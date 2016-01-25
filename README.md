@@ -20,7 +20,7 @@ Personal Learing Note
 
  TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
-Copyright 2016 sabertazimi
+Copyright (c) 2016 sabertazimi
 
 ## Contact
 - e-mail : sabertazimi@gmail.com
