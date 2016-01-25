@@ -1,4 +1,4 @@
-## <assert.h>
+## `<assert.h>`
 - 关闭断言
 ```C
 #define NDEBUG
@@ -10,15 +10,17 @@
 #include <assert.h>
 ```
 
-## ctype.h>
+## `<ctype.h>`
 - 可检测字符
+
 getc、fgetc、getchar函数可返回值(EOF值/unsigned char类型)
 - 不可检测字符
+
 非EOF值/非unsigned char类型(*会引发严重错误*)
 
 ![ctype functions](img/ctype.h.jpg)
 
-## <errno.h>
+## `<errno.h>`
 - errno的值在程序启动时为零，但是不会被任何库函数设为零
 ```C
 errno = 0;
@@ -157,10 +159,10 @@ if (errno != 0) {
 #endif
 ```
 
-## <float.h>/<limits.h>
-- 宏定义：CHAR/UCHAR/SCHAR/SHRT/USHRT/INT/UINT/LONG/ULONG/FLT/DBL/LDBL有关的MIN/MAX/EPSILON
+## `<float.h>/<limits.h>`
+- 宏定义：`CHAR/UCHAR/SCHAR/SHRT/USHRT/INT/UINT/LONG/ULONG/FLT/DBL/LDBL`有关的``MIN/MAX/EPSILON``
 
-## <locale.h>
+## `<locale.h>`
 - 实现时间/单位/货币等一系列的国际化
 - 常用函数
 ```C
@@ -177,10 +179,10 @@ _CRTIMP struct lconv * __cdecl localeconv(void);
 #define LC_TIME         5
 ```
 
-## <math.h>
+## `<math.h>`
 数学函数库(包括后缀f(float)/l(long double))
 
-## <setjmp.h>
+## `<setjmp.h>`
 - 常用函数
 ```C
 int setjmp(jmp_buf env);
@@ -193,14 +195,14 @@ void longjmp(jmp_buf env, int val);
   1. 实现非本地(局部)跳转(跨越多层函数调用栈进行跳转)
   2. 实现类Java异常机制(异常抛出及捕获)
 
-## <signal.h>
+## `<signal.h>`
 **信号处理程序中所有数据应为volatile类型**
 ```C
 _CRTIMP int __cdecl raise(int);
 _CRTIMP void (__cdecl * __cdecl signal(int, void (__cdecl *)(int)))(int);
 ```
 
-## <stdarg.h>
+## `<stdarg.h>`
 用于编写可变参数函数
 ```C
 void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束 */
@@ -216,20 +218,24 @@ void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束
 }
 ```
 
-## <stddef.h>
+## `<stddef.h>`
 - 宏
   - NULL Null 指针常量
   - `offsetof(type, member-desginator)`
-      获得字段在结构体中的偏移量
+
+获得字段在结构体中的偏移量
 - 类型
   - `ptrdiff_t`
+
   带符号的整数类型, 用来表示指针相减的结果类型
   - `wchar_t`
+
   宽字符类型
+
   - `size_t`
   无符号整数类型, 用来表示sizeof操作符的结果类型
 
-## <string.h>
+## `<string.h>`
 - men系函数：操作任意字符序列
 - strn系函数：操作非空字符序列
 - str系函数：操作字符串序列('\0')
