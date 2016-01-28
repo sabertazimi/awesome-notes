@@ -1,6 +1,21 @@
 # HTML5 Basic Notes
 
-## Tags
+Personal Learning Notes
+
+## Structure
+
+### section
+
+必须含有**hx**标题子标签
+
+### nav
+
+-   传统导航条
+-   侧边栏导航
+-   页内跳转
+-   翻页操作
+
+## Media
 
 ### figure
 
@@ -32,11 +47,11 @@ Attr -
 
 定义被链接文档出现方式
 
-- blank     在新窗口中打开被链接文档
-- self      默认:在相同的框架中打开被链接文档
-- parent    在父框架集中打开被链接文档
-- top       在整个窗口中打开被链接文档
-- framename 在指定的框架中打开被链接文档
+-   blank     在新窗口中打开被链接文档
+-   self      默认:在相同的框架中打开被链接文档
+-   parent    在父框架集中打开被链接文档
+-   top       在整个窗口中打开被链接文档
+-   framename 在指定的框架中打开被链接文档
 
 ### embed
 
@@ -52,7 +67,7 @@ Attr -
 
 ### details > summary | datalist
 
-Attr -
+**Attr** -
 
 #### datagrid
 
@@ -64,30 +79,29 @@ Attr -
 
 ### time
 
-Attr -
+**Attr** -
 
 #### pubdate
 
 #### datetime
 
----
-
 ## Attributes
 
-### contentEditable
+### Global Attributes
 
-- boolean
+#### contentEditable
 
-### hidden
+-boolean
 
-- boolean
+#### hidden
 
-### spellcheck
+**boolean**
 
-- boolean
+#### spellcheck
 
-### tabindex
+**boolean**
 
-- -1
+#### tabindex
 
+**-1**
 编程可获得焦点，tab键不可获得焦点
