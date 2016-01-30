@@ -1,5 +1,3 @@
-[TOC]
-
 # JavaScript Grammar Basic
 
 ## 变量
@@ -26,7 +24,7 @@
 
 ## 函数
 
-### 函数定义时  
+### 函数定义时
 - 全局变量
 
 定义在函数体外，在函数体内不使用var关键字引用
@@ -118,102 +116,14 @@ document.onkeydown=function(event){
 - Frame Events
 
 ```javascript
-onresize/load/scroll/error 
+onresize/load/scroll/error
 ```
-- Input Events	
+- Input Events
 
 ```javascript
 oninput/onchange
 ```
 ------
-
-# Emmet
-## 嵌套操作
-- 孩子 : >
-
-``` html
-div>ul>li
-
-<div>
-    <ul>
-        <li></li>
-    </ul>
-</div>
-```
-- 兄弟 : +
-```html
-div+ul>li
-
-<div></div>
-<ul>
-    <li></li>
-</ul>
-```
-上级：^
-ul>li^div
-<ul>
-    <li></li>
-</ul>
-<div></div>
-ul>li>a^^div 上级多层
-<ul>
-    <li><a href=""></a></li>
-</ul>
-<div></div>
-重复：*
-ul>li*3
-<ul>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>
-分组：()
-div>(p>span)*2
-<div>
-    <p><span></span></p>
-    <p><span></span></p>
-</div>
-2. 属性操作----------
-id和类
-div#header+div.main+div#footer
-<div id="header"></div>
-<div class="main"></div>
-<div id="footer"></div>
-属性值
-a[title=test target=_self]
-<a title="test" target="_self" href=""></a>
-数列值：$
-p.item$*3
-<p class="item1"></p>
-<p class="item2"></p>
-<p class="item3"></p>
-p.item$$*3
-<p class="item01"></p>
-<p class="item02"></p>
-<p class="item03"></p>
-数列操作符：@
-p.item$@-*3   @- = -1
-<p class="item3"></p>
-<p class="item2"></p>
-<p class="item1"></p>
-p.item$@3*3  @3 = 从3开始3次
-<p class="item3"></p>
-<p class="item4"></p>
-<p class="item5"></p>
-p.item$@-3*3 @-3 = 3次后到3结束
-<p class="item5"></p>
-<p class="item4"></p>
-<p class="item3"></p>
-3. 字符操作----------        
-字符操作：{}
-a{click}
-<a href="">click</a>
-a>{click}+span{me}
-<a href="">click<span>me</span></a>
-4. 缺省元素----------
-.header+.footer  ---------------  div.header+div.footer
-ul>.item*3 -------------- ul>li.item*3
-table>.row*4>.cell*3 -------------- table>tr.row*4>td.cell*3
 
 
 
@@ -351,7 +261,7 @@ meteor search .或package_name
 meteor add package_name
 4.android
 meteor add-platform android
-meteor install-sdk android  // ~/.meteor/android-bundle 
+meteor install-sdk android  // ~/.meteor/android-bundle
 meteor run android 或 meteor run android-device
  --mobile-server https://hostname:port  指定(http可不写schema)
 5.static assets: app_folder_name → public (default assets folder 不可改名)
@@ -367,7 +277,7 @@ b.accounts-password      1.1.4  Password support for accounts
 	 {{> loginButtons}}
 
 c.stylus-multi
-    将.css改为.styl	
+    将.css改为.styl
    @import ‘nib’
 d.iron:router
 Router.configure( {
@@ -434,7 +344,7 @@ Template.html_templateTag_name.helpers(
 	{
 		property_name:data_variable, e.g Collection.find()、数组名、函数
 		prepertyn:data_variablen
-	}	
+	}
 );    //传递一个匿名对象参数，它拥有一个对象数组字段/实例域
 
 Template.body.helpers
@@ -469,12 +379,12 @@ Meteor.user()._id
 {{#if currentUser}}   {{/if}}
 
 if(Meteor.user()) 判断当前是否有用户登录
-Accounts.ui.config 
+Accounts.ui.config
 四、Session
 1.将对象的某一个属性设为过滤器
-Session.set(“userFilter”, Object.property_nmae);   
+Session.set(“userFilter”, Object.property_nmae);
 2.通过get得到过滤器属性值(已设置过滤器为有效值，未设置过滤器为NULL)
-{ property_name: Session.get(“userFilter”) }    
+{ property_name: Session.get(“userFilter”) }
 3.移除过滤器
 Session.set(“userFilter”, undefined);
 
@@ -488,8 +398,8 @@ Session.set(“userFilter”, undefined);
 find( {selector },                         //选择器 propername:filter_value
 	{sort : { fieldname : -1 } }  , //从小至大排列的filter
 	limit:number
-)   
-	
+)
+
 count、insert(对象{})、remove(Mongo Filter)
 update({键值对}、{$set	{键值对}})
 	可通过update读入用户操作，更新数据库，可再次反馈给用户
@@ -500,6 +410,4 @@ allow（安全性）
 meteor remove insecure
 2.MongoDB/Collection的安全性
 
-doc：一个完整的image_data(即Collection中一个完整的对象)	
-
-
+doc：一个完整的image_data(即Collection中一个完整的对象)
