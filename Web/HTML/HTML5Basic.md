@@ -245,6 +245,10 @@ table>.row*4>.cell*3
 
 ## Form
 
+#### novalidate
+
+关闭表单的提交验证
+
 ### 表单元素共有属性
 
 #### form=form_name
@@ -275,6 +279,13 @@ table>.row*4>.cell*3
 -   top       在整个窗口中打开被链接文档
 -   framename 在指定的框架中打开被链接文档
 
+#### formnovalidate
+
+取消表单元素的提交验证 
+
+将submit元素的formnovalidate属性值为true，使整个表单提交验证失效，实现加提交；
+进而弹出再次确认按钮(真提交)。
+
 #### autofocus
 
 #### required
@@ -304,20 +315,28 @@ textbox.value = '666666';   //  等同于 input.value = '666666';
 
 ##### checkbox
 
-#### `list` && `autocomplete`
+##### search
 
-为输入框指定智能提示数据
+搜索条
 
-```html
-<input list=datalist_id autocomplete=on >
+##### tel 
+
+电话号码 - 无输入检查
+
+##### url
+
+##### email
+
+##### date/month/week/time/datetime-local
+
+```javasrcipt
+stepUp();
+stepDown();
 ```
 
-#### pattern
-
-通过正则表达式指定输入格式
-
 ```html
-<input pattern="[0-9][A-Z]{3}">
+input.valueAsNumber
+input.valueAsDate
 ```
 
 #### indeterminate
@@ -335,6 +354,30 @@ if (checkbox.indeterminate) {
     }
 }
 ```
+
+#### `list` && `autocomplete`
+
+为输入框指定智能提示数据
+
+```html
+<input list=datalist_id autocomplete=on >
+```
+
+#### pattern
+
+通过正则表达式指定输入格式
+
+```html
+<input pattern="[0-9][A-Z]{3}">
+```
+
+#### validity
+
+返回ValidityState对象，拥有ValidityState.valid属性 
+
+### output
+
+input元素的镜像元素
 
 ### textarea
 
@@ -365,12 +408,74 @@ style="display: none";
 </datalist>
 ```
 
+## Content
+
+### details > summary | datalist
+
+**Attr** -
+
+#### datagrid
+
+#### 配合autocomplete属性
+
+#### open(boolean)
+
+默认open=false
+
+### summary
+
+折叠/收缩时触发toggle事件
+
+### mark
+
+突出/高亮显示，无关原文作者
+
+### em
+
+原文作者文章重点
+
+### strong
+
+原文作者段落强调
+
+### small
+
+-   免责声明、注意事项、法律规定、版权声明
+-   不改变文字样式
+
+### `<progress value="" max="">`
+
+value/max 百分比
+
+### meter
+
+#### value
+#### min
+#### max
+#### low
+#### high
+#### optimum
+
+### wbr
+
+软换行
 
 ## Media
 
+### canvas
+
+-   绘制路径 beginPath() -> draw() -> closePath()
+-   绘制样式 颜色、渐变、变换、阴影
+
 ### figure
 
-流内容 如文件、图片、音频、视频
+流内容 如代码、文件、图片、音频、视频
+
+### figcaption
+
+figure可拥有唯一的0/1个figcaption
+
+<figcaption>figure_title</figcaption>
 
 ### img
 
@@ -409,24 +514,6 @@ style="display: none";
 插入媒体流
 
 ### command
-
-### details > summary | datalist
-
-**Attr** -
-
-#### datagrid
-
-#### 配合autocomplete属性
-
-## Style
-
-### small
-
-### mark
-
-### wbr
-
-软换行
 
 ## Information
 
