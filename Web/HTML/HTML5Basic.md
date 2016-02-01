@@ -466,6 +466,13 @@ value/max 百分比
 
 -   绘制路径 beginPath() -> draw() -> closePath()
 -   绘制样式 颜色、渐变、变换、阴影
+-   绘制图形 fill/stroke/clip
+
+```javascript
+vat context = canvas.getContext('2d');
+```
+
+#### Path2D对象
 
 ### figure
 
@@ -556,3 +563,19 @@ figure可拥有唯一的0/1个figcaption
 
 **-1**
 编程可获得焦点，tab键不可获得焦点
+
+## Web Storage API
+
+代替cookies
+
+## Web Sockets API
+
+通信功能
+
+## Web RTC API
+
+多媒体通信
+
+## Web Workers API
+
+多线程处理
