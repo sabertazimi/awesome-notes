@@ -1,219 +1,403 @@
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [CSS 3 Basic Notes](#css-3-basic-notes)
+	- [属性排序](#属性排序)
+		- [概述](#概述)
+			- [显示属性](#显示属性)
+			- [自身属性](#自身属性)
+			- [文本属性](#文本属性)
+		- [详细](#详细)
+			- [显示属性](#显示属性)
+			- [自身属性](#自身属性)
+			- [文本属性](#文本属性)
+	- [命名规范](#命名规范)
+		- [页面结构](#页面结构)
+		- [导航](#导航)
+		- [功能](#功能)
+		- [CSS Files](#css-files)
+	- [CSS Selector](#css-selector)
+		- [pseudo-class-selector](#pseudo-class-selector)
+			- [元素选择器](#元素选择器)
+			- [关系选择器](#关系选择器)
+			- [属性选择器](#属性选择器)
+			- [伪类](#伪类)
+			- [伪元素](#伪元素)
+	- [Custom](#custom)
+		- [自定义字体](#自定义字体)
+		- [自定义动画](#自定义动画)
+	- [常用属性](#常用属性)
+		- [height](#height)
+		- [list-style-type/image](#list-style-typeimage)
+		- [overflow](#overflow)
+		- [box-sizing](#box-sizing)
+		- [background](#background)
+		- [font-style](#font-style)
+		- [font-variant](#font-variant)
+		- [text-align](#text-align)
+		- [position](#position)
+		- [z-index](#z-index)
+
+<!-- /TOC -->
+
+# CSS 3 Basic Notes
+
 ## 属性排序
 
-1. 概述
+### 概述
 
 > 显示属性 -> 自身属性 -> 文本属性
 
-- display
-- list-style
-- position
-- float
-- clear
- 
-- width
-- height
-- margin
-- padding
-- border
-- background
+#### 显示属性
 
-- color
-- font
-- text-decoration
-- vertical-align
-- white-space
-- other text
-- content
+-   display
+-   list-style
+-   position
+-   float
+-   clear
 
-2. 详细
+#### 自身属性
 
-- display
-- visibility
-- float
-- clear
+-   width
+-   height
+-   margin
+-   padding
+-   border
+-   background
 
-- position
-- top
-- right
-- bottom
-- left
-- z-index
+#### 文本属性
 
-- width
-- min-width
-- max-width
-- height
-- min-height
-- max-height
-- overflow
-- margin
-- margin-top
-- margin-right
-- margin-bottom
-- margin-left
+-   color
+-   font
+-   text-decoration
+-   vertical-align
+-   white-space
+-   other text
+-   content
 
-- padding
-- padding-top
-- padding-right
-- padding-bottom
-- padding-left
+### 详细
 
-- border-width
-- border-top-width
-- border-right-width
-- border-bottom-width
-- border-left-width
+#### 显示属性
 
-- border-style
-- border-top-style
-- border-right-style
-- border-bottom-style
-- border-left-style
+-   display
+-   visibility
+-   float
+-   clear
+-   position
+-   top
+-   right
+-   bottom
+-   left
+-   z-index
 
-- border-color
-- border-top-color
-- border-right-color
-- border-bottom-color
-- border-left-color
+#### 自身属性
 
-- outline
+-   width
+-   min-width
+-   max-width
+-   height
+-   min-height
+-   max-height
+-   overflow
+-   margin
+-   margin-top
+-   margin-right
+-   margin-bottom
+-   margin-left
+-   padding
+-   padding-top
+-   padding-right
+-   padding-bottom
+-   padding-left
+-   border-width
+-   border-top-width
+-   border-right-width
+-   border-bottom-width
+-   border-left-width
+-   border-style
+-   border-top-style
+-   border-right-style
+-   border-bottom-style
+-   border-left-style
+-   border-color
+-   border-top-color
+-   border-right-color
+-   border-bottom-color
+-   border-left-color
+-   outline
+-   list-style
+-   table-layout
+-   caption-side
+-   border-collapse
+-   border-spacing
+-   empty-cells
 
-- list-style
+#### 文本属性
 
-- table-layout
-- caption-side
-- border-collapse
-- border-spacing
-- empty-cells
-
-- font
-- font-family
-- font-size
-- line-height
-- font-weight
-- text-align
-- text-indent
-- text-transform
-- text-decoration
-- letter-spacing
-- word-spacing
-- white-space
-- vertical-align
-- color
-
-- background
-- background-color
-- background-image
-- background-repeat
-- background-position
-
-- opacity
-
-- cursor
-
-- content
-- quotes
+-   font
+-   font-family
+-   font-size
+-   line-height
+-   font-weight
+-   text-align
+-   text-indent
+-   text-transform
+-   text-decoration
+-   letter-spacing
+-   word-spacing
+-   white-space
+-   vertical-align
+-   color
+-   background
+-   background-color
+-   background-image
+-   background-repeat
+-   background-position
+-   opacity
+-   cursor
+-   content
+-   quotes
 
 ## 命名规范
 
 ### 页面结构
-- 容器: container
-- 页头：header
-- 内容：content/container
-- 页面主体：main
-- 页尾：footer
-- 导航：nav
-- 侧栏：sidebar
-- 栏目：column
-- 页面外围控制整体佈局宽度：wrapper
-- 左右中：left right center
+
+-   容器: container
+-   页头：header
+-   内容：content/container
+-   页面主体：main
+-   页尾：footer
+-   导航：nav
+-   侧栏：sidebar
+-   栏目：column
+-   页面外围控制整体佈局宽度：wrapper
+-   左右中：left right center
 
 ### 导航
-- 导航：nav
-- 主导航：mainnav
-- 子导航：subnav
-- 顶导航：topnav
-- 边导航：sidebar
-- 左导航：leftsidebar
-- 右导航：rightsidebar
-- 菜单：menu
-- 子菜单：submenu
-- 标题: title
-- 摘要: summary
+
+-   导航：nav
+-   主导航：mainnav
+-   子导航：subnav
+-   顶导航：topnav
+-   边导航：sidebar
+-   左导航：leftsidebar
+-   右导航：rightsidebar
+-   菜单：menu
+-   子菜单：submenu
+-   标题: title
+-   摘要: summary
 
 ### 功能
-- 标志：logo
-- 广告：banner
-- 登陆：login
-- 登录条：loginbar
-- 注册：register
-- 搜索：search
-- 功能区：shop
-- 标题：title
-- 加入：joinus
-- 状态：status
-- 按钮：btn
-- 滚动：scroll
-- 标籤页：tab
-- 文章列表：list
-- 提示信息：msg
-- 当前的: current
-- 小技巧：tips
-- 图标: icon
-- 注释：note
-- 指南：guild
-- 服务：service
-- 热点：hot
-- 新闻：news
-- 下载：download
-- 投票：vote
-- 合作伙伴：partner
-- 友情链接：link
-- 版权：copyright
+
+-   标志：logo
+-   广告：banner
+-   登陆：login
+-   登录条：loginbar
+-   注册：register
+-   搜索：search
+-   功能区：shop
+-   标题：title
+-   加入：joinus
+-   状态：status
+-   按钮：btn
+-   滚动：scroll
+-   标籤页：tab
+-   文章列表：list
+-   提示信息：msg
+-   当前的: current
+-   小技巧：tips
+-   图标: icon
+-   注释：note
+-   指南：guild
+-   服务：service
+-   热点：hot
+-   新闻：news
+-   下载：download
+-   投票：vote
+-   合作伙伴：partner
+-   友情链接：link
+-   版权：copyright
 
 ### CSS Files
-- 主要的 master.css
-- 模块 module.css
-- 基本共用 base.css
-- 布局、版面 layout.css
-- 主题 themes.css
-- 专栏 columns.css
-- 文字 font.css
-- 表单 forms.css
-- 补丁 mend.css
-- 打印 print.css
+
+-   主要的 master.css
+-   模块 module.css
+-   基本共用 base.css
+-   布局、版面 layout.css
+-   主题 themes.css
+-   专栏 columns.css
+-   文字 font.css
+-   表单 forms.css
+-   补丁 mend.css
+-   打印 print.css
 
 ## CSS Selector
+
+![CSS 3 Selector](images/css3-selector-lest.png)
+
 ### pseudo-class-selector
-- link
 
-link、visited
-- user-action
+#### 元素选择器
 
-active、focus、hover
-- forms(interfaces)
+```css
+p {
+    line-height:1.5em;
+    margin-bottom:1em;
+}
+```
 
-checked、enabled、disabled
-- structural
+#### 关系选择器
 
-first-child(此元素为父元素的第一个子元素)、last-child、nth-child(n变量)、only-child
+-   E F：所有后代选择器
 
-first-of-type、last-of-type、only-of-type
-- textual
+```css
+ul li {
+    margin-bottom:0.5em;
+}
+```
 
-first-letter、first-line
-- positional
+E > F：直接子选择器
 
-Before、after
-- fragments
+```css
+ul > li {list-style:none;} //仅限ul的直接子元素li，忽略嵌套子元素
+```
 
-::selection选择器(双冒号)：无前置普通类选择器，匹配用户选取部分
+E + F：直接相邻兄弟选择器
 
-- attribute selector
+```css
+li + li {
+    border-top:1px
+    solid #ddd;
+}
+```
 
-selector·[attr = ‘“  value ”]   
+E ~ F：一般兄弟选择器
 
-attr ^=(前端匹配)/$=(尾部匹配)/*=(wild匹配)  “ values ”
+```css
+//定位具有相同父元素的，h1标签之后的所有p标签
+h1 ~ p {
+    color:#f00;
+}
+```
+
+#### 属性选择器
+
+`E[attr]`
+
+```css
+input[required] {border:1px solid #f00;} //定位页面里所有具有必填属性"required"的input
+```
+
+`E[attr=val]`
+
+```css
+input[type=password] {border:1px solid #aaa;} //定位页面里的密码输入框
+```
+
+`E[attr|=val]`
+
+```csss
+p[class|=a] {color:#333;}
+//定位页面里所有的P段落里具有class属性且属性值为a或是a-开始的，比如class="a"以及class="a-b"
+```
+
+`E[attr~=val]`
+
+```css
+div[title~=english] {color:#f88;} //定位页面里所有具有属性title且属性值里拥有完整单词english的div容器，比如title="english"以及title="a english"
+```
+
+`E[attr^=val]`
+
+```css
+div[class^=a] {color:#666;}
+//定位页面里具有属性class且属性值以a开头的div容器，比如class="a"以及class="ab"
+```
+
+`E[attr$=val]`
+
+```css
+div[class$=a] {color:#f00;}
+//定位页面里具有属性class且属性值以a结尾的div窗口，比如class="nba"以及class="cba"
+```
+
+`E[attr*=val]`
+
+```css
+a[title*=link] {text-decoration:underline;}
+//定位所有title里具有link字符串的a链接
+```
+
+#### 伪类
+
+-   :link：未访问的链接；
+-   :visited：已访问的链接，不建议使用；
+-   :hover：鼠标移动到容器，不仅限于链接，可用于页面中的任何元素；
+-   :active：被激活时的状态，不仅限于链接，可用于任何具有tabindex属性的元素；
+-   :focus：获得焦点时状态，不仅限于链接，可用于任何具有tabindex属性的无线：
+-   :enabled：已启用的界面元素：`input`
+-   :disabled：已禁用的界面元素：`input`
+-   :target：该选择器定位当前活动页面内定位点的目标元素, #anchor-name `#info:target {font-size:24px;}`
+-   :default：应用于一个或多个作为一组类似元素中的默认元素的UI元素；
+-   :valid：应用于输入验证有效元素，基于input的type/pattern属性
+-   :invalid：应用于输入验证无效元素，
+-   :in-range：应用于具有范围限制的元素，其中该值位于限制内；比如具有min和max属性的number和range输入框；
+-   :out-of-range：与:in-range选择相反，其中该值在限制范围外；
+-   :required：应用于具有必填属性required的表单控件；
+-   :optional：应用于没有必填属性required的所有表单控件
+-   :read-only：应用于其内容无法供用户修改的元素；
+-   :read-write：应用于其内容可供用户修改的元素，比如输入框；
+-   :root：根元素，始终指html元素；
+-   E F:nth-child(n)：该选择器定位元素E的第n个子元素的元素F,可省略E
+-   E F:nth-last-child(n)：该选择器定位元素E的倒数第n个子元素的元素F,可省略E
+-   E F:nth-of-type(n)：该选择器定位元素E的第n个指定类型子元素,可省略E
+-   E F:nth-lash-of-type(n)：该选择器定位元素E的导数第n个指定类型子元素,可省略E
+-   E F:first-child
+-   E F:last-child
+-   E F:first-of-type
+-   E F:last-of-type
+-   E F:only-child
+-   E F:only-of-type
+-   E:empty：没有子元素的元素，没有子元素包括文本节点；
+-   E:lang(en)：具有使用双字母缩写(en)表示的语言的元素；
+-   E:not(exception)：该选择器将选择与括号内的选择器不匹配的元素：
+
+#### 伪元素
+
+-   ::first-line：匹配文本首行；
+-   ::first-letter：匹配文本首字母；
+-   ::selection：匹配突出显示的文本：
+
+```css
+//定义选中的文本颜色与背景色
+::selection {background:#444; color:#fff;}
+```
+
+-   ::before 与 ::after ：使用 contnet 属性生成额外的内容并插入在标记中：
+
+```css
+a:after { content: "↗"; }
+```
+
+attr() – 调用当前元素的属性
+
+```css
+a:after { content:"(" attr(href) ")"; }
+```
+
+url() / uri() – 用于引用媒体文件
+
+```css
+h1::before { content: url(logo.png); }
+```
+
+counter() –  调用计数器，可以不使用列表元素实现序号功能,配合CSS3中`counter-increment`和`counter-reset`属性
+
+```css
+h2:before {
+    counter-increment: chapter;
+    content: "Chapter " counter(chapter);
+}
+```
 
 ## Custom
 
@@ -234,17 +418,50 @@ selector {
 ```
 
 ### 自定义动画
+
 transition添加于普通类选择器，transform添加于伪类选择器
 
 ## 常用属性
-- height:XXvh(viewport height)
-- list-style-type/image 改变ul/ol前标记类型
-- overflow:visible,hidden,scroll,auto
-- box-sizing:content-box(default),border-box
-- background:linear-gradient
-- font-style:normal,italic,oblique
-- font-variant:normal,small-caps(小型大写字母)
-- text-align:justify(自适应，左右都无空格)
-- position
-     - static(使top/bottom/left/right属性无效化)、relative、absolute、fixed(不受滑动条影响)
-     - z-index：数值越大，处于可视的优先级越大
+
+### height
+
+XXvh(viewport height)
+
+### list-style-type/image
+
+改变ul/ol前标记类型
+
+### overflow
+
+visible,hidden,scroll,auto
+
+### box-sizing
+
+content-box(default),border-box
+
+### background
+
+linear-gradient
+
+### font-style
+
+normal,italic,oblique
+
+### font-variant
+
+normal,small-caps(小型大写字母)
+
+### text-align
+
+justify(自适应，左右都无空格)
+
+### position
+
+-   static(使top/bottom/left/right属性无效化)
+-   relative
+-   absolute
+-   fixed(不受滑动条影响)
+
+### z-index
+
+数值越大，处于可视的优先级越大
