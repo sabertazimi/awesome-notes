@@ -22,22 +22,52 @@
 			- [属性选择器](#属性选择器)
 			- [伪类](#伪类)
 			- [伪元素](#伪元素)
-	- [Custom](#custom)
-		- [自定义字体](#自定义字体)
-		- [自定义动画](#自定义动画)
 	- [常用属性](#常用属性)
-		- [height](#height)
+		- [全局属性值](#全局属性值)
+		- [layout](#layout)
+			- [position](#position)
+			- [z-index](#z-index)
+			- [float](#float)
+		- [box](#box)
+			- [overflow/overflow-x/overflow-y](#overflowoverflow-xoverflow-y)
+			- [text-overflow](#text-overflow)
+			- [resize](#resize)
+			- [box-sizing](#box-sizing)
+			- [height](#height)
+			- [column](#column)
+			- [flex](#flex)
+				- [父元素属性](#父元素属性)
+				- [子元素属性](#子元素属性)
 		- [list-style-type/image](#list-style-typeimage)
-		- [overflow](#overflow)
-		- [box-sizing](#box-sizing)
+		- [custom style](#custom-style)
+			- [custom methods](#custom-methods)
+				- [transition+transform](#transitiontransform)
+				- [直接使用animation](#直接使用animation)
+			- [transition](#transition)
+			- [transform](#transform)
+			- [animation](#animation)
+		- [align](#align)
+			- [text-align](#text-align)
+			- [vertical-align](#vertical-align)
+		- [opacity](#opacity)
+		- [border](#border)
+			- [border-radius](#border-radius)
+			- [border-image](#border-image)
 		- [background](#background)
-		- [font-style](#font-style)
-		- [font-variant](#font-variant)
-		- [text-align](#text-align)
-		- [position](#position)
-		- [z-index](#z-index)
-
-<!-- /TOC -->
+			- [background-image](#background-image)
+			- [(moz/webkit)background-clip](#mozwebkitbackground-clip)
+			- [(moz/webkit)background-origin](#mozwebkitbackground-origin)
+			- [background-size](#background-size)
+		- [font](#font)
+			- [font-size](#font-size)
+			- [font-style](#font-style)
+			- [font-variant](#font-variant)
+			- [font-size-adjust](#font-size-adjust)
+			- [custom function - @font-face](#custom-function-font-face)
+		- [filter](#filter)
+	- [media query](#media-query)
+		- [设备类型](#设备类型)
+		- [设备特性](#设备特性)
 
 # CSS 3 Basic Notes
 
@@ -399,69 +429,433 @@ h2:before {
 }
 ```
 
-## Custom
-
-### 自定义字体
-
-```css
-@font-face {
-    :call <SNR>105_SparkupNext()
-    font-family:mySpecialFont;
-    src:url(‘./Colleen.ttf’);
-
-}
-selector {
-    :call <SNR>105_SparkupNext()
-    font-family:mySpecialFont;
-
-}
-```
-
-### 自定义动画
-
-transition添加于普通类选择器，transform添加于伪类选择器
-
 ## 常用属性
 
-### height
+### 全局属性值
 
-XXvh(viewport height)
+auto
+inherit
+initial 指定为默认值，用于消除样式
+none
 
-### list-style-type/image
+### layout
 
-改变ul/ol前标记类型
-
-### overflow
-
-visible,hidden,scroll,auto
-
-### box-sizing
-
-content-box(default),border-box
-
-### background
-
-linear-gradient
-
-### font-style
-
-normal,italic,oblique
-
-### font-variant
-
-normal,small-caps(小型大写字母)
-
-### text-align
-
-justify(自适应，左右都无空格)
-
-### position
+#### position
 
 -   static(使top/bottom/left/right属性无效化)
 -   relative
 -   absolute
 -   fixed(不受滑动条影响)
 
-### z-index
+#### z-index
 
 数值越大，处于可视的优先级越大
+
+#### float
+
+### box
+
+#### overflow/overflow-x/overflow-y
+
+visible,hidden,scroll,auto
+
+#### text-overflow
+
+-   clip     切除溢出部分
+-   ellipsis 省略号标志
+
+#### resize
+
+前置属性:overflow
+
+```css
+/*允许用户修改元素尺寸*/
+resize: none/both/horizontal/vertical/inherit;
+```
+
+#### box-sizing
+
+content-box(default), padding-box, border-box
+
+#### height
+
+XXvh(viewport height)
+
+直接计算宽度/高度
+
+```js
+cal(50% - 100px);
+cal(10em + 3px);
+```
+
+#### column
+
+```css
+/*子元素分列*/
+.three-column {
+  padding: 1em;
+  -moz-column-count: 3;
+  -moz-column-gap: 1em;
+  -webkit-column-count: 3;
+  -webkit-column-gap: 1em;
+  column-count: 3;
+  column-gap: 1em;
+}
+```
+
+-   column-count
+-   column-width
+-   column-gap         分隔距离
+-   column-rule(style) 分隔线
+
+#### flex
+
+##### 父元素属性
+
+```css
+display: flex;
+flex-direction: row/column;
+flex-wrap: nowrap/wrap/wrap-reverse;
+justify-content: flex-start/flex-end/center/space-between/space-around;
+align-content: flex-start/flex-end/center/space-between/space-around;
+align-items: flex-start/flex-end/center/baseline/stretch;
+```
+
+##### 子元素属性
+
+```css
+flex: number;  /*宽/高度权重*/
+order: number; /*显示顺序*/
+flex-basis: number;
+flex-shrink: number;
+flex-grow: number;
+align-self: auto/flex-start/flex-end/center/baseline/stretch;
+```
+
+```css
+.container {
+  display: -webkit-flex;
+  display: flex;
+}
+
+.initial {
+  /*width: 100px~200px*/
+  -webkit-flex: initial;
+          flex: initial;
+  width: 200px;
+  min-width: 100px;
+}
+.none {
+  /*width: 200px*/
+  -webkit-flex: none;
+          flex: none;
+  width: 200px;
+}
+.flex1 {
+  /*width: left width * 1/3*/
+  -webkit-flex: 1;
+          flex: 1;
+}
+.flex2 {
+  /*width: left width * 2/3*/
+  -webkit-flex: 2;
+          flex: 2;
+}
+```
+
+```css
+/*子元素全部居中对齐*/
+.vertical-container {
+  height: 300px;
+
+  display: -webkit-flex;
+  display:         flex;
+
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+```
+
+### list-style-type/image
+
+改变ul/ol前标记类型
+
+### custom style
+
+transition添加于普通类选择器
+animation添加于普通类选择器或伪类选择器
+transform添加于普通类选择器与伪类选择器
+
+#### custom methods
+
+##### transition+transform
+
+```css
+.div {
+    transform: scaleX(0);
+    transition: **transform** .5s ease;
+}
+
+.div:hover {
+    transform: scaleX(1);
+}
+```
+
+##### 直接使用animation
+
+#### transition
+
+-   transition-property: color;
+-   transition-duration: 1s;
+-   transition-timing-function: cubic-bezier(.42, 0, .58, 1);
+-   transition-delay: .5s;
+
+#### transform
+
+-   matrix()/matrix3d();
+-   rotateX/Y/Z();
+-   scaleX/Y/Z();
+-   skewX/Y/Z();
+-   translateX/Y/Z();
+
+#### animation
+
+**Tip : fade in body style**
+
+```css
+@keyframes body-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    animation-name: body-fade-in;
+    animation-duration: 2.5s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+}
+
+```
+
+
+```css
+@keyframes name {
+    0%/from {
+        color: red;
+    }
+    50% {
+        color: blue;
+    }
+    100%/to {
+        color: green;
+    }
+}
+
+/*直接动画*/
+.div {
+    animation-name: name;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(.42, 0, .58, 1);
+    animation-delay: .5s;
+}
+
+/*hover后再播放动画，高级化transform+transition*/
+.div:hover {
+    animation-name: name;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(.42, 0, .58, 1);
+    animation-delay: .5s;
+}
+```
+
+-   animation-iteration-count: 执行次数 infinite
+-   animation-direction: 执行方向
+	-   normal    0%->100%方向
+	-   alternate/alternate-reverse 不断交替方向
+	-   reverse   100%->0%方向
+
+### align
+
+#### text-align
+
+justify(自适应，左右都无空格)
+
+#### vertical-align
+
+垂直对齐方式
+
+### opacity
+
+0 ~ 1, 渐进效果常用属性
+
+### border
+
+#### border-radius
+
+```css
+[ <length> | <percentage> ]{1,4} [ / [ <length> | <percentage> ]{1,4} ]?
+```
+
+#### border-image
+
+```css
+<'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'>
+```
+
+### background
+
+#### background-image
+
+-   url()
+-   linear-gradient()
+-   radial-gradient()
+
+#### (moz/webkit)background-clip
+
+指定背景显示范围  content-box/padding-box/border-box
+
+#### (moz/webkit)background-origin
+
+指定背景绘制起点  content-box/padding-box/border-box
+
+#### background-size
+
+-   contain
+-   cover
+
+### font
+
+#### font-size
+
+**Best Practice**
+
+```css
+html {
+    /*浏览器默认size为16px，此时将html-size自动计算为10px*/
+    font-size:62.5%;
+}
+
+small {
+    /*11px*/
+    font-size: 1.1rem;
+}
+
+strong {
+    /*18px*/
+    font-size: 1.8rem;
+}
+```
+
+#### font-style
+
+normal,italic,oblique
+
+#### font-variant
+
+normal,small-caps(小型大写字母)
+
+#### font-size-adjust
+
+-   使字体保持大小，不随字体类型改变而改变
+-   不同字体有不同的值(x-height/字体尺寸)
+
+#### custom function - @font-face
+
+使用户使用服务端提供的字体(bootstrap中有使用@font-face)
+
+```css
+@font-face {
+    :call <SNR>105_SparkupNext()
+    font-family:mySpecialFont;
+    font-style/font-weight/font-variant:inherit;
+    src:url(‘./Colleen.ttf’);
+}
+
+selector {
+    :call <SNR>105_SparkupNext()
+    font-family:mySpecialFont;
+
+}
+
+### filter
+
+来源自SVG的滤镜特效
+
+```css
+filter: url(resources.svg);/*引用SVG filter元素*/
+filter: blur(5px);         /*模糊*/
+filter: brightness(0.4);   /*高光*/
+filter: contrast(200%);    /*对比度*/
+filter: drop-shadow(16px 16px 20px blue);  /*阴影*/
+filter: grayscale(50%);    /*灰度*/
+filter: hue-rotate(90deg); /*色相旋转*/
+filter: invert(75%);       /*颜色翻转/反相*/
+filter: opacity(25%);      /*透明度*/
+filter: saturate(30%);     /*饱和度*/
+filter: sepia(60%);        /*老照片*/
+
+/* Apply multiple filters */
+filter: contrast(175%) brightness(3%);
+
+/* Global values */
+filter: inherit;
+filter: initial;
+filter: unset;
+```
+
+## media query
+
+```css
+@media (not/only) 设备类型 and ( (not) 设备特性),
+(not/only) 设备类型 and ( (not) 设备特性-1) and ( (not) 设备特性-2) {
+    样式代码
+}
+```
+
+```css
+/*screen size : 500px ~ 1000px*/
+@media screen and (min-width: 500px) and (max-width: 1000px) {
+    .container {
+        width: 750px;
+    }
+}
+```
+
+### 设备类型
+
+|类型|解释|
+|:---------------:|:--------------------:|
+|all|所有设备|
+|braille|盲文|
+|embossed|盲文打印|
+|handheld|手持设备|
+|print|文档打印或打印预览模式|
+|projection|项目演示，比如幻灯|
+|screen|彩色电脑屏幕|
+|speech|演讲|
+|tty|固定字母间距的网格的媒体，比如电传打字机|
+|tv|电视|
+
+### 设备特性
+
+|属性|值|Min/Max|描述|
+|:----------:|:-------:|:-----:|:---------------:|
+|aspect-ratio|整数/整数|yes|渲染界面的宽高比例|
+|device-aspect-ratio|整数/整数|yes|设备屏幕的宽高比例|
+|color|整数|yes|每种色彩的字节数|
+|color-index|整数|yes|色彩表中的色彩数|
+|height|length|yes|渲染界面的高度|
+|width|length|yes|渲染界面的宽度|
+|device-height|length|yes|设备屏幕的输出高度|
+|device-width|length|yes|设备屏幕的输出宽度|
+|grid|整数|no|是否是基于格栅的设备|
+|monochrome|整数|yes|单色帧缓冲器中每像素字节|
+|resolution|分辨率(“dpi/dpcm”)|yes|分辨率|
+|scan|Progressive interlaced|no|tv媒体类型的扫描方式|
+|orientation|Portrait/landscape|no|横屏或竖屏|
