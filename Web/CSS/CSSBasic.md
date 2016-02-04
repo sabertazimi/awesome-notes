@@ -38,6 +38,7 @@
 			- [flex](#flex)
 				- [父元素属性](#父元素属性)
 				- [子元素属性](#子元素属性)
+				- [Best Practice](#best-practice)
 		- [list-style-type/image](#list-style-typeimage)
 		- [custom style](#custom-style)
 			- [custom methods](#custom-methods)
@@ -68,6 +69,8 @@
 	- [media query](#media-query)
 		- [设备类型](#设备类型)
 		- [设备特性](#设备特性)
+
+<!-- /TOC -->
 
 # CSS 3 Basic Notes
 
@@ -433,10 +436,10 @@ h2:before {
 
 ### 全局属性值
 
-auto
-inherit
-initial 指定为默认值，用于消除样式
-none
+-   auto
+-   inherit
+-   initial 指定为默认值，用于消除样式
+-   none
 
 ### layout
 
@@ -531,6 +534,8 @@ flex-shrink: number;
 flex-grow: number;
 align-self: auto/flex-start/flex-end/center/baseline/stretch;
 ```
+
+##### Best Practice
 
 ```css
 .container {
@@ -782,6 +787,7 @@ selector {
     font-family:mySpecialFont;
 
 }
+```
 
 ### filter
 
