@@ -564,9 +564,93 @@ figure可拥有唯一的0/1个figcaption
 **-1**
 编程可获得焦点，tab键不可获得焦点
 
+## Geolocation API
+	
+```js
+if (window.navigator.geolocation) {
+        //getCurrentPosition第三个参数为可选参数
+        navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {
+        // 指示浏览器获取高精度的位置，默认为false
+        enableHighAccuracy: true,
+        // 指定获取地理位置的超时时间，默认不限时，单位为毫秒
+        timeout: 5000,
+        // 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。
+        maximumAge: 3000
+    });
+} else {
+    alert("Your browser does not support Geolocation!");
+}
+```
+
+locationError为获取位置信息失败的回调函数，可以根据错误类型提示信息：
+
+```js
+locationError: function(error){
+    switch(error.code) {
+        case error.TIMEOUT:
+            showError("A timeout occured! Please try again!");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            showError('We can\'t detect your location. Sorry!');
+            break;
+        case error.PERMISSION_DENIED:
+            showError('Please allow geolocation access for this to work.');
+            break;
+        case error.UNKNOWN_ERROR:
+            showError('An unknown error occured!');
+            break;
+    }
+}
+```
+
+locationSuccess为获取位置信息成功的回调函数，返回的数据中包含经纬度等信息，结合Google Map API 即可在地图中显示当前用户的位置信息，如下：
+
+```js
+locationSuccess: function(position){
+    var coords = position.coords;    
+    var latlng = new google.maps.LatLng(
+        // 维度
+        coords.latitude,
+        // 精度
+        coords.longitude
+    );  
+    var myOptions = {  
+        // 地图放大倍数  
+        zoom: 12,  
+        // 地图中心设为指定坐标点  
+        center: latlng,  
+        // 地图类型  
+        mapTypeId: google.maps.MapTypeId.ROADMAP  
+    };  
+    // 创建地图并输出到页面  
+    var myMap = new google.maps.Map(  
+        document.getElementById("map"),myOptions  
+    );  
+    // 创建标记  
+    var marker = new google.maps.Marker({  
+        // 标注指定的经纬度坐标点  
+        position: latlng,  
+        // 指定用于标注的地图  
+        map: myMap
+    });
+    //创建标注窗口  
+    var infowindow = new google.maps.InfoWindow({  
+        content:"您在这里<br/>纬度："+  
+            coords.latitude+  
+            "<br/>经度："+coords.longitude  
+    });  
+    //打开标注窗口  
+    infowindow.open(myMap,marker); 
+}
+```
+
+```navigator.geolocation.watchPosition(locationSuccess, locationError, positionOption)```自动更新地理位置
+
 ## Web Storage API
 
 代替cookies
+
+## Web Files API
 
 ## Web Sockets API
 
