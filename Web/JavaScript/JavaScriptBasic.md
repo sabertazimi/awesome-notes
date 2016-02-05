@@ -3,67 +3,82 @@
 ## 变量
 
 ### 变量声明提升(Hoisting)
-- var 表达式和 function 声明都将会被提升到当前作用域(全局作用域/函数作用域)的顶部, 其余表达式顺序不变
+
+-   var 表达式和 function 声明都将会被提升到当前作用域(全局作用域/函数作用域)的顶部, 其余表达式顺序不变
 
 ### 数组
-- 关联数组：`arrayName[“string”]  = value;`
-    实际为Array对象添加属性`{string:value}`
-- `[]`数组，`{}`对象
-- 缓存数组长度:`int l = list.length`(访问`length`造成运算)
+
+-   关联数组：`arrayName[“string”]  = value;` 实际为Array对象添加属性`{string:value}`
+-   `[]`数组，`{}`对象
+-   缓存数组长度:`int l = list.length`(访问`length`造成运算)
 
 ### 类型转化
-- 字符串->整数：`+string`/`Number(string)`/`parseInt(string, arg1)`
-- any->`bool`：`!!any`
+
+-   字符串->整数：`+string`/`Number(string)`/`parseInt(string, arg1)`
+-   any->`bool`：`!!any`
 
 ------
 
 ## 运算符
-- ==与===  !=与!==
+
+-   ==与===  !=与!==
 
 ------
 
 ## 函数
 
 ### 函数定义时
-- 全局变量
+
+#### 全局变量
 
 定义在函数体外，在函数体内不使用var关键字引用
-- 局部变量
+
+#### 局部变量
 
 函数体内使用var关键字定义
-- 不使用 var 声明变量将会导致隐式的全局变量
-- 声明局部变量时绝对不要遗漏 var 关键字
+
+-   不使用 var 声明变量将会导致隐式的全局变量
+-   声明局部变量时绝对不要遗漏 var 关键字
 
 ### 匿名函数
-- 匿名函数自动执行(定义即执行)：匿名包装器
-    - 使得匿名函数内部的代码能够立即执行
-    - 创建命名空间，防止变量命名冲突
-    - `function(argumentNmae) {}(argumentValue)`  Value用于给匿名函数传递参数
-    - 非匿名函数不自动执行(需显式传参调用执行)
+
+匿名函数自动执行(定义即执行)：匿名包装器
+
+-   使得匿名函数内部的代码能够立即执行
+-   创建命名空间，防止变量命名冲突
+-   `function(argumentNmae) {}(argumentValue)`  Value用于给匿名函数传递参数
+-   非匿名函数不自动执行(需显式传参调用执行)
 
 ### call/apply
-- Function.call(obj, arg1, arg2,...)
-- Function.apply(obj, [arg1, arg2, ...]/arguments)
+
+-   `Function.call(obj, arg1, arg2,...)`
+-   `Function.apply(obj, [arg1, arg2, ...]/arguments)`
 
 ### this/that
-- `var that=this; //用于获取外部对象`
+
+-   `var that=this; //用于获取外部对象`
 
 e.g `foo(){ //this会指向全局对象(window对象)}`
 
 ### 闭包(closure)
-- 两个函数都维持着对外部作用域 Counter 的引用，因此总可以访问Counter作用域内定义的变量count(外部局部变量)
-    - 函数外部不可对函数内部进行赋值或引用
-    - 但函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部，即内部引用外部)
+
+两个函数都维持着对外部作用域 Counter 的引用，因此总可以访问Counter作用域内定义的变量count(外部局部变量)
+
+-   函数外部不可对函数内部进行赋值或引用
+-   但函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部，即内部引用外部)
 
 ### hasOwnProperty
-- 使用其它对象的`hasOwnProperty`，并将其上下文设置为`foo`
+
+-   使用其它对象的`hasOwnProperty`，并将其上下文设置为`foo`
 
 `({}).hasOwnProperty.call(foo, 'bar'); // true`
-- 推荐总是使用`hasOwnProperty`进行`for in`循环
+
+-   推荐总是使用`hasOwnProperty`进行`for in`循环
 
 ### eval
-- 不要使用`eval()`函数
-- 不要使用字符串作`setTimeOut`/`setInterval`的第一个参数(会调用`eval`函数)
+
+-   不要使用`eval()`函数
+-   不要使用字符串作`setTimeOut`/`setInterval`的第一个参数(会调用`eval`函数)
 
 ------
 
