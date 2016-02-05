@@ -16,12 +16,14 @@
 		- [aside](#aside)
 		- [footer](#footer)
 	- [Form](#form)
+			- [novalidate](#novalidate)
 		- [表单元素共有属性](#表单元素共有属性)
 			- [form=form_name](#formformname)
 			- [formaction=target_name](#formactiontargetname)
 			- [formmethod=post/get](#formmethodpostget)
 			- [formenctype](#formenctype)
 			- [formtarget](#formtarget)
+			- [formnovalidate](#formnovalidate)
 			- [autofocus](#autofocus)
 			- [required](#required)
 		- [labels](#labels)
@@ -30,9 +32,16 @@
 			- [type](#type)
 				- [text](#text)
 				- [checkbox](#checkbox)
+				- [search](#search)
+				- [tel](#tel)
+				- [url](#url)
+				- [email](#email)
+				- [date/month/week/time/datetime-local](#datemonthweektimedatetime-local)
+			- [indeterminate](#indeterminate)
 			- [`list` && `autocomplete`](#list-autocomplete)
 			- [pattern](#pattern)
-			- [indeterminate](#indeterminate)
+			- [validity](#validity)
+		- [output](#output)
 		- [textarea](#textarea)
 			- [maxlength](#maxlength)
 			- [cols](#cols)
@@ -40,8 +49,29 @@
 		- [menu](#menu)
 		- [dialog](#dialog)
 		- [datalist](#datalist)
+	- [Content](#content)
+		- [details > summary | datalist](#details-summary-datalist)
+			- [datagrid](#datagrid)
+			- [配合autocomplete属性](#配合autocomplete属性)
+			- [open(boolean)](#openboolean)
+		- [summary](#summary)
+		- [mark](#mark)
+		- [em](#em)
+		- [strong](#strong)
+		- [small](#small)
+		- [`<progress value="" max="">`](#progress-value-max)
+		- [meter](#meter)
+			- [value](#value)
+			- [min](#min)
+			- [max](#max)
+			- [low](#low)
+			- [high](#high)
+			- [optimum](#optimum)
+		- [wbr](#wbr)
 	- [Media](#media)
+		- [canvas](#canvas)
 		- [figure](#figure)
+		- [figcaption](#figcaption)
 		- [img](#img)
 			- [src](#src)
 			- [alt](#alt)
@@ -51,13 +81,6 @@
 			- [target](#target)
 		- [embed](#embed)
 		- [command](#command)
-		- [details > summary | datalist](#details-summary-datalist)
-			- [datagrid](#datagrid)
-			- [配合autocomplete属性](#配合autocomplete属性)
-	- [Style](#style)
-		- [small](#small)
-		- [mark](#mark)
-		- [wbr](#wbr)
 	- [Information](#information)
 		- [time](#time)
 			- [pubdate](#pubdate)
@@ -68,6 +91,12 @@
 			- [hidden](#hidden)
 			- [spellcheck](#spellcheck)
 			- [tabindex](#tabindex)
+	- [Geolocation API](#geolocation-api)
+	- [Web Storage API](#web-storage-api)
+	- [Web Files API](#web-files-api)
+	- [Web Sockets API](#web-sockets-api)
+	- [Web RTC API](#web-rtc-api)
+	- [Web Workers API](#web-workers-api)
 
 <!-- /TOC -->
 
@@ -281,7 +310,7 @@ table>.row*4>.cell*3
 
 #### formnovalidate
 
-取消表单元素的提交验证 
+取消表单元素的提交验证
 
 将submit元素的formnovalidate属性值为true，使整个表单提交验证失效，实现加提交；
 进而弹出再次确认按钮(真提交)。
@@ -319,7 +348,7 @@ textbox.value = '666666';   //  等同于 input.value = '666666';
 
 搜索条
 
-##### tel 
+##### tel
 
 电话号码 - 无输入检查
 
@@ -373,7 +402,7 @@ if (checkbox.indeterminate) {
 
 #### validity
 
-返回ValidityState对象，拥有ValidityState.valid属性 
+返回ValidityState对象，拥有ValidityState.valid属性
 
 ### output
 
@@ -465,6 +494,7 @@ value/max 百分比
 ### canvas
 
 -   绘制路径 beginPath() -> draw() -> closePath()
+-   Path2D对象
 -   绘制样式 颜色、渐变、变换、阴影
 -   绘制图形 fill/stroke/clip
 
@@ -472,7 +502,7 @@ value/max 百分比
 vat context = canvas.getContext('2d');
 ```
 
-#### Path2D对象
+[Canvas API](Demo/canvas-cheat-sheet.html)
 
 ### figure
 
@@ -565,7 +595,7 @@ figure可拥有唯一的0/1个figcaption
 编程可获得焦点，tab键不可获得焦点
 
 ## Geolocation API
-	
+
 ```js
 if (window.navigator.geolocation) {
         //getCurrentPosition第三个参数为可选参数
@@ -607,40 +637,40 @@ locationSuccess为获取位置信息成功的回调函数，返回的数据中�
 
 ```js
 locationSuccess: function(position){
-    var coords = position.coords;    
+    var coords = position.coords;
     var latlng = new google.maps.LatLng(
         // 维度
         coords.latitude,
         // 精度
         coords.longitude
-    );  
-    var myOptions = {  
-        // 地图放大倍数  
-        zoom: 12,  
-        // 地图中心设为指定坐标点  
-        center: latlng,  
-        // 地图类型  
-        mapTypeId: google.maps.MapTypeId.ROADMAP  
-    };  
-    // 创建地图并输出到页面  
-    var myMap = new google.maps.Map(  
-        document.getElementById("map"),myOptions  
-    );  
-    // 创建标记  
-    var marker = new google.maps.Marker({  
-        // 标注指定的经纬度坐标点  
-        position: latlng,  
-        // 指定用于标注的地图  
+    );
+    var myOptions = {
+        // 地图放大倍数
+        zoom: 12,
+        // 地图中心设为指定坐标点
+        center: latlng,
+        // 地图类型
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    // 创建地图并输出到页面
+    var myMap = new google.maps.Map(
+        document.getElementById("map"),myOptions
+    );
+    // 创建标记
+    var marker = new google.maps.Marker({
+        // 标注指定的经纬度坐标点
+        position: latlng,
+        // 指定用于标注的地图
         map: myMap
     });
-    //创建标注窗口  
-    var infowindow = new google.maps.InfoWindow({  
-        content:"您在这里<br/>纬度："+  
-            coords.latitude+  
-            "<br/>经度："+coords.longitude  
-    });  
-    //打开标注窗口  
-    infowindow.open(myMap,marker); 
+    //创建标注窗口
+    var infowindow = new google.maps.InfoWindow({
+        content:"您在这里<br/>纬度："+
+            coords.latitude+
+            "<br/>经度："+coords.longitude
+    });
+    //打开标注窗口
+    infowindow.open(myMap,marker);
 }
 ```
 
