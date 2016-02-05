@@ -680,6 +680,36 @@ locationSuccess: function(position){
 
 代替cookies
 
+```js
+if(!localStorage.getItem('bgcolor')) {
+  populateStorage();
+} else {
+  setStyles();
+}
+
+function populateStorage() {
+  localStorage.setItem('bgcolor', document.getElementById('bgcolor').value);
+  localStorage.setItem('font', document.getElementById('font').value);
+  localStorage.setItem('image', document.getElementById('image').value);
+
+  setStyles();
+}
+
+function setStyles() {
+  var currentColor = localStorage.getItem('bgcolor');
+  var currentFont = localStorage.getItem('font');
+  var currentImage = localStorage.getItem('image');
+
+  document.getElementById('bgcolor').value = currentColor;
+  document.getElementById('font').value = currentFont;
+  document.getElementById('image').value = currentImage;
+
+  htmlElem.style.backgroundColor = '#' + currentColor;
+  pElem.style.fontFamily = currentFont;
+  imgElem.setAttribute('src', currentImage);
+}
+```
+
 ## Web Files API
 
 ## Web Sockets API
