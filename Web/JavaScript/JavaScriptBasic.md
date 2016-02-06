@@ -62,6 +62,8 @@
 
 # JavaScript Basic Notes
 
+SEO searchbot graceful degradation
+
 ## JavaScript Grammar Basic
 
 ### 变量
@@ -166,13 +168,13 @@ e.g `foo(){ //this会指向全局对象(window对象)}`
 ### DOM-Core
 
 ```js
-    createElement()
-    createTextNode()
+    document.createElement("nodeName");
+    document.createTextNode("String");
 
     cloneNode()
 
-    appendChild()
-    insertBefore()
+    parentElement.appendChild(childElement);
+    parentElement.insertBefore(newElement, targetElement);
 
     removeChild()
 
@@ -184,7 +186,56 @@ e.g `foo(){ //this会指向全局对象(window对象)}`
     getElementById()
     getElementsByTagName()
     hasChildNode()
+```
 
+#### dynamic creation
+
+##### append
+
+```javascript
+var testdiv = document.getElementById("testdiv");
+
+var para = document.createElement("p");
+testdiv.appendChild(para);
+
+var txt = document.createTextNode("Hello World");
+para.appendChild(txt);
+```
+
+##### insert
+
+```js
+function insertAfter(newElement,targetElement) {
+  var parent = targetElement.parentNode;
+  if (parent.lastChild == targetElement) {
+    parent.appendChild(newElement);
+  } else {
+    parent.insertBefore(newElement,targetElement.nextSibling);
+  }
+}
+```
+
+#### node
+
+node除包括元素结点(tag)外，包括许多其它结点(甚至空格符视作一个结点),需借助nodeType找出目标结点
+
+```js
+node.nodeType
+```
+
+|nodeType|representation|
+|:----------:|:---------------|
+|1|元素结点|
+|2|属性结点|
+|3|文本结点|
+
+```js
+node.nodeName
+node.nodeValue
+```
+
+```
+```js
     node.childNodes
     node.firstChild
     node.lastChild
@@ -193,24 +244,73 @@ e.g `foo(){ //this会指向全局对象(window对象)}`
     node.parentNode
 ```
 
+### HTML-DOM
+
+```js
+element.innerHTML
+```
+
+innerHTML: unconcrete,including all types of childNodes 
+
+**div.innerHTML = <p>Test<em>test</em>Test.</p>**
+
+```html
+<div>
+	<p>Test<em>test</em>Test.</p>
+</div>
+```
+
+```js
+document.body
+element.alt = string;
+element.classname = value;
+```
+
+**Tip**: bind class
+
+```javascript
+function addClass(element, value) {
+	if (!element.className) {
+		element.className = value;
+	} else {
+		newClassName = element.className;
+		newClassName += " ";
+		newClassName += value;
+		element.className = newClassName;
+	}
+}
+```
+
+```javascript
+element.event = function() {};
+elemetn.onclick = function() {};
+```
+
+### CSS-DOM
+
+```
+element.style.*;
+element.style.fontFamily;
+element.style.marginTopWidth;
+```
+
 ### document
 
 ```javascript
-document.write()
-document.getElementsByTagName()
-document.URI
-document.title
+document.write();
+document.URI;
+document.title;
 ```
 
 ### window
 
 ```javascript
-window.location(string)
-window.innerWidth(number)
-window.closed(boolean)
+window.location(string);
+window.innerWidth(number);
+window.closed(boolean);
 ```
 
-**Tip-1**: 实现jQuery中`$(document).ready(function(){});
+**Tip**: 实现jQuery中`$(document).ready(function(){});
 
 ```js
 //initialize
@@ -234,45 +334,6 @@ function addLoadEvent(func) {
     }
   }
 }
-```
-
-### normal dom element
-
-```javascript
-element.childNodes  //Node Array
-element.firstChild
-element.lastChild
-element.parentNode
-element.nextSibling
-```
-
-node除包括元素结点(tag)外，包括许多其它结点(甚至空格符视作一个结点),需借助nodeType找出目标结点
-
-```js
-node.nodeType
-```
-
-|nodeType|representation|
-|:----------:|:---------------|
-|1|元素结点|
-|2|属性结点|
-|3|文本结点|
-
-```js
-node.nodeName
-node.nodeValue
-```
-
-```js
-element.innerHTML
-element.alt
-element.style.*
-element.classname
-```
-
-```js
-element.event = function() {};
-elemetn.onclick = function() {};
 ```
 
 ### Events
@@ -330,7 +391,9 @@ $(window).height()               //返回窗口高度
 $(window).scrollTop()		//返回滚动条距网页顶部距离
 ```
 
-### 模板引擎：handlebars.js
+------
+
+## 模板引擎：handlebars.js
 
 将JSON通过模板转化为Html内容(分离结构与内容，达成结构固定内容变化)
 Data——(Structure)——Content
@@ -344,6 +407,61 @@ Handlebars.compile($(“#template_id”).html());  //一次编译，多次使用
 {{#if @first}} … {{/if}}
 {{@index}} 数组下标
 ```
+
+------
+
+## Ajax
+
+```javascript
+function getHTTPObject() {
+	if (typeof XMLHttpRequest == "undefined")
+		XMLHttpRequest = function () {
+			try { 
+				return new ActiveXObject("Msxml2.XMLHTTP.6.0");
+			} catch (e) {}
+			try {
+				return new ActiveXObject("Msxml2.XMLHTTP.3.0");
+			} catch (e) {}
+			try {
+				return new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {}
+			return false;
+		}  // end of XMLHttpRequest = function() {}
+    else return new XMLHttpRequest();
+}
+```
+
+```javascript
+var request = new XMLHttpRequest();
+```
+
+```javascript
+// 3rd argument : async mode
+request.open( "GET", "example.txt", true );
+
+request.onreadystatechange = function() {
+	//do something
+	/*
+	switch(request.readyState) {
+		case 0: initalize
+		case 1: loading
+		case 2: loaded
+		case 3: transaction
+		case 4: complete
+	}
+	*/
+	if (request.readyState == 4) {
+		var para = document.createElement("p");
+		var txt = document.createTextNode(request.responseText);
+		para.appendChild(txt);
+		document.getElementById('new').appendChild(para);
+	}
+};
+
+request.send(null);        
+```
+
+------
 
 ## Meteor
 
