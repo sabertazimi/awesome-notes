@@ -64,49 +64,192 @@
 
 SEO searchbot graceful degradation
 
-## JavaScript Grammar Basic
+## 变量
 
-### 变量
-
-#### 变量声明提升(Hoisting)
-
--   var 表达式和 function 声明都将会被提升到当前作用域(全局作用域/函数作用域)的顶部, 其余表达式顺序不变
-
-#### 数组
-
--   关联数组：`arrayName[“string”]  = value;` 实际为Array对象添加属性`{string:value}`
--   `[]`数组，`{}`对象
--   缓存数组长度:`int l = list.length`(访问`length`造成运算)
-
-#### 类型转化
-
--   字符串->整数：`+string`/`Number(string)`/`parseInt(string, arg1)`
--   any->`bool`：`!!any`
-
-------
-
-### 运算符
-
--   ==与===  !=与!==
-
-------
-
-### 函数
-
-#### 函数定义时
-
-##### 全局变量
+### 全局变量
 
 定义在函数体外，在函数体内不使用var关键字引用
 
-##### 局部变量
+### 局部变量
 
 函数体内使用var关键字定义
 
 -   不使用 var 声明变量将会导致隐式的全局变量
 -   声明局部变量时绝对不要遗漏 var 关键字
 
-#### 匿名函数
+### 变量声明提升(Hoisting)
+
+-   var 表达式和 function 声明都将会被提升到当前作用域(全局作用域/函数作用域)的顶部, 其余表达式顺序不变
+
+### 数组
+
+-   关联数组：`arrayName[“string”]  = value;` 实际为Array对象添加属性`{string:value}`
+-   `[]`数组，`{}`对象
+-   缓存数组长度:`int l = list.length`(访问`length`造成运算)
+
+### 类型转化
+
+-   字符串->整数：`+string`/`Number(string)`/`parseInt(string, arg1)`
+-   any->`bool`：`!!any`
+
+------
+
+## 运算符
+
+-   ==与===  
+-   !=与!==
+
+------
+
+## 对象
+
+### 共享 - 原型代理/享元模式(new与Object.create)
+
+构造函数的原型对象被设置为新实例的原型引用
+
+```javascript
+f.prototype = o;
+```
+
+```javascript
+if (!Object.create) {
+  Object.create = function (o) {
+    if (arguments.length > 1) {
+      throw new Error('Object.create implementation'
+      + ' only accepts the first parameter.');
+    }
+    function F() {}
+    F.prototype = o;
+    return new F();
+  };
+}
+```
+
+```javascript
+var switchProto = {
+    isOn: function isOn() {
+      return this.state;
+    },
+
+    toggle: function toggle() {
+      this.state = !this.state;
+      return this;
+    },
+
+    state: false
+ };
+
+ var switchInstance = Object.create(switchProto);
+```
+
+此时属性与方法均共享: 若子属性值被新对象替换，则不影响原型；否则子属性值被直接修改，会影响原型.
+
+需改变属性值时，**尽量替换，防止直接修改**.
+
+### 独立 - 原型克隆
+
+```javascript
+_.extend = function(obj) {
+  each(slice.call(arguments, 1), function(source) {
+    for (var prop in source) {
+      obj[prop] = source[prop];
+    }
+  });
+  return obj;
+};
+```
+
+此时属性与方法不共享，实例对象各自拥有一份拷贝
+
+### 封装 - 工厂方法(闭包)
+
+```js
+function factory() {
+  var highlander = {
+      name: 'MacLeod'
+    };
+    
+  //利用闭包，返回私有对象，实现工厂方法
+  return {
+    get: function get() {
+      return highlander;
+    }
+  };
+}
+```
+
+### 对象三大特征
+
+-   原型代理(享元模式): 利用享元模式共享公有属性与通用方法
+-   实例状态(原型克隆): 利用原型克隆拥有各自属性值
+-   封装性(闭包式继承): 利用闭包方法实现属性私有化
+
+共用方法,单独属性,封装细节
+
+------
+
+## 函数
+
+### Lambda Calculus
+
+-   函数是一等公民
+-   函数可作为入参，可作为返回值(即可作为一般数据)
+
+#### 闭包(closure)
+
+两个函数都维持着对外部作用域 Counter 的引用，因此总可以访问Counter作用域内定义的变量count(外部局部变量)
+
+-   函数外部不可对函数内部进行赋值或引用
+-   但函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部，即内部引用外部)
+-   特权性质: 从外部通过闭包方法访问内部(函数作用域)局部变量
+
+#### 偏函数应用
+
+运用闭包可封装函数
+
+
+```js
+function joinWords(a, b) {
+	return [a,b].join(' ');
+}
+function prefixer(word) {
+	return function(b) {
+		return joinWords(word, b);
+	}
+}
+
+//封装函数joinWords(a, b)
+var prefixerWithHate = prefixer('Hate');
+//得到封装后的函数prefixerWithHate(parameter);
+
+//调用封装后的函数
+//相当于调用joinWords('Hate', ' Java')
+console.log(prefixerWithHate('Java'));
+```
+
+### 函数声明与函数表达式
+
+函数表达式的foo只可在函数体内访问，其它地方需使用fooFunc
+
+```javascript
+//函数声明
+function foo() {
+	
+}
+
+//函数表达式
+var fooFunc = function foo() {
+	
+};
+
+//变量提升
+var fooFunc;
+fooFunc = function foo() {
+	
+};
+```
+
+### 匿名函数
 
 匿名函数自动执行(定义即执行)：匿名包装器
 
@@ -115,25 +258,53 @@ SEO searchbot graceful degradation
 -   `function(argumentNmae) {}(argumentValue)`  Value用于给匿名函数传递参数
 -   非匿名函数不自动执行(需显式传参调用执行)
 
-#### call/apply
+### call/apply
 
--   `Function.call(obj, arg1, arg2,...)`
--   `Function.apply(obj, [arg1, arg2, ...]/arguments)`
+-   `Function.call(contextObj, arg1, arg2,...)`
+-   `Function.apply(contextArray, [arg1, arg2, ...]/arguments)`
 
-#### this/that
+```js
+function.call/apply();
+window.function.call/apply();
+//js解释器临时将数组/字符串包装成对象原型
+[].arrayStaticFunction.call/apply();
+Array.prototype.arrayStaticFunction.call/apply();
+"".stringStaticFunction.call/apply();
+String.prototype.stringStaticFunction.call/apply();
+```
+
+相当于 - 
+
+```javascript
+context.function(arguments);
+```
+
+### this/that
 
 -   `var that=this; //用于获取外部对象`
 
 e.g `foo(){ //this会指向全局对象(window对象)}`
 
-#### 闭包(closure)
+### 多态方法
 
-两个函数都维持着对外部作用域 Counter 的引用，因此总可以访问Counter作用域内定义的变量count(外部局部变量)
+```js
+var greet = function greet(options) {
+	//运用slice方法与arguments隐参,得到参数对象/数组
+	//运用if/switch方法分情况调用函数,实现多态方法
+	var args = [].slice.call(arguments, 0);
+	//方法集中含有此方法
+	if (typeof options === 'string'
+	&& typeof methods[options] === 'function') {
+		action = options;
+		//取第2个参数开始为真正的参数
+		args.shift();
+	}
+	//调用对应方法,入参为args,返回调用值
+	return methods[action](args);
+}
+```
 
--   函数外部不可对函数内部进行赋值或引用
--   但函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部，即内部引用外部)
-
-#### hasOwnProperty
+### hasOwnProperty
 
 -   使用其它对象的`hasOwnProperty`，并将其上下文设置为`foo`
 
@@ -141,10 +312,37 @@ e.g `foo(){ //this会指向全局对象(window对象)}`
 
 -   推荐总是使用`hasOwnProperty`进行`for in`循环
 
-#### eval
+### eval
 
 -   不要使用`eval()`函数
 -   不要使用字符串作`setTimeOut`/`setInterval`的第一个参数(会调用`eval`函数)
+
+------
+
+## 模块化
+
+### 命名空间
+
+通过传参匿名函数,创建命名空间,进行模块包裹
+
+```javascript
+var app = {};
+
+(function (exports) {
+
+  (function (exports) {
+    var api = {
+        moduleExists: function test() {
+          return true;
+        }
+      };
+    //闭包式继承,扩展exports对象为api对象
+    $.extend(exports, api);
+  }((typeof exports === 'undefined') ?
+      window : exports));
+//将api对象绑定至app对象上
+}(app));
+```
 
 ------
 
