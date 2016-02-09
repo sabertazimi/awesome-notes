@@ -346,6 +346,15 @@ var app = {};
 
 ------
 
+## MVC
+
+### View
+
+-   关注表现层逻辑
+-   向相关模块(Model)派发事件
+
+------
+
 ## JavaScript DOM Basic
 
 ### DOM - O
