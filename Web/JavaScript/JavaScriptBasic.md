@@ -101,6 +101,39 @@ SEO searchbot graceful degradation
 
 ------
 
+## 控制流程
+
+### switch/case
+
+用方法查询代替switch/case语句
+
+```javascript
+function doAction(action) {
+  var actions = {
+    'hack': function () {
+      return 'hack';
+    },
+
+    'slash': function () {
+      return 'slash';
+    },
+
+    'run': function () {
+      return 'run';
+    }
+  };
+
+  if (typeof actions[action] !== 'function') {
+    throw new Error('Invalid action.');
+  }
+
+  //闭包方法集
+  return actions[action]();
+}
+```
+
+------
+
 ## 对象
 
 ### 共享 - 原型代理/享元模式(new与Object.create)
@@ -315,6 +348,7 @@ var greet = function greet(options) {
 ### eval
 
 -   不要使用`eval()`函数
+-   不要使用字符串作参数 new Function();(会调用`eval`函数)
 -   不要使用字符串作`setTimeOut`/`setInterval`的第一个参数(会调用`eval`函数)
 
 ------
@@ -352,6 +386,11 @@ var app = {};
 
 -   关注表现层逻辑
 -   向相关模块(Model)派发事件
+
+load()回调函数:
+
+-   不加入过多的逻辑处理
+-   不进行多余的DOM操作
 
 ------
 
@@ -739,20 +778,21 @@ Simple templates to add login widgets to an app
 
 #### [iron:router](https://atmospherejs.com/iron/router)
 
-```js
-Router.configure( {
-    layoutTemplate: 'ParentTemplateName'    e.g'ApplicationLayout'
-});
-```
-
 ```html
-<template name=”ApplicationLayout”>
-    {{> yield “navbar”}}	//规定html区域
-    {{> yield “main”}}	//规定html区域
+<template name="ApplicationLayout">
+    {{> yield "navbar"}}	<!--规定html区域-->
+    {{> yield "main"}}		<!--规定html区域-->
 </template>
 ```
 
-```js
+```javascript
+Router.configure( {
+    layoutTemplate: "ParentTemplateName"  //e.g"ApplicationLayout"
+});
+```
+
+
+```javascript
 Router.route('/', function () {
   this.render('MyTemplate');
 });
@@ -762,13 +802,14 @@ Router.route('/items', function () {
 });
 
 Router.route('/items', function () {
-  this.render('TemplateName'{
-	to:”yieldFunctionArgument”    //规定html区域
-}
+  this.render('TemplateName': {
+	to: "yieldFunctionArgument"    //规定html区域
+  });
+});
 
 Router.route('/items/_id', function () {
   this.render('TemplateName'{
-	to:”yieldFunctionArgument”,    //规定html区域
+	to:"yieldFunctionArgument",    //规定html区域
 	data:function() {    //传递Template中的特定数据
 		return Collection.FindOne({_id: this.params._id});
 	}
@@ -790,7 +831,7 @@ Router.route('/restful', {where: 'server'})
   })
   .post(function () {
     this.response.end('post request\n');
-  });
+});
 ```
 
 #### twbs:bootstrap 3.3.6
@@ -855,7 +896,7 @@ Template.templateTag_name.events({
 ```js
 Meteor.user()
 Meteor.users.find()
-Meteor.users.findOne(filter)j
+Meteor.users.findOne(filter)
 Meteor.user().email[num].address
 Meteor.user().username
 Meteor.user()._id
@@ -870,19 +911,19 @@ Meteor.user()._id
 -   将对象的某一个属性设为过滤器
 
 ```js
-Session.set(“userFilter”, Object.property_nmae);
+Session.set("userFilter", Object.property_nmae);
 ```
 
 -   通过get得到过滤器属性值(已设置过滤器为有效值，未设置过滤器为NULL)
 
 ```js
-{ property_name: Session.get(“userFilter”) }
+{ property_name: Session.get("userFilter") }
 ```
 
 -   移除过滤器
 
 ```js
-Session.set(“userFilter”, undefined);
+Session.set("userFilter", undefined);
 ```
 
 ### MongoDB
@@ -918,3 +959,33 @@ allow（安全性）
 meteor remove insecure
 
 #### MongoDB/Collection的安全性
+
+## Code Guide
+
+### 入参函数
+
+注意是否需要拷贝传入对象,使原有对象不受函数影响,并返回新对象
+
+```javascript
+//坏习惯: 除非必要,否则不改变原有对象
+var obj = {
+	value: 2
+};
+
+function setValue(obj, val) {
+	obj.value = val;
+	return obj;
+}
+```
+
+```javascript
+//好习惯: 改变新对象,返回新对象
+var obj = {
+	value: 2
+};
+
+function setValue(obj, val) {
+	var instance = extend({}, obj, {value: val});
+	return instance;
+}
+```
