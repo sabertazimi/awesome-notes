@@ -88,7 +88,8 @@ $().modal(‘’);
 ## Button
 
 ```html
-class:btn btn-success btn-warning btn-info
+class:btn btn-block
+      btn-primary btn-success btn-warning btn-danger btn-info
 
 <button data-toggle=”” data-target-”” data-dismiss=””></button>
 ```
