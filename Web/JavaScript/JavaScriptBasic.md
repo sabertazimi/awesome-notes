@@ -126,6 +126,15 @@ if (typeof Array.isArray === "undefined") {
 }
 ```
 
+#### 常用方法
+
+```javascript
+Array.unshift(value); // 添加数组首元素
+Array.push(value);    // 添加数组尾元素 
+Array.shift();        // 删除数组首元素
+Array.pop();          // 删除数组尾元素
+```
+
 ### 类型转化
 
 -   字符串->整数：`+string`/`Number(string)`/`parseInt(string, arg1)`
@@ -1009,26 +1018,6 @@ onresize/load/scroll/error
 
 ```javascript
 oninput/onchange
-```
-
-------
-
-## JQuery
-
-### 常用多态函数
-
-```js
-data、html、css
-$(document).ready(function(){});
-```
-
-### window
-
-```js
-$(window).scroll(function(event) {});
-$(document).height()           //返回整个网页的高度
-$(window).height()               //返回窗口高度
-$(window).scrollTop()		//返回滚动条距网页顶部距离
 ```
 
 ------

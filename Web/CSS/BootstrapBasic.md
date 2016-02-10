@@ -13,6 +13,10 @@
 </UI API>
 ```
 
+## text
+
+text-center text-primary
+
 ## Form
 
 ```html
@@ -130,3 +134,9 @@ class=navbar navbar-default navbar-fixed-top nav-tabs nav-pills
           <li><a href=""></a></li>
 </ul>
 ```
+
+## Style
+
+### 嵌入效果
+
+.well  .well-xs  .well-sm
