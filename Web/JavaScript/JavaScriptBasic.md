@@ -86,7 +86,6 @@ function () {
 }
 ```
 
-
 ### 全局变量
 
 定义在函数体外，在函数体内不使用var关键字引用
@@ -192,6 +191,7 @@ function doAction(action) {
 
 共用方法,单独属性,封装细节
 
+
 ### 构造函数
 
 首字母大写
@@ -259,7 +259,156 @@ var global = (function () {
 }());
 ```
 
-### 共享 - 原型代理/享元模式(new与Object.create)
+### 私有属性与特权方法
+
+#### 私有属性
+
+实现方式: 闭包
+
+```javascript
+function Gadget() {
+	// private member
+	var name = 'iPod';
+	// public function
+	this.getName = function () {
+		return name;
+	};
+}
+```
+
+#### 特权方法
+
+getter:返回基本类型值/**引用**类型**深拷贝**(POLA最低授权原则)
+
+```javascript
+function Gadget() {
+	// private member
+	var pref = {};
+	// public function
+	this.getPref = function () {
+		return pref.clone();
+	};
+}
+```
+
+#### Best Practice
+
+**即使函数模式 + 揭示模式**
+
+-   实现私有属性与私有方法
+-   提供私有方法的公共(读/执行 not 写)接口,公共接口发生意外,私有方法仍安全
+
+```javascript
+//匿名即时函数模式
+var myobj = (function () {
+	// private member
+	var name = "tazimi";
+    // private method
+    var getName = function getName() {
+    	return name;
+    }
+    // 闭包
+    return {
+        // 公共接口 - 私有方法
+    	getName: getName;
+    };
+}());
+```
+
+### 静态属性与方法
+
+#### 静态属性
+
+实现方式: 闭包/原型代理
+
+#### 静态方法
+
+直接向构造函数添加方法
+
+```javascript
+Object.isArray = function () {};
+```
+
+### 模块化对象
+
+命名空间+依赖模式+私有属性/特权方法+初始化模式+揭示模式(公共接口)+即时函数模式
+
+package+import+private field/methods+constructor+public methods
+
+#### Best Practice
+
+```javascript
+// 命名空间模式
+MYAPP.namespace('MYAPP.utilities.array');
+
+//形参: 导入全局变量
+MYAPP.utilities.array = (function (app, global) {
+// start of var declare
+
+// 依赖模式
+var uobj = MYAPP.utilities.object,
+	ulang = MYAPP.utilities.lang,
+// 私有属性
+	arrStr = "[object Array]",
+	toStr = Object.prototype.toString;
+// 私有方法
+	inArray = function (haystack, needle) {
+		for (var i = 0, max = haystack.length; i < max; i += 1) {
+			if (haystack[i] === needle) {
+				return i;
+			}
+		}
+		return −1;
+	},
+	isArray = function (a) {
+		return toStr.call(a) === arrayString;
+	};
+
+// end of var declare
+
+// 初始化模式
+初始化代码,只执行一次
+
+// 揭示公共接口
+return {
+	isArray: isArray,
+	indexOf: inArray
+};
+
+}(MYAPP, this));
+```
+
+### 普通方法
+
+为prototype添加方法,可以通过实现语法糖method()简化代码(链模式)
+
+```javascript
+if (typeof Function.prototype.method !== "function") {
+	Function.prototype.method = function (name, implementation) {
+		this.prototype[name] = implementation;
+		return this;
+	};
+}
+```
+
+```javascript
+var Person = function (name) {
+	this.name = name;
+}
+.method('getName', function () {
+	return this.name;
+})
+.method('setName', function (name) {
+	this.name = name;
+	return this;
+});
+```
+
+### Class式继承
+
+### Prototype式继承
+
+#### 共享 - 原型代理/享元模式(new与Object.create)
 
 构造函数的原型对象被设置为新实例的原型引用
 
@@ -302,7 +451,7 @@ var switchProto = {
 
 需改变属性值时，**尽量替换，防止直接修改**.
 
-### 独立 - 原型克隆
+#### 独立 - 原型克隆
 
 ```javascript
 _.extend = function(obj) {
@@ -317,7 +466,7 @@ _.extend = function(obj) {
 
 此时属性与方法不共享，实例对象各自拥有一份拷贝
 
-### 封装 - 工厂方法(闭包)
+#### 封装 - 工厂方法(闭包)
 
 ```js
 function factory() {
@@ -730,6 +879,12 @@ addPerson(conf);
 
 ##### Curry化
 
+##### 链模式
+
+```javascript
+return this
+```
+
 #### 初始化模式
 
 ##### 即使函数
@@ -777,6 +932,163 @@ var app = {};
 }(app));
 ```
 
+```javascript
+// global object
+var MYAPP = {};
+// constructors
+MYAPP.Parent = function () {};
+MYAPP.Child = function () {};
+// a variable
+MYAPP.some_var = 1;
+// an object container
+MYAPP.modules = {};
+// nested objects
+MYAPP.modules.module1 = {};
+MYAPP.modules.module1.data = {a: 1, b: 2};
+MYAPP.modules.module2 = {};
+```
+
+#### 通用命名空间函数
+
+```javascript
+MYAPP.namespace = function (namespaceString) {
+	var parts = namespaceString.split('.'),
+		parent = MYAPP,
+		i;
+	// strip redundant leading global
+	if (parts[0] === "MYAPP") {
+		// remove leading global
+		parts = parts.slice(1);
+	}
+	for (i = 0; i < parts.length; i += 1) {
+		// create a property if it doesn't exist
+		if (typeof parent[parts[i]] === "undefined") {
+			parent[parts[i]] = {};
+		}
+		//关键: 向内嵌套
+		parent = parent[parts[i]];
+	}
+	// 返回最内层模块名
+	return parent;
+};
+```
+
+```javascript
+// assign returned value to a local var
+var module2 = MYAPP.namespace('MYAPP.modules.module2');
+module2 === MYAPP.modules.module2; // true
+// skip initial `MYAPP`
+MYAPP.namespace('modules.module51');
+// long namespace
+MYAPP.namespace('once.upon.a.time.there.was.this.long.nested.property');
+```
+
+### 沙盒模式
+
+#### 实现沙盒构造函数
+
+-   私有属性绑定至this/prototype
+-   特权方法绑定至modules/prototype
+
+```javascript
+function Sandbox() {
+	// turning arguments into an array
+	var args = Array.prototype.slice.call(arguments),
+	// the last argument is the callback
+		callback = args.pop(),
+	// modules can be passed as an array or as individual parameters
+		modules = (args[0] && typeof args[0] === "string") ? args : args[0],
+		i;
+
+	// make sure the function is called
+	// as a constructor
+	if (!(this instanceof Sandbox)) {
+		return new Sandbox(modules, callback);
+	}
+
+	// add properties to `this` as needed:
+	this.a = 1;
+	this.b = 2;
+
+	// now add modules to the core `this` object
+	// no modules or "*" both mean "use all modules"
+	if (!modules || modules === '*') {
+		modules = [];
+	for (i in Sandbox.modules) {
+		if (Sandbox.modules.hasOwnProperty(i)) {
+			modules.push(i);
+		}
+	}
+}
+
+	// initialize the required modules
+	for (i = 0; i < modules.length; i += 1) {
+		Sandbox.modules[modules[i]](this);
+	}
+
+	// call the callback
+	callback(this);
+}
+```
+
+```javascript
+// any prototype properties as needed
+Sandbox.prototype = {
+	name: "My Application",
+	version: "1.0",
+	getName: function () {
+		return this.name;
+	}
+};
+```
+
+静态属性 - 使用添加的方法/模块
+
+```javascript
+Sandbox.modules = {};
+Sandbox.modules.dom = function (box) {
+	box.getElement = function () {};
+	box.getStyle = function () {};
+	box.foo = "bar";
+};
+Sandbox.modules.event = function (box) {
+	// access to the Sandbox prototype if needed:
+	// box.constructor.prototype.m = "mmm";
+	box.attachEvent = function () {};
+	box.dettachEvent = function () {};
+};
+Sandbox.modules.ajax = function (box) {
+	box.makeRequest = function () {};
+	box.getResponse = function () {};
+};
+```
+
+#### 沙盒使用方式
+
+```javascript
+Sandbox(['ajax', 'event'], function (box) {
+	// console.log(box);
+});
+
+Sandbox('*', function (box) {
+	// console.log(box);
+});
+Sandbox(function (box) {
+	// console.log(box);
+});
+
+Sandbox('dom', 'event', function (box) {
+	// work with dom and event
+	Sandbox('ajax', function (box) {
+		// another sandboxed "box" object
+		// this "box" is not the same as
+		// the "box" outside this function
+		//...
+		// done with Ajax
+	});
+	// no trace of Ajax module here
+});
+```
 ------
 
 ## MVC
@@ -1123,6 +1435,16 @@ var re = /pattern/gmi;
 
 _method: 表示私有化方法
 
+### 全局变量
+
+应只有模块名为全局变量;jsmin不会缩减全局变量与全局函数名
+
+### 初始化模式
+
+```javascript
+var MYAPP = MYAPP || {};
+```
+
 ### 单一var模式
 
 一个作用域内仅出现一个var关键字,且为所有变量赋初值:
@@ -1137,6 +1459,12 @@ var a = 1,        // int
     obj = {},     // object
     i = 1.0,      // float
     j = false;    // boolean
+```
+
+### 条件表达式
+
+```javascript
+condition ? if-coding : else-coding;
 ```
 
 ### 空格
