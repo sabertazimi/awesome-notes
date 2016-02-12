@@ -406,6 +406,93 @@ var Person = function (name) {
 
 ### Class式继承
 
+#### 设置原型与借用构造函数
+
+##### Best Practice
+
+此模式会使得子类属性继承2次
+
+```javascript
+function Parent(name) {
+	this.name = name || 'Adam';
+}
+// adding functionality to the prototype
+Parent.prototype.say = function () {
+	return this.name;
+};
+
+// child constructor
+function Child(name) {
+	Parent.apply(this, arguments);
+}
+Child.prototype = new Parent();
+```
+
+#### 代理构造函数
+
+##### Best Practice
+
+```javascript
+var inherit = (function () {
+	var F = function () {};	
+	return function (C, P) {
+		F.prototype = P.prototype;
+		C.prototype = new F();
+		C.uber = P.prototype;
+		C.prototype.constructor = C;
+	};
+}());
+```
+
+#### kclass语法糖
+
+```javascript
+var klass = function (Parent, props) {
+	var Child, F, i;
+
+	// 新的构造函数
+	Child = function () {
+		if (Child.uber && Child.uber.hasOwnProperty("_construct")) {
+			Child.uber._construct.apply(this, arguments);
+		}
+		if (Child.prototype.hasOwnProperty("_construct")) {
+			Child.prototype._construct.apply(this, arguments);
+		}
+	};
+
+	// 类式继承
+	Parent = Parent || Object;
+	// 代理构造函数F
+	F = function () {};
+	F.prototype = Parent.prototype;
+	Child.prototype = new F();
+	Child.uber = Parent.prototype;
+	Child.prototype.constructor = Child;
+
+	// 添加属性与方法
+	for (i in props) {
+		if (props.hasOwnProperty(i)) {
+			Child.prototype[i] = props[i];
+		}
+	}
+
+	// return the "class"
+	return Child;
+};
+```
+
+```javascript
+var SuperMan = klass(Man, {
+	_construct: function (what) {
+		console.log("SuperMan's constructor");
+	},
+	getName: function () {
+		var name = SuperMan.uber.getName.call(this);
+		return "I am " + name;
+	}
+});
+```
+
 ### Prototype式继承
 
 #### 共享 - 原型代理/享元模式(new与Object.create)
@@ -453,6 +540,10 @@ var switchProto = {
 
 #### 独立 - 原型克隆
 
+此时属性与方法不共享，实例对象各自拥有一份拷贝
+
+##### 浅克隆
+
 ```javascript
 _.extend = function(obj) {
   each(slice.call(arguments, 1), function(source) {
@@ -464,7 +555,57 @@ _.extend = function(obj) {
 };
 ```
 
-此时属性与方法不共享，实例对象各自拥有一份拷贝
+##### 深克隆
+
+```javascript
+function extendDeep(parent, child) {
+	var i,
+		toStr = Object.prototype.toString,
+		astr = "[object Array]";
+		child = child || {};
+
+	for (i in parent) {
+		if (parent.hasOwnProperty(i)) {
+		    // 若属性为对象,则进行深克隆
+			if (typeof parent[i] === "object") {
+				child[i] = (toStr.call(parent[i]) === astr) ? [] : {};
+				extendDeep(parent[i], child[i]);
+			} else {
+				child[i] = parent[i];
+			}
+		}
+	}
+
+	return child;
+}
+```
+
+##### 属性混入 - 多重继承
+
+```javascript
+function mix() {
+	var arg, prop, child = {};
+
+	for (arg = 0; arg < arguments.length; arg += 1) {
+		for (prop in arguments[arg]) {
+			if (arguments[arg].hasOwnProperty(prop)) {
+				child[prop] = arguments[arg][prop];
+			}
+		}
+	}
+
+	return child;
+}
+```
+
+```javascript
+var cake = mix(
+	{eggs: 2, large: true},
+	{butter: 1, salted: true},
+	{flour: "3 cups"},
+	{sugar: "sure!"}
+);
+```
 
 #### 封装 - 工厂方法(闭包)
 
@@ -791,6 +932,29 @@ String.prototype.stringStaticFunction.call/apply();
 
 ```javascript
 context.function(arguments);
+```
+
+#### 通过call/apply实现bind函数
+
+```javascript
+function bind(o, m) {
+	return function () {
+		return m.apply(o, [].slice.call(arguments));
+	};
+}
+```
+
+```javascript
+var one = {
+	name: "object",
+	say: function (greet) {
+		return greet + ", " + this.name;
+	}
+},
+	two = {name: "another object"},
+	twosay = bind(two, one.say);
+
+twosay('yo'); // "yo, another object"
 ```
 
 ### this/that
@@ -1201,6 +1365,38 @@ node.nodeValue
     node.parentNode
 ```
 
+#### Frag
+
+减少DOM操作次数,减少页面渲染次数
+
+```javascript
+var p, t, frag;
+
+frag = document.createDocumentFragment();
+
+p = document.createElement('p');
+t = document.createTextNode('first paragraph');
+p.appendChild(t);
+frag.appendChild(p);
+
+p = document.createElement('p');
+t = document.createTextNode('second paragraph');
+p.appendChild(t);
+frag.appendChild(p);
+
+// 只渲染一次HTML页面
+document.body.appendChild(frag);
+```
+
+```javascript
+var oldnode = document.getElementById('result'),
+	clone = oldnode.cloneNode(true);
+// work with the clone
+
+// when you're done:
+oldnode.parentNode.replaceChild(clone, oldnode);
+```
+
 ### HTML-DOM
 
 ```js
@@ -1225,6 +1421,11 @@ documents.forms
 documents.forms[0].elements  //第一个表单内的所有字段
 element.alt = string;
 element.classname = value;
+```
+
+```javascript
+document.querySelector("cssSelector");
+document.querySelectorAll("cssSelector");
 ```
 
 **Tip**: bind class
@@ -1332,6 +1533,42 @@ onresize/load/scroll/error
 oninput/onchange
 ```
 
+#### User-Defined Handler
+
+```javascript
+function myHandler(e) {
+	var src, parts;
+
+	// get event and source element
+	e = e || window.event;
+	src = e.target || e.srcElement;
+
+	// 事件授权
+	if (src.nodeName.toLowerCase() !== "button") {
+		return;
+	}
+
+	// actual work: update label
+	parts = src.innerHTML.split(": ");
+	parts[1] = parseInt(parts[1], 10) + 1;
+	src.innerHTML = parts[0] + ": " + parts[1];
+	// no bubble
+	if (typeof e.stopPropagation === "function") {
+		e.stopPropagation();
+	}
+	if (typeof e.cancelBubble !== "undefined") {
+		e.cancelBubble = true;
+	}
+	// prevent default action
+	if (typeof e.preventDefault === "function") {
+		e.preventDefault();
+	}
+	if (typeof e.returnValue !== "undefined") {
+		e.returnValue = false;
+	}
+}
+```
+
 ------
 
 ## 模板引擎：handlebars.js
@@ -1422,6 +1659,58 @@ var re = /pattern/gmi;
 -   g 全局匹配
 -   m 多行匹配
 -   i 大小写敏感匹配
+
+------
+
+## Effective
+
+### 缓存模式
+
+缓存对象属性与DOM对象
+
+### 加载脚本
+
+#### 延迟加载
+
+```html
+... The full body of the page ...
+<!-- end of chunk #2 -->
+<script src="all_20100426.js"></script>
+<script>
+window.onload = function () {
+	var script = document.createElement("script");
+	script.src = "all_lazy_20100426.js";
+	document.documentElement.firstChild.appendChild(script);
+};
+</script>
+</body>
+</html>
+<!-- end of chunk #3 -->
+```
+
+#### 按需加载
+
+```javascript
+function require(file, callback) {
+	var script = document.getElementsByTagName('script')[0],
+		newjs = document.createElement('script');
+
+	// IE
+	newjs.onreadystatechange = function () {
+		if (newjs.readyState === 'loaded' || newjs.readyState === 'complete') {
+			newjs.onreadystatechange = null;
+			callback();
+		}
+	};
+	// others
+	newjs.onload = function () {
+		callback();
+	};
+	// 添加至html页面
+	newjs.src = file;
+	script.parentNode.insertBefore(newjs, script);
+}
+```
 
 ------
 
