@@ -1,3 +1,19 @@
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [React Basic Notes](#react-basic-notes)
+	- [MVC模式](#mvc模式)
+		- [Controller](#controller)
+		- [Best Practice](#best-practice)
+
+<!-- /TOC -->!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [React Basic Notes](#react-basic-notes)
+	- [MVC模式](#mvc模式)
+		- [Controller](#controller)
+		- [Best Practice](#best-practice)
+
+<!-- /TOC -->
+
 # React Basic Notes
 
 ## MVC模式
@@ -20,5 +36,5 @@
 - 使用context
 - 少做dom操作，始终让UI能够基于State还原
 - 在store和action中不dom操作或者访问window.属性，只与数据打交道
-- 推荐使用ES6 
-- npm的debug包，log组件渲染的每个步骤和动作 
+- 推荐使用ES6
+- npm的debug包，log组件渲染的每个步骤和动作

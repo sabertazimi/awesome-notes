@@ -1,62 +1,124 @@
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [JavaScript Basic Notes](#javascript-basic-notes)
-	- [JavaScript Grammar Basic](#javascript-grammar-basic)
-		- [变量](#变量)
-			- [变量声明提升(Hoisting)](#变量声明提升hoisting)
-			- [数组](#数组)
-			- [类型转化](#类型转化)
-		- [运算符](#运算符)
-		- [函数](#函数)
-			- [函数定义时](#函数定义时)
-				- [全局变量](#全局变量)
-				- [局部变量](#局部变量)
-			- [匿名函数](#匿名函数)
-			- [call/apply](#callapply)
-			- [this/that](#thisthat)
+	- [变量](#变量)
+		- [全局变量](#全局变量)
+		- [局部变量](#局部变量)
+		- [变量声明提升(Hoisting)](#变量声明提升hoisting)
+		- [数组](#数组)
+			- [数组字面量](#数组字面量)
+			- [常用方法](#常用方法)
+		- [类型转化](#类型转化)
+	- [运算符](#运算符)
+	- [控制流程](#控制流程)
+		- [switch/case](#switchcase)
+	- [对象](#对象)
+		- [对象三大特征](#对象三大特征)
+		- [构造函数](#构造函数)
+			- [new的实质](#new的实质)
+			- [返回值](#返回值)
+			- [最佳实践](#最佳实践)
+		- [全局对象](#全局对象)
+		- [私有属性与特权方法](#私有属性与特权方法)
+			- [私有属性](#私有属性)
+			- [特权方法](#特权方法)
+			- [Best Practice](#best-practice)
+		- [静态属性与方法](#静态属性与方法)
+			- [静态属性](#静态属性)
+			- [静态方法](#静态方法)
+		- [模块化对象](#模块化对象)
+			- [Best Practice](#best-practice)
+		- [普通属性](#普通属性)
+		- [普通方法](#普通方法)
+		- [Class式继承](#class式继承)
+			- [设置原型与借用构造函数](#设置原型与借用构造函数)
+				- [Best Practice](#best-practice)
+			- [代理构造函数](#代理构造函数)
+				- [Best Practice](#best-practice)
+			- [kclass语法糖](#kclass语法糖)
+		- [Prototype式继承](#prototype式继承)
+			- [共享 - 原型代理/享元模式(new与Object.create)](#共享-原型代理享元模式new与objectcreate)
+			- [独立 - 原型克隆](#独立-原型克隆)
+				- [浅克隆](#浅克隆)
+				- [深克隆](#深克隆)
+				- [属性混入 - 多重继承](#属性混入-多重继承)
+			- [封装 - 工厂方法(闭包)](#封装-工厂方法闭包)
+		- [包装类对象](#包装类对象)
+		- [错误对象](#错误对象)
+	- [函数](#函数)
+		- [Lambda Calculus](#lambda-calculus)
 			- [闭包(closure)](#闭包closure)
-			- [hasOwnProperty](#hasownproperty)
-			- [eval](#eval)
+			- [偏函数应用](#偏函数应用)
+		- [函数表达式](#函数表达式)
+		- [入参函数](#入参函数)
+		- [回调函数](#回调函数)
+		- [自定义函数(Self-Defining Function)/惰性函数定义(Lazy Function Definition)](#自定义函数self-defining-function惰性函数定义lazy-function-definition)
+		- [即时函数](#即时函数)
+			- [即时函数模式](#即时函数模式)
+			- [模式作用](#模式作用)
+			- [返回值](#返回值)
+		- [call/apply](#callapply)
+			- [通过call/apply实现bind函数](#通过callapply实现bind函数)
+		- [this/that](#thisthat)
+		- [多态方法](#多态方法)
+		- [hasOwnProperty](#hasownproperty)
+		- [eval](#eval)
+		- [常用函数](#常用函数)
+			- [parseInt](#parseint)
+		- [常用模式](#常用模式)
+			- [API模式](#api模式)
+				- [回调模式](#回调模式)
+				- [配置对象](#配置对象)
+				- [返回函数(闭包)](#返回函数闭包)
+				- [Curry化](#curry化)
+				- [链模式](#链模式)
+			- [初始化模式](#初始化模式)
+				- [即使函数](#即使函数)
+				- [即使对象初始化](#即使对象初始化)
+				- [初始化分支](#初始化分支)
+	- [模块化](#模块化)
+		- [命名空间](#命名空间)
+			- [通用命名空间函数](#通用命名空间函数)
+		- [沙盒模式](#沙盒模式)
+			- [实现沙盒构造函数](#实现沙盒构造函数)
+			- [沙盒使用方式](#沙盒使用方式)
+	- [MVC](#mvc)
+		- [View](#view)
 	- [JavaScript DOM Basic](#javascript-dom-basic)
 		- [DOM - O](#dom-o)
 		- [DOM-Core](#dom-core)
+			- [dynamic creation](#dynamic-creation)
+				- [append](#append)
+				- [insert](#insert)
+			- [node](#node)
+			- [Frag](#frag)
+		- [HTML-DOM](#html-dom)
+		- [CSS-DOM](#css-dom)
 		- [document](#document)
 		- [window](#window)
-		- [normal dom element](#normal-dom-element)
 		- [Events](#events)
 			- [Mouse Events](#mouse-events)
 			- [Key Events](#key-events)
 			- [Frame Events](#frame-events)
 			- [Input Events](#input-events)
-	- [JQuery](#jquery)
-		- [常用多态函数](#常用多态函数)
-		- [window](#window)
-		- [模板引擎：handlebars.js](#模板引擎handlebarsjs)
-	- [Meteor](#meteor)
-		- [特殊文件夹](#特殊文件夹)
-		- [Basic Command](#basic-command)
-			- [create and run](#create-and-run)
-			- [list package](#list-package)
-			- [add package](#add-package)
-			- [android platform](#android-platform)
-			- [发布](#发布)
-		- [常用Package](#常用package)
-			- [barbatus:stars-rating 1.0.7](#barbatusstars-rating-107)
-			- [accounts-password 1.1.4](#accounts-password-114)
-			- [accounts-ui 1.1.6](#accounts-ui-116)
-			- [[iron:router](https://atmospherejs.com/iron/router)](#ironrouterhttpsatmospherejscomironrouter)
-			- [twbs:bootstrap 3.3.6](#twbsbootstrap-336)
-			- [ecmascript 0.1.6](#ecmascript-016)
-			- [jquery 1.11.4](#jquery-1114)
-			- [mongo 1.1.3](#mongo-113)
-		- [传递数据](#传递数据)
-		- [设置事件](#设置事件)
-		- [Meteor.user()](#meteoruser)
-		- [Session](#session)
-		- [MongoDB](#mongodb)
-		- [安全性](#安全性)
-			- [package的安全性](#package的安全性)
-			- [MongoDB/Collection的安全性](#mongodbcollection的安全性)
+			- [User-Defined Handler](#user-defined-handler)
+	- [模板引擎：handlebars.js](#模板引擎handlebarsjs)
+	- [Ajax](#ajax)
+	- [JSON](#json)
+	- [正则表达式](#正则表达式)
+	- [Effective](#effective)
+		- [缓存模式](#缓存模式)
+		- [加载脚本](#加载脚本)
+			- [延迟加载](#延迟加载)
+			- [按需加载](#按需加载)
+	- [Code Style](#code-style)
+		- [命名规范](#命名规范)
+		- [全局变量](#全局变量)
+		- [初始化模式](#初始化模式)
+		- [单一var模式](#单一var模式)
+		- [条件表达式](#条件表达式)
+		- [空格](#空格)
+		- [Comments](#comments)
 
 <!-- /TOC -->
 
@@ -129,7 +191,7 @@ if (typeof Array.isArray === "undefined") {
 
 ```javascript
 Array.unshift(value); // 添加数组首元素
-Array.push(value);    // 添加数组尾元素 
+Array.push(value);    // 添加数组尾元素
 Array.shift();        // 删除数组首元素
 Array.pop();          // 删除数组尾元素
 ```
@@ -143,7 +205,7 @@ Array.pop();          // 删除数组尾元素
 
 ## 运算符
 
--   ==与===  
+-   ==与===
 -   !=与!==
 
 ------
@@ -207,7 +269,7 @@ function doAction(action) {
 var Person = function (name) {
 	//var this = Object.create(Person.prototype);
 	//即 this.prototype = Person.prototype;
-	
+
 	this.name = name;
 	this.say = function () {
 		return "I am " + this.name;
@@ -228,7 +290,7 @@ var ObjectMaker = function () {
 	//直接忽略this.name
 	var that = {};
 	that.name = "And that's that";
-	return that;	
+	return that;
 };
 ```
 
@@ -251,11 +313,11 @@ function Waffle() {
 ### 全局对象
 
 ```javascript
-//立即函数模式: 
+//立即函数模式:
 //此时返回值不是函数本身,而是函数执行后的return语句返回值
 var global = (function () {
     //返回全局对象
-	return this;	
+	return this;
 }());
 ```
 
@@ -377,6 +439,9 @@ return {
 
 }(MYAPP, this));
 ```
+### 普通属性
+
+*编写函数时,一般用[]访问对象属性*
 
 ### 普通方法
 
@@ -434,7 +499,7 @@ Child.prototype = new Parent();
 
 ```javascript
 var inherit = (function () {
-	var F = function () {};	
+	var F = function () {};
 	return function (C, P) {
 		F.prototype = P.prototype;
 		C.prototype = new F();
@@ -614,7 +679,7 @@ function factory() {
   var highlander = {
       name: 'MacLeod'
     };
-    
+
   //利用闭包，返回私有对象，实现工厂方法
   return {
     get: function get() {
@@ -739,12 +804,12 @@ var addFive = schonfinkelize(addOne, 1, 3);
 ```javascript
 //函数声明
 function foo() {
-	
+
 }
 
 //函数表达式
 var foo = function foo() {
-	
+
 };
 var obj = {
 	say : function say() {
@@ -752,13 +817,13 @@ var obj = {
 	}
 };
 foo(function me() {
-	
+
 });
 
 //变量提升
 var foo;
 foo = function foo() {
-	
+
 };
 
 console.log(foo.name);
@@ -881,9 +946,9 @@ foo();  // log: test
 
 #### 即时函数模式
 
--   函数表达式 
+-   函数表达式
 -   末尾添加括号(传参),使函数立即执行
--   将整个函数置于括号内   
+-   将整个函数置于括号内
 
 ```javascript
 (function () {
@@ -909,7 +974,7 @@ var getResult = (function () {
 	var res = 2 + 2;
 	return function () {
 		return res;
-	}	
+	}
 }());
 ```
 
@@ -928,7 +993,7 @@ Array.prototype.arrayStaticFunction.call/apply();
 String.prototype.stringStaticFunction.call/apply();
 ```
 
-相当于 - 
+相当于 -
 
 ```javascript
 context.function(arguments);
@@ -1065,7 +1130,7 @@ obj.init();
 
 ```javascript
 if(typeof target === "undefined") {
-	
+
 }
 ```
 
@@ -1403,7 +1468,7 @@ oldnode.parentNode.replaceChild(clone, oldnode);
 element.innerHTML
 ```
 
-innerHTML: unconcrete,including all types of childNodes 
+innerHTML: unconcrete,including all types of childNodes
 
 **div.innerHTML = <p>Test<em>test</em>Test.</p>**
 
@@ -1594,7 +1659,7 @@ Handlebars.compile($(“#template_id”).html());  //一次编译，多次使用
 function getHTTPObject() {
 	if (typeof XMLHttpRequest == "undefined")
 		XMLHttpRequest = function () {
-			try { 
+			try {
 				return new ActiveXObject("Msxml2.XMLHTTP.6.0");
 			} catch (e) {}
 			try {
@@ -1636,7 +1701,7 @@ request.onreadystatechange = function() {
 	}
 };
 
-request.send(null);        
+request.send(null);
 ```
 
 ------
@@ -1763,7 +1828,7 @@ Good places to use a white space include:
 -   +,-,*,/,<,>,= 前后
 -   function () {}
 -   function foo() {}
--   } if/for/while () {}   
+-   } if/for/while () {}
 -   } else {}
 
 ```javascript
@@ -1803,7 +1868,7 @@ if (a&& b&&c) {
 @constructor
 @method sum
 @param {Number}/{String} instructions
-@return {Number}/{String} instructions 
+@return {Number}/{String} instructions
 
 -    属性
 

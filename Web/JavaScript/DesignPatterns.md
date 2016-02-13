@@ -1,3 +1,15 @@
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Design Patterns Notes](#design-patterns-notes)
+	- [Singleton](#singleton)
+	- [Factory](#factory)
+	- [Decorator](#decorator)
+		- [实现(关键 - 实现传递方式)](#实现关键-实现传递方式)
+			- [return this.uber.function()](#return-thisuberfunction)
+			- [Decorators List](#decorators-list)
+
+<!-- /TOC -->
+
 # Design Patterns Notes
 
 ## Singleton
@@ -64,7 +76,7 @@ CarMaker.factory = function (type) {
 	return newcar;
 };
 
-// 定义特定工厂方法 
+// 定义特定工厂方法
 CarMaker.Compact = function () {
 	this.doors = 4;
 };
@@ -195,7 +207,7 @@ Sale.prototype.getPrice = function () {
 		// 通过循环叠加上一次装饰后的结果
 		price = Sale.decorators[name].getPrice(price);
 	}
-	
+
 	return price;
 };
 ```
