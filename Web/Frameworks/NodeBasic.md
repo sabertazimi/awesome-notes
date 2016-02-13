@@ -1,3 +1,11 @@
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Node Basic Notes](#node-basic-notes)
+	- [Directory Path](#directory-path)
+	- [Lib/Plugins](#libplugins)
+
+<!-- /TOC -->
+
 # Node Basic Notes
 
 ## Directory Path
@@ -30,4 +38,3 @@
 -   Bunyan     Logging
 -   Tape       Testing
 -   Cuid       Better than GUID/UUID for web applications
-
