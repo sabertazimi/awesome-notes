@@ -1721,9 +1721,18 @@ var json = JSON.stringofy(obj);
 
 var re = /pattern/gmi;
 
+### Flags
+
 -   g 全局匹配
 -   m 多行匹配
 -   i 大小写敏感匹配
+
+### 元字符
+
+-   \d : 0~9
+-   \s : 空白符(" " \n \r \t \f)
+-   \S : 非空白符(alpha number)
+-   + : 多个digits
 
 ------
 
