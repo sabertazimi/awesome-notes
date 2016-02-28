@@ -189,11 +189,39 @@ if (typeof Array.isArray === "undefined") {
 
 #### 常用方法
 
+##### 堆栈
+
 ```javascript
 Array.unshift(value); // 添加数组首元素
 Array.push(value);    // 添加数组尾元素
 Array.shift();        // 删除数组首元素
 Array.pop();          // 删除数组尾元素
+```
+
+##### 微操作
+
+```javascript
+[].reverse();
+[].concat(otherArray);
+[].replace(oldSubStr, newStr);
+string(charArray).split("割断点");   // 选择割断符,返回字符串数组
+[string].join("连接符");             // 将字符串数组连接成字符串o
+"".substr(start, end);
+[].slice(start, end);               // [start] - [end - 1]
+[].splice();                        // 功能强大的多态方法
+```
+
+```javascript
+// 反转字符串
+var reverseStr = normalizedStr.split('').reverse().join('');
+```
+
+##### 高阶函数
+
+```javascript
+[].map((item) => {});                            // map over
+[].filter((item) => {});                         // list comprehension
+[].reduce((previous, current) => {}, initial);   // fold function
 ```
 
 ### 类型转化
@@ -741,7 +769,7 @@ catch (e) {
 -   函数是对象
 -   函数提供局部作用域
 
-### Lambda Calculus
+### 函数式JavaScript
 
 -   函数是一等公民
 -   函数可作为入参，可作为返回值(即可作为一般数据)
@@ -796,6 +824,22 @@ var addOne = schonfinkelize(add, 1);
 var addFive = schonfinkelize(addOne, 1, 3);
 // addFive(4) === 9;
 ```
+
+#### 高阶函数
+
+##### `[]`.map
+
+相当于Haskell中的List Map
+
+##### `[]`.filter
+
+相当于Haskell中的List Filter
+
+##### `[]`.reduce
+
+相当于Haskell中的fold
+
+##### `[]`.sort
 
 ### 函数表达式
 
@@ -1733,6 +1777,16 @@ var re = /pattern/gmi;
 -   \s : 空白符(" " \n \r \t \f)
 -   \S : 非空白符(alpha number)
 -   + : 多个digits
+
+### 相关函数
+
+#### test
+
+```javascript
+/Reg/Flags.test(str); // 返回值为 Boolean
+
+/[a-z|A-Z|0-9]/gmi.test(str);
+```
 
 ------
 
