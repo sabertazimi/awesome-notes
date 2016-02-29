@@ -198,22 +198,51 @@ Array.shift();        // 删除数组首元素
 Array.pop();          // 删除数组尾元素
 ```
 
-##### 微操作
+##### 分割/合并
 
 ```javascript
-[].reverse();
 [].concat(otherArray);
-[].replace(oldSubStr, newStr);
-string(charArray).split("割断点");   // 选择割断符,返回字符串数组
 [string].join("连接符");             // 将字符串数组连接成字符串o
-"".substr(start, end);
+string(charArray).split("割断点");   // 选择割断符,返回字符串数组
 [].slice(start, end);               // [start] - [end - 1]
 [].splice();                        // 功能强大的多态方法
 ```
 
+##### 替换
+
 ```javascript
+[].replace(oldSubStr, newStr);
+```
+
+##### 查询
+
+```javascript
+"".substr(start, end);
+[].indexOf(char); // -1 or other
+```
+
+##### 其他
+
+```javascript
+[].reverse();
+```
+
+```javascript
+// Tips
 // 反转字符串
 var reverseStr = normalizedStr.split('').reverse().join('');
+```
+
+##### Array Tips
+
+-   对字符串每个元素进行单独操作 e.g map/filter
+
+```javascript
+str.split('').map(function(subStr) {
+    return decode(subStr.charCodeAt(0));
+}).join('');
+
+str.split('').someOperator().join('');
 ```
 
 ##### 高阶函数
@@ -1124,6 +1153,13 @@ myFunc(1, 2, 3);
 ```
 
 ### 常用函数
+
+#### 类型判断
+
+```javascript
+Boolean(val);  // true
+Array(val);    // Array[<3个空存储位置>]
+```
 
 #### parseInt
 
