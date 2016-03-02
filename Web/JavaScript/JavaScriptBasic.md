@@ -221,6 +221,12 @@ string(charArray).split("割断点");   // 选择割断符,返回字符串数组
 [].indexOf(char); // -1 or other
 ```
 
+##### 遍历
+
+```javascript
+[]/obj.forEach(function (val) {});    // 遍历数组/对象所有元素(val为单个元素)
+```
+
 ##### 其他
 
 ```javascript
@@ -1165,6 +1171,12 @@ Array(val);    // Array[<3个空存储位置>]
 
 parseInt(val, 2/8/10);
 
+#### 对象
+
+```javascript
+Object.keys(obj);   // 返回一个数组, 保存obj中所有可枚举属性的键值
+```
+
 ### 常用模式
 
 #### API模式
@@ -1790,7 +1802,15 @@ request.send(null);
 
 ```javascript
 var obj = JSON.parse(json);
-var json = JSON.stringofy(obj);
+var json = JSON.stringify(obj);
+```
+
+### jQuery
+
+```javascript
+$.getJSON("/json/cats.json", function(json) {
+    $(".message").html(JSON.stringify(json));
+});
 ```
 
 ------
