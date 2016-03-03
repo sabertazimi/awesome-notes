@@ -1177,6 +1177,12 @@ parseInt(val, 2/8/10);
 Object.keys(obj);   // 返回一个数组, 保存obj中所有可枚举属性的键值
 ```
 
+#### 数学函数
+
+```javascript
+Math.floor(Math.random * arr.length);
+```
+
 ### 常用模式
 
 #### API模式
@@ -1512,7 +1518,6 @@ node.nodeName
 node.nodeValue
 ```
 
-```
 ```js
     node.childNodes
     node.firstChild
