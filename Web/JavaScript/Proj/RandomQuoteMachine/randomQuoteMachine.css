@@ -1,0 +1,64 @@
+html,
+body {
+    margin:0;
+    padding: 0;
+
+    list-style: none;
+
+    text-align: center;
+    vertical-align: baseline;
+    text-decoration: none;
+
+    font-family: 'Raleway', sans-serif;
+    font-size: 62.5%;
+    font-weight: 400;
+}
+
+div {
+    position: relative;
+    z-index: 2;
+}
+
+body {
+    color : #333;
+    background-color: #9b59b6;
+}
+
+.container {
+    position: relative;
+
+    display: table;
+    clear: both;
+
+    width: 450px;
+    margin: 8% auto auto auto;
+    padding: 40px 50px;
+
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.quote-box {
+    clear: both;
+
+    width:450px;
+    height: auto;
+
+    text-align: center;
+    color: #9b59b6;
+    font-size:2.75rem;
+    font-weight: 500;
+}
+
+.btn {
+    display: block;
+    float: right ;
+
+    width: 100px;
+    height: 38px;
+
+    color: white;
+    border: 0;
+    border-radius: 3px;
+    background-color: #9b59b6;
+}
