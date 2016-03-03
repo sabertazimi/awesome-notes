@@ -57,3 +57,13 @@ $("selector").removeClass("");
 $("selector").css("color", "red");
 $("selector").prop("disable", "true");
 ```
+
+## Ajax
+
+```javascript
+$.getJSON(url, data, success(data, status, xhr));
+
+$.getJSON("test.js", function(json){
+  alert("JSON Data: " + json.users[3].name);
+});
+```
