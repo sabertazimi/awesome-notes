@@ -251,12 +251,24 @@ str.split('').map(function(subStr) {
 str.split('').someOperator().join('');
 ```
 
+-   实现contains方法
+
+```javascript
+arr.indexOf(item) === -1;
+```
+
+-   改变某一处字母
+
+```javascript
+after = after.charAt(0).toUpperCase() + after.slice(1);
+```
+
 ##### 高阶函数
 
 ```javascript
 [].map((item) => {});                            // map over
 [].filter((item) => {});                         // list comprehension
-[].reduce((previous, current) => {}, initial);   // fold function
+[].reduce((previous, current [, currentIndex, arr]) => {}, initial);   // fold function
 ```
 
 ### 类型转化
@@ -1187,6 +1199,7 @@ Object.keys(obj);   // 返回一个数组, 保存obj中所有可枚举属性的�
 
 ```javascript
 Math.floor(Math.random * arr.length);
+Math.min/Math.max;  // 最小值/最大值
 ```
 
 ### 常用模式
