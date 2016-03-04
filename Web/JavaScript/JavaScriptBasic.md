@@ -342,6 +342,12 @@ var Person = function (name) {
 };
 ```
 
+##### 原生对象的new构造
+
+boolean string number 不用new表现不同
+
+Tips: 构造boolean时，不要使用new
+
 #### 返回值
 
 this/user-defined literal object
