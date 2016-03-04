@@ -1,5 +1,6 @@
 // 每点击一次页面，重新生成一条漂亮的彩带
-
+// tips from: http://krazydad.com/tutorials/makecolors.php
+// @thanks evan you
 // html: <canvas width="1366" height="323"></canvas>
 
 document.addEventListener('touchmove', function (e) {
@@ -26,7 +27,7 @@ function i(){
     q=[{x:0,y:h*.7+f},{x:0,y:h*.7-f}]
     while(q[1].x<w+f) d(q[0], q[1])
 }
-function d(i,j){   
+function d(i,j){
     x.beginPath()
     x.moveTo(i.x, i.y)
     x.lineTo(j.x, j.y)
