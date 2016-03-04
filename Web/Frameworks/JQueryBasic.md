@@ -51,6 +51,10 @@ $("selector").addClass("");
 $("selector").removeClass("");
 ```
 
+```javascript
+hidden
+```
+
 ### style
 
 ```javascript
