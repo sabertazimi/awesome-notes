@@ -1,0 +1,118 @@
+html,
+body {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    font-weight: 200;
+    font-size: 62.5%;
+}
+
+.chat {
+    position: fixed;
+    right: 1%;
+    bottom: 2%;
+}
+
+.btn-chat {
+    border-radius: 0;
+    opacity: 0.7;
+    transition: color,background-color,opacity .5s ease-out;
+}
+
+.btn-chat:hover {
+    color: rgb(246, 172, 86);
+    background-color: rgb(16, 107, 131);
+    opacity: 1;
+}
+
+#chatModal {
+    position: fixed;
+    right: 1%;
+    bottom: 2%;
+}
+
+#chatInput {
+    display: inline-block;
+}
+
+#chatInputBtn {
+    display: inline-block;
+}
+
+.chat-thread {
+  margin: 24px auto 0 auto;
+  padding: 0 20px 0 0;
+  list-style: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.chat-thread li {
+  position: relative;
+  clear: both;
+  display: inline-block;
+  padding: 16px 40px 16px 20px;
+  margin: 0 0 20px 0;
+  font: 16px/20px 'Noto Sans', sans-serif;
+  border-radius: 10px;
+  background-color: rgba(25, 147, 147, 0.2);
+}
+
+/* 利用伪元素实现头像 */
+/*.chat-thread li:before {
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  content: '';
+}*/
+
+/* 利用伪元素实现气泡箭头 */
+.chat-thread li:after {
+  position: absolute;
+  top: 15px;
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 15px solid rgba(25, 147, 147, 0.2);
+}
+
+.chat-thread .remote {
+  animation: show-chat-odd 0.15s 1 ease-in;
+  -moz-animation: show-chat-odd 0.15s 1 ease-in;
+  -webkit-animation: show-chat-odd 0.15s 1 ease-in;
+  float: right;
+  margin-right: 80px;
+  color: #0AD5C1;
+}
+
+/*.chat-thread .remote:before {
+  right: -80px;
+  background-image: url(data:image/jpeg;base64,../img/夜空.jpg);
+}*/
+
+.chat-thread .remote:after {
+  border-right: 15px solid transparent;
+  right: -15px;
+}
+
+.chat-thread .local {
+  animation: show-chat-even 0.15s 1 ease-in;
+  -moz-animation: show-chat-even 0.15s 1 ease-in;
+  -webkit-animation: show-chat-even 0.15s 1 ease-in;
+  float: left;
+  margin-left: 80px;
+  color: #0EC879;
+}
+
+/*.chat-thread .local:before {
+  left: -80px;
+  background-image: url(data:image/jpeg;base64,../img/星空.jpg);
+}*/
+
+.chat-thread .local:after {
+  border-left: 15px solid transparent;
+  left: -15px;
+}

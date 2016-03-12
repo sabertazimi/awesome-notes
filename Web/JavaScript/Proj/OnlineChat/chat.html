@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Chat System Demo
+        </title>
+        <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="css/chat.css" media="screen" title="no title" charset="utf-8">
+    </head>
+    <body>
+        <button id="chatButton" class="chat btn btn-primary btn-lg btn-chat" type="button" data-toggle="modal" data-target="#chatModal">Chat</button>
+
+        <div class="modal fade" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="chatModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body chat-body">
+                        <ul class="chat-thread">
+                        <li class="local">Test01</li>
+                        <li class="remote">Test02</li>
+                        <li class="local">Test03</li>
+                        <li class="remote">Test0</li>
+                        <li class="remote">Test0</li>
+                        <li class="local">Test06</li>
+                        <li class="local">Test07</li>
+                        <li class="remote">Test0</li>
+                        <li class="local">Test09</li>
+                        <li class="remote">Test10</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="chatInput" placeholder="Input">
+                            </div>
+                        </form>
+                        <button class="btn btn-default btn-chat" type="button" data-dismiss="modal">Close</button>
+                        <button class="btn btn-primary btn-chat" id="chatInputBtn" type="button">Submit</button>
+                        <a class="chat-anchor" href="#">123</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/jquery-1.12.1.min.js" charset="utf-8"></script>
+        <script src="js/bootstrap.min.js" charset="utf-8"></script>
+        <script src="js/chat.js" charset="utf-8"></script>
+    </body>
+</html>
