@@ -734,6 +734,22 @@ justify(自适应，左右都无空格)
 -   contain
 -   cover
 
+#### Best Practice
+
+##### 单背景极简欢迎首页
+
+```
+.jumbotron {
+	background-image: url("");
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+
+	height: 1px;
+	width: 1px;
+}
+```
+
 ### font
 
 #### font-size
@@ -776,17 +792,31 @@ normal,small-caps(小型大写字母)
 
 ```css
 @font-face {
-    :call <SNR>105_SparkupNext()
+    /*:call <SNR>105_SparkupNext()*/
     font-family:mySpecialFont;
     font-style/font-weight/font-variant:inherit;
     src:url(‘./Colleen.ttf’);
 }
 
-selector {
-    :call <SNR>105_SparkupNext()
-    font-family:mySpecialFont;
+/*selector {*/
+    /*:call <SNR>105_SparkupNext()*/
+    /*font-family:mySpecialFont;*/
+/*}*/
+```
 
-}
+#### Font Best Practice
+
+```css
+    text-decoration: none;
+	text-transform: uppercase;
+
+    color: black;
+	line-height: 100px;
+
+    letter-spacing: 1.3px;
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: 400;
 ```
 
 ### filter
@@ -865,3 +895,25 @@ filter: unset;
 |resolution|分辨率(“dpi/dpcm”)|yes|分辨率|
 |scan|Progressive interlaced|no|tv媒体类型的扫描方式|
 |orientation|Portrait/landscape|no|横屏或竖屏|
+
+### 常用组件
+
+#### button
+
+- padding
+
+```css
+.btn-custom {
+	border-radius: 0;
+	background-color: black;
+	padding: 10px 40px;
+	text-align: center;
+	line-height: 100px;
+}
+```
+
+#### footer
+
+```css
+
+```

@@ -142,11 +142,37 @@ class=navbar navbar-default navbar-fixed-top nav-tabs nav-pills
 	</div>
 </nav>
 
- <ul class="nav navbar-nav">
-          <li class="active"><a href=""></a></li>
-          <li><a href=""></a></li>
-          <li><a href=""></a></li>
+<ul class="nav navbar-nav">
+    <li class="active"><a href=""></a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
 </ul>
+
+<div class="header">
+      <div class="container">
+        <ul class="nav">
+            <li>ABOUT</li>
+            <li>WORK</li>
+            <li>TEAM</li>
+            <li>CONTACT</li>
+        </ul>
+      </div>
+</div>
+```
+
+## Jumbotron
+
+```css
+<div class="jumbotron">
+    <div class="container">
+        <div class="main">
+            <h1>We are Broadway</h1>
+            <a href ="#" class="btn-main">
+          		Get started
+          	</a>
+        </div>
+    </div>
+</div>
 ```
 
 ## Style
