@@ -1,0 +1,168 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+}
+
+.container {
+	max-width: 940px;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+
+
+/* Header */
+.header {
+    height: 800px;
+
+    text-align: center;
+
+    background: url('bg.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.header .container {
+	position: relative;
+	top: 200px;
+}
+
+.header h1 {
+	margin-top: 0;
+	margin-bottom: 80px;
+
+	font-size: 80px;
+	line-height: 100px;
+}
+
+@media (min-width:850px) {
+	.header h1 {
+		font-size: 120px;
+	}
+}
+
+.header p {
+	margin-top: 0;
+	margin-bottom: 40px;
+
+	letter-spacing: 8px;
+
+	font-weight: 500;
+}
+
+
+/* Nav */
+.nav {
+    background-color: black;
+}
+
+.nav ul {
+	margin: 0 auto;
+	padding: 0;
+
+	list-style: none;
+
+	text-align: center;
+
+    color: white;
+}
+
+.nav li {
+    display: inline-block;
+    line-height: 80px;
+    padding: 0 5px 0 5px;
+    transition: background-color .5s ease-in;
+}
+
+.nav li:hover {
+    background-color: #117bff;
+}
+
+
+/* Main */
+.main .container {
+	margin: 80px auto;
+}
+
+.main .container img {
+    float: left;
+    margin: 50px 80px 50px 0;
+}
+
+
+/* Jumbotron */
+.jumbotron {
+	height: 600px;
+
+}
+
+.jumbotron .container {
+	position: relative;
+	top: 220px;
+}
+
+.jumbotron .container .main {
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+	font-size: 14px;
+}
+
+/* Media Queries */
+@media (max-width: 500px) {
+  .header h1 {
+    font-size: 50px;
+    line-height: 64px;
+  }
+
+  .main, .jumbotron {
+    padding: 0 30px;
+  }
+
+  .main img {
+    width: 100%;
+  }
+}
+
+.btn-blue {
+	padding: 10px 40px;
+
+    transition: background-color .5s ease-in;
+	text-align: center;
+    text-decoration: none;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+
+    color: white;
+	border-radius: 0;
+    background-color: black;
+
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.btn-blue:hover {
+    background-color: #117bff;
+}
+
+.text-main {
+    text-decoration: none;
+    text-transform: uppercase;
+
+    color: white;
+}
+
+.footer {
+    background: black;
+}
+
+.footer p {
+    line-height: 80px;
+    margin: 0;
+}
