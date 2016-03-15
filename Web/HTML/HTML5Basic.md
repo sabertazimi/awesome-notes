@@ -274,6 +274,14 @@ table>.row*4>.cell*3
 
 ### footer
 
+### blockquote
+
+长文本引用
+
+### pre
+
+代码段
+
 ## Form
 
 #### novalidate
@@ -477,6 +485,10 @@ defined list>defined tab + defined data
 
 -   免责声明、注意事项、法律规定、版权声明
 -   不改变文字样式
+
+### hr
+
+下划线
 
 ### `<progress value="" max="">`
 
