@@ -1,76 +1,4 @@
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [CSS 3 Basic Notes](#css-3-basic-notes)
-	- [属性排序](#属性排序)
-		- [概述](#概述)
-			- [显示属性](#显示属性)
-			- [自身属性](#自身属性)
-			- [文本属性](#文本属性)
-		- [详细](#详细)
-			- [显示属性](#显示属性)
-			- [自身属性](#自身属性)
-			- [文本属性](#文本属性)
-	- [命名规范](#命名规范)
-		- [页面结构](#页面结构)
-		- [导航](#导航)
-		- [功能](#功能)
-		- [CSS Files](#css-files)
-	- [CSS Selector](#css-selector)
-		- [pseudo-class-selector](#pseudo-class-selector)
-			- [元素选择器](#元素选择器)
-			- [关系选择器](#关系选择器)
-			- [属性选择器](#属性选择器)
-			- [伪类](#伪类)
-			- [伪元素](#伪元素)
-	- [常用属性](#常用属性)
-		- [全局属性值](#全局属性值)
-		- [layout](#layout)
-			- [position](#position)
-			- [z-index](#z-index)
-			- [float](#float)
-		- [box](#box)
-			- [overflow/overflow-x/overflow-y](#overflowoverflow-xoverflow-y)
-			- [text-overflow](#text-overflow)
-			- [resize](#resize)
-			- [box-sizing](#box-sizing)
-			- [height](#height)
-			- [column](#column)
-			- [flex](#flex)
-				- [父元素属性](#父元素属性)
-				- [子元素属性](#子元素属性)
-				- [Best Practice](#best-practice)
-		- [list-style-type/image](#list-style-typeimage)
-		- [custom style](#custom-style)
-			- [custom methods](#custom-methods)
-				- [transition+transform](#transitiontransform)
-				- [直接使用animation](#直接使用animation)
-			- [transition](#transition)
-			- [transform](#transform)
-			- [animation](#animation)
-		- [align](#align)
-			- [text-align](#text-align)
-			- [vertical-align](#vertical-align)
-		- [opacity](#opacity)
-		- [border](#border)
-			- [border-radius](#border-radius)
-			- [border-image](#border-image)
-		- [background](#background)
-			- [background-image](#background-image)
-			- [(moz/webkit)background-clip](#mozwebkitbackground-clip)
-			- [(moz/webkit)background-origin](#mozwebkitbackground-origin)
-			- [background-size](#background-size)
-		- [font](#font)
-			- [font-size](#font-size)
-			- [font-style](#font-style)
-			- [font-variant](#font-variant)
-			- [font-size-adjust](#font-size-adjust)
-			- [custom function - @font-face](#custom-function-font-face)
-		- [filter](#filter)
-	- [media query](#media-query)
-		- [设备类型](#设备类型)
-		- [设备特性](#设备特性)
-
-<!-- /TOC -->
 
 # CSS 3 Basic Notes
 
@@ -441,22 +369,11 @@ h2:before {
 -   initial 指定为默认值，用于消除样式
 -   none
 
-### layout
-
-#### position
-
--   static(使top/bottom/left/right属性无效化)
--   relative
--   absolute
--   fixed(不受滑动条影响)
+### box
 
 #### z-index
 
 数值越大，处于可视的优先级越大
-
-#### float
-
-### box
 
 #### overflow/overflow-x/overflow-y
 
@@ -511,7 +428,47 @@ cal(10em + 3px);
 -   column-gap         分隔距离
 -   column-rule(style) 分隔线
 
-#### flex
+#### Awesome Box Patterns
+
+#### Flow Patterns
+
+block 元素宽度为 100%, inline 元素从左至右分布
+
+#### Float Patterns
+
+#### Layer Patterns
+
+**position**
+
+-   static(使top/bottom/left/right属性无效化)
+-   relative: 使元素相对于 static 布局, 可使用`top/bottom/left/right`属性进行平移
+    -   `top:+px`   : 下移
+    -   `bottom:+px`: 上移
+    -   `left:+px`  : 右移
+    -   `right:+px` : 左移
+-   absolute: 使元素相对于 浏览器窗口/父元素 布局, 可使用`top/bottom/left/right`属性进行定位
+    -   `top:+px`   : 使元素距离窗口上方距离为正
+    -   `bottom:+px`: 使元素距离窗口下方距离为正
+    -   `left:+px`  : 使元素距离窗口左方距离为正
+    -   `right:+px` : 使元素距离窗口右方距离为正
+-   fixed: 用法类似 absolute, 但不受滑动条影响
+
+```css
+/* 使子元素可以相对于父元素布局*/
+
+.parent {
+	position: relative;
+}
+
+.children {
+	position: absolute;
+
+	top:auto;
+	left: 0;
+}
+```
+
+#### Flex Patterns
 
 ##### 父元素属性
 
@@ -580,6 +537,53 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
           align-items: center;
   -webkit-justify-content: center;
           justify-content: center;
+}
+```
+
+#### 居中问题
+
+##### 不定 block 元素水平居中
+
+-   将元素改为 inline 型
+
+```css
+.container{
+    text-align:center;
+}
+.container ul{
+    display:inline;
+}
+```
+
+-   父元素 float, 父子元素 relative
+
+```css
+.container{
+    float:left;
+    position:relative;
+    left:50%
+}
+
+.container ul{
+    position:relative;
+    left:-50%;
+}
+```
+
+##### 垂直居中问题
+
+```css
+.container{
+    height:100px;
+    line-height:100px;
+}
+```
+
+```css
+.container{
+    height:300px;
+    display:table-cell;     /* IE8以上及Chrome、Firefox */
+    vertical-align:middle;  /* IE8以上及Chrome、Firefox */
 }
 ```
 
@@ -738,7 +742,7 @@ justify(自适应，左右都无空格)
 
 ##### 单背景极简欢迎首页
 
-```
+```css
 .jumbotron {
 	background-image: url("");
 	background-size: cover;
@@ -747,6 +751,22 @@ justify(自适应，左右都无空格)
 
 	height: 1px;
 	width: 1px;
+}
+```
+
+### text
+
+```css
+.text {
+	text-align: center;
+	text-decoration: underline/line-through;  /* 下划线与删除线 */
+}
+
+.paragraph {
+    text-indent: 2em;     /* 段落缩进 */
+	line-height: 1.5em;   /* 行间距  */
+	letter-spacing: 50px; /* 字间距  */
+	word-spacing: 50px;   /* 词间距  */
 }
 ```
 
