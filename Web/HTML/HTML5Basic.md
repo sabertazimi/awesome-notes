@@ -298,7 +298,7 @@ table>.row*4>.cell*3
 		<div>选择尺寸：</div>
 		<input type="checkbox"多选框 name="size"数据名称，交给后台 value="5"值 id="cb_0" checked disabled 默认勾选，无法更改>
 		<label for="cb_0">5寸</label>
-		一个input一个label，一一对应，同类name相同
+		<!-- 一个input一个label，一一对应，同类name相同 -->
 		<input type="radio"单选框 name="material" value="fushi" id="rd_0">
 		<label for="rd_0">富士，单选第一个</label>
 
@@ -401,6 +401,10 @@ textbox.value = '666666';   //  等同于 input.value = '666666';
 #### type
 
 ##### text
+
+##### radio
+
+name相同时, 多个 radio 组成一个 radio group
 
 ##### checkbox
 
