@@ -1,4 +1,88 @@
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
+- [CSS 3 Basic Notes](#css-3-basic-notes)
+	- [属性排序](#属性排序)
+		- [概述](#概述)
+			- [显示属性](#显示属性)
+			- [自身属性](#自身属性)
+			- [文本属性](#文本属性)
+		- [详细](#详细)
+			- [显示属性](#显示属性)
+			- [自身属性](#自身属性)
+			- [文本属性](#文本属性)
+	- [命名规范](#命名规范)
+		- [页面结构](#页面结构)
+		- [导航](#导航)
+		- [功能](#功能)
+		- [CSS Files](#css-files)
+	- [CSS Selector](#css-selector)
+		- [pseudo-class-selector](#pseudo-class-selector)
+			- [元素选择器](#元素选择器)
+			- [关系选择器](#关系选择器)
+			- [属性选择器](#属性选择器)
+			- [伪类](#伪类)
+			- [伪元素](#伪元素)
+	- [常用属性](#常用属性)
+		- [全局属性值](#全局属性值)
+		- [box](#box)
+			- [z-index](#z-index)
+			- [overflow/overflow-x/overflow-y](#overflowoverflow-xoverflow-y)
+			- [text-overflow](#text-overflow)
+			- [resize](#resize)
+			- [box-sizing](#box-sizing)
+			- [height](#height)
+			- [column](#column)
+			- [Awesome Box Patterns](#awesome-box-patterns)
+			- [Flow Patterns](#flow-patterns)
+			- [Float Patterns](#float-patterns)
+			- [Layer Patterns](#layer-patterns)
+			- [Flex Patterns](#flex-patterns)
+				- [父元素属性](#父元素属性)
+				- [子元素属性](#子元素属性)
+				- [Best Practice](#best-practice)
+			- [分栏问题](#分栏问题)
+			- [居中问题](#居中问题)
+				- [不定 block 元素水平居中](#不定-block-元素水平居中)
+				- [垂直居中问题](#垂直居中问题)
+		- [list-style-type/image](#list-style-typeimage)
+		- [custom style](#custom-style)
+			- [custom methods](#custom-methods)
+				- [transition+transform](#transitiontransform)
+				- [直接使用animation](#直接使用animation)
+			- [transition](#transition)
+			- [transform](#transform)
+			- [animation](#animation)
+		- [align](#align)
+			- [text-align](#text-align)
+			- [vertical-align](#vertical-align)
+		- [opacity](#opacity)
+		- [border](#border)
+			- [border-radius](#border-radius)
+			- [border-image](#border-image)
+		- [background](#background)
+			- [background-image](#background-image)
+			- [(moz/webkit)background-clip](#mozwebkitbackground-clip)
+			- [(moz/webkit)background-origin](#mozwebkitbackground-origin)
+			- [background-size](#background-size)
+			- [Best Practice](#best-practice)
+				- [单背景极简欢迎首页](#单背景极简欢迎首页)
+		- [text](#text)
+		- [font](#font)
+			- [font-size](#font-size)
+			- [font-style](#font-style)
+			- [font-variant](#font-variant)
+			- [font-size-adjust](#font-size-adjust)
+			- [custom function - @font-face](#custom-function-font-face)
+			- [Font Best Practice](#font-best-practice)
+		- [filter](#filter)
+	- [media query](#media-query)
+		- [设备类型](#设备类型)
+		- [设备特性](#设备特性)
+		- [常用组件](#常用组件)
+			- [button](#button)
+			- [footer](#footer)
+
+<!-- /TOC -->
 
 # CSS 3 Basic Notes
 
@@ -538,6 +622,56 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
   -webkit-justify-content: center;
           justify-content: center;
 }
+```
+
+#### 分栏问题
+
+```html
+<div class="main">
+    <div class="body">
+    </div>
+</div>
+<div class="left"></div>
+<div class="right"></div>
+```
+
+```css
+html,
+body {
+    margin: 0;
+    height: 100%;
+    font-size: 1.5rem;
+}
+
+.left {
+    margin-left: -100%;
+}
+
+.right {
+    margin-left: -200px;
+}
+
+.left,
+.right {
+    width: 200px;
+    height: 100%;
+    float: left;
+    background-color: #a0b3d6;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+
+.main,
+.body {
+    margin: 0 210px;
+    height: 100%;
+    background-color: #ffe6b8;
+}
+
 ```
 
 #### 居中问题
