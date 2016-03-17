@@ -86,10 +86,14 @@
 		- [设备类型](#设备类型)
 		- [设备特性](#设备特性)
 		- [常用组件](#常用组件)
+			- [header](#header)
+				- [nav](#nav)
+					- [基本原则](#基本原则)
 			- [button](#button)
 			- [footer](#footer)
 			- [picture](#picture)
 				- [圆形图片](#圆形图片)
+			- [Animation Tips](#animation-tips)
 
 <!-- /TOC -->
 
@@ -1123,17 +1127,43 @@ filter: unset;
 
 ### 常用组件
 
+#### header
+
+##### nav
+
+###### 基本原则
+
+对 a 标签进行样式设置
+
+```css
+ul {
+    /* 垂直菜单设置宽度, 水平菜单不设置宽度*/
+    list-style: none;
+}
+
+/* 水平菜单 */
+li {
+    float: left;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+}
+
+```
+
 #### button
 
-- padding
+-   padding
 
 ```css
 .btn-custom {
 	border-radius: 0;
 	background-color: black;
 	padding: 10px 40px;
-	text-align: center;
-	line-height: 100px;
+    text-align: center;
+    line-height: 100px;
 }
 ```
 
@@ -1153,3 +1183,7 @@ filter: unset;
     overflow: hidden;
 }
 ```
+
+#### Animation Tips
+
+切换动画时, 需要先把之前的动画清楚(防止出现闪烁 Bug )
