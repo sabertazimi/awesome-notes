@@ -35,15 +35,22 @@
 			- [Awesome Box Patterns](#awesome-box-patterns)
 			- [Flow Patterns](#flow-patterns)
 			- [Float Patterns](#float-patterns)
+				- [清除浮动](#清除浮动)
 			- [Layer Patterns](#layer-patterns)
 			- [Flex Patterns](#flex-patterns)
 				- [父元素属性](#父元素属性)
 				- [子元素属性](#子元素属性)
 				- [Best Practice](#best-practice)
 			- [分栏问题](#分栏问题)
+				- [两栏布局](#两栏布局)
+- [div-1 {](#div-1-)
+- [div-1a {](#div-1a-)
+- [div-1b {](#div-1b-)
+				- [三栏布局](#三栏布局)
 			- [居中问题](#居中问题)
 				- [不定 block 元素水平居中](#不定-block-元素水平居中)
 				- [垂直居中问题](#垂直居中问题)
+				- [混合布局](#混合布局)
 		- [list-style-type/image](#list-style-typeimage)
 		- [custom style](#custom-style)
 			- [custom methods](#custom-methods)
@@ -81,6 +88,8 @@
 		- [常用组件](#常用组件)
 			- [button](#button)
 			- [footer](#footer)
+			- [picture](#picture)
+				- [圆形图片](#圆形图片)
 
 <!-- /TOC -->
 
@@ -520,6 +529,24 @@ block 元素宽度为 100%, inline 元素从左至右分布
 
 #### Float Patterns
 
+##### 清除浮动
+
+**Best Practice**: 为父容器添加 clearfix class - `display: table` 防止外边距塌陷, `clear: both` 清楚浮动
+
+```css
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}
+```
+
 #### Layer Patterns
 
 **position**
@@ -626,6 +653,35 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
 
 #### 分栏问题
 
+-   float 左右元素 + margin 中间元素
+-   float 元素 + width: %
+
+##### 两栏布局
+
+利用父元素 relative 与 子元素 absolute 进行布局
+
+```css
+#div-1 {
+    position:relative;
+}
+
+#div-1a {
+    position:absolute;
+    top:0;
+    right:0;
+    width:200px;
+}
+
+#div-1b {
+    position:absolute;
+    top:0;
+    left:0;
+    width:200px;
+}
+```
+
+##### 三栏布局
+
 ```html
 <div class="main">
     <div class="body">
@@ -648,33 +704,44 @@ body {
 }
 
 .right {
-    margin-left: -200px;
+    margin-left: -120px;
 }
 
 .left,
 .right {
-    width: 200px;
     height: 100%;
     float: left;
     background-color: #a0b3d6;
 }
 
-.main {
-    width: 100%;
-    height: 100%;
-    float: left;
+.left {
+    width: 200px;
+}
+
+.right {
+    width: 120px;
 }
 
 .main,
 .body {
-    margin: 0 210px;
     height: 100%;
     background-color: #ffe6b8;
 }
 
+.main {
+    width: 100%;
+    float: left;
+}
+
+.body {
+    /* 内容区域实体, 左右 margin 值为 .left/.right 宽度*/
+    margin: 0 130px 0 210px;
+}
 ```
 
 #### 居中问题
+
+[CSS Tricks - Centering CSS Complete Guide](https://css-tricks.com/centering-css-complete-guide/)
 
 ##### 不定 block 元素水平居中
 
@@ -720,6 +787,10 @@ body {
     vertical-align:middle;  /* IE8以上及Chrome、Firefox */
 }
 ```
+
+##### 混合布局
+
+在子容器中在设置新元素即可
 
 ### list-style-type/image
 
@@ -1070,4 +1141,15 @@ filter: unset;
 
 ```css
 
+```
+
+#### picture
+
+##### 圆形图片
+
+```css
+{
+    border-radius: 50%;
+    overflow: hidden;
+}
 ```
