@@ -551,6 +551,12 @@ block 元素宽度为 100%, inline 元素从左至右分布
 }
 ```
 
+##### Best Practice
+
+-   段中部分元素浮动(结合 margin/padding), 可实现内嵌效果
+-   分栏布局
+
+
 #### Layer Patterns
 
 **position**
