@@ -2,12 +2,31 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <title></title>
+        <title>忘记密码</title>
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
         <link rel="stylesheet" href="css/style.css" media="screen" title="no title" charset="utf-8">
     </head>
     <body>
+        <a class="btn btn-large btn-primary btn-custom btn-forgotten" href="#">忘记密码?</a>
+        <a class="btn btn-large btn-primary btn-custom btn-mobile hidden" href="#">手机号</a>
+        <a class="btn btn-large btn-primary btn-custom btn-idcard hidden" href="#">身份证</a>
 
+        <section class="forgotten-main hidden">
+            <form class="form-main hidden" id="mobileForm" action="index.html" method="post">
+                <div>
+                    <input class="input-custom" id="phoneNumber" type="text" placeholder="请输入手机号" required="true" pattern="[0-9]{11}">
+                    <span class="add-on btn-primary btn-custom">发送验证码</span>
+                    <button type="submit" class="btn btn-primary btn-custom">Submit</button>
+                </div>
+            </form>
+            <form class="form-main hidden" id="idcardForm" action="index.html" method="post">
+                <div>
+                    <label for="idcardNumber">身份证号码</label>
+                    <input class="input-custom" type="text" id="idcardNumber" placeholder="请输入身份证号码" required="true">
+                    <button type="submit" class="btn btn-primary btn-custom">Submit</button>
+                </div>
+            </form>
+        </section>
         <script src="js/jquery-1.12.1.min.js" charset="utf-8"></script>
         <script src="js/bootstrap.min.js" charset="utf-8"></script>
         <script src="js/index.js" charset="utf-8"></script>
