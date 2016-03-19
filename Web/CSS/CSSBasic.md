@@ -391,7 +391,7 @@ a[title*=link] {text-decoration:underline;}
 -   :visited：已访问的链接，不建议使用；
 -   :hover：鼠标移动到容器，不仅限于链接，可用于页面中的任何元素；
 -   :active：被激活时的状态，不仅限于链接，可用于任何具有tabindex属性的元素；
--   :focus：获得焦点时状态，不仅限于链接，可用于任何具有tabindex属性的无线：
+-   :focus：获得焦点时状态，不仅限于链接，可用于任何具有tabindex属性的元素：
 -   :enabled：已启用的界面元素：`input`
 -   :disabled：已禁用的界面元素：`input`
 -   :target：该选择器定位当前活动页面内定位点的目标元素, #anchor-name `#info:target {font-size:24px;}`
@@ -454,6 +454,22 @@ counter() –  调用计数器，可以不使用列表元素实现序号功能,�
 h2:before {
     counter-increment: chapter;
     content: "Chapter " counter(chapter);
+}
+```
+
+-   [利用伪类画额外图形](https://css-tricks.com/examples/ShapesOfCSS/)
+
+```css
+.first-details-intro::after {
+     width: 0;
+     height: 0;
+     content: "";
+     position: absolute;
+     top: 50%;
+     right: 0;
+     border-top: 15px solid transparent;
+     border-right: 25px solid #fff;
+     border-bottom: 15px solid transparent;
 }
 ```
 
@@ -1216,6 +1232,56 @@ filter: unset;
 
 ### 常用组件
 
+#### form
+
+##### select
+
+```css
+.custom-select {
+    width: 15%;
+    height: 35px;
+    margin-right: 20px;
+
+    /* 消除默认箭头 */
+    text-indent: 0.01px;
+    text-overflow: "";
+
+    /* 自定义边框 */
+    border: 0;
+
+    /* 将箭头图片移至右端 */
+    background: url('../img/arrow.png') no-repeat;
+    background-color: #fff;
+    background-position: right;
+
+    /* 消除默认样式 */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.custom-select:focus {
+    border: 1px solid #e74f4d;
+}
+
+.custom-select option {
+    width: 100%;
+    height: 25px;
+    padding-left: 30px;
+
+    color: #323333;
+    background-color: #fff;
+
+    line-height: 25px;
+}
+
+.custom-select option:hover {
+    color: #fff;
+    background: url(../img/tick.png) no-repeat 8px center;
+    background-color: #e74f4d;
+}
+```
+
 #### header
 
 ##### nav
@@ -1247,7 +1313,7 @@ a {
 -   padding
 
 ```css
-.btn-custom {
+a.btn-custom {
 	border-radius: 0;
 	background-color: black;
 	padding: 10px 40px;
@@ -1276,3 +1342,18 @@ a {
 #### Animation Tips
 
 切换动画时, 需要先把之前的动画清楚(防止出现闪烁 Bug )
+
+#### Layout
+
+##### 相同单元
+
+-   ul + li + float
+-   .container{text-align:center;} + .content{width: xx%;}
+
+##### 元素定位
+
+-   align
+-   margin + padding
+-   position + top/bottom/left/right
+-   float
+-   flex
