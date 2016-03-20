@@ -8,6 +8,14 @@
 		- [数组](#数组)
 			- [数组字面量](#数组字面量)
 			- [常用方法](#常用方法)
+				- [堆栈](#堆栈)
+				- [分割/合并](#分割合并)
+				- [替换](#替换)
+				- [查询](#查询)
+				- [遍历](#遍历)
+				- [其他](#其他)
+				- [Array Tips](#array-tips)
+				- [高阶函数](#高阶函数)
 		- [类型转化](#类型转化)
 	- [运算符](#运算符)
 	- [控制流程](#控制流程)
@@ -16,6 +24,7 @@
 		- [对象三大特征](#对象三大特征)
 		- [构造函数](#构造函数)
 			- [new的实质](#new的实质)
+				- [原生对象的new构造](#原生对象的new构造)
 			- [返回值](#返回值)
 			- [最佳实践](#最佳实践)
 		- [全局对象](#全局对象)
@@ -46,9 +55,14 @@
 		- [包装类对象](#包装类对象)
 		- [错误对象](#错误对象)
 	- [函数](#函数)
-		- [Lambda Calculus](#lambda-calculus)
+		- [函数式JavaScript](#函数式javascript)
 			- [闭包(closure)](#闭包closure)
 			- [偏函数应用](#偏函数应用)
+			- [高阶函数](#高阶函数)
+				- [`[]`.map](#map)
+				- [`[]`.filter](#filter)
+				- [`[]`.reduce](#reduce)
+				- [`[]`.sort](#sort)
 		- [函数表达式](#函数表达式)
 		- [入参函数](#入参函数)
 		- [回调函数](#回调函数)
@@ -64,7 +78,10 @@
 		- [hasOwnProperty](#hasownproperty)
 		- [eval](#eval)
 		- [常用函数](#常用函数)
+			- [类型判断](#类型判断)
 			- [parseInt](#parseint)
+			- [对象](#对象)
+			- [数学函数](#数学函数)
 		- [常用模式](#常用模式)
 			- [API模式](#api模式)
 				- [回调模式](#回调模式)
@@ -92,11 +109,11 @@
 				- [insert](#insert)
 			- [node](#node)
 			- [Frag](#frag)
-		- [HTML-DOM](#html-dom)
-		- [CSS-DOM](#css-dom)
+		- [DOM HTML](#dom-html)
+		- [DOM Style](#dom-style)
 		- [document](#document)
 		- [window](#window)
-		- [Events](#events)
+		- [DOM Events](#dom-events)
 			- [Mouse Events](#mouse-events)
 			- [Key Events](#key-events)
 			- [Frame Events](#frame-events)
@@ -104,8 +121,16 @@
 			- [User-Defined Handler](#user-defined-handler)
 	- [模板引擎：handlebars.js](#模板引擎handlebarsjs)
 	- [Ajax](#ajax)
+		- [基本用法](#基本用法)
+		- [简单封装](#简单封装)
+		- [跨域请求](#跨域请求)
 	- [JSON](#json)
+		- [jQuery](#jquery)
 	- [正则表达式](#正则表达式)
+		- [Flags](#flags)
+		- [元字符](#元字符)
+		- [相关函数](#相关函数)
+			- [test](#test)
 	- [Effective](#effective)
 		- [缓存模式](#缓存模式)
 		- [加载脚本](#加载脚本)
@@ -1578,7 +1603,7 @@ var oldnode = document.getElementById('result'),
 oldnode.parentNode.replaceChild(clone, oldnode);
 ```
 
-### HTML-DOM
+### DOM HTML
 
 ```js
 element.innerHTML
@@ -1629,7 +1654,7 @@ element.event = function() {};
 elemetn.onclick = function() {};
 ```
 
-### CSS-DOM
+### DOM Style
 
 ```
 element.style.*;
@@ -1679,7 +1704,7 @@ function addLoadEvent(func) {
 }
 ```
 
-### Events
+### DOM Events
 
 #### Mouse Events
 
