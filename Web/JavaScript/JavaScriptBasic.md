@@ -2134,3 +2134,23 @@ if (a&& b&&c) {
 
 @property propertyName
 @type Number/String
+
+## Security
+
+### Input check
+
+#### 特殊字符
+
+-   null字符
+-   空格字符
+-   空输入(提示)
+
+### XSS Attack
+
+防御:
+
+```js
+Array.prototype.filter.call(input.value, function (item) {
+    return item !== "<" && item !== ">";  // " " "\n" "\0" etc.
+});
+```
