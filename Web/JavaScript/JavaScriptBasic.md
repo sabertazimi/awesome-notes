@@ -1569,6 +1569,7 @@ node.nodeValue
     node.nextSibling
     node.previousSibling
     node.parentNode
+	node.textContent
 ```
 
 #### Frag
