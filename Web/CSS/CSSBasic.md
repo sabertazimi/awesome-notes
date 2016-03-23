@@ -33,9 +33,12 @@
 			- [height](#height)
 			- [column](#column)
 			- [Awesome Box Patterns](#awesome-box-patterns)
+			- [Block Formatting Context](#block-formatting-context)
+				- [Create BFC](#create-bfc)
 			- [Flow Patterns](#flow-patterns)
 			- [Float Patterns](#float-patterns)
 				- [清除浮动](#清除浮动)
+				- [Best Practice](#best-practice)
 			- [Layer Patterns](#layer-patterns)
 			- [Flex Patterns](#flex-patterns)
 				- [父元素属性](#父元素属性)
@@ -43,6 +46,8 @@
 				- [Best Practice](#best-practice)
 			- [分栏问题](#分栏问题)
 				- [两栏布局](#两栏布局)
+				- [三栏布局](#三栏布局)
+			- [居中问题](#居中问题)
 				- [不定 block 元素水平居中](#不定-block-元素水平居中)
 				- [垂直居中问题](#垂直居中问题)
 				- [混合布局](#混合布局)
@@ -80,15 +85,22 @@
 	- [media query](#media-query)
 		- [设备类型](#设备类型)
 		- [设备特性](#设备特性)
-		- [常用组件](#常用组件)
-			- [header](#header)
-				- [nav](#nav)
-					- [基本原则](#基本原则)
-			- [button](#button)
-			- [footer](#footer)
-			- [picture](#picture)
-				- [圆形图片](#圆形图片)
-			- [Animation Tips](#animation-tips)
+	- [常用组件](#常用组件)
+		- [form](#form)
+			- [select](#select)
+		- [header](#header)
+			- [nav](#nav)
+				- [基本原则](#基本原则)
+		- [button](#button)
+		- [footer](#footer)
+		- [picture](#picture)
+			- [圆形图片](#圆形图片)
+		- [Animation Tips](#animation-tips)
+		- [Layout](#layout)
+			- [相同单元](#相同单元)
+			- [元素定位](#元素定位)
+	- [Design](#design)
+		- [Color](#color)
 
 <!-- /TOC -->
 
@@ -697,18 +709,18 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
 利用父元素 relative 与 子元素 absolute 进行布局
 
 ```css
-#div-1 {
+.div-1 {
     position:relative;
 }
 
-#div-1a {
+.div-1a {
     position:absolute;
     top:0;
     right:0;
     width:200px;
 }
 
-#div-1b {
+.div-1b {
     position:absolute;
     top:0;
     left:0;
@@ -1240,13 +1252,13 @@ filter: unset;
 |scan|Progressive interlaced|no|tv媒体类型的扫描方式|
 |orientation|Portrait/landscape|no|横屏或竖屏|
 
-### 常用组件
+## 常用组件
 
 -   **reset.css**
 
-#### form
+### form
 
-##### select
+#### select
 
 ```css
 .custom-select {
@@ -1294,11 +1306,11 @@ filter: unset;
 }
 ```
 
-#### header
+### header
 
-##### nav
+#### nav
 
-###### 基本原则
+##### 基本原则
 
 对 a 标签进行样式设置
 
@@ -1320,7 +1332,7 @@ a {
 
 ```
 
-#### button
+### button
 
 -   padding
 
@@ -1334,15 +1346,11 @@ a.btn-custom {
 }
 ```
 
-#### footer
+### footer
 
-```css
+### picture
 
-```
-
-#### picture
-
-##### 圆形图片
+#### 圆形图片
 
 ```css
 {
@@ -1351,21 +1359,27 @@ a.btn-custom {
 }
 ```
 
-#### Animation Tips
+### Animation Tips
 
 切换动画时, 需要先把之前的动画清楚(防止出现闪烁 Bug )
 
-#### Layout
+### Layout
 
-##### 相同单元
+#### 相同单元
 
 -   ul + li + float
 -   .container{text-align:center;} + .content{width: xx%;}
 
-##### 元素定位
+#### 元素定位
 
 -   align
 -   margin + padding
 -   position + top/bottom/left/right
 -   float
 -   flex
+
+## Design
+
+### Color
+
+-   floralwhite + #7986cb
