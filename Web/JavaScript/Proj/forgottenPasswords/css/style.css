@@ -1,7 +1,7 @@
 /* reset */
 html, body {
     width: 100%;
-    height: 1000px
+    height: 1000px;
     margin: 0;
     padding: 0;
 }
@@ -29,22 +29,6 @@ body {
     background-color: #e74f4d;
 }
 
-.input-custom {
-    width: 50%;
-    height: 40px;
-    padding-left: 10px;
-
-    border: 1px solid #e74f4d;
-
-    font-size: 1.2em;
-}
-
-.input-custom:hover {
-    color: #fff;
-    background-color: #e74f4d;
-    border: 1px solid #fff;
-}
-
 .btn-forgotten {
     left: 50%;
 }
@@ -61,36 +45,4 @@ body {
     width: 100%;
     height: 1000px;
     text-align: center;
-}
-
-.form-main {
-    position: relative;
-    left: 25%;
-
-    width: 50%;
-    height: 1000px;
-    padding-top: 150px;
-}
-
-#mobileForm span {
-    position: absolute;
-    top: 150px;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 20px;
-    border: none;
-}
-
-#mobileForm button {
-    position: absolute;
-    top: 220px;
-}
-
-#idcardForm label {
-    color: #e74f4d;
-}
-
-#idcardForm button {
-    position: absolute;
-    top: 220px;
 }

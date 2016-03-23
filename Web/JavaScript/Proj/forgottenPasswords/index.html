@@ -12,21 +12,37 @@
         <a class="btn btn-large btn-primary btn-custom btn-idcard hidden" href="#">身份证</a>
 
         <section class="forgotten-main hidden">
-            <form class="form-main hidden" id="mobileForm" action="index.html" method="post">
-                <div>
-                    <input class="input-custom" id="phoneNumber" type="text" placeholder="请输入手机号" required="true" pattern="[0-9]{11}">
-                    <span class="add-on btn-primary btn-custom">发送验证码</span>
-                    <button type="submit" class="btn btn-primary btn-custom">Submit</button>
-                </div>
+            <form class="form-horizontal hidden" role="form" id="mobileForm" action="index.html" method="post">
+            	<div class="form-group">
+            		<label for="phoneNumber" class="col-sm-2 control-label">手机号</label>
+            		<div class="col-sm-10 col-md-5">
+                        <div class="input-group">
+            			    <input type="text" class="form-control input-custom" id="phoneNumber" name="phoneNumber" placeholder="请输入手机号" required="true" pattern="[0-9]{11}">
+                            <a href="#" class="input-group-addon btn btn-primary">发送验证码</a>
+                        </div>
+            		</div>
+            	</div>
+            	<div class="form-group">
+            		<div class="col-sm-offset-2 col-sm-10">
+            			<button type="submit" class="btn btn-primary">确认</button>
+            		</div>
+            	</div>
             </form>
-            <form class="form-main hidden" id="idcardForm" action="index.html" method="post">
-                <div>
-                    <label for="idcardNumber">身份证号码</label>
-                    <input class="input-custom" type="text" id="idcardNumber" placeholder="请输入身份证号码" required="true">
-                    <button type="submit" class="btn btn-primary btn-custom">Submit</button>
-                </div>
+            <form class="form-horizontal hidden" role="form" id="idcardForm" action="index.html" method="post">
+            	<div class="form-group">
+            		<label for="idcardNumber" class="col-sm-2 control-label">身份证号</label>
+            		<div class="col-sm-10 col-md-5">
+            			<input type="text" class="form-control input-custom" id="idcardNumber" name="idcardNumber" placeholder="请输入身份证号" required="true">
+            		</div>
+            	</div>
+            	<div class="form-group">
+            		<div class="col-sm-offset-2 col-sm-10">
+            			<button type="submit" class="btn btn-primary">确认</button>
+            		</div>
+            	</div>
             </form>
         </section>
+
         <script src="js/jquery-1.12.1.min.js" charset="utf-8"></script>
         <script src="js/bootstrap.min.js" charset="utf-8"></script>
         <script src="js/index.js" charset="utf-8"></script>
