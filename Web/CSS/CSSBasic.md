@@ -43,11 +43,6 @@
 				- [Best Practice](#best-practice)
 			- [分栏问题](#分栏问题)
 				- [两栏布局](#两栏布局)
-- [div-1 {](#div-1-)
-- [div-1a {](#div-1a-)
-- [div-1b {](#div-1b-)
-				- [三栏布局](#三栏布局)
-			- [居中问题](#居中问题)
 				- [不定 block 元素水平居中](#不定-block-元素水平居中)
 				- [垂直居中问题](#垂直居中问题)
 				- [混合布局](#混合布局)
@@ -542,6 +537,21 @@ cal(10em + 3px);
 -   column-rule(style) 分隔线
 
 #### Awesome Box Patterns
+
+#### Block Formatting Context
+
+-   一个BFC包含创建该上下文元素的所有子元素，但不包括创建了新BFC的子元素的内部元素
+-   一个元素不能同时存在于两个BFC中: 可让处于BFC内部的元素与外部的元素相互隔离
+
+##### Create BFC
+
+-   根元素或其它包含它的元素
+-   position: absolute/fixed
+-   float: left/right
+-   overflow: hidden
+-   display: inline-block
+-   display: flex/inline-flex
+-   display: table-cell
 
 #### Flow Patterns
 
@@ -1231,6 +1241,8 @@ filter: unset;
 |orientation|Portrait/landscape|no|横屏或竖屏|
 
 ### 常用组件
+
+-   **reset.css**
 
 #### form
 
