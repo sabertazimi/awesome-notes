@@ -527,6 +527,18 @@ defined list>defined tab + defined data
 
 突出/高亮显示，无关原文作者
 
+### ins
+
+insert text
+
+### del
+
+delete text
+
+### u
+
+underline text
+
 ### em
 
 原文作者文章重点
