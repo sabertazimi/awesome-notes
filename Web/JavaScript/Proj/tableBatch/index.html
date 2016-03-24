@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" media="screen" title="no title" charset="utf-8">
+    <title>卖家店铺列表</title>
+    <style>
+	    .bodyStyle{
+		    margin-top: 10px;
+	    }
+    </style>
+</head>
+<body class="bodyStyle">
+	<div class="container-fluid">
+		<div class="panel panel-info">
+			<div class="panel-heading text-center">
+				<b>选择店铺</b>
+			</div>
+			<div class="panel-body">
+				<table id="shop_table" class="table table-bordered  table-hover">
+					<thead>
+						<tr class="active">
+							<th width="20%">店铺名称</th>
+							<th width="50%">店铺描述</th>
+							<th width="15%">开店时间</th>
+							<th width="15%" >查看店铺订单</th>
+						</tr>
+					</thead>
+					<tbody id="shop_tableBody">
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4" class="text-center">
+                                <button type="button" class="btn btn-primary btn-lg" id="deleteBtn">删除</button>
+                                <button type="button" class="btn btn-primary btn-lg hidden" id="confirmBtn">确认</button>
+                            </th>
+                        </tr>
+                    </tfoot>
+				</table>
+
+				<!--
+				<span id="sp" class="pageshow"></span>
+				<ul class="pagination pull-right pagehandle pagination-sm" id="pagination"></ul>
+				-->
+			</div>
+		</div>
+	</div>
+    <script src="js/jquery-1.12.1.min.js" charset="utf-8"></script>
+    <script src="js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="js/index.js" charset="utf-8"></script>
+</body>
+</html>
