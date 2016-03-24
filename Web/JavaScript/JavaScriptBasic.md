@@ -288,6 +288,12 @@ arr.indexOf(item) === -1;
 after = after.charAt(0).toUpperCase() + after.slice(1);
 ```
 
+-   删除只能指定元素
+
+```javascript
+arr.splice(index, 1);
+```
+
 ##### 高阶函数
 
 ```javascript
