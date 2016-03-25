@@ -217,10 +217,10 @@ if (typeof Array.isArray === "undefined") {
 ##### 堆栈
 
 ```javascript
-Array.unshift(value); // 添加数组首元素
-Array.push(value);    // 添加数组尾元素
-Array.shift();        // 删除数组首元素
-Array.pop();          // 删除数组尾元素
+arr.unshift(value); // 添加数组首元素
+arr.push(value);    // 添加数组尾元素
+arr.shift();        // 删除数组首元素
+arr.pop();          // 删除数组尾元素
 ```
 
 ##### 分割/合并
