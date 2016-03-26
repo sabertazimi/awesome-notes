@@ -586,6 +586,31 @@ value/max 百分比
 vat context = canvas.getContext('2d');
 ```
 
+```javascript
+// 根据参数画线
+function drawLine(fromX, fromY, toX, toY) {
+    context.moveTo(fromX, fromY);
+    context.lineTo(toX, toY);
+    context.stroke();
+}
+
+// 根据参数画圆
+function drawCircle(x, y, radius, color) {
+    context.fillStyle = color;
+    context.beginPath();
+    context.arc(x, y, radius, 0, Math.PI*2, true);
+    context.closePath();
+    context.fill();
+    context.stroke();
+}
+
+// 改变 canvas 中图形颜色
+function changeColor(color){
+    context.fillStyle = color;
+    context.fill();
+}
+```
+
 [Canvas API](Demo/canvas-cheat-sheet.html)
 
 ### figure
