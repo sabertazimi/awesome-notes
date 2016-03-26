@@ -1220,7 +1220,7 @@ Array(val);    // Array[<3个空存储位置>]
 
 parseInt(val, 2/8/10);
 
-#### 对象
+#### 对象函数
 
 ```javascript
 Object.keys(obj);   // 返回一个数组, 保存obj中所有可枚举属性的键值
@@ -1231,6 +1231,52 @@ Object.keys(obj);   // 返回一个数组, 保存obj中所有可枚举属性的�
 ```javascript
 Math.floor(Math.random * arr.length);
 Math.min/Math.max;  // 最小值/最大值
+```
+
+#### 时间
+
+##### setInterval
+
+**Tips:** 相当于一重循环
+
+```js
+// 选择排序: 具有两重循环
+let animation = setInterval(() => {
+    // interval - (外)循环结束条件
+    if (i >= length) {
+        clearInterval(animation);
+        // 结束动画
+        setTimeout(() => {
+            for (let n = 0;n < length; n++) {
+                ele_arr[n].className = 'data-list__item finish';
+                (function (index) {
+                    setTimeout(() => {
+                        ele_arr[index].className = 'data-list__item';
+                    }, 500);
+                }(n))
+            }
+        }, 200);
+        return;
+    }
+
+    // 内循环
+    j = i;
+    temp = data_queue[i];
+    while(j>0 && data_queue[j-1] >= temp){
+        list_element.replaceChild(_createItemElement(data_queue[j-1]), ele_arr[j]);
+        data_queue[j] = data_queue[j-1];
+        ele_arr[j].className = 'data-list__item change';
+        (function(index){
+            setTimeout(() => {
+                ele_arr[index].className = 'data-list__item';
+            },200);
+        }(j))
+        j--;
+    }
+    list_element.replaceChild(_createItemElement(temp), ele_arr[j]);
+    data_queue[j] = temp;
+    i++;
+},200);
 ```
 
 ### 常用模式
