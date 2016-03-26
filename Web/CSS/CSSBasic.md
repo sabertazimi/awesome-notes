@@ -699,6 +699,20 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
 }
 ```
 
+```css
+.layer {
+    display: flex;
+    margin: 5px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid #000;
+    background-color: #fff;
+    flex-grow: 1; 
+}
+
+```
+
 #### 分栏问题
 
 -   float 左右元素 + margin 中间元素
