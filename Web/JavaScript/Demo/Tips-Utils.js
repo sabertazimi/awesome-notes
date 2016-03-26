@@ -141,7 +141,7 @@
         function setHomepage() {
             if (document.all) {
                 document.body.style.behavior = 'url(#default#homepage)';
-                document.body.setHomePage('http://www.jq-school.com')
+                document.body.setHomePage('https://github.com')
             } else if (window.sidebar) {
                 if (window.netscape) {
                     try {
