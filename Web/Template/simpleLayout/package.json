@@ -1,0 +1,27 @@
+{
+  "name": "simplelayout",
+  "version": "1.0.0",
+  "description": "A template for simple layout website",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sabertazimi/Awesome-Notes.git"
+  },
+  "keywords": [
+    "awesome",
+    "learn",
+    "notes",
+    "web",
+    "hust",
+    "university"
+  ],
+  "author": "sabertazimi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sabertazimi/Awesome-Notes/issues"
+  },
+  "homepage": "https://github.com/sabertazimi/Awesome-Notes#readme"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "simplelayout",
+  "description": "A template for simple layout website",
+  "main": "index.html",
+  "authors": [
+    "sabertazimi"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "awesome",
+    "learn",
+    "notes",
+    "web",
+    "hust",
+    "university"
+  ],
+  "homepage": "https://github.com/sabertazimi/Awesome-Notes",
+  "moduleType": [
+    "node"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.5.0"
+  }
+}
