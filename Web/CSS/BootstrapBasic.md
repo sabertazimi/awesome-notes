@@ -12,15 +12,21 @@
 	- [Text](#text)
 	- [Form](#form)
 		- [Form Basic](#form-basic)
-		- [CheckBox Select](#checkbox-select)
+		- [CheckBox and Select](#checkbox-and-select)
+		- [Alerts and Prompts](#alerts-and-prompts)
 	- [Table](#table)
 		- [Table Basic Class](#table-basic-class)
 	- [Card](#card)
 		- [Panel](#panel)
 		- [Well](#well)
+	- [Images](#images)
+		- [Img Class](#img-class)
+		- [Thumbnail](#thumbnail)
+		- [Media](#media)
+		- [Embed](#embed)
+	- [Alerts and Prompts](#alerts-and-prompts)
 	- [Modal](#modal)
 	- [Button](#button)
-	- [Thumbnail](#thumbnail)
 	- [Jumbotron](#jumbotron)
 	- [Icon-Fonts](#icon-fonts)
 	- [Style](#style)
@@ -32,13 +38,13 @@
 
 ```html
 <UI API>
-<container/content>
-<header>
-</header>
-<body>
-</body>
-<footer>
-</footer>
+	<container/content>
+	<header>
+	</header>
+	<body>
+	</body>
+	<footer>
+	</footer>
 </container/content>
 </UI API>
 ```
@@ -74,91 +80,91 @@ navbar > container > nav/navbar-header/navbar-nav/navbar-form > li/a
 ```html
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
-    	<!-- Brand and toggle get grouped for better mobile display -->
-    	<div class="navbar-header">
-      		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        		<span class="sr-only">Toggle navigation</span>
-        		<span class="icon-bar"></span>
-        		<span class="icon-bar"></span>
-        		<span class="icon-bar"></span>
-      		</button>
-      	<a class="navbar-brand" href="#">Brand</a>
-    	</div>
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Brand</a>
+		</div>
 
-	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	    	<ul class="nav navbar-nav">
-	        	<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-	        	<li><a href="#">Link</a></li>
-	        	<li class="dropdown">
-	          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-	          		<ul class="dropdown-menu">
-	            		<li><a href="#">Action</a></li>
-	            		<li><a href="#">Another action</a></li>
-	            		<li><a href="#">Something else here</a></li>
-	            		<li role="separator" class="divider"></li>
-	            		<li><a href="#">Separated link</a></li>
-	            		<li role="separator" class="divider"></li>
-	            		<li><a href="#">One more separated link</a></li>
-	          		</ul>
-	        	</li>
-	      	</ul>
-	      	<form class="navbar-form navbar-left" role="search">
-			  	<div class="form-group">
-	          		<input type="text" class="form-control" placeholder="Search">
-	        	</div>
-	        	<button type="submit" class="btn btn-default">Submit</button>
-	        </form>
-	        <ul class="nav navbar-nav navbar-right">
-		  	  	<li><a href="#">Link</a></li>
-			  	<li class="dropdown">
-				  	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-	          	  	<ul class="dropdown-menu">
-	            	  	<li><a href="#">Action</a></li>
-	                  	<li><a href="#">Another action</a></li>
-	                  	<li><a href="#">Something else here</a></li>
-	                  	<li role="separator" class="divider"></li>
-	                  	<li><a href="#">Separated link</a></li>
-	          	  	</ul>
-	          	</li>
-	      	</ul>
-    	</div><!-- /.navbar-collapse -->
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+				<li><a href="#">Link</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Action</a></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="#">Separated link</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="#">One more separated link</a></li>
+					</ul>
+				</li>
+			</ul>
+			<form class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">Link</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Action</a></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="#">Separated link</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>
 ```
 
 ```css
 body{
-    padding:50px 0px 0px 0px;
-    z-index:0;
+	padding:50px 0px 0px 0px;
+	z-index:0;
 }
 
 .navbar-inverse {
-     background: #303F9F;
+	background: #303F9F;
 }
 
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
-    color: #fff;
-    background: #1A237E;
+	color: #fff;
+	background: #1A237E;
 }
 
 .navbar-inverse .navbar-nav > .open > a,
- .navbar-inverse .navbar-nav > .open > a:hover,
- .navbar-inverse .navbar-nav > .open > a:focus {
-    color: #fff;
-    background: #1A237E;
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+	color: #fff;
+	background: #1A237E;
 }
 
 .navbar-inverse .navbar-nav .open .dropdown-menu> li> a,
 .navbar-inverse .navbar-nav .open .dropdown-menu {
-    background-color: #303F9F;
-    color:#eeeeee;
+	background-color: #303F9F;
+	color:#eeeeee;
 }
 
 .navbar-inverse .navbar-nav .open .dropdown-menu> li> a:hover {
-    color:#000000;
+	color:#000000;
 }
 ```
 
@@ -168,9 +174,9 @@ body{
 
 ```html
 <ol class="breadcrumb">
-  <li><a href="#">Home</a></li>
-  <li><a href="#">Library</a></li>
-  <li class="active">Data</li>
+	<li><a href="#">Home</a></li>
+	<li><a href="#">Library</a></li>
+	<li class="active">Data</li>
 </ol>
 ```
 
@@ -275,51 +281,51 @@ step=”(步长:指定输入数字必须倍数关系)”
 
 ```html
 <form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputFile">File input</label>
-    <input type="file" id="exampleInputFile">
-    <p class="help-block">Example block-level help text here.</p>
-  </div>
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Check me out
-    </label>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+	<div class="form-group">
+		<label for="exampleInputEmail1">Email address</label>
+		<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+	</div>
+	<div class="form-group">
+		<label for="exampleInputPassword1">Password</label>
+		<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+	</div>
+	<div class="form-group">
+		<label for="exampleInputFile">File input</label>
+		<input type="file" id="exampleInputFile">
+		<p class="help-block">Example block-level help text here.</p>
+	</div>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox"> Check me out
+		</label>
+	</div>
+	<button type="submit" class="btn btn-default">Submit</button>
 </form>
 
 <div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
-      </div><!-- /btn-group -->
-      <input type="text" class="form-control" aria-label="...">
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
+	<div class="col-lg-6">
+		<div class="input-group">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+				<ul class="dropdown-menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Another action</a></li>
+					<li><a href="#">Something else here</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="#">Separated link</a></li>
+				</ul>
+			</div><!-- /btn-group -->
+			<input type="text" class="form-control" aria-label="...">
+		</div><!-- /input-group -->
+	</div><!-- /.col-lg-6 -->
 </div>
 ```
 
-### CheckBox Select
+### CheckBox and Select
 
 ```html
 <div class="form-group">
-   <div class="checkbox col-sm-5 col-sm-offset-2">
+	<div class="checkbox col-sm-5 col-sm-offset-2">
 		<label class="checkbox-inline">
 			<input type="checkbox" name="approve" value="">
 			<strong>May we contact you?</strong>
@@ -333,6 +339,8 @@ step=”(步长:指定输入数字必须倍数关系)”
 	</div>
 </div>
 ```
+
+### Alerts and Prompts
 
 ## Table
 
@@ -420,6 +428,81 @@ step=”(步长:指定输入数字必须倍数关系)”
 </div>
 ```
 
+## Images
+
+### Img Class
+
+-   img-responsive
+-   img-rounded
+-   img-circle
+-   img-thumbnail
+
+### Thumbnail
+
+```html
+<div class="row">
+	<div class="col-sm-6 col-md-4">
+		<div class="thumbnail">
+			<img class="img-thumbnail" src="..." alt="...">
+			<div class="caption">
+				<h3>Thumbnail label</h3>
+				<p>...</p>
+				<p>
+					<a href="#" class="btn btn-primary btn-xs" role="button">Button</a>
+					<a href="#" class="btn btn-default btn-xs" role="button">Button</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+```
+
+### Media
+
+-   media
+-   media-list(ul)
+-   media-object
+-   media-body
+-   media-heading
+-   media-left/right
+-   media-top/middle/bottom
+
+```html
+<ul class="media-list">
+	<li class="media">
+		<div class="media-left media-middle">
+			<a href="#">
+				<img class="media-object" src="..." alt="...">
+			</a>
+		</div>
+		<div class="media-body">
+			<h4 class="media-heading">Media heading</h4>
+			...
+		</div>
+	</li>
+</ul>
+```
+
+### Embed
+
+-   embed-responsive
+-   embed-responsive-item
+    -   targets: `<iframe>, <embed>, <video>, <object>`
+
+```html
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" src="..."></iframe>
+</div>
+
+<!-- 4:3 aspect ratio -->
+<div class="embed-responsive embed-responsive-4by3">
+  <iframe class="embed-responsive-item" src="..."></iframe>
+</div>
+```
+
+## Alerts and Prompts
+
 ## Modal
 
 ```html
@@ -432,26 +515,26 @@ $().modal(‘’);
 
 ## Button
 
--   targets: a/
+-   targets: a/input/button
 -   base:    btn
 -   color:   btn-primary btn-success btn-warning btn-danger btn-info
 -   size:    btn-xs/sm/lg
--   display: btn-block
+-   display: btn-block/btn-main
 -   group:   btn-toolbar/btn-group/btn-group-vertical/btn-group-lg
 
 ```html
 <div class="btn-toolbar">
-    <div class="btn-group">
-        <button class="btn">左</button>
-        <button class="btn">中</button>
-        <button class="btn">右</button>
-    </div>
+	<div class="btn-group">
+		<button class="btn">左</button>
+		<button class="btn">中</button>
+		<button class="btn">右</button>
+	</div>
 </div>
 
 <div class="btn-group btn-group-vertical">
-    <button class="btn">上</button>
-    <button class="btn">中</button>
-    <button class="btn">下</button>
+	<button class="btn">上</button>
+	<button class="btn">中</button>
+	<button class="btn">下</button>
 </div>
 ```
 
@@ -461,34 +544,18 @@ $().modal(‘’);
 <button data-toggle=”” data-target-”” data-dismiss=””></button>
 ```
 
-## Thumbnail
-
-```html
-<container>
-<row>
-<col-xs/md-num>
-<thumbnail>
-…...
-<caption>
-</caption>
-</thumbnail>
-</col-xs/md-num>
-<row>
-<container>
-```
-
 ## Jumbotron
 
-```css
+```html
 <div class="jumbotron">
-    <div class="container">
-        <div class="main">
-            <h1>We are Broadway</h1>
-            <a href ="#" class="btn-main">
-          		Get started
-          	</a>
-        </div>
-    </div>
+	<div class="container">
+		<div class="main">
+			<h1>We are Broadway</h1>
+			<a href ="#" class="btn-main">
+				Get started
+			</a>
+		</div>
+	</div>
 </div>
 ```
 
