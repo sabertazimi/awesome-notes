@@ -13,7 +13,7 @@
 	- [Form](#form)
 		- [Form Basic](#form-basic)
 		- [CheckBox and Select](#checkbox-and-select)
-		- [Alerts and Prompts](#alerts-and-prompts)
+		- [Form Alerts and Prompts](#form-alerts-and-prompts)
 	- [Table](#table)
 		- [Table Basic Class](#table-basic-class)
 	- [Card](#card)
@@ -25,6 +25,10 @@
 		- [Media](#media)
 		- [Embed](#embed)
 	- [Alerts and Prompts](#alerts-and-prompts)
+		- [Labels](#labels)
+		- [Badges](#badges)
+		- [Alerts](#alerts)
+		- [Progress Bars](#progress-bars)
 	- [Modal](#modal)
 	- [Button](#button)
 	- [Jumbotron](#jumbotron)
@@ -340,7 +344,42 @@ step=”(步长:指定输入数字必须倍数关系)”
 </div>
 ```
 
-### Alerts and Prompts
+### Form Alerts and Prompts
+
+-   has-color
+-   has-feedback
+-   form-control-feedback(icon)
+-   control-label/form-control/help-block
+
+```html
+<div class="form-group has-success has-feedback">
+	<label class="control-label" for="inputSuccess2">Input with success</label>
+	<input type="text" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status">
+	<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+	<span id="inputSuccess2Status" class="sr-only">(success)</span>
+</div>
+<div class="form-group has-warning has-feedback">
+	<label class="control-label" for="inputWarning2">Input with warning</label>
+	<input type="text" class="form-control" id="inputWarning2" aria-describedby="inputWarning2Status">
+	<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+	<span id="inputWarning2Status" class="sr-only">(warning)</span>
+</div>
+<div class="form-group has-error has-feedback">
+	<label class="control-label" for="inputError2">Input with error</label>
+	<input type="text" class="form-control" id="inputError2" aria-describedby="inputError2Status">
+	<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+	<span id="inputError2Status" class="sr-only">(error)</span>
+</div>
+<div class="form-group has-success has-feedback">
+	<label class="control-label" for="inputGroupSuccess1">Input group with success</label>
+	<div class="input-group">
+		<span class="input-group-addon">@</span>
+		<input type="text" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
+	</div>
+	<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+	<span id="inputGroupSuccess1Status" class="sr-only">(success)</span>
+</div>
+```
 
 ## Table
 
@@ -487,21 +526,91 @@ step=”(步长:指定输入数字必须倍数关系)”
 
 -   embed-responsive
 -   embed-responsive-item
-    -   targets: `<iframe>, <embed>, <video>, <object>`
+-   targets: `<iframe>, <embed>, <video>, <object>`
 
 ```html
 <!-- 16:9 aspect ratio -->
 <div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="..."></iframe>
+	<iframe class="embed-responsive-item" src="..."></iframe>
 </div>
 
 <!-- 4:3 aspect ratio -->
 <div class="embed-responsive embed-responsive-4by3">
-  <iframe class="embed-responsive-item" src="..."></iframe>
+	<iframe class="embed-responsive-item" src="..."></iframe>
 </div>
 ```
 
 ## Alerts and Prompts
+
+### Labels
+
+-   target: span
+-   label
+-   label-color
+-   label-size
+
+```html
+<span class="label label-default label-xs">Default</span>
+<span class="label label-primary label-sm">Primary</span>
+<span class="label label-success label-md">Success</span>
+<span class="label label-info label-lg">Info</span>
+<span class="label label-warning">Warning</span>
+<span class="label label-danger">Danger</span>
+```
+
+### Badges
+
+```html
+<button class="btn btn-primary" type="button">
+	Messages <span class="badge">4</span>
+</button>
+```
+
+### Alerts
+
+-   alert
+-   alert-color
+-   alert-dismissible
+-   alert-link
+
+```html
+<div class="alert alert-warning alert-dismissible" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<strong>Warning!</strong> Better check yourself, you're not looking too good.
+	<a href="#" class="alert-link">...</a>
+</div>
+```
+
+### Progress Bars
+
+-   progress-bar
+-   width/aria-valuemin/aria-valuemax
+-   progress-bar-color
+-   progress-bar-striped
+-   stacked: put multi-progress-bar into same .progress
+
+```html
+<div class="progress">
+	<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+		<span class="sr-only">40% Complete (success)</span>
+	</div>
+</div>
+<div class="progress">
+	<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+		<span class="sr-only">20% Complete</span>
+	</div>
+</div>
+<div class="progress">
+	<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+		<span class="sr-only">60% Complete (warning)</span>
+	</div>
+</div>
+<div class="progress">
+	<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+		<span class="sr-only">80% Complete (danger)</span>
+	</div>
+</div>
+```
 
 ## Modal
 
