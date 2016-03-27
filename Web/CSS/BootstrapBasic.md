@@ -9,6 +9,10 @@
 			- [Class](#class)
 			- [Structure](#structure)
 		- [BreadCrumb](#breadcrumb)
+	- [Tabs and Pills](#tabs-and-pills)
+		- [Tab Pane](#tab-pane)
+		- [Tab Pane JS API](#tab-pane-js-api)
+		- [Tab Pane JS Events](#tab-pane-js-events)
 	- [Text](#text)
 	- [Form](#form)
 		- [Form Basic](#form-basic)
@@ -33,8 +37,11 @@
 	- [Button](#button)
 	- [Jumbotron](#jumbotron)
 	- [Icon-Fonts](#icon-fonts)
-	- [Style](#style)
-		- [嵌入效果](#嵌入效果)
+	- [Common Class](#common-class)
+		- [color](#color)
+		- [size](#size)
+		- [state](#state)
+		- [aniatmion](#aniatmion)
 
 <!-- /TOC -->
 
@@ -183,6 +190,80 @@ body{
 	<li class="active">Data</li>
 </ol>
 ```
+
+## Tabs and Pills
+
+-   nav-tabs/nav-pills
+-   nav-justified/nav-stacked
+-   link - active/disabled
+
+```html
+<ul class="nav nav-tabs/nav-pills nav-justified/nav-stacked">
+	<li role="presentation" class="active"><a href="#">Home</a></li>
+    <li role="presentation" class="disabled"><a href="#">Messages</a></li>
+	<li role="presentation" class="dropdown">
+    	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      		Dropdown <span class="caret"></span>
+    	</a>
+    	<ul class="dropdown-menu">
+      		...
+    	</ul>
+  	</li>
+</ul>
+```
+
+### Tab Pane
+
+```html
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="home">...</div>
+    <div role="tabpanel" class="tab-pane fade" id="profile">...</div>
+    <div role="tabpanel" class="tab-pane fade" id="messages">...</div>
+    <div role="tabpanel" class="tab-pane fade" id="settings">...</div>
+  </div>
+
+</div>
+```
+
+### Tab Pane JS API
+
+```js
+$('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+$('#myTabs a[href="#profile"]').tab('show') // Select tab by name
+$('#myTabs a:first').tab('show') 			// Select first tab
+$('#myTabs a:last').tab('show') 			// Select last tab
+$('#myTabs li:eq(2) a').tab('show') 		// Select third tab (0-indexed)
+```
+
+### Tab Pane JS Events
+
+-   hide.bs.tab (on the current active tab)
+-   show.bs.tab (on the to-be-shown tab)
+-   hidden.bs.tab (on the previous active tab, the same one as for the hide.bs.tab event)
+-   shown.bs.tab (on the newly-active just-shown tab, the same one as for the show.bs.tab event)
+
+```js
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  e.target // newly activated tab
+  e.relatedTarget // previous active tab
+})
+```
+
 
 ## Text
 
@@ -675,6 +756,22 @@ $().modal(‘’);
 <i class="fa fa-phone/fa-fax/fa-envelope"></i>
 ```
 
-## Style
+## Common Class
 
-### 嵌入效果
+### color
+
+-   default/primary/info/warnings/danger
+
+### size
+
+-   xs/sm/md/lg
+
+### state
+
+-   active
+-   disabled
+
+### aniatmion
+
+-   fade
+-   in
