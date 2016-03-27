@@ -12,6 +12,35 @@
 
 # JQuery
 
+## Events
+
+### Mouse
+
+-   click
+-   dblclick
+-   mouseenter
+-   mouseleave
+
+### Keyboard
+
+-   keypress
+-   keydown
+-   keyup
+
+### Form
+
+-   submit
+-   change
+-   focus
+-   blur
+
+### Document/Window
+
+-   load
+-   resize
+-   scroll
+-   unload
+
 ## 常用多态函数
 
 ```js
