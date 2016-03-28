@@ -1,10 +1,15 @@
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [Design Patterns Notes](#design-patterns-notes)
-	- [Singleton](#singleton)
-	- [Factory](#factory)
-	- [Decorator](#decorator)
-		- [实现(关键 - 实现传递方式)](#实现关键-实现传递方式)
+	- [Classify](#classify)
+		- [创建者模式](#创建者模式)
+		- [结构设计模式](#结构设计模式)
+		- [行为设计模式](#行为设计模式)
+	- [Common Design Patterns](#common-design-patterns)
+		- [Singleton](#singleton)
+		- [Factory](#factory)
+		- [Decorator](#decorator)
+			- [实现(关键 - 实现传递方式)](#实现关键-实现传递方式)
 			- [return this.uber.function()](#return-thisuberfunction)
 			- [Decorators List](#decorators-list)
 
@@ -12,7 +17,35 @@
 
 # Design Patterns Notes
 
-## Singleton
+## Classify
+
+### 创建者模式
+
+-   构造器模式(Constructor)
+-   工厂模式(Factory)
+-   抽象工厂模式(Abstract)
+-   原型模式(Prototype)
+-   单例模式(Singleton)
+-   建造者模式(Builder)
+
+### 结构设计模式
+
+-   装饰模式
+-   外观模式
+-   享元模式
+-   适配器模式
+-   代理模式
+
+### 行为设计模式
+
+-   迭代模式
+-   中介者模式
+-   观察者模式
+-   访问者模式
+
+## Common Design Patterns
+
+### Singleton
 
 原型与构造函数指针运作正常
 
@@ -42,7 +75,7 @@ function Universe() {
 }
 ```
 
-## Factory
+### Factory
 
 ```javascript
 // 父构造函数
@@ -88,11 +121,11 @@ CarMaker.SUV = function () {
 };
 ```
 
-## Decorator
+### Decorator
 
 关键: 将每次装饰后的结果向后传递,以达到叠加装饰效果
 
-### 实现(关键 - 实现传递方式)
+#### 实现(关键 - 实现传递方式)
 
 两种方式:
 
