@@ -17,6 +17,45 @@
 
 # Design Patterns Notes
 
+## Modular Patterns
+
+### Object Literal
+
+通过对象字面量创建命名空间
+
+```javascript
+MYAPP.namespace = function (namespaceString) {
+	var parts = namespaceString.split('.'),
+		parent = MYAPP,
+		i;
+	// strip redundant leading global
+	if (parts[0] === "MYAPP") {
+		// remove leading global
+		parts = parts.slice(1);
+	}
+	for (i = 0; i < parts.length; i += 1) {
+		// create a property if it doesn't exist
+		if (typeof parent[parts[i]] === "undefined") {
+			parent[parts[i]] = {};
+		}
+		//关键: 向内嵌套
+		parent = parent[parts[i]];
+	}
+	// 返回最内层模块
+	return parent;
+};
+```
+
+```javascript
+// assign returned value to a local var
+var module2 = MYAPP.namespace('MYAPP.modules.module2');
+module2 === MYAPP.modules.module2; // true
+// skip initial `MYAPP`
+MYAPP.namespace('modules.module51');
+// long namespace
+MYAPP.namespace('once.upon.a.time.there.was.this.long.nested.property');
+```
+
 ## Common Design Patterns
 
 ### Classification
