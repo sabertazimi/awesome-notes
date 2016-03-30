@@ -65,17 +65,26 @@ MYAPP.namespace('once.upon.a.time.there.was.this.long.nested.property');
 
 ```js
 var myobj = (function () {
-	// private member
+		// private member
 	var name = "tazimi",
-    // private method
-    	getName = function getName() {
+
+		// private method
+		// excluded in return object
+
+    	// privileged method
+    	function getName() {
     		return name;
     	},
-		setName = function setName(n) {
+		function setName(n) {
 			if (typeof n === 'string') {
 			    name = n;
 			}
 			return this;
+		},
+
+		// public method
+		function logName() {
+			console.log(name);
 		};
 
     // 闭包
@@ -87,9 +96,7 @@ var myobj = (function () {
 		setName: setName,
 
 		// 公共方法
-		logName: function (n) {
-			console.log('This is '+ n);
-		};
+		log: logName;
     };
 }());
 ```
@@ -352,4 +359,218 @@ Sale.prototype.getPrice = function () {
 
 	return price;
 };
+```
+
+### Observer/Pub-Sub
+
+被观察者(Subject)维护一组观察者列表，每当被观察者状态改变时，调用 notify 函数，此函数中调用观察者(Observer)的 update 函数(可自定义)
+
+#### Observer
+
+```js
+function ObserverList(){
+  this.observerList = [];
+}
+
+ObserverList.prototype.Add = function( obj ){
+  return this.observerList.push( obj );
+};
+
+ObserverList.prototype.Empty = function(){
+  this.observerList = [];
+};
+
+ObserverList.prototype.Count = function(){
+  return this.observerList.length;
+};
+
+
+ObserverList.prototype.Get = function( index ){
+  if( index > -1 && index < this.observerList.length ){
+    return this.observerList[ index ];
+  }
+};
+
+ObserverList.prototype.Insert = function( obj, index ){
+  var pointer = -1;
+
+  if( index === 0 ){
+    this.observerList.unshift( obj );
+    pointer = index;
+  }else if( index === this.observerList.length ){
+    this.observerList.push( obj );
+    pointer = index;
+  }
+
+  return pointer;
+};
+
+ObserverList.prototype.IndexOf = function( obj, startIndex ){
+  var i = startIndex, pointer = -1;
+
+  while( i < this.observerList.length ){
+    if( this.observerList[i] === obj ){
+      pointer = i;
+    }
+    i++;
+  }
+
+  return pointer;
+};
+
+ObserverList.prototype.RemoveAt = function( index ){
+  if( index === 0 ){
+    this.observerList.shift();
+  }else if( index === this.observerList.length -1 ){
+    this.observerList.pop();
+  }
+};
+
+//  被观察者维护一个观察者列表
+function Subject(){
+  this.observers = new ObserverList();
+}
+
+Subject.prototype.AddObserver = function( observer ){
+  this.observers.Add( observer );
+};
+
+Subject.prototype.RemoveObserver = function( observer ){
+  this.observers.RemoveAt( this.observers.IndexOf( observer, 0 ) );
+};
+
+Subject.prototype.Notify = function( context ){
+  var observerCount = this.observers.Count();
+  for(var i=0; i < observerCount; i++){
+    this.observers.Get(i).Update( context );
+  }
+};
+
+// The Observer
+function Observer(){
+  this.Update = function(){
+    // ...
+  };
+}
+
+// Extend an object with an extension
+function extend( extension, obj ){
+  for ( var key in extension ){
+    obj[key] = extension[key];
+  }
+}
+
+```
+
+#### Pub/Sub
+
+-   pubsubz.js
+
+```js
+module.exports = (function ( window, doc, undef ) {
+
+    var pubsubz ={};
+
+    var topics = {},
+        subUid = -1;
+
+    pubsubz.publish = function ( topic, args ) {
+
+        // undefined check
+        if (!topics[topic]) {
+            return false;
+        }
+
+        setTimeout(function () {
+            var subscribers = topics[topic],
+                len = subscribers ? subscribers.length : 0;
+
+            while (len--) {
+                subscribers[len].func(topic, args);
+            }
+        }, 0);
+
+        return true;
+
+    };
+
+    pubsubz.subscribe = function ( topic, func ) {
+
+        // undefined check
+        if (!topics[topic]) {
+            topics[topic] = [];
+        }
+
+		// add observer to observerlist(topics)
+        var token = (++subUid).toString();
+        topics[topic].push({
+            token: token,
+            func: func
+        });
+        return token;
+    };
+
+    pubsubz.unsubscribe = function ( token ) {
+        for (var m in topics) {
+            if (topics[m]) {
+                for (var i = 0, j = topics[m].length; i < j; i++) {
+                    if (topics[m][i].token === token) {
+                        topics[m].splice(i, 1);
+                        return token;
+                    }
+                }
+            }
+        }
+        return false;
+    };
+
+    return pubsubz;
+}( this, this.document, undefined ));
+```
+
+-   test.js
+
+```js
+var pubsub = require('./pubsubz.js');
+
+// add observer to observerlist
+var testFirstSub = pubsub.subscribe( 'login', function (topic , data ) {
+        console.log( topic + ": " + data );
+    });
+
+// subject broadcast/notify, observer update
+pubsub.publish( 'login', 'hello world!' );
+pubsub.publish( 'login', ['test','a','b','c'] );
+pubsub.publish( 'login', [{'color':'blue'},{'text':'hello'}] );
+
+setTimeout(function(){
+    pubsub.unsubscribe(testFirstSub);
+}, 0);
+
+// permanent subscribe
+pubsub.subscribe('sum', function (topic, data) {
+    if (toString.apply(data) !== '[object Array]') {
+        console.log('Please input array: * ' + data + ' * is not array!');
+    } else {
+        var tmp = data.filter(function (item) {
+                return toString.apply(item) === '[object Number]';
+            });
+
+        if (tmp.length) {
+            var sum = tmp.reduce(function (previous, current) {
+                return previous + current;
+            }, 0);
+            console.log('sumof ' + data + ' : ' + sum);
+        } else {
+            console.log('Please input number array: * ' + data + ' * is not number array!');
+        }
+    }
+
+    return this;
+});
+
+pubsub.publish( 'login', 'hello again!' );
+pubsub.publish('sum', 'hello again!');
+pubsub.publish('sum', [1, 2, 3, 4, 5]);
+pubsub.publish('sum', ['a', 'b', 'c', 'd', 'e']);
 ```
