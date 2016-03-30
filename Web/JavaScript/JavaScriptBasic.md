@@ -1209,6 +1209,82 @@ myFunc(1, 2, 3);
 
 ### 常用函数
 
+#### Object
+
+-   `Object.create(prototype[,descriptors])`
+
+```js
+var o = Object.create({
+            "say": function () {
+                alert(this.name);
+            },
+            "name":"Byron"
+});
+```
+
+-   Object.defineProperty(O,Prop,descriptor)
+-   Object.defineProperties(O,descriptors)
+
+```js
+// value：值，默认是undefined
+// writable：是否是只读property，默认是false,有点像C#中的const
+// enumerable：是否可以被枚举(for in)，默认false
+// configurable：是否可以被删除，默认false
+```
+
+```js
+// get:返回property的值得方法，默认是undefined
+// set：为property设置值的方法，默认是undefined
+```js
+
+```js
+Object.defineProperty(o,'age', {
+            value: 24,
+            writable: true,
+            enumerable: true,
+            configurable: true
+});
+Object.defineProperty(o, 'sex', {
+            value: 'male',
+            writable: false,    //  不可赋值
+            enumerable: false,  //  不可遍历/枚举
+            configurable: false
+});
+```
+
+```js
+Object.defineProperties(o, {
+            'age': {
+                value: 24,
+                writable: true,
+                enumerable: true,
+                configurable: true
+            },
+            'sex': {
+                value: 'male',
+                writable: false,
+                enumerable: false,
+                configurable: false
+            }
+});
+```
+
+-   Object.getOwnPropertyDescriptor(O,property)
+-   Object.getOwnPropertyNames
+-   Object.keys() - 仅获取可枚举的属性
+
+```js
+var props = Object.getOwnPropertyDescriptor(o, 'age');
+console.log(props); 						// Object {value: 24, writable: true, enumerable: true, configurable: true}
+
+console.log(Object.getOwnPropertyNames(o)); // ["age", "sex"]
+console.log(Object.keys(o)); 				// ["age"]
+```
+
+-   Object.preventExtensions(O)/Object.isExtensible(O) - 不可新增属性，可删除/修改属性
+-   Object.seal(O)/Object.isSealed(O)                  - 不可新增/删除属性，可修改属性
+-   Object.freeze(O)/Object.isFrozen(O)                - 不可新增/删除/修改属性
+
 #### 类型判断
 
 ```javascript
@@ -1216,14 +1292,10 @@ Boolean(val);  // true
 Array(val);    // Array[<3个空存储位置>]
 ```
 
-#### parseInt
+#### 解析函数
 
+```js
 parseInt(val, 2/8/10);
-
-#### 对象函数
-
-```javascript
-Object.keys(obj);   // 返回一个数组, 保存obj中所有可枚举属性的键值
 ```
 
 #### 数学函数
@@ -1233,7 +1305,7 @@ Math.floor(Math.random * arr.length);
 Math.min/Math.max;  // 最小值/最大值
 ```
 
-#### 时间
+#### 时间函数
 
 ##### setInterval
 
