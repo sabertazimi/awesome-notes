@@ -56,6 +56,44 @@ MYAPP.namespace('modules.module51');
 MYAPP.namespace('once.upon.a.time.there.was.this.long.nested.property');
 ```
 
+### 立即函数模式
+
+通过调用立即函数，返回一个对象，暴露(exposed to public)公共接口(特权/公共方法):
+
+-   闭包: 定义私有变量与特权方法
+-   返回对象: 即使通过外部代码改变返回对象的接口，也不会影响原接口
+
+```js
+var myobj = (function () {
+	// private member
+	var name = "tazimi",
+    // private method
+    	getName = function getName() {
+    		return name;
+    	},
+		setName = function setName(n) {
+			if (typeof n === 'string') {
+			    name = n;
+			}
+			return this;
+		};
+
+    // 闭包
+    return {
+		// 公共接口: 特权/公共方法
+
+        // 特权方法
+    	getName: getName,
+		setName: setName,
+
+		// 公共方法
+		logName: function (n) {
+			console.log('This is '+ n);
+		};
+    };
+}());
+```
+
 ## Common Design Patterns
 
 ### Classification
