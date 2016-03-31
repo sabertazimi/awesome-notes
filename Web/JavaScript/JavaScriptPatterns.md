@@ -1,6 +1,9 @@
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [Design Patterns Notes](#design-patterns-notes)
+	- [Modular Patterns](#modular-patterns)
+		- [Object Literal](#object-literal)
+		- [立即函数模式](#立即函数模式)
 	- [Common Design Patterns](#common-design-patterns)
 		- [Classification](#classification)
 			- [创建者模式](#创建者模式)
@@ -8,10 +11,19 @@
 			- [行为设计模式](#行为设计模式)
 		- [Singleton](#singleton)
 		- [Factory](#factory)
+		- [](#)
 		- [Decorator](#decorator)
 			- [实现(关键 - 实现传递方式)](#实现关键-实现传递方式)
 			- [return this.uber.function()](#return-thisuberfunction)
 			- [Decorators List](#decorators-list)
+		- [Command Pattern](#command-pattern)
+		- [Mediator Pattern](#mediator-pattern)
+		- [Observer/Pub-Sub Pattern](#observerpub-sub-pattern)
+			- [Observer](#observer)
+			- [Pub/Sub](#pubsub)
+				- [Implementation](#implementation)
+				- [Sample](#sample)
+					- [Ajax Callback](#ajax-callback)
 
 <!-- /TOC -->
 
@@ -237,6 +249,8 @@ CarMaker.SUV = function () {
 };
 ```
 
+###
+
 ### Decorator
 
 关键: 将每次装饰后的结果向后传递,以达到叠加装饰效果
@@ -361,7 +375,45 @@ Sale.prototype.getPrice = function () {
 };
 ```
 
-### Observer/Pub-Sub
+### Command Pattern
+
+-   将方法/动作封装成对象, 使得外部通过唯一方法 excute/run 调用内部方法/动作
+
+```js
+module.exports = (function () {
+    var manager = {};
+
+    // command to be encapsulted
+    manager.isNull = function (nu) {
+        return toString.apply(nu) === '[object Null]';
+    };
+    manager.isArray = function (arr) {
+        return toString.apply(arr) === '[object Array]';
+    };
+    manager.isString = function (str) {
+        return toString.apply(str) ==='[object String]';
+    };
+
+    // public api
+    function execute(command) {
+        return manager[command] && manager[command].apply(manager, [].slice.call(arguments, 1));
+    }
+    function run(command) {
+        return manager[command] && manager[command].apply(manager, [].slice.call(arguments, 1));
+    }
+
+    return {
+        execute: execute,
+        run: run
+    };
+}());
+```
+
+### Mediator Pattern
+
+中央集权的控制中心 - 所有观察者共享一个共有的被观察者(所有订阅者订阅同一个节点)
+
+### Observer/Pub-Sub Pattern
 
 被观察者(Subject)维护一组观察者列表，每当被观察者状态改变时，调用 notify 函数，此函数中调用观察者(Observer)的 update 函数(可自定义)
 
@@ -463,6 +515,8 @@ function extend( extension, obj ){
 ```
 
 #### Pub/Sub
+
+##### Implementation
 
 -   pubsubz.js
 
@@ -573,4 +627,79 @@ pubsub.publish( 'login', 'hello again!' );
 pubsub.publish('sum', 'hello again!');
 pubsub.publish('sum', [1, 2, 3, 4, 5]);
 pubsub.publish('sum', ['a', 'b', 'c', 'd', 'e']);
+```
+
+##### Sample
+
+###### Ajax Callback
+
+-   当请求返回，并且实际的数据可用的时候，会生成一个通知
+-   如何使用这些事件（或者返回的数据），都是由订阅者自己决定的
+-   可以有多个不同的订阅者，以不同的方式使用返回的数据
+-   Ajax层: 唯一的责任 - 请求和返回数据，接着将数据发送给所有想要使用数据的地方
+
+```js
+(function ($) {
+
+   // Pre-compile template and "cache" it using closure
+   var resultTemplate = _.template($( "#resultTemplate" ).html());
+
+   // Subscribe to the new search tags topic
+   $.subscribe( "/search/tags" , function( tags ) {
+       $( "#searchResults" )
+                .html("
+
+
+	Searched for:" + tags + "
+
+");
+   });
+
+   // Subscribe to the new results topic
+   $.subscribe( "/search/resultSet" , function( results ){
+
+       $( "#searchResults" ).append(resultTemplate( results ));
+
+   });
+
+   // Submit a search query and publish tags on the /search/tags topic
+   $( "#flickrSearch" ).submit( function( e ) {
+
+       e.preventDefault();
+       var tags = $(this).find( "#query").val();
+
+       if ( !tags ){
+        return;
+       }
+
+       $.publish( "/search/tags" , [ $.trim(tags) ]);
+
+   });
+
+
+   // Subscribe to new tags being published and perform
+   // a search query using them. Once data has returned
+   // publish this data for the rest of the application
+   // to consume
+
+   $.subscribe("/search/tags", function( tags ) {
+
+	   // Ajax Request
+       $.getJSON( "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?" ,{
+              tags: tags,
+              tagmode: "any",
+              format: "json"
+            },
+
+          function( data ){
+
+              if( !data.items.length ) {
+                return;
+              }
+
+              $.publish( "/search/resultSet" , data.items  );
+       });
+
+   });
+}());
 ```
