@@ -11,11 +11,11 @@
 			- [行为设计模式](#行为设计模式)
 		- [Singleton](#singleton)
 		- [Factory](#factory)
-		- [](#)
 		- [Decorator](#decorator)
 			- [实现(关键 - 实现传递方式)](#实现关键-实现传递方式)
 			- [return this.uber.function()](#return-thisuberfunction)
 			- [Decorators List](#decorators-list)
+		- [Facade Pattern](#facade-pattern)
 		- [Command Pattern](#command-pattern)
 		- [Mediator Pattern](#mediator-pattern)
 		- [Observer/Pub-Sub Pattern](#observerpub-sub-pattern)
@@ -28,6 +28,8 @@
 <!-- /TOC -->
 
 # Design Patterns Notes
+
+[Awesome Book](http://www.dofactory.com/javascript/design-patterns)
 
 ## Modular Patterns
 
@@ -249,8 +251,6 @@ CarMaker.SUV = function () {
 };
 ```
 
-###
-
 ### Decorator
 
 关键: 将每次装饰后的结果向后传递,以达到叠加装饰效果
@@ -372,6 +372,24 @@ Sale.prototype.getPrice = function () {
 	}
 
 	return price;
+};
+```
+
+### Facade Pattern
+
+将多个复杂的子系统封装+合并，实现一个复杂功能，但只暴露一个简单的接口 - 封装复杂逻辑
+
+```js
+var sabertazimi = {};
+
+sabertazimi.addMyEvent = function(el,ev,fn){
+    if (el.addEventListener) {
+        el.addEventListener(ev,fn, false);
+    } else if (el.attachEvent) {
+        el.attachEvent("on" + ev, fn);
+    } else {
+        el["on" + ev] = fn;
+    }
 };
 ```
 
