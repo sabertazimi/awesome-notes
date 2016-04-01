@@ -123,7 +123,7 @@ var myobj = (function () {
 |:---------------:|:-------------------------------------------------------------:|
 |Factory Method(工厂方法)|通过将数据和事件接口化来构建若干个子类。|
 |Abstract Factory(抽象工厂)|建立若干族类的一个实例，这个实例不需要具体类的细节信息。（抽象类）|
-|Builder (建造者)|将对象的构建方法和其表现形式分离开来，总是构建相同类型的对象。|
+|Builder(建造者)|将对象的构建方法和其表现形式分离开来，总是构建相同类型的对象。|
 |Prototype(原型)|一个完全初始化的实例，用于拷贝或者克隆。|
 |Singleton(单例)|一个类只有唯一的一个实例，这个实例在整个程序中有一个全局的访问点。|
 
@@ -205,50 +205,101 @@ function Universe() {
 }
 ```
 
-### Factory
+### Factory Method
 
-```javascript
-// 父构造函数
-function CarMaker() {}
+```js
+module.exports = (function () {
+	function VehicleFactory() {
+		var publicVehicle = new Object();
 
-// 父类方法: 将被具体子类继承
-CarMaker.prototype.drive = function () {
-	return "Vroom, I have " + this.doors + " doors";
-};
+	    // specific factory
+	    function Car( options ) {
+		  this.type = 'car';
+	      this.doors = options.doors || 4;
+	      this.state = options.state || "brand new";
+	      this.color = options.color || "silver";
+	      this.speed = options.speed || 10;
+	    }
+	    function Truck( options){
+		  this.type = 'truck';
+	      this.state = options.state || "used";
+	      this.wheelSize = options.wheelSize || "large";
+	      this.color = options.color || "blue";
+	      this.speed = options.speed || 8;
+	    }
 
-// 静态工厂方法
-CarMaker.factory = function (type) {
-	var constr = type,
-		newcar;
-	// defined check
-	if (typeof CarMaker[constr] !== "function") {
-		throw {
-			name: "Error",
-			message: constr + " doesn't exist"
+		// public features of vehicle , added to __proto__
+		function _run() {
+			var args = [].slice.call(arguments);
+
+			if (args.length === 0) {
+				console.log(this.type + ' - run with: ' + this.speed + 'km/s');
+			} else if (toString.apply(args[0]) === '[object Number]') {
+				this.speed = args[0];
+			}
+		}
+		function _withColor() {
+			var args = [].slice.call(arguments);
+
+			if (args.length === 0) {
+				console.log('The color of this ' + this.type + ' product is : ' + this.color);
+			} else if (toString.apply(args[0]) === '[object String]') {
+				this.color = args[0];
+			}
+		}
+		// provide a function to change other public features
+		function _reform(funcName, newFunc) {
+			if (typeof this[funcName] === 'function' || typeof this.prototype[funcName] === 'function') {
+				delete this[funcName];
+				this.prototype[funcName] = newFunc;
+			}
+		}
+		// provide a function to add new public features
+		function _addFeature(funcName, newFunc) {
+			if (typeof this[funcName] === 'undefined') {
+				this[funcName] = newFunc;
+				this.prototype[funcName] = newFunc;
+			}
+		}
+
+		// private features, added to obj
+
+	    // core: create method
+		this.create = function (options) {
+			var vehicleClass = '',
+				newVehicle = {};
+
+			if (options.type === 'car') {
+				vehicleClass = Car;
+			} else {
+				vehicleClass = Truck;
+			}
+
+			// create new vehicle with options, by pre-defined specific constructor
+			newVehicle =  new vehicleClass(options);
+			// set up prototype
+			newVehicle.__proto__ = publicVehicle;
+			newVehicle.prototype = publicVehicle;
+
+			// add public feature
+			newVehicle.prototype.run = _run;
+			newVehicle.prototype.withColor = _withColor;
+			newVehicle.prototype.reform = _reform;
+			newVehicle.prototype.addFeature = _addFeature;
+
+			// add private(seperately) feature
+
+			// return new obj
+			return newVehicle;
 		};
 	}
-	// 继承父类(只运行一次,增强代码健壮性)
-	if (typeof CarMaker[constr].prototype.drive !== "function") {
-		CarMaker[constr].prototype = new CarMaker();
-	}
-	// 创建新实例
-	newcar = new CarMaker[constr]();
-	// coding for 公有属性/方法
 
-	// return
-	return newcar;
-};
+	// define more factory
 
-// 定义特定工厂方法
-CarMaker.Compact = function () {
-	this.doors = 4;
-};
-CarMaker.Convertible = function () {
-	this.doors = 2;
-};
-CarMaker.SUV = function () {
-	this.doors = 24;
-};
+	return {
+		vehicleFactory: VehicleFactory
+	};
+}());
 ```
 
 ### Decorator
