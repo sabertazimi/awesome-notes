@@ -9,8 +9,11 @@
 			- [创建者模式](#创建者模式)
 			- [结构设计模式](#结构设计模式)
 			- [行为设计模式](#行为设计模式)
-		- [Singleton](#singleton)
-		- [Factory](#factory)
+		- [Class Pattern](#class-pattern)
+		- [Mix-In Pattern](#mix-in-pattern)
+		- [Singleton Pattern](#singleton-pattern)
+		- [Abstract Factory](#abstract-factory)
+		- [Factory Method](#factory-method)
 		- [Decorator](#decorator)
 			- [实现(关键 - 实现传递方式)](#实现关键-实现传递方式)
 			- [return this.uber.function()](#return-thisuberfunction)
@@ -175,7 +178,88 @@ var myobj = (function () {
 -   观察者模式
 -   访问者模式
 
-### Singleton
+### Class Pattern
+
+```js
+var Person =  function( firstName , lastName ){
+  this.firstName = firstName;
+  this.lastName =  lastName;
+  this.gender = "male";
+};
+
+// Define a subclass constructor for for "Superhero":
+var Superhero = function( firstName, lastName , powers ){
+    // Invoke the superclass constructor on the new object
+    // then use .call() to invoke the constructor as a method of
+    // the object to be initialized.
+    Person.call( this, firstName, lastName );
+
+    // Finally, store their powers, a new array of traits not found in a normal "Person"
+    this.powers = powers;
+};
+SuperHero.prototype = Object.create( Person.prototype );
+```
+
+```js
+var superman = new Superhero( "Clark" ,"Kent" , ["flight","heat-vision"] );
+console.log( superman );
+```
+
+### Mix-In Pattern
+
+将多个对象的属性混入同一个对象,达到继承/扩展/组合的效果
+
+-   不改变原型链
+
+```js
+function mix() {
+	var arg, prop, child = {};
+
+	for (arg = 0; arg < arguments.length; arg += 1) {
+		for (prop in arguments[arg]) {
+			if (arguments[arg].hasOwnProperty(prop)) {
+				child[prop] = arguments[arg][prop];
+			}
+		}
+	}
+
+	return child;
+}
+```
+
+```js
+var cake = mix(
+	{eggs: 2, large: true},
+	{butter: 1, salted: true},
+	{flour: "3 cups"},
+	{sugar: "sure!"}
+);
+```
+
+-   改变原型链
+
+```js
+// Extend an existing object with a method from another
+function mix( receivingClass, givingClass ) {
+
+    // mix-in provide certain methods
+    if ( arguments[2] ) {
+        for ( var i = 2, len = arguments.length; i < len; i++ ) {
+            receivingClass.prototype[arguments[i]] = givingClass.prototype[arguments[i]];
+        }
+    }
+    // mix-in provide obj
+    else {
+        for ( var methodName in givingClass.prototype ) {
+            if ( !receivingClass.prototype[methodName] ) {
+               receivingClass.prototype[methodName] = givingClass.prototype[methodName];
+            }
+        }
+    }
+}
+```
+
+### Singleton Pattern
 
 原型与构造函数指针运作正常
 
@@ -203,6 +287,35 @@ function Universe() {
 
 	return instance;
 }
+```
+
+### Abstract Factory
+
+```js
+var AbstractVehicleFactory = (function () {
+    // Storage for our vehicle types
+    var types = {};
+
+    function _getVehicle( type, customizations ) {
+		var Vehicle = types[type];
+		return (Vehicle ? new Vehicle(customizations) : null);
+	}
+	function _registerVehicle( type, Vehicle ) {
+		var proto = Vehicle.prototype;
+
+		// only register classes that fulfill the vehicle contract
+		if ( proto.drive && proto.breakDown ) {
+			types[type] = Vehicle;
+		}
+
+		return AbstractVehicleFactory;
+	}
+
+    return {
+		getVehicle: _getVehicle,
+		registerVehicle: _registerVehicle
+    };
+})();
 ```
 
 ### Factory Method
