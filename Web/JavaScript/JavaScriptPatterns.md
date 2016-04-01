@@ -121,7 +121,7 @@ var myobj = (function () {
 }());
 ```
 
-### UMD(Universal Module Definition) Pattern
+### [UMD(Universal Module Definition) Pattern](https://github.com/https://github.com/umdjs/umd/tree/master/templates)
 
 -   先判断是否支持 Node.js 的模块(exports)，存在则使用 Node.js 模块模式
 -   再判断是否支持 AMD(define)，存在则使用 AMD 方式加载模块
