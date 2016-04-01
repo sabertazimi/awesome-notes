@@ -4,6 +4,7 @@
 	- [Modular Patterns](#modular-patterns)
 		- [Object Literal](#object-literal)
 		- [立即函数模式](#立即函数模式)
+		- [UMD(Universal Module Definition) Pattern](#umduniversal-module-definition-pattern)
 	- [Common Design Patterns](#common-design-patterns)
 		- [Classification](#classification)
 			- [创建者模式](#创建者模式)
@@ -14,11 +15,13 @@
 		- [Singleton Pattern](#singleton-pattern)
 		- [Abstract Factory](#abstract-factory)
 		- [Factory Method](#factory-method)
-		- [Decorator](#decorator)
-			- [实现(关键 - 实现传递方式)](#实现关键-实现传递方式)
+		- [Decorator Pattern](#decorator-pattern)
+			- [实现1(关键 - 实现传递方式)](#实现1关键-实现传递方式)
 			- [return this.uber.function()](#return-thisuberfunction)
 			- [Decorators List](#decorators-list)
+			- [实现2](#实现2)
 		- [Facade Pattern](#facade-pattern)
+		- [Flyweight Pattern](#flyweight-pattern)
 		- [Command Pattern](#command-pattern)
 		- [Mediator Pattern](#mediator-pattern)
 		- [Observer/Pub-Sub Pattern](#observerpub-sub-pattern)
@@ -118,6 +121,25 @@ var myobj = (function () {
 }());
 ```
 
+### UMD(Universal Module Definition) Pattern
+
+-   先判断是否支持 Node.js 的模块(exports)，存在则使用 Node.js 模块模式
+-   再判断是否支持 AMD(define)，存在则使用 AMD 方式加载模块
+
+```js
+(function (window, factory) {
+    if (typeof exports === 'object') {
+        module.exports = factory();
+    } else if (typeof define === 'function' && define.amd) {
+        define(factory);
+    } else {
+        window.eventUtil = factory();
+    }
+})(this, function () {
+    //module ...
+});
+```
+
 ## Common Design Patterns
 
 ### Classification
@@ -137,7 +159,7 @@ var myobj = (function () {
 |Bridge(桥接模式)|将对象的接口从其实现中分离出来，这样对象的实现和接口可以独立的变化。|
 |Composite(组合模式)|通过将简单可组合的对象组合起来，构成一个完整的对象，这个对象的能力将会超过这些组成部分的能力的总和，即会有新的能力产生。|
 |Decorator(装饰器)|动态给对象增加一些可替换的处理流程。|
-|Facada(外观模式)|一个类隐藏了内部子系统的复杂度，只暴露出一些简单的接口。|
+|Facade(外观模式)|一个类隐藏了内部子系统的复杂度，只暴露出一些简单的接口。|
 |Flyweight(享元模式)|一个细粒度对象，用于将包含在其它地方的信息 在不同对象之间高效地共享。|
 |Proxy(代理模式)|一个充当占位符的对象用来代表一个真实的对象。|
 
@@ -415,11 +437,15 @@ module.exports = (function () {
 }());
 ```
 
-### Decorator
+### Decorator Pattern
+
+-   重写/重载/扩展对象原有的行为(method),但不改变对象原有属性
+-   可以添加新属性，并围绕新属性扩展对象的原行为 e.g 原对象只会说中文，装饰后同时说中文与英文
+-   避免了通过继承来为类型添加新的职责的形式可取，通过继承的方式容易造成子类的膨胀
 
 关键: 将每次装饰后的结果向后传递,以达到叠加装饰效果
 
-#### 实现(关键 - 实现传递方式)
+#### 实现1(关键 - 实现传递方式)
 
 两种方式:
 
@@ -539,6 +565,57 @@ Sale.prototype.getPrice = function () {
 };
 ```
 
+#### 实现2
+
+```js
+// The constructor to decorate
+function MacBook() {
+  this.cost = function () { return 997; };
+  this.screenSize = function () { return 11.6; };
+
+}
+
+// Decorator 1
+function Memory( macbook ) {
+  var v = macbook.cost();
+  macbook.cost = function() {
+    return v + 75;
+  };
+
+}
+
+// Decorator 2
+function Engraving( macbook ){
+  var v = macbook.cost();
+  macbook.cost = function(){
+    return  v + 200;
+  };
+
+}
+
+// Decorator 3
+function Insurance( macbook ){
+  var v = macbook.cost();
+  macbook.cost = function(){
+     return  v + 250;
+  };
+
+}
+```
+
+```js
+var mb = new MacBook();
+Memory( mb );
+Engraving( mb );
+Insurance( mb );
+
+// Outputs: 1522
+console.log( mb.cost() );
+
+// Outputs: 11.6
+console.log( mb.screenSize() );
+```
+
 ### Facade Pattern
 
 将多个复杂的子系统封装+合并，实现一个复杂功能，但只暴露一个简单的接口 - 封装复杂逻辑
@@ -555,6 +632,87 @@ sabertazimi.addMyEvent = function(el,ev,fn){
         el["on" + ev] = fn;
     }
 };
+```
+
+### Flyweight Pattern
+
+-   内在信息 - 对象中的内部方法所需信息/属性, 一个单独的享元可替代大量具有相同内在信息的对象
+-   某个类型的对象有大量的实例，对这些实例进行分类，合并相同分类的对象，只创建少量实例(享元)
+-   通过享元工厂来管理一组享元，当所需享元已存在时，返回已存在享元;当所需享元不存在时，创建新享元
+
+```js
+function Flyweight (make, model, processor) {
+    this.make = make;
+    this.model = model;
+    this.processor = processor;
+};
+
+var FlyWeightFactory = (function () {
+    var flyweights = {};
+
+    return {
+        get: function (make, model, processor) {
+            // 不存在所需享元，新建新享元
+            if (!flyweights[make + model]) {
+                flyweights[make + model] =
+                    new Flyweight(make, model, processor);
+            }
+
+            return flyweights[make + model];
+        },
+
+        getCount: function () {
+            var count = 0;
+            for (var f in flyweights) count++;
+            return count;
+        }
+    }
+})();
+
+var Computer = function (make, model, processor, memory, tag) {
+    this.flyweight = FlyWeightFactory.get(make, model, processor);
+    this.memory = memory;
+    this.tag = tag;
+    this.getMake = function () {
+        return this.flyweight.make;
+    }
+    // ...
+}
+
+function ComputerCollection () {
+    var computers = {};
+    var count = 0;
+
+    return {
+        add: function (make, model, processor, memory, tag) {
+            computers[tag] =
+                new Computer(make, model, processor, memory, tag);
+            count++;
+        },
+
+        get: function (tag) {
+            return computers[tag];
+        },
+
+        getCount: function () {
+            return count;
+        }
+    };
+}
+
+(function () {
+    var computers = new ComputerCollection();
+
+    computers.add("Dell", "Studio XPS", "Intel", "5G", "Y755P");
+    computers.add("Dell", "Studio XPS", "Intel", "6G", "X997T");
+    computers.add("Dell", "Studio XPS", "Intel", "2G", "NT777");
+    computers.add("Dell", "Studio XPS", "Intel", "2G", "0J88A");
+    computers.add("HP", "Envy", "Intel", "4G", "CNU883701");
+    computers.add("HP", "Envy", "Intel", "2G", "TXU003283");
+
+    console.log("Computers: " + computers.getCount());
+    console.log("Flyweights: " + FlyWeightFactory.getCount());
+}())
 ```
 
 ### Command Pattern
