@@ -54,7 +54,7 @@ npm install gulp --save-dev
 
 ### Task Runner - Gulp
 
-####  gulp plugins
+#### Gulp Plugins
 
 ```shell
 npm install jshint gulp-jshint jshint-stylish gulp-imagemin gulp-concat gulp-uglify gulp-minify-css gulp-usemin gulp-cache gulp-changed gulp-rev gulp-rename gulp-notify  browser-sync del --save-dev
