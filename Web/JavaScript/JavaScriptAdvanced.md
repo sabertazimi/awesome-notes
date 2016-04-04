@@ -1,5 +1,20 @@
 # JavaScript Advanced Notes
 
+## JavaScript Idioms
+
+### Closure and IIFE
+
+### Check
+
+-   `O || {} ` `O || (O = {})`
+-   `if (O && O.property)`
+-   `if (typeof v === " ")`
+-   `toString. apply(var)`
+
+### Other
+
+!!result 转化成 Boolean
+
 ## Event Mechanism
 
 ### Event-Delegate

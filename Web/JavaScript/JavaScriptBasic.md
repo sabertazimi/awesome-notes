@@ -153,6 +153,20 @@ SEO searchbot graceful degradation
 
 ## 变量
 
+###  原始数据类型值 Primitive type
+
+-   Undefined
+-   Null
+-   Boolean
+-   Number
+-   String
+
+###  引用类型值 Object type
+
+-   Object	e.g Date
+-   Array
+-   Function
+
 **反模式**:
 
 -   隐式全局变量(未使用var声明便使用变量)
