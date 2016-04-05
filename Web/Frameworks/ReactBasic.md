@@ -38,3 +38,19 @@
 - 在store和action中不dom操作或者访问window.属性，只与数据打交道
 - 推荐使用ES6
 - npm的debug包，log组件渲染的每个步骤和动作
+
+## Plugins
+
+### Documents
+
+-   [Blog Generator](https://github.com/gatsbyjs/gatsby)
+-   [React Built In Editor](https://github.com/facebook/draft-js)
+
+### UI
+
+-   [React Animation npm install react-set-animate --save](https://github.com/FunctionFoundry/react-set-animate)
+-   [React Material UI](https://github.com/callemall/material-ui)
+
+### Testing
+
+-   [React Testing Utilities](https://github.com/airbnb/enzyme)

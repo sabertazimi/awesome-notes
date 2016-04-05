@@ -708,7 +708,7 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
     align-items: center;
     border: 1px solid #000;
     background-color: #fff;
-    flex-grow: 1; 
+    flex-grow: 1;
 }
 
 ```
@@ -1397,3 +1397,88 @@ a.btn-custom {
 ### Color
 
 -   floralwhite + #7986cb
+
+
+## UI Libraries && Components
+
+### Society
+
+-   [一键分享](https://github.com/overtrue/share.js)
+
+### Mouse Effect
+
+-   https://github.com/processing/p5.js
+-   https://github.com/yoannmoinet/nipplejs
+
+### Message
+
+#### Prompt
+
+-   [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
+-   [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
+-   [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
+
+#### Calendar
+
+-   [GitHub Style Calendar](https://github.com/DKirwan/calendar-heatmap)
+
+#### Time
+
+-    [bower install pickadate](https://github.com/amsul/pickadate.js)
+
+### Editor
+
+-   [Wang Editor - Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
+-   [React Built In Editor](https://github.com/facebook/draft-js)
+
+### Media
+
+#### Video
+
+-   [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
+
+#### Image
+
+-   [Variant Size Pictures](https://github.com/imulus/retinajs)
+-   [Pictures Filter](https://github.com/we-are-next/cssco)
+
+#### Icons
+
+-   [SVG Logos](https://github.com/gilbarbara/logos)
+
+### Animation
+
+-   [Velocity Animation](https://github.com/julianshapiro/velocity)
+-   [React Animation npm install react-set-animate --save](https://github.com/FunctionFoundry/react-set-animate)
+
+### Card
+
+-   [GitHub Information Card](https://github.com/lepture/github-cards)
+
+### Nav
+
+-   https://github.com/VPenkov/okayNav
+
+### Menu
+
+-   [Menu Icon Click Animation](https://github.com/jonsuh/hamburgers)
+
+### Form
+
+#### Input
+
+-   [Super Placeholder](https://github.com/chinchang/superplaceholder.js)
+
+### Layout
+
+-   [Full Page Layout](https://github.com/alvarotrigo/fullPage.js)
+-   [One Page Layout](https://github.com/davist11/jQuery-One-Page-Nav)
+-   [Bricks Layout](https://github.com/callmecavs/bricks.js)
+
+### Slide
+
+-   https://github.com/impress/impress.js
+
+### Framework
+
+-   [React Material UI](https://github.com/callemall/material-ui)
