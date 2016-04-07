@@ -51,6 +51,10 @@
 -   [React Animation npm install react-set-animate --save](https://github.com/FunctionFoundry/react-set-animate)
 -   [React Material UI](https://github.com/callemall/material-ui)
 
+#### Search Bar
+
+-   https://github.com/searchkit/searchkit
+
 ### Testing
 
 -   [React Testing Utilities](https://github.com/airbnb/enzyme)

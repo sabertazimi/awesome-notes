@@ -1417,6 +1417,7 @@ a.btn-custom {
 -   [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
 -   [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
 -   [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
+-   https://github.com/FezVrasta/popper.js
 
 #### Calendar
 
@@ -1468,6 +1469,10 @@ a.btn-custom {
 #### Input
 
 -   [Super Placeholder](https://github.com/chinchang/superplaceholder.js)
+
+#### Search Bar
+
+-   [React Search Bar](https://github.com/searchkit/searchkit)
 
 ### Layout
 
