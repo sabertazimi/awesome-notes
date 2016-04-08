@@ -1418,6 +1418,7 @@ a.btn-custom {
 -   [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
 -   [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
 -   https://github.com/FezVrasta/popper.js
+-   https://github.com/wavded/humane-js
 
 #### Calendar
 
