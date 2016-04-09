@@ -1401,6 +1401,8 @@ a.btn-custom {
 
 ## UI Libraries && Components
 
+-   http://microjs.com/
+
 ### Society
 
 -   [一键分享](https://github.com/overtrue/share.js)
@@ -1412,14 +1414,6 @@ a.btn-custom {
 
 ### Message
 
-#### Prompt
-
--   [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
--   [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
--   [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
--   https://github.com/FezVrasta/popper.js
--   https://github.com/wavded/humane-js
-
 #### Calendar
 
 -   [GitHub Style Calendar](https://github.com/DKirwan/calendar-heatmap)
@@ -1427,6 +1421,10 @@ a.btn-custom {
 #### Time
 
 -    [bower install pickadate](https://github.com/amsul/pickadate.js)
+
+### Documentation
+
+-   https://github.com/usablica/intro.js
 
 ### Editor
 
@@ -1443,6 +1441,7 @@ a.btn-custom {
 
 -   [Variant Size Pictures](https://github.com/imulus/retinajs)
 -   [Pictures Filter](https://github.com/we-are-next/cssco)
+-   [Pictures Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
 
 #### Icons
 
@@ -1450,8 +1449,28 @@ a.btn-custom {
 
 ### Animation
 
+-   [Awesome Effect Library - Effeckt.css](https://github.com/h5bp/Effeckt.css)
+-   [animate.css](https://github.com/daneden/animate.css)
 -   [Velocity Animation](https://github.com/julianshapiro/velocity)
 -   [React Animation npm install react-set-animate --save](https://github.com/FunctionFoundry/react-set-animate)
+
+#### Particles
+
+-   https://github.com/MapleRecall/html5-particles
+
+####  Hover
+
+-   [Hovering Button Effects](https://github.com/IanLunn/Hover)
+-   [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
+-   [Hint.css - Tooltips](https://github.com/chinchang/hint.css)
+
+#### Prompt
+
+-   [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
+-   [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
+-   https://github.com/FezVrasta/popper.js
+-   https://github.com/wavded/humane-js
+
 
 ### Card
 
@@ -1475,15 +1494,34 @@ a.btn-custom {
 
 -   [React Search Bar](https://github.com/searchkit/searchkit)
 
+#### Select
+
+-   [Awesome Chosen](https://github.com/harvesthq/chosen)
+
 ### Layout
+
+#### Page
 
 -   [Full Page Layout](https://github.com/alvarotrigo/fullPage.js)
 -   [One Page Layout](https://github.com/davist11/jQuery-One-Page-Nav)
+
+#### Grid
+
 -   [Bricks Layout](https://github.com/callmecavs/bricks.js)
 
-### Slide
+#### Scroll
 
--   https://github.com/impress/impress.js
+-   [视差滚动](https://github.com/Prinzhorn/skrollr)
+
+#### Position
+
+-   [定位元素 - tether](https://github.com/HubSpot/tether)
+
+#### Slide
+
+-   [One Page Style Vertical-Silde](https://github.com/MopTym/doSlide)
+-   [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
+-   [Awesome PPT/Prezi](https://github.com/impress/impress.js)
 
 ### Framework
 
