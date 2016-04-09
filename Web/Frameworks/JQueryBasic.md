@@ -73,6 +73,10 @@ $("selector").parent();
 $("selector").children();
 ```
 
+```js
+$("selector").index();
+```
+
 ### class
 
 ```javascript
