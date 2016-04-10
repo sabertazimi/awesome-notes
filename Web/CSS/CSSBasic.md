@@ -1431,25 +1431,29 @@ a.btn-custom {
 -   [Wang Editor - Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
 -   [React Built In Editor](https://github.com/facebook/draft-js)
 
-### Media
-
-#### Video
+### Video
 
 -   [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
 
-#### Image
+### Image
+
+#### Size
 
 -   [Variant Size Pictures](https://github.com/imulus/retinajs)
--   [Pictures Filter](https://github.com/we-are-next/cssco)
+
+#### Slide
+
 -   [Pictures Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
+
+#### Filter
+
+-   [Pictures Color Style Filter](https://github.com/we-are-next/cssco)
+-   [Rainyday Effect](https://github.com/maroslaw/rainyday.js)
 
 #### Icons
 
 -   [SVG Logos](https://github.com/gilbarbara/logos)
 
-### Effect
-
--   https://github.com/maroslaw/rainyday.js
 
 ### Animation
 
@@ -1474,7 +1478,6 @@ a.btn-custom {
 -   [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
 -   https://github.com/FezVrasta/popper.js
 -   https://github.com/wavded/humane-js
-
 
 ### Card
 
