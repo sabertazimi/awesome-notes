@@ -1447,6 +1447,10 @@ a.btn-custom {
 
 -   [SVG Logos](https://github.com/gilbarbara/logos)
 
+### Effect
+
+-   https://github.com/maroslaw/rainyday.js
+
 ### Animation
 
 -   [Awesome Effect Library - Effeckt.css](https://github.com/h5bp/Effeckt.css)
