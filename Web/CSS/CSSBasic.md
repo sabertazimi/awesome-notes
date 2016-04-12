@@ -1443,6 +1443,7 @@ a.btn-custom {
 
 #### Slide
 
+-   https://github.com/hustcc/placeholder.js
 -   [Pictures Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
 
 #### Filter
