@@ -1396,8 +1396,8 @@ a.btn-custom {
 
 ### Color
 
+-   http://www.gradifycss.com/
 -   floralwhite + #7986cb
-
 
 ## UI Libraries && Components
 
@@ -1450,6 +1450,7 @@ a.btn-custom {
 
 -   [Pictures Color Style Filter](https://github.com/we-are-next/cssco)
 -   [Rainyday Effect](https://github.com/maroslaw/rainyday.js)
+-   [Canvas Manipulation](https://github.com/meltingice/CamanJS/)
 
 #### Icons
 
@@ -1483,6 +1484,7 @@ a.btn-custom {
 ### Card
 
 -   [GitHub Information Card](https://github.com/lepture/github-cards)
+-   https://github.com/bootcards/bootcards
 
 ### Nav
 
