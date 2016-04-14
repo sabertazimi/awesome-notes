@@ -1543,6 +1543,10 @@ a.btn-custom {
 
 ## JS Libraries
 
+### Table
+
+-   [jQuery Plugin for Render Data](https://github.com/DataTables/DataTables)
+
 ### File
 
 #### File Tree View
