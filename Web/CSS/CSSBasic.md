@@ -1533,6 +1533,18 @@ a.btn-custom {
 -   [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
 -   [Awesome PPT/Prezi](https://github.com/impress/impress.js)
 
+### Template
+
+-   [Free Bootstrap 3 Admin Template](https://github.com/puikinsh/gentelella)
+
 ### Framework
 
 -   [React Material UI](https://github.com/callemall/material-ui)
+
+## JS Libraries
+
+### File
+
+#### File Tree View
+
+-   https://github.com/zTree/zTree_v3
