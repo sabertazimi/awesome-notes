@@ -27,6 +27,20 @@ var handleError = function (err) {
 };
 
 gulp.task('bower', function () {
+    gulp.src('./bower_components/bootstrap/dist/fonts/*')
+        .pipe(gulp.dest('./dist/fonts/'));
+
+    gulp.src('./bower_components/bootstrap/dist/css/bootstrap.min.css')
+        .pipe(gulp.dest('./dist/css/'));
+    gulp.src('./bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')
+        .pipe(gulp.dest('./dist/css/'));
+
+    gulp.src('./bower_components/boostrap/dist/js/bootstrap.min.js')
+        .pipe(gulp.dest('./dist/js/'));
+    gulp.src('./bower_components/datatables.net/js/jquery.dataTables.min.js')
+        .pipe(gulp.dest('./dist/js/'));
+    gulp.src('./bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')
+        .pipe(gulp.dest('./dist/js/'));
     gulp.src('./bower_components/jquery/dist/jquery.min.js')
         .pipe(gulp.dest('./dist/js/'));
 });
@@ -48,10 +62,7 @@ gulp.task('watchjs', function () {
 
         var combined = combiner.obj([
             gulp.src([
-                'src/js/logger.js',
-                'src/js/mediator.js',
-                'src/js/spaceship.js',
-                'src/js/commander.js',
+                'src/js/*',
             ]),
             concat('main.js'),
             gulp.dest(paths.distDir),
@@ -70,10 +81,7 @@ gulp.task('watchjs', function () {
 gulp.task('js', function () {
     var combined = combiner.obj([
         gulp.src([
-            'src/js/logger.js',
-            'src/js/mediator.js',
-            'src/js/spaceship.js',
-            'src/js/commander.js',
+            'src/js/*',
         ]),
         concat('main.js'),
         gulp.dest('dist/js/'),
