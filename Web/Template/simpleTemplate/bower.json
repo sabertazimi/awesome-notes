@@ -1,0 +1,27 @@
+{
+  "name": "task26",
+  "description": "task 26",
+  "main": "index.js",
+  "authors": [
+    "sabertazimi"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "ife",
+    "font-end",
+    "learning",
+    "hust"
+  ],
+  "homepage": "https://github.com/WebLearningUnion/LearningTasks",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3"
+  }
+}
