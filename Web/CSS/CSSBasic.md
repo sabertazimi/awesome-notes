@@ -1508,6 +1508,10 @@ a.btn-custom {
 
 -   [Awesome Chosen](https://github.com/harvesthq/chosen)
 
+#### Validate
+
+-   [jQuery Form Validator](https://github.com/victorjonsson/jQuery-Form-Validator)
+
 ### Layout
 
 #### Page
