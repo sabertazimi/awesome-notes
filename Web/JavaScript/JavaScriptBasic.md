@@ -1124,6 +1124,7 @@ var getResult = (function () {
 
 -   `Function.call(contextObj, arg1, arg2,...)`
 -   `Function.apply(contextArray, [arg1, arg2, ...]/arguments)`
+-   call效率高于apply
 
 ```js
 function.call/apply();
