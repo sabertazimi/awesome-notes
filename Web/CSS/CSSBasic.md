@@ -1518,6 +1518,7 @@ a.btn-custom {
 #### Grid
 
 -   [Bricks Layout](https://github.com/callmecavs/bricks.js)
+-   [Brick Layer](https://github.com/ademilter/bricklayer)
 
 #### Scroll
 
