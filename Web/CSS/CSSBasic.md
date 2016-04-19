@@ -1396,8 +1396,14 @@ a.btn-custom {
 
 ### Color
 
--   http://www.gradifycss.com/
+#### Scheme 
+
 -   floralwhite + #7986cb
+-   http://www.gradifycss.com/
+
+#### Lib
+
+-   https://github.com/adriantoine/kewler
 
 ## UI Libraries && Components
 
@@ -1435,7 +1441,7 @@ a.btn-custom {
 
 -   [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
 
-### Image
+### ImageS
 
 #### Size
 
@@ -1451,6 +1457,7 @@ a.btn-custom {
 -   [Pictures Color Style Filter](https://github.com/we-are-next/cssco)
 -   [Rainyday Effect](https://github.com/maroslaw/rainyday.js)
 -   [Canvas Manipulation](https://github.com/meltingice/CamanJS/)
+-   https://github.com/HumbleSoftware/js-imagediff
 
 #### Icons
 
@@ -1544,6 +1551,7 @@ a.btn-custom {
 
 ### Framework
 
+-   [HTML Presentation Framework](https://github.com/hakimel/reveal.js)
 -   [React Material UI](https://github.com/callemall/material-ui)
 
 ## JS Libraries
