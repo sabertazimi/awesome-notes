@@ -1,7 +1,7 @@
 {
-  "name": "task26",
+  "name": "table",
   "version": "1.0.0",
-  "description": "task 26",
+  "description": "table",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
@@ -11,7 +11,6 @@
     "url": "git+https://github.com/Weblearningunion/LearningTasks.git"
   },
   "keywords": [
-    "ife",
     "font-end",
     "learning",
     "hust"

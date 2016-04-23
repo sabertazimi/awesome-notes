@@ -97,10 +97,25 @@ $("selector").prop("disable", "true");
 
 ## Ajax
 
+### $.getJSON
+
 ```javascript
 $.getJSON(url, data, success(data, status, xhr));
 
 $.getJSON("test.js", function(json){
   alert("JSON Data: " + json.users[3].name);
+});
+```
+
+### $.ajax
+
+```javascript
+$.ajax({
+    url: 'http://localhost:3000',
+    type: 'GET'/'POST'/'PUT'/'DELETE',
+    data: dataSchema,
+    dataType: 'json'
+    success: successCallback,
+    error: errorHandle,
 });
 ```

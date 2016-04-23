@@ -1,13 +1,12 @@
 {
-  "name": "task26",
-  "description": "task 26",
+  "name": "table",
+  "description": "table",
   "main": "index.js",
   "authors": [
     "sabertazimi"
   ],
   "license": "MIT",
   "keywords": [
-    "ife",
     "font-end",
     "learning",
     "hust"
@@ -22,6 +21,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^2.2.3"
+    "jquery": "^2.2.3",
+    "bootstrap": "^3.3.6"
   }
 }

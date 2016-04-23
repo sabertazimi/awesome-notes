@@ -286,4 +286,4 @@ gulp.task('templates', function () {
 });
 
 
-gulp.task('default', ['js', 'css', 'images', 'copy', 'templates', 'watchjs', 'watchcss', 'watchimages', 'watchcopy', 'watchtemplates']);
+gulp.task('default', ['bower', 'html', 'js', 'css', 'images', 'copy', 'templates', 'watchhtml', 'watchjs', 'watchcss', 'watchimages', 'watchcopy', 'watchtemplates']);

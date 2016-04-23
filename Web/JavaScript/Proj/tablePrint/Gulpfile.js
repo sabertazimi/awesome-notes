@@ -27,6 +27,12 @@ var handleError = function (err) {
 };
 
 gulp.task('bower', function () {
+    gulp.src('./bower_components/bootstrap/dist/fonts/*')
+        .pipe(gulp.dest('./dist/fonts/'));
+    gulp.src('./bower_components/bootstrap/dist/css/bootstrap.min.css')
+        .pipe(gulp.dest('./dist/css/'));
+    gulp.src('./bower_components/boostrap/dist/js/bootstrap.min.js')
+        .pipe(gulp.dest('./dist/js/'));
     gulp.src('./bower_components/jquery/dist/jquery.min.js')
         .pipe(gulp.dest('./dist/js/'));
 });
@@ -286,4 +292,4 @@ gulp.task('templates', function () {
 });
 
 
-gulp.task('default', ['js', 'css', 'images', 'copy', 'templates', 'watchjs', 'watchcss', 'watchimages', 'watchcopy', 'watchtemplates']);
+gulp.task('default', ['bower', 'html', 'js', 'css', 'images', 'copy', 'templates', 'watchhtml', 'watchjs', 'watchcss', 'watchimages', 'watchcopy', 'watchtemplates']);
