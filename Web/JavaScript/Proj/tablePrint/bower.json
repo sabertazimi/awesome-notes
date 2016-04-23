@@ -22,9 +22,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^2.2.3",
-    "datatables.net": "^1.10.11",
-    "datatables.net-bs": "^1.10.11",
-    "bootstrap": "^3.3.6"
+    "jquery": "^2.2.3"
   }
 }

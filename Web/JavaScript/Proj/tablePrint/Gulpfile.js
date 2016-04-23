@@ -27,27 +27,13 @@ var handleError = function (err) {
 };
 
 gulp.task('bower', function () {
-    gulp.src('./bower_components/bootstrap/dist/fonts/*')
-        .pipe(gulp.dest('./dist/fonts/'));
-
-    gulp.src('./bower_components/bootstrap/dist/css/bootstrap.min.css')
-        .pipe(gulp.dest('./dist/css/'));
-    gulp.src('./bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')
-        .pipe(gulp.dest('./dist/css/'));
-
-    gulp.src('./bower_components/boostrap/dist/js/bootstrap.min.js')
-        .pipe(gulp.dest('./dist/js/'));
-    gulp.src('./bower_components/datatables.net/js/jquery.dataTables.min.js')
-        .pipe(gulp.dest('./dist/js/'));
-    gulp.src('./bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')
-        .pipe(gulp.dest('./dist/js/'));
     gulp.src('./bower_components/jquery/dist/jquery.min.js')
         .pipe(gulp.dest('./dist/js/'));
 });
 
 gulp.task('watchjs', function () {
     gulp.watch('src/js/**/*.js', function (event) {
-        var paths = watchPath(event, 'src/', 'dist/');
+        var paths = watchPath(event, 'src/', 'public/');
         /*
         paths
             { srcPath: 'src/js/log.js',
@@ -62,7 +48,7 @@ gulp.task('watchjs', function () {
 
         var combined = combiner.obj([
             gulp.src([
-                'src/js/*',
+                'src/js/**/*.js',
             ]),
             concat('main.js'),
             gulp.dest(paths.distDir),
@@ -81,15 +67,15 @@ gulp.task('watchjs', function () {
 gulp.task('js', function () {
     var combined = combiner.obj([
         gulp.src([
-            'src/js/*',
+            'src/js/**/*.js',
         ]),
         concat('main.js'),
-        gulp.dest('dist/js/'),
+        gulp.dest('public/js/'),
         sourcemaps.init(),
         rename({ suffix: '.min' }),
         uglify(),
         sourcemaps.write('./'),
-        gulp.dest('dist/js/')
+        gulp.dest('public/js/')
     ]);
     combined.on('error', handleError);
 });
@@ -97,12 +83,14 @@ gulp.task('js', function () {
 
 gulp.task('watchcss', function () {
     gulp.watch('src/css/**/*.css', function (event) {
-        var paths = watchPath(event, 'src/', 'dist/');
+        var paths = watchPath(event, 'src/', 'public/');
 
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
         gutil.log('Dist ' + paths.distPath);
 
-        gulp.src(paths.srcPath)
+        gulp.src('src/css/**/*.css')
+            .pipe(concat('main.css'))
+            .pipe(gulp.dest(paths.distDir))
             .pipe(sourcemaps.init())
             .pipe(autoprefixer({
               browsers: 'last 2 versions'
@@ -115,7 +103,9 @@ gulp.task('watchcss', function () {
 });
 
 gulp.task('css', function () {
-    gulp.src('src/css/*.css')
+    gulp.src('src/css/**/*.css')
+        .pipe(concat('main.css'))
+        .pipe(gulp.dest('public/css/'))
         .pipe(sourcemaps.init())
         .pipe(autoprefixer({
           browsers: 'last 2 versions'
@@ -123,7 +113,7 @@ gulp.task('css', function () {
         .pipe(rename({ suffix: '.min' }))
         .pipe(minifycss())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('dist/css/'));
+        .pipe(gulp.dest('public/css/'));
 });
 
 // gulp.task('watchless', function () {
@@ -199,7 +189,7 @@ gulp.task('css', function () {
 
 gulp.task('watchhtml', function () {
     gulp.watch('src/*.html', function (event) {
-        var paths = watchPath(event, 'src/', 'dist/');
+        var paths = watchPath(event, 'src/', 'public/');
 
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
         gutil.log('Dist ' + paths.distPath);
@@ -211,15 +201,15 @@ gulp.task('watchhtml', function () {
 
 gulp.task('html', function() {
     var htmlSrc = './src/*.html',
-        htmlDst = './dist/';
+        htmlDst = './public/';
 
     gulp.src(htmlSrc)
         .pipe(gulp.dest(htmlDst));
 });
 
-gulp.task('watchimage', function () {
+gulp.task('watchimages', function () {
     gulp.watch('src/images/**/*', function (event) {
-        var paths = watchPath(event,'src/','dist/');
+        var paths = watchPath(event,'src/','public/');
 
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
         gutil.log('Dist ' + paths.distPath);
@@ -232,17 +222,17 @@ gulp.task('watchimage', function () {
     });
 });
 
-gulp.task('image', function () {
+gulp.task('images', function () {
     gulp.src('src/images/**/*')
         .pipe(imagemin({
             progressive: true
         }))
-        .pipe(gulp.dest('dist/images'));
+        .pipe(gulp.dest('public/images'));
 });
 
 gulp.task('watchcopy', function () {
     gulp.watch('src/fonts/**/*', function (event) {
-        var paths = watchPath(event,'src/', 'dist/');
+        var paths = watchPath(event,'src/', 'public/');
 
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
         gutil.log('Dist ' + paths.distPath);
@@ -254,12 +244,12 @@ gulp.task('watchcopy', function () {
 
 gulp.task('copy', function () {
     gulp.src('src/fonts/**/*')
-        .pipe(gulp.dest('dist/fonts/'));
+        .pipe(gulp.dest('public/fonts/'));
 });
 
 gulp.task('watchtemplates', function () {
     gulp.watch('src/templates/**/*', function (event) {
-        var paths = watchPath(event, 'src/', 'dist/');
+        var paths = watchPath(event, 'src/', 'public/');
 
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
         gutil.log('Dist ' + paths.distPath);
@@ -292,8 +282,8 @@ gulp.task('templates', function () {
           namespace: 'S.templates',
           noRedeclare: true
         }))
-        .pipe(gulp.dest('dist/templates'));
+        .pipe(gulp.dest('public/templates'));
 });
 
 
-gulp.task('default', ['bower', 'watchjs', 'watchcss', 'watchhtml', 'watchimage', 'watchcopy', 'watchtemplates']);
+gulp.task('default', ['js', 'css', 'images', 'copy', 'templates', 'watchjs', 'watchcss', 'watchimages', 'watchcopy', 'watchtemplates']);
