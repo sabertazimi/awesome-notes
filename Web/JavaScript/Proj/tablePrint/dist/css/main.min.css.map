@@ -1,1 +1,0 @@
-{"version":3,"sources":["main.css"],"names":[],"mappings":"AAAA,UACI,QAAA,KAGJ,aACI,QAAA","file":"main.min.css","sourcesContent":[".no-print {\n    display: none;\n}\n\n.table-print {\n    display: block;\n}\n"],"sourceRoot":"/source/"}
