@@ -1441,7 +1441,7 @@ a.btn-custom {
 
 -   [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
 
-### ImageS
+### Images
 
 #### Size
 
@@ -1500,6 +1500,10 @@ a.btn-custom {
 ### Menu
 
 -   [Menu Icon Click Animation](https://github.com/jonsuh/hamburgers)
+
+### Chart
+
+-   [HTML5 Chart](https://github.com/chartjs/Chart.js)
 
 ### Form
 
