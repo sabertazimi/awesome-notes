@@ -1546,6 +1546,7 @@ a.btn-custom {
 #### Slide
 
 -   [One Page Style Vertical-Silde](https://github.com/MopTym/doSlide)
+-   [Photo Swipe](https://github.com/dimsemenov/PhotoSwipe)
 -   [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
 -   [Awesome PPT/Prezi](https://github.com/impress/impress.js)
 
