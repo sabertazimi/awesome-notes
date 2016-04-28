@@ -1564,6 +1564,7 @@ a.btn-custom {
 ### Table
 
 -   [jQuery Plugin for Render Data](https://github.com/DataTables/DataTables)
+-   [Extended Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
 
 ### File
 
