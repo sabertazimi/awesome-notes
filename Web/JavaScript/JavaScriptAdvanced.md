@@ -2,6 +2,11 @@
 
 ## JavaScript Idioms
 
+### Literal
+
+-   不要使用 new Boolean()/new Number()/new String()
+-   避免使用 new Object()/new Array()
+
 ### Closure and IIFE
 
 ### Check
@@ -161,4 +166,48 @@ gulp.task('browser-sync', ['default'], function () {
         // Watch any files in dist/, reload on change
   gulp.watch(['dist/**']).on('change', browserSync.reload);
     });
+```
+
+## Effective JavaScript
+
+### 禁用特性
+
+-   with () {}
+-   eval()
+-   少用 new
+-   少用 cotinue
+-   少用 forEach()
+
+### 循环
+
+**倒序**循环可提升性能
+
+```js
+for (var i = item.length; i--;) {
+    process(items[i]);
+}
+
+var j = items.length;
+while (j--) {
+    process(items[i]);
+}
+
+var k = items.length;
+do {
+    process(items[k]);
+} while (k--);
+```
+
+### Exception
+
+#### Call Stack Overflow
+
+调用栈尺寸限制异常，应立即定位在代码中的递归实例上
+
+```js
+try {
+    recursion();
+} catch (ex) {
+    console.error('error info');
+}
 ```

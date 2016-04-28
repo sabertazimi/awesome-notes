@@ -151,6 +151,10 @@
 
 SEO searchbot graceful degradation
 
+## 常量
+
+常数值 **加括号** 可转化为对象
+
 ## 变量
 
 ###  原始数据类型值 Primitive type
@@ -160,6 +164,64 @@ SEO searchbot graceful degradation
 -   Boolean
 -   Number
 -   String
+
+#### undefined
+
+对象属性为定义时，该属性值为undefined.
+
+```js
+var undefined = void null;
+var undefined = void 1;
+var undefined = function () {};
+
+;(fucntion (undef) {
+	var undefined = undef;
+})();
+```
+
+#### null
+
+当引用为空或引用对象不存在时，值为null
+
+#### float
+
+计算浮点数时，应先计算整数，再利用移位/乘法/除法转化为浮点数
+
+```js
+var a = (1 + 2) / 10;  // a = 0.1 + 0.2;
+```
+
+#### 非数 NaN
+
+```js
+typeof  NaN  // 'number'
+NaN === NaN // false
+isNaN();
+isFinite();
+```
+
+```js
+function isNumber(value) {
+	return typeof value === 'number' && isFinite(value);
+}
+```
+
+#### string
+
+##### 引用特性
+
+-   赋值与传参 传递 string字符串常量 的引用
+-   所有 string量 都是不可变量,当对 string 进行操作后，将先会在堆区创建副本，再通过副本进行修改，并返回副本的索引
+-   没有被任何变量引用的 string: 垃圾回收
+
+##### 非对象特性(基本变量)
+
+-   字符串中的字符不可枚举(for in 循环)
+-   delete 无法删除某位字符
+
+##### 基本操作
+
++=: 字符串连接操作
 
 ###  引用类型值 Object type
 
@@ -205,8 +267,10 @@ function () {
 ### 数组
 
 -   关联数组：`arrayName[“string”]  = value;` 实际为Array对象添加属性`{string:value}`
--   `[]`数组，`{}`对象
 -   缓存数组长度:`int l = list.length`(访问`length`造成运算)
+-   `[]`数组，`{}`对象
+
+数组在 数值运算环境 中转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN数组)
 
 #### 数组字面量
 
@@ -284,7 +348,7 @@ var reverseStr = normalizedStr.split('').reverse().join('');
 
 ```javascript
 str.split('').map(function(subStr) {
-    return decode(subStr.charCodeAt(0));
+	return decode(subStr.charCodeAt(0));
 }).join('');
 
 str.split('').someOperator().join('');
@@ -316,10 +380,43 @@ arr.splice(index, 1);
 [].reduce((previous, current [, currentIndex, arr]) => {}, initial);   // fold function
 ```
 
+### 类型检测
+
+```js
+function typeOf(o) {
+	var _toString = Object.prototype.toString,
+		_type = {
+			'undefined': 'undefined',
+			'number': 'number',
+			'boolean': 'boolean',
+			'string': 'string',
+			'[object Function]': 'function',
+			'[object Array]': 'array',
+			'[object Date]': 'date',
+			'[object RegExp]': 'regexp',
+			'[object Error]': 'error'
+		};
+
+		return _type[typeof o] || _type[_toString.call(o)] || (o ? 'object' : 'null');
+}
+```
+
 ### 类型转化
 
--   字符串->整数：`+string`/`Number(string)`/`parseInt(string, arg1)`
--   any->`bool`：`!!any`
+-   字符串 -> 整数：`+string`/`Number(string)`/`parseInt(string, arg1)`
+-   any -> `bool`：`!!any`
+-   const -> `object`: `(const)`
+
+> parseInt(): 遇到非数字字符立即停止运行，返回当前转化值; 将 0 开头字符串解析为八进制数，0x 开头字符串解析为十六进制数
+
+```js
+parseInt(str, base);
+```
+
+-   数组在 数值运算环境 中 转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN数组)
+-   对象在 逻辑运算环境 中 转化为 true ,包括false的封装对象
+-   对象在 数值运算环境 中 转化为 数字 ,若转化失败,则返回NaN
+-   对象与 数值加号运算: 先数值加, (**失败后**)再字符串加
 
 ------
 
@@ -327,6 +424,17 @@ arr.splice(index, 1);
 
 -   ==与===
 -   !=与!==
+
+### 条件表达式
+
+养成使用分号结束句子的习惯, 需分行显示的语句必须确保单行不会形成完整语义
+
+```js
+var i = a ? 1
+    : b ? 2
+    : c ? 3
+    : 4;
+```
 
 ------
 
@@ -339,21 +447,21 @@ arr.splice(index, 1);
 ```javascript
 function doAction(action) {
   var actions = {
-    'hack': function () {
-      return 'hack';
-    },
+	'hack': function () {
+	  return 'hack';
+	},
 
-    'slash': function () {
-      return 'slash';
-    },
+	'slash': function () {
+	  return 'slash';
+	},
 
-    'run': function () {
-      return 'run';
-    }
+	'run': function () {
+	  return 'run';
+	}
   };
 
   if (typeof actions[action] !== 'function') {
-    throw new Error('Invalid action.');
+	throw new Error('Invalid action.');
   }
 
   //闭包方法集
@@ -376,7 +484,8 @@ function doAction(action) {
 
 ### 构造函数
 
-首字母大写
+-   首字母大写
+-   当返回值为基本类型时,仍然可得到原有对象
 
 #### new的实质
 
@@ -442,7 +551,7 @@ function Waffle() {
 //立即函数模式:
 //此时返回值不是函数本身,而是函数执行后的return语句返回值
 var global = (function () {
-    //返回全局对象
+	//返回全局对象
 	return this;
 }());
 ```
@@ -491,15 +600,15 @@ function Gadget() {
 var myobj = (function () {
 	// private member
 	var name = "tazimi";
-    // private method
-    var getName = function getName() {
-    	return name;
-    }
-    // 闭包
-    return {
-        // 公共接口 - 私有方法
-    	getName: getName;
-    };
+	// private method
+	var getName = function getName() {
+		return name;
+	}
+	// 闭包
+	return {
+		// 公共接口 - 私有方法
+		getName: getName;
+	};
 }());
 ```
 
@@ -697,29 +806,29 @@ f.prototype = o;
 ```javascript
 if (!Object.create) {
   Object.create = function (o) {
-    if (arguments.length > 1) {
-      throw new Error('Object.create implementation'
-      + ' only accepts the first parameter.');
-    }
-    function F() {}
-    F.prototype = o;
-    return new F();
+	if (arguments.length > 1) {
+	  throw new Error('Object.create implementation'
+	  + ' only accepts the first parameter.');
+	}
+	function F() {}
+	F.prototype = o;
+	return new F();
   };
 }
 ```
 
 ```javascript
 var switchProto = {
-    isOn: function isOn() {
-      return this.state;
-    },
+	isOn: function isOn() {
+	  return this.state;
+	},
 
-    toggle: function toggle() {
-      this.state = !this.state;
-      return this;
-    },
+	toggle: function toggle() {
+	  this.state = !this.state;
+	  return this;
+	},
 
-    state: false
+	state: false
  };
 
  var switchInstance = Object.create(switchProto);
@@ -738,9 +847,9 @@ var switchProto = {
 ```javascript
 _.extend = function(obj) {
   each(slice.call(arguments, 1), function(source) {
-    for (var prop in source) {
-      obj[prop] = source[prop];
-    }
+	for (var prop in source) {
+	  obj[prop] = source[prop];
+	}
   });
   return obj;
 };
@@ -757,7 +866,7 @@ function extendDeep(parent, child) {
 
 	for (i in parent) {
 		if (parent.hasOwnProperty(i)) {
-		    // 若属性为对象,则进行深克隆
+			// 若属性为对象,则进行深克隆
 			if (typeof parent[i] === "object") {
 				child[i] = (toStr.call(parent[i]) === astr) ? [] : {};
 				extendDeep(parent[i], child[i]);
@@ -803,14 +912,14 @@ var cake = mix(
 ```js
 function factory() {
   var highlander = {
-      name: 'MacLeod'
-    };
+	  name: 'MacLeod'
+	};
 
   //利用闭包，返回私有对象，实现工厂方法
   return {
-    get: function get() {
-      return highlander;
-    }
+	get: function get() {
+	  return highlander;
+	}
   };
 }
 ```
@@ -1230,10 +1339,10 @@ myFunc(1, 2, 3);
 
 ```js
 var o = Object.create({
-            "say": function () {
-                alert(this.name);
-            },
-            "name":"Byron"
+			"say": function () {
+				alert(this.name);
+			},
+			"name":"Byron"
 });
 ```
 
@@ -1254,33 +1363,33 @@ var o = Object.create({
 
 ```js
 Object.defineProperty(o,'age', {
-            value: 24,
-            writable: true,
-            enumerable: true,
-            configurable: true
+			value: 24,
+			writable: true,
+			enumerable: true,
+			configurable: true
 });
 Object.defineProperty(o, 'sex', {
-            value: 'male',
-            writable: false,    //  不可赋值
-            enumerable: false,  //  不可遍历/枚举
-            configurable: false
+			value: 'male',
+			writable: false,    //  不可赋值
+			enumerable: false,  //  不可遍历/枚举
+			configurable: false
 });
 ```
 
 ```js
 Object.defineProperties(o, {
-            'age': {
-                value: 24,
-                writable: true,
-                enumerable: true,
-                configurable: true
-            },
-            'sex': {
-                value: 'male',
-                writable: false,
-                enumerable: false,
-                configurable: false
-            }
+			'age': {
+				value: 24,
+				writable: true,
+				enumerable: true,
+				configurable: true
+			},
+			'sex': {
+				value: 'male',
+				writable: false,
+				enumerable: false,
+				configurable: false
+			}
 });
 ```
 
@@ -1329,40 +1438,40 @@ Math.min/Math.max;  // 最小值/最大值
 ```js
 // 选择排序: 具有两重循环
 let animation = setInterval(() => {
-    // interval - (外)循环结束条件
-    if (i >= length) {
-        clearInterval(animation);
-        // 结束动画
-        setTimeout(() => {
-            for (let n = 0;n < length; n++) {
-                ele_arr[n].className = 'data-list__item finish';
-                (function (index) {
-                    setTimeout(() => {
-                        ele_arr[index].className = 'data-list__item';
-                    }, 500);
-                }(n))
-            }
-        }, 200);
-        return;
-    }
+	// interval - (外)循环结束条件
+	if (i >= length) {
+		clearInterval(animation);
+		// 结束动画
+		setTimeout(() => {
+			for (let n = 0;n < length; n++) {
+				ele_arr[n].className = 'data-list__item finish';
+				(function (index) {
+					setTimeout(() => {
+						ele_arr[index].className = 'data-list__item';
+					}, 500);
+				}(n))
+			}
+		}, 200);
+		return;
+	}
 
-    // 内循环
-    j = i;
-    temp = data_queue[i];
-    while(j>0 && data_queue[j-1] >= temp){
-        list_element.replaceChild(_createItemElement(data_queue[j-1]), ele_arr[j]);
-        data_queue[j] = data_queue[j-1];
-        ele_arr[j].className = 'data-list__item change';
-        (function(index){
-            setTimeout(() => {
-                ele_arr[index].className = 'data-list__item';
-            },200);
-        }(j))
-        j--;
-    }
-    list_element.replaceChild(_createItemElement(temp), ele_arr[j]);
-    data_queue[j] = temp;
-    i++;
+	// 内循环
+	j = i;
+	temp = data_queue[i];
+	while(j>0 && data_queue[j-1] >= temp){
+		list_element.replaceChild(_createItemElement(data_queue[j-1]), ele_arr[j]);
+		data_queue[j] = data_queue[j-1];
+		ele_arr[j].className = 'data-list__item change';
+		(function(index){
+			setTimeout(() => {
+				ele_arr[index].className = 'data-list__item';
+			},200);
+		}(j))
+		j--;
+	}
+	list_element.replaceChild(_createItemElement(temp), ele_arr[j]);
+	data_queue[j] = temp;
+	i++;
 },200);
 ```
 
@@ -1376,8 +1485,8 @@ let animation = setInterval(() => {
 
 ```javascript
 var conf = {
-    name: "tazimi",
-    e-mail: "test@gmail.com"
+	name: "tazimi",
+	e-mail: "test@gmail.com"
 };
 
 addPerson(conf);
@@ -1429,15 +1538,15 @@ var app = {};
 (function (exports) {
 
   (function (exports) {
-    var api = {
-        moduleExists: function test() {
-          return true;
-        }
-      };
-    //闭包式继承,扩展exports对象为api对象
-    $.extend(exports, api);
+	var api = {
+		moduleExists: function test() {
+		  return true;
+		}
+	  };
+	//闭包式继承,扩展exports对象为api对象
+	$.extend(exports, api);
   }((typeof exports === 'undefined') ?
-      window : exports));
+	  window : exports));
 //将api对象绑定至app对象上
 }(app));
 ```
@@ -1624,35 +1733,35 @@ load()回调函数:
 
 <table >
 <tr>
-    <td align=center colspan=2>element node</td>
+	<td align=center colspan=2>element node</td>
 </tr>
 <tr>
-    <td>text node</td>
-    <td>attribute node</td>
+	<td>text node</td>
+	<td>attribute node</td>
 </tr>
 </table>
 
 ### DOM-Core
 
 ```js
-    document.createElement("nodeName");
-    document.createTextNode("String");
+	document.createElement("nodeName");
+	document.createTextNode("String");
 
-    cloneNode()
+	cloneNode()
 
-    parentElement.appendChild(childElement);
-    parentElement.insertBefore(newElement, targetElement);
+	parentElement.appendChild(childElement);
+	parentElement.insertBefore(newElement, targetElement);
 
-    removeChild()
+	removeChild()
 
-    replaceChild()
+	replaceChild()
 
-    setAttribute()
-    getAttribute()
+	setAttribute()
+	getAttribute()
 
-    getElementById()
-    getElementsByTagName()
-    hasChildNode()
+	getElementById()
+	getElementsByTagName()
+	hasChildNode()
 ```
 
 #### dynamic creation
@@ -1675,9 +1784,9 @@ para.appendChild(txt);
 function insertAfter(newElement,targetElement) {
   var parent = targetElement.parentNode;
   if (parent.lastChild == targetElement) {
-    parent.appendChild(newElement);
+	parent.appendChild(newElement);
   } else {
-    parent.insertBefore(newElement,targetElement.nextSibling);
+	parent.insertBefore(newElement,targetElement.nextSibling);
   }
 }
 ```
@@ -1702,12 +1811,12 @@ node.nodeValue
 ```
 
 ```js
-    node.childNodes
-    node.firstChild
-    node.lastChild
-    node.nextSibling
-    node.previousSibling
-    node.parentNode
+	node.childNodes
+	node.firstChild
+	node.lastChild
+	node.nextSibling
+	node.previousSibling
+	node.parentNode
 	node.textContent
 ```
 
@@ -1825,7 +1934,7 @@ window.closed(boolean);
 window.onload = readyFunction;
 
 function readyFunction() {
-    function() {}
+	function() {}
 }
 ```
 
@@ -1834,12 +1943,12 @@ function readyFunction() {
 function addLoadEvent(func) {
   var oldonload = window.onload;
   if (typeof window.onload != 'function') {
-    window.onload = func;
+	window.onload = func;
   } else {
-    window.onload = function() {
-      oldonload();
-      func();
-    }
+	window.onload = function() {
+	  oldonload();
+	  func();
+	}
   }
 }
 ```
@@ -1860,11 +1969,11 @@ onmouse-down/move/enter/out/leave/over
 
 ```javascript
 document.onkeydown=function(event){
-    var e = event || window.event || arguments.callee.caller.arguments[0];
-      if(e && e.keyCode==13){ // enter 键
-        //coding
-       }
-    };
+	var e = event || window.event || arguments.callee.caller.arguments[0];
+	  if(e && e.keyCode==13){ // enter 键
+		//coding
+	   }
+	};
 ```
 
 #### Frame Events
@@ -1953,7 +2062,7 @@ function getHTTPObject() {
 			} catch (e) {}
 			return false;
 		}  // end of XMLHttpRequest = function() {}
-    else return new XMLHttpRequest();
+	else return new XMLHttpRequest();
 }
 ```
 
@@ -1966,22 +2075,22 @@ var request = new XMLHttpRequest();
 request.open( "GET", "example.txt", true );
 
 request.onreadystatechange = function() {
-    //do something
-    /*
-    switch(request.readyState) {
-        case 0: initalize
-        case 1: loading
-        case 2: loaded
-        case 3: transaction
-        case 4: complete
-    }
-    */
-    if (request.readyState == 4) {
-        var para = document.createElement("p");
-        var txt = document.createTextNode(request.responseText);
-        para.appendChild(txt);
-        document.getElementById('new').appendChild(para);
-    }
+	//do something
+	/*
+	switch(request.readyState) {
+		case 0: initalize
+		case 1: loading
+		case 2: loaded
+		case 3: transaction
+		case 4: complete
+	}
+	*/
+	if (request.readyState == 4) {
+		var para = document.createElement("p");
+		var txt = document.createTextNode(request.responseText);
+		para.appendChild(txt);
+		document.getElementById('new').appendChild(para);
+	}
 };
 
 request.send(null);
@@ -2068,12 +2177,12 @@ Response.Headers.Add("Access-Control-Allow-Origin", "*");
 
 ```javascript
 $.ajax({
-    url:"http://map.oicqzone.com/gpsApi.php?lat=22.502412986242&lng=113.93832783228",
-    type:‘GET‘,
-    dataType:‘JSONP‘,  // 处理Ajax跨域问题
-    success: function(data){
-    $(‘body‘).append( "Name: " + data );
-    }
+	url:"http://map.oicqzone.com/gpsApi.php?lat=22.502412986242&lng=113.93832783228",
+	type:‘GET‘,
+	dataType:‘JSONP‘,  // 处理Ajax跨域问题
+	success: function(data){
+	$(‘body‘).append( "Name: " + data );
+	}
 });
 ```
 
@@ -2090,7 +2199,7 @@ var json = JSON.stringify(obj);
 
 ```javascript
 $.getJSON("/json/cats.json", function(json) {
-    $(".message").html(JSON.stringify(json));
+	$(".message").html(JSON.stringify(json));
 });
 ```
 
@@ -2266,11 +2375,11 @@ var MYAPP = MYAPP || {};
 
 ```javascript
 var a = 1,        // int
-    b = 2,        // int
-    sum = a + b,  // int
-    obj = {},     // object
-    i = 1.0,      // float
-    j = false;    // boolean
+	b = 2,        // int
+	sum = a + b,  // int
+	obj = {},     // object
+	i = 1.0,      // float
+	j = false;    // boolean
 ```
 
 ### 条件表达式
@@ -2349,7 +2458,7 @@ if (a&& b&&c) {
 
 ```js
 Array.prototype.filter.call(input.value, function (item) {
-    return item !== "<" && item !== ">";  // " " "\n" "\0" etc.
+	return item !== "<" && item !== ">";  // " " "\n" "\0" etc.
 });
 ```
 
