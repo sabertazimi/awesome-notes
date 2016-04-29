@@ -55,6 +55,10 @@
 
 -   https://github.com/searchkit/searchkit
 
+#### Mouse
+
+-   [React Draftjs](https://github.com/draft-js-plugins/draft-js-plugins)
+
 ### Testing
 
 -   [React Testing Utilities](https://github.com/airbnb/enzyme)
