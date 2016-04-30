@@ -1437,6 +1437,10 @@ a.btn-custom {
 -   [Wang Editor - Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
 -   [React Built In Editor](https://github.com/facebook/draft-js)
 
+#### Emoji
+
+-   [OwO Keyboard Emoji](https://github.com/DIYgod/OwO)
+
 ### Video
 
 -   [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
