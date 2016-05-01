@@ -1,13 +1,26 @@
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [JavaScript Basic Notes](#javascript-basic-notes)
+	- [常量](#常量)
 	- [变量](#变量)
+		- [原始数据类型值 Primitive type](#原始数据类型值-primitive-type)
+			- [undefined](#undefined)
+			- [null](#null)
+			- [float](#float)
+			- [非数 NaN](#非数-nan)
+			- [string](#string)
+				- [引用特性](#引用特性)
+				- [非对象特性(基本变量)](#非对象特性基本变量)
+				- [基本操作](#基本操作)
+		- [引用类型值 Object type](#引用类型值-object-type)
 		- [全局变量](#全局变量)
 		- [局部变量](#局部变量)
 		- [变量声明提升(Hoisting)](#变量声明提升hoisting)
-		- [数组](#数组)
+		- [数组(与Object同源)](#数组与object同源)
+			- [length](#length)
 			- [数组字面量](#数组字面量)
 			- [常用方法](#常用方法)
+				- [sort](#sort)
 				- [堆栈](#堆栈)
 				- [分割/合并](#分割合并)
 				- [替换](#替换)
@@ -16,8 +29,10 @@
 				- [其他](#其他)
 				- [Array Tips](#array-tips)
 				- [高阶函数](#高阶函数)
+		- [类型检测](#类型检测)
 		- [类型转化](#类型转化)
 	- [运算符](#运算符)
+		- [条件表达式](#条件表达式)
 	- [控制流程](#控制流程)
 		- [switch/case](#switchcase)
 	- [对象](#对象)
@@ -78,10 +93,12 @@
 		- [hasOwnProperty](#hasownproperty)
 		- [eval](#eval)
 		- [常用函数](#常用函数)
+			- [Object](#object)
 			- [类型判断](#类型判断)
-			- [parseInt](#parseint)
-			- [对象](#对象)
+			- [解析函数](#解析函数)
 			- [数学函数](#数学函数)
+			- [时间函数](#时间函数)
+				- [setInterval](#setinterval)
 		- [常用模式](#常用模式)
 			- [API模式](#api模式)
 				- [回调模式](#回调模式)
@@ -129,8 +146,20 @@
 	- [正则表达式](#正则表达式)
 		- [Flags](#flags)
 		- [元字符](#元字符)
-		- [相关函数](#相关函数)
+		- [常用限定符](#常用限定符)
+		- [反向引用](#反向引用)
+		- [RegExp 静态属性](#regexp-静态属性)
+		- [分组语法](#分组语法)
+		- [Best Practice(提升效率)](#best-practice提升效率)
+		- [RegExp 常用函数](#regexp-常用函数)
 			- [test](#test)
+			- [replace](#replace)
+				- [replace arguments](#replace-arguments)
+					- [replace best practice](#replace-best-practice)
+		- [常用正则表达式](#常用正则表达式)
+			- [中英文](#中英文)
+			- [数字](#数字)
+			- [空字符与空格字符](#空字符与空格字符)
 	- [Effective](#effective)
 		- [缓存模式](#缓存模式)
 		- [加载脚本](#加载脚本)
@@ -144,6 +173,11 @@
 		- [条件表达式](#条件表达式)
 		- [空格](#空格)
 		- [Comments](#comments)
+	- [Security](#security)
+		- [Input check](#input-check)
+			- [特殊字符](#特殊字符)
+		- [XSS Attack](#xss-attack)
+	- [MV* Pattern](#mv-pattern)
 
 <!-- /TOC -->
 
@@ -264,13 +298,19 @@ function () {
 
 -   var 表达式和 function 声明都将会被提升到当前作用域(全局作用域/函数作用域)的顶部, 其余表达式顺序不变
 
-### 数组
+### 数组(与Object同源)
 
 -   关联数组：`arrayName[“string”]  = value;` 实际为Array对象添加属性`{string:value}`
 -   缓存数组长度:`int l = list.length`(访问`length`造成运算)
 -   `[]`数组，`{}`对象
 
 数组在 数值运算环境 中转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN数组)
+
+#### length
+
+-   数组下标满足 [0, 2^32-1) 即可
+-   运用大于length的下标, length自动增大，不会发生数组边界错误
+-   length 等于 数组最后一个整数属性名+1, length 不一定等于 数组中有效元素个数
 
 #### 数组字面量
 
@@ -291,6 +331,19 @@ if (typeof Array.isArray === "undefined") {
 ```
 
 #### 常用方法
+
+##### sort
+
+```js
+arr.sort(toExchange);
+```
+
+```js
+var toExchange = function (a, b) {
+	return 1;  // a, b 交换位置
+	return -1; // a, b 不交换位置
+}
+```
 
 ##### 堆栈
 
@@ -2207,9 +2260,6 @@ $.getJSON("/json/cats.json", function(json) {
 
 ## 正则表达式
 
--   不使用new RegExp(),使用正则表达式字面量
--   及时将正则表达式赋给变量,使用时才不会重复创建正则表达式对象
-
 ```js
 var re = /pattern/gmi;
 ```
@@ -2269,7 +2319,7 @@ var regExp = /((<\/?\w+>.*\2))/g;
 -   `\1 \2 \3`: 第 n 个子表达式匹配的结果字符
 -   `$1 $2 $3`: 第 n 个子表达式匹配的结果字符
 
-### 静态属性
+### RegExp 静态属性
 
 反向引用的值可以从 RegExp() 构造函数中取得
 
@@ -2303,6 +2353,24 @@ RegExp.$*;
 ||`(?<!exp)`|匹配前面不是exp的位置|
 |注释|(?#comment)|这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读|
 
+### Best Practice(提升效率)
+
+-   不使用new RegExp(),使用正则表达式字面量
+-   将正则表达式赋值给变量，防止正则表达式重复创建
+-   以简单(唯一性)字元开始，如 `^/$ x \u363A [a-z] \b `, 避免以分组表达式开始
+
+```js
+\s\s* 优于 \s{1,}
+```
+
+-   减少表达式的重叠匹配
+-   减少分支表达式,并将最常用的分支放在最前面
+-   无需反向引用时，使用非捕获组
+
+```js
+(?:...) 优于 (...)
+```
+
 ### RegExp 常用函数
 
 #### test
@@ -2319,12 +2387,43 @@ RegExp.$*;
 replace(regExp, str/func);
 ```
 
+##### replace arguments
+
 第二个参数若为函数式参数,replace 方法会向它传递一系列参数:
 
 -   第一个参数:    匹配结果字符串
 -   第 n 个参数:   子表达式匹配结果字符串
 -   倒数第二个参数: 匹配文本在源字符串中的下标位置
 -   最后一个参数:   源字符串自身
+
+###### replace best practice
+
+-   使用２个子表达式修剪字符串,字符串总长度影响性能
+-   使用循环修剪字符串(分别用 正/负循环 修剪 首/尾空白符),空白字符长度影响性能
+
+```js
+if (!String.prototype.trim) {
+	String.prototype.trim = function () {
+		return this.replace(/^\s+/, '').replace(/\s+$/, '');
+	}
+}
+```
+
+```js
+if (!String.prototype.trim) {
+	String.prototype.trim = function () {
+		var str = this.replace(/^\s+/, ''),
+			end = str.length - 1,
+			ws = /\s/;
+
+		while (ws.test(str.charAt(end))) {
+			end--;
+		}
+
+		return str.slice(0, end + 1);
+	}
+}
+```
 
 ### 常用正则表达式
 
