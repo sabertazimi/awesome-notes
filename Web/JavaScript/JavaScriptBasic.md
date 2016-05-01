@@ -2163,26 +2163,41 @@ Handlebars.compile($(“#template_id”).html());  //一次编译，多次使用
 ### 基本用法
 
 ```javascript
-function getHTTPObject() {
-	if (typeof XMLHttpRequest == "undefined")
-		XMLHttpRequest = function () {
-			try {
-				return new ActiveXObject("Msxml2.XMLHTTP.6.0");
-			} catch (e) {}
-			try {
-				return new ActiveXObject("Msxml2.XMLHTTP.3.0");
-			} catch (e) {}
-			try {
-				return new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {}
-			return false;
-		}  // end of XMLHttpRequest = function() {}
-	else return new XMLHttpRequest();
-}
+var XHR = (function () {
+	var standard = {
+			createXHR : function () {
+				return new XMLHttpRequest();
+			}
+		},
+		newActionXObject = {
+			createXHR : function () {
+				return new ActionXObject('Msxml12.XMLHTTP');
+			}
+		},
+		oldActionXObject = {
+			createXHR : function () {
+				return new ActionXObject('Microsoft.XMLHTTP');
+			}
+		};
+
+	// 根据兼容性返回对应的工厂对象
+	// 此立即函数运行一次即可完成兼容性检查，防止重复检查
+	if (standard.createXHR()) {
+		return standard;
+	} else {
+		try {
+			newActionXObject.createXHR();
+			return newActionXObject;
+		} catch (o) {
+			oldActionXObject.createXHR();
+			return oldActionXObject;
+		}
+	}
+})();
 ```
 
 ```javascript
-var request = new XMLHttpRequest();
+var request = XHR.createXHR();
 ```
 
 ```javascript
