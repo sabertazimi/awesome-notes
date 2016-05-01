@@ -1286,15 +1286,14 @@ var findNodes = function (callbackObj, callback) {
 ```javascript
 //definition
 var foo = function () {
-	initialize code;
+	// initialize code;
 	var t = new Date();
 
 	foo = function () {
-		console.log("test");
 		return t;
 	};
 
-    // 使得第一次调用也可以产生想要的结果,保证每次调用的行为保持一致
+    // 使得第一次调用可以产生预期值,保证每次调用的行为保持一致
 	return foo();
 };
 
@@ -1302,6 +1301,19 @@ var foo = function () {
 console.log(foo());	// t
 //second run
 console.log(foo());	// t
+```
+
+```js
+var addEvent = function(el, type, handle) {
+	addEvent = el.addEventListener ? function (el, type, handle) {
+		el.addEventListener(type, handle, false);
+	} : function (el, type, handle) {
+		el.attachEvent('on' + type, handle);
+	};
+
+	// 保持每次调用对外表现行为一致
+	addEvent(el, type, handle);
+}
 ```
 
 但如果通过函数表达式重新将foo赋给其他变量,每次执行时foo指针都指向含初始化代码的函数.
