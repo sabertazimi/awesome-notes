@@ -70,8 +70,12 @@
 		- [包装类对象](#包装类对象)
 		- [错误对象](#错误对象)
 	- [函数](#函数)
+		- [调用模式](#调用模式)
+		- [arguments](#arguments)
+			- [arguments.callee](#argumentscallee)
 		- [函数式JavaScript](#函数式javascript)
 			- [闭包(closure)](#闭包closure)
+				- [闭包函数的结构](#闭包函数的结构)
 			- [偏函数应用](#偏函数应用)
 			- [高阶函数](#高阶函数)
 				- [`[]`.map](#map)
@@ -1029,6 +1033,54 @@ catch (e) {
 -   函数是对象
 -   函数提供局部作用域
 
+### 调用模式
+
+-   函数调用模式: this 绑定至全局对象
+
+```js
+add(1, 2); // this -> global
+
+var obj = {
+	value: 1,
+	foo: function () {
+		// 若不将 this 赋值给 that, 而在内部函数中直接使用 this.value
+		// 则会发生错误: 内部函数的 this 指向全局对象而不是obj
+		var that = this;
+		function inner() {
+			return that.value;
+		}
+		return inner();
+	}
+};
+
+obj.foo();  // 1
+```
+
+-   方法调用模式(.): this 绑定至此方法所属的对象
+-   构造器调用模式(new)
+-   apply/call 调用模式
+
+### arguments
+
+-   不是数组,但有 length 属性(实参个数)
+-   Array.prototype/[].func.apply(arguments, ...);
+
+#### arguments.callee
+
+-   引用 arguments 所属 function, 可以利用 callee 实现匿名递归函数
+-   arguments.callee.length: 形参个数
+
+```js
+try {
+	if (arguments.length !== arugments.callee.length) {
+		throw new Error('传递的参数个数不匹配');
+	}
+} catch (err) {
+	console.log(err);
+	return this;
+}
+```
+
 ### 函数式JavaScript
 
 -   函数是一等公民
@@ -1041,6 +1093,10 @@ catch (e) {
 -   函数外部不可对函数内部进行赋值或引用
 -   但函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部，即内部引用外部)
 -   特权性质: 从外部通过闭包方法访问内部(函数作用域)局部变量
+
+##### 闭包函数的结构
+
+优先级: this > 局部变量 > 形参 > arguments > 函数名
 
 #### 偏函数应用
 
@@ -1223,23 +1279,29 @@ var findNodes = function (callbackObj, callback) {
 
 ### 自定义函数(Self-Defining Function)/惰性函数定义(Lazy Function Definition)
 
-第一次执行时,进行初始化并重新定义函数变量
-第二次执行时,不再进行初始化(函数被重定义至真正函数)
+-   第一次执行时,进行初始化并重新定义函数变量
+-   第二次执行时,不再进行初始化(函数被重定义至真正函数)
+-   第一次执行为 promise, 将重复使用的部分进行初始化，之后的调用不再浪费新空间，提高代码效率
 
 ```javascript
 //definition
 var foo = function () {
 	initialize code;
+	var t = new Date();
 
 	foo = function () {
 		console.log("test");
+		return t;
 	};
+
+    // 使得第一次调用也可以产生想要的结果,保证每次调用的行为保持一致
+	return foo();
 };
 
-//first run
-foo();
+//first run: same behavoir as second run
+console.log(foo());	// t
 //second run
-foo();  // log: test
+console.log(foo());	// t
 ```
 
 但如果通过函数表达式重新将foo赋给其他变量,每次执行时foo指针都指向含初始化代码的函数.
