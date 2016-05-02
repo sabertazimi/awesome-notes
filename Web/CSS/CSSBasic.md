@@ -1440,6 +1440,7 @@ a.btn-custom {
 #### Emoji
 
 -   [OwO Keyboard Emoji](https://github.com/DIYgod/OwO)
+-   [Emoji Panel](https://github.com/TimeToKnow/emoji-panel)
 
 ### Video
 
