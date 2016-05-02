@@ -59,11 +59,12 @@
 		- [普通属性](#普通属性)
 		- [普通方法](#普通方法)
 		- [Class式继承](#class式继承)
-			- [**设置原型** 与 **借用构造函数**](#设置原型-与-借用构造函数)
+			- [代理构造函数(运用中继者)](#代理构造函数运用中继者)
 				- [Best Practice](#best-practice)
-			- [代理构造函数](#代理构造函数)
+			- [类继承(**借用构造函数**)与原型继承(**设置原型**) 混合继承模式](#类继承借用构造函数与原型继承设置原型-混合继承模式)
 				- [Best Practice](#best-practice)
-			- [kclass语法糖 - Best Practice](#kclass语法糖-best-practice)
+			- [kclass语法糖](#kclass语法糖)
+				- [Best Practice](#best-practice)
 		- [原型链继承](#原型链继承)
 			- [共享 - 原型代理(prototype)](#共享-原型代理prototype)
 			- [独立 - 原型克隆](#独立-原型克隆)
@@ -823,33 +824,9 @@ var Person = function (name) {
 
 ### Class式继承
 
-#### **设置原型** 与 **借用构造函数**
+#### 代理构造函数(运用中继者)
 
--   `child.prototype = new Parent();`
--   `Parent.apply(this, arguments);`
-
-##### Best Practice
-
-此模式会使得子类属性继承2次
-
-```javascript
-function Parent(name) {
-	this.name = name || 'Adam';
-}
-// adding functionality to the prototype
-Parent.prototype.say = function () {
-	return this.name;
-};
-
-// child constructor
-function Child(name) {
-	Parent.apply(this, arguments);
-}
-Child.prototype = new Parent();       // 设置原型链,建立继承关系
-Child.prototype.constructor = Child;  // 使得 Prototype 对象与 Constructor 对象形成闭环
-```
-
-#### 代理构造函数
+**可用于所有继承模式中,减少内存消耗**
 
 ##### Best Practice
 
@@ -877,7 +854,37 @@ Child.prototype.add = function () {
 }
 ```
 
-#### kclass语法糖 - Best Practice
+#### 类继承(**借用构造函数**)与原型继承(**设置原型**) 混合继承模式
+
+-   `child.prototype = new Parent();`
+-   `Parent.apply(this, arguments);`
+
+##### Best Practice
+
+此模式会使得子类属性继承2次
+
+```javascript
+function Parent(name) {
+	this.name = name || 'Adam';
+}
+// adding functionality to the prototype
+Parent.prototype.say = function () {
+	return this.name;
+};
+
+// child constructor
+function Child(name) {
+	Parent.apply(this, arguments);
+}
+Child.prototype = new Parent();       // 设置原型链,建立继承关系
+Child.prototype.constructor = Child;  // 使得 Prototype 对象与 Constructor 对象形成闭环
+```
+
+#### kclass语法糖
+
+复制式地继承，将会消耗大量内存单元
+
+##### Best Practice
 
 ```javascript
 var klass = function (Parent, props) {
