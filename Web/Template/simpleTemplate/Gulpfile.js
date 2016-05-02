@@ -11,6 +11,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var less = require('gulp-less');
 var sass = require('gulp-ruby-sass');
 var imagemin = require('gulp-imagemin');
+var babel = require('gulp-babel');
 
 var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
@@ -50,9 +51,9 @@ gulp.task('watchjs', function () {
             gulp.src([
                 'src/js/**/*.js',
             ]),
-            concat('main.js'),
-            gulp.dest(paths.distDir),
             sourcemaps.init(),
+            babel(),
+            concat('main.js'),
             rename({ suffix: '.min' }),
             uglify(),
             sourcemaps.write('./'),
@@ -69,9 +70,9 @@ gulp.task('js', function () {
         gulp.src([
             'src/js/**/*.js',
         ]),
-        concat('main.js'),
-        gulp.dest('dist/js/'),
         sourcemaps.init(),
+        babel(),
+        concat('main.js'),
         rename({ suffix: '.min' }),
         uglify(),
         sourcemaps.write('./'),
