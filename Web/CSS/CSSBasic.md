@@ -1539,6 +1539,10 @@ a.btn-custom {
 -   [Bricks Layout](https://github.com/callmecavs/bricks.js)
 -   [Brick Layer](https://github.com/ademilter/bricklayer)
 
+#### Split
+
+-   [SplitJS](https://github.com/nathancahill/Split.js)
+
 #### Scroll
 
 -   [视差滚动](https://github.com/Prinzhorn/skrollr)
