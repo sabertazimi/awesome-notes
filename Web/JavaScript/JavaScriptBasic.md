@@ -536,44 +536,95 @@ function doAction(action) {
 -   实例状态(原型克隆): 利用原型克隆拥有各自属性值
 -   封装性(闭包式继承): 利用闭包方法实现属性私有化
 
-共用方法,单独属性,封装细节
+即共用方法,单独属性,封装细节
 
+### 原型链(`__proto__`)
+
+![原型链](./images/prototype.png)
+
+-   实例化对象仅有属性`__proto__`, 没有属性prototype
+-   所有对象(包括函数/构造函数)有属性`__proto__`(隐式原型)
+-   除Object.create(), 对象的隐式原型指向构造该对象的 构造函数的原型(prototype)
+
+```js
+Object.__proto__ === Function.prototype;            // true
+Function.__proto__ === Function.prototype;          // true
+Function.__proto__.__proto__ === Object.prototype;  // true
+```
 
 ### 构造函数
 
 -   首字母大写
--   当返回值为基本类型时,仍然可得到原有对象
+-   所有函数(包括构造函数)有 prototype 属性
 
-#### new的实质
+#### 构造对象的三种形式
 
-不加new使用构造函数时
+##### 对象字面量
 
--   隐式this指针指向全局对象
--   返回值为undefined
+对象字面量由 Object构造函数 隐式构造
 
-```javascript
-var Person = function (name) {
-	//var this = Object.create(Person.prototype);
-	//即 this.prototype = Person.prototype;
-
-	this.name = name;
-	this.say = function () {
-		return "I am " + this.name;
-	}
-
-	//return this
+```js
+var obj = {
+	name: 'sabertazimi'
 };
+
+console.log(obj.__proto__ === Object.prototype);  // true
 ```
 
-##### 原生对象的new构造
+##### new 构造函数
 
-boolean string number 不用new表现不同
+new 构造函数作用原理如下:
 
-Tips: 构造boolean时，不要使用new
+-   形成原型链: 隐式原型指向构造函数的原型对象 `obj.__proto__ = constructor.prototype`
+-   构造函数对象(Constructor)与原型对象(Prototype)之间形成闭环:
+    -   Constructor.prototype = Prototype
+    -   Prototype.constructor = Constructor
+
+```js
+function newInstance(constructor){
+	//var this = Object.create(Person.prototype);
+	// this.__proto__ = F.prototype
+	// F.prototype = Person.prototype
+	// 即 this.__proto__ = Person.prototype;
+    var obj = {};
+    obj.__proto__ = constructor.prototype;
+    constructor.apply(obj,sliceArguments(arguments,1));
+    return obj;
+}
+=>
+new Constructor(arguments);
+```
+
+```js
+function Employee(name) {
+    this.name = name;
+    this.getName = function () {
+		return this.name};
+}
+
+var employee = newInstance(Empolyee,'Jack');
+=>
+var employee = new Employee('Jack');
+```
+
+##### Object.create
+
+```js
+  Object.create = function (o) {
+	if (arguments.length > 1) {
+	  throw new Error('Object.create implementation'
+	  + ' only accepts the first parameter.');
+	}
+	function F() {}
+	F.prototype = o;
+	return new F();
+  };
+```
 
 #### 返回值
 
-this/user-defined literal object
+-   返回 this 或 user-defined literal object
+-   当返回值为**基本类型**时,仍然可得到 this 指针指向的原有对象
 
 ```javascript
 var ObjectMaker = function () {
@@ -585,6 +636,10 @@ var ObjectMaker = function () {
 	return that;
 };
 ```
+
+#### instanceof
+
+若 在实例对象的原型链(`__proto__`)中 能找到 构造函数的prototype属性(Prototype对象), 则返回true, 否则返回false
 
 #### 最佳实践
 
@@ -763,7 +818,10 @@ var Person = function (name) {
 
 ### Class式继承
 
-#### 设置原型与借用构造函数
+#### **设置原型** 与 **借用构造函数**
+
+-   `child.prototype = new Parent();`
+-   `Parent.apply(this, arguments);`
 
 ##### Best Practice
 
@@ -852,7 +910,7 @@ var SuperMan = klass(Man, {
 
 ### Prototype式继承
 
-#### 共享 - 原型代理/享元模式(new与Object.create)
+#### 共享 - 原型代理/享元模式(new 与 Object.create)
 
 构造函数的原型对象被设置为新实例的原型引用
 
@@ -1032,6 +1090,13 @@ catch (e) {
 
 -   函数是对象
 -   函数提供局部作用域
+-   Object是Function的实例对象, **Function.prototype**是Object的实例对象
+
+```js
+Object.__proto__ === Function.prototype;            // true
+Function.__proto__ === Function.prototype;          // true
+Function.__proto__.__proto__ === Object.prototype;  // true
+```
 
 ### 调用模式
 
@@ -1059,6 +1124,12 @@ obj.foo();  // 1
 -   方法调用模式(.): this 绑定至此方法所属的对象
 -   构造器调用模式(new)
 -   apply/call 调用模式
+
+### prototype
+
+-   **实例化对象没有 prototype 属性**
+-   每个函数都有 prototype 属性
+-   prototype属性 指向 函数的原型对象
 
 ### arguments
 
