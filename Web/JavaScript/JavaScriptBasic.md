@@ -37,10 +37,14 @@
 		- [switch/case](#switchcase)
 	- [对象](#对象)
 		- [对象三大特征](#对象三大特征)
+		- [原型链(`__proto__`)](#原型链proto)
 		- [构造函数](#构造函数)
-			- [new的实质](#new的实质)
-				- [原生对象的new构造](#原生对象的new构造)
+			- [构造对象的三种形式](#构造对象的三种形式)
+				- [对象字面量](#对象字面量)
+				- [new 构造函数](#new-构造函数)
+				- [Object.create](#objectcreate)
 			- [返回值](#返回值)
+			- [instanceof](#instanceof)
 			- [最佳实践](#最佳实践)
 		- [全局对象](#全局对象)
 		- [私有属性与特权方法](#私有属性与特权方法)
@@ -55,13 +59,13 @@
 		- [普通属性](#普通属性)
 		- [普通方法](#普通方法)
 		- [Class式继承](#class式继承)
-			- [设置原型与借用构造函数](#设置原型与借用构造函数)
+			- [**设置原型** 与 **借用构造函数**](#设置原型-与-借用构造函数)
 				- [Best Practice](#best-practice)
 			- [代理构造函数](#代理构造函数)
 				- [Best Practice](#best-practice)
-			- [kclass语法糖](#kclass语法糖)
-		- [Prototype式继承](#prototype式继承)
-			- [共享 - 原型代理/享元模式(new与Object.create)](#共享-原型代理享元模式new与objectcreate)
+			- [kclass语法糖 - Best Practice](#kclass语法糖-best-practice)
+		- [原型链继承](#原型链继承)
+			- [共享 - 原型代理(prototype)](#共享-原型代理prototype)
 			- [独立 - 原型克隆](#独立-原型克隆)
 				- [浅克隆](#浅克隆)
 				- [深克隆](#深克隆)
@@ -71,6 +75,7 @@
 		- [错误对象](#错误对象)
 	- [函数](#函数)
 		- [调用模式](#调用模式)
+		- [prototype](#prototype)
 		- [arguments](#arguments)
 			- [arguments.callee](#argumentscallee)
 		- [函数式JavaScript](#函数式javascript)
@@ -840,7 +845,8 @@ Parent.prototype.say = function () {
 function Child(name) {
 	Parent.apply(this, arguments);
 }
-Child.prototype = new Parent();
+Child.prototype = new Parent();       // 设置原型链,建立继承关系
+Child.prototype.constructor = Child;  // 使得 Prototype 对象与 Constructor 对象形成闭环
 ```
 
 #### 代理构造函数
@@ -849,17 +855,29 @@ Child.prototype = new Parent();
 
 ```javascript
 var inherit = (function () {
+	// 减少继承过程中父类的实例化,减少资源消耗
+	// 实例化一个空类所需资源更少
 	var F = function () {};
 	return function (C, P) {
-		F.prototype = P.prototype;
-		C.prototype = new F();
-		C.uber = P.prototype;
+		// c.__proto__ = C.prototype = f
+		// f.__proto__ = F.prototype
+		// F.prototype = P.prototype
+		// c.__proto__.__proto__ = f.__proto__ = P.prototype
+		F.prototype = P.prototype; // f.__proto__ = F.prototype = P.prototype
+		C.prototype = new F();     // C.prototype = f
 		C.prototype.constructor = C;
+		C.super = P.prototype;     // 此句可提高代码的重用性
 	};
-}());
+})();
 ```
 
-#### kclass语法糖
+```js
+Child.prototype.add = function () {
+    return Child.super.add.call(this);
+}
+```
+
+#### kclass语法糖 - Best Practice
 
 ```javascript
 var klass = function (Parent, props) {
@@ -908,9 +926,9 @@ var SuperMan = klass(Man, {
 });
 ```
 
-### Prototype式继承
+### 原型链继承
 
-#### 共享 - 原型代理/享元模式(new 与 Object.create)
+#### 共享 - 原型代理(prototype)
 
 构造函数的原型对象被设置为新实例的原型引用
 
@@ -948,10 +966,6 @@ var switchProto = {
 
  var switchInstance = Object.create(switchProto);
 ```
-
-此时属性与方法均共享: 若子属性值被新对象替换，则不影响原型；否则子属性值被直接修改，会影响原型.
-
-需改变属性值时，**尽量替换，防止直接修改**.
 
 #### 独立 - 原型克隆
 
@@ -1103,7 +1117,7 @@ Function.__proto__.__proto__ === Object.prototype;  // true
 -   函数调用模式: this 绑定至全局对象
 
 ```js
-add(1, 2); // this -> global
+add(1, 2);  // this -> global
 
 var obj = {
 	value: 1,
@@ -1121,9 +1135,18 @@ var obj = {
 obj.foo();  // 1
 ```
 
--   方法调用模式(.): this 绑定至此方法所属的对象
--   构造器调用模式(new)
+-   方法调用模式(`.`/`[]`): this 绑定至此方法所属的对象
+-   构造器调用模式(new): this 绑定至传入的空对象
 -   apply/call 调用模式
+
+函数引用可以不可以改变函数定义作用域，但可以改变函数执行作用域(可达到apply/call的效果)
+
+```js
+this.construct = Foo;
+this.construct(options);
+    =>
+Foo.call(this, optiions);
+```
 
 ### prototype
 
