@@ -126,8 +126,6 @@
 		- [沙盒模式](#沙盒模式)
 			- [实现沙盒构造函数](#实现沙盒构造函数)
 			- [沙盒使用方式](#沙盒使用方式)
-	- [MVC](#mvc)
-		- [View](#view)
 	- [JavaScript DOM Basic](#javascript-dom-basic)
 		- [DOM - O](#dom-o)
 		- [DOM-Core](#dom-core)
@@ -170,24 +168,6 @@
 			- [中英文](#中英文)
 			- [数字](#数字)
 			- [空字符与空格字符](#空字符与空格字符)
-	- [Effective](#effective)
-		- [缓存模式](#缓存模式)
-		- [加载脚本](#加载脚本)
-			- [延迟加载](#延迟加载)
-			- [按需加载](#按需加载)
-	- [Code Style](#code-style)
-		- [命名规范](#命名规范)
-		- [全局变量](#全局变量)
-		- [初始化模式](#初始化模式)
-		- [单一var模式](#单一var模式)
-		- [条件表达式](#条件表达式)
-		- [空格](#空格)
-		- [Comments](#comments)
-	- [Security](#security)
-		- [Input check](#input-check)
-			- [特殊字符](#特殊字符)
-		- [XSS Attack](#xss-attack)
-	- [MV* Pattern](#mv-pattern)
 
 <!-- /TOC -->
 
@@ -211,7 +191,8 @@ SEO searchbot graceful degradation
 
 #### undefined
 
-对象属性为定义时，该属性值为undefined.
+-   对象属性未定义时，该属性值为undefined
+-   未初始化变量的初值为 undefined(表示 等待被赋值)
 
 ```js
 var undefined = void null;
@@ -445,6 +426,8 @@ arr.splice(index, 1);
 
 ### 类型检测
 
+#### Best Practice
+
 ```js
 function typeOf(o) {
 	var _toString = Object.prototype.toString,
@@ -457,14 +440,35 @@ function typeOf(o) {
 			'[object Array]': 'array',
 			'[object Date]': 'date',
 			'[object RegExp]': 'regexp',
-			'[object Error]': 'error'
+			'[object Error]': 'error',
+			'[object JSON]': 'json'
 		};
 
 		return _type[typeof o] || _type[_toString.call(o)] || (o ? 'object' : 'null');
 }
 ```
 
-### 类型转化
+#### Null 检测
+
+不应使用 typeof 检测 null, 应使用 ===/!==
+
+```js
+/*
+ * ECMAScript 标准的重大 bug
+ */
+typeof null // => object
+```
+
+#### 自定义对象检测
+
+value instanceof constructor(查找原型链)
+
+#### 属性检测
+
+-   由于属性值可能为 0值表达式, 不应使用 0值表达式(0/''/null/undefined) 检测属性值
+-   应使用 for in 进行属性检测
+
+### 强制类型转化(Type Coercion)
 
 -   字符串 -> 整数：`+string`/`Number(string)`/`parseInt(string, arg1)`
 -   any -> `bool`：`!!any`
@@ -476,9 +480,10 @@ function typeOf(o) {
 parseInt(str, base);
 ```
 
+-   boolean 在 数值运算环境 中 true => 1, false => 0
 -   数组在 数值运算环境 中 转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN数组)
--   对象在 逻辑运算环境 中 转化为 true ,包括false的封装对象
--   对象在 数值运算环境 中 转化为 数字 ,若转化失败,则返回NaN
+-   对象在 逻辑运算环境 中 转化为 true , 包括 false 的封装对象
+-   对象在 数值运算环境 中 先利用 valueOf(object), 再利用 toString() 转化为数字, 若转化失败, 则返回NaN
 -   对象与 数值加号运算: 先数值加, (**失败后**)再字符串加
 
 ------
@@ -1938,20 +1943,6 @@ Sandbox('dom', 'event', function (box) {
 ```
 ------
 
-## MVC
-
-### View
-
--   关注表现层逻辑
--   向相关模块(Model)派发事件
-
-load()回调函数:
-
--   不加入过多的逻辑处理
--   不进行多余的DOM操作
-
-------
-
 ## JavaScript DOM Basic
 
 ### DOM - O
@@ -2629,180 +2620,29 @@ if (!String.prototype.trim) {
 
 `/[(^\s+)(\s+$)]/g`
 
-------
+## 错误处理(Error/Exception)
 
-## Effective
+### 错误类型
 
-### 缓存模式
-
-缓存对象属性与DOM对象
-
-### 加载脚本
-
-#### 延迟加载
-
-```html
-... The full body of the page ...
-<!-- end of chunk #2 -->
-<script src="all_20100426.js"></script>
-<script>
-window.onload = function () {
-	var script = document.createElement("script");
-	script.src = "all_lazy_20100426.js";
-	document.documentElement.firstChild.appendChild(script);
-};
-</script>
-</body>
-</html>
-<!-- end of chunk #3 -->
-```
-
-#### 按需加载
-
-```javascript
-function require(file, callback) {
-	var script = document.getElementsByTagName('script')[0],
-		newjs = document.createElement('script');
-
-	// IE
-	newjs.onreadystatechange = function () {
-		if (newjs.readyState === 'loaded' || newjs.readyState === 'complete') {
-			newjs.onreadystatechange = null;
-			callback();
-		}
-	};
-	// others
-	newjs.onload = function () {
-		callback();
-	};
-	// 添加至html页面
-	newjs.src = file;
-	script.parentNode.insertBefore(newjs, script);
-}
-```
-
-------
-
-## Code Style
-
-### 命名规范
-
-驼峰命名法
-
-构造函数:首字母大写
-
-_method: 表示私有化方法
-
-### 全局变量
-
-应只有模块名为全局变量;jsmin不会缩减全局变量与全局函数名
-
-### 初始化模式
-
-```javascript
-var MYAPP = MYAPP || {};
-```
-
-### 单一var模式
-
-一个作用域内仅出现一个var关键字,且为所有变量赋初值:
-
--   简洁代码
--   提示变量类型
-
-```javascript
-var a = 1,        // int
-	b = 2,        // int
-	sum = a + b,  // int
-	obj = {},     // object
-	i = 1.0,      // float
-	j = false;    // boolean
-```
-
-### 条件表达式
-
-```javascript
-condition ? if-coding : else-coding;
-```
-
-### 空格
-
-Good places to use a white space include:
--   ,/; 后
--   +,-,*,/,<,>,= 前后
--   function () {}
--   function foo() {}
--   } if/for/while () {}
--   } else {}
-
-```javascript
-var d = 0,
-a = b + 1;
-
-if (a && b && c) {
-	d = a % c;
-	a += d;
-}
-
-// antipattern
-// missing or inconsistent spaces
-// make the code confusing
-var d= 0,
-a =b+1;
-
-if (a&& b&&c) {
-	d=a %c;
-	a+= d;
-}
-```
-
-### Comments
-
--   模块
-
-@module myapp
-@namespace MYAPP
-
--   对象
-
-@class mathStuff
-
--   函数/方法
-
-@constructor
-@method sum
-@param {Number}/{String} instructions
-@return {Number}/{String} instructions
-
--    属性
-
-@property propertyName
-@type Number/String
-
-## Security
-
-### Input check
-
-#### 特殊字符
-
--   null字符
--   空格字符
--   空输入(提示)
-
-### XSS Attack
-
-防御:
+-   Error
+-   EvalError
+-   RangeError
+-   ReferenceError
+-   SyntaxError
+-   TypeError
+-   URIError
+-   自定义错误
 
 ```js
-Array.prototype.filter.call(input.value, function (item) {
-	return item !== "<" && item !== ">";  // " " "\n" "\0" etc.
-});
+function MyError(message) {
+	Error.call(this,arguments);
+	this.message = message;
+}
+MyError.prototype = new Error();
+MyError.prototype.constructor = MyError;
 ```
 
-## MV* Pattern
+### 异常作用
 
-在MVC中，视图位于我们架构的顶部，其背后是控制器。模型在控制器后面，而因此我们的视图了解得到我们的控制器，而控制器了解得到模型。这里，我们的视图有对模型的直接访问。然而将整个模型完全暴露给视图可能会有安全和性能损失，这取决于我们应用程序的复杂性。MVVM则尝试去避免这些问题。
-
-在MVP中，控制器的角色被代理器所取代，代理器和视图处于同样的地位，视图和模型的事件都被它侦听着并且接受它的调解。不同于MVVM，没有一个将视图绑定到视图模型的机制，因此我们转而依赖于每一个视图都实现一个允许代理器同视图去交互的接口。
-
-MVVM进一步允许我们创建一个模型的特定视图子集，包含了状态和逻辑信息，避免了将模型完全暴露给视图的必要。不同于MVP的代理器，视图模型并不需要去引用一个视图。视图可以绑定到视图模型的属性上面，视图模型则去将包含在模型中的数据暴露给视图。像我们所提到过的，对视图的抽象意味着其背后的代码需要较少的逻辑。
+-    在可能失败的地方抛出异常，对失败处做标签，易于**调试与测试**
+-    修复 bug 后，可考虑是否在此处抛出异常
