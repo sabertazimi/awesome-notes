@@ -1,21 +1,24 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var watchPath = require('gulp-watch-path');
-var combiner = require('stream-combiner2');
-var sourcemaps = require('gulp-sourcemaps');
-var rename = require('gulp-rename');
-var minifycss = require('gulp-minify-css');
-var autoprefixer = require('gulp-autoprefixer');
-var less = require('gulp-less');
-var sass = require('gulp-ruby-sass');
-var imagemin = require('gulp-imagemin');
-var babel = require('gulp-babel');
+var gulp = require('gulp'),
+    gutil = require('gulp-util'),
+    concat = require('gulp-concat'),
+    combiner = require('stream-combiner2'),
+    sourcemaps = require('gulp-sourcemaps'),
+    rename = require('gulp-rename');
 
-var handlebars = require('gulp-handlebars');
-var wrap = require('gulp-wrap');
-var declare = require('gulp-declare');
+var uglify = require('gulp-uglify'),
+    babel = require('gulp-babel');
+
+var cleancss = require('gulp-clean-css'),
+    autoprefixer = require('gulp-autoprefixer'),
+    less = require('gulp-less'),
+    sass = require('gulp-ruby-sass');
+
+var imagemin = require('gulp-imagemin');
+
+var watchPath = require('gulp-watch-path'),
+    handlebars = require('gulp-handlebars'),
+    wrap = require('gulp-wrap'),
+    declare = require('gulp-declare');
 
 var handleError = function (err) {
     var colors = gutil.colors;
@@ -28,7 +31,13 @@ var handleError = function (err) {
 };
 
 gulp.task('bower', function () {
+    gulp.src('./bower_components/mdl/material.min.css')
+        .pipe(gulp.dest('./dist/css/'));
+    gulp.src('./bower_components/mdl/material.min.js')
+        .pipe(gulp.dest('./dist/js/'));
     gulp.src('./bower_components/jquery/dist/jquery.min.js')
+        .pipe(gulp.dest('./dist/js/'));
+    gulp.src('./bower_components/handlebars/handlebars.min.js')
         .pipe(gulp.dest('./dist/js/'));
 });
 
@@ -51,9 +60,10 @@ gulp.task('watchjs', function () {
             gulp.src([
                 'src/js/**/*.js',
             ]),
+            concat('main.js'),
+            gulp.dest(paths.distDir),
             sourcemaps.init(),
             babel(),
-            concat('main.js'),
             rename({ suffix: '.min' }),
             uglify(),
             sourcemaps.write('./'),
@@ -70,9 +80,10 @@ gulp.task('js', function () {
         gulp.src([
             'src/js/**/*.js',
         ]),
+        concat('main.js'),
+        gulp.dest('dist/js/'),
         sourcemaps.init(),
         babel(),
-        concat('main.js'),
         rename({ suffix: '.min' }),
         uglify(),
         sourcemaps.write('./'),
@@ -97,7 +108,7 @@ gulp.task('watchcss', function () {
               browsers: 'last 2 versions'
             }))
             .pipe(rename({ suffix: '.min' }))
-            .pipe(minifycss())
+            .pipe(cleancss())
             .pipe(sourcemaps.write('./'))
             .pipe(gulp.dest(paths.distDir));
     });
@@ -112,7 +123,7 @@ gulp.task('css', function () {
           browsers: 'last 2 versions'
         }))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(minifycss())
+        .pipe(cleancss())
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('dist/css/'));
 });

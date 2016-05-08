@@ -38,7 +38,7 @@
     "gulp-handlebars": "^4.0.0",
     "gulp-imagemin": "^2.2.1",
     "gulp-less": "^3.0.2",
-    "gulp-minify-css": "^1.0.0",
+    "gulp-clean-css": "^2.0.7",
     "gulp-rename": "^1.2.2",
     "gulp-ruby-sass": "^1.0.1",
     "gulp-sourcemaps": "^1.5.1",
