@@ -542,3 +542,45 @@ Array.prototype.filter.call(input.value, function (item) {
 	return item !== "<" && item !== ">";  // " " "\n" "\0" etc.
 });
 ```
+
+## ECMAScript 2015
+
+### Babel
+
+```bash
+$ babel example.js -o compiled.js
+$ babel src -d lib -s
+```
+
+#### babel-node
+
+A read-eval-print loop(REPL) can replace node REPL.
+
+#### babel-core
+
+提供 babel 转码 API
+
+```bash
+$ npm install babel-core --save
+```
+
+```js
+var babel = require('babel-core');
+
+// 字符串转码
+babel.transform('code();', options);
+// => { code, map, ast }
+
+// 文件转码（异步）
+babel.transformFile('filename.js', options, function(err, result) {
+      result; // => { code, map, ast }
+});
+
+// 文件转码（同步）
+babel.transformFileSync('filename.js', options);
+// => { code, map, ast }
+
+// Babel AST转码
+babel.transformFromAst(ast, code, options);
+// => { code, map, ast }
+```
