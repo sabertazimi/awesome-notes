@@ -584,3 +584,291 @@ babel.transformFileSync('filename.js', options);
 babel.transformFromAst(ast, code, options);
 // => { code, map, ast }
 ```
+
+## ECMAScript 2015
+
+### Variable
+
+-   一方面规定，var命令和function命令声明的全局变量，依旧是全局对象的属性
+-   另一方面规定，let命令、const命令、class命令声明的全局变量，不属于全局对象的属性
+
+#### let
+
+-   不存在变量提升
+-   块级作用域(Temporal Dead Zone)
+-   块级作用域内定义的变量/函数，在块级作用域外 ReferenceError
+
+#### const
+
+-   const一旦声明变量，就必须立即初始化，不能留到以后赋值
+-   块级作用域(Temporal Dead Zone)
+-   引用一个引用变量时，只表示此变量地址不可变，但所引用变量的值/属性可变(* const)
+
+### Destructuring(Pattern Matching)
+
+-   **建议只要有可能，就不要在模式中放置圆括号**
+-   赋值语句的非模式部分，可以使用圆括号
+
+#### 默认值
+
+-   ES6内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
+-   如果一个数组成员不严格等于undefined，默认值不会生效
+
+```js
+var [x = 1] = [undefined];
+x // 1
+
+var [x = 1] = [null];
+x // null
+```
+
+```js
+let [x = 1, y = x] = [];     // x=1; y=1
+let [x = 1, y = x] = [2];    // x=2; y=2
+let [x = 1, y = x] = [1, 2]; // x=1; y=2
+let [x = y, y = 1] = [];     // ReferenceError
+```
+
+#### Sample
+
+##### swap
+
+```js
+[x, y] = [y, x];
+```
+
+##### 简化函数的参数与返回值
+
+-   可用于工厂(factory)/设置(options)模式: 传参一般为 options 对象，具有固定的属性名
+-   一次性定义多个参数
+-   一次性定义多个参数的默认值
+
+```js
+// 参数是一组有次序的值
+function f([x, y, z]) { ... }
+f([1, 2, 3])
+
+// 参数是一组无次序的值
+function f({x, y, z}) { ... }
+f({z: 3, y: 2, x: 1})
+
+// 可省略 var foo = config.foo || 'default foo';
+jQuery.ajax = function (url, {
+  async = true,
+  beforeSend = function () {},
+  cache = true,
+  complete = function () {},
+  crossDomain = false,
+  global = true,
+  // ... more config
+}) {
+  // ... do stuff
+};
+```
+
+```js
+// 返回一个数组
+function example() {
+  return [1, 2, 3];
+}
+var [a, b, c] = example();
+
+// 返回一个对象
+function example() {
+  return {
+    foo: 1,
+    bar: 2
+  };
+}
+var { foo, bar } = example();
+```
+
+##### 解析 JSON 对象
+
+```js
+var jsonData = {
+  id: 42,
+  status: "OK",
+  data: [867, 5309]
+}
+
+let { id, status, data: number } = jsonData;
+
+console.log(id, status, number)
+// 42, "OK", [867, 5309]
+```
+
+##### 遍历 map/list
+
+```js
+var map = new Map();
+map.set('first', 'hello');
+map.set('second', 'world');
+
+for (let [key, value] of map) {
+  console.log(key + " is " + value);
+}
+// first is hello
+// second is world
+
+// 获取键名
+for (let [key] of map) {
+  // ...
+}
+
+// 获取键值
+for (let [,value] of map) {
+  // ...
+}
+```
+
+##### 加载特定模块
+
+```js
+const { SourceMapConsumer, SourceNode } = require("source-map");
+```
+
+#### Array Iterator Style Matching
+
+等号右边必须为数组等实现了 Iterator 接口的对象,否则报错
+
+-   Array
+-   Set
+-   Generator 函数
+
+```js
+let [foo, [[bar], baz]] = [1, [[2], 3]];
+foo // 1
+bar // 2
+baz // 3
+
+let [ , , third] = ["foo", "bar", "baz"];
+third // "baz"
+
+let [x, , y] = [1, 2, 3];
+x // 1
+y // 3
+
+let [head, ...tail] = [1, 2, 3, 4];
+head // 1
+tail // [2, 3, 4]
+
+let [x, y, ...z] = ['a'];
+x // "a"
+y // undefined
+z // []
+
+// Generator 函数
+function* fibs() {
+  var a = 0;
+  var b = 1;
+  while (true) {
+    yield a;
+    [a, b] = [b, a + b];
+  }
+}
+
+var [first, second, third, fourth, fifth, sixth] = fibs();
+sixth // 5
+```
+
+#### Object Style Matching
+
+-   真正被赋值的是后者，而不是前者
+
+```js
+let {pattern: variable} = { key: value };
+```
+
+-   解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象
+-   undefined/null 无法转化为对象
+
+```js
+let { prop: x } = undefined; // TypeError
+let { prop: y } = null; // TypeError
+```
+
+```js
+var { bar, foo } = { foo: "aaa", bar: "bbb" };
+foo // "aaa"
+bar // "bbb"
+
+var { foo: foo, bar: bar } = { foo: "aaa", bar: "bbb" };
+
+var { baz } = { foo: "aaa", bar: "bbb" };
+baz // undefined
+```
+
+```js
+var { foo: baz } = { foo: "aaa", bar: "bbb" };
+baz // "aaa"
+
+let obj = { first: 'hello', last: 'world' };
+let { first: f, last: l } = obj;
+f // 'hello'
+l // 'world'
+```
+
+```js
+let { log, sin, cos } = Math;
+```
+
+#### String Style Matching
+
+```js
+const [a, b, c, d, e] = 'hello';
+a // "h"
+b // "e"
+c // "l"
+d // "l"
+e // "o"
+
+let {length : len} = 'hello';
+len // 5
+```
+
+#### Number/Boolean Style Matching
+
+number/boolean 会转化成对象
+
+```js
+let {toString: s} = 123;
+s === Number.prototype.toString // true
+
+let {toString: s} = true;
+s === Boolean.prototype.toString // true
+```
+
+#### Function Arguments Style Matching
+
+```js
+function add([x, y]){
+  return x + y;
+}
+add([1, 2]) // 3
+
+[[1, 2], [3, 4]].map(([a, b]) => a + b)
+// [ 3, 7 ]
+
+function move({x = 0, y = 0} = {}) {
+  return [x, y];
+}
+move({x: 3, y: 8}); // [3, 8]
+move({x: 3}); // [3, 0]
+move({}); // [0, 0]
+move(); // [0, 0]
+
+// 严格为 undefined 时，触发默认值设置
+[1, undefined, 3].map((x = 'yes') => x)
+// [ 1, 'yes', 3 ]
+```
+
+### String
+
+```js
+'\z' === 'z'  // true
+'\172' === 'z' // true
+'\x7A' === 'z' // true
+'\u007A' === 'z' // true
+'\u{7A}' === 'z' // true
+```
