@@ -50,6 +50,30 @@
 		- [Input check](#input-check)
 			- [特殊字符](#特殊字符)
 		- [XSS Attack](#xss-attack)
+	- [ECMAScript 2015](#ecmascript-2015)
+		- [Babel](#babel)
+			- [babel-node](#babel-node)
+			- [babel-core](#babel-core)
+	- [ECMAScript 2015](#ecmascript-2015)
+		- [Variable](#variable)
+			- [let](#let)
+			- [const](#const)
+		- [Destructuring(Pattern Matching)](#destructuringpattern-matching)
+			- [默认值](#默认值)
+			- [Sample](#sample)
+				- [swap](#swap)
+				- [简化函数的参数与返回值](#简化函数的参数与返回值)
+				- [解析 JSON 对象](#解析-json-对象)
+				- [遍历 map/list](#遍历-maplist)
+				- [加载特定模块](#加载特定模块)
+			- [Array Iterator Style Matching](#array-iterator-style-matching)
+			- [Object Style Matching](#object-style-matching)
+			- [String Style Matching](#string-style-matching)
+			- [Number/Boolean Style Matching](#numberboolean-style-matching)
+			- [Function Arguments Style Matching](#function-arguments-style-matching)
+		- [String](#string)
+			- [Methods](#methods)
+			- [Template String](#template-string)
 
 <!-- /TOC -->
 
@@ -871,4 +895,186 @@ move(); // [0, 0]
 '\x7A' === 'z' // true
 '\u007A' === 'z' // true
 '\u{7A}' === 'z' // true
+```
+
+#### Methods
+
+-    string.codePointAt(index): 正确处理 4 字节存储字符
+-    string.fromCodePoint(codePoint)
+
+```js
+function is32Bit(c) {
+  return c.codePointAt(0) > 0xFFFF;
+}
+
+String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y'
+// true
+```
+
+-   string.includes(substr)/startsWith(substr)/endsWith(substr)
+-   使用第二个参数n时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束
+
+```js
+var s = 'Hello world!';
+
+s.startsWith('world', 6) // true
+s.endsWith('Hello', 5) // true
+s.includes('Hello', 6) // false
+```
+
+-   repeat(times)
+
+```js
+'hello'.repeat(2) // "hellohello"
+'na'.repeat(2.9) // "nana"
+
+'na'.repeat(-0.9) // ""
+'na'.repeat(-1) // RangeError
+
+'na'.repeat(NaN) // ""
+'na'.repeat(Infinity) // RangeError
+
+'na'.repeat('na') // ""
+'na'.repeat('3') // "nanana"
+```
+
+-    padStart/padEnd(len, paddingStr)
+
+```js
+'1'.padStart(10, '0') // "0000000001"
+'12'.padStart(10, '0') // "0000000012"
+'123456'.padStart(10, '0') // "0000123456"
+
+'12'.padStart(10, 'YYYY-MM-DD') // "YYYY-MM-12"
+'09-12'.padStart(10, 'YYYY-MM-DD') // "YYYY-09-12"
+```
+
+#### Template String
+
+` str ` 表示模板字符串
+
+```js
+// 普通字符串
+`In JavaScript '\n' is a line-feed.`
+`\`Yo\` World!`
+
+// 多行字符串
+`In JavaScript this is
+ not legal.`
+
+// 引用变量
+`${x} + ${y * 2} = ${x + y * 2}`
+`${obj.x + obj.y}`
+
+// 调用函数
+`foo ${fn()} bar`
+```
+
+-   编译模板(小型模板引擎)
+
+```js
+function compile(template){
+	  var evalExpr = /<%=(.+?)%>/g;
+	  var expr = /<%([\s\S]+?)%>/g;
+
+	  template = template
+	    .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
+	    .replace(expr, '`); \n $1 \n  echo(`');
+
+	  template = 'echo(`' + template + '`);';
+
+	  var script =
+	  `(function parse(data){
+	    var output = "";
+
+	    function echo(html){
+	      output += html;
+	    }
+
+	    ${ template }
+
+	    return output;
+	  })`;
+
+	  return script;
+}
+
+var template = `
+<ul>
+  <% for(var i=0; i < data.supplies.length; i++) {%>
+    <li><%= data.supplies[i] %></li>
+  <% } %>
+</ul>
+`;
+var parse = compile(template);
+div.innerHTML = parse({ supplies: [ "broom", "mop", "cleaner" ] });
+// => <ul>
+// =>   <li>broom</li>
+// =>   <li>mop</li>
+// =>   <li>cleaner</li>
+// => </ul>
+
+
+// 下面的hashTemplate函数
+// 是一个自定义的模板处理函数
+var libraryHtml = hashTemplate`
+  <ul>
+    #for book in ${myBooks}
+      <li><i>#{book.title}</i> by #{book.author}</li>
+    #end
+  </ul>
+`;
+```
+
+-   国际化处理
+
+```js
+i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`
+// "欢迎访问xxx，您是第xxxx位访问者！"
+```
+
+-   XSS 攻击
+
+```js
+var message =
+  SaferHTML`<p>${sender} has sent you a message.</p>`;
+
+function SaferHTML(templateData) {
+  var s = templateData[0];
+  for (var i = 1; i < arguments.length; i++) {
+    var arg = String(arguments[i]);
+
+    // Escape special characters in the substitution.
+    s += arg.replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+
+    // Don't escape special characters in the template.
+    s += templateData[i];
+  }
+  return s;
+}
+```
+
+-   运行代码
+
+```js
+jsx`
+  <div>
+    <input
+      ref='input'
+      onChange='${this.handleChange}'
+      defaultValue='${this.state.value}' />
+      ${this.state.value}
+   </div>
+`
+
+java`
+class HelloWorldApp {
+  public static void main(String[] args) {
+    System.out.println(“Hello World!”); // Display the string.
+  }
+}
+`
+HelloWorldApp.main();
 ```
