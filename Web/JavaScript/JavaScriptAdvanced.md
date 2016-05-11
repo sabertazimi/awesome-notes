@@ -1078,3 +1078,20 @@ class HelloWorldApp {
 `
 HelloWorldApp.main();
 ```
+
+### RegExp
+
+-   u 修饰符
+-   y(粘连全局符) 修饰符号隐含了头部匹配的标志
+
+```js
+function codePointLength(text) {
+      var result = text.match(/[\s\S]/gu);
+        return result ? result.length : 0;
+}
+
+var s = '𠮷𠮷';
+
+s.length // 4
+codePointLength(s) // 2
+```
