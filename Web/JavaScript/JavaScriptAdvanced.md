@@ -266,6 +266,12 @@ var DOM = tazimi.util.Dom;
 DOM.method.call( /* 关注 this 指针*/ );
 ```
 
+### 字符串
+
+```js
+str = str + 'one' + 'two';
+```
+
 ### 函数
 
 #### 作用域链
@@ -275,7 +281,7 @@ DOM.method.call( /* 关注 this 指针*/ );
 
 ### 循环
 
-**倒序**循环可提升性能
+#### **倒序**循环可提升性能
 
 ```js
 for (var i = item.length; i--;) {
@@ -291,6 +297,29 @@ var k = items.length;
 do {
     process(items[k]);
 } while (k--);
+```
+
+#### Duff's Device(达夫设备)
+
+```js
+var i = items.length % 8;
+
+while (i) {
+	process(items[i--]);
+}
+
+i = Math.floor(items.length / 8);
+
+while (i) {
+	process(items[i--]);
+	process(items[i--]);
+	process(items[i--]);
+	process(items[i--]);
+	process(items[i--]);
+	process(items[i--]);
+	process(items[i--]);
+	process(items[i--]);
+}
 ```
 
 ### Exception
@@ -482,6 +511,266 @@ old.parentNode.replaceChild(clone, old);
 ```js
 element.classList.add('className');
 element.className += ' className';
+```
+
+### 定时器(防止脚本阻塞)
+
+JavaScript　代码与 UI 共享线程
+
+setTimeout()/setInterval()
+
+-   第二个参数: 不是执行时间, 是加入执行队列时间
+-   若其他位于执行队列中的函数执行时间超过延时，则用户感觉不到延时的存在
+-   模拟有间隙的循环，使得 UI 更新得以进入浏览器线程的执行队列中
+
+```js
+var button = document.getElementById('myButton');
+
+button.onclick = function() {
+
+	oneMethod();
+
+	setTimeout(function() {
+		document.getElementById('notice').style.color = 'red';
+	}, 250);
+}
+```
+
+-   分解任务
+
+```js
+function saveDocument(id) {
+
+	// 利用闭包封装待执行任务
+	var tasks = [openDocument, writeText, closeDocument, updateUI];
+
+	setTimeout(function() {
+
+		// 执行下一个任务
+		var task = tasks.shift();
+		task(id);
+
+		// 检查是否还有其他任务
+		if (tasks.length > 0) {
+			// 递归调用(每次参数不同)
+			setTimeout(arguments.callee, 25);
+		}
+	}, 25);
+}
+```
+
+```js
+function processArray(items, process, callback) {
+	// 克隆原数组
+	var todo = items.concat();
+
+	setTimeout(function() {
+
+		process(todo.shift());
+
+		if (todo.length > 0) {
+			setTimeout(arguments.callee, 25);
+		} else {
+			callback(items);
+		}
+	}, 25);
+}
+```
+
+-   批处理任务
+
+```js
+function timedProcessArray(items, process, callback) {
+	// 克隆原始数组
+	var todo = items.concat();
+
+	setTimeout(function() {
+		var start = +new Date();
+
+		// 一次批处理任务持续 0.05s
+		do {
+			process(todo.shift());
+		} while (todo.length < 0 && (+new Date() - start < 50));
+
+		if (todo.length > 0) {
+			setTimeout(arguments.callee, 25);
+		} else {
+			callback(items);
+		}
+	}, 25);
+}
+```
+
+### 计时器
+
+```js
+/*
+ * usage: start -> stop -> getTime
+ */
+var Timer = {
+	_data: {},
+
+	start: function(key) {
+		Timer._data[key] = new Date();
+	},
+	stop: function(key) {
+		var time = Timer._data[key];
+
+		if (time) {
+			Timer._data[key] = new Date() - time;
+		}
+	},
+	getTime: function(key) {
+		return Timer._data[key];
+	};
+}
+```
+
+### Web Worker
+
+#### 运行环境
+
+-   navigation 对象: appName, appVersion, userAgent, platform
+-   location 对象: 所有属性只读
+-   ECMAScript 对象: Object/Array/Date
+-   XMLHttpRequest 方法
+-   setTimeout/setInterval 方法
+-   self 对象: 指向全局 worker 对象
+-   importScripts 方法: 加载外部依赖
+-   close 方法: 停止 worker
+
+#### worker 实例
+
+-   先 on ,后 post
+-   main.js/worker.js 的 onmessage 与 postMessage 相互触发
+
+```js
+/*
+ * jsonparser.js
+ */
+self.onmessage = function(event) {
+	var jsonText = event.data,
+		jsonData = JSON.parse(jsonText);
+
+	self.postMessage(jsonData);
+}
+```
+
+```js
+/*
+ * main.js
+ */
+var worker = new Worker('jsonparse.js';
+
+worker.onmessage = function(event) {
+	var jsonData = event.data;
+	evaluateData(jsonData);
+};
+
+worker.postMessage(jsonText);
+```
+
+### Ajax
+
+#### 数据格式
+
+|Format|Size|Download time|Parse time|Total load time|
+|:-----:|:-----:|:----------:|:----------:|:----------:|
+|Verbose XML|582,960 bytes|999.4 ms|343.1 ms|1342.5 ms|
+Verbose JSON-P|487,913 bytes|598.2 ms|0.0 ms|598.2 ms|
+Simple XML|437,960 bytes|475.1 ms|83.1 ms|558.2 ms|
+Verbose JSON|487,895 bytes|527.7 ms|26.7 ms|554.4 ms|
+Simple JSON|392,895 bytes|498.7 ms|29.0 ms|527.7 ms|
+Simple JSON-P|392,913 bytes|454.0 ms|3.1 ms|457.1 ms|
+Array JSON|292,895 bytes|305.4 ms|18.6 ms|324.0 ms|
+Array JSON-P|292,912 bytes|316.0 ms|3.4 ms|319.4 ms|
+Custom Format (script insertion)|222,912 bytes|66.3 ms|11.7 ms|78.0 ms|
+Custom Format (XHR)|222,892 bytes|63.1 ms|14.5 ms|77.6 ms|
+
+#### Ajax 缓存
+
+```js
+var localCache = {};
+
+function xhrRequest(url, callback) {
+	// Check the local cache for this URL.
+	if (localCache[url]) {
+		callback.success(localCache[url]);
+		return;
+	}
+
+	// If this URL wasn't found in the cache, make the request.
+	var req = createXhrObject();
+
+	req.onerror = function() {
+		callback.error();
+	};
+
+	req.onreadystatechange = function() {
+		if (req.readyState == 4) {
+			if (req.responseText === '' || req.status == '404') {
+				callback.error();
+				return;
+			}
+
+			// Store the response on the local cache.
+			localCache[url] = req.responseText;
+			callback.success(req.responseText);
+		};
+	}
+}
+
+req.open("GET", url, true);
+// req.set();
+req.send(null);
+```
+
+### 避免重复工作
+
+-   特性/浏览器检测代码只运行一次
+-   惰性定义模式/自定义模式
+
+### 算数逻辑运算
+
+#### 位操作
+
+-   i%2 => `i&0x1`
+-   位掩码
+
+```js
+var OPTION_A = 1,
+	OPTION_B = 2,
+	OPTION_C = 4,
+	OPTION_D = 8,
+	OPTION_E = 16;
+
+var options = OPTION_A|OPTION_C|OPTION_D;
+```
+
+#### Math 对象
+
+```js
+Math.E
+Math.LN10
+Math.LN2
+Math.LOG2E
+Math.LOG10E
+Math.PI
+Math.SQRT1_2
+Math.SQRT2
+
+Math.abs(num)
+Math.exp(num)
+Math.log(num)
+Math.pow(num,power)
+Math.sqrt(num)
+Math.acos(x)
+Math.asin(x)
+Math.atan(x)
+Math.atan2(y,x)
+Math.cos(x)
+Math.sin(x)
+Math.tan(x)
 ```
 
 ## Code Style Guide
