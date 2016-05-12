@@ -14,7 +14,7 @@
 			- [Gulpfile.js](#gulpfilejs)
 		- [MV* Pattern](#mv-pattern)
 		- [View](#view)
-	- [Effective](#effective)
+	- [Effective JavaScript](#effective-javascript)
 		- [禁用特性](#禁用特性)
 		- [循环](#循环)
 		- [Exception](#exception)
@@ -23,7 +23,7 @@
 		- [缓存模式](#缓存模式)
 		- [加载脚本](#加载脚本)
 			- [延迟加载](#延迟加载)
-			- [按需加载](#按需加载)
+			- [动态加载](#动态加载)
 	- [Code Style Guide](#code-style-guide)
 		- [Style](#style)
 			- [命名规范](#命名规范)
@@ -54,7 +54,6 @@
 		- [Babel](#babel)
 			- [babel-node](#babel-node)
 			- [babel-core](#babel-core)
-	- [ECMAScript 2015](#ecmascript-2015)
 		- [Variable](#variable)
 			- [let](#let)
 			- [const](#const)
@@ -74,6 +73,7 @@
 		- [String](#string)
 			- [Methods](#methods)
 			- [Template String](#template-string)
+		- [RegExp](#regexp)
 
 <!-- /TOC -->
 
@@ -235,7 +235,7 @@ load()回调函数:
 -   不加入过多的逻辑处理
 -   不进行多余的DOM操作
 
-## Effective
+## Effective JavaScript
 
 ### 禁用特性
 
@@ -279,7 +279,6 @@ try {
 }
 ```
 
-
 ### Event-Delegate
 
 -   事件委托利用的是事件冒泡机制，只制定一事件处理程序，就可以管理某一类型的所有事件
@@ -314,19 +313,18 @@ window.onload = function(){
 }
 ```
 
-
 ### 缓存模式
 
-缓存对象属性与DOM对象
+缓存对象属性与 DOM 对象
 
 ### 加载脚本
+
+合并脚本后再进行高级加载技术
 
 #### 延迟加载
 
 ```html
 ... The full body of the page ...
-<!-- end of chunk #2 -->
-<script src="all_20100426.js"></script>
 <script>
 window.onload = function () {
 	var script = document.createElement("script");
@@ -336,13 +334,12 @@ window.onload = function () {
 </script>
 </body>
 </html>
-<!-- end of chunk #3 -->
 ```
 
-#### 按需加载
+#### 动态加载
 
 ```javascript
-function require(file, callback) {
+function requireScript(file, callback) {
 	var script = document.getElementsByTagName('script')[0],
 		newjs = document.createElement('script');
 
@@ -357,10 +354,15 @@ function require(file, callback) {
 	newjs.onload = function () {
 		callback();
 	};
+
 	// 添加至html页面
 	newjs.src = file;
 	script.parentNode.insertBefore(newjs, script);
 }
+
+requireScript('the_rest.js', function() {
+	Application.init();
+});
 ```
 
 ## Code Style Guide
@@ -608,8 +610,6 @@ babel.transformFileSync('filename.js', options);
 babel.transformFromAst(ast, code, options);
 // => { code, map, ast }
 ```
-
-## ECMAScript 2015
 
 ### Variable
 
