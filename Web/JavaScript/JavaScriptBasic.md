@@ -75,7 +75,7 @@
 		- [包装类对象](#包装类对象)
 		- [错误对象](#错误对象)
 	- [函数](#函数)
-		- [调用模式](#调用模式)
+		- [函数调用模式](#函数调用模式)
 		- [prototype](#prototype)
 		- [arguments](#arguments)
 			- [arguments.callee](#argumentscallee)
@@ -1124,9 +1124,9 @@ Function.__proto__ === Function.prototype;          // true
 Function.__proto__.__proto__ === Object.prototype;  // true
 ```
 
-### 调用模式
+### 函数调用模式
 
--   函数调用模式: this 绑定至全局对象
+-   普通调用模式: this 绑定至全局对象
 
 ```js
 add(1, 2);  // this -> global
@@ -1187,7 +1187,23 @@ try {
 }
 ```
 
-### 函数式JavaScript
+### 作用域链
+
+-   函数每次运行时，都会新建执行环境内部对象，执行完后销毁此对象
+-   每个执行环境拥有独立的作用域链,例如 独立全局对象、独立**活动对象**,
+-   可动态改变作用域链的语句: with/try catch(异常对象入列，位于作用域链链首)
+
+```js
+scope -> (list) [0]活动对象 -> [1]全局对象
+```
+
+#### 全局对象
+
+含有 全局对象如 window/document，全局方法，全局 this 指针等
+
+#### 活动对象(Activation Object)
+
+### 函数式 JavaScript
 
 -   函数是一等公民
 -   函数可作为入参，可作为返回值(即可作为一般数据)
@@ -1227,7 +1243,7 @@ var prefixerWithHate = prefixer('Hate');
 console.log(prefixerWithHate('Java'));
 ```
 
-通用化curry化
+通用化 **curry** 化
 
 ```javascript
 function schonfinkelize(fn) {
@@ -1251,21 +1267,19 @@ var addFive = schonfinkelize(addOne, 1, 3);
 
 ##### `[]`.map
 
-相当于Haskell中的List Map
+相当于 Haskell 中的 List Map
 
 ##### `[]`.filter
 
-相当于Haskell中的List Filter
+相当于 Haskell 中的 List Filter
 
 ##### `[]`.reduce
 
-相当于Haskell中的fold
+相当于 Haskell 中的 fold
 
 ##### `[]`.sort
 
 ### 函数表达式
-
-函数表达式的foo只可在函数体内访问，其它地方需使用fooFunc
 
 ```javascript
 //函数声明
@@ -1282,9 +1296,6 @@ var obj = {
 
 	}
 };
-foo(function me() {
-
-});
 
 //变量提升
 var foo;
@@ -1295,12 +1306,12 @@ foo = function foo() {
 console.log(foo.name);
 ```
 
-### 入参函数
+### 函数入参
 
-注意是否需要拷贝传入对象,使原有对象不受函数影响,并返回新对象
+**无副作用**的函数: 注意是否需要拷贝传入对象,使原有对象不受函数影响,并返回新对象
 
 ```javascript
-//坏习惯: 除非必要,否则不改变原有对象
+// 除非必要,否则不改变原有对象
 var obj = {
 	value: 2
 };
@@ -1312,7 +1323,7 @@ function setValue(obj, val) {
 ```
 
 ```javascript
-//好习惯: 改变新对象,返回新对象
+// 好习惯: 改变新对象,返回新对象
 var obj = {
 	value: 2
 };
@@ -1363,7 +1374,7 @@ var findNodes = function (callback) {
 };
 ```
 
-当回调函数为对象方法时(特别时方法中使用this指针),需同时传入对象参数
+当回调函数为对象方法时(特别时方法中使用 this 指针),需同时传入对象参数,并利用 apply/call 改变执行环境
 
 ```javascript
 var findNodes = function (callbackObj, callback) {
@@ -1421,8 +1432,6 @@ var addEvent = function(el, type, handle) {
 	addEvent(el, type, handle);
 }
 ```
-
-但如果通过函数表达式重新将foo赋给其他变量,每次执行时foo指针都指向含初始化代码的函数.
 
 ### 即时函数
 
