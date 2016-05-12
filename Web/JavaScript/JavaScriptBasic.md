@@ -1950,15 +1950,42 @@ Sandbox('dom', 'event', function (box) {
 	// no trace of Ajax module here
 });
 ```
+
 ------
 
 ## JavaScript DOM Basic
 
+-   DOM Level 0
+-   DOM Level 1
+    -   DOM Core
+	-   DOM HTML
+-   DOM Level 2
+    -   DOM2 Core
+	-   DOM2 HTML
+	-   DOM2 Events
+	-   DOM2 Style
+	-   DOM2 Traversal
+	-   DOM2 Range
+	-   DOM2 Views
+-   DOM Level 3
+    -   DOM3 Core
+	-   DOM3 Load and Save
+	-   DOM3 Validation
+
+```js
+if (document.implementation) {
+	document.implementation.hasFeature('HTML', '1.0');
+	// => DOM HTML
+}
+```
+
 ### DOM - O
+
 -   native object: JavaScript Native e.g. Array
 -   host object: provided by Browser e.g. HTML5 API
 -   user-defined object
 
+```html
 <table >
 <tr>
 	<td align=center colspan=2>element node</td>
@@ -1968,8 +1995,9 @@ Sandbox('dom', 'event', function (box) {
 	<td>attribute node</td>
 </tr>
 </table>
+```
 
-### DOM-Core
+### DOM Core
 
 ```js
 	document.createElement("nodeName");
@@ -2133,52 +2161,10 @@ elemetn.onclick = function() {};
 
 ### DOM Style
 
-```
+```js
 element.style.*;
 element.style.fontFamily;
 element.style.marginTopWidth;
-```
-
-### document
-
-```javascript
-document.write();
-document.URI;
-document.title;
-```
-
-### window
-
-```javascript
-window.location(string);
-window.innerWidth(number);
-window.closed(boolean);
-```
-
-**Tip**: 实现jQuery中`$(document).ready(function(){});
-
-```js
-//initialize
-window.onload = readyFunction;
-
-function readyFunction() {
-	function() {}
-}
-```
-
-```js
-//add more ready function
-function addLoadEvent(func) {
-  var oldonload = window.onload;
-  if (typeof window.onload != 'function') {
-	window.onload = func;
-  } else {
-	window.onload = function() {
-	  oldonload();
-	  func();
-	}
-  }
-}
 ```
 
 ### DOM Events
@@ -2252,6 +2238,47 @@ function myHandler(e) {
 }
 ```
 
+### document
+
+```javascript
+document.write();
+document.URI;
+document.title;
+```
+
+### window
+
+```javascript
+window.location(string);
+window.innerWidth(number);
+window.closed(boolean);
+```
+
+**Tip**: 实现jQuery中`$(document).ready(function(){});
+
+```js
+//initialize
+window.onload = readyFunction;
+
+function readyFunction() {
+	function() {}
+}
+```
+
+```js
+//add more ready function
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+	window.onload = func;
+  } else {
+	window.onload = function() {
+	  oldonload();
+	  func();
+	}
+  }
+}
+```
 ------
 
 ## 模板引擎：handlebars.js

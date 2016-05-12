@@ -16,17 +16,21 @@
 		- [View](#view)
 	- [Effective JavaScript](#effective-javascript)
 		- [禁用特性](#禁用特性)
+		- [局部变量/函数参数](#局部变量函数参数)
 		- [函数](#函数)
-			- [局部变量/函数参数](#局部变量函数参数)
 			- [作用域链](#作用域链)
 		- [循环](#循环)
 		- [Exception](#exception)
 			- [Call Stack Overflow](#call-stack-overflow)
-		- [Event-Delegate](#event-delegate)
+		- [Event Delegate(事件委托)](#event-delegate事件委托)
 		- [缓存模式](#缓存模式)
 		- [加载脚本](#加载脚本)
 			- [延迟加载](#延迟加载)
 			- [动态加载](#动态加载)
+		- [DOM](#dom)
+			- [重排与重绘](#重排与重绘)
+			- [批量修改 DOM](#批量修改-dom)
+		- [CSS](#css)
 	- [Code Style Guide](#code-style-guide)
 		- [Style](#style)
 			- [命名规范](#命名规范)
@@ -248,11 +252,21 @@ load()回调函数:
 -   少用 cotinue
 -   少用 forEach()
 
+### 局部变量/函数参数
+
+-   局部变量引用全局变量/全局变量作为参数传入函数: 加快符号解析
+-   局部变量缓存 DOM 元素
+-   局部变量缓存布局信息
+-   局部变量引用嵌套成员: 加快原型链查找
+-   局部变量引用方法时，应注意会动态改变 this 指针
+
+```js
+var DOM = tazimi.util.Dom;
+
+DOM.method.call( /* 关注 this 指针*/ );
+```
+
 ### 函数
-
-#### 局部变量/函数参数
-
--   局部变量引用全局变量/全局变量作为参数传入函数
 
 #### 作用域链
 
@@ -293,10 +307,10 @@ try {
 }
 ```
 
-### Event-Delegate
+### Event Delegate(事件委托)
 
 -   事件委托利用的是事件冒泡机制，只制定一事件处理程序，就可以管理某一类型的所有事件
--   使用事件委托，只需在DOM书中尽量最高的层次上添加一个事件处理程序
+-   使用事件委托，只需在 DOM 树中尽量最高的层次上添加一个事件处理程序
 
 ```js
 window.onload = function(){
@@ -312,6 +326,15 @@ window.onload = function(){
         if (target.nodeName.toLowerCase() == "li") {
             target.style.background = "red";
         }
+
+		// 阻止默认行为并取消冒泡
+		if (typeof e.preventDefault === 'function') {
+			e.preventDefault();
+			e.stopPropagation();
+		} else {
+			e.returnValue = false;
+			e.cancelBubble = true;
+		}
     }
 
     oUl.onmouseout = function(e) {
@@ -323,6 +346,15 @@ window.onload = function(){
         if (target.nodeName.toLowerCase() == "li") {
             target.style.background = "";
         }
+
+		// 阻止默认行为并取消冒泡
+		if (typeof e.preventDefault === 'function') {
+			e.preventDefault();
+			e.stopPropagation();
+		} else {
+			e.returnValue = false;
+			e.cancelBubble = true;
+		}
     }
 }
 ```
@@ -377,6 +409,79 @@ function requireScript(file, callback) {
 requireScript('the_rest.js', function() {
 	Application.init();
 });
+```
+
+### DOM
+
+-   局部变量缓存 DOM 元素
+-   局部变量缓存布局信息
+
+```js
+var btn = document.getElementById('btn');
+```
+
+-   HTML Collection 转化成数组再操作
+
+```js
+function toArray(coll) {
+	for (var i = 0, a = [], len = coll.length; i < len; i++) {
+		a[i] = coll[i];
+	}
+
+	return a;
+}
+```
+
+-   children 优于 childNodes
+-   childElementCount 优于 childNodes.length
+-   firstElementChild 优于 firstChild
+-   lastElementChild 优于 lastChild
+-   nextElementSibling 优于 nextSibling 优于 `childNodes[next]`
+-   previousElementSibling 优于 previousSibling
+
+#### 重排与重绘
+
+-   重排: 重新构造渲染树
+-   重绘: 重新绘制受影响部分
+
+**获取**或改变布局的操作会导致渲染树**变化队列**刷新,执行渲染队列中的"待处理变化",重排 DOM 元素
+
+```js
+offsetTop/Left/Width/Height
+scrollTop/Left/Width/Height
+clientTop/Left/Width/Height
+getComputedStyle()
+```
+
+#### 批量修改 DOM
+
+-   先 display="none", 修改完成后，display=""
+-   使待修改 DOM 元素脱离标准文档流(改变布局／定位方式)，可减少其他元素的重绘次数
+-   document.createDocumentFragment()
+
+```js
+var fragment = document.createDocumentFragment();
+appendDataToElement(fragment, data);
+document.getElementById('mylist').appendChild(fragment);
+```
+
+-   oldNode.cloneNode(true);
+
+```js
+var old = document.getElementById('mylist'),
+	clone = old.cloneNode(true);
+
+appendDataToElement(clone, data);
+old.parentNode.replaceChild(clone, old);
+```
+
+### CSS
+
+在 js 中(除定位属性) 外，不直接操作 element.style.attr/element.cssText:
+
+```js
+element.classList.add('className');
+element.className += ' className';
 ```
 
 ## Code Style Guide
