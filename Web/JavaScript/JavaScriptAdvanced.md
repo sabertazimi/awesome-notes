@@ -977,6 +977,21 @@ Array.prototype.filter.call(input.value, function (item) {
 });
 ```
 
+## Testing
+
+### Frameworks
+
+#### 单元测试
+
+-   Jasmine
+-   Mocha
+
+#### UI 测试
+
+-   用户行为: Karma/Selenium
+-   功能测试: Phantomjs/Slimerjs
+
+
 ## ECMAScript 2015
 
 ### Babel
