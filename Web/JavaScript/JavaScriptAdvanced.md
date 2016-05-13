@@ -981,7 +981,7 @@ Array.prototype.filter.call(input.value, function (item) {
 
 ### Frameworks
 
-#### 单元测试
+#### Unit 测试
 
 -   Jasmine
 -   Mocha
@@ -989,16 +989,139 @@ Array.prototype.filter.call(input.value, function (item) {
 #### UI 测试
 
 -   用户行为: Karma/Selenium
--   功能测试: Phantomjs/Slimerjs
+-   功能测试: Phantomjs/Slimerjs/Karma
 
+### 可测试代码
+
+-   完整注释
+-   最小复杂度 = (扇入 * 扇出) ^ 2
+-   可隔离性: 最小依赖性 + 松耦合性
+
+#### 范例
+
+-   使用依赖注入，将外部对象移至函数参数处(不在函数内部调用构造器): 易于构造 mock/stub, 降低扇出(函数复杂度)
+
+### 圈复杂度
+
+V(G) = e - n + 2 **<10**
+
+### 函数复杂度
+
+函数复杂度 = (扇入 * 扇出) ^ 2
+
+#### 扇出(引用) **<7**
+
+-   所引用外部对象/方法之和
+-   高扇出: 高复杂度/高依赖性/高耦合度
+
+#### 扇入(被引用)
+
+-   其他对象/方法引用此函数的次数之和
+-   顶层抽象代码 与 不常用功能 应保持低扇入
+
+### 耦合度
+
+#### 内容耦合(5)
+
+```js
+O.property = 'tazimi';
+O.method = function() {};
+O.prototype.method = function() {};
+```
+
+#### 公共耦合(4)
+
+共享全局变量
+
+```js
+var Global = 'global';
+
+function A() {
+	Global = 'A';
+};
+function B() {
+	Global = 'B';
+}
+```
+
+#### 控制耦合(3)
+
+```js
+var absFactory = new AbstractFactory({ env: 'TEST' });
+```
+
+#### 印记耦合(2)
+
+```js
+O.prototype.makeBread = function(args) {
+	return new Bread(args.type, args.size);
+}
+
+O.makeBread({ type: wheat, size: 99, name: 'foo' });
+```
+
+#### 数据耦合(1)
+
+#### 无耦合(0)
+
+### 单元测试
+
+#### 测试原则
+
+-   代码覆盖率
+-   非法值测试
+-   边界测试
+-   非边界测试
+
+#### 隔离被测代码
+
+-   编写代码时，保持最小复杂度(最小依赖，最低耦合)
+-   利用 mock/stub 模拟外部依赖/测试数据
+
+#### mock/stub/spy
+
+-   mock: 模拟对象中的方法/接口
+-   stub: 模拟对象中的返回值
+-   spy: 在原有对象的基础上，增加监视用变量/方法 e.g assert/调用次数/参数限制
+
+```js
+var mockery = require('mockery');
+mockery.enable();
+describe("Sum suite File", function() {
+beforeEach(function() {
+mockery.registerAllowable('./mySumFS', true);
+});
+afterEach(function() {
+mockery.deregisterAllowable('./mySumFS');
+});
+it("Adds Integers!", function() {
+var filename = "numbers"
+, fsMock = {
+readFileSync: function (path, encoding) {
+expect(path).toEqual(filename);
+expect(encoding).toEqual('utf8');
+return JSON.stringify({ a: 9, b: 3 });
+}
+}
+;
+mockery.registerMock('fs', fsMock);
+var mySum = require('./mySumFS');
+expect(mySum.sum(filename)).toEqual(12);
+mockery.deregisterMock('fs');
+});
+```
+
+### console
+
+console.log/time/timeEnd/profile/profileEnd/trace/dir/dirxml/assert
 
 ## ECMAScript 2015
 
 ### Babel
 
 ```bash
-$ babel example.js -o compiled.js
-$ babel src -d lib -s
+babel example.js -o compiled.js
+babel src -d lib -s
 ```
 
 #### babel-node
