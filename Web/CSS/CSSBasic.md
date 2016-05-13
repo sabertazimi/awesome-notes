@@ -1409,6 +1409,11 @@ a.btn-custom {
 
 -   http://microjs.com/
 
+### Utils
+
+-   [CSS Reset](https://github.com/necolas/normalize.css)
+-   [Feature/Browser Detection](https://github.com/Modernizr/Modernizr)
+
 ### Society
 
 -   [一键分享](https://github.com/overtrue/share.js)
