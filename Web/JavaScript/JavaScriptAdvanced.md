@@ -1518,3 +1518,11 @@ var s = '𠮷𠮷';
 s.length // 4
 codePointLength(s) // 2
 ```
+
+### Number
+
+-   0bxxx/0Bxxx
+-   0oxxx/0Oxxx
+-   Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()
+-   Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`
+-   ** 指数运算符
