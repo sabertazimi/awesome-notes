@@ -1559,6 +1559,7 @@ a.btn-custom {
 
 #### Slide
 
+-   [Lighter Gallery](https://github.com/sachinchoolur/lightGallery)
 -   [One Page Style Vertical-Silde](https://github.com/MopTym/doSlide)
 -   [Photo Swipe](https://github.com/dimsemenov/PhotoSwipe)
 -   [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
