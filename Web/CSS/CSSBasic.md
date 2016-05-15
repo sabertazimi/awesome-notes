@@ -1450,6 +1450,7 @@ a.btn-custom {
 ### Video
 
 -   [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
+-   [plyr](https://github.com/selz/plyr)
 
 ### Images
 
