@@ -1498,6 +1498,7 @@ a.btn-custom {
 -   [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
 -   https://github.com/FezVrasta/popper.js
 -   https://github.com/wavded/humane-js
+-   [Desktop Notification](https://github.com/Nickersoft/push.js)
 
 ### Card
 

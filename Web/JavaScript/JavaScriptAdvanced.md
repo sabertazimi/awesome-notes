@@ -17,9 +17,12 @@
 	- [Effective JavaScript](#effective-javascript)
 		- [禁用特性](#禁用特性)
 		- [局部变量/函数参数](#局部变量函数参数)
+		- [字符串](#字符串)
 		- [函数](#函数)
 			- [作用域链](#作用域链)
 		- [循环](#循环)
+			- [**倒序**循环可提升性能](#倒序循环可提升性能)
+			- [Duff's Device(达夫设备)](#duffs-device达夫设备)
 		- [Exception](#exception)
 			- [Call Stack Overflow](#call-stack-overflow)
 		- [Event Delegate(事件委托)](#event-delegate事件委托)
@@ -31,6 +34,18 @@
 			- [重排与重绘](#重排与重绘)
 			- [批量修改 DOM](#批量修改-dom)
 		- [CSS](#css)
+		- [定时器(防止脚本阻塞)](#定时器防止脚本阻塞)
+		- [计时器](#计时器)
+		- [Web Worker](#web-worker)
+			- [运行环境](#运行环境)
+			- [worker 实例](#worker-实例)
+		- [Ajax](#ajax)
+			- [数据格式](#数据格式)
+			- [Ajax 缓存](#ajax-缓存)
+		- [避免重复工作](#避免重复工作)
+		- [算数逻辑运算](#算数逻辑运算)
+			- [位操作](#位操作)
+			- [Math 对象](#math-对象)
 	- [Code Style Guide](#code-style-guide)
 		- [Style](#style)
 			- [命名规范](#命名规范)
@@ -57,6 +72,28 @@
 		- [Input check](#input-check)
 			- [特殊字符](#特殊字符)
 		- [XSS Attack](#xss-attack)
+	- [Testing](#testing)
+		- [Frameworks](#frameworks)
+			- [Unit 测试](#unit-测试)
+			- [UI 测试](#ui-测试)
+		- [可测试代码](#可测试代码)
+			- [范例](#范例)
+		- [圈复杂度](#圈复杂度)
+		- [函数复杂度](#函数复杂度)
+			- [扇出(引用) **<7**](#扇出引用-7)
+			- [扇入(被引用)](#扇入被引用)
+		- [耦合度](#耦合度)
+			- [内容耦合(5)](#内容耦合5)
+			- [公共耦合(4)](#公共耦合4)
+			- [控制耦合(3)](#控制耦合3)
+			- [印记耦合(2)](#印记耦合2)
+			- [数据耦合(1)](#数据耦合1)
+			- [无耦合(0)](#无耦合0)
+		- [单元测试](#单元测试)
+			- [测试原则](#测试原则)
+			- [隔离被测代码](#隔离被测代码)
+			- [mock/stub/spy](#mockstubspy)
+		- [console](#console)
 	- [ECMAScript 2015](#ecmascript-2015)
 		- [Babel](#babel)
 			- [babel-node](#babel-node)
@@ -81,6 +118,10 @@
 			- [Methods](#methods)
 			- [Template String](#template-string)
 		- [RegExp](#regexp)
+		- [Number](#number)
+		- [Array](#array)
+			- [Array.from](#arrayfrom)
+			- [Array.copyWithin](#arraycopywithin)
 
 <!-- /TOC -->
 
@@ -1649,3 +1690,70 @@ codePointLength(s) // 2
 -   Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()
 -   Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`
 -   ** 指数运算符
+
+### Array
+
+#### Array.from
+
+强大的**函数式**方法
+
+-   伪数组对象(array-like object)
+-   可枚举对象(iterable object)
+-   克隆数组
+-   map 函数
+
+```js
+// Set
+// Map
+
+// NodeList对象
+let ps = document.querySelectorAll('p');
+Array.from(ps).forEach(function (p) {
+  console.log(p);
+});
+
+// arguments对象
+function foo() {
+  var args = Array.from(arguments);
+  // ...
+}
+
+Array.from('hello')
+// => ['h', 'e', 'l', 'l', 'o']
+
+let namesSet = new Set(['a', 'b'])
+Array.from(namesSet) // ['a', 'b']
+
+// 克隆数组
+Array.from([1, 2, 3])
+// => [1, 2, 3]
+
+Array.from(arrayLike, x => x * x);
+// =>
+Array.from(arrayLike).map(x => x * x);
+
+Array.from([1, 2, 3], x => x * x)
+// [1, 4, 9]
+```
+
+#### Array.copyWithin
+
+替换数组元素，修改原数组
+
+```js
+Array.prototype.copyWithin(target, start = 0, end = this.length)
+```
+
+```js
+[1, 2, 3, 4, 5].copyWithin(0, 3)
+// => [4, 5, 3, 4, 5]
+
+// -2相当于3号位，-1相当于4号位
+[1, 2, 3, 4, 5].copyWithin(0, -2, -1)
+// => [4, 2, 3, 4, 5]
+
+// 将2号位到数组结束，复制到0号位
+var i32a = new Int32Array([1, 2, 3, 4, 5]);
+i32a.copyWithin(0, 2);
+// => Int32Array [3, 4, 5, 4, 5]
+```
