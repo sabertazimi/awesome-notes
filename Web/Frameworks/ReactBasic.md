@@ -39,7 +39,7 @@
 - 推荐使用ES6
 - npm的debug包，log组件渲染的每个步骤和动作
 
-## Plugins
+## Components/Plugins
 
 ### Documents
 
@@ -50,6 +50,10 @@
 
 -   [React Animation npm install react-set-animate --save](https://github.com/FunctionFoundry/react-set-animate)
 -   [React Material UI](https://github.com/callemall/material-ui)
+
+#### Charts
+
+-   [React Chartjs](https://github.com/jhudson8/react-chartjs)
 
 #### Search Bar
 
