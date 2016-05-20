@@ -1567,6 +1567,12 @@ a.btn-custom {
 -   [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
 -   [Awesome PPT/Prezi](https://github.com/impress/impress.js)
 
+### Geometry
+
+#### Blocks
+
+-   [obelisk.js](https://github.com/nosir/obelisk.js)
+
 ### Template
 
 -   [Free Bootstrap 3 Admin Template](https://github.com/puikinsh/gentelella)
