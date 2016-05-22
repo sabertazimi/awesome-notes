@@ -48,8 +48,11 @@
 
 ### UI
 
--   [React Animation npm install react-set-animate --save](https://github.com/FunctionFoundry/react-set-animate)
 -   [React Material UI](https://github.com/callemall/material-ui)
+
+#### Animation
+
+-   [React Animation npm install react-set-animate --save](https://github.com/FunctionFoundry/react-set-animate)
 
 #### Charts
 
@@ -58,6 +61,10 @@
 #### Search Bar
 
 -   https://github.com/searchkit/searchkit
+
+#### Scroll Bar
+
+-   [React Scroll Box](https://github.com/smikhalevski/react-scroll-box)
 
 #### Mouse
 

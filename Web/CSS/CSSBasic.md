@@ -1480,7 +1480,6 @@ a.btn-custom {
 -   [Awesome Effect Library - Effeckt.css](https://github.com/h5bp/Effeckt.css)
 -   [animate.css](https://github.com/daneden/animate.css)
 -   [Velocity Animation](https://github.com/julianshapiro/velocity)
--   [React Animation npm install react-set-animate --save](https://github.com/FunctionFoundry/react-set-animate)
 -   [Ramjet](https://github.com/rich-harris/ramjet)
 
 #### Particles
