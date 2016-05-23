@@ -1511,15 +1511,21 @@ a.btn-custom {
 
 -   [Sortable](https://github.com/RubaXa/Sortable)
 
-### Nav
+#### Nav
 
 -   https://github.com/VPenkov/okayNav
 
-### Menu
+#### Menu
 
 -   [Menu Icon Click Animation](https://github.com/jonsuh/hamburgers)
 
-### Chart
+### Graph/Chart
+
+#### Graph
+
+-   [Sigmajs - Graph Drawing](https://github.com/jacomyal/sigma.js)
+
+#### Chart
 
 -   [HTML5 Chart](https://github.com/chartjs/Chart.js)
 
