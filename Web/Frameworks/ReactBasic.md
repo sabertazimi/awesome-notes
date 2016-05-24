@@ -49,6 +49,7 @@
 ### Data
 
 -   [Baobab](https://github.com/Yomguithereal/baobab)
+-   [React Resolver](https://github.com/ericclemmons/react-resolver)
 
 ### UI
 
