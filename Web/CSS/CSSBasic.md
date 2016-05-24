@@ -1499,6 +1499,7 @@ a.btn-custom {
 -   https://github.com/FezVrasta/popper.js
 -   https://github.com/wavded/humane-js
 -   [Desktop Notification](https://github.com/Nickersoft/push.js)
+-   [Nodejs Notification](https://github.com/mikaelbr/node-notifier)
 
 ### Content
 
