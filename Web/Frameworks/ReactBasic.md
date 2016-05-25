@@ -50,6 +50,7 @@
 
 -   [Baobab](https://github.com/Yomguithereal/baobab)
 -   [React Resolver](https://github.com/ericclemmons/react-resolver)
+-   [RxJS Middleware](https://github.com/redux-observable/redux-observable)
 
 ### UI
 
