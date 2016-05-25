@@ -1494,12 +1494,16 @@ a.btn-custom {
 
 #### Prompt
 
--   [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
 -   [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
 -   https://github.com/FezVrasta/popper.js
 -   https://github.com/wavded/humane-js
 -   [Desktop Notification](https://github.com/Nickersoft/push.js)
 -   [Nodejs Notification](https://github.com/mikaelbr/node-notifier)
+
+#### Message
+
+-   [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
+-   [TheaterJS - Typing Effect](https://github.com/Zhouzi/TheaterJS)
 
 ### Content
 
