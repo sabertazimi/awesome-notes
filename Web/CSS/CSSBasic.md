@@ -1576,6 +1576,10 @@ a.btn-custom {
 
 -   [定位元素 - tether](https://github.com/HubSpot/tether)
 
+#### Mail
+
+-   [Mail Generator](https://github.com/eladnava/mailgen)
+
 #### Slide
 
 -   [Lighter Gallery](https://github.com/sachinchoolur/lightGallery)
