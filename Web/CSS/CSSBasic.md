@@ -1481,6 +1481,7 @@ a.btn-custom {
 -   [animate.css](https://github.com/daneden/animate.css)
 -   [Velocity Animation](https://github.com/julianshapiro/velocity)
 -   [Ramjet](https://github.com/rich-harris/ramjet)
+-   [barba.js](https://github.com/luruke/barba.js)
 
 #### Particles
 
