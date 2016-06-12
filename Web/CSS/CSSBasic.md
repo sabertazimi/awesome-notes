@@ -1482,6 +1482,7 @@ a.btn-custom {
 -   [Velocity Animation](https://github.com/julianshapiro/velocity)
 -   [Ramjet](https://github.com/rich-harris/ramjet)
 -   [barba.js](https://github.com/luruke/barba.js)
+-   [Scroll Up Animation](https://github.com/michalsnik/aos)
 
 #### Particles
 
