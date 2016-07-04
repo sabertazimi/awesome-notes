@@ -1479,6 +1479,7 @@ a.btn-custom {
 
 -   [Awesome Effect Library - Effeckt.css](https://github.com/h5bp/Effeckt.css)
 -   [animate.css](https://github.com/daneden/animate.css)
+-   [anime.js](https://github.com/juliangarnier/anime)
 -   [Velocity Animation](https://github.com/julianshapiro/velocity)
 -   [Ramjet](https://github.com/rich-harris/ramjet)
 -   [barba.js](https://github.com/luruke/barba.js)
