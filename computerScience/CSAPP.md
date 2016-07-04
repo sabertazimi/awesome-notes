@@ -9,21 +9,7 @@
 -   xxx: 尾数
 -   exp: 阶码
 
-## Hardware and Software Interface
-
-### Procedure and Stack
-
-#### Memory Types
-
-|分层|特性|
-|:----------:|:----------:|
-|Stack|Writable|
-|Heap(Dynamic Data)|Writable|
-|Static Data|Writable|
-|Literals|Read-Only|
-|Instructions|Read-Only|
-
-#### Stack Frame
+### Stack Frame
 
 ![stack frame](img/stack_frame.png)
 
@@ -46,3 +32,18 @@ ret
 ```
 
 `x86_64`: 可使用超出 Stack Pointer 128 bytes 的内存区域, 称为 Red Zone.
+
+## Architecture
+
+## Optimization
+
+### Replacement
+
+-   用多条 Shift/Add/Sub 指令, 代替 Mul/Div
+
+### Unrolling(Duff's Device)
+
+增大循环的步长 - Duff's Device 以 7 为步长:
+
+-   提升循环的运行效率
+-   一次循环内: 可先将所有数据先读出来(Memory State),将进行计算(Excute State), 从而消除 Load/Use 冒险而产生的 Bubble
