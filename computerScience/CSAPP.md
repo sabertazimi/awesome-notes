@@ -96,13 +96,31 @@ CPI = 1.0 + lp + mp + rp:
 
 ## Optimization
 
-### Replacement
+### Principles
+
+-   合适的算法和数据结构
+-   编写编译器能够有效优化的代码  e.g 寄存器别名,存储器别名,函数的副作用 导致编译器无法(不敢)合并/删除冗余代码
+-   提高代码的并行性
+-   消除不必要的访存 e.g 多次访存(可用中间量优化), 多次函数调用(可用宏/内联函数优化)
+
+### Tips
+
+#### Replacement
 
 -   用多条 Shift/Add/Sub 指令, 代替 Mul/Div
 
-### Unrolling(Duff's Device)
+#### Branch
 
-增大循环的步长 - Duff's Device 以 7 为步长:
+-   利用条件表达式代替条件分支语句: 降低预测错误惩罚
+
+#### Code Motion
+
+-   将不变测试条件/常变量的计算从循环中移出
+-   将多次访存利用中间自动/寄存器变量改写成一次访存
+
+#### Unrolling (Duff's Device)
+
+循环展开: 增大循环的步长 - Duff's Device 以 7 为步长:
 
 -   提升循环的运行效率
 -   一次循环内: 可先将所有数据先读出来(Memory State),将进行计算(Excute State), 从而消除 Load/Use 冒险而产生的 Bubble
