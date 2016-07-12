@@ -1,0 +1,8 @@
+-   cdn
+-   服务器端渲染
+-   生产环境全局变量(去除不必要的build用 lib/plugin, 如 react-hot-loader)
+-   提取公共库(common.js)
+-   代码压缩: 压缩js(去除注释/空行/替换变量名等)
+-   代码分割: 按需加载js
+-   代码分割: chunk
+-   代码分离: 分离css(extract-text-webpack-plugin
