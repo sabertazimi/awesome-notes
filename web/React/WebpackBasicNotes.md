@@ -42,3 +42,13 @@ CleanUpPlugin =
         exclude: ['stats.json', 'important.js']
     });
 ```
+
+## Options
+
+-  --progress
+-  --colors
+-  -p
+
+## Advanced
+
+code split: require.ensure([], () => {});
