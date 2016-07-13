@@ -5,16 +5,15 @@
 		- [Controller](#controller)
 		- [Best Practice](#best-practice)
 
-<!-- /TOC -->!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-- [React Basic Notes](#react-basic-notes)
-	- [MVC模式](#mvc模式)
-		- [Controller](#controller)
-		- [Best Practice](#best-practice)
-
 <!-- /TOC -->
 
 # React Basic Notes
+
+## props and state
+
+### getInitialState() and constructor(props, context)
+
+### componentDidMount()
 
 ## MVC模式
 
