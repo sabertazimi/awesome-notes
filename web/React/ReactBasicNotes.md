@@ -15,6 +15,22 @@
 
 ### componentDidMount()
 
+## ES6
+
+### this.setState()
+
+```js
+constructor() {
+    this.handle = this.handle.bind(this);
+}
+
+handle(e) {
+    this.setState({
+
+    });
+}
+```
+
 ## MVC模式
 
 ### Controller
