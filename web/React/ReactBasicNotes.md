@@ -15,6 +15,18 @@
 
 ### componentDidMount()
 
+### props validation
+
+```js
+static PropTypes = {
+    arrayProps: React.PropTypes.array
+    // array/bool/func/number/object/string/symbol/node/element
+    // React.PropTypes.instanceOf/oneOf/oneOfType
+    // React.PropTypes.arrayOf(React.PropsTypes.number)
+    // React.PropTypes.objectOf(React.PropsTypes.number)
+    // React.PropTypes.any.isRequired
+```
+
 ## ES6
 
 ### this.setState()
