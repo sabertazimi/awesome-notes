@@ -15,6 +15,10 @@
 
 ### componentDidMount()
 
+### componentWillReceiveProps()
+
+当此方法被调用时, 不代表 props 一定被改变. 当使用此方法监听 props 变化时, 必须额外检查 props 是否确实被改变.
+
 ### props validation
 
 ```js
@@ -25,9 +29,66 @@ static PropTypes = {
     // React.PropTypes.arrayOf(React.PropsTypes.number)
     // React.PropTypes.objectOf(React.PropsTypes.number)
     // React.PropTypes.any.isRequired
+}
 ```
 
-## ES6
+## element and component
+
+react element 实际上是纯对象, 可由 React.createElement()/JSX/element factory helper 创建, 并被 react 在必要时渲染成真实的DOM结点
+
+```js
+ReactDOM.render({
+  type: Form,
+  props: {
+    isSubmitted: false,
+    buttonText: 'OK!'
+  }
+}, document.getElementById('root'));
+
+// React: You told me this...
+{
+  type: Form,
+  props: {
+    isSubmitted: false,
+    buttonText: 'OK!'
+  }
+}
+
+// React: ...And Form told me this...
+{
+  type: Button,
+  props: {
+    children: 'OK!',
+    color: 'blue'
+  }
+}
+
+// React: ...and Button told me this! I guess I'm done.
+{
+  type: 'button',
+  props: {
+    className: 'button button-blue',
+    children: {
+      type: 'b',
+      props: {
+        children: 'OK!'
+      }
+    }
+  }
+}
+```
+
+### functional/class component
+
+-   函数型组件没有实例, 类型组件具有实例, 但实例化的工作由 react 自动完成
+-   class component 具有更多特性: state, lifecycle hook, performance optimizations(shouldComponentUpdate()回调方法)
+
+### stateful/stateless component
+
+-   stateless component: 采用函数型声明, 不使用 setState(), 一般作为表现型组件
+-   stateful component: 采用类型声明, 使用 setState(), 一般作为容器型组件(结合Redux)
+
+## ES6 Syntax
 
 ### this.setState()
 
