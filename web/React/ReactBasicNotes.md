@@ -88,6 +88,26 @@ ReactDOM.render({
 -   stateless component: 采用函数型声明, 不使用 setState(), 一般作为表现型组件
 -   stateful component: 采用类型声明, 使用 setState(), 一般作为容器型组件(结合Redux)
 
+### component lifecycle
+
+#### creation
+
+constructor(props, context) -> componentWillMount() -> render() -> componentDidMount()
+
+#### updates
+
+update for three reasons:
+
+-   parent/top (re-)render
+-   this.setState() called
+-   this.forceUpdate() called
+
+componentWillReceiveProps(nextProps) -> shouldComponentUpdate(nextProps, nextState) -> componentWillUpdate(nextProps, nextState) -> render() -> componentDidUpdate(prevProps, prevState)
+
+#### unmount
+
+componentWillUnmount()
+
 ## ES6 Syntax
 
 ### this.setState()
