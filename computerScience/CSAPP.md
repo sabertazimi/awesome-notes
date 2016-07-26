@@ -153,3 +153,123 @@ CPI = 1.0 + lp + mp + rp:
 -    控制权返回给 Instruction_current
 -    控制权返回给 Instruction_next
 -    abort/exit
+
+### 进程
+
+-   一个独立的逻辑控制流(并行执行)
+-   一个私有的地址空间(缓存与虚拟存储器)
+
+#### 上下文
+
+-   代码/数据,栈,通用寄存器,程序计数器,环境变量,文件描述符集合
+-   上下文切换:用户模式与内核模式的切换
+-   高速缓存污染(pollution): 每次切换后,总是会发生 cold cache miss
+
+#### 进程控制
+
+```c
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <errno.h>
+```
+
+##### 创建和终止进程
+
+-   父进程与子进程获得 2 份独立的私有空间与 2 份独立的上下文, 不同的PID(process id)
+-   由于指针(如打开的文件描述符),有可能互相影响,但大体上互不影响
+
+```c
+/*
+ * output: parent: x=0
+ * output: child: x=2
+ * 独立上下文代表拥有独立的通用寄存器与栈,代表拥有拷贝的自动变量(局部变量),互不影响地进行修改
+ */
+int main(void) {
+    pid_t pid;
+    int x = 1;
+
+    pid = fork();
+
+    if (pid == 0) { // child
+        printf("child: x=%d\n", ++x);
+        exit(0);
+    }
+
+    // parent
+    printf("parent: x=%d\n", --x);
+    exit(0);
+}
+```
+
+##### 回收子进程
+
+```c
+#define N 2
+
+int main(void) {
+    int status, i;
+    pid_t pid[N], retpid;
+
+    for (i = 0; i < N; i++) {
+        if ((pid[i] = fork()) == 0) { // child
+            exit(100+i);
+        }
+    }
+
+    // parent reaps(回收) N children in order
+    i = 0;
+    while((retpid = waitpid(pid[i++], &status, 0)) > 0) {
+        if (WIFEXITED(statue)) {
+            printf("child: %d terminated normally with exit status=%d\n", retpid, WEXITSTATUS(status));
+        } else {
+            printf("child %d terminated abnormally\n", retpid);
+        }
+    }
+
+    // only if there are no more children, it can exit normally
+    if (errno != ECHILD) {
+        unix_error("waitpid error"); // exit with error log
+    }
+
+    exit(0); // exit normally
+}
+```
+
+### 信号
+
+```c
+#include <sys/types.h>
+#include <unistd.h>
+#include <signal.h>
+```
+
+-   一个只发出而未被处理的信号为待处理信号
+-   一种类型至多有一个待处理信号, 多余待处理信号**不会进入处理队列**,只是**被简单丢弃**
+-   不可以用信号对其他事件进行计数, 同一事件多次发生产生的信号有可能被简单丢弃
+
+## 调试/测试
+
+### 日志
+
+```c
+void unix_error(char *msg) {
+    fprintf(stderr, "%s: %s\n", msg, strerror(errno));
+    exit(0);
+}
+
+void posix_error(int code, char *msg) {
+    fprinf(stderr, "%s: %s\n", msg, strerror(code));
+    exit(0);
+}
+
+void dns_error(char *msg) {
+    fprintf(stderr, "%s: DNS error %d\n", msg, h_errno);
+    exit(0);
+}
+
+void app_error(char *msg) {
+    fprinf(stderr, "%s\n", msg);
+    exit(0);
+}
+```
