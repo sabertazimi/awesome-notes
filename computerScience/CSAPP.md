@@ -139,12 +139,12 @@ CPI = 1.0 + lp + mp + rp:
 
 #### 分类
 
-|类别|原因|异步/同步|返回行为|
-|:------:|:----------:|:-----:|:----------:|
-|中断(interrupt)|I/O|async|next(concurrency)|
-|陷阱(trap)|有意的异常/系统调用(内核模式)|sync|next|
-|故障(fault)|潜在可恢复的错误|sync|possible current/abort(not return)|
-|终止(abort)|不可恢复的错误|sync|abort(not return)|
+|类别|原因|异步/同步|返回行为|例子|
+|:------:|:----------:|:-----:|:----------:|:---------:|
+|中断(interrupt)|I/O|async|next(concurrency)|磁盘|
+|陷阱(trap)|有意的异常/系统调用(内核模式)|sync|next|read/write/intN|
+|故障(fault)|潜在可恢复的错误|sync|possible current/abort(not return)|segmentation fault/floating exception|
+|终止(abort)|不可恢复的错误|sync|abort(not return)|硬件错误|
 
 #### 异常处理程序
 
