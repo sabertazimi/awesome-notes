@@ -124,3 +124,32 @@ CPI = 1.0 + lp + mp + rp:
 
 -   提升循环的运行效率
 -   一次循环内: 可先将所有数据先读出来(Memory State),将进行计算(Excute State), 从而消除 Load/Use 冒险而产生的 Bubble
+
+## 异常控制流
+
+理解异常控制流,有助于理解以下概念:
+
+-   陷阱(trap)/系统调用(system call)
+-   系统级I/O
+-   线程/进程(concurrency)
+-   虚拟存储器
+-   软件异常
+
+### 异常
+
+#### 分类
+
+|类别|原因|异步/同步|返回行为|
+|:------:|:----------:|:-----:|:----------:|
+|中断(interrupt)|I/O|async|next(concurrency)|
+|陷阱(trap)|有意的异常/系统调用(内核模式)|sync|next|
+|故障(fault)|潜在可恢复的错误|sync|possible current/abort(not return)|
+|终止(abort)|不可恢复的错误|sync|abort(not return)|
+
+#### 异常处理程序
+
+异常处理程序主要分为3类:
+
+-    控制权返回给 Instruction_current
+-    控制权返回给 Instruction_next
+-    abort/exit
