@@ -248,6 +248,240 @@ int main(void) {
 -   一种类型至多有一个待处理信号, 多余待处理信号**不会进入处理队列**,只是**被简单丢弃**
 -   不可以用信号对其他事件进行计数, 同一事件多次发生产生的信号有可能被简单丢弃
 
+#### 处理信号
+
+```c
+void handler(int sig) {
+   pid_t pid;
+
+   while ((pid = waitpid(-1, NULL, 0)) > 0)  {
+       printf("Handler reaped child %d\n", (int)pid);
+   }
+
+   if (errno != ECHILD) {
+       unix_error("waitpid error");
+   } else {
+       sleep(2);
+   }
+   
+   return;
+}
+
+int main(void) {
+    int i, n;
+    char buf[MAXBUF];
+    pid_t pid;
+
+    if (signal(SIGCHLD, handler) == SIG_ERR) {
+        unix_error("signal error");
+    }
+
+    for (i = 0; i < 3; I++) {
+        pid = fork();
+
+        if (pid ==0) {
+            printf("Hello from child %d\n", (int)getpid());
+            sleep(1);
+            exit(0);
+        }
+    }
+
+    // manually restart the READ call
+    while ((n = read(STDIN_FILENO, buf, sizeof(buf))) < 0) {
+        if (errno != EINTR) {
+            unix_error("read error");
+        }
+
+        printf("Parent processing input\n");
+
+        while(1) {
+            ;
+        }
+
+        exit(0);
+    }
+}
+```
+
+#### 阻塞信号
+
+```c
+// how: SIG_BLOCK, SIG_UNBLOCK, SIG_SETMASK, 是否阻塞set中的信号合集
+int sigprocmask(int how, const sigset_t *set, sigset_t *oldset);
+
+int sigemptyset(sigset_t *set);
+int sigfillset(sigset_t *set);
+int sigaddset(sigset_t *set, int signum);
+int sigdelset(sigset_t *set, int signum);
+int sigismember(const sigset_t *set， int signum);
+```
+
+```c
+void handler(int sig) {
+    pid_t pid;
+
+    while ((pid = waitpid(-1, NULL, 0)) > 0) {
+        deletejob(pid);
+    }
+
+    if (errno != ECHILD) {
+        unix_error("waitpid error");
+    }
+}
+
+// 保证父进程先执行 addjob, 再执行 deletejob
+int main(int argc, char **argv) {
+    int pid;
+    sigset_t mask;
+
+    signal(SIGCHLD, handler;)
+    initjob();
+
+    while (1) {
+        sigemptyset(&mask);
+        sigaddset(&mask, SIGCHLD);
+        sigprocmask(SIG_BLOCK, &mask, NULL); // block SIGCHLD
+
+        if ((pid = fork()) == 0) {
+            sigprocmask(SIG_UNBLOCK, &mask, NULL); // unblock SIGCHLD in child, make it can transfer signal
+            execve("/bin/date", argv, NULL);
+        }
+
+        // parent process
+        addjob(pid);
+        sigprocmask(SIG_UNBLOCK, &mask, NULL); // after addjob, unblock SIGCHLD, make it can handle signal
+    }
+}
+```
+
+### 非本地跳转
+
+```c
+#include <setjmp.h>
+```
+
+-   setjmp - catch: 返回多次
+-   longjmp - throw: 不返回
+
+## 虚拟存储器
+
+虚拟地址: TLB(translation lookaside buffer in pm)
+
+-   TLBT(tag) - TLBI(index) - VPO
+-   VPN(virtual page number) - VPO(virtual page offset)
+
+物理地址: C(cache) PPO = VPO
+
+-   CT(tag) - CI(index) - CO(offset)
+-   PPN(physical page number) - PPO(physical page offset)
+
+
+
+## 系统级 I/O
+
+```c
+// robust I/O
+ssize_t rio_readn(int fd, void *usrbuf, size_t n) {
+    size_t nleft = n;
+    ssize_t nread;
+    char *bufp = usrbuf;
+
+    while (nleft > 0) {
+        if ((nread = read(fd, bufp, nleft)) < 0) {
+            if (errno == EINTR) {
+                nread = 0; // interrupted by signal_handler, re-call read()
+            } else {
+                return -1;
+            }
+        } else if (nread == 0) {
+            break;
+        }
+
+        nleft -= nread;
+        bufp += nread; // remove data from bufp
+    }
+
+    return (n - left);
+}
+
+
+ssize_t rio_writen(int fd, void *usrbuf, size_t n) {
+    size_t nleft = n;
+    ssize_t nwritten;
+    char *bufp = usrbuf;
+
+    while (nleft > 0) {
+        if ((nwritten = read(fd, bufp, nleft)) < 0) {
+            if (errno == EINTR) {
+                nwritten = 0; // interrupted by signal_handler, re-call read()
+            } else {
+                return -1;
+            }
+        }
+
+        nleft -= nwritten;
+        bufp += nwritten; // remove data from bufp
+    }
+
+    return n;
+}```
+
+### socket I/O
+
+#### 限制
+
+输出函数+输入函数: 中间必须插入 fflush, fseek, fsetpos, rewind
+输入函数+输出函数: 中间必须插入 fseek, fsetpos, rewind
+
+#### I/O 函数的选择
+
+-   sprintf+rio_writen: 格式化输出至套接口
+-   rio_readlineb+sscanf: 格式化输入
+
+## 网络
+
+```c
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+
+int main(int argc, char *argv) {
+    char **pp;
+    struct in_addr addr;
+    struct hostent *hostp;
+
+    if (argc != 2) {
+        fprintf(stderr, "usage: %s <domain name or dotted-decimal>\n", argv[0]);
+        exit(0);
+    }
+
+    if (inet_aton(argv[1], &addr) != 0) {
+        hostp = gethostbyaddr((const char*)&addr, sizeof(addr), AF_INET);
+    } else {
+        hostp = gethostbyname(argv[1]);
+    }
+
+    printf("official hostname: %s\n:", hostp->h_name);
+
+    for (pp = hostp->h_aliases; *pp != NULL; pp++) {
+        printf("alias: %s\n", *pp);
+    }
+
+    for (pp = hostp->h_addr_list; *pp != NULL; pp++) {
+        addr.s_addr = ((struct in_addr *)*pp)->s_addr;
+        printf("address: %s\n", inet_ntoa(addr));
+    }
+
+    exit(0);
+}
+```
+
+## 并发
+
+### 锁
+
+防止死锁: 每对互斥锁(s, t), 每个线程顺序请求锁, 逆序释放锁
+
 ## 调试/测试
 
 ### 日志
