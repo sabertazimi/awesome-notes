@@ -37,9 +37,18 @@ providePlugin =
         jQuery: 'jquery',
         'window.jQuery': 'jquery'
     });
-CleanUpPlugin = 
+cleanUpPlugin = 
     new WebpackCleanupPlugin({
         exclude: ['stats.json', 'important.js']
+    });
+dllPlugin = new Webpack.DllPlugin({
+        path: 'manifest.json',
+        name: '[name]',
+        context: __dirname
+    });
+dllReferencePlugin = new Webpack.DllReferencePlugin({
+        manifest: require('./manifest.json'),
+        context: __dirname
     });
 ```
 
