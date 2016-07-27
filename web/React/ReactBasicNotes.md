@@ -149,6 +149,8 @@ handle(e) {
 
 ## Components/Plugins
 
+[**Starter Kit Collection**](http://andrewhfarmer.com/starter-project)
+
 ### Documents
 
 -   [Blog Generator](https://github.com/gatsbyjs/gatsby)
