@@ -1394,6 +1394,10 @@ a.btn-custom {
 
 ## Design
 
+content -> centering -> font family -> spacing -> color&contrast -> balance(position) -> primary/secondary color -> custom font -> images/links
+
+> reference: [web design in 4 minutes](http://jgthms.com/web-design-in-4-minutes/#share)
+
 ### Color
 
 #### Scheme 
