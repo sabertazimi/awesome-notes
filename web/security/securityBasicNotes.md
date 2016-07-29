@@ -61,10 +61,24 @@ response.setHeader("Content-Security-Policy", "frame-ancestors 'none'");
 
 #### Protection
 
-not passing session IDs in queryStrings/requestBody, instead of passing them in HTTP cookies
+-   not passing session IDs in queryStrings/requestBody, instead of passing them in HTTP cookies
 
 ```js
 req.session.regenerate(function(err) {
     // New session here
 })
 ```
+
+-   reset session IDs after set up session successfully
+
+### XSS(Cross-Site-Scripting) Attack
+
+user input: <script> malicious code </script>
+
+#### Protection
+
+don't trust user:
+
+-   `replace(/<script>|<script/>/g, '')`
+-   `trim()`
+-   using template engine(handlebars, jade, etc...)
