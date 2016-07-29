@@ -186,6 +186,7 @@ handle(e) {
 
 -   [React Draftjs](https://github.com/draft-js-plugins/draft-js-plugins)
 
-### Testing
+### Debug/Test
 
 -   [React Testing Utilities](https://github.com/airbnb/enzyme)
+-   [React Component hierachy](https://github.com/team-gryff/react-monocle)
