@@ -1488,6 +1488,7 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 -   [Ramjet](https://github.com/rich-harris/ramjet)
 -   [barba.js](https://github.com/luruke/barba.js)
 -   [Scroll Up Animation](https://github.com/michalsnik/aos)
+-   [Mottojs - animated words](https://github.com/jrainlau/motto)
 
 #### Particles
 
