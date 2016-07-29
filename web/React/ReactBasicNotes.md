@@ -190,3 +190,4 @@ handle(e) {
 
 -   [React Testing Utilities](https://github.com/airbnb/enzyme)
 -   [React Component hierachy](https://github.com/team-gryff/react-monocle)
+-   Chrome Extensions -  React Dev Tools/Redux Dev Tools
