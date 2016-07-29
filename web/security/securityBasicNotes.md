@@ -13,6 +13,15 @@ SELECT *
    AND pass  = '' or 1=1--' LIMIT 1
 ```
 
+#### Protection
+
+parameterized statements
+
+```js
+// Construct the SQL statement we want to run, specifying the parameter.
+String sql = "SELECT * FROM users WHERE email = ?";
+```
+
 ### Click Jacking
 
 Hover a transparent malicious link upon the true button
@@ -42,8 +51,20 @@ Hover a transparent malicious link upon the true button
 
 -    X-Frame-Options
 
-````js
+```js
 // nodejs
 response.setHeader("X-Frame-Options", "DENY");
 response.setHeader("Content-Security-Policy", "frame-ancestors 'none'");
+```
+
+### Session Fixation
+
+#### Protection
+
+not passing session IDs in queryStrings/requestBody, instead of passing them in HTTP cookies
+
+```js
+req.session.regenerate(function(err) {
+    // New session here
+})
 ```
