@@ -136,8 +136,91 @@ express/csurf library
 
 #### Protection
 
+Check the Referer when doing redirects
+
 ```js
 function isRelative(url) {
     return url && url.match(/^\/[^\/\\]/);
 }
 ```
+
+### User Enumeration
+
+通过暴力工具得到被攻击网站的用户名单, 并利用社工得到密码
+
+> 很显然, REST API 无法抵抗此种攻击
+> E.g [GitHub User Profile](https://github.com)
+
+#### Protection
+
+##### Login
+
+使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误
+
+-   Login error message: Unkonwn User **or** Password
+-   All login code-paths take the same time on average: time consuming operations
+-   All login code-paths take the same context: session IDs, cookies
+
+##### Signup/Reset(not with name, should with email)
+
+使攻击者无法枚举用户名, 他无法确定是用户不存在还是用户已存在
+
+-   Not Exist: Sending sign-up email
+-   Exist: Sending pwd-reset email
+
+### Inline Document Type Definition in XML
+
+Dangerous Macros:
+
+-   XML Bombs
+-   XML Externel Entities
+
+#### Protection
+
+Disable DTD parse in XML parser
+
+### Information Leakage
+
+-   Server in Response Headers
+-   Cookies: JSESSIONID -> java
+-   URL: .jsp, .php, .asp
+-   Error Message
+-   AJAX responses
+-   JSON/XML reponses
+-   Code Information
+
+```json
+{
+    Server: Apache/1.3.23
+    Accept-Ranges:  bytes
+    Content-length: 196
+    Connection: close
+    Content-Type: text/html
+    Cookie: JSESSIONID=XXXXX
+}
+{
+    Server: Microsoft-IIS/5.0
+    Content-Type: text/html
+    Accept-Ranges: bytes
+    ETag: "b0aac0542e25c31"
+    Content-Length: 7369
+}
+```
+
+#### Protection
+
+-   处理/混淆/加密原始数据(raw data)
+-   处理/混淆客户端代码
+-   去除工具库的版本信息
+-   Disable the “Server” HTTP Header and Similar Headers
+-   Use Clean URLs without extensions
+-   Ensure Cookie Parameters are Generic
+-   Disable Client-Side Error Reporting
+-   Sanitize Data Passed to the Client
+-   Obfuscate JavaScript\
+-   Sanitize Template Files
+-   Ensure Correct Configuration of Web Root Directory
+
+### Secure Treatment of Passwords
+
+> [Hacks Explain](https://www.hacksplaining.com/prevention/password-mismanagement)
