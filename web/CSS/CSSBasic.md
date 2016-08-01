@@ -1590,11 +1590,14 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 
 #### Slide
 
--   [Lighter Gallery](https://github.com/sachinchoolur/lightGallery)
 -   [One Page Style Vertical-Silde](https://github.com/MopTym/doSlide)
--   [Photo Swipe](https://github.com/dimsemenov/PhotoSwipe)
 -   [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
 -   [Awesome PPT/Prezi](https://github.com/impress/impress.js)
+
+#### Gallery
+
+-   [Light Gallery](https://github.com/sachinchoolur/lightgallery.js/)
+-   [Photo Swipe](https://github.com/dimsemenov/PhotoSwipe)
 
 ### Geometry
 
