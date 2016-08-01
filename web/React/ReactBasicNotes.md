@@ -1,11 +1,31 @@
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-- [React Basic Notes](#react-basic-notes)
-	- [MVC模式](#mvc模式)
-		- [Controller](#controller)
-		- [Best Practice](#best-practice)
-
-<!-- /TOC -->
+* [React Basic Notes](#react-basic-notes)
+	* [props and state](#props-and-state)
+		* [getInitialState() and constructor(props, context)](#getinitialstate-and-constructorprops-context)
+		* [componentDidMount()](#componentdidmount)
+		* [componentWillReceiveProps()](#componentwillreceiveprops)
+		* [props validation](#props-validation)
+	* [element and component](#element-and-component)
+		* [functional/class component](#functionalclass-component)
+		* [stateful/stateless component](#statefulstateless-component)
+		* [component lifecycle](#component-lifecycle)
+			* [creation](#creation)
+			* [updates](#updates)
+			* [unmount](#unmount)
+	* [ES6 Syntax](#es6-syntax)
+		* [this.setState()](#thissetstate)
+	* [MVC模式](#mvc模式)
+		* [Controller](#controller)
+		* [Best Practice](#best-practice)
+	* [Components/Plugins](#componentsplugins)
+		* [Documents](#documents)
+		* [Data](#data)
+		* [UI](#ui)
+			* [Animation](#animation)
+			* [Charts](#charts)
+			* [Search Bar](#search-bar)
+			* [Scroll Bar](#scroll-bar)
+			* [Mouse](#mouse)
+		* [Debug/Test](#debugtest)
 
 # React Basic Notes
 

@@ -1,3 +1,9 @@
+
+* [Redux Basic Notes](#redux-basic-notes)
+	* [Best Practice](#best-practice)
+	* [Awesome Tools](#awesome-tools)
+		* [Debugging](#debugging)
+
 # Redux Basic Notes
 
 Stack: ES6, webpack, react-hot-loader

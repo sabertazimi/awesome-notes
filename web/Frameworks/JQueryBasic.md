@@ -1,14 +1,19 @@
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [JQuery](#jquery)
-	- [常用多态函数](#常用多态函数)
-	- [window](#window)
-	- [DOM](#dom)
-		- [structure](#structure)
-		- [class](#class)
-		- [style](#style)
-
-<!-- /TOC -->
+* [JQuery](#jquery)
+	* [Events](#events)
+		* [Mouse](#mouse)
+		* [Keyboard](#keyboard)
+		* [Form](#form)
+		* [Document/Window](#documentwindow)
+	* [常用多态函数](#常用多态函数)
+	* [window](#window)
+	* [DOM](#dom)
+		* [structure](#structure)
+		* [class](#class)
+		* [style](#style)
+	* [Ajax](#ajax)
+		* [$.getJSON](#getjson)
+		* [$.ajax](#ajax-1)
 
 # JQuery
 
