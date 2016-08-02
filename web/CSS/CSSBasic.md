@@ -1471,6 +1471,7 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 ### Society
 
 -   [一键分享](https://github.com/overtrue/share.js)
+-   [sharing](https://github.com/mxstbr/sharing)
 
 ### Mouse Effect
 
