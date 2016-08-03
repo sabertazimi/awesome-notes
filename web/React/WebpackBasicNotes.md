@@ -59,6 +59,8 @@ dllReferencePlugin = new Webpack.DllReferencePlugin({
     });
 ```
 
+-   imageMinPlugin
+
 ## Options
 
 -  --progress
