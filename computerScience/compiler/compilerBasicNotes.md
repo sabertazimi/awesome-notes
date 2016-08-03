@@ -41,7 +41,7 @@ front-end to back-end:
 
 ### Tokenizer - 词法分析器
 
-#### Finite State Machine - 转移图算法
+#### 转移图算法
 
 ```c
 token nextToken(void) {
@@ -75,7 +75,7 @@ token nextToken(void) {
 	}
 }
 ```
-#### 关键字(keyword)
+#### 关键字(keyword)处理
 
 -   根据 完美哈希算法(无冲突哈希函数) , 建立所有关键字对应的关键字完美哈希表
 -   读入有效标识符(字符串型)后, 查询关键字哈希表, 检查当前标识符是否为关键字
@@ -111,7 +111,9 @@ hash_two(char *str, int len) {
 }
 ```
 
-#### 正则表达式(Regular Expression)
+### 正则语言(Regular Expressions)
+
+#### 基本定义
 
 对于给定的字符集 C:
 
@@ -119,6 +121,226 @@ hash_two(char *str, int len) {
 -   任意 char <- C 是正则表达式
 -   若 M, N 是正则表达式, 则 M|N = {M, N}, MN = {mn|m <- M, n <- N}, M* = {"\0", M, MM, MMM, ...} (选择/连接/闭包)也是正则表达式
 
+#### 形式表示
+
+```regexp
+// 具有顺序性
+e -> "\0"		// basic defination
+	| c			// basic defination
+	| e | e		// recursive defination
+	| ee		// recursive defination
+	| e*		// recursive defination
+```
+
+#### 正则语法糖(Syntax Sugar)
+
+-   `[a-z]` : a|...|z
+-   c?      : 0/1 个c
+-   c+      : 1/n 个 c
+-   c{i, j} : i-j 个 c
+-   "a*"    : a* 自身(非 kleen 闭包)
+-   .       : 除 ‘\n’ 外的任意字符
+
+```regexp
+// 标识符
+[a-zA-Z\_][a-zA-Z\_0-9]*
+
+// decimal integer
+(+|-)?(0|[1-9][0-9]*)
+
+// decimal float
+(+|-)?(0|[1-9][0-9]*|)?\.[0-9]+
+```
+
+### 有限状态自动机(Finite Automaton)
+
+#### 确定有限状态自动机(Deterministic Finite Automaton)
+
+M = (AlphaSets, StateSets, currentState, FiniteStateSets, transferFunction)
+
+> A = {a, b}, SS = {0, 1, 2}, cS = 0, FS = {2},
+	transferFunction = {
+		(cS0, a) -> cS1, (cS0, b) -> cS0,
+		(cS1, a) -> cS2, (cS1, b) -> cS1,
+		(cS2, a) -> cS2, (cS2, b) -> cS2,
+	}
+
+##### 状态转移表实现 DFA
+
+|状态\字符|a|b|
+|:----------:|:-----:|:-----:|
+|0|1|0|
+|1|2|1|
+|2|2|2|
+
+#### 非确定有限状态自动机(Nondeterministic Finite Automaton)
+
+transferFunction 中的次态不确定/不唯一(为一个开集合)
+
+> (cS0, a) -> {cS1, cS2}
+
 ## Projects Exercise
+
+### C Declaration Interpreter
+
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+#define MAXTOKENS 100
+#define MAXTOKENLEN 64
+
+enum type_tag {
+    IDENTIFIER,
+    QUALIFIER,
+    TYPE,
+};
+
+struct token {
+    char type;
+    char string[MAXTOKENLEN];
+};
+
+int top = -1;
+struct token stack[MAXTOKENS];
+struct token ts;
+
+#define pop stack[top--]
+#define push(s) stack[++top] = s
+
+enum type_tag classify_string(void) {
+    char *s = ts.string;
+
+    if (!strcmp(s, "const")) {
+        strcpy(s, "read-only ");
+        return QUALIFIER;
+    }
+
+    if (!strcmp(s, "volatile")) return QUALIFIER;
+    if (!strcmp(s, "void")) return TYPE;
+    if (!strcmp(s, "char")) return TYPE;
+    if (!strcmp(s, "signed")) return TYPE;
+    if (!strcmp(s, "unsigned")) return TYPE;
+    if (!strcmp(s, "short")) return TYPE;
+    if (!strcmp(s, "int")) return TYPE;
+    if (!strcmp(s, "long")) return TYPE;
+    if (!strcmp(s, "float")) return TYPE;
+    if (!strcmp(s, "double")) return TYPE;
+    if (!strcmp(s, "struct")) return TYPE;
+    if (!strcmp(s, "union")) return TYPE;
+    if (!strcmp(s, "enum")) return TYPE;
+
+    return IDENTIFIER;
+}
+
+void gettoken(void) {
+    char *p = ts.string;
+
+    /* 略过空白字符 */
+    while ((*p = getchar()) == ' ');
+
+    if (isalnum(*p)) {
+        /* 读入得标识符以ａ－Ｚ，０－９开头 */
+        while (isalnum(*++p = getchar()));
+        ungetc(*p, stdin);
+        *p = '\0';
+        ts.type = classify_string();
+        return;
+    }
+
+    if (*p == '*') {
+        strcpy(ts.string, "pointer to");
+        ts.type = '*';
+        return;
+    }
+
+    ts.string[1] = '\0';
+    ts.type = *p;
+    return;
+}
+
+void read_to_first_identifer(void) {
+    gettoken();
+
+	// read til identifier
+    while (ts.type != IDENTIFIER) {
+        push(ts);
+        gettoken();
+    }
+
+    printf("%s is ", ts.string);
+    gettoken();
+}
+
+void deal_with_arrays(void) {
+    while (ts.type == '[') {
+        printf("array ");
+        gettoken();
+
+		/* 数字或']' */
+        if (isdigit(ts.string[0])) {
+            printf("0..%d ", atoi(ts.string) - 1);
+            gettoken();
+        }
+
+        gettoken();
+        printf("of ");
+    }
+}
+
+void deal_with_pointers(void) {
+    while (stack[top].type == '*')
+    {
+        printf("%s ", pop.string);
+    }
+}
+
+void deal_with_function_args(void) {
+    while (ts.type != ')') {
+        gettoken();
+    }
+
+    gettoken();
+    printf("function returning ");
+}
+
+void deal_with_declarator(void) {
+    /* 处理标识符之后可能存在的数组/函数 */
+
+    switch (ts.type) {
+    	case '[':
+        	deal_with_arrays();
+        	break;
+    	case '(':
+        	deal_with_function_args();
+        	break;
+    }
+
+    deal_with_pointers();
+
+    /* 处理在读入到标识符之前压入到堆栈中的符号 */
+    while (top >= 0) {
+        if (stack[top].type == '(') {
+            pop;
+            gettoken();  //读取')'之后的符号
+            deal_with_declarator();
+        } else {
+            printf("%s", pop.string);
+        }
+    }
+}
+
+int main(void) {
+    /* 将标记压入堆栈中, 直到遇见标识符 */
+    read_to_first_identifer();
+    deal_with_declarator();
+    printf("\n");
+
+    system("pause");
+    return 0;
+}
+```
 
 ### Cool(Classrom Object-Oriented Language)
