@@ -1,17 +1,23 @@
 
-- [Compiler Basic Notes](#compiler-basic-notes)
-	- [Basic Concepts](#basic-concepts)
-		- [Defination of compilers](#defination-of-compilers)
-		- [Structure of compilers](#structure-of-compilers)
-	- [Lexical Analysis](#lexical-analysis)
-		- [Tokenizer - 词法分析器](#tokenizer-词法分析器)
-			- [Finite State Machine - 转移图算法](#finite-state-machine-转移图算法)
-			- [关键字(keyword)](#关键字keyword)
-- [define KEYWORD_MAXLEN 10](#define-keywordmaxlen-10)
-- [define KEYWORD_HASH_SEED 131](#define-keywordhashseed-131)
-			- [正则表达式(Regular Expression)](#正则表达式regular-expression)
-	- [Projects Exercise](#projects-exercise)
-		- [Cool(Classrom Object-Oriented Language)](#coolclassrom-object-oriented-language)
+* [Compiler Basic Notes](#compiler-basic-notes)
+	* [Basic Concepts](#basic-concepts)
+		* [Defination of compilers](#defination-of-compilers)
+		* [Structure of compilers](#structure-of-compilers)
+	* [Lexical Analysis](#lexical-analysis)
+		* [Tokenizer - 词法分析器](#tokenizer---词法分析器)
+			* [转移图算法](#转移图算法)
+			* [关键字(keyword)处理](#关键字keyword处理)
+		* [正则语言(Regular Expressions)](#正则语言regular-expressions)
+			* [基本定义](#基本定义)
+			* [形式表示](#形式表示)
+			* [正则语法糖(Syntax Sugar)](#正则语法糖syntax-sugar)
+		* [有限状态自动机(Finite Automaton)](#有限状态自动机finite-automaton)
+			* [确定有限状态自动机(Deterministic Finite Automaton)](#确定有限状态自动机deterministic-finite-automaton)
+				* [状态转移表实现 DFA](#状态转移表实现-dfa)
+			* [非确定有限状态自动机(Nondeterministic Finite Automaton)](#非确定有限状态自动机nondeterministic-finite-automaton)
+	* [Projects Exercise](#projects-exercise)
+		* [C Declaration Interpreter](#c-declaration-interpreter)
+		* [Cool(Classrom Object-Oriented Language)](#coolclassrom-object-oriented-language)
 
 # Compiler Basic Notes
 
@@ -159,11 +165,11 @@ e -> "\0"		// basic defination
 M = (AlphaSets, StateSets, currentState, FiniteStateSets, transferFunction)
 
 > A = {a, b}, SS = {0, 1, 2}, cS = 0, FS = {2},
-	transferFunction = {
-		(cS0, a) -> cS1, (cS0, b) -> cS0,
-		(cS1, a) -> cS2, (cS1, b) -> cS1,
-		(cS2, a) -> cS2, (cS2, b) -> cS2,
-	}
+>     transferFunction = {
+>         (cS0, a) -> cS1, (cS0, b) -> cS0,
+>         (cS1, a) -> cS2, (cS1, b) -> cS1,
+>         (cS2, a) -> cS2, (cS2, b) -> cS2,
+>     }
 
 ##### 状态转移表实现 DFA
 
