@@ -164,12 +164,14 @@ e -> "\0"		// basic defination
 
 M = (AlphaSets, StateSets, currentState, FiniteStateSets, transferFunction)
 
-> A = {a, b}, SS = {0, 1, 2}, cS = 0, FS = {2},
->     transferFunction = {
->         (cS0, a) -> cS1, (cS0, b) -> cS0,
->         (cS1, a) -> cS2, (cS1, b) -> cS1,
->         (cS2, a) -> cS2, (cS2, b) -> cS2,
->     }
+```c
+A = {a, b}, SS = {0, 1, 2}, cS = 0, FS = {2},
+transferFunction = {
+	(cS0, a) -> cS1, (cS0, b) -> cS0,
+	(cS1, a) -> cS2, (cS1, b) -> cS1,
+	(cS2, a) -> cS2, (cS2, b) -> cS2,
+}
+```
 
 ##### 状态转移表实现 DFA
 
