@@ -724,13 +724,16 @@ $ git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
 $ :PluginInstall
 ```
 
-### airline/CtrlP
+### airline/CtrlP/colorschemes
 
 -   need config
 -   :AirlineTheme {theme}
 -   :colorscheme {theme}
 
 ```vimrc
+" colorschemes config
+colorscheme Monokai
+
 " airline config
 "set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
