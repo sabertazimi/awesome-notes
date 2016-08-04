@@ -749,12 +749,16 @@ let g:ctrlp_user_command = 'find %s -type f'
 
 ### YouCompleteMe
 
-need compile
+need compile and config
 
 ```sh
 $ sudo apt-get install build-essential cmake python-dev python3-dev
 $ cd ~/.vim/bundle/YouCompleteMe
-$ ./install.puy --clang-completer --tern-completer
+$ ./install.py --clang-completer
+```
+
+```vimrc
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 ```
 
 ### ctags
