@@ -1,17 +1,17 @@
 "==========================================
-" ProjectLink: https://github.com/wklken/vim-for-server
-"              https://github.com/sabertazimi/awesome-notes
-" Author:  wklken
-"          sabertazimi(Add Plugins for Vim by Vundle.vim)
-" Version: 1.0
-" Email: wklken@yeah.net
-"        sabertazimi@gmail.com
+" Repos:    https://github.com/wklken/vim-for-server
+"           https://github.com/sabertazimi/awesome-notes
+" Author:   wklken
+"           sabertazimi
+" Version:  1.1
+" Email:    wklken@yeah.net
+"           sabertazimi@gmail.com
 " BlogPost: http://www.wklken.me
 "           http://sabertazimi.github.io
-" ReadMe: README.md
-" Last_modify: 2015-07-07
-"              2016-08-04
-" Desc: simple vim config for server, with minimalist plugins
+" ReadMe:   README.md
+" Modified: 2015-07-07
+"           2016-08-04
+" Desc:     simple vim config for server, with minimalist plugins.
 "==========================================
 
 " vundle config
@@ -22,31 +22,33 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
+"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
+"
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
 Plugin 'L9'
 
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
 
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
 
 " marktown toc(table of content) generator
 Plugin 'AutoClose'
@@ -63,6 +65,9 @@ Plugin 'dracula/vim'
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'aperezdc/vim-template'
+
+" YCM config
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 
 " airline config
 " set laststatus=2
