@@ -100,7 +100,7 @@
 
 #### 指针检查
 
--   alloctor失败，需添加NULL检查
+-   alloctor失败，需添加NULL检查:
     -   assert
     -   exit
 
@@ -285,16 +285,6 @@ Valgrind - [GitHub Repo](https://github.com/svn2github/valgrind)
 
 ## Useful Functions
 
-### Alloctor
-
-启发式(Heuristic)编程:
-
-- 建立已分配void指针表,free函数执行时,只回收表中存在的指针;不存在则报错
--   对heap进行分区 - 小/中/大块内存请求,分别从不同区域(8/16/32最小单位区)分配
-
--   记录当前堆块的信息，如长度，空闲状态
--   记录周围环境信息，如保留上/下一堆块的指针或记录上/下堆块空闲状态
-
 #### memset
 
 #### free
@@ -305,7 +295,7 @@ Valgrind - [GitHub Repo](https://github.com/svn2github/valgrind)
 
 #### strdup
 
-string duplicate - `char *strdup(string)` 封装allocator细节
+string duplicate - `char *strdup(string)` 封装 allocator 细节
 
 #### strchr/strstr
 
