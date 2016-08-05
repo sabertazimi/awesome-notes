@@ -62,9 +62,15 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'dracula/vim'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'aperezdc/vim-template'
+
+" Goyo and limelight config
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " YCM config
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
