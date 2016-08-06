@@ -67,10 +67,6 @@
 				* [配置文件](#配置文件)
 	* [浏览器兼容性(Browser Compatibility)](#浏览器兼容性browser-compatibility)
 		* [特性检测](#特性检测)
-	* [Web 安全(Security)](#web-安全security)
-		* [Input check](#input-check)
-			* [特殊字符](#特殊字符)
-		* [XSS Attack](#xss-attack)
 	* [Testing](#testing)
 		* [Frameworks](#frameworks)
 			* [Unit 测试](#unit-测试)
@@ -995,26 +991,6 @@ if (document.getElementById) {
 }
 ```
 
-## Web 安全(Security)
-
-### Input check
-
-#### 特殊字符
-
--   null字符
--   空格字符
--   空输入(提示)
-
-### XSS Attack
-
-防御:
-
-```js
-Array.prototype.filter.call(input.value, function (item) {
-	return item !== "<" && item !== ">";  // " " "\n" "\0" etc.
-});
-```
-
 ## Testing
 
 ### Frameworks
@@ -1754,3 +1730,11 @@ var i32a = new Int32Array([1, 2, 3, 4, 5]);
 i32a.copyWithin(0, 2);
 // => Int32Array [3, 4, 5, 4, 5]
 ```
+
+## Browser/Under the hood
+
+### Variables Lifecycle
+
+-   Declaration phase: 在作用域中注册变量
+-   Initialization phase: 分配内存, 在作用域中绑定变量(undefined)
+-   Assignment phase
