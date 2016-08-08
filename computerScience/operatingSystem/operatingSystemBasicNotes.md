@@ -48,6 +48,10 @@
 			* [段页式存储管理](#段页式存储管理)
 		* [特权级](#特权级)
 			* [特权级检查](#特权级检查)
+			* [特权级切换](#特权级切换)
+				* [ring 0 to ring 3](#ring-0-to-ring-3)
+				* [ring 3 to ring 0 (特权级提升)](#ring-3-to-ring-0-特权级提升)
+			* [TSS(Task State Segment)](#tsstask-state-segment)
 
 # Operating System Basic Notes
 
@@ -300,4 +304,30 @@ BIOS 根据设置(硬盘/U盘/网络启动), 加载存储设备的主引导扇�
 
 ### 特权级
 
+0: 最高特权级, 3: 最低特权级
+
 #### 特权级检查
+
+-   CPL/RPL: 访问者特权级
+-   DRL: 段描述符/门描述符(中断/陷阱门)中保存的特权级, 表示被访问段/中断服务/陷阱的特权级
+-   CPL/RPL <= DRL e.g 0 < 3
+
+#### 特权级切换
+
+##### ring 0 to ring 3
+
+-   interrupt/trap: push SS(**RPL=3**) -> ESP -> EFLAGS -> CS(**RPL=3**) -> EIP -> Error Code
+_   iret: pop above variables, move to ring 3
+
+##### ring 3 to ring 0 (特权级提升)
+
+
+-   interrupt/trap: stack switch
+-   push EFLAGS -> CS(**RPL=0**) -> EIP -> Error Code
+-   iret: pop above variables, move to ring 0
+
+#### TSS(Task State Segment)
+
+保存不同特权级的堆栈信息(SS/ESP)
+
+全局描述符表中保存一个 TSS Descriptor(TSS base + TSS limit): allocate TSS memory -> init TSS -> fill TSS descriptor in GDT -> set TSS selector(task register)
