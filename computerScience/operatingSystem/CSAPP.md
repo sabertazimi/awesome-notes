@@ -1,3 +1,4 @@
+
 * [Computer Systems: A Programmer's Perspective - System Basic Notes](#computer-systems-a-programmers-perspective---system-basic-notes)
 	* [机器码与进制转换](#机器码与进制转换)
 		* [浮点数](#浮点数)
@@ -29,7 +30,6 @@
 			* [处理信号](#处理信号)
 			* [阻塞信号](#阻塞信号)
 		* [非本地跳转](#非本地跳转)
-	* [虚拟存储器](#虚拟存储器)
 	* [系统级 I/O](#系统级-io)
 
 # Computer Systems: A Programmer's Perspective - System Basic Notes
@@ -396,20 +396,6 @@ int main(int argc, char **argv) {
 
 -   setjmp - catch: 返回多次
 -   longjmp - throw: 不返回
-
-## 虚拟存储器
-
-虚拟地址: TLB(translation lookaside buffer in pm)
-
--   TLBT(tag) - TLBI(index) - VPO
--   VPN(virtual page number) - VPO(virtual page offset)
-
-物理地址: C(cache) PPO = VPO
-
--   CT(tag) - CI(index) - CO(offset)
--   PPN(physical page number) - PPO(physical page offset)
-
-
 
 ## 系统级 I/O
 

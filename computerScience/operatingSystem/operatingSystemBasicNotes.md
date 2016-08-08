@@ -31,6 +31,23 @@
 				* [紧凑(compaction)](#紧凑compaction)
 				* [分区对换(swapping in/out)](#分区对换swapping-inout)
 			* [malloc 实现策略](#malloc-实现策略)
+				* [启发式(Heuristic)编程](#启发式heuristic编程)
+				* [伙伴系统(Buddy System)](#伙伴系统buddy-system)
+					* [合并空闲块](#合并空闲块)
+		* [非连续内存分配](#非连续内存分配)
+			* [段式存储管理](#段式存储管理)
+			* [页式存储管理](#页式存储管理)
+				* [虚拟地址](#虚拟地址)
+				* [物理地址](#物理地址)
+				* [页表](#页表)
+					* [页表结构](#页表结构)
+				* [性能问题](#性能问题)
+					* [TLB(translation lookaside buffer)](#tlbtranslation-lookaside-buffer)
+					* [多级页表](#多级页表)
+					* [反置页表](#反置页表)
+			* [段页式存储管理](#段页式存储管理)
+		* [特权级](#特权级)
+			* [特权级检查](#特权级检查)
 
 # Operating System Basic Notes
 
@@ -215,4 +232,72 @@ BIOS 根据设置(硬盘/U盘/网络启动), 加载存储设备的主引导扇�
 
 #### 段式存储管理
 
+将逻辑地址划分, 低位表示段内偏移, 高位(取摸)表示段号(类比缓存中的内存地址)
 
+#### 页式存储管理
+
+##### 虚拟地址
+
+> TLB(translation lookaside buffer in cpu/pm)
+
+-   Virtual Address = 2^(bits of virtual page offset) * virtual page number + virtual page offset
+-   VPN(virtual page number point to PPN) - VPO(virtual page offset = PPO)
+-   根据 VPN 在页表中找到对应表项(VPN 表示项号), 每项保存着 PPN
+-   TLBT(tag) - TLBI(index) - VPO
+
+##### 物理地址
+
+> C(cache) PPO = VPO
+
+-   Page Frame(帧): 高位为帧号, 低位为偏移
+-   Physical Address = 2^(bits of physical page offset) * physical page number/page frame number + physical page offset
+-   PPN(physical page number) - PPO(physical page offset = VPO)
+-   CT(tag) - CI(index) - CO(offset)
+
+##### 页表
+
+-   页表由操作系统建立, 硬件(CPU/MMU)根据页表信息将虚拟地址映射为物理地址
+
+###### 页表结构
+
+-   FN/PPN
+-   标志位: resident bit(存在位)/dirty bit(修改位)/reference(clock) bit(引用位)
+
+##### 性能问题
+    
+-   两次访存: 第一次获取页表项, 第二次访问实际数据
+-   页表占据大量内存单元
+
+###### TLB(translation lookaside buffer)
+
+缓存页表项 - key: VPN, value: PPN　不用访问页表
+
+###### 多级页表
+
+切割页表: 建立子页表
+
+> CR3 寄存器: 保存一级页表的基址
+
+-   父页表表项保存子页表起始地址, 逻辑地址某部分保存偏移地址(子表项号)
+-   存在位为 0 时, 不用保存子表, 节省内存单元
+
+###### 反置页表
+
+-   PPN 作为页表索引, 页表项保存 VPN(或者 Hash(VPN|PID))
+-   将 VPN 映射为 PPN 时, 需遍历整个页表(但此页表只占用少量内存单元)
+
+#### 段页式存储管理
+
+在页式存储管理基础上, 引入段式存储管理
+
+<--- vsn --- vpn --- vpo ---> 映射为 <--- ppn --- ppo --->
+
+> sn: segment number, pn:page number, po: page offset
+
+-   以 vsn 为索引在进程段表中找到段表项, 获取段基址与段大小信息(base limit)
+-   以 vpn 为索引在进程页表(页表基址 = 段基址)中找到页表项, 获取 ppn
+-   ppn + vpo(ppo) 为实际物理地址
+
+### 特权级
+
+#### 特权级检查
