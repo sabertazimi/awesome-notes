@@ -27,8 +27,8 @@
 
 ### Defination of compilers
 
--   `program_code` ---compiler---> executable
--   data ---executable---> output
+*   `program_code` ---compiler---> executable
+*   data ---executable---> output
 
 > e.g Fortran(formula translation) 1 project
 
@@ -36,14 +36,16 @@
 
 front-end to back-end:
 
--   front-end: src ---lexical analysis---> tokens ---parsing/syntax analysis---> AST(Abstract Syntax Tree)
--   back-end: AST ---...---> ... ---...---> ... ---code generation---> dist
+*   front-end: src ---lexical analysis---> tokens ---parsing/syntax analysis---> AST(Abstract Syntax Tree)
+*   back-end: AST ---...---> ... ---...---> ... ---code generation---> dist
 
--   lexical analysis(词法分析)
--   parsing/syntax analysis(语法分析)
--   semantic analysis(语义分析): type and scope
--   optimization
--   code generation: translate to other high level language/assembly code/machine code
+details:
+
+*   lexical analysis(词法分析)
+*   parsing/syntax analysis(语法分析)
+*   semantic analysis(语义分析): type and scope
+*   optimization
+*   code generation: translate to other high level language/assembly code/machine code
 
 ## Lexical Analysis
 
@@ -83,10 +85,11 @@ token nextToken(void) {
 	}
 }
 ```
+
 #### 关键字(keyword)处理
 
--   根据 完美哈希算法(无冲突哈希函数) , 建立所有关键字对应的关键字完美哈希表
--   读入有效标识符(字符串型)后, 查询关键字哈希表, 检查当前标识符是否为关键字
+*   根据 完美哈希算法(无冲突哈希函数) , 建立所有关键字对应的关键字完美哈希表
+*   读入有效标识符(字符串型)后, 查询关键字哈希表, 检查当前标识符是否为关键字
 
 ```c
 #define KEYWORD_MAXLEN 10
@@ -125,9 +128,9 @@ hash_two(char *str, int len) {
 
 对于给定的字符集 C:
 
--   空串 "\0" 是正则表达式
--   任意 char <- C 是正则表达式
--   若 M, N 是正则表达式, 则 M|N = {M, N}, MN = {mn|m <- M, n <- N}, M* = {"\0", M, MM, MMM, ...} (选择/连接/闭包)也是正则表达式
+*   空串 "\0" 是正则表达式
+*   任意 char <- C 是正则表达式
+*   若 M, N 是正则表达式, 则 M|N = {M, N}, MN = {mn|m <- M, n <- N}, M* = {"\0", M, MM, MMM, ...} (选择/连接/闭包)也是正则表达式
 
 #### 形式表示
 
@@ -142,12 +145,12 @@ e -> "\0"		// basic defination
 
 #### 正则语法糖(Syntax Sugar)
 
--   `[a-z]` : a|...|z
--   c?      : 0/1 个c
--   c+      : 1/n 个 c
--   c{i, j} : i-j 个 c
--   "a*"    : a* 自身(非 kleen 闭包)
--   .       : 除 ‘\n’ 外的任意字符
+*   `[a-z]` : a|...|z
+*   c?      : 0/1 个c
+*   c+      : 1/n 个 c
+*   c{i, j} : i-j 个 c
+*   "a*"    : a* 自身(非 kleen 闭包)
+*   .       : 除 ‘\n’ 外的任意字符
 
 ```regexp
 // 标识符
@@ -195,24 +198,25 @@ RegExp --Thompson 算法--> NFA --子集构造算法--> DFA --Hopcroft 最小化
 
 #### Thompson 算法: RegExp --> NFA
 
--   直接构造基本 RegExp
--   递归构造复合 RegExp
--   epsilon            : i --epsilon--> f
--   RegExp             : i --NFA(RegExp)--> f
--   选择               : i 分路 --epsilon--> m --NFA(RegExp)--> n --epsilon--> n 分路 --epsilon--> f
--   连接               : i --NFA(RegExp)--> m --epsilon--> n --NFA(RegExp)--> f
--   闭包(n个RegExp前缀) : i --epsilon--> m --NFA(RegExp)--> n --epsilon--> f, m <--n * epsilon-- n
+*   直接构造基本 RegExp
+*   递归构造复合 RegExp
+*   epsilon : i --epsilon--> f
+*   RegExp  : i --NFA(RegExp)--> f
+*   选择    : i --NFA(RegExp1)--> f, i --NFA(RegExp2)--> f
+*   连接    : i --NFA(RegExp1)--> m --NFA(RegExp2)--> f
+*   闭包    : i --epsilon--> m --epsilon--> f, m --RegExp--> m
 
 #### 子集构造算法: NFA --> DFA
 
 由 Thompson 算法生成的 NFA, 当且仅当输入为 epsilon 时, 次态不唯一
 
--   将所有可达到次态作为一个集合 s, 视为单一次态 s
--   delta(Sigma) + epsilon-closure(深度/广度优先遍历找寻可达到次态边界)
+*   将所有可达到次态作为一个集合 s, 视为单一次态 s
+*   delta(Sigma) + epsilon-closure(深度/广度优先遍历找寻可达到次态边界)
 
 ```cpp
-DFA simplify_state(NFA nfa) {
+DFA subset_construction(NFA nfa) {
 	s0 = eps_closure(n0);
+
 	StateSet += s0;
 	enqueue(s0);
 
@@ -236,6 +240,8 @@ DFA simplify_state(NFA nfa) {
 
 #### Hopcroft 算法
 
+最小化 DFA(数字逻辑中的最简状态表), 合并等价状态(等价类)
+
 ```cpp
 split(StateSet S) {
 	foreach (char ch) {
@@ -254,7 +260,42 @@ hopcroft(DFA) {
 }
 ```
 
-最小化 DFA(数字逻辑中的最简状态表), 合并等价状态(等价类)
+#### 实现
+
+##### DFA
+
+###### 有向图
+
+###### 转移表
+
+*   行: 现态
+*   列: 输入
+*   值: 次态/ERROR/-1
+
+驱动代码: table 用于实现 switch/case, stack 用于实现最长匹配
+
+```cpp
+next_token() {
+	state = 0;
+	stack = [];
+
+	while (state != ERROR) {
+		c = getChar();
+
+		if (state is ACCEPT/FINITE) {
+			clear(stack);
+		}
+
+		push(state);
+		state = table[state][c];
+	}
+
+	while (state is not ACCEPT/FINITE) {
+		state = pop();
+		rollback();
+	}
+}
+```
 
 ## Projects Exercise
 
