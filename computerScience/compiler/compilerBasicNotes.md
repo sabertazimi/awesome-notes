@@ -385,7 +385,86 @@ F -> num
 
 ### 自顶向下分析
 
-## Projects Exercise
+*   从开始符号出发推导任意句子 t, 与给定句子 s 进行比较分析
+*   利用分析树进行逐叶子匹配, 若匹配失败则进行回溯
+
+```cpp
+bool top_down_parsing(tokens[]) {
+	i = 0;
+	stack = [S];
+
+	while (stack != []) {
+		if (stack[top] is a terminal t) {
+			t == tokens[i] ? pop(i++) : backtrack();
+		} else if (stack[top] is a nonterminal T) {
+			pop();
+			push(T expansion);	// 自右向左压栈, e.g pop(S), push(N_right), push(V), push(N_left)
+		} else {
+			throw new SyntaxError();
+		}
+	}
+
+	return i >= tokens.length && is_empty(stack) ? true : false;
+}
+```
+
+#### 避免回溯
+
+利用前看符号避免回溯
+
+```grammar
+Sentence -> Noun Verb Noun
+Noun -> sheep
+	|	tiger
+	|	grass
+	|	water
+Verb -> eat
+	|	drink
+```
+
+> tiger eat water: 向前看非终结符推导出的所有终结符中匹配tiger的终结符; 不向前看,则先推导 N, 再推导 n, 但 n 不一定匹配 tiger, 则需进行回溯; 向前看一个字符, 直接推导 N --> n, 同时直接找寻匹配 tiger 的终结符
+
+```grammar
+S -> N V N
+N -> (sheep)tiger
+V -> eat
+N -> (sheep-tiger-grass)water
+```
+
+#### 递归下降分析算法(预测分析算法)
+
+*   分治算法: 每个非终结符构造一个**分析函数**
+*   前看符号: 用**前看符号**指导产生式规则的选择(expansion)
+
+```cpp
+parse_S(tokens[]) {
+	parse_N(tokens[0]);
+	parse_V(tokens[1]);
+	parse_N(tokens[2]);
+}
+
+parse_N(token) {
+	if (token == s|t|g|w) {
+		return true;
+	} else {
+		throw new SyntaxError();
+	}
+}
+
+parse_V(token) {
+	if (token == e|d) {
+		return true;
+	} else {
+		throw new SyntaxError();
+	}
+}
+```
+
+#### LL(1)分析算法
+
+利用前看符号避免回溯
+
+## Compilers Exercise
 
 ### C Declaration Interpreter
 
