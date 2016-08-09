@@ -164,7 +164,7 @@ e -> "\0"		// basic defination
 
 #### 确定有限状态自动机(Deterministic Finite Automaton)
 
-M = (AlphaSets, StateSets, currentState, FiniteStateSets, transferFunction)
+M = (AlphaSet/InputSet, StateSet, currentState, FiniteStateSet, transferFunction)
 
 ```c
 A = {a, b}, SS = {0, 1, 2}, cS = 0, FS = {2},
@@ -189,11 +189,11 @@ transferFunction 中的次态不确定/不唯一(为一个开集合)
 
 > (cS0, a) -> {cS1, cS2}
 
-### 词法分析器
+### 自动词法分析器
 
 RegExp --Thompson 算法--> NFA --子集构造算法--> DFA --Hopcroft 最小化算法--> 词法分析器代码
 
-#### Thompson 算法
+#### Thompson 算法: RegExp --> NFA
 
 -   直接构造基本 RegExp
 -   递归构造复合 RegExp
@@ -201,7 +201,60 @@ RegExp --Thompson 算法--> NFA --子集构造算法--> DFA --Hopcroft 最小化
 -   RegExp             : i --NFA(RegExp)--> f
 -   选择               : i 分路 --epsilon--> m --NFA(RegExp)--> n --epsilon--> n 分路 --epsilon--> f
 -   连接               : i --NFA(RegExp)--> m --epsilon--> n --NFA(RegExp)--> f
--   闭包(n个RegExp前缀): i --epsilon--> m --NFA(RegExp)--> n --epsilon--> f, m <--n * epsilon-- n
+-   闭包(n个RegExp前缀) : i --epsilon--> m --NFA(RegExp)--> n --epsilon--> f, m <--n * epsilon-- n
+
+#### 子集构造算法: NFA --> DFA
+
+由 Thompson 算法生成的 NFA, 当且仅当输入为 epsilon 时, 次态不唯一
+
+-   将所有可达到次态作为一个集合 s, 视为单一次态 s
+-   delta(Sigma) + epsilon-closure(深度/广度优先遍历找寻可达到次态边界)
+
+```cpp
+DFA simplify_state(NFA nfa) {
+	s0 = eps_closure(n0);
+	StateSet += s0;
+	enqueue(s0);
+
+	while (workqueue != []) {
+		dequeue(s);
+
+		foreach (ch in InputSet) {
+			next_state = eps_closure(delta(s, ch));
+			Fn[s, ch] = next_state;		// DFA 中的转移函数
+
+			if (next_state not in StateSet) {
+				StateSet += next_state;
+				enqueue(next_state);
+			}
+		}
+	}
+
+	return DFA(StateSet, Fn);
+}
+```
+
+#### Hopcroft 算法
+
+```cpp
+split(StateSet S) {
+	foreach (char ch) {
+		if (ch can split S) {
+			split S into S1, ..., Sk;
+		}
+	}
+}
+
+hopcroft(DFA) {
+	split all nodes into InitStateSet and FiniteStateSet (Two State Sets);
+
+	while (set is still changes) {
+		split(S);
+	}
+}
+```
+
+最小化 DFA(数字逻辑中的最简状态表), 合并等价状态(等价类)
 
 ## Projects Exercise
 
