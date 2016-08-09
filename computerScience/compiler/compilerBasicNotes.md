@@ -297,6 +297,65 @@ next_token() {
 }
 ```
 
+## Syntax Analysis(语法分析)
+
+### 乔姆斯基文法体系
+
+*   3 型文法(词法工具): 正则文法
+*   2 型文法(语法工具): 上下文无关文法
+*   1 型文法: 上下文有关文法
+*   0 型文法: 任意文法
+*   ((((3)2)1)0)
+
+Tokens + Grammar --Syntax Analysis--> AST(Abstract Syntax Tree)
+
+### 上下文无关文法
+
+#### 文法表示
+
+G = (S, N, T, P):
+
+*   S: 开始符
+*   N: 非终结符集合
+*   T: 终结符集合
+*   P: 产生式规则集合 X -> beta1, beta2, ..., betan, X <- N, beta <- N+T
+
+
+#### 形式化表示
+
+##### 简易表示
+
+```grammar
+Sentence -> Noun Verb Noun
+Noun -> sheep
+	|	tiger
+	|	grass
+	|	water
+Verb -> eat
+	|	drink
+```
+
+> S: Sentence, N: Sentence/Verb/Noun, T: sheep/tiger/grass/water/eat/drink
+
+```grammar
+E -> num
+	|id
+	|E + E
+	|E * E
+```
+
+> S: E, N: E, T: num/id/+/*
+
+##### 巴科斯范式(Backus-Naur Form)
+
+*   ::=             : "被定义为"
+*   "word"          : 字符本身
+*   双引号外的字     : 语法部分
+*   尖括号( < > )   : 必选项(非终结符)
+*   方括号( `[ ]` ) : 可选项
+*   大括号( { } )   : 可重复0至无数次的项
+*   竖线( | )       : "OR"
+
 ## Projects Exercise
 
 ### C Declaration Interpreter
