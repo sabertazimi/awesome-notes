@@ -299,6 +299,8 @@ next_token() {
 
 ## Syntax Analysis(语法分析)
 
+Tokens + Grammar --Syntax Analysis--> AST(Abstract Syntax Tree)
+
 ### 乔姆斯基文法体系
 
 *   3 型文法(词法工具): 正则文法
@@ -306,8 +308,6 @@ next_token() {
 *   1 型文法: 上下文有关文法
 *   0 型文法: 任意文法
 *   ((((3)2)1)0)
-
-Tokens + Grammar --Syntax Analysis--> AST(Abstract Syntax Tree)
 
 ### 上下文无关文法
 
@@ -319,7 +319,6 @@ G = (S, N, T, P):
 *   N: 非终结符集合
 *   T: 终结符集合
 *   P: 产生式规则集合 X -> beta1, beta2, ..., betan, X <- N, beta <- N+T
-
 
 #### 形式化表示
 
@@ -341,7 +340,7 @@ Verb -> eat
 E -> num
 	|id
 	|E + E
-	|E * E
+	|E `*` E
 ```
 
 > S: E, N: E, T: num/id/+/*
@@ -355,6 +354,36 @@ E -> num
 *   方括号( `[ ]` ) : 可选项
 *   大括号( { } )   : 可重复0至无数次的项
 *   竖线( | )       : "OR"
+
+#### 分析树
+
+进行文法推导时生成的树:
+
+*   根        : 开始符
+*   内部结点  : 非终结符
+*   叶子结点  : 终结符
+*   层        : 一步推导(优先级影响推导顺序)
+*   叶子结点串: 最终表达式
+*   后序遍历  : 最终结果
+
+##### 二义性文法
+
+若给定文法 G, 对于句子 s, 其有 2 可不同的分析树, 择称 G 是二义性文法
+
+##### 文法重写(消除二义性)
+
+```grammar
+E -> E + T
+	|T
+T -> T * F
+	|F
+F -> num
+	|id
+```
+
+> 消除 + 与 `*` 的二义性, 如 3+4`*`5
+
+### 自顶向下分析
 
 ## Projects Exercise
 
