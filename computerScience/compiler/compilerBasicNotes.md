@@ -15,6 +15,8 @@
 			* [确定有限状态自动机(Deterministic Finite Automaton)](#确定有限状态自动机deterministic-finite-automaton)
 				* [状态转移表实现 DFA](#状态转移表实现-dfa)
 			* [非确定有限状态自动机(Nondeterministic Finite Automaton)](#非确定有限状态自动机nondeterministic-finite-automaton)
+		* [词法分析器](#词法分析器)
+			* [Thompson 算法](#thompson-算法)
 	* [Projects Exercise](#projects-exercise)
 		* [C Declaration Interpreter](#c-declaration-interpreter)
 		* [Cool(Classrom Object-Oriented Language)](#coolclassrom-object-oriented-language)
