@@ -460,6 +460,25 @@ parse_V(token) {
 }
 ```
 
+##### 算法实现
+
+```cpp
+// X -> a
+// 	|	XX
+// 	|	aXXX
+// 	|	aXXXXb
+parse_X() {
+	token = nextToken();
+
+	switch (token) {
+		case ...: // i: token == atom_char or parse_XX();
+		case ...: // j: token == atom_char, token = nextToken(), parse_XXX();
+		case ...: // k: token == atom_char, token = nextToken(), parse_XXXX(), token=nextToken(), token == b
+		default: throw new SyntaxError();
+	}
+}
+```
+
 #### LL(1)分析算法
 
 利用前看符号避免回溯
