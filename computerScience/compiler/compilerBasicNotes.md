@@ -187,6 +187,20 @@ transferFunction 中的次态不确定/不唯一(为一个开集合)
 
 > (cS0, a) -> {cS1, cS2}
 
+### 词法分析器
+
+RegExp --Thompson 算法--> NFA --子集构造算法--> DFA --Hopcroft 最小化算法--> 词法分析器代码
+
+#### Thompson 算法
+
+-   直接构造基本 RegExp
+-   递归构造复合 RegExp
+-   epsilon            : i --epsilon--> f
+-   RegExp             : i --NFA(RegExp)--> f
+-   选择               : i 分路 --epsilon--> m --NFA(RegExp)--> n --epsilon--> n 分路 --epsilon--> f
+-   连接               : i --NFA(RegExp)--> m --epsilon--> n --NFA(RegExp)--> f
+-   闭包(n个RegExp前缀): i --epsilon--> m --NFA(RegExp)--> n --epsilon--> f, m <--n * epsilon-- n
+
 ## Projects Exercise
 
 ### C Declaration Interpreter
