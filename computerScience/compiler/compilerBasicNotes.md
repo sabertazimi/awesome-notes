@@ -398,7 +398,7 @@ bool top_down_parsing(tokens[]) {
 			t == tokens[i] ? pop(i++) : backtrack();
 		} else if (stack[top] is a nonterminal T) {
 			pop();
-			push(T expansion);	// 自右向左压栈, e.g pop(S), push(N_right), push(V), push(N_left)
+			push(T next expansion);	// 自右向左压栈, e.g pop(S), push(N_right), push(V), push(N_left)
 		} else {
 			throw new SyntaxError();
 		}
@@ -484,7 +484,173 @@ parse_X() {
 *   从左(L)向右读入程序
 *   最左(L)推导
 *   一个(1)前看符号
-*   表驱动
+*   分治算法: 每个非终结符构造一个**first set** 和一个 **follow set**, 最后为每个规则构造一个 **final set**
+*   分析表驱动(由 first sets/follow sets/final sets 推导分析表)
+
+```cpp
+bool ll1_parsing(tokens[]) {
+	i = 0;
+	stack = [S];
+
+	while (stack != []) {
+		if (stack[top] is a terminal t) {
+			t == tokens[i] ? pop(i++) : throw new SyntaxError();
+		} else if (stack[top] is a nonterminal T) {
+			pop();
+			// push(T correct expansion);
+			// 自右向左压栈, e.g pop(S), push(N_right), push(V), push(N_left)
+			push(final_table[T][tokens[i]] 对应项(规则编号)所对应规则的右边式子);
+		} else {
+			throw new SyntaxError();
+		}
+	}
+
+	return i >= tokens.length && is_empty(stack) ? true : false;
+}
+```
+
+##### nullable sets
+
+*   存在规则: X -> epsilon
+*   或者    : X -> Y1Y2...Yn, 且存在规则 Y1->epsilon, ..., Yn->epsilon
+
+```cpp
+nullable = {};
+
+while (nullable is still changing) {
+	foreach (production p: X -> beta) {
+		if ((beta == epsilon) || (beta == Y1...Yn && Y1 <- nullable && ... && Yn <- nullable)) {
+			nullable += X;
+		}
+	}
+}
+```
+
+##### first sets
+
+first sets 不动点算法:
+
+```cpp
+foreach (nonterminal N) {
+	first(N) = {};
+}
+
+while (some sets is changing) {
+	foreach (production p: N->beta1...betan) {
+		foreach (betai from beta1 upto betan) {
+			if (betai == a) {
+			// e.g N->abX: first(N) += {a}
+				first(N) += {a};
+				break;
+			} else if (betai == M) {
+				first(N) += first(M);
+				if (M is not in nullable) {
+					break;
+				} // else continue this loop to add first(beta_next) into first(N)
+			}
+		}
+	}
+}
+```
+
+|Nonterminal|First Set|
+|:-----:|:----------:|
+|S|{s, t, g, w}|
+|N|{s, t, g, w}|
+|V|{e, d}|
+
+##### follow sets
+
+follow sets 不动点算法:
+
+```cpp
+foreach (nonterminal N) {
+	follow(N) = {};
+}
+
+while (some sets is changing) {
+	foreach (production p: N->beta1...betan) {
+		temp = follow(N);
+		foreach (betai from betan downto beta1) {
+			if (betai == a) {
+				temp = {a};
+			} else if (betai == M) {
+				follow(M) += temp
+				temp = (M is not nullable) ? (first(M)) : (temp + first(M))
+			}
+		}
+	}
+}
+```
+
+##### final sets
+
+*   当 N -> Y1...Yn 右边 Y 全为 nullable 时, final(p) += follow(N)
+
+final sets 不动点算法:
+
+```cpp
+foreach (production p) {
+	final(p) = {}
+}
+
+calculate_final_set(production p: N->beta1...betan) {
+	foreach (betai from beta1 upto betan) {
+		if (betai == a) {
+			final(p) += {a};
+			break;
+		} else if (betai == M) {
+			final(p) += first(M);
+			if (M is not in nullable) {
+				break;
+			}
+		}
+	}
+
+	// all betas are in nullable (当前规则的所有右边符号都是可空集)
+	//　故, final(p) 必须包括 follow(M) (当推导出右边符号都为空时, first(p) 即为 follow(M))
+	if (i > n) {
+		first(N) += follow(N);
+	}
+}
+```
+
+##### 分析表
+
+*   结合 nullable sets 准确求出 first sets
+*   再利用 first sets 准确求出 follow sets
+*   再利用 first sets, 并结合 follow sets(全空集修正) 准确求出 分析表:
+
+```grammar
+0: z -> d
+1:	|	X Y Z
+2: Y -> c
+3:	|
+4: X -> Y
+5:	|	a
+```
+
+nullable = {X, Y}
+
+||X|Y|Z|
+|:-----:|:-----:|:-----:|:-----:|
+|first|{a, c}|{c}|{a, c, d}|
+|follow|{a, c, d}|{a, c, d}|{}|
+
+|production|0|1|2|3|4|5|
+|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+|final|{d}|{a, c, d}|{c}|{a, c, d}|{a, c, d}|{a}|
+
+|Non\Terminal|a|c|d|
+|Z|1|1|0, 1|
+|Y|3|2, 3|3|
+|X|4, 5|4|4|
+
+> 数字为规则编号
+
+##### 解决冲突(分析表某项右多个编号)
+
+*   消除左递归, 使文法适应 L(最左推导)
 
 ## Compilers Exercise
 
