@@ -804,7 +804,7 @@ while (true) {
 }
 ```
 
-##### 解决冲突
+##### 解决冲突(SLR/LR(1)/LALR)
 
 采取与 first/follow/final sets 以及 前看符号 类似策略:
 
