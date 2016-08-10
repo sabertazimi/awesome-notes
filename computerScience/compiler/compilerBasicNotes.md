@@ -681,9 +681,98 @@ nullable = {X, Y}
 
 #### LR(0) 分析算法(移进-归约(reduce)算法)
 
+*   从左向右读入程序, 逆向最右推导, 不用前看符号
+*   添加伪开始符号: S' -> S$ `$表示 tokens/file 结束符`
 *   移进        : 读入记号 `push(token[i])`
-*   归约(reduce):         `pop(stack[top]` `push(left expansion)`
+*   归约(reduce):         `pop(right expansion)` `push(left expansion)`
 
+##### 分析表构造
+
+LR(0) 分析表构造算法: (原理同于 Hopcroft 算法)
+
+```cpp
+closure(production_set p) {
+	while (p is still changing) {
+		foreach (p's item i: A -> b . By...) {
+			p += {B -> . y...}
+		}
+	}
+}
+
+goto(production_set p, token x) {
+	temp = {}
+
+	foreach (p's item i: A -> b . x...) {
+		temp += {A -> bx . ...}
+	}
+
+	return closure(temp)
+}
+```
+
+```cpp
+p0 = closure(S'' -> . S $)
+(production_with_dot_)set = {p0}
+Q = enqueue(p0)
+
+while (Q is not empty) {
+	p = dequeue(Q)
+
+	foreach (x <- Nonterminal||Terminal) {
+		q = goto(p, x)
+	}
+
+	if (x <- Terminal) {
+		ACTION[p, x] = q
+	} else {
+		GOTO[p, x] = q
+	}
+
+	if (q not <- set) {
+		set += {q}
+		enqueue(q)
+	}
+}
+```
+
+##### 驱动代码
+
+LR(0) 驱动算法:
+
+```cpp
+stack[];
+push($)
+push(state1)
+
+while (true) {
+	token t = nextToken()
+	state s = stack[top]
+
+	if (ACTION[s, t] == statei) {
+		push(t)
+		push(statei)
+	} else if (ACTION[s, t] == reducej) {
+		// X is the left side of production j: X->beta
+		// beta is the right side of production j: X->beta
+
+		// pop up right side
+		pop(beta && bundle state variables)
+
+		// current state after pop up all bundle state(of beta)
+		state s = stack[top]
+
+		// push left side
+		push(X)
+
+		// transfer state after reduce
+		push(GOTO[s, X])
+	} else {
+		throw new SyntaxError();
+	}
+}
+```
+
+#### SLR 分析算法
 
 ## Compilers Exercise
 
