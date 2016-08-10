@@ -482,7 +482,7 @@ parse_X() {
 #### LL(1)分析算法
 
 *   从左(L)向右读入程序
-*   最左(L)推导
+*   最左(L)推导: 优先推导最左侧非终结符
 *   一个(1)前看符号
 *   分治算法: 每个非终结符构造一个**first set** 和一个 **follow set**, 最后为每个规则构造一个 **final set**
 *   分析表驱动(由 first sets/follow sets/final sets 推导分析表)
@@ -629,7 +629,6 @@ calculate_final_set(production p: N->beta1...betan) {
 4: X -> Y
 5:	|	a
 ```
-
 nullable = {X, Y}
 
 ||X|Y|Z|
@@ -648,9 +647,43 @@ nullable = {X, Y}
 
 > 数字为规则编号
 
-##### 解决冲突(分析表某项右多个编号)
+##### 解决冲突(分析表某项有多个编号)
 
-*   消除左递归, 使文法适应 L(最左推导)
+通过文法重写消除左递归, 使文法适应 L(最左推导):
+
+*   改写成右递归文法
+*   提取左公因式
+
+### 自底向上分析
+
+```grammar
+0: S -> E
+1: E -> E + T
+2:	|	T
+3: T -> T * F
+4:	|	F
+5: F -> n
+```
+
+```instance
+2 + 3 * 4
+=> F + 3 * 4
+=> T + 3 * 4
+=> E + 3 * 4
+=> E + T * 4
+=> E + T * F
+=> E + T
+=> E
+=> S
+```
+
+>   最右推导(优先推导最右侧非终结符)逆过程
+
+#### LR(0) 分析算法(移进-归约(reduce)算法)
+
+*   移进        : 读入记号 `push(token[i])`
+*   归约(reduce):         `pop(stack[top]` `push(left expansion)`
+
 
 ## Compilers Exercise
 
