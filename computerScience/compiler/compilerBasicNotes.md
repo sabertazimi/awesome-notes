@@ -693,7 +693,7 @@ LR(0) 分析表构造算法: (原理同于 Hopcroft 算法)
 ```cpp
 closure(production_set p) {
 	while (p is still changing) {
-		foreach (p's item i: A -> b . By...) {
+		foreach (p's item i: A -> b . B ...) {
 			p += {B -> . y...}
 		}
 	}
@@ -720,17 +720,17 @@ while (Q is not empty) {
 
 	foreach (x <- Nonterminal||Terminal) {
 		q = goto(p, x)
-	}
 
-	if (x <- Terminal) {
-		ACTION[p, x] = q
-	} else {
-		GOTO[p, x] = q
-	}
+		if (x <- Terminal) {
+			ACTION[p, x] = q
+		} else {
+			GOTO[p, x] = q
+		}
 
-	if (q not <- set) {
-		set += {q}
-		enqueue(q)
+		if (q not <- set) {
+			set += {q}
+			enqueue(q)
+		}
 	}
 }
 ```
@@ -772,7 +772,12 @@ while (true) {
 }
 ```
 
-#### SLR 分析算法
+##### 解决冲突
+
+采取与 first/follow/final sets 以及 前看符号 类似策略:
+
+*   `production_with_dot_set` 中的 item 修改为 `X -> [beta1 . betan..., a]` 二元组
+*   closure(production_set p) 中闭包规则从 `X -> [a . Y beta,a]` 修改为 `Y -> [.y, b]` b <- final(beta a)
 
 ## Compilers Exercise
 
