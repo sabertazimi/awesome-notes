@@ -998,6 +998,45 @@ E: n
  ;
 ```
 
+#### 表达式类型检查
+
+```cpp
+enum type {INT, BOOL};
+
+// exp_t e : AST 中的结点
+enum type check_exp_type(exp_t e) {
+	switch (e->kind) {
+		case EXP_INT:
+			return INT;
+		case EXP_TRUE:
+			return BOOL;
+		case EXP_FALSE:
+			return BOOL;
+		case EXP_ADD:
+			enum type t1 = check_exp_type(e->left);
+			enum type t2 = check_exp_type(e->right);
+			if (t1 != INT || t2 != INT) {
+				throw new SemanticError();
+				break;
+			} else {
+				return INT;
+			}
+		case EXP_AND:
+			enum type t1 = check_exp_type(e->left);
+			enum type t2 = check_exp_type(e->right);
+			if (t1 != BOOL || t2 != BOOL) {
+				throw new SemanticError();
+				break;
+			} else {
+				return BOOL;
+			}
+		default:
+			throw new SemanticError();
+			break;
+	}
+}
+```
+
 ## Compilers Exercise
 
 ### C Declaration Interpreter
