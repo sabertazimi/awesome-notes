@@ -68,8 +68,8 @@
 
 front-end to back-end:
 
-*   front-end: src ---lexical analysis---> tokens ---parsing/syntax analysis---> AST(Abstract Syntax Tree)
-*   back-end: AST ---...---> ... ---...---> ... ---code generation---> dist
+*   front-end: src ---lexical analysis---> tokens ---parsing/syntax analysis---> AST(Abstract Syntax Tree) ---semantic analysis---> intermediate
+*   back-end: intermediate ---...---> ... ---...---> ... ---code generation---> dist
 
 details:
 
@@ -356,7 +356,7 @@ G = (S, N, T, P):
 
 ##### 简易表示
 
-```grammar
+```Bison
 Sentence -> Noun Verb Noun
 Noun -> sheep
 	|	tiger
@@ -368,7 +368,7 @@ Verb -> eat
 
 > S: Sentence, N: Sentence/Verb/Noun, T: sheep/tiger/grass/water/eat/drink
 
-```grammar
+```Bison
 E -> num
 	|id
 	|E + E
@@ -404,7 +404,7 @@ E -> num
 
 ##### 文法重写(消除二义性)
 
-```grammar
+```Bison
 E -> E + T
 	|T
 T -> T * F
@@ -444,7 +444,7 @@ bool top_down_parsing(tokens[]) {
 
 利用前看符号避免回溯
 
-```grammar
+```Bison
 Sentence -> Noun Verb Noun
 Noun -> sheep
 	|	tiger
@@ -456,7 +456,7 @@ Verb -> eat
 
 > tiger eat water: 向前看非终结符推导出的所有终结符中匹配tiger的终结符; 不向前看,则先推导 N, 再推导 n, 但 n 不一定匹配 tiger, 则需进行回溯; 向前看一个字符, 直接推导 N --> n, 同时直接找寻匹配 tiger 的终结符
 
-```grammar
+```Bison
 S -> N V N
 N -> (sheep)tiger
 V -> eat
@@ -653,7 +653,7 @@ calculate_final_set(production p: N->beta1...betan) {
 *   再利用 first sets 准确求出 follow sets
 *   再利用 first sets, 并结合 follow sets(全空集修正) 准确求出 分析表:
 
-```grammar
+```Bison
 0: z -> d
 1:	|	X Y Z
 2: Y -> c
@@ -688,7 +688,7 @@ nullable = {X, Y}
 
 ### 自底向上分析
 
-```grammar
+```Bison
 0: S -> E
 1: E -> E + T
 2:	|	T
@@ -811,6 +811,8 @@ while (true) {
 *   `production_with_dot_set` 中的 item 修改为 `X -> [beta1 . betan..., a]` 二元组
 *   closure(production_set p) 中闭包规则从 `X -> [a . Y beta,a]` 修改为 `Y -> [.y, b]` b <- final(beta a)
 
+### 抽象语法树
+
 #### 语法制导翻译(Syntax-Directed Translation)
 
 在进行归约(reduce)的同时, 进行语义动作:
@@ -830,21 +832,170 @@ push(right side value);
 push(next state);
 ```
 
-### 抽象语法树
+#### 抽象语法
 
-*   抽象语法: 表达语法结构的内部表示, 作为前端(词法语法分析)和后端(代码生成)的中间件
+*   表达语法结构的内部表示, 作为前端(词法语法分析)和后端(代码生成)的中间件, tokens --语法分析器--> 抽象语法(树) --代码生成器--> 目标代码
+*   抽象语法无需考虑左/右递归, 左公因子提取, 分隔符等
 
-```yacc
+```Bison
 // 具体语法
 E: E + T
  | T
  ;
-
 T: T * F
  | F
-
+ ;
 F: n
  | (E)
+ ;
+
+// 抽象语法
+E: n
+ | E + E
+ | E * E
+```
+
+#### AST 的实现
+
+##### 数据结构
+
+```Bison
+E: n
+ | E + E
+ | E * E
+```
+
+```c
+enum kind {
+	E_INT,
+	E_ADD,
+	E_TIMES
+};
+
+struct exp {
+	enum kind kind;
+};
+
+struct exp_int {
+	enum kind kind;
+	int value;
+};
+
+struct exp_add {
+	enum kind kind;
+	struct exp *left;
+	struct exp *right;
+};
+
+struct exp_times {
+	enum kind kind;
+	struct exp *left;
+	struct exp *right;
+};
+
+struct exp_int *new_exp_int(int value) {
+	struct exp_int *p = (struct exp_int *)malloc(sizeof(struct exp_int));
+	if (!p) throw new Error();
+	p->kind = E_INT;
+	p->value = value;
+	return p;
+}
+
+struct exp_add *new_exp_add(exp *left, exp *right) {
+	struct exp_add *p = (struct exp_add *)malloc(sizeof(struct exp_add));
+	if (!p) throw new Error();
+	p->kind = E_ADD;
+	p->left = left;
+	p->right = right;
+	return p;
+}
+
+struct exp_times *new_exp_times(exp *left, exp *right) {
+	struct exp_tiems *p = (struct exp_times *)malloc(sizeof(struct exp_times));
+	if (!p) throw new Error();
+	p->kind = E_TIMES;
+	p->left = left;
+	p->right = right;
+	return p;
+}
+```
+
+##### 相关算法
+
+```cpp
+int nodes_num(exp *e) {
+	switch (e->kind) {
+		case E_INT:
+			return 1;
+		case E_ADD:		// fall through
+		case E_TIMES:
+			return 1 + nodes_num(e->left) + nodes_num(e->right);
+		default:
+			throw new SyntaxError("compile bug");
+	}
+}
+```
+
+```cpp
+int pretty_print(exp *e) {
+	switch (e->kind) {
+		case E_INT:
+			printf("%d", e->value);
+			return 1;
+		case E_ADD:
+			printf("(");
+			pretty_print(e->left);
+			printf(")");
+			printf("+");
+			printf("(");
+			pretty_print(e->right);
+			printf(")");
+			return 1;
+		case E_TIMES:
+			printf("(");
+			pretty_print(e->left);
+			printf(")");
+			printf("*");
+			printf("(");
+			pretty_print(e->right);
+			printf(")");
+			return 1;
+		default:
+			throw new SyntaxError();
+			break;
+	}
+}
+```
+
+##### 构造算法
+
+利用语法制导翻译, 在语法动作(action)/语法归约(reduce)中加入生成语法树的代码(自底(叶子)向上(根)构造函数)
+
+```Bison
+E: E + E { $$ = new_exp_add($1, $3); }
+ | E * E { $$ = new_exp_times($1, $3); }
+ | n     { $$ = new_exp_int($1); }
+ ;
+```
+
+## Semantic Analysis(语义分析)
+
+*   类型检查
+*   上下文**相关**分析(检查抽象语法树上下文相关的属性)
+
+AST + semantic of programming language --semantic analysis--> intermediate
+
+e.g 变量/函数必须先声明再使用; 每个表达式必须有合适类型(左值/右值); 函数调用与函数定义保持一致(函数签名)
+
+### 语义检查
+
+```Bison
+E: n
+ | true
+ | false
+ | E + E
+ | E && E
+ ;
 ```
 
 ## Compilers Exercise

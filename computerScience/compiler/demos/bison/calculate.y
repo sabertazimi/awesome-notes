@@ -65,8 +65,6 @@ void yyerror(char *s) {
     return;
 }
 
-
 int main(int argc, char **argv) {
-    yyparse();
-    return 0;
+    return yyparse();
 }
