@@ -21,7 +21,7 @@ purge:
 	$(RM) $(PROG).tab.c $(PROG)
 
 rebuild:
-	make purge && make bison && make
+	make purge && make bison && make && make clean
 
 run:
 	./$(PROG)
