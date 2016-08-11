@@ -990,7 +990,24 @@ e.g 变量/函数必须先声明再使用; 每个表达式必须有合适类型(
 ### 语义检查
 
 ```Bison
+P: D S
+ ;
+
+D: T id ';' D
+ |
+ ;
+
+T: int
+ | bool
+ ;
+
+S: id = E
+ | printi (E)
+ | printb (E)
+ ;
+
 E: n
+ | id
  | true
  | false
  | E + E
@@ -998,16 +1015,74 @@ E: n
  ;
 ```
 
-#### 表达式类型检查
+#### 符号表(上下文相关)
+
+用来存储程序中变量的相关信息:
+
+*   类型
+*   作用域
+*   访问控制权
+
+#### 类型检查
 
 ```cpp
 enum type {INT, BOOL};
+table_t table;	// symbol table
 
-// exp_t e : AST 中的结点
-enum type check_exp_type(exp_t e) {
+// dec_t, stm_t, exp_t: AST 中的结点
+
+enum type check_prog(dec_t d, stm_t s) {
+	// 生成符号表
+	table = check_dec(d);
+	// 根据符号表检查语句
+	return check_stm(s);
+}
+
+// 生成符号表
+table_t check_dec(dec_t d){
+	foreach(T id <- d) {
+		table_insert(table, id, T);
+	}
+}
+
+enum type check_stm(table_t table, stm_t s) {
+	switch (s->kind) {
+		case STM_ASSIGN:
+			t1 = table_search(table, id);
+			t2 = check_exp(table, s->exp);
+			if (t1 != t2) {
+				throw new SemanticError("type mismatch");
+			} else {
+				return t1;
+			}
+		case STM_PRINTI:
+			t = check_exp(s->exp);
+			if (t != INT) {
+				throw new SemanticError("type mismatch");
+			} else {
+				return INT;
+			}
+		case STM_PRINTB:
+			t = check_exp(s->exp);
+			if (t != BOOL) {
+				throw new SemanticError("type mismatch");
+			} else {
+				return BOOL;
+			}
+	}
+}
+
+enum type check_exp(exp_t e) {
 	switch (e->kind) {
 		case EXP_INT:
 			return INT;
+		case EXP_ID:
+			t = table_search(table, id);	// 查询符号表, 得到变量类型
+			if (id not exist) {
+				throw new SemanticError("id not found");
+			} else {
+				return t;
+			}
 		case EXP_TRUE:
 			return BOOL;
 		case EXP_FALSE:
