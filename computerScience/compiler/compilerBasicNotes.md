@@ -834,10 +834,17 @@ push(next state);
 
 *   抽象语法: 表达语法结构的内部表示, 作为前端(词法语法分析)和后端(代码生成)的中间件
 
-```bison
+```yacc
 // 具体语法
 E: E + T
+ | T
+ ;
 
+T: T * F
+ | F
+
+F: n
+ | (E)
 ```
 
 ## Compilers Exercise
