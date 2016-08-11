@@ -981,13 +981,12 @@ E: E + E { $$ = new_exp_add($1, $3); }
 ## Semantic Analysis(语义分析)
 
 *   类型检查
+*   作用域检查
 *   上下文**相关**分析(检查抽象语法树上下文相关的属性)
 
 AST + semantic of programming language --semantic analysis--> intermediate
 
 e.g 变量/函数必须先声明再使用; 每个表达式必须有合适类型(左值/右值); 函数调用与函数定义保持一致(函数签名)
-
-### 语义检查
 
 ```Bison
 P: D S
@@ -1015,15 +1014,45 @@ E: n
  ;
 ```
 
-#### 符号表(上下文相关)
+### 符号表(上下文相关)
 
 用来存储程序中变量的相关信息:
 
-*   类型
-*   作用域
+*   类型: 字典结构 (key, type)
+*   作用域:
+    *   进入作用域, 插入元素(插入哈希表首, 屏蔽外部同名变量); 离开作用域, 删除元素
+    *   进入作用域, 压入新符号表; 离开作用域, 弹出栈顶符号表
 *   访问控制权
+*   命名空间: 变量, 标签, 形参, 标号 各自拥有一类符号表
 
-#### 类型检查
+可将符号表实现为:
+
+*   哈希表: 查找时间复杂度 O(1);
+*   红黑树: 查找时间复杂度 O(lg N);
+
+```cpp
+#ifndef XX_SEMANTIC_TABLE_H
+#define XX_SEMANTIC_TABLE_H
+
+typedef enum type type_t;
+typedef char * key_t;    // typedef int hash_t; typedef hash_t key_t;
+typedef struct value {
+	type_t type;
+	scope_t scope;
+} value_t;
+
+typedef ... table_t;	// 符号表数据结构
+
+table_t new_table(void);
+int table_insert(table_t table, key_t id, value_t info);
+value_t table_search(table_t table, key_t id);
+
+#endif
+```
+
+### 类型检查
+
+table: 字典结构 (key, type)
 
 ```cpp
 enum type {INT, BOOL};
@@ -1111,6 +1140,13 @@ enum type check_exp(exp_t e) {
 	}
 }
 ```
+
+### 作用域检查
+
+table:
+
+*   进入作用域, 插入元素(插入哈希表首, 屏蔽外部同名变量); 离开作用域, 删除元素
+*   进入作用域, 压入新符号表; 离开作用域, 弹出栈顶符号表
 
 ## Compilers Exercise
 
