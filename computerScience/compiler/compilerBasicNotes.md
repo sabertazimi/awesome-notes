@@ -714,7 +714,7 @@ nullable = {X, Y}
 #### LR(0) 分析算法(移进-归约(reduce)算法)
 
 *   从左向右读入程序, 逆向最右推导, 不用前看符号
-*   添加伪开始符号: S' -> S$ `$表示 tokens/file 结束符`
+*   添加伪开始符号: S' -> . S$   `$表示 tokens/file 结束符`
 *   移进        : 读入记号 `push(token[i])`
 *   归约(reduce):         `pop(right expansion)` `push(left expansion)`
 
@@ -780,7 +780,7 @@ while (true) {
 	token t = nextToken()
 	state s = stack[top]
 
-	if (ACTION[s, t] == statei) {
+	if (ACTION[s, t] == shifti) {
 		push(t)
 		push(statei)
 	} else if (ACTION[s, t] == reducej) {
@@ -810,6 +810,35 @@ while (true) {
 
 *   `production_with_dot_set` 中的 item 修改为 `X -> [beta1 . betan..., a]` 二元组
 *   closure(production_set p) 中闭包规则从 `X -> [a . Y beta,a]` 修改为 `Y -> [.y, b]` b <- final(beta a)
+
+#### 语法制导翻译(Syntax-Directed Translation)
+
+在进行归约(reduce)的同时, 进行语义动作:
+
+*   给每条产生规则附加一个语义动作
+
+```bison
+exp : exp '+' exp { $$ = $1 + $3; }
+;
+```
+
+*   在分析栈中压入 symbol, value, state (原本只压入 symbol, state)
+
+```cpp
+push(right side symbol);
+push(right side value);
+push(next state);
+```
+
+### 抽象语法树
+
+*   抽象语法: 表达语法结构的内部表示, 作为前端(词法语法分析)和后端(代码生成)的中间件
+
+```bison
+// 具体语法
+E: E + T
+
+```
 
 ## Compilers Exercise
 
