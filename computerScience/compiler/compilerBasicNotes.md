@@ -1148,6 +1148,135 @@ table:
 *   进入作用域, 插入元素(插入哈希表首, 屏蔽外部同名变量); 离开作用域, 删除元素
 *   进入作用域, 压入新符号表; 离开作用域, 弹出栈顶符号表
 
+### 类型相容性
+
+*   名字不同但结构相同的类型是否相等
+*   面向对象的继承类: is-a 关系 Parent parent = child;
+
+### 错误诊断
+
+*   准确的错误信息: 出错位置等
+*   大量的错误信息
+*   一定的自纠功能
+
+## Code Generation(代码生成)
+
+为数据分配计算资源:
+
+*   数据: 全局变量, 局部变量, 动态分配变量
+*   资源: 寄存器(register), 数据区(.data, .bss), 代码区(.code), 栈区(runtime stack), 堆区(user heap)
+
+> 当前局部变量应该放在寄存器还是内存区?
+
+为代码选择计算指令(等价性):
+
+*   代码: 表达式/语句/函数代码
+*   指令: 算术/比较/跳转/调用/返回指令
+
+```Bison
+P: D S
+ ;
+
+D: T id ';' D
+ |
+ ;
+
+T: int
+ | bool
+ ;
+
+S: id = E
+ | printi (E)
+ | printb (E)
+ ;
+
+E: n
+ | id
+ | true
+ | false
+ | E + E
+ | E && E
+ ;
+```
+
+```Bison
+s: push NUM
+ | load x
+ | store x
+ | add
+ | sub
+ | times
+ | div
+ ;
+```
+
+### 递归下降代码生成算法
+
+```cpp
+gen_prog(dec_t d, stm_t s) {
+	gen_dec(d);
+	gen_stm(s);
+}
+
+gen_dec(T id; D) {
+	// stack_code(".int id")
+	gen_type(T);
+	emit(" id");
+
+	gen_dec(D);
+}
+
+gen_type(type_t t) {
+	switch(t-kind) {
+		case INT:	// fall through
+		case BOOL:
+			emit(".int");
+			break;
+	}
+}
+
+gen_stm(stm_t s) {
+	switch (s->kind) {
+		STM_ASSIGN:
+			gen_exp(s->exp);
+			emit("store s->id");
+			break;
+		STM_PRINTI:
+			gen_exp(s->exp);
+			emit("printi");
+			break;
+		STM_PRINTB:
+			gen_exp(s->exp);
+			emit("printb");
+			break;
+	}
+}
+
+gen_exp(exp_t e) {
+	switch (e->kind) {
+		case EXP_INT:
+			emit("push e->value");	// n
+			break;
+		case EXP_ID:
+			emit("load e->value");	// id
+			break;
+		case EXP_BOOL:
+			emit("push e->value");	// 1/0
+			break;
+		case EXP_ADD:
+			gen_exp(e->left);
+			gen_exp(e->right);
+			emit("add");
+			break;
+		case EXP_AND:
+			gen_exp(e->left);
+			gen_exp(e->right);
+			emit("and");
+			break;
+	}
+}
+```
+
 ## Compilers Exercise
 
 ### C Declaration Interpreter
