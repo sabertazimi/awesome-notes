@@ -1199,6 +1199,14 @@ E: n
  ;
 ```
 
+### 递归下降代码生成算法
+
+#### 基于栈计算机
+
+Mem + Stack + ALU
+
+> JVM(Java Virtual Machine)
+
 ```Bison
 s: push NUM
  | load x
@@ -1209,8 +1217,6 @@ s: push NUM
  | div
  ;
 ```
-
-### 递归下降代码生成算法
 
 ```cpp
 gen_prog(dec_t d, stm_t s) {
@@ -1276,6 +1282,153 @@ gen_exp(exp_t e) {
 	}
 }
 ```
+
+#### 基于寄存器计算机 (RISC)
+
+Mem + Reg + ALU
+
+> MIPS ISA
+
+```Bison
+// src -> dist
+s: movn n, r
+ | mov r1, r2
+ | load [x], r
+ | store r, [x]
+ | add r1, r2, r3
+ | sub r1, r2, r3
+ | times r1, r2, r3
+ | div r1, r2, r3
+```
+
+```cpp
+void gen_prog(dec_t d, stm_t s) {
+	gen_dec(d);
+	gen_stm(s);
+}
+
+void gen_dec(T id; D) {
+	// reg_code(".int id")
+	// 为变量分配寄存器
+	gen_type(T);
+	emit(" id");
+
+	gen_dec(D);
+}
+
+void gen_type(type_t t) {
+	switch(t-kind) {
+		case INT:	// fall through
+		case BOOL:
+			emit(".int");
+			break;
+	}
+}
+
+void gen_stm(stm_t s) {
+	switch (s->kind) {
+		STM_ASSIGN:
+			r = gen_exp(s->exp);
+			emit("mov r, e->id");
+			break;
+		STM_PRINTI:
+			r = gen_exp(s->exp);
+			emit("printi r");
+			break;
+		STM_PRINTB:
+			r = gen_exp(s->exp);
+			emit("printb r");
+			break;
+	}
+}
+
+reg_t gen_exp(exp_t e) {
+	switch (e->kind) {
+		case EXP_INT:
+			r = random_reg();
+			emit("movn e->value, r");	// n
+			return r;
+		case EXP_ID:
+			r = random_reg();
+			emit("mov e->value, r");	// id
+			return r;
+		case EXP_BOOL:
+			r = random_reg();
+			emit("movn e->value, r");	// 1/0
+			return r;
+		case EXP_ADD:
+			r1 = gen_exp(e->left);
+			r2 = gen_exp(e->right);
+			r = random_reg();
+			emit("add r1, r2, r");
+			return r;
+		case EXP_AND:
+			r1 = gen_exp(e->left);
+			r2 = gen_exp(e->right);
+			r = random_reg();
+			emit("and r1, r2, r");
+			return r;
+	}
+}
+```
+
+## Immediate Representation(IR)
+
+*   树与有向无环图(DAG)
+*   三地址码(3-address code)
+*   控制流图(CFG)
+*   静态单赋值形式(SSA)
+*   连续传递风格(CPS)
+
+### 三地址码
+
+*   原子表达式
+*   简单控制流 cjmp/jmp
+*   抽象的机器代码(伪代码)
+
+### 控制流图
+
+#### Block
+
+*   block_t: { label_t; stm_list; jmp_t; }
+*   扫描三地址码, 生成blocks
+*   图论算法:结点为 blocks, 边为跳转边
+
+死基本块删除优化：删除遍历不到的语句块
+
+#### 数据流分析与程序重写
+
+*   根据数据流分析得到的信息, 对三地址码/控制流图进行重写
+*   后端的每一个阶段都可进行数据流分析
+
+> 常量传播优化: 将赋值语句右端变量直接替换为常量, 减少访存
+
+##### 数据分析方法
+
+###### 到达定义分析
+
+分析变量的哪些定义点可以到达变量的使用点处, 若可达定义唯一则可进行常量传播优化:
+
+*   in set = prior out set
+*   out set = self set + in set - kill set(重复定义点)
+
+###### 活性分析
+
+*   寄存器分配优化 活跃区间不相交的变量可共用一个寄存器
+*   并行优化 使用区间并行的计算可并行执行
+
+## 代码优化
+
+### 前端优化
+
+*   AST中常量折叠优化 `1+2 => 3`
+*   AST中代数化简优化 `a=1*b => a=b` `2*a=>a<<1`
+
+### 后端优化
+
+*   CFG中(控制流分析)死代码块删除优化
+*   CFG中(数据流分析-可达定义分析)常量传播优化
+*   CFG中(数据流分析-活性分析)寄存器分配优化
 
 ## Compilers Exercise
 
