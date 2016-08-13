@@ -939,3 +939,22 @@ mbox 的格式来生成一系列的补丁以便你可以发送到一个邮件列
 #### git-note
 
 为特定commit添加note,一个commit只能有一个note
+
+## Other tools
+
+### diff && patch
+
+```sh
+$ diff -u <src> <dist>
+$ diff -Nur <src_dir> <dist_dir>
+```
+
+```sh
+$ patch -p[num] < patchfile
+$ patch -dry -run -p[num] < patchfile
+```
+
+```sh
+$ diff -Nur program_1.0 program_2.0 > program_2.0.patch
+$ patch -p1 <../program_2.0.patch
+```
