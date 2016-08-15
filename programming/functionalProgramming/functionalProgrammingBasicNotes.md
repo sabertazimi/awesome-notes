@@ -8,6 +8,7 @@
 		* [lists](#lists)
 		* [let expressions](#let-expressions)
 		* [options](#options)
+		* [boolean operations](#boolean-operations)
 
 # Functional Programming Basic Notes
 
