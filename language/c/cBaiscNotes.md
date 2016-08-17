@@ -417,13 +417,13 @@ pthread_delay_np
 ```
 
 ```c
-InitThreadPackage
-ThreadNew
-ThreadSleep
-RunAllThreads
+InitThreadPackage;
+ThreadNew;
+ThreadSleep;
+RunAllThreads;
 SemaphoreNew(int > 0);
-SemaphoreWait(lock)
-SemaphoreSignal(lock)
+SemaphoreWait(lock);
+SemaphoreSignal(lock);
 ```
 
 #### Semaphore
@@ -431,7 +431,7 @@ SemaphoreSignal(lock)
 -   哲学家就餐问题
 -   将Semaphore变量的值在允许范围内(不至于使得线程锁失效)使得其取最大值，减少线程阻塞
 -   EmptyBuf 8, FullBuf 0
--   双向通信，互相唤醒 - `Writer:sw(e),ss(f);`  `Reader:sw(f),ss(e);`
+-   双向通信，互相唤醒 - `Writer:sw(empty),ss(full);`  `Reader:sw(full),ss(empty);`
 
 ```c
 void SellTickets(int agent, int *ticketsNum, Semaphore lock) {

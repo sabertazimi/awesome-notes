@@ -418,6 +418,9 @@ _   iret: pop above variables, move to ring 3
 
 ## 进程(资源分配单位)
 
+*   独立性: 无副作用(确定性), 可重现
+*   并发性: 提升效率, 共享资源, 高度模块化
+
 ### 进程状态/生命周期
 
 创建, 就绪(ready), 运行(running), 等待(wait/sleeping), 挂起(suspend: 进程由内存换出至外存), 结束(抢占, 唤醒): 进程优先级与剩余内存单元在一定程度上会影响进程状态
@@ -438,3 +441,132 @@ _   iret: pop above variables, move to ring 3
 *   线程共享段表/共享库/数据/代码/环境变量/文件描述符集合/地址空间, 但拥有独立的堆/栈/通用寄存器
 *   线程控制块(Thread Control Block)
 *   用户线程与内核线程: 多为 1 对 1
+
+## 处理机调度
+
+*   从就绪队列中挑选下一个占用 CPU 的进程(挑选进程的内核函数)
+*   从多个可用 CPU 中挑选使用 CPU 资源
+
+### 调度时机
+
+*   进程停止运行, 进入等待/挂起/终止状态
+*   进程的中断请求完成时, 由等待状态进入就绪状态, 准备抢占 CPU 资源(准备从内核态返回用户态)
+
+### 调度策略/算法
+
+#### 算法目标
+
+*   CPU 有效使用率
+*   吞吐量(高带宽): 单位时间内完成进程数量
+*   等待时间(低延迟): 进程在就绪队列等待总时间
+*   周转时间(低延迟): 进程从初始化到结束总时间
+*   响应时间(低延迟): 从提交请求到产生响应总时间
+
+#### 先来先服务算法(First Come First Served/FCFS)
+
+*   依次执行就绪队列中的各进程(先进入就绪队列先执行)
+*   CPU 利用率较低
+
+#### 短进程优先算法(Shortest Process Next/Shortest Remaining Time)
+
+*   优先执行周转耗时/剩余耗时最短的进程
+*   若短进程过多, 则导致长进程一直无法执行
+
+#### 最高响应比优先算法(Highest Response Ratio Next)
+
+*   R = (waitTime + serviceTime) / serviceTime: 已等待时间越长, 优先级上升
+*   修正短进程优先算法的缺点
+
+#### 时间片轮转算法(Round Robin)
+
+*   在 FCFS 基础上, 设定一个基本时间单元, 每经过一个时间单元, 轮转至下一个先到进程(并进行循环轮转)
+*   额外的上下文切换
+*   时间片合适大小: 10 ms
+
+#### 多级队列调度算法(MQ)
+
+*   将就绪队列分成多个独立子队列, 每个队列可采取不同调度算法
+*   前台交互队列使用时间片轮转算法, 后台 IO 队列使用先来先服务算法
+*   队列间使用时间片轮转算法
+
+#### 多级反馈队列算法(MLFQ)
+
+*   优先级高的子队列时间片小, 优先级低的子队列时间片大
+*   CPU 密集型进程(耗时高)优先级下降很快
+*   IO 密集型进程(耗时低)停留在高优先级
+
+## 同步互斥
+
+*   互斥(mutual exclusion)
+*   死锁(deadlock)
+*   饥饿(starvation)
+
+### 临界区的访问原则
+
+*   空闲则入
+*   忙则等待
+*   有限等待
+
+### 基于软件方法的同步互斥
+
+```cpp
+int turn;		// 表示谁该进入临界区
+bool flag[];	// 表示进程是否准备好进入临界区
+```
+
+```cpp
+// 对于 2 个线程的情况
+// Peterson Algorithm
+// 线程 i
+flag[i] = true;
+turn = j;		// 后设置 turn 标志的进程不可进入临界区, 会在 while 循环进行等待
+while (flag[j] && turn == j) ;
+
+...		// critical section
+
+flag[i] = false;
+```
+
+```cpp
+// Dekkers Algorithm
+// 线程 i
+turn = 0;
+flag[] = {false};
+
+do {
+	flag[i] = true;
+	while (flag[j] == true) {
+		if (turn != i) {
+			flag[i] = false;
+			while (turn != i) ;
+			flag[i] = true;
+		}
+	}
+
+	// critical section
+
+	turn = j;
+	flag[i] = false;
+} while (true);
+```
+
+### 高级抽象的同步互斥
+
+利用原子操作实现锁数据结构(lock)
+
+```cpp
+struct lock/semaphore {
+	bool locked/sem = n;	// n: 并发数/可用资源数
+	wait_queue q;
+
+	void acquire/prolaag() {
+		locked/sem--;
+		if (locked/sem < 0) sleep_and_enqueue(this_thread);
+	};
+
+	void release/verhoog() {
+		locked/sem++;
+		if (locked/sem <= 0) wakeup_and_dequeue(other_thread);
+	};
+};
+```
