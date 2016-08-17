@@ -52,6 +52,53 @@
 				* [ring 0 to ring 3](#ring-0-to-ring-3)
 				* [ring 3 to ring 0 (特权级提升)](#ring-3-to-ring-0-特权级提升)
 			* [TSS(Task State Segment)](#tsstask-state-segment)
+	* [虚拟内存管理](#虚拟内存管理)
+		* [覆盖与交换](#覆盖与交换)
+			* [覆盖技术(overlay)](#覆盖技术overlay)
+			* [交换技术(swap)](#交换技术swap)
+		* [虚拟页式存储管理](#虚拟页式存储管理)
+			* [标志位](#标志位)
+			* [页面置换算法](#页面置换算法)
+				* [局部置换算法](#局部置换算法)
+					* [最远未用算法(Least Recently Used/LRU Algorithm)](#最远未用算法least-recently-usedlru-algorithm)
+					* [时钟算法(Clock Algorithm)](#时钟算法clock-algorithm)
+					* [	最不常用算法(Least Frequently Used/LFU Algorithm)](#最不常用算法least-frequently-usedlfu-algorithm)
+				* [全局置换算法](#全局置换算法)
+					* [工作集算法](#工作集算法)
+					* [缺页率算法](#缺页率算法)
+	* [进程(资源分配单位)](#进程资源分配单位)
+		* [进程状态/生命周期](#进程状态生命周期)
+			* [进程控制块(Process Control Block)](#进程控制块process-control-block)
+		* [进程通信](#进程通信)
+		* [线程(CPU 调度单位)](#线程cpu-调度单位)
+	* [处理机调度](#处理机调度)
+		* [调度时机](#调度时机)
+		* [调度策略/算法](#调度策略算法)
+			* [算法目标](#算法目标)
+			* [先来先服务算法(First Come First Served/FCFS)](#先来先服务算法first-come-first-servedfcfs)
+			* [短进程优先算法(Shortest Process Next/Shortest Remaining Time)](#短进程优先算法shortest-process-nextshortest-remaining-time)
+			* [最高响应比优先算法(Highest Response Ratio Next)](#最高响应比优先算法highest-response-ratio-next)
+			* [时间片轮转算法(Round Robin)](#时间片轮转算法round-robin)
+			* [多级队列调度算法(MQ)](#多级队列调度算法mq)
+			* [多级反馈队列算法(MLFQ)](#多级反馈队列算法mlfq)
+	* [同步互斥](#同步互斥)
+		* [临界区的访问原则](#临界区的访问原则)
+		* [基于软件方法的同步互斥](#基于软件方法的同步互斥)
+		* [高级抽象的同步互斥](#高级抽象的同步互斥)
+			* [lock/semaphore](#locksemaphore)
+			* [monitor](#monitor)
+		* [死锁](#死锁)
+	* [文件系统](#文件系统)
+		* [文件组成](#文件组成)
+		* [文件系统基本数据结构](#文件系统基本数据结构)
+			* [文件卷控制块(superblock)](#文件卷控制块superblock)
+			* [目录项(dentry)](#目录项dentry)
+			* [文件控制块(vnode/inode)](#文件控制块vnodeinode)
+			* [文件描述符](#文件描述符)
+			* [打开文件表](#打开文件表)
+		* [文件分配](#文件分配)
+		* [空闲空间管理](#空闲空间管理)
+		* [冗余磁盘阵列(Redundant Array of Inexpensive Disks/RAID)](#冗余磁盘阵列redundant-array-of-inexpensive-disksraid)
 
 # Operating System Basic Notes
 
@@ -435,6 +482,11 @@ _   iret: pop above variables, move to ring 3
 *   内存资源信息: 堆指针/栈指针/虚拟内存页面指针
 *   上下文信息(用于进程/上下文切换时保存/恢复上下文): trap frame/context(register files)
 
+### 进程通信
+
+*   直接通信: send(proc, msg), receive(proc, msg) `shmctl() shm*`
+*   间接通信: send(msg_que, msg), receive(msg_que, msg) `msgctl() msg*`
+
 ### 线程(CPU 调度单位)
 
 *   进程缺陷: 共享数据不便, 系统开销大
@@ -552,7 +604,9 @@ do {
 
 ### 高级抽象的同步互斥
 
-利用原子操作实现锁数据结构(lock)
+利用原子操作实现互斥数据结构
+
+#### lock/semaphore
 
 ```cpp
 struct lock/semaphore {
@@ -570,3 +624,80 @@ struct lock/semaphore {
 	};
 };
 ```
+
+#### monitor
+
+*   与 semaphore 相反, 初始 0, `wait(++ && sleep)`, `signal(-- && wakeup)`
+*   管程内可以中断执行, 并 notify 其他等待线程
+
+### 死锁
+
+非抢占持有互斥循环等待
+
+## 文件系统
+
+*   分配文件磁盘空间: 分配与管理
+*   管理文件集合: 定位, 命名, 文件系统结构
+*   数据可靠和安全: 持久化保存, 防止数据丢失(系统崩溃时)
+*   基本操作单位: 数据块
+*   文件访问模式: 顺序访问/随机访问/索引访问
+*   文件系统种类: 磁盘/数据库/日志/网络/分布式/虚拟文件系统
+
+### 文件组成
+
+*   文件头: 文件属性(名称/类型/大小/权限/路径/创建者/创建时间/最近修改时间)
+*   文件头: 文件存储位置与顺序
+*   文件体: 实际字节序列
+
+### 文件系统基本数据结构
+
+superblock -> dentry -> vnode/inode
+
+#### 文件卷控制块(superblock)
+
+*   每个文件系统只有一个控制块
+*   描述该文件系统全局信息: 数据块(大小等信息), 空余块信息, 文件指针/引用计数
+
+#### 目录项(dentry)
+
+*   目录是一类特殊的文件: 其内容为文件索引表(文件名/文件指针), 内部采取哈希表存储
+*   目录与文件构成树状结构
+*   每个目录有一个目录项
+*   保存目录相关信息: 指向文件控制块, 父目录/子目录信息
+
+#### 文件控制块(vnode/inode)
+
+*   每个文件有一个文件控制块
+*   保存该文件详细信息: 访问权限, 所属者/组, 文件大小, 数据块位置(索引)
+
+#### 文件描述符
+
+操作系统在打开文件表中维护的打开文件状态与信息:
+
+*   文件指针: 最近一次读写位置
+*   文件打开计数(引用计数): 引用计数为 0 时, 回收相关资源
+*   文件磁盘位置
+*   访问权限
+
+#### 打开文件表
+
+*   系统打开文件表: 保存文件描述符
+*   进程打开文件表: 指向系统打开文件表某项, 并附加额外信息
+
+### 文件分配
+
+*   分配方式: 连续分配, 琏式分配, 索引分配
+*   琏式索引分配: 琏式链接多个索引块
+*   多级索引分配: 索引分配 + 多级琏式索引块
+
+### 空闲空间管理
+
+*   bit 位图, 链表, 琏式索引: 保存空闲数据块位置与顺序
+
+### 冗余磁盘阵列(Redundant Array of Inexpensive Disks/RAID)
+
+*   RAID-0: 磁盘条带化
+*   RAID-1: 磁盘镜像(冗余拷贝), 提高可靠性
+*   RAID-4: 带奇偶校验(校验和)的磁盘条带化, 提高可靠性
+*   RAID-5: 带分布式奇偶校验的磁盘条带化, 减少校验和所在物理磁盘的读写压力
+*   RAID-6: 每组条带块有两个冗余块, 可以检查到 2 个磁盘错误
