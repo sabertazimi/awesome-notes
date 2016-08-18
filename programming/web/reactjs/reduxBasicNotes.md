@@ -27,6 +27,7 @@ export default appStore = createStore(rootReducers)
 *   初态与变化态皆由 Reducers 定义并控制
 *   Actions 中保存着 action.type 外, 还保存着供 Reducers 进行有效状态变化的其他信息(可自定义)
 *   调用 Dispatch 方法自动向 Store 传递一个 Action(因为只有一个全局 Store, 故无需额外指定 Store 参数), Store 遍历调用其中的  Reducers, 根据 switch 语句进行匹配 action 处理
+*   reducer 只保存最基本的 states, 可计算出的 states 放在 mapStateToProps(selector) 中直接计算后绑定至 props
 
 ## Best Practice
 
