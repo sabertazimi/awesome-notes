@@ -105,8 +105,14 @@ ReactDOM.render({
 
 ### stateful/stateless component
 
--   stateless component: 采用函数型声明, 不使用 setState(), 一般作为表现型组件
--   stateful component: 采用类型声明, 使用 setState(), 一般作为容器型组件(结合Redux)
+#### stateless component
+
+采用函数型声明, 不使用 setState(), 一般作为表现型组件
+
+#### stateful component
+
+*   采用类型声明, 使用 setState(), 一般作为容器型组件(containers)
+*   结合 Redux 中的 connect 方法, 将 store 中的 state 作为此类组件的 props
 
 ### component lifecycle
 
