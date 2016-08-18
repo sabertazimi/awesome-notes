@@ -8,6 +8,26 @@
 
 Stack: ES6, webpack, react-hot-loader
 
+## Basic Concepts
+
+### Store and States
+
+#### Store
+
+Redux 中只有一个全局唯一 store 状态树, 且由 reducers 创建 store.
+
+```js
+export default appStore = createStore(rootReducers)
+```
+
+#### States
+
+在 Redux 中 States 并不显式定义:
+
+*   初态与变化态皆由 Reducers 定义并控制
+*   Actions 中保存着 action.type 外, 还保存着供 Reducers 进行有效状态变化的其他信息(可自定义)
+*   调用 Dispatch 方法自动向 Store 传递一个 Action(因为只有一个全局 Store, 故无需额外指定 Store 参数), Store 遍历调用其中的  Reducers, 根据 switch 语句进行匹配 action 处理
+
 ## Best Practice
 
 1. 用ES6, webpack, react-hot-loader....详细内容参照MERN v2.0 - Build production ready universal apps easily
