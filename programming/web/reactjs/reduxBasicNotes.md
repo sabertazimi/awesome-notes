@@ -52,6 +52,23 @@ export default appStore = createStore(rootReducers)
 
 ## Awesome Tools
 
+### Libs
+
+#### http
+
+-   isomorphic-fetch
+
+#### middleware
+
+-   redux-thunk
+-   redux-saga
+-   redux-promise
+-   redux-diff-logger
+
+#### state
+
+-   redux-undo
+
 ### Debugging
 
 -   [Redux Devtools](https://github.com/gaearon/redux-devtools)

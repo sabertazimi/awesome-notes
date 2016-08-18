@@ -189,6 +189,10 @@ handle(e) {
 -   [React Resolver](https://github.com/ericclemmons/react-resolver)
 -   [RxJS Middleware](https://github.com/redux-observable/redux-observable)
 
+### Data to View
+
+-   [reselect](https://github.com/reactjs/reselect)
+
 ### UI
 
 -   [React Material UI](https://github.com/callemall/material-ui)
