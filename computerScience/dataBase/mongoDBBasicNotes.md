@@ -45,4 +45,50 @@ $ sudo rm -r /var/log/mongodb
 $ sudo rm -r /var/lib/mongodb
 ```
 
+## Shell Instruction
 
+### create and drop
+
+#### create
+
+```sh
+use test
+show dbs
+```
+
+#### drop
+
+```sh
+use dbToDrop
+db.dropDatabase()
+```
+
+### query
+
+```sh
+db.collection.find().pretty()
+```
+
+### insert
+
+```sh
+db.collection.insert(ison);
+```
+
+### information
+
+#### database
+
+```sh
+db.getName()
+db.stats()
+db.version()
+db.getMongo()
+```
+
+#### collection
+
+```sh
+db.getCollectionNames()
+db.printCollectionStats()
+```
