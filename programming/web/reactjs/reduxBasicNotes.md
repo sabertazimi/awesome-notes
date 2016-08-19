@@ -10,24 +10,37 @@ Stack: ES6, webpack, react-hot-loader
 
 ## Basic Concepts
 
-### Store and States
+### Store and State
 
 #### Store
 
 Redux 中只有一个全局唯一 store 状态树, 且由 reducers 创建 store.
 
 ```js
-export default appStore = createStore(rootReducers)
+export default appStore = createStore(rootReducers, initState);
 ```
 
-#### States
+#### State
 
-在 Redux 中 States 并不显式定义:
+在 Redux 中 State 并不显式定义:
 
 *   初态与变化态皆由 Reducers 定义并控制
 *   Actions 中保存着 action.type 外, 还保存着供 Reducers 进行有效状态变化的其他信息(可自定义)
 *   调用 Dispatch 方法自动向 Store 传递一个 Action(因为只有一个全局 Store, 故无需额外指定 Store 参数), Store 遍历调用其中的  Reducers, 根据 switch 语句进行匹配 action 处理
-*   reducer 只保存最基本的 states, 可计算出的 states 放在 mapStateToProps(selector) 中直接计算后绑定至 props
+*   reducer 只保存最基本的 state, 可计算出的 state 放在 mapStateToProps(selector) 中直接计算后绑定至 props
+
+##### Persisted State
+
+```js
+// localStorage.getItem('state')/localStorage.setItem('state', serializedState)
+const persistedState = loadLocalStorageState();
+const appStore = createStore(rootReducers, persistedState);
+const appStore.subscribe(throttle(() => {
+    saveLocalStorageState({
+        todos: store.getState().todos
+    });
+}, 1000));
+```
 
 ### Reducers
 
