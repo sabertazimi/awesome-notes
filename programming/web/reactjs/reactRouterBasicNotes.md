@@ -50,3 +50,7 @@ render((
 ### Clean URLs
 
 replace hashHistory for browserHistory
+
+### Change Route
+
+*   onEnter = { () => store.dispatch(createRouteAction(params))}
