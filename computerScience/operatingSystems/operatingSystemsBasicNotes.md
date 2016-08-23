@@ -404,6 +404,15 @@ _   iret: pop above variables, move to ring 3
 
 虚拟内存 = 物理内存 + 外存
 
+### Page Fault
+
+*   虚拟地址越界: 访问不存在的虚拟地址
+*   对只读地址进行写操作
+*   访问未映射虚拟页(swap in/out)
+*   CPU 将产生异常的的线性地址(linear address) 存储在 CR2 寄存器中, 将 errorCode(bit2-访问权限异常,bit1-写异常,bit0-物理页不存在)压入中断栈
+
+> CR0: 处理器模式(实/保护/分段/分页模式); CR2: Page Fault Linear Address; CR3: Page-Directory Base Address Register
+
 ### 覆盖与交换
 
 #### 覆盖技术(overlay)
@@ -432,6 +441,9 @@ _   iret: pop above variables, move to ring 3
 当出现缺页异常且物理内存已满时, 需要以页面置换算法为指导, 换出闲置物理页面, 换入所要求缺页, 并更新页表项:
 
 *   尽可能减少物理页面的换入换出次数
+*   只可交换映射到用户空间的物理页
+*   当页表项中 `PTE_P` 为0 时, 对应高位地址表示扇区地址(而不是物理位移)
+*   换入时机: Page Fault 缺页; 换出时机: 积极/消极换出策略
 
 ##### 局部置换算法
 
@@ -474,6 +486,34 @@ _   iret: pop above variables, move to ring 3
 ###### 缺页率算法
 
 当缺页频繁时, 缺页时将缺页的页面加入常驻集; 当缺页不频繁时, 缺页时将不属于工作集的页面移出常驻集
+
+#### 实现
+
+*   为每个进程分配一个 vma 块, 模拟一个完整的物理内存
+*   vmas 按起始**地址从小至大**形成一个双向链表, 且地址空间**没有任何交集**
+
+```c
+#define VM_READ  0x00000001
+#define VM_WRITE 0x00000002
+#define VM_EXEC  0x00000004
+#define VM_USER  (VM_READ | VM_WRITE | VM_EXEC)
+
+typedef struct __mm {
+    list_entry_t mmap_list; // header of vmas' list
+    vma *mmap_cache;        // current accessed vma(used for speed purpose)
+    pde_t *pgdir;           // PDT for vmas
+    int map_count;          // count of vmas
+    void *sm_priv;          // private data for swap manager
+} mm;
+
+typedef struct __vma {
+    struct mm *vm_mm;       // all vmas use the same PDT(page directory table)
+    uintptr_t vm_start;     // start address of vma (align to PGSIZE)
+    uintptr_t vm_end;       // end address of vma   (align to PGSIZE)
+    uint32_t vm_flags;      // flags of vma
+    list_entry_t vma_list;  // doubly linked list: sort all vmas by start address
+} vma;
+```
 
 ## 进程(资源分配单位)
 
