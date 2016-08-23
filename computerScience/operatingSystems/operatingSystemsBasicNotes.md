@@ -189,6 +189,10 @@ BIOS 根据设置(硬盘/U盘/网络启动), 加载存储设备的主引导扇�
 
 ## 物理内存管理
 
+### bootloader 探测机器内存分布
+
+为内存管理模块提供基础: 在进入实模式前, 调用int 15h(88h, e801h, e820h), 借助 BIOS 中断获取内存信息
+
 ### 基本概念
 
 #### 基本目标
@@ -240,6 +244,11 @@ BIOS 根据设置(硬盘/U盘/网络启动), 加载存储设备的主引导扇�
 -   Worst-fit(最差匹配): 使用利用度最差的空闲块 - 分配中块效率高, 释放时需重新排列空闲块链表(降序)
 
 #### 碎片整理策略
+
+#### ucore 实现
+
+-   连续存放 n 个 page 结构, 形式表示内存页, 并在连续内存块的首页(header page)保存此连续块的连续页数目
+-   维护一个链表, 链表每项为大块连续内存块的起始页(header page address) 和 连续页数目, 管理分散的连续内存块
 
 ##### 紧凑(compaction)
 
@@ -333,7 +342,10 @@ BIOS 根据设置(硬盘/U盘/网络启动), 加载存储设备的主引导扇�
 
 ###### 多级页表
 
-切割页表: 建立子页表
+*   切割页表: 建立子页表
+*   Page Directory -> Page Table -> Physical Address
+*   将线性地址分成三部分 Directory+Table+Offset: cr3+Dir 取出 page table base, ptb+Tab 取出 physical address base, pab+offset = pa
+
 
 > CR3 寄存器: 保存一级页表的基址
 
