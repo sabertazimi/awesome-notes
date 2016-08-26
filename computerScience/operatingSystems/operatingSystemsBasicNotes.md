@@ -17,6 +17,7 @@
 					* [跳转到 os kernel 的入口点(entry point), 转移控制权至 os](#跳转到-os-kernel-的入口点entry-point-转移控制权至-os)
 				* [保护模式与段机制](#保护模式与段机制)
 	* [物理内存管理](#物理内存管理)
+		* [bootloader 探测机器内存分布](#bootloader-探测机器内存分布)
 		* [基本概念](#基本概念-1)
 			* [基本目标](#基本目标)
 			* [基本管理方式](#基本管理方式)
@@ -28,6 +29,7 @@
 			* [内存碎片](#内存碎片)
 			* [动态分配策略](#动态分配策略)
 			* [碎片整理策略](#碎片整理策略)
+			* [ucore 实现](#ucore-实现)
 				* [紧凑(compaction)](#紧凑compaction)
 				* [分区对换(swapping in/out)](#分区对换swapping-inout)
 			* [malloc 实现策略](#malloc-实现策略)
@@ -53,6 +55,7 @@
 				* [ring 3 to ring 0 (特权级提升)](#ring-3-to-ring-0-特权级提升)
 			* [TSS(Task State Segment)](#tsstask-state-segment)
 	* [虚拟内存管理](#虚拟内存管理)
+		* [Page Fault](#page-fault)
 		* [覆盖与交换](#覆盖与交换)
 			* [覆盖技术(overlay)](#覆盖技术overlay)
 			* [交换技术(swap)](#交换技术swap)
@@ -66,11 +69,18 @@
 				* [全局置换算法](#全局置换算法)
 					* [工作集算法](#工作集算法)
 					* [缺页率算法](#缺页率算法)
+			* [实现](#实现)
 	* [进程(资源分配单位)](#进程资源分配单位)
 		* [进程状态/生命周期](#进程状态生命周期)
 			* [进程控制块(Process Control Block)](#进程控制块process-control-block)
 		* [进程通信](#进程通信)
 		* [线程(CPU 调度单位)](#线程cpu-调度单位)
+			* [idleproc(0号内核线程)](#idleproc0号内核线程)
+		* [内核线程与用户进程](#内核线程与用户进程)
+		* [实现](#实现-1)
+			* [process context(执行现场)](#process-context执行现场)
+			* [`do_fork` function](#do_fork-function)
+			* [`do_execve` function](#do_execve-function)
 	* [处理机调度](#处理机调度)
 		* [调度时机](#调度时机)
 		* [调度策略/算法](#调度策略算法)
@@ -582,8 +592,6 @@ typedef struct __vma {
 
 #### `do_execve` function
 
-
-
 ## 处理机调度
 
 *   从就绪队列中挑选下一个占用 CPU 的进程(挑选进程的内核函数)
@@ -593,6 +601,17 @@ typedef struct __vma {
 
 *   进程停止运行, 进入等待/挂起/终止状态
 *   进程的中断请求完成时, 由等待状态进入就绪状态, 准备抢占 CPU 资源(准备从内核态返回用户态)
+
+#### 六大调度时机
+
+*   proc.c::do_exit 用户线程执行结束,主动放弃CPU控制权
+*   proc.c::do_wait 用户线程等待子进程结束,主动放弃CPU控制权
+*   proc.c::init_main
+    *   initproc 内核线程等待所有用户进程结束,如果没有结束,就主动放弃CPU控制权
+    *   initproc 内核线程在所有用户进程结束后,让 kswapd 内核线程执行10次，用于回收空闲内存资源
+*   proc.c::cpu_idle idleproc 内核线程的工作就是等待有处于就绪态的进程或线程,如果有就调用schedule函数
+*   sync.h::lock 在获取锁的过程中,如果无法得到锁,则主动放弃CPU控制权
+*   trap.c::trap 如果在当前进程在用户态被打断,且当前进程控制块的成员变量 need_resched 设置为1,则当前线程会放弃CPU控制权
 
 ### 调度策略/算法
 
