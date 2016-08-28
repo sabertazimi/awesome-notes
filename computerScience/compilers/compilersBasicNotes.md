@@ -1078,6 +1078,12 @@ value_t table_search(table_t table, key_t id);
 #endif
 ```
 
+#### method/object environment
+
+*   Method(ClassName, functionName) = (Type1, ..., Typen, Typen+1) - Typen+1 为返回值的类型, 即方法自身的类型
+*   Object(identifier) = Type
+*   由于方法与对象可能相同, 所以需要两个映射函数(符号表)
+
 ### 类型检查
 
 table: 字典结构 (key, type)
