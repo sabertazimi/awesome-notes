@@ -111,6 +111,9 @@ details:
 
 ### Tokenizer - 词法分析器
 
+*   Maximal match
+*   Higher priority match
+
 #### 转移图算法
 
 ```c
@@ -227,6 +230,9 @@ e -> "\0"		// basic defination
 
 #### 确定有限状态自动机(Deterministic Finite Automaton)
 
+*   Only a transition for a state with a input
+*   No epsilon moves
+
 M = (AlphaSet/InputSet, StateSet, currentState, FiniteStateSet, transferFunction)
 
 ```c
@@ -248,7 +254,10 @@ transferFunction = {
 
 #### 非确定有限状态自动机(Nondeterministic Finite Automaton)
 
-transferFunction 中的次态不确定/不唯一(为一个开集合)
+transferFunction 中的次态不确定/不唯一(为一个开集合):
+
+*   Multiple transitions for a state with a input
+*   can epsilon moves
 
 > (cS0, a) -> {cS1, cS2}
 
