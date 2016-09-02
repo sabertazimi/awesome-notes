@@ -154,6 +154,15 @@ npm completion >> ~/.bashrc (or ~/.zshrc)
 source ~/.zshrc
 ```
 
+## npm
+
+### Basic Command
+
+```sh
+$ npm prune // uninstall node_modules not in package.json
+$ npm outdated
+```
+
 ## Basic Node Modules
 
 > exports和module.exports的区别
