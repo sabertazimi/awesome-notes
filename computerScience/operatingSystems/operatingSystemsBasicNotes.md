@@ -583,7 +583,7 @@ typedef struct __vma {
 
 *   设置好执行现场后, 一旦调度器选择了 initproc 执行, 就需要根据 initproc->context 中保存的执行现场来恢复 initproc 的执行
 *   通过 proc_run 和进一步的 switch_to 函数完成两个执行现场的切换，具体流程如下:
-    *   让 current 指向 next 内核线程 initproc 
+    *   让 current 指向 next 内核线程 initproc
     *   设置任务状态段 ts 中特权态0下的栈顶指针 esp0 为 next 内核线程 initproc 的内核栈的栈顶, 即 next->kstack + KSTACKSIZE
     *   设置 CR3 寄存器的值为 next 内核线程 initproc 的页目录表起始地址 next->cr3
     *   由 switch_to 函数完成具体的两个线程的执行现场切换, 即切换各个寄存器
@@ -751,6 +751,58 @@ struct lock/semaphore {
 
 非抢占持有互斥循环等待
 
+### 实现
+
+#### P/V 操作
+
+##### 具体实现信号量的P操作
+
+*   关中断
+*   判断当前信号量的value是否大于0
+*   如果是>0，则表明可以获得信号量，故让value减一，并打开中断返回
+*   如果不是>0，则表明无法获得信号量，故需要将当前的进程加入到等待队列中，并打开中断，然后运行调度器选择另外一个进程执行
+*   如果被V操作唤醒，则把自身关联的wait从等待队列中删除（此过程需要先关中断，完成后开中断）
+
+##### 具体实现信号量的V操作
+
+*   关中断
+*   如果信号量对应的 wait queue 中没有进程在等待，直接把信号量的 value 加一，然后开中断返回
+*   如果有进程在等待且进程等待的原因是 semophore 设置的，则调用 wakeup_wait 函数将 waitqueue 中等待的第一个wait删除，且把此wait关联的进程唤醒,最后开中断返回
+
+#### 管程
+
+管程由四部分组成：
+
+*   管程内部的共享变量(mutex): 一个二值信号量，是实现每次只允许一个进程进入管程的关键元素，确保了互斥访问性质
+*   管程内部的条件变量: 通过执行 wait_cv,会使得等待某个条件C为真的进程能够离开管程并睡眠，且让其他进程进入管程继续执行;而进入管程的某进程设置条件C为真并执行signal_cv时，能够让等待某个条件C为真的睡眠进程被唤醒，从而继续进入管程中执行
+*   管程内部并发执行的进程
+*   对局部于管程内部的共享数据设置初始值的语句
+*   成员变量信号量 next: 配合进程对条件变量 cv 的操作而设置的，由于发出signal_cv的进程A会唤醒睡眠进程B，进程B执行会导致进程A睡眠，直到进程B离开管程，进程A才能继续执行，这个同步过程是通过信号量next完成
+*   整形变量 next_count: 表示由于发出 singal_cv 而睡眠的进程个数
+
+```c
+typedef struct monitor{
+    semaphore_t mutex;  // the mutex lock for going into the routines in monitor, should be initialized to 1
+    semaphore_t next;   // the next semaphore is used to down the signaling proc itself, and the other OR wakeuped
+    int next_count;     // the number of of sleeped signaling
+    proc condvar_t *cv; // the condvars in monitor
+} monitor_t;
+```
+
+##### Conditional Variable
+
+*   wait_cv： 被一个进程调用, 以等待断言 Pc 被满足后该进程可恢复执行. 进程挂在该条件变量上等待时, 不被认为是占用了管程
+*   signal_cv：被一个进程调用, 以指出断言 Pc 现在为真, 从而可以唤醒等待断言 Pc 被满足的进程继续执行
+*   信号量sem: 用于让发出 wait_cv 操作的等待某个条件C为真的进程睡眠, 而让发出 signal_cv 操作的进程通过这个 sem 来唤醒睡眠的进程
+*   count: 表示等在这个条件变量上的睡眠进程的个数
+*   owner: 表示此条件变量的宿主是哪个管程
+
+typedef struct condvar{
+    semaphore_t sem;            // the sem semaphore is used to down the waiting proc, and the signaling proc should up the waiting
+    proc int count;             // the number of waiters on
+    condvar monitor_t * owner;  // the owner(monitor) of this condvar
+} condvar_t;
+
 ## 文件系统
 
 *   分配文件磁盘空间: 分配与管理
@@ -818,3 +870,63 @@ superblock -> dentry -> vnode/inode
 *   RAID-4: 带奇偶校验(校验和)的磁盘条带化, 提高可靠性
 *   RAID-5: 带分布式奇偶校验的磁盘条带化, 减少校验和所在物理磁盘的读写压力
 *   RAID-6: 每组条带块有两个冗余块, 可以检查到 2 个磁盘错误
+
+### 实现
+
+#### Mount
+
+`sfs_do_mount`函数中:
+
+*   完成了加载位于硬盘上的SFS文件系统的超级块 superblock 和 freemap 的工作l
+*   在内存中有了 SFS 文件系统的全局信息
+
+#### index
+
+*   对于普通文件，索引值指向的 block 中保存的是文件中的数据
+*   对于目录，索引值指向的数据保存的是目录下所有的文件名以及对应的索引节点所在的索引块（磁盘块）所形成的数组
+
+#### inode
+
+内存inode包含了SFS的硬盘inode信息，而且还增加了其他一些信息，这属于是便于进行是判断否改写、互斥操作、回收和快速地定位等作用。 一个内存inode是在打开一个文件后才创建的，如果关机则相关信息都会消失。而硬盘inode的内容是保存在硬盘中的，只是在进程需要时才被读入到内存中，用于访问文件或目录的具体内容数据
+
+```c
+struct inode {
+    union {
+        //包含不同文件系统特定inode信息的union成员变量
+        struct device __device_info; //设备文件系统内存inode信息
+        struct sfs_inode __sfs_inode_info; //SFS文件系统内存inode信息
+    } in_info;
+
+    enum {
+        inode_type_device_info = 0x1234,
+        inode_type_sfs_inode_info,
+    } in_type; //此inode所属文件系统类型
+
+    atomic_t ref_count; //此inode的引用计数
+    atomic_t open_count; //打开此inode对应文件的个数
+
+    struct fs *in_fs; //抽象的文件系统，包含访问文件系统的函数指针
+    const struct inode_ops *in_ops; //抽象的inode操作，包含访问inode的函数指针
+};
+```
+
+```c
+struct inode_ops {
+    unsigned long vop_magic;
+    int (*vop_open)(struct inode *node, uint32_t open_flags);
+    int (*vop_close)(struct inode *node);
+    int (*vop_read)(struct inode *node, struct iobuf *iob);
+    int (*vop_write)(struct inode *node, struct iobuf *iob);
+    int (*vop_getdirentry)(struct inode *node, struct iobuf *iob);
+    int (*vop_create)(struct inode *node, const char *name, bool excl, struct inode **node_store);
+    int (*vop_lookup)(struct inode *node, char *path, struct inode **node_store);
+
+    ……
+
+};
+```
+
+#### Device
+
+利用 `vfs_dev_t` 数据结构，就可以让文件系统通过一个链接 `vfs_dev_t` 结构的双向链表找到device对应的inode数据结构，一个inode节点的成员变量in_type的值是0x1234，则此 inode的成员变量in_info将成为一个device结构。这样inode就和一个设备建立了联系，这个inode就是一个设备文件
+
