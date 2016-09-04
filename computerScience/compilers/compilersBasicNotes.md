@@ -638,10 +638,12 @@ bool ll1_parsing(tokens[]) {
 }
 ```
 
+
 ##### nullable sets
 
 *   存在规则: X -> epsilon
-*   或者    : X -> Y1Y2...Yn, 且存在规则 Y1->epsilon, ..., Yn->epsilon
+*   或者    : X -> Y1Y2...Yn, 且存在规则 Y1 -> epsilon, ..., Yn -> epsilon
+*   即      : X -*>  epsilon (epsilon <- first(X))
 
 ```cpp
 nullable = {};
@@ -656,6 +658,12 @@ while (nullable is still changing) {
 ```
 
 ##### first sets
+
+first(X) = {t | X -*> talpha} U {epsilon | X-*>epsilon} :
+
+*   first(t)  = {t}
+*   epsilon<-first(X): X -> epsilon or X -> A1...An, epsilon<-first(Ai)
+*   first(alpha)<-first(X): X -> A1..Analpha, epsilon<-first(Ai)
 
 first sets 不动点算法:
 
@@ -690,6 +698,14 @@ while (some sets is changing) {
 
 ##### follow sets
 
+follow(X) = {t | S -*> beta X t epsilon} :
+
+*   for X -> AB:
+    *   first(B) <- follow(A), follow(X) <- follow(B)
+    *   if B -*> epsilon: follow(X) <- follow(A)
+*   A -> alpha X beta: first(beta) - {epsilon} <- follow(X)
+*   $ <- follow(S)
+
 follow sets 不动点算法:
 
 ```cpp
@@ -699,7 +715,10 @@ foreach (nonterminal N) {
 
 while (some sets is changing) {
 	foreach (production p: N->beta1...betan) {
+
+        // temp: follow(left) <- follow(right)
 		temp = follow(N);
+
 		foreach (betai from betan downto beta1) {
 			if (betai == a) {
 				temp = {a};
@@ -781,8 +800,17 @@ nullable = {X, Y}
 通过文法重写消除左递归, 使文法适应 L(最左推导):
 
 *   改写成右递归文法
-*   提取左公因式
 *   规定优先级与结合性
+*   提取左公因式(Common Prefix)
+
+```Bison
+E -> T+E
+    |T
+
+E -> TX
+X -> +E
+    |epsilon
+```
 
 ###### 消除直接左递归
 
