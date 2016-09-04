@@ -443,7 +443,7 @@ L(syntax) = semantic: 多个语法对应一个语义(不同形式的表达式对
 
 若给定文法 G, 对于句子 s, 其有 2 可不同的分析树, 择称 G 是二义性文法
 
-###### 文法重写(消除二义性)
+###### 文法重写
 
 ```Bison
 E -> E + T
@@ -508,7 +508,7 @@ V -> eat
 N -> (sheep-tiger-grass)water
 ```
 
-#### 递归下降分析算法(预测分析算法)
+#### 递归下降分析算法(Recursive Descent/预测分析算法)
 
 *   分治算法: 每个非终结符构造一个**分析函数**
 *   前看符号: 用**前看符号**指导产生式规则的选择(expansion)
@@ -538,6 +538,58 @@ parse_V(token) {
 ```
 
 ##### 算法实现
+
+*   tip one: use save pointer to implement roll back
+*   tip two: use logical OR expression to replace nested if-else structure
+
+```c
+bool term(TOKEN tok) {
+    return *next++ == tok;
+}
+
+bool E1(void) {
+    return T();
+}
+
+bool E2(void) {
+    return T()
+        && term(PLUS)
+        && E();
+}
+
+bool E(void) {
+    // roll back pointer
+    TOKEN *save = next;
+
+    return (next = save, E1())
+        || (next = save, E2());
+}
+
+bool T1(void) {
+    return term(INT);
+}
+
+bool T2(void) {
+    return term(INT)
+        && term(TIMES)
+        && T();
+}
+
+bool T3(void) {
+    return term(OPEN)
+        && E()
+        && term(CLOSE);
+}
+
+bool T(void) {
+    // roll back pointer
+    TOKEN *save = next;
+
+    return (next = save, T1())
+        || (next = save, T2())
+        || (next = save, T3());
+}
+```
 
 ```cpp
 // X -> a
@@ -730,6 +782,30 @@ nullable = {X, Y}
 
 *   改写成右递归文法
 *   提取左公因式
+*   规定优先级与结合性
+
+```Bison
+S -> Salpha1
+    |Salpha2
+    ...
+    |Salphan
+    |beta1
+    |beta2
+    ...
+    |betam
+
+S -> beta1S'
+    |beta2S'
+    ...
+    |betanS'
+S'-> alpha1S'
+    |alpha2S'
+    ...
+    |alphanS'
+    |epsilon
+```
+
+
 
 ### 自底向上分析
 
