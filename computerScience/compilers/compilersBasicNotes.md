@@ -1053,6 +1053,12 @@ int main() {
 }
 ```
 
+##### 非 LL(1) 文法/语言
+
+*   ambiguous grammar
+*   left recursive grammar
+*   not left factored grammar(未提取展开式的公因子)
+
 ### 自底向上分析
 
 ```Bison
@@ -1084,6 +1090,14 @@ int main() {
 *   添加伪开始符号: S' -> . S$   `$表示 tokens/file 结束符`
 *   移进        : 读入记号 `push(token[i])`
 *   归约(reduce):         `pop(right expansion)` `push(left expansion)`
+
+##### 短语(Handles)
+
+```Bison
+S -*> αXω -> αβω
+```
+
+β 是 αβω 的一个短语(Handle)
 
 ##### 分析表构造
 
