@@ -617,9 +617,9 @@ parse_X() {
 
 #### **LL(1)分析算法**
 
-*   从左(L)向右读入程序
-*   最左(L)推导: 优先推导最左侧非终结符
-*   一个(1)前看符号
+*   从左(L)向右读入程序(left to right scan)
+*   最左(L)推导: 优先推导最左侧非终结符(leftmost derivation)
+*   一个(1)前看符号(look ahead)
 *   分治算法: 每个非终结符构造一个**first set** 和一个 **follow set**, 最后为每个规则构造一个 **final set**
 *   分析表驱动(由 first sets/follow sets/final sets 推导分析表)
 
@@ -1093,7 +1093,7 @@ int main() {
 
 #### **LR(0) 分析算法(移进-归约(reduce)算法)**
 
-*   从左向右读入程序, 逆向最右推导, 不用前看符号
+*   从左向右读入程序(left to right scan), 逆向最右推导(rightmost derivation), 不用前看符号
 *   添加伪开始符号: S' -> . S$   `$表示 tokens/file 结束符`
 *   移进        : 读入记号 `push(token[i])`
 *   归约(reduce):         `pop(right expansion)` `push(left expansion)`
@@ -1109,6 +1109,8 @@ S -*> αXω -> αβω
 ##### **分析表构造**
 
 LR(0) 分析表构造算法: (原理同于 Hopcroft 算法)
+
+*   E -> A, A -> B, B -> C ... :Recursively, right hand side of C production will be reduced to E finally
 
 ```cpp
 closure(production_set p) {
@@ -1198,6 +1200,25 @@ while (true) {
 
 *   `production_with_dot_set` 中的 item 修改为 `X -> [beta1 . betan..., a]` 二元组
 *   closure(production_set p) 中闭包规则从 `X -> [a . Y beta,a]` 修改为 `Y -> [.y, b]` b <- final(beta a)
+
+#### LALR(k)
+
+#### SLR
+
+Simple LR: improves LR(k) shift/reduce heuristic
+
+New reduce rule:
+
+*   state contains item X -> β.
+*   next_token <- follow(X) 
+
+##### 实现
+
+*   stack pair: `<input, state>`
+*   state i: if has item X -> α.aβ , goto[i, a] = j then action[i, a] = shift j(shift then to state j)
+*   state i: if has item X -> α. , a <- follow(X) then action[i, a] = reduce(X -> α)
+*   state i: if has item S' -> S then action[i, $] = accept
+*   otherwise: action[i, a] = error
 
 ### **抽象语法树**
 
