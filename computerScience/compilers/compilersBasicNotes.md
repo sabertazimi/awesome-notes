@@ -55,6 +55,9 @@
 				* [**分析表构造**](#分析表构造)
 				* [**驱动代码**](#驱动代码)
 				* [**解决冲突(SLR/LR(1)/LALR)**](#解决冲突slrlr1lalr)
+			* [LALR(k)](#lalrk)
+			* [SLR](#slr)
+				* [实现](#实现-1)
 		* [**抽象语法树**](#抽象语法树)
 			* [**语法制导翻译(Syntax-Directed Translation)**](#语法制导翻译syntax-directed-translation)
 			* [**抽象语法**](#抽象语法)
@@ -63,6 +66,7 @@
 				* [**相关算法**](#相关算法)
 				* [**构造算法**](#构造算法)
 	* [**Semantic Analysis(语义分析)**](#semantic-analysis语义分析)
+		* [类型系统(type system)](#类型系统type-system)
 		* [**符号表(上下文相关)**](#符号表上下文相关)
 			* [**method/object environment**](#methodobject-environment)
 		* [**类型检查**](#类型检查)
@@ -1392,7 +1396,7 @@ E: E + E { $$ = new_exp_add($1, $3); }
 *   声明检查(identifiers declaration)
 *   定义检查:
     *   class 仅可定义一次
-    *   method 仅可定义一次
+    *   method 在同一 class 中仅可定义一次
 *   类型检查(types)
 *   作用域检查
 *   继承关系(inheritance relationships)
@@ -1426,6 +1430,54 @@ E: n
  | E + E
  | E && E
  ;
+```
+
+### 类型系统(type system)
+
+#### Type Checking
+
+`├ e: T` meas e 可计算为类型为 T 的值
+
+#### Type Environments
+
+*   Object(identifier) = Type
+*   `O` Type environments 是一个函数, 将 object identifiers 映射成 types
+*   `O ├ e: T` 表示在 O 函数作用下, 可证明 e 的类型为 T
+
+```type
+// input x
+// output T
+O[T/x](x) = T
+
+O[T/x](y) = O(y)
+```
+
+```type
+[Var]
+O(x) = T
+----------
+O ├ x: T
+
+[Let without Init]
+O[T0/x] ├ e1: T1
+--------------------
+O ├ let x: T0 in e1: T1
+```
+#### Typing Methods
+
+*   Method(ClassName, functionName) = (Type1, ..., Typen, Typen+1)
+*   Typen+1 为返回值的类型, 即方法自身的类型
+
+```type
+[Dispatch]
+O,M ├ e0: T0
+O,M ├ e1: T1
+...
+O,M ├ en: Tn
+M(T0, func) = (T1', ..., Tn', Tn+1')
+Ti <= Ti'
+----------
+O,M ├ e0.func(e1, ..., en): Tn+1'
 ```
 
 ### **符号表(上下文相关)**
@@ -1464,15 +1516,27 @@ value_t table_search(table_t table, key_t id);
 #endif
 ```
 
-#### **method/object environment**
-
-*   Method(ClassName, functionName) = (Type1, ..., Typen, Typen+1) - Typen+1 为返回值的类型, 即方法自身的类型
-*   Object(identifier) = Type
-*   由于方法与对象可能相同, 所以需要两个映射函数(符号表)
-
 ### **类型检查**
 
-table: 字典结构 (key, type)
+*   table: 字典结构 (key, type) (Hash Table/Red Black Tree)
+*   type environment(Object, Methods, Class) is passed from parent to child(down the tree)
+*   types are passed from child to parent(up the tree)
+
+```cpp
+TypeCheck(Environment/OMC, e1+e2) = {
+    T1 = TypeCheck(OMC, e1);
+    T2 = TypeCheck(OMC, e2);
+    Check T1 == T2 == Int;
+    return Int;
+}
+
+TypeCheck(OMC, let x: T <- e0 in e1) = {
+    T0 = TypeCheck(OMC, e0);
+    T1 = TypeCheck(OMC.add(O(x)=T), e1);
+    Check subtype(T0, T1);  // T0 <= T1
+    return T1;
+}
+```
 
 ```cpp
 enum type {INT, BOOL};
