@@ -1389,8 +1389,13 @@ E: E + E { $$ = new_exp_add($1, $3); }
 
 ## **Semantic Analysis(语义分析)**
 
-*   类型检查
+*   声明检查(identifiers declaration)
+*   定义检查:
+    *   class 仅可定义一次
+    *   method 仅可定义一次
+*   类型检查(types)
 *   作用域检查
+*   继承关系(inheritance relationships)
 *   上下文**相关**分析(检查抽象语法树上下文相关的属性)
 
 AST + semantic of programming language --semantic analysis--> intermediate
