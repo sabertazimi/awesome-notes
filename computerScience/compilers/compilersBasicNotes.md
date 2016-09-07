@@ -1,109 +1,115 @@
 
-* [**Compiler Basic Notes**](#compiler-basic-notes)
-	* [**Basic Concepts**](#basic-concepts)
-		* [**Defination of compilers**](#defination-of-compilers)
-		* [**Structure of compilers**](#structure-of-compilers)
-	* [**Lexical Analysis**](#lexical-analysis)
-		* [**Tokenizer - 词法分析器**](#tokenizer---词法分析器)
-			* [**转移图算法**](#转移图算法)
-			* [**关键字(keyword)处理**](#关键字keyword处理)
-		* [**正则语言(Regular Expressions)**](#正则语言regular-expressions)
-			* [**基本定义**](#基本定义)
-			* [**形式表示**](#形式表示)
-			* [**正则语法糖(Syntax Sugar)**](#正则语法糖syntax-sugar)
-		* [**有限状态自动机(Finite Automaton)**](#有限状态自动机finite-automaton)
-			* [**确定有限状态自动机(Deterministic Finite Automaton)**](#确定有限状态自动机deterministic-finite-automaton)
-				* [**状态转移表实现 DFA**](#状态转移表实现-dfa)
-			* [**非确定有限状态自动机(Nondeterministic Finite Automaton)**](#非确定有限状态自动机nondeterministic-finite-automaton)
-		* [**自动词法分析器**](#自动词法分析器)
-			* [**Thompson 算法: RegExp --> NFA**](#thompson-算法-regexp----nfa)
-			* [**子集构造算法: NFA --> DFA**](#子集构造算法-nfa----dfa)
-			* [**Hopcroft 算法**](#hopcroft-算法)
-			* [**实现**](#实现)
-				* [**DFA**](#dfa)
-					* [**有向图**](#有向图)
-					* [**转移表**](#转移表)
-	* [**Syntax Analysis(语法分析)**](#syntax-analysis语法分析)
-		* [**乔姆斯基文法体系**](#乔姆斯基文法体系)
-		* [**上下文无关文法**](#上下文无关文法)
-			* [**文法表示**](#文法表示)
-			* [**形式化表示**](#形式化表示)
-				* [**简易表示**](#简易表示)
-				* [**巴科斯范式(Backus-Naur Form)**](#巴科斯范式backus-naur-form)
-			* [**分析树**](#分析树)
-				* [**meaning function(多对一)**](#meaning-function多对一)
-				* [**二义性文法(一对多)**](#二义性文法一对多)
-					* [**文法重写**](#文法重写)
-					* [**优先级与结合性**](#优先级与结合性)
-		* [**自顶向下分析**](#自顶向下分析)
-			* [**避免回溯**](#避免回溯)
-			* [**递归下降分析算法(Recursive Descent/预测分析算法)**](#递归下降分析算法recursive-descent预测分析算法)
-				* [**算法实现**](#算法实现)
-			* [**LL(1)分析算法**](#ll1分析算法)
-				* [**nullable sets**](#nullable-sets)
-				* [**first sets**](#first-sets)
-				* [**follow sets**](#follow-sets)
-				* [**final sets**](#final-sets)
-				* [**分析表**](#分析表)
-				* [**解决冲突(分析表某项有多个编号)**](#解决冲突分析表某项有多个编号)
-					* [**消除直接左递归**](#消除直接左递归)
-					* [**消除间接左递归**](#消除间接左递归)
-				* [**非 LL(1) 文法/语言**](#非-ll1-文法语言)
-		* [**自底向上分析**](#自底向上分析)
-			* [**LR(0) 分析算法(移进-归约(reduce)算法)**](#lr0-分析算法移进-归约reduce算法)
-				* [**短语(Handles)**](#短语handles)
-				* [**分析表构造**](#分析表构造)
-				* [**驱动代码**](#驱动代码)
-				* [**解决冲突(SLR/LR(1)/LALR)**](#解决冲突slrlr1lalr)
+* [Compiler Basic Notes](#compiler-basic-notes)
+	* [Basic Concepts](#basic-concepts)
+		* [Defination of compilers](#defination-of-compilers)
+		* [Structure of compilers](#structure-of-compilers)
+	* [Lexical Analysis](#lexical-analysis)
+		* [Tokenizer - 词法分析器](#tokenizer---词法分析器)
+			* [转移图算法](#转移图算法)
+			* [关键字(keyword)处理](#关键字keyword处理)
+		* [正则语言(Regular Expressions)](#正则语言regular-expressions)
+			* [基本定义](#基本定义)
+			* [形式表示](#形式表示)
+			* [正则语法糖(Syntax Sugar)](#正则语法糖syntax-sugar)
+		* [有限状态自动机(Finite Automaton)](#有限状态自动机finite-automaton)
+			* [确定有限状态自动机(Deterministic Finite Automaton)](#确定有限状态自动机deterministic-finite-automaton)
+				* [状态转移表实现 DFA](#状态转移表实现-dfa)
+			* [非确定有限状态自动机(Nondeterministic Finite Automaton)](#非确定有限状态自动机nondeterministic-finite-automaton)
+		* [自动词法分析器](#自动词法分析器)
+			* [Thompson 算法: RegExp --> NFA](#thompson-算法-regexp----nfa)
+			* [子集构造算法: NFA --> DFA](#子集构造算法-nfa----dfa)
+			* [Hopcroft 算法](#hopcroft-算法)
+			* [实现](#实现)
+				* [DFA](#dfa)
+					* [有向图](#有向图)
+					* [转移表](#转移表)
+	* [Syntax Analysis(语法分析)](#syntax-analysis语法分析)
+		* [乔姆斯基文法体系](#乔姆斯基文法体系)
+		* [上下文无关文法](#上下文无关文法)
+			* [文法表示](#文法表示)
+			* [形式化表示](#形式化表示)
+				* [简易表示](#简易表示)
+				* [巴科斯范式(Backus-Naur Form)](#巴科斯范式backus-naur-form)
+			* [分析树](#分析树)
+				* [meaning function(多对一)](#meaning-function多对一)
+				* [二义性文法(一对多)](#二义性文法一对多)
+					* [文法重写](#文法重写)
+					* [优先级与结合性](#优先级与结合性)
+		* [自顶向下分析](#自顶向下分析)
+			* [避免回溯](#避免回溯)
+			* [递归下降分析算法(Recursive Descent/预测分析算法)](#递归下降分析算法recursive-descent预测分析算法)
+				* [算法实现](#算法实现)
+			* [LL(1)分析算法](#ll1分析算法)
+				* [nullable sets](#nullable-sets)
+				* [first sets](#first-sets)
+				* [follow sets](#follow-sets)
+				* [select sets](#select-sets)
+				* [分析表](#分析表)
+				* [解决冲突(分析表某项有多个编号)](#解决冲突分析表某项有多个编号)
+					* [消除直接左递归](#消除直接左递归)
+					* [消除间接左递归](#消除间接左递归)
+				* [非 LL(1) 文法/语言](#非-ll1-文法语言)
+		* [自底向上分析](#自底向上分析)
+			* [LR(0) 分析算法(移进-归约(reduce)算法)](#lr0-分析算法移进-归约reduce算法)
+				* [短语(Handles)](#短语handles)
+				* [分析表构造](#分析表构造)
+				* [驱动代码](#驱动代码)
+				* [解决冲突(SLR/LR(1)/LALR)](#解决冲突slrlr1lalr)
 			* [LALR(k)](#lalrk)
 			* [SLR](#slr)
 				* [实现](#实现-1)
-		* [**抽象语法树**](#抽象语法树)
-			* [**语法制导翻译(Syntax-Directed Translation)**](#语法制导翻译syntax-directed-translation)
-			* [**抽象语法**](#抽象语法)
-			* [**AST 的实现**](#ast-的实现)
-				* [**数据结构**](#数据结构)
-				* [**相关算法**](#相关算法)
-				* [**构造算法**](#构造算法)
-	* [**Semantic Analysis(语义分析)**](#semantic-analysis语义分析)
+		* [抽象语法树](#抽象语法树)
+			* [语法制导翻译(Syntax-Directed Translation)](#语法制导翻译syntax-directed-translation)
+			* [抽象语法](#抽象语法)
+			* [AST 的实现](#ast-的实现)
+				* [数据结构](#数据结构)
+				* [相关算法](#相关算法)
+				* [构造算法](#构造算法)
+	* [Semantic Analysis(语义分析)](#semantic-analysis语义分析)
 		* [类型系统(type system)](#类型系统type-system)
-		* [**符号表(上下文相关)**](#符号表上下文相关)
-			* [**method/object environment**](#methodobject-environment)
-		* [**类型检查**](#类型检查)
-		* [**作用域检查**](#作用域检查)
-		* [**类型相容性**](#类型相容性)
-		* [**错误诊断**](#错误诊断)
-	* [**Code Generation(代码生成)**](#code-generation代码生成)
-		* [**递归下降代码生成算法**](#递归下降代码生成算法)
-			* [**基于栈计算机**](#基于栈计算机)
-			* [**基于寄存器计算机 (RISC)**](#基于寄存器计算机-risc)
-	* [**Immediate Representation(IR)**](#immediate-representationir)
-		* [**三地址码**](#三地址码)
-		* [**控制流图**](#控制流图)
-			* [**Block**](#block)
-			* [**数据流分析与程序重写**](#数据流分析与程序重写)
-				* [**数据分析方法**](#数据分析方法)
-					* [**到达定义分析**](#到达定义分析)
-					* [**活性分析**](#活性分析)
-	* [**代码优化**](#代码优化)
-		* [**前端优化**](#前端优化)
-		* [**后端优化**](#后端优化)
-	* [**Compilers Exercise**](#compilers-exercise)
-		* [**C Declaration Interpreter**](#c-declaration-interpreter)
-		* [**Cool(Classrom Object-Oriented Language)**](#coolclassrom-object-oriented-language)
+			* [Type Checking](#type-checking)
+			* [Type Environments](#type-environments)
+			* [Typing Methods](#typing-methods)
+		* [符号表(上下文相关)](#符号表上下文相关)
+		* [类型检查](#类型检查)
+		* [作用域检查](#作用域检查)
+		* [类型相容性](#类型相容性)
+		* [错误诊断](#错误诊断)
+	* [代码优化](#代码优化)
+		* [组织管理](#组织管理)
+			* [Activation Record(AR) / Frame](#activation-recordar--frame)
+			* [全局变量](#全局变量)
+			* [堆区](#堆区)
+		* [前端优化](#前端优化)
+		* [后端优化](#后端优化)
+	* [Code Generation(代码生成)](#code-generation代码生成)
+		* [递归下降代码生成算法](#递归下降代码生成算法)
+			* [基于栈计算机](#基于栈计算机)
+			* [基于寄存器计算机 (RISC)](#基于寄存器计算机-risc)
+	* [Immediate Representation(IR)](#immediate-representationir)
+		* [三地址码](#三地址码)
+		* [控制流图](#控制流图)
+			* [Block](#block)
+			* [数据流分析与程序重写](#数据流分析与程序重写)
+				* [数据分析方法](#数据分析方法)
+					* [到达定义分析](#到达定义分析)
+					* [活性分析](#活性分析)
+	* [Compilers Exercise](#compilers-exercise)
+		* [C Declaration Interpreter](#c-declaration-interpreter)
+		* [Cool(Classrom Object-Oriented Language)](#coolclassrom-object-oriented-language)
 
-# **Compiler Basic Notes**
+# Compiler Basic Notes
 
-## **Basic Concepts**
+## Basic Concepts
 
-### **Defination of compilers**
+### Defination of compilers
 
 *   `program_code` ---compiler---> executable
 *   data ---executable---> output
 
 > e.g Fortran(formula translation) 1 project
 
-### **Structure of compilers**
+### Structure of compilers
 
 front-end to back-end:
 
@@ -118,14 +124,14 @@ details:
 *   optimization
 *   code generation: translate to other high level language/assembly code/machine code
 
-## **Lexical Analysis**
+## Lexical Analysis
 
-### **Tokenizer - 词法分析器**
+### Tokenizer - 词法分析器
 
 *   Maximal match
 *   Higher priority match
 
-#### **转移图算法**
+#### 转移图算法
 
 ```c
 token nextToken(void) {
@@ -160,7 +166,7 @@ token nextToken(void) {
 }
 ```
 
-#### **关键字(keyword)处理**
+#### 关键字(keyword)处理
 
 *   根据 完美哈希算法(无冲突哈希函数) , 建立所有关键字对应的关键字完美哈希表
 *   读入有效标识符(字符串型)后, 查询关键字哈希表, 检查当前标识符是否为关键字
@@ -196,9 +202,9 @@ hash_two(char *str, int len) {
 }
 ```
 
-### **正则语言(Regular Expressions)**
+### 正则语言(Regular Expressions)
 
-#### **基本定义**
+#### 基本定义
 
 对于给定的字符集 C:
 
@@ -206,7 +212,7 @@ hash_two(char *str, int len) {
 *   任意 char <- C 是正则表达式
 *   若 M, N 是正则表达式, 则 M|N = {M, N}, MN = {mn|m <- M, n <- N}, M* = {"\0", M, MM, MMM, ...} (选择/连接/闭包)也是正则表达式
 
-#### **形式表示**
+#### 形式表示
 
 ```regexp
 // 具有顺序性
@@ -217,7 +223,7 @@ e -> "\0"		// basic defination
 	| e*		// recursive defination
 ```
 
-#### **正则语法糖(Syntax Sugar)**
+#### 正则语法糖(Syntax Sugar)
 
 *   `[a-z]` : a|...|z
 *   c?      : 0/1 个c
@@ -237,9 +243,9 @@ e -> "\0"		// basic defination
 (+|-)?(0|[1-9][0-9]*|)?\.[0-9]+
 ```
 
-### **有限状态自动机(Finite Automaton)**
+### 有限状态自动机(Finite Automaton)
 
-#### **确定有限状态自动机(Deterministic Finite Automaton)**
+#### 确定有限状态自动机(Deterministic Finite Automaton)
 
 *   Only a transition for a state with a input
 *   No epsilon moves
@@ -255,7 +261,7 @@ transferFunction = {
 }
 ```
 
-##### **状态转移表实现 DFA**
+##### 状态转移表实现 DFA
 
 |状态\字符|a|b|
 |:----------:|:-----:|:-----:|
@@ -263,7 +269,7 @@ transferFunction = {
 |1|2|1|
 |2|2|2|
 
-#### **非确定有限状态自动机(Nondeterministic Finite Automaton)**
+#### 非确定有限状态自动机(Nondeterministic Finite Automaton)
 
 transferFunction 中的次态不确定/不唯一(为一个开集合):
 
@@ -272,11 +278,11 @@ transferFunction 中的次态不确定/不唯一(为一个开集合):
 
 > (cS0, a) -> {cS1, cS2}
 
-### **自动词法分析器**
+### 自动词法分析器
 
 RegExp --Thompson 算法--> NFA --子集构造算法--> DFA --Hopcroft 最小化算法--> 词法分析器代码
 
-#### **Thompson 算法: RegExp --> NFA**
+#### Thompson 算法: RegExp --> NFA
 
 *   直接构造基本 RegExp
 *   递归构造复合 RegExp
@@ -286,7 +292,7 @@ RegExp --Thompson 算法--> NFA --子集构造算法--> DFA --Hopcroft 最小化
 *   连接    : i --NFA(RegExp1)--> m --NFA(RegExp2)--> f
 *   闭包    : i --epsilon--> m --epsilon--> f, m --RegExp--> m
 
-#### **子集构造算法: NFA --> DFA**
+#### 子集构造算法: NFA --> DFA
 
 由 Thompson 算法生成的 NFA, 当且仅当输入为 epsilon 时, 次态不唯一
 
@@ -318,7 +324,7 @@ DFA subset_construction(NFA nfa) {
 }
 ```
 
-#### **Hopcroft 算法**
+#### Hopcroft 算法
 
 最小化 DFA(数字逻辑中的最简状态表), 合并等价状态(等价类)
 
@@ -340,13 +346,13 @@ hopcroft(DFA) {
 }
 ```
 
-#### **实现**
+#### 实现
 
-##### **DFA**
+##### DFA
 
-###### **有向图**
+###### 有向图
 
-###### **转移表**
+###### 转移表
 
 *   行: 现态
 *   列: 输入
@@ -377,11 +383,11 @@ next_token() {
 }
 ```
 
-## **Syntax Analysis(语法分析)**
+## Syntax Analysis(语法分析)
 
 Tokens + Grammar --Syntax Analysis--> AST(Abstract Syntax Tree)
 
-### **乔姆斯基文法体系**
+### 乔姆斯基文法体系
 
 *   3 型文法(词法工具): 正则文法
 *   2 型文法(语法工具): 上下文无关文法
@@ -389,9 +395,9 @@ Tokens + Grammar --Syntax Analysis--> AST(Abstract Syntax Tree)
 *   0 型文法: 任意文法
 *   ((((3)2)1)0)
 
-### **上下文无关文法**
+### 上下文无关文法
 
-#### **文法表示**
+#### 文法表示
 
 G = (S, N, T, P):
 
@@ -400,9 +406,9 @@ G = (S, N, T, P):
 *   T: 终结符集合
 *   P: 产生式规则集合 X -> beta1, beta2, ..., betan, X <- N, beta <- N+T
 
-#### **形式化表示**
+#### 形式化表示
 
-##### **简易表示**
+##### 简易表示
 
 ```Bison
 Sentence -> Noun Verb Noun
@@ -425,7 +431,7 @@ E -> num
 
 > S: E, N: E, T: num/id/+/*
 
-##### **巴科斯范式(Backus-Naur Form)**
+##### 巴科斯范式(Backus-Naur Form)
 
 *   ::=             : "被定义为"
 *   "word"          : 字符本身
@@ -435,7 +441,7 @@ E -> num
 *   大括号( { } )   : 可重复0至无数次的项
 *   竖线( | )       : "OR"
 
-#### **分析树**
+#### 分析树
 
 进行文法推导时生成的树:
 
@@ -446,15 +452,15 @@ E -> num
 *   叶子结点串: 最终表达式
 *   后序遍历  : 最终结果
 
-##### **meaning function(多对一)**
+##### meaning function(多对一)
 
 L(syntax) = semantic: 多个语法对应一个语义(不同形式的表达式对应同一个意思)
 
-##### **二义性文法(一对多)**
+##### 二义性文法(一对多)
 
 若给定文法 G, 对于句子 s, 其有 2 可不同的分析树, 择称 G 是二义性文法
 
-###### **文法重写**
+###### 文法重写
 
 ```Bison
 E -> E + T
@@ -467,11 +473,11 @@ F -> num
 
 > 消除 + 与 `*` 的二义性, 如 3+4`*`5
 
-###### **优先级与结合性**
+###### 优先级与结合性
 
 声明优先级与结合性可在一定程度上消除文法的二义性
 
-### **自顶向下分析**
+### 自顶向下分析
 
 *   从开始符号出发推导任意句子 t, 与给定句子 s 进行比较分析
 *   利用分析树进行逐叶子匹配, 若匹配失败则进行回溯
@@ -496,7 +502,7 @@ bool top_down_parsing(tokens[]) {
 }
 ```
 
-#### **避免回溯**
+#### 避免回溯
 
 利用前看符号避免回溯
 
@@ -519,7 +525,7 @@ V -> eat
 N -> (sheep-tiger-grass)water
 ```
 
-#### **递归下降分析算法(Recursive Descent/预测分析算法)**
+#### 递归下降分析算法(Recursive Descent/预测分析算法)
 
 *   分治算法: 每个非终结符构造一个**分析函数**
 *   前看符号: 用**前看符号**指导产生式规则的选择(expansion)
@@ -548,7 +554,7 @@ parse_V(token) {
 }
 ```
 
-##### **算法实现**
+##### 算法实现
 
 *   tip one: use save pointer to implement roll back
 *   tip two: use logical OR expression to replace nested if-else structure
@@ -619,13 +625,13 @@ parse_X() {
 }
 ```
 
-#### **LL(1)分析算法**
+#### LL(1)分析算法
 
 *   从左(L)向右读入程序(left to right scan)
 *   最左(L)推导: 优先推导最左侧非终结符(leftmost derivation)
 *   一个(1)前看符号(look ahead)
-*   分治算法: 每个非终结符构造一个**first set** 和一个 **follow set**, 最后为每个规则构造一个 **final set**
-*   分析表驱动(由 first sets/follow sets/final sets 推导分析表)
+*   分治算法: 每个非终结符构造一个**first set** 和一个 **follow set**, 最后为每个规则构造一个 **select set**
+*   分析表驱动(由 first sets/follow sets/select sets 推导分析表)
 
 ```cpp
 bool ll1_parsing(tokens[]) {
@@ -639,7 +645,7 @@ bool ll1_parsing(tokens[]) {
 			pop();
 			// push(T correct expansion);
 			// 自右向左压栈, e.g pop(S), push(N_right), push(V), push(N_left)
-			push(final_table[T][tokens[i]] 对应项(规则编号)所对应规则的右边式子);
+			push(select_table[T][tokens[i]] 对应项(规则编号)所对应规则的右边式子);
 		} else {
 			throw new SyntaxError();
 		}
@@ -650,7 +656,7 @@ bool ll1_parsing(tokens[]) {
 ```
 
 
-##### **nullable sets**
+##### nullable sets
 
 *   存在规则: X -> epsilon
 *   或者    : X -> Y1Y2...Yn, 且存在规则 Y1 -> epsilon, ..., Yn -> epsilon
@@ -668,7 +674,7 @@ while (nullable is still changing) {
 }
 ```
 
-##### **first sets**
+##### first sets
 
 first(X) = {t | X -*> talpha} U {epsilon | X-*>epsilon} :
 
@@ -707,7 +713,7 @@ while (some sets is changing) {
 |N|{s, t, g, w}|
 |V|{e, d}|
 
-##### **follow sets**
+##### follow sets
 
 follow(X) = {t | S -*> beta X t epsilon} :
 
@@ -742,24 +748,24 @@ while (some sets is changing) {
 }
 ```
 
-##### **final sets**
+##### select sets
 
-*   当 N -> Y1...Yn 右边 Y 全为 nullable 时, final(p) += follow(N)
+*   当 N -> Y1...Yn 右边 Y 全为 nullable 时, select(p) += follow(N)
 
-final sets 不动点算法:
+select sets 不动点算法:
 
 ```cpp
 foreach (production p) {
-	final(p) = {}
+	select(p) = {}
 }
 
-calculate_final_set(production p: N->beta1...betan) {
+calculate_select_set(production p: N->beta1...betan) {
 	foreach (betai from beta1 upto betan) {
 		if (betai == a) {
-			final(p) += {a};
+			select(p) += {a};
 			break;
 		} else if (betai == M) {
-			final(p) += first(M);
+			select(p) += first(M);
 			if (M is not in nullable) {
 				break;
 			}
@@ -767,14 +773,14 @@ calculate_final_set(production p: N->beta1...betan) {
 	}
 
 	// all betas are in nullable (当前规则的所有右边符号都是可空集)
-	//　故, final(p) 必须包括 follow(M) (当推导出右边符号都为空时, first(p) 即为 follow(M))
+	//　故, select(p) 必须包括 follow(M) (当推导出右边符号都为空时, first(p) 即为 follow(M))
 	if (i > n) {
 		first(N) += follow(N);
 	}
 }
 ```
 
-##### **分析表**
+##### 分析表
 
 *   结合 nullable sets 准确求出 first sets
 *   再利用 first sets 准确求出 follow sets
@@ -797,7 +803,7 @@ nullable = {X, Y}
 
 |production|0|1|2|3|4|5|
 |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
-|final|{d}|{a, c, d}|{c}|{a, c, d}|{a, c, d}|{a}|
+|select|{d}|{a, c, d}|{c}|{a, c, d}|{a, c, d}|{a}|
 
 |Non\Terminal|a|c|d|
 |Z|1|1|0, 1|
@@ -806,7 +812,7 @@ nullable = {X, Y}
 
 > 数字为规则编号
 
-##### **解决冲突(分析表某项有多个编号)**
+##### 解决冲突(分析表某项有多个编号)
 
 通过文法重写消除左递归, 使文法适应 L(最左推导):
 
@@ -823,7 +829,7 @@ X -> +E
     |epsilon
 ```
 
-###### **消除直接左递归**
+###### 消除直接左递归
 
 ```Bison
 S -> Salpha1
@@ -846,7 +852,7 @@ S'-> alpha1S'
     |epsilon
 ```
 
-###### **消除间接左递归**
+###### 消除间接左递归
 
 *   把文法 G 的所有非终结符按任一顺序排列, e.g A1, A2, …, An
 *   消除 Ai 规则中的直接左递归: 把形如 Ai→Ajγ 的产生式改写成 Ai→δ1γ /δ2γ /…/δkγ(其中 Aj→δ1 /δ2 /…/δk 是关于的 Aj 全部规则)
@@ -1064,13 +1070,13 @@ int main() {
 }
 ```
 
-##### **非 LL(1) 文法/语言**
+##### 非 LL(1) 文法/语言
 
 *   ambiguous grammar
 *   left recursive grammar
 *   not left factored grammar(未提取展开式的公因子)
 
-### **自底向上分析**
+### 自底向上分析
 
 ```Bison
 0: S -> E
@@ -1095,14 +1101,14 @@ int main() {
 
 >   最右推导(优先推导最右侧非终结符)逆过程
 
-#### **LR(0) 分析算法(移进-归约(reduce)算法)**
+#### LR(0) 分析算法(移进-归约(reduce)算法)
 
 *   从左向右读入程序(left to right scan), 逆向最右推导(rightmost derivation), 不用前看符号
 *   添加伪开始符号: S' -> . S$   `$表示 tokens/file 结束符`
 *   移进        : 读入记号 `push(token[i])`
 *   归约(reduce):         `pop(right expansion)` `push(left expansion)`
 
-##### **短语(Handles)**
+##### 短语(Handles)
 
 ```Bison
 S -*> αXω -> αβω
@@ -1110,7 +1116,7 @@ S -*> αXω -> αβω
 
 β 是 αβω 的一个短语(Handle)
 
-##### **分析表构造**
+##### 分析表构造
 
 LR(0) 分析表构造算法: (原理同于 Hopcroft 算法)
 
@@ -1161,7 +1167,7 @@ while (Q is not empty) {
 }
 ```
 
-##### **驱动代码**
+##### 驱动代码
 
 LR(0) 驱动算法:
 
@@ -1198,12 +1204,12 @@ while (true) {
 }
 ```
 
-##### **解决冲突(SLR/LR(1)/LALR)**
+##### 解决冲突(SLR/LR(1)/LALR)
 
-采取与 first/follow/final sets 以及 前看符号 类似策略:
+采取与 first/follow/select sets 以及 前看符号 类似策略:
 
 *   `production_with_dot_set` 中的 item 修改为 `X -> [beta1 . betan..., a]` 二元组
-*   closure(production_set p) 中闭包规则从 `X -> [a . Y beta,a]` 修改为 `Y -> [.y, b]` b <- final(beta a)
+*   closure(production_set p) 中闭包规则从 `X -> [a . Y beta,a]` 修改为 `Y -> [.y, b]` b <- select(beta a)
 
 #### LALR(k)
 
@@ -1224,9 +1230,9 @@ New reduce rule:
 *   state i: if has item S' -> S then action[i, $] = accept
 *   otherwise: action[i, a] = error
 
-### **抽象语法树**
+### 抽象语法树
 
-#### **语法制导翻译(Syntax-Directed Translation)**
+#### 语法制导翻译(Syntax-Directed Translation)
 
 在进行归约(reduce)的同时, 进行语义动作:
 
@@ -1245,7 +1251,7 @@ push(right side value);
 push(next state);
 ```
 
-#### **抽象语法**
+#### 抽象语法
 
 *   表达语法结构的内部表示, 作为前端(词法语法分析)和后端(代码生成)的中间件, tokens --语法分析器--> 抽象语法(树) --代码生成器--> 目标代码
 *   抽象语法无需考虑左/右递归, 左公因子提取, 分隔符等
@@ -1268,9 +1274,9 @@ E: n
  | E * E
 ```
 
-#### **AST 的实现**
+#### AST 的实现
 
-##### **数据结构**
+##### 数据结构
 
 ```Bison
 E: n
@@ -1333,7 +1339,7 @@ struct exp_times *new_exp_times(exp *left, exp *right) {
 }
 ```
 
-##### **相关算法**
+##### 相关算法
 
 ```cpp
 int nodes_num(exp *e) {
@@ -1380,7 +1386,7 @@ int pretty_print(exp *e) {
 }
 ```
 
-##### **构造算法**
+##### 构造算法
 
 利用语法制导翻译, 在语法动作(action)/语法归约(reduce)中加入生成语法树的代码(自底(叶子)向上(根)构造函数)
 
@@ -1391,7 +1397,7 @@ E: E + E { $$ = new_exp_add($1, $3); }
  ;
 ```
 
-## **Semantic Analysis(语义分析)**
+## Semantic Analysis(语义分析)
 
 *   声明检查(identifiers declaration)
 *   定义检查:
@@ -1480,7 +1486,7 @@ Ti <= Ti'
 O,M ├ e0.func(e1, ..., en): Tn+1'
 ```
 
-### **符号表(上下文相关)**
+### 符号表(上下文相关)
 
 用来存储程序中变量的相关信息:
 
@@ -1516,7 +1522,7 @@ value_t table_search(table_t table, key_t id);
 #endif
 ```
 
-### **类型检查**
+### 类型检查
 
 *   table: 字典结构 (key, type) (Hash Table/Red Black Tree)
 *   type environment(Object, Methods, Class) is passed from parent to child(down the tree)
@@ -1625,25 +1631,57 @@ enum type check_exp(exp_t e) {
 }
 ```
 
-### **作用域检查**
+### 作用域检查
 
 table:
 
 *   进入作用域, 插入元素(插入哈希表首, 屏蔽外部同名变量); 离开作用域, 删除元素
 *   进入作用域, 压入新符号表; 离开作用域, 弹出栈顶符号表
 
-### **类型相容性**
+### 类型相容性
 
 *   名字不同但结构相同的类型是否相等
 *   面向对象的继承类: is-a 关系 Parent parent = child;
 
-### **错误诊断**
+### 错误诊断
 
 *   准确的错误信息: 出错位置等
 *   大量的错误信息
 *   一定的自纠功能
 
-## **Code Generation(代码生成)**
+## 代码优化
+
+### 组织管理
+
+#### Activation Record(AR) / Frame
+
+用于管理过程活性(procedure activation)的信息:
+
+*   result: 置于记录的顶层, 便于访问此结果
+*   argument
+*   return address
+*   control link: 指向调用者(上级)
+
+#### 全局变量
+
+不存于 AR 中, 存于静态数据段
+
+#### 堆区
+
+new/malloc 得到的变量/对象不存于 AR 中, 存于堆区
+
+### 前端优化
+
+*   AST中常量折叠优化 `1+2 => 3`
+*   AST中代数化简优化 `a=1*b => a=b` `2*a=>a<<1`
+
+### 后端优化
+
+*   CFG中(控制流分析)死代码块删除优化
+*   CFG中(数据流分析-可达定义分析)常量传播优化
+*   CFG中(数据流分析-活性分析)寄存器分配优化
+
+## Code Generation(代码生成)
 
 为数据分配计算资源:
 
@@ -1683,9 +1721,9 @@ E: n
  ;
 ```
 
-### **递归下降代码生成算法**
+### 递归下降代码生成算法
 
-#### **基于栈计算机**
+#### 基于栈计算机
 
 Mem + Stack + ALU
 
@@ -1767,7 +1805,7 @@ gen_exp(exp_t e) {
 }
 ```
 
-#### **基于寄存器计算机 (RISC)**
+#### 基于寄存器计算机 (RISC)
 
 Mem + Reg + ALU
 
@@ -1856,7 +1894,7 @@ reg_t gen_exp(exp_t e) {
 }
 ```
 
-## **Immediate Representation(IR)**
+## Immediate Representation(IR)
 
 *   树与有向无环图(DAG)
 *   三地址码(3-address code)
@@ -1864,15 +1902,15 @@ reg_t gen_exp(exp_t e) {
 *   静态单赋值形式(SSA)
 *   连续传递风格(CPS)
 
-### **三地址码**
+### 三地址码
 
 *   原子表达式
 *   简单控制流 cjmp/jmp
 *   抽象的机器代码(伪代码)
 
-### **控制流图**
+### 控制流图
 
-#### **Block**
+#### Block
 
 *   block_t: { label_t; stm_list; jmp_t; }
 *   扫描三地址码, 生成blocks
@@ -1880,43 +1918,30 @@ reg_t gen_exp(exp_t e) {
 
 死基本块删除优化：删除遍历不到的语句块
 
-#### **数据流分析与程序重写**
+#### 数据流分析与程序重写
 
 *   根据数据流分析得到的信息, 对三地址码/控制流图进行重写
 *   后端的每一个阶段都可进行数据流分析
 
 > 常量传播优化: 将赋值语句右端变量直接替换为常量, 减少访存
 
-##### **数据分析方法**
+##### 数据分析方法
 
-###### **到达定义分析**
+###### 到达定义分析
 
 分析变量的哪些定义点可以到达变量的使用点处, 若可达定义唯一则可进行常量传播优化:
 
 *   in set = prior out set
 *   out set = self set + in set - kill set(重复定义点)
 
-###### **活性分析**
+###### 活性分析
 
 *   寄存器分配优化 活跃区间不相交的变量可共用一个寄存器
 *   并行优化 使用区间并行的计算可并行执行
 
-## **代码优化**
+## Compilers Exercise
 
-### **前端优化**
-
-*   AST中常量折叠优化 `1+2 => 3`
-*   AST中代数化简优化 `a=1*b => a=b` `2*a=>a<<1`
-
-### **后端优化**
-
-*   CFG中(控制流分析)死代码块删除优化
-*   CFG中(数据流分析-可达定义分析)常量传播优化
-*   CFG中(数据流分析-活性分析)寄存器分配优化
-
-## **Compilers Exercise**
-
-### **C Declaration Interpreter**
+### C Declaration Interpreter
 
 ```c
 #include <stdio.h>
@@ -2078,4 +2103,4 @@ int main(void) {
 }
 ```
 
-### **Cool(Classrom Object-Oriented Language)**
+### Cool(Classrom Object-Oriented Language)
