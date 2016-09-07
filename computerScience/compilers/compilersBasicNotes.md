@@ -1649,6 +1649,51 @@ table:
 *   大量的错误信息
 *   一定的自纠功能
 
+## Immediate Representation(IR)
+
+*   树与有向无环图(DAG)
+*   三地址码(3-address code)
+*   控制流图(CFG)
+*   静态单赋值形式(SSA)
+*   连续传递风格(CPS)
+
+### 三地址码
+
+*   原子表达式
+*   简单控制流 cjmp/jmp
+*   抽象的机器代码(伪代码)
+
+### 控制流图
+
+#### Block
+
+*   block_t: { label_t; stm_list; jmp_t; }
+*   扫描三地址码, 生成blocks
+*   图论算法:结点为 blocks, 边为跳转边
+
+死基本块删除优化：删除遍历不到的语句块
+
+#### 数据流分析与程序重写
+
+*   根据数据流分析得到的信息, 对三地址码/控制流图进行重写
+*   后端的每一个阶段都可进行数据流分析
+
+> 常量传播优化: 将赋值语句右端变量直接替换为常量, 减少访存
+
+##### 数据分析方法
+
+###### 到达定义分析
+
+分析变量的哪些定义点可以到达变量的使用点处, 若可达定义唯一则可进行常量传播优化:
+
+*   in set = prior out set
+*   out set = self set + in set - kill set(重复定义点)
+
+###### 活性分析
+
+*   寄存器分配优化 活跃区间不相交的变量可共用一个寄存器
+*   并行优化 使用区间并行的计算可并行执行
+
 ## 代码优化
 
 ### 组织管理
@@ -1670,16 +1715,56 @@ table:
 
 new/malloc 得到的变量/对象不存于 AR 中, 存于堆区
 
-### 前端优化
+### 优化类型
 
-*   AST中常量折叠优化 `1+2 => 3`
-*   AST中代数化简优化 `a=1*b => a=b` `2*a=>a<<1`
+*   Local optimizations
+*   Global optimizations
+*   Inter-procedural optimizations
 
-### 后端优化
+### 局部优化
 
-*   CFG中(控制流分析)死代码块删除优化
-*   CFG中(数据流分析-可达定义分析)常量传播优化
-*   CFG中(数据流分析-活性分析)寄存器分配优化
+*   常量折叠优化: 所有代入常量的地方全部代入常量 `1 + 2 => 3`
+*   代数化简优化: `a=1*b => a=b` `2*a=>a<<1` (all tips from csapp)
+*   复制传播(copy propagation)优化: 利用前面计算出来的结果, 直接替换后面所有出现在右边的已计算左式(寄存器)
+
+### 全局优化
+
+#### Dead Code Elimination
+
+*   CFG中(控制流分析) 死代码块删除优化
+
+#### Constant Propagation
+
+
+CFG中(数据流分析-可达定义分析) 常量传播(constant propagation)优化:
+
+*   **forwards analysis**
+*   C(stm, x, in) = value of x before stm ; C(stm, x, out) = value of x after stm
+*   bottom < c < top => C(stm, x, in) = least_upper_bound{ C(prev_stmi, x, out) }:
+    *   C(prev_stm, x, out) = top(nondeterministic)  => C(stm, x, in) = top
+    *   C(prev_stm1, x, out) != C(prev_stm2, x, out) => C(stm, x, in) = top
+    *   C(prev_stami, x, out) = c/bottom(dead code)  => C(stm, x, in) = c
+*   C(stm, x, in) = bottom => C(stm, x, out) = bottom
+*   C(x := c, x, out) = c
+*   C(x := f(), x, out) = top
+*   init: set entry to C = top, set anywhere else to C = bottom
+
+#### Liveness Analysis
+
+CFG中 数据流分析-活性分析(liveness analysis), 可用于复制传播优化与寄存器分配优化:
+
+*   **backwards analysis**
+*   L(stm, x, out) = V { L(next_stm, x, in)}
+*   L(... := f(x), x, in) = true
+*   L(x := e, x, in) = false
+*   L(none x, x, in) = L(none x, x, out)
+*   init: L(...) = false
+
+#### 寄存器分配(Register Allocation/Graph Coloring)
+
+*   当 t1 与 t2 同时具有活性时, 不可共享寄存器; 反之, t1 与 t2 不同时具有活性, 可以共享寄存器
+*   当 t1 与 t2 同时具有活性时, 添加一条边连接 t1 与 t2, 构建 register interference graph(RIG)
+*   colors number = registers number, k-colorable problem
 
 ## Code Generation(代码生成)
 
@@ -1894,50 +1979,45 @@ reg_t gen_exp(exp_t e) {
 }
 ```
 
-## Immediate Representation(IR)
+## Garbage Collection
 
-*   树与有向无环图(DAG)
-*   三地址码(3-address code)
-*   控制流图(CFG)
-*   静态单赋值形式(SSA)
-*   连续传递风格(CPS)
+### Mark and Sweep
 
-### 三地址码
+*   mark phase: traces reachable objects (mark_bit |= 1)
 
-*   原子表达式
-*   简单控制流 cjmp/jmp
-*   抽象的机器代码(伪代码)
+```haskell
+let todo = {all roots}
+while todo != nil do
+    pick v <- todo
+    todo -= {v}
+    if mark(v) == 0 then
+        mark(v) |= 1
+        let v1, ..., vn be the pointers contained in v
+        todo += {v1, ..., vn}
+    fi
+od
+```
 
-### 控制流图
+*   sweep phase: collects garbage objects (mark_bit == 0)
 
-#### Block
+```haskell
+p = bottom of heap
+while p < top of heap do
+    if mark(p) == 1 then
+        mark(p) = 0
+    else
+        add block p...(p + sizeof(p) - 1)  to freelist
+    fi
+    p += sizeof(p)
+od
+```
 
-*   block_t: { label_t; stm_list; jmp_t; }
-*   扫描三地址码, 生成blocks
-*   图论算法:结点为 blocks, 边为跳转边
+### Stop and Copy
 
-死基本块删除优化：删除遍历不到的语句块
+copy all reachable objects in old space to new space(reserved for GC):
 
-#### 数据流分析与程序重写
-
-*   根据数据流分析得到的信息, 对三地址码/控制流图进行重写
-*   后端的每一个阶段都可进行数据流分析
-
-> 常量传播优化: 将赋值语句右端变量直接替换为常量, 减少访存
-
-##### 数据分析方法
-
-###### 到达定义分析
-
-分析变量的哪些定义点可以到达变量的使用点处, 若可达定义唯一则可进行常量传播优化:
-
-*   in set = prior out set
-*   out set = self set + in set - kill set(重复定义点)
-
-###### 活性分析
-
-*   寄存器分配优化 活跃区间不相交的变量可共用一个寄存器
-*   并行优化 使用区间并行的计算可并行执行
+*   copied objects
+*   scaned objects: pointers have been restored
 
 ## Compilers Exercise
 
