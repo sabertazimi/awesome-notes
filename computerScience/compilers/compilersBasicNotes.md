@@ -2104,3 +2104,5 @@ int main(void) {
 ```
 
 ### Cool(Classrom Object-Oriented Language)
+
+*   [Awesome Reference](http://web.stanford.edu/class/cs143/materials/cool-manual.pdf)
