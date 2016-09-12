@@ -479,6 +479,74 @@ Parent c = new Child();
 c.speak("Hello World!") // => "Child: Hello World!"
 ```
 
+## STL
+
+*   工作方式: copy in, copy out
+
+### Container
+
+*   序列容器: vector string deque list
+*   关联容器: set multiset map multimap
+*   连续内存容器: vector string deque
+*   链表容器: list slit hash
+
+### Methods
+
+#### empty/size
+
+list.empty() 优于 list.size() == 0
+
+#### assign/insert/erase
+
+```cpp
+void container::insert(InputIterator begin, InputIterator end);
+void container::insert(iterator position, InputIterator begin, InputIterator end);
+
+iterator container::erase(iterator begin, iterator end);    // 序列容器
+void container::erase(iterator begin, iterator end);        // 关联容器
+
+void container::assign(InputIterator begin, InputIterator end);
+```
+
+```cpp
+v1.assign(v2.begin() + v2.size() / 2, v2.end());
+v1.insert(v1.end(), v2.begin() + v2.size() / 2, v2.end())   // 将 v2 一半元素插入 v1 尾部
+```
+
+#### erase/remove
+
+*   对于连续内存容器 vector/string/deque:
+
+```cpp
+c.erase(remove(c.begin(), c.end(), 1963), c.end())
+
+bool badValue(int);
+c.erase(remove_if(c.begin(), c.end(), badValue), c.end());
+```
+
+*   对于 list:
+
+```cpp
+c.remove(1963)
+
+bool badValue(int);
+c.remove_if(badValue);  // higher order function
+```
+
+*   对于关联容器:
+
+```cpp
+c.erase(1963);
+```
+
+#### reserve/swap
+
+```cpp
+v.reserve(1000);    // 强制分配 1000 个元素内存单元, 防止反复回收/释放, 提高执行效率
+
+string(s).swap(s);  // 回收多余内存单元(shrink to fit), 提高内存利用率
+```
+
 ## Awesome Tips / Best Practice
 
 *   普通函数成员 与 析构函数 全部定义为虚函数
