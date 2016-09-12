@@ -355,6 +355,13 @@ $ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks
 |--before=/--until=|限制日志时间 "2008-01-15" "2 years 1 day 3 minutes ago"|
 |--help|
 
+### reflog
+
+```sh
+$ git reflog
+$ git reset HEAD@{index}
+```
+
 ### show
 
 -   **查看其他分支 或 提交点的文件状态**
