@@ -117,10 +117,12 @@ sudo add-apt-repository ppa:webupd8team/atom
 sudo add-apt-repository ppa:numix/ppa
 sudo add-apt-repository ppa:zeal-developers/ppa
 sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
-sudo add-apt-repository ppa:ubuntu-wine/ppaudo add-apt-repository ppa:noobslab/deepin-sc
+sudo add-apt-repository ppa:ubuntu-wine/ppaudo
 sudo add-apt-repository ppa:ubuntu-wine/ppa
-sudo add-apt-repository ppa:kilian/f.lux
 sudo add-apt-repository ppa:docky-core/stable
+sudo add-apt-repository ppa:noobslab/deepin-sc
+sudo add-apt-repository ppa:noobslab/themes
+sudo add-apt-repository ppa:noobslab/macbuntu
 sudo apt-get update
 ```
 
@@ -412,20 +414,19 @@ sudo ln -s /home/hustlyl/.local/share/umake/web/visual-studio-code/Code /usr/loc
 
 ## Software
 
-### Desktop
+### [Appearence](https://blog.microideation.com/2016/08/30/customizing-ubuntu-system/)
 
 ```shell
 sudo apt-get install docky
+sudo apt-get install numix-gtk-theme numix-icon-theme numix-icon-theme-circle
+sudo apt-get install mac-ithemes-v3 mac-icons-v3
+sudo apt-get install macbuntu-os-ithemes-lts-v7 macbuntu-os-icons-lts-v7 
 ```
 
 #### gnome
 
 ```shell
 sudo apt-get install gnome gnome-shell gnome-panel gnome-menus gnome-session gnome-tweak-tool gdm
-```
-
-```shell
-sudo apt-get install numix-gtk-theme numix-icon-theme-circle
 ```
 
 ### ZealDocs
