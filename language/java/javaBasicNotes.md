@@ -396,6 +396,18 @@ $ gradle jar
 $ gradle javadoc
 ```
 
+### build.gradle
+
+```gradle
+apply plugin: 'java'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.sabertazimi.tao.Tao'
+    }
+}
+```
+
 ## 基本结构
 
 ### 数据类型
