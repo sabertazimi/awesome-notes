@@ -342,7 +342,7 @@
 
 # Java Basic Notes
 
-## CMD操作
+## CLI Tools
 
 ###	编译
 
@@ -380,6 +380,22 @@ jar {c t x u f} [v m e 0 M i] [-C 目录] 文件名
 -   -link superlink 标准类名：为标准类添加超链接
 -   -linksourse：方法/类名转化为超链接，指向生成的html格式的源文件
  
+## Gradle Tool
+
+```sh
+$ sudo apt install gradle
+
+$ gradle help
+$ gradle tasks
+
+$ gradle assemble
+$ gradle build
+$ gradle clean
+$ gradle test
+$ gradle jar
+$ gradle javadoc
+```
+
 ## 基本结构
 
 ### 数据类型
