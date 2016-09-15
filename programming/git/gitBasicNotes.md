@@ -128,6 +128,7 @@ $ git config --global user.email sabertazimi@gmail.com
 $ git config --global core.editor vim
 $ git config --global push.default simple
 $ git config --global credential.helper store
+$ git config --global commit.template $HOME/.gitmsg.md
 $ git config --list
 ```
 
