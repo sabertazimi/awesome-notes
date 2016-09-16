@@ -960,3 +960,17 @@ struct inode_ops {
 
 利用 `vfs_dev_t` 数据结构，就可以让文件系统通过一个链接 `vfs_dev_t` 结构的双向链表找到device对应的inode数据结构，一个inode节点的成员变量in_type的值是0x1234，则此 inode的成员变量in_info将成为一个device结构。这样inode就和一个设备建立了联系，这个inode就是一个设备文件
 
+## 实践
+
+### 工具
+
+#### Bochs
+
+```sh 
+wget http://sourceforge.net/projects/bochs/files/bochs/2.5.1/bochs-2.5.1.tar.gz/download -O bochs.tar.gz
+tar -xvfz bochs.tar.gz
+cd bochs-2.5.1
+./configure --enable-debugger --enable-debugger-gui --enable-disasm --with-x --with-term
+make
+sudo cp ./bochs /usr/bin/bochs-dbg
+```
