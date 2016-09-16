@@ -4,6 +4,9 @@
 	* [基本概念](#基本概念)
 		* [操作系统内核特征](#操作系统内核特征)
 		* [操作系统的演变](#操作系统的演变)
+			* [批处理系统](#批处理系统)
+			* [分时系统](#分时系统)
+			* [实时系统](#实时系统)
 	* [启动](#启动)
 		* [BIOS](#bios)
 		* [启动顺序](#启动顺序)
@@ -16,6 +19,8 @@
 					* [从硬盘上加载 某种(kernel in ELF) 格式的 os kernel(在硬盘中紧邻 MBR) 至内存的固定区域](#从硬盘上加载-某种kernel-in-elf-格式的-os-kernel在硬盘中紧邻-mbr-至内存的固定区域)
 					* [跳转到 os kernel 的入口点(entry point), 转移控制权至 os](#跳转到-os-kernel-的入口点entry-point-转移控制权至-os)
 				* [保护模式与段机制](#保护模式与段机制)
+	* [中断(Interrupt Service Routine/Interrupt Quest)](#中断interrupt-service-routineinterrupt-quest)
+		* [处理流程](#处理流程)
 	* [物理内存管理](#物理内存管理)
 		* [bootloader 探测机器内存分布](#bootloader-探测机器内存分布)
 		* [基本概念](#基本概念-1)
@@ -83,6 +88,7 @@
 			* [`do_execve` function](#do_execve-function)
 	* [处理机调度](#处理机调度)
 		* [调度时机](#调度时机)
+			* [六大调度时机](#六大调度时机)
 		* [调度策略/算法](#调度策略算法)
 			* [算法目标](#算法目标)
 			* [先来先服务算法(First Come First Served/FCFS)](#先来先服务算法first-come-first-servedfcfs)
@@ -98,6 +104,12 @@
 			* [lock/semaphore](#locksemaphore)
 			* [monitor](#monitor)
 		* [死锁](#死锁)
+		* [实现](#实现-2)
+			* [P/V 操作](#pv-操作)
+				* [具体实现信号量的P操作](#具体实现信号量的p操作)
+				* [具体实现信号量的V操作](#具体实现信号量的v操作)
+			* [管程](#管程)
+				* [Conditional Variable](#conditional-variable)
 	* [文件系统](#文件系统)
 		* [文件组成](#文件组成)
 		* [文件系统基本数据结构](#文件系统基本数据结构)
@@ -109,6 +121,18 @@
 		* [文件分配](#文件分配)
 		* [空闲空间管理](#空闲空间管理)
 		* [冗余磁盘阵列(Redundant Array of Inexpensive Disks/RAID)](#冗余磁盘阵列redundant-array-of-inexpensive-disksraid)
+		* [实现](#实现-3)
+			* [Mount](#mount)
+			* [index](#index)
+			* [inode](#inode)
+			* [Device](#device)
+	* [实践](#实践)
+		* [工具](#工具)
+			* [Bochs](#bochs)
+				* [Installation](#installation)
+				* [Config](#config)
+				* [Run](#run)
+			* [GNU ld](#gnu-ld)
 
 # Operating System Basic Notes
 
@@ -402,6 +426,7 @@ empty_8042:
 -   VPN(virtual page number point to PPN) - VPO(virtual page offset = PPO)
 -   根据 VPN 在页表中找到对应表项(VPN 表示项号), 每项保存着 PPN
 -   TLBT(tag) - TLBI(index) - VPO
+-   因为内存局部性原理, TLB 一般只需要很小(比如 **64 项**)即可达到不错的效果
 
 ##### 物理地址
 
@@ -678,7 +703,30 @@ typedef struct __vma {
 *   把进程状态设置为“就绪”态
 *   设置返回码为子进程的id号
 
+fork() 的主要行为:
+
+*   申请 pid 与进程结构
+*   设置 ppid 为父进程的 pid
+*   复制用户相关的字段, 如 p_pgrp/p_gid/p_ruid/p_euid/p_rgid/p_egid
+*   复制调度相关的字段, 如 p_cpu/p_nice/p_pri
+*   复制父进程的文件描述符(p_ofile), 并增加引用计数
+*   复制父进程的信号处理例程(p_sigact)
+*   通过vm_clone(), 复制父进程的地址空间(p_vm)
+*   复制父进程的寄存器状态(p_contxt)
+*   复制父进程的中断上下文, 并设置tf->eax为 0, 使fork()在子进程中返回0。
+
 #### `do_execve` function
+
+exec() 的主要行为: 
+
+*   *读取文件的第一个块, 检查 Magic Number(NMAGIC) 是否正确
+*   保存参数(argv)到临时分配的几个物理页, 其中的每个字符串单独一页
+*   清空旧的进程地址空间(vm_clear()), 并结合可执行文件的 header, 初始化新的进程地址空间(vm_renew())
+*   将 argv 与 argc 压入新地址空间中的栈
+*   释放临时存放参数的几个物理页
+*   关闭带有 FD_CLOEXEC 标识的文件描述符
+*   清理信号处理例程
+*   通过_retu()返回用户态
 
 ## 处理机调度
 
@@ -1009,6 +1057,15 @@ struct inode_ops {
 #### Device
 
 利用 `vfs_dev_t` 数据结构，就可以让文件系统通过一个链接 `vfs_dev_t` 结构的双向链表找到device对应的inode数据结构，一个inode节点的成员变量in_type的值是0x1234，则此 inode的成员变量in_info将成为一个device结构。这样inode就和一个设备建立了联系，这个inode就是一个设备文件
+
+## 设备管理
+
+*   CPU一般都是通过寄存器的形式来访问外部设备
+*   外设的寄存器通常包括控制寄存器、状态寄存器与数据寄存器三类, 分别用于发送命令/读取状态/读写数据.
+
+### I/O
+
+调用 `io_delay()` 函数: 对于一些老式总线的外部设备, 读写I/O端口的速度若过快就容易出现丢失数据的现象
 
 ## 实践
 
