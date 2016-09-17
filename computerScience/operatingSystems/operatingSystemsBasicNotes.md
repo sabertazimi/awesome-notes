@@ -1063,6 +1063,13 @@ struct inode_ops {
 *   CPU一般都是通过寄存器的形式来访问外部设备
 *   外设的寄存器通常包括控制寄存器、状态寄存器与数据寄存器三类, 分别用于发送命令/读取状态/读写数据.
 
+### CGA/EGA + Chromatext video buffer
+
+在内存的低 1MB 中, 有许多地址被映射至外部设备, 其中就包含文字显示模块(显卡控制显示器):
+
+*   从 0xB8000 开始, 每 2 个字节表示屏幕上显示的一个字符(80 x 25)
+*   前一个字节为 字符ASCII码, 后一个字节为 字符颜色和属性的控制信息(back_twinkle, back_r, back_g, back_b, front_light, front_r, front_g, front_b)
+
 ### I/O
 
 调用 `io_delay()` 函数: 对于一些老式总线的外部设备, 读写I/O端口的速度若过快就容易出现丢失数据的现象
