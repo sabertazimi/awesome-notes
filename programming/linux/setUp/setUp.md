@@ -213,7 +213,9 @@ sudo apt-get install wps-office
 
 #### music
 
-```shell
+*   [Netease Music Official](http://music.163.com/#/download)
+
+```sh
 $ sudo -H pip install requests
 $ sudo -H pip install pycrypto
 $ sudo apt-get install deepin-music
