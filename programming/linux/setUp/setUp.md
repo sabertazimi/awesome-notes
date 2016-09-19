@@ -477,7 +477,7 @@ sudo n stable
 -   global awesome packages
 
 ```shell
-sudo npm install -g bower gulp gh-pages tooling antd-init npm-check standard jslint jshint nodemon express express-generator speed-test babel-cli lebab
+sudo npm install -g bower gulp webpack cnpm gh-pages tooling antd-init npm-check standard jslint jshint nodemon express express-generator speed-test babel-cli lebab
 ```
 
 #### Bower
