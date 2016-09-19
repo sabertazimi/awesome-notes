@@ -3,7 +3,13 @@
 	* [Language](#language)
 	* [Git](#git)
 	* [DHCP](#dhcp)
-	* [PPA](#ppa)
+	* [Platform](#platform)
+		* [Nodejs](#nodejs)
+			* [Npm](#npm)
+			* [Global Awesome Packages](#global-awesome-packages)
+	* [Chrome](#chrome)
+		* [XX-Net](#xx-net)
+		* [Extensions](#extensions)
 	* [Aria2](#aria2)
 	* [ Fonts](#-fonts)
 	* [IDE](#ide)
@@ -20,16 +26,9 @@
 	* [Shell Tools](#shell-tools)
 		* [f-irc/irssi (irc client)](#f-ircirssi-irc-client)
 		* [pppoeconf/speedtest-cli](#pppoeconfspeedtest-cli)
+	* [Config](#config)
 		* [Terminal](#terminal)
 		* [zsh](#zsh)
-	* [Platform](#platform)
-		* [Nodejs](#nodejs)
-			* [Npm](#npm)
-			* [Global Awesome Packages](#global-awesome-packages)
-	* [Chrome](#chrome)
-		* [Installation](#installation)
-		* [XX-Net](#xx-net)
-		* [Extensions](#extensions)
 	* [GFW](#gfw)
 		* [Hosts](#hosts)
 		* [Lantern](#lantern)
@@ -63,6 +62,7 @@ sudo dpkg-reconfigure locales
 ## Git
 
 ```sh
+$ sudo apt install git
 $ git config --global user.name "sabertazimi"
 $ git config --global user.email sabertazimi@gmail.com
 $ git config --global core.editor vim
@@ -81,19 +81,64 @@ $ git config list
 ```sh
 sudo vim /etc/dhcp/dhclient.conf
 
-prepend domain-name-servers 127.0.0.1;下一行
+prepend domain-name-servers 127.0.0.1;
 
 prepend domain-name-servers 114.114.114.114;
 prepend domain-name-servers 223.5.5.5;
 ```
+## Platform
 
-## PPA
+### Nodejs
+
+```shell
+sudo apt install nodejs nodejs-dev
+sudo apt install npm
+```
+
+#### Npm
+
+```shell
+sudo npm install -g n
+sudo n stable
+```
+
+#### Global Awesome Packages
+
+```shell
+sudo npm install -g cnpm 
+sudo cnpm install -g bower gulp webpack babel-cli lebab
+sudo cnpm install -g gh-pages tooling antd-init
+sudo cnpm install -g npm-check standard jslint jshint
+sudo cnpm install -g nodemon express express-generator
+sudo cnpm install -g speed-test
+```
+
+## Chrome
 
 ```shell
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 sudo vi /etc/apt/sources.list < deb http://dl.google.com/linux/deb/ stable main
-sudo apt-get update
 ```
+
+### XX-Net
+
+*   download
+
+https://github.com/XX-net/XX-Net/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95
+
+```shell
+nohup ~/XX-Net-3.1.19/start & >/dev/null 2>&1
+```
+
+### Extensions
+
+*   SwitchyOmega
+*   Tempermonkey
+*   RSS Reader
+*   Netease Email
+*   Dida List
+*   Zhihu
+*   Bilibili
 
 ## Aria2
 
@@ -198,8 +243,6 @@ Plugin 'junegunn/limelight.vim'
 " Goyo and limelight config
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
-
-set noswapfile
 ```
 
 ### Sublime Text
@@ -293,6 +336,8 @@ sudo poof
 ifconfig ppp0
 ```
 
+## Config
+
 ### Terminal
 
 ```sh
@@ -312,91 +357,6 @@ vim ~/.zshrc
 
 *   theme : rkj-repos candy ys robbyrussell
 *   plugins=(vi-mode git github go golang gradle history screen cp emoji man node npm sudo)
-
-## Platform
-
-### Nodejs
-
-```shell
-sudo apt install nodejs nodejs-dev
-sudo apt install npm
-```
-
-#### Npm
-
-```shell
-sudo npm install -g n
-sudo n stable
-```
-
-#### Global Awesome Packages
-
-```shell
-sudo npm install -g cnpm 
-sudo cnpm install -g bower gulp webpack babel-cli lebab
-sudo cnpm install -g gh-pages tooling antd-init
-sudo cnpm install -g npm-check standard jslint jshint
-sudo cnpm install -g nodemon express express-generator
-sudo cnpm install -g speed-test
-```
-
-## Chrome
-
-### Installation
-
-```sh
-$ sudo apt install google-chrome-stable
-```
-
-### XX-Net
-
-*   download
-
-https://github.com/XX-net/XX-Net/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95
-
-```shell
-nohup ~/XX-Net-2.9.4/start.sh & >/dev/null 2>&1
-```
-
-### Extensions
-
--   Adblock Plus
--   AutoPager Chrome
--   Flag for Chrome
--   GitHub Awesome Autocomplete
--   GitHub Hovercard
--   GitHub improved
--   Gmail Notifier +
--   Google Search
--   Hacker News
--   Hacker News UX
--   IE Tab
--   Isometric Contributions
--   JSONView
--   Wikipedia
--   Momentum
--   Octo Mate
--   Octotree
--   Page load time
--   Proxy SwitchyOmega
--   Quora Extender
--   React Developer Tools
--   Search the current site
--   Show me the React
--   Stylish
--   Tampermonkey
--   Thunder
--   User-Agent Switcher
--   Vimium
--   Wappalyzer
--   Web Developer
--   Zhihu-showL
--   translate
--   vocabulary
--   bilibili
--   dida
--   zhihu
--   163
 
 ## GFW
 
