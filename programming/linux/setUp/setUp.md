@@ -1,4 +1,4 @@
-# Linux SetUp
+# Linux Set Up
 
 ## Language
 
@@ -8,21 +8,15 @@ xdg-user-dirs-gtk-update
 export LANG=zh_CN
 ```
 
+*   /var/lib/locales/supported.d/local
+
 ```shell
 sudo locale-gen zh_CN.GBK
 sudo locale-gen zh_CN.GB18030
-```
-
-```shell
-sudo vim /var/lib/locales/supported.d/local
-zh_CN.GBK GBK
-zh_CN.GB18030 GB18030
 sudo dpkg-reconfigure locales
 ```
 
-## Config
-
-### Git
+## Git
 
 ```sh
 $ git config --global user.name "sabertazimi"
@@ -38,7 +32,7 @@ $ git config --global alias.p "push"
 $ git config list
 ```
 
-### DHCP
+## DHCP
 
 ```sh
 sudo vim /etc/dhcp/dhclient.conf
@@ -49,7 +43,7 @@ prepend domain-name-servers 114.114.114.114;
 prepend domain-name-servers 223.5.5.5;
 ```
 
-### PPA
+## PPA
 
 ```shell
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -57,7 +51,7 @@ sudo vi /etc/apt/sources.list < deb http://dl.google.com/linux/deb/ stable main
 sudo apt-get update
 ```
 
-### Aria2
+## Aria2
 
 ```shell
 mkdir -p ~/.aria2
@@ -120,7 +114,7 @@ file-allocation=prealloc
 check-certificate=false
 ```
 
-###  Fonts
+##  Fonts
 
 *   /usr/share/fonts/chinese/TrueType/
 *   [Windows Fonts Download](http://pan.baidu.com/s/1jGRz7ue)
