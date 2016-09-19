@@ -1,3 +1,47 @@
+
+* [Linux Set Up](#linux-set-up)
+	* [Language](#language)
+	* [Git](#git)
+	* [DHCP](#dhcp)
+	* [PPA](#ppa)
+	* [Aria2](#aria2)
+	* [ Fonts](#-fonts)
+	* [IDE](#ide)
+		* [ Android Studio/WebStorm/CLion](#-android-studiowebstormclion)
+	* [Text Editor](#text-editor)
+		* [Vim(Github)](#vimgithub)
+		* [Sublime Text](#sublime-text)
+		* [Atom](#atom)
+		* [Visual Studio Code](#visual-studio-code)
+	* [Software](#software)
+		* [[Appearence](https://blog.microideation.com/2016/08/30/customizing-ubuntu-system/)](#appearencehttpsblogmicroideationcom20160830customizing-ubuntu-system)
+		* [ZealDocs](#zealdocs)
+		* [Desktop](#desktop)
+	* [Shell Tools](#shell-tools)
+		* [f-irc/irssi (irc client)](#f-ircirssi-irc-client)
+		* [pppoeconf/speedtest-cli](#pppoeconfspeedtest-cli)
+		* [Terminal](#terminal)
+		* [zsh](#zsh)
+	* [Platform](#platform)
+		* [Nodejs](#nodejs)
+			* [Npm](#npm)
+			* [Global Awesome Packages](#global-awesome-packages)
+	* [Chrome](#chrome)
+		* [Installation](#installation)
+		* [XX-Net](#xx-net)
+		* [Extensions](#extensions)
+	* [GFW](#gfw)
+		* [Hosts](#hosts)
+		* [Lantern](#lantern)
+		* [Shadowsocks](#shadowsocks)
+		* [sshuttle](#sshuttle)
+		* [Proxychains(Global Proxy)](#proxychainsglobal-proxy)
+		* [OpenVPN && vpngate/vpnbook](#openvpn--vpngatevpnbook)
+		* [Docker VPN](#docker-vpn)
+	* [Windows](#windows)
+		* [Imitate Linux](#imitate-linux)
+		* [Software](#software-1)
+
 # Linux Set Up
 
 ## Language
@@ -135,15 +179,17 @@ fc-cache
 
 *   basic version
 
-```shell
+```sh
 curl https://raw.githubusercontent.com/wklken/vim-for-server/master/vimrc > ~/.vimrc
 ```
 
 *   advanced version
 
-```shell
+```sh
 curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
+```
 
+```vimrc
 Plugin 'mzlogin/vim-markdown-toc'
 Plugin 'aperezdc/vim-template'
 Plugin 'junegunn/goyo.vim'
@@ -153,6 +199,7 @@ Plugin 'junegunn/limelight.vim'
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
+set noswapfile
 ```
 
 ### Sublime Text
