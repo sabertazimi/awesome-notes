@@ -301,6 +301,12 @@ $ sudo apt-get install zeal
 $ sudo apt-get remove appmenu-qt5
 ```
 
+### Desktop
+
+```sh
+$ sudo apt install gnome gnome-shell gnome-panel gnome-menus gnome-session gnome-tweak-tool gdm
+```
+
 ## Shell Tools
 
 [Futher List](http://www.codeceo.com/article/linux-terminal-guide.html)
