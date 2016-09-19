@@ -451,8 +451,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 sudo vim /etc/passwd
 ```
 
--   theme : rkj-repos candy ys
--   plugins : git node ruby meteor bundler osx rake sublime
+*   theme : rkj-repos candy ys robbyrussell
+*   plugins=(vi-mode git github go golang gradle history screen cp emoji man node npm sudo)
 
 ```shell
 vim ~/.zshrc
