@@ -342,6 +342,7 @@ curl https://raw.githubusercontent.com/wklken/vim-for-server/master/vimrc > ~/.v
 -   advanced version
 
 ```shell
+curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.s
 wget -qO- https://raw.github.com/ma6174/vim/master/setup.sh | sh -x
 ```
 
