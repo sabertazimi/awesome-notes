@@ -547,7 +547,15 @@ nohup ~/XX-Net-2.9.4/start.sh & >/dev/null 2>&1
 -   Web Search Pro
 -   xThundedr
 
-## Chrome Extensions
+## Chrome
+
+### Installation
+
+```sh
+$ sudo apt install google-chrome-stable
+```
+
+### Extensions
 
 -   Adblock Plus
 -   AutoPager Chrome
