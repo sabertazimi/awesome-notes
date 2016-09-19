@@ -1,72 +1,6 @@
-
-* [Linux SetUp](#linux-setup)
-	* [Lang](#lang)
-	* [Purge](#purge)
-	* [Set Up](#set-up)
-		* [Config](#config)
-		* [PPA](#ppa)
-		* [Download](#download)
-		* [Office/Docs](#officedocs)
-		* [Entertainment](#entertainment)
-			* [music](#music)
-			* [game](#game)
-				* [playonlinux](#playonlinux)
-				* [emulator](#emulator)
-		* [ fonts](#-fonts)
-		* [tools](#tools)
-		* [GDB Hacker UI](#gdb-hacker-ui)
-			* [GDB-DashBoard](#gdb-dashboard)
-			* [Voltron](#voltron)
-				* [pip3](#pip3)
-				* [install](#install)
-				* [config](#config-1)
-	* [IDE](#ide)
-		* [ Android Studio](#-android-studio)
-		* [ WebStorm](#-webstorm)
-	* [Text Editor](#text-editor)
-		* [Vim(Github)](#vimgithub)
-		* [Sublime Text](#sublime-text)
-		* [Atom](#atom)
-		* [Visual Studio Code](#visual-studio-code)
-	* [Software](#software)
-		* [Desktop](#desktop)
-			* [gnome](#gnome)
-		* [ZealDocs](#zealdocs)
-		* [[N1(E-Mail)](https://invite.nylas.com/download/)](#n1e-mailhttpsinvitenylascomdownload)
-	* [Shell Tools](#shell-tools)
-		* [f-irc/irssi (irc client)](#f-ircirssi-irc-client)
-		* [wifi access point](#wifi-access-point)
-		* [pppoeconf/speedtest-cli](#pppoeconfspeedtest-cli)
-		* [Terminal](#terminal)
-		* [zsh](#zsh)
-	* [Platform](#platform)
-		* [Nodejs](#nodejs)
-			* [Npm](#npm)
-			* [Bower](#bower)
-	* [firefox extensions](#firefox-extensions)
-	* [Chrome Extensions](#chrome-extensions)
-	* [GFW](#gfw)
-		* [Hosts](#hosts)
-		* [XX-Net](#xx-net)
-		* [Lantern](#lantern)
-		* [Shadowsocks](#shadowsocks)
-		* [sshuttle](#sshuttle)
-		* [Proxychains(Global Proxy)](#proxychainsglobal-proxy)
-		* [OpenVPN && vpngate/vpnbook](#openvpn--vpngatevpnbook)
-		* [Docker VPN](#docker-vpn)
-	* [Windows](#windows)
-		* [Imitate Linux](#imitate-linux)
-		* [Software](#software-1)
-
 # Linux SetUp
 
-> 建立一个软件repo，加快装机速度，是程序员的必备修养 -- 尼采
-
-/home /usr /opt /lib /var /etc
-
-------
-
-## Lang
+## Language
 
 ```shell
 export LANG=en_US
@@ -76,30 +10,37 @@ export LANG=zh_CN
 
 ```shell
 sudo locale-gen zh_CN.GBK
-sudo locale-gen zh_CN.GB2312
 sudo locale-gen zh_CN.GB18030
 ```
 
 ```shell
 sudo vim /var/lib/locales/supported.d/local
 zh_CN.GBK GBK
-zh_CN.GB2312 GB2312
 zh_CN.GB18030 GB18030
 sudo dpkg-reconfigure locales
 ```
 
-## Purge
+## Config
 
-```shell
-sudo apt-get remove libreoffice-common
-sudo apt-get remove unity-webapps-common
+### Git
+
+```sh
+$ git config --global user.name "sabertazimi"
+$ git config --global user.email sabertazimi@gmail.com
+$ git config --global core.editor vim
+$ git config --global push.default simple
+$ git config --global credential.helper store
+$ git config --global commit.template $HOME/.gitmsg.md
+$ git config --global alias.s "status"
+$ git config --global alias.a "add"
+$ git config --global alias.c "commit -v"
+$ git config --global alias.p "push"
+$ git config list
 ```
 
-## Set Up
+### DHCP
 
-### Config
-
-```shell
+```sh
 sudo vim /etc/dhcp/dhclient.conf
 
 prepend domain-name-servers 127.0.0.1;下一行
@@ -112,15 +53,15 @@ prepend domain-name-servers 223.5.5.5;
 
 ```shell
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-sudo vim /etc/apt/sources.list < deb http://dl.google.com/linux/deb/ stable main
+sudo vi /etc/apt/sources.list < deb http://dl.google.com/linux/deb/ stable main
 sudo apt-get update
 ```
 
-### Download
+### Aria2
 
 ```shell
 mkdir -p ~/.aria2
-sudo vim ~/.aria2/aria2.conf
+sudo vi ~/.aria2/aria2.conf
 ```
 
 ```conf
@@ -179,36 +120,15 @@ file-allocation=prealloc
 check-certificate=false
 ```
 
-### Office/Docs
+###  Fonts
 
--   [Chartsflow Editor](http://www.yworks.com/products/yed/download)
--   [GeoGebra - 几何图形](http://www.geogebra.org/download)
-
-###  fonts
-
--   /usr/share/fonts/chinese/TrueType/
--   [Windows Fonts Download](http://pan.baidu.com/s/1jGRz7ue)
+*   /usr/share/fonts/chinese/TrueType/
+*   [Windows Fonts Download](http://pan.baidu.com/s/1jGRz7ue)
 
 ```shell
 mkfontscale
 mkfontdir
 fc-cache
-```
-
-### GDB Hacker UI
-
-#### GDB-DashBoard
-
-```shell
-wget -P ~ git.io/.gdbinit
-(gdb) source ~/.gdbinit
-```
-
-```shell
-git clone https://github.com/cyrus-and/gdb-dashboard.git
-cp -fr ./gdb-dashboard/.gdbinit ~/
-rm -fr ./gdb-dashboard
-(gdb) source ~/.gdbinit
 ```
 
 ## IDE
@@ -219,13 +139,13 @@ rm -fr ./gdb-dashboard
 
 ### Vim(Github)
 
--   basic version
+*   basic version
 
 ```shell
 curl https://raw.githubusercontent.com/wklken/vim-for-server/master/vimrc > ~/.vimrc
 ```
 
--   advanced version
+*   advanced version
 
 ```shell
 curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
@@ -233,7 +153,7 @@ curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
 
 ### Sublime Text
 
-```shell
+```sh
 git clone https://github.com/lyfeyaj/sublime-text-imfix.git
 cd sublime-text-imfix
 ./sublime-imfix
@@ -259,7 +179,7 @@ CEFB3783 B2E1BA96 71AAF7B4 AFB61B1D
 import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
 ```
 
-```shell
+```sh
 git clone https://github.com/sabertazimi/Awesome-Sublime
 cd Awesome-Sublime
 cp -fr User ~/.config/sublime-text-3/Packages/
@@ -267,13 +187,13 @@ cp -fr User ~/.config/sublime-text-3/Packages/
 
 ### Atom
 
--   firewall config
+*   firewall config
 
 ```
  $ touch ~/.atom/.apmrc && echo 'strict-ssl = false' > ~/.atom/.apmrc
 ```
 
--   plugins: sync-SETTINGS(gist)
+*   plugins: sync-SETTINGS(gist)
 
 ```javascript
   "activate-power-mode":
@@ -283,7 +203,7 @@ cp -fr User ~/.config/sublime-text-3/Packages/
 
 ### Visual Studio Code
 
-```Shell
+```
 sudo apt-get install ubuntu-make
 umake web visual-studio-code
 umake web visual-studio-code --remove
@@ -313,13 +233,9 @@ $ sudo apt install gnome gnome-shell gnome-panel gnome-menus gnome-session gnome
 
 ### f-irc/irssi (irc client)
 
-### wifi access point
-
-`https://github.com/oblique/create_ap`
-
 ### pppoeconf/speedtest-cli
 
-```shell
+```sh
 sudo pppoeconf
 sudo pon dsl-provider
 sudo poof
@@ -328,37 +244,31 @@ ifconfig ppp0
 
 ### Terminal
 
--   Font - DejaVu Sans Mono Book 12
--   Ctrl + Shift + E/O
--   Alt + Arrow
-
-```shell
-$ sudo apt-get install terminator
+```sh
 $ sudo update-alternatives --config x-terminal-emulator
 ```
 
 ### zsh
 
 ```shell
-sudo apt-get install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-sudo vim /etc/passwd
+```
+
+```shell
+vim /etc/passwd
+vim ~/.zshrc
 ```
 
 *   theme : rkj-repos candy ys robbyrussell
 *   plugins=(vi-mode git github go golang gradle history screen cp emoji man node npm sudo)
-
-```shell
-vim ~/.zshrc
-```
 
 ## Platform
 
 ### Nodejs
 
 ```shell
-sudo apt-get install nodejs nodejs-dbg
-sudo apt-get install npm
+sudo apt install nodejs nodejs-dev
+sudo apt install npm
 ```
 
 #### Npm
@@ -368,7 +278,7 @@ sudo npm install -g n
 sudo n stable
 ```
 
--   global awesome packages
+#### Global Awesome Packages
 
 ```shell
 sudo npm install -g cnpm 
@@ -378,9 +288,6 @@ sudo cnpm install -g npm-check standard jslint jshint
 sudo cnpm install -g nodemon express express-generator
 sudo cnpm install -g speed-test
 ```
-
-
-
 
 ## Chrome
 
@@ -392,7 +299,7 @@ $ sudo apt install google-chrome-stable
 
 ### XX-Net
 
--   download
+*   download
 
 https://github.com/XX-net/XX-Net/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95
 
@@ -444,37 +351,36 @@ nohup ~/XX-Net-2.9.4/start.sh & >/dev/null 2>&1
 
 ### Hosts
 
-https://github.com/racaljk/hosts
+*   https://github.com/racaljk/hosts
 
 ### Lantern
 
--   https://github.com/getlantern/lantern
+*   https://github.com/getlantern/lantern
 
 ### Shadowsocks
 
--   https://github.com/shadowsocks/shadowsocks
--   https://github.com/breakwa11/shadowsocks-rss
--   https://github.com/yangyangwithgnu/autoshadower
+*   https://github.com/breakwa11/shadowsocks-rss
+*   https://github.com/yangyangwithgnu/autoshadower
 
 ### sshuttle
 
--   https://github.com/apenwarr/sshuttle
+*   https://github.com/apenwarr/sshuttle
 
 ### Proxychains(Global Proxy)
 
--   https://github.com/rofl0r/proxychains-ng
+*   https://github.com/rofl0r/proxychains-ng
 
 ### OpenVPN && vpngate/vpnbook
 
--   https://github.com/OpenVPN/openvpn
--   https://github.com/waylau/vpngate-mirrors
+*   https://github.com/OpenVPN/openvpn
+*   https://github.com/waylau/vpngate-mirrors
 
-```shell
+```sh
 sudo apt-get install openssl
 sudo apt-get install pam-devel
 ```
 
-```shell
+```sh
 sudo wget http://www.oberhumer.com/opensource/lzo/download/lzo-2.06.tar.gz
 tar –zxvf lzo-2.06.tar.gz –C /usr/src/
 cd /usr/src/lzo-2.06
@@ -483,7 +389,7 @@ sudo make
 sudo make install
 ```
 
-```shell
+```sh
 sudo unzip openvpn-2.3.10.zip
 cd openvpn-2.3.2
 sudo ./.configure --prefix=/opt/openvpn-2.3.10
@@ -491,31 +397,32 @@ sudo make
 sudo make install
 ```
 
-```shell
+```sh
 sudo apt-get install easy-rsa
 sudo apt-get install openvpn
 ```
 
 ### Docker VPN
 
-https://github.com/hwdsl2/docker-ipsec-vpn-server
+*   https://github.com/hwdsl2/docker-ipsec-vpn-server
 
 ## Windows
 
 ### Imitate Linux
 
--   Wox
--   Cygwin
+*   Wox
+*   Cygwin
+*   chocalate
 
 ### Software
 
--   360 safe
--   qq browser
--   sougoupinyin
--   haozip
--   qq
--   baiduyun
--   thunder
--   netease music
--   office 2007
--   nodejs: cash
+*   360 safe
+*   google chrome
+*   sougoupinyin
+*   haozip
+*   qq
+*   baiduyun
+*   thunder
+*   netease music
+*   office
+*   nodejs: cash
