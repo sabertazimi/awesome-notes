@@ -119,7 +119,6 @@ sudo add-apt-repository ppa:webupd8team/atom
 sudo add-apt-repository ppa:numix/ppa
 sudo add-apt-repository ppa:zeal-developers/ppa
 sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
-sudo add-apt-repository ppa:ubuntu-wine/ppaudo
 sudo add-apt-repository ppa:ubuntu-wine/ppa
 sudo add-apt-repository ppa:docky-core/stable
 sudo add-apt-repository ppa:noobslab/deepin-sc
@@ -132,6 +131,8 @@ sudo apt-get update
 
 ```shell
 sudo apt-get install aria2
+mkdir -p ~/.aria2
+sudo vim ~/.aria2/aria2.conf
 firefox-addons: baiduexporter send-to-aria2
 ```
 
@@ -342,7 +343,7 @@ curl https://raw.githubusercontent.com/wklken/vim-for-server/master/vimrc > ~/.v
 -   advanced version
 
 ```shell
-curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.s
+curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
 wget -qO- https://raw.github.com/ma6174/vim/master/setup.sh | sh -x
 ```
 
