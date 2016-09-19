@@ -287,41 +287,6 @@ rm -fr ./gdb-dashboard
 (gdb) source ~/.gdbinit
 ```
 
-#### Voltron
-
-##### pip3
-
-```shell
-$ sudo easy_install3 pip
-```
-
-##### install
-
-```shell
-$ git clone https://github.com/snare/voltron
-$ sudo apt-get install libreadline6-dev python3-dev python3-setuptools python3-yaml
-$ cd voltron
-$ sudo python3 setup.py install
-```
-
-##### config
-
--   .gdbinit
-
-```shell
-source /usr/local/lib/python3.4/dist-packages/voltron-0.1.2-py3.4.egg/voltron/entry.py
-voltron init
-set disassembly-flavor att
-
-(gdb) source .gdbinit
-```
-
--   view (in another terminal)
-
-```shell
-$ voltron view register stack disasm backtrace
-```
-
 ## IDE
 
 ###  Android Studio
