@@ -216,11 +216,8 @@ sudo apt-get install wps-office
 *   [Netease Music Official](http://music.163.com/#/download)
 
 ```sh
-$ sudo -H pip install requests
-$ sudo -H pip install pycrypto
-$ sudo apt-get install deepin-music
-$ git clone https://github.com/wu-nerd/dmusic-plugin-NeteaseCloudMusic.git
-$ python dmusic-plugin-NeteaseCloudMusic/install.py
+sudo apt install libqt5libqgtk2 libqt5multimediawidgets5 libqt5multimedia5-plugins libqt5x11extras5
+sudo dpkg --install neteasemusic.deb
 ```
 
 #### game
