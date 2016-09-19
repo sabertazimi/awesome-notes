@@ -113,27 +113,14 @@ prepend domain-name-servers 223.5.5.5;
 ```shell
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 sudo vim /etc/apt/sources.list < deb http://dl.google.com/linux/deb/ stable main
-sudo add-apt-repository ppa:nilarimogard/webupd8
-sudo add-apt-repository ppa:webupd8team/sublime-text-3
-sudo add-apt-repository ppa:webupd8team/atom
-sudo add-apt-repository ppa:numix/ppa
-sudo add-apt-repository ppa:zeal-developers/ppa
-sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
-sudo add-apt-repository ppa:ubuntu-wine/ppa
-sudo add-apt-repository ppa:docky-core/stable
-sudo add-apt-repository ppa:noobslab/deepin-sc
-sudo add-apt-repository ppa:noobslab/themes
-sudo add-apt-repository ppa:noobslab/macbuntu
 sudo apt-get update
 ```
 
 ### Download
 
 ```shell
-sudo apt-get install aria2
 mkdir -p ~/.aria2
 sudo vim ~/.aria2/aria2.conf
-firefox-addons: baiduexporter send-to-aria2
 ```
 
 ```conf
@@ -194,60 +181,8 @@ check-certificate=false
 
 ### Office/Docs
 
-*   [Sougou Pinyin](http://pinyin.sogou.com/linux/)
-
-```sh
-sudo apt install libopencc fcitx-libs fcitx-libs-qt
-```
-
--   [WPS](http://community.wps.cn/download/)
 -   [Chartsflow Editor](http://www.yworks.com/products/yed/download)
 -   [GeoGebra - 几何图形](http://www.geogebra.org/download)
-
-```shell
-sudo apt-get install ipython ipython3 python-pip python3-pip 
-sudo apt-get install xpad xchm
-```
-
-```shell
-sudo apt-get install fcitx-sogoupinyin
-sudo apt-get install wps-office
-```
-
-### Entertainment
-
-#### music
-
-*   [Netease Music Official](http://music.163.com/#/download)
-
-```sh
-sudo apt install libqt5libqgtk2 libqt5multimediawidgets5 libqt5multimedia5-plugins libqt5x11extras5
-sudo dpkg --install neteasemusic.deb
-```
-
-#### game
-
-##### playonlinux
-
-```shell
-sudo apt-get install build-essential libgl1-mesa-dev libglu1-mesa-dev libglut-dev freeglut3-dev
-```
-
-```shell
-wget -q "http://deb.playonlinux.com/public.gpg" -O- | sudo apt-key add -
-sudo wget http://deb.playonlinux.com/playonlinux_trusty.list -O /etc/apt/sources.list.d/playonlinux.list
-sudo apt-get update
-sudo apt-get install playonlinux
-```
-
-##### emulator
-
-```shell
-sudo apt-get install vbaexpress 
-sudo apt-get install visualboyadvance 
-sudo apt-get install visualboyadvance-gtk
-sudo apt-get install desmume
-```
 
 ###  fonts
 
@@ -258,19 +193,6 @@ sudo apt-get install desmume
 mkfontscale
 mkfontdir
 fc-cache
-```
-
-### tools
-
-```shell
-sudo apt-get install git unrar
-sudo apt-get install screen ssh axel
-sudo apt-get install lnav exfat-fuse manpages-zh
-sudo apt-get install vpnc network-manager-vpnc 
-sudo apt-get install hardinfo
-sudo apt-get install gconf-editor
-sudo apt-get install nautilus-actions -y
-sudo apt-get install htop
 ```
 
 ### GDB Hacker UI
@@ -291,17 +213,11 @@ rm -fr ./gdb-dashboard
 
 ## IDE
 
-###  Android Studio
-
-###  WebStorm
+###  Android Studio/WebStorm/CLion
 
 ## Text Editor
 
 ### Vim(Github)
-
-```shell
-sudo apt-get install vim
-```
 
 -   basic version
 
@@ -313,14 +229,9 @@ curl https://raw.githubusercontent.com/wklken/vim-for-server/master/vimrc > ~/.v
 
 ```shell
 curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
-wget -qO- https://raw.github.com/ma6174/vim/master/setup.sh | sh -x
 ```
 
 ### Sublime Text
-
-```shell
-sudo apt-get install sublime-text-installer
-```
 
 ```shell
 git clone https://github.com/lyfeyaj/sublime-text-imfix.git
@@ -356,19 +267,13 @@ cp -fr User ~/.config/sublime-text-3/Packages/
 
 ### Atom
 
-```shell
-sudo apt-get install atom
-```
-
 -   firewall config
 
 ```
  $ touch ~/.atom/.apmrc && echo 'strict-ssl = false' > ~/.atom/.apmrc
 ```
 
--   plugins: sync-SETTINGS
-
-e95d69c522d199322429
+-   plugins: sync-SETTINGS(gist)
 
 ```javascript
   "activate-power-mode":
@@ -389,29 +294,12 @@ sudo ln -s /home/hustlyl/.local/share/umake/web/visual-studio-code/Code /usr/loc
 
 ### [Appearence](https://blog.microideation.com/2016/08/30/customizing-ubuntu-system/)
 
-```shell
-sudo apt-get install docky
-sudo apt-get install numix-gtk-theme numix-icon-theme numix-icon-theme-circle
-sudo apt-get install mac-ithemes-v3 mac-icons-v3
-sudo apt-get install macbuntu-os-ithemes-lts-v7 macbuntu-os-icons-lts-v7 
-```
-
-#### gnome
-
-```shell
-sudo apt-get install gnome gnome-shell gnome-panel gnome-menus gnome-session gnome-tweak-tool gdm
-```
-
 ### ZealDocs
 
 ```shell
 $ sudo apt-get install zeal
 $ sudo apt-get remove appmenu-qt5
 ```
-
-### [N1(E-Mail)](https://invite.nylas.com/download/)
-
-Awesome Open Source E-Mail Desktop App
 
 ## Shell Tools
 
@@ -477,46 +365,16 @@ sudo n stable
 -   global awesome packages
 
 ```shell
-sudo npm install -g bower gulp webpack cnpm gh-pages tooling antd-init npm-check standard jslint jshint nodemon express express-generator speed-test babel-cli lebab
+sudo npm install -g cnpm 
+sudo cnpm install -g bower gulp webpack babel-cli lebab
+sudo cnpm install -g gh-pages tooling antd-init
+sudo cnpm install -g npm-check standard jslint jshint
+sudo cnpm install -g nodemon express express-generator
+sudo cnpm install -g speed-test
 ```
 
-#### Bower
 
-```shell
-bower init
-bower install bootstrap -S
-bower install font-awesome -S
-```
 
-## firefox extensions
-
-```shell
-nohup ~/XX-Net-2.9.4/start.sh & >/dev/null 2>&1
-```
-
--   AdblockPlus
--   Alexa
--   BetterSearch
--   ChatZilla
--   CLEO
--   Disconnect Search
--   DownThemeAll
--   ExtendedStatusBar
--   FEBE
--   Firebug
--   Flagfox
--   Greasemonkey
--   Markdown Here
--   Markdown Viewer
--   Octotree
--   Pan
--   SeleniumIDE
--   Stylish
--   TabMixPlus
--   User Agent Switcher
--   VimFx
--   Web Search Pro
--   xThundedr
 
 ## Chrome
 
@@ -524,6 +382,16 @@ nohup ~/XX-Net-2.9.4/start.sh & >/dev/null 2>&1
 
 ```sh
 $ sudo apt install google-chrome-stable
+```
+
+### XX-Net
+
+-   download
+
+https://github.com/XX-net/XX-Net/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95
+
+```shell
+nohup ~/XX-Net-2.9.4/start.sh & >/dev/null 2>&1
 ```
 
 ### Extensions
@@ -571,18 +439,6 @@ $ sudo apt install google-chrome-stable
 ### Hosts
 
 https://github.com/racaljk/hosts
-
-### XX-Net
-
-```shell
-sudo apt-get install python-vte  python-OpenSSL  python-gtk2 libffi-dev python-appindicator libnss3-tools
-```
-
--   download
-
-https://github.com/XX-net/XX-Net/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95
-
--   firefox config: pan add-on
 
 ### Lantern
 
