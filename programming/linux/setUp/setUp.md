@@ -263,11 +263,11 @@ fc-cache
 ```shell
 sudo apt-get install git unrar
 sudo apt-get install screen ssh axel
-sudo apt-get install lnav exfat-fuse syspeek manpages-zh
+sudo apt-get install lnav exfat-fuse manpages-zh
 sudo apt-get install vpnc network-manager-vpnc 
-sudo apt-get install fluxgui hardinfo
+sudo apt-get install hardinfo
 sudo apt-get install gconf-editor
-sudo apt-get install -y nautilus-actions 
+sudo apt-get install nautilus-actions -y
 sudo apt-get install htop
 ```
 
