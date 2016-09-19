@@ -111,6 +111,8 @@ prepend domain-name-servers 223.5.5.5;
 ### PPA
 
 ```shell
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo vim /etc/apt/sources.list < deb http://dl.google.com/linux/deb/ stable main
 sudo add-apt-repository ppa:nilarimogard/webupd8
 sudo add-apt-repository ppa:webupd8team/sublime-text-3
 sudo add-apt-repository ppa:webupd8team/atom
