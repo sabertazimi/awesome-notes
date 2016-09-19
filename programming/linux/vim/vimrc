@@ -52,7 +52,6 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " marktown toc(table of content) generator
 Plugin 'AutoClose'
-Plugin 'mzlogin/vim-markdown-toc'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
@@ -64,6 +63,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'dracula/vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
+Plugin 'mzlogin/vim-markdown-toc'
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'aperezdc/vim-template'

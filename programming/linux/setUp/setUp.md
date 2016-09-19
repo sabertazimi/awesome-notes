@@ -55,7 +55,7 @@ sudo apt-get update
 
 ```shell
 mkdir -p ~/.aria2
-sudo vi ~/.aria2/aria2.conf
+vi ~/.aria2/aria2.conf
 ```
 
 ```conf
@@ -143,6 +143,16 @@ curl https://raw.githubusercontent.com/wklken/vim-for-server/master/vimrc > ~/.v
 
 ```shell
 curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
+
+Plugin 'mzlogin/vim-markdown-toc'
+Plugin 'aperezdc/vim-template'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
+
+" Goyo and limelight config
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
 ```
 
 ### Sublime Text
