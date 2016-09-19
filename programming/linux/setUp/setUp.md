@@ -194,7 +194,12 @@ check-certificate=false
 
 ### Office/Docs
 
--   [Sougou Pinyin](http://pinyin.sogou.com/linux/)
+*   [Sougou Pinyin](http://pinyin.sogou.com/linux/)
+
+```sh
+sudo apt install libopencc fcitx-libs fcitx-libs-qt
+```
+
 -   [WPS](http://community.wps.cn/download/)
 -   [Chartsflow Editor](http://www.yworks.com/products/yed/download)
 -   [GeoGebra - 几何图形](http://www.geogebra.org/download)
