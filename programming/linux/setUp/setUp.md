@@ -282,7 +282,7 @@ wget -P ~ git.io/.gdbinit
 
 ```shell
 git clone https://github.com/cyrus-and/gdb-dashboard.git
-cp -fr ./gdb-dashboard/.gdbinit ./
+cp -fr ./gdb-dashboard/.gdbinit ~/
 rm -fr ./gdb-dashboard
 (gdb) source ~/.gdbinit
 ```
