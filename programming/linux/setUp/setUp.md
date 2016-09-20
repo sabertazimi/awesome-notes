@@ -87,7 +87,7 @@ prepend domain-name-servers 223.5.5.5;
 
 ```shell
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-sudo vi /etc/apt/sources.list < deb http://dl.google.com/linux/deb/ stable main
+sudo vi /etc/apt/sources.list << deb http://dl.google.com/linux/deb/ stable main
 ```
 
 ### XX-Net
@@ -189,31 +189,6 @@ fc-cache
 ###  Android Studio/WebStorm/CLion
 
 ## Text Editor
-
-### Vim(Github)
-
-*   basic version
-
-```sh
-curl https://raw.githubusercontent.com/wklken/vim-for-server/master/vimrc > ~/.vimrc
-```
-
-*   advanced version
-
-```sh
-curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
-```
-
-```vimrc
-Plugin 'mzlogin/vim-markdown-toc'
-Plugin 'aperezdc/vim-template'
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
-
-" Goyo and limelight config
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-```
 
 ### Sublime Text
 
@@ -321,8 +296,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 ```
 
 ```shell
-vim /etc/passwd
-vim ~/.zshrc
+vi /etc/passwd
+vi ~/.zshrc
 ```
 
 *   theme : rkj-repos candy ys robbyrussell
