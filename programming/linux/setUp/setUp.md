@@ -34,18 +34,18 @@
 
 ## Language
 
-```shell
-export LANG=en_US
-xdg-user-dirs-gtk-update
-export LANG=zh_CN
+```sh
+$ export LANG=en_US
+$ xdg-user-dirs-gtk-update
+$ export LANG=zh_CN
 ```
 
 *   /var/lib/locales/supported.d/local
 
-```shell
-sudo locale-gen zh_CN.GBK
-sudo locale-gen zh_CN.GB18030
-sudo dpkg-reconfigure locales
+```sh
+$ sudo locale-gen zh_CN.GBK
+$ sudo locale-gen zh_CN.GB18030
+$ sudo dpkg-reconfigure locales
 ```
 
 ## Git
@@ -77,9 +77,9 @@ $ git config list
 
 ## Aria2
 
-```shell
-mkdir -p ~/.aria2
-vi ~/.aria2/aria2.conf
+```sh
+$ mkdir -p ~/.aria2
+$ vi ~/.aria2/aria2.conf
 ```
 
 ```conf
@@ -143,10 +143,10 @@ check-certificate=false
 *   /usr/share/fonts/chinese/TrueType/
 *   [Windows Fonts Download](http://pan.baidu.com/s/1jGRz7ue)
 
-```shell
-mkfontscale
-mkfontdir
-fc-cache
+```sh
+$ mkfontscale
+$ mkfontdir
+$ fc-cache
 ```
 
 ## IDE
@@ -156,12 +156,6 @@ fc-cache
 ## Text Editor
 
 ### Sublime Text
-
-```sh
-git clone https://github.com/lyfeyaj/sublime-text-imfix.git
-cd sublime-text-imfix
-./sublime-imfix
-```
 
 ```markdown
 —– BEGIN LICENSE —–
@@ -184,18 +178,12 @@ import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc5
 ```
 
 ```sh
-git clone https://github.com/sabertazimi/Awesome-Sublime
-mv ~/.config/sublime-text-3/Packages/User ~/.config/sublime-text-3/Packages/User.bk
-cp -fr Awesome-Sublime/User ~/.config/sublime-text-3/Packages/
+$ git clone https://github.com/sabertazimi/Awesome-Sublime
+$ mv ~/.config/sublime-text-3/Packages/User ~/.config/sublime-text-3/Packages/User.bk
+$ cp -fr Awesome-Sublime/User ~/.config/sublime-text-3/Packages/
 ```
 
 ### Atom
-
-*   firewall config
-
-```
- $ touch ~/.atom/.apmrc && echo 'strict-ssl = false' > ~/.atom/.apmrc
-```
 
 *   plugins: sync-SETTINGS(gist)
 
@@ -207,11 +195,10 @@ cp -fr Awesome-Sublime/User ~/.config/sublime-text-3/Packages/
 
 ### Visual Studio Code
 
-```
-sudo apt-get install ubuntu-make
-umake web visual-studio-code
-umake web visual-studio-code --remove
-sudo ln -s /home/hustlyl/.local/share/umake/web/visual-studio-code/Code /usr/local/bin/code
+```sh
+$ sudo apt-get install ubuntu-make
+$ umake web visual-studio-code (--remove)
+$ sudo ln -s /home/hustlyl/.local/share/umake/web/visual-studio-code/Code /usr/local/bin/code
 ```
 
 ## Software
@@ -220,7 +207,7 @@ sudo ln -s /home/hustlyl/.local/share/umake/web/visual-studio-code/Code /usr/loc
 
 ### ZealDocs
 
-```shell
+```sh
 $ sudo apt-get install zeal
 $ sudo apt-get remove appmenu-qt5
 ```
@@ -240,10 +227,10 @@ $ sudo apt install gnome gnome-shell gnome-panel gnome-menus gnome-session gnome
 ### pppoeconf/speedtest-cli
 
 ```sh
-sudo pppoeconf
-sudo pon dsl-provider
-sudo poof
-ifconfig ppp0
+$ sudo pppoeconf
+$ sudo pon dsl-provider
+$ sudo poof
+$ ifconfig ppp0
 ```
 
 ## GFW
@@ -275,30 +262,30 @@ ifconfig ppp0
 *   https://github.com/waylau/vpngate-mirrors
 
 ```sh
-sudo apt-get install openssl
-sudo apt-get install pam-devel
+$ sudo apt-get install openssl
+$ sudo apt-get install pam-devel
 ```
 
 ```sh
-sudo wget http://www.oberhumer.com/opensource/lzo/download/lzo-2.06.tar.gz
-tar –zxvf lzo-2.06.tar.gz –C /usr/src/
-cd /usr/src/lzo-2.06
-sudo  ./configure --prefix=/usr/local
-sudo make
-sudo make install
+$ sudo wget http://www.oberhumer.com/opensource/lzo/download/lzo-2.06.tar.gz
+$ tar –zxvf lzo-2.06.tar.gz –C /usr/src/
+$ cd /usr/src/lzo-2.06
+$ sudo  ./configure --prefix=/usr/local
+$ sudo make
+$ sudo make install
 ```
 
 ```sh
-sudo unzip openvpn-2.3.10.zip
-cd openvpn-2.3.2
-sudo ./.configure --prefix=/opt/openvpn-2.3.10
-sudo make
-sudo make install
+$ sudo unzip openvpn-2.3.10.zip
+$ cd openvpn-2.3.2
+$ sudo ./.configure --prefix=/opt/openvpn-2.3.10
+$ sudo make
+$ sudo make install
 ```
 
 ```sh
-sudo apt-get install easy-rsa
-sudo apt-get install openvpn
+$ sudo apt-get install easy-rsa
+$ sudo apt-get install openvpn
 ```
 
 ### Docker VPN

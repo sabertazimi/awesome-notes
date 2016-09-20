@@ -26,12 +26,12 @@ NPM="cnpm"
 
 function BeforeInstall()
 {
-    sudo sh -c "echo "prepend domain-name-servers 127.0.0.1;" >> /etc/dhcp/dhclient.conf"
-    sudo sh -c "echo "prepend domain-name-servers 114.114.114.114;" >> /etc/dhcp/dhclient.conf"
-    sudo sh -c "echo "prepend domain-name-servers 223.5.5.5;" >> /etc/dhcp/dhclient.conf"
+    echo "prepend domain-name-servers 127.0.0.1;" | sudo tee -a /etc/dhcp/dhclient.conf
+    echo "prepend domain-name-servers 114.114.114.114;" | sudo tee -a /etc/dhcp/dhclient.conf
+    echo "prepend domain-name-servers 223.5.5.5;" | sudo tee -a /etc/dhcp/dhclient.conf
 
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    sudo sh -c "echo "deb http://dl.google.com/linux/deb/ stable main" >> /etc/apt/sources.list"
+    echo "deb http://dl.google.com/linux/deb/ stable main" | sudo tee -a /etc/apt/sources.list
 
     wget -O ~/XX-Net.zip https://codeload.github.com/XX-net/XX-Net/zip/3.1.19
     unzip ~/XX-Net.zip -d ~/
