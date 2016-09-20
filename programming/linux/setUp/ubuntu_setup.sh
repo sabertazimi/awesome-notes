@@ -19,6 +19,7 @@ ROOT_DIR=$(pwd) #do not change
 ACTION="all"
 SRC_DIR=${HOME}/Work/Source
 GIT_CONFIG="./config/ubuntu_16.04.ini"
+NPM="cnpm"
 # }}}
 
 # function definition {{{
@@ -48,6 +49,47 @@ function AptInstall()
     fi
 	if [[ $ans =~ [Yy] || PROMPT -eq 0 ]]; then
         sudo apt-get install $1 --allow-unauthenticated -y || AptSingleInstall "$1"
+        sleep 1
+	else
+		echo -e  "\n\nAbort install\n"
+	fi
+    IFS=${oldifs}
+}
+
+function BeforeNpmInstall()
+{
+    AptInstall "nodejs npm" || echo -e "node install failed\n" >> ${LOG_FILE}
+    echo -e "\nnode update ...\n"
+    sudo npm install -g n && sudo n stable || echo -e "node update failed\n" >> ${LOG_FILE}
+    echo -e "\ncnpm install ...\n"
+    sudo npm install -g cnpm
+}
+
+# $1:node modules list to install..
+function NpmSingleInstall()
+{
+    local oldifs=${IFS}
+    IFS=" "
+    for i in $1
+    do
+        sudo ${NPM} install -g $i || echo -e "npm install failed : $i\n" >> ${LOG_FILE}
+    done
+    IFS=${oldifs}
+}
+
+function NpmInstall()
+{
+    local oldifs=${IFS}
+    IFS=" "
+    ans=""
+    if [[  $1 =~  ^[\ ]*$ ]]; then
+        return 3
+    fi
+    if [[  PROMPT -eq 1  ]]; then
+        read -n1 -p "Install $1 ?(y/n)" ans
+    fi
+	if [[ $ans =~ [Yy] || PROMPT -eq 0 ]]; then
+        sudo ${NPM} install -g $1 || NpmSingleInstall "$1"
         sleep 1
 	else
 		echo -e  "\n\nAbort install\n"
@@ -149,7 +191,7 @@ function OmuShowHelp()
 {
     PrintInfo
     echo -e "\n$1"
-    echo -e "\nUsage:`basename $0` [-f <path of ini file>] [-a all|ppa|apt|download|build] [-h]\n"
+    echo -e "\nUsage:`basename $0` [-f <path of ini file>] [-a all|ppa|apt|npm|download|build] [-h]\n"
 }
 
 function ProcessOptionA()
@@ -161,6 +203,8 @@ function ProcessOptionA()
         ppa )
             ;;
         apt )
+            ;;
+        npm )
             ;;
         download )
             ;;
@@ -295,6 +339,18 @@ if [[  ${ACTION} == "all" || ${ACTION} == "apt" ]]; then
     for i in ${apt_list}; do
         if [[ $i != "" ]]; then
             AptInstall $i
+        fi
+    done
+fi
+
+if [[  ${ACTION} == "all" || ${ACTION} == "npm" ]]; then
+    echo -e "\n\nNode install ...\n"
+    BeforeNpmInstall
+    echo -e "\n\nNpm install ...\n"
+    npm_list=$(git config --get-all npm.modules)
+    for i in ${npm_list}; do
+        if [[ $i != "" ]]; then
+            NpmInstall $i
         fi
     done
 fi

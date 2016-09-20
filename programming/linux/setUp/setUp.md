@@ -3,10 +3,6 @@
 	* [Language](#language)
 	* [Git](#git)
 	* [DHCP](#dhcp)
-	* [Platform](#platform)
-		* [Nodejs](#nodejs)
-			* [Npm](#npm)
-			* [Global Awesome Packages](#global-awesome-packages)
 	* [Chrome](#chrome)
 		* [XX-Net](#xx-net)
 		* [Extensions](#extensions)
@@ -85,32 +81,6 @@ prepend domain-name-servers 127.0.0.1;
 
 prepend domain-name-servers 114.114.114.114;
 prepend domain-name-servers 223.5.5.5;
-```
-## Platform
-
-### Nodejs
-
-```shell
-sudo apt install nodejs nodejs-dev
-sudo apt install npm
-```
-
-#### Npm
-
-```shell
-sudo npm install -g n
-sudo n stable
-```
-
-#### Global Awesome Packages
-
-```shell
-sudo npm install -g cnpm 
-sudo cnpm install -g bower gulp webpack babel-cli lebab
-sudo cnpm install -g gh-pages tooling antd-init
-sudo cnpm install -g npm-check standard jslint jshint
-sudo cnpm install -g nodemon express express-generator
-sudo cnpm install -g speed-test
 ```
 
 ## Chrome
