@@ -59,10 +59,28 @@ function AptInstall()
 function BeforeNpmInstall()
 {
     AptInstall "nodejs npm" || echo -e "node install failed\n" >> ${LOG_FILE}
-    echo -e "\nnode update ...\n"
-    sudo npm install -g n && sudo n stable || echo -e "node update failed\n" >> ${LOG_FILE}
-    echo -e "\ncnpm install ...\n"
-    sudo npm install -g cnpm
+
+    if [[  PROMPT -eq 1  ]]; then
+        read -n1 -p "Update node ?(y/n)" ans
+    fi
+	if [[ $ans =~ [Yy] || PROMPT -eq 0 ]]; then
+        echo -e "\nUpdate node ...\n"
+        sudo npm install -g n && sudo n stable || echo -e "node update failed\n" >> ${LOG_FILE}
+        sleep 1
+	else
+		echo -e  "\n\nAbort update\n"
+	fi
+
+    if [[  PROMPT -eq 1  ]]; then
+        read -n1 -p "Install cnpm ?(y/n)" ans
+    fi
+	if [[ $ans =~ [Yy] || PROMPT -eq 0 ]]; then
+        echo -e "\nInstall cnpm ...\n"
+        sudo npm install -g cnpm
+        sleep 1
+	else
+		echo -e  "\n\nAbort install\n"
+	fi
 }
 
 # $1:node modules list to install..
