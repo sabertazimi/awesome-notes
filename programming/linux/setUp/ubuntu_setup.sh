@@ -24,6 +24,23 @@ NPM="cnpm"
 
 # function definition {{{
 
+function BeforeInstall()
+{
+    sudo sh -c "echo "prepend domain-name-servers 127.0.0.1;" >> /etc/dhcp/dhclient.conf"
+    sudo sh -c "echo "prepend domain-name-servers 114.114.114.114;" >> /etc/dhcp/dhclient.conf"
+    sudo sh -c "echo "prepend domain-name-servers 223.5.5.5;" >> /etc/dhcp/dhclient.conf"
+
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    sudo sh -c "echo "deb http://dl.google.com/linux/deb/ stable main" >> /etc/apt/sources.list"
+
+    wget -O ~/XX-Net.zip https://codeload.github.com/XX-net/XX-Net/zip/3.1.19
+    unzip ~/XX-Net.zip -d ~/
+    rm -fr ~/XX-Net.zip
+    sudo touch /usr/local/bin/chrome
+    echo "nohup ~/XX-Net-3.1.19/start & >/dev/null 2>&1" | sudo tee -a /usr/local/bin/chrome
+    sudo chmod +x /usr/local/bin/chrome
+}
+
 # $1:software list to install..
 function AptSingleInstall()
 {
@@ -322,6 +339,8 @@ if [[  ${ans} =~ [yY] ]]; then
 else
     PROMPT=1
 fi
+
+BeforeInstall
 
 if [[  ${ACTION} == "all" || ${ACTION} == "ppa" ]]; then
     ppa_list=$(git config --get-all repo.ppa)

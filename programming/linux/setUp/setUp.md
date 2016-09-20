@@ -2,16 +2,12 @@
 * [Linux Set Up](#linux-set-up)
 	* [Language](#language)
 	* [Git](#git)
-	* [DHCP](#dhcp)
-	* [Chrome](#chrome)
-		* [XX-Net](#xx-net)
-		* [Extensions](#extensions)
+	* [Extensions](#extensions)
 	* [Aria2](#aria2)
 	* [ Fonts](#-fonts)
 	* [IDE](#ide)
 		* [ Android Studio/WebStorm/CLion](#-android-studiowebstormclion)
 	* [Text Editor](#text-editor)
-		* [Vim(Github)](#vimgithub)
 		* [Sublime Text](#sublime-text)
 		* [Atom](#atom)
 		* [Visual Studio Code](#visual-studio-code)
@@ -22,9 +18,6 @@
 	* [Shell Tools](#shell-tools)
 		* [f-irc/irssi (irc client)](#f-ircirssi-irc-client)
 		* [pppoeconf/speedtest-cli](#pppoeconfspeedtest-cli)
-	* [Config](#config)
-		* [Terminal](#terminal)
-		* [zsh](#zsh)
 	* [GFW](#gfw)
 		* [Hosts](#hosts)
 		* [Lantern](#lantern)
@@ -72,35 +65,7 @@ $ git config --global alias.p "push"
 $ git config list
 ```
 
-## DHCP
-
-```sh
-sudo vim /etc/dhcp/dhclient.conf
-
-prepend domain-name-servers 127.0.0.1;
-
-prepend domain-name-servers 114.114.114.114;
-prepend domain-name-servers 223.5.5.5;
-```
-
-## Chrome
-
-```shell
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-sudo vi /etc/apt/sources.list << deb http://dl.google.com/linux/deb/ stable main
-```
-
-### XX-Net
-
-*   download
-
-https://github.com/XX-net/XX-Net/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95
-
-```shell
-nohup ~/XX-Net-3.1.19/start & >/dev/null 2>&1
-```
-
-### Extensions
+## Extensions
 
 *   SwitchyOmega
 *   Tempermonkey
@@ -220,8 +185,8 @@ import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc5
 
 ```sh
 git clone https://github.com/sabertazimi/Awesome-Sublime
-cd Awesome-Sublime
-cp -fr User ~/.config/sublime-text-3/Packages/
+mv ~/.config/sublime-text-3/Packages/User ~/.config/sublime-text-3/Packages/User.bk
+cp -fr Awesome-Sublime/User ~/.config/sublime-text-3/Packages/
 ```
 
 ### Atom
@@ -280,28 +245,6 @@ sudo pon dsl-provider
 sudo poof
 ifconfig ppp0
 ```
-
-## Config
-
-### Terminal
-
-```sh
-$ sudo update-alternatives --config x-terminal-emulator
-```
-
-### zsh
-
-```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-```
-
-```shell
-vi /etc/passwd
-vi ~/.zshrc
-```
-
-*   theme : rkj-repos candy ys robbyrussell
-*   plugins=(vi-mode git github go golang gradle history screen cp emoji man node npm sudo)
 
 ## GFW
 

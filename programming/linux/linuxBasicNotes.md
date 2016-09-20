@@ -559,6 +559,21 @@ make install
 ```
 e.g apche  /var/www/html/index.html  /usr/local/apache/htdocs/index.html
 
+### 网络连接命令
+
+#### wget
+
+*   下载全站资料
+*   -P  表示下载到哪个目录
+*   -r  表示递归下载
+*   -np 表示不下载旁站连接.
+*   -k  表示将下载的网页里的链接修改为本地链接.
+*   -p  获得所有显示网页所需的元素
+
+```sh
+wget -r -p -np -k -P ~/tmp/ http://java-er.com
+```
+
 ### 网络管理命令
 
 #### arp -a ——显示地址解析协议(IP地址—网卡地址)
