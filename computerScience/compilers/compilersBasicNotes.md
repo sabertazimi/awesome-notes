@@ -2246,3 +2246,32 @@ int main(void) {
 ### Cool(Classrom Object-Oriented Language)
 
 *   [Awesome Reference](http://web.stanford.edu/class/cs143/materials/cool-manual.pdf)
+
+### Parser Implemention
+
+```cpp
+// 返回下一个Token(只测试该Token，不向前移动Token List的offset指针)
+Token Peek(void);
+```
+
+```cpp
+// 消费下一个Token
+Token Next(void);
+```
+
+```cpp
+// void Expect(expectedToken)
+if (Peek() != expectedToken) {
+    Error("expect %s, but got %s\n", expectedToken, Peek());
+}
+```
+
+```cpp
+// void Try(expectedToken)
+if (Peek() == expectedToken) {
+    Next(); // 消费之
+    return true;
+}
+
+return false;
+```
