@@ -26,6 +26,7 @@ NPM="cnpm"
 
 function BeforeInstall()
 {
+    alias sudo="sudo"
     echo "prepend domain-name-servers 127.0.0.1;" | sudo tee -a /etc/dhcp/dhclient.conf
     echo "prepend domain-name-servers 114.114.114.114;" | sudo tee -a /etc/dhcp/dhclient.conf
     echo "prepend domain-name-servers 223.5.5.5;" | sudo tee -a /etc/dhcp/dhclient.conf
@@ -39,6 +40,7 @@ function BeforeInstall()
     sudo touch /usr/local/bin/chrome
     echo "nohup ~/XX-Net-3.1.19/start & >/dev/null 2>&1" | sudo tee -a /usr/local/bin/chrome
     sudo chmod +x /usr/local/bin/chrome
+    alias sudo="echo "${mypasswd}" | sudo -S"
 }
 
 # $1:software list to install..
@@ -340,7 +342,7 @@ else
     PROMPT=1
 fi
 
-BeforeInstall
+# BeforeInstall
 
 if [[  ${ACTION} == "all" || ${ACTION} == "ppa" ]]; then
     ppa_list=$(git config --get-all repo.ppa)
