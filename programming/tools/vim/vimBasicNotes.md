@@ -712,7 +712,7 @@ q/ 或 q: 弹出历史记录窗口
 
 > register为小写时,覆盖录制宏;register为大写时,追加录制宏
 
-## 工具
+## Tools
 
 ### Vundle
 
@@ -817,3 +817,8 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extr
 |`<C-h>`(与`<BS>`)|从当前匹配项中删除一个字符|
 |`<C-l>`|从当前匹配项中增加一个字符|
 |{char}|中止自动补全并插入字符{char}|
+
+### git
+
+*   Gblame + key o
+*   Glog
