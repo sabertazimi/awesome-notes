@@ -821,4 +821,7 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extr
 ### git
 
 *   Gblame + key o
-*   Glog
+*   Glog + `[q`/`]q`/`[Q`/`]Q`
+*   Gdiff
+*   Gcommit/Gstatus
+*   Gpull/Gpush
