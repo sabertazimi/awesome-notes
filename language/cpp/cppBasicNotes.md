@@ -5,15 +5,21 @@
 	* [变量、类型与函数](#变量类型与函数)
 		* [变量](#变量)
 		* [指针](#指针)
+		* [reference (引用类型)](#reference-引用类型)
+			* [性质](#性质)
+			* [作为函数参数](#作为函数参数)
+			* [特性](#特性)
 		* [类型](#类型)
 			* [volatile](#volatile)
-			* [reference (引用类型)](#reference-引用类型)
-				* [性质](#性质)
-				* [作为函数参数](#作为函数参数)
-				* [特性](#特性)
+		* [运算符](#运算符)
+			* [sizeof](#sizeof)
 		* [Expression (表达式)](#expression-表达式)
+			* [左/右值表达式](#左右值表达式)
+		* [联合(union)](#联合union)
+		* [位段](#位段)
 		* [函数](#函数)
 			* [参数的默认值(defalut)](#参数的默认值defalut)
+			* [内联函数(inline)](#内联函数inline)
 	* [类](#类)
 		* [访问控制权限](#访问控制权限)
 		* [派生控制权限](#派生控制权限)
@@ -22,6 +28,8 @@
 			* [功能](#功能)
 		* [析构函数](#析构函数)
 		* [`new` 与 `delete`/`delete []`](#new-与-deletedelete-)
+			* [stack 与 heap](#stack-与-heap)
+			* [普通指针与成员指针](#普通指针与成员指针)
 		* [成员指针 与 指针成员](#成员指针-与-指针成员)
 			* [成员指针 - 指向成员的指针](#成员指针---指向成员的指针)
 			* [定义含指针成员(成员是个指针)的类](#定义含指针成员成员是个指针的类)
@@ -40,6 +48,7 @@
 			* [特性](#特性-3)
 			* [功能](#功能-1)
 			* [纯虚函数 与 抽象类](#纯虚函数-与-抽象类)
+			* [使用](#使用)
 	* [作用域(Scope)](#作用域scope)
 		* [面向过程的作用域](#面向过程的作用域)
 		* [面向对象的作用域](#面向对象的作用域)
@@ -50,6 +59,13 @@
 	* [异常](#异常)
 		* [异常对象的析构](#异常对象的析构)
 	* [多态](#多态)
+	* [STL](#stl)
+		* [Container](#container)
+		* [Methods](#methods)
+			* [empty/size](#emptysize)
+			* [assign/insert/erase](#assigninserterase)
+			* [erase/remove](#eraseremove)
+			* [reserve/swap](#reserveswap)
 	* [Awesome Tips / Best Practice](#awesome-tips--best-practice)
 
 # C++ Basic Notes
@@ -199,6 +215,19 @@ i++;
 y + 2;
 ```
 
+### 联合(union)
+
+匿名联合具有以下性质:
+
+*   没有对象的全局匿名联合必须 static
+*   只可定义 public 成员
+*   数据成员与联合本身作用域相同
+*   数据成员共享存储空间
+
+### 位段
+
+class/struct/union 都可定义位段成员, 但类型必须为 char/short/int/enum, 不可为 long/float/array/class
+
 ### 函数
 
 #### 参数的默认值(defalut)
@@ -227,6 +256,7 @@ int foo(int x, int y = x++);    // error
 *   内联成功后, 原函数会被编译器清除
 *   不管内联是否成功, 内联函数作用域局限于当前源文件
 *   全局 extern main 函数不能定义为内联函数(否则会使得主函数作用域变小, 操作系统无法访问主函数)
+*   在类体内实现的任何函数自动变为内联函数
 
 ## 类
 
@@ -319,10 +349,16 @@ String::~String() {
 
 ### `new` 与 `delete`/`delete []`
 
--   实例化有构造函数的类时,只能用 new, 不能用 malloc
--   回收有析构函数的类时,只能用 delete, 不能用 free
--   为普通指针变量分配/回收内存单元: 可用 malloc/new/free/delete
-*   new/malloc 返回堆指针, delete/free 的对象都是堆指针, 而 CLASS c(3) 创建在栈上
+#### stack 与 heap
+
+*   string str("sabertazimi") 创建在栈上, 自动析构
+*   new/malloc 返回堆指针, delete/free 的对象都是堆指针, 完全由程序员管理创建与回收
+
+#### 普通指针与成员指针
+
+*   普通指针/不含指针成员的对象变量分配/回收内存可**混用** malloc/new/free/delete/delete []
+*   创建/回收含有**指针成员**的类时,只能用 new/delete/delete [](分配对象内存+调用构造/析构函数), 不能用 malloc/free(只作用于对象本身,不调用构造/析构函数,即不为指针成员分配/回收内存), 否则会造成**指针成员**未分配内存/内存泄露
+*   new 对象数组实质: malloc 对象 + 调用对象无参构造函数
 
 ### 成员指针 与 指针成员
 
