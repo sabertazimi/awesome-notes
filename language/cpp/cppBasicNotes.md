@@ -28,16 +28,18 @@
 			* [特殊成员的初始化](#特殊成员的初始化)
 			* [构造函数体](#构造函数体)
 			* [默认无参构造函数](#默认无参构造函数)
+			* [深拷贝构造函数](#深拷贝构造函数)
 		* [析构函数](#析构函数)
 		* [`new` 与 `delete`/`delete []`](#new-与-deletedelete-)
 			* [stack 与 heap](#stack-与-heap)
-			* [普通指针与成员指针](#普通指针与成员指针)
+			* [指针成员](#指针成员)
 		* [this 指针](#this-指针)
 		* [成员指针 与 指针成员](#成员指针-与-指针成员)
 			* [成员指针 - 指向成员的指针](#成员指针---指向成员的指针)
-			* [定义含指针成员(成员是个指针)的类](#定义含指针成员成员是个指针的类)
+			* [定义含指针成员的类](#定义含指针成员的类)
 		* [函数成员](#函数成员)
-			* [const/volatile 关键字修饰](#constvolatile-关键字修饰)
+			* [const/volatile 关键字](#constvolatile-关键字)
+			* [mutable 关键字](#mutable-关键字)
 		* [静态成员](#静态成员)
 			* [静态数据成员](#静态数据成员)
 			* [特性](#特性-1)
@@ -313,7 +315,19 @@ B z(7, 8); => B z(7, 8);    ///< 2 参
 B z = (7, 8); => B z(8);    ///< 1 参
 ```
 
+#### 深拷贝构造函数
+
 *   形式为 Foo:Foo(Foo &obj) 的构造函数,可使得对象作为实参传递时自动进行深拷贝复制
+
+```cpp
+ARRAY::ARRAY(ARRAY &r) {
+    p = new int[size = r.size];
+
+    for (int i = 0;i < size; i++) {
+        p[i] = r.p[i];
+    }
+}
+```
 
 ### 析构函数
 
@@ -370,9 +384,9 @@ String::~String() {
 #### stack 与 heap
 
 *   string str("sabertazimi") 创建在栈上, 自动析构
-*   new/malloc 返回堆指针, delete/free 的对象都是堆指针, 完全由程序员管理创建与回收
+*   new/malloc 返回堆指针, delete/free 的对象是堆指针/(&引用变量), 完全由程序员管理创建与回收
 
-#### 普通指针与成员指针
+#### 指针成员
 
 *   普通指针/不含指针成员的对象变量分配/回收内存可**混用** malloc/new/free/delete/delete []
 *   创建/回收含有**指针成员**的类时,只能用 new/delete/delete [](分配对象内存+调用构造/析构函数), 不能用 malloc/free(只作用于对象本身,不调用构造/析构函数,即不为指针成员分配/回收内存), 否则会造成**指针成员**未分配内存/内存泄露
@@ -384,19 +398,30 @@ String::~String() {
 
 *   this 指针指向对象起始地址处(对象首成员地址)
 *   一般函数: `class_type *const this;`
-*   const 函数: `const class_type *const this`
+*   const 函数: `const class_type *const this;`, 可以修改 this 所指对象的**非只读静态数据成员**
+*   volatile 函数: `volatile class_type *const this;`
+*   当 this 指针类型不同时, 亦会**产生重载函数**
 
 ### 成员指针 与 指针成员
 
 #### 成员指针 - 指向成员的指针
 
-考虑到越界问题,成员指针不可移动
+*   成员指针**不是地址**, 而是**偏移量**
+*   考虑到越界问题,成员指针不可移动
+*   成员指针不可进行类型转换, 不可将其转换为其他类型, 也不可将其他类型转换为它
 
 ```cc
-int A::*pi = &A::i;
+int A::*pi = &A::i;         ///< 数据成员指针
+int (A::*pf)(void) = &A::f;     ///< 函数成员指针
+
+long x = a.*pi;     ///< x = a.*pi = a.*(&A::i) = a.A::i = a.i;
+x = (a.*pf)();      ///< x = (a.*pf)() = (a.*(&A::f))() = (a.A::f)() = a.f()
+
+pi++, pf+=1;        ///< Error: 成员指针不可移动
+x = (long)pi;       ///< Error: pi 不能转换为 long int
 ```
 
-#### 定义含指针成员(成员是个指针)的类
+#### 定义含指针成员的类
 
 -   深拷贝构造函数: T(const T &)
 -   深拷贝赋值运算函数: virtual T& operator=(const T &)
@@ -406,11 +431,17 @@ int A::*pi = &A::i;
 
 ### 函数成员
 
-#### const/volatile 关键字修饰
+#### const/volatile 关键字
 
--   修饰函数成员隐含参数 - this 对象指针,表示不可修改/挥发对象
--   被修饰函数成员不能修改对象自身(即对象的**普通数据成员**), 可以修改对象的**静态**数据成员
--   构造函数/析构函数不可被 const/volatile 修饰
+*   修饰函数成员隐含参数 * this 对象指针,表示不可修改/挥发对象
+*   被修饰函数成员不能修改对象自身(即对象的**普通数据成员**), 可以修改对象的**非只读静态**数据成员
+*   构造函数/析构函数不可被 const/volatile 修饰: 在构造/析构函数中, 对象必须可以被修改(No const), 且处于稳定状态(No volatile)
+
+#### mutable 关键字
+
+*   mutable 不可修饰引用成员
+*   mutable 成员不可用 const/volatile/static 修饰
+*   const 函数中可以修改 mutable 成员
 
 ### 静态成员
 
@@ -504,12 +535,71 @@ struct A {
 
 #### 命名空间(namespace)
 
--   指定一个完全的命名空间时, 不会将任何标识符加入当前作用域. 可重新定义同名局部符号
--   指定一个命名空间的具体成员时, 会将成员符号加入当前作用域
--   可以为嵌套命名空间定义别名
+*   指定一个完全的命名空间时, 不会将任何标识符加入当前作用域. 可**重新定义**同名局部符号
 
 ```cpp
+namespace A {
+    int a = 0;
+    namespace B {
+        int a = 0;
+    }
+    namespace C {
+
+    }
+    namespace D {
+
+    }
+    using namespace B;
+    using namespace C;
+}
+
+using namespace A;
+int a = 5;      ///< Right: 全局变量 a 与 A中的a 同名
+```
+
+*   指定一个命名空间的具体成员时, 会将成员符号加入当前作用域
+
+```cpp
+namespace A {
+    float a = 0,
+          b = 0;
+    float d(float y) {
+        return y;
+    }
+}
+
+namespace B {
+    void g(void) {
+        cout<<"B\n">>;
+    }
+}
+
+int main(void) {
+    using A::a;
+    using A::d;
+    using B::g;
+    
+    long a = 1;     ///< Error: a 已被加入当前 main 函数作用域(A::a), 不可重复定义
+    a = d(2.1);     ///< Right: A::a = A::d(2.1);
+
+    return 0;
+}
+```
+
+*   可以为嵌套命名空间定义别名
+
+```cpp
+namespace A {
+    namespace B {
+        namespace C {
+            int k = 4;
+        }
+    }
+}
+
 namespace ABCD = A::B::C;
+
+using ABCD::k;      ///< refer to A::B::C::k
 ```
 
 ## 运算符重载
