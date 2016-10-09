@@ -37,11 +37,20 @@ function BeforeInstall()
     # wget -O ~/XX-Net.zip https://codeload.github.com/XX-net/XX-Net/zip/3.1.19
     # unzip ~/XX-Net.zip -d ~/
     # rm -fr ~/XX-Net.zip
+    # echo "nohup ~/XX-Net-3.1.19/start & >/dev/null 2>&1" | sudo tee -a /usr/local/bin/chrome
+
+    sudo touch /usr/local/bin/ssh_D
+    echo "ssh -qTfnN -D 7070 bwg" | sudo tee -a /usr/local/bin/ssh_D
+    sudo chmod +x /usr/local/bin/ssh_D
+
+    sudo touch /usr/local/bin/sssocks
+    echo "nohup sslocal -c ~/ss_config.json > ~/.ss_log &" | sudo tee -a /usr/local/bin/sssocks
+    sudo chmod +x /usr/local/bin/sssocks
 
     sudo touch /usr/local/bin/chrome
-    echo "ssh -qTfnN -D 7070 bwg\nnohup google-chrome &" | sudo tee -a /usr/local/bin/chrome
-    # echo "nohup ~/XX-Net-3.1.19/start & >/dev/null 2>&1" | sudo tee -a /usr/local/bin/chrome
+    echo "nohup google-chrome > ~/.chrome_log &" | sudo tee -a /usr/local/bin/chrome
     sudo chmod +x /usr/local/bin/chrome
+
     alias sudo="echo "${mypasswd}" | sudo -S"
 }
 
