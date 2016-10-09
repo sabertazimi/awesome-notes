@@ -247,6 +247,7 @@ $ ifconfig ppp0
 
 *   https://github.com/breakwa11/shadowsocks-rss
 *   https://github.com/yangyangwithgnu/autoshadower
+*   https://github.com/shadowsocks/ChinaDNS-Python
 
 ### sshuttle
 
@@ -261,54 +262,6 @@ $ ifconfig ppp0
 *   https://github.com/OpenVPN/openvpn
 *   https://github.com/waylau/vpngate-mirrors
 
-```sh
-$ sudo apt-get install openssl
-$ sudo apt-get install pam-devel
-```
-
-```sh
-$ sudo wget http://www.oberhumer.com/opensource/lzo/download/lzo-2.06.tar.gz
-$ tar –zxvf lzo-2.06.tar.gz –C /usr/src/
-$ cd /usr/src/lzo-2.06
-$ sudo  ./configure --prefix=/usr/local
-$ sudo make
-$ sudo make install
-```
-
-```sh
-$ sudo unzip openvpn-2.3.10.zip
-$ cd openvpn-2.3.2
-$ sudo ./.configure --prefix=/opt/openvpn-2.3.10
-$ sudo make
-$ sudo make install
-```
-
-```sh
-$ sudo apt-get install easy-rsa
-$ sudo apt-get install openvpn
-```
-
 ### Docker VPN
 
 *   https://github.com/hwdsl2/docker-ipsec-vpn-server
-
-## Windows
-
-### Imitate Linux
-
-*   Wox
-*   Cygwin
-*   chocalate
-
-### Software
-
-*   360 safe
-*   google chrome
-*   sougoupinyin
-*   haozip
-*   qq
-*   baiduyun
-*   thunder
-*   netease music
-*   office
-*   nodejs: cash
