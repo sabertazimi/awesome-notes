@@ -136,11 +136,22 @@ Host cloud
     HostName xx.org
     User  root
     IdentityFile ~/.ssh/dsl_private_key
+Host bwg
+    HostName 23.106.150.152
+    User root
+    Port 29692
 ```
 
-```shell
+```sh
 $ git clone git@github.com:user/repo
 $ git clone git@cs.github.com:user/repo
+```
+
+### `ssh -D`
+
+```sh
+$ ssh -qTfnN -D 7070 bwg
+$ google-chrome socks5 127.0.0.1 7070
 ```
 
 ### 密钥文件

@@ -34,11 +34,13 @@ function BeforeInstall()
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     echo "deb http://dl.google.com/linux/deb/ stable main" | sudo tee -a /etc/apt/sources.list
 
-    wget -O ~/XX-Net.zip https://codeload.github.com/XX-net/XX-Net/zip/3.1.19
-    unzip ~/XX-Net.zip -d ~/
-    rm -fr ~/XX-Net.zip
+    # wget -O ~/XX-Net.zip https://codeload.github.com/XX-net/XX-Net/zip/3.1.19
+    # unzip ~/XX-Net.zip -d ~/
+    # rm -fr ~/XX-Net.zip
+
     sudo touch /usr/local/bin/chrome
-    echo "nohup ~/XX-Net-3.1.19/start & >/dev/null 2>&1" | sudo tee -a /usr/local/bin/chrome
+    echo "ssh -qTfnN -D 7070 bwg\nnohup google-chrome &" | sudo tee -a /usr/local/bin/chrome
+    # echo "nohup ~/XX-Net-3.1.19/start & >/dev/null 2>&1" | sudo tee -a /usr/local/bin/chrome
     sudo chmod +x /usr/local/bin/chrome
     alias sudo="echo "${mypasswd}" | sudo -S"
 }
