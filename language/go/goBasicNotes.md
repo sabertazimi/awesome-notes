@@ -148,7 +148,108 @@ type Vertex struct {
     Y int
 }
 
-fmt.Println(Vertex{1, 2})
+var (
+    v1 = Vertex{1, 2}
+    v2 = Vertex{X: 1}   // Y: 0
+    v3 = Vertex{}       // X: 0, Y: 0
+    vp = &Vertex{1, 2}  // *Vertex
+)
+```
+
+### array
+
+数组的长度是其类型的一部分
+
+```go
+var a [2]string
+a[0] = "Hello"
+a[1] = "Golang"
+
+fmt.Println(a[0], a[1])
+fmt.Println(a)
+```
+
+### slice
+
+*   s[lo:lo] == nil
+
+```go
+p := []int{2, 3, 5, 7, 11, 13}
+
+fmt.Println("p[1:4] ==", p[1:4])
+fmt.Println("p[:3] ==", p[:3])  // p[0:3]        => 0, 1, 2
+fmt.Println("p[4:]" ==, p[4:])  // p[4:len(p)-1] => 4, ..., len(p)-2
+```
+
+*   make 函数创建 slice
+
+```go
+a := make([]int, 5)     // len(a) = 5
+b := make([]int, 0, 5)  // len(b) = 0, cap(b) = 5
+b = b[:cap(5)]          // len(b) = 5, cap(b) = 5
+```
+
+*   len && cap
+
+```go
+// just shorten/extend, not drop elements
+// change len(p), keep cap(p)
+p = p [:0]
+p = p[:4]
+
+// drop its elements
+// change len(p) and cap(p)
+p = p[2:]
+```
+
+*   append
+
+```go
+append(s, 2, 3, 4)
+```
+
+*   range(iterator): 返回 2 个值(index int, element copy(s[index]) T), 在每一次迭代 index+=1
+
+```go
+pow := []int{1, 2, 4, 8, 16, 32, 64, 128}
+
+func main() {
+    for i := range pow {
+        fmt.Printf("index == %d\n", i)
+    }
+
+    for _, v := range pow {
+        fmt.Printf("value == %d\n", v)
+    }
+
+    for i, v := range pow {
+        fmt.Printf("2**%d = %d\n", i, v)
+    }
+}
+```
+
+### map
+
+```go
+type Vertex struct {
+    Lat, Long float64
+}
+
+var m map[string]Vertex = make(map[string]Vertex)
+m["Bell Labs"] = Vertex{
+    40.68433, -74.39967
+}
+
+ml := map[string]Vertex{
+    "Bell Labs": Vertex{
+        40.68433, -74.39967,
+    },
+    "Google": {37.42202, -122.08408},
+}
+
+delete(m, "Bell Labs")
+
+element, ok_flag := m["Google"]
 ```
 
 ## Flow Control
