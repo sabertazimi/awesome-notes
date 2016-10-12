@@ -427,3 +427,151 @@ func main() {
 }
 ```
 
+### Methods
+
+*   Go 中没有 class, 但可以在 struct/同一个包内的type 上(receiver)定义方法
+
+```go
+type Vertex struct {
+    X, Y float64
+}
+
+func (v *Vertex) Abs() float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+func main() {
+    v := &Vertex{3, 4}
+    fmt.Println(v.Abs())
+}
+```
+
+```go
+type MyFloat float64
+
+func (f MyFloat) Abs() float64 {
+    if f < 0 {
+        return float64(-f)
+    } else {
+        return float64(f)
+    }
+}
+
+func main() {
+    f := MyFloat(-math.Sqrt2)
+    fmt.Println(f.Abs())
+```
+
+#### Pointer/Value Receiver
+
+*   pointer receiver: 可以改变原值(call by reference)
+*   value receive: 不可以改变原值(call by value)
+*   调用 methods 时, 可以不考虑 v 是 value/pointer, go 会自动处理
+
+```go
+func (v *Vertex) changeV() {
+    v.X += 1
+    v.Y += 1
+}
+
+v.changeV() => (&v).changeV()
+```
+
+```go
+func (v Vertex) Abs() {
+    return abs(v)
+}
+
+(&v).Abs() => v.Abs()
+```
+
+*   Best Practice: 在同一个类型上定义的所有方法最好统一 receiver 类型(全部 value receivers 或 全部 pointer receivers)
+
+### Interface
+
+#### 值
+
+(value, type)
+
+```go
+var i I
+var t *T
+i = t   // => (nil, *T)
+```
+
+```go
+var i I     // => (nil, nil)
+```
+
+#### Type assetions
+
+*   单返回值: 断言失败时产生 panic
+*   双返回值: 断言失败时不产生 panic
+
+```go
+// create empty interface, ("hello", string)
+var i interface{} = "hello"
+
+s := i.(string)
+s, ok := i.(string) // => true
+f, ok := i.(float64)// => false(no panic)
+f := i.(float64)    // => false with panic
+```
+
+*   type switches
+
+```go
+switch v := i.(type) {
+    case int;
+        fmt.Println("Int.")
+    case string:
+        fmt.Println("String.")
+    default:
+        fmt.Printf("Other type.")
+}
+```
+
+## Concurrent
+
+### goroutine
+
+```go
+go f(x, y, z)   // => excute in a new goroutine with share memory
+```
+
+### channels
+
+typed conduit(类型管道)
+
+```go
+var c chan int = make(chan int)
+
+c <- sum    // send sum to channel c
+v := <-c    // receive from channel c, assign value to v
+```
+
+```go
+func sum(s []int, c chan int) {
+    sum := 0
+
+    for _, v := range s {
+        sum += v
+    }
+
+    c <- sum
+}
+
+func main() {
+    s := []int{7, 2, 8, -9, 4, 0}
+
+    c := make(chan int)
+
+    go sum(s[:len(s)/2], c)
+    go sum(s[len(s/2):], c)
+
+    x, y = <-c, <-c
+
+    fmt.Println(x, y, x+y)
+}
+```
+
