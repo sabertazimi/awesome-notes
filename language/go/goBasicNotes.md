@@ -541,7 +541,8 @@ go f(x, y, z)   // => excute in a new goroutine with share memory
 
 ### channels
 
-typed conduit(类型管道)
+*   typed conduit(类型管道)
+*   block excution
 
 ```go
 var c chan int = make(chan int)
@@ -572,6 +573,58 @@ func main() {
     x, y = <-c, <-c
 
     fmt.Println(x, y, x+y)
+}
+```
+
+#### select
+
+*   select(当所有情况都不满足时)可被阻塞
+
+```go
+for {
+    select {
+        case c <- x:
+            x, y = y, x+y
+        case <- quit:
+            fmt.Println("quit")
+            return
+    }
+}
+```
+
+#### Worker Pools
+
+```go
+package main
+
+import "fmt"
+import "time"
+
+func worker(id int, jobs <-chan int, results chan<- int) {
+    for j := range jobs {
+        fmt.Println("worker", id, "processing job", j)
+        time.Sleep(time.Second)
+        results <- j * 2
+    }
+}
+
+func main() {
+    jobs := make(chan int, 100)
+    results := make(chan int, 100)
+
+    for w := 1; w <= 3; w++ {
+        go worker(w, jobs, results)
+    }
+
+    for j := 1; j <= 9; j++ {
+        jobs <- j
+    }
+
+    close(jobs)
+
+    for a := 1; a <= 9; a++ {
+        <-results
+    }
 }
 ```
 
