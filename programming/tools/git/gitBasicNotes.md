@@ -848,6 +848,10 @@ curl -i http://git.io -F "url=https://github.com/technoweenie" -F "code=t"
 
 #### git fetch
 
+```sh
+$ git fetch <repo_name> <branch_name>
+```
+
 #### git pull
 
 #### git push
