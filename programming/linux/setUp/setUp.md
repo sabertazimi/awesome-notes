@@ -32,7 +32,67 @@
 
 # Linux Set Up
 
-## Language
+## ArchLinux Set Up
+
+### Tutorials
+
+*   [Arch Linux - Jianshu](http://www.jianshu.com/p/960130fb1fa5)
+*   [Linux Toy](https://linuxtoy.org/archives/the-perfect-linux-desktop-arch-linux-2007-08-2-1.html)
+*   [Gist Part 1](https://gist.github.com/bcbcarl/5d3d9c41d728eef395dd)
+*   [Gist Patr 2](https://gist.github.com/bcbcarl/2d4c77cc06955f74bd0b)
+
+### Basic
+
+```sh
+Ctrl+Alt+F1
+# less /usr/share/aif/docs/official_installation_guide_en
+
+Ctrl+Alt+F2
+# install os
+
+Ctrl+Alt+F3
+# pacman -S lynx arch-wiki-docs arch-wiki-lite
+# lynx /usr/share/doc/arch-wiki/html/index.html
+```
+
+```sh
+# systemctl enable dhcpcd
+# reboot
+# pacman -S --needed base-devel git wget jshon expac yajl zsh vim
+```
+
+*   makepkg
+
+```sh
+$ curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/package_name.tar.gz
+$ cd package_name
+$ less PKGBUILD
+$ less package_name.install
+
+$ makepkg -si
+# -s sync deps
+# -i install
+# -r rm deps
+# -c clean up
+```
+
+### Pacman
+
+*   /etc/pacman.conf
+*   /etc/pacman.d/mirrorlist
+
+### AUR
+
+*   [yaourt](https://archlinux.fr/yaourt-en)
+
+```sh
+# packages' list
+$ wget https://aur.archlinux.org/packages.gz
+```
+
+## Ubuntu Set Up
+
+### Language
 
 ```sh
 $ export LANG=en_US
@@ -48,7 +108,7 @@ $ sudo locale-gen zh_CN.GB18030
 $ sudo dpkg-reconfigure locales
 ```
 
-## Git
+### Git
 
 ```sh
 $ sudo apt install git
@@ -65,17 +125,7 @@ $ git config --global alias.p "push"
 $ git config list
 ```
 
-## Extensions
-
-*   SwitchyOmega
-*   Tempermonkey
-*   RSS Reader
-*   Netease Email
-*   Dida List
-*   Zhihu
-*   Bilibili
-
-## Aria2
+### Aria2
 
 ```sh
 $ mkdir -p ~/.aria2
@@ -138,7 +188,7 @@ file-allocation=prealloc
 check-certificate=false
 ```
 
-##  Fonts
+###  Fonts
 
 *   /usr/share/fonts/chinese/TrueType/
 *   [Windows Fonts Download](http://pan.baidu.com/s/1jGRz7ue)
@@ -149,13 +199,13 @@ $ mkfontdir
 $ fc-cache
 ```
 
-## IDE
+### IDE
 
-###  Android Studio/WebStorm/CLion
+####  Android Studio/WebStorm/CLion
 
-## Text Editor
+### Text Editor
 
-### Sublime Text
+#### Sublime Text
 
 ```markdown
 —– BEGIN LICENSE —–
@@ -183,7 +233,7 @@ $ mv ~/.config/sublime-text-3/Packages/User ~/.config/sublime-text-3/Packages/Us
 $ cp -fr Awesome-Sublime/User ~/.config/sublime-text-3/Packages/
 ```
 
-### Atom
+#### Atom
 
 *   plugins: sync-SETTINGS(gist)
 
@@ -193,7 +243,7 @@ $ cp -fr Awesome-Sublime/User ~/.config/sublime-text-3/Packages/
       enabled: false
 ```
 
-### Visual Studio Code
+#### Visual Studio Code
 
 ```sh
 $ sudo apt-get install ubuntu-make
@@ -201,30 +251,30 @@ $ umake web visual-studio-code (--remove)
 $ sudo ln -s /home/hustlyl/.local/share/umake/web/visual-studio-code/Code /usr/local/bin/code
 ```
 
-## Software
+### Software
 
-### [Appearence](https://blog.microideation.com/2016/08/30/customizing-ubuntu-system/)
+#### [Appearence](https://blog.microideation.com/2016/08/30/customizing-ubuntu-system/)
 
-### ZealDocs
+#### ZealDocs
 
 ```sh
 $ sudo apt-get install zeal
 $ sudo apt-get remove appmenu-qt5
 ```
 
-### Desktop
+#### Desktop
 
 ```sh
 $ sudo apt install gnome gnome-shell gnome-panel gnome-menus gnome-session gnome-tweak-tool gdm
 ```
 
-## Shell Tools
+### Shell Tools
 
 [Futher List](http://www.codeceo.com/article/linux-terminal-guide.html)
 
-### f-irc/irssi (irc client)
+#### f-irc/irssi (irc client)
 
-### pppoeconf/speedtest-cli
+#### pppoeconf/speedtest-cli
 
 ```sh
 $ sudo pppoeconf
@@ -233,35 +283,35 @@ $ sudo poof
 $ ifconfig ppp0
 ```
 
-## GFW
+### GFW
 
-### Hosts
+#### Hosts
 
 *   https://github.com/racaljk/hosts
 
-### Lantern
+#### Lantern
 
 *   https://github.com/getlantern/lantern
 
-### Shadowsocks
+#### Shadowsocks
 
 *   https://github.com/breakwa11/shadowsocks-rss
 *   https://github.com/yangyangwithgnu/autoshadower
 *   https://github.com/shadowsocks/ChinaDNS-Python
 
-### sshuttle
+#### sshuttle
 
 *   https://github.com/apenwarr/sshuttle
 
-### Proxychains(Global Proxy)
+#### Proxychains(Global Proxy)
 
 *   https://github.com/rofl0r/proxychains-ng
 
-### OpenVPN && vpngate/vpnbook
+#### OpenVPN && vpngate/vpnbook
 
 *   https://github.com/OpenVPN/openvpn
 *   https://github.com/waylau/vpngate-mirrors
 
-### Docker VPN
+#### Docker VPN
 
 *   https://github.com/hwdsl2/docker-ipsec-vpn-server
