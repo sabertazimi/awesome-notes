@@ -780,6 +780,13 @@ git commit
 git push -u
 ```
 
+### Purge
+
+```sh
+$ git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}')"
+$ git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch your-file-name' --tag-name-filter cat -- --all
+```
+
 ### Wiki
 
 #### Wiki Git Access
