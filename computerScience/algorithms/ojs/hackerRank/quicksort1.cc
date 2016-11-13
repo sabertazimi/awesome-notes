@@ -23,12 +23,13 @@ void partition(vector<int> arr) {
         while (arr[left] < guard) left++;
         while (arr[right] > guard) right--;
 
-        int tmp = arr[left];
-        arr[left] = arr[right];
-        arr[right] = tmp;
-
-        left++;
-        right--;
+        if (left <= right) {
+            int tmp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = tmp;
+            left++;
+            right--;
+        }
     }
 
     int tmp = arr[right];
