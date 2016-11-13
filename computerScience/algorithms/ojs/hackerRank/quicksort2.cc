@@ -10,11 +10,11 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 int partition(vector<int> &arr, int lo, int hi) {
-    // enter code for partitioning and printing here.
     int guard = arr[lo],
         left = lo + 1,
         right = hi;
@@ -36,23 +36,29 @@ int partition(vector<int> &arr, int lo, int hi) {
     arr[right] = arr[lo];
     arr[lo] = tmp;
 
-    for (int i = lo; i < hi; i++) {
-        cout << arr[i] << " ";
-    }
-    cout << arr[hi] << endl;
+    /* for (int i = lo; i < hi; i++) { */
+    /*     cout << arr[i] << " "; */
+    /* } */
+    /* cout << arr[hi] << endl; */
 
-    return right;
+    return right + 1;
 }
 
-void quickSort(vector<int> &arr, int lo, int hi) {
-    // Complete this function
-    if (arr.size() <= 1 || lo >= hi) {
-        return;
-    } else {
+void _quickSort(vector<int> &arr, int lo, int hi) {
+    if (lo < hi) {
         int sep = partition(arr, lo, hi);
-        quickSort(arr, lo, sep-1);
-        quickSort(arr, sep+1, hi);
+        _quickSort(arr, lo, sep-1);
+        _quickSort(arr, sep+1, hi);
+
+        for (int i = lo; i < hi; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << arr[hi] << endl;
     }
+}
+
+void quickSort(vector<int> &arr) {
+    _quickSort(arr, 0, arr.size() - 1);
 }
 
 int main(void) {
@@ -65,7 +71,12 @@ int main(void) {
         cin >> arr[i];
     }
 
-    quickSort(arr, 0, arr.size() - 1);
+    quickSort(arr);
+
+    /* for (int i = 0; i < arr.size() - 1; i++) { */
+    /*     cout << arr[i] << " "; */
+    /* } */
+    /* cout << arr[arr.size() - 1] << endl; */
 
     return 0;
 }

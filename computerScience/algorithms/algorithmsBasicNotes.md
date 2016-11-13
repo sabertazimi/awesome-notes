@@ -48,14 +48,24 @@
 
 ## Sorting Algorithm
 
-1. Selection Sort
-2. Insertion Sort-Shell Sort
-3. Merge Sort
-4. Quick Sort
-5. Heap Sort(Priority Queue)
-6. Radix-Sorts 基数排序(可用于混乱shuffle数组):
-    -   从个位到高位放入桶
-    -   从高位到个位放入桶
+### Selection Sort
+
+### Insertion Sort-Shell Sort
+
+### Merge Sort
+
+### Quick Sort
+
+*   partition: 哨兵(最后再将其归位) + 大循环 + 2 小循环, 交换元素法
+*   partition: 辅助数组 brr, 3 循环(3 次扫描 arr) 分别将小/等/大于 guard 的数加入 brr
+*   partition: 哨兵(最后再将其归位) + lo + hi, 外加 2 个动指针 leftlimit 与 rightlimit, 表示小于区的上界和大于区的上界
+
+### Heap Sort(Priority Queue)
+
+### Radix-Sorts 基数排序(可用于混乱shuffle数组):
+
+*   从个位到高位放入桶
+*   从高位到个位放入桶
 
 > Sorting Algorithms Performance
 
