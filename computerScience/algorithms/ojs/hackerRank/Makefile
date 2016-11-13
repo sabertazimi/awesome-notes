@@ -14,7 +14,7 @@ run:
 	./$(PROG).out
 
 clean:
-	rm -fr ./$(PROG).out
+	rm -fr ./*.out
 
 debug:
 	gdb $(PROG).out -q -ex "b $(PROG).cc:1" -ex "r"
