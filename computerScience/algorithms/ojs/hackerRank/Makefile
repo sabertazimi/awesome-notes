@@ -3,7 +3,7 @@
 # sabertazimi, 2016-11-13 17:29
 #
 
-PROG=quicksort5
+PROG=select2
 
 all:
 	g++ -o $(PROG).out -g $(PROG).cc
