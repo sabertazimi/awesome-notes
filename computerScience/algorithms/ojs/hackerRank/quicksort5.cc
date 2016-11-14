@@ -35,25 +35,25 @@ void _quickSort(vector<int> &arr, int lo, int hi) {
     stack<int> st;     // change recursion to iteration by stack
 
     while (1) {
-        // sort the smaller sub-array
+        // sorting while loop
         while (lo < hi) {
             spot = partition(arr, lo, hi);
 
             if (spot - lo < hi - spot) {
-                // push limits of larger sub-array into stack
+                // push the limits of larger sub-array into stack
                 // to make larger sub-array get sorted later than smaller ones
                 st.push(spot + 1);
                 st.push(hi);
 
-                // sort the smaller sub-array
+                // sort the smaller sub-array first
                 hi = spot - 1;
             } else {
-                // push limits of larger sub-array into stack
+                // push the limits of larger sub-array into stack
                 // to make larger sub-array get sorted later than smaller ones
                 st.push(lo);
                 st.push(spot - 1);
 
-                // sort the smaller sub-array
+                // sort the smaller sub-array first
                 lo = spot + 1;
             }
         }
@@ -62,6 +62,8 @@ void _quickSort(vector<int> &arr, int lo, int hi) {
         if (st.empty()) {
             break;
         } else {
+            // else, get the limits of larger sub-array
+            // then sort the larger sub-array
             hi = st.top();
             st.pop();
             lo = st.top();
