@@ -16,23 +16,25 @@
 using namespace std;
 
 int partition(vector<int> &arr, int lo, int hi) {
-    int pivot = hi,
-        lq = lo - 1;
+    int guard = hi,     ///< the index of guard element
+        lq = lo - 1;    ///< the limit of less/equal element area
 
-    for (int i = lo; i < pivot; i++) {
-        if (arr[i] <= arr[pivot]) {
+    // move all of elements less than or equal to guard element to the left area of array
+    for (int i = lo; i < guard; i++) {
+        if (arr[i] <= arr[guard]) {
             swap(arr[++lq], arr[i]);
         }
     }
 
-    swap(arr[++lq], arr[pivot]);
+    // move guard element to right position
+    swap(arr[++lq], arr[guard]);
 
     return lq;
 }
 
 void _quickSort(vector<int> &arr, int lo, int hi) {
-    int spot = 0;
-    stack<int> st;     // change recursion to iteration by stack
+    int spot = 0;       ///< position of separating result
+    stack<int> st;      ///< change recursion to iteration by stack
 
     while (1) {
         // sorting while loop
