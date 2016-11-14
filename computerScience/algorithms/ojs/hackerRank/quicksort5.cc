@@ -8,7 +8,9 @@
  * \license MIT
  */
 
+#include <cmath>
 #include <vector>
+#include <stack>
 #include <iostream>
 
 using namespace std;
@@ -29,17 +31,42 @@ int partition(vector<int> &arr, int lo, int hi) {
 }
 
 void _quickSort(vector<int> &arr, int lo, int hi) {
-    if (lo < hi) {
-        int sep = partition(arr, lo, hi);
+    int spot = 0;
+    stack<int> st;     // change recursion to iteration by stack
 
-        for (int i = 0; i < arr.size() - 1; i++) {
-            cout << arr[i] << " ";
+    while (1) {
+        // sort the smaller sub-array
+        while (lo < hi) {
+            spot = partition(arr, lo, hi);
+
+            if (spot - lo < hi - spot) {
+                // push limits of larger sub-array into stack
+                // to make larger sub-array get sorted later than smaller ones
+                st.push(spot + 1);
+                st.push(hi);
+
+                // sort the smaller sub-array
+                hi = spot - 1;
+            } else {
+                // push limits of larger sub-array into stack
+                // to make larger sub-array get sorted later than smaller ones
+                st.push(lo);
+                st.push(spot - 1);
+
+                // sort the smaller sub-array
+                lo = spot + 1;
+            }
         }
-        cout << arr[arr.size() - 1] << endl;
 
-        _quickSort(arr, lo, sep-1);
-        _quickSort(arr, sep+1, hi);
-
+        // empty stack represent sorting get finished already
+        if (st.empty()) {
+            break;
+        } else {
+            hi = st.top();
+            st.pop();
+            lo = st.top();
+            st.pop();
+        }
     }
 }
 
@@ -48,5 +75,21 @@ void quickSort(vector<int> &arr) {
 }
 
 int main(void) {
+    int n;
+    cin >> n;
+
+    vector<int> arr(n);
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    quickSort(arr);
+
+    for (int i = 0; i < arr.size() - 1; i++) {
+        cout << arr[i] << ' ';
+    }
+    cout << arr[arr.size() - 1] << endl;
+
     return 0;
 }
