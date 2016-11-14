@@ -6,7 +6,7 @@
 PROG=select2
 
 all:
-	g++ -o $(PROG).out -g $(PROG).cc
+	g++ -o $(PROG).out -g -Wall -Wextra $(PROG).cc
 
 .PHONY=run clean debug
 

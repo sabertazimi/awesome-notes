@@ -15,23 +15,33 @@
 
 using namespace std;
 
+/// \brief partition algorithm implementation
+/// \param arr array
+/// \param lo  lowest limit of array
+/// \param hi  highest limit of array
+/// \return index of guard element(separation position)
 int partition(vector<int> &arr, int lo, int hi) {
     int guard = hi,     ///< the index of guard element
-        lq = lo - 1;    ///< the limit of less/equal element area
+        le = lo - 1;    ///< the limit of less/equal element area
 
     // move all of elements less than or equal to guard element to the left area of array
     for (int i = lo; i < guard; i++) {
         if (arr[i] <= arr[guard]) {
-            swap(arr[++lq], arr[i]);
+            swap(arr[++le], arr[i]);
         }
     }
 
     // move guard element to right position
-    swap(arr[++lq], arr[guard]);
+    swap(arr[++le], arr[guard]);
 
-    return lq;
+    return le;
 }
 
+/// \brief iteration version of quicksort algorithm
+/// \param arr array
+/// \param lo  lowest limit of array
+/// \param hi  highest limit of array
+/// \return void
 void _quickSort(vector<int> &arr, int lo, int hi) {
     int spot = 0;       ///< position of separating result
     stack<int> st;      ///< change recursion to iteration by stack
@@ -74,6 +84,7 @@ void _quickSort(vector<int> &arr, int lo, int hi) {
     }
 }
 
+/// \brief: wrapper function
 void quickSort(vector<int> &arr) {
     _quickSort(arr, 0, arr.size() - 1);
 }
@@ -90,7 +101,7 @@ int main(void) {
 
     quickSort(arr);
 
-    for (int i = 0; i < arr.size() - 1; i++) {
+    for (int i = 0; i < (int)arr.size() - 1; i++) {
         cout << arr[i] << ' ';
     }
     cout << arr[arr.size() - 1] << endl;
