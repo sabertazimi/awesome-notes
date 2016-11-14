@@ -1,6 +1,6 @@
 /*!
- * \file quicksort2.cc
- * \brief Quicksort 2 -Sorting from HackerRank
+ * \file quicksort4.cc
+ * \brief Quicksort 4 -Running Time of Quicksort
  *
  * \author sabertazimi, <sabertazimi@gmail.com>
  * \version 1.0
@@ -14,45 +14,51 @@
 
 using namespace std;
 
+static int nis, nqs;
+
 int partition(vector<int> &arr, int lo, int hi) {
-    int guard = arr[lo],
-        left = lo + 1,
-        right = hi;
+    int pivot = hi,
+        lq = lo - 1;
 
-    while (left <= right) {
-        while (arr[left] < guard) left++;
-        while (arr[right] > guard) right--;
-
-        if (left <= right) {
-            swap(arr[left++], arr[right--]);
+    for (int i = lo; i < pivot; i++) {
+        if (arr[i] <= arr[pivot]) {
+            swap(arr[++lq], arr[i]);
+            nqs++;
         }
     }
 
-    swap(arr[right], arr[lo]);
+    swap(arr[++lq], arr[pivot]);
+    nqs++;
 
-    /* for (int i = lo; i < hi; i++) { */
-    /*     cout << arr[i] << " "; */
-    /* } */
-    /* cout << arr[hi] << endl; */
-
-    return right + 1;
+    return lq;
 }
 
 void _quickSort(vector<int> &arr, int lo, int hi) {
     if (lo < hi) {
         int sep = partition(arr, lo, hi);
+
+        // for (int i = 0; i < arr.size() - 1; i++) {
+        //     cout << arr[i] << " ";
+        // }
+        // cout << arr[arr.size() - 1] << endl;
+
         _quickSort(arr, lo, sep-1);
         _quickSort(arr, sep+1, hi);
 
-        for (int i = lo; i < hi; i++) {
-            cout << arr[i] << " ";
-        }
-        cout << arr[hi] << endl;
     }
 }
 
 void quickSort(vector<int> &arr) {
     _quickSort(arr, 0, arr.size() - 1);
+}
+
+void insertionsort(vector<int> arr) {
+    for (int i = 1; i < arr.size(); i++) {
+        for (int j = i; arr[j - 1] > arr[j] && j > 0; j--) {
+            swap(arr[j - 1], arr[j]);
+            nis++;
+        }
+    }
 }
 
 int main(void) {
@@ -65,7 +71,10 @@ int main(void) {
         cin >> arr[i];
     }
 
+    insertionsort(arr);
     quickSort(arr);
+
+    cout<< nis - nqs << endl;
 
     /* for (int i = 0; i < arr.size() - 1; i++) { */
     /*     cout << arr[i] << " "; */

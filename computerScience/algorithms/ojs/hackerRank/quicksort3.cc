@@ -1,6 +1,6 @@
 /*!
- * \file quicksort2.cc
- * \brief Quicksort 2 -Sorting from HackerRank
+ * \file quicksort3.cc
+ * \brief Quicksort 3 - Quicksort in Place
  *
  * \author sabertazimi, <sabertazimi@gmail.com>
  * \version 1.0
@@ -15,39 +15,32 @@
 using namespace std;
 
 int partition(vector<int> &arr, int lo, int hi) {
-    int guard = arr[lo],
-        left = lo + 1,
-        right = hi;
+    int pivot = hi,
+        lq = lo - 1;
 
-    while (left <= right) {
-        while (arr[left] < guard) left++;
-        while (arr[right] > guard) right--;
-
-        if (left <= right) {
-            swap(arr[left++], arr[right--]);
+    for (int i = lo; i < pivot; i++) {
+        if (arr[i] <= arr[pivot]) {
+            swap(arr[++lq], arr[i]);
         }
     }
 
-    swap(arr[right], arr[lo]);
+    swap(arr[++lq], arr[pivot]);
 
-    /* for (int i = lo; i < hi; i++) { */
-    /*     cout << arr[i] << " "; */
-    /* } */
-    /* cout << arr[hi] << endl; */
-
-    return right + 1;
+    return lq;
 }
 
 void _quickSort(vector<int> &arr, int lo, int hi) {
     if (lo < hi) {
         int sep = partition(arr, lo, hi);
+
+        for (int i = 0; i < arr.size() - 1; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << arr[arr.size() - 1] << endl;
+
         _quickSort(arr, lo, sep-1);
         _quickSort(arr, sep+1, hi);
 
-        for (int i = lo; i < hi; i++) {
-            cout << arr[i] << " ";
-        }
-        cout << arr[hi] << endl;
     }
 }
 
