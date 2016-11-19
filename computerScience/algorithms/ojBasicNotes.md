@@ -1,5 +1,12 @@
 # OJ Basic Notes
 
+## C++ Notes for OJ
+
+### map
+
+*   insert/update: mp[key] = value;
+*   search: mp.count(key)/mp.find(key), 不会插入空元素
+
 ## Dynamic Programming
 
 ### Digital Bits Dynamic Programming(数位 DP)
