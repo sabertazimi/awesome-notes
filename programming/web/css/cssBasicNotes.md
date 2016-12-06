@@ -861,10 +861,10 @@ body {
 
 ```css
 .container{
-    text-align:center;
+    text-align: center;
 }
 .container ul{
-    display:inline;
+    display: inline;
 }
 ```
 

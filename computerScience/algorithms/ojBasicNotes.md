@@ -1,3 +1,12 @@
+
+* [OJ Basic Notes](#oj-basic-notes)
+	* [C++ Notes for OJ](#c-notes-for-oj)
+		* [map](#map)
+	* [Dynamic Programming](#dynamic-programming)
+		* [Digital Bits Dynamic Programming(数位 DP)](#digital-bits-dynamic-programming数位-dp)
+			* [题目模式](#题目模式)
+			* [解题模式](#解题模式)
+
 # OJ Basic Notes
 
 ## C++ Notes for OJ
@@ -6,6 +15,63 @@
 
 *   insert/update: mp[key] = value;
 *   search: mp.count(key)/mp.find(key), 不会插入空元素
+
+## Simulation
+
+### Painting
+
+*   对于实际操作, 直接覆写至状态数组即可, 无需关心边界条件(效果会立即生效)
+
+> e.g 交接处方块 , 2 次写 1, maps[i][j] = 1, 不用担心重复计数
+
+## String
+
+```cpp
+sstream::stringstream
+
+sort()
+transform(toupper/tolower)
+
+string::size_type
+string::npos(vector.end())
+
+str.find() == string::npos/string::size_type
+str.substr(int pos, int len)
+
+getline(cin/sin, strbuf)
+```
+
+*   string::size_type pre, post 指针: 进行逐行匹配
+
+## Map Theory
+
+### Shortest Paths
+
+*   Dijkstra
+*   Floyd
+
+### Minial Spanning Tree
+
+*   Kruskal(tFind/tUnion)
+
+### BFS(mark array/queue)
+
+*   Shortest Paths
+*   Diameter(直径) of Tree(Two pass for BFS)
+
+### DFS(mark array/stack/recursion)
+
+*   Longest Paths
+
+### Connected Component
+
+#### Strongly Connected Component
+
+*   Tarjan Alogirthm(v.index(DFS 时此点被访问的顺序) == v.lowlink(从 v 出发经有向边可达到的所有结点中最小的 index))
+
+#### tUnion + tFind
+
+quickly figure out connection of map
 
 ## Dynamic Programming
 
@@ -144,5 +210,33 @@ int main(void) {
     }
 
     return 0;
+}
+```
+
+## Math
+
+### Matrix Fast Power
+
+```cpp
+typedef vector<vector> mat;
+
+mat mul(mat& A, mat& B) {
+    mat C(A.size(), vec(B[0].size()));
+    for(int i = 0; i < (int)A.size(); ++i)
+        for(int j = 0; j < (int)B[0].size(); ++j)
+                for(int k = 0; k < (int)B.size(); ++k)
+                        C[i][j] ^= A[i][k] & B[k][j];
+    return C;
+}
+
+mat pow(mat A, int p) {
+    mat E(A.size(), vec(A.size()));
+    for(int i = 0; i < (int)A.size(); ++i) E[i][i] = 1;
+    while(p){
+        if(p & 1) E = mul(E, A);
+        A = mul(A, A);
+        p >>= 1;
+    }
+    return E;
 }
 ```
