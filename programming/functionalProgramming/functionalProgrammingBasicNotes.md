@@ -12,11 +12,103 @@
 
 # Functional Programming Basic Notes
 
+## Defination for Functionanl Programming
+
+*   avoid mutation
+*   first class functions
+*   recursive data structures and recursive functions
+*   laziness
+
+## Datatype
+
+### Datatype Binding
+
+tagged union, every constructor name as tag, fields for different constructors can't exist at the same time
+
+### Built-in Tagged Constructor
+
+*   NONE
+*   SOME i
+*   []
+*   x :: xs (infix constructor)
+*   ()
+
+### Type Constructor
+
+type constructor: datatype bindings with variables
+
+```sml
+datatype 'a mylist = EMPTY | CONS of 'a * 'a mylist
+mylist isn't a type, int list is a type
+```
+
+*   'a , 'a equivalent/different
+*   'a, 'b different
+*   ''a, ''a equivalent
+
+## Pattern Matching
+
+*   null/isSome check tag part（variant）
+*   hd/tl/valOf check data part (extract data)
+
+```sml
+case e of
+      p1 => e1
+    | pn => en
+
+val p = e (* declare multiple variables once time in p(pattern) *)
+
+fun foo p = e (* declare multiple callee arguments(hidden to caller) once time in p(pattern) *)
+```
+
+In SML, all functions only take 1 argument, a tuple/record:
+
+fun f (x, y, z) = x + y + z seems that takes 3 arguments, but truly owing to pattern matching only takes 1 tuple argument
+Likewise, fun f () = 0 takes 1 empty tuple argument.
+
+Futher more, tuples is syntactic sugar for records.
+
+> As a whole: all functions only take 1 record argument owing to pattern matching.
+
+## Tail Position, Tail expression, Tail Call and Tail Recursion
+
+recursive defination for Tail Position:
+
+*   if E isn't in tail position, then sub expressions of E aren't in tail position
+*   if E is in tail position, then some sub expressions of E are in tail position
+
+```sml
+if eb then e1 else e2 
+```
+
+is in tail position, then e1 and e2 are in tail position, not eb
+
+```sml
+f (x, e)
+```
+
+is in tail position, then f is in tail position(tail call), not x and e
+
+```sml
+fun factorial n =
+    let
+        fun aux(n, acc) =
+            if
+                n = 0
+            then
+                acc
+            else
+                aux (n-1, n*acc)
+    in
+        aux (n,1)
+    end
+```
+
 ## Rules for expressions
 
-*   Syntax
-*   Type-checking
-*   Evaluation ruls
+*   Syntactic: syntax rules
+*   Semantic: type checking rules
+*   Runtime: evaluation rules
 
 ### samples
 

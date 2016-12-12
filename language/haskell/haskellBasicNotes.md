@@ -474,7 +474,7 @@ third (_, _, z) = z
 
 运用Type变量(只可为*单字符*),实现泛型参数与多态函数
 
-借助Typeclass可轻松实现多态函数
+借助 Typeclass 可轻松实现多态函数
 
 ```haskell
 ghci> :t head
@@ -1175,7 +1175,7 @@ ghci> getFirst $ First (Just 'a') `mappend` First Nothing
 Just 'a'
 ```
 
-### 自定义Typeclass
+### 自定义 Typeclass
 
 -   创建新类: *可以只有声明没有实现*
 
