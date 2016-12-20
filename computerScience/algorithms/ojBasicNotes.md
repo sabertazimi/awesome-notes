@@ -181,6 +181,33 @@ int main()
 }
 ```
 
+### algorithm
+
+#### sort
+
+*  in map: auto sort
+
+```cpp
+struct Node {
+    bool operator<(const Node &o) {
+        return *this < o;
+    }
+};
+
+map<Node> mps;
+```
+
+*   sort vector
+
+```cpp
+bool cmp(const elem &i, const elem &j) {
+    return i < j;
+}
+
+sort(vec.start(), vec.end(), cmp);
+```
+
+
 ### map
 
 *   insert/update: mp[key] = value;
