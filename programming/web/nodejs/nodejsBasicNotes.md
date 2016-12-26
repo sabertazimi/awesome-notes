@@ -107,11 +107,11 @@
 -   Performance analysis in     ./benchmarks/
 -   Native C/C++ source in      ./source/
 
-## Npm Set Up
+## Npm Cli
 
 ### Basic Steps
 
-```shell
+```sh
 $ npm adduser
 $ mkdir proj/
 $ npm init --scope=<username>  // 修改 package.json 可再次运行此命令
@@ -133,23 +133,39 @@ $ npm outdated   // 去除过期包
 },
 ```
 
-```shell
+```sh
 $ npm test
 ```
 
 ### Publish Steps
 
-```shell
+```sh
 $ npm publish
 $ npm dist-tag add @<pkg>@<version> [<tag>]
 $ npm dist-tag rm <pkg> <tag>
 $ npm dist-tag ls [<pkg>]
+```
 
+#### Semantic Version(Semver)
+
+*   patch release: bugfix and other minor changes
+*   minor release: new features not breaking API(backward compatible)
+*   major release: new features breaking API(not backward compatible)
+
+```sh
+$ npm version patch
+$ npm publish
+
+$ npm version minor
+$ npm publish
+
+$ npm version major
+$ npm publish
 ```
 
 ### Tab Completion
 
-```shell
+```sh
 npm completion >> ~/.bashrc (or ~/.zshrc)
 source ~/.zshrc
 ```
@@ -583,7 +599,7 @@ md5.digest('hex');  // 'acbd18db4cc2f85cedef654fccc4a4d8'
 
 #### Hmac API
 
-```shell
+```sh
 $ openssl genrsa -out key.pem 1024
 ```
 
@@ -737,14 +753,14 @@ assert.ok(0, 'Zero is not truthy');
 
 -   [Parse Server](https://github.com/ParsePlatform/parse-server)
 
-```shell
+```sh
 $ npm install -g parse-server mongodb-runner
 $ mongodb-runner start
 $ parse-server --appId APPLICATION_ID --masterKey MASTER_KEY
 ```
 -   [JSON Server](https://github.com/typicode/json-server)
 
-```shell
+```sh
 $ npm install -g json-server
 ```
 
@@ -898,7 +914,7 @@ app.use(logger('combined, {stream: accessLogStream}'));
 -   [npm install tooling -g](https://github.com/egoist/tooling)
 -   [cooking](https://github.com/ElemeFE/cooking)
 
-```shell
+```sh
 antd-init
 npm run dev
 npm run build
