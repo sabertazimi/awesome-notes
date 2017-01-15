@@ -129,6 +129,7 @@ $ git config --global core.editor vim
 $ git config --global push.default simple
 $ git config --global credential.helper store
 $ git config --global commit.template $HOME/.gitmsg.md
+$ git config --global http.postbuffer 524288000
 $ git config --list
 ```
 
