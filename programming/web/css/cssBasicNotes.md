@@ -156,6 +156,13 @@
 
 # CSS 3 Basic Notes
 
+## Best Practice
+
+### rem vs em
+
+*   Size in em if the property scales according to it’s font-size
+*   Size everything else in rem
+
 ## 属性排序
 
 ### 概述
