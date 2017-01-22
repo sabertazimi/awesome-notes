@@ -158,6 +158,35 @@
 
 ## Best Practice
 
+### Normalize
+
+```css
+html {
+    box-sizing: border-box
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+    margin: inherit;
+    padding: inherit;
+}
+
+body {
+    line-height: 1.5;
+}
+```
+
+### gap
+
+```css
+* + * {
+    margin-top: 1.5em;
+}
+```
+
 ### rem vs em
 
 *   Size in em if the property scales according to it’s font-size
