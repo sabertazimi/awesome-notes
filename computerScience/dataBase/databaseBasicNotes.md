@@ -92,3 +92,28 @@ db.getMongo()
 db.getCollectionNames()
 db.printCollectionStats()
 ```
+
+## Basic Concepts
+
+### Common Words
+
+*   create/drop(from)/insert into/delete from/update
+*   restricts
+*   sub-queries
+*   views(shorthand for queries)
+*   left/right join on ...
+*   primary/foreign key
+*   references
+
+### Normalized Design
+
+*   every row has the same number of columns
+*   every row has a unique key(PRIMARY KEY)
+*   everything in a row is all relevant to unique key
+*   everything in a row is all relevant to each other
+
+> (id, name, birth, majar, grade) is not normalized, because grade is not relevant to student id
+> (id, name, birth) + (id, majar, grade) is normalized
+> (name, os, lang) is not mormalized, because os isn't relevant to lang
+> (name, os) + (name, lang) is normalized
+
