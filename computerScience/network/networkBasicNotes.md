@@ -27,7 +27,11 @@ nodal = proc + queue + trans + prop: 总时延 = 产生/到达时延 + 排队时
 defines:
 
 *   types of messages exchanged
-*   syntax/fields of message types
+*   syntax of various message types(fields defination)
+*   semantics of fields
+*   rules fsor when/how to send/respond to messages
+
+### HTTP
 
 ### Process
 
