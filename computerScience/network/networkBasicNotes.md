@@ -61,6 +61,14 @@ header lines -> Connections/Date/Server/Last-Modified/Content-Length(bytes)/Cont
 entity body
 ```
 
+#### Cookies
+
+*   first request header -> without cookie
+*   first response header -> Set-cookie: `numebr` to client
+*   client store identification number for specific site into cookies files
+*   second request header -> cookie: `number` (extract identification number for specific site from cookies files)
+*   function: create **User Session Layer** on top of stateless HTTP
+
 ### Process
 
 #### Port to Transport Layer
