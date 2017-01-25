@@ -1,4 +1,4 @@
-# Net Working Notes
+# Computer NetWorking Notes
 
 ## Computer Network and Internet
 
@@ -32,6 +32,34 @@ defines:
 *   rules fsor when/how to send/respond to messages
 
 ### HTTP
+
+*   HTTP -> Socket Interface -> TCP
+*   stateless protocol
+
+#### Non-Persistent Connections and Persistent Connections
+
+*   non-persistent connections: 1 http request with 1 tcp connection
+*   persistent connections: multiple http request with 1 tcp connection
+
+#### HTTP Message Format
+
+*    http request format
+
+```http
+request line -> (method field, object url field, protocol version)
+header lines -> Host/Connections(close -> non-persistent connection)/User-agent/Accept-language
+\r\n
+entity body
+```
+
+*   http response format
+
+```http
+status line -> (protocol version, status code, corresponding status message)
+header lines -> Connections/Date/Server/Last-Modified/Content-Length(bytes)/Content-Type
+\r\n
+entity body
+```
 
 ### Process
 
