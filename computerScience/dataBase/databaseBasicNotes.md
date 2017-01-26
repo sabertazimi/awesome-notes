@@ -111,8 +111,20 @@ tools: xmlcopyeditor xmllint
 $ xmllint --valid --noout Bookstore.xml
 ```
 
-## Relational Algebra
+#### XSD(XML Schema Definition)
 
+```sh
+$ xmllint -schema Bookstore.xsd -noout Bookstore.xml
+```
+
+### JSON(JavaScript Object Notation)
+
+*   serializing data objects in files
+*   human-readable data
+*   semi-structured data
+*   number/boolean/string/array/object(empty or key-value pair) recursive constructs
+
+## Relational Algebra
 
 
 ## Nosql - MongoDB Basic Notes
