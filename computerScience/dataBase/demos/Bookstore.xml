@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE Bookstore SYSTEM "Bookstore.dtd">
+
+<Bookstore>
+    <Book ISBN="ISBN-0-23-23333-233" Price="233" Authors="Sabertazimi">
+        <Title>Kind of sword</Title>
+        <Authors>
+            <Author Ident="Sabertazimi">
+                <First_Name>Yilong</First_Name>
+                <Last_Name>Liu</Last_Name>
+            </Author>
+        </Authors>
+    </Book>
+</Bookstore>
