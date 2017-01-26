@@ -179,3 +179,14 @@ evaluation: whole let result = body_result
 *   lexical scope: function where defined
 *   dynamic scope: function where called
 
+### compose and pipeline
+
+```sml
+fun sqrt_of_abs = Math.sqrt o Real.fromInt o abs
+
+infix !>
+fun x !> f = f x
+
+fun sqrt_of_abs i = i !> abs !> Real.fromInt !> Math.sqrt
+```
+
