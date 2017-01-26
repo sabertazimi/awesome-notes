@@ -173,3 +173,9 @@ evaluation: whole let result = body_result
 *   e1 orelse e2 : keyword
 *   not e1       : bool -> bool
 *   =(equal) <>(not equal) > < >= <=: require two same type elem
+
+### lexical scope vs dynamic scope
+
+*   lexical scope: function where defined
+*   dynamic scope: function where called
+
