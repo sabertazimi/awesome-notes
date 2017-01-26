@@ -174,12 +174,14 @@ evaluation: whole let result = body_result
 *   not e1       : bool -> bool
 *   =(equal) <>(not equal) > < >= <=: require two same type elem
 
-### lexical scope vs dynamic scope
+### closure
+
+#### lexical scope vs dynamic scope
 
 *   lexical scope: function where defined
 *   dynamic scope: function where called
 
-### compose and pipeline
+#### compose and pipeline
 
 ```sml
 fun sqrt_of_abs = Math.sqrt o Real.fromInt o abs
@@ -188,5 +190,17 @@ infix !>
 fun x !> f = f x
 
 fun sqrt_of_abs i = i !> abs !> Real.fromInt !> Math.sqrt
+```
+
+#### curry and uncurry
+
+```sml
+fun carry f x y = f (x, y)
+fun uncarry f (x, y) = f x y
+
+fun range (i, j) = if i > j then [] else i :: range(i+1, j)
+fun countup = curry range 1
+
+val arr = countup 7 (* maps to [1, 2, ..., 7] *)
 ```
 
