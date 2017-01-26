@@ -1,0 +1,887 @@
+
+<!ENTITY % HTMLlat1 PUBLIC
+   "-//W3C//ENTITIES Latin1//EN//HTML"
+   "HTMLlat1.ent">
+%HTMLlat1;
+
+<!ENTITY % HTMLsymbol PUBLIC
+   "-//W3C//ENTITIES Symbols//EN//HTML"
+   "HTMLsymbol.ent">
+%HTMLsymbol;
+
+<!ENTITY % HTMLspecial PUBLIC
+   "-//W3C//ENTITIES Special//EN//HTML"
+   "HTMLspecial.ent">
+%HTMLspecial;
+
+<!-- Added HTML5 named entities *not* included. -->
+
+<!ENTITY % global "
+    accesskey CDATA #IMPLIED
+    class CDATA #IMPLIED
+    contenteditable (true | false)  #IMPLIED
+    contextmenu IDREF #IMPLIED
+    dir (ltr | rtl | auto) #IMPLIED
+    draggable (true | false) #IMPLIED
+    dropzone NAMES #IMPLIED
+    hidden (hidden) #IMPLIED
+    id ID #IMPLIED
+    itemid CDATA #IMPLIED
+    itemprop CDATA #IMPLIED
+    itemref IDREFS #IMPLIED
+    itemscope (itemscope) #IMPLIED
+    itemtype CDATA #IMPLIED
+    lang NAME #IMPLIED
+    spellcheck (true | false) #IMPLIED
+    style CDATA #IMPLIED
+    tabindex CDATA #IMPLIED
+    title CDATA #IMPLIED
+    translate (yes | no) #IMPLIED
+    onabort CDATA #IMPLIED
+    onblur CDATA #IMPLIED
+    oncanplay CDATA #IMPLIED
+    oncanplaythrough CDATA #IMPLIED
+    onchange CDATA #IMPLIED
+    onclick CDATA #IMPLIED
+    oncontextmenu CDATA #IMPLIED
+    oncuechange CDATA #IMPLIED
+    ondblclick CDATA #IMPLIED
+    ondrag CDATA #IMPLIED
+    ondragend CDATA #IMPLIED
+    ondragenter CDATA #IMPLIED
+    ondragleave CDATA #IMPLIED
+    ondragover CDATA #IMPLIED
+    ondragstart CDATA #IMPLIED
+    ondrop CDATA #IMPLIED
+    ondurationchange CDATA #IMPLIED
+    onemptied CDATA #IMPLIED
+    onended CDATA #IMPLIED
+    onerror CDATA #IMPLIED
+    onfocus CDATA #IMPLIED
+    oninput CDATA #IMPLIED
+    oninvalid CDATA #IMPLIED
+    onkeydown CDATA #IMPLIED
+    onkeypress CDATA #IMPLIED
+    onkeyup CDATA #IMPLIED
+    onload CDATA #IMPLIED
+    onloadeddata CDATA #IMPLIED
+    onloadedmetadata CDATA #IMPLIED
+    onloadstart CDATA #IMPLIED
+    onmousedown CDATA #IMPLIED
+    onmousemove CDATA #IMPLIED
+    onmouseout CDATA #IMPLIED
+    onmouseover CDATA #IMPLIED
+    onmouseup CDATA #IMPLIED
+    onmousewheel CDATA #IMPLIED
+    onpause CDATA #IMPLIED
+    onplay CDATA #IMPLIED
+    onplaying CDATA #IMPLIED
+    onprogress CDATA #IMPLIED
+    onratechange CDATA #IMPLIED
+    onreset CDATA #IMPLIED
+    onscroll CDATA #IMPLIED
+    onseeked CDATA #IMPLIED
+    onseeking CDATA #IMPLIED
+    onselect CDATA #IMPLIED
+    onshow CDATA #IMPLIED
+    onstalled CDATA #IMPLIED
+    onsubmit CDATA #IMPLIED
+    onsuspend CDATA #IMPLIED
+    ontimeupdate CDATA #IMPLIED
+    onvolumechange CDATA #IMPLIED
+    onwaiting CDATA #IMPLIED
+    ">
+<!ENTITY % phrase "a | area | link | meta | style | abbr | address | audio | b | bdi | bdo | br | button | canvas | cite | code | command | data | datalist | del | em | embed | i | iframe | img | input | ins | kbd | keygen | label | map | mark | menu | meter | noscript | object | output | progress | q | ruby | s | samp | script | section | select | small | span | strong | sub | sup | svg | textarea | time | u | var | video | wbr | (#PCDATA)">
+<!ENTITY % flow "article | aside | blockquote | details | dfn | div | dl | fieldset | figure | footer | form | h1 | h2 | h3 | h4 | h5 | h6 | header | hgroup | hr | nav | ol | p | pre | table | ul | %phrase;">
+
+<!ELEMENT a - - (%flow;)*>
+<!ATTLIST a
+  %global;
+  href CDATA #IMPLIED
+  target CDATA #IMPLIED
+  download CDATA #IMPLIED
+  ping CDATA #IMPLIED
+  rel CDATA #IMPLIED
+  media CDATA #IMPLIED
+  hreflang NAME #IMPLIED
+  type CDATA #IMPLIED
+  >
+
+<!ELEMENT area - O EMPTY>
+<!ATTLIST area
+  %global;
+  alt CDATA #IMPLIED
+  coords CDATA #IMPLIED
+  shape (rect|circle|poly|default) #IMPLIED
+  href CDATA #IMPLIED
+  target CDATA #IMPLIED
+  download CDATA #IMPLIED
+  ping CDATA #IMPLIED
+  rel CDATA #IMPLIED
+  media CDATA #IMPLIED
+  hreflang NAME #IMPLIED
+  type CDATA #IMPLIED
+  >
+
+<!ELEMENT link - O EMPTY>
+<!ATTLIST link
+  %global;
+  href CDATA #IMPLIED
+  rel CDATA #IMPLIED
+  media CDATA #IMPLIED
+  hreflang NAME #IMPLIED
+  type CDATA #IMPLIED
+  sizes CDATA #IMPLIED
+  >
+
+<!ELEMENT meta - O EMPTY>
+<!ATTLIST meta
+  %global;
+  name NAME #IMPLIED
+  http-equiv CDATA #IMPLIED
+  content CDATA #IMPLIED
+  charset CDATA #IMPLIED
+  >
+
+<!ELEMENT style - - CDATA>
+<!ATTLIST style
+  %global;
+  scoped (scoped) #IMPLIED
+  type CDATA #IMPLIED
+  media CDATA #IMPLIED
+  >
+
+<!ELEMENT abbr - - (%phrase;)*>
+<!ATTLIST abbr
+  %global;
+  >
+
+<!ELEMENT address - - (%phrase;)*>
+<!ATTLIST address
+  %global;
+  >
+
+<!ELEMENT audio - - (%flow; | source)*>
+<!ATTLIST audio
+  %global;
+  src CDATA #IMPLIED
+  crossorigin (anonymous | use-credentials) #IMPLIED
+  preload (none | metadata | auto) #IMPLIED
+  autoplay (autoplay) #IMPLIED
+  mediagroup CDATA #IMPLIED
+  loop (loop) #IMPLIED
+  muted (muted) #IMPLIED
+  controls (controls) #IMPLIED
+  >
+
+<!ELEMENT b - - (%phrase;)*>
+<!ATTLIST b
+  %global;
+  >
+
+<!ELEMENT bdi - - (%phrase;)*>
+<!ATTLIST bdi
+  %global;
+  >
+
+<!ELEMENT bdo - - (%phrase;)*>
+<!ATTLIST bdo
+  %global;
+  >
+
+<!ELEMENT br - O EMPTY>
+<!ATTLIST br
+  %global;
+  >
+
+<!ELEMENT button - - (%phrase;)*>
+<!ATTLIST button
+  %global;
+  autofocus (autofocus) #IMPLIED
+  disabled (disabled) #IMPLIED
+  form CDATA #IMPLIED
+  formaction CDATA #IMPLIED
+  formenctype CDATA #IMPLIED
+  formmethod (get | post) #IMPLIED
+  formnovalidate (formnovalidate) #IMPLIED
+  formtarget CDATA #IMPLIED
+  name CDATA #IMPLIED
+  type (submit | reset | button) #IMPLIED
+  value CDATA #IMPLIED
+  >
+
+<!ELEMENT canvas - - (%flow;)*>
+<!ATTLIST canvas
+  %global;
+  >
+
+<!ELEMENT cite - - (%phrase;)*>
+<!ATTLIST cite
+  %global;
+  >
+
+<!ELEMENT code - - (%phrase;)*>
+<!ATTLIST code
+  %global;
+  >
+
+<!ELEMENT command - - (%phrase;)*>
+<!ATTLIST command
+  %global;
+  c_ CDATA #IMPLIED
+  type CDATA #IMPLIED
+  label CDATA #IMPLIED
+  icon CDATA #IMPLIED
+  disabled (disabled) #IMPLIED
+  checked (checked) #IMPLIED
+  radiogroup CDATA #IMPLIED
+  command CDATA #IMPLIED
+  >
+
+<!ELEMENT data - - (%phrase;)*>
+<!ATTLIST data
+  %global;
+  value CDATA #IMPLIED
+  >
+
+<!ELEMENT datalist - - (%phrase; | option)*>
+<!ATTLIST datalist
+  %global;
+  >
+
+<!ELEMENT del - - (%flow;)*>
+<!ATTLIST del
+  %global;
+  cite CDATA #IMPLIED
+  datetime CDATA #IMPLIED
+  >
+
+<!ELEMENT em - - (%phrase;)*>
+<!ATTLIST em
+  %global;
+  >
+
+<!ELEMENT embed - O EMPTY>
+<!ATTLIST embed
+  %global;
+  src CDATA #IMPLIED
+  type CDATA #IMPLIED
+  media CDATA #IMPLIED
+  >
+
+<!ELEMENT i - - (%phrase;)*>
+<!ATTLIST i
+  %global;
+  >
+
+<!ELEMENT iframe - - (%phrase;)*>
+<!ATTLIST iframe
+  %global;
+  src CDATA #IMPLIED
+  srcdoc CDATA #IMPLIED
+  name CDATA #IMPLIED
+  sandbox NAMES #IMPLIED
+  seamless (yes | no) #IMPLIED
+  width CDATA #IMPLIED
+  height CDATA #IMPLIED
+  >
+
+<!ELEMENT img - O EMPTY>
+<!ATTLIST img
+  %global;
+  alt CDATA #IMPLIED
+  src CDATA #REQUIRED
+  crossorigin CDATA #IMPLIED
+  usemap CDATA #IMPLIED
+  ismap (ismap) #IMPLIED
+  width CDATA #IMPLIED
+  height CDATA #IMPLIED
+  >
+
+<!ELEMENT input - O EMPTY>
+<!ATTLIST input
+  %global;
+  accept CDATA #IMPLIED
+  alt CDATA #IMPLIED
+  autocomplete (autocomplete) #IMPLIED
+  autofocus (on | off) #IMPLIED
+  checked (checked) #IMPLIED
+  dirname CDATA #IMPLIED
+  disabled (disabled) #IMPLIED
+  form CDATA #IMPLIED
+  formaction CDATA #IMPLIED
+  formenctype CDATA #IMPLIED
+  formmethod (get | post) #IMPLIED
+  formnovalidate (formnovalidate) #IMPLIED
+  formtarget CDATA #IMPLIED
+  height CDATA #IMPLIED
+  list CDATA #IMPLIED
+  min CDATA #IMPLIED
+  max CDATA #IMPLIED
+  maxlength NUMBER #IMPLIED
+  multiple (multiple) #IMPLIED
+  name CDATA #IMPLIED
+  pattern CDATA #IMPLIED
+  placeholder CDATA #IMPLIED
+  readonly (readonly) #IMPLIED
+  required (required) #IMPLIED
+  size NUMBER #IMPLIED
+  src CDATA #IMPLIED
+  setp CDATA #IMPLIED
+  type CDATA #IMPLIED
+  value CDATA #IMPLIED
+  width CDATA #IMPLIED
+  >
+
+<!ELEMENT ins - - (%flow;)*>
+<!ATTLIST ins
+  %global;
+  cite CDATA #IMPLIED
+  datetime CDATA #IMPLIED
+  >
+
+<!ELEMENT kbd - - (%phrase;)*>
+<!ATTLIST kbd
+  %global;
+  >
+
+<!ELEMENT keygen - O EMPTY>
+<!ATTLIST keygen
+  %global;
+  autofocus (on | off) #IMPLIED
+  challenge CDATA #IMPLIED
+  disabled (disabled) #IMPLIED
+  form CDATA #IMPLIED
+  keytype (rsa) #IMPLIED
+  name CDATA #IMPLIED
+  >
+
+<!ELEMENT label - - (%phrase;)*>
+<!ATTLIST label
+  %global;
+  form CDATA #IMPLIED
+  for CDATA #IMPLIED
+  >
+
+<!ELEMENT map - - (%flow;)*>
+<!ATTLIST map
+  %global;
+  name CDATA #IMPLIED
+  >
+
+<!ELEMENT mark - - (%phrase;)*>
+<!ATTLIST mark
+  %global;
+  >
+
+<!ELEMENT menu - - (li | (%flow;))*>
+<!ATTLIST menu
+  %global;
+  label CDATA #IMPLIED
+  type CDATA #IMPLIED
+  >
+
+<!ELEMENT meter - - (%phrase;)* -(meter)>
+<!ATTLIST meter
+  %global;
+  value CDATA #IMPLIED
+  min CDATA #IMPLIED
+  max CDATA #IMPLIED
+  low CDATA #IMPLIED
+  high CDATA #IMPLIED
+  optimum CDATA #IMPLIED
+  >
+
+<!ELEMENT noscript - - (%phrase;)*>
+<!ATTLIST noscript
+  %global;
+  >
+
+<!ELEMENT object - - ((param)*, (%flow;)*)>
+<!ATTLIST object
+  %global;
+  data CDATA #IMPLIED
+  type CDATA #IMPLIED
+  typemustmatch (typemustmatch) #IMPLIED
+  name CDATA #IMPLIED
+  usemap CDATA #IMPLIED
+  form CDATA #IMPLIED
+  width CDATA #IMPLIED
+  height CDATA #IMPLIED
+  >
+
+<!ELEMENT output - - (%phrase;)*>
+<!ATTLIST output
+  %global;
+  for CDATA #IMPLIED
+  form CDATA #IMPLIED
+  name CDATA #IMPLIED
+  >
+
+<!ELEMENT progress - - (%phrase;)* -(progress)>
+<!ATTLIST progress
+  %global;
+  value CDATA #IMPLIED
+  max CDATA #IMPLIED
+  >
+
+<!ELEMENT q - - (%phrase;)*>
+<!ATTLIST q
+  %global;
+  cite CDATA #IMPLIED
+  >
+
+<!ELEMENT ruby - - (%phrase; | rt | rp)*>
+<!ATTLIST ruby
+  %global;
+  >
+
+<!ELEMENT s - - (%phrase;)*>
+<!ATTLIST s
+  %global;
+  >
+
+<!ELEMENT samp - - (%phrase;)*>
+<!ATTLIST samp
+  %global;
+  >
+
+<!ELEMENT script - - CDATA>
+<!ATTLIST script
+  %global;
+  src CDATA #IMPLIED
+  async (async) #IMPLIED
+  defer (defer) #IMPLIED
+  type CDATA #IMPLIED
+  charset CDATA #IMPLIED
+  >
+
+<!ELEMENT section - - (%phrase;)*>
+<!ATTLIST section
+  %global;
+  >
+
+<!ELEMENT select - - (option | optgroup)*>
+<!ATTLIST select
+  %global;
+  autofocus (autofocus) #IMPLIED
+  disabled (disabled) #IMPLIED
+  form CDATA #IMPLIED
+  multiple (multiple) #IMPLIED
+  name CDATA #IMPLIED
+  required (required) #IMPLIED
+  size NUMBER #IMPLIED
+  >
+
+<!ELEMENT small - - (%phrase;)*>
+<!ATTLIST small
+  %global;
+  >
+
+<!ELEMENT span - - (%phrase;)*>
+<!ATTLIST span
+  %global;
+  >
+
+<!ELEMENT strong - - (%phrase;)*>
+<!ATTLIST strong
+  %global;
+  >
+
+<!ELEMENT sub - - (%phrase;)*>
+<!ATTLIST sub
+  %global;
+  >
+
+<!ELEMENT sup - - (%phrase;)*>
+<!ATTLIST sup
+  %global;
+  >
+
+<!ELEMENT svg - - (%phrase;)*>
+<!ATTLIST svg
+  %global;
+  >
+
+<!ELEMENT textarea - - CDATA>
+<!ATTLIST textarea
+  %global;
+  accept CDATA #IMPLIED
+  alt CDATA #IMPLIED
+  autocomplete (on | off) #IMPLIED
+  autofocus (autofocus) #IMPLIED
+  cols NUMBER #IMPLIED
+  dirname CDATA #IMPLIED
+  disabled (disabled) #IMPLIED
+  form CDATA #IMPLIED
+  maxlength NUMBER #IMPLIED
+  name CDATA #IMPLIED
+  placeholder CDATA #IMPLIED
+  readonly (readonly) #IMPLIED
+  required (required) #IMPLIED
+  rows NUMBER #IMPLIED
+  wrap (soft | hard) #IMPLIED
+  >
+
+<!ELEMENT time - - (%phrase;)*>
+<!ATTLIST time
+  %global;
+  datetime CDATA #IMPLIED
+  >
+
+<!ELEMENT u - - (%phrase;)*>
+<!ATTLIST u
+  %global;
+  >
+
+<!ELEMENT var - - (%phrase;)*>
+<!ATTLIST var
+  %global;
+  >
+
+<!ELEMENT video - - (%flow; | source)*>
+<!ATTLIST video
+  %global;
+  src CDATA #IMPLIED
+  crossorigin (anonymous | use-credentials) #IMPLIED
+  poster CDATA #IMPLIED
+  preload (none | metadata | auto) #IMPLIED
+  autoplay (autoplay) #IMPLIED
+  mediagroup CDATA #IMPLIED
+  loop (loop) #IMPLIED
+  muted (muted) #IMPLIED
+  controls (controls) #IMPLIED
+  width NUMBER #IMPLIED
+  height NUMBER #IMPLIED
+  >
+
+<!ELEMENT wbr - O EMPTY>
+<!ATTLIST wbr
+  %global;
+  >
+
+<!ELEMENT article - - (%flow;)*>
+<!ATTLIST article
+  %global;
+  >
+
+<!ELEMENT aside - - (%flow;)*>
+<!ATTLIST aside
+  %global;
+  >
+
+<!ELEMENT blockquote - - (%flow;)*>
+<!ATTLIST blockquote
+  %global;
+  cite CDATA #IMPLIED
+  >
+
+<!ELEMENT details - - (summary, (%flow;)*)>
+<!ATTLIST details
+  %global;
+  open (open) #IMPLIED
+  >
+
+<!ELEMENT dfn - - (%flow;)*>
+<!ATTLIST dfn
+  %global;
+  >
+
+<!ELEMENT div - - (%flow;)*>
+<!ATTLIST div
+  %global;
+  >
+
+<!ELEMENT dl - O (dt | dd)*>
+<!ATTLIST dl
+  %global;
+  >
+
+<!ELEMENT fieldset - - (legend?, (%flow;)*)>
+<!ATTLIST fieldset
+  %global;
+  autofocus (autofocus) #IMPLIED
+  disabled (disabled) #IMPLIED
+  form CDATA #IMPLIED
+  name CDATA #IMPLIED
+  >
+
+<!ELEMENT figure - - (%flow; | figcaption)*>
+<!ATTLIST figure
+  %global;
+  >
+
+<!ELEMENT footer - - (%flow;)*>
+<!ATTLIST footer
+  %global;
+  >
+
+<!ELEMENT form - - (%flow;)*>
+<!ATTLIST form
+  %global;
+  accept-charset CDATA #IMPLIED
+  action CDATA #IMPLIED
+  autocomplete (on | off) #IMPLIED
+  enctype CDATA #IMPLIED
+  method (post | get) #IMPLIED
+  name CDATA #IMPLIED
+  novalidate (novalidate) #IMPLIED
+  target CDATA #IMPLIED
+  >
+
+<!ELEMENT h1 - - (%phrase;)*>
+<!ATTLIST h1
+  %global;
+  >
+
+<!ELEMENT h2 - - (%phrase;)*>
+<!ATTLIST h2
+  %global;
+  >
+
+<!ELEMENT h3 - - (%phrase;)*>
+<!ATTLIST h3
+  %global;
+  >
+
+<!ELEMENT h4 - - (%phrase;)*>
+<!ATTLIST h4
+  %global;
+  >
+
+<!ELEMENT h5 - - (%phrase;)*>
+<!ATTLIST h5
+  %global;
+  >
+
+<!ELEMENT h6 - - (%phrase;)*>
+<!ATTLIST h6
+  %global;
+  >
+
+<!ELEMENT header - - (%flow;)*>
+<!ATTLIST header
+  %global;
+  >
+
+<!ELEMENT hgroup - - (h1 | h2 | h3 | h4 | h5 | h6)*>
+<!ATTLIST hgroup
+  %global;
+  >
+
+<!ELEMENT hr - O EMPTY>
+<!ATTLIST hr
+  %global;
+  >
+
+<!ELEMENT nav - - (%flow;)*>
+<!ATTLIST nav
+  %global;
+  >
+
+<!ELEMENT ol - - (li)*>
+<!ATTLIST ol
+  %global;
+  reversed (reversed) #IMPLIED
+  start CDATA #IMPLIED
+  >
+
+<!ELEMENT p - O (%phrase;)*>
+<!ATTLIST p
+  %global;
+  >
+
+<!ELEMENT pre - - (%flow;)*>
+<!ATTLIST pre
+  %global;
+  >
+
+<!ELEMENT table - - (caption?, (colgroup*), thead?, tfoot?, (tbody+ | tr+), tfoot?)>
+<!ATTLIST table
+  %global;
+  border NUMBER #IMPLIED
+  frame (void|above|below|hsides|lhs|rhs|vsides|box|border) #IMPLIED
+  >
+
+<!ELEMENT ul - - (li)*>
+<!ATTLIST ul
+  %global;
+  >
+
+<!ELEMENT base - O EMPTY>
+<!ATTLIST base
+  %global;
+  href CDATA #IMPLIED
+  target CDATA #IMPLIED
+  >
+
+<!ELEMENT body O O (%flow;)*>
+<!ATTLIST body
+  %global;
+  onafterprint CDATA #IMPLIED
+  onbeforeprint CDATA #IMPLIED
+  onbeforeunload CDATA #IMPLIED
+  onhashchange CDATA #IMPLIED
+  onmessage CDATA #IMPLIED
+  onoffline CDATA #IMPLIED
+  ononline CDATA #IMPLIED
+  onpagehide CDATA #IMPLIED
+  onpageshow CDATA #IMPLIED
+  onpopstate CDATA #IMPLIED
+  onresize CDATA #IMPLIED
+  onstorage CDATA #IMPLIED
+  onunload CDATA #IMPLIED
+  >
+
+<!ELEMENT caption - - (%flow;)*>
+<!ATTLIST caption
+  %global;
+  >
+
+<!ELEMENT col - O EMPTY>
+<!ATTLIST col
+  %global;
+  span NUMBER #IMPLIED
+  >
+
+<!ELEMENT colgroup - - (%phrase;)*>
+<!ATTLIST colgroup
+  %global;
+  c CDATA #IMPLIED
+  span NUMBER #IMPLIED
+  >
+
+<!ELEMENT dd - - (%flow;)*>
+<!ATTLIST dd
+  %global;
+  >
+
+<!ELEMENT dt - O (%flow;)*>
+<!ATTLIST dt
+  %global;
+  >
+
+<!ELEMENT figcaption - - (%flow;)*>
+<!ATTLIST figcaption
+  %global;
+  >
+
+<!ELEMENT head O O (base | command | link | meta | noscript | script | style | title | bgsound | isindex | nextid )*>
+<!ATTLIST head
+  %global;
+  >
+
+<!ELEMENT html O O (head, body)>
+<!ATTLIST html
+  %global;
+  manifest CDATA #IMPLIED
+  >
+
+<!ELEMENT legend - - (%phrase;)*>
+<!ATTLIST legend
+  %global;
+  >
+
+<!ELEMENT li - O (%flow;)*>
+<!ATTLIST li
+  %global;
+  value CDATA #IMPLIED
+  >
+
+<!ELEMENT optgroup - - (option)*>
+<!ATTLIST optgroup
+  %global;
+  disabled (disabled) #IMPLIED
+  label CDATA #REQUIRED
+  >
+
+<!ELEMENT option - O (#PCDATA)>
+<!ATTLIST option
+  %global;
+  disabled (disabled) #IMPLIED
+  label CDATA #IMPLIED
+  selected (selected) #IMPLIED
+  value CDATA #IMPLIED
+  >
+
+<!ELEMENT param - O EMPTY>
+<!ATTLIST param
+  %global;
+  name CDATA #IMPLIED
+  value CDATA #IMPLIED
+  >
+
+<!ELEMENT rp - - (%phrase;)*>
+<!ATTLIST rp
+  %global;
+  >
+
+<!ELEMENT rt - - (%phrase;)*>
+<!ATTLIST rt
+  %global;
+  >
+
+<!ELEMENT source - O EMPTY>
+<!ATTLIST source
+  %global;
+  src CDATA #IMPLIED
+  type CDATA #IMPLIED
+  media CDATA #IMPLIED
+  >
+
+<!ELEMENT summary - - (%phrase;)*>
+<!ATTLIST summary
+  %global;
+  >
+
+<!ELEMENT tbody O O (tr)*>
+<!ATTLIST tbody
+  %global;
+  >
+
+<!ELEMENT td - O (%flow;)*>
+<!ATTLIST td
+  %global;
+  colspan NUMBER #IMPLIED
+  rowspan NUMBER #IMPLIED
+  headers CDATA #IMPLIED
+  >
+
+<!ELEMENT tfoot - - (tr)*>
+<!ATTLIST tfoot
+  %global;
+  >
+
+<!ELEMENT th - O (%flow;)*>
+<!ATTLIST th
+  %global;
+  colspan NUMBER #IMPLIED
+  rowspan NUMBER #IMPLIED
+  headers CDATA #IMPLIED
+  scope (row | col | rowgroup | colgroup) #IMPLIED
+  >
+
+<!ELEMENT thead - O (tr)*>
+<!ATTLIST thead
+  %global;
+  >
+
+<!ELEMENT title - - (#PCDATA)>
+<!ATTLIST title
+  %global;
+  >
+
+<!ELEMENT tr - O (td | th)*>
+<!ATTLIST tr
+  %global;
+  >
+
+<!ELEMENT track - O EMPTY>
+<!ATTLIST track
+  %global;
+  default (default) #IMPLIED
+  kind (subtitles | captions | descriptions | chapters | metadata) #IMPLIED
+  label CDATA #IMPLIED
+  src CDATA #IMPLIED
+  srclang NAME #IMPLIED
+  >

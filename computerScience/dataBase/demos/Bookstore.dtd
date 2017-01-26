@@ -1,14 +1,20 @@
 <!ELEMENT Bookstore (Book*)>
 <!ELEMENT Book (Title, Authors, Remark?)>
-<!ATTLIST Book  ISBN ID #REQUIRED
-                Price CDATA #REQUIRED
-                Authors IDREFS #REQUIRED>
+<!ATTLIST Book
+    ISBN ID #REQUIRED
+    Price CDATA #REQUIRED
+    Authors IDREFS #REQUIRED
+>
 <!ELEMENT Title (#PCDATA)>
 <!ELEMENT Remark (#PCDATA | BookRef)*>
 <!ELEMENT BookRef EMPTY>
-<!ATTLIST BookRef book IDREF #REQUIRED>
+<!ATTLIST BookRef
+    book IDREF #REQUIRED
+>
 <!ELEMENT Authors (Author*)>
 <!ELEMENT Author (First_Name, Last_Name)>
-<!ATTLIST Author Ident ID #REQUIRED>
+<!ATTLIST Author
+    Ident ID #REQUIRED
+>
 <!ELEMENT First_Name (#PCDATA)>
 <!ELEMENT Last_Name (#PCDATA)>
