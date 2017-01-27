@@ -126,6 +126,31 @@ $ xmllint -schema Bookstore.xsd -noout Bookstore.xml
 
 ## Relational Algebra
 
+### Operators
+
+*   select operator σ(sigma): `σ(sID < 100 ^ sAge > 20)Table_Name` set constraints
+*   project operator π(pi)  :   `π(sID, GPA)Table_Name` select certain columns
+*   cross-product operator x: Table1 x Table2, m tuples(rows) x n tuples(rows) => m*n tuples(rows)
+*   natural join operator ∞: σ(E1.A1 = E2.A1 ^ E1.A2 = E2.A2 ...) (E1 x E2)
+*   theta join operator ∞(cond): σ(cond) (E1 x E2), call cond as ϴ
+
+```sql
+π(sID, GPA) (σ(sID < 100 ^ GPA > 3.7) Student)
+```
+
+## Higher-Level Database Design Models
+
+Higher-Level Database Design Models `-Translator->` Relational implemented by RDBMS
+
+### UML(Unified Modeling Language)
+
+*   Classes
+*   Associations
+*   Associations Classes
+*   Subclasses
+*   Composition & Aggregation
+
+### E/R Model(Entity-Relationship Model)
 
 ## Nosql - MongoDB Basic Notes
 
