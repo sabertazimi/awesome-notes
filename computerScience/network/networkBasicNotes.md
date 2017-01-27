@@ -4,6 +4,10 @@
 
 ### What is Internet
 
+end-to-end principle: implement features in the end-system/hosts where possible
+
+> congestion implemented on Transport Layer
+
 #### Consist
 
 Internet Service Provider -> Packet Switch/Communication Link -> Host/End System
@@ -14,9 +18,9 @@ nodal = proc + queue + trans + prop: 总时延 = 产生/到达时延 + 排队时
 
 #### Layer
 
-*   Application Layer Protocol: HTTP SMTP (message)
-*   Transport Layer Protocol: TCP UDP (segment)
-*   Network Layer Protocol: IP (因特网的粘合剂) (datagram)
+*   Application Layer Protocol: HTTP SMTP (message, stream of data)
+*   Transport Layer Protocol: TCP UDP (segment, segment of data)
+*   Network Layer Protocol: IP (因特网的粘合剂) (**unreliable** datagram, packet of data)
 *   Data Link Layer Protocol: Wifi PPP(点对点) 以太网 (frame)
 *   Physical Layer Protocol 
 
@@ -86,8 +90,8 @@ internet telephony      - SIP/RTP           - UDP
 ```
 #### Address
 
-*   (32 bits)IP  : find specific host/end-system
-*   (16 bits)port: find specific process
+*   (32 bits network layer  )IP  : find specific host/end-system
+*   (16 bits transport layer)port: find specific process
 
 ## Transport Layer
 
@@ -96,7 +100,28 @@ internet telephony      - SIP/RTP           - UDP
 *   reliable transmission and **flow control**
 *   connection-oriented service
 
+#### 3-way handshake
+
+SYN -> SYN/ACK -> ACK
+
 ### UDP
 
 *   lightweight without connection
- 
+
+## Network Layer
+
+### IP Service Model
+
+*   prevent packets looping forever(TTL/time to live field in header): if TTL gets decreased to zero, then drop this datagram
+*   limit fragment packets size(Packet ID, Flags, Fragment Offset)
+*   reduce changes of wrong destination(Checksum, Destination Address)
+
+## Wireshark
+
+### Set Up
+
+```sh
+$ sudo dpkg-reconfigure wireshark-common
+$ sudo gpasswd -a $USER wireshark
+```
+
