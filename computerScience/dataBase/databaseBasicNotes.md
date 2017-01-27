@@ -144,11 +144,62 @@ Higher-Level Database Design Models `-Translator->` Relational implemented by RD
 
 ### UML(Unified Modeling Language)
 
-*   Classes
-*   Associations
-*   Associations Classes
-*   Subclasses
-*   Composition & Aggregation
+#### Classes
+
+for data modeling: 
+
+*   add PK(primary key)
+*   drop methods
+
+```uml
+-----------
+| student |
+|---------|
+|sID   PK |
+|sName    |
+|GPA      |
+|---------|
+|<methods>|
+-----------
+```
+
+#### Associations
+
+relationships between objects of 2 classes):
+
+*   one to one: 1..1  --- 1..1
+*   many to one: *    --- 1..1
+*   one to many:1..1  ---  *
+*   many to many: *   ---  *
+
+```uml
+-----------                   ---------
+| student |                   |collegs|
+|---------|                   |       |
+|sID   PK |x..y   Apply   m..n|       |
+|sName    |-------------------|       |
+|GPA      |                   |       |
+|---------|                   |       |
+|<methods>|                   |       |
+-----------                   ---------
+```
+
+#### Associations Classes
+
+*   classes store information of relationship edge between 2 data classes
+*   unnecessary if 0..1 or 1..1
+
+```uml
+c1 * --- 1..1 c2
+information of relationship edge can stored in c1
+owing to every object of c1 only associated with 1 object of c2
+```
+
+#### Subclasses
+
+children classes
+
+#### Composition and Aggregation
 
 ### E/R Model(Entity-Relationship Model)
 
