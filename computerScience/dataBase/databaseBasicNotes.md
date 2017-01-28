@@ -133,6 +133,11 @@ $ xmllint -schema Bookstore.xsd -noout Bookstore.xml
 *   cross-product operator x: Table1 x Table2, m tuples(rows) x n tuples(rows) => m*n tuples(rows)
 *   natural join operator ∞: σ(E1.A1 = E2.A1 ^ E1.A2 = E2.A2 ...) (E1 x E2)
 *   theta join operator ∞(cond): σ(cond) (E1 x E2), call cond as ϴ
+*   difference operator -: matching schemas => change rows/tuples
+*   union/intersection operator ∪ / ∩: matching schemas => change rows/tuples
+*   rename operator ρ: change schemas(attributes name), different schemas <=> same schemas (**union/intersection/self-join**)
+*   assign statement :=
+*   tree notation
 
 ```sql
 π(sID, GPA) (σ(sID < 100 ^ GPA > 3.7) Student)
