@@ -50,11 +50,15 @@
 *   everything in a row is all relevant to each other
 
 > (id, name, birth, majar, grade) is not normalized, because grade is not relevant to student id
+
 > (id, name, birth) + (id, majar, grade) is normalized
+
 > (name, os, lang) is not mormalized, because os isn't relevant to lang
+
 > (name, os) + (name, lang) is normalized
 
 > Data-intensive applications may not use DBMS/Query Language at all
+
 > e.g Hadoop, all operations on data stores in files
 
 ## Data Format
@@ -207,6 +211,52 @@ children classes
 #### Composition and Aggregation
 
 ### E/R Model(Entity-Relationship Model)
+
+## SQL
+
+```sql
+DROP VIEW IF EXISTS Standings;
+DROP VIEW IF EXISTS Count;
+DROP VIEW IF EXISTS Wins;
+DROP TABLE IF EXISTS Matches;
+DROP TABLE IF EXISTS Players;
+
+-- Players Table
+CREATE TABLE Players (
+	id SERIAL primary key,
+	name varchar(255)
+);
+
+-- Matches Table
+CREATE TABLE Matches (
+	id SERIAL primary key,
+	player int references Players(id),
+	opponent int references Players(id),
+	result int
+);
+
+-- Wins View shows number of wins for each Player
+CREATE VIEW Wins AS
+	SELECT Players.id, COUNT(Matches.opponent) AS n 
+	FROM Players
+	LEFT JOIN (SELECT * FROM Matches WHERE result>0) as Matches
+	ON Players.id = Matches.player
+	GROUP BY Players.id;
+
+-- Count View shows number of matches for each Player
+CREATE VIEW Count AS
+	SELECT Players.id, Count(Matches.opponent) AS n 
+	FROM Players
+	LEFT JOIN Matches
+	ON Players.id = Matches.player
+	GROUP BY Players.id;
+
+-- Standings View shows number of wins and matches for each Player
+CREATE VIEW Standings AS 
+	SELECT Players.id,Players.name,Wins.n as wins,Count.n as matches 
+	FROM Players,Count,Wins
+	WHERE Players.id = Wins.id and Wins.id = Count.id;
+```
 
 ## Nosql - MongoDB Basic Notes
 
