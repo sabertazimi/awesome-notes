@@ -172,7 +172,7 @@ evaluation: whole let result = body_result
 *   e1 andalso e2: keyword
 *   e1 orelse e2 : keyword
 *   not e1       : bool -> bool
-*   =(equal) <>(not equal) > < >= <=: require two same type elem
+*   `=`(equal) `<>`(not equal) `>` `<` `>=` `<=`: require two same type elem
 
 ### closure
 
@@ -204,3 +204,4 @@ fun countup = curry range 1
 val arr = countup 7 (* maps to [1, 2, ..., 7] *)
 ```
 
+## Type inference
