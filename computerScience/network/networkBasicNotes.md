@@ -24,6 +24,14 @@ nodal = proc + queue + trans + prop: 总时延 = 产生/到达时延 + 排队时
 *   Data Link Layer Protocol: Wifi PPP(点对点) 以太网 (frame)
 *   Physical Layer Protocol 
 
+#### Layering Principle
+
+*   modularity
+*   well defined service: simple service model provided by lower level, providing for higher level
+*   reuse
+*   separation of concerns
+*   continuous improvement: change inner structure of layer independently
+
 ## Application Layer
 
 ### Application Layer Protocol
