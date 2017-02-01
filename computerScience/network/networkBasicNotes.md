@@ -124,6 +124,42 @@ SYN -> SYN/ACK -> ACK
 *   limit fragment packets size(Packet ID, Flags, Fragment Offset)
 *   reduce changes of wrong destination(Checksum, Destination Address)
 
+### IPv4 Addresses
+
+*   32 bits long: a.b.c.d
+
+#### Address Structure
+
+*   historical: class A: 0-network(7 bits)-host(24 bits) class B: 10-network(14 bits)-host(16 bits) class C: 110-network(21 bits)-host(8 bits)
+*   today: 171.64.0.0/16 means 171.64.0.0 to 171.64.255.255, A/24 describes 256 addresses, A/20 describes 4096 addresses
+*   longest prefix matching and netmask(A/16 e.g 0.0.0.0/0 => matching all addresses)
+
+### ARP(Address Resolution Protocol)
+
+*   generates mappings between link layer and network layer addresses cached in nodes
+*   request-reply protocol: who has network address X => I have network address X
+*   request sent to link layer broadcast address, reply sent to requesting address
+*   when request to dist ARP packet header with empty DIST HARDWARE ADDRESS field and opcode 1(request)
+*   when reply to src ARP packet header with dist hardware address as SRC HARDWARE ADDRESS field, src hardware address as DIST HARDWARE ADDRESS field and opcode 2(reply)
+
+### Packet Format
+
+#### Endian
+
+*   network is big-endian
+*   in x86 processor, use `htons()/ntohs()/htonl()/ntohl()` host - network -short/long helper function to transform format
+
+```c
+#include <arpa/inet.h>
+
+uint16_t http_port = 80;
+uint16_t packet_port = ntohs(packet->port);
+
+if (packet_port == http_port) {
+    // OK
+}
+```
+
 ## Wireshark
 
 ### Set Up
