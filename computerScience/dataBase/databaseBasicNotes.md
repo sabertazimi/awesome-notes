@@ -1,24 +1,42 @@
 
-* [Basic Concepts](#basic-concepts)
-	* [Feature](#feature)
-	* [Common Words](#common-words)
-	* [Normalized Design](#normalized-design)
-* [Relational Algebra](#relational-algebra)
-* [Nosql - MongoDB Basic Notes](#nosql---mongodb-basic-notes)
-	* [Set Up](#set-up)
-		* [Install](#install)
-		* [Not Upgrade](#not-upgrade)
-		* [Start/Stop/Restart](#startstoprestart)
-		* [Uninstall](#uninstall)
-	* [Shell Instruction](#shell-instruction)
-		* [create and drop](#create-and-drop)
-			* [create](#create)
-			* [drop](#drop)
-		* [query](#query)
-		* [insert](#insert)
-		* [information](#information)
-			* [database](#database)
-			* [collection](#collection)
+* [Database Basic Notes](#database-basic-notes)
+	* [Basic Concepts](#basic-concepts)
+		* [Feature](#feature)
+		* [Common Words](#common-words)
+		* [Normalized Design](#normalized-design)
+	* [Data Format](#data-format)
+		* [XML](#xml)
+			* [DTD(Document Type Definition)](#dtddocument-type-definition)
+			* [XSD(XML Schema Definition)](#xsdxml-schema-definition)
+		* [JSON(JavaScript Object Notation)](#jsonjavascript-object-notation)
+	* [Relational Algebra](#relational-algebra)
+		* [Operators](#operators)
+	* [Higher-Level Database Design Models](#higher-level-database-design-models)
+		* [UML(Unified Modeling Language)](#umlunified-modeling-language)
+			* [Classes](#classes)
+			* [Associations](#associations)
+			* [Associations Classes](#associations-classes)
+			* [Subclasses](#subclasses)
+			* [Composition and Aggregation](#composition-and-aggregation)
+		* [E/R Model(Entity-Relationship Model)](#er-modelentity-relationship-model)
+	* [SQL](#sql)
+	* [Nosql - MongoDB Basic Notes](#nosql---mongodb-basic-notes)
+		* [Set Up](#set-up)
+			* [Install](#install)
+			* [Not Upgrade](#not-upgrade)
+			* [Start/Stop/Restart](#startstoprestart)
+			* [Uninstall](#uninstall)
+		* [Shell Instruction](#shell-instruction)
+			* [create and drop](#create-and-drop)
+				* [create](#create)
+				* [drop](#drop)
+			* [query](#query)
+			* [insert](#insert)
+			* [information](#information)
+				* [database](#database)
+				* [collection](#collection)
+
+# Database Basic Notes
 
 ## Basic Concepts
 
@@ -41,13 +59,6 @@
 *   left/right join on ...
 *   primary/foreign key
 *   references
-
-### Normalized Design
-
-*   every row has the same number of columns
-*   every row has a unique key(PRIMARY KEY)
-*   everything in a row is all relevant to unique key
-*   everything in a row is all relevant to each other
 
 > (id, name, birth, majar, grade) is not normalized, because grade is not relevant to student id
 
@@ -214,6 +225,11 @@ children classes
 
 ## SQL
 
+*   select ... from ... where
+*   insert into ... ...
+*   delete from ... where ...
+*   update ... set ... = ... where ...
+
 ```sql
 DROP VIEW IF EXISTS Standings;
 DROP VIEW IF EXISTS Count;
@@ -256,6 +272,100 @@ CREATE VIEW Standings AS
 	SELECT Players.id,Players.name,Wins.n as wins,Count.n as matches 
 	FROM Players,Count,Wins
 	WHERE Players.id = Wins.id and Wins.id = Count.id;
+```
+
+## Relational Design
+
+### Decomposition
+
+*   start with mega-relations: including all attributes
+*   decompose into smaller relations(BCNF/4NF)
+
+### functional dependencies
+
+*   A -> B => 1-1/n-1 mapping
+*   key sets: closure of sets contains all attributes
+
+> assuming relation R(A, B, C, D, ..., G)
+
+> andclosure of A, B {A, B}+ `A->C->D, B->E->F, F->G` => {A, B}+ = {A, B, C, ..., G}
+
+> then, {A, B} is a key
+
+> if there no exists such closure, then treat all-attributes as a key
+
+### **BCNF** (boyce-codd normal form)
+
+*   for each A -> B having A is super key && B isn't key
+*   not exists A -> B -> C
+*   here's the algorithm:
+
+```cpp
+/*
+ * @brief fixed point algorithm just like most algorithms from compiler
+ * 
+ * by decomposing to transform non-key dependent attributes to key dependent attributes
+ */
+
+compute FDs for R
+compute key for R using its FDs
+
+while (there is relation R' aren't in BCNF) {
+    pick any R' with A -> B that violates BCNF (A is not its key)
+    decompose R' into R1(A, B) and R2(A, rest)
+    compute FDs for R1 and R2
+    compute keys for R1 and R2 using their FDs
+}
+```
+
+### multivalued dependencies
+
+*   A -> B && rest attributes => A ->> B
+*   A ->> B(1-n mapping), A ->> C(1-n mapping), no `B -> C`/`C ->> B`, B * C redundant tuples/rows
+*   A ->>B && A ->>C => A ->> B∩C
+*   A ->>B && B ->>C => A ->> C-B
+
+### 4NF(forth normal form)
+
+*   if A ->> B then A is key && B isn't key
+*   here's the algorithm:
+
+```cpp
+/*
+ * @brief fixed point algorithm just like most algorithms from compiler
+ *
+ * by decomposing to transform non-key dependent attributes to key dependent attributes
+ */
+
+compute FDs and MVDs for R
+compute key for R using its FDs
+
+while (there is relation R' aren't in 4NF) {
+    pick any R' with A ->> B that violates 4NF(A is not its key)
+    decompose R' into R1(A, B) and R2(A, rest)
+    compute FDs and MVDs for R1 and R2
+    compute keys for R1 and R2 using their FDs
+}
+```
+
+### Normalized Design
+
+*   every row has the same number of columns
+*   every row has a unique key(PRIMARY KEY)
+*   everything in a row is all relevant to unique key
+*   everything in a row is all relevant to each other
+
+## Indexes
+
+*   primary mechanism to improve performance of database
+*   persist data structures stored in database (hash tables/B trees/B+ trees)
+*   trade off: `scale of database` and `workload(query/update rate)` as input of physical design advisors
+
+```sql
+CREATE INDEX IndexName on T(A)
+CREATE INDEX IndexName on T(A1, A2, ..., An)
+CREATE UNIQUE INDEX IndexName on T(A)
+DROP INDEX IndexName
 ```
 
 ## Nosql - MongoDB Basic Notes
