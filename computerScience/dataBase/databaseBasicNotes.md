@@ -368,6 +368,39 @@ CREATE UNIQUE INDEX IndexName on T(A)
 DROP INDEX IndexName
 ```
 
+## Transactions
+
+*   a sequence of one/more SQL operations treated as a unit
+*   target: concurrency and failures recovery
+
+### Transaction Standard
+
+*   all or nothing(atomicity)
+*   transaction begins automatically on first SQL statement
+*   on "commit": old transaction ends, new one begins
+*   on session termination: current transaction ends
+*   "autocommit" turns each statement into transaction
+
+### ACID Properties
+
+*   Atomicity(Logging)
+*   Consistency
+*   Isolation: guarantee serializability(Locking)
+*   Durability(Logging)
+
+#### Isolation Level
+
+weaker isolation level: read uncommitted < read committed < repeatable read < serializable
+
+*   increased concurrency + decreased overhead = increased performance
+*   weaker consistency guarantees
+*   some system default: repeatable read
+
+```sql
+SET TRANSACTION READ ONLY;
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+```
+
 ## Nosql - MongoDB Basic Notes
 
 ### Set Up
