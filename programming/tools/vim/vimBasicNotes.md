@@ -804,7 +804,7 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extr
 |`<C-x><C-f>`|文件名补全|
 |`<C-x><C-o>`|全能（Omni）补全|
 
--   可供弹出式菜单使用的命令
+*   可供弹出式菜单使用的命令
 
 |按键操作|作用|
 |:--------:|:--------------------------------------:|
@@ -825,3 +825,4 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extr
 *   Gdiff
 *   Gcommit/Gstatus
 *   Gpull/Gpush
+
