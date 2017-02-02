@@ -401,6 +401,37 @@ SET TRANSACTION READ ONLY;
 SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 ```
 
+## Integrity Constraints
+
+```sql
+CREATE TABLE TableName (
+    ... PRIMARY KEY,
+    ... UNIQUE,
+    ... CHECK (Condition),
+    ... references TableName(ForeignKey),
+    ... references TableName(ForeignKey) ON DELETE/UPDATE RESTRICT/SET NULL/CASCADE,
+    ... ,
+    PRIMARY KEY (Attr1, Attr2, ...),
+    UNIQUE (Attr1, Attr2, ...),
+    CHECK (Condition),
+    FOREIGN KEY (Attr1, Attr2, ...) references TableName(Bttr1, Bttr2, ...) [ ON ... (default RESTRICT) ]
+);
+
+CREATE ASSERTION AssertionName
+CHECK (Condition);
+```
+
+## Triggers
+
+```sql
+CREATE TRIGGER TriggerName
+BEFORE|AFTER|INSTEAD OF Events
+[ referencing-variables ]
+[ FOR EACH ROW ]
+WHEN ( Condition )
+Action
+```
+
 ## Nosql - MongoDB Basic Notes
 
 ### Set Up
