@@ -421,15 +421,70 @@ CREATE ASSERTION AssertionName
 CHECK (Condition);
 ```
 
-## Triggers
+## Triggers (DBMS Level Constraints)
 
 ```sql
 CREATE TRIGGER TriggerName
-BEFORE|AFTER|INSTEAD OF Events
+BEFORE|AFTER|INSTEAD OF Events(INSERT/UPDATE OF/DELETE ON TableName)
 [ referencing-variables ]
 [ FOR EACH ROW ]
 WHEN ( Condition )
+[ BEGIN ]
 Action
+[ END ];
+
+CREATE TRIGGER Cascade
+After DELETE ON S
+REFERENCING OLD ROW AS O
+FOR EACH ROW
+DELETE FROM R WHERE A = O.B (R.A = S.B)
+
+CREATE TRIGGER Cascade
+After DELETE ON S
+REFERENCING OLD TABLE AS OT
+DELETE FROM R WHERE A IN (SELECT B FROM BT)
+```
+
+## Views
+
+*   logical layer: hiding data from users
+*   modularity and reuse of query
+
+```sql
+VIEW ViewName = VIEWQUERY (R1, R2, ..., Rn)
+
+CREATE VIEW ViewName (T1, T2, ..., Tn) AS
+< Query >
+```
+
+### Modifications on Views
+
+owing to views are logical layer, it's senseless to modify data on views
+
+#### Implements Modification with Triggers
+
+```sql
+CREATE TRIGGER TriggerName
+INSTEAD OF DELETE/UPDATE OF/INSERT ON ViewName
+[ referencing-variables ]
+[ FOR EACH ROW ]
+WHEN ( Condition )
+[ BEGIN ]
+Action
+[ END ];
+```
+
+#### SQL Standard - Updatable Views
+
+*   SELECT (no DISTINCT) on single table T
+*   no GROUP BY/HAVING or Aggregation
+*   attributes can't be NULL/default values
+*   sub-queries cant' refer to table T
+
+```sql
+CREATE VEIW
+...
+WITH CHECK OPTION;
 ```
 
 ## Nosql - MongoDB Basic Notes
