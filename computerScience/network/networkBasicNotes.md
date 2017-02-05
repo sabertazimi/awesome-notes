@@ -103,18 +103,50 @@ internet telephony      - SIP/RTP           - UDP
 
 ## Transport Layer
 
-### TCP
+### TCP(Transmission Control Protocol)
 
-*   reliable transmission and **flow control**
 *   connection-oriented service
+*   in-sequence stream of bytes service
+*   reliable delivery
+*   **congestion control**
 
 #### 3-way handshake
 
-SYN -> SYN/ACK -> ACK
+*   SYN -> SYN/ACK -> ACK
+*   FIN(toB) -> [Data+]ACK(toA) -> FIN(toA) -> ACK(toB)
 
-### UDP
+### UDP(User Datagram Protocol)
 
-*   lightweight without connection
+*   lightweight and connectionless
+*   datagram service
+*   unreliable delivery
+*   udp header: source port(16 bit), destination port(16 bit), checksum(16 bit), length(16 bit)
+
+### ICMP (Internet Control Message Protocol)
+
+*   report error conditions back
+*   help diagnose problems
+*   site above IP
+
+#### ICMP Message Type
+
+*     0 type 0 code: echo reply(by ping)
+*     3 type 0 code: destination network unreachable
+*     3 type 1 code: destination host unreachable
+*     3 type 3 code: destination port unreachable
+*     8 type 0 code: echo request(by ping)
+*    11 type 0 code: TTL(time to live) Expired(by ping)
+
+### Error Detection
+
+*   TCP/IP: checksums(1 bit)
+*   Ethernet(Link Layer): cylic redundancy code(2 bit/more)
+*   SSL(Secure Sockets Layer)/TLS(Transport Layer Security): message authentication code(**MAC**)(cryptographic data) - prevent malicious attacks
+
+### Slide Window and Retransmission
+
+*   SWZ N and RWS 1: go back N
+*   SWZ N and RWZ N: selective repeat
 
 ## Network Layer
 
@@ -139,8 +171,9 @@ SYN -> SYN/ACK -> ACK
 *   generates mappings between link layer and network layer addresses cached in nodes
 *   request-reply protocol: who has network address X => I have network address X
 *   request sent to link layer broadcast address, reply sent to requesting address
-*   when request to dist ARP packet header with empty DIST HARDWARE ADDRESS field and opcode 1(request)
-*   when reply to src ARP packet header with dist hardware address as SRC HARDWARE ADDRESS field, src hardware address as DIST HARDWARE ADDRESS field and opcode 2(reply)
+*   when request to dest ARP packet header with empty DEST HARDWARE ADDRESS field and opcode 1(request)
+*   when reply to src ARP packet header with dest hardware address as SRC HARDWARE ADDRESS field, src hardware address as DEST HARDWARE ADDRESS field and opcode 2(reply)
+*   if A and B aren't in same sub-net, they delivery ARP boardcast with third public gateway
 
 ### Packet Format
 
