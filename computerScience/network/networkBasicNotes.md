@@ -202,3 +202,10 @@ $ sudo dpkg-reconfigure wireshark-common
 $ sudo gpasswd -a $USER wireshark
 ```
 
+## Other Tools
+
+*   ifconfig + egrep
+*   netstat + egrep
+*   tcpdump
+*   nslookup
+
