@@ -213,6 +213,11 @@ sort(vec.start(), vec.end(), cmp);
 *   insert/update: mp[key] = value;
 *   search: mp.count(key)/mp.find(key), 不会插入空元素
 
+## Greedy Algorithm
+
+*   字典排序比较问题
+*   Huffman Tree
+
 ## Simulation
 
 ### Painting

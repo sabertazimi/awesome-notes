@@ -731,11 +731,54 @@ $ :PluginInstall
 -   :colorscheme {theme}
 
 ```vimrc
+set nocompatible
+set number
+
+syntax on
+filetype plugin indent on
+
+set shiftwidth=4
+set softtabstop=4
+
+set spell spelllang=en_us
+scriptencoding utf-8
+
+set mouse=a
+set mousehide
+
+set ignorecase
+set smartcase
+
+" :find filepath
+" :tabnew filepath
+" :tabp :tabn
+" :b partOfFilepath
+" :ls
+set path+=**
+set wildmenu
+set wildmode=list:longest,full
+
+" NERDtree like setup for netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+" let g:netrw_list_hide=netrw_gitignore#Hide()
+" let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+augroup ProjectDrawer
+autocmd!
+autocmd VimEnter * :Vexplore
+augroup END
+
+" ctags setup
+" command! MakeTags !ctags -R -f ./.git/tags .
+
 " colorschemes config
 colorscheme Monokai
 
 " airline config
-"set laststatus=2
+" set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
