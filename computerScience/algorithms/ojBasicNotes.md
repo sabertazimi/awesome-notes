@@ -1,15 +1,93 @@
-
 * [OJ Basic Notes](#oj-basic-notes)
 	* [C++ Notes for OJ](#c-notes-for-oj)
+		* [Implementation Pattern(OOP Pattern)](#implementation-patternoop-pattern)
+		* [algorithm](#algorithm)
+			* [sort](#sort)
 		* [map](#map)
+	* [Greedy Algorithm](#greedy-algorithm)
+	* [Simulation](#simulation)
+		* [Painting](#painting)
+	* [String](#string)
+	* [Map Theory](#map-theory)
+		* [Shortest Paths](#shortest-paths)
+		* [Minial Spanning Tree](#minial-spanning-tree)
+		* [BFS(mark array/queue)](#bfsmark-arrayqueue)
+		* [DFS(mark array/stack/recursion)](#dfsmark-arraystackrecursion)
+		* [Connected Component](#connected-component)
+			* [Strongly Connected Component](#strongly-connected-component)
+			* [tUnion + tFind](#tunion--tfind)
 	* [Dynamic Programming](#dynamic-programming)
+		* [典型题目](#典型题目)
 		* [Digital Bits Dynamic Programming(数位 DP)](#digital-bits-dynamic-programming数位-dp)
 			* [题目模式](#题目模式)
 			* [解题模式](#解题模式)
+	* [Math](#math)
+		* [Matrix Fast Power](#matrix-fast-power)
+		* [Mod Power](#mod-power)
 
 # OJ Basic Notes
 
 ## C++ Notes for OJ
+
+### limits
+
+```cpp
+#include<iostream>
+#include<string>
+#include <limits>
+
+using namespace std;
+
+int main(void) {
+    cout << "type: \t\t" << "************size**************"<< endl;
+    cout << "bool: \t\t" << "所占字节数：" << sizeof(bool);
+    cout << "\t最大值：" << (numeric_limits<bool>::max)();
+    cout << "\t\t最小值：" << (numeric_limits<bool>::min)() << endl;
+    cout << "char: \t\t" << "所占字节数：" << sizeof(char);
+    cout << "\t最大值：" << (numeric_limits<char>::max)();
+    cout << "\t\t最小值：" << (numeric_limits<char>::min)() << endl;
+    cout << "signed char: \t" << "所占字节数：" << sizeof(signed char);
+    cout << "\t最大值：" << (numeric_limits<signed char>::max)();
+    cout << "\t\t最小值：" << (numeric_limits<signed char>::min)() << endl;
+    cout << "unsigned char: \t" << "所占字节数：" << sizeof(unsigned char);
+    cout << "\t最大值：" << (numeric_limits<unsigned char>::max)();
+    cout << "\t\t最小值：" << (numeric_limits<unsigned char>::min)() << endl;
+    cout << "wchar_t: \t" << "所占字节数：" << sizeof(wchar_t);
+    cout << "\t最大值：" << (numeric_limits<wchar_t>::max)();
+    cout << "\t\t最小值：" << (numeric_limits<wchar_t>::min)() << endl;
+    cout << "short: \t\t" << "所占字节数：" << sizeof(short);
+    cout << "\t最大值：" << (numeric_limits<short>::max)();
+    cout << "\t\t最小值：" << (numeric_limits<short>::min)() << endl;
+    cout << "int: \t\t" << "所占字节数：" << sizeof(int);
+    cout << "\t最大值：" << (numeric_limits<int>::max)();
+    cout << "\t最小值：" << (numeric_limits<int>::min)() << endl;
+    cout << "unsigned: \t" << "所占字节数：" << sizeof(unsigned);
+    cout << "\t最大值：" << (numeric_limits<unsigned>::max)();
+    cout << "\t最小值：" << (numeric_limits<unsigned>::min)() << endl;
+    cout << "long: \t\t" << "所占字节数：" << sizeof(long);
+    cout << "\t最大值：" << (numeric_limits<long>::max)();
+    cout << "\t最小值：" << (numeric_limits<long>::min)() << endl;
+    cout << "unsigned long: \t" << "所占字节数：" << sizeof(unsigned long);
+    cout << "\t最大值：" << (numeric_limits<unsigned long>::max)();
+    cout << "\t最小值：" << (numeric_limits<unsigned long>::min)() << endl;
+    cout << "double: \t" << "所占字节数：" << sizeof(double);
+    cout << "\t最大值：" << (numeric_limits<double>::max)();
+    cout << "\t最小值：" << (numeric_limits<double>::min)() << endl;
+    cout << "long double: \t" << "所占字节数：" << sizeof(long double);
+    cout << "\t最大值：" << (numeric_limits<long double>::max)();
+    cout << "\t最小值：" << (numeric_limits<long double>::min)() << endl;
+    cout << "float: \t\t" << "所占字节数：" << sizeof(float);
+    cout << "\t最大值：" << (numeric_limits<float>::max)();
+    cout << "\t最小值：" << (numeric_limits<float>::min)() << endl;
+    cout << "size_t: \t" << "所占字节数：" << sizeof(size_t);
+    cout << "\t最大值：" << (numeric_limits<size_t>::max)();
+    cout << "\t最小值：" << (numeric_limits<size_t>::min)() << endl;
+    cout << "string: \t" << "所占字节数：" << sizeof(string) << endl;
+    // << "\t最大值：" << (numeric_limits<string>::max)() << "\t最小值：" << (numeric_limits<string>::min)() << endl;
+    cout << "type: \t\t" << "************size**************"<< endl;
+    return 0;
+}
+```
 
 ### Implementation Pattern(OOP Pattern)
 
@@ -213,6 +291,41 @@ sort(vec.start(), vec.end(), cmp);
 *   insert/update: mp[key] = value;
 *   search: mp.count(key)/mp.find(key), 不会插入空元素
 
+## Search Problem
+
+### Max/Min Problem
+
+在某些问题中, 要求满足条件的 max/min, 且可以轻易地判定某个值是否满足该条件, 则可利用二分法进行值的枚举
+
+```cpp
+// poj 1064
+int N, K;
+double L[maxn];
+
+// judgement
+bool C(double x) {
+	int num = 0;
+	
+	for (int i = 0; i < N; i++) {
+		num += (int)(L[i] / x);
+	}
+	
+	return num >= K;
+}
+
+void solve(void) {
+	double lb = 0, ub = numeric_limits<double>::max();
+	
+	for (int i = 0; i < 100; i++) {
+		double mid = (lb + ub) / 2;
+		if (C(mid)) lb = mid;
+		else ub = mid;
+	}
+	
+	printf("%.2f\n", floor(ub * 100) / 100);
+}
+```
+
 ## Greedy Algorithm
 
 *   字典排序比较问题
@@ -276,6 +389,20 @@ getline(cin/sin, strbuf)
 quickly figure out connection of map
 
 ## Dynamic Programming
+
+*   dp 数组可以滚动使用, 从而节省空间
+
+> dp[m][n] => dp[2][n] (dp[i & 1][j])
+
+### 典型题目
+
+关键: 最优子结构 + 状态无后效性
+
+*   所有背包问题
+*   二分问题:最优二分搜索树/文件合并
+*   非连续特征序列: 最长子序列/最长上升序列
+*   多重部分和问题  e.g 数组中是否存在一对数的和为xx
+*   计数问题/分组问题/分划问题
 
 ### Digital Bits Dynamic Programming(数位 DP)
 
@@ -442,3 +569,32 @@ mat pow(mat A, int p) {
     return E;
 }
 ```
+
+### Mod Power
+
+```cpp
+typedef long long ll;
+
+ll mod_pow(ll x, ll n, ll mod) {
+    ll res = 1;
+
+    while (n > 0) {
+        if (n & 1) res = res * x % mod;
+
+        x = x * x % mod;
+        n >>= 1;
+    }
+
+    return res;
+}
+```
+
+## Tips
+
+### Float Pointer
+
+利用浮动指针解决相关问题:
+
+*   字符串比较
+*   连续区间问题(尺取法)
+
