@@ -1,29 +1,42 @@
-* [OJ Basic Notes](#oj-basic-notes)
-	* [C++ Notes for OJ](#c-notes-for-oj)
-		* [Implementation Pattern(OOP Pattern)](#implementation-patternoop-pattern)
-		* [algorithm](#algorithm)
-			* [sort](#sort)
-		* [map](#map)
-	* [Greedy Algorithm](#greedy-algorithm)
-	* [Simulation](#simulation)
-		* [Painting](#painting)
-	* [String](#string)
-	* [Map Theory](#map-theory)
-		* [Shortest Paths](#shortest-paths)
-		* [Minial Spanning Tree](#minial-spanning-tree)
-		* [BFS(mark array/queue)](#bfsmark-arrayqueue)
-		* [DFS(mark array/stack/recursion)](#dfsmark-arraystackrecursion)
-		* [Connected Component](#connected-component)
-			* [Strongly Connected Component](#strongly-connected-component)
-			* [tUnion + tFind](#tunion--tfind)
-	* [Dynamic Programming](#dynamic-programming)
-		* [典型题目](#典型题目)
-		* [Digital Bits Dynamic Programming(数位 DP)](#digital-bits-dynamic-programming数位-dp)
-			* [题目模式](#题目模式)
-			* [解题模式](#解题模式)
-	* [Math](#math)
-		* [Matrix Fast Power](#matrix-fast-power)
-		* [Mod Power](#mod-power)
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [OJ Basic Notes](#oj-basic-notes)
+	- [C++ Notes for OJ](#c-notes-for-oj)
+		- [limits](#limits)
+		- [Implementation Pattern(OOP Pattern)](#implementation-patternoop-pattern)
+		- [algorithm](#algorithm)
+			- [sort](#sort)
+		- [map](#map)
+	- [Search Problem](#search-problem)
+		- [Max/Min Problem](#maxmin-problem)
+		- [Range Max/Min Query](#range-maxmin-query)
+	- [Greedy Algorithm](#greedy-algorithm)
+	- [Simulation](#simulation)
+		- [Painting](#painting)
+		- [Reverting](#reverting)
+		- [Meet/Collision Problem](#meetcollision-problem)
+	- [String](#string)
+	- [Map Theory](#map-theory)
+		- [Shortest Paths](#shortest-paths)
+		- [Minial Spanning Tree](#minial-spanning-tree)
+		- [BFS(mark array/queue)](#bfsmark-arrayqueue)
+		- [DFS(mark array/stack/recursion)](#dfsmark-arraystackrecursion)
+		- [Connected Component](#connected-component)
+			- [Strongly Connected Component](#strongly-connected-component)
+			- [tUnion + tFind](#tunion-tfind)
+	- [Dynamic Programming](#dynamic-programming)
+		- [典型题目](#典型题目)
+		- [Digital Bits Dynamic Programming(数位 DP)](#digital-bits-dynamic-programming数位-dp)
+			- [题目模式](#题目模式)
+			- [解题模式](#解题模式)
+	- [Math](#math)
+		- [Matrix Fast Power](#matrix-fast-power)
+		- [Mod Power](#mod-power)
+	- [Tips](#tips)
+		- [Float Pointer](#float-pointer)
+		- [bit 表示法](#bit-表示法)
+
+<!-- /TOC -->
 
 # OJ Basic Notes
 
@@ -32,9 +45,9 @@
 ### limits
 
 ```cpp
-#include<iostream>
-#include<string>
-#include <limits>
+ #include<iostream>
+ #include<string>
+ #include <limits>
 
 using namespace std;
 
@@ -92,10 +105,10 @@ int main(void) {
 ### Implementation Pattern(OOP Pattern)
 
 ```cpp
-#define FIN             freopen("input.txt","r",stdin)
-#define FOUT            freopen("output.txt","w",stdout)
-#define fst             first
-#define snd             second
+ #define FIN             freopen("input.txt","r",stdin)
+ #define FOUT            freopen("output.txt","w",stdout)
+ #define fst             first
+ #define snd             second
 
 typedef long long LL;
 typedef pair < int, int >PII;
@@ -235,9 +248,9 @@ int solve() {
 int main()
 {
 
-#ifndef ONLINE_JUDGE
+ #ifndef ONLINE_JUDGE
     FIN;
-#endif				// ONLINE_JUDGE
+ #endif				// ONLINE_JUDGE
 
     scanf("%d", &T);
 
@@ -326,6 +339,56 @@ void solve(void) {
 }
 ```
 
+### Range Max/Min Query
+
+*   Segment Tree (线段树)
+*   Binary Indexed Tree (树状数组)
+*   Bucket Method (Divide and Conquer) 
+
+```cpp
+const int maxn = 1 << 17;
+
+int n;
+int dat[2 * maxn - 1];
+
+void init(int n_) {
+	n = 1;
+	
+	// padding to 2^n
+	while (n < n_) n *= 2;
+	
+	for (int i = 0; i < 2 * n - 1; i++) {
+		dat[i] = (numeric_limits<int>::max)();
+	}
+}
+
+void update(int k, int a) {
+	k += n - 1;
+	dat[k] = a;
+	
+	while (k > 0) {
+		k = (k - 1) / 2;
+		dat[k] = min(dat[k * 2 + 1], dat[k * 2 + 2]);
+	}
+}
+
+int query(int a, int b, int k, int l, int r) {
+	// failed
+	if (r <= a || b <= 1) {
+		return (numeric_limits<int>::max)();
+	}
+	
+	// [l, r) <= [a, b)
+	if (a <= 1 && r <= b) {
+		return dat[k];
+	} else {
+		int vl = query(a, b, k * 2 + 1, l, (l + r) / 2);
+		int vr = query(a, b, k * 2 + 2, (l + r) / 2, r);
+		return min(vl, vr);
+	}
+}
+```
+
 ## Greedy Algorithm
 
 *   字典排序比较问题
@@ -338,6 +401,16 @@ void solve(void) {
 *   对于实际操作, 直接覆写至状态数组即可, 无需关心边界条件(效果会立即生效)
 
 > e.g 交接处方块 , 2 次写 1, maps[i][j] = 1, 不用担心重复计数
+
+### Reverting
+
+*   using 1 bit to simulate operation
+*   when need to output, calculate bits up
+*   combined with dp problem
+
+### Meet/Collision Problem
+
+将相遇/碰撞的两物体视作插肩而过即可
 
 ## String
 
@@ -597,4 +670,25 @@ ll mod_pow(ll x, ll n, ll mod) {
 
 *   字符串比较
 *   连续区间问题(尺取法)
+
+### bit 表示法
+
+多用于状态枚举(1 bit 表示 1 个状态/开关), 表示状态集合
+
+> 可用于动态规划中压缩状态
+
+```c
+0				// empty set
+1 << i			// just 1 bit on
+(1 << n) - 1	// n bit on
+if (S >> i & 1) // include nth(i) bit
+S | 1 << i		// insert nth(i) bit
+S & ~(1 << i)	// remove nth(1) bit
+S | T			// union
+S & T			// intersection
+
+i & -i 			// last 1 bit
+```
+
+
 
