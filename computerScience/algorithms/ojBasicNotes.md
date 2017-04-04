@@ -306,6 +306,13 @@ sort(vec.start(), vec.end(), cmp);
 
 ## Search Problem
 
+### Search in Sorted Array
+
+*   Binary Search
+*   Divide and Conquer
+
+> leetcode 74/240
+
 ### Max/Min Problem
 
 在某些问题中, 要求满足条件的 max/min, 且可以轻易地判定某个值是否满足该条件, 则可利用二分法进行值的枚举
