@@ -9,5 +9,6 @@
 yum install python-setuptools && easy_install pip
 pip install shadowsocks
 echo "nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &" /etc/rc.local
-nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &
+nohup ssserver -c /etc/shadowsocks.json -d start /dev/null 2>&1 &
+# nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &
 
