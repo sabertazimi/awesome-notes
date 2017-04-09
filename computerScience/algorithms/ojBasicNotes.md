@@ -42,6 +42,15 @@
 
 ## C++ Notes for OJ
 
+### Format
+
+#### string and integer
+
+*   stringstream
+*   to_string
+*   stoll
+*   atoi/atol/atof
+
 ### limits
 
 ```cpp
@@ -303,6 +312,14 @@ sort(vec.start(), vec.end(), cmp);
 
 *   insert/update: mp[key] = value;
 *   search: mp.count(key)/mp.find(key), 不会插入空元素
+*   unordered_map: hash map
+
+### Algorithm
+
+*   sort
+*   reverse
+*   accumulate
+*   `prev_permutation`/`next_permutation`
 
 ## Search Problem
 
@@ -325,23 +342,23 @@ double L[maxn];
 // judgement
 bool C(double x) {
 	int num = 0;
-	
+
 	for (int i = 0; i < N; i++) {
 		num += (int)(L[i] / x);
 	}
-	
+
 	return num >= K;
 }
 
 void solve(void) {
 	double lb = 0, ub = numeric_limits<double>::max();
-	
+
 	for (int i = 0; i < 100; i++) {
 		double mid = (lb + ub) / 2;
 		if (C(mid)) lb = mid;
 		else ub = mid;
 	}
-	
+
 	printf("%.2f\n", floor(ub * 100) / 100);
 }
 ```
@@ -350,7 +367,7 @@ void solve(void) {
 
 *   Segment Tree (线段树)
 *   Binary Indexed Tree (树状数组)
-*   Bucket Method (Divide and Conquer) 
+*   Bucket Method (Divide and Conquer)
 
 ```cpp
 const int maxn = 1 << 17;
@@ -360,10 +377,10 @@ int dat[2 * maxn - 1];
 
 void init(int n_) {
 	n = 1;
-	
+
 	// padding to 2^n
 	while (n < n_) n *= 2;
-	
+
 	for (int i = 0; i < 2 * n - 1; i++) {
 		dat[i] = (numeric_limits<int>::max)();
 	}
@@ -372,7 +389,7 @@ void init(int n_) {
 void update(int k, int a) {
 	k += n - 1;
 	dat[k] = a;
-	
+
 	while (k > 0) {
 		k = (k - 1) / 2;
 		dat[k] = min(dat[k * 2 + 1], dat[k * 2 + 2]);
@@ -384,7 +401,7 @@ int query(int a, int b, int k, int l, int r) {
 	if (r <= a || b <= 1) {
 		return (numeric_limits<int>::max)();
 	}
-	
+
 	// [l, r) <= [a, b)
 	if (a <= 1 && r <= b) {
 		return dat[k];
@@ -572,7 +589,7 @@ ll dfs(int pos, int state, bool lead, bool limit) {
     ll ans=0;
 
     // 枚举: 把不同情况的个数加到ans
-    for(int i = 0;i <= up; i++)  
+    for(int i = 0;i <= up; i++)
     {
         // 当前数位枚举的数是i，根据题目的约束条件分类讨论
         // 计算不同情况下的个数, 根据 state 变量来保证 i 的合法性
