@@ -51,6 +51,15 @@
 *   stoll
 *   atoi/atol/atof
 
+### Iterator
+
+#### slice
+
+```cpp
+vector<int> b(a.begin() + 1, a.end());
+vector<int> c(a.rbegin(), a.rend());
+```
+
 ### limits
 
 ```cpp
@@ -713,6 +722,4 @@ S & T			// intersection
 
 i & -i 			// last 1 bit
 ```
-
-
 
