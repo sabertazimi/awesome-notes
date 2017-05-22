@@ -301,6 +301,10 @@ $ ifconfig ppp0
 *   https://github.com/yangyangwithgnu/autoshadower
 *   https://github.com/shadowsocks/ChinaDNS-Python
 
+```sh
+nohup ssserver -c /etc/shadowsocks.json 2>&1 &
+```
+
 #### sshuttle
 
 *   https://github.com/apenwarr/sshuttle
