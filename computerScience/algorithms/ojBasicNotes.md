@@ -697,6 +697,10 @@ ll mod_pow(ll x, ll n, ll mod) {
 
 ## Tips
 
+### Two Pointer
+
+可以在**有穷时间内**判断是否存在**循环**：一个快指针，一个慢指针，当两者相遇时，表示存在循环。
+
 ### Float Pointer
 
 利用浮动指针解决相关问题:
