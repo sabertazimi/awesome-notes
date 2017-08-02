@@ -697,6 +697,12 @@ ll mod_pow(ll x, ll n, ll mod) {
 
 ## Tips
 
+### Map
+
+*   用于 Hash 化
+*   用于将字符串转为数字
+*   用于计数
+
 ### Set
 
 *   用于去重与查重(duplicate)
