@@ -699,7 +699,8 @@ ll mod_pow(ll x, ll n, ll mod) {
 
 ### Set
 
-用于去重与查重(duplicate)
+*   用于去重与查重(duplicate)
+*   用于集合运算题（交、并、差等）
 
 ### Two Pointer
 
