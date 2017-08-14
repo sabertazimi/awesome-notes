@@ -697,6 +697,10 @@ ll mod_pow(ll x, ll n, ll mod) {
 
 ## Tips
 
+### Array
+
+*   可以利用数组元素的正负性表示存在性（或其他特殊意义）
+
 ### Map
 
 *   用于 Hash 化
