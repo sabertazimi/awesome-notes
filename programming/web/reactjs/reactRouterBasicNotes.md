@@ -54,3 +54,29 @@ replace hashHistory for browserHistory
 ### Change Route
 
 *   onEnter = { () => store.dispatch(createRouteAction(params))}
+
+## Deployment
+
+### Express Config
+
+```js
+app.use(express.static(path.resolve(__dirname, 'build')));
+
+// always serve index.html for any request
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html');
+});
+```
+
+### Nginx Config
+
+```conf
+# always serve index.html for any request (react-router for single page application)
+root /var/www/blog/html/build;
+index index.html;
+server_name blog.sabertazimi.cn;
+
+location / {
+   try_files $uri /index.html;
+}
+```
