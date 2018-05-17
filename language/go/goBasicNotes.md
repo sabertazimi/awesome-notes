@@ -31,14 +31,15 @@
 
 ```sh
 $ sudo apt install golang
-$ echo "export $GOPATH=$HOME/Work/Source/goproj"
+$ echo "export GOPATH=$HOME/gopath"
+$ echo "export PATH=$PATH:$GOPATH/bin"
+$ go env
 ```
 
 ```sh
-goproj
+$GOPATH
 |--- bin
 |--- src
-
 ```
 
 ### Basic Command
