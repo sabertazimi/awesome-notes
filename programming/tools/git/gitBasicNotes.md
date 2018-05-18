@@ -668,7 +668,8 @@ $ git checkout <commit-hash-id>
 
 ### HEAD/branch
 
-HEAD -> refs/heads/master -> commit object
+*   HEAD -> refs/heads/master -> commit object
+*   branches are just refs, refs are just files (contain commit hash id)
 
 ### .git/objects
 
