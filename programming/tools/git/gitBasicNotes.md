@@ -644,19 +644,29 @@ issues类型和feature类型的实现方式一模一样，仅仅有名字上面�
 
 ## Inside
 
-### Basic Workflow
-
-#### add
+### add
 
 *   create blob objects: contains content of files
 *   add files to index list (.git/index)
 
-#### commit
+### commit
 
 *   create tree objects: each object represent a directory, contains blob object refs in this directory
 *   create commit object: contains root tree object hash number and parent commit object hash number
 
-#### HEAD/branch
+### checkout
+
+```sh
+$ git checkout <commit-hash-id>
+```
+
+*   get commit object by commit hash id
+*   get root tree object in commit object
+*   write file entries by root tree object (tree graph)
+*   write .git/index
+*   set HEAD to that commit (detached HEAD state)
+
+### HEAD/branch
 
 HEAD -> refs/heads/master -> commit object
 
