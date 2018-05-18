@@ -642,6 +642,83 @@ issues类型和feature类型的实现方式一模一样，仅仅有名字上面�
   1. 只能从basedOn类型分支上创建
   2. 可以借助basedOn分支升级
 
+## Inside
+
+### Basic Workflow
+
+#### add
+
+*   create blob objects: contains content of files
+*   add files to index list (.git/index)
+
+#### commit
+
+*   create tree objects: each object represent a directory, contains blob object refs in this directory
+*   create commit object: contains root tree object hash number and parent commit object hash number
+
+#### HEAD/branch
+
+HEAD -> refs/heads/master -> commit object
+
+### .git/objects
+
+```sh
+$ echo 'test content' | git hash-object -w --stdin # -w for write into codebase, --stdin for reading from stdin not file
+$ git cat-file -p <object-hash-number>
+```
+
+```sh
+#!/bin/bash
+
+function seperator() {
+    for i in {1..20}
+    do
+        printf "-"
+    done
+    printf $1
+    for i in {1..20}
+    do
+        printf "-"
+    done
+    printf "\n"
+}
+
+function git_object_type() {
+    printf "type => "
+    git cat-file -t $1
+    for i in {1..40}
+    do
+        printf "-"
+    done
+    printf "\n"
+}
+
+function git_object_content() {
+    git cat-file -p $1
+}
+
+function print_git_objects() {
+    files=$(echo $(find . -type f) | sed 's/[\/\.]//g')
+    index=0
+
+    for file in $files
+    do
+        len=$(expr length "$file")
+
+        if [ $len -gt 30 ]
+        then
+            index=$(expr $index + 1)
+            seperator $index
+            echo $file
+            git_object_type $file
+            git_object_content $file
+        fi
+    done
+}
+
+print_git_objects
+```
+
 ## GitHub
 
 ### LICENSE
