@@ -662,6 +662,8 @@ HEAD -> refs/heads/master -> commit object
 
 ### .git/objects
 
+`.git/objects` is immutable, `.git/refs` is mutable
+
 ```sh
 $ echo 'test content' | git hash-object -w --stdin # -w for write into codebase, --stdin for reading from stdin not file
 $ git cat-file -p <object-hash-number>
