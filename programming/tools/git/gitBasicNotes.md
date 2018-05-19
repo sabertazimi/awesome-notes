@@ -666,6 +666,34 @@ $ git checkout <commit-hash-id>
 *   write .git/index
 *   set HEAD to that commit (detached HEAD state)
 
+### merge
+
+```sh
+$ git merge <giver-branch>/<giver-commit>
+```
+
+*   write giver commit hash to `.git/MERGE_HEAD`
+*   find base commit (the most recent common ancestor commit)
+*   diff and apply according to base commit, giver commit, receiver commit
+*   do what `git checkout` do
+*   remove `.git/MERGE_HEAD`
+
+### fetch
+
+*   get hash of remote commit and its root tree object
+*   copy all diff objects in tree graph into .git/objects
+*   update `.git/refs/remotes/origin/<branch>`, set `.git/FETCH_HEAD` to it
+
+### clone
+
+`git init` + `git remote add origin <repo-url>` + `git pull origin`
+
+### push
+
+*   apply commit to remote repo
+*   update remote repo .git/refs/heads/<branch> to new commit
+*   update local repo .git/refs/remotes/origin/<branch> to new commit
+
 ### HEAD/branch
 
 *   HEAD -> refs/heads/master -> commit object
@@ -711,7 +739,7 @@ function git_object_content() {
 }
 
 function print_git_objects() {
-    files=$(echo $(find . -type f) | sed 's/[\/\.]//g')
+    files=$(git rev-list --parents --objects HEAD | awk '{print $1}')
     index=0
 
     for file in $files
