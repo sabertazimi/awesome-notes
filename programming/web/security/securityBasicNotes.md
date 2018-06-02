@@ -251,3 +251,31 @@ Disable DTD parse in XML parser
 ### Secure Treatment of Passwords
 
 > [Hacks Explain](https://www.hacksplaining.com/prevention/password-mismanagement)
+
+### 目录遍历攻击
+
+GET /../../../passwd.key HTTP/1.1
+
+#### Protection
+
+检查请求路径是否安全, 否则不返回响应
+
+### 病毒 NPM 包
+
+名字与流行包相近, 通过 postinstall 脚本执行病毒脚本，获取系统环境变量信息 e.g crossenv
+
+#### Protection
+
+*   No typo in package.json
+*   禁止执行 postinstall 脚本
+
+### 正则表达式 DoS 攻击 (ReDoS)
+
+正则表达式引擎采用回溯的方式匹配所有可能性，导致性能问题
+
+#### Protection
+
+*   不使用 NFA 实现的正则表达式引擎, 使用 DFA 实现的正则表达式引擎
+*   不定义性能消耗过大的正则表达式
+*   不动态构造正则表达式 new RegExp()
+*   禁止用户输入影响正则表达式构建/匹配
