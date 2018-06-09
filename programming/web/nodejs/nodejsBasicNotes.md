@@ -703,6 +703,12 @@ assert.notEqual(1, true, 'Truthy');
 assert.ok(0, 'Zero is not truthy');
 ```
 
+## package.json
+
+### bin
+
+当设置了 bin 字段后, 在 package.json script 字段中，可以使用简写编写命令(但是局部安装无法使得 shell 下可使用简写)
+
 ## Awesome Package
 
 -   Mout Like  Underscore/Lo-Dash, stuff that should probably be included in JavaScript
