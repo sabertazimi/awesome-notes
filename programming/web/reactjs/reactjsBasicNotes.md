@@ -1,33 +1,64 @@
-* [React Basic Notes](#react-basic-notes)
-	* [props and state](#props-and-state)
-		* [getInitialState() and constructor(props, context)](#getinitialstate-and-constructorprops-context)
-		* [componentDidMount()](#componentdidmount)
-		* [componentWillReceiveProps()](#componentwillreceiveprops)
-		* [props validation](#props-validation)
-	* [element and component](#element-and-component)
-		* [functional/class component](#functionalclass-component)
-		* [stateful/stateless component](#statefulstateless-component)
-		* [component lifecycle](#component-lifecycle)
-			* [creation](#creation)
-			* [updates](#updates)
-			* [unmount](#unmount)
-	* [ES6 Syntax](#es6-syntax)
-		* [this.setState()](#thissetstate)
-	* [MVC模式](#mvc模式)
-		* [Controller](#controller)
-		* [Best Practice](#best-practice)
-	* [Components/Plugins](#componentsplugins)
-		* [Documents](#documents)
-		* [Data](#data)
-		* [UI](#ui)
-			* [Animation](#animation)
-			* [Charts](#charts)
-			* [Search Bar](#search-bar)
-			* [Scroll Bar](#scroll-bar)
-			* [Mouse](#mouse)
-		* [Debug/Test](#debugtest)
+<!-- TOC -->
+
+- [React Basic Notes](#react-basic-notes)
+    - [Diff Algorithm (Reconciliation)](#diff-algorithm-reconciliation)
+        - [Elements of Different Types](#elements-of-different-types)
+        - [DOM Elements of Same Type](#dom-elements-of-same-type)
+        - [Component Elements of Same Type](#component-elements-of-same-type)
+    - [props and state](#props-and-state)
+        - [getInitialState() and constructor(props, context)](#getinitialstate-and-constructorprops-context)
+        - [componentDidMount()](#componentdidmount)
+        - [componentWillReceiveProps()](#componentwillreceiveprops)
+        - [props validation](#props-validation)
+    - [element and component](#element-and-component)
+        - [functional/class component](#functionalclass-component)
+        - [stateful/stateless component](#statefulstateless-component)
+            - [stateless component](#stateless-component)
+            - [stateful component](#stateful-component)
+        - [component lifecycle](#component-lifecycle)
+            - [creation](#creation)
+            - [updates](#updates)
+            - [unmount](#unmount)
+    - [ES6 Syntax](#es6-syntax)
+        - [this.setState()](#thissetstate)
+    - [MVC模式](#mvc模式)
+        - [Controller](#controller)
+        - [Best Practice](#best-practice)
+    - [Components/Plugins](#componentsplugins)
+        - [Documents](#documents)
+        - [Data](#data)
+        - [Data to View](#data-to-view)
+        - [UI](#ui)
+            - [Animation](#animation)
+            - [Charts](#charts)
+            - [Search Bar](#search-bar)
+            - [Scroll Bar](#scroll-bar)
+            - [Mouse](#mouse)
+        - [Debug/Test](#debugtest)
+
+<!-- /TOC -->
 
 # React Basic Notes
+
+## Diff Algorithm (Reconciliation)
+
+### Elements of Different Types
+
+- rebuild element and children
+- methods: componentWillUnmount/componentWillMount/componentDidMount
+
+### DOM Elements of Same Type
+
+- only update the changed attributes
+- use `key` attribute to match children
+
+`Best Practice`: give `key` to `<li>/<tr>/<tc>` elements (stable, predictable, unique and not array indexed)
+
+### Component Elements of Same Type
+
+- update the props to match the new element
+- methods: componentWillRecevieProps/componentWillUpdate
+- then `render` called, diff algorithm recurses on the old result and the new result
 
 ## props and state
 
@@ -37,7 +68,7 @@
 
 ### componentWillReceiveProps()
 
-当此方法被调用时, 不代表 props 一定被改变. 当使用此方法监听 props 变化时, 必须额外检查 props 是否确实被改变.
+当此方法被调用时, 不代表 props 一定被改变. 当使用此方法监听 props 变化时, 必须额外检查 props 是否确实被改变
 
 ### props validation
 
