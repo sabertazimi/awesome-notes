@@ -398,7 +398,7 @@ $ gradle javadoc
 
 ### build.gradle
 
-```gradle
+```groovy
 apply plugin: 'java'
 
 jar {

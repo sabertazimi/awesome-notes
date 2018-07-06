@@ -123,7 +123,7 @@
     -   PreferredAuthentications publickey
     -   IdentityFile 密钥文件完整路径 `ssh -i file`
 
-```shell
+```bash
 Host github.com
   HostName github.com
   PreferredAuthentications publickey
@@ -164,7 +164,7 @@ $ google-chrome socks5 127.0.0.1 7070
 
 ### 远程传输文件
 
-```shell
+```bash
 rsync -ax -e 'ssh -c blowfish' /root/start_dir root@x.x.x.x:/root/dest_dir
 ```
 
@@ -177,7 +177,7 @@ rsync -ax -e 'ssh -c blowfish' /root/start_dir root@x.x.x.x:/root/dest_dir
 
 ## Linux文件架构
 
-```shell
+```bash
 $ man hier
 ```
 
@@ -260,7 +260,7 @@ ln	-s(创建软链接)	[原文件]		[目标文件]
 
 ### screen
 
-```shell
+```bash
 screen -S screenName
 screen -ls
 screen -r
@@ -343,7 +343,7 @@ tar [可选参数] 压缩文件(可指定压缩路径)  [-c 解压缩路径]源�
 
 #### .7z
 
-```shell
+```bash
 7z x manager.7z -r -o /home/xx
 7z a -t7z -r manager.7z /home/manager/*
 ```
@@ -493,7 +493,7 @@ finger apacheuser 查看单个用户信息
 
 #### 修复命令
 
-```shell
+```bash
 sudo debugfs /dev/sda9
 > debugfs: lsdel
 ```
@@ -540,7 +540,7 @@ rpm校验(查看Cracker信息):
 
 源配置文件:/etc/yum.repos.d
 
-```shell
+```bash
 cd /etc/yum.repos.d
 mv CentOS-Base.repo CentOS-Base.repo.bk
 wget http://mirrors.163.com/.help/CentOS7-Base-163.repo
@@ -565,7 +565,7 @@ yum makecache
 
 (如上述脚本出错，执行make clean）
 
-```shell
+```bash
 make install
 ```
 e.g apche  /var/www/html/index.html  /usr/local/apache/htdocs/index.html
@@ -812,7 +812,7 @@ e.g    [ -e  /etc/root/install.log  ]
 
 #### if语句
 
-```shell
+```bash
 if [ 条件判断式 ] ; then
     程序
 fi
@@ -837,7 +837,7 @@ fi
 
 #### case语句
 
-```shell
+```bash
 case $变量名 in
     “值1”)
             程序
@@ -853,7 +853,7 @@ esac
 
 #### for语句
 
-```shell
+```bash
 for 变量 in 值1 值2 值3 …… 值n
     do
         程序
@@ -871,7 +871,7 @@ for (( 初始值;循环控制条件;变量变化 ))
 
 #### while语句与until语句
 
-```shell
+```bash
 while [ 条件判断式 ]
     do
         程序
@@ -902,6 +902,6 @@ until [ 条件判断式 ]
 
 ### Terminal
 
-```shell
+```bash
 $ sudo update-alternatives --config x-terminal-emulator
 ```

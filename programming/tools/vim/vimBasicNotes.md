@@ -485,7 +485,7 @@ u: 回退命令
 |:vimgrep||
 |:make||
 
-```shell
+```bash
 cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
 ```
 
@@ -716,7 +716,7 @@ q/ 或 q: 弹出历史记录窗口
 
 ### Vundle
 
-```shell
+```bash
 $ git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
 ```
 
@@ -730,7 +730,7 @@ $ :PluginInstall
 -   :AirlineTheme {theme}
 -   :colorscheme {theme}
 
-```vimrc
+```vim
 set nocompatible
 set number
 
@@ -800,7 +800,7 @@ $ cd ~/.vim/bundle/YouCompleteMe
 $ ./install.py --clang-completer
 ```
 
-```vimrc
+```vim
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 ```
 

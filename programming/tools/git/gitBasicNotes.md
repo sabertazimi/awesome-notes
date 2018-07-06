@@ -122,7 +122,7 @@
 
 #### Initialize
 
-```shell
+```bash
 $ git config --global user.name "sabertazimi"
 $ git config --global user.email sabertazimi@gmail.com
 $ git config --global core.editor vim
@@ -133,7 +133,7 @@ $ git config --global http.postbuffer 524288000
 $ git config --list
 ```
 
-```shell
+```bash
 $ git help
 $ git --help
 $ man git-
@@ -179,19 +179,19 @@ doc/**/*.pdf
 
 查看未暂存(un-staged)差异
 
-```shell
+```bash
 $ git diff
 ```
 
 查看已暂存(staged)差异
 
-```shell
+```bash
 $ git diff --staged
 ```
 
 *显示空白字符错误(space/tab/return)*
 
-```shell
+```bash
 git diff --check
 ```
 
@@ -199,7 +199,7 @@ git diff --check
 
 -   交互式的选择 add 特定部分
 
-```shell
+```bash
 $ git add -p
 ```
 
@@ -208,13 +208,13 @@ $ git add -p
 -   -a: 跳过暂存阶段(git add)
 -   -v: 显示详细diff信息
 
-```shell
+```bash
 $ git commit -a -v
 ```
 
 重新提交
 
-```shell
+```bash
 $ git commit --amend -a -v
 ```
 
@@ -279,7 +279,7 @@ to `--runner-port`.
 
 -   重新提交前n次的commit
 
-```shell
+```bash
 $ git revert -n
 ```
 
@@ -287,19 +287,19 @@ $ git revert -n
 
 完全删除文件
 
-```shell
+```bash
 $ git rm filename
 ```
 
 --cached: 保留磁盘文件(仅从git库移除文件)
 
-```shell
+```bash
 $ git rm --cached filename
 ```
 
 ### move
 
-```shell
+```bash
 $ git mv old_path new_path
 ```
 
@@ -318,7 +318,7 @@ $ git mv old_path new_path
 -   --help
 
 
-```shell
+```bash
 $ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks path_name
 ```
 
@@ -368,7 +368,7 @@ $ git reset HEAD@{index}
 
 -   **查看其他分支 或 提交点的文件状态**
 
-```shell
+```bash
 $ git show branchName/commitHash:fileName
 ```
 
@@ -376,39 +376,39 @@ $ git show branchName/commitHash:fileName
 
 添加与删除远程仓库源
 
-```shell
+```bash
 $ git remote add <shortname> <remote-url>
 $ git remote rm <shortname>
 ```
 
 拉取和推送变更
 
-```shell
+```bash
 $ git pull [remote-name]
 $ git push [remote-name] [local-branch-name]:[remote-branch-name]
 ```
 
 显示仓库信息
 
-```shell
+```bash
 $ git remote show [remote-name]
 ```
 
 重命名仓库缩写名
 
-```shell
+```bash
 $ git remote rename <old> <new>
 ```
 
 从本地操作,删除远程仓库的分支
 
-```shell
+```bash
 $ git push origin --delete [remote-branch-name]
 ```
 
 保存推送密码
 
-```shell
+```bash
 $ git config --global credential.helper store
 ```
 
@@ -416,7 +416,7 @@ $ git config --global credential.helper store
 
 列出标记及其信息
 
-```shell
+```bash
 $ git tag
 $ git tag -l "v1.8-"
 $ git show <tagname(v1.4)>
@@ -429,19 +429,19 @@ $ git show <tagname(v1.4)>
 
 创建附注(annotated)标签
 
-```shell
+```bash
 $ git tag -a <tagname(v1.4)> [commit序列]
 ```
 
 创建轻量(lightweight)标签
 
-```shell
+```bash
 $ git tag <tagname(v1.4)> [commit序列]
 ```
 
 共享标签至远程库
 
-```shell
+```bash
 $ git push [remote-name] <tagname>
 $ git push [remote-name] --tags
 ```
@@ -450,7 +450,7 @@ $ git push [remote-name] --tags
 
 -   !: 执行外部命令
 
-```shell
+```bash
 $ git config --global alias.co checkout
 $ git config --global alias.br branch
 $ git config --global alias.ci commit
@@ -470,13 +470,13 @@ $ git config --global alias.visual '!gitk'
 
 切换到工作分支,编码开发新特性
 
-```shell
+```bash
 $ git checkout feature-branch
 ```
 
 新特性开发完毕,变基操作以简洁提交历史
 
-```shell
+```bash
 $ git rebase master
 
 git rebase [basebranch] [topicbranch]
@@ -484,7 +484,7 @@ git rebase [basebranch] [topicbranch]
 
 切换到主分支,合并特性分支
 
-```shell
+```bash
 $ git checkout master
 $ git merge feature-branch
 ```
@@ -497,31 +497,31 @@ $ git merge feature-branch
 
 创建新分支
 
-```shell
+```bash
 $ git branch <new-branch-name>
 ```
 
 删除分支
 
-```shell
+```bash
 $ git branch -d <branch-name>
 ```
 
 切换分支
 
-```shell
+```bash
 $ git checkout <branch-name>
 ```
 
 切换到新分支
 
-```shell
+```bash
 $ git checkout -b <new-branch-name>
 ```
 
 打印分支信息
 
-```shell
+```bash
 $ git branch -v(详细信息) -vv(详细远程信息) --merged(显示合并至当前分支的分支) --no-merged(显示未合并至当前分支的分支)
 ```
 
@@ -531,7 +531,7 @@ $ git branch -v(详细信息) -vv(详细远程信息) --merged(显示合并至�
 
 -   设置当前所在本地分支跟踪某一远程分支
 
-```shell
+```bash
 $ git branch -u [remotename]/[branch]
 ```
 
@@ -539,7 +539,7 @@ $ git branch -u [remotename]/[branch]
     -   --track: 本地分支由git自动命名
     -   -b: 本地分支由创建者命名
 
-```shell
+```bash
 git checkout --track [new-local-branch]
 
 git checkout -b [new-local-branch] [remotename]/[branch]
@@ -871,7 +871,7 @@ THE SOFTWARE.
 
 -   利用GitHub Repository API以及curl工具创建仓库
 
-```shell
+```bash
 curl -u 'username' -d '{"name":"RepoName", "description":"description string", "homepage":"URL", "auto_init":true, "gitignore_template":"Meteor", "license_template":"mit"}' https://api.github.com/user/repos
 ```
 
@@ -910,7 +910,7 @@ $ git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignor
 
 #### Wiki Git Access
 
-```shell
+```bash
 $ git clone git@github.com:user/repo.wiki.git
 ```
 

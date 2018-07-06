@@ -134,7 +134,7 @@ $ mkdir -p ~/.aria2
 $ vi ~/.aria2/aria2.conf
 ```
 
-```conf
+```
 #用户名
 #rpc-user=user
 #密码

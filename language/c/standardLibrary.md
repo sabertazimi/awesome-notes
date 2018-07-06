@@ -11,21 +11,27 @@
 * [`<string.h>`](#stringh)
 
 ## `<assert.h>`
+
 - 关闭断言
-```C
+
+```c
 #define NDEBUG
 #include <assert.h>
 ```
+
 - 开启断言
-```C
+
+```c
 #undef NDEBUG
 #include <assert.h>
 ```
 
 ## `<ctype.h>`
+
 - 可检测字符
 
 getc、fgetc、getchar函数可返回值(EOF值/unsigned char类型)
+
 - 不可检测字符
 
 非EOF值/非unsigned char类型(*会引发严重错误*)
@@ -33,15 +39,18 @@ getc、fgetc、getchar函数可返回值(EOF值/unsigned char类型)
 ![ctype functions](img/ctype.h.jpg)
 
 ## `<errno.h>`
+
 - errno的值在程序启动时为零，但是不会被任何库函数设为零
-```C
+
+```c
 errno = 0;
 y = sqrt(x);
 if (errno != 0) {
     printf("invalid x : %e\n", x);
 }
 ```
-```C
+
+```c
 #ifndef _I386_ERRNO_H
 #define _I386_ERRNO_H
 #define EPERM 1 /* Operation not permitted */
@@ -172,17 +181,22 @@ if (errno != 0) {
 ```
 
 ## `<float.h>/<limits.h>`
+
 - 宏定义：`CHAR/UCHAR/SCHAR/SHRT/USHRT/INT/UINT/LONG/ULONG/FLT/DBL/LDBL`有关的``MIN/MAX/EPSILON``
 
 ## `<locale.h>`
+
 - 实现时间/单位/货币等一系列的国际化
 - 常用函数
-```C
+
+```c
 _CRTIMP char * __cdecl setlocale(int, const char *);
 _CRTIMP struct lconv * __cdecl localeconv(void);
 ```
+
 - int值
-```C
+
+```c
 #define LC_ALL          0
 #define LC_COLLATE      1
 #define LC_CTYPE        2
@@ -192,14 +206,18 @@ _CRTIMP struct lconv * __cdecl localeconv(void);
 ```
 
 ## `<math.h>`
+
 数学函数库(包括后缀f(float)/l(long double))
 
 ## `<setjmp.h>`
+
 - 常用函数
-```C
+
+```c
 int setjmp(jmp_buf env);
 void longjmp(jmp_buf env, int val);
 ```
+
 - 使用：用于if/else、loop、switch语句
   1. 直接调用setjmp函数时，返回值为0;
   2. 调用longjmp函数时，若val值不为0,则跳转至上次setjmp返回值为0处，继续向后执行语句
@@ -208,15 +226,19 @@ void longjmp(jmp_buf env, int val);
   2. 实现类Java异常机制(异常抛出及捕获)
 
 ## `<signal.h>`
+
 **信号处理程序中所有数据应为volatile类型**
-```C
+
+```c
 _CRTIMP int __cdecl raise(int);
 _CRTIMP void (__cdecl * __cdecl signal(int, void (__cdecl *)(int)))(int);
 ```
 
 ## `<stdarg.h>`
+
 用于编写可变参数函数
-```C
+
+```c
 void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束 */
 {
     va_list ap;
@@ -231,6 +253,7 @@ void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束
 ```
 
 ## `<stddef.h>`
+
 - 宏
   - NULL Null 指针常量
   - `offsetof(type, member-desginator)`
@@ -248,7 +271,7 @@ void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束
   无符号整数类型, 用来表示sizeof操作符的结果类型
 
 ## `<string.h>`
+
 - men系函数：操作任意字符序列
 - strn系函数：操作非空字符序列
 - str系函数：操作字符串序列('\0')
-

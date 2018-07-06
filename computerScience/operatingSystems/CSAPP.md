@@ -47,7 +47,7 @@
 
 ![stack frame](img/stack_frame.png)
 
-```ass
+```
 # 准备阶段
 # Caller-Save: %eax %ecx %edx
 # Callee-Save: %ebx %esi %edi
@@ -101,7 +101,7 @@ PrectPC | `W_valM`(无法预测) | `M_valP/M_valA`(在译码阶段合并信号�
 
 流水线中最早阶段的转发源, 优先级最高 execute > memory > write
 
-```hcl
+```
 int d_valA = [
     D_icode in {ICALL, IJXX}: D_valP;
 

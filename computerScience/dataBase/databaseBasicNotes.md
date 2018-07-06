@@ -171,7 +171,7 @@ for data modeling:
 *   add PK(primary key)
 *   drop methods
 
-```uml
+```
 -----------
 | student |
 |---------|
@@ -192,7 +192,7 @@ relationships between objects of 2 classes):
 *   one to many:1..1  ---  *
 *   many to many: *   ---  *
 
-```uml
+```
 -----------                   ---------
 | student |                   |collegs|
 |---------|                   |       |
@@ -209,7 +209,7 @@ relationships between objects of 2 classes):
 *   classes store information of relationship edge between 2 data classes
 *   unnecessary if 0..1 or 1..1
 
-```uml
+```
 c1 * --- 1..1 c2
 information of relationship edge can stored in c1
 owing to every object of c1 only associated with 1 object of c2
@@ -493,7 +493,7 @@ WITH CHECK OPTION;
 
 #### Install
 
-```shell
+```bash
 $ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 $ echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list 
 $ sudo apt-get update
@@ -502,7 +502,7 @@ $ sudo apt-get install -y mongodb-org mongodb-org-server mongodb-org-shell mongo
 
 #### Not Upgrade
 
-```shell
+```bash
 $ echo "mongodb-org hold" | sudo dpkg --set-selections
 $ echo "mongodb-org-server hold" | sudo dpkg --set-selections
 $ echo "mongodb-org-shell hold" | sudo dpkg --set-selections
@@ -512,7 +512,7 @@ $ echo "mongodb-org-tools hold" | sudo dpkg --set-selections
 
 #### Start/Stop/Restart
 
-```shell
+```bash
 $ sudo service mongod start
 $ sudo service mongod stop
 $ sudo service mongod restart
@@ -520,7 +520,7 @@ $ sudo service mongod restart
 
 #### Uninstall
 
-```shell
+```bash
 $ sudo service mongod stop
 $ sudo apt-get purge mongodb-org*
 $ sudo rm -r /var/log/mongodb

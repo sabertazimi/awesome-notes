@@ -338,7 +338,7 @@ BIOS 根据设置(硬盘/U盘/网络启动), 加载存储设备的主引导扇�
 
 -   通过 8042 键盘控制器的端口, 开启 A20, 关闭 memory wrap around, 获取足够内存空间
 
-```asm
+```
 ; 键盘控制器的命令
 ; 0xD0 Read Output Port
 ; 0xD1 Write Output Port
@@ -1281,7 +1281,7 @@ $ bochs -q -f .bochsrc
 
 #### GNU ld
 
-```main.ld
+```
 ENTRY(kmain)
 SECTIONS {
     __bios__ = 0xa0000; # 绑定BIOS保留内存的地址到__bios__

@@ -150,7 +150,7 @@
 -   concatenation
 -   minimal
 
-```shell
+```bash
 npm install
 bower install
 npm install gulp --save-dev
@@ -166,7 +166,7 @@ npm install gulp --save-dev
 
 #### Gulp Plugins
 
-```shell
+```bash
 npm install jshint gulp-jshint jshint-stylish gulp-imagemin gulp-concat gulp-uglify gulp-minify-css gulp-usemin gulp-cache gulp-changed gulp-rev gulp-rename gulp-notify  browser-sync del --save-dev
 ```
 

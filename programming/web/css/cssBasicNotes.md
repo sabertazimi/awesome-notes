@@ -446,7 +446,7 @@ input[type=password] {border:1px solid #aaa;} //定位页面里的密码输入�
 
 `E[attr|=val]`
 
-```csss
+```css
 p[class|=a] {color:#333;}
 //定位页面里所有的P段落里具有class属性且属性值为a或是a-开始的，比如class="a"以及class="a-b"
 ```

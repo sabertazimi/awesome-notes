@@ -59,7 +59,7 @@ Load-ALU-Store模式 - 读入寄存器，算术逻辑单元运算，回写至内
 
 #### MASM
 
-```shell
+```bash
 masm /Zi/Zd src dist
 masm /I(path)           // 引用 标准库/宏
 masm /I..\include
@@ -67,7 +67,7 @@ masm /I..\include
 
 #### LINK
 
-```shell
+```bash
 link /DEBUG src
 ```
 
@@ -168,7 +168,7 @@ movX  src dest  #X:b/w/l/q （1/2/4/8字节）
 
 内存数据重复读入寄存器 - 使得汇编代码与上下文无关,减少BUG产生可能性
 
-```asm
+```
 R1 = MEM[SP + 8]
 ……
 R1 = MEM[SP + 8]
@@ -223,7 +223,7 @@ R1 = MEM[SP + 8]
 
 ## Stack Frame
 
-```ass
+```
 # 准备阶段
 # Caller-Save: %eax %ecx %edx
 # Callee-Save: %ebx %esi %edi
@@ -251,7 +251,7 @@ int get_sea_digit(int index, int dig) {
 }
 ```
 
-```ass
+```
 # 访问二维数组元素
 # %ecx = dig
 # %eax = index

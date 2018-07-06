@@ -854,7 +854,10 @@ class DownloadTask extends AsyncTask<Void, Integer, Boolean> {
 <service android:name=".MyService" >
 </service>
 ```
-```stopSelf()```
+
+```
+stopSelf()
+```
 
 ```java
 public class MyService extends Service {

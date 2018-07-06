@@ -180,7 +180,7 @@ G = (S, N, T, P):
 
 ##### 简易表示
 
-```Bison
+```
 Sentence -> Noun Verb Noun
 Noun -> sheep
 	|	tiger
@@ -192,7 +192,7 @@ Verb -> eat
 
 > S: Sentence, N: Sentence/Verb/Noun, T: sheep/tiger/grass/water/eat/drink
 
-```Bison
+```
 E -> num
 	|id
 	|E + E
@@ -230,7 +230,7 @@ E -> num
 
 #### 形式表示
 
-```regexp
+```js
 // 具有顺序性
 e -> "\0"		// basic defination
 	| c			// basic defination
@@ -248,7 +248,7 @@ e -> "\0"		// basic defination
 *   "a*"    : a* 自身(非 kleen 闭包)
 *   .       : 除 ‘\n’ 外的任意字符
 
-```regexp
+```js
 // 标识符
 [a-zA-Z\_][a-zA-Z\_0-9]*
 
@@ -294,7 +294,7 @@ L(syntax) = semantic: 多个语法对应一个语义(不同形式的表达式对
 
 ##### 文法重写
 
-```Bison
+```
 E -> E + T
 	|T
 T -> T * F
@@ -567,7 +567,7 @@ bool top_down_parsing(tokens[]) {
 
 利用前看符号避免回溯
 
-```Bison
+```
 Sentence -> Noun Verb Noun
 Noun -> sheep
 	|	tiger
@@ -579,7 +579,7 @@ Verb -> eat
 
 > tiger eat water: 向前看非终结符推导出的所有终结符中匹配tiger的终结符; 不向前看,则先推导 N, 再推导 n, 但 n 不一定匹配 tiger, 则需进行回溯; 向前看一个字符, 直接推导 N --> n, 同时直接找寻匹配 tiger 的终结符
 
-```Bison
+```
 S -> N V N
 N -> (sheep)tiger
 V -> eat
@@ -847,7 +847,7 @@ calculate_select_set(production p: N->beta1...betan) {
 *   再利用 first sets 准确求出 follow sets
 *   再利用 first sets, 并结合 follow sets(全空集修正) 准确求出 分析表:
 
-```Bison
+```
 0: z -> d
 1:	|	X Y Z
 2: Y -> c
@@ -881,7 +881,7 @@ nullable = {X, Y}
 *   规定优先级与结合性
 *   提取左公因式(Common Prefix)
 
-```Bison
+```
 E -> T+E
     |T
 
@@ -892,7 +892,7 @@ X -> +E
 
 ###### 消除直接左递归
 
-```Bison
+```
 S -> Salpha1
     |Salpha2
     ...
@@ -1139,7 +1139,7 @@ int main() {
 
 ### 自底向上分析
 
-```Bison
+```
 0: S -> E
 1: E -> E + T
 2:	|	T
@@ -1148,7 +1148,7 @@ int main() {
 5: F -> n
 ```
 
-```instance
+```
 2 + 3 * 4
 => F + 3 * 4
 => T + 3 * 4
@@ -1171,7 +1171,7 @@ int main() {
 
 ##### 短语(Handles)
 
-```Bison
+```
 S -*> αXω -> αβω
 ```
 
@@ -1317,7 +1317,7 @@ push(next state);
 *   表达语法结构的内部表示, 作为前端(词法语法分析)和后端(代码生成)的中间件, tokens --语法分析器--> 抽象语法(树) --代码生成器--> 目标代码
 *   抽象语法无需考虑左/右递归, 左公因子提取, 分隔符等
 
-```Bison
+```
 // 具体语法
 E: E + T
  | T
@@ -1339,7 +1339,7 @@ E: n
 
 ##### 数据结构
 
-```Bison
+```
 E: n
  | E + E
  | E * E
@@ -1451,7 +1451,7 @@ int pretty_print(exp *e) {
 
 利用语法制导翻译, 在语法动作(action)/语法归约(reduce)中加入生成语法树的代码(自底(叶子)向上(根)构造函数)
 
-```Bison
+```
 E: E + E { $$ = new_exp_add($1, $3); }
  | E * E { $$ = new_exp_times($1, $3); }
  | n     { $$ = new_exp_int($1); }
@@ -1473,7 +1473,7 @@ AST + semantic of programming language --semantic analysis--> intermediate
 
 e.g 变量/函数必须先声明再使用; 每个表达式必须有合适类型(左值/右值); 函数调用与函数定义保持一致(函数签名)
 
-```Bison
+```
 P: D S
  ;
 
@@ -1511,7 +1511,7 @@ E: n
 *   `O` Type environments 是一个函数, 将 object identifiers 映射成 types
 *   `O ├ e: T` 表示在 O 函数作用下, 可证明 e 的类型为 T
 
-```type
+```
 // input x
 // output T
 O[T/x](x) = T
@@ -1519,7 +1519,7 @@ O[T/x](x) = T
 O[T/x](y) = O(y)
 ```
 
-```type
+```
 [Var]
 O(x) = T
 ----------
@@ -1535,7 +1535,7 @@ O ├ let x: T0 in e1: T1
 *   Method(ClassName, functionName) = (Type1, ..., Typen, Typen+1)
 *   Typen+1 为返回值的类型, 即方法自身的类型
 
-```type
+```
 [Dispatch]
 O,M ├ e0: T0
 O,M ├ e1: T1
@@ -1841,7 +1841,7 @@ CFG中 数据流分析-活性分析(liveness analysis), 可用于复制传播优
 *   代码: 表达式/语句/函数代码
 *   指令: 算术/比较/跳转/调用/返回指令
 
-```Bison
+```
 P: D S
  ;
 
@@ -1875,7 +1875,7 @@ Mem + Stack + ALU
 
 > JVM(Java Virtual Machine)
 
-```Bison
+```
 s: push NUM
  | load x
  | store x
@@ -1957,7 +1957,7 @@ Mem + Reg + ALU
 
 > MIPS ISA
 
-```Bison
+```
 // src -> dist
 s: movn n, r
  | mov r1, r2

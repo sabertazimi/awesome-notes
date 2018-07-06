@@ -424,7 +424,7 @@ name相同时, 多个 radio 组成一个 radio group
 
 ##### date/month/week/time/datetime-local
 
-```javasrcipt
+```javascript
 stepUp();
 stepDown();
 ```

@@ -69,7 +69,7 @@ shell command
 
 ### Core Dump
 
-```shell
+```bash
 ulimit -c unlimited
 gdb -c core_file_path target_exe_path
 ```
@@ -77,7 +77,7 @@ gdb -c core_file_path target_exe_path
 
 -   CS Segment
 
-```shell
+```bash
 (gdb) disass
 (gdb) x/i
 (gdb) x/5i $pc
@@ -86,7 +86,7 @@ gdb -c core_file_path target_exe_path
 
 -   Registers
 
-```shell
+```bash
 (gdb) i r
 (gdb) i r a
 (gdb) i r ds
@@ -98,7 +98,7 @@ gdb -c core_file_path target_exe_path
 
 ## Stack Frame
 
-```shell
+```bash
 (gdb) bt
 (gdb) frame n
 (gdb) info locals

@@ -178,7 +178,7 @@
 
 ## Platform
 
-```shell
+```bash
 apt-get install haskell-Platform
 apt-get install ghc-mod
 atom plugins : language-haskell autocomplete-haskell ide-haskell haskell-ghc-mod
@@ -2882,7 +2882,7 @@ main = do
 -   `hGetChar`
 -   `hGetLine`
 
-```hasekll
+```haskell
 import System.IO
 
 main = do

@@ -452,7 +452,7 @@ delete &q;  // address of x
 *   作用: 成员别名 `(a.*pf)() => a.size()`
 *   优先级: . > * > .*(结合性: 自左向右)
 
-```cc
+```cpp
 int A::*pi = &A::i;         ///< 数据成员指针
 int (A::*pf)(void) = &A::f;     ///< 函数成员指针
 
@@ -576,7 +576,7 @@ int (*f)() = &CROWD::getnumber;
 *   纯虚函数具有虚函数的所有特性
 *   具有纯虚函数的类自动成为抽象类
 
-```cc
+```cpp
 struct A {
     virtual void f1() = 0;
     virtual void f2() = 0;

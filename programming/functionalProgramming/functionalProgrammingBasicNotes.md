@@ -37,7 +37,7 @@ tagged union, every constructor name as tag, fields for different constructors c
 
 type constructor: datatype bindings with variables
 
-```sml
+```
 datatype 'a mylist = EMPTY | CONS of 'a * 'a mylist
 mylist isn't a type, int list is a type
 ```
@@ -51,7 +51,7 @@ mylist isn't a type, int list is a type
 *   null/isSome check tag part（variant）
 *   hd/tl/valOf check data part (extract data)
 
-```sml
+```
 case e of
       p1 => e1
     | pn => en
@@ -77,19 +77,19 @@ recursive defination for Tail Position:
 *   if E isn't in tail position, then sub expressions of E aren't in tail position
 *   if E is in tail position, then some sub expressions of E are in tail position
 
-```sml
+```
 if eb then e1 else e2 
 ```
 
 is in tail position, then e1 and e2 are in tail position, not eb
 
-```sml
+```
 f (x, e)
 ```
 
 is in tail position, then f is in tail position(tail call), not x and e
 
-```sml
+```
 fun factorial n =
     let
         fun aux(n, acc) =
@@ -112,7 +112,7 @@ fun factorial n =
 
 ### samples
 
-```ml
+```
 syntax: if e1 then e2 else e3
 type: e1 = bool,  e2 = e3 = any
 evaluation: e1 ? e2 : e3
@@ -122,7 +122,7 @@ evaluation: e1 ? e2 : e3
 
 ### functions
 
-```ml
+```
 syntax: fun name (arg1: type1, .., argn: typen) = body
 type: name = type1 * ... * typen -> body_type
 lazy evaluation
@@ -130,7 +130,7 @@ lazy evaluation
 
 ### tuples
 
-```ml
+```
 (* tuples *)
 syntax: e = (e1, ..., en)
 type: e1 * ... * en (can become fun's arguments list)
@@ -139,7 +139,7 @@ evaluation: #1 e, #2 e, ..., #n e
 
 ### lists
 
-```ml
+```
 (* lists *)
 syntax: l = [e1, ..., en]
 type: [] = elem_type list; hd(head) l = elem_type, tl(tail) x = elem_type list
@@ -150,7 +150,7 @@ evaluation: cons = e :: l; null [] = false;
 
 ### let expressions
 
-```ml
+```
 syntax: let
             b1 b2 ... bn
         in
@@ -183,7 +183,7 @@ evaluation: whole let result = body_result
 
 #### compose and pipeline
 
-```sml
+```
 fun sqrt_of_abs = Math.sqrt o Real.fromInt o abs
 
 infix !>
@@ -194,7 +194,7 @@ fun sqrt_of_abs i = i !> abs !> Real.fromInt !> Math.sqrt
 
 #### curry and uncurry
 
-```sml
+```
 fun carry f x y = f (x, y)
 fun uncarry f (x, y) = f x y
 
