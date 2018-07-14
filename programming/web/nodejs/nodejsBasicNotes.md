@@ -139,9 +139,12 @@ $ npm test
 
 ### Publish Steps
 
+`latest` or `alpha`
+
 ```sh
 $ npm publish
-$ npm dist-tag add @<pkg>@<version> [<tag>]
+$ npm publish --tag [<tag>]
+$ npm dist-tag add <pkg>@<version> [<tag>]
 $ npm dist-tag rm <pkg> <tag>
 $ npm dist-tag ls [<pkg>]
 ```
@@ -177,6 +180,15 @@ source ~/.zshrc
 ```sh
 $ npm prune // uninstall node_modules not in package.json
 $ npm outdated
+```
+
+### Link Command
+
+```sh
+# in local B package, build local B binary (npm install -g B)
+$ npm link
+# in local A package, set `B` link in package.json to local B binary
+$ npm link B 
 ```
 
 ## Basic Node Modules
