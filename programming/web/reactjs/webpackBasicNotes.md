@@ -60,6 +60,8 @@ dllReferencePlugin = new Webpack.DllReferencePlugin({
 ```
 
 -   imageMinPlugin
+-   webpack-bundle-analyzer
+-   webpack-monitor
 
 ## Options
 
