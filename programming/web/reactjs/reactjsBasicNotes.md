@@ -24,10 +24,15 @@
     - [MVC模式](#mvc模式)
         - [Controller](#controller)
         - [Best Practice](#best-practice)
+    - [React 16 (New Features)](#react-16-new-features)
+        - [Context API](#context-api)
+        - [Error Boundary](#error-boundary)
+        - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
     - [Components/Plugins](#componentsplugins)
         - [Documents](#documents)
         - [Data](#data)
         - [Data to View](#data-to-view)
+        - [Chat](#chat)
         - [UI](#ui)
             - [Animation](#animation)
             - [Charts](#charts)
@@ -203,6 +208,54 @@ handle(e) {
 - 在store和action中不dom操作或者访问window.属性，只与数据打交道
 - 推荐使用ES6
 - npm的debug包，log组件渲染的每个步骤和动作
+
+## React 16 (New Features)
+
+### Context API
+
+### Error Boundary
+
+### `React.Fragment`/`Array Components`
+
+```js
+class Items extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Fruit />
+        <Beverages />
+        <Drinks />
+      </React.Fragment>
+    )
+  }
+}
+
+class Fruit extends React.Component {
+  render() {
+    return (
+      <>
+        <li>Apple</li>
+        <li>Orange</li>
+        <li>Blueberry</li>
+        <li>Cherry</li>
+      </>
+    )
+  }
+}
+
+class Frameworks extends React.Component {
+  render () {
+    return (
+      [
+        <p>JavaScript:</p>
+        <li>React</li>,
+        <li>Vuejs</li>,
+        <li>Angular</li>
+      ]
+    )
+  }
+}
+```
 
 ## Components/Plugins
 
