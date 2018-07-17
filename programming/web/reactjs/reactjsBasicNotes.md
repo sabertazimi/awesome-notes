@@ -213,6 +213,7 @@ handle(e) {
 
 -   [Blog Generator](https://github.com/gatsbyjs/gatsby)
 -   [React Built In Editor](https://github.com/facebook/draft-js)
+-   docz
 
 ### Data
 
@@ -223,6 +224,10 @@ handle(e) {
 ### Data to View
 
 -   [reselect](https://github.com/reactjs/reselect)
+
+### Chat
+
+-   [Matrix](https://github.com/matrix-org/matrix-react-sdk
 
 ### UI
 
