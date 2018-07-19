@@ -68,6 +68,22 @@ const appStore.subscribe(throttle(() => {
 10. 在test里不管你用tape还是mocha，请用http://airbnb.io/enzyme/
 11. 有些时候有些项目你并不需要redux
 
+```js
+const fluxStandardAction = {
+    type: 'ADD_TODO',
+    payload: {
+        text: 'Do something'
+    },
+    meta: meta
+};
+
+const fluxStandardAction = {
+    type: 'ADD_TODO',
+    payload: new Error(),
+    error: true
+};
+```
+
 ## Awesome Tools
 
 ### Libs
