@@ -79,7 +79,8 @@
         - [包装类对象](#包装类对象)
         - [错误对象](#错误对象)
     - [函数](#函数)
-        - [函数调用模式](#函数调用模式)
+        - [函数调用模式 (innovation pattern) (`this`)](#函数调用模式-innovation-pattern-this)
+            - [`this` in arrow function](#this-in-arrow-function)
         - [prototype](#prototype)
         - [arguments](#arguments)
             - [arguments.callee](#argumentscallee)
@@ -106,7 +107,6 @@
         - [call/apply/bind](#callapplybind)
             - [bind](#bind)
             - [通过call/apply实现bind函数](#通过callapply实现bind函数)
-        - [this/that](#thisthat)
         - [多态方法](#多态方法)
         - [hasOwnProperty](#hasownproperty-function hasOwnProperty() { [native code] }1)
         - [eval](#eval)
@@ -134,7 +134,7 @@
         - [沙盒模式](#沙盒模式)
             - [实现沙盒构造函数](#实现沙盒构造函数)
             - [沙盒使用方式](#沙盒使用方式)
-    - [JavaScript DOM Basic](#javascript-dom-basic)
+    - [JavaScript DOM Basic Notes](#javascript-dom-basic-notes)
         - [DOM - O](#dom---o)
         - [DOM Core](#dom-core)
             - [dynamic creation](#dynamic-creation)
@@ -1134,19 +1134,19 @@ Function.__proto__ === Function.prototype;          // true
 Function.__proto__.__proto__ === Object.prototype;  // true
 ```
 
-### 函数调用模式
+### 函数调用模式 (innovation pattern) (`this`)
 
 -   普通调用模式: this 绑定至全局对象
 
 ```js
 add(1, 2);  // this -> global
 
-var obj = {
+const obj = {
 	value: 1,
 	foo: function () {
 		// 若不将 this 赋值给 that, 而在内部函数中直接使用 this.value
 		// 则会发生错误: 内部函数的 this 指向全局对象而不是obj
-		var that = this;
+		const that = this;
 		function inner() {
 			return that.value;
 		}
@@ -1161,13 +1161,35 @@ obj.foo();  // 1
 -   构造器调用模式(new): this 绑定至传入的空对象
 -   apply/call 调用模式
 
-函数引用可以不可以改变函数定义作用域，但可以改变函数执行作用域(可达到apply/call的效果)
+函数引用不可以改变函数定义作用域 (scope)，但可以改变函数执行作用域 (context)
 
 ```js
 this.construct = Foo;
 this.construct(options);
     =>
 Foo.call(this, optiions);
+```
+
+#### `this` in arrow function
+
+*   `this` defined where arrow function defined (not called)
+*   `apply`/`call`/`bind` can't change `this` in arrow function
+
+```js
+const obj = {
+	foo: function () {
+		const inner = () => {
+			return this.value;
+		}
+
+		return inner();
+	}
+};
+
+const func = obj.foo;
+
+obj.foo();	// `this` in `inner` function refer to `obj`
+func();		// `this` in `inner` function refer to `window`
 ```
 
 ### prototype
@@ -1505,8 +1527,9 @@ context.function(arguments);
 
 #### bind
 
-*   change function runtime context (higher priority than apply/call/runtime context change)
+*   change function runtime context (ignore innovation pattern `function/method/new/call/apply`)
 *   curry function
+*   can't change `this` in arrow function
 
 ```js
 const bindedFunc = func.bind(context, arg1, arg2, ...);
@@ -1534,12 +1557,6 @@ var one = {
 
 twosay('yo'); // "yo, another object"
 ```
-
-### this/that
-
--   `var that=this; //用于获取外部对象`
-
-e.g `foo(){ //this会指向全局对象(window对象)}`
 
 ### 多态方法
 
