@@ -103,7 +103,8 @@
             - [即时函数模式](#即时函数模式)
             - [模式作用](#模式作用)
             - [返回值](#返回值-1)
-        - [call/apply](#callapply)
+        - [call/apply/bind](#callapplybind)
+            - [bind](#bind)
             - [通过call/apply实现bind函数](#通过callapply实现bind函数)
         - [this/that](#thisthat)
         - [多态方法](#多态方法)
@@ -1480,7 +1481,7 @@ var getResult = (function () {
 }());
 ```
 
-### call/apply
+### call/apply/bind
 
 -   `Function.call(contextObj, arg1, arg2,...)`
 -   `Function.apply(contextArray, [arg1, arg2, ...]/arguments)`
@@ -1500,6 +1501,15 @@ String.prototype.stringStaticFunction.call/apply();
 
 ```javascript
 context.function(arguments);
+```
+
+#### bind
+
+*   change function runtime context (higher priority than apply/call/runtime context change)
+*   curry function
+
+```js
+const bindedFunc = func.bind(context, arg1, arg2, ...);
 ```
 
 #### 通过call/apply实现bind函数
@@ -1962,7 +1972,7 @@ Sandbox('dom', 'event', function (box) {
 
 ------
 
-## JavaScript DOM Basic
+## JavaScript DOM Basic Notes
 
 -   DOM Level 0
 -   DOM Level 1
@@ -2083,6 +2093,11 @@ node.nodeValue
 	node.previousSibling
 	node.parentNode
 	node.textContent
+```
+
+```js
+    node.matches(selector) // return false or true
+    node.contains(node)    // return false or true
 ```
 
 #### Frag
