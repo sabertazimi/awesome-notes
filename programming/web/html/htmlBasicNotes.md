@@ -886,7 +886,8 @@ function WebSocketTest()
 
 子域名设置:
 
-```sh
+```bash
+
 sudo mkdir -p /var/www/blog/html
 sudo chown -R $USER:$USER /var/www/blog/html
 sudo chmod -R 755 /var/www
@@ -895,13 +896,17 @@ sudo vim /etc/nginx/sites-available/blog    # change 'root' and 'server_name' co
 sudo ln -s /etc/nginx/sites-available/blog /etc/nginx/sites-enabled/ 
 sudo nginx -t
 sudo systemctl restart nginx
+
 ```
 
 ## Accessbility
 
 ### structure
 
+#### body
+
 ```html
+
 <header>
     <nav>
         <ul>
@@ -915,11 +920,30 @@ sudo systemctl restart nginx
 
 <footer>
 </footer>
+
+```
+
+#### radio group with `fieldset` and `legend`
+
+```html
+
+<form>
+  <fieldset>
+    <legend>Choose one of these three items:</legend>
+    <input id="one" type="radio" name="items" value="one">
+    <label for="one">Choice One</label><br>
+    <input id="two" type="radio" name="items" value="two">
+    <label for="two">Choice Two</label><br>
+    <input id="three" type="radio" name="items" value="three">
+    <label for="three">Choice Three</label>
+  </fieldset>
+</form>
+
 ```
 
 ### element
 
-#### img
+#### img access
 
 - alt=""
 
@@ -928,23 +952,47 @@ sudo systemctl restart nginx
 - src=""
 - type=""
 
-#### figure
+#### figure access
 
 ```html
+
 <figure>
     <img src="" alt="" />
     <br />
     <figcaption></figcaption>
 </figure>
+
 ```
 
-#### form
+#### form access
 
 - label[for] input
 
 ```html
+
 <form>
   <label for="name">Name:</label>
   <input type="text" id="name" name="name">
 </form>
+
+```
+
+#### time access
+
+```html
+
+<time datetime="2016-09-15">Thursday, September 15<sup>th</sup></time>
+
+```html
+
+#### color contrast
+
+- more than 4.5:1 ratio
+
+#### accesskey and tabindex
+
+```html
+
+<a id="second" href="" accesskey="c">
+
 ```
