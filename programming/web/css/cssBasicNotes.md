@@ -48,6 +48,7 @@
                 - [父元素属性](#父元素属性)
                 - [子元素属性](#子元素属性)
                 - [Best Practice](#best-practice-2)
+            - [Grid Patterns](#grid-patterns)
             - [分栏问题](#分栏问题)
                 - [两栏布局](#两栏布局)
                 - [三栏布局](#三栏布局)
@@ -726,6 +727,8 @@ block 元素宽度为 100%, inline 元素从左至右分布
 
 #### Flex Patterns
 
+[Complete Guid to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+
 ##### 父元素属性
 
 ```css
@@ -807,13 +810,16 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
     background-color: #fff;
     flex-grow: 1;
 }
-
 ```
+
+#### Grid Patterns
+
+[Complete Grid Guide](https://css-tricks.com/snippets/css/complete-guide-grid/)
 
 #### 分栏问题
 
--   float 左右元素 + margin 中间元素
--   float 元素 + width: %
+- float 左右元素 + margin 中间元素
+- float 元素 + width: %
 
 ##### 两栏布局
 
