@@ -1,169 +1,170 @@
 <!-- TOC -->
 
 - [CSS 3 Basic Notes](#css-3-basic-notes)
-    - [Best Practice](#best-practice)
-        - [Normalize](#normalize)
-        - [gap](#gap)
-        - [rem vs em](#rem-vs-em)
-    - [属性排序](#属性排序)
-        - [概述](#概述)
-            - [显示属性](#显示属性)
-            - [自身属性](#自身属性)
-            - [文本属性](#文本属性)
-        - [详细](#详细)
-            - [显示属性](#显示属性-1)
-            - [自身属性](#自身属性-1)
-            - [文本属性](#文本属性-1)
-    - [命名规范](#命名规范)
-        - [页面结构](#页面结构)
-        - [导航](#导航)
-        - [功能](#功能)
-        - [CSS Files](#css-files)
-    - [CSS Selector](#css-selector)
-        - [pseudo-class-selector](#pseudo-class-selector)
-            - [元素选择器](#元素选择器)
-            - [关系选择器](#关系选择器)
-            - [属性选择器](#属性选择器)
-            - [伪类](#伪类)
-            - [伪元素](#伪元素)
-    - [常用属性](#常用属性)
-        - [全局属性值](#全局属性值)
-        - [box](#box)
-            - [z-index](#z-index)
-            - [overflow/overflow-x/overflow-y](#overflowoverflow-xoverflow-y)
-            - [text-overflow](#text-overflow)
-            - [resize](#resize)
-            - [box-sizing](#box-sizing)
-            - [height](#height)
-            - [column](#column)
-            - [Awesome Box Patterns](#awesome-box-patterns)
-            - [Block Formatting Context](#block-formatting-context)
-                - [Create BFC](#create-bfc)
-            - [Flow Patterns](#flow-patterns)
-            - [Float Patterns](#float-patterns)
-                - [清除浮动](#清除浮动)
-                - [Best Practice](#best-practice-1)
-            - [Layer Patterns](#layer-patterns)
-            - [Flex Patterns](#flex-patterns)
-                - [父元素属性](#父元素属性)
-                - [子元素属性](#子元素属性)
-                - [flexibity of `float`](#flexibity-of-float)
-                - [Best Practice](#best-practice-2)
-            - [Grid Patterns](#grid-patterns)
-            - [分栏问题](#分栏问题)
-                - [两栏布局](#两栏布局)
-                - [三栏布局](#三栏布局)
-            - [居中问题](#居中问题)
-                - [不定 block 元素水平居中](#不定-block-元素水平居中)
-                - [垂直居中问题](#垂直居中问题)
-                - [混合布局](#混合布局)
-        - [list-style-type/image](#list-style-typeimage)
-        - [custom style](#custom-style)
-            - [custom methods](#custom-methods)
-                - [transition+transform](#transitiontransform)
-                - [直接使用animation](#直接使用animation)
-            - [transition](#transition)
-            - [transform](#transform)
-            - [animation](#animation)
-        - [align](#align)
-            - [text-align](#text-align)
-            - [vertical-align](#vertical-align)
-        - [opacity](#opacity)
-        - [border](#border)
-            - [border-radius](#border-radius)
-            - [border-image](#border-image)
-        - [background](#background)
-            - [background-image](#background-image)
-            - [(moz/webkit)background-clip](#mozwebkitbackground-clip)
-            - [(moz/webkit)background-origin](#mozwebkitbackground-origin)
-            - [background-size](#background-size)
-            - [Best Practice](#best-practice-3)
-                - [单背景极简欢迎首页](#单背景极简欢迎首页)
-        - [text](#text)
-        - [font](#font)
-            - [font-size](#font-size)
-            - [font-style](#font-style)
-            - [font-variant](#font-variant)
-            - [font-size-adjust](#font-size-adjust)
-            - [custom function - @font-face](#custom-function---font-face)
-            - [Font Best Practice](#font-best-practice)
-        - [filter](#filter)
-    - [Responsive Desgin](#responsive-desgin)
-        - [responsive font](#responsive-font)
-        - [responsive length](#responsive-length)
-        - [responsive image](#responsive-image)
-        - [media query](#media-query)
-        - [设备类型](#设备类型)
-        - [设备特性](#设备特性)
-    - [常用组件](#常用组件)
-        - [form](#form)
-            - [select](#select)
-        - [header](#header)
-            - [nav](#nav)
-                - [基本原则](#基本原则)
-        - [button](#button)
-        - [footer](#footer)
-        - [picture](#picture)
-            - [圆形图片](#圆形图片)
-        - [Animation Tips](#animation-tips)
-        - [Layout](#layout)
-            - [相同单元](#相同单元)
-            - [元素定位](#元素定位)
-    - [Design](#design)
-        - [Color](#color)
-            - [Scheme](#scheme)
-            - [Lib](#lib)
-    - [UI Libraries && Components](#ui-libraries--components)
-        - [Utils](#utils)
-        - [Society](#society)
-        - [Mouse Effect](#mouse-effect)
-        - [Message](#message)
-            - [Calendar](#calendar)
-            - [Time](#time)
-        - [Documentation](#documentation)
-        - [Editor](#editor)
-            - [Emoji](#emoji)
-        - [Video](#video)
-        - [Images](#images)
-            - [Size](#size)
-            - [Slide](#slide)
-            - [Filter](#filter)
-            - [Icons](#icons)
-        - [Animation](#animation)
-            - [Particles](#particles)
-            - [Hover](#hover)
-            - [Prompt](#prompt)
-            - [Message](#message-1)
-        - [Content](#content)
-            - [Card](#card)
-            - [List](#list)
-            - [Nav](#nav)
-            - [Menu](#menu)
-        - [Graph/Chart](#graphchart)
-            - [Graph](#graph)
-            - [Chart](#chart)
-        - [Form](#form)
-            - [Input](#input)
-            - [Search Bar](#search-bar)
-            - [Select](#select)
-            - [Validate](#validate)
-        - [Layout](#layout-1)
-            - [Page](#page)
-            - [Grid](#grid)
-            - [Split](#split)
-            - [Scroll](#scroll)
-            - [Position](#position)
-            - [Mail](#mail)
-            - [Slide](#slide-1)
-            - [Gallery](#gallery)
-        - [Geometry](#geometry)
-            - [Blocks](#blocks)
-        - [Template](#template)
-        - [Framework](#framework)
-    - [JS Libraries](#js-libraries)
-        - [Table](#table)
-        - [File](#file)
-            - [File Tree View](#file-tree-view)
+  - [Best Practice](#best-practice)
+    - [Normalize](#normalize)
+    - [gap](#gap)
+    - [rem vs em](#rem-vs-em)
+  - [属性排序](#属性排序)
+    - [概述](#概述)
+      - [显示属性](#显示属性)
+      - [自身属性](#自身属性)
+      - [文本属性](#文本属性)
+    - [详细](#详细)
+      - [显示属性](#显示属性-1)
+      - [自身属性](#自身属性-1)
+      - [文本属性](#文本属性-1)
+  - [命名规范](#命名规范)
+    - [页面结构](#页面结构)
+    - [导航](#导航)
+    - [功能](#功能)
+    - [CSS Files](#css-files)
+  - [CSS Selector](#css-selector)
+    - [pseudo-class-selector](#pseudo-class-selector)
+      - [元素选择器](#元素选择器)
+      - [关系选择器](#关系选择器)
+      - [属性选择器](#属性选择器)
+      - [伪类](#伪类)
+      - [伪元素](#伪元素)
+  - [常用属性](#常用属性)
+    - [全局属性值](#全局属性值)
+    - [Box Style](#box-style)
+      - [width](#width)
+      - [z-index](#z-index)
+      - [overflow/overflow-x/overflow-y](#overflowoverflow-xoverflow-y)
+      - [text-overflow](#text-overflow)
+      - [resize](#resize)
+      - [box-sizing](#box-sizing)
+      - [height](#height)
+      - [column](#column)
+      - [Awesome Box Patterns](#awesome-box-patterns)
+      - [Block Formatting Context](#block-formatting-context)
+        - [Create BFC](#create-bfc)
+      - [Flow Patterns](#flow-patterns)
+      - [Float Patterns](#float-patterns)
+        - [清除浮动](#清除浮动)
+        - [Best Practice](#best-practice-1)
+      - [Layer Patterns](#layer-patterns)
+      - [Flex Patterns](#flex-patterns)
+        - [父元素属性](#父元素属性)
+        - [子元素属性](#子元素属性)
+        - [flexibity of `float`](#flexibity-of-float)
+        - [Best Practice](#best-practice-2)
+      - [Grid Patterns](#grid-patterns)
+      - [分栏问题](#分栏问题)
+        - [两栏布局](#两栏布局)
+        - [三栏布局](#三栏布局)
+      - [居中问题](#居中问题)
+        - [不定 block 元素水平居中](#不定-block-元素水平居中)
+        - [垂直居中问题](#垂直居中问题)
+        - [混合布局](#混合布局)
+    - [list-style-type/image](#list-style-typeimage)
+    - [custom style](#custom-style)
+      - [custom methods](#custom-methods)
+        - [transition+transform](#transitiontransform)
+        - [直接使用animation](#直接使用animation)
+      - [transition](#transition)
+      - [transform](#transform)
+      - [animation](#animation)
+    - [align](#align)
+      - [text-align](#text-align)
+      - [vertical-align](#vertical-align)
+    - [opacity](#opacity)
+    - [border](#border)
+      - [border-radius](#border-radius)
+      - [border-image](#border-image)
+    - [background](#background)
+      - [background-image](#background-image)
+      - [(moz/webkit)background-clip](#mozwebkitbackground-clip)
+      - [(moz/webkit)background-origin](#mozwebkitbackground-origin)
+      - [background-size](#background-size)
+      - [Best Practice](#best-practice-3)
+        - [单背景极简欢迎首页](#单背景极简欢迎首页)
+    - [text](#text)
+    - [font](#font)
+      - [font-size](#font-size)
+      - [font-style](#font-style)
+      - [font-variant](#font-variant)
+      - [font-size-adjust](#font-size-adjust)
+      - [custom function - @font-face](#custom-function---font-face)
+      - [Font Best Practice](#font-best-practice)
+    - [filter](#filter)
+  - [Responsive Desgin](#responsive-desgin)
+    - [responsive font](#responsive-font)
+    - [responsive length](#responsive-length)
+    - [responsive image](#responsive-image)
+    - [media query](#media-query)
+    - [设备类型](#设备类型)
+    - [设备特性](#设备特性)
+  - [常用组件](#常用组件)
+    - [form](#form)
+      - [select](#select)
+    - [header](#header)
+      - [nav](#nav)
+        - [基本原则](#基本原则)
+    - [button](#button)
+    - [footer](#footer)
+    - [picture](#picture)
+      - [圆形图片](#圆形图片)
+    - [Animation Tips](#animation-tips)
+    - [Layout](#layout)
+      - [相同单元](#相同单元)
+      - [元素定位](#元素定位)
+  - [Design](#design)
+    - [Color](#color)
+      - [Scheme](#scheme)
+      - [Lib](#lib)
+  - [UI Libraries && Components](#ui-libraries--components)
+    - [Utils](#utils)
+    - [Society](#society)
+    - [Mouse Effect](#mouse-effect)
+    - [Message](#message)
+      - [Calendar](#calendar)
+      - [Time](#time)
+    - [Documentation](#documentation)
+    - [Editor](#editor)
+      - [Emoji](#emoji)
+    - [Video](#video)
+    - [Images](#images)
+      - [Size](#size)
+      - [Slide](#slide)
+      - [Filter](#filter)
+      - [Icons](#icons)
+    - [Animation](#animation)
+      - [Particles](#particles)
+      - [Hover](#hover)
+      - [Prompt](#prompt)
+      - [Message](#message-1)
+    - [Content](#content)
+      - [Card](#card)
+      - [List](#list)
+      - [Nav](#nav)
+      - [Menu](#menu)
+    - [Graph/Chart](#graphchart)
+      - [Graph](#graph)
+      - [Chart](#chart)
+    - [Form](#form)
+      - [Input](#input)
+      - [Search Bar](#search-bar)
+      - [Select](#select)
+      - [Validate](#validate)
+    - [Layout](#layout-1)
+      - [Page](#page)
+      - [Grid](#grid)
+      - [Split](#split)
+      - [Scroll](#scroll)
+      - [Position](#position)
+      - [Mail](#mail)
+      - [Slide](#slide-1)
+      - [Gallery](#gallery)
+    - [Geometry](#geometry)
+      - [Blocks](#blocks)
+    - [Template](#template)
+    - [Framework](#framework)
+  - [JS Libraries](#js-libraries)
+    - [Table](#table)
+    - [File](#file)
+      - [File Tree View](#file-tree-view)
 
 <!-- /TOC -->
 
@@ -583,12 +584,16 @@ h2:before {
 
 ### 全局属性值
 
--   auto
--   inherit
--   initial 指定为默认值，用于消除样式
--   none
+- auto
+- inherit
+- initial 指定为默认值，用于消除样式
+- none
 
-### box
+### Box Style
+
+#### width
+
+- auto: present for `fill-available/max-content/min-content/fit-content`
 
 #### z-index
 
@@ -600,8 +605,8 @@ visible,hidden,scroll,auto
 
 #### text-overflow
 
--   clip     切除溢出部分
--   ellipsis 省略号标志
+- clip     切除溢出部分
+- ellipsis 省略号标志
 
 #### resize
 
@@ -835,6 +840,35 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
 #### Grid Patterns
 
 [Complete Grid Guide](https://css-tricks.com/snippets/css/complete-guide-grid/)
+
+```css
+.container {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-columns: repeat([auto-fit / auto-fill / numbers], minmax(60px, 1fr)); */
+
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: minmax(90px, 1fr);
+
+    grid-template-areas: 
+      "header header header"
+      "advert content content"
+      "footer footer footer";
+
+    grid-gap: 10px;
+    justify-items: center;
+    align-items: end;
+}
+
+.item {
+    grid-row: start / end; /* 2 / -1 */
+    grid-column: start / end;
+    grid-area: footer;
+    /* grid-area: hstart / vstart / hend / vend */
+    justify-self: center;
+    align-self: end;
+}
+```
 
 #### 分栏问题
 
@@ -1752,26 +1786,26 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 
 #### Blocks
 
--   [obelisk.js](https://github.com/nosir/obelisk.js)
+- [obelisk.js](https://github.com/nosir/obelisk.js)
 
 ### Template
 
--   [Free Bootstrap 3 Admin Template](https://github.com/puikinsh/gentelella)
+- [Free Bootstrap 3 Admin Template](https://github.com/puikinsh/gentelella)
 
 ### Framework
 
--   [HTML Presentation Framework](https://github.com/hakimel/reveal.js)
--   [React Material UI](https://github.com/callemall/material-ui)
+- [HTML Presentation Framework](https://github.com/hakimel/reveal.js)
+- [React Material UI](https://github.com/callemall/material-ui)
 
 ## JS Libraries
 
 ### Table
 
--   [jQuery Plugin for Render Data](https://github.com/DataTables/DataTables)
--   [Extended Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
+- [jQuery Plugin for Render Data](https://github.com/DataTables/DataTables)
+- [Extended Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
 
 ### File
 
 #### File Tree View
 
--   https://github.com/zTree/zTree_v3
+- https://github.com/zTree/zTree_v3
