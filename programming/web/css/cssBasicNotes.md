@@ -47,6 +47,7 @@
             - [Flex Patterns](#flex-patterns)
                 - [父元素属性](#父元素属性)
                 - [子元素属性](#子元素属性)
+                - [flexibity of `float`](#flexibity-of-float)
                 - [Best Practice](#best-practice-2)
             - [Grid Patterns](#grid-patterns)
             - [分栏问题](#分栏问题)
@@ -749,6 +750,25 @@ flex-basis: number;
 flex-shrink: number;
 flex-grow: number;
 align-self: auto/flex-start/flex-end/center/baseline/stretch;
+```
+
+##### flexibity of `float`
+
+```html
+<div class="parent">
+    <div class="child></div>
+</div>
+```
+
+```css
+.parent {
+    display: flex;
+}
+
+.child {
+    /* this will push child to the right of parent border */
+    margin-left: auto;
+}
 ```
 
 ##### Best Practice
