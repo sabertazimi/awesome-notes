@@ -188,4 +188,4 @@ $x: 1;
 
 ### Built-in Functions
 
-[Complete Guide](https://sass-lang.com/documentation/Sass/Script/Functions.html)
+[Offical Documentation](https://sass-lang.com/documentation/Sass/Script/Functions.html) or [Devdocs Guide](http://devdocs.io/sass-functions)
