@@ -1,49 +1,51 @@
+# React Basic Notes
+
 <!-- TOC -->
 
 - [React Basic Notes](#react-basic-notes)
-    - [Diff Algorithm (Reconciliation)](#diff-algorithm-reconciliation)
-        - [Elements of Different Types](#elements-of-different-types)
-        - [DOM Elements of Same Type](#dom-elements-of-same-type)
-        - [Component Elements of Same Type](#component-elements-of-same-type)
-    - [props and state](#props-and-state)
-        - [getInitialState() and constructor(props, context)](#getinitialstate-and-constructorprops-context)
-        - [componentDidMount()](#componentdidmount)
-        - [componentWillReceiveProps()](#componentwillreceiveprops)
-        - [props validation](#props-validation)
-    - [element and component](#element-and-component)
-        - [functional/class component](#functionalclass-component)
-        - [stateful/stateless component](#statefulstateless-component)
-            - [stateless component](#stateless-component)
-            - [stateful component](#stateful-component)
-        - [component lifecycle](#component-lifecycle)
-            - [creation](#creation)
-            - [updates](#updates)
-            - [unmount](#unmount)
-    - [ES6 Syntax](#es6-syntax)
-        - [this.setState()](#thissetstate)
-    - [MVC模式](#mvc模式)
-        - [Controller](#controller)
-        - [Best Practice](#best-practice)
-    - [React 16 (New Features)](#react-16-new-features)
-        - [Context API](#context-api)
-        - [Error Boundary](#error-boundary)
-        - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
-    - [Components/Plugins](#componentsplugins)
-        - [Documents](#documents)
-        - [Data](#data)
-        - [Data to View](#data-to-view)
-        - [Chat](#chat)
-        - [UI](#ui)
-            - [Animation](#animation)
-            - [Charts](#charts)
-            - [Search Bar](#search-bar)
-            - [Scroll Bar](#scroll-bar)
-            - [Mouse](#mouse)
-        - [Debug/Test](#debugtest)
+  - [Diff Algorithm (Reconciliation)](#diff-algorithm-reconciliation)
+    - [Elements of Different Types](#elements-of-different-types)
+    - [DOM Elements of Same Type](#dom-elements-of-same-type)
+    - [Component Elements of Same Type](#component-elements-of-same-type)
+  - [props and state](#props-and-state)
+    - [getInitialState() and constructor(props, context)](#getinitialstate-and-constructorprops-context)
+    - [componentDidMount()](#componentdidmount)
+    - [componentWillReceiveProps()](#componentwillreceiveprops)
+    - [props validation](#props-validation)
+  - [element and component](#element-and-component)
+    - [functional/class component](#functionalclass-component)
+    - [stateful/stateless component](#statefulstateless-component)
+      - [stateless component](#stateless-component)
+      - [stateful component](#stateful-component)
+    - [component lifecycle](#component-lifecycle)
+      - [creation](#creation)
+      - [updates](#updates)
+      - [unmount](#unmount)
+    - [HOC (Higher-Order Components)](#hoc-higher-order-components)
+  - [ES6 Syntax](#es6-syntax)
+    - [this.setState()](#thissetstate)
+  - [MVC模式](#mvc模式)
+    - [Controller](#controller)
+    - [Best Practice](#best-practice)
+  - [React 16 (New Features)](#react-16-new-features)
+    - [Context API](#context-api)
+    - [Error Boundary](#error-boundary)
+    - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
+  - [Components/Plugins](#componentsplugins)
+    - [Documents](#documents)
+    - [Data](#data)
+    - [Data to View](#data-to-view)
+    - [Chat](#chat)
+    - [UI](#ui)
+      - [Animation](#animation)
+      - [Charts](#charts)
+      - [Search Bar](#search-bar)
+      - [Scroll Bar](#scroll-bar)
+      - [Mouse](#mouse)
+    - [Debug/Test](#debugtest)
 
 <!-- /TOC -->
 
-# React Basic Notes
 
 ## Diff Algorithm (Reconciliation)
 
@@ -136,8 +138,8 @@ ReactDOM.render({
 
 ### functional/class component
 
--   函数型组件没有实例, 类型组件具有实例, 但实例化的工作由 react 自动完成
--   class component 具有更多特性: state, lifecycle hook, performance optimizations(shouldComponentUpdate()回调方法)
+- 函数型组件没有实例, 类型组件具有实例, 但实例化的工作由 react 自动完成
+- class component 具有更多特性: state, lifecycle hook, performance optimizations(shouldComponentUpdate()回调方法)
 
 ### stateful/stateless component
 
@@ -147,8 +149,8 @@ ReactDOM.render({
 
 #### stateful component
 
-*   采用类型声明, 使用 setState(), 一般作为容器型组件(containers)
-*   结合 Redux 中的 connect 方法, 将 store 中的 state 作为此类组件的 props
+- 采用类型声明, 使用 setState(), 一般作为容器型组件(containers)
+- 结合 Redux 中的 connect 方法, 将 store 中的 state 作为此类组件的 props
 
 ### component lifecycle
 
@@ -160,15 +162,78 @@ constructor(props, context) -> componentWillMount() -> render() -> componentDidM
 
 update for three reasons:
 
--   parent/top (re-)render
--   this.setState() called
--   this.forceUpdate() called
+- parent/top (re-)render
+- this.setState() called
+- this.forceUpdate() called
 
 componentWillReceiveProps(nextProps) -> shouldComponentUpdate(nextProps, nextState) -> componentWillUpdate(nextProps, nextState) -> render() -> componentDidUpdate(prevProps, prevState)
 
 #### unmount
 
 componentWillUnmount()
+
+### HOC (Higher-Order Components)
+
+```jsx
+// ToggleableMenu.jsx
+function withToggleable(Clickable) {
+  return class extends React.Component {
+    constructor() {
+      super()
+      this.toggle = this.toggle.bind(this)
+      this.state = { show: false }
+    }
+
+    toggle() {
+      this.setState(prevState => ({ show: !prevState.show }))
+    }
+
+    render() {
+      return (
+        <div>
+          <Clickable
+            {...this.props}
+            onClick={this.toggle}
+          />
+          {this.state.show && this.props.children}
+        </div>
+      )
+    }
+  }
+}
+
+class Menu extends React.Component {
+  render() {
+    return (
+      <div onClick={this.props.onClick}>
+        <h1>{this.props.title}</h1>
+      </div>
+    )
+  }
+}
+
+export default withToggleable(Menu);
+```
+
+```jsx
+class Menu extends React.Component {
+  render() {
+    return (
+      <div>
+        <ToggleableMenu title="First Menu">
+          <p>Some content</p>
+        </ToggleableMenu>
+        <ToggleableMenu title="Second Menu">
+          <p>Another content</p>
+        </ToggleableMenu>
+        <ToggleableMenu title="Third Menu">
+          <p>More content</p>
+        </ToggleableMenu>
+      </div>
+    )
+  }
+}
+```
 
 ## ES6 Syntax
 
