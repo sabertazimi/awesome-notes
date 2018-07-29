@@ -3,25 +3,29 @@
 <!-- TOC -->
 
 - [Sass Basic Notes](#sass-basic-notes)
-  - [Variable](#variable)
-    - [`$`](#)
-    - [`#`](#)
-    - [`&`](#)
-    - [map](#map)
-  - [Directive](#directive)
-    - [Mixin/Include](#mixininclude)
-    - [if-else](#if-else)
-    - [for loop](#for-loop)
-    - [while loop](#while-loop)
-    - [each](#each)
-    - [import](#import)
-    - [extend](#extend)
+  - [Basis](#basis)
+    - [Variable](#variable)
+      - [`$` normal variable](#-normal-variable)
+      - [`#` string variable](#-string-variable)
+      - [`&` nesting varilable](#-nesting-varilable)
+      - [map](#map)
+    - [Directive](#directive)
+      - [Mixin/Include](#mixininclude)
+      - [if-else](#if-else)
+      - [for loop](#for-loop)
+      - [while loop](#while-loop)
+      - [each](#each)
+      - [import](#import)
+      - [extend](#extend)
+    - [Built-in Functions](#built-in-functions)
 
 <!-- /TOC -->
 
-## Variable
+## Basis
 
-### `$`
+### Variable
+
+#### `$` normal variable
 
 - start with `$`
 
@@ -33,15 +37,15 @@ h1 {
 }
 ```
 
-### `#`
+#### `#` string variable
 
 - `#{$var}`: combine with string
 
-### `&`
+#### `&` nesting varilable
 
 parent-selector
 
-### map
+#### map
 
 ```scss
 $colors: (
@@ -57,12 +61,12 @@ $colors: (
 }
 ```
 
-## Directive
+### Directive
 
-### Mixin/Include
+#### Mixin/Include
 
 ```scss
-@mixin box-shadow($x, $y, $blur, $c) { 
+@mixin box-shadow($x, $y, $blur, $c) {
   -webkit-box-shadow: $x, $y, $blur, $c;
   -moz-box-shadow: $x, $y, $blur, $c;
   -ms-box-shadow: $x, $y, $blur, $c;
@@ -74,7 +78,7 @@ div {
 }
 ```
 
-### if-else
+#### if-else
 
 ```scss
 @mixin border-stroke($val) {
@@ -93,7 +97,7 @@ div {
 }
 ```
 
-### for loop
+#### for loop
 
 ```scss
 @for $i from 1 through 12 {
@@ -103,7 +107,7 @@ div {
 }
 ```
 
-### while loop
+#### while loop
 
 ```scss
 $x: 1;
@@ -115,7 +119,7 @@ $x: 1;
 }
 ```
 
-### each
+#### each
 
 ```scss
 @each $color in blue, red, green {
@@ -125,14 +129,48 @@ $x: 1;
 }
 ```
 
-### import
+#### import
 
 ```scss
 // import _variables.scss in main.scss
 @import 'variables';
 ```
 
-### extend
+#### extend
+
+```scss
+// This CSS won't print because %equal-heights is never extended.
+%equal-heights {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// This CSS will print because %message-shared is extended.
+%message-shared {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.message {
+  @extend %message-shared;
+}
+
+.success {
+  @extend %message-shared;
+  border-color: green;
+}
+
+.error {
+  @extend %message-shared;
+  border-color: red;
+}
+
+.warning {
+  @extend %message-shared;
+  border-color: yellow;
+}
+```
 
 ```scss
 .panel {
@@ -147,3 +185,7 @@ $x: 1;
   font-size: 2em;
 }
 ```
+
+### Built-in Functions
+
+[Complete Guide](https://sass-lang.com/documentation/Sass/Script/Functions.html)
