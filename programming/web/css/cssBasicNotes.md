@@ -384,16 +384,14 @@ body {
 
 ### CSS Files
 
--   主要的 master.css
--   模块 module.css
--   基本共用 base.css
--   布局、版面 layout.css
--   主题 themes.css
--   专栏 columns.css
--   文字 font.css
--   表单 forms.css
--   补丁 mend.css
--   打印 print.css
+- main.css
+- base: normalize.css, reset.css, utils.css, font.css, base.css (margin-right, text-center, float-right)
+- components: form.css, button.css, navbar.css, dropdown.css
+- layout: columns.css, grid.css, header.css, footer.css, section.css, navigation.css
+- pages: home.css, about.css
+- themes: color.css, font.css
+- abstracts: $variables, @mixin function
+- vendors: external libraries (font-awesome, bootstrap)
 
 ## CSS Selector
 
