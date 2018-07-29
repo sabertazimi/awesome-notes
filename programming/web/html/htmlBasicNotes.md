@@ -1,109 +1,127 @@
+# HTML5 Basic Notes
+
 <!-- TOC -->
 
 - [HTML5 Basic Notes](#html5-basic-notes)
-    - [Emmet](#emmet)
-        - [嵌套操作](#嵌套操作)
-        - [属性操作](#属性操作)
-        - [字符操作](#字符操作)
-        - [缺省元素](#缺省元素)
-    - [Structure](#structure)
-        - [section](#section)
-        - [header](#header)
-        - [hgroup](#hgroup)
-        - [nav](#nav)
-        - [main](#main)
-        - [address](#address)
-        - [aside](#aside)
-        - [footer](#footer)
-        - [blockquote](#blockquote)
-        - [pre](#pre)
-    - [Form](#form)
-            - [novalidate](#novalidate)
-        - [表单元素共有属性](#表单元素共有属性)
-            - [form=form_name](#formform_name)
-            - [formaction=target_name](#formactiontarget_name)
-            - [formmethod=post/get](#formmethodpostget)
-            - [formenctype](#formenctype)
-            - [formtarget](#formtarget)
-            - [formnovalidate](#formnovalidate)
-            - [autofocus](#autofocus)
-            - [required](#required)
-        - [labels](#labels)
-            - [隐式control属性](#隐式control属性)
-        - [input](#input)
-            - [type](#type)
-                - [text](#text)
-                - [radio](#radio)
-                - [checkbox](#checkbox)
-                - [search](#search)
-                - [tel](#tel)
-                - [url](#url)
-                - [email](#email)
-                - [date/month/week/time/datetime-local](#datemonthweektimedatetime-local)
-            - [indeterminate](#indeterminate)
-            - [`list` && `autocomplete`](#list--autocomplete)
-            - [pattern](#pattern)
-            - [validity](#validity)
-        - [output](#output)
-        - [textarea](#textarea)
-            - [maxlength](#maxlength)
-            - [cols](#cols)
-            - [wrap](#wrap)
-        - [menu](#menu)
-        - [dialog](#dialog)
-        - [datalist](#datalist)
-    - [Content](#content)
-        - [details > summary | datalist](#details--summary--datalist)
-            - [datagrid](#datagrid)
-            - [配合autocomplete属性](#配合autocomplete属性)
-            - [open(boolean)](#openboolean)
-        - [dl>(multi)dt + (multi)dd](#dlmultidt--multidd)
-        - [summary](#summary)
-        - [mark](#mark)
-        - [ins](#ins)
-        - [del](#del)
-        - [u](#u)
-        - [em](#em)
-        - [strong](#strong)
-        - [small](#small)
-        - [hr](#hr)
-        - [`<progress value="" max="">`](#progress-value-max)
-        - [meter](#meter)
-            - [value](#value)
-            - [min](#min)
-            - [max](#max)
-            - [low](#low)
-            - [high](#high)
-            - [optimum](#optimum)
-        - [wbr](#wbr)
-    - [Media](#media)
-        - [canvas](#canvas)
-        - [figure](#figure)
-        - [figcaption](#figcaption)
-        - [img](#img)
-            - [src](#src)
-            - [alt](#alt)
-        - [a(anchor)](#aanchor)
-            - [href](#href)
-            - [id/name](#idname)
-            - [target](#target)
-        - [embed](#embed)
-        - [command](#command)
-    - [Information](#information)
-        - [time](#time)
-            - [pubdate](#pubdate)
-            - [datetime](#datetime)
-    - [Attributes](#attributes)
-        - [Global Attributes](#global-attributes)
-            - [contentEditable](#contenteditable)
-            - [hidden](#hidden)
-            - [spellcheck](#spellcheck)
-            - [tabindex](#tabindex)
-    - [Geolocation API](#geolocation-api)
+  - [Emmet](#emmet)
+    - [嵌套操作](#嵌套操作)
+    - [属性操作](#属性操作)
+    - [字符操作](#字符操作)
+    - [缺省元素](#缺省元素)
+  - [Structure](#structure)
+    - [section](#section)
+    - [header](#header)
+    - [hgroup](#hgroup)
+    - [nav](#nav)
+    - [main](#main)
+    - [address](#address)
+    - [aside](#aside)
+    - [footer](#footer)
+    - [blockquote](#blockquote)
+    - [pre](#pre)
+  - [Form](#form)
+    - [novalidate](#novalidate)
+    - [表单元素共有属性](#表单元素共有属性)
+      - [form=form_name](#formform_name)
+      - [formaction=target_name](#formactiontarget_name)
+      - [formmethod=post/get](#formmethodpostget)
+      - [formenctype](#formenctype)
+      - [formtarget](#formtarget)
+      - [formnovalidate](#formnovalidate)
+      - [autofocus](#autofocus)
+      - [required](#required)
+    - [labels](#labels)
+      - [隐式control属性](#隐式control属性)
+    - [input](#input)
+      - [type](#type)
+        - [text](#text)
+        - [radio](#radio)
+        - [checkbox](#checkbox)
+        - [search](#search)
+        - [tel](#tel)
+        - [url](#url)
+        - [email](#email)
+        - [date/month/week/time/datetime-local](#datemonthweektimedatetime-local)
+      - [indeterminate](#indeterminate)
+      - [`list` && `autocomplete`](#list--autocomplete)
+      - [pattern](#pattern)
+      - [validity](#validity)
+    - [output](#output)
+    - [textarea](#textarea)
+      - [maxlength](#maxlength)
+      - [cols](#cols)
+      - [wrap](#wrap)
+    - [menu](#menu)
+    - [dialog](#dialog)
+    - [datalist](#datalist)
+  - [Content](#content)
+    - [details > summary | datalist](#details--summary--datalist)
+      - [datagrid](#datagrid)
+      - [配合autocomplete属性](#配合autocomplete属性)
+      - [open(boolean)](#openboolean)
+    - [dl>(multi)dt + (multi)dd](#dlmultidt--multidd)
+    - [summary](#summary)
+    - [mark](#mark)
+    - [ins](#ins)
+    - [del](#del)
+    - [u](#u)
+    - [em](#em)
+    - [strong](#strong)
+    - [small](#small)
+    - [hr](#hr)
+    - [`<progress value="" max="">`](#progress-value-max)
+    - [meter](#meter)
+      - [value](#value)
+      - [min](#min)
+      - [max](#max)
+      - [low](#low)
+      - [high](#high)
+      - [optimum](#optimum)
+    - [wbr](#wbr)
+  - [Media](#media)
+    - [canvas](#canvas)
+    - [figure](#figure)
+    - [figcaption](#figcaption)
+    - [img](#img)
+      - [src](#src)
+      - [alt](#alt)
+    - [a(anchor)](#aanchor)
+      - [href](#href)
+      - [id/name](#idname)
+      - [target](#target)
+    - [embed](#embed)
+    - [command](#command)
+  - [Information](#information)
+    - [time](#time)
+      - [pubdate](#pubdate)
+      - [datetime](#datetime)
+  - [Attributes](#attributes)
+    - [Global Attributes](#global-attributes)
+      - [contentEditable](#contenteditable)
+      - [hidden](#hidden)
+      - [spellcheck](#spellcheck)
+      - [tabindex](#tabindex)
+  - [Geolocation API](#geolocation-api)
+  - [Web Storage API](#web-storage-api)
+  - [Web Files API](#web-files-api)
+  - [Web Sockets API](#web-sockets-api)
+  - [Web RTC API](#web-rtc-api)
+  - [Web Workers API](#web-workers-api)
+  - [Nginx Config](#nginx-config)
+  - [Accessbility](#accessbility)
+    - [structure](#structure)
+      - [body](#body)
+      - [radio group with `fieldset` and `legend`](#radio-group-with-fieldset-and-legend)
+    - [element](#element)
+      - [img access](#img-access)
+      - [audio/source](#audiosource)
+      - [figure access](#figure-access)
+      - [form access](#form-access)
+      - [time access](#time-access)
+      - [color contrast](#color-contrast)
+      - [accesskey and tabindex](#accesskey-and-tabindex)
 
 <!-- /TOC -->
-
-# HTML5 Basic Notes
 
 ## Emmet
 
@@ -337,7 +355,7 @@ table>.row*4>.cell*3
 <input type="date picker(data,month,week,time,datetime,datetime-local)">
 ```
 
-#### novalidate
+### novalidate
 
 关闭表单的提交验证
 
@@ -786,7 +804,11 @@ locationSuccess: function(position){
 }
 ```
 
-```navigator.geolocation.watchPosition(locationSuccess, locationError, positionOption)```自动更新地理位置
+```js
+navigator.geolocation.watchPosition(locationSuccess, locationError, positionOption)
+```
+
+自动更新地理位置
 
 ## Web Storage API
 
@@ -887,7 +909,6 @@ function WebSocketTest()
 子域名设置:
 
 ```bash
-
 sudo mkdir -p /var/www/blog/html
 sudo chown -R $USER:$USER /var/www/blog/html
 sudo chmod -R 755 /var/www
@@ -896,7 +917,6 @@ sudo vim /etc/nginx/sites-available/blog    # change 'root' and 'server_name' co
 sudo ln -s /etc/nginx/sites-available/blog /etc/nginx/sites-enabled/ 
 sudo nginx -t
 sudo systemctl restart nginx
-
 ```
 
 ## Accessbility
@@ -906,7 +926,6 @@ sudo systemctl restart nginx
 #### body
 
 ```html
-
 <header>
     <nav>
         <ul>
@@ -920,13 +939,11 @@ sudo systemctl restart nginx
 
 <footer>
 </footer>
-
 ```
 
 #### radio group with `fieldset` and `legend`
 
 ```html
-
 <form>
   <fieldset>
     <legend>Choose one of these three items:</legend>
@@ -938,7 +955,6 @@ sudo systemctl restart nginx
     <label for="three">Choice Three</label>
   </fieldset>
 </form>
-
 ```
 
 ### element
@@ -955,13 +971,11 @@ sudo systemctl restart nginx
 #### figure access
 
 ```html
-
 <figure>
     <img src="" alt="" />
     <br />
     <figcaption></figcaption>
 </figure>
-
 ```
 
 #### form access
@@ -969,21 +983,17 @@ sudo systemctl restart nginx
 - label[for] input
 
 ```html
-
 <form>
   <label for="name">Name:</label>
   <input type="text" id="name" name="name">
 </form>
-
 ```
 
 #### time access
 
 ```html
-
 <time datetime="2016-09-15">Thursday, September 15<sup>th</sup></time>
-
-```html
+```
 
 #### color contrast
 
@@ -992,7 +1002,5 @@ sudo systemctl restart nginx
 #### accesskey and tabindex
 
 ```html
-
 <a id="second" href="" accesskey="c">
-
 ```
