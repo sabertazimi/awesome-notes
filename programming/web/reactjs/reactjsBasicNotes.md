@@ -22,6 +22,7 @@
       - [updates](#updates)
       - [unmount](#unmount)
     - [HOC (Higher-Order Components)](#hoc-higher-order-components)
+    - [Render Props](#render-props)
   - [ES6 Syntax](#es6-syntax)
     - [this.setState()](#thissetstate)
   - [MVC模式](#mvc模式)
@@ -202,7 +203,7 @@ function withToggleable(Clickable) {
   }
 }
 
-class Menu extends React.Component {
+class NormalMenu extends React.Component {
   render() {
     return (
       <div onClick={this.props.onClick}>
@@ -212,7 +213,59 @@ class Menu extends React.Component {
   }
 }
 
-export default withToggleable(Menu);
+export default withToggleable(NormalMenu);
+```
+
+```jsx
+class Menu extends React.Component {
+  render() {
+    return (
+      <div>
+        <ToggleableMenu title="First Menu">
+          <p>Some content</p>
+        </ToggleableMenu>
+        <ToggleableMenu title="Second Menu">
+          <p>Another content</p>
+        </ToggleableMenu>
+        <ToggleableMenu title="Third Menu">
+          <p>More content</p>
+        </ToggleableMenu>
+      </div>
+    )
+  }
+}
+```
+
+### Render Props
+
+```jsx
+class Toggleable extends React.Component {
+  constructor() {
+    super()
+    this.toggle = this.toggle.bind(this)
+    this.state = { show: false }
+  }
+
+  toggle() {
+    this.setState(prevState => ({ show: !prevState.show }))
+  }
+
+  render() {
+    return this.props.children(this.state.show, this.toggle)
+  }
+}
+
+const ToggleableMenu = props =>
+  <Toggleable>
+    {(show, onClick) => (
+      <div>
+        <div onClick={onClick}>
+          <h1>{props.title}</h1>
+        </div>
+        {show && props.children}
+      </div>
+    )}
+  </Toggleable>
 ```
 
 ```jsx
