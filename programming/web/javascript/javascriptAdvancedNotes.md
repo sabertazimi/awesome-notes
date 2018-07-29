@@ -1166,8 +1166,12 @@ debugger;
 
 #### Node API
 
+- node --inspect
+- [ndb](https://github.com/GoogleChromeLabs/ndb)
+
 ```bash
 node --inspect
+ndb index.js
 ```
 
 ## ECMAScript 2015
