@@ -175,6 +175,16 @@ componentWillUnmount()
 
 ### HOC (Higher-Order Components)
 
+solve:
+
+- reuse code with using ES6 classes
+- compose multiple HOCs
+
+problem:
+
+- indirection issues: which HOC providing a certain prop
+- name collision: overwrite the same name prop silently
+
 ```jsx
 // ToggleableMenu.jsx
 function withToggleable(Clickable) {
@@ -237,6 +247,17 @@ class Menu extends React.Component {
 ```
 
 ### Render Props
+
+solve:
+
+- reuse code with using ES6 classes
+- lowest level of indirection
+- no naming collision
+
+problem:
+
+- minor memory issues when defining a closure for every render
+- callback hell (when many cross-cutting concerns are applied to a component)
 
 ```jsx
 class Toggleable extends React.Component {
