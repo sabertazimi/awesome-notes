@@ -55,6 +55,7 @@
         - [fixed sidebar with flexbox](#fixed-sidebar-with-flexbox)
         - [Best Practice](#best-practice-2)
       - [Grid Patterns](#grid-patterns)
+        - [attention tips](#attention-tips)
       - [分栏问题](#分栏问题)
         - [两栏布局](#两栏布局)
         - [三栏布局](#三栏布局)
@@ -106,9 +107,9 @@
   - [常用组件](#常用组件)
     - [form](#form)
       - [select](#select)
-    - [header](#header)
-      - [nav](#nav)
-        - [基本原则](#基本原则)
+    - [nav](#nav)
+      - [基本原则](#基本原则)
+      - [awesome style](#awesome-style)
     - [button](#button)
     - [footer](#footer)
     - [picture](#picture)
@@ -936,6 +937,11 @@ main {
 }
 ```
 
+##### attention tips
+
+- `grid-column` will refactor template of grid (`grid-template-columns`)
+- `grid-row` will refactor template of grid (`grid-template-rows`)
+
 #### 分栏问题
 
 - float 左右元素 + margin 中间元素
@@ -1588,11 +1594,9 @@ use `inline-box` with `width`
 }
 ```
 
-### header
+### nav
 
-#### nav
-
-##### 基本原则
+#### 基本原则
 
 对 a 标签进行样式设置
 
@@ -1611,12 +1615,53 @@ a {
     display: block;
     text-decoration: none;
 }
+```
 
+```css
+ul {
+  text-align: right;
+}
+
+li {
+  display: inline-block;
+}
+```
+
+#### awesome style
+
+change bottom border
+
+```css
+a {
+  position: relative;
+  padding-bottom: 5px;
+  color: #008080;
+  text-decoration: none;
+}
+
+a::after {
+  content: "";
+  background-color: #22313F;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+}
+
+a:hover {
+  color: #22313F;
+}
+
+a:hover::after {
+  left: 0;
+  width: 100%;
+}
 ```
 
 ### button
 
--   padding
+- padding
 
 ```css
 a.btn-custom {
