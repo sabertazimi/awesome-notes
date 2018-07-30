@@ -47,9 +47,12 @@
         - [Best Practice](#best-practice-1)
       - [Layer Patterns](#layer-patterns)
       - [Flex Patterns](#flex-patterns)
+        - [Under the Hood of `flex`](#under-the-hood-of-flex)
+        - [Useful shorthand of `flex`](#useful-shorthand-of-flex)
         - [父元素属性](#父元素属性)
         - [子元素属性](#子元素属性)
         - [flexibity of `float`](#flexibity-of-float)
+        - [fixed sidebar with flexbox](#fixed-sidebar-with-flexbox)
         - [Best Practice](#best-practice-2)
       - [Grid Patterns](#grid-patterns)
       - [分栏问题](#分栏问题)
@@ -749,6 +752,29 @@ block 元素宽度为 100%, inline 元素从左至右分布
 
 [Complete Guid to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
+##### Under the Hood of `flex`
+
+- when there is some free space left: true width = `flex-basis` (or `width`) + `flex-grow`/sum of `flex-grow`
+- when there is not enough space: true width = `flex-basis` (or `width`) - `flex-shrink`/sum of `flex-shrink`
+
+##### Useful shorthand of `flex`
+
+- `flex:auto`:
+
+元素会根据自身的宽度与高度来确定尺寸，但是会自行伸长以吸收flex容器中额外的自由空间，也会缩短至自身最小尺寸以适应容器 equal to`flex: 1 1 auto`
+
+- `flex:initial`:
+
+属性默认值， 元素会根据自身宽高设置尺寸。它会缩短自身以适应容器，但不会伸长并吸收flex容器中的额外自由空间来适应容器 equal to `flex: 0 1 auto`
+
+- `flex:none`:
+
+元素会根据自身宽高来设置尺寸。它是完全非弹性的：既不会缩短，也不会伸长来适应flex容器 equal to `flex: 0 0 auto`
+
+- `flex:<positive-number>`
+
+元素会被赋予一个容器中自由空间的指定占比 equal to `flex: <positive-number> 1 0`
+
 ##### 父元素属性
 
 ```css
@@ -787,6 +813,32 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
 .child {
     /* this will push child to the right of parent border */
     margin-left: auto;
+}
+```
+
+##### fixed sidebar with flexbox
+
+```html
+<body>
+  <aside></aside>
+  <main></main>
+</body>
+```
+
+```css
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+}
+
+aside {
+  flex: 0 0 auto; /* inflexible */
+}
+
+main {
+  flex: 1 1 auto; /* auto flexible */
+  overflow: auto;
 }
 ```
 
