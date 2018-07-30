@@ -20,6 +20,7 @@
     - [blockquote](#blockquote)
     - [pre](#pre)
   - [Form](#form)
+    - [validate](#validate)
     - [novalidate](#novalidate)
     - [表单元素共有属性](#表单元素共有属性)
       - [form=form_name](#formform_name)
@@ -354,6 +355,11 @@ table>.row*4>.cell*3
 <input type="color">
 <input type="date picker(data,month,week,time,datetime,datetime-local)">
 ```
+
+### validate
+
+- [Complete Guide for Form Validation](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation)
+- [Complete Guide for Constraint Validation](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation)
 
 ### novalidate
 
