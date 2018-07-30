@@ -93,6 +93,9 @@
   - [Responsive Desgin](#responsive-desgin)
     - [responsive font](#responsive-font)
     - [responsive length](#responsive-length)
+    - [responsive box](#responsive-box)
+      - [responsive width/height](#responsive-widthheight)
+      - [responsive inline-box](#responsive-inline-box)
     - [responsive image](#responsive-image)
     - [media query](#media-query)
     - [设备类型](#设备类型)
@@ -1395,6 +1398,26 @@ filter: unset;
 - `vh`
 - `vmin`
 - `vmax`
+
+### responsive box
+
+#### responsive width/height
+
+- `min-height`
+- `max-height`
+- `min-width`
+- `max-width`
+
+#### responsive inline-box
+
+use `inline-box` with `width`
+
+```css
+.element {
+  display: inline-box;
+  width: 80%;
+}
+```
 
 ### responsive image
 
