@@ -42,6 +42,7 @@
         - [Create BFC](#create-bfc)
       - [Flow Patterns](#flow-patterns)
       - [Float Patterns](#float-patterns)
+        - [fixed parent](#fixed-parent)
         - [清除浮动](#清除浮动)
         - [Best Practice](#best-practice-1)
       - [Layer Patterns](#layer-patterns)
@@ -659,19 +660,32 @@ cal(10em + 3px);
 
 ##### Create BFC
 
--   根元素或其它包含它的元素
--   position: absolute/fixed
--   float: left/right
--   overflow: hidden
--   display: inline-block
--   display: flex/inline-flex
--   display: table-cell
+- 根元素或其它包含它的元素
+- position: absolute/fixed
+- float: left/right
+- overflow: hidden
+- display: inline-block
+- display: flex/inline-flex
+- display: table-cell
 
 #### Flow Patterns
 
 block 元素宽度为 100%, inline 元素从左至右分布
 
 #### Float Patterns
+
+##### fixed parent
+
+> Floating wont work inside fixed or absolute divs unless specify widthh
+
+```css
+.parent {
+    position: fixed;
+    left: 0px;
+    top: 5px;
+    width: 100%;
+}
+```
 
 ##### 清除浮动
 
@@ -693,9 +707,8 @@ block 元素宽度为 100%, inline 元素从左至右分布
 
 ##### Best Practice
 
--   段中部分元素浮动(结合 margin/padding), 可实现内嵌效果
--   分栏布局
-
+- 段中部分元素浮动(结合 margin/padding), 可实现内嵌效果
+- 分栏布局
 
 #### Layer Patterns
 
