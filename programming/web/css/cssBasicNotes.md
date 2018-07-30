@@ -978,7 +978,7 @@ body {
 
 ##### 不定 block 元素水平居中
 
--   将元素改为 inline 型
+- 将元素改为 inline 型
 
 ```css
 .container{
@@ -989,7 +989,7 @@ body {
 }
 ```
 
--   父元素 float, 父子元素 relative
+- 父元素 float, 父子元素 relative
 
 ```css
 .container{
