@@ -1,3 +1,5 @@
+# JavaScript Advanced Notes
+
 <!-- TOC -->
 
 - [JavaScript Advanced Notes](#javascript-advanced-notes)
@@ -91,8 +93,11 @@
       - [隔离被测代码](#隔离被测代码)
       - [mock/stub/spy](#mockstubspy)
     - [Tools API](#tools-api)
+      - [Chrome Dev Tools](#chrome-dev-tools)
+        - [capture default eventListener](#capture-default-eventlistener)
       - [console API](#console-api)
       - [JS API](#js-api)
+        - [Trace Property (Vue Internal)](#trace-property-vue-internal)
       - [Node API](#node-api)
   - [ECMAScript 2015](#ecmascript-2015)
     - [Babel](#babel)
@@ -129,8 +134,6 @@
     - [Monkey Patch](#monkey-patch)
 
 <!-- /TOC -->
-
-# JavaScript Advanced Notes
 
 ## JavaScript Idioms
 
@@ -1150,6 +1153,24 @@ describe("Sum suite File", function() {
 
 ### Tools API
 
+#### Chrome Dev Tools
+
+##### capture default eventListener
+
+> $0: the reference to the currently selected element in the Elements panel
+
+```js
+const listener = getEventListeners($0).click[0].listener;
+$0.removeEventListener('click', listener);
+$0.addEventListener('click', (e) => {
+  // do something
+  // ...
+
+  // then
+  listener(e);
+});
+```
+
 #### console API
 
 ```js
@@ -1162,6 +1183,28 @@ console.trace/dir/dirxml/assert/;
 
 ```js
 debugger;
+```
+
+```js
+copy(obj) // to clipborad
+```
+
+##### Trace Property (Vue Internal)
+
+```js
+const traceProperty = (object, property) => {
+  let value = object[property];
+  Object.defineProperty(object, property, {
+    get () {
+      console.trace(`${property} requested`);
+      return value;
+    },
+    set (newValue) {
+      console.trace(`setting ${property} to `, newValue);
+      value = newValue;
+    },
+  })
+};
 ```
 
 #### Node API
