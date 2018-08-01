@@ -11,9 +11,9 @@
       - [自身属性](#自身属性)
       - [文本属性](#文本属性)
     - [详细](#详细)
-      - [显示属性](#显示属性-1)
-      - [自身属性](#自身属性-1)
-      - [文本属性](#文本属性-1)
+      - [显示属性 Detail](#显示属性-detail)
+      - [自身属性 Detail](#自身属性-detail)
+      - [文本属性 Detail](#文本属性-detail)
   - [命名规范](#命名规范)
     - [页面结构](#页面结构)
     - [导航](#导航)
@@ -184,20 +184,22 @@
 
 ```css
 html {
-    box-sizing: border-box
-    margin: 0;
-    padding: 0;
-    font-size: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
 }
 
-*, *:before, *:after {
-    box-sizing: inherit;
-    margin: inherit;
-    padding: inherit;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: inherit;
+  padding: inherit;
 }
 
 body {
-    line-height: 1.5;
+  line-height: 1.5;
 }
 ```
 
@@ -205,7 +207,7 @@ body {
 
 ```css
 * + * {
-    margin-top: 1.5em;
+  margin-top: 1.5em;
 }
 ```
 
@@ -222,113 +224,116 @@ body {
 
 #### 显示属性
 
--   display
--   list-style
--   position
--   float
--   clear
+- position
+- display
+- float
+- clear
 
 #### 自身属性
 
--   width
--   height
--   margin
--   padding
--   border
--   background
+- width
+- height
+- margin
+- padding
+- border
+- list-style
+- background
 
 #### 文本属性
 
--   color
--   font
--   text-decoration
--   vertical-align
--   white-space
--   other text
--   content
+- color
+- font
+- text-decoration
+- text-align
+- vertical-align
+- white-space
+- other text
+- content
 
 ### 详细
 
-#### 显示属性
+#### 显示属性 Detail
 
--   display
--   visibility
--   float
--   clear
--   position
--   top
--   right
--   bottom
--   left
--   z-index
+- position
+- z-index
+- top
+- right
+- bottom
+- left
+- box-sizing
+- display
+- visibility
+- float
+- clear
 
-#### 自身属性
+#### 自身属性 Detail
 
--   width
--   min-width
--   max-width
--   height
--   min-height
--   max-height
--   overflow
--   margin
--   margin-top
--   margin-right
--   margin-bottom
--   margin-left
--   padding
--   padding-top
--   padding-right
--   padding-bottom
--   padding-left
--   border-width
--   border-top-width
--   border-right-width
--   border-bottom-width
--   border-left-width
--   border-style
--   border-top-style
--   border-right-style
--   border-bottom-style
--   border-left-style
--   border-color
--   border-top-color
--   border-right-color
--   border-bottom-color
--   border-left-color
--   outline
--   list-style
--   table-layout
--   caption-side
--   border-collapse
--   border-spacing
--   empty-cells
+- width
+- min-width
+- max-width
+- height
+- min-height
+- max-height
+- overflow
+- margin
+- margin-top
+- margin-right
+- margin-bottom
+- margin-left
+- padding
+- padding-top
+- padding-right
+- padding-bottom
+- padding-left
+- border
+- border-width
+- border-top-width
+- border-right-width
+- border-bottom-width
+- border-left-width
+- border-style
+- border-top-style
+- border-right-style
+- border-bottom-style
+- border-left-style
+- border-color
+- border-top-color
+- border-right-color
+- border-bottom-color
+- border-left-color
+- outline
+- list-style
+- table-layout
+- caption-side
+- border-collapse
+- border-spacing
+- empty-cells
+- background
+- background-color
+- background-image
+- background-repeat
+- background-position
 
-#### 文本属性
+#### 文本属性 Detail
 
--   font
--   font-family
--   font-size
--   line-height
--   font-weight
--   text-align
--   text-indent
--   text-transform
--   text-decoration
--   letter-spacing
--   word-spacing
--   white-space
--   vertical-align
--   color
--   background
--   background-color
--   background-image
--   background-repeat
--   background-position
--   opacity
--   cursor
--   content
--   quotes
+- color
+- font
+- font-family
+- font-size
+- font-weight
+- line-height
+- text-align
+- text-indent
+- text-transform
+- text-decoration
+- letter-spacing
+- word-spacing
+- white-space
+- vertical-align
+- opacity
+- cursor
+- content
+- quotes
 
 ## 命名规范
 
@@ -411,33 +416,32 @@ body {
 
 ```css
 p {
-    line-height:1.5em;
-    margin-bottom:1em;
+  margin-bottom: 1em;
+  line-height: 1.5em;
 }
 ```
 
 #### 关系选择器
 
--   E F：所有后代选择器
+- E F：所有后代选择器
 
 ```css
 ul li {
-    margin-bottom:0.5em;
+  margin-bottom: 0.5em;
 }
 ```
 
 E > F：直接子选择器
 
 ```css
-ul > li {list-style:none;} //仅限ul的直接子元素li，忽略嵌套子元素
+ul > li {list-style: none;} /* 仅限ul的直接子元素li，忽略嵌套子元素 */
 ```
 
 E + F：直接相邻兄弟选择器
 
 ```css
 li + li {
-    border-top:1px
-    solid #ddd;
+  border-top: 1px solid #ddd;
 }
 ```
 
@@ -446,7 +450,7 @@ E ~ F：一般兄弟选择器
 ```css
 //定位具有相同父元素的，h1标签之后的所有p标签
 h1 ~ p {
-    color:#f00;
+  color: #f00;
 }
 ```
 
@@ -454,96 +458,94 @@ h1 ~ p {
 
 `E[attr]`
 
-```css
-input[required] {border:1px solid #f00;} //定位页面里所有具有必填属性"required"的input
+```scss
+input[required] {border: 1px solid #f00;} //定位页面里所有具有必填属性"required"的input
 ```
 
 `E[attr=val]`
 
-```css
-input[type=password] {border:1px solid #aaa;} //定位页面里的密码输入框
+```scss
+input[type=password] {border: 1px solid #aaa;} //定位页面里的密码输入框
 ```
 
 `E[attr|=val]`
 
-```css
-p[class|=a] {color:#333;}
-//定位页面里所有的P段落里具有class属性且属性值为a或是a-开始的，比如class="a"以及class="a-b"
+```scss
+p[class|=a] {color: #333;} //定位页面里所有的P段落里具有class属性且属性值为a或是a-开始的，比如class="a"以及class="a-b"
 ```
 
 `E[attr~=val]`
 
-```css
-div[title~=english] {color:#f88;} //定位页面里所有具有属性title且属性值里拥有完整单词english的div容器，比如title="english"以及title="a english"
+```scss
+div[title~=english] {color: #f88;} //定位页面里所有具有属性title且属性值里拥有完整单词english的div容器，比如title="english"以及title="a english"
 ```
 
 `E[attr^=val]`
 
-```css
-div[class^=a] {color:#666;}
-//定位页面里具有属性class且属性值以a开头的div容器，比如class="a"以及class="ab"
+```scss
+div[class^=a] {color: #666;} //定位页面里具有属性class且属性值以a开头的div容器，比如class="a"以及class="ab"
 ```
 
 `E[attr$=val]`
 
-```css
-div[class$=a] {color:#f00;}
+```scss
+div[class$=a] {color: #f00;}
 //定位页面里具有属性class且属性值以a结尾的div窗口，比如class="nba"以及class="cba"
 ```
 
 `E[attr*=val]`
 
-```css
-a[title*=link] {text-decoration:underline;}
+```scss
+a[title*=link] {text-decoration: underline;}
 //定位所有title里具有link字符串的a链接
 ```
 
 #### 伪类
 
--   :link：未访问的链接；
--   :visited：已访问的链接，不建议使用；
--   :hover：鼠标移动到容器，不仅限于链接，可用于页面中的任何元素；
--   :active：被激活时的状态，不仅限于链接，可用于任何具有tabindex属性的元素；
--   :focus：获得焦点时状态，不仅限于链接，可用于任何具有tabindex属性的元素：
--   :enabled：已启用的界面元素：`input`
--   :disabled：已禁用的界面元素：`input`
--   :target：该选择器定位当前活动页面内定位点的目标元素, #anchor-name `#info:target {font-size:24px;}`
--   :default：应用于一个或多个作为一组类似元素中的默认元素的UI元素；
--   :valid：应用于输入验证有效元素，基于input的type/pattern属性
--   :invalid：应用于输入验证无效元素，
--   :in-range：应用于具有范围限制的元素，其中该值位于限制内；比如具有min和max属性的number和range输入框；
--   :out-of-range：与:in-range选择相反，其中该值在限制范围外；
--   :required：应用于具有必填属性required的表单控件；
--   :optional：应用于没有必填属性required的所有表单控件
--   :read-only：应用于其内容无法供用户修改的元素；
--   :read-write：应用于其内容可供用户修改的元素，比如输入框；
--   :root：根元素，始终指html元素；
--   E F:nth-child(n)：该选择器定位元素E的第n个子元素的元素F,可省略E
--   E F:nth-last-child(n)：该选择器定位元素E的倒数第n个子元素的元素F,可省略E
--   E F:nth-of-type(n)：该选择器定位元素E的第n个指定类型子元素,可省略E
--   E F:nth-lash-of-type(n)：该选择器定位元素E的导数第n个指定类型子元素,可省略E
--   E F:first-child
--   E F:last-child
--   E F:first-of-type
--   E F:last-of-type
--   E F:only-child
--   E F:only-of-type
--   E:empty：没有子元素的元素，没有子元素包括文本节点；
--   E:lang(en)：具有使用双字母缩写(en)表示的语言的元素；
--   E:not(exception)：该选择器将选择与括号内的选择器不匹配的元素：
+- :link：未访问的链接；
+- :visited：已访问的链接，不建议使用；
+- :hover：鼠标移动到容器，不仅限于链接，可用于页面中的任何元素；
+- :active：被激活时的状态，不仅限于链接，可用于任何具有tabindex属性的元素；
+- :focus：获得焦点时状态，不仅限于链接，可用于任何具有tabindex属性的元素：
+- :enabled：已启用的界面元素：`input`
+- :disabled：已禁用的界面元素：`input`
+- :target：该选择器定位当前活动页面内定位点的目标元素, #anchor-name `#info:target {font-size:24px;}`
+- :default：应用于一个或多个作为一组类似元素中的默认元素的UI元素；
+- :valid：应用于输入验证有效元素，基于input的type/pattern属性
+- :invalid：应用于输入验证无效元素，
+- :in-range：应用于具有范围限制的元素，其中该值位于限制内；比如具有min和max属性的number和range输入框；
+- :out-of-range：与:in-range选择相反，其中该值在限制范围外；
+- :required：应用于具有必填属性required的表单控件；
+- :optional：应用于没有必填属性required的所有表单控件
+- :read-only：应用于其内容无法供用户修改的元素；
+- :read-write：应用于其内容可供用户修改的元素，比如输入框；
+- :root：根元素，始终指html元素；
+- E F:nth-child(n)：该选择器定位元素E的第n个子元素的元素F,可省略E
+- E F:nth-last-child(n)：该选择器定位元素E的倒数第n个子元素的元素F,可省略E
+- E F:nth-of-type(n)：该选择器定位元素E的第n个指定类型子元素,可省略E
+- E F:nth-lash-of-type(n)：该选择器定位元素E的导数第n个指定类型子元素,可省略E
+- E F:first-child
+- E F:last-child
+- E F:first-of-type
+- E F:last-of-type
+- E F:only-child
+- E F:only-of-type
+- E:empty：没有子元素的元素，没有子元素包括文本节点；
+- E:lang(en)：具有使用双字母缩写(en)表示的语言的元素；
+- E:not(exception)：该选择器将选择与括号内的选择器不匹配的元素：
 
 #### 伪元素
 
--   ::first-line：匹配文本首行；
--   ::first-letter：匹配文本首字母；
--   ::selection：匹配突出显示的文本：
+- ::first-line：匹配文本首行；
+- ::first-letter：匹配文本首字母；
+- ::selection：匹配突出显示的文本：
 
 ```css
 //定义选中的文本颜色与背景色
 ::selection {background:#444; color:#fff;}
 ```
 
--   ::before 与 ::after ：使用 contnet 属性生成额外的内容并插入在标记中：
+- ::before 与 ::after ：使用 contnet 属性生成额外的内容并插入在标记中：
 
 ```css
 a:after { content: "↗"; }
@@ -1203,14 +1205,10 @@ justify(自适应，左右都无空格)
 
 #### border-radius
 
-```css
-[ <length> | <percentage> ]{1,4} [ / [ <length> | <percentage> ]{1,4} ]?
-```
-
 #### border-image
 
 ```css
-<'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'>
+border-image: source slice width outset repeat
 ```
 
 ### background
@@ -1337,11 +1335,11 @@ normal,small-caps(小型大写字母)
 
 ```css
 小米米官网: {
-    font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+  font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
 }
 
 淘宝技术研发中心: {
-    font: 12px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif;
+  font: 12px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif;
 }
 
 加网: {
@@ -1362,7 +1360,7 @@ normal,small-caps(小型大写字母)
 }
 ```
 
-```css
+```md
 宋体 SimSun
 黑体 SimHei
 微软雅黑 Microsoft YaHei
@@ -1493,8 +1491,8 @@ use `inline-box` with `width`
 
 ```css
 @media (not/only) 设备类型 and ( (not) 设备特性),
-(not/only) 设备类型 and ( (not) 设备特性-1) and ( (not) 设备特性-2) {
-    样式代码
+  (not/only) 设备类型 and ( (not) 设备特性-1) and ( (not) 设备特性-2) {
+  /* 样式代码 */
 }
 ```
 
@@ -1640,13 +1638,13 @@ a {
 }
 
 a::after {
-  content: "";
-  background-color: #22313F;
   position: absolute;
   bottom: 0;
   left: 50%;
   width: 0;
   height: 3px;
+  background-color: #22313f;
+  content: "";
 }
 
 a:hover {
@@ -1665,11 +1663,11 @@ a:hover::after {
 
 ```css
 a.btn-custom {
-	border-radius: 0;
-	background-color: black;
-	padding: 10px 40px;
-    text-align: center;
-    line-height: 100px;
+  padding: 10px 40px;
+  border-radius: 0;
+  background-color: #000;
+  line-height: 100px;
+  text-align: center;
 }
 ```
 
