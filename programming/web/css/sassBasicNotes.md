@@ -17,6 +17,7 @@
       - [each](#each)
       - [import](#import)
       - [extend](#extend)
+        - [Media Queries with extend](#media-queries-with-extend)
     - [Built-in Functions](#built-in-functions)
   - [Project Structure](#project-structure)
 
@@ -184,6 +185,48 @@ $x: 1;
   @extend .panel;
   width: 150px;
   font-size: 2em;
+}
+```
+
+##### Media Queries with extend
+
+```scss
+%foo {
+  content: 'foo';
+}
+
+// Wrong
+@media print {
+  .bar {
+    // This doesn't work. Worse: it crashes.
+    @extend %foo;
+  }
+}
+
+// Right
+@media print {
+  .bar {
+    @at-root (without: media) {
+      @extend %foo;
+    }
+  }
+}
+
+// Right
+%foo {
+  content: 'foo';
+
+  &-print {
+    @media print {
+      content: 'foo print';
+    }
+  }
+}
+
+@media print {
+  .bar {
+    @extend %foo-print;
+  }
 }
 ```
 
