@@ -36,6 +36,7 @@
     - [Framework](#framework)
     - [Sprite Builder](#sprite-builder)
     - [Grid System](#grid-system)
+    - [Media Query](#media-query)
 
 <!-- /TOC -->
 
@@ -214,6 +215,13 @@ $x: 1;
 ```
 
 #### extend
+
+`@extend` is basically about moving selectors around:
+
+- can't extend complex selector
+- can't extend cross media query
+- avoid extending from nested selectors
+- avoid chaining `@extend` directives
 
 ```scss
 // This CSS won't print because %equal-heights is never extended.
@@ -509,3 +517,9 @@ When working on a very large project with a lot of abstract utilities, it might 
 - [Susy](http://susy.oddbird.net)
 - [Singulartiy](https://github.com/at-import/Singularity)
 - [CSSWizardry Grids](https://github.com/csswizardry/csswizardry-grids)
+
+### Media Query
+
+- [Sass MQ](https://github.com/sass-mq/sass-mq)
+- [Breakpoint Sass](http://breakpoint-sass.com)
+- [Include Media](https://github.com/eduardoboucas/include-media)
