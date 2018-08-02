@@ -8,6 +8,7 @@
       - [font-size](#font-size)
       - [spacing](#spacing)
       - [vertical rhythms](#vertical-rhythms)
+  - [Grid System](#grid-system)
 
 <!-- /TOC -->
 
@@ -52,3 +53,10 @@ keep vertical spaces between elements on a page consistent (and relative) to eac
 
 - Set the vertical white space between elements to a multiple of base-size
 - Set the line-height of all text elements to a multiple of base-size
+
+## Grid System
+
+- Must have different traits at different sizes
+- Must be fluid between breakpoints
+- Must have enough control to decide which columns will transform and at which point
+- Classes should ideally still make sense at all breakpoints
