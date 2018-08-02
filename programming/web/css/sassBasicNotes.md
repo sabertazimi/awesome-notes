@@ -9,6 +9,7 @@
       - [`#` string variable](#-string-variable)
       - [`&` nesting varilable](#-nesting-varilable)
       - [map](#map)
+      - [arguments list](#arguments-list)
     - [Directive](#directive)
       - [Mixin/Include](#mixininclude)
       - [if-else](#if-else)
@@ -19,9 +20,14 @@
       - [extend](#extend)
         - [Media Queries with extend](#media-queries-with-extend)
     - [Built-in Functions](#built-in-functions)
+      - [Color](#color)
   - [Project Structure](#project-structure)
   - [Best Practice](#best-practice)
     - [Children Selector](#children-selector)
+  - [Tools](#tools)
+    - [Framework](#framework)
+    - [Sprite Builder](#sprite-builder)
+    - [Grid System](#grid-system)
 
 <!-- /TOC -->
 
@@ -65,6 +71,33 @@ $colors: (
 }
 ```
 
+#### arguments list
+
+```scss
+@mixin dummy($a, $b, $c) {
+  // …
+}
+
+// Yep
+@include dummy(true, 42, 'kittens');
+
+// Yep but nope
+$params: (true, 42, 'kittens');
+$value: dummy(nth($params, 1), nth($params, 2), nth($params, 3));
+
+// Yep
+$params: (true, 42, 'kittens');
+@include dummy($params...);
+
+// Yep
+$params: (
+  'c': 'kittens',
+  'a': true,
+  'b': 42,
+);
+@include dummy($params...);
+```
+
 ### Directive
 
 #### Mixin/Include
@@ -98,6 +131,18 @@ div {
   @else {
     border: none;
   }
+}
+```
+
+```scss
+// Good
+@if not index($list, $item) {
+  // …
+}
+
+// Bad
+@if index($list, $item) == null {
+  // …
 }
 ```
 
@@ -236,6 +281,20 @@ $x: 1;
 
 [Offical Documentation](https://sass-lang.com/documentation/Sass/Script/Functions.html) or [Devdocs Guide](http://devdocs.io/sass-functions)
 
+#### Color
+
+- `mix` is better than `lighten`/`darken`
+
+```scss
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+```
+
 ## Project Structure
 
 [Complete Guide for Sass Directory Structure](https://vanseodesign.com/css/sass-directory-structures)
@@ -330,3 +389,21 @@ When working on a very large project with a lot of abstract utilities, it might 
   }
 }
 ```
+
+## Tools
+
+### Framework
+
+- [Compass](http://compass-style.org)
+- Bourbon
+
+### Sprite Builder
+
+- [Grunticon](https://github.com/filamentgroup/grunticon)
+- [Grumpicon](http://grumpicon.com)
+
+### Grid System
+
+- [Susy](http://susy.oddbird.net)
+- [Singulartiy](https://github.com/at-import/Singularity)
+- [CSSWizardry Grids](https://github.com/csswizardry/csswizardry-grids)
