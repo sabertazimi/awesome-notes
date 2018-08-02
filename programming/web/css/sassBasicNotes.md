@@ -24,6 +24,10 @@
       - [Color](#color)
       - [Math](#math)
       - [type and unit](#type-and-unit)
+  - [Error Handle](#error-handle)
+    - [function error handle](#function-error-handle)
+    - [mixin error handle](#mixin-error-handle)
+    - [Lists Check](#lists-check)
   - [Project Structure](#project-structure)
   - [Best Practice](#best-practice)
     - [Children Selector](#children-selector)
@@ -327,12 +331,61 @@ whatever {
 - type-of($var)
 - is-type-of($var, $type)
 
+## Error Handle
+
+- type-of
+- is-type-of
+- unit
+- unitless
+- @warn/@error
+
+### function error handle
+
+```scss
+@function add-10($number) {
+  @if type-of($number) != "number" {
+    @warn "`#{$number}` is not a number of `add-10`.";
+    @return false;
+  }
+
+  @return $number + 10;
+}
+```
+
+### mixin error handle
+
+```scss
+@mixin module($name) {
+  // Initialize a validity checker boolean
+  $everything-okay: true;
+
+  // Check for argument validity
+  @if type-of($name) != 'string' {
+    @warn '"#{$name}" is not a string for "module".';
+    $everything-okay: false;
+  }
+
+  // If everything's still okay, dump mixin content
+  @if $everything-okay {
+    @content;
+  }
+}
+```
+
+### Lists Check
+
+```scss
+@if length($value) > 1 and type-of($value) != map {
+  // It is a list of multiple values
+}
+```
+
 ## Project Structure
 
-[Complete Guide for Sass Directory Structure](https://vanseodesign.com/css/sass-directory-structures)
-[Difference between Sass Directory Architectures](https://www.sitepoint.com/look-different-sass-architectures)
+- [Complete Guide for Sass Directory Structure](https://vanseodesign.com/css/sass-directory-structures)
+- [Difference between Sass Directory Architectures](https://www.sitepoint.com/look-different-sass-architectures)
 
-```
+```text
 sass/
 |– abstracts/
 |   |– _variables.scss   # Sass Variables
@@ -352,7 +405,7 @@ sass/
 |   ...                  # Etc…
 |
 |– components/
-|   |– _buttons.scss     # Buttons 
+|   |– _buttons.scss     # Buttons
 |   |– _carousel.scss    # Carousel
 |   |– _cover.scss       # Cover
 |   |– _dropdown.scss    # Dropdown
