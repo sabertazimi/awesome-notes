@@ -8,8 +8,6 @@
       - [font-size](#font-size)
       - [spacing](#spacing)
       - [vertical rhythms](#vertical-rhythms)
-  - [Best Practice](#best-practice)
-    - [Children Selector](#children-selector)
 
 <!-- /TOC -->
 
@@ -54,33 +52,3 @@ keep vertical spaces between elements on a page consistent (and relative) to eac
 
 - Set the vertical white space between elements to a multiple of base-size
 - Set the line-height of all text elements to a multiple of base-size
-
-## Best Practice
-
-### Children Selector
-
-```scss
-// Good
-%button {
-  display: inline-block;
-  // … button styles
-
-  // Relationship: a %button that is a child of a %modal
-  %modal > & {
-    display: block;
-  }
-}
-
-.button {
-  @extend %button;
-}
-
-// Bad
-.modal {
-  @extend %modal;
-
-  > .button {
-    @extend %button;
-  }
-}
-```

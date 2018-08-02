@@ -20,6 +20,8 @@
         - [Media Queries with extend](#media-queries-with-extend)
     - [Built-in Functions](#built-in-functions)
   - [Project Structure](#project-structure)
+  - [Best Practice](#best-practice)
+    - [Children Selector](#children-selector)
 
 <!-- /TOC -->
 
@@ -298,3 +300,33 @@ in `main.scss` file:
 7. import `themes` (or `pages` when it's not `partial` directory)
 
 When working on a very large project with a lot of abstract utilities, it might be interesting to group them by topic rather than type, for instance typography (_typography.scss), theming (_theming.scss), etc. Each file contains all the related helpers: variables, functions, mixins and placeholders.
+
+## Best Practice
+
+### Children Selector
+
+```scss
+// Good
+%button {
+  display: inline-block;
+  // … button styles
+
+  // Relationship: a %button that is a child of a %modal
+  %modal > & {
+    display: block;
+  }
+}
+
+.button {
+  @extend %button;
+}
+
+// Bad
+.modal {
+  @extend %modal;
+
+  > .button {
+    @extend %button;
+  }
+}
+```
