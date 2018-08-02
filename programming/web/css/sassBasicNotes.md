@@ -18,6 +18,7 @@
       - [import](#import)
       - [extend](#extend)
     - [Built-in Functions](#built-in-functions)
+  - [Project Structure](#project-structure)
 
 <!-- /TOC -->
 
@@ -189,3 +190,68 @@ $x: 1;
 ### Built-in Functions
 
 [Offical Documentation](https://sass-lang.com/documentation/Sass/Script/Functions.html) or [Devdocs Guide](http://devdocs.io/sass-functions)
+
+## Project Structure
+
+[Complete Guide for Sass Directory Structure](https://vanseodesign.com/css/sass-directory-structures)
+[Difference between Sass Directory Architectures](https://www.sitepoint.com/look-different-sass-architectures)
+
+```
+sass/
+|– abstracts/
+|   |– _variables.scss   # Sass Variables
+|   |– _functions.scss   # Sass Functions
+|   |– _mixins.scss      # Sass Mixins
+|   |– _helpers.scss     # Class & placeholders helpers
+|   ...                  # Etc…
+|
+|– vendors/
+|   |– _bootstrap.scss   # Bootstrap
+|   |– _jquery-ui.scss   # jQuery UI
+|   ...                  # Etc…
+|
+|– base/
+|   |– _reset.scss       # Reset/normalize
+|   |– _typography.scss  # Typography rules
+|   ...                  # Etc…
+|
+|– components/
+|   |– _buttons.scss     # Buttons 
+|   |– _carousel.scss    # Carousel
+|   |– _cover.scss       # Cover
+|   |– _dropdown.scss    # Dropdown
+|   |– _navigation.scss  # Navigation
+|   ...                  # Etc…
+|
+|– layout/
+|   |– _grid.scss        # Grid system
+|   |– _header.scss      # Header
+|   |– _footer.scss      # Footer
+|   |– _sidebar.scss     # Sidebar
+|   |– _forms.scss       # Forms
+|   ...                  # Etc…
+|
+|– pages/
+|   |– _home.scss        # Home specific styles
+|   |– _contact.scss     # Contact specific styles
+|   ...                  # Etc…
+|
+|– themes/
+|   |– _theme.scss       # Default theme
+|   |– _admin.scss       # Admin theme
+|   ...                  # Etc…
+|
+|– main.scss             # primary Sass file
+```
+
+in `main.scss` file:
+
+1. `@charset 'utf-8';`
+2. import `abstracts`
+3. import `vendors`
+4. import `base`
+5. import `layout`
+6. import `components`
+7. import `themes` (or `pages` when it's not `partial` directory)
+
+When working on a very large project with a lot of abstract utilities, it might be interesting to group them by topic rather than type, for instance typography (_typography.scss), theming (_theming.scss), etc. Each file contains all the related helpers: variables, functions, mixins and placeholders.

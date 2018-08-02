@@ -397,14 +397,14 @@ body {
 
 ### CSS Files
 
-- main.css
+- abstracts: $variables, @mixin function
+- vendors: external libraries (font-awesome, bootstrap)
 - base: normalize.css, reset.css, utils.css, font.css, base.css (margin-right, text-center, float-right)
 - components: form.css, button.css, navbar.css, dropdown.css
 - layout: columns.css, grid.css, header.css, footer.css, section.css, navigation.css
 - pages: home.css, about.css
 - themes: color.css, font.css
-- abstracts: $variables, @mixin function
-- vendors: external libraries (font-awesome, bootstrap)
+- main.css
 
 ## CSS Selector
 
