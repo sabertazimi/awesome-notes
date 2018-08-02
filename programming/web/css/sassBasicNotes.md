@@ -10,6 +10,7 @@
       - [`&` nesting varilable](#-nesting-varilable)
       - [map](#map)
       - [arguments list](#arguments-list)
+      - [`!default` flag](#default-flag)
     - [Directive](#directive)
       - [Mixin/Include](#mixininclude)
       - [if-else](#if-else)
@@ -21,6 +22,8 @@
         - [Media Queries with extend](#media-queries-with-extend)
     - [Built-in Functions](#built-in-functions)
       - [Color](#color)
+      - [Math](#math)
+      - [type and unit](#type-and-unit)
   - [Project Structure](#project-structure)
   - [Best Practice](#best-practice)
     - [Children Selector](#children-selector)
@@ -97,6 +100,10 @@ $params: (
 );
 @include dummy($params...);
 ```
+
+#### `!default` flag
+
+only assign when variables hadn't been assigned
 
 ### Directive
 
@@ -294,6 +301,31 @@ $x: 1;
   @return mix(black, $color, $percentage);
 }
 ```
+
+#### Math
+
+- round($number)
+- ceil($number)
+- floor($number)
+- abs($number)
+- max
+- min
+
+```scss
+$value: 13.37;
+$length: $value * 1em;
+
+whatever {
+  padding-top: round($length); // 13em
+}
+```
+
+#### type and unit
+
+- unit($length)
+- unitless($length)
+- type-of($var)
+- is-type-of($var, $type)
 
 ## Project Structure
 
