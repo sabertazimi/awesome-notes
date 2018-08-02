@@ -8,7 +8,8 @@
       - [`$` normal variable](#-normal-variable)
       - [`#` string variable](#-string-variable)
       - [`&` nesting varilable](#-nesting-varilable)
-      - [map](#map)
+      - [List](#list)
+      - [Map](#map)
       - [arguments list](#arguments-list)
       - [`!default` flag](#default-flag)
     - [Directive](#directive)
@@ -62,7 +63,23 @@ h1 {
 
 parent-selector
 
-#### map
+#### List
+
+- length($list)
+- nth($list, $n)
+- set-nth($list, $n, $value)
+- index($list, $value)
+- list-separator($list)
+- append($list, $value, [$separator])
+
+#### Map
+
+- map-get($map, $key)
+- map-merge($map, $map)
+- map-remove($map, $keys)
+- map-keys($map)
+- map-values($map)
+- map-has-key($map, $key)
 
 ```scss
 $colors: (
