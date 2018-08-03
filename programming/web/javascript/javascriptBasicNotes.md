@@ -180,6 +180,8 @@
   - [错误处理(Error/Exception)](#错误处理errorexception)
     - [错误类型](#错误类型)
     - [异常作用](#异常作用)
+  - [Asynchronous Programming](#asynchronous-programming)
+    - [await/async](#awaitasync)
 
 <!-- /TOC -->
 
@@ -2706,3 +2708,21 @@ MyError.prototype.constructor = MyError;
 
 -    在可能失败的地方抛出异常，对失败处做标签，易于**调试与测试**
 -    修复 bug 后，可考虑是否在此处抛出异常
+
+## Asynchronous Programming
+
+### await/async
+
+avoid wrong parallel logic
+
+```js
+// wrong
+const books = await bookModel.fetchAll();
+const author = await authorModel.fetch(authorId);
+
+// right
+const bookPromise = bookModel.fetchAll();
+const authorPromise = authorModel.fetch(authorId);
+const book = await bookPromise;
+const author = await authorPromise;
+```
