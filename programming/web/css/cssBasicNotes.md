@@ -86,6 +86,7 @@
       - [Best Practice](#best-practice-3)
         - [单背景极简欢迎首页](#单背景极简欢迎首页)
     - [text](#text)
+      - [white-space](#white-space)
     - [font](#font)
       - [font-size](#font-size)
       - [font-style](#font-style)
@@ -1252,15 +1253,26 @@ border-image: source slice width outset repeat
 
 ```css
 .text {
-	text-align: center;
-	text-decoration: underline/line-through;  /* 下划线与删除线 */
+  text-align: center;
+  text-decoration: underline/line-through;  /* 下划线与删除线 */
 }
 
 .paragraph {
-    text-indent: 2em;     /* 段落缩进 */
-	line-height: 1.5em;   /* 行间距  */
-	letter-spacing: 50px; /* 字间距  */
-	word-spacing: 50px;   /* 词间距  */
+  text-indent: 2em;     /* 段落缩进 */
+  line-height: 1.5em;   /* 行间距  */
+  word-spacing: 50px;   /* 词间距  */
+  letter-spacing: 50px; /* 字间距  */
+}
+```
+
+#### white-space
+
+html 中, 普通标签内自动忽略空格符, 并将其与空白符转换成一个空格进行输出, 可用 white-spacing 改变这一行为
+
+```css
+p {
+  /* 保留所有特殊符号 */
+  white-space: pre;
 }
 ```
 
