@@ -1,3 +1,5 @@
+# Linux Basic Notes
+
 <!-- TOC -->
 
 - [Linux Basic Notes](#linux-basic-notes)
@@ -108,6 +110,7 @@
       - [while语句与until语句](#while语句与until语句)
     - [函数](#函数)
     - [信号](#信号)
+    - [Interactive Shell Script Tips](#interactive-shell-script-tips)
   - [Terminal](#terminal)
   - [Perf Tools](#perf-tools)
     - [`uptime`](#uptime)
@@ -123,9 +126,7 @@
 
 <!-- /TOC -->
 
-# Linux Basic Notes
-
-##	重装Linux
+## 重装Linux
 
 -   自动挂载项 /etc/fstab  etc/rc.local
 -   自定义脚本-新建目录(加入环境变量)
@@ -133,7 +134,7 @@
 
 ## ssh命令
 
-###  编辑~/.ssh/config文件
+### 编辑~/.ssh/config文件
 
 -   Host 别名
     -   HostName 主机名(ip)           `ssh user@ip`
@@ -917,10 +918,95 @@ until [ 条件判断式 ]
 - trap SIG*/EXIT —— 捕捉信号(后 + 忽略信号/默认处理信号/自定义处理信号)
 - trap – SIG*/EXIT  —— 移除信号
 
+### Interactive Shell Script Tips
+
+- help option
+
+```bash
+#!/bin/sh
+if [ ${#@} -ne 0 ] && [ "${@#"--help"}" = "" ]; then
+  printf -- '...help...\n';
+  exit 0;
+fi;
+```
+
+- slient option
+
+```bash
+#!/bin/sh
+if [ ${#@} -ne 0 ] && [ "${@#"--silent"}" = "" ]; then
+  stty -echo;
+fi;
+# ...
+# before point of intended output:
+stty +echo && printf -- 'intended output\n';
+# silence it again till end of script
+stty -echo;
+# ...
+stty +echo;
+exit 0;
+```
+
+- command available
+
+```bash
+#!/bin/sh
+_=$(command -v docker);
+if [ "$?" != "0" ]; then
+  printf -- 'You don\'t seem to have Docker installed.\n';
+  printf -- 'Get it: https://www.docker.com/community-edition\n';
+  printf -- 'Exiting with code 127...\n';
+  exit 127;
+fi;
+```
+
+- absolute path
+
+```bash
+#!/bin/sh
+CURR_DIR="$(dirname $0);"
+printf -- 'moving application to /opt/app.jar';
+mv "${CURR_DIR}/application.jar" /opt/app.jar;
+```
+
+- error handle
+
+```bash
+#!/bin/sh
+error_handle() {
+  stty echo;
+}
+
+if [ ${#@} -ne 0 ] && [ "${@#"--silent"}" = "" ]; then
+  stty -echo;
+  trap error_handle INT;
+  trap error_handle TERM;
+  trap error_handle KILL;
+  trap error_handle EXIT;
+fi;
+# ...
+```
+
+- loading progress
+
+```bash
+#!/bin/sh
+printf -- 'Performing asynchronous action..';
+./trigger-action;
+DONE=0;
+while [ $DONE -eq 0 ]; do
+  ./async-checker;
+  if [ "$?" = "0" ]; then DONE=1; fi;
+  printf -- '.';
+  sleep 1;
+done;
+printf -- ' DONE!\n';
+```
+
 ## Terminal
 
 ```bash
-$ sudo update-alternatives --config x-terminal-emulator
+sudo update-alternatives --config x-terminal-emulator
 ```
 
 ## Perf Tools
