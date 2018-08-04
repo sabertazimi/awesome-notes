@@ -1,27 +1,53 @@
+# Webpack Basic Notes
+
 <!-- TOC -->
 
 - [Webpack Basic Notes](#webpack-basic-notes)
-    - [Optimization](#optimization)
-    - [Plugin](#plugin)
+  - [Config](#config)
+    - [resolve](#resolve)
     - [Options](#options)
-    - [Advanced](#advanced)
-        - [code split](#code-split)
-        - [Tree Shaking](#tree-shaking)
+  - [Optimization](#optimization)
+  - [Plugin](#plugin)
+  - [Advanced](#advanced)
+    - [code split](#code-split)
+    - [Tree Shaking](#tree-shaking)
 
 <!-- /TOC -->
 
-# Webpack Basic Notes
+## Config
+
+### resolve
+
+```js
+{
+  resolve: {
+    alias: {
+      '~': resolve(__dirname, 'src'),
+    },
+    extensions: [
+      '.js',
+      '.jsx',
+    ],
+  },
+}
+```
+
+### Options
+
+- --progress
+- --colors
+- -p
 
 ## Optimization
 
--   cdn
--   服务器端渲染
--   生产环境全局变量(去除不必要的build用 lib/plugin, 如 react-hot-loader)
--   提取公共库(common.js)
--   代码压缩: 压缩js(去除注释/空行/替换变量名等)
--   代码分割: 按需加载js
--   代码分割: chunk
--   代码分离: 分离css(extract-text-webpack-plugin
+- cdn
+- 服务器端渲染
+- 生产环境全局变量(去除不必要的build用 lib/plugin, 如 react-hot-loader)
+- 提取公共库(common.js)
+- 代码压缩: 压缩js(去除注释/空行/替换变量名等)
+- 代码分割: 按需加载js
+- 代码分割: chunk
+- 代码分离: 分离css(extract-text-webpack-plugin
 
 ## Plugin
 
@@ -49,7 +75,7 @@ providePlugin =
         jQuery: 'jquery',
         'window.jQuery': 'jquery'
     });
-cleanUpPlugin = 
+cleanUpPlugin =
     new WebpackCleanupPlugin({
         exclude: ['stats.json', 'important.js']
     });
@@ -64,15 +90,9 @@ dllReferencePlugin = new Webpack.DllReferencePlugin({
     });
 ```
 
--   imageMinPlugin
--   webpack-bundle-analyzer
--   webpack-monitor
-
-## Options
-
--  --progress
--  --colors
--  -p
+- imageMinPlugin
+- webpack-bundle-analyzer
+- webpack-monitor
 
 ## Advanced
 
