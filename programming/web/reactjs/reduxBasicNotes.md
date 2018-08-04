@@ -1,4 +1,4 @@
-
+﻿
 * [Redux Basic Notes](#redux-basic-notes)
 	* [Best Practice](#best-practice)
 	* [Awesome Tools](#awesome-tools)
@@ -7,6 +7,8 @@
 # Redux Basic Notes
 
 Stack: ES6, webpack, react-hot-loader
+
+[React Redux Style Guide](https://github.com/iraycd/React-Redux-Styleguide)
 
 ## Basic Concepts
 
