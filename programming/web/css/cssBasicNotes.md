@@ -37,9 +37,9 @@
       - [box-sizing](#box-sizing)
       - [height](#height)
       - [column](#column)
-      - [Awesome Box Patterns](#awesome-box-patterns)
       - [Block Formatting Context](#block-formatting-context)
         - [Create BFC](#create-bfc)
+      - [Margin Collapsing/Merging](#margin-collapsingmerging)
       - [Flow Patterns](#flow-patterns)
       - [Float Patterns](#float-patterns)
         - [fixed parent](#fixed-parent)
@@ -656,27 +656,33 @@ cal(10em + 3px);
 }
 ```
 
--   column-count
--   column-width
--   column-gap         分隔距离
--   column-rule(style) 分隔线
-
-#### Awesome Box Patterns
+- column-count
+- column-width
+- column-gap         分隔距离
+- column-rule(style) 分隔线
 
 #### Block Formatting Context
 
--   一个BFC包含创建该上下文元素的所有子元素，但不包括创建了新BFC的子元素的内部元素
--   一个元素不能同时存在于两个BFC中: 可让处于BFC内部的元素与外部的元素相互隔离
+- 一个BFC包含创建该上下文元素的所有子元素，但不包括创建了新BFC的子元素的内部元素
+- 一个元素不能同时存在于两个BFC中: 可让处于BFC内部的元素与外部的元素相互隔离
 
 ##### Create BFC
 
 - 根元素或其它包含它的元素
-- position: absolute/fixed
+- overflow: not visible (i.e hidden)
 - float: left/right
-- overflow: hidden
+- position: absolute/fixed
 - display: inline-block
 - display: flex/inline-flex
-- display: table-cell
+- display: grid/inline-grid
+- display: table-cell/table-caption/table-*h
+- display: flow-root
+
+#### Margin Collapsing/Merging
+
+- closet sibling: 1's margin-bottom with 2's margin-top
+- parent and it's first/last child: up with up (bottom with bottom)
+- empty block: margin-top with margin-bottom
 
 #### Flow Patterns
 
