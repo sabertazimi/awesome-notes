@@ -62,7 +62,31 @@ h1 {
 
 #### `&` nesting varilable
 
-parent-selector
+refer to parent-selector, only use it on:
+
+- pseduo selectors and pseduo elements
+
+```scss
+.button {
+  &:hover {
+    color: $color-button-hover;
+  }
+
+  &::after {
+
+  }
+}
+```
+
+- relationship selectors
+
+```scss
+.button {
+  .sidebar & {
+    font-size: 0.9rem;
+  }
+}
+```
 
 #### List
 
