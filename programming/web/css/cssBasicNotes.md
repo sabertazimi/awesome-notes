@@ -214,8 +214,31 @@ body {
 
 ### rem vs em
 
-*   Size in em if the property scales according to it’s font-size
-*   Size everything else in rem
+- Size in em if the property scales according to it’s font-size
+
+```css
+.container {
+  margin-top: 1.2em;
+}
+```
+
+- Size in em if the font-size should be modular (relative to it's context/parent): `Modular Font Size`
+
+```css
+.container {
+  font-size: 1.2rem;
+}
+
+.container  p {
+  font-size: 1em;
+}
+
+.container  small {
+  font-size: 0.9em;
+}
+```
+
+- Size everything else in rem (include media queries)
 
 ## 属性排序
 
