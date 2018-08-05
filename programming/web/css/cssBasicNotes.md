@@ -1,8 +1,8 @@
 <!-- TOC -->
 
 - [CSS 3 Basic Notes](#css-3-basic-notes)
-  - [Cascading](#cascading)
-    - [Order](#order)
+  - [Cascading and Inheritance](#cascading-and-inheritance)
+    - [Cascading Order](#cascading-order)
     - [Specificity](#specificity)
   - [Best Practice](#best-practice)
     - [Normalize](#normalize)
@@ -182,9 +182,9 @@
 
 # CSS 3 Basic Notes
 
-## Cascading
+## Cascading and Inheritance
 
-### Order
+### Cascading Order
 
 1. user agent normal
 2. user normal
@@ -203,7 +203,8 @@ specificiy has 4 bits - thousands, hundreds, tens, ones `0000`:
 - tens: class selector, attribute selector, pseudo-class(:)
 - ones: element selector, pseudo-element(::)
 
-> Universal selector (*), combinators (+, >, ~, ' ') and negation pseudo-class (:not) have no effect on specificity
+> Universal selector (*), combinators (+, >, ~, ' ')
+> negation pseudo-class (:not) have no effect on specificity, but selectors in it have effect on specificity
 
 ```scss
 h1 {
@@ -265,6 +266,19 @@ div li:nth-child(2) a:hover {
 /* win */
 div div .nav:nth-child(2) a:hover {
   border: 10px double black;
+}
+```
+
+Styles for a directly targeted element will always take precedence over inherited styles, regardless of the specificity of the inherited rule
+
+```css
+#parent {
+  color: green;
+}
+
+/* <h1> element will be purple */
+h1 {
+  color: purple;
 }
 ```
 
