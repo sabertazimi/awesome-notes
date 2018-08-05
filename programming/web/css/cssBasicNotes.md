@@ -1,6 +1,9 @@
 <!-- TOC -->
 
 - [CSS 3 Basic Notes](#css-3-basic-notes)
+  - [Cascading](#cascading)
+    - [Order](#order)
+    - [Specificity](#specificity)
   - [Best Practice](#best-practice)
     - [Normalize](#normalize)
     - [gap](#gap)
@@ -178,6 +181,92 @@
 <!-- /TOC -->
 
 # CSS 3 Basic Notes
+
+## Cascading
+
+### Order
+
+1. user agent normal
+2. user normal
+3. author normal
+4. CSS Animations
+5. author !important
+6. user !important
+7. user agent !important
+
+### Specificity
+
+specificiy has 4 bits - thousands, hundreds, tens, ones `0000`:
+
+- thousands: inline-style
+- hundreds: ID selector
+- tens: class selector, attribute selector, pseudo-class(:)
+- ones: element selector, pseudo-element(::)
+
+> Universal selector (*), combinators (+, >, ~, ' ') and negation pseudo-class (:not) have no effect on specificity
+
+```scss
+h1 {
+  specificity: 0001;
+}
+
+#id {
+  specificity: 0100;
+}
+
+h1 + p::first-letter {
+  specificity: 0003;
+}
+
+li > a[href*="en-US"] > .inline-warning {
+  specificity: 0022;
+}
+
+/* <h1 style="color: black">Hello</h1> */
+inline-style {
+  specificity: 1000;
+}
+```
+
+```css
+/* specificity: 0101 */
+#outer a {
+  background-color: red;
+}
+
+/* specificity: 0201 */
+/* win */
+#outer #inner a {
+  background-color: blue;
+}
+
+/* specificity: 0104 */
+#outer div ul li a {
+  color: yellow;
+}
+
+/* specificity: 0113 */
+/* win */
+#outer div ul .nav a {
+  color: white;
+}
+
+/* specificity: 0024 */
+div div li:nth-child(2) a:hover {
+  border: 10px solid black;
+}
+
+/* specificity: 0023 */
+div li:nth-child(2) a:hover {
+  border: 10px dashed black;
+}
+
+/* specificity: 0033 */
+/* win */
+div div .nav:nth-child(2) a:hover {
+  border: 10px double black;
+}
+```
 
 ## Best Practice
 
