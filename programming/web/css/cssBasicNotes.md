@@ -1,3 +1,5 @@
+# CSS 3 Basic Notes
+
 <!-- TOC -->
 
 - [CSS 3 Basic Notes](#css-3-basic-notes)
@@ -149,9 +151,10 @@
       - [Slide](#slide)
       - [Filter](#filter)
       - [Icons](#icons)
-    - [Animation](#animation)
+    - [Animation Component](#animation-component)
+      - [Loading Spinner](#loading-spinner)
       - [Particles](#particles)
-      - [Hover](#hover)
+      - [Hover Component](#hover-component)
       - [Prompt](#prompt)
       - [Message](#message-1)
     - [Content](#content)
@@ -186,8 +189,6 @@
       - [File Tree View](#file-tree-view)
 
 <!-- /TOC -->
-
-# CSS 3 Basic Notes
 
 ## Cascading and Inheritance
 
@@ -1312,7 +1313,7 @@ transform添加于普通类选择器与伪类选择器
 
 #### animation
 
-**Tip : fade in body style**
+> Tip : fade in body style
 
 ```css
 @keyframes body-fade-in {
@@ -1330,9 +1331,7 @@ body {
     animation-timing-function: ease;
     animation-iteration-count: 1;
 }
-
 ```
-
 
 ```css
 @keyframes name {
@@ -2000,8 +1999,7 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 
 - [SVG Logos](https://github.com/gilbarbara/logos)
 
-
-### Animation
+### Animation Component
 
 - [Awesome Effect Library - Effeckt.css](https://github.com/h5bp/Effeckt.css)
 - [animate.css](https://github.com/daneden/animate.css)
@@ -2012,11 +2010,15 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 - [Scroll Up Animation](https://github.com/michalsnik/aos)
 - [Mottojs - animated words](https://github.com/jrainlau/motto)
 
+#### Loading Spinner
+
+- [Epic Spinners](https://github.com/epicmaxco/epic-spinners)
+
 #### Particles
 
 - https://github.com/MapleRecall/html5-particles
 
-####  Hover
+#### Hover Component
 
 - [Hovering Button Effects](https://github.com/IanLunn/Hover)
 - [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
