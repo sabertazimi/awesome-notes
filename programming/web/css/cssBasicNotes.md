@@ -128,6 +128,7 @@
     - [Layout](#layout)
       - [相同单元](#相同单元)
       - [元素定位](#元素定位)
+  - [CSS Variables](#css-variables)
   - [Design](#design)
     - [Color](#color)
       - [Scheme](#scheme)
@@ -166,14 +167,14 @@
       - [Search Bar](#search-bar)
       - [Select](#select)
       - [Validate](#validate)
-    - [Layout](#layout-1)
+    - [Layout Component](#layout-component)
       - [Page](#page)
       - [Grid](#grid)
       - [Split](#split)
       - [Scroll](#scroll)
       - [Position](#position)
       - [Mail](#mail)
-      - [Slide](#slide-1)
+      - [Slide Component](#slide-component)
       - [Gallery](#gallery)
     - [Geometry](#geometry)
       - [Blocks](#blocks)
@@ -1885,16 +1886,32 @@ a.btn-custom {
 
 #### 相同单元
 
--   ul + li + float
--   .container{text-align:center;} + .content{width: xx%;}
+- ul + li + float
+- .container{text-align:center;} + .content{width: xx%;}
 
 #### 元素定位
 
--   align
--   margin + padding
--   position + top/bottom/left/right
--   float
--   flex
+- align
+- margin + padding
+- position + top/bottom/left/right
+- float
+- flex
+
+## CSS Variables
+
+```css
+.element {
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+}
+```
+
+```js
+window.addEventListener('resize', () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+```
 
 ## Design
 
@@ -1906,203 +1923,203 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 
 #### Scheme 
 
--   floralwhite + #7986cb
--   http://www.gradifycss.com/
+- floralwhite + #7986cb
+- http://www.gradifycss.com/
 
 #### Lib
 
--   https://github.com/adriantoine/kewler
+- https://github.com/adriantoine/kewler
 
 ## UI Libraries && Components
 
--   http://microjs.com/
+- http://microjs.com/
 
 ### Utils
 
--   [CSS Reset](https://github.com/necolas/normalize.css)
--   [Feature/Browser Detection](https://github.com/Modernizr/Modernizr)
+- [CSS Reset](https://github.com/necolas/normalize.css)
+- [Feature/Browser Detection](https://github.com/Modernizr/Modernizr)
 
 ### Society
 
--   [一键分享](https://github.com/overtrue/share.js)
--   [sharing](https://github.com/mxstbr/sharing)
+- [一键分享](https://github.com/overtrue/share.js)
+- [sharing](https://github.com/mxstbr/sharing)
 
 ### Mouse Effect
 
--   https://github.com/processing/p5.js
--   https://github.com/yoannmoinet/nipplejs
+- https://github.com/processing/p5.js
+- https://github.com/yoannmoinet/nipplejs
 
 ### Message
 
 #### Calendar
 
--   [GitHub Style Calendar](https://github.com/DKirwan/calendar-heatmap)
+- [GitHub Style Calendar](https://github.com/DKirwan/calendar-heatmap)
 
 #### Time
 
--    [bower install pickadate](https://github.com/amsul/pickadate.js)
+- [bower install pickadate](https://github.com/amsul/pickadate.js)
 
 ### Documentation
 
--   https://github.com/usablica/intro.js
+- https://github.com/usablica/intro.js
 
 ### Editor
 
--   [Wang Editor - Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
--   [React Built In Editor](https://github.com/facebook/draft-js)
+- [Wang Editor - Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
+- [React Built In Editor](https://github.com/facebook/draft-js)
 
 #### Emoji
 
--   [OwO Keyboard Emoji](https://github.com/DIYgod/OwO)
--   [Emoji Panel](https://github.com/TimeToKnow/emoji-panel)
+- [OwO Keyboard Emoji](https://github.com/DIYgod/OwO)
+- [Emoji Panel](https://github.com/TimeToKnow/emoji-panel)
 
 ### Video
 
--   [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
--   [plyr](https://github.com/selz/plyr)
+- [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
+- [plyr](https://github.com/selz/plyr)
 
 ### Images
 
 #### Size
 
--   [Variant Size Pictures](https://github.com/imulus/retinajs)
+- [Variant Size Pictures](https://github.com/imulus/retinajs)
 
 #### Slide
 
--   https://github.com/hustcc/placeholder.js
--   [Pictures Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
+- https://github.com/hustcc/placeholder.js
+- [Pictures Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
 
 #### Filter
 
--   [Pictures Color Style Filter](https://github.com/we-are-next/cssco)
--   [Rainyday Effect](https://github.com/maroslaw/rainyday.js)
--   [Canvas Manipulation](https://github.com/meltingice/CamanJS/)
--   https://github.com/HumbleSoftware/js-imagediff
+- [Pictures Color Style Filter](https://github.com/we-are-next/cssco)
+- [Rainyday Effect](https://github.com/maroslaw/rainyday.js)
+- [Canvas Manipulation](https://github.com/meltingice/CamanJS/)
+- https://github.com/HumbleSoftware/js-imagediff
 
 #### Icons
 
--   [SVG Logos](https://github.com/gilbarbara/logos)
+- [SVG Logos](https://github.com/gilbarbara/logos)
 
 
 ### Animation
 
--   [Awesome Effect Library - Effeckt.css](https://github.com/h5bp/Effeckt.css)
--   [animate.css](https://github.com/daneden/animate.css)
--   [anime.js](https://github.com/juliangarnier/anime)
--   [Velocity Animation](https://github.com/julianshapiro/velocity)
--   [Ramjet](https://github.com/rich-harris/ramjet)
--   [barba.js](https://github.com/luruke/barba.js)
--   [Scroll Up Animation](https://github.com/michalsnik/aos)
--   [Mottojs - animated words](https://github.com/jrainlau/motto)
+- [Awesome Effect Library - Effeckt.css](https://github.com/h5bp/Effeckt.css)
+- [animate.css](https://github.com/daneden/animate.css)
+- [anime.js](https://github.com/juliangarnier/anime)
+- [Velocity Animation](https://github.com/julianshapiro/velocity)
+- [Ramjet](https://github.com/rich-harris/ramjet)
+- [barba.js](https://github.com/luruke/barba.js)
+- [Scroll Up Animation](https://github.com/michalsnik/aos)
+- [Mottojs - animated words](https://github.com/jrainlau/motto)
 
 #### Particles
 
--   https://github.com/MapleRecall/html5-particles
+- https://github.com/MapleRecall/html5-particles
 
 ####  Hover
 
--   [Hovering Button Effects](https://github.com/IanLunn/Hover)
--   [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
--   [Hint.css - Tooltips](https://github.com/chinchang/hint.css)
+- [Hovering Button Effects](https://github.com/IanLunn/Hover)
+- [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
+- [Hint.css - Tooltips](https://github.com/chinchang/hint.css)
 
 #### Prompt
 
--   [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
--   https://github.com/FezVrasta/popper.js
--   https://github.com/wavded/humane-js
--   [Desktop Notification](https://github.com/Nickersoft/push.js)
--   [Nodejs Notification](https://github.com/mikaelbr/node-notifier)
+- [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
+- https://github.com/FezVrasta/popper.js
+- https://github.com/wavded/humane-js
+- [Desktop Notification](https://github.com/Nickersoft/push.js)
+- [Nodejs Notification](https://github.com/mikaelbr/node-notifier)
 
 #### Message
 
--   [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
--   [TheaterJS - Typing Effect](https://github.com/Zhouzi/TheaterJS)
+- [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
+- [TheaterJS - Typing Effect](https://github.com/Zhouzi/TheaterJS)
 
 ### Content
 
 #### Card
 
--   [GitHub Information Card](https://github.com/lepture/github-cards)
--   https://github.com/bootcards/bootcards
+- [GitHub Information Card](https://github.com/lepture/github-cards)
+- https://github.com/bootcards/bootcards
 
 #### List
 
--   [Sortable](https://github.com/RubaXa/Sortable)
+- [Sortable](https://github.com/RubaXa/Sortable)
 
 #### Nav
 
--   https://github.com/VPenkov/okayNav
+- https://github.com/VPenkov/okayNav
 
 #### Menu
 
--   [Menu Icon Click Animation](https://github.com/jonsuh/hamburgers)
+- [Menu Icon Click Animation](https://github.com/jonsuh/hamburgers)
 
 ### Graph/Chart
 
 #### Graph
 
--   [Sigmajs - Graph Drawing](https://github.com/jacomyal/sigma.js)
+- [Sigmajs - Graph Drawing](https://github.com/jacomyal/sigma.js)
 
 #### Chart
 
--   [HTML5 Chart](https://github.com/chartjs/Chart.js)
+- [HTML5 Chart](https://github.com/chartjs/Chart.js)
 
 ### Form
 
 #### Input
 
--   [Super Placeholder](https://github.com/chinchang/superplaceholder.js)
+- [Super Placeholder](https://github.com/chinchang/superplaceholder.js)
 
 #### Search Bar
 
--   [React Search Bar](https://github.com/searchkit/searchkit)
+- [React Search Bar](https://github.com/searchkit/searchkit)
 
 #### Select
 
--   [Awesome Chosen](https://github.com/harvesthq/chosen)
+- [Awesome Chosen](https://github.com/harvesthq/chosen)
 
 #### Validate
 
--   [jQuery Form Validator](https://github.com/victorjonsson/jQuery-Form-Validator)
+- [jQuery Form Validator](https://github.com/victorjonsson/jQuery-Form-Validator)
 
-### Layout
+### Layout Component
 
 #### Page
 
--   [Full Page Layout](https://github.com/alvarotrigo/fullPage.js)
--   [One Page Layout](https://github.com/davist11/jQuery-One-Page-Nav)
+- [Full Page Layout](https://github.com/alvarotrigo/fullPage.js)
+- [One Page Layout](https://github.com/davist11/jQuery-One-Page-Nav)
 
 #### Grid
 
--   [Bricks Layout](https://github.com/callmecavs/bricks.js)
--   [Brick Layer](https://github.com/ademilter/bricklayer)
+- [Bricks Layout](https://github.com/callmecavs/bricks.js)
+- [Brick Layer](https://github.com/ademilter/bricklayer)
 
 #### Split
 
--   [SplitJS](https://github.com/nathancahill/Split.js)
+- [SplitJS](https://github.com/nathancahill/Split.js)
 
 #### Scroll
 
--   [视差滚动](https://github.com/Prinzhorn/skrollr)
+- [视差滚动](https://github.com/Prinzhorn/skrollr)
 
 #### Position
 
--   [定位元素 - tether](https://github.com/HubSpot/tether)
+- [定位元素 - tether](https://github.com/HubSpot/tether)
 
 #### Mail
 
--   [Mail Generator](https://github.com/eladnava/mailgen)
+- [Mail Generator](https://github.com/eladnava/mailgen)
 
-#### Slide
+#### Slide Component
 
--   [One Page Style Vertical-Silde](https://github.com/MopTym/doSlide)
--   [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
--   [Awesome PPT/Prezi](https://github.com/impress/impress.js)
+- [One Page Style Vertical-Silde](https://github.com/MopTym/doSlide)
+- [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
+- [Awesome PPT/Prezi](https://github.com/impress/impress.js)
 
 #### Gallery
 
--   [Light Gallery](https://github.com/sachinchoolur/lightgallery.js/)
--   [Photo Swipe](https://github.com/dimsemenov/PhotoSwipe)
+- [Light Gallery](https://github.com/sachinchoolur/lightgallery.js/)
+- [Photo Swipe](https://github.com/dimsemenov/PhotoSwipe)
 
 ### Geometry
 
