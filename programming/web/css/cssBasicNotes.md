@@ -1516,8 +1516,8 @@ normal,small-caps(小型大写字母)
 #### Font Best Practice
 
 ```css
-    text-decoration: none;
-	text-transform: uppercase;
+  text-decoration: none;
+  text-transform: uppercase;
 
     color: black;
 	line-height: 100px;
@@ -1673,16 +1673,16 @@ use `inline-box` with `width`
 ### responsive image
 
 ```css
-
 .responsive-image {
-    display: block;
-    max-width: 100%;
-    height: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
-
 ```
 
 ### media query
+
+`only` for improving compatibility with older browsers
 
 ```css
 @media (not/only) 设备类型 and ( (not) 设备特性),
