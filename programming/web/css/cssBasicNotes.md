@@ -1682,7 +1682,8 @@ use `inline-box` with `width`
 
 ### media query
 
-`only` for improving compatibility with older browsers
+- `only` for improving compatibility with older browsers
+- definition order matters when media query with a different selector
 
 ```css
 @media (not/only) 设备类型 and ( (not) 设备特性),
