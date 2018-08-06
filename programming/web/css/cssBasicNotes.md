@@ -867,6 +867,8 @@ block 元素宽度为 100%, inline 元素从左至右分布
 
 #### Float Patterns
 
+float make element force to be `display: block`
+
 ##### fixed parent
 
 > Floating wont work inside fixed or absolute divs unless specify widthh
