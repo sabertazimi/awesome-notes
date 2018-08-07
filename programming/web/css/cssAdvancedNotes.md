@@ -10,11 +10,14 @@
       - [vertical rhythms](#vertical-rhythms)
   - [Grid System](#grid-system)
   - [Performance](#performance)
+    - [CSS Triggers](#css-triggers)
     - [reset.css](#resetcss)
     - [will-change](#will-change)
     - [contain](#contain)
     - [window.requestAnimationFrame](#windowrequestanimationframe)
-    - [animation](#animation)
+    - [Animation](#animation)
+      - [Best Practice](#best-practice)
+      - [Animation Internal](#animation-internal)
 
 <!-- /TOC -->
 
@@ -68,6 +71,13 @@ keep vertical spaces between elements on a page consistent (and relative) to eac
 - Classes should ideally still make sense at all breakpoints
 
 ## Performance
+
+### CSS Triggers
+
+- [CSS Property Triggers](https://github.com/GoogleChromeLabs/css-triggers)
+- [JS DOM API Triggers](https://gist.github.com/paulirish/5d52fb081b3570c81e3a)
+
+avoid to frequently change css property or call JS DOM API triggering layout stage (reflow)
 
 ### reset.css
 
@@ -156,9 +166,22 @@ function step(timestamp) {
 window.requestAnimationFrame(step);
 ```
 
-### animation
+### Animation
 
-- `transform: scale` better than `width`/`height`
-- `transform: translate` better than `top`/`right`/`bottom`/`left`
+#### Best Practice
 
-The `top`/`left` has very large time to `paint` each frame
+[High Performance Tips](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations)
+
+- all animation: `keyframe` animation or `transitions` is best
+- js-based animation: `requestAnimationFrame` is better than `setTimeout`/`setInterval`
+- position animation:`transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`
+- scale animation: `transform: scale(n)` better than `width`/`height`
+- rotation animation: `transform: rotate(ndeg)` is better
+- opacity/visibility animation: `opacity: 0...1` is better
+
+#### Animation Internal
+
+- `width`/`height`/`margin`/`left`/`top` in `Layout` stage
+- `box-shadow`/`border-radius`/`background`/`outline`/`color` in `Paint` stage
+- `cursor`/`z-index`/`transform`/`opacity` in `Composite Layers` stage
+- `top`/`left` has very large time to `paint` each frame
