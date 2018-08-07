@@ -10,9 +10,11 @@
       - [vertical rhythms](#vertical-rhythms)
   - [Grid System](#grid-system)
   - [Performance](#performance)
+    - [reset.css](#resetcss)
     - [will-change](#will-change)
     - [contain](#contain)
     - [window.requestAnimationFrame](#windowrequestanimationframe)
+    - [animation](#animation)
 
 <!-- /TOC -->
 
@@ -66,6 +68,10 @@ keep vertical spaces between elements on a page consistent (and relative) to eac
 - Classes should ideally still make sense at all breakpoints
 
 ## Performance
+
+### reset.css
+
+- `*` selector has poor performance
 
 ### will-change
 
@@ -149,3 +155,10 @@ function step(timestamp) {
 
 window.requestAnimationFrame(step);
 ```
+
+### animation
+
+- `transform: scale` better than `width`/`height`
+- `transform: translate` better than `top`/`right`/`bottom`/`left`
+
+The `top`/`left` has very large time to `paint` each frame
