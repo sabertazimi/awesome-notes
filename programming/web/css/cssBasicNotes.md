@@ -871,7 +871,10 @@ block 元素宽度为 100%, inline 元素从左至右分布
 
 #### Float Patterns
 
-float make element force to be `display: block`
+float make element specified value of `display`:
+
+- `inline-table` computed to `table`
+- `inline`/`inline-block`/`table-*` computed to `block`
 
 ##### fixed parent
 
@@ -924,13 +927,18 @@ float make element force to be `display: block`
 ##### absolute
 
 - 使元素相对于 浏览器窗口/父元素(`positoin: non-static`) 布局
-- make element force to `display: block`
 - 可使用`top/bottom/left/right`属性进行定位
+- `float: none`
+- display: `inline-table` computed to `table`
+- display: `inline`/`inline-block`/`table-*` computed to `block`
 
 ##### fixed
 
 - 使元素想对于 浏览器窗口 布局, 但不受滑动条影响
 - 可使用`top/bottom/left/right`属性进行定位
+- `float: none`
+- display: `inline-table` computed to `table`
+- display: `inline`/`inline-block`/`table-*` computed to `block`
 
 ```css
 /* 使子元素可以相对于父元素布局*/
@@ -942,7 +950,7 @@ float make element force to be `display: block`
 .children {
   position: absolute;
 
-  top:auto;
+  top: auto;
   left: 0;
 }
 ```
