@@ -56,7 +56,11 @@
         - [fixed parent](#fixed-parent)
         - [清除浮动](#清除浮动)
         - [Best Practice](#best-practice-1)
-      - [Layer Patterns](#layer-patterns)
+      - [Position Patterns](#position-patterns)
+        - [static](#static)
+        - [relative](#relative)
+        - [absolute](#absolute)
+        - [fixed](#fixed)
       - [Flex Patterns](#flex-patterns)
         - [Under the Hood of `flex`](#under-the-hood-of-flex)
         - [Useful shorthand of `flex`](#useful-shorthand-of-flex)
@@ -905,35 +909,41 @@ float make element force to be `display: block`
 - 段中部分元素浮动(结合 margin/padding), 可实现内嵌效果
 - 分栏布局
 
-#### Layer Patterns
+#### Position Patterns
 
 **position**
 
--   static(使top/bottom/left/right属性无效化)
--   relative: 使元素相对于 static 布局, 可使用`top/bottom/left/right`属性进行平移
-    -   `top:+px`   : 下移
-    -   `bottom:+px`: 上移
-    -   `left:+px`  : 右移
-    -   `right:+px` : 左移
--   absolute: 使元素相对于 浏览器窗口/父元素 布局, 可使用`top/bottom/left/right`属性进行定位
-    -   `top:+px`   : 使元素距离窗口上方距离为正
-    -   `bottom:+px`: 使元素距离窗口下方距离为正
-    -   `left:+px`  : 使元素距离窗口左方距离为正
-    -   `right:+px` : 使元素距离窗口右方距离为正
--   fixed: 使元素想对于 浏览器窗口 布局, 但不受滑动条影响, 可使用`top/bottom/left/right`属性进行定位
+##### static
+
+- top/left/width/right/z-index are invalid
+
+##### relative
+
+使元素相对于 static 布局, 可使用`top/bottom/left/right`属性进行平移
+
+##### absolute
+
+- 使元素相对于 浏览器窗口/父元素(`positoin: non-static`) 布局
+- make element force to `display: block`
+- 可使用`top/bottom/left/right`属性进行定位
+
+##### fixed
+
+- 使元素想对于 浏览器窗口 布局, 但不受滑动条影响
+- 可使用`top/bottom/left/right`属性进行定位
 
 ```css
 /* 使子元素可以相对于父元素布局*/
 
 .parent {
-	position: relative;
+  position: relative;
 }
 
 .children {
-	position: absolute;
+  position: absolute;
 
-	top:auto;
-	left: 0;
+  top:auto;
+  left: 0;
 }
 ```
 
