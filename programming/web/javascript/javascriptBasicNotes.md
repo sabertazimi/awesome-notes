@@ -181,6 +181,7 @@
     - [错误类型](#错误类型)
     - [异常作用](#异常作用)
   - [Asynchronous Programming](#asynchronous-programming)
+    - [Promise](#promise)
     - [await/async](#awaitasync)
 
 <!-- /TOC -->
@@ -2710,6 +2711,68 @@ MyError.prototype.constructor = MyError;
 -    修复 bug 后，可考虑是否在此处抛出异常
 
 ## Asynchronous Programming
+
+### Promise
+
+avoid callback hell with:
+
+- return `new Promise`
+- `Promise.all`
+
+```js
+const users = [
+  'W8lbAokuirfdlTJpnsNC5kryuHtu1G53',
+  'ZinqxnohbXMQdtF6avtlUkxLLknRxCTh',
+  'ynQePb3RB2JSx4iziGYMM5eXgkwnufS5',
+  'EtT2haq2sNoWnNjmeyZnfUmZn9Ihfi8w'
+];
+
+const response = [];
+
+const getUser = (user) => () => {
+  return axios
+    .get(`/users/userId=${user}`)
+    .then((res) => response.push(res));
+};
+
+const getUsers = (users) => {
+  const [
+    getFirstUser,
+    getSecondUser,
+    getThirdUser,
+    getFourthUser
+  ] = users.map(getUser);
+
+  getFirstUser()
+    .then(getSecondUser)
+    .then(getThirdUser)
+    .then(getFourthUser)
+    .catch(console.log);
+};
+```
+
+```js
+const users = [
+  'W8lbAokuirfdlTJpnsNC5kryuHtu1G53',
+  'ZinqxnohbXMQdtF6avtlUkxLLknRxCTh',
+  'ynQePb3RB2JSx4iziGYMM5eXgkwnufS5',
+  'EtT2haq2sNoWnNjmeyZnfUmZn9Ihfi8w'
+];
+
+let response = [];
+
+function getUsers(users) {
+  const promises = [];
+  promises[0] = axios.get(`/users/userId=${users[0]}`);
+  promises[1] = axios.get(`/users/userId=${users[1]}`);
+  promises[2] = axios.get(`/users/userId=${users[2]}`);
+  promises[3] = axios.get(`/users/userId=${users[3]}`);
+
+  Promise.all(promises)
+    .then((userDataArr) => response = userDataArr)
+    .catch((err) => console.log(err));
+}
+```
 
 ### await/async
 
