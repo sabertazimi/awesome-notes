@@ -687,6 +687,9 @@ a[title*=link] {text-decoration: underline;}
 - :link：未访问的链接；
 - :visited：已访问的链接，不建议使用；
 - :hover：鼠标移动到容器，不仅限于链接，可用于页面中的任何元素；
+
+> link - visited - hover order matters
+
 - :active：被激活时的状态，不仅限于链接，可用于任何具有tabindex属性的元素；
 - :focus：获得焦点时状态，不仅限于链接，可用于任何具有tabindex属性的元素：
 - :enabled：已启用的界面元素：`input`
