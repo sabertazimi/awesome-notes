@@ -48,36 +48,36 @@
       - [box-sizing](#box-sizing)
       - [height](#height)
       - [column](#column)
-      - [Block Formatting Context](#block-formatting-context)
-        - [Create BFC](#create-bfc)
+    - [Box Model](#box-model)
+    - [Block Formatting Context](#block-formatting-context)
+      - [Create BFC](#create-bfc)
       - [Margin Collapsing/Merging](#margin-collapsingmerging)
-      - [Flow Patterns](#flow-patterns)
-      - [Float Patterns](#float-patterns)
-        - [fixed parent](#fixed-parent)
-        - [清除浮动](#清除浮动)
-        - [Best Practice](#best-practice-1)
-      - [Position Patterns](#position-patterns)
-        - [static](#static)
-        - [relative](#relative)
-        - [absolute](#absolute)
-        - [fixed](#fixed)
-      - [Flex Patterns](#flex-patterns)
-        - [Under the Hood of `flex`](#under-the-hood-of-flex)
-        - [Useful shorthand of `flex`](#useful-shorthand-of-flex)
-        - [父元素属性](#父元素属性)
-        - [子元素属性](#子元素属性)
-        - [flexibity of `float`](#flexibity-of-float)
-        - [fixed sidebar with flexbox](#fixed-sidebar-with-flexbox)
-        - [Best Practice](#best-practice-2)
-      - [Grid Patterns](#grid-patterns)
-        - [attention tips](#attention-tips)
-      - [分栏问题](#分栏问题)
-        - [两栏布局](#两栏布局)
-        - [三栏布局](#三栏布局)
-      - [居中问题](#居中问题)
-        - [不定 block 元素水平居中](#不定-block-元素水平居中)
-        - [垂直居中问题](#垂直居中问题)
-        - [混合布局](#混合布局)
+    - [Float Patterns](#float-patterns)
+      - [fixed parent](#fixed-parent)
+      - [清除浮动](#清除浮动)
+      - [Best Practice](#best-practice-1)
+    - [Position Patterns](#position-patterns)
+      - [static](#static)
+      - [relative](#relative)
+      - [absolute](#absolute)
+      - [fixed](#fixed)
+    - [Flex Patterns](#flex-patterns)
+      - [Under the Hood of `flex`](#under-the-hood-of-flex)
+      - [Useful shorthand of `flex`](#useful-shorthand-of-flex)
+      - [父元素属性](#父元素属性)
+      - [子元素属性](#子元素属性)
+      - [flexibity of `float`](#flexibity-of-float)
+      - [fixed sidebar with flexbox](#fixed-sidebar-with-flexbox)
+      - [Flexbox Best Practice](#flexbox-best-practice)
+    - [Grid Patterns](#grid-patterns)
+      - [attention tips](#attention-tips)
+    - [分栏问题](#分栏问题)
+      - [两栏布局](#两栏布局)
+      - [三栏布局](#三栏布局)
+    - [居中问题](#居中问题)
+      - [不定 block 元素水平居中](#不定-block-元素水平居中)
+      - [垂直居中问题](#垂直居中问题)
+      - [混合布局](#混合布局)
     - [list-style-type/image](#list-style-typeimage)
     - [custom style](#custom-style)
       - [custom methods](#custom-methods)
@@ -98,7 +98,7 @@
       - [(moz/webkit)background-clip](#mozwebkitbackground-clip)
       - [(moz/webkit)background-origin](#mozwebkitbackground-origin)
       - [background-size](#background-size)
-      - [Best Practice](#best-practice-3)
+      - [Best Practice](#best-practice-2)
         - [单背景极简欢迎首页](#单背景极简欢迎首页)
     - [text](#text)
       - [white-space](#white-space)
@@ -842,22 +842,35 @@ cal(10em + 3px);
 - column-gap         分隔距离
 - column-rule(style) 分隔线
 
-#### Block Formatting Context
+### Box Model
+
+- block-level box: display 属性为 block, list-item, table 的元素，会生成 block-level box，并且参与 block formatting context
+- inline-level box: display 属性为 inline, inline-block, inline-table 的元素，会生成 inline-level box，并且参与 inline formatting context
+- Flex Formatting Context(FFC)
+- Grid Formatting Context(GFC)
+
+### Block Formatting Context
 
 - 一个BFC包含创建该上下文元素的所有子元素，但不包括创建了新BFC的子元素的内部元素
+- BFC就是页面上的一个隔离的独立容器, 容器里面的子元素不会影响到外面的元素, 反之也如此
 - 一个元素不能同时存在于两个BFC中: 可让处于BFC内部的元素与外部的元素相互隔离
+- 内部的Box会在垂直方向，一个接一个地放置
+- vertical margin collapsing
+- 每个元素的margin box的左边, 与包含块border box的左边相接触
+- BFC的区域不会与 float box 重叠: 自适应分栏布局, 清除外/内部浮动
+- 计算BFC的高度时, 浮动元素也参与计算: 防止内边距塌陷 (margin-top collapse with margin-bottom)
 
-##### Create BFC
+#### Create BFC
 
 - 根元素或其它包含它的元素
 - overflow: not visible (i.e hidden)
 - float: left/right
 - position: absolute/fixed
 - display: inline-block
-- display: flex/inline-flex
-- display: grid/inline-grid
 - display: table-cell/table-caption/table-*h
 - display: flow-root
+- direct children of `display: flex/inline-flex`
+- direct children of `display: grid/inline-grid`
 
 #### Margin Collapsing/Merging
 
@@ -865,18 +878,14 @@ cal(10em + 3px);
 - parent and it's first/last child: up with up (bottom with bottom)
 - empty block: margin-top with margin-bottom
 
-#### Flow Patterns
-
-block 元素宽度为 100%, inline 元素从左至右分布
-
-#### Float Patterns
+### Float Patterns
 
 float make element specified value of `display`:
 
 - `inline-table` computed to `table`
 - `inline`/`inline-block`/`table-*` computed to `block`
 
-##### fixed parent
+#### fixed parent
 
 > Floating wont work inside fixed or absolute divs unless specify widthh
 
@@ -889,7 +898,7 @@ float make element specified value of `display`:
 }
 ```
 
-##### 清除浮动
+#### 清除浮动
 
 **Best Practice**: 为父容器添加 clearfix class - `display: table` 防止外边距塌陷, `clear: both` 清楚浮动
 
@@ -907,24 +916,24 @@ float make element specified value of `display`:
 }
 ```
 
-##### Best Practice
+#### Best Practice
 
 - 段中部分元素浮动(结合 margin/padding), 可实现内嵌效果
 - 分栏布局
 
-#### Position Patterns
+### Position Patterns
 
 **position**
 
-##### static
+#### static
 
 - top/left/width/right/z-index are invalid
 
-##### relative
+#### relative
 
 使元素相对于 static 布局, 可使用`top/bottom/left/right`属性进行平移
 
-##### absolute
+#### absolute
 
 - 使元素相对于 浏览器窗口/父元素(`positoin: non-static`) 布局
 - 可使用`top/bottom/left/right`属性进行定位
@@ -932,7 +941,7 @@ float make element specified value of `display`:
 - display: `inline-table` computed to `table`
 - display: `inline`/`inline-block`/`table-*` computed to `block`
 
-##### fixed
+#### fixed
 
 - 使元素想对于 浏览器窗口 布局, 但不受滑动条影响
 - 可使用`top/bottom/left/right`属性进行定位
@@ -955,16 +964,16 @@ float make element specified value of `display`:
 }
 ```
 
-#### Flex Patterns
+### Flex Patterns
 
 [Complete Guid to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
-##### Under the Hood of `flex`
+#### Under the Hood of `flex`
 
 - when there is some free space left: true width = `flex-basis` (or `width`) + `flex-grow`/sum of `flex-grow`
 - when there is not enough space: true width = `flex-basis` (or `width`) - `flex-shrink`/sum of `flex-shrink`
 
-##### Useful shorthand of `flex`
+#### Useful shorthand of `flex`
 
 - `flex:auto`:
 
@@ -982,7 +991,7 @@ float make element specified value of `display`:
 
 元素会被赋予一个容器中自由空间的指定占比 equal to `flex: <positive-number> 1 0`
 
-##### 父元素属性
+#### 父元素属性
 
 ```css
 display: flex;
@@ -993,7 +1002,7 @@ align-content: flex-start/flex-end/center/space-between/space-around;
 align-items: flex-start/flex-end/center/baseline/stretch;
 ```
 
-##### 子元素属性
+#### 子元素属性
 
 ```css
 flex: number;  /*宽/高度权重*/
@@ -1004,7 +1013,7 @@ flex-grow: number;
 align-self: auto/flex-start/flex-end/center/baseline/stretch;
 ```
 
-##### flexibity of `float`
+#### flexibity of `float`
 
 ```html
 <div class="parent">
@@ -1014,16 +1023,16 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
 
 ```css
 .parent {
-    display: flex;
+  display: flex;
 }
 
 .child {
-    /* this will push child to the right of parent border */
-    margin-left: auto;
+  /* this will push child to the right of parent border */
+  margin-left: auto;
 }
 ```
 
-##### fixed sidebar with flexbox
+#### fixed sidebar with flexbox
 
 ```html
 <body>
@@ -1049,7 +1058,7 @@ main {
 }
 ```
 
-##### Best Practice
+#### Flexbox Best Practice
 
 ```css
 .container {
@@ -1110,50 +1119,50 @@ main {
 }
 ```
 
-#### Grid Patterns
+### Grid Patterns
 
 [Complete Grid Guide](https://css-tricks.com/snippets/css/complete-guide-grid/)
 
 ```css
 .container {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-columns: repeat(3, 1fr);
-    /* grid-template-columns: repeat([auto-fit / auto-fill / numbers], minmax(60px, 1fr)); */
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  /* grid-template-columns: repeat([auto-fit / auto-fill / numbers], minmax(60px, 1fr)); */
 
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-rows: minmax(90px, 1fr);
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: minmax(90px, 1fr);
 
-    grid-template-areas: 
-      "header header header"
-      "advert content content"
-      "footer footer footer";
+  grid-template-areas: 
+    "header header header"
+    "advert content content"
+    "footer footer footer";
 
-    grid-gap: 10px;
-    justify-items: center;
-    align-items: end;
+  grid-gap: 10px;
+  justify-items: center;
+  align-items: end;
 }
 
 .item {
-    grid-row: start / end; /* 2 / -1 */
-    grid-column: start / end;
-    grid-area: footer;
-    /* grid-area: hstart / vstart / hend / vend */
-    justify-self: center;
-    align-self: end;
+  grid-row: start / end; /* 2 / -1 */
+  grid-column: start / end;
+  grid-area: footer;
+  /* grid-area: hstart / vstart / hend / vend */
+  justify-self: center;
+  align-self: end;
 }
 ```
 
-##### attention tips
+#### attention tips
 
 - `grid-column` will refactor template of grid (`grid-template-columns`)
 - `grid-row` will refactor template of grid (`grid-template-rows`)
 
-#### 分栏问题
+### 分栏问题
 
 - float 左右元素 + margin 中间元素
 - float 元素 + width: %
 
-##### 两栏布局
+#### 两栏布局
 
 利用父元素 relative 与 子元素 absolute 进行布局
 
@@ -1177,7 +1186,7 @@ main {
 }
 ```
 
-##### 三栏布局
+#### 三栏布局
 
 ```html
 <div class="main">
@@ -1236,11 +1245,11 @@ body {
 }
 ```
 
-#### 居中问题
+### 居中问题
 
 [CSS Tricks - Centering CSS Complete Guide](https://css-tricks.com/centering-css-complete-guide/)
 
-##### 不定 block 元素水平居中
+#### 不定 block 元素水平居中
 
 - 将元素改为 inline 型
 
@@ -1268,7 +1277,7 @@ body {
 }
 ```
 
-##### 垂直居中问题
+#### 垂直居中问题
 
 ```css
 .container{
@@ -1285,7 +1294,7 @@ body {
 }
 ```
 
-##### 混合布局
+#### 混合布局
 
 在子容器中在设置新元素即可
 
@@ -1295,9 +1304,9 @@ body {
 
 ### custom style
 
-transition添加于普通类选择器
-animation添加于普通类选择器或伪类选择器
-transform添加于普通类选择器与伪类选择器
+- transition添加于普通类选择器
+- animation添加于普通类选择器或伪类选择器
+- transform添加于普通类选择器与伪类选择器
 
 #### custom methods
 
