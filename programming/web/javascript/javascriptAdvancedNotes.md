@@ -130,6 +130,7 @@
       - [Array.from](#arrayfrom)
       - [Array.copyWithin](#arraycopywithin)
     - [export](#export)
+    - [Class 语法糖](#class-语法糖)
   - [Browser/Under the hood](#browserunder-the-hood)
     - [Variables Lifecycle](#variables-lifecycle)
     - [Arrow Function](#arrow-function)
@@ -1910,6 +1911,47 @@ i32a.copyWithin(0, 2);
 ```
 
 ### export
+
+### Class 语法糖
+
+```js
+class A {
+  constructor(value) {
+    this.val = value;
+  }
+}
+
+class B extends A {
+  constructor(value) {
+    super(value);
+  }
+}
+
+const b = new B(6);
+
+console.log(B.__proto__ === A);
+console.log(B.prototype.constructor === B);
+console.log(B.prototype.__proto__ === A.prototype);
+console.log(b.__proto__ === B.prototype);
+
+function AA(value) {
+  this.val = value;
+}
+
+function BB(value) {
+  AA.call(this, value);
+}
+
+BB.prototype = Object.create(AA.prototype);
+BB.prototype.constructor = BB;
+
+const bb = new BB(6);
+
+console.log(BB.__proto__ === Function.prototype); // not consistence with class syntax
+console.log(BB.prototype.constructor === BB);
+console.log(BB.prototype.__proto__ === AA.prototype);
+console.log(bb.__proto__ === BB.prototype);
+```
 
 禁止对复合对象字面量进行导出操作 (array literal, object literal)
 
