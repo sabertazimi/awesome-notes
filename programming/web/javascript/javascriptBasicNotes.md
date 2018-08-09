@@ -584,9 +584,13 @@ const foo = new Foo(2);
 ```
 
 ```js
-Object.__proto__ === Function.prototype;            // true
+Object.__proto__ === Function.prototype;            // true because of `new Object()`, `Object` is a constructor(function)
 Function.__proto__ === Function.prototype;          // true
-Function.__proto__.__proto__ === Object.prototype;  // true
+Function.__proto__.__proto__ === Object.prototype;  // true because of Object.protoype is the top of inheritance chains (null is Object.prototype.prototype)
+
+// =>
+Object instanceof Function // true
+Function instanceof Object // true
 ```
 
 ### 构造函数
