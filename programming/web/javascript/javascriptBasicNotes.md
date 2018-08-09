@@ -567,9 +567,12 @@ function doAction(action) {
 ![原型链](./images/prototype.png)
 
 - 实例化对象仅有属性`__proto__`, 没有属性`prototype`, 函数具有属性 `prototype` (指向引擎为其自动创建的原型对象)
-- 所有对象(包括函数/构造函数)有属性`__proto__`(隐式原型)
-- 除 `Object.create()` 外, 对象的隐式原型指向构造该对象的 `构造函数的原型(prototype)`
+- 所有引用类型 (包括对象/数组/函数/构造函数) 都有属性`__proto__`(隐式原型)
+- 所有函数/构造函数的 `__proto__` 都指向 `Function.prototype`
+- 除 `Object.create()` 外, 所新建对象的 `__proto__` 指向构造该对象的构造函数的 `原型(prototype)`
 - 先有Object.prototype(原型链顶端), Function.prototype 继承 Object.prototype 而产生, 最后 Object/Function/Array/其它构造函数继承Function.prototype 而产生
+- 除 `typeof Function.prototype` 为 'function' 外, 其余函数/构造函数的原型对象都为 '对象'(`typeof` 为 'object')
+
 
 ```js
 function Foo(value) {
@@ -585,10 +588,13 @@ const foo = new Foo(2);
 ```
 
 ```js
-// true because of `Object` is `function Object()` and created by `Function` (Object = new Function())
+// true because of `Object` is `function Object()` and inherited from `Function.prototype`
 // Object has its own `prototype` property refer to `Object.prototype`
 Object.__proto__ === Function.prototype;
-// true because of Function is `function Function()` and created by `Function` (Function = new Function())
+// true because of `Array` is `function Array()` and inherited from `Function.prototype`
+// Array has its own `prototype` property refer to `Array.prototype`
+Array.__proto__ === Function.prototype;
+// true because of Function is `function Function()` and inherited from `Function.prototype`
 // Function has its own `prototype` property refer to `Function.prototype`
 Function.__proto__ === Function.prototype;
 // true because of Object.protoype is the top of inheritance chains (null is Object.prototype.__proto__)
