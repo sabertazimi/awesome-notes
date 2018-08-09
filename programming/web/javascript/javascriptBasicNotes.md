@@ -566,12 +566,15 @@ function doAction(action) {
 
 ![原型链](./images/prototype.png)
 
-- 实例化对象仅有属性`__proto__`, 没有属性`prototype`, 函数具有属性 `prototype` (指向引擎为其自动创建的原型对象)
+- 实例化对象仅有属性`__proto__`, 没有属性`prototype`, 函数才具有属性 `prototype` (指向引擎为其自动创建的原型对象)
 - 所有引用类型 (包括对象/数组/函数/构造函数) 都有属性`__proto__`(隐式原型)
 - 所有函数/构造函数的 `__proto__` 都指向 `Function.prototype`
-- 除 `Object.create()` 外, 所新建对象的 `__proto__` 指向构造该对象的构造函数的 `原型(prototype)`
-- 先有Object.prototype(原型链顶端), Function.prototype 继承 Object.prototype 而产生, 最后 Object/Function/Array/其它构造函数继承Function.prototype 而产生
-- 除 `typeof Function.prototype` 为 'function' 外, 其余函数/构造函数的原型对象都为 '对象'(`typeof` 为 'object')
+- 除`Object.prototype.__proto__`指向 null 外, 其余函数/构造函数的原型对象的`__proto__` 都指向 `Object.prototype`
+- 除`Object.create()`外, 所新建对象的 `__proto__` 指向构造该对象的构造函数的`原型对象(prototype)`
+- 除`typeof Function.prototype` 为 'function' 外, 其余函数/构造函数的原型对象都为 '对象'(`typeof` 为 'object')
+- 先有`Object.prototype`(原型链顶端), `Function.prototype` 继承`Object.prototype`而产生, 最后`Object/Function/Array/其它构造函数`继承`Function.prototype`而产生
+
+> `Object` ---`__proto__`--> `Function.prototype` ---`__proto__`--> `Object.prototype` ---`__proto__`--> `null`
 
 
 ```js
