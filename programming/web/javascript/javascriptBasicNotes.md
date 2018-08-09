@@ -566,7 +566,7 @@ function doAction(action) {
 
 ![原型链](./images/prototype.png)
 
--   实例化对象仅有属性`__proto__`, 没有属性prototype
+-   实例化对象仅有属性`__proto__`, 没有属性`prototype`
 -   所有对象(包括函数/构造函数)有属性`__proto__`(隐式原型)
 -   除 `Object.create()` 外, 对象的隐式原型指向构造该对象的 `构造函数的原型(prototype)`
 
@@ -579,7 +579,7 @@ function Foo(value) {
 // Foo.prototype -> FooPrototype
 // FooPrototype.constructor -> [function Foo]
 //
-// foo.prototype -> FooPrototype
+// foo.__proto__ -> FooPrototype
 const foo = new Foo(2);
 ```
 
@@ -676,12 +676,12 @@ var ObjectMaker = function () {
 
 #### instanceof
 
-若 在实例对象的原型链(`__proto__`)中 能找到 构造函数的prototype属性(Prototype对象), 则返回true, 否则返回false
+若 在实例对象的原型链(`__proto__`)中 能找到 构造函数的`prototype`属性(Prototype对象), 则返回`true`, 否则返回`false`
 
 ```js
-// true if
-// 1. Foo.prototype === Bar.prototype
-// 2. Foo.prototype......prototype === Bar.prototype
+// true only if
+// 1. Foo.__proto__ === Bar.prototype
+// 2. Foo.__proto__......__proto__ === Bar.prototype
 Foo instance of Bar
 ```
 
