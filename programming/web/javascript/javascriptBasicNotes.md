@@ -566,9 +566,10 @@ function doAction(action) {
 
 ![原型链](./images/prototype.png)
 
--   实例化对象仅有属性`__proto__`, 没有属性`prototype`
--   所有对象(包括函数/构造函数)有属性`__proto__`(隐式原型)
--   除 `Object.create()` 外, 对象的隐式原型指向构造该对象的 `构造函数的原型(prototype)`
+- 实例化对象仅有属性`__proto__`, 没有属性`prototype`, 函数具有属性 `prototype` (指向引擎为其自动创建的原型对象)
+- 所有对象(包括函数/构造函数)有属性`__proto__`(隐式原型)
+- 除 `Object.create()` 外, 对象的隐式原型指向构造该对象的 `构造函数的原型(prototype)`
+- 先有Object.prototype(原型链顶端), Function.prototype 继承 Object.prototype 而产生, 最后 Object/Function/Array/其它构造函数继承Function.prototype 而产生
 
 ```js
 function Foo(value) {
@@ -584,13 +585,22 @@ const foo = new Foo(2);
 ```
 
 ```js
-Object.__proto__ === Function.prototype;            // true because of `new Object()`, `Object` is a constructor(function)
-Function.__proto__ === Function.prototype;          // true
-Function.__proto__.__proto__ === Object.prototype;  // true because of Object.protoype is the top of inheritance chains (null is Object.prototype.prototype)
+// true because of `Object` is `function Object()` and created by `Function` (Object = new Function())
+// Object has its own `prototype` property refer to `Object.prototype`
+Object.__proto__ === Function.prototype;
+// true because of Function is `function Function()` and created by `Function` (Function = new Function())
+// Function has its own `prototype` property refer to `Function.prototype`
+Function.__proto__ === Function.prototype;
+// true because of Object.protoype is the top of inheritance chains (null is Object.prototype.__proto__)
+// all `object/function/array instance`.__proto__......__proto__ refer to Object.prototype
+Function.__proto__.__proto__ === Object.prototype;
 
 // =>
 Object instanceof Function // true
 Function instanceof Object // true
+
+// =>
+// 
 ```
 
 ### 构造函数
@@ -1221,9 +1231,10 @@ func();		// `this` in `inner` function refer to `window`
 
 ### prototype
 
--   **实例化对象没有 prototype 属性**
--   每个函数都有 prototype 属性
--   prototype属性 指向 函数的原型对象
+- **实例化对象没有 prototype 属性**
+- 每个函数都有 prototype 属性
+- prototype属性 指向 函数的原型对象 (由 js 引擎自动创建)
+- 每个函数的 `__proto__` 都指向 `Function.prototype`
 
 ### arguments
 
