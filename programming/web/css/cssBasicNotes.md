@@ -104,9 +104,10 @@
       - [Font Best Practice](#font-best-practice)
     - [filter](#filter)
   - [Animation](#animation)
-    - [custom methods](#custom-methods)
+    - [animation property](#animation-property)
       - [transition+transform](#transitiontransform)
       - [animation+transform](#animationtransform)
+    - [animation helper](#animation-helper)
     - [transition](#transition)
     - [transform](#transform)
     - [animation](#animation)
@@ -1573,7 +1574,7 @@ filter: unset;
 
 ## Animation
 
-### custom methods
+### animation property
 
 #### transition+transform
 
@@ -1588,7 +1589,16 @@ filter: unset;
 }
 ```
 
-#### animation+transform 
+#### animation+transform
+
+### animation helper
+
+- border
+- background
+- background with multiple gradient
+- single box-shadow
+- multiple box-shadow
+- pseudo elements (::before and ::after)
 
 ### transition
 
