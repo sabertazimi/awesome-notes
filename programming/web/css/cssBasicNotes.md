@@ -79,13 +79,6 @@
       - [垂直居中问题](#垂直居中问题)
       - [混合布局](#混合布局)
     - [list-style-type/image](#list-style-typeimage)
-    - [custom style](#custom-style)
-      - [custom methods](#custom-methods)
-        - [transition+transform](#transitiontransform)
-        - [直接使用animation](#直接使用animation)
-      - [transition](#transition)
-      - [transform](#transform)
-      - [animation](#animation)
     - [align](#align)
       - [text-align](#text-align)
       - [vertical-align](#vertical-align)
@@ -110,6 +103,13 @@
       - [custom function - @font-face](#custom-function---font-face)
       - [Font Best Practice](#font-best-practice)
     - [filter](#filter)
+  - [Animation](#animation)
+    - [custom methods](#custom-methods)
+      - [transition+transform](#transitiontransform)
+      - [animation+transform](#animationtransform)
+    - [transition](#transition)
+    - [transform](#transform)
+    - [animation](#animation)
   - [Responsive Desgin](#responsive-desgin)
     - [responsive font](#responsive-font)
     - [responsive length](#responsive-length)
@@ -1305,102 +1305,6 @@ body {
 
 改变ul/ol前标记类型
 
-### custom style
-
-- transition添加于普通类选择器
-- animation添加于普通类选择器或伪类选择器
-- transform添加于普通类选择器与伪类选择器
-
-#### custom methods
-
-##### transition+transform
-
-```css
-.div {
-    transform: scaleX(0);
-    transition: **transform** .5s ease;
-}
-
-.div:hover {
-    transform: scaleX(1);
-}
-```
-
-##### 直接使用animation
-
-#### transition
-
--   transition-property: color;
--   transition-duration: 1s;
--   transition-timing-function: cubic-bezier(.42, 0, .58, 1);
--   transition-delay: .5s;
-
-#### transform
-
--   matrix()/matrix3d();
--   rotateX/Y/Z();
--   scaleX/Y/Z();
--   skewX/Y/Z();
--   translateX/Y/Z();
-
-#### animation
-
-> Tip : fade in body style
-
-```css
-@keyframes body-fade-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-body {
-    animation-name: body-fade-in;
-    animation-duration: 2.5s;
-    animation-timing-function: ease;
-    animation-iteration-count: 1;
-}
-```
-
-```css
-@keyframes name {
-    0%/from {
-        color: red;
-    }
-    50% {
-        color: blue;
-    }
-    100%/to {
-        color: green;
-    }
-}
-
-/*直接动画*/
-.div {
-    animation-name: name;
-    animation-duration: 1s;
-    animation-timing-function: cubic-bezier(.42, 0, .58, 1);
-    animation-delay: .5s;
-}
-
-/*hover后再播放动画，高级化transform+transition*/
-.div:hover {
-    animation-name: name;
-    animation-duration: 1s;
-    animation-timing-function: cubic-bezier(.42, 0, .58, 1);
-    animation-delay: .5s;
-}
-```
-
--   animation-iteration-count: 执行次数 infinite
--   animation-direction: 执行方向
-	-   normal    0%->100%方向
-	-   alternate/alternate-reverse 不断交替方向
-	-   reverse   100%->0%方向
-
 ### align
 
 #### text-align
@@ -1666,6 +1570,104 @@ filter: inherit;
 filter: initial;
 filter: unset;
 ```
+
+## Animation
+
+### custom methods
+
+#### transition+transform
+
+```css
+.div {
+    transform: scaleX(0);
+    transition: **transform** .5s ease;
+}
+
+.div:hover {
+    transform: scaleX(1);
+}
+```
+
+#### animation+transform 
+
+### transition
+
+- transition-property: color;
+- transition-duration: 1s;
+- transition-timing-function: cubic-bezier(.42, 0, .58, 1);
+- transition-delay: .5s;
+
+### transform
+
+- scaleX/Y/Z();
+- translateX/Y/Z();
+- rotateX/Y/Z();
+- skewX/Y/Z();
+- matrix()/matrix3d();
+
+> `perspective` should set with 3D transform property
+
+### animation
+
+- transform: scale, translate, rotate, skew
+- animation bounce/cache: first -100, then, +5/+20, finally 0
+
+> Tip : fade in body style
+
+```css
+@keyframes body-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    animation-name: body-fade-in;
+    animation-duration: 2.5s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+}
+```
+
+```css
+@keyframes name {
+    0%/from {
+        color: red;
+    }
+    50% {
+        color: blue;
+    }
+    100%/to {
+        color: green;
+    }
+}
+
+/*直接动画*/
+.div {
+  animation-name: name;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(.42, 0, .58, 1);
+  animation-delay: .5s;
+}
+
+/*hover后再播放动画，高级化transform+transition*/
+.div:hover {
+  animation-name: name;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(.42, 0, .58, 1);
+  animation-delay: .5s;
+}
+```
+
+- animation-iteration-count: 执行次数 infinite
+- animation-direction: 执行方向
+  - normal    0%->100%方向
+  - alternate/alternate-reverse 不断交替方向
+  - reverse   100%->0%方向
+- animation-fill-mode: forwards
 
 ## Responsive Desgin
 
