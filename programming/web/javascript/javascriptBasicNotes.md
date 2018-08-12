@@ -2155,7 +2155,6 @@ node.nodeValue
 ```js
 node.parentNode
 node.childNodes
-node.children
 node.firstChild
 node.lastChild
 node.nextSibling
@@ -2163,9 +2162,21 @@ node.previousSibling
 node.textContent
 ```
 
+Element-only navigation:
+Navigation properties listed above refer to all nodes. For instance, in childNodes we can see both text nodes, element nodes, and even comment nodes if there exist
+
 ```js
-    node.matches(selector) // return false or true
-    node.contains(node)    // return false or true
+node.parentElement
+node.children
+node.firstElementChild
+node.lastElementChild
+node.previousElementSibling
+node.nextElementSibling
+```
+
+```js
+node.matches(selector) // return false or true
+node.contains(node)    // return false or true
 ```
 
 #### Frag
