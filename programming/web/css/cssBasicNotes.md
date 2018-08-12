@@ -74,6 +74,9 @@
     - [分栏问题](#分栏问题)
       - [两栏布局](#两栏布局)
       - [三栏布局](#三栏布局)
+        - [absolute to left/right + margin to middle](#absolute-to-leftright--margin-to-middle)
+        - [float to left/right + margin to middle](#float-to-leftright--margin-to-middle)
+        - [float + negative margin both to left/right](#float--negative-margin-both-to-leftright)
     - [居中问题](#居中问题)
       - [不定 block 元素水平居中](#不定-block-元素水平居中)
       - [垂直居中问题](#垂直居中问题)
@@ -1170,6 +1173,12 @@ main {
 
 利用父元素 relative 与 子元素 absolute 进行布局
 
+- inline-block + inline-block
+- float + float
+- float + margin-left (block element ignore float element, inline element surround float element)
+- absolute + margin-left (absolute element not in normal flow)
+- float + BFC
+
 ```css
 .div-1 {
     position:relative;
@@ -1192,60 +1201,78 @@ main {
 
 #### 三栏布局
 
+##### absolute to left/right + margin to middle
+
+position .left and .right with absolute, add margin-left and margin-right to .middle
+
+##### float to left/right + margin to middle
+
 ```html
-<div class="main">
-    <div class="body">
-    </div>
-</div>
-<div class="left"></div>
-<div class="right"></div>
+.left
+.right
+.middle
 ```
 
 ```css
-html,
-body {
-    margin: 0;
-    height: 100%;
-    font-size: 1.5rem;
-}
-
 .left {
-    margin-left: -100%;
+  float: left;
 }
 
 .right {
-    margin-left: -120px;
+  float: right;
 }
 
-.left,
-.right {
-    height: 100%;
-    float: left;
-    background-color: #a0b3d6;
+.middle {
+  margin: 0 right-width 0 left-width;
+}
+```
+
+##### float + negative margin both to left/right
+
+On a floated element, a negative margin opposite the float direction will decrease
+the float area, causing adjacent elements to overlap the floated element. A negative
+margin in the direction of the float will pull the floated element in that direction.
+
+1. HTML: .middle first
+2. padding-left and padding-right to .container, `min-width: 2 * (leftWidth + rightWidth)` to container
+3. Float: `float: left` to .left/.middle/.right
+4. Negative Margin: `margin-left: -100%` to .left, `margin-right: -rightWidth px` to .right
+5. Move: `right: leftWidth px` to .left
+
+```html
+<div class="container">
+  <div class="middle"></div>
+  <div class="left"></div>
+  <div class="right"></div>
+</div>
+```
+
+```css
+.container {
+  padding: 0 200px 0 300px; /* padding-left = .left width, same to .right */
 }
 
-.left {
-    width: 200px;
+.container .middle {
+  float: left;
+  width: 100%;
+  background-color: blueviolet;
 }
 
-.right {
-    width: 120px;
+.container .left {
+  float: left;
+  position: relative;
+  right: 300px;
+  width: 300px;
+  margin-left: -100%;
+  background-color: darkblue;
 }
 
-.main,
-.body {
-    height: 100%;
-    background-color: #ffe6b8;
-}
-
-.main {
-    width: 100%;
-    float: left;
-}
-
-.body {
-    /* 内容区域实体, 左右 margin 值为 .left/.right 宽度*/
-    margin: 0 130px 0 210px;
+.container .right {
+  float: left;
+  position: relative;
+  width: 200px;
+  margin-right: -200px;
+  background-color: darkred;
 }
 ```
 
