@@ -143,6 +143,7 @@
         - [append](#append)
         - [insert](#insert)
       - [node](#node)
+        - [Traverse DOM Tree](#traverse-dom-tree)
       - [Frag](#frag)
     - [DOM HTML](#dom-html)
     - [DOM Style](#dom-style)
@@ -2038,22 +2039,22 @@ Sandbox('dom', 'event', function (box) {
 
 ## JavaScript DOM Basic Notes
 
--   DOM Level 0
--   DOM Level 1
-    -   DOM Core
-	-   DOM HTML
--   DOM Level 2
-    -   DOM2 Core
-	-   DOM2 HTML
-	-   DOM2 Events
-	-   DOM2 Style
-	-   DOM2 Traversal
-	-   DOM2 Range
-	-   DOM2 Views
--   DOM Level 3
-    -   DOM3 Core
-	-   DOM3 Load and Save
-	-   DOM3 Validation
+- DOM Level 0
+- DOM Level 1
+  - DOM Core
+  - DOM HTML
+- DOM Level 2
+  - DOM2 Core
+  - DOM2 HTML
+  - DOM2 Events
+  - DOM2 Style
+  - DOM2 Traversal
+  - DOM2 Range
+  - DOM2 Views
+- DOM Level 3
+  - DOM3 Core
+  - DOM3 Load and Save
+  - DOM3 Validation
 
 ```js
 if (document.implementation) {
@@ -2149,14 +2150,17 @@ node.nodeName
 node.nodeValue
 ```
 
+##### Traverse DOM Tree
+
 ```js
-	node.childNodes
-	node.firstChild
-	node.lastChild
-	node.nextSibling
-	node.previousSibling
-	node.parentNode
-	node.textContent
+node.parentNode
+node.childNodes
+node.children
+node.firstChild
+node.lastChild
+node.nextSibling
+node.previousSibling
+node.textContent
 ```
 
 ```js
