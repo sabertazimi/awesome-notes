@@ -1723,6 +1723,13 @@ use `inline-box` with `width`
 }
 ```
 
+```html
+<picture>
+ <source srcset="mdn-logo-wide.png" media="(min-width: 600px)">
+ <img src="mdn-logo-narrow.png" alt="MDN">
+</picture>
+```
+
 ### media query
 
 - `only` for improving compatibility with older browsers
