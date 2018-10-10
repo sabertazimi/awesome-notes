@@ -675,7 +675,8 @@ exec 2>>error.log
 
 ##### crontab
 
-/etc/crontab
+- /etc/crontab
+- [Crontab Quick Tutorial](https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html)
 
 crontab -l(list)
 crontab -e(establish)
