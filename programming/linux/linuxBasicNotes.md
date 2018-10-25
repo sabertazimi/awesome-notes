@@ -90,6 +90,8 @@
       - [开机任务](#开机任务)
     - [历史记录命令](#历史记录命令)
       - [history](#history)
+    - [Driver Command](#driver-command)
+      - [Touchpad Synaptics](#touchpad-synaptics)
     - [并行命令](#并行命令)
   - [Shell编程](#shell编程)
     - [Warings](#warings)
@@ -696,34 +698,42 @@ anacron —— 异步时间表
 
 #### 后台任务
 
--   jobs —— 所有作业
--   atq —— 延时作业队列
+- jobs —— 所有作业
+- atq —— 延时作业队列
 
--   at -M(不使用邮件发送运行结果) -f filename deltatime
-atrm 作业号/名
+- at -M(不使用邮件发送运行结果) -f filename deltatime
+- atrm 作业号/名
 
--   bg/fg 作业号/名
--   nohup 脚本 & —— 脱离控制台并后台运行脚本
+- bg/fg 作业号/名
+- nohup 脚本 & —— 脱离控制台并后台运行脚本
 
 19 ~ -20 （-20优先级最高）
 
--   nice -n number 作业号/名
--   renice number -p PID
+- nice -n number 作业号/名
+- renice number -p PID
 
 #### 开机任务
 
--   /etc/rc.local —— 系统开机任务
--   /etc/profile/  /etc/bash.bashrc —— bash启动任务/远程登陆任务
--   /etc/bash.bashrc —— SSH连接任务
+- /etc/rc.local —— 系统开机任务
+- /etc/profile/  /etc/bash.bashrc —— bash启动任务/远程登陆任务
+- /etc/bash.bashrc —— SSH连接任务
 
 ### 历史记录命令
 
 #### history
 
--   -c 清除历史命令
--   -w (~/.bash_history) 保存历史命令
+- -c 清除历史命令
+- -w (~/.bash_history) 保存历史命令
 
 /etc/profile中修改HISTSIZE !n/!!/!字符串  重复执行第n条/上一条/指定开头的历史命令
+
+### Driver Command
+
+#### Touchpad Synaptics
+
+```bash
+synclient TouchpadOff=0
+```
 
 ### 并行命令
 
