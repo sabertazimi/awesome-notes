@@ -2835,7 +2835,7 @@ function getUsers(users) {
 
 ### await/async
 
-avoid wrong parallel logic
+avoid wrong parallel logic (too sequential)
 
 ```js
 // wrong
@@ -2847,4 +2847,15 @@ const bookPromise = bookModel.fetchAll();
 const authorPromise = authorModel.fetch(authorId);
 const book = await bookPromise;
 const author = await authorPromise;
+
+async getAuthors(authorIds) {
+  // WRONG, this will cause sequential calls
+  // const authors = _.map(
+  //   authorIds,
+  //   id => await authorModel.fetch(id));
+  // CORRECT
+  const promises = _.map(authorIds, id => authorModel.fetch(id));
+  const authors = await Promise.all(promises);
+}
 ```
+
