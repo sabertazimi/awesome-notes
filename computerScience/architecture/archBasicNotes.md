@@ -7,6 +7,9 @@
     - [Instructions Dependencies and Latencies](#instructions-dependencies-and-latencies)
     - [Branch Prediction](#branch-prediction)
   - [VLIW (Very Long Instruction Word)](#vliw-very-long-instruction-word)
+  - [Out of Order Execution (OoO or OoE)](#out-of-order-execution-ooo-or-ooe)
+    - [The Brainiac vs Speed-demon Debate](#the-brainiac-vs-speed-demon-debate)
+  - [Memory](#memory)
   - [Reference](#reference)
 
 <!-- /TOC -->
@@ -45,6 +48,30 @@ it is possible for the instruction set itself to be designed to explicitly group
 A VLIW processor's instruction flow is much like a superscalar,
 except the decode/dispatch stage is much simpler and only occurs for each group of sub-instructions.
 No VLIW designs have yet been commercially successful as mainstream CPUs.
+
+## Out of Order Execution (OoO or OoE)
+
+If branches and long-latency instructions are going to cause bubbles in the pipeline(s),
+then perhaps those empty cycles can be used to do other work.
+To achieve this, the instructions in the program must be reordered (**instruction scheduling** and **register renaming**).
+Compiler completes static instruction scheduling (rearranged instruction stream at compile time),
+processor completes dynamic instruction scheduling (renaming registers and reorder instruction stream at runtime).
+The processor must keep a mapping of the instructions in flight at any moment and the physical registers they use.
+The extra logic of scheduler is particularly **power-hungry** because those transistors are **always** working.
+
+### The Brainiac vs Speed-demon Debate
+
+Brainiac designs are at the smart-machine end of the spectrum,
+with lots of OOO hardware trying to squeeze every last drop of instruction-level parallelism out of the code,
+even if it costs millions of logic transistors and years of design effort to do it.
+In contrast, speed-demon designs are simpler and smaller,
+relying on a smart compiler and willing to sacrifice a little bit of instruction-level parallelism
+for the other benefits that simplicity brings.
+Which would you rather have: 4 powerful brainiac cores, or 8 simpler in-order cores?
+When it comes to the brainiac debate,
+many vendors have gone down one path then changed their mind and switched to the other side.
+
+## Memory
 
 ## Reference
 
