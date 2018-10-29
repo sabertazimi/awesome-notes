@@ -9,6 +9,8 @@
   - [VLIW (Very Long Instruction Word)](#vliw-very-long-instruction-word)
   - [Out of Order Execution (OoO or OoE)](#out-of-order-execution-ooo-or-ooe)
     - [The Brainiac vs Speed-demon Debate](#the-brainiac-vs-speed-demon-debate)
+    - [Power Wall and ILP Wall](#power-wall-and-ilp-wall)
+    - [Decoupled x86 microarchitecture](#decoupled-x86-microarchitecture)
   - [Memory](#memory)
   - [Reference](#reference)
 
@@ -70,6 +72,28 @@ for the other benefits that simplicity brings.
 Which would you rather have: 4 powerful brainiac cores, or 8 simpler in-order cores?
 When it comes to the brainiac debate,
 many vendors have gone down one path then changed their mind and switched to the other side.
+
+### Power Wall and ILP Wall
+
+Power usage goes up even faster than clock speed does
+(increasing clock speed by 20% with 50% more power usage, O(power) = `frequence * Voltage * Voltage`).
+Leakage current also goes up as the voltage is increased,
+leakage generally goes up as the temperature increases as well.
+The power and heat problems become unmanageable,
+because it's simply not possible to provide that much power and cooling to a silicon chip.
+Thus, going purely for clock speed is not the best strategy.
+
+normal programs just don't have a lot of fine-grained parallelism in them,
+due to a combination of load latencies, cache misses, branches and dependencies between instructions.
+This limit of available instruction-level parallelism is called the ILP wall.
+
+### Decoupled x86 microarchitecture
+
+Dynamically decode the x86 instructions into simple, RISC-like micro-instructions (μops, pronounced "micro-ops"),
+which can then be executed by a fast, RISC-style register-renaming OOO superscalar core.
+The pipeline depth of Core i*2/i*3 Sandy/Ivy Bridge was shown as 14/19 stages in the earlier section on superpipelining,
+it is 14 stages when the processor is running from its L0 μop cache (which is the common case),
+but 19 stages when running from the L1 instruction cache and having to decode x86 instructions and translate them into μops.
 
 ## Memory
 
