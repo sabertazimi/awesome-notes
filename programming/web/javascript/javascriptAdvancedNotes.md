@@ -131,8 +131,11 @@
       - [Array.copyWithin](#arraycopywithin)
     - [export](#export)
     - [Class 语法糖](#class-语法糖)
-  - [Browser/Under the hood](#browserunder-the-hood)
+  - [Under the hood](#under-the-hood)
     - [Variables Lifecycle](#variables-lifecycle)
+    - [Exection Context](#exection-context)
+      - [Global Exection Context](#global-exection-context)
+      - [Function Exection Context](#function-exection-context)
     - [Arrow Function](#arrow-function)
   - [Performance](#performance)
     - [Monkey Patch](#monkey-patch)
@@ -1955,21 +1958,43 @@ console.log(bb.__proto__ === BB.prototype);
 
 禁止对复合对象字面量进行导出操作 (array literal, object literal)
 
-## Browser/Under the hood
+## Under the hood
 
 ### Variables Lifecycle
 
--   Declaration phase: 在作用域中注册变量
--   Initialization phase: 分配内存, 在作用域中绑定变量(undefined)
--   Assignment phase
+- Creation phase (**Hoisting**)
+  - Declaration phase: 在作用域中注册变量
+  - Initialization phase: 分配内存, 在作用域中绑定变量 (`undefined`)
+- Execution phase/Assignment phase
+
+### Exection Context
+
+#### Global Exection Context
+
+- create global object (`window`)
+- create `this` object(refer to `window`)
+- declare and initialize variable(`undefined`)/function, store them into memory
+
+#### Function Exection Context
+
+- create arguments object
+- create `this` object
+- declare and initialize variable(`undefined`)/function, store them into memory
+
+如果 JavaScript 引擎在函数执行上下文中找不到变量,
+它会在最近的父级执行上下文中查找该变量.
+这个查找链将会一直持续, 直到引擎查找到全局执行上下文.
+这种情况下, 如果全局执行上下文也没有该变量, 那么将会抛出引用错误 (Reference Error).
+子函数“包含”它父级函数的变量环境，把这个概念称为**闭包(Closure)**,
+即使父级函数执行环境已经从执行栈弹出了, 子函数还是可以访问父级函数变量 x (通过作用域链).
 
 ### Arrow Function
 
-*   no thisArgs binding
-*   no arguments binding
-*   no prototype binding
-*   no suited for `New` constructor
-*   not suited as methods of plain object (`this` in arrow function would be refer to `window`)
+- no thisArgs binding
+- no arguments binding
+- no prototype binding
+- no suited for `New` constructor
+- not suited as methods of plain object (`this` in arrow function would be refer to `window`)
 
 ## Performance
 
