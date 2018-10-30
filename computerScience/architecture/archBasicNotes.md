@@ -11,7 +11,8 @@
     - [The Brainiac vs Speed-demon Debate](#the-brainiac-vs-speed-demon-debate)
     - [Power Wall and ILP Wall](#power-wall-and-ilp-wall)
     - [Decoupled x86 microarchitecture](#decoupled-x86-microarchitecture)
-  - [Hardware Threads](#hardware-threads)
+  - [SMT (Hardware Threads)](#smt-hardware-threads)
+    - [More cores or Wider cores](#more-cores-or-wider-cores)
   - [Memory](#memory)
   - [Reference](#reference)
 
@@ -96,14 +97,44 @@ The pipeline depth of Core i*2/i*3 Sandy/Ivy Bridge was shown as 14/19 stages in
 it is 14 stages when the processor is running from its L0 μop cache (which is the common case),
 but 19 stages when running from the L1 instruction cache and having to decode x86 instructions and translate them into μops.
 
-## Hardware Threads
+## SMT (Hardware Threads)
 
 Even the most aggressively brainiac OOO superscalar processor
 will still almost never exceed an average of about 2-3 instructions per cycle
 when running most mainstream, real-world software,
 due to a combination of load latencies, cache misses, branching and dependencies between instructions.
+
 Simultaneous multi-threading (**SMT**) is a processor design technique which exploits thread-level parallelism
 (other running programs, or other threads within the same program).
+The instructions come from multiple threads running at the same time, all on the one processor core.
+An SMT processor uses just one physical processor core to present two or more logical processors to the system.
+Seperate units include the program counter, the architecturally-visible registers, the memory mappings held in the TLB,
+shared units include the decoders and dispatch logic, the functional units, and the caches.
+
+However, in practice, at least for desktops, laptops, tablets, phones and small servers,
+it is rarely the case that several different programs are actively executing at the same time,
+so it usually comes down to just the **one task** the machine is currently being used for.
+Some applications, such as database systems, image and video processing, audio processing, 3D graphics rendering and scientific code,
+do have obvious high-level (coarse-grained) parallelism available and easy to exploit,
+but many of these applications which are easy to parallelize are primarily limited by **memory bandwidth**, not by the processor.
+
+If one thread saturates just one functional unit which the other threads need,
+it effectively stalls all of the other threads,
+even if they only need relatively little use of that unit.
+**Competition** between the threads for cache space may produce worse results
+than letting just one thread have all the cache space available,
+particularly for software where the critical working set is highly cache-size sensitive,
+such as hardware simulators/emulators, virtual machines and high-quality video encoding.
+
+Due to above 3 reasons, SMT performance can actually be worse than single-thread performance
+(traditional context switching between threads) sometimes.
+
+### More cores or Wider cores
+
+Very wide superscalar designs scale very badly in terms of both chip area and clock speed:
+
+- the complex multiple-issue dispatch logic scales up as (issue width)^2
+- highly multi-ported register files and caches to service all those simultaneous accesses
 
 ## Memory
 
