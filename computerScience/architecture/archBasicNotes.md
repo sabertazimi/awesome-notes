@@ -11,6 +11,7 @@
     - [The Brainiac vs Speed-demon Debate](#the-brainiac-vs-speed-demon-debate)
     - [Power Wall and ILP Wall](#power-wall-and-ilp-wall)
     - [Decoupled x86 microarchitecture](#decoupled-x86-microarchitecture)
+  - [Hardware Threads](#hardware-threads)
   - [Memory](#memory)
   - [Reference](#reference)
 
@@ -94,6 +95,15 @@ which can then be executed by a fast, RISC-style register-renaming OOO superscal
 The pipeline depth of Core i*2/i*3 Sandy/Ivy Bridge was shown as 14/19 stages in the earlier section on superpipelining,
 it is 14 stages when the processor is running from its L0 μop cache (which is the common case),
 but 19 stages when running from the L1 instruction cache and having to decode x86 instructions and translate them into μops.
+
+## Hardware Threads
+
+Even the most aggressively brainiac OOO superscalar processor
+will still almost never exceed an average of about 2-3 instructions per cycle
+when running most mainstream, real-world software,
+due to a combination of load latencies, cache misses, branching and dependencies between instructions.
+Simultaneous multi-threading (**SMT**) is a processor design technique which exploits thread-level parallelism
+(other running programs, or other threads within the same program).
 
 ## Memory
 
