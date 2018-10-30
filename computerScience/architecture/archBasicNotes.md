@@ -16,6 +16,11 @@
   - [DLP (data-level parallelism)](#dlp-data-level-parallelism)
     - [SIMD Vector Instructions](#simd-vector-instructions)
   - [Memory](#memory)
+    - [Memory Wall](#memory-wall)
+    - [Caches](#caches)
+      - [Cache ocality](#cache-ocality)
+      - [Cache Layout](#cache-layout)
+    - [Memory Latency and Bandwidth](#memory-latency-and-bandwidth)
   - [Reference](#reference)
 
 <!-- /TOC -->
@@ -176,8 +181,84 @@ the idea is to look for ways to make one instruction apply to a group of data va
 
 One of DLP methods called **SIMD** parallelism (single instruction, multiple data).
 More often, it's called **vector processing**.
+With some thought, a small set of vector instructions can enable some impressive speedups,
+such as packing/unpacking, byte shuffling, bit masking instructions, just like x86 Matrix Math Extensions (MMX),
+Streaming SIMD Extensions (SSE), and ongoing revisions of Advanced Vector Extensions (AVX).
+MMX provide 64-bit vectors, x86 SSE added 8 new 128-bit registers, then widened to 256 bits with AVX.
 
 ## Memory
+
+### Memory Wall
+
+Latency is especially bad for loads from memory, which make up about a quarter of all instructions.
+Using a modern SDRAM with a CAS latency of 11,
+will typically be **24 cycles of the memory system bus**,
+1 to send the address to the DIMM (memory module),
+RAS-to-CAS delay of 11 for the row access,
+CAS latency of 11 for the column access,
+and a final 1 to send the first piece of data up to the processor (or E-cache).
+On a multi-processor system, even more bus cycles may be required to support **cache coherency** between the processors.
+There are the cycles within the processor itself,
+checking the various on-chip caches before the address even gets sent to the memory controller, accounting for **20 CPU cycles**.
+For 2.4GHz processor and 800MHz SDRAM memory, summing up to (1+11+11+1) * 2400/800 + 20 = 92 CPU cycles,
+a 4.0 GHz processor would wait a staggering 140 cycles to access main memory.
+This problem of the large, and slowly growing, gap between the processor and main memory is called the memory wall.
+
+### Caches
+
+Modern processors solve the problem of the memory wall with caches.
+A cache is a small but fast type of memory located on or near the processor chip.
+Its role is to keep **faster copies** of small pieces of main memory,
+L1 caches around 8-64K in size, L2 caches around 100K-10M in size, larger and slower L3 caches.
+A modern primary (L1) cache has a latency of just 2 to 4 processor cycles, with around 90% caches hit rates.
+
+> The memory hierarchy of a modern desktop/laptop: Core i4 Haswell.
+
+|Level|Size|Latency (cycles)|Location|
+|---|---|---|---|
+|L1 Cache|32KB|4|inside each core|
+|L2 Cache|256KB|12|beside each core|
+|L3 Cache|6MB|~21|shared between all cores|
+|L4 E-Cache|128MB|~58|separate eDRAM chip|
+|RAM|8+GB|~117|SDRAM DIMMs on motherboard|
+|Swap|100+GB|10000+|hard disk or SSD|
+
+#### Cache ocality
+
+Temporal locality is exploited by merely keeping recently accessed data in the cache.
+To take advantage of spatial locality,
+data is transferred from main memory up into the cache in blocks of a few dozen bytes at a time, called a cache line.
+
+#### Cache Layout
+
+Using the virtual address might cause caches need to be flushed on every context switch (**thrashing**)
+(2 programs mapping a same virtual address to different physical address).
+Using the physical address means the V2N mapping must be performed, making every cache lookup slower.
+A common trick is to use virtual addresses for the cache indexing but physical addresses for the tags.
+The virtual-to-physical mapping (TLB lookup) can then be performed in parallel with the cache indexing
+so that it will be ready in time for the tag comparison.
+Such a scheme is called a virtually-indexed physically-tagged cache.
+
+Set-associative caches are able to avoid some unfortunate cache conflicts.
+Unfortunately, the more highly associative a cache is, the slower it is to access.
+The instruction L1 cache can afford to be highly set-associative (prefetching and buffering in pipeline),
+but the data L1 cache settled on 4-way set-associative as the sweet spot.
+The large L2/L3 cache (LLC for "last-level cache") is also usually highly associative, perhaps as much as 12- or 16-way.
+External E-cache is sometimes direct-mapped for flexibility of size and implementation.
+
+### Memory Latency and Bandwidth
+
+Lower-latency designs will be better for pointer-chasing code,
+such as compilers and database systems.
+Bandwidth-oriented (adding more memory banks and making the busses wider)
+systems have the advantage for programs with simple, linear access patterns,
+such as image processing and scientific code.
+
+Latency is much harder to improve than bandwidth.
+Synchronously clocked DRAM (SDRAM) allowed pipelining of the memory system.
+This reduces effective latency because it allows a new memory access to be started before the current one has completed,
+while an asynchronous memory system had to wait for the transfer of half a cache line
+from the previous access before starting a new request.
 
 ## Reference
 
