@@ -13,6 +13,8 @@
     - [Decoupled x86 microarchitecture](#decoupled-x86-microarchitecture)
   - [SMT (Hardware Threads)](#smt-hardware-threads)
     - [More cores or Wider cores](#more-cores-or-wider-cores)
+  - [DLP (data-level parallelism)](#dlp-data-level-parallelism)
+    - [SIMD Vector Instructions](#simd-vector-instructions)
   - [Memory](#memory)
   - [Reference](#reference)
 
@@ -110,6 +112,7 @@ The instructions come from multiple threads running at the same time, all on the
 An SMT processor uses just one physical processor core to present two or more logical processors to the system.
 Seperate units include the program counter, the architecturally-visible registers, the memory mappings held in the TLB,
 shared units include the decoders and dispatch logic, the functional units, and the caches.
+SMT is essentially a way to **convert TLP into ILP**.
 
 However, in practice, at least for desktops, laptops, tablets, phones and small servers,
 it is rarely the case that several different programs are actively executing at the same time,
@@ -131,10 +134,48 @@ Due to above 3 reasons, SMT performance can actually be worse than single-thread
 
 ### More cores or Wider cores
 
-Very wide superscalar designs scale very badly in terms of both chip area and clock speed:
+Very wide superscalar designs scale very badly in terms of both chip area and clock speed,
+so a single 10-issue core would actually be both larger and slower than two 5-issue cores:
 
 - the complex multiple-issue dispatch logic scales up as (issue width)^2
 - highly multi-ported register files and caches to service all those simultaneous accesses
+
+Today, a "typical" SMT design implies both a wide execution core and OOO execution logic,
+including multiple decoders, the large and complex superscalar dispatch logic and so on.
+For applications with lots of active but **memory-latency-limited** threads
+(database systems, 3D graphics rendering),
+more **simple cores** would be better because big/wide cores would spend most of their time waiting for memory anyway.
+For **most applications**, however, there simply are not enough threads active to make this viable,
+and the performance of just a single thread is much more important,
+so a design with **fewer but bigger, wider**, more brainiac cores is more appropriate.
+
+Intel's Xeon Haswell, the server version of Core i*4 Haswell,
+uses 5.7 billion transistors to provide 18 cores (up from 8 in Xeon Sandy Bridge),
+each a very aggressively brainiac 8-issue design (up from 6-issue in Sandy Bridge),
+each still with 2-thread SMT.
+IBM's POWER8 uses 4.4 billion transistors to move to a considerably more brainiac core design than POWER7,
+and at the same time provide 12 cores (up from 8 in POWER7),
+each with 8-thread SMT (up from 4 in POWER7).
+
+In the future we might see **asymmetric designs**,
+with one or two big, wide, brainiac cores plus a large number of smaller, narrower, simpler cores.
+IBM's Cell processor (used in the Sony PlayStation 3) was arguably the first such design,
+but unfortunately it suffered from severe programmability problems
+because the ISA incompatible between small cores and large main core
+and had limited by awkward access to main memory.
+Some modern ARM designs also use an asymmetric approach,
+with several large cores paired with one or a few smaller, simpler "companion" cores,
+to increase battery life.
+
+## DLP (data-level parallelism)
+
+Rather than looking for ways to execute groups of instructions in parallel,
+the idea is to look for ways to make one instruction apply to a group of data values in parallel.
+
+### SIMD Vector Instructions
+
+One of DLP methods called **SIMD** parallelism (single instruction, multiple data).
+More often, it's called **vector processing**.
 
 ## Memory
 
