@@ -58,6 +58,29 @@ render((
 > In App.js: `render() { return (<div>... {this.props.children}</ div>); }`
 > In Repos.js: `render() { return (<div>... {this.props.children}</ div>); }`
 
+### Private Route
+
+```jsx
+const PrivateRoute = ({
+  component: Component,
+  toAuth,
+  ...rest
+}) => {
+  return (
+    <Route {...rest} render={(props) => (
+      auth.isAuthenticated() === true
+      ? <Component {...props}/>
+      : <Redirect to={
+          pathname: toAuth,
+          state: {
+            from: props.location
+          }
+        }/>
+    )}/>
+  );
+}
+```
+
 ### URL Params
 
 ```js
@@ -82,6 +105,46 @@ replace hashHistory for browserHistory
 ### Change Route
 
 - onEnter = { () => store.dispatch(createRouteAction(params))}
+- return `<Redirect />`
+
+```jsx
+class Login = () => {
+  login = () => {
+    // 1. login
+    // 2. setState (500ms delay)
+    auth.login(() => {
+      this.setState({
+        redirect: true
+      });
+    }, 500);
+  }
+
+  render() {
+    const {
+      redirect
+    } = this.state;
+    const {
+      from
+    } = this.props.location.state || {
+      from: {
+        pathname: '/'
+      }
+    };
+
+    if (redirect) {
+      return (
+        <Redirect to={from}/>
+      )
+    }
+
+    return (
+      <div>
+        <button onClick={this.login}>Login</button>
+      </div>
+    );
+  }
+}
+```
 
 ## Deployment
 
@@ -203,7 +266,7 @@ class Route extends Component {
     const match = matchPath(location.pathname, { path, exact });
 
     if (!match) {
-      return null:
+      return null;
     }
 
     if (component) {
