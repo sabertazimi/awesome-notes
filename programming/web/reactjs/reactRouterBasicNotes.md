@@ -1,5 +1,26 @@
 # React Router Basic Notes
 
+<!-- TOC -->
+
+- [React Router Basic Notes](#react-router-basic-notes)
+  - [Router and Route](#router-and-route)
+    - [Basic Usage](#basic-usage)
+    - [Nested Route](#nested-route)
+    - [Private Route](#private-route)
+    - [URL Params](#url-params)
+    - [IndexRoute](#indexroute)
+    - [Clean URLs](#clean-urls)
+    - [Change Route](#change-route)
+  - [Deployment](#deployment)
+    - [Express Config](#express-config)
+    - [Nginx Config](#nginx-config)
+  - [A Simple React Router](#a-simple-react-router)
+    - [Route Component](#route-component)
+    - [Link Component](#link-component)
+    - [Redirect Component](#redirect-component)
+
+<!-- /TOC -->
+
 ## Router and Route
 
 parent routes are active when child routes are active
@@ -172,7 +193,7 @@ location / {
 }
 ```
 
-### A Simple React Router
+## A Simple React Router
 
 - `<Route>` instances listen to `popstate` event to `forceUpdate`.
 - When click `<Link>`/`<Reditect>`, `historyPush` or `historyReplace` get called, `<Route>` instances re-match and re-render.
@@ -194,7 +215,7 @@ const historyReplace = (path) => {
 }
 ```
 
-#### Route Component
+### Route Component
 
 ```jsx
 const matchPath = (pathname, options) => {
@@ -282,7 +303,7 @@ class Route extends Component {
 }
 ```
 
-#### Link Component
+### Link Component
 
 Whenever a `<Link>` is clicked and the location changes,
 each `<Route>` will be aware of that and re-match and re-render with `instances`.
@@ -313,7 +334,7 @@ class Link extends Component {
 }
 ```
 
-#### Redirect Component
+### Redirect Component
 
 ```jsx
 class Redirect extends Component {
