@@ -124,7 +124,8 @@
     - [media query](#media-query)
     - [设备类型](#设备类型)
     - [设备特性](#设备特性)
-  - [常用组件](#常用组件)
+  - [常用组件 (Awesome Demo)](#常用组件-awesome-demo)
+    - [Flexiable Heading](#flexiable-heading)
     - [form](#form)
       - [select](#select)
     - [nav](#nav)
@@ -979,6 +980,7 @@ float make element specified value of `display`:
 
 - when there is some free space left: true width = `flex-basis` (or `width`) + `flex-grow`/sum of `flex-grow`
 - when there is not enough space: true width = `flex-basis` (or `width`) - `flex-shrink`/sum of `flex-shrink`
+- text nodes and pseudo-elements can be flex children
 
 #### Useful shorthand of `flex`
 
@@ -1811,9 +1813,28 @@ use `inline-box` with `width`
 |scan|Progressive interlaced|no|tv媒体类型的扫描方式|
 |orientation|Portrait/landscape|no|横屏或竖屏|
 
-## 常用组件
+## 常用组件 (Awesome Demo)
 
--   **reset.css**
+### Flexiable Heading
+
+```css
+h1 {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+h1::before,
+h1::after {
+  content: "";
+  background-color: gray;
+  height: .1em;
+  margin: .2em;
+  flex: 1;
+}
+```
+
+- **reset.css**
 
 ### form
 
