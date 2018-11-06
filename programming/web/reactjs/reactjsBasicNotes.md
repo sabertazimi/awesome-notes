@@ -22,7 +22,7 @@
       - [updates](#updates)
       - [unmount](#unmount)
     - [HOC (Higher-Order Components)](#hoc-higher-order-components)
-    - [Render Props](#render-props)
+    - [Render Props (Children as Function)](#render-props-children-as-function)
     - [Hooks](#hooks)
       - [Default Hooks](#default-hooks)
       - [Basic Rules](#basic-rules)
@@ -250,7 +250,7 @@ class Menu extends React.Component {
 }
 ```
 
-### Render Props
+### Render Props (Children as Function)
 
 solve:
 
