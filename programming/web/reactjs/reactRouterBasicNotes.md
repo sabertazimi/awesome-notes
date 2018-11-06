@@ -8,7 +8,8 @@
     - [Nested Route](#nested-route)
     - [Private Route](#private-route)
     - [URL Params](#url-params)
-    - [IndexRoute](#indexroute)
+    - [Component Props](#component-props)
+    - [Link/URL Props](#linkurl-props)
     - [Clean URLs](#clean-urls)
     - [Change Route](#change-route)
   - [Deployment](#deployment)
@@ -114,10 +115,32 @@ const PrivateRoute = ({
 <div>{this.props.params.repoName}</ div>
 ```
 
-### IndexRoute
+### Component Props
 
-- has no path
-- becomes this.props.children of the parent
+- subroutes
+- id/size
+- etc...
+
+```jsx
+<Route render={(props) => <Component {...props}/>}/>
+```
+
+### Link/URL Props
+
+```jsx
+to={
+  pathname: url,
+  state: {
+    ...
+  }
+}
+
+...
+
+const {
+  ...
+} = this.props.location.state;
+```
 
 ### Clean URLs
 
@@ -126,31 +149,23 @@ replace hashHistory for browserHistory
 ### Change Route
 
 - onEnter = { () => store.dispatch(createRouteAction(params))}
-- return `<Redirect />`
+- return `<Redirect />` conditionaly and `withRouter` wrapper (`this.props.history.push('nextURL')`)
 
 ```jsx
 class Login = () => {
   login = () => {
     // 1. login
-    // 2. setState (500ms delay)
+    // 2. setState and pushHistory (500ms delay)
     auth.login(() => {
-      this.setState({
-        redirect: true
-      });
+      const { from } = this.props.location.state || { from: { pathname: '/' }};
+      this.setState({ redirect: true });
+      this.props.history.push(from);
     }, 500);
   }
 
   render() {
-    const {
-      redirect
-    } = this.state;
-    const {
-      from
-    } = this.props.location.state || {
-      from: {
-        pathname: '/'
-      }
-    };
+    const { redirect } = this.state;
+    const { from } = this.props.location.state || { from: { pathname: '/' }};
 
     if (redirect) {
       return (
@@ -165,6 +180,9 @@ class Login = () => {
     );
   }
 }
+
+// apply `history` object to props of `Login` component
+export default withRouter(Login);
 ```
 
 ## Deployment
