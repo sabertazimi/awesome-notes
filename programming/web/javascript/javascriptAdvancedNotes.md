@@ -138,6 +138,9 @@
       - [Function Exection Context](#function-exection-context)
     - [Arrow Function](#arrow-function)
   - [Performance](#performance)
+    - [V8 Good Parts](#v8-good-parts)
+      - [Object Shape](#object-shape)
+      - [Inline Cache](#inline-cache)
     - [Monkey Patch](#monkey-patch)
 
 <!-- /TOC -->
@@ -1997,6 +2000,51 @@ console.log(bb.__proto__ === BB.prototype);
 - not suited as methods of plain object (`this` in arrow function would be refer to `window`)
 
 ## Performance
+
+### V8 Good Parts
+
+- source code (parser) AST (interpreter) bytecode
+- send profilling data from bytecode to optimizing compiler, generate optimized code
+- **Ignition** interpreter
+- **TurboFan** optimizing compiler (2 for SpiderMonkey/Edge, 3 for Safari)
+
+#### Object Shape
+
+```js
+// o1 and o2 have the same shape
+// JSObject(1, 2) => Shape('x', 'y')
+// JSObject(3, 4) => Shape('x', 'y')
+// 'x' => 0 Offset, Writable, Enumerable, Configurable
+// 'y' => 1 Offset, Writable, Enumerable, Configurable
+const o1 = { x: 1, y: 2 };
+const o2 = { x: 3, y: 4 };
+```
+
+Shape Transform
+
+```js
+// Shape chain: Shape(empty) => Shape(x) => Shape(x, y)
+const o = {};
+o.x = 1;
+o.y = 2;
+
+// Shape chain: Shape(empty) => Shape(y) => Shape(y, x)
+const o = {};
+o.y = 2;
+o.x = 1;
+
+// Shape chain: Shape(x)
+const o = { x: 1};
+```
+
+array shape: Shape('length'), 'length' => 0 Offset, Writable
+
+#### Inline Cache
+
+V8 use ICs to memorize information (same shape) where to find properties on objects:
+
+- always initialize objects in the same way (generate the same shape)
+- don't mess with property attributes of array elements
 
 ### Monkey Patch
 
