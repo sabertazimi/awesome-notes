@@ -109,6 +109,7 @@
   - [Web Sockets API](#web-sockets-api)
   - [Web RTC API](#web-rtc-api)
   - [Web Workers API](#web-workers-api)
+  - [Web Animations API](#web-animations-api)
   - [Nginx Config](#nginx-config)
   - [Accessbility](#accessbility)
     - [structure](#structure)
@@ -914,6 +915,18 @@ function WebSocketTest()
 
 多线程处理
 
+## Web Animations API
+
+```js
+const rabbitDownKeyframes = new KeyframeEffect(
+    whiteRabbit, // element to animate
+    [
+      { transform: 'translateY(0%)' },  // keyframe
+      { transform: 'translateY(100%)' } // keyframe
+    ],
+    { duration: 3000, fill: 'forwards' } // keyframe options
+);
+```
 
 ## Nginx Config
 
