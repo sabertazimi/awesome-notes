@@ -917,6 +917,9 @@ function WebSocketTest()
 
 ## Web Animations API
 
+- `KeyframeEffect`
+- `Animation`
+
 ```js
 const rabbitDownKeyframes = new KeyframeEffect(
     whiteRabbit, // element to animate
@@ -926,6 +929,51 @@ const rabbitDownKeyframes = new KeyframeEffect(
     ],
     { duration: 3000, fill: 'forwards' } // keyframe options
 );
+
+const rabbitDownAnimation = new Animation(rabbitDownKeyFrames, document.timeline);
+
+whiteRabbit.addEventListener('click', downHandler);
+
+function downHandler() {
+  rabbitDownAnimation.play();
+  whiteRabbit.removeEventListener('click', downHandler);
+}
+```
+
+- `element.animate`
+
+```js
+const animationKeyframes = [
+  {
+    transform: 'rotate(0)',
+    color: '#000',
+  },
+  {
+    color: '#431236',
+    offset: 0.3
+  },
+  {
+    transform: 'rotate(360deg)',
+    color: '#000',
+  },
+];
+
+const animationTiming = {
+  duration: 3000,
+  iterations: Infinity
+};
+
+const animation = document.querySelector('alice').animate(
+  animationKeyframes,
+  animationTiming
+);
+```
+
+- `animation.pause()/play()/reverse()/finish()/cancel()`
+
+```js
+animation.pause();
+animation.currentTime = animation.effect.getComputedTiming().duration / 2;
 ```
 
 ## Nginx Config
