@@ -53,8 +53,15 @@
   - [Functional JavaScript](#functional-javascript)
     - [Pros](#pros)
     - [Cons](#cons)
+    - [闭包(closure)](#闭包closure)
+      - [闭包函数的结构](#闭包函数的结构)
     - [Partial Application](#partial-application)
     - [Currying](#currying)
+    - [API](#api)
+      - [`[]`.map](#map)
+      - [`[]`.filter](#filter)
+      - [`[]`.reduce](#reduce)
+      - [`[]`.sort](#sort)
   - [Code Style Guide](#code-style-guide)
     - [Style](#style)
       - [命名规范](#命名规范)
@@ -154,17 +161,17 @@
 
 ### Literal
 
--   不要使用 new Boolean()/new Number()/new String()
--   避免使用 new Object()/new Array()
+- 不要使用 new Boolean()/new Number()/new String()
+- 避免使用 new Object()/new Array()
 
 ### Closure and IIFE
 
 ### Check
 
--   `O || {} ` `O || (O = {})`
--   `if (O && O.property)`
--   `if (typeof v === " ")`
--   `toString. apply(var)`
+- `O || {}` `O || (O = {})`
+- `if (O && O.property)`
+- `if (typeof v === " ")`
+- `toString. apply(var)`
 
 ### Other
 
@@ -172,13 +179,13 @@
 
 ## Project
 
--   sacc
--   autoprefixer
--   github-css-remove-unused-class
--   Jslint
--   uglification
--   concatenation
--   minimal
+- sacc
+- autoprefixer
+- github-css-remove-unused-class
+- Jslint
+- uglification
+- concatenation
+- minimal
 
 ```bash
 npm install
@@ -298,13 +305,13 @@ MVVM进一步允许我们创建一个模型的特定视图子集，包含了状�
 
 ### View
 
--   关注表现层逻辑
--   向相关模块(Model)派发事件
+- 关注表现层逻辑
+- 向相关模块(Model)派发事件
 
 load()回调函数:
 
--   不加入过多的逻辑处理
--   不进行多余的DOM操作
+- 不加入过多的逻辑处理
+- 不进行多余的DOM操作
 
 ## Effective JavaScript
 
@@ -317,19 +324,19 @@ load()回调函数:
 
 ### 禁用特性
 
--   with () {}
--   eval()
--   少用 new
--   少用 cotinue
--   少用 forEach()
+- with () {}
+- eval()
+- 少用 new
+- 少用 cotinue
+- 少用 forEach()
 
 ### 局部变量/函数参数
 
--   局部变量引用全局变量/全局变量作为参数传入函数: 加快符号解析
--   局部变量缓存 DOM 元素
--   局部变量缓存布局信息
--   局部变量引用嵌套成员: 加快原型链查找
--   局部变量引用方法时，应注意会动态改变 this 指针
+- 局部变量引用全局变量/全局变量作为参数传入函数: 加快符号解析
+- 局部变量缓存 DOM 元素
+- 局部变量缓存布局信息
+- 局部变量引用嵌套成员: 加快原型链查找
+- 局部变量引用方法时，应注意会动态改变 this 指针
 
 ```js
 var DOM = tazimi.util.Dom;
@@ -376,20 +383,20 @@ do {
 var i = items.length % 8;
 
 while (i) {
-	process(items[i--]);
+  process(items[i--]);
 }
 
 i = Math.floor(items.length / 8);
 
 while (i) {
-	process(items[i--]);
-	process(items[i--]);
-	process(items[i--]);
-	process(items[i--]);
-	process(items[i--]);
-	process(items[i--]);
-	process(items[i--]);
-	process(items[i--]);
+  process(items[i--]);
+  process(items[i--]);
+  process(items[i--]);
+  process(items[i--]);
+  process(items[i--]);
+  process(items[i--]);
+  process(items[i--]);
+  process(items[i--]);
 }
 ```
 
@@ -409,8 +416,8 @@ try {
 
 ### Event Delegate(事件委托)
 
--   事件委托利用的是事件冒泡机制，只制定一事件处理程序，就可以管理某一类型的所有事件
--   使用事件委托，只需在 DOM 树中尽量最高的层次上添加一个事件处理程序
+- 事件委托利用的是事件冒泡机制，只制定一事件处理程序，就可以管理某一类型的所有事件
+- 使用事件委托，只需在 DOM 树中尽量最高的层次上添加一个事件处理程序
 
 ```js
 window.onload = function(){
@@ -427,14 +434,14 @@ window.onload = function(){
             target.style.background = "red";
         }
 
-		// 阻止默认行为并取消冒泡
-		if (typeof e.preventDefault === 'function') {
-			e.preventDefault();
-			e.stopPropagation();
-		} else {
-			e.returnValue = false;
-			e.cancelBubble = true;
-		}
+    // 阻止默认行为并取消冒泡
+    if (typeof e.preventDefault === 'function') {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      e.returnValue = false;
+      e.cancelBubble = true;
+    }
     }
 
     oUl.onmouseout = function(e) {
@@ -447,14 +454,14 @@ window.onload = function(){
             target.style.background = "";
         }
 
-		// 阻止默认行为并取消冒泡
-		if (typeof e.preventDefault === 'function') {
-			e.preventDefault();
-			e.stopPropagation();
-		} else {
-			e.returnValue = false;
-			e.cancelBubble = true;
-		}
+    // 阻止默认行为并取消冒泡
+    if (typeof e.preventDefault === 'function') {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      e.returnValue = false;
+      e.cancelBubble = true;
+    }
     }
 }
 ```
@@ -473,9 +480,9 @@ window.onload = function(){
 ... The full body of the page ...
 <script>
 window.onload = function () {
-	var script = document.createElement("script");
-	script.src = "all_lazy_20100426.js";
-	document.documentElement.firstChild.appendChild(script);
+  var script = document.createElement("script");
+  script.src = "all_lazy_20100426.js";
+  document.documentElement.firstChild.appendChild(script);
 };
 </script>
 </body>
@@ -486,63 +493,63 @@ window.onload = function () {
 
 ```javascript
 function requireScript(file, callback) {
-	var script = document.getElementsByTagName('script')[0],
-		newjs = document.createElement('script');
+  var script = document.getElementsByTagName('script')[0],
+    newjs = document.createElement('script');
 
-	// IE
-	newjs.onreadystatechange = function () {
-		if (newjs.readyState === 'loaded' || newjs.readyState === 'complete') {
-			newjs.onreadystatechange = null;
-			callback();
-		}
-	};
-	// others
-	newjs.onload = function () {
-		callback();
-	};
+  // IE
+  newjs.onreadystatechange = function () {
+    if (newjs.readyState === 'loaded' || newjs.readyState === 'complete') {
+      newjs.onreadystatechange = null;
+      callback();
+    }
+  };
+  // others
+  newjs.onload = function () {
+    callback();
+  };
 
-	// 添加至html页面
-	newjs.src = file;
-	script.parentNode.insertBefore(newjs, script);
+  // 添加至html页面
+  newjs.src = file;
+  script.parentNode.insertBefore(newjs, script);
 }
 
 requireScript('the_rest.js', function() {
-	Application.init();
+  Application.init();
 });
 ```
 
 ### DOM
 
--   局部变量缓存 DOM 元素
--   局部变量缓存布局信息
+- 局部变量缓存 DOM 元素
+- 局部变量缓存布局信息
 
 ```js
 var btn = document.getElementById('btn');
 ```
 
--   HTML Collection 转化成数组再操作
+- HTML Collection 转化成数组再操作
 
 ```js
 function toArray(coll) {
-	for (var i = 0, a = [], len = coll.length; i < len; i++) {
-		a[i] = coll[i];
-	}
+  for (var i = 0, a = [], len = coll.length; i < len; i++) {
+    a[i] = coll[i];
+  }
 
-	return a;
+  return a;
 }
 ```
 
--   children 优于 childNodes
--   childElementCount 优于 childNodes.length
--   firstElementChild 优于 firstChild
--   lastElementChild 优于 lastChild
--   nextElementSibling 优于 nextSibling 优于 `childNodes[next]`
--   previousElementSibling 优于 previousSibling
+- children 优于 childNodes
+- childElementCount 优于 childNodes.length
+- firstElementChild 优于 firstChild
+- lastElementChild 优于 lastChild
+- nextElementSibling 优于 nextSibling 优于 `childNodes[next]`
+- previousElementSibling 优于 previousSibling
 
 #### 重排与重绘
 
--   重排: 重新构造渲染树
--   重绘: 重新绘制受影响部分
+- 重排: 重新构造渲染树
+- 重绘: 重新绘制受影响部分
 
 **获取**或改变布局的操作会导致渲染树**变化队列**刷新,执行渲染队列中的"待处理变化",重排 DOM 元素
 
@@ -555,9 +562,9 @@ getComputedStyle()
 
 #### 批量修改 DOM
 
--   先 display="none", 修改完成后，display=""
--   使待修改 DOM 元素脱离标准文档流(改变布局／定位方式)，可减少其他元素的重绘次数
--   document.createDocumentFragment()
+- 先 display="none", 修改完成后，display=""
+- 使待修改 DOM 元素脱离标准文档流(改变布局／定位方式)，可减少其他元素的重绘次数
+- document.createDocumentFragment()
 
 ```js
 var fragment = document.createDocumentFragment();
@@ -565,11 +572,11 @@ appendDataToElement(fragment, data);
 document.getElementById('mylist').appendChild(fragment);
 ```
 
--   oldNode.cloneNode(true);
+- oldNode.cloneNode(true);
 
 ```js
 var old = document.getElementById('mylist'),
-	clone = old.cloneNode(true);
+  clone = old.cloneNode(true);
 
 appendDataToElement(clone, data);
 old.parentNode.replaceChild(clone, old);
@@ -590,85 +597,85 @@ JavaScript　代码与 UI 共享线程
 
 setTimeout()/setInterval()
 
--   第二个参数: 不是执行时间, 是加入执行队列时间
--   若其他位于执行队列中的函数执行时间超过延时，则用户感觉不到延时的存在
--   模拟有间隙的循环，使得 UI 更新得以进入浏览器线程的执行队列中
+- 第二个参数: 不是执行时间, 是加入执行队列时间
+- 若其他位于执行队列中的函数执行时间超过延时，则用户感觉不到延时的存在
+- 模拟有间隙的循环，使得 UI 更新得以进入浏览器线程的执行队列中
 
 ```js
 var button = document.getElementById('myButton');
 
 button.onclick = function() {
 
-	oneMethod();
+  oneMethod();
 
-	setTimeout(function() {
-		document.getElementById('notice').style.color = 'red';
-	}, 250);
+  setTimeout(function() {
+    document.getElementById('notice').style.color = 'red';
+  }, 250);
 }
 ```
 
--   分解任务
+- 分解任务
 
 ```js
 function saveDocument(id) {
 
-	// 利用闭包封装待执行任务
-	var tasks = [openDocument, writeText, closeDocument, updateUI];
+  // 利用闭包封装待执行任务
+  var tasks = [openDocument, writeText, closeDocument, updateUI];
 
-	setTimeout(function() {
+  setTimeout(function() {
 
-		// 执行下一个任务
-		var task = tasks.shift();
-		task(id);
+    // 执行下一个任务
+    var task = tasks.shift();
+    task(id);
 
-		// 检查是否还有其他任务
-		if (tasks.length > 0) {
-			// 递归调用(每次参数不同)
-			setTimeout(arguments.callee, 25);
-		}
-	}, 25);
+    // 检查是否还有其他任务
+    if (tasks.length > 0) {
+      // 递归调用(每次参数不同)
+      setTimeout(arguments.callee, 25);
+    }
+  }, 25);
 }
 ```
 
 ```js
 function processArray(items, process, callback) {
-	// 克隆原数组
-	var todo = items.concat();
+  // 克隆原数组
+  var todo = items.concat();
 
-	setTimeout(function() {
+  setTimeout(function() {
 
-		process(todo.shift());
+    process(todo.shift());
 
-		if (todo.length > 0) {
-			setTimeout(arguments.callee, 25);
-		} else {
-			callback(items);
-		}
-	}, 25);
+    if (todo.length > 0) {
+      setTimeout(arguments.callee, 25);
+    } else {
+      callback(items);
+    }
+  }, 25);
 }
 ```
 
--   批处理任务
+- 批处理任务
 
 ```js
 function timedProcessArray(items, process, callback) {
-	// 克隆原始数组
-	var todo = items.concat();
+  // 克隆原始数组
+  var todo = items.concat();
 
-	setTimeout(function() {
-		var start = +new Date();
+  setTimeout(function() {
+    var start = +new Date();
 
-		// 一次批处理任务持续 0.05s
-		do {
-			process(todo.shift());
-		} while (todo.length < 0 && (+new Date() - start < 50));
+    // 一次批处理任务持续 0.05s
+    do {
+      process(todo.shift());
+    } while (todo.length < 0 && (+new Date() - start < 50));
 
-		if (todo.length > 0) {
-			setTimeout(arguments.callee, 25);
-		} else {
-			callback(items);
-		}
-	}, 25);
+    if (todo.length > 0) {
+      setTimeout(arguments.callee, 25);
+    } else {
+      callback(items);
+    }
+  }, 25);
 }
 ```
 
@@ -679,21 +686,21 @@ function timedProcessArray(items, process, callback) {
  * usage: start -> stop -> getTime
  */
 var Timer = {
-	_data: {},
+  _data: {},
 
-	start: function(key) {
-		Timer._data[key] = new Date();
-	},
-	stop: function(key) {
-		var time = Timer._data[key];
+  start: function(key) {
+    Timer._data[key] = new Date();
+  },
+  stop: function(key) {
+    var time = Timer._data[key];
 
-		if (time) {
-			Timer._data[key] = new Date() - time;
-		}
-	},
-	getTime: function(key) {
-		return Timer._data[key];
-	};
+    if (time) {
+      Timer._data[key] = new Date() - time;
+    }
+  },
+  getTime: function(key) {
+    return Timer._data[key];
+  };
 }
 ```
 
@@ -701,29 +708,29 @@ var Timer = {
 
 #### 运行环境
 
--   navigation 对象: appName, appVersion, userAgent, platform
--   location 对象: 所有属性只读
--   ECMAScript 对象: Object/Array/Date
--   XMLHttpRequest 方法
--   setTimeout/setInterval 方法
--   self 对象: 指向全局 worker 对象
--   importScripts 方法: 加载外部依赖
--   close 方法: 停止 worker
+- navigation 对象: appName, appVersion, userAgent, platform
+- location 对象: 所有属性只读
+- ECMAScript 对象: Object/Array/Date
+- XMLHttpRequest 方法
+- setTimeout/setInterval 方法
+- self 对象: 指向全局 worker 对象
+- importScripts 方法: 加载外部依赖
+- close 方法: 停止 worker
 
 #### worker 实例
 
--   先 on ,后 post
--   main.js/worker.js 的 onmessage 与 postMessage 相互触发
+- 先 on ,后 post
+- main.js/worker.js 的 onmessage 与 postMessage 相互触发
 
 ```js
 /*
  * jsonparser.js
  */
 self.onmessage = function(event) {
-	var jsonText = event.data,
-		jsonData = JSON.parse(jsonText);
+  var jsonText = event.data,
+    jsonData = JSON.parse(jsonText);
 
-	self.postMessage(jsonData);
+  self.postMessage(jsonData);
 }
 ```
 
@@ -734,8 +741,8 @@ self.onmessage = function(event) {
 var worker = new Worker('jsonparse.js';
 
 worker.onmessage = function(event) {
-	var jsonData = event.data;
-	evaluateData(jsonData);
+  var jsonData = event.data;
+  evaluateData(jsonData);
 };
 
 worker.postMessage(jsonText);
@@ -764,31 +771,31 @@ Custom Format (XHR)|222,892 bytes|63.1 ms|14.5 ms|77.6 ms|
 var localCache = {};
 
 function xhrRequest(url, callback) {
-	// Check the local cache for this URL.
-	if (localCache[url]) {
-		callback.success(localCache[url]);
-		return;
-	}
+  // Check the local cache for this URL.
+  if (localCache[url]) {
+    callback.success(localCache[url]);
+    return;
+  }
 
-	// If this URL wasn't found in the cache, make the request.
-	var req = createXhrObject();
+  // If this URL wasn't found in the cache, make the request.
+  var req = createXhrObject();
 
-	req.onerror = function() {
-		callback.error();
-	};
+  req.onerror = function() {
+    callback.error();
+  };
 
-	req.onreadystatechange = function() {
-		if (req.readyState == 4) {
-			if (req.responseText === '' || req.status == '404') {
-				callback.error();
-				return;
-			}
+  req.onreadystatechange = function() {
+    if (req.readyState == 4) {
+      if (req.responseText === '' || req.status == '404') {
+        callback.error();
+        return;
+      }
 
-			// Store the response on the local cache.
-			localCache[url] = req.responseText;
-			callback.success(req.responseText);
-		};
-	}
+      // Store the response on the local cache.
+      localCache[url] = req.responseText;
+      callback.success(req.responseText);
+    };
+  }
 }
 
 req.open("GET", url, true);
@@ -798,8 +805,8 @@ req.send(null);
 
 ### 避免重复工作
 
--   特性/浏览器检测代码只运行一次
--   惰性定义模式/自定义模式
+- 特性/浏览器检测代码只运行一次
+- 惰性定义模式/自定义模式
 
 ### First Paint Time
 
@@ -838,7 +845,7 @@ function getPerformanceTiming() {
   times.redirect = t.redirectEnd - t.redirectStart;
   //【重要】DNS 查询时间
   //【原因】DNS 预加载做了么？页面内是不是使用了太多不同的域名导致域名查询的时间太长？
-  // 可使用 HTML5 Prefetch 预查询 DNS ，见：[HTML5 prefetch](http://segmentfault.com/a/1190000000633364)            
+  // 可使用 HTML5 Prefetch 预查询 DNS ，见：[HTML5 prefetch](http://segmentfault.com/a/1190000000633364)
   times.lookupDomain = t.domainLookupEnd - t.domainLookupStart;
   //【重要】读取页面第一个字节的时间
   //【原因】这可以理解为用户拿到你的资源占用的时间，加异地机房了么，加CDN 处理了么？加带宽了么？加 CPU 运算速度了么？
@@ -865,15 +872,15 @@ function getPerformanceTiming() {
 
 #### 位操作
 
--   i%2 => `i&0x1`
--   位掩码
+- i%2 => `i&0x1`
+- 位掩码
 
 ```js
 var OPTION_A = 1,
-	OPTION_B = 2,
-	OPTION_C = 4,
-	OPTION_D = 8,
-	OPTION_E = 16;
+  OPTION_B = 2,
+  OPTION_C = 4,
+  OPTION_D = 8,
+  OPTION_E = 16;
 
 var options = OPTION_A|OPTION_C|OPTION_D;
 ```
@@ -933,6 +940,18 @@ const map1 = { 'b': 2 };
 const map2 = map1.set{ 'b': 2 };
 ```
 
+### 闭包(closure)
+
+两个函数都维持着对外部作用域 Counter 的引用，因此总可以访问Counter作用域内定义的变量count(外部局部变量)
+
+- 函数外部不可对函数内部进行赋值或引用
+- 但函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部，即内部引用外部)
+- 特权性质: 从外部通过闭包方法访问内部(函数作用域)局部变量
+
+#### 闭包函数的结构
+
+优先级: this > 局部变量 > 形参 > arguments > 函数名
+
 ### Partial Application
 
 ```js
@@ -954,6 +973,40 @@ chain of multiple single argument functions
 ```js
 const add = x => y => x + y
 ```
+
+```javascript
+function schonfinkelize(fn) {
+  const slice = Array.prototype.slice,
+  stored_args = slice.call(arguments, 1);
+
+  return function () {
+    const new_args = slice.call(arguments),
+    args = stored_args.concat(new_args);
+    return fn.apply(null, args);
+  };
+}
+
+const addOne = schonfinkelize(add, 1);
+// addOne(3) === 4;
+const addFive = schonfinkelize(addOne, 1, 3);
+// addFive(4) === 9;
+```
+
+### API
+
+#### `[]`.map
+
+相当于 Haskell 中的 List Map
+
+#### `[]`.filter
+
+相当于 Haskell 中的 List Filter
+
+#### `[]`.reduce
+
+相当于 Haskell 中的 fold
+
+#### `[]`.sort
 
 ## Code Style Guide
 
@@ -981,16 +1034,16 @@ var MYAPP = MYAPP || {};
 
 一个作用域内仅出现一个var关键字,且为所有变量赋初值:
 
--   简洁代码
--   提示变量类型
+- 简洁代码
+- 提示变量类型
 
 ```javascript
 var a = 1,        // int
-	b = 2,        // int
-	sum = a + b,  // int
-	obj = {},     // object
-	i = 1.0,      // float
-	j = false;    // boolean
+  b = 2,        // int
+  sum = a + b,  // int
+  obj = {},     // object
+  i = 1.0,      // float
+  j = false;    // boolean
 ```
 
 #### 条件表达式
@@ -1001,26 +1054,27 @@ condition ? if-coding : else-coding;
 
 #### 换行
 
--    键入最后一个运算符后再换行, 运算符置于行尾可使 automatic semicolon insertion 机制失效
--    换行后保持 2 个缩进层次
+- 键入最后一个运算符后再换行, 运算符置于行尾可使 automatic semicolon insertion 机制失效
+- 换行后保持 2 个缩进层次
 
 #### 空格
 
 Good places to use a white space include:
--   ,/; 后
--   +,-,*,/,<,>,= 前后
--   function () {}
--   function foo() {}
--   } if/for/while () {}
--   } else {}
+
+- ,/; 后
+- +,-,*,/,<,>,= 前后
+- function () {}
+- function foo() {}
+- } if/for/while () {}
+- } else {}
 
 ```javascript
 var d = 0,
 a = b + 1;
 
 if (a && b && c) {
-	d = a % c;
-	a += d;
+  d = a % c;
+  a += d;
 }
 
 // antipattern
@@ -1030,15 +1084,15 @@ var d= 0,
 a =b+1;
 
 if (a&& b&&c) {
-	d=a %c;
-	a+= d;
+  d=a %c;
+  a+= d;
 }
 ```
 
 #### 注释
 
--    上方插入空行
--    与下方语句统一缩进
+- 上方插入空行
+- 与下方语句统一缩进
 
 ```js
 /*
@@ -1090,15 +1144,15 @@ if (a&& b&&c) {
 
 ##### 参数
 
--   函数不应依赖于全局变量，实现与执行全局环境的的解耦
--   全局变量应以函数参数/依赖的形式，注入函数内部
+- 函数不应依赖于全局变量，实现与执行全局环境的的解耦
+- 全局变量应以函数参数/依赖的形式，注入函数内部
 
 #### 解耦
 
 ##### 事件处理与UI逻辑
 
--   事件处理函数与应用逻辑函数分开成单独函数,提高代码重用率
--   应用逻辑函数不依赖于 event 对象，其属性值作为参数传入，易于解耦与测试
+- 事件处理函数与应用逻辑函数分开成单独函数,提高代码重用率
+- 应用逻辑函数不依赖于 event 对象，其属性值作为参数传入，易于解耦与测试
 
 ```js
 var MyApp = {
@@ -1154,23 +1208,23 @@ if (document.getElementById) {
 
 #### Unit 测试
 
--   Jasmine
--   Mocha
+- Jasmine
+- Mocha
 
 #### UI 测试
 
--   用户行为: Karma/Selenium
--   功能测试: Phantomjs/Slimerjs/Karma
+- 用户行为: Karma/Selenium
+- 功能测试: Phantomjs/Slimerjs/Karma
 
 ### 可测试代码
 
--   完整注释
--   最小复杂度 = (扇入 * 扇出) ^ 2
--   可隔离性: 最小依赖性 + 松耦合性
+- 完整注释
+- 最小复杂度 = (扇入 * 扇出) ^ 2
+- 可隔离性: 最小依赖性 + 松耦合性
 
 #### 范例
 
--   使用依赖注入，将外部对象移至函数参数处(不在函数内部调用构造器): 易于构造 mock/stub, 降低扇出(函数复杂度)
+- 使用依赖注入，将外部对象移至函数参数处(不在函数内部调用构造器): 易于构造 mock/stub, 降低扇出(函数复杂度)
 
 ### 圈复杂度
 
@@ -1182,13 +1236,13 @@ V(G) = e - n + 2 **<10**
 
 #### 扇出(引用) **<7**
 
--   所引用外部对象/方法之和
--   高扇出: 高复杂度/高依赖性/高耦合度
+- 所引用外部对象/方法之和
+- 高扇出: 高复杂度/高依赖性/高耦合度
 
 #### 扇入(被引用)
 
--   其他对象/方法引用此函数的次数之和
--   顶层抽象代码 与 不常用功能 应保持低扇入
+- 其他对象/方法引用此函数的次数之和
+- 顶层抽象代码 与 不常用功能 应保持低扇入
 
 ### 耦合度
 
@@ -1208,10 +1262,10 @@ O.prototype.method = function() {};
 var Global = 'global';
 
 function A() {
-	Global = 'A';
+  Global = 'A';
 };
 function B() {
-	Global = 'B';
+  Global = 'B';
 }
 ```
 
@@ -1225,7 +1279,7 @@ var absFactory = new AbstractFactory({ env: 'TEST' });
 
 ```js
 O.prototype.makeBread = function(args) {
-	return new Bread(args.type, args.size);
+  return new Bread(args.type, args.size);
 }
 
 O.makeBread({ type: wheat, size: 99, name: 'foo' });
@@ -1239,21 +1293,21 @@ O.makeBread({ type: wheat, size: 99, name: 'foo' });
 
 #### 测试原则
 
--   代码覆盖率
--   非法值测试
--   边界测试
--   非边界测试
+- 代码覆盖率
+- 非法值测试
+- 边界测试
+- 非边界测试
 
 #### 隔离被测代码
 
--   编写代码时，保持最小复杂度(最小依赖，最低耦合)
--   利用 mock/stub 模拟外部依赖/测试数据
+- 编写代码时，保持最小复杂度(最小依赖，最低耦合)
+- 利用 mock/stub 模拟外部依赖/测试数据
 
 #### mock/stub/spy
 
--   mock: 模拟对象中的方法/接口
--   stub: 模拟对象中的返回值
--   spy: 在原有对象的基础上，增加监视用变量/方法 e.g assert/调用次数/参数限制
+- mock: 模拟对象中的方法/接口
+- stub: 模拟对象中的返回值
+- spy: 在原有对象的基础上，增加监视用变量/方法 e.g assert/调用次数/参数限制
 
 ```js
 var mockery = require('mockery');
@@ -1388,7 +1442,7 @@ A read-eval-print loop(REPL) can replace node REPL.
 提供 babel 转码 API
 
 ```bash
-$ npm install babel-core --save
+npm install babel-core --save
 ```
 
 ```js
@@ -1414,30 +1468,30 @@ babel.transformFromAst(ast, code, options);
 
 ### Variable
 
--   一方面规定，var命令和function命令声明的全局变量，依旧是全局对象的属性
--   另一方面规定，let命令、const命令、class命令声明的全局变量，不属于全局对象的属性
+- 一方面规定，var命令和function命令声明的全局变量，依旧是全局对象的属性
+- 另一方面规定，let命令、const命令、class命令声明的全局变量，不属于全局对象的属性
 
 #### let
 
--   不存在变量提升
--   块级作用域(Temporal Dead Zone)
--   块级作用域内定义的变量/函数，在块级作用域外 ReferenceError
+- 不存在变量提升
+- 块级作用域(Temporal Dead Zone)
+- 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError
 
 #### const
 
--   const一旦声明变量，就必须立即初始化，不能留到以后赋值
--   块级作用域(Temporal Dead Zone)
--   引用一个引用变量时，只表示此变量地址不可变，但所引用变量的值/属性可变(* const)
+- const一旦声明变量，就必须立即初始化，不能留到以后赋值
+- 块级作用域(Temporal Dead Zone)
+- 引用一个引用变量时，只表示此变量地址不可变，但所引用变量的值/属性可变(* const)
 
 ### Destructuring(Pattern Matching)
 
--   **建议只要有可能，就不要在模式中放置圆括号**
--   赋值语句的非模式部分，可以使用圆括号
+- **建议只要有可能，就不要在模式中放置圆括号**
+- 赋值语句的非模式部分，可以使用圆括号
 
 #### 默认值
 
--   ES6内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
--   如果一个数组成员不严格等于undefined，默认值不会生效
+- ES6内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
+- 如果一个数组成员不严格等于undefined，默认值不会生效
 
 ```js
 var [x = 1] = [undefined];
@@ -1464,9 +1518,9 @@ let [x = y, y = 1] = [];     // ReferenceError
 
 ##### 简化函数的参数与返回值
 
--   可用于工厂(factory)/设置(options)模式: 传参一般为 options 对象，具有固定的属性名
--   一次性定义多个参数
--   一次性定义多个参数的默认值
+- 可用于工厂(factory)/设置(options)模式: 传参一般为 options 对象，具有固定的属性名
+- 一次性定义多个参数
+- 一次性定义多个参数的默认值
 
 ```js
 // 参数是一组有次序的值
@@ -1557,9 +1611,9 @@ const { SourceMapConsumer, SourceNode } = require("source-map");
 
 等号右边必须为数组等实现了 Iterator 接口的对象,否则报错
 
--   Array
--   Set
--   Generator 函数
+- Array
+- Set
+- Generator 函数
 
 ```js
 let [foo, [[bar], baz]] = [1, [[2], 3]];
@@ -1599,14 +1653,14 @@ sixth // 5
 
 #### Object Style Matching
 
--   真正被赋值的是后者，而不是前者
+- 真正被赋值的是后者，而不是前者
 
 ```js
 let {pattern: variable} = { key: value };
 ```
 
--   解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象
--   undefined/null 无法转化为对象
+- 解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象
+- undefined/null 无法转化为对象
 
 ```js
 let { prop: x } = undefined; // TypeError
@@ -1700,8 +1754,8 @@ move(); // [0, 0]
 
 #### Methods
 
--    string.codePointAt(index): 正确处理 4 字节存储字符
--    string.fromCodePoint(codePoint)
+- string.codePointAt(index): 正确处理 4 字节存储字符
+- string.fromCodePoint(codePoint)
 
 ```js
 function is32Bit(c) {
@@ -1712,8 +1766,8 @@ String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y'
 // true
 ```
 
--   string.includes(substr)/startsWith(substr)/endsWith(substr)
--   使用第二个参数n时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束
+- string.includes(substr)/startsWith(substr)/endsWith(substr)
+- 使用第二个参数n时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束
 
 ```js
 var s = 'Hello world!';
@@ -1723,7 +1777,7 @@ s.endsWith('Hello', 5) // true
 s.includes('Hello', 6) // false
 ```
 
--   repeat(times)
+- repeat(times)
 
 ```js
 'hello'.repeat(2) // "hellohello"
@@ -1739,7 +1793,7 @@ s.includes('Hello', 6) // false
 'na'.repeat('3') // "nanana"
 ```
 
--    padStart/padEnd(len, paddingStr)
+- padStart/padEnd(len, paddingStr)
 
 ```js
 '1'.padStart(10, '0') // "0000000001"
@@ -1752,7 +1806,7 @@ s.includes('Hello', 6) // false
 
 #### Template String
 
-` str ` 表示模板字符串
+`str` 表示模板字符串
 
 ```js
 // 普通字符串
@@ -1771,33 +1825,33 @@ s.includes('Hello', 6) // false
 `foo ${fn()} bar`
 ```
 
--   编译模板(小型模板引擎)
+- 编译模板(小型模板引擎)
 
 ```js
 function compile(template){
-	  var evalExpr = /<%=(.+?)%>/g;
-	  var expr = /<%([\s\S]+?)%>/g;
+    var evalExpr = /<%=(.+?)%>/g;
+    var expr = /<%([\s\S]+?)%>/g;
 
-	  template = template
-	    .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
-	    .replace(expr, '`); \n $1 \n  echo(`');
+    template = template
+      .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
+      .replace(expr, '`); \n $1 \n  echo(`');
 
-	  template = 'echo(`' + template + '`);';
+    template = 'echo(`' + template + '`);';
 
-	  var script =
-	  `(function parse(data){
-	    var output = "";
+    var script =
+    `(function parse(data){
+      var output = "";
 
-	    function echo(html){
-	      output += html;
-	    }
+      function echo(html){
+        output += html;
+      }
 
-	    ${ template }
+      ${ template }
 
-	    return output;
-	  })`;
+      return output;
+    })`;
 
-	  return script;
+    return script;
 }
 
 var template = `
@@ -1827,14 +1881,14 @@ var libraryHtml = hashTemplate`
 `;
 ```
 
--   国际化处理
+- 国际化处理
 
 ```js
 i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`
 // "欢迎访问xxx，您是第xxxx位访问者！"
 ```
 
--   XSS 攻击
+- XSS 攻击
 
 ```js
 var message =
@@ -1857,7 +1911,7 @@ function SaferHTML(templateData) {
 }
 ```
 
--   运行代码
+- 运行代码
 
 ```js
 jsx`
@@ -1882,8 +1936,8 @@ HelloWorldApp.main();
 
 ### RegExp
 
--   u 修饰符
--   y(粘连全局符) 修饰符号隐含了头部匹配的标志
+- u 修饰符
+- y(粘连全局符) 修饰符号隐含了头部匹配的标志
 
 ```js
 function codePointLength(text) {
@@ -1899,11 +1953,11 @@ codePointLength(s) // 2
 
 ### Number
 
--   0bxxx/0Bxxx
--   0oxxx/0Oxxx
--   Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()
--   Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`
--   ** 指数运算符
+- 0bxxx/0Bxxx
+- 0oxxx/0Oxxx
+- Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()
+- Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`
+- ** 指数运算符
 
 ### Array
 
@@ -1911,10 +1965,10 @@ codePointLength(s) // 2
 
 强大的**函数式**方法
 
--   伪数组对象(array-like object)
--   可枚举对象(iterable object)
--   克隆数组
--   map 函数
+- 伪数组对象(array-like object)
+- 可枚举对象(iterable object)
+- 克隆数组
+- map 函数
 
 ```js
 // Set
