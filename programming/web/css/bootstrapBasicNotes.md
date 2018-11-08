@@ -100,7 +100,10 @@ navbar > container > nav/navbar-header/navbar-nav/navbar-form > li/a
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button
+        type="button" class="navbar-toggle collapsed"
+        data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+        aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -115,7 +118,11 @@ navbar > container > nav/navbar-header/navbar-nav/navbar-form > li/a
         <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Link</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a
+          href="#" class="dropdown-toggle" data-toggle="dropdown"
+          role="button" aria-haspopup="true" aria-expanded="false">
+            Dropdown<span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
@@ -136,7 +143,10 @@ navbar > container > nav/navbar-header/navbar-nav/navbar-form > li/a
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+          role="button" aria-haspopup="true" aria-expanded="false">
+            Dropdown <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
@@ -248,7 +258,8 @@ body {
   <li role="presentation" class="active"><a href="#">Home</a></li>
     <li role="presentation" class="disabled"><a href="#">Messages</a></li>
   <li role="presentation" class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+      aria-haspopup="true" aria-expanded="false">
           Dropdown <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
@@ -265,10 +276,14 @@ body {
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+    <li role="presentation" class="active"><a href="#home" aria-controls="home"
+      role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile"
+      role="tab" data-toggle="tab">Profile</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages"
+      role="tab" data-toggle="tab">Messages</a></li>
+    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab"
+      data-toggle="tab">Settings</a></li>
   </ul>
 
   <!-- Tab panes -->
@@ -300,8 +315,10 @@ $('#myTabs li:eq(2) a').tab('show') // Select third tab (0-indexed)
 
 - hide.bs.tab (on the current active tab)
 - show.bs.tab (on the to-be-shown tab)
-- hidden.bs.tab (on the previous active tab, the same one as for the hide.bs.tab event)
-- shown.bs.tab (on the newly-active just-shown tab, the same one as for the show.bs.tab event)
+- hidden.bs.tab (on the previous active tab,
+  the same one as for the hide.bs.tab event)
+- shown.bs.tab (on the newly-active just-shown tab,
+  the same one as for the show.bs.tab event)
 
 ```js
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -315,11 +332,14 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 href/data-target -> id
 
 ```html
-<a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+<a class="btn btn-primary" role="button" data-toggle="collapse"
+href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
   Link with href
 </a>
 
-<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+<button class="btn btn-primary" type="button" data-toggle="collapse"
+data-target="#collapseExample" aria-expanded="false"
+aria-controls="collapseExample">
   Button with data-target
 </button>
 
@@ -338,43 +358,72 @@ panel-body/list-group
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <a role="button" data-toggle="collapse" data-parent="#accordion"
+        href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           Collapsible Group Item #1
         </a>
       </h4>
     </div>
     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+        terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+        skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+        single-origin coffee nulla assumenda shoreditch et. Nihil anim
+        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+        sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
+        you probably haven't heard of them accusamus labore sustainable VHS.
       </div>
     </div>
   </div>
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <a class="collapsed" role="button" data-toggle="collapse"
+        data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+        aria-controls="collapseTwo">
           Collapsible Group Item #2
         </a>
       </h4>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+        terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+        skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+        single-origin coffee nulla assumenda shoreditch et. Nihil anim
+        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+        sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
+        you probably haven't heard of them accusamus labore sustainable VHS.
       </div>
     </div>
   </div>
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        <a class="collapsed" role="button" data-toggle="collapse"
+        data-parent="#accordion" href="#collapseThree" aria-expanded="false"
+        aria-controls="collapseThree">
           Collapsible Group Item #3
         </a>
       </h4>
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
       <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+        terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+        skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+        single-origin coffee nulla assumenda shoreditch et. Nihil anim
+        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+        sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
+        you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
     </div>
   </div>
 </div>
@@ -417,14 +466,16 @@ step=”(步长:指定输入数字必须倍数关系)”
   <div class="form-group">
     <label for="firstname" class="col-sm-2 control-label">First Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name">
+      <input type="text" class="form-control" id="firstname" name="firstname"
+      placeholder="Enter First Name">
     </div>
   </div>
   <!-- input -->
   <div class="form-group">
     <label for="lastname" class="col-sm-2 control-label">Last Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name">
+      <input type="text" class="form-control" id="lastname" name="lastname"
+      placeholder="Enter Last Name">
     </div>
   </div>
   <!-- input-addon -->
@@ -433,12 +484,14 @@ step=”(步长:指定输入数字必须倍数关系)”
     <div class="col-xs-5 col-sm-4 col-md-3">
       <div class="input-group">
         <div class="input-group-addon">(</div>
-        <input type="tel" class="form-control" id="areacode" name="areacode" placeholder="Area code">
+        <input type="tel" class="form-control" id="areacode" name="areacode"
+        placeholder="Area code">
         <div class="input-group-addon">)</div>
       </div>
     </div>
     <div class="col-xs-7 col-sm-6 col-md-7">
-      <input type="tel" class="form-control" id="telnum" name="telnum" placeholder="Tel. number">
+      <input type="tel" class="form-control" id="telnum" name="telnum"
+      placeholder="Tel. number">
     </div>
   </div>
   <!-- input -->
@@ -506,7 +559,9 @@ step=”(步长:指定输入数字必须倍数关系)”
   <div class="col-lg-6">
     <div class="input-group">
       <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+        <button type="button" class="btn btn-default dropdown-toggle"
+        data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">Action <span class="caret"></span></button>
         <ul class="dropdown-menu">
           <li><a href="#">Action</a></li>
           <li><a href="#">Another action</a></li>
@@ -771,7 +826,8 @@ step=”(步长:指定输入数字必须倍数关系)”
 
 ```html
 <div class="alert alert-warning alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <button type="button" class="close" data-dismiss="alert"
+  aria-label="Close"><span aria-hidden="true">&times;</span></button>
   <strong>Warning!</strong> Better check yourself, you're not looking too good.
   <a href="#" class="alert-link">...</a>
 </div>
@@ -787,22 +843,30 @@ step=”(步长:指定输入数字必须倍数关系)”
 
 ```html
 <div class="progress">
-  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+  <div class="progress-bar progress-bar-success" role="progressbar"
+  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:
+  40%">
     <span class="sr-only">40% Complete (success)</span>
   </div>
 </div>
 <div class="progress">
-  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+  <div class="progress-bar progress-bar-info" role="progressbar"
+  aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:
+  20%">
     <span class="sr-only">20% Complete</span>
   </div>
 </div>
 <div class="progress">
-  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+  <div class="progress-bar progress-bar-warning" role="progressbar"
+  aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:
+  60%">
     <span class="sr-only">60% Complete (warning)</span>
   </div>
 </div>
 <div class="progress">
-  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+  <div class="progress-bar progress-bar-danger" role="progressbar"
+  aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:
+  80%">
     <span class="sr-only">80% Complete (danger)</span>
   </div>
 </div>
@@ -822,13 +886,17 @@ $(function () {
 ```
 
 ```html
-<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+<button type="button" class="btn btn-default" data-toggle="tooltip"
+data-placement="left" title="Tooltip on left">Tooltip on left</button>
 
-<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+<button type="button" class="btn btn-default" data-toggle="tooltip"
+data-placement="top" title="Tooltip on top">Tooltip on top</button>
 
-<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+<button type="button" class="btn btn-default" data-toggle="tooltip"
+data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
 
-<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
+<button type="button" class="btn btn-default" data-toggle="tooltip"
+data-placement="right" title="Tooltip on right">Tooltip on right</button>
 ```
 
 ### Popover
@@ -848,20 +916,28 @@ $(function () {
 ```
 
 ```html
-<button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" title="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<button type="button" class="btn btn-default" data-container="body"
+data-toggle="popover" data-placement="left" title="left"
+data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
   Popover on left
 </button>
 
-<button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" title="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<button type="button" class="btn btn-default" data-container="body"
+data-toggle="popover" data-placement="top" title="top" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus.">
   Popover on top
 </button>
 
-<button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" title="bottom" data-content="Vivamus
+<button type="button" class="btn btn-default" data-container="body"
+data-toggle="popover" data-placement="bottom" title="bottom"
+data-content="Vivamus
 sagittis lacus vel augue laoreet rutrum faucibus.">
   Popover on bottom
 </button>
 
-<button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="right" title="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<button type="button" class="btn btn-default" data-container="body"
+data-toggle="popover" data-placement="right" title="right"
+data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
   Popover on right
 </button>
 ```
@@ -887,7 +963,8 @@ $().modal('');
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal"
+        aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
@@ -903,15 +980,20 @@ $().modal('');
 ```
 
 ```html
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+<button type="button" class="btn btn-primary" data-toggle="modal"
+data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+<button type="button" class="btn btn-primary" data-toggle="modal"
+data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
+<button type="button" class="btn btn-primary" data-toggle="modal"
+data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for
+@getbootstrap</button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal"
+        aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="exampleModalLabel">New message</h4>
       </div>
       <div class="modal-body">
@@ -1017,11 +1099,13 @@ $().modal('');
   </div>
 
   <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+  <a class="left carousel-control" href="#carousel-example-generic"
+  role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+  <a class="right carousel-control" href="#carousel-example-generic"
+  role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
@@ -1031,7 +1115,8 @@ $().modal('');
 ```js
 .carousel(options)
 
-Initializes the carousel with an optional options object and starts cycling through items.
+Initializes the carousel with an optional options object
+and starts cycling through items.
 Copy
 
 $('.carousel').carousel({

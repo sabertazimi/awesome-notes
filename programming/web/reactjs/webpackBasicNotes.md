@@ -104,5 +104,7 @@ require.ensure([], () => {});
 
 1. 尽量不写带有副作用的代码: 诸如编写了立即执行函数, 在函数里又使用了外部变量等
 2. 如果对 ES6 语义特性要求不是特别严格, 可以开启 babel 的 loose 模式 etc. 是否真的要不可枚举 class 的属性
-3. 如果是开发 JavaScript 库, 使用 rollup(ES6 module export + code flow static analysis), 并且提供 ES6 module 的版本, 入口文件地址设置到 package.json 的 module 字段
-4. 如果 JavaScript 库开发中, 难以避免的产生各种副作用代码, 可以将功能函数或者组件, 打包成单独的文件或目录, 以便于用户可以通过目录去加载.如有条件，也可为自己的库开发单独的 webpack-loader, 便于用户按需加载
+3. 如果是开发 JavaScript 库, 使用 rollup(ES6 module export + code flow static analysis),
+  并且提供 ES6 module 的版本, 入口文件地址设置到 package.json 的 module 字段
+4. 如果 JavaScript 库开发中, 难以避免的产生各种副作用代码, 可以将功能函数或者组件, 打包成单独的文件或目录,
+  以便于用户可以通过目录去加载.如有条件，也可为自己的库开发单独的 webpack-loader, 便于用户按需加载

@@ -58,7 +58,8 @@ $xl: $base * $ratio *ratio;
 
 #### vertical rhythms
 
-keep vertical spaces between elements on a page consistent (and relative) to each other:
+keep vertical spaces between elements on a page
+consistent (and relative) to each other:
 
 - Set the vertical white space between elements to a multiple of base-size
 - Set the line-height of all text elements to a multiple of base-size
@@ -77,7 +78,8 @@ keep vertical spaces between elements on a page consistent (and relative) to eac
 - [CSS Property Triggers](https://github.com/GoogleChromeLabs/css-triggers)
 - [JS DOM API Triggers](https://gist.github.com/paulirish/5d52fb081b3570c81e3a)
 
-avoid to frequently change css property or call JS DOM API triggering layout stage (reflow)
+avoid to frequently change css property
+or call JS DOM API triggering layout stage (reflow)
 
 ### reset.css
 
@@ -106,7 +108,8 @@ avoid to frequently change css property or call JS DOM API triggering layout sta
 
 [CSS Containment](https://developers.google.com/web/updates/2016/06/css-containment)
 
-contain 属性允许开发者声明当前元素和它的内容尽可能的独立于 DOM 树的其他部分。这使得浏览器在重新计算布局、样式、绘图或它们的组合的时候，只会影响到有限的 DOM 区域，而不是整个页面
+contain 属性允许开发者声明当前元素和它的内容尽可能的独立于 DOM 树的其他部分。
+这使得浏览器在重新计算布局、样式、绘图或它们的组合的时候，只会影响到有限的 DOM 区域，而不是整个页面
 
 ```css
 /* 无布局包含*/

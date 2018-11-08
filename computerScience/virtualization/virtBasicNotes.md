@@ -50,7 +50,8 @@ func run() {
     cmd.Stdout = os.Stdout
     cmd.Stderr = os.Stderr
     cmd.SysProcAttr = &syscall.SysProcAttr {
-        Cloneflags: syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID | syscall.CLONE_NEWNS | syscall.CLONE_NEWUSER,
+        Cloneflags: syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID
+          | syscall.CLONE_NEWNS | syscall.CLONE_NEWUSER,
         Credential: &syscall.Credential{Uid: 0, Gid: 0},
         UidMappings: []syscall.SysProcIDMap{
             {ContainerID: 0, HostID: os.Getuid(), Size: 1},
@@ -105,8 +106,11 @@ func cg() {
     cgroups := "/sys/fs/cgroup/"
     pids := filepath.Join(cgroups, "pids")
     os.Mkdir(filepath.Join(pids, "sabertazimi"), 0755)
-    must(ioutil.WriteFile(filepath.Join(pids, "sabertazimi/pids.max"), []byte("20"), 0700))
-    must(ioutil.WriteFile(filepath.Join(pids, "sabertazimi/notify_on_release"), []byte("1"), 0700))
-    must(ioutil.WriteFile(filepath.Join(pids, "sabertazimi/cgroup.procs"), []byte(strconv.Itoa(os.Getpid())), 0700))
+    must(ioutil.WriteFile(filepath.Join(pids, "sabertazimi/pids.max"),
+      []byte("20"), 0700))
+    must(ioutil.WriteFile(filepath.Join(pids, "sabertazimi/notify_on_release"),
+      []byte("1"), 0700))
+    must(ioutil.WriteFile(filepath.Join(pids, "sabertazimi/cgroup.procs"),
+      []byte(strconv.Itoa(os.Getpid())), 0700))
 }
 ```

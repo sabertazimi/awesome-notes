@@ -102,7 +102,8 @@ ret
 
 ### Branch/Loop/Jump
 
-PrectPC | `W_valM`(无法预测) | `M_valP/M_valA`(在译码阶段合并信号量 valA 与 valP: PCUpdate 位于 Fetch,无需传递 valP, 只剩 call/jxxx 需要 valP)
+PrectPC | `W_valM`(无法预测) | `M_valP/M_valA`
+(在译码阶段合并信号量 valA 与 valP: PCUpdate 位于 Fetch,无需传递 valP, 只剩 call/jxxx 需要 valP)
 
 - AT: always taken
 - NT: never taken
@@ -188,7 +189,7 @@ CPI = 1.0 + lp + mp + rp:
 |:------:|:----------:|:-----:|:----------:|:---------:|
 |中断(interrupt)|I/O|async|next(concurrency)|磁盘|
 |陷阱(trap)|有意的异常/系统调用(内核模式)|sync|next|read/write/intN|
-|故障(fault)|潜在可恢复的错误|sync|possible current/abort(not return)|segmentation fault/floating exception|
+|故障(fault)|潜在可恢复的错误|sync|current/abort|segmentation fault/floating exception|
 |终止(abort)|不可恢复的错误|sync|abort(not return)|硬件错误|
 
 #### 异常处理程序
@@ -266,7 +267,8 @@ int main(void) {
     i = 0;
     while((retpid = waitpid(pid[i++], &status, 0)) > 0) {
         if (WIFEXITED(statue)) {
-            printf("child: %d terminated normally with exit status=%d\n", retpid, WEXITSTATUS(status));
+            printf("child: %d terminated normally with exit status=%d\n",
+              retpid, WEXITSTATUS(status));
         } else {
             printf("child %d terminated abnormally\n", retpid);
         }
@@ -388,13 +390,15 @@ int main(int argc, char **argv) {
         sigprocmask(SIG_BLOCK, &mask, NULL); // block SIGCHLD
 
         if ((pid = fork()) == 0) {
-            sigprocmask(SIG_UNBLOCK, &mask, NULL); // unblock SIGCHLD in child, make it can transfer signal
+            // unblock SIGCHLD in child, make it can transfer signal
+            sigprocmask(SIG_UNBLOCK, &mask, NULL);
             execve("/bin/date", argv, NULL);
         }
 
         // parent process
         addjob(pid);
-        sigprocmask(SIG_UNBLOCK, &mask, NULL); // after addjob, unblock SIGCHLD, make it can handle signal
+        // after addjob, unblock SIGCHLD, make it can handle signal
+        sigprocmask(SIG_UNBLOCK, &mask, NULL);
     }
 }
 ```

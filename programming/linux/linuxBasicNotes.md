@@ -310,7 +310,8 @@ screen -r
   The format for /etc/passwd and other human-readable files.
 6. Games
 7. Conventions and miscellaneous
-  Overviews of various topics, conventions and protocols, character set standards, and miscellaneous other things.
+  Overviews of various topics, conventions and protocols,
+  character set standards, and miscellaneous other things.
 8. System management commands
   Commands like mount(8), many of which only root can execute.
 
@@ -411,7 +412,11 @@ groupdel test2
 
 - groups someuser
 - cat /etc/group
-- cat /etc/passwd |awk -F [:] ‘{print $4}’ |sort|uniq | getent group |awk -F [:] ‘{print $1}’
+
+```bash
+cat /etc/passwd | awk -F [:] ‘{print $4}’
+\ |sort|uniq | getent group |awk -F [:] ‘{print $1}’
+```
 
 #### 用户操作
 

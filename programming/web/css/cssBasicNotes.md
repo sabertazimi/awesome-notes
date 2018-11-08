@@ -221,7 +221,8 @@ specificiy has 4 bits - thousands, hundreds, tens, ones `0000`:
 - ones: element selector, pseudo-element(::)
 
 > Universal selector (*), combinators (+, >, ~, ' ')
-> negation pseudo-class (:not) have no effect on specificity, but selectors in it have effect on specificity
+> negation pseudo-class (:not) have no effect on specificity,
+> but selectors in it have effect on specificity
 
 ```scss
 h1 {
@@ -286,7 +287,9 @@ div div .nav:nth-child(2) a:hover {
 }
 ```
 
-Styles for a directly targeted element will always take precedence over inherited styles, regardless of the specificity of the inherited rule
+Styles for a directly targeted element will
+always take precedence over inherited styles,
+regardless of the specificity of the inherited rule
 
 ```css
 #parent {
@@ -303,36 +306,50 @@ h1 {
 
 ### Initial Value
 
-The initial value of a CSS property is its default value, as listed in its definition table
+The initial value of a CSS property is its default value,
+as listed in its definition table
 
 ### Specified Value
 
-The specified value of a CSS property is the value it receives from the document's style sheet
+The specified value of a CSS property is the value
+it receives from the document's style sheet
 
 ### Computed Value
 
-The computed value of a CSS property is the value that is transferred from parent to child during inheritance. It is calculated from the specified value by:
+The computed value of a CSS property is the value that
+is transferred from parent to child during inheritance.
+It is calculated from the specified value by:
 
 1. Handling the special values `inherit`, `initial`, `unset`, and `revert`
-2. Doing the computation needed to reach the value described in the "Computed value" line in the property's definition table
+2. Doing the computation needed to reach the value described in the
+  "Computed value" line in the property's definition table
 
 ### Used Value
 
-The used value of a CSS property is its value after all calculations have been performed on the computed value:
+The used value of a CSS property is its value after all calculations
+have been performed on the computed value:
 
 - The used values of dimensions (e.g., width, line-height) are in pixels
-- The used values of shorthand properties (e.g., background) are consistent with those of their component properties (e.g., background-color or background-size) and with position and float
+- The used values of shorthand properties (e.g., background)
+  are consistent with those of their component properties
+  (e.g., background-color or background-size) and with position and float
 
 ### Actual Value
 
-The actual value of a CSS property is the used value of that property after any necessary approximations have been applied
+The actual value of a CSS property is the used value of that property
+after any necessary approximations have been applied
 
 The user agent performs four steps to calculate a property's actual (final) value:
 
-1. the specified value is determined based on the result of cascading, inheritance, or using the initial value.
-2. the computed value is calculated according to the specification (for example, a span with position: absolute will have its computed display changed to block)
+1. the specified value is determined based on the result of
+  cascading, inheritance, or using the initial value.
+2. the computed value is calculated according to the specification
+  (for example, a span with position:
+  absolute will have its computed display changed to block)
 3. layout is calculated, resulting in the used value
-4. the used value is transformed according to the limitations of the local environment, resulting in the actual value
+4. the used value is transformed according to
+  the limitations of the local environment,
+  resulting in the actual value
 
 > initial -> specified -> computed -> used -> actual value
 
@@ -385,7 +402,8 @@ body {
 }
 ```
 
-- Size in em if the font-size should be modular (relative to it's context/parent): `Modular Font Size`
+Size in em if the font-size should be modular
+(relative to it's context/parent): `Modular Font Size`
 
 ```css
 .container {
@@ -586,7 +604,8 @@ body {
 
 - abstracts: $variables, @mixin function
 - vendors: external libraries (font-awesome, bootstrap)
-- base: normalize.css, reset.css, utils.css, font.css, base.css (margin-right, text-center, float-right)
+- base: normalize.css, reset.css, utils.css, font.css, base.css
+  (margin-right, text-center, float-right)
 - components: form.css, button.css, navbar.css, dropdown.css
 - layout: columns.css, grid.css, header.css, footer.css, section.css, navigation.css
 - pages: home.css, about.css
@@ -664,7 +683,9 @@ p[class|=a] {color: #333;} //定位页面里所有的P段落里具有class属性
 `E[attr~=val]`
 
 ```scss
-div[title~=english] {color: #f88;} //定位页面里所有具有属性title且属性值里拥有完整单词english的div容器，比如title="english"以及title="a english"
+// 定位页面里所有具有属性title且属性值里拥有完整单词english的div容器
+// 比如title="english"以及title="a english"
+div[title~=english] {color: #f88;}
 ```
 
 `E[attr^=val]`
@@ -852,8 +873,10 @@ cal(10em + 3px);
 
 ### Box Model
 
-- block-level box: display 属性为 block, list-item, table 的元素，会生成 block-level box，并且参与 block formatting context
-- inline-level box: display 属性为 inline, inline-block, inline-table 的元素，会生成 inline-level box，并且参与 inline formatting context
+- block-level box: display 属性为 block, list-item, table 的元素,
+  会生成 block-level box，并且参与 block formatting context
+- inline-level box: display 属性为 inline, inline-block, inline-table 的元素，
+  会生成 inline-level box，并且参与 inline formatting context
 - Flex Formatting Context(FFC)
 - Grid Formatting Context(GFC)
 
@@ -908,7 +931,8 @@ float make element specified value of `display`:
 
 #### 清除浮动
 
-**Best Practice**: 为父容器添加 clearfix class - `display: table` 防止外边距塌陷, `clear: both` 清楚浮动
+**Best Practice**: 为父容器添加 clearfix class
+`display: table` 防止外边距塌陷, `clear: both` 清楚浮动
 
 ```css
 .clearfix:before,
@@ -978,19 +1002,23 @@ position
 
 #### Under the Hood of `flex`
 
-- when there is some free space left: true width = `flex-basis` (or `width`) + `flex-grow`/sum of `flex-grow`
-- when there is not enough space: true width = `flex-basis` (or `width`) - `flex-shrink`/sum of `flex-shrink`
+- when there is some free space left:
+  true width = `flex-basis` (or `width`) + `flex-grow`/sum of `flex-grow`
+- when there is not enough space:
+  true width = `flex-basis` (or `width`) - `flex-shrink`/sum of `flex-shrink`
 - text nodes and pseudo-elements can be flex children
 
 #### Useful shorthand of `flex`
 
 - `flex:auto`:
 
-元素会根据自身的宽度与高度来确定尺寸，但是会自行伸长以吸收flex容器中额外的自由空间，也会缩短至自身最小尺寸以适应容器 equal to`flex: 1 1 auto`
+元素会根据自身的宽度与高度来确定尺寸，但是会自行伸长以吸收flex容器中额外的自由空间，
+也会缩短至自身最小尺寸以适应容器 equal to`flex: 1 1 auto`
 
 - `flex:initial`:
 
-属性默认值， 元素会根据自身宽高设置尺寸。它会缩短自身以适应容器，但不会伸长并吸收flex容器中的额外自由空间来适应容器 equal to `flex: 0 1 auto`
+属性默认值， 元素会根据自身宽高设置尺寸。它会缩短自身以适应容器，
+但不会伸长并吸收flex容器中的额外自由空间来适应容器 equal to `flex: 0 1 auto`
 
 - `flex:none`:
 
@@ -1136,7 +1164,10 @@ main {
 .container {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-columns: repeat(3, 1fr);
-  /* grid-template-columns: repeat([auto-fit / auto-fill / numbers], minmax(60px, 1fr)); */
+  /*
+   * grid-template-columns:
+   *   repeat([auto-fit / auto-fill / numbers], minmax(60px, 1fr));
+   */
 
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-rows: minmax(90px, 1fr);
@@ -1177,7 +1208,8 @@ main {
 
 - inline-block + inline-block
 - float + float
-- float + margin-left (block element ignore float element, inline element surround float element)
+- float + margin-left
+  (block element ignore float element, inline element surround float element)
 - absolute + margin-left (absolute element not in normal flow)
 - float + BFC
 
@@ -1236,9 +1268,11 @@ the float area, causing adjacent elements to overlap the floated element. A nega
 margin in the direction of the float will pull the floated element in that direction.
 
 1. HTML: .middle first
-2. padding-left and padding-right to .container, `min-width: 2 * (leftWidth + rightWidth)` to container
+2. padding-left and padding-right to .container,
+  `min-width: 2 * (leftWidth + rightWidth)` to container
 3. Float: `float: left` to .left/.middle/.right
-4. Negative Margin: `margin-left: -100%` to .left, `margin-right: -rightWidth px` to .right
+4. Negative Margin: `margin-left: -100%` to .left,
+  `margin-right: -rightWidth px` to .right
 5. Move: `right: leftWidth px` to .left
 
 ```html
@@ -1510,7 +1544,8 @@ normal,small-caps(小型大写字母)
 }
 
 一淘UX: {
-    font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+    font-family: Helvetica, 'Hiragino Sans GB',
+      'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
 }
 
 {
@@ -2015,7 +2050,8 @@ window.addEventListener('resize', () => {
 
 ## Design
 
-content -> centering -> font family -> spacing -> color&contrast -> balance(position) -> primary/secondary color -> custom font -> images/links
+content -> centering -> font family -> spacing -> color&contrast
+-> balance(position) -> primary/secondary color -> custom font -> images/links
 
 > reference: [web design in 4 minutes](http://jgthms.com/web-design-in-4-minutes/#share)
 

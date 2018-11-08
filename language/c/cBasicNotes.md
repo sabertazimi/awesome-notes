@@ -173,7 +173,8 @@ void swap(void *vp1, void *vp2, int size) {
 ##### 实现
 
 ```c
-void *lsearch(void *key, void *base, int n, int elemSize, int (*cmpfn)(void *, void *)) {
+void *lsearch(void *key, void *base, int n, int elemSize,
+  int (*cmpfn)(void *, void *)) {
     for (int i = 0;i < n;i++) {
         void * elemAddr = (char *)base + i * elemSize;
         if (cmpfn(key, elemAddr) == 0) {
@@ -378,7 +379,11 @@ typedef unsigned long int pthread_t;
  * @param  {线程运行函数的起始地址} void *(*__start_routine) (void *)
  * @param  {运行函数的参数}        void *__arg
  */
-extern int pthread_create __P ((pthread_t *__thread, __const pthread_attr_t *__attr, void *(*__start_routine) (void *)， void *__arg));
+extern int pthread_create __P ((
+  pthread_t *__thread,
+  __const pthread_attr_t *__attr,
+  void *(*__start_routine) (void *)， void *__arg)
+);
 　　
 /**
  * 等待线程

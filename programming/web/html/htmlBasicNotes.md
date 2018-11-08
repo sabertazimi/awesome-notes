@@ -324,13 +324,15 @@ table>.row*4>.cell*3
   <fieldset>
     <legend>这是分区的标题</legend>
     <div>选择尺寸：</div>
-    <input type="checkbox"多选框 name="size"数据名称，交给后台 value="5"值 id="cb_0" checked disabled 默认勾选，无法更改>
+    <input type="checkbox"多选框 name="size"数据名称，交给后台
+      value="5"值 id="cb_0" checked disabled 默认勾选，无法更改>
     <label for="cb_0">5寸</label>
     <!-- 一个input一个label，一一对应，同类name相同 -->
     <input type="radio"单选框 name="material" value="fushi" id="rd_0">
     <label for="rd_0">富士，单选第一个</label>
 
-    <input type="text"单行文本框，默认 id="dexcription" placeholder="里面是提示" value="这里是默认内容" readonly只读 hidden隐藏>
+    <input type="text"单行文本框，默认 id="dexcription" placeholder="里面是提示"
+      value="这里是默认内容" readonly只读 hidden隐藏>
     <input type="submit"提交按钮> == <button type="submit">提交</button>
     <input type="reset"重置按钮>  == <button type="reset">重置</button>
 
@@ -743,7 +745,8 @@ boolean
 ```js
 if (window.navigator.geolocation) {
         //getCurrentPosition第三个参数为可选参数
-        navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {
+        navigator.geolocation.getCurrentPosition(
+          locationSuccess, locationError, {
         // 指示浏览器获取高精度的位置，默认为false
         enableHighAccuracy: true,
         // 指定获取地理位置的超时时间，默认不限时，单位为毫秒
@@ -987,7 +990,8 @@ sudo mkdir -p /var/www/blog/html
 sudo chown -R $USER:$USER /var/www/blog/html
 sudo chmod -R 755 /var/www
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/blog
-sudo vim /etc/nginx/sites-available/blog    # change 'root' and 'server_name' config, remove 'default_server' config
+# change 'root' and 'server_name' config, remove 'default_server' config
+sudo vim /etc/nginx/sites-available/blog
 sudo ln -s /etc/nginx/sites-available/blog /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx

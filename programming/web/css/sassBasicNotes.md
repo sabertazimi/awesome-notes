@@ -339,7 +339,8 @@ $x: 1;
 
 ### Built-in Functions
 
-[Offical Documentation](https://sass-lang.com/documentation/Sass/Script/Functions.html) or [Devdocs Guide](http://devdocs.io/sass-functions)
+[Offical Documentation](https://sass-lang.com/documentation/Sass/Script/Functions.html)
+or [Devdocs Guide](http://devdocs.io/sass-functions)
 
 #### Color
 
@@ -492,7 +493,10 @@ in `main.scss` file:
 6. import `components`
 7. import `themes` (or `pages` when it's not `partial` directory)
 
-When working on a very large project with a lot of abstract utilities, it might be interesting to group them by topic rather than type, for instance typography (_typography.scss), theming (_theming.scss), etc. Each file contains all the related helpers: variables, functions, mixins and placeholders.
+When working on a very large project with a lot of abstract utilities,
+it might be interesting to group them by topic rather than type,
+for instance typography (_typography.scss), theming (_theming.scss), etc.
+Each file contains all the related helpers: variables, functions, mixins and placeholders.
 
 ## Best Practice
 

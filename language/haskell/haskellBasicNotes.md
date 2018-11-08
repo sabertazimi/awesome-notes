@@ -888,7 +888,8 @@ class Monad m where
 {- 当出现异常后,之后所有的值都变为Nothing -}
 ghci> return (0,0) >>= landRight 2 >>= landLeft 2 >>= landRight 2
 Just (2,4)
-ghci> return (0,0) >>= landLeft 1 >>= landRight 4 >>= landLeft (-1) >>= landRight (-2)
+ghci> return (0,0) >>= landLeft 1 >>= landRight 4
+  \ >>= landLeft (-1) >>= landRight (-2)
 Nothing
 ```
 
@@ -1213,7 +1214,8 @@ instance (Eq m) => Eq (Maybe m) where
 ### `data` type
 
 ```haskell
-data SelfDefinedTypeName = ValueConstructorName ValueType .. | .. deriving (Typeclass, ..)
+data SelfDefinedTypeName =
+  ValueConstructorName ValueType .. | .. deriving (Typeclass, ..)
 ```
 
 - data范例

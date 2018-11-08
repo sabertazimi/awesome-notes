@@ -124,7 +124,8 @@ int main(void) {
     cout << "\t最大值：" << (numeric_limits<size_t>::max)();
     cout << "\t最小值：" << (numeric_limits<size_t>::min)() << endl;
     cout << "string: \t" << "所占字节数：" << sizeof(string) << endl;
-    // << "\t最大值：" << (numeric_limits<string>::max)() << "\t最小值：" << (numeric_limits<string>::min)() << endl;
+    // << "\t最大值：" << (numeric_limits<string>::max)() << "\t最小值："
+    // << (numeric_limits<string>::min)() << endl;
     cout << "type: \t\t" << "************size**************"<< endl;
     return 0;
 }
@@ -620,7 +621,8 @@ ll dfs(int pos, int state, bool lead, bool limit) {
         if() ...
         else if()...
 
-        ans += dfs(pos-1, new_state(pos, state) /*状态转移*/, lead && i==0, limit && i == a[pos])
+        ans += dfs(pos-1, new_state(pos, state) /*状态转移*/,
+          lead && i==0, limit && i == a[pos])
     }
 
     // 计算结束, 记录状态

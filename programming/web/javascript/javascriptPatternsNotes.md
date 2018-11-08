@@ -217,7 +217,8 @@ myApp.utils =  {};
 
 ### Core Idea
 
-- hold other object/object list as property: to invoke others' properties/methods and make a wrapper
+- hold other object/object list as property:
+  to invoke others' properties/methods and make a wrapper
 
 ### Details
 
@@ -429,7 +430,8 @@ module.exports = (function () {
     }
     // provide a function to change other public features
     function _reform(funcName, newFunc) {
-      if (typeof this[funcName] === 'function' || typeof this.prototype[funcName] === 'function') {
+      if (typeof this[funcName] === 'function'
+        || typeof this.prototype[funcName] === 'function') {
         delete this[funcName];
         this.prototype[funcName] = newFunc;
       }
@@ -876,10 +878,16 @@ module.exports = (function () {
 
     // public api
     function execute(command) {
-        return manager[command] && manager[command].apply(manager, [].slice.call(arguments, 1));
+        return manager[command] && manager[command].apply(
+          manager,
+          [].slice.call(arguments, 1)
+        );
     }
     function run(command) {
-        return manager[command] && manager[command].apply(manager, [].slice.call(arguments, 1));
+        return manager[command] && manager[command].apply(
+          manager,
+          [].slice.call(arguments, 1)
+        );
     }
 
     return {
@@ -1096,7 +1104,9 @@ pubsub.subscribe('sum', function (topic, data) {
             }, 0);
             console.log('sumof ' + data + ' : ' + sum);
         } else {
-            console.log('Please input number array: * ' + data + ' * is not number array!');
+            console.log(
+              'Please input number array: * ' + data + ' * is not number array!'
+            );
         }
     }
 
@@ -1154,7 +1164,10 @@ MicroEvent.prototype    = {
         this._events = this._events || {};
         if( event in this._events === false  )  return;
         for(var i = 0; i < this._events[event].length; i++){
-            this._events[event][i].apply(this, Array.prototype.slice.call(arguments, 1));
+            this._events[event][i].apply(
+              this,
+              Array.prototype.slice.call(arguments, 1)
+            );
         }
     }
 };
@@ -1238,9 +1251,8 @@ if( typeof module !== "undefined" && ('exports' in module)){
    // to consume
 
    $.subscribe("/search/tags", function( tags ) {
-
      // Ajax Request
-       $.getJSON( "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?" ,{
+     $.getJSON( "http://api.flickr.com/services/feeds/", {
               tags: tags,
               tagmode: "any",
               format: "json"

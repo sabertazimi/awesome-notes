@@ -42,7 +42,8 @@ class AnimalDB {
 
 #### Open-Closed Principle
 
-Software entities(Classes, modules, functions) should be open for extension, close for modification.
+Software entities(Classes, modules, functions) should be open for extension,
+close for modification.
 
 ```java
 const animals: Array<Animal> = [
@@ -280,7 +281,8 @@ class Rectangle implements IShape {
 
 Dependency should be on **abstractions** not concretions:
 
-- High-level modules should not depend upon low-level modules. Both should depend upon **abstractions**
+- High-level modules should not depend upon low-level modules.
+  Both should depend upon **abstractions**
 - Abstractions should not depend on details. Details should depend upon abstractions
 
 ```java

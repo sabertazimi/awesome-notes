@@ -105,7 +105,7 @@
 
 <!-- /TOC -->
 
-- Main                        ./index.js, ./server.js, or ./yourentryfile.js in the root
+- Main         ./index.js, ./server.js, or ./yourentryfile.js in the root
 - Supporting files in         ./lib/
 - Static HTTP files in        ./public/
 - Views or templates in       ./views/

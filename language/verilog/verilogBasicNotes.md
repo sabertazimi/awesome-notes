@@ -853,7 +853,8 @@ always @(posedge clock)
 
 initial begin
     #TIME;
-    $display("End of simulation time is %d , total number of clocks seen is %d expected is %d",$time,no_of_clocks,($time/5));
+    $display("End of simulation time is %d ,
+      total number of clocks seen is %d expected is %d",$time,no_of_clocks,($time/5));
     $finish;
 end
 ```

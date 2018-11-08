@@ -204,7 +204,10 @@ npm install gulp --save-dev
 #### Gulp Plugins
 
 ```bash
-npm install jshint gulp-jshint jshint-stylish gulp-imagemin gulp-concat gulp-uglify gulp-minify-css gulp-usemin gulp-cache gulp-changed gulp-rev gulp-rename gulp-notify  browser-sync del --save-dev
+npm install jshint gulp-jshint jshint-stylish --save-dev
+npm install gulp-imagemin gulp-concat gulp-uglify gulp-minify-css --save-dev
+npm install gulp-usemin gulp-cache gulp-changed gulp-rev --save-dev
+npm install gulp-rename gulp-notify  browser-sync del --save-dev
 ```
 
 #### Gulpfile.js
@@ -254,7 +257,11 @@ gulp.task('usemin',['jshint'], function () {
 // Images
 gulp.task('imagemin', function() {
   return del(['dist/images']), gulp.src('app/images/**/*')
-    .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    .pipe(cache(imagemin({
+      optimizationLevel: 3,
+      progressive: true,
+      interlaced: true
+    })))
     .pipe(gulp.dest('dist/images'))
     .pipe(notify({ message: 'Images task complete' }));
 });
@@ -931,8 +938,11 @@ Math.tan(x)
 - more garbage collection
 - more memory usage
 
-With help of `immutable.js`, object creation/garbage collection/memory usage can be alleviated.
-For example, in vanilla.js, `map2 === map1` become `false`, but in immutable.js `map2 === map1` become `true`
+With help of `immutable.js`,
+object creation/garbage collection/memory usage can be alleviated.
+
+For example, in vanilla.js, `map2 === map1` become `false`,
+but in immutable.js `map2 === map1` become `true`
 (copy free due to immutable data).
 
 ```js
@@ -2107,7 +2117,8 @@ console.log(bb.__proto__ === BB.prototype);
 - no arguments binding
 - no prototype binding
 - no suited for `New` constructor
-- not suited as methods of plain object (`this` in arrow function would be refer to `window`)
+- not suited as methods of plain object
+  (`this` in arrow function would be refer to `window`)
 
 ## Performance
 

@@ -14,8 +14,10 @@ particularly with the help of
 
 * Fully CSS-compatible
 * Language extensions such as variables, nesting, and mixins
-* Many {Sass::Script::Functions useful functions} for manipulating colors and other values
-* Advanced features like [control directives](#control_directives__expressions) for libraries
+* Many {Sass::Script::Functions useful functions}
+  for manipulating colors and other values
+* Advanced features like [control directives](#control_directives__expressions)
+  for libraries
 * Well-formatted, customizable output
 
 ## Syntax
@@ -117,7 +119,8 @@ Sass stylesheets don't work the same as views.
 They don't contain dynamic content,
 so the CSS only needs to be generated when the Sass file has been updated.
 By default, `.sass` and `.scss` files are placed in public/stylesheets/sass
-(this can be customized with the [`:template_location`](#template_location-option) option).
+(this can be customized with the
+[`:template_location`](#template_location-option) option).
 Then, whenever necessary, they're compiled into corresponding CSS files in public/stylesheets.
 For instance, public/stylesheets/sass/main.scss would be compiled to public/stylesheets/main.css.
 
@@ -130,13 +133,15 @@ that are all [`@import`](#import)ed into one large file.
 
 Without a framework, Sass puts the cached templates in the `.sass-cache` directory.
 In Rails and Merb, they go in `tmp/sass-cache`.
-The directory can be customized with the [`:cache_location`](#cache_location-option) option.
+The directory can be customized with the
+[`:cache_location`](#cache_location-option) option.
 If you don't want Sass to use caching at all,
 set the [`:cache`](#cache-option) option to `false`.
 
 ### Options
 
-Options can be set by setting the {Sass::Plugin::Configuration#options Sass::Plugin#options} hash
+Options can be set by setting the
+{Sass::Plugin::Configuration#options Sass::Plugin#options} hash
 in `environment.rb` in Rails or `config.ru` in Rack...
 
     Sass::Plugin.options[:style] = :compact
@@ -243,7 +248,9 @@ Available options are:
   this option should only be set directly, not accessed or modified.
   Use the {Sass::Plugin::Configuration#template_location_array Sass::Plugin#template_location_array},
   {Sass::Plugin::Configuration#add_template_location Sass::Plugin#add_template_location},
-  and {Sass::Plugin::Configuration#remove_template_location Sass::Plugin#remove_template_location} methods instead**.
+  and
+  {Sass::Plugin::Configuration#remove_template_location Sass::Plugin#remove_template_location}
+  methods instead**.
 
 * **`:css_location`**:
   The path where CSS output should be written to.
@@ -670,7 +677,8 @@ SassScript supports eight data types:
 * colors (e.g. `blue`, `#04a3f9`, `rgba(255, 0, 0, 0.5)`)
 * booleans (e.g. `true`, `false`)
 * nulls (e.g. `null`)
-* lists of values, separated by spaces or commas (e.g. `1.5em 1em 0 2em`, `Helvetica, Arial, sans-serif`)
+* lists of values, separated by spaces or commas
+  (e.g. `1.5em 1em 0 2em`, `Helvetica, Arial, sans-serif`)
 * maps from one value to another (e.g. `(key1: value1, key2: value2)`)
 * function references
 
@@ -833,7 +841,17 @@ that it has special support for.
 #### Number Operations
 
 SassScript supports the standard arithmetic operations on numbers
-(addition `+`, subtraction `-`, multiplication `*`, division `/`, and modulo `%`). Sass math functions preserve units during arithmetic operations. This means that, just like in real life, you cannot work on numbers with incompatible units (such as adding a number with `px` and `em`) and two numbers with the same unit that are multiplied together will produce square units (`10px * 10px == 100px * px`). **Be Aware** that `px * px` is an invalid CSS unit and you will get an error from Sass for attempting to use invalid units in CSS.
+(addition `+`, subtraction `-`, multiplication `*`, division `/`, and modulo `%`).
+Sass math functions preserve units during arithmetic operations.
+This means that, just like in real life,
+you cannot work on numbers with incompatible units
+(such as adding a number with `px` and `em`)
+and two numbers with the same unitthat
+are multiplied together will produce square units
+(`10px * 10px == 100px * px`).
+**Be Aware** that `px * px` is an invalid CSS unit
+and you will get an error from Sass
+for attempting to use invalid units in CSS.
 
 Relational operators
 (`<`, `>`, `<=`, `>=`)
@@ -1071,10 +1089,13 @@ While this is less concise, it can make the stylesheet easier to read.
 It also allows functions to present more flexible interfaces,
 providing many arguments without becoming difficult to call.
 
-Named arguments can be passed in any order, and arguments with default values can be omitted.
-Since the named arguments are variable names, underscores and dashes can be used interchangeably.
+Named arguments can be passed in any order,
+and arguments with default values can be omitted.
+Since the named arguments are variable names,
+underscores and dashes can be used interchangeably.
 
-See {Sass::Script::Functions} for a full listing of Sass functions and their argument names,
+See {Sass::Script::Functions} for a full listing of
+Sass functions and their argument names,
 as well as instructions on defining your own in Ruby.
 
 ### Interpolation: `#{}`
@@ -1206,7 +1227,8 @@ or the `--load-path` option on the command line.
 
 `@import` takes a filename to import.
 By default, it looks for a Sass file to import directly,
-but there are a few circumstances under which it will compile to a CSS `@import` rule:
+but there are a few circumstances under which
+it will compile to a CSS `@import` rule:
 
 * If the file's extension is `.css`.
 * If the filename begins with `http://`.
@@ -1679,7 +1701,8 @@ For example:
     }
 
 However, placeholder selectors can be extended, just like classes and ids.
-The extended selectors will be generated, but the base placeholder selector will not.
+The extended selectors will be generated,
+but the base placeholder selector will not.
 For example:
 
     .notice {
@@ -2314,8 +2337,10 @@ While this is less concise, it can make the stylesheet easier to read.
 It also allows functions to present more flexible interfaces,
 providing many arguments without becoming difficult to call.
 
-Named arguments can be passed in any order, and arguments with default values can be omitted.
-Since the named arguments are variable names, underscores and dashes can be used interchangeably.
+Named arguments can be passed in any order,
+and arguments with default values can be omitted.
+Since the named arguments are variable names,
+underscores and dashes can be used interchangeably.
 
 #### Trailing Commas
 
@@ -2411,8 +2436,11 @@ get directly passed through to the wrapped mixin. For example:
 
 ### Passing Content Blocks to a Mixin
 
-It is possible to pass a block of styles to the mixin for placement within the styles included by
-the mixin. The styles will appear at the location of any `@content` directives found within the mixin. This makes it possible to define abstractions relating to the construction of
+It is possible to pass a block of styles to
+the mixin for placement within the styles included by the mixin.
+The styles will appear at the location of any `@content` directives
+found within the mixin.
+This makes it possible to define abstractions relating to the construction of
 selectors and directives.
 
 For example:
@@ -2455,8 +2483,10 @@ mixin and can be used to implement such behaviors.
 
 #### Variable Scope and Content Blocks
 
-The block of content passed to a mixin are evaluated in the scope where the block is defined,
-not in the scope of the mixin. This means that variables local to the mixin **cannot** be used
+The block of content passed to a mixin are evaluated in the scope
+where the block is defined,
+not in the scope of the mixin.
+This means that variables local to the mixin **cannot** be used
 within the passed style block and variables will resolve to the global value:
 
     $color: white;
@@ -2477,8 +2507,10 @@ Compiles to:
       border-color: blue;
     }
 
-Additionally, this makes it clear that the variables and mixins that are used within the
-passed block are related to the other styles around where the block is defined. For example:
+Additionally, this makes it clear that the variables
+and mixins that are used within the
+passed block are related to the other styles around where the block is defined.
+For example:
 
     #sidebar {
       $sidebar-width: 300px;
@@ -2518,7 +2550,8 @@ In the above example we could have called the function like this:
     #sidebar { width: grid-width($n: 5); }
 
 It is recommended that you prefix your functions to avoid naming conflicts
-and so that readers of your stylesheets know they are not part of Sass or CSS. For example, if you work for ACME Corp, you might have named the function above `-acme-grid-width`.
+and so that readers of your stylesheets know they are not part of Sass or CSS.
+For example, if you work for ACME Corp, you might have named the function above `-acme-grid-width`.
 
 User-defined functions also support [variable arguments](#variable_arguments)
 in the same way as mixins.
@@ -2636,7 +2669,8 @@ see the {Sass::CacheStores::Base source documentation}.
 Sass importers are in charge of taking paths passed to `@import` and finding the
 appropriate Sass code for those paths. By default, this code is loaded from
 the {Sass::Importers::Filesystem filesystem}, but importers could be added to load
-from a database, over HTTP, or use a different file naming scheme than what Sass expects.
+from a database, over HTTP,
+or use a different file naming scheme than what Sass expects.
 
 Each importer is in charge of a single load path (or whatever the corresponding notion
 is for the backend). Importers can be placed in the {file:SASS_REFERENCE.md#load_paths-option

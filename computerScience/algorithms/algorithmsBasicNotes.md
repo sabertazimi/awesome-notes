@@ -77,7 +77,8 @@
 
 ### Merge Sort
 
-- 利用 Merge Sort 计算逆序对个数: left[i] > right[j] => inversions += (mid - i + 1), 即所有 i~mid 元素都与 j 元素为逆序对
+- 利用 Merge Sort 计算逆序对个数: left[i] > right[j] => inversions += (mid - i + 1),
+  即所有 i~mid 元素都与 j 元素为逆序对
 
 ```java
     // merge and count
@@ -94,7 +95,8 @@
         for (int k = lo; k <= hi; k++) {
             if      (i > mid)           a[k] = aux[j++];
             else if (j > hi)            a[k] = aux[i++];
-            else if (aux[j] < aux[i]) { a[k] = aux[j++]; inversions += (mid - i + 1); }
+            else if (aux[j] < aux[i]) { a[k] = aux[j++]; inversions += (mid -
+            i + 1); }
             else                        a[k] = aux[i++];
         }
         return inversions;
@@ -462,7 +464,8 @@ Hibbard Deletion
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     public void delete(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to delete() is null");
+        if (key == null) throw new IllegalArgumentException("argument to
+        delete() is null");
         if (!contains(key)) return;
 
         // if both children of root are black, set root to red
@@ -539,7 +542,8 @@ a = b+1;b = c+1;c = a+1;
 
 ### 子问题
 
-- 子问题可映射为有向图, 并对其进行拓扑排序: 共有 O(n) 个子问题, 每个子问题最多 O(n) 种选择, 则算法时间复杂度为 O(n^2).其对应子问题图有 n 个顶点, 每个顶点最多有 n-1 条边.
+- 子问题可映射为有向图, 并对其进行拓扑排序: 共有 O(n) 个子问题,
+  每个子问题最多 O(n) 种选择, 则算法时间复杂度为 O(n^2).其对应子问题图有 n 个顶点, 每个顶点最多有 n-1 条边.
 - 递归生成可以重复求解的子问题,而不是不断生成新的子问题
 
 ### 范例
@@ -641,7 +645,8 @@ void Relax(int u, int v, int w) {
 
 先将图进行拓扑排序(深度优先遍历), 再按照拓扑排序顺序, 依次对每个结点(拓扑排序)的邻接边进行 relax
 
-> a -> b -> c --> d, 且 a--b, a--c, b--d, c--d: relax(a, b), relax(a, c), relax(b, d), relax(c, d)
+> a -> b -> c --> d, 且 a--b, a--c, b--d, c--d:
+> relax(a, b), relax(a, c), relax(b, d), relax(c, d)
 
 #### Bellman-Ford Algorithm
 

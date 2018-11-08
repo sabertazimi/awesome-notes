@@ -102,7 +102,8 @@ S 0
 
 ### Datatype Binding
 
-tagged union, every constructor name as tag, fields for different constructors can't exist at the same time
+tagged union, every constructor name as tag,
+fields for different constructors can't exist at the same time
 
 ### Built-in Tagged Constructor
 
@@ -137,12 +138,14 @@ case e of
 
 val p = e (* declare multiple variables once time in p(pattern) *)
 
-fun foo p = e (* declare multiple callee arguments(hidden to caller) once time in p(pattern) *)
+(* declare multiple callee arguments(hidden to caller) once time in p(pattern) *)
+fun foo p = e
 ```
 
 In SML, all functions only take 1 argument, a tuple/record:
 
-fun f (x, y, z) = x + y + z seems that takes 3 arguments, but truly owing to pattern matching only takes 1 tuple argument
+fun f (x, y, z) = x + y + z seems that takes 3 arguments,
+but truly owing to pattern matching only takes 1 tuple argument
 Likewise, fun f () = 0 takes 1 empty tuple argument.
 
 Futher more, tuples is syntactic sugar for records.

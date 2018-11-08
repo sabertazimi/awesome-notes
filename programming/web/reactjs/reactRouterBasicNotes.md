@@ -43,7 +43,9 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path='/' component={Home}/>
-          <Route exact path='/tags' render={ () => { return <Redirect to='/tags/all'/> } }/>
+          <Route exact path='/tags' render={ () => {
+            return <Redirect to='/tags/all'/> }
+          }/>
           <Route path='/tags/:tagName' component={Tags}/>
           <Route path='/posts/:mdFile' component={Post}/>
           <Route path='/book' component={Book}/>
@@ -215,7 +217,8 @@ location / {
 ## A Simple React Router
 
 - `<Route>` instances listen to `popstate` event to `forceUpdate`.
-- When click `<Link>`/`<Reditect>`, `historyPush` or `historyReplace` get called, `<Route>` instances re-match and re-render.
+- When click `<Link>`/`<Reditect>`, `historyPush` or `historyReplace` get called,
+  `<Route>` instances re-match and re-render.
 
 ```jsx
 const instances = [];

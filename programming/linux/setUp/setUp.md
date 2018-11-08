@@ -230,7 +230,14 @@ CEFB3783 B2E1BA96 71AAF7B4 AFB61B1D
 ```
 
 ```python
-import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
+import urllib.request,os,hashlib; h ='2915d1851351e5ee549c20394736b442' +
+'8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package';
+ipp = sublime.installed_packages_path(); urllib.request.install_opener(
+urllib.request.build_opener( urllib.request.ProxyHandler()) ); by =
+urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ',
+'%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating
+download (got %s instead of %s), please try manual install' % (dh, h)) if dh
+!= h else open(os.path.join( ipp, pf), 'wb' ).write(by)
 ```
 
 ```bash
@@ -271,7 +278,8 @@ sudo apt-get remove appmenu-qt5
 #### Desktop
 
 ```bash
-sudo apt install gnome gnome-shell gnome-panel gnome-menus gnome-session gnome-tweak-tool gdm
+sudo apt install gnome gnome-shell gnome-panel
+\ gnome-menus gnome-session gnome-tweak-tool gdm
 ```
 
 ### Shell Tools
