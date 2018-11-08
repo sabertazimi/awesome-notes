@@ -1,180 +1,177 @@
-
-* [Haskell Basic Notes](#haskell-basic-notes)
-	* [Platform](#platform)
-		* [ghci](#ghci)
-		* [ghc](#ghc)
-	* [Unique Mark](#unique-mark)
-		* [:+](#)
-		* [_](#-1)
-		* [<-](#-)
-		* [=>](#-2)
-		* [->](#--1)
-	* [Expression](#expression)
-	* [Type](#type)
-		* [基本类型](#基本类型)
-			* [Int](#int)
-			* [Integer](#integer)
-			* [Float](#float)
-			* [Double](#double)
-			* [Bool](#bool)
-			* [Char](#char)
-			* [`[Char]`/String](#charstring)
-			* [Ordering](#ordering)
-			* [Word](#word)
-			* [Rational](#rational)
-		* [List](#list)
-			* [Operator](#operator)
-			* [Function](#function)
-			* [Range](#range)
-			* [List Comprehension(数学定义)](#list-comprehension数学定义)
-		* [Tuple(原组)](#tuple原组)
-			* [内部差异性](#内部差异性)
-			* [外部差异性](#外部差异性)
-			* [Tuple Function](#tuple-function)
-				* [二元组](#二元组)
-				* [三元组](#三元组)
-		* [泛型](#泛型)
-		* [函数类型](#函数类型)
-	* [基本语法](#基本语法)
-		* [名字/函数定义](#名字函数定义)
-			* [模式匹配(Pattern Matching)](#模式匹配pattern-matching)
-				* [Best Practice](#best-practice)
-				* [常用模式](#常用模式)
-					* [as模式](#as模式)
-					* [List](#list-1)
-					* [Tuple](#tuple)
-			* [guard模式 与 where绑定](#guard模式-与-where绑定)
-			* [let绑定](#let绑定)
-			* [case表达式](#case表达式)
-	* [Typeclass](#typeclass)
-		* [=>符号](#符号)
-		* [Basic Typeclass](#basic-typeclass)
-			* [Eq](#eq)
-			* [Ord](#ord)
-			* [Show](#show)
-			* [Read](#read)
-			* [Enum](#enum)
-			* [Bounded](#bounded)
-			* [Num](#num)
-			* [Integral](#integral)
-			* [Floating](#floating)
-			* [*Functor*](#functor)
-			* [Control.Applicative](#controlapplicative)
-				* [Maybe](#maybe)
-				* [`[]`](#-3)
-				* [IO](#io)
-				* [ZipList](#ziplist)
-				* [多个 functors](#多个-functors)
-				* [高度封装函数: *liftA2*](#高度封装函数-lifta2)
-			* [Control.Monad](#controlmonad)
-				* [Maybe Monad](#maybe-monad)
-					* [实现](#实现)
-					* [do 表示法](#do-表示法)
-				* [List Monad](#list-monad)
-				* [MonadPlus](#monadplus)
-				* [Monad Algorithms](#monad-algorithms)
-					* [马走日](#马走日)
-			* [Foldable](#foldable)
-			* [Data.Monoid](#datamonoid)
-		* [自定义Typeclass](#自定义typeclass)
-		* [`data` type](#data-type)
-			* [函数特性](#函数特性)
-			* [记录语法(Record Syntax)](#记录语法record-syntax)
-			* [类型参数(Type Parameters)](#类型参数type-parameters)
-				* [Maybe value constructor](#maybe-value-constructor)
-			* [Deriving(派生)](#deriving派生)
-			* [type定义](#type定义)
-			* [高级数据结构](#高级数据结构)
-				* [栈](#栈)
-				* [链表](#链表)
-				* [二叉树](#二叉树)
-	* [函数](#函数)
-		* [递归函数](#递归函数)
-			* [List](#list-2)
-		* [高阶函数](#高阶函数)
-			* [Curry化](#curry化)
-			* [map函数](#map函数)
-			* [filter函数](#filter函数)
-			* [fold函数与scan函数](#fold函数与scan函数)
-			* [lambda表达式](#lambda表达式)
-			* [$函数](#函数-1)
-			* [.函数与 Function composition(函数组合)](#函数与-function-composition函数组合)
-		* [常用函数](#常用函数)
-			* [无参函数](#无参函数)
-			* [前缀函数](#前缀函数)
-			* [中缀函数](#中缀函数)
-				* [+](#-4)
-				* [++](#-5)
-				* [:](#-6)
-				* [!!](#-7)
-			* [数学函数](#数学函数)
-				* [System.Random](#systemrandom)
-			* [数字函数](#数字函数)
-	* [模块](#模块)
-		* [import](#import)
-		* [建立模块](#建立模块)
-			* [单一模块](#单一模块)
-			* [子模块](#子模块)
-		* [常用基础模块](#常用基础模块)
-			* [Data.List](#datalist)
-				* [修正Prelude模块](#修正prelude模块)
-			* [Data.Char](#datachar)
-			* [Data.Map](#datamap)
-			* [Data.Set](#dataset)
-	* [输入与输出](#输入与输出)
-		* [IO action](#io-action)
-			* [return](#return)
-		* [Command Line](#command-line)
-		* [BtyeString](#btyestring)
-		* [常用输入输出函数](#常用输入输出函数)
-			* [输出](#输出)
-				* [putChar/putStr/putStrLn](#putcharputstrputstrln)
-				* [print](#print)
-				* [File/System.IO](#filesystemio)
-					* [writeFile](#writefile)
-					* [appendFile](#appendfile)
-			* [输入](#输入)
-				* [getChar :: IO Char](#getchar--io-char)
-				* [getContents](#getcontents)
-				* [File](#file)
-					* [handle](#handle)
-					* [withFile](#withfile)
-					* [readFile](#readfile)
-			* [Action](#action)
-				* [when](#when)
-				* [sequence](#sequence)
-				* [mapM mapM_ Control.Monad.forM](#mapm-mapm_-controlmonadform)
-				* [Control.Monad.forever](#controlmonadforever)
-				* [hSetBuffering](#hsetbuffering)
-				* [hFlush](#hflush)
-			* [Other](#other)
-				* [lines](#lines)
-				* [interact](#interact)
-				* [System.Directory - removeFile/renameFile](#systemdirectory---removefilerenamefile)
-	* [异常](#异常)
-		* [catch](#catch)
-	* [Advanced Monad](#advanced-monad)
-		* [Writer Monad](#writer-monad)
-			* [Control.Monad.Writer](#controlmonadwriter)
-		* [Reader Monad](#reader-monad)
-		* [State Monad](#state-monad)
-			* [Control.Monad.State](#controlmonadstate)
-			* [Control.Monad.State (MonadState)](#controlmonadstate-monadstate)
-			* [实例](#实例)
-		* [Error Monad](#error-monad)
-		* [Useful Monad Functions](#useful-monad-functions)
-			* [liftM](#liftm)
-			* [join](#join)
-			* [filterM](#filterm)
-			* [foldM](#foldm)
-			* [`<=<`(组合函数)](#组合函数)
-		* [Self-Defined Monad](#self-defined-monad)
-	* [注释](#注释)
-		* [符号](#符号-1)
-
 # Haskell Basic Notes
 
-函数式编程语言的一般思路：先取一个初始的集合并将其变形，执行过滤条件，最终取得正确的结果。
+<!-- TOC -->
+
+- [Haskell Basic Notes](#haskell-basic-notes)
+  - [Platform](#platform)
+    - [ghci](#ghci)
+    - [ghc](#ghc)
+  - [Unique Mark](#unique-mark)
+    - [:+](#)
+    - [_](#_)
+    - [<-](#-)
+    - [=>](#)
+    - [->](#-)
+  - [Expression](#expression)
+  - [Type](#type)
+    - [基本类型](#基本类型)
+      - [Int](#int)
+      - [Integer](#integer)
+      - [Float](#float)
+      - [Double](#double)
+      - [Bool](#bool)
+      - [Char](#char)
+      - [`[Char]`/String](#charstring)
+      - [Ordering](#ordering)
+      - [Word](#word)
+      - [Rational](#rational)
+    - [List](#list)
+      - [Operator](#operator)
+      - [Function](#function)
+      - [Range](#range)
+      - [List Comprehension(数学定义)](#list-comprehension数学定义)
+    - [Tuple(原组)](#tuple原组)
+      - [内部差异性](#内部差异性)
+      - [外部差异性](#外部差异性)
+      - [Tuple Function](#tuple-function)
+        - [二元组](#二元组)
+        - [三元组](#三元组)
+    - [泛型](#泛型)
+    - [函数类型](#函数类型)
+  - [基本语法](#基本语法)
+    - [名字/函数定义](#名字函数定义)
+      - [模式匹配(Pattern Matching)](#模式匹配pattern-matching)
+        - [Best Practice](#best-practice)
+        - [常用模式](#常用模式)
+          - [as模式](#as模式)
+          - [List](#list-1)
+          - [Tuple](#tuple)
+      - [guard模式 与 where绑定](#guard模式-与-where绑定)
+      - [let绑定](#let绑定)
+      - [case表达式](#case表达式)
+  - [Typeclass](#typeclass)
+    - [=>符号](#符号)
+    - [Basic Typeclass](#basic-typeclass)
+      - [Eq](#eq)
+      - [Ord](#ord)
+      - [Show](#show)
+      - [Read](#read)
+      - [Enum](#enum)
+      - [Bounded](#bounded)
+      - [Num](#num)
+      - [Integral](#integral)
+      - [Floating](#floating)
+      - [*Functor*](#functor)
+      - [Control.Applicative](#controlapplicative)
+        - [Maybe](#maybe)
+        - [`[]`](#)
+        - [IO](#io)
+        - [ZipList](#ziplist)
+        - [多个 functors](#多个-functors)
+        - [高度封装函数: *liftA2*](#高度封装函数-lifta2)
+      - [Control.Monad](#controlmonad)
+        - [Maybe Monad](#maybe-monad)
+          - [实现](#实现)
+          - [do 表示法](#do-表示法)
+        - [List Monad](#list-monad)
+        - [MonadPlus](#monadplus)
+        - [Monad Algorithms](#monad-algorithms)
+          - [马走日](#马走日)
+      - [Foldable](#foldable)
+      - [Data.Monoid](#datamonoid)
+    - [自定义 Typeclass](#自定义-typeclass)
+    - [`data` type](#data-type)
+      - [函数特性](#函数特性)
+      - [记录语法(Record Syntax)](#记录语法record-syntax)
+      - [类型参数(Type Parameters)](#类型参数type-parameters)
+        - [Maybe value constructor](#maybe-value-constructor)
+      - [Deriving(派生)](#deriving派生)
+      - [type定义](#type定义)
+      - [高级数据结构](#高级数据结构)
+        - [栈](#栈)
+        - [链表](#链表)
+        - [二叉树](#二叉树)
+  - [函数](#函数)
+    - [递归函数](#递归函数)
+      - [List](#list-2)
+    - [高阶函数](#高阶函数)
+      - [Curry化](#curry化)
+      - [map函数](#map函数)
+      - [filter函数](#filter函数)
+      - [fold函数与scan函数](#fold函数与scan函数)
+      - [lambda表达式](#lambda表达式)
+      - [$函数](#函数)
+      - [.函数与 Function composition(函数组合)](#函数与-function-composition函数组合)
+    - [常用函数](#常用函数)
+      - [无参函数](#无参函数)
+      - [前缀函数](#前缀函数)
+      - [中缀函数](#中缀函数)
+      - [数学函数](#数学函数)
+        - [System.Random](#systemrandom)
+      - [数字函数](#数字函数)
+  - [模块](#模块)
+    - [import](#import)
+    - [建立模块](#建立模块)
+      - [单一模块](#单一模块)
+      - [子模块](#子模块)
+    - [常用基础模块](#常用基础模块)
+      - [Data.List](#datalist)
+        - [修正Prelude模块](#修正prelude模块)
+      - [Data.Char](#datachar)
+      - [Data.Map](#datamap)
+      - [Data.Set](#dataset)
+  - [输入与输出](#输入与输出)
+    - [IO action](#io-action)
+      - [return](#return)
+    - [Command Line](#command-line)
+    - [BtyeString](#btyestring)
+    - [常用输入输出函数](#常用输入输出函数)
+      - [输出](#输出)
+        - [putChar/putStr/putStrLn](#putcharputstrputstrln)
+        - [print](#print)
+        - [File/System.IO](#filesystemio)
+          - [writeFile](#writefile)
+          - [appendFile](#appendfile)
+      - [输入](#输入)
+        - [getChar :: IO Char](#getchar--io-char)
+        - [getContents](#getcontents)
+        - [File](#file)
+          - [handle](#handle)
+          - [withFile](#withfile)
+          - [readFile](#readfile)
+      - [Action](#action)
+        - [when](#when)
+        - [sequence](#sequence)
+        - [mapM mapM_ Control.Monad.forM](#mapm-mapm_-controlmonadform)
+        - [Control.Monad.forever](#controlmonadforever)
+        - [hSetBuffering](#hsetbuffering)
+        - [hFlush](#hflush)
+      - [Other](#other)
+        - [lines](#lines)
+        - [interact](#interact)
+        - [System.Directory - removeFile/renameFile](#systemdirectory---removefilerenamefile)
+  - [异常](#异常)
+    - [catch](#catch)
+  - [Advanced Monad](#advanced-monad)
+    - [Writer Monad](#writer-monad)
+      - [Control.Monad.Writer](#controlmonadwriter)
+    - [Reader Monad](#reader-monad)
+    - [State Monad](#state-monad)
+      - [Control.Monad.State](#controlmonadstate)
+      - [Control.Monad.State (MonadState)](#controlmonadstate-monadstate)
+      - [实例](#实例)
+    - [Error Monad](#error-monad)
+    - [Useful Monad Functions](#useful-monad-functions)
+      - [liftM](#liftm)
+      - [join](#join)
+      - [filterM](#filterm)
+      - [foldM](#foldm)
+      - [`<=<`(组合函数)](#组合函数)
+    - [Self-Defined Monad](#self-defined-monad)
+  - [注释](#注释)
+    - [符号](#符号)
+
+<!-- /TOC -->
 
 ## Platform
 
@@ -438,8 +435,8 @@ ghci> [ [ x | x <- xs, even x ] | xs <- xxs]
 #### 外部差异性
 
 -   数目不同或某项不同的Tuple属于不同Type
-	-   不可置于同一List中
-	-   不同长度的Tuple不可比较(比较符只可用于相同Type)
+  -   不可置于同一List中
+  -   不同长度的Tuple不可比较(比较符只可用于相同Type)
 
 #### Tuple Function
 
@@ -750,10 +747,10 @@ ghci> :t 20
 
 -   成员: Maybe a, [], Either a, IO
     -   成员kind必须为 `* -> *`
-	-   f *一元类型构造符(type constructor)*
+  -   f *一元类型构造符(type constructor)*
 -   必须遵守准则:
     -   fmap id = id
-	-   fmap (f . g) F = fmap f (fmap g F)
+  -   fmap (f . g) F = fmap f (fmap g F)
 
 ```haskell
 ghci> :info Functor
@@ -902,9 +899,9 @@ Nothing
 ```
 
 -   Monad Laws:
-	-   return 满足 Left identity: `retrun x >>= f 等于 f x`
-	-   return 满足 right identity: `m >>= return 等于 m`
-	-   Associativity: 结合律 `(m >>= f) >>= g 等于 m >>= (\x -> f x >>= g) `
+  -   return 满足 Left identity: `retrun x >>= f 等于 f x`
+  -   return 满足 right identity: `m >>= return 等于 m`
+  -   Associativity: 结合律 `(m >>= f) >>= g 等于 m >>= (\x -> f x >>= g) `
 
 ```haskell
 ghci> return 3 >>= (\x -> Just (x+100000))
@@ -995,8 +992,8 @@ instance Monad [] where
 
 -   返回值交互: 下例中 n 与 return (n, ch) 进行交互
     -   list comprehension 与 do 表示法 均是 >>= 的语法糖
-	-   list comprehension: <- 与 条件表达式
-	-   do 表示法: <- 与 guard函数
+  -   list comprehension: <- 与 条件表达式
+  -   do 表示法: <- 与 guard函数
 
 ```haskell
 ghci> [1,2] >>= \n -> ['a','b'] >>= \ch -> return (n,ch)
@@ -1796,18 +1793,14 @@ tazimi = "It's a-me, tazimi!"
 
 #### 中缀函数
 
-##### +
-
-从类型定义可以看出,+左右两边参数必须为同类型
+`+`: 从类型定义可以看出,+左右两边参数必须为同类型
 
 ```haskell
 ghci> :t (+)
 (+) :: (Num a) => a -> a -> a
 ```
 
-##### ++
-
-List连接符,遍历前一List
+`++`: List连接符,遍历前一List
 
 ```haskell
 ghci> [1,2,3,4] ++ [9,10,11,12]
@@ -1816,9 +1809,7 @@ ghci> "hello" ++ " " ++ "world"
 "hello world"
 ```
 
-##### :
-
-连接单个元素
+`:`: 连接单个元素
 
 ```haskell
 ghci> 'A':" SMALL CAT"
@@ -1827,9 +1818,7 @@ ghci> 5:[1,2,3,4,5]
 [5,1,2,3,4,5]
 ```
 
-##### !!
-
-引用符
+`!!`: 引用符
 
 ```haskell
 ghci> [9.4,33.2,96.2,11.2,23.25] !! 1
