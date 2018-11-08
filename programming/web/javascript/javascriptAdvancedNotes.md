@@ -53,6 +53,8 @@
   - [Functional JavaScript](#functional-javascript)
     - [Pros](#pros)
     - [Cons](#cons)
+    - [Partial Application](#partial-application)
+    - [Currying](#currying)
   - [Code Style Guide](#code-style-guide)
     - [Style](#style)
       - [命名规范](#命名规范)
@@ -75,7 +77,7 @@
         - [配置文件](#配置文件)
   - [浏览器兼容性(Browser Compatibility)](#浏览器兼容性browser-compatibility)
     - [特性检测](#特性检测)
-  - [Testing](#testing)
+  - [Testing and Debugging](#testing-and-debugging)
     - [Log](#log)
     - [Frameworks](#frameworks)
       - [Unit 测试](#unit-测试)
@@ -904,8 +906,9 @@ Math.tan(x)
 
 ## Functional JavaScript
 
-- pure
-- immutable
+- predictable (pure and immutable)
+- safe (pure and immutable)
+- transparent (pure and immutable)
 - modular (composite)
 
 ### Pros
@@ -928,6 +931,28 @@ For example, in vanilla.js, `map2 === map1` become `false`, but in immutable.js 
 ```js
 const map1 = { 'b': 2 };
 const map2 = map1.set{ 'b': 2 };
+```
+
+### Partial Application
+
+```js
+const partialFromBind = (fn, ...args) => {
+  return fn.bind(null, ...args);
+}
+
+const partial = (fn, ...args) => {
+  return (...rest) => {
+    return fn(...args, ...rest);
+  }
+}
+```
+
+### Currying
+
+chain of multiple single argument functions
+
+```js
+const add = x => y => x + y
 ```
 
 ## Code Style Guide
@@ -1114,7 +1139,7 @@ if (document.getElementById) {
 }
 ```
 
-## Testing
+## Testing and Debugging
 
 ### Log
 
