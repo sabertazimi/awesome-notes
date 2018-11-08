@@ -99,7 +99,8 @@ response.setHeader("Content-Security-Policy", "frame-ancestors 'none'");
 
 在 **HTTP Cookies** 中传输**复杂**的 Session IDs, 并在**成功连接**/**恶意篡改**后重置 Session IDs.
 
-- where: not passing session IDs in queryStrings/requestBody, instead of passing them in **HTTP cookies**
+- where: not passing session IDs in queryStrings/requestBody,
+  instead of passing them in **HTTP cookies**
 
 ```js
 req.session.regenerate(function(err) {
@@ -132,7 +133,9 @@ don't trust user:
 
 ### CSRF(Cross-Site Request Forgery) - 跨站请求伪造
 
-挟制用户在当前已登录的Web应用程序上执行非本意的操作 - 利用已认证用户(长期 Cookies), 访问攻击者网站, 并被强制执行脚本, 在用户不知情的情况下提交 Get/Post Request with Cookies 给被攻击网站.
+挟制用户在当前已登录的Web应用程序上执行非本意的操作,
+利用已认证用户(长期 Cookies), 访问攻击者网站, 并被强制执行脚本,
+在用户不知情的情况下提交 Get/Post Request with Cookies 给被攻击网站.
 
 #### CSRF Protection
 

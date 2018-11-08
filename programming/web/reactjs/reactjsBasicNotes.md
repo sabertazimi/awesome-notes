@@ -63,7 +63,8 @@
 - only update the changed attributes
 - use `key` attribute to match children
 
-`Best Practice`: give `key` to `<li>/<tr>/<tc>` elements (stable, predictable, unique and not array indexed)
+`Best Practice`: give `key` to `<li>/<tr>/<tc>` elements
+(stable, predictable, unique and not array indexed)
 
 ### Component Elements of Same Type
 
@@ -96,7 +97,8 @@ static PropTypes = {
 
 ## element and component
 
-react element 实际上是纯对象, 可由 React.createElement()/JSX/element factory helper 创建, 并被 react 在必要时渲染成真实的DOM结点
+react element 实际上是纯对象, 可由 React.createElement()/JSX/element factory helper 创建,
+并被 react 在必要时渲染成真实的DOM结点
 
 ```js
 ReactDOM.render({
@@ -170,7 +172,9 @@ update for three reasons:
 - this.setState() called
 - this.forceUpdate() called
 
-componentWillReceiveProps(nextProps) -> shouldComponentUpdate(nextProps, nextState) -> componentWillUpdate(nextProps, nextState) -> render() -> componentDidUpdate(prevProps, prevState)
+componentWillReceiveProps(nextProps) -> shouldComponentUpdate(nextProps, nextState)
+-> componentWillUpdate(nextProps, nextState)
+-> render() -> componentDidUpdate(prevProps, prevState)
 
 #### unmount
 
@@ -314,7 +318,8 @@ class Menu extends React.Component {
 
 ### Hooks
 
-- reuse stateful logic between components (avoid wrapper hell in render props or HOC)
+- reuse stateful logic between components
+  (avoid wrapper hell in render props or HOC)
 - split one complex component into smaller functions
 - use more of React's features without classes
 
@@ -366,11 +371,13 @@ function FriendStatus(props) {
 ChatAPI.subscribeToFriendStatus(100, handleStatusChange);     // Run first effect
 
 // Update with { friend: { id: 200 } } props
-ChatAPI.unsubscribeFromFriendStatus(100, handleStatusChange); // Clean up previous effect
+// Clean up previous effect
+ChatAPI.unsubscribeFromFriendStatus(100, handleStatusChange);
 ChatAPI.subscribeToFriendStatus(200, handleStatusChange);     // Run next effect
 
 // Update with { friend: { id: 300 } } props
-ChatAPI.unsubscribeFromFriendStatus(200, handleStatusChange); // Clean up previous effect
+// Clean up previous effect
+ChatAPI.unsubscribeFromFriendStatus(200, handleStatusChange);
 ChatAPI.subscribeToFriendStatus(300, handleStatusChange);     // Run next effect
 
 // Unmount

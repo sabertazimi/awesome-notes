@@ -90,7 +90,7 @@
     - [函数表达式](#函数表达式)
     - [函数入参](#函数入参)
     - [回调函数](#回调函数)
-    - [自定义函数(Self-Defining Function)/惰性函数定义(Lazy Function Definition)](#自定义函数self-defining-function惰性函数定义lazy-function-definition)
+    - [自定义函数/惰性函数定义](#自定义函数惰性函数定义)
     - [即时函数](#即时函数)
       - [即时函数模式](#即时函数模式)
       - [模式作用](#模式作用)
@@ -99,7 +99,6 @@
       - [bind](#bind)
       - [通过call/apply实现bind函数](#通过callapply实现bind函数)
     - [多态方法](#多态方法)
-    - [hasOwnProperty](#hasownproperty-function hasOwnProperty() { [native code] }1)
     - [eval](#eval)
     - [常用函数](#常用函数)
       - [Object](#object)
@@ -564,7 +563,8 @@ function doAction(action) {
 - 除`typeof Function.prototype` 为 'function' 外, 其余函数/构造函数的原型对象都为 '对象'(`typeof` 为 'object')
 - 先有`Object.prototype`(原型链顶端), `Function.prototype` 继承`Object.prototype`而产生, 最后`Object/Function/Array/其它构造函数`继承`Function.prototype`而产生
 
-> `Object` ---`__proto__`--> `Function.prototype` ---`__proto__`--> `Object.prototype` ---`__proto__`--> `null`
+> `Object` ---`__proto__`--> `Function.prototype` ---`__proto__`
+> --> `Object.prototype` ---`__proto__`--> `null`
 
 ```js
 function Foo(value) {
@@ -1383,7 +1383,9 @@ var findNodes = function (callbackObj, callback) {
 };
 ```
 
-### 自定义函数(Self-Defining Function)/惰性函数定义(Lazy Function Definition)
+### 自定义函数/惰性函数定义
+
+(Self-Defining Function)/(Lazy Function Definition)
 
 - 第一次执行时,进行初始化并重新定义函数变量
 - 第二次执行时,不再进行初始化(函数被重定义至真正函数)
@@ -1534,7 +1536,7 @@ var greet = function greet(options) {
 }
 ```
 
-### hasOwnProperty
+hasOwnProperty:
 
 - 使用其它对象的`hasOwnProperty`，并将其上下文设置为`foo`
 
@@ -1634,7 +1636,8 @@ Object.defineProperties(o, {
 
 ```js
 var props = Object.getOwnPropertyDescriptor(o, 'age');
-console.log(props); // Object {value: 24, writable: true, enumerable: true, configurable: true}
+console.log(props);
+// Object {value: 24, writable: true, enumerable: true, configurable: true}
 
 console.log(Object.getOwnPropertyNames(o)); // ["age", "sex"]
 console.log(Object.keys(o)); // ["age"]
@@ -2072,7 +2075,9 @@ node.textContent
 ```
 
 Element-only navigation:
-Navigation properties listed above refer to all nodes. For instance, in childNodes we can see both text nodes, element nodes, and even comment nodes if there exist
+Navigation properties listed above refer to all nodes. For instance,
+in childNodes we can see both text nodes, element nodes,
+and even comment nodes if there exist.
 
 ```js
 node.parentElement
