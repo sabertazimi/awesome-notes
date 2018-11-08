@@ -50,6 +50,9 @@
     - [算数逻辑运算](#算数逻辑运算)
       - [位操作](#位操作)
       - [Math 对象](#math-对象)
+  - [Functional JavaScript](#functional-javascript)
+    - [Pros](#pros)
+    - [Cons](#cons)
   - [Code Style Guide](#code-style-guide)
     - [Style](#style)
       - [命名规范](#命名规范)
@@ -899,17 +902,45 @@ Math.sin(x)
 Math.tan(x)
 ```
 
+## Functional JavaScript
+
+- pure
+- immutable
+- modular (composite)
+
+### Pros
+
+- type safe and state safe
+- explicit flow of data
+- concurrency safety
+
+### Cons
+
+- verbose
+- more object creation
+- more garbage collection
+- more memory usage
+
+With help of `immutable.js`, object creation/garbage collection/memory usage can be alleviated.
+For example, in vanilla.js, `map2 === map1` become `false`, but in immutable.js `map2 === map1` become `true`
+(copy free due to immutable data).
+
+```js
+const map1 = { 'b': 2 };
+const map2 = map1.set{ 'b': 2 };
+```
+
 ## Code Style Guide
 
 ### Style
 
 #### 命名规范
 
--    变量: 名词前缀
--    方法/函数: 动词前缀
--   _method: 表示私有化方法
--    普通函数: 驼峰命名法(Camel Case)
--    构造函数: 帕斯卡命名法(Pascal Case), 首字母大写
+- 变量: 名词前缀
+- 方法/函数: 动词前缀
+- _method: 表示私有化方法
+- 普通函数: 驼峰命名法(Camel Case)
+- 构造函数: 帕斯卡命名法(Pascal Case), 首字母大写
 
 #### 全局变量
 
