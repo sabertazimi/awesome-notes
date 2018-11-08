@@ -1,5 +1,12 @@
-* [常用缩写词](#常用缩写词)
-* [Header File](#header-file)
+# Naming Conventions
+
+<!-- TOC -->
+
+- [Naming Conventions](#naming-conventions)
+  - [常用缩写词](#常用缩写词)
+  - [Header File](#header-file)
+
+<!-- /TOC -->
 
 ## 常用缩写词
 
@@ -62,13 +69,13 @@
 |time|stamp|ts|
 |value|val|
 
-## Header File 
+## Header File
 
-**防止其他文件重复#include本文件**
+防止其他文件重复#include本文件
 
 ```c
-#ifndef MONGOOSE_HEADER_INCLUDED 
-#define    MONGOOSE_HEADER_INCLUDED 
+#ifndef MONGOOSE_HEADER_INCLUDED
+#define    MONGOOSE_HEADER_INCLUDED
 
 /*.................................
  * do something here

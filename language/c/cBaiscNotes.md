@@ -1,53 +1,58 @@
-* [C Basic Notes](#c-basic-notes)
-	* [编程习惯](#编程习惯)
-		* [Macro](#macro)
-			* [括号](#括号)
-		* [头文件](#头文件)
-			* [缺少标准库头文件](#缺少标准库头文件)
-				* [缺少函数原型](#缺少函数原型)
-				* [覆盖标准库函数原型](#覆盖标准库函数原型)
-				* [缺少宏定义](#缺少宏定义)
-			* [防止重复包括头文件](#防止重复包括头文件)
-			* [头文件不申请内存单元](#头文件不申请内存单元)
-		* [检查](#检查)
-			* [边界检查](#边界检查)
-			* [指针检查](#指针检查)
-	* [类型转换](#类型转换)
-		* [机器码转换](#机器码转换)
-	* [Awesome Pointer(Tips and Best Practice)](#awesome-pointertips-and-best-practice)
-		* [Error Prone Pointers(易错点)](#error-prone-pointers易错点)
-		* [Debugging Malloc](#debugging-malloc)
-			* [处理void指针](#处理void指针)
-		* [利用void指针实现泛型(generic)](#利用void指针实现泛型generic)
-			* [通用型 swap 函数](#通用型-swap-函数)
-			* [通用型 lsearch 函数](#通用型-lsearch-函数)
-				* [实现](#实现)
-				* [int 实例](#int-实例)
-				* [string 实例](#string-实例)
-			* [泛型数据结构](#泛型数据结构)
-				* [通用型栈](#通用型栈)
-			* [Tools](#tools)
-	* [Useful Functions](#useful-functions)
-		* [Alloctor](#alloctor)
-			* [memset](#memset)
-			* [free](#free)
-		* [Strings](#strings)
-			* [strdup](#strdup)
-			* [strchr/strstr](#strchrstrstr)
-			* [strtok](#strtok)
-			* [strcasecmp 不区分大小写](#strcasecmp-不区分大小写)
-			* [getopt](#getopt)
-		* [I/O](#io)
-		* [Exceptions](#exceptions)
-		* [Process](#process)
-			* [fork/execve](#forkexecve)
-			* [Other](#other)
-		* [Threads](#threads)
-			* [pthread.h](#pthreadh)
-			* [Semaphore](#semaphore)
-	* [联合体](#联合体)
-
 # C Basic Notes
+
+<!-- TOC -->
+
+- [C Basic Notes](#c-basic-notes)
+  - [编程习惯](#编程习惯)
+    - [Macro(宏)](#macro宏)
+      - [括号](#括号)
+      - [特殊用法](#特殊用法)
+    - [头文件](#头文件)
+      - [缺少标准库头文件](#缺少标准库头文件)
+        - [缺少函数原型](#缺少函数原型)
+        - [覆盖标准库函数原型](#覆盖标准库函数原型)
+        - [缺少宏定义](#缺少宏定义)
+      - [防止重复包括头文件](#防止重复包括头文件)
+      - [头文件不申请内存单元](#头文件不申请内存单元)
+    - [检查](#检查)
+      - [边界检查](#边界检查)
+      - [指针检查](#指针检查)
+  - [类型转换](#类型转换)
+    - [机器码转换](#机器码转换)
+  - [Awesome Pointer(Tips and Best Practice)](#awesome-pointertips-and-best-practice)
+    - [Error Prone Pointers(易错点)](#error-prone-pointers易错点)
+    - [Debugging Malloc](#debugging-malloc)
+      - [处理void指针](#处理void指针)
+    - [利用void指针实现泛型(generic)](#利用void指针实现泛型generic)
+      - [通用型 swap 函数](#通用型-swap-函数)
+      - [通用型 lsearch 函数](#通用型-lsearch-函数)
+        - [实现](#实现)
+        - [int 实例](#int-实例)
+        - [string 实例](#string-实例)
+      - [泛型数据结构](#泛型数据结构)
+        - [通用型栈](#通用型栈)
+      - [Tools](#tools)
+  - [Useful Functions](#useful-functions)
+    - [memset](#memset)
+    - [free](#free)
+    - [Strings](#strings)
+      - [strdup](#strdup)
+      - [strchr/strstr](#strchrstrstr)
+      - [strtok](#strtok)
+      - [strcasecmp 不区分大小写](#strcasecmp-不区分大小写)
+      - [getopt](#getopt)
+    - [I/O](#io)
+      - [sscanf](#sscanf)
+    - [Exceptions](#exceptions)
+    - [Process](#process)
+      - [fork/execve](#forkexecve)
+      - [Other](#other)
+    - [Threads](#threads)
+      - [pthread.h](#pthreadh)
+      - [Semaphore](#semaphore)
+  - [联合体](#联合体)
+
+<!-- /TOC -->
 
 ## 编程习惯
 
@@ -59,9 +64,9 @@
 
 #### 特殊用法
 
-*   #: 字符串化
-*   ##: 强制连接符
-*   do { ... } while (0): 防止语法错误
+- `#`: 字符串化
+- `##`: 强制连接符
+- do { ... } while (0): 防止语法错误
 
 ### 头文件
 
@@ -101,21 +106,21 @@
 
 #### 边界检查
 
--   空/满栈检查
--   参数合法性检查    e.g elemSize > 0 检查
+- 空/满栈检查
+- 参数合法性检查    e.g elemSize > 0 检查
 
 #### 指针检查
 
--   alloctor失败，需添加NULL检查:
-    -   assert
-    -   exit
+- alloctor失败，需添加NULL检查:
+  - assert
+  - exit
 
 ## 类型转换
 
 ### 机器码转换
 
--   有符号类型转换: 进行符号扩展
--   无符号类型转换: 进行零扩展
+- 有符号类型转换: 进行符号扩展
+- 无符号类型转换: 进行零扩展
 
 ## Awesome Pointer(Tips and Best Practice)
 
@@ -129,16 +134,16 @@ float f = 7.0;
 short s = *(short *)&f;
 ```
 
--   悬挂指针
--   未初始化
--   改写未知区域
-    -   下标越界
-    -   内存上溢 e.g `gets(string);`
--   指针相关运算符优先级与结合性
--   返回局部变量的地址
--   重复释放内存空间
--   内存泄漏   e.g 未释放空间/未释放部分深度空间(多维数组)
--   不能引用void指针指向的内存单元
+- 悬挂指针
+- 未初始化
+- 改写未知区域
+  - 下标越界
+  - 内存上溢 e.g `gets(string);`
+- 指针相关运算符优先级与结合性
+- 返回局部变量的地址
+- 重复释放内存空间
+- 内存泄漏   e.g 未释放空间/未释放部分深度空间(多维数组)
+- 不能引用void指针指向的内存单元
 
 ### Debugging Malloc
 
@@ -291,9 +296,9 @@ Valgrind - [GitHub Repo](https://github.com/svn2github/valgrind)
 
 ## Useful Functions
 
-#### memset
+### memset
 
-#### free
+### free
 
 **free函数会回退4/8字节，取出heap块的长度/信息,根据此信息进行heap块的释放.**
 
@@ -334,9 +339,9 @@ perror(string) - 用来将上一个函数发生错误的原因输出到标准设
 
 #### fork/execve
 
--   fork(): 创建当前进程的拷贝
--   execve(): 用另一程序的代码代替当前进程的代码
-    - `int execve(char *filename, char *argv[], char *envp[])`
+- fork(): 创建当前进程的拷贝
+- execve(): 用另一程序的代码代替当前进程的代码
+  - `int execve(char *filename, char *argv[], char *envp[])`
 
 ```c
 void fork_exec(char *path, char *argv[]) {
@@ -355,9 +360,9 @@ void fork_exec(char *path, char *argv[]) {
 
 #### Other
 
--   getpid()
--   wait(int *child_status)/waitpid(pid)
--   exit()
+- getpid()
+- wait(int *child_status)/waitpid(pid)
+- exit()
 
 ### Threads
 
@@ -428,35 +433,35 @@ SemaphoreSignal(lock);
 
 #### Semaphore
 
--   哲学家就餐问题
--   将Semaphore变量的值在允许范围内(不至于使得线程锁失效)使得其取最大值，减少线程阻塞
--   EmptyBuf 8, FullBuf 0
--   双向通信，互相唤醒 - `Writer:sw(empty),ss(full);`  `Reader:sw(full),ss(empty);`
+- 哲学家就餐问题
+- 将Semaphore变量的值在允许范围内(不至于使得线程锁失效)使得其取最大值，减少线程阻塞
+- EmptyBuf 8, FullBuf 0
+- 双向通信，互相唤醒 - `Writer:sw(empty),ss(full);`  `Reader:sw(full),ss(empty);`
 
 ```c
 void SellTickets(int agent, int *ticketsNum, Semaphore lock) {
-	while (true) {
-		// 当 lock == 0 时,当前进程阻塞, 等待 lock > 0
-		// 当 lock > 0 时, 当前进程继续进行, 并且 lock--
-		SemaphoreWait(lock);
+  while (true) {
+    // 当 lock == 0 时,当前进程阻塞, 等待 lock > 0
+    // 当 lock > 0 时, 当前进程继续进行, 并且 lock--
+    SemaphoreWait(lock);
 
-		if (*ticketsNum == 0) break;  // 票已售磬
+    if (*ticketsNum == 0) break;  // 票已售磬
 
-		(*ticketsNum)--;  // 售出一张票
-		printf("Sell One Ticket.\n");
+    (*ticketsNum)--;  // 售出一张票
+    printf("Sell One Ticket.\n");
 
-		// lock++ 使得 lock > 0
-		// 若有其他进程调用了SemaphoreWait, 且因之前 lock == 0 而被阻塞, 则此时其他进程可继续进行
-		SemaphoreSignal(lock);
-	}
+    // lock++ 使得 lock > 0
+    // 若有其他进程调用了SemaphoreWait, 且因之前 lock == 0 而被阻塞, 则此时其他进程可继续进行
+    SemaphoreSignal(lock);
+  }
 
     // break to here
-	// 作用同循环内的 Signal 函数
-	SemaphoreSignal(lock);
+  // 作用同循环内的 Signal 函数
+  SemaphoreSignal(lock);
 }
 ```
 
 ## 联合体
 
--   机器码 e.g 理解 IEEE 754 标准
--   区分大/小端模式
+- 机器码 e.g 理解 IEEE 754 标准
+- 区分大/小端模式

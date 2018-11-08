@@ -1,14 +1,21 @@
-* [`<assert.h>`](#asserth)
-* [`<ctype.h>`](#ctypeh)
-* [`<errno.h>`](#errnoh)
-* [`<float.h>/<limits.h>`](#floathlimitsh)
-* [`<locale.h>`](#localeh)
-* [`<math.h>`](#mathh)
-* [`<setjmp.h>`](#setjmph)
-* [`<signal.h>`](#signalh)
-* [`<stdarg.h>`](#stdargh)
-* [`<stddef.h>`](#stddefh)
-* [`<string.h>`](#stringh)
+# C Standard Library
+
+<!-- TOC -->
+
+- [C Standard Library](#c-standard-library)
+  - [`<assert.h>`](#asserth)
+  - [`<ctype.h>`](#ctypeh)
+  - [`<errno.h>`](#errnoh)
+  - [`<float.h>/<limits.h>`](#floathlimitsh)
+  - [`<locale.h>`](#localeh)
+  - [`<math.h>`](#mathh)
+  - [`<setjmp.h>`](#setjmph)
+  - [`<signal.h>`](#signalh)
+  - [`<stdarg.h>`](#stdargh)
+  - [`<stddef.h>`](#stddefh)
+  - [`<string.h>`](#stringh)
+
+<!-- /TOC -->
 
 ## `<assert.h>`
 
@@ -227,7 +234,7 @@ void longjmp(jmp_buf env, int val);
 
 ## `<signal.h>`
 
-**信号处理程序中所有数据应为volatile类型**
+信号处理程序中所有数据应为volatile类型
 
 ```c
 _CRTIMP int __cdecl raise(int);
@@ -257,16 +264,12 @@ void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束
 - 宏
   - NULL Null 指针常量
   - `offsetof(type, member-desginator)`
-
-获得字段在结构体中的偏移量
+  获得字段在结构体中的偏移量
 - 类型
   - `ptrdiff_t`
-
   带符号的整数类型, 用来表示指针相减的结果类型
   - `wchar_t`
-
   宽字符类型
-
   - `size_t`
   无符号整数类型, 用来表示sizeof操作符的结果类型
 

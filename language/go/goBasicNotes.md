@@ -1,56 +1,67 @@
-* [Go Basic Notes](#go-basic-notes)
-	* [CLI](#cli)
-		* [Installation](#installation)
-		* [Basic Command](#basic-command)
-			* [Build](#build)
-			* [Test](#test)
-			* [Clean](#clean)
-			* [Modules](#modules)
-	* [Packages](#packages)
-		* [package and import](#package-and-import)
-	* [Variable](#variable)
-		* [Type Declaration](#type-declaration)
-		* [Type conversions](#type-conversions)
-		* [struct](#struct)
-	* [Flow Control](#flow-control)
-		* [if](#if)
-		* [for](#for)
-		* [switch](#switch)
-		* [defer](#defer)
-			* [ 执行时机](#-执行时机)
-			* [实质](#实质)
-			* [应用场景](#应用场景)
-	* [Function](#function)
-		* [Parameters and Return Value](#parameters-and-return-value)
-
 # Go Basic Notes
+
+<!-- TOC -->
+
+- [Go Basic Notes](#go-basic-notes)
+  - [CLI](#cli)
+    - [Installation](#installation)
+    - [Basic Command](#basic-command)
+      - [Build](#build)
+      - [Test](#test)
+      - [Clean](#clean)
+      - [Modules](#modules)
+  - [Packages](#packages)
+    - [package and import](#package-and-import)
+  - [Variable](#variable)
+    - [Type Declaration](#type-declaration)
+    - [Type conversions](#type-conversions)
+    - [struct](#struct)
+    - [array](#array)
+    - [slice](#slice)
+    - [map](#map)
+  - [Flow Control](#flow-control)
+    - [if](#if)
+    - [for](#for)
+    - [switch](#switch)
+    - [defer](#defer)
+      - [执行时机](#执行时机)
+      - [实质](#实质)
+      - [应用场景](#应用场景)
+  - [Function](#function)
+    - [Parameters and Return Value](#parameters-and-return-value)
+    - [Methods](#methods)
+      - [Pointer/Value Receiver](#pointervalue-receiver)
+    - [Interface](#interface)
+      - [值](#值)
+      - [Type assetions](#type-assetions)
+  - [Concurrent](#concurrent)
+    - [goroutine](#goroutine)
+    - [channels](#channels)
+      - [select](#select)
+      - [Worker Pools](#worker-pools)
+
+<!-- /TOC -->
 
 ## CLI
 
 ### Installation
 
 ```sh
-$ sudo apt install golang
-$ echo "export GOPATH=$HOME/gopath"
-$ echo "export PATH=$PATH:$GOPATH/bin"
-$ go env
-```
-
-```sh
-$GOPATH
-|--- bin
-|--- src
+sudo apt install golang
+echo "export GOPATH=$HOME/gopath"
+echo "export PATH=$PATH:$GOPATH/bin"
+go env
 ```
 
 ### Basic Command
 
 ```sh
-$ go version
-$ go run main.go
-$ go fmt /path/to/test
+go version
+go run main.go
+go fmt /path/to/test
 ```
 
-*   go 的大部分工具的作用基本单位为 package(directories)
+- go 的大部分工具的作用基本单位为 package(directories)
 
 #### Build
 
@@ -68,29 +79,29 @@ $ go install path/to/mainpack
 ```sh
 # path/to/pack/demo.go
 # path/to/pack/demo_test.go
-$ go test path/to/pack
+go test path/to/pack
 ```
 
 #### Clean
 
 ```sh
-$ go clean -i path/to/pack
+go clean -i path/to/pack
 ```
 
 #### Modules
 
-*   remote packages
+- remote packages
+- $GOPATH/bin/hello
 
 ```sh
-$ go get github.com/golang/example/hello
-$ $GOPATH/bin/hello
+go get github.com/golang/example/hello
 ```
 
 ## Packages
 
 ### package and import
 
-*   for path/to/pack:
+- for path/to/pack:
 
 ```go
 package pack
@@ -102,14 +113,14 @@ import (
 )
 ```
 
-*   只有首字母大写的函数才可被成功导出, 首字母小写的函数为文件私有函数
+- 只有首字母大写的函数才可被成功导出, 首字母小写的函数为文件私有函数
 
 ## Variable
 
 ### Type Declaration
 
-*   Go 将类型置于变量名后的理由: reads clearly, from left to right
-*   `:=` 不可用在函数外
+- Go 将类型置于变量名后的理由: reads clearly, from left to right
+- `:=` 不可用在函数外
 
 ```go
 // 简写类型/赋值
@@ -172,7 +183,7 @@ fmt.Println(a)
 
 ### slice
 
-*   s[lo:lo] == nil
+- s[lo:lo] == nil
 
 ```go
 p := []int{2, 3, 5, 7, 11, 13}
@@ -182,7 +193,7 @@ fmt.Println("p[:3] ==", p[:3])  // p[0:3]        => 0, 1, 2
 fmt.Println("p[4:]" ==, p[4:])  // p[4:len(p)-1] => 4, ..., len(p)-2
 ```
 
-*   make 函数创建 slice
+- make 函数创建 slice
 
 ```go
 a := make([]int, 5)     // len(a) = 5
@@ -190,7 +201,7 @@ b := make([]int, 0, 5)  // len(b) = 0, cap(b) = 5
 b = b[:cap(5)]          // len(b) = 5, cap(b) = 5
 ```
 
-*   len && cap
+- len && cap
 
 ```go
 // just shorten/extend, not drop elements
@@ -203,13 +214,13 @@ p = p[:4]
 p = p[2:]
 ```
 
-*   append
+- append
 
 ```go
 append(s, 2, 3, 4)
 ```
 
-*   range(iterator): 返回 2 个值(index int, element copy(s[index]) T), 在每一次迭代 index+=1
+- range(iterator): 返回 2 个值(index int, element copy(s[index]) T), 在每一次迭代 index+=1
 
 ```go
 pow := []int{1, 2, 4, 8, 16, 32, 64, 128}
@@ -285,7 +296,7 @@ for i := 0; i < 10; i++ {
 
 ### switch
 
-*   switch 中的case 自动break(除非使用 fallthrough 语句)
+- switch 中的case 自动break(除非使用 fallthrough 语句)
 
 ```go
 switch time.Saturday {
@@ -324,7 +335,7 @@ switch {    // switch true
 
 defer 语句会将函数执行延迟至上层函数返回处(函数参数会立刻生成):
 
-####  执行时机
+#### 执行时机
 
 函数设置返回值后, 即将返回调用函数前(若 defer 函数修改返回变量, 则会造成返回值与预期不一致)
 
@@ -372,14 +383,14 @@ func f() (result int) {
 
 #### 应用场景
 
-*   资源回收
+- 资源回收
 
 ```go
 mu.Lock()
 defer mu.Unlock()
 ```
 
-*   panic 异常的捕获
+- panic 异常的捕获
 
 ```go
 func f() {
@@ -399,16 +410,16 @@ func g() {
 }
 ```
 
-*   保证语句(在发生异常的情况下)始终会被执行
-*   有意修改返回值
+- 保证语句(在发生异常的情况下)始终会被执行
+- 有意修改返回值
 
 ## Function
 
 ### Parameters and Return Value
 
-*   简写参数类型
-*   多值返回函数
-*   命名返回值(注释文档)
+- 简写参数类型
+- 多值返回函数
+- 命名返回值(注释文档)
 
 ```go
 func swap(x, y string) (string, string) {
@@ -430,7 +441,7 @@ func main() {
 
 ### Methods
 
-*   Go 中没有 class, 但可以在 struct/同一个包内的type 上(receiver)定义方法
+- Go 中没有 class, 但可以在 struct/同一个包内的type 上(receiver)定义方法
 
 ```go
 type Vertex struct {
@@ -465,9 +476,9 @@ func main() {
 
 #### Pointer/Value Receiver
 
-*   pointer receiver: 可以改变原值(call by reference)
-*   value receive: 不可以改变原值(call by value)
-*   调用 methods 时, 可以不考虑 v 是 value/pointer, go 会自动处理
+- pointer receiver: 可以改变原值(call by reference)
+- value receive: 不可以改变原值(call by value)
+- 调用 methods 时, 可以不考虑 v 是 value/pointer, go 会自动处理
 
 ```go
 func (v *Vertex) changeV() {
@@ -486,7 +497,7 @@ func (v Vertex) Abs() {
 (&v).Abs() => v.Abs()
 ```
 
-*   Best Practice: 在同一个类型上定义的所有方法最好统一 receiver 类型(全部 value receivers 或 全部 pointer receivers)
+- Best Practice: 在同一个类型上定义的所有方法最好统一 receiver 类型(全部 value receivers 或 全部 pointer receivers)
 
 ### Interface
 
@@ -506,8 +517,8 @@ var i I     // => (nil, nil)
 
 #### Type assetions
 
-*   单返回值: 断言失败时产生 panic
-*   双返回值: 断言失败时不产生 panic
+- 单返回值: 断言失败时产生 panic
+- 双返回值: 断言失败时不产生 panic
 
 ```go
 // create empty interface, ("hello", string)
@@ -519,7 +530,7 @@ f, ok := i.(float64)// => false(no panic)
 f := i.(float64)    // => false with panic
 ```
 
-*   type switches
+- type switches
 
 ```go
 switch v := i.(type) {
@@ -542,8 +553,8 @@ go f(x, y, z)   // => excute in a new goroutine with share memory
 
 ### channels
 
-*   typed conduit(类型管道)
-*   block excution
+- typed conduit(类型管道)
+- block excution
 
 ```go
 var c chan int = make(chan int)
@@ -579,7 +590,7 @@ func main() {
 
 #### select
 
-*   select(当所有情况都不满足时)可被阻塞
+- select(当所有情况都不满足时)可被阻塞
 
 ```go
 for {
@@ -628,4 +639,3 @@ func main() {
     }
 }
 ```
-

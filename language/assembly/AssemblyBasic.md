@@ -1,39 +1,43 @@
 
-* [Assembly Basic Notes](#assembly-basic-notes)
-	* [GCC/GDB/Kit](#gccgdbkit)
-		* [GCC](#gcc)
-		* [GDB](#gdb)
-		* [MASM/LINK/TD](#masmlinktd)
-			* [MASM](#masm)
-			* [LINK](#link)
-			* [TD](#td)
-				* [Basic](#basic)
-				* [Alt](#alt)
-				* [代码区](#代码区)
-				* [数据区](#数据区)
-		* [NMAKE](#nmake)
-		* [Objdump](#objdump)
-	* [位运算](#位运算)
-	* [Address](#address)
-		* [mov](#mov)
-		* [address](#address-1)
-	* [常用命令](#常用命令)
-		* [读取指令](#读取指令)
-			* [mov](#mov-1)
-		* [算术命令](#算术命令)
-		* [转移命令](#转移命令)
-	* [Control Flow](#control-flow)
-		* [if](#if)
-		* [loop](#loop)
-			* [do/while](#dowhile)
-			* [while/do](#whiledo)
-			* [for](#for)
-		* [switch(**Jump Table**)](#switchjump-table)
-	* [Stack Frame](#stack-frame)
-	* [Data Structure](#data-structure)
-		* [Arrays](#arrays)
-
 # Assembly Basic Notes
+
+<!-- TOC -->
+
+- [Assembly Basic Notes](#assembly-basic-notes)
+  - [GCC/GDB/Kit](#gccgdbkit)
+    - [GCC](#gcc)
+    - [GDB](#gdb)
+    - [MASM/LINK/TD](#masmlinktd)
+      - [MASM](#masm)
+      - [LINK](#link)
+      - [TD](#td)
+        - [Basic](#basic)
+        - [Alt](#alt)
+        - [代码区](#代码区)
+        - [数据区](#数据区)
+    - [NMAKE](#nmake)
+    - [Objdump](#objdump)
+  - [位运算](#位运算)
+  - [Address](#address)
+    - [mov](#mov)
+    - [address](#address)
+  - [常用命令](#常用命令)
+    - [读取指令](#读取指令)
+      - [mov 读取](#mov-读取)
+    - [算术命令](#算术命令)
+    - [转移命令](#转移命令)
+  - [Control Flow](#control-flow)
+    - [if](#if)
+    - [loop](#loop)
+      - [do/while](#dowhile)
+      - [while/do](#whiledo)
+      - [for](#for)
+    - [switch(**Jump Table**)](#switchjump-table)
+  - [Stack Frame](#stack-frame)
+  - [Data Structure](#data-structure)
+    - [Arrays](#arrays)
+
+<!-- /TOC -->
 
 Load-ALU-Store模式 - 读入寄存器，算术逻辑单元运算，回写至内存
 
@@ -73,41 +77,41 @@ link /DEBUG src
 
 #### TD
 
--   `tab`  切换分区
--   `alt`  功能键
--   `ctrl` 子功能键
+- `tab`  切换分区
+- `alt`  功能键
+- `ctrl` 子功能键
 
 ##### Basic
 
--   `F2`: break
--   `F7`: step into
--   `F8`: step over
+- `F2`: break
+- `F7`: step into
+- `F8`: step over
 
 ##### Alt
 
--   `Alt+F5`   : 临时跳转至 dos 界面
--   `Alt+Enter`: 全屏
--   `Alt+X`    : 退出
+- `Alt+F5`   : 临时跳转至 dos 界面
+- `Alt+Enter`: 全屏
+- `Alt+X`    : 退出
 
 ##### 代码区
 
--   `<C-A>` Assemble: 临时修改汇编指令
--   `<C-C>` Caller  : 从子程序处跳回至 Caller 处
--   `<C-F>` Follow  : 查看 CALL/JMP/INT 跳转至的子程序处
--   `<C-O>` Origin  : 跳转至 cs:ip 指向指令处
+- `<C-A>` Assemble: 临时修改汇编指令
+- `<C-C>` Caller  : 从子程序处跳回至 Caller 处
+- `<C-F>` Follow  : 查看 CALL/JMP/INT 跳转至的子程序处
+- `<C-O>` Origin  : 跳转至 cs:ip 指向指令处
 
 ##### 数据区
 
--   `<C-C>` Change: 临时修改数据
--   `<C-D>` Display: 选择显示格式 e.g Byte/Word/Long/Comp/Float/Real/Double/Extended
--   `<C-G>` Goto: 跳转至指定地址区
+- `<C-C>` Change: 临时修改数据
+- `<C-D>` Display: 选择显示格式 e.g Byte/Word/Long/Comp/Float/Real/Double/Extended
+- `<C-G>` Goto: 跳转至指定地址区
 
 ### NMAKE
 
--   `$<`: 源文件名
--   `$?`: 所有源文件名
--   `$@`: 全路径的目标文件
--   `$*`: 除去扩展名的全路径的目标文件
+- `$<`: 源文件名
+- `$?`: 所有源文件名
+- `$@`: 全路径的目标文件
+- `$*`: 除去扩展名的全路径的目标文件
 
 ```makefile
 EXE = $(NAME).exe
@@ -164,11 +168,11 @@ movX  src dest  #X:b/w/l/q （1/2/4/8字节）
 
 ### 读取指令
 
-#### mov
+#### mov 读取
 
 内存数据重复读入寄存器 - 使得汇编代码与上下文无关,减少BUG产生可能性
 
-```
+```c
 R1 = MEM[SP + 8]
 ……
 R1 = MEM[SP + 8]
@@ -182,10 +186,10 @@ R1 = MEM[SP + 8]
 ### 转移命令
 
 - Flags
-    - CF：Carry Flag(unsigned)    进位标志——当有进位时设为1
-    - OF：OverFolw Flag(signed) 溢出标志——当补码溢出时设为1
-    - SF：Sign Flag(signed)           符号标志——当t<0时设为1
-    - ZF：Zero Flag                        零标志——当t==0时设为1
+  - CF：Carry Flag(unsigned)    进位标志——当有进位时设为1
+  - OF：OverFolw Flag(signed) 溢出标志——当补码溢出时设为1
+  - SF：Sign Flag(signed)           符号标志——当t<0时设为1
+  - ZF：Zero Flag                        零标志——当t==0时设为1
 
 - cmpX命令
     `cmpl Src2, Src1`
@@ -202,6 +206,7 @@ R1 = MEM[SP + 8]
 ## Control Flow
 
 ### if
+
 `cmovC src, dest`(C表示Conditional——e/ne等)
     当条件成立时，src->dest  src与dest可分别用于存放两种情况的值
 
@@ -223,7 +228,7 @@ R1 = MEM[SP + 8]
 
 ## Stack Frame
 
-```
+```c
 # 准备阶段
 # Caller-Save: %eax %ecx %edx
 # Callee-Save: %ebx %esi %edi
@@ -251,7 +256,7 @@ int get_sea_digit(int index, int dig) {
 }
 ```
 
-```
+```c
 # 访问二维数组元素
 # %ecx = dig
 # %eax = index
