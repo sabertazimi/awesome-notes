@@ -359,7 +359,7 @@ $ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks
 
 ### reflog
 
-```sh
+```bash
 $ git reflog
 $ git reset HEAD@{index}
 ```
@@ -656,7 +656,7 @@ issues类型和feature类型的实现方式一模一样，仅仅有名字上面�
 
 ### checkout
 
-```sh
+```bash
 $ git checkout <commit-hash-id>
 ```
 
@@ -668,7 +668,7 @@ $ git checkout <commit-hash-id>
 
 ### merge
 
-```sh
+```bash
 $ git merge <giver-branch>/<giver-commit>
 ```
 
@@ -703,12 +703,12 @@ $ git merge <giver-branch>/<giver-commit>
 
 `.git/objects` is immutable, `.git/refs` is mutable
 
-```sh
+```bash
 $ echo 'test content' | git hash-object -w --stdin # -w for write into codebase, --stdin for reading from stdin not file
 $ git cat-file -p <object-hash-number>
 ```
 
-```sh
+```bash
 #!/bin/bash
 
 function seperator() {
@@ -901,7 +901,7 @@ git push -u
 
 ### Purge
 
-```sh
+```bash
 $ git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}')"
 $ git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch your-file-name' --tag-name-filter cat -- --all
 ```
@@ -974,7 +974,7 @@ curl -i http://git.io -F "url=https://github.com/technoweenie" -F "code=t"
 
 #### git fetch
 
-```sh
+```bash
 $ git fetch <repo_name> <branch_name>
 ```
 
@@ -1082,17 +1082,17 @@ mbox 的格式来生成一系列的补丁以便你可以发送到一个邮件列
 
 ### diff && patch
 
-```sh
+```bash
 $ diff -u <src> <dist>
 $ diff -Nur <src_dir> <dist_dir>
 ```
 
-```sh
+```bash
 $ patch -p[num] < patchfile
 $ patch -dry -run -p[num] < patchfile
 ```
 
-```sh
+```bash
 $ diff -Nur program_1.0 program_2.0 > program_2.0.patch
 $ patch -p1 <../program_2.0.patch
 ```

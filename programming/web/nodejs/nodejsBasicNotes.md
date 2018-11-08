@@ -111,7 +111,7 @@
 
 ### Basic Steps
 
-```sh
+```bash
 $ npm adduser
 $ mkdir proj/
 $ npm init --scope=<username>  // 修改 package.json 可再次运行此命令
@@ -133,7 +133,7 @@ $ npm outdated   // 去除过期包
 },
 ```
 
-```sh
+```bash
 $ npm test
 ```
 
@@ -141,7 +141,7 @@ $ npm test
 
 `latest` or `alpha`
 
-```sh
+```bash
 $ npm publish
 $ npm publish --tag [<tag>]
 $ npm dist-tag add <pkg>@<version> [<tag>]
@@ -155,7 +155,7 @@ $ npm dist-tag ls [<pkg>]
 *   minor release: new features not breaking API(backward compatible)
 *   major release: new features breaking API(not backward compatible)
 
-```sh
+```bash
 $ npm version patch
 $ npm publish
 
@@ -168,7 +168,7 @@ $ npm publish
 
 ### Tab Completion
 
-```sh
+```bash
 npm completion >> ~/.bashrc (or ~/.zshrc)
 source ~/.zshrc
 ```
@@ -177,14 +177,14 @@ source ~/.zshrc
 
 ### Basic Command
 
-```sh
+```bash
 $ npm prune // uninstall node_modules not in package.json
 $ npm outdated
 ```
 
 ### Link Command
 
-```sh
+```bash
 # in local B package, build local B binary (npm install -g B)
 $ npm link
 # in local A package, set `B` link in package.json to local B binary
@@ -611,7 +611,7 @@ md5.digest('hex');  // 'acbd18db4cc2f85cedef654fccc4a4d8'
 
 #### Hmac API
 
-```sh
+```bash
 $ openssl genrsa -out key.pem 1024
 ```
 
@@ -723,7 +723,7 @@ assert.ok(0, 'Zero is not truthy');
 
 ### version
 
-```sh
+```bash
 npm version major
 npm version minor
 npm version patch
@@ -779,14 +779,14 @@ npm version patch
 
 -   [Parse Server](https://github.com/ParsePlatform/parse-server)
 
-```sh
+```bash
 $ npm install -g parse-server mongodb-runner
 $ mongodb-runner start
 $ parse-server --appId APPLICATION_ID --masterKey MASTER_KEY
 ```
 -   [JSON Server](https://github.com/typicode/json-server)
 
-```sh
+```bash
 $ npm install -g json-server
 ```
 
@@ -940,7 +940,7 @@ app.use(logger('combined, {stream: accessLogStream}'));
 -   [npm install tooling -g](https://github.com/egoist/tooling)
 -   [cooking](https://github.com/ElemeFE/cooking)
 
-```sh
+```bash
 antd-init
 npm run dev
 npm run build

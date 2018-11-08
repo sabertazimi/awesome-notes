@@ -46,7 +46,7 @@
 
 ### Installation
 
-```sh
+```bash
 sudo apt install golang
 echo "export GOPATH=$HOME/gopath"
 echo "export PATH=$PATH:$GOPATH/bin"
@@ -55,7 +55,7 @@ go env
 
 ### Basic Command
 
-```sh
+```bash
 go version
 go run main.go
 go fmt /path/to/test
@@ -65,7 +65,7 @@ go fmt /path/to/test
 
 #### Build
 
-```sh
+```bash
 # generate library
 $ go build path/to/libpack
 $ go install path/to/libpack
@@ -76,7 +76,7 @@ $ go install path/to/mainpack
 
 #### Test
 
-```sh
+```bash
 # path/to/pack/demo.go
 # path/to/pack/demo_test.go
 go test path/to/pack
@@ -84,7 +84,7 @@ go test path/to/pack
 
 #### Clean
 
-```sh
+```bash
 go clean -i path/to/pack
 ```
 
@@ -93,7 +93,7 @@ go clean -i path/to/pack
 - remote packages
 - $GOPATH/bin/hello
 
-```sh
+```bash
 go get github.com/golang/example/hello
 ```
 

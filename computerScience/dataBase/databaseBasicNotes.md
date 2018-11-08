@@ -138,13 +138,13 @@
 
 tools: xmlcopyeditor xmllint
 
-```sh
+```bash
 xmllint --valid --noout Bookstore.xml
 ```
 
 #### XSD(XML Schema Definition)
 
-```sh
+```bash
 xmllint -schema Bookstore.xsd -noout Bookstore.xml
 ```
 
@@ -546,27 +546,27 @@ sudo rm -r /var/lib/mongodb
 
 ##### create
 
-```sh
+```bash
 use test
 show dbs
 ```
 
 ##### drop
 
-```sh
+```bash
 use dbToDrop
 db.dropDatabase()
 ```
 
 #### query
 
-```sh
+```bash
 db.collection.find().pretty()
 ```
 
 #### insert
 
-```sh
+```bash
 db.collection.insert(ison);
 ```
 
@@ -574,7 +574,7 @@ db.collection.insert(ison);
 
 ##### database
 
-```sh
+```bash
 db.getName()
 db.stats()
 db.version()
@@ -583,7 +583,7 @@ db.getMongo()
 
 ##### collection
 
-```sh
+```bash
 db.getCollectionNames()
 db.printCollectionStats()
 ```

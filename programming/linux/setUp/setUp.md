@@ -45,7 +45,7 @@
 
 ### Basic
 
-```sh
+```bash
 Ctrl+Alt+F1
 # less /usr/share/aif/docs/official_installation_guide_en
 
@@ -57,7 +57,7 @@ Ctrl+Alt+F3
 # lynx /usr/share/doc/arch-wiki/html/index.html
 ```
 
-```sh
+```bash
 # systemctl enable dhcpcd
 # reboot
 # pacman -S --needed base-devel git wget jshon expac yajl zsh vim
@@ -65,7 +65,7 @@ Ctrl+Alt+F3
 
 *   makepkg
 
-```sh
+```bash
 $ curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/package_name.tar.gz
 $ cd package_name
 $ less PKGBUILD
@@ -87,7 +87,7 @@ $ makepkg -si
 
 *   [yaourt](https://archlinux.fr/yaourt-en)
 
-```sh
+```bash
 # packages' list
 $ wget https://aur.archlinux.org/packages.gz
 ```
@@ -96,7 +96,7 @@ $ wget https://aur.archlinux.org/packages.gz
 
 ### Language
 
-```sh
+```bash
 $ export LANG=en_US
 $ xdg-user-dirs-gtk-update
 $ export LANG=zh_CN
@@ -104,7 +104,7 @@ $ export LANG=zh_CN
 
 *   /var/lib/locales/supported.d/local
 
-```sh
+```bash
 $ sudo locale-gen zh_CN.GBK
 $ sudo locale-gen zh_CN.GB18030
 $ sudo dpkg-reconfigure locales
@@ -112,7 +112,7 @@ $ sudo dpkg-reconfigure locales
 
 ### Git
 
-```sh
+```bash
 $ sudo apt install git
 $ git config --global user.name "sabertazimi"
 $ git config --global user.email sabertazimi@gmail.com
@@ -129,7 +129,7 @@ $ git config list
 
 ### Aria2
 
-```sh
+```bash
 $ mkdir -p ~/.aria2
 $ vi ~/.aria2/aria2.conf
 ```
@@ -195,7 +195,7 @@ check-certificate=false
 *   /usr/share/fonts/chinese/TrueType/
 *   [Windows Fonts Download](http://pan.baidu.com/s/1jGRz7ue)
 
-```sh
+```bash
 $ mkfontscale
 $ mkfontdir
 $ fc-cache
@@ -229,7 +229,7 @@ CEFB3783 B2E1BA96 71AAF7B4 AFB61B1D
 import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
 ```
 
-```sh
+```bash
 $ git clone https://github.com/sabertazimi/Awesome-Sublime
 $ mv ~/.config/sublime-text-3/Packages/User ~/.config/sublime-text-3/Packages/User.bk
 $ cp -fr Awesome-Sublime/User ~/.config/sublime-text-3/Packages/
@@ -247,7 +247,7 @@ $ cp -fr Awesome-Sublime/User ~/.config/sublime-text-3/Packages/
 
 #### Visual Studio Code
 
-```sh
+```bash
 $ sudo apt-get install ubuntu-make
 $ umake ide visual-studio-code (--remove)
 $ sudo ln -s /home/hustlyl/.local/share/umake/web/visual-studio-code/Code /usr/local/bin/code
@@ -259,14 +259,14 @@ $ sudo ln -s /home/hustlyl/.local/share/umake/web/visual-studio-code/Code /usr/l
 
 #### ZealDocs
 
-```sh
+```bash
 $ sudo apt-get install zeal
 $ sudo apt-get remove appmenu-qt5
 ```
 
 #### Desktop
 
-```sh
+```bash
 $ sudo apt install gnome gnome-shell gnome-panel gnome-menus gnome-session gnome-tweak-tool gdm
 ```
 
@@ -278,7 +278,7 @@ $ sudo apt install gnome gnome-shell gnome-panel gnome-menus gnome-session gnome
 
 #### pppoeconf/speedtest-cli
 
-```sh
+```bash
 $ sudo pppoeconf
 $ sudo pon dsl-provider
 $ sudo poof
@@ -301,7 +301,7 @@ $ ifconfig ppp0
 *   https://github.com/yangyangwithgnu/autoshadower
 *   https://github.com/shadowsocks/ChinaDNS-Python
 
-```sh
+```bash
 nohup ssserver -c /etc/shadowsocks.json 2>&1 &
 ```
 

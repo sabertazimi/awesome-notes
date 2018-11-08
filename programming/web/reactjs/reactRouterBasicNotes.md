@@ -201,7 +201,7 @@ app.get('*', (req, res) => {
 
 ### Nginx Config
 
-```config
+```conf
 # always serve index.html for any request (react-router for single page application)
 root /var/www/blog/html/build;
 index index.html;

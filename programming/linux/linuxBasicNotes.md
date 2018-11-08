@@ -164,14 +164,14 @@ Host bwg
     Port 29692
 ```
 
-```sh
+```bash
 $ git clone git@github.com:user/repo
 $ git clone git@cs.github.com:user/repo
 ```
 
 ### `ssh -D`
 
-```sh
+```bash
 $ ssh -qTfnN -D 7070 bwg
 $ google-chrome socks5 127.0.0.1 7070
 ```
@@ -603,7 +603,7 @@ e.g apche  /var/www/html/index.html  /usr/local/apache/htdocs/index.html
 *   -k  表示将下载的网页里的链接修改为本地链接.
 *   -p  获得所有显示网页所需的元素
 
-```sh
+```bash
 wget -r -p -np -k -P ~/tmp/ http://java-er.com
 ```
 
@@ -779,7 +779,7 @@ synclient TouchpadOff=0
 *   $#: argc
 *   $?: exit code of last command
 
-```sh
+```bash
 if [ "$?" -ne "0" ];then
     echo "sorry, command execution failed!"
 fi
@@ -812,7 +812,7 @@ fi
 
 *   一般地, 将数值运算用 (()) [[]] 或 $(()) 括起, 可以确保变量不会被识别为 string
 
-```sh
+```bash
 read x
 read y
 

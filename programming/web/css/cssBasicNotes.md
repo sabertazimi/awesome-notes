@@ -1519,7 +1519,7 @@ normal,small-caps(小型大写字母)
 }
 ```
 
-```md
+```c
 宋体 SimSun
 黑体 SimHei
 微软雅黑 Microsoft YaHei

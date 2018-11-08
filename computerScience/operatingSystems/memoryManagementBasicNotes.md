@@ -6,7 +6,7 @@
 
 check usage of virtual memory and swap region
 
-```sh
+```bash
 vmstat 2
 ```
 
@@ -14,6 +14,6 @@ vmstat 2
 
 check detailed usage of memory
 
-```sh
+```bash
 pmap PID
 ```

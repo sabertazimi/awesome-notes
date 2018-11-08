@@ -434,7 +434,7 @@ whatever {
 - [Complete Guide for Sass Directory Structure](https://vanseodesign.com/css/sass-directory-structures)
 - [Difference between Sass Directory Architectures](https://www.sitepoint.com/look-different-sass-architectures)
 
-```text
+```c
 sass/
 |– abstracts/
 |   |– _variables.scss   # Sass Variables

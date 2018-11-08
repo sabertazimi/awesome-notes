@@ -88,7 +88,7 @@ entity body
 - bandwidth-sensitive application: UDP
 - reliable-sensitive application: TCP
 
-```sh
+```bash
 email                   - SMTP              - TCP
 remote terminal access  - Telnet            - TCP
 Web                     - HTTP/HTTPS        - TCP

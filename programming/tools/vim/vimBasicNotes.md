@@ -720,7 +720,7 @@ q/ 或 q: 弹出历史记录窗口
 $ git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
 ```
 
-```sh
+```bash
 $ :PluginInstall
 ```
 
@@ -794,7 +794,7 @@ let g:ctrlp_user_command = 'find %s -type f'
 
 need compile and config
 
-```sh
+```bash
 $ sudo apt-get install build-essential cmake python-dev python3-dev
 $ cd ~/.vim/bundle/YouCompleteMe
 $ ./install.py --clang-completer
