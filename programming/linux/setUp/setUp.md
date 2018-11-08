@@ -1,47 +1,51 @@
 
-* [Linux Set Up](#linux-set-up)
-	* [ArchLinux Set Up](#archlinux-set-up)
-		* [Tutorials](#tutorials)
-		* [Basic](#basic)
-		* [Pacman](#pacman)
-		* [AUR](#aur)
-	* [Ubuntu Set Up](#ubuntu-set-up)
-		* [Language](#language)
-		* [Git](#git)
-		* [Aria2](#aria2)
-		* [ Fonts](#-fonts)
-		* [IDE](#ide)
-			* [ Android Studio/WebStorm/CLion](#-android-studiowebstormclion)
-		* [Text Editor](#text-editor)
-			* [Sublime Text](#sublime-text)
-			* [Atom](#atom)
-			* [Visual Studio Code](#visual-studio-code)
-		* [Software](#software)
-			* [[Appearence](https://blog.microideation.com/2016/08/30/customizing-ubuntu-system/)](#appearencehttpsblogmicroideationcom20160830customizing-ubuntu-system)
-			* [ZealDocs](#zealdocs)
-			* [Desktop](#desktop)
-		* [Shell Tools](#shell-tools)
-			* [f-irc/irssi (irc client)](#f-ircirssi-irc-client)
-			* [pppoeconf/speedtest-cli](#pppoeconfspeedtest-cli)
-		* [GFW](#gfw)
-			* [Hosts](#hosts)
-			* [Lantern](#lantern)
-			* [Shadowsocks](#shadowsocks)
-			* [sshuttle](#sshuttle)
-			* [Proxychains(Global Proxy)](#proxychainsglobal-proxy)
-			* [OpenVPN && vpngate/vpnbook](#openvpn--vpngatevpnbook)
-			* [Docker VPN](#docker-vpn)
-
 # Linux Set Up
+
+<!-- TOC -->
+
+- [Linux Set Up](#linux-set-up)
+  - [ArchLinux Set Up](#archlinux-set-up)
+    - [Tutorials](#tutorials)
+    - [Basic](#basic)
+    - [Pacman](#pacman)
+    - [AUR](#aur)
+  - [Ubuntu Set Up](#ubuntu-set-up)
+    - [Language](#language)
+    - [Git](#git)
+    - [Aria2](#aria2)
+    - [Fonts](#fonts)
+    - [IDE](#ide)
+      - [Android Studio/WebStorm/CLion](#android-studiowebstormclion)
+    - [Text Editor](#text-editor)
+      - [Sublime Text](#sublime-text)
+      - [Atom](#atom)
+      - [Visual Studio Code](#visual-studio-code)
+    - [Software](#software)
+      - [[Appearence](https://blog.microideation.com/2016/08/30/customizing-ubuntu-system/)](#appearencehttpsblogmicroideationcom20160830customizing-ubuntu-system)
+      - [ZealDocs](#zealdocs)
+      - [Desktop](#desktop)
+    - [Shell Tools](#shell-tools)
+      - [f-irc/irssi (irc client)](#f-ircirssi-irc-client)
+      - [pppoeconf/speedtest-cli](#pppoeconfspeedtest-cli)
+    - [GFW](#gfw)
+      - [Hosts](#hosts)
+      - [Lantern](#lantern)
+      - [Shadowsocks](#shadowsocks)
+      - [sshuttle](#sshuttle)
+      - [Proxychains(Global Proxy)](#proxychainsglobal-proxy)
+      - [OpenVPN && vpngate/vpnbook](#openvpn--vpngatevpnbook)
+      - [Docker VPN](#docker-vpn)
+
+<!-- /TOC -->
 
 ## ArchLinux Set Up
 
 ### Tutorials
 
-*   [Arch Linux - Jianshu](http://www.jianshu.com/p/960130fb1fa5)
-*   [Linux Toy](https://linuxtoy.org/archives/the-perfect-linux-desktop-arch-linux-2007-08-2-1.html)
-*   [Gist Part 1](https://gist.github.com/bcbcarl/5d3d9c41d728eef395dd)
-*   [Gist Patr 2](https://gist.github.com/bcbcarl/2d4c77cc06955f74bd0b)
+- [Arch Linux - Jianshu](http://www.jianshu.com/p/960130fb1fa5)
+- [Linux Toy](https://linuxtoy.org/archives/the-perfect-linux-desktop-arch-linux-2007-08-2-1.html)
+- [Gist Part 1](https://gist.github.com/bcbcarl/5d3d9c41d728eef395dd)
+- [Gist Patr 2](https://gist.github.com/bcbcarl/2d4c77cc06955f74bd0b)
 
 ### Basic
 
@@ -63,7 +67,7 @@ Ctrl+Alt+F3
 # pacman -S --needed base-devel git wget jshon expac yajl zsh vim
 ```
 
-*   makepkg
+- makepkg
 
 ```bash
 $ curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/package_name.tar.gz
@@ -80,12 +84,12 @@ $ makepkg -si
 
 ### Pacman
 
-*   /etc/pacman.conf
-*   /etc/pacman.d/mirrorlist
+- /etc/pacman.conf
+- /etc/pacman.d/mirrorlist
 
 ### AUR
 
-*   [yaourt](https://archlinux.fr/yaourt-en)
+- [yaourt](https://archlinux.fr/yaourt-en)
 
 ```bash
 # packages' list
@@ -97,44 +101,44 @@ $ wget https://aur.archlinux.org/packages.gz
 ### Language
 
 ```bash
-$ export LANG=en_US
-$ xdg-user-dirs-gtk-update
-$ export LANG=zh_CN
+export LANG=en_US
+xdg-user-dirs-gtk-update
+export LANG=zh_CN
 ```
 
-*   /var/lib/locales/supported.d/local
+- /var/lib/locales/supported.d/local
 
 ```bash
-$ sudo locale-gen zh_CN.GBK
-$ sudo locale-gen zh_CN.GB18030
-$ sudo dpkg-reconfigure locales
+sudo locale-gen zh_CN.GBK
+sudo locale-gen zh_CN.GB18030
+sudo dpkg-reconfigure locales
 ```
 
 ### Git
 
 ```bash
-$ sudo apt install git
-$ git config --global user.name "sabertazimi"
-$ git config --global user.email sabertazimi@gmail.com
-$ git config --global core.editor vim
-$ git config --global push.default simple
-$ git config --global credential.helper store
-$ git config --global commit.template $HOME/.gitmsg.md
-$ git config --global alias.s "status"
-$ git config --global alias.a "add"
-$ git config --global alias.c "commit -v"
-$ git config --global alias.p "push"
-$ git config list
+sudo apt install git
+git config --global user.name "sabertazimi"
+git config --global user.email sabertazimi@gmail.com
+git config --global core.editor vim
+git config --global push.default simple
+git config --global credential.helper store
+git config --global commit.template $HOME/.gitmsg.md
+git config --global alias.s "status"
+git config --global alias.a "add"
+git config --global alias.c "commit -v"
+git config --global alias.p "push"
+git config list
 ```
 
 ### Aria2
 
 ```bash
-$ mkdir -p ~/.aria2
-$ vi ~/.aria2/aria2.conf
+mkdir -p ~/.aria2
+vi ~/.aria2/aria2.conf
 ```
 
-```
+```bash
 #用户名
 #rpc-user=user
 #密码
@@ -190,20 +194,20 @@ file-allocation=prealloc
 check-certificate=false
 ```
 
-###  Fonts
+### Fonts
 
-*   /usr/share/fonts/chinese/TrueType/
-*   [Windows Fonts Download](http://pan.baidu.com/s/1jGRz7ue)
+- /usr/share/fonts/chinese/TrueType/
+- [Windows Fonts Download](http://pan.baidu.com/s/1jGRz7ue)
 
 ```bash
-$ mkfontscale
-$ mkfontdir
-$ fc-cache
+mkfontscale
+mkfontdir
+fc-cache
 ```
 
 ### IDE
 
-####  Android Studio/WebStorm/CLion
+#### Android Studio/WebStorm/CLion
 
 ### Text Editor
 
@@ -230,14 +234,14 @@ import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc5
 ```
 
 ```bash
-$ git clone https://github.com/sabertazimi/Awesome-Sublime
-$ mv ~/.config/sublime-text-3/Packages/User ~/.config/sublime-text-3/Packages/User.bk
-$ cp -fr Awesome-Sublime/User ~/.config/sublime-text-3/Packages/
+git clone https://github.com/sabertazimi/Awesome-Sublime
+mv ~/.config/sublime-text-3/Packages/User ~/.config/sublime-text-3/Packages/User.bk
+cp -fr Awesome-Sublime/User ~/.config/sublime-text-3/Packages/
 ```
 
 #### Atom
 
-*   plugins: sync-SETTINGS(gist)
+- plugins: sync-SETTINGS(gist)
 
 ```javascript
   "activate-power-mode":
@@ -248,9 +252,9 @@ $ cp -fr Awesome-Sublime/User ~/.config/sublime-text-3/Packages/
 #### Visual Studio Code
 
 ```bash
-$ sudo apt-get install ubuntu-make
-$ umake ide visual-studio-code (--remove)
-$ sudo ln -s /home/hustlyl/.local/share/umake/web/visual-studio-code/Code /usr/local/bin/code
+sudo apt-get install ubuntu-make
+umake ide visual-studio-code (--remove)
+sudo ln -s /home/hustlyl/.local/share/umake/web/visual-studio-code/Code /usr/local/bin/code
 ```
 
 ### Software
@@ -260,14 +264,14 @@ $ sudo ln -s /home/hustlyl/.local/share/umake/web/visual-studio-code/Code /usr/l
 #### ZealDocs
 
 ```bash
-$ sudo apt-get install zeal
-$ sudo apt-get remove appmenu-qt5
+sudo apt-get install zeal
+sudo apt-get remove appmenu-qt5
 ```
 
 #### Desktop
 
 ```bash
-$ sudo apt install gnome gnome-shell gnome-panel gnome-menus gnome-session gnome-tweak-tool gdm
+sudo apt install gnome gnome-shell gnome-panel gnome-menus gnome-session gnome-tweak-tool gdm
 ```
 
 ### Shell Tools
@@ -279,27 +283,27 @@ $ sudo apt install gnome gnome-shell gnome-panel gnome-menus gnome-session gnome
 #### pppoeconf/speedtest-cli
 
 ```bash
-$ sudo pppoeconf
-$ sudo pon dsl-provider
-$ sudo poof
-$ ifconfig ppp0
+sudo pppoeconf
+sudo pon dsl-provider
+sudo poof
+ifconfig ppp0
 ```
 
 ### GFW
 
 #### Hosts
 
-*   https://github.com/racaljk/hosts
+- [Hosts](https://github.com/racaljk/hosts)
 
 #### Lantern
 
-*   https://github.com/getlantern/lantern
+- [Lantern](https://github.com/getlantern/lantern)
 
 #### Shadowsocks
 
-*   https://github.com/breakwa11/shadowsocks-rss
-*   https://github.com/yangyangwithgnu/autoshadower
-*   https://github.com/shadowsocks/ChinaDNS-Python
+- [RSS](https://github.com/breakwa11/shadowsocks-rss)
+- [Autoshadower](https://github.com/yangyangwithgnu/autoshadower)
+- [ChinaDNS](https://github.com/shadowsocks/ChinaDNS-Python)
 
 ```bash
 nohup ssserver -c /etc/shadowsocks.json 2>&1 &
@@ -307,17 +311,17 @@ nohup ssserver -c /etc/shadowsocks.json 2>&1 &
 
 #### sshuttle
 
-*   https://github.com/apenwarr/sshuttle
+- [sshuttle](https://github.com/apenwarr/sshuttle)
 
 #### Proxychains(Global Proxy)
 
-*   https://github.com/rofl0r/proxychains-ng
+- [proxychains](https://github.com/rofl0r/proxychains-ng)
 
 #### OpenVPN && vpngate/vpnbook
 
-*   https://github.com/OpenVPN/openvpn
-*   https://github.com/waylau/vpngate-mirrors
+- [openvpn](https://github.com/OpenVPN/openvpn)
+- [vpngate](https://github.com/waylau/vpngate-mirrors)
 
 #### Docker VPN
 
-*   https://github.com/hwdsl2/docker-ipsec-vpn-server
+- [Docker VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server)

@@ -1,5 +1,22 @@
 # Design Patterns Notes
 
+<!-- TOC -->
+
+- [Design Patterns Notes](#design-patterns-notes)
+  - [Prototype](#prototype)
+  - [Bridge](#bridge)
+  - [Composite](#composite)
+  - [Adapter](#adapter)
+  - [Decorator](#decorator)
+  - [Strategy](#strategy)
+  - [Facade](#facade)
+  - [Flyweight](#flyweight)
+  - [State](#state)
+  - [Mediator](#mediator)
+  - [Iterator](#iterator)
+
+<!-- /TOC -->
+
 ## Prototype
 
 关键方法clone()

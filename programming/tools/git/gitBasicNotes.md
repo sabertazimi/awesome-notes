@@ -1,143 +1,159 @@
 
-* [Git Basic Note](#git-basic-note)
-	* [Basic](#basic)
-		* [Config](#config)
-			* [Initialize](#initialize)
-		* [File State](#file-state)
-		* [.gitignore](#gitignore)
-		* [diff](#diff)
-		* [add](#add)
-		* [commit](#commit)
-			* [提交信息格式](#提交信息格式)
-				* [Message Subject(First Line)](#message-subjectfirst-line)
-					* [Type Values](#type-values)
-					* [Scope Values](#scope-values)
-				* [Message Body](#message-body)
-				* [Message Footer](#message-footer)
-		* [stash](#stash)
-		* [revert](#revert)
-		* [remove](#remove)
-		* [move](#move)
-		* [log](#log)
-			* [pretty-format](#pretty-format)
-			* [常用选项](#常用选项)
-		* [show](#show)
-		* [remote](#remote)
-		* [tag](#tag)
-		* [alias](#alias)
-		* [merge](#merge)
-		* [rebase](#rebase)
-	* [Branch](#branch)
-		* [Basic Workflow Commands](#basic-workflow-commands)
-			* [Basic](#basic-1)
-			* [remote](#remote-1)
-		* [Advanced Branch Workflow](#advanced-branch-workflow)
-			* [master类型 && develop类型](#master类型--develop类型)
-				* [每一次的提交都必须有意义](#每一次的提交都必须有意义)
-				* [开发型任务中的master类型与develop类型分支必须成对出现，master分支的推进只能来源与release分支和hotfix分支的合并，禁止在master分支上直接提交。](#开发型任务中的master类型与develop类型分支必须成对出现master分支的推进只能来源与release分支和hotfix分支的合并禁止在master分支上直接提交)
-			* [feature类型分支满足：](#feature类型分支满足)
-			* [release类型分支满足：](#release类型分支满足)
-			* [hotfix类型分支满足:](#hotfix类型分支满足)
-			* [issues类型分支满足：](#issues类型分支满足)
-			* [trials类型分支满足：](#trials类型分支满足)
-			* [basedOn类型分支满足:](#basedon类型分支满足)
-			* [work类型分支满足：](#work类型分支满足)
-	* [GitHub](#github)
-		* [LICENSE](#license)
-			* [Popular LICENSE](#popular-license)
-			* [Unique LICENSE](#unique-license)
-		* [Teamwork](#teamwork)
-			* [Pull Request Work Flow](#pull-request-work-flow)
-		* [Create Repo without Browser](#create-repo-without-browser)
-		* [Wiki](#wiki)
-			* [Wiki Git Access](#wiki-git-access)
-		* [Shorten GitHub URL](#shorten-github-url)
-	* [Commands List](#commands-list)
-		* [Basic Commands](#basic-commands)
-			* [git config](#git-config)
-			* [git help](#git-help)
-			* [git init](#git-init)
-			* [git clone](#git-clone)
-			* [git add](#git-add)
-			* [git status](#git-status)
-			* [git diff](#git-diff)
-			* [git difftool](#git-difftool)
-			* [git commit](#git-commit)
-			* [git reset](#git-reset)
-			* [git rm](#git-rm)
-			* [git mv](#git-mv)
-			* [git clean](#git-clean)
-			* [git branch](#git-branch)
-			* [git checkout](#git-checkout)
-			* [git merge](#git-merge)
-			* [git mergetool](#git-mergetool)
-			* [git log](#git-log)
-			* [git stash](#git-stash)
-			* [git tag](#git-tag)
-			* [git fetch](#git-fetch)
-			* [git pull](#git-pull)
-			* [git push](#git-push)
-			* [git remote](#git-remote)
-			* [git archive](#git-archive)
-			* [git submodule](#git-submodule)
-		* [检查与比较](#检查与比较)
-			* [git show](#git-show)
-			* [git shortlog](#git-shortlog)
-			* [git describe](#git-describe)
-		* [调试](#调试)
-			* [git bisect](#git-bisect)
-			* [git blame](#git-blame)
-			* [git grep](#git-grep)
-		* [补丁](#补丁)
-			* [git cherry-pick](#git-cherry-pick)
-			* [git rebase](#git-rebase)
-			* [git revert](#git-revert)
-		* [邮件](#邮件)
-			* [git apply](#git-apply)
-			* [git am](#git-am)
-			* [git format-patch](#git-format-patch)
-			* [git imap-send](#git-imap-send)
-			* [git send-email](#git-send-email)
-			* [git request-pull](#git-request-pull)
-		* [外部系统](#外部系统)
-			* [git svn](#git-svn)
-			* [git fast-import](#git-fast-import)
-		* [管理](#管理)
-			* [git gc](#git-gc)
-			* [git fsck](#git-fsck)
-			* [git reflog](#git-reflog)
-			* [git filter-branch](#git-filter-branch)
-			* [git-note](#git-note)
-
 # Git Basic Note
+
+<!-- TOC -->
+
+- [Git Basic Note](#git-basic-note)
+  - [Basic](#basic)
+    - [Config](#config)
+      - [Initialize](#initialize)
+    - [File State](#file-state)
+    - [.gitignore](#gitignore)
+    - [diff](#diff)
+    - [add](#add)
+    - [commit](#commit)
+      - [提交信息格式](#提交信息格式)
+        - [Message Subject(First Line)](#message-subjectfirst-line)
+          - [Type Values](#type-values)
+          - [Scope Values](#scope-values)
+        - [Message Body](#message-body)
+        - [Message Footer](#message-footer)
+    - [stash](#stash)
+    - [revert](#revert)
+    - [remove](#remove)
+    - [move](#move)
+    - [log](#log)
+      - [pretty-format](#pretty-format)
+      - [常用选项](#常用选项)
+    - [reflog](#reflog)
+    - [show](#show)
+    - [remote](#remote)
+    - [tag](#tag)
+    - [alias](#alias)
+    - [merge](#merge)
+    - [rebase](#rebase)
+  - [Branch](#branch)
+    - [Basic Workflow Commands](#basic-workflow-commands)
+      - [Basic Branch](#basic-branch)
+      - [remote branch](#remote-branch)
+    - [Advanced Branch Workflow](#advanced-branch-workflow)
+      - [master类型 && develop类型](#master类型--develop类型)
+      - [feature类型分支满足](#feature类型分支满足)
+      - [release类型分支满足](#release类型分支满足)
+      - [hotfix类型分支满足](#hotfix类型分支满足)
+      - [issues类型分支满足](#issues类型分支满足)
+      - [trials类型分支满足](#trials类型分支满足)
+      - [basedOn类型分支满足](#basedon类型分支满足)
+      - [work类型分支满足](#work类型分支满足)
+  - [Inside](#inside)
+    - [add detail](#add-detail)
+    - [commit detail](#commit-detail)
+    - [checkout detail](#checkout-detail)
+    - [merge detail](#merge-detail)
+    - [fetch detail](#fetch-detail)
+    - [clone detail](#clone-detail)
+    - [push detail](#push-detail)
+    - [HEAD/branch detail](#headbranch-detail)
+    - [.git/objects](#gitobjects)
+  - [GitHub](#github)
+    - [LICENSE](#license)
+      - [Popular LICENSE](#popular-license)
+      - [Unique LICENSE](#unique-license)
+    - [Teamwork](#teamwork)
+      - [Pull Request Work Flow](#pull-request-work-flow)
+    - [Create Repo without Browser](#create-repo-without-browser)
+    - [Purge](#purge)
+    - [Wiki](#wiki)
+      - [Wiki Git Access](#wiki-git-access)
+    - [Shorten GitHub URL](#shorten-github-url)
+  - [Commands List](#commands-list)
+    - [Basic Commands](#basic-commands)
+      - [git config](#git-config)
+      - [git help](#git-help)
+      - [git init](#git-init)
+      - [git clone](#git-clone)
+      - [git add](#git-add)
+      - [git status](#git-status)
+      - [git diff](#git-diff)
+      - [git difftool](#git-difftool)
+      - [git commit](#git-commit)
+      - [git reset](#git-reset)
+      - [git rm](#git-rm)
+      - [git mv](#git-mv)
+      - [git clean](#git-clean)
+      - [git branch](#git-branch)
+      - [git checkout](#git-checkout)
+      - [git merge](#git-merge)
+      - [git mergetool](#git-mergetool)
+      - [git log](#git-log)
+      - [git stash](#git-stash)
+      - [git tag](#git-tag)
+      - [git fetch](#git-fetch)
+      - [git pull](#git-pull)
+      - [git push](#git-push)
+      - [git remote](#git-remote)
+      - [git archive](#git-archive)
+      - [git submodule](#git-submodule)
+    - [检查与比较](#检查与比较)
+      - [git show](#git-show)
+      - [git shortlog](#git-shortlog)
+      - [git describe](#git-describe)
+    - [调试](#调试)
+      - [git bisect](#git-bisect)
+      - [git blame](#git-blame)
+      - [git grep](#git-grep)
+    - [补丁](#补丁)
+      - [git cherry-pick](#git-cherry-pick)
+      - [git rebase](#git-rebase)
+      - [git revert](#git-revert)
+    - [邮件](#邮件)
+      - [git apply](#git-apply)
+      - [git am](#git-am)
+      - [git format-patch](#git-format-patch)
+      - [git imap-send](#git-imap-send)
+      - [git send-email](#git-send-email)
+      - [git request-pull](#git-request-pull)
+    - [外部系统](#外部系统)
+      - [git svn](#git-svn)
+      - [git fast-import](#git-fast-import)
+    - [管理](#管理)
+      - [git gc](#git-gc)
+      - [git fsck](#git-fsck)
+      - [git reflog](#git-reflog)
+      - [git filter-branch](#git-filter-branch)
+      - [git-note](#git-note)
+  - [Other tools](#other-tools)
+    - [diff && patch](#diff--patch)
+
+<!-- /TOC -->
 
 ## Basic
 
 ### Config
 
--   /etc/gitconfig
--   ~/.gitconfig 或 ~/.config/git/config
--   repo/.git/config
--   git config --global color.ui true
+- /etc/gitconfig
+- ~/.gitconfig 或 ~/.config/git/config
+- repo/.git/config
+- git config --global color.ui true
 
 #### Initialize
 
 ```bash
-$ git config --global user.name "sabertazimi"
-$ git config --global user.email sabertazimi@gmail.com
-$ git config --global core.editor vim
-$ git config --global push.default simple
-$ git config --global credential.helper store
-$ git config --global commit.template $HOME/.gitmsg.md
-$ git config --global http.postbuffer 524288000
-$ git config --list
+git config --global user.name "sabertazimi"
+git config --global user.email sabertazimi@gmail.com
+git config --global core.editor vim
+git config --global push.default simple
+git config --global credential.helper store
+git config --global commit.template $HOME/.gitmsg.md
+git config --global http.postbuffer 524288000
+git config --list
 ```
 
 ```bash
-$ git help
-$ git --help
-$ man git-
-$ git help config
+git help
+git --help
+man git-
+git help config
 ```
 
 ### File State
@@ -148,12 +164,12 @@ Untracked Unmodified(**Stable State**) Modified Staged
 
 文件 .gitignore 的格式规范如下：
 
--   所有空行或者以 ＃ 开头的行都会被 Git 忽略
--   可以使用标准的 glob 模式(简化正则表达式)匹配
--   匹配模式可以以（ / ）开头防止递归
--   匹配模式可以以（ / ）结尾指定目录
--   要跟踪指定模式以外的文件或目录，可以在模式前加上惊叹号（ ! ）取反
--   [GitHub gitignore Style](https://github.com/github/gitignore)
+- 所有空行或者以 ＃ 开头的行都会被 Git 忽略
+- 可以使用标准的 glob 模式(简化正则表达式)匹配
+- 匹配模式可以以（ / ）开头防止递归
+- 匹配模式可以以（ / ）结尾指定目录
+- 要跟踪指定模式以外的文件或目录，可以在模式前加上惊叹号（ ! ）取反
+- [GitHub gitignore Style](https://github.com/github/gitignore)
 
 ```bash
 # no .a files
@@ -180,16 +196,16 @@ doc/**/*.pdf
 查看未暂存(un-staged)差异
 
 ```bash
-$ git diff
+git diff
 ```
 
 查看已暂存(staged)差异
 
 ```bash
-$ git diff --staged
+git diff --staged
 ```
 
-*显示空白字符错误(space/tab/return)*
+显示空白字符错误(space/tab/return)
 
 ```bash
 git diff --check
@@ -197,25 +213,25 @@ git diff --check
 
 ### add
 
--   交互式的选择 add 特定部分
+- 交互式的选择 add 特定部分
 
 ```bash
-$ git add -p
+git add -p
 ```
 
 ### commit
 
--   -a: 跳过暂存阶段(git add)
--   -v: 显示详细diff信息
+- -a: 跳过暂存阶段(git add)
+- -v: 显示详细diff信息
 
 ```bash
-$ git commit -a -v
+git commit -a -v
 ```
 
 重新提交
 
 ```bash
-$ git commit --amend -a -v
+git commit --amend -a -v
 ```
 
 #### 提交信息格式
@@ -235,14 +251,14 @@ no more than 50 characters
 ###### Type Values
 
 - (production code change)
-    - feat (new feature for the user)
-    - fix (bug fix for the user)
-    - docs (changes to the documentation)
-    - refactor (refactoring production code, e.g. renaming a variable)
+  - feat (new feature for the user)
+  - fix (bug fix for the user)
+  - docs (changes to the documentation)
+  - refactor (refactoring production code, e.g. renaming a variable)
 - (no production code change)
-    - style (formatting, missing semi colons)
-    - test (adding missing tests, refactoring tests)
-    - chore (updating grunt tasks etc)
+  - style (formatting, missing semi colons)
+  - test (adding missing tests, refactoring tests)
+  - chore (updating grunt tasks etc)
 
 ###### Scope Values
 
@@ -263,24 +279,24 @@ no more than 50 characters
 
 - referencing issues e.g. close #666, #888
 - breaking changes 碎片式更改(特别是**用户端**)
-e.g.`port-runner` command line option has changed to `runner-port`, so that it is
-consistent with the configuration file syntax.
-To migrate your project, change all the commands, where you use `--port-runner`
-to `--runner-port`.
+  e.g.`port-runner` command line option has changed to `runner-port`, so that it is
+  consistent with the configuration file syntax.
+  To migrate your project, change all the commands, where you use `--port-runner`
+  to `--runner-port`.
 
 ### stash
 
--   git stash: 备份当前的工作区的内容，将当前的工作区内容保存到Git栈
--   git stash pop: 从Git栈中读取最近一次保存的内容，恢复工作区的相关内容
--   git stash list: 显示Git栈内的所有备份
--   git stash clear: 清空Git栈
+- git stash: 备份当前的工作区的内容，将当前的工作区内容保存到Git栈
+- git stash pop: 从Git栈中读取最近一次保存的内容，恢复工作区的相关内容
+- git stash list: 显示Git栈内的所有备份
+- git stash clear: 清空Git栈
 
 ### revert
 
--   重新提交前n次的commit
+- 重新提交前n次的commit
 
 ```bash
-$ git revert -n
+git revert -n
 ```
 
 ### remove
@@ -288,38 +304,37 @@ $ git revert -n
 完全删除文件
 
 ```bash
-$ git rm filename
+git rm filename
 ```
 
 --cached: 保留磁盘文件(仅从git库移除文件)
 
 ```bash
-$ git rm --cached filename
+git rm --cached filename
 ```
 
 ### move
 
 ```bash
-$ git mv old_path new_path
+git mv old_path new_path
 ```
 
 ### log
 
--   -p: 打印diff差异信息
--   -n: n为十进制数字,显示最近n次信息
--   --stat: 打印简略统计信息
--   --graph: 显示分支合并历史
--   --pretty=: 设置日志格式
--   --author=: 指定作者
--   --committer=: 指定提交者
--   --after=/--since=: 限制日志时间
--   --before=/--until=: 限制日志时间 "2008-01-15" "2 years 1 day 3 minutes ago"
--   --decorate: 查看各个分支当前所指的对象(commit object)
--   --help
-
+- -p: 打印diff差异信息
+- -n: n为十进制数字,显示最近n次信息
+- --stat: 打印简略统计信息
+- --graph: 显示分支合并历史
+- --pretty=: 设置日志格式
+- --author=: 指定作者
+- --committer=: 指定提交者
+- --after=/--since=: 限制日志时间
+- --before=/--until=: 限制日志时间 "2008-01-15" "2 years 1 day 3 minutes ago"
+- --decorate: 查看各个分支当前所指的对象(commit object)
+- --help
 
 ```bash
-$ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks path_name
+git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks path_name
 ```
 
 #### pretty-format
@@ -360,16 +375,16 @@ $ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks
 ### reflog
 
 ```bash
-$ git reflog
-$ git reset HEAD@{index}
+git reflog
+git reset HEAD@{index}
 ```
 
 ### show
 
--   **查看其他分支 或 提交点的文件状态**
+- 查看其他分支 或 提交点的文件状态
 
 ```bash
-$ git show branchName/commitHash:fileName
+git show branchName/commitHash:fileName
 ```
 
 ### remote
@@ -377,39 +392,39 @@ $ git show branchName/commitHash:fileName
 添加与删除远程仓库源
 
 ```bash
-$ git remote add <shortname> <remote-url>
-$ git remote rm <shortname>
+git remote add <shortname> <remote-url>
+git remote rm <shortname>
 ```
 
 拉取和推送变更
 
 ```bash
-$ git pull [remote-name]
-$ git push [remote-name] [local-branch-name]:[remote-branch-name]
+git pull [remote-name]
+git push [remote-name] [local-branch-name]:[remote-branch-name]
 ```
 
 显示仓库信息
 
 ```bash
-$ git remote show [remote-name]
+git remote show [remote-name]
 ```
 
 重命名仓库缩写名
 
 ```bash
-$ git remote rename <old> <new>
+git remote rename <old> <new>
 ```
 
 从本地操作,删除远程仓库的分支
 
 ```bash
-$ git push origin --delete [remote-branch-name]
+git push origin --delete [remote-branch-name]
 ```
 
 保存推送密码
 
 ```bash
-$ git config --global credential.helper store
+git config --global credential.helper store
 ```
 
 ### tag
@@ -417,49 +432,49 @@ $ git config --global credential.helper store
 列出标记及其信息
 
 ```bash
-$ git tag
-$ git tag -l "v1.8-"
-$ git show <tagname(v1.4)>
+git tag
+git tag -l "v1.8-"
+git show <tagname(v1.4)>
 ```
 
 创建标签:
 
--   不加-m会调用core.editor)
--   省略commit序列,标签添加至最新提交
+- 不加-m会调用core.editor)
+- 省略commit序列,标签添加至最新提交
 
 创建附注(annotated)标签
 
 ```bash
-$ git tag -a <tagname(v1.4)> [commit序列]
+git tag -a <tagname(v1.4)> [commit序列]
 ```
 
 创建轻量(lightweight)标签
 
 ```bash
-$ git tag <tagname(v1.4)> [commit序列]
+git tag <tagname(v1.4)> [commit序列]
 ```
 
 共享标签至远程库
 
 ```bash
-$ git push [remote-name] <tagname>
-$ git push [remote-name] --tags
+git push [remote-name] <tagname>
+git push [remote-name] --tags
 ```
 
 ### alias
 
--   !: 执行外部命令
+- !: 执行外部命令
 
 ```bash
-$ git config --global alias.co checkout
-$ git config --global alias.br branch
-$ git config --global alias.ci commit
-$ git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
 
-$ git config --global alias.unstage 'reset HEAD --'
-$ git config --global alias.last 'log -1 HEAD'
+git config --global alias.unstage 'reset HEAD --'
+git config --global alias.last 'log -1 HEAD'
 
-$ git config --global alias.visual '!gitk'
+git config --global alias.visual '!gitk'
 ```
 
 ### merge
@@ -471,13 +486,13 @@ $ git config --global alias.visual '!gitk'
 切换到工作分支,编码开发新特性
 
 ```bash
-$ git checkout feature-branch
+git checkout feature-branch
 ```
 
 新特性开发完毕,变基操作以简洁提交历史
 
 ```bash
-$ git rebase master
+git rebase master
 
 git rebase [basebranch] [topicbranch]
 ```
@@ -485,59 +500,59 @@ git rebase [basebranch] [topicbranch]
 切换到主分支,合并特性分支
 
 ```bash
-$ git checkout master
-$ git merge feature-branch
+git checkout master
+git merge feature-branch
 ```
 
 ## Branch
 
 ### Basic Workflow Commands
 
-#### Basic
+#### Basic Branch
 
 创建新分支
 
 ```bash
-$ git branch <new-branch-name>
+git branch <new-branch-name>
 ```
 
 删除分支
 
 ```bash
-$ git branch -d <branch-name>
+git branch -d <branch-name>
 ```
 
 切换分支
 
 ```bash
-$ git checkout <branch-name>
+git checkout <branch-name>
 ```
 
 切换到新分支
 
 ```bash
-$ git checkout -b <new-branch-name>
+git checkout -b <new-branch-name>
 ```
 
 打印分支信息
 
 ```bash
-$ git branch -v(详细信息) -vv(详细远程信息) --merged(显示合并至当前分支的分支) --no-merged(显示未合并至当前分支的分支)
+git branch -v(详细信息) -vv(详细远程信息) --merged(显示合并至当前分支的分支) --no-merged(显示未合并至当前分支的分支)
 ```
 
-#### remote
+#### remote branch
 
 本地分支跟踪远程分支(在此本地分支上运行git pull自动抓取),2种方式:
 
--   设置当前所在本地分支跟踪某一远程分支
+- 设置当前所在本地分支跟踪某一远程分支
 
 ```bash
-$ git branch -u [remotename]/[branch]
+git branch -u [remotename]/[branch]
 ```
 
--   创建并切换至新的本地分支(跟踪某一远程分支)
-    -   --track: 本地分支由git自动命名
-    -   -b: 本地分支由创建者命名
+- 创建并切换至新的本地分支(跟踪某一远程分支)
+  - --track: 本地分支由git自动命名
+  - -b: 本地分支由创建者命名
 
 ```bash
 git checkout --track [new-local-branch]
@@ -567,20 +582,20 @@ git checkout -b [new-local-branch] [remotename]/[branch]
 
 e.g master/develop/next
 
-##### 每一次的提交都必须有意义
+- 每一次的提交都必须有意义
 
 git在每次提交的时候要求输入对此提交的概括，这个概括不能为空。
 
 正确的提交概括：更新了程序doc
 错误的提交概括：updates
 
-##### 开发型任务中的master类型与develop类型分支必须成对出现，master分支的推进只能来源与release分支和hotfix分支的合并，禁止在master分支上直接提交。
+- 开发型任务中的master类型与develop类型分支必须成对出现，master分支的推进只能来源与release分支和hotfix分支的合并，禁止在master分支上直接提交
 
 > master分支上只有我们推送上去的稳定版本的程序，develop分支上的程序一直处于开发状态，不稳定。
 在开发型任务中使用gg-init进行版本控制的初始化，建立配套的master～develop分支对。
 在使用型任务中使用gg-work-init进行版本控制的初始化，拉取需要使用的稳定版本程序的master分支，并初始化对应的basedOn分支（见9）。
 
-#### feature类型分支满足：
+#### feature类型分支满足
 
   1. 只能从develop类型分支上创建
   2. 最终必须合并到develop类型分支
@@ -590,7 +605,7 @@ git在每次提交的时候要求输入对此提交的概括，这个概括不�
 在develop类型分支上使用gg-feature-open featureName建立并转向一个名为feature/featureName的新分支
 在一个feature类型分支上使用gg-feature-close把这个分支的工作合并到develop类型分支上，删除此分支，完成一个特性的开发
 
-#### release类型分支满足：
+#### release类型分支满足
 
   1. 只能从develop类型分支上创建
   2. 最终必须同时合并到master类型分支(发布新的版本)和develop类型分支(基于新版本的进一步开发)
@@ -598,15 +613,15 @@ git在每次提交的时候要求输入对此提交的概括，这个概括不�
 
 > 每当工作进入到一个较为稳定阶段的时候，我们可以使用gg-release-open versionNum建立并转向一个名为release-versionNum的临时分支，在这个分支上允许进行小的改动（比如修改一下readme文件中的版本号），然后使用gg-release-close将此版本合并（发布）到master类型分支上，同时合并到develop类型分支上，然后删除此分支。
 
-#### hotfix类型分支满足:
+#### hotfix类型分支满足
 
-  1.  只能从master类型分支上创建
-  2.  最终必须同时合并到master类型分支(发布新的热补丁版本)和develop类型分支(基于新版本的进一步开发)
-  3.  最终分支被删除
+1. 只能从master类型分支上创建
+2. 最终必须同时合并到master类型分支(发布新的热补丁版本)和develop类型分支(基于新版本的进一步开发)
+3. 最终分支被删除
 
 > 当新版本发布后发现必须马上解决的严重bug时，我们应该使用gg-hotfix-open versionNum建立并转向一个名为hotfix-versionNum的临时分支，在这个分支上完成bug的修复，然后使用gg-hotfix-close将此版本合并（发布）到master类型分支上，同时合并到develop类型分支上，然后删除此分支。
 
-#### issues类型分支满足：
+#### issues类型分支满足
 
   1. 只能从develop类型分支上创建
   2. 最终必须合并到develop类型分支
@@ -617,94 +632,93 @@ git在每次提交的时候要求输入对此提交的概括，这个概括不�
 在一个issues类型分支上使用gg-issues-close把这个分支的工作合并到develop类型分支上，然后删除此分支，解决了一个复杂的问题
 issues类型和feature类型的实现方式一模一样，仅仅有名字上面的差别。
 
-#### trials类型分支满足：
+#### trials类型分支满足
 
-  1. 可以从除了release类型分支以外的任何类型分支上创建
-  2. 在这个分支上请发挥想象力大胆实验
-    - 接受实验结果，把实验过程并入父分支，称为good-close
-    - 实验结果不理想，放弃实验结果，从实验开始前重新来过，称为bad-close
-  3. 最终分支被删除
+- 可以从除了release类型分支以外的任何类型分支上创建
+- 在这个分支上请发挥想象力大胆实验
+  - 接受实验结果，把实验过程并入父分支，称为good-close
+  - 实验结果不理想，放弃实验结果，从实验开始前重新来过，称为bad-close
+- 最终分支被删除
 
 > 在满足条件的分支A上工作，时不时会冒出一些大胆的想法，这个时候使用gg-trials-open trialsName创建并转向一个名为A/trials.trialsName的实验分支，在这个分支上进行疯狂的实验，然后
 
+#### basedOn类型分支满足
 
-#### basedOn类型分支满足:
-
-  1. 从name|master建立并初始化为name|basedOn
-  2. 只能从对应的master分支fork到此分支
-  3. 禁止在这个分支上提交
+1. 从name|master建立并初始化为name|basedOn
+2. 只能从对应的master分支fork到此分支
+3. 禁止在这个分支上提交
 
 > 这个分支是一个为了使工作流程更为清晰的缓存分支，分支上只有从master稳定分支上挑选出来的自己在工作中将要（尝试）使用的稳定版本。在basedOn类型分支上使用gg-select 版本号  从对应的master分支上选出一个稳定版本或使用gg-select-the-latest从对应的master分支上选择最新的版本，fork到这个分支，并加上inUse-versionNum的标签
 从master到此分支的行为是fork，即有可能此分支的log为 (init)v1.0===>v0.9=====>v0.8======>v1.3,这个分支上的commit来源于master，但是其分支提交历史与master分支无关
 
-#### work类型分支满足：
+#### work类型分支满足
 
-  1. 只能从basedOn类型分支上创建
-  2. 可以借助basedOn分支升级
+1. 只能从basedOn类型分支上创建
+2. 可以借助basedOn分支升级
 
 ## Inside
 
-### add
+### add detail
 
-*   create blob objects: contains content of files
-*   add files to index list (.git/index)
+- create blob objects: contains content of files
+- add files to index list (.git/index)
 
-### commit
+### commit detail
 
-*   create tree objects: each object represent a directory, contains blob object refs in this directory
-*   create commit object: contains root tree object hash number and parent commit object hash number
+- create tree objects: each object represent a directory, contains blob object refs in this directory
+- create commit object: contains root tree object hash number and parent commit object hash number
 
-### checkout
-
-```bash
-$ git checkout <commit-hash-id>
-```
-
-*   get commit object by commit hash id
-*   get root tree object in commit object
-*   write file entries by root tree object (tree graph)
-*   write .git/index
-*   set HEAD to that commit (detached HEAD state)
-
-### merge
+### checkout detail
 
 ```bash
-$ git merge <giver-branch>/<giver-commit>
+git checkout <commit-hash-id>
 ```
 
-*   write giver commit hash to `.git/MERGE_HEAD`
-*   find base commit (the most recent common ancestor commit)
-*   diff and apply according to base commit, giver commit, receiver commit
-*   do what `git checkout` do
-*   remove `.git/MERGE_HEAD`
+- get commit object by commit hash id
+- get root tree object in commit object
+- write file entries by root tree object (tree graph)
+- write .git/index
+- set HEAD to that commit (detached HEAD state)
 
-### fetch
+### merge detail
 
-*   get hash of remote commit and its root tree object
-*   copy all diff objects in tree graph into .git/objects
-*   update `.git/refs/remotes/origin/<branch>`, set `.git/FETCH_HEAD` to it
+```bash
+git merge <giver-branch>/<giver-commit>
+```
 
-### clone
+- write giver commit hash to `.git/MERGE_HEAD`
+- find base commit (the most recent common ancestor commit)
+- diff and apply according to base commit, giver commit, receiver commit
+- do what `git checkout` do
+- remove `.git/MERGE_HEAD`
+
+### fetch detail
+
+- get hash of remote commit and its root tree object
+- copy all diff objects in tree graph into .git/objects
+- update `.git/refs/remotes/origin/<branch>`, set `.git/FETCH_HEAD` to it
+
+### clone detail
 
 `git init` + `git remote add origin <repo-url>` + `git pull origin`
 
-### push
+### push detail
 
-*   apply commit to remote repo
-*   update remote repo .git/refs/heads/<branch> to new commit
-*   update local repo .git/refs/remotes/origin/<branch> to new commit
+- apply commit to remote repo
+- update remote repo `.git/refs/heads/<branch>` to new commit
+- update local repo `.git/refs/remotes/origin/<branch>` to new commit
 
-### HEAD/branch
+### HEAD/branch detail
 
-*   HEAD -> refs/heads/master -> commit object
-*   branches are just refs, refs are just files (contain commit hash id)
+- HEAD -> refs/heads/master -> commit object
+- branches are just refs, refs are just files (contain commit hash id)
 
 ### .git/objects
 
 `.git/objects` is immutable, `.git/refs` is mutable
 
 ```bash
-$ echo 'test content' | git hash-object -w --stdin # -w for write into codebase, --stdin for reading from stdin not file
+echo 'test content' | git hash-object -w --stdin # -w for write into codebase, --stdin for reading from stdin not file
 $ git cat-file -p <object-hash-number>
 ```
 
@@ -770,7 +784,7 @@ print_git_objects
 
 #### Unique LICENSE
 
--   CC BY-NC-SA 3.0 License
+- CC BY-NC-SA 3.0 License
 
 ```html
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
@@ -869,13 +883,13 @@ THE SOFTWARE.
 
 ### Create Repo without Browser
 
--   利用GitHub Repository API以及curl工具创建仓库
+- 利用GitHub Repository API以及curl工具创建仓库
 
 ```bash
 curl -u 'username' -d '{"name":"RepoName", "description":"description string", "homepage":"URL", "auto_init":true, "gitignore_template":"Meteor", "license_template":"mit"}' https://api.github.com/user/repos
 ```
 
--   上传本地代码至远程仓库
+- 上传本地代码至远程仓库
 
 ```bash
 git init
@@ -902,8 +916,8 @@ git push -u
 ### Purge
 
 ```bash
-$ git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}')"
-$ git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch your-file-name' --tag-name-filter cat -- --all
+git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}')"
+git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch your-file-name' --tag-name-filter cat -- --all
 ```
 
 ### Wiki
@@ -911,7 +925,7 @@ $ git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignor
 #### Wiki Git Access
 
 ```bash
-$ git clone git@github.com:user/repo.wiki.git
+git clone git@github.com:user/repo.wiki.git
 ```
 
 ### Shorten GitHub URL
@@ -975,7 +989,7 @@ curl -i http://git.io -F "url=https://github.com/technoweenie" -F "code=t"
 #### git fetch
 
 ```bash
-$ git fetch <repo_name> <branch_name>
+git fetch <repo_name> <branch_name>
 ```
 
 #### git pull
@@ -1009,6 +1023,7 @@ $ git fetch <repo_name> <branch_name>
 ### 调试
 
 #### git bisect
+
 通过自动进行一个二分查找来找到哪一个特定的提交是导致 bug 或者问题的第一个提交。
 
 #### git blame
@@ -1030,9 +1045,11 @@ $ git fetch <repo_name> <branch_name>
 ### 邮件
 
 #### git apply
+
 应用一个通过 git diff 或者甚至使用 GNU diff 命令创建的补丁
 
 #### git am
+
 应用来自邮箱的补丁
 
 #### git format-patch
@@ -1054,6 +1071,7 @@ mbox 的格式来生成一系列的补丁以便你可以发送到一个邮件列
 #### git svn
 
 #### git fast-import
+
 对于其他版本控制系统或者从其他任何的格式导入，你可以使用 git fast-import 快速地将其他格式映射到 Git 可以轻松记录的格式
 
 ### 管理
@@ -1083,16 +1101,16 @@ mbox 的格式来生成一系列的补丁以便你可以发送到一个邮件列
 ### diff && patch
 
 ```bash
-$ diff -u <src> <dist>
-$ diff -Nur <src_dir> <dist_dir>
+diff -u <src> <dist>
+diff -Nur <src_dir> <dist_dir>
 ```
 
 ```bash
-$ patch -p[num] < patchfile
-$ patch -dry -run -p[num] < patchfile
+patch -p[num] < patchfile
+patch -dry -run -p[num] < patchfile
 ```
 
 ```bash
-$ diff -Nur program_1.0 program_2.0 > program_2.0.patch
-$ patch -p1 <../program_2.0.patch
+diff -Nur program_1.0 program_2.0 > program_2.0.patch
+patch -p1 <../program_2.0.patch
 ```
