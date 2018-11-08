@@ -279,8 +279,8 @@ no more than 50 characters
 
 - referencing issues e.g. close #666, #888
 - breaking changes 碎片式更改(特别是**用户端**)
-  e.g.`port-runner` command line option has changed to `runner-port`, so that it is
-  consistent with the configuration file syntax.
+  e.g.`port-runner` command line option has changed to `runner-port`,
+  so that it is consistent with the configuration file syntax.
   To migrate your project, change all the commands, where you use `--port-runner`
   to `--runner-port`.
 
@@ -648,8 +648,15 @@ issues类型和feature类型的实现方式一模一样，仅仅有名字上面�
 2. 只能从对应的master分支fork到此分支
 3. 禁止在这个分支上提交
 
-> 这个分支是一个为了使工作流程更为清晰的缓存分支，分支上只有从master稳定分支上挑选出来的自己在工作中将要（尝试）使用的稳定版本。在basedOn类型分支上使用gg-select 版本号  从对应的master分支上选出一个稳定版本或使用gg-select-the-latest从对应的master分支上选择最新的版本，fork到这个分支，并加上inUse-versionNum的标签
-从master到此分支的行为是fork，即有可能此分支的log为 (init)v1.0===>v0.9=====>v0.8======>v1.3,这个分支上的commit来源于master，但是其分支提交历史与master分支无关
+> 这个分支是一个为了使工作流程更为清晰的缓存分支，
+> 分支上只有从master稳定分支上挑选出来的自己在工作中将要（尝试）使用的稳定版本。
+> 在basedOn类型分支上使用 gg-select 版本号
+> 从对应的master分支上选出一个稳定版本或使用gg-select-the-latest从对应的master分支上选择最新的版本，
+> fork到这个分支，并加上inUse-versionNum的标签
+> 从master到此分支的行为是fork，
+> 即有可能此分支的log为
+> (init)v1.0===>v0.9=====>v0.8======>v1.3,
+> 这个分支上的commit来源于master，但是其分支提交历史与master分支无关
 
 #### work类型分支满足
 
@@ -665,8 +672,10 @@ issues类型和feature类型的实现方式一模一样，仅仅有名字上面�
 
 ### commit detail
 
-- create tree objects: each object represent a directory, contains blob object refs in this directory
-- create commit object: contains root tree object hash number and parent commit object hash number
+- create tree objects: each object represent a directory,
+  contains blob object refs in this directory
+- create commit object:
+  contains root tree object hash number and parent commit object hash number
 
 ### checkout detail
 
@@ -718,7 +727,9 @@ git merge <giver-branch>/<giver-commit>
 `.git/objects` is immutable, `.git/refs` is mutable
 
 ```bash
-echo 'test content' | git hash-object -w --stdin # -w for write into codebase, --stdin for reading from stdin not file
+# -w for write into codebase,
+# --stdin for reading from stdin not file
+echo 'test content' | git hash-object -w --stdin
 $ git cat-file -p <object-hash-number>
 ```
 
@@ -787,7 +798,13 @@ print_git_objects
 - CC BY-NC-SA 3.0 License
 
 ```html
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
+<a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative
+Commons License" style="border-width:0"
+src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons
+Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
 ```
 
 ```markdown
@@ -807,10 +824,17 @@ Do whatever you like with the original work, just don't be a dick.
 Being a dick includes - but is not limited to - the following instances:
 
 1a. Outright copyright infringement - Don't just copy this and change the name.
-1b. Selling the unmodified original with no work done what-so-ever, that's REALLY being a dick.
-1c. Modifying the original work to contain hidden harmful content. That would make you a PROPER dick.
+1b. Selling the unmodified original with no work done what-so-ever,
+  that's REALLY being a dick.
+1c. Modifying the original work to contain hidden harmful content.
+  That would make you a PROPER dick.
 
-If you become rich through modifications, related worksrvices, or supporting the original work, share the love. Only a dick would make loads off this work and not buy the original works creator(s) a pint.Code is provided with no warranty. Using somebody else's code and bitching when it goes wrong makes you a DONKEY dick. Fix the problem yourself. A non-dick would submit the fix back.
+If you become rich through modifications, related worksrvices, or supporting
+the original work, share the love. Only a dick would make loads off this work
+and not buy the original works creator(s) a pint.Code is provided with no
+warranty. Using somebody else's code and bitching when it goes wrong makes
+you a DONKEY dick. Fix the problem yourself. A non-dick would submit the fix
+back.
 ```
 
 ```markdown
@@ -823,9 +847,15 @@ This is for your reference only,not for your cheating -  Just don't be a dick.
 Being a dick includes - but is not limited to - the following instances:
 
 1a. Outright copyright infringement - Don't just copy this and change the name.
-1b. Reserve a copy of this project and tell your teacher that it is your own homework - Plagiarism is shame.
+1b. Reserve a copy of this project and tell your teacher
+  that it is your own homework - Plagiarism is shame.
 
-If you become rich through modifications, related worksrvices, or supporting the original work, share the love. Only a dick would make loads off this work and not buy the original works creator(s) a pint.Code is provided with no warranty. Using somebody else's code and bitching when it goes wrong makes you a DONKEY dick. Fix the problem yourself. A non-dick would submit the fix back.
+If you become rich through modifications, related worksrvices,
+or supporting the original work, share the love. Only a dick would make loads
+off this work and not buy the original works creator(s) a pint.Code is
+provided with no warranty. Using somebody else's code and bitching when it
+goes wrong makes you a DONKEY dick. Fix the problem yourself. A non-dick
+would submit the fix back.
 ```
 
 ```markdown
@@ -886,7 +916,10 @@ THE SOFTWARE.
 - 利用GitHub Repository API以及curl工具创建仓库
 
 ```bash
-curl -u 'username' -d '{"name":"RepoName", "description":"description string", "homepage":"URL", "auto_init":true, "gitignore_template":"Meteor", "license_template":"mit"}' https://api.github.com/user/repos
+curl -u 'username' -d '{"name":"RepoName",
+\ "description":"description string","homepage":"URL",
+\ "auto_init":true, "gitignore_template":"Meteor", "license_template":"mit"}'
+\ https://api.github.com/user/repos
 ```
 
 - 上传本地代码至远程仓库
@@ -916,8 +949,12 @@ git push -u
 ### Purge
 
 ```bash
-git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}')"
-git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch your-file-name' --tag-name-filter cat -- --all
+git rev-list --objects --all
+\ | grep "$(git verify-pack -v .git/objects/pack/*.idx
+\ | sort -k 3 -n | tail -5 | awk '{print$1}')"
+git filter-branch -f --prune-empty --index-filter
+\ 'git rm -rf --cached --ignore-unmatch your-file-name'
+\ --tag-name-filter cat -- --all
 ```
 
 ### Wiki

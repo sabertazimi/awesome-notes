@@ -243,7 +243,9 @@ constraints:
 ### 操作系统的演变
 
 - 单用户系统(45-55) -> 批处理系统(55-65) -> 多道系统(65-80) -> 分时系统(70-) -> 分布式系统
-- 手工系统 -人机矛盾-> 联机批处理系统 -CPU I/O 矛盾-> 脱机批处理系统 -响应能力-> 执行系统(中断/通道) -并行-> 多道批处理系统(粗粒度) -> 分时系统(细粒度) -> 实时系统 -> 个人/网络/分布式系统
+- 手工系统 -人机矛盾-> 联机批处理系统 -CPU I/O 矛盾
+  -> 脱机批处理系统 -响应能力-> 执行系统(中断/通道) -并行->
+  多道批处理系统(粗粒度) -> 分时系统(细粒度) -> 实时系统 -> 个人/网络/分布式系统
 
 #### 批处理系统
 
@@ -311,19 +313,23 @@ constraints:
 - CF: 初值 F000H
 - EIP: 初值 FFF0H
 
-(FFF)F0000H+FFF0H = FFFFFFF0H, BIOS 的 EPROM(Erasable Programmable Read Only Memory) 处
+(FFF)F0000H+FFF0H = FFFFFFF0H,
+BIOS 的 EPROM(Erasable Programmable Read Only Memory) 处
 加电后第一条指令一般是 ljmp(实模式下, 内存 !MB), 跳转地址为 CF<<4+EIP, 跳转至 BIOS 例行程序起始点.
 
 #### BIOS Config
 
-BIOS 根据设置(硬盘/U盘/网络启动), 加载存储设备的主引导扇区(Master Boot Record)(第一个扇区)的 512 字节至内存 0x7c00 处, 开始执行第一条指令(bootloader)
+BIOS 根据设置(硬盘/U盘/网络启动),
+加载存储设备的主引导扇区(Master Boot Record)(第一个扇区)的 512 字节至内存 0x7c00 处,
+开始执行第一条指令(bootloader)
 
 #### Bootloader
 
 实模式与保护模式带来的问题:
 
 - 在实模式的寻址模式中, 令物理地址为 16 位段寄存器左移 4 位加 16 位逻辑地址的偏移所得的 20 位地址
-- 若要访问 1MB 之后的内存, 则必须开启 A20 Line 开关(关闭 wrap around), 将 32 位地址总线打开, 并进入保护模式(Protect Mode)
+- 若要访问 1MB 之后的内存, 则必须开启 A20 Line 开关(关闭 wrap around),
+  将 32 位地址总线打开, 并进入保护模式(Protect Mode)
 - 在实模式中, 0~4KB 为中断向量表保留, 640KB ~ 1MB 为显存与 BIOS 保留, 实际可用的内存只有 636KB
 - 考虑到日后内核镜像的体积有超过 1MB 的可能, 所以将其装载到物理地址 1MB(0x100000) 之后连续的一块内存中更好.
 - 若要装载内核到物理地址 1MB之后(实模式下无法访问), 可在实模式中暂时将其装载到一个临时位置, 待进入保护模式之后再移动至合适位置
@@ -380,7 +386,8 @@ empty_8042:
 
 ##### 保护模式与段机制
 
-- CS -> 全局描述符表(其起始地址与表大小位于 gdt 寄存器中)某项(每项存有 base/limit 等信息) -> 局部描述符表 -> 段选择子(段的基本信息) -> 基址+EIP -> 线性地址 ---页机制---> 物理地址
+- CS -> 全局描述符表(其起始地址与表大小位于 gdt 寄存器中)某项(每项存有 base/limit 等信息)
+  -> 局部描述符表 -> 段选择子(段的基本信息) -> 基址+EIP -> 线性地址 ---页机制---> 物理地址
 - 将 cr0 寄存器 bit0 置为1, 表示进入了保护模式, 段机制开始起作用
 
 ## 物理内存管理
@@ -514,7 +521,8 @@ typedef struct gdt_ptr {
 
 > TLB(translation lookaside buffer in cpu/pm)
 
-- Virtual Address = 2^(bits of virtual page offset) * virtual page number + virtual page offset
+- Virtual Address =
+  2^(bits of virtual page offset) * virtual page number + virtual page offset
 - VPN(virtual page number point to PPN) - VPO(virtual page offset = PPO)
 - 根据 VPN 在页表中找到对应表项(VPN 表示项号), 每项保存着 PPN
 - TLBT(tag) - TLBI(index) - VPO
@@ -525,7 +533,9 @@ typedef struct gdt_ptr {
 > C(cache) PPO = VPO
 
 - Page Frame(帧): 高位为帧号, 低位为偏移
-- Physical Address = 2^(bits of physical page offset) * physical page number/page frame number + physical page offset
+- Physical Address =
+  2^(bits of physical page offset)
+  `*` physical page number/page frame number + physical page offset
 - PPN(physical page number) - PPO(physical page offset = VPO)
 - CT(tag) - CI(index) - CO(offset)
 
@@ -551,7 +561,9 @@ typedef struct gdt_ptr {
 
 - 切割页表: 建立子页表
 - Page Directory -> Page Table -> Physical Address
-- 将线性地址分成三部分 Directory+Table+Offset: cr3+Dir 取出 page table base, ptb+Tab 取出 physical address base, pab+offset = pa
+- 将线性地址分成三部分 Directory+Table+Offset:
+  cr3+Dir 取出 page table base,
+  ptb+Tab 取出 physical address base, pab+offset = pa
 
 > CR3 寄存器: 保存一级页表的基址
 
@@ -591,7 +603,8 @@ typedef struct gdt_ptr {
 
 ##### ring 0 to ring 3
 
-- interrupt/trap: push SS(**RPL=3**) -> ESP -> EFLAGS -> CS(**RPL=3**) -> EIP -> Error Code
+- interrupt/trap: push SS(**RPL=3**) -> ESP -> EFLAGS
+  -> CS(**RPL=3**) -> EIP -> Error Code
 - iret: pop above variables, move to ring 3
 
 ##### ring 3 to ring 0 (特权级提升)
@@ -604,7 +617,9 @@ typedef struct gdt_ptr {
 
 保存不同特权级的堆栈信息(SS/ESP)
 
-全局描述符表中保存一个 TSS Descriptor(TSS base + TSS limit): allocate TSS memory -> init TSS -> fill TSS descriptor in GDT -> set TSS selector(task register)
+全局描述符表中保存一个 TSS Descriptor(TSS base + TSS limit):
+allocate TSS memory -> init TSS
+-> fill TSS descriptor in GDT -> set TSS selector(task register)
 
 ## 虚拟内存管理
 
@@ -617,7 +632,9 @@ typedef struct gdt_ptr {
 - 访问未映射虚拟页(swap in/out)
 - CPU 将产生异常的的线性地址(linear address) 存储在 CR2 寄存器中, 将 errorCode(bit2-访问权限异常,bit1-写异常,bit0-物理页不存在)压入中断栈
 
-> CR0: 处理器模式(实/保护/分段/分页模式); CR2: Page Fault Linear Address; CR3: Page-Directory Base Address Register
+> CR0: 处理器模式(实/保护/分段/分页模式);
+> CR2: Page Fault Linear Address;
+> CR3: Page-Directory Base Address Register
 
 ### 覆盖与交换
 
@@ -632,7 +649,10 @@ typedef struct gdt_ptr {
 ### 虚拟页式存储管理
 
 - 只将运行进程所必需页面装入内存, 其余页面至于外存
-- 进程发生缺页异常时, 将所要求缺页装入内存: 选择目标物理页面 -> 无未占用物理页面, 则换出闲置物理页面(访问位) -> 装入物理内存,更新页表项(换入逻辑地址与换出逻辑地址对应的页表项的驻留位/修改位/访问位/锁定位以及物理页号 ppn)
+- 进程发生缺页异常时, 将所要求缺页装入内存:
+  选择目标物理页面 -> 无未占用物理页面, 则换出闲置物理页面(访问位)
+  -> 装入物理内存,更新页表项
+  (换入逻辑地址与换出逻辑地址对应的页表项的驻留位/修改位/访问位/锁定位以及物理页号 ppn)
 - 监控已经装入内存的页面, 及时将不需要页面换出至外存
 
 #### 标志位
@@ -685,7 +705,8 @@ typedef struct gdt_ptr {
 
 ###### 工作集算法
 
-- 工作集(随时间动态变化集): 一个进程当前正在使用的逻辑页面集合, WorkingSet(currentTime, workingSetWindow(访问时间窗口)) `(cT - wSW, cT + wSW)`
+- 工作集(随时间动态变化集): 一个进程当前正在使用的逻辑页面集合,
+  WorkingSet(currentTime, workingSetWindow(访问时间窗口)) `(cT - wSW, cT + wSW)`
 - 根据工作集大小(逻辑页面集合), 为该进程分配常驻集(合适数目的物理页面集合): 若常驻集 > 工作集, 则缺页率较低
 - 再额外维护一个类希 LRU 算法中的访存链表, 记录近期访问过的物理页面, 将其也加入常驻集
 
@@ -776,16 +797,20 @@ typedef struct __vma {
 
 - 处理机的态/处理机的特权级: 根据对资源和机器指令的使用权限, 将处理执行时的工作状态区分为不同的状态
 - 管理(supervisor mode)/系统态: 使用全部机器指令(包括特权指令), 可使用所有资源, 允许访问整个内存区, 运行系统程序
-- 用户态: 禁止使用特权指令(I/O设备指令, 直接修改特殊寄存器指令, 改变机器状态指令), 不可**直接**取用资源与改变机器状态, 只可访问自己的存储区域, 运行用户程序
+- 用户态: 禁止使用特权指令(I/O设备指令, 直接修改特殊寄存器指令, 改变机器状态指令),
+  不可**直接**取用资源与改变机器状态, 只可访问自己的存储区域, 运行用户程序
 - 用户态切换至管态: 错误/异常状态(除0/缺页), 外部中断(I/O), 系统调用, 这一过程是由**硬件完成**的
 
 ### 进程状态/生命周期
 
-创建, 就绪(ready), 运行(running), 等待(wait/sleeping), 挂起(suspend: 进程由内存换出至外存), 结束(抢占, 唤醒): 进程优先级与剩余内存单元在一定程度上会影响进程状态
+创建, 就绪(ready), 运行(running), 等待(wait/sleeping),
+挂起(suspend: 进程由内存换出至外存), 结束(抢占, 唤醒):
+进程优先级与剩余内存单元在一定程度上会影响进程状态
 
 - 进程首先在 cpu 初始化或者 sys_fork 的时候被创建,当为该进程分配了一个进程控制块之后,该进程进入 uninit 态
 - 当进程完全完成初始化之后,该进程转为 runnable 态
-- 当到达调度点时,由调度器 sched_class 根据运行队列 rq 的内容来判断一个进程是否应该被运行,即把处于runnable 态的进程转换成 running 状态,从而占用 CPU 执行
+- 当到达调度点时,由调度器 sched_class 根据运行队列 rq 的内容来判断一个进程是否应该被运行,
+  即把处于runnable 态的进程转换成 running 状态,从而占用 CPU 执行
 - running 态的进程通过 wait 等系统调用被阻塞,进入 sleeping 态
 - sleeping 态的进程被 wakeup 变成 runnable 态的进程
 - running 态的进程主动 exit 变成 zombie 态, 然后由其父进程完成对其资源的最后释放,子进程的进程控制块成为 unused
@@ -1054,8 +1079,12 @@ struct lock/semaphore {
 
 ```c
 typedef struct monitor{
-    semaphore_t mutex;  // the mutex lock for going into the routines in monitor, should be initialized to 1
-    semaphore_t next;   // the next semaphore is used to down the signaling proc itself, and the other OR wakeuped
+    // the mutex lock for going into the routines in monitor,
+    // should be initialized to 1
+    semaphore_t mutex;  
+    // the next semaphore is used to down the signaling proc itself,
+    // and the other OR wakeuped
+    semaphore_t next;
     int next_count;     // the number of of sleeped signaling
     proc condvar_t *cv; // the condvars in monitor
 } monitor_t;
@@ -1070,7 +1099,9 @@ typedef struct monitor{
 - owner: 表示此条件变量的宿主是哪个管程
 
 typedef struct condvar{
-    semaphore_t sem;            // the sem semaphore is used to down the waiting proc, and the signaling proc should up the waiting
+    // the sem semaphore is used to down the waiting proc,
+    // and the signaling proc should up the waiting
+    semaphore_t sem;
     proc int count;             // the number of waiters on
     condvar monitor_t * owner;  // the owner(monitor) of this condvar
 } condvar_t;
@@ -1190,7 +1221,11 @@ struct inode_ops {
     int (*vop_read)(struct inode *node, struct iobuf *iob);
     int (*vop_write)(struct inode *node, struct iobuf *iob);
     int (*vop_getdirentry)(struct inode *node, struct iobuf *iob);
-    int (*vop_create)(struct inode *node, const char *name, bool excl, struct inode **node_store);
+    int (*vop_create)(
+        struct inode *node,
+        const char *name,
+        bool excl,
+        struct inode **node_store);
     int (*vop_lookup)(struct inode *node, char *path, struct inode **node_store);
 
     ……
@@ -1200,7 +1235,11 @@ struct inode_ops {
 
 #### Device
 
-利用 `vfs_dev_t` 数据结构，就可以让文件系统通过一个链接 `vfs_dev_t` 结构的双向链表找到device对应的inode数据结构，一个inode节点的成员变量in_type的值是0x1234，则此 inode的成员变量in_info将成为一个device结构。这样inode就和一个设备建立了联系，这个inode就是一个设备文件
+利用 `vfs_dev_t` 数据结构，
+就可以让文件系统通过一个链接 `vfs_dev_t` 结构的双向链表找到device对应的inode数据结构，
+一个inode节点的成员变量in_type的值是0x1234，
+则此 inode的成员变量in_info将成为一个device结构。
+这样inode就和一个设备建立了联系，这个inode就是一个设备文件
 
 ## 设备管理详解
 
@@ -1212,7 +1251,9 @@ struct inode_ops {
 在内存的低 1MB 中, 有许多地址被映射至外部设备, 其中就包含文字显示模块(显卡控制显示器):
 
 - 从 0xB8000 开始, 每 2 个字节表示屏幕上显示的一个字符(80 x 25)
-- 前一个字节为 字符ASCII码, 后一个字节为 字符颜色和属性的控制信息(back_twinkle, back_r, back_g, back_b, front_light, front_r, front_g, front_b)
+- 前一个字节为 字符ASCII码, 后一个字节为
+  字符颜色和属性的控制信息
+  (back_twinkle, back_r, back_g, back_b, front_light, front_r, front_g, front_b)
 
 ### I/O
 
@@ -1227,7 +1268,9 @@ struct inode_ops {
 ##### Installation
 
 ```bash
-wget http://sourceforge.net/projects/bochs/files/bochs/2.5.1/bochs-2.5.1.tar.gz/download -O bochs.tar.gz
+wget
+\ http://sourceforge.net/projects/bochs/files/bochs/2.5.1/bochs-2.5.1.tar.gz/download
+\ -O bochs.tar.gz
 tar -xvfz bochs.tar.gz
 cd bochs-2.5.1
 ./configure --enable-debugger --enable-debugger-gui --enable-disasm --with-x --with-term
@@ -1246,7 +1289,8 @@ megs: 128
 # 软盘镜像
 floppya: 1_44=bin/kernel.images, status=inserted
 # 硬盘镜像
-ata0-master: type=disk, path="bin/rootfs.images", mode=flat, cylinders=2, heads=16, spt=63
+ata0-master: type=disk, path="bin/rootfs.images",
+\ mode=flat, cylinders=2, heads=16, spt=63
 # 引导方式(软盘)
 boot: a
 # 日志输出

@@ -1250,7 +1250,11 @@ data type也是函数,若省略参数亦会造成Curry化.
 
 ```haskell
 ghci> map (Circle 10 20) [4,5,6,6]
-[Circle 10.0 20.0 4.0,Circle 10.0 20.0 5.0,Circle 10.0 20.0 6.0,Circle 10.0 20.0 6.0]
+[Circle 10.0 20.0 4.0,
+Circle 10.0 20.0 5.0,
+Circle 10.0 20.0 6.0,
+Circle 10.0 20.0 6.0
+]
 ```
 
 - Value Constructor:使用`ValueConstructorName ValueType ..`可构造出一个该类型的定义/名字
@@ -1294,7 +1298,8 @@ data Car a b c = Car { company :: a
 
 ```haskell
 tellCar :: (Show a) => Car String String a -> String
-tellCar (Car {company = c, model = m, year = y}) = "This " ++ c ++ " " ++ m ++ " was made in " ++ show y
+tellCar (Car {company = c, model = m, year = y}) =
+  "This " ++ c ++ " " ++ m ++ " was made in " ++ show y
 ```
 
 ##### Maybe value constructor
@@ -1394,7 +1399,8 @@ push a xs = ((),a:xs)
 
 ```haskell
 data List a = Empty | Cons a (List a) deriving (Show, Read, Eq, Ord)
-data List a = Empty | Cons { listHead :: a, listTail :: List a} deriving (Show, Read, Eq, Ord)
+data List a = Empty
+  | Cons { listHead :: a, listTail :: List a} deriving (Show, Read, Eq, Ord)
 ```
 
 ##### 二叉树
@@ -1893,7 +1899,8 @@ cuboidVolume :: Float -> Float -> Float -> Float
 cuboidVolume a b c = rectangleArea a b * c
 
 cuboidArea :: Float -> Float -> Float -> Float
-cuboidArea a b c = rectangleArea a b * 2 + rectangleArea a c * 2 + rectangleArea c b * 2
+cuboidArea a b c =
+  rectangleArea a b * 2 + rectangleArea a c * 2 + rectangleArea c b * 2
 
 rectangleArea :: Float -> Float -> Float
 rectangleArea a b = a * b
@@ -1938,7 +1945,8 @@ volume :: Float -> Float -> Float -> Float
 volume a b c = rectangleArea a b * c
 
 area :: Float -> Float -> Float -> Float
-area a b c = rectangleArea a b * 2 + rectangleArea a c * 2 + rectangleArea c b * 2
+area a b c =
+  rectangleArea a b * 2 + rectangleArea a c * 2 + rectangleArea c b * 2
 
 rectangleArea :: Float -> Float -> Float
 rectangleArea a b = a * b
@@ -2092,7 +2100,8 @@ ghci> dropWhile (<3) [1,2,2,2,3,4,5,4,3,2,1]
 **span** - 扩展``takeWhile``
 
 ```haskell
-ghci> let (fw，rest) = span (/=' ') "This is a sentence" in "First word:" ++ fw ++ "，the rest:" ++ rest
+ghci> let (fw，rest) = span (/=' ')
+\ "This is a sentence" in "First word:" ++ fw ++ "，the rest:" ++ rest
 "First word: This，the rest: is a sentence"
 ```
 
@@ -2311,9 +2320,12 @@ ghci> insert 3 [1,2,4,3,2,1]
 ##### 修正Prelude模块
 
 ``length``，``take``，``drop``，``splitAt``，``!!`` 和 ``replicate``
-``Data.List`` 中包含了更通用的替代版,如: ``genericLength，genericTake，genericDrop，genericSplitAt，genericIndex`` 和 ``genericReplicate``
+``Data.List`` 中包含了更通用的替代版,如:
+``genericLength，genericTake，genericDrop，genericSplitAt，genericIndex`` 和 ``genericReplicate``
 
-``nub``, ``delete``, ``union``, ``intsect`` 和 ``group`` 函数也有各自的通用替代版 ``nubBy``，``deleteBy``，``unionBy``，``intersectBy`` 和 ``groupBy``，它们的区别就是前一组函数使用 ``(==)`` 来测试是否相等，而带 ``By`` 的那组则取一个函数作参数来判定相等性.
+``nub``, ``delete``, ``union``, ``intsect`` 和 ``group`` 函数
+也有各自的通用替代版 ``nubBy``，``deleteBy``，``unionBy``，``intersectBy`` 和 ``groupBy``，
+它们的区别就是前一组函数使用 ``(==)`` 来测试是否相等，而带 ``By`` 的那组则取一个函数作参数来判定相等性.
 
 ```haskell
 ghci> let values = [-4.3，-2.4，-1.2，0.4，2.3，5.9，10.5，29.1，5.3，-2.4，-14.5，2.9，2.3]
@@ -2331,7 +2343,9 @@ ghci> groupBy ((==) `on` (> 0)) values
 [[-4.3,-2.4,-1.2],[0.4,2.3,5.9,10.5,29.1,5.3],[-2.4,-14.5],[2.9,2.3]]
 ```
 
-``sort``，``insert``，``maximum`` 和 ``min`` 都有各自的通用版本。如 ``groupBy`` 类似，**sortBy**，**insertBy**，**maximumBy** 和 **minimumBy** 都取一个函数来比较两个元素的大小.
+``sort``，``insert``，``maximum`` 和 ``min`` 都有各自的通用版本。
+如 ``groupBy`` 类似，**sortBy**，**insertBy**，**maximumBy**
+和 **minimumBy** 都取一个函数来比较两个元素的大小.
 
 ```haskell
 ghci> let xs = [[5,4,5,4,4],[1,2,3],[3,5,4,3],[],[2],[2,2]]
@@ -2551,7 +2565,8 @@ phoneBook =
 
 ```haskell
 phoneBookToMap :: (Ord k) => [(k, String)] -> Map.Map k String
-phoneBookToMap xs = Map.fromListWith (\number1 number2 -> number1 ++ ", " ++ number2) xs
+phoneBookToMap xs = Map.fromListWith
+  (\number1 number2 -> number1 ++ ", " ++ number2) xs
 ```
 
 ```haskell

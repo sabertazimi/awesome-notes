@@ -132,7 +132,9 @@
 
 front-end to back-end:
 
-- front-end: src ---lexical analysis---> tokens ---parsing/syntax analysis---> AST(Abstract Syntax Tree) ---semantic analysis---> intermediate
+- front-end: src ---lexical analysis---> tokens
+  ---parsing/syntax analysis---> AST(Abstract Syntax Tree)
+  ---semantic analysis---> intermediate
 - back-end: intermediate ---...---> ... ---...---> ... ---code generation---> dist
 
 details:
@@ -229,7 +231,9 @@ E -> num
 
 - 空串 "\0" 是正则表达式
 - 任意 char <- C 是正则表达式
-- 若 M, N 是正则表达式, 则 M|N = {M, N}, MN = {mn|m <- M, n <- N}, M* = {"\0", M, MM, MMM, ...} (选择/连接/闭包)也是正则表达式
+- 若 M, N 是正则表达式, 则 M|N = {M, N},
+  MN = {mn|m <- M, n <- N},
+  M* = {"\0", M, MM, MMM, ...} (选择/连接/闭包)也是正则表达式
 
 #### 形式表示
 
@@ -580,7 +584,9 @@ Verb -> eat
   | drink
 ```
 
-> tiger eat water: 向前看非终结符推导出的所有终结符中匹配tiger的终结符; 不向前看,则先推导 N, 再推导 n, 但 n 不一定匹配 tiger, 则需进行回溯; 向前看一个字符, 直接推导 N --> n, 同时直接找寻匹配 tiger 的终结符
+> tiger eat water: 向前看非终结符推导出的所有终结符中匹配tiger的终结符;
+> 不向前看,则先推导 N, 再推导 n, 但 n 不一定匹配 tiger, 则需进行回溯;
+> 向前看一个字符, 直接推导 N --> n, 同时直接找寻匹配 tiger 的终结符
 
 ```c
 S -> N V N
@@ -683,7 +689,9 @@ parse_X() {
   switch (token) {
     case ...: // i: token == atom_char or parse_XX();
     case ...: // j: token == atom_char, token = nextToken(), parse_XXX();
-    case ...: // k: token == atom_char, token = nextToken(), parse_XXXX(), token=nextToken(), token == b
+    // k: token == atom_char, token = nextToken(),
+    // parse_XXXX(), token=nextToken(), token == b
+    case ...:
     default: throw new SyntaxError();
   }
 }
@@ -730,7 +738,8 @@ nullable = {};
 
 while (nullable is still changing) {
   foreach (production p: X -> beta) {
-    if ((beta == epsilon) || (beta == Y1...Yn && Y1 <- nullable && ... && Yn <- nullable)) {
+    if ((beta == epsilon) || (beta == Y1...Yn
+      && Y1 <- nullable && ... && Yn <- nullable)) {
       nullable += X;
     }
   }
@@ -919,7 +928,8 @@ S'-> alpha1S'
 ###### 消除间接左递归
 
 - 把文法 G 的所有非终结符按任一顺序排列, e.g A1, A2, …, An
-- 消除 Ai 规则中的直接左递归: 把形如 Ai→Ajγ 的产生式改写成 Ai→δ1γ /δ2γ /…/δkγ(其中 Aj→δ1 /δ2 /…/δk 是关于的 Aj 全部规则)
+- 消除 Ai 规则中的直接左递归: 把形如 Ai→Ajγ 的产生式
+  改写成 Ai→δ1γ /δ2γ /…/δkγ(其中 Aj→δ1 /δ2 /…/δk 是关于的 Aj 全部规则)
 - 去掉多余的规则(不可达规则)
 
 ```cpp
@@ -994,9 +1004,12 @@ void Removing(WF *p,char *q,int n,int count) {
           // g 产生式右边产生式第一个符号与第 j 个非终结符相等
                     if (p[g].right[0] == q[j]) {
                         for (int h = 0; h < n*n; h++) {
-                            if (p[h].left[0] == q[j] && int (p[h].left.length()) == 1) {
+                            if (p[h].left[0] == q[j]
+                              && int (p[h].left.length()) == 1) {
                                 string str;
-                                str = p[g].right.substr(1,int (p[g].right.length ()));
+                                str = p[g].right.substr(
+                                  1,
+                                  int (p[g].right.length ()));
                                 p[++count1].left = p[g].left;
                                 p[count1].right = p[h].right + str;
                             }
@@ -1184,7 +1197,8 @@ S -*> αXω -> αβω
 
 LR(0) 分析表构造算法: (原理同于 Hopcroft 算法)
 
-- E -> A, A -> B, B -> C ... :Recursively, right hand side of C production will be reduced to E finally
+- E -> A, A -> B, B -> C ... :
+  Recursively, right hand side of C production will be reduced to E finally
 
 ```cpp
 closure(production_set p) {
@@ -1273,7 +1287,8 @@ while (true) {
 采取与 first/follow/select sets 以及 前看符号 类似策略:
 
 - `production_with_dot_set` 中的 item 修改为 `X -> [beta1 . betan..., a]` 二元组
-- closure(production_set p) 中闭包规则从 `X -> [a . Y beta,a]` 修改为 `Y -> [.y, b]` b <- select(beta a)
+- closure(production_set p) 中闭包规则从 `X -> [a . Y beta,a]`
+  修改为 `Y -> [.y, b]` b <- select(beta a)
 
 #### LALR(k)
 
@@ -1289,7 +1304,8 @@ New reduce rule:
 ##### SLR 实现
 
 - stack pair: `<input, state>`
-- state i: if has item X -> α.aβ , goto[i, a] = j then action[i, a] = shift j(shift then to state j)
+- state i: if has item X -> α.aβ ,
+  goto[i, a] = j then action[i, a] = shift j(shift then to state j)
 - state i: if has item X -> α. , a <- follow(X) then action[i, a] = reduce(X -> α)
 - state i: if has item S' -> S then action[i, $] = accept
 - otherwise: action[i, a] = error
@@ -1590,7 +1606,8 @@ value_t table_search(table_t table, key_t id);
 ### 类型检查
 
 - table: 字典结构 (key, type) (Hash Table/Red Black Tree)
-- type environment(Object, Methods, Class) is passed from parent to child(down the tree)
+- type environment(Object, Methods, Class)
+  is passed from parent to child(down the tree)
 - types are passed from child to parent(up the tree)
 
 ```cpp

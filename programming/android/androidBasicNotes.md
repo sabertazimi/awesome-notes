@@ -202,7 +202,9 @@ public static void actionStart(Context context, String data1, String data2) {
 ## UI Design
 
 > N activities can respond to a particular intent:
-Android will pop(弹出) up a little dialogue list(对话框) to user showing application icon defining the intent
+
+Android will pop(弹出) up a little dialogue list(对话框) to
+user showing application icon defining the intent
 
 当有多个活动可相应某个特定意图时，系统将会弹出对话框提示用户选择一个应用的活动或者设定默认值(default)
 
@@ -365,7 +367,10 @@ class ViewHolder {
     ImageView fruitImage;
     TextView fruitName;
 }
-public FruitAdapter(Context context, int textViewResourceId, List<Fruit> objects) {
+public FruitAdapter(
+  Context context,
+  int textViewResourceId,
+  List<Fruit> objects) {
     super(context, textViewResourceId, objects);
     resourceId = textViewResourceId;
 }
@@ -404,7 +409,11 @@ public View getView(int position, View convertView, ViewGroup parent) {
 ```java
 listView.setOnItemClickListener(new OnItemClickListener() {
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(
+      AdapterView<?> parent,
+      View view,
+      int position,
+      long id) {
         Fruit fruit = fruitList.get(position);
         Toast.makeText(MainActivity.this, fruit.getName(), Toast.LENGTH_SHORT).show();
     }
@@ -453,7 +462,10 @@ android.app.Fragment
 
 ```java
 @Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+public View onCreateView(
+  LayoutInflater inflater,
+  ViewGroup container,
+  Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.left_fragment, container, false);
     return view;
 }
@@ -838,7 +850,8 @@ public class MyProvider extends ContentProvider {
         return false;
     }
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(Uri uri, String[] projection, String selection,
+      String[] selectionArgs, String sortOrder) {
         return null;
     }
     @Override
@@ -846,7 +859,8 @@ public class MyProvider extends ContentProvider {
         return null;
     }
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    public int update(Uri uri, ContentValues values, String selection,
+      String[] selectionArgs) {
         return 0;
     }
     @Override
@@ -1047,9 +1061,11 @@ public void onServiceConnected(ComponentName name, IBinder service) {
 - In service onCreate
 
 ```java
-Notification notification = new Notification(R.drawable.ic_launcher, "Notification comes", System. currentTimeMillis());
+Notification notification = new Notification(R.drawable.ic_launcher,
+  "Notification comes", System. currentTimeMillis());
 Intent notificationIntent = new Intent(this, MainActivity.class);
-PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+  notificationIntent, 0);
 notification.setLatestEventInfo(this, "This is title", "This is content", pendingIntent);
 startForeground(1, notification);
 ```
@@ -1119,12 +1135,14 @@ public int onStartCommand(Intent intent, int flags, int startId) {
 ```java
 NotificationManager manager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
-Notification notification = new Notification(R.drawable.ic_launcher, "This is ticker text", System.currentTimeMillis());
+Notification notification = new Notification(R.drawable.ic_launcher, "This is
+  ticker text", System.currentTimeMillis());
 
 Intent intent = new Intent(this, NotificationActivity.class);
 PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-notification.setLatestEventInfo(this, "This is content title", "This is content text", pi);
+notification.setLatestEventInfo(this, "This is content title", "This is
+  content text", pi);
 
 manager.notify(1, notification);
 //在被启动Activity manager.cancel(1);
@@ -1248,12 +1266,16 @@ public class ContentHandler extends DefaultHandler {
         version = new StringBuilder();
     }
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+    public void startElement(String uri, String localName, String qName,
+      Attributes attributes) throws SAXException {
         // 记录当前结点名
         nodeName = localName;
     }
     @Override
-    public void characters(char[] ch, int start, int length) throws SAXException {
+    public void characters(
+      char[] ch,
+      int start,
+      int length) throws SAXException {
         // 根据当前的结点名判断将内容添加到哪一个StringBuilder对象中
         if ("id".equals(nodeName)) {
             id.append(ch, start, length);
@@ -1264,7 +1286,10 @@ public class ContentHandler extends DefaultHandler {
         }
     }
     @Override
-    public void endElement(String uri, String localName, String qName) throws SAXException {
+    public void endElement(
+      String uri,
+      String localName,
+      String qName) throws SAXException {
         if ("app".equals(localName)) {
             Log.d("ContentHandler", "id is " + id.toString().trim());
             Log.d("ContentHandler", "name is " + name.toString().trim());
@@ -1363,7 +1388,8 @@ void onError(Exception e);
 
 ```java
 public class HttpUtil {
-    public static void sendHttpRequest(final String address, final HttpCallbackListener listener) {
+    public static void sendHttpRequest(final String address, final
+      HttpCallbackListener listener) {
         new Thread(new Runnable() {
         @Override
         public void run() {
@@ -1645,7 +1671,8 @@ public class Person implements Parcelable {
         dest.writeInt(age); // 写出age
     }
 
-    public static final Parcelable.Creator<Person> CREATOR = new Parcelable.Creator<Person>() {
+    public static final Parcelable.Creator<Person> CREATOR = new
+      Parcelable.Creator<Person>() {
         @Override
         public Person createFromParcel(Parcel source) {
             Person person = new Person();

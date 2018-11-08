@@ -27,7 +27,8 @@ nodal = proc + queue + trans + prop: 总时延 = 产生/到达时延 + 排队时
 #### Layering Principle
 
 - modularity
-- well defined service: simple service model provided by lower level, providing for higher level
+- well defined service: simple service model provided by lower level,
+  providing for higher level
 - reuse
 - separation of concerns
 - continuous improvement: change inner structure of layer independently
@@ -78,7 +79,8 @@ entity body
 - first request header -> without cookie
 - first response header -> Set-cookie: `numebr` to client
 - client store identification number for specific site into cookies files
-- second request header -> cookie: `number` (extract identification number for specific site from cookies files)
+- second request header -> cookie: `number`
+  (extract identification number for specific site from cookies files)
 - function: create **User Session Layer** on top of stateless HTTP
 
 ### Process
@@ -121,7 +123,8 @@ internet telephony      - SIP/RTP           - UDP
 - lightweight and connectionless
 - datagram service
 - unreliable delivery
-- udp header: source port(16 bit), destination port(16 bit), checksum(16 bit), length(16 bit)
+- udp header: source port(16 bit), destination port(16 bit),
+  checksum(16 bit), length(16 bit)
 
 ### ICMP (Internet Control Message Protocol)
 
@@ -142,7 +145,8 @@ internet telephony      - SIP/RTP           - UDP
 
 - TCP/IP: checksums(1 bit)
 - Ethernet(Link Layer): cylic redundancy code(2 bit/more)
-- SSL(Secure Sockets Layer)/TLS(Transport Layer Security): message authentication code(**MAC**)(cryptographic data) - prevent malicious attacks
+- SSL(Secure Sockets Layer)/TLS(Transport Layer Security):
+  message authentication code(**MAC**)(cryptographic data) - prevent malicious attacks
 
 ### Slide Window and Retransmission
 
@@ -153,7 +157,8 @@ internet telephony      - SIP/RTP           - UDP
 
 ### IP Service Model
 
-- prevent packets looping forever(TTL/time to live field in header): if TTL gets decreased to zero, then drop this datagram
+- prevent packets looping forever(TTL/time to live field in header):
+  if TTL gets decreased to zero, then drop this datagram
 - limit fragment packets size(Packet ID, Flags, Fragment Offset)
 - reduce changes of wrong destination(Checksum, Destination Address)
 
@@ -163,8 +168,10 @@ internet telephony      - SIP/RTP           - UDP
 
 #### Address Structure
 
-- historical: class A: 0-network(7 bits)-host(24 bits) class B: 10-network(14 bits)-host(16 bits) class C: 110-network(21 bits)-host(8 bits)
-- today: 171.64.0.0/16 means 171.64.0.0 to 171.64.255.255, A/24 describes 256 addresses, A/20 describes 4096 addresses
+- historical: class A: 0-network(7 bits)-host(24 bits) class B:
+  10-network(14 bits)-host(16 bits) class C: 110-network(21 bits)-host(8 bits)
+- today: 171.64.0.0/16 means 171.64.0.0 to 171.64.255.255,
+  A/24 describes 256 addresses, A/20 describes 4096 addresses
 - longest prefix matching and netmask(A/16 e.g 0.0.0.0/0 => matching all addresses)
 
 ### ARP(Address Resolution Protocol)
@@ -172,16 +179,21 @@ internet telephony      - SIP/RTP           - UDP
 - generates mappings between link layer and network layer addresses cached in nodes
 - request-reply protocol: who has network address X => I have network address X
 - request sent to link layer broadcast address, reply sent to requesting address
-- when request to dest ARP packet header with empty DEST HARDWARE ADDRESS field and opcode 1(request)
-- when reply to src ARP packet header with dest hardware address as SRC HARDWARE ADDRESS field, src hardware address as DEST HARDWARE ADDRESS field and opcode 2(reply)
-- if A and B aren't in same sub-net, they delivery ARP boardcast with third public gateway
+- when request to dest ARP packet header
+  with empty DEST HARDWARE ADDRESS field and opcode 1(request)
+- when reply to src ARP packet header
+  with dest hardware address as SRC HARDWARE ADDRESS field,
+  src hardware address as DEST HARDWARE ADDRESS field and opcode 2(reply)
+- if A and B aren't in same sub-net,
+  they delivery ARP boardcast with third public gateway
 
 ### Packet Format
 
 #### Endian
 
 - network is big-endian
-- in x86 processor, use `htons()/ntohs()/htonl()/ntohl()` host - network -short/long helper function to transform format
+- in x86 processor, use `htons()/ntohs()/htonl()/ntohl()` host:
+  network -short/long helper function to transform format
 
 ```c
 #include <arpa/inet.h>

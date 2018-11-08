@@ -81,7 +81,8 @@
 - primary/foreign key
 - references
 
-> (id, name, birth, majar, grade) is not normalized, because grade is not relevant to student id
+> (id, name, birth, majar, grade) is not normalized,
+> because grade is not relevant to student id
 > (id, name, birth) + (id, majar, grade) is normalized
 > (name, os, lang) is not mormalized, because os isn't relevant to lang
 > (name, os) + (name, lang) is normalized
@@ -161,12 +162,14 @@ xmllint -schema Bookstore.xsd -noout Bookstore.xml
 
 - select operator σ(sigma): `σ(sID < 100 ^ sAge > 20)Table_Name` set constraints
 - project operator π(pi)  :   `π(sID, GPA)Table_Name` select certain columns
-- cross-product operator x: Table1 x Table2, m tuples(rows) x n tuples(rows) => m*n tuples(rows)
+- cross-product operator x: Table1 x Table2,
+  m tuples(rows) x n tuples(rows) => m*n tuples(rows)
 - natural join operator ∞: σ(E1.A1 = E2.A1 ^ E1.A2 = E2.A2 ...) (E1 x E2)
 - theta join operator ∞(cond): σ(cond) (E1 x E2), call cond as ϴ
 - difference operator -: matching schemas => change rows/tuples
 - union/intersection operator ∪ / ∩: matching schemas => change rows/tuples
-- rename operator ρ: change schemas(attributes name), different schemas <=> same schemas (**union/intersection/self-join**)
+- rename operator ρ: change schemas(attributes name),
+  different schemas <=> same schemas (**union/intersection/self-join**)
 - assign statement :=
 - tree notation
 
@@ -303,7 +306,8 @@ CREATE VIEW Standings AS
 - key sets: closure of sets contains all attributes
 
 > assuming relation R(A, B, C, D, ..., G)
-> andclosure of A, B {A, B}+ `A->C->D, B->E->F, F->G` => {A, B}+ = {A, B, C, ..., G}
+> andclosure of A, B {A, B} + `A->C->D, B->E->F, F->G`
+> => {A, B}+ = {A, B, C, ..., G}
 > then, {A, B} is a key
 > if there no exists such closure, then treat all-attributes as a key
 
@@ -334,7 +338,8 @@ while (there is relation R' aren't in BCNF) {
 ### multivalued dependencies
 
 - A -> B && rest attributes => A ->> B
-- A ->> B(1-n mapping), A ->> C(1-n mapping), no `B -> C`/`C ->> B`, B * C redundant tuples/rows
+- A ->> B(1-n mapping), A ->> C(1-n mapping),
+  no `B -> C`/`C ->> B`, B * C redundant tuples/rows
 - A ->>B && A ->>C => A ->> B∩C
 - A ->>B && B ->>C => A ->> C-B
 
@@ -372,7 +377,8 @@ while (there is relation R' aren't in 4NF) {
 
 - primary mechanism to improve performance of database
 - persist data structures stored in database (hash tables/B trees/B+ trees)
-- trade off: `scale of database` and `workload(query/update rate)` as input of physical design advisors
+- trade off: `scale of database` and `workload(query/update rate)`
+  as input of physical design advisors
 
 ```sql
 CREATE INDEX IndexName on T(A)
@@ -427,7 +433,8 @@ CREATE TABLE TableName (
     PRIMARY KEY (Attr1, Attr2, ...),
     UNIQUE (Attr1, Attr2, ...),
     CHECK (Condition),
-    FOREIGN KEY (Attr1, Attr2, ...) references TableName(Bttr1, Bttr2, ...) [ ON ... (default RESTRICT) ]
+    FOREIGN KEY (Attr1, Attr2, ...) references
+      TableName(Bttr1, Bttr2, ...) [ ON ... (default RESTRICT) ]
 );
 
 CREATE ASSERTION AssertionName
@@ -508,9 +515,11 @@ WITH CHECK OPTION;
 
 ```bash
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse"
+\ | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 sudo apt-get update
-sudo apt-get install -y mongodb-org mongodb-org-server mongodb-org-shell mongodb-org-mongos mongodb-org-tools
+sudo apt-get install -y mongodb-org mongodb-org-server
+\ mongodb-org-shell mongodb-org-mongos mongodb-org-tools
 ```
 
 #### Not Upgrade
