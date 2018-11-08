@@ -1,127 +1,138 @@
 
-* [Nodejs Basic Notes](#nodejs-basic-notes)
-	* [Npm Set Up](#npm-set-up)
-		* [Basic Steps](#basic-steps)
-		* [Test Steps](#test-steps)
-		* [Publish Steps](#publish-steps)
-		* [Tab Completion](#tab-completion)
-	* [Basic Node Modules](#basic-node-modules)
-		* [Process Module](#process-module)
-			* [Process Properties](#process-properties)
-			* [Process Events](#process-events)
-			* [Process Methods](#process-methods)
-				* [Get Info](#get-info)
-				* [Message Loop/Counter](#message-loopcounter)
-				* [Child Process](#child-process)
-	* [File Module](#file-module)
-		* [fs API](#fs-api)
-		* [Buffer Object](#buffer-object)
-		* [Path API](#path-api)
-	* [Self-Defined Modules](#self-defined-modules)
-		* [Basic Modular Pattern](#basic-modular-pattern)
-		* [Export Modules](#export-modules)
-		* [CallBack Function](#callback-function)
-	* [Http Module](#http-module)
-		* [Resquest Object](#resquest-object)
-			* [属性](#属性)
-		* [Response Object](#response-object)
-			* [类型](#类型)
-			* [事件](#事件)
-			* [方法](#方法)
-		* [Http Get](#http-get)
-		* [Http Server](#http-server)
-		* [Sample](#sample)
-	* [Net Module](#net-module)
-		* [Socket Object](#socket-object)
-		* [Socker.IO](#sockerio)
-		* [Basic Methods](#basic-methods)
-	* [URL Module](#url-module)
-		* [Basic Method](#basic-method)
-			* [parse](#parse)
-		* [dns](#dns)
-	* [Security Module](#security-module)
-		* [Crypto](#crypto)
-			* [Hash API](#hash-api)
-			* [Hmac API](#hmac-api)
-			* [公钥加密](#公钥加密)
-	* [Async Modules](#async-modules)
-		* [Cluster Module](#cluster-module)
-	* [Test Modules](#test-modules)
-		* [assert](#assert)
-	* [Awesome Package](#awesome-package)
-		* [Http](#http)
-		* [File](#file)
-		* [Stream](#stream)
-		* [Format](#format)
-		* [Back-End DOM](#back-end-dom)
-		* [Deploy](#deploy)
-		* [Server](#server)
-		* [Storage](#storage)
-			* [Cookie/Session](#cookiesession)
-			* [DataBase](#database)
-			* [Security](#security)
-				* [Encrypt(加密)](#encrypt加密)
-		* [Documentation](#documentation)
-		* [Parser](#parser)
-			* [XML](#xml)
-			* [JSON](#json)
-			* [Programming Language](#programming-language)
-		* [MD5](#md5)
-		* [Base64](#base64)
-		* [Package](#package)
-		* [Automatic Workflow/Tools](#automatic-workflowtools)
-			* [Webpack](#webpack)
-		* [Minimalize](#minimalize)
-		* [Testing](#testing)
-			* [Unit Testing](#unit-testing)
-			* [Feature Testing](#feature-testing)
-			* [Higher Level Tools](#higher-level-tools)
-			* [Coverage](#coverage)
-			* [Small Libraries](#small-libraries)
-			* [Other Testing](#other-testing)
-		* [Log](#log)
-		* [Search](#search)
-		* [Linter](#linter)
-		* [Template Engine](#template-engine)
-		* [Boilerplate](#boilerplate)
-			* [Other Boilerplate](#other-boilerplate)
-		* [Fonts](#fonts)
-		* [Images](#images)
-		* [Browser](#browser)
-		* [Lazy Load(懒加载)](#lazy-load懒加载)
-		* [Other Packages](#other-packages)
-	* [Spider](#spider)
-
 # Nodejs Basic Notes
 
--   Main                        ./index.js, ./server.js, or ./yourentryfile.js in the root
--   Supporting files in         ./lib/
--   Static HTTP files in        ./public/
--   Views or templates in       ./views/
--   Command-line executables in ./bin/
--   Tests in                    ./test/ (or ./spec/ if you’re a Jasmine cool-aid drinker)
--   npm scripts in              ./scripts/
--   Config in                   ./config/
--   Documentation in            ./doc/
--   Examples in                 ./examples/
--   Performance analysis in     ./benchmarks/
--   Native C/C++ source in      ./source/
+<!-- TOC -->
+
+- [Nodejs Basic Notes](#nodejs-basic-notes)
+  - [Npm Cli](#npm-cli)
+    - [Basic Steps](#basic-steps)
+    - [Test Steps](#test-steps)
+    - [Publish Steps](#publish-steps)
+      - [Semantic Version(Semver)](#semantic-versionsemver)
+    - [Tab Completion](#tab-completion)
+  - [npm](#npm)
+    - [Basic Command](#basic-command)
+    - [Link Command](#link-command)
+  - [Basic Node Modules](#basic-node-modules)
+    - [Process Module](#process-module)
+      - [Process Properties](#process-properties)
+      - [Process Events](#process-events)
+      - [Process Methods](#process-methods)
+        - [Get Info](#get-info)
+        - [Message Loop/Counter](#message-loopcounter)
+        - [Child Process](#child-process)
+  - [File Module](#file-module)
+    - [fs API](#fs-api)
+    - [Buffer Object](#buffer-object)
+    - [Path API](#path-api)
+  - [Self-Defined Modules](#self-defined-modules)
+    - [Basic Modular Pattern](#basic-modular-pattern)
+    - [Export Modules](#export-modules)
+    - [CallBack Function](#callback-function)
+  - [Http Module](#http-module)
+    - [Resquest Object](#resquest-object)
+      - [属性](#属性)
+    - [Response Object](#response-object)
+      - [类型](#类型)
+      - [事件](#事件)
+      - [方法](#方法)
+    - [Http Get](#http-get)
+    - [Http Server](#http-server)
+    - [Sample](#sample)
+  - [Net Module](#net-module)
+    - [Socket Object](#socket-object)
+    - [Socker.IO](#sockerio)
+    - [Basic Methods](#basic-methods)
+  - [URL Module](#url-module)
+    - [Basic Method](#basic-method)
+      - [parse](#parse)
+    - [dns](#dns)
+  - [Security Module](#security-module)
+    - [Crypto](#crypto)
+      - [Hash API](#hash-api)
+      - [Hmac API](#hmac-api)
+      - [公钥加密](#公钥加密)
+  - [Async Modules](#async-modules)
+    - [Cluster Module](#cluster-module)
+  - [Test Modules](#test-modules)
+    - [assert](#assert)
+  - [package.json](#packagejson)
+    - [bin](#bin)
+    - [version](#version)
+  - [Awesome Package](#awesome-package)
+    - [Http](#http)
+    - [File](#file)
+    - [Stream](#stream)
+    - [Format](#format)
+    - [Back-End DOM](#back-end-dom)
+    - [Deploy](#deploy)
+    - [Server](#server)
+    - [Storage](#storage)
+      - [Cookie/Session](#cookiesession)
+      - [DataBase](#database)
+      - [Security](#security)
+        - [Encrypt(加密)](#encrypt加密)
+    - [Documentation](#documentation)
+    - [Parser](#parser)
+      - [XML](#xml)
+      - [JSON](#json)
+      - [Programming Language](#programming-language)
+    - [MD5](#md5)
+    - [Base64](#base64)
+    - [Package](#package)
+    - [Automatic Workflow/Tools](#automatic-workflowtools)
+      - [Webpack](#webpack)
+    - [Minimalize](#minimalize)
+    - [Testing](#testing)
+      - [Unit Testing](#unit-testing)
+      - [Feature Testing](#feature-testing)
+      - [Higher Level Tools](#higher-level-tools)
+      - [Coverage](#coverage)
+      - [Small Libraries](#small-libraries)
+      - [Other Testing](#other-testing)
+    - [Log](#log)
+    - [Search](#search)
+    - [Linter](#linter)
+    - [Template Engine](#template-engine)
+    - [Boilerplate](#boilerplate)
+      - [Other Boilerplate](#other-boilerplate)
+    - [Fonts](#fonts)
+    - [Images](#images)
+    - [Browser](#browser)
+    - [Lazy Load(懒加载)](#lazy-load懒加载)
+    - [Other Packages](#other-packages)
+  - [Spider](#spider)
+
+<!-- /TOC -->
+
+- Main                        ./index.js, ./server.js, or ./yourentryfile.js in the root
+- Supporting files in         ./lib/
+- Static HTTP files in        ./public/
+- Views or templates in       ./views/
+- Command-line executables in ./bin/
+- Tests in                    ./test/ (or ./spec/ if you’re a Jasmine cool-aid drinker)
+- npm scripts in              ./scripts/
+- Config in                   ./config/
+- Documentation in            ./doc/
+- Examples in                 ./examples/
+- Performance analysis in     ./benchmarks/
+- Native C/C++ source in      ./source/
 
 ## Npm Cli
 
 ### Basic Steps
 
 ```bash
-$ npm adduser
-$ mkdir proj/
-$ npm init --scope=<username>  // 修改 package.json 可再次运行此命令
+npm adduser
+mkdir proj/
+npm init --scope=<username>  // 修改 package.json 可再次运行此命令
 
-$ npm install --save <modulename>     // 修改 package.json 可再次运行此命令(不接模块名为自动更新)
-$ npm prune                    // 清除无用包
-$ npm rm --save  // --save 删除文件的同时更新 package.json 文件
+npm install --save <modulename>     // 修改 package.json 可再次运行此命令(不接模块名为自动更新)
+npm prune                    // 清除无用包
+npm rm --save  // --save 删除文件的同时更新 package.json 文件
 
-$ npm ls
-$ npm outdated   // 去除过期包
+npm ls
+npm outdated   // 去除过期包
 ```
 
 ### Test Steps
@@ -134,7 +145,7 @@ $ npm outdated   // 去除过期包
 ```
 
 ```bash
-$ npm test
+npm test
 ```
 
 ### Publish Steps
@@ -142,28 +153,28 @@ $ npm test
 `latest` or `alpha`
 
 ```bash
-$ npm publish
-$ npm publish --tag [<tag>]
-$ npm dist-tag add <pkg>@<version> [<tag>]
-$ npm dist-tag rm <pkg> <tag>
-$ npm dist-tag ls [<pkg>]
+npm publish
+npm publish --tag [<tag>]
+npm dist-tag add <pkg>@<version> [<tag>]
+npm dist-tag rm <pkg> <tag>
+npm dist-tag ls [<pkg>]
 ```
 
 #### Semantic Version(Semver)
 
-*   patch release: bugfix and other minor changes
-*   minor release: new features not breaking API(backward compatible)
-*   major release: new features breaking API(not backward compatible)
+- patch release: bugfix and other minor changes
+- minor release: new features not breaking API(backward compatible)
+- major release: new features breaking API(not backward compatible)
 
 ```bash
-$ npm version patch
-$ npm publish
+npm version patch
+npm publish
 
-$ npm version minor
-$ npm publish
+npm version minor
+npm publish
 
-$ npm version major
-$ npm publish
+npm version major
+npm publish
 ```
 
 ### Tab Completion
@@ -178,17 +189,17 @@ source ~/.zshrc
 ### Basic Command
 
 ```bash
-$ npm prune // uninstall node_modules not in package.json
-$ npm outdated
+npm prune // uninstall node_modules not in package.json
+npm outdated
 ```
 
 ### Link Command
 
 ```bash
 # in local B package, build local B binary (npm install -g B)
-$ npm link
+npm link
 # in local A package, set `B` link in package.json to local B binary
-$ npm link B 
+npm link B
 ```
 
 ## Basic Node Modules
@@ -221,28 +232,28 @@ process.stdin.pipe(process.stdout);
 
 #### Process Events
 
--   uncaughtException
--   SIGINT
--   exit
+- uncaughtException
+- SIGINT
+- exit
 
 #### Process Methods
 
 ##### Get Info
 
--   process.on()
--   process.uptime(): 进程运行时长
--   process.getgid/setgid/getuid/setuid();
--   process.cwd()
--   process.memoryUsage()
+- process.on()
+- process.uptime(): 进程运行时长
+- process.getgid/setgid/getuid/setuid();
+- process.cwd()
+- process.memoryUsage()
 
 ##### Message Loop/Counter
 
--   process.nextTick()
+- process.nextTick()
 
 ##### Child Process
 
--   cp.spawn(): 创建子进程, 拥有独立的 stdin/stdout/stderr 文件描述符
--   cp.exec(): 创建子进程, 并会在进程结束时调用传入的回调函数
+- cp.spawn(): 创建子进程, 拥有独立的 stdin/stdout/stderr 文件描述符
+- cp.exec(): 创建子进程, 并会在进程结束时调用传入的回调函数
 
 ```js
 var cp = require('child_process');
@@ -250,16 +261,16 @@ var cp = require('child_process');
 cp.exec('ls -l', {
     encoding: 'uft-8',
     timeout: 0,
-	maxBuffer: 200 * 1024,
-	killSignal: 'SIGTERM',
-	setsid: false,
-	cwd: null,
-	env: null
+  maxBuffer: 200 * 1024,
+  killSignal: 'SIGTERM',
+  setsid: false,
+  cwd: null,
+  env: null
 }, function (err, stdout, stderr) {
-	if (!err) {
-		console.log(stdout);
-		console.log(stderr);
-	}
+  if (!err) {
+    console.log(stdout);
+    console.log(stderr);
+  }
 });
 ```
 
@@ -267,11 +278,11 @@ cp.exec('ls -l', {
 
 ### fs API
 
--   fs.createReadStream
--   fs.readdir
--   fs.readFile
--   fs.readFileSync
--   fs.exsits
+- fs.createReadStream
+- fs.readdir
+- fs.readFile
+- fs.readFileSync
+- fs.exsits
 
 ```js
 var fs = require('fs');
@@ -292,8 +303,8 @@ var str = buf.toString();
 
 ### Path API
 
--   path.resolve: 自动按系统处理路径
--   path.extname: 返回文件类型
+- path.resolve: 自动按系统处理路径
+- path.extname: 返回文件类型
 
 ```js
 var path = require('path');
@@ -317,7 +328,7 @@ path.delimiter
 
 编写具有回调函数参数的模块
 
--   定义模块
+- 定义模块
 
 ```js
 function foo(x, y, callback) {
@@ -333,7 +344,7 @@ function foo(x, y, callback) {
 }
 ```
 
--   使用模块
+- 使用模块
 
 ```js
 foo(a, b, function (err, param) {
@@ -353,7 +364,7 @@ module.exports = function (args) { /* ... */ }
 
 ### CallBack Function
 
--    向定义最内层回调,可避免回套嵌套
+- 向定义最内层回调,可避免回套嵌套
 
 ```js
 server.on('request', function(req, res) {
@@ -392,7 +403,7 @@ typedef Stream response
 
 #### 事件
 
--   监听事件
+- 监听事件
 
 ```js
 response.on('data', function (data) {});
@@ -403,7 +414,7 @@ response.on('end', function () {
 });
 ```
 
--   发出事件
+- 发出事件
 
 ```js
 response.end();  //  传输结束
@@ -553,16 +564,16 @@ serverInstance.listen(portNumber);   // 开始监听特定端口
 
 解析处URL各个组成部分:
 
--   href
--   protocol
--   host
--   auth
--   hostname
--   port
--   pathname
--   search
--   query
--   hash
+- href
+- protocol
+- host
+- auth
+- hostname
+- port
+- pathname
+- search
+- query
+- hash
 
 ```js
 // true 表示调用 queryString 模块查询字符串
@@ -571,9 +582,9 @@ url.parse(request.url, true);
 
 ### dns
 
--   dns.resolve
--   dns.reverse
--   dns.lookup
+- dns.resolve
+- dns.reverse
+- dns.lookup
 
 ```js
 var dns = require('dns');
@@ -594,10 +605,10 @@ dns.resolve('tazimi.tk', 'A', function(e,r) {
 
 ### Crypto
 
--   hash algorithm
--   hmac algorithm
--   cipher/decipher algorithms
--   signature/validate
+- hash algorithm
+- hmac algorithm
+- cipher/decipher algorithms
+- signature/validate
 
 #### Hash API
 
@@ -612,7 +623,7 @@ md5.digest('hex');  // 'acbd18db4cc2f85cedef654fccc4a4d8'
 #### Hmac API
 
 ```bash
-$ openssl genrsa -out key.pem 1024
+openssl genrsa -out key.pem 1024
 ```
 
 ```js
@@ -696,15 +707,15 @@ function createWorker() {
 
 ### assert
 
--   assert.equal(expect, real, assertPrompt);
--   assert.notEqual(expect, real, assertPrompt);
--   assert.strictEqual(expect, real, assertPrompt);
--   assert.notStrictEqual(expect, real, assertPrompt);
--   assert.deepEqual(expect, real, assertPrompt);
--   assert.notDeepEqual(expect, real, assertPrompt);
--   assert.ok(var, assertPrompt): 测试对象真值(truthy/falsy)
--   assert.throws(fn): 测试方法是否抛出异常
--   assert.doesNotThrow(fn): 测试方法是否抛出异常
+- assert.equal(expect, real, assertPrompt);
+- assert.notEqual(expect, real, assertPrompt);
+- assert.strictEqual(expect, real, assertPrompt);
+- assert.notStrictEqual(expect, real, assertPrompt);
+- assert.deepEqual(expect, real, assertPrompt);
+- assert.notDeepEqual(expect, real, assertPrompt);
+- assert.ok(var, assertPrompt): 测试对象真值(truthy/falsy)
+- assert.throws(fn): 测试方法是否抛出异常
+- assert.doesNotThrow(fn): 测试方法是否抛出异常
 
 ```js
 var assert = require('assert');
@@ -731,165 +742,165 @@ npm version patch
 
 ## Awesome Package
 
--   Mout Like  Underscore/Lo-Dash, stuff that should probably be included in JavaScript
--   Express    Web-application framework
--   Q          Promises
--   Qconf      Application config
--   Credential Safe password hashing
--   Hogan      Mustache for Express
--   Superagent Communicate with APIs
--   Socket.io  Realtime communications (WebSocket)
--   Async      Asynchronous functional utilities
--   Bunyan     Logging
--   Tape       Testing
--   Cuid       Better than GUID/UUID for web applications
+- Mout Like  Underscore/Lo-Dash, stuff that should probably be included in JavaScript
+- Express    Web-application framework
+- Q          Promises
+- Qconf      Application config
+- Credential Safe password hashing
+- Hogan      Mustache for Express
+- Superagent Communicate with APIs
+- Socket.io  Realtime communications (WebSocket)
+- Async      Asynchronous functional utilities
+- Bunyan     Logging
+- Tape       Testing
+- Cuid       Better than GUID/UUID for web applications
 
 ### Http
 
--   bl
--   concat-stream
--   async
--   [jssip - chat library](https://github.com/versatica/JsSIP)
+- bl
+- concat-stream
+- async
+- [jssip - chat library](https://github.com/versatica/JsSIP)
 
 ### File
 
--   [Human Readable File Size](https://github.com/avoidwork/filesize.js)
+- [Human Readable File Size](https://github.com/avoidwork/filesize.js)
 
 ### Stream
 
--   through2-map
--   [React DOM Stream](https://github.com/aickin/react-dom-stream)
+- through2-map
+- [React DOM Stream](https://github.com/aickin/react-dom-stream)
 
 ### Format
 
--   [Moment.js Awesome Library](https://github.com/moment/moment)
--   strftime
+- [Moment.js Awesome Library](https://github.com/moment/moment)
+- strftime
 
 ### Back-End DOM
 
--   React DOM Stream
--   [Cheerio - jQuery](https://github.com/cheeriojs/cheerio)
-
+- React DOM Stream
+- [Cheerio - jQuery](https://github.com/cheeriojs/cheerio)
 
 ### Deploy
 
--   https://github.com/shipitjs/shipit
+- [Shipit](https://github.com/shipitjs/shipit)
 
 ### Server
 
--   [Parse Server](https://github.com/ParsePlatform/parse-server)
+- [Parse Server](https://github.com/ParsePlatform/parse-server)
 
 ```bash
-$ npm install -g parse-server mongodb-runner
-$ mongodb-runner start
-$ parse-server --appId APPLICATION_ID --masterKey MASTER_KEY
+npm install -g parse-server mongodb-runner
+mongodb-runner start
+parse-server --appId APPLICATION_ID --masterKey MASTER_KEY
 ```
--   [JSON Server](https://github.com/typicode/json-server)
+
+- [JSON Server](https://github.com/typicode/json-server)
 
 ```bash
-$ npm install -g json-server
+npm install -g json-server
 ```
 
 ### Storage
 
 #### Cookie/Session
 
--   npm install -S cookie-parser
--   npm install -S express-session
+- npm install -S cookie-parser
+- npm install -S express-session
 
 #### DataBase
 
--   npm install mongoose -S
--   [npm install mongojs -S](https://github.com/mafintosh/mongojs)
--   [npm install indexeddbshim](https://github.com/axemclion/IndexedDBShim)
+- npm install mongoose -S
+- [npm install mongojs -S](https://github.com/mafintosh/mongojs)
+- [npm install indexeddbshim](https://github.com/axemclion/IndexedDBShim)
 
 #### Security
 
 ##### Encrypt(加密)
 
--   npm install --save passport-local-mongoose passport-local passport
+- npm install --save passport-local-mongoose passport-local passport
 
 ### Documentation
 
--   [documentationjs](https://github.com/documentationjs/documentation)
--   [YUI Doc Generator](https://github.com/yui/yuidoc)
--   [YUI Doc Dark Theme](https://github.com/Krxtopher/yuidoc-themes)
+- [documentationjs](https://github.com/documentationjs/documentation)
+- [YUI Doc Generator](https://github.com/yui/yuidoc)
+- [YUI Doc Dark Theme](https://github.com/Krxtopher/yuidoc-themes)
 
 ### Parser
 
 #### XML
 
--   node-xml
+- node-xml
 
 #### JSON
 
--   npm install --save normalizr`
+- npm install --save normalizr`
 
 #### Programming Language
 
--   [jison: Bison in JavaScript](https://github.com/zaach/jison)
+- [jison: Bison in JavaScript](https://github.com/zaach/jison)
 
 ### MD5
 
--   [npm install blueimp-md5](https://github.com/blueimp/JavaScript-MD5)
+- [npm install blueimp-md5](https://github.com/blueimp/JavaScript-MD5)
 
 ### Base64
 
--   [npm install base64](https://github.com/dankogai/js-base64)
+- [npm install base64](https://github.com/dankogai/js-base64)
 
 ### Package
 
--   [npm-shrinkwrap](https://github.com/uber/npm-shrinkwrap)
+- [npm-shrinkwrap](https://github.com/uber/npm-shrinkwrap)
 
 ### Automatic Workflow/Tools
 
 #### Webpack
 
--   [webpack-visualizer](https://github.com/chrisbateman/webpack-visualizer)
+- [webpack-visualizer](https://github.com/chrisbateman/webpack-visualizer)
 
 ### Minimalize
 
--   [`npm install --save purify-css`](https://github.com/purifycss/purifycss)
+- [`npm install --save purify-css`](https://github.com/purifycss/purifycss)
 
 ### Testing
 
 #### Unit Testing
 
--   [jasmine](https://github.com/jasmine/jasmine)
--   [mocha](https://github.com/mochajs/mocha)
+- [jasmine](https://github.com/jasmine/jasmine)
+- [mocha](https://github.com/mochajs/mocha)
 
 #### Feature Testing
 
--   [karma](https://github.com/karma-runner/karma)
--   [Webkit API(Chrome)](https://github.com/ariya/phantomjs)
--   [Gecko API(Firefox)](https://github.com/laurentj/slimerjs)
--   [selenium](https://github.com/SeleniumHQ/selenium)
+- [karma](https://github.com/karma-runner/karma)
+- [Webkit API(Chrome)](https://github.com/ariya/phantomjs)
+- [Gecko API(Firefox)](https://github.com/laurentj/slimerjs)
+- [selenium](https://github.com/SeleniumHQ/selenium)
 
 #### Higher Level Tools
 
--   [Nightmare - Phantomjs Like Browser Automation Testing](https://github.com/segmentio/nightmare)
--   [NightWatchjs - Selenium/Node Testing Framework](https://github.com/nightwatchjs/nightwatch)
+- [Nightmare - Phantomjs Like Browser Automation Testing](https://github.com/segmentio/nightmare)
+- [NightWatchjs - Selenium/Node Testing Framework](https://github.com/nightwatchjs/nightwatch)
 
 #### Coverage
 
--   [JS code coverage tool](https://github.com/gotwarlost/istanbul)
--   [Karma Coverage](https://github.com/karma-runner/karma-coverage)
+- [JS code coverage tool](https://github.com/gotwarlost/istanbul)
+- [Karma Coverage](https://github.com/karma-runner/karma-coverage)
 
 #### Small Libraries
 
--   [Mockery](https://github.com/mfncooper/mockery)
+- [Mockery](https://github.com/mfncooper/mockery)
 
 #### Other Testing
 
--   [npm install testem -g](https://github.com/testem/testem)
--   [Multi-Version Nodejs](https://github.com/victorbjelkholm/autochecker)
+- [npm install testem -g](https://github.com/testem/testem)
+- [Multi-Version Nodejs](https://github.com/victorbjelkholm/autochecker)
 
 ### Log
 
--   [npm install log4js](https://github.com/nomiddlename/log4js-node)
--   [npm install -S stacktrace-js](https://github.com/stacktracejs/stacktrace.js)
--   [Stacktrace visualization tools](https://github.com/joyent/node-stackvis)
--   `npm install -S morgan`
+- [npm install log4js](https://github.com/nomiddlename/log4js-node)
+- [npm install -S stacktrace-js](https://github.com/stacktracejs/stacktrace.js)
+- [Stacktrace visualization tools](https://github.com/joyent/node-stackvis)
+- `npm install -S morgan`
 
 ```js
 var logger = require('morgan');
@@ -898,11 +909,11 @@ app.use(logger('combined, {stream: accessLogStream}'));
 
 ### Search
 
--   [Full Text Search Engine](https://github.com/olivernn/lunr.js)
+- [Full Text Search Engine](https://github.com/olivernn/lunr.js)
 
 ### Linter
 
--   [npm install standard -g](https://github.com/feross/standard)
+- [npm install standard -g](https://github.com/feross/standard)
 
 ```json
 "standard": {
@@ -921,24 +932,24 @@ app.use(logger('combined, {stream: accessLogStream}'));
 
 ### Template Engine
 
--   `npm install -S hbs` - express plugin for handlebars
+- `npm install -S hbs` - express plugin for handlebars
 
 ### Boilerplate
 
--   [Basic - HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
--   [Font-End - React Redux Universal Hot Example](https://github.com/erikras/react-redux-universal-hot-example)
--   [Font-End - React Starter Kit](https://github.com/kriasoft/react-starter-kit)
--   [Back-End - Nodejs Hackathon Starter](https://github.com/sahat/hackathon-starter)
--   [Full Stack - Google Web Start Kit](https://github.com/google/web-starter-kit)
--   [Plugins - jQuery Boilerplate](https://github.com/jquery-boilerplate/jquery-boilerplate)
--   [Desktop - Electron React Boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
--   [Mobile - React Native Boilerplate](https://github.com/bartonhammond/snowflake)
+- [Basic - HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
+- [Font-End - React Redux Universal Hot Example](https://github.com/erikras/react-redux-universal-hot-example)
+- [Font-End - React Starter Kit](https://github.com/kriasoft/react-starter-kit)
+- [Back-End - Nodejs Hackathon Starter](https://github.com/sahat/hackathon-starter)
+- [Full Stack - Google Web Start Kit](https://github.com/google/web-starter-kit)
+- [Plugins - jQuery Boilerplate](https://github.com/jquery-boilerplate/jquery-boilerplate)
+- [Desktop - Electron React Boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
+- [Mobile - React Native Boilerplate](https://github.com/bartonhammond/snowflake)
 
 #### Other Boilerplate
 
--   [npm install antd-init -g](https://github.com/ant-design/antd-init)
--   [npm install tooling -g](https://github.com/egoist/tooling)
--   [cooking](https://github.com/ElemeFE/cooking)
+- [npm install antd-init -g](https://github.com/ant-design/antd-init)
+- [npm install tooling -g](https://github.com/egoist/tooling)
+- [cooking](https://github.com/ElemeFE/cooking)
 
 ```bash
 antd-init
@@ -948,39 +959,39 @@ npm run build
 
 ### Fonts
 
--   [npm install --save fontmin](https://github.com/ecomfe/fontmin)
--   [npm install fonts.css --save](https://github.com/zenozeng/fonts.css)
--   [Chinese WebFont Zip](https://github.com/aui/font-spider)
+- [npm install --save fontmin](https://github.com/ecomfe/fontmin)
+- [npm install fonts.css --save](https://github.com/zenozeng/fonts.css)
+- [Chinese WebFont Zip](https://github.com/aui/font-spider)
 
 ### Images
 
--   [SVG](https://github.com/svg/svgo)
--   [ICO](https://github.com/kevva/to-ico)
--   [A fast DVI to SVG converter](https://github.com/mgieseki/dvisvgm)
--   [Images API](https://github.com/rsms/node-imagemagick)
+- [SVG](https://github.com/svg/svgo)
+- [ICO](https://github.com/kevva/to-ico)
+- [A fast DVI to SVG converter](https://github.com/mgieseki/dvisvgm)
+- [Images API](https://github.com/rsms/node-imagemagick)
 
 ### Browser
 
--   [Feature/Browser Detection](https://github.com/Modernizr/Modernizr)
+- [Feature/Browser Detection](https://github.com/Modernizr/Modernizr)
 
 ### Lazy Load(懒加载)
 
--   [SystemJS](https://github.com/systemjs/systemjs)
--   [Lazyload.js](https://github.com/rgrove/lazyload)
--   [Await/Async Lazy Load - Labjs](https://github.com/getify/LABjs)
+- [SystemJS](https://github.com/systemjs/systemjs)
+- [Lazyload.js](https://github.com/rgrove/lazyload)
+- [Await/Async Lazy Load - Labjs](https://github.com/getify/LABjs)
 
 ### Other Packages
 
--   prompt
--   trigonometry
+- prompt
+- trigonometry
 
 ## Spider
 
--   async.js
--   cheerio: jQuery-DOM API
--   iconv-lite: 转码库
--   request
--   http请求获取页面
--   正则表达式匹配信息
--   数据持久化数据库
--   数据可视化
+- async.js
+- cheerio: jQuery-DOM API
+- iconv-lite: 转码库
+- request
+- http请求获取页面
+- 正则表达式匹配信息
+- 数据持久化数据库
+- 数据可视化

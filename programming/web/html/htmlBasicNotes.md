@@ -282,15 +282,15 @@ table>.row*4>.cell*3
 
 ### nav
 
--   传统导航条
--   侧边栏导航
--   页内跳转
--   翻页操作
+- 传统导航条
+- 侧边栏导航
+- 页内跳转
+- 翻页操作
 
 ### main
 
--   每个网页只有1个`main`元素
--   `main`不可为`article`、`aside`、`header`、`footer`、`nav`孩子
+- 每个网页只有1个`main`元素
+- `main`不可为`article`、`aside`、`header`、`footer`、`nav`孩子
 
 ### address
 
@@ -314,42 +314,42 @@ table>.row*4>.cell*3
 
 ```html
 <form action="表单提交的后台地址接口" method="post"提交方式，一般为post>
-	<fieldset 若内容比较多，用来分区>
-		<legend>这是分区的标题</legend>
-		<label for="file">选择照片按钮</label>
-		<input type="file" id="file">
+  <fieldset 若内容比较多，用来分区>
+    <legend>这是分区的标题</legend>
+    <label for="file">选择照片按钮</label>
+    <input type="file" id="file">
 
-	</fieldset>
+  </fieldset>
 
-	<fieldset>
-		<legend>这是分区的标题</legend>
-		<div>选择尺寸：</div>
-		<input type="checkbox"多选框 name="size"数据名称，交给后台 value="5"值 id="cb_0" checked disabled 默认勾选，无法更改>
-		<label for="cb_0">5寸</label>
-		<!-- 一个input一个label，一一对应，同类name相同 -->
-		<input type="radio"单选框 name="material" value="fushi" id="rd_0">
-		<label for="rd_0">富士，单选第一个</label>
+  <fieldset>
+    <legend>这是分区的标题</legend>
+    <div>选择尺寸：</div>
+    <input type="checkbox"多选框 name="size"数据名称，交给后台 value="5"值 id="cb_0" checked disabled 默认勾选，无法更改>
+    <label for="cb_0">5寸</label>
+    <!-- 一个input一个label，一一对应，同类name相同 -->
+    <input type="radio"单选框 name="material" value="fushi" id="rd_0">
+    <label for="rd_0">富士，单选第一个</label>
 
-		<input type="text"单行文本框，默认 id="dexcription" placeholder="里面是提示" value="这里是默认内容" readonly只读 hidden隐藏>
-		<input type="submit"提交按钮> == <button type="submit">提交</button>
-		<input type="reset"重置按钮>  == <button type="reset">重置</button>
+    <input type="text"单行文本框，默认 id="dexcription" placeholder="里面是提示" value="这里是默认内容" readonly只读 hidden隐藏>
+    <input type="submit"提交按钮> == <button type="submit">提交</button>
+    <input type="reset"重置按钮>  == <button type="reset">重置</button>
 
-		<div>
-			<label for="delivery" 功能提示信息，通过for与标签对应>配送方式</label>
-			<select id="delivery"下拉选择>
-			<optgroup label="group1"给选项分组>
-				<option value="0">快递</option>
-				<option value="1">EMS</option>
-			</optgroup>
-				<option value="2" selected>平邮</option>
-			</select>
-		</div>
+    <div>
+      <label for="delivery" 功能提示信息，通过for与标签对应>配送方式</label>
+      <select id="delivery"下拉选择>
+      <optgroup label="group1"给选项分组>
+        <option value="0">快递</option>
+        <option value="1">EMS</option>
+      </optgroup>
+        <option value="2" selected>平邮</option>
+      </select>
+    </div>
 
-		<div>
-			<label for="feedback">意见反馈,多行文本框</label>
-			<textarea name="feedback" rows="4"4行 id="feedback"></textarea>
-		</div>
-	</fieldset>
+    <div>
+      <label for="feedback">意见反馈,多行文本框</label>
+      <textarea name="feedback" rows="4"4行 id="feedback"></textarea>
+    </div>
+  </fieldset>
 </form>
 
 <input type="email">
@@ -387,19 +387,19 @@ table>.row*4>.cell*3
 
 #### formenctype
 
--   默认值：application/x-www-form-urlencoded  提交前编码所有字符
--   multipart/form-data  不编码字符，**上传控件表单元素**必须使用改值
--   text/plain  表单元素数据中的空格->`+`
+- 默认值：application/x-www-form-urlencoded  提交前编码所有字符
+- multipart/form-data  不编码字符，**上传控件表单元素**必须使用改值
+- text/plain  表单元素数据中的空格->`+`
 
 #### formtarget
 
 定义表单提交后加载页面打开方式
 
--   blank     在新窗口中打开被链接文档
--   self      默认:在相同的框架中打开被链接文档
--   parent    在父框架集中打开被链接文档
--   top       在整个窗口中打开被链接文档
--   framename 在指定的框架中打开被链接文档
+- blank     在新窗口中打开被链接文档
+- self      默认:在相同的框架中打开被链接文档
+- parent    在父框架集中打开被链接文档
+- top       在整个窗口中打开被链接文档
+- framename 在指定的框架中打开被链接文档
 
 #### formnovalidate
 
@@ -515,8 +515,8 @@ input元素的镜像元素
 
 #### wrap
 
--   hard:换行时加入换行标志，**此时必须指定**`cols`属性
--   soft:不加入换行标志
+- hard:换行时加入换行标志，**此时必须指定**`cols`属性
+- soft:不加入换行标志
 
 ### menu
 
@@ -582,8 +582,8 @@ underline text
 
 ### small
 
--   免责声明、注意事项、法律规定、版权声明
--   不改变文字样式
+- 免责声明、注意事项、法律规定、版权声明
+- 不改变文字样式
 
 ### hr
 
@@ -596,10 +596,15 @@ value/max 百分比
 ### meter
 
 #### value
+
 #### min
+
 #### max
+
 #### low
+
 #### high
+
 #### optimum
 
 ### wbr
@@ -610,10 +615,10 @@ value/max 百分比
 
 ### canvas
 
--   绘制路径 beginPath() -> draw() -> closePath()
--   Path2D对象
--   绘制样式 颜色、渐变、变换、阴影
--   绘制图形 fill/stroke/clip
+- 绘制路径 beginPath() -> draw() -> closePath()
+- Path2D对象
+- 绘制样式 颜色、渐变、变换、阴影
+- 绘制图形 fill/stroke/clip
 
 ```javascript
 vat context = canvas.getContext('2d');
@@ -654,7 +659,7 @@ function changeColor(color){
 
 figure可拥有唯一的0/1个figcaption
 
-<figcaption>figure_title</figcaption>
+`<figcaption>figure_title</figcaption>`
 
 ### img
 
@@ -682,11 +687,11 @@ figure可拥有唯一的0/1个figcaption
 
 定义被链接文档出现方式
 
--   blank     在新窗口中打开被链接文档
--   self      默认:在相同的框架中打开被链接文档
--   parent    在父框架集中打开被链接文档
--   top       在整个窗口中打开被链接文档
--   framename 在指定的框架中打开被链接文档
+- blank     在新窗口中打开被链接文档
+- self      默认:在相同的框架中打开被链接文档
+- parent    在父框架集中打开被链接文档
+- top       在整个窗口中打开被链接文档
+- framename 在指定的框架中打开被链接文档
 
 ### embed
 
@@ -698,11 +703,9 @@ figure可拥有唯一的0/1个figcaption
 
 ### time
 
-**Attr** -
-
 #### pubdate
 
--   boolean 代表当前`<time>`表示整个网页的时间
+- boolean 代表当前`<time>`表示整个网页的时间
 
 #### datetime
 
@@ -711,9 +714,9 @@ figure可拥有唯一的0/1个figcaption
 <time datetime="2010-11-13T20:00+09:00"></time>
 ```
 
--   `T` 分隔日期与时间
--   `Z` 使用UTC标准时间
--   `+` 时差
+- `T` 分隔日期与时间
+- `Z` 使用UTC标准时间
+- `+` 时差
 
 ## Attributes
 
@@ -725,16 +728,15 @@ figure可拥有唯一的0/1个figcaption
 
 #### hidden
 
-**boolean**
+boolean
 
 #### spellcheck
 
-**boolean**
+boolean
 
 #### tabindex
 
-**-1**
-编程可获得焦点，tab键不可获得焦点
+**-1**: 编程可获得焦点，tab键不可获得焦点
 
 ## Geolocation API
 
@@ -986,7 +988,7 @@ sudo chown -R $USER:$USER /var/www/blog/html
 sudo chmod -R 755 /var/www
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/blog
 sudo vim /etc/nginx/sites-available/blog    # change 'root' and 'server_name' config, remove 'default_server' config
-sudo ln -s /etc/nginx/sites-available/blog /etc/nginx/sites-enabled/ 
+sudo ln -s /etc/nginx/sites-available/blog /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx
 ```

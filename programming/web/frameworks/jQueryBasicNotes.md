@@ -1,50 +1,54 @@
 
-* [JQuery](#jquery)
-	* [Events](#events)
-		* [Mouse](#mouse)
-		* [Keyboard](#keyboard)
-		* [Form](#form)
-		* [Document/Window](#documentwindow)
-	* [常用多态函数](#常用多态函数)
-	* [window](#window)
-	* [DOM](#dom)
-		* [structure](#structure)
-		* [class](#class)
-		* [style](#style)
-	* [Ajax](#ajax)
-		* [$.getJSON](#getjson)
-		* [$.ajax](#ajax-1)
-
 # JQuery
+
+<!-- TOC -->
+
+- [JQuery](#jquery)
+  - [Events](#events)
+    - [Mouse](#mouse)
+    - [Keyboard](#keyboard)
+    - [Form](#form)
+    - [Document/Window](#documentwindow)
+  - [常用多态函数](#常用多态函数)
+  - [window](#window)
+  - [DOM](#dom)
+    - [structure](#structure)
+    - [class](#class)
+    - [style](#style)
+  - [Ajax](#ajax)
+    - [$.getJSON](#getjson)
+    - [$.ajax](#ajax)
+
+<!-- /TOC -->
 
 ## Events
 
 ### Mouse
 
--   click
--   dblclick
--   mouseenter
--   mouseleave
+- click
+- dblclick
+- mouseenter
+- mouseleave
 
 ### Keyboard
 
--   keypress
--   keydown
--   keyup
+- keypress
+- keydown
+- keyup
 
 ### Form
 
--   submit
--   change
--   focus
--   blur
+- submit
+- change
+- focus
+- blur
 
 ### Document/Window
 
--   load
--   resize
--   scroll
--   unload
+- load
+- resize
+- scroll
+- unload
 
 ## 常用多态函数
 
@@ -59,7 +63,7 @@ $(document).ready(function(){});
 $(window).scroll(function(event) {});
 $(document).height()           //返回整个网页的高度
 $(window).height()               //返回窗口高度
-$(window).scrollTop()		//返回滚动条距网页顶部距离
+$(window).scrollTop() //返回滚动条距网页顶部距离
 ```
 
 ## DOM

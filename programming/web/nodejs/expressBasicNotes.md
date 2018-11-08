@@ -1,20 +1,26 @@
 
-* [Express Basic Notes](#express-basic-notes)
-	* [Middleware Function](#middleware-function)
-		* [ Principle: `next()/next(err)` OR res.end()/res.send()](#-principle-nextnexterr-or-resendressend)
-		* [Template](#template)
-		* [Use](#use)
-		* [Useful Middleware](#useful-middleware)
-	* [Http](#http)
-		* [Res](#res)
-			* [res.local](#reslocal)
-		* [Req](#req)
-
 # Express Basic Notes
+
+<!-- TOC -->
+
+- [Express Basic Notes](#express-basic-notes)
+  - [Middleware Function](#middleware-function)
+    - [Principle](#principle)
+    - [Template](#template)
+    - [Use](#use)
+    - [Useful Middleware](#useful-middleware)
+  - [Http](#http)
+    - [Res](#res)
+      - [res.local](#reslocal)
+    - [Req](#req)
+
+<!-- /TOC -->
 
 ## Middleware Function
 
-###  Principle: `next()/next(err)` OR res.end()/res.send() 
+### Principle
+
+`next()/next(err)` OR res.end()/res.send()
 
 ### Template
 
@@ -38,25 +44,25 @@ app.use(middlewareFunction);
 
 ### Useful Middleware
 
--   basicAuth
--   bodyParser
--   compiler
--   cookieParser
--   csrf: 跨域请求(依赖 session bodyparser)
--   directory
--   errorHandle
--   favicon
--   limit: 限制请求个数,防止 Dos 攻击
--   logger
--   methodOverride
--   profiler: 置于所有中间件之前,记录响应时间和内存使用
--   query
--   responseTime
--   router
--   session
--   static
--   staticCache
--   vhost
+- basicAuth
+- bodyParser
+- compiler
+- cookieParser
+- csrf: 跨域请求(依赖 session bodyparser)
+- directory
+- errorHandle
+- favicon
+- limit: 限制请求个数,防止 Dos 攻击
+- logger
+- methodOverride
+- profiler: 置于所有中间件之前,记录响应时间和内存使用
+- query
+- responseTime
+- router
+- session
+- static
+- staticCache
+- vhost
 
 ## Http
 
@@ -79,6 +85,6 @@ app.use(function (req, res, next) {
 
 ### Req
 
--   req.body.{{inputName}}: 处理表单
--   req.params.routeName: /users/:id -> req.params.id
--   req.query: queryString.parse() 处理后的查询字符串对象
+- req.body.{{inputName}}: 处理表单
+- req.params.routeName: /users/:id -> req.params.id
+- req.query: queryString.parse() 处理后的查询字符串对象

@@ -51,7 +51,6 @@
 
 <!-- /TOC -->
 
-
 ## Diff Algorithm (Reconciliation)
 
 ### Elements of Different Types
@@ -553,55 +552,55 @@ class Frameworks extends React.Component {
 
 ## Components/Plugins
 
--   [**Starter Kit Collection**](http://andrewhfarmer.com/starter-project)
--   [React Storybook]{https://github.com/kadirahq/react-storybook)
+- [**Starter Kit Collection**](http://andrewhfarmer.com/starter-project)
+- [React Storybook](https://github.com/kadirahq/react-storybook)
 
 ### Documents
 
--   [Blog Generator](https://github.com/gatsbyjs/gatsby)
--   [React Built In Editor](https://github.com/facebook/draft-js)
--   docz
+- [Blog Generator](https://github.com/gatsbyjs/gatsby)
+- [React Built In Editor](https://github.com/facebook/draft-js)
+- docz
 
 ### Data
 
--   [Baobab](https://github.com/Yomguithereal/baobab)
--   [React Resolver](https://github.com/ericclemmons/react-resolver)
--   [RxJS Middleware](https://github.com/redux-observable/redux-observable)
+- [Baobab](https://github.com/Yomguithereal/baobab)
+- [React Resolver](https://github.com/ericclemmons/react-resolver)
+- [RxJS Middleware](https://github.com/redux-observable/redux-observable)
 
 ### Data to View
 
--   [reselect](https://github.com/reactjs/reselect)
+- [reselect](https://github.com/reactjs/reselect)
 
 ### Chat
 
--   [Matrix](https://github.com/matrix-org/matrix-react-sdk
+- [Matrix](https://github.com/matrix-org/matrix-react-sdk)
 
 ### UI
 
--   [React Material UI](https://github.com/callemall/material-ui)
+- [React Material UI](https://github.com/callemall/material-ui)
 
 #### Animation
 
--   [React Animation npm install react-set-animate --save](https://github.com/FunctionFoundry/react-set-animate)
+- [React Animation npm install react-set-animate --save](https://github.com/FunctionFoundry/react-set-animate)
 
 #### Charts
 
--   [React Chartjs](https://github.com/jhudson8/react-chartjs)
+- [React Chartjs](https://github.com/jhudson8/react-chartjs)
 
 #### Search Bar
 
--   https://github.com/searchkit/searchkit
+- [SearchKit](https://github.com/searchkit/searchkit)
 
 #### Scroll Bar
 
--   [React Scroll Box](https://github.com/smikhalevski/react-scroll-box)
+- [React Scroll Box](https://github.com/smikhalevski/react-scroll-box)
 
 #### Mouse
 
--   [React Draftjs](https://github.com/draft-js-plugins/draft-js-plugins)
+- [React Draftjs](https://github.com/draft-js-plugins/draft-js-plugins)
 
 ### Debug/Test
 
--   [React Testing Utilities](https://github.com/airbnb/enzyme)
--   [React Component hierachy](https://github.com/team-gryff/react-monocle)
--   Chrome Extensions -  React Dev Tools/Redux Dev Tools
+- [React Testing Utilities](https://github.com/airbnb/enzyme)
+- [React Component hierachy](https://github.com/team-gryff/react-monocle)
+- Chrome Extensions -  React Dev Tools/Redux Dev Tools

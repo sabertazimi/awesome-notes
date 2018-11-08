@@ -1,43 +1,47 @@
 
-* [Design Patterns Notes](#design-patterns-notes)
-	* [Modular Patterns](#modular-patterns)
-		* [Object Literal](#object-literal)
-		* [立即函数模式(IIFE)](#立即函数模式iife)
-		* [[UMD(Universal Module Definition) Pattern](https://github.com/https://github.com/umdjs/umd/tree/master/templates)](#umduniversal-module-definition-patternhttpsgithubcomhttpsgithubcomumdjsumdtreemastertemplates)
-	* [Common Design Patterns](#common-design-patterns)
-		* [Classification](#classification)
-		* [Core Idea](#core-idea)
-		* [Details](#details)
-			* [创建者模式](#创建者模式)
-			* [结构设计模式](#结构设计模式)
-			* [行为设计模式](#行为设计模式)
-		* [Class Pattern](#class-pattern)
-		* [Mix-In Pattern](#mix-in-pattern)
-		* [Singleton Pattern](#singleton-pattern)
-		* [Abstract Factory](#abstract-factory)
-		* [Factory Method](#factory-method)
-		* [Adapter Pattern](#adapter-pattern)
-		* [Decorator Pattern](#decorator-pattern)
-			* [实现1(关键 - 实现传递方式)](#实现1关键---实现传递方式)
-			* [return this.uber.function()](#return-thisuberfunction)
-			* [Decorators List](#decorators-list)
-			* [实现2](#实现2)
-		* [Facade Pattern](#facade-pattern)
-		* [Flyweight Pattern](#flyweight-pattern)
-		* [Proxy Pattern](#proxy-pattern)
-		* [Command Pattern](#command-pattern)
-		* [Mediator Pattern](#mediator-pattern)
-		* [Observer/Pub-Sub Pattern](#observerpub-sub-pattern)
-			* [Observer](#observer)
-			* [Pub/Sub](#pubsub)
-				* [Implementation](#implementation)
-				* [Sample](#sample)
-					* [Ajax Callback](#ajax-callback)
-	* [MV* Pattern](#mv-pattern)
-	* [jQuery Pattern](#jquery-pattern)
-		* [Plugin Pattern](#plugin-pattern)
-
 # Design Patterns Notes
+
+<!-- TOC -->
+
+- [Design Patterns Notes](#design-patterns-notes)
+  - [Modular Patterns](#modular-patterns)
+    - [Object Literal](#object-literal)
+    - [立即函数模式(IIFE)](#立即函数模式iife)
+    - [[UMD(Universal Module Definition) Pattern](https://github.com/https://github.com/umdjs/umd/tree/master/templates)](#umduniversal-module-definition-patternhttpsgithubcomhttpsgithubcomumdjsumdtreemastertemplates)
+  - [Common Design Patterns](#common-design-patterns)
+    - [Classification](#classification)
+    - [Core Idea](#core-idea)
+    - [Details](#details)
+      - [创建者模式](#创建者模式)
+      - [结构设计模式](#结构设计模式)
+      - [行为设计模式](#行为设计模式)
+    - [Class Pattern](#class-pattern)
+    - [Mix-In Pattern](#mix-in-pattern)
+    - [Singleton Pattern](#singleton-pattern)
+    - [Abstract Factory](#abstract-factory)
+    - [Factory Method](#factory-method)
+    - [Adapter Pattern](#adapter-pattern)
+    - [Decorator Pattern](#decorator-pattern)
+      - [实现1(关键 - 实现传递方式)](#实现1关键---实现传递方式)
+      - [return this.uber.function()](#return-thisuberfunction)
+      - [Decorators List](#decorators-list)
+      - [实现2](#实现2)
+    - [Facade Pattern](#facade-pattern)
+    - [Flyweight Pattern](#flyweight-pattern)
+    - [Proxy Pattern](#proxy-pattern)
+    - [Command Pattern](#command-pattern)
+    - [Mediator Pattern](#mediator-pattern)
+    - [Observer/Pub-Sub Pattern](#observerpub-sub-pattern)
+      - [Observer](#observer)
+      - [Pub/Sub](#pubsub)
+        - [Implementation](#implementation)
+        - [Sample](#sample)
+          - [Ajax Callback](#ajax-callback)
+  - [MV* Pattern](#mv-pattern)
+  - [jQuery Pattern](#jquery-pattern)
+    - [Plugin Pattern](#plugin-pattern)
+
+<!-- /TOC -->
 
 [Awesome Book](http://www.dofactory.com/javascript/design-patterns)
 
@@ -49,24 +53,24 @@
 
 ```javascript
 MYAPP.namespace = function (namespaceString) {
-	var parts = namespaceString.split('.'),
-		parent = MYAPP,
-		i;
-	// strip redundant leading global
-	if (parts[0] === "MYAPP") {
-		// remove leading global
-		parts = parts.slice(1);
-	}
-	for (i = 0; i < parts.length; i += 1) {
-		// create a property if it doesn't exist
-		if (typeof parent[parts[i]] === "undefined") {
-			parent[parts[i]] = {};
-		}
-		//关键: 向内嵌套
-		parent = parent[parts[i]];
-	}
-	// 返回最内层模块
-	return parent;
+  var parts = namespaceString.split('.'),
+    parent = MYAPP,
+    i;
+  // strip redundant leading global
+  if (parts[0] === "MYAPP") {
+    // remove leading global
+    parts = parts.slice(1);
+  }
+  for (i = 0; i < parts.length; i += 1) {
+    // create a property if it doesn't exist
+    if (typeof parent[parts[i]] === "undefined") {
+      parent[parts[i]] = {};
+    }
+    //关键: 向内嵌套
+    parent = parent[parts[i]];
+  }
+  // 返回最内层模块
+  return parent;
 };
 ```
 
@@ -84,43 +88,43 @@ MYAPP.namespace('once.upon.a.time.there.was.this.long.nested.property');
 
 通过调用立即函数，返回一个对象，暴露(exposed to public)公共接口(特权/公共方法):
 
--   闭包: 定义私有变量与特权方法
--   返回对象: 即使通过外部代码改变返回对象的接口，也不会影响原接口
+- 闭包: 定义私有变量与特权方法
+- 返回对象: 即使通过外部代码改变返回对象的接口，也不会影响原接口
 
 ```js
 var myobj = (function () {
-		// private member
-	var name = "tazimi",
+    // private member
+  var name = "tazimi",
 
-		// private method
-		// excluded in return object
+    // private method
+    // excluded in return object
 
-    	// privileged method
-    	function getName() {
-    		return name;
-    	},
-		function setName(n) {
-			if (typeof n === 'string') {
-			    name = n;
-			}
-			return this;
-		},
+      // privileged method
+      function getName() {
+        return name;
+      },
+    function setName(n) {
+      if (typeof n === 'string') {
+          name = n;
+      }
+      return this;
+    },
 
-		// public method
-		function logName() {
-			console.log(name);
-		};
+    // public method
+    function logName() {
+      console.log(name);
+    };
 
     // 闭包
     return {
-		// 公共接口: 特权/公共方法
+    // 公共接口: 特权/公共方法
 
         // 特权方法
-    	getName: getName,
-		setName: setName,
+      getName: getName,
+    setName: setName,
 
-		// 公共方法
-		log: logName;
+    // 公共方法
+    log: logName;
     };
 }());
 ```
@@ -155,12 +159,12 @@ myApp.utils =  {};
 }).apply( myApp.utils.tools );
 ```
 
--   jQuery Plugin Pattern: 通过给立即函数传参，注入全局变量/其他依赖
+- jQuery Plugin Pattern: 通过给立即函数传参，注入全局变量/其他依赖
 
 ### [UMD(Universal Module Definition) Pattern](https://github.com/https://github.com/umdjs/umd/tree/master/templates)
 
--   先判断是否支持 Node.js 的模块(exports)，存在则使用 Node.js 模块模式
--   再判断是否支持 AMD(define)，存在则使用 AMD 方式加载模块
+- 先判断是否支持 Node.js 的模块(exports)，存在则使用 Node.js 模块模式
+- 再判断是否支持 AMD(define)，存在则使用 AMD 方式加载模块
 
 ```js
 (function (window, factory) {
@@ -188,7 +192,6 @@ myApp.utils =  {};
 |Prototype(原型)|一个完全初始化的实例，用于拷贝或者克隆。|
 |Singleton(单例)|一个类只有唯一的一个实例，这个实例在整个程序中有一个全局的访问点。|
 
-
 |Structural|Class|
 |:---------------:|:-----------------------------------------------------:|
 |Adapter(适配器)|将不同类的接口进行匹配，调整，这样尽管内部接口不兼容但是不同的类还是可以协同工作的。|
@@ -214,33 +217,33 @@ myApp.utils =  {};
 
 ### Core Idea
 
--   hold other object/object list as property: to invoke others' properties/methods and make a wrapper
+- hold other object/object list as property: to invoke others' properties/methods and make a wrapper
 
 ### Details
 
 #### 创建者模式
 
--   构造器模式(Constructor)
--   工厂模式(Factory)
--   抽象工厂模式(Abstract)
--   原型模式(Prototype)
--   单例模式(Singleton)
--   建造者模式(Builder)
+- 构造器模式(Constructor)
+- 工厂模式(Factory)
+- 抽象工厂模式(Abstract)
+- 原型模式(Prototype)
+- 单例模式(Singleton)
+- 建造者模式(Builder)
 
 #### 结构设计模式
 
--   装饰模式
--   外观模式
--   享元模式
--   适配器模式
--   代理模式
+- 装饰模式
+- 外观模式
+- 享元模式
+- 适配器模式
+- 代理模式
 
 #### 行为设计模式
 
--   迭代模式
--   中介者模式
--   观察者模式
--   访问者模式
+- 迭代模式
+- 中介者模式
+- 观察者模式
+- 访问者模式
 
 ### Class Pattern
 
@@ -273,34 +276,34 @@ console.log( superman );
 
 将多个对象的属性混入同一个对象,达到继承/扩展/组合的效果
 
--   不改变原型链
+- 不改变原型链
 
 ```js
 function mix() {
-	var arg, prop, child = {};
+  var arg, prop, child = {};
 
-	for (arg = 0; arg < arguments.length; arg += 1) {
-		for (prop in arguments[arg]) {
-			if (arguments[arg].hasOwnProperty(prop)) {
-				child[prop] = arguments[arg][prop];
-			}
-		}
-	}
+  for (arg = 0; arg < arguments.length; arg += 1) {
+    for (prop in arguments[arg]) {
+      if (arguments[arg].hasOwnProperty(prop)) {
+        child[prop] = arguments[arg][prop];
+      }
+    }
+  }
 
-	return child;
+  return child;
 }
 ```
 
 ```js
 var cake = mix(
-	{eggs: 2, large: true},
-	{butter: 1, salted: true},
-	{flour: "3 cups"},
-	{sugar: "sure!"}
+  {eggs: 2, large: true},
+  {butter: 1, salted: true},
+  {flour: "3 cups"},
+  {sugar: "sure!"}
 );
 ```
 
--   改变原型链
+- 改变原型链
 
 ```js
 // Extend an existing object with a method from another
@@ -329,27 +332,27 @@ function mix( receivingClass, givingClass ) {
 
 ```javascript
 function Universe() {
-	// 缓存实例
-	var instance;
+  // 缓存实例
+  var instance;
 
-	// anti-Self-Defined Function Pattern
-	// 反-自定义函数模式: 先重写,再初始化
-	Universe = function Universe() {
-		return instance;
-	};
+  // anti-Self-Defined Function Pattern
+  // 反-自定义函数模式: 先重写,再初始化
+  Universe = function Universe() {
+    return instance;
+  };
 
-	// 保存原型,使其一直保持于同一位置
-	// (this指针指向不重要)
-	Universe.prototype = this;
+  // 保存原型,使其一直保持于同一位置
+  // (this指针指向不重要)
+  Universe.prototype = this;
 
-	instance = new Universe();
-	// 重定向constructor指针
-	instance.constructor = Universe;
-	// 功能代码
-	instance.start_time = 0;
-	instance.bang = "Big";
+  instance = new Universe();
+  // 重定向constructor指针
+  instance.constructor = Universe;
+  // 功能代码
+  instance.start_time = 0;
+  instance.bang = "Big";
 
-	return instance;
+  return instance;
 }
 ```
 
@@ -361,23 +364,23 @@ var AbstractVehicleFactory = (function () {
     var types = {};
 
     function _getVehicle( type, customizations ) {
-		var Vehicle = types[type];
-		return (Vehicle ? new Vehicle(customizations) : null);
-	}
-	function _registerVehicle( type, Vehicle ) {
-		var proto = Vehicle.prototype;
+    var Vehicle = types[type];
+    return (Vehicle ? new Vehicle(customizations) : null);
+  }
+  function _registerVehicle( type, Vehicle ) {
+    var proto = Vehicle.prototype;
 
-		// only register classes that fulfill the vehicle contract
-		if ( proto.drive && proto.breakDown ) {
-			types[type] = Vehicle;
-		}
+    // only register classes that fulfill the vehicle contract
+    if ( proto.drive && proto.breakDown ) {
+      types[type] = Vehicle;
+    }
 
-		return AbstractVehicleFactory;
-	}
+    return AbstractVehicleFactory;
+  }
 
     return {
-		getVehicle: _getVehicle,
-		registerVehicle: _registerVehicle
+    getVehicle: _getVehicle,
+    registerVehicle: _registerVehicle
     };
 })();
 ```
@@ -386,96 +389,96 @@ var AbstractVehicleFactory = (function () {
 
 ```js
 module.exports = (function () {
-	function VehicleFactory() {
-		var publicVehicle = new Object();
+  function VehicleFactory() {
+    var publicVehicle = new Object();
 
-	    // specific factory
-	    function Car( options ) {
-		  this.type = 'car';
-	      this.doors = options.doors || 4;
-	      this.state = options.state || "brand new";
-	      this.color = options.color || "silver";
-	      this.speed = options.speed || 10;
-	    }
-	    function Truck( options){
-		  this.type = 'truck';
-	      this.state = options.state || "used";
-	      this.wheelSize = options.wheelSize || "large";
-	      this.color = options.color || "blue";
-	      this.speed = options.speed || 8;
-	    }
+      // specific factory
+      function Car( options ) {
+      this.type = 'car';
+        this.doors = options.doors || 4;
+        this.state = options.state || "brand new";
+        this.color = options.color || "silver";
+        this.speed = options.speed || 10;
+      }
+      function Truck( options){
+      this.type = 'truck';
+        this.state = options.state || "used";
+        this.wheelSize = options.wheelSize || "large";
+        this.color = options.color || "blue";
+        this.speed = options.speed || 8;
+      }
 
-		// public features of vehicle , added to __proto__
-		function _run() {
-			var args = [].slice.call(arguments);
+    // public features of vehicle , added to __proto__
+    function _run() {
+      var args = [].slice.call(arguments);
 
-			if (args.length === 0) {
-				console.log(this.type + ' - run with: ' + this.speed + 'km/s');
-			} else if (toString.apply(args[0]) === '[object Number]') {
-				this.speed = args[0];
-			}
-		}
-		function _withColor() {
-			var args = [].slice.call(arguments);
+      if (args.length === 0) {
+        console.log(this.type + ' - run with: ' + this.speed + 'km/s');
+      } else if (toString.apply(args[0]) === '[object Number]') {
+        this.speed = args[0];
+      }
+    }
+    function _withColor() {
+      var args = [].slice.call(arguments);
 
-			if (args.length === 0) {
-				console.log('The color of this ' + this.type + ' product is : ' + this.color);
-			} else if (toString.apply(args[0]) === '[object String]') {
-				this.color = args[0];
-			}
-		}
-		// provide a function to change other public features
-		function _reform(funcName, newFunc) {
-			if (typeof this[funcName] === 'function' || typeof this.prototype[funcName] === 'function') {
-				delete this[funcName];
-				this.prototype[funcName] = newFunc;
-			}
-		}
-		// provide a function to add new public features
-		function _addFeature(funcName, newFunc) {
-			if (typeof this[funcName] === 'undefined') {
-				this[funcName] = newFunc;
-				this.prototype[funcName] = newFunc;
-			}
-		}
+      if (args.length === 0) {
+        console.log('The color of this ' + this.type + ' product is : ' + this.color);
+      } else if (toString.apply(args[0]) === '[object String]') {
+        this.color = args[0];
+      }
+    }
+    // provide a function to change other public features
+    function _reform(funcName, newFunc) {
+      if (typeof this[funcName] === 'function' || typeof this.prototype[funcName] === 'function') {
+        delete this[funcName];
+        this.prototype[funcName] = newFunc;
+      }
+    }
+    // provide a function to add new public features
+    function _addFeature(funcName, newFunc) {
+      if (typeof this[funcName] === 'undefined') {
+        this[funcName] = newFunc;
+        this.prototype[funcName] = newFunc;
+      }
+    }
 
-		// private features, added to obj
+    // private features, added to obj
 
-	    // core: create method
-		this.create = function (options) {
-			var vehicleClass = '',
-				newVehicle = {};
+      // core: create method
+    this.create = function (options) {
+      var vehicleClass = '',
+        newVehicle = {};
 
-			if (options.type === 'car') {
-				vehicleClass = Car;
-			} else {
-				vehicleClass = Truck;
-			}
+      if (options.type === 'car') {
+        vehicleClass = Car;
+      } else {
+        vehicleClass = Truck;
+      }
 
-			// create new vehicle with options, by pre-defined specific constructor
-			newVehicle =  new vehicleClass(options);
-			// set up prototype
-			newVehicle.__proto__ = publicVehicle;
-			newVehicle.prototype = publicVehicle;
+      // create new vehicle with options, by pre-defined specific constructor
+      newVehicle =  new vehicleClass(options);
+      // set up prototype
+      newVehicle.__proto__ = publicVehicle;
+      newVehicle.prototype = publicVehicle;
 
-			// add public feature
-			newVehicle.prototype.run = _run;
-			newVehicle.prototype.withColor = _withColor;
-			newVehicle.prototype.reform = _reform;
-			newVehicle.prototype.addFeature = _addFeature;
+      // add public feature
+      newVehicle.prototype.run = _run;
+      newVehicle.prototype.withColor = _withColor;
+      newVehicle.prototype.reform = _reform;
+      newVehicle.prototype.addFeature = _addFeature;
 
-			// add private(seperately) feature
+      // add private(seperately) feature
 
-			// return new obj
-			return newVehicle;
-		};
-	}
+      // return new obj
+      return newVehicle;
+    };
+  }
 
-	// define more factory
+  // define more factory
 
-	return {
-		vehicleFactory: VehicleFactory
-	};
+  return {
+    vehicleFactory: VehicleFactory
+  };
 }());
 ```
 
@@ -483,15 +486,15 @@ module.exports = (function () {
 
 适配器通过内部使用新接口规定的属性/方法, 创建一个外观与旧接口一致 的方法
 
--   old.method();
--   adapter.method();  // 实现此 method 时,使用了新接口规定的属性/方法
+- old.method();
+- adapter.method();  // 实现此 method 时,使用了新接口规定的属性/方法
 
 ```js
 // old interface
 function Shipping() {
    this.request = function(zipStart, zipEnd, weight) {
-	   // ...
-	   return "$49.75";
+     // ...
+     return "$49.75";
    }
 }
 
@@ -510,11 +513,11 @@ function AdapterShipping(credentials) {
    shipping.login(credentials);
 
    return {
-	   request: function(zipStart, zipEnd, weight) {
-		   shipping.setStart(zipStart);
-		   shipping.setDestination(zipEnd);
-		   return shipping.calculate(weight);
-	   }
+     request: function(zipStart, zipEnd, weight) {
+       shipping.setStart(zipStart);
+       shipping.setDestination(zipEnd);
+       return shipping.calculate(weight);
+     }
    };
 }
 ```
@@ -532,9 +535,9 @@ cost = adapter.request("78701", "10010", "2 lbs");
 
 ### Decorator Pattern
 
--   重写/重载/扩展对象原有的行为(method),但不改变对象原有属性
--   可以添加新属性，并围绕新属性扩展对象的原行为 e.g 原对象只会说中文，装饰后同时说中文与英文
--   避免了通过继承来为类型添加新的职责的形式可取，通过继承的方式容易造成子类的膨胀
+- 重写/重载/扩展对象原有的行为(method),但不改变对象原有属性
+- 可以添加新属性，并围绕新属性扩展对象的原行为 e.g 原对象只会说中文，装饰后同时说中文与英文
+- 避免了通过继承来为类型添加新的职责的形式可取，通过继承的方式容易造成子类的膨胀
 
 关键: 将每次装饰后的结果向后传递,以达到叠加装饰效果
 
@@ -542,68 +545,68 @@ cost = adapter.request("78701", "10010", "2 lbs");
 
 两种方式:
 
--   uber属性获得每次装饰后结果
--   循环叠加每次装饰后结果
+- uber属性获得每次装饰后结果
+- 循环叠加每次装饰后结果
 
 #### return this.uber.function()
 
 ```javascript
 // 构造函数
 function Sale(price) {
-	this.price = price || 100;
+  this.price = price || 100;
 }
 Sale.prototype.getPrice = function () {
-	return this.price;
+  return this.price;
 };
 
 // 定义具体装饰器
 // 通过uber属性获得上一次装饰后的结果
 Sale.decorators = {};
 Sale.decorators.fedtax = {
-	getPrice: function () {
-		var price = this.uber.getPrice();
-		price += price * 5 / 100;
-		return price;
-	}
+  getPrice: function () {
+    var price = this.uber.getPrice();
+    price += price * 5 / 100;
+    return price;
+  }
 };
 Sale.decorators.quebec = {
-	getPrice: function () {
-		var price = this.uber.getPrice();
-		price += price * 7.5 / 100;
-		return price;
-	}
+  getPrice: function () {
+    var price = this.uber.getPrice();
+    price += price * 7.5 / 100;
+    return price;
+  }
 };
 Sale.decorators.money = {
-	getPrice: function () {
-		return "$" + this.uber.getPrice().toFixed(2);
-	}
+  getPrice: function () {
+    return "$" + this.uber.getPrice().toFixed(2);
+  }
 };
 Sale.decorators.cdn = {
-	getPrice: function () {
-		return "CDN$ " + this.uber.getPrice().toFixed(2);
-	}
+  getPrice: function () {
+    return "CDN$ " + this.uber.getPrice().toFixed(2);
+  }
 };
 
 Sale.prototype.decorate = function (decorator) {
-	var F = function () {},
-		overrides = this.constructor.decorators[decorator],
-		i,
-		newobj;
+  var F = function () {},
+    overrides = this.constructor.decorators[decorator],
+    i,
+    newobj;
 
-	// 临时代理构造函数
-	F.prototype = this;
-	newobj = new F();
-	// 传递实现的关键
-	// 通过uber属性获得上一次装饰后的结果
-	newobj.uber = F.prototype;
+  // 临时代理构造函数
+  F.prototype = this;
+  newobj = new F();
+  // 传递实现的关键
+  // 通过uber属性获得上一次装饰后的结果
+  newobj.uber = F.prototype;
 
-	for (i in overrides) {
-		if (overrides.hasOwnProperty(i)) {
-			newobj[i] = overrides[i];
-		}
-	}
+  for (i in overrides) {
+    if (overrides.hasOwnProperty(i)) {
+      newobj[i] = overrides[i];
+    }
+  }
 
-	return newobj;
+  return newobj;
 };
 ```
 
@@ -612,49 +615,49 @@ Sale.prototype.decorate = function (decorator) {
 ```javascript
 // 构造函数
 function Sale(price) {
-	this.price = (price > 0) || 100;
-	this.decorators_list = [];
+  this.price = (price > 0) || 100;
+  this.decorators_list = [];
 }
 Sale.prototype.getPrice = function () {
-	return this.price;
+  return this.price;
 };
 
 // 定义具体装饰器
 Sale.decorators = {};
 Sale.decorators.fedtax = {
-	getPrice: function (price) {
-		return price + price * 5 / 100;
-	}
+  getPrice: function (price) {
+    return price + price * 5 / 100;
+  }
 };
 Sale.decorators.quebec = {
-	getPrice: function (price) {
-		return price + price * 7.5 / 100;
-	}
+  getPrice: function (price) {
+    return price + price * 7.5 / 100;
+  }
 };
 Sale.decorators.money = {
-	getPrice: function (price) {
-		return "$" + price.toFixed(2);
-	}
+  getPrice: function (price) {
+    return "$" + price.toFixed(2);
+  }
 };
 
 
 Sale.prototype.decorate = function (decorator) {
-	this.decorators_list.push(decorator);
+  this.decorators_list.push(decorator);
 };
 Sale.prototype.getPrice = function () {
-	var price = this.price,
-		i,
-		max = this.decorators_list.length,
-		name;
+  var price = this.price,
+    i,
+    max = this.decorators_list.length,
+    name;
 
-	for (i = 0; i < max; i += 1) {
-		name = this.decorators_list[i];
-		// 传递实现的关键
-		// 通过循环叠加上一次装饰后的结果
-		price = Sale.decorators[name].getPrice(price);
-	}
+  for (i = 0; i < max; i += 1) {
+    name = this.decorators_list[i];
+    // 传递实现的关键
+    // 通过循环叠加上一次装饰后的结果
+    price = Sale.decorators[name].getPrice(price);
+  }
 
-	return price;
+  return price;
 };
 ```
 
@@ -729,9 +732,9 @@ sabertazimi.addMyEvent = function(el,ev,fn){
 
 ### Flyweight Pattern
 
--   内在信息 - 对象中的内部方法所需信息/属性, 一个单独的享元可替代大量具有相同内在信息的对象
--   某个类型的对象有大量的实例，对这些实例进行分类，合并相同分类的对象，只创建少量实例(享元)
--   通过享元工厂来管理一组享元，当所需享元已存在时，返回已存在享元;当所需享元不存在时，创建新享元
+- 内在信息 - 对象中的内部方法所需信息/属性, 一个单独的享元可替代大量具有相同内在信息的对象
+- 某个类型的对象有大量的实例，对这些实例进行分类，合并相同分类的对象，只创建少量实例(享元)
+- 通过享元工厂来管理一组享元，当所需享元已存在时，返回已存在享元;当所需享元不存在时，创建新享元
 
 ```js
 function Flyweight (make, model, processor) {
@@ -854,7 +857,7 @@ function GeoProxy() {
 
 ### Command Pattern
 
--   将方法/动作封装成对象, 使得外部通过唯一方法 excute/run 调用内部方法/动作
+- 将方法/动作封装成对象, 使得外部通过唯一方法 excute/run 调用内部方法/动作
 
 ```js
 module.exports = (function () {
@@ -995,7 +998,7 @@ function extend( extension, obj ){
 
 ##### Implementation
 
--   pubsubz.js
+- pubsubz.js
 
 ```js
 module.exports = (function ( window, doc, undef ) {
@@ -1032,7 +1035,7 @@ module.exports = (function ( window, doc, undef ) {
             topics[topic] = [];
         }
 
-		// add observer to observerlist(topics)
+    // add observer to observerlist(topics)
         var token = (++subUid).toString();
         topics[topic].push({
             token: token,
@@ -1059,7 +1062,7 @@ module.exports = (function ( window, doc, undef ) {
 }( this, this.document, undefined ));
 ```
 
--   test.js
+- test.js
 
 ```js
 var pubsub = require('./pubsubz.js');
@@ -1106,7 +1109,7 @@ pubsub.publish('sum', [1, 2, 3, 4, 5]);
 pubsub.publish('sum', ['a', 'b', 'c', 'd', 'e']);
 ```
 
--   in jQuery
+- in jQuery
 
 ```js
 // Equivalent to subscribe(topicName, callback)
@@ -1121,7 +1124,7 @@ $( document ).trigger( "topicName" );
 $( document ).off( "topicName" );
 ```
 
--   MicroEvent.js
+- MicroEvent.js
 
 ```js
 /**
@@ -1185,10 +1188,10 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
 ###### Ajax Callback
 
--   当请求返回，并且实际的数据可用的时候，会生成一个通知
--   如何使用这些事件（或者返回的数据），都是由订阅者自己决定的
--   可以有多个不同的订阅者，以不同的方式使用返回的数据
--   Ajax层: 唯一的责任 - 请求和返回数据，接着将数据发送给所有想要使用数据的地方
+- 当请求返回，并且实际的数据可用的时候，会生成一个通知
+- 如何使用这些事件（或者返回的数据），都是由订阅者自己决定的
+- 可以有多个不同的订阅者，以不同的方式使用返回的数据
+- Ajax层: 唯一的责任 - 请求和返回数据，接着将数据发送给所有想要使用数据的地方
 
 ```js
 (function ($) {
@@ -1202,7 +1205,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
                 .html("
 
 
-	Searched for:" + tags + "
+  Searched for:" + tags + "
 
 ");
    });
@@ -1236,7 +1239,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
    $.subscribe("/search/tags", function( tags ) {
 
-	   // Ajax Request
+     // Ajax Request
        $.getJSON( "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?" ,{
               tags: tags,
               tagmode: "any",

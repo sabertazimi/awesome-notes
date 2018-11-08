@@ -5,34 +5,34 @@
 - [Security Basic Notes](#security-basic-notes)
   - [Curated List of Vulnerability(漏洞)](#curated-list-of-vulnerability漏洞)
     - [SQL Injection](#sql-injection)
-      - [Protection](#protection)
+      - [SQL Injection Protection](#sql-injection-protection)
     - [Click Jacking](#click-jacking)
-      - [Protection](#protection-1)
+      - [Click Jacking Protection](#click-jacking-protection)
     - [Session Fixation](#session-fixation)
-      - [Protection](#protection-2)
+      - [Protection](#protection)
     - [XSS(Cross-Site-Scripting) Attack](#xsscross-site-scripting-attack)
-      - [Protection](#protection-3)
+      - [XSS Protection](#xss-protection)
     - [CSRF(Cross-Site Request Forgery) - 跨站请求伪造](#csrfcross-site-request-forgery---跨站请求伪造)
-      - [Protection](#protection-4)
+      - [CSRF Protection](#csrf-protection)
     - [File Upload Vulnerabilities](#file-upload-vulnerabilities)
-      - [Protection](#protection-5)
+      - [File Upload Protection](#file-upload-protection)
     - [Malicious Redirects](#malicious-redirects)
-      - [Protection](#protection-6)
+      - [Malicious Redirects Protection](#malicious-redirects-protection)
     - [User Enumeration](#user-enumeration)
-      - [Protection](#protection-7)
+      - [User Enumeration Protection](#user-enumeration-protection)
         - [Login](#login)
         - [Signup/Reset(not with name, should with email)](#signupresetnot-with-name-should-with-email)
     - [Inline Document Type Definition in XML](#inline-document-type-definition-in-xml)
-      - [Protection](#protection-8)
+      - [XML Protection](#xml-protection)
     - [Information Leakage](#information-leakage)
-      - [Protection](#protection-9)
+      - [Information Leakage Protection](#information-leakage-protection)
     - [Secure Treatment of Passwords](#secure-treatment-of-passwords)
     - [目录遍历攻击](#目录遍历攻击)
-      - [Protection](#protection-10)
+      - [Directory Protection](#directory-protection)
     - [病毒 NPM 包](#病毒-npm-包)
-      - [Protection](#protection-11)
+      - [Package Protection](#package-protection)
     - [正则表达式 DoS 攻击 (ReDoS)](#正则表达式-dos-攻击-redos)
-      - [Protection](#protection-12)
+      - [ReDoS Protection](#redos-protection)
 
 <!-- /TOC -->
 
@@ -49,7 +49,7 @@ SELECT *
    AND pass  = '' or 1=1--' LIMIT 1
 ```
 
-#### Protection
+#### SQL Injection Protection
 
 parameterized statements
 
@@ -62,9 +62,9 @@ String sql = "SELECT * FROM users WHERE email = ?";
 
 Hover a transparent malicious link upon the true button
 
-#### Protection
+#### Click Jacking Protection
 
--   frame killing snippet
+- frame killing snippet
 
 ```html
 <style>
@@ -85,7 +85,7 @@ Hover a transparent malicious link upon the true button
 </script>
 ```
 
--    X-Frame-Options
+- X-Frame-Options
 
 ```js
 // nodejs
@@ -99,45 +99,46 @@ response.setHeader("Content-Security-Policy", "frame-ancestors 'none'");
 
 在 **HTTP Cookies** 中传输**复杂**的 Session IDs, 并在**成功连接**/**恶意篡改**后重置 Session IDs.
 
--   where: not passing session IDs in queryStrings/requestBody, instead of passing them in **HTTP cookies**
+- where: not passing session IDs in queryStrings/requestBody, instead of passing them in **HTTP cookies**
 
 ```js
 req.session.regenerate(function(err) {
     // New session here
 })
 ```
--   what: generate complex session IDs
+
+- what: generate complex session IDs
 
 ```js
 const generateSessionId = sess => uid(24);
 ```
 
--   how: reset session IDs after set up session successfully
--   how: reset session IDs after it's been changed manually on client(Set-Cookies)
+- how: reset session IDs after set up session successfully
+- how: reset session IDs after it's been changed manually on client(Set-Cookies)
 
 ### XSS(Cross-Site-Scripting) Attack
 
--   Reflected XSS: url input(search pages)
+- Reflected XSS: url input(search pages)
 
-user input: <script> malicious code </script>
+user input: `<script> malicious code </script>`
 
-#### Protection
+#### XSS Protection
 
 don't trust user:
 
--   `replace(/<script>|<script/>/g, '')`
--   `trim()`
--   using template engine(handlebars, jade, etc...)
+- `replace(/<script>|<script/>/g, '')`
+- `trim()`
+- using template engine(handlebars, jade, etc...)
 
 ### CSRF(Cross-Site Request Forgery) - 跨站请求伪造
 
 挟制用户在当前已登录的Web应用程序上执行非本意的操作 - 利用已认证用户(长期 Cookies), 访问攻击者网站, 并被强制执行脚本, 在用户不知情的情况下提交 Get/Post Request with Cookies 给被攻击网站.
 
-#### Protection
+#### CSRF Protection
 
--   GET request 没有副作用
--   确保 request 正常渠道发起(hidden token check in form)
--   addition authentication: input password again
+- GET request 没有副作用
+- 确保 request 正常渠道发起(hidden token check in form)
+- addition authentication: input password again
 
 ```js
 express/csurf library
@@ -158,19 +159,19 @@ express/csurf library
 ?>
 ```
 
-#### Protection
+#### File Upload Protection
 
 对于上传文件:
 
--   隔离 + 禁止执行
--   重命名/Hash 化: 以防攻击者找到此文件
--   检查文件格式
--   检查 Content-Type Header
--   使用 Virus Scanner
+- 隔离 + 禁止执行
+- 重命名/Hash 化: 以防攻击者找到此文件
+- 检查文件格式
+- 检查 Content-Type Header
+- 使用 Virus Scanner
 
 ### Malicious Redirects
 
-#### Protection
+#### Malicious Redirects Protection
 
 Check the Referer when doing redirects
 
@@ -187,43 +188,43 @@ function isRelative(url) {
 > 很显然, REST API 无法抵抗此种攻击
 > E.g [GitHub User Profile](https://github.com)
 
-#### Protection
+#### User Enumeration Protection
 
 ##### Login
 
 使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误
 
--   Login error message: Unkonwn User **or** Password
--   All login code-paths take the same time on average: time consuming operations
--   All login code-paths take the same context: session IDs, cookies
+- Login error message: Unkonwn User **or** Password
+- All login code-paths take the same time on average: time consuming operations
+- All login code-paths take the same context: session IDs, cookies
 
 ##### Signup/Reset(not with name, should with email)
 
 使攻击者无法枚举用户名, 他无法确定是用户不存在还是用户已存在
 
--   Not Exist: Sending sign-up email
--   Exist: Sending pwd-reset email
+- Not Exist: Sending sign-up email
+- Exist: Sending pwd-reset email
 
 ### Inline Document Type Definition in XML
 
 Dangerous Macros:
 
--   XML Bombs
--   XML Externel Entities
+- XML Bombs
+- XML Externel Entities
 
-#### Protection
+#### XML Protection
 
 Disable DTD parse in XML parser
 
 ### Information Leakage
 
--   Server in Response Headers
--   Cookies: JSESSIONID -> java
--   URL: .jsp, .php, .asp
--   Error Message
--   AJAX responses
--   JSON/XML reponses
--   Code Information
+- Server in Response Headers
+- Cookies: JSESSIONID -> java
+- URL: .jsp, .php, .asp
+- Error Message
+- AJAX responses
+- JSON/XML reponses
+- Code Information
 
 ```json
 {
@@ -243,19 +244,19 @@ Disable DTD parse in XML parser
 }
 ```
 
-#### Protection
+#### Information Leakage Protection
 
--   处理/混淆/加密原始数据(raw data)
--   处理/混淆客户端代码
--   去除工具库的版本信息
--   Disable the “Server” HTTP Header and Similar Headers
--   Use Clean URLs without extensions
--   Ensure Cookie Parameters are Generic
--   Disable Client-Side Error Reporting
--   Sanitize Data Passed to the Client
--   Obfuscate JavaScript\
--   Sanitize Template Files
--   Ensure Correct Configuration of Web Root Directory
+- 处理/混淆/加密原始数据(raw data)
+- 处理/混淆客户端代码
+- 去除工具库的版本信息
+- Disable the “Server” HTTP Header and Similar Headers
+- Use Clean URLs without extensions
+- Ensure Cookie Parameters are Generic
+- Disable Client-Side Error Reporting
+- Sanitize Data Passed to the Client
+- Obfuscate JavaScript\
+- Sanitize Template Files
+- Ensure Correct Configuration of Web Root Directory
 
 ### Secure Treatment of Passwords
 
@@ -265,7 +266,7 @@ Disable DTD parse in XML parser
 
 GET /../../../passwd.key HTTP/1.1
 
-#### Protection
+#### Directory Protection
 
 检查请求路径是否安全, 否则不返回响应
 
@@ -273,18 +274,18 @@ GET /../../../passwd.key HTTP/1.1
 
 名字与流行包相近, 通过 postinstall 脚本执行病毒脚本，获取系统环境变量信息 e.g crossenv
 
-#### Protection
+#### Package Protection
 
-*   No typo in package.json
-*   禁止执行 postinstall 脚本
+- No typo in package.json
+- 禁止执行 postinstall 脚本
 
 ### 正则表达式 DoS 攻击 (ReDoS)
 
 正则表达式引擎采用回溯的方式匹配所有可能性，导致性能问题
 
-#### Protection
+#### ReDoS Protection
 
-*   不使用 NFA 实现的正则表达式引擎, 使用 DFA 实现的正则表达式引擎
-*   不定义性能消耗过大的正则表达式
-*   不动态构造正则表达式 new RegExp()
-*   禁止用户输入影响正则表达式构建/匹配
+- 不使用 NFA 实现的正则表达式引擎, 使用 DFA 实现的正则表达式引擎
+- 不定义性能消耗过大的正则表达式
+- 不动态构造正则表达式 new RegExp()
+- 禁止用户输入影响正则表达式构建/匹配
