@@ -3,7 +3,7 @@
 <!-- TOC -->
 
 - [CSS Advanced Notes](#css-advanced-notes)
-  - [Typography](#typography)
+  - [Typography Principles](#typography-principles)
     - [font-size and spacing](#font-size-and-spacing)
       - [font-size](#font-size)
       - [spacing](#spacing)
@@ -21,7 +21,7 @@
 
 <!-- /TOC -->
 
-## Typography
+## Typography Principles
 
 - The typeface (font-family)
 - Type (modular) scale

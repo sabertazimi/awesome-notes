@@ -55,7 +55,7 @@
     - [Float Patterns](#float-patterns)
       - [fixed parent](#fixed-parent)
       - [清除浮动](#清除浮动)
-      - [Best Practice](#best-practice-1)
+      - [Float Best Practice](#float-best-practice)
     - [Position Patterns](#position-patterns)
       - [static](#static)
       - [relative](#relative)
@@ -94,7 +94,7 @@
       - [(moz/webkit)background-clip](#mozwebkitbackground-clip)
       - [(moz/webkit)background-origin](#mozwebkitbackground-origin)
       - [background-size](#background-size)
-      - [Best Practice](#best-practice-2)
+      - [Background Best Practice](#background-best-practice)
         - [单背景极简欢迎首页](#单背景极简欢迎首页)
     - [text](#text)
       - [white-space](#white-space)
@@ -165,7 +165,7 @@
       - [Particles](#particles)
       - [Hover Component](#hover-component)
       - [Prompt](#prompt)
-      - [Message](#message-1)
+      - [Message UI](#message-ui)
     - [Content](#content)
       - [Card](#card)
       - [List](#list)
@@ -526,61 +526,61 @@ body {
 
 ### 页面结构
 
--   容器: container
--   页头：header
--   内容：content/container
--   页面主体：main
--   页尾：footer
--   导航：nav
--   侧栏：sidebar
--   栏目：column
--   页面外围控制整体佈局宽度：wrapper
--   左右中：left right center
+- 容器: container
+- 页头：header
+- 内容：content/container
+- 页面主体：main
+- 页尾：footer
+- 导航：nav
+- 侧栏：sidebar
+- 栏目：column
+- 页面外围控制整体佈局宽度：wrapper
+- 左右中：left right center
 
 ### 导航
 
--   导航：nav
--   主导航：mainnav
--   子导航：subnav
--   顶导航：topnav
--   边导航：sidebar
--   左导航：leftsidebar
--   右导航：rightsidebar
--   菜单：menu
--   子菜单：submenu
--   标题: title
--   摘要: summary
+- 导航：nav
+- 主导航：mainnav
+- 子导航：subnav
+- 顶导航：topnav
+- 边导航：sidebar
+- 左导航：leftsidebar
+- 右导航：rightsidebar
+- 菜单：menu
+- 子菜单：submenu
+- 标题: title
+- 摘要: summary
 
 ### 功能
 
--   标志：logo
--   广告：banner
--   登陆：login
--   登录条：loginbar
--   注册：register
--   搜索：search
--   功能区：shop
--   标题：title
--   加入：joinus
--   状态：status
--   按钮：btn
--   滚动：scroll
--   标籤页：tab
--   文章列表：list
--   提示信息：msg
--   当前的: current
--   小技巧：tips
--   图标: icon
--   注释：note
--   指南：guild
--   服务：service
--   热点：hot
--   新闻：news
--   下载：download
--   投票：vote
--   合作伙伴：partner
--   友情链接：link
--   版权：copyright
+- 标志：logo
+- 广告：banner
+- 登陆：login
+- 登录条：loginbar
+- 注册：register
+- 搜索：search
+- 功能区：shop
+- 标题：title
+- 加入：joinus
+- 状态：status
+- 按钮：btn
+- 滚动：scroll
+- 标籤页：tab
+- 文章列表：list
+- 提示信息：msg
+- 当前的: current
+- 小技巧：tips
+- 图标: icon
+- 注释：note
+- 指南：guild
+- 服务：service
+- 热点：hot
+- 新闻：news
+- 下载：download
+- 投票：vote
+- 合作伙伴：partner
+- 友情链接：link
+- 版权：copyright
 
 ### CSS Files
 
@@ -762,7 +762,7 @@ h2:before {
 }
 ```
 
--   [利用伪类画额外图形](https://css-tricks.com/examples/ShapesOfCSS/)
+- [利用伪类画额外图形](https://css-tricks.com/examples/ShapesOfCSS/)
 
 ```css
 .first-details-intro::after {
@@ -924,14 +924,14 @@ float make element specified value of `display`:
 }
 ```
 
-#### Best Practice
+#### Float Best Practice
 
 - 段中部分元素浮动(结合 margin/padding), 可实现内嵌效果
 - 分栏布局
 
 ### Position Patterns
 
-**position**
+position
 
 #### static
 
@@ -1141,7 +1141,7 @@ main {
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-rows: minmax(90px, 1fr);
 
-  grid-template-areas: 
+  grid-template-areas:
     "header header header"
     "advert content content"
     "footer footer footer";
@@ -1363,9 +1363,9 @@ border-image: source slice width outset repeat
 
 #### background-image
 
--   url()
--   linear-gradient()
--   radial-gradient()
+- url()
+- linear-gradient()
+- radial-gradient()
 
 #### (moz/webkit)background-clip
 
@@ -1377,22 +1377,22 @@ border-image: source slice width outset repeat
 
 #### background-size
 
--   contain
--   cover
+- contain
+- cover
 
-#### Best Practice
+#### Background Best Practice
 
 ##### 单背景极简欢迎首页
 
 ```css
 .jumbotron {
-	background-image: url("");
-	background-size: cover;
-	background-position: center center;
-	background-repeat: no-repeat;
+  background-image: url("");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 
-	height: 1px;
-	width: 1px;
+  height: 1px;
+  width: 1px;
 }
 ```
 
@@ -1427,7 +1427,7 @@ p {
 
 #### font-size
 
-**Best Practice**
+Best Practice
 
 ```css
 html {
@@ -1456,8 +1456,8 @@ normal,small-caps(小型大写字母)
 
 #### font-size-adjust
 
--   使字体保持大小，不随字体类型改变而改变
--   不同字体有不同的值(x-height/字体尺寸)
+- 使字体保持大小，不随字体类型改变而改变
+- 不同字体有不同的值(x-height/字体尺寸)
 
 #### custom function - @font-face
 
@@ -1484,7 +1484,7 @@ normal,small-caps(小型大写字母)
   text-transform: uppercase;
 
     color: black;
-	line-height: 100px;
+  line-height: 100px;
 
     letter-spacing: 1.3px;
     font-family: sans-serif;
@@ -2021,18 +2021,18 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 
 ### Color
 
-#### Scheme 
+#### Scheme
 
 - floralwhite + #7986cb
-- http://www.gradifycss.com/
+- [gradify css](http://www.gradifycss.com/)
 
 #### Lib
 
-- https://github.com/adriantoine/kewler
+- [kewler](https://github.com/adriantoine/kewler)
 
 ## UI Libraries && Components
 
-- http://microjs.com/
+- [micro js](http://microjs.com/)
 
 ### Utils
 
@@ -2046,8 +2046,8 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 
 ### Mouse Effect
 
-- https://github.com/processing/p5.js
-- https://github.com/yoannmoinet/nipplejs
+- [p5.js](https://github.com/processing/p5.js)
+- [nipple.js](https://github.com/yoannmoinet/nipplejs)
 
 ### Message
 
@@ -2061,7 +2061,7 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 
 ### Documentation
 
-- https://github.com/usablica/intro.js
+- [intro.js](https://github.com/usablica/intro.js)
 
 ### Editor
 
@@ -2086,7 +2086,7 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 
 #### Slide
 
-- https://github.com/hustcc/placeholder.js
+- [placeholder.js](https://github.com/hustcc/placeholder.js)
 - [Pictures Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
 
 #### Filter
@@ -2094,7 +2094,7 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 - [Pictures Color Style Filter](https://github.com/we-are-next/cssco)
 - [Rainyday Effect](https://github.com/maroslaw/rainyday.js)
 - [Canvas Manipulation](https://github.com/meltingice/CamanJS/)
-- https://github.com/HumbleSoftware/js-imagediff
+- [js-imagediff](https://github.com/HumbleSoftware/js-imagediff)
 
 #### Icons
 
@@ -2117,7 +2117,7 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 
 #### Particles
 
-- https://github.com/MapleRecall/html5-particles
+- [html5 particles](https://github.com/MapleRecall/html5-particles)
 
 #### Hover Component
 
@@ -2128,12 +2128,12 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 #### Prompt
 
 - [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
-- https://github.com/FezVrasta/popper.js
-- https://github.com/wavded/humane-js
+- [popper.js](https://github.com/FezVrasta/popper.js)
+- [humane js](https://github.com/wavded/humane-js)
 - [Desktop Notification](https://github.com/Nickersoft/push.js)
 - [Nodejs Notification](https://github.com/mikaelbr/node-notifier)
 
-#### Message
+#### Message UI
 
 - [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
 - [TheaterJS - Typing Effect](https://github.com/Zhouzi/TheaterJS)
@@ -2143,7 +2143,7 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 #### Card
 
 - [GitHub Information Card](https://github.com/lepture/github-cards)
-- https://github.com/bootcards/bootcards
+- [bootcards](https://github.com/bootcards/bootcards)
 
 #### List
 
@@ -2151,7 +2151,7 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 
 #### Nav
 
-- https://github.com/VPenkov/okayNav
+- [okay nav](https://github.com/VPenkov/okayNav)
 
 #### Menu
 
@@ -2250,4 +2250,4 @@ content -> centering -> font family -> spacing -> color&contrast -> balance(posi
 
 #### File Tree View
 
-- https://github.com/zTree/zTree_v3
+- [zTree v3](https://github.com/zTree/zTree_v3)

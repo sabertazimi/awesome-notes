@@ -514,7 +514,7 @@ When working on a very large project with a lot of abstract utilities, it might 
   @extend %button;
 }
 
-// Bad
+// Bad Style
 .modal {
   @extend %modal;
 
