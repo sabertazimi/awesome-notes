@@ -122,8 +122,8 @@ port, signal
 
 ## Module
 
--   Inout(Net) -> (Net)Module(Net) -> Inout(Net)
--   Input(Net/Register) -> (Net)Module(Net/Register) -> Output(Net)
+- Inout(Net) -> (Net)Module(Net) -> Inout(Net)
+- Input(Net/Register) -> (Net)Module(Net/Register) -> Output(Net)
 
 ```verilog
 module moduleName( In1, In2, Out1, Out2, InOut1);
@@ -159,8 +159,8 @@ endmodule
 
 ### 外部端口
 
--   封装内部端口,装饰者模式
--   一个内部端口可与多个外部端口相连
+- 封装内部端口,装饰者模式
+- 一个内部端口可与多个外部端口相连
 
 ```verilog
 module scram_b (
@@ -180,15 +180,15 @@ endmodule
 
 ## function
 
--   不含时间/事件控制
--   至少1个输入
--   至多1个输出
--   只含行为模块
--   只含阻塞赋值语句
+- 不含时间/事件控制
+- 至少1个输入
+- 至多1个输出
+- 只含行为模块
+- 只含阻塞赋值语句
 
 ```verilog
-function 	[7: 0] 	aligned_word;	   // function declaration
-    input 	[7: 0] 	word;
+function  [7: 0]  aligned_word;    // function declaration
+    input  [7: 0]  word;
     begin
       aligned_word = word;
       if (aligned_word != 0)
@@ -199,9 +199,9 @@ function 	[7: 0] 	aligned_word;	   // function declaration
 
 ```verilog
 module arithmetic_unit (result_1, result_2, operand_1, operand_2,);
-  output 		[4: 0] result_1;
-  output		[3: 0] result_2;
-  input 		[3: 0] operand_1, operand_2;
+  output   [4: 0] result_1;
+  output  [3: 0] result_2;
+  input   [3: 0] operand_1, operand_2;
   assign result_1 = sum_of_operands (operand_1, operand_2);
   assign result_2 = larger_operand (operand_1, operand_2);
 
@@ -219,26 +219,26 @@ endmodule
 
 将测试流程分为多个任务:
 
--   初始化任务
--   模拟生成任务
--   自我检查任务
+- 初始化任务
+- 模拟生成任务
+- 自我检查任务
 
 ```verilog
 module adder_task (c_out, sum, clk, reset, c_in, data_a, data_b);
-  output reg	[3: 0] 	sum;
-  output reg		c_out;
-  input 	[3: 0] 	data_a, data_b;
-  input 		clk, reset, c_in;
- 
+  output reg [3: 0]  sum;
+  output reg  c_out;
+  input  [3: 0]  data_a, data_b;
+  input   clk, reset, c_in;
+
   always @(posedge clk or posedge reset) begin
     if (reset) {c_out, sum} <= 0;
     else add_values (sum, c_out, data_a, data_b, c_in); // invoke task
   end
-  task add_values;	// task declaration
-    output reg	[3: 0] 	SUM;
-    output reg		C_OUT;
-    input 	[3: 0] 	DATA_A, DATA_B;
-    input 		C_IN;
+  task add_values; // task declaration
+    output reg [3: 0]  SUM;
+    output reg  C_OUT;
+    input  [3: 0]  DATA_A, DATA_B;
+    input   C_IN;
             {C_OUT, SUM} = DATA_A + (DATA_B + C_IN);
    endtask
 endmodule
@@ -250,11 +250,11 @@ endmodule
 
 ### 常量
 
--   0: 逻辑0
--   1: 逻辑1
--   x/X: Unknow/Floating
--   z/Z: 高阻抗状态(High Impendence)
--   parameter: #define
+- 0: 逻辑0
+- 1: 逻辑1
+- x/X: Unknow/Floating
+- z/Z: 高阻抗状态(High Impendence)
+- parameter: #define
 
 ```verilog
 localparam idle = 2'b00;
@@ -294,6 +294,7 @@ B[1][0] = 1;                  // B[1][0](1 bit)置1
 C[0][0][3:0] = 4'b0010;      // C[0][0] 低4bit为0010
 C[2][8][5] = 1;               // C[2][8] 第5bit为1
 ```
+
 #### 部分位选
 
 ```verilog
@@ -311,7 +312,7 @@ gpio_mode[mark-:4]; // => mark,mark-1,mark-2,mark-3
 <Bits长度>'[signed]<进制><数值>
 ```
 
--   位长不能用表达式表示,只可用固定的 parameter
+- 位长不能用表达式表示,只可用固定的 parameter
 
 ```verilog
 Num = 5'b01101;               // 二进制
@@ -322,7 +323,7 @@ Num = 4'bxxx1;              // 前三位未知
 Num = 4'bz01;               // 前两位为z, 后两位为01
 ```
 
-#### 有符号数 
+#### 有符号数
 
 - signed reg
 - signed wire
@@ -337,8 +338,8 @@ Num = 4'bz01;               // 前两位为z, 后两位为01
 
 ### Register - reg/integer/time/real/realtime
 
--   有记忆性
--   默认值: x
+- 有记忆性
+- 默认值: x
 
 #### integer
 
@@ -354,26 +355,26 @@ always @(posedge CLK)
 
 #### real
 
--   real 默认值为0,不可为x/z
--   不可声明位宽
+- real 默认值为0,不可为x/z
+- 不可声明位宽
 
 ### Net - wire/wand/wor
 
--   局部变量, 没有记忆性
--   默认值: z
--   wire 间不可直接相连, wand/wor 间课直接相连
--   可用 wire 定义局部变量
+- 局部变量, 没有记忆性
+- 默认值: z
+- wire 间不可直接相连, wand/wor 间课直接相连
+- 可用 wire 定义局部变量
 
 ## Gate Level
 
 ### Basic Gate
 
--   and
--   nand(与非)
--   or
--   nor(或非)
--   xor(异或)
--   xnor(同或)
+- and
+- nand(与非)
+- or
+- nor(或非)
+- xor(异或)
+- xnor(同或)
 
 ### Use Gate
 
@@ -411,10 +412,10 @@ and #(1, 2) u0and [NUM_BITS - 1: 0] (gated_d, din, bypass);
 
 ### Self-Defined Gate(用户自定义原语)
 
--   可以有一个/多个输入
--   只能有一个输出
--   第一个端口必须是输出端口
--   - 表示 值"无变化"
+- 可以有一个/多个输入
+- 只能有一个输出
+- 第一个端口必须是输出端口
+- - 表示 值"无变化"
 
 ```verilog
 primitive XOR2 (DOUT, X1, X2);
@@ -432,7 +433,7 @@ endprimitive
 
 ## Dataflow Level
 
--    assign net = net/reg: **左式只能是net**
+- assign net = net/reg: **左式只能是net**
 
 ### [Operators](https://hom-wang.gitbooks.io/verilog-hdl/content/Chapter_04.html)
 
@@ -447,11 +448,11 @@ endprimitive
 
 ### 整数提升
 
--   表达式所有中间取 最大位宽(最长(左/右)操作数)
+- 表达式所有中间取 最大位宽(最长(左/右)操作数)
 
 #### { }
 
-**可实现 haskell 中的模式匹配**
+可实现 haskell 中的**模式匹配**
 
 ```verilog
 // 连接运算符
@@ -463,7 +464,7 @@ A = { 3'b101, 2{1'b0} };        // A = 5'b101_00
 
 ## Behavior Level
 
--   reg = net/reg: **左式只能是reg*
+- reg = net/reg: **左式只能是reg*
 
 ### 时延控制
 
@@ -506,7 +507,7 @@ always @(事件1, 事件2, ...)
 
 ### if-else
 
--   必须添加 else
+- 必须添加 else
 
 ```verilog
 if (condition1)
@@ -525,9 +526,9 @@ else
 
 ### case/casex/casez
 
--   expr: 常量/变量/连接运算符{ }/x/z
--   casex: 当输入某一位为 x/z 时，忽略此位匹配(恒将此位匹配为真)
--   casez: 当输入某一位为 z 时，忽略此位匹配(恒将此位匹配为真)
+- expr: 常量/变量/连接运算符{ }/x/z
+- casex: 当输入某一位为 x/z 时，忽略此位匹配(恒将此位匹配为真)
+- casez: 当输入某一位为 z 时，忽略此位匹配(恒将此位匹配为真)
 
 ```verilog
 case (expr)
@@ -559,8 +560,8 @@ for (循环初值; 循环条件; 控制部分)
 
 ### repeat loop
 
--   initial for **test bench**
--   当需 if/else 进行断言时,注意 **延时** 造成的错误逻辑
+- initial for **test bench**
+- 当需 if/else 进行断言时,注意 **延时** 造成的错误逻辑
 
 ```verilog
 // 重复事件控制:
@@ -609,8 +610,8 @@ initial
 
 ### Blocking/Non-Blocking
 
--   Blocking(=): 顺序执行
--   Non-Blocking(<=): 并行执行
+- Blocking(=): 顺序执行
+- Non-Blocking(<=): 并行执行
 
 ```verilog
 output = input_logic;
@@ -654,9 +655,9 @@ endgenerate
 
 ## Delay(时延)
 
--   语句内时延
--   语句间时延
--   语句内时延期间：右值保持稳定不变，才可成功赋给左值
+- 语句内时延
+- 语句间时延
+- 语句内时延期间：右值保持稳定不变，才可成功赋给左值
 
 ```verilog
 sum = (a ^ b) ^ cin;
@@ -695,50 +696,50 @@ sum = (a ^ b) ^ cin;
 
 ### Memory
 
--   其中数据文件中地址必须在系统任务中定义的范围内，系统任务中定义的地址必须在存储器定义的地址范围内
--   优先考虑数据文件中的地址>系统任务中定义的起始地址和结束地址>存储器定义的起始地址和结束地址
+- 其中数据文件中地址必须在系统任务中定义的范围内，系统任务中定义的地址必须在存储器定义的地址范围内
+- 优先考虑数据文件中的地址>系统任务中定义的起始地址和结束地址>存储器定义的起始地址和结束地址
 
 ## Demos
 
--   [gitbooks.io](https://hom-wang.gitbooks.io/verilog-hdl/content/Chapter_07.html)
--   [Xilinx Lab](http://www.xilinx.com/support/university/ise/ise-teaching-material/hdl-design.html)
+- [gitbooks.io](https://hom-wang.gitbooks.io/verilog-hdl/content/Chapter_07.html)
+- [Xilinx Lab](http://www.xilinx.com/support/university/ise/ise-teaching-material/hdl-design.html)
 
 ### Binary Multiplier
 
 ```verilog
    1100 (the multiplicand)
 x  1011 (the multiplier)
-   ---- 
+   ----
    0000 (initial partial product, start with 0000)
    1100 (1st multiplier bit is 1, so add the multiplicand)
-   ---- 
+   ----
    1100 (sum)
-   ---- 
+   ----
    01100 (shift sum one position to the right)
    1100 (2nd multiplier bit is 1, so add multiplicand again)
-   ---- 
+   ----
   100100 (sum, with a carry generated on the left)
-   ---- 
+   ----
    100100 (shift sum once to the right, including carry)
    0100100 (3rd multiplier bit is 0, so skip add, shift once)
-   ---- 
+   ----
    1100 (4th multiplier bit is 1, so add multiplicand again)
-   ---- 
+   ----
   10000100 (sum, with a carry generated on the left)
-   10000100 (shift sum once to the right, including carry) 
+   10000100 (shift sum once to the right, including carry)
 ```
 
 ### Multi-Hz
 
 ```verilog
 /*
- * 利用计数器实现任意分频 
+ * 利用计数器实现任意分频
  */
-always @(posedge f_clk) begin 
+always @(posedge f_clk) begin
 
     //设定频率控制字p  
     if (i == p) begin
-        i=0; 
+        i=0;
         f_out=~f_out;
     end
     else begin
@@ -751,21 +752,21 @@ end
 
 ### 不可综合结构
 
-*   initial: 只用于 test bench
-*   events: Events 同步测试各个组件
-*   real: Real 数据类型不可综合
-*   time: Time 数据类型不可综合
-*   force/release
-*   assign(reg)/deassign(reg)
-*   fork join
-*   primitive: 只有门级的原语（primitives）可综合
-*   table: 用户自定义原语（UDP）及 table 不可综合
-*   `#1` 延迟只用于仿真，综合器直接忽略延迟
+- initial: 只用于 test bench
+- events: Events 同步测试各个组件
+- real: Real 数据类型不可综合
+- time: Time 数据类型不可综合
+- force/release
+- assign(reg)/deassign(reg)
+- fork join
+- primitive: 只有门级的原语（primitives）可综合
+- table: 用户自定义原语（UDP）及 table 不可综合
+- `#1` 延迟只用于仿真，综合器直接忽略延迟
 
 ### 混合编程
 
--   内部变量用 assign 赋值
--   输出变量通过监听 内部变量 改变输出值
+- 内部变量用 assign 赋值
+- 输出变量通过监听 内部变量 改变输出值
 
 ```verilog
     assign DT0 = ...;
@@ -791,7 +792,7 @@ end
 
 ### Parameter
 
--   只在定义的模块内部起作用
+- 只在定义的模块内部起作用
 
 #### Overload Method
 
@@ -859,11 +860,11 @@ end
 
 ## 有限状态机(FSM)
 
--   reset: initial state
--   default: illegal/unreachable state
+- reset: initial state
+- default: illegal/unreachable state
 
 ## 算术状态机(ASM)
 
--   state box: moore fsm
--   conditional box: mealy fsm
--   decision box: `x_input` = 0/1
+- state box: moore fsm
+- conditional box: mealy fsm
+- decision box: `x_input` = 0/1

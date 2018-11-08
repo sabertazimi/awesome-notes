@@ -7,11 +7,6 @@
     - [ghci](#ghci)
     - [ghc](#ghc)
   - [Unique Mark](#unique-mark)
-    - [:+](#)
-    - [_](#_)
-    - [<-](#-)
-    - [=>](#)
-    - [->](#-)
   - [Expression](#expression)
   - [Type](#type)
     - [基本类型](#基本类型)
@@ -44,7 +39,7 @@
         - [Best Practice](#best-practice)
         - [常用模式](#常用模式)
           - [as模式](#as模式)
-          - [List](#list-1)
+          - [List 模式](#list-模式)
           - [Tuple](#tuple)
       - [guard模式 与 where绑定](#guard模式-与-where绑定)
       - [let绑定](#let绑定)
@@ -64,7 +59,7 @@
       - [*Functor*](#functor)
       - [Control.Applicative](#controlapplicative)
         - [Maybe](#maybe)
-        - [`[]`](#)
+        - [Collection `[]`](#collection-)
         - [IO](#io)
         - [ZipList](#ziplist)
         - [多个 functors](#多个-functors)
@@ -93,7 +88,7 @@
         - [二叉树](#二叉树)
   - [函数](#函数)
     - [递归函数](#递归函数)
-      - [List](#list-2)
+      - [List 函数](#list-函数)
     - [高阶函数](#高阶函数)
       - [Curry化](#curry化)
       - [map函数](#map函数)
@@ -183,16 +178,16 @@ atom plugins : language-haskell autocomplete-haskell ide-haskell haskell-ghc-mod
 
 ### ghci
 
--   :l - load file
--   :r - reload file
--   :cd
--   :edit - $EDITOR
--   :m - module
--   :q - quit
--   :?
--   :k - kind
--   :t - type function
--   :info - data/Typeclass
+- :l - load file
+- :r - reload file
+- :cd
+- :edit - $EDITOR
+- :m - module
+- :q - quit
+- :?
+- :k - kind
+- :t - type function
+- :info - data/Typeclass
 
 ### ghc
 
@@ -200,23 +195,23 @@ atom plugins : language-haskell autocomplete-haskell ide-haskell haskell-ghc-mod
 
 ## Unique Mark
 
-### :+
+`:+`
 
 复数符 - 2 :+ 3 -> 2+3i
 
-### _
+`_`
 
 泛匹配符: 表示不关心此部分具体内容
 
-### <-
+`<-`
 
 属于符号,用于ListRange中.
 
-### =>
+`=>`
 
 类型约束分隔符
 
-### ->
+`->`
 
 ## Expression
 
@@ -284,19 +279,19 @@ Data.Word - unsigned int
 
 #### Operator
 
--   ++
--   :
--   !!
--   \>/</==
+- ++
+- :
+- !!
+- \>/</==
 
 #### Function
 
--   head List 首元素
--   last List 尾元素
--   init List 除去尾元素的部分
--   tail List 除去首元素的部分
+- head List 首元素
+- last List 尾元素
+- init List 除去尾元素的部分
+- tail List 除去首元素的部分
 
--   length List 长度
+- length List 长度
 
 *Tips*:
 
@@ -304,7 +299,7 @@ Data.Word - unsigned int
 fromIntegral (length [1,2,3,4]) + 3.2
 ```
 
--   null List BestPractice: 检查一个 List 是否为空
+- null List BestPractice: 检查一个 List 是否为空
 
 ```haskell
 ghci> null [1,2,3]
@@ -313,8 +308,8 @@ ghci> null []
 True
 ```
 
--   reverse List 反转
--   take num List 返回List前num个元素组成的List
+- reverse List 反转
+- take num List 返回List前num个元素组成的List
 
 ```haskell
 ghci> take 3 [5,4,3,2,1]
@@ -325,7 +320,7 @@ ghci> take 0 [6,6,6]
 []
 ```
 
--   drop num List 删除List前num个元素
+- drop num List 删除List前num个元素
 
 ```haskell
 ghci> drop 3 [8,4,2,1,5,6]
@@ -336,13 +331,13 @@ ghci> drop 100 [1,2,3,4]
 []
 ```
 
--   maximum List 返回最大元素
--   minimun List 返回最小元素
+- maximum List 返回最大元素
+- minimun List 返回最小元素
 
--   sum List 返回List元素和
--   product List 返回List元素积
+- sum List 返回List元素和
+- product List 返回List元素积
 
--   elem ``elem`` List 判断元素存在性
+- elem ``elem`` List 判断元素存在性
 
 ```haskell
 ghci> 4 `elem` [3,4,5,6]
@@ -351,9 +346,9 @@ ghci> 10 `elem` [3,4,5,6]
 False
 ```
 
--   cycle List  返回循环无限数组(*Haskell惰性特性*)
--   repeat Elem 返回循环无限数组(*Haskell惰性特性*)
--   replicate num Elem 返回循环无限数组
+- cycle List  返回循环无限数组(*Haskell惰性特性*)
+- repeat Elem 返回循环无限数组(*Haskell惰性特性*)
+- replicate num Elem 返回循环无限数组
 
 ```haskell
 take 10 (cycle [1,2,3]) -> [1,2,3,1,2,3,1,2,3,1]
@@ -361,7 +356,7 @@ take 10 (repeat 5)      -> [5,5,5,5,5,5,5,5,5,5]
 replicate 3 10          -> [10,10,10]
 ```
 
--   takeWhile :: (a -> Bool) -> `[a]` -> `[a]`  遇到不符合限制条件的元素便停止遍历List
+- takeWhile :: (a -> Bool) -> `[a]` -> `[a]`  遇到不符合限制条件的元素便停止遍历List
 
 ```haskell
 ghci> sum (takeWhile (<10000) (filter odd (map (^2) [1..])))
@@ -372,9 +367,9 @@ ghci> sum (takeWhile (<10000) (filter odd (map (^2) [1..])))
 
 三要素: , 与 ..
 
--   上限
--   下限
--   步长(*仅可标明一次*)
+- 上限
+- 下限
+- 步长(*仅可标明一次*)
 
 ```haskell
 上下限: [1..20]
@@ -388,12 +383,12 @@ take 24 [13,26..]
 
 由类似集合定义的离散数学定义,来定义复杂的List:
 
-**`[expression | filter]`**
+`[expression | filter]`
 
-**`[expression | x <\- Range, Predicate(断言/限制条件)]`**
+`[expression | x <\- Range, Predicate(断言/限制条件)]`
 
--   Range: `,`分隔多个Range(一般为List)
--   Predicate: `,`分隔多个断言;每个断言均为Boolean表达式
+- Range: `,`分隔多个Range(一般为List)
+- Predicate: `,`分隔多个断言;每个断言均为Boolean表达式
 
 ```haskell
 ghci> [x*2 | x <- [1..10], x*2 >= 12]
@@ -409,15 +404,14 @@ ghci> boomBangs [7..13]
 ["BOOM!","BOOM!","BANG!","BANG!"]
 ```
 
--   多个Range
-
+- 多个Range
 
 ```haskell
 ghci> [ x*y | x <- [2,5,10], y <- [8,10,11]]
 [16,20,22,40,50,55,80,100,110]
 ```
 
--   嵌套Comprehension
+- 嵌套Comprehension
 
 ```haskell
 ghci> let xxs = [[1,3,5,2,3,1,2,4,5],[1,2,3,4,5,6,7,8,9],[1,2,4,2,1,6,3,1,3,2,3,6]]
@@ -430,13 +424,13 @@ ghci> [ [ x | x <- xs, even x ] | xs <- xxs]
 
 #### 内部差异性
 
--   同一Tuple里可存放不同Type的项
+- 同一Tuple里可存放不同Type的项
 
 #### 外部差异性
 
--   数目不同或某项不同的Tuple属于不同Type
-  -   不可置于同一List中
-  -   不同长度的Tuple不可比较(比较符只可用于相同Type)
+- 数目不同或某项不同的Tuple属于不同Type
+  - 不可置于同一List中
+  - 不同长度的Tuple不可比较(比较符只可用于相同Type)
 
 #### Tuple Function
 
@@ -489,14 +483,14 @@ ghci> :t (*)
 
 ### 函数类型
 
--   单个参数
+- 单个参数
 
 ```haskell
 removeNonUppercase :: [Char] -> [Char]
 removeNonUppercase st = [ c | c <- st, c `elem` ['A'..'Z']]
 ```
 
--   多个参数
+- 多个参数
 
 ```haskell
 addThree :: Int -> Int -> Int -> Int
@@ -513,9 +507,9 @@ addThree x y z = x + y + z
 
 ##### Best Practice
 
--   代替if-else/switch语句
--   递归算法(将递归基础作为首模式,递归函数体作为尾模式)
--   List Range中亦可使用模式匹配
+- 代替if-else/switch语句
+- 递归算法(将递归基础作为首模式,递归函数体作为尾模式)
+- List Range中亦可使用模式匹配
 
 ```haskell
 addVectors :: (Num a) => (a, a) -> (a, a) -> (a, a)
@@ -538,10 +532,10 @@ capital "" = "Empty string, whoops!"
 capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
 ```
 
-###### List
+###### List 模式
 
--   x:xs
--   x:y:z:xs
+- x:xs
+- x:y:z:xs
 
 ```haskell
 head' :: [a] -> a
@@ -563,19 +557,19 @@ sum' (x:xs) = x + sum' xs
 
 ###### Tuple
 
--   (x, y)
--   (x, y, z)
+- (x, y)
+- (x, y, z)
 
 #### guard模式 与 where绑定
 
 子模式匹配: 运用布尔表达式实现判断,应用对应函数体
 
--   关键符号: | 与 where
--   |     分隔函数体
--   where
-    -   可见性: 定义只对本模式可见的(私有)名字与(私有)函数
-    -   where定义在最外层,使得各模式共享(私有)名字与(私有)函数
-    -   名字定义时可使用模式匹配  `where (head:_) = firstname`
+- 关键符号: | 与 where
+- |     分隔函数体
+- where
+  - 可见性: 定义只对本模式可见的(私有)名字与(私有)函数
+  - where定义在最外层,使得各模式共享(私有)名字与(私有)函数
+  - 名字定义时可使用模式匹配  `where (head:_) = firstname`
 
 ```haskell
 bmiTell :: (RealFloat a) => a -> a -> String
@@ -605,14 +599,14 @@ let sideArea = 2 * pi * r * h
 in  sideArea + 2 * topArea
 ```
 
--   可见性:in作用域,只对本guard可见
--   可使用模式匹配
--   可用于List Range中
+- 可见性:in作用域,只对本guard可见
+- 可使用模式匹配
+- 可用于List Range中
 
 #### case表达式
 
--   模式匹配是case表达式的特殊情况(语法糖:简化写法)
--   在函数中,模式匹配只能用于参数定义中,而case表达式可用于其他地方(let/where绑定 普通表达式 guard语句)
+- 模式匹配是case表达式的特殊情况(语法糖:简化写法)
+- 在函数中,模式匹配只能用于参数定义中,而case表达式可用于其他地方(let/where绑定 普通表达式 guard语句)
 
 ```haskell
 case expression of pattern -> result
@@ -649,9 +643,9 @@ fromIntegral :: (Integral a, Num b) => a -> b
 
 #### Eq
 
--   功能: 成员类型可判断相等性
--   成员: 大部分基本类型(不包含函数类型)
--   方法: == 与 /= 函数
+- 功能: 成员类型可判断相等性
+- 成员: 大部分基本类型(不包含函数类型)
+- 方法: == 与 /= 函数
 
 ```haskell
 class Eq a where
@@ -665,32 +659,32 @@ class Eq a where
 
 Ord成员必为Eq成员: class (Eq a) => Ord a where
 
--   功能: 成员类型可排序
--   成员: 大部分基本类型(不包含函数类型)
--   方法:
-    -   < > <= >= 函数
-    -   compare函数 (Ord a) => a -> a -> Ordering
+- 功能: 成员类型可排序
+- 成员: 大部分基本类型(不包含函数类型)
+- 方法:
+  - < > <= >= 函数
+  - compare函数 (Ord a) => a -> a -> Ordering
 
 #### Show
 
--   功能: 成员类型可用字符串表示
--   成员: 大部分基本类型(不包含函数类型)
--   方法: show函数 (Show a) => a -> String
+- 功能: 成员类型可用字符串表示
+- 成员: 大部分基本类型(不包含函数类型)
+- 方法: show函数 (Show a) => a -> String
 
 *Tips*: 结合Read, 可用于字符串与数值之间的转化
 
 #### Read
 
--   功能: 可以将字串转为Read某成员类型
--   成员: 大部分基本类型(不包含函数类型)
--   方法: read函数 (Read a) => String -> a
+- 功能: 可以将字串转为Read某成员类型
+- 成员: 大部分基本类型(不包含函数类型)
+- 方法: read函数 (Read a) => String -> a
 
 *Tips*: 结合Show, 可用于字符串与数值之间的转化
 
 #### Enum
 
--   功能: 连续性(可枚举), 其成员类型可用于*Range*中
--   成员: () Bool Char Ordering Int Integer Float Double
+- 功能: 连续性(可枚举), 其成员类型可用于*Range*中
+- 成员: () Bool Char Ordering Int Integer Float Double
 
 ```haskell
 [Thursday .. Sunday]
@@ -705,8 +699,8 @@ Friday
 
 #### Bounded
 
--   功能: 成员类型具有上下限
--   方法: minBound/maxBound函数 (Bounded a) => a *无参多态常量/定义*
+- 功能: 成员类型具有上下限
+- 方法: minBound/maxBound函数 (Bounded a) => a *无参多态常量/定义*
 
 ```haskell
 ghci> minBound :: Day
@@ -717,10 +711,10 @@ Sunday
 
 #### Num
 
--   功能: 成员类型具有数字特征
--   成员: 实数 整数 - Int Integer Float Double
--   方法: + - * abs 函数
--   实例: 所有数字都是多态常量/定义(可视为函数)
+- 功能: 成员类型具有数字特征
+- 成员: 实数 整数 - Int Integer Float Double
+- 方法: + - * abs 函数
+- 实例: 所有数字都是多态常量/定义(可视为函数)
 
 ```haskell
 ghci> :t 20
@@ -729,13 +723,13 @@ ghci> :t 20
 
 #### Integral
 
--   功能: 成员类型具有数字特征
--   成员: 整型 - Int Integer
+- 功能: 成员类型具有数字特征
+- 成员: 整型 - Int Integer
 
 #### Floating
 
--   功能: 成员类型具有数字特征
--   成员: 浮点型 - Float Double
+- 功能: 成员类型具有数字特征
+- 成员: 浮点型 - Float Double
 
 |typeclass|method feature|
 |:----------:|:--------------------:|
@@ -745,12 +739,12 @@ ghci> :t 20
 
 #### *Functor*
 
--   成员: Maybe a, [], Either a, IO
-    -   成员kind必须为 `* -> *`
-  -   f *一元类型构造符(type constructor)*
--   必须遵守准则:
-    -   fmap id = id
-  -   fmap (f . g) F = fmap f (fmap g F)
+- 成员: Maybe a, [], Either a, IO
+  - 成员kind必须为 `* -> *`
+  - f *一元类型构造符(type constructor)*
+- 必须遵守准则:
+  - fmap id = id
+  - fmap (f . g) F = fmap f (fmap g F)
 
 ```haskell
 ghci> :info Functor
@@ -779,15 +773,15 @@ instance Functor IO where
 
 #### Control.Applicative
 
--   成员: f :: `* -> *` *一元类型构造符(type constructor)*
--   <*>: 参数为 2 个 functor 实例,其中一个包含一个函数
+- 成员: f :: `* -> *` *一元类型构造符(type constructor)*
+- <*>: 参数为 2 个 functor 实例,其中一个包含一个函数
 
 ```haskell
 (<$>) :: (Functor f) => (a -> b) -> f a -> f b
 f <$> x = fmap f x
 ```
 
--   作用: 可以用单一一个函数操作多个 functors
+- 作用: 可以用单一一个函数操作多个 functors
 
 ```haskell
 class (Functor f) => Applicative f where
@@ -804,7 +798,7 @@ instance Applicative Maybe where
     (Just f) <*> something = fmap f something
 ```
 
-##### `[]`
+##### Collection `[]`
 
 ```haskell
 instance Applicative [] where
@@ -873,7 +867,7 @@ Just [3,4]
 
 #### Control.Monad
 
--   成员: 类型构造符(type constructor)
+- 成员: 类型构造符(type constructor)
 
 ```haskell
 class Monad m where
@@ -888,7 +882,7 @@ class Monad m where
     fail msg = error msg
 ```
 
--   特性: 允许返回值之间具有弹性交互
+- 特性: 允许返回值之间具有弹性交互
 
 ```haskell
 {- 当出现异常后,之后所有的值都变为Nothing -}
@@ -898,10 +892,11 @@ ghci> return (0,0) >>= landLeft 1 >>= landRight 4 >>= landLeft (-1) >>= landRigh
 Nothing
 ```
 
--   Monad Laws:
-  -   return 满足 Left identity: `retrun x >>= f 等于 f x`
-  -   return 满足 right identity: `m >>= return 等于 m`
-  -   Associativity: 结合律 `(m >>= f) >>= g 等于 m >>= (\x -> f x >>= g) `
+Monad Laws:
+
+- return 满足 Left identity: `retrun x >>= f 等于 f x`
+- return 满足 right identity: `m >>= return 等于 m`
+- Associativity: 结合律 `(m >>= f) >>= g 等于 m >>= (\x -> f x >>= g)`
 
 ```haskell
 ghci> return 3 >>= (\x -> Just (x+100000))
@@ -948,8 +943,8 @@ instance Monad Maybe where
 
 ###### do 表示法
 
--   在 do expression 中，每一行都是一个 monadic value
--   检查返回值，使用 <-
+- 在 do expression 中，每一行都是一个 monadic value
+- 检查返回值，使用 <-
 
 ```haskell
 foo :: Maybe String
@@ -974,14 +969,14 @@ routine = do
 
 ##### List Monad
 
--   non-detetminism(不确定性)
+- non-detetminism(不确定性)
 
 ```haskell
 ghci> (*) <$> [1,2,3] <*> [10,100,1000]
 [10,100,1000,20,200,2000,30,300,3000]
 ```
 
--   实现
+- 实现
 
 ```haskell
 instance Monad [] where
@@ -990,10 +985,10 @@ instance Monad [] where
     fail _ = []
 ```
 
--   返回值交互: 下例中 n 与 return (n, ch) 进行交互
-    -   list comprehension 与 do 表示法 均是 >>= 的语法糖
-  -   list comprehension: <- 与 条件表达式
-  -   do 表示法: <- 与 guard函数
+- 返回值交互: 下例中 n 与 return (n, ch) 进行交互
+  - list comprehension 与 do 表示法 均是 >>= 的语法糖
+- list comprehension: <- 与 条件表达式
+- do 表示法: <- 与 guard函数
 
 ```haskell
 ghci> [1,2] >>= \n -> ['a','b'] >>= \ch -> return (n,ch)
@@ -1031,7 +1026,7 @@ instance MonadPlus [] where
 
 ###### 马走日
 
--   计算出可移动位置
+- 计算出可移动位置
 
 ```haskell
 moveKnight :: KnightPos -> [KnightPos]
@@ -1043,7 +1038,7 @@ moveKnight (c,r) = do
     return (c',r')
 ```
 
--   利用 >>= 向后传递多个可交互的位置
+- 利用 >>= 向后传递多个可交互的位置
 
 ```haskell
 in3 start = return start >>= moveKnight >>= moveKnight >>= moveKnight
@@ -1055,7 +1050,7 @@ in3 start = do
     moveKnight second
 ```
 
--   最后完成完整函数: 产生所有三步的可能位置，检查其中一个位置是否在里面
+- 最后完成完整函数: 产生所有三步的可能位置，检查其中一个位置是否在里面
 
 ```haskell
 canReachIn3 :: KnightPos -> KnightPos -> Bool
@@ -1080,10 +1075,10 @@ instance F.Foldable Tree where
 
 #### Data.Monoid
 
--   成员: 必须为具体类型(*不可是类型构造符(type constructor))
--   准则(Monoid Law):
-    -   *结合律* a·(b·c) = (a·b)·c
-    -   无需满足 a `mappend` b == b `mappend` a
+- 成员: 必须为具体类型(*不可是类型构造符(type constructor))
+- 准则(Monoid Law):
+  - *结合律* a·(b·c) = (a·b)·c
+  - 无需满足 a `mappend` b == b `mappend` a
 
 ```haskell
 class Monoid m where
@@ -1093,7 +1088,7 @@ class Monoid m where
     mconcat = foldr mappend mempty
 ```
 
--   实例
+- 实例
 
 ```haskell
 instance Monoid [a] where
@@ -1174,19 +1169,19 @@ Just 'a'
 
 ### 自定义 Typeclass
 
--   创建新类: *可以只有声明没有实现*
+- 创建新类: *可以只有声明没有实现*
 
 ```haskell
 class ClassName where
     defining code
 ```
 
--   创建已有类的实例: *必须实现所有已声明函数*
-    -   作用等同于deriving(自由度更大)
-    -   可以重写函数,去除默认函数处理,达到特定目的
+- 创建已有类的实例: *必须实现所有已声明函数*
+  - 作用等同于deriving(自由度更大)
+  - 可以重写函数,去除默认函数处理,达到特定目的
 
 ```haskell
--   先创建新类型
+- 先创建新类型
 data TrafficLight = Red | Yellow | Green
 
 instance Eq TrafficLight where
@@ -1201,9 +1196,9 @@ instance Show TrafficLight where
     show Green = "Green light"
 ```
 
--   创建新类和实现实例时,使用class constraint
-    - 可达到*类似于*继承的效果
-    - 可达到限制类型的效果
+- 创建新类和实现实例时,使用class constraint
+  - 可达到*类似于*继承的效果
+  - 可达到限制类型的效果
 
 ```haskell
 class (Eq a) => Num a where
@@ -1221,14 +1216,14 @@ instance (Eq m) => Eq (Maybe m) where
 data SelfDefinedTypeName = ValueConstructorName ValueType .. | .. deriving (Typeclass, ..)
 ```
 
--   data范例
+- data范例
 
 ```haskell
 data Point = Point Float Float deriving (Show)
 data Shape = Circle Point Float | Rectangle Point Point deriving (Show)
 ```
 
--   导出data
+- 导出data
 
 ```haskell
 module Shapes
@@ -1237,7 +1232,7 @@ module Shapes
 ) where
 ```
 
--   后构造器 > 前构造器
+- 后构造器 > 前构造器
 
 > e.g True > False
 
@@ -1256,7 +1251,7 @@ ghci> map (Circle 10 20) [4,5,6,6]
 [Circle 10.0 20.0 4.0,Circle 10.0 20.0 5.0,Circle 10.0 20.0 6.0,Circle 10.0 20.0 6.0]
 ```
 
--   Value Constructor:使用`ValueConstructorName ValueType ..`可构造出一个该类型的定义/名字
+- Value Constructor:使用`ValueConstructorName ValueType ..`可构造出一个该类型的定义/名字
 
 ```haskell
 ghci > Circle 10 20 30
@@ -1265,7 +1260,7 @@ Circle 10 20 30
 
 #### 记录语法(Record Syntax)
 
--   定义
+- 定义
 
 ```haskell
 data Person = Person { firstName :: String
@@ -1277,7 +1272,7 @@ data Person = Person { firstName :: String
                      } deriving (Show)
 ```
 
--   使用
+- 使用
 
 ```haskell
 ghci> Car {company="Ford", model="Mustang", year=1967}
@@ -1306,7 +1301,7 @@ tellCar (Car {company = c, model = m, year = y}) = "This " ++ c ++ " " ++ m ++ "
 data Maybe a = Nothing | Just a
 ```
 
--   Just可实现转化:
+- Just可实现转化:
 
 ```haskell
 Just :: a -> Maybe a
@@ -1363,7 +1358,7 @@ type Name = String
 type PhoneBook = [(Name,PhoneNumber)]
 ```
 
--   type类型参数: 匹配data类型参数
+- type类型参数: 匹配data类型参数
 
 ```haskell
 type AssocList k v = [(k,v)]
@@ -1374,10 +1369,10 @@ type IntMap = Map.Map Int
 
 类型别名,只可以在 Haskell 的类型部分中使用:
 
--   定义新类型
--   类型声明
--   类型注释(::)
--   禁止: 定义名字/定义 *AssocList [(1,2),(4,5),(7,9)]*
+- 定义新类型
+- 类型声明
+- 类型注释(::)
+- 禁止: 定义名字/定义 *AssocList [(1,2),(4,5),(7,9)]*
 
 #### 高级数据结构
 
@@ -1432,14 +1427,14 @@ ghci> let numsTree = foldr treeInsert EmptyTree nums
 
 ### 递归函数
 
--   边界条件
--   递归基础
--   递归函数体
+- 边界条件
+- 递归基础
+- 递归函数体
 
-#### List
+#### List 函数
 
--   边界条件: 空List
--   递归函数体: x:xs 取出首元素进行一般操作,对尾部进行递归操作.
+- 边界条件: 空List
+- 递归函数体: x:xs 取出首元素进行一般操作,对尾部进行递归操作.
 
 ```haskell
 maximum' :: (Ord a) => [a] -> a
@@ -1495,7 +1490,7 @@ elem' a (x:xs)
     | otherwise = a `elem'` xs
 ```
 
-*Awesome Quick Sort*
+Awesome Quick Sort
 
 ```haskell
 quicksort :: (Ord a) => [a] -> [a]
@@ -1512,16 +1507,16 @@ quicksort (x:xs) =
 
 当传入不全参数时,会改变函数的类型,*返回值从单类型变成函数类型*.
 
--   当传入不全参数时:
--   compare 的类型变为 (Ord a) => a -> (a -> Ordering)
+- 当传入不全参数时:
+- compare 的类型变为 (Ord a) => a -> (a -> Ordering)
 
 ```haskell
 compareWithHundred :: (Num a, Ord a) => a -> Ordering
 compareWithHundred x = compare 100 x
 ```
 
--   通过给二元中缀函数传递唯一参数:
--   中缀函数类型由 a -> a -> a 转为 a -> a
+- 通过给二元中缀函数传递唯一参数:
+- 中缀函数类型由 a -> a -> a 转为 a -> a
 
 ```haskell
 divideByTen :: (Floating a) => a -> a
@@ -1531,9 +1526,9 @@ ghci> :t (/10)
 (/10) :: (Fractional a) => a -> a
 ```
 
--   包装函数:
-    -   传入一个二元函数作为参数,便可实现zipWithFunc
-    -   若在定义时便传入一个函数参数,便可实现Curry化
+- 包装函数:
+  - 传入一个二元函数作为参数,便可实现zipWithFunc
+  - 若在定义时便传入一个函数参数,便可实现Curry化
 
 ```haskell
 zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
@@ -1554,12 +1549,13 @@ ghci> zipWith' (zipWith' (*)) [[1,2,3],[3,5,6],[2,3,4]] [[3,2,2],[3,4,5],[5,4,3]
 [[3,4,6],[9,20,30],[10,12,12]]
 ```
 
--   通过Curry化,还可省略参数
+- 通过Curry化,还可省略参数
 
 ```haskell
 foo a = bar b a ->
 foo = bar b
 ```
+
 #### map函数
 
 映射函数 - List Comprehension的函数化
@@ -1570,7 +1566,7 @@ map _ [] = []
 map f (x:xs) = f x : map f xs
 ```
 
--   如果map传入的函数参数的类型为 a -> a -> a,则返回的List类型为`[a -> a]`(f x传参不完全,造成了Curry化).
+- 如果map传入的函数参数的类型为 a -> a -> a,则返回的List类型为`[a -> a]`(f x传参不完全,造成了Curry化).
 
 ```haskell
 ghci> let listOfFuns = map (*) [0..]
@@ -1624,18 +1620,17 @@ ghci> filter (`elem` ['A'..'Z']) "i lauGh At You BecAuse u r aLL the Same"
 
 > 如图中所示,左折叠时将acc视为第0个元素;右折叠时将acc视为最后一个元素.
 
--   三要素:
-    -   二元函数  \acc x ->  function 或 \x acc -> function
-    -   初始累加值
-    -   待折叠List
--   工作原理:
-    -   不断从List中取出元素,进行二元函数调用,直至List被取空
-    -   调用参数分别为 新取出元素x 与 之前n次调用后的累加值acc
-    -   返回值作为下次调用的累加值acc
-
--   左折叠函数
-    -   foldl `\acc x ->`
-    -   foldl1: 取List首元素作为初始累加值
+- 三要素:
+  - 二元函数  \acc x ->  function 或 \x acc -> function
+  - 初始累加值
+  - 待折叠List
+- 工作原理:
+  - 不断从List中取出元素,进行二元函数调用,直至List被取空
+  - 调用参数分别为 新取出元素x 与 之前n次调用后的累加值acc
+  - 返回值作为下次调用的累加值acc
+- 左折叠函数
+  - foldl `\acc x ->`
+  - foldl1: 取List首元素作为初始累加值
 
 ```haskell
 foldl :: (Foldable t) => (b -> a -> b) -> b -> t a -> b
@@ -1646,9 +1641,9 @@ sum' :: (Num a) => [a] -> a
 sum' xs = foldl (\acc x -> acc + x) 0 xs
 ```
 
--   右折叠函数
-    -   foldr `\x acc ->`
-    -   foldr1: 取List尾元素作为初始累加值
+- 右折叠函数
+  - foldr `\x acc ->`
+  - foldr1: 取List尾元素作为初始累加值
 
 ```haskell
 foldr :: (Foldable t) => (a -> b -> b) -> b -> t a -> b
@@ -1659,7 +1654,7 @@ map' :: (a -> b) -> [a] -> [b]
 map' f xs = foldr (\x acc -> f x : acc) [] xs
 ```
 
--   更多范例
+- 更多范例
 
 ```haskell
 maximum' :: (Ord a) => [a] -> a
@@ -1681,7 +1676,7 @@ last' :: [a] -> a
 last' = foldl1 (\_ x -> x)
 ```
 
--   scanl/scanr/scanl1/scanr1函数会将每次折叠的结果都记录在一个List中
+- scanl/scanr/scanl1/scanr1函数会将每次折叠的结果都记录在一个List中
 
 ```haskell
 ghci> scanl (+) 0 [3,5,2,1]
@@ -1694,7 +1689,7 @@ ghci> scanl (flip (:)) [] [3,2,1]
 [[],[3],[2,3],[1,2,3]]
 ```
 
--   逆波兰表达式
+- 逆波兰表达式
 
 ```haskell
 import Data.List
@@ -1730,8 +1725,8 @@ flip' f = \x y -> f y x
 
 `($) :: (a -> b) -> a -> b`
 
--   特性: 优先级最低,右结合
--   功能: 改变优先级,相当于在右方添加括号
+- 特性: 优先级最低,右结合
+- 功能: 改变优先级,相当于在右方添加括号
 
 ```haskell
 f (g (z x)) <-> f $ g $ z x
@@ -1743,7 +1738,7 @@ f (g (z x)) <-> f $ g $ z x
 
 `f . g = \x -> f (g x)` - f 的参数类型必须与 g 的返回值类型相同
 
--   功能: 可以去除函数调用括号
+- 功能: 可以去除函数调用括号
 
 ```haskell
 fn x = ceiling (negate (tan (cos (max 50 x))))
@@ -1751,7 +1746,7 @@ fn x = ceiling (negate (tan (cos (max 50 x))))
 -> Curry化: fn = ceiling . negate . tan . cos . max 50
 ```
 
--   Best Practice: 三种不同的函数写法
+- Best Practice: 三种不同的函数写法
 
 ```haskell
 oddSquareSum :: Integer
@@ -1827,20 +1822,20 @@ ghci> [9.4,33.2,96.2,11.2,23.25] !! 1
 
 #### 数学函数
 
--   x `mod` y
--   `even arg`
--   `odd arg`
+- x `mod` y
+- `even arg`
+- `odd arg`
 
 ##### System.Random
 
--   `random :: (RandomGen g, Random a) => g -> (a, g)`
--    getStdGen
--    newStdGen
+- `random :: (RandomGen g, Random a) => g -> (a, g)`
+- getStdGen
+- newStdGen
 
 #### 数字函数
 
--   fromInteger函数  (Num a) => Integer -> a
--   fromIntegral函数 (Integral a, Num b) => a -> b
+- fromInteger函数  (Num a) => Integer -> a
+- fromIntegral函数 (Integral a, Num b) => a -> b
 
 ## 模块
 
@@ -1902,7 +1897,7 @@ rectangleArea :: Float -> Float -> Float
 rectangleArea a b = a * b
 ```
 
--   使用
+- 使用
 
 ```haskell
 import Geometry
@@ -1914,7 +1909,7 @@ import Geometry
 
 建立一个 ``Geometry`` 文件夹(注意*首字母*要大写),新建三个文件
 
--   sphere.hs
+- sphere.hs
 
 ```haskell
 module Geometry.Sphere
@@ -1929,7 +1924,7 @@ area :: Float -> Float
 area radius = 4 * pi * (radius ^ 2)
 ```
 
--   cuboid.hs
+- cuboid.hs
 
 ```haskell
 module Geometry.Cuboid
@@ -1947,7 +1942,7 @@ rectangleArea :: Float -> Float -> Float
 rectangleArea a b = a * b
 ```
 
--   cube.hs
+- cube.hs
 
 ```haskell
 module Geometry.Cube
@@ -1964,7 +1959,7 @@ area :: Float -> Float
 area side = Cuboid.area side side side
 ```
 
--   使用
+- 使用
 
 ```haskell
 import Geometry.Sphere
@@ -1982,11 +1977,9 @@ import qualified Geometry.Cube as Cube
 
 #### Data.List
 
-**intersperse**
-
-**intercalate**
-
-**transpose**
+- intersperse
+- intercalate
+- transpose
 
 ```haskell
 ghci> transpose [[1,2,3],[4,5,6],[7,8,9]]
@@ -2018,7 +2011,7 @@ ghci> concatMap (replicate 4) [1..3]
 [1,1,1,1,2,2,2,2,3,3,3,3]
 ```
 
-**and**
+and
 
 ```haskell
 ghci> and $ map (>4) [5,6,7,8]
@@ -2027,7 +2020,7 @@ ghci> and $ map (==4) [4,4,4,3,4]
 False
 ```
 
-**or**
+or
 
 ```haskell
 ghci> or $ map (==4) [2,3,4,5,6,1]
@@ -2058,7 +2051,7 @@ ghci> take 3 $ iterate (++ "haha") "haha"
 ["haha","hahahaha","hahahahahaha"]
 ```
 
-**splitAt**
+splitAt
 
 ```haskell
 ghci> splitAt 3 "heyman"
@@ -2110,7 +2103,7 @@ ghci> span (/=4) [1,2,3,4,5,6,7]
 ([1,2,3],[4,5,6,7])
 ```
 
-**sort**
+sort
 
 ```haskell
 ghci> sort [8,5,3,2,1,6,4,2]
@@ -2119,7 +2112,7 @@ ghci> sort "This will be sorted soon"
 " Tbdeehiillnooorssstw"
 ```
 
-**group**
+group
 
 ```haskell
 ghci> group [1,1,1,1,2,2,2,2,3,3,2,2,2,5,6,7]
@@ -2175,7 +2168,7 @@ False
 
 **elem** 与 **notElem**
 
-**partition**
+partition
 
 ```haskell
 ghci> partition (`elem` ['A'..'Z']) "BOBsidneyMORGANeddy"
@@ -2183,7 +2176,8 @@ ghci> partition (`elem` ['A'..'Z']) "BOBsidneyMORGANeddy"
 ghci> partition (>3) [1,3,5,6,3,2,1,0,3,7]
 ([5,6,7],[1,3,3,2,1,0,3])
 ```
-**find**
+
+find
 
 ```haskell
 ghci> find (>4) [1,2,3,4,5,6]
@@ -2265,7 +2259,7 @@ ghci> nub "Lots of words and stuff"
 "Lots fwrdanu"
 ```
 
-**delete**
+delete
 
 ```haskell
 ghci> delete 'h' "hey there ghang!"
@@ -2301,7 +2295,7 @@ ghci> [1..7] `intersect` [5..10]
 [5,6,7]
 ```
 
-**insert**
+insert
 
 ```haskell
 ghci> insert 4 [1,2,3,5,6,7]
@@ -2345,26 +2339,26 @@ ghci> sortBy (compare `on` length) xs
 
 #### Data.Char
 
--   **isControl** 判断一个字符是否是控制字符。
--   **isSpace** 判断一个字符是否是空格字符，包括空格，tab，换行符等.
--   **isLower** 判断一个字符是否为小写.
--   **isUper** 判断一个字符是否为大写。
--   **isAlpha** 判断一个字符是否为字母.
--   **isAlphaNum** 判断一个字符是否为字母或数字.
--   **isPrint** 判断一个字符是否是可打印的.
--   **isDigit** 判断一个字符是否为数字.
--   **isOctDigit** 判断一个字符是否为八进制数字.
--   **isHexDigit** 判断一个字符是否为十六进制数字.
--   **isLetter** 判断一个字符是否为字母.
--   **isMark** 判断是否为 unicode 注音字符，你如果是法国人就会经常用到的.
--   **isNumber** 判断一个字符是否为数字.
--   **isPunctuation** 判断一个字符是否为标点符号.
--   **isSymbol**判断一个字符是否为货币符号.
--   **isSeperater** 判断一个字符是否为 unicode 空格或分隔符.
--   **isAscii** 判断一个字符是否在 unicode 字母表的前 128 位。
--   **isLatin1** 判断一个字符是否在 unicode 字母表的前 256 位.
--   **isAsciiUpper** 判断一个字符是否为大写的 ascii 字符.
--   **isAsciiLower** 判断一个字符是否为小写的 ascii 字符.
+- **isControl** 判断一个字符是否是控制字符。
+- **isSpace** 判断一个字符是否是空格字符，包括空格，tab，换行符等.
+- **isLower** 判断一个字符是否为小写.
+- **isUper** 判断一个字符是否为大写。
+- **isAlpha** 判断一个字符是否为字母.
+- **isAlphaNum** 判断一个字符是否为字母或数字.
+- **isPrint** 判断一个字符是否是可打印的.
+- **isDigit** 判断一个字符是否为数字.
+- **isOctDigit** 判断一个字符是否为八进制数字.
+- **isHexDigit** 判断一个字符是否为十六进制数字.
+- **isLetter** 判断一个字符是否为字母.
+- **isMark** 判断是否为 unicode 注音字符，你如果是法国人就会经常用到的.
+- **isNumber** 判断一个字符是否为数字.
+- **isPunctuation** 判断一个字符是否为标点符号.
+- **isSymbol**判断一个字符是否为货币符号.
+- **isSeperater** 判断一个字符是否为 unicode 空格或分隔符.
+- **isAscii** 判断一个字符是否在 unicode 字母表的前 128 位。
+- **isLatin1** 判断一个字符是否在 unicode 字母表的前 256 位.
+- **isAsciiUpper** 判断一个字符是否为大写的 ascii 字符.
+- **isAsciiLower** 判断一个字符是否为小写的 ascii 字符.
 
 ```haskell
 ghci> all isAlphaNum "bobby283"
@@ -2401,10 +2395,10 @@ ghci> map generalCategory " \t\nA9?|"
 [Space,Control,Control,UppercaseLetter,DecimalNumber,OtherPunctuation,MathSymbol]
 ```
 
--   **toUpper** 将一个字符转为大写字母，若该字符不是小写字母，就按原值返回.
--   **toLower** 将一个字符转为小写字母，若该字符不是大写字母，就按原值返回.
--   **toTitle** 将一个字符转为 title-case，对大多数字元而言，title-case 就是大写.
--   **digitToInt** 将一个字符转为 Int 值，而这一字符必须得在 ``'1'..'9','a'..'f'``或``'A'..'F'`` 的范围之内.
+- **toUpper** 将一个字符转为大写字母，若该字符不是小写字母，就按原值返回.
+- **toLower** 将一个字符转为小写字母，若该字符不是大写字母，就按原值返回.
+- **toTitle** 将一个字符转为 title-case，对大多数字元而言，title-case 就是大写.
+- **digitToInt** 将一个字符转为 Int 值，而这一字符必须得在 ``'1'..'9','a'..'f'``或``'A'..'F'`` 的范围之内.
 
 ```haskell
 ghci> map digitToInt "34538"
@@ -2479,7 +2473,7 @@ ghci> Map.empty
 fromList []
 ```
 
-**insert**
+insert
 
 ```haskell
 ghci> Map.insert 5 600 (Map.insert 4 200 ( Map.insert 3 100  Map.empty))
@@ -2493,21 +2487,21 @@ fromList' :: (Ord k) => [(k,v)] -> Map.Map k v
 fromList' = foldr (\(k,v) acc -> Map.insert k v acc) Map.empty
 ```
 
-**null**
+null
 
 ```haskell
 ghci> Map.null Map.empty
 True
 ```
 
-**size**
+size
 
 ```haskell
 ghci> Map.size $ Map.fromList [(2,4),(3,3),(4,2),(5,4),(6,4)]
 5
 ```
 
-**singleton**
+singleton
 
 ```haskell
 ghci> Map.singleton 3 9
@@ -2516,9 +2510,9 @@ ghci> Map.insert 5 9 $ Map.singleton 3 9
 fromList [(3,9),(5,9)]
 ```
 
-**lookup**
+lookup
 
-**member**
+member
 
 ```haskell
 ghci> Map.member 3 $ Map.fromList [(3,6),(4,3),(6,9)]
@@ -2588,7 +2582,7 @@ ghci> Map.fromListWith (+) [(2,3),(2,5),(2,100),(3,29),(3,22),(3,11),(4,22),(4,1
 fromList [(2,108),(3,62),(4,37)]
 ```
 
-**insertWith**
+insertWith
 
 ```haskell
 ghci> Map.insertWith (+) 3 100 $ Map.fromList [(3,4),(5,103),(6,339)]
@@ -2597,13 +2591,13 @@ fromList [(3,104),(5,103),(6,339)]
 
 #### Data.Set
 
-*内部元素排序且唯一*
+内部元素排序且唯一
 
 ```haskell
 import qualified Data.Set as Set
 ```
 
-**fromList**
+fromList
 
 ```haskell
 ghci> let set1 = Set.fromList text1
@@ -2674,7 +2668,7 @@ ghci> Set.map (+1) $ Set.fromList [3,4,5,6,7,2,3,4]
 fromList [3,4,5,6,7,8]
 ```
 
--   删除重复元素
+- 删除重复元素
 
 ```haskell
 ghci> let setNub xs = Set.toList $ Set.fromList xs
@@ -2708,10 +2702,10 @@ main = do
 
 #### return
 
--   return功能:将 pure value 包成 I/O actions,不会终止函数/程序
--   return作用:
-    -   if condition then I/O action else I/O action
-    -   改变`do block形成的I/O action`的结果值:  otherIOaction -> return pureValue
+- return功能:将 pure value 包成 I/O actions,不会终止函数/程序
+- return作用:
+  - if condition then I/O action else I/O action
+  - 改变`do block形成的I/O action`的结果值:  otherIOaction -> return pureValue
 
 > e.g return "haha" - String -> IO String
 
@@ -2732,8 +2726,8 @@ reverseWords = unwords . map reverse . words
 
 > System.Environment
 
--   getArgs: `getArgs :: IO [String]`
--   getProgName: `getProgName :: IO String`
+- getArgs: `getArgs :: IO [String]`
+- getProgName: `getProgName :: IO String`
 
 ```haskell
 import System.Environment
@@ -2790,8 +2784,8 @@ remove [fileName, numberString] = do
 
 ### BtyeString
 
--   `Data.ByteString`
--   `Data.ByteString.Lazy`
+- `Data.ByteString`
+- `Data.ByteString.Lazy`
 
 lazy bytestrings 像装了一堆大小为 64K 的 strict bytestrings 的 list
 
@@ -2800,9 +2794,9 @@ import qualified Data.ByteString.Lazy as B
 import qualified Data.ByteString as S
 ```
 
--   pack/unpack
--   fromChunks/toChunks
--   cons/empty/head/tail/init/null/length/map/reverse/foldl/foldr/concat/takeWhile/filter
+- pack/unpack
+- fromChunks/toChunks
+- cons/empty/head/tail/init/null/length/map/reverse/foldl/foldr/concat/takeWhile/filter
 
 ### 常用输入输出函数
 
@@ -2824,8 +2818,8 @@ print = putStrLn . show
 
 ##### File/System.IO
 
--   `hPutStr`
--   `hPutStrLn`
+- `hPutStr`
+- `hPutStrLn`
 
 ###### writeFile
 
@@ -2863,13 +2857,13 @@ main = do
 
 ###### handle
 
--   `data IOMode = ReadMode | WriteMode | AppendMode | ReadWriteMode`
--   `openFile :: FilePath(String) -> IOMode -> IO Handle`
--   `hGetContents :: Handle -> IO String`
--   `hClose :: Handle -> IO ()`
+- `data IOMode = ReadMode | WriteMode | AppendMode | ReadWriteMode`
+- `openFile :: FilePath(String) -> IOMode -> IO Handle`
+- `hGetContents :: Handle -> IO String`
+- `hClose :: Handle -> IO ()`
 
--   `hGetChar`
--   `hGetLine`
+- `hGetChar`
+- `hGetLine`
 
 ```haskell
 import System.IO
@@ -2979,13 +2973,13 @@ main = do
 
 ##### lines
 
-`lines :: String -> [String] ` - 按换行符将段落切割成句子
+`lines :: String -> [String]` - 按换行符将段落切割成句子
 
 ##### interact
 
--   arguments: String -> String 的函数
--   return: 一个 I/O action
--   function: I/O action 会读取输入，调用提供的函数，然后把函数的结果打印出来
+- arguments: String -> String 的函数
+- return: 一个 I/O action
+- function: I/O action 会读取输入，调用提供的函数，然后把函数的结果打印出来
 
 ```haskell
 main = interact shortLinesOnly
@@ -3161,6 +3155,6 @@ ghci> strMsg "boom!" :: String
 
 ### 符号
 
--   --      单行注释
--   {- -}   块注释
--   {-# #-} (文件头部)编译器参数
+- `--`      单行注释
+- `{- -}`   块注释
+- `{-# #-}` (文件头部)编译器参数
