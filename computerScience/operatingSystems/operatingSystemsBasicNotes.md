@@ -951,8 +951,8 @@ exec() 的主要行为:
 ### 基于软件方法的同步互斥
 
 ```cpp
-int turn;		// 表示谁该进入临界区
-bool flag[];	// 表示进程是否准备好进入临界区
+int turn; // 表示谁该进入临界区
+bool flag[]; // 表示进程是否准备好进入临界区
 ```
 
 ```cpp
@@ -960,10 +960,10 @@ bool flag[];	// 表示进程是否准备好进入临界区
 // Peterson Algorithm
 // 线程 i
 flag[i] = true;
-turn = j;		// 后设置 turn 标志的进程不可进入临界区, 会在 while 循环进行等待
+turn = j; // 后设置 turn 标志的进程不可进入临界区, 会在 while 循环进行等待
 while (flag[j] && turn == j) ;
 
-...		// critical section
+...// critical section
 
 flag[i] = false;
 ```
@@ -975,19 +975,19 @@ turn = 0;
 flag[] = {false};
 
 do {
-	flag[i] = true;
-	while (flag[j] == true) {
-		if (turn != i) {
-			flag[i] = false;
-			while (turn != i) ;
-			flag[i] = true;
-		}
-	}
+  flag[i] = true;
+  while (flag[j] == true) {
+    if (turn != i) {
+      flag[i] = false;
+      while (turn != i) ;
+      flag[i] = true;
+    }
+  }
 
-	// critical section
+  // critical section
 
-	turn = j;
-	flag[i] = false;
+  turn = j;
+  flag[i] = false;
 } while (true);
 ```
 
@@ -999,18 +999,18 @@ do {
 
 ```cpp
 struct lock/semaphore {
-	bool locked/sem = n;	// n: 并发数/可用资源数
-	wait_queue q;
+  bool locked/sem = n; // n: 并发数/可用资源数
+  wait_queue q;
 
-	void acquire/prolaag() {
-		locked/sem--;
-		if (locked/sem < 0) sleep_and_enqueue(this_thread);
-	};
+  void acquire/prolaag() {
+    locked/sem--;
+    if (locked/sem < 0) sleep_and_enqueue(this_thread);
+  };
 
-	void release/verhoog() {
-		locked/sem++;
-		if (locked/sem <= 0) wakeup_and_dequeue(other_thread);
-	};
+  void release/verhoog() {
+    locked/sem++;
+    if (locked/sem <= 0) wakeup_and_dequeue(other_thread);
+  };
 };
 ```
 

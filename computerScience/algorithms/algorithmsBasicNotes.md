@@ -1,70 +1,83 @@
-
-* [Algorithm Basic Notes](#algorithm-basic-notes)
-	* [Sorting Algorithm](#sorting-algorithm)
-	* [Tree Algorithm](#tree-algorithm)
-		* [Binary Search Tree](#binary-search-tree)
-		* [2-3Tree Banlance Tree](#2-3tree-banlance-tree)
-		* [Red-Black BST](#red-black-bst)
-			* [基本性质](#基本性质)
-			* [基本操作](#基本操作)
-		* [B Tree](#b-tree)
-			* [插入/删除](#插入删除)
-		* [Fibonacci Heap](#fibonacci-heap)
-		* [K-Dimensional Tree](#k-dimensional-tree)
-	* [Search Algorithm](#search-algorithm)
-		* [Fisrt Search](#fisrt-search)
-		* [cycle detection](#cycle-detection)
-	* [Dynamic Programming](#dynamic-programming)
-		* [子问题](#子问题)
-		* [范例](#范例)
-	* [Greedy Algorithm](#greedy-algorithm)
-	* [Map Algorithm](#map-algorithm)
-		* [图的表示](#图的表示)
-		* [广度优先遍历](#广度优先遍历)
-			* [ v.color](#-vcolor)
-			* [ v.pi](#-vpi)
-			* [ v.d](#-vd)
-			* [ 利用队列实现广度优先遍历](#-利用队列实现广度优先遍历)
-		* [深度优先遍历](#深度优先遍历)
-			* [v.color](#vcolor)
-			* [v.pi](#vpi)
-			* [v.d/v.f](#vdvf)
-		* [拓扑排序](#拓扑排序)
-			* [Kahn 算法](#kahn-算法)
-			* [DFS(深度优先)](#dfs深度优先)
-		* [单源最短路径](#单源最短路径)
-			* [DAG Shortest Paths](#dag-shortest-paths)
-			* [Bellman-Ford Algorithm](#bellman-ford-algorithm)
-			* [Dijkstra Algorithm](#dijkstra-algorithm)
-		* [结点对最短路径](#结点对最短路径)
-			* [Floyd-Warshall Algorithm](#floyd-warshall-algorithm)
-		* [MaxFLow Problem](#maxflow-problem)
-			* [最大流模型](#最大流模型)
-			* [ 残存网络](#-残存网络)
-			* [ MaxFlow-Mincut Theorem 最大流最小割定理](#-maxflow-mincut-theorem-最大流最小割定理)
-			* [Ford-Fulkerson Algorithm](#ford-fulkerson-algorithm)
-
 # Algorithm Basic Notes
+
+<!-- TOC -->
+
+- [Algorithm Basic Notes](#algorithm-basic-notes)
+  - [Sorting Algorithm](#sorting-algorithm)
+    - [Summary](#summary)
+    - [Selection Sort](#selection-sort)
+    - [Insertion Sort/Shell Sort](#insertion-sortshell-sort)
+    - [Merge Sort](#merge-sort)
+    - [Quick Sort](#quick-sort)
+    - [Heap Sort(Priority Queue)](#heap-sortpriority-queue)
+    - [Radix-Sorts 基数排序(可用于混乱shuffle数组)](#radix-sorts-基数排序可用于混乱shuffle数组)
+  - [Tree Algorithm](#tree-algorithm)
+    - [Binary Search Tree](#binary-search-tree)
+    - [2-3Tree Banlance Tree](#2-3tree-banlance-tree)
+    - [Red-Black BST](#red-black-bst)
+      - [基本性质](#基本性质)
+      - [基本操作](#基本操作)
+    - [B Tree](#b-tree)
+      - [插入/删除](#插入删除)
+    - [Fibonacci Heap](#fibonacci-heap)
+    - [K-Dimensional Tree](#k-dimensional-tree)
+  - [Search Algorithm](#search-algorithm)
+    - [Fisrt Search](#fisrt-search)
+    - [cycle detection](#cycle-detection)
+  - [Dynamic Programming](#dynamic-programming)
+    - [子问题](#子问题)
+    - [范例](#范例)
+  - [Greedy Algorithm](#greedy-algorithm)
+  - [Map Algorithm](#map-algorithm)
+    - [图的表示](#图的表示)
+      - [稀疏矩阵](#稀疏矩阵)
+    - [广度优先遍历](#广度优先遍历)
+      - [v.color](#vcolor)
+      - [v.pi](#vpi)
+      - [v.d](#vd)
+      - [利用队列实现广度优先遍历](#利用队列实现广度优先遍历)
+    - [深度优先遍历](#深度优先遍历)
+      - [`v.color`](#vcolor)
+      - [`v.pi`](#vpi)
+      - [v.d/v.f](#vdvf)
+    - [拓扑排序](#拓扑排序)
+      - [Kahn 算法](#kahn-算法)
+      - [DFS(深度优先)](#dfs深度优先)
+    - [单源最短路径](#单源最短路径)
+      - [DAG Shortest Paths](#dag-shortest-paths)
+      - [Bellman-Ford Algorithm](#bellman-ford-algorithm)
+      - [Dijkstra Algorithm](#dijkstra-algorithm)
+    - [结点对最短路径](#结点对最短路径)
+      - [Floyd-Warshall Algorithm](#floyd-warshall-algorithm)
+    - [MaxFLow Problem](#maxflow-problem)
+      - [最大流模型](#最大流模型)
+      - [残存网络](#残存网络)
+      - [MaxFlow-Mincut Theorem 最大流最小割定理](#maxflow-mincut-theorem-最大流最小割定理)
+      - [Ford-Fulkerson Algorithm](#ford-fulkerson-algorithm)
+  - [Tree Edit Distance](#tree-edit-distance)
+    - [Defination](#defination)
+
+<!-- /TOC -->
 
 ## Sorting Algorithm
 
 ### Summary
 
-*   强制稳定: 增加(唯一)时间戳, 修改 CompareTo 接口定义 => 当主元素相同时, 时间戳小的元素更小
+- 强制稳定: 增加(唯一)时间戳, 修改 CompareTo 接口定义 => 当主元素相同时, 时间戳小的元素更小
 
 ### Selection Sort
 
-*   swap: O(n)
-*   compare: O(n^2)
+- swap: O(n)
+- compare: O(n^2)
 
 ### Insertion Sort/Shell Sort
 
-*   swap: O(n^2/4)
-*   compare: O(n^2/4)
+- swap: O(n^2/4)
+- compare: O(n^2/4)
 
 ### Merge Sort
 
-*   利用 Merge Sort 计算逆序对个数: left[i] > right[j] => inversions += (mid - i + 1), 即所有 i~mid 元素都与 j 元素为逆序对
+- 利用 Merge Sort 计算逆序对个数: left[i] > right[j] => inversions += (mid - i + 1), 即所有 i~mid 元素都与 j 元素为逆序对
 
 ```java
     // merge and count
@@ -141,9 +154,9 @@
 
 ### Quick Sort
 
-*   partition: 哨兵(最后再将其归位) + 大循环 + 2 小循环, 交换元素法
-*   partition: 辅助数组 brr, 3 循环(3 次扫描 arr) 分别将小/等/大于 guard 的数加入 brr
-*   partition: 哨兵(最后再将其归位) + lo + hi, 外加 2 个动指针 leftlimit 与 rightlimit, 表示小于区的上界和大于区的上界
+- partition: 哨兵(最后再将其归位) + 大循环 + 2 小循环, 交换元素法
+- partition: 辅助数组 brr, 3 循环(3 次扫描 arr) 分别将小/等/大于 guard 的数加入 brr
+- partition: 哨兵(最后再将其归位) + lo + hi, 外加 2 个动指针 leftlimit 与 rightlimit, 表示小于区的上界和大于区的上界
 
 ```cpp
 // lt eq gt three parts
@@ -166,8 +179,8 @@ void quick3waySort(int *a, int lo, int hi) {
 
 ### Heap Sort(Priority Queue)
 
-*   swap: 2NlgN + 2N  (2NlgN for sink N times, 2N for construct MaxHeap)
-*   compare: NlgN + N (NlgN for sink N times, N for construct MaxHeap)
+- swap: 2NlgN + 2N  (2NlgN for sink N times, 2N for construct MaxHeap)
+- compare: NlgN + N (NlgN for sink N times, N for construct MaxHeap)
 
 ```cpp
 // MaxPQ
@@ -189,10 +202,10 @@ void sink(int k) {
 }
 ```
 
-### Radix-Sorts 基数排序(可用于混乱shuffle数组):
+### Radix-Sorts 基数排序(可用于混乱shuffle数组)
 
-*   从个位到高位放入桶
-*   从高位到个位放入桶
+- 从个位到高位放入桶
+- 从高位到个位放入桶
 
 > Sorting Algorithms Performance
 
@@ -206,15 +219,16 @@ Hibbard Deletion
 
 ### 2-3Tree Banlance Tree
 
-1. 插入:
-    * 1+1=2node -> 3node
-    * **1+2=3node -> 4node** -> 2node
-    * 将 4node 结点中间元素移至父结点, 其余2元素分离为子 2node 节点
+插入:
+
+- 1+1=2node -> 3node
+- **1+2=3node -> 4node** -> 2node
+- 将 4node 结点中间元素移至父结点, 其余2元素分离为子 2node 节点
 
 ### Red-Black BST
 
-*   基于2-3Tree, 将3node用红色标记
-*   关键: 将红色标记向上传递至根部
+- 基于2-3Tree, 将3node用红色标记
+- 关键: 将红色标记向上传递至根部
 
 ```java
     // is node x red; false if x is null ?
@@ -487,12 +501,12 @@ t: 每个内部结点至少 t 个孩子(t-1 个 key), 至多 2t 个孩子(2t-1 �
 
 BST + 循环双向链表:
 
-* 一个根树(根结点)循环双向链表
-* n 个孩子循环双向链表: 每个根树的每层结点形成一个循环双向链表
+- 一个根树(根结点)循环双向链表
+- n 个孩子循环双向链表: 每个根树的每层结点形成一个循环双向链表
 
 ### K-Dimensional Tree
 
-* 分隔空间数据
+- 分隔空间数据
 
 e.g 左子树：左下方   右子树：右上方
 
@@ -500,16 +514,16 @@ e.g 左子树：左下方   右子树：右上方
 
 ### Fisrt Search
 
-* DFS(深度优先)：栈实现
-* BFS(广度优先)：队列实现
+- DFS(深度优先)：栈实现
+- BFS(广度优先)：队列实现
 
 ![Search Algorithm Performance](img/SearchPerformance.jpg)
 
 ### cycle detection
 
-* 许多图论算法不适用于存在环路的复杂图,故使用循环检测剔除意外情况
+- 许多图论算法不适用于存在环路的复杂图,故使用循环检测剔除意外情况
 
-**处理方法：可将环路元素(如强联通分支)视作单一元素，忽视其内部结构**
+处理方法：可将环路元素(如强联通分支)视作单一元素，忽视其内部结构
 
 ```java
 a = b+1;b = c+1;c = a+1;
@@ -518,36 +532,36 @@ a = b+1;b = c+1;c = a+1;
 
 ## Dynamic Programming
 
-* 最优解结构特征: 一个选择 + 子问题的最优解 - 所有(可**重复求解**)子问题的最优解可**独立求解**(不互相影响)
-* 递归定义最优解: 列出递归表达式
-* 自底向上求解最优解
-* 构造最优解(额外信息数组)
+- 最优解结构特征: 一个选择 + 子问题的最优解 - 所有(可**重复求解**)子问题的最优解可**独立求解**(不互相影响)
+- 递归定义最优解: 列出递归表达式
+- 自底向上求解最优解
+- 构造最优解(额外信息数组)
 
 ### 子问题
 
-* 子问题可映射为有向图, 并对其进行拓扑排序: 共有 O(n) 个子问题, 每个子问题最多 O(n) 种选择, 则算法时间复杂度为 O(n^2).其对应子问题图有 n 个顶点, 每个顶点最多有 n-1 条边.
-* 递归生成可以重复求解的子问题,而不是不断生成新的子问题
+- 子问题可映射为有向图, 并对其进行拓扑排序: 共有 O(n) 个子问题, 每个子问题最多 O(n) 种选择, 则算法时间复杂度为 O(n^2).其对应子问题图有 n 个顶点, 每个顶点最多有 n-1 条边.
+- 递归生成可以重复求解的子问题,而不是不断生成新的子问题
 
 ### 范例
 
-* 切割钢条问题: max{p[i], r[n-i]}
-* 矩阵相乘链问题
-* 最大公共子序列问题: r[i, j] = max{r[i, j-1], r[i-1, j]}
-* 无权最短路径: path[i, j] = min{path[i, r], [r, j]}
+- 切割钢条问题: max{p[i], r[n-i]}
+- 矩阵相乘链问题
+- 最大公共子序列问题: r[i, j] = max{r[i, j-1], r[i-1, j]}
+- 无权最短路径: path[i, j] = min{path[i, r], [r, j]}
 
 ## Greedy Algorithm
 
-* 最优解结构特征: 一个选择 + 子问题的最优解 - 所有(可**重复求解**)子问题的最优解可**独立求解**(不互相影响)
-* 递归定义最优解: 列出递归表达式
-* 自底向上求解最优解: 每次不进行多次选择, 只进行一次 **贪心选择**
-* 构造最优解(额外信息数组)
+- 最优解结构特征: 一个选择 + 子问题的最优解 - 所有(可**重复求解**)子问题的最优解可**独立求解**(不互相影响)
+- 递归定义最优解: 列出递归表达式
+- 自底向上求解最优解: 每次不进行多次选择, 只进行一次 **贪心选择**
+- 构造最优解(额外信息数组)
 
 ## Map Algorithm
 
 ### 图的表示
 
-* 邻接链表法
-* 邻接矩阵法
+- 邻接链表法
+- 邻接矩阵法
 
 #### 稀疏矩阵
 
@@ -559,9 +573,9 @@ unordered_map< int, unordered_map<int, int> > // => (row, (col, val))
 
 #### v.color
 
-* white: 未被发现/访问
-* gray: 已被发现(进入队列), 邻接结点未全部发现
-* black: 已被发现, 邻接结点全部发现
+- white: 未被发现/访问
+- gray: 已被发现(进入队列), 邻接结点未全部发现
+- black: 已被发现, 邻接结点全部发现
 
 #### v.pi
 
@@ -579,16 +593,16 @@ unordered_map< int, unordered_map<int, int> > // => (row, (col, val))
 
 #### `v.color`
 
-* white: 未被发现/访问
-* gray: 已被发现, 未二次访问
-* black: 已被发现, 二次访问(比其深的所有结点皆被发现)
+- white: 未被发现/访问
+- gray: 已被发现, 未二次访问
+- black: 已被发现, 二次访问(比其深的所有结点皆被发现)
 
 当第一个访问 edge(u,v) 时:
 
-* v.color == white: 树边
-* v.color == gray : 后向边(v 为 深度优先**森林** 的祖父结点)
-* v.color == black: 前向边/横向边(v 为较深的结点/子结点)
-* 无向图深度优先遍历不会出现 前向边/横向边
+- v.color == white: 树边
+- v.color == gray : 后向边(v 为 深度优先**森林*- 的祖父结点)
+- v.color == black: 前向边/横向边(v 为较深的结点/子结点)
+- 无向图深度优先遍历不会出现 前向边/横向边
 
 #### `v.pi`
 
@@ -596,9 +610,9 @@ unordered_map< int, unordered_map<int, int> > // => (row, (col, val))
 
 #### v.d/v.f
 
-* v.d = ++time: 被发现的时间戳(入栈)
-* v.f = ++time: 被二次访问的时间戳(出栈)
-* time`<`v.d, white; v.d`<`time`<`v.f, gray: time`>`v.f, black
+- v.d = ++time: 被发现的时间戳(入栈)
+- v.f = ++time: 被二次访问的时间戳(出栈)
+- time`<`v.d, white; v.d`<`time`<`v.f, gray: time`>`v.f, black
 
 ### 拓扑排序
 
@@ -637,9 +651,9 @@ void Relax(int u, int v, int w) {
 
 贪心算法: 每次选取不属于 S 集合(white) 且 v.d 最小(gray)的结点, 对其所有邻接边进行 relax, 并将其加入 S 集合(black)
 
-* white: 不属于 S 集合
-* gray: 不属于 S 集合 且 v.d 最小
-* black: 属于 S 集合
+- white: 不属于 S 集合
+- gray: 不属于 S 集合 且 v.d 最小
+- black: 属于 S 集合
 
 ### 结点对最短路径
 
@@ -683,33 +697,33 @@ Matrix floyd_warshall(Matrix W) {
 
 最大流模型必须满足以下条件:
 
-* 无双向边
-* 唯一的源点 s 和 唯一的汇点 t
+- 无双向边
+- 唯一的源点 s 和 唯一的汇点 t
 
 对于不符合该模型的问题可进行简单转化:
 
-* 双向边: 添加额外结点, 切割双向边的其中一条, 使得双向边变成 3 条单向边
+- 双向边: 添加额外结点, 切割双向边的其中一条, 使得双向边变成 3 条单向边
 
 > a --> b, b --> a: a --> c, c --> b, b --> a
 
-* 多源点/汇点: 添加一个总源点/汇点
+- 多源点/汇点: 添加一个总源点/汇点
 
 #### 残存网络
 
-* 若原图 u --> v 总容量 > 0, 则残存网络中 边 u --> v:剩余容量, 边 v --> u: 已用容量
-* 增广路径: 残存网络中一条可行通路
+- 若原图 u --> v 总容量 > 0, 则残存网络中 边 u --> v:剩余容量, 边 v --> u: 已用容量
+- 增广路径: 残存网络中一条可行通路
 
 #### MaxFlow-Mincut Theorem 最大流最小割定理
 
-* 切割的净流量: 流出-流入
-* 切割的容量: 流出总容量(无需减流入总容量)
-* 最小切割: 容量最小的切割
+- 切割的净流量: 流出-流入
+- 切割的容量: 流出总容量(无需减流入总容量)
+- 最小切割: 容量最小的切割
 
 最大流最小割定理: 以下三个命题等价
 
-* f 是 G 的一个最大流
-* 残存网络 Gf 不含增广路径
-* |f| = c(S, T)(切割的容量): |f| <= c(S, T)(流网络中任意流 f <= 任意切割容量 c(S, T))
+- f 是 G 的一个最大流
+- 残存网络 Gf 不含增广路径
+- |f| = c(S, T)(切割的容量): |f| <= c(S, T)(流网络中任意流 f <= 任意切割容量 c(S, T))
 
 #### Ford-Fulkerson Algorithm
 
