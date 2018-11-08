@@ -67,7 +67,7 @@
 
 按照皮亚诺公理可得自然数集合表示为 `{0, S(0), S(S(0)), ...}`, 于是得到如下定义:
 
-```sml
+```haskell
 S ≡ λn.λf.λx.f (n f x)
 
 0 ≡ λf.λx.x
@@ -79,7 +79,7 @@ S ≡ λn.λf.λx.f (n f x)
 
 对后继函数S和丘奇数的简单验证如下：
 
-```sml
+```haskell
 S 0
 ≡ (λn.λf.λx.f (n f x)) λf.λx.x
 = (λn.λg.λy.g (n g y)) λf.λx.x    // alpha
@@ -116,7 +116,7 @@ tagged union, every constructor name as tag, fields for different constructors c
 
 type constructor: datatype bindings with variables
 
-```sml
+```haskell
 datatype 'a mylist = EMPTY | CONS of 'a * 'a mylist
 mylist isn't a type, int list is a type
 ```
@@ -130,7 +130,7 @@ mylist isn't a type, int list is a type
 - null/isSome check tag part（variant）
 - hd/tl/valOf check data part (extract data)
 
-```sml
+```haskell
 case e of
       p1 => e1
     | pn => en
@@ -156,19 +156,19 @@ recursive defination for Tail Position:
 - if E isn't in tail position, then sub expressions of E aren't in tail position
 - if E is in tail position, then some sub expressions of E are in tail position
 
-```sml
+```haskell
 if eb then e1 else e2
 ```
 
 is in tail position, then e1 and e2 are in tail position, not eb
 
-```sml
+```haskell
 f (x, e)
 ```
 
 is in tail position, then f is in tail position(tail call), not x and e
 
-```sml
+```haskell
 fun factorial n =
     let
         fun aux(n, acc) =
@@ -191,7 +191,7 @@ fun factorial n =
 
 ### samples
 
-```sml
+```haskell
 syntax: if e1 then e2 else e3
 type: e1 = bool,  e2 = e3 = any
 evaluation: e1 ? e2 : e3
@@ -201,7 +201,7 @@ evaluation: e1 ? e2 : e3
 
 ### functions
 
-```sml
+```haskell
 syntax: fun name (arg1: type1, .., argn: typen) = body
 type: name = type1 * ... * typen -> body_type
 lazy evaluation
@@ -209,7 +209,7 @@ lazy evaluation
 
 ### tuples
 
-```sml
+```haskell
 (* tuples *)
 syntax: e = (e1, ..., en)
 type: e1 * ... * en (can become fun's arguments list)
@@ -218,7 +218,7 @@ evaluation: #1 e, #2 e, ..., #n e
 
 ### lists
 
-```sml
+```haskell
 (* lists *)
 syntax: l = [e1, ..., en]
 type: [] = elem_type list; hd(head) l = elem_type, tl(tail) x = elem_type list
@@ -229,7 +229,7 @@ evaluation: cons = e :: l; null [] = false;
 
 ### let expressions
 
-```sml
+```haskell
 syntax: let
             b1 b2 ... bn
         in
@@ -262,7 +262,7 @@ evaluation: whole let result = body_result
 
 #### compose and pipeline
 
-```sml
+```haskell
 fun sqrt_of_abs = Math.sqrt o Real.fromInt o abs
 
 infix !>
@@ -273,7 +273,7 @@ fun sqrt_of_abs i = i !> abs !> Real.fromInt !> Math.sqrt
 
 #### curry and uncurry
 
-```sml
+```haskell
 fun carry f x y = f (x, y)
 fun uncarry f (x, y) = f x y
 
