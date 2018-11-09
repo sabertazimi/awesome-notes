@@ -70,6 +70,7 @@
     - [make](#make)
     - [内置补全](#内置补全)
     - [git](#git)
+  - [Documentation](#documentation)
   - [VSCode Vim](#vscode-vim)
 
 <!-- /TOC -->
@@ -896,6 +897,15 @@ command! MakeTags !ctags -R .
 - Gdiff
 - Gcommit/Gstatus
 - Gpull/Gpush
+
+## Documentation
+
+`:help`:
+
+- `:help ^n`: `<C-n>` docs in normal mode
+- `:help i_^n`: `<C-n>` docs in insert mode
+- `:help c_^n`: `<C-n>` docs in commandline mode
+- `:helpgrep command`: search docs includes `command`
 
 ## VSCode Vim
 
