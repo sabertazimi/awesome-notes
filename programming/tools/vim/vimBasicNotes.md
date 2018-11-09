@@ -70,6 +70,7 @@
     - [make](#make)
     - [内置补全](#内置补全)
     - [git](#git)
+  - [VSCode Vim](#vscode-vim)
 
 <!-- /TOC -->
 
@@ -792,7 +793,7 @@ autocmd VimEnter * :Vexplore
 augroup END
 
 " ctags setup
-" command! MakeTags !ctags -R -f ./.git/tags .
+command! MakeTags !ctags -R .
 
 " colorschemes config
 colorscheme Monokai
@@ -895,3 +896,7 @@ command! MakeTags !ctags -R .
 - Gdiff
 - Gcommit/Gstatus
 - Gpull/Gpush
+
+## VSCode Vim
+
+- `gd`: go to defination
