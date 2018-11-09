@@ -55,6 +55,7 @@
       - [替换域中的特殊字符](#替换域中的特殊字符)
     - [global](#global)
   - [文件与缓冲区](#文件与缓冲区)
+    - [File Search](#file-search)
     - [缓冲区](#缓冲区)
     - [保存文件](#保存文件)
     - [窗口](#窗口)
@@ -609,6 +610,29 @@ q/ 或 q: 弹出历史记录窗口
 
 ## 文件与缓冲区
 
+### File Search
+
+built-in fuzzy file search `:find` or `:tabnew`
+
+```vim
+set nocompatible
+set number
+
+syntax on
+filetype plugin indent on
+
+" :find filepath
+" :tabnew filepath
+" :tabp :tabn
+" :b partOfFilepath
+" :ls
+set path+=**
+set wildmenu
+set wildmode=list:longest,full
+```
+
+`:ls` to list opened file, `:b` to jump to specific file
+
 ### 缓冲区
 
 |命令|作用|
@@ -720,6 +744,7 @@ git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
 
 ### airline/CtrlP/colorschemes
 
+- built-in fuzzy file search `:find`
 - need config
 - :AirlineTheme {theme}
 - :colorscheme {theme}
@@ -799,6 +824,13 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extr
 ```
 
 ### ctags
+
+```vim
+" ^] jump
+" g^] for ambiguous tags
+" ^t jump back
+command! MakeTags !ctags -R .
+```
 
 |命令|作用|
 |:-------------:|:-------------------------------:|
