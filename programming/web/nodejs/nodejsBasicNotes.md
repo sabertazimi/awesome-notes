@@ -10,9 +10,9 @@
     - [Publish Steps](#publish-steps)
       - [Semantic Version(Semver)](#semantic-versionsemver)
     - [Tab Completion](#tab-completion)
-  - [npm](#npm)
     - [Basic Command](#basic-command)
     - [Link Command](#link-command)
+    - [npx](#npx)
   - [Basic Node Modules](#basic-node-modules)
     - [Process Module](#process-module)
       - [Process Properties](#process-properties)
@@ -184,8 +184,6 @@ npm completion >> ~/.bashrc (or ~/.zshrc)
 source ~/.zshrc
 ```
 
-## npm
-
 ### Basic Command
 
 ```bash
@@ -200,6 +198,21 @@ npm outdated
 npm link
 # in local A package, set `B` link in package.json to local B binary
 npm link B
+```
+
+### npx
+
+run local node_modules
+
+```bash
+npm install eslint -D
+npx eslint .
+```
+
+run global package (not installed)
+
+```bash
+npx create-react-app react-app
 ```
 
 ## Basic Node Modules
