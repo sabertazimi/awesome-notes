@@ -1,4 +1,3 @@
-
 # Nodejs Basic Notes
 
 <!-- TOC -->
@@ -213,6 +212,25 @@ run global package (not installed)
 
 ```bash
 npx create-react-app react-app
+```
+
+run specific version
+
+```bash
+npx -p package1@next -p package2@next -c "command"
+```
+
+run scripts with different node version
+
+```bash
+npx -p node@version -- node index.js
+```
+
+run remote repo/gist code
+
+```bash
+npx user/repo#branch
+npx gistUrl
 ```
 
 ## Basic Node Modules
