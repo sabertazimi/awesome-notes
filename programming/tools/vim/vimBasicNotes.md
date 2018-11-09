@@ -71,7 +71,6 @@
     - [内置补全](#内置补全)
     - [git](#git)
   - [Documentation](#documentation)
-  - [VSCode Vim](#vscode-vim)
 
 <!-- /TOC -->
 
@@ -270,6 +269,8 @@
 |b|反向移动到当前单词/上一单词的开头|
 |e|正向移动到当前单词/下一单词的结尾|
 |ge|反向移动到上一单词的结尾|
+|gd|jump to defination|
+|gi|jump to last insert position|
 
 ##### 标记
 
@@ -906,7 +907,3 @@ command! MakeTags !ctags -R .
 - `:help i_^n`: `<C-n>` docs in insert mode
 - `:help c_^n`: `<C-n>` docs in commandline mode
 - `:helpgrep command`: search docs includes `command`
-
-## VSCode Vim
-
-- `gd`: go to defination
