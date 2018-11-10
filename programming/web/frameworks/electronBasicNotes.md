@@ -1,0 +1,85 @@
+# Electron Basic Notes
+
+<!-- TOC -->
+
+- [Electron Basic Notes](#electron-basic-notes)
+  - [Getting Started](#getting-started)
+  - [Basic Concepts](#basic-concepts)
+    - [Process](#process)
+    - [Shared Data](#shared-data)
+  - [Process Communication](#process-communication)
+    - [Main to Render](#main-to-render)
+    - [Render to Main](#render-to-main)
+    - [Render to Render](#render-to-render)
+
+<!-- /TOC -->
+
+## Getting Started
+
+- [Electron Forge](https://electronforge.io)
+- [Boilerplate](https://github.com/electron-react-boilerplate)
+
+```bash
+npm install -g electron-forge
+electron-forge init my-new-project --template=react
+cd my-new-project
+electron-forge start
+```
+
+## Basic Concepts
+
+### Process
+
+主进程通过实例化BrowserWindow，每个BrowserWindow实例都在它自己的渲染进程内返回一个web页面。
+当BrowserWindow实例销毁时，相应的渲染进程也会终止。
+
+主进程负责掌管所有的web页面和它们相应的渲染进程。
+每个渲染进程都是相互独立的，它们只关心自己所运行的web页面。
+
+在页面（渲染进程）中不允许调用原生GUI相关的API，那是因为在网页（渲染进程）中中掌管原生GUI很危险，易造成内存泄露。
+如果想在网页中进行GUI的操作，渲染进程必须向主进程传达请求，然后在主进程中完成操作。
+
+在Electron中，有几种连接主进程和渲染进程的方法，例如用于传送消息的ipcRenderer和ipcMain模块，以及用于RPC的remote模块。
+
+### Shared Data
+
+- [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Storage)
+- [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
+- Electron IPC
+
+```js
+// main process
+global.sharedObject = {
+  someProperty: 'default value'
+};
+
+// render process 1
+require('remote').getGlobal('sharedObject').someProperty = 'new value';
+
+// render process 2
+console.log(require('remote').getGlobal('sharedObject').someProperty);
+```
+
+## Process Communication
+
+### Main to Render
+
+- webContents.executeJavaScript
+- ipcRenderer
+- ipcMain
+
+### Render to Main
+
+- remote module
+
+```js
+const {BrowserWindow} = require('electron').remote;
+let win = new BrowserWindow({width: 800, height: 600});
+win.loadURL('https://github.com');
+```
+
+### Render to Render
+
+- Web Storage API
+- IndexedDB
+- Electron IPC e.g remote.getGlobal
