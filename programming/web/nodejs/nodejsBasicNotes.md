@@ -59,6 +59,7 @@
     - [bin](#bin)
     - [version](#version)
   - [Awesome Package](#awesome-package)
+    - [CLI Tools](#cli-tools)
     - [Http](#http)
     - [File](#file)
     - [Stream](#stream)
@@ -785,6 +786,14 @@ npm version patch
 - Bunyan     Logging
 - Tape       Testing
 - Cuid       Better than GUID/UUID for web applications
+
+### CLI Tools
+
+- [commander](https://github.com/tj/commander.js)
+- [ora spinner](https://github.com/sindresorhus/ora)
+- [enquirer](https://github.com/enquirer/enquirer)
+- [chalk](https://github.com/chalk/chalk)
+- [open CLI framework](https://github.com/oclif/oclif)
 
 ### Http
 
