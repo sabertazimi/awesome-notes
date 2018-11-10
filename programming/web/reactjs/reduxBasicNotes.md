@@ -20,7 +20,7 @@
     - [Libs](#libs)
       - [Data Types](#data-types)
       - [Network](#network)
-      - [Middleware](#middleware-1)
+      - [Middleware Tool](#middleware-tool)
       - [State Tool](#state-tool)
     - [Debugging](#debugging)
 
@@ -298,7 +298,7 @@ const fluxStandardAction = {
 - node-fetch
 - isomorphic-fetch
 
-#### Middleware
+#### Middleware Tool
 
 - redux-thunk
 - [redux-sage](https://github.com/yelouafi/redux-saga)
