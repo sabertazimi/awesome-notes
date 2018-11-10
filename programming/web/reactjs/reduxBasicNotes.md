@@ -9,12 +9,19 @@
       - [State](#state)
         - [Persisted State](#persisted-state)
     - [Reducers](#reducers)
-  - [Best Practice](#best-practice)
+    - [map to props](#map-to-props)
+  - [Middleware](#middleware)
+    - [Middleware Basic Concepts](#middleware-basic-concepts)
+    - [Middleware Simple Implementation](#middleware-simple-implementation)
+    - [Scheduler Middleware](#scheduler-middleware)
+    - [redux-thunk Middleware](#redux-thunk-middleware)
+  - [Redux Best Practice](#redux-best-practice)
   - [Awesome Tools](#awesome-tools)
     - [Libs](#libs)
-      - [http](#http)
-      - [middleware](#middleware)
-      - [state](#state)
+      - [Data Types](#data-types)
+      - [Network](#network)
+      - [Middleware](#middleware-1)
+      - [State Tool](#state-tool)
     - [Debugging](#debugging)
 
 <!-- /TOC -->
@@ -60,9 +67,164 @@ const appStore.subscribe(throttle(() => {
 
 ### Reducers
 
-- 必须保持无任何副作用: 不修改传入参数, 不调用副作用函数(api/date.now()/math.random())
+必须保持无任何副作用: 不修改传入参数, 不调用副作用函数
+`(api/date.now()/math.random())`
 
-## Best Practice
+### map to props
+
+dump components implementation
+
+``` js
+// app.js
+React.render(
+  <Provider store={store}>
+    {() => <MyRootComponent />}
+  </Provider>,
+  rootEl
+);
+
+// dump conponent
+import { Component } from 'react';
+
+export default class Counter extends Component {
+  render() {
+    return (
+      <button onClick={this.props.onIncrement}>
+        {this.props.value}
+      </button>
+    );
+  }
+}
+```
+
+``` js
+import { Component } from 'react';
+import { connect } from 'react-redux';
+
+import Counter from '../components/Counter';
+import { increment } from '../actionsCreators';
+
+// Which part of the Redux global state does our component want to receive as props?
+function mapStateToProps(state) {
+  return {
+    value: state.counter
+  };
+}
+
+// Which action creators does it want to receive by props?
+function mapDispatchToProps(dispatch) {
+  return {
+    onIncrement: () => dispatch(increment())
+  };
+}
+
+export default connect(   // Line 20
+  mapStateToProps,
+  mapDispatchToProps
+)(Counter);
+```
+
+## Middleware
+
+### Middleware Basic Concepts
+
+每一个 Middleware 可以得到:
+
+1. 最初的 store 对象 (dispatch 属性还是原来的)，
+  因此，可以通过 store.getState 获得最近的状态，
+  以及通过原本的 dispatch 对象直接发布 action 对象，
+  跳过其他 Middleware dispatch 方法（next）。
+  上面 vanillaPromise 演示了这样的用法。
+2. next 方法: 前一个Middleware 返回的 dispatch 方法。
+  当前 Middleware 可以根据自己对 action 的判断和处理结果，
+  决定是否调用 next 方法，以及传入什么样的参数。
+
+### Middleware Simple Implementation
+
+``` js
+function applyMiddleware(store, middlewares) {
+  middlewares = middlewares.slice();
+  middlewares.reverse();
+
+  let next = store.dispatch;
+  middlewares.forEach(middleware =>
+    next = middleware(store)(next)
+  );
+
+  return Object.assign({}, store, { dispatch: next });
+}
+```
+
+``` js
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+
+// applyMiddleware takes createStore() and returns
+// a function with a compatible API.
+let createStoreWithMiddleware = applyMiddleware(
+  logger,
+  crashReporter
+)(createStore);
+
+// Use it like you would use createStore()let todoApp = combineReducers(reducers);
+let store = createStoreWithMiddleware(todoApp);
+```
+
+### Scheduler Middleware
+
+``` js
+/**
+ * Schedules actions with { meta: { delay: N } } to be delayed by N milliseconds.
+ * Makes `dispatch` return a function to cancel the interval in this case.
+ */
+const timeoutScheduler = store => next => action => {
+  if (!action.meta || !action.meta.delay) {
+    return next(action);
+  }
+
+  let intervalId = setTimeout(
+    () => next(action),
+    action.meta.delay
+  );
+
+  return function cancel() {
+    clearInterval(intervalId);
+  };
+};
+```
+
+### redux-thunk Middleware
+
+``` js
+// thunk middleware
+const thunk = store => next => action =>
+  typeof action === 'function' ?
+    action(store.dispatch, store.getState) :
+    next(action);
+
+const createStoreWithMiddleware = applyMiddleware(
+  logger，
+  thunk
+  timeoutScheduler
+)(createStore);
+const store = createStoreWithMiddleware(combineReducers(reducers));
+
+function addFave(tweetId) {
+  return (dispatch, getState) => {
+    if (getState.tweets[tweetId] && getState.tweets[tweetId].faved)
+        return;
+
+    dispatch({type: IS_LOADING});
+    // Yay, that could be sync or async dispatching
+    remote.addFave(tweetId).then(
+      (res) => { dispatch({type: ADD_FAVE_SUCCEED}) },
+      (err) => { dispatch({type: ADD_FAVE_FAILED, err: err}) },
+  };
+}
+
+store.dispatch(addFave());
+```
+
+## Redux Best Practice
 
 - 用ES6, webpack, react-hot-loader....详细内容参照MERN v2.0
   Build production ready universal apps easily
@@ -127,20 +289,26 @@ const fluxStandardAction = {
 
 ### Libs
 
-#### http
+#### Data Types
 
+- immutable.js: decrease useless copy and memory occupation
+
+#### Network
+
+- node-fetch
 - isomorphic-fetch
 
-#### middleware
+#### Middleware
 
 - redux-thunk
-- redux-saga
-- redux-promise
-- redux-diff-logger
+- [redux-sage](https://github.com/yelouafi/redux-saga)
+- [redux-promise](https://github.com/acdlite/redux-promise)
+- [redux-diff-loger](https://github.com/fcomb/redux-diff-logger)
 
-#### state
+#### State Tool
 
 - redux-undo
+- reselect: memorize state transformation
 
 ### Debugging
 
