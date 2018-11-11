@@ -8,6 +8,7 @@
       - [font-size](#font-size)
       - [spacing](#spacing)
       - [vertical rhythms](#vertical-rhythms)
+    - [Table](#table)
   - [Grid System](#grid-system)
   - [Performance](#performance)
     - [CSS Triggers](#css-triggers)
@@ -30,6 +31,8 @@
 - Colors (theming)
 
 > refer to: font-family, font-size, spacing, color
+
+[reference](https://noti.st/rar/mz1rIY/golden-rules-of-typography-on-the-web)
 
 ### font-size and spacing
 
@@ -63,6 +66,13 @@ consistent (and relative) to each other:
 
 - Set the vertical white space between elements to a multiple of base-size
 - Set the line-height of all text elements to a multiple of base-size
+
+### Table
+
+- remove fills, gridlines, border and bolding
+- left-align text, right-align numbers
+  and align headings with data
+- put white space to work to group and separate
 
 ## Grid System
 
