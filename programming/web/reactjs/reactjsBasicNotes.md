@@ -36,6 +36,11 @@
     - [Context API](#context-api)
     - [Error Boundary](#error-boundary)
     - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
+  - [Server Side Rendering](#server-side-rendering)
+    - [Pros of SSR](#pros-of-ssr)
+      - [Performance](#performance)
+      - [SEO](#seo)
+    - [Basic Example](#basic-example)
   - [Components/Plugins](#componentsplugins)
     - [Documents](#documents)
     - [Data](#data)
@@ -583,6 +588,105 @@ class Frameworks extends React.Component {
     )
   }
 }
+```
+
+## Server Side Rendering
+
+Application code is written in a way that
+it can be executed **both on the server and on the client**.
+The browser displays the initial HTML (fetch from server),
+simultaneously downloads the single-page app (SPA) in the background.
+Once the client-side code is ready,
+the client takes over and the website becomes a SPA.
+
+### Pros of SSR
+
+#### Performance
+
+- Smaller first meaningful paint time
+- HTML's strengths: progressive rendering
+- Browsers are incredibly good at rendering partial content
+
+#### SEO
+
+- Search engine crawlers used to not execute scripts (or initial scripts)
+- Search engine usually stop after a while (roughly 10 seconds)
+- SPAs can't set meaningful HTTP status codes
+
+### Basic Example
+
+[presentation](http://peerigon.github.io/talks/2018-07-20-js-camp-barcelona-bumpy-road-universal-javascript/#1)
+
+webpack config
+
+```js
+module.exports = [
+  webConfig,
+  nodeConfig,
+];
+
+const webConfig = {}
+  ...baseConfig,
+  target: 'web',
+};
+
+const nodeConfig = {
+  ...baseConfig,
+  target: 'node',
+  output: {
+    ...baseConfig.output,
+    libraryTarget: 'commonjs2',
+  },
+  externals: [require('webpack-node-externals')()],
+};
+```
+
+start.server.js
+
+```js
+import React from 'react';
+import ReactDOMServer from "react-dom/server";
+import App from './App.js';
+
+export deafult () => ReactDOMServer.renderToString(<App />);
+```
+
+index.html.js
+
+```js
+const startApp = require('../dist/server.js').default;
+
+module.exports = () => `<!DOCTYPE html>
+<head>
+  ...
+</head>
+<body>
+  <div id="app">${startApp()}</div>
+  <script src="/static/client.js"></script>
+</body>
+</html>
+```
+
+start.client.js
+
+```js
+import React from 'react';
+import ReactDOMServer from "react-dom";
+import App from './App.js';
+
+ReactDOM.hydrate(<App />, document.getElementById('app'));
+```
+
+- async fetch out of `<App />`
+
+```js
+const data = await fetchData();
+const app = <App {...data} />
+
+return {
+  html: ReactDOMServer.renderToString(app);
+  state: { data }
+};
 ```
 
 ## Components/Plugins

@@ -114,6 +114,7 @@
         - [Trace Property (Vue Internal)](#trace-property-vue-internal)
       - [Node API](#node-api)
   - [ECMAScript 2015](#ecmascript-2015)
+    - [TC39](#tc39)
     - [Babel](#babel)
       - [babel-node](#babel-node)
       - [babel-core](#babel-core)
@@ -1436,6 +1437,10 @@ ndb index.js
 
 ## ECMAScript 2015
 
+### TC39
+
+- [New Feature Process](http://tc39.github.io/process-document)
+
 ### Babel
 
 ```bash
@@ -1968,6 +1973,16 @@ codePointLength(s) // 2
 - Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()
 - Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`
 - ** 指数运算符
+- BigInt
+
+```js
+const a = 2172141653;
+const b = 15346349309;
+a * b
+// => 33334444555566670000
+BigInt(a) * BigInt(b)
+// => 33334444555566667777n
+```
 
 ### Array
 

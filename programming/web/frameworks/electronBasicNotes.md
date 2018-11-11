@@ -11,6 +11,7 @@
     - [Main to Render](#main-to-render)
     - [Render to Main](#render-to-main)
     - [Render to Render](#render-to-render)
+  - [Electron Security](#electron-security)
 
 <!-- /TOC -->
 
@@ -83,3 +84,35 @@ win.loadURL('https://github.com');
 - Web Storage API
 - IndexedDB
 - Electron IPC e.g remote.getGlobal
+
+## Electron Security
+
+- only load secure content (HTTPS/WSS/FTPS)
+- verify integrity of scripts via CSP and SRI
+- don't trust external resources
+- disable nodejs in renderers that display remote content
+
+```js
+let win;
+
+const createBrowserWindow = () => {
+  win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    title: 'Electron App',
+    webPreferences: {
+      nodeIntegration: false,
+      preload: path.join(__dirname, 'preload.js');
+    }
+  });
+};
+```
+
+```js
+// preload.js
+const fs = require('fs');
+
+global.desktop = {
+  files: () => fs.readdirSync(__dirname);
+}
+```
