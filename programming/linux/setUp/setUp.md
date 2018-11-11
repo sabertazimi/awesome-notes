@@ -35,6 +35,7 @@
       - [Proxychains(Global Proxy)](#proxychainsglobal-proxy)
       - [OpenVPN && vpngate/vpnbook](#openvpn--vpngatevpnbook)
       - [Docker VPN](#docker-vpn)
+  - [Bonus for OSX](#bonus-for-osx)
 
 <!-- /TOC -->
 
@@ -333,3 +334,7 @@ nohup ssserver -c /etc/shadowsocks.json 2>&1 &
 #### Docker VPN
 
 - [Docker VPN](https://github.com/hwdsl2/docker-ipsec-vpn-server)
+
+## Bonus for OSX
+
+- [Basic Dev Setup for OSX](https://hackernoon.com/macbook-dev-setup-5890e61a8f0a)
