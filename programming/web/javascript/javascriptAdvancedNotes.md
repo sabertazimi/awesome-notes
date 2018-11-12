@@ -1375,9 +1375,50 @@ $0.addEventListener('click', (e) => {
 #### console API
 
 ```js
-console.log/info/warn/error;
-console.time/timeEnd/profile/profileEnd/group/groupEnd;
-console.trace/dir/dirxml/assert/;
+console.log/info/warn/error
+console.dir/dirxml/table; // different output style
+console.assert;
+console.group/groupEnd
+console.time/timeEnd;
+console.profile/profileEnd;
+console.count
+console.trace;
+```
+
+`console.log`
+
+```js
+// `sprinf` style log
+console.log('%d %o %s', integer, object, string);
+```
+
+`console.table`
+
+```js
+// display array of object (tabular data)
+const transactions = [{
+  id: "7cb1-e041b126-f3b8",
+  seller: "WAL0412",
+  buyer: "WAL3023",
+  price: 203450,
+  time: 1539688433
+},
+{
+  id: "1d4c-31f8f14b-1571",
+  seller: "WAL0452",
+  buyer: "WAL3023",
+  price: 348299,
+  time: 1539688433
+},
+{
+  id: "b12c-b3adf58f-809f",
+  seller: "WAL0012",
+  buyer: "WAL2025",
+  price: 59240,
+  time: 1539688433
+}];
+
+console.table(data, ['id', 'price']);
 ```
 
 #### JS API
@@ -2212,4 +2253,5 @@ window.addEventListener('replacestate', function (event) {
 
 ### Analysis Tools
 
+- [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools/)
 - [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
