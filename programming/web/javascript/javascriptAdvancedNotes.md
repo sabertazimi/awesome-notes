@@ -155,6 +155,7 @@
       - [Object Shape](#object-shape)
       - [Inline Cache](#inline-cache)
     - [Monkey Patch](#monkey-patch)
+    - [Analysis Tools](#analysis-tools)
 
 <!-- /TOC -->
 
@@ -2208,3 +2209,7 @@ window.addEventListener('replacestate', function (event) {
     // doing something
 });
 ```
+
+### Analysis Tools
+
+- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
