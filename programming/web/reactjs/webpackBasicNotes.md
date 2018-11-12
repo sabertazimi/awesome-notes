@@ -9,8 +9,9 @@
   - [Optimization](#optimization)
   - [Plugin](#plugin)
   - [Advanced](#advanced)
-    - [code split](#code-split)
+    - [Code Spliting](#code-spliting)
     - [Tree Shaking](#tree-shaking)
+    - [Perf Profiling](#perf-profiling)
 
 <!-- /TOC -->
 
@@ -96,7 +97,7 @@ dllReferencePlugin = new Webpack.DllReferencePlugin({
 
 ## Advanced
 
-### code split
+### Code Spliting
 
 require.ensure([], () => {});
 
@@ -108,3 +109,13 @@ require.ensure([], () => {});
   并且提供 ES6 module 的版本, 入口文件地址设置到 package.json 的 module 字段
 4. 如果 JavaScript 库开发中, 难以避免的产生各种副作用代码, 可以将功能函数或者组件, 打包成单独的文件或目录,
   以便于用户可以通过目录去加载.如有条件，也可为自己的库开发单独的 webpack-loader, 便于用户按需加载
+
+### Perf Profiling
+
+```bash
+npx webpack --mode production --profile --json > stats.json
+```
+
+- [Optimize Helper](https://webpack.jakoblind.no/optimize/)
+- [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
+- [webpack-monitor](https://github.com/webpackmonitor/webpackmonitor)

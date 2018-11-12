@@ -745,13 +745,13 @@ return {
 ## Components/Plugins
 
 - [**Starter Kit Collection**](http://andrewhfarmer.com/starter-project)
-- [React Storybook](https://github.com/kadirahq/react-storybook)
+- [React Storybook](https://github.com/storybooks/storybook)
 
 ### Documents
 
 - [Blog Generator](https://github.com/gatsbyjs/gatsby)
 - [React Built In Editor](https://github.com/facebook/draft-js)
-- docz
+- [docz](https://github.com/pedronauck/docz)
 
 ### Data
 
