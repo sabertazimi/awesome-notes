@@ -156,6 +156,7 @@
       - [Inline Cache](#inline-cache)
     - [Monkey Patch](#monkey-patch)
     - [Analysis Tools](#analysis-tools)
+  - [PWA](#pwa)
 
 <!-- /TOC -->
 
@@ -2255,3 +2256,12 @@ window.addEventListener('replacestate', function (event) {
 
 - [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools/)
 - [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
+
+## PWA
+
+Progressive Web Apps:
+
+- served over `HTTPS`
+- provide a manifest
+- register a ServiceWorker
+  (web cache for offline and performance)
