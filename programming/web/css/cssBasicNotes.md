@@ -193,6 +193,7 @@
     - [Template](#template)
     - [Framework](#framework)
   - [JS Libraries](#js-libraries)
+    - [Audio](#audio)
     - [Table](#table)
     - [File](#file)
       - [File Tree View](#file-tree-view)
@@ -2252,6 +2253,7 @@ content -> centering -> font family -> spacing -> color&contrast
 #### Slide Component
 
 - [One Page Style Vertical-Silde](https://github.com/MopTym/doSlide)
+- [Glider.js](https://github.com/NickPiscitelli/Glider.js)
 - [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
 - [Awesome PPT/Prezi](https://github.com/impress/impress.js)
 
@@ -2276,6 +2278,10 @@ content -> centering -> font family -> spacing -> color&contrast
 - [React Material UI](https://github.com/callemall/material-ui)
 
 ## JS Libraries
+
+### Audio
+
+- [Howler.js](https://github.com/goldfire/howler.js)
 
 ### Table
 
