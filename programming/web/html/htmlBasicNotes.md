@@ -81,7 +81,6 @@
       - [optimum](#optimum)
     - [wbr](#wbr)
   - [Media](#media)
-    - [canvas](#canvas)
     - [figure](#figure)
     - [figcaption](#figcaption)
     - [img](#img)
@@ -110,6 +109,9 @@
   - [Web RTC API](#web-rtc-api)
   - [Web Workers API](#web-workers-api)
   - [Web Animations API](#web-animations-api)
+  - [Web Canvas API](#web-canvas-api)
+    - [Basic Usage](#basic-usage)
+    - [Canvas Reference](#canvas-reference)
   - [Nginx Config](#nginx-config)
   - [Accessbility](#accessbility)
     - [structure](#structure)
@@ -615,44 +617,6 @@ value/max 百分比
 
 ## Media
 
-### canvas
-
-- 绘制路径 beginPath() -> draw() -> closePath()
-- Path2D对象
-- 绘制样式 颜色、渐变、变换、阴影
-- 绘制图形 fill/stroke/clip
-
-```javascript
-vat context = canvas.getContext('2d');
-```
-
-```javascript
-// 根据参数画线
-function drawLine(fromX, fromY, toX, toY) {
-    context.moveTo(fromX, fromY);
-    context.lineTo(toX, toY);
-    context.stroke();
-}
-
-// 根据参数画圆
-function drawCircle(x, y, radius, color) {
-    context.fillStyle = color;
-    context.beginPath();
-    context.arc(x, y, radius, 0, Math.PI*2, true);
-    context.closePath();
-    context.fill();
-    context.stroke();
-}
-
-// 改变 canvas 中图形颜色
-function changeColor(color){
-    context.fillStyle = color;
-    context.fill();
-}
-```
-
-[Canvas API](Demo/canvas-cheat-sheet.html)
-
 ### figure
 
 流内容 如代码、文件、图片、音频、视频
@@ -980,6 +944,51 @@ const animation = document.querySelector('alice').animate(
 animation.pause();
 animation.currentTime = animation.effect.getComputedTiming().duration / 2;
 ```
+
+## Web Canvas API
+
+### Basic Usage
+
+- 绘制路径 beginPath() -> draw() -> closePath()
+- Path2D对象
+- 绘制样式: 颜色、渐变、变换、阴影
+- 绘制图形: fill/stroke/clip
+
+```javascript
+ const context = canvas.getContext('2d');
+```
+
+```javascript
+// 根据参数画线
+function drawLine(fromX, fromY, toX, toY) {
+  context.moveTo(fromX, fromY);
+  context.lineTo(toX, toY);
+  context.stroke();
+}
+
+// 根据参数画圆
+function drawCircle(x, y, radius, color) {
+  context.fillStyle = color;
+  context.beginPath();
+  context.arc(x, y, radius, 0, Math.PI*2, true);
+  context.closePath();
+  context.fill();
+  context.stroke();
+}
+
+// 改变 canvas 中图形颜色
+function changeColor(color){
+  context.fillStyle = color;
+  context.fill();
+}
+```
+
+### Canvas Reference
+
+- [Canvas on MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API)
+- [Canvas Cheat Sheet](Demo/canvas-cheat-sheet.html)
+- [Canvas Perf Tips](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
+- [Canvas Deep Live](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
 
 ## Nginx Config
 
