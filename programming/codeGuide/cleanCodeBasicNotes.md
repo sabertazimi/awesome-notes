@@ -10,6 +10,7 @@
       - [Liskov Substitution Principle](#liskov-substitution-principle)
       - [Interface Segregation Principle](#interface-segregation-principle)
       - [Dependency Inversion Principle](#dependency-inversion-principle)
+  - [Programming Paradigms](#programming-paradigms)
 
 <!-- /TOC -->
 
@@ -335,3 +336,5 @@ class MockHttpService implements Connection {
     }
 }
 ```
+
+## Programming Paradigms
