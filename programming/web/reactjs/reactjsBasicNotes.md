@@ -36,6 +36,8 @@
     - [Context API](#context-api)
     - [Error Boundary](#error-boundary)
     - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
+  - [React Performance](#react-performance)
+    - [Code Spliting](#code-spliting)
   - [Server Side Rendering](#server-side-rendering)
     - [Pros of SSR](#pros-of-ssr)
       - [Performance](#performance)
@@ -587,6 +589,57 @@ class Frameworks extends React.Component {
       ]
     )
   }
+}
+```
+
+## React Performance
+
+### Code Spliting
+
+```js
+import React, { Component } from "react";
+import { Formik } from "formik";
+import * as Yup from "yup";
+
+const formValidator = Yup.object().shape({ /* ... */ });
+
+export default class Form extends Component {
+  render() {
+    return (
+      <Formik validationSchema={formValidator}>
+        {/* ... */}
+      </Formik>
+    );
+  }
+}
+```
+
+```js
+import React, { Component } from "react";
+
+export default class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      Form: undefined
+    };
+  }
+
+  render() {
+    const { Form } = this.state;
+
+    return (
+      <div className="app">
+        {Form ? <Form /> : <button onClick={this.showForm}>Show form</button>}
+      </div>
+    );
+  }
+
+  showForm = async () => {
+    const { default: Form } = await import("./Form");
+    this.setState({ Form });
+  };
 }
 ```
 
