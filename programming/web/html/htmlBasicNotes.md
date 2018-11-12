@@ -111,6 +111,7 @@
   - [Web Animations API](#web-animations-api)
   - [Web Canvas API](#web-canvas-api)
     - [Basic Usage](#basic-usage)
+    - [Canvas Performance](#canvas-performance)
     - [Canvas Reference](#canvas-reference)
   - [Nginx Config](#nginx-config)
   - [Accessbility](#accessbility)
@@ -981,6 +982,21 @@ function changeColor(color){
   context.fillStyle = color;
   context.fill();
 }
+```
+
+### Canvas Performance
+
+- canvas buffer
+
+```js
+frontCanvasContext.drawImage(bufferCanvas, 0, 0);
+```
+
+- multiple canvas: top layer, background layer, interactive layer
+- disable alpha path
+
+```js
+const ctx = canvas.getContext('2d', { alpha: false });
 ```
 
 ### Canvas Reference
