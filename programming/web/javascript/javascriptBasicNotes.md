@@ -174,6 +174,7 @@
     - [await/async](#awaitasync)
   - [Awesome Libraries](#awesome-libraries)
     - [Object Schema Validator](#object-schema-validator)
+    - [Color](#color)
 
 <!-- /TOC -->
 
@@ -2782,3 +2783,7 @@ async getAuthors(authorIds) {
 
 - [joi](https://github.com/hapijs/joi)
 - [yup](https://github.com/jquense/yup)
+
+### Color
+
+- [culori](https://github.com/Evercoder/culori)
