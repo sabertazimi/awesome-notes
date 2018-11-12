@@ -192,7 +192,6 @@
       - [Blocks](#blocks)
     - [Template](#template)
     - [Framework](#framework)
-  - [JS Libraries](#js-libraries)
     - [Audio](#audio)
     - [Table](#table)
     - [File](#file)
@@ -2276,8 +2275,6 @@ content -> centering -> font family -> spacing -> color&contrast
 
 - [HTML Presentation Framework](https://github.com/hakimel/reveal.js)
 - [React Material UI](https://github.com/callemall/material-ui)
-
-## JS Libraries
 
 ### Audio
 

@@ -172,6 +172,8 @@
   - [Asynchronous Programming](#asynchronous-programming)
     - [Promise](#promise)
     - [await/async](#awaitasync)
+  - [Awesome Libraries](#awesome-libraries)
+    - [Object Schema Validator](#object-schema-validator)
 
 <!-- /TOC -->
 
@@ -2773,3 +2775,10 @@ async getAuthors(authorIds) {
   const authors = await Promise.all(promises);
 }
 ```
+
+## Awesome Libraries
+
+### Object Schema Validator
+
+- [joi](https://github.com/hapijs/joi)
+- [yup](https://github.com/jquense/yup)
