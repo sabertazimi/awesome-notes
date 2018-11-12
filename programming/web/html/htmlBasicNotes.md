@@ -1003,7 +1003,8 @@ const ctx = canvas.getContext('2d', { alpha: false });
 
 - [Canvas on MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API)
 - [Canvas Cheat Sheet](Demo/canvas-cheat-sheet.html)
-- [Canvas Perf Tips](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
+- [Canvas Perf Tips 1](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
+- [Canvas Perf Tips 2](https://www.html5rocks.com/en/tutorials/canvas/performance/)
 - [Canvas Deep Live](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
 
 ## Nginx Config
