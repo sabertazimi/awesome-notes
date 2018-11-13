@@ -156,6 +156,7 @@
       - [Inline Cache](#inline-cache)
     - [Monkey Patch](#monkey-patch)
     - [Analysis Tools](#analysis-tools)
+    - [Performance Best Practice](#performance-best-practice)
   - [PWA](#pwa)
 
 <!-- /TOC -->
@@ -2256,6 +2257,11 @@ window.addEventListener('replacestate', function (event) {
 
 - [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools/)
 - [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
+
+### Performance Best Practice
+
+- use monomorphic objects due to shape and inline caches
+- use monomorphic fucntion in hot code paths
 
 ## PWA
 
