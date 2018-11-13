@@ -11,6 +11,7 @@
     - [Tab Completion](#tab-completion)
     - [Basic Command](#basic-command)
     - [Link Command](#link-command)
+    - [Security](#security)
     - [npx](#npx)
   - [Basic Node Modules](#basic-node-modules)
     - [Process Module](#process-module)
@@ -70,7 +71,7 @@
     - [Storage](#storage)
       - [Cookie/Session](#cookiesession)
       - [DataBase](#database)
-      - [Security](#security)
+      - [Security](#security-1)
         - [Encrypt(加密)](#encrypt加密)
     - [Documentation](#documentation)
     - [Parser](#parser)
@@ -125,14 +126,18 @@
 ```bash
 npm adduser
 mkdir proj/
-npm init --scope=<username>  // 修改 package.json 可再次运行此命令
+# 修改 package.json 可再次运行此命令
+# scope for everyone
+npm init --scope=<username>  
 
-npm install --save <modulename>     // 修改 package.json 可再次运行此命令(不接模块名为自动更新)
-npm prune                    // 清除无用包
-npm rm --save  // --save 删除文件的同时更新 package.json 文件
+# 修改 package.json 可再次运行此命令(不接模块名为自动更新)
+npm install -S <package>
+npm install -D <pacakge>
+npm prune      # 清除无用包
+npm rm --save  # --save 删除文件的同时更新 package.json 文件
 
 npm ls
-npm outdated   // 去除过期包
+npm outdated   # 去除过期包
 ```
 
 ### Test Steps
@@ -186,6 +191,15 @@ source ~/.zshrc
 
 ### Basic Command
 
+best practice: `npm ci` for cache install (speed up installation)
+
+```bash
+// with package-lock.json exists
+npm ci
+```
+
+remove useless package
+
 ```bash
 npm prune // uninstall node_modules not in package.json
 npm outdated
@@ -198,6 +212,13 @@ npm outdated
 npm link
 # in local A package, set `B` link in package.json to local B binary
 npm link B
+```
+
+### Security
+
+```bash
+npm audit fix
+npm audit fix --force
 ```
 
 ### npx
