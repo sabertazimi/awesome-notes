@@ -11,6 +11,10 @@
       - [Interface Segregation Principle](#interface-segregation-principle)
       - [Dependency Inversion Principle](#dependency-inversion-principle)
   - [Programming Paradigms](#programming-paradigms)
+    - [Taxonomy of Paradigms](#taxonomy-of-paradigms)
+      - [Observable Nondeterminism](#observable-nondeterminism)
+      - [Named State](#named-state)
+    - [Functional Programming](#functional-programming)
 
 <!-- /TOC -->
 
@@ -339,5 +343,50 @@ class MockHttpService implements Connection {
 
 ## Programming Paradigms
 
-Each program-ming language realizes one or more paradigms.
+Each programming language realizes one or more paradigms.
 Each paradigm is defined by a set of programming concepts.
+
+### Taxonomy of Paradigms
+
+![taxonomy of programming paradigms](figures/programming_paradigms.jpg)
+
+Nondeterminism is important for real-world interaction.
+Named state is important for modularity.
+
+#### Observable Nondeterminism
+
+During the execution, this choice is made by
+a part of the run-time system called the scheduler.
+The nondeterminism is observable
+if a user can see **different results** from executions
+that start at the **same internal configuration**.
+
+- concurrency or race condition (timing effects)
+- shared-state concurrency or message-passing concurrency
+- concurrent programming language e.g Java
+
+#### Named State
+
+State is the ability to remember information (a sequence of values in time).
+Distinguish three axes of expressiveness, depending on whether the state is:
+
+- unnamed or named
+- deterministic or nondeterministic
+- sequential or concurrent
+- named, nondeterministic and concurrent paradigmh
+  as the most expressiveness of state
+- named state for updatable memory (mutable state) and modularity
+
+The least expressive combination is functional programming
+(threaded state: unnamed, deterministic, sequential).
+Adding concurrency gives declarative concurrent programming
+(synchrocells: unnamed, deterministic, concurrent).
+Adding nondeterministic choice gives concurrent logic programming
+(stream mergers: unnamed, nondeterministic, concurrent).
+Adding ports or cells, gives message passing or shared state
+(named, nondeterministic, concurrent).
+
+### Functional Programming
+
+Based on the concept of first-class function or closure,
+which makes it equivalent to the λ-calculus which is `Turing complete`.
