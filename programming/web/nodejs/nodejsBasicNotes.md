@@ -214,7 +214,7 @@ npm link
 npm link B
 ```
 
-### Security
+### Security Command
 
 ```bash
 npm audit fix
