@@ -287,9 +287,15 @@ no more than 50 characters
 ### stash
 
 - git stash: 备份当前的工作区的内容，将当前的工作区内容保存到Git栈
-- git stash pop: 从Git栈中读取最近一次保存的内容，恢复工作区的相关内容
+- git stash apply/pop: 从Git栈中读取最近一次保存的内容，恢复工作区的相关内容
+- git stash branch `<branch>`: 新建分支，并在该分支上恢复储藏内容
 - git stash list: 显示Git栈内的所有备份
 - git stash clear: 清空Git栈
+
+```bash
+# git stash unapply
+git stash show -p stash@{0} | git apply -R
+```
 
 ### revert
 
