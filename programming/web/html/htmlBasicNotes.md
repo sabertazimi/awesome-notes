@@ -103,6 +103,7 @@
       - [spellcheck](#spellcheck)
       - [tabindex](#tabindex)
   - [Geolocation API](#geolocation-api)
+  - [Web Audio API](#web-audio-api)
   - [Web Storage API](#web-storage-api)
   - [Web Files API](#web-files-api)
   - [Web Sockets API](#web-sockets-api)
@@ -791,6 +792,72 @@ navigator.geolocation.watchPosition(locationSuccess, locationError, positionOpti
 ```
 
 自动更新地理位置
+
+## Web Audio API
+
+```js
+const sampleSize = 1024;  // number of samples to collect before analyzing data
+const audioUrl = "viper.mp3";
+
+let audioData = null;
+let audioPlaying = false;
+
+const audioContext = new AudioContext();
+const sourceNode = audioContext.createBufferSource();
+const analyserNode = audioContext.createAnalyser();
+const javascriptNode = audioContext.createScriptProcessor(sampleSize, 1, 1);
+
+// Create the array for the data values
+const amplitudeArray = new Uint8Array(analyserNode.frequencyBinCount);
+
+// Now connect the nodes together
+sourceNode.connect(audioContext.destination);
+sourceNode.connect(analyserNode);
+analyserNode.connect(javascriptNode);
+javascriptNode.connect(audioContext.destination);
+
+
+// setup the event handler that is triggered
+// every time enough samples have been collected
+// trigger the audio analysis and draw the results
+javascriptNode.onaudioprocess = function () {
+  // get the Time Domain data for this sample
+  analyserNode.getByteTimeDomainData(amplitudeArray);
+
+  // draw the display if the audio is playing
+  // if (audioPlaying == true) {
+  // requestAnimFrame(drawTimeDomain);
+  // }
+}
+
+// Load the audio from the URL via Ajax and store it in global variable audioData
+// Note that the audio load is asynchronous
+function loadSound(url) {
+  fetch(url)
+    .then((response) => {
+      audioContext.decodeAudioData(response, (buffer) => {
+        audioData = buffer;
+        playSound(audioData);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+// Play the audio and loop until stopped
+function playSound(buffer) {
+  sourceNode.buffer = buffer;
+  sourceNode.start(0);    // Play the sound now
+  sourceNode.loop = true;
+  audioPlaying = true;
+}
+
+function stopSound() {
+  sourceNode.stop(0);
+  audioPlaying = false;
+}
+```
 
 ## Web Storage API
 
