@@ -155,8 +155,9 @@
       - [Object Shape](#object-shape)
       - [Inline Cache](#inline-cache)
     - [Monkey Patch](#monkey-patch)
-    - [Analysis Tools](#analysis-tools)
     - [Performance Best Practice](#performance-best-practice)
+    - [Awesome Performance Tutorial](#awesome-performance-tutorial)
+    - [Analysis Tools](#analysis-tools)
   - [PWA](#pwa)
 
 <!-- /TOC -->
@@ -2253,15 +2254,22 @@ window.addEventListener('replacestate', function (event) {
 });
 ```
 
-### Analysis Tools
-
-- [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools/)
-- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
-
 ### Performance Best Practice
 
 - use monomorphic objects due to shape and inline caches
 - use monomorphic fucntion in hot code paths
+
+### Awesome Performance Tutorial
+
+- [v8 perf](https://github.com/thlorenz/v8-perf)
+
+### Analysis Tools
+
+- [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools/)
+- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
+- [deoptigate](https://github.com/thlorenz/deoptigate)
+- [turbolizer](https://github.com/thlorenz/turbolizer)
+- [v8 map processor](https://github.com/thlorenz/v8-map-processor)
 
 ## PWA
 
