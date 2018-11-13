@@ -83,7 +83,7 @@ ret
 ### Control Signal
 
 |State|Signal|
-|:---------:|:----------:|
+|:---------|:----------|
 |Fetch|icode,ifun  rA,rB  valC,valP|
 |Decode|valA,srcA  valB,srcB|
 |Execute|valE  Cond|
@@ -94,7 +94,7 @@ ret
 ### Special Control Signal
 
 |Condition|Signal|
-|:---------:|:----------:|
+|:---------|:----------|
 |handle ret| `IRET in {D_icode, E_icode, M_icode}` |
 |load/use hazard| `E_icode in {IMRMOVL, IPOPL} && E_dstM in {d_srcA, d_srcB}` |
 |mispredicted branch| `E_icode in {IJXX} && !e_Cnd` |
@@ -186,7 +186,7 @@ CPI = 1.0 + lp + mp + rp:
 #### 分类
 
 |类别|原因|异步/同步|返回行为|例子|
-|:------:|:----------:|:-----:|:----------:|:---------:|
+|:------|:----------|:-----|:----------|:---------|
 |中断(interrupt)|I/O|async|next(concurrency)|磁盘|
 |陷阱(trap)|有意的异常/系统调用(内核模式)|sync|next|read/write/intN|
 |故障(fault)|潜在可恢复的错误|sync|current/abort|segmentation fault/floating exception|

@@ -772,7 +772,7 @@ my_DataBase.execSQL("DROP TABLE test");
   - `query()`
 
 |方法参数|对应 SQL 部分|描述|
-|:------:|:----------:|:------------:|
+|:------|:----------|:------------|
 |table|from tableName|指定查询的表名|
 |columns|select column1, column2|指定查询的列名|
 |selection|where column = value|指定 where 的约束条件|

@@ -105,7 +105,7 @@
       - [expr/let数值运算工具](#exprlet数值运算工具)
       - [$((    运算式    ))   或  $[    运算式    ]](#----运算式-------或------运算式----)
     - [流程控制语句](#流程控制语句)
-      - [条件判断式  [    前后有空格   ]](#条件判断式------前后有空格---)
+      - [条件判断式](#条件判断式)
       - [if语句](#if语句)
       - [case语句](#case语句)
       - [for语句](#for语句)
@@ -839,9 +839,9 @@ fi
 
 ### 流程控制语句
 
-#### 条件判断式  [    前后有空格   ]
+#### 条件判断式
 
-e.g    [ -e  /etc/root/install.log  ]
+e.g    [[ -e  /etc/root/install.log  ]]
 
 |operator|function|
 |:-----------|:-----------|
@@ -863,20 +863,20 @@ e.g    [ -e  /etc/root/install.log  ]
 #### if语句
 
 ```bash
-if [ 条件判断式 ] ; then
+if [[ 条件判断式 ]] ; then
     程序
 fi
-if [ 条件判断式 ]
+if [[ 条件判断式 ]]
     then
         程序
     else
         程序
 fi
 
-if [ 条件判断式1 ]
+if [[ 条件判断式1 ]]
     then
         程序1
-elif [ 条件判断式2 ]
+elif [[ 条件判断式2 ]]
     then
         程序2
 ……
@@ -922,12 +922,12 @@ for (( 初始值;循环控制条件;变量变化 ))
 #### while语句与until语句
 
 ```bash
-while [ 条件判断式 ]
+while [[ 条件判断式 ]]
     do
         程序
     done
 
-until [ 条件判断式 ]
+until [[ 条件判断式 ]]
     do
         程序
     done
@@ -954,7 +954,7 @@ until [ 条件判断式 ]
 
 ```bash
 #!/bin/sh
-if [ ${#@} -ne 0 ] && [ "${@#"--help"}" = "" ]; then
+if [[ ${#@} -ne 0 ]] && [[ "${@#"--help"}" = "" ]]; then
   printf -- '...help...\n';
   exit 0;
 fi;
@@ -964,7 +964,7 @@ fi;
 
 ```bash
 #!/bin/sh
-if [ ${#@} -ne 0 ] && [ "${@#"--silent"}" = "" ]; then
+if [[ ${#@} -ne 0 ]] && [[ "${@#"--silent"}" = "" ]]; then
   stty -echo;
 fi;
 # ...
@@ -982,7 +982,7 @@ exit 0;
 ```bash
 #!/bin/sh
 _=$(command -v docker);
-if [ "$?" != "0" ]; then
+if [[ "$?" != "0" ]]; then
   printf -- 'You don\'t seem to have Docker installed.\n';
   printf -- 'Get it: https://www.docker.com/community-edition\n';
   printf -- 'Exiting with code 127...\n';
@@ -1007,7 +1007,7 @@ error_handle() {
   stty echo;
 }
 
-if [ ${#@} -ne 0 ] && [ "${@#"--silent"}" = "" ]; then
+if [[ ${#@} -ne 0 ]] && [[ "${@#"--silent"}" = "" ]]; then
   stty -echo;
   trap error_handle INT;
   trap error_handle TERM;

@@ -762,18 +762,18 @@ worker.postMessage(jsonText);
 
 #### 数据格式
 
-|Format|Size|Download time|Parse time|Total load time|
-|:-----:|:-----:|:----------:|:----------:|:----------:|
-|Verbose XML|582,960 bytes|999.4 ms|343.1 ms|1342.5 ms|
-Verbose JSON-P|487,913 bytes|598.2 ms|0.0 ms|598.2 ms|
-Simple XML|437,960 bytes|475.1 ms|83.1 ms|558.2 ms|
-Verbose JSON|487,895 bytes|527.7 ms|26.7 ms|554.4 ms|
-Simple JSON|392,895 bytes|498.7 ms|29.0 ms|527.7 ms|
-Simple JSON-P|392,913 bytes|454.0 ms|3.1 ms|457.1 ms|
-Array JSON|292,895 bytes|305.4 ms|18.6 ms|324.0 ms|
-Array JSON-P|292,912 bytes|316.0 ms|3.4 ms|319.4 ms|
-Custom Format (script insertion)|222,912 bytes|66.3 ms|11.7 ms|78.0 ms|
-Custom Format (XHR)|222,892 bytes|63.1 ms|14.5 ms|77.6 ms|
+|Format|Size (bytes)|Download time (ms)|Parse time (ms)|Total load time (ms)|
+|:-----|-----:|----------:|----------:|----------:|
+|Verbose XML|582,960|999.4|343.1|1342.5|
+|Verbose JSON-P|487,913|598.2|0.0|598.2|
+|Simple XML|437,960|475.1|83.1|558.2|
+|Verbose JSON|487,895|527.7|26.7|554.4|
+|Simple JSON|392,895|498.7|29.0|527.7|
+|Simple JSON-P|392,913|454.0|3.1|457.1|
+|Array JSON|292,895|305.4|18.6|324.0|
+|Array JSON-P|292,912|316.0|3.4|319.4|
+|Custom Format (script insertion)|222,912|66.3|11.7|78.0|
+|Custom Format (XHR)|222,892|63.1|14.5|77.6|
 
 #### Ajax 缓存
 

@@ -732,7 +732,7 @@ ghci> :t 20
 - 成员: 浮点型 - Float Double
 
 |typeclass|method feature|
-|:----------:|:--------------------:|
+|:----------|:--------------------|
 |Functor|f a + (a -> b) -> f b|
 |Applicative|f a + f (a -> b) -> f b|
 |Monad|m a + (a -> m b) -> m b|
