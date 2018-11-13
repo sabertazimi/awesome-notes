@@ -338,3 +338,6 @@ class MockHttpService implements Connection {
 ```
 
 ## Programming Paradigms
+
+Each program-ming language realizes one or more paradigms.
+Each paradigm is defined by a set of programming concepts.
