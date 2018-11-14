@@ -56,6 +56,7 @@
     - [menu](#menu)
     - [dialog](#dialog)
     - [datalist](#datalist)
+    - [Form Demo](#form-demo)
   - [Content](#content)
     - [details > summary | datalist](#details--summary--datalist)
       - [datagrid](#datagrid)
@@ -538,6 +539,79 @@ style="display: none";
     <option value="Mac OS">Mac OS</option>
     <option value="Linux">Linux</option>
 </datalist>
+```
+
+### Form Demo
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up Form</title>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+      <form action="index.html" method="post">
+
+          <h2>Your basic info</h2>
+
+          <label for="name">Name</label>
+          <input type="text" id="name" name="student_name">
+
+          <label for="mail">Email</label>
+          <input type="email" id="mail" name="student_email">
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="student_password">
+
+          <label>Age:</label>
+          <input type="radio" id="under_16" value="under_16"
+          name="user_age"><label for="under_16" class="light">Under
+          16</label><br>
+          <input type="radio" id="over_16" value="over_16"
+          name="user_age"><label for="over_16" class="light">16 or
+          Older</label>
+
+          <h2>Your profile</h2>
+
+          <label for="bio">Biography</label>
+          <textarea id="bio" name="student_bio"></textarea>
+
+          <label for="courses">Select Courses</label>
+          <select id="courses" name="student_courses">
+            <optgroup label="Engineering">
+              <option value="computer_engineering">Computer Science Engineering</option>
+              <option value="slectrical_engineering">Electrical Engineering</option>
+              <option value="mechanical_engineering">Mechanical Engineering</option>
+              <option value="civil_engineering">Civil Engineering</option>
+              <option value="chemical_engineering">Chemical Engineering</option>
+            </optgroup>
+            <optgroup label="Management">
+              <option value="finance_management">Finance Management</option>
+              <option value="technology_management">Technology Management</option>
+              <option value="marketing_management">Marketing Management</option>
+              <option value="business_administration">Business Administration</option>
+            </optgroup>
+          </select>
+
+          <label>Interests:</label>
+          <input type="checkbox" id="engineering"
+          value="interest_engineering" name="user_interest"><label
+          class="light" for="engineering">Engineering</label><br>
+          <input type="checkbox" id="business" value="interest_business"
+          name="user_interest"><label class="light"
+          for="business">Business</label><br>
+          <input type="checkbox" id="law" value="interest_law"
+          name="user_interest"><label class="light" for="law">Law</label>
+
+        <button type="submit">Submit</button>
+      </form>
+    </body>
+</html>
 ```
 
 ## Content
