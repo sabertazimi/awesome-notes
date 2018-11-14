@@ -338,3 +338,57 @@ nohup ssserver -c /etc/shadowsocks.json 2>&1 &
 ## Bonus for OSX
 
 - [Basic Dev Setup for OSX](https://hackernoon.com/macbook-dev-setup-5890e61a8f0a)
+- [OSX Setup Apps](https://juejin.im/post/58e1f221570c350057a6bc03)
+
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json
+\ qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
+
+brew cask install qq
+brew cask install qqinput   # qq输入法
+brew cask install qqmacmgr  # 腾讯电脑管家
+brew cask install qqmusic   # qq音乐
+brew cask install rtx       # 腾讯RTX
+
+brew cask install aliwangwang
+brew cask install thunder 
+brew cask install baiducloud  # 百度网盘
+brew cask install youdao      # 有道词典  
+
+brew cask install mplayerx    # 视频播放器
+brew cask install batterzip   # zip，付费
+brew cask install daisydisk
+
+# markdown
+brew cask install typora
+brew cask install macdown
+
+# 效率
+brew cask install alfred
+brew cask install xmind     # 思维导图
+brew cask install calibre   # 电子书管理
+
+# 虚拟机
+brew cask install genymotion
+brew cask install virtualbox
+brew cask install vagrant
+
+# 版本管理
+brew cask install sourcetree    # git
+brew cask install versions      # svn，付费
+brew cask install kaleidoscope  # 文件比较，付费
+
+# 开发
+brew cask install iterm2
+brew cask install gas-mask        # host 管理 
+brew cask install sqlitebrowser
+brew cask install shadowsocksx 
+
+# 请求/抓包
+brew cask install cocoapacketanalyzer # tcp/ip 抓包
+brew cask install charles # http 抓包，付费 
+brew cask install postman # api工具，http 请求模拟 
+brew cask install paw     # api工具，http 请求模拟，付费
+```
