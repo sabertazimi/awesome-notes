@@ -1193,6 +1193,13 @@ main {
 }
 ```
 
+```css
+.items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+```
+
 #### attention tips
 
 - `grid-column` will refactor template of grid (`grid-template-columns`)
