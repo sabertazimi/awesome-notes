@@ -812,7 +812,8 @@ h2:before {
 
 #### width
 
-- auto: present for `fill-available/max-content/min-content/fit-content`
+auto with `css-sizing`:
+present for `fill-available/max-content/min-content/fit-content`
 
 #### z-index
 
