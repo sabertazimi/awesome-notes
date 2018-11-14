@@ -143,6 +143,7 @@
       - [User-Defined Handler](#user-defined-handler)
     - [document](#document)
     - [window](#window)
+    - [JS DOM API](#js-dom-api)
   - [Ajax](#ajax)
     - [基本用法](#基本用法)
     - [简单封装](#简单封装)
@@ -2300,6 +2301,10 @@ function addLoadEvent(func) {
   }
 }
 ```
+
+### JS DOM API
+
+- getBoundingClientRect
 
 ------
 
