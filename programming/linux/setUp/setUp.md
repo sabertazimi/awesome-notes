@@ -353,7 +353,7 @@ brew cask install qqmusic   # qq音乐
 brew cask install rtx       # 腾讯RTX
 
 brew cask install aliwangwang
-brew cask install thunder 
+brew cask install thunder
 brew cask install baiducloud  # 百度网盘
 brew cask install youdao      # 有道词典  
 
@@ -382,13 +382,13 @@ brew cask install kaleidoscope  # 文件比较，付费
 
 # 开发
 brew cask install iterm2
-brew cask install gas-mask        # host 管理 
+brew cask install gas-mask        # host 管理
 brew cask install sqlitebrowser
-brew cask install shadowsocksx 
+brew cask install shadowsocksx
 
 # 请求/抓包
 brew cask install cocoapacketanalyzer # tcp/ip 抓包
-brew cask install charles # http 抓包，付费 
-brew cask install postman # api工具，http 请求模拟 
+brew cask install charles # http 抓包，付费
+brew cask install postman # api工具，http 请求模拟
 brew cask install paw     # api工具，http 请求模拟，付费
 ```
