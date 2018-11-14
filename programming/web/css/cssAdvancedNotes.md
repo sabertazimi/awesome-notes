@@ -10,6 +10,7 @@
       - [vertical rhythms](#vertical-rhythms)
     - [Table](#table)
   - [Grid System](#grid-system)
+  - [Graceful Degration](#graceful-degration)
   - [Performance](#performance)
     - [CSS Triggers](#css-triggers)
     - [reset.css](#resetcss)
@@ -81,6 +82,23 @@ consistent (and relative) to each other:
 - Must be fluid between breakpoints
 - Must have enough control to decide which columns will transform and at which point
 - Classes should ideally still make sense at all breakpoints
+
+## Graceful Degration
+
+write old browser css code,
+then write modern browser css code
+
+```css
+.grid {
+  display: flex;
+}
+
+/* old browser dosen't support this rule */
+/* old browser will ignore this rule */
+.grid {
+  display: grid;
+}
+```
 
 ## Performance
 
