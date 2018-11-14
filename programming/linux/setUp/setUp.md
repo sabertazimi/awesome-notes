@@ -377,7 +377,6 @@ brew cask install vagrant
 
 # 版本管理
 brew cask install sourcetree    # git
-brew cask install versions      # svn，付费
 brew cask install kaleidoscope  # 文件比较，付费
 
 # 开发
