@@ -11,6 +11,7 @@
     - [Table](#table)
   - [Grid System](#grid-system)
   - [Graceful Degration](#graceful-degration)
+  - [CSS Houdini](#css-houdini)
   - [Performance](#performance)
     - [CSS Triggers](#css-triggers)
     - [reset.css](#resetcss)
@@ -99,6 +100,19 @@ then write modern browser css code
   display: grid;
 }
 ```
+
+## CSS Houdini
+
+- [Draft](https://drafts.css-houdini.org)
+
+CSS Houdini bring many API:
+
+- css properties and values api
+- css layout api (layoutWorklet)
+- css paint api (paintWorklet)
+- css composite api (compositeWorklet)
+
+to let developers enhance css without any browser updates
 
 ## Performance
 
