@@ -108,9 +108,12 @@ then write modern browser css code
 
 CSS Houdini bring many API:
 
-- css properties and values api
-- css layout api (layoutWorklet)
-- css paint api (paintWorklet)
+- css properties and values api:
+  custom properties (--var, var(--var)), custom function (--darken(--var))
+- css layout api (layoutWorklet):
+  layout below (display: flex/grid), layout above (css-sizing: min-content/max-content/fit-content)
+- css paint api (paintWorklet):
+  background, background-color, background-image
 - css composite api (compositeWorklet)
 
 to let developers enhance css without any browser updates
