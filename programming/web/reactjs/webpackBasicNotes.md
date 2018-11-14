@@ -12,6 +12,7 @@
     - [Code Spliting](#code-spliting)
     - [Tree Shaking](#tree-shaking)
     - [Perf Profiling](#perf-profiling)
+  - [Reference](#reference)
 
 <!-- /TOC -->
 
@@ -119,3 +120,7 @@ npx webpack --mode production --profile --json > stats.json
 - [Optimize Helper](https://webpack.jakoblind.no/optimize/)
 - [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
 - [webpack-monitor](https://github.com/webpackmonitor/webpackmonitor)
+
+## Reference
+
+- [Webpakc 4 Tutorial](https://nystudio107.com/blog/an-annotated-webpack-4-config-for-frontend-web-development)
