@@ -16,6 +16,7 @@
     - [will-change](#will-change)
     - [contain](#contain)
     - [window.requestAnimationFrame](#windowrequestanimationframe)
+    - [CSS Perf Tips](#css-perf-tips)
     - [Animation](#animation)
       - [Best Practice](#best-practice)
       - [Animation Internal](#animation-internal)
@@ -178,6 +179,24 @@ function step(timestamp) {
 
 window.requestAnimationFrame(step);
 ```
+
+### CSS Perf Tips
+
+- Lazyload any CSS not needed for Start Render:
+  - This could be Critical CSS;
+  - or splitting your CSS into Media Queries.
+- Avoid @import:
+  - In your HTML;
+  - but in CSS especially;
+  - and beware of oddities with the Preload Scanner.
+- Be wary of synchronous CSS and JavaScript order:
+  - JavaScript defined after CSS won’t run until CSSOM is completed;
+  - so if your JavaScript doesn’t depend on your CSS;
+    - load it before your CSS;
+  - but if it does depend on your CSS:
+    - load it after your CSS.
+- Load CSS as the DOM needs it:
+  - This unblocks Start Render and allows progressive rendering.
 
 ### Animation
 
