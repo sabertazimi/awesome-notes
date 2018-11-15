@@ -2868,6 +2868,10 @@ class Promise {
       }
     });
   }
+
+  catch(onRejected) {
+    return this.then(null, onRejected);
+  }
 }
 ```
 
