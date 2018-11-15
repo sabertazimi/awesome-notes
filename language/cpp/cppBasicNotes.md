@@ -80,13 +80,23 @@
   - [多态](#多态)
   - [STL](#stl)
     - [Container](#container)
-    - [Methods](#methods)
+      - [Container Choosing](#container-choosing)
       - [empty/size](#emptysize)
       - [assign/insert/erase](#assigninserterase)
       - [erase/remove](#eraseremove)
       - [reserve/swap](#reserveswap)
+    - [Heap Algorithm](#heap-algorithm)
+    - [Sorting Algorithms](#sorting-algorithms)
+    - [Partitioning Algorithms](#partitioning-algorithms)
+    - [Permutation Algorithms](#permutation-algorithms)
+    - [Numeric Algorithms](#numeric-algorithms)
+    - [Query Algorithms](#query-algorithms)
+    - [Search Algortihms](#search-algortihms)
+    - [Set Algortihms](#set-algortihms)
+    - [Mover Algorithms](#mover-algorithms)
+    - [Value Algorithms](#value-algorithms)
+    - [Functional Algorithms](#functional-algorithms)
   - [Awesome Tips / Best Practice](#awesome-tips--best-practice)
-  - [Best Practice](#best-practice)
     - [静态成员 BP](#静态成员-bp)
     - [友元函数](#友元函数)
     - [单继承 BP](#单继承-bp)
@@ -798,7 +808,16 @@ c.speak("Hello World!") // => "Child: Hello World!"
 - 连续内存容器: vector string deque
 - 链表容器: list slit hash
 
-### Methods
+#### Container Choosing
+
+- Vector vs Array:
+  use Array when size is fixed and need elaborate container-like behavior
+- Vector vs Deque:
+  use Deque when container is large
+- Vector vs List (no random access):
+  use List when many middle insertion/deletion/splicing
+- Vector vs Set/Map:
+  use Set/Map when container is large
 
 #### empty/size
 
@@ -855,6 +874,147 @@ v.reserve(1000);    // 强制分配 1000 个元素内存单元, 防止反复回�
 string(s).swap(s);  // 回收多余内存单元(shrink to fit), 提高内存利用率
 ```
 
+### Heap Algorithm
+
+```cpp
+std::make_heap(begin(numbers), end(numbers));
+std::push_heap(begin(numbers), end(numbers));
+std::pop_heap(begin(numbers), end(numbers));
+std::is_heap
+std::is_heap_until
+```
+
+### Sorting Algorithms
+
+```cpp
+sort
+stable_sort
+std::is_sorted
+std::is_sorted_until
+
+partial_sort
+nth_element: 0 - nth-1 sorted (< nth), nth+1 - end (> nth) unsorted
+sort_heap
+inplace_merge
+```
+
+### Partitioning Algorithms
+
+```cpp
+partition_point
+partition
+stable_partition
+std::is_partitioned
+std::is_partitioned_until
+```
+
+### Permutation Algorithms
+
+```cpp
+rotate
+shuffle
+prev_permutation
+next_permutation
+```
+
+### Numeric Algorithms
+
+```cpp
+count
+count_if
+
+accumulate
+(transform_)reduce
+
+partial_sum
+(transform_)inclusive_scan
+(transform_)exclusive_scan
+
+inner_product
+adjacent_difference
+sample
+```
+
+### Query Algorithms
+
+```cpp
+all_of
+any_of
+none_of
+
+equal
+lexicographical_compare
+mismatch
+```
+
+### Search Algortihms
+
+```cpp
+search
+find
+find_if
+find_if_not
+find_first_of
+find_end
+adjacent_find
+
+equal_range
+lower_bound
+upper_bound
+
+min_element
+max_element
+minmax_element
+```
+
+### Set Algortihms
+
+```cpp
+set_difference
+set_intersection
+set_union
+set_symmetric_difference
+includes
+merge
+```
+
+### Mover Algorithms
+
+```cpp
+copy
+copy_backward
+copy_if
+remove_copy
+unique_copy
+reverse_copy
+rotate_copy
+replace_copy
+replace_copy_if
+partition_copy
+partial_sort_copy
+
+move
+move_backward
+swap_ranges
+```
+
+### Value Algorithms
+
+```cpp
+fill
+generate
+replace
+replace_if
+iota
+```
+
+### Functional Algorithms
+
+```cpp
+transform
+for_each
+```
+
 ## Awesome Tips / Best Practice
 
 - 普通函数成员 与 析构函数 全部定义为虚函数
@@ -862,8 +1022,6 @@ string(s).swap(s);  // 回收多余内存单元(shrink to fit), 提高内存利�
 - 被改变参数/返回值 全部定义为 引用类型
 - 深拷贝(赋值)函数参数/返回值 全部定义为 引用类型
 - 函数(传值)参数全部定义为 const & 类型: 既减少值的多余复制, 又保证原值不会被误修改
-
-## Best Practice
 
 ### 静态成员 BP
 
