@@ -1393,6 +1393,7 @@ console.trace;
 ```js
 // `sprinf` style log
 console.log('%d %o %s', integer, object, string);
+console.log('%c ...', 'css style');
 ```
 
 `console.table`
