@@ -17,6 +17,8 @@
       - [Contextual Menu](#contextual-menu)
     - [Dialog](#dialog)
   - [Electron Security](#electron-security)
+  - [Electron Builder](#electron-builder)
+  - [Electron Updater](#electron-updater)
 
 <!-- /TOC -->
 
@@ -140,3 +142,7 @@ global.desktop = {
   files: () => fs.readdirSync(__dirname);
 }
 ```
+
+## Electron Builder
+
+## Electron Updater
