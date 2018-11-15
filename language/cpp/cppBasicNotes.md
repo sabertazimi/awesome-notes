@@ -30,6 +30,7 @@
       - [默认无参构造函数](#默认无参构造函数)
       - [构造顺序](#构造顺序)
       - [深拷贝构造函数](#深拷贝构造函数)
+      - [move constructor](#move-constructor)
     - [析构函数](#析构函数)
     - [构造与析构(重点)(P148)](#构造与析构重点p148)
       - [派生树](#派生树)
@@ -348,6 +349,17 @@ ARRAY::ARRAY(ARRAY &r) {
     for (int i = 0;i < size; i++) {
         p[i] = r.p[i];
     }
+}
+```
+
+#### move constructor
+
+```cpp
+class A {
+  A(const A&& a) {
+    // move constructor
+    // set a == nullptr
+  }
 }
 ```
 
