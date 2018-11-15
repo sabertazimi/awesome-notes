@@ -71,6 +71,7 @@
       - [Flexbox Best Practice](#flexbox-best-practice)
     - [Grid Patterns](#grid-patterns)
       - [attention tips](#attention-tips)
+      - [Grid Alignment](#grid-alignment)
     - [分栏问题](#分栏问题)
       - [两栏布局](#两栏布局)
       - [三栏布局](#三栏布局)
@@ -1204,6 +1205,12 @@ main {
 
 - `grid-column` will refactor template of grid (`grid-template-columns`)
 - `grid-row` will refactor template of grid (`grid-template-rows`)
+
+#### Grid Alignment
+
+- `justify-content`/`align-content` content within element (effectively adjusts padding)
+- `justify-self`/`align-self` inline element within parent (effectively adjusts margins)
+- `justify-items/`align-items` inline items inside box (controls child items)
 
 ### 分栏问题
 
