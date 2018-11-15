@@ -11,6 +11,10 @@
     - [Main to Render](#main-to-render)
     - [Render to Main](#render-to-main)
     - [Render to Render](#render-to-render)
+  - [Menu](#menu)
+    - [Application Menu](#application-menu)
+    - [Contextual Menu](#contextual-menu)
+  - [Dialog](#dialog)
   - [Electron Security](#electron-security)
 
 <!-- /TOC -->
@@ -84,6 +88,23 @@ win.loadURL('https://github.com');
 - Web Storage API
 - IndexedDB
 - Electron IPC e.g remote.getGlobal
+
+## Menu
+
+### Application Menu
+
+### Contextual Menu
+
+## Dialog
+
+```js
+openFile
+openDirectory
+multiSelections
+createDirectory
+showHiddenFiles
+promptToCreate (Windows Only)
+```
 
 ## Electron Security
 
