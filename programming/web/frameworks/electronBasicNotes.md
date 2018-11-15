@@ -11,10 +11,11 @@
     - [Main to Render](#main-to-render)
     - [Render to Main](#render-to-main)
     - [Render to Render](#render-to-render)
-  - [Menu](#menu)
-    - [Application Menu](#application-menu)
-    - [Contextual Menu](#contextual-menu)
-  - [Dialog](#dialog)
+  - [Native UI](#native-ui)
+    - [Menu](#menu)
+      - [Application Menu](#application-menu)
+      - [Contextual Menu](#contextual-menu)
+    - [Dialog](#dialog)
   - [Electron Security](#electron-security)
 
 <!-- /TOC -->
@@ -89,13 +90,15 @@ win.loadURL('https://github.com');
 - IndexedDB
 - Electron IPC e.g remote.getGlobal
 
-## Menu
+## Native UI
 
-### Application Menu
+### Menu
 
-### Contextual Menu
+#### Application Menu
 
-## Dialog
+#### Contextual Menu
+
+### Dialog
 
 ```js
 openFile
