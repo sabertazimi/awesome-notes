@@ -113,7 +113,7 @@
       - [JS API](#js-api)
         - [Trace Property (Vue Internal)](#trace-property-vue-internal)
       - [Node API](#node-api)
-  - [ECMAScript 2015](#ecmascript-2015)
+  - [ECMAScript 2015+](#ecmascript-2015)
     - [TC39](#tc39)
     - [Babel](#babel)
       - [babel-node](#babel-node)
@@ -137,13 +137,16 @@
     - [String](#string)
       - [Methods](#methods)
       - [Template String](#template-string)
+      - [Tagged Templates](#tagged-templates)
     - [RegExp](#regexp)
     - [Number](#number)
     - [Array](#array)
       - [Array.from](#arrayfrom)
       - [Array.copyWithin](#arraycopywithin)
-    - [export](#export)
+    - [Modules](#modules)
     - [Class 语法糖](#class-语法糖)
+    - [Symbol](#symbol)
+    - [Proxy and Reflect](#proxy-and-reflect)
   - [Under the hood](#under-the-hood)
     - [Variables Lifecycle](#variables-lifecycle)
     - [Exection Context](#exection-context)
@@ -1481,7 +1484,7 @@ node --inspect
 ndb index.js
 ```
 
-## ECMAScript 2015
+## ECMAScript 2015+
 
 ### TC39
 
@@ -1886,6 +1889,27 @@ s.includes('Hello', 6) // false
 `foo ${fn()} bar`
 ```
 
+#### Tagged Templates
+
+```js
+function template(strings, ...keys) {
+  return (function(...values) {
+    var dict = values[values.length - 1] || {};
+    var result = [strings[0]];
+    keys.forEach(function(key, i) {
+      var value = Number.isInteger(key) ? values[key] : dict[key];
+      result.push(value, strings[i + 1]);
+    });
+    return result.join('');
+  });
+}
+
+var t1Closure = template`${0}${1}${0}!`;
+t1Closure('Y', 'A');  // "YAY!"
+var t2Closure = template`${0} ${'foo'}!`;
+t2Closure('Hello', {foo: 'World'});  // "Hello World!"
+```
+
 - 编译模板(小型模板引擎)
 
 ```js
@@ -2097,7 +2121,36 @@ i32a.copyWithin(0, 2);
 // => Int32Array [3, 4, 5, 4, 5]
 ```
 
-### export
+### Modules
+
+import and export
+
+```js
+import { lastName as surname } from './profile.js';
+```
+
+```js
+export const firstName = 'Michael';
+export const lastName = 'Jackson';
+export const year = 1958;
+```
+
+```js
+// profile.js
+const firstName = 'Michael';
+const lastName = 'Jackson';
+const year = 1958;
+
+export {firstName, lastName, year};
+```
+
+```js
+// 接口改名
+export { foo as myFoo } from 'my_module';
+
+// 整体输出
+export * from 'my_module';
+```
 
 ### Class 语法糖
 
@@ -2141,6 +2194,54 @@ console.log(bb.__proto__ === BB.prototype);
 ```
 
 禁止对复合对象字面量进行导出操作 (array literal, object literal)
+
+### Symbol
+
+implement iterator with `Symbol.iterator`
+
+```js
+function methodsIterator() {  
+  let index = 0;
+  let methods = Object.keys(this).filter((key) => {
+    return typeof this[key] === 'function';
+  }).map(key => this[key]);
+  return {
+    next: () => ({ // Conform to Iterator protocol
+      done : index >= methods.length,
+      value: methods[index++]
+    })
+  };
+}
+let myMethods = {  
+  toString: function() {
+    return '[object myMethods]';
+  },
+  sumNumbers: function(a, b) {
+    return a + b;
+  },
+  numbers: [1, 5, 6],
+  [Symbol.iterator]: methodsIterator // Conform to Iterable Protocol
+};
+for (let method of myMethods) {  
+  console.log(method); // logs methods `toString` and `sumNumbers`
+}
+```
+
+### Proxy and Reflect
+
+modify default object behavior with `Proxy` and `Reflect`
+
+```js
+Proxy(target, {
+  set: function(target, name, value, receiver) {
+    var success = Reflect.set(target,name, value, receiver);
+    if (success) {
+      log('property ' + name + ' on ' + target + ' set to ' + value);
+    }
+    return success;
+  }
+});
+```
 
 ## Under the hood
 
