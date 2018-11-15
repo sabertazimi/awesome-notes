@@ -828,6 +828,8 @@ export default Intl;
 #### Animation
 
 - [React Animation npm install react-set-animate --save](https://github.com/FunctionFoundry/react-set-animate)
+- [React Particle Animation](https://github.com/transitive-bullshit/react-particle-animation)
+- [React Particle Button](https://github.com/transitive-bullshit/react-particle-effect-button)
 
 #### Charts
 
