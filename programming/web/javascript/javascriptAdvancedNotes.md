@@ -157,6 +157,8 @@
   - [Performance](#performance)
     - [Web Browser Speed](#web-browser-speed)
       - [Speed Tools](#speed-tools)
+    - [Data Format and Size](#data-format-and-size)
+      - [Images](#images)
     - [V8 Good Parts](#v8-good-parts)
       - [Object Shape](#object-shape)
       - [Inline Cache](#inline-cache)
@@ -2346,6 +2348,29 @@ Proxy(target, {
 - [FID Tracking](https://github.com/GoogleChromeLabs/first-input-delay)
 - [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
 - [Lighthouse (`audit` tab)](https://github.com/GoogleChrome/lighthouse)
+
+### Data Format and Size
+
+#### Images
+
+mp4 smaller than gif
+
+```html
+<!-- ffmpeg -i dog.gif dog.mp4 -->
+<video autoplay loop muted playsinline>
+  <source src="dog.mp4" type="video/mp4">
+</video>
+```
+
+WebP 25-35% smaller than jpg/png
+
+```html
+<picture>
+  <source type="image/webp" srcset="flower.webp">
+  <source type="image/jpeg" srcset="flower.jpg">
+  <img src="flower.jpg">
+</picture>
+```
 
 ### V8 Good Parts
 
