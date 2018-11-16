@@ -2396,6 +2396,8 @@ reduce image transfer sizes by average of ~20%
 
 #### Images Lazy Loading
 
+- Lazy Loading Polyfill
+
 ```html
 <img data-src="flower.jpg" class="lazyload">
 ```
@@ -2408,6 +2410,14 @@ window.addEventListener('scroll', function(event) {
     }
   })
 });
+```
+
+- Native Lazy Loading
+
+```html
+<img src="flower.jpg" lazyload="auto">
+<img src="flower.jpg" lazyload="on">
+<img src="flower.jpg" lazyload="off">
 ```
 
 ### V8 Good Parts
