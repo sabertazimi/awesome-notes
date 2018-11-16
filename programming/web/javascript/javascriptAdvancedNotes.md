@@ -161,7 +161,11 @@
       - [Images Format](#images-format)
       - [Images Compression](#images-compression)
       - [Images Sizing](#images-sizing)
+    - [Data Loading](#data-loading)
       - [Images Lazy Loading](#images-lazy-loading)
+      - [JavaScript Lazy Loading](#javascript-lazy-loading)
+      - [JavaScript Preloading](#javascript-preloading)
+      - [Babel Config for JavaScript](#babel-config-for-javascript)
     - [V8 Good Parts](#v8-good-parts)
       - [Object Shape](#object-shape)
       - [Inline Cache](#inline-cache)
@@ -2394,6 +2398,8 @@ reduce image transfer sizes by average of ~20%
 >
 ```
 
+### Data Loading
+
 #### Images Lazy Loading
 
 - Lazy Loading Polyfill
@@ -2418,6 +2424,43 @@ window.addEventListener('scroll', function(event) {
 <img src="flower.jpg" lazyload="auto">
 <img src="flower.jpg" lazyload="on">
 <img src="flower.jpg" lazyload="off">
+```
+
+#### JavaScript Lazy Loading
+
+```jsx
+const DetailsComponent = lazy(() => import('./details'));
+const PageComponent = () => {
+  <Suspense fallback={<div>Loading...</div>}>
+    <DetailsComponent />
+  </Suspense>
+}
+```
+
+#### JavaScript Preloading
+
+```js
+<link rel="preload" as="script" href="critical.js">
+```
+
+#### Babel Config for JavaScript
+
+```json
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "esmodules": true,
+          "node": ">= 8",
+          "browsers": "> 0.25%",
+        },
+        "useBuiltIns": "usage"
+      }
+    ]
+  ]
+}
 ```
 
 ### V8 Good Parts
