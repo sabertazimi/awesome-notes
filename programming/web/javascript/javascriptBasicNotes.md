@@ -178,6 +178,7 @@
     - [Object Schema Validator](#object-schema-validator)
     - [Color](#color)
     - [iFrame](#iframe)
+    - [SVG](#svg)
 
 <!-- /TOC -->
 
@@ -2916,3 +2917,7 @@ async getAuthors(authorIds) {
 ### iFrame
 
 - [Postmate](https://github.com/dollarshaveclub/postmate)
+
+### SVG
+
+- [GreenSock JS](https://github.com/greensock/GreenSock-JS)
