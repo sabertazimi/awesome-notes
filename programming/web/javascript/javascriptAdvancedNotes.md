@@ -14,14 +14,6 @@
       - [Global Exection Context](#global-exection-context)
       - [Function Exection Context](#function-exection-context)
     - [Event Loop](#event-loop)
-  - [Project](#project)
-    - [Principle](#principle)
-      - [不修改他人对象](#不修改他人对象)
-    - [Task Runner - Gulp](#task-runner---gulp)
-      - [Gulp Plugins](#gulp-plugins)
-      - [Gulpfile.js](#gulpfilejs)
-    - [MV* Pattern](#mv-pattern)
-    - [View](#view)
   - [Effective JavaScript](#effective-javascript)
     - [Memory Leak](#memory-leak)
     - [禁用特性](#禁用特性)
@@ -56,6 +48,26 @@
     - [算数逻辑运算](#算数逻辑运算)
       - [位操作](#位操作)
       - [Math 对象](#math-对象)
+  - [Browser Performance](#browser-performance)
+    - [Browser Speed](#browser-speed)
+      - [Speed Tools](#speed-tools)
+    - [Data Format and Size](#data-format-and-size)
+      - [Images Format](#images-format)
+      - [Images Compression](#images-compression)
+      - [Images Sizing](#images-sizing)
+    - [Data Loading](#data-loading)
+      - [Data Preloading](#data-preloading)
+      - [Images Lazy Loading](#images-lazy-loading)
+      - [JavaScript Lazy Loading](#javascript-lazy-loading)
+      - [Babel Config for JavaScript](#babel-config-for-javascript)
+    - [V8 Good Parts](#v8-good-parts)
+      - [Object Shape](#object-shape)
+      - [Inline Cache](#inline-cache)
+      - [V8 Perf Tools](#v8-perf-tools)
+    - [Monkey Patch](#monkey-patch)
+    - [Performance Best Practice](#performance-best-practice)
+    - [Awesome Performance Tutorial](#awesome-performance-tutorial)
+    - [Perf and Analysis Tools](#perf-and-analysis-tools)
   - [Functional JavaScript](#functional-javascript)
     - [Pros](#pros)
     - [Cons](#cons)
@@ -152,27 +164,6 @@
     - [Class 语法糖](#class-语法糖)
     - [Symbol](#symbol)
     - [Proxy and Reflect](#proxy-and-reflect)
-  - [Performance](#performance)
-    - [Web Browser Speed](#web-browser-speed)
-      - [Speed Tools](#speed-tools)
-    - [Data Format and Size](#data-format-and-size)
-      - [Images Format](#images-format)
-      - [Images Compression](#images-compression)
-      - [Images Sizing](#images-sizing)
-    - [Data Loading](#data-loading)
-      - [Data Preloading](#data-preloading)
-      - [Images Lazy Loading](#images-lazy-loading)
-      - [JavaScript Lazy Loading](#javascript-lazy-loading)
-      - [Babel Config for JavaScript](#babel-config-for-javascript)
-    - [CSS API](#css-api)
-    - [V8 Good Parts](#v8-good-parts)
-      - [Object Shape](#object-shape)
-      - [Inline Cache](#inline-cache)
-      - [V8 Perf Tools](#v8-perf-tools)
-    - [Monkey Patch](#monkey-patch)
-    - [Performance Best Practice](#performance-best-practice)
-    - [Awesome Performance Tutorial](#awesome-performance-tutorial)
-    - [Perf and Analysis Tools](#perf-and-analysis-tools)
   - [PWA](#pwa)
     - [Service Worker](#service-worker)
       - [SW Pros](#sw-pros)
@@ -279,149 +270,6 @@ foo();
 
 As above code, using `setTimeout` with `0` seconds timer
 helps to defer execution of `Promise` and `bar` until the **stack** is **empty**.
-
-## Project
-
-- sass
-- autoprefixer
-- github-css-remove-unused-class
-- Jslint
-- uglification
-- concatenation
-- minimal
-
-```bash
-npm install
-bower install
-npm install gulp --save-dev
-```
-
-### Principle
-
-#### 不修改他人对象
-
-不为 全局对象(DOM对象/BOM对象/类库全局对象) 与 原生对象 覆盖/新增/删除 属性或方法
-
-### Task Runner - Gulp
-
-#### Gulp Plugins
-
-```bash
-npm install jshint gulp-jshint jshint-stylish --save-dev
-npm install gulp-imagemin gulp-concat gulp-uglify gulp-minify-css --save-dev
-npm install gulp-usemin gulp-cache gulp-changed gulp-rev --save-dev
-npm install gulp-rename gulp-notify  browser-sync del --save-dev
-```
-
-#### Gulpfile.js
-
-```js
-ar gulp = require('gulp'),
-    minifycss = require('gulp-minify-css'),
-    jshint = require('gulp-jshint'),
-    stylish = require('jshint-stylish'),
-    uglify = require('gulp-uglify'),
-    usemin = require('gulp-usemin'),
-    imagemin = require('gulp-imagemin'),
-    rename = require('gulp-rename'),
-    concat = require('gulp-concat'),
-    notify = require('gulp-notify'),
-    cache = require('gulp-cache'),
-    changed = require('gulp-changed'),
-    rev = require('gulp-rev'),
-    browserSync = require('browser-sync'),
-    del = require('del');
-
-gulp.task('jshint', function() {
-  return gulp.src('app/scripts/**/*.js')
-  .pipe(jshint())
-  .pipe(jshint.reporter(stylish));
-});
-
-// Clean
-gulp.task('clean', function() {
-    return del(['dist']);
-});
-
-// Default task
-gulp.task('default', ['clean'], function() {
-    gulp.start('usemin', 'imagemin','copyfonts');
-});
-
-gulp.task('usemin',['jshint'], function () {
-  return gulp.src('./app/menu.html')
-      .pipe(usemin({
-        css:[minifycss(),rev()],
-        js: [uglify(),rev()]
-      }))
-      .pipe(gulp.dest('dist/'));
-});
-
-// Images
-gulp.task('imagemin', function() {
-  return del(['dist/images']), gulp.src('app/images/**/*')
-    .pipe(cache(imagemin({
-      optimizationLevel: 3,
-      progressive: true,
-      interlaced: true
-    })))
-    .pipe(gulp.dest('dist/images'))
-    .pipe(notify({ message: 'Images task complete' }));
-});
-
-gulp.task('copyfonts', ['clean'], function() {
-   gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
-   .pipe(gulp.dest('./dist/fonts'));
-   gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
-   .pipe(gulp.dest('./dist/fonts'));
-});
-
-// Watch
-gulp.task('watch', ['browser-sync'], function() {
-  // Watch .js files
-  gulp.watch('{app/scripts/**/*.js,app/styles/**/*.css,app/**/*.html}', ['usemin']);
-      // Watch image files
-  gulp.watch('app/images/**/*', ['imagemin']);
-
-});
-
-gulp.task('browser-sync', ['default'], function () {
-   var files = [
-      'app/**/*.html',
-      'app/styles/**/*.css',
-      'app/images/**/*.png',
-      'app/scripts/**/*.js',
-      'dist/**/*'
-   ];
-
-   browserSync.init(files, {
-      server: {
-         baseDir: "dist",
-         index: "menu.html"
-      }
-   });
-        // Watch any files in dist/, reload on change
-  gulp.watch(['dist/**']).on('change', browserSync.reload);
-    });
-```
-
-### MV* Pattern
-
-在MVC中，视图位于我们架构的顶部，其背后是控制器。模型在控制器后面，而因此我们的视图了解得到我们的控制器，而控制器了解得到模型。这里，我们的视图有对模型的直接访问。然而将整个模型完全暴露给视图可能会有安全和性能损失，这取决于我们应用程序的复杂性。MVVM则尝试去避免这些问题。
-
-在MVP中，控制器的角色被代理器所取代，代理器和视图处于同样的地位，视图和模型的事件都被它侦听着并且接受它的调解。不同于MVVM，没有一个将视图绑定到视图模型的机制，因此我们转而依赖于每一个视图都实现一个允许代理器同视图去交互的接口。
-
-MVVM进一步允许我们创建一个模型的特定视图子集，包含了状态和逻辑信息，避免了将模型完全暴露给视图的必要。不同于MVP的代理器，视图模型并不需要去引用一个视图。视图可以绑定到视图模型的属性上面，视图模型则去将包含在模型中的数据暴露给视图。像我们所提到过的，对视图的抽象意味着其背后的代码需要较少的逻辑。
-
-### View
-
-- 关注表现层逻辑
-- 向相关模块(Model)派发事件
-
-load()回调函数:
-
-- 不加入过多的逻辑处理
-- 不进行多余的DOM操作
 
 ## Effective JavaScript
 
@@ -699,6 +547,24 @@ old.parentNode.replaceChild(clone, old);
 ```js
 element.classList.add('className');
 element.className += ' className';
+```
+
+```js
+script -> style -> layout -> paint -> composite
+```
+
+Make `script` stage become: read then write.
+Interleaved read and write will triger multiple times
+of relayout/repaint/recomposite.
+
+```js
+// bad
+read css -> write css (re-layout/paint/composite)
+-> read css -> write css (re-layout/paint/composite)
+-> read css -> write css (re-layout/paint/composite)
+
+// good
+read css -> write css (only re-layout/paint/composite once)
 ```
 
 ### 定时器(防止脚本阻塞)
@@ -1020,6 +886,230 @@ Math.cos(x)
 Math.sin(x)
 Math.tan(x)
 ```
+
+## Browser Performance
+
+### Browser Speed
+
+- First Contentful Paint
+- First Ipnut Delay
+- Time to Interactive
+
+#### Speed Tools
+
+- [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools/)
+- [FID Tracking](https://github.com/GoogleChromeLabs/first-input-delay)
+- [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
+- [Lighthouse (`audit` tab)](https://github.com/GoogleChrome/lighthouse)
+
+### Data Format and Size
+
+#### Images Format
+
+mp4 smaller than gif
+
+```html
+<!-- ffmpeg -i dog.gif dog.mp4 -->
+<video autoplay loop muted playsinline>
+  <source src="dog.mp4" type="video/mp4">
+</video>
+```
+
+WebP 25-35% smaller than jpg/png
+
+```html
+<picture>
+  <source type="image/webp" srcset="flower.webp">
+  <source type="image/jpeg" srcset="flower.jpg">
+  <img src="flower.jpg">
+</picture>
+```
+
+#### Images Compression
+
+- [Imagemin](https://github.com/Klathmon/imagemin-webpack-plugin)
+
+#### Images Sizing
+
+provide 3~5 different sizes
+reduce image transfer sizes by average of ~20%
+
+- [Sharp](https://github.com/lovell/sharp)
+- [Jimp](https://github.com/oliver-moran/jimp)
+
+```html
+<img srcset="flower-small.jpg 480w, flower-large.jpg 1080w"
+  sizes="50vw"
+  src="flower-large.jpg"
+>
+```
+
+### Data Loading
+
+#### Data Preloading
+
+```js
+<link rel="preload" as="script" href="critical.js">
+<link rel="modulepreload" href="critical-module.mjs">
+
+<link rel="preload" as="image" href="...">
+<link rel="preload" as="font" href="..." crossorigin>
+<link rel="preload" as="fetch" href="..." crossorigin>
+```
+
+#### Images Lazy Loading
+
+- Lazy Loading Polyfill
+
+```html
+<img data-src="flower.jpg" class="lazyload">
+```
+
+```js
+window.addEventListener('scroll', function(event) {
+  Array.from(document.querySelectorAll('.lazyload')).forEach((image) => {
+    if (image.slideIntoView(event.getBoundingClientRect())) {
+      image.setAttribute('src', image.dataset.src);
+    }
+  })
+});
+```
+
+- Native Lazy Loading
+
+```html
+<img src="flower.jpg" lazyload="auto">
+<img src="flower.jpg" lazyload="on">
+<img src="flower.jpg" lazyload="off">
+```
+
+#### JavaScript Lazy Loading
+
+```jsx
+const DetailsComponent = lazy(() => import('./details'));
+const PageComponent = () => {
+  <Suspense fallback={<div>Loading...</div>}>
+    <DetailsComponent />
+  </Suspense>
+}
+```
+
+#### Babel Config for JavaScript
+
+```json
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "esmodules": true,
+          "node": ">= 8",
+          "browsers": "> 0.25%",
+        },
+        "useBuiltIns": "usage"
+      }
+    ]
+  ]
+}
+```
+
+```js
+<script type="module" src="main.mjs"></script>
+<script nomodule src="legacy.js"></script>
+```
+
+### V8 Good Parts
+
+- source code (parser) AST (interpreter) bytecode
+- send profilling data from bytecode to optimizing compiler, generate optimized code
+- **Ignition** interpreter
+- **TurboFan** optimizing compiler (2 for SpiderMonkey/Edge, 3 for Safari)
+
+#### Object Shape
+
+```js
+// o1 and o2 have the same shape
+// JSObject(1, 2) => Shape('x', 'y')
+// JSObject(3, 4) => Shape('x', 'y')
+// 'x' => 0 Offset, Writable, Enumerable, Configurable
+// 'y' => 1 Offset, Writable, Enumerable, Configurable
+const o1 = { x: 1, y: 2 };
+const o2 = { x: 3, y: 4 };
+```
+
+Shape Transform
+
+```js
+// Shape chain: Shape(empty) => Shape(x) => Shape(x, y)
+const o = {};
+o.x = 1;
+o.y = 2;
+
+// Shape chain: Shape(empty) => Shape(y) => Shape(y, x)
+const o = {};
+o.y = 2;
+o.x = 1;
+
+// Shape chain: Shape(x)
+const o = { x: 1};
+```
+
+array shape: Shape('length'), 'length' => 0 Offset, Writable
+
+#### Inline Cache
+
+V8 use ICs to memorize information (same shape) where to find properties on objects:
+
+- always initialize objects in the same way (generate the same shape)
+- don't mess with property attributes of array elements
+
+#### V8 Perf Tools
+
+- [deoptigate](https://github.com/thlorenz/deoptigate)
+- [turbolizer](https://github.com/thlorenz/turbolizer)
+- [v8 map processor](https://github.com/thlorenz/v8-map-processor)
+
+### Monkey Patch
+
+```js
+let _wr = function (type) {
+    let orig = window.history[type];
+
+    return function () {
+        let rv = orig.apply(this, arguments);
+        let e = new Event(type.toLowerCase());
+        e.arguments = arguments;
+        window.dispatchEvent(e);
+        return rv;
+    };
+};
+
+window.history.pushState = _wr('pushState');
+window.history.replaceState = _wr('replaceState');
+
+window.addEventListener('pushstate', function (event) {
+    // doing something
+});
+
+window.addEventListener('replacestate', function (event) {
+    // doing something
+});
+```
+
+### Performance Best Practice
+
+- use monomorphic objects due to shape and inline caches
+- use monomorphic fucntion in hot code paths
+
+### Awesome Performance Tutorial
+
+- [v8 perf](https://github.com/thlorenz/v8-perf)
+
+### Perf and Analysis Tools
+
+- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
+- [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report/)
 
 ## Functional JavaScript
 
@@ -2331,250 +2421,6 @@ Proxy(target, {
   }
 });
 ```
-
-## Performance
-
-### Web Browser Speed
-
-- First Contentful Paint
-- First Ipnut Delay
-- Time to Interactive
-
-#### Speed Tools
-
-- [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools/)
-- [FID Tracking](https://github.com/GoogleChromeLabs/first-input-delay)
-- [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
-- [Lighthouse (`audit` tab)](https://github.com/GoogleChrome/lighthouse)
-
-### Data Format and Size
-
-#### Images Format
-
-mp4 smaller than gif
-
-```html
-<!-- ffmpeg -i dog.gif dog.mp4 -->
-<video autoplay loop muted playsinline>
-  <source src="dog.mp4" type="video/mp4">
-</video>
-```
-
-WebP 25-35% smaller than jpg/png
-
-```html
-<picture>
-  <source type="image/webp" srcset="flower.webp">
-  <source type="image/jpeg" srcset="flower.jpg">
-  <img src="flower.jpg">
-</picture>
-```
-
-#### Images Compression
-
-- [Imagemin](https://github.com/Klathmon/imagemin-webpack-plugin)
-
-#### Images Sizing
-
-provide 3~5 different sizes
-reduce image transfer sizes by average of ~20%
-
-- [Sharp](https://github.com/lovell/sharp)
-- [Jimp](https://github.com/oliver-moran/jimp)
-
-```html
-<img srcset="flower-small.jpg 480w, flower-large.jpg 1080w"
-  sizes="50vw"
-  src="flower-large.jpg"
->
-```
-
-### Data Loading
-
-#### Data Preloading
-
-```js
-<link rel="preload" as="script" href="critical.js">
-<link rel="modulepreload" href="critical-module.mjs">
-
-<link rel="preload" as="image" href="...">
-<link rel="preload" as="font" href="..." crossorigin>
-<link rel="preload" as="fetch" href="..." crossorigin>
-```
-
-#### Images Lazy Loading
-
-- Lazy Loading Polyfill
-
-```html
-<img data-src="flower.jpg" class="lazyload">
-```
-
-```js
-window.addEventListener('scroll', function(event) {
-  Array.from(document.querySelectorAll('.lazyload')).forEach((image) => {
-    if (image.slideIntoView(event.getBoundingClientRect())) {
-      image.setAttribute('src', image.dataset.src);
-    }
-  })
-});
-```
-
-- Native Lazy Loading
-
-```html
-<img src="flower.jpg" lazyload="auto">
-<img src="flower.jpg" lazyload="on">
-<img src="flower.jpg" lazyload="off">
-```
-
-#### JavaScript Lazy Loading
-
-```jsx
-const DetailsComponent = lazy(() => import('./details'));
-const PageComponent = () => {
-  <Suspense fallback={<div>Loading...</div>}>
-    <DetailsComponent />
-  </Suspense>
-}
-```
-
-#### Babel Config for JavaScript
-
-```json
-{
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "esmodules": true,
-          "node": ">= 8",
-          "browsers": "> 0.25%",
-        },
-        "useBuiltIns": "usage"
-      }
-    ]
-  ]
-}
-```
-
-```js
-<script type="module" src="main.mjs"></script>
-<script nomodule src="legacy.js"></script>
-```
-
-### CSS API
-
-```js
-script -> style -> layout -> paint -> composite
-```
-
-Make `script` stage become: read then write.
-Interleaved read and write will triger multiple times
-of relayout/repaint/recomposite.
-
-```js
-// bad
-read css -> write css (re-layout/paint/composite)
--> read css -> write css (re-layout/paint/composite)
--> read css -> write css (re-layout/paint/composite)
-
-// good
-read css -> write css (only re-layout/paint/composite once)
-```
-
-### V8 Good Parts
-
-- source code (parser) AST (interpreter) bytecode
-- send profilling data from bytecode to optimizing compiler, generate optimized code
-- **Ignition** interpreter
-- **TurboFan** optimizing compiler (2 for SpiderMonkey/Edge, 3 for Safari)
-
-#### Object Shape
-
-```js
-// o1 and o2 have the same shape
-// JSObject(1, 2) => Shape('x', 'y')
-// JSObject(3, 4) => Shape('x', 'y')
-// 'x' => 0 Offset, Writable, Enumerable, Configurable
-// 'y' => 1 Offset, Writable, Enumerable, Configurable
-const o1 = { x: 1, y: 2 };
-const o2 = { x: 3, y: 4 };
-```
-
-Shape Transform
-
-```js
-// Shape chain: Shape(empty) => Shape(x) => Shape(x, y)
-const o = {};
-o.x = 1;
-o.y = 2;
-
-// Shape chain: Shape(empty) => Shape(y) => Shape(y, x)
-const o = {};
-o.y = 2;
-o.x = 1;
-
-// Shape chain: Shape(x)
-const o = { x: 1};
-```
-
-array shape: Shape('length'), 'length' => 0 Offset, Writable
-
-#### Inline Cache
-
-V8 use ICs to memorize information (same shape) where to find properties on objects:
-
-- always initialize objects in the same way (generate the same shape)
-- don't mess with property attributes of array elements
-
-#### V8 Perf Tools
-
-- [deoptigate](https://github.com/thlorenz/deoptigate)
-- [turbolizer](https://github.com/thlorenz/turbolizer)
-- [v8 map processor](https://github.com/thlorenz/v8-map-processor)
-
-### Monkey Patch
-
-```js
-let _wr = function (type) {
-    let orig = window.history[type];
-
-    return function () {
-        let rv = orig.apply(this, arguments);
-        let e = new Event(type.toLowerCase());
-        e.arguments = arguments;
-        window.dispatchEvent(e);
-        return rv;
-    };
-};
-
-window.history.pushState = _wr('pushState');
-window.history.replaceState = _wr('replaceState');
-
-window.addEventListener('pushstate', function (event) {
-    // doing something
-});
-
-window.addEventListener('replacestate', function (event) {
-    // doing something
-});
-```
-
-### Performance Best Practice
-
-- use monomorphic objects due to shape and inline caches
-- use monomorphic fucntion in hot code paths
-
-### Awesome Performance Tutorial
-
-- [v8 perf](https://github.com/thlorenz/v8-perf)
-
-### Perf and Analysis Tools
-
-- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
-- [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report/)
 
 ## PWA
 
