@@ -12,7 +12,7 @@
   - [Grid System](#grid-system)
   - [Graceful Degration](#graceful-degration)
   - [CSS Houdini](#css-houdini)
-  - [Performance](#performance)
+  - [CSS Performance](#css-performance)
     - [CSS Triggers](#css-triggers)
     - [reset.css](#resetcss)
     - [will-change](#will-change)
@@ -118,7 +118,7 @@ CSS Houdini bring many API:
 
 to let developers enhance css without any browser updates
 
-## Performance
+## CSS Performance
 
 ### CSS Triggers
 
