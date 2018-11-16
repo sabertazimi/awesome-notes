@@ -240,6 +240,8 @@ if there’s any pending call back waiting to be executed:
 
 - ES6 job queue: used by `Promises` (higher priority)
 - message queue: used by `setTimeout`, `DOM events`
+- 微任务Microtask，有特权，可以插队: Promise,MutationObserver， MessageChannel
+- 宏任务Macrotask，没有特权:setInterval, setImmediate, I/O
 
 ```js
 const bar = () => {
@@ -270,6 +272,40 @@ foo();
 
 As above code, using `setTimeout` with `0` seconds timer
 helps to defer execution of `Promise` and `bar` until the **stack** is **empty**.
+
+```js
+console.log("1");
+
+setTimeout(()=>{
+    console.log(2)
+    Promise.resolve().then(()=>{
+        console.log(3);
+        process.nextTick(function foo() {
+            console.log(4);
+        });
+    })
+})
+
+Promise.resolve().then(()=>{
+    console.log(5);
+    setTimeout(()=>{
+        console.log(6)
+    })
+    Promise.resolve().then(()=>{
+        console.log(7);
+    })
+})
+
+process.nextTick(function foo() {
+    console.log(8);
+    process.nextTick(function foo() {
+        console.log(9);
+    });
+});
+
+console.log("10")
+// 1 10 8 9 5 7 2 3 4 6
+```
 
 ## Effective JavaScript
 
