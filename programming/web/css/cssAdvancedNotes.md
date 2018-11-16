@@ -18,7 +18,7 @@
     - [will-change](#will-change)
     - [contain](#contain)
     - [window.requestAnimationFrame](#windowrequestanimationframe)
-    - [CSS Perf Tips](#css-perf-tips)
+    - [CSS Loading Tips](#css-loading-tips)
     - [Animation](#animation)
       - [Best Practice](#best-practice)
       - [Animation Internal](#animation-internal)
@@ -216,7 +216,7 @@ function step(timestamp) {
 window.requestAnimationFrame(step);
 ```
 
-### CSS Perf Tips
+### CSS Loading Tips
 
 - Lazyload any CSS not needed for Start Render:
   - This could be Critical CSS;
