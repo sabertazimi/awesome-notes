@@ -164,6 +164,7 @@
       - [Images Lazy Loading](#images-lazy-loading)
       - [JavaScript Lazy Loading](#javascript-lazy-loading)
       - [Babel Config for JavaScript](#babel-config-for-javascript)
+    - [CSS API](#css-api)
     - [V8 Good Parts](#v8-good-parts)
       - [Object Shape](#object-shape)
       - [Inline Cache](#inline-cache)
@@ -2456,6 +2457,26 @@ const PageComponent = () => {
 ```js
 <script type="module" src="main.mjs"></script>
 <script nomodule src="legacy.js"></script>
+```
+
+### CSS API
+
+```js
+script -> style -> layout -> paint -> composite
+```
+
+Make `script` stage become: read then write.
+Interleaved read and write will triger multiple times
+of relayout/repaint/recomposite.
+
+```js
+// bad
+read css -> write css (re-layout/paint/composite)
+-> read css -> write css (re-layout/paint/composite)
+-> read css -> write css (re-layout/paint/composite)
+
+// good
+read css -> write css (only re-layout/paint/composite once)
 ```
 
 ### V8 Good Parts
