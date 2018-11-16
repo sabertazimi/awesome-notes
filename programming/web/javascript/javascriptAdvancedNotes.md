@@ -155,13 +155,16 @@
     - [Symbol](#symbol)
     - [Proxy and Reflect](#proxy-and-reflect)
   - [Performance](#performance)
+    - [Web Browser Speed](#web-browser-speed)
+      - [Speed Tools](#speed-tools)
     - [V8 Good Parts](#v8-good-parts)
       - [Object Shape](#object-shape)
       - [Inline Cache](#inline-cache)
+      - [V8 Perf Tools](#v8-perf-tools)
     - [Monkey Patch](#monkey-patch)
     - [Performance Best Practice](#performance-best-practice)
     - [Awesome Performance Tutorial](#awesome-performance-tutorial)
-    - [Analysis Tools](#analysis-tools)
+    - [Perf and Analysis Tools](#perf-and-analysis-tools)
   - [PWA](#pwa)
 
 <!-- /TOC -->
@@ -2331,6 +2334,19 @@ Proxy(target, {
 
 ## Performance
 
+### Web Browser Speed
+
+- First Contentful Paint
+- First Ipnut Delay
+- Time to Interactive
+
+#### Speed Tools
+
+- [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools/)
+- [FID Tracking](https://github.com/GoogleChromeLabs/first-input-delay)
+- [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
+- [Lighthouse (`audit` tab)](https://github.com/GoogleChrome/lighthouse)
+
 ### V8 Good Parts
 
 - source code (parser) AST (interpreter) bytecode
@@ -2376,6 +2392,12 @@ V8 use ICs to memorize information (same shape) where to find properties on obje
 - always initialize objects in the same way (generate the same shape)
 - don't mess with property attributes of array elements
 
+#### V8 Perf Tools
+
+- [deoptigate](https://github.com/thlorenz/deoptigate)
+- [turbolizer](https://github.com/thlorenz/turbolizer)
+- [v8 map processor](https://github.com/thlorenz/v8-map-processor)
+
 ### Monkey Patch
 
 ```js
@@ -2412,14 +2434,10 @@ window.addEventListener('replacestate', function (event) {
 
 - [v8 perf](https://github.com/thlorenz/v8-perf)
 
-### Analysis Tools
+### Perf and Analysis Tools
 
-- [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools/)
-- [FID Tracking](https://github.com/GoogleChromeLabs/first-input-delay)
 - [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
-- [deoptigate](https://github.com/thlorenz/deoptigate)
-- [turbolizer](https://github.com/thlorenz/turbolizer)
-- [v8 map processor](https://github.com/thlorenz/v8-map-processor)
+- [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report/)
 
 ## PWA
 
