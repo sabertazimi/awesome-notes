@@ -2150,6 +2150,7 @@ content -> centering -> font family -> spacing -> color&contrast
 #### Icons
 
 - [SVG Logos](https://github.com/gilbarbara/logos)
+- [Pure CSS Icons](https://cssicon.space/#/)
 
 ### Animation Component
 
