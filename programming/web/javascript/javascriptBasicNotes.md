@@ -176,6 +176,8 @@
     - [await/async](#awaitasync)
   - [Geolocation API](#geolocation-api)
   - [Web Audio API](#web-audio-api)
+    - [From Oscillator](#from-oscillator)
+    - [From Music Data](#from-music-data)
   - [Web Storage API](#web-storage-api)
   - [Web Files API](#web-files-api)
   - [Web Sockets API](#web-sockets-api)
@@ -3003,6 +3005,50 @@ navigator.geolocation.watchPosition(locationSuccess, locationError, positionOpti
 自动更新地理位置
 
 ## Web Audio API
+
+### From Oscillator
+
+```js
+                         -3  -1   1       4   6       9   11
+                       -4  -2   0   2   3   5   7   8   10  12
+  .___________________________________________________________________________.
+  :  | |  |  | | | |  |  | | | | | |  |  | | | |  |  | | | | | |  |  | | | |  :
+  :  | |  |  | | | |  |  | | | | | |  |  | | | |  |  | | | | | |  |  | | | |  :
+  :  | |  |  | | | |  |  | | | | | |  |  | | | |  |  | | | | | |  |  | | | |  :
+<-:  |_|  |  |_| |_|  |  |_| |_| |_|  |  |_| |_|  |  |_| |_| |_|  |  |_| |_|  :->
+  :   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   :
+  : A | B | C | D | E | F | G | A | B | C | D | E | F | G | A | B | C | D | E :
+  :___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___:
+    ^                           ^           ^               ^           ^
+  220 Hz                      440 Hz      523.25 Hz       880 Hz     1174.65 Hz
+(-1 Octave)                 (middle A)                 (+1 Octave)
+```
+
+```js
+const audioContext = new AudioContext();
+
+const baseFrequency = 440;
+const getNoteFreq = (base, pitch) => base * Math.pow(2, pitch / 12);
+// oscillator.frequency.value = getNoteFreq(440, 7);
+
+const getNoteDetune = pitch => pitch * 100;
+// oscillator.detune.value = getNoteDetune(7);
+
+const play = (type, delay, pitch, duration) => {
+  const oscillator = audioContext.createOscillator()
+  oscillator.connect(audioContext.destination)
+
+  oscillator.type = type;
+  oscillator.detune.value = getNoteDetune(pitch);
+
+  const startTime = audioContext.currentTime + delay;
+  const stopTime = startTime + duration;
+  oscillator.start(startTime);
+  oscillator.stop(stopTime);
+};
+```
+
+### From Music Data
 
 ```js
 const sampleSize = 1024;  // number of samples to collect before analyzing data
