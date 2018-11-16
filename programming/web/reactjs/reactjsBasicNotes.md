@@ -548,6 +548,7 @@ handle(e) {
 - 在store和action中不dom操作或者访问window.属性，只与数据打交道
 - 推荐使用ES6
 - npm的debug包，log组件渲染的每个步骤和动作
+- [Singel](https://github.com/diegohaz/singel)
 
 ## React 16 (New Features)
 
