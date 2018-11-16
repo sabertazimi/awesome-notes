@@ -158,7 +158,10 @@
     - [Web Browser Speed](#web-browser-speed)
       - [Speed Tools](#speed-tools)
     - [Data Format and Size](#data-format-and-size)
-      - [Images](#images)
+      - [Images Format](#images-format)
+      - [Images Compression](#images-compression)
+      - [Images Sizing](#images-sizing)
+      - [Images Lazy Loading](#images-lazy-loading)
     - [V8 Good Parts](#v8-good-parts)
       - [Object Shape](#object-shape)
       - [Inline Cache](#inline-cache)
@@ -2351,7 +2354,7 @@ Proxy(target, {
 
 ### Data Format and Size
 
-#### Images
+#### Images Format
 
 mp4 smaller than gif
 
@@ -2370,6 +2373,41 @@ WebP 25-35% smaller than jpg/png
   <source type="image/jpeg" srcset="flower.jpg">
   <img src="flower.jpg">
 </picture>
+```
+
+#### Images Compression
+
+- [Imagemin](https://github.com/Klathmon/imagemin-webpack-plugin)
+
+#### Images Sizing
+
+provide 3~5 different sizes
+reduce image transfer sizes by average of ~20%
+
+- [Sharp](https://github.com/lovell/sharp)
+- [Jimp](https://github.com/oliver-moran/jimp)
+
+```html
+<img srcset="flower-small.jpg 480w, flower-large.jpg 1080w"
+  sizes="50vw"
+  src="flower-large.jpg"
+>
+```
+
+#### Images Lazy Loading
+
+```html
+<img data-src="flower.jpg" class="lazyload">
+```
+
+```js
+window.addEventListener('scroll', function(event) {
+  Array.from(document.querySelectorAll('.lazyload')).forEach((image) => {
+    if (image.slideIntoView(event.getBoundingClientRect())) {
+      image.setAttribute('src', image.dataset.src);
+    }
+  })
+});
 ```
 
 ### V8 Good Parts
