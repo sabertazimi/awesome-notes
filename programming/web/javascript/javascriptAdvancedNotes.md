@@ -8,6 +8,12 @@
     - [Closure and IIFE](#closure-and-iife)
     - [Check](#check)
     - [Other](#other)
+  - [JavaScript Engine Internal](#javascript-engine-internal)
+    - [Variables Lifecycle](#variables-lifecycle)
+    - [Exection Context](#exection-context)
+      - [Global Exection Context](#global-exection-context)
+      - [Function Exection Context](#function-exection-context)
+    - [Event Loop](#event-loop)
   - [Project](#project)
     - [Principle](#principle)
       - [不修改他人对象](#不修改他人对象)
@@ -143,16 +149,11 @@
     - [Array](#array)
       - [Array.from](#arrayfrom)
       - [Array.copyWithin](#arraycopywithin)
+    - [Arrow Function](#arrow-function)
     - [Modules](#modules)
     - [Class 语法糖](#class-语法糖)
     - [Symbol](#symbol)
     - [Proxy and Reflect](#proxy-and-reflect)
-  - [Under the hood](#under-the-hood)
-    - [Variables Lifecycle](#variables-lifecycle)
-    - [Exection Context](#exection-context)
-      - [Global Exection Context](#global-exection-context)
-      - [Function Exection Context](#function-exection-context)
-    - [Arrow Function](#arrow-function)
   - [Performance](#performance)
     - [V8 Good Parts](#v8-good-parts)
       - [Object Shape](#object-shape)
@@ -185,9 +186,82 @@
 
 !!result 转化成 Boolean
 
+## JavaScript Engine Internal
+
+Under the hood
+
+### Variables Lifecycle
+
+- Creation phase (**Hoisting**)
+  - Declaration phase: 在作用域中注册变量
+  - Initialization phase: 分配内存, 在作用域中绑定变量 (`undefined`)
+- Execution phase/Assignment phase
+
+### Exection Context
+
+#### Global Exection Context
+
+- create global object (`window`)
+- create `this` object(refer to `window`)
+- declare and initialize variable(`undefined`)/function, store them into memory
+
+#### Function Exection Context
+
+- create arguments object
+- create `this` object
+- declare and initialize variable(`undefined`)/function, store them into memory
+
+如果 JavaScript 引擎在函数执行上下文中找不到变量,
+它会在最近的父级执行上下文中查找该变量.
+这个查找链将会一直持续, 直到引擎查找到全局执行上下文.
+这种情况下, 如果全局执行上下文也没有该变量, 那么将会抛出引用错误 (Reference Error).
+子函数“包含”它父级函数的变量环境，把这个概念称为**闭包(Closure)**,
+即使父级函数执行环境已经从执行栈弹出了, 子函数还是可以访问父级函数变量 x (通过作用域链).
+
+### Event Loop
+
+The job of the **event loop** is to look into the call stack
+and determine if the call stack is empty or not.
+If the **call stack** is empty,
+it looks into the **ES6 job queue** and **message queue** to see
+if there’s any pending call back waiting to be executed:
+
+- ES6 job queue: used by `Promises` (higher priority)
+- message queue: used by `setTimeout`, `DOM events`
+
+```js
+const bar = () => {
+  console.log('bar');
+};
+
+const baz = () => {
+  console.log('baz');
+};
+
+const foo = () => {
+  console.log('foo');
+  setTimeout(bar, 0);
+  new Promise((resolve, reject) => {
+    resolve('Promise resolved');
+  }).then(res => console.log(res))
+    .catch(err => console.log(err));
+  baz();
+};
+
+foo();
+
+// foo
+// baz
+// Promised resolved
+// bar
+```
+
+As above code, using `setTimeout` with `0` seconds timer
+helps to defer execution of `Promise` and `bar` until the **stack** is **empty**.
+
 ## Project
 
-- sacc
+- sass
 - autoprefixer
 - github-css-remove-unused-class
 - Jslint
@@ -2121,6 +2195,15 @@ i32a.copyWithin(0, 2);
 // => Int32Array [3, 4, 5, 4, 5]
 ```
 
+### Arrow Function
+
+- no thisArgs binding
+- no arguments binding
+- no prototype binding
+- no suited for `New` constructor
+- not suited as methods of plain object
+  (`this` in arrow function would be refer to `window`)
+
 ### Modules
 
 import and export
@@ -2246,45 +2329,6 @@ Proxy(target, {
 });
 ```
 
-## Under the hood
-
-### Variables Lifecycle
-
-- Creation phase (**Hoisting**)
-  - Declaration phase: 在作用域中注册变量
-  - Initialization phase: 分配内存, 在作用域中绑定变量 (`undefined`)
-- Execution phase/Assignment phase
-
-### Exection Context
-
-#### Global Exection Context
-
-- create global object (`window`)
-- create `this` object(refer to `window`)
-- declare and initialize variable(`undefined`)/function, store them into memory
-
-#### Function Exection Context
-
-- create arguments object
-- create `this` object
-- declare and initialize variable(`undefined`)/function, store them into memory
-
-如果 JavaScript 引擎在函数执行上下文中找不到变量,
-它会在最近的父级执行上下文中查找该变量.
-这个查找链将会一直持续, 直到引擎查找到全局执行上下文.
-这种情况下, 如果全局执行上下文也没有该变量, 那么将会抛出引用错误 (Reference Error).
-子函数“包含”它父级函数的变量环境，把这个概念称为**闭包(Closure)**,
-即使父级函数执行环境已经从执行栈弹出了, 子函数还是可以访问父级函数变量 x (通过作用域链).
-
-### Arrow Function
-
-- no thisArgs binding
-- no arguments binding
-- no prototype binding
-- no suited for `New` constructor
-- not suited as methods of plain object
-  (`this` in arrow function would be refer to `window`)
-
 ## Performance
 
 ### V8 Good Parts
@@ -2371,6 +2415,7 @@ window.addEventListener('replacestate', function (event) {
 ### Analysis Tools
 
 - [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools/)
+- [FID Tracking](https://github.com/GoogleChromeLabs/first-input-delay)
 - [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
 - [deoptigate](https://github.com/thlorenz/deoptigate)
 - [turbolizer](https://github.com/thlorenz/turbolizer)
