@@ -113,8 +113,6 @@
       - [隔离被测代码](#隔离被测代码)
       - [mock/stub/spy](#mockstubspy)
     - [Tools API](#tools-api)
-      - [Chrome Dev Tools](#chrome-dev-tools)
-        - [capture default eventListener](#capture-default-eventlistener)
       - [console API](#console-api)
       - [JS API](#js-api)
         - [Trace Property (Vue Internal)](#trace-property-vue-internal)
@@ -162,9 +160,9 @@
       - [Images Compression](#images-compression)
       - [Images Sizing](#images-sizing)
     - [Data Loading](#data-loading)
+      - [Data Preloading](#data-preloading)
       - [Images Lazy Loading](#images-lazy-loading)
       - [JavaScript Lazy Loading](#javascript-lazy-loading)
-      - [JavaScript Preloading](#javascript-preloading)
       - [Babel Config for JavaScript](#babel-config-for-javascript)
     - [V8 Good Parts](#v8-good-parts)
       - [Object Shape](#object-shape)
@@ -175,6 +173,11 @@
     - [Awesome Performance Tutorial](#awesome-performance-tutorial)
     - [Perf and Analysis Tools](#perf-and-analysis-tools)
   - [PWA](#pwa)
+  - [Chrome Dev Tools](#chrome-dev-tools)
+    - [Elements Panel](#elements-panel)
+    - [Source Panel](#source-panel)
+    - [capture default eventListener](#capture-default-eventlistener)
+    - [More Tools](#more-tools)
 
 <!-- /TOC -->
 
@@ -1446,24 +1449,6 @@ describe("Sum suite File", function() {
 
 ### Tools API
 
-#### Chrome Dev Tools
-
-##### capture default eventListener
-
-> $0: the reference to the currently selected element in the Elements panel
-
-```js
-const listener = getEventListeners($0).click[0].listener;
-$0.removeEventListener('click', listener);
-$0.addEventListener('click', (e) => {
-  // do something
-  // ...
-
-  // then
-  listener(e);
-});
-```
-
 #### console API
 
 ```js
@@ -2400,6 +2385,17 @@ reduce image transfer sizes by average of ~20%
 
 ### Data Loading
 
+#### Data Preloading
+
+```js
+<link rel="preload" as="script" href="critical.js">
+<link rel="modulepreload" href="critical-module.mjs">
+
+<link rel="preload" as="image" href="...">
+<link rel="preload" as="font" href="..." crossorigin>
+<link rel="preload" as="fetch" href="..." crossorigin>
+```
+
 #### Images Lazy Loading
 
 - Lazy Loading Polyfill
@@ -2437,12 +2433,6 @@ const PageComponent = () => {
 }
 ```
 
-#### JavaScript Preloading
-
-```js
-<link rel="preload" as="script" href="critical.js">
-```
-
 #### Babel Config for JavaScript
 
 ```json
@@ -2461,6 +2451,11 @@ const PageComponent = () => {
     ]
   ]
 }
+```
+
+```js
+<script type="module" src="main.mjs"></script>
+<script nomodule src="legacy.js"></script>
 ```
 
 ### V8 Good Parts
@@ -2563,3 +2558,36 @@ Progressive Web Apps:
 - provide a manifest
 - register a ServiceWorker
   (web cache for offline and performance)
+
+## Chrome Dev Tools
+
+### Elements Panel
+
+- break on elements
+
+### Source Panel
+
+- multiple breakpoints: source, XHR/fetch, DOM, global/event listeners
+
+### capture default eventListener
+
+> $0: the reference to the currently selected element in the Elements panel
+
+```js
+const listener = getEventListeners($0).click[0].listener;
+$0.removeEventListener('click', listener);
+$0.addEventListener('click', (e) => {
+  // do something
+  // ...
+
+  // then
+  listener(e);
+});
+```
+
+### More Tools
+
+- rendering
+- layers
+- animations
+- coverage
