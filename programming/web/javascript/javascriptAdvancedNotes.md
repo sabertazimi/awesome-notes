@@ -174,6 +174,11 @@
     - [Awesome Performance Tutorial](#awesome-performance-tutorial)
     - [Perf and Analysis Tools](#perf-and-analysis-tools)
   - [PWA](#pwa)
+    - [Service Worker](#service-worker)
+      - [SW Pros](#sw-pros)
+      - [SW Costs](#sw-costs)
+      - [SW Demo](#sw-demo)
+    - [PWA Library](#pwa-library)
   - [Chrome Dev Tools](#chrome-dev-tools)
     - [Elements Panel](#elements-panel)
     - [Source Panel](#source-panel)
@@ -2577,8 +2582,69 @@ Progressive Web Apps:
 
 - served over `HTTPS`
 - provide a manifest
-- register a ServiceWorker
+- register a `ServiceWorker`
   (web cache for offline and performance)
+
+### Service Worker
+
+#### SW Pros
+
+- cache
+- offline
+- background
+- custom request to minimize network
+
+#### SW Costs
+
+- need startup time
+
+```js
+// 20~100 ms for desktop
+// 100 ms for mobile
+const entry = performance.getEntriesByName(url)[0];
+const swStartupTime = entry.requestStart - entry.workerStart;
+```
+
+- cache reads aren't always instant:
+  - cache hit time = read time (only this case better than `NO SW`),
+  - cache miss time = read time + network latency,
+  - cache slow time = slow read time + network latency,
+  - SW asleep = SW boot latency + read time ( + network latency),
+  - NO SW = network latency.
+
+```js
+const entry = performance.getEntriesByName(url)[0];
+
+// no remote request means this was handled by the cache
+if (entry.transferSize === 0) {
+  const cacheTime = entry.responseStart - entry.requestStart;
+}
+```
+
+```js
+const cacheStart = performance.now();
+const response = await caches.match(event.request);
+const cacheEnd = performance.now();
+```
+
+#### SW Demo
+
+- SW Serving Strategy
+- SW Caching Strategy
+
+```js
+// Check that service workers are registered
+if ('serviceWorker' in navigator) {
+  // Use the window load event to keep the page load performant
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js');
+  });
+}
+```
+
+### PWA Library
+
+- [Workbox](https://github.com/GoogleChrome/workbox)
 
 ## Chrome Dev Tools
 
