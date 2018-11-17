@@ -930,6 +930,7 @@ npm install -g json-server
 
 - [jasmine](https://github.com/jasmine/jasmine)
 - [mocha](https://github.com/mochajs/mocha)
+- [Assert](https://github.com/power-assert-js/power-assert)
 
 #### Feature Testing
 
