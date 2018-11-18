@@ -443,6 +443,8 @@ function FriendListItem(props) {
 }
 ```
 
+reducer hook
+
 ```jsx
 function useReducer(reducer, initialState) {
   const [state, setState] = useState(initialState);
@@ -466,6 +468,8 @@ function Todos() {
 }
 ```
 
+previous hook
+
 ```jsx
 function Counter() {
   const [count, setCount] = useState(0);
@@ -481,6 +485,8 @@ function usePrevious(value) {
   return ref.current;
 }
 ```
+
+store hook
 
 ```js
 import { useState } from 'react';
@@ -508,6 +514,53 @@ export function useStore() {
 
   return [ state, store.setState ];
 }
+```
+
+forece update hook
+
+```js
+// @ts-ignore
+import { useState } from 'react';
+
+interface VoidFunction {
+  (): void;
+}
+
+interface VoidFunctionCreator {
+  (): VoidFunction;
+}
+
+const max: number = 9007199254740990; // Number.MAX_SAFE_INTEGER - 1;
+
+const useForceUpdate: VoidFunctionCreator = (): VoidFunction => {
+  const [ , setState ] = useState(0);
+  const forceUpdate: VoidFunction = (): void => {
+    setState((state: number) => (state + 1) % max);
+  };
+  return forceUpdate;
+};
+
+export default useForceUpdate;
+```
+
+router hook
+
+```js
+import { useContext, useEffect } from 'react';
+import { __RouterContext } from 'react-router';
+import useForceUpdate from 'use-force-update';
+
+const useReactRouter = () => {
+  const forceUpdate = useForceUpdate();
+  const routerContext = useContext(__RouterContext);
+
+  useEffect(
+    () => routerContext.history.listen(forceUpdate),
+    [ routerContext ],
+  );
+
+  return routerContext;
+};
 ```
 
 ## ES6 Syntax
