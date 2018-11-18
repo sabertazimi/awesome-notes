@@ -552,6 +552,23 @@ parseInt(str, base);
 - 对象在 数值运算环境 中 先利用 valueOf(object), 再利用 toString() 转化为数字, 若转化失败, 则返回NaN
 - 对象与 数值加号运算: 先数值加, (**失败后**)再字符串加
 
+```js
+// good
+const totalScore = String(this.reviewScore);
+
+// good
+const val = Number(inputValue);
+
+// good
+const val = parseInt(inputValue, 10);
+
+// good
+const hasAge = Boolean(age);
+
+// best
+const hasAge = !!age;
+```
+
 ## 运算符
 
 - ==与===
