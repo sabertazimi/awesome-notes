@@ -3,12 +3,64 @@
 <!-- TOC -->
 
 - [JavaScript Advanced Notes](#javascript-advanced-notes)
-  - [JavaScript Idioms](#javascript-idioms)
+  - [Modern JavaScript](#modern-javascript)
+    - [TC39](#tc39)
+    - [Babel](#babel)
+      - [babel-node](#babel-node)
+      - [babel-core](#babel-core)
+    - [Variable](#variable)
+      - [let](#let)
+      - [const](#const)
+    - [Destructuring(Pattern Matching)](#destructuringpattern-matching)
+      - [默认值](#默认值)
+      - [Sample](#sample)
+        - [swap](#swap)
+        - [简化函数的参数与返回值](#简化函数的参数与返回值)
+        - [解析 JSON 对象](#解析-json-对象)
+        - [遍历 map/list](#遍历-maplist)
+        - [加载特定模块](#加载特定模块)
+      - [Array Iterator Style Matching](#array-iterator-style-matching)
+      - [Object Style Matching](#object-style-matching)
+      - [String Style Matching](#string-style-matching)
+      - [Number/Boolean Style Matching](#numberboolean-style-matching)
+      - [Function Arguments Style Matching](#function-arguments-style-matching)
+    - [String](#string)
+      - [Methods](#methods)
+      - [Template String](#template-string)
+      - [Tagged Templates](#tagged-templates)
+    - [RegExp](#regexp)
+    - [Number](#number)
+    - [Array](#array)
+      - [Array.from](#arrayfrom)
+      - [Array.copyWithin](#arraycopywithin)
+    - [Arrow Function](#arrow-function)
+    - [Modules](#modules)
+    - [Class 语法糖](#class-语法糖)
+    - [Symbol](#symbol)
+    - [Proxy and Reflect](#proxy-and-reflect)
+  - [Functional JavaScript](#functional-javascript)
+    - [Pros](#pros)
+    - [Cons](#cons)
+    - [闭包(closure)](#闭包closure)
+      - [闭包函数的结构](#闭包函数的结构)
+    - [Partial Application](#partial-application)
+    - [Currying](#currying)
+    - [API](#api)
+      - [`[]`.map](#map)
+      - [`[]`.filter](#filter)
+      - [`[]`.reduce](#reduce)
+      - [`[]`.sort](#sort)
+  - [JavaScript Patterns](#javascript-patterns)
     - [Literal](#literal)
     - [Closure and IIFE](#closure-and-iife)
     - [Check](#check)
+    - [函数(function)](#函数function)
+      - [参数](#参数)
+    - [解耦](#解耦)
+      - [事件处理与UI逻辑](#事件处理与ui逻辑)
+    - [Env and Config](#env-and-config)
     - [Other](#other)
-  - [JavaScript Engine Internal](#javascript-engine-internal)
+  - [JavaScript Internal](#javascript-internal)
     - [Variables Lifecycle](#variables-lifecycle)
     - [Exection Context](#exection-context)
       - [Global Exection Context](#global-exection-context)
@@ -68,24 +120,10 @@
     - [Performance Best Practice](#performance-best-practice)
     - [Awesome Performance Tutorial](#awesome-performance-tutorial)
     - [Perf and Analysis Tools](#perf-and-analysis-tools)
-  - [Functional JavaScript](#functional-javascript)
-    - [Pros](#pros)
-    - [Cons](#cons)
-    - [闭包(closure)](#闭包closure)
-      - [闭包函数的结构](#闭包函数的结构)
-    - [Partial Application](#partial-application)
-    - [Currying](#currying)
-    - [API](#api)
-      - [`[]`.map](#map)
-      - [`[]`.filter](#filter)
-      - [`[]`.reduce](#reduce)
-      - [`[]`.sort](#sort)
-  - [Code Style Guide](#code-style-guide)
+  - [JavaScript Style](#javascript-style)
     - [Style](#style)
       - [命名规范](#命名规范)
-      - [全局变量](#全局变量)
       - [初始化模式](#初始化模式)
-      - [单一var模式](#单一var模式)
       - [条件表达式](#条件表达式)
       - [换行](#换行)
       - [空格](#空格)
@@ -94,14 +132,6 @@
         - [对象](#对象)
         - [属性](#属性)
         - [方法/函数](#方法函数)
-    - [Guide](#guide)
-      - [函数(function)](#函数function)
-        - [参数](#参数)
-      - [解耦](#解耦)
-        - [事件处理与UI逻辑](#事件处理与ui逻辑)
-        - [配置文件](#配置文件)
-  - [浏览器兼容性(Browser Compatibility)](#浏览器兼容性browser-compatibility)
-    - [特性检测](#特性检测)
   - [Testing and Debugging](#testing-and-debugging)
     - [Log](#log)
     - [Frameworks](#frameworks)
@@ -129,56 +159,894 @@
       - [JS API](#js-api)
         - [Trace Property (Vue Internal)](#trace-property-vue-internal)
       - [Node API](#node-api)
-  - [ECMAScript 2015+](#ecmascript-2015)
-    - [TC39](#tc39)
-    - [Babel](#babel)
-      - [babel-node](#babel-node)
-      - [babel-core](#babel-core)
-    - [Variable](#variable)
-      - [let](#let)
-      - [const](#const)
-    - [Destructuring(Pattern Matching)](#destructuringpattern-matching)
-      - [默认值](#默认值)
-      - [Sample](#sample)
-        - [swap](#swap)
-        - [简化函数的参数与返回值](#简化函数的参数与返回值)
-        - [解析 JSON 对象](#解析-json-对象)
-        - [遍历 map/list](#遍历-maplist)
-        - [加载特定模块](#加载特定模块)
-      - [Array Iterator Style Matching](#array-iterator-style-matching)
-      - [Object Style Matching](#object-style-matching)
-      - [String Style Matching](#string-style-matching)
-      - [Number/Boolean Style Matching](#numberboolean-style-matching)
-      - [Function Arguments Style Matching](#function-arguments-style-matching)
-    - [String](#string)
-      - [Methods](#methods)
-      - [Template String](#template-string)
-      - [Tagged Templates](#tagged-templates)
-    - [RegExp](#regexp)
-    - [Number](#number)
-    - [Array](#array)
-      - [Array.from](#arrayfrom)
-      - [Array.copyWithin](#arraycopywithin)
-    - [Arrow Function](#arrow-function)
-    - [Modules](#modules)
-    - [Class 语法糖](#class-语法糖)
-    - [Symbol](#symbol)
-    - [Proxy and Reflect](#proxy-and-reflect)
+    - [Browser Compatibility](#browser-compatibility)
+      - [特性检测](#特性检测)
+  - [Chrome Dev Tools](#chrome-dev-tools)
+    - [Elements Panel](#elements-panel)
+    - [Source Panel](#source-panel)
+    - [capture default eventListener](#capture-default-eventlistener)
+    - [More Tools](#more-tools)
   - [PWA](#pwa)
     - [Service Worker](#service-worker)
       - [SW Pros](#sw-pros)
       - [SW Costs](#sw-costs)
       - [SW Demo](#sw-demo)
     - [PWA Library](#pwa-library)
-  - [Chrome Dev Tools](#chrome-dev-tools)
-    - [Elements Panel](#elements-panel)
-    - [Source Panel](#source-panel)
-    - [capture default eventListener](#capture-default-eventlistener)
-    - [More Tools](#more-tools)
 
 <!-- /TOC -->
 
-## JavaScript Idioms
+## Modern JavaScript
+
+### TC39
+
+- [New Feature Process](http://tc39.github.io/process-document)
+
+### Babel
+
+```bash
+babel example.js -o compiled.js
+babel src -d lib -s
+```
+
+#### babel-node
+
+A read-eval-print loop(REPL) can replace node REPL.
+
+#### babel-core
+
+提供 babel 转码 API
+
+```bash
+npm install babel-core --save
+```
+
+```js
+const babel = require('babel-core');
+
+// 字符串转码
+babel.transform('code();', options);
+// => { code, map, ast }
+
+// 文件转码（异步）
+babel.transformFile('filename.js', options, function(err, result) {
+      result; // => { code, map, ast }
+});
+
+// 文件转码（同步）
+babel.transformFileSync('filename.js', options);
+// => { code, map, ast }
+
+// Babel AST转码
+babel.transformFromAst(ast, code, options);
+// => { code, map, ast }
+```
+
+### Variable
+
+- 一方面规定，var命令和function命令声明的全局变量，依旧是全局对象的属性
+- 另一方面规定，let命令、const命令、class命令声明的全局变量，不属于全局对象的属性
+
+#### let
+
+- 不存在变量提升
+- 块级作用域(Temporal Dead Zone)
+- 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError
+
+#### const
+
+- const一旦声明变量，就必须立即初始化，不能留到以后赋值
+- 块级作用域(Temporal Dead Zone)
+- 引用一个引用变量时，只表示此变量地址不可变，但所引用变量的值/属性可变(* const)
+
+### Destructuring(Pattern Matching)
+
+- **建议只要有可能，就不要在模式中放置圆括号**
+- 赋值语句的非模式部分，可以使用圆括号
+
+#### 默认值
+
+- ES6内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
+- 如果一个数组成员不严格等于undefined，默认值不会生效
+
+```js
+const [x = 1] = [undefined];
+x // 1
+
+const [x = 1] = [null];
+x // null
+```
+
+```js
+let [x = 1, y = x] = [];     // x=1; y=1
+let [x = 1, y = x] = [2];    // x=2; y=2
+let [x = 1, y = x] = [1, 2]; // x=1; y=2
+let [x = y, y = 1] = [];     // ReferenceError
+```
+
+#### Sample
+
+##### swap
+
+```js
+[x, y] = [y, x];
+```
+
+##### 简化函数的参数与返回值
+
+- 可用于工厂(factory)/设置(options)模式: 传参一般为 options 对象，具有固定的属性名
+- 一次性定义多个参数
+- 一次性定义多个参数的默认值
+
+```js
+// 参数是一组有次序的值
+function f([x, y, z]) { ... }
+f([1, 2, 3])
+
+// 参数是一组无次序的值
+function f({x, y, z}) { ... }
+f({z: 3, y: 2, x: 1})
+
+// 可省略 var foo = config.foo || 'default foo';
+jQuery.ajax = function (url, {
+  async = true,
+  beforeSend = function () {},
+  cache = true,
+  complete = function () {},
+  crossDomain = false,
+  global = true,
+  // ... more config
+}) {
+  // ... do stuff
+};
+```
+
+```js
+// 返回一个数组
+function example() {
+  return [1, 2, 3];
+}
+const [a, b, c] = example();
+
+// 返回一个对象
+function example() {
+  return {
+    foo: 1,
+    bar: 2
+  };
+}
+const { foo, bar } = example();
+```
+
+##### 解析 JSON 对象
+
+```js
+const jsonData = {
+  id: 42,
+  status: "OK",
+  data: [867, 5309]
+}
+
+const { id, status, data: number } = jsonData;
+
+console.log(id, status, number)
+// 42, "OK", [867, 5309]
+```
+
+##### 遍历 map/list
+
+```js
+const map = new Map();
+map.set('first', 'hello');
+map.set('second', 'world');
+
+for (let [key, value] of map) {
+  console.log(key + " is " + value);
+}
+// first is hello
+// second is world
+
+// 获取键名
+for (let [key] of map) {
+  // ...
+}
+
+// 获取键值
+for (let [,value] of map) {
+  // ...
+}
+```
+
+##### 加载特定模块
+
+```js
+const { SourceMapConsumer, SourceNode } = require("source-map");
+```
+
+#### Array Iterator Style Matching
+
+等号右边必须为数组等实现了 Iterator 接口的对象,否则报错
+
+- Array
+- Set
+- Generator 函数
+
+```js
+const [foo, [[bar], baz]] = [1, [[2], 3]];
+foo // 1
+bar // 2
+baz // 3
+
+const [ , , third] = ["foo", "bar", "baz"];
+third // "baz"
+
+const [x, , y] = [1, 2, 3];
+x // 1
+y // 3
+
+const [head, ...tail] = [1, 2, 3, 4];
+head // 1
+tail // [2, 3, 4]
+
+const [x, y, ...z] = ['a'];
+x // "a"
+y // undefined
+z // []
+
+// Generator 函数
+function* fibs() {
+  var a = 0;
+  var b = 1;
+  while (true) {
+    yield a;
+    [a, b] = [b, a + b];
+  }
+}
+
+const [first, second, third, fourth, fifth, sixth] = fibs();
+sixth // 5
+```
+
+#### Object Style Matching
+
+- 真正被赋值的是后者，而不是前者
+
+```js
+const {pattern: variable} = { key: value };
+```
+
+- 解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象
+- undefined/null 无法转化为对象
+
+```js
+const { prop: x } = undefined; // TypeError
+const { prop: y } = null; // TypeError
+```
+
+```js
+const { bar, foo } = { foo: "aaa", bar: "bbb" };
+foo // "aaa"
+bar // "bbb"
+
+const { foo: foo, bar: bar } = { foo: "aaa", bar: "bbb" };
+
+const { baz } = { foo: "aaa", bar: "bbb" };
+baz // undefined
+```
+
+```js
+const { foo: baz } = { foo: "aaa", bar: "bbb" };
+baz // "aaa"
+
+const obj = { first: 'hello', last: 'world' };
+const { first: f, last: l } = obj;
+f // 'hello'
+l // 'world'
+```
+
+```js
+const { log, sin, cos } = Math;
+```
+
+#### String Style Matching
+
+```js
+const [a, b, c, d, e] = 'hello';
+a // "h"
+b // "e"
+c // "l"
+d // "l"
+e // "o"
+
+let {length : len} = 'hello';
+len // 5
+```
+
+#### Number/Boolean Style Matching
+
+number/boolean 会转化成对象
+
+```js
+let {toString: s} = 123;
+s === Number.prototype.toString // true
+
+let {toString: s} = true;
+s === Boolean.prototype.toString // true
+```
+
+#### Function Arguments Style Matching
+
+```js
+function add([x, y]){
+  return x + y;
+}
+add([1, 2]) // 3
+
+[[1, 2], [3, 4]].map(([a, b]) => a + b)
+// [ 3, 7 ]
+
+function move({x = 0, y = 0} = {}) {
+  return [x, y];
+}
+move({x: 3, y: 8}); // [3, 8]
+move({x: 3}); // [3, 0]
+move({}); // [0, 0]
+move(); // [0, 0]
+
+// 严格为 undefined 时，触发默认值设置
+[1, undefined, 3].map((x = 'yes') => x)
+// [ 1, 'yes', 3 ]
+```
+
+### String
+
+```js
+'\z' === 'z'  // true
+'\172' === 'z' // true
+'\x7A' === 'z' // true
+'\u007A' === 'z' // true
+'\u{7A}' === 'z' // true
+```
+
+#### Methods
+
+- string.codePointAt(index): 正确处理 4 字节存储字符
+- string.fromCodePoint(codePoint)
+
+```js
+function is32Bit(c) {
+  return c.codePointAt(0) > 0xFFFF;
+}
+
+String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y'
+// true
+```
+
+- string.includes(substr)/startsWith(substr)/endsWith(substr)
+- 使用第二个参数n时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束
+
+```js
+const s = 'Hello world!';
+
+s.startsWith('world', 6) // true
+s.endsWith('Hello', 5) // true
+s.includes('Hello', 6) // false
+```
+
+- repeat(times)
+
+```js
+'hello'.repeat(2) // "hellohello"
+'na'.repeat(2.9) // "nana"
+
+'na'.repeat(-0.9) // ""
+'na'.repeat(-1) // RangeError
+
+'na'.repeat(NaN) // ""
+'na'.repeat(Infinity) // RangeError
+
+'na'.repeat('na') // ""
+'na'.repeat('3') // "nanana"
+```
+
+- padStart/padEnd(len, paddingStr)
+
+```js
+'1'.padStart(10, '0') // "0000000001"
+'12'.padStart(10, '0') // "0000000012"
+'123456'.padStart(10, '0') // "0000123456"
+
+'12'.padStart(10, 'YYYY-MM-DD') // "YYYY-MM-12"
+'09-12'.padStart(10, 'YYYY-MM-DD') // "YYYY-09-12"
+```
+
+#### Template String
+
+`str` 表示模板字符串
+
+```js
+// 普通字符串
+`In JavaScript '\n' is a line-feed.`
+`\`Yo\` World!`
+
+// 多行字符串
+`In JavaScript this is
+ not legal.`
+
+// 引用变量
+`${x} + ${y * 2} = ${x + y * 2}`
+`${obj.x + obj.y}`
+
+// 调用函数
+`foo ${fn()} bar`
+```
+
+#### Tagged Templates
+
+```js
+function template(strings, ...keys) {
+  return (function(...values) {
+    const dict = values[values.length - 1] || {};
+    const result = [strings[0]];
+    keys.forEach(function(key, i) {
+      const value = Number.isInteger(key) ? values[key] : dict[key];
+      result.push(value, strings[i + 1]);
+    });
+    return result.join('');
+  });
+}
+
+const t1Closure = template`${0}${1}${0}!`;
+t1Closure('Y', 'A');  // "YAY!"
+const t2Closure = template`${0} ${'foo'}!`;
+t2Closure('Hello', {foo: 'World'});  // "Hello World!"
+```
+
+- 编译模板(小型模板引擎)
+
+```js
+function compile(template){
+    const evalExpr = /<%=(.+?)%>/g;
+    const expr = /<%([\s\S]+?)%>/g;
+
+    template = template
+      .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
+      .replace(expr, '`); \n $1 \n  echo(`');
+
+    template = 'echo(`' + template + '`);';
+
+    const script =
+    `(function parse(data){
+      var output = "";
+
+      function echo(html){
+        output += html;
+      }
+
+      ${ template }
+
+      return output;
+    })`;
+
+    return script;
+}
+
+const template = `
+<ul>
+  <% for(var i=0; i < data.supplies.length; i++) { %>
+    <li><%= data.supplies[i] %></li>
+  <% } %>
+</ul>
+`;
+const parse = compile(template);
+div.innerHTML = parse({ supplies: [ "broom", "mop", "cleaner" ] });
+// => <ul>
+// =>   <li>broom</li>
+// =>   <li>mop</li>
+// =>   <li>cleaner</li>
+// => </ul>
+
+
+// 下面的hashTemplate函数
+// 是一个自定义的模板处理函数
+const libraryHtml = hashTemplate`
+  <ul>
+    #for book in ${myBooks}
+      <li><i>#{book.title}</i> by #{book.author}</li>
+    #end
+  </ul>
+`;
+```
+
+- 国际化处理
+
+```js
+i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`
+// "欢迎访问xxx，您是第xxxx位访问者！"
+```
+
+- XSS 攻击
+
+```js
+const message =
+  SaferHTML`<p>${sender} has sent you a message.</p>`;
+
+function SaferHTML(templateData) {
+  let s = templateData[0];
+  for (let i = 1; i < arguments.length; i++) {
+    const arg = String(arguments[i]);
+
+    // Escape special characters in the substitution.
+    s += arg.replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+
+    // Don't escape special characters in the template.
+    s += templateData[i];
+  }
+  return s;
+}
+```
+
+- 运行代码
+
+```js
+jsx`
+  <div>
+    <input
+      ref='input'
+      onChange='${this.handleChange}'
+      defaultValue='${this.state.value}' />
+      ${this.state.value}
+   </div>
+`
+
+java`
+class HelloWorldApp {
+  public static void main(String[] args) {
+    System.out.println(“Hello World!”); // Display the string.
+  }
+}
+`
+HelloWorldApp.main();
+```
+
+### RegExp
+
+- u 修饰符
+- y(粘连全局符) 修饰符号隐含了头部匹配的标志
+
+```js
+function codePointLength(text) {
+      var result = text.match(/[\s\S]/gu);
+        return result ? result.length : 0;
+}
+
+const s = '𠮷𠮷';
+
+s.length // 4
+codePointLength(s) // 2
+```
+
+### Number
+
+- 0bxxx/0Bxxx
+- 0oxxx/0Oxxx
+- Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()
+- Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`
+- ** 指数运算符
+- BigInt
+
+```js
+const a = 2172141653;
+const b = 15346349309;
+a * b
+// => 33334444555566670000
+BigInt(a) * BigInt(b)
+// => 33334444555566667777n
+```
+
+### Array
+
+#### Array.from
+
+强大的**函数式**方法
+
+- 伪数组对象(array-like object)
+- 可枚举对象(iterable object)
+- 克隆数组
+- map 函数
+
+```js
+// Set
+// Map
+
+// NodeList对象
+const ps = document.querySelectorAll('p');
+Array.from(ps).forEach(function (p) {
+  console.log(p);
+});
+
+// arguments对象
+function foo() {
+  const args = Array.from(arguments);
+  // ...
+}
+
+Array.from('hello')
+// => ['h', 'e', 'l', 'l', 'o']
+
+const namesSet = new Set(['a', 'b'])
+Array.from(namesSet) // ['a', 'b']
+
+// 克隆数组
+Array.from([1, 2, 3])
+// => [1, 2, 3]
+
+Array.from(arrayLike, x => x * x);
+// =>
+Array.from(arrayLike).map(x => x * x);
+
+Array.from([1, 2, 3], x => x * x)
+// [1, 4, 9]
+```
+
+#### Array.copyWithin
+
+替换数组元素，修改原数组
+
+```js
+Array.prototype.copyWithin(target, start = 0, end = this.length)
+```
+
+```js
+[1, 2, 3, 4, 5].copyWithin(0, 3)
+// => [4, 5, 3, 4, 5]
+
+// -2相当于3号位，-1相当于4号位
+[1, 2, 3, 4, 5].copyWithin(0, -2, -1)
+// => [4, 2, 3, 4, 5]
+
+// 将2号位到数组结束，复制到0号位
+const i32a = new Int32Array([1, 2, 3, 4, 5]);
+i32a.copyWithin(0, 2);
+// => Int32Array [3, 4, 5, 4, 5]
+```
+
+### Arrow Function
+
+- no thisArgs binding
+- no arguments binding
+- no prototype binding
+- no suited for `New` constructor
+- not suited as methods of plain object
+  (`this` in arrow function would be refer to `window`)
+
+### Modules
+
+import and export
+
+```js
+import { lastName as surname } from './profile.js';
+```
+
+```js
+export const firstName = 'Michael';
+export const lastName = 'Jackson';
+export const year = 1958;
+```
+
+```js
+// profile.js
+const firstName = 'Michael';
+const lastName = 'Jackson';
+const year = 1958;
+
+export {firstName, lastName, year};
+```
+
+```js
+// 接口改名
+export { foo as myFoo } from 'my_module';
+
+// 整体输出
+export * from 'my_module';
+```
+
+- CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用
+- CommonJS 模块是运行时加载，ES6 模块是编译时输出接口
+
+### Class 语法糖
+
+```js
+class A {
+  constructor(value) {
+    this.val = value;
+  }
+}
+
+class B extends A {
+  constructor(value) {
+    super(value);
+  }
+}
+
+const b = new B(6);
+
+console.log(B.__proto__ === A);
+console.log(B.prototype.constructor === B);
+console.log(B.prototype.__proto__ === A.prototype);
+console.log(b.__proto__ === B.prototype);
+
+function AA(value) {
+  this.val = value;
+}
+
+function BB(value) {
+  AA.call(this, value);
+}
+
+BB.prototype = Object.create(AA.prototype);
+BB.prototype.constructor = BB;
+
+const bb = new BB(6);
+
+console.log(BB.__proto__ === Function.prototype); // not consistence with class syntax
+console.log(BB.prototype.constructor === BB);
+console.log(BB.prototype.__proto__ === AA.prototype);
+console.log(bb.__proto__ === BB.prototype);
+```
+
+禁止对复合对象字面量进行导出操作 (array literal, object literal)
+
+### Symbol
+
+implement iterator with `Symbol.iterator`
+
+```js
+function methodsIterator() {  
+  let index = 0;
+  let methods = Object.keys(this).filter((key) => {
+    return typeof this[key] === 'function';
+  }).map(key => this[key]);
+  return {
+    next: () => ({ // Conform to Iterator protocol
+      done : index >= methods.length,
+      value: methods[index++]
+    })
+  };
+}
+let myMethods = {  
+  toString: function() {
+    return '[object myMethods]';
+  },
+  sumNumbers: function(a, b) {
+    return a + b;
+  },
+  numbers: [1, 5, 6],
+  [Symbol.iterator]: methodsIterator // Conform to Iterable Protocol
+};
+for (let method of myMethods) {  
+  console.log(method); // logs methods `toString` and `sumNumbers`
+}
+```
+
+### Proxy and Reflect
+
+modify default object behavior with `Proxy` and `Reflect`
+
+```js
+Proxy(target, {
+  set: function(target, name, value, receiver) {
+    const success = Reflect.set(target,name, value, receiver);
+    if (success) {
+      log('property ' + name + ' on ' + target + ' set to ' + value);
+    }
+    return success;
+  }
+});
+```
+
+## Functional JavaScript
+
+- predictable (pure and immutable)
+- safe (pure and immutable)
+- transparent (pure and immutable)
+- modular (composite)
+
+### Pros
+
+- type safe and state safe
+- explicit flow of data
+- concurrency safety
+
+### Cons
+
+- verbose
+- more object creation
+- more garbage collection
+- more memory usage
+
+With help of `immutable.js`,
+object creation/garbage collection/memory usage can be alleviated.
+
+For example, in vanilla.js, `map2 === map1` become `false`,
+but in immutable.js `map2 === map1` become `true`
+(copy free due to immutable data).
+
+```js
+const map1 = { 'b': 2 };
+const map2 = map1.set{ 'b': 2 };
+```
+
+### 闭包(closure)
+
+两个函数都维持着对外部作用域 Counter 的引用，因此总可以访问Counter作用域内定义的变量count(外部局部变量)
+
+- 函数外部不可对函数内部进行赋值或引用
+- 但函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部，即内部引用外部)
+- 特权性质: 从外部通过闭包方法访问内部(函数作用域)局部变量
+
+#### 闭包函数的结构
+
+优先级: this > 局部变量 > 形参 > arguments > 函数名
+
+### Partial Application
+
+```js
+const partialFromBind = (fn, ...args) => {
+  return fn.bind(null, ...args);
+}
+
+const partial = (fn, ...args) => {
+  return (...rest) => {
+    return fn(...args, ...rest);
+  }
+}
+```
+
+### Currying
+
+chain of multiple single argument functions
+
+```js
+const add = x => y => x + y
+```
+
+```javascript
+function schonfinkelize(fn) {
+  const slice = Array.prototype.slice,
+  stored_args = slice.call(arguments, 1);
+
+  return function () {
+    const new_args = slice.call(arguments),
+    args = stored_args.concat(new_args);
+    return fn.apply(null, args);
+  };
+}
+
+const addOne = schonfinkelize(add, 1);
+// addOne(3) === 4;
+const addFive = schonfinkelize(addOne, 1, 3);
+// addFive(4) === 9;
+```
+
+### API
+
+#### `[]`.map
+
+相当于 Haskell 中的 List Map
+
+#### `[]`.filter
+
+相当于 Haskell 中的 List Filter
+
+#### `[]`.reduce
+
+相当于 Haskell 中的 fold
+
+#### `[]`.sort
+
+## JavaScript Patterns
 
 ### Literal
 
@@ -194,11 +1062,51 @@
 - `if (typeof v === " ")`
 - `toString. apply(var)`
 
+### 函数(function)
+
+#### 参数
+
+- 函数不应依赖于全局变量，实现与执行全局环境的的解耦
+- 全局变量应以函数参数/依赖的形式，注入函数内部
+
+### 解耦
+
+#### 事件处理与UI逻辑
+
+- 事件处理函数与应用逻辑函数分开成单独函数,提高代码重用率
+- 应用逻辑函数不依赖于 event 对象，其属性值作为参数传入，易于解耦与测试
+
+```js
+const MyApp = {
+
+    // 事件处理函数
+    handleClick: function(event) {
+
+        /* 将事件的属性作为参数，传递给应用逻辑函数
+         * 使得应用逻辑函数不依赖于 event 对象，易于解耦与测试
+         */
+        this.showPopup(event.clientX, event.clientY);
+    }
+
+    // 应用逻辑函数
+    showPopup: function(x, y) {
+        const popup = document.getElementById('popup');
+        popup.style.left = x + 'px';
+        popup.style.top  = y + 'px';
+        popup.className = 'reveal';
+    }
+}
+```
+
+### Env and Config
+
+配置文件以 .env/JS(Object)/JSON/JSONP/XML/YML 格式单独存放，方便读取
+
 ### Other
 
 !!result 转化成 Boolean
 
-## JavaScript Engine Internal
+## JavaScript Internal
 
 Under the hood
 
@@ -333,7 +1241,7 @@ console.log("10")
 - 局部变量引用方法时，应注意会动态改变 this 指针
 
 ```js
-var DOM = tazimi.util.Dom;
+const DOM = tazimi.util.Dom;
 
 DOM.method.call( /* 关注 this 指针*/ );
 ```
@@ -356,16 +1264,16 @@ str = str + 'one' + 'two';
 #### **倒序**循环可提升性能
 
 ```js
-for (var i = item.length; i--;) {
+for (let i = item.length; i--;) {
     process(items[i]);
 }
 
-var j = items.length;
+let j = items.length;
 while (j--) {
     process(items[i]);
 }
 
-var k = items.length;
+let k = items.length;
 do {
     process(items[k]);
 } while (k--);
@@ -374,7 +1282,7 @@ do {
 #### Duff's Device(达夫设备)
 
 ```js
-var i = items.length % 8;
+let i = items.length % 8;
 
 while (i) {
   process(items[i--]);
@@ -415,12 +1323,12 @@ try {
 
 ```js
 window.onload = function(){
-    var oUl = document.getElementById("ul"),
-        aLi = oUl.getElementsByTagName("li");
+    const oUl = document.getElementById("ul");
+    const aLi = oUl.getElementsByTagName("li");
 
     oUl.onmouseover = function (e) {
-        var e = e || window.event,
-            target = e.target || e.srcElement;
+        const e = e || window.event;
+        const target = e.target || e.srcElement;
 
         //alert(target.innerHTML);
 
@@ -439,8 +1347,8 @@ window.onload = function(){
     }
 
     oUl.onmouseout = function(e) {
-        var e = e || window.event,
-            target = e.target || e.srcElement;
+        const e = e || window.event;
+        const target = e.target || e.srcElement;
 
         //alert(target.innerHTML);
 
@@ -474,7 +1382,7 @@ window.onload = function(){
 ... The full body of the page ...
 <script>
 window.onload = function () {
-  var script = document.createElement("script");
+  const script = document.createElement("script");
   script.src = "all_lazy_20100426.js";
   document.documentElement.firstChild.appendChild(script);
 };
@@ -487,8 +1395,8 @@ window.onload = function () {
 
 ```javascript
 function requireScript(file, callback) {
-  var script = document.getElementsByTagName('script')[0],
-    newjs = document.createElement('script');
+  const script = document.getElementsByTagName('script')[0];
+  const newjs = document.createElement('script');
 
   // IE
   newjs.onreadystatechange = function () {
@@ -518,14 +1426,14 @@ requireScript('the_rest.js', function() {
 - 局部变量缓存布局信息
 
 ```js
-var btn = document.getElementById('btn');
+const btn = document.getElementById('btn');
 ```
 
 - HTML Collection 转化成数组再操作
 
 ```js
 function toArray(coll) {
-  for (var i = 0, a = [], len = coll.length; i < len; i++) {
+  for (let i = 0, a = [], len = coll.length; i < len; i++) {
     a[i] = coll[i];
   }
 
@@ -561,7 +1469,7 @@ getComputedStyle()
 - document.createDocumentFragment()
 
 ```js
-var fragment = document.createDocumentFragment();
+const fragment = document.createDocumentFragment();
 appendDataToElement(fragment, data);
 document.getElementById('mylist').appendChild(fragment);
 ```
@@ -569,8 +1477,8 @@ document.getElementById('mylist').appendChild(fragment);
 - oldNode.cloneNode(true);
 
 ```js
-var old = document.getElementById('mylist'),
-  clone = old.cloneNode(true);
+const old = document.getElementById('mylist');
+const clone = old.cloneNode(true);
 
 appendDataToElement(clone, data);
 old.parentNode.replaceChild(clone, old);
@@ -614,10 +1522,9 @@ setTimeout()/setInterval()
 - 模拟有间隙的循环，使得 UI 更新得以进入浏览器线程的执行队列中
 
 ```js
-var button = document.getElementById('myButton');
+const button = document.getElementById('myButton');
 
 button.onclick = function() {
-
   oneMethod();
 
   setTimeout(function() {
@@ -632,12 +1539,12 @@ button.onclick = function() {
 function saveDocument(id) {
 
   // 利用闭包封装待执行任务
-  var tasks = [openDocument, writeText, closeDocument, updateUI];
+  const tasks = [openDocument, writeText, closeDocument, updateUI];
 
   setTimeout(function() {
 
     // 执行下一个任务
-    var task = tasks.shift();
+    const task = tasks.shift();
     task(id);
 
     // 检查是否还有其他任务
@@ -652,7 +1559,7 @@ function saveDocument(id) {
 ```js
 function processArray(items, process, callback) {
   // 克隆原数组
-  var todo = items.concat();
+  const todo = items.concat();
 
   setTimeout(function() {
 
@@ -672,10 +1579,10 @@ function processArray(items, process, callback) {
 ```js
 function timedProcessArray(items, process, callback) {
   // 克隆原始数组
-  var todo = items.concat();
+  const todo = items.concat();
 
   setTimeout(function() {
-    var start = +new Date();
+    const start = +new Date();
 
     // 一次批处理任务持续 0.05s
     do {
@@ -697,14 +1604,14 @@ function timedProcessArray(items, process, callback) {
 /*
  * usage: start -> stop -> getTime
  */
-var Timer = {
+const Timer = {
   _data: {},
 
   start: function(key) {
     Timer._data[key] = new Date();
   },
   stop: function(key) {
-    var time = Timer._data[key];
+    const time = Timer._data[key];
 
     if (time) {
       Timer._data[key] = new Date() - time;
@@ -739,7 +1646,7 @@ var Timer = {
  * jsonparser.js
  */
 self.onmessage = function(event) {
-  var jsonText = event.data,
+  const jsonText = event.data,
     jsonData = JSON.parse(jsonText);
 
   self.postMessage(jsonData);
@@ -750,10 +1657,10 @@ self.onmessage = function(event) {
 /*
  * main.js
  */
-var worker = new Worker('jsonparse.js';
+const worker = new Worker('jsonparse.js';
 
 worker.onmessage = function(event) {
-  var jsonData = event.data;
+  const jsonData = event.data;
   evaluateData(jsonData);
 };
 
@@ -780,7 +1687,7 @@ worker.postMessage(jsonText);
 #### Ajax 缓存
 
 ```js
-var localCache = {};
+const localCache = {};
 
 function xhrRequest(url, callback) {
   // Check the local cache for this URL.
@@ -790,7 +1697,7 @@ function xhrRequest(url, callback) {
   }
 
   // If this URL wasn't found in the cache, make the request.
-  var req = createXhrObject();
+  const req = createXhrObject();
 
   req.onerror = function() {
     callback.error();
@@ -837,15 +1744,15 @@ window.addEventListener('load', function() {
 ```js
 // 计算加载时间
 function getPerformanceTiming() {
-  var performance = window.performance;
+  const  performance = window.performance;
   if (!performance) {
     // 当前浏览器不支持
     console.log('你的浏览器不支持 performance 接口');
     return;
   }
 
-  var t = performance.timing;
-  var times = {};
+  const t = performance.timing;
+  const times = {};
   //【重要】页面加载完成的时间
   //【原因】这几乎代表了用户等待页面可用的时间
   times.loadPage = t.loadEventEnd - t.navigationStart;
@@ -888,13 +1795,13 @@ function getPerformanceTiming() {
 - 位掩码
 
 ```js
-var OPTION_A = 1,
+const OPTION_A = 1,
   OPTION_B = 2,
   OPTION_C = 4,
   OPTION_D = 8,
   OPTION_E = 16;
 
-var options = OPTION_A|OPTION_C|OPTION_D;
+const options = OPTION_A|OPTION_C|OPTION_D;
 ```
 
 #### Math 对象
@@ -1147,107 +2054,7 @@ window.addEventListener('replacestate', function (event) {
 - [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
 - [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report/)
 
-## Functional JavaScript
-
-- predictable (pure and immutable)
-- safe (pure and immutable)
-- transparent (pure and immutable)
-- modular (composite)
-
-### Pros
-
-- type safe and state safe
-- explicit flow of data
-- concurrency safety
-
-### Cons
-
-- verbose
-- more object creation
-- more garbage collection
-- more memory usage
-
-With help of `immutable.js`,
-object creation/garbage collection/memory usage can be alleviated.
-
-For example, in vanilla.js, `map2 === map1` become `false`,
-but in immutable.js `map2 === map1` become `true`
-(copy free due to immutable data).
-
-```js
-const map1 = { 'b': 2 };
-const map2 = map1.set{ 'b': 2 };
-```
-
-### 闭包(closure)
-
-两个函数都维持着对外部作用域 Counter 的引用，因此总可以访问Counter作用域内定义的变量count(外部局部变量)
-
-- 函数外部不可对函数内部进行赋值或引用
-- 但函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部，即内部引用外部)
-- 特权性质: 从外部通过闭包方法访问内部(函数作用域)局部变量
-
-#### 闭包函数的结构
-
-优先级: this > 局部变量 > 形参 > arguments > 函数名
-
-### Partial Application
-
-```js
-const partialFromBind = (fn, ...args) => {
-  return fn.bind(null, ...args);
-}
-
-const partial = (fn, ...args) => {
-  return (...rest) => {
-    return fn(...args, ...rest);
-  }
-}
-```
-
-### Currying
-
-chain of multiple single argument functions
-
-```js
-const add = x => y => x + y
-```
-
-```javascript
-function schonfinkelize(fn) {
-  const slice = Array.prototype.slice,
-  stored_args = slice.call(arguments, 1);
-
-  return function () {
-    const new_args = slice.call(arguments),
-    args = stored_args.concat(new_args);
-    return fn.apply(null, args);
-  };
-}
-
-const addOne = schonfinkelize(add, 1);
-// addOne(3) === 4;
-const addFive = schonfinkelize(addOne, 1, 3);
-// addFive(4) === 9;
-```
-
-### API
-
-#### `[]`.map
-
-相当于 Haskell 中的 List Map
-
-#### `[]`.filter
-
-相当于 Haskell 中的 List Filter
-
-#### `[]`.reduce
-
-相当于 Haskell 中的 fold
-
-#### `[]`.sort
-
-## Code Style Guide
+## JavaScript Style
 
 ### Style
 
@@ -1259,30 +2066,10 @@ const addFive = schonfinkelize(addOne, 1, 3);
 - 普通函数: 驼峰命名法(Camel Case)
 - 构造函数: 帕斯卡命名法(Pascal Case), 首字母大写
 
-#### 全局变量
-
-应只有模块名为全局变量;jsmin不会缩减全局变量与全局函数名
-
 #### 初始化模式
 
 ```javascript
-var MYAPP = MYAPP || {};
-```
-
-#### 单一var模式
-
-一个作用域内仅出现一个var关键字,且为所有变量赋初值:
-
-- 简洁代码
-- 提示变量类型
-
-```javascript
-var a = 1,        // int
-  b = 2,        // int
-  sum = a + b,  // int
-  obj = {},     // object
-  i = 1.0,      // float
-  j = false;    // boolean
+const MYAPP = MYAPP || {};
 ```
 
 #### 条件表达式
@@ -1308,7 +2095,7 @@ Good places to use a white space include:
 - } else {}
 
 ```javascript
-var d = 0,
+let d = 0,
 a = b + 1;
 
 if (a && b && c) {
@@ -1319,7 +2106,7 @@ if (a && b && c) {
 // antipattern
 // missing or inconsistent spaces
 // make the code confusing
-var d= 0,
+let d= 0,
 a =b+1;
 
 if (a&& b&&c) {
@@ -1375,61 +2162,6 @@ if (a&& b&&c) {
  * @param {Number}/{String} instructions
  * @return {Number}/{String} instructions
  */
-```
-
-### Guide
-
-#### 函数(function)
-
-##### 参数
-
-- 函数不应依赖于全局变量，实现与执行全局环境的的解耦
-- 全局变量应以函数参数/依赖的形式，注入函数内部
-
-#### 解耦
-
-##### 事件处理与UI逻辑
-
-- 事件处理函数与应用逻辑函数分开成单独函数,提高代码重用率
-- 应用逻辑函数不依赖于 event 对象，其属性值作为参数传入，易于解耦与测试
-
-```js
-var MyApp = {
-
-    // 事件处理函数
-    handleClick: function(event) {
-
-        /* 将事件的属性作为参数，传递给应用逻辑函数
-         * 使得应用逻辑函数不依赖于 event 对象，易于解耦与测试
-         */
-        this.showPopup(event.clientX, event.clientY);
-    }
-
-    // 应用逻辑函数
-    showPopup: function(x, y) {
-        var popup = document.getElementById('popup');
-        popup.style.left = x + 'px';
-        popup.style.top  = y + 'px';
-        popup.className = 'reveal';
-    }
-}
-```
-
-##### 配置文件
-
-配置文件以 JS(Object)/JSON/JSONP/XML/YML 格式单独存放，方便读取
-
-## 浏览器兼容性(Browser Compatibility)
-
-### 特性检测
-
-**不使用特性/浏览器推断**，往往容易推断错误(且会随着浏览器更新产生新的错误)
-
-```js
-// 特性检测
-if (document.getElementById) {
-    element = document.getElementById(id);
-}
 ```
 
 ## Testing and Debugging
@@ -1498,7 +2230,7 @@ O.prototype.method = function() {};
 共享全局变量
 
 ```js
-var Global = 'global';
+const Global = 'global';
 
 function A() {
   Global = 'A';
@@ -1511,7 +2243,7 @@ function B() {
 #### 控制耦合(3)
 
 ```js
-var absFactory = new AbstractFactory({ env: 'TEST' });
+const  absFactory = new AbstractFactory({ env: 'TEST' });
 ```
 
 #### 印记耦合(2)
@@ -1549,7 +2281,7 @@ O.makeBread({ type: wheat, size: 99, name: 'foo' });
 - spy: 在原有对象的基础上，增加监视用变量/方法 e.g assert/调用次数/参数限制
 
 ```js
-var mockery = require('mockery');
+const mockery = require('mockery');
 mockery.enable();
 
 describe("Sum suite File", function() {
@@ -1687,776 +2419,51 @@ node --inspect
 ndb index.js
 ```
 
-## ECMAScript 2015+
+### Browser Compatibility
 
-### TC39
+#### 特性检测
 
-- [New Feature Process](http://tc39.github.io/process-document)
-
-### Babel
-
-```bash
-babel example.js -o compiled.js
-babel src -d lib -s
-```
-
-#### babel-node
-
-A read-eval-print loop(REPL) can replace node REPL.
-
-#### babel-core
-
-提供 babel 转码 API
-
-```bash
-npm install babel-core --save
-```
+**不使用特性/浏览器推断**，往往容易推断错误(且会随着浏览器更新产生新的错误)
 
 ```js
-var babel = require('babel-core');
-
-// 字符串转码
-babel.transform('code();', options);
-// => { code, map, ast }
-
-// 文件转码（异步）
-babel.transformFile('filename.js', options, function(err, result) {
-      result; // => { code, map, ast }
-});
-
-// 文件转码（同步）
-babel.transformFileSync('filename.js', options);
-// => { code, map, ast }
-
-// Babel AST转码
-babel.transformFromAst(ast, code, options);
-// => { code, map, ast }
-```
-
-### Variable
-
-- 一方面规定，var命令和function命令声明的全局变量，依旧是全局对象的属性
-- 另一方面规定，let命令、const命令、class命令声明的全局变量，不属于全局对象的属性
-
-#### let
-
-- 不存在变量提升
-- 块级作用域(Temporal Dead Zone)
-- 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError
-
-#### const
-
-- const一旦声明变量，就必须立即初始化，不能留到以后赋值
-- 块级作用域(Temporal Dead Zone)
-- 引用一个引用变量时，只表示此变量地址不可变，但所引用变量的值/属性可变(* const)
-
-### Destructuring(Pattern Matching)
-
-- **建议只要有可能，就不要在模式中放置圆括号**
-- 赋值语句的非模式部分，可以使用圆括号
-
-#### 默认值
-
-- ES6内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
-- 如果一个数组成员不严格等于undefined，默认值不会生效
-
-```js
-var [x = 1] = [undefined];
-x // 1
-
-var [x = 1] = [null];
-x // null
-```
-
-```js
-let [x = 1, y = x] = [];     // x=1; y=1
-let [x = 1, y = x] = [2];    // x=2; y=2
-let [x = 1, y = x] = [1, 2]; // x=1; y=2
-let [x = y, y = 1] = [];     // ReferenceError
-```
-
-#### Sample
-
-##### swap
-
-```js
-[x, y] = [y, x];
-```
-
-##### 简化函数的参数与返回值
-
-- 可用于工厂(factory)/设置(options)模式: 传参一般为 options 对象，具有固定的属性名
-- 一次性定义多个参数
-- 一次性定义多个参数的默认值
-
-```js
-// 参数是一组有次序的值
-function f([x, y, z]) { ... }
-f([1, 2, 3])
-
-// 参数是一组无次序的值
-function f({x, y, z}) { ... }
-f({z: 3, y: 2, x: 1})
-
-// 可省略 var foo = config.foo || 'default foo';
-jQuery.ajax = function (url, {
-  async = true,
-  beforeSend = function () {},
-  cache = true,
-  complete = function () {},
-  crossDomain = false,
-  global = true,
-  // ... more config
-}) {
-  // ... do stuff
-};
-```
-
-```js
-// 返回一个数组
-function example() {
-  return [1, 2, 3];
+// 特性检测
+if (document.getElementById) {
+    element = document.getElementById(id);
 }
-var [a, b, c] = example();
-
-// 返回一个对象
-function example() {
-  return {
-    foo: 1,
-    bar: 2
-  };
-}
-var { foo, bar } = example();
 ```
 
-##### 解析 JSON 对象
+## Chrome Dev Tools
+
+### Elements Panel
+
+- break on elements
+
+### Source Panel
+
+- multiple breakpoints: source, XHR/fetch, DOM, global/event listeners
+
+### capture default eventListener
+
+> $0: the reference to the currently selected element in the Elements panel
 
 ```js
-var jsonData = {
-  id: 42,
-  status: "OK",
-  data: [867, 5309]
-}
-
-let { id, status, data: number } = jsonData;
-
-console.log(id, status, number)
-// 42, "OK", [867, 5309]
-```
-
-##### 遍历 map/list
-
-```js
-var map = new Map();
-map.set('first', 'hello');
-map.set('second', 'world');
-
-for (let [key, value] of map) {
-  console.log(key + " is " + value);
-}
-// first is hello
-// second is world
-
-// 获取键名
-for (let [key] of map) {
+const listener = getEventListeners($0).click[0].listener;
+$0.removeEventListener('click', listener);
+$0.addEventListener('click', (e) => {
+  // do something
   // ...
-}
 
-// 获取键值
-for (let [,value] of map) {
-  // ...
-}
-```
-
-##### 加载特定模块
-
-```js
-const { SourceMapConsumer, SourceNode } = require("source-map");
-```
-
-#### Array Iterator Style Matching
-
-等号右边必须为数组等实现了 Iterator 接口的对象,否则报错
-
-- Array
-- Set
-- Generator 函数
-
-```js
-let [foo, [[bar], baz]] = [1, [[2], 3]];
-foo // 1
-bar // 2
-baz // 3
-
-let [ , , third] = ["foo", "bar", "baz"];
-third // "baz"
-
-let [x, , y] = [1, 2, 3];
-x // 1
-y // 3
-
-let [head, ...tail] = [1, 2, 3, 4];
-head // 1
-tail // [2, 3, 4]
-
-let [x, y, ...z] = ['a'];
-x // "a"
-y // undefined
-z // []
-
-// Generator 函数
-function* fibs() {
-  var a = 0;
-  var b = 1;
-  while (true) {
-    yield a;
-    [a, b] = [b, a + b];
-  }
-}
-
-var [first, second, third, fourth, fifth, sixth] = fibs();
-sixth // 5
-```
-
-#### Object Style Matching
-
-- 真正被赋值的是后者，而不是前者
-
-```js
-let {pattern: variable} = { key: value };
-```
-
-- 解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象
-- undefined/null 无法转化为对象
-
-```js
-let { prop: x } = undefined; // TypeError
-let { prop: y } = null; // TypeError
-```
-
-```js
-var { bar, foo } = { foo: "aaa", bar: "bbb" };
-foo // "aaa"
-bar // "bbb"
-
-var { foo: foo, bar: bar } = { foo: "aaa", bar: "bbb" };
-
-var { baz } = { foo: "aaa", bar: "bbb" };
-baz // undefined
-```
-
-```js
-var { foo: baz } = { foo: "aaa", bar: "bbb" };
-baz // "aaa"
-
-let obj = { first: 'hello', last: 'world' };
-let { first: f, last: l } = obj;
-f // 'hello'
-l // 'world'
-```
-
-```js
-let { log, sin, cos } = Math;
-```
-
-#### String Style Matching
-
-```js
-const [a, b, c, d, e] = 'hello';
-a // "h"
-b // "e"
-c // "l"
-d // "l"
-e // "o"
-
-let {length : len} = 'hello';
-len // 5
-```
-
-#### Number/Boolean Style Matching
-
-number/boolean 会转化成对象
-
-```js
-let {toString: s} = 123;
-s === Number.prototype.toString // true
-
-let {toString: s} = true;
-s === Boolean.prototype.toString // true
-```
-
-#### Function Arguments Style Matching
-
-```js
-function add([x, y]){
-  return x + y;
-}
-add([1, 2]) // 3
-
-[[1, 2], [3, 4]].map(([a, b]) => a + b)
-// [ 3, 7 ]
-
-function move({x = 0, y = 0} = {}) {
-  return [x, y];
-}
-move({x: 3, y: 8}); // [3, 8]
-move({x: 3}); // [3, 0]
-move({}); // [0, 0]
-move(); // [0, 0]
-
-// 严格为 undefined 时，触发默认值设置
-[1, undefined, 3].map((x = 'yes') => x)
-// [ 1, 'yes', 3 ]
-```
-
-### String
-
-```js
-'\z' === 'z'  // true
-'\172' === 'z' // true
-'\x7A' === 'z' // true
-'\u007A' === 'z' // true
-'\u{7A}' === 'z' // true
-```
-
-#### Methods
-
-- string.codePointAt(index): 正确处理 4 字节存储字符
-- string.fromCodePoint(codePoint)
-
-```js
-function is32Bit(c) {
-  return c.codePointAt(0) > 0xFFFF;
-}
-
-String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y'
-// true
-```
-
-- string.includes(substr)/startsWith(substr)/endsWith(substr)
-- 使用第二个参数n时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束
-
-```js
-var s = 'Hello world!';
-
-s.startsWith('world', 6) // true
-s.endsWith('Hello', 5) // true
-s.includes('Hello', 6) // false
-```
-
-- repeat(times)
-
-```js
-'hello'.repeat(2) // "hellohello"
-'na'.repeat(2.9) // "nana"
-
-'na'.repeat(-0.9) // ""
-'na'.repeat(-1) // RangeError
-
-'na'.repeat(NaN) // ""
-'na'.repeat(Infinity) // RangeError
-
-'na'.repeat('na') // ""
-'na'.repeat('3') // "nanana"
-```
-
-- padStart/padEnd(len, paddingStr)
-
-```js
-'1'.padStart(10, '0') // "0000000001"
-'12'.padStart(10, '0') // "0000000012"
-'123456'.padStart(10, '0') // "0000123456"
-
-'12'.padStart(10, 'YYYY-MM-DD') // "YYYY-MM-12"
-'09-12'.padStart(10, 'YYYY-MM-DD') // "YYYY-09-12"
-```
-
-#### Template String
-
-`str` 表示模板字符串
-
-```js
-// 普通字符串
-`In JavaScript '\n' is a line-feed.`
-`\`Yo\` World!`
-
-// 多行字符串
-`In JavaScript this is
- not legal.`
-
-// 引用变量
-`${x} + ${y * 2} = ${x + y * 2}`
-`${obj.x + obj.y}`
-
-// 调用函数
-`foo ${fn()} bar`
-```
-
-#### Tagged Templates
-
-```js
-function template(strings, ...keys) {
-  return (function(...values) {
-    var dict = values[values.length - 1] || {};
-    var result = [strings[0]];
-    keys.forEach(function(key, i) {
-      var value = Number.isInteger(key) ? values[key] : dict[key];
-      result.push(value, strings[i + 1]);
-    });
-    return result.join('');
-  });
-}
-
-var t1Closure = template`${0}${1}${0}!`;
-t1Closure('Y', 'A');  // "YAY!"
-var t2Closure = template`${0} ${'foo'}!`;
-t2Closure('Hello', {foo: 'World'});  // "Hello World!"
-```
-
-- 编译模板(小型模板引擎)
-
-```js
-function compile(template){
-    var evalExpr = /<%=(.+?)%>/g;
-    var expr = /<%([\s\S]+?)%>/g;
-
-    template = template
-      .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
-      .replace(expr, '`); \n $1 \n  echo(`');
-
-    template = 'echo(`' + template + '`);';
-
-    var script =
-    `(function parse(data){
-      var output = "";
-
-      function echo(html){
-        output += html;
-      }
-
-      ${ template }
-
-      return output;
-    })`;
-
-    return script;
-}
-
-var template = `
-<ul>
-  <% for(var i=0; i < data.supplies.length; i++) { %>
-    <li><%= data.supplies[i] %></li>
-  <% } %>
-</ul>
-`;
-var parse = compile(template);
-div.innerHTML = parse({ supplies: [ "broom", "mop", "cleaner" ] });
-// => <ul>
-// =>   <li>broom</li>
-// =>   <li>mop</li>
-// =>   <li>cleaner</li>
-// => </ul>
-
-
-// 下面的hashTemplate函数
-// 是一个自定义的模板处理函数
-var libraryHtml = hashTemplate`
-  <ul>
-    #for book in ${myBooks}
-      <li><i>#{book.title}</i> by #{book.author}</li>
-    #end
-  </ul>
-`;
-```
-
-- 国际化处理
-
-```js
-i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`
-// "欢迎访问xxx，您是第xxxx位访问者！"
-```
-
-- XSS 攻击
-
-```js
-var message =
-  SaferHTML`<p>${sender} has sent you a message.</p>`;
-
-function SaferHTML(templateData) {
-  var s = templateData[0];
-  for (var i = 1; i < arguments.length; i++) {
-    var arg = String(arguments[i]);
-
-    // Escape special characters in the substitution.
-    s += arg.replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;");
-
-    // Don't escape special characters in the template.
-    s += templateData[i];
-  }
-  return s;
-}
-```
-
-- 运行代码
-
-```js
-jsx`
-  <div>
-    <input
-      ref='input'
-      onChange='${this.handleChange}'
-      defaultValue='${this.state.value}' />
-      ${this.state.value}
-   </div>
-`
-
-java`
-class HelloWorldApp {
-  public static void main(String[] args) {
-    System.out.println(“Hello World!”); // Display the string.
-  }
-}
-`
-HelloWorldApp.main();
-```
-
-### RegExp
-
-- u 修饰符
-- y(粘连全局符) 修饰符号隐含了头部匹配的标志
-
-```js
-function codePointLength(text) {
-      var result = text.match(/[\s\S]/gu);
-        return result ? result.length : 0;
-}
-
-var s = '𠮷𠮷';
-
-s.length // 4
-codePointLength(s) // 2
-```
-
-### Number
-
-- 0bxxx/0Bxxx
-- 0oxxx/0Oxxx
-- Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()
-- Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`
-- ** 指数运算符
-- BigInt
-
-```js
-const a = 2172141653;
-const b = 15346349309;
-a * b
-// => 33334444555566670000
-BigInt(a) * BigInt(b)
-// => 33334444555566667777n
-```
-
-### Array
-
-#### Array.from
-
-强大的**函数式**方法
-
-- 伪数组对象(array-like object)
-- 可枚举对象(iterable object)
-- 克隆数组
-- map 函数
-
-```js
-// Set
-// Map
-
-// NodeList对象
-let ps = document.querySelectorAll('p');
-Array.from(ps).forEach(function (p) {
-  console.log(p);
-});
-
-// arguments对象
-function foo() {
-  var args = Array.from(arguments);
-  // ...
-}
-
-Array.from('hello')
-// => ['h', 'e', 'l', 'l', 'o']
-
-let namesSet = new Set(['a', 'b'])
-Array.from(namesSet) // ['a', 'b']
-
-// 克隆数组
-Array.from([1, 2, 3])
-// => [1, 2, 3]
-
-Array.from(arrayLike, x => x * x);
-// =>
-Array.from(arrayLike).map(x => x * x);
-
-Array.from([1, 2, 3], x => x * x)
-// [1, 4, 9]
-```
-
-#### Array.copyWithin
-
-替换数组元素，修改原数组
-
-```js
-Array.prototype.copyWithin(target, start = 0, end = this.length)
-```
-
-```js
-[1, 2, 3, 4, 5].copyWithin(0, 3)
-// => [4, 5, 3, 4, 5]
-
-// -2相当于3号位，-1相当于4号位
-[1, 2, 3, 4, 5].copyWithin(0, -2, -1)
-// => [4, 2, 3, 4, 5]
-
-// 将2号位到数组结束，复制到0号位
-var i32a = new Int32Array([1, 2, 3, 4, 5]);
-i32a.copyWithin(0, 2);
-// => Int32Array [3, 4, 5, 4, 5]
-```
-
-### Arrow Function
-
-- no thisArgs binding
-- no arguments binding
-- no prototype binding
-- no suited for `New` constructor
-- not suited as methods of plain object
-  (`this` in arrow function would be refer to `window`)
-
-### Modules
-
-import and export
-
-```js
-import { lastName as surname } from './profile.js';
-```
-
-```js
-export const firstName = 'Michael';
-export const lastName = 'Jackson';
-export const year = 1958;
-```
-
-```js
-// profile.js
-const firstName = 'Michael';
-const lastName = 'Jackson';
-const year = 1958;
-
-export {firstName, lastName, year};
-```
-
-```js
-// 接口改名
-export { foo as myFoo } from 'my_module';
-
-// 整体输出
-export * from 'my_module';
-```
-
-- CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用
-- CommonJS 模块是运行时加载，ES6 模块是编译时输出接口
-
-### Class 语法糖
-
-```js
-class A {
-  constructor(value) {
-    this.val = value;
-  }
-}
-
-class B extends A {
-  constructor(value) {
-    super(value);
-  }
-}
-
-const b = new B(6);
-
-console.log(B.__proto__ === A);
-console.log(B.prototype.constructor === B);
-console.log(B.prototype.__proto__ === A.prototype);
-console.log(b.__proto__ === B.prototype);
-
-function AA(value) {
-  this.val = value;
-}
-
-function BB(value) {
-  AA.call(this, value);
-}
-
-BB.prototype = Object.create(AA.prototype);
-BB.prototype.constructor = BB;
-
-const bb = new BB(6);
-
-console.log(BB.__proto__ === Function.prototype); // not consistence with class syntax
-console.log(BB.prototype.constructor === BB);
-console.log(BB.prototype.__proto__ === AA.prototype);
-console.log(bb.__proto__ === BB.prototype);
-```
-
-禁止对复合对象字面量进行导出操作 (array literal, object literal)
-
-### Symbol
-
-implement iterator with `Symbol.iterator`
-
-```js
-function methodsIterator() {  
-  let index = 0;
-  let methods = Object.keys(this).filter((key) => {
-    return typeof this[key] === 'function';
-  }).map(key => this[key]);
-  return {
-    next: () => ({ // Conform to Iterator protocol
-      done : index >= methods.length,
-      value: methods[index++]
-    })
-  };
-}
-let myMethods = {  
-  toString: function() {
-    return '[object myMethods]';
-  },
-  sumNumbers: function(a, b) {
-    return a + b;
-  },
-  numbers: [1, 5, 6],
-  [Symbol.iterator]: methodsIterator // Conform to Iterable Protocol
-};
-for (let method of myMethods) {  
-  console.log(method); // logs methods `toString` and `sumNumbers`
-}
-```
-
-### Proxy and Reflect
-
-modify default object behavior with `Proxy` and `Reflect`
-
-```js
-Proxy(target, {
-  set: function(target, name, value, receiver) {
-    var success = Reflect.set(target,name, value, receiver);
-    if (success) {
-      log('property ' + name + ' on ' + target + ' set to ' + value);
-    }
-    return success;
-  }
+  // then
+  listener(e);
 });
 ```
+
+### More Tools
+
+- rendering
+- layers
+- animations
+- coverage
 
 ## PWA
 
@@ -2527,36 +2534,3 @@ if ('serviceWorker' in navigator) {
 ### PWA Library
 
 - [Workbox](https://github.com/GoogleChrome/workbox)
-
-## Chrome Dev Tools
-
-### Elements Panel
-
-- break on elements
-
-### Source Panel
-
-- multiple breakpoints: source, XHR/fetch, DOM, global/event listeners
-
-### capture default eventListener
-
-> $0: the reference to the currently selected element in the Elements panel
-
-```js
-const listener = getEventListeners($0).click[0].listener;
-$0.removeEventListener('click', listener);
-$0.addEventListener('click', (e) => {
-  // do something
-  // ...
-
-  // then
-  listener(e);
-});
-```
-
-### More Tools
-
-- rendering
-- layers
-- animations
-- coverage
