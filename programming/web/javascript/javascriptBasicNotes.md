@@ -17,7 +17,7 @@
     - [引用类型值 Object type](#引用类型值-object-type)
     - [全局变量](#全局变量)
     - [局部变量](#局部变量)
-    - [变量声明提升(Hoisting)](#变量声明提升hoisting)
+    - [变量提升 Hoisting](#变量提升-hoisting)
     - [数组(与Object同源)](#数组与object同源)
       - [length](#length)
       - [数组字面量](#数组字面量)
@@ -308,9 +308,52 @@ function () {
 - 不使用 var 声明变量将会导致隐式的全局变量
 - 声明局部变量时绝对不要遗漏 var 关键字
 
-### 变量声明提升(Hoisting)
+### 变量提升 Hoisting
 
-- var 表达式和 function 声明都将会被提升到当前作用域(全局作用域/函数作用域)的顶部, 其余表达式顺序不变
+var 表达式和 function 声明都将会被提升到当前作用域(全局作用域/函数作用域)的顶部, 其余表达式顺序不变
+
+```js
+// 我们知道这个行不通 (假设没有未定义的全局变量)
+function example() {
+  console.log(notDefined); // => throws a ReferenceError
+}
+
+// 在引用变量后创建变量声明将会因变量提升而起作用。
+// 注意: 真正的值 `true` 不会被提升。
+function example() {
+  console.log(declaredButNotAssigned); // => undefined
+  var declaredButNotAssigned = true;
+}
+
+// 解释器将变量提升到函数的顶部
+// 这意味着我们可以将上边的例子重写为：
+function example() {
+  let declaredButNotAssigned;
+  console.log(declaredButNotAssigned); // => undefined
+  declaredButNotAssigned = true;
+}
+
+// 使用 const 和 let
+function example() {
+  console.log(declaredButNotAssigned); // => throws a ReferenceError
+  console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
+  const declaredButNotAssigned = true;
+}
+```
+
+```js
+function example() {
+  console.log(named); // => undefined
+
+  named(); // => TypeError named is not a function
+
+  superPower(); // => ReferenceError superPower is not defined
+
+  var named = function superPower() {
+    console.log('Flying');
+  };
+}
+```
 
 ### 数组(与Object同源)
 
