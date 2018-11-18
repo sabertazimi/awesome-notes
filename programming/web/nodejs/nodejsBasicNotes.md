@@ -56,6 +56,7 @@
     - [Cluster Module](#cluster-module)
   - [Test Modules](#test-modules)
     - [assert](#assert)
+  - [Envrionment](#envrionment)
   - [package.json](#packagejson)
     - [bin](#bin)
     - [version](#version)
@@ -308,6 +309,7 @@ process.stdin.pipe(process.stdout);
 
 - cp.spawn(): 创建子进程, 拥有独立的 stdin/stdout/stderr 文件描述符
 - cp.exec(): 创建子进程, 并会在进程结束时调用传入的回调函数
+- [execa](https://github.com/sindresorhus/execa)
 
 ```js
 var cp = require('child_process');
@@ -778,6 +780,35 @@ assert.equal(1, true, 'Truthy');
 assert.notEqual(1, true, 'Truthy');
 
 assert.ok(0, 'Zero is not truthy');
+```
+
+## Envrionment
+
+```js
+// .env file (added to .gitignore)
+NODE_ENV=development
+PORT=8626
+# Set your database/API connection information here
+API_KEY=**************************
+API_URL=**************************
+```
+
+```js
+// config.js
+const dotenv = require('dotenv');
+dotenv.config();
+
+module.exports = {
+  endpoint: process.env.API_URL,
+  masterKey: process.env.API_KEY,
+  port: process.env.PORT
+};
+```
+
+```js
+// server.js
+const { port } = require('./config');
+console.log(`Your port is ${port}`); // 8626
 ```
 
 ## package.json
