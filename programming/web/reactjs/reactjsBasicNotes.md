@@ -28,7 +28,7 @@
       - [Basic Rules](#basic-rules)
       - [Custom Hooks](#custom-hooks)
   - [ES6 Syntax](#es6-syntax)
-    - [this.setState()](#thissetstate)
+    - [binding for this](#binding-for-this)
   - [MVC模式](#mvc模式)
     - [Controller](#controller)
     - [Best Practice](#best-practice)
@@ -565,18 +565,23 @@ const useReactRouter = () => {
 
 ## ES6 Syntax
 
-### this.setState()
+### binding for this
 
 ```js
 constructor() {
-    this.handle = this.handle.bind(this);
+  this.handle = this.handle.bind(this);
 }
 
 handle(e) {
-    this.setState({
-
-    });
+  this.setState({
+    ...
+  });
 }
+```
+
+```js
+state = {}
+handle = (e) => {}
 ```
 
 ## MVC模式
