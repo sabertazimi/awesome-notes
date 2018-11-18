@@ -51,7 +51,7 @@
       - [`[]`.reduce](#reduce)
       - [`[]`.sort](#sort)
   - [JavaScript Patterns](#javascript-patterns)
-    - [Literal](#literal)
+    - [Literal Pattern](#literal-pattern)
     - [Closure and IIFE](#closure-and-iife)
     - [Check](#check)
     - [函数(function)](#函数function)
@@ -59,6 +59,8 @@
     - [解耦](#解耦)
       - [事件处理与UI逻辑](#事件处理与ui逻辑)
     - [Env and Config](#env-and-config)
+    - [Stand Library Idioms](#stand-library-idioms)
+    - [初始化模式](#初始化模式)
     - [Other](#other)
   - [JavaScript Internal](#javascript-internal)
     - [Variables Lifecycle](#variables-lifecycle)
@@ -83,7 +85,7 @@
     - [加载脚本](#加载脚本)
       - [延迟加载](#延迟加载)
       - [动态加载](#动态加载)
-    - [DOM](#dom)
+    - [DOM Performance](#dom-performance)
       - [重排与重绘](#重排与重绘)
       - [批量修改 DOM](#批量修改-dom)
     - [CSS](#css)
@@ -120,18 +122,25 @@
     - [Performance Best Practice](#performance-best-practice)
     - [Awesome Performance Tutorial](#awesome-performance-tutorial)
     - [Perf and Analysis Tools](#perf-and-analysis-tools)
-  - [JavaScript Style](#javascript-style)
-    - [Style](#style)
-      - [命名规范](#命名规范)
-      - [初始化模式](#初始化模式)
-      - [条件表达式](#条件表达式)
-      - [换行](#换行)
-      - [空格](#空格)
-      - [注释](#注释)
-        - [模块](#模块)
-        - [对象](#对象)
-        - [属性](#属性)
-        - [方法/函数](#方法函数)
+  - [JavaScript Style Guide](#javascript-style-guide)
+    - [Naming Style](#naming-style)
+    - [Variable Style](#variable-style)
+    - [Object Style](#object-style)
+    - [Array Style](#array-style)
+    - [Destruct Style](#destruct-style)
+    - [String Style](#string-style)
+    - [Function Style](#function-style)
+    - [Arrow Function Style](#arrow-function-style)
+    - [Module Style](#module-style)
+    - [Iterator and Generator Style](#iterator-and-generator-style)
+    - [Expression Style](#expression-style)
+    - [换行 Style](#换行-style)
+    - [空格 Style](#空格-style)
+    - [注释 Style](#注释-style)
+      - [模块](#模块)
+      - [对象](#对象)
+      - [属性](#属性)
+      - [方法/函数](#方法函数)
   - [Testing and Debugging](#testing-and-debugging)
     - [Log](#log)
     - [Frameworks](#frameworks)
@@ -1048,7 +1057,7 @@ const addFive = schonfinkelize(addOne, 1, 3);
 
 ## JavaScript Patterns
 
-### Literal
+### Literal Pattern
 
 - 不要使用 new Boolean()/new Number()/new String()
 - 避免使用 new Object()/new Array()
@@ -1101,6 +1110,17 @@ const MyApp = {
 ### Env and Config
 
 配置文件以 .env/JS(Object)/JSON/JSONP/XML/YML 格式单独存放，方便读取
+
+### Stand Library Idioms
+
+- use `Number.isNaN` not `isNaN`
+- use `Number.isFinite` not `isFinite`
+
+### 初始化模式
+
+```javascript
+const MYAPP = MYAPP || {};
+```
 
 ### Other
 
@@ -1420,7 +1440,7 @@ requireScript('the_rest.js', function() {
 });
 ```
 
-### DOM
+### DOM Performance
 
 - 局部变量缓存 DOM 元素
 - 局部变量缓存布局信息
@@ -2054,36 +2074,587 @@ window.addEventListener('replacestate', function (event) {
 - [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
 - [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report/)
 
-## JavaScript Style
+## JavaScript Style Guide
 
-### Style
+- [Airbnb Guide](https://github.com/airbnb/javascript)
 
-#### 命名规范
+### Naming Style
 
 - 变量: 名词前缀
 - 方法/函数: 动词前缀
 - _method: 表示私有化方法
-- 普通函数: 驼峰命名法(Camel Case)
-- 构造函数: 帕斯卡命名法(Pascal Case), 首字母大写
+- 普通函数: 驼峰命名法(camelCase)
+- 构造函数: 帕斯卡命名法(PascalCase)
+- 缩略词和缩写都必须是全部大写/小写
+- 对于 jQuery 对象的变量使用 $ 作为前缀
 
-#### 初始化模式
+### Variable Style
 
-```javascript
-const MYAPP = MYAPP || {};
+- no single `let/const`
+- sort `let/const`
+
+```js
+// bad
+let i, len, dragonball,
+    items = getItems(),
+    goSportsTeam = true;
+
+// bad
+let i;
+const items = getItems();
+let dragonball;
+const goSportsTeam = true;
+let len;
+
+// good
+const goSportsTeam = true;
+const items = getItems();
+let dragonball;
+let i;
+let length;
 ```
 
-#### 条件表达式
+- no chains assignment (create implict global variable)
 
-```javascript
-condition ? if-coding : else-coding;
+```js
+// bad
+(function example() {
+  // JavaScript 把它解释为
+  // let a = ( b = ( c = 1 ) );
+  // let 关键词只适用于变量 a ；变量 b 和变量 c 则变成了全局变量。
+  let a = b = c = 1;
+}());
+
+console.log(a); // throws ReferenceError
+console.log(b); // 1
+console.log(c); // 1
+
+// good
+(function example() {
+  let a = 1;
+  let b = a;
+  let c = a;
+}());
+
+console.log(a); // throws ReferenceError
+console.log(b); // throws ReferenceError
+console.log(c); // throws ReferenceError
 ```
 
-#### 换行
+- use `()` wrap multiple line
+
+```js
+// bad
+const foo =
+  superLongLongLongLongLongLongLongLongFunctionName();
+
+// bad
+const foo
+  = 'superLongLongLongLongLongLongLongLongString';
+
+// good
+const foo = (
+  superLongLongLongLongLongLongLongLongFunctionName()
+);
+
+// good
+const foo = 'superLongLongLongLongLongLongLongLongString';
+```
+
+### Object Style
+
+- use literal
+
+```js
+// bad
+const item = new Object();
+
+// good
+const item = {};
+```
+
+- use object-shorthand
+
+```js
+// bad
+const atom = {
+  lukeSkywalker: lukeSkywalker,
+  addValue: function (value) {
+    return atom.value + value;
+  },
+};
+
+// good
+const atom = {
+  lukeSkywalker,
+  addValue(value) {
+    return atom.value + value;
+  },
+};
+```
+
+- use Object.prototype.XX not object.xx
+
+```js
+// bad
+console.log(object.hasOwnProperty(key));
+
+// good
+console.log(Object.prototype.hasOwnProperty.call(object, key));
+
+// best
+const has = Object.prototype.hasOwnProperty; // 在模块范围内的缓存中查找一次
+/* or */
+import has from 'has'; // https://www.npmjs.com/package/has
+// ...
+console.log(has.call(object, key));
+```
+
+- use object spread not object.assign
+
+```js
+// very bad
+const original = { a: 1, b: 2 };
+const copy = Object.assign(original, { c: 3 }); // 变异的 `original` ಠ_ಠ
+delete copy.a; // 这....
+
+// bad
+const original = { a: 1, b: 2 };
+const copy = Object.assign({}, original, { c: 3 });
+
+// good
+const original = { a: 1, b: 2 };
+const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
+
+const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
+```
+
+- use `.` for static name, use `[]` for variable name
+
+```js
+// good
+const isJedi = luke.jedi;
+
+function getProp(prop) {
+  return luke[prop];
+}
+```
+
+### Array Style
+
+- use literal
+- use `push` not `[]`
+- use array spread (best) or `Array.from` (good)
+
+```js
+const foo = document.querySelectorAll('.foo');
+
+// good
+const nodes = Array.from(foo);
+
+// best
+const nodes = [...foo];
+```
+
+### Destruct Style
+
+对于多个返回值使用对象解构，而不是数组解构
+
+```js
+// bad
+function processInput(input) {
+  // 处理代码...
+  return [left, right, top, bottom];
+}
+
+// 调用者需要考虑返回数据的顺序。
+const [left, __, top] = processInput(input);
+
+// good
+function processInput(input) {
+  // 处理代码...
+  return { left, right, top, bottom };
+}
+
+// 调用者只选择他们需要的数据。
+const { left, top } = processInput(input);
+```
+
+### String Style
+
+- use `'` not `"`
+- use \`${}\` not `'str1' + 'str2'`
+
+### Function Style
+
+- use naming function expression not function declaration
+
+```js
+// bad
+function foo() {
+  // ...
+}
+
+// bad
+const foo = function () {
+  // ...
+};
+
+// good
+// 从变量引用调用中区分的词汇名称
+const short = function longUniqueMoreDescriptiveLexicalFoo() {
+  // ...
+};
+```
+
+- use `...args` not `arguments`
+
+```js
+// bad
+function concatenateAll() {
+  const args = Array.prototype.slice.call(arguments);
+  return args.join('');
+}
+
+// good
+function concatenateAll(...args) {
+  return args.join('');
+}
+```
+
+- use default parameters not default expression pattern
+
+```js
+// bad
+function handleThings(opts) {
+  this.opts = opts || {};
+}
+
+// good
+function handleThings(opts = {}) {
+  this.opts = opts;
+}
+```
+
+- no reassign parameters: side effect and bad performance
+
+### Arrow Function Style
+
+- `()` and `{}` should pair
+
+```js
+// bad
+arr.map((x) => x + 1);
+arr.map((x, index) => x + index);
+[1, 2, 3].map(x => {
+  const y = x + 1;
+  return x * y;
+});
+
+// good
+arr.map(x => x + 1);
+arr.map((x, index) => {
+  return x + index;
+});
+[1, 2, 3].map((x) => {
+  const y = x + 1;
+  return x * y;
+});
+```
+
+- use `()` wrap multiple line return value
+
+```js
+// bad
+['get', 'post', 'put'].map(httpMethod => Object.prototype.hasOwnProperty.call(
+    httpMagicObjectWithAVeryLongName,
+    httpMethod,
+  )
+);
+
+// good
+['get', 'post', 'put'].map(httpMethod => (
+  Object.prototype.hasOwnProperty.call(
+    httpMagicObjectWithAVeryLongName,
+    httpMethod,
+  )
+));
+```
+
+### Module Style
+
+- import first
+
+```js
+// bad
+import foo from 'foo';
+foo.init();
+
+import bar from 'bar';
+
+// good
+import foo from 'foo';
+import bar from 'bar';
+
+foo.init();
+```
+
+- no shorthand `export from`
+
+```js
+// bad
+// filename es6.js
+export { es6 as default } from './AirbnbStyleGuide';
+
+// good
+// filename es6.js
+import { es6 } from './AirbnbStyleGuide';
+export default es6;
+```
+
+- path occurs once
+
+```js
+// bad
+import foo from 'foo';
+// … 其他导入 … //
+import { named1, named2 } from 'foo';
+
+// good
+import foo, { named1, named2 } from 'foo';
+
+// best
+import foo, {
+  named1,
+  named2,
+} from 'foo';
+```
+
+- not export `let`
+
+```js
+// bad
+let foo = 3;
+export { foo };
+
+// good
+const foo = 3;
+export { foo };
+```
+
+### Iterator and Generator Style
+
+- no iterator, 应该使用 JavaScript 的高阶函数代替 for-in 或者 for-of:
+  - 使用 `map/reduce/filter/any/every/some/find/findIndex/ ...` 遍历数组
+  - 使用 `Object.keys() / Object.values() / Object.entries()` 迭代对象生成数组
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+
+// bad
+let sum = 0;
+for (let num of numbers) {
+  sum += num;
+}
+sum === 15;
+
+// good
+let sum = 0;
+numbers.forEach((num) => {
+  sum += num;
+});
+sum === 15;
+
+// best (use the functional force)
+const sum = numbers.reduce((total, num) => total + num, 0);
+sum === 15;
+
+// bad
+const increasedByOne = [];
+for (let i = 0; i < numbers.length; i++) {
+  increasedByOne.push(numbers[i] + 1);
+}
+
+// good
+const increasedByOne = [];
+numbers.forEach((num) => {
+  increasedByOne.push(num + 1);
+});
+
+// best (keeping it functional)
+const increasedByOne = numbers.map(num => num + 1);
+```
+
+- use `function*` for generator
+
+```js
+// bad
+function * foo() {
+  // ...
+}
+
+// bad
+const bar = function *() {
+  // ...
+};
+
+// good
+function* foo() {
+  // ...
+}
+
+// good
+const foo = function* () {
+  // ...
+};
+```
+
+### Expression Style
+
+if 语句使用 ToBoolean 的抽象方法来计算表达式的结果:
+
+- Objects 的取值为： true
+- Undefined 的取值为： false
+- Null 的取值为： false
+- Booleans 的取值为： 布尔值的取值
+- Numbers 的取值为：如果为 +0, -0, or NaN 值为 false 否则为 true
+- Strings 的取值为: 如果是一个空字符串 '' 值为 false 否则为 true
+
+对于布尔值使用简写，但是对于字符串和数字进行显式比较
+
+```js
+// bad
+if (isValid === true) {
+  // ...
+}
+
+// good
+if (isValid) {
+  // ...
+}
+
+// bad
+if (name) {
+  // ...
+}
+
+// good
+if (name !== '') {
+  // ...
+}
+
+// bad
+if (collection.length) {
+  // ...
+}
+
+// good
+if (collection.length > 0) {
+  // ...
+}
+```
+
+use `{}` warp `case` when exists `const`/`let`/`function`/`class` declaration
+
+```js
+// bad
+switch (foo) {
+  case 1:
+    let x = 1;
+    break;
+  case 2:
+    const y = 2;
+    break;
+  case 3:
+    function f() {
+      // ...
+    }
+    break;
+  default:
+    class C {}
+}
+
+// good
+switch (foo) {
+  case 1: {
+    let x = 1;
+    break;
+  }
+  case 2: {
+    const y = 2;
+    break;
+  }
+  case 3: {
+    function f() {
+      // ...
+    }
+    break;
+  }
+  case 4:
+    bar();
+    break;
+  default: {
+    class C {}
+  }
+}
+```
+
+### 换行 Style
 
 - 键入最后一个运算符后再换行, 运算符置于行尾可使 automatic semicolon insertion 机制失效
 - 换行后保持 2 个缩进层次
 
-#### 空格
+```js
+// bad
+const arr = [
+  [0, 1], [2, 3], [4, 5],
+];
+
+const objectInArray = [{
+  id: 1,
+}, {
+  id: 2,
+}];
+
+const numberInArray = [
+  1, 2,
+];
+
+// good
+const arr = [[0, 1], [2, 3], [4, 5]];
+
+const objectInArray = [
+  {
+    id: 1,
+  },
+  {
+    id: 2,
+  },
+];
+
+const numberInArray = [
+  1,
+  2,
+];
+```
+
+- use `()` wrap multiple line assignment or arguments
+
+```js
+// good
+const foo = (
+  superLongLongLongLongLongLongLongLongFunctionName()
+);
+
+['get', 'post', 'put'].map(httpMethod => (
+  Object.prototype.hasOwnProperty.call(
+    httpMagicObjectWithAVeryLongName,
+    httpMethod,
+  )
+));
+```
+
+### 空格 Style
 
 Good places to use a white space include:
 
@@ -2093,6 +2664,8 @@ Good places to use a white space include:
 - function foo() {}
 - } if/for/while () {}
 - } else {}
+- no space inner `()` `[]`
+- use space inner `{}`
 
 ```javascript
 let d = 0,
@@ -2115,7 +2688,7 @@ if (a&& b&&c) {
 }
 ```
 
-#### 注释
+### 注释 Style
 
 - 上方插入空行
 - 与下方语句统一缩进
@@ -2127,7 +2700,7 @@ if (a&& b&&c) {
  */
 ```
 
-##### 模块
+#### 模块
 
 ```js
 /*
@@ -2136,7 +2709,7 @@ if (a&& b&&c) {
  */
 ```
 
-##### 对象
+#### 对象
 
 ```js
 /*
@@ -2144,7 +2717,7 @@ if (a&& b&&c) {
  */
 ```
 
-##### 属性
+#### 属性
 
 ```js
 /*
@@ -2153,7 +2726,7 @@ if (a&& b&&c) {
  */
 ```
 
-##### 方法/函数
+#### 方法/函数
 
 ```js
 /*
