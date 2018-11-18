@@ -29,6 +29,14 @@
       - [Custom Hooks](#custom-hooks)
   - [ES6 Syntax](#es6-syntax)
     - [binding for this](#binding-for-this)
+  - [React Style Guide](#react-style-guide)
+    - [Naming Style](#naming-style)
+    - [Props Style](#props-style)
+    - [Refs Style](#refs-style)
+    - [Alignment Style](#alignment-style)
+    - [Quotes Style](#quotes-style)
+    - [Spacing Style](#spacing-style)
+    - [Ordering of Class Component](#ordering-of-class-component)
   - [MVC模式](#mvc模式)
     - [Controller](#controller)
     - [Best Practice](#best-practice)
@@ -583,6 +591,195 @@ handle(e) {
 state = {}
 handle = (e) => {}
 ```
+
+## React Style Guide
+
+### Naming Style
+
+- use PascalCase for `.jsx` and component constructor
+- use camelCase for component instance reference
+- use camelCase for props name
+
+```js
+// bad
+import reservationCard from './ReservationCard';
+
+// good
+import ReservationCard from './ReservationCard';
+
+// bad
+const ReservationItem = <ReservationCard />;
+
+// good
+const reservationItem = <ReservationCard />;
+```
+
+- setting displayname for HOC
+
+```js
+// bad
+export default function withFoo(WrappedComponent) {
+  return function WithFoo(props) {
+    return <WrappedComponent {...props} foo />;
+  }
+}
+
+// good
+export default function withFoo(WrappedComponent) {
+  function WithFoo(props) {
+    return <WrappedComponent {...props} foo />;
+  }
+
+  const wrappedComponentName = WrappedComponent.displayName
+    || WrappedComponent.name
+    || 'Component';
+
+  WithFoo.displayName = `withFoo(${wrappedComponentName})`;
+  return WithFoo;
+}
+```
+
+### Props Style
+
+- use `prop` not `prop={true}`
+- filter out unnecessary props
+
+```js
+// bad
+render() {
+  const { irrelevantProp, ...relevantProps  } = this.props;
+  return <WrappedComponent {...this.props} />
+}
+
+// good
+render() {
+  const { irrelevantProp, ...relevantProps  } = this.props;
+  return <WrappedComponent {...relevantProps} />
+}
+```
+
+### Refs Style
+
+- use callback refs
+
+```js
+// bad
+<Foo
+  ref="myRef"
+/>
+
+// good
+<Foo
+  ref={(ref) => { this.myRef = ref; }}
+/>
+```
+
+### Alignment Style
+
+```js
+// bad
+<Foo superLongParam="bar"
+     anotherSuperLongParam="baz" />
+
+// good
+<Foo
+  superLongParam="bar"
+  anotherSuperLongParam="baz"
+/>
+
+// if props fit in one line then keep it on the same line
+<Foo bar="bar" />
+
+// children get indented normally
+<Foo
+  superLongParam="bar"
+  anotherSuperLongParam="baz"
+>
+  <Quux />
+</Foo>
+
+// bad
+{showButton &&
+  <Button />
+}
+
+// bad
+{
+  showButton &&
+    <Button />
+}
+
+// good
+{showButton && (
+  <Button />
+)}
+
+// good
+{showButton && <Button />}
+```
+
+### Quotes Style
+
+- use `"` for JSX attributes, use `'` for all other JS
+
+```js
+// bad
+<Foo bar='bar' />
+
+// good
+<Foo bar="bar" />
+
+// bad
+<Foo style={{ left: "20px" }} />
+
+// good
+<Foo style={{ left: '20px' }} />
+```
+
+### Spacing Style
+
+- a single space in self-closing tag
+- no pad JSX curly spaces
+
+```js
+// bad
+<Foo/>
+
+// very bad
+<Foo                 />
+
+// bad
+<Foo
+ />
+
+// good
+<Foo />
+```
+
+```js
+// bad
+<Foo bar={ baz } />
+
+// good
+<Foo bar={baz} />
+```
+
+### Ordering of Class Component
+
+1. optional static methods
+2. constructor
+3. getChildContext
+4. componentWillMount
+5. componentDidMount
+6. componentWillReceiveProps
+7. shouldComponentUpdate
+8. componentWillUpdate
+9. componentDidUpdate
+10. componentWillUnmount
+11. clickHandlers or eventHandlers like onClickSubmit() or onChangeDescription()
+12. getter methods for render like getSelectReason() or getFooterContent()
+13. optional render methods like renderNavigation() or renderProfilePicture()
+14. render
 
 ## MVC模式
 
