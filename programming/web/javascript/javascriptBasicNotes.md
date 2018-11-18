@@ -509,8 +509,6 @@ parseInt(str, base);
 - 对象在 数值运算环境 中 先利用 valueOf(object), 再利用 toString() 转化为数字, 若转化失败, 则返回NaN
 - 对象与 数值加号运算: 先数值加, (**失败后**)再字符串加
 
-------
-
 ## 运算符
 
 - ==与===
@@ -526,8 +524,6 @@ var i = a ? 1
     : c ? 3
     : 4;
 ```
-
-------
 
 ## 控制流程
 
@@ -559,8 +555,6 @@ function doAction(action) {
   return actions[action]();
 }
 ```
-
-------
 
 ## 对象
 
@@ -1165,8 +1159,6 @@ catch (e) {
   e.remedy();  // genericErrorHandler
 }
 ```
-
-------
 
 ## 函数
 
@@ -1783,8 +1775,6 @@ if(typeof target === "undefined") {
 }
 ```
 
-------
-
 ## 模块化
 
 ### 命名空间
@@ -1967,8 +1957,6 @@ Sandbox('dom', 'event', function (box) {
   // no trace of Ajax module here
 });
 ```
-
-------
 
 ## JavaScript DOM Basic Notes
 
@@ -2322,8 +2310,6 @@ function addLoadEvent(func) {
 
 - getBoundingClientRect
 
-------
-
 ## Ajax
 
 ### 基本用法
@@ -2482,8 +2468,6 @@ $.ajax({
 });
 ```
 
-------
-
 ## JSON
 
 ```javascript
@@ -2498,8 +2482,6 @@ $.getJSON("/json/cats.json", function(json) {
   $(".message").html(JSON.stringify(json));
 });
 ```
-
-------
 
 ## 正则表达式
 
