@@ -1,5 +1,23 @@
 # Vue Basic Notes
 
+<!-- TOC -->
+
+- [Vue Basic Notes](#vue-basic-notes)
+  - [Internal of Vue](#internal-of-vue)
+    - [Vue Constructor](#vue-constructor)
+    - [prototype of Vue](#prototype-of-vue)
+    - [Global API of Vue](#global-api-of-vue)
+    - [Vue Instance](#vue-instance)
+    - [Read-only property](#read-only-property)
+    - [Shared Utils](#shared-utils)
+    - [Options of Vue](#options-of-vue)
+      - [Normalize Options](#normalize-options)
+      - [Merge Options](#merge-options)
+    - [Reactive Data Pattern](#reactive-data-pattern)
+    - [Virtual DOM Diff and Patch](#virtual-dom-diff-and-patch)
+
+<!-- /TOC -->
+
 ## Internal of Vue
 
 - [vue-design](http://hcysun.me/vue-design)
@@ -681,3 +699,12 @@ for (const key in dirs) {
 - 对于 provide 选项，其合并策略使用与 data 选项相同的 mergeDataOrFn 函数
 - 最后，以上没有提及到的选项都将使默认选项 defaultStrat
 - 最最后，默认合并策略函数 defaultStrat 的策略是：只要子选项不是 undefined 就使用子选项，否则使用父选项
+
+### Reactive Data Pattern
+
+```js
+data.a;     // getHook() get called
+data.a = 2; // setHook() get called
+```
+
+### Virtual DOM Diff and Patch
