@@ -150,6 +150,11 @@ git config --list
 ```
 
 ```bash
+git config --global pull.rebase true
+git config --global rebase.autoStash true
+```
+
+```bash
 git help
 git --help
 man git-
@@ -508,6 +513,12 @@ git rebase [basebranch] [topicbranch]
 ```bash
 git checkout master
 git merge feature-branch
+```
+
+pull with auto reabse and auto stash
+
+```bash
+git pull --rebase --autostash
 ```
 
 ## Branch
