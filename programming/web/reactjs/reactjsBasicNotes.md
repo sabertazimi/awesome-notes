@@ -40,7 +40,7 @@
   - [MVC模式](#mvc模式)
     - [Controller](#controller)
     - [Best Practice](#best-practice)
-  - [React 16 (New Features)](#react-16-new-features)
+  - [Modern React](#modern-react)
     - [Context API](#context-api)
     - [Error Boundary](#error-boundary)
     - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
@@ -805,9 +805,23 @@ render() {
 - npm的debug包，log组件渲染的每个步骤和动作
 - [Singel](https://github.com/diegohaz/singel)
 
-## React 16 (New Features)
+## Modern React
 
 ### Context API
+
+```js
+function contextWrapper(WrappedComponent, Context) {
+  return class extends React.Component {
+    render() {
+      return (
+        <Context.Consumer>
+          { context => <WrappedComponent context={context} { ...this.props } /> }
+        </Context.Consumer>
+      )
+    }
+  }
+}
+```
 
 ### Error Boundary
 
