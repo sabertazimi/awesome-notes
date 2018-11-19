@@ -4,6 +4,17 @@
 <!-- TOC -->
 
 - [Design Patterns Notes](#design-patterns-notes)
+  - [Baisc Patterns](#baisc-patterns)
+    - [Literal Pattern](#literal-pattern)
+    - [Closure and IIFE](#closure-and-iife)
+    - [Check Pattern](#check-pattern)
+    - [函数(function)](#函数function)
+      - [参数](#参数)
+    - [解耦](#解耦)
+      - [事件处理与UI逻辑](#事件处理与ui逻辑)
+    - [Env and Config](#env-and-config)
+    - [Stand Library Idioms](#stand-library-idioms)
+    - [Other](#other)
   - [Modular Patterns](#modular-patterns)
     - [Object Literal](#object-literal)
     - [立即函数模式(IIFE)](#立即函数模式iife)
@@ -44,6 +55,71 @@
 <!-- /TOC -->
 
 [Awesome Book](http://www.dofactory.com/javascript/design-patterns)
+
+## Baisc Patterns
+
+### Literal Pattern
+
+- 不要使用 new Boolean()/new Number()/new String()
+- 避免使用 new Object()/new Array()
+
+### Closure and IIFE
+
+### Check Pattern
+
+- `O || {}` `O || (O = {})`
+- `if (O && O.property)`
+- `if (typeof v === " ")`
+- `toString. apply(var)`
+
+### 函数(function)
+
+#### 参数
+
+- 函数不应依赖于全局变量，实现与执行全局环境的的解耦
+- 全局变量应以函数参数/依赖的形式，注入函数内部
+
+### 解耦
+
+#### 事件处理与UI逻辑
+
+- 事件处理函数与应用逻辑函数分开成单独函数,提高代码重用率
+- 应用逻辑函数不依赖于 event 对象，其属性值作为参数传入，易于解耦与测试
+
+```js
+const MyApp = {
+
+    // 事件处理函数
+    handleClick: function(event) {
+
+        /* 将事件的属性作为参数，传递给应用逻辑函数
+         * 使得应用逻辑函数不依赖于 event 对象，易于解耦与测试
+         */
+        this.showPopup(event.clientX, event.clientY);
+    }
+
+    // 应用逻辑函数
+    showPopup: function(x, y) {
+        const popup = document.getElementById('popup');
+        popup.style.left = x + 'px';
+        popup.style.top  = y + 'px';
+        popup.className = 'reveal';
+    }
+}
+```
+
+### Env and Config
+
+配置文件以 .env/JS(Object)/JSON/JSONP/XML/YML 格式单独存放，方便读取
+
+### Stand Library Idioms
+
+- use `Number.isNaN` not `isNaN`
+- use `Number.isFinite` not `isFinite`
+
+### Other
+
+!!result 转化成 Boolean
 
 ## Modular Patterns
 
