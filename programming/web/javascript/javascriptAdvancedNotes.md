@@ -56,6 +56,12 @@
       - [Global Exection Context](#global-exection-context)
       - [Function Exection Context](#function-exection-context)
     - [Event Loop](#event-loop)
+  - [Browser Internal](#browser-internal)
+    - [Render Engine](#render-engine)
+      - [HTML Parser](#html-parser)
+      - [CSS Parser](#css-parser)
+      - [Layout](#layout)
+      - [Paint](#paint)
   - [Effective JavaScript](#effective-javascript)
     - [Memory Leak](#memory-leak)
     - [禁用特性](#禁用特性)
@@ -1151,6 +1157,88 @@ process.nextTick(function foo() {
 console.log("10")
 // 1 10 8 9 5 7 2 3 4 6
 ```
+
+## Browser Internal
+
+- Chrome: Blink (based on Webkit) + V8
+- Firefox: Gecko + SpiderMonkey
+- Safari: Webkit + JavaScriptCore (Nitro)
+- Edge: Trident/EdgeHTML + Chakra
+
+### Render Engine
+
+Parser/Script -> DOM Tree -> Styled Tree -> Layout -> Paint -> Composite
+
+#### HTML Parser
+
+DTD is context-sensitive grammar.
+Use State Machine pattern to implement a tokenizer
+
+```js
+Data -> Tag Open -> Tag Name -> Tag Close -> Data
+```
+
+tokenizer send tokens to constructor, constructing DOM tree
+
+```js
+initial -> before HTML -> before head -> in head -> after head
+-> in body -> after body -> after after body -> EOF token
+```
+
+#### CSS Parser
+
+CSS is context-free grammar.
+Webkit use flex/bison (bottom-to-up), Gecko use up-to-bottom.
+
+```js
+ruleset
+  : selector [ ',' S* selector ]*
+    '{' S* declaration [ ';' S* declaration ]* '}' S*
+  ;
+selector
+  : simple_selector [ combinator selector | S+ [ combinator? selector ]? ]?
+  ;
+simple_selector
+  : element_name [ HASH | class | attrib | pseudo ]*
+  | [ HASH | class | attrib | pseudo ]+
+  ;
+class
+  : '.' IDENT
+  ;
+element_name
+  : IDENT | '*'
+  ;
+attrib
+  : '[' S* IDENT S* [ [ '=' | INCLUDES | DASHMATCH ] S*
+    [ IDENT | STRING ] S* ] ']'
+  ;
+pseudo
+  : ':' [ IDENT | FUNCTION S* [IDENT S*] ')' ]
+  ;
+```
+
+#### Layout
+
+为避免对所有细小更改都进行整体布局，浏览器采用了一种“dirty 位”系统。
+如果某个呈现器发生了更改，或者将自身及其子代标注为“dirty”，则需要进行布局:
+
+- 父呈现器确定自己的宽度
+- 父呈现器依次处理子呈现器，并且：
+  - 放置子呈现器（设置 x,y 坐标）
+  - 如果有必要，调用子呈现器的布局（如果子呈现器是 dirty 的，或者这是全局布局，或出于其他某些原因），
+    这会计算子呈现器的高度
+- 父呈现器根据子呈现器的累加高度以及边距和补白的高度来设置自身高度，此值也可供父呈现器的父呈现器使用
+- 将其 dirty 位设置为 false
+
+#### Paint
+
+Paint Order:
+
+- 背景颜色
+- 背景图片
+- 边框
+- 子代
+- 轮廓
 
 ## Effective JavaScript
 
