@@ -942,7 +942,8 @@ export function trapTabKey(e, context) {
 ### ARIA
 
 ```html
-<button class="list-expander" aria-expanded="false" aria-controls="expandable-list-1">Expand List</button>
+<button class="list-expander" aria-expanded="false"
+aria-controls="expandable-list-1">Expand List</button>
 <ul id="expandable-list-1">
     <li><a href="http://example.com">Sample Link</a></li>
     <li><a href="http://example.com">Sample Link 2</a></li>
