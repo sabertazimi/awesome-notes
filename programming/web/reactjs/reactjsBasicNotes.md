@@ -769,11 +769,11 @@ render() {
 1. optional static methods
 2. constructor
 3. getChildContext
-4. componentWillMount
+4. getDerivedStateFromProps
 5. componentDidMount
-6. componentWillReceiveProps
+6. getDerivedStateFromProps
 7. shouldComponentUpdate
-8. componentWillUpdate
+8. getSnapshotBeforeUpdate
 9. componentDidUpdate
 10. componentWillUnmount
 11. clickHandlers or eventHandlers like onClickSubmit() or onChangeDescription()
