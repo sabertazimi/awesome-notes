@@ -109,6 +109,7 @@
       - [body](#body)
       - [radio group with `fieldset` and `legend`](#radio-group-with-fieldset-and-legend)
     - [element](#element)
+      - [Button Access](#button-access)
       - [img access](#img-access)
       - [audio/source](#audiosource)
       - [figure access](#figure-access)
@@ -116,6 +117,7 @@
       - [time access](#time-access)
       - [color contrast](#color-contrast)
       - [accesskey and tabindex](#accesskey-and-tabindex)
+    - [ARIA](#aria)
 
 <!-- /TOC -->
 
@@ -824,6 +826,10 @@ sudo systemctl restart nginx
 
 ### element
 
+#### Button Access
+
+Use `<button>` for clickable elements
+
 #### img access
 
 - alt=""
@@ -868,4 +874,91 @@ sudo systemctl restart nginx
 
 ```html
 <a id="second" href="" accesskey="c">
+```
+
+```js
+document.addEventListener('keyup', (event) => {
+    switch (event.keyCode) {
+        // escape
+        case 27:
+            // exit
+            break;
+        // enter || spacebar
+        case 13 || 32:
+            // submit or something
+            break;
+        // left arrow
+        case 37:
+            // move back / previous
+            break;
+        // right arrow
+        case 39:
+            // move forward
+            break;
+        // up arrow
+        case 38:
+            // move up
+            break;
+        // down arrow
+        case 40:
+            // move down
+            break;
+       }
+}
+```
+
+```js
+/**
+ * Traps the tab key inside of the context, so the user can't accidentally get
+ * stuck behind it.
+ *
+ * Note that this does not work for VoiceOver users who are navigating with
+ * the VoiceOver commands, only for default tab actions. We would need to
+ * implement something like the inert attribute for that (see https://github.com/WICG/inert)
+ * @param  {object} e the Event object
+ */
+export function trapTabKey(e, context) {
+    if (e.key !== 'Tab') return;
+
+    let focusableItems = getFocusable(context);
+    let focusedItem = document.activeElement;
+
+    let focusedItemIndex = focusableItems.indexOf(focusedItem);
+
+    if (e.shiftKey) {
+        if (focusedItemIndex == 0) {
+            focusableItems[focusableItems.length - 1].focus();
+            e.preventDefault();
+        }
+    } else {
+        if (focusedItemIndex == focusableItems.length - 1) {
+            focusableItems[0].focus();
+            e.preventDefault();
+        }
+    }
+}
+```
+
+### ARIA
+
+```html
+<button class="list-expander" aria-expanded="false" aria-controls="expandable-list-1">Expand List</button>
+<ul id="expandable-list-1">
+    <li><a href="http://example.com">Sample Link</a></li>
+    <li><a href="http://example.com">Sample Link 2</a></li>
+    <li><a href="http://example.com">Sample Link 3</a></li>
+</ul>
+```
+
+```js
+const listExpander = document.querySelector('.list-expander');
+const list = document.querySelector('#expandable-list-1');
+
+listExpander.addEventListener('click', (e) => {
+    if(list.getAttribute('aria-expanded') === "true") {
+        list.setAttribute('aria-expanded', 'false');
+    } else {
+        list.setAttribute('aria-expanded', 'true');
+    }
+});
 ```
