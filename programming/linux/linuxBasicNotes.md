@@ -28,7 +28,19 @@
       - [which 系统命令名(同时查询别名及结果颜色)](#which-系统命令名同时查询别名及结果颜色)
       - [`find [搜索路径] [可选参数] [文件名](可加"")`](#find-搜索路径-可选参数-文件名可加)
       - [`grep` `[可选参数] “字符串” 文件名`](#grep-可选参数-字符串-文件名)
-    - [screen](#screen)
+    - [Process Command](#process-command)
+      - [ps](#ps)
+      - [top](#top)
+      - [jobs](#jobs)
+      - [bg](#bg)
+        - [fg](#fg)
+      - [kill](#kill)
+      - [killall](#killall)
+      - [shutdown](#shutdown)
+      - [pstree](#pstree)
+      - [vmstat](#vmstat)
+      - [xload/tload](#xloadtload)
+      - [screen](#screen)
     - [I/O Command](#io-command)
       - [cat](#cat)
       - [sort](#sort)
@@ -37,6 +49,11 @@
       - [wc](#wc)
       - [head/tail](#headtail)
       - [tee](#tee)
+      - [nl](#nl)
+      - [fold](#fold)
+      - [fmt](#fmt)
+      - [pr](#pr)
+      - [printf](#printf)
     - [帮助命令](#帮助命令)
       - [`man` `[可选参数] 命令名称`](#man-可选参数-命令名称)
       - [系统命令 --help](#系统命令---help)
@@ -112,6 +129,7 @@
       - [基本变量](#基本变量)
       - [built-in 变量](#built-in-变量)
       - [环境变量](#环境变量)
+        - [Env Commnad](#env-commnad)
     - [数值运算](#数值运算)
       - [declare命令](#declare命令)
       - [expr/let数值运算工具](#exprlet数值运算工具)
@@ -300,7 +318,54 @@ display a list of appropriate commands
 - -I 不区分大小写
 - -v 排除指定字符串
 
-### screen
+### Process Command
+
+#### ps
+
+report a snapshot of current processes
+
+#### top
+
+display tasks
+
+#### jobs
+
+list active jobs
+
+#### bg
+
+place a job in the background
+
+##### fg
+
+place a job in the foreground
+
+#### kill
+
+send a signal to a process
+
+#### killall
+
+kill processes by name
+
+#### shutdown
+
+shutdown or reboot the system
+
+#### pstree
+
+outputs a process list arranged in a tree-like pattern
+
+#### vmstat
+
+outputs a snapshot of system resource usage:
+including memory, swap and disk I/O
+
+#### xload/tload
+
+draws a graph showing system load over time
+
+#### screen
 
 ```bash
 screen -S screenName
@@ -352,6 +417,26 @@ bunzip2
 bzip2
 ....
 ```
+
+#### nl
+
+number lines
+
+#### fold
+
+wrap each line to a specified length
+
+#### fmt
+
+a simple text formatter
+
+#### pr
+
+prepare text for printing
+
+#### printf
+
+format and print data
 
 ### 帮助命令
 
@@ -882,15 +967,16 @@ fi
 - ~/.bash_profile
 - ~/.bashrc
 - /etc/profile
-
 - /etc/bash.bashrc
-
 - /etc/issue——shell登录信息
+- PS1环境变量——shell头行打印信息
+- PATH环境变量
+
+##### Env Commnad
 
 - env——查看环境变量
 - export 变量名=变量值——设置环境变量
-- PATH环境变量
-- PS1环境变量——shell头行打印信息
+- printenv
 
 ### 数值运算
 
