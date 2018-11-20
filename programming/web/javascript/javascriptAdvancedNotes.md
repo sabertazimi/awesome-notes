@@ -1244,9 +1244,10 @@ Paint Order:
 
 ### Memory Leak
 
-- not used global vars (bind to window or document)
-- not used setInterval or other callback functions
-- not used DOM reference
+- useless global vars (bind to window or document)
+- useless callback functions (e.g setInterval)
+- useless DOM reference
+- circular reference
 - closure
 
 ### 禁用特性
