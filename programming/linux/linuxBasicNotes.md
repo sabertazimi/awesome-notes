@@ -139,7 +139,9 @@
       - [for语句](#for语句)
       - [while语句与until语句](#while语句与until语句)
     - [函数](#函数)
+    - [Bash IO](#bash-io)
     - [信号](#信号)
+    - [Bash Debugging](#bash-debugging)
     - [Interactive Shell Script Tips](#interactive-shell-script-tips)
   - [Terminal](#terminal)
   - [Perf Tools](#perf-tools)
@@ -1119,11 +1121,147 @@ until [[ 条件判断式 ]]
     done
 ```
 
+```bash
+#!/bin/bash
+# while-menu: a menu driven system information program
+DELAY=3 # Number of seconds to display results
+while [[ $REPLY != 0 ]]; do
+    clear
+    cat <<- _EOF_
+        Please Select:
+        1. Display System Information
+        2. Display Disk Space
+        3. Display Home Space Utilization
+        0. Quit
+    _EOF_
+    read -p "Enter selection [0-3] > "
+    if [[ $REPLY =~ ^[0-3]$ ]]; then
+        if [[ $REPLY == 1 ]]; then
+            echo "Hostname: $HOSTNAME"
+            uptime
+            sleep $DELAY
+        fi
+        if [[ $REPLY == 2 ]]; then
+            df -h
+            sleep $DELAY
+        fi
+        if [[ $REPLY == 3 ]]; then
+            if [[ $(id -u) -eq 0 ]]; then
+                echo "Home Space Utilization (All Users)"
+                du -sh /home/*
+            else
+                echo "Home Space Utilization ($USER)"
+                du -sh $HOME
+            fi
+            sleep $DELAY
+        fi
+    else
+        echo "Invalid entry."
+        sleep $DELAY
+    fi
+done
+echo "Program terminated."
+```
+
+```bash
+#!/bin/bash
+# while-read: read lines from a file
+while read distro version release; do
+    printf "Distro: %s\tVersion: %s\tReleased: %s\n" \
+        $distro \
+        $version \
+        $release
+done < distros.txt
+```
+
 ### 函数
 
 - 函数局部变量 local + 变量名
 - 函数参数  :  $ + #/？/@/n
 - 引用函数库文件  ——  source  sh文件名   /   .  sh文件名          可修改~/.bashrc文件
+
+### Bash IO
+
+```bash
+#!/bin/bash
+# read-validate: validate input
+invalid_input () {
+    echo "Invalid input '$REPLY'" >&2
+    exit 1
+}
+read -p "Enter a single item > "
+# input is empty (invalid)
+[[ -z $REPLY ]] && invalid_input
+# input is multiple items (invalid)
+(( $(echo $REPLY | wc -w) > 1 )) && invalid_input
+# is input a valid filename?
+if [[ $REPLY =~ ^[-[:alnum:]\._]+$ ]]; then
+    echo "'$REPLY' is a valid filename."
+    if [[ -e $REPLY ]]; then
+        echo "And file '$REPLY' exists."
+    else
+        echo "However, file '$REPLY' does not exist."
+    fi
+    # is input a floating point number?
+    if [[ $REPLY =~ ^-?[[:digit:]]*\.[[:digit:]]+$ ]]; then
+        echo "'$REPLY' is a floating point number."
+    else
+        echo "'$REPLY' is not a floating point number."
+    fi
+    # is input an integer?
+    if [[ $REPLY =~ ^-?[[:digit:]]+$ ]]; then
+        echo "'$REPLY' is an integer."
+    else
+        echo "'$REPLY' is not an integer."
+    fi
+else
+    echo "The string '$REPLY' is not a valid filename."
+fi
+```
+
+```bash
+#!/bin/bash
+# read-menu: a menu driven system information program
+clear
+echo "
+Please Select:
+
+    1. Display System Information
+    2. Display Disk Space
+    3. Display Home Space Utilization
+    0. Quit
+"
+read -p "Enter selection [0-3] > "
+
+if [[ $REPLY =~ ^[0-3]$ ]]; then
+    if [[ $REPLY == 0 ]]; then
+        echo "Program terminated."
+        exit
+    fi
+    if [[ $REPLY == 1 ]]; then
+        echo "Hostname: $HOSTNAME"
+        uptime
+        exit
+    fi
+    if [[ $REPLY == 2 ]]; then
+        df -h
+        exit
+    fi
+    if [[ $REPLY == 3 ]]; then
+        if [[ $(id -u) -eq 0 ]]; then
+            echo "Home Space Utilization (All Users)"
+            du -sh /home/*
+        else
+            echo "Home Space Utilization ($USER)"
+            du -sh $HOME
+        fi
+        exit
+    fi
+else
+    echo "Invalid entry." >&2
+    exit 1
+fi
+```
 
 ### 信号
 
@@ -1133,6 +1271,35 @@ until [[ 条件判断式 ]]
 - kill/killall —— SIGINT
 - trap SIG*/EXIT —— 捕捉信号(后 + 忽略信号/默认处理信号/自定义处理信号)
 - trap – SIG*/EXIT  —— 移除信号
+
+### Bash Debugging
+
+`-x` option
+
+```bash
+#!/bin/bash -x
+# trouble: script to demonstrate common errors
+number=1
+if [ $number = 1 ]; then
+    echo "Number is equal to 1."
+else
+    echo "Number is not equal to 1."
+fi
+```
+
+```bash
+#!/bin/bash
+# trouble: script to demonstrate common errors
+number=1
+echo "number=$number" # DEBUG
+set -x # Turn on tracing
+if [ $number = 1 ]; then
+    echo "Number is equal to 1."
+else
+    echo "Number is not equal to 1."
+fi
+set +x # Turn off tracing
+```
 
 ### Interactive Shell Script Tips
 
