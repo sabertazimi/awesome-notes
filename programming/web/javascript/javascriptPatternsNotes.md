@@ -979,7 +979,8 @@ module.exports = (function () {
 
 ### Observer/Pub-Sub Pattern
 
-被观察者(Subject)维护一组观察者列表，每当被观察者状态改变时，调用 notify 函数，此函数中调用观察者(Observer)的 update 函数(可自定义)
+- 被观察者(Subject)维护一组观察者列表，每当被观察者状态改变时，调用 notify 函数，此函数中调用观察者(Observer)的 update 函数(可自定义)
+- decouple subject and observer: each depends on `Abstraction` not `Implementation`
 
 #### Observer
 
