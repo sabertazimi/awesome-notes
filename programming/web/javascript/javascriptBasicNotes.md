@@ -144,6 +144,8 @@
     - [document](#document)
     - [window](#window)
     - [JS DOM API](#js-dom-api)
+      - [width/height](#widthheight)
+    - [left/top](#lefttop)
   - [Ajax](#ajax)
     - [基本用法](#基本用法)
     - [简单封装](#简单封装)
@@ -2369,6 +2371,16 @@ function addLoadEvent(func) {
 ### JS DOM API
 
 - getBoundingClientRect
+
+#### width/height
+
+- offsetWidth/offsetHeight = content + padding + border
+- clientWidth/clientHeight = content + padding
+
+### left/top
+
+- offsetLeft/offsetTop: 表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent对象）左上角的距离
+- scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素大小
 
 ## Ajax
 
