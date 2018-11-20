@@ -1,30 +1,30 @@
-
 # JQuery
 
 <!-- TOC -->
 
 - [JQuery](#jquery)
-  - [$.Callbacks](#callbacks)
-  - [Deferred](#deferred)
-  - [DOM](#dom)
+  - [Callbacks Queue](#callbacks-queue)
+  - [Deferred Queue](#deferred-queue)
+  - [Sizzle Selector Engine](#sizzle-selector-engine)
+  - [DOM Module](#dom-module)
     - [structure](#structure)
     - [class](#class)
     - [style](#style)
-  - [Events](#events)
+  - [Events Module](#events-module)
     - [Mouse](#mouse)
     - [Keyboard](#keyboard)
     - [Form](#form)
     - [Document/Window](#documentwindow)
     - [常用多态函数](#常用多态函数)
     - [window](#window)
-  - [Ajax](#ajax)
+  - [Ajax Module](#ajax-module)
     - [$.getJSON](#getjson)
     - [$.ajax](#ajax)
-  - [Animation](#animation)
+  - [Animation Module](#animation-module)
 
 <!-- /TOC -->
 
-## $.Callbacks
+## Callbacks Queue
 
 callback queue use `Observer` pattern to
 add callbacks to callback queue,
@@ -60,7 +60,7 @@ function Callbacks(options) {
 }
 ```
 
-## Deferred
+## Deferred Queue
 
 Same to `Promise`
 
@@ -182,7 +182,12 @@ class Promise {
 }
 ```
 
-## DOM
+## Sizzle Selector Engine
+
+- runtime tokenizer and parser
+- api from `querySelectorAll`
+
+## DOM Module
 
 ### structure
 
@@ -220,7 +225,7 @@ $("selector").css("color", "red");
 $("selector").prop("disable", "true");
 ```
 
-## Events
+## Events Module
 
 ### Mouse
 
@@ -265,7 +270,7 @@ $(window).height()               //返回窗口高度
 $(window).scrollTop() //返回滚动条距网页顶部距离
 ```
 
-## Ajax
+## Ajax Module
 
 ### $.getJSON
 
@@ -290,4 +295,4 @@ $.ajax({
 });
 ```
 
-## Animation
+## Animation Module
