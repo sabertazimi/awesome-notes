@@ -7,10 +7,12 @@
   - [Deferred Queue](#deferred-queue)
   - [Sizzle Selector Engine](#sizzle-selector-engine)
   - [DOM Module](#dom-module)
+    - [DOM Internal](#dom-internal)
     - [structure](#structure)
     - [class](#class)
     - [style](#style)
   - [Events Module](#events-module)
+    - [Events Internal](#events-internal)
     - [Mouse](#mouse)
     - [Keyboard](#keyboard)
     - [Form](#form)
@@ -189,6 +191,29 @@ class Promise {
 
 ## DOM Module
 
+### DOM Internal
+
+createDocumentFragment:
+
+多次使用节点方法(如：appendChild)绘制页面，每次都要刷新页面一次。
+使用document_createDocumentFragment()创建一个文档碎片，把所有的新结点附加在其上，
+然后把文档碎片的内容一次性添加到document中，提升性能
+
+```js
+function domManip(parentEles, target, callback) {
+  const fragment = buildFragment([target], parentEles);
+  callback.call(parentEles);
+}
+
+
+...
+after() {
+  return this.domManip(arguments, function (elem) {
+    this.parentNode.insertBefore(elem, this.nextSibling);
+  });
+}
+```
+
 ### structure
 
 ```javascript
@@ -226,6 +251,15 @@ $("selector").prop("disable", "true");
 ```
 
 ## Events Module
+
+### Events Internal
+
+1. 通过 on 绑定事件，分析传递的数据，加工变成 add 能够识别的数据
+2. 通过 add 把数据整理放到数据缓存中保存，通过 addEventListener 绑定事件
+3. 触发事件执行 addEventListener 回调 dispatch 方法
+4. 修正事件对象存在的问题，通过 fix 生成一个可写的事件对象
+5. 引入 handlers 把委托和原生事件（例如"click"）绑定区分对待
+6. 执行数据缓存的事件回调，传入内部产生的事件对象
 
 ### Mouse
 
