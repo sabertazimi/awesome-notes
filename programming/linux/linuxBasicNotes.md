@@ -138,7 +138,8 @@
       - [case语句](#case语句)
       - [for语句](#for语句)
       - [while语句与until语句](#while语句与until语句)
-    - [函数](#函数)
+    - [Bash Array](#bash-array)
+    - [Bash Function](#bash-function)
     - [Bash IO](#bash-io)
     - [信号](#信号)
     - [Bash Debugging](#bash-debugging)
@@ -960,6 +961,46 @@ if [ "$?" -ne "0" ];then
 fi
 ```
 
+每次 shift 命令执行的时候，变量 $2 的值会移动到变量 $1 中，变量 $3 的值会移动到变量 $2 中.
+变量 $# 的值也会相应的减1
+
+```bash
+#!/bin/bash
+# posit-param2: script to display all arguments
+count=1
+while [[ $# -gt 0 ]]; do
+    echo "Argument $count = $1"
+    count=$((count + 1))
+    shift
+done
+```
+
+```bash
+usage () {
+    echo "$PROGNAME: usage: $PROGNAME [-f file | -i]"
+    return
+}
+# process command line options
+interactive=
+filename=
+while [[ -n $1 ]]; do
+    case $1 in
+    -f | --file)            shift
+                            filename=$1
+                            ;;
+    -i | --interactive)     interactive=1
+                            ;;
+    -h | --help)            usage
+                            exit
+                            ;;
+    *)                      usage >&2
+                            exit 1
+                            ;;
+    esac
+    shift
+done
+```
+
 #### 环境变量
 
 - /etc/profile.d/*.sh
@@ -983,9 +1024,9 @@ fi
 
 ### Bash Expansions
 
-- $(()) or $[]: arithmetic expansion
+- `$(())` or `$[]`: arithmetic expansion
 
-一般地, 将数值运算用 (()) [[]] 或 $(()) 括起, 可以确保变量不会被识别为 string
+一般地, 将数值运算用 `(())` `[[]]` 或 `$(())` 括起, 可以确保变量不会被识别为 string
 
 ```bash
 read x
@@ -1010,8 +1051,8 @@ then
 fi
 ```
 
-- [[ xxx ]]: condition
-- (( xxx )): arithemetic condition
+- `[[ xxx ]]`: condition
+- `(( xxx ))`: arithemetic condition
 
 |operator|function|
 |:-----------|:-----------|
@@ -1040,6 +1081,55 @@ fi
 ```bash
 echo a{A{1,2},B{3,4}}b
 aA1b aA2b aB3b aB4b
+```
+
+- `${}`: string expansion
+  - `${parameter:-word}`: 若 parameter 没有设置（例如，不存在）或者为空，展开结果是 word 的值。
+    若 parameter 不为空，则展开结果是 parameter 的值
+  - `${parameter:+word}`: 若 parameter 没有设置或为空，展开结果为空。
+    若 parameter 不为空， 展开结果是 word 的值会替换掉 parameter 的值
+  - `${parameter:=word}`: 若 parameter 没有设置或为空，展开结果是 word 的值。
+    另外，word 的值会赋值给 parameter。
+    若 parameter 不为空，展开结果是 parameter 的值
+  - `${parameter:?word}`: 若 parameter 没有设置或为空，这种展开导致脚本带有错误退出，
+    并且 word 的内容会发送到标准错误。
+    若 parameter 不为空， 展开结果是 parameter 的值
+  - `${!prefix*}` `${!prefix@}`: 这种展开会返回以 prefix 开头的已有变量名
+  - `${#parameter}`: 展开成由 parameter 所包含的字符串的长度
+  - `${parameter:offset}` `${parameter:offset:length}`: 提取一部分字符
+  - `${parameter,,}` 把 parameter 的值全部展开成小写字母
+  - `${parameter,}` 仅仅把 parameter 的第一个字符展开成小写字母
+  - `${parameter^^}` 把 parameter 的值全部转换成大写字母
+  - `${parameter^}` 仅仅把 parameter 的第一个字符转换成大写字母
+  - `${parameter#pattern}` `${parameter##pattern}`,
+    `${parameter%pattern}` `${parameter%%pattern}`: 从 paramter 所包含的字符串中清除开头/末尾一部分文本
+  - `${parameter/pattern/string}`, `${parameter//pattern/string}`,
+    `${parameter/#pattern/string}`, `${parameter/%pattern/string}`: replace
+
+```bash
+foo=file.txt.zip
+echo ${foo#*.}
+txt.zip
+echo ${foo##*.}
+zip
+
+foo=file.txt.zip
+echo ${foo%.*}
+file.txt
+echo ${foo%%.*}
+file
+```
+
+```bash
+foo=JPG.JPG
+echo ${foo/JPG/jpg}
+jpg.JPG
+echo ${foo//JPG/jpg}
+jpg.jpg
+echo ${foo/#JPG/jpg}
+jpg.JPG
+echo ${foo/%JPG/jpg}
+JPG.jpg
 ```
 
 - $(): command result
@@ -1089,6 +1179,105 @@ case $变量名 in
 esac
 ```
 
+|case pattern|function|
+|:-----|:-----------------------------------------|
+|`a)`|Matches if word equals "a"|
+|`[[:alpha:]])`|Matches if word is a single alphabetic character|
+|`???)`|Matches if word is exactly three characters long|
+|`*.txt)|Matches if word ends with the characters “.txt”|
+|`*)`|Matches any value of word|
+
+```bash
+#!/bin/bash
+# case-menu: a menu driven system information program
+clear
+echo "
+Please Select:
+1. Display System Information
+2. Display Disk Space
+3. Display Home Space Utilization
+0. Quit
+"
+read -p "Enter selection [0-3] > "
+case $REPLY in
+    0)  echo "Program terminated."
+        exit
+        ;;
+    1)  echo "Hostname: $HOSTNAME"
+        uptime
+        ;;
+    2)  df -h
+        ;;
+    3)  if [[ $(id -u) -eq 0 ]]; then
+            echo "Home Space Utilization (All Users)"
+            du -sh /home/*
+        else
+            echo "Home Space Utilization ($USER)"
+            du -sh $HOME
+        fi
+        ;;
+    *)  echo "Invalid entry" >&2
+        exit 1
+        ;;
+esac
+```
+
+or case pattern
+
+```bash
+#!/bin/bash
+# case-menu: a menu driven system information program
+clear
+echo "
+Please Select:
+A. Display System Information
+B. Display Disk Space
+C. Display Home Space Utilization
+Q. Quit
+"
+read -p "Enter selection [A, B, C or Q] > "
+case $REPLY in
+q|Q) echo "Program terminated."
+     exit
+     ;;
+a|A) echo "Hostname: $HOSTNAME"
+     uptime
+     ;;
+b|B) df -h
+     ;;
+c|C) if [[ $(id -u) -eq 0 ]]; then
+         echo "Home Space Utilization (All Users)"
+         du -sh /home/*
+     else
+         echo "Home Space Utilization ($USER)"
+         du -sh $HOME
+     fi
+     ;;
+*)   echo "Invalid entry" >&2
+     exit 1
+     ;;
+esac
+```
+
+fall through case pattern (`;;&`)
+
+```bash
+#!/bin/bash
+# case4-2: test a character
+read -n 1 -p "Type a character > "
+echo
+case $REPLY in
+    [[:upper:]])    echo "'$REPLY' is upper case." ;;&
+    [[:lower:]])    echo "'$REPLY' is lower case." ;;&
+    [[:alpha:]])    echo "'$REPLY' is alphabetic." ;;&
+    [[:digit:]])    echo "'$REPLY' is a digit." ;;&
+    [[:graph:]])    echo "'$REPLY' is a visible character." ;;&
+    [[:punct:]])    echo "'$REPLY' is a punctuation symbol." ;;&
+    [[:space:]])    echo "'$REPLY' is a whitespace character." ;;&
+    [[:xdigit:]])   echo "'$REPLY' is a hexadecimal digit." ;;&
+esac
+```
+
 #### for语句
 
 ```bash
@@ -1101,10 +1290,9 @@ for 变量 in 值1 值2 值3 …… 值n
 {1..50}     # 1 2 ... 50
 {0..10..2}  # 0 2 4 6 8 10
 
-for (( 初始值;循环控制条件;变量变化 ))
-    do
-        程序
-    done
+for (( 初始值;循环控制条件;变量变化 )); do
+    程序
+done
 ```
 
 #### while语句与until语句
@@ -1119,6 +1307,14 @@ until [[ 条件判断式 ]]
     do
         程序
     done
+```
+
+```bash
+(( expression1 ))
+while (( expression2 )); do
+    commands
+    (( expression3 ))
+done
 ```
 
 ```bash
@@ -1174,7 +1370,11 @@ while read distro version release; do
 done < distros.txt
 ```
 
-### 函数
+### Bash Array
+
+- [Array Reference](http://billie66.github.io/TLCL/book/chap36.html)
+
+### Bash Function
 
 - 函数局部变量 local + 变量名
 - 函数参数  :  $ + #/？/@/n
@@ -1260,6 +1460,31 @@ if [[ $REPLY =~ ^[0-3]$ ]]; then
 else
     echo "Invalid entry." >&2
     exit 1
+fi
+```
+
+```bash
+# interactive mode
+if [[ -n $interactive ]]; then
+    while true; do
+        read -p "Enter name of output file: " filename
+        if [[ -e $filename ]]; then
+            read -p "'$filename' exists. Overwrite? [y/n/q] > "
+            case $REPLY in
+            Y|y)    break
+                    ;;
+            Q|q)    echo "Program terminated."
+                    exit
+                    ;;
+            *)      continue
+                    ;;
+            esac
+        elif [[ -z $filename ]]; then
+            continue
+        else
+            break
+        fi
+    done
 fi
 ```
 
