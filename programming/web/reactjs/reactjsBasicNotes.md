@@ -45,6 +45,7 @@
     - [Error Boundary](#error-boundary)
     - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
   - [React Performance](#react-performance)
+    - [Rerendering Problem](#rerendering-problem)
     - [Code Spliting](#code-spliting)
   - [Server Side Rendering](#server-side-rendering)
     - [Pros of SSR](#pros-of-ssr)
@@ -868,6 +869,91 @@ class Frameworks extends React.Component {
 ```
 
 ## React Performance
+
+### Rerendering Problem
+
+The major difference between them is that
+React.Component doesn’t implement the shouldComponentUpdate() lifecycle method
+while React.PureComponent implements it.
+If component's render() function renders the same result
+given the same props and state,
+use React.PureComponent/React.memo for a performance boost in some cases.
+
+```js
+import React, { PureComponent } from 'react';
+
+const Unstable = (props) => {
+  console.log(" Rendered Unstable component ");
+
+  return (
+    <div>
+      <p> {props.value}</p>
+    </div>
+  );
+};
+
+class App extends PureComponent {
+  state = {
+    value: 1,
+  }
+
+  componentDidMount() {
+    setInterval(() => {
+      this.setState(() => {
+        return { value:1 };
+      })
+    }, 2000);
+  }
+
+  render() {
+    return (
+      <div>
+        <Unstable value={this.state.value}/>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```js
+import React, { Component } from 'react';
+
+const Unstable = React.memo((props) => {
+  console.log(" Rendered this component ");
+
+  return (
+    <div>
+      <p> {props.value}</p>
+    </div>
+  );
+});
+
+class App extends Component {
+  state = {
+    value: 1,
+  }
+
+  componentDidMount() {
+    setInterval(() => {
+      this.setState(() => {
+        return { value:1 };
+      });
+    }, 2000);
+  }
+
+  render() {
+    return (
+      <div>
+        <Unstable value={this.state.value}/>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
 
 ### Code Spliting
 
