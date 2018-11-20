@@ -22,11 +22,21 @@
       - [ln](#ln)
     - [基本搜索命令](#基本搜索命令)
       - [locate 文件名](#locate-文件名)
+      - [type](#type)
+      - [apropos](#apropos)
       - [whereis/whatis 系统命令名](#whereiswhatis-系统命令名)
       - [which 系统命令名(同时查询别名及结果颜色)](#which-系统命令名同时查询别名及结果颜色)
       - [`find [搜索路径] [可选参数] [文件名](可加"")`](#find-搜索路径-可选参数-文件名可加)
       - [`grep` `[可选参数] “字符串” 文件名`](#grep-可选参数-字符串-文件名)
     - [screen](#screen)
+    - [I/O Command](#io-command)
+      - [cat](#cat)
+      - [sort](#sort)
+      - [uniq](#uniq)
+      - [grep](#grep)
+      - [wc](#wc)
+      - [head/tail](#headtail)
+      - [tee](#tee)
     - [帮助命令](#帮助命令)
       - [`man` `[可选参数] 命令名称`](#man-可选参数-命令名称)
       - [系统命令 --help](#系统命令---help)
@@ -258,6 +268,14 @@ ln -s(创建软链接) [原文件]  [目标文件]
 
 结合updatedb命令(该命令一般自动1天/次)
 
+#### type
+
+indicate how a command name is interpreted
+
+#### apropos
+
+display a list of appropriate commands
+
 #### whereis/whatis 系统命令名
 
 #### which 系统命令名(同时查询别名及结果颜色)
@@ -289,6 +307,48 @@ screen -r
 
 - Ctrl+d  // detach window
 - Ctrl+k  // kill window
+
+### I/O Command
+
+#### cat
+
+concatenate files
+
+#### sort
+
+sort lines of text
+
+#### uniq
+
+report or omit repeated lines
+
+#### grep
+
+print lines matching a pattern
+
+#### wc
+
+print newline, word, and byte counts for each file
+
+#### head/tail
+
+output the first/last part of a file
+
+```bash
+head -n 5 filename
+tail -f filename
+```
+
+#### tee
+
+read from standard input and write to standard output and files
+
+```bash
+[me@linuxbox ~]$ ls /usr/bin | tee ls.txt | grep zip
+bunzip2
+bzip2
+....
+```
 
 ### 帮助命令
 
