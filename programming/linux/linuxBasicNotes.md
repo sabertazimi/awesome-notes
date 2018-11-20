@@ -100,6 +100,8 @@
       - [开机任务](#开机任务)
     - [历史记录命令](#历史记录命令)
       - [history](#history)
+      - [ctrl-r](#ctrl-r)
+      - [History Shortcuts](#history-shortcuts)
     - [Driver Command](#driver-command)
       - [Touchpad Synaptics](#touchpad-synaptics)
     - [并行命令](#并行命令)
@@ -114,6 +116,7 @@
       - [declare命令](#declare命令)
       - [expr/let数值运算工具](#exprlet数值运算工具)
       - [$((    运算式    ))   或  $[    运算式    ]](#----运算式-------或------运算式----)
+    - [Bash Expansions](#bash-expansions)
     - [流程控制语句](#流程控制语句)
       - [条件判断式](#条件判断式)
       - [if语句](#if语句)
@@ -790,6 +793,31 @@ anacron —— 异步时间表
 
 /etc/profile中修改HISTSIZE !n/!!/!字符串  重复执行第n条/上一条/指定开头的历史命令
 
+```bash
+# repeat history command
+!number
+```
+
+#### ctrl-r
+
+press ctrl-r 提示符改变，显示我们正在执行反向增量搜索。
+搜索过程是”反向的”，因为我们按照从”现在”到过去 某个时间段的顺序来搜寻。
+下一步，我们开始输入要查找的文本搜索返回我们需要的结果。
+(enter to execute, ctrl-j to copy)
+
+#### History Shortcuts
+
+|command|function|
+|:--------|:------------------------|
+|Ctrl-p|移动到上一个历史条目|
+|Ctrl-n|移动到下一个历史条目|
+|Alt-<|移动到历史列表开头|
+|Alt->|移动到历史列表结尾|
+|Ctrl-r|反向增量搜索|
+|Alt-p|反向搜索，非增量搜索|
+|Alt-n|向前搜索，非增量|
+|Ctrl-o|执行历史列表中的当前项，并移到下一个|
+
 ### Driver Command
 
 #### Touchpad Synaptics
@@ -895,6 +923,20 @@ if [ "$a" -gt "$b" ]
 then
     echo "a > b"
 fi
+```
+
+### Bash Expansions
+
+- $(()) or $[]: calculation
+- $(): command result
+- {}: group regexp
+- [[ xxx ]]: condition
+- "": allow expansions
+- '': disallow expansions
+
+```bash
+echo a{A{1,2},B{3,4}}b
+aA1b aA2b aB3b aB4b
 ```
 
 ### 流程控制语句
