@@ -2903,6 +2903,7 @@ class Promise {
         try {
           // If `onFulfilled()` returns a promise, trust `resolve()` to handle
           // it correctly.
+          // store new value to new Promise
           resolve(onFulfilled(res));
         } catch (err) {
           reject(err);
@@ -2911,6 +2912,7 @@ class Promise {
 
       const _onRejected = err => {
         try {
+          // store new value to new Promise
           reject(onRejected(err));
         } catch (_err) {
           reject(_err);
