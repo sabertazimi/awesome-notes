@@ -132,11 +132,8 @@
         - [Env Commnad](#env-commnad)
     - [数值运算](#数值运算)
       - [declare命令](#declare命令)
-      - [expr/let数值运算工具](#exprlet数值运算工具)
-      - [$((    运算式    ))   或  $[    运算式    ]](#----运算式-------或------运算式----)
     - [Bash Expansions](#bash-expansions)
     - [流程控制语句](#流程控制语句)
-      - [条件判断式](#条件判断式)
       - [if语句](#if语句)
       - [case语句](#case语句)
       - [for语句](#for语句)
@@ -982,11 +979,11 @@ fi
 
 #### declare命令
 
-#### expr/let数值运算工具
+### Bash Expansions
 
-#### $((    运算式    ))   或  $[    运算式    ]
+- $(()) or $[]: arithmetic expansion
 
-- 一般地, 将数值运算用 (()) [[]] 或 $(()) 括起, 可以确保变量不会被识别为 string
+一般地, 将数值运算用 (()) [[]] 或 $(()) 括起, 可以确保变量不会被识别为 string
 
 ```bash
 read x
@@ -1011,33 +1008,18 @@ then
 fi
 ```
 
-### Bash Expansions
-
-- $(()) or $[]: calculation
-- $(): command result
-- {}: group regexp
 - [[ xxx ]]: condition
-- "": allow expansions
-- '': disallow expansions
-
-```bash
-echo a{A{1,2},B{3,4}}b
-aA1b aA2b aB3b aB4b
-```
-
-### 流程控制语句
-
-#### 条件判断式
-
-e.g    [[ -e  /etc/root/install.log  ]]
+- (( xxx )): arithemetic condition
 
 |operator|function|
 |:-----------|:-----------|
 |! EXPRESSION|The EXPRESSION is false|
 |-n STRING|The length of STRING is greater than zero|
 |-z STRING|The lengh of STRING is zero (ie it is empty)|
-|STRING1 = STRING2|STRING1 is equal to STRING2|
+|STRING1 == STRING2|STRING1 is equal to STRING2|
 |STRING1 != STRING2|STRING1 is not equal to STRING2|
+|STRING1 > STRING2|STRING1 sorts after STRING2|
+|STRING1 < STRING2|STRING1 sorts before STRING2|
 |INTEGER1 -eq INTEGER2|INTEGER1 is numerically equal to INTEGER2|
 |INTEGER1 -gt INTEGER2|INTEGER1 is numerically greater than INTEGER2|
 |INTEGER1 -lt INTEGER2|INTEGER1 is numerically less than INTEGER2|
@@ -1047,6 +1029,22 @@ e.g    [[ -e  /etc/root/install.log  ]]
 |-s FILE|FILE exists and it's size is greater than zero (ie. it is not empty)|
 |-w FILE|FILE exists and the write permission is granted|
 |-x FILE|FILE exists and the execute permission is granted|
+|`AND -a &&`||
+|`OR -o ||`||
+|`NOT ! !`||
+
+- {}: group regexp
+
+```bash
+echo a{A{1,2},B{3,4}}b
+aA1b aA2b aB3b aB4b
+```
+
+- $(): command result
+- "": allow expansions string
+- '': disallow expansions string
+
+### 流程控制语句
 
 #### if语句
 
