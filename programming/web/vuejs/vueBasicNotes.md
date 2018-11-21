@@ -702,6 +702,8 @@ for (const key in dirs) {
 
 ### Reactive Data Pattern
 
+data getter/setter -- notify -> watcher -- trigger --> render
+
 ```js
 data.a;     // getHook() get called
 data.a = 2; // setHook() get called
