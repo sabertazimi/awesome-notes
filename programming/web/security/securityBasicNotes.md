@@ -155,6 +155,22 @@ don't trust user:
 express/csurf library
 ```
 
+```html
+<a href="https://an.evil.site" target="_blank" rel="noopener noreferrer
+nofollow">进入一个“邪恶”的网站</a>
+```
+
+```js
+// old browser
+"use strict";
+
+function openUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+```
+
 ### File Upload Vulnerabilities
 
 当使用 JS 代码限制上传文件类型时, 攻击者 Disable JS in Browser, 并上传 malicious code file.
