@@ -35,7 +35,8 @@
 
 > refer to: font-family, font-size, spacing, color
 
-[reference](https://noti.st/rar/mz1rIY/golden-rules-of-typography-on-the-web)
+- [reference](https://noti.st/rar/mz1rIY/golden-rules-of-typography-on-the-web)
+- [Praticel Typography](https://practicaltypography.com)
 
 ### font-size and spacing
 
