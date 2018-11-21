@@ -339,6 +339,7 @@ nohup ssserver -c /etc/shadowsocks.json 2>&1 &
 
 - [Basic Dev Setup for OSX](https://hackernoon.com/macbook-dev-setup-5890e61a8f0a)
 - [OSX Setup Apps](https://juejin.im/post/58e1f221570c350057a6bc03)
+- [Web Dev Setup](https://medium.freecodecamp.org/a-simple-javascript-node-coding-setup-on-mac-os-x-1face26dd522)
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
