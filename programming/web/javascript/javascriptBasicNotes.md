@@ -176,6 +176,7 @@
     - [Promise](#promise)
       - [Promise Polyfill](#promise-polyfill)
     - [await/async](#awaitasync)
+    - [Sleep Function](#sleep-function)
   - [Geolocation API](#geolocation-api)
   - [Web Audio API](#web-audio-api)
     - [From Oscillator](#from-oscillator)
@@ -2971,6 +2972,29 @@ async getAuthors(authorIds) {
   const promises = _.map(authorIds, id => authorModel.fetch(id));
   const authors = await Promise.all(promises);
 }
+```
+
+### Sleep Function
+
+```js
+function sleep(time) {
+  return new Promise((resolve) => setTimeout(resolve,time));
+}
+```
+
+```js
+sleep(2000).then(() => {
+  //do something after 2000 milliseconds
+  console.log('resolved');
+});
+
+
+async function add(n1, n2) {
+  await sleep(2222);
+  console.log(n1 + n2);
+}
+
+add(1, 2);
 ```
 
 ## Geolocation API
