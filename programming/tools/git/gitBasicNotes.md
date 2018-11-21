@@ -1068,6 +1068,31 @@ git fetch <repo_name> <branch_name>
 享资源上.submodule 命令有几个子命令, 如（ add 、 update 、 sync 等等）用来管理这些
 资源.
 
+- add submodule
+
+```bash
+git submodule add git://github.com/chneukirchen/rack.git rack
+cat .gitmodules
+```
+
+- get submodule
+
+```bash
+git submodule init
+git submodule update
+```
+
+- sync submodule
+
+```bash
+git pull origin/master --rebase
+git submodule update
+```
+
+```bash
+git submodule update --init --force --remote
+```
+
 ### 检查与比较
 
 #### git show
