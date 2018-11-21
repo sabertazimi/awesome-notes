@@ -1000,6 +1000,12 @@ curl -i http://git.io -F "url=https://github.com/technoweenie" -F "code=t"
 
 #### git clone
 
+clone specific branch
+
+```bash
+git clone -b branch_name repo_url
+```
+
 #### git add
 
 #### git status
