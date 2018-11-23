@@ -947,6 +947,34 @@ lexicographical_compare
 mismatch
 ```
 
+```cpp
+template<class InputIt1, class InputIt2>
+bool equal(
+    InputIt1 first1,
+    InputIt1 last1,
+    InputIt2 first2
+) {
+    for (; first1 != last1; ++first1, ++first2) {
+        if (!(*first1 == *first2)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+```
+
+```cpp
+bool is_prefix(const std::string& s, const std::string& of) {
+    if (s.size() > of.size()) return false;
+    return std::equal(s.begin(), s.end(), of.begin());
+}
+
+bool is_palindrome(const std::string& s) {
+    return std::equal(s.begin(), s.begin() + s.size() / 2, s.rbegin());
+}
+```
+
 ### Search Algortihms
 
 ```cpp
