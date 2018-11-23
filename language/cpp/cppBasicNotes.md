@@ -82,6 +82,7 @@
     - [Input Output](#input-output)
       - [iomanip STL API](#iomanip-stl-api)
     - [Container](#container)
+      - [unordered_map container](#unordered_map-container)
       - [Container Choosing](#container-choosing)
       - [empty/size](#emptysize)
       - [assign/insert/erase](#assigninserterase)
@@ -836,6 +837,20 @@ int main() {
 - 关联容器: set multiset map multimap
 - 连续内存容器: vector string deque
 - 链表容器: list slit hash
+
+#### unordered_map container
+
+- count/find
+- `[]`
+
+```cpp
+if (m_breakpoints.count(possible_breakpoint_location)) {
+    auto& bp = m_breakpoints[possible_breakpoint_location];
+}
+
+auto alias = m_aliases.find(input);
+return (alias != m_aliases.end() && alias->second == command);
+```
 
 #### Container Choosing
 
