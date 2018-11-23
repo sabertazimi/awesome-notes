@@ -91,7 +91,9 @@
     - [Permutation Algorithms](#permutation-algorithms)
     - [Numeric Algorithms](#numeric-algorithms)
     - [Query Algorithms](#query-algorithms)
+      - [Equal STL Algo](#equal-stl-algo)
     - [Search Algortihms](#search-algortihms)
+      - [Find STL Algo](#find-stl-algo)
     - [Set Algortihms](#set-algortihms)
     - [Mover Algorithms](#mover-algorithms)
     - [Value Algorithms](#value-algorithms)
@@ -947,6 +949,8 @@ lexicographical_compare
 mismatch
 ```
 
+#### Equal STL Algo
+
 ```cpp
 template<class InputIt1, class InputIt2>
 bool equal(
@@ -993,6 +997,24 @@ upper_bound
 min_element
 max_element
 minmax_element
+```
+
+#### Find STL Algo
+
+```cpp
+template<class InputIterator, class T>
+  InputIterator find (InputIterator first, InputIterator last, const T& val) {
+  while (first!=last) {
+    if (*first==val) return first;
+    ++first;
+  }
+  return last;
+}
+```
+
+```cpp
+auto it = std::find_if(begin(g_register_descriptors), end(g_register_descriptors),
+                      [r](auto&& rd) { return rd.r == r; });
 ```
 
 ### Set Algortihms
