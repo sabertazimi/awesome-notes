@@ -1016,6 +1016,12 @@ bool is_prefix(const std::string& s, const std::string& of) {
     return std::equal(s.begin(), s.end(), of.begin());
 }
 
+bool is_suffix(const std::string& s, const std::string& of) {
+    if (s.size() > of.size()) return false;
+    auto diff = of.size() - s.size();
+    return std::equal(s.begin(), s.end(), of.begin() + diff);
+}
+
 bool is_palindrome(const std::string& s) {
     return std::equal(s.begin(), s.begin() + s.size() / 2, s.rbegin());
 }
