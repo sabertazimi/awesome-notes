@@ -1758,6 +1758,21 @@ body {
   - alternate/alternate-reverse 不断交替方向
   - reverse   100%->0%方向
 - animation-fill-mode: forwards
+- animatino-play-state: `paused`/`running`
+- DOM events:
+  - animationiteration: triggered after each animation iteration
+  - animationend: triggered after an animation completes
+  - animationstart: triggered at the start of an animation
+
+```css
+div {
+  animation-play-state: paused;
+}
+
+:checked ~ div {
+  animation-play-state: running;
+}
+```
 
 ## Responsive Desgin
 
