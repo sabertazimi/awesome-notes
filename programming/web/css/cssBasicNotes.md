@@ -127,6 +127,7 @@
     - [设备特性](#设备特性)
   - [常用组件 (Awesome Demo)](#常用组件-awesome-demo)
     - [Flexiable Heading](#flexiable-heading)
+    - [Table](#table)
     - [form](#form)
       - [select](#select)
     - [nav](#nav)
@@ -194,7 +195,7 @@
     - [Template](#template)
     - [Framework](#framework)
     - [Audio](#audio)
-    - [Table](#table)
+    - [Table Library](#table-library)
     - [File](#file)
       - [File Tree View](#file-tree-view)
 
@@ -1901,6 +1902,11 @@ h1::after {
 
 - **reset.css**
 
+### Table
+
+- `margin-left: auto` to align-left
+- `border: 0` and `border-collapse: collapse` to remove border line
+
 ### form
 
 #### select
@@ -2311,7 +2317,7 @@ content -> centering -> font family -> spacing -> color&contrast
 
 - [Howler.js](https://github.com/goldfire/howler.js)
 
-### Table
+### Table Library
 
 - [jQuery Plugin for Render Data](https://github.com/DataTables/DataTables)
 - [Extended Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
