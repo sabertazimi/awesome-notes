@@ -470,6 +470,7 @@ git tag <tagname(v1.4)> [commit序列]
 ```bash
 git push [remote-name] <tagname>
 git push [remote-name] --tags
+git push --follow-tags
 ```
 
 ### alias
