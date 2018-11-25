@@ -1072,7 +1072,7 @@ git fetch <repo_name> <branch_name>
 - add submodule
 
 ```bash
-git submodule add git://github.com/chneukirchen/rack.git rack
+git submodule add git://github.com/chneukirchen/rack.git ./lib/rack
 cat .gitmodules
 ```
 
