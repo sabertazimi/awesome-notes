@@ -750,6 +750,10 @@ BigInt(a) * BigInt(b)
 
 ### Array
 
+```js
+[...Array(5).keys()] // => [0, 1, 2, 3, 4]
+```
+
 #### Array.from
 
 强大的**函数式**方法
