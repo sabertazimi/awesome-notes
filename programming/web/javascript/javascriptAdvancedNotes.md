@@ -1958,6 +1958,20 @@ window.addEventListener('scroll', function(event) {
 
 #### JavaScript Lazy Loading
 
+- `defer`: downloads the script while the document is still parsing,
+  but waits until the document has finished parsing before executing it
+  (in order)
+- `async`: downloads the script during parsing the document,
+  but will pause the parser to execute the script
+- If the scripts rely on each other, use defer
+- If the script is independent, use async
+
+```html
+<script src="myscript.js"></script>
+<script src="myscript.js" defer></script>
+<script src="myscript.js" async></script>k
+```
+
 ```jsx
 const DetailsComponent = lazy(() => import('./details'));
 const PageComponent = () => {
