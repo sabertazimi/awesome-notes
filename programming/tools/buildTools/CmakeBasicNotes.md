@@ -1,8 +1,8 @@
-# CMake Basic Notes
+# Cmake Basic Notes
 
 <!-- TOC -->
 
-- [CMake Basic Notes](#cmake-basic-notes)
+- [Cmake Basic Notes](#cmake-basic-notes)
   - [Basic Build System](#basic-build-system)
   - [Flow Control](#flow-control)
     - [if control](#if-control)
@@ -72,7 +72,7 @@ message(STATUS "CMake demo: build for library")
 install(TARGETS testStudent DESTINATION /usr/lib)
 ```
 
-use a shared or library
+use a shared or static library
 
 ```bash
 cmake_minimum_required(VERSION 2.8.9)
@@ -94,7 +94,7 @@ target_link_libraries(libtest ${PROJECT_LINK_LIBS} )
 message(STATUS "CMake demo: use library")
 ```
 
-set output library
+set output of library
 
 ```bash
 # 指定lib输出目录
@@ -116,6 +116,39 @@ set_target_properties(
     VERSION ${DEMO5_VERSION}
     SOVERSION ${DEMO5_VERSION_MAJOR}
 )
+```
+
+build for library and executable
+
+```bash
+cmake_minimum_required(VERSION 3.5)
+project(MiniSat VERSION 2.2 LANGUAGES CXX)
+
+add_library(libminisat STATIC
+    minisat/core/Solver.cc
+    minisat/utils/Options.cc
+    minisat/utils/System.cc
+    minisat/simp/SimpSolver.cc
+)
+
+target_compile_features(libminisat
+    PUBLIC
+      cxx_attributes
+      cxx_defaulted_functions
+      cxx_deleted_functions
+      cxx_final
+)
+
+target_include_directories(libminisat PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_compile_definitions(libminisat PUBLIC __STDC_LIMIT_MACROS __STDC_FORMAT_MACROS)
+
+# Also build the two MiniSat executables
+add_executable(minisat minisat/core/Main.cc)
+target_link_libraries(minisat libminisat)
+
+add_executable(minisat-simp minisat/simp/Main.cc)
+target_link_libraries(minisat-simp libminisat)
 ```
 
 ## Flow Control
