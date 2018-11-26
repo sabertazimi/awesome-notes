@@ -8,16 +8,14 @@
     - [属性操作](#属性操作)
     - [字符操作](#字符操作)
     - [缺省元素](#缺省元素)
-  - [Semantic HTML](#semantic-html)
   - [Structure](#structure)
     - [section](#section)
-    - [header](#header)
+    - [header footer](#header-footer)
     - [hgroup](#hgroup)
     - [nav](#nav)
     - [main](#main)
     - [address](#address)
     - [aside](#aside)
-    - [footer](#footer)
     - [blockquote](#blockquote)
     - [pre](#pre)
   - [Form](#form)
@@ -105,8 +103,9 @@
       - [tabindex](#tabindex)
   - [Nginx Config](#nginx-config)
   - [Accessbility](#accessbility)
-    - [structure](#structure)
-      - [body](#body)
+    - [Semantic HTML](#semantic-html)
+    - [Structure Access](#structure-access)
+      - [Body Access](#body-access)
       - [radio group with `fieldset` and `legend`](#radio-group-with-fieldset-and-legend)
     - [element](#element)
       - [Button Access](#button-access)
@@ -259,10 +258,6 @@ table>.row*4>.cell*3
 =  table>tr.row*4>td.cell*3
 ```
 
-## Semantic HTML
-
-[Semantic HTML Presentation](http://justineo.github.io/slideshows/semantic-html/#/)
-
 ## Structure
 
 [Reference Website](http://www.html5jscss.com/html5-semantics-section.html)
@@ -271,7 +266,10 @@ table>.row*4>.cell*3
 
 必须含有**hx**标题子标签
 
-### header
+### header footer
+
+not only can the page `<body>` contain a header and a footer,
+but so can every `<article>` and `<section>` element
 
 ### hgroup
 
@@ -294,8 +292,6 @@ table>.row*4>.cell*3
 ### aside
 
 名词解释的附属部分/友情链接/广告
-
-### footer
 
 ### blockquote
 
@@ -788,9 +784,13 @@ sudo systemctl restart nginx
 
 ## Accessbility
 
-### structure
+### Semantic HTML
 
-#### body
+[Semantic HTML Presentation](http://justineo.github.io/slideshows/semantic-html/#/)
+
+### Structure Access
+
+#### Body Access
 
 ```html
 <header>
