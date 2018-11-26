@@ -28,6 +28,7 @@
       - [Basic Rules](#basic-rules)
       - [Custom Hooks](#custom-hooks)
   - [ES6 Syntax](#es6-syntax)
+    - [Comments](#comments)
     - [binding for this](#binding-for-this)
   - [React Style Guide](#react-style-guide)
     - [Naming Style](#naming-style)
@@ -573,6 +574,17 @@ const useReactRouter = () => {
 ```
 
 ## ES6 Syntax
+
+### Comments
+
+```jsx
+render() {
+  {/* */}
+  {/*
+
+  */}
+}
+```
 
 ### binding for this
 
