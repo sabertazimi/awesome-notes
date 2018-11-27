@@ -2804,6 +2804,9 @@ resolve only accept **one** value
 return new Promise(resolve => resolve([a, b]));
 ```
 
+- promises on the same chain execute orderly
+- promises on two seperate chains execute in random order
+
 ```js
 const users = [
   'W8lbAokuirfdlTJpnsNC5kryuHtu1G53',
