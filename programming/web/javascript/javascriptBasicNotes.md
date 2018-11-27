@@ -2795,7 +2795,14 @@ MyError.prototype.constructor = MyError;
 avoid callback hell with:
 
 - return `new Promise`
+- return `promise.then`
 - `Promise.all`
+
+resolve only accept **one** value
+
+```js
+return new Promise(resolve => resolve([a, b]));
+```
 
 ```js
 const users = [
