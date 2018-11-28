@@ -1690,14 +1690,23 @@ filter: unset;
 - transition-timing-function: cubic-bezier(.42, 0, .58, 1);
 - transition-delay: .5s;
 
+```css
+.element {
+  transition: property durtation timing-function delay;
+  transition: transform .5s ease-in-out .2s;
+}
+```
+
 ### transform
 
-- scaleX/Y/Z();
-- translateX/Y/Z();
-- rotateX/Y/Z();
-- skewX/Y/Z();
-- matrix()/matrix3d();
+- scale/X/Y/Z/3d(): 0 - n
+- translate/X/Y/Z/3d(): n px
+- rotate/X/Y/Z/3d(): deg
+- skew/X/Y(): deg
+- matrix()/matrix3d()
 - transform-orgin: change transform start point
+  `top bottom center left right`
+- perspective(): 为 **3D** 转换元素定义透视视图
 
 > `perspective` should set with 3D transform property
 
@@ -1705,6 +1714,12 @@ filter: unset;
 
 - transform: scale, translate, rotate, skew
 - animation bounce/cache: first -100, then, +5/+20, finally 0
+
+```css
+.element {
+  animation: name duration timing-function delay iteration-count direction;
+}
+```
 
 > Tip : fade in body style
 
