@@ -847,6 +847,7 @@ npm version patch
 - [enquirer](https://github.com/enquirer/enquirer)
 - [chalk](https://github.com/chalk/chalk)
 - [open CLI framework](https://github.com/oclif/oclif)
+- [progress](https://github.com/bvaughn/progress-estimator)
 
 ### Http
 
