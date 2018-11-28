@@ -25,6 +25,9 @@
 
 <!-- /TOC -->
 
+content -> centering -> font family -> spacing -> color&contrast
+-> balance(position) -> primary/secondary color -> custom font -> images/links
+
 ## Typography Principles
 
 - The typeface (font-family)
