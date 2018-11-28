@@ -142,10 +142,6 @@
       - [相同单元](#相同单元)
       - [元素定位](#元素定位)
   - [CSS Variables](#css-variables)
-  - [Design](#design)
-    - [Color](#color)
-      - [Scheme](#scheme)
-      - [Lib](#lib)
   - [UI Libraries && Components](#ui-libraries--components)
     - [Utils](#utils)
     - [Society](#society)
@@ -157,6 +153,7 @@
     - [Editor](#editor)
       - [Emoji](#emoji)
     - [Video](#video)
+    - [Fonts](#fonts)
     - [Images](#images)
       - [Size](#size)
       - [Slide](#slide)
@@ -2090,24 +2087,6 @@ window.addEventListener('resize', () => {
 });
 ```
 
-## Design
-
-content -> centering -> font family -> spacing -> color&contrast
--> balance(position) -> primary/secondary color -> custom font -> images/links
-
-> reference: [web design in 4 minutes](http://jgthms.com/web-design-in-4-minutes/#share)
-
-### Color
-
-#### Scheme
-
-- floralwhite + #7986cb
-- [gradify css](http://www.gradifycss.com/)
-
-#### Lib
-
-- [kewler](https://github.com/adriantoine/kewler)
-
 ## UI Libraries && Components
 
 - [micro js](http://microjs.com/)
@@ -2156,6 +2135,10 @@ content -> centering -> font family -> spacing -> color&contrast
 - [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
 - [plyr](https://github.com/selz/plyr)
 
+### Fonts
+
+- [Fontmin](https://github.com/ecomfe/fontmin)
+
 ### Images
 
 #### Size
@@ -2181,6 +2164,7 @@ content -> centering -> font family -> spacing -> color&contrast
 
 ### Animation Component
 
+- [Airbnb After Effect Solution](https://github.com/airbnb/lottie-web)
 - [Awesome Effect Library - Effeckt.css](https://github.com/h5bp/Effeckt.css)
 - [animate.css](https://github.com/daneden/animate.css)
 - [anime.js](https://github.com/juliangarnier/anime)
