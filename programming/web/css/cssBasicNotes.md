@@ -1209,9 +1209,15 @@ main {
 
 #### Grid Alignment
 
-- `justify-content`/`align-content` content within element (effectively adjusts padding)
-- `justify-self`/`align-self` inline element within parent (effectively adjusts margins)
-- `justify-items/`align-items` inline items inside box (controls child items)
+- `justify-content`/`align-content` content within element,
+  attach to **parent** css selector
+  (effectively adjusts `padding` of parent)
+- `justify-items`/`align-items` inline items inside box,
+  attach to **parent** css selector
+  (controls `margin` of children )
+- `justify-self`/`align-self` inline element within parent,
+  attach to **chilren** css selector
+  (effectively adjusts `margin` of children)
 
 ### 分栏问题
 
