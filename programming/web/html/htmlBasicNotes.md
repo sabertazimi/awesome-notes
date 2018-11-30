@@ -18,6 +18,7 @@
     - [aside](#aside)
     - [blockquote](#blockquote)
     - [pre](#pre)
+  - [Head Tag](#head-tag)
   - [Form](#form)
     - [validate](#validate)
     - [novalidate](#novalidate)
@@ -300,6 +301,10 @@ but so can every `<article>` and `<section>` element
 ### pre
 
 代码段
+
+## Head Tag
+
+- [Meta Data in `head`](https://gethead.info/)
 
 ## Form
 
