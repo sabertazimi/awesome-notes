@@ -1755,6 +1755,8 @@ transform-style 属性也是3D效果中经常使用的，
 backface-visibility: hidden;
 ```
 
+当元素 `rotateY(180deg)` 时，元素将被隐藏
+
 ### animation
 
 - transform: scale, translate, rotate, skew
