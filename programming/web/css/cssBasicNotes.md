@@ -115,6 +115,8 @@
     - [transition](#transition)
     - [transform](#transform)
       - [perspective](#perspective)
+      - [transform-style](#transform-style)
+      - [backface-visibility](#backface-visibility)
     - [animation](#animation)
   - [Responsive Desgin](#responsive-desgin)
     - [responsive font](#responsive-font)
@@ -1713,6 +1715,15 @@ filter: unset;
 
 > `perspective` should set with 3D transform property
 
+一般需要在容器元素上加上以下样式:
+
+```css
+.transform-container {
+  perspective: 1024px;
+  transform-style: preserve-3d;
+}
+```
+
 #### perspective
 
 translateZ 的功能就是让元素在自己的眼前或近或远
@@ -1730,6 +1741,19 @@ translateZ 的功能就是让元素在自己的眼前或近或远
 - 当 translateZ 值非常接近 201 像素，但是不超过 201 像素的时候（如 200 像素）
   该元素的大小就会撑满整个屏幕（父辈元素没有 overflow:hidden 的限制）
 - 当 translateZ 值再变大，超过 201 像素的时候，该元素看不见了
+
+#### transform-style
+
+transform-style 属性也是3D效果中经常使用的，
+其两个参数，`flat|preserve-3d`.
+前者flat为默认值，表示平面的；
+后者preserve-3d表示3D透视
+
+#### backface-visibility
+
+```css
+backface-visibility: hidden;
+```
 
 ### animation
 
