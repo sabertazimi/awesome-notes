@@ -760,6 +760,33 @@ wget -r -p -np -k -P ~/tmp/ http://java-er.com
 
 ### 网络管理命令
 
+```bash
+ip link show
+ip address show
+ip route show
+
+# add commands to /etc/init.d/local.sh
+
+rm -fr /etc/udev/rules.d/70-persistent-net.rules
+
+# start up network adapter
+ip link set eth0 up
+
+# add/delete static ip
+ip address add 192.168.1.1/24 dev eth0
+ip address del 192.168.1.1/24 dev eth0
+
+# add/delete static route
+ip route add 192.168.1.0/24 dev eth0
+ip route del 192.168.1.0/24 dev eth0
+ip route add default via 192.168.0.196
+
+# watch packets
+watch -n 1 "ifconfig eth0"
+watch -n 1 "ifconfig eth1"
+watch -n 1 "ifconfig eth2"
+```
+
 #### arp -a ——显示地址解析协议(IP地址—网卡地址)
 
 - 网际互联层：IP协议(网际)、IGMP协议(互联网组管理)、ICMP协议(互联网控制报文)
