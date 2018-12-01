@@ -114,6 +114,7 @@
     - [animation helper](#animation-helper)
     - [transition](#transition)
     - [transform](#transform)
+      - [perspective](#perspective)
     - [animation](#animation)
   - [Responsive Desgin](#responsive-desgin)
     - [responsive font](#responsive-font)
@@ -1711,6 +1712,24 @@ filter: unset;
 - perspective(): 为 **3D** 转换元素定义透视视图
 
 > `perspective` should set with 3D transform property
+
+#### perspective
+
+translateZ 的功能就是让元素在自己的眼前或近或远
+
+```css
+.parent {
+  perspective: 201px;
+}
+```
+
+其子元素:
+
+- 设置的 translateZ 值越小，则子元素大小越小（因为元素远去，我们眼睛看到的就会变小）；
+- translateZ 值越大，该元素也会越来越大
+- 当 translateZ 值非常接近 201 像素，但是不超过 201 像素的时候（如 200 像素）
+  该元素的大小就会撑满整个屏幕（父辈元素没有 overflow:hidden 的限制）
+- 当 translateZ 值再变大，超过 201 像素的时候，该元素看不见了
 
 ### animation
 
