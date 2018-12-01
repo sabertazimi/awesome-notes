@@ -747,6 +747,21 @@ a[title*=link] {text-decoration: underline;}
 - E:lang(en)：具有使用双字母缩写(en)表示的语言的元素；
 - E:not(exception)：该选择器将选择与括号内的选择器不匹配的元素：
 
+```html
+<a href="#p1">p1</a>
+<div id="p1">p1</div>
+```
+
+```css
+div:target {
+  background-color: purple;
+}
+
+#p1:target {
+  background-color: purple;
+}
+```
+
 #### 伪元素
 
 - ::first-line：匹配文本首行；
