@@ -1713,8 +1713,6 @@ filter: unset;
   `top bottom center left right`
 - perspective(): 为 **3D** 转换元素定义透视视图
 
-> `perspective` should set with 3D transform property
-
 一般需要在容器元素上加上以下样式:
 
 ```css
@@ -1723,6 +1721,9 @@ filter: unset;
   transform-style: preserve-3d;
 }
 ```
+
+> :hover should not add to transfromed elements
+> :hover should add to parent element
 
 #### perspective
 
