@@ -14,6 +14,7 @@
   - [State](#state)
   - [Mediator](#mediator)
   - [Iterator](#iterator)
+  - [IOC and DI](#ioc-and-di)
 
 <!-- /TOC -->
 
@@ -79,3 +80,85 @@ private ClassName component;(拥有一个对象引用)
 ## Iterator
 
 一个Iterator对象封装访问和遍历一个聚集对象中的各个构件的方法
+
+## IOC and DI
+
+- IOC（inversion of control）控制反转模式；控制反转是将组件间的依赖关系从程序内部提到外部来管理
+- DI（dependency injection）依赖注入模式；依赖注入是指将组件的依赖通过外部以参数或其他形式注入
+
+```java
+class DbMysql {
+  public function query(){}
+}
+
+class Controller {
+  public $db;
+  public function __construct($dbMysql) {
+    $this->db = $dbMysql;
+  }
+  public function action(){
+    $this->db->query();
+  }
+}
+
+$db = new DbMysql();
+$c = new Controller($db);
+$c->action();
+```
+
+with IOC container
+
+```java
+class DbMysql {
+  public function __construct($host, $name, $pwd) {
+    // do something
+  }
+  public function query() {
+    echo __METHOD__ . PHP_EOL;
+  }
+}
+
+class DbRedis {
+  public function __construct($host, $name, $pwd) {
+    // do something
+  }
+  public function set() {
+    echo __METHOD__ . PHP_EOL;
+  }
+}
+
+class controller {p
+  public $mysql;
+  public $redis;
+  public function __construct($mysql, $redis) {
+    $this->mysql = $mysql;
+    $this->redis = $redis;
+  }
+  public function action() {
+    $this->mysql->query();
+    $this->redis->set();}
+  }
+}
+
+
+class Container {
+  public $bindings = [];
+  public function bind($key, Closure $value) {
+    $this->bindings[$key] = $value;
+  }
+  public function make($key) {
+    $new = $this->bindings[$key];
+    return $new();
+  }
+}
+
+$app = new Container();
+$app->bind('mysql', function () {return new DbMysql('host', 'name', 'pwd'); });
+$app->bind('redis', function () { return new DbRedis('host', 'name', 'pwd'); });
+$app->bind('controller', function () use ($app) {
+  return new Controller($app->make('mysql'), $app->make('redis'));
+});
+$controller = $app->make('controller');
+$controller->action();
+/** * 输出： * DbMysql::query * DbRedis::set */
+```
