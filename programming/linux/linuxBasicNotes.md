@@ -111,6 +111,7 @@
       - [`nmap —— 批量主机服务扫描`](#nmap--批量主机服务扫描)
       - [ncat —— 批量主机服务扫描](#ncat--批量主机服务扫描)
     - [脚本运行命令](#脚本运行命令)
+      - [Systemctl](#systemctl)
       - [定时任务](#定时任务)
         - [crontab](#crontab)
       - [后台任务](#后台任务)
@@ -850,6 +851,27 @@ nftables  命令行工具：nft
 
 exec 1>>output.log
 exec 2>>error.log
+
+#### Systemctl
+
+```bash
+systemctl enable local
+```
+
+in `/etc/init.d/local`
+
+```bash
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          local
+# Required-Start:    $all
+# Required-Stop:
+# Default-Start:     3 4 5
+# Default-Stop:
+# Short-Description: Personal start script
+
+sslocal -c shadowsocks.json -d start
+```
 
 #### 定时任务
 
