@@ -69,6 +69,7 @@
     - [内置补全](#内置补全)
     - [git](#git)
   - [Documentation](#documentation)
+  - [Error](#error)
 
 <!-- /TOC -->
 
@@ -916,3 +917,10 @@ In insert mode
 - `:help i_^n`: `<C-n>` docs in insert mode
 - `:help c_^n`: `<C-n>` docs in commandline mode
 - `:helpgrep command`: search docs includes `command`
+
+## Error
+
+can't open swap or backup file:
+
+- create `:set directory?` directory
+- chown of directory to `${whoami}`
