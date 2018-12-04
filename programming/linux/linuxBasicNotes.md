@@ -59,6 +59,7 @@
       - [系统命令 --help](#系统命令---help)
       - [help shell内部命令](#help-shell内部命令)
       - [info](#info)
+      - [system info](#system-info)
     - [压缩命令](#压缩命令)
       - [.zip](#zip)
       - [.gz](#gz)
@@ -475,6 +476,18 @@ format and print data
 #### info
 
 显示大型帮助文档 - enter进入  u返回  p上一节  n下一节  q退出
+
+#### system info
+
+```bash
+sudo add-apt-repository ppa:dawidd0811/neofetch
+sudo apt-get update
+sudo apt-get install neofetch
+```
+
+```bash
+sudo apt-get install screenfetch
+```
 
 ### 压缩命令
 
