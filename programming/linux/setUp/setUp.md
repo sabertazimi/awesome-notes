@@ -4,6 +4,10 @@
 <!-- TOC -->
 
 - [Linux Set Up](#linux-set-up)
+  - [Grub](#grub)
+    - [Windows Repair](#windows-repair)
+    - [Ubuntu Live Repair](#ubuntu-live-repair)
+    - [Grub Config](#grub-config)
   - [ArchLinux Set Up](#archlinux-set-up)
     - [Tutorials](#tutorials)
     - [Basic](#basic)
@@ -38,6 +42,36 @@
   - [Bonus for OSX](#bonus-for-osx)
 
 <!-- /TOC -->
+
+## Grub
+
+### Windows Repair
+
+- easyBCD for non-efi loader
+- with efi loader, run command:
+
+```bash
+# root commander
+bcdedit /set "{bootmgr}" path \EFI\ubuntu\grubx64.efi
+```
+
+### Ubuntu Live Repair
+
+```bash
+sudo add-apt add-apt-repository ppa:yannubuntu/boot-repair
+sudo apt update
+sudo apt install boot-repair
+boot-repair
+```
+
+### Grub Config
+
+```bash
+su
+cp /boot/grub/grub.cfg /boot/grub/grub.cfg_backup
+vim /boot/grub/grub.cfg
+reboot
+```
 
 ## ArchLinux Set Up
 
