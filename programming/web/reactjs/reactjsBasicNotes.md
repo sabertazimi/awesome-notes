@@ -882,6 +882,14 @@ class Frameworks extends React.Component {
 
 ## React Performance
 
+- use `key` correctly
+- `shouldComponentUpdate`
+- `React.PureComponent`
+- stateless component
+- Immutable.js
+- Isomorphic rendering
+- Webpack bundle analyzer
+
 ### Rerendering Problem
 
 The major difference between them is that
