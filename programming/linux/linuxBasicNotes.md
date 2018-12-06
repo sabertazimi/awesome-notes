@@ -121,7 +121,8 @@
       - [history](#history)
       - [ctrl-r](#ctrl-r)
       - [History Shortcuts](#history-shortcuts)
-    - [Driver Command](#driver-command)
+    - [Device Command](#device-command)
+      - [Monitor Info](#monitor-info)
       - [Touchpad Synaptics](#touchpad-synaptics)
     - [并行命令](#并行命令)
     - [Other Command](#other-command)
@@ -975,7 +976,14 @@ press ctrl-r 提示符改变，显示我们正在执行反向增量搜索。
 |Alt-n|向前搜索，非增量|
 |Ctrl-o|执行历史列表中的当前项，并移到下一个|
 
-### Driver Command
+### Device Command
+
+#### Monitor Info
+
+```bash
+sudo apt-get install read-edid
+sudo get-edid | parse-edid
+```
 
 #### Touchpad Synaptics
 
