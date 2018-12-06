@@ -138,14 +138,22 @@
     - [流程控制语句](#流程控制语句)
       - [if语句](#if语句)
       - [case语句](#case语句)
-      - [for语句](#for语句)
-      - [while语句与until语句](#while语句与until语句)
+      - [for 语句](#for-语句)
+      - [while 语句与 until 语句](#while-语句与-until-语句)
+      - [do while statement](#do-while-statement)
     - [Bash Array](#bash-array)
     - [Bash Function](#bash-function)
     - [Bash IO](#bash-io)
     - [信号](#信号)
     - [Bash Debugging](#bash-debugging)
     - [Interactive Shell Script Tips](#interactive-shell-script-tips)
+      - [Check Root Validation](#check-root-validation)
+      - [Bash help option](#bash-help-option)
+      - [Bash slient option](#bash-slient-option)
+      - [Check Command Validation](#check-command-validation)
+        - [Get Absolute Path](#get-absolute-path)
+      - [Bash error handle](#bash-error-handle)
+      - [Bash loading progress](#bash-loading-progress)
   - [Terminal](#terminal)
   - [Perf Tools](#perf-tools)
     - [`uptime`](#uptime)
@@ -1340,7 +1348,7 @@ case $REPLY in
 esac
 ```
 
-#### for语句
+#### for 语句
 
 ```bash
 for 变量 in 值1 值2 值3 …… 值n
@@ -1357,7 +1365,7 @@ for (( 初始值;循环控制条件;变量变化 )); do
 done
 ```
 
-#### while语句与until语句
+#### while 语句与 until 语句
 
 ```bash
 while [[ 条件判断式 ]]
@@ -1430,6 +1438,15 @@ while read distro version release; do
         $version \
         $release
 done < distros.txt
+```
+
+#### do while statement
+
+```bash
+while : ; do
+    actions
+    [[ current_time <= $cutoff ]] || break
+done
 ```
 
 ### Bash Array
@@ -1590,7 +1607,22 @@ set +x # Turn off tracing
 
 ### Interactive Shell Script Tips
 
-- help option
+#### Check Root Validation
+
+```bash
+if (( $EUID != 0 )); then
+    echo "Please run as root!"
+    exit
+fi
+```
+
+```bash
+# run as root directly
+sudo chown root <filename>
+sudo chmod +s <filename>
+```
+
+#### Bash help option
 
 ```bash
 #!/bin/sh
@@ -1600,7 +1632,7 @@ if [[ ${#@} -ne 0 ]] && [[ "${@#"--help"}" = "" ]]; then
 fi;
 ```
 
-- slient option
+#### Bash slient option
 
 ```bash
 #!/bin/sh
@@ -1617,7 +1649,7 @@ stty +echo;
 exit 0;
 ```
 
-- command available
+#### Check Command Validation
 
 ```bash
 #!/bin/sh
@@ -1630,7 +1662,7 @@ if [[ "$?" != "0" ]]; then
 fi;
 ```
 
-- absolute path
+##### Get Absolute Path
 
 ```bash
 #!/bin/sh
@@ -1639,7 +1671,7 @@ printf -- 'moving application to /opt/app.jar';
 mv "${CURR_DIR}/application.jar" /opt/app.jar;
 ```
 
-- error handle
+#### Bash error handle
 
 ```bash
 #!/bin/sh
@@ -1657,7 +1689,7 @@ fi;
 # ...
 ```
 
-- loading progress
+#### Bash loading progress
 
 ```bash
 #!/bin/sh
