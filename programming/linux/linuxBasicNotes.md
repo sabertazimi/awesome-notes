@@ -124,6 +124,8 @@
     - [Driver Command](#driver-command)
       - [Touchpad Synaptics](#touchpad-synaptics)
     - [并行命令](#并行命令)
+    - [Other Command](#other-command)
+      - [Time](#time)
   - [Shell编程](#shell编程)
     - [Warings](#warings)
     - [文件重定向](#文件重定向)
@@ -991,6 +993,30 @@ synclient TouchpadOff=0
 - command1  |  command2  前一正确命令的输出结果作为后一命令的输入结果
 
 > e.g ls && echo yes >> .log || echo no >> .log
+
+### Other Command
+
+#### Time
+
+```bash
+date
+```
+
+change ntp (Network Time Protocol) time
+
+```bash
+sudo apt-get install ntpdate
+sudo iptables -A OUTPUT -p udp --dport 123 -j ACCEPT
+sudo iptables -A INPUT -p udp --sport 123 -j ACCEPT
+sudo ntpdate time.windows.com
+sudo hwclock --localtime --systohc
+```
+
+use local time (not UTC time)
+
+```bash
+sudo timedatectl set-local-rtc 1
+```
 
 ## Shell编程
 

@@ -70,6 +70,8 @@
     - [git](#git)
   - [Documentation](#documentation)
   - [Error](#error)
+    - [Swap Backup File](#swap-backup-file)
+    - [Error Encoding](#error-encoding)
 
 <!-- /TOC -->
 
@@ -936,4 +938,3 @@ set enc=utf8
 set fencs=utf8,gbk,gb2312,gb18030
 set termencoding=utf-8
 ```
-
