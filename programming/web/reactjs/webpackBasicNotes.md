@@ -4,8 +4,9 @@
 
 - [Webpack Basic Notes](#webpack-basic-notes)
   - [Config](#config)
-    - [resolve](#resolve)
-    - [Options](#options)
+    - [Watch Options](#watch-options)
+    - [Resolve Options](#resolve-options)
+    - [Flag Options](#flag-options)
   - [Optimization](#optimization)
   - [Plugin](#plugin)
   - [Advanced](#advanced)
@@ -18,7 +19,14 @@
 
 ## Config
 
-### resolve
+### Watch Options
+
+```bash
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+```
+
+### Resolve Options
 
 ```js
 {
@@ -34,7 +42,7 @@
 }
 ```
 
-### Options
+### Flag Options
 
 - --progress
 - --colors
