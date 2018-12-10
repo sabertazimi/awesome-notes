@@ -1742,6 +1742,11 @@ printf -- ' DONE!\n';
 ## Terminal
 
 ```bash
+sudo update-alternatives --install /usr/bin/x-terminal-emulator
+ \ x-terminal-emulator /opt/Hyper/hyper 50
+```
+
+```bash
 sudo update-alternatives --config x-terminal-emulator
 ```
 
