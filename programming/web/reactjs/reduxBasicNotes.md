@@ -16,6 +16,8 @@
     - [Scheduler Middleware](#scheduler-middleware)
     - [redux-thunk Middleware](#redux-thunk-middleware)
   - [Redux Best Practice](#redux-best-practice)
+    - [State Management](#state-management)
+      - [RxJS](#rxjs)
   - [Awesome Tools](#awesome-tools)
     - [Libs](#libs)
       - [Data Types](#data-types)
@@ -284,6 +286,27 @@ const fluxStandardAction = {
     error: true
 };
 ```
+
+### State Management
+
+- redux for global state:
+  作为全局状态管理
+- rxjs for redux-middleware:
+  rxjs 管理所有输入的 input -> redux action 的调度过程
+- mobx for component-state:
+  作为组件局部状态管理器来用。
+- UI 变化很复杂时，用 component 归一化处理
+- state 变化很复杂时，用 action/state 归一化处理
+- data-input 很复杂时，用 rxjs/observable 归一化处理
+
+#### RxJS
+
+- 同步与异步的统一
+- 获取和订阅的统一
+- 现在与未来的统一
+- 可组合的数据变更过程
+- 数据与视图的精确绑定
+- 条件变更之后的自动重新计算
 
 ## Awesome Tools
 
