@@ -27,6 +27,12 @@
       - [Default Hooks](#default-hooks)
       - [Basic Rules](#basic-rules)
       - [Custom Hooks](#custom-hooks)
+        - [Async Data Hook](#async-data-hook)
+        - [reducer hook](#reducer-hook)
+        - [previous hook](#previous-hook)
+        - [store hook](#store-hook)
+        - [forece update hook](#forece-update-hook)
+        - [router hook](#router-hook)
   - [ES6 Syntax](#es6-syntax)
     - [Comments](#comments)
     - [binding for this](#binding-for-this)
@@ -413,6 +419,8 @@ ChatAPI.unsubscribeFromFriendStatus(300, handleStatusChange); // Clean up last e
 
 #### Custom Hooks
 
+##### Async Data Hook
+
 ```jsx
 import { useState, useEffect } from 'react';
 
@@ -453,7 +461,89 @@ function FriendListItem(props) {
 }
 ```
 
-reducer hook
+```jsx
+import React, { Fragment, useState, useEffect } from 'react';
+import axios from 'axios';
+
+const useDataApi = (initialUrl, initialData) => {
+  const [data, setData] = useState(initialData);
+  const [url, setUrl] = useState(initialUrl);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const fetchData = async () => {
+    setIsError(false);
+    setIsLoading(true);
+
+    try {
+      const result = await axios(url);
+
+      setData(result.data);
+    } catch (error) {
+      setIsError(true);
+    }
+
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [url]);
+
+  const doGet = (event, url) => {
+    setUrl(url);
+    event.preventDefault();
+  };
+
+  return { data, isLoading, isError, doGet };
+};
+
+function App() {
+  const [query, setQuery] = useState('redux');
+  const { data, isLoading, isError, doGet } = useDataApi(
+    'http://hn.algolia.com/api/v1/search?query=redux',
+    { hits: [] },
+  );
+
+  return (
+    <Fragment>
+      <form
+        onSubmit={event =>
+          doGet(
+            event,
+            `http://hn.algolia.com/api/v1/search?query=${query}`,
+          )
+        }
+      >
+        <input
+          type="text"
+          value={query}
+          onChange={event => setQuery(event.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      {isError && <div>Something went wrong ...</div>}
+
+      {isLoading ? (
+        <div>Loading ...</div>
+      ) : (
+        <ul>
+          {data.hits.map(item => (
+            <li key={item.objectID}>
+              <a href={item.url}>{item.title}</a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Fragment>
+  );
+}
+
+export default App;
+```
+
+##### reducer hook
 
 ```jsx
 function useReducer(reducer, initialState) {
@@ -478,7 +568,7 @@ function Todos() {
 }
 ```
 
-previous hook
+##### previous hook
 
 ```jsx
 function Counter() {
@@ -496,7 +586,7 @@ function usePrevious(value) {
 }
 ```
 
-store hook
+##### store hook
 
 ```js
 import { useState } from 'react';
@@ -526,7 +616,7 @@ export function useStore() {
 }
 ```
 
-forece update hook
+##### forece update hook
 
 ```js
 // @ts-ignore
@@ -553,7 +643,7 @@ const useForceUpdate: VoidFunctionCreator = (): VoidFunction => {
 export default useForceUpdate;
 ```
 
-router hook
+##### router hook
 
 ```js
 import { useContext, useEffect } from 'react';
