@@ -1021,6 +1021,20 @@ fit
 plot 'data.dat' using 1:2, 'data.dat' using 1:3
 ```
 
+```bash
+#!/usr/bin/gnuplot -c
+
+set terminal png enhanced
+set output ARG1.".png"
+set style data linespoints
+show timestamp
+set title ARG1
+set xlabel "time (seconds)"
+set ylabel "Segments (cwnd, ssthresh)"
+plot ARG1 using 1:7 title "snd_cwnd", \
+     ARG1 using 1:($8>=2147483647 ? 0 : $8) title "snd_ssthresh"
+```
+
 ### Other Command
 
 #### Time
