@@ -125,6 +125,7 @@
       - [Monitor Info](#monitor-info)
       - [Touchpad Synaptics](#touchpad-synaptics)
     - [并行命令](#并行命令)
+    - [Plot Command](#plot-command)
     - [Other Command](#other-command)
       - [Time](#time)
   - [Shell编程](#shell编程)
@@ -1001,6 +1002,24 @@ synclient TouchpadOff=0
 - command1  |  command2  前一正确命令的输出结果作为后一命令的输入结果
 
 > e.g ls && echo yes >> .log || echo no >> .log
+
+### Plot Command
+
+chart.gp
+
+```bash
+#!/usr/bin/env gnuplot
+
+set term wxt enhanced
+set xtics
+set view
+set multiplot
+set size
+set origin
+fit
+
+plot 'data.dat' using 1:2, 'data.dat' using 1:3
+```
 
 ### Other Command
 
