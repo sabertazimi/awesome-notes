@@ -2174,6 +2174,7 @@ window.addEventListener('resize', () => {
 
 - [CSS Reset](https://github.com/necolas/normalize.css)
 - [Feature/Browser Detection](https://github.com/Modernizr/Modernizr)
+- [Box Shadows](https://madeas.github.io/box-shadows)
 
 ### Society
 
@@ -2211,6 +2212,7 @@ window.addEventListener('resize', () => {
 
 ### Video
 
+- [Video Landingpage](https://github.com/rishabhp/bideo.js)
 - [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
 - [plyr](https://github.com/selz/plyr)
 
@@ -2346,6 +2348,7 @@ window.addEventListener('resize', () => {
 #### Scroll
 
 - [视差滚动](https://github.com/Prinzhorn/skrollr)
+- [Scroll Animation](https://michalsnik.github.io/aos/)
 
 #### Position
 
