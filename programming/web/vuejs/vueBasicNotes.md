@@ -22,12 +22,14 @@
 ## Slot
 
 - [Web Slot](https://developers.google.com/web/fundamentals/web-components/shadowdom#slots)
+- `name` attr
+- `fallback` content
 
 ```javascript
 const Tab = san.defineComponent({
     template: '<div>'
-        + '  <header><slot name="title"></slot></header>'
-        + '  <main><slot></slot></main>'
+        + '  <header><slot name="title">slot fallback content</slot></header>'
+        + '  <main><slot>slot fallback content</slot></main>'
         + '</div>'
 });
 
