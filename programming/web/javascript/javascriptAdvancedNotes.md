@@ -175,6 +175,7 @@
       - [SW Costs](#sw-costs)
       - [SW Demo](#sw-demo)
     - [PWA Library](#pwa-library)
+    - [PWA Tutorials](#pwa-tutorials)
 
 <!-- /TOC -->
 
@@ -3133,3 +3134,7 @@ if ('serviceWorker' in navigator) {
 ### PWA Library
 
 - [Workbox](https://github.com/GoogleChrome/workbox)
+
+### PWA Tutorials
+
+- [Extensive Guide](https://www.smashingmagazine.com/2018/11/guide-pwa-progressive-web-applications/)
