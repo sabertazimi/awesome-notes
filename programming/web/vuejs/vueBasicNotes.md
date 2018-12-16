@@ -3,6 +3,7 @@
 <!-- TOC -->
 
 - [Vue Basic Notes](#vue-basic-notes)
+  - [Data in Vue](#data-in-vue)
   - [Internal of Vue](#internal-of-vue)
     - [Vue Constructor](#vue-constructor)
     - [prototype of Vue](#prototype-of-vue)
@@ -17,6 +18,10 @@
     - [Virtual DOM Diff and Patch](#virtual-dom-diff-and-patch)
 
 <!-- /TOC -->
+
+## Data in Vue
+
+data of vue === (props + state) of react
 
 ## Internal of Vue
 
