@@ -3,7 +3,7 @@
 <!-- TOC -->
 
 - [Vue Basic Notes](#vue-basic-notes)
-  - [Data in Vue](#data-in-vue)
+  - [Slot](#slot)
   - [Internal of Vue](#internal-of-vue)
     - [Vue Constructor](#vue-constructor)
     - [prototype of Vue](#prototype-of-vue)
@@ -19,9 +19,36 @@
 
 <!-- /TOC -->
 
-## Data in Vue
+## Slot
 
-data of vue === (props + state) of react
+- [Web Slot](https://developers.google.com/web/fundamentals/web-components/shadowdom#slots)
+
+```javascript
+const Tab = san.defineComponent({
+    template: '<div>'
+        + '  <header><slot name="title"></slot></header>'
+        + '  <main><slot></slot></main>'
+        + '</div>'
+});
+
+const MyComponent = san.defineComponent({
+    components: {
+        'ui-tab': Tab
+    },
+
+    template: '<div><ui-tab>'
+        + '<h3 slot="title">1</h3><p>one</p>'
+        + '<h3 slot="title">2</h3><p>two<a slot="title">slot fail</a></p>'
+        + '</ui-tab></div>'
+});
+
+/* MyComponent 渲染结果，a 元素无法被插入 title slot
+<div>
+  <header><h3>1</h3><h3>2</h3></header>
+  <main><p>one</p><p>two<a>slot fail</a></p></main>
+</div>
+*/
+```
 
 ## Internal of Vue
 
