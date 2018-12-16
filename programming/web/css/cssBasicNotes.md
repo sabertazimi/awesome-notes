@@ -1020,6 +1020,8 @@ position
 
 #### Under the Hood of `flex`
 
+当 flex-basis 设置为 auto 且 width（或者height）不为 auto 时，计算 used size 时会用到 width（或者height）的值
+
 - when there is some free space left:
   true width = `flex-basis` (or `width`) + `flex-grow`/sum of `flex-grow`
 - when there is not enough space:
@@ -1027,6 +1029,8 @@ position
 - text nodes and pseudo-elements can be flex children
 
 #### Useful shorthand of `flex`
+
+`flex: flex-grow flex-shrink flex-basis`
 
 - `flex:auto`:
 
