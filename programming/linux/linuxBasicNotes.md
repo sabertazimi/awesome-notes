@@ -131,6 +131,7 @@
   - [Shell编程](#shell编程)
     - [Warings](#warings)
     - [文件重定向](#文件重定向)
+      - [Here Document](#here-document)
     - [变量](#变量)
       - [基本变量](#基本变量)
       - [built-in 变量](#built-in-变量)
@@ -1076,21 +1077,47 @@ sudo timedatectl set-local-rtc 1
 - `>/>> 文件 2>&1  &>/&>>文件`  覆盖/追加正确输出与错误输出同时重定向
 - `</<<` 文件名/输入设备名         覆盖/追加标准输入重定向
 
+#### Here Document
+
+```bash
+commnad << END
+...
+END
+
+command << EOF
+...
+EOF
+```
+
+```bash
+#!/bin/bash
+gnuplot -persist <<EOF
+set data style linespoints
+show timestamp
+set title "$1"
+set xlabel "time (seconds)"
+set ylabel "Segments (cwnd, ssthresh)"
+plot "$1" using 1:7 title "snd_cwnd", \\
+     "$1" using 1:(\$8>=2147483647 ? 0 : \$8) title "snd_ssthresh"
+EOF
+```
+
 ### 变量
 
 #### 基本变量
 
-- =  : 左右两端不可有空格
-- ‘ ’: 完全标准字符串
-- “ ”: 格式化字符串
+- `=`  : 左右两端不可有空格
+- `' '`: 完全标准字符串
+- `" "`: 格式化字符串
 - 调用变量值：$变量名
 - set/unset——设置/取消变量
 
 #### built-in 变量
 
-- $@: argv[1], ..., argv[n]
-- $#: argc
-- $?: exit code of last command
+- `$*`/`$@`: `argv[1], ..., argv[n]`
+- `$0/$1/../$n`: `argv[0], ..., argv[n]`
+- `$#`: argc
+- `$?`: exit code of last command
 
 ```bash
 if [ "$?" -ne "0" ];then
