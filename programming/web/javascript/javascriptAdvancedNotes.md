@@ -165,9 +165,14 @@
     - [Browser Compatibility](#browser-compatibility)
       - [特性检测](#特性检测)
   - [Chrome Dev Tools](#chrome-dev-tools)
+    - [Shortcuts](#shortcuts)
     - [Elements Panel](#elements-panel)
+      - [Style Tab](#style-tab)
+    - [Console Panel](#console-panel)
+      - [Console Settings](#console-settings)
+      - [capture default eventListener](#capture-default-eventlistener)
     - [Source Panel](#source-panel)
-    - [capture default eventListener](#capture-default-eventlistener)
+    - [Network Panel](#network-panel)
     - [More Tools](#more-tools)
   - [PWA](#pwa)
     - [Service Worker](#service-worker)
@@ -3034,15 +3039,44 @@ if (document.getElementById) {
 
 ## Chrome Dev Tools
 
+### Shortcuts
+
+- c-d: go to next word
+- c-m: go to next bracket
+- c-p: go to files
+- cs-p: go to anywhere
+- cs-o: go to functions
+
+long click reload: multiple reload options e.g clean cache
+
 ### Elements Panel
 
 - break on elements
 
-### Source Panel
+#### Style Tab
 
-- multiple breakpoints: source, XHR/fetch, DOM, global/event listeners
+- color picker
+- filter: class filter, pseudo filter, css style filter
 
-### capture default eventListener
+### Console Panel
+
+- getEventListeners(dom)
+- monitorEvents(dom, events)
+- unmonitorEvents(dom)
+- debug(fn)
+- undebug(fn)
+- monitor(fn)
+- unmonitor(fn)
+
+#### Console Settings
+
+- preserve log
+- show timestamps
+- Verbose: additional performance log
+- click filename, filter error messages
+- add folder to workspace
+
+#### capture default eventListener
 
 > $0: the reference to the currently selected element in the Elements panel
 
@@ -3057,6 +3091,15 @@ $0.addEventListener('click', (e) => {
   listener(e);
 });
 ```
+
+### Source Panel
+
+- multiple breakpoints: source, XHR/fetch, DOM, global/event listeners
+
+### Network Panel
+
+- throtting: simulate different network environment
+- initiator：go to files
 
 ### More Tools
 
