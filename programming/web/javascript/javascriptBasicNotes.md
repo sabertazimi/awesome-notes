@@ -141,9 +141,10 @@
       - [Frame Events](#frame-events)
       - [Input Events](#input-events)
       - [User-Defined Handler](#user-defined-handler)
-    - [document](#document)
-    - [window](#window)
+    - [Document](#document)
+    - [Window](#window)
       - [location API](#location-api)
+    - [New DOM API](#new-dom-api)
     - [JS DOM API](#js-dom-api)
       - [width/height](#widthheight)
     - [left/top](#lefttop)
@@ -2202,6 +2203,7 @@ oldnode.parentNode.replaceChild(clone, oldnode);
 
 ```js
 element.innerHTML
+element.textContent
 ```
 
 innerHTML: unconcrete,including all types of childNodes
@@ -2229,6 +2231,14 @@ document.querySelector("cssSelector");
 document.querySelectorAll("cssSelector");
 ```
 
+### DOM Style
+
+```js
+element.style.*;
+element.style.fontFamily;
+element.style.marginTopWidth;
+```
+
 **Tip**: bind class
 
 ```javascript
@@ -2242,19 +2252,6 @@ function addClass(element, value) {
     element.className = newClassName;
   }
 }
-```
-
-```javascript
-element.event = function() {};
-elemetn.onclick = function() {};
-```
-
-### DOM Style
-
-```js
-element.style.*;
-element.style.fontFamily;
-element.style.marginTopWidth;
 ```
 
 ### DOM Events
@@ -2328,7 +2325,7 @@ function myHandler(e) {
 }
 ```
 
-### document
+### Document
 
 ```javascript
 document.write();
@@ -2336,7 +2333,7 @@ document.URI;
 document.title;
 ```
 
-### window
+### Window
 
 ```javascript
 window.location(string);
@@ -2391,6 +2388,21 @@ window.addEventListener('hashchange', (event) => {
     somecoolfeature();
   }
 }, false);
+```
+
+### New DOM API
+
+```js
+document.querySelector
+document.querySelectorAll
+
+element.classList.add
+element.classList.remove
+element.classList.toggle
+
+element.textContent
+
+element.addEventListener
 ```
 
 ### JS DOM API
