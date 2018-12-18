@@ -1420,6 +1420,14 @@ justify(自适应，左右都无空格)
 
 垂直对齐方式
 
+```css
+.form__item__label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+```
+
 ### opacity
 
 0 ~ 1, 渐进效果常用属性
