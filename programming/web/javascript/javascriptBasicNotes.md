@@ -196,6 +196,7 @@
     - [Canvas Performance](#canvas-performance)
     - [Canvas Reference](#canvas-reference)
   - [Awesome Libraries](#awesome-libraries)
+    - [Form](#form)
     - [Object Schema Validator](#object-schema-validator)
     - [Color](#color)
     - [iFrame](#iframe)
@@ -3489,6 +3490,10 @@ const ctx = canvas.getContext('2d', { alpha: false });
 - [Canvas Deep Live](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
 
 ## Awesome Libraries
+
+### Form
+
+- [Async Validator](https://github.com/yiminghe/async-validator)
 
 ### Object Schema Validator
 
