@@ -2430,6 +2430,18 @@ const height = window.innerHeight
 - scrollHeight: 元素内容的高度，包括溢出部分
 - scrollTop: 元素内容向上滚动了多少像素，如果没有滚动则为0
 
+```js
+const supportPageOffset = window.pageXOffset !== undefined;
+const isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+
+const x = supportPageOffset ? window.pageXOffset
+        : isCSS1Compat ? document.documentElement.scrollLeft
+        : document.body.scrollLeft;
+const y = supportPageOffset ? window.pageYOffset
+        : isCSS1Compat ? document.documentElement.scrollTop
+        : document.body.scrollTop;
+```
+
 ### left/top
 
 - offsetLeft/offsetTop: 表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent对象）左上角的距离
