@@ -147,6 +147,7 @@
     - [New DOM API](#new-dom-api)
     - [JS DOM API](#js-dom-api)
       - [width/height](#widthheight)
+      - [Scroll Height](#scroll-height)
     - [left/top](#lefttop)
   - [Ajax](#ajax)
     - [基本用法](#基本用法)
@@ -2413,6 +2414,21 @@ element.addEventListener
 
 - offsetWidth/offsetHeight = content + padding + border
 - clientWidth/clientHeight = content + padding
+
+```js
+const height = window.innerHeight
+            || document.documentElement.clientHeight
+            || document.body.clientHeight;
+```
+
+#### Scroll Height
+
+- outerHeight: 是整个浏览器窗口的大小，包括窗口标题、工具栏、状态栏等
+- innerHeight: 是DOM视口的大小，包括滚动条
+- offsetHeight: 整个可视区域大小，包括border和scrollbar在内
+- clientHeight: 内部可视区域大小
+- scrollHeight: 元素内容的高度，包括溢出部分
+- scrollTop: 元素内容向上滚动了多少像素，如果没有滚动则为0
 
 ### left/top
 
