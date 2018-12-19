@@ -2350,6 +2350,34 @@ document.onkeydown=function(event){
   };
 ```
 
+- event.key => [keyName](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)
+
+```js
+'Alt'
+'CapsLock'
+'Control'
+'Fn'
+'Numlock'
+'Shift'
+'Enter'
+'Tab'
+' ' // space bar
+
+'ArrowDown'
+'ArrowLeft'
+'ArrowRight'
+'ArrowUp'
+'Home'
+'End'
+'PageDOwn'
+'PageUp'
+
+'Backspace'
+'Delete'
+'Redo'
+'Undo'
+```
+
 #### Frame Events
 
 ```javascript
