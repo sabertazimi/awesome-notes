@@ -3179,7 +3179,7 @@ if ('serviceWorker' in navigator) {
 
 ```js
 function isImage(fetchRequest) {
-    return fetchRequest.method === "GET" 
+    return fetchRequest.method === "GET"
            && fetchRequest.destination === "image";
 }
 
