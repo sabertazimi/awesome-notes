@@ -179,6 +179,7 @@
       - [SW Pros](#sw-pros)
       - [SW Costs](#sw-costs)
       - [SW Demo](#sw-demo)
+      - [SW for Broken Images](#sw-for-broken-images)
     - [PWA Library](#pwa-library)
     - [PWA Tutorials](#pwa-tutorials)
 
@@ -3172,6 +3173,52 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js');
   });
 }
+```
+
+#### SW for Broken Images
+
+```js
+function isImage(fetchRequest) {
+    return fetchRequest.method === "GET" 
+           && fetchRequest.destination === "image";
+}
+
+self.addEventListener('fetch', (e) => {
+    e.respondWith(
+        fetch(e.request)
+            .then((response) => {
+                if (response.ok) return response;
+
+                // User is online, but response was not ok
+                if (isImage(e.request)) {
+                    // Get broken image placeholder from cache
+                    return caches.match("/broken.png");
+                }
+
+            })
+            .catch((err) => {
+
+                // User is probably offline
+                if (isImage(e.request)) {
+                    // Get broken image placeholder from cache
+                    return caches.match("/broken.png");
+                }
+
+            })
+    )
+});
+
+self.addEventListener('install', (e) => {
+    self.skipWaiting();
+    e.waitUntil(
+        caches.open("precache").then((cache) => {
+
+            // Add /broken.png to "precache"
+            cache.add("/broken.png");
+
+        })
+    );
+});
 ```
 
 ### PWA Library
