@@ -491,6 +491,8 @@ arr.pop();          // 删除数组尾元素
 
 ##### 分割/合并
 
+- slice 不改变原数组, splice 改变原数组
+
 ```javascript
 [].concat(otherArray);
 [string].join("连接符");             // 将字符串数组连接成字符串o
