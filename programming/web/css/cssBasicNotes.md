@@ -986,6 +986,7 @@ position
 #### absolute
 
 - 使元素相对于 浏览器窗口/父元素(`positoin: non-static`) 布局
+  - 若 body 为 static, 则元素不会随着滚动条滚动, 其相对于初始窗口布局
 - 可使用`top/bottom/left/right`属性进行定位
 - `float: none`
 - display: `inline-table` computed to `table`
