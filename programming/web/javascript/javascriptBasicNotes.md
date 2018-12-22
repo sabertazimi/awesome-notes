@@ -2548,6 +2548,12 @@ const y = supportPageOffset ? window.pageYOffset
         : document.body.scrollTop;
 ```
 
+```js
+if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
+  console.log('Scrolled to Bottom!');
+}
+```
+
 ### left/top
 
 - offsetLeft/offsetTop: 表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent对象）左上角的距离
