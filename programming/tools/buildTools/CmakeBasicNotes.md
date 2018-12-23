@@ -10,6 +10,8 @@
     - [foreach control](#foreach-control)
     - [while control](#while-control)
     - [function control](#function-control)
+      - [Basic Usage of Function](#basic-usage-of-function)
+      - [Parse Arguments of Function](#parse-arguments-of-function)
   - [Useful Command](#useful-command)
     - [Checking Command](#checking-command)
     - [Testing Command](#testing-command)
@@ -18,9 +20,27 @@
     - [List Command](#list-command)
     - [Package Command](#package-command)
     - [Install Command](#install-command)
+      - [install binaries](#install-binaries)
+      - [install normal files](#install-normal-files)
+      - [install scripts](#install-scripts)
+      - [install directories](#install-directories)
+      - [Install Demo](#install-demo)
     - [find packages](#find-packages)
+      - [Basic Usage of Find](#basic-usage-of-find)
+      - [Find.cmake](#findcmake)
+      - [Full Find Demo](#full-find-demo)
   - [Useful Tools](#useful-tools)
+  - [Config Command](#config-command)
+    - [Version Config](#version-config)
+    - [Project Config](#project-config)
+    - [Environment Config](#environment-config)
+    - [Library for Clients Usage](#library-for-clients-usage)
+  - [Test Setting](#test-setting)
+  - [Generator Expression](#generator-expression)
+  - [Submodule and Dependencies](#submodule-and-dependencies)
   - [CMake Patterns](#cmake-patterns)
+    - [Modern CMake](#modern-cmake)
+      - [Interface vs Private](#interface-vs-private)
     - [Nice Patterns](#nice-patterns)
     - [Anti Patterns](#anti-patterns)
   - [Reference](#reference)
@@ -172,6 +192,9 @@ Standard options:
 
 ### if control
 
+- Unary: NOT, TARGET, EXISTS (file), DEFINED
+- Binary: STREQUAL, AND, OR, MATCHES(regular expression), VERSION_LESS, VERSION_LESS_EQUAL
+
 ```bash
 if(WIN32)
     message("This is win32 platform")
@@ -204,6 +227,8 @@ endwhile()
 
 ### function control
 
+#### Basic Usage of Function
+
 ```bash
 function(doubleIt VALUE)
     math(EXPR RESULT "${VALUE} * 2")
@@ -232,6 +257,33 @@ function(doubleEach)
 endfunction()
 
 doubleEach(5 6 7 8)                # Prints 10, 12, 14, 16 on separate lines
+```
+
+#### Parse Arguments of Function
+
+```bash
+function(COMPLEX)
+cmake_parse_arguments(
+    COMPLEX_PREFIX
+    "SINGLE;ANOTHER"
+    "ONE_VALUE;ALSO_ONE_VALUE"
+    "MULTI_VALUES"
+    ${ARGN}
+)
+
+endfunction()
+
+complex(SINGLE ONE_VALUE value MULTI_VALUES some other values)
+```
+
+Inside the function after this call, you'll find:
+
+```bash
+COMPLEX_PREFIX_SINGLE = TRUE
+COMPLEX_PREFIX_ANOTHER = FALSE
+COMPLEX_PREFIX_ONE_VALUE = "value"
+COMPLEX_PREFIX_ALSO_ONE_VALUE = <UNDEFINED>
+COMPLEX_PREFIX_MULTI_VALUES = "some;other;values"
 ```
 
 ## Useful Command
@@ -345,7 +397,7 @@ cpack --config CPackSourceConfig.cmake
 
 ### Install Command
 
-- install binaries
+#### install binaries
 
 ```bash
 INSTALL(TARGETS targets...
@@ -364,7 +416,7 @@ INSTALL(TARGETS myrun mylib mystaticlib
         ARCHIVE DESTINATION libstatic）
 ```
 
-- install normal files
+#### install normal files
 
 ```bash
 INSTALL(FILES files... DESTINATION <dir>
@@ -377,7 +429,7 @@ INSTALL(FILES files... DESTINATION <dir>
 INSTALL(FILES COPYRIGHT README DESTINATION share/doc/cmake/t2)
 ```
 
-- install scripts
+#### install scripts
 
 ```bash
 INSTALL(PROGRAMS files... DESTINATION <dir>
@@ -390,7 +442,7 @@ INSTALL(PROGRAMS files... DESTINATION <dir>
 INSTALL(PROGRAMS runhello.sh DESTINATION bin)
 ```
 
-- install directories
+#### install directories
 
 ```bash
 INSTALL(DIRECTORY dirs... DESTINATION <dir>
@@ -409,6 +461,27 @@ INSTALL(DIRECTORY icons scripts/ DESTINATION share/myproj
      GROUP_EXECUTE GROUP_READ)
 ```
 
+#### Install Demo
+
+```bash
+find_package(Bar 2.0 REQUIRED)
+add_library(Foo ...)
+target_link_libraries(Foo PRIVATE Bar::Bar)
+
+install(TARGETS Foo EXPORT FooTargets
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+  INCLUDES DESTINATION include
+)
+
+install(EXPORT FooTargets
+  FILE FooTargets.cmake
+  NAMESPACE Foo::
+  DESTINATION lib/cmake/Foo
+)
+```
+
 ### find packages
 
 find modules
@@ -420,7 +493,7 @@ ls /usr/share/cmake/Modules/
 cmake --help-module FindBZip2
 ```
 
-usage of find packages
+#### Basic Usage of Find
 
 ```bash
 project(helloworld)
@@ -431,6 +504,28 @@ if (BZIP2_FOUND)
     target_link_libraries(helloworld ${BZIP2_LIBRARIES})
 endif (BZIP2_FOUND)
 ```
+
+```bash
+find_path(Foo_INCLUDE_DIR foo.h)
+find_library(Foo_LIBRARY foo)
+mark_as_advanced(Foo_INCLUDE_DIR Foo_LIBRARY)
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(Foo
+  REQUIRED_VARS Foo_LIBRARY Foo_INCLUDE_DIR
+)
+
+if(Foo_FOUND AND NOT TARGET Foo::Foo)
+  add_library(Foo::Foo UNKNOWN IMPORTED)
+  set_target_properties(Foo::Foo PROPERTIES
+    IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+    IMPORTED_LOCATION "${Foo_LIBRARY}"
+    INTERFACE_INCLUDE_DIRECTORIES "${Foo_INCLUDE_DIR}"
+  )
+endif()
+```
+
+#### Find.cmake
 
 add find module for project
 
@@ -453,6 +548,8 @@ if(DEMO9LIB_INCLUDE_DIR AND DEMO9LIB_LIBRARY)
     set(DEMO9LIB_FOUND TRUE)
 endif(DEMO9LIB_INCLUDE_DIR AND DEMO9LIB_LIBRARY)
 ```
+
+#### Full Find Demo
 
 ```bash
 # CMakeLists.txt
@@ -531,7 +628,152 @@ ifeq ($(findstring clean,$(MAKECMDGOALS)),)
 endif
 ```
 
+## Config Command
+
+### Version Config
+
+```bash
+cmake_minimum_required(VERSION 3.1)
+
+if(${CMAKE_VERSION} VERSION_LESS 3.13)
+  cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
+else()
+  cmake_policy(VERSION 3.13)
+endif()
+```
+
+### Project Config
+
+```bash
+project(MyProject VERSION 1.0 DESCRIPTION "Very nice project" LANGUAGES CXX)
+```
+
+### Environment Config
+
+`set(ENV{variable_name} value)` and get `$ENV{variable_name}` environment variables
+
+### Library for Clients Usage
+
+```bash
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file("FooConfigVersion.cmake"
+  VERSION ${Foo_VERSION}
+  COMPATIBILITY SameMajorVersion
+)
+
+install(FILES "FooConfig.cmake" "FooConfigVersion.cmake"
+  DESTINATION lib/cmake/Foo
+)
+```
+
+```bash
+include(CMakeFindDependencyMacro)
+find_dependency(Bar 2.0)
+include("${CMAKE_CURRENT_LIST_DIR}/FooTargets.cmake")
+```
+
+## Test Setting
+
+```bash
+set(CTEST_SOURCE_DIRECTORY "/source")
+set(CTEST_BINARY_DIRECTORY "/binary")
+
+set(ENV{CXXFLAGS} "--coverage")
+set(CTEST_CMAKE_GENERATOR "Ninja")
+set(CTEST_USE_LAUNCHERS 1)
+
+set(CTEST_COVERAGE_COMMAND "gcov")
+set(CTEST_MEMORYCHECK_COMMAND "valgrind")
+#set(CTEST_MEMORYCHECK_TYPE "ThreadSanitizer")
+
+ctest_start("Continuous")
+ctest_configure()
+ctest_build()
+ctest_test()
+ctest_coverage()
+ctest_memcheck()
+ctest_submit()
+```
+
+```bash
+macro(package_add_test TESTNAME)
+    add_executable(${TESTNAME} ${ARGN})
+    target_link_libraries(${TESTNAME} gtest gmock gtest_main)
+    add_test(${TESTNAME} COMMAND ${TESTNAME})
+    set_target_properties(${TESTNAME} PROPERTIES FOLDER tests)
+endmacro()
+
+package_add_test(test1 test1.cpp)
+```
+
+## Generator Expression
+
+Most CMake commands happen at configure time,
+include the if statements seen above.
+Generator expressions were added at runtime.
+They are evaluated in target properties:
+
+- If you want to put a compile flag only for the DEBUG configuration
+- Limiting an item to a certain language only, such as CXX
+- Accessing configuration dependent properties, like target file location
+- Giving a different location for build and install directories
+
+```bash
+target_include_directories(MyTarget PUBLIC
+  $<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/include">
+  $<INSTALL_INTERFACE:include>
+)
+```
+
+## Submodule and Dependencies
+
+```bash
+find_package(Git QUIET)
+
+if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+  execute_process(COMMAND
+    ${GIT_EXECUTABLE} submodule update --init --recursive
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} RESULT_VARIABLE GIT_SUBMOD_RESULT
+  )
+
+  if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+    message(FATAL_ERROR "git submodule update --init failed with ${GIT_SUBMOD_RESULT}")
+  endif()
+endif()
+```
+
 ## CMake Patterns
+
+### Modern CMake
+
+Modern CMake is all about targets and properties.
+
+Constructors of Targets:
+
+- add_executable()
+- add_library()
+
+Member variables of Targets:
+
+- Target properties
+
+Member functions:
+
+- get_target_property()
+- set_target_properties()
+- get_property(TARGET)
+- set_property(TARGET)
+- target_compile_definitions()
+- target_compile_features()
+- target_compile_options()
+- target_include_directories()
+- target_link_libraries()
+- target_sources()
+
+#### Interface vs Private
+
+interface properties model usage requirements,
+whereas private properties model build requirements of targets.
 
 ### Nice Patterns
 
