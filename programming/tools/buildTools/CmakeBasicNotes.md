@@ -4,6 +4,7 @@
 
 - [Cmake Basic Notes](#cmake-basic-notes)
   - [Basic Build System](#basic-build-system)
+    - [Basic Options](#basic-options)
   - [Flow Control](#flow-control)
     - [if control](#if-control)
     - [foreach control](#foreach-control)
@@ -19,6 +20,9 @@
     - [Install Command](#install-command)
     - [find packages](#find-packages)
   - [Useful Tools](#useful-tools)
+  - [CMake Patterns](#cmake-patterns)
+    - [Nice Patterns](#nice-patterns)
+    - [Anti Patterns](#anti-patterns)
   - [Reference](#reference)
 
 <!-- /TOC -->
@@ -150,6 +154,19 @@ target_link_libraries(minisat libminisat)
 add_executable(minisat-simp minisat/simp/Main.cc)
 target_link_libraries(minisat-simp libminisat)
 ```
+
+### Basic Options
+
+```bash
+make VERBOSE=1
+```
+
+Standard options:
+
+- `-DCMAKE_BUILD_TYPE=` Pick from Release, RelWithDebInfo, Debug, or sometimes more
+- `-DCMAKE_INSTALL_PREFIX=` /usr/local (the default), ~/.local
+- `-D BUILD_SHARED_LIBS=`
+- `--trace` print every line of CMake
 
 ## Flow Control
 
@@ -513,6 +530,27 @@ ifeq ($(findstring clean,$(MAKECMDGOALS)),)
     @ $(MAKE) -C build $(MAKECMDGOALS)
 endif
 ```
+
+## CMake Patterns
+
+### Nice Patterns
+
+- Think in targets (Object-Oriented)
+- Export your interface: You should be able to run from build or install
+- Write a Config.cmake file: This is what a library author should do to support clients
+- Make ALIAS targets to keep usage consistent
+- Combine common functionality into clearly documented functions
+- Use lowercase function names
+- Upper case is for variables
+- Use cmake_policy and/or range of versions
+
+### Anti Patterns
+
+- Do not use global functions: e.g `link_directories`, `include_libraries`
+- Don't add unneeded PUBLIC requirements e.g `-Wall`
+- Don't GLOB files
+- Link to built files directly: Always link to targets if available
+- Never skip PUBLIC/PRIVATE when linking
 
 ## Reference
 
