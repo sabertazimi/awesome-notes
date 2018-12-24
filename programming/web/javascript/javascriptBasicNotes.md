@@ -197,6 +197,7 @@
     - [Canvas Performance](#canvas-performance)
     - [Canvas Reference](#canvas-reference)
   - [Awesome Libraries](#awesome-libraries)
+    - [Alert](#alert)
     - [Form](#form)
     - [Object Schema Validator](#object-schema-validator)
     - [Color](#color)
@@ -3596,6 +3597,10 @@ const ctx = canvas.getContext('2d', { alpha: false });
 - [Canvas Deep Live](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
 
 ## Awesome Libraries
+
+### Alert
+
+- [Sweet Alert](https://github.com/t4t5/sweetalert)
 
 ### Form
 
