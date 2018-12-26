@@ -69,8 +69,31 @@ const appStore.subscribe(throttle(() => {
 
 ### Reducers
 
+- [Reducing Boilerplate](https://redux.js.org/recipes/reducing-boilerplate)
+
 必须保持无任何副作用: 不修改传入参数, 不调用副作用函数
 `(api/date.now()/math.random())`
+
+```js
+function createReducer(initialState, handlers) {
+  return function reducer(state = initialState, action) {
+    if (handlers.hasOwnProperty(action.type)) {
+      return handlers[action.type](state, action)
+    } else {
+      return state
+    }
+  }
+}
+
+const reducer = createReducer(initialState, {
+  reset: () => initialState,
+  increment: state => ({ count: state.count + 1}),
+  decrement: state => ({ count: state.count + 1}),
+  [ActionTypes.ADD_TODO]: (state, action) => {
+    ...;
+  },
+});
+```
 
 ### map to props
 
