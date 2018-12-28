@@ -203,6 +203,7 @@
     - [Color](#color)
     - [iFrame](#iframe)
     - [SVG](#svg)
+    - [Clipboard](#clipboard)
 
 <!-- /TOC -->
 
@@ -3622,3 +3623,7 @@ const ctx = canvas.getContext('2d', { alpha: false });
 ### SVG
 
 - [GreenSock JS](https://github.com/greensock/GreenSock-JS)
+
+### Clipboard
+
+- [Clipboard](https://github.com/zenorocha/clipboard.js)
