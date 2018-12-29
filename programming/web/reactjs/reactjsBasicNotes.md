@@ -61,6 +61,7 @@
     - [Basic Example](#basic-example)
     - [Internationalization](#internationalization)
       - [Simple Intl](#simple-intl)
+  - [Testing](#testing)
   - [Components/Plugins](#componentsplugins)
     - [Polyfill](#polyfill)
     - [Documents](#documents)
@@ -1259,6 +1260,11 @@ class Intl {
 
 export default Intl;
 ```
+
+## Testing
+
+- [Complete Tutorial](https://www.robinwieruch.de/react-testing-tutorial/#react-enzyme-test-setup)
+- [Cypress - Testing Framework](https://www.cypress.io/)
 
 ## Components/Plugins
 
