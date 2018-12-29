@@ -253,11 +253,12 @@ store.dispatch(addFave());
 
 - 用ES6, webpack, react-hot-loader....详细内容参照MERN v2.0
   Build production ready universal apps easily
-- [Redux Devtools](https://github.com/gaearon/redux-devtools)
 - 区分smart component (know the state) 和 dump component (stateless)
 - component里不要出现任何async calls，交给action creator来做
 - reducer尽量简单，复杂的交给action creator
 - reducer里return新state的时候：
+- [Redux Devtools](https://github.com/gaearon/redux-devtools)
+- [Redux React Styleguide](https://github.com/iraycd/React-Redux-Styleguide)
 
 ```js
 // add new item to state array
@@ -291,6 +292,27 @@ return state.map((item) => {
 ```
 
 - action creator里，用promise/async/await以及redux-thunk来帮助你完成想要的功能
+
+```js
+// bad
+const loadTodo = (id) => (dispatch, getState) => {
+  // only fetch the todo if it isn't already loaded
+  if (!getState().todos.includes(id)) {
+    const todo = await fetch(`/todos/${id}`);
+    dispatch(addTodo(todo));
+  }
+}
+
+// good
+const loadTodo = (id, todos) => (dispatch) => {
+  // only fetch the todo if it isn't already loaded
+  if (!todos.includes(id)) {
+    const todo = await fetch(`/todos/${id}`);
+    dispatch(addTodo(todo));
+  }
+}
+```
+
 - 在 test 里不管你用 tape 还是 mocha，请用 [enzyme.js](http://airbnb.io/enzyme/)
 - 有些时候有些项目你并不需要redux
 
