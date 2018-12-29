@@ -33,6 +33,8 @@
     - [Array](#array)
       - [Array.from](#arrayfrom)
       - [Array.copyWithin](#arraycopywithin)
+      - [Array.find](#arrayfind)
+      - [Spread Array](#spread-array)
     - [Arrow Function](#arrow-function)
     - [Modules](#modules)
     - [Class 语法糖](#class-语法糖)
@@ -241,6 +243,15 @@ babel.transformFromAst(ast, code, options);
 
 - 不存在变量提升
 - 块级作用域(Temporal Dead Zone)
+
+```js
+const a = 1;
+
+... // temporal dead zone: throw reference error
+
+let b = 2;
+```
+
 - 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError
 
 #### const
@@ -825,6 +836,19 @@ Array.prototype.copyWithin(target, start = 0, end = this.length)
 const i32a = new Int32Array([1, 2, 3, 4, 5]);
 i32a.copyWithin(0, 2);
 // => Int32Array [3, 4, 5, 4, 5]
+```
+
+#### Array.find
+
+```js
+arr.find(fn)
+arr.findIndex(fn)
+```
+
+#### Spread Array
+
+```js
+arr2.push(...arr1)
 ```
 
 ### Arrow Function
