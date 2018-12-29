@@ -259,6 +259,7 @@ store.dispatch(addFave());
 - reducer里return新state的时候：
 - [Redux Devtools](https://github.com/gaearon/redux-devtools)
 - [Redux React Styleguide](https://github.com/iraycd/React-Redux-Styleguide)
+- [Simple Redux API](https://github.com/rematch/rematch)
 
 ```js
 // add new item to state array
