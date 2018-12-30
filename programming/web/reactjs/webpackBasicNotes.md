@@ -101,6 +101,8 @@ dllReferencePlugin = new Webpack.DllReferencePlugin({
 ```
 
 - imageMinPlugin
+- preload plugin
+- prefetch plugin
 - webpack-bundle-analyzer
 - webpack-monitor
 
