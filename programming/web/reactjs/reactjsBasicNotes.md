@@ -76,6 +76,7 @@
       - [Mouse](#mouse)
       - [Button](#button)
       - [Calendar](#calendar)
+      - [Select](#select)
     - [Debug/Test](#debugtest)
 
 <!-- /TOC -->
@@ -1329,6 +1330,10 @@ export default Intl;
 
 - [Big Calendar](https://github.com/intljusticemission/react-big-calendar)
 - [React Calendar](https://github.com/moodydev/react-calendar)
+
+#### Select
+
+- [React Select](https://github.com/JedWatson/react-select)
 
 ### Debug/Test
 
