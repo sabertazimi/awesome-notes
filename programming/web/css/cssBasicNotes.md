@@ -128,6 +128,7 @@
     - [media query](#media-query)
     - [设备类型](#设备类型)
     - [设备特性](#设备特性)
+      - [Style for Print PDF](#style-for-print-pdf)
   - [常用组件 (Awesome Demo)](#常用组件-awesome-demo)
     - [Flexiable Heading](#flexiable-heading)
     - [Table](#table)
@@ -1972,6 +1973,11 @@ use `inline-box` with `width`
 |resolution|分辨率(“dpi/dpcm”)|yes|分辨率|
 |scan|Progressive interlaced|no|tv媒体类型的扫描方式|
 |orientation|Portrait/landscape|no|横屏或竖屏|
+
+#### Style for Print PDF
+
+- [Page Style Standard](https://developer.mozilla.org/en-US/docs/Web/CSS/@page)
+- [PDF Style Tutorial](https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/)
 
 ## 常用组件 (Awesome Demo)
 
