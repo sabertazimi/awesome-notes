@@ -204,6 +204,7 @@
     - [iFrame](#iframe)
     - [SVG](#svg)
     - [Clipboard](#clipboard)
+    - [Animation](#animation)
 
 <!-- /TOC -->
 
@@ -3629,3 +3630,7 @@ const ctx = canvas.getContext('2d', { alpha: false });
 ### Clipboard
 
 - [Clipboard](https://github.com/zenorocha/clipboard.js)
+
+### Animation
+
+- [anime](https://github.com/juliangarnier/anime/)
