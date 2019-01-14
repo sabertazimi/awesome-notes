@@ -3599,6 +3599,8 @@ const ctx = canvas.getContext('2d', { alpha: false });
 
 ## Awesome Libraries
 
+- [Best of JS](https://bestofjs.org/)
+
 ### Alert
 
 - [Sweet Alert](https://github.com/t4t5/sweetalert)
