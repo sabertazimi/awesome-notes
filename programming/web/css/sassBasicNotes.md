@@ -31,6 +31,7 @@
     - [Lists Check](#lists-check)
   - [Project Structure](#project-structure)
   - [Best Practice](#best-practice)
+    - [Performance](#performance)
     - [Children Selector](#children-selector)
   - [Tools](#tools)
     - [Framework](#framework)
@@ -499,6 +500,10 @@ for instance typography (_typography.scss), theming (_theming.scss), etc.
 Each file contains all the related helpers: variables, functions, mixins and placeholders.
 
 ## Best Practice
+
+### Performance
+
+- mixin better than extend
 
 ### Children Selector
 
