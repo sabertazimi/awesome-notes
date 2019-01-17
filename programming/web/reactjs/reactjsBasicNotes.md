@@ -59,6 +59,7 @@
     - [Pros of SSR](#pros-of-ssr)
       - [Performance](#performance)
       - [SEO](#seo)
+      - [Awesome Library](#awesome-library)
     - [Basic Example](#basic-example)
     - [Internationalization](#internationalization)
       - [Simple Intl](#simple-intl)
@@ -1365,6 +1366,10 @@ the client takes over and the website becomes a SPA.
 - Search engine crawlers used to not execute scripts (or initial scripts)
 - Search engine usually stop after a while (roughly 10 seconds)
 - SPAs can't set meaningful HTTP status codes
+
+#### Awesome Library
+
+- [Next.js for Isomorphic rendering](https://nextjs.org)
 
 ### Basic Example
 
