@@ -125,6 +125,9 @@
       - [Monitor Info](#monitor-info)
       - [Touchpad Synaptics](#touchpad-synaptics)
     - [并行命令](#并行命令)
+    - [C/C++ Binary Command](#cc-binary-command)
+      - [ldd](#ldd)
+      - [nm](#nm)
     - [Plot Command](#plot-command)
     - [Other Command](#other-command)
       - [Time](#time)
@@ -160,6 +163,13 @@
       - [Bash error handle](#bash-error-handle)
       - [Bash loading progress](#bash-loading-progress)
   - [Terminal](#terminal)
+    - [Tmux](#tmux)
+      - [Basic Tmux Command](#basic-tmux-command)
+      - [Basic Hotkeys](#basic-hotkeys)
+        - [Session management](#session-management)
+        - [Tmux Windows Hotkeys](#tmux-windows-hotkeys)
+        - [Tmux Panes Hotkeys](#tmux-panes-hotkeys)
+      - [Configuration](#configuration)
   - [Perf Tools](#perf-tools)
     - [`uptime`](#uptime)
     - [`dmesg | tail`](#dmesg--tail)
@@ -1004,6 +1014,20 @@ synclient TouchpadOff=0
 
 > e.g ls && echo yes >> .log || echo no >> .log
 
+### C/C++ Binary Command
+
+#### ldd
+
+```bash
+ldd ./lib.sio
+```
+
+#### nm
+
+```bash
+nm -Ca ./lib.so
+```
+
 ### Plot Command
 
 chart.gp
@@ -1808,6 +1832,109 @@ sudo update-alternatives --install /usr/bin/x-terminal-emulator
 
 ```bash
 sudo update-alternatives --config x-terminal-emulator
+```
+
+### Tmux
+
+#### Basic Tmux Command
+
+```bash
+tmux ls
+tmux new -s sessionID
+tmux a -t sessionID # attach
+tmux show -g >> current.tmux.conf # export configuration
+```
+
+#### Basic Hotkeys
+
+```bash
+?        # 快捷键帮助列表
+```
+
+##### Session management
+
+```bash
+:new<CR> # 创建新的 Session，其中 : 是进入 Tmux 命令行的快捷键
+s list sessions
+$ rename the current session
+d detach from the current session
+```
+
+##### Tmux Windows Hotkeys
+
+```bash
+c create a new window
+, rename the current window
+w list windows
+% split horizontally
+" split vertically
+n change to the next window
+p change to the previous window
+0 to 9 select windows 0 through 9
+```
+
+##### Tmux Panes Hotkeys
+
+```bash
+% create a horizontal pane
+" create a vertical pane
+<space>  # 切换 Pane 布局
+h move to the left pane. *
+j move to the pane below *
+l move to the right pane *
+k move to the pane above *
+q show pane numbers
+o toggle between panes
+} swap with next pane
+{ swap with previous pane
+! break the pane out of the window
+x kill the current pane
+t        # 显示一个时钟
+```
+
+#### Configuration
+
+```bash
+# C-b is not acceptable -- Vim uses it
+set-option -g prefix C-a
+bind-key C-a last-window
+
+# Start numbering at 1
+set -g base-index 1
+
+# Allows for faster key repetition
+set -s escape-time 0
+
+# Set status bar
+set -g status-bg black
+set -g status-fg white
+set -g status-left ""
+set -g status-right "#[fg=green]#H"
+
+# Rather than constraining window size to the maximum size of any client
+# connected to the *session*, constrain window size to the maximum size of any
+# client connected to *that window*. Much more reasonable.
+setw -g aggressive-resize on
+
+# Allows us to use C-a a <command> to send commands to a TMUX session inside
+# another TMUX session
+bind-key a send-prefix
+
+# Reload configuration
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded"
+
+# Escape to enter copy mode, v to selection, y to yank, p to paste
+bind Escape copy-mode
+bind-key -T copy-mode-vi 'v' send -X begin-selection
+bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
+# bind-key -t vi-copy v begin-selection
+# bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+unbind p
+bind p pasteb
+setw -g mode-keys vi      # Vi
+
+# Highlight active window
+set-window-option -g window-status-current-bg red
 ```
 
 ## Perf Tools
