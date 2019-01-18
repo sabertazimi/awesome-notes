@@ -179,6 +179,7 @@
     - [异常作用](#异常作用)
   - [Asynchronous Programming](#asynchronous-programming)
     - [Promise](#promise)
+      - [Promise.all](#promiseall)
       - [Promise Polyfill](#promise-polyfill)
     - [await/async](#awaitasync)
     - [Sleep Function](#sleep-function)
@@ -3015,6 +3016,24 @@ function getUsers(users) {
     .then((userDataArr) => response = userDataArr)
     .catch((err) => console.log(err));
 }
+```
+
+#### Promise.all
+
+```js
+Promise.all(urls.map(fetch)).then(responses =>
+    Promise.all(responses.map(res => res.text())
+).then(texts => {
+  //
+})
+```
+
+```js
+Promise.all(urls.map(url =>
+    fetch(url).then(resp => resp.text())
+)).then(texts => {
+  //
+})
 ```
 
 #### Promise Polyfill
