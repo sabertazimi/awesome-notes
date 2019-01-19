@@ -198,6 +198,7 @@
     - [Canvas Performance](#canvas-performance)
     - [Canvas Reference](#canvas-reference)
   - [Awesome Libraries](#awesome-libraries)
+    - [Persistence/Storage/Store](#persistencestoragestore)
     - [Alert](#alert)
     - [Form](#form)
     - [Object Schema Validator](#object-schema-validator)
@@ -3621,6 +3622,13 @@ const ctx = canvas.getContext('2d', { alpha: false });
 
 - [Best of JS](https://bestofjs.org/)
 
+### Persistence/Storage/Store
+
+- [ImmortalDB](https://github.com/gruns/ImmortalDB)
+- [brownies](https://github.com/franciscop/brownies)
+- [store.js](https://github.com/marcuswestin/store.js)
+- [localForage](https://github.com/localForage/localForage)
+
 ### Alert
 
 - [Sweet Alert](https://github.com/t4t5/sweetalert)
@@ -3628,6 +3636,7 @@ const ctx = canvas.getContext('2d', { alpha: false });
 ### Form
 
 - [Async Validator](https://github.com/yiminghe/async-validator)
+- [Input Format](https://github.com/nosir/cleave.js)
 
 ### Object Schema Validator
 
@@ -3653,3 +3662,6 @@ const ctx = canvas.getContext('2d', { alpha: false });
 ### Animation
 
 - [anime](https://github.com/juliangarnier/anime/)
+- [Popmotion](https://github.com/popmotion/popmotion)
+- [Typed.js](https://github.com/mattboldt/typed.js/)
+- [Scroll Magic](https://github.com/janpaepke/ScrollMagic)
