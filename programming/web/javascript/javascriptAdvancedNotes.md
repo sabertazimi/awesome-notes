@@ -2259,6 +2259,8 @@ window.addEventListener('replacestate', function (event) {
 - [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
 - [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report/)
 
+Audits of Chrome: PWA, best practices, SEO, performance, device simulator
+
 ## JavaScript Style Guide
 
 - [Airbnb Guide](https://github.com/airbnb/javascript)
