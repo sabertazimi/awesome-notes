@@ -316,9 +316,9 @@ function () {
 ```js
 const now= new Date();
 now.getFullYear(); // 1-n
-now.getMonth();    // 0-11
+now.getMonth();    // Warn: 0-11
 now.getDate();     // 1-n
-now.getDay():      // 0-6
+now.getDay():      // Warn: 0-6
 now.toString();
 
 const daysOfMonth = (year, month) => {
