@@ -50,6 +50,7 @@
     - [Best Practice](#best-practice)
   - [Modern React](#modern-react)
     - [Context API](#context-api)
+      - [Ref with Context](#ref-with-context)
     - [Error Boundary](#error-boundary)
     - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
   - [React Performance](#react-performance)
@@ -1154,6 +1155,69 @@ function contextWrapper(WrappedComponent, Context) {
     }
   }
 }
+```
+
+#### Ref with Context
+
+```js
+// Context.js
+import React, { Component, createContext } from 'react';
+
+// React team — thanks for Context API 👍
+const context = createContext();
+const { Provider: ContextProvider, Consumer } = context;
+
+class Provider extends Component {
+  // refs
+  // usage: this.textareaRef.current
+  textareaRef = React.createRef();
+
+  // input handler
+  onInput = e => {
+    const { name, value } = e.target;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  render() {
+    return (
+      <ContextProvider value={{
+        textareaRef: this.textareaRef,
+        onInput: this.onInput,
+      }}
+      >
+        {this.props.children}
+      </ContextProvider>
+    );
+  }
+}
+```
+
+```js
+// TextArea.jsx
+import React from 'react';
+import { Consumer } from './Context';
+
+const TextArea = () => (
+  <Consumer>
+    {context => (
+      <textarea
+        ref={context.textareaRef}
+        className="app__textarea"
+        name="snippet"
+        placeholder="Your snippet…"
+        onChange={context.onInput}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
+        wrap="off"
+      />
+    )}
+  </Consumer>
+);
 ```
 
 ### Error Boundary
