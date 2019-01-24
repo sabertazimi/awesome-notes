@@ -1923,6 +1923,69 @@ accordion menu:
 }
 ```
 
+slider:
+
+```css
+.slide {
+  width: 500%;
+  overflow: hidden;
+}
+
+@keyframes slide {
+  0% {
+    margin-left: 0;
+  }
+  10% {
+    margin-left: 0;
+  }
+  12% {
+    margin-left: -100%;
+  }
+  22% {
+    margin-left: -100%;
+  }
+  24% {
+    margin-left: -200%;
+  }
+  34% {
+    margin-left: -200%;
+  }
+  36% {
+    margin-left: -300%;
+  }
+  46% {
+    margin-left: -300%;
+  }
+  48% {
+    margin-left: -400%;
+  }
+  58% {
+    margin-left: -400%;
+  }
+  60% {
+    margin-left: -300%;
+  }
+  70% {
+    margin-left: -300%;
+  }
+  72% {
+    margin-left: -200%;
+  }
+  82% {
+    margin-left: -200%;
+  }
+  84% {
+    margin-left: -100%;
+  }
+  94% {
+    margin-left: -100%;
+  }
+  96% {
+    margin-left: 0;
+  }
+}
+```
+
 ## Responsive Desgin
 
 ### responsive font
