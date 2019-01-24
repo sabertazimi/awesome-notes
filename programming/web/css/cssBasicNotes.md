@@ -1730,6 +1730,7 @@ filter: unset;
 - background with multiple gradient
 - single box-shadow
 - multiple box-shadow
+- :hover/:foucs + animation/transform/transition
 - pseudo elements (::before and ::after)
 - pseudo elements with animation
   (opacity, scale, translate, width/height, margin, background-position)
