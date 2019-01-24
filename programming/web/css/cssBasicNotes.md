@@ -1436,6 +1436,8 @@ justify(自适应，左右都无空格)
 
 ### border
 
+mix transparent with non-transparent border to make shapes (e.g. triangle).
+
 #### border-radius
 
 #### border-image
@@ -1710,12 +1712,32 @@ filter: unset;
 
 ### animation helper
 
+- opacity
+- width/height
+- max-width/max-height
+- margin
 - border
 - background
+- background-position
 - background with multiple gradient
 - single box-shadow
 - multiple box-shadow
 - pseudo elements (::before and ::after)
+- pseudo elements with animation
+  (opacity, scale, translate, width/height, margin, background-position)
+- scale
+- translate
+- animation-delay
+
+```css
+overflow: hidden;
+z-index: -1;
+```
+
+Changing top/right/bottom/left of pseduo element
+can change animation start point
+(e.g bottom: 0, right: 0, change width/height from 0 to 100%,
+size animation will start from bottom-right corner).
 
 ### transition
 
@@ -1741,6 +1763,8 @@ filter: unset;
 - transform-orgin: change transform start point
   `top bottom center left right`
 - perspective(): 为 **3D** 转换元素定义透视视图
+- keep translate(-50%, -50%) in keyframe transform peoperty list
+  when using it for alignment
 
 一般需要在容器元素上加上以下样式:
 
@@ -1748,6 +1772,10 @@ filter: unset;
 .transform-container {
   perspective: 1024px;
   transform-style: preserve-3d;
+}
+
+.front .back {
+  backface-visibility: hidden;
 }
 ```
 
