@@ -118,6 +118,7 @@
       - [transform-style](#transform-style)
       - [backface-visibility](#backface-visibility)
     - [animation](#animation)
+    - [Animation Examples](#animation-examples)
   - [Responsive Desgin](#responsive-desgin)
     - [responsive font](#responsive-font)
     - [responsive length](#responsive-length)
@@ -1458,6 +1459,13 @@ border-image: source slice width outset repeat
 
 指定背景显示范围  content-box/padding-box/border-box
 
+```css
+h1 {
+  background-image: url(bg.jpg);
+  background-clip: text;
+}
+```
+
 #### (moz/webkit)background-origin
 
 指定背景绘制起点  content-box/padding-box/border-box
@@ -1895,6 +1903,23 @@ div {
 
 :checked ~ div {
   animation-play-state: running;
+}
+```
+
+### Animation Examples
+
+accordion menu:
+
+```css
+.menu {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height, 0.3s;
+}
+
+.container:hover .menu,
+.menu:focus {
+  max-height: 1em;
 }
 ```
 
