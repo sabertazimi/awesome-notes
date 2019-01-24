@@ -169,6 +169,7 @@
         - [Session management](#session-management)
         - [Tmux Windows Hotkeys](#tmux-windows-hotkeys)
         - [Tmux Panes Hotkeys](#tmux-panes-hotkeys)
+        - [Tmux Scroll](#tmux-scroll)
       - [Configuration](#configuration)
   - [Perf Tools](#perf-tools)
     - [`uptime`](#uptime)
@@ -1892,6 +1893,12 @@ x kill the current pane
 t        # 显示一个时钟
 ```
 
+##### Tmux Scroll
+
+- `C-a + [` to into scoll mode, `q` to quit scoll mode
+- copy mode can scoll too
+- `set -g mouse on` for enabling mouse scolling
+
 #### Configuration
 
 ```bash
@@ -1910,6 +1917,9 @@ set -g status-bg black
 set -g status-fg white
 set -g status-left ""
 set -g status-right "#[fg=green]#H"
+
+# Enable scroll mouse
+set -g mouse on
 
 # Rather than constraining window size to the maximum size of any client
 # connected to the *session*, constrain window size to the maximum size of any
@@ -1931,6 +1941,7 @@ bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
 # bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
 unbind p
 bind p pasteb
+
 setw -g mode-keys vi      # Vi
 
 # Highlight active window
