@@ -15,6 +15,10 @@
     - [Middleware Simple Implementation](#middleware-simple-implementation)
     - [Scheduler Middleware](#scheduler-middleware)
     - [redux-thunk Middleware](#redux-thunk-middleware)
+  - [Redux Internal](#redux-internal)
+    - [createStore](#createstore)
+    - [Action Validation](#action-validation)
+    - [Provider and Connection](#provider-and-connection)
   - [Redux Best Practice](#redux-best-practice)
     - [State Management](#state-management)
       - [RxJS](#rxjs)
@@ -247,6 +251,170 @@ function addFave(tweetId) {
 }
 
 store.dispatch(addFave());
+```
+
+## Redux Internal
+
+### createStore
+
+- use closure to store state and subscribe
+- use middleware to change normal dispatch function
+
+```js
+const applyMiddleware = (...middlewares) => store => {
+    // should return (next) => (action) => { ... } function
+    if (middlewares.length === 0) {
+        return dispatch => dispatch;
+    }
+
+    if (middlewares.length === 1) {
+        return middlewares[0];
+    }
+
+    // [ (next) => (action) => {...}, ... ] array
+    // next: (action) => { ... } function
+    const boundMiddlewares = middlewares.map(middleware => middleware(store));
+
+    return boundMiddlewares.reduce((a, b) => (next => a(b(next))));
+};
+
+const createStore = (reducer, middleware) => {
+    // clousre for storing global state
+    let state = undefined;
+    const subscribers = [];
+    const coreDispatch = (action) => {
+        validateAction(action);
+        state = reducer(state, action);
+        subscribers.forEach(handler => handler());
+    };
+    const getState = () => state;
+
+    const store = {
+        dispatch: coreDispatch,
+        getState,
+        subscribe: (handler) => {
+            subscribers.push(handler);
+
+            // unsubscribe function
+            return () => {
+                const index = subscribers.indexOf(handler);
+
+                if (index > 0) {
+                    subscribers.splice(index, 1);
+                }
+            };
+        }
+    };
+
+    if (middleware) {
+        // store default dispatch
+        const dispatch = action => store.dispatch(action);
+
+        // middleware = ({ dispatch, getState }) => (next) => (action) => { ... };
+        // middleware is a higher-order function (return (action) => { ... });
+        // dispatch, getState and coreDispatch are injected into middleware as arguments
+        store.dispatch = middleware({
+            dispatch,
+            getState
+        })(coreDispatch);
+    }
+
+    coreDispatch({
+        type: INIT_MEDUX
+    });
+    return store;
+};
+```
+
+### Action Validation
+
+```js
+const isValidKey = (key) => {
+    return ['type', 'payload', 'error', 'meta'].indexOf(key) > -1;
+};
+
+const validateAction = (action) => {
+    if (!action || typeof action !== 'object' || Array.isArray(action)) {
+        throw new Error('Action must be an object!');
+    }
+
+    if (typeof action.type === 'undefined') {
+        throw new Error('Action must have a type!');
+    }
+
+    if (!Object.keys(action).every(isValidKey)) {
+        throw new Error('Action only have `type`, `payload`, `error` or `meta` field!');
+    }
+};
+```
+
+### Provider and Connection
+
+- use Context to provide store (two methods):
+  - inject store into every children recursively
+  - use Consumer in Connect higher order component
+  `<Consumer>{store => (<WrapperComponent store={store}>)}</Consumer>`
+
+```js
+export const Provider = ({
+    store,
+    children
+}) => {
+    const StoreContext = React.createContext(store);
+
+    return (
+        <StoreContext.Provider value={store}>
+            <StoreContext.Consumer>
+                {(store) => {
+                    const childrenWithStore =
+                      React.Children.map(children, child =>
+                        React.cloneElement(child, { store: store })
+                    );
+
+                    return <div>{childrenWithStore}</div>
+                }}
+            </StoreContext.Consumer>
+        </StoreContext.Provider>
+    );
+};
+
+export const connect = (
+    mapStateToProps = () => ({}),
+    mapDispatchToProps = () => ({})
+) => Component => {
+    class Connected extends React.Component {
+        onStoreOrPropsChange(props) {
+            const { store } = this.props;
+            const state = store.getState();
+            const stateProps = mapStateToProps(state, props);
+            const dispatchProps = mapDispatchToProps(store.dispatch, props);
+            this.setState({
+                ...stateProps,
+                ...dispatchProps
+            });
+        }
+
+        componentWillMount() {
+            const { store } = this.props;
+            this.onStoreOrPropsChange(this.props);
+            this.unsubscribe = store.subscribe(() => this.onStoreOrPropsChange(this.props));
+        }
+
+        componentWillReceiveProps(nextProps) {
+            this.onStoreOrPropsChange(nextProps);
+        }
+
+        componentWillUnmount() {
+            this.unsubscribe();
+        }
+
+        render() {
+            return <Component {...this.props} {...this.state} />;
+        }
+    }
+
+    return Connected;
+};
 ```
 
 ## Redux Best Practice
