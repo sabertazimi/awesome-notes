@@ -97,6 +97,7 @@
       - [pubdate](#pubdate)
       - [datetime](#datetime)
   - [Attributes](#attributes)
+    - [dataset](#dataset)
     - [Global Attributes](#global-attributes)
       - [contentEditable](#contenteditable)
       - [hidden](#hidden)
@@ -752,6 +753,25 @@ figure可拥有唯一的0/1个figcaption
 - `+` 时差
 
 ## Attributes
+
+### dataset
+
+```html
+<td data-row="1" data-column="1"></td>
+```
+
+```js
+const onChange = (event) => {
+  const {
+    currentTarget: {
+      dataset: {
+        row,
+        column,
+      },
+    },
+  } = event;
+};
+```
 
 ### Global Attributes
 
