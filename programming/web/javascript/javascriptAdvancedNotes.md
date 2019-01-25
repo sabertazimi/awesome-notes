@@ -1127,8 +1127,25 @@ if there’s any pending call back waiting to be executed:
 
 - ES6 job queue: used by `Promises` (higher priority)
 - message queue: used by `setTimeout`, `DOM events`
-- 微任务Microtask，有特权，可以插队: Promise,MutationObserver， MessageChannel
-- 宏任务Macrotask，没有特权:setInterval, setImmediate, I/O
+- 微任务 Microtask，有特权, 可以插队: process.nextTick, Promises, MutationObserver, MessageChannel
+- 宏任务 Macrotask，没有特权: setTimeout, setInterval, setImmediate, I/O
+- Microtask 优先于 Macrotask
+
+```js
+for (let ii = 0; ii < macrotask.length; ii++) {
+  eval(macrotask[ii])()
+
+  if (microtask.length != 0) {
+    // process microtasks
+    for (let __i = 0; __i < microtask.length; __i++) {
+      eval(microtask[__i])()
+    }
+
+    // empty microtask
+    microtask = []
+  }
+}
+```
 
 ```js
 const bar = () => {
