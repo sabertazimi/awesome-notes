@@ -81,6 +81,7 @@
       - [Calendar](#calendar)
       - [Select](#select)
     - [Debug/Test](#debugtest)
+    - [Solution and Framework](#solution-and-framework)
 
 <!-- /TOC -->
 
@@ -1574,9 +1575,9 @@ export default Intl;
 
 ### Documents
 
-- [Blog Generator](https://github.com/gatsbyjs/gatsby)
+- [Docz](https://github.com/pedronauck/docz)
+- [Gatsby.js](https://github.com/gatsbyjs/gatsby)
 - [React Built In Editor](https://github.com/facebook/draft-js)
-- [docz](https://github.com/pedronauck/docz)
 
 ### Data
 
@@ -1638,3 +1639,8 @@ export default Intl;
 - [React Component hierachy](https://github.com/team-gryff/react-monocle)
 - [React a11y](https://github.com/reactjs/react-a11y)
 - Chrome Extensions -  React Dev Tools/Redux Dev Tools
+
+### Solution and Framework
+
+- [Gatsby.js](https://github.com/gatsbyjs/gatsby)
+- [Next.js](https://github.com/zeit/next.js/)
