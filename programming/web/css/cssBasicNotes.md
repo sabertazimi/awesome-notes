@@ -847,6 +847,26 @@ visible,hidden,scroll,auto
 - clip     切除溢出部分
 - ellipsis 省略号标志
 
+```css
+.article-container {
+  width: 500px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+```
+
+```css
+.article-container {
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; //需要显示的行数
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+```
+
 #### resize
 
 前置属性:overflow
