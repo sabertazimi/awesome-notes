@@ -119,6 +119,7 @@
     - [Performance Best Practice](#performance-best-practice)
     - [Awesome Performance Tutorial](#awesome-performance-tutorial)
     - [Perf and Analysis Tools](#perf-and-analysis-tools)
+      - [Inspect Android Device](#inspect-android-device)
   - [JavaScript Style Guide](#javascript-style-guide)
     - [Naming Style](#naming-style)
     - [Variable Style](#variable-style)
@@ -2277,6 +2278,12 @@ window.addEventListener('replacestate', function (event) {
 - [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report/)
 
 Audits of Chrome: PWA, best practices, SEO, performance, device simulator
+
+#### Inspect Android Device
+
+- enable developmemnt mode and USB debugging in Android Device
+- link Android and PC with USB cable
+- open `chrome://inspect/#devices` to start inspecting
 
 ## JavaScript Style Guide
 
