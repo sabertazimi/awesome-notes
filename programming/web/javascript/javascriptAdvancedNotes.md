@@ -181,6 +181,7 @@
     - [Performance Panel](#performance-panel)
       - [Memory Panel](#memory-panel)
       - [JS Profiler Panel](#js-profiler-panel)
+      - [Layer Panel](#layer-panel)
     - [Rendering Panel](#rendering-panel)
     - [More Tools](#more-tools)
   - [PWA](#pwa)
@@ -3298,6 +3299,10 @@ $0.addEventListener('click', (e) => {
 #### Memory Panel
 
 #### JS Profiler Panel
+
+#### Layer Panel
+
+tool for composite stage analysis
 
 ### Rendering Panel
 
