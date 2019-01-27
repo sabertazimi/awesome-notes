@@ -3309,6 +3309,7 @@ tool for composite stage analysis
 - re-paint area
 - FPS monitor
 - scroll event
+- layout/layer border
 
 ### More Tools
 
