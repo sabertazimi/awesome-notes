@@ -178,6 +178,10 @@
       - [capture default eventListener](#capture-default-eventlistener)
     - [Source Panel](#source-panel)
     - [Network Panel](#network-panel)
+    - [Performance Panel](#performance-panel)
+      - [Memory Panel](#memory-panel)
+      - [JS Profiler Panel](#js-profiler-panel)
+    - [Rendering Panel](#rendering-panel)
     - [More Tools](#more-tools)
   - [PWA](#pwa)
     - [Service Worker](#service-worker)
@@ -3285,6 +3289,21 @@ $0.addEventListener('click', (e) => {
 
 - throtting: simulate different network environment
 - initiator：go to files
+
+### Performance Panel
+
+- script->style->layout->paint->composite timeline
+- performance tips
+
+#### Memory Panel
+
+#### JS Profiler Panel
+
+### Rendering Panel
+
+- re-paint area
+- FPS monitor
+- scroll event
 
 ### More Tools
 
