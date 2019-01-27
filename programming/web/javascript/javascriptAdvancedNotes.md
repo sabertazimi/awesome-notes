@@ -84,6 +84,7 @@
     - [DOM Performance](#dom-performance)
       - [重排与重绘](#重排与重绘)
       - [批量修改 DOM](#批量修改-dom)
+      - [requestAnimationFrame](#requestanimationframe)
     - [CSS](#css)
     - [定时器(防止脚本阻塞)](#定时器防止脚本阻塞)
     - [计时器](#计时器)
@@ -1565,6 +1566,10 @@ const clone = old.cloneNode(true);
 appendDataToElement(clone, data);
 old.parentNode.replaceChild(clone, old);
 ```
+
+#### requestAnimationFrame
+
+run scripts as early as possible
 
 ### CSS
 
