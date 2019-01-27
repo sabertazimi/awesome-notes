@@ -126,7 +126,7 @@ to let developers enhance css without any browser updates
 
 ### CSS Triggers
 
-- [CSS Property Triggers](https://github.com/GoogleChromeLabs/css-triggers)
+- [CSS Triggers](https://github.com/GoogleChromeLabs/css-triggers)
 - [JS DOM API Triggers](https://gist.github.com/paulirish/5d52fb081b3570c81e3a)
 
 avoid to frequently change css property
