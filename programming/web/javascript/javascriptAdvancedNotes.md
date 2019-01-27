@@ -1590,6 +1590,7 @@ of relayout/repaint/recomposite.
 
 ```js
 // bad
+// Forced Synchronous Layout
 read css -> write css (re-layout/paint/composite)
 -> read css -> write css (re-layout/paint/composite)
 -> read css -> write css (re-layout/paint/composite)
