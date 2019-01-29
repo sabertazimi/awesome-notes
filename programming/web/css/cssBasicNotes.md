@@ -2144,6 +2144,7 @@ h1::after {
 - `margin-left: auto` to align-left
 - `border: 0` and `border-collapse: collapse` to remove border line
 - `table-layout: fixed` to contain cells with same width
+- implement filter or pagination with `display: none` applied to `<tr>`
 
 ### form
 
