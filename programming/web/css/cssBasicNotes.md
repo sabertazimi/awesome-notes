@@ -861,7 +861,7 @@ visible,hidden,scroll,auto
   display: -webkit-box;
   word-break: break-all;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4; //需要显示的行数
+  -webkit-line-clamp: 4; /* 需要显示的行数 */
   overflow: hidden;
   text-overflow: ellipsis;
 }
