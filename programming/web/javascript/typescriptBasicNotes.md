@@ -36,6 +36,7 @@
   - [Generic Types](#generic-types)
     - [Generic Function](#generic-function)
     - [Generic Class](#generic-class)
+    - [Specific Instances from Generic Types](#specific-instances-from-generic-types)
   - [Union Types](#union-types)
   - [Intersection Types](#intersection-types)
   - [Mixins](#mixins)
@@ -660,6 +661,22 @@ class Queue<T> {
 const queue = new Queue<number>();
 queue.push(0);
 queue.push('1'); // Error：不能推入一个 `string`，只有 number 类型被允许
+```
+
+### Specific Instances from Generic Types
+
+```js
+class Foo<T> {
+  foo: T;
+}
+
+const FooNumber = Foo as { new (): Foo<number> }; // ref 1
+
+function id<T>(x: T) {
+  return x;
+}
+
+const idNum = id as { (x: number): number };
 ```
 
 ## Union Types
