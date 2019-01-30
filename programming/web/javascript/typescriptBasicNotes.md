@@ -19,14 +19,15 @@
     - [Function Interface](#function-interface)
     - [Arrow Function](#arrow-function)
     - [Weak Overload](#weak-overload)
-  - [Class](#class)
-    - [Access Modifiers](#access-modifiers)
-  - [Alias Types](#alias-types)
   - [Type Assertion](#type-assertion)
   - [Interface](#interface)
     - [Extends Interface](#extends-interface)
     - [Implements Interface](#implements-interface)
     - [Indexable Interface](#indexable-interface)
+  - [Alias Types](#alias-types)
+    - [Literal Types](#literal-types)
+  - [Access Modifiers](#access-modifiers)
+    - [readonly](#readonly)
   - [Generic Types](#generic-types)
   - [Union Types](#union-types)
   - [Intersection Types](#intersection-types)
@@ -351,18 +352,6 @@ padding(1, 1, 1, 1); // Okay: top, right, bottom, left
 padding(1, 1, 1); // Error: Not a part of the available overloads
 ```
 
-## Class
-
-### Access Modifiers
-
-## Alias Types
-
-```js
-type Text = string | { text: string };
-type Coordinates = [number, number];
-type Callback = (data: string) => void;
-```
-
 ## Type Assertion
 
 - `<type>`
@@ -451,6 +440,103 @@ const crazy = new CrazyClass(); // crazy would be { hello:123 }
 let x: { foo: number, [x: string]: any };
 
 x = { foo: 1, baz: 2 }; // ok, 'baz' 属性匹配于索引签名
+```
+
+## Alias Types
+
+```js
+type Text = string | { text: string };
+type Coordinates = [number, number];
+type Callback = (data: string) => void;
+```
+
+### Literal Types
+
+```js
+type CardinalDirection = 'North' | 'East' | 'South' | 'West';
+
+function move(distance: number, direction: CardinalDirection) {
+  // ...
+}
+
+move(1, 'North'); // ok
+move(1, 'Nurth'); // Error
+
+type OneToFive = 1 | 2 | 3 | 4 | 5;
+type Bools = true | false;
+```
+
+## Access Modifiers
+
+### readonly
+
+readonly type
+
+```js
+type Foo = {
+  readonly bar: number;
+  readonly bas: number;
+};
+
+// 初始化
+const foo: Foo = { bar: 123, bas: 456 };
+
+// 不能被改变
+foo.bar = 456; // Error: foo.bar 为仅读属性
+```
+
+readonly indexable signature
+
+```js
+interface Foo {
+  readonly [x: number]: number;
+}
+
+// 使用
+
+const foo: Foo = { 0: 123, 2: 345 };
+console.log(foo[0]); // ok（读取）
+foo[0] = 456; // Error: 属性只读
+```
+
+readonly properties of class
+
+```js
+class Foo {
+  readonly bar = 1; // OK
+  readonly baz: string;
+  constructor() {
+    this.baz = 'hello'; // OK
+  }
+}
+```
+
+Readonly generic type
+
+```js
+type Foo = {
+  bar: number;
+  bas: number;
+};
+
+type FooReadonly = Readonly<Foo>;
+
+const foo: Foo = { bar: 123, bas: 456 };
+const fooReadonly: FooReadonly = { bar: 123, bas: 456 };
+
+foo.bar = 456; // ok
+fooReadonly.bar = 456; // Error: bar 属性只读
+```
+
+in React
+
+```js
+export class Something extends React.Component<{ foo: number }, { baz: number }> {
+  someMethod() {
+    this.props.foo = 123; // Error: props 是不可变的
+    this.state.baz = 456; // Error: 你应该使用 this.setState()
+  }
+}
 ```
 
 ## Generic Types
