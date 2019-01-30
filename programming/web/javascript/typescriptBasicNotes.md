@@ -29,9 +29,7 @@
   - [Literal Types](#literal-types)
   - [Moving Types](#moving-types)
   - [Access Modifiers](#access-modifiers)
-    - [public](#public)
-    - [protected](#protected)
-    - [private](#private)
+    - [public/proteced/private](#publicprotecedprivate)
     - [readonly](#readonly)
   - [Generic Types](#generic-types)
     - [Generic Function](#generic-function)
@@ -556,11 +554,30 @@ color = 'anythingElse'; // Error
 
 ## Access Modifiers
 
-### public
+### public/proteced/private
 
-### protected
+```js
+class Singleton {
+  private static instance: Singleton;
+  private constructor() {
+    // ..
+  }
 
-### private
+  public static getInstance() {
+    if (!Singleton.instance) {
+      Singleton.instance = new Singleton();
+    }
+
+    return Singleton.instance;
+  }
+
+  someMethod() {}
+}
+
+let someThing = new Singleton(); // Error: constructor of 'singleton' is private
+
+let instacne = Singleton.getInstance(); // do some thing with the instance
+```
 
 ### readonly
 
