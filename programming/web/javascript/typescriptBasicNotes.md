@@ -26,6 +26,7 @@
   - [Generic Types](#generic-types)
   - [Union Types](#union-types)
   - [Intersection Types](#intersection-types)
+  - [Reference](#reference)
 
 <!-- /TOC -->
 
@@ -426,3 +427,7 @@ const x = extend({ a: 'hello' }, { b: 42 });
 const a = x.a;
 const b = x.b;
 ```
+
+## Reference
+
+- [TypeScript Cookbook](https://github.com/jkchao/typescript-book-chinese)
