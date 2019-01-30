@@ -27,8 +27,13 @@
   - [Alias Types](#alias-types)
     - [Literal Types](#literal-types)
   - [Access Modifiers](#access-modifiers)
+    - [public](#public)
+    - [protected](#protected)
+    - [private](#private)
     - [readonly](#readonly)
   - [Generic Types](#generic-types)
+    - [Generic Function](#generic-function)
+    - [Generic Class](#generic-class)
   - [Union Types](#union-types)
   - [Intersection Types](#intersection-types)
   - [Reference](#reference)
@@ -468,6 +473,12 @@ type Bools = true | false;
 
 ## Access Modifiers
 
+### public
+
+### protected
+
+### private
+
 ### readonly
 
 readonly type
@@ -531,7 +542,7 @@ fooReadonly.bar = 456; // Error: bar 属性只读
 in React
 
 ```js
-export class Something extends React.Component<{ foo: number }, { baz: number }> {
+class Something extends React.Component<{ foo: number }, { baz: number }> {
   someMethod() {
     this.props.foo = 123; // Error: props 是不可变的
     this.state.baz = 456; // Error: 你应该使用 this.setState()
@@ -541,6 +552,8 @@ export class Something extends React.Component<{ foo: number }, { baz: number }>
 
 ## Generic Types
 
+### Generic Function
+
 ```js
 function reverse<T>(items: T[]): T[] {
   const toreturn = [];
@@ -549,6 +562,22 @@ function reverse<T>(items: T[]): T[] {
   }
   return toreturn;
 }
+```
+
+### Generic Class
+
+```js
+// 创建一个泛型类
+class Queue<T> {
+  private data = [];
+  push = (item: T) => this.data.push(item);
+  pop = (): T => this.data.shift();
+}
+
+// 简单的使用
+const queue = new Queue<number>();
+queue.push(0);
+queue.push('1'); // Error：不能推入一个 `string`，只有 number 类型被允许
 ```
 
 ## Union Types
@@ -565,6 +594,41 @@ function formatCommandline(command: string[] | string) {
   }
 
   // Do stuff with line: string
+}
+```
+
+```js
+interface Square {
+  kind: 'square';
+  size: number;
+}
+
+interface Rectangle {
+  kind: 'rectangle';
+  width: number;
+  height: number;
+}
+
+// 有人仅仅是添加了 `Circle` 类型
+// 我们可能希望 TypeScript 能在任何被需要的地方抛出错误
+interface Circle {
+  kind: 'circle';
+  radius: number;
+}
+
+type Shape = Square | Rectangle | Circle;
+
+function area(s: Shape) {
+  switch (s.kind) {
+    case 'square':
+      return s.size * s.size;
+    case 'rectangle':
+      return s.width * s.height;
+    case 'circle':
+      return Math.PI * s.radius ** 2;
+    default:
+      const _exhaustiveCheck: never = s;
+  }
 }
 ```
 
