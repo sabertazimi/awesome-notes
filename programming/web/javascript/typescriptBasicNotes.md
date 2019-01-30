@@ -16,13 +16,17 @@
     - [Enum as Flags](#enum-as-flags)
     - [Internal of Enum](#internal-of-enum)
   - [Function](#function)
+    - [Function Interface](#function-interface)
+    - [Arrow Function](#arrow-function)
     - [Weak Overload](#weak-overload)
   - [Class](#class)
     - [Access Modifiers](#access-modifiers)
   - [Alias Types](#alias-types)
+  - [Type Assertion](#type-assertion)
   - [Interface](#interface)
     - [Extends Interface](#extends-interface)
     - [Implements Interface](#implements-interface)
+    - [Indexable Interface](#indexable-interface)
   - [Generic Types](#generic-types)
   - [Union Types](#union-types)
   - [Intersection Types](#intersection-types)
@@ -269,6 +273,56 @@ console.log(Tristate[Tristate.False]); // 'False' because `Tristate.False == 0`
 
 ## Function
 
+### Function Interface
+
+```js
+interface ReturnString {
+  (): string;
+}
+
+declare const foo: ReturnString;
+
+const bar = foo(); // bar 被推断为一个字符串
+```
+
+```js
+interface Complex {
+  (foo: string, bar?: number, ...others: boolean[]): number;
+}
+```
+
+```js
+interface Overloaded {
+  (foo: string): string;
+  (foo: number): number;
+}
+
+// 实现接口的一个例子：
+function stringOrNumber(foo: number): number;
+function stringOrNumber(foo: string): string;
+function stringOrNumber(foo: any): any {
+  if (typeof foo === 'number') {
+    return foo * foo;
+  } else if (typeof foo === 'string') {
+    return `hello ${foo}`;
+  }
+}
+
+const overloaded: Overloaded = stringOrNumber;
+
+// 使用
+const str = overloaded(''); // str 被推断为 'string'
+const num = overloaded(123); // num 被推断为 'number'
+```
+
+### Arrow Function
+
+在一个以 number 类型为参数，以 string 类型为返回值的函数中:
+
+```js
+const simple: (foo: number) => string = foo => foo.toString();
+```
+
 ### Weak Overload
 
 ```js
@@ -307,6 +361,24 @@ padding(1, 1, 1); // Error: Not a part of the available overloads
 type Text = string | { text: string };
 type Coordinates = [number, number];
 type Callback = (data: string) => void;
+```
+
+## Type Assertion
+
+- `<type>`
+- `as type`
+
+> `as` is better in `.jsx`
+
+```js
+let foo: any;
+let bar = <string>foo; // 现在 bar 的类型是 'string'
+```
+
+```js
+function handler(event: Event) {
+  const mouseEvent = event as MouseEvent;
+}
 ```
 
 ## Interface
@@ -371,6 +443,14 @@ class CrazyClass implements Crazy {
 
 // Because
 const crazy = new CrazyClass(); // crazy would be { hello:123 }
+```
+
+### Indexable Interface
+
+```js
+let x: { foo: number, [x: string]: any };
+
+x = { foo: 1, baz: 2 }; // ok, 'baz' 属性匹配于索引签名
 ```
 
 ## Generic Types
