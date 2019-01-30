@@ -23,9 +23,11 @@
   - [Interface](#interface)
     - [Extends Interface](#extends-interface)
     - [Implements Interface](#implements-interface)
-    - [Indexable Interface](#indexable-interface)
+  - [Index Signature](#index-signature)
+    - [Select Index](#select-index)
   - [Alias Types](#alias-types)
-    - [Literal Types](#literal-types)
+  - [Literal Types](#literal-types)
+  - [Moving Types](#moving-types)
   - [Access Modifiers](#access-modifiers)
     - [public](#public)
     - [protected](#protected)
@@ -36,6 +38,12 @@
     - [Generic Class](#generic-class)
   - [Union Types](#union-types)
   - [Intersection Types](#intersection-types)
+  - [Mixins](#mixins)
+  - [Closure](#closure)
+  - [React with TypeScript](#react-with-typescript)
+    - [Functional Component](#functional-component)
+    - [Class Component](#class-component)
+    - [Generic Component](#generic-component)
   - [Reference](#reference)
 
 <!-- /TOC -->
@@ -51,17 +59,17 @@
   "compilerOptions": {
 
     /* 基本选项 */
-    "target": "es5",       // 'ES3', 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'
-    "module": "commonjs",  // 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015'
-    "lib": [],             // 指定要包含在编译中的库文件
-    "allowJs": true,       // 允许编译 javascript 文件
-    "checkJs": true,       // 报告 javascript 文件中的错误
-    "jsx": "preserve",     // 'preserve', 'react-native', or 'react'
-    "declaration": true,   // 生成相应的 '.d.ts' 文件
-    "sourceMap": true,     // 生成相应的 '.map' 文件
-    "outFile": "./",       // 将输出文件合并为一个文件
-    "outDir": "./",        // 指定输出目录
-    "rootDir": "./",       // 用来控制输出目录结构 --outDir.
+    "target": "es5",         // 'ES3', 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'
+    "module": "es2015",      // 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015'
+    "lib": ["es6", "dom"],   // 指定要包含在编译中的库文件
+    "allowJs": true,         // 允许编译 javascript 文件
+    "checkJs": true,         // 报告 javascript 文件中的错误
+    "jsx": "react",          // 'preserve', 'react-native', or 'react'
+    "declaration": true,     // 生成相应的 '.d.ts' 文件
+    "sourceMap": true,       // 生成相应的 '.map' 文件
+    "outFile": "./",         // 将输出文件合并为一个文件
+    "outDir": "./",          // 指定输出目录
+    "rootDir": "./",         // 用来控制输出目录结构 --outDir.
     "removeComments": true,  // 删除编译后的所有的注释
     "noEmit": true,          // 不生成输出文件
     "importHelpers": true,   // 从 tslib 导入辅助工具函数
@@ -112,7 +120,7 @@ declare module '*.css';
 ```
 
 ```bash
-npm install @types/jquery --save-dev
+npm i -D @types/react @types/react-dom
 ```
 
 ### lib.d.ts
@@ -439,12 +447,58 @@ class CrazyClass implements Crazy {
 const crazy = new CrazyClass(); // crazy would be { hello:123 }
 ```
 
-### Indexable Interface
+## Index Signature
 
 ```js
 let x: { foo: number, [x: string]: any };
 
 x = { foo: 1, baz: 2 }; // ok, 'baz' 属性匹配于索引签名
+```
+
+当你声明一个索引签名时，所有明确的成员都必须符合索引签名
+
+```js
+// ok
+interface Foo {
+  [key: string]: number;
+  x: number;
+  y: number;
+}
+
+// Error
+interface Bar {
+  [key: string]: number;
+  x: number;
+  y: string; // Error: y 属性必须为 number 类型
+}
+```
+
+使用交叉类型可以解决上述问题
+
+```js
+type FieldState = {
+  value: string;
+};
+
+type FormState = { isValid: boolean } & { [fieldName: string]: FieldState };
+```
+
+### Select Index
+
+```js
+type Index = 'a' | 'b' | 'c';
+type FromIndex = { [k in Index]?: number };
+
+const good: FromIndex = { b: 1, c: 2 };
+
+// Error:
+// `{ b: 1, c: 2, d: 3 }` 不能分配给 'FromIndex'
+// 对象字面量只能指定已知类型，'d' 不存在 'FromIndex' 类型上
+const bad: FromIndex = { b: 1, c: 2, d: 3 };
+```
+
+```js
+type FromSomeIndex<K extends string> = { [key in K]: number };
 ```
 
 ## Alias Types
@@ -455,7 +509,7 @@ type Coordinates = [number, number];
 type Callback = (data: string) => void;
 ```
 
-### Literal Types
+## Literal Types
 
 ```js
 type CardinalDirection = 'North' | 'East' | 'South' | 'West';
@@ -469,6 +523,34 @@ move(1, 'Nurth'); // Error
 
 type OneToFive = 1 | 2 | 3 | 4 | 5;
 type Bools = true | false;
+```
+
+## Moving Types
+
+```js
+// 捕获字符串的类型与值
+const foo = 'Hello World';
+
+// 使用一个捕获的类型
+let bar: typeof foo;
+
+// bar 仅能被赋值 'Hello World'
+bar = 'Hello World'; // ok
+bar = 'anything else'; // Error
+```
+
+```js
+const colors = {
+  red: 'red',
+  blue: 'blue'
+};
+
+type Colors = keyof typeof colors;
+
+let color: Colors; // color 的类型是 'red' | 'blue'
+color = 'red'; // ok
+color = 'blue'; // ok
+color = 'anythingElse'; // Error
 ```
 
 ## Access Modifiers
@@ -656,6 +738,149 @@ const x = extend({ a: 'hello' }, { b: 42 });
 // 现在 x 拥有了 a 属性与 b 属性
 const a = x.a;
 const b = x.b;
+```
+
+## Mixins
+
+```js
+// 所有 mixins 都需要
+type Constructor<T = {}> = new (...args: any[]) => T;
+
+/////////////
+// mixins 例子
+////////////
+
+// 添加属性的混合例子
+function TimesTamped<TBase extends Constructor>(Base: TBase) {
+  return class extends Base {
+    timestamp = Date.now();
+  };
+}
+
+// 添加属性和方法的混合例子
+function Activatable<TBase extends Constructor>(Base: TBase) {
+  return class extends Base {
+    isActivated = false;
+
+    activate() {
+      this.isActivated = true;
+    }
+
+    deactivate() {
+      this.isActivated = false;
+    }
+  };
+}
+
+///////////
+// 组合类
+///////////
+
+// 简答的类
+class User {
+  name = '';
+}
+
+// 添加 TimesTamped 的 User
+const TimestampedUser = TimesTamped(User);
+
+// Tina TimesTamped 和 Activatable 的类
+const TimestampedActivatableUser = TimesTamped(Activatable(User));
+
+//////////
+// 使用组合类
+//////////
+
+const timestampedUserExample = new TimestampedUser();
+console.log(timestampedUserExample.timestamp);
+
+const timestampedActivatableUserExample = new TimestampedActivatableUser();
+console.log(timestampedActivatableUserExample.timestamp);
+console.log(timestampedActivatableUserExample.isActivated);
+```
+
+## Closure
+
+```js
+const { called } = new class {
+  count = 0;
+  called = () => {
+    this.count++;
+    console.log(`Called : ${this.count}`);
+  };
+}();
+
+called(); // Called : 1
+called(); // Called : 2
+```
+
+## React with TypeScript
+
+### Functional Component
+
+```js
+type Props = {
+  foo: string;
+};
+
+const myComponent: React.FunctionComponent<Props> = props => {
+  return <span>{props.foo}</span>;
+};
+
+<MyComponent foo="bar" />;
+```
+
+### Class Component
+
+```js
+type Props = {
+  foo: string;
+};
+
+class MyComponent extends React.Component<Props, {}> {
+  render() {
+    return <span>{this.props.foo}</span>;
+  }
+}
+
+<MyComponent foo="bar" />;
+```
+
+```js
+class FocusingInput extends React.Component<{
+  value: string;
+  onChange: (value: string) => any
+}, {}> {
+  input: HTMLInputElement | null = null;
+
+  render() {
+    return (
+      <input
+        ref={input => (this.input = input)}
+        value={this.props.value}
+        onChange={e => {
+          this.props.onChange(e.target.value);
+        }}
+      />
+    );
+  }
+  focus() {
+    if (this.input != null) {
+      this.input.focus();
+    }
+  }
+}
+```
+
+### Generic Component
+
+```js
+// 一个泛型组件
+type SelectProps<T> = { items: T[] };
+class Select<T> extends React.Component<SelectProps<T>, any> {}
+
+// 使用
+const Form = () => <Select<string> items={['a', 'b']} />;
 ```
 
 ## Reference
