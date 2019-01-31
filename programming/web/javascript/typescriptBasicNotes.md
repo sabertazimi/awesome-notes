@@ -5,6 +5,8 @@
 - [TypeScript Basic Notes](#typescript-basic-notes)
   - [Installation](#installation)
     - [Config](#config)
+    - [Webpack for TypeScript](#webpack-for-typescript)
+    - [Intergration](#intergration)
   - [Modules](#modules)
     - [globals.d.ts](#globalsdts)
     - [lib.d.ts](#libdts)
@@ -53,6 +55,11 @@
 
 - [Types Defination](https://github.com/DefinitelyTyped/DefinitelyTyped)
 
+```bash
+npm i -D typescript awesome-typescript-loader source-map-loader
+npm i -D react react-dom @types/react @types/react-dom
+```
+
 ```json
 {
   "compilerOptions": {
@@ -67,7 +74,7 @@
     "declaration": true,     // 生成相应的 '.d.ts' 文件
     "sourceMap": true,       // 生成相应的 '.map' 文件
     "outFile": "./",         // 将输出文件合并为一个文件
-    "outDir": "./",          // 指定输出目录
+    "outDir": "./build/",          // 指定输出目录
     "rootDir": "./",         // 用来控制输出目录结构 --outDir.
     "removeComments": true,  // 删除编译后的所有的注释
     "noEmit": true,          // 不生成输出文件
@@ -105,9 +112,55 @@
     /* 其他选项 */
     "experimentalDecorators": true,        // 启用装饰器
     "emitDecoratorMetadata": true          // 为装饰器提供元数据的支持
-  }
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
 ```
+
+### Webpack for TypeScript
+
+```js
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.tsx',
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
+    devtool: 'source-map',
+    resolve: {
+        extensions: ['.js', '.json', '.ts', '.tsx'],
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(ts|tsx)$/,
+                loader: 'awesome-typescript-loader',
+            },
+            {   enforce: "pre",
+                test: /\.js$/,
+                loader: "source-map-loader",
+            },
+        ],
+    },
+    externals: {
+        "react": "React",
+        "react-dom": "ReactDOM",
+    },
+};
+```
+
+### Intergration
+
+- [TSX-Boilerplate](@typescript-eslint/parser)
+- [ESLint for TypeScript](https://github.com/typescript-eslint/typescript-eslint)
+- [TSLint Config Airbnb](https://github.com/progre/tslint-config-airbnb)
 
 ## Modules
 
