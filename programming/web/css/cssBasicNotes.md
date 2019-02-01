@@ -118,7 +118,10 @@
       - [transform-style](#transform-style)
       - [backface-visibility](#backface-visibility)
     - [animation](#animation)
+      - [FLIP](#flip)
     - [Animation Examples](#animation-examples)
+      - [Accordion Menu Animation](#accordion-menu-animation)
+        - [Slider Animation](#slider-animation)
   - [Responsive Desgin](#responsive-desgin)
     - [responsive font](#responsive-font)
     - [responsive length](#responsive-length)
@@ -1927,9 +1930,28 @@ div {
 }
 ```
 
+#### FLIP
+
+- first: 初始状态
+- last: 动画结束状态
+- invert: last 至 first 的 `transform` 属性
+- play: `transition: transform .2s linear`
+
+```css
+/* first: scale(1), last: scale(1.2) */
+.scale-up {
+  transform: scale(0.8);
+  transition: transform .2s linear;
+}
+
+.scale-up:hover {
+  transform: none;
+}
+```
+
 ### Animation Examples
 
-accordion menu:
+#### Accordion Menu Animation
 
 ```css
 .menu {
@@ -1944,7 +1966,7 @@ accordion menu:
 }
 ```
 
-slider:
+##### Slider Animation
 
 ```css
 .slide {
