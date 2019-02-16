@@ -2437,6 +2437,7 @@ window.addEventListener('resize', () => {
 #### Loading Spinner
 
 - [Epic Spinners](https://github.com/epicmaxco/epic-spinners)
+- [Loading IO](https://loading.io/)
 
 #### Particles
 
@@ -2444,6 +2445,7 @@ window.addEventListener('resize', () => {
 
 #### Hover Component
 
+- [Image Hover](http://imagehover.io/)
 - [Hovering Button Effects](https://github.com/IanLunn/Hover)
 - [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
 - [Hint.css - Tooltips](https://github.com/chinchang/hint.css)
