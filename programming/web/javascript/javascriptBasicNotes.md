@@ -199,6 +199,7 @@
     - [Canvas Reference](#canvas-reference)
   - [Awesome Libraries](#awesome-libraries)
     - [Persistence/Storage/Store](#persistencestoragestore)
+    - [File Uploader](#file-uploader)
     - [Alert](#alert)
     - [Form](#form)
     - [Object Schema Validator](#object-schema-validator)
@@ -3631,6 +3632,10 @@ const ctx = canvas.getContext('2d', { alpha: false });
 - [brownies](https://github.com/franciscop/brownies)
 - [store.js](https://github.com/marcuswestin/store.js)
 - [localForage](https://github.com/localForage/localForage)
+
+### File Uploader
+
+- [Uppy](https://github.com/transloadit/uppy)
 
 ### Alert
 
