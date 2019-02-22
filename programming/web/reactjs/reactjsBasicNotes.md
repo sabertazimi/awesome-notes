@@ -1420,6 +1420,12 @@ simultaneously downloads the single-page app (SPA) in the background.
 Once the client-side code is ready,
 the client takes over and the website becomes a SPA.
 
+前后端分离是一种进步，但彻底的分离，也不尽善尽美，
+比如会有首屏加载速度和 SEO 方面的困扰。
+前后端分离+服务端首屏渲染看起来是个更优的方案，
+它结合了前后端分离和服务端渲染两者的优点，
+既做到了前后端分离，又能保证首页渲染速度，还有利于 SEO。
+
 ### Pros of SSR
 
 #### Performance
