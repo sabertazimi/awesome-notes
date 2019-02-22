@@ -137,6 +137,7 @@
     - [DOM HTML](#dom-html)
     - [DOM Style](#dom-style)
     - [DOM Events](#dom-events)
+      - [Tab Visibility Event](#tab-visibility-event)
       - [Mouse Events](#mouse-events)
       - [Key Events](#key-events)
       - [Frame Events](#frame-events)
@@ -2336,6 +2337,43 @@ function addClass(element, value) {
 ```
 
 ### DOM Events
+
+#### Tab Visibility Event
+
+- 切换标签页时改变网页标题/声音/视频
+
+```js
+window.addEventListener('visibilitychange', () => {
+  switch(document.visibilityState) {
+    case 'hidden':
+      console.log('Tab隐藏');
+      break;
+    case 'visible':
+      console.log('Tab被聚焦');
+      break;
+  }
+});
+```
+
+```js
+const videoElement = document.getElementById("videoElement");
+
+// Autoplay the video if application is visible
+if (document.visibilityState == "visible") {
+  videoElement.play();
+}
+
+// Handle page visibility change events
+function handleVisibilityChange() {
+  if (document.visibilityState == "hidden") {
+    videoElement.pause();
+  } else {
+    videoElement.play();
+  }
+}
+
+document.addEventListener('visibilitychange', handleVisibilityChange, false);
+```
 
 #### Mouse Events
 
