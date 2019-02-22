@@ -198,6 +198,7 @@
     - [Basic Usage](#basic-usage)
     - [Canvas Performance](#canvas-performance)
     - [Canvas Reference](#canvas-reference)
+  - [Gamepad API](#gamepad-api)
   - [Awesome Libraries](#awesome-libraries)
     - [Persistence/Storage/Store](#persistencestoragestore)
     - [File Uploader](#file-uploader)
@@ -3659,6 +3660,33 @@ const ctx = canvas.getContext('2d', { alpha: false });
 - [Canvas Perf Tips 1](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
 - [Canvas Perf Tips 2](https://www.html5rocks.com/en/tutorials/canvas/performance/)
 - [Canvas Deep Live](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
+
+## Gamepad API
+
+[Gamepad API Tutorials](https://developer.mozilla.org/zh-CN/docs/Games/Techniques/Controls_Gamepad_API)
+
+```js
+const gamepads = {};
+
+function gamepadHandler(event, connecting) {
+  // gamepad === navigator.getGamepads()[gamepad.index]
+  const { gamepad } = event;
+
+  if (connecting) {
+    gamepads[gamepad.index] = gamepad;
+  } else {
+    delete gamepads[gamepad.index];
+  }
+}
+
+window.addEventListener("gamepadconnected", (e) => {
+  gamepadHandler(e, true);
+});
+
+window.addEventListener("gamepaddisconnected", (e) => {
+  gamepadHandler(e, false);
+});
+```
 
 ## Awesome Libraries
 
