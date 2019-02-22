@@ -3643,6 +3643,7 @@ const ctx = canvas.getContext('2d', { alpha: false });
 
 ### Form
 
+- [Promise Validator](https://github.com/poppinss/indicative)
 - [Async Validator](https://github.com/yiminghe/async-validator)
 - [Input Format](https://github.com/nosir/cleave.js)
 
