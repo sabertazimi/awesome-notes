@@ -3538,7 +3538,48 @@ function WebSocketTest()
 
 ## Web Workers API
 
-多线程处理
+- 多线程处理
+- 有两种方法可以停止 Worker:
+  从主页调用 `worker.terminate()` 或在 worker 内部调用 `self.close()`
+- 利用 [BroadcastChannel API](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel)
+  可以创建 Shared Worker, 即共享 Workers 在同一源 (origin) 下面的各种进程都可以访问它，
+  包括：iframes、浏览器中的不同 tab 页 (browsing context)
+- Web Workers 无法访问一些非常关键的 JavaScript 特性:
+  DOM(它会造成线程不安全), window 对象, document 对象, parent 对象.
+- Usecase: Graphic App (Ray Tracing), Encryption, Prefetching Data,
+  PWA (Service Worker), Spell Checking
+
+```html
+<button onclick="startComputation()">Start computation</button>
+
+<script>
+  const worker = new Worker('worker.js');
+
+  worker.addEventListener('message', function(e) {
+    console.log(e.data);
+  }, false);
+
+  function startComputation() {
+    worker.postMessage({'cmd': 'average', 'data': [1, 2, 3, 4]});
+  }
+</script>
+```
+
+```js
+// worker.js
+self.addEventListener('message', function(e) {
+  const data = e.data;
+  switch (data.cmd) {
+    case 'average':
+      const result = calculateAverage(data);
+      self.postMessage(result);
+      break;
+    default:
+      self.postMessage('Unknown command');
+  }
+}, false);
+```
+
 
 ## Web Animations API
 
