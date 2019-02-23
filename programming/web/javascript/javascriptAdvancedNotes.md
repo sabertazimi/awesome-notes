@@ -3338,6 +3338,7 @@ Progressive Web Apps:
 - offline
 - background
 - custom request to minimize network
+- [Notification API](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification)
 
 #### SW Costs
 

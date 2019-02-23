@@ -3580,7 +3580,6 @@ self.addEventListener('message', function(e) {
 }, false);
 ```
 
-
 ## Web Animations API
 
 - `KeyframeEffect`
