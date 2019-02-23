@@ -70,7 +70,7 @@
       - [fixed sidebar with flexbox](#fixed-sidebar-with-flexbox)
       - [Flexbox Best Practice](#flexbox-best-practice)
     - [Grid Patterns](#grid-patterns)
-      - [attention tips](#attention-tips)
+      - [Grid Attention Tips](#grid-attention-tips)
       - [Grid Alignment](#grid-alignment)
     - [分栏问题](#分栏问题)
       - [两栏布局](#两栏布局)
@@ -1247,7 +1247,35 @@ main {
 }
 ```
 
-#### attention tips
+*named* rows and columns
+
+```css
+.main {
+  display: grid;
+  grid-column-gap: 2rem;
+  grid-row-gap: 1rem;
+  grid-template-rows: [header] 100px [body] auto;
+  grid-template-columns:
+    [left-gutter] 1fr [sidebar] 4fr [content] 8fr [right-gutter] 1fr;
+}
+
+.header {
+  grid-row: header;
+  grid-column: sidebar / right-gutter;
+}
+
+.sidebar {
+  grid-row: body;
+  grid-column: sidebar;
+}
+
+.content {
+  grid-row: body;
+  grid-column: content;
+}
+```
+
+#### Grid Attention Tips
 
 - `grid-column` will refactor template of grid (`grid-template-columns`)
 - `grid-row` will refactor template of grid (`grid-template-rows`)
