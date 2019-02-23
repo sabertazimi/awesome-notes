@@ -1305,10 +1305,10 @@ Paint Order:
 ### Memory Leak
 
 - useless global vars (bind to window or document)
-- useless callback functions (e.g setInterval)
+- useless callback functions (e.g setInterval/setTimeout)
 - useless DOM reference
-- circular reference
 - closure
+- circular reference
 
 ### 禁用特性
 
@@ -2205,6 +2205,8 @@ const PageComponent = () => {
 
 #### Object Shape
 
+- [Shapes ICS](https://mathiasbynens.be/notes/shapes-ics)
+
 ```js
 // o1 and o2 have the same shape
 // JSObject(1, 2) => Shape('x', 'y')
@@ -2239,6 +2241,7 @@ array shape: Shape('length'), 'length' => 0 Offset, Writable
 V8 use ICs to memorize information (same shape) where to find properties on objects:
 
 - always initialize objects in the same way (generate the same shape)
+- don't add property to objects dynamically (invalid inline cache)
 - don't mess with property attributes of array elements
 
 #### V8 Perf Tools
