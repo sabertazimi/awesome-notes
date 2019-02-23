@@ -201,6 +201,7 @@
   - [Gamepad API](#gamepad-api)
   - [Awesome Libraries](#awesome-libraries)
     - [Persistence/Storage/Store](#persistencestoragestore)
+    - [Code Analysis](#code-analysis)
     - [File Uploader](#file-uploader)
     - [Alert](#alert)
     - [Form](#form)
@@ -3698,6 +3699,12 @@ window.addEventListener("gamepaddisconnected", (e) => {
 - [brownies](https://github.com/franciscop/brownies)
 - [store.js](https://github.com/marcuswestin/store.js)
 - [localForage](https://github.com/localForage/localForage)
+
+### Code Analysis
+
+- [Babel.js](https://github.com/babel/babel)
+- [AST Explorer](https://astexplorer.net)
+- [Codecrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
 
 ### File Uploader
 
