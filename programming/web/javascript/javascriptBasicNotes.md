@@ -151,7 +151,8 @@
       - [width/height](#widthheight)
       - [Window Height](#window-height)
       - [Scroll Size](#scroll-size)
-    - [left/top](#lefttop)
+      - [DOM left/top Property](#dom-lefttop-property)
+      - [Mutation Observer API](#mutation-observer-api)
   - [Ajax](#ajax)
     - [基本用法](#基本用法)
     - [简单封装](#简单封装)
@@ -2600,10 +2601,40 @@ if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
 }
 ```
 
-### left/top
+#### DOM left/top Property
 
 - offsetLeft/offsetTop: 表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent对象）左上角的距离
 - scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素大小
+
+#### Mutation Observer API
+
+如果文档中连续插入 1000 个 `<li>` 元素，就会连续触发 1000 个插入事件，
+执行每个事件的回调函数，这很可能造成浏览器的卡顿；
+而 Mutation Observer 完全不同，只在 1000 个段落都插入结束后才会触发，而且只触发一次.
+
+Mutation Observer有以下特点:
+
+- 它等待所有脚本任务完成后，才会运行，即采用异步方式
+- 它把 DOM 变动记录封装成一个数组进行处理，而不是一条条地个别处理 DOM 变动
+- 它即可以观察发生在 DOM 节点的所有变动，也可以观察某一类变动
+
+```js
+const mutationObserver = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    console.log(mutation);
+  });
+});
+
+// 开始侦听页面的根 HTML 元素中的更改。
+mutationObserver.observe(document.documentElement, {
+  attributes: true,
+  characterData: true,
+  childList: true,
+  subtree: true,
+  attributeOldValue: true,
+  characterDataOldValue: true
+});
+```
 
 ## Ajax
 
