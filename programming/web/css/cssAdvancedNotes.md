@@ -13,6 +13,7 @@
   - [Graceful Degration](#graceful-degration)
   - [CSS Houdini](#css-houdini)
   - [CSS Performance](#css-performance)
+    - [CSS Selectors](#css-selectors)
     - [CSS Triggers](#css-triggers)
     - [reset.css](#resetcss)
     - [will-change](#will-change)
@@ -123,6 +124,11 @@ CSS Houdini bring many API:
 to let developers enhance css without any browser updates
 
 ## CSS Performance
+
+### CSS Selectors
+
+减少选择器的复杂性，与构造样式本身的其他工作相比，
+选择器复杂性可以占用计算元素样式所需时间的50%以上
 
 ### CSS Triggers
 
