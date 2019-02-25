@@ -19,8 +19,8 @@
   - [Router](#router)
     - [Navigation Guards](#navigation-guards)
   - [Vue Library](#vue-library)
-    - [UI](#ui)
-      - [Drag and Drop](#drag-and-drop)
+    - [Drag and Drop](#drag-and-drop)
+    - [Scroller](#scroller)
 
 <!-- /TOC -->
 
@@ -758,8 +758,10 @@ data.a = 2; // setHook() get called
 
 ## Vue Library
 
-### UI
-
-#### Drag and Drop
+### Drag and Drop
 
 - [Drag and Drop Grid Layout](https://github.com/jbaysolutions/vue-grid-layout)
+
+### Scroller
+
+- [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
