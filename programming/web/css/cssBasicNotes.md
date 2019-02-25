@@ -146,6 +146,7 @@
     - [picture](#picture)
       - [圆形图片](#圆形图片)
     - [Animation Tips](#animation-tips)
+    - [Resizable Component](#resizable-component)
     - [Layout](#layout)
       - [相同单元](#相同单元)
       - [元素定位](#元素定位)
@@ -2340,7 +2341,31 @@ a.btn-custom {
 
 ### Animation Tips
 
-切换动画时, 需要先把之前的动画清楚(防止出现闪烁 Bug )
+切换动画时, 需要先把之前的动画清除
+(防止出现闪烁 Bug )
+
+### Resizable Component
+
+[Codepen Demo](https://codepen.io/ZeroX-DG/pen/vjdoYe)
+
+```js
+bottom-right:
+  new_width = element_original_width + (mouseX - original_mouseX)
+  new_height = element_original_height + (mouseY - original_mouseY)
+bottom-left:
+  new_width = element_original_width - (mouseX - original_mouseX)
+  new_height = element_original_height + (mouseY - original_mouseY)
+  new_x = element_original_x - (mouseX - original_mouseX)
+top-right:
+  new_width = element_original_width + (mouseX - original_mouseX)
+  new_height = element_original_height - (mouseY - original_mouseY)
+  new_y = element_original_y + (mouseY - original_mouseY)
+top-left:
+  new_width = element_original_width - (mouseX - original_mouseX)
+  new_height = element_original_height - (mouseY - original_mouseY)
+  new_x = element_original_x + (mouseX - original_mouseX)
+  new_y = element_original_y + (mouseY - original_mouseY)
+```
 
 ### Layout
 
