@@ -76,7 +76,7 @@
     - [Data to View](#data-to-view)
     - [Chat](#chat)
     - [UI](#ui)
-      - [Big Data](#big-data)
+      - [List Virtualization](#list-virtualization)
       - [Animation](#animation)
       - [Charts](#charts)
       - [Search Bar](#search-bar)
@@ -1278,6 +1278,7 @@ class Frameworks extends React.Component {
 - Immutable.js
 - Isomorphic rendering
 - Webpack bundle analyzer
+- [Progressive React](https://houssein.me/progressive-react)
 
 ### Rerendering Problem
 
@@ -1595,7 +1596,6 @@ npx create-react-app app-name --scripts-version @sabertazimi/react-scripts --use
 ### Boilerplate
 
 - [Create React App](https://github.com/facebook/create-react-app)
-- [Custom React Scripts](https://auth0.com/blog/how-to-configure-create-react-app/)
 - [nwb - React Component Boilerplate](https://github.com/insin/nwb)
 - [Neutrino.js - More Customizable Boilerplate](https://github.com/neutrinojs/neutrino)
 
@@ -1632,7 +1632,7 @@ npx create-react-app app-name --scripts-version @sabertazimi/react-scripts --use
 
 - [React Material UI](https://github.com/callemall/material-ui)
 
-#### Big Data
+#### List Virtualization
 
 - [Large Data List/Table/Scroller](https://github.com/bvaughn/react-virtualized)
 
