@@ -210,6 +210,11 @@ npm outdated
 ### Link Command
 
 ```bash
+cd path/to/my-project
+npm link path/to/my-utils
+```
+
+```bash
 # in local B package, build local B binary (npm install -g B)
 npm link
 # in local A package, set `B` link in package.json to local B binary
