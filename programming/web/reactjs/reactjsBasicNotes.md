@@ -1580,6 +1580,7 @@ export default Intl;
 ### Boilerplate
 
 - [Create React App](https://github.com/facebook/create-react-app)
+- [Custom React Scripts](https://auth0.com/blog/how-to-configure-create-react-app/)
 - [nwb - React Component Boilerplate](https://github.com/insin/nwb)
 - [Neutrino.js - More Customizable Boilerplate](https://github.com/neutrinojs/neutrino)
 
@@ -1618,7 +1619,7 @@ export default Intl;
 
 #### Big Data
 
-- [Large Data - List/Table/Scroll](https://github.com/bvaughn/react-virtualized)
+- [Large Data List/Table/Scroller](https://github.com/bvaughn/react-virtualized)
 
 #### Animation
 
