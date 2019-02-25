@@ -21,6 +21,7 @@
   - [Vue Library](#vue-library)
     - [Drag and Drop](#drag-and-drop)
     - [Scroller](#scroller)
+    - [Loading](#loading)
 
 <!-- /TOC -->
 
@@ -765,3 +766,7 @@ data.a = 2; // setHook() get called
 ### Scroller
 
 - [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
+
+### Loading
+
+- [Vue Skeleton](https://github.com/egoist/vue-content-loader)
