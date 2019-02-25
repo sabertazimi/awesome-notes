@@ -65,6 +65,8 @@
     - [Internationalization](#internationalization)
       - [Simple Intl](#simple-intl)
   - [Testing](#testing)
+  - [Create React App](#create-react-app)
+    - [React Scripts](#react-scripts)
   - [React Library](#react-library)
     - [Boilerplate](#boilerplate)
     - [Solution and Framework](#solution-and-framework)
@@ -1571,6 +1573,19 @@ export default Intl;
 
 - [Complete Tutorial](https://www.robinwieruch.de/react-testing-tutorial/#react-enzyme-test-setup)
 - [Cypress - Testing Framework](https://www.cypress.io/)
+
+## Create React App
+
+- [Custom React Scripts](https://auth0.com/blog/how-to-configure-create-react-app/)
+
+```js
+npx create-react-app app-name --scripts-version @sabertazimi/react-scripts --use-npm
+```
+
+### React Scripts
+
+- HTML/CSS/JSX boilerplate in `template/` directory
+- config in `config/` directory
 
 ## React Library
 
