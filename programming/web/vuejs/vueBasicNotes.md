@@ -18,6 +18,9 @@
     - [Virtual DOM Diff and Patch](#virtual-dom-diff-and-patch)
   - [Router](#router)
     - [Navigation Guards](#navigation-guards)
+  - [Vue Library](#vue-library)
+    - [UI](#ui)
+      - [Drag and Drop](#drag-and-drop)
 
 <!-- /TOC -->
 
@@ -752,3 +755,11 @@ data.a = 2; // setHook() get called
 ### Navigation Guards
 
 - [Offical Documentation of Router Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html)
+
+## Vue Library
+
+### UI
+
+#### Drag and Drop
+
+- [Drag and Drop Grid Layout](https://github.com/jbaysolutions/vue-grid-layout)
