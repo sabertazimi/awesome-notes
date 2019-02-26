@@ -67,6 +67,7 @@
   - [Testing](#testing)
   - [Create React App](#create-react-app)
     - [React Scripts](#react-scripts)
+    - [Deployment](#deployment)
   - [React Library](#react-library)
     - [Boilerplate](#boilerplate)
     - [Solution and Framework](#solution-and-framework)
@@ -1588,6 +1589,11 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 
 - HTML/CSS/JSX boilerplate in `template/` directory
 - config in `config/` directory
+
+### Deployment
+
+- [Offical Documentation](https://facebook.github.io/create-react-app/docs/deployment)
+- [Deploy Subdirectory](https://medium.com/@svinkle/how-to-deploy-a-react-app-to-a-subdirectory-f694d46427c1)
 
 ## React Library
 
