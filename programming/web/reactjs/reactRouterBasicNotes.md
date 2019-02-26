@@ -13,6 +13,7 @@
     - [Clean URLs](#clean-urls)
     - [Change Route](#change-route)
   - [Deployment](#deployment)
+    - [Relative Path](#relative-path)
     - [Webpack Dev Server](#webpack-dev-server)
     - [Express Config](#express-config)
     - [Nginx Config](#nginx-config)
@@ -190,6 +191,34 @@ export default withRouter(Login);
 ```
 
 ## Deployment
+
+### Relative Path
+
+```js
+<ConnectedRouter history={history} basename='/react-boilerplate'>
+  <Fragment>
+    <Switch>
+      <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
+      <Route path={`${process.env.PUBLIC_URL}/about`} component={About} />
+      <Route
+        path={`${process.env.PUBLIC_URL}/404`}
+        render={() => (<Redirect to={`${process.env.PUBLIC_URL}/`} />)}
+      />
+    </Switch>
+  </Fragment>
+</ConnectedRouter>
+
+const Header = () => (
+  <div>
+    <NavLink to={`${process.env.PUBLIC_URL}/`}>
+      Home
+    </NavLink>
+    <NavLink to={`${process.env.PUBLIC_URL}/about`}>
+      About
+    </NavLink>
+  </div>
+);
+```
 
 ### Webpack Dev Server
 
