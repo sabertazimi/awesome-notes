@@ -1581,6 +1581,7 @@ export default Intl;
 
 ```js
 npx create-react-app app-name --scripts-version @sabertazimi/react-scripts --use-npm
+npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-npm
 ```
 
 ### React Scripts
