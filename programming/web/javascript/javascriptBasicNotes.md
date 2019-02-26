@@ -212,6 +212,7 @@
     - [SVG](#svg)
     - [Clipboard](#clipboard)
     - [Animation](#animation)
+    - [Slides](#slides)
 
 <!-- /TOC -->
 
@@ -3818,3 +3819,7 @@ window.addEventListener("gamepaddisconnected", (e) => {
 - [Popmotion](https://github.com/popmotion/popmotion)
 - [Typed.js](https://github.com/mattboldt/typed.js/)
 - [Scroll Magic](https://github.com/janpaepke/ScrollMagic)
+
+### Slides
+
+- [MDX Deck](https://github.com/jxnblk/mdx-deck)
