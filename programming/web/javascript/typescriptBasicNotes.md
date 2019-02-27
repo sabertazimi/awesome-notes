@@ -849,7 +849,8 @@ function area(s: Shape) {
 
 ## Intersection Types
 
-extend 是一种非常常见的模式
+extend 是一种非常常见的模式,
+intersection type 具有所有类型的功能
 
 ```js
 function extend<T, U>(first: T, second: U): T & U {
@@ -871,6 +872,51 @@ const x = extend({ a: 'hello' }, { b: 42 });
 // 现在 x 拥有了 a 属性与 b 属性
 const a = x.a;
 const b = x.b;
+```
+
+`connect` in React
+
+```js
+import * as React from 'react'
+import * as Redux from 'redux'
+
+import { MyReduxState } from './my-root-reducer.ts'
+
+export interface OwnProps {
+  propFromParent: number
+}
+
+interface StateProps {
+  propFromReduxStore: string
+}
+
+interface DispatchProps {
+  onSomeEvent: () => void
+}
+
+type Props = StateProps & DispatchProps & OwnProps
+
+interface State {
+  internalComponentStateField: string
+}
+
+class MyComponent extends React.Component<Props, State> {
+  ...
+}
+
+function mapStateToProps(state: MyReduxState, ownProps: OwnProps): StateProps {
+  ...
+}
+
+function mapDispatchToProps(
+  dispatch: Redux.Dispatch<any>,
+  ownProps: OwnProps
+): DispatchProps {
+  ...
+}
+  
+export default connect<StateProps, DispatchProps, OwnProps>
+  (mapStateToProps, mapDispatchToProps)(MyComponent)
 ```
 
 ## Mixins
