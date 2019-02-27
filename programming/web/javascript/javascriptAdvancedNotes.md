@@ -2109,6 +2109,8 @@ reduce image transfer sizes by average of ~20%
 
 ### Data Loading
 
+- [Resources Priority](https://developers.google.com/web/fundamentals/performance/resource-prioritization)
+
 #### Data Preloading
 
 ```js
