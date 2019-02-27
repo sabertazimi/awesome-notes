@@ -203,6 +203,7 @@
   - [Awesome Libraries](#awesome-libraries)
     - [Persistence/Storage/Store](#persistencestoragestore)
     - [Code Analysis](#code-analysis)
+    - [Code Optimizer](#code-optimizer)
     - [File Uploader](#file-uploader)
     - [Alert](#alert)
     - [Form](#form)
@@ -3777,6 +3778,10 @@ window.addEventListener("gamepaddisconnected", (e) => {
 - [Babel.js](https://github.com/babel/babel)
 - [AST Explorer](https://astexplorer.net)
 - [Codecrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
+
+### Code Optimizer
+
+- [JavaScript Obfuscator](https://github.com/javascript-obfuscator/javascript-obfuscator)
 
 ### File Uploader
 
