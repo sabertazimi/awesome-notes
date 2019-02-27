@@ -3116,6 +3116,16 @@ describe("Sum suite File", function() {
 #### console API
 
 ```js
+var devtools = /./;
+devtools.toString = function() {
+  this.opened = true;
+}
+
+console.log('%c', devtools);
+// devtools.opened will become true if/when the console is opened
+```
+
+```js
 console.log/info/warn/error
 console.dir/dirxml/table; // different output style
 console.assert;
