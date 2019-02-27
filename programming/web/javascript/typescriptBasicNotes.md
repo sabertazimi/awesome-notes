@@ -164,6 +164,8 @@ module.exports = {
 
 ## Modules
 
+- [Types Search](https://microsoft.github.io/TypeSearch/)
+
 ### globals.d.ts
 
 ```js
