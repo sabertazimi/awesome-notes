@@ -140,6 +140,7 @@
       - [select](#select)
     - [nav](#nav)
       - [基本原则](#基本原则)
+      - [Hidden Link](#hidden-link)
       - [awesome style](#awesome-style)
     - [button](#button)
     - [footer](#footer)
@@ -2265,8 +2266,9 @@ li {
 }
 
 a {
-    display: block;
+    display: inline-block;
     text-decoration: none;
+    cursor: pointer;
 }
 ```
 
@@ -2277,6 +2279,17 @@ ul {
 
 li {
   display: inline-block;
+}
+```
+
+#### Hidden Link
+
+```css
+a {
+  opacity: 0;
+  cursor: default;
+  pointer-events: none;
+  text-decoration: none;
 }
 ```
 
