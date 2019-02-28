@@ -2461,6 +2461,19 @@ body {
 }
 ```
 
+当两个 `width: 100%` slide 同时处于同一水平位置,
+添加左进/右进动画, 当 slide 向右滑动时,
+水平的 scrollX 会直接滑到最右边,
+导致幻灯片浏览异常.
+[解决办法](https://github.com/sabertazimi/hust-web/blob/master/css/target-slide/index.js)
+如下:
+
+```js
+const resetScollX = () => {
+  window.scrollTo(0, 0);
+};
+```
+
 ### Layout
 
 #### 相同单元
