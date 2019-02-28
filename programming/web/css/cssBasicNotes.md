@@ -856,7 +856,7 @@ visible,hidden,scroll,auto
 - ellipsis 省略号标志
 
 ```css
-.article-container {
+.truncation-article-container {
   width: 500px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1543,7 +1543,14 @@ h1 {
 
 #### background-attachment
 
-- parallax effect
+- `scroll`: scrolls with the main view, but stays fixed inside the local view
+- `local`: scrolls both with the main view and the local view
+- `fixed`: stays fixed no matter what
+- 对于可以滚动的元素 (设置为 `overflow: scroll` 的元素),
+  当 `background-attachment` 设置为 `scroll` 时, 背景图不会随元素内容的滚动而滚动
+- 对于可以滚动的元素 (设置为 `overflow: scroll` 的元素）,
+  设置 `background-attachment: local`, 则背景会随内容的滚动而滚动
+- parallax effect: `background-attachment: fixed`
 
 ```css
 background-attachment: scroll; /* 背景图相对于元素固定，背景随页面滚动而移动，即背景和内容绑定 */
