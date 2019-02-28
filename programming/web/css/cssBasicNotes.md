@@ -149,6 +149,7 @@
       - [圆形图片](#圆形图片)
     - [Animation Tips](#animation-tips)
     - [Resizable Component](#resizable-component)
+    - [Slides](#slides)
     - [Layout](#layout)
       - [相同单元](#相同单元)
       - [元素定位](#元素定位)
@@ -2389,6 +2390,48 @@ top-left:
   new_height = element_original_height - (mouseY - original_mouseY)
   new_x = element_original_x + (mouseX - original_mouseX)
   new_y = element_original_y + (mouseY - original_mouseY)
+```
+
+### Slides
+
+- `position: absolute` to stack slides up
+- `id` + `:target` for style current slide (change z-index)
+
+```html
+<main>
+  <section class="slide" id="slide1">
+    <a class="slide-link" href="#slide2">next</a>
+  </section>
+  <section class="slide" id="slide2">
+    <a class="slide-link" href="#slide1">prev</a>
+    <a class="slide-link" href="#slide3">next</a>
+  </section>
+  <section class="slide" id="slide3">
+    <a class="slide-link" href="#slide2">prev</a>
+    <a class="slide-link" href="#slide4">next</a>
+  </section>
+  <section class="slide" id="slide4">
+    <a class="slide-link" href="#slide3">prev</a>
+    <a class="slide-link" href="#slide5">next</a>
+  </section>
+  <section class="slide" id="slide5">
+    <a class="slide-link" href="#slide4">prev</a>
+  </section>
+</main>
+```
+
+```css
+.slide {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+}
+
+.slide:target {
+  z-index: 1;
+}
 ```
 
 ### Layout
