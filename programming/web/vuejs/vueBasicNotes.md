@@ -19,6 +19,7 @@
   - [Router](#router)
     - [Navigation Guards](#navigation-guards)
   - [Vue Library](#vue-library)
+    - [Documentation](#documentation)
     - [Drag and Drop](#drag-and-drop)
     - [Scroller](#scroller)
     - [Loading](#loading)
@@ -758,6 +759,10 @@ data.a = 2; // setHook() get called
 - [Offical Documentation of Router Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html)
 
 ## Vue Library
+
+### Documentation
+
+- [Vuepress](https://github.com/vuejs/vuepress)
 
 ### Drag and Drop
 
