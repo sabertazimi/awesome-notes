@@ -13,6 +13,7 @@
     - [Code Spliting](#code-spliting)
     - [Tree Shaking](#tree-shaking)
     - [Perf Profiling](#perf-profiling)
+    - [Commit Linter](#commit-linter)
   - [Reference](#reference)
 
 <!-- /TOC -->
@@ -130,6 +131,32 @@ npx webpack --mode production --profile --json > stats.json
 - [Optimize Helper](https://webpack.jakoblind.no/optimize/)
 - [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
 - [webpack-monitor](https://github.com/webpackmonitor/webpackmonitor)
+
+### Commit Linter
+
+```json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "src/**/*.scss": [
+      "stylelint --fix",
+      "git add"
+    ],
+    "src/**/*.css": [
+      "stylelint --fix",
+      "git add"
+    ]
+  },
+}
+```
 
 ## Reference
 
