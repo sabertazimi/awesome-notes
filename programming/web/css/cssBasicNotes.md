@@ -2396,6 +2396,9 @@ top-left:
 
 - `position: absolute` to stack slides up
 - `id` + `:target` for style current slide (change z-index)
+- add animation to slide change: (prev, current, next)
+  `.slide`, `.slide:target`, `.slide:target ~ slide`
+- add `overflow: hidden` to `body` when animation
 
 ```html
 <main>
@@ -2421,16 +2424,40 @@ top-left:
 ```
 
 ```css
+body {
+  overflow: hidden;   /* key 1 */
+}
+
 .slide {
   box-sizing: border-box;
-  position: absolute;
+  position: absolute; /* key 2 */
   width: 100%;
   height: 100vh;
+  z-index: 0;         /* key 3 */
+}
+
+.slide:target {
+  z-index: 1;         /* key 4 */
+}
+```
+
+```css
+/* Rotate Fade-In Animation */
+.slide {
   z-index: 0;
+  transform: rotate(90deg);
+  transform-origin: 0 0;
+  transition: transform 1s, opacity 0.8s;
 }
 
 .slide:target {
   z-index: 1;
+  transform: rotate(0deg);
+}
+
+.slide:target ~ section {
+  transform: rotate(-90deg);
+  opacity: 0;
 }
 ```
 
