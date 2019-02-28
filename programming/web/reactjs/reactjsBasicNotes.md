@@ -86,6 +86,7 @@
       - [Button](#button)
       - [Calendar](#calendar)
       - [Select](#select)
+      - [Terminal](#terminal)
     - [Debug/Test](#debugtest)
 
 <!-- /TOC -->
@@ -1678,6 +1679,10 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 #### Select
 
 - [React Select](https://github.com/JedWatson/react-select)
+
+#### Terminal
+
+- [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
 
 ### Debug/Test
 
