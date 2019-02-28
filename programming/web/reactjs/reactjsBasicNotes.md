@@ -76,18 +76,18 @@
     - [Data](#data)
     - [Data to View](#data-to-view)
     - [Chat](#chat)
-    - [UI](#ui)
-      - [List Virtualization](#list-virtualization)
-      - [Animation](#animation)
-      - [Charts](#charts)
-      - [Search Bar](#search-bar)
-      - [Scroll Bar](#scroll-bar)
-      - [Mouse](#mouse)
-      - [Button](#button)
-      - [Calendar](#calendar)
-      - [Select](#select)
-      - [Terminal](#terminal)
-    - [Debug/Test](#debugtest)
+    - [UI Framework](#ui-framework)
+    - [List Virtualization](#list-virtualization)
+    - [Animation](#animation)
+    - [Charts](#charts)
+    - [Search Bar](#search-bar)
+    - [Scroll Bar](#scroll-bar)
+    - [Mouse](#mouse)
+    - [Button](#button)
+    - [Calendar](#calendar)
+    - [Select](#select)
+    - [Terminal](#terminal)
+    - [Debug/Test Library](#debugtest-library)
 
 <!-- /TOC -->
 
@@ -1621,6 +1621,7 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 - [Docz](https://github.com/pedronauck/docz)
 - [Gatsby.js](https://github.com/gatsbyjs/gatsby)
 - [React Built In Editor](https://github.com/facebook/draft-js)
+- [Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
 
 ### Data
 
@@ -1636,55 +1637,55 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 
 - [Matrix](https://github.com/matrix-org/matrix-react-sdk)
 
-### UI
+### UI Framework
 
 - [React Material UI](https://github.com/callemall/material-ui)
 
-#### List Virtualization
+### List Virtualization
 
 - [Large Data List/Table/Scroller](https://github.com/bvaughn/react-virtualized)
 
-#### Animation
+### Animation
 
 - [React Spring](https://github.com/react-spring/react-spring)
 - [React Animation](https://github.com/FunctionFoundry/react-set-animate)
 - [React Particle Animation](https://github.com/transitive-bullshit/react-particle-animation)
 - [React Particle Button](https://github.com/transitive-bullshit/react-particle-effect-button)
 
-#### Charts
+### Charts
 
 - [React Chartjs](https://github.com/jhudson8/react-chartjs)
 
-#### Search Bar
+### Search Bar
 
 - [SearchKit](https://github.com/searchkit/searchkit)
 
-#### Scroll Bar
+### Scroll Bar
 
 - [React Scroll Box](https://github.com/smikhalevski/react-scroll-box)
 
-#### Mouse
+### Mouse
 
 - [React Draftjs](https://github.com/draft-js-plugins/draft-js-plugins)
 
-#### Button
+### Button
 
 - [Tiny Fab](https://github.com/dericgw/react-tiny-fab/)
 
-#### Calendar
+### Calendar
 
 - [Big Calendar](https://github.com/intljusticemission/react-big-calendar)
 - [React Calendar](https://github.com/moodydev/react-calendar)
 
-#### Select
+### Select
 
 - [React Select](https://github.com/JedWatson/react-select)
 
-#### Terminal
+### Terminal
 
 - [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
 
-### Debug/Test
+### Debug/Test Library
 
 - [React Testing Utilities](https://github.com/airbnb/enzyme)
 - [React Component hierachy](https://github.com/team-gryff/react-monocle)
