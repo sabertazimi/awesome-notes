@@ -1558,6 +1558,26 @@ background-attachment: fixed; /* 背景图相对于元素内容固定 */
 background-attachment: local; /* 背景图相对于视口固定，所以随页面滚动背景不动，相当于背景被设置在了 body 上 */
 ```
 
+```css
+/* parallax effect */
+body {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.parallax {
+  min-height: 60%;               /* key */
+  background-attachment: fixed;  /* key */
+  background-image: url('./images/bg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+```
+
 #### Background Best Practice
 
 ##### 单背景极简欢迎首页
