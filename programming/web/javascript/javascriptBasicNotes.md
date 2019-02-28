@@ -2343,6 +2343,11 @@ function addClass(element, value) {
 
 ### DOM Events
 
+For `click/keydown` events:
+
+- `event.prevetDefault()`
+- `event.stopPropagation()`
+
 #### Tab Visibility Event
 
 - 切换标签页时改变网页标题/声音/视频
