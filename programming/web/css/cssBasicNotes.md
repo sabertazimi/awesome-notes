@@ -123,7 +123,7 @@
       - [FLIP](#flip)
     - [Animation Examples](#animation-examples)
       - [Accordion Menu Animation](#accordion-menu-animation)
-        - [Slider Animation](#slider-animation)
+      - [Slides Animation](#slides-animation)
   - [Responsive Desgin](#responsive-desgin)
     - [responsive font](#responsive-font)
     - [responsive length](#responsive-length)
@@ -1824,6 +1824,13 @@ filter: unset;
 ### animation helper
 
 - opacity
+- `overflow: hidden`
+- pseudo elements (::before and ::after)
+- pseudo elements with animation
+  (opacity, scale, translate, width/height, margin, background-position)
+- :hover/:foucs/:target + animation/transform/transition
+- transform: scale/translate
+- animation-delay
 - width/height
 - max-width/max-height
 - margin
@@ -1833,13 +1840,6 @@ filter: unset;
 - background with multiple gradient
 - single box-shadow
 - multiple box-shadow
-- :hover/:foucs + animation/transform/transition
-- pseudo elements (::before and ::after)
-- pseudo elements with animation
-  (opacity, scale, translate, width/height, margin, background-position)
-- scale
-- translate
-- animation-delay
 
 ```css
 overflow: hidden;
@@ -2046,7 +2046,7 @@ div {
 }
 ```
 
-##### Slider Animation
+#### Slides Animation
 
 ```css
 .slide {
