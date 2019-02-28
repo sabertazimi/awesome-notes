@@ -96,6 +96,7 @@
       - [(moz/webkit)background-clip](#mozwebkitbackground-clip)
       - [(moz/webkit)background-origin](#mozwebkitbackground-origin)
       - [background-size](#background-size)
+      - [background-attachment](#background-attachment)
       - [Background Best Practice](#background-best-practice)
         - [单背景极简欢迎首页](#单背景极简欢迎首页)
     - [text](#text)
@@ -1539,6 +1540,16 @@ h1 {
 
 - contain
 - cover
+
+#### background-attachment
+
+- parallax effect
+
+```css
+background-attachment: scroll; /* 背景图相对于元素固定，背景随页面滚动而移动，即背景和内容绑定 */
+background-attachment: fixed; /* 背景图相对于元素内容固定 */
+background-attachment: local; /* 背景图相对于视口固定，所以随页面滚动背景不动，相当于背景被设置在了 body 上 */
+```
 
 #### Background Best Practice
 
