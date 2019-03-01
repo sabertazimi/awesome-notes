@@ -23,6 +23,7 @@
     - [Animation](#animation)
       - [Best Practice](#best-practice)
       - [Animation Internal](#animation-internal)
+  - [CSS Hacks](#css-hacks)
   - [Custom Bootstrap Theme](#custom-bootstrap-theme)
     - [Webpack Setup](#webpack-setup)
     - [Useful CSS Presets](#useful-css-presets)
@@ -270,6 +271,86 @@ window.requestAnimationFrame(step);
 - `cursor`/`z-index`/`transform`/`opacity` in `Composite Layers` stage
 - `top`/`left` has very large time to `paint` each frame
 
+## CSS Hacks
+
+- [Browser Hacks](https://github.com/4ae9b8/browserhacks)
+
+```css
+/***** Selector Hacks ******/
+
+/* IE6 and below */
+* html #uno  { color: red }
+
+/* IE7 */
+*:first-child+html #dos { color: red }
+
+/* IE7, FF, Saf, Opera  */
+html>body #tres { color: red }
+
+/* IE8, FF, Saf, Opera (Everything but IE 6,7) */
+html>/**/body #cuatro { color: red }
+
+/* Opera 9.27 and below, safari 2 */
+html:first-child #cinco { color: red }
+
+/* Safari 2-3 */
+html[xmlns*=""] body:last-child #seis { color: red }
+
+/* safari 3+, chrome 1+, opera9+, ff 3.5+ */
+body:nth-of-type(1) #siete { color: red }
+
+/* safari 3+, chrome 1+, opera9+, ff 3.5+ */
+body:first-of-type #ocho {  color: red }
+
+/* saf3+, chrome1+ */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+ #diez  { color: red  }
+}
+
+/* iPhone / mobile webkit */
+@media screen and (max-device-width: 480px) {
+ #veintiseis { color: red  }
+}
+
+/* Safari 2 - 3.1 */
+html[xmlns*=""]:root #trece  { color: red  }
+
+/* Safari 2 - 3.1, Opera 9.25 */
+*|html[xmlns*=""] #catorce { color: red  }
+
+/* Everything but IE6-8 */
+:root *> #quince { color: red  }
+
+/* IE7 */
+*+html #dieciocho {  color: red }
+
+/* Firefox only. 1+ */
+#veinticuatro,  x:-moz-any-link  { color: red }
+
+/* Firefox 3.0+ */
+#veinticinco,  x:-moz-any-link, x:default  { color: red  }
+
+/***** Attribute Hacks ******/
+
+/* IE6 */
+#once { _color: blue }
+
+/* IE6, IE7 */
+#doce { *color: blue; /* or #color: blue */ }
+
+/* Everything but IE6 */
+#diecisiete { color/**/: blue }
+
+/* IE6, IE7, IE8 */
+#diecinueve { color: blue\9; }
+
+/* IE7, IE8 */
+#veinte { color/*\**/: blue\9; }
+
+/* IE6, IE7 -- acts as an !important */
+#veintesiete { color: blue !ie; } /* string after ! can be anything */
+```
+
 ## Custom Bootstrap Theme
 
 ### Webpack Setup
@@ -508,3 +589,4 @@ Some useful best practices:
 - `label` are set to `display: inline-block` to allow margin
 - `textarea` are modified to only be resizable vertically `resize: vertical`
   as horizontal resizing often “breaks” page layout
+- `summary` are set to `cursor: pointer`
