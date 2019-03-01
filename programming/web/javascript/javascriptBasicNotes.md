@@ -2415,6 +2415,15 @@ ondbclick
 onmouse-down/move/enter/out/leave/over
 ```
 
+[drag event](https://developer.mozilla.org/en-US/docs/Web/API/Document/drag_event):
+
+- dragstart
+- dragend
+- dragover
+- dragenter
+- dragleave
+- drop
+
 #### Key Events
 
 `onkeypress/up/down`
