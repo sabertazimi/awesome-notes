@@ -239,6 +239,12 @@ $x: 1;
 @import 'variables';
 ```
 
+`~` to import scss from `node_modules`
+
+```scss
+@import '~bootstrap/scss/bootstrap';
+```
+
 #### extend
 
 `@extend` is basically about moving selectors around:
