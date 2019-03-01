@@ -385,6 +385,9 @@ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks p
 
 ### reflog
 
+`git reflog show` is an alias for
+`git log -g --abbrev-commit --pretty=oneline`.
+
 ```bash
 git reflog
 git reset HEAD@{index}
@@ -1015,11 +1018,23 @@ git clone -b branch_name repo_url
 
 #### git difftool
 
-外置diff工具
+外置 diff 工具
 
 #### git commit
 
 #### git reset
+
+```bash
+git reset $(git merge-base master $(git rev-parse --abbrev-ref HEAD))
+```
+
+- `git rev-parse --abbrev-rev HEAD`
+  will return the name of the branch currently on
+- `git merge-base master $(name of your branch)`
+  will find the best common ancestor between master and current branch
+- `git reset $(hash of the branch creation)`
+  will undo all the commits, merges, rebases
+  (preserving changes to the code)
 
 #### git rm
 
