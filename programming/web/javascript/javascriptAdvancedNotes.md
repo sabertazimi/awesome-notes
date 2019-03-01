@@ -2152,9 +2152,9 @@ window.addEventListener('scroll', function(event) {
 
 - `defer`: downloads the script while the document is still parsing,
   but waits until the document has finished parsing before executing it
-  (in order)
+  (**in order**)
 - `async`: downloads the script during parsing the document,
-  but will pause the parser to execute the script
+  but will **pause** the parser to execute the script
 - If the scripts rely on each other, use defer
 - If the script is independent, use async
 
