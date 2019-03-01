@@ -19,6 +19,7 @@
     - [blockquote](#blockquote)
     - [pre](#pre)
   - [Head Tag](#head-tag)
+    - [Favicon](#favicon)
   - [Form](#form)
     - [validate](#validate)
     - [novalidate](#novalidate)
@@ -306,6 +307,14 @@ but so can every `<article>` and `<section>` element
 ## Head Tag
 
 - [Meta Data in `head`](https://gethead.info/)
+
+### Favicon
+
+```html
+<head>
+  <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+</head>
+```
 
 ## Form
 
