@@ -137,6 +137,7 @@
     - [DOM HTML](#dom-html)
     - [DOM Style](#dom-style)
     - [DOM Events](#dom-events)
+      - [Global DOM Event](#global-dom-event)
       - [Tab Visibility Event](#tab-visibility-event)
       - [Mouse Events](#mouse-events)
       - [Key Events](#key-events)
@@ -2347,6 +2348,21 @@ For `click/keydown` events:
 
 - `event.prevetDefault()`
 - `event.stopPropagation()`
+
+#### Global DOM Event
+
+DOMContentLoaded:
+
+- 当文档中没有脚本时, 浏览器解析完文档便能触发 DOMContentLoaded 事件
+- 如果文档中包含脚本, 则脚本会阻塞文档的解析,
+  而脚本需要等 CSSOM 构建完成才能执行
+- 在任何情况下, DOMContentLoaded 的触发不需要等待图片等其他资源加载完成
+
+```js
+document.addEventListener('DOMContentLoaded', (event) => {
+  console.log('DOM fully loaded and parsed.');
+});
+```
 
 #### Tab Visibility Event
 
