@@ -1901,6 +1901,38 @@ size animation will start from bottom-right corner).
 }
 ```
 
+With `transition: opacity 0.5s` set,
+fisrt add `.opacity-0` class,
+then replace it with `.opacity-1` class.
+Transition animation get trigger
+as css style of element changed (class changed).
+
+```css
+.element {
+  transition: opacity 0.5s;
+}
+
+/* before-enter -> enter -> before-leave -> leave */
+.enter,
+.before-leave {
+  opacity: 1;
+}
+
+.leave,
+.before-enter {
+  opacity: 0;
+}
+```
+
+```js
+div.classList.add('before-enter');
+
+setTimeout(() => {
+  div.classList.remove('before-enter');
+  div.classList.add('enter');
+}, 20);
+```
+
 ### transform
 
 - scale/X/Y/Z/3d(): 0 - n
