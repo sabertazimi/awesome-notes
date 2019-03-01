@@ -138,6 +138,8 @@
     - [设备特性](#设备特性)
       - [Style for Print PDF](#style-for-print-pdf)
   - [常用组件 (Awesome Demo)](#常用组件-awesome-demo)
+    - [Landing Page](#landing-page)
+    - [Modal](#modal)
     - [Flexiable Heading](#flexiable-heading)
     - [Table](#table)
     - [form](#form)
@@ -1044,6 +1046,19 @@ position
 }
 ```
 
+```css
+.fullscreen-video {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  background-size: cover;
+  overflow: hidden;
+  z-index: -100;
+}
+```
+
 #### fixed
 
 - 使元素想对于 浏览器窗口 布局, 但不受滑动条影响
@@ -1552,6 +1567,16 @@ h1 {
 
 - contain
 - cover
+- useful for `images` and `video`
+
+```css
+.video {
+  min-width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  overflow: hidden;
+}
+```
 
 #### background-attachment
 
@@ -2345,6 +2370,61 @@ use `inline-box` with `width`
 - [PDF Style Tutorial](https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/)
 
 ## 常用组件 (Awesome Demo)
+
+### Landing Page
+
+```css
+h1 {
+  background-image: url(bg.jpg);
+  background-clip: text;
+}
+```
+
+```css
+.jumbotron {
+  min-height: 100%;
+  background-image: url("");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+}
+```
+
+```css
+.fullscreen-video {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  background-size: cover;
+  overflow: hidden;
+  z-index: -100;
+}
+```
+
+```css
+.parallax {
+  min-height: 60%;               /* key */
+  background-attachment: fixed;  /* key */
+  background-image: url('./images/bg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+```
+
+### Modal
+
+```css
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+```
 
 ### Flexiable Heading
 
