@@ -966,6 +966,14 @@ export function trapTabKey(e, context) {
 
 ### ARIA
 
+- `aria-label`
+- `aria-labelledby="dropdownMenuButton"`
+- `aria-disabled="true"`: disable element
+- `aria-controls="navbarSupportedContent"`
+- `aria-expanded="false"`: dropdown
+- `aria-haspopup="true"`: dropdown/popup
+- `aria-current="pages`: breadcrumb
+
 ```html
 <button class="list-expander" aria-expanded="false"
 aria-controls="expandable-list-1">Expand List</button>
