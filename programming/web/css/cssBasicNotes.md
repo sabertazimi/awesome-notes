@@ -122,10 +122,6 @@
       - [backface-visibility](#backface-visibility)
     - [animation](#animation)
       - [FLIP](#flip)
-    - [Animation Examples](#animation-examples)
-      - [Fade with Class](#fade-with-class)
-      - [Accordion Menu Animation](#accordion-menu-animation)
-      - [Slides Animation](#slides-animation)
   - [Responsive Desgin](#responsive-desgin)
     - [responsive font](#responsive-font)
     - [responsive length](#responsive-length)
@@ -142,17 +138,20 @@
     - [Modal](#modal)
     - [Flexiable Heading](#flexiable-heading)
     - [Table](#table)
-    - [form](#form)
-      - [select](#select)
-    - [nav](#nav)
+    - [Form](#form)
+      - [Select](#select)
+    - [Navigation](#navigation)
       - [基本原则](#基本原则)
       - [Hidden Link](#hidden-link)
-      - [awesome style](#awesome-style)
-    - [button](#button)
-    - [footer](#footer)
-    - [picture](#picture)
+      - [Awesome Navigation Style](#awesome-navigation-style)
+    - [Button](#button)
+    - [Footer](#footer)
+    - [Picture](#picture)
       - [圆形图片](#圆形图片)
     - [Animation Tips](#animation-tips)
+      - [Fade with Class](#fade-with-class)
+      - [Accordion Menu Animation](#accordion-menu-animation)
+      - [Slides Animation](#slides-animation)
     - [Resizable Component](#resizable-component)
     - [Slides](#slides)
     - [Layout](#layout)
@@ -190,10 +189,10 @@
     - [Graph/Chart](#graphchart)
       - [Graph](#graph)
       - [Chart](#chart)
-    - [Form](#form)
+    - [Form Library](#form-library)
       - [Input](#input)
       - [Search Bar](#search-bar)
-      - [Select](#select)
+      - [Select Library](#select-library)
       - [Validate](#validate)
     - [Layout Component](#layout-component)
       - [Page](#page)
@@ -2131,135 +2130,6 @@ div {
 }
 ```
 
-### Animation Examples
-
-#### Fade with Class
-
-```css
-.enter,
-.leave {
-  transition: opacity 0.5s;
-}
-
-.before-enter,
-.leave {
-  opacity: 0;
-}
-
-.enter,
-.before-leave {
-  opacity: 1;
-}
-```
-
-```js
-function enter(el, done) {
-  el.classList.add('before-enter');
-
-  setTimeout(() => {
-    el.classList.remove('before-enter');
-    el.classList.add('enter');
-  }, 20);  
-
-  setTimeout(() => {
-    el.classList.remove('enter');
-    done();
-  }, 500);
-}
-
-function leave(el, done) {
-  el.classList.add('before-leave');
-
-  setTimeout(() => {
-    el.classList.remove('before-leave');
-    el.classList.add('leave');
-  }, 0);
-
-  setTimeout(() => {
-    el.classList.remove('leave');
-    done();
-  }, 500);
-}
-```
-
-#### Accordion Menu Animation
-
-```css
-.menu {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height, 0.3s;
-}
-
-.container:hover .menu,
-.menu:focus {
-  max-height: 1em;
-}
-```
-
-#### Slides Animation
-
-```css
-.slide {
-  width: 500%;
-  overflow: hidden;
-}
-
-@keyframes slide {
-  0% {
-    margin-left: 0;
-  }
-  10% {
-    margin-left: 0;
-  }
-  12% {
-    margin-left: -100%;
-  }
-  22% {
-    margin-left: -100%;
-  }
-  24% {
-    margin-left: -200%;
-  }
-  34% {
-    margin-left: -200%;
-  }
-  36% {
-    margin-left: -300%;
-  }
-  46% {
-    margin-left: -300%;
-  }
-  48% {
-    margin-left: -400%;
-  }
-  58% {
-    margin-left: -400%;
-  }
-  60% {
-    margin-left: -300%;
-  }
-  70% {
-    margin-left: -300%;
-  }
-  72% {
-    margin-left: -200%;
-  }
-  82% {
-    margin-left: -200%;
-  }
-  84% {
-    margin-left: -100%;
-  }
-  94% {
-    margin-left: -100%;
-  }
-  96% {
-    margin-left: 0;
-  }
-}
-```
-
 ## Responsive Desgin
 
 ### responsive font
@@ -2454,9 +2324,9 @@ h1::after {
 - `table-layout: fixed` to contain cells with same width
 - implement filter or pagination with `display: none` applied to `<tr>`
 
-### form
+### Form
 
-#### select
+#### Select
 
 ```css
 .custom-select {
@@ -2504,7 +2374,7 @@ h1::after {
 }
 ```
 
-### nav
+### Navigation
 
 #### 基本原则
 
@@ -2549,7 +2419,7 @@ a {
 }
 ```
 
-#### awesome style
+#### Awesome Navigation Style
 
 change bottom border
 
@@ -2581,7 +2451,7 @@ a:hover::after {
 }
 ```
 
-### button
+### Button
 
 - padding
 
@@ -2595,9 +2465,9 @@ a.btn-custom {
 }
 ```
 
-### footer
+### Footer
 
-### picture
+### Picture
 
 #### 圆形图片
 
@@ -2612,6 +2482,133 @@ a.btn-custom {
 
 切换动画时, 需要先把之前的动画清除
 (防止出现闪烁 Bug )
+
+#### Fade with Class
+
+```css
+.enter,
+.leave {
+  transition: opacity 0.5s;
+}
+
+.before-enter,
+.leave {
+  opacity: 0;
+}
+
+.enter,
+.before-leave {
+  opacity: 1;
+}
+```
+
+```js
+function enter(el, done) {
+  el.classList.add('before-enter');
+
+  setTimeout(() => {
+    el.classList.remove('before-enter');
+    el.classList.add('enter');
+  }, 20);  
+
+  setTimeout(() => {
+    el.classList.remove('enter');
+    done();
+  }, 500);
+}
+
+function leave(el, done) {
+  el.classList.add('before-leave');
+
+  setTimeout(() => {
+    el.classList.remove('before-leave');
+    el.classList.add('leave');
+  }, 0);
+
+  setTimeout(() => {
+    el.classList.remove('leave');
+    done();
+  }, 500);
+}
+```
+
+#### Accordion Menu Animation
+
+```css
+.menu {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height, 0.3s;
+}
+
+.container:hover .menu,
+.menu:focus {
+  max-height: 1em;
+}
+```
+
+#### Slides Animation
+
+```css
+.slide {
+  width: 500%;
+  overflow: hidden;
+}
+
+@keyframes slide {
+  0% {
+    margin-left: 0;
+  }
+  10% {
+    margin-left: 0;
+  }
+  12% {
+    margin-left: -100%;
+  }
+  22% {
+    margin-left: -100%;
+  }
+  24% {
+    margin-left: -200%;
+  }
+  34% {
+    margin-left: -200%;
+  }
+  36% {
+    margin-left: -300%;
+  }
+  46% {
+    margin-left: -300%;
+  }
+  48% {
+    margin-left: -400%;
+  }
+  58% {
+    margin-left: -400%;
+  }
+  60% {
+    margin-left: -300%;
+  }
+  70% {
+    margin-left: -300%;
+  }
+  72% {
+    margin-left: -200%;
+  }
+  82% {
+    margin-left: -200%;
+  }
+  84% {
+    margin-left: -100%;
+  }
+  94% {
+    margin-left: -100%;
+  }
+  96% {
+    margin-left: 0;
+  }
+}
+```
 
 ### Resizable Component
 
@@ -2896,7 +2893,7 @@ window.addEventListener('resize', () => {
 
 - [HTML5 Chart](https://github.com/chartjs/Chart.js)
 
-### Form
+### Form Library
 
 #### Input
 
@@ -2906,7 +2903,7 @@ window.addEventListener('resize', () => {
 
 - [React Search Bar](https://github.com/searchkit/searchkit)
 
-#### Select
+#### Select Library
 
 - [Awesome Chosen](https://github.com/harvesthq/chosen)
 
