@@ -2356,7 +2356,13 @@ DOMContentLoaded:
 - 当文档中没有脚本时, 浏览器解析完文档便能触发 DOMContentLoaded 事件
 - 如果文档中包含脚本, 则脚本会阻塞文档的解析,
   而脚本需要等 CSSOM 构建完成才能执行
+  - 在 DOM、CSSOM 构建完毕, `defer` 脚本执行完成之后, DOMContentLoaded 事件触发
+  - HTML 文档构建不受 `async` 脚本影响,
+    不需要等待 async 脚本执行与样式表加载,
+    HTML 解析完毕后, DOMContentLoaded 立即触发
 - 在任何情况下, DOMContentLoaded 的触发不需要等待图片等其他资源加载完成
+- 当 HTML 文档解析完成就会触发 DOMContentLoaded,
+  而所有资源加载完成之后, **load** 事件才会被触发
 
 ```js
 document.addEventListener('DOMContentLoaded', (event) => {
