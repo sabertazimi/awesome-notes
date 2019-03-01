@@ -1035,6 +1035,15 @@ position
 - display: `inline-table` computed to `table`
 - display: `inline`/`inline-block`/`table-*` computed to `block`
 
+```css
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+```
+
 #### fixed
 
 - 使元素想对于 浏览器窗口 布局, 但不受滑动条影响
