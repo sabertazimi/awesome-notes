@@ -106,6 +106,7 @@
       - [font-style](#font-style)
       - [font-variant](#font-variant)
       - [font-size-adjust](#font-size-adjust)
+      - [font-diplay](#font-diplay)
       - [custom function - @font-face](#custom-function---font-face)
       - [Font Best Practice](#font-best-practice)
     - [filter](#filter)
@@ -1656,6 +1657,39 @@ normal,small-caps(小型大写字母)
 
 - 使字体保持大小，不随字体类型改变而改变
 - 不同字体有不同的值(x-height/字体尺寸)
+
+#### font-diplay
+
+The font display timeline:
+
+- block period: font face is not loaded,
+  render an **invisible** fallback font face
+  (use normally when loaded in this period)
+- swap period: font face is not loaded,
+  render a fallback font face
+  (use normally when loaded in this period)
+- failure period: the user agent treats it as a failed load
+  causing normal font fallback
+
+`font-display` - how a font face is displayed based on
+whether and when it is downloaded and ready to use:
+
+- auto: font display strategy defined by the user agent
+- block: a short block period and an infinite swap period
+- swap: an extremely small block period and an infinite swap period
+- fallback: an extremely small block period and a short swap period
+- optional: an extremely small block period and no swap period
+
+```css
+@font-face {
+  font-family: ExampleFont;
+  src: url(/path/to/fonts/examplefont.woff) format('woff'),
+       url(/path/to/fonts/examplefont.eot) format('eot');
+  font-weight: 400;
+  font-style: normal;
+  font-display: fallback;
+}
+```
 
 #### custom function - @font-face
 
