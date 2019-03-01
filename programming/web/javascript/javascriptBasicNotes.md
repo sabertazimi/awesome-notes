@@ -3530,7 +3530,9 @@ function stopSound() {
 
 ## Web Storage API
 
-代替cookies
+- 协同 cookies
+- 对于复杂对象的读取与存储,
+  需要借助 `JSON.parse` 与 `JSON.stringify`
 
 ```js
 if(!localStorage.getItem('bgcolor')) {
