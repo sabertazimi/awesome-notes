@@ -51,6 +51,10 @@
     - [size](#size)
     - [state](#state)
     - [aniatmion](#aniatmion)
+  - [Custom Theme](#custom-theme)
+    - [Webpack Setup](#webpack-setup)
+    - [Useful Custom Functions](#useful-custom-functions)
+    - [Useful Custom Variables](#useful-custom-variables)
 
 <!-- /TOC -->
 
@@ -1160,3 +1164,190 @@ Cycles to the next item.
 - collapse
 - fade
 - in
+
+## Custom Theme
+
+### Webpack Setup
+
+```json
+{
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "cross-env NODE_ENV=development \
+      webpack-dev-server --port 2333 --mode development --open",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "lint": "stylelint ./src/**/*.scss ./src/**/*.css && \
+      eslint --ext .js --ext .jsx ./src"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "@babel/preset-env": "^7.3.1",
+    "autoprefixer": "^8.6.2",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
+    "clean-webpack-plugin": "^0.1.19",
+    "cross-env": "^5.2.0",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-loader": "^2.1.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.0",
+    "node-sass": "^4.11.0",
+    "postcss-loader": "^2.1.5",
+    "precss": "^4.0.0",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "stylelint": "^9.10.1",
+    "stylelint-config-mass": "^1.0.2",
+    "stylelint-webpack-plugin": "^0.10.5",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.6",
+    "webpack-dev-server": "^3.2.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.7"
+  }
+}
+```
+
+```js
+const path = require('path');
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+
+const packageJson = require('./package.json');
+
+const devMode = process.env.NODE_ENV !== 'production';
+const useSass = !!(packageJson.devDependencies['node-sass']);
+
+const styleLoader = [
+  devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+  {
+    loader: 'css-loader',
+    options: {
+      minimize: !devMode,
+    },
+  },
+  'postcss-loader',
+];
+
+if (useSass) {
+  styleLoader.push('sass-loader');
+}
+
+module.exports = {
+  entry: {
+    main: './src/index.js',
+  },
+  output: {
+    filename: '[name].[chunkhash].js',
+    path: path.resolve(__dirname, 'build'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: [
+          'babel-loader',
+          'eslint-loader',
+        ],
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              minimize: !devMode,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(css|scss)$/,
+        use: [...styleLoader],
+      },
+    ],
+  },
+  plugins: [
+    new CleanWebpackPlugin('build'),
+    new HtmlWebpackPlugin({
+      hash: true,
+      template: './src/index.html',
+      filename: './index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    }),
+    new StyleLintPlugin(),
+  ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  devtool: 'source-map',
+};
+```
+
+### Useful Custom Functions
+
+- `@import '~bootstrap/scss/functions';`
+- `@import '~bootstrap/scss/mixins';`
+
+```css
+@function color($key: 'blue') {
+  @return map-get($colors, $key);
+}
+
+@function theme-color($key: 'primary') {
+  @return map-get($theme-colors, $key);
+}
+
+@function gray($key: '100') {
+  @return map-get($grays, $key);
+}
+
+@function theme-color-level($color-name: 'primary', $level: 0) {
+  $color: theme-color($color-name);
+  $color-base: if($level > 0, #000, #fff);
+  $level: abs($level);
+
+  @return mix($color-base, $color, $level * $theme-color-interval);
+}
+
+/* color contrast: color-yiq(color) */
+.custom-element {
+  background-color: color-yiq(#000);
+  color: color-yiq(theme-color('dark'));
+}
+```
+
+### Useful Custom Variables
+
+- `@import '~bootstrap/scss/variables';`
+
+```css
+$theme-colors: (
+  'primary': #0074d9,
+  'danger': #ff4136
+  'secondary':#495057,
+  'success': #37b24d,
+  'info': #1c7ed6,
+  'warning': #f59f00,
+  'danger': #f03e3e,
+);
+```
