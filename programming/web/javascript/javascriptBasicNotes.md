@@ -2159,24 +2159,35 @@ if (document.implementation) {
 ### DOM Core
 
 ```js
-  document.createElement("nodeName");
-  document.createTextNode("String");
+document.createElement("nodeName");
+document.createTextNode("String");
 
-  cloneNode()
+cloneNode()
+node.remove()
 
-  parentElement.appendChild(childElement);
-  parentElement.insertBefore(newElement, targetElement);
+parentElement.appendChild(childElement);
+parentElement.insertBefore(newElement, targetElement);
+parentElement.removeChild()
+parentElement.replaceChild()
+parentElement.hasChildNode()
 
-  removeChild()
+setAttribute()
+getAttribute()
 
-  replaceChild()
+document.getElementById()
+document.getElementsByTagName()
+document.querySelector()
+document.querySelectorAll()
+```
 
-  setAttribute()
-  getAttribute()
-
-  getElementById()
-  getElementsByTagName()
-  hasChildNode()
+```js
+const showAlert = (type, message, duration = 3) {
+  const div = document.createElement('div');
+  div.className = type;
+  div.appendChild(document.createTextNode(message))
+  container.insertBefore(div, form);
+  setTimeout(() => div.remove(), duration * 1000);
+};
 ```
 
 #### dynamic creation
