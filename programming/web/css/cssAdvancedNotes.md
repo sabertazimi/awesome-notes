@@ -30,8 +30,9 @@
     - [Useful Custom Functions](#useful-custom-functions)
     - [Useful Custom Variables](#useful-custom-variables)
     - [Bootstrap Reboot Tips](#bootstrap-reboot-tips)
-    - [Custom Navbar](#custom-navbar)
     - [Custom Spacing](#custom-spacing)
+    - [Custom Navbar](#custom-navbar)
+    - [Custom Dropdown](#custom-dropdown)
 
 <!-- /TOC -->
 
@@ -597,15 +598,6 @@ Some useful best practices:
   as horizontal resizing often “breaks” page layout
 - `summary` are set to `cursor: pointer`
 
-### Custom Navbar
-
-```css
-$navbar-light-color: $violet-4;
-$navbar-light-hover-color: $violet-6;
-$navbar-light-active-color: $violet-9;
-$navbar-light-toggler-border-color: $violet-2;
-```
-
 ### Custom Spacing
 
 key variable - `$spacer`:
@@ -647,3 +639,16 @@ key variable - `$spacer`:
   margin-top: -0.25rem !important;
 }
 ```
+
+### Custom Navbar
+
+```css
+$navbar-light-color: $violet-4;
+$navbar-light-hover-color: $violet-6;
+$navbar-light-active-color: $violet-9;
+$navbar-light-toggler-border-color: $violet-2;
+```
+
+### Custom Dropdown
+
+custom `$dropdown-` variables
