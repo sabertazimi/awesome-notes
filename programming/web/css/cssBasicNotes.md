@@ -123,6 +123,7 @@
     - [animation](#animation)
       - [FLIP](#flip)
     - [Animation Examples](#animation-examples)
+      - [Fade with Class](#fade-with-class)
       - [Accordion Menu Animation](#accordion-menu-animation)
       - [Slides Animation](#slides-animation)
   - [Responsive Desgin](#responsive-desgin)
@@ -2065,6 +2066,55 @@ div {
 ```
 
 ### Animation Examples
+
+#### Fade with Class
+
+```css
+.enter,
+.leave {
+  transition: opacity 0.5s;
+}
+
+.before-enter,
+.leave {
+  opacity: 0;
+}
+
+.enter,
+.before-leave {
+  opacity: 1;
+}
+```
+
+```js
+function enter(el, done) {
+  el.classList.add('before-enter');
+
+  setTimeout(() => {
+    el.classList.remove('before-enter');
+    el.classList.add('enter');
+  }, 20);  
+
+  setTimeout(() => {
+    el.classList.remove('enter');
+    done();
+  }, 500);
+}
+
+function leave(el, done) {
+  el.classList.add('before-leave');
+
+  setTimeout(() => {
+    el.classList.remove('before-leave');
+    el.classList.add('leave');
+  }, 0);
+
+  setTimeout(() => {
+    el.classList.remove('leave');
+    done();
+  }, 500);
+}
+```
 
 #### Accordion Menu Animation
 
