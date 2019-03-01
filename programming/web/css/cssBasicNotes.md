@@ -747,14 +747,14 @@ a[title*=link] {text-decoration: underline;}
 - E :nth-child(n) 选择 E 的第 n 个孩子
 - E F:nth-child(n)：该选择器定位元素E的第n个子元素的元素F,可省略E
 - E F:nth-last-child(n)：该选择器定位元素E的倒数第n个子元素的元素F,可省略E
-- E F:nth-of-type(n)：该选择器定位元素E的第n个指定类型子元素,可省略E
-- E F:nth-lash-of-type(n)：该选择器定位元素E的导数第n个指定类型子元素,可省略E
-- E F:first-child
-- E F:last-child
-- E F:first-of-type
-- E F:last-of-type
-- E F:only-child
-- E F:only-of-type
+- E F:nth-of-type(n)：该选择器定位元素E的第n个 **相同类型** 子元素,可省略E
+- E F:nth-lash-of-type(n)：该选择器定位元素E的导数第n个 **相同类型** 子元素,可省略E
+- E F:first-child 第一个孩子
+- E F:last-child 最后一个孩子
+- E F:only-child 单一后代
+- E F:first-of-type **相同类型** 的第一个元素
+- E F:last-of-type **相同类型** 的最后一个元素
+- E F:only-of-type 孩子中只有一种该元素
 - E:empty：没有子元素的元素，没有子元素包括文本节点；
 - E:lang(en)：具有使用双字母缩写(en)表示的语言的元素；
 - E:not(exception)：该选择器将选择与括号内的选择器不匹配的元素：
