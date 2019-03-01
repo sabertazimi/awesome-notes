@@ -202,6 +202,7 @@
     - [Canvas Reference](#canvas-reference)
   - [Gamepad API](#gamepad-api)
   - [Awesome Libraries](#awesome-libraries)
+    - [Mouse](#mouse)
     - [Persistence/Storage/Store](#persistencestoragestore)
     - [Code Analysis](#code-analysis)
     - [Code Optimizer](#code-optimizer)
@@ -3801,6 +3802,10 @@ window.addEventListener("gamepaddisconnected", (e) => {
 ## Awesome Libraries
 
 - [Best of JS](https://bestofjs.org/)
+
+### Mouse
+
+- [interact.js - drag/drop/resizing/multi-touch](https://github.com/taye/interact.js)
 
 ### Persistence/Storage/Store
 
