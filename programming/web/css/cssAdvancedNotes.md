@@ -30,6 +30,8 @@
     - [Useful Custom Functions](#useful-custom-functions)
     - [Useful Custom Variables](#useful-custom-variables)
     - [Bootstrap Reboot Tips](#bootstrap-reboot-tips)
+    - [Custom Navbar](#custom-navbar)
+    - [Custom Spacing](#custom-spacing)
 
 <!-- /TOC -->
 
@@ -276,6 +278,7 @@ window.requestAnimationFrame(step);
 - [Browser Hacks](https://github.com/4ae9b8/browserhacks)
 
 ```css
+/* stylelint-disable */
 /***** Selector Hacks ******/
 
 /* IE6 and below */
@@ -349,6 +352,7 @@ html[xmlns*=""]:root #trece  { color: red  }
 
 /* IE6, IE7 -- acts as an !important */
 #veintesiete { color: blue !ie; } /* string after ! can be anything */
+/* stylelint-enable */
 ```
 
 ## Custom Bootstrap Theme
@@ -489,6 +493,8 @@ module.exports = {
 };
 ```
 
+- [Advanced Webpack Configuration](https://medium.com/@estherfalayi/setting-up-webpack-for-bootstrap-4-and-font-awesome-eb276e04aaeb)
+
 ### Useful CSS Presets
 
 - `@import '~bootstrap/scss/reboot`;
@@ -541,33 +547,33 @@ $theme-colors: (
   'danger': #f03e3e,
 );
 
-$enable-caret:                                true !default;
-$enable-rounded:                              true !default;
-$enable-shadows:                              false !default;
-$enable-gradients:                            false !default;
-$enable-transitions:                          true !default;
-$enable-prefers-reduced-motion-media-query:   true !default;
-$enable-grid-classes:                         true !default;
-$enable-pointer-cursor-for-buttons:           true !default;
-$enable-print-styles:                         true !default;
-$enable-responsive-font-sizes:                false !default;
-$enable-validation-icons:                     true !default;
-$enable-deprecation-messages:                 true !default;
+$enable-caret: true !default;
+$enable-rounded: true !default;
+$enable-shadows: false !default;
+$enable-gradients: false !default;
+$enable-transitions: true !default;
+$enable-prefers-reduced-motion-media-query: true !default;
+$enable-grid-classes: true !default;
+$enable-pointer-cursor-for-buttons: true !default;
+$enable-print-styles: true !default;
+$enable-responsive-font-sizes: false !default;
+$enable-validation-icons: true !default;
+$enable-deprecation-messages: true !default;
 
 $colors: (
-  "blue": $blue,
-  "indigo": $indigo,
-  "purple": $purple,
-  "pink": $pink,
-  "red": $red,
-  "orange": $orange,
-  "yellow": $yellow,
-  "green": $green,
-  "teal": $teal,
-  "cyan": $cyan,
-  "white": $white,
-  "gray": $gray-600,
-  "gray-dark": $gray-800
+  'blue': $blue,
+  'indigo': $indigo,
+  'purple': $purple,
+  'pink': $pink,
+  'red': $red,
+  'orange': $orange,
+  'yellow': $yellow,
+  'green': $green,
+  'teal': $teal,
+  'cyan': $cyan,
+  'white': $white,
+  'gray': $gray-600,
+  'gray-dark': $gray-800
 ) !default;
 ```
 
@@ -590,3 +596,54 @@ Some useful best practices:
 - `textarea` are modified to only be resizable vertically `resize: vertical`
   as horizontal resizing often “breaks” page layout
 - `summary` are set to `cursor: pointer`
+
+### Custom Navbar
+
+```css
+$navbar-light-color: $violet-4;
+$navbar-light-hover-color: $violet-6;
+$navbar-light-active-color: $violet-9;
+$navbar-light-toggler-border-color: $violet-2;
+```
+
+### Custom Spacing
+
+key variable - `$spacer`:
+
+- t - for classes that set margin-top or padding-top
+- b - for classes that set margin-bottom or padding-bottom
+- l - for classes that set margin-left or padding-left
+- r - for classes that set margin-right or padding-right
+- x - for classes that set both *-left and *-right
+- y - for classes that set both *-top and *-bottom
+- blank - for classes that set a margin or padding on all 4 sides of the element
+- 0 - for classes that eliminate the margin or padding by setting it to 0
+- 1 - (by default) for classes that set the margin or padding to $spacer * .25
+- 2 - (by default) for classes that set the margin or padding to $spacer * .5
+- 3 - (by default) for classes that set the margin or padding to $spacer
+- 4 - (by default) for classes that set the margin or padding to $spacer * 1.5
+- 5 - (by default) for classes that set the margin or padding to $spacer * 3
+- auto - for classes that set the margin to auto
+
+```css
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.ml-1 {
+  margin-left: ($spacer * 0.25) !important;
+}
+
+.px-2 {
+  padding-right: ($spacer * 0.5) !important;
+  padding-left: ($spacer * 0.5) !important;
+}
+
+.p-3 {
+  padding: $spacer !important;
+}
+
+.mt-n1 {
+  margin-top: -0.25rem !important;
+}
+```
