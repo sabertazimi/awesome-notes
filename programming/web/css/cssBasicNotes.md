@@ -966,6 +966,8 @@ cal(10em + 3px);
 - parent and it's first/last child: up with up (bottom with bottom)
 - empty block: margin-top with margin-bottom
 
+Best Practice: only use `margin-bottom: 1em/1rem` for spacing.
+
 ### Float Patterns
 
 float make element specified value of `display`:
