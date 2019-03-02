@@ -64,6 +64,10 @@
     - [Custom Borders](#custom-borders)
     - [Custom Navbar and Navigation](#custom-navbar-and-navigation)
     - [Custom Dropdown](#custom-dropdown)
+    - [Custom Listgroup](#custom-listgroup)
+    - [Custom Card](#custom-card)
+    - [Custom Breadcrumb](#custom-breadcrumb)
+    - [Custom Form](#custom-form)
 
 <!-- /TOC -->
 
@@ -1496,8 +1500,65 @@ $navbar-light-color: $violet-4;
 $navbar-light-hover-color: $violet-6;
 $navbar-light-active-color: $violet-9;
 $navbar-light-toggler-border-color: $violet-2;
+
+$navbar-dark-color: $violet-3;
+$navbar-dark-hover-color: $violet-5;
+$navbar-dark-active-color: $violet-1;
+$navbar-dark-toggler-border-color: $violet-1;
+
+$nav-tabs-border-color: $primary;
+$nav-tabs-link-hover-border-color: $violet-5;
+$nav-tabs-link-active-color: $violet-9;
+$nav-tabs-link-active-bg: $violet-3;
+$nav-tabs-link-active-border-color: $violet-1;
+
+$nav-pills-link-active-color: $white;
+$nav-pills-link-active-bg: $primary;
 ```
 
 ### Custom Dropdown
 
 custom `$dropdown-` variables
+
+```css
+$dropdown-padding-y: 1rem;
+$dropdown-spacer: 0.5rem;
+$dropdown-bg: $white;
+$dropdown-border-color: $primary;
+$dropdown-border-width: $border-width * 3;
+$dropdown-link-color: $primary;
+$dropdown-item-padding-y: 0.5rem;
+$dropdown-item-padding-x: 3rem;
+```
+
+### Custom Listgroup
+
+```css
+$list-group-border-color: $primary;
+```
+
+### Custom Card
+
+```css
+$card-border-color: $primary;
+$card-color: $primary;
+$card-bg: $violet-0;
+```
+
+### Custom Breadcrumb
+
+```css
+$breadcrumb-bg: $violet-0;
+$breadcrumb-divider-color: $gray-600 !default;
+$breadcrumb-active-color: $violet-3;
+$breadcrumb-divider: quote('>');
+```
+
+### Custom Form
+
+```css
+$input-btn-padding-y: 0.75rem;
+$input-btn-padding-x: 1.5rem;
+$input-btn-focus-width: 0; /* remove focus box-shadow */
+$custom-control-indicator-checked-color: $primary;
+```
