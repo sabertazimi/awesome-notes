@@ -3184,6 +3184,7 @@ window.addEventListener('resize', () => {
 
 - [视差滚动](https://github.com/Prinzhorn/skrollr)
 - [Scroll Animation](https://michalsnik.github.io/aos/)
+- [Scroll Reveal](https://github.com/scrollreveal/scrollreveal)
 
 #### Position
 
