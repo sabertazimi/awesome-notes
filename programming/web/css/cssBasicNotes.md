@@ -64,11 +64,12 @@
       - [fixed](#fixed)
     - [Flex Patterns](#flex-patterns)
       - [Under the Hood of `flex`](#under-the-hood-of-flex)
-      - [Useful shorthand of `flex`](#useful-shorthand-of-flex)
+      - [Useful Shorthand of `flex`](#useful-shorthand-of-flex)
       - [父元素属性](#父元素属性)
       - [子元素属性](#子元素属性)
-      - [flexibity of `float`](#flexibity-of-float)
-      - [fixed sidebar with flexbox](#fixed-sidebar-with-flexbox)
+      - [Flexibity of `float`](#flexibity-of-float)
+      - [Pseudo Elements of Flex Box](#pseudo-elements-of-flex-box)
+      - [Fixed Sidebar with Flexbox](#fixed-sidebar-with-flexbox)
       - [Flexbox Best Practice](#flexbox-best-practice)
     - [Grid Patterns](#grid-patterns)
       - [Grid Attention Tips](#grid-attention-tips)
@@ -1103,7 +1104,7 @@ position
   true width = `flex-basis` (or `width`) - `flex-shrink`/sum of `flex-shrink`
 - text nodes and pseudo-elements can be flex children
 
-#### Useful shorthand of `flex`
+#### Useful Shorthand of `flex`
 
 `flex: flex-grow flex-shrink flex-basis`
 
@@ -1147,7 +1148,7 @@ flex-grow: number;
 align-self: auto/flex-start/flex-end/center/baseline/stretch;
 ```
 
-#### flexibity of `float`
+#### Flexibity of `float`
 
 ```html
 <div class="parent">
@@ -1166,7 +1167,23 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
 }
 ```
 
-#### fixed sidebar with flexbox
+#### Pseudo Elements of Flex Box
+
+set `flex` to pseudo elements of flex box
+will change width of pseudo elements.
+
+```css
+.flex {
+  display: flex;
+}
+
+.flex::before {
+  position: relative; /* no need for absolute position */
+  display: block;
+}
+```
+
+#### Fixed Sidebar with Flexbox
 
 ```html
 <body>
