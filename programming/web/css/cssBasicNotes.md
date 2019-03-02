@@ -148,6 +148,7 @@
       - [Awesome Navigation Style](#awesome-navigation-style)
     - [Button](#button)
     - [Footer](#footer)
+      - [Sticky Footer](#sticky-footer)
     - [Picture](#picture)
       - [圆形图片](#圆形图片)
     - [Animation Tips](#animation-tips)
@@ -2526,6 +2527,143 @@ a.btn-custom {
 ```
 
 ### Footer
+
+#### Sticky Footer
+
+- 如果页面内容不足够长时, 页脚固定在浏览器窗口的底部
+- 如果内容足够长时, 页脚固定在页面的最底部
+
+5 种方法:
+
+- negative bottom margin content-wrapper with **fixed height** footer
+- negative top margin on **fixed height** footer
+- `calc` on **fixed height** footer
+- use `flex` on `body`
+- use `grid` on `body`
+
+```html
+<body>
+  <div class="wrapper">
+      content
+    <div class="push"></div>
+  </div>
+  <footer class="footer"></footer>
+</body>
+
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  min-height: 100%;
+
+  /* Equal to height of footer */
+  /* But also accounting for potential margin-bottom of last child */
+  margin-bottom: -50px;
+}
+.footer,
+.push {
+  height: 50px;
+}
+</style>
+```
+
+```html
+<body>
+  <div class="content">
+    <div class="content-inside">
+      content
+    </div>
+  </div>
+  <footer class="footer"></footer>
+</body>
+
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.content {
+  min-height: 100%;
+}
+.content-inside {
+  padding: 20px;
+  padding-bottom: 50px;
+}
+.footer {
+  height: 50px;
+  margin-top: -50px;
+}
+</style>
+```
+
+```html
+<body>
+  <div class="content">
+    content
+  </div>
+  <footer class="footer"></footer>
+</body>
+
+<style>
+.content {
+  min-height: calc(100vh - 70px);
+}
+.footer {
+  height: 50px;
+}
+</style>
+```
+
+```html
+<body>
+  <div class="content">
+    content
+  </div>
+  <footer class="footer"></footer>
+</body>
+
+<style>
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1 0 auto;
+}
+.footer {
+  flex-shrink: 0;
+}
+</style>
+```
+
+```html
+<body>
+  <div class="content">
+    content
+  </div>
+  <footer class="footer"></footer>
+</body>
+
+<style>
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+.footer {
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+</style>
+```
 
 ### Picture
 
