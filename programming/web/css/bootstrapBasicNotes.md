@@ -55,11 +55,13 @@
     - [Bootstrap Card](#bootstrap-card)
   - [Custom Bootstrap Theme](#custom-bootstrap-theme)
     - [Webpack Setup](#webpack-setup)
-    - [Useful CSS Presets](#useful-css-presets)
-    - [Useful Custom Functions](#useful-custom-functions)
-    - [Useful Custom Variables](#useful-custom-variables)
     - [Bootstrap Reboot Tips](#bootstrap-reboot-tips)
+    - [Useful Custom Functions](#useful-custom-functions)
+    - [Custom Global Options](#custom-global-options)
+    - [Custom Colors](#custom-colors)
     - [Custom Spacing](#custom-spacing)
+    - [Custom Layout](#custom-layout)
+    - [Custom Borders](#custom-borders)
     - [Custom Navbar and Navigation](#custom-navbar-and-navigation)
     - [Custom Dropdown](#custom-dropdown)
 
@@ -1320,9 +1322,27 @@ module.exports = {
 
 - [Advanced Webpack Configuration](https://medium.com/@estherfalayi/setting-up-webpack-for-bootstrap-4-and-font-awesome-eb276e04aaeb)
 
-### Useful CSS Presets
+### Bootstrap Reboot Tips
 
 - `@import '~bootstrap/scss/reboot`;
+
+Some useful best practices:
+
+- body `font-size: 1rem` for scalable component spacing.
+- avoid `margin-top` as vertical margins collapse
+  (only use `margin-bottom` for headings `h1/.../h6`,
+  lists `ul/ol/dl/dd`, `<pre></pre>`)
+- block use `rems` for `margin` for easier scaling across device sizes
+- using inherit whenever possible for `font-` property
+- `box-sizing: border-box` is globally set on every element
+  including `*::before` and `*::after`
+- body sets a global `font-family`, `line-height` and `text-align`
+- body sets `background-color: #fff` for safety
+- `legend`/`fieldset` have no borders/padding/margin
+- `label` are set to `display: inline-block` to allow margin
+- `textarea` are modified to only be resizable vertically `resize: vertical`
+  as horizontal resizing often “breaks” page layout
+- `summary` are set to `cursor: pointer`
 
 ### Useful Custom Functions
 
@@ -1357,7 +1377,24 @@ module.exports = {
 }
 ```
 
-### Useful Custom Variables
+### Custom Global Options
+
+```css
+$enable-caret: true !default;
+$enable-rounded: true !default;
+$enable-shadows: false !default;
+$enable-gradients: false !default;
+$enable-transitions: true !default;
+$enable-prefers-reduced-motion-media-query: true !default;
+$enable-grid-classes: true !default;
+$enable-pointer-cursor-for-buttons: true !default;
+$enable-print-styles: true !default;
+$enable-responsive-font-sizes: false !default;
+$enable-validation-icons: true !default;
+$enable-deprecation-messages: true !default;
+```
+
+### Custom Colors
 
 - `@import '~bootstrap/scss/variables';`
 
@@ -1371,19 +1408,6 @@ $theme-colors: (
   'warning': #f59f00,
   'danger': #f03e3e,
 );
-
-$enable-caret: true !default;
-$enable-rounded: true !default;
-$enable-shadows: false !default;
-$enable-gradients: false !default;
-$enable-transitions: true !default;
-$enable-prefers-reduced-motion-media-query: true !default;
-$enable-grid-classes: true !default;
-$enable-pointer-cursor-for-buttons: true !default;
-$enable-print-styles: true !default;
-$enable-responsive-font-sizes: false !default;
-$enable-validation-icons: true !default;
-$enable-deprecation-messages: true !default;
 
 $colors: (
   'blue': $blue,
@@ -1401,26 +1425,6 @@ $colors: (
   'gray-dark': $gray-800
 ) !default;
 ```
-
-### Bootstrap Reboot Tips
-
-Some useful best practices:
-
-- body `font-size: 1rem` for scalable component spacing.
-- avoid `margin-top` as vertical margins collapse
-  (only use `margin-bottom` for headings `h1/.../h6`,
-  lists `ul/ol/dl/dd`, `<pre></pre>`)
-- block use `rems` for `margin` for easier scaling across device sizes
-- using inherit whenever possible for `font-` property
-- `box-sizing: border-box` is globally set on every element
-  including `*::before` and `*::after`
-- body sets a global `font-family`, `line-height` and `text-align`
-- body sets `background-color: #fff` for safety
-- `legend`/`fieldset` have no borders/padding/margin
-- `label` are set to `display: inline-block` to allow margin
-- `textarea` are modified to only be resizable vertically `resize: vertical`
-  as horizontal resizing often “breaks” page layout
-- `summary` are set to `cursor: pointer`
 
 ### Custom Spacing
 
@@ -1464,11 +1468,29 @@ key variable - `$spacer`:
 }
 ```
 
+### Custom Layout
+
+```css
+$grid-columns: 12 !default;
+$grid-gutter-width: 30px !default;
+```
+
+### Custom Borders
+
+```css
+$border-width: 1px !default;
+$border-color: $gray-300 !default;
+$border-radius: .25rem !default;
+$border-radius-lg: .3rem !default;
+$border-radius-sm: .2rem !default;
+```
+
 ### Custom Navbar and Navigation
 
 ```css
+/* $nav-link-padding-x: 1.5rem; */
+$navbar-nav-link-padding-x: 1.5rem;
 $nav-link-padding-y: 1rem;
-$nav-link-padding-x: 2rem;
 
 $navbar-light-color: $violet-4;
 $navbar-light-hover-color: $violet-6;
