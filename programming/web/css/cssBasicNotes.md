@@ -159,6 +159,7 @@
       - [相同单元](#相同单元)
       - [元素定位](#元素定位)
   - [CSS Variables](#css-variables)
+    - [Scope Variebls](#scope-variebls)
   - [UI Libraries && Components](#ui-libraries--components)
     - [Utils](#utils)
     - [Society](#society)
@@ -2774,6 +2775,61 @@ window.addEventListener('resize', () => {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
+```
+
+### Scope Variebls
+
+```html
+<div class="alert alert-info">
+  <div class="alert-content">
+    <h2 class="alert-title">
+      Info
+    </h2>
+    <div class="alert-body">
+      <p>
+        Info Message.
+      </p>
+    </div>
+  </div>
+</div>
+```
+
+```css
+.alert {
+  --primary: #777;
+  --secondary: #ccc;
+
+  border: 1px solid var(--primary);
+  background-color: var(--secondary);
+}
+
+.alert::before {
+  background-color: var(--primary);
+}
+
+.alert-title {
+  color: var(--primary);
+}
+
+.alert-success {
+  --primary: #40c057;
+  --secondary: #d3f9d8;
+}
+
+.alert-info {
+  --primary: #228be6;
+  --secondary: #d0ebff;
+}
+
+.alert-warning {
+  --primary: #fab005;
+  --secondary: #fff3bf;
+}
+
+.alert-error {
+  --primary: #fa5252;
+  --secondary: #ffe3e3;
+}
 ```
 
 ## UI Libraries && Components
