@@ -1575,6 +1575,7 @@ export default Intl;
 ## Testing
 
 - [Complete Tutorial](https://www.robinwieruch.de/react-testing-tutorial/#react-enzyme-test-setup)
+- [Jest and Enzyme Snapshots Testing](https://medium.com/codeclan/testing-react-with-jest-and-enzyme-20505fec4675)
 - [Cypress - Testing Framework](https://www.cypress.io/)
 
 ## Create React App
