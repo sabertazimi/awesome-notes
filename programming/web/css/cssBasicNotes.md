@@ -210,11 +210,11 @@
     - [Geometry](#geometry)
       - [Blocks](#blocks)
     - [Template](#template)
-    - [Framework](#framework)
     - [Audio](#audio)
     - [Table Library](#table-library)
     - [File](#file)
       - [File Tree View](#file-tree-view)
+    - [Framework](#framework)
 
 <!-- /TOC -->
 
@@ -3215,11 +3215,6 @@ window.addEventListener('resize', () => {
 
 - [Free Bootstrap 3 Admin Template](https://github.com/puikinsh/gentelella)
 
-### Framework
-
-- [HTML Presentation Framework](https://github.com/hakimel/reveal.js)
-- [React Material UI](https://github.com/callemall/material-ui)
-
 ### Audio
 
 - [Howler.js](https://github.com/goldfire/howler.js)
@@ -3234,3 +3229,11 @@ window.addEventListener('resize', () => {
 #### File Tree View
 
 - [zTree v3](https://github.com/zTree/zTree_v3)
+
+### Framework
+
+- [Bootstrap](https://github.com/twbs/bootstrap)
+- [Bulma](https://github.com/jgthms/bulma)
+- [Materialize](https://github.com/Dogfalo/materialize)
+- [React Material UI](https://github.com/callemall/material-ui)
+- [HTML Presentation Framework](https://github.com/hakimel/reveal.js)
