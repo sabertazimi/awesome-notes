@@ -209,7 +209,7 @@
     - [File Uploader](#file-uploader)
     - [Alert](#alert)
     - [Form](#form)
-    - [Object Schema Validator](#object-schema-validator)
+      - [Object Schema Validator](#object-schema-validator)
     - [Color](#color)
     - [iFrame](#iframe)
     - [SVG](#svg)
@@ -3851,7 +3851,7 @@ window.addEventListener("gamepaddisconnected", (e) => {
 - [Async Validator](https://github.com/yiminghe/async-validator)
 - [Input Format](https://github.com/nosir/cleave.js)
 
-### Object Schema Validator
+#### Object Schema Validator
 
 - [joi](https://github.com/hapijs/joi)
 - [yup](https://github.com/jquense/yup)
