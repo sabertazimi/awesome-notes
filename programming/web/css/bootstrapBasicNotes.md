@@ -51,6 +51,8 @@
     - [size](#size)
     - [state](#state)
     - [aniatmion](#aniatmion)
+  - [Boostrap 4](#boostrap-4)
+    - [Bootstrap Card](#bootstrap-card)
 
 <!-- /TOC -->
 
@@ -1160,3 +1162,11 @@ Cycles to the next item.
 - collapse
 - fade
 - in
+
+## Boostrap 4
+
+### Bootstrap Card
+
+- .well: .card.bg-light
+- .panel: .card
+- .thumbnail: .card + .card-img/.card-img-top
