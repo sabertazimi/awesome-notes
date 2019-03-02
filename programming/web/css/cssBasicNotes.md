@@ -215,6 +215,7 @@
     - [File](#file)
       - [File Tree View](#file-tree-view)
     - [Framework](#framework)
+    - [Fonts Library](#fonts-library)
 
 <!-- /TOC -->
 
@@ -3238,3 +3239,9 @@ window.addEventListener('resize', () => {
 - [Materialize](https://github.com/Dogfalo/materialize)
 - [React Material UI](https://github.com/callemall/material-ui)
 - [HTML Presentation Framework](https://github.com/hakimel/reveal.js)
+
+### Fonts Library
+
+- [Poppins](https://fonts.google.com/specimen/Poppins)
+- [Raleway](https://fonts.google.com/specimen/Raleway)
+- [Operator](https://www.typography.com/fonts/operator/styles/)
