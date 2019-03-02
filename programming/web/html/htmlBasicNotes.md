@@ -982,6 +982,7 @@ export function trapTabKey(e, context) {
 - `aria-expanded="false"`: dropdown
 - `aria-haspopup="true"`: dropdown/popup
 - `aria-current="pages`: breadcrumb
+- `aria-valuenow`/`aria-valuemin`/`aria-valuemax`
 
 ```html
 <button class="list-expander" aria-expanded="false"
