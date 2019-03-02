@@ -976,13 +976,14 @@ export function trapTabKey(e, context) {
 ### ARIA
 
 - `aria-label`
-- `aria-labelledby="dropdownMenuButton"`
+- `aria-labelledby="dropdownMenuButton"`: dropdown/form
 - `aria-disabled="true"`: disable element
-- `aria-controls="navbarSupportedContent"`
+- `aria-controls="navbarSupportedContent"`: navigation
 - `aria-expanded="false"`: dropdown
 - `aria-haspopup="true"`: dropdown/popup
 - `aria-current="pages`: breadcrumb
-- `aria-valuenow`/`aria-valuemin`/`aria-valuemax`
+- `aria-valuenow`/`aria-valuemin`/`aria-valuemax`: progress
+- `aria-describledBy`: input + small
 
 ```html
 <button class="list-expander" aria-expanded="false"
