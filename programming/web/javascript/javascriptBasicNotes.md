@@ -216,6 +216,8 @@
     - [Clipboard](#clipboard)
     - [Animation](#animation)
     - [Slides](#slides)
+    - [Rich Text Editor](#rich-text-editor)
+    - [Code Editor](#code-editor)
 
 <!-- /TOC -->
 
@@ -3882,3 +3884,12 @@ window.addEventListener("gamepaddisconnected", (e) => {
 ### Slides
 
 - [MDX Deck](https://github.com/jxnblk/mdx-deck)
+
+### Rich Text Editor
+
+- [CKEditor](https://github.com/ckeditor/)
+
+### Code Editor
+
+- [ACE Editor](https://github.com/ajaxorg/ace)
+- [CodeMirror](https://github.com/codemirror/CodeMirror)
