@@ -98,6 +98,7 @@
       - [(moz/webkit)background-origin](#mozwebkitbackground-origin)
       - [background-size](#background-size)
       - [background-attachment](#background-attachment)
+      - [Mix Blend Mode](#mix-blend-mode)
       - [Background Best Practice](#background-best-practice)
         - [单背景极简欢迎首页](#单背景极简欢迎首页)
     - [text](#text)
@@ -1637,6 +1638,34 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+```
+
+#### Mix Blend Mode
+
+- with `multiply`: black is cutout (keep black)
+  (0 * WHAT = 0)
+- with `screen`: white is cutout (keep white)
+  (100 - (100 - WHAT) * (100 - 100) = 100)
+
+```html
+<div class="background">
+  <h1>Even More CSS Secrets</h1>
+</div>
+```
+
+```css
+.background {
+  background-image: url('bg.png');
+  background-position: center;
+  background-size: cover;
+  backgorund-repeat: no-repeat;
+  mix-blend-mode: screen;  /* screen or multiply  */
+}
+
+.background h1 {
+  background-color: black; /* mix with background */
+  color: white;            /* keep white */
 }
 ```
 
