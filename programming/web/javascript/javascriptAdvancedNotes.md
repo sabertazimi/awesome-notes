@@ -2244,6 +2244,8 @@ window.addEventListener('scroll', function(event) {
   but will **pause** the parser to execute the script
 - If the scripts rely on each other, use defer
 - If the script is independent, use async
+- If put JavaScript in `<head>`, in such script can't access DOM directly
+  (DOM haven't get parsed)
 
 ```html
 <script src="myscript.js"></script>
