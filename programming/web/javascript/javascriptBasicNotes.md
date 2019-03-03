@@ -133,6 +133,7 @@
         - [insert](#insert)
       - [node](#node)
         - [Traverse DOM Tree](#traverse-dom-tree)
+        - [Event Check](#event-check)
       - [Frag](#frag)
     - [DOM HTML](#dom-html)
     - [DOM Style](#dom-style)
@@ -561,7 +562,7 @@ str.split('').map(function(subStr) {
 str.split('').someOperator().join('');
 ```
 
-- 实现contains方法
+- 实现 contains 方法
 
 ```javascript
 arr.indexOf(item) === -1;
@@ -2265,9 +2266,11 @@ node.previousElementSibling
 node.nextElementSibling
 ```
 
+##### Event Check
+
 ```js
-node.matches(selector) // return false or true
-node.contains(node)    // return false or true
+node.matches(event.target) // return false or true
+node.contains(event.target)        // return false or true
 ```
 
 #### Frag
@@ -2433,6 +2436,17 @@ document.addEventListener('visibilitychange', handleVisibilityChange, false);
 onclick
 ondbclick
 onmouse-down/move/enter/out/leave/over
+```
+
+For click event, no need for X/Y to judge internal/outside state.
+Use DOM API `element.contains` to check is a better way.
+
+```js
+window.addEventListener('click', (event) => {
+  if (document.getElementById('main').contains(event.target) {
+    // ...
+  }
+});
 ```
 
 [drag event](https://developer.mozilla.org/en-US/docs/Web/API/Document/drag_event):
