@@ -123,6 +123,7 @@
       - [transform-style](#transform-style)
       - [backface-visibility](#backface-visibility)
     - [animation](#animation)
+      - [Animation Play State](#animation-play-state)
       - [FLIP](#flip)
   - [Responsive Desgin](#responsive-desgin)
     - [responsive font](#responsive-font)
@@ -2055,6 +2056,18 @@ setTimeout(() => {
 > :hover should not add to transfromed elements
 > :hover should add to parent element
 
+当旋转绝对定位居中的元素时, 需要改变 `transform-origin`:
+
+```css
+.roate {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: left;
+}
+```
+
 #### perspective
 
 translateZ 的功能就是让元素在自己的眼前或近或远
@@ -2161,6 +2174,8 @@ body {
   - animationend: triggered after an animation completes
   - animationstart: triggered at the start of an animation
 
+#### Animation Play State
+
 ```css
 div {
   animation-play-state: paused;
@@ -2169,6 +2184,26 @@ div {
 :checked ~ div {
   animation-play-state: running;
 }
+```
+
+animation pattern: 利用 `animation-paly-state`
+与 JS 添加 `.animate` 类控制动画开始和停止.
+
+```css
+.to-animte {
+  animation: animationName 1.5s linear;
+  animation-play-state: paused;
+  animation-iteration-count: infinite;
+}
+
+.animate {
+  animation-iteration-count: running;
+}
+```
+
+```js
+element.classList.add('animate');
+setTimeout(() => element.classList.remove('animate'), duration);
 ```
 
 #### FLIP
