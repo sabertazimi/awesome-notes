@@ -1649,6 +1649,7 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 ### Animation
 
 - [React Spring](https://github.com/react-spring/react-spring)
+- [React Transition Group](https://github.com/reactjs/react-transition-group)
 - [React Animation](https://github.com/FunctionFoundry/react-set-animate)
 - [React Particle Animation](https://github.com/transitive-bullshit/react-particle-animation)
 - [React Particle Button](https://github.com/transitive-bullshit/react-particle-effect-button)
@@ -1668,6 +1669,7 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 ### Mouse
 
 - [React Draftjs](https://github.com/draft-js-plugins/draft-js-plugins)
+- [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd)
 - [React DnD - Drag and Drop](https://github.com/react-dnd/react-dnd)
 
 ### Button
