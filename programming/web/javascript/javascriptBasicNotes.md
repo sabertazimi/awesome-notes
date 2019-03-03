@@ -139,10 +139,10 @@
     - [DOM Events](#dom-events)
       - [Global DOM Event](#global-dom-event)
       - [Tab Visibility Event](#tab-visibility-event)
+      - [Input Events](#input-events)
       - [Mouse Events](#mouse-events)
       - [Key Events](#key-events)
       - [Frame Events](#frame-events)
-      - [Input Events](#input-events)
       - [User-Defined Handler](#user-defined-handler)
     - [Document](#document)
     - [Window](#window)
@@ -2422,6 +2422,11 @@ function handleVisibilityChange() {
 document.addEventListener('visibilitychange', handleVisibilityChange, false);
 ```
 
+#### Input Events
+
+- focus/focusin/focusout
+- input/change
+
 #### Mouse Events
 
 ```javascript
@@ -2484,12 +2489,6 @@ document.onkeydown=function(event){
 
 ```javascript
 onresize/load/scroll/error
-```
-
-#### Input Events
-
-```javascript
-oninput/onchange
 ```
 
 #### User-Defined Handler
