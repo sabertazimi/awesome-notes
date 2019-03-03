@@ -161,6 +161,7 @@
       - [相同单元](#相同单元)
       - [元素定位](#元素定位)
   - [CSS Variables](#css-variables)
+    - [Variables DOM API](#variables-dom-api)
     - [Scope Variebls](#scope-variebls)
   - [UI Libraries && Components](#ui-libraries--components)
     - [Utils](#utils)
@@ -2933,6 +2934,8 @@ const resetScollX = () => {
 
 ## CSS Variables
 
+### Variables DOM API
+
 ```css
 .element {
   height: 100vh; /* Fallback for browsers that do not support Custom Properties */
@@ -2945,6 +2948,11 @@ window.addEventListener('resize', () => {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
+```
+
+```js
+const root = document.documentElement;
+const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
 ```
 
 ### Scope Variebls
