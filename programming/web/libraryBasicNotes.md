@@ -526,6 +526,8 @@
 ### Mock
 
 - [Mockery](https://github.com/mfncooper/mockery)
+- [JSON Placeholder](http://jsonplaceholder.typicode.com)
+- [Images Placeholder](https://placeholder.com)
 
 ### Other Testing
 
