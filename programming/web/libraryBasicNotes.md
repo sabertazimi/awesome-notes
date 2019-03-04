@@ -30,6 +30,7 @@
   - [Fonts](#fonts)
   - [Icons](#icons)
   - [Images](#images)
+    - [SVG](#svg)
     - [Size](#size)
     - [Slide](#slide)
     - [Gallery](#gallery)
@@ -56,7 +57,6 @@
   - [Code Optimizer](#code-optimizer)
   - [Color](#color)
   - [iFrame](#iframe)
-  - [SVG](#svg)
   - [Clipboard](#clipboard)
   - [Editor](#editor)
     - [Rich Text Editor](#rich-text-editor)
@@ -241,13 +241,17 @@
 
 - [SVG Logos](https://github.com/gilbarbara/logos)
 - [Pure CSS Icons](https://cssicon.space/#/)
+- [GreenSock JS](https://github.com/greensock/GreenSock-JS)
 
 ## Images
 
-- [SVG](https://github.com/svg/svgo)
 - [ICO](https://github.com/kevva/to-ico)
-- [A fast DVI to SVG converter](https://github.com/mgieseki/dvisvgm)
 - [Images API](https://github.com/rsms/node-imagemagick)
+
+### SVG
+
+- [SVG](https://github.com/svg/svgo)
+- [A fast DVI to SVG converter](https://github.com/mgieseki/dvisvgm)
 
 ### Size
 
@@ -397,10 +401,6 @@
 ## iFrame
 
 - [Postmate](https://github.com/dollarshaveclub/postmate)
-
-## SVG
-
-- [GreenSock JS](https://github.com/greensock/GreenSock-JS)
 
 ## Clipboard
 
