@@ -63,6 +63,7 @@
     - [Code Editor](#code-editor)
     - [Audio](#audio)
     - [Video](#video)
+  - [i18n](#i18n)
   - [CLI](#cli)
   - [Network](#network)
   - [DOM](#dom)
@@ -105,7 +106,11 @@
 
 ## UI Framework
 
+- [React Ant Design](https://github.com/ant-design/ant-design)
+- [React Semantic UI](https://github.com/Semantic-Org/Semantic-UI-React)
 - [React Material UI](https://github.com/callemall/material-ui)
+- [React BluePrint](https://github.com/palantir/blueprint)
+- [React Polaris](https://github.com/Shopify/polaris-react)
 - [Bootstrap](https://github.com/twbs/bootstrap)
 - [Bulma](https://github.com/jgthms/bulma)
 - [Materialize](https://github.com/Dogfalo/materialize)
@@ -433,6 +438,10 @@
 - [Video Landingpage](https://github.com/rishabhp/bideo.js)
 - [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
 - [plyr](https://github.com/selz/plyr)
+
+## i18n
+
+- [Formatting international numbers and currencies](https://github.com/autoNumeric/autoNumeric/)
 
 ## CLI
 
