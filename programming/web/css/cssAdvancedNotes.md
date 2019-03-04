@@ -13,6 +13,7 @@
   - [Graceful Degration](#graceful-degration)
   - [CSS Houdini](#css-houdini)
   - [CSS Performance](#css-performance)
+    - [Basic Perf Tips](#basic-perf-tips)
     - [CSS Selectors](#css-selectors)
     - [CSS Triggers](#css-triggers)
     - [reset.css](#resetcss)
@@ -125,6 +126,14 @@ CSS Houdini bring many API:
 to let developers enhance css without any browser updates
 
 ## CSS Performance
+
+### Basic Perf Tips
+
+- use `audits` panel to diagnose
+- use CSS shorthand and color shortcuts
+- eliminate unneeded zeros and units
+- remove unused CSS by `coverage` panel of Devtools
+- `link` is parallel, `@import` isn't parallel
 
 ### CSS Selectors
 
