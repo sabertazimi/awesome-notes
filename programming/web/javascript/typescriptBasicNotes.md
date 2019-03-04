@@ -995,6 +995,8 @@ called(); // Called : 2
 
 ## React with TypeScript
 
+- [React TypeScript Cheatsheet](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)
+
 ### Functional Component
 
 ```js
