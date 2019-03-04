@@ -18,11 +18,6 @@
     - [Virtual DOM Diff and Patch](#virtual-dom-diff-and-patch)
   - [Router](#router)
     - [Navigation Guards](#navigation-guards)
-  - [Vue Library](#vue-library)
-    - [Documentation](#documentation)
-    - [Drag and Drop](#drag-and-drop)
-    - [Scroller](#scroller)
-    - [Loading](#loading)
 
 <!-- /TOC -->
 
@@ -757,21 +752,3 @@ data.a = 2; // setHook() get called
 ### Navigation Guards
 
 - [Offical Documentation of Router Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html)
-
-## Vue Library
-
-### Documentation
-
-- [Vuepress](https://github.com/vuejs/vuepress)
-
-### Drag and Drop
-
-- [Drag and Drop Grid Layout](https://github.com/jbaysolutions/vue-grid-layout)
-
-### Scroller
-
-- [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
-
-### Loading
-
-- [Vue Skeleton](https://github.com/egoist/vue-content-loader)
