@@ -28,8 +28,8 @@
   - [Society](#society)
   - [Emoji](#emoji)
   - [Fonts](#fonts)
-  - [Icons](#icons)
   - [Images](#images)
+    - [Icons](#icons)
     - [SVG](#svg)
     - [Size](#size)
     - [Slide](#slide)
@@ -237,16 +237,17 @@
 - [Raleway](https://fonts.google.com/specimen/Raleway)
 - [Operator](https://www.typography.com/fonts/operator/styles/)
 
-## Icons
-
-- [SVG Logos](https://github.com/gilbarbara/logos)
-- [Pure CSS Icons](https://cssicon.space/#/)
-- [GreenSock JS](https://github.com/greensock/GreenSock-JS)
-
 ## Images
 
 - [ICO](https://github.com/kevva/to-ico)
 - [Images API](https://github.com/rsms/node-imagemagick)
+
+### Icons
+
+- [SVG Logos](https://github.com/gilbarbara/logos)
+- [SVG Icons](https://iconsvg.xyz)
+- [Pure CSS Icons](https://cssicon.space/#/)
+- [GreenSock JS](https://github.com/greensock/GreenSock-JS)
 
 ### SVG
 
