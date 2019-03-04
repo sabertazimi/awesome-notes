@@ -49,6 +49,7 @@
       - [height](#height)
       - [column](#column)
     - [Box Model](#box-model)
+      - [Percentage of Width/Top](#percentage-of-widthtop)
     - [Block Formatting Context](#block-formatting-context)
       - [Create BFC](#create-bfc)
       - [Margin Collapsing/Merging](#margin-collapsingmerging)
@@ -884,6 +885,12 @@ cal(10em + 3px);
   会生成 inline-level box，并且参与 inline formatting context
 - Flex Formatting Context(FFC)
 - Grid Formatting Context(GFC)
+
+#### Percentage of Width/Top
+
+positioned elements with `top: percentage`
+depend on `height` of parent,
+if `height` of parent is `auto`, it's not working.
 
 ### Block Formatting Context
 
