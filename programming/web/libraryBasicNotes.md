@@ -332,6 +332,7 @@
 
 ## Form
 
+- [React Formik](https://github.com/jaredpalmer/formik)
 - [Form Boilerplate](https://github.com/andybelldesign/boilerform)
 
 ### Input
