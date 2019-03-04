@@ -4,7 +4,9 @@
 
 - [Linux Basic Notes](#linux-basic-notes)
   - [重装Linux](#重装linux)
-  - [ssh命令](#ssh命令)
+  - [ssh 命令](#ssh-命令)
+    - [Key](#key)
+    - [SSHD](#sshd)
     - [编辑~/.ssh/config文件](#编辑sshconfig文件)
     - [`ssh -D`](#ssh--d)
     - [密钥文件](#密钥文件)
@@ -84,7 +86,7 @@
       - [普通权限](#普通权限)
       - [ACL权限](#acl权限)
       - [sudo权限](#sudo权限)
-      - [SetUID/SetGID权限——可执行程序/目录+普通用户临时获得root权限 （rws）](#setuidsetgid权限可执行程序目录普通用户临时获得root权限-rws)
+      - [SetUID/SetGID 权限——可执行程序/目录+普通用户临时获得root权限 （rws）](#setuidsetgid-权限可执行程序目录普通用户临时获得root权限-rws)
     - [磁盘管理命令](#磁盘管理命令)
       - [修复命令](#修复命令)
       - [分区命令](#分区命令)
@@ -192,7 +194,23 @@
 - 自定义脚本-新建目录(加入环境变量)
 - 自定义别名 ~/.bashrc
 
-## ssh命令
+## ssh 命令
+
+### Key
+
+```bash
+ssh-keygen -t rsa
+ssh-add ~/.ssh/id_rsa
+```
+
+### SSHD
+
+- config file in `/etc/ssh/sshd_config`
+
+```bash
+sudo systemctl reload sshd
+sudo service restart sshd
+```
 
 ### 编辑~/.ssh/config文件
 
@@ -609,7 +627,7 @@ cat /etc/passwd | awk -F [:] ‘{print $4}’
 
 ##### 增加用户
 
-useradd [options] LOGIN
+- useradd [options] LOGIN
 
 Options:
 
@@ -649,6 +667,10 @@ gpasswd -a test test2  将用户test加入到test2组(附设组)
 
 gpasswd -d test test2  将用户test从test2组中移出
 
+```bash
+usermod -aG sudo <username>
+```
+
 ##### 删除用户
 
 userdel test -r同时删除用户登录目录(/home/xxx)
@@ -676,6 +698,7 @@ finger apacheuser 查看单个用户信息
 - umask存储位置 ——/etc/profile
 - 文件默认权限 = 文件默认最大权限rw-(666)  减去  umask值(如----w--w-)(022)
 - 目录默认权限 = 目录默认最大权限rwx(777) 减去 umask值
+- `id <username>`
 
 #### ACL权限
 
@@ -690,7 +713,7 @@ finger apacheuser 查看单个用户信息
 
 /etc/sudoers.tmp
 
-#### SetUID/SetGID权限——可执行程序/目录+普通用户临时获得root权限 （rws）
+#### SetUID/SetGID 权限——可执行程序/目录+普通用户临时获得root权限 （rws）
 
 - chmod 0xxx  取消双权限
 - chmod 2xxx  设置SetGID权限
