@@ -96,7 +96,6 @@
 - [Basic - HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 - [Back-End - Nodejs Hackathon Starter](https://github.com/sahat/hackathon-starter)
 - [Desktop - Electron React Boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
-- [tooling](https://github.com/egoist/tooling)
 
 ## Solution and Framework
 
