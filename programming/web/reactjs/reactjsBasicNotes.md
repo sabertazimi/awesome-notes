@@ -28,11 +28,11 @@
       - [Basic Rules](#basic-rules)
       - [Custom Hooks](#custom-hooks)
         - [Async Data Hook](#async-data-hook)
-        - [reducer hook](#reducer-hook)
-        - [previous hook](#previous-hook)
-        - [store hook](#store-hook)
-        - [forece update hook](#forece-update-hook)
-        - [router hook](#router-hook)
+        - [Reducer Hook](#reducer-hook)
+        - [Previous Hook](#previous-hook)
+        - [Store Hook](#store-hook)
+        - [Forece Update Hook](#forece-update-hook)
+        - [Router Hook](#router-hook)
         - [Form Hook](#form-hook)
   - [ES6 Syntax](#es6-syntax)
     - [Comments](#comments)
@@ -549,7 +549,7 @@ function App() {
 export default App;
 ```
 
-##### reducer hook
+##### Reducer Hook
 
 ```jsx
 function useReducer(reducer, initialState) {
@@ -574,7 +574,7 @@ function Todos() {
 }
 ```
 
-##### previous hook
+##### Previous Hook
 
 ```jsx
 function Counter() {
@@ -592,7 +592,7 @@ function usePrevious(value) {
 }
 ```
 
-##### store hook
+##### Store Hook
 
 ```js
 import { useState } from 'react';
@@ -622,7 +622,7 @@ export function useStore() {
 }
 ```
 
-##### forece update hook
+##### Forece Update Hook
 
 ```js
 // @ts-ignore
@@ -649,7 +649,7 @@ const useForceUpdate: VoidFunctionCreator = (): VoidFunction => {
 export default useForceUpdate;
 ```
 
-##### router hook
+##### Router Hook
 
 ```js
 import { useContext, useEffect } from 'react';
@@ -670,6 +670,33 @@ const useReactRouter = () => {
 ```
 
 ##### Form Hook
+
+```js
+import { useState } from 'react';
+
+const useForm = (callback) => {
+
+  const [values, setValues] = useState({});
+
+  const handleSubmit = (event) => {
+    if (event) event.preventDefault();
+      callback();
+  };
+
+  const handleChange = (event) => {
+    event.persist();
+    setValues(values => ({ ...values, [event.target.name]: event.target.value }));
+  };
+
+  return {
+    handleChange,
+    handleSubmit,
+    values,
+  }
+};
+
+export default useForm;
+```
 
 ```jsx
 export const useField = (
