@@ -344,11 +344,20 @@ class Menu extends React.Component {
 - use more of React's features without classes
 - class components will read `this.props` **too early** or **too late**,
   because of mutable `this` in React
-  (however `props` argument of function components is immutable)
+  (however `props` argument of function components is immutable),
+  that says *function components capture the rendered values*.
   more details on
   [Overreacted](https://overreacted.io/how-are-function-components-different-from-classes/)
 
 #### Default Hooks
+
+- useState: read rendered props/state
+- useRef: read rendered props/state from **the future**.
+  Generally, you should avoid reading or setting refs
+  during rendering because they’re mutable.
+  We want to keep the rendering predictable.
+  However, if we want to get the latest value of a particular prop or state,
+  it's good to read/set `ref.current`.
 
 ```jsx
 import { useState } from 'react';
