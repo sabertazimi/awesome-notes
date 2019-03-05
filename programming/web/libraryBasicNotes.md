@@ -8,7 +8,7 @@
   - [Solution and Framework](#solution-and-framework)
   - [UI Framework](#ui-framework)
   - [Utils](#utils)
-  - [Data](#data)
+  - [State/Data Management](#statedata-management)
   - [Documentation](#documentation)
   - [Chat](#chat)
   - [List Virtualization](#list-virtualization)
@@ -118,16 +118,17 @@
 
 ## Utils
 
-- [CSS Reset](https://github.com/necolas/normalize.css)
+- [CSS Normalize](https://github.com/necolas/normalize.css)
 - [Feature/Browser Detection](https://github.com/Modernizr/Modernizr)
 - [Box Shadows](https://madeas.github.io/box-shadows)
 
-## Data
+## State/Data Management
 
-- [Baobab](https://github.com/Yomguithereal/baobab)
-- [React Resolver](https://github.com/ericclemmons/react-resolver)
-- [RxJS Middleware](https://github.com/redux-observable/redux-observable)
+- [Redux Helpler Tools](https://github.com/reduxjs/redux-starter-kit)
 - [reselect](https://github.com/reactjs/reselect)
+- [RxJS Middleware](https://github.com/redux-observable/redux-observable)
+- [React Resolver](https://github.com/ericclemmons/react-resolver)
+- [Baobab](https://github.com/Yomguithereal/baobab)
 
 ## Documentation
 
