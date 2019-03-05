@@ -7,7 +7,8 @@
   - [Boilerplate](#boilerplate)
   - [Solution and Framework](#solution-and-framework)
   - [UI Framework](#ui-framework)
-  - [Utils](#utils)
+  - [Browser](#browser)
+  - [CSS Utils](#css-utils)
   - [State/Data Management](#statedata-management)
   - [Documentation](#documentation)
   - [Chat](#chat)
@@ -116,11 +117,15 @@
 - [Materialize](https://github.com/Dogfalo/materialize)
 - [HTML Presentation Framework](https://github.com/hakimel/reveal.js)
 
-## Utils
+## Browser
+
+- [Feature/Browser Detection](https://github.com/Modernizr/Modernizr)
+
+## CSS Utils
 
 - [CSS Normalize](https://github.com/necolas/normalize.css)
-- [Feature/Browser Detection](https://github.com/Modernizr/Modernizr)
 - [Box Shadows](https://madeas.github.io/box-shadows)
+- [Styled System](https://github.com/styled-system/styled-system)
 
 ## State/Data Management
 
