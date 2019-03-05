@@ -162,6 +162,8 @@
     - [Layout](#layout)
       - [相同单元](#相同单元)
       - [元素定位](#元素定位)
+    - [Geometry](#geometry)
+      - [Triangle](#triangle)
   - [CSS Variables](#css-variables)
     - [Variables DOM API](#variables-dom-api)
     - [Scope Variebls](#scope-variebls)
@@ -2961,6 +2963,64 @@ const resetScollX = () => {
 - position + top/bottom/left/right
 - float
 - flex
+
+### Geometry
+
+#### Triangle
+
+```css
+/* transparent border */
+.arrow-up {
+  width: 0;
+  height: 0;
+
+  border-right: 16px solid transparent;
+  border-left: 16px solid transparent;
+
+  border-bottom: 20px solid #8888e8;
+}
+
+/* clip path */
+.arrow-right {
+  width: 20px;
+  height: 32px;
+  background-color: #e888a3;
+
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
+}
+
+/* pseudo element + hidden overflow */
+.arrow-down {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    display: block;
+    width: calc(40px / 1.41);
+    height: calc(40px / 1.41);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #f7df6c;
+    transform: rotate(-45deg);
+    transform-origin: 0 0;
+  }
+}
+
+/* HTML Entities */
+/**
+ * ◄ : &#9668;
+ * ► : &#9658;
+ * ▼ : &#9660;
+ * ▲ : &#9650;
+ */
+.arrow::before {
+  content: '&#9660';
+}
+```
 
 ## CSS Variables
 
