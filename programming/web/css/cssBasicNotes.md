@@ -1517,6 +1517,48 @@ justify(自适应，左右都无空格)
 
 mix transparent with non-transparent border to make shapes (e.g. triangle).
 
+```css
+.arrow-up {
+  width: 0;
+  height: 0;
+
+  border-right: 16px solid transparent;
+  border-left: 16px solid transparent;
+
+  border-bottom: 20px solid #8888e8;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+
+  border-left: 20px solid #e888a3;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+
+  border-right: 16px solid transparent;
+  border-left: 16px solid transparent;
+
+  border-top: 20px solid #f7df6c;
+}
+
+.arrow-left {
+  width: 0;
+  height: 0;
+
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+
+  border-right: 20px solid #8de698;
+}
+```
+
 #### border-radius
 
 #### border-image
