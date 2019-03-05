@@ -342,6 +342,11 @@ class Menu extends React.Component {
   (avoid wrapper hell in render props or HOC)
 - split one complex component into smaller functions
 - use more of React's features without classes
+- class components will read `this.props` **too early** or **too late**,
+  because of mutable `this` in React
+  (however `props` argument of function components is immutable)
+  more details on
+  [Overreacted](https://overreacted.io/how-are-function-components-different-from-classes/)
 
 #### Default Hooks
 
