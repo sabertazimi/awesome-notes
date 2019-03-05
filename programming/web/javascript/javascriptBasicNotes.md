@@ -315,6 +315,11 @@ now.getMonth();    // Warn: 0-11
 now.getDate();     // 1-n
 now.getDay():      // Warn: 0-6
 now.toString();
+now.toDateString();
+now.toTimeString();
+now.toLocaleString();
+now.toLocaleDateString();
+now.toLocaleTimeString();
 
 const daysOfMonth = (year, month) => {
   // `0` for last month of next month
