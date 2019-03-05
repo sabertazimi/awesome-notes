@@ -2237,6 +2237,7 @@ window.addEventListener('scroll', function(event) {
 
 #### JavaScript Lazy Loading
 
+- [Script Priorities](https://addyosmani.com/blog/script-priorities/)
 - `defer`: downloads the script while the document is still parsing,
   but waits until the document has finished parsing before executing it
   (**in order**)
