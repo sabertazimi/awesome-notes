@@ -3,7 +3,7 @@
 ## GraphiQL
 
 - `ctrl+enter`: run query
-- `ctrl+space`: auto complete
+- `ctrl+space`: auto complete in `()` or `{}`
 - `shift+ctrl+p`: prettify
 
 ## Basic Syntax
