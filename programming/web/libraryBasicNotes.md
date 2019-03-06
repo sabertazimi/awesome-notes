@@ -329,6 +329,7 @@
 - [Vue Skeleton](https://github.com/egoist/vue-content-loader)
 - [Epic Spinners](https://github.com/epicmaxco/epic-spinners)
 - [Loading IO](https://loading.io/)
+- [Page Loading Progress](https://github.com/rstacruz/nprogress)
 
 ### Hover
 
