@@ -29,6 +29,7 @@
         - [替换](#替换)
         - [查询](#查询)
         - [遍历](#遍历)
+        - [Deep Clone of Array](#deep-clone-of-array)
         - [其他](#其他)
         - [Array Tips](#array-tips)
         - [高阶函数](#高阶函数)
@@ -523,6 +524,21 @@ string(charArray).split("割断点");   // 选择割断符,返回字符串数组
 
 ```javascript
 []/obj.forEach(function (val) {});    // 遍历数组/对象所有元素(val为单个元素)
+```
+
+##### Deep Clone of Array
+
+```js
+let nestedArray = [1, [2], 3];
+let arrayCopy = JSON.parse(JSON.stringify(nestedArray));
+
+// Make some changes
+arrayCopy[0] = '1'; // change shallow element
+arrayCopy[1][0] = '3'; // change nested element
+console.log(arrayCopy); // [ '1', [ '3' ], 3 ]
+
+// Good: Nested array NOT affected
+console.log(nestedArray); //  1, [ 2 ], 3 ]
 ```
 
 ##### 其他
