@@ -473,6 +473,7 @@
 
 ## Network
 
+- [HTTP/HTTPS troubleshooting and profiling](https://github.com/trimstray/htrace.sh)
 - bl
 - concat-stream
 - async
