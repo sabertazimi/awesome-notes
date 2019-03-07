@@ -18,8 +18,7 @@
   - [List Virtualization](#list-virtualization)
   - [Card](#card)
   - [List](#list)
-  - [Nav](#nav)
-  - [Menu](#menu)
+  - [Navigation](#navigation)
   - [Charts](#charts)
   - [Search](#search)
   - [Scroll](#scroll)
@@ -175,12 +174,10 @@
 
 - [Sortable](https://github.com/RubaXa/Sortable)
 
-## Nav
+## Navigation
 
 - [okay nav](https://github.com/VPenkov/okayNav)
-
-## Menu
-
+- [Animated Nav Burgers](https://github.com/march08/animated-burgers)
 - [Menu Icon Click Animation](https://github.com/jonsuh/hamburgers)
 
 ## Charts
