@@ -80,7 +80,7 @@
     - [Higher Level Tools](#higher-level-tools)
     - [Coverage](#coverage)
     - [Mock](#mock)
-    - [Other Testing](#other-testing)
+    - [Website Monitoring](#website-monitoring)
     - [Performance](#performance)
     - [Log](#log)
 
@@ -520,9 +520,12 @@
 
 ### Unit Testing
 
+- [Jest](https://github.com/facebook/jest)
+- [Enzyme - React Testing](https://github.com/airbnb/enzyme)
 - [jasmine](https://github.com/jasmine/jasmine)
 - [mocha](https://github.com/mochajs/mocha)
 - [Assert](https://github.com/power-assert-js/power-assert)
+- [testem](https://github.com/testem/testem)
 
 ### Feature Testing
 
@@ -548,10 +551,9 @@
 - [Images Placeholder](https://placeholder.com)
 - [Images Mock](http://source.unsplash.com/random)
 
-### Other Testing
+### Website Monitoring
 
-- [testem](https://github.com/testem/testem)
-- [Multi-Version Nodejs](https://github.com/victorbjelkholm/autochecker)
+- [Source Buster](https://github.com/alexfedoseev/sourcebuster-js)
 
 ### Performance
 
