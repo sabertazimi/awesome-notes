@@ -2059,6 +2059,8 @@ Math.tan(x)
 
 ## Browser Performance
 
+- [Performance 工具指北](https://zhuanlan.zhihu.com/p/41017888)
+
 ### Browser Pefermance Monitoring
 
 前端性能监控分为两种方式，一种叫做合成监控（Synthetic Monitoring，SYN），另一种是真实用户监控（Real User Monitoring，RUM）。
