@@ -54,13 +54,13 @@
   - [Mail](#mail)
   - [Blocks](#blocks)
   - [Table](#table)
+  - [Color](#color)
+  - [iFrame](#iframe)
+  - [Clipboard](#clipboard)
   - [File](#file)
   - [Persistence/Storage/Store](#persistencestoragestore)
   - [Code Analysis](#code-analysis)
   - [Code Optimizer](#code-optimizer)
-  - [Color](#color)
-  - [iFrame](#iframe)
-  - [Clipboard](#clipboard)
   - [Editor](#editor)
     - [Rich Text Editor](#rich-text-editor)
     - [Code Editor](#code-editor)
@@ -397,6 +397,19 @@
 - [jQuery Plugin for Render Data](https://github.com/DataTables/DataTables)
 - [Extended Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
 
+## Color
+
+- [Color Palettes from Online Website](https://github.com/cloudflare-design/color)
+- [culori](https://github.com/Evercoder/culori)
+
+## iFrame
+
+- [Postmate](https://github.com/dollarshaveclub/postmate)
+
+## Clipboard
+
+- [Clipboard](https://github.com/zenorocha/clipboard.js)
+
 ## File
 
 - [Uppy](https://github.com/transloadit/uppy)
@@ -419,18 +432,6 @@
 ## Code Optimizer
 
 - [JavaScript Obfuscator](https://github.com/javascript-obfuscator/javascript-obfuscator)
-
-## Color
-
-- [culori](https://github.com/Evercoder/culori)
-
-## iFrame
-
-- [Postmate](https://github.com/dollarshaveclub/postmate)
-
-## Clipboard
-
-- [Clipboard](https://github.com/zenorocha/clipboard.js)
 
 ## Editor
 
