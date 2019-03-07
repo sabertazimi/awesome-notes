@@ -523,6 +523,7 @@
 
 - [Jest](https://github.com/facebook/jest)
 - [Enzyme - React Testing](https://github.com/airbnb/enzyme)
+- [React Testing Library](https://github.com/kentcdodds/react-testing-library)
 - [jasmine](https://github.com/jasmine/jasmine)
 - [mocha](https://github.com/mochajs/mocha)
 - [Assert](https://github.com/power-assert-js/power-assert)
