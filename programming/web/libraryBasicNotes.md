@@ -51,6 +51,7 @@
     - [Select](#select)
     - [Validator](#validator)
   - [Layout](#layout)
+  - [Social](#social)
   - [Mail](#mail)
   - [Blocks](#blocks)
   - [Table](#table)
@@ -383,6 +384,10 @@
 - [Brick Layer](https://github.com/ademilter/bricklayer)
 - [定位元素 - tether](https://github.com/HubSpot/tether)
 - [SplitJS](https://github.com/nathancahill/Split.js)
+
+## Social
+
+- [Social Share URLs](https://github.com/bradvin/social-share-urls)
 
 ## Mail
 
