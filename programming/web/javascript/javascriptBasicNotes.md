@@ -583,6 +583,20 @@ after = after.charAt(0).toUpperCase() + after.slice(1);
 arr.splice(index, 1);
 ```
 
+- Remove Duplicate Elements
+
+```javascript
+// 1: "Set"
+[...new Set(array)];
+
+// 2: "Filter"
+array.filter((item, index) => array.indexOf(item) === index);
+
+// 3: "Reduce"
+array.reduce((unique, item) =>
+  unique.includes(item) ? unique : [...unique, item], []);
+```
+
 ##### 高阶函数
 
 ```javascript
