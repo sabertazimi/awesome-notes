@@ -1,5 +1,12 @@
 # GraphQL Basic Notes
 
+## Better REST
+
+- no overfetching
+- no underfetching (need multiple RESTful request)
+- flexible (clients can specify their exact data requirements)
+- strong `Schema` and `Type System` (just like database)
+
 ## GraphiQL
 
 - `ctrl+enter`: run query
