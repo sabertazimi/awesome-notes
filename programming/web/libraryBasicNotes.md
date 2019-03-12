@@ -483,7 +483,8 @@
 
 ## Network
 
-- [HTTP/HTTPS troubleshooting and profiling](https://github.com/trimstray/htrace.sh)
+- [HTTP/HTTPS Troubleshooting and Profiling](https://github.com/trimstray/htrace.sh)
+- [HTTP/HTTPS Benchmarking Tool](https://github.com/mcollina/autocannon)
 - bl
 - concat-stream
 - async
