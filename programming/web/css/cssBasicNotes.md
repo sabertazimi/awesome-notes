@@ -2531,11 +2531,12 @@ a {
 a::after {
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: 0;
   width: 0;
   height: 3px;
   background-color: #22313f;
   content: "";
+  transform-origin: bottom-center;
 }
 
 a:hover {
@@ -2543,7 +2544,6 @@ a:hover {
 }
 
 a:hover::after {
-  left: 0;
   width: 100%;
 }
 ```
