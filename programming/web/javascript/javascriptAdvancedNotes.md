@@ -191,6 +191,7 @@
       - [Layer Panel](#layer-panel)
     - [Rendering Panel](#rendering-panel)
     - [More Tools](#more-tools)
+  - [SSR](#ssr)
   - [PWA](#pwa)
     - [Service Worker](#service-worker)
       - [SW Pros](#sw-pros)
@@ -3424,6 +3425,10 @@ tool for composite stage analysis
 - layers
 - animations
 - coverage
+
+## SSR
+
+- [Server Side Rendering with Puppeteer](https://developers.google.com/web/tools/puppeteer/articles/ssr)
 
 ## PWA
 
