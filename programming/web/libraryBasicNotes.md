@@ -59,6 +59,7 @@
   - [iFrame](#iframe)
   - [Clipboard](#clipboard)
   - [File](#file)
+    - [PDF](#pdf)
   - [Persistence/Storage/Store](#persistencestoragestore)
   - [Code Analysis](#code-analysis)
   - [Code Optimizer](#code-optimizer)
@@ -420,6 +421,10 @@
 - [Uppy](https://github.com/transloadit/uppy)
 - [zTree v3](https://github.com/zTree/zTree_v3)
 - [Human Readable File Size](https://github.com/avoidwork/filesize.js)
+
+### PDF
+
+- [pdfkit](https://github.com/foliojs/pdfkit)
 
 ## Persistence/Storage/Store
 
