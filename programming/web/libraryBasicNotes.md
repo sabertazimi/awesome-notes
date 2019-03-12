@@ -165,6 +165,7 @@
 
 ## List Virtualization
 
+- [React Window](https://github.com/bvaughn/react-window)
 - [Large Data List/Table/Scroller](https://github.com/bvaughn/react-virtualized)
 
 ## Card
