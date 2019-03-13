@@ -103,6 +103,7 @@
 - [Basic - HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 - [Back-End - Nodejs Hackathon Starter](https://github.com/sahat/hackathon-starter)
 - [Desktop - Electron React Boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
+- [hygen - component generator](https://github.com/jondot/hygen)
 
 ## Solution and Framework
 
@@ -156,6 +157,7 @@
 - [Gatsby.js](https://github.com/gatsbyjs/gatsby)
 - [Vuepress](https://github.com/vuejs/vuepress)
 - [Intro.js](https://github.com/usablica/intro.js)
+- [wiki.js](https://github.com/Requarks/wiki)
 - [documentationjs](https://github.com/documentationjs/documentation)
 - [YUI Doc Generator](https://github.com/yui/yuidoc)
 - [YUI Doc Dark Theme](https://github.com/Krxtopher/yuidoc-themes)
