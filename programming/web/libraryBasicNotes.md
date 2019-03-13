@@ -418,7 +418,7 @@
 
 ## File
 
-- [Uppy](https://github.com/transloadit/uppy)
+- [Uppy](https://github.com/transloadit/uppy/tree/master/packages/%40uppy/react)
 - [zTree v3](https://github.com/zTree/zTree_v3)
 - [Human Readable File Size](https://github.com/avoidwork/filesize.js)
 - [FireFox Send](https://github.com/mozilla/send)
