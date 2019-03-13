@@ -27,7 +27,6 @@
   - [Calendar](#calendar)
   - [Time](#time)
   - [Slides](#slides)
-  - [Terminal](#terminal)
   - [Society](#society)
   - [Emoji](#emoji)
   - [Fonts](#fonts)
@@ -63,6 +62,7 @@
   - [Persistence/Storage/Store](#persistencestoragestore)
   - [Code Analysis](#code-analysis)
   - [Code Optimizer](#code-optimizer)
+  - [Terminal](#terminal)
   - [Editor](#editor)
     - [Rich Text Editor](#rich-text-editor)
     - [Code Editor](#code-editor)
@@ -162,6 +162,7 @@
 
 ## Chat
 
+- [React Chat Widget](https://github.com/Wolox/react-chat-widget)
 - [Matrix](https://github.com/matrix-org/matrix-react-sdk)
 
 ## List Virtualization
@@ -238,10 +239,6 @@
 - [Glider.js](https://github.com/NickPiscitelli/Glider.js)
 - [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
 - [Awesome PPT/Prezi](https://github.com/impress/impress.js)
-
-## Terminal
-
-- [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
 
 ## Society
 
@@ -383,6 +380,7 @@
 
 - [Full Page Layout](https://github.com/alvarotrigo/fullPage.js)
 - [One Page Layout](https://github.com/davist11/jQuery-One-Page-Nav)
+- [React Panel Group](https://github.com/DanFessler/react-panelgroup)
 - [Bricks Layout](https://github.com/callmecavs/bricks.js)
 - [Brick Layer](https://github.com/ademilter/bricklayer)
 - [定位元素 - tether](https://github.com/HubSpot/tether)
@@ -446,16 +444,23 @@
 
 - [JavaScript Obfuscator](https://github.com/javascript-obfuscator/javascript-obfuscator)
 
+## Terminal
+
+- [React Terminal](https://github.com/rohanchandra/react-terminal-component)
+- [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
+
 ## Editor
 
 ### Rich Text Editor
 
+- [React Markdown](https://github.com/rexxars/react-markdown)
 - [CKEditor](https://github.com/ckeditor/)
 - [Wang Editor - Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
 - [Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
 
 ### Code Editor
 
+- [React ACE](https://github.com/securingsincity/react-ace)
 - [ACE Editor](https://github.com/ajaxorg/ace)
 - [CodeMirror](https://github.com/codemirror/CodeMirror)
 - [React Built In Editor](https://github.com/facebook/draft-js)
