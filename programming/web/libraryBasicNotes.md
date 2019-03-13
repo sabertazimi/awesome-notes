@@ -70,6 +70,7 @@
     - [Video](#video)
   - [i18n](#i18n)
   - [CLI](#cli)
+  - [Daemon](#daemon)
   - [Network](#network)
   - [DOM](#dom)
   - [Server](#server)
@@ -481,6 +482,11 @@
 - [chalk](https://github.com/chalk/chalk)
 - [open CLI framework](https://github.com/oclif/oclif)
 - [progress](https://github.com/bvaughn/progress-estimator)
+
+## Daemon
+
+- [PM2](https://github.com/Unitech/pm2)
+- [Nodemon](https://github.com/remy/nodemon)
 
 ## Network
 
