@@ -49,6 +49,7 @@
     - [Controller](#controller)
     - [Best Practice](#best-practice)
   - [Modern React](#modern-react)
+    - [Lazy and Suspense](#lazy-and-suspense)
     - [Context API](#context-api)
       - [Ref with Context](#ref-with-context)
     - [Error Boundary](#error-boundary)
@@ -1173,6 +1174,28 @@ render() {
 - [Singel](https://github.com/diegohaz/singel)
 
 ## Modern React
+
+### Lazy and Suspense
+
+```js
+import React, { lazy, Suspense } from 'react';
+
+const Product = lazy(() => import('./ProductHandler'));
+
+const App = () => (
+  <div className='product-list'>
+    <h1>My Awesome Product</h1>
+    <Suspense fallback={<h2>Product list is loading...</h2>}>
+      <p>Take a look at my product:</p>
+      <section>
+        <Product id='PDT-49-232' />
+        <Product id='PDT-50-233' />
+        <Product id='PDT-51-234' />
+      </section>
+    </Suspense>
+  </div>
+);
+```
 
 ### Context API
 
