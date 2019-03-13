@@ -83,7 +83,8 @@
     - [Higher Level Tools](#higher-level-tools)
     - [Coverage](#coverage)
     - [Mock](#mock)
-    - [Website Monitoring](#website-monitoring)
+    - [Network Debugging](#network-debugging)
+    - [Monitoring](#monitoring)
     - [Performance](#performance)
     - [Log](#log)
 
@@ -580,7 +581,11 @@
 - [Images Placeholder](https://placeholder.com)
 - [Images Mock](http://source.unsplash.com/random)
 
-### Website Monitoring
+### Network Debugging
+
+- [Whistle](https://github.com/avwo/whistle)
+
+### Monitoring
 
 - [Source Buster](https://github.com/alexfedoseev/sourcebuster-js)
 
