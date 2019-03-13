@@ -422,6 +422,7 @@
 - [Uppy](https://github.com/transloadit/uppy)
 - [zTree v3](https://github.com/zTree/zTree_v3)
 - [Human Readable File Size](https://github.com/avoidwork/filesize.js)
+- [FireFox Send](https://github.com/mozilla/send)
 
 ### PDF
 
