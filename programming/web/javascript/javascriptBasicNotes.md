@@ -40,6 +40,7 @@
       - [属性检测](#属性检测)
     - [强制类型转化(Type Coercion)](#强制类型转化type-coercion)
   - [运算符](#运算符)
+    - [Loose Comparison](#loose-comparison)
     - [条件表达式](#条件表达式)
   - [控制流程](#控制流程)
     - [switch/case](#switchcase)
@@ -688,6 +689,15 @@ const hasAge = !!age;
 
 - ==与===
 - !=与!==
+
+### Loose Comparison
+
+[JS Loose Comparison](https://felix-kling.de/js-loose-comparison):
+
+- Type(x) === Type(y): return `x === y` (Strict Equality Comparison)
+- Type(x) !== Type(y):
+  - x and y are `undefined` or `null`: return true
+  - return comparsion between `ToNumber(x)` and `ToPrimitive(y)`
 
 ### 条件表达式
 
