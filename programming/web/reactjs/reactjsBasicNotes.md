@@ -25,6 +25,7 @@
     - [Render Props (Children as Function)](#render-props-children-as-function)
     - [Hooks](#hooks)
       - [Default Hooks](#default-hooks)
+        - [useRef](#useref)
         - [useEffect](#useeffect)
       - [Basic Rules](#basic-rules)
       - [Custom Hooks](#custom-hooks)
@@ -355,12 +356,6 @@ class Menu extends React.Component {
 #### Default Hooks
 
 - `useState`: read rendered props/state
-- `useRef`: read rendered props/state from **the future**.
-  Generally, you should avoid reading or setting refs
-  during rendering because they’re mutable.
-  We want to keep the rendering predictable.
-  However, if we want to get the latest value of a particular prop or state,
-  it's good to read/set `ref.current`.
 - `useCallback`: 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
   但是每次都是返回新的函数, 使用 `useCallback`, 可以让它使用上次的函数.
   在虚拟 DOM 更新过程中, 如果事件句柄相同, 那么就不用每次都进行
@@ -423,6 +418,31 @@ ChatAPI.subscribeToFriendStatus(300, handleStatusChange);     // Run next effect
 
 // Unmount
 ChatAPI.unsubscribeFromFriendStatus(300, handleStatusChange); // Clean up last effect
+```
+
+##### useRef
+
+`useRef` read rendered props/state from **the future**.
+Generally, you should avoid reading or setting refs
+during rendering because they’re mutable.
+We want to keep the rendering predictable.
+However, if we want to get the latest value of a particular prop or state,
+it's good to read/set `ref.current`.
+
+```js
+function Example() {
+  const [count, setCount] = useState(0);
+  const latestCount = useRef(count);
+
+  useEffect(() => {
+    // Set the mutable latest value
+    latestCount.current = count;
+    setTimeout(() => {
+      // Read the mutable latest value
+      console.log(`You clicked ${latestCount.current} times`);
+    }, 3000);
+  });
+}
 ```
 
 ##### useEffect
