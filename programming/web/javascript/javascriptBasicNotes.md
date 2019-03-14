@@ -2384,6 +2384,8 @@ For `click/keydown` events:
 - `event.prevetDefault()`
 - `event.stopPropagation()`
 
+`element.dispatchEvent` to trigger events.
+
 #### Global DOM Event
 
 DOMContentLoaded:
