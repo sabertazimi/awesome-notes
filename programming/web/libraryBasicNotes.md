@@ -471,6 +471,7 @@
 ### Audio
 
 - [Howler.js](https://github.com/goldfire/howler.js)
+- [Music Helper Utils](https://github.com/madewithlove/music-fns)
 
 ### Video
 
