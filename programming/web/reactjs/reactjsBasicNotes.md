@@ -447,8 +447,9 @@ function Example() {
 
 ##### useEffect
 
-Hoisting functions that don’t need props or state outside of component,
-and pull the ones that are used only by an effect inside of that effect.
+React renders UI for current props/state to screen,
+React cleans up the effect for prev props/state,
+React runs the effect for current props/state.
 
 `useEffect` nasty loop:
 The effect hook runs when the component mounts but also when the component updates.
@@ -464,6 +465,9 @@ If one of the variables changes, the hook runs again.
 If the array with the variables is empty, the hook doesn’t run
 when updating the component at all (only run when mounting),
 because it doesn’t have to watch any variables.
+
+Hoisting functions that don’t need props or state outside of component,
+and pull the ones that are used only by an effect inside of that effect.
 
 ```js
 // https://www.robinwieruch.de/react-hooks-fetch-data
