@@ -485,6 +485,9 @@ function Example() {
 
 ##### useEffect
 
+[Complete Guide](https://overreacted.io/a-complete-guide-to-useeffect)
+
+`useEffect` lifecycle:
 React renders UI for current props/state to screen,
 React cleans up the effect for prev props/state,
 React runs the effect for current props/state.
@@ -496,6 +499,7 @@ the component updates and the effect runs again.
 It fetches the data again and again.
 That’s a bug and needs to be avoided.
 
+`useEffect` deps list:
 That’s why provide an **empty array** as second argument to the effect hook
 to avoid activating it on component updates
 but **only for the mounting** of the component.
@@ -504,8 +508,12 @@ If the array with the variables is empty, the hook doesn’t run
 when updating the component at all (only run when mounting),
 because it doesn’t have to watch any variables.
 
-Hoisting functions that don’t need props or state outside of component,
-and pull the ones that are used only by an effect inside of that effect.
+Functions in useEffect:
+
+- If only use some functions inside an effect, move them directly into that effect.
+- Hoisting functions that don’t need props or state outside of component,
+  and pull the ones that are used only by an effect inside of that effect.
+- for useCallback function, it should be in deps list `useEffect(() => {}, [callback])`
 
 ```js
 // https://www.robinwieruch.de/react-hooks-fetch-data
