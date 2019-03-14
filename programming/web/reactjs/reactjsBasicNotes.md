@@ -25,6 +25,7 @@
     - [Render Props (Children as Function)](#render-props-children-as-function)
     - [Hooks](#hooks)
       - [Default Hooks](#default-hooks)
+        - [useState](#usestate)
         - [useRef](#useref)
         - [useEffect](#useeffect)
       - [Basic Rules](#basic-rules)
@@ -355,11 +356,21 @@ class Menu extends React.Component {
 
 #### Default Hooks
 
-- `useState`: read rendered props/state
 - `useCallback`: 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
   但是每次都是返回新的函数, 使用 `useCallback`, 可以让它使用上次的函数.
   在虚拟 DOM 更新过程中, 如果事件句柄相同, 那么就不用每次都进行
   `removeEventListner` 与 `addEventListner`.
+
+##### useState
+
+read rendered props/state
+
+```js
+setState(prevState => {
+  // Object.assign would also work
+  return {...prevState, ...updatedValues};
+});
+```
 
 ```jsx
 import { useState } from 'react';
