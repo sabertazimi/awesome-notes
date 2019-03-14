@@ -25,6 +25,7 @@
     - [Render Props (Children as Function)](#render-props-children-as-function)
     - [Hooks](#hooks)
       - [Default Hooks](#default-hooks)
+        - [useCallback](#usecallback)
         - [useState](#usestate)
         - [useRef](#useref)
         - [useEffect](#useeffect)
@@ -356,10 +357,36 @@ class Menu extends React.Component {
 
 #### Default Hooks
 
-- `useCallback`: 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
-  但是每次都是返回新的函数, 使用 `useCallback`, 可以让它使用上次的函数.
-  在虚拟 DOM 更新过程中, 如果事件句柄相同, 那么就不用每次都进行
-  `removeEventListner` 与 `addEventListner`.
+##### useCallback
+
+对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
+但是每次都是返回新的函数, 使用 `useCallback`, 可以让它使用上次的函数.
+在虚拟 DOM 更新过程中, 如果事件句柄相同, 那么就不用每次都进行
+`removeEventListner` 与 `addEventListner`.
+
+```js
+function Parent() {
+  const [query, setQuery] = useState('react');
+
+  // ✅ Preserves identity until query changes
+  const fetchData = useCallback(() => {
+    const url = 'https://hn.algolia.com/api/v1/search?query=' + query;
+    // ... Fetch data and return it ...
+  }, [query]);  // ✅ Callback deps are OK
+
+  return <Child fetchData={fetchData} />
+}
+
+function Child({ fetchData }) {
+  let [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetchData().then(setData);
+  }, [fetchData]); // ✅ Effect deps are OK
+
+  // ...
+}
+```
 
 ##### useState
 
