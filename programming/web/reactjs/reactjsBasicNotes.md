@@ -25,6 +25,7 @@
     - [Render Props (Children as Function)](#render-props-children-as-function)
     - [Hooks](#hooks)
       - [Default Hooks](#default-hooks)
+        - [useEffect](#useeffect)
       - [Basic Rules](#basic-rules)
       - [Custom Hooks](#custom-hooks)
         - [Async Data Hook](#async-data-hook)
@@ -423,6 +424,26 @@ ChatAPI.subscribeToFriendStatus(300, handleStatusChange);     // Run next effect
 // Unmount
 ChatAPI.unsubscribeFromFriendStatus(300, handleStatusChange); // Clean up last effect
 ```
+
+##### useEffect
+
+Hoisting functions that don’t need props or state outside of component,
+and pull the ones that are used only by an effect inside of that effect.
+
+`useEffect` nasty loop:
+The effect hook runs when the component mounts but also when the component updates.
+Because we are setting the state after every data fetch,
+the component updates and the effect runs again.
+It fetches the data again and again.
+That’s a bug and needs to be avoided.
+
+That’s why provide an **empty array** as second argument to the effect hook
+to avoid activating it on component updates
+but **only for the mounting** of the component.
+If one of the variables changes, the hook runs again.
+If the array with the variables is empty, the hook doesn’t run
+when updating the component at all (only run when mounting),
+because it doesn’t have to watch any variables.
 
 #### Basic Rules
 
