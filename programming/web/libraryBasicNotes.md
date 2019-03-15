@@ -37,6 +37,7 @@
     - [Slide](#slide)
     - [Gallery](#gallery)
     - [Filter](#filter)
+    - [Canvas](#canvas)
   - [Particles](#particles)
   - [Animation](#animation)
     - [Typing](#typing)
@@ -45,6 +46,8 @@
   - [Message](#message)
     - [Prompt](#prompt)
     - [Alert](#alert)
+    - [Focus](#focus)
+    - [Tooltip](#tooltip)
   - [Form](#form)
     - [Input](#input)
     - [Select](#select)
@@ -58,6 +61,7 @@
   - [iFrame](#iframe)
   - [Clipboard](#clipboard)
   - [File](#file)
+    - [Upload](#upload)
     - [PDF](#pdf)
   - [Persistence/Storage/Store](#persistencestoragestore)
   - [Code Analysis](#code-analysis)
@@ -297,8 +301,12 @@
 
 - [Pictures Color Style Filter](https://github.com/we-are-next/cssco)
 - [Rainyday Effect](https://github.com/maroslaw/rainyday.js)
-- [Canvas Manipulation](https://github.com/meltingice/CamanJS/)
 - [js-imagediff](https://github.com/HumbleSoftware/js-imagediff)
+
+### Canvas
+
+- [rough.js](https://github.com/pshihn/rough)
+- [Canvas Manipulation](https://github.com/meltingice/CamanJS/)
 
 ## Particles
 
@@ -336,8 +344,6 @@
 
 - [Image Hover](http://imagehover.io/)
 - [Hovering Button Effects](https://github.com/IanLunn/Hover)
-- [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
-- [Hint.css - Tooltips](https://github.com/chinchang/hint.css)
 
 ## Message
 
@@ -354,7 +360,18 @@
 
 ### Alert
 
+- [Sweet Alert 2](https://github.com/sweetalert2/sweetalert2)
 - [Sweet Alert](https://github.com/t4t5/sweetalert)
+
+### Focus
+
+- [driver.js](https://github.com/kamranahmedse/driver.js)
+
+### Tooltip
+
+- [tippy.js](https://github.com/atomiks/tippyjs)
+- [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
+- [Hint.css - Tooltips](https://github.com/chinchang/hint.css)
 
 ## Form
 
@@ -364,6 +381,7 @@
 ### Input
 
 - [Super Placeholder](https://github.com/chinchang/superplaceholder.js)
+- [autoComplete.js](https://github.com/TarekRaafat/autoComplete.js)
 
 ### Select
 
@@ -421,10 +439,14 @@
 
 ## File
 
-- [Uppy](https://github.com/transloadit/uppy/tree/master/packages/%40uppy/react)
 - [zTree v3](https://github.com/zTree/zTree_v3)
 - [Human Readable File Size](https://github.com/avoidwork/filesize.js)
 - [FireFox Send](https://github.com/mozilla/send)
+
+### Upload
+
+- [filepond](https://github.com/pqina/filepond)
+- [Uppy File Uploader](https://github.com/transloadit/uppy/tree/master/packages/%40uppy/react)
 
 ### PDF
 
