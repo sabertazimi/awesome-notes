@@ -106,6 +106,8 @@ dllReferencePlugin = new Webpack.DllReferencePlugin({
 - prefetch plugin
 - webpack-bundle-analyzer
 - webpack-monitor
+- [webpack-jarvis - Browser UI](https://github.com/zouhir/jarvis)
+- [webpackbar](https://github.com/nuxt/webpackbar)
 
 ## Advanced
 
