@@ -25,7 +25,7 @@
   - [Mouse](#mouse)
   - [Button](#button)
   - [Calendar](#calendar)
-  - [Time](#time)
+  - [Time/Date](#timedate)
   - [Slides](#slides)
   - [Society](#society)
   - [Emoji](#emoji)
@@ -233,10 +233,11 @@
 - [React Calendar](https://github.com/moodydev/react-calendar)
 - [GitHub Style Calendar](https://github.com/DKirwan/calendar-heatmap)
 
-## Time
+## Time/Date
 
+- [day.js](https://github.com/iamkun/dayjs)
 - [Pickadate.js](https://github.com/amsul/pickadate.js)
-- [Moment.js Awesome Library](https://github.com/moment/moment)
+- [Moment.js](https://github.com/moment/moment)
 - strftime
 
 ## Slides
