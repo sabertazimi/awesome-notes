@@ -138,7 +138,7 @@
         - [Event Check](#event-check)
       - [Frag](#frag)
     - [DOM HTML](#dom-html)
-    - [DOM Style](#dom-style)
+    - [CSSOM](#cssom)
     - [DOM Events](#dom-events)
       - [Global DOM Event](#global-dom-event)
       - [Tab Visibility Event](#tab-visibility-event)
@@ -150,7 +150,6 @@
     - [Document](#document)
     - [Window](#window)
       - [location API](#location-api)
-    - [New DOM API](#new-dom-api)
     - [JS DOM API](#js-dom-api)
       - [width/height](#widthheight)
       - [Window Height](#window-height)
@@ -2364,12 +2363,18 @@ document.querySelector("cssSelector");
 document.querySelectorAll("cssSelector");
 ```
 
-### DOM Style
+### CSSOM
 
 ```js
 element.style.*;
 element.style.fontFamily;
 element.style.marginTopWidth;
+```
+
+```js
+element.classList.add
+element.classList.remove
+element.classList.toggle
 ```
 
 **Tip**: bind class
@@ -2633,21 +2638,6 @@ window.addEventListener('hashchange', (event) => {
     somecoolfeature();
   }
 }, false);
-```
-
-### New DOM API
-
-```js
-document.querySelector
-document.querySelectorAll
-
-element.classList.add
-element.classList.remove
-element.classList.toggle
-
-element.textContent
-
-element.addEventListener
 ```
 
 ### JS DOM API
