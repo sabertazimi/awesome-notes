@@ -208,7 +208,8 @@
 
 - [React Scroll Box](https://github.com/smikhalevski/react-scroll-box)
 - [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
-- [视差滚动](https://github.com/Prinzhorn/skrollr)
+- [Scroll Parallax](https://github.com/Prinzhorn/skrollr)
+- [Smooth Scroll Animation](https://github.com/alexfoxy/laxxx)
 - [Scroll Reveal](https://github.com/scrollreveal/scrollreveal)
 - [Scroll Animation](https://github.com/michalsnik/aos)
 - [Scroll Magic](https://github.com/janpaepke/ScrollMagic)
