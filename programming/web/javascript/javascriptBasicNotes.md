@@ -139,6 +139,9 @@
       - [Frag](#frag)
     - [DOM HTML](#dom-html)
     - [CSSOM](#cssom)
+      - [Inline Styles](#inline-styles)
+      - [Computed Styles](#computed-styles)
+      - [CSS Class](#css-class)
     - [DOM Events](#dom-events)
       - [Global DOM Event](#global-dom-event)
       - [Tab Visibility Event](#tab-visibility-event)
@@ -2365,11 +2368,39 @@ document.querySelectorAll("cssSelector");
 
 ### CSSOM
 
+The CSS Object Model is a set of APIs allowing the manipulation of CSS from JavaScript.
+It is much like the DOM, but for the CSS rather than the HTML.
+It allows users to read and modify CSS style dynamically.
+
+#### Inline Styles
+
 ```js
 element.style.*;
 element.style.fontFamily;
 element.style.marginTopWidth;
 ```
+
+#### Computed Styles
+
+- shorthand style for full property
+- longhand style for specific property
+- `getPropertyValue` can get css variables too
+
+```js
+window.getComputedStyle(document.body).background;
+
+// dot notation, same as above
+window.getComputedStyle(el).backgroundColor;
+
+// square bracket notation
+window.getComputedStyle(el)['background-color'];
+
+// using getPropertyValue()
+// can get css variables property too
+window.getComputedStyle(el).getPropertyValue('background-color');
+```
+
+#### CSS Class
 
 ```js
 element.classList.add
