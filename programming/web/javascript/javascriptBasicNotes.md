@@ -140,6 +140,7 @@
     - [DOM HTML](#dom-html)
     - [CSSOM](#cssom)
       - [Inline Styles](#inline-styles)
+      - [Get/Set Styles](#getset-styles)
       - [Computed Styles](#computed-styles)
       - [CSS Class](#css-class)
     - [DOM Events](#dom-events)
@@ -2378,6 +2379,29 @@ It allows users to read and modify CSS style dynamically.
 element.style.*;
 element.style.fontFamily;
 element.style.marginTopWidth;
+```
+
+#### Get/Set Styles
+
+- getPropertyValue
+- setProperty
+- removeProperty
+- item
+- `getPropertyPriority`: return `''` or `important`
+
+```js
+let box = document.querySelector('.box');
+
+box.style.setProperty('color', 'orange');
+box.style.setProperty('font-family', 'Georgia, serif');
+op.innerHTML = box.style.getPropertyValue('color');
+op2.innerHTML = `${box.style.item(0)}, ${box.style.item(1)}`;
+
+box.style.setProperty('font-size', '1.5em');
+box.style.item(0) // "font-size"
+
+document.body.style.removeProperty('font-size');
+document.body.style.item(0); // ""
 ```
 
 #### Computed Styles
