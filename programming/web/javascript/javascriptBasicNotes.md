@@ -143,6 +143,11 @@
       - [Get/Set Styles](#getset-styles)
       - [Computed Styles](#computed-styles)
       - [CSS Class](#css-class)
+      - [CSSStyleSheet Interface](#cssstylesheet-interface)
+        - [CSS Rules Definition](#css-rules-definition)
+        - [Media Rule](#media-rule)
+        - [Keyframe Rule](#keyframe-rule)
+        - [Add/Remove CSS Rules](#addremove-css-rules)
     - [DOM Events](#dom-events)
       - [Global DOM Event](#global-dom-event)
       - [Tab Visibility Event](#tab-visibility-event)
@@ -2445,6 +2450,115 @@ function addClass(element, value) {
     element.className = newClassName;
   }
 }
+```
+
+#### CSSStyleSheet Interface
+
+##### CSS Rules Definition
+
+- type of `cssRules`:
+  STYLE_RULE (1), IMPORT_RULE (3), MEDIA_RULE (4), KEYFRAMES_RULE (7)
+- `selectorText` property of rules
+- `style` property of rules
+
+```js
+let myRules = document.styleSheets[0].cssRules,
+    p = document.querySelector('p');
+
+for (i of myRules) {
+  if (i.type === 1) {
+    p.innerHTML += `<c​ode>${i.selectorText}</c​ode><br>`;
+  }
+
+  if (i.selectorText === 'a:hover') {
+    i.selectorText = 'a:hover, a:active';
+  }
+
+  const myStyle = i.style;
+
+  // Set the bg color on the body
+  myStyle.setProperty('background-color', 'peachpuff');
+
+  // Get the font size of the body
+  myStyle.getPropertyValue('font-size');
+  
+  // Get the 5th item in the body's style rule
+  myStyle.item(5);
+
+  // Log the current length of the body style rule (8)
+  myStyle.length;
+
+  // Remove the line height
+  myStyle.removeProperty('line-height');
+
+  // log the length again (7)
+  myStyle.length;
+
+  // Check priority of font-family (empty string)
+  myStyle.getPropertyPriority('font-family');
+}
+```
+
+##### Media Rule
+
+- `conditionText` property of media rule
+- nested `cssRules`
+
+```js
+let myRules = document.styleSheets[0].cssRules,
+    p = document.querySelector('.output');
+
+for (i of myRules) {
+  if (i.type === 4) {
+    p.innerHTML += `<c​ode>${i.conditionText}</c​ode><br>`;
+
+    for (j of i.cssRules) {
+      p.innerHTML += `<c​ode>${j.selectorText}</c​ode><br>`;
+    }
+  }
+}
+```
+
+##### Keyframe Rule
+
+- `name` property of keyframe rule
+- nested `cssRules`:
+- `keyText` property of rules
+
+```js
+let myRules = document.styleSheets[0].cssRules,
+    p = document.querySelector('.output');
+
+for (i of myRules) {
+  if (i.type === 7) {
+    p.innerHTML += `<c​ode>${i.name}</c​ode><br>`;
+
+    for (j of i.cssRules) {
+     p.innerHTML += `<c​ode>${j.keyText}</c​ode><br>`;
+    }
+  }
+}
+```
+
+##### Add/Remove CSS Rules
+
+```js
+let myStylesheet = document.styleSheets[0];
+console.log(myStylesheet.cssRules.length); // 8
+
+document.styleSheets[0].insertRule(
+  'article { line-height: 1.5; font-size: 1.5em; }',
+  myStylesheet.cssRules.length
+);
+console.log(document.styleSheets[0].cssRules.length); // 9
+```
+
+```js
+let myStylesheet = document.styleSheets[0];
+console.log(myStylesheet.cssRules.length); // 8
+
+myStylesheet.deleteRule(3);
+console.log(myStylesheet.cssRules.length); // 7
 ```
 
 ### DOM Events
