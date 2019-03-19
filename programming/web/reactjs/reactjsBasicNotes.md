@@ -25,6 +25,7 @@
     - [Render Props (Children as Function)](#render-props-children-as-function)
     - [Hooks](#hooks)
       - [Default Hooks](#default-hooks)
+        - [useMemo](#usememo)
         - [useCallback](#usecallback)
         - [useState](#usestate)
         - [useRef](#useref)
@@ -415,12 +416,35 @@ class Menu extends React.Component {
 
 #### Default Hooks
 
+##### useMemo
+
+- returns a memoized value
+- only recompute the memoized value when one of the dependencies has changed
+- **optimization** helps to avoid expensive calculations on every render
+
+```js
+const Button = ({ color, children }) => {
+  const textColor = useMemo(
+    () => slowlyCalculateTextColor(color),
+    [color] // ✅ Don’t recalculate until `color` changes
+  );
+
+  return (
+    <button className={'Button-' + color + ' Button-text-' + textColor}>
+      {children}
+    </button>
+  );
+};
+```
+
 ##### useCallback
 
-对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
+- returns a memoized callback
+- 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
 但是每次都是返回新的函数, 使用 `useCallback`, 可以让它使用上次的函数.
 在虚拟 DOM 更新过程中, 如果事件句柄相同, 那么就不用每次都进行
 `removeEventListner` 与 `addEventListner`.
+- `useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`
 
 ```js
 function Parent() {
