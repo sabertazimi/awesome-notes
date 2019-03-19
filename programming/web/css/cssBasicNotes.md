@@ -739,6 +739,11 @@ div:target {
 ```
 
 ```css
+.msg {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
 input:not(:placeholder-shown) + .msg {
   opacity: 1;
 }
