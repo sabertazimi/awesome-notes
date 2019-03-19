@@ -1888,6 +1888,21 @@ function debounce (func, wait = 50, immediate = true) {
 ```
 
 ```js
+// simple throttle
+function throttle(action) {
+  let isRunning = false;
+  return function() {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(() => {
+      action();
+      isRunning = false;
+    });
+  }
+}
+```
+
+```js
 /**
  * underscore 节流函数，返回函数连续调用时，func 执行频率限定为 次 / wait
  *
