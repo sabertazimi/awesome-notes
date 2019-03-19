@@ -702,6 +702,7 @@ a[title*=link] {text-decoration: underline;}
 - :read-only：应用于其内容无法供用户修改的元素；
 - :read-write：应用于其内容可供用户修改的元素，比如输入框；
 - :root：根元素，始终指html元素；
+- :placeholder-shown: select `input` with placeholer
 - E :nth-child(n) 选择 E 的第 n 个孩子
 - E F:nth-child(n)：该选择器定位元素E的第n个子元素的元素F,可省略E
 - E F:nth-last-child(n)：该选择器定位元素E的倒数第n个子元素的元素F,可省略E
@@ -729,6 +730,12 @@ div:target {
 
 #p1:target {
   background-color: purple;
+}
+```
+
+```css
+input:not(:placeholder-shown) + .msg {
+  opacity: 1;
 }
 ```
 
