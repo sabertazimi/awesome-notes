@@ -137,6 +137,8 @@
     - [设备类型](#设备类型)
     - [设备特性](#设备特性)
       - [Style for Print PDF](#style-for-print-pdf)
+  - [Accessibility](#accessibility)
+    - [Screnn Reader Only](#screnn-reader-only)
   - [常用组件 (Awesome Demo)](#常用组件-awesome-demo)
     - [Landing Page](#landing-page)
     - [Modal](#modal)
@@ -2375,6 +2377,25 @@ use `inline-box` with `width`
 
 - [Page Style Standard](https://developer.mozilla.org/en-US/docs/Web/CSS/@page)
 - [PDF Style Tutorial](https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/)
+
+## Accessibility
+
+### Screnn Reader Only
+
+```css
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
+  white-space: nowrap;
+  overflow: hidden;
+}
+```
 
 ## 常用组件 (Awesome Demo)
 
