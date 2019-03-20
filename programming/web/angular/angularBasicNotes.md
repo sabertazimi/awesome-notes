@@ -5,6 +5,7 @@
 - [Angular Basic Notes](#angular-basic-notes)
   - [Basic](#basic)
     - [CLI](#cli)
+  - [Module](#module)
   - [Pipe](#pipe)
     - [Pure Pipe](#pure-pipe)
     - [Impure Pipe](#impure-pipe)
@@ -37,6 +38,14 @@ ng e2e
 ```bash
 ng generate --help
 ```
+
+## Module
+
+Angular 需要知道如何把应用程序的各个部分组合到一起,
+以及该应用需要哪些其它文件和库,
+这些信息被称为元数据（metadata.
+有些元数据位于`@Component`装饰器中, 你会把它加到组件类上.
+另一些关键性的元数据位于`@NgModule`装饰器中.
 
 ## Pipe
 
