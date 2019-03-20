@@ -29,10 +29,13 @@ npm install -g @angular/cli
 ng new my-app
 ng add <package-name>
 ng serve --open
-ng build
 ng lint
 ng test
 ng e2e
+```
+
+```bash
+ng build --prod true --outputPath ./build --baseHref hust-web/angular/learn
 ```
 
 ```bash
