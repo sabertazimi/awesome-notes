@@ -30,3 +30,7 @@ ng lint
 ng test
 ng e2e
 ```
+
+```bash
+ng generate --help
+```
