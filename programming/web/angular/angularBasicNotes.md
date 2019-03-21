@@ -6,6 +6,8 @@
   - [Basic](#basic)
     - [CLI](#cli)
   - [Module](#module)
+  - [Component](#component)
+    - [Props](#props)
   - [Pipe](#pipe)
     - [Pure Pipe](#pure-pipe)
     - [Impure Pipe](#impure-pipe)
@@ -18,6 +20,8 @@
       - [ngClass](#ngclass)
   - [Styles](#styles)
     - [CSS Class Binding](#css-class-binding)
+  - [Service](#service)
+    - [Injection Provider](#injection-provider)
 
 <!-- /TOC -->
 
@@ -60,6 +64,24 @@ Angular 需要知道如何把应用程序的各个部分组合到一起,
 这些信息被称为元数据（metadata.
 有些元数据位于`@Component`装饰器中, 你会把它加到组件类上.
 另一些关键性的元数据位于`@NgModule`装饰器中.
+
+## Component
+
+### Props
+
+```js
+import { Input } from '@angular/core';
+
+... {
+  @Input() hero: Hero;
+}
+```
+
+private props
+
+```js
+constructor(private heroService: HeroService) { }
+```
 
 ## Pipe
 
@@ -135,4 +157,14 @@ setCurrentClasses() {
 <!-- binding to `class.special` trumps the class attribute -->
 <div class="special"
      [class.special]="!isSpecial">This one is not so special</div>
+```
+
+## Service
+
+### Injection Provider
+
+```js
+@Injectable({
+  providedIn: 'root',
+})
 ```
