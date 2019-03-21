@@ -108,6 +108,7 @@ Angular 会在每个组件的变更检测周期中执行非纯管道.
 - UI 变化很复杂时，用 component 归一化处理
 - state 变化很复杂时，用 action/state 归一化处理
 - data-input 很复杂时，用 RxJS/observable 归一化处理
+- [reactive.how](https://reactive.how)
 
 ### Basis
 
