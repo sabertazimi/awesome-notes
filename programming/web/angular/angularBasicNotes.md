@@ -12,6 +12,11 @@
   - [Service](#service)
     - [Injection Provider](#injection-provider)
   - [RxJS](#rxjs)
+    - [Basis](#basis)
+    - [Operator](#operator)
+      - [创建数据流](#创建数据流)
+      - [转换数据流](#转换数据流)
+      - [组合数据流](#组合数据流)
   - [Component](#component)
     - [Props](#props)
   - [Event Binding](#event-binding)
@@ -99,10 +104,12 @@ Angular 会在每个组件的变更检测周期中执行非纯管道.
 - 现在与未来的统一
 - 可组合的数据变更过程
 - 数据与视图的精确绑定
-- 条件变更之后的自动重新计算
+- 条件变更之后的自动重新计算 (Reactive)
 - UI 变化很复杂时，用 component 归一化处理
 - state 变化很复杂时，用 action/state 归一化处理
 - data-input 很复杂时，用 RxJS/observable 归一化处理
+
+### Basis
 
 可观察对象可以发送多个任意类型的值 —— 字面量、消息、事件.
 无论这些值是同步发送的还是异步发送的,
@@ -111,6 +118,70 @@ Angular 会在每个组件的变更检测周期中执行非纯管道.
 因此应用代码只管订阅并消费这些值就可以了, 做完之后, 取消订阅.
 无论这个流是击键流、HTTP 响应流还是定时器,
 对这些值进行监听和停止监听的接口都是一样的.
+
+Observer（观察者）是Observable（可观察对象）推送数据的消费者.
+在RxJS中, Observer 是一个由回调函数组成的对象,
+键名分别为next, error, complete,
+以此接受 Observable 推送的不同类型的通知 (data input).
+
+Subscription 是一个代表可以终止资源的对象,
+表示一个Observable的执行过程.
+Subscription有一个重要的方法: unsubscribe.
+这个方法不需要传入参数,
+调用后便会终止相应的资源.
+Observable 当有数据产生时才会推送给订阅者,
+所以它可能会无限次向订阅者推送数据.
+因此在 Angular 里面创建组件的时候务必要取消订阅操作, 以避免内存泄漏.
+
+```js
+// Create simple observable that emits three values
+const myObservable = of(1, 2, 3);
+
+// Create observer object
+const myObserver = {
+  next: x => console.log('Observer got a next value: ' + x),
+  error: err => console.error('Observer got an error: ' + err),
+  complete: () => console.log('Observer got a complete notification'),
+};
+
+// Execute with the observer object
+const subscription = myObservable.subscribe(myObserver);
+// Logs:
+// Observer got a next value: 1
+// Observer got a next value: 2
+// Observer got a next value: 3
+// Observer got a complete notification
+```
+
+### Operator
+
+#### 创建数据流
+
+- 单值: of, empty, never
+- 多值: from
+- 定时: interval, timer
+- 从事件创建: fromEvent
+- 从Promise创建: fromPromise
+- 自定义创建: create
+
+#### 转换数据流
+
+- 改变数据形态: map, mapTo, pluck
+- 过滤一些值: filter, skip, first, last, take
+- 时间轴上的操作: delay, timeout, throttle, debounce, audit, bufferTime
+- 累加: reduce, scan
+- 异常处理: throw, catch, retry, finally
+- 条件执行: takeUntil, delayWhen, retryWhen, subscribeOn, ObserveOn
+- 转接: switch
+
+#### 组合数据流
+
+- concat: 保持原来的序列顺序连接两个数据流
+- merge: 合并序列
+- race: 预设条件为其中一个数据流完成
+- forkJoin: 预设条件为所有数据流都完成
+- zip: 取各来源数据流最后一个值合并为对象
+- combineLatest: 取各来源数据流最后一个值合并为数组
 
 ## Component
 
@@ -190,4 +261,3 @@ setCurrentClasses() {
 <div class="special"
      [class.special]="!isSpecial">This one is not so special</div>
 ```
-
