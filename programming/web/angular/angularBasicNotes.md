@@ -9,6 +9,7 @@
   - [Pipe](#pipe)
     - [Pure Pipe](#pure-pipe)
     - [Impure Pipe](#impure-pipe)
+    - [Async Pipe](#async-pipe)
   - [Service](#service)
     - [Injection Provider](#injection-provider)
   - [RxJS](#rxjs)
@@ -91,6 +92,13 @@ Higher performance.
 Angular 会在每个组件的变更检测周期中执行非纯管道.
 非纯管道可能会被调用很多次,
 和每个按键或每次鼠标移动一样频繁.
+
+### Async Pipe
+
+```html
+<!-- heroes$ is a Observable -->
+<li *ngFor="let hero of heroes$ | async">{{hero.name}}</li>
+```
 
 ## Service
 
