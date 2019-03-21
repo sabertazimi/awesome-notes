@@ -23,6 +23,7 @@
       - [Utils Operator](#utils-operator)
   - [Component](#component)
     - [Props](#props)
+    - [Attributes](#attributes)
   - [Event Binding](#event-binding)
   - [Directives](#directives)
     - [Structural Directives](#structural-directives)
@@ -247,7 +248,33 @@ import { Input } from '@angular/core';
 private props
 
 ```js
+import { HeroService } from '../hero.service';
+
 constructor(private heroService: HeroService) { }
+```
+
+### Attributes
+
+Angular 只会绑定到组件的公共属性
+
+```js
+import { MessageService } from '../message.service';
+
+... {
+  constructor(public messageService: MessageService) {}
+}
+```
+
+```html
+<div *ngIf="messageService.messages.length">
+  <h2>Messages</h2>
+  <button class="clear" (click)="messageService.clear()">
+    Clear
+  </button>
+  <div *ngFor="let message of messageService.messages">
+    {{message}}
+  </div>
+</div>
 ```
 
 ## Event Binding
