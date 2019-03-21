@@ -21,6 +21,7 @@
       - [Multicast Operator](#multicast-operator)
       - [Error Handling Operator](#error-handling-operator)
       - [Utils Operator](#utils-operator)
+  - [Router](#router)
   - [Component](#component)
     - [Props](#props)
     - [Attributes](#attributes)
@@ -139,6 +140,10 @@ Observable 当有数据产生时才会推送给订阅者,
 所以它可能会无限次向订阅者推送数据.
 因此在 Angular 里面创建组件的时候务必要取消订阅操作, 以避免内存泄漏.
 
+Subject 既是可观察对象的数据源, 本身也是 Observable.
+可以像订阅任何 Observable 一样订阅 Subject.
+还可以通过调用它的 next(value) 方法往 Observable 中推送一些值.
+
 ```js
 // Create simple observable that emits three values
 const myObservable = of(1, 2, 3);
@@ -157,6 +162,28 @@ const subscription = myObservable.subscribe(myObserver);
 // Observer got a next value: 2
 // Observer got a next value: 3
 // Observer got a complete notification
+```
+
+```js
+... {
+  search(term: string): void {
+    this.searchTerms.next(term);
+  }
+
+  ngOnInit(): void {
+    this.heroes$ = this.searchTerms.pipe(
+      // wait 300ms after each keystroke before considering the term
+      debounceTime(300),
+
+      // ignore new term if same as previous term
+      distinctUntilChanged(),
+
+      // switch to new search observable each time the term changes
+      // return another Observable
+      switchMap((term: string) => this.heroService.searchHeroes(term)),
+    );
+  }
+}
 ```
 
 ### Operator
@@ -181,6 +208,14 @@ const subscription = myObservable.subscribe(myObserver);
 - groupBy
 - switch
 - swtichMap
+
+借助`switchMap`操作符,
+每个有效的击键事件都会触发一次`HttpClient.get()`方法调用.
+即使在每个请求之间都有至少 300ms 的间隔,
+仍然可能会同时存在多个尚未返回的 HTTP 请求.
+`switchMap()`会记住原始的请求顺序,
+只会返回最近一次 HTTP 方法调用的结果,
+以前的那些请求都会被取消和舍弃.
 
 #### Filter Operator
 
@@ -232,6 +267,29 @@ const subscription = myObservable.subscribe(myObserver);
 - delayWhen
 - timeout
 - toPromise
+
+## Router
+
+`<router-outlet>` 会告诉路由器要在哪里显示路由的视图.
+
+```js
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { HeroesComponent } from './heroes/heroes.component';
+
+const routes: Routes = [
+  {
+    path: 'heroes',
+    component: HeroesComponent,
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
 
 ## Component
 
