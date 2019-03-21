@@ -503,15 +503,15 @@ const fluxStandardAction = {
 
 ### State Management
 
-- redux for global state:
+- Redux for global state:
   作为全局状态管理
-- rxjs for redux-middleware:
-  rxjs 管理所有输入的 input -> redux action 的调度过程
-- mobx for component-state:
+- RxJS for redux-middleware:
+  RxJS 管理所有输入的 input -> redux action 的调度过程
+- Mobx for component-state:
   作为组件局部状态管理器来用。
 - UI 变化很复杂时，用 component 归一化处理
 - state 变化很复杂时，用 action/state 归一化处理
-- data-input 很复杂时，用 rxjs/observable 归一化处理
+- data-input 很复杂时，用 RxJS/observable 归一化处理
 
 #### RxJS
 
