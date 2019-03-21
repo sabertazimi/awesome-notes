@@ -9,6 +9,15 @@
   - [Pipe](#pipe)
     - [Pure Pipe](#pure-pipe)
     - [Impure Pipe](#impure-pipe)
+  - [Event Binding](#event-binding)
+  - [Directives](#directives)
+    - [Structural Directives](#structural-directives)
+      - [ngFor](#ngfor)
+      - [ngIf](#ngif)
+    - [Attribute Directives](#attribute-directives)
+      - [ngClass](#ngclass)
+  - [Styles](#styles)
+    - [CSS Class Binding](#css-class-binding)
 
 <!-- /TOC -->
 
@@ -34,8 +43,10 @@ ng test
 ng e2e
 ```
 
+production build: suffix `/` is required
+
 ```bash
-ng build --prod true --outputPath ./build --baseHref hust-web/angular/learn
+ng build --prod true --outputPath ./build --baseHref https://sabertazimi.github.io/hust-web/angular/learn/
 ```
 
 ```bash
@@ -64,3 +75,64 @@ Higher performance.
 Angular 会在每个组件的变更检测周期中执行非纯管道.
 非纯管道可能会被调用很多次,
 和每个按键或每次鼠标移动一样频繁.
+
+## Event Binding
+
+- `()` template syntax for event binding
+
+```html
+<li (click)="onSelect($event.target.name)"></li>
+<li (click)="onSelect(hero.name)"></li>
+```
+
+## Directives
+
+### Structural Directives
+
+#### ngFor
+
+```html
+<li *ngFor="let hero of heroes">{{hero.name}}</li>
+```
+
+#### ngIf
+
+```html
+<div *ngIf="selectedHero">Selected</div>
+```
+
+### Attribute Directives
+
+#### ngClass
+
+same to `[ngStyle]`
+
+```html
+<div [ngClass]="currentClasses">This div is initially saveable, unchanged, and special</div>
+```
+
+```js
+currentClasses: {};
+
+setCurrentClasses() {
+  // CSS classes: added/removed per current state of component properties
+  this.currentClasses = {
+    'saveable': this.canSave,
+    'modified': !this.isUnchanged,
+    'special':  this.isSpecial
+  };
+}
+```
+
+## Styles
+
+### CSS Class Binding
+
+```html
+<!-- toggle the "special" class on/off with a property -->
+<div [class.special]="isSpecial">The class binding is special</div>
+
+<!-- binding to `class.special` trumps the class attribute -->
+<div class="special"
+     [class.special]="!isSpecial">This one is not so special</div>
+```
