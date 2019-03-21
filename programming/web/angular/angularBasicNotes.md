@@ -165,7 +165,7 @@ const subscription = myObservable.subscribe(myObserver);
 - 单值: of, empty, never
 - 多值: from
 - 定时: interval, timer
-- 从事件创建: fromEvent
+- 从事件创建: fromEvent/fromEventPattern
 - 从 Promise 创建: fromPromise
 - 自定义创建: create
 
