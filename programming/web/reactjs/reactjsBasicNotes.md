@@ -23,22 +23,22 @@
       - [unmount](#unmount)
     - [HOC (Higher-Order Components)](#hoc-higher-order-components)
     - [Render Props (Children as Function)](#render-props-children-as-function)
-    - [Hooks](#hooks)
-      - [Default Hooks](#default-hooks)
-        - [useMemo](#usememo)
-        - [useCallback](#usecallback)
-        - [useState](#usestate)
-        - [useRef](#useref)
-        - [useEffect](#useeffect)
-      - [Basic Rules](#basic-rules)
-      - [Custom Hooks](#custom-hooks)
-        - [Async Data Hook](#async-data-hook)
-        - [Reducer Hook](#reducer-hook)
-        - [Previous Hook](#previous-hook)
-        - [Store Hook](#store-hook)
-        - [Forece Update Hook](#forece-update-hook)
-        - [Router Hook](#router-hook)
-        - [Form Hook](#form-hook)
+  - [Hooks](#hooks)
+    - [Default Hooks](#default-hooks)
+      - [useMemo](#usememo)
+      - [useCallback](#usecallback)
+      - [useState](#usestate)
+      - [useRef](#useref)
+      - [useEffect](#useeffect)
+    - [Basic Rules](#basic-rules)
+    - [Custom Hooks](#custom-hooks)
+      - [Async Data Hook](#async-data-hook)
+      - [Reducer Hook](#reducer-hook)
+      - [Previous Hook](#previous-hook)
+      - [Store Hook](#store-hook)
+      - [Forece Update Hook](#forece-update-hook)
+      - [Router Hook](#router-hook)
+      - [Form Hook](#form-hook)
   - [ES6 Syntax](#es6-syntax)
     - [Comments](#comments)
     - [binding for this](#binding-for-this)
@@ -401,7 +401,7 @@ class Menu extends React.Component {
 }
 ```
 
-### Hooks
+## Hooks
 
 - reuse stateful logic between components
   (avoid wrapper hell in render props or HOC)
@@ -414,9 +414,9 @@ class Menu extends React.Component {
   more details on
   [Overreacted](https://overreacted.io/how-are-function-components-different-from-classes/)
 
-#### Default Hooks
+### Default Hooks
 
-##### useMemo
+#### useMemo
 
 - returns a memoized value
 - only recompute the memoized value when one of the dependencies has changed
@@ -437,7 +437,7 @@ const Button = ({ color, children }) => {
 };
 ```
 
-##### useCallback
+#### useCallback
 
 - returns a memoized callback
 - 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
@@ -470,7 +470,7 @@ function Child({ fetchData }) {
 }
 ```
 
-##### useState
+#### useState
 
 read rendered props/state
 
@@ -540,7 +540,7 @@ ChatAPI.subscribeToFriendStatus(300, handleStatusChange);     // Run next effect
 ChatAPI.unsubscribeFromFriendStatus(300, handleStatusChange); // Clean up last effect
 ```
 
-##### useRef
+#### useRef
 
 `useRef` read rendered props/state from **the future**.
 Generally, you should avoid reading or setting refs
@@ -565,7 +565,7 @@ function Example() {
 }
 ```
 
-##### useEffect
+#### useEffect
 
 [Complete Guide](https://overreacted.io/a-complete-guide-to-useeffect)
 
@@ -635,14 +635,14 @@ const useDataApi = (initialUrl, initialData) => {
 };
 ```
 
-#### Basic Rules
+### Basic Rules
 
 - only call Hooks at the top level (don't inside loops, conditions or nested functions)
 - only call Hooks from React function components
 
-#### Custom Hooks
+### Custom Hooks
 
-##### Async Data Hook
+#### Async Data Hook
 
 ```jsx
 import { useState, useEffect } from 'react';
@@ -766,7 +766,7 @@ function App() {
 export default App;
 ```
 
-##### Reducer Hook
+#### Reducer Hook
 
 ```jsx
 function useReducer(reducer, initialState) {
@@ -791,7 +791,7 @@ function Todos() {
 }
 ```
 
-##### Previous Hook
+#### Previous Hook
 
 ```jsx
 function Counter() {
@@ -809,7 +809,7 @@ function usePrevious(value) {
 }
 ```
 
-##### Store Hook
+#### Store Hook
 
 ```js
 import { useState } from 'react';
@@ -839,7 +839,7 @@ export function useStore() {
 }
 ```
 
-##### Forece Update Hook
+#### Forece Update Hook
 
 ```js
 // @ts-ignore
@@ -866,7 +866,7 @@ const useForceUpdate: VoidFunctionCreator = (): VoidFunction => {
 export default useForceUpdate;
 ```
 
-##### Router Hook
+#### Router Hook
 
 ```js
 import { useContext, useEffect } from 'react';
@@ -886,7 +886,7 @@ const useReactRouter = () => {
 };
 ```
 
-##### Form Hook
+#### Form Hook
 
 ```js
 import { useState } from 'react';
