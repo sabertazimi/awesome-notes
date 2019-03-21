@@ -14,9 +14,13 @@
   - [RxJS](#rxjs)
     - [Basis](#basis)
     - [Operator](#operator)
-      - [创建数据流](#创建数据流)
-      - [转换数据流](#转换数据流)
-      - [组合数据流](#组合数据流)
+      - [Creation Operator](#creation-operator)
+      - [Transformation Operator](#transformation-operator)
+      - [Filter Operator](#filter-operator)
+      - [Combination Operator](#combination-operator)
+      - [Multicast Operator](#multicast-operator)
+      - [Error Handling Operator](#error-handling-operator)
+      - [Utils Operator](#utils-operator)
   - [Component](#component)
     - [Props](#props)
   - [Event Binding](#event-binding)
@@ -98,13 +102,13 @@ Angular 会在每个组件的变更检测周期中执行非纯管道.
 
 ## RxJS
 
-- RxJS 管理所有输入的 input -> redux action 的调度过程
+- RxJS 管理所有输入的 input -> consumer/redux action 的调度过程
+- 条件变更之后的自动重新计算 (Reactive)
 - 同步与异步的统一
 - 获取和订阅的统一
 - 现在与未来的统一
 - 可组合的数据变更过程
 - 数据与视图的精确绑定
-- 条件变更之后的自动重新计算 (Reactive)
 - UI 变化很复杂时，用 component 归一化处理
 - state 变化很复杂时，用 action/state 归一化处理
 - data-input 很复杂时，用 RxJS/observable 归一化处理
@@ -156,26 +160,48 @@ const subscription = myObservable.subscribe(myObserver);
 
 ### Operator
 
-#### 创建数据流
+#### Creation Operator
 
 - 单值: of, empty, never
 - 多值: from
 - 定时: interval, timer
 - 从事件创建: fromEvent
-- 从Promise创建: fromPromise
+- 从 Promise 创建: fromPromise
 - 自定义创建: create
 
-#### 转换数据流
+#### Transformation Operator
 
-- 改变数据形态: map, mapTo, pluck
-- 过滤一些值: filter, skip, first, last, take
-- 时间轴上的操作: delay, timeout, throttle, debounce, audit, bufferTime
-- 累加: reduce, scan
-- 异常处理: throw, catch, retry, finally
-- 条件执行: takeUntil, delayWhen, retryWhen, subscribeOn, ObserveOn
-- 转接: switch
+- map
+- mapTo
+- mergeMap/flatMap
+- pluck
+- reduce
+- scan
+- groupBy
+- switch
+- swtichMap
 
-#### 组合数据流
+#### Filter Operator
+
+- audit
+- auditTime
+- filter
+- skip
+- first
+- last
+- take
+- takeWhile
+- takeUntil
+- throttle
+- throttleTime
+- debounce
+- debounceTime
+- distinctUntilChanged
+- bufferTime
+- subscribeOn
+- ObserveOn
+
+#### Combination Operator
 
 - concat: 保持原来的序列顺序连接两个数据流
 - merge: 合并序列
@@ -183,6 +209,28 @@ const subscription = myObservable.subscribe(myObserver);
 - forkJoin: 预设条件为所有数据流都完成
 - zip: 取各来源数据流最后一个值合并为对象
 - combineLatest: 取各来源数据流最后一个值合并为数组
+
+#### Multicast Operator
+
+- multicast
+- publish
+- share
+
+#### Error Handling Operator
+
+- throw
+- catch/catchError
+- retry
+- retryWhen
+- finally
+
+#### Utils Operator
+
+- do/tap
+- delay
+- delayWhen
+- timeout
+- toPromise
 
 ## Component
 
