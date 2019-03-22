@@ -26,6 +26,7 @@
   - [Router](#router)
   - [Component](#component)
     - [Props](#props)
+    - [Event](#event)
     - [Attributes](#attributes)
     - [Reference](#reference)
   - [Event Binding](#event-binding)
@@ -79,6 +80,12 @@ Angular 需要知道如何把应用程序的各个部分组合到一起,
 这些信息被称为元数据（metadata.
 有些元数据位于`@Component`装饰器中, 你会把它加到组件类上.
 另一些关键性的元数据位于`@NgModule`装饰器中.
+
+NgModule 为其中的组件提供了一个编译上下文环境.
+根模块总会有一个根组件, 并在引导期间创建它.
+任何模块都能包含任意数量的其它组件,
+这些组件可以通过路由器加载, 也可以通过模板创建.
+那些属于这个 NgModule 的组件会共享同一个编译上下文环境.
 
 ## Pipe
 
@@ -349,6 +356,46 @@ private props
 import { HeroService } from '../hero.service';
 
 constructor(private heroService: HeroService) { }
+```
+
+### Event
+
+parent
+
+```js
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `<app-child (valueChange)='displayCounter($event)'></app-child>`
+})
+export class AppComponent implements OnInit {
+  ngOnInit() {}
+
+  displayCounter(count) {
+    console.log(count);
+  }
+}
+```
+
+child
+
+```js
+import { Component, Input, EventEmitter, Output } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  template: `<button class='btn btn-primary' (click)="handleClick()">Click me</button>`
+})
+export class AppChildComponent {
+  @Output() valueChange: EventEmitter<number> = new EventEmitter();
+  counter = 0;
+
+  handleClick() {
+    this.counter += 1;
+    this.valueChange.emit(this.counter);
+  }
+}
 ```
 
 ### Attributes
