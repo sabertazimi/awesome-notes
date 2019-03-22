@@ -27,6 +27,7 @@
   - [Component](#component)
     - [Props](#props)
     - [Attributes](#attributes)
+    - [Reference](#reference)
   - [Event Binding](#event-binding)
   - [Directives](#directives)
     - [Structural Directives](#structural-directives)
@@ -370,6 +371,21 @@ import { MessageService } from '../message.service';
   <div *ngFor="let message of messageService.messages">
     {{message}}
   </div>
+</div>
+```
+
+### Reference
+
+`#`
+
+```html
+<div>
+  <label>Hero name:
+    <input #heroName />
+  </label>
+  <button (click)="add(heroName.value); heroName.value=''">
+    add
+  </button>
 </div>
 ```
 
