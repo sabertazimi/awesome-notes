@@ -246,7 +246,8 @@ of(1,2,3)
 - scan
 - groupBy
 - switch
-- swtichMap
+- swtichMap: 在每次发出时, 会取消前一个内部 Observable (所提供函数的 retun value) 的订阅,
+然后订阅一个新的 observable. 即当有新的输入时便不再关心之前请求的响应结果.
 
 借助`switchMap`操作符,
 每个有效的击键事件都会触发一次`HttpClient.get()`方法调用.
@@ -271,7 +272,7 @@ of(1,2,3)
 - throttleTime
 - debounce
 - debounceTime
-- distinctUntilChanged
+- distinctUntilChanged: 只有当当前值与之前最后一个值 `!==` 时才将其发出
 - bufferTime
 - subscribeOn
 - ObserveOn
@@ -376,7 +377,7 @@ import { MessageService } from '../message.service';
 
 ### Reference
 
-`#`
+`#` refer to DOM
 
 ```html
 <div>
