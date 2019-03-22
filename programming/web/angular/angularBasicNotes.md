@@ -14,6 +14,7 @@
     - [Injection Provider](#injection-provider)
   - [RxJS](#rxjs)
     - [Basis](#basis)
+    - [RxJS Pipe Helper](#rxjs-pipe-helper)
     - [Operator](#operator)
       - [Creation Operator](#creation-operator)
       - [Transformation Operator](#transformation-operator)
@@ -192,6 +193,35 @@ const subscription = myObservable.subscribe(myObserver);
     );
   }
 }
+```
+
+### RxJS Pipe Helper
+
+RxJS 提供了 pipe 辅助函数,
+它存在于 Observable 上,
+它缓解了操作符不在原型上所带来的问题.
+
+```js
+import { take, map } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
+
+map.call(
+  take.call(
+    of(1,2,3),
+    2
+  ),
+  val => val + 2
+);
+
+// to
+import { take, map } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
+
+of(1,2,3)
+  .pipe(
+    take(2),
+    map(val => val + 2)
+  );
 ```
 
 ### Operator
