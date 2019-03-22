@@ -6,10 +6,15 @@
   - [Basic](#basic)
     - [CLI](#cli)
   - [Module](#module)
-  - [Pipe](#pipe)
-    - [Pure Pipe](#pure-pipe)
-    - [Impure Pipe](#impure-pipe)
-    - [Async Pipe](#async-pipe)
+  - [Component](#component)
+    - [Props](#props)
+    - [Event](#event)
+    - [Attributes](#attributes)
+    - [Reference](#reference)
+    - [Pipe](#pipe)
+      - [Pure Pipe](#pure-pipe)
+      - [Impure Pipe](#impure-pipe)
+      - [Async Pipe](#async-pipe)
   - [Service](#service)
     - [Injection Provider](#injection-provider)
   - [RxJS](#rxjs)
@@ -24,11 +29,7 @@
       - [Error Handling Operator](#error-handling-operator)
       - [Utils Operator](#utils-operator)
   - [Router](#router)
-  - [Component](#component)
-    - [Props](#props)
-    - [Event](#event)
-    - [Attributes](#attributes)
-    - [Reference](#reference)
+  - [Form](#form)
   - [Event Binding](#event-binding)
   - [Directives](#directives)
     - [Structural Directives](#structural-directives)
@@ -87,22 +88,121 @@ NgModule 为其中的组件提供了一个编译上下文环境.
 这些组件可以通过路由器加载, 也可以通过模板创建.
 那些属于这个 NgModule 的组件会共享同一个编译上下文环境.
 
-## Pipe
+## Component
 
-### Pure Pipe
+### Props
+
+```js
+import { Input } from '@angular/core';
+
+... {
+  @Input() hero: Hero;
+}
+```
+
+private props
+
+```js
+import { HeroService } from '../hero.service';
+
+constructor(private heroService: HeroService) { }
+```
+
+### Event
+
+parent
+
+```js
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `<app-child (valueChange)='displayCounter($event)'></app-child>`
+})
+export class AppComponent implements OnInit {
+  ngOnInit() {}
+
+  displayCounter(count) {
+    console.log(count);
+  }
+}
+```
+
+child
+
+```js
+import { Component, Input, EventEmitter, Output } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  template: `<button class='btn btn-primary' (click)="handleClick()">Click me</button>`
+})
+export class AppChildComponent {
+  @Output() valueChange: EventEmitter<number> = new EventEmitter();
+  counter = 0;
+
+  handleClick() {
+    this.counter += 1;
+    this.valueChange.emit(this.counter);
+  }
+}
+```
+
+### Attributes
+
+Angular 只会绑定到组件的公共属性
+
+```js
+import { MessageService } from '../message.service';
+
+... {
+  constructor(public messageService: MessageService) {}
+}
+```
+
+```html
+<div *ngIf="messageService.messages.length">
+  <h2>Messages</h2>
+  <button class="clear" (click)="messageService.clear()">
+    Clear
+  </button>
+  <div *ngFor="let message of messageService.messages">
+    {{message}}
+  </div>
+</div>
+```
+
+### Reference
+
+`#` refer to DOM
+
+```html
+<div>
+  <label>Hero name:
+    <input #heroName />
+  </label>
+  <button (click)="add(heroName.value); heroName.value=''">
+    add
+  </button>
+</div>
+```
+
+### Pipe
+
+#### Pure Pipe
 
 Angular 只有在它检测到输入值发生了纯变更时才会执行纯管道.
 纯变更是指对原始类型值 (String、Number、Boolean、Symbol) 的更改,
 或者对对象引用 (Date、Array、Function、Object) 的更改.
 Higher performance.
 
-### Impure Pipe
+#### Impure Pipe
 
 Angular 会在每个组件的变更检测周期中执行非纯管道.
 非纯管道可能会被调用很多次,
 和每个按键或每次鼠标移动一样频繁.
 
-### Async Pipe
+#### Async Pipe
 
 ```html
 <!-- heroes$ is a Observable -->
@@ -338,104 +438,10 @@ const routes: Routes = [
 export class AppRoutingModule { }
 ```
 
-## Component
+## Form
 
-### Props
-
-```js
-import { Input } from '@angular/core';
-
-... {
-  @Input() hero: Hero;
-}
-```
-
-private props
-
-```js
-import { HeroService } from '../hero.service';
-
-constructor(private heroService: HeroService) { }
-```
-
-### Event
-
-parent
-
-```js
-import { Component, OnInit } from '@angular/core';
-
-@Component({
-  selector: 'app-root',
-  template: `<app-child (valueChange)='displayCounter($event)'></app-child>`
-})
-export class AppComponent implements OnInit {
-  ngOnInit() {}
-
-  displayCounter(count) {
-    console.log(count);
-  }
-}
-```
-
-child
-
-```js
-import { Component, Input, EventEmitter, Output } from '@angular/core';
-
-@Component({
-  selector: 'app-child',
-  template: `<button class='btn btn-primary' (click)="handleClick()">Click me</button>`
-})
-export class AppChildComponent {
-  @Output() valueChange: EventEmitter<number> = new EventEmitter();
-  counter = 0;
-
-  handleClick() {
-    this.counter += 1;
-    this.valueChange.emit(this.counter);
-  }
-}
-```
-
-### Attributes
-
-Angular 只会绑定到组件的公共属性
-
-```js
-import { MessageService } from '../message.service';
-
-... {
-  constructor(public messageService: MessageService) {}
-}
-```
-
-```html
-<div *ngIf="messageService.messages.length">
-  <h2>Messages</h2>
-  <button class="clear" (click)="messageService.clear()">
-    Clear
-  </button>
-  <div *ngFor="let message of messageService.messages">
-    {{message}}
-  </div>
-</div>
-```
-
-### Reference
-
-`#` refer to DOM
-
-```html
-<div>
-  <label>Hero name:
-    <input #heroName />
-  </label>
-  <button (click)="add(heroName.value); heroName.value=''">
-    add
-  </button>
-</div>
-```
+- `[(ngModel)]`
+- `(ngSubmit)`
 
 ## Event Binding
 
