@@ -2860,6 +2860,21 @@ if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
 - offsetLeft/offsetTop: 表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent对象）左上角的距离
 - scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素大小
 
+```js
+const isElementInViewport = (el) => {
+  const { top, height, left, width } = el.getBoundingClientRect();
+  const w = window.innerWidth || document.documentElement.clientWidth;
+  const h = window.innerHeight || document.documentElement.clientHeight;
+
+  return (
+    top <= h &&
+    (top + height) >= 0 &&
+    left <= w &&
+    (left + width) >= 0
+  );
+};
+```
+
 #### Mutation Observer API
 
 如果文档中连续插入 1000 个 `<li>` 元素，就会连续触发 1000 个插入事件，
