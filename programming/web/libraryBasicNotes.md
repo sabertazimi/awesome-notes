@@ -605,6 +605,7 @@
 - [JSON Placeholder](http://jsonplaceholder.typicode.com)
 - [Images Placeholder](https://placeholder.com)
 - [Images Mock](http://source.unsplash.com/random)
+- [In Memory Web API](https://github.com/angular/in-memory-web-api)
 
 ### Network Debugging
 
