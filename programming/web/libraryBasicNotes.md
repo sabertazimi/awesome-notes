@@ -38,6 +38,9 @@
     - [Gallery](#gallery)
     - [Filter](#filter)
     - [Canvas](#canvas)
+  - [Media](#media)
+    - [Audio](#audio)
+    - [Video](#video)
   - [Particles](#particles)
   - [Animation](#animation)
     - [Typing](#typing)
@@ -70,8 +73,6 @@
   - [Editor](#editor)
     - [Rich Text Editor](#rich-text-editor)
     - [Code Editor](#code-editor)
-    - [Audio](#audio)
-    - [Video](#video)
   - [i18n](#i18n)
   - [CLI](#cli)
   - [Daemon](#daemon)
@@ -310,6 +311,20 @@
 - [rough.js](https://github.com/pshihn/rough)
 - [Canvas Manipulation](https://github.com/meltingice/CamanJS/)
 
+## Media
+
+### Audio
+
+- [Howler.js](https://github.com/goldfire/howler.js)
+- [Music Helper Utils](https://github.com/madewithlove/music-fns)
+
+### Video
+
+- [React Video Player](https://github.com/zhihu/griffith)
+- [Video Landingpage](https://github.com/rishabhp/bideo.js)
+- [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
+- [plyr](https://github.com/selz/plyr)
+
 ## Particles
 
 - [html5 particles](https://github.com/MapleRecall/html5-particles)
@@ -491,17 +506,6 @@
 - [ACE Editor](https://github.com/ajaxorg/ace)
 - [CodeMirror](https://github.com/codemirror/CodeMirror)
 - [React Built In Editor](https://github.com/facebook/draft-js)
-
-### Audio
-
-- [Howler.js](https://github.com/goldfire/howler.js)
-- [Music Helper Utils](https://github.com/madewithlove/music-fns)
-
-### Video
-
-- [Video Landingpage](https://github.com/rishabhp/bideo.js)
-- [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
-- [plyr](https://github.com/selz/plyr)
 
 ## i18n
 

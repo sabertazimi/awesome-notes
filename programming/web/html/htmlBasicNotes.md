@@ -109,16 +109,20 @@
     - [Semantic HTML](#semantic-html)
     - [Structure Access](#structure-access)
       - [Body Access](#body-access)
-      - [radio group with `fieldset` and `legend`](#radio-group-with-fieldset-and-legend)
-    - [element](#element)
+      - [Article Access](#article-access)
+      - [Radio Group with `fieldset` and `legend`](#radio-group-with-fieldset-and-legend)
+    - [Element Access](#element-access)
+      - [Reference Access](#reference-access)
+      - [Text Access](#text-access)
       - [Button Access](#button-access)
-      - [img access](#img-access)
-      - [audio/source](#audiosource)
-      - [figure access](#figure-access)
-      - [form access](#form-access)
-      - [time access](#time-access)
-      - [color contrast](#color-contrast)
-      - [accesskey and tabindex](#accesskey-and-tabindex)
+      - [Image Access](#image-access)
+      - [Audio/Source Access](#audiosource-access)
+      - [Figure Access](#figure-access)
+      - [Form Access](#form-access)
+      - [Time Access](#time-access)
+      - [Address Access](#address-access)
+      - [Color Contrast](#color-contrast)
+      - [Accesskey and Tabindex](#accesskey-and-tabindex)
     - [ARIA](#aria)
 
 <!-- /TOC -->
@@ -824,6 +828,14 @@ sudo systemctl restart nginx
 
 ### Structure Access
 
+- header
+- main
+- footer
+- section
+- article
+- nav
+- aside
+
 #### Body Access
 
 ```html
@@ -836,13 +848,37 @@ sudo systemctl restart nginx
 </header>
 
 <main>
-</mian>
+</main>
 
 <footer>
 </footer>
 ```
 
-#### radio group with `fieldset` and `legend`
+#### Article Access
+
+The `<article>` element is used to represent a fully self-contained region of content
+
+```html
+<article>
+  <header>
+    <h1>Why you should buy more cheeses than you currently do</h1>
+  </header>
+  <section>
+    <header>
+      <h2>Part 1: Variety is spicy</h2>
+    </header>
+    <!-- cheesy content -->
+  </section>
+  <section>
+    <header>
+      <h2>Part 2: Cows are great</h2>
+    </header>
+    <!-- more cheesy content -->
+  </section>
+</article>
+```
+
+#### Radio Group with `fieldset` and `legend`
 
 ```html
 <form>
@@ -858,22 +894,62 @@ sudo systemctl restart nginx
 </form>
 ```
 
-### element
+### Element Access
+
+#### Reference Access
+
+- `<cite>`
+- `<q>`
+- `<blockquote>`
+- `<code>`
+
+```html
+<p>Everytime Kenny is killed, Stan will announce
+  <q cite="http://en.wikipedia.org/wiki/Kenny_McCormick#Cultural_impact">
+    Oh my God, you/they killed Kenny!
+  </q>.
+</p>
+```
+
+```html
+<blockquote cite="https://www.huxley.net/bnw/four.html">
+  <p>
+    Words can be like X-rays, if you use them properly
+    – they'll go through anything. You read and you're pierced.
+  </p>
+</blockquote>
+
+<cite>– Aldous Huxley, Brave New World</cite>
+```
+
+#### Text Access
+
+- `<b>`
+- `<strong>`
+- `<mark>`
+- `<ins>`
+- `<del>`
+
+不要将 `<b>` 元素与 `<strong>`、`<em>` 或 `<mark>` 元素混淆:
+
+- `<strong>` 元素表示某些重要性的文本
+- `<em>` 强调文本
+- `<mark>` 元素表示某些相关性的文本
 
 #### Button Access
 
 Use `<button>` for clickable elements
 
-#### img access
+#### Image Access
 
 - alt=""
 
-#### audio/source
+#### Audio/Source Access
 
 - src=""
 - type=""
 
-#### figure access
+#### Figure Access
 
 ```html
 <figure>
@@ -883,7 +959,7 @@ Use `<button>` for clickable elements
 </figure>
 ```
 
-#### form access
+#### Form Access
 
 - label[for] input
 
@@ -894,17 +970,39 @@ Use `<button>` for clickable elements
 </form>
 ```
 
-#### time access
+#### Time Access
 
 ```html
 <time datetime="2016-09-15">Thursday, September 15<sup>th</sup></time>
 ```
 
-#### color contrast
+#### Address Access
+
+```html
+<footer>
+  <section class="contact" vocab="http://schema.org/" typeof="LocalBusiness">
+    <h2>Contact us!</h2>
+    <address property="email">
+      <a href="mailto:us@example.com">us@example.com</a>
+    </address>
+    <address property="address" typeof="PostalAddress">
+      <p property="streetAddress">123 Main St., Suite 404</p>
+      <p>
+        <span property="addressLocality">Yourtown</span>,
+        <span property="addressRegion">AK</span>,
+        <span property="postalCode">12345</span>
+      </p>
+      <p property="addressCountry">United States of America</p>
+    </address>
+  </section>
+</footer>
+```
+
+#### Color Contrast
 
 - more than 4.5:1 ratio
 
-#### accesskey and tabindex
+#### Accesskey and Tabindex
 
 ```html
 <a id="second" href="" accesskey="c">
