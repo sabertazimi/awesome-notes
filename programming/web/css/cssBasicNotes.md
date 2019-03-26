@@ -37,82 +37,82 @@
       - [属性选择器](#属性选择器)
       - [伪类](#伪类)
       - [伪元素](#伪元素)
-  - [常用属性](#常用属性)
-    - [全局属性值](#全局属性值)
-    - [Box Style](#box-style)
-      - [width](#width)
-      - [z-index](#z-index)
-      - [overflow/overflow-x/overflow-y](#overflowoverflow-xoverflow-y)
-      - [text-overflow](#text-overflow)
-      - [resize](#resize)
-      - [box-sizing](#box-sizing)
-      - [height](#height)
-      - [column](#column)
-    - [Box Model](#box-model)
-      - [Percentage of Width/Top](#percentage-of-widthtop)
-    - [Block Formatting Context](#block-formatting-context)
-      - [Create BFC](#create-bfc)
-      - [Margin Collapsing/Merging](#margin-collapsingmerging)
-    - [Float Patterns](#float-patterns)
-      - [fixed parent](#fixed-parent)
-      - [清除浮动](#清除浮动)
-      - [Float Best Practice](#float-best-practice)
-    - [Stack Context](#stack-context)
-    - [Position Patterns](#position-patterns)
-      - [static](#static)
-      - [relative](#relative)
-      - [absolute](#absolute)
-      - [fixed](#fixed)
-    - [Flex Patterns](#flex-patterns)
-      - [Under the Hood of `flex`](#under-the-hood-of-flex)
-      - [Useful Shorthand of `flex`](#useful-shorthand-of-flex)
-      - [父元素属性](#父元素属性)
-      - [子元素属性](#子元素属性)
-      - [Flexibity of `float`](#flexibity-of-float)
-      - [Pseudo Elements of Flex Box](#pseudo-elements-of-flex-box)
-      - [Fixed Sidebar with Flexbox](#fixed-sidebar-with-flexbox)
-      - [Flexbox Best Practice](#flexbox-best-practice)
-    - [Grid Patterns](#grid-patterns)
-      - [Grid Attention Tips](#grid-attention-tips)
-      - [Grid Alignment](#grid-alignment)
-    - [分栏问题](#分栏问题)
-      - [两栏布局](#两栏布局)
-      - [三栏布局](#三栏布局)
-        - [absolute to left/right + margin to middle](#absolute-to-leftright--margin-to-middle)
-        - [float to left/right + margin to middle](#float-to-leftright--margin-to-middle)
-        - [float + negative margin both to left/right](#float--negative-margin-both-to-leftright)
-    - [居中问题](#居中问题)
-      - [不定 block 元素水平居中](#不定-block-元素水平居中)
-      - [垂直居中问题](#垂直居中问题)
-      - [混合布局](#混合布局)
-    - [list-style-type/image](#list-style-typeimage)
-    - [align](#align)
-      - [text-align](#text-align)
-      - [vertical-align](#vertical-align)
-    - [opacity](#opacity)
-    - [border](#border)
-      - [border-radius](#border-radius)
-      - [border-image](#border-image)
-    - [background](#background)
-      - [background-image](#background-image)
-      - [(moz/webkit)background-clip](#mozwebkitbackground-clip)
-      - [(moz/webkit)background-origin](#mozwebkitbackground-origin)
-      - [background-size](#background-size)
-      - [background-attachment](#background-attachment)
-      - [Mix Blend Mode](#mix-blend-mode)
-      - [Background Best Practice](#background-best-practice)
-        - [单背景极简欢迎首页](#单背景极简欢迎首页)
-    - [text](#text)
-      - [white-space](#white-space)
-    - [font](#font)
-      - [font-size](#font-size)
-      - [font-style](#font-style)
-      - [font-variant](#font-variant)
-      - [font-size-adjust](#font-size-adjust)
-      - [font-diplay](#font-diplay)
-      - [custom function - @font-face](#custom-function---font-face)
-      - [Font Best Practice](#font-best-practice)
-    - [filter](#filter)
+  - [全局属性值](#全局属性值)
+  - [Box Style](#box-style)
+    - [width](#width)
+    - [z-index](#z-index)
+    - [overflow/overflow-x/overflow-y](#overflowoverflow-xoverflow-y)
+    - [text-overflow](#text-overflow)
+    - [resize](#resize)
+    - [box-sizing](#box-sizing)
+    - [height](#height)
+    - [column](#column)
+  - [Box Model](#box-model)
+    - [Percentage of Width/Top](#percentage-of-widthtop)
+  - [Block Formatting Context](#block-formatting-context)
+    - [Create BFC](#create-bfc)
+    - [Margin Collapsing/Merging](#margin-collapsingmerging)
+  - [Float Patterns](#float-patterns)
+    - [fixed parent](#fixed-parent)
+    - [清除浮动](#清除浮动)
+    - [Float Best Practice](#float-best-practice)
+  - [Stack Context](#stack-context)
+  - [Position Patterns](#position-patterns)
+    - [static](#static)
+    - [relative](#relative)
+    - [absolute](#absolute)
+    - [fixed](#fixed)
+  - [Flex Patterns](#flex-patterns)
+    - [Under the Hood of `flex`](#under-the-hood-of-flex)
+    - [Useful Shorthand of `flex`](#useful-shorthand-of-flex)
+    - [父元素属性](#父元素属性)
+    - [子元素属性](#子元素属性)
+    - [Flexibity of `float`](#flexibity-of-float)
+    - [Pseudo Elements of Flex Box](#pseudo-elements-of-flex-box)
+    - [Fixed Sidebar with Flexbox](#fixed-sidebar-with-flexbox)
+    - [Flexbox Best Practice](#flexbox-best-practice)
+  - [Grid Patterns](#grid-patterns)
+    - [Grid Attention Tips](#grid-attention-tips)
+    - [Grid Alignment](#grid-alignment)
+  - [分栏问题](#分栏问题)
+    - [两栏布局](#两栏布局)
+    - [三栏布局](#三栏布局)
+      - [absolute to left/right + margin to middle](#absolute-to-leftright--margin-to-middle)
+      - [float to left/right + margin to middle](#float-to-leftright--margin-to-middle)
+      - [float + negative margin both to left/right](#float--negative-margin-both-to-leftright)
+  - [居中问题](#居中问题)
+    - [不定 block 元素水平居中](#不定-block-元素水平居中)
+    - [垂直居中问题](#垂直居中问题)
+    - [混合布局](#混合布局)
+  - [list-style-type/image](#list-style-typeimage)
+  - [align](#align)
+    - [text-align](#text-align)
+    - [vertical-align](#vertical-align)
+  - [opacity](#opacity)
+  - [border](#border)
+    - [border-radius](#border-radius)
+    - [border-image](#border-image)
+  - [background](#background)
+    - [background-image](#background-image)
+    - [(moz/webkit)background-clip](#mozwebkitbackground-clip)
+    - [(moz/webkit)background-origin](#mozwebkitbackground-origin)
+    - [background-size](#background-size)
+    - [background-attachment](#background-attachment)
+    - [Mix Blend Mode](#mix-blend-mode)
+    - [Background Best Practice](#background-best-practice)
+      - [单背景极简欢迎首页](#单背景极简欢迎首页)
+  - [CSS Text](#css-text)
+    - [white-space](#white-space)
+  - [CSS Font](#css-font)
+    - [font-size](#font-size)
+    - [font-style](#font-style)
+    - [font-variant](#font-variant)
+    - [font-size-adjust](#font-size-adjust)
+    - [font-diplay](#font-diplay)
+    - [custom function - @font-face](#custom-function---font-face)
+    - [Font Best Practice](#font-best-practice)
+  - [CSS Couter](#css-couter)
+  - [CSS Filter](#css-filter)
   - [Animation](#animation)
     - [animation property](#animation-property)
       - [transition+transform](#transitiontransform)
@@ -805,31 +805,29 @@ h2:before {
 }
 ```
 
-## 常用属性
-
-### 全局属性值
+## 全局属性值
 
 - auto
 - inherit
 - initial 指定为默认值，用于消除样式
 - none
 
-### Box Style
+## Box Style
 
-#### width
+### width
 
 auto with `css-sizing`:
 present for `fill-available/max-content/min-content/fit-content`
 
-#### z-index
+### z-index
 
 数值越大，处于可视的优先级越大
 
-#### overflow/overflow-x/overflow-y
+### overflow/overflow-x/overflow-y
 
 visible,hidden,scroll,auto
 
-#### text-overflow
+### text-overflow
 
 - clip     切除溢出部分
 - ellipsis 省略号标志
@@ -854,7 +852,7 @@ visible,hidden,scroll,auto
 }
 ```
 
-#### resize
+### resize
 
 前置属性:overflow
 
@@ -863,11 +861,11 @@ visible,hidden,scroll,auto
 resize: none/both/horizontal/vertical/inherit;
 ```
 
-#### box-sizing
+### box-sizing
 
 content-box(default), padding-box, border-box
 
-#### height
+### height
 
 XXvh(viewport height)
 
@@ -878,7 +876,7 @@ cal(50% - 100px);
 cal(10em + 3px);
 ```
 
-#### column
+### column
 
 ```css
 /*子元素分列*/
@@ -898,7 +896,7 @@ cal(10em + 3px);
 - column-gap         分隔距离
 - column-rule(style) 分隔线
 
-### Box Model
+## Box Model
 
 - block-level box: display 属性为 block, list-item, table 的元素,
   会生成 block-level box，并且参与 block formatting context
@@ -907,13 +905,13 @@ cal(10em + 3px);
 - Flex Formatting Context(FFC)
 - Grid Formatting Context(GFC)
 
-#### Percentage of Width/Top
+### Percentage of Width/Top
 
 positioned elements with `top: percentage`
 depend on `height` of parent,
 if `height` of parent is `auto`, it's not working.
 
-### Block Formatting Context
+## Block Formatting Context
 
 - 一个BFC包含创建该上下文元素的所有子元素，但不包括创建了新BFC的子元素的内部元素
 - BFC就是页面上的一个隔离的独立容器, 容器里面的子元素不会影响到外面的元素, 反之也如此
@@ -924,7 +922,7 @@ if `height` of parent is `auto`, it's not working.
 - BFC的区域不会与 float box 重叠: 自适应分栏布局, 清除外/内部浮动
 - 计算BFC的高度时, 浮动元素也参与计算: 防止内边距塌陷 (margin-top collapse with margin-bottom)
 
-#### Create BFC
+### Create BFC
 
 - 根元素或其它包含它的元素
 - overflow: not visible (i.e hidden)
@@ -936,7 +934,7 @@ if `height` of parent is `auto`, it's not working.
 - direct children of `display: flex/inline-flex`
 - direct children of `display: grid/inline-grid`
 
-#### Margin Collapsing/Merging
+### Margin Collapsing/Merging
 
 - closet sibling: 1's margin-bottom with 2's margin-top
 - parent and it's first/last child: up with up (bottom with bottom)
@@ -944,14 +942,14 @@ if `height` of parent is `auto`, it's not working.
 
 Best Practice: only use `margin-bottom: 1em/1rem` for spacing.
 
-### Float Patterns
+## Float Patterns
 
 float make element specified value of `display`:
 
 - `inline-table` computed to `table`
 - `inline`/`inline-block`/`table-*` computed to `block`
 
-#### fixed parent
+### fixed parent
 
 > Floating wont work inside fixed or absolute divs unless specify widthh
 
@@ -964,7 +962,7 @@ float make element specified value of `display`:
 }
 ```
 
-#### 清除浮动
+### 清除浮动
 
 **Best Practice**: 为父容器添加 clearfix class
 `display: table` 防止外边距塌陷, `clear: both` 清楚浮动
@@ -983,12 +981,12 @@ float make element specified value of `display`:
 }
 ```
 
-#### Float Best Practice
+### Float Best Practice
 
 - 段中部分元素浮动(结合 margin/padding), 可实现内嵌效果
 - 分栏布局
 
-### Stack Context
+## Stack Context
 
 The root element forms the root stacking context.
 Other stacking contexts are generated by any positioned element
@@ -998,19 +996,19 @@ having a computed value of `z-index` other than `auto`.
 Once apply a `position` property to a box,
 can use the `z-index` property to adjust its stack level.
 
-### Position Patterns
+## Position Patterns
 
 position
 
-#### static
+### static
 
 - top/left/width/right/z-index are invalid
 
-#### relative
+### relative
 
 使元素相对于 static 布局, 可使用`top/bottom/left/right`属性进行平移
 
-#### absolute
+### absolute
 
 - 使元素相对于 浏览器窗口/父元素(`positoin: non-static`) 布局
   - 若 body 为 static, 则元素不会随着滚动条滚动, 其相对于初始窗口布局
@@ -1049,7 +1047,7 @@ position
 }
 ```
 
-#### fixed
+### fixed
 
 - 使元素想对于 浏览器窗口 布局, 但不受滑动条影响
 - 可使用`top/bottom/left/right`属性进行定位
@@ -1072,11 +1070,11 @@ position
 }
 ```
 
-### Flex Patterns
+## Flex Patterns
 
 [Complete Guid to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
-#### Under the Hood of `flex`
+### Under the Hood of `flex`
 
 当 flex-basis 设置为 auto 且 width（或者height）不为 auto 时，计算 used size 时会用到 width（或者height）的值
 
@@ -1086,7 +1084,7 @@ position
   true width = `flex-basis` (or `width`) - `flex-shrink`/sum of `flex-shrink`
 - text nodes and pseudo-elements can be flex children
 
-#### Useful Shorthand of `flex`
+### Useful Shorthand of `flex`
 
 `flex: flex-grow flex-shrink flex-basis`
 
@@ -1108,7 +1106,7 @@ position
 
 元素会被赋予一个容器中自由空间的指定占比 equal to `flex: <positive-number> 1 0`
 
-#### 父元素属性
+### 父元素属性
 
 ```css
 display: flex;
@@ -1119,7 +1117,7 @@ align-content: flex-start/flex-end/center/space-between/space-around;
 align-items: flex-start/flex-end/center/baseline/stretch;
 ```
 
-#### 子元素属性
+### 子元素属性
 
 ```css
 flex: number;  /*宽/高度权重*/
@@ -1130,7 +1128,7 @@ flex-grow: number;
 align-self: auto/flex-start/flex-end/center/baseline/stretch;
 ```
 
-#### Flexibity of `float`
+### Flexibity of `float`
 
 ```html
 <div class="parent">
@@ -1149,7 +1147,7 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
 }
 ```
 
-#### Pseudo Elements of Flex Box
+### Pseudo Elements of Flex Box
 
 set `flex` to pseudo elements of flex box
 will change width of pseudo elements.
@@ -1165,7 +1163,7 @@ will change width of pseudo elements.
 }
 ```
 
-#### Fixed Sidebar with Flexbox
+### Fixed Sidebar with Flexbox
 
 ```html
 <body>
@@ -1191,7 +1189,7 @@ main {
 }
 ```
 
-#### Flexbox Best Practice
+### Flexbox Best Practice
 
 ```css
 .container {
@@ -1252,7 +1250,7 @@ main {
 }
 ```
 
-### Grid Patterns
+## Grid Patterns
 
 [Complete Grid Guide](https://css-tricks.com/snippets/css/complete-guide-grid/)
 
@@ -1323,12 +1321,12 @@ main {
 }
 ```
 
-#### Grid Attention Tips
+### Grid Attention Tips
 
 - `grid-column` will refactor template of grid (`grid-template-columns`)
 - `grid-row` will refactor template of grid (`grid-template-rows`)
 
-#### Grid Alignment
+### Grid Alignment
 
 - `justify-content`/`align-content` content within element,
   attach to **parent** css selector
@@ -1340,12 +1338,12 @@ main {
   attach to **chilren** css selector
   (effectively adjusts `margin` of children)
 
-### 分栏问题
+## 分栏问题
 
 - float 左右元素 + margin 中间元素
 - float 元素 + width: %
 
-#### 两栏布局
+### 两栏布局
 
 利用父元素 relative 与 子元素 absolute 进行布局
 
@@ -1376,13 +1374,13 @@ main {
 }
 ```
 
-#### 三栏布局
+### 三栏布局
 
-##### absolute to left/right + margin to middle
+#### absolute to left/right + margin to middle
 
 position .left and .right with absolute, add margin-left and margin-right to .middle
 
-##### float to left/right + margin to middle
+#### float to left/right + margin to middle
 
 ```html
 .left
@@ -1404,7 +1402,7 @@ position .left and .right with absolute, add margin-left and margin-right to .mi
 }
 ```
 
-##### float + negative margin both to left/right
+#### float + negative margin both to left/right
 
 On a floated element, a negative margin opposite the float direction will decrease
 the float area, causing adjacent elements to overlap the floated element. A negative
@@ -1455,11 +1453,11 @@ margin in the direction of the float will pull the floated element in that direc
 }
 ```
 
-### 居中问题
+## 居中问题
 
 [CSS Tricks - Centering CSS Complete Guide](https://css-tricks.com/centering-css-complete-guide/)
 
-#### 不定 block 元素水平居中
+### 不定 block 元素水平居中
 
 - 将元素改为 inline 型
 
@@ -1487,7 +1485,7 @@ margin in the direction of the float will pull the floated element in that direc
 }
 ```
 
-#### 垂直居中问题
+### 垂直居中问题
 
 ```css
 .container{
@@ -1504,21 +1502,21 @@ margin in the direction of the float will pull the floated element in that direc
 }
 ```
 
-#### 混合布局
+### 混合布局
 
 在子容器中在设置新元素即可
 
-### list-style-type/image
+## list-style-type/image
 
 改变ul/ol前标记类型
 
-### align
+## align
 
-#### text-align
+### text-align
 
 justify(自适应，左右都无空格)
 
-#### vertical-align
+### vertical-align
 
 垂直对齐方式
 
@@ -1530,11 +1528,11 @@ justify(自适应，左右都无空格)
 }
 ```
 
-### opacity
+## opacity
 
 0 ~ 1, 渐进效果常用属性
 
-### border
+## border
 
 mix transparent with non-transparent border to make shapes (e.g. triangle).
 
@@ -1580,17 +1578,17 @@ mix transparent with non-transparent border to make shapes (e.g. triangle).
 }
 ```
 
-#### border-radius
+### border-radius
 
-#### border-image
+### border-image
 
 ```css
 border-image: source slice width outset repeat
 ```
 
-### background
+## background
 
-#### background-image
+### background-image
 
 - url()
 - linear-gradient()
@@ -1624,7 +1622,7 @@ awesome gradient buttons
 }
 ```
 
-#### (moz/webkit)background-clip
+### (moz/webkit)background-clip
 
 指定背景显示范围  content-box/padding-box/border-box
 
@@ -1635,11 +1633,11 @@ h1 {
 }
 ```
 
-#### (moz/webkit)background-origin
+### (moz/webkit)background-origin
 
 指定背景绘制起点  content-box/padding-box/border-box
 
-#### background-size
+### background-size
 
 - contain
 - cover
@@ -1654,7 +1652,7 @@ h1 {
 }
 ```
 
-#### background-attachment
+### background-attachment
 
 - `scroll`: scrolls with the main view, but stays fixed inside the local view
 - `local`: scrolls both with the main view and the local view
@@ -1691,7 +1689,7 @@ body {
 }
 ```
 
-#### Mix Blend Mode
+### Mix Blend Mode
 
 - with `multiply`: black is cutout (keep black)
   (0 * WHAT = 0)
@@ -1719,9 +1717,9 @@ body {
 }
 ```
 
-#### Background Best Practice
+### Background Best Practice
 
-##### 单背景极简欢迎首页
+#### 单背景极简欢迎首页
 
 ```css
 .jumbotron {
@@ -1735,7 +1733,7 @@ body {
 }
 ```
 
-### text
+## CSS Text
 
 ```css
 .text {
@@ -1751,7 +1749,7 @@ body {
 }
 ```
 
-#### white-space
+### white-space
 
 html 中, 普通标签内自动忽略空格符, 并将其与空白符转换成一个空格进行输出, 可用 white-spacing 改变这一行为
 
@@ -1762,9 +1760,9 @@ p {
 }
 ```
 
-### font
+## CSS Font
 
-#### font-size
+### font-size
 
 Best Practice
 
@@ -1785,20 +1783,20 @@ strong {
 }
 ```
 
-#### font-style
+### font-style
 
 normal,italic,oblique
 
-#### font-variant
+### font-variant
 
 normal,small-caps(小型大写字母)
 
-#### font-size-adjust
+### font-size-adjust
 
 - 使字体保持大小，不随字体类型改变而改变
 - 不同字体有不同的值(x-height/字体尺寸)
 
-#### font-diplay
+### font-diplay
 
 The font display timeline:
 
@@ -1831,7 +1829,7 @@ whether and when it is downloaded and ready to use:
 }
 ```
 
-#### custom function - @font-face
+### custom function - @font-face
 
 使用户使用服务端提供的字体(bootstrap中有使用@font-face)
 
@@ -1849,7 +1847,7 @@ whether and when it is downloaded and ready to use:
 /*}*/
 ```
 
-#### Font Best Practice
+### Font Best Practice
 
 ```css
   text-decoration: none;
@@ -1948,7 +1946,25 @@ whether and when it is downloaded and ready to use:
 华文新魏：STXinwei
 ```
 
-### filter
+## CSS Couter
+
+Adjust the appearance of content based on its location in a document.
+
+```css
+/* Set a counter named 'section', and its initial value is 0. */
+body {
+  counter-reset: section;
+}
+
+/* Increment the value of section counter by 1 */
+/* Display the value of section counter */
+h3::before {
+  counter-increment: section;
+  content: counter(section);
+}
+```
+
+## CSS Filter
 
 来源自SVG的滤镜特效
 
