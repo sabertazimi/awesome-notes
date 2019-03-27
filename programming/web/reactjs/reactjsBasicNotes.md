@@ -32,6 +32,7 @@
       - [useEffect](#useeffect)
     - [Basic Rules](#basic-rules)
     - [Custom Hooks](#custom-hooks)
+      - [LifeCycle Hooks](#lifecycle-hooks)
       - [Async Data Hook](#async-data-hook)
       - [Reducer Hook](#reducer-hook)
       - [Previous Hook](#previous-hook)
@@ -641,6 +642,65 @@ const useDataApi = (initialUrl, initialData) => {
 - only call Hooks from React function components
 
 ### Custom Hooks
+
+#### LifeCycle Hooks
+
+componentDidMount
+
+```js
+const useMount = (fn) => {
+  useEffect(() => void fn(), []);
+};
+```
+
+componentWillUnmount
+
+```js
+const useUnmount = (fn) => {
+  useEffect(() => fn, []);
+};
+```
+
+componentDidUpdate
+
+```js
+const useUpdate = (fn) => {
+  const mounting = useRef(true);
+
+  useEffect(() => {
+    if (mounting.current) {
+      // first get called for componentDidMount lifecycle
+      // so skip it
+      mounting.current = false;
+    } else {
+      fn();
+    }
+  });
+};
+```
+
+Force Update
+
+```js
+const useUpdate = () => useState(0)[1];
+```
+
+isMounted
+
+```js
+const useIsMounted = () => {
+  const [isMount, setIsMount] = useState(false);
+
+  useEffect(() => {
+    if (!isMount) {
+      setIsMount(true);
+    }
+    return () => setIsMount(false);
+  }, []);
+
+  return isMount;
+};
+```
 
 #### Async Data Hook
 
