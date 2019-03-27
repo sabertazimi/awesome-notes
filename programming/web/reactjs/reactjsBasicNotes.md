@@ -13,7 +13,8 @@
     - [componentDidMount()](#componentdidmount)
     - [componentWillReceiveProps()](#componentwillreceiveprops)
     - [props validation](#props-validation)
-  - [element and component](#element-and-component)
+  - [Element and Component](#element-and-component)
+    - [JSX](#jsx)
     - [functional/class component](#functionalclass-component)
     - [stateful/stateless component](#statefulstateless-component)
       - [stateless component](#stateless-component)
@@ -195,7 +196,7 @@ static PropTypes = {
 }
 ```
 
-## element and component
+## Element and Component
 
 react element 实际上是纯对象, 可由 React.createElement()/JSX/element factory helper 创建,
 并被 react 在必要时渲染成真实的DOM结点
@@ -240,6 +241,17 @@ ReactDOM.render({
     }
   }
 }
+```
+
+### JSX
+
+在 JSX 中, 小写标签被认为是 HTML 标签.
+但是, 含有 `.` 的大写和小写标签名却不是.
+
+```js
+<component /> 将被转换为 React.createElement('component') (i.e, HTML 标签)
+<obj.component /> 将被转换为 React.createElement(obj.component)
+<Component /> 将被转换为 React.createElement(Component)
 ```
 
 ### functional/class component
