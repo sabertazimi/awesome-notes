@@ -63,6 +63,7 @@
     - [Error Boundary](#error-boundary)
     - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
   - [React Performance](#react-performance)
+    - [React Fiber](#react-fiber)
     - [Rerendering Problem](#rerendering-problem)
     - [Code Spliting](#code-spliting)
   - [Server Side Rendering](#server-side-rendering)
@@ -1847,6 +1848,13 @@ class Frameworks extends React.Component {
 - Isomorphic rendering
 - Webpack bundle analyzer
 - [Progressive React](https://houssein.me/progressive-react)
+
+### React Fiber
+
+- [A Simple React with Fiber Reconciliation](https://github.com/sabertazimi/meactjs)
+
+React Fiber 的目标是提高其在动画、布局和手势等领域的适用性.
+它的主要特性是 incremental rendering: 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
 
 ### Rerendering Problem
 
