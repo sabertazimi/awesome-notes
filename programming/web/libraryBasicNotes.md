@@ -273,6 +273,7 @@
 
 - [ICO](https://github.com/kevva/to-ico)
 - [Images API](https://github.com/rsms/node-imagemagick)
+- [JavaScript Load Image](https://github.com/blueimp/JavaScript-Load-Image)
 
 ### Icons
 
