@@ -134,6 +134,7 @@
       - [responsive inline-box](#responsive-inline-box)
     - [responsive image](#responsive-image)
     - [media query](#media-query)
+      - [JavaScript Media Query API](#javascript-media-query-api)
     - [设备类型](#设备类型)
     - [设备特性](#设备特性)
       - [Style for Print PDF](#style-for-print-pdf)
@@ -2353,6 +2354,23 @@ use `inline-box` with `width`
     .container {
         width: 750px;
     }
+}
+```
+
+#### JavaScript Media Query API
+
+- [MDN Media Query Tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)
+
+```js
+// https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList
+const mql = window.matchMedia(mediaQueryString)
+```
+
+```js
+if (window.matchMedia("(min-width: 400px)").matches) {
+  /* the view port is at least 400 pixels wide */
+} else {
+  /* the view port is less than 400 pixels wide */
 }
 ```
 
