@@ -258,6 +258,12 @@ ReactDOM.render({
 - 采用类型声明, 使用 setState(), 一般作为容器型组件(containers)
 - 结合 Redux 中的 connect 方法, 将 store 中的 state 作为此类组件的 props
 
+```js
+this.setState((prevState, props) => ({
+  counter: prevState.counter + props.increment
+}))
+```
+
 ### Component Lifecycle
 
 #### Creation/Mounting
