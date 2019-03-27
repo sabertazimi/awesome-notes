@@ -138,6 +138,8 @@
 
 ## JS Utils
 
+- [Cash - jQuery Lite](https://github.com/kenwheeler/cash)
+
 ### String
 
 - [String Manipulation](https://github.com/dleitee/strman)
