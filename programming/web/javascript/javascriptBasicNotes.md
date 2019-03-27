@@ -212,6 +212,7 @@
     - [Canvas Performance](#canvas-performance)
     - [Canvas Reference](#canvas-reference)
   - [Gamepad API](#gamepad-api)
+  - [URL API](#url-api)
 
 <!-- /TOC -->
 
@@ -4030,3 +4031,7 @@ window.addEventListener("gamepaddisconnected", (e) => {
   gamepadHandler(e, false);
 });
 ```
+
+## URL API
+
+- [URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams)
