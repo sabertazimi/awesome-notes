@@ -4,6 +4,7 @@
 
 - [React Basic Notes](#react-basic-notes)
   - [Diff Algorithm (Reconciliation)](#diff-algorithm-reconciliation)
+    - [React Fiber](#react-fiber)
     - [Elements of Different Types](#elements-of-different-types)
     - [DOM Elements of Same Type](#dom-elements-of-same-type)
     - [Component Elements of Same Type](#component-elements-of-same-type)
@@ -17,10 +18,13 @@
     - [stateful/stateless component](#statefulstateless-component)
       - [stateless component](#stateless-component)
       - [stateful component](#stateful-component)
-    - [component lifecycle](#component-lifecycle)
-      - [creation](#creation)
-      - [updates](#updates)
-      - [unmount](#unmount)
+    - [Component Lifecycle](#component-lifecycle)
+      - [Creation/Mounting](#creationmounting)
+      - [Updating](#updating)
+      - [Unmounting](#unmounting)
+    - [Refs](#refs)
+      - [Forward Refs](#forward-refs)
+      - [Callback Refs](#callback-refs)
     - [HOC (Higher-Order Components)](#hoc-higher-order-components)
     - [Render Props (Children as Function)](#render-props-children-as-function)
   - [Hooks](#hooks)
@@ -63,7 +67,6 @@
     - [Error Boundary](#error-boundary)
     - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
   - [React Performance](#react-performance)
-    - [React Fiber](#react-fiber)
     - [Rerendering Problem](#rerendering-problem)
     - [Code Spliting](#code-spliting)
   - [Server Side Rendering](#server-side-rendering)
@@ -85,10 +88,17 @@
 
 ## Diff Algorithm (Reconciliation)
 
+### React Fiber
+
+- [A Simple React with Fiber Reconciliation](https://github.com/sabertazimi/meactjs)
+
+React Fiber 的目标是提高其在动画、布局和手势等领域的适用性.
+它的主要特性是 incremental rendering: 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
+
 ### Elements of Different Types
 
 - rebuild element and children
-- methods: componentWillUnmount/componentWillMount/componentDidMount
+- methods: componentDidMount/componentWillUnmount
 
 ### DOM Elements of Same Type
 
@@ -248,13 +258,13 @@ ReactDOM.render({
 - 采用类型声明, 使用 setState(), 一般作为容器型组件(containers)
 - 结合 Redux 中的 connect 方法, 将 store 中的 state 作为此类组件的 props
 
-### component lifecycle
+### Component Lifecycle
 
-#### creation
+#### Creation/Mounting
 
-constructor(props, context) -> componentWillMount() -> render() -> componentDidMount()
+constructor(props, context) -> getDerivedStateFromProps() -> render() -> componentDidMount()
 
-#### updates
+#### Updating
 
 update for three reasons:
 
@@ -262,13 +272,54 @@ update for three reasons:
 - this.setState() called
 - this.forceUpdate() called
 
-componentWillReceiveProps(nextProps) -> shouldComponentUpdate(nextProps, nextState)
--> componentWillUpdate(nextProps, nextState)
--> render() -> componentDidUpdate(prevProps, prevState)
+getDerivedStateFromProps() -> shouldComponentUpdate(nextProps, nextState)
+-> render() -> getSnapshotBeforeUpdate() -> componentDidUpdate(prevProps, prevState)
 
-#### unmount
+getSnapshotBeforeUpdate:
+在最新的渲染输出提交给 DOM 前将会立即调用,
+这对于从 DOM 捕获信息（比如：滚动位置）很有用.
+
+#### Unmounting
 
 componentWillUnmount()
+
+### Refs
+
+ref 用于返回对元素的引用.
+但在大多数情况下, 应该避免使用它们.
+当需要直接访问 DOM 元素或组件的实例时, 它们可能非常有用.
+
+#### Forward Refs
+
+Ref forwarding 是一个特性,
+它允许一些组件获取接收到 ref 对象并将它进一步传递给子组件.
+
+```js
+const ButtonElement = React.forwardRef((props, ref) => (
+  <button ref={ref} className="CustomButton">
+    {props.children}
+  </button>
+));
+
+// Create ref to the DOM button:
+// get ref to `<button>`
+const ref = React.createRef();
+<ButtonElement ref={ref}>{'Forward Ref'}</ButtonElement>
+```
+
+#### Callback Refs
+
+```js
+class MyComponent extends Component {
+  componentDidMount() {
+    this.node.scrollIntoView();
+  }
+
+  render() {
+    return <div ref={node => this.node = node} />;
+  }
+}
+```
 
 ### HOC (Higher-Order Components)
 
@@ -1517,6 +1568,7 @@ render() {
 
 ```js
 // bad
+// deprecated
 <Foo
   ref="myRef"
 />
@@ -1848,13 +1900,6 @@ class Frameworks extends React.Component {
 - Isomorphic rendering
 - Webpack bundle analyzer
 - [Progressive React](https://houssein.me/progressive-react)
-
-### React Fiber
-
-- [A Simple React with Fiber Reconciliation](https://github.com/sabertazimi/meactjs)
-
-React Fiber 的目标是提高其在动画、布局和手势等领域的适用性.
-它的主要特性是 incremental rendering: 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
 
 ### Rerendering Problem
 
