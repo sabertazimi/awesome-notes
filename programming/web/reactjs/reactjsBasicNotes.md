@@ -37,8 +37,10 @@
       - [Reducer Hook](#reducer-hook)
       - [Previous Hook](#previous-hook)
       - [Store Hook](#store-hook)
-      - [Forece Update Hook](#forece-update-hook)
+      - [History Hook](#history-hook)
+      - [Debounce Hook](#debounce-hook)
       - [Router Hook](#router-hook)
+      - [Script Loading Hook](#script-loading-hook)
       - [Form Hook](#form-hook)
   - [ES6 Syntax](#es6-syntax)
     - [Comments](#comments)
@@ -587,9 +589,7 @@ That’s why provide an **empty array** as second argument to the effect hook
 to avoid activating it on component updates
 but **only for the mounting** of the component.
 If one of the variables changes, the hook runs again.
-If the array with the variables is empty, the hook doesn’t run
-when updating the component at all (only run when mounting),
-because it doesn’t have to watch any variables.
+For listeners binding, use `[]` deps list should be better.
 
 Functions in useEffect:
 
@@ -643,6 +643,8 @@ const useDataApi = (initialUrl, initialData) => {
 
 ### Custom Hooks
 
+- [More Custom Hooks](https://usehooks.com)
+
 #### LifeCycle Hooks
 
 componentDidMount
@@ -683,6 +685,31 @@ Force Update
 
 ```js
 const useUpdate = () => useState(0)[1];
+```
+
+```js
+// @ts-ignore
+import { useState } from 'react';
+
+interface VoidFunction {
+  (): void;
+}
+
+interface VoidFunctionCreator {
+  (): VoidFunction;
+}
+
+const max: number = 9007199254740990; // Number.MAX_SAFE_INTEGER - 1;
+
+const useForceUpdate: VoidFunctionCreator = (): VoidFunction => {
+  const [ , setState ] = useState(0);
+  const forceUpdate: VoidFunction = (): void => {
+    setState((state: number) => (state + 1) % max);
+  };
+  return forceUpdate;
+};
+
+export default useForceUpdate;
 ```
 
 isMounted
@@ -899,31 +926,145 @@ export function useStore() {
 }
 ```
 
-#### Forece Update Hook
+#### History Hook
 
 ```js
-// @ts-ignore
-import { useState } from 'react';
+import { useReducer, useCallback } from 'react';
 
-interface VoidFunction {
-  (): void;
-}
-
-interface VoidFunctionCreator {
-  (): VoidFunction;
-}
-
-const max: number = 9007199254740990; // Number.MAX_SAFE_INTEGER - 1;
-
-const useForceUpdate: VoidFunctionCreator = (): VoidFunction => {
-  const [ , setState ] = useState(0);
-  const forceUpdate: VoidFunction = (): void => {
-    setState((state: number) => (state + 1) % max);
-  };
-  return forceUpdate;
+// Initial state that we pass into useReducer
+const initialState = {
+  // Array of previous state values updated each time we push a new state
+  past: [],
+  // Current state value
+  present: null,
+  // Will contain "future" state values if we undo (so we can redo)
+  future: []
 };
 
-export default useForceUpdate;
+// Our reducer function to handle state changes based on action
+const reducer = (state, action) => {
+  const { past, present, future } = state;
+
+  switch (action.type) {
+    case 'UNDO':
+      const previous = past[past.length - 1];
+      const newPast = past.slice(0, past.length - 1);
+
+      return {
+        past: newPast,
+        present: previous,
+        future: [present, ...future]
+      };
+    case 'REDO':
+      const next = future[0];
+      const newFuture = future.slice(1);
+
+      return {
+        past: [...past, present],
+        present: next,
+        future: newFuture
+      };
+    case 'SET':
+      const { newPresent } = action;
+
+      if (newPresent === present) {
+        return state;
+      }
+      return {
+        past: [...past, present],
+        present: newPresent,
+        future: []
+      };
+    case 'CLEAR':
+      const { initialPresent } = action;
+
+      return {
+        ...initialState,
+        present: initialPresent
+      };
+  }
+};
+
+// Hook
+const useHistory = initialPresent => {
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
+    present: initialPresent
+  });
+
+  const canUndo = state.past.length !== 0;
+  const canRedo = state.future.length !== 0;
+
+  // Setup our callback functions
+  // We memoize with useCallback to prevent unnecessary re-renders
+
+  const undo = useCallback(
+    () => {
+      if (canUndo) {
+        dispatch({ type: 'UNDO' });
+      }
+    },
+    [canUndo, dispatch]
+  );
+
+  const redo = useCallback(
+    () => {
+      if (canRedo) {
+        dispatch({ type: 'REDO' });
+      }
+    },
+    [canRedo, dispatch]
+  );
+
+  const set = useCallback(newPresent => dispatch({ type: 'SET', newPresent }), [
+    dispatch
+  ]);
+
+  const clear = useCallback(() => dispatch({ type: 'CLEAR', initialPresent }), [
+    dispatch
+  ]);
+
+  // If needed we could also return past and future state
+  return { state: state.present, set, undo, redo, clear, canUndo, canRedo };
+};
+```
+
+#### Debounce Hook
+
+```js
+// Hook
+function useDebounce(value, delay) {
+  // State and setters for debounced value
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(
+    () => {
+      // Update debounced value after delay
+      const handler = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay);
+
+      // Cancel the timeout if value changes (also on delay change or unmount)
+      // This is how we prevent debounced value
+      // from updating if value is changed ...
+      // .. within the delay period. Timeout gets cleared and restarted.
+      return () => {
+        clearTimeout(handler);
+      };
+    },
+    [value, delay] // Only re-call effect if value or delay changes
+  );
+
+  return debouncedValue;
+}
+
+// Usage
+const [searchTerm, setSearchTerm] = useState('');
+const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+useEffect(() => {
+  ...
+}, [debouncedSearchTerm]);
 ```
 
 #### Router Hook
@@ -943,6 +1084,77 @@ const useReactRouter = () => {
   );
 
   return routerContext;
+};
+```
+
+#### Script Loading Hook
+
+```js
+// Hook
+let cachedScripts = [];
+
+const useScript = (src) => {
+  // Keeping track of script loaded and error state
+  const [state, setState] = useState({
+    loaded: false,
+    error: false
+  });
+
+  useEffect(
+    () => {
+      // If cachedScripts array already includes src
+      // that means another instance ...
+      // ... of this hook already loaded this script, so no need to load again.
+      if (cachedScripts.includes(src)) {
+        setState({
+          loaded: true,
+          error: false
+        });
+      } else {
+        cachedScripts.push(src);
+
+        // Create script
+        let script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+
+        // Script event listener callbacks for load and error
+        const onScriptLoad = () => {
+          setState({
+            loaded: true,
+            error: false
+          });
+        };
+
+        const onScriptError = () => {
+          // Remove from cachedScripts we can try loading again
+          const index = cachedScripts.indexOf(src);
+          if (index >= 0) cachedScripts.splice(index, 1);
+          script.remove();
+
+          setState({
+            loaded: true,
+            error: true
+          });
+        };
+
+        script.addEventListener('load', onScriptLoad);
+        script.addEventListener('error', onScriptError);
+
+        // Add script to document body
+        document.body.appendChild(script);
+
+        // Remove event listeners on cleanup
+        return () => {
+          script.removeEventListener('load', onScriptLoad);
+          script.removeEventListener('error', onScriptError);
+        };
+      }
+    },
+    [src] // Only re-run effect if script src changes
+  );
+
+  return [state.loaded, state.error];
 };
 ```
 
