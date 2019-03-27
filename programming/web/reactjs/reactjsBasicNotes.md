@@ -78,6 +78,7 @@
   - [Create React App](#create-react-app)
     - [React Scripts](#react-scripts)
     - [Deployment](#deployment)
+  - [Interviews](#interviews)
 
 <!-- /TOC -->
 
@@ -2228,3 +2229,7 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 
 - [Offical Documentation](https://facebook.github.io/create-react-app/docs/deployment)
 - [Deploy Subdirectory](https://medium.com/@svinkle/how-to-deploy-a-react-app-to-a-subdirectory-f694d46427c1)
+
+## Interviews
+
+- [Reactjs Interview Questions](https://github.com/semlinker/reactjs-interview-questions)
