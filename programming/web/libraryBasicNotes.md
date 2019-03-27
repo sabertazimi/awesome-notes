@@ -8,6 +8,8 @@
   - [Solution and Framework](#solution-and-framework)
   - [UI Framework](#ui-framework)
   - [Browser](#browser)
+  - [JS Utils](#js-utils)
+    - [String](#string)
   - [CSS Utils](#css-utils)
   - [State/Data Management](#statedata-management)
     - [Redux](#redux)
@@ -133,6 +135,12 @@
 ## Browser
 
 - [Feature/Browser Detection](https://github.com/Modernizr/Modernizr)
+
+## JS Utils
+
+### String
+
+- [String Manipulation](https://github.com/dleitee/strman)
 
 ## CSS Utils
 
