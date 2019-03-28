@@ -370,13 +370,18 @@ const ref = React.createRef();
 #### Callback Refs
 
 ```js
-class MyComponent extends Component {
-  componentDidMount() {
-    this.node.scrollIntoView();
+class UserInput extends Component {
+  setSearchInput = (input) => {
+    this.input = input;
   }
 
-  render() {
-    return <div ref={node => this.node = node} />;
+  render () {
+    return (
+      <input
+        type='text'
+        ref={this.setSearchInput} /> // Access DOM input in handle submit
+      <button type='submit'>Submit</button>
+    );
   }
 }
 ```
