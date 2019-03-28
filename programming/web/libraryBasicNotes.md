@@ -17,9 +17,9 @@
     - [Other](#other)
   - [Documentation](#documentation)
   - [Chat](#chat)
-  - [List Virtualization](#list-virtualization)
   - [Card](#card)
   - [List](#list)
+  - [List Virtualization/Windowing](#list-virtualizationwindowing)
   - [Navigation](#navigation)
   - [Charts](#charts)
   - [Search](#search)
@@ -183,11 +183,6 @@
 - [React Chat Widget](https://github.com/Wolox/react-chat-widget)
 - [Matrix](https://github.com/matrix-org/matrix-react-sdk)
 
-## List Virtualization
-
-- [React Window](https://github.com/bvaughn/react-window)
-- [Large Data List/Table/Scroller](https://github.com/bvaughn/react-virtualized)
-
 ## Card
 
 - [GitHub Information Card](https://github.com/lepture/github-cards)
@@ -196,6 +191,11 @@
 ## List
 
 - [Sortable](https://github.com/RubaXa/Sortable)
+
+## List Virtualization/Windowing
+
+- [React Window](https://github.com/bvaughn/react-window)
+- [Large Data List/Table/Scroller](https://github.com/bvaughn/react-virtualized)
 
 ## Navigation
 
