@@ -14,6 +14,8 @@
   - [State](#state)
   - [Mediator](#mediator)
   - [Iterator](#iterator)
+  - [Observer](#observer)
+  - [Sub-Pub](#sub-pub)
   - [IOC and DI](#ioc-and-di)
 
 <!-- /TOC -->
@@ -80,6 +82,14 @@ private ClassName component;(拥有一个对象引用)
 ## Iterator
 
 一个Iterator对象封装访问和遍历一个聚集对象中的各个构件的方法
+
+## Observer
+
+观察者模式中主体和观察者是互相感知
+
+## Sub-Pub
+
+发布-订阅模式是借助第三方来实现调度, 发布者和订阅者之间互不感知
 
 ## IOC and DI
 
