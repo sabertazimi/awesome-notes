@@ -2286,6 +2286,7 @@ node.lastChild
 node.nextSibling
 node.previousSibling
 node.textContent
+node.closest(selectors) // returns closest ancestor of current element matching selectors
 ```
 
 Element-only navigation:
