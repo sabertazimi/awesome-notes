@@ -210,6 +210,7 @@
   - [Web Animations API](#web-animations-api)
   - [Web Canvas API](#web-canvas-api)
     - [Basic Usage](#basic-usage)
+    - [Game Loop With Canvas](#game-loop-with-canvas)
     - [Canvas Performance](#canvas-performance)
     - [Canvas Reference](#canvas-reference)
   - [Gamepad API](#gamepad-api)
@@ -4031,6 +4032,39 @@ function changeColor(color){
   context.fillStyle = color;
   context.fill();
 }
+```
+
+### Game Loop With Canvas
+
+for all objects:
+
+- constructor: `positon{x, y}`, `speed{x, y}`, `size{x, y}`
+- update(deltatime): change position or speed
+- draw(ctx): use canvas api and object properties (position/size) to render objects
+
+```js
+let canvas = document.getElementById("gameScreen");
+let ctx = canvas.getContext("2d");
+
+const GAME_WIDTH = 800;
+const GAME_HEIGHT = 600;
+
+let game = new Game(GAME_WIDTH, GAME_HEIGHT);
+
+let lastTime = 0;
+function gameLoop(timestamp) {
+  let deltaTime = timestamp - lastTime;
+  lastTime = timestamp;
+
+  ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+
+  game.update(deltaTime);
+  game.draw(ctx);
+
+  requestAnimationFrame(gameLoop);
+}
+
+requestAnimationFrame(gameLoop);
 ```
 
 ### Canvas Performance
