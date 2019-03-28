@@ -101,6 +101,7 @@
       - [位操作](#位操作)
       - [Math 对象](#math-对象)
   - [Browser Performance](#browser-performance)
+    - [Browser Caches](#browser-caches)
     - [Browser Pefermance Monitoring](#browser-pefermance-monitoring)
       - [合成监控](#合成监控)
       - [真实用户监控](#真实用户监控)
@@ -2184,6 +2185,18 @@ Math.tan(x)
 ## Browser Performance
 
 - [Performance 工具指北](https://zhuanlan.zhihu.com/p/41017888)
+
+### Browser Caches
+
+- [Dive into Browser Caches](https://github.com/ljianshu/Blog/issues/23)
+
+从缓存位置上来说分为四种, 并且各自有优先级,
+当依次查找缓存且都没有命中的时候, 才会去请求网络:
+
+- Service Worker: PWA
+- Memory Cache: reload Tab page
+- Disk Cache: big files
+- Push Cache: HTTP/2
 
 ### Browser Pefermance Monitoring
 
