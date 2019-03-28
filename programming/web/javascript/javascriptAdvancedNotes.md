@@ -252,8 +252,8 @@ babel.transformFromAst(ast, code, options);
 
 ### Variable
 
-- 一方面规定，var命令和function命令声明的全局变量，依旧是全局对象的属性
-- 另一方面规定，let命令、const命令、class命令声明的全局变量，不属于全局对象的属性
+- 一方面规定, var/function 声明的全局变量, 依旧是全局对象的属性
+- 另一方面规定, let/const/class 声明的全局变量, 不属于全局对象的属性
 
 #### let
 
