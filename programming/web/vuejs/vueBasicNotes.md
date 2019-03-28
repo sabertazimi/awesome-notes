@@ -15,6 +15,7 @@
       - [Normalize Options](#normalize-options)
       - [Merge Options](#merge-options)
     - [Reactive Data Pattern](#reactive-data-pattern)
+    - [Two-Way Binding](#two-way-binding)
     - [Virtual DOM Diff and Patch](#virtual-dom-diff-and-patch)
   - [Router](#router)
     - [Navigation Guards](#navigation-guards)
@@ -743,6 +744,42 @@ data getter/setter -- notify -> watcher -- trigger --> render
 ```js
 data.a;     // getHook() get called
 data.a = 2; // setHook() get called
+```
+
+### Two-Way Binding
+
+View-Model 主要做了两件微小的事情：
+
+- 从 M 到 V 的映射 (Data Binding), 这样可以大量节省人肉来 update View 的代码:
+  通过 Proxy 代理 Model, 每当调用 `Model[property].set` 时同时调用 `render`
+- 从 V 到 M 的事件监听 (DOM Listeners), 这样 Model 会随着 View 触发事件而改变
+
+```js
+const _data = {
+  name: 'mark',
+};
+
+// new Proxy(target, handler);
+let changeName = new Proxy(_data, {
+  set(obj, name, value) {
+    obj[name] = value;
+    render();
+  }
+});
+```
+
+```js
+Array.from(el.getElementsByTagName('input')).filter(ele => {
+  return ele.getAttribute('v-model');
+}).forEach(input => {
+  let name = input.getAttribute('v-model');
+  input.value = changeName[name];
+
+  // DOM Event Listener (listen to the changes of view)
+  input.oninput = function() {
+    changeName[name] = this.value;
+  }
+});
 ```
 
 ### Virtual DOM Diff and Patch
