@@ -201,6 +201,7 @@
   - [Web Audio API](#web-audio-api)
     - [From Oscillator](#from-oscillator)
     - [From Music Data](#from-music-data)
+    - [Audio Bar Chart with Canvas](#audio-bar-chart-with-canvas)
   - [Web Storage API](#web-storage-api)
   - [Web Files API](#web-files-api)
   - [Web Sockets API](#web-sockets-api)
@@ -3718,7 +3719,6 @@ sourceNode.connect(analyserNode);
 analyserNode.connect(javascriptNode);
 javascriptNode.connect(audioContext.destination);
 
-
 // setup the event handler that is triggered
 // every time enough samples have been collected
 // trigger the audio analysis and draw the results
@@ -3759,6 +3759,44 @@ function stopSound() {
   sourceNode.stop(0);
   audioPlaying = false;
 }
+```
+
+### Audio Bar Chart with Canvas
+
+- [AnalyserNode.getByteFrequencyData API](https://developer.mozilla.org/zh-CN/docs/Web/API/AnalyserNode/getByteFrequencyData)
+- [Github Demo](https://github.com/bogdan-cornianu/swave/blob/master/src/visualizer.ts)
+
+```js
+const WIDTH = this.canvas.clientWidth;
+const HEIGHT = this.canvas.clientHeight;
+this.analyserNode.fftSize = 256;
+let bufferLengthAlt = this.analyserNode.frequencyBinCount;
+let dataArrayAlt = new Uint8Array(bufferLengthAlt);
+
+this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+let draw = () => {
+  let drawVisual = requestAnimationFrame(draw);
+  this.analyserNode.getByteFrequencyData(dataArrayAlt);
+
+  this.ctx.fillStyle = 'rgb(255, 255, 255)';
+  this.ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+  let barWidth = (WIDTH / bufferLengthAlt) * 2.5;
+  let barHeight;
+  let x = 0;
+
+  for (let i = 0; i < bufferLengthAlt; i++) {
+    barHeight = dataArrayAlt[i];
+
+    this.ctx.fillStyle = 'rgb(' + (barHeight + 100) + ',15,156)';
+    this.ctx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight / 2);
+
+    x += barWidth + 1;
+  }
+};
+
+draw();
 ```
 
 ## Web Storage API
