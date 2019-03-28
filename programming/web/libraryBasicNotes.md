@@ -295,6 +295,7 @@
 ### SVG
 
 - [SVG](https://github.com/svg/svgo)
+- [Illustration SVG Gallery](https://gallery.manypixels.co/)
 - [A fast DVI to SVG converter](https://github.com/mgieseki/dvisvgm)
 
 ### Size
