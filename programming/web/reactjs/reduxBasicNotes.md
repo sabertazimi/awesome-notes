@@ -60,6 +60,7 @@ export default appStore = createStore(rootReducers, initState);
 - 调用 Dispatch 方法自动向 Store 传递一个 Action(因为只有一个全局 Store, 故无需额外指定 Store 参数),
   Store 遍历调用其中的  Reducers, 根据 switch 语句进行匹配 action 处理
 - reducer 只保存最基本的 state, 可计算出的 state 放在 mapStateToProps(selector) 中直接计算后绑定至 props
+- 将数据保存在 Redux 存储中, 并在组件内部保持 UI 相关状态
 
 ##### Persisted State
 
