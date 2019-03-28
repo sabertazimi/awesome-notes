@@ -128,6 +128,42 @@ React Fiber 的目标是提高其在动画、布局和手势等领域的适用�
 未来会在更多的可以 batch updates 的场景下将 setState 设为异步执行,
 所以编写代码时最好将 setState 总是当做异步执行函数.
 
+Batch Update: 事件处理,
+Not Bacth Update: Async Work (setTimeout/Promise.then)
+
+```js
+class Example extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      val: 0
+    };
+  }
+  
+  componentDidMount() {
+    this.setState({val: this.state.val + 1});
+    console.log(this.state.val);    // 第 1 次 log
+
+    this.setState({val: this.state.val + 1});
+    console.log(this.state.val);    // 第 2 次 log
+
+    setTimeout(() => {
+      this.setState({val: this.state.val + 1});
+      console.log(this.state.val);  // 第 3 次 log
+
+      this.setState({val: this.state.val + 1});
+      console.log(this.state.val);  // 第 4 次 log
+    }, 0);
+  }
+
+  render() {
+    return null;
+  }
+};
+
+// => 0 0 2 3
+```
+
 ### componentDidMount()
 
 - don't `setState` directly in this method
