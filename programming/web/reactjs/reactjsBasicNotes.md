@@ -79,6 +79,8 @@
     - [Internationalization](#internationalization)
       - [Simple Intl](#simple-intl)
   - [Testing](#testing)
+    - [Shallow Renderer](#shallow-renderer)
+    - [Test Renderer](#test-renderer)
     - [Enzyme](#enzyme)
   - [Create React App](#create-react-app)
     - [React Scripts](#react-scripts)
@@ -2214,6 +2216,61 @@ export default Intl;
 - [Complete Tutorial](https://www.robinwieruch.de/react-testing-tutorial/#react-enzyme-test-setup)
 - [Jest and Enzyme Snapshots Testing](https://medium.com/codeclan/testing-react-with-jest-and-enzyme-20505fec4675)
 - [Cypress - Testing Framework](https://www.cypress.io/)
+
+### Shallow Renderer
+
+浅层渲染 (Shallow Renderer) 对于在 React 中编写单元测试用例很有用.
+它允许渲染一个一级深的组件并断言其渲染方法返回的内容, 而不必担心子组件未实例化或渲染.
+
+```js
+function MyComponent() {
+  return (
+    <div>
+      <span className={'heading'}>{'Title'}</span>
+      <span className={'description'}>{'Description'}</span>
+    </div>
+  )
+}
+```
+
+```js
+import ShallowRenderer from 'react-test-renderer/shallow'
+
+const renderer = new ShallowRenderer()
+renderer.render(<MyComponent />)
+
+const result = renderer.getRenderOutput()
+
+expect(result.type).toBe('div')
+expect(result.props.children).toEqual([
+  <span className={'heading'}>{'Title'}</span>,
+  <span className={'description'}>{'Description'}</span>
+])
+```
+
+### Test Renderer
+
+测试渲染器 (Test Renderer) 可用于将组件渲染为纯 JavaScript 对象,
+而不依赖于 DOM 或原生移动环境.
+该包可以轻松获取由 ReactDOM 或 React Native 平台所渲染的视图层次结构 (类似于 DOM 树) 的快照,
+而无需使用浏览器或 jsdom.
+
+```js
+import TestRenderer from 'react-test-renderer'
+
+const Link = ({page, children}) => <a href={page}>{children}</a>
+
+const testRenderer = TestRenderer.create(
+  <Link page={'https://www.facebook.com/'}>{'Facebook'}</Link>
+)
+
+console.log(testRenderer.toJSON())
+// {
+//   type: 'a',
+//   props: { href: 'https://www.facebook.com/' },
+//   children: [ 'Facebook' ]
+// }
+```
 
 ### Enzyme
 
