@@ -1502,6 +1502,18 @@ foo = function foo() {
 console.log(foo.name);
 ```
 
+函数声明对于函数内部而言无法修改 (const)
+
+```js
+var b = 10;
+(function b() {
+  b = 20;
+  console.log(b)
+})()
+
+// print out function b { ... }
+```
+
 ### 函数入参
 
 **无副作用**的函数: 注意是否需要拷贝传入对象,使原有对象不受函数影响,并返回新对象
