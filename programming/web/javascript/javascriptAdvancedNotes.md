@@ -1147,7 +1147,7 @@ if there’s any pending call back waiting to be executed:
 - message queue: used by `setTimeout`, `DOM events`
 - 微任务 Microtask，有特权, 可以插队:
   process.nextTick,
-  Promises.then (Promise 构造函数是同步任务),
+  Promises.then (Promise 构造函数是同步函数),
   MutationObserver
 - 宏任务 Macrotask，没有特权:
   setTimeout, setInterval,
@@ -1262,7 +1262,7 @@ console.log('script end');
 // 输出顺序: script start->promise1->promise1 end->script end->promise2->settimeout
 ```
 
-`await a(); b()` 等价于 `Promise(a()).then(b())`: a 是同步任务, b 是 microtask
+`await a(); b()` 等价于 `Promise(a()).then(b())`: a 是同步执行, b 是 microtask
 
 ```js
 async function async1() {
@@ -1301,6 +1301,37 @@ async1 end
 promise2
 setTimeout
 */
+```
+
+当调用栈没有同步函数时, 直接执行任务队列里的函数
+
+```js
+function test () {
+  console.log('start');
+
+  setTimeout(() => {
+    console.log('children2');
+    Promise.resolve().then(() => {console.log('children2-1')});
+  }, 0);
+
+  setTimeout(() => {
+    console.log('children3');
+    Promise.resolve().then(() => {console.log('children3-1')});
+  }, 0);
+
+  Promise.resolve().then(() => {console.log('children1')});
+  console.log('end');
+}
+
+test();
+
+// start
+// end
+// children1
+// children2
+// children2-1
+// children3
+// children3-1
 ```
 
 ## Browser Internal
