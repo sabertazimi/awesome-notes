@@ -57,8 +57,9 @@
     - [Quotes Style](#quotes-style)
     - [Spacing Style](#spacing-style)
     - [Ordering of Class Component](#ordering-of-class-component)
-  - [MVC模式](#mvc模式)
+  - [MVC/MVVM](#mvcmvvm)
     - [Controller](#controller)
+    - [Comparsion](#comparsion)
     - [Best Practice](#best-practice)
   - [Modern React](#modern-react)
     - [Lazy and Suspense](#lazy-and-suspense)
@@ -1745,7 +1746,7 @@ render() {
 13. optional render methods like renderNavigation() or renderProfilePicture()
 14. render
 
-## MVC模式
+## MVC/MVVM
 
 ### Controller
 
@@ -1753,6 +1754,12 @@ render() {
 - 渲染和重定向
 - 选择Model和Service
 - 处理Session和Cookies
+
+### Comparsion
+
+- 初始渲染: Virtual DOM > 脏检查 >= 依赖收集
+- 小量数据更新: 依赖收集 >> Virtual DOM + 优化 > 脏检查（无法优化） > Virtual DOM 无优化
+- 大量数据更新: 脏检查 + 优化 >= 依赖收集 + 优化 > Virtual DOM（无法/无需优化）>> MVVM 无优化
 
 ### Best Practice
 
