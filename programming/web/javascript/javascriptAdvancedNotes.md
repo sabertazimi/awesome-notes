@@ -1146,11 +1146,14 @@ if there’s any pending call back waiting to be executed:
 - ES6 job queue: used by `Promises` (higher priority)
 - message queue: used by `setTimeout`, `DOM events`
 - 微任务 Microtask，有特权, 可以插队:
-  process.nextTick, Promises.then (Promise 构造函数是同步任务),
-  MutationObserver, MessageChannel
+  process.nextTick,
+  Promises.then (Promise 构造函数是同步任务),
+  MutationObserver
 - 宏任务 Macrotask，没有特权:
-  setTimeout, setInterval, setImmediate, I/O,
-  postMessage, UI Interaction Events
+  setTimeout, setInterval,
+  setImmediate, I/O,
+  MessageChannel, postMessage,
+  UI Interaction Events
 - Microtask 优先于 Macrotask
 - 浏览器为了能够使得 JS 内部 (macro)task 与 DOM 任务能够有序的执行,
   会在一个 (macro)task 执行结束后, 在下一个 (macro)task 执行开始前, 对页面进行重新渲染
