@@ -37,6 +37,10 @@ Stack: ES6, webpack, react-hot-loader
 
 ## Basic Concepts
 
+- 单一数据源:  整个应用程序的状态存储在单个对象树中 (容易跟踪/调试)
+- 状态只读: 通过 dispatch(action) 间接更改状态, 不直接写入状态
+- 纯函数更改状态: reducer(state, action) => newState
+
 ### Store and State
 
 #### Store
