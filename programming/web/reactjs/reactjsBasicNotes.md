@@ -9,10 +9,9 @@
     - [DOM Elements of Same Type](#dom-elements-of-same-type)
     - [Component Elements of Same Type](#component-elements-of-same-type)
   - [Props and State](#props-and-state)
-    - [getInitialState() and constructor(props, context)](#getinitialstate-and-constructorprops-context)
+    - [setState](#setstate)
     - [componentDidMount()](#componentdidmount)
-    - [componentWillReceiveProps()](#componentwillreceiveprops)
-    - [props validation](#props-validation)
+    - [Props Validation](#props-validation)
   - [Element and Component](#element-and-component)
     - [JSX](#jsx)
     - [functional/class component](#functionalclass-component)
@@ -119,7 +118,15 @@ React Fiber 的目标是提高其在动画、布局和手势等领域的适用�
 
 ## Props and State
 
-### getInitialState() and constructor(props, context)
+### setState
+
+在事件处理函数中的 setState 是异步执行的,
+为了防止子组件在处理事件时多次渲染,
+将多个 setState (包括父组件) 移到浏览器事件之后执行
+(batch updates: 此时 React 内部变量 isBatchingUpdates 变成 true),
+可以提升 React 性能.
+未来会在更多的可以 batch updates 的场景下将 setState 设为异步执行,
+所以编写代码时最好将 setState 总是当做异步执行函数.
 
 ### componentDidMount()
 
@@ -181,11 +188,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-### componentWillReceiveProps()
-
-当此方法被调用时, 不代表 props 一定被改变. 当使用此方法监听 props 变化时, 必须额外检查 props 是否确实被改变
-
-### props validation
+### Props Validation
 
 ```js
 static PropTypes = {
