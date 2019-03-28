@@ -1159,7 +1159,7 @@ for (let ii = 0; ii < macrotask.length; ii++) {
   eval(macrotask[ii])()
 
   if (microtask.length != 0) {
-    // process microtasks
+    // process all microtasks
     for (let __i = 0; __i < microtask.length; __i++) {
       eval(microtask[__i])()
     }
@@ -1167,6 +1167,8 @@ for (let ii = 0; ii < macrotask.length; ii++) {
     // empty microtask
     microtask = []
   }
+
+  // next macrotask in next loop iteration
 }
 ```
 
@@ -1254,6 +1256,47 @@ setTimeout(function(){
 console.log('script end');
 
 // 输出顺序: script start->promise1->promise1 end->script end->promise2->settimeout
+```
+
+`await a(); b()` 等价于 `Promise(a()).then(b())`: a 是同步任务, b 是 microtask
+
+```js
+async function async1() {
+  console.log('async1 start');
+  await async2();
+  console.log('async1 end');
+}
+async function async2() {
+  console.log('async2');
+}
+
+console.log('script start');
+
+setTimeout(function() {
+  console.log('setTimeout');
+}, 0);
+
+async1();
+
+new Promise(function(resolve) {
+  console.log('promise1');
+  resolve();
+}).then(function() {
+  console.log('promise2');
+});
+
+console.log('script end');
+
+/*
+script start
+async1 start
+async2
+promise1
+script end
+async1 end
+promise2
+setTimeout
+*/
 ```
 
 ## Browser Internal
