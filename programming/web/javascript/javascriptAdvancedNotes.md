@@ -200,6 +200,7 @@
       - [SW for Broken Images](#sw-for-broken-images)
     - [PWA Library](#pwa-library)
     - [PWA Tutorials](#pwa-tutorials)
+  - [HTTP/2](#http2)
 
 <!-- /TOC -->
 
@@ -3638,3 +3639,15 @@ self.addEventListener('install', (e) => {
 ### PWA Tutorials
 
 - [Extensive Guide](https://www.smashingmagazine.com/2018/11/guide-pwa-progressive-web-applications/)
+
+## HTTP/2
+
+在 HTTP/1.x 中，每次请求都会建立一次HTTP连接:
+
+- 串行的文件传输. 当请求 a 文件时, b文件只能等待
+- 连接数过多
+
+HTTP/2 的多路复用就是为了解决上述的两个性能问题.
+在 HTTP/2 中, 有两个非常重要的概念, 分别是帧（frame）和流（stream）.
+帧代表着最小的数据单位, 每个帧会标识出该帧属于哪个流, 流也就是多个帧组成的数据流.
+多路复用, 就是在一个 TCP 连接中可以存在多条流, 避免队头阻塞问题和连接数过多问题.
