@@ -96,6 +96,7 @@
       - [Ajax 缓存](#ajax-缓存)
     - [Reduce Repeat Manipulation](#reduce-repeat-manipulation)
       - [Debounce and Throttle](#debounce-and-throttle)
+      - [RequestAnimationFrame Throttling](#requestanimationframe-throttling)
     - [First Paint Time](#first-paint-time)
     - [算数逻辑运算](#算数逻辑运算)
       - [位操作](#位操作)
@@ -2077,6 +2078,37 @@ _.throttle = function(func, wait, options) {
       return result;
     };
 };
+```
+
+#### RequestAnimationFrame Throttling
+
+```js
+let frameId = 0;
+let ticking = false;
+
+const handleResize = event => {
+  if (ticking) return;
+  ticking = true;
+  frameId = requestAnimationFrame(() => handleUpdate(event));
+};
+
+const handleUpdate = event => {
+  console.log('resize update');
+
+  ...
+
+  ticking = false;
+};
+
+useEffect(() => {
+  window.addEventListener('resize', handleResize);
+  handleUpdate();
+
+  return () => {
+    window.removeEventListener('resize', handleResize);
+    cancelAnimationFrame(frameId);
+  };
+});
 ```
 
 ### First Paint Time
