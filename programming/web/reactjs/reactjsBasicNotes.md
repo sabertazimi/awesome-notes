@@ -1886,6 +1886,13 @@ const TextArea = () => (
 
 ### Error Boundary
 
+以下是错误边界不起作用的情况:
+
+- 在事件处理器内
+- setTimeout 或 requestAnimationFrame 回调中的异步代码
+- 在服务端渲染期间
+- 错误边界代码本身中引发错误时
+
 ```js
 class ErrorBoundary extends React.Component {
   state = {
