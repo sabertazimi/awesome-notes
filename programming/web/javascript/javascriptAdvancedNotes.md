@@ -1226,6 +1226,28 @@ console.log("10")
 // 1 10 8 9 5 7 2 3 4 6
 ```
 
+Promise 构造函数本身是同步函数
+
+```js
+console.log('script start');
+
+const promise1 = new Promise(function (resolve) {
+  console.log('promise1');
+  resolve();
+  console.log('promise1 end');
+}).then(function () {
+  console.log('promise2');
+});
+
+setTimeout(function(){
+  console.log('settimeout');
+})
+
+console.log('script end');
+
+// 输出顺序: script start->promise1->promise1 end->script end->promise2->settimeout
+```
+
 ## Browser Internal
 
 - Chrome: Blink (based on Webkit) + V8
