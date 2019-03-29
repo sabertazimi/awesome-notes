@@ -2090,6 +2090,14 @@ setTimeout(() => {
 
 ### transform
 
+Transformations do affect the visual rendering,
+but have no affect on the CSS layout other than affecting overflow.
+Transforms are also taken into account
+when computing client rectangles exposed
+via the Element Interface Extensions,
+namely getClientRects() and getBoundingClientRect(),
+which are specified in [CSSOM-VIEW].
+
 - scale/X/Y/Z/3d(): 0 - n
 - translate/X/Y/Z/3d(): n px
 - rotate/X/Y/Z/3d(): deg
