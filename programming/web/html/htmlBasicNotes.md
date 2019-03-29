@@ -822,6 +822,12 @@ sudo systemctl restart nginx
 
 ## Accessbility
 
+- 不要将颜色作为传达信息的唯一手段 (色盲/弱)
+- 确保文本与其背景保持足够的对比
+- 提供输入焦点的视觉提示
+- 注意表单
+- 避免组件识别障碍
+
 ### Semantic HTML
 
 [Semantic HTML Presentation](http://justineo.github.io/slideshows/semantic-html/#/)
