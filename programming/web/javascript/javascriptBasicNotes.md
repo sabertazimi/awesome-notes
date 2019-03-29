@@ -215,6 +215,7 @@
     - [Canvas Reference](#canvas-reference)
   - [Gamepad API](#gamepad-api)
   - [URL API](#url-api)
+  - [Observer API](#observer-api)
 
 <!-- /TOC -->
 
@@ -4120,3 +4121,11 @@ window.addEventListener("gamepaddisconnected", (e) => {
 ## URL API
 
 - [URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams)
+
+## Observer API
+
+- [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)
+- [Mutation Observer](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)
+- [Performance Observer](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver)
+- [Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)
+- [Reporting Observer](https://developer.mozilla.org/en-US/docs/Web/API/ReportingObserver)
