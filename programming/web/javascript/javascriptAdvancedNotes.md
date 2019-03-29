@@ -3571,6 +3571,8 @@ $0.addEventListener('click', (e) => {
 
 - script->style->layout->paint->composite timeline
 - performance tips
+- [Timeline Events](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/performance-reference)
+- [Performance Analysis Reference](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
 
 #### Memory Panel
 
