@@ -333,8 +333,9 @@
 ### Video
 
 - [React Video Player](https://github.com/zhihu/griffith)
+- [video.js](https://github.com/videojs/video.js)
+- [Griffith](https://github.com/zhihu/griffith)
 - [Video Landingpage](https://github.com/rishabhp/bideo.js)
-- [HTML5 Video Player - video.js](https://github.com/videojs/video.js)
 - [plyr](https://github.com/selz/plyr)
 
 ## Particles
@@ -521,16 +522,18 @@
 
 ## i18n
 
+- [React Intl](https://github.com/yahoo/react-intl)
 - [Formatting international numbers and currencies](https://github.com/autoNumeric/autoNumeric/)
 
 ## CLI
 
 - [commander](https://github.com/tj/commander.js)
 - [ora spinner](https://github.com/sindresorhus/ora)
-- [enquirer](https://github.com/enquirer/enquirer)
+- [Inquirer](https://github.com/SBoudrias/Inquirer.js)
 - [chalk](https://github.com/chalk/chalk)
 - [open CLI framework](https://github.com/oclif/oclif)
 - [progress](https://github.com/bvaughn/progress-estimator)
+- [Babun - Windows Zsh](https://github.com/babun/babun)
 
 ## Daemon
 
