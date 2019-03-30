@@ -43,6 +43,37 @@ sudo sysctl -p
 }
 ```
 
+`jsconfig.json` for vscode
+
+```js
+{
+  "compilerOptions": {
+    // This must be specified if "paths" is set
+    "baseUrl": ".",
+    // Relative to "baseUrl"
+    "paths": {
+      "*": ["*", "src/*"]
+    }
+  }
+}
+
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "Config/*": ["src/config/*"],
+      "Components/*": ["src/components/*"],
+      "Ducks/*": ["src/ducks/*"],
+      "Shared/*": ["src/shared/*"],
+      "App/*": ["src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
+```
+
 ### Flag Options
 
 - --progress
