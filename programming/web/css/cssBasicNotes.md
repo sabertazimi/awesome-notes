@@ -31,12 +31,12 @@
     - [功能](#功能)
     - [CSS Files](#css-files)
   - [CSS Selector](#css-selector)
-    - [pseudo-class-selector](#pseudo-class-selector)
-      - [元素选择器](#元素选择器)
-      - [关系选择器](#关系选择器)
-      - [属性选择器](#属性选择器)
-      - [伪类](#伪类)
-      - [伪元素](#伪元素)
+    - [元素选择器](#元素选择器)
+    - [关系选择器](#关系选择器)
+    - [属性选择器](#属性选择器)
+    - [伪类](#伪类)
+    - [伪元素](#伪元素)
+    - [Descendant Selector](#descendant-selector)
   - [全局属性值](#全局属性值)
   - [Box Style](#box-style)
     - [width](#width)
@@ -590,9 +590,7 @@ Size in em if the font-size should be modular
 
 ![CSS 3 Selector](images/css3-selector-lest.png)
 
-### pseudo-class-selector
-
-#### 元素选择器
+### 元素选择器
 
 ```css
 p {
@@ -601,7 +599,7 @@ p {
 }
 ```
 
-#### 关系选择器
+### 关系选择器
 
 - E F：所有后代选择器
 
@@ -639,7 +637,7 @@ h1 ~ p {
 }
 ```
 
-#### 属性选择器
+### 属性选择器
 
 `E[attr]`
 
@@ -687,7 +685,7 @@ a[title*=link] {text-decoration: underline;}
 //定位所有title里具有link字符串的a链接
 ```
 
-#### 伪类
+### 伪类
 
 - :link：未访问的链接；
 - :visited：已访问的链接，不建议使用；
@@ -752,7 +750,7 @@ input:not(:placeholder-shown) + .msg {
 }
 ```
 
-#### 伪元素
+### 伪元素
 
 - ::first-line：匹配文本首行；
 - ::first-letter：匹配文本首字母；
@@ -805,6 +803,21 @@ h2:before {
      border-bottom: 15px solid transparent;
 }
 ```
+
+### Descendant Selector
+
+using the descendant selector without more specificity can be really expensive.
+The browser is going to check every descendant element for a match
+because the relationship isn’t restricted to parent and child.
+
+For `.container ul li a` selector:
+
+- match every `<a>` on the page
+- find every `<a>` contained in a `<li>`
+- use the previous matches and narrow down to
+  the ones contained in a `<ul>`
+- finally, filter down the above selection to
+  the ones contained in an element with the class `.container`
 
 ## 全局属性值
 
