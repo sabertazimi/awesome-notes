@@ -10,6 +10,7 @@
   - [Browser](#browser)
   - [JS Utils](#js-utils)
     - [String](#string)
+    - [React Utils](#react-utils)
   - [CSS Utils](#css-utils)
   - [State/Data Management](#statedata-management)
     - [Redux](#redux)
@@ -143,6 +144,10 @@
 ### String
 
 - [String Manipulation](https://github.com/dleitee/strman)
+
+### React Utils
+
+- [classnames](https://github.com/JedWatson/classnames)
 
 ## CSS Utils
 
