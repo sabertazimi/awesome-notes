@@ -771,6 +771,7 @@ attr() – 调用当前元素的属性
 
 ```css
 a:after { content:"(" attr(href) ")"; }
+a:after { content:"(" attr(data-language) ")"; }
 ```
 
 url() / uri() – 用于引用媒体文件
