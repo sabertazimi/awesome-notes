@@ -599,6 +599,7 @@
 ### Unit Testing
 
 - [Jest](https://github.com/facebook/jest)
+- [Jest UI](https://github.com/Raathigesh/majestic)
 - [Enzyme - React Testing](https://github.com/airbnb/enzyme)
 - [React Testing Library](https://github.com/kentcdodds/react-testing-library)
 - [jasmine](https://github.com/jasmine/jasmine)
