@@ -467,6 +467,12 @@ solve:
 - lowest level of indirection
 - no naming collision
 
+advantages:
+
+- separate presentation from logic
+- extendable
+- reusable (abstract same logic)
+
 problem:
 
 - minor memory issues when defining a closure for every render
