@@ -14,6 +14,7 @@
     - [Tree Shaking](#tree-shaking)
     - [Perf Profiling](#perf-profiling)
     - [Commit Linter](#commit-linter)
+    - [Profile Statistics](#profile-statistics)
   - [Reference](#reference)
 
 <!-- /TOC -->
@@ -190,6 +191,14 @@ npx webpack --mode production --profile --json > stats.json
   },
 }
 ```
+
+### Profile Statistics
+
+```bash
+webpack --profile --json > stats.json
+```
+
+- [Webpack Chart](https://github.com/alexkuz/webpack-chart)
 
 ## Reference
 
