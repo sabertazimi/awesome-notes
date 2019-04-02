@@ -100,7 +100,7 @@
       - [进程控制块(Process Control Block)](#进程控制块process-control-block)
     - [进程通信](#进程通信)
     - [线程(CPU 调度单位)](#线程cpu-调度单位)
-      - [idleproc(0号内核线程)](#idleproc0号内核线程)
+      - [idleproc(0 号内核线程)](#idleproc0-号内核线程)
     - [内核线程与用户进程](#内核线程与用户进程)
     - [Process 实现](#process-实现)
       - [process context(执行现场)](#process-context执行现场)
@@ -126,8 +126,8 @@
     - [死锁](#死锁)
     - [mutex 实现](#mutex-实现)
       - [P/V 操作](#pv-操作)
-        - [具体实现信号量的P操作](#具体实现信号量的p操作)
-        - [具体实现信号量的V操作](#具体实现信号量的v操作)
+        - [具体实现信号量的 P 操作](#具体实现信号量的-p-操作)
+        - [具体实现信号量的 V 操作](#具体实现信号量的-v-操作)
       - [管程](#管程)
         - [Conditional Variable](#conditional-variable)
   - [文件系统 (FileSystem)](#文件系统-filesystem)
@@ -192,8 +192,8 @@ constraints:
 
 ### 操作系统的特性
 
-- 并发性  : 能处理多个同时性活动的能力
-- 共享性  : 多个计算任务对系统资源的共同享用
+- 并发性 : 能处理多个同时性活动的能力
+- 共享性 : 多个计算任务对系统资源的共同享用
 - 不确定性: 操作系统能处理随机发生的多个事件 - 程序运行次序的不确定性, 程序运行时间的不确定性
 
 ### 操作系统的资源管理功能
@@ -280,7 +280,7 @@ constraints:
 #### 用户接口
 
 - 操作/命令接口(操作命令): 作业控制语言/键盘命令(CLI)/图形化用户界面(GUI)
-- 程序接口(系统功能调用):  在用户程序中可以直接使用系统功能调用(system call)请求操作系统提供的服务
+- 程序接口(系统功能调用): 在用户程序中可以直接使用系统功能调用(system call)请求操作系统提供的服务
 
 ### 操作系统的组织结构
 
@@ -319,7 +319,7 @@ BIOS 的 EPROM(Erasable Programmable Read Only Memory) 处
 
 #### BIOS Config
 
-BIOS 根据设置(硬盘/U盘/网络启动),
+BIOS 根据设置(硬盘/U 盘/网络启动),
 加载存储设备的主引导扇区(Master Boot Record)(第一个扇区)的 512 字节至内存 0x7c00 处,
 开始执行第一条指令(bootloader)
 
@@ -332,7 +332,7 @@ BIOS 根据设置(硬盘/U盘/网络启动),
   将 32 位地址总线打开, 并进入保护模式(Protect Mode)
 - 在实模式中, 0~4KB 为中断向量表保留, 640KB ~ 1MB 为显存与 BIOS 保留, 实际可用的内存只有 636KB
 - 考虑到日后内核镜像的体积有超过 1MB 的可能, 所以将其装载到物理地址 1MB(0x100000) 之后连续的一块内存中更好.
-- 若要装载内核到物理地址 1MB之后(实模式下无法访问), 可在实模式中暂时将其装载到一个临时位置, 待进入保护模式之后再移动至合适位置
+- 若要装载内核到物理地址 1MB 之后(实模式下无法访问), 可在实模式中暂时将其装载到一个临时位置, 待进入保护模式之后再移动至合适位置
 
 解决方案:
 
@@ -376,7 +376,7 @@ empty_8042:
     ret
 ```
 
-- 置 cr0 保护模式标志位(bit0) 为1
+- 置 cr0 保护模式标志位(bit0) 为 1
 - 加载全局描述符表
 - 设置各个通用寄存器与段寄存器
 
@@ -388,13 +388,13 @@ empty_8042:
 
 - CS -> 全局描述符表(其起始地址与表大小位于 gdt 寄存器中)某项(每项存有 base/limit 等信息)
   -> 局部描述符表 -> 段选择子(段的基本信息) -> 基址+EIP -> 线性地址 ---页机制---> 物理地址
-- 将 cr0 寄存器 bit0 置为1, 表示进入了保护模式, 段机制开始起作用
+- 将 cr0 寄存器 bit0 置为 1, 表示进入了保护模式, 段机制开始起作用
 
 ## 物理内存管理
 
 ### bootloader 探测机器内存分布
 
-为内存管理模块提供基础: 在进入实模式前, 调用int 15h(88h, e801h, e820h), 借助 BIOS 中断获取内存信息
+为内存管理模块提供基础: 在进入实模式前, 调用 int 15h(88h, e801h, e820h), 借助 BIOS 中断获取内存信息
 
 ### bootloader 基本概念
 
@@ -464,27 +464,27 @@ empty_8042:
 
 将等待状态进程的分区对换至外存,以增大可用内存单元
 
-> e.g Linux Swap 分区: 安装系统时一般切割大小为内存大小的50%~100% 的外存作为 Swao 分区
+> e.g Linux Swap 分区: 安装系统时一般切割大小为内存大小的 50%~100% 的外存作为 Swao 分区
 
 #### malloc 实现策略
 
 ##### 启发式(Heuristic)编程
 
-- 建立已分配void指针表,free函数执行时,只回收表中存在的指针;不存在则报错
-- 对heap进行分区 - 小/中/大块内存请求,分别从不同区域(8/16/32最小单位区)分配
+- 建立已分配 void 指针表,free 函数执行时,只回收表中存在的指针;不存在则报错
+- 对 heap 进行分区 - 小/中/大块内存请求,分别从不同区域(8/16/32 最小单位区)分配
 - 记录当前堆块的信息，如长度，空闲状态
 - 记录周围环境信息，如保留上/下一堆块的指针或记录上/下堆块空闲状态
 
 ##### 伙伴系统(Buddy System)
 
 - 可分配内存单元总大小为 2^n
-- 总是将大小 **小于**请求大小的**2倍**且为**2的幂次方** 的某块内存单元分配出去(大小为 2^(i-1))
+- 总是将大小 **小于**请求大小的**2 倍**且为**2 的幂次方** 的某块内存单元分配出去(大小为 2^(i-1))
 
 ###### 合并空闲块
 
 - 空闲块相邻
 - 空闲块等大
-- 低地址空闲块的 起始地址 必须为 空闲块大小 的 2的幂次方倍(2倍以上)
+- 低地址空闲块的 起始地址 必须为 空闲块大小 的 2 的幂次方倍(2 倍以上)
 
 ### 非连续内存分配
 
@@ -505,7 +505,7 @@ typedef struct gdt_ptr {
 } __attribute__((packed)) gdt_ptr_t;
 ```
 
-- 用 16 位来表示表的长度(2 ^ 16 = 65532 bytes), 除以每一个描述符的 8 字节, 最多能创建8192个描述符
+- 用 16 位来表示表的长度(2 ^ 16 = 65532 bytes), 除以每一个描述符的 8 字节, 最多能创建 8192 个描述符
 
 #### 页式存储管理
 
@@ -515,14 +515,14 @@ typedef struct gdt_ptr {
 - update GDT
 - update ds,es,ss
 - update cs with jmp instruction
-- cr0 寄存器 bit31(most bit) 置1
+- cr0 寄存器 bit31(most bit) 置 1
 
 ##### 虚拟地址
 
 > TLB(translation lookaside buffer in cpu/pm)
 
 - Virtual Address =
-  2^(bits of virtual page offset) * virtual page number + virtual page offset
+  2^(bits of virtual page offset) \* virtual page number + virtual page offset
 - VPN(virtual page number point to PPN) - VPO(virtual page offset = PPO)
 - 根据 VPN 在页表中找到对应表项(VPN 表示项号), 每项保存着 PPN
 - TLBT(tag) - TLBI(index) - VPO
@@ -555,7 +555,7 @@ typedef struct gdt_ptr {
 
 ###### TLB(translation lookaside buffer)
 
-缓存页表项 - key: VPN, value: PPN　不用访问页表
+缓存页表项 - key: VPN, value: PPN 　不用访问页表
 
 ###### 多级页表
 
@@ -586,7 +586,7 @@ typedef struct gdt_ptr {
 若以 4K(limit) 为 1 个页表大小, 则下级页表首址为 `段/页表中某项的值 << 12`(2^12 = 4K)
 
 - 以 vsn 为索引在进程段表中找到段表项, 获取段(页表)基址与段大小信息(item_value/limit): base = item_value << log2(limit)
-- 以 vpn 为索引在进程页表(页表基址 = base中找到页表项, 获取 ppn
+- 以 vpn 为索引在进程页表(页表基址 = base 中找到页表项, 获取 ppn
 - ppn << log2(limit) + vpo(ppo) 为实际物理地址
 
 ### 内存的特权级
@@ -668,7 +668,7 @@ allocate TSS memory -> init TSS
 
 - 尽可能减少物理页面的换入换出次数
 - 只可交换映射到用户空间的物理页
-- 当页表项中 `PTE_P` 为0 时, 对应高位地址表示扇区地址(而不是物理位移)
+- 当页表项中 `PTE_P` 为 0 时, 对应高位地址表示扇区地址(而不是物理位移)
 - 换入时机: Page Fault 缺页; 换出时机: 积极/消极换出策略
 
 ##### 局部置换算法
@@ -685,13 +685,13 @@ allocate TSS memory -> init TSS
 - 缺页时, 从指针处开始查找页面进行置换: 若访问位为 0, 则进行置换; 若访问位为 1, 则将此页面访问位置 0, 继续查找未访问页面
 - 改进: 增加修改位
 
-|指针扫描前|指针扫描后|
-|:----------|:----------|
-|访问位 修改位|访问位 修改位|
-|0 0|置换|
-|0 1|0 0|
-|1 0|0 0|
-|1 1|0 1|
+| 指针扫描前    | 指针扫描后    |
+| :------------ | :------------ |
+| 访问位 修改位 | 访问位 修改位 |
+| 0 0           | 置换          |
+| 0 1           | 0 0           |
+| 1 0           | 0 0           |
+| 1 1           | 0 1           |
 
 ###### 最不常用算法(Least Frequently Used/LFU Algorithm)
 
@@ -755,7 +755,7 @@ typedef struct __vma {
 - push PC(Program Counter)
 - 中断向量表(将中断向量表对应的中断的 PSW(高 2 字节) 与 PC(低 2 字节) 先后替换原 PSW 与 PC)
 - 系统堆栈
-- 中断屏蔽码: n 位 2进制数(n 为中断总数), 允许响应 n 号中断则该位置 1
+- 中断屏蔽码: n 位 2 进制数(n 为中断总数), 允许响应 n 号中断则该位置 1
 
 程序状态字:
 
@@ -797,9 +797,9 @@ typedef struct __vma {
 
 - 处理机的态/处理机的特权级: 根据对资源和机器指令的使用权限, 将处理执行时的工作状态区分为不同的状态
 - 管理(supervisor mode)/系统态: 使用全部机器指令(包括特权指令), 可使用所有资源, 允许访问整个内存区, 运行系统程序
-- 用户态: 禁止使用特权指令(I/O设备指令, 直接修改特殊寄存器指令, 改变机器状态指令),
+- 用户态: 禁止使用特权指令(I/O 设备指令, 直接修改特殊寄存器指令, 改变机器状态指令),
   不可**直接**取用资源与改变机器状态, 只可访问自己的存储区域, 运行用户程序
-- 用户态切换至管态: 错误/异常状态(除0/缺页), 外部中断(I/O), 系统调用, 这一过程是由**硬件完成**的
+- 用户态切换至管态: 错误/异常状态(除 0/缺页), 外部中断(I/O), 系统调用, 这一过程是由**硬件完成**的
 
 ### 进程状态/生命周期
 
@@ -810,7 +810,7 @@ typedef struct __vma {
 - 进程首先在 cpu 初始化或者 sys_fork 的时候被创建,当为该进程分配了一个进程控制块之后,该进程进入 uninit 态
 - 当进程完全完成初始化之后,该进程转为 runnable 态
 - 当到达调度点时,由调度器 sched_class 根据运行队列 rq 的内容来判断一个进程是否应该被运行,
-  即把处于runnable 态的进程转换成 running 状态,从而占用 CPU 执行
+  即把处于 runnable 态的进程转换成 running 状态,从而占用 CPU 执行
 - running 态的进程通过 wait 等系统调用被阻塞,进入 sleeping 态
 - sleeping 态的进程被 wakeup 变成 runnable 态的进程
 - running 态的进程主动 exit 变成 zombie 态, 然后由其父进程完成对其资源的最后释放,子进程的进程控制块成为 unused
@@ -821,8 +821,8 @@ typedef struct __vma {
 通过组织管理 PCB(链表/索引表) 来组织管理进程; 在进程创建/终止的同时, 生成/回收改进程的 PCB:
 
 - 进程信息: 名字/pid/uid
-- 链表信息: 父进程指针/所属队列指针(就绪队列/IO等待队列/挂起队列)
-- CPU调度/运行时信息: eflags/cr3/状态
+- 链表信息: 父进程指针/所属队列指针(就绪队列/IO 等待队列/挂起队列)
+- CPU 调度/运行时信息: eflags/cr3/状态
 - 内存资源信息: 堆指针/栈指针/虚拟内存页面指针
 - 上下文信息(用于进程/上下文切换时保存/恢复上下文): trap frame/context(register files)
 
@@ -838,7 +838,7 @@ typedef struct __vma {
 - 线程控制块(Thread Control Block)
 - 用户线程与内核线程: 多为 1 对 1
 
-#### idleproc(0号内核线程)
+#### idleproc(0 号内核线程)
 
 - 工作就是不停地查询，直至有其他内核线程处于就绪状态, 令调度器执行那个内核线程
 - idleproc 内核线程是在操作系统没有其他内核线程可执行的情况下才会被调用
@@ -858,19 +858,20 @@ typedef struct __vma {
 - 设置好执行现场后, 一旦调度器选择了 initproc 执行, 就需要根据 initproc->context 中保存的执行现场来恢复 initproc 的执行
 - 通过 proc_run 和进一步的 switch_to 函数完成两个执行现场的切换，具体流程如下:
   - 让 current 指向 next 内核线程 initproc
-  - 设置任务状态段 ts 中特权态0下的栈顶指针 esp0 为 next 内核线程 initproc 的内核栈的栈顶, 即 next->kstack + KSTACKSIZE
+  - 设置任务状态段 ts 中特权态 0 下的栈顶指针 esp0 为 next 内核线程 initproc 的内核栈的栈顶,
+    即 next->kstack + KSTACKSIZE
   - 设置 CR3 寄存器的值为 next 内核线程 initproc 的页目录表起始地址 next->cr3
   - 由 switch_to 函数完成具体的两个线程的执行现场切换, 即切换各个寄存器
 
 #### `do_fork` function
 
-- 分配并初始化进程控制块(alloc_proc函数)
-- 分配并初始化内核栈(setup_stack函数)
-- 根据 clone_flag 标志复制或共享进程内存管理结构(copy_mm函数)
-- 设置进程在内核(或用户态)正常运行和调度所需的中断帧和执行上下文(copy_thread函数)
+- 分配并初始化进程控制块(alloc_proc 函数)
+- 分配并初始化内核栈(setup_stack 函数)
+- 根据 clone_flag 标志复制或共享进程内存管理结构(copy_mm 函数)
+- 设置进程在内核(或用户态)正常运行和调度所需的中断帧和执行上下文(copy_thread 函数)
 - 把设置好的进程控制块放入 hash_list 和 proc_list 两个全局进程链表中
 - 把进程状态设置为“就绪”态
-- 设置返回码为子进程的id号
+- 设置返回码为子进程的 id 号
 
 fork() 的主要行为:
 
@@ -880,9 +881,9 @@ fork() 的主要行为:
 - 复制调度相关的字段, 如 p_cpu/p_nice/p_pri
 - 复制父进程的文件描述符(p_ofile), 并增加引用计数
 - 复制父进程的信号处理例程(p_sigact)
-- 通过vm_clone(), 复制父进程的地址空间(p_vm)
+- 通过 vm_clone(), 复制父进程的地址空间(p_vm)
 - 复制父进程的寄存器状态(p_contxt)
-- 复制父进程的中断上下文, 并设置tf->eax为 0, 使fork()在子进程中返回0。
+- 复制父进程的中断上下文, 并设置 tf->eax 为 0, 使 fork()在子进程中返回 0。
 
 #### `do_execve` function
 
@@ -909,14 +910,14 @@ exec() 的主要行为:
 
 #### 六大调度时机
 
-- proc.c::do_exit 用户线程执行结束,主动放弃CPU控制权
-- proc.c::do_wait 用户线程等待子进程结束,主动放弃CPU控制权
+- proc.c::do_exit 用户线程执行结束,主动放弃 CPU 控制权
+- proc.c::do_wait 用户线程等待子进程结束,主动放弃 CPU 控制权
 - proc.c::init_main
-  - initproc 内核线程等待所有用户进程结束,如果没有结束,就主动放弃CPU控制权
-  - initproc 内核线程在所有用户进程结束后,让 kswapd 内核线程执行10次，用于回收空闲内存资源
-- proc.c::cpu_idle idleproc 内核线程的工作就是等待有处于就绪态的进程或线程,如果有就调用schedule函数
-- sync.h::lock 在获取锁的过程中,如果无法得到锁,则主动放弃CPU控制权
-- trap.c::trap 如果在当前进程在用户态被打断,且当前进程控制块的成员变量 need_resched 设置为1,则当前线程会放弃CPU控制权
+  - initproc 内核线程等待所有用户进程结束,如果没有结束,就主动放弃 CPU 控制权
+  - initproc 内核线程在所有用户进程结束后,让 kswapd 内核线程执行 10 次，用于回收空闲内存资源
+- proc.c::cpu_idle idleproc 内核线程的工作就是等待有处于就绪态的进程或线程,如果有就调用 schedule 函数
+- sync.h::lock 在获取锁的过程中,如果无法得到锁,则主动放弃 CPU 控制权
+- trap.c::trap 如果在当前进程在用户态被打断,且当前进程控制块的成员变量 need_resched 设置为 1,则当前线程会放弃 CPU 控制权
 
 ### 调度策略/算法
 
@@ -1052,36 +1053,40 @@ struct lock/semaphore {
 
 #### P/V 操作
 
-##### 具体实现信号量的P操作
+##### 具体实现信号量的 P 操作
 
 - 关中断
-- 判断当前信号量的value是否大于0
-- 如果是>0，则表明可以获得信号量，故让value减一，并打开中断返回
+- 判断当前信号量的 value 是否大于 0
+- 如果是>0，则表明可以获得信号量，故让 value 减一，并打开中断返回
 - 如果不是>0，则表明无法获得信号量，故需要将当前的进程加入到等待队列中，并打开中断，然后运行调度器选择另外一个进程执行
-- 如果被V操作唤醒，则把自身关联的wait从等待队列中删除（此过程需要先关中断，完成后开中断）
+- 如果被 V 操作唤醒，则把自身关联的 wait 从等待队列中删除（此过程需要先关中断，完成后开中断）
 
-##### 具体实现信号量的V操作
+##### 具体实现信号量的 V 操作
 
 - 关中断
 - 如果信号量对应的 wait queue 中没有进程在等待，直接把信号量的 value 加一，然后开中断返回
-- 如果有进程在等待且进程等待的原因是 semophore 设置的，则调用 wakeup_wait 函数将 waitqueue 中等待的第一个wait删除，且把此wait关联的进程唤醒,最后开中断返回
+- 如果有进程在等待且进程等待的原因是 semophore 设置的,
+  则调用 wakeup_wait 函数将 waitqueue 中等待的第一个 wait 删除,
+  且把此 wait 关联的进程唤醒, 最后开中断返回
 
 #### 管程
 
 管程由四部分组成：
 
 - 管程内部的共享变量(mutex): 一个二值信号量，是实现每次只允许一个进程进入管程的关键元素，确保了互斥访问性质
-- 管程内部的条件变量: 通过执行 wait_cv,会使得等待某个条件C为真的进程能够离开管程并睡眠，且让其他进程进入管程继续执行;而进入管程的某进程设置条件C为真并执行signal_cv时，能够让等待某个条件C为真的睡眠进程被唤醒，从而继续进入管程中执行
+- 管程内部的条件变量: 通过执行 wait_cv,会使得等待某个条件 C 为真的进程能够离开管程并睡眠，且让其他进程进入管程继续执行;
+  而进入管程的某进程设置条件 C 为真并执行 signal_cv 时，能够让等待某个条件 C 为真的睡眠进程被唤醒，从而继续进入管程中执行
 - 管程内部并发执行的进程
 - 对局部于管程内部的共享数据设置初始值的语句
-- 成员变量信号量 next: 配合进程对条件变量 cv 的操作而设置的，由于发出signal_cv的进程A会唤醒睡眠进程B，进程B执行会导致进程A睡眠，直到进程B离开管程，进程A才能继续执行，这个同步过程是通过信号量next完成
+- 成员变量信号量 next: 配合进程对条件变量 cv 的操作而设置的, 由于发出 signal_cv 的进程 A 会唤醒睡眠进程 B,
+  进程 B 执行会导致进程 A 睡眠，直到进程 B 离开管程，进程 A 才能继续执行，这个同步过程是通过信号量 next 完成
 - 整形变量 next_count: 表示由于发出 singal_cv 而睡眠的进程个数
 
 ```c
 typedef struct monitor{
     // the mutex lock for going into the routines in monitor,
     // should be initialized to 1
-    semaphore_t mutex;  
+    semaphore_t mutex;
     // the next semaphore is used to down the signaling proc itself,
     // and the other OR wakeuped
     semaphore_t next;
@@ -1094,16 +1099,16 @@ typedef struct monitor{
 
 - wait_cv： 被一个进程调用, 以等待断言 Pc 被满足后该进程可恢复执行. 进程挂在该条件变量上等待时, 不被认为是占用了管程
 - signal_cv：被一个进程调用, 以指出断言 Pc 现在为真, 从而可以唤醒等待断言 Pc 被满足的进程继续执行
-- 信号量sem: 用于让发出 wait_cv 操作的等待某个条件C为真的进程睡眠, 而让发出 signal_cv 操作的进程通过这个 sem 来唤醒睡眠的进程
+- 信号量 sem: 用于让发出 wait_cv 操作的等待某个条件 C 为真的进程睡眠, 而让发出 signal_cv 操作的进程通过这个 sem 来唤醒睡眠的进程
 - count: 表示等在这个条件变量上的睡眠进程的个数
 - owner: 表示此条件变量的宿主是哪个管程
 
 typedef struct condvar{
-    // the sem semaphore is used to down the waiting proc,
-    // and the signaling proc should up the waiting
-    semaphore_t sem;
-    proc int count;             // the number of waiters on
-    condvar monitor_t * owner;  // the owner(monitor) of this condvar
+// the sem semaphore is used to down the waiting proc,
+// and the signaling proc should up the waiting
+semaphore_t sem;
+proc int count; // the number of waiters on
+condvar monitor_t \* owner; // the owner(monitor) of this condvar
 } condvar_t;
 
 ## 文件系统 (FileSystem)
@@ -1180,7 +1185,7 @@ superblock -> dentry -> vnode/inode
 
 `sfs_do_mount`函数中:
 
-- 完成了加载位于硬盘上的SFS文件系统的超级块 superblock 和 freemap 的工作l
+- 完成了加载位于硬盘上的 SFS 文件系统的超级块 superblock 和 freemap 的工作 l
 - 在内存中有了 SFS 文件系统的全局信息
 
 #### index
@@ -1190,7 +1195,9 @@ superblock -> dentry -> vnode/inode
 
 #### inode
 
-内存inode包含了SFS的硬盘inode信息，而且还增加了其他一些信息，这属于是便于进行是判断否改写、互斥操作、回收和快速地定位等作用。 一个内存inode是在打开一个文件后才创建的，如果关机则相关信息都会消失。而硬盘inode的内容是保存在硬盘中的，只是在进程需要时才被读入到内存中，用于访问文件或目录的具体内容数据
+内存 inode 包含了 SFS 的硬盘 inode 信息, 而且还增加了其他一些信息, 这属于是便于进行是判断否改写、互斥操作、回收和快速地定位等作用.
+一个内存 inode 是在打开一个文件后才创建的, 如果关机则相关信息都会消失.
+而硬盘 inode 的内容是保存在硬盘中的, 只是在进程需要时才被读入到内存中, 用于访问文件或目录的具体内容数据.
 
 ```c
 struct inode {
@@ -1236,14 +1243,14 @@ struct inode_ops {
 #### Device
 
 利用 `vfs_dev_t` 数据结构，
-就可以让文件系统通过一个链接 `vfs_dev_t` 结构的双向链表找到device对应的inode数据结构，
-一个inode节点的成员变量in_type的值是0x1234，
-则此 inode的成员变量in_info将成为一个device结构。
-这样inode就和一个设备建立了联系，这个inode就是一个设备文件
+就可以让文件系统通过一个链接 `vfs_dev_t` 结构的双向链表找到 device 对应的 inode 数据结构，
+一个 inode 节点的成员变量 in_type 的值是 0x1234，
+则此 inode 的成员变量 in_info 将成为一个 device 结构。
+这样 inode 就和一个设备建立了联系，这个 inode 就是一个设备文件
 
 ## 设备管理详解
 
-- CPU一般都是通过寄存器的形式来访问外部设备
+- CPU 一般都是通过寄存器的形式来访问外部设备
 - 外设的寄存器通常包括控制寄存器、状态寄存器与数据寄存器三类, 分别用于发送命令/读取状态/读写数据.
 
 ### CGA/EGA + Chromatext video buffer
@@ -1251,13 +1258,13 @@ struct inode_ops {
 在内存的低 1MB 中, 有许多地址被映射至外部设备, 其中就包含文字显示模块(显卡控制显示器):
 
 - 从 0xB8000 开始, 每 2 个字节表示屏幕上显示的一个字符(80 x 25)
-- 前一个字节为 字符ASCII码, 后一个字节为
+- 前一个字节为 字符 ASCII 码, 后一个字节为
   字符颜色和属性的控制信息
   (back_twinkle, back_r, back_g, back_b, front_light, front_r, front_g, front_b)
 
 ### I/O
 
-调用 `io_delay()` 函数: 对于一些老式总线的外部设备, 读写I/O端口的速度若过快就容易出现丢失数据的现象
+调用 `io_delay()` 函数: 对于一些老式总线的外部设备, 读写 I/O 端口的速度若过快就容易出现丢失数据的现象
 
 ## 实践
 
@@ -1327,7 +1334,7 @@ bochs -q -f .bochsrc
 - step 单步执行
 - r 显示当前寄存器的值
 - sreg 显示当前的段寄存器的值
-- info gdt, info idt, info tss, info tab 分别显示当前的GDT、IDT、TSS、页表信息
+- info gdt, info idt, info tss, info tab 分别显示当前的 GDT、IDT、TSS、页表信息
 - print-stack 打印当前栈顶的值
 - help 显示帮助
 

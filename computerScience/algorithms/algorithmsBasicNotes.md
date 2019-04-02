@@ -10,7 +10,7 @@
     - [Merge Sort](#merge-sort)
     - [Quick Sort](#quick-sort)
     - [Heap Sort(Priority Queue)](#heap-sortpriority-queue)
-    - [Radix-Sorts 基数排序(可用于混乱shuffle数组)](#radix-sorts-基数排序可用于混乱shuffle数组)
+    - [Radix-Sorts 基数排序(可用于混乱 shuffle 数组)](#radix-sorts-基数排序可用于混乱-shuffle-数组)
   - [Tree Algorithm](#tree-algorithm)
     - [Binary Search Tree](#binary-search-tree)
     - [2-3Tree Banlance Tree](#2-3tree-banlance-tree)
@@ -181,7 +181,7 @@ void quick3waySort(int *a, int lo, int hi) {
 
 ### Heap Sort(Priority Queue)
 
-- swap: 2NlgN + 2N  (2NlgN for sink N times, 2N for construct MaxHeap)
+- swap: 2NlgN + 2N (2NlgN for sink N times, 2N for construct MaxHeap)
 - compare: NlgN + N (NlgN for sink N times, N for construct MaxHeap)
 
 ```cpp
@@ -204,7 +204,7 @@ void sink(int k) {
 }
 ```
 
-### Radix-Sorts 基数排序(可用于混乱shuffle数组)
+### Radix-Sorts 基数排序(可用于混乱 shuffle 数组)
 
 - 从个位到高位放入桶
 - 从高位到个位放入桶
@@ -225,11 +225,11 @@ Hibbard Deletion
 
 - 1+1=2node -> 3node
 - **1+2=3node -> 4node** -> 2node
-- 将 4node 结点中间元素移至父结点, 其余2元素分离为子 2node 节点
+- 将 4node 结点中间元素移至父结点, 其余 2 元素分离为子 2node 节点
 
 ### Red-Black BST
 
-- 基于2-3Tree, 将3node用红色标记
+- 基于 2-3Tree, 将 3node 用红色标记
 - 关键: 将红色标记向上传递至根部
 
 ```java
@@ -482,10 +482,10 @@ Hibbard Deletion
 
 1. 非红即黑
 2. 根黑
-3. 叶黑          e.g T.null 黑哨兵
+3. 叶黑 e.g T.null 黑哨兵
 4. 红父孩子黑
 5. 简单路径同黑
-6. 右孩子不红    e.g 父黑两孩红 -> 父红两孩黑(flip); 父黑右红 -> 父左旋变红, 右孩子变黑(left-rotate)
+6. 右孩子不红 e.g 父黑两孩红 -> 父红两孩黑(flip); 父黑右红 -> 父左旋变红, 右孩子变黑(left-rotate)
 
 #### 基本操作
 
@@ -511,7 +511,7 @@ BST + 循环双向链表:
 
 - 分隔空间数据
 
-e.g 左子树：左下方   右子树：右上方
+e.g 左子树：左下方 右子树：右上方
 
 ## Search Algorithm
 
@@ -604,7 +604,7 @@ unordered_map< int, unordered_map<int, int> > // => (row, (col, val))
 当第一个访问 edge(u,v) 时:
 
 - v.color == white: 树边
-- v.color == gray : 后向边(v 为 深度优先**森林*- 的祖父结点)
+- v.color == gray : 后向边(v 为 深度优先\*_森林_- 的祖父结点)
 - v.color == black: 前向边/横向边(v 为较深的结点/子结点)
 - 无向图深度优先遍历不会出现 前向边/横向边
 
@@ -669,7 +669,7 @@ void Relax(int u, int v, int w) {
 #### Floyd-Warshall Algorithm
 
 d^k(i, j) = w(i, j), k = 0
-    | min(d^k-1(i, j), d^k-1(i, k) + d^k-1(k, j)), k >= 1
+| min(d^k-1(i, j), d^k-1(i, k) + d^k-1(k, j)), k >= 1
 
 pi^(i, j) = pi^k-1(i, j) or pi^k-1(k, j)
 

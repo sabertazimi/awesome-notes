@@ -4,7 +4,7 @@
 
 - [Notes](#notes)
   - [测试模型](#测试模型)
-    - [PIE模型](#pie模型)
+    - [PIE 模型](#pie-模型)
     - [启发式测试策略模型(Heuristic Test Strategy Model)——软件功能测试(难以实现完全自动化)](#启发式测试策略模型heuristic-test-strategy-model软件功能测试难以实现完全自动化)
     - [用户体验测试(对软件功能测试的有益补充)](#用户体验测试对软件功能测试的有益补充)
   - [测试规模](#测试规模)
@@ -15,7 +15,7 @@
     - [逻辑覆盖方法](#逻辑覆盖方法)
     - [随机测试方法](#随机测试方法)
     - [黑盒/组合测试方法](#黑盒组合测试方法)
-    - [定位Fault](#定位fault)
+    - [定位 Fault](#定位-fault)
     - [模糊测试](#模糊测试)
   - [移动设备:(机型,屏幕,环境)碎片化 ，耗电量](#移动设备机型屏幕环境碎片化-耗电量)
   - [Useful Demos/Tools](#useful-demostools)
@@ -24,7 +24,7 @@
 
 ## 测试模型
 
-### PIE模型
+### PIE 模型
 
 (Execution)Fault,(Infection)Error,(Propagation)Failure
 
@@ -62,19 +62,19 @@ Unit/Module/Integration/System Testing
 ### 图结构覆盖方法
 
 - 顶点覆盖,边覆盖,边对覆盖(三顶点,两邻边)
-- VC/EC/EPC法
+- VC/EC/EPC 法
 
 ### 数据流覆盖方法
 
 - 数据流覆盖:定义处覆盖,使用处覆盖
-- DU法(Data&Use)
+- DU 法(Data&Use)
 
 ### 逻辑覆盖方法
 
 - 逻辑覆盖:条件处覆盖,判定处覆盖
 - DC(Decision),CC(Condition)法
-- MC/DC法
-- MCC法(完全覆盖)
+- MC/DC 法
+- MCC 法(完全覆盖)
 
 ### 随机测试方法
 
@@ -83,13 +83,13 @@ Unit/Module/Integration/System Testing
 ### 黑盒/组合测试方法
 
 - 等价类划分:合法输入(软件功能),非法输入(异常处理)
-- 等价类的边界值分析:合法MIN,MIN+,MAX-,MAX  非法:MIN-,MAX+
+- 等价类的边界值分析:合法 MIN,MIN+,MAX-,MAX 非法:MIN-,MAX+
 - 决策表+组合测试:简化决策表(考虑输入相关性)
   - 组合用例:维度与测试准度成正比
   - 约束用例:需避开约束输入(输入相关性,同时输入会成为无效输入)
   - 测试用例约简+测试用例优先级:额外贪心算法进行化简+排序测试用例求得近似解
 
-### 定位Fault
+### 定位 Fault
 
 - 代码可疑度=
   (失败测试用例经过数/失败测试用例总数)/

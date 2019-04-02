@@ -101,7 +101,7 @@ internet telephony      - SIP/RTP           - UDP
 
 #### Address
 
-- (32 bits network layer  )IP  : find specific host/end-system
+- (32 bits network layer )IP : find specific host/end-system
 - (16 bits transport layer)port: find specific process
 
 ## Transport Layer

@@ -152,22 +152,22 @@ details:
 - 字母表/符号集: 元素的非空有穷集合
 - 符号串: 字母表中的符号组成的任何有穷序列
 - 固有头/尾: 非空首/尾子串
-- 闭包:   Σ* = Σ0 U Σ1 U ... U Σn ...
-- 正闭包: Σ* = Σ1 U ... U Σn ...
+- 闭包: Σ\* = Σ0 U Σ1 U ... U Σn ...
+- 正闭包: Σ\* = Σ1 U ... U Σn ...
 
 ### 文法与语言的形式化表示
 
 - 文法(Grammar) G = (Vn, Vt, P, S) - 非终结符集, 终结符集, 规则/产生式集, 开始符号
-- 语言(Language) L(G) = {x | S -*> x, x <- Vt*} 文法 G 一切句子的集合
+- 语言(Language) L(G) = {x | S -_> x, x <- Vt_} 文法 G 一切句子的集合
 - 句型: rhs of P, 句子: 不含非终结符的右部
-- 直接推导: v -> w, 闭包推导: v -*> w, 正闭包推导: v -+> w
+- 直接推导: v -> w, 闭包推导: v -\*> w, 正闭包推导: v -+> w
 
 ### 乔姆斯基文法体系
 
 - ((((3)2)1)0)
 - 0 型文法: 任意文法
-- 1 型文法: 上下文有关文法(context sensitive)  αAβ -> αηβ
-- 2 型文法(语法工具): 上下文无关文法           A -> α
+- 1 型文法: 上下文有关文法(context sensitive) αAβ -> αηβ
+- 2 型文法(语法工具): 上下文无关文法 A -> α
 - 3 型文法(词法工具): 正规文法
 
 ### 上下文无关文法
@@ -204,17 +204,17 @@ E -> num
   |E `*` E
 ```
 
-> S: E, N: E, T: num/id/+/*
+> S: E, N: E, T: num/id/+/\*
 
 ##### 巴科斯范式(Backus-Naur Form)
 
-- ::=             : "被定义为"
-- "word"          : 字符本身
-- 双引号外的字     : 语法部分
-- 尖括号( < > )   : 必选项(非终结符)
+- ::= : "被定义为"
+- "word" : 字符本身
+- 双引号外的字 : 语法部分
+- 尖括号( < > ) : 必选项(非终结符)
 - 方括号( `[ ]` ) : 0/1
-- 大括号( { } )   : 0/n
-- 竖线( | )       : "OR"
+- 大括号( { } ) : 0/n
+- 竖线( | ) : "OR"
 
 ### 正规文法
 
@@ -233,7 +233,7 @@ E -> num
 - 任意 char <- C 是正则表达式
 - 若 M, N 是正则表达式, 则 M|N = {M, N},
   MN = {mn|m <- M, n <- N},
-  M* = {"\0", M, MM, MMM, ...} (选择/连接/闭包)也是正则表达式
+  M\* = {"\0", M, MM, MMM, ...} (选择/连接/闭包)也是正则表达式
 
 #### 形式表示
 
@@ -249,11 +249,11 @@ e -> "\0" // basic defination
 #### 正则语法糖(Syntax Sugar)
 
 - `[a-z]` : a|...|z
-- c?      : 0/1 个c
-- c+      : 1/n 个 c
+- c? : 0/1 个 c
+- c+ : 1/n 个 c
 - c{i, j} : i-j 个 c
-- "a*"    : a* 自身(非 kleen 闭包)
-- .       : 除 ‘\n’ 外的任意字符
+- "a*" : a* 自身(非 kleen 闭包)
+- . : 除 ‘\n’ 外的任意字符
 
 ```js
 // 标识符
@@ -270,12 +270,12 @@ e -> "\0" // basic defination
 
 进行文法推导时生成的树:
 
-- 根        : 开始符
-- 内部结点  : 非终结符
-- 叶子结点  : 终结符
-- 层        : 一步推导(优先级影响推导顺序)
+- 根 : 开始符
+- 内部结点 : 非终结符
+- 叶子结点 : 终结符
+- 层 : 一步推导(优先级影响推导顺序)
 - 叶子结点串: 最终表达式
-- 后序遍历  : 最终结果
+- 后序遍历 : 最终结果
 
 #### 推导类型
 
@@ -284,8 +284,8 @@ e -> "\0" // basic defination
 
 #### 句型分析
 
-- 短语: 若 S -*> Aβ, A -+> α, 则称 α 是句型 αβ 相对于非终结符 A 的短语
-- 直接短语: S -*> Aβ, A -> α
+- 短语: 若 S -\*> Aβ, A -+> α, 则称 α 是句型 αβ 相对于非终结符 A 的短语
+- 直接短语: S -\*> Aβ, A -> α
 - 一个右句型的直接短语称为该句型的句柄(用于**自下而上**的归约分析)
 - 最左归约: 归约最左的句柄, 最右归约: 归约最右的句柄
 
@@ -321,7 +321,7 @@ F -> num
 - 有害规则: 使文法产生二义性的规则
 - 多余规则: 不可达/不可终止的规则
 - 2 型文法的 ε 规则: 当语言中不含有 ε 符号串, 则一定存在终结符集不含有 ε 的等价文法(代入法消除 ε)
-- 保证非终结符 A 的有效性: S -*> αAβ, A -+> t
+- 保证非终结符 A 的有效性: S -\*> αAβ, A -+> t
 
 ## Lexical Analysis
 
@@ -421,11 +421,11 @@ transferFunction = {
 
 ##### 状态转移表实现 DFA
 
-|状态\字符|a|b|
-|:----------|:-----|:-----|
-|0|1|0|
-|1|2|1|
-|2|2|2|
+| 状态\字符 | a   | b   |
+| :-------- | :-- | :-- |
+| 0         | 1   | 0   |
+| 1         | 2   | 1   |
+| 2         | 2   | 2   |
 
 #### 非确定有限状态自动机(Nondeterministic Finite Automaton)
 
@@ -445,10 +445,10 @@ RegExp --Thompson 算法--> NFA --子集构造算法--> DFA --Hopcroft 最小化
 - 直接构造基本 RegExp
 - 递归构造复合 RegExp
 - epsilon : i --epsilon--> f
-- RegExp  : i --NFA(RegExp)--> f
-- 选择    : i --NFA(RegExp1)--> f, i --NFA(RegExp2)--> f
-- 连接    : i --NFA(RegExp1)--> m --NFA(RegExp2)--> f
-- 闭包    : i --epsilon--> m --epsilon--> f, m --RegExp--> m
+- RegExp : i --NFA(RegExp)--> f
+- 选择 : i --NFA(RegExp1)--> f, i --NFA(RegExp2)--> f
+- 连接 : i --NFA(RegExp1)--> m --NFA(RegExp2)--> f
+- 闭包 : i --epsilon--> m --epsilon--> f, m --RegExp--> m
 
 #### 子集构造算法: NFA --> DFA
 
@@ -584,7 +584,7 @@ Verb -> eat
   | drink
 ```
 
-> tiger eat water: 向前看非终结符推导出的所有终结符中匹配tiger的终结符;
+> tiger eat water: 向前看非终结符推导出的所有终结符中匹配 tiger 的终结符;
 > 不向前看,则先推导 N, 再推导 n, 但 n 不一定匹配 tiger, 则需进行回溯;
 > 向前看一个字符, 直接推导 N --> n, 同时直接找寻匹配 tiger 的终结符
 
@@ -730,8 +730,8 @@ bool ll1_parsing(tokens[]) {
 ##### nullable sets
 
 - 存在规则: X -> epsilon
-- 或者    : X -> Y1Y2...Yn, 且存在规则 Y1 -> epsilon, ..., Yn -> epsilon
-- 即      : X -*>  epsilon (epsilon <- first(X))
+- 或者 : X -> Y1Y2...Yn, 且存在规则 Y1 -> epsilon, ..., Yn -> epsilon
+- 即 : X -\*> epsilon (epsilon <- first(X))
 
 ```cpp
 nullable = {};
@@ -748,9 +748,9 @@ while (nullable is still changing) {
 
 ##### first sets
 
-first(X) = {t | X -*> talpha} U {epsilon | X-*>epsilon} :
+first(X) = {t | X -_> talpha} U {epsilon | X-_>epsilon} :
 
-- first(t)  = {t}
+- first(t) = {t}
 - epsilon<-first(X): X -> epsilon or X -> A1...An, epsilon<-first(Ai)
 - first(alpha)<-first(X): X -> A1..Analpha, epsilon<-first(Ai)
 
@@ -779,21 +779,21 @@ while (some sets is changing) {
 }
 ```
 
-|Nonterminal|First Set|
-|:-----|:----------|
-|S|{s, t, g, w}|
-|N|{s, t, g, w}|
-|V|{e, d}|
+| Nonterminal | First Set    |
+| :---------- | :----------- |
+| S           | {s, t, g, w} |
+| N           | {s, t, g, w} |
+| V           | {e, d}       |
 
 ##### follow sets
 
-follow(X) = {t | S -*> beta X t epsilon} :
+follow(X) = {t | S -\*> beta X t epsilon} :
 
 - for X -> AB:
   - first(B) <- follow(A), follow(X) <- follow(B)
-  - if B -*> epsilon: follow(X) <- follow(A)
+  - if B -\*> epsilon: follow(X) <- follow(A)
 - A -> alpha X beta: first(beta) - {epsilon} <- follow(X)
-- $ <- follow(S)
+- \$ <- follow(S)
 
 follow sets 不动点算法:
 
@@ -869,14 +869,14 @@ calculate_select_set(production p: N->beta1...betan) {
 
 nullable = {X, Y}
 
-||X|Y|Z|
-|:-----|:-----|:-----|:-----|
-|first|{a, c}|{c}|{a, c, d}|
-|follow|{a, c, d}|{a, c, d}|{}|
+|        | X         | Y         | Z         |
+| :----- | :-------- | :-------- | :-------- |
+| first  | {a, c}    | {c}       | {a, c, d} |
+| follow | {a, c, d} | {a, c, d} | {}        |
 
-|production|0|1|2|3|4|5|
-|:-----|:-----|:-----|:-----|:-----|:-----|:-----|
-|select|{d}|{a, c, d}|{c}|{a, c, d}|{a, c, d}|{a}|
+| production | 0   | 1         | 2   | 3         | 4         | 5   |
+| :--------- | :-- | :-------- | :-- | :-------- | :-------- | :-- |
+| select     | {d} | {a, c, d} | {c} | {a, c, d} | {a, c, d} | {a} |
 
 |Non\Terminal|a|c|d|
 |Z|1|1|0, 1|
@@ -1181,9 +1181,9 @@ int main() {
 #### LR(0) 分析算法(移进-归约(reduce)算法)
 
 - 从左向右读入程序(left to right scan), 逆向最右推导(rightmost derivation), 不用前看符号
-- 添加伪开始符号: S' -> . S$   `$表示 tokens/file 结束符`
-- 移进        : 读入记号 `push(token[i])`
-- 归约(reduce):         `pop(right expansion)` `push(left expansion)`
+- 添加伪开始符号: S' -> . S\$ `$表示 tokens/file 结束符`
+- 移进 : 读入记号 `push(token[i])`
+- 归约(reduce): `pop(right expansion)` `push(left expansion)`
 
 ##### 短语(Handles)
 
@@ -1750,7 +1750,7 @@ table:
 #### Block
 
 - block_t: { label_t; stm_list; jmp_t; }
-- 扫描三地址码, 生成blocks
+- 扫描三地址码, 生成 blocks
 - 图论算法:结点为 blocks, 边为跳转边
 
 死基本块删除优化：删除遍历不到的语句块
@@ -1813,18 +1813,18 @@ new/malloc 得到的变量/对象不存于 AR 中, 存于堆区
 
 #### Dead Code Elimination
 
-- CFG中(控制流分析) 死代码块删除优化
+- CFG 中(控制流分析) 死代码块删除优化
 
 #### Constant Propagation
 
-CFG中(数据流分析-可达定义分析) 常量传播(constant propagation)优化:
+CFG 中(数据流分析-可达定义分析) 常量传播(constant propagation)优化:
 
 - **forwards analysis**
 - C(stm, x, in) = value of x before stm ; C(stm, x, out) = value of x after stm
 - bottom < c < top => C(stm, x, in) = least_upper_bound{ C(prev_stmi, x, out) }:
-  - C(prev_stm, x, out) = top(nondeterministic)  => C(stm, x, in) = top
+  - C(prev_stm, x, out) = top(nondeterministic) => C(stm, x, in) = top
   - C(prev_stm1, x, out) != C(prev_stm2, x, out) => C(stm, x, in) = top
-  - C(prev_stami, x, out) = c/bottom(dead code)  => C(stm, x, in) = c
+  - C(prev_stami, x, out) = c/bottom(dead code) => C(stm, x, in) = c
 - C(stm, x, in) = bottom => C(stm, x, out) = bottom
 - C(x := c, x, out) = c
 - C(x := f(), x, out) = top
@@ -1832,7 +1832,7 @@ CFG中(数据流分析-可达定义分析) 常量传播(constant propagation)优
 
 #### Liveness Analysis
 
-CFG中 数据流分析-活性分析(liveness analysis), 可用于复制传播优化与寄存器分配优化:
+CFG 中 数据流分析-活性分析(liveness analysis), 可用于复制传播优化与寄存器分配优化:
 
 - backwards analysis
 - L(stm, x, out) = V { L(next_stm, x, in)}

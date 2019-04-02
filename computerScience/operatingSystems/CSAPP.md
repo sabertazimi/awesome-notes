@@ -49,7 +49,7 @@
 
 ### 浮点数
 
-规格化浮点数: 1.xxx * 2^(exp - 127) - e.g `5 = 5.0 = 1.25 * 2^(129 - 127)`
+规格化浮点数: 1.xxx _ 2^(exp - 127) - e.g `5 = 5.0 = 1.25 _ 2^(129 - 127)`
 
 - xxx: 尾数
 - exp: 阶码
@@ -82,23 +82,21 @@ ret
 
 ### Control Signal
 
-|State|Signal|
-|:---------|:----------|
-|Fetch|icode,ifun  rA,rB  valC,valP|
-|Decode|valA,srcA  valB,srcB|
-|Execute|valE  Cond|
-|Memory|valM  read/write|
-|WriteBack|E port,dstE  M port,dstM|
-|PCUpdate|PC|
+| State     | Signal                     |
+| :-------- | :------------------------- |
+| Fetch     | icode,ifun rA,rB valC,valP |
+| Decode    | valA,srcA valB,srcB        |
+| Execute   | valE Cond                  |
+| Memory    | valM read/write            |
+| WriteBack | E port,dstE M port,dstM    |
+| PCUpdate  | PC                         |
 
 ### Special Control Signal
 
-|Condition|Signal|
-|:---------|:----------|
-|handle ret| `IRET in {D_icode, E_icode, M_icode}` |
-|load/use hazard| `E_icode in {IMRMOVL, IPOPL} && E_dstM in {d_srcA, d_srcB}` |
-|mispredicted branch| `E_icode in {IJXX} && !e_Cnd` |
-|exception| `m_stat in {SADR, SINS, SHLT} || W_stat in {SADR, SINS, SHLT}` |
+- handle ret: `IRET in {D_icode, E_icode, M_icode}`
+- load/use hazard: `E_icode in {IMRMOVL, IPOPL} && E_dstM in {d_srcA, d_srcB}`
+- mispredicted branch: `E_icode in {IJXX} && !e_Cnd`
+- exception: `m_stat in {SADR, SINS, SHLT} || W_stat in {SADR, SINS, SHLT}`
 
 ### Branch/Loop/Jump
 
@@ -145,7 +143,7 @@ CPI = 1.0 + lp + mp + rp:
 ### Principles
 
 - 合适的算法和数据结构
-- 编写编译器能够有效优化的代码  e.g 寄存器别名,存储器别名,函数的副作用 导致编译器无法(不敢)合并/删除冗余代码
+- 编写编译器能够有效优化的代码 e.g 寄存器别名,存储器别名,函数的副作用 导致编译器无法(不敢)合并/删除冗余代码
 - 提高代码的并行性
 - 消除不必要的访存 e.g 多次访存(可用中间量优化), 多次函数调用(可用宏/内联函数优化)
 
@@ -176,7 +174,7 @@ CPI = 1.0 + lp + mp + rp:
 理解异常控制流,有助于理解以下概念:
 
 - 陷阱(trap)/系统调用(system call)
-- 系统级I/O
+- 系统级 I/O
 - 线程/进程(concurrency)
 - 虚拟存储器
 - 软件异常
@@ -185,16 +183,16 @@ CPI = 1.0 + lp + mp + rp:
 
 #### 分类
 
-|类别|原因|异步/同步|返回行为|例子|
-|:------|:----------|:-----|:----------|:---------|
-|中断(interrupt)|I/O|async|next(concurrency)|磁盘|
-|陷阱(trap)|有意的异常/系统调用(内核模式)|sync|next|read/write/intN|
-|故障(fault)|潜在可恢复的错误|sync|current/abort|segmentation fault/floating exception|
-|终止(abort)|不可恢复的错误|sync|abort(not return)|硬件错误|
+| 类别      | 原因              | 异步/同步 | 返回行为          | 例子          |
+| :-------- | :---------------- | :-------- | :---------------- | :------------ |
+| interrupt | 输入/输出外部中断 | async     | next(concurrency) | 磁盘          |
+| trap      | 主动异常/系统调用 | sync      | next              | write/intN    |
+| fault     | 潜在可恢复的错误  | sync      | current/abort     | seg/float exp |
+| abort     | 不可恢复的错误    | sync      | abort(not return) | 硬件错误      |
 
 #### 异常处理程序
 
-异常处理程序主要分为3类:
+异常处理程序主要分为 3 类:
 
 - 控制权返回给 Instruction_current
 - 控制权返回给 Instruction_next
@@ -222,7 +220,7 @@ CPI = 1.0 + lp + mp + rp:
 
 ##### 创建和终止进程
 
-- 父进程与子进程获得 2 份独立的私有空间与 2 份独立的上下文, 不同的PID(process id)
+- 父进程与子进程获得 2 份独立的私有空间与 2 份独立的上下文, 不同的 PID(process id)
 - 由于指针(如打开的文件描述符),有可能互相影响,但大体上互不影响
 
 ```c

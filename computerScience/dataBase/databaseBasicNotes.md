@@ -1,4 +1,3 @@
-
 # Database Basic Notes
 
 <!-- TOC -->
@@ -161,9 +160,9 @@ xmllint -schema Bookstore.xsd -noout Bookstore.xml
 ### Operators
 
 - select operator σ(sigma): `σ(sID < 100 ^ sAge > 20)Table_Name` set constraints
-- project operator π(pi)  :   `π(sID, GPA)Table_Name` select certain columns
+- project operator π(pi) : `π(sID, GPA)Table_Name` select certain columns
 - cross-product operator x: Table1 x Table2,
-  m tuples(rows) x n tuples(rows) => m*n tuples(rows)
+  m tuples(rows) x n tuples(rows) => m\*n tuples(rows)
 - natural join operator ∞: σ(E1.A1 = E2.A1 ^ E1.A2 = E2.A2 ...) (E1 x E2)
 - theta join operator ∞(cond): σ(cond) (E1 x E2), call cond as ϴ
 - difference operator -: matching schemas => change rows/tuples
@@ -206,10 +205,10 @@ for data modeling:
 
 relationships between objects of 2 classes):
 
-- one to one: 1..1  --- 1..1
-- many to one: \*    --- 1..1
-- one to many:1..1  ---  \*
-- many to many: `*`   ---  `*`
+- one to one: 1..1 --- 1..1
+- many to one: \* --- 1..1
+- one to many:1..1 --- \*
+- many to many: `*` --- `*`
 
 ```c
 -----------                   ---------
@@ -339,7 +338,7 @@ while (there is relation R' aren't in BCNF) {
 
 - A -> B && rest attributes => A ->> B
 - A ->> B(1-n mapping), A ->> C(1-n mapping),
-  no `B -> C`/`C ->> B`, B * C redundant tuples/rows
+  no `B -> C`/`C ->> B`, B \* C redundant tuples/rows
 - A ->>B && A ->>C => A ->> B∩C
 - A ->>B && B ->>C => A ->> C-B
 
