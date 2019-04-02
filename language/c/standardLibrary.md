@@ -37,17 +37,17 @@
 
 - 可检测字符
 
-getc、fgetc、getchar函数可返回值(EOF值/unsigned char类型)
+getc、fgetc、getchar 函数可返回值(EOF 值/unsigned char 类型)
 
 - 不可检测字符
 
-非EOF值/非unsigned char类型(*会引发严重错误*)
+非 EOF 值/非 unsigned char 类型(_会引发严重错误_)
 
 ![ctype functions](img/ctype.h.jpg)
 
 ## `<errno.h>`
 
-- errno的值在程序启动时为零，但是不会被任何库函数设为零
+- errno 的值在程序启动时为零，但是不会被任何库函数设为零
 
 ```c
 errno = 0;
@@ -189,7 +189,7 @@ if (errno != 0) {
 
 ## `<float.h>/<limits.h>`
 
-- 宏定义：`CHAR/UCHAR/SCHAR/SHRT/USHRT/INT/UINT/LONG/ULONG/FLT/DBL/LDBL`有关的``MIN/MAX/EPSILON``
+- 宏定义：`CHAR/UCHAR/SCHAR/SHRT/USHRT/INT/UINT/LONG/ULONG/FLT/DBL/LDBL`有关的`MIN/MAX/EPSILON`
 
 ## `<locale.h>`
 
@@ -201,7 +201,7 @@ _CRTIMP char * __cdecl setlocale(int, const char *);
 _CRTIMP struct lconv * __cdecl localeconv(void);
 ```
 
-- int值
+- int 值
 
 ```c
 #define LC_ALL          0
@@ -214,7 +214,7 @@ _CRTIMP struct lconv * __cdecl localeconv(void);
 
 ## `<math.h>`
 
-数学函数库(包括后缀f(float)/l(long double))
+数学函数库(包括后缀 f(float)/l(long double))
 
 ## `<setjmp.h>`
 
@@ -225,16 +225,16 @@ int setjmp(jmp_buf env);
 void longjmp(jmp_buf env, int val);
 ```
 
-- 使用：用于if/else、loop、switch语句
-  1. 直接调用setjmp函数时，返回值为0;
-  2. 调用longjmp函数时，若val值不为0,则跳转至上次setjmp返回值为0处，继续向后执行语句
+- 使用：用于 if/else、loop、switch 语句
+  1. 直接调用 setjmp 函数时，返回值为 0;
+  2. 调用 longjmp 函数时，若 val 值不为 0,则跳转至上次 setjmp 返回值为 0 处，继续向后执行语句
 - 功能
   1. 实现非本地(局部)跳转(跨越多层函数调用栈进行跳转)
-  2. 实现类Java异常机制(异常抛出及捕获)
+  2. 实现类 Java 异常机制(异常抛出及捕获)
 
 ## `<signal.h>`
 
-信号处理程序中所有数据应为volatile类型
+信号处理程序中所有数据应为 volatile 类型
 
 ```c
 _CRTIMP int __cdecl raise(int);
@@ -264,17 +264,17 @@ void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束
 - 宏
   - NULL Null 指针常量
   - `offsetof(type, member-desginator)`
-  获得字段在结构体中的偏移量
+    获得字段在结构体中的偏移量
 - 类型
   - `ptrdiff_t`
-  带符号的整数类型, 用来表示指针相减的结果类型
+    带符号的整数类型, 用来表示指针相减的结果类型
   - `wchar_t`
-  宽字符类型
+    宽字符类型
   - `size_t`
-  无符号整数类型, 用来表示sizeof操作符的结果类型
+    无符号整数类型, 用来表示 sizeof 操作符的结果类型
 
 ## `<string.h>`
 
-- men系函数：操作任意字符序列
-- strn系函数：操作非空字符序列
-- str系函数：操作字符串序列('\0')
+- men 系函数：操作任意字符序列
+- strn 系函数：操作非空字符序列
+- str 系函数：操作字符串序列('\0')

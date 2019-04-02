@@ -16,18 +16,18 @@
 - 两种不同的转换器工具：ASP.NET 版本转换器和 Visual Studio .NET 项目转换器
 - 用于生成正则表达式的 Regulator
 - 用于分析程序集的 .NET Reflector
-- 用于单元测试的NUnit
+- 用于单元测试的 NUnit
 
 ## GCC
 
 - -E: cpp(c preprocessor) 预处理 => .i
-- -S: cll                 编译   => .s
-- -c: as(assemble)        汇编   => .o
-- -time                    Time the execution of each subprocess
-- `-std=<standard>`          Assume that the input sources are for `<standard>`
-- `-B <directory>`           Add `<directory>` to the compiler's search paths
-- -v                       Display the programs invoked by the compiler
-- `-o <file>`                Place the output into `<file>`
-- -shared                  Create a shared library
+- -S: cll 编译 => .s
+- -c: as(assemble) 汇编 => .o
+- -time Time the execution of each subprocess
+- `-std=<standard>` Assume that the input sources are for `<standard>`
+- `-B <directory>` Add `<directory>` to the compiler's search paths
+- -v Display the programs invoked by the compiler
+- `-o <file>` Place the output into `<file>`
+- -shared Create a shared library
 - - Wall
 - - v --help

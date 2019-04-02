@@ -22,8 +22,8 @@
   - [Awesome Pointer(Tips and Best Practice)](#awesome-pointertips-and-best-practice)
     - [Error Prone Pointers(易错点)](#error-prone-pointers易错点)
     - [Debugging Malloc](#debugging-malloc)
-      - [处理void指针](#处理void指针)
-    - [利用void指针实现泛型(generic)](#利用void指针实现泛型generic)
+      - [处理 void 指针](#处理-void-指针)
+    - [利用 void 指针实现泛型(generic)](#利用-void-指针实现泛型generic)
       - [通用型 swap 函数](#通用型-swap-函数)
       - [通用型 lsearch 函数](#通用型-lsearch-函数)
         - [实现](#实现)
@@ -79,7 +79,7 @@
 ##### 覆盖标准库函数原型
 
 - 定义过多参数原型，调用时传入过多参数，函数正确执行(无视多余参数)
-- 定义缺少参数原型，调用时传入不完整参数，函数错误执行，误把0xc(%ebp)，0x10(%ebp)，…等更多内存单元当作函数参数
+- 定义缺少参数原型，调用时传入不完整参数，函数错误执行，误把 0xc(%ebp)，0x10(%ebp)，…等更多内存单元当作函数参数
 
 ##### 缺少宏定义
 
@@ -107,11 +107,11 @@
 #### 边界检查
 
 - 空/满栈检查
-- 参数合法性检查    e.g elemSize > 0 检查
+- 参数合法性检查 e.g elemSize > 0 检查
 
 #### 指针检查
 
-- alloctor失败，需添加NULL检查:
+- alloctor 失败，需添加 NULL 检查:
   - assert
   - exit
 
@@ -142,20 +142,20 @@ short s = *(short *)&f;
 - 指针相关运算符优先级与结合性
 - 返回局部变量的地址
 - 重复释放内存空间
-- 内存泄漏   e.g 未释放空间/未释放部分深度空间(多维数组)
-- 不能引用void指针指向的内存单元
+- 内存泄漏 e.g 未释放空间/未释放部分深度空间(多维数组)
+- 不能引用 void 指针指向的内存单元
 
 ### Debugging Malloc
 
-#### 处理void指针
+#### 处理 void 指针
 
-Tips: 中途运用强制类型转换,使得void指针可以执行指针加减运算
+Tips: 中途运用强制类型转换,使得 void 指针可以执行指针加减运算
 
 ```c
 void *target = (char *)void_pointer + ...;
 ```
 
-### 利用void指针实现泛型(generic)
+### 利用 void 指针实现泛型(generic)
 
 #### 通用型 swap 函数
 
@@ -301,7 +301,7 @@ Valgrind - [GitHub Repo](https://github.com/svn2github/valgrind)
 
 ### free
 
-**free函数会回退4/8字节，取出heap块的长度/信息,根据此信息进行heap块的释放.**
+**free 函数会回退 4/8 字节，取出 heap 块的长度/信息,根据此信息进行 heap 块的释放.**
 
 ### Strings
 
@@ -323,7 +323,7 @@ string duplicate - `char *strdup(string)` 封装 allocator 细节
 
 ### I/O
 
-####　sscanf
+####　 sscanf
 
 可以用作简易匹配读取函数
 
@@ -362,7 +362,7 @@ void fork_exec(char *path, char *argv[]) {
 #### Other
 
 - getpid()
-- wait(int *child_status)/waitpid(pid)
+- wait(int \*child_status)/waitpid(pid)
 - exit()
 
 ### Threads
@@ -439,9 +439,9 @@ SemaphoreSignal(lock);
 #### Semaphore
 
 - 哲学家就餐问题
-- 将Semaphore变量的值在允许范围内(不至于使得线程锁失效)使得其取最大值，减少线程阻塞
+- 将 Semaphore 变量的值在允许范围内(不至于使得线程锁失效)使得其取最大值，减少线程阻塞
 - EmptyBuf 8, FullBuf 0
-- 双向通信，互相唤醒 - `Writer:sw(empty),ss(full);`  `Reader:sw(full),ss(empty);`
+- 双向通信，互相唤醒 - `Writer:sw(empty),ss(full);` `Reader:sw(full),ss(empty);`
 
 ```c
 void SellTickets(int agent, int *ticketsNum, Semaphore lock) {

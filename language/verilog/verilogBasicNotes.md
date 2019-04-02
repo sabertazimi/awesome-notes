@@ -1,5 +1,4 @@
-﻿
-# Verilog Basic Notes
+﻿# Verilog Basic Notes
 
 <!-- TOC -->
 
@@ -7,7 +6,7 @@
   - [General Flow](#general-flow)
     - [Create Proj - .v(sources) / .xdc(constraints)](#create-proj---vsources--xdcconstraints)
     - [RTL Analysis](#rtl-analysis)
-    - [Simulate Design - *_tb.v(simulation sources)](#simulate-design---_tbvsimulation-sources)
+    - [Simulate Design - \*\_tb.v(simulation sources)](#simulate-design---\\_tbvsimulation-sources)
     - [Synthesize Design](#synthesize-design)
     - [Implement Design](#implement-design)
     - [Post-Implementation Timing Simulate Design](#post-implementation-timing-simulate-design)
@@ -85,7 +84,7 @@
 
 Schematic
 
-### Simulate Design - *_tb.v(simulation sources)
+### Simulate Design - \*\_tb.v(simulation sources)
 
 - simulation options: 500ns
 - Scopes -> dut -> swt/led
@@ -181,8 +180,8 @@ endmodule
 ## function
 
 - 不含时间/事件控制
-- 至少1个输入
-- 至多1个输出
+- 至少 1 个输入
+- 至多 1 个输出
 - 只含行为模块
 - 只含阻塞赋值语句
 
@@ -250,8 +249,8 @@ endmodule
 
 ### 常量
 
-- 0: 逻辑0
-- 1: 逻辑1
+- 0: 逻辑 0
+- 1: 逻辑 1
 - x/X: Unknow/Floating
 - z/Z: 高阻抗状态(High Impendence)
 - parameter: #define
@@ -343,7 +342,7 @@ Num = 4'bz01;               // 前两位为z, 后两位为01
 
 #### integer
 
-长度为32 Bit, 补码表示, 常用于计数器
+长度为 32 Bit, 补码表示, 常用于计数器
 
 ```verilog
 always @(posedge CLK)
@@ -355,7 +354,7 @@ always @(posedge CLK)
 
 #### real
 
-- real 默认值为0,不可为x/z
+- real 默认值为 0,不可为 x/z
 - 不可声明位宽
 
 ### Net - wire/wand/wor
@@ -433,7 +432,7 @@ endprimitive
 
 ## Dataflow Level
 
-- assign net = net/reg: **左式只能是net**
+- assign net = net/reg: **左式只能是 net**
 
 ### [Operators](https://hom-wang.gitbooks.io/verilog-hdl/content/Chapter_04.html)
 
@@ -464,7 +463,7 @@ A = { 3'b101, 2{1'b0} };        // A = 5'b101_00
 
 ## Behavior Level
 
-- reg = net/reg: **左式只能是reg*
+- reg = net/reg: \*_左式只能是 reg_
 
 ### 时延控制
 
@@ -668,7 +667,7 @@ sum = (a ^ b) ^ cin;
 
 ### define 宏
 
-将多个 define 宏,放至 _defines.v, 作为全局宏
+将多个 define 宏,放至 \_defines.v, 作为全局宏
 
 ### 默认未连接端口
 

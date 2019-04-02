@@ -91,7 +91,7 @@ go clean -i path/to/pack
 #### Modules
 
 - remote packages
-- $GOPATH/bin/hello
+- \$GOPATH/bin/hello
 
 ```bash
 go get github.com/golang/example/hello
@@ -296,7 +296,7 @@ for i := 0; i < 10; i++ {
 
 ### switch
 
-- switch 中的case 自动break(除非使用 fallthrough 语句)
+- switch 中的 case 自动 break(除非使用 fallthrough 语句)
 
 ```go
 switch time.Saturday {
@@ -441,7 +441,7 @@ func main() {
 
 ### Methods
 
-- Go 中没有 class, 但可以在 struct/同一个包内的type 上(receiver)定义方法
+- Go 中没有 class, 但可以在 struct/同一个包内的 type 上(receiver)定义方法
 
 ```go
 type Vertex struct {
