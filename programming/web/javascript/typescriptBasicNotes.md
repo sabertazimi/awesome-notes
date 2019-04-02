@@ -42,6 +42,7 @@
   - [Mixins](#mixins)
   - [Closure](#closure)
   - [React with TypeScript](#react-with-typescript)
+    - [Props Types](#props-types)
     - [Functional Component](#functional-component)
     - [Class Component](#class-component)
     - [Generic Component](#generic-component)
@@ -996,6 +997,17 @@ called(); // Called : 2
 ## React with TypeScript
 
 - [React TypeScript Cheatsheet](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)
+
+### Props Types
+
+```js
+export declare interface AppProps {
+  children: React.ReactNode; // best
+  style?: React.CSSProperties; // for style
+  onChange?: (e: React.FormEvent<HTMLInputElement>) => void; // form events!
+  props: Props & React.HTMLProps<HTMLButtonElement>
+}
+```
 
 ### Functional Component
 
