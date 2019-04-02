@@ -789,6 +789,31 @@ h2:before {
 }
 ```
 
+```css
+div {
+  counter-reset: tidbit-counter 58;
+}
+
+h2::before {
+  counter-increment: tidbit-counter;
+  content: counter(tidbit-counter) ": ";
+}
+```
+
+```html
+<div>
+  <h2>HTML</h2>
+  <h2>CSS</h2>
+  <h2>JS</h2>
+</div>
+
+<!-- output
+59: HTML
+60: CSS
+61: JS
+output -->
+```
+
 - [利用伪类画额外图形](https://css-tricks.com/examples/ShapesOfCSS/)
 
 ```css
