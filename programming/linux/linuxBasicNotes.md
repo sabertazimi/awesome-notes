@@ -652,9 +652,9 @@ Options:
 - -u, --uid UID                 为新用户指定一个UID
 - -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping
 
-`useradd test`
-
-设置密码: `passwd test`
+- create user: `useradd test -m`
+- 设置密码: `passwd test`
+- add to `/etc/sudoers`
 
 ##### 修改用户
 
