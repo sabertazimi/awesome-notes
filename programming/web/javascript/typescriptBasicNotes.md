@@ -39,6 +39,7 @@
     - [Specific Instances from Generic Types](#specific-instances-from-generic-types)
   - [Union Types](#union-types)
   - [Intersection Types](#intersection-types)
+  - [Mapped Types](#mapped-types)
   - [Mixins](#mixins)
   - [Closure](#closure)
   - [React with TypeScript](#react-with-typescript)
@@ -911,6 +912,31 @@ function mapDispatchToProps(
 
 export default connect<StateProps, DispatchProps, OwnProps>
   (mapStateToProps, mapDispatchToProps)(MyComponent)
+```
+
+## Mapped Types
+
+```js
+type Readonly<T> = { readonly [P in keyof T]: T[P] }
+type Partial<T> = { [P in keyof T]?: T[P] }
+type Nullable<T> = { [P in keyof T]: T[P] | null }
+
+type Proxy<T> = {
+    get(): T;
+    set(value: T): void;
+}
+
+type Proxify<T> = {
+    [P in keyof T]: Proxy<T[P]>;
+}
+
+type Pick<T, K extends keyof T> = {
+    [P in K]: T[P];
+}
+
+type Record<K extends keyof any, T> = {
+    [P in K]: T;
+}
 ```
 
 ## Mixins
