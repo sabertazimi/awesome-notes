@@ -814,6 +814,50 @@ h2::before {
 output -->
 ```
 
+nested counters
+
+```css
+ol {
+  counter-reset: section;                /* 为每个ol元素创建新的计数器实例 */
+  list-style-type: none;
+}
+
+li:before {
+  counter-increment: section;            /* 只增加计数器的当前实例 */
+  content: counters(section, ".") " ";   /* 为所有计数器实例增加以“.”分隔的值 */
+}
+```
+
+```html
+<ol>
+  <li>item</li>          <!-- 1     -->
+  <li>item               <!-- 2     -->
+    <ol>
+      <li>item</li>      <!-- 2.1   -->
+      <li>item</li>      <!-- 2.2   -->
+      <li>item           <!-- 2.3   -->
+        <ol>
+          <li>item</li>  <!-- 2.3.1 -->
+          <li>item</li>  <!-- 2.3.2 -->
+        </ol>
+        <ol>
+          <li>item</li>  <!-- 2.3.1 -->
+          <li>item</li>  <!-- 2.3.2 -->
+          <li>item</li>  <!-- 2.3.3 -->
+        </ol>
+      </li>
+      <li>item</li>      <!-- 2.4   -->
+    </ol>
+  </li>
+  <li>item</li>          <!-- 3     -->
+  <li>item</li>          <!-- 4     -->
+</ol>
+<ol>
+  <li>item</li>          <!-- 1     -->
+  <li>item</li>          <!-- 2     -->
+</ol>
+```
+
 - [利用伪类画额外图形](https://css-tricks.com/examples/ShapesOfCSS/)
 
 ```css
