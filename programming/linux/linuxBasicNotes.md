@@ -3,16 +3,16 @@
 <!-- TOC -->
 
 - [Linux Basic Notes](#linux-basic-notes)
-  - [重装Linux](#重装linux)
+  - [重装 Linux](#重装-linux)
   - [ssh 命令](#ssh-命令)
     - [Key](#key)
     - [SSHD](#sshd)
-    - [编辑~/.ssh/config文件](#编辑sshconfig文件)
+    - [编辑~/.ssh/config 文件](#编辑sshconfig-文件)
     - [`ssh -D`](#ssh--d)
     - [密钥文件](#密钥文件)
     - [远程传输文件](#远程传输文件)
   - [命令优先级:(用于区别同名命令)](#命令优先级用于区别同名命令)
-  - [Linux文件架构](#linux文件架构)
+  - [Linux 文件架构](#linux-文件架构)
   - [命令操作](#命令操作)
     - [基本处理命令](#基本处理命令)
       - [ls](#ls)
@@ -59,7 +59,7 @@
     - [帮助命令](#帮助命令)
       - [`man` `[可选参数] 命令名称`](#man-可选参数-命令名称)
       - [系统命令 --help](#系统命令---help)
-      - [help shell内部命令](#help-shell内部命令)
+      - [help shell 内部命令](#help-shell-内部命令)
       - [info](#info)
       - [system info](#system-info)
     - [压缩命令](#压缩命令)
@@ -84,34 +84,34 @@
         - [限制用户](#限制用户)
     - [权限管理命令](#权限管理命令)
       - [普通权限](#普通权限)
-      - [ACL权限](#acl权限)
-      - [sudo权限](#sudo权限)
-      - [SetUID/SetGID 权限——可执行程序/目录+普通用户临时获得root权限 （rws）](#setuidsetgid-权限可执行程序目录普通用户临时获得root权限-rws)
+      - [ACL 权限](#acl-权限)
+      - [sudo 权限](#sudo-权限)
+      - [SetUID/SetGID 权限——可执行程序/目录+普通用户临时获得 root 权限 （rws）](#setuidsetgid-权限可执行程序目录普通用户临时获得-root-权限-rws)
     - [磁盘管理命令](#磁盘管理命令)
       - [修复命令](#修复命令)
       - [分区命令](#分区命令)
         - [fdisk](#fdisk)
         - [parted](#parted)
     - [包管理命令](#包管理命令)
-      - [rpm命令](#rpm命令)
+      - [rpm 命令](#rpm-命令)
       - [yum](#yum)
       - [源码包安装](#源码包安装)
     - [网络连接命令](#网络连接命令)
       - [wget](#wget)
       - [Certbot](#certbot)
     - [网络管理命令](#网络管理命令)
-      - [arp -a ——显示地址解析协议(IP地址—网卡地址)](#arp--a-显示地址解析协议ip地址网卡地址)
+      - [arp -a ——显示地址解析协议(IP 地址—网卡地址)](#arp--a-显示地址解析协议ip-地址网卡地址)
       - [netstat -an——查看本机启用的端口](#netstat--an查看本机启用的端口)
-      - [nslookup domain_name——查看DNS解析器](#nslookup-domain_name查看dns解析器)
+      - [nslookup domain_name——查看 DNS 解析器](#nslookup-domain_name查看-dns-解析器)
       - [ping -c ip/domain——探测网络状况](#ping--c-ipdomain探测网络状况)
       - [`telnet [ip/domain] [端口]——远程管理与端口探测命令`](#telnet-ipdomain-端口远程管理与端口探测命令)
       - [`traceroute [-n IP] domain —— 路由跟踪命令`](#traceroute--n-ip-domain--路由跟踪命令)
-      - [NetFilter框架](#netfilter框架)
+      - [NetFilter 框架](#netfilter-框架)
     - [网络扫描命令](#网络扫描命令)
       - [`fping -a -u -g -f [target] —— 批量扫描主机地址`](#fping--a--u--g--f-target--批量扫描主机地址)
       - [`hping -p -S -a —— 可伪造IP地址`](#hping--p--s--a--可伪造ip地址)
-      - [`traceroute  -n -I -T -p —— 路由扫描`](#traceroute---n--i--t--p--路由扫描)
-      - [`mtr  —— 路由扫描`](#mtr---路由扫描)
+      - [`traceroute -n -I -T -p —— 路由扫描`](#traceroute--n--i--t--p--路由扫描)
+      - [`mtr —— 路由扫描`](#mtr--路由扫描)
       - [`nmap —— 批量主机服务扫描`](#nmap--批量主机服务扫描)
       - [ncat —— 批量主机服务扫描](#ncat--批量主机服务扫描)
     - [脚本运行命令](#脚本运行命令)
@@ -134,7 +134,7 @@
     - [Plot Command](#plot-command)
     - [Other Command](#other-command)
       - [Time](#time)
-  - [Shell编程](#shell编程)
+  - [Shell 编程](#shell-编程)
     - [Warings](#warings)
     - [文件重定向](#文件重定向)
       - [Here Document](#here-document)
@@ -144,11 +144,11 @@
       - [环境变量](#环境变量)
         - [Env Commnad](#env-commnad)
     - [数值运算](#数值运算)
-      - [declare命令](#declare命令)
+      - [declare 命令](#declare-命令)
     - [Bash Expansions](#bash-expansions)
     - [流程控制语句](#流程控制语句)
-      - [if语句](#if语句)
-      - [case语句](#case语句)
+      - [if 语句](#if-语句)
+      - [case 语句](#case-语句)
       - [for 语句](#for-语句)
       - [while 语句与 until 语句](#while-语句与-until-语句)
       - [do while statement](#do-while-statement)
@@ -188,9 +188,9 @@
 
 <!-- /TOC -->
 
-## 重装Linux
+## 重装 Linux
 
-- 自动挂载项 /etc/fstab  etc/rc.local
+- 自动挂载项 /etc/fstab etc/rc.local
 - 自定义脚本-新建目录(加入环境变量)
 - 自定义别名 ~/.bashrc
 
@@ -212,12 +212,12 @@ sudo systemctl reload sshd
 sudo service restart sshd
 ```
 
-### 编辑~/.ssh/config文件
+### 编辑~/.ssh/config 文件
 
 - Host 别名
-  - HostName 主机名(ip)           `ssh user@ip`
+  - HostName 主机名(ip) `ssh user@ip`
   - Port 可忽略
-  - User 登录用户名               `ssh user@ip`
+  - User 登录用户名 `ssh user@ip`
   - PreferredAuthentications publickey
   - IdentityFile 密钥文件完整路径 `ssh -i file`
 
@@ -266,12 +266,12 @@ rsync -ax -e 'ssh -c blowfish' /root/start_dir root@x.x.x.x:/root/dest_dir
 
 ## 命令优先级:(用于区别同名命令)
 
-包含路径命令  ./vmtools.pl
+包含路径命令 ./vmtools.pl
 \>别名命令
-\>bash内部命令
-\>$PATH包含目录内的命令  /bin /sbin
+\>bash 内部命令
+\>\$PATH 包含目录内的命令 /bin /sbin
 
-## Linux文件架构
+## Linux 文件架构
 
 ```bash
 man hier
@@ -279,7 +279,7 @@ man hier
 
 通过源码包安装的软件，可以通过 ./configure --prefix=/opt/
 
-/usr/src是内核源码存放的目录
+/usr/src 是内核源码存放的目录
 
 ## 命令操作
 
@@ -289,7 +289,7 @@ man hier
 
 - -lh(long human)
 - -ld(long directory)
-- -i inode(ID号) --color==auto
+- -i inode(ID 号) --color==auto
 
 权限(user/group/other) 引用计数 user group 文件大小 文件修改时间 文件名
 
@@ -320,19 +320,19 @@ print working directory
 
 无需参数(改名+移动)
 
-- -i显示确认信息
+- -i 显示确认信息
 
 #### ln
 
-link命令  .bak/.hard(硬链接) .soft(软链接：创建链接时填写绝对路径)
+link 命令 .bak/.hard(硬链接) .soft(软链接：创建链接时填写绝对路径)
 
-ln -s(创建软链接) [原文件]  [目标文件]
+ln -s(创建软链接) [原文件][目标文件]
 
 ### 基本搜索命令
 
 #### locate 文件名
 
-结合updatedb命令(该命令一般自动1天/次)
+结合 updatedb 命令(该命令一般自动 1 天/次)
 
 #### type
 
@@ -352,8 +352,8 @@ display a list of appropriate commands
 - -iname 不区分大小写
 - -user `user_name` 按照所有者搜索
 - -nouser 搜索没有所有者的文件
-- -atime(文件访问时间)/-ctime(改变文件属性)/-mtime(改变文件内容)  -10(十天内)/10(十天当天)/+10(十天前)
-- -size(文件大小) -25k(小于25k)/25M(25M)/+25G(大于25G)
+- -atime(文件访问时间)/-ctime(改变文件属性)/-mtime(改变文件内容) -10(十天内)/10(十天当天)/+10(十天前)
+- -size(文件大小) -25k(小于 25k)/25M(25M)/+25G(大于 25G)
 - -inum `inode_number`
 - -a / -o 逻辑与/逻辑或(左右两端搜索条件)
 - -exec/-ok `system_command_list {} \;对搜索结果执行操作
@@ -418,8 +418,8 @@ screen -ls
 screen -r
 ```
 
-- Ctrl+d  // detach window
-- Ctrl+k  // kill window
+- Ctrl+d // detach window
+- Ctrl+k // kill window
 
 ### I/O Command
 
@@ -487,38 +487,38 @@ format and print data
 
 #### `man` `[可选参数] 命令名称`
 
-- -f显示操作等级
-- -k包含匹配
-- -1/2/.../9显示命令不同操作等级的帮助
+- -f 显示操作等级
+- -k 包含匹配
+- -1/2/.../9 显示命令不同操作等级的帮助
 
 1. Commands (Programs)
-  Those commands that can be executed by the user from within a shell.
+   Those commands that can be executed by the user from within a shell.
 2. System calls
-  Those functions which must be performed by the kernel.
+   Those functions which must be performed by the kernel.
 3. Library calls
-  Most of the libc functions.
+   Most of the libc functions.
 4. Special files (devices)
-  Files found in /dev.
+   Files found in /dev.
 5. File formats and conventions
-  The format for /etc/passwd and other human-readable files.
+   The format for /etc/passwd and other human-readable files.
 6. Games
 7. Conventions and miscellaneous
-  Overviews of various topics, conventions and protocols,
-  character set standards, and miscellaneous other things.
+   Overviews of various topics, conventions and protocols,
+   character set standards, and miscellaneous other things.
 8. System management commands
-  Commands like mount(8), many of which only root can execute.
+   Commands like mount(8), many of which only root can execute.
 
 #### 系统命令 --help
 
 只显示可选参数帮助
 
-#### help shell内部命令
+#### help shell 内部命令
 
-显示shell内部命令帮助，如cd命令(shell内部命令)
+显示 shell 内部命令帮助，如 cd 命令(shell 内部命令)
 
 #### info
 
-显示大型帮助文档 - enter进入  u返回  p上一节  n下一节  q退出
+显示大型帮助文档 - enter 进入 u 返回 p 上一节 n 下一节 q 退出
 
 #### system info
 
@@ -543,7 +543,7 @@ sudo apt-get install screenfetch
 
 - gzip 源文件
 - gzip –c 源文件 > 压缩文件
-- gzip  -r 源目录 将源目录下所有子文件分别单独压缩
+- gzip -r 源目录 将源目录下所有子文件分别单独压缩
 - gzip –d(解压缩) 文件
 - gunzip 压缩文件
 
@@ -557,14 +557,14 @@ sudo apt-get install screenfetch
 
 #### .tar.gz/.tar.bz2
 
-tar [可选参数] 压缩文件(可指定压缩路径)  [-c 解压缩路径]源文件/源目录
+tar [可选参数] 压缩文件(可指定压缩路径) [-c 解压缩路径]源文件/源目录
 
-- -z 将.tar压缩为.tar.gz -j 将.tar压缩为.tar.bz2
+- -z 将.tar 压缩为.tar.gz -j 将.tar 压缩为.tar.bz2
 - -c 打包 -x 解打包
 - -t 查看压缩文件
 - -v 显示过程
 - -f 指定压缩文件名
-- -C指定解压缩路径
+- -C 指定解压缩路径
 - -zcvf/-zxvf/-ztcf -jcvf/-jxvf/-jtvf
 
 #### .7z
@@ -582,10 +582,10 @@ tar [可选参数] 压缩文件(可指定压缩路径)  [-c 解压缩路径]源�
 
 ### 挂载命令
 
-mount [-t 文件系统] [-o 特殊选项] 设备文件名 挂载点(挂载目录/media /misc /mnt)
+mount [-t 文件系统][-o 特殊选项] 设备文件名 挂载点(挂载目录/media /misc /mnt)
 
 - 无参数 显示当前挂载设备
-- -a  依据/etc/fstab文件配置,自动挂载
+- -a 依据/etc/fstab 文件配置,自动挂载
 
 umount 设备文件名/挂载点
 
@@ -631,26 +631,26 @@ cat /etc/passwd | awk -F [:] ‘{print $4}’
 
 Options:
 
-- -b, --base-dir BASE_DIR       设置基本路径作为用户的登录目录
-- -c, --comment COMMENT         对用户的注释
-- -d, --home-dir HOME_DIR       设置用户的登录目录
-- -D, --defaults                改变设置
-- -e, --expiredate EXPIRE_DATE  设置用户的有效期
-- -f, --inactive INACTIVE       用户过期后，让密码无效
-- -g, --gid GROUP               使用户只属于某个组
-- -G, --groups GROUPS           使用户加入某个组(附设组)
-- -h, --help                    帮助
-- -k, --skel SKEL_DIR           指定其他的skel目录
-- -K, --key KEY=VALUE           覆盖 /etc/login.defs 配置文件
-- -m, --create-home             自动创建登录目录
-- -l,                           不把用户加入到lastlog文件中
-- -M,                           不自动创建登录目录
-- -r,                           建立系统账号
-- -o, --non-unique              允许用户拥有相同的UID
-- -p, --password PASSWORD       为新用户使用加密密码
-- -s, --shell SHELL             登录时候的shell
-- -u, --uid UID                 为新用户指定一个UID
-- -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping
+- -b, --base-dir BASE_DIR 设置基本路径作为用户的登录目录
+- -c, --comment COMMENT 对用户的注释
+- -d, --home-dir HOME_DIR 设置用户的登录目录
+- -D, --defaults 改变设置
+- -e, --expiredate EXPIRE_DATE 设置用户的有效期
+- -f, --inactive INACTIVE 用户过期后，让密码无效
+- -g, --gid GROUP 使用户只属于某个组
+- -G, --groups GROUPS 使用户加入某个组(附设组)
+- -h, --help 帮助
+- -k, --skel SKEL_DIR 指定其他的 skel 目录
+- -K, --key KEY=VALUE 覆盖 /etc/login.defs 配置文件
+- -m, --create-home 自动创建登录目录
+- -l, 不把用户加入到 lastlog 文件中
+- -M, 不自动创建登录目录
+- -r, 建立系统账号
+- -o, --non-unique 允许用户拥有相同的 UID
+- -p, --password PASSWORD 为新用户使用加密密码
+- -s, --shell SHELL 登录时候的 shell
+- -u, --uid UID 为新用户指定一个 UID
+- -Z, --selinux-user SEUSER use a specific SEUSER for the SELinux user mapping
 
 - create user: `useradd test -m`
 - 设置密码: `passwd test`
@@ -663,9 +663,9 @@ usermod -d /home/test -G test2 test
 - -l 新用户名 旧用户名 修改用户名
 - -g 新用户组 目标用户 改变用户所属组
 
-gpasswd -a test test2  将用户test加入到test2组(附设组)
+gpasswd -a test test2 将用户 test 加入到 test2 组(附设组)
 
-gpasswd -d test test2  将用户test从test2组中移出
+gpasswd -d test test2 将用户 test 从 test2 组中移出
 
 ```bash
 usermod -aG sudo <username>
@@ -673,7 +673,7 @@ usermod -aG sudo <username>
 
 ##### 删除用户
 
-userdel test -r同时删除用户登录目录(/home/xxx)
+userdel test -r 同时删除用户登录目录(/home/xxx)
 
 ##### 查看用户
 
@@ -685,9 +685,9 @@ finger apacheuser 查看单个用户信息
 
 ##### 限制用户
 
-- passwd -l 用户名  锁定用户
-- passwd -u 用户名  解锁用户
-- passwd -d 用户名  清除用户密码
+- passwd -l 用户名 锁定用户
+- passwd -u 用户名 解锁用户
+- passwd -d 用户名 清除用户密码
 
 ### 权限管理命令
 
@@ -695,30 +695,30 @@ finger apacheuser 查看单个用户信息
 
 - chown 用户名：组名 文件名
 - chgrp 组名 文件名
-- umask存储位置 ——/etc/profile
-- 文件默认权限 = 文件默认最大权限rw-(666)  减去  umask值(如----w--w-)(022)
-- 目录默认权限 = 目录默认最大权限rwx(777) 减去 umask值
+- umask 存储位置 ——/etc/profile
+- 文件默认权限 = 文件默认最大权限 rw-(666) 减去 umask 值(如----w--w-)(022)
+- 目录默认权限 = 目录默认最大权限 rwx(777) 减去 umask 值
 - `id <username>`
 
-#### ACL权限
+#### ACL 权限
 
-- 查看分区ACL权限是否开启 dumpe2fs -h 设备分区名
-- 临时开启分区ACL权限        mount -o remount,acl 设备分区名
-- 永久开启分区ACL权限        /etc/fstab
+- 查看分区 ACL 权限是否开启 dumpe2fs -h 设备分区名
+- 临时开启分区 ACL 权限 mount -o remount,acl 设备分区名
+- 永久开启分区 ACL 权限 /etc/fstab
 
-- setfacl -m  (d:默认权限) u/g:用户名/组名:权限(rwx)  文件名
-- getfacl 文件名——查看文件ACL权限
+- setfacl -m (d:默认权限) u/g:用户名/组名:权限(rwx) 文件名
+- getfacl 文件名——查看文件 ACL 权限
 
-#### sudo权限
+#### sudo 权限
 
 /etc/sudoers.tmp
 
-#### SetUID/SetGID 权限——可执行程序/目录+普通用户临时获得root权限 （rws）
+#### SetUID/SetGID 权限——可执行程序/目录+普通用户临时获得 root 权限 （rws）
 
-- chmod 0xxx  取消双权限
-- chmod 2xxx  设置SetGID权限
-- chmod 4xxx  设置SetUID权限
-- chmod 6xxx  设置双权限
+- chmod 0xxx 取消双权限
+- chmod 2xxx 设置 SetGID 权限
+- chmod 4xxx 设置 SetUID 权限
+- chmod 6xxx 设置双权限
 
 ### 磁盘管理命令
 
@@ -735,38 +735,38 @@ sudo debugfs /dev/sda9
 
 ##### fdisk
 
-分区表类型MBR
+分区表类型 MBR
 
-n p e l 新 主 逻辑 扩展 分区 w激活
+n p e l 新 主 逻辑 扩展 分区 w 激活
 
 ##### parted
 
-分区表类型MBR/GPT
+分区表类型 MBR/GPT
 
-- mklabel     选择分区表类型
-- print       打印分区信息
-- mkpart      新建分区
-- rm          删除分区
-- unit        选择单位
-- quit        结束分区
+- mklabel 选择分区表类型
+- print 打印分区信息
+- mkpart 新建分区
+- rm 删除分区
+- unit 选择单位
+- quit 结束分区
 
 ### 包管理命令
 
-#### rpm命令
+#### rpm 命令
 
 安装和卸载时同时存在依赖性(包依赖、库依赖)
 
-rpm查询:
+rpm 查询:
 
-- -q 包名 查询已安装的包  //必备参数
+- -q 包名 查询已安装的包 //必备参数
 - -a 查询所有已安装的包
 - -i 查询软件信息
 - -l list
 - -f 查询系统文件属于哪个软件包
-- -R查询软件包的依赖性
-- -p 查询未安装包   //普适参数
+- -R 查询软件包的依赖性
+- -p 查询未安装包 //普适参数
 
-rpm校验(查看Cracker信息):
+rpm 校验(查看 Cracker 信息):
 
 - -V 校验已安装包 相应信息不是.号便是被修改项 可用于找回丢失的系统命令
 
@@ -783,7 +783,7 @@ yum makecache
 
 - yum list
 - yum search 'keyword'
-- yum -y(自动回答yes) install 包名
+- yum -y(自动回答 yes) install 包名
 - yum -y update 包名
 - yum -y remove 包名
 - yum grouplist
@@ -797,24 +797,24 @@ yum makecache
 - /usr/local/软件名/
 - /usr/local/src/软件名/
 
-(如上述脚本出错，执行make clean）
+(如上述脚本出错，执行 make clean）
 
 ```bash
 make install
 ```
 
-e.g apche  /var/www/html/index.html  /usr/local/apache/htdocs/index.html
+e.g apche /var/www/html/index.html /usr/local/apache/htdocs/index.html
 
 ### 网络连接命令
 
 #### wget
 
 - 下载全站资料
-- -P  表示下载到哪个目录
-- -r  表示递归下载
+- -P 表示下载到哪个目录
+- -r 表示递归下载
 - -np 表示不下载旁站连接.
-- -k  表示将下载的网页里的链接修改为本地链接.
-- -p  获得所有显示网页所需的元素
+- -k 表示将下载的网页里的链接修改为本地链接.
+- -p 获得所有显示网页所需的元素
 
 ```bash
 wget -r -p -np -k -P ~/tmp/ http://java-er.com
@@ -854,19 +854,19 @@ watch -n 1 "ifconfig eth1"
 watch -n 1 "ifconfig eth2"
 ```
 
-#### arp -a ——显示地址解析协议(IP地址—网卡地址)
+#### arp -a ——显示地址解析协议(IP 地址—网卡地址)
 
-- 网际互联层：IP协议(网际)、IGMP协议(互联网组管理)、ICMP协议(互联网控制报文)
-- 传输层：TCP协议(传输控制)、UDP协议(用户数据报)
+- 网际互联层：IP 协议(网际)、IGMP 协议(互联网组管理)、ICMP 协议(互联网控制报文)
+- 传输层：TCP 协议(传输控制)、UDP 协议(用户数据报)
 
 #### netstat -an——查看本机启用的端口
 
-- (-a查看所有连接和监听端口 -n显示IP地址和端口号)
-- -t tcp协议端口
-- -u udp协议端口
+- (-a 查看所有连接和监听端口 -n 显示 IP 地址和端口号)
+- -t tcp 协议端口
+- -u udp 协议端口
 - -l 监听状态服务
 
-#### nslookup domain_name——查看DNS解析器
+#### nslookup domain_name——查看 DNS 解析器
 
 /etc/network/interfaces
 
@@ -883,21 +883,21 @@ watch -n 1 "ifconfig eth2"
 
 #### `traceroute [-n IP] domain —— 路由跟踪命令`
 
-#### NetFilter框架
+#### NetFilter 框架
 
-nftables  命令行工具：nft
+nftables 命令行工具：nft
 
 ### 网络扫描命令
 
-预防策略——SYN攻击、DDOS攻击
+预防策略——SYN 攻击、DDOS 攻击
 
 #### `fping -a -u -g -f [target] —— 批量扫描主机地址`
 
 #### `hping -p -S -a —— 可伪造IP地址`
 
-#### `traceroute  -n -I -T -p —— 路由扫描`
+#### `traceroute -n -I -T -p —— 路由扫描`
 
-#### `mtr  —— 路由扫描`
+#### `mtr —— 路由扫描`
 
 #### `nmap —— 批量主机服务扫描`
 
@@ -911,7 +911,7 @@ nftables  命令行工具：nft
 - -w 设置超时时间
 - -v 显示命令执行过程
 - -z 一个输入输出模式
-- -u UDP协议
+- -u UDP 协议
 
 ### 脚本运行命令
 
@@ -951,12 +951,12 @@ crontab -e(establish)
 
 - m,n —— 分隔多个时间
 - m-n —— 表示时间范围
-- /n —— 表示每隔n时间
-- 天数 与 星期 设置 之间 是  “或”关系
+- /n —— 表示每隔 n 时间
+- 天数 与 星期 设置 之间 是 “或”关系
 
 - /var/spool/cron/user_name/
 - /var/log/con
-- /etc/cron.*ly 时间表
+- /etc/cron.\*ly 时间表
 
 /etc/anacrontab
 
@@ -973,7 +973,7 @@ anacron —— 异步时间表
 - bg/fg 作业号/名
 - nohup 脚本 & —— 脱离控制台并后台运行脚本
 
-19 ~ -20 （-20优先级最高）
+19 ~ -20 （-20 优先级最高）
 
 - nice -n number 作业号/名
 - renice number -p PID
@@ -981,8 +981,8 @@ anacron —— 异步时间表
 #### 开机任务
 
 - /etc/rc.local —— 系统开机任务
-- /etc/profile/  /etc/bash.bashrc —— bash启动任务/远程登陆任务
-- /etc/bash.bashrc —— SSH连接任务
+- /etc/profile/ /etc/bash.bashrc —— bash 启动任务/远程登陆任务
+- /etc/bash.bashrc —— SSH 连接任务
 
 ### 历史记录命令
 
@@ -991,7 +991,7 @@ anacron —— 异步时间表
 - -c 清除历史命令
 - -w (~/.bash_history) 保存历史命令
 
-/etc/profile中修改HISTSIZE !n/!!/!字符串  重复执行第n条/上一条/指定开头的历史命令
+/etc/profile 中修改 HISTSIZE !n/!!/!字符串 重复执行第 n 条/上一条/指定开头的历史命令
 
 ```bash
 # repeat history command
@@ -1007,16 +1007,16 @@ press ctrl-r 提示符改变，显示我们正在执行反向增量搜索。
 
 #### History Shortcuts
 
-|command|function|
-|:--------|:------------------------|
-|Ctrl-p|移动到上一个历史条目|
-|Ctrl-n|移动到下一个历史条目|
-|Alt-<|移动到历史列表开头|
-|Alt->|移动到历史列表结尾|
-|Ctrl-r|反向增量搜索|
-|Alt-p|反向搜索，非增量搜索|
-|Alt-n|向前搜索，非增量|
-|Ctrl-o|执行历史列表中的当前项，并移到下一个|
+| command | function                             |
+| :------ | :----------------------------------- |
+| Ctrl-p  | 移动到上一个历史条目                 |
+| Ctrl-n  | 移动到下一个历史条目                 |
+| Alt-<   | 移动到历史列表开头                   |
+| Alt->   | 移动到历史列表结尾                   |
+| Ctrl-r  | 反向增量搜索                         |
+| Alt-p   | 反向搜索，非增量搜索                 |
+| Alt-n   | 向前搜索，非增量                     |
+| Ctrl-o  | 执行历史列表中的当前项，并移到下一个 |
 
 ### Device Command
 
@@ -1037,10 +1037,10 @@ synclient TouchpadOff=0
 
 命令间插入符
 
-- command1;command2      顺序执行，相当于C语言中语句结束符
-- command1&&command2     命令同时执行(当1正确时)或同时不执行(当1出错时)
-- command1 ||  command2  只执行一个命令(正确命令)
-- command1  |  command2  前一正确命令的输出结果作为后一命令的输入结果
+- command1;command2 顺序执行，相当于 C 语言中语句结束符
+- command1&&command2 命令同时执行(当 1 正确时)或同时不执行(当 1 出错时)
+- command1 || command2 只执行一个命令(正确命令)
+- command1 | command2 前一正确命令的输出结果作为后一命令的输入结果
 
 > e.g ls && echo yes >> .log || echo no >> .log
 
@@ -1114,22 +1114,22 @@ use local time (not UTC time)
 sudo timedatectl set-local-rtc 1
 ```
 
-## Shell编程
+## Shell 编程
 
 ### Warings
 
 - = 左右无空格
 - () [] 内部最好有空格
-- 数值运算用 (()) 或 $(())
+- 数值运算用 (()) 或 \$(())
 
 ### 文件重定向
 
-- `>` 文件名/输出设备名        覆盖标准输出重定向
-- `>>` 文件名/输出设备名    追加标准输出重定向
-- 2>(右端无空格)文件名/输出设备名  覆盖错误输出重定向
+- `>` 文件名/输出设备名 覆盖标准输出重定向
+- `>>` 文件名/输出设备名 追加标准输出重定向
+- 2>(右端无空格)文件名/输出设备名 覆盖错误输出重定向
 - 2>>(右端无空格)文件名/输出设备名 追加错误输出重定向
-- `>/>> 文件 2>&1  &>/&>>文件`  覆盖/追加正确输出与错误输出同时重定向
-- `</<<` 文件名/输入设备名         覆盖/追加标准输入重定向
+- `>/>> 文件 2>&1 &>/&>>文件` 覆盖/追加正确输出与错误输出同时重定向
+- `</<<` 文件名/输入设备名 覆盖/追加标准输入重定向
 
 #### Here Document
 
@@ -1160,10 +1160,10 @@ EOF
 
 #### 基本变量
 
-- `=`  : 左右两端不可有空格
+- `=` : 左右两端不可有空格
 - `' '`: 完全标准字符串
 - `" "`: 格式化字符串
-- 调用变量值：$变量名
+- 调用变量值：\$变量名
 - set/unset——设置/取消变量
 
 #### built-in 变量
@@ -1180,7 +1180,7 @@ fi
 ```
 
 每次 shift 命令执行的时候，变量 $2 的值会移动到变量 $1 中，变量 $3 的值会移动到变量 $2 中.
-变量 $# 的值也会相应的减1
+变量 \$# 的值也会相应的减 1
 
 ```bash
 #!/bin/bash
@@ -1221,14 +1221,14 @@ done
 
 #### 环境变量
 
-- /etc/profile.d/*.sh
+- /etc/profile.d/\*.sh
 - ~/.bash_profile
 - ~/.bashrc
 - /etc/profile
 - /etc/bash.bashrc
-- /etc/issue——shell登录信息
-- PS1环境变量——shell头行打印信息
-- PATH环境变量
+- /etc/issue——shell 登录信息
+- PS1 环境变量——shell 头行打印信息
+- PATH 环境变量
 
 ##### Env Commnad
 
@@ -1238,7 +1238,7 @@ done
 
 ### 数值运算
 
-#### declare命令
+#### declare 命令
 
 ### Bash Expansions
 
@@ -1272,27 +1272,27 @@ fi
 - `[[ xxx ]]`: condition
 - `(( xxx ))`: arithemetic condition
 
-|operator|function|
-|:-----------|:-----------|
-|! EXPRESSION|The EXPRESSION is false|
-|-n STRING|The length of STRING is greater than zero|
-|-z STRING|The lengh of STRING is zero (ie it is empty)|
-|STRING1 == STRING2|STRING1 is equal to STRING2|
-|STRING1 != STRING2|STRING1 is not equal to STRING2|
-|STRING1 > STRING2|STRING1 sorts after STRING2|
-|STRING1 < STRING2|STRING1 sorts before STRING2|
-|INTEGER1 -eq INTEGER2|INTEGER1 is numerically equal to INTEGER2|
-|INTEGER1 -gt INTEGER2|INTEGER1 is numerically greater than INTEGER2|
-|INTEGER1 -lt INTEGER2|INTEGER1 is numerically less than INTEGER2|
-|-d FILE|FILE exists and is a directory|
-|-e FILE|FILE exists|
-|-r FILE|FILE exists and the read permission is granted|
-|-s FILE|FILE exists and it's size is greater than zero (ie. it is not empty)|
-|-w FILE|FILE exists and the write permission is granted|
-|-x FILE|FILE exists and the execute permission is granted|
-|`AND -a &&`||
-|`OR -o ||`||
-|`NOT ! !`||
+| operator              | function                                          |
+| :-------------------- | :------------------------------------------------ |
+| ! EXPRESSION          | The EXPRESSION is false                           |
+| -n STRING             | The length of STRING is greater than zero         |
+| -z STRING             | The lengh of STRING is zero (ie it is empty)      |
+| STRING1 == STRING2    | STRING1 is equal to STRING2                       |
+| STRING1 != STRING2    | STRING1 is not equal to STRING2                   |
+| STRING1 > STRING2     | STRING1 sorts after STRING2                       |
+| STRING1 < STRING2     | STRING1 sorts before STRING2                      |
+| INTEGER1 -eq INTEGER2 | INTEGER1 is numerically equal to INTEGER2         |
+| INTEGER1 -gt INTEGER2 | INTEGER1 is numerically greater than INTEGER2     |
+| INTEGER1 -lt INTEGER2 | INTEGER1 is numerically less than INTEGER2        |
+| -d FILE               | FILE exists and is a directory                    |
+| -e FILE               | FILE exists                                       |
+| -r FILE               | FILE exists and the read permission is granted    |
+| -s FILE               | FILE exists and it's size is greater than zero    |
+| -w FILE               | FILE exists and the write permission is granted   |
+| -x FILE               | FILE exists and the execute permission is granted |
+| `AND -a &&`           |                                                   |
+| `OR -o ||`            |                                                   |
+| `NOT ! !`             |                                                   |
 
 - {}: group regexp
 
@@ -1350,13 +1350,13 @@ echo ${foo/%JPG/jpg}
 JPG.jpg
 ```
 
-- $(): command result
+- \$(): command result
 - "": allow expansions string
 - '': disallow expansions string
 
 ### 流程控制语句
 
-#### if语句
+#### if 语句
 
 ```bash
 if [[ 条件判断式 ]] ; then
@@ -1381,7 +1381,7 @@ else
 fi
 ```
 
-#### case语句
+#### case 语句
 
 ```bash
 case $变量名 in
@@ -1397,13 +1397,13 @@ case $变量名 in
 esac
 ```
 
-|case pattern|function|
-|:-----|:-----------------------------------------|
-|`a)`|Matches if word equals "a"|
-|`[[:alpha:]])`|Matches if word is a single alphabetic character|
-|`???)`|Matches if word is exactly three characters long|
-|`*.txt)|Matches if word ends with the characters “.txt”|
-|`*)`|Matches any value of word|
+| case pattern   | function                              |
+| :------------- | :------------------------------------ |
+| `a)`           | word equals "a"                       |
+| `[[:alpha:]])` | word is a single alphabetic character |
+| `???)`         | word is exactly three characters long |
+| `\*.txt)`      | word ends with the characters “.txt”  |
+| `*)`           | any value of word                     |
 
 ```bash
 #!/bin/bash
@@ -1604,8 +1604,8 @@ done
 ### Bash Function
 
 - 函数局部变量 local + 变量名
-- 函数参数  :  $ + #/？/@/n
-- 引用函数库文件  ——  source  sh文件名   /   .  sh文件名          可修改~/.bashrc文件
+- 函数参数 : \$ + #/？/@/n
+- 引用函数库文件 —— source sh 文件名 / . sh 文件名 可修改~/.bashrc 文件
 
 ### Bash IO
 
@@ -1721,8 +1721,8 @@ fi
 - CTRL + C —— SIGINT
 - CTRL + Z —— SIGSTP
 - kill/killall —— SIGINT
-- trap SIG*/EXIT —— 捕捉信号(后 + 忽略信号/默认处理信号/自定义处理信号)
-- trap – SIG*/EXIT  —— 移除信号
+- trap SIG\*/EXIT —— 捕捉信号(后 + 忽略信号/默认处理信号/自定义处理信号)
+- trap – SIG\*/EXIT —— 移除信号
 
 ### Bash Debugging
 
