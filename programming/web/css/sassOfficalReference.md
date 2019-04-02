@@ -12,13 +12,13 @@ particularly with the help of
 
 ## Features
 
-* Fully CSS-compatible
-* Language extensions such as variables, nesting, and mixins
-* Many {Sass::Script::Functions useful functions}
+- Fully CSS-compatible
+- Language extensions such as variables, nesting, and mixins
+- Many {Sass::Script::Functions useful functions}
   for manipulating colors and other values
-* Advanced features like [control directives](#control_directives__expressions)
+- Advanced features like [control directives](#control_directives__expressions)
   for libraries
-* Well-formatted, customizable output
+- Well-formatted, customizable output
 
 ## Syntax
 
@@ -52,7 +52,7 @@ using the `sass-convert` command line tool:
     # Convert SCSS to Sass
     $ sass-convert style.scss style.sass
 
-Note that this command does *not* generate CSS files. For that, use
+Note that this command does _not_ generate CSS files. For that, use
 the `sass` command described elsewhere.
 
 ## Using Sass
@@ -155,18 +155,18 @@ All relevant options are also available via flags
 to the `sass` and `scss` command-line executables.
 Available options are:
 
-* **`:style`**:
+- **`:style`**:
   Sets the style of the CSS output.
   See [Output Style](#output_style).
 
-* **`:syntax`**:
+- **`:syntax`**:
   The syntax of the input file, `:sass` for the indented syntax
   and `:scss` for the CSS-extension syntax.
   This is only useful when you're constructing {Sass::Engine} instances yourself;
   it's automatically set properly when using {Sass::Plugin}.
   Defaults to `:sass`.
 
-* **`:property_syntax`**:
+- **`:property_syntax`**:
   Forces indented-syntax documents to use one syntax for properties.
   If the correct syntax isn't used, an error is thrown.
   `:new` forces the use of a colon
@@ -180,37 +180,37 @@ Available options are:
   By default, either syntax is valid.
   This has no effect on SCSS documents.
 
-* **`:cache`**:
+- **`:cache`**:
   Whether parsed Sass files should be cached,
   allowing greater speed. Defaults to true.
 
-* **`:read_cache`**:
+- **`:read_cache`**:
   If this is set and `:cache` is not,
   only read the Sass cache if it exists,
   don't write to it if it doesn't.
 
-* **`:cache_store`**:
+- **`:cache_store`**:
   If this is set to an instance of a subclass of {Sass::CacheStores::Base},
   that cache store will be used to store and retrieve
   cached compilation results.
   Defaults to a {Sass::CacheStores::Filesystem} that is
   initialized using the [`:cache_location` option](#cache_location-option).
 
-* **`:never_update`**:
+- **`:never_update`**:
   Whether the CSS files should never be updated,
   even if the template file changes.
   Setting this to true may give small performance gains.
   It always defaults to false.
   Only has meaning within Rack, Ruby on Rails, or Merb.
 
-* **`:always_update`**:
+- **`:always_update`**:
   Whether the CSS files should be updated every
   time a controller is accessed,
   as opposed to only when the template has been modified.
   Defaults to false.
   Only has meaning within Rack, Ruby on Rails, or Merb.
 
-* **`:always_check`**:
+- **`:always_check`**:
   Whether a Sass template should be checked for updates every
   time a controller is accessed,
   as opposed to only when the server starts.
@@ -219,11 +219,11 @@ Available options are:
   Defaults to false in production mode, true otherwise.
   Only has meaning within Rack, Ruby on Rails, or Merb.
 
-* **`:poll`**:
+- **`:poll`**:
   When true, always use the polling backend for {Sass::Plugin::Compiler#watch}
   rather than the native filesystem backend.
 
-* **`:full_exception`**:
+- **`:full_exception`**:
   Whether an error in the Sass code
   should cause Sass to provide a detailed description
   within the generated CSS file.
@@ -234,7 +234,7 @@ Available options are:
   Otherwise, an exception will be raised in the Ruby code.
   Defaults to false in production mode, true otherwise.
 
-* **`:template_location`**:
+- **`:template_location`**:
   A path to the root sass template directory for your application.
   If a hash, `:css_location` is ignored and this option designates
   a mapping between input and output directories.
@@ -252,36 +252,36 @@ Available options are:
   {Sass::Plugin::Configuration#remove_template_location Sass::Plugin#remove_template_location}
   methods instead**.
 
-* **`:css_location`**:
+- **`:css_location`**:
   The path where CSS output should be written to.
   This option is ignored when `:template_location` is a Hash.
   Defaults to `"./public/stylesheets"`.
   Only has meaning within Rack, Ruby on Rails, or Merb.
 
-* **`:cache_location`**:
+- **`:cache_location`**:
   The path where the cached `sassc` files should be written to.
   Defaults to `"./tmp/sass-cache"` in Rails and Merb,
   or `"./.sass-cache"` otherwise.
   If the [`:cache_store` option](#cache_location-option) is set,
   this is ignored.
 
-* **`:unix_newlines`**:
+- **`:unix_newlines`**:
   If true, use Unix-style newlines when writing files.
   Only has meaning on Windows, and only when Sass is writing the files
   (in Rack, Rails, or Merb, when using {Sass::Plugin} directly,
   or when using the command-line executable).
 
-* **`:filename`**:
+- **`:filename`**:
   The filename of the file being rendered.
   This is used solely for reporting errors,
   and is automatically set when using Rack, Rails, or Merb.
 
-* **`:line`**:
+- **`:line`**:
   The number of the first line of the Sass template.
   Used for reporting line numbers for errors.
   This is useful to set if the Sass template is embedded in a Ruby file.
 
-* **`:load_paths`**:
+- **`:load_paths`**:
   An array of filesystem paths or importers which should be searched
   for Sass templates imported with the [`@import`](#import) directive.
   These may be strings, `Pathname` objects, or subclasses of {Sass::Importers::Base}.
@@ -290,14 +290,14 @@ Available options are:
   The load path is also informed by {Sass.load_paths}
   and the `SASS_PATH` environment variable.
 
-* **`:filesystem_importer`**:
+- **`:filesystem_importer`**:
   A {Sass::Importers::Base} subclass used to handle plain string load paths.
   This should import files from the filesystem.
   It should be a Class object inheriting from {Sass::Importers::Base}
   with a constructor that takes a single string argument (the load path).
   Defaults to {Sass::Importers::Filesystem}.
 
-* **`:sourcemap`**:
+- **`:sourcemap`**:
   Controls how sourcemaps are generated. These sourcemaps tell the browser how
   to find the Sass styles that caused each CSS style to be generated. This has
   three valid values: **`:auto`** uses relative URIs where possible, assuming
@@ -310,7 +310,7 @@ Available options are:
   sourcemap files. Finally, **`:none`** causes no sourcemaps to be generated at
   all.
 
-* **`:line_numbers`**:
+- **`:line_numbers`**:
   When set to true, causes the line number and file
   where a selector is defined to be emitted into the compiled CSS
   as a comment. Useful for debugging, especially when using imports
@@ -319,7 +319,7 @@ Available options are:
   Automatically disabled when using the `:compressed` output style
   or the `:debug_info`/`:trace_selectors` options.
 
-* **`:trace_selectors`**:
+- **`:trace_selectors`**:
   When set to true, emit a full trace of imports and mixins before
   each selector. This can be helpful for in-browser debugging of
   stylesheet imports and mixin includes. This option supersedes
@@ -327,7 +327,7 @@ Available options are:
   `:debug_info` option. Automatically disabled when using the
   `:compressed` output style.
 
-* **`:debug_info`**:
+- **`:debug_info`**:
   When set to true, causes the line number and file
   where a selector is defined to be emitted into the compiled CSS
   in a format that can be understood by the browser.
@@ -335,11 +335,11 @@ Available options are:
   for displaying the Sass filename and line number.
   Automatically disabled when using the `:compressed` output style.
 
-* **`:custom`**:
+- **`:custom`**:
   An option that's available for individual applications to set
   to make data available to {Sass::Script::Functions custom Sass functions}.
 
-* **`:quiet`**:
+- **`:quiet`**:
   When set to true, causes warnings to be disabled.
 
 [source maps]: https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit?hl=en_US&pli=1&pli=1
@@ -672,15 +672,15 @@ called `$main-width`, you can access it as `$main_width`, and vice versa.
 
 SassScript supports eight data types:
 
-* numbers (e.g. `1.2`, `13`, `10px`)
-* strings of text, with and without quotes (e.g. `"foo"`, `'bar'`, `baz`)
-* colors (e.g. `blue`, `#04a3f9`, `rgba(255, 0, 0, 0.5)`)
-* booleans (e.g. `true`, `false`)
-* nulls (e.g. `null`)
-* lists of values, separated by spaces or commas
+- numbers (e.g. `1.2`, `13`, `10px`)
+- strings of text, with and without quotes (e.g. `"foo"`, `'bar'`, `baz`)
+- colors (e.g. `blue`, `#04a3f9`, `rgba(255, 0, 0, 0.5)`)
+- booleans (e.g. `true`, `false`)
+- nulls (e.g. `null`)
+- lists of values, separated by spaces or commas
   (e.g. `1.5em 1em 0 2em`, `Helvetica, Arial, sans-serif`)
-* maps from one value to another (e.g. `(key1: value1, key2: value2)`)
-* function references
+- maps from one value to another (e.g. `(key1: value1, key2: value2)`)
+- function references
 
 SassScript also supports all other types of CSS property value,
 such as Unicode ranges and `!important` declarations.
@@ -752,9 +752,9 @@ while the second is a list containing four numbers.
 Lists can also have no items in them at all. These lists are represented as `()`
 (which is also an empty [map](#maps)). They can't be output directly to CSS; if
 you try to do e.g. `font-family: ()`, Sass will raise an error. If a list
-contains empty lists or null values, as in `1px 2px () 3px` or `1px 2px null
-3px`, the empty lists and null values will be removed before the containing list
-is turned into CSS.
+contains empty lists or null values, as in `1px 2px () 3px` or `1px 2px null 3px`,
+the empty lists and null values will
+be removed before the containing list is turned into CSS.
 
 Comma-separated lists may have a trailing comma. This is especially
 useful because it allows you to represent a single-element list. For
@@ -769,7 +769,7 @@ Bracketed lists containing are used as line names in [CSS Grid Layout][], but
 they can also be used in pure Sass code just like any other list. Bracketed
 lists can be comma- or space-separated.
 
-[CSS Grid Layout]: https://www.w3.org/TR/css-grid-1/
+[css grid layout]: https://www.w3.org/TR/css-grid-1/
 
 #### Maps
 
@@ -921,10 +921,10 @@ number (as in `-3px`), a unary negation operator (as in `-$var`), or part of an
 identifier (as in `font-weight`). Most of the time, it's clear which is which,
 but there are some tricky cases. As a general rule, you're safest if:
 
-* You always include spaces on both sides of `-` when subtracting.
-* You include a space before `-` but not after for a negative number or a unary
+- You always include spaces on both sides of `-` when subtracting.
+- You include a space before `-` but not after for a negative number or a unary
   negation.
-* You wrap a unary negation in parentheses if it's in a space-separated list, as
+- You wrap a unary negation in parentheses if it's in a space-separated list, as
   in `10px (-$var)`.
 
 The different meanings of `-` take precedence in the following order:
@@ -932,8 +932,8 @@ The different meanings of `-` take precedence in the following order:
 1. A `-` as part of an identifier. This means that `a-1` is an unquoted string
    with value `"a-1"`. The only exception are units; Sass normally allows any
    valid identifier to be used as an identifier, but identifiers may not contain
-   a hyphen followed by a digit. This means that `5px-3px` is the same as `5px -
-   3px`.
+   a hyphen followed by a digit.
+   This means that `5px-3px` is the same as `5px - 3px`.
 
 2. A `-` between two numbers with no whitespace. This indicates subtraction, so
    `1-2` is the same as `1 - 2`.
@@ -1230,10 +1230,10 @@ By default, it looks for a Sass file to import directly,
 but there are a few circumstances under which
 it will compile to a CSS `@import` rule:
 
-* If the file's extension is `.css`.
-* If the filename begins with `http://`.
-* If the filename is a `url()`.
-* If the `@import` has any media queries.
+- If the file's extension is `.css`.
+- If the filename begins with `http://`.
+- If the filename is a `url()`.
+- If the `@import` has any media queries.
 
 If none of the above conditions are met
 and the extension is `.scss` or `.sass`,
@@ -1539,7 +1539,7 @@ is compiled to:
       border-width: 3px; }
 
 In effect, every element with class `.seriousError`
-also has class `.error` *and* class `.attention`.
+also has class `.error` _and_ class `.attention`.
 Thus, the styles defined later in the document take precedence:
 `.seriousError` has background color `#ff0` rather than `#fdd`,
 since `.attention` is defined later than `.error`.
@@ -1573,7 +1573,7 @@ For example:
 
 Now everything with class `.seriousError` also has class `.error`,
 and everything with class `.criticalError` has class `.seriousError`
-*and* class `.error`.
+_and_ class `.error`.
 It's compiled to:
 
     .error, .seriousError, .criticalError {
@@ -1775,7 +1775,7 @@ allow it to be used within `@media` and other directives.
 #### Extending Compound Selectors
 
 Older versions of Sass allowed compound selectors, such as `.special.cool` or
-`a:hover`, to be extended. Only style rules containing *all* simple selectors
+`a:hover`, to be extended. Only style rules containing _all_ simple selectors
 would be extended. However, this violated the rule that the elements matching
 the style rule should be styled as though it matched the extended selector. For
 example,
@@ -1791,7 +1791,7 @@ means that all elements with `class="neat"` should be styled as though they had
       @extend .special.cool;
     }
 
-*should mean* that all elements with `class="neat"` should be styled as though
+_should mean_ that all elements with `class="neat"` should be styled as though
 they had `class="neat special cool"`. But that's not how it actually worked.
 They were instead styled in a way that was impossible to achieve with pure HTML,
 which was inconsistent, violated guarantees that CSS usually provides, and was
@@ -1806,7 +1806,7 @@ simple selectors individually, as in:
       @extend .special, .cool;
     }
 
-This doesn't do *exactly* the same thing, but it usually works. If that's not
+This doesn't do _exactly_ the same thing, but it usually works. If that's not
 sufficient, you can use a [placeholder selector](#placeholder_selectors_foo) to
 refer to both selectors at once:
 
@@ -1886,7 +1886,7 @@ space: `@at-root (without: media supports)` moves outside of both
 There are two special values you can pass to `@at-root`. "rule" refers
 to normal CSS rules; `@at-root (without: rule)` is the same as
 `@at-root` with no query. `@at-root (without: all)` means that the
-styles should be moved outside of *all* directives and CSS rules.
+styles should be moved outside of _all_ directives and CSS rules.
 
 If you want to specify which directives or rules to include, rather
 than listing which ones should be excluded, you can use `with` instead
@@ -1959,7 +1959,7 @@ and expressions for including styles only under some conditions
 or including the same style several times with variations.
 
 **Note:** Control directives are an advanced feature, and are uncommon
- in day-to-day styling.  They exist mainly for use in [mixins](#mixins),
+in day-to-day styling. They exist mainly for use in [mixins](#mixins),
 particularly those that are part of libraries like
 [Compass](http://compass-style.org), and so require substantial
 flexibility.
@@ -2033,8 +2033,8 @@ decrement instead of increment.
 
 The `@for` statement sets `$var` to each successive number in the specified
 range and each time outputs the nested styles using that value of `$var`. For
-the form `from ... through`, the range *includes* the values of `<start>` and
-`<end>`, but the form `from ... to` runs up to *but not including* the value of
+the form `from ... through`, the range _includes_ the values of `<start>` and
+`<end>`, but the form `from ... to` runs up to _but not including_ the value of
 `<end>`. Using the `through` syntax,
 
     @for $i from 1 through 3 {
@@ -2079,8 +2079,9 @@ is compiled to:
 
 #### Multiple Assignment
 
-The `@each` directive can also use multiple variables, as in `@each $var1,
-$var2, ... in <list>`. If `<list>` is a list of lists, each element of the
+The `@each` directive can also use multiple variables,
+as in `@each $var1, $var2, ... in <list>`.
+If `<list>` is a list of lists, each element of the
 sub-lists is assigned to the respective variable. For example:
 
     @each $animal, $color, $cursor in (puma, black, default),
@@ -2473,7 +2474,7 @@ The same mixins can be done in the `.sass` shorthand syntax:
         background-image: url(/logo.gif)
 
 **Note:** when the `@content` directive is specified more than once or
- in a loop, the style block will be duplicated with each invocation.
+in a loop, the style block will be duplicated with each invocation.
 
 Some mixins may require a passed content block or may have different
 behavior depending on whether a content block was passed. The

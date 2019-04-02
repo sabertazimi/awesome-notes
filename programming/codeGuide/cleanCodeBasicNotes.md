@@ -36,12 +36,12 @@ class Animal {
 // =>
 
 class Animal {
-    constructor(name) {}
-    getAnimalName() {}
+  constructor(name) {}
+  getAnimalName() {}
 }
 class AnimalDB {
-    getAnimal(animal) {}
-    saveAnimal(animal) {}
+  getAnimal(animal) {}
+  saveAnimal(animal) {}
 }
 ```
 

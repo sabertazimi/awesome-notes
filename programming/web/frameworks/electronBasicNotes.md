@@ -38,16 +38,17 @@ electron-forge start
 
 ### Process
 
-主进程通过实例化BrowserWindow，每个BrowserWindow实例都在它自己的渲染进程内返回一个web页面。
-当BrowserWindow实例销毁时，相应的渲染进程也会终止。
+主进程通过实例化 BrowserWindow，每个 BrowserWindow 实例都在它自己的渲染进程内返回一个 web 页面。
+当 BrowserWindow 实例销毁时，相应的渲染进程也会终止。
 
-主进程负责掌管所有的web页面和它们相应的渲染进程。
-每个渲染进程都是相互独立的，它们只关心自己所运行的web页面。
+主进程负责掌管所有的 web 页面和它们相应的渲染进程。
+每个渲染进程都是相互独立的，它们只关心自己所运行的 web 页面。
 
-在页面（渲染进程）中不允许调用原生GUI相关的API，那是因为在网页（渲染进程）中中掌管原生GUI很危险，易造成内存泄露。
-如果想在网页中进行GUI的操作，渲染进程必须向主进程传达请求，然后在主进程中完成操作。
+在页面（渲染进程）中不允许调用原生 GUI 相关的 API，那是因为在网页（渲染进程）中中掌管原生 GUI 很危险，易造成内存泄露。
+如果想在网页中进行 GUI 的操作，渲染进程必须向主进程传达请求，然后在主进程中完成操作。
 
-在Electron中，有几种连接主进程和渲染进程的方法，例如用于传送消息的ipcRenderer和ipcMain模块，以及用于RPC的remote模块。
+在 Electron 中，有几种连接主进程和渲染进程的方法，
+例如用于传送消息的 ipcRenderer 和 ipcMain 模块，以及用于 RPC 的 remote 模块.
 
 ### Shared Data
 
@@ -81,8 +82,8 @@ console.log(require('remote').getGlobal('sharedObject').someProperty);
 - remote module
 
 ```js
-const {BrowserWindow} = require('electron').remote;
-let win = new BrowserWindow({width: 800, height: 600});
+const { BrowserWindow } = require('electron').remote;
+let win = new BrowserWindow({ width: 800, height: 600 });
 win.loadURL('https://github.com');
 ```
 

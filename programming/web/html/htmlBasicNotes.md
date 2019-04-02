@@ -33,7 +33,7 @@
       - [autofocus](#autofocus)
       - [required](#required)
     - [labels](#labels)
-      - [隐式control属性](#隐式control属性)
+      - [隐式 control 属性](#隐式-control-属性)
     - [input](#input)
       - [type](#type)
         - [text](#text)
@@ -60,7 +60,7 @@
   - [Content](#content)
     - [details > summary | datalist](#details--summary--datalist)
       - [datagrid](#datagrid)
-      - [配合autocomplete属性](#配合autocomplete属性)
+      - [配合 autocomplete 属性](#配合-autocomplete-属性)
       - [open(boolean)](#openboolean)
     - [dl>(multi)dt + (multi)dd](#dlmultidt--multidd)
     - [summary](#summary)
@@ -133,12 +133,12 @@
 
 孩子 : >
 
-``` html
+```html
 div>ul>li
 <div>
-    <ul>
-        <li></li>
-    </ul>
+  <ul>
+    <li></li>
+  </ul>
 </div>
 ```
 
@@ -148,7 +148,7 @@ div>ul>li
 div+ul>li
 <div></div>
 <ul>
-    <li></li>
+  <li></li>
 </ul>
 ```
 
@@ -157,25 +157,25 @@ div+ul>li
 ```html
 ul>li^div
 <ul>
-    <li></li>
+  <li></li>
 </ul>
 <div></div>
 
 ul>li>a^^div
 <ul>
-    <li><a href=""></a></li>
+  <li><a href=""></a></li>
 </ul>
 <div></div>
 ```
 
-重复：*
+重复：\*
 
 ```html
 ul>li*3
 <ul>
-    <li></li>
-    <li></li>
-    <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
 </ul>
 ```
 
@@ -184,14 +184,14 @@ ul>li*3
 ```html
 div>(p>span)*2
 <div>
-    <p><span></span></p>
-    <p><span></span></p>
+  <p><span></span></p>
+  <p><span></span></p>
 </div>
 ```
 
 ### 属性操作
 
-id:#  class:.
+id:# class:.
 
 ```html
 div#header+div.main+div#footer
@@ -203,11 +203,10 @@ div#header+div.main+div#footer
 属性值:[]
 
 ```html
-a[title=test target=_self]
-<a title="test" target="_self" href=""></a>
+a[title=test target=_self] <a title="test" target="_self" href=""></a>
 ```
 
-数列值：$
+数列值：\$
 
 ```html
 p.item$*3
@@ -224,12 +223,12 @@ p.item$$*3
 数列操作符：@
 
 ```html
-p.item$@-*3   @- = -1
+p.item$@-*3 @- = -1
 <p class="item3"></p>
 <p class="item2"></p>
 <p class="item1"></p>
 
-p.item$@3*3  @3 = 从3开始3次
+p.item$@3*3 @3 = 从3开始3次
 <p class="item3"></p>
 <p class="item4"></p>
 <p class="item5"></p>
@@ -255,14 +254,8 @@ a>{click}+span{me}
 ### 缺省元素
 
 ```html
-.header+.footer
- = div.header+div.footer
-
-ul>.item*3
-= ul>li.item*3
-
-table>.row*4>.cell*3
-=  table>tr.row*4>td.cell*3
+.header+.footer = div.header+div.footer ul>.item*3 = ul>li.item*3
+table>.row*4>.cell*3 = table>tr.row*4>td.cell*3
 ```
 
 ## Structure
@@ -289,7 +282,7 @@ but so can every `<article>` and `<section>` element
 
 ### main
 
-- 每个网页只有1个`main`元素
+- 每个网页只有 1 个`main`元素
 - `main`不可为`article`、`aside`、`header`、`footer`、`nav`孩子
 
 ### address
@@ -316,62 +309,78 @@ but so can every `<article>` and `<section>` element
 
 ```html
 <head>
-  <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 </head>
 ```
 
 ## Form
 
 ```html
-<form action="表单提交的后台地址接口" method="post"提交方式，一般为post>
+<form action="表单提交的后台地址接口" method="post" 提交方式，一般为post>
   <fieldset 若内容比较多，用来分区>
     <legend>这是分区的标题</legend>
     <label for="file">选择照片按钮</label>
-    <input type="file" id="file">
-
+    <input type="file" id="file" />
   </fieldset>
 
   <fieldset>
     <legend>这是分区的标题</legend>
     <div>选择尺寸：</div>
-    <input type="checkbox"多选框 name="size"数据名称，交给后台
-      value="5"值 id="cb_0" checked disabled 默认勾选，无法更改>
+    <input
+      type="checkbox"
+      多选框
+      name="size"
+      数据名称，交给后台
+      value="5"
+      值
+      id="cb_0"
+      checked
+      disabled
+      默认勾选，无法更改
+    />
     <label for="cb_0">5寸</label>
     <!-- 一个input一个label，一一对应，同类name相同 -->
-    <input type="radio"单选框 name="material" value="fushi" id="rd_0">
+    <input type="radio" 单选框 name="material" value="fushi" id="rd_0" />
     <label for="rd_0">富士，单选第一个</label>
 
-    <input type="text"单行文本框，默认 id="dexcription" placeholder="里面是提示"
-      value="这里是默认内容" readonly只读 hidden隐藏>
-    <input type="submit"提交按钮> == <button type="submit">提交</button>
-    <input type="reset"重置按钮>  == <button type="reset">重置</button>
+    <input
+      type="text"
+      单行文本框，默认
+      id="dexcription"
+      placeholder="里面是提示"
+      value="这里是默认内容"
+      readonly只读
+      hidden隐藏
+    />
+    <input type="submit" 提交按钮 /> == <button type="submit">提交</button>
+    <input type="reset" 重置按钮 /> == <button type="reset">重置</button>
 
     <div>
       <label for="delivery" 功能提示信息，通过for与标签对应>配送方式</label>
-      <select id="delivery"下拉选择>
-      <optgroup label="group1"给选项分组>
-        <option value="0">快递</option>
-        <option value="1">EMS</option>
-      </optgroup>
+      <select id="delivery" 下拉选择>
+        <optgroup label="group1" 给选项分组>
+          <option value="0">快递</option>
+          <option value="1">EMS</option>
+        </optgroup>
         <option value="2" selected>平邮</option>
       </select>
     </div>
 
     <div>
       <label for="feedback">意见反馈,多行文本框</label>
-      <textarea name="feedback" rows="4"4行 id="feedback"></textarea>
+      <textarea name="feedback" rows="4" 4行 id="feedback"></textarea>
     </div>
   </fieldset>
 </form>
 
-<input type="email">
-<input type="url">
-<input type="number">
-<input type="tel">
-<input type="search">
-<input type="range">
-<input type="color">
-<input type="date picker(data,month,week,time,datetime,datetime-local)">
+<input type="email" />
+<input type="url" />
+<input type="number" />
+<input type="tel" />
+<input type="search" />
+<input type="range" />
+<input type="color" />
+<input type="date picker(data,month,week,time,datetime,datetime-local)" />
 ```
 
 ### validate
@@ -399,25 +408,25 @@ but so can every `<article>` and `<section>` element
 
 #### formenctype
 
-- 默认值：application/x-www-form-urlencoded  提交前编码所有字符
-- multipart/form-data  不编码字符，**上传控件表单元素**必须使用改值
-- text/plain  表单元素数据中的空格->`+`
+- 默认值：application/x-www-form-urlencoded 提交前编码所有字符
+- multipart/form-data 不编码字符，**上传控件表单元素**必须使用改值
+- text/plain 表单元素数据中的空格->`+`
 
 #### formtarget
 
 定义表单提交后加载页面打开方式
 
-- blank     在新窗口中打开被链接文档
-- self      默认:在相同的框架中打开被链接文档
-- parent    在父框架集中打开被链接文档
-- top       在整个窗口中打开被链接文档
+- blank 在新窗口中打开被链接文档
+- self 默认:在相同的框架中打开被链接文档
+- parent 在父框架集中打开被链接文档
+- top 在整个窗口中打开被链接文档
 - framename 在指定的框架中打开被链接文档
 
 #### formnovalidate
 
 取消表单元素的提交验证
 
-将submit元素的formnovalidate属性值为true，使整个表单提交验证失效，实现加提交；
+将 submit 元素的 formnovalidate 属性值为 true，使整个表单提交验证失效，实现加提交；
 进而弹出再次确认按钮(真提交)。
 
 #### autofocus
@@ -432,13 +441,13 @@ but so can every `<article>` and `<section>` element
 <label for="input_id">OS : </label>
 ```
 
-#### 隐式control属性
+#### 隐式 control 属性
 
-javascript tips：通过control属性改变标签对应表单元素的值
+javascript tips：通过 control 属性改变标签对应表单元素的值
 
 ```javascript
 var textbox = $('#label_id').control;
-textbox.value = '666666';   //  等同于 input.value = '666666';
+textbox.value = '666666'; //  等同于 input.value = '666666';
 ```
 
 ### input
@@ -449,7 +458,7 @@ textbox.value = '666666';   //  等同于 input.value = '666666';
 
 ##### radio
 
-name相同时, 多个 radio 组成一个 radio group
+name 相同时, 多个 radio 组成一个 radio group
 
 ##### checkbox
 
@@ -473,23 +482,19 @@ stepDown();
 ```
 
 ```html
-input.valueAsNumber
-input.valueAsDate
+input.valueAsNumber input.valueAsDate
 ```
 
 #### indeterminate
 
-javascript tips：检查type=checkbox的状态
+javascript tips：检查 type=checkbox 的状态
 
 ```javascript
 if (checkbox.indeterminate) {
-
 } else {
-    if (checkbox.checked) {
-
-    } else {
-
-    }
+  if (checkbox.checked) {
+  } else {
+  }
 }
 ```
 
@@ -498,7 +503,7 @@ if (checkbox.indeterminate) {
 为输入框指定智能提示数据
 
 ```html
-<input list=datalist_id autocomplete=on >
+<input list="datalist_id" autocomplete="on" />
 ```
 
 #### pattern
@@ -506,16 +511,16 @@ if (checkbox.indeterminate) {
 通过正则表达式指定输入格式
 
 ```html
-<input pattern="[0-9][A-Z]{3}">
+<input pattern="[0-9][A-Z]{3}" />
 ```
 
 #### validity
 
-返回ValidityState对象，拥有ValidityState.valid属性
+返回 ValidityState 对象，拥有 ValidityState.valid 属性
 
 ### output
 
-input元素的镜像元素
+input 元素的镜像元素
 
 ### textarea
 
@@ -540,9 +545,9 @@ input元素的镜像元素
 style="display: none";
 
 <datalist id="register-prompt" style="display:none;">
-    <option value="Windows">Windows</option>
-    <option value="Mac OS">Mac OS</option>
-    <option value="Linux">Linux</option>
+  <option value="Windows">Windows</option>
+  <option value="Mac OS">Mac OS</option>
+  <option value="Linux">Linux</option>
 </datalist>
 ```
 
@@ -551,71 +556,92 @@ style="display: none";
 ```html
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sign Up Form</title>
-        <link rel="stylesheet" href="css/normalize.css">
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
-        <link rel="stylesheet" href="css/main.css">
-    </head>
-    <body>
-      <form action="index.html" method="post">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up Form</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300,400,700"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <form action="index.html" method="post">
+      <h2>Your basic info</h2>
 
-          <h2>Your basic info</h2>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="student_name" />
 
-          <label for="name">Name</label>
-          <input type="text" id="name" name="student_name">
+      <label for="mail">Email</label>
+      <input type="email" id="mail" name="student_email" />
 
-          <label for="mail">Email</label>
-          <input type="email" id="mail" name="student_email">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="student_password" />
 
-          <label for="password">Password</label>
-          <input type="password" id="password" name="student_password">
+      <label>Age:</label>
+      <input
+        type="radio"
+        id="under_16"
+        value="under_16"
+        name="user_age"
+      /><label for="under_16" class="light">Under 16</label><br />
+      <input type="radio" id="over_16" value="over_16" name="user_age" /><label
+        for="over_16"
+        class="light"
+        >16 or Older</label
+      >
 
-          <label>Age:</label>
-          <input type="radio" id="under_16" value="under_16"
-          name="user_age"><label for="under_16" class="light">Under
-          16</label><br>
-          <input type="radio" id="over_16" value="over_16"
-          name="user_age"><label for="over_16" class="light">16 or
-          Older</label>
+      <h2>Your profile</h2>
 
-          <h2>Your profile</h2>
+      <label for="bio">Biography</label>
+      <textarea id="bio" name="student_bio"></textarea>
 
-          <label for="bio">Biography</label>
-          <textarea id="bio" name="student_bio"></textarea>
+      <label for="courses">Select Courses</label>
+      <select id="courses" name="student_courses">
+        <optgroup label="Engineering">
+          <option value="computer_engineering"
+            >Computer Science Engineering</option
+          >
+          <option value="slectrical_engineering">Electrical Engineering</option>
+          <option value="mechanical_engineering">Mechanical Engineering</option>
+          <option value="civil_engineering">Civil Engineering</option>
+          <option value="chemical_engineering">Chemical Engineering</option>
+        </optgroup>
+        <optgroup label="Management">
+          <option value="finance_management">Finance Management</option>
+          <option value="technology_management">Technology Management</option>
+          <option value="marketing_management">Marketing Management</option>
+          <option value="business_administration"
+            >Business Administration</option
+          >
+        </optgroup>
+      </select>
 
-          <label for="courses">Select Courses</label>
-          <select id="courses" name="student_courses">
-            <optgroup label="Engineering">
-              <option value="computer_engineering">Computer Science Engineering</option>
-              <option value="slectrical_engineering">Electrical Engineering</option>
-              <option value="mechanical_engineering">Mechanical Engineering</option>
-              <option value="civil_engineering">Civil Engineering</option>
-              <option value="chemical_engineering">Chemical Engineering</option>
-            </optgroup>
-            <optgroup label="Management">
-              <option value="finance_management">Finance Management</option>
-              <option value="technology_management">Technology Management</option>
-              <option value="marketing_management">Marketing Management</option>
-              <option value="business_administration">Business Administration</option>
-            </optgroup>
-          </select>
+      <label>Interests:</label>
+      <input
+        type="checkbox"
+        id="engineering"
+        value="interest_engineering"
+        name="user_interest"
+      /><label class="light" for="engineering">Engineering</label><br />
+      <input
+        type="checkbox"
+        id="business"
+        value="interest_business"
+        name="user_interest"
+      /><label class="light" for="business">Business</label><br />
+      <input
+        type="checkbox"
+        id="law"
+        value="interest_law"
+        name="user_interest"
+      /><label class="light" for="law">Law</label>
 
-          <label>Interests:</label>
-          <input type="checkbox" id="engineering"
-          value="interest_engineering" name="user_interest"><label
-          class="light" for="engineering">Engineering</label><br>
-          <input type="checkbox" id="business" value="interest_business"
-          name="user_interest"><label class="light"
-          for="business">Business</label><br>
-          <input type="checkbox" id="law" value="interest_law"
-          name="user_interest"><label class="light" for="law">Law</label>
-
-        <button type="submit">Submit</button>
-      </form>
-    </body>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
 </html>
 ```
 
@@ -627,11 +653,11 @@ style="display: none";
 
 #### datagrid
 
-#### 配合autocomplete属性
+#### 配合 autocomplete 属性
 
 #### open(boolean)
 
-默认open=false
+默认 open=false
 
 ### dl>(multi)dt + (multi)dd
 
@@ -639,7 +665,7 @@ defined list>defined tab + defined data
 
 ### summary
 
-折叠/收缩时触发toggle事件
+折叠/收缩时触发 toggle 事件
 
 ### mark
 
@@ -704,7 +730,7 @@ value/max 百分比
 
 ### figcaption
 
-figure可拥有唯一的0/1个figcaption
+figure 可拥有唯一的 0/1 个 figcaption
 
 `<figcaption>figure_title</figcaption>`
 
@@ -716,7 +742,7 @@ figure可拥有唯一的0/1个figcaption
 
 #### alt
 
-(图片崩溃时文本)、title(提示信息)、class(CSS类选择器)
+(图片崩溃时文本)、title(提示信息)、class(CSS 类选择器)
 
 ### a(anchor)
 
@@ -734,10 +760,10 @@ figure可拥有唯一的0/1个figcaption
 
 定义被链接文档出现方式
 
-- blank     在新窗口中打开被链接文档
-- self      默认:在相同的框架中打开被链接文档
-- parent    在父框架集中打开被链接文档
-- top       在整个窗口中打开被链接文档
+- blank 在新窗口中打开被链接文档
+- self 默认:在相同的框架中打开被链接文档
+- parent 在父框架集中打开被链接文档
+- top 在整个窗口中打开被链接文档
 - framename 在指定的框架中打开被链接文档
 
 ### embed
@@ -762,7 +788,7 @@ figure可拥有唯一的0/1个figcaption
 ```
 
 - `T` 分隔日期与时间
-- `Z` 使用UTC标准时间
+- `Z` 使用 UTC 标准时间
 - `+` 时差
 
 ## Attributes
@@ -774,14 +800,11 @@ figure可拥有唯一的0/1个figcaption
 ```
 
 ```js
-const onChange = (event) => {
+const onChange = event => {
   const {
     currentTarget: {
-      dataset: {
-        row,
-        column,
-      },
-    },
+      dataset: { row, column }
+    }
   } = event;
 };
 ```
@@ -802,7 +825,7 @@ boolean
 
 #### tabindex
 
-**-1**: 编程可获得焦点，tab键不可获得焦点
+**-1**: 编程可获得焦点，tab 键不可获得焦点
 
 ## Nginx Config
 
@@ -846,18 +869,16 @@ sudo systemctl restart nginx
 
 ```html
 <header>
-    <nav>
-        <ul>
-            <li><a></a></li>
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li><a></a></li>
+    </ul>
+  </nav>
 </header>
 
-<main>
-</main>
+<main></main>
 
-<footer>
-</footer>
+<footer></footer>
 ```
 
 #### Article Access
@@ -890,11 +911,11 @@ The `<article>` element is used to represent a fully self-contained region of co
 <form>
   <fieldset>
     <legend>Choose one of these three items:</legend>
-    <input id="one" type="radio" name="items" value="one">
-    <label for="one">Choice One</label><br>
-    <input id="two" type="radio" name="items" value="two">
-    <label for="two">Choice Two</label><br>
-    <input id="three" type="radio" name="items" value="three">
+    <input id="one" type="radio" name="items" value="one" />
+    <label for="one">Choice One</label><br />
+    <input id="two" type="radio" name="items" value="two" />
+    <label for="two">Choice Two</label><br />
+    <input id="three" type="radio" name="items" value="three" />
     <label for="three">Choice Three</label>
   </fieldset>
 </form>
@@ -910,18 +931,19 @@ The `<article>` element is used to represent a fully self-contained region of co
 - `<code>`
 
 ```html
-<p>Everytime Kenny is killed, Stan will announce
+<p>
+  Everytime Kenny is killed, Stan will announce
   <q cite="http://en.wikipedia.org/wiki/Kenny_McCormick#Cultural_impact">
-    Oh my God, you/they killed Kenny!
-  </q>.
+    Oh my God, you/they killed Kenny! </q
+  >.
 </p>
 ```
 
 ```html
 <blockquote cite="https://www.huxley.net/bnw/four.html">
   <p>
-    Words can be like X-rays, if you use them properly
-    – they'll go through anything. You read and you're pierced.
+    Words can be like X-rays, if you use them properly – they'll go through
+    anything. You read and you're pierced.
   </p>
 </blockquote>
 
@@ -959,9 +981,9 @@ Use `<button>` for clickable elements
 
 ```html
 <figure>
-    <img src="" alt="" />
-    <br />
-    <figcaption></figcaption>
+  <img src="" alt="" />
+  <br />
+  <figcaption></figcaption>
 </figure>
 ```
 
@@ -972,7 +994,7 @@ Use `<button>` for clickable elements
 ```html
 <form>
   <label for="name">Name:</label>
-  <input type="text" id="name" name="name">
+  <input type="text" id="name" name="name" />
 </form>
 ```
 
@@ -1011,7 +1033,7 @@ Use `<button>` for clickable elements
 #### Accesskey and Tabindex
 
 ```html
-<a id="second" href="" accesskey="c">
+<a id="second" href="" accesskey="c"></a>
 ```
 
 ```js
@@ -1056,24 +1078,24 @@ document.addEventListener('keyup', (event) => {
  * @param  {object} e the Event object
  */
 export function trapTabKey(e, context) {
-    if (e.key !== 'Tab') return;
+  if (e.key !== 'Tab') return;
 
-    let focusableItems = getFocusable(context);
-    let focusedItem = document.activeElement;
+  let focusableItems = getFocusable(context);
+  let focusedItem = document.activeElement;
 
-    let focusedItemIndex = focusableItems.indexOf(focusedItem);
+  let focusedItemIndex = focusableItems.indexOf(focusedItem);
 
-    if (e.shiftKey) {
-        if (focusedItemIndex == 0) {
-            focusableItems[focusableItems.length - 1].focus();
-            e.preventDefault();
-        }
-    } else {
-        if (focusedItemIndex == focusableItems.length - 1) {
-            focusableItems[0].focus();
-            e.preventDefault();
-        }
+  if (e.shiftKey) {
+    if (focusedItemIndex == 0) {
+      focusableItems[focusableItems.length - 1].focus();
+      e.preventDefault();
     }
+  } else {
+    if (focusedItemIndex == focusableItems.length - 1) {
+      focusableItems[0].focus();
+      e.preventDefault();
+    }
+  }
 }
 ```
 
@@ -1090,12 +1112,17 @@ export function trapTabKey(e, context) {
 - `aria-describledBy`: input + small
 
 ```html
-<button class="list-expander" aria-expanded="false"
-aria-controls="expandable-list-1">Expand List</button>
+<button
+  class="list-expander"
+  aria-expanded="false"
+  aria-controls="expandable-list-1"
+>
+  Expand List
+</button>
 <ul id="expandable-list-1">
-    <li><a href="http://example.com">Sample Link</a></li>
-    <li><a href="http://example.com">Sample Link 2</a></li>
-    <li><a href="http://example.com">Sample Link 3</a></li>
+  <li><a href="http://example.com">Sample Link</a></li>
+  <li><a href="http://example.com">Sample Link 2</a></li>
+  <li><a href="http://example.com">Sample Link 3</a></li>
 </ul>
 ```
 
@@ -1103,11 +1130,11 @@ aria-controls="expandable-list-1">Expand List</button>
 const listExpander = document.querySelector('.list-expander');
 const list = document.querySelector('#expandable-list-1');
 
-listExpander.addEventListener('click', (e) => {
-    if(list.getAttribute('aria-expanded') === "true") {
-        list.setAttribute('aria-expanded', 'false');
-    } else {
-        list.setAttribute('aria-expanded', 'true');
-    }
+listExpander.addEventListener('click', e => {
+  if (list.getAttribute('aria-expanded') === 'true') {
+    list.setAttribute('aria-expanded', 'false');
+  } else {
+    list.setAttribute('aria-expanded', 'true');
+  }
 });
 ```

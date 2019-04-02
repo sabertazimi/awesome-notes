@@ -140,27 +140,27 @@ class Example extends React.Component {
       val: 0
     };
   }
-  
-  componentDidMount() {
-    this.setState({val: this.state.val + 1});
-    console.log(this.state.val);    // 第 1 次 log
 
-    this.setState({val: this.state.val + 1});
-    console.log(this.state.val);    // 第 2 次 log
+  componentDidMount() {
+    this.setState({ val: this.state.val + 1 });
+    console.log(this.state.val); // 第 1 次 log
+
+    this.setState({ val: this.state.val + 1 });
+    console.log(this.state.val); // 第 2 次 log
 
     setTimeout(() => {
-      this.setState({val: this.state.val + 1});
-      console.log(this.state.val);  // 第 3 次 log
+      this.setState({ val: this.state.val + 1 });
+      console.log(this.state.val); // 第 3 次 log
 
-      this.setState({val: this.state.val + 1});
-      console.log(this.state.val);  // 第 4 次 log
+      this.setState({ val: this.state.val + 1 });
+      console.log(this.state.val); // 第 4 次 log
     }, 0);
   }
 
   render() {
     return null;
   }
-};
+}
 
 // => 0 0 2 3
 ```
@@ -183,10 +183,10 @@ class MyComponent extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://api.example.com/items")
+    fetch('https://api.example.com/items')
       .then(res => res.json())
       .then(
-        (result) => {
+        result => {
           this.setState({
             isLoaded: true,
             items: result.items
@@ -195,13 +195,13 @@ class MyComponent extends React.Component {
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
-        (error) => {
+        error => {
           this.setState({
             isLoaded: true,
             error
           });
         }
-      )
+      );
   }
 
   render() {
@@ -241,7 +241,7 @@ static PropTypes = {
 ## Element and Component
 
 react element 实际上是纯对象, 可由 React.createElement()/JSX/element factory helper 创建,
-并被 react 在必要时渲染成真实的DOM结点
+并被 react 在必要时渲染成真实的 DOM 结点
 
 ```js
 ReactDOM.render({
@@ -315,7 +315,7 @@ ReactDOM.render({
 ```js
 this.setState((prevState, props) => ({
   counter: prevState.counter + props.increment
-}))
+}));
 ```
 
 ### Component Lifecycle
@@ -364,7 +364,7 @@ const ButtonElement = React.forwardRef((props, ref) => (
 // Create ref to the DOM button:
 // get ref to `<button>`
 const ref = React.createRef();
-<ButtonElement ref={ref}>{'Forward Ref'}</ButtonElement>
+<ButtonElement ref={ref}>{'Forward Ref'}</ButtonElement>;
 ```
 
 #### Callback Refs
@@ -403,27 +403,24 @@ problem:
 function withToggleable(Clickable) {
   return class extends React.Component {
     constructor() {
-      super()
-      this.toggle = this.toggle.bind(this)
-      this.state = { show: false }
+      super();
+      this.toggle = this.toggle.bind(this);
+      this.state = { show: false };
     }
 
     toggle() {
-      this.setState(prevState => ({ show: !prevState.show }))
+      this.setState(prevState => ({ show: !prevState.show }));
     }
 
     render() {
       return (
         <div>
-          <Clickable
-            {...this.props}
-            onClick={this.toggle}
-          />
+          <Clickable {...this.props} onClick={this.toggle} />
           {this.state.show && this.props.children}
         </div>
-      )
+      );
     }
-  }
+  };
 }
 
 class NormalMenu extends React.Component {
@@ -432,7 +429,7 @@ class NormalMenu extends React.Component {
       <div onClick={this.props.onClick}>
         <h1>{this.props.title}</h1>
       </div>
-    )
+    );
   }
 }
 
@@ -454,7 +451,7 @@ class Menu extends React.Component {
           <p>More content</p>
         </ToggleableMenu>
       </div>
-    )
+    );
   }
 }
 ```
@@ -481,21 +478,21 @@ problem:
 ```jsx
 class Toggleable extends React.Component {
   constructor() {
-    super()
-    this.toggle = this.toggle.bind(this)
-    this.state = { show: false }
+    super();
+    this.toggle = this.toggle.bind(this);
+    this.state = { show: false };
   }
 
   toggle() {
-    this.setState(prevState => ({ show: !prevState.show }))
+    this.setState(prevState => ({ show: !prevState.show }));
   }
 
   render() {
-    return this.props.children(this.state.show, this.toggle)
+    return this.props.children(this.state.show, this.toggle);
   }
 }
 
-const ToggleableMenu = props =>
+const ToggleableMenu = props => (
   <Toggleable>
     {(show, onClick) => (
       <div>
@@ -506,6 +503,7 @@ const ToggleableMenu = props =>
       </div>
     )}
   </Toggleable>
+);
 ```
 
 ```jsx
@@ -523,7 +521,7 @@ class Menu extends React.Component {
           <p>More content</p>
         </ToggleableMenu>
       </div>
-    )
+    );
   }
 }
 ```
@@ -537,7 +535,7 @@ class Menu extends React.Component {
 - class components will read `this.props` **too early** or **too late**,
   because of mutable `this` in React
   (however `props` argument of function components is immutable),
-  that says *function components capture the rendered values*.
+  that says _function components capture the rendered values_.
   more details on
   [Overreacted](https://overreacted.io/how-are-function-components-different-from-classes/)
 
@@ -568,9 +566,9 @@ const Button = ({ color, children }) => {
 
 - returns a memoized callback
 - 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
-但是每次都是返回新的函数, 使用 `useCallback`, 可以让它使用上次的函数.
-在虚拟 DOM 更新过程中, 如果事件句柄相同, 那么就不用每次都进行
-`removeEventListner` 与 `addEventListner`.
+  但是每次都是返回新的函数, 使用 `useCallback`, 可以让它使用上次的函数.
+  在虚拟 DOM 更新过程中, 如果事件句柄相同, 那么就不用每次都进行
+  `removeEventListner` 与 `addEventListner`.
 - `useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`
 
 ```js
@@ -581,9 +579,9 @@ function Parent() {
   const fetchData = useCallback(() => {
     const url = 'https://hn.algolia.com/api/v1/search?query=' + query;
     // ... Fetch data and return it ...
-  }, [query]);  // ✅ Callback deps are OK
+  }, [query]); // ✅ Callback deps are OK
 
-  return <Child fetchData={fetchData} />
+  return <Child fetchData={fetchData} />;
 }
 
 function Child({ fetchData }) {
@@ -604,7 +602,7 @@ read rendered props/state
 ```js
 setState(prevState => {
   // Object.assign would also work
-  return {...prevState, ...updatedValues};
+  return { ...prevState, ...updatedValues };
 });
 ```
 
@@ -618,9 +616,7 @@ function Example() {
   return (
     <div>
       <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
     </div>
   );
 }
@@ -651,17 +647,17 @@ function FriendStatus(props) {
 }
 
 // Mount with { friend: { id: 100 } } props
-ChatAPI.subscribeToFriendStatus(100, handleStatusChange);     // Run first effect
+ChatAPI.subscribeToFriendStatus(100, handleStatusChange); // Run first effect
 
 // Update with { friend: { id: 200 } } props
 // Clean up previous effect
 ChatAPI.unsubscribeFromFriendStatus(100, handleStatusChange);
-ChatAPI.subscribeToFriendStatus(200, handleStatusChange);     // Run next effect
+ChatAPI.subscribeToFriendStatus(200, handleStatusChange); // Run next effect
 
 // Update with { friend: { id: 300 } } props
 // Clean up previous effect
 ChatAPI.unsubscribeFromFriendStatus(200, handleStatusChange);
-ChatAPI.subscribeToFriendStatus(300, handleStatusChange);     // Run next effect
+ChatAPI.subscribeToFriendStatus(300, handleStatusChange); // Run next effect
 
 // Unmount
 ChatAPI.unsubscribeFromFriendStatus(300, handleStatusChange); // Clean up last effect
@@ -774,7 +770,7 @@ const useDataApi = (initialUrl, initialData) => {
 componentDidMount
 
 ```js
-const useMount = (fn) => {
+const useMount = fn => {
   useEffect(() => void fn(), []);
 };
 ```
@@ -782,7 +778,7 @@ const useMount = (fn) => {
 componentWillUnmount
 
 ```js
-const useUnmount = (fn) => {
+const useUnmount = fn => {
   useEffect(() => fn, []);
 };
 ```
@@ -790,7 +786,7 @@ const useUnmount = (fn) => {
 componentDidUpdate
 
 ```js
-const useUpdate = (fn) => {
+const useUpdate = fn => {
   const mounting = useRef(true);
 
   useEffect(() => {
@@ -826,7 +822,7 @@ interface VoidFunctionCreator {
 const max: number = 9007199254740990; // Number.MAX_SAFE_INTEGER - 1;
 
 const useForceUpdate: VoidFunctionCreator = (): VoidFunction => {
-  const [ , setState ] = useState(0);
+  const [, setState] = useState(0);
   const forceUpdate: VoidFunction = (): void => {
     setState((state: number) => (state + 1) % max);
   };
@@ -888,9 +884,7 @@ function FriendListItem(props) {
   const isOnline = useFriendStatus(props.friend.id);
 
   return (
-    <li style={{ color: isOnline ? 'green' : 'black' }}>
-      {props.friend.name}
-    </li>
+    <li style={{ color: isOnline ? 'green' : 'black' }}>{props.friend.name}</li>
   );
 }
 ```
@@ -936,17 +930,14 @@ function App() {
   const [query, setQuery] = useState('redux');
   const { data, isLoading, isError, doGet } = useDataApi(
     'http://hn.algolia.com/api/v1/search?query=redux',
-    { hits: [] },
+    { hits: [] }
   );
 
   return (
     <Fragment>
       <form
         onSubmit={event =>
-          doGet(
-            event,
-            `http://hn.algolia.com/api/v1/search?query=${query}`,
-          )
+          doGet(event, `http://hn.algolia.com/api/v1/search?query=${query}`)
         }
       >
         <input
@@ -1008,7 +999,11 @@ function Todos() {
 function Counter() {
   const [count, setCount] = useState(0);
   const prevCount = usePrevious(count);
-  return <h1>Now: {count}, before: {prevCount}</h1>;
+  return (
+    <h1>
+      Now: {count}, before: {prevCount}
+    </h1>
+  );
 }
 
 function usePrevious(value) {
@@ -1033,20 +1028,20 @@ export const store = {
   },
   setters: []
 };
-  
+
 // Bind the setState function to the store object so
 // we don't lose context when calling it elsewhere
 store.setState = store.setState.bind(store);
 
 // this is the custom hook we'll call on components.
 export function useStore() {
-  const [ state, set ] = useState(store.state);
+  const [state, set] = useState(store.state);
 
   if (!store.setters.includes(set)) {
     store.setters.push(set);
   }
 
-  return [ state, store.setState ];
+  return [state, store.setState];
 }
 ```
 
@@ -1122,23 +1117,17 @@ const useHistory = initialPresent => {
   // Setup our callback functions
   // We memoize with useCallback to prevent unnecessary re-renders
 
-  const undo = useCallback(
-    () => {
-      if (canUndo) {
-        dispatch({ type: 'UNDO' });
-      }
-    },
-    [canUndo, dispatch]
-  );
+  const undo = useCallback(() => {
+    if (canUndo) {
+      dispatch({ type: 'UNDO' });
+    }
+  }, [canUndo, dispatch]);
 
-  const redo = useCallback(
-    () => {
-      if (canRedo) {
-        dispatch({ type: 'REDO' });
-      }
-    },
-    [canRedo, dispatch]
-  );
+  const redo = useCallback(() => {
+    if (canRedo) {
+      dispatch({ type: 'REDO' });
+    }
+  }, [canRedo, dispatch]);
 
   const set = useCallback(newPresent => dispatch({ type: 'SET', newPresent }), [
     dispatch
@@ -1202,10 +1191,7 @@ const useReactRouter = () => {
   const forceUpdate = useForceUpdate();
   const routerContext = useContext(__RouterContext);
 
-  useEffect(
-    () => routerContext.history.listen(forceUpdate),
-    [ routerContext ],
-  );
+  useEffect(() => routerContext.history.listen(forceUpdate), [routerContext]);
 
   return routerContext;
 };
@@ -1217,7 +1203,7 @@ const useReactRouter = () => {
 // Hook
 let cachedScripts = [];
 
-const useScript = (src) => {
+const useScript = src => {
   // Keeping track of script loaded and error state
   const [state, setState] = useState({
     loaded: false,
@@ -1287,25 +1273,27 @@ const useScript = (src) => {
 ```js
 import { useState } from 'react';
 
-const useForm = (callback) => {
-
+const useForm = callback => {
   const [values, setValues] = useState({});
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     if (event) event.preventDefault();
-      callback();
+    callback();
   };
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     event.persist();
-    setValues(values => ({ ...values, [event.target.name]: event.target.value }));
+    setValues(values => ({
+      ...values,
+      [event.target.name]: event.target.value
+    }));
   };
 
   return {
     handleChange,
     handleSubmit,
-    values,
-  }
+    values
+  };
 };
 
 export default useForm;
@@ -1340,13 +1328,10 @@ export const useField = (
     return fieldValid;
   };
 
-  useEffect(
-    () => {
-      if (pristine) return; // Avoid validate on mount
-      form.validateFields(fieldsToValidateOnChange);
-    },
-    [value]
-  );
+  useEffect(() => {
+    if (pristine) return; // Avoid validate on mount
+    form.validateFields(fieldsToValidateOnChange);
+  }, [value]);
 
   let field = {
     name,
@@ -1459,7 +1444,7 @@ const App = props => {
       await timeout(2000); // Simulate network time
       if (formData.username.length < 10) {
         //Simulate 400 response from server
-        usernameField.setErrors(["Make a longer username"]);
+        usernameField.setErrors(['Make a longer username']);
       } else {
         //Simulate 201 response from server
         window.alert(
@@ -1469,32 +1454,32 @@ const App = props => {
     }
   });
 
-  const usernameField = useField("username", form, {
-    defaultValue: "",
+  const usernameField = useField('username', form, {
+    defaultValue: '',
     validations: [
       async formData => {
         await timeout(2000);
-        return formData.username.length < 6 && "Username already exists";
+        return formData.username.length < 6 && 'Username already exists';
       }
     ],
     fieldsToValidateOnChange: []
   });
-  const passwordField = useField("password", form, {
-    defaultValue: "",
+  const passwordField = useField('password', form, {
+    defaultValue: '',
     validations: [
       formData =>
-        formData.password.length < 6 && "Password must be at least 6 characters"
+        formData.password.length < 6 && 'Password must be at least 6 characters'
     ],
-    fieldsToValidateOnChange: ["password", "confirmPassword"]
+    fieldsToValidateOnChange: ['password', 'confirmPassword']
   });
-  const confirmPasswordField = useField("confirmPassword", form, {
-    defaultValue: "",
+  const confirmPasswordField = useField('confirmPassword', form, {
+    defaultValue: '',
     validations: [
       formData =>
         formData.password !== formData.confirmPassword &&
-        "Passwords do not match"
+        'Passwords do not match'
     ],
-    fieldsToValidateOnChange: ["password", "confirmPassword"]
+    fieldsToValidateOnChange: ['password', 'confirmPassword']
   });
 
   let requiredFields = [usernameField, passwordField, confirmPasswordField];
@@ -1527,7 +1512,7 @@ const App = props => {
             requiredFields.some(f => f.pristine)
           }
         >
-          {form.submitting ? "Submitting" : "Submit"}
+          {form.submitting ? 'Submitting' : 'Submit'}
         </Button>
       </form>
     </div>
@@ -1563,8 +1548,8 @@ handle(e) {
 ```
 
 ```js
-state = {}
-handle = (e) => {}
+state = {};
+handle = e => {};
 ```
 
 ## React Style Guide
@@ -1763,8 +1748,8 @@ render() {
 
 - 处理请求的参数
 - 渲染和重定向
-- 选择Model和Service
-- 处理Session和Cookies
+- 选择 Model 和 Service
+- 处理 Session 和 Cookies
 
 ### Comparsion
 
@@ -1776,15 +1761,15 @@ render() {
 
 - 组件细分化
 - 组件
-  - 只传入必要的props
-  - 使用immutablejs或者react.addons.update实现不可变数据结构
-  - 结合React.addons.PureRenderMixin来减少reRender
-- 在shouldComponentUpdate中优化组件减少reRender
-- 使用context
-- 少做dom操作，始终让UI能够基于State还原
-- 在store和action中不dom操作或者访问window.属性，只与数据打交道
-- 推荐使用ES6
-- npm的debug包，log组件渲染的每个步骤和动作
+  - 只传入必要的 props
+  - 使用 immutablejs 或者 react.addons.update 实现不可变数据结构
+  - 结合 React.addons.PureRenderMixin 来减少 reRender
+- 在 shouldComponentUpdate 中优化组件减少 reRender
+- 使用 context
+- 少做 dom 操作，始终让 UI 能够基于 State 还原
+- 在 store 和 action 中不 dom 操作或者访问 window.属性，只与数据打交道
+- 推荐使用 ES6
+- npm 的 debug 包，log 组件渲染的每个步骤和动作
 - [Singel](https://github.com/diegohaz/singel)
 
 ## Modern React
@@ -1797,14 +1782,14 @@ import React, { lazy, Suspense } from 'react';
 const Product = lazy(() => import('./ProductHandler'));
 
 const App = () => (
-  <div className='product-list'>
+  <div className="product-list">
     <h1>My Awesome Product</h1>
     <Suspense fallback={<h2>Product list is loading...</h2>}>
       <p>Take a look at my product:</p>
       <section>
-        <Product id='PDT-49-232' />
-        <Product id='PDT-50-233' />
-        <Product id='PDT-51-234' />
+        <Product id="PDT-49-232" />
+        <Product id="PDT-50-233" />
+        <Product id="PDT-51-234" />
       </section>
     </Suspense>
   </div>
@@ -1819,11 +1804,11 @@ function contextWrapper(WrappedComponent, Context) {
     render() {
       return (
         <Context.Consumer>
-          { context => <WrappedComponent context={context} { ...this.props } /> }
+          {context => <WrappedComponent context={context} {...this.props} />}
         </Context.Consumer>
-      )
+      );
     }
-  }
+  };
 }
 ```
 
@@ -1847,16 +1832,17 @@ class Provider extends Component {
     const { name, value } = e.target;
 
     this.setState({
-      [name]: value,
+      [name]: value
     });
-  }
+  };
 
   render() {
     return (
-      <ContextProvider value={{
-        textareaRef: this.textareaRef,
-        onInput: this.onInput,
-      }}
+      <ContextProvider
+        value={{
+          textareaRef: this.textareaRef,
+          onInput: this.onInput
+        }}
       >
         {this.props.children}
       </ContextProvider>
@@ -1904,7 +1890,7 @@ class ErrorBoundary extends React.Component {
   state = {
     hasError: false,
     error: null,
-    info: null,
+    info: null
   };
 
   // key point
@@ -1997,8 +1983,8 @@ use React.PureComponent/React.memo for a performance boost in some cases.
 ```js
 import React, { PureComponent } from 'react';
 
-const Unstable = (props) => {
-  console.log(" Rendered Unstable component ");
+const Unstable = props => {
+  console.log(' Rendered Unstable component ');
 
   return (
     <div>
@@ -2009,21 +1995,21 @@ const Unstable = (props) => {
 
 class App extends PureComponent {
   state = {
-    value: 1,
-  }
+    value: 1
+  };
 
   componentDidMount() {
     setInterval(() => {
       this.setState(() => {
-        return { value:1 };
-      })
+        return { value: 1 };
+      });
     }, 2000);
   }
 
   render() {
     return (
       <div>
-        <Unstable value={this.state.value}/>
+        <Unstable value={this.state.value} />
       </div>
     );
   }
@@ -2035,8 +2021,8 @@ export default App;
 ```js
 import React, { Component } from 'react';
 
-const Unstable = React.memo((props) => {
-  console.log(" Rendered this component ");
+const Unstable = React.memo(props => {
+  console.log(' Rendered this component ');
 
   return (
     <div>
@@ -2047,13 +2033,13 @@ const Unstable = React.memo((props) => {
 
 class App extends Component {
   state = {
-    value: 1,
-  }
+    value: 1
+  };
 
   componentDidMount() {
     setInterval(() => {
       this.setState(() => {
-        return { value:1 };
+        return { value: 1 };
       });
     }, 2000);
   }
@@ -2061,7 +2047,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Unstable value={this.state.value}/>
+        <Unstable value={this.state.value} />
       </div>
     );
   }
@@ -2073,25 +2059,23 @@ export default App;
 ### Code Spliting
 
 ```js
-import React, { Component } from "react";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import React, { Component } from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
-const formValidator = Yup.object().shape({ /* ... */ });
+const formValidator = Yup.object().shape({
+  /* ... */
+});
 
 export default class Form extends Component {
   render() {
-    return (
-      <Formik validationSchema={formValidator}>
-        {/* ... */}
-      </Formik>
-    );
+    return <Formik validationSchema={formValidator}>{/* ... */}</Formik>;
   }
 }
 ```
 
 ```js
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class App extends Component {
   constructor() {
@@ -2113,7 +2097,7 @@ export default class App extends Component {
   }
 
   showForm = async () => {
-    const { default: Form } = await import("./Form");
+    const { default: Form } = await import('./Form');
     this.setState({ Form });
   };
 }
@@ -2210,7 +2194,7 @@ start.client.js
 
 ```js
 import React from 'react';
-import ReactDOMServer from "react-dom";
+import ReactDOMServer from 'react-dom';
 import App from './App.js';
 
 ReactDOM.hydrate(<App />, document.getElementById('app'));
@@ -2293,23 +2277,23 @@ function MyComponent() {
       <span className={'heading'}>{'Title'}</span>
       <span className={'description'}>{'Description'}</span>
     </div>
-  )
+  );
 }
 ```
 
 ```js
-import ShallowRenderer from 'react-test-renderer/shallow'
+import ShallowRenderer from 'react-test-renderer/shallow';
 
-const renderer = new ShallowRenderer()
-renderer.render(<MyComponent />)
+const renderer = new ShallowRenderer();
+renderer.render(<MyComponent />);
 
-const result = renderer.getRenderOutput()
+const result = renderer.getRenderOutput();
 
-expect(result.type).toBe('div')
+expect(result.type).toBe('div');
 expect(result.props.children).toEqual([
   <span className={'heading'}>{'Title'}</span>,
   <span className={'description'}>{'Description'}</span>
-])
+]);
 ```
 
 ### Test Renderer
@@ -2320,15 +2304,15 @@ expect(result.props.children).toEqual([
 而无需使用浏览器或 jsdom.
 
 ```js
-import TestRenderer from 'react-test-renderer'
+import TestRenderer from 'react-test-renderer';
 
-const Link = ({page, children}) => <a href={page}>{children}</a>
+const Link = ({ page, children }) => <a href={page}>{children}</a>;
 
 const testRenderer = TestRenderer.create(
   <Link page={'https://www.facebook.com/'}>{'Facebook'}</Link>
-)
+);
 
-console.log(testRenderer.toJSON())
+console.log(testRenderer.toJSON());
 // {
 //   type: 'a',
 //   props: { href: 'https://www.facebook.com/' },
@@ -2361,7 +2345,12 @@ describe(() => {
       { id: 5, name: 'John', email: 'john@example.com' },
       { id: 6, name: 'Liam', email: 'liam@example.com' },
       { id: 7, name: 'Maya', email: 'maya@example.com', someTest: 10 },
-      {id: 8, name: 'Oliver', email: 'oliver@example.com', hello: 'hello world'},
+      {
+        id: 8,
+        name: 'Oliver',
+        email: 'oliver@example.com',
+        hello: 'hello world'
+      },
       { id: 25, name: 'Amelia', email: 'amelia@example.com' }
     ];
 

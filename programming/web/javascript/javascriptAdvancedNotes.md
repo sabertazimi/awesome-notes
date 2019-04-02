@@ -242,7 +242,7 @@ babel.transform('code();', options);
 
 // 文件转码（异步）
 babel.transformFile('filename.js', options, function(err, result) {
-      result; // => { code, map, ast }
+  result; // => { code, map, ast }
 });
 
 // 文件转码（同步）
@@ -276,9 +276,9 @@ let b = 2;
 
 #### const
 
-- const一旦声明变量，就必须立即初始化，不能留到以后赋值
+- const 一旦声明变量，就必须立即初始化，不能留到以后赋值
 - 块级作用域(Temporal Dead Zone)
-- 引用一个引用变量时，只表示此变量地址不可变，但所引用变量的值/属性可变(* const)
+- 引用一个引用变量时，只表示此变量地址不可变，但所引用变量的值/属性可变(\* const)
 
 ### Destructuring(Pattern Matching)
 
@@ -287,22 +287,22 @@ let b = 2;
 
 #### 默认值
 
-- ES6内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
-- 如果一个数组成员不严格等于undefined，默认值不会生效
+- ES6 内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
+- 如果一个数组成员不严格等于 undefined，默认值不会生效
 
 ```js
 const [x = 1] = [undefined];
-x // 1
+x; // 1
 
 const [x = 1] = [null];
-x // null
+x; // null
 ```
 
 ```js
-let [x = 1, y = x] = [];     // x=1; y=1
-let [x = 1, y = x] = [2];    // x=2; y=2
+let [x = 1, y = x] = []; // x=1; y=1
+let [x = 1, y = x] = [2]; // x=2; y=2
 let [x = 1, y = x] = [1, 2]; // x=1; y=2
-let [x = y, y = 1] = [];     // ReferenceError
+let [x = y, y = 1] = []; // ReferenceError
 ```
 
 #### Sample
@@ -364,13 +364,13 @@ const { foo, bar } = example();
 ```js
 const jsonData = {
   id: 42,
-  status: "OK",
+  status: 'OK',
   data: [867, 5309]
-}
+};
 
 const { id, status, data: number } = jsonData;
 
-console.log(id, status, number)
+console.log(id, status, number);
 // 42, "OK", [867, 5309]
 ```
 
@@ -382,7 +382,7 @@ map.set('first', 'hello');
 map.set('second', 'world');
 
 for (let [key, value] of map) {
-  console.log(key + " is " + value);
+  console.log(key + ' is ' + value);
 }
 // first is hello
 // second is world
@@ -393,7 +393,7 @@ for (let [key] of map) {
 }
 
 // 获取键值
-for (let [,value] of map) {
+for (let [, value] of map) {
   // ...
 }
 ```
@@ -401,7 +401,7 @@ for (let [,value] of map) {
 ##### 加载特定模块
 
 ```js
-const { SourceMapConsumer, SourceNode } = require("source-map");
+const { SourceMapConsumer, SourceNode } = require('source-map');
 ```
 
 #### Array Iterator Style Matching
@@ -414,25 +414,25 @@ const { SourceMapConsumer, SourceNode } = require("source-map");
 
 ```js
 const [foo, [[bar], baz]] = [1, [[2], 3]];
-foo // 1
-bar // 2
-baz // 3
+foo; // 1
+bar; // 2
+baz; // 3
 
-const [ , , third] = ["foo", "bar", "baz"];
-third // "baz"
+const [, , third] = ['foo', 'bar', 'baz'];
+third; // "baz"
 
 const [x, , y] = [1, 2, 3];
-x // 1
-y // 3
+x; // 1
+y; // 3
 
 const [head, ...tail] = [1, 2, 3, 4];
-head // 1
-tail // [2, 3, 4]
+head; // 1
+tail; // [2, 3, 4]
 
 const [x, y, ...z] = ['a'];
-x // "a"
-y // undefined
-z // []
+x; // "a"
+y; // undefined
+z; // []
 
 // Generator 函数
 function* fibs() {
@@ -445,7 +445,7 @@ function* fibs() {
 }
 
 const [first, second, third, fourth, fifth, sixth] = fibs();
-sixth // 5
+sixth; // 5
 ```
 
 #### Object Style Matching
@@ -453,7 +453,7 @@ sixth // 5
 - 真正被赋值的是后者，而不是前者
 
 ```js
-const {pattern: variable} = { key: value };
+const { pattern: variable } = { key: value };
 ```
 
 - 解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象
@@ -465,24 +465,24 @@ const { prop: y } = null; // TypeError
 ```
 
 ```js
-const { bar, foo } = { foo: "aaa", bar: "bbb" };
-foo // "aaa"
-bar // "bbb"
+const { bar, foo } = { foo: 'aaa', bar: 'bbb' };
+foo; // "aaa"
+bar; // "bbb"
 
-const { foo: foo, bar: bar } = { foo: "aaa", bar: "bbb" };
+const { foo: foo, bar: bar } = { foo: 'aaa', bar: 'bbb' };
 
-const { baz } = { foo: "aaa", bar: "bbb" };
-baz // undefined
+const { baz } = { foo: 'aaa', bar: 'bbb' };
+baz; // undefined
 ```
 
 ```js
-const { foo: baz } = { foo: "aaa", bar: "bbb" };
-baz // "aaa"
+const { foo: baz } = { foo: 'aaa', bar: 'bbb' };
+baz; // "aaa"
 
 const obj = { first: 'hello', last: 'world' };
 const { first: f, last: l } = obj;
-f // 'hello'
-l // 'world'
+f; // 'hello'
+l; // 'world'
 ```
 
 ```js
@@ -493,14 +493,14 @@ const { log, sin, cos } = Math;
 
 ```js
 const [a, b, c, d, e] = 'hello';
-a // "h"
-b // "e"
-c // "l"
-d // "l"
-e // "o"
+a; // "h"
+b; // "e"
+c; // "l"
+d; // "l"
+e; // "o"
 
-let {length : len} = 'hello';
-len // 5
+let { length: len } = 'hello';
+len; // 5
 ```
 
 #### Number/Boolean Style Matching
@@ -508,45 +508,44 @@ len // 5
 number/boolean 会转化成对象
 
 ```js
-let {toString: s} = 123;
-s === Number.prototype.toString // true
+let { toString: s } = 123;
+s === Number.prototype.toString; // true
 
-let {toString: s} = true;
-s === Boolean.prototype.toString // true
+let { toString: s } = true;
+s === Boolean.prototype.toString; // true
 ```
 
 #### Function Arguments Style Matching
 
 ```js
-function add([x, y]){
+function add([x, y]) {
   return x + y;
 }
 add([1, 2]) // 3
-
-[[1, 2], [3, 4]].map(([a, b]) => a + b)
+  [([1, 2], [3, 4])].map(([a, b]) => a + b);
 // [ 3, 7 ]
 
-function move({x = 0, y = 0} = {}) {
+function move({ x = 0, y = 0 } = {}) {
   return [x, y];
 }
-move({x: 3, y: 8}); // [3, 8]
-move({x: 3}); // [3, 0]
+move({ x: 3, y: 8 }); // [3, 8]
+move({ x: 3 }); // [3, 0]
 move({}); // [0, 0]
 move(); // [0, 0]
 
 // 严格为 undefined 时，触发默认值设置
-[1, undefined, 3].map((x = 'yes') => x)
+[1, undefined, 3].map((x = 'yes') => x);
 // [ 1, 'yes', 3 ]
 ```
 
 ### String
 
 ```js
-'\z' === 'z'  // true
-'\172' === 'z' // true
-'\x7A' === 'z' // true
-'\u007A' === 'z' // true
-'\u{7A}' === 'z' // true
+'z' === 'z'; // true
+'\172' === 'z'; // true
+'\x7A' === 'z'; // true
+'\u007A' === 'z'; // true
+'\u{7A}' === 'z'; // true
 ```
 
 #### Methods
@@ -556,49 +555,49 @@ move(); // [0, 0]
 
 ```js
 function is32Bit(c) {
-  return c.codePointAt(0) > 0xFFFF;
+  return c.codePointAt(0) > 0xffff;
 }
 
-String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y'
+String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y';
 // true
 ```
 
 - string.includes(substr)/startsWith(substr)/endsWith(substr)
-- 使用第二个参数n时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束
+- 使用第二个参数 n 时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束
 
 ```js
 const s = 'Hello world!';
 
-s.startsWith('world', 6) // true
-s.endsWith('Hello', 5) // true
-s.includes('Hello', 6) // false
+s.startsWith('world', 6); // true
+s.endsWith('Hello', 5); // true
+s.includes('Hello', 6); // false
 ```
 
 - repeat(times)
 
 ```js
-'hello'.repeat(2) // "hellohello"
-'na'.repeat(2.9) // "nana"
+'hello'.repeat(2); // "hellohello"
+'na'.repeat(2.9); // "nana"
 
-'na'.repeat(-0.9) // ""
-'na'.repeat(-1) // RangeError
+'na'.repeat(-0.9); // ""
+'na'.repeat(-1); // RangeError
 
-'na'.repeat(NaN) // ""
-'na'.repeat(Infinity) // RangeError
+'na'.repeat(NaN); // ""
+'na'.repeat(Infinity); // RangeError
 
-'na'.repeat('na') // ""
-'na'.repeat('3') // "nanana"
+'na'.repeat('na'); // ""
+'na'.repeat('3'); // "nanana"
 ```
 
 - padStart/padEnd(len, paddingStr)
 
 ```js
-'1'.padStart(10, '0') // "0000000001"
-'12'.padStart(10, '0') // "0000000012"
-'123456'.padStart(10, '0') // "0000123456"
+'1'.padStart(10, '0'); // "0000000001"
+'12'.padStart(10, '0'); // "0000000012"
+'123456'.padStart(10, '0'); // "0000123456"
 
-'12'.padStart(10, 'YYYY-MM-DD') // "YYYY-MM-12"
-'09-12'.padStart(10, 'YYYY-MM-DD') // "YYYY-09-12"
+'12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-MM-12"
+'09-12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-09-12"
 ```
 
 #### Template String
@@ -607,39 +606,34 @@ s.includes('Hello', 6) // false
 
 ```js
 // 普通字符串
-`In JavaScript '\n' is a line-feed.`
-`\`Yo\` World!`
-
-// 多行字符串
-`In JavaScript this is
- not legal.`
-
-// 引用变量
-`${x} + ${y * 2} = ${x + y * 2}`
-`${obj.x + obj.y}`
-
-// 调用函数
-`foo ${fn()} bar`
+`In JavaScript '\n' is a line-feed.``\`Yo\` World!``In JavaScript this is // 多行字符串
+ not legal.``${
+  x // 引用变量
+} + ${y * 2} = ${x + y * 2}``${obj.x + obj.y}``foo ${
+  fn() // 调用函数
+} bar`;
 ```
 
 #### Tagged Templates
 
 ```js
 const boldify = (parts, ...insertedParts) => {
-  return parts.map((s, i) => {
-    if (i === insertedParts.length) return s
-    return `${s}<strong>${insertedParts[i]}</strong>`
-  }).join('')
-}
+  return parts
+    .map((s, i) => {
+      if (i === insertedParts.length) return s;
+      return `${s}<strong>${insertedParts[i]}</strong>`;
+    })
+    .join('');
+};
 
-const name = 'Jamon Holmgren'
-console.log(boldify`Hi, my name is ${name}!`)
+const name = 'Jamon Holmgren';
+console.log(boldify`Hi, my name is ${name}!`);
 // => "Hi, my name is <strong>Jamon Holmgren</strong>!"
 ```
 
 ```js
 function template(strings, ...keys) {
-  return (function(...values) {
+  return function(...values) {
     const dict = values[values.length - 1] || {};
     const result = [strings[0]];
     keys.forEach(function(key, i) {
@@ -647,42 +641,41 @@ function template(strings, ...keys) {
       result.push(value, strings[i + 1]);
     });
     return result.join('');
-  });
+  };
 }
 
 const t1Closure = template`${0}${1}${0}!`;
-t1Closure('Y', 'A');  // "YAY!"
+t1Closure('Y', 'A'); // "YAY!"
 const t2Closure = template`${0} ${'foo'}!`;
-t2Closure('Hello', {foo: 'World'});  // "Hello World!"
+t2Closure('Hello', { foo: 'World' }); // "Hello World!"
 ```
 
 - 编译模板(小型模板引擎)
 
 ```js
-function compile(template){
-    const evalExpr = /<%=(.+?)%>/g;
-    const expr = /<%([\s\S]+?)%>/g;
+function compile(template) {
+  const evalExpr = /<%=(.+?)%>/g;
+  const expr = /<%([\s\S]+?)%>/g;
 
-    template = template
-      .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
-      .replace(expr, '`); \n $1 \n  echo(`');
+  template = template
+    .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
+    .replace(expr, '`); \n $1 \n  echo(`');
 
-    template = 'echo(`' + template + '`);';
+  template = 'echo(`' + template + '`);';
 
-    const script =
-    `(function parse(data){
+  const script = `(function parse(data){
       var output = "";
 
       function echo(html){
         output += html;
       }
 
-      ${ template }
+      ${template}
 
       return output;
     })`;
 
-    return script;
+  return script;
 }
 
 const template = `
@@ -693,13 +686,12 @@ const template = `
 </ul>
 `;
 const parse = compile(template);
-div.innerHTML = parse({ supplies: [ "broom", "mop", "cleaner" ] });
+div.innerHTML = parse({ supplies: ['broom', 'mop', 'cleaner'] });
 // => <ul>
 // =>   <li>broom</li>
 // =>   <li>mop</li>
 // =>   <li>cleaner</li>
 // => </ul>
-
 
 // 下面的hashTemplate函数
 // 是一个自定义的模板处理函数
@@ -715,15 +707,14 @@ const libraryHtml = hashTemplate`
 - 国际化处理
 
 ```js
-i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`
+i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`;
 // "欢迎访问xxx，您是第xxxx位访问者！"
 ```
 
 - XSS 攻击
 
 ```js
-const message =
-  SaferHTML`<p>${sender} has sent you a message.</p>`;
+const message = SaferHTML`<p>${sender} has sent you a message.</p>`;
 
 function SaferHTML(templateData) {
   let s = templateData[0];
@@ -731,9 +722,10 @@ function SaferHTML(templateData) {
     const arg = String(arguments[i]);
 
     // Escape special characters in the substitution.
-    s += arg.replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;");
+    s += arg
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
 
     // Don't escape special characters in the template.
     s += templateData[i];
@@ -753,7 +745,7 @@ jsx`
       defaultValue='${this.state.value}' />
       ${this.state.value}
    </div>
-`
+`;
 
 java`
 class HelloWorldApp {
@@ -761,7 +753,7 @@ class HelloWorldApp {
     System.out.println(“Hello World!”); // Display the string.
   }
 }
-`
+`;
 HelloWorldApp.main();
 ```
 
@@ -772,14 +764,14 @@ HelloWorldApp.main();
 
 ```js
 function codePointLength(text) {
-      var result = text.match(/[\s\S]/gu);
-        return result ? result.length : 0;
+  var result = text.match(/[\s\S]/gu);
+  return result ? result.length : 0;
 }
 
 const s = '𠮷𠮷';
 
-s.length // 4
-codePointLength(s) // 2
+s.length; // 4
+codePointLength(s); // 2
 ```
 
 ### Number
@@ -788,22 +780,22 @@ codePointLength(s) // 2
 - 0oxxx/0Oxxx
 - Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()
 - Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`
-- ** 指数运算符
+- \*\* 指数运算符
 - BigInt
 
 ```js
 const a = 2172141653;
 const b = 15346349309;
-a * b
+a * b;
 // => 33334444555566670000
-BigInt(a) * BigInt(b)
+BigInt(a) * BigInt(b);
 // => 33334444555566667777n
 ```
 
 ### Array
 
 ```js
-[...Array(5).keys()] // => [0, 1, 2, 3, 4]
+[...Array(5).keys()]; // => [0, 1, 2, 3, 4]
 ```
 
 #### Array.includes
@@ -825,7 +817,7 @@ no more `indexOf() > -1`
 
 // NodeList对象
 const ps = document.querySelectorAll('p');
-Array.from(ps).forEach(function (p) {
+Array.from(ps).forEach(function(p) {
   console.log(p);
 });
 
@@ -835,21 +827,21 @@ function foo() {
   // ...
 }
 
-Array.from('hello')
+Array.from('hello');
 // => ['h', 'e', 'l', 'l', 'o']
 
-const namesSet = new Set(['a', 'b'])
-Array.from(namesSet) // ['a', 'b']
+const namesSet = new Set(['a', 'b']);
+Array.from(namesSet); // ['a', 'b']
 
 // 克隆数组
-Array.from([1, 2, 3])
+Array.from([1, 2, 3]);
 // => [1, 2, 3]
 
 Array.from(arrayLike, x => x * x);
 // =>
 Array.from(arrayLike).map(x => x * x);
 
-Array.from([1, 2, 3], x => x * x)
+Array.from([1, 2, 3], x => x * x);
 // [1, 4, 9]
 ```
 
@@ -858,15 +850,16 @@ Array.from([1, 2, 3], x => x * x)
 替换数组元素，修改原数组
 
 ```js
-Array.prototype.copyWithin(target, start = 0, end = this.length)
+Array.prototype.copyWithin(target, (start = 0), (end = this.length));
 ```
 
 ```js
-[1, 2, 3, 4, 5].copyWithin(0, 3)
-// => [4, 5, 3, 4, 5]
+[1, 2, 3, 4, 5].copyWithin(0, 3)[
+  // => [4, 5, 3, 4, 5]
 
-// -2相当于3号位，-1相当于4号位
-[1, 2, 3, 4, 5].copyWithin(0, -2, -1)
+  // -2相当于3号位，-1相当于4号位
+  (1, 2, 3, 4, 5)
+].copyWithin(0, -2, -1);
 // => [4, 2, 3, 4, 5]
 
 // 将2号位到数组结束，复制到0号位
@@ -878,14 +871,14 @@ i32a.copyWithin(0, 2);
 #### Array.find
 
 ```js
-arr.find(fn)
-arr.findIndex(fn)
+arr.find(fn);
+arr.findIndex(fn);
 ```
 
 #### Spread Array
 
 ```js
-arr2.push(...arr1)
+arr2.push(...arr1);
 ```
 
 ### New Object API
@@ -900,17 +893,15 @@ const score = {
   todd: 19,
   ken: 4,
   gant: 41
-}
+};
 
-Object
-  .keys(score)
-  .map(k => score[k])
+Object.keys(score).map(k => score[k]);
 // => [ 42, 19, 4, 41 ]
 
-Object.values(score)
+Object.values(score);
 // => [ 42, 19, 4, 41 ]
 
-Object.entries(score)
+Object.entries(score);
 /**
  * =>
  * [
@@ -951,7 +942,7 @@ const firstName = 'Michael';
 const lastName = 'Jackson';
 const year = 1958;
 
-export {firstName, lastName, year};
+export { firstName, lastName, year };
 ```
 
 ```js
@@ -1013,19 +1004,22 @@ console.log(bb.__proto__ === BB.prototype);
 implement iterator with `Symbol.iterator`
 
 ```js
-function methodsIterator() {  
+function methodsIterator() {
   let index = 0;
-  let methods = Object.keys(this).filter((key) => {
-    return typeof this[key] === 'function';
-  }).map(key => this[key]);
+  let methods = Object.keys(this)
+    .filter(key => {
+      return typeof this[key] === 'function';
+    })
+    .map(key => this[key]);
   return {
-    next: () => ({ // Conform to Iterator protocol
-      done : index >= methods.length,
+    next: () => ({
+      // Conform to Iterator protocol
+      done: index >= methods.length,
       value: methods[index++]
     })
   };
 }
-let myMethods = {  
+let myMethods = {
   toString: function() {
     return '[object myMethods]';
   },
@@ -1035,7 +1029,7 @@ let myMethods = {
   numbers: [1, 5, 6],
   [Symbol.iterator]: methodsIterator // Conform to Iterable Protocol
 };
-for (let method of myMethods) {  
+for (let method of myMethods) {
   console.log(method); // logs methods `toString` and `sumNumbers`
 }
 ```
@@ -1047,7 +1041,7 @@ modify default object behavior with `Proxy` and `Reflect`
 ```js
 Proxy(target, {
   set: function(target, name, value, receiver) {
-    const success = Reflect.set(target,name, value, receiver);
+    const success = Reflect.set(target, name, value, receiver);
     if (success) {
       log('property ' + name + ' on ' + target + ' set to ' + value);
     }
@@ -1090,7 +1084,7 @@ const map2 = map1.set{ 'b': 2 };
 
 ### 闭包(closure)
 
-两个函数都维持着对外部作用域 Counter 的引用，因此总可以访问Counter作用域内定义的变量count(外部局部变量)
+两个函数都维持着对外部作用域 Counter 的引用，因此总可以访问 Counter 作用域内定义的变量 count(外部局部变量)
 
 - 函数外部不可对函数内部进行赋值或引用
 - 但函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部，即内部引用外部)
@@ -1105,13 +1099,13 @@ const map2 = map1.set{ 'b': 2 };
 ```js
 const partialFromBind = (fn, ...args) => {
   return fn.bind(null, ...args);
-}
+};
 
 const partial = (fn, ...args) => {
   return (...rest) => {
     return fn(...args, ...rest);
-  }
-}
+  };
+};
 ```
 
 ### Currying
@@ -1119,17 +1113,17 @@ const partial = (fn, ...args) => {
 chain of multiple single argument functions
 
 ```js
-const add = x => y => x + y
+const add = x => y => x + y;
 ```
 
 ```javascript
 function schonfinkelize(fn) {
   const slice = Array.prototype.slice,
-  stored_args = slice.call(arguments, 1);
+    stored_args = slice.call(arguments, 1);
 
-  return function () {
+  return function() {
     const new_args = slice.call(arguments),
-    args = stored_args.concat(new_args);
+      args = stored_args.concat(new_args);
     return fn.apply(null, args);
   };
 }
@@ -1215,16 +1209,16 @@ if there’s any pending call back waiting to be executed:
 
 ```js
 for (let ii = 0; ii < macrotask.length; ii++) {
-  eval(macrotask[ii])()
+  eval(macrotask[ii])();
 
   if (microtask.length != 0) {
     // process all microtasks
     for (let __i = 0; __i < microtask.length; __i++) {
-      eval(microtask[__i])()
+      eval(microtask[__i])();
     }
 
     // empty microtask
-    microtask = []
+    microtask = [];
   }
 
   // next macrotask in next loop iteration
@@ -1245,7 +1239,8 @@ const foo = () => {
   setTimeout(bar, 0);
   new Promise((resolve, reject) => {
     resolve('Promise resolved');
-  }).then(res => console.log(res))
+  })
+    .then(res => console.log(res))
     .catch(err => console.log(err));
   baz();
 };
@@ -1262,36 +1257,36 @@ As above code, using `setTimeout` with `0` seconds timer
 helps to defer execution of `Promise` and `bar` until the **stack** is **empty**.
 
 ```js
-console.log("1");
+console.log('1');
 
-setTimeout(()=>{
-    console.log(2)
-    Promise.resolve().then(()=>{
-        console.log(3);
-        process.nextTick(function foo() {
-            console.log(4);
-        });
-    })
-})
-
-Promise.resolve().then(()=>{
-    console.log(5);
-    setTimeout(()=>{
-        console.log(6)
-    })
-    Promise.resolve().then(()=>{
-        console.log(7);
-    })
-})
-
-process.nextTick(function foo() {
-    console.log(8);
+setTimeout(() => {
+  console.log(2);
+  Promise.resolve().then(() => {
+    console.log(3);
     process.nextTick(function foo() {
-        console.log(9);
+      console.log(4);
     });
+  });
 });
 
-console.log("10")
+Promise.resolve().then(() => {
+  console.log(5);
+  setTimeout(() => {
+    console.log(6);
+  });
+  Promise.resolve().then(() => {
+    console.log(7);
+  });
+});
+
+process.nextTick(function foo() {
+  console.log(8);
+  process.nextTick(function foo() {
+    console.log(9);
+  });
+});
+
+console.log('10');
 // 1 10 8 9 5 7 2 3 4 6
 ```
 
@@ -1300,17 +1295,17 @@ Promise 构造函数本身是同步函数
 ```js
 console.log('script start');
 
-const promise1 = new Promise(function (resolve) {
+const promise1 = new Promise(function(resolve) {
   console.log('promise1');
   resolve();
   console.log('promise1 end');
-}).then(function () {
+}).then(function() {
   console.log('promise2');
 });
 
-setTimeout(function(){
+setTimeout(function() {
   console.log('settimeout');
-})
+});
 
 console.log('script end');
 
@@ -1361,20 +1356,26 @@ setTimeout
 当调用栈没有同步函数时, 直接执行任务队列里的函数
 
 ```js
-function test () {
+function test() {
   console.log('start');
 
   setTimeout(() => {
     console.log('children2');
-    Promise.resolve().then(() => {console.log('children2-1')});
+    Promise.resolve().then(() => {
+      console.log('children2-1');
+    });
   }, 0);
 
   setTimeout(() => {
     console.log('children3');
-    Promise.resolve().then(() => {console.log('children3-1')});
+    Promise.resolve().then(() => {
+      console.log('children3-1');
+    });
   }, 0);
 
-  Promise.resolve().then(() => {console.log('children1')});
+  Promise.resolve().then(() => {
+    console.log('children1');
+  });
   console.log('end');
 }
 
@@ -1500,7 +1501,7 @@ Paint Order:
 ```js
 const DOM = tazimi.util.Dom;
 
-DOM.method.call( /* 关注 this 指针*/ );
+DOM.method.call(/* 关注 this 指针*/);
 ```
 
 ### 字符串
@@ -1521,18 +1522,18 @@ str = str + 'one' + 'two';
 #### **倒序**循环可提升性能
 
 ```js
-for (let i = item.length; i--;) {
-    process(items[i]);
+for (let i = item.length; i--; ) {
+  process(items[i]);
 }
 
 let j = items.length;
 while (j--) {
-    process(items[i]);
+  process(items[i]);
 }
 
 let k = items.length;
 do {
-    process(items[k]);
+  process(items[k]);
 } while (k--);
 ```
 
@@ -1567,9 +1568,9 @@ while (i) {
 
 ```js
 try {
-    recursion();
+  recursion();
 } catch (ex) {
-    console.error('error info');
+  console.error('error info');
 }
 ```
 
@@ -1581,19 +1582,19 @@ try {
 - no need to register new event listeners for newer children
 
 ```js
-window.onload = function(){
-    const oUl = document.getElementById("ul");
-    const aLi = oUl.getElementsByTagName("li");
+window.onload = function() {
+  const oUl = document.getElementById('ul');
+  const aLi = oUl.getElementsByTagName('li');
 
-    oUl.onmouseover = function (e) {
-        const e = e || window.event;
-        const target = e.target || e.srcElement;
+  oUl.onmouseover = function(e) {
+    const e = e || window.event;
+    const target = e.target || e.srcElement;
 
-        //alert(target.innerHTML);
+    //alert(target.innerHTML);
 
-        if (target.nodeName.toLowerCase() == "li") {
-            target.style.background = "red";
-        }
+    if (target.nodeName.toLowerCase() == 'li') {
+      target.style.background = 'red';
+    }
 
     // 阻止默认行为并取消冒泡
     if (typeof e.preventDefault === 'function') {
@@ -1603,17 +1604,17 @@ window.onload = function(){
       e.returnValue = false;
       e.cancelBubble = true;
     }
+  };
+
+  oUl.onmouseout = function(e) {
+    const e = e || window.event;
+    const target = e.target || e.srcElement;
+
+    //alert(target.innerHTML);
+
+    if (target.nodeName.toLowerCase() == 'li') {
+      target.style.background = '';
     }
-
-    oUl.onmouseout = function(e) {
-        const e = e || window.event;
-        const target = e.target || e.srcElement;
-
-        //alert(target.innerHTML);
-
-        if (target.nodeName.toLowerCase() == "li") {
-            target.style.background = "";
-        }
 
     // 阻止默认行为并取消冒泡
     if (typeof e.preventDefault === 'function') {
@@ -1623,8 +1624,8 @@ window.onload = function(){
       e.returnValue = false;
       e.cancelBubble = true;
     }
-    }
-}
+  };
+};
 ```
 
 ### 缓存模式
@@ -1658,14 +1659,14 @@ function requireScript(file, callback) {
   const newjs = document.createElement('script');
 
   // IE
-  newjs.onreadystatechange = function () {
+  newjs.onreadystatechange = function() {
     if (newjs.readyState === 'loaded' || newjs.readyState === 'complete') {
       newjs.onreadystatechange = null;
       callback();
     }
   };
   // others
-  newjs.onload = function () {
+  newjs.onload = function() {
     callback();
   };
 
@@ -1715,10 +1716,10 @@ function toArray(coll) {
 **获取**或改变布局的操作会导致渲染树**变化队列**刷新,执行渲染队列中的"待处理变化",重排 DOM 元素
 
 ```js
-offsetTop/Left/Width/Height
-scrollTop/Left/Width/Height
-clientTop/Left/Width/Height
-getComputedStyle()
+offsetTop / Left / Width / Height;
+scrollTop / Left / Width / Height;
+clientTop / Left / Width / Height;
+getComputedStyle();
 ```
 
 #### 批量修改 DOM
@@ -1777,7 +1778,7 @@ read css -> write css (only re-layout/paint/composite once)
 
 ### 定时器(防止脚本阻塞)
 
-JavaScript　代码与 UI 共享线程
+JavaScript 　代码与 UI 共享线程
 
 setTimeout()/setInterval()
 
@@ -1794,19 +1795,17 @@ button.onclick = function() {
   setTimeout(function() {
     document.getElementById('notice').style.color = 'red';
   }, 250);
-}
+};
 ```
 
 - 分解任务
 
 ```js
 function saveDocument(id) {
-
   // 利用闭包封装待执行任务
   const tasks = [openDocument, writeText, closeDocument, updateUI];
 
   setTimeout(function() {
-
     // 执行下一个任务
     const task = tasks.shift();
     task(id);
@@ -1826,7 +1825,6 @@ function processArray(items, process, callback) {
   const todo = items.concat();
 
   setTimeout(function() {
-
     process(todo.shift());
 
     if (todo.length > 0) {
@@ -1851,7 +1849,7 @@ function timedProcessArray(items, process, callback) {
     // 一次批处理任务持续 0.05s
     do {
       process(todo.shift());
-    } while (todo.length < 0 && (+new Date() - start < 50));
+    } while (todo.length < 0 && +new Date() - start < 50);
 
     if (todo.length > 0) {
       setTimeout(arguments.callee, 25);
@@ -1914,7 +1912,7 @@ self.onmessage = function(event) {
     jsonData = JSON.parse(jsonText);
 
   self.postMessage(jsonData);
-}
+};
 ```
 
 ```js
@@ -1935,18 +1933,18 @@ worker.postMessage(jsonText);
 
 #### 数据格式
 
-|Format|Size (bytes)|Download time (ms)|Parse time (ms)|Total load time (ms)|
-|:-----|-----:|----------:|----------:|----------:|
-|Verbose XML|582,960|999.4|343.1|1342.5|
-|Verbose JSON-P|487,913|598.2|0.0|598.2|
-|Simple XML|437,960|475.1|83.1|558.2|
-|Verbose JSON|487,895|527.7|26.7|554.4|
-|Simple JSON|392,895|498.7|29.0|527.7|
-|Simple JSON-P|392,913|454.0|3.1|457.1|
-|Array JSON|292,895|305.4|18.6|324.0|
-|Array JSON-P|292,912|316.0|3.4|319.4|
-|Custom Format (script insertion)|222,912|66.3|11.7|78.0|
-|Custom Format (XHR)|222,892|63.1|14.5|77.6|
+| Format                           | Size (bytes) | Download (ms) | Parse (ms) |
+| :------------------------------- | -----------: | ------------: | ---------: |
+| Verbose XML                      |      582,960 |         999.4 |      343.1 |
+| Verbose JSON-P                   |      487,913 |         598.2 |        0.0 |
+| Simple XML                       |      437,960 |         475.1 |       83.1 |
+| Verbose JSON                     |      487,895 |         527.7 |       26.7 |
+| Simple JSON                      |      392,895 |         498.7 |       29.0 |
+| Simple JSON-P                    |      392,913 |         454.0 |        3.1 |
+| Array JSON                       |      292,895 |         305.4 |       18.6 |
+| Array JSON-P                     |      292,912 |         316.0 |        3.4 |
+| Custom Format (script insertion) |      222,912 |          66.3 |       11.7 |
+| Custom Format (XHR)              |      222,892 |          63.1 |       14.5 |
 
 #### Ajax 缓存
 
@@ -1977,11 +1975,11 @@ function xhrRequest(url, callback) {
       // Store the response on the local cache.
       localCache[url] = req.responseText;
       callback.success(req.responseText);
-    };
-  }
+    }
+  };
 }
 
-req.open("GET", url, true);
+req.open('GET', url, true);
 // req.set();
 req.send(null);
 ```
@@ -2001,7 +1999,7 @@ req.send(null);
 ```js
 // 这个是用来获取当前时间戳的
 function now() {
-  return +new Date()
+  return +new Date();
 }
 
 /**
@@ -2012,41 +2010,42 @@ function now() {
  * @param  {boolean}  immediate   设置为ture时，是否立即调用函数
  * @return {function}             返回客户调用函数
  */
-function debounce (func, wait = 50, immediate = true) {
-  let timer, context, args
+function debounce(func, wait = 50, immediate = true) {
+  let timer, context, args;
 
   // 延迟执行函数
-  const later = () => setTimeout(() => {
-    // 延迟函数执行完毕，清空缓存的定时器序号
-    timer = null
-    // 延迟执行的情况下，函数会在延迟函数中执行
-    // 使用到之前缓存的参数和上下文
-    if (!immediate) {
-      func.apply(context, args)
-      context = args = null
-    }
-  }, wait)
+  const later = () =>
+    setTimeout(() => {
+      // 延迟函数执行完毕，清空缓存的定时器序号
+      timer = null;
+      // 延迟执行的情况下，函数会在延迟函数中执行
+      // 使用到之前缓存的参数和上下文
+      if (!immediate) {
+        func.apply(context, args);
+        context = args = null;
+      }
+    }, wait);
 
   // 这里返回的函数是每次实际调用的函数
   return function(...params) {
     // 如果没有创建延迟执行函数（later），就创建一个
     if (!timer) {
-      timer = later()
+      timer = later();
       // 如果是立即执行，调用函数
       // 否则缓存参数和调用上下文
       if (immediate) {
-        func.apply(this, params)
+        func.apply(this, params);
       } else {
-        context = this
-        args = params
+        context = this;
+        args = params;
       }
-    // 如果已有延迟执行函数（later），调用的时候清除原来的并重新设定一个
-    // 这样做延迟函数会重新计时
+      // 如果已有延迟执行函数（later），调用的时候清除原来的并重新设定一个
+      // 这样做延迟函数会重新计时
     } else {
-      clearTimeout(timer)
-      timer = later()
+      clearTimeout(timer);
+      timer = later();
     }
-  }
+  };
 }
 ```
 
@@ -2061,7 +2060,7 @@ function throttle(action) {
       action();
       isRunning = false;
     });
-  }
+  };
 }
 ```
 
@@ -2077,59 +2076,59 @@ function throttle(action) {
  * @return {function}             返回客户调用函数
  */
 _.throttle = function(func, wait, options) {
-    var context, args, result;
-    var timeout = null;
-    // 之前的时间戳
-    var previous = 0;
-    // 如果 options 没传则设为空对象
-    if (!options) options = {};
-    // 定时器回调函数
-    var later = function() {
-      // 如果设置了 leading，就将 previous 设为 0
-      // 用于下面函数的第一个 if 判断
-      previous = options.leading === false ? 0 : _.now();
-      // 置空一是为了防止内存泄漏，二是为了下面的定时器判断
-      timeout = null;
+  var context, args, result;
+  var timeout = null;
+  // 之前的时间戳
+  var previous = 0;
+  // 如果 options 没传则设为空对象
+  if (!options) options = {};
+  // 定时器回调函数
+  var later = function() {
+    // 如果设置了 leading，就将 previous 设为 0
+    // 用于下面函数的第一个 if 判断
+    previous = options.leading === false ? 0 : _.now();
+    // 置空一是为了防止内存泄漏，二是为了下面的定时器判断
+    timeout = null;
+    result = func.apply(context, args);
+    if (!timeout) context = args = null;
+  };
+  return function() {
+    // 获得当前时间戳
+    var now = _.now();
+    // 首次进入前者肯定为 true
+    // 如果需要第一次不执行函数
+    // 就将上次时间戳设为当前的
+    // 这样在接下来计算 remaining 的值时会大于0
+    if (!previous && options.leading === false) previous = now;
+    // 计算剩余时间
+    var remaining = wait - (now - previous);
+    context = this;
+    args = arguments;
+    // 如果当前调用已经大于上次调用时间 + wait
+    // 或者用户手动调了时间
+    // 如果设置了 trailing，只会进入这个条件
+    // 如果没有设置 leading，那么第一次会进入这个条件
+    // 还有一点，你可能会觉得开启了定时器那么应该不会进入这个 if 条件了
+    // 其实还是会进入的，因为定时器的延时
+    // 并不是准确的时间，很可能你设置了2秒
+    // 但是他需要2.2秒才触发，这时候就会进入这个条件
+    if (remaining <= 0 || remaining > wait) {
+      // 如果存在定时器就清理掉否则会调用二次回调
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+      previous = now;
       result = func.apply(context, args);
       if (!timeout) context = args = null;
-    };
-    return function() {
-      // 获得当前时间戳
-      var now = _.now();
-      // 首次进入前者肯定为 true
-      // 如果需要第一次不执行函数
-      // 就将上次时间戳设为当前的
-      // 这样在接下来计算 remaining 的值时会大于0
-      if (!previous && options.leading === false) previous = now;
-      // 计算剩余时间
-      var remaining = wait - (now - previous);
-      context = this;
-      args = arguments;
-      // 如果当前调用已经大于上次调用时间 + wait
-      // 或者用户手动调了时间
-      // 如果设置了 trailing，只会进入这个条件
-      // 如果没有设置 leading，那么第一次会进入这个条件
-      // 还有一点，你可能会觉得开启了定时器那么应该不会进入这个 if 条件了
-      // 其实还是会进入的，因为定时器的延时
-      // 并不是准确的时间，很可能你设置了2秒
-      // 但是他需要2.2秒才触发，这时候就会进入这个条件
-      if (remaining <= 0 || remaining > wait) {
-        // 如果存在定时器就清理掉否则会调用二次回调
-        if (timeout) {
-          clearTimeout(timeout);
-          timeout = null;
-        }
-        previous = now;
-        result = func.apply(context, args);
-        if (!timeout) context = args = null;
-      } else if (!timeout && options.trailing !== false) {
-        // 判断是否设置了定时器和 trailing
-        // 没有的话就开启一个定时器
-        // 并且不能不能同时设置 leading 和 trailing
-        timeout = setTimeout(later, remaining);
-      }
-      return result;
-    };
+    } else if (!timeout && options.trailing !== false) {
+      // 判断是否设置了定时器和 trailing
+      // 没有的话就开启一个定时器
+      // 并且不能不能同时设置 leading 和 trailing
+      timeout = setTimeout(later, remaining);
+    }
+    return result;
+  };
 };
 ```
 
@@ -2168,12 +2167,12 @@ useEffect(() => {
 
 ```js
 document.addEventListener('DOMContentLoaded', function() {
-  console.log("DOM 挂载时间: ", Date.now() - timerStart);
+  console.log('DOM 挂载时间: ', Date.now() - timerStart);
   // 性能日志上报
 });
 
 window.addEventListener('load', function() {
-  console.log("所有资源加载完成时间: ", Date.now()-timerStart);
+  console.log('所有资源加载完成时间: ', Date.now() - timerStart);
   // 性能日志上报
 });
 ```
@@ -2181,7 +2180,7 @@ window.addEventListener('load', function() {
 ```js
 // 计算加载时间
 function getPerformanceTiming() {
-  const  performance = window.performance;
+  const performance = window.performance;
   if (!performance) {
     // 当前浏览器不支持
     console.log('你的浏览器不支持 performance 接口');
@@ -2238,33 +2237,33 @@ const OPTION_A = 1,
   OPTION_D = 8,
   OPTION_E = 16;
 
-const options = OPTION_A|OPTION_C|OPTION_D;
+const options = OPTION_A | OPTION_C | OPTION_D;
 ```
 
 #### Math 对象
 
 ```js
-Math.E
-Math.LN10
-Math.LN2
-Math.LOG2E
-Math.LOG10E
-Math.PI
-Math.SQRT1_2
-Math.SQRT2
+Math.E;
+Math.LN10;
+Math.LN2;
+Math.LOG2E;
+Math.LOG10E;
+Math.PI;
+Math.SQRT1_2;
+Math.SQRT2;
 
-Math.abs(num)
-Math.exp(num)
-Math.log(num)
-Math.pow(num,power)
-Math.sqrt(num)
-Math.acos(x)
-Math.asin(x)
-Math.atan(x)
-Math.atan2(y,x)
-Math.cos(x)
-Math.sin(x)
-Math.tan(x)
+Math.abs(num);
+Math.exp(num);
+Math.log(num);
+Math.pow(num, power);
+Math.sqrt(num);
+Math.acos(x);
+Math.asin(x);
+Math.atan(x);
+Math.atan2(y, x);
+Math.cos(x);
+Math.sin(x);
+Math.tan(x);
 ```
 
 ## Browser Performance
@@ -2294,11 +2293,11 @@ Math.tan(x)
 
 常见的工具有 Google 的 Lighthouse，webpagetest，pagespeed 等
 
-|                  优点               |             缺点             |
-| :-----------------------------------| :--------------------------: |
-|                实现简单              |     无法还原全部真实场景     |
+| 优点                                   |             缺点             |
+| :------------------------------------- | :--------------------------: |
+| 实现简单                               |     无法还原全部真实场景     |
 | 能采集到丰富的数据，如硬件指标或瀑布图 |    登录等场景需要额外解决    |
-|        不影响真实用户的访问性能       |       单次数据不够稳定       |
+| 不影响真实用户的访问性能               |       单次数据不够稳定       |
 | 可以提供页面加载幻灯片等可视化分析途径 | 数据量较小，无法发挥更大价值 |
 
 #### 真实用户监控
@@ -2310,21 +2309,21 @@ Math.tan(x)
 
 - 真实用户监控的优缺点
 
-|                  优点               |                   缺点                 |
-|:------------------------------------|:--------------------------------------|
-|   无需配置模拟条件，完全还原真实场景   | 一定程度影响真实用户的访问性能及流量消耗 |
-|     不存在登录等需要额外解决的场景     |           无法采集硬件相关指标         |
-|   数据样本足够庞大，可以减少统计误差   |  受传输限制无法采集完整的资源加载瀑布图  |
-| 新年数据可与其它数据关联，产生更大价值 |          无法可视化展示加载过程         |
+| 优点                                   | 缺点                             |
+| :------------------------------------- | :------------------------------- |
+| 无需配置模拟条件，完全还原真实场景     | 影响真实用户的访问性能及流量消耗 |
+| 不存在登录等需要额外解决的场景         | 无法采集硬件相关指标             |
+| 数据样本足够庞大，可以减少统计误差     | 无法采集完整的资源加载瀑布图     |
+| 新年数据可与其它数据关联，产生更大价值 | 无法可视化展示加载过程           |
 
 #### 对比
 
-|     对比项    |         合成监控            |         真实用户监控             |
-|:------------| :----------------------------| :-------------------------------|
-| 实现难度及成本|           较低               |           较高                  |
-| 采集数据丰富度|           丰富               |           基础                  |
-|   数据样本量  |         较小                 |           大(视业务体量)         |
-|    适合场景  | 定性分析, 配合 CI 小数据量分析 | 定量分析, 结合业务数据进行深度挖掘 |
+| 对比项         | 合成监控               | 真实用户监控               |
+| :------------- | :--------------------- | :------------------------- |
+| 实现难度及成本 | 较低                   | 较高                       |
+| 采集数据丰富度 | 丰富                   | 基础                       |
+| 数据样本量     | 较小                   | 大(视业务体量)             |
+| 适合场景       | 定性分析, 小数据量分析 | 定量分析, 业务数据深度挖掘 |
 
 #### 方案
 
@@ -2385,7 +2384,7 @@ mp4 smaller than gif
 ```html
 <!-- ffmpeg -i dog.gif dog.mp4 -->
 <video autoplay loop muted playsinline>
-  <source src="dog.mp4" type="video/mp4">
+  <source src="dog.mp4" type="video/mp4" />
 </video>
 ```
 
@@ -2393,9 +2392,9 @@ WebP 25-35% smaller than jpg/png
 
 ```html
 <picture>
-  <source type="image/webp" srcset="flower.webp">
-  <source type="image/jpeg" srcset="flower.jpg">
-  <img src="flower.jpg">
+  <source type="image/webp" srcset="flower.webp" />
+  <source type="image/jpeg" srcset="flower.jpg" />
+  <img src="flower.jpg" />
 </picture>
 ```
 
@@ -2412,10 +2411,11 @@ reduce image transfer sizes by average of ~20%
 - [Jimp](https://github.com/oliver-moran/jimp)
 
 ```html
-<img srcset="flower-small.jpg 480w, flower-large.jpg 1080w"
+<img
+  srcset="flower-small.jpg 480w, flower-large.jpg 1080w"
   sizes="50vw"
   src="flower-large.jpg"
->
+/>
 ```
 
 ### Data Loading
@@ -2438,25 +2438,25 @@ reduce image transfer sizes by average of ~20%
 - Lazy Loading Polyfill
 
 ```html
-<img data-src="flower.jpg" class="lazyload">
+<img data-src="flower.jpg" class="lazyload" />
 ```
 
 ```js
 window.addEventListener('scroll', function(event) {
-  Array.from(document.querySelectorAll('.lazyload')).forEach((image) => {
+  Array.from(document.querySelectorAll('.lazyload')).forEach(image => {
     if (image.slideIntoView(event.getBoundingClientRect())) {
       image.setAttribute('src', image.dataset.src);
     }
-  })
+  });
 });
 ```
 
 - Native Lazy Loading
 
 ```html
-<img src="flower.jpg" lazyload="auto">
-<img src="flower.jpg" lazyload="on">
-<img src="flower.jpg" lazyload="off">
+<img src="flower.jpg" lazyload="auto" />
+<img src="flower.jpg" lazyload="on" />
+<img src="flower.jpg" lazyload="off" />
 ```
 
 #### JavaScript Lazy Loading
@@ -2475,7 +2475,8 @@ window.addEventListener('scroll', function(event) {
 ```html
 <script src="myscript.js"></script>
 <script src="myscript.js" defer></script>
-<script src="myscript.js" async></script>k
+<script src="myscript.js" async></script
+>k
 ```
 
 ```jsx
@@ -2483,8 +2484,8 @@ const DetailsComponent = lazy(() => import('./details'));
 const PageComponent = () => {
   <Suspense fallback={<div>Loading...</div>}>
     <DetailsComponent />
-  </Suspense>
-}
+  </Suspense>;
+};
 ```
 
 #### Babel Config for JavaScript
@@ -2498,7 +2499,7 @@ const PageComponent = () => {
         "targets": {
           "esmodules": true,
           "node": ">= 8",
-          "browsers": "> 0.25%",
+          "browsers": "> 0.25%"
         },
         "useBuiltIns": "usage"
       }
@@ -2547,7 +2548,7 @@ o.y = 2;
 o.x = 1;
 
 // Shape chain: Shape(x)
-const o = { x: 1};
+const o = { x: 1 };
 ```
 
 array shape: Shape('length'), 'length' => 0 Offset, Writable
@@ -2569,27 +2570,27 @@ V8 use ICs to memorize information (same shape) where to find properties on obje
 ### Monkey Patch
 
 ```js
-let _wr = function (type) {
-    let orig = window.history[type];
+let _wr = function(type) {
+  let orig = window.history[type];
 
-    return function () {
-        let rv = orig.apply(this, arguments);
-        let e = new Event(type.toLowerCase());
-        e.arguments = arguments;
-        window.dispatchEvent(e);
-        return rv;
-    };
+  return function() {
+    let rv = orig.apply(this, arguments);
+    let e = new Event(type.toLowerCase());
+    e.arguments = arguments;
+    window.dispatchEvent(e);
+    return rv;
+  };
 };
 
 window.history.pushState = _wr('pushState');
 window.history.replaceState = _wr('replaceState');
 
-window.addEventListener('pushstate', function (event) {
-    // doing something
+window.addEventListener('pushstate', function(event) {
+  // doing something
 });
 
-window.addEventListener('replacestate', function (event) {
-    // doing something
+window.addEventListener('replacestate', function(event) {
+  // doing something
 });
 ```
 
@@ -2623,11 +2624,11 @@ Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 
 - 变量: 名词前缀
 - 方法/函数: 动词前缀
-- _method: 表示私有化方法
+- \_method: 表示私有化方法
 - 普通函数: 驼峰命名法(camelCase)
 - 构造函数: 帕斯卡命名法(PascalCase)
 - 缩略词和缩写都必须是全部大写/小写
-- 对于 jQuery 对象的变量使用 $ 作为前缀
+- 对于 jQuery 对象的变量使用 \$ 作为前缀
 
 ### Variable Style
 
@@ -2636,9 +2637,11 @@ Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 
 ```js
 // bad
-let i, len, dragonball,
-    items = getItems(),
-    goSportsTeam = true;
+let i,
+  len,
+  dragonball,
+  items = getItems(),
+  goSportsTeam = true;
 
 // bad
 let i;
@@ -2663,8 +2666,8 @@ let length;
   // JavaScript 把它解释为
   // let a = ( b = ( c = 1 ) );
   // let 关键词只适用于变量 a ；变量 b 和变量 c 则变成了全局变量。
-  let a = b = c = 1;
-}());
+  let a = (b = c = 1);
+})();
 
 console.log(a); // throws ReferenceError
 console.log(b); // 1
@@ -2675,7 +2678,7 @@ console.log(c); // 1
   let a = 1;
   let b = a;
   let c = a;
-}());
+})();
 
 console.log(a); // throws ReferenceError
 console.log(b); // throws ReferenceError
@@ -2686,17 +2689,13 @@ console.log(c); // throws ReferenceError
 
 ```js
 // bad
-const foo =
-  superLongLongLongLongLongLongLongLongFunctionName();
+const foo = superLongLongLongLongLongLongLongLongFunctionName();
 
 // bad
-const foo
-  = 'superLongLongLongLongLongLongLongLongString';
+const foo = 'superLongLongLongLongLongLongLongLongString';
 
 // good
-const foo = (
-  superLongLongLongLongLongLongLongLongFunctionName()
-);
+const foo = superLongLongLongLongLongLongLongLongFunctionName();
 
 // good
 const foo = 'superLongLongLongLongLongLongLongLongString';
@@ -2720,9 +2719,9 @@ const item = {};
 // bad
 const atom = {
   lukeSkywalker: lukeSkywalker,
-  addValue: function (value) {
+  addValue: function(value) {
     return atom.value + value;
-  },
+  }
 };
 
 // good
@@ -2730,7 +2729,7 @@ const atom = {
   lukeSkywalker,
   addValue(value) {
     return atom.value + value;
-  },
+  }
 };
 ```
 
@@ -2824,7 +2823,7 @@ const { left, top } = processInput(input);
 ### String Style
 
 - use `'` not `"`
-- use \`${}\` not `'str1' + 'str2'`
+- use \`\${}\` not `'str1' + 'str2'`
 
 ### Function Style
 
@@ -2837,7 +2836,7 @@ function foo() {
 }
 
 // bad
-const foo = function () {
+const foo = function() {
   // ...
 };
 
@@ -2885,7 +2884,7 @@ function handleThings(opts = {}) {
 
 ```js
 // bad
-arr.map((x) => x + 1);
+arr.map(x => x + 1);
 arr.map((x, index) => x + index);
 [1, 2, 3].map(x => {
   const y = x + 1;
@@ -2897,7 +2896,7 @@ arr.map(x => x + 1);
 arr.map((x, index) => {
   return x + index;
 });
-[1, 2, 3].map((x) => {
+[1, 2, 3].map(x => {
   const y = x + 1;
   return x * y;
 });
@@ -2907,19 +2906,20 @@ arr.map((x, index) => {
 
 ```js
 // bad
-['get', 'post', 'put'].map(httpMethod => Object.prototype.hasOwnProperty.call(
+['get', 'post', 'put'].map(httpMethod =>
+  Object.prototype.hasOwnProperty.call(
     httpMagicObjectWithAVeryLongName,
-    httpMethod,
+    httpMethod
   )
 );
 
 // good
-['get', 'post', 'put'].map(httpMethod => (
+['get', 'post', 'put'].map(httpMethod =>
   Object.prototype.hasOwnProperty.call(
     httpMagicObjectWithAVeryLongName,
-    httpMethod,
+    httpMethod
   )
-));
+);
 ```
 
 ### Module Style
@@ -2965,10 +2965,7 @@ import { named1, named2 } from 'foo';
 import foo, { named1, named2 } from 'foo';
 
 // best
-import foo, {
-  named1,
-  named2,
-} from 'foo';
+import foo, { named1, named2 } from 'foo';
 ```
 
 - not export `let`
@@ -3001,7 +2998,7 @@ sum === 15;
 
 // good
 let sum = 0;
-numbers.forEach((num) => {
+numbers.forEach(num => {
   sum += num;
 });
 sum === 15;
@@ -3018,7 +3015,7 @@ for (let i = 0; i < numbers.length; i++) {
 
 // good
 const increasedByOne = [];
-numbers.forEach((num) => {
+numbers.forEach(num => {
   increasedByOne.push(num + 1);
 });
 
@@ -3030,12 +3027,12 @@ const increasedByOne = numbers.map(num => num + 1);
 
 ```js
 // bad
-function * foo() {
+function* foo() {
   // ...
 }
 
 // bad
-const bar = function *() {
+const bar = function*() {
   // ...
 };
 
@@ -3045,7 +3042,7 @@ function* foo() {
 }
 
 // good
-const foo = function* () {
+const foo = function*() {
   // ...
 };
 ```
@@ -3147,52 +3144,46 @@ switch (foo) {
 
 ```js
 // bad
-const arr = [
-  [0, 1], [2, 3], [4, 5],
+const arr = [[0, 1], [2, 3], [4, 5]];
+
+const objectInArray = [
+  {
+    id: 1
+  },
+  {
+    id: 2
+  }
 ];
 
-const objectInArray = [{
-  id: 1,
-}, {
-  id: 2,
-}];
-
-const numberInArray = [
-  1, 2,
-];
+const numberInArray = [1, 2];
 
 // good
 const arr = [[0, 1], [2, 3], [4, 5]];
 
 const objectInArray = [
   {
-    id: 1,
+    id: 1
   },
   {
-    id: 2,
-  },
+    id: 2
+  }
 ];
 
-const numberInArray = [
-  1,
-  2,
-];
+const numberInArray = [1, 2];
 ```
 
 - use `()` wrap multiple line assignment or arguments
 
 ```js
 // good
-const foo = (
-  superLongLongLongLongLongLongLongLongFunctionName()
-);
+const foo = superLongLongLongLongLongLongLongLongFunctionName();
 
-['get', 'post', 'put'].map(httpMethod => (
+['get', 'post', 'put'].map(httpMethod =>
   Object.prototype.hasOwnProperty.call(
     httpMagicObjectWithAVeryLongName,
-    httpMethod,
+    httpMethod
   )
-));
+);
 ```
 
 ### 空格 Style
@@ -3200,7 +3191,7 @@ const foo = (
 Good places to use a white space include:
 
 - ,/; 后
-- +,-,*,/,<,>,= 前后
+- +,-,\*,/,<,>,= 前后
 - function () {}
 - function foo() {}
 - } if/for/while () {}
@@ -3210,7 +3201,7 @@ Good places to use a white space include:
 
 ```javascript
 let d = 0,
-a = b + 1;
+  a = b + 1;
 
 if (a && b && c) {
   d = a % c;
@@ -3220,12 +3211,12 @@ if (a && b && c) {
 // antipattern
 // missing or inconsistent spaces
 // make the code confusing
-let d= 0,
-a =b+1;
+let d = 0,
+  a = b + 1;
 
-if (a&& b&&c) {
-  d=a %c;
-  a+= d;
+if (a && b && c) {
+  d = a % c;
+  a += d;
 }
 ```
 
@@ -3304,7 +3295,7 @@ if (a&& b&&c) {
 ### 可测试代码
 
 - 完整注释
-- 最小复杂度 = (扇入 * 扇出) ^ 2
+- 最小复杂度 = (扇入 \* 扇出) ^ 2
 - 可隔离性: 最小依赖性 + 松耦合性
 
 #### 范例
@@ -3317,7 +3308,7 @@ V(G) = e - n + 2 **<10**
 
 ### 函数复杂度
 
-函数复杂度 = (扇入 * 扇出) ^ 2
+函数复杂度 = (扇入 \* 扇出) ^ 2
 
 #### 扇出(引用) **<7**
 
@@ -3348,7 +3339,7 @@ const Global = 'global';
 
 function A() {
   Global = 'A';
-};
+}
 function B() {
   Global = 'B';
 }
@@ -3357,7 +3348,7 @@ function B() {
 #### 控制耦合(3)
 
 ```js
-const  absFactory = new AbstractFactory({ env: 'TEST' });
+const absFactory = new AbstractFactory({ env: 'TEST' });
 ```
 
 #### 印记耦合(2)
@@ -3365,7 +3356,7 @@ const  absFactory = new AbstractFactory({ env: 'TEST' });
 ```js
 O.prototype.makeBread = function(args) {
   return new Bread(args.type, args.size);
-}
+};
 
 O.makeBread({ type: wheat, size: 99, name: 'foo' });
 ```
@@ -3398,30 +3389,30 @@ O.makeBread({ type: wheat, size: 99, name: 'foo' });
 const mockery = require('mockery');
 mockery.enable();
 
-describe("Sum suite File", function() {
-    beforeEach(function() {
-        mockery.registerAllowable('./mySumFS', true);
-    });
+describe('Sum suite File', function() {
+  beforeEach(function() {
+    mockery.registerAllowable('./mySumFS', true);
+  });
 
-    afterEach(function() {
-        mockery.deregisterAllowable('./mySumFS');
-    });
+  afterEach(function() {
+    mockery.deregisterAllowable('./mySumFS');
+  });
 
-    it("Adds Integers!", function() {
-        const filename = "numbers";
-        const fsMock = {
-            readFileSync: function (path, encoding) {
-                expect(path).toEqual(filename);
-                expect(encoding).toEqual('utf8');
-                return JSON.stringify({ a: 9, b: 3 });
-            }
-        };
+  it('Adds Integers!', function() {
+    const filename = 'numbers';
+    const fsMock = {
+      readFileSync: function(path, encoding) {
+        expect(path).toEqual(filename);
+        expect(encoding).toEqual('utf8');
+        return JSON.stringify({ a: 9, b: 3 });
+      }
+    };
 
-        mockery.registerMock('fs', fsMock);
-        const mySum = require('./mySumFS');
-        expect(mySum.sum(filename)).toEqual(12);
-        mockery.deregisterMock('fs');
-    });
+    mockery.registerMock('fs', fsMock);
+    const mySum = require('./mySumFS');
+    expect(mySum.sum(filename)).toEqual(12);
+    mockery.deregisterMock('fs');
+  });
 });
 ```
 
@@ -3433,20 +3424,20 @@ describe("Sum suite File", function() {
 var devtools = /./;
 devtools.toString = function() {
   this.opened = true;
-}
+};
 
 console.log('%c', devtools);
 // devtools.opened will become true if/when the console is opened
 ```
 
 ```js
-console.log/info/warn/error
-console.dir/dirxml/table; // different output style
+console.log / info / warn / error;
+console.dir / dirxml / table; // different output style
 console.assert;
-console.group/groupEnd
-console.time/timeEnd;
-console.profile/profileEnd;
-console.count
+console.group / groupEnd;
+console.time / timeEnd;
+console.profile / profileEnd;
+console.count;
 console.trace;
 ```
 
@@ -3462,27 +3453,29 @@ console.log('%c ...', 'css style');
 
 ```js
 // display array of object (tabular data)
-const transactions = [{
-  id: "7cb1-e041b126-f3b8",
-  seller: "WAL0412",
-  buyer: "WAL3023",
-  price: 203450,
-  time: 1539688433
-},
-{
-  id: "1d4c-31f8f14b-1571",
-  seller: "WAL0452",
-  buyer: "WAL3023",
-  price: 348299,
-  time: 1539688433
-},
-{
-  id: "b12c-b3adf58f-809f",
-  seller: "WAL0012",
-  buyer: "WAL2025",
-  price: 59240,
-  time: 1539688433
-}];
+const transactions = [
+  {
+    id: '7cb1-e041b126-f3b8',
+    seller: 'WAL0412',
+    buyer: 'WAL3023',
+    price: 203450,
+    time: 1539688433
+  },
+  {
+    id: '1d4c-31f8f14b-1571',
+    seller: 'WAL0452',
+    buyer: 'WAL3023',
+    price: 348299,
+    time: 1539688433
+  },
+  {
+    id: 'b12c-b3adf58f-809f',
+    seller: 'WAL0012',
+    buyer: 'WAL2025',
+    price: 59240,
+    time: 1539688433
+  }
+];
 
 console.table(data, ['id', 'price']);
 ```
@@ -3494,7 +3487,7 @@ debugger;
 ```
 
 ```js
-copy(obj) // to clipborad
+copy(obj); // to clipborad
 ```
 
 ```js
@@ -3521,15 +3514,15 @@ window.addEventListener('error', function() {
 const traceProperty = (object, property) => {
   let value = object[property];
   Object.defineProperty(object, property, {
-    get () {
+    get() {
       console.trace(`${property} requested`);
       return value;
     },
-    set (newValue) {
+    set(newValue) {
       console.trace(`setting ${property} to `, newValue);
       value = newValue;
-    },
-  })
+    }
+  });
 };
 ```
 
@@ -3552,7 +3545,7 @@ ndb index.js
 ```js
 // 特性检测
 if (document.getElementById) {
-    element = document.getElementById(id);
+  element = document.getElementById(id);
 }
 ```
 
@@ -3597,12 +3590,12 @@ long click reload: multiple reload options e.g clean cache
 
 #### capture default eventListener
 
-> $0: the reference to the currently selected element in the Elements panel
+> \$0: the reference to the currently selected element in the Elements panel
 
 ```js
 const listener = getEventListeners($0).click[0].listener;
 $0.removeEventListener('click', listener);
-$0.addEventListener('click', (e) => {
+$0.addEventListener('click', e => {
   // do something
   // ...
 
@@ -3724,45 +3717,39 @@ if ('serviceWorker' in navigator) {
 
 ```js
 function isImage(fetchRequest) {
-    return fetchRequest.method === "GET"
-           && fetchRequest.destination === "image";
+  return fetchRequest.method === 'GET' && fetchRequest.destination === 'image';
 }
 
-self.addEventListener('fetch', (e) => {
-    e.respondWith(
-        fetch(e.request)
-            .then((response) => {
-                if (response.ok) return response;
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    fetch(e.request)
+      .then(response => {
+        if (response.ok) return response;
 
-                // User is online, but response was not ok
-                if (isImage(e.request)) {
-                    // Get broken image placeholder from cache
-                    return caches.match("/broken.png");
-                }
-
-            })
-            .catch((err) => {
-
-                // User is probably offline
-                if (isImage(e.request)) {
-                    // Get broken image placeholder from cache
-                    return caches.match("/broken.png");
-                }
-
-            })
-    )
+        // User is online, but response was not ok
+        if (isImage(e.request)) {
+          // Get broken image placeholder from cache
+          return caches.match('/broken.png');
+        }
+      })
+      .catch(err => {
+        // User is probably offline
+        if (isImage(e.request)) {
+          // Get broken image placeholder from cache
+          return caches.match('/broken.png');
+        }
+      })
+  );
 });
 
-self.addEventListener('install', (e) => {
-    self.skipWaiting();
-    e.waitUntil(
-        caches.open("precache").then((cache) => {
-
-            // Add /broken.png to "precache"
-            cache.add("/broken.png");
-
-        })
-    );
+self.addEventListener('install', e => {
+  self.skipWaiting();
+  e.waitUntil(
+    caches.open('precache').then(cache => {
+      // Add /broken.png to "precache"
+      cache.add('/broken.png');
+    })
+  );
 });
 ```
 
@@ -3776,9 +3763,9 @@ self.addEventListener('install', (e) => {
 
 ## HTTP/2
 
-在 HTTP/1.x 中，每次请求都会建立一次HTTP连接:
+在 HTTP/1.x 中，每次请求都会建立一次 HTTP 连接:
 
-- 串行的文件传输. 当请求 a 文件时, b文件只能等待
+- 串行的文件传输. 当请求 a 文件时, b 文件只能等待
 - 连接数过多
 
 HTTP/2 的多路复用就是为了解决上述的两个性能问题.

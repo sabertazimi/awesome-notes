@@ -20,8 +20,8 @@
     - [常用多态函数](#常用多态函数)
     - [window](#window)
   - [Ajax Module](#ajax-module)
-    - [$.getJSON](#getjson)
-    - [$.ajax](#ajax)
+    - [\$.getJSON](#\getjson)
+    - [\$.ajax](#\ajax)
   - [Animation Module](#animation-module)
     - [Tween Object](#tween-object)
 
@@ -174,7 +174,10 @@ class Promise {
       } else if (this.$state === 'REJECTED') {
         _onRejected(this.$internalValue);
       } else {
-        this.$chained.push({ onFulfilled: _onFulfilled, onRejected: _onRejected });
+        this.$chained.push({
+          onFulfilled: _onFulfilled,
+          onRejected: _onRejected
+        });
       }
     });
   }
@@ -197,8 +200,8 @@ class Promise {
 createDocumentFragment:
 
 多次使用节点方法(如：appendChild)绘制页面，每次都要刷新页面一次。
-使用document_createDocumentFragment()创建一个文档碎片，把所有的新结点附加在其上，
-然后把文档碎片的内容一次性添加到document中，提升性能
+使用 document_createDocumentFragment()创建一个文档碎片，把所有的新结点附加在其上，
+然后把文档碎片的内容一次性添加到 document 中，提升性能
 
 ```js
 function domManip(parentEles, target, callback) {
@@ -218,37 +221,37 @@ after() {
 ### structure
 
 ```javascript
-$("selector").html("tag+text");
-$("selector").text("text");
+$('selector').html('tag+text');
+$('selector').text('text');
 
-$("selector").clone();
-$("selector").remove();
-$("selector").appendTo("selector");
+$('selector').clone();
+$('selector').remove();
+$('selector').appendTo('selector');
 
-$("selector").parent();
-$("selector").children();
+$('selector').parent();
+$('selector').children();
 ```
 
 ```js
-$("selector").index();
+$('selector').index();
 ```
 
 ### class
 
 ```javascript
-$("selector").addClass("");
-$("selector").removeClass("");
+$('selector').addClass('');
+$('selector').removeClass('');
 ```
 
 ```javascript
-hidden
+hidden;
 ```
 
 ### style
 
 ```javascript
-$("selector").css("color", "red");
-$("selector").prop("disable", "true");
+$('selector').css('color', 'red');
+$('selector').prop('disable', 'true');
 ```
 
 ## Events Module
@@ -300,24 +303,24 @@ $(document).ready(function(){});
 
 ```js
 $(window).scroll(function(event) {});
-$(document).height()           //返回整个网页的高度
-$(window).height()               //返回窗口高度
-$(window).scrollTop() //返回滚动条距网页顶部距离
+$(document).height(); //返回整个网页的高度
+$(window).height(); //返回窗口高度
+$(window).scrollTop(); //返回滚动条距网页顶部距离
 ```
 
 ## Ajax Module
 
-### $.getJSON
+### \$.getJSON
 
 ```javascript
 $.getJSON(url, data, success(data, status, xhr));
 
-$.getJSON("test.js", function(json){
-  alert("JSON Data: " + json.users[3].name);
+$.getJSON('test.js', function(json) {
+  alert('JSON Data: ' + json.users[3].name);
 });
 ```
 
-### $.ajax
+### \$.ajax
 
 ```javascript
 $.ajax({

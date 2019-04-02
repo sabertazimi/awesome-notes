@@ -1,4 +1,3 @@
-
 # Git Basic Note
 
 <!-- TOC -->
@@ -37,14 +36,14 @@
       - [Basic Branch](#basic-branch)
       - [remote branch](#remote-branch)
     - [Advanced Branch Workflow](#advanced-branch-workflow)
-      - [master类型 && develop类型](#master类型--develop类型)
-      - [feature类型分支满足](#feature类型分支满足)
-      - [release类型分支满足](#release类型分支满足)
-      - [hotfix类型分支满足](#hotfix类型分支满足)
-      - [issues类型分支满足](#issues类型分支满足)
-      - [trials类型分支满足](#trials类型分支满足)
-      - [basedOn类型分支满足](#basedon类型分支满足)
-      - [work类型分支满足](#work类型分支满足)
+      - [master 类型 && develop 类型](#master-类型--develop-类型)
+      - [feature 类型分支满足](#feature-类型分支满足)
+      - [release 类型分支满足](#release-类型分支满足)
+      - [hotfix 类型分支满足](#hotfix-类型分支满足)
+      - [issues 类型分支满足](#issues-类型分支满足)
+      - [trials 类型分支满足](#trials-类型分支满足)
+      - [basedOn 类型分支满足](#basedon-类型分支满足)
+      - [work 类型分支满足](#work-类型分支满足)
   - [Inside](#inside)
     - [add detail](#add-detail)
     - [commit detail](#commit-detail)
@@ -227,7 +226,7 @@ git add -p
 ### commit
 
 - -a: 跳过暂存阶段(git add)
-- -v: 显示详细diff信息
+- -v: 显示详细 diff 信息
 
 ```bash
 git commit -a -v
@@ -242,11 +241,16 @@ git commit --amend -a -v
 #### 提交信息格式
 
 ```html
-firstline - <type>(<scope>): <subject>
-  (emptyline)
-<body>
-  (emptyline)
-<footer>
+firstline -
+<type
+  >(<scope
+    >):
+    <subject>
+      (emptyline)
+      <body>
+        (emptyline)
+        <footer></footer></body></subject></scope
+></type>
 ```
 
 ##### Message Subject(First Line)
@@ -291,11 +295,11 @@ no more than 50 characters
 
 ### stash
 
-- git stash: 备份当前的工作区的内容，将当前的工作区内容保存到Git栈
-- git stash apply/pop: 从Git栈中读取最近一次保存的内容，恢复工作区的相关内容
+- git stash: 备份当前的工作区的内容，将当前的工作区内容保存到 Git 栈
+- git stash apply/pop: 从 Git 栈中读取最近一次保存的内容，恢复工作区的相关内容
 - git stash branch `<branch>`: 新建分支，并在该分支上恢复储藏内容
-- git stash list: 显示Git栈内的所有备份
-- git stash clear: 清空Git栈
+- git stash list: 显示 Git 栈内的所有备份
+- git stash clear: 清空 Git 栈
 
 ```bash
 # git stash unapply
@@ -304,7 +308,7 @@ git stash show -p stash@{0} | git apply -R
 
 ### revert
 
-- 重新提交前n次的commit
+- 重新提交前 n 次的 commit
 
 ```bash
 git revert -n
@@ -318,7 +322,7 @@ git revert -n
 git rm filename
 ```
 
---cached: 保留磁盘文件(仅从git库移除文件)
+--cached: 保留磁盘文件(仅从 git 库移除文件)
 
 ```bash
 git rm --cached filename
@@ -332,8 +336,8 @@ git mv old_path new_path
 
 ### log
 
-- -p: 打印diff差异信息
-- -n: n为十进制数字,显示最近n次信息
+- -p: 打印 diff 差异信息
+- -n: n 为十进制数字,显示最近 n 次信息
 - --stat: 打印简略统计信息
 - --graph: 显示分支合并历史
 - --pretty=: 设置日志格式
@@ -350,38 +354,38 @@ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks p
 
 #### pretty-format
 
-|选项|说明|
-|:-----|:-------------------------|
-|%H|提交对象(commit)的完整哈希字串|
-|%h|提交对象的简短哈希字串|
-|%T|树对象(tree)的完整哈希字串|
-|%t|树对象的简短哈希字串|
-|%P|父对象(parent)的完整哈希字串|
-|%p|父对象的简短哈希字串|
-|%an|作者(author)的名字|
-|%ae|作者的电子邮件地址|
-|%ad|作者修订日期(可以用\|-date=\|选项定制格式)|
-|%ar|作者修订日期，按多久以前的方式显示|
-|%cn|提交者(committer)的名字|
-|%ce|提交者的电子邮件地址|
-|%cd|提交日期|
-|%cr|提交日期,按多久以前的方式显示|
-|%s|提交说明|
+| 选项 | 说明                                       |
+| :--- | :----------------------------------------- |
+| %H   | 提交对象(commit)的完整哈希字串             |
+| %h   | 提交对象的简短哈希字串                     |
+| %T   | 树对象(tree)的完整哈希字串                 |
+| %t   | 树对象的简短哈希字串                       |
+| %P   | 父对象(parent)的完整哈希字串               |
+| %p   | 父对象的简短哈希字串                       |
+| %an  | 作者(author)的名字                         |
+| %ae  | 作者的电子邮件地址                         |
+| %ad  | 作者修订日期(可以用\|-date=\|选项定制格式) |
+| %ar  | 作者修订日期，按多久以前的方式显示         |
+| %cn  | 提交者(committer)的名字                    |
+| %ce  | 提交者的电子邮件地址                       |
+| %cd  | 提交日期                                   |
+| %cr  | 提交日期,按多久以前的方式显示              |
+| %s   | 提交说明                                   |
 
 #### 常用选项
 
-|选项|说明|
-|:-----|:-------------------------|
-|-p|打印diff差异信息|
-|-n|n为十进制数字,显示最近n次信息|
-|--stat|打印简略统计信息|
-|--graph|显示分支合并历史|
-|--pretty=|设置日志格式|
-|--author=|指定作者|
-|--committer=|指定提交者|
-|--after=/--since=|限制日志时间|
-|--before=/--until=|限制日志时间 "2008-01-15" "2 years 1 day 3 minutes ago"|
-|--help|
+| 选项               | 说明                                                    |
+| :----------------- | :------------------------------------------------------ |
+| -p                 | 打印 diff 差异信息                                      |
+| -n                 | n 为十进制数字,显示最近 n 次信息                        |
+| --stat             | 打印简略统计信息                                        |
+| --graph            | 显示分支合并历史                                        |
+| --pretty=          | 设置日志格式                                            |
+| --author=          | 指定作者                                                |
+| --committer=       | 指定提交者                                              |
+| --after=/--since=  | 限制日志时间                                            |
+| --before=/--until= | 限制日志时间 "2008-01-15" "2 years 1 day 3 minutes ago" |
+| --help             |
 
 ### reflog
 
@@ -453,8 +457,8 @@ git show <tagname(v1.4)>
 
 创建标签:
 
-- 不加-m会调用core.editor)
-- 省略commit序列,标签添加至最新提交
+- 不加-m 会调用 core.editor)
+- 省略 commit 序列,标签添加至最新提交
 
 创建附注(annotated)标签
 
@@ -563,7 +567,7 @@ git branch -v(详细信息) -vv(详细远程信息) --merged(显示合并至当�
 
 #### remote branch
 
-本地分支跟踪远程分支(在此本地分支上运行git pull自动抓取),2种方式:
+本地分支跟踪远程分支(在此本地分支上运行 git pull 自动抓取),2 种方式:
 
 - 设置当前所在本地分支跟踪某一远程分支
 
@@ -572,7 +576,7 @@ git branch -u [remotename]/[branch]
 ```
 
 - 创建并切换至新的本地分支(跟踪某一远程分支)
-  - --track: 本地分支由git自动命名
+  - --track: 本地分支由 git 自动命名
   - -b: 本地分支由创建者命名
 
 ```bash
@@ -583,106 +587,113 @@ git checkout -b [new-local-branch] [remotename]/[branch]
 
 ### Advanced Branch Workflow
 
-1. master类型分支，名为?|master或master，其中?为开发代号
-2. develop类型分支，名为?|develop或develop，其中?为开发代号
-3. feature类型分支，名为feature/*或?|feature/*，其中*为特征描述
-4. release类型分支，名为release-*或?|release-*，其中*为要发布的版本号
-5. hotfix类型分支，名为hotfix-*或?|hotfix-*，其中*为要发布的版本号
-6. issues类型分支，名为issues/*或?|issues/*，其中*为问题描述
-7. trials类型分支，名为？%trials.*，？为此分支的父分支，*为描述的名称（或直接为？%trials）
-8. basedOn类型分支，名为basedOn或?|basedOn，?为其来源的master分支的开发代号
-9. work类型分支，名为work.***/basedOn-?-*，***代表此描述此work的名称，?为其所基于的分支的开发代号，最后一个*代表其在？|basedOn上所基于的分支的版本号或状态名
+1. master 类型分支，名为?|master 或 master，其中?为开发代号
+2. develop 类型分支，名为?|develop 或 develop，其中?为开发代号
+3. feature 类型分支，名为 feature/_或?|feature/_，其中\*为特征描述
+4. release 类型分支，名为 release-_或?|release-_，其中\*为要发布的版本号
+5. hotfix 类型分支，名为 hotfix-_或?|hotfix-_，其中\*为要发布的版本号
+6. issues 类型分支，名为 issues/_或?|issues/_，其中\*为问题描述
+7. trials 类型分支，名为？%trials.*，？为此分支的父分支，*为描述的名称（或直接为？%trials）
+8. basedOn 类型分支，名为 basedOn 或?|basedOn，?为其来源的 master 分支的开发代号
+9. work 类型分支，名为 work.**_/basedOn-?-_，\***代表此描述此 work 的名称,
+   ?为其所基于的分支的开发代号，最后一个\*代表其在？|basedOn 上所基于的分支的版本号或状态名
 
-下面介绍模型中的约定，并定义gg-*这样的抽象动作来完成约定中的行为
+下面介绍模型中的约定，并定义 gg-\*这样的抽象动作来完成约定中的行为
 
 约定:
 
-#### master类型 && develop类型
+#### master 类型 && develop 类型
 
-*多长期分支模式*: master分支与develop分支都是长期分支,区别在于分支的**稳定性等级** - master > develop
+_多长期分支模式_: master 分支与 develop 分支都是长期分支,区别在于分支的**稳定性等级** - master > develop
 
 e.g master/develop/next
 
 - 每一次的提交都必须有意义
 
-git在每次提交的时候要求输入对此提交的概括，这个概括不能为空。
+git 在每次提交的时候要求输入对此提交的概括，这个概括不能为空。
 
-正确的提交概括：更新了程序doc
+正确的提交概括：更新了程序 doc
 错误的提交概括：updates
 
-- 开发型任务中的master类型与develop类型分支必须成对出现，master分支的推进只能来源与release分支和hotfix分支的合并，禁止在master分支上直接提交
+- 开发型任务中的 master 类型与 develop 类型分支必须成对出现,
+  master 分支的推进只能来源与 release 分支和 hotfix 分支的合并，禁止在 master 分支上直接提交
 
-> master分支上只有我们推送上去的稳定版本的程序，develop分支上的程序一直处于开发状态，不稳定。
-在开发型任务中使用gg-init进行版本控制的初始化，建立配套的master～develop分支对。
-在使用型任务中使用gg-work-init进行版本控制的初始化，拉取需要使用的稳定版本程序的master分支，并初始化对应的basedOn分支（见9）。
+> master 分支上只有我们推送上去的稳定版本的程序，develop 分支上的程序一直处于开发状态，不稳定。
+> 在开发型任务中使用 gg-init 进行版本控制的初始化，建立配套的 master ～ develop 分支对。
+> 在使用型任务中使用 gg-work-init 进行版本控制的初始化,
+> 拉取需要使用的稳定版本程序的 master 分支，并初始化对应的 basedOn 分支（见 9）.
 
-#### feature类型分支满足
+#### feature 类型分支满足
 
-  1. 只能从develop类型分支上创建
-  2. 最终必须合并到develop类型分支
-  3. 最终分支被删除
-
-> 每当有新特性需要加入的时候，我们应该从develop类型分支上新建一个feature类型分支，完成新特性的开发和测试后将特性合并到develop类型分支上。
-在develop类型分支上使用gg-feature-open featureName建立并转向一个名为feature/featureName的新分支
-在一个feature类型分支上使用gg-feature-close把这个分支的工作合并到develop类型分支上，删除此分支，完成一个特性的开发
-
-#### release类型分支满足
-
-  1. 只能从develop类型分支上创建
-  2. 最终必须同时合并到master类型分支(发布新的版本)和develop类型分支(基于新版本的进一步开发)
-  3. 最终分支被删除
-
-> 每当工作进入到一个较为稳定阶段的时候，我们可以使用gg-release-open versionNum建立并转向一个名为release-versionNum的临时分支，在这个分支上允许进行小的改动（比如修改一下readme文件中的版本号），然后使用gg-release-close将此版本合并（发布）到master类型分支上，同时合并到develop类型分支上，然后删除此分支。
-
-#### hotfix类型分支满足
-
-1. 只能从master类型分支上创建
-2. 最终必须同时合并到master类型分支(发布新的热补丁版本)和develop类型分支(基于新版本的进一步开发)
+1. 只能从 develop 类型分支上创建
+2. 最终必须合并到 develop 类型分支
 3. 最终分支被删除
 
-> 当新版本发布后发现必须马上解决的严重bug时，我们应该使用gg-hotfix-open versionNum建立并转向一个名为hotfix-versionNum的临时分支，在这个分支上完成bug的修复，然后使用gg-hotfix-close将此版本合并（发布）到master类型分支上，同时合并到develop类型分支上，然后删除此分支。
+> 每当有新特性需要加入的时候，我们应该从 develop 类型分支上新建一个 feature 类型分支，完成新特性的开发和测试后将特性合并到 develop 类型分支上。
+> 在 develop 类型分支上使用 gg-feature-open featureName 建立并转向一个名为 feature/featureName 的新分支
+> 在一个 feature 类型分支上使用 gg-feature-close 把这个分支的工作合并到 develop 类型分支上，删除此分支，完成一个特性的开发
 
-#### issues类型分支满足
+#### release 类型分支满足
 
-  1. 只能从develop类型分支上创建
-  2. 最终必须合并到develop类型分支
-  3. 最终分支被删除
+1. 只能从 develop 类型分支上创建
+2. 最终必须同时合并到 master 类型分支(发布新的版本)和 develop 类型分支(基于新版本的进一步开发)
+3. 最终分支被删除
 
-> 注解：每当有（比较复杂的）问题需要解决的时候，我们应该从develop类型分支上新建一个issues类型分支，完成问题的调试后合并到develop类型分支上。
-在develop类型分支上使用gg-issues-open featureName建立并转向一个名为issues/issuesName的新分支
-在一个issues类型分支上使用gg-issues-close把这个分支的工作合并到develop类型分支上，然后删除此分支，解决了一个复杂的问题
-issues类型和feature类型的实现方式一模一样，仅仅有名字上面的差别。
+> 每当工作进入到一个较为稳定阶段的时候，可以使用 gg-release-open versionNum 建立一个名为 release-versionNum 的临时分支,
+> 在这个分支上允许进行小的改动（比如修改一下 readme 文件中的版本号）,
+> 然后使用 gg-release-close 将此版本合并（发布）到 master 类型分支上，同时合并到 develop 类型分支上，然后删除此分支.
 
-#### trials类型分支满足
+#### hotfix 类型分支满足
 
-- 可以从除了release类型分支以外的任何类型分支上创建
+1. 只能从 master 类型分支上创建
+2. 最终必须同时合并到 master 类型分支(发布新的热补丁版本)和 develop 类型分支(基于新版本的进一步开发)
+3. 最终分支被删除
+
+> 当新版本发布后发现必须马上解决的严重 bug 时，使用 gg-hotfix-open versionNum 建立名为 hotfix-versionNum 的临时分支,
+> 在这个分支上完成 bug 的修复，然后使用 gg-hotfix-close 将此版本合并（发布）到 master 类型分支上，同时合并到 develop 类型分支上，然后删除此分支.
+
+#### issues 类型分支满足
+
+1. 只能从 develop 类型分支上创建
+2. 最终必须合并到 develop 类型分支
+3. 最终分支被删除
+
+> 注解：每当有（比较复杂的）问题需要解决的时候，应该从 develop 类型分支上新建一个 issues 类型分支，完成问题的调试后合并到 develop 类型分支上。
+> 在 develop 类型分支上使用 gg-issues-open featureName 建立并转向一个名为 issues/issuesName 的新分支
+> 在一个 issues 类型分支上使用 gg-issues-close 把这个分支的工作合并到 develop 类型分支上，然后删除此分支，解决了一个复杂的问题
+> issues 类型和 feature 类型的实现方式一模一样，仅仅有名字上面的差别。
+
+#### trials 类型分支满足
+
+- 可以从除了 release 类型分支以外的任何类型分支上创建
 - 在这个分支上请发挥想象力大胆实验
-  - 接受实验结果，把实验过程并入父分支，称为good-close
-  - 实验结果不理想，放弃实验结果，从实验开始前重新来过，称为bad-close
+  - 接受实验结果，把实验过程并入父分支，称为 good-close
+  - 实验结果不理想，放弃实验结果，从实验开始前重新来过，称为 bad-close
 - 最终分支被删除
 
-> 在满足条件的分支A上工作，时不时会冒出一些大胆的想法，这个时候使用gg-trials-open trialsName创建并转向一个名为A/trials.trialsName的实验分支，在这个分支上进行疯狂的实验，然后
+> 在满足条件的分支 A 上工作，时不时会冒出一些大胆的想法
+> 这个时候使用 gg-trials-open trialsName 创建并转向一个名为 A/trials.trialsName 的实验分支，在这个分支上进行疯狂的实验
 
-#### basedOn类型分支满足
+#### basedOn 类型分支满足
 
-1. 从name|master建立并初始化为name|basedOn
-2. 只能从对应的master分支fork到此分支
+1. 从 name|master 建立并初始化为 name|basedOn
+2. 只能从对应的 master 分支 fork 到此分支
 3. 禁止在这个分支上提交
 
 > 这个分支是一个为了使工作流程更为清晰的缓存分支，
-> 分支上只有从master稳定分支上挑选出来的自己在工作中将要（尝试）使用的稳定版本。
-> 在basedOn类型分支上使用 gg-select 版本号
-> 从对应的master分支上选出一个稳定版本或使用gg-select-the-latest从对应的master分支上选择最新的版本，
-> fork到这个分支，并加上inUse-versionNum的标签
-> 从master到此分支的行为是fork，
-> 即有可能此分支的log为
+> 分支上只有从 master 稳定分支上挑选出来的自己在工作中将要（尝试）使用的稳定版本。
+> 在 basedOn 类型分支上使用 gg-select 版本号
+> 从对应的 master 分支上选出一个稳定版本或使用 gg-select-the-latest 从对应的 master 分支上选择最新的版本，
+> fork 到这个分支，并加上 inUse-versionNum 的标签
+> 从 master 到此分支的行为是 fork，
+> 即有可能此分支的 log 为
 > (init)v1.0===>v0.9=====>v0.8======>v1.3,
-> 这个分支上的commit来源于master，但是其分支提交历史与master分支无关
+> 这个分支上的 commit 来源于 master，但是其分支提交历史与 master 分支无关
 
-#### work类型分支满足
+#### work 类型分支满足
 
-1. 只能从basedOn类型分支上创建
-2. 可以借助basedOn分支升级
+1. 只能从 basedOn 类型分支上创建
+2. 可以借助 basedOn 分支升级
 
 ## Inside
 
@@ -819,22 +830,25 @@ print_git_objects
 - CC BY-NC-SA 3.0 License
 
 ```html
-<a rel="license"
-href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative
-Commons License" style="border-width:0"
-src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
-work is licensed under a <a rel="license"
-href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons
-Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"
+  ><img
+    alt="Creative
+Commons License"
+    style="border-width:0"
+    src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png"/></a
+><br />This work is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"
+  >Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a
+>.
 ```
 
 ```markdown
+\*\*
+** May you do good and not evil.
+** May you find forgiveness for yourself and forgive others.
+** May you share freely, never taking more than you give.
 **
-**    May you do good and not evil.
-**    May you find forgiveness for yourself and forgive others.
-**    May you share freely, never taking more than you give.
-**
-**
+\*\*
 ```
 
 ```markdown
@@ -846,9 +860,9 @@ Being a dick includes - but is not limited to - the following instances:
 
 1a. Outright copyright infringement - Don't just copy this and change the name.
 1b. Selling the unmodified original with no work done what-so-ever,
-  that's REALLY being a dick.
+that's REALLY being a dick.
 1c. Modifying the original work to contain hidden harmful content.
-  That would make you a PROPER dick.
+That would make you a PROPER dick.
 
 If you become rich through modifications, related worksrvices, or supporting
 the original work, share the love. Only a dick would make loads off this work
@@ -863,13 +877,13 @@ Homework Public License(HPL)
 
 Copyright (c) 2016 Yilong Liu
 
-This is for your reference only,not for your cheating -  Just don't be a dick.
+This is for your reference only,not for your cheating - Just don't be a dick.
 
 Being a dick includes - but is not limited to - the following instances:
 
 1a. Outright copyright infringement - Don't just copy this and change the name.
 1b. Reserve a copy of this project and tell your teacher
-  that it is your own homework - Plagiarism is shame.
+that it is your own homework - Plagiarism is shame.
 
 If you become rich through modifications, related worksrvices,
 or supporting the original work, share the love. Only a dick would make loads
@@ -901,10 +915,10 @@ section above first, and then thank the author(s) in Copyright section.
 
 Here are some suggested ways:
 
- - Email the authors a thank-you letter, and make friends with him/her/them.
- - Report bugs or issues.
- - Tell friends what a wonderful project this is.
- - And, sure, you can just express thanks in your mind without telling the world.
+- Email the authors a thank-you letter, and make friends with him/her/them.
+- Report bugs or issues.
+- Tell friends what a wonderful project this is.
+- And, sure, you can just express thanks in your mind without telling the world.
 
 Contributors of this project by forking have the option to add his/her name and
 forked project url at copyright and project url sections, but shall not delete
@@ -921,7 +935,7 @@ THE SOFTWARE.
 
 ### Teamwork
 
-如果在组织的托管空间创建版本库，一定要要为版本库指派一个拥有Push权限的团队，以免以“Fork + Pull”模式工作时，Pull Request没有人响应。
+如果在组织的托管空间创建版本库，一定要要为版本库指派一个拥有 Push 权限的团队，以免以“Fork + Pull”模式工作时，Pull Request 没有人响应。
 
 #### Pull Request Work Flow
 
@@ -934,7 +948,7 @@ THE SOFTWARE.
 
 ### Create Repo without Browser
 
-- 利用GitHub Repository API以及curl工具创建仓库
+- 利用 GitHub Repository API 以及 curl 工具创建仓库
 
 ```bash
 curl -u 'username' -d '{"name":"RepoName",
@@ -1052,7 +1066,7 @@ git reset $(git merge-base master $(git rev-parse --abbrev-ref HEAD))
 
 #### git mergetool
 
-外置merge工具
+外置 merge 工具
 
 #### git log
 
@@ -1195,7 +1209,7 @@ mbox 的格式来生成一系列的补丁以便你可以发送到一个邮件列
 
 #### git-note
 
-为特定commit添加note,一个commit只能有一个note
+为特定 commit 添加 note,一个 commit 只能有一个 note
 
 ## Other tools
 

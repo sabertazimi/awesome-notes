@@ -1430,8 +1430,7 @@ _named_ rows and columns
   grid-column-gap: 2rem;
   grid-row-gap: 1rem;
   grid-template-rows: [header] 100px [body] auto;
-  grid-template-columns:
-    [left-gutter] 1fr[sidebar] 4fr [content] 8fr [right-gutter] 1fr;
+  grid-template-columns: [l-gutter] 1fr[sidebar] 4fr [content] 8fr [r-gutter] 1fr;
 }
 
 .header {
@@ -2155,7 +2154,7 @@ background-position/background-size
 ```css
 .image-container {
   position: relative;
-  padding-bottom: calc( 2 / 3) * 100%; /* (height / width) ratio */
+  padding-bottom: calc(2 / 3) * 100%; /* (height / width) ratio */
 }
 
 .image-container > img {
@@ -2574,20 +2573,20 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 
 ### 设备特性
 
-| 属性                | 值                     | Min/Max | 描述                |
-| :------------------ | :--------------------- | :------ | :------------------|
-| aspect-ratio        | 整数/整数              | yes     | 渲染界面的宽高比例   |
-| device-aspect-ratio | 整数/整数              | yes     | 设备屏幕的宽高比例   |
+| 属性                | 值                     | Min/Max | 描述                 |
+| :------------------ | :--------------------- | :------ | :------------------- |
+| aspect-ratio        | 整数/整数              | yes     | 渲染界面宽高比例     |
+| device-aspect-ratio | 整数/整数              | yes     | 设备屏幕宽高比例     |
 | color               | 整数                   | yes     | 每种色彩的字节数     |
 | color-index         | 整数                   | yes     | 色彩表中的色彩数     |
 | height              | length                 | yes     | 渲染界面的高度       |
 | width               | length                 | yes     | 渲染界面的宽度       |
 | device-height       | length                 | yes     | 设备屏幕的输出高度   |
 | device-width        | length                 | yes     | 设备屏幕的输出宽度   |
-| grid                | 整数                   | no      | 是否是基于格栅的设备  |
-| monochrome          | 整数                   | yes     | 缓冲器中每像素字节    |
+| grid                | 整数                   | no      | 是否是基于格栅的设备 |
+| monochrome          | 整数                   | yes     | 缓冲器中每像素字节   |
 | resolution          | 分辨率(“dpi/dpcm”)     | yes     | 分辨率               |
-| scan                | Progressive interlaced | no      | tv 媒体类型的扫描方式 |
+| scan                | Progressive interlaced | no      | tv 媒体扫描方式      |
 | orientation         | Portrait/landscape     | no      | 横屏或竖屏           |
 
 #### Style for Print PDF

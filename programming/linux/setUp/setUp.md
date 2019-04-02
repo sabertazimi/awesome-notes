@@ -1,4 +1,3 @@
-
 # Linux Set Up
 
 <!-- TOC -->
@@ -390,7 +389,7 @@ brew cask install rtx       # 腾讯RTX
 brew cask install aliwangwang
 brew cask install thunder
 brew cask install baiducloud  # 百度网盘
-brew cask install youdao      # 有道词典  
+brew cask install youdao      # 有道词典
 
 brew cask install mplayerx    # 视频播放器
 brew cask install batterzip   # zip，付费

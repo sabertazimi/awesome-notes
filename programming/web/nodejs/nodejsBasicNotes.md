@@ -60,66 +60,21 @@
   - [package.json](#packagejson)
     - [bin](#bin)
     - [version](#version)
-  - [Awesome Package](#awesome-package)
-    - [CLI Tools](#cli-tools)
-    - [Http](#http)
-    - [File](#file)
-    - [Stream](#stream)
-    - [Format](#format)
-    - [Back-End DOM](#back-end-dom)
-    - [Deploy](#deploy)
-    - [Server](#server)
-    - [Storage](#storage)
-      - [Cookie/Session](#cookiesession)
-      - [DataBase](#database)
-      - [Security](#security)
-        - [Encrypt(加密)](#encrypt加密)
-    - [Documentation](#documentation)
-    - [Parser](#parser)
-      - [XML](#xml)
-      - [JSON](#json)
-      - [Programming Language](#programming-language)
-    - [MD5](#md5)
-    - [Base64](#base64)
-    - [Package](#package)
-    - [Automatic Workflow/Tools](#automatic-workflowtools)
-      - [Webpack](#webpack)
-    - [Minimalize](#minimalize)
-    - [Testing](#testing)
-      - [Unit Testing](#unit-testing)
-      - [Feature Testing](#feature-testing)
-      - [Higher Level Tools](#higher-level-tools)
-      - [Coverage](#coverage)
-      - [Small Libraries](#small-libraries)
-      - [Other Testing](#other-testing)
-    - [Performance](#performance)
-    - [Log](#log)
-    - [Search](#search)
-    - [Linter](#linter)
-    - [Template Engine](#template-engine)
-    - [Boilerplate](#boilerplate)
-      - [Other Boilerplate](#other-boilerplate)
-    - [Fonts](#fonts)
-    - [Images](#images)
-    - [Browser](#browser)
-    - [Lazy Load(懒加载)](#lazy-load懒加载)
-    - [Other Packages](#other-packages)
-  - [Spider](#spider)
 
 <!-- /TOC -->
 
-- Main         ./index.js, ./server.js, or ./yourentryfile.js in the root
-- Supporting files in         ./lib/
-- Static HTTP files in        ./public/
-- Views or templates in       ./views/
+- Main ./index.js, ./server.js, or ./yourentryfile.js in the root
+- Supporting files in ./lib/
+- Static HTTP files in ./public/
+- Views or templates in ./views/
 - Command-line executables in ./bin/
-- Tests in                    ./test/ (or ./spec/ if you’re a Jasmine cool-aid drinker)
-- npm scripts in              ./scripts/
-- Config in                   ./config/
-- Documentation in            ./doc/
-- Examples in                 ./examples/
-- Performance analysis in     ./benchmarks/
-- Native C/C++ source in      ./source/
+- Tests in ./test/ (or ./spec/ if you’re a Jasmine cool-aid drinker)
+- npm scripts in ./scripts/
+- Config in ./config/
+- Documentation in ./doc/
+- Examples in ./examples/
+- Performance analysis in ./benchmarks/
+- Native C/C++ source in ./source/
 
 ## Npm Cli
 
@@ -130,7 +85,7 @@ npm adduser
 mkdir proj/
 # 修改 package.json 可再次运行此命令
 # scope for everyone
-npm init --scope=<username>  
+npm init --scope=<username>
 
 # 修改 package.json 可再次运行此命令(不接模块名为自动更新)
 npm install -S <package>
@@ -264,7 +219,7 @@ npx gistUrl
 
 ## Basic Node Modules
 
-> exports和module.exports的区别
+> exports 和 module.exports 的区别
 
 exports 是 module.exports 的引用, 改变 exports 值无法改变 module.exports 值
 
@@ -319,20 +274,24 @@ process.stdin.pipe(process.stdout);
 ```js
 var cp = require('child_process');
 
-cp.exec('ls -l', {
+cp.exec(
+  'ls -l',
+  {
     encoding: 'uft-8',
     timeout: 0,
-  maxBuffer: 200 * 1024,
-  killSignal: 'SIGTERM',
-  setsid: false,
-  cwd: null,
-  env: null
-}, function (err, stdout, stderr) {
-  if (!err) {
-    console.log(stdout);
-    console.log(stderr);
+    maxBuffer: 200 * 1024,
+    killSignal: 'SIGTERM',
+    setsid: false,
+    cwd: null,
+    env: null
+  },
+  function(err, stdout, stderr) {
+    if (!err) {
+      console.log(stdout);
+      console.log(stderr);
+    }
   }
-});
+);
 ```
 
 ## File Module
@@ -353,7 +312,10 @@ fs.readdir('/path/to/file', function callback(err, fileNameArr) {});
 
 fs.createReadStream();
 
-src.pipe(dst1).pipe(dst2).pipe(dst3);  //  连接多个 stream
+src
+  .pipe(dst1)
+  .pipe(dst2)
+  .pipe(dst3); //  连接多个 stream
 ```
 
 ### Buffer Object
@@ -420,7 +382,9 @@ foo(a, b, function (err, param) {
 ### Export Modules
 
 ```js
-module.exports = function (args) { /* ... */ }
+module.exports = function(args) {
+  /* ... */
+};
 ```
 
 ### CallBack Function
@@ -451,7 +415,7 @@ server.on('request', function(req, res) {
 #### 属性
 
 ```js
-request.method  // POST GET
+request.method; // POST GET
 ```
 
 ### Response Object
@@ -467,56 +431,56 @@ typedef Stream response
 - 监听事件
 
 ```js
-response.on('data', function (data) {});
-response.on('error', function (error) {});
-response.on('end', function () {
-    // 结束阶段
-    stream.end();
+response.on('data', function(data) {});
+response.on('error', function(error) {});
+response.on('end', function() {
+  // 结束阶段
+  stream.end();
 });
 ```
 
 - 发出事件
 
 ```js
-response.end();  //  传输结束
+response.end(); //  传输结束
 ```
 
 #### 方法
 
 ```js
-response.setEncoding('utf8');  // 自动将 data 事件中 Buffer 对象转换成 String
+response.setEncoding('utf8'); // 自动将 data 事件中 Buffer 对象转换成 String
 
 //  content-type: text/plain
 //                application/json
-response.writeHead(200, { 'Content-Type': ''});
+response.writeHead(200, { 'Content-Type': '' });
 ```
 
 ### Http Get
 
 ```js
-http.get(url, function callback(response) { });
+http.get(url, function callback(response) {});
 ```
 
 ```js
-http.get(url, function (response) {
-    var pipeData = '';
+http.get(url, function(response) {
+  var pipeData = '';
 
-    response.setEncoding('utf8');
-    response.on('data', function (data) {
-        pipeData += data;
-    });
-    response.on('end', function () {
-        console.log(pipeData.length);
-        console.log(pipeData);
-    });
+  response.setEncoding('utf8');
+  response.on('data', function(data) {
+    pipeData += data;
+  });
+  response.on('end', function() {
+    console.log(pipeData.length);
+    console.log(pipeData);
+  });
 });
 ```
 
 ### Http Server
 
 ```js
-var server = http.createServer(function (request, response) {
-    // 处理请求的逻辑...
+var server = http.createServer(function(request, response) {
+  // 处理请求的逻辑...
 });
 server.listen(8000);
 ```
@@ -524,46 +488,45 @@ server.listen(8000);
 ### Sample
 
 ```js
-var net = require('net')
+var net = require('net');
 var chatServer = net.createServer(),
-
-// 用于检测僵尸客户端,用于及时清楚僵尸客户端
-clientList = []
+  // 用于检测僵尸客户端,用于及时清楚僵尸客户端
+  clientList = [];
 
 chatServer.on('connection', function(client) {
-    client.name = client.remoteAddress + ':' + client.remotePort
-    client.write('Hi ' + client.name + '!\n');
-    clientList.push(client)
+  client.name = client.remoteAddress + ':' + client.remotePort;
+  client.write('Hi ' + client.name + '!\n');
+  clientList.push(client);
 
-    client.on('data', function(data) {
-        broadcast(data, client)
-    })
-    client.on('end', function() {
-        clientList.splice(clientList.indexOf(client), 1)
-    })
-    client.on('error', function(e) {
-        console.log(e)
-    })
-})
+  client.on('data', function(data) {
+    broadcast(data, client);
+  });
+  client.on('end', function() {
+    clientList.splice(clientList.indexOf(client), 1);
+  });
+  client.on('error', function(e) {
+    console.log(e);
+  });
+});
 
 function broadcast(message, client) {
-    var cleanup = []
-    for(var i=0;i<clientList.length;i+=1) {
-        // 向其他人(排除自身)发送消息
-        if(client !== clientList[i]) {
-            if(clientList[i].writable) {
-                clientList[i].write(client.name + " says " + message)
-            } else {
-                cleanup.push(clientList[i])
-                clientList[i].destroy()
-            }
-        }
+  var cleanup = [];
+  for (var i = 0; i < clientList.length; i += 1) {
+    // 向其他人(排除自身)发送消息
+    if (client !== clientList[i]) {
+      if (clientList[i].writable) {
+        clientList[i].write(client.name + ' says ' + message);
+      } else {
+        cleanup.push(clientList[i]);
+        clientList[i].destroy();
+      }
     }
+  }
 
-    // 清楚僵尸客户端
-    for(i=0;i<cleanup.length;i+=1) {
-        clientList.splice(clientList.indexOf(cleanup[i]), 1)
-    }
+  // 清楚僵尸客户端
+  for (i = 0; i < cleanup.length; i += 1) {
+    clientList.splice(clientList.indexOf(cleanup[i]), 1);
+  }
 }
 
 chatServer.listen(9000);
@@ -583,38 +546,36 @@ socket.end();
 
 ```js
 var http = require('http'),
-    io = require('socket.io'),
-    fs = require('fs'),
-    sockFile = fs.readFileSync('socket.html');
+  io = require('socket.io'),
+  fs = require('fs'),
+  sockFile = fs.readFileSync('socket.html');
 
 server = http.createServer();
-server.on('request', function(req, res){
-    res.writeHead(200, {'content-type': 'text/html'});
-    res.end(sockFile);
+server.on('request', function(req, res) {
+  res.writeHead(200, { 'content-type': 'text/html' });
+  res.end(sockFile);
 });
 server.listen(8080);
 
 var socket = io.listen(server);
 
 // 命名空间
-socket.of('/upandrunning')
-.on('connection', function(client){
-    console.log('Client connected to Up and Running namespace.');
-    client.send("Welcome to 'Up and Running'");
+socket.of('/upandrunning').on('connection', function(client) {
+  console.log('Client connected to Up and Running namespace.');
+  client.send("Welcome to 'Up and Running'");
 });
-socket.of('/weather')
-.on('connection', function(client){
-    console.log('Client connected to Weather namespace.');
-    client.send("Welcome to 'Weather Updates'");
+socket.of('/weather').on('connection', function(client) {
+  console.log('Client connected to Weather namespace.');
+  client.send("Welcome to 'Weather Updates'");
 });
 ```
 
 ### Basic Methods
 
 ```js
-var serverInstance = net.createServer(function callback (socket) {});
+var serverInstance = net.createServer(function callback(socket) {});
 
-serverInstance.listen(portNumber);   // 开始监听特定端口
+serverInstance.listen(portNumber); // 开始监听特定端口
 ```
 
 ## URL Module
@@ -623,7 +584,7 @@ serverInstance.listen(portNumber);   // 开始监听特定端口
 
 #### parse
 
-解析处URL各个组成部分:
+解析处 URL 各个组成部分:
 
 - href
 - protocol
@@ -651,15 +612,15 @@ url.parse(request.url, true);
 var dns = require('dns');
 
 dns.lookup('google.com', 4, function(e, a) {
-    console.log(a);
+  console.log(a);
 });
 
-dns.resolve('tazimi.tk', 'A', function(e,r) {
-    if (e) {
-        console.log(e);
-    }
-    console.log(JSON.stringify(r, null, 2));
-} );
+dns.resolve('tazimi.tk', 'A', function(e, r) {
+  if (e) {
+    console.log(e);
+  }
+  console.log(JSON.stringify(r, null, 2));
+});
 ```
 
 ## Security Module
@@ -675,10 +636,10 @@ dns.resolve('tazimi.tk', 'A', function(e,r) {
 
 ```js
 var crypto = require('crypto'),
-    md5 = crypto.createHash('md5');
+  md5 = crypto.createHash('md5');
 
 md5.update('foo');
-md5.digest('hex');  // 'acbd18db4cc2f85cedef654fccc4a4d8'
+md5.digest('hex'); // 'acbd18db4cc2f85cedef654fccc4a4d8'
 ```
 
 #### Hmac API
@@ -689,13 +650,13 @@ openssl genrsa -out key.pem 1024
 
 ```js
 var crypto = require('crypto'),
-    fs = require('fs'),
-    pem  = fs.readFileSync('key.pem'),
-    key = pem.toString('ascii'),
-    hmac = crypto.createHmac('sha1', key);
+  fs = require('fs'),
+  pem = fs.readFileSync('key.pem'),
+  key = pem.toString('ascii'),
+  hmac = crypto.createHmac('sha1', key);
 
 hmac.update('bar');
-hmac.digest('hex');  // '7fdfeniw012lsda9129dfd9123'
+hmac.digest('hex'); // '7fdfeniw012lsda9129dfd9123'
 ```
 
 #### 公钥加密
@@ -708,59 +669,66 @@ hmac.digest('hex');  // '7fdfeniw012lsda9129dfd9123'
 
 ```js
 var cluster = require('cluster'),
-    http = require('http'),
-    numCPUs = require('os').cpus().length;
-var rssWarn = (50 * 1024 * 1024),
-    heapWarn = (50 * 1024 * 1024);
+  http = require('http'),
+  numCPUs = require('os').cpus().length;
+var rssWarn = 50 * 1024 * 1024,
+  heapWarn = 50 * 1024 * 1024;
 var workers = {};
 
-if(cluster.isMaster) {
-    for(var i=0; i<numCPUs; i++) {
-        createWorker()
+if (cluster.isMaster) {
+  for (var i = 0; i < numCPUs; i++) {
+    createWorker();
+  }
+  setInterval(function() {
+    var time = new Date().getTime();
+    for (pid in workers) {
+      if (workers.hasOwnProperty(pid) && workers[pid].lastCb + 5000 < time) {
+        console.log('Long running worker ' + pid + ' killed');
+        workers[pid].worker.kill();
+        delete workers[pid];
+        createWorker();
+      }
     }
-    setInterval(function() {
-        var time = new Date().getTime()
-        for(pid in workers) {
-            if(workers.hasOwnProperty(pid) &&
-                workers[pid].lastCb + 5000 < time) {
-                console.log('Long running worker ' + pid + ' killed')
-                workers[pid].worker.kill()
-                delete workers[pid]
-                createWorker()
-            }
-        }
-    }, 1000)
+  }, 1000);
 } else {
-    //Server
-    http.Server(function(req,res) {
-        //mess up 1 in 200 reqs
-        if (Math.floor(Math.random() * 200) === 4) {
-            console.log('Stopped ' + process.pid + ' from ever finishing')
-            while(true) { continue }
+  //Server
+  http
+    .Server(function(req, res) {
+      //mess up 1 in 200 reqs
+      if (Math.floor(Math.random() * 200) === 4) {
+        console.log('Stopped ' + process.pid + ' from ever finishing');
+        while (true) {
+          continue;
         }
-        res.writeHead(200);
-        res.end('hello world from ' + process.pid + '\n')
-    }).listen(8000)
-    //Report stats once a second
-    setInterval(function report(){
-        process.send({cmd: "reportMem", memory: process.memoryUsage(), process: process.pid})
-    }, 1000)
+      }
+      res.writeHead(200);
+      res.end('hello world from ' + process.pid + '\n');
+    })
+    .listen(8000);
+  //Report stats once a second
+  setInterval(function report() {
+    process.send({
+      cmd: 'reportMem',
+      memory: process.memoryUsage(),
+      process: process.pid
+    });
+  }, 1000);
 }
 
 function createWorker() {
-    var worker = cluster.fork()
-    console.log('Created worker: ' + worker.pid)
+  var worker = cluster.fork();
+  console.log('Created worker: ' + worker.pid);
 
-    //allow boot time
-    workers[worker.pid] = {worker:worker, lastCb: new Date().getTime()-1000}
-    worker.on('message', function(m) {
-        if(m.cmd === "reportMem") {
-            workers[m.process].lastCb = new Date().getTime()
-            if(m.memory.rss > rssWarn) {
-                console.log('Worker ' + m.process + ' using too much memory.')
-            }
-        }
-    })
+  //allow boot time
+  workers[worker.pid] = { worker: worker, lastCb: new Date().getTime() - 1000 };
+  worker.on('message', function(m) {
+    if (m.cmd === 'reportMem') {
+      workers[m.process].lastCb = new Date().getTime();
+      if (m.memory.rss > rssWarn) {
+        console.log('Worker ' + m.process + ' using too much memory.');
+      }
+    }
+  });
 }
 ```
 

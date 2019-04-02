@@ -178,7 +178,8 @@ import { MessageService } from '../message.service';
 
 ```html
 <div>
-  <label>Hero name:
+  <label
+    >Hero name:
     <input #heroName />
   </label>
   <button (click)="add(heroName.value); heroName.value=''">
@@ -243,14 +244,14 @@ Angular 会在每个组件的变更检测周期中执行非纯管道.
 无论这个流是击键流、HTTP 响应流还是定时器,
 对这些值进行监听和停止监听的接口都是一样的.
 
-Observer（观察者）是Observable（可观察对象）推送数据的消费者.
-在RxJS中, Observer 是一个由回调函数组成的对象,
-键名分别为next, error, complete,
+Observer（观察者）是 Observable（可观察对象）推送数据的消费者.
+在 RxJS 中, Observer 是一个由回调函数组成的对象,
+键名分别为 next, error, complete,
 以此接受 Observable 推送的不同类型的通知 (data input).
 
 Subscription 是一个代表可以终止资源的对象,
-表示一个Observable的执行过程.
-Subscription有一个重要的方法: unsubscribe.
+表示一个 Observable 的执行过程.
+Subscription 有一个重要的方法: unsubscribe.
 这个方法不需要传入参数,
 调用后便会终止相应的资源.
 Observable 当有数据产生时才会推送给订阅者,
@@ -269,7 +270,7 @@ const myObservable = of(1, 2, 3);
 const myObserver = {
   next: x => console.log('Observer got a next value: ' + x),
   error: err => console.error('Observer got an error: ' + err),
-  complete: () => console.log('Observer got a complete notification'),
+  complete: () => console.log('Observer got a complete notification')
 };
 
 // Execute with the observer object
@@ -313,23 +314,16 @@ RxJS 提供了 pipe 辅助函数,
 import { take, map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
-map.call(
-  take.call(
-    of(1,2,3),
-    2
-  ),
-  val => val + 2
-);
+map.call(take.call(of(1, 2, 3), 2), val => val + 2);
 
 // to
 import { take, map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
-of(1,2,3)
-  .pipe(
-    take(2),
-    map(val => val + 2)
-  );
+of(1, 2, 3).pipe(
+  take(2),
+  map(val => val + 2)
+);
 ```
 
 ### Operator
@@ -354,7 +348,7 @@ of(1,2,3)
 - groupBy
 - switch
 - swtichMap: 在每次发出时, 会取消前一个内部 Observable (所提供函数的 retun value) 的订阅,
-然后订阅一个新的 observable. 即当有新的输入时便不再关心之前请求的响应结果.
+  然后订阅一个新的 observable. 即当有新的输入时便不再关心之前请求的响应结果.
 
 借助`switchMap`操作符,
 每个有效的击键事件都会触发一次`HttpClient.get()`方法调用.
@@ -427,15 +421,15 @@ import { HeroesComponent } from './heroes/heroes.component';
 const routes: Routes = [
   {
     path: 'heroes',
-    component: HeroesComponent,
-  },
+    component: HeroesComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
 ```
 
 ## Form
@@ -475,7 +469,9 @@ export class AppRoutingModule { }
 same to `[ngStyle]`
 
 ```html
-<div [ngClass]="currentClasses">This div is initially saveable, unchanged, and special</div>
+<div [ngClass]="currentClasses">
+  This div is initially saveable, unchanged, and special
+</div>
 ```
 
 ```js
@@ -500,6 +496,7 @@ setCurrentClasses() {
 <div [class.special]="isSpecial">The class binding is special</div>
 
 <!-- binding to `class.special` trumps the class attribute -->
-<div class="special"
-     [class.special]="!isSpecial">This one is not so special</div>
+<div class="special" [class.special]="!isSpecial">
+  This one is not so special
+</div>
 ```

@@ -19,7 +19,7 @@
     - [全局变量](#全局变量)
     - [局部变量](#局部变量)
     - [变量提升 Hoisting](#变量提升-hoisting)
-    - [数组(与Object同源)](#数组与object同源)
+    - [数组(与 Object 同源)](#数组与-object-同源)
       - [length](#length)
       - [数组字面量](#数组字面量)
       - [常用方法](#常用方法)
@@ -65,10 +65,10 @@
     - [模块化对象](#模块化对象)
     - [普通属性](#普通属性)
     - [普通方法](#普通方法)
-    - [Class式继承](#class式继承)
+    - [Class 式继承](#class-式继承)
       - [代理构造函数(运用中继者)](#代理构造函数运用中继者)
       - [类继承(**借用构造函数**)与原型继承(**设置原型**) 混合继承模式](#类继承借用构造函数与原型继承设置原型-混合继承模式)
-      - [kclass语法糖](#kclass语法糖)
+      - [kclass 语法糖](#kclass-语法糖)
     - [原型链继承](#原型链继承)
       - [共享 - 原型代理(prototype)](#共享---原型代理prototype)
       - [独立 - 原型克隆](#独立---原型克隆)
@@ -100,7 +100,7 @@
       - [即时函数返回值](#即时函数返回值)
     - [call/apply/bind](#callapplybind)
       - [bind](#bind)
-      - [通过call/apply实现bind函数](#通过callapply实现bind函数)
+      - [通过 call/apply 实现 bind 函数](#通过-callapply-实现-bind-函数)
     - [多态方法](#多态方法)
     - [eval](#eval)
     - [常用函数](#常用函数)
@@ -111,11 +111,11 @@
       - [时间函数](#时间函数)
         - [setInterval](#setinterval)
     - [常用模式](#常用模式)
-      - [API模式](#api模式)
+      - [API 模式](#api-模式)
         - [回调模式](#回调模式)
         - [配置对象](#配置对象)
         - [返回函数(闭包)](#返回函数闭包)
-        - [Curry化](#curry化)
+        - [Curry 化](#curry-化)
         - [链模式](#链模式)
       - [初始化模式](#初始化模式)
         - [即使函数](#即使函数)
@@ -237,7 +237,7 @@ SEO searchbot graceful degradation
 
 #### undefined
 
-- 对象属性未定义时，该属性值为undefined
+- 对象属性未定义时，该属性值为 undefined
 - 未初始化变量的初值为 undefined(表示 等待被赋值)
 
 ```js
@@ -252,21 +252,21 @@ var undefined = function () {};
 
 #### null
 
-当引用为空或引用对象不存在时，值为null
+当引用为空或引用对象不存在时，值为 null
 
 #### float
 
 计算浮点数时，应先计算整数，再利用移位/乘法/除法转化为浮点数
 
 ```js
-var a = (1 + 2) / 10;  // a = 0.1 + 0.2;
+var a = (1 + 2) / 10; // a = 0.1 + 0.2;
 ```
 
 #### 非数 NaN
 
 ```js
-typeof  NaN  // 'number'
-NaN === NaN // false
+typeof NaN; // 'number'
+NaN === NaN; // false
 isNaN();
 isFinite();
 ```
@@ -281,8 +281,8 @@ function isNumber(value) {
 
 ##### 引用特性
 
-- 赋值与传参 传递 string字符串常量 的引用
-- 所有 string量 都是不可变量,当对 string 进行操作后，将先会在堆区创建副本，再通过副本进行修改，并返回副本的索引
+- 赋值与传参 传递 string 字符串常量 的引用
+- 所有 string 量 都是不可变量,当对 string 进行操作后，将先会在堆区创建副本，再通过副本进行修改，并返回副本的索引
 - 没有被任何变量引用的 string: 垃圾回收
 
 ##### 非对象特性(基本变量)
@@ -302,9 +302,9 @@ function isNumber(value) {
 
 **反模式**:
 
-- 隐式全局变量(未使用var声明便使用变量)
+- 隐式全局变量(未使用 var 声明便使用变量)
 
-实质:隐式全局变量不是真正的变量，而是全局对象(在浏览器环境中为window对象)的属性;可以**```delete```**删除隐式全局量
+实质:隐式全局变量不是真正的变量，而是全局对象(在浏览器环境中为 window 对象)的属性;可以**`delete`**删除隐式全局量
 
 ```javascript
 //函数外隐式全局变量
@@ -360,7 +360,7 @@ const nextMonth = (year, month) => {
 ```js
 const getDateItemList = (year, month) => {
   const days = daysOfMonth(year, month);
-  const currentDateItemList = [...Array(days).keys()].map((index) => {
+  const currentDateItemList = [...Array(days).keys()].map(index => {
     return DateItem(year, month, 1 + index);
   });
 
@@ -371,23 +371,23 @@ const getDateItemList = (year, month) => {
   const prefixFirstDay = lastMonthDays - prefixDays + 1;
   const prefixYear = prevYear(year);
   const prefixMonth = prevMonth(year, month);
-  const prefixDateItemList = [...Array(prefixDays).keys()].map((index) => {
+  const prefixDateItemList = [...Array(prefixDays).keys()].map(index => {
     return DateItem(prefixYear, prefixMonth, prefixFirstDay + index);
   });
 
   const lastDayItem = DateItem(year, month, days);
   const lastDayWeekday = lastDayItem.day;
-  const suffixDays = lastDayWeekday === 6 ? 7: (6 - lastDayWeekday);
+  const suffixDays = lastDayWeekday === 6 ? 7 : 6 - lastDayWeekday;
   const suffixYear = nextYear(year);
   const suffixMonth = nextMonth(year, month);
-  const suffixDateItemList = [...Array(suffixDays).keys()].map((index) => {
+  const suffixDateItemList = [...Array(suffixDays).keys()].map(index => {
     return DateItem(suffixYear, suffixMonth, 1 + index);
   });
 
   const dateItemList = [
     ...prefixDateItemList,
     ...currentDateItemList,
-    ...suffixDateItemList,
+    ...suffixDateItemList
   ];
 
   return dateItemList;
@@ -396,11 +396,11 @@ const getDateItemList = (year, month) => {
 
 ### 全局变量
 
-定义在函数体外，在函数体内不使用var关键字引用
+定义在函数体外，在函数体内不使用 var 关键字引用
 
 ### 局部变量
 
-函数体内使用var关键字定义
+函数体内使用 var 关键字定义
 
 - 不使用 var 声明变量将会导致隐式的全局变量
 - 声明局部变量时绝对不要遗漏 var 关键字
@@ -452,18 +452,18 @@ function example() {
 }
 ```
 
-### 数组(与Object同源)
+### 数组(与 Object 同源)
 
-- 关联数组：`arrayName[“string”]  = value;` 实际为Array对象添加属性`{string:value}`
+- 关联数组：`arrayName[“string”] = value;` 实际为 Array 对象添加属性`{string:value}`
 - 缓存数组长度:`int l = list.length`(访问`length`造成运算)
 - `[]`数组，`{}`对象
 
-数组在 数值运算环境 中转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN数组)
+数组在 数值运算环境 中转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN 数组)
 
 #### length
 
 - 数组下标满足 [0, 2^32-1) 即可
-- 运用大于length的下标, length自动增大，不会发生数组边界错误
+- 运用大于 length 的下标, length 自动增大，不会发生数组边界错误
 - length 等于 数组最后一个整数属性名+1, length 不一定等于 数组中有效元素个数
 
 #### 数组字面量
@@ -471,16 +471,16 @@ function example() {
 不使用构造函数,使用数组字面量创建数组
 
 ```javascript
-new Array(3);     // 数组长度
-new Array(3.14);  // RangeError
+new Array(3); // 数组长度
+new Array(3.14); // RangeError
 ```
 
 ```javascript
-if (typeof Array.isArray === "undefined") {
-  Array.isArray = function (arg) {
+if (typeof Array.isArray === 'undefined') {
+  Array.isArray = function(arg) {
     // 其余对象返回值 [object Object/Number/String/Boolean]
-    return Object.prototype.toString.call(arg) === "[object Array]";
-  }
+    return Object.prototype.toString.call(arg) === '[object Array]';
+  };
 }
 ```
 
@@ -493,19 +493,19 @@ arr.sort(toExchange);
 ```
 
 ```js
-var toExchange = function (a, b) {
-  return 1;  // a, b 交换位置
+var toExchange = function(a, b) {
+  return 1; // a, b 交换位置
   return -1; // a, b 不交换位置
-}
+};
 ```
 
 ##### 堆栈
 
 ```javascript
 arr.unshift(value); // 添加数组首元素
-arr.push(value);    // 添加数组尾元素
-arr.shift();        // 删除数组首元素
-arr.pop();          // 删除数组尾元素
+arr.push(value); // 添加数组尾元素
+arr.shift(); // 删除数组首元素
+arr.pop(); // 删除数组尾元素
 ```
 
 ##### 分割/合并
@@ -514,10 +514,10 @@ arr.pop();          // 删除数组尾元素
 
 ```javascript
 [].concat(otherArray);
-[string].join("连接符");             // 将字符串数组连接成字符串o
-string(charArray).split("割断点");   // 选择割断符,返回字符串数组
-[].slice(start, end);               // [start] - [end - 1]
-[].splice();                        // 功能强大的多态方法
+[string].join('连接符'); // 将字符串数组连接成字符串o
+string(charArray).split('割断点'); // 选择割断符,返回字符串数组
+[].slice(start, end); // [start] - [end - 1]
+[].splice(); // 功能强大的多态方法
 ```
 
 ##### 替换
@@ -529,14 +529,14 @@ string(charArray).split("割断点");   // 选择割断符,返回字符串数组
 ##### 查询
 
 ```javascript
-"".substr(start, end);
+''.substr(start, end);
 [].indexOf(char); // -1 or other
 ```
 
 ##### 遍历
 
 ```javascript
-[]/obj.forEach(function (val) {});    // 遍历数组/对象所有元素(val为单个元素)
+[] / obj.forEach(function(val) {}); // 遍历数组/对象所有元素(val为单个元素)
 ```
 
 ##### Deep Clone of Array
@@ -563,7 +563,10 @@ console.log(nestedArray); //  1, [ 2 ], 3 ]
 ```javascript
 // Tips
 // 反转字符串
-var reverseStr = normalizedStr.split('').reverse().join('');
+var reverseStr = normalizedStr
+  .split('')
+  .reverse()
+  .join('');
 ```
 
 ##### Array Tips
@@ -571,11 +574,17 @@ var reverseStr = normalizedStr.split('').reverse().join('');
 - 对字符串每个元素进行单独操作 e.g map/filter
 
 ```javascript
-str.split('').map(function(subStr) {
-  return decode(subStr.charCodeAt(0));
-}).join('');
+str
+  .split('')
+  .map(function(subStr) {
+    return decode(subStr.charCodeAt(0));
+  })
+  .join('');
 
-str.split('').someOperator().join('');
+str
+  .split('')
+  .someOperator()
+  .join('');
 ```
 
 - 实现 contains 方法
@@ -606,8 +615,10 @@ arr.splice(index, 1);
 array.filter((item, index) => array.indexOf(item) === index);
 
 // 3: "Reduce"
-array.reduce((unique, item) =>
-  unique.includes(item) ? unique : [...unique, item], []);
+array.reduce(
+  (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
+  []
+);
 ```
 
 ##### 高阶函数
@@ -626,10 +637,10 @@ array.reduce((unique, item) =>
 function typeOf(o) {
   var _toString = Object.prototype.toString,
     _type = {
-      'undefined': 'undefined',
-      'number': 'number',
-      'boolean': 'boolean',
-      'string': 'string',
+      undefined: 'undefined',
+      number: 'number',
+      boolean: 'boolean',
+      string: 'string',
       '[object Function]': 'function',
       '[object Array]': 'array',
       '[object Date]': 'date',
@@ -638,7 +649,7 @@ function typeOf(o) {
       '[object JSON]': 'json'
     };
 
-    return _type[typeof o] || _type[_toString.call(o)] || (o ? 'object' : 'null');
+  return _type[typeof o] || _type[_toString.call(o)] || (o ? 'object' : 'null');
 }
 ```
 
@@ -650,7 +661,7 @@ function typeOf(o) {
 /*
  * ECMAScript 标准的重大 bug
  */
-typeof null // => object
+typeof null; // => object
 ```
 
 #### 自定义对象检测
@@ -659,7 +670,7 @@ value instanceof constructor(查找原型链)
 
 #### 属性检测
 
-- 由于属性值可能为 0值表达式, 不应使用 0值表达式(0/''/null/undefined) 检测属性值
+- 由于属性值可能为 0 值表达式, 不应使用 0 值表达式(0/''/null/undefined) 检测属性值
 - 应使用 for in 进行属性检测
 
 ### 强制类型转化(Type Coercion)
@@ -675,9 +686,9 @@ parseInt(str, base);
 ```
 
 - boolean 在 数值运算环境 中 true => 1, false => 0
-- 数组在 数值运算环境 中 转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN数组)
+- 数组在 数值运算环境 中 转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN 数组)
 - 对象在 逻辑运算环境 中 转化为 true , 包括 false 的封装对象
-- 对象在 数值运算环境 中 先利用 valueOf(object), 再利用 toString() 转化为数字, 若转化失败, 则返回NaN
+- 对象在 数值运算环境 中 先利用 valueOf(object), 再利用 toString() 转化为数字, 若转化失败, 则返回 NaN
 - 对象与 数值加号运算: 先数值加, (**失败后**)再字符串加
 
 ```js
@@ -716,36 +727,33 @@ const hasAge = !!age;
 养成使用分号结束句子的习惯, 需分行显示的语句必须确保单行不会形成完整语义
 
 ```js
-var i = a ? 1
-    : b ? 2
-    : c ? 3
-    : 4;
+var i = a ? 1 : b ? 2 : c ? 3 : 4;
 ```
 
 ## 控制流程
 
 ### switch/case
 
-用方法查询代替switch/case语句
+用方法查询代替 switch/case 语句
 
 ```javascript
 function doAction(action) {
   var actions = {
-  'hack': function () {
-    return 'hack';
-  },
+    hack: function() {
+      return 'hack';
+    },
 
-  'slash': function () {
-    return 'slash';
-  },
+    slash: function() {
+      return 'slash';
+    },
 
-  'run': function () {
-    return 'run';
-  }
+    run: function() {
+      return 'run';
+    }
   };
 
   if (typeof actions[action] !== 'function') {
-  throw new Error('Invalid action.');
+    throw new Error('Invalid action.');
   }
 
   //闭包方法集
@@ -806,8 +814,8 @@ Function.__proto__ === Function.prototype;
 Function.__proto__.__proto__ === Object.prototype;
 
 // =>
-Object instanceof Function // true
-Function instanceof Object // true
+Object instanceof Function; // true
+Function instanceof Object; // true
 ```
 
 ### 构造函数
@@ -819,14 +827,14 @@ Function instanceof Object // true
 
 ##### 对象字面量
 
-对象字面量由 Object构造函数 隐式构造
+对象字面量由 Object 构造函数 隐式构造
 
 ```js
 var obj = {
   name: 'sabertazimi'
 };
 
-console.log(obj.__proto__ === Object.prototype);  // true
+console.log(obj.__proto__ === Object.prototype); // true
 ```
 
 ##### new 构造函数
@@ -868,15 +876,16 @@ var employee = new Employee('Jack');
 ##### Object.create
 
 ```js
-  Object.create = function (o) {
+Object.create = function(o) {
   if (arguments.length > 1) {
-    throw new Error('Object.create implementation'
-    + ' only accepts the first parameter.');
+    throw new Error(
+      'Object.create implementation' + ' only accepts the first parameter.'
+    );
   }
   function F() {}
   F.prototype = o;
   return new F();
-  };
+};
 ```
 
 #### 返回值
@@ -885,8 +894,8 @@ var employee = new Employee('Jack');
 - 当返回值为**基本类型**时,仍然可得到 this 指针指向的原有对象
 
 ```javascript
-var ObjectMaker = function () {
-  this.name = "This is it";
+var ObjectMaker = function() {
+  this.name = 'This is it';
   //user-defined literal object
   //直接忽略this.name
   var that = {};
@@ -897,7 +906,7 @@ var ObjectMaker = function () {
 
 #### instanceof
 
-若 在实例对象的原型链(`__proto__`)中 能找到 构造函数的`prototype`属性(Prototype对象), 则返回`true`, 否则返回`false`
+若 在实例对象的原型链(`__proto__`)中 能找到 构造函数的`prototype`属性(Prototype 对象), 则返回`true`, 否则返回`false`
 
 ```js
 // true only if
@@ -910,7 +919,6 @@ Foo instance of Bar
 
 ```javascript
 function Waffle() {
-
   //当未使用new关键字时,this指向全局对象
   //此时进入if语句
   if (!(this instanceof Waffle)) {
@@ -918,7 +926,7 @@ function Waffle() {
   }
 
   //正常构造函数
-  this.tastes = "yummy";
+  this.tastes = 'yummy';
 }
 ```
 
@@ -927,10 +935,10 @@ function Waffle() {
 ```javascript
 //立即函数模式:
 //此时返回值不是函数本身,而是函数执行后的return语句返回值
-var global = (function () {
+var global = (function() {
   //返回全局对象
   return this;
-}());
+})();
 ```
 
 ### 私有属性与特权方法
@@ -944,7 +952,7 @@ function Gadget() {
   // private member
   var name = 'iPod';
   // public function
-  this.getName = function () {
+  this.getName = function() {
     return name;
   };
 }
@@ -952,14 +960,14 @@ function Gadget() {
 
 #### 特权方法
 
-getter:返回基本类型值/**引用**类型**深拷贝**(POLA最低授权原则)
+getter:返回基本类型值/**引用**类型**深拷贝**(POLA 最低授权原则)
 
 ```javascript
 function Gadget() {
   // private member
   var pref = {};
   // public function
-  this.getPref = function () {
+  this.getPref = function() {
     return pref.clone();
   };
 }
@@ -998,7 +1006,7 @@ var myobj = (function () {
 直接向构造函数添加方法
 
 ```javascript
-Object.isArray = function () {};
+Object.isArray = function() {};
 ```
 
 ### 模块化对象
@@ -1056,11 +1064,11 @@ return {
 
 ### 普通方法
 
-为prototype添加方法,可以通过实现语法糖method()简化代码(链模式)
+为 prototype 添加方法,可以通过实现语法糖 method()简化代码(链模式)
 
 ```javascript
-if (typeof Function.prototype.method !== "function") {
-  Function.prototype.method = function (name, implementation) {
+if (typeof Function.prototype.method !== 'function') {
+  Function.prototype.method = function(name, implementation) {
     this.prototype[name] = implementation;
     return this;
   };
@@ -1068,46 +1076,46 @@ if (typeof Function.prototype.method !== "function") {
 ```
 
 ```javascript
-var Person = function (name) {
+var Person = function(name) {
   this.name = name;
 }
-.method('getName', function () {
-  return this.name;
-})
-.method('setName', function (name) {
-  this.name = name;
-  return this;
-});
+  .method('getName', function() {
+    return this.name;
+  })
+  .method('setName', function(name) {
+    this.name = name;
+    return this;
+  });
 ```
 
-### Class式继承
+### Class 式继承
 
 #### 代理构造函数(运用中继者)
 
 可用于所有继承模式中,减少内存消耗 **Best Practice**:
 
 ```javascript
-var inherit = (function () {
+var inherit = (function() {
   // 减少继承过程中父类的实例化,减少资源消耗
   // 实例化一个空类所需资源更少
-  var F = function () {};
-  return function (C, P) {
+  var F = function() {};
+  return function(C, P) {
     // c.__proto__ = C.prototype = f
     // f.__proto__ = F.prototype
     // F.prototype = P.prototype
     // c.__proto__.__proto__ = f.__proto__ = P.prototype
     F.prototype = P.prototype; // f.__proto__ = F.prototype = P.prototype
-    C.prototype = new F();     // C.prototype = f
+    C.prototype = new F(); // C.prototype = f
     C.prototype.constructor = C;
-    C.super = P.prototype;     // 此句可提高代码的重用性
+    C.super = P.prototype; // 此句可提高代码的重用性
   };
 })();
 ```
 
 ```js
-Child.prototype.add = function () {
-    return Child.super.add.call(this);
-}
+Child.prototype.add = function() {
+  return Child.super.add.call(this);
+};
 ```
 
 #### 类继承(**借用构造函数**)与原型继承(**设置原型**) 混合继承模式
@@ -1115,14 +1123,14 @@ Child.prototype.add = function () {
 - `child.prototype = new Parent();`
 - `Parent.apply(this, arguments);`
 
-此模式会使得子类属性继承2次 **Best Practice**:
+此模式会使得子类属性继承 2 次 **Best Practice**:
 
 ```javascript
 function Parent(name) {
   this.name = name || 'Adam';
 }
 // adding functionality to the prototype
-Parent.prototype.say = function () {
+Parent.prototype.say = function() {
   return this.name;
 };
 
@@ -1130,24 +1138,24 @@ Parent.prototype.say = function () {
 function Child(name) {
   Parent.apply(this, arguments);
 }
-Child.prototype = new Parent();       // 设置原型链,建立继承关系
-Child.prototype.constructor = Child;  // 使得 Prototype 对象与 Constructor 对象形成闭环
+Child.prototype = new Parent(); // 设置原型链,建立继承关系
+Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor 对象形成闭环
 ```
 
-#### kclass语法糖
+#### kclass 语法糖
 
 复制式地继承，将会消耗大量内存单元 **Best Practice**:
 
 ```javascript
-var klass = function (Parent, props) {
+var klass = function(Parent, props) {
   var Child, F, i;
 
   // 新的构造函数
-  Child = function () {
-    if (Child.uber && Child.uber.hasOwnProperty("_construct")) {
+  Child = function() {
+    if (Child.uber && Child.uber.hasOwnProperty('_construct')) {
       Child.uber._construct.apply(this, arguments);
     }
-    if (Child.prototype.hasOwnProperty("_construct")) {
+    if (Child.prototype.hasOwnProperty('_construct')) {
       Child.prototype._construct.apply(this, arguments);
     }
   };
@@ -1155,7 +1163,7 @@ var klass = function (Parent, props) {
   // 类式继承
   Parent = Parent || Object;
   // 代理构造函数F
-  F = function () {};
+  F = function() {};
   F.prototype = Parent.prototype;
   Child.prototype = new F();
   Child.uber = Parent.prototype;
@@ -1175,12 +1183,12 @@ var klass = function (Parent, props) {
 
 ```javascript
 var SuperMan = klass(Man, {
-  _construct: function (what) {
+  _construct: function(what) {
     console.log("SuperMan's constructor");
   },
-  getName: function () {
+  getName: function() {
     var name = SuperMan.uber.getName.call(this);
-    return "I am " + name;
+    return 'I am ' + name;
   }
 });
 ```
@@ -1197,14 +1205,15 @@ f.prototype = o;
 
 ```javascript
 if (!Object.create) {
-  Object.create = function (o) {
-  if (arguments.length > 1) {
-    throw new Error('Object.create implementation'
-    + ' only accepts the first parameter.');
-  }
-  function F() {}
-  F.prototype = o;
-  return new F();
+  Object.create = function(o) {
+    if (arguments.length > 1) {
+      throw new Error(
+        'Object.create implementation' + ' only accepts the first parameter.'
+      );
+    }
+    function F() {}
+    F.prototype = o;
+    return new F();
   };
 }
 ```
@@ -1221,9 +1230,9 @@ var switchProto = {
   },
 
   state: false
- };
+};
 
- var switchInstance = Object.create(switchProto);
+var switchInstance = Object.create(switchProto);
 ```
 
 #### 独立 - 原型克隆
@@ -1235,9 +1244,9 @@ var switchProto = {
 ```javascript
 _.extend = function(obj) {
   each(slice.call(arguments, 1), function(source) {
-  for (var prop in source) {
-    obj[prop] = source[prop];
-  }
+    for (var prop in source) {
+      obj[prop] = source[prop];
+    }
   });
   return obj;
 };
@@ -1249,14 +1258,14 @@ _.extend = function(obj) {
 function extendDeep(parent, child) {
   var i,
     toStr = Object.prototype.toString,
-    astr = "[object Array]";
-    child = child || {};
+    astr = '[object Array]';
+  child = child || {};
 
   for (i in parent) {
     if (parent.hasOwnProperty(i)) {
       // 若属性为对象,则进行深克隆
-      if (typeof parent[i] === "object") {
-        child[i] = (toStr.call(parent[i]) === astr) ? [] : {};
+      if (typeof parent[i] === 'object') {
+        child[i] = toStr.call(parent[i]) === astr ? [] : {};
         extendDeep(parent[i], child[i]);
       } else {
         child[i] = parent[i];
@@ -1272,7 +1281,9 @@ function extendDeep(parent, child) {
 
 ```javascript
 function mix() {
-  var arg, prop, child = {};
+  var arg,
+    prop,
+    child = {};
 
   for (arg = 0; arg < arguments.length; arg += 1) {
     for (prop in arguments[arg]) {
@@ -1288,10 +1299,10 @@ function mix() {
 
 ```javascript
 var cake = mix(
-  {eggs: 2, large: true},
-  {butter: 1, salted: true},
-  {flour: "3 cups"},
-  {sugar: "sure!"}
+  { eggs: 2, large: true },
+  { butter: 1, salted: true },
+  { flour: '3 cups' },
+  { sugar: 'sure!' }
 );
 ```
 
@@ -1305,9 +1316,9 @@ function factory() {
 
   //利用闭包，返回私有对象，实现工厂方法
   return {
-  get: function get() {
-    return highlander;
-  }
+    get: function get() {
+      return highlander;
+    }
   };
 }
 ```
@@ -1321,7 +1332,7 @@ function factory() {
 
 ```javascript
 // primitive string
-var greet = "Hello there";
+var greet = 'Hello there';
 // primitive is converted to an object
 // in order to use the split() method
 greet.split(' ')[0]; // "Hello"
@@ -1331,14 +1342,14 @@ greet.smile = true;
 typeof greet.smile; // "undefined"
 ```
 
-不使用new关键字,包装类构造函数返回值为基本类型
+不使用 new 关键字,包装类构造函数返回值为基本类型
 
 ```javascript
-typeof Number(1);            // "number"
-typeof Number("1");          // "number"
+typeof Number(1); // "number"
+typeof Number('1'); // "number"
 typeof Number(new Number()); // "number"
-typeof String(1);            // "string"
-typeof Boolean(1);           // "boolean"
+typeof String(1); // "string"
+typeof Boolean(1); // "boolean"
 ```
 
 ### 错误对象
@@ -1361,12 +1372,12 @@ catch (e) {
 
 - 函数是对象
 - 函数提供局部作用域
-- Object是Function的实例对象, **Function.prototype**是Object的实例对象
+- Object 是 Function 的实例对象, **Function.prototype**是 Object 的实例对象
 
 ```js
-Object.__proto__ === Function.prototype;            // true
-Function.__proto__ === Function.prototype;          // true
-Function.__proto__.__proto__ === Object.prototype;  // true
+Object.__proto__ === Function.prototype; // true
+Function.__proto__ === Function.prototype; // true
+Function.__proto__.__proto__ === Object.prototype; // true
 ```
 
 ### 函数调用模式 (innovation pattern) (`this` binding types)
@@ -1377,11 +1388,11 @@ Function.__proto__.__proto__ === Object.prototype;  // true
 - 方法调用模式(`.`/`[]`): this 绑定至此方法所属的对象
 
 ```js
-add(1, 2);  // this -> global
+add(1, 2); // this -> global
 
 const obj = {
   value: 1,
-  foo: function () {
+  foo: function() {
     // 若不将 this 赋值给 that, 而在内部函数中直接使用 this.value
     // 则会发生错误: 内部函数的 this 指向全局对象而不是obj
     const that = this;
@@ -1392,7 +1403,7 @@ const obj = {
   }
 };
 
-obj.foo();  // 1
+obj.foo(); // 1
 ```
 
 #### Explicit Binding
@@ -1419,10 +1430,10 @@ Foo.call(this, optiions);
 
 ```js
 const obj = {
-  foo: function () {
+  foo: function() {
     const inner = () => {
       return this.value;
-    }
+    };
 
     return inner();
   }
@@ -1438,7 +1449,7 @@ func(); // `this` in `inner` function refer to `window`
 
 - **实例化对象没有 prototype 属性**
 - 每个函数都有 prototype 属性
-- prototype属性 指向 函数的原型对象 (由 js 引擎自动创建)
+- prototype 属性 指向 函数的原型对象 (由 js 引擎自动创建)
 - 每个函数的 `__proto__` 都指向 `Function.prototype`
 
 ### arguments
@@ -1482,25 +1493,17 @@ scope -> (list) [0]活动对象 -> [1]全局对象
 
 ```javascript
 //函数声明
-function foo() {
-
-}
+function foo() {}
 
 //函数表达式
-var foo = function foo() {
-
-};
+var foo = function foo() {};
 var obj = {
-  say : function say() {
-
-  }
+  say: function say() {}
 };
 
 //变量提升
 var foo;
-foo = function foo() {
-
-};
+foo = function foo() {};
 
 console.log(foo.name);
 ```
@@ -1511,8 +1514,8 @@ console.log(foo.name);
 var b = 10;
 (function b() {
   b = 20;
-  console.log(b)
-})()
+  console.log(b);
+})();
 
 // print out function b { ... }
 ```
@@ -1540,7 +1543,7 @@ var obj = {
 };
 
 function setValue(obj, val) {
-  var instance = extend({}, obj, {value: val});
+  var instance = extend({}, obj, { value: val });
   return instance;
 }
 ```
@@ -1549,7 +1552,7 @@ function setValue(obj, val) {
 
 ```javascript
 // check if callback is callable
-if (typeof callback !== "function") {
+if (typeof callback !== 'function') {
   callback = false;
 }
 
@@ -1560,13 +1563,13 @@ if (callback) {
 ```
 
 ```javascript
-var findNodes = function (callback) {
+var findNodes = function(callback) {
   var i = 100000,
-  nodes = [],
-  found;
+    nodes = [],
+    found;
 
   // check if callback is callable
-  if (typeof callback !== "function") {
+  if (typeof callback !== 'function') {
     callback = false;
   }
 
@@ -1575,10 +1578,10 @@ var findNodes = function (callback) {
 
     // now callback:
     if (callback) {
-    callback(found);
+      callback(found);
     }
 
-  nodes.push(found);
+    nodes.push(found);
   }
 
   return nodes;
@@ -1588,18 +1591,17 @@ var findNodes = function (callback) {
 当回调函数为对象方法时(特别时方法中使用 this 指针),需同时传入对象参数,并利用 apply/call 改变执行环境
 
 ```javascript
-var findNodes = function (callbackObj, callback) {
-  if (typeof callback === "function") {
+var findNodes = function(callbackObj, callback) {
+  if (typeof callback === 'function') {
     callback.call(callbackObj, found);
   }
 };
 
-
-var findNodes = function (callbackObj, callback) {
-  if (typeof callback === "string") {
+var findNodes = function(callbackObj, callback) {
+  if (typeof callback === 'string') {
     callback = callbackObj[callback];
   }
-  if (typeof callback === "function") {
+  if (typeof callback === 'function') {
     callback.call(callbackObj, found);
   }
 };
@@ -1615,15 +1617,15 @@ var findNodes = function (callbackObj, callback) {
 
 ```javascript
 //definition
-var foo = function () {
+var foo = function() {
   // initialize code;
   var t = new Date();
 
-  foo = function () {
+  foo = function() {
     return t;
   };
 
-    // 使得第一次调用可以产生预期值,保证每次调用的行为保持一致
+  // 使得第一次调用可以产生预期值,保证每次调用的行为保持一致
   return foo();
 };
 
@@ -1635,15 +1637,17 @@ console.log(foo()); // t
 
 ```js
 var addEvent = function(el, type, handle) {
-  addEvent = el.addEventListener ? function (el, type, handle) {
-    el.addEventListener(type, handle, false);
-  } : function (el, type, handle) {
-    el.attachEvent('on' + type, handle);
-  };
+  addEvent = el.addEventListener
+    ? function(el, type, handle) {
+        el.addEventListener(type, handle, false);
+      }
+    : function(el, type, handle) {
+        el.attachEvent('on' + type, handle);
+      };
 
   // 保持每次调用对外表现行为一致
   addEvent(el, type, handle);
-}
+};
 ```
 
 ### 即时函数
@@ -1657,9 +1661,9 @@ var addEvent = function(el, type, handle) {
 - 将整个函数置于括号内
 
 ```javascript
-(function () {
-  console.log("watch out");
-}());
+(function() {
+  console.log('watch out');
+})();
 ```
 
 #### 模式作用
@@ -1672,23 +1676,23 @@ var addEvent = function(el, type, handle) {
 
 var foo = (function () {}());
 
-foo不被赋予function值,而被赋予函数执行后的返回值;
+foo 不被赋予 function 值,而被赋予函数执行后的返回值;
 此返回值可设为函数可产生闭包。
 
 ```javascript
-var getResult = (function () {
+var getResult = (function() {
   var res = 2 + 2;
-  return function () {
+  return function() {
     return res;
-  }
-}());
+  };
+})();
 ```
 
 ### call/apply/bind
 
 - `Function.call(contextObj, arg1, arg2,...)`
 - `Function.apply(contextArray, [arg1, arg2, ...]/arguments)`
-- call效率高于apply
+- call 效率高于 apply
 
 ```js
 function.call/apply();
@@ -1716,11 +1720,11 @@ context.function(arguments);
 const bindedFunc = func.bind(context, arg1, arg2, ...);
 ```
 
-#### 通过call/apply实现bind函数
+#### 通过 call/apply 实现 bind 函数
 
 ```javascript
 function bind(o, m) {
-  return function () {
+  return function() {
     return m.apply(o, [].slice.call(arguments));
   };
 }
@@ -1728,12 +1732,12 @@ function bind(o, m) {
 
 ```javascript
 var one = {
-  name: "object",
-  say: function (greet) {
-    return greet + ", " + this.name;
-  }
-},
-  two = {name: "another object"},
+    name: 'object',
+    say: function(greet) {
+      return greet + ', ' + this.name;
+    }
+  },
+  two = { name: 'another object' },
   twosay = bind(two, one.say);
 
 twosay('yo'); // "yo, another object"
@@ -1747,15 +1751,14 @@ var greet = function greet(options) {
   //运用if/switch方法分情况调用函数,实现多态方法
   var args = [].slice.call(arguments, 0);
   //方法集中含有此方法
-  if (typeof options === 'string'
-  && typeof methods[options] === 'function') {
+  if (typeof options === 'string' && typeof methods[options] === 'function') {
     action = options;
     //取第2个参数开始为真正的参数
     args.shift();
   }
   //调用对应方法,入参为args,返回调用值
   return methods[action](args);
-}
+};
 ```
 
 hasOwnProperty:
@@ -1774,19 +1777,19 @@ hasOwnProperty:
 
 ```javascript
 // anti-pattern
-var property = "name";
-alert(eval("obj." + property));
+var property = 'name';
+alert(eval('obj.' + property));
 // preferred
-var property = "name";
+var property = 'name';
 alert(obj[property]);
 
 // anti-pattern
-setTimeout("myFunc()", 1000);
-setTimeout("myFunc(1, 2, 3)", 1000);
+setTimeout('myFunc()', 1000);
+setTimeout('myFunc(1, 2, 3)', 1000);
 // preferred
 setTimeout(myFunc, 1000);
-setTimeout(function () {
-myFunc(1, 2, 3);
+setTimeout(function() {
+  myFunc(1, 2, 3);
 }, 1000);
 ```
 
@@ -1798,10 +1801,10 @@ myFunc(1, 2, 3);
 
 ```js
 var o = Object.create({
-      "say": function () {
-        alert(this.name);
-      },
-      "name":"Byron"
+  say: function() {
+    alert(this.name);
+  },
+  name: 'Byron'
 });
 ```
 
@@ -1815,7 +1818,7 @@ var o = Object.create({
 // configurable：是否可以被删除，默认false
 ```
 
-```js
+````js
 // get:返回property的值得方法，默认是undefined
 // set：为property设置值的方法，默认是undefined
 ```js
@@ -1833,22 +1836,22 @@ Object.defineProperty(o, 'sex', {
       enumerable: false,  //  不可遍历/枚举
       configurable: false
 });
-```
+````
 
 ```js
 Object.defineProperties(o, {
-      'age': {
-        value: 24,
-        writable: true,
-        enumerable: true,
-        configurable: true
-      },
-      'sex': {
-        value: 'male',
-        writable: false,
-        enumerable: false,
-        configurable: false
-      }
+  age: {
+    value: 24,
+    writable: true,
+    enumerable: true,
+    configurable: true
+  },
+  sex: {
+    value: 'male',
+    writable: false,
+    enumerable: false,
+    configurable: false
+  }
 });
 ```
 
@@ -1866,27 +1869,27 @@ console.log(Object.keys(o)); // ["age"]
 ```
 
 - Object.preventExtensions(O)/Object.isExtensible(O) - 不可新增属性，可删除/修改属性
-- Object.seal(O)/Object.isSealed(O)                  - 不可新增/删除属性，可修改属性
-- Object.freeze(O)/Object.isFrozen(O)                - 不可新增/删除/修改属性
+- Object.seal(O)/Object.isSealed(O) - 不可新增/删除属性，可修改属性
+- Object.freeze(O)/Object.isFrozen(O) - 不可新增/删除/修改属性
 
 #### 类型判断
 
 ```javascript
-Boolean(val);  // true
-Array(val);    // Array[<3个空存储位置>]
+Boolean(val); // true
+Array(val); // Array[<3个空存储位置>]
 ```
 
 #### 解析函数
 
 ```js
-parseInt(val, 2/8/10);
+parseInt(val, 2 / 8 / 10);
 ```
 
 #### 数学函数
 
 ```javascript
 Math.floor(Math.random * arr.length);
-Math.min/Math.max;  // 最小值/最大值
+Math.min / Math.max; // 最小值/最大值
 ```
 
 #### 时间函数
@@ -1903,13 +1906,13 @@ let animation = setInterval(() => {
     clearInterval(animation);
     // 结束动画
     setTimeout(() => {
-      for (let n = 0;n < length; n++) {
+      for (let n = 0; n < length; n++) {
         ele_arr[n].className = 'data-list__item finish';
-        (function (index) {
+        (function(index) {
           setTimeout(() => {
             ele_arr[index].className = 'data-list__item';
           }, 500);
-        }(n))
+        })(n);
       }
     }, 200);
     return;
@@ -1918,26 +1921,29 @@ let animation = setInterval(() => {
   // 内循环
   j = i;
   temp = data_queue[i];
-  while(j>0 && data_queue[j-1] >= temp){
-    list_element.replaceChild(_createItemElement(data_queue[j-1]), ele_arr[j]);
-    data_queue[j] = data_queue[j-1];
+  while (j > 0 && data_queue[j - 1] >= temp) {
+    list_element.replaceChild(
+      _createItemElement(data_queue[j - 1]),
+      ele_arr[j]
+    );
+    data_queue[j] = data_queue[j - 1];
     ele_arr[j].className = 'data-list__item change';
-    (function(index){
+    (function(index) {
       setTimeout(() => {
         ele_arr[index].className = 'data-list__item';
-      },200);
-    }(j))
+      }, 200);
+    })(j);
     j--;
   }
   list_element.replaceChild(_createItemElement(temp), ele_arr[j]);
   data_queue[j] = temp;
   i++;
-},200);
+}, 200);
 ```
 
 ### 常用模式
 
-#### API模式
+#### API 模式
 
 ##### 回调模式
 
@@ -1956,12 +1962,12 @@ addPerson(conf);
 
 一个函数的返回值设为另一个函数
 
-##### Curry化
+##### Curry 化
 
 ##### 链模式
 
 ```javascript
-return this
+return this;
 ```
 
 #### 初始化模式
@@ -1974,13 +1980,12 @@ obj.init();
 
 ##### 初始化分支
 
-浏览器探嗅:执行此功能的if/else语句只执行一次
+浏览器探嗅:执行此功能的 if/else 语句只执行一次
 
-检测浏览器对H5/CSS3/ES5/ES2016的支持情况,不足则自行编写函数补充功能.
+检测浏览器对 H5/CSS3/ES5/ES2016 的支持情况,不足则自行编写函数补充功能.
 
 ```javascript
-if(typeof target === "undefined") {
-
+if (typeof target === 'undefined') {
 }
 ```
 
@@ -1993,53 +1998,51 @@ if(typeof target === "undefined") {
 ```javascript
 var app = {};
 
-(function (exports) {
-
-  (function (exports) {
-  var api = {
-    moduleExists: function test() {
-      return true;
-    }
+(function(exports) {
+  (function(exports) {
+    var api = {
+      moduleExists: function test() {
+        return true;
+      }
     };
-  //闭包式继承,扩展exports对象为api对象
-  $.extend(exports, api);
-  }((typeof exports === 'undefined') ?
-    window : exports));
-//将api对象绑定至app对象上
-}(app));
+    //闭包式继承,扩展exports对象为api对象
+    $.extend(exports, api);
+  })(typeof exports === 'undefined' ? window : exports);
+  //将api对象绑定至app对象上
+})(app);
 ```
 
 ```javascript
 // global object
 var MYAPP = {};
 // constructors
-MYAPP.Parent = function () {};
-MYAPP.Child = function () {};
+MYAPP.Parent = function() {};
+MYAPP.Child = function() {};
 // a variable
 MYAPP.some_var = 1;
 // an object container
 MYAPP.modules = {};
 // nested objects
 MYAPP.modules.module1 = {};
-MYAPP.modules.module1.data = {a: 1, b: 2};
+MYAPP.modules.module1.data = { a: 1, b: 2 };
 MYAPP.modules.module2 = {};
 ```
 
 #### 通用命名空间函数
 
 ```javascript
-MYAPP.namespace = function (namespaceString) {
+MYAPP.namespace = function(namespaceString) {
   var parts = namespaceString.split('.'),
     parent = MYAPP,
     i;
   // strip redundant leading global
-  if (parts[0] === "MYAPP") {
+  if (parts[0] === 'MYAPP') {
     // remove leading global
     parts = parts.slice(1);
   }
   for (i = 0; i < parts.length; i += 1) {
     // create a property if it doesn't exist
-    if (typeof parent[parts[i]] === "undefined") {
+    if (typeof parent[parts[i]] === 'undefined') {
       parent[parts[i]] = {};
     }
     //关键: 向内嵌套
@@ -2064,17 +2067,17 @@ MYAPP.namespace('once.upon.a.time.there.was.this.long.nested.property');
 
 #### 实现沙盒构造函数
 
-- 私有属性绑定至this/prototype
-- 特权方法绑定至modules/prototype
+- 私有属性绑定至 this/prototype
+- 特权方法绑定至 modules/prototype
 
 ```javascript
 function Sandbox() {
   // turning arguments into an array
   var args = Array.prototype.slice.call(arguments),
-  // the last argument is the callback
+    // the last argument is the callback
     callback = args.pop(),
-  // modules can be passed as an array or as individual parameters
-    modules = (args[0] && typeof args[0] === "string") ? args : args[0],
+    // modules can be passed as an array or as individual parameters
+    modules = args[0] && typeof args[0] === 'string' ? args : args[0],
     i;
 
   // make sure the function is called
@@ -2091,12 +2094,12 @@ function Sandbox() {
   // no modules or "*" both mean "use all modules"
   if (!modules || modules === '*') {
     modules = [];
-  for (i in Sandbox.modules) {
-    if (Sandbox.modules.hasOwnProperty(i)) {
-      modules.push(i);
+    for (i in Sandbox.modules) {
+      if (Sandbox.modules.hasOwnProperty(i)) {
+        modules.push(i);
+      }
     }
   }
-}
 
   // initialize the required modules
   for (i = 0; i < modules.length; i += 1) {
@@ -2111,9 +2114,9 @@ function Sandbox() {
 ```javascript
 // any prototype properties as needed
 Sandbox.prototype = {
-  name: "My Application",
-  version: "1.0",
-  getName: function () {
+  name: 'My Application',
+  version: '1.0',
+  getName: function() {
     return this.name;
   }
 };
@@ -2123,40 +2126,40 @@ Sandbox.prototype = {
 
 ```javascript
 Sandbox.modules = {};
-Sandbox.modules.dom = function (box) {
-  box.getElement = function () {};
-  box.getStyle = function () {};
-  box.foo = "bar";
+Sandbox.modules.dom = function(box) {
+  box.getElement = function() {};
+  box.getStyle = function() {};
+  box.foo = 'bar';
 };
-Sandbox.modules.event = function (box) {
+Sandbox.modules.event = function(box) {
   // access to the Sandbox prototype if needed:
   // box.constructor.prototype.m = "mmm";
-  box.attachEvent = function () {};
-  box.dettachEvent = function () {};
+  box.attachEvent = function() {};
+  box.dettachEvent = function() {};
 };
-Sandbox.modules.ajax = function (box) {
-  box.makeRequest = function () {};
-  box.getResponse = function () {};
+Sandbox.modules.ajax = function(box) {
+  box.makeRequest = function() {};
+  box.getResponse = function() {};
 };
 ```
 
 #### 沙盒使用方式
 
 ```javascript
-Sandbox(['ajax', 'event'], function (box) {
+Sandbox(['ajax', 'event'], function(box) {
   // console.log(box);
 });
 
-Sandbox('*', function (box) {
+Sandbox('*', function(box) {
   // console.log(box);
 });
-Sandbox(function (box) {
+Sandbox(function(box) {
   // console.log(box);
 });
 
-Sandbox('dom', 'event', function (box) {
+Sandbox('dom', 'event', function(box) {
   // work with dom and event
-  Sandbox('ajax', function (box) {
+  Sandbox('ajax', function(box) {
     // another sandboxed "box" object
     // this "box" is not the same as
     // the "box" outside this function
@@ -2200,39 +2203,39 @@ if (document.implementation) {
 - user-defined object
 
 ```html
-<table >
-<tr>
-  <td align=center colspan=2>element node</td>
-</tr>
-<tr>
-  <td>text node</td>
-  <td>attribute node</td>
-</tr>
+<table>
+  <tr>
+    <td align="center" colspan="2">element node</td>
+  </tr>
+  <tr>
+    <td>text node</td>
+    <td>attribute node</td>
+  </tr>
 </table>
 ```
 
 ### DOM Core
 
 ```js
-document.createElement("nodeName");
-document.createTextNode("String");
+document.createElement('nodeName');
+document.createTextNode('String');
 
-cloneNode()
-node.remove()
+cloneNode();
+node.remove();
 
 parentElement.appendChild(childElement);
 parentElement.insertBefore(newElement, targetElement);
-parentElement.removeChild()
-parentElement.replaceChild()
-parentElement.hasChildNode()
+parentElement.removeChild();
+parentElement.replaceChild();
+parentElement.hasChildNode();
 
-setAttribute()
-getAttribute()
+setAttribute();
+getAttribute();
 
-document.getElementById()
-document.getElementsByTagName()
-document.querySelector()
-document.querySelectorAll()
+document.getElementById();
+document.getElementsByTagName();
+document.querySelector();
+document.querySelectorAll();
 ```
 
 ```js
@@ -2250,58 +2253,59 @@ const showAlert = (type, message, duration = 3) {
 ##### append
 
 ```javascript
-var testdiv = document.getElementById("testdiv");
+var testdiv = document.getElementById('testdiv');
 
-var para = document.createElement("p");
+var para = document.createElement('p');
 testdiv.appendChild(para);
 
-var txt = document.createTextNode("Hello World");
+var txt = document.createTextNode('Hello World');
 para.appendChild(txt);
 ```
 
 ##### insert
 
 ```js
-function insertAfter(newElement,targetElement) {
+function insertAfter(newElement, targetElement) {
   var parent = targetElement.parentNode;
   if (parent.lastChild == targetElement) {
-  parent.appendChild(newElement);
+    parent.appendChild(newElement);
   } else {
-  parent.insertBefore(newElement,targetElement.nextSibling);
+    parent.insertBefore(newElement, targetElement.nextSibling);
   }
 }
 ```
 
 #### node
 
-node除包括元素结点(tag)外，包括许多其它结点(甚至空格符视作一个结点),需借助nodeType找出目标结点
+node 除包括元素结点(tag)外，包括许多其它结点(甚至空格符视作一个结点),需借助 nodeType 找出目标结点
 
 ```js
-node.nodeType
+node.nodeType;
 ```
 
-|nodeType|representation|
-|:----------|:---------------|
-|1|元素结点|
-|2|属性结点|
-|3|文本结点|
+| nodeType | representation |
+| :------- | :------------- |
+| 1        | 元素结点       |
+| 2        | 属性结点       |
+| 3        | 文本结点       |
 
 ```js
-node.nodeName
-node.nodeValue
+node.nodeName;
+node.nodeValue;
 ```
 
 ##### Traverse DOM Tree
 
 ```js
-node.parentNode
-node.childNodes
-node.firstChild
-node.lastChild
-node.nextSibling
-node.previousSibling
-node.textContent
-node.closest(selectors) // returns closest ancestor of current element matching selectors
+node.parentNode;
+node.childNodes;
+node.firstChild;
+node.lastChild;
+node.nextSibling;
+node.previousSibling;
+node.textContent;
+// returns closest ancestor of current element matching selectors
+node.closest(selectors);
 ```
 
 Element-only navigation:
@@ -2310,24 +2314,24 @@ in childNodes we can see both text nodes, element nodes,
 and even comment nodes if there exist.
 
 ```js
-node.parentElement
-node.children
-node.firstElementChild
-node.lastElementChild
-node.previousElementSibling
-node.nextElementSibling
+node.parentElement;
+node.children;
+node.firstElementChild;
+node.lastElementChild;
+node.previousElementSibling;
+node.nextElementSibling;
 ```
 
 ##### Event Check
 
 ```js
-node.matches(event.target) // return false or true
-node.contains(event.target)        // return false or true
+node.matches(event.target); // return false or true
+node.contains(event.target); // return false or true
 ```
 
 #### Frag
 
-减少DOM操作次数,减少页面渲染次数
+减少 DOM 操作次数,减少页面渲染次数
 
 ```javascript
 var p, t, frag;
@@ -2360,8 +2364,8 @@ oldnode.parentNode.replaceChild(clone, oldnode);
 ### DOM HTML
 
 ```js
-element.innerHTML
-element.textContent
+element.innerHTML;
+element.textContent;
 ```
 
 innerHTML: unconcrete,including all types of childNodes
@@ -2375,18 +2379,18 @@ innerHTML: unconcrete,including all types of childNodes
 ```
 
 ```js
-document.body
-documents.images
-documents.links
-documents.forms
-documents.forms[0].elements  //第一个表单内的所有字段
+document.body;
+documents.images;
+documents.links;
+documents.forms;
+documents.forms[0].elements; //第一个表单内的所有字段
 element.alt = string;
 element.classname = value;
 ```
 
 ```javascript
-document.querySelector("cssSelector");
-document.querySelectorAll("cssSelector");
+document.querySelector('cssSelector');
+document.querySelectorAll('cssSelector');
 ```
 
 ### CSSOM
@@ -2420,7 +2424,7 @@ op.innerHTML = box.style.getPropertyValue('color');
 op2.innerHTML = `${box.style.item(0)}, ${box.style.item(1)}`;
 
 box.style.setProperty('font-size', '1.5em');
-box.style.item(0) // "font-size"
+box.style.item(0); // "font-size"
 
 document.body.style.removeProperty('font-size');
 document.body.style.item(0); // ""
@@ -2449,9 +2453,9 @@ window.getComputedStyle(el).getPropertyValue('background-color');
 #### CSS Class
 
 ```js
-element.classList.add
-element.classList.remove
-element.classList.toggle
+element.classList.add;
+element.classList.remove;
+element.classList.toggle;
 ```
 
 **Tip**: bind class
@@ -2462,7 +2466,7 @@ function addClass(element, value) {
     element.className = value;
   } else {
     newClassName = element.className;
-    newClassName += " ";
+    newClassName += ' ';
     newClassName += value;
     element.className = newClassName;
   }
@@ -2480,7 +2484,7 @@ function addClass(element, value) {
 
 ```js
 let myRules = document.styleSheets[0].cssRules,
-    p = document.querySelector('p');
+  p = document.querySelector('p');
 
 for (i of myRules) {
   if (i.type === 1) {
@@ -2498,7 +2502,7 @@ for (i of myRules) {
 
   // Get the font size of the body
   myStyle.getPropertyValue('font-size');
-  
+
   // Get the 5th item in the body's style rule
   myStyle.item(5);
 
@@ -2523,7 +2527,7 @@ for (i of myRules) {
 
 ```js
 let myRules = document.styleSheets[0].cssRules,
-    p = document.querySelector('.output');
+  p = document.querySelector('.output');
 
 for (i of myRules) {
   if (i.type === 4) {
@@ -2544,14 +2548,14 @@ for (i of myRules) {
 
 ```js
 let myRules = document.styleSheets[0].cssRules,
-    p = document.querySelector('.output');
+  p = document.querySelector('.output');
 
 for (i of myRules) {
   if (i.type === 7) {
     p.innerHTML += `<c​ode>${i.name}</c​ode><br>`;
 
     for (j of i.cssRules) {
-     p.innerHTML += `<c​ode>${j.keyText}</c​ode><br>`;
+      p.innerHTML += `<c​ode>${j.keyText}</c​ode><br>`;
     }
   }
 }
@@ -2603,7 +2607,7 @@ DOMContentLoaded:
   而所有资源加载完成之后, **load** 事件才会被触发
 
 ```js
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', event => {
   console.log('DOM fully loaded and parsed.');
 });
 ```
@@ -2614,7 +2618,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 ```js
 window.addEventListener('visibilitychange', () => {
-  switch(document.visibilityState) {
+  switch (document.visibilityState) {
     case 'hidden':
       console.log('Tab隐藏');
       break;
@@ -2626,16 +2630,16 @@ window.addEventListener('visibilitychange', () => {
 ```
 
 ```js
-const videoElement = document.getElementById("videoElement");
+const videoElement = document.getElementById('videoElement');
 
 // Autoplay the video if application is visible
-if (document.visibilityState == "visible") {
+if (document.visibilityState == 'visible') {
   videoElement.play();
 }
 
 // Handle page visibility change events
 function handleVisibilityChange() {
-  if (document.visibilityState == "hidden") {
+  if (document.visibilityState == 'hidden') {
     videoElement.pause();
   } else {
     videoElement.play();
@@ -2653,9 +2657,9 @@ document.addEventListener('visibilitychange', handleVisibilityChange, false);
 #### Mouse Events
 
 ```javascript
-onclick
-ondbclick
-onmouse-down/move/enter/out/leave/over
+onclick;
+ondbclick;
+onmouse - down / move / enter / out / leave / over;
 ```
 
 For click event, no need for X/Y to judge internal/outside state.
@@ -2683,46 +2687,47 @@ window.addEventListener('click', (event) => {
 `onkeypress/up/down`
 
 ```javascript
-document.onkeydown=function(event){
+document.onkeydown = function(event) {
   var e = event || window.event || arguments.callee.caller.arguments[0];
-    if(e && e.keyCode==13){ // enter 键
+  if (e && e.keyCode == 13) {
+    // enter 键
     //coding
-     }
-  };
+  }
+};
 ```
 
 - event.key => [keyName](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)
 
 ```js
-'Alt'
-'CapsLock'
-'Control'
-'Fn'
-'Numlock'
-'Shift'
-'Enter'
-'Tab'
-' ' // space bar
+'Alt';
+'CapsLock';
+'Control';
+'Fn';
+'Numlock';
+'Shift';
+'Enter';
+'Tab';
+' '; // space bar
 
-'ArrowDown'
-'ArrowLeft'
-'ArrowRight'
-'ArrowUp'
-'Home'
-'End'
-'PageDOwn'
-'PageUp'
+'ArrowDown';
+'ArrowLeft';
+'ArrowRight';
+'ArrowUp';
+'Home';
+'End';
+'PageDOwn';
+'PageUp';
 
-'Backspace'
-'Delete'
-'Redo'
-'Undo'
+'Backspace';
+'Delete';
+'Redo';
+'Undo';
 ```
 
 #### Frame Events
 
 ```javascript
-onresize/load/scroll/error
+onresize / load / scroll / error;
 ```
 
 #### User-Defined Handler
@@ -2736,26 +2741,26 @@ function myHandler(e) {
   src = e.target || e.srcElement;
 
   // 事件授权
-  if (src.nodeName.toLowerCase() !== "button") {
+  if (src.nodeName.toLowerCase() !== 'button') {
     return;
   }
 
   // actual work: update label
-  parts = src.innerHTML.split(": ");
+  parts = src.innerHTML.split(': ');
   parts[1] = parseInt(parts[1], 10) + 1;
-  src.innerHTML = parts[0] + ": " + parts[1];
+  src.innerHTML = parts[0] + ': ' + parts[1];
   // no bubble
-  if (typeof e.stopPropagation === "function") {
+  if (typeof e.stopPropagation === 'function') {
     e.stopPropagation();
   }
-  if (typeof e.cancelBubble !== "undefined") {
+  if (typeof e.cancelBubble !== 'undefined') {
     e.cancelBubble = true;
   }
   // prevent default action
-  if (typeof e.preventDefault === "function") {
+  if (typeof e.preventDefault === 'function') {
     e.preventDefault();
   }
-  if (typeof e.returnValue !== "undefined") {
+  if (typeof e.returnValue !== 'undefined') {
     e.returnValue = false;
   }
 }
@@ -2777,7 +2782,7 @@ window.innerWidth(number);
 window.closed(boolean);
 ```
 
-**Tip**: 实现jQuery中`$(document).ready(function(){});
+**Tip**: 实现 jQuery 中`\$(document).ready(function(){});
 
 ```js
 //initialize
@@ -2793,37 +2798,41 @@ function readyFunction() {
 function addLoadEvent(func) {
   var oldonload = window.onload;
   if (typeof window.onload != 'function') {
-  window.onload = func;
+    window.onload = func;
   } else {
-  window.onload = function() {
-    oldonload();
-    func();
-  }
+    window.onload = function() {
+      oldonload();
+      func();
+    };
   }
 }
 ```
 
 #### location API
 
-|属性|描述|
-|:---------|:--------------------|
-|hash|设置或返回从井号 (#) 开始的 URL（锚）|
-|host|设置或返回主机名和当前 URL 的端口号|
-|hostname|设置或返回当前 URL 的主机名|
-|href|设置或返回完整的 URL|
-|pathname|设置或返回当前 URL 的路径部分|
-|port|设置或返回当前 URL 的端口号|
-|protocol|设置或返回当前 URL 的协议|
-|search|设置或返回从问号 (?) 开始的 URL（查询部分）|
+| 属性     | 描述                                        |
+| :------- | :------------------------------------------ |
+| hash     | 设置或返回从井号 (#) 开始的 URL（锚）       |
+| host     | 设置或返回主机名和当前 URL 的端口号         |
+| hostname | 设置或返回当前 URL 的主机名                 |
+| href     | 设置或返回完整的 URL                        |
+| pathname | 设置或返回当前 URL 的路径部分               |
+| port     | 设置或返回当前 URL 的端口号                 |
+| protocol | 设置或返回当前 URL 的协议                   |
+| search   | 设置或返回从问号 (?) 开始的 URL（查询部分） |
 
 ```js
-window.addEventListener('hashchange', (event) => {
-  // event.oldURL
-  // event.nweURL
-  if (location.hash === '#somecoolfeature') {
-    somecoolfeature();
-  }
-}, false);
+window.addEventListener(
+  'hashchange',
+  event => {
+    // event.oldURL
+    // event.nweURL
+    if (location.hash === '#somecoolfeature') {
+      somecoolfeature();
+    }
+  },
+  false
+);
 ```
 
 ### JS DOM API
@@ -2836,9 +2845,10 @@ window.addEventListener('hashchange', (event) => {
 - clientWidth/clientHeight = content + padding
 
 ```js
-const height = window.innerHeight
-            || document.documentElement.clientHeight
-            || document.body.clientHeight;
+const height =
+  window.innerHeight ||
+  document.documentElement.clientHeight ||
+  document.body.clientHeight;
 ```
 
 #### Window Height
@@ -2856,14 +2866,18 @@ const height = window.innerHeight
 
 ```js
 const supportPageOffset = window.pageXOffset !== undefined;
-const isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
 
-const x = supportPageOffset ? window.pageXOffset
-        : isCSS1Compat ? document.documentElement.scrollLeft
-        : document.body.scrollLeft;
-const y = supportPageOffset ? window.pageYOffset
-        : isCSS1Compat ? document.documentElement.scrollTop
-        : document.body.scrollTop;
+const x = supportPageOffset
+  ? window.pageXOffset
+  : isCSS1Compat
+  ? document.documentElement.scrollLeft
+  : document.body.scrollLeft;
+const y = supportPageOffset
+  ? window.pageYOffset
+  : isCSS1Compat
+  ? document.documentElement.scrollTop
+  : document.body.scrollTop;
 ```
 
 ```js
@@ -2874,21 +2888,16 @@ if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
 
 #### DOM left/top Property
 
-- offsetLeft/offsetTop: 表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent对象）左上角的距离
+- offsetLeft/offsetTop: 表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent 对象）左上角的距离
 - scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素大小
 
 ```js
-const isElementInViewport = (el) => {
+const isElementInViewport = el => {
   const { top, height, left, width } = el.getBoundingClientRect();
   const w = window.innerWidth || document.documentElement.clientWidth;
   const h = window.innerHeight || document.documentElement.clientHeight;
 
-  return (
-    top <= h &&
-    (top + height) >= 0 &&
-    left <= w &&
-    (left + width) >= 0
-  );
+  return top <= h && top + height >= 0 && left <= w && left + width >= 0;
 };
 ```
 
@@ -2898,15 +2907,15 @@ const isElementInViewport = (el) => {
 执行每个事件的回调函数，这很可能造成浏览器的卡顿；
 而 Mutation Observer 完全不同，只在 1000 个段落都插入结束后才会触发，而且只触发一次.
 
-Mutation Observer有以下特点:
+Mutation Observer 有以下特点:
 
 - 它等待所有脚本任务完成后，才会运行，即采用异步方式
 - 它把 DOM 变动记录封装成一个数组进行处理，而不是一条条地个别处理 DOM 变动
 - 它即可以观察发生在 DOM 节点的所有变动，也可以观察某一类变动
 
 ```js
-const mutationObserver = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
+const mutationObserver = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
     console.log(mutation);
   });
 });
@@ -2927,19 +2936,19 @@ mutationObserver.observe(document.documentElement, {
 ### 基本用法
 
 ```javascript
-var XHR = (function () {
+var XHR = (function() {
   var standard = {
-      createXHR : function () {
+      createXHR: function() {
         return new XMLHttpRequest();
       }
     },
     newActionXObject = {
-      createXHR : function () {
+      createXHR: function() {
         return new ActionXObject('Msxml12.XMLHTTP');
       }
     },
     oldActionXObject = {
-      createXHR : function () {
+      createXHR: function() {
         return new ActionXObject('Microsoft.XMLHTTP');
       }
     };
@@ -2966,7 +2975,7 @@ var request = XHR.createXHR();
 
 ```javascript
 // 3rd argument : async mode
-request.open( "GET", "example.txt", true );
+request.open('GET', 'example.txt', true);
 
 request.onreadystatechange = function() {
   //do something
@@ -2980,7 +2989,7 @@ request.onreadystatechange = function() {
   }
   */
   if (request.readyState == 4) {
-    var para = document.createElement("p");
+    var para = document.createElement('p');
     var txt = document.createTextNode(request.responseText);
     para.appendChild(txt);
     document.getElementById('new').appendChild(para);
@@ -2994,34 +3003,34 @@ request.send(null);
 
 ```javascript
 ajax({
-  url: "./TestXHR.aspx",              //请求地址
-  type: "POST",                       //请求方式
-  data: { name: "super", age: 20 },   //请求参数
-  dataType: "json",
-  success: function (response, xml) {
+  url: './TestXHR.aspx', //请求地址
+  type: 'POST', //请求方式
+  data: { name: 'super', age: 20 }, //请求参数
+  dataType: 'json',
+  success: function(response, xml) {
     // 此处放成功后执行的代码
   },
-  fail: function (status) {
+  fail: function(status) {
     // 此处放失败后执行的代码
   }
 });
 
 function ajax(options) {
-
   options = options || {};
-  options.type = (options.type || "GET").toUpperCase();
-  options.dataType = options.dataType || "json";
+  options.type = (options.type || 'GET').toUpperCase();
+  options.dataType = options.dataType || 'json';
   var params = formatParams(options.data);
 
   //创建 - 非IE6 - 第一步
   if (window.XMLHttpRequest) {
     var xhr = new XMLHttpRequest();
-  } else { //IE6及其以下版本浏览器
+  } else {
+    //IE6及其以下版本浏览器
     var xhr = new ActiveXObject('Microsoft.XMLHTTP');
   }
 
   //接收 - 第三步
-  xhr.onreadystatechange = function () {
+  xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
       var status = xhr.status;
       if (status >= 200 && status < 300) {
@@ -3030,16 +3039,16 @@ function ajax(options) {
         options.fail && options.fail(status);
       }
     }
-  }
+  };
 
   //连接 和 发送 - 第二步
-  if (options.type == "GET") {
-    xhr.open("GET", options.url + "?" + params, true);
+  if (options.type == 'GET') {
+    xhr.open('GET', options.url + '?' + params, true);
     xhr.send(null);
-  } else if (options.type == "POST") {
-    xhr.open("POST", options.url, true);
+  } else if (options.type == 'POST') {
+    xhr.open('POST', options.url, true);
     //设置表单提交时的内容类型
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send(params);
   }
 }
@@ -3047,10 +3056,10 @@ function ajax(options) {
 function formatParams(data) {
   var arr = [];
   for (var name in data) {
-    arr.push(encodeURIComponent(name) + "=" + encodeURIComponent(data[name]));
+    arr.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
   }
-  arr.push(("v=" + Math.random()).replace(".",""));
-  return arr.join("&");
+  arr.push(('v=' + Math.random()).replace('.', ''));
+  return arr.join('&');
 }
 ```
 
@@ -3058,7 +3067,7 @@ function formatParams(data) {
 
 ```html
 <!-- HTML -->
-<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<meta http-equiv="Access-Control-Allow-Origin" content="*" />
 ```
 
 ```javascript
@@ -3090,15 +3099,15 @@ var json = JSON.stringify(obj);
 ### jQuery
 
 ```javascript
-$.getJSON("/json/cats.json", function(json) {
-  $(".message").html(JSON.stringify(json));
+$.getJSON('/json/cats.json', function(json) {
+  $('.message').html(JSON.stringify(json));
 });
 ```
 
 ## 正则表达式
 
 ```js
-var re = /pattern/gmi;
+var re = /pattern/gim;
 ```
 
 ### Flags
@@ -3109,41 +3118,41 @@ var re = /pattern/gmi;
 
 ### 元字符
 
-|符号|说明|
-|:------|:--------------------|
-|.|匹配除换行符以外的任意字符|
-|\w|匹配字母或数字或下划线或汉字|
-|\s|空白符(" " \n \r \t \f)|
-|\S|非空白符(alpha number)|
-|\d|匹配数字|
-|\b|匹配单词的开始或结束|
-|^|匹配字符串的开始|
-|$|匹配字符串的结束|
-|\W|匹配任意不是字母，数字，下划线，汉字的字符|
-|\S|匹配任意不是空白符的字符|
-|\D|匹配任意非数字的字符|
-|\B|匹配不是单词开头或结束的位置|
-|[^x]|匹配除了x以外的任意字符|
-|[^aeiou]|匹配除了aeiou这几个字母以外的任意字符|
+| 符号     | 说明                                       |
+| :------- | :----------------------------------------- |
+| .        | 匹配除换行符以外的任意字符                 |
+| \w       | 匹配字母或数字或下划线或汉字               |
+| \s       | 空白符(" " \n \r \t \f)                    |
+| \S       | 非空白符(alpha number)                     |
+| \d       | 匹配数字                                   |
+| \b       | 匹配单词的开始或结束                       |
+| ^        | 匹配字符串的开始                           |
+| \$       | 匹配字符串的结束                           |
+| \W       | 匹配任意不是字母，数字，下划线，汉字的字符 |
+| \S       | 匹配任意不是空白符的字符                   |
+| \D       | 匹配任意非数字的字符                       |
+| \B       | 匹配不是单词开头或结束的位置               |
+| [^x]     | 匹配除了 x 以外的任意字符                  |
+| [^aeiou] | 匹配除了 aeiou 这几个字母以外的任意字符    |
 
 ### 常用限定符
 
-|符号|说明|
-|:-----|:----------------------|
-|*|重复零次或更多次|
-|+|重复一次或更多次|
-|?|重复零次或一次|
-|{n}|重复n次|
-|{n,}|重复n次或更多次|
-|{n,m}|重复n到m次|
+| 符号  | 说明              |
+| :---- | :---------------- |
+| \*    | 重复零次或更多次  |
+| +     | 重复一次或更多次  |
+| ?     | 重复零次或一次    |
+| {n}   | 重复 n 次         |
+| {n,}  | 重复 n 次或更多次 |
+| {n,m} | 重复 n 到 m 次    |
 
-|懒惰限定符|说明|
-|:-----|:----------------------|
-|*?|重复任意次，但尽可能少重复|
-|+?|重复1次或更多次，但尽可能少重复|
-|??|重复0次或1次，但尽可能少重复|
-|{n,m}?|重复n到m次，但尽可能少重复|
-|{n,}?|重复n次以上，但尽可能少重复|
+| 懒惰限定符 | 说明                              |
+| :--------- | :-------------------------------- |
+| \*?        | 重复任意次，但尽可能少重复        |
+| +?         | 重复 1 次或更多次，但尽可能少重复 |
+| ??         | 重复 0 次或 1 次，但尽可能少重复  |
+| {n,m}?     | 重复 n 到 m 次，但尽可能少重复    |
+| {n,}?      | 重复 n 次以上，但尽可能少重复     |
 
 ### 反向引用
 
@@ -3168,34 +3177,34 @@ RegExp.$+;
 RegExp.$*;
 ```
 
-|长名|短名|说明|
-|:----------|:-----|:--------------------|
-|input|$_|最后用于匹配的格式字符串|
-|lastMatch|`$&`|最后匹配的结果字符|
-|lastParen|$+|最后匹配的分组/子表达式|
-|leftContext|$`|匹配结果字符串前的字符|
-|rightContext|$\'|匹配结果字符串后的字符|
-|multiline|$*|指定是否开启多行模式|
+| 长名         | 短名                       | 说明                     |
+| :----------- | :------------------------- | :----------------------- |
+| input        | \$\_                       | 最后用于匹配的格式字符串 |
+| lastMatch    | `$&`                       | 最后匹配的结果字符       |
+| lastParen    | \$+                        | 最后匹配的分组/子表达式  |
+| leftContext  | \$`|匹配结果字符串前的字符 |
+| rightContext | \$\'                       | 匹配结果字符串后的字符   |
+| multiline    | \$\*                       | 指定是否开启多行模式     |
 
 ### 分组语法
 
 - group
 - lookahead (零宽断言)
 
-分类|代码/语法|说明|
-|:-----|:-------------|:------------------------------------|
-|捕获|(exp)|匹配exp,并捕获文本到自动命名的组里|
-||`(?<name>exp)`|匹配exp,并捕获文本到名称为name的组里，也可以写成(?'name'exp)|
-||(?:exp)|匹配exp,不捕获匹配的文本，也不给此分组分配组号|
-|零宽断言|(?=exp)|匹配exp前面的位置|
-||(?<=exp)|匹配exp后面的位置|
-||(?!exp)|匹配后面跟的不是exp的位置|
-||`(?<!exp)`|匹配前面不是exp的位置|
-|注释|(?#comment)|这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读|
+| 分类     | 代码/语法      | 说明                                            |
+| :------- | :------------- | :---------------------------------------------- |
+| 捕获     | (exp)          | 匹配 exp,并捕获文本到自动命名的组里             |
+|          | `(?<name>exp)` | 匹配 exp,并捕获文本到名称为 name 的组里         |
+|          | (?:exp)        | 匹配 exp,不捕获匹配的文本，也不给此分组分配组号 |
+| 零宽断言 | (?=exp)        | 匹配 exp 前面的位置                             |
+|          | (?<=exp)       | 匹配 exp 后面的位置                             |
+|          | (?!exp)        | 匹配后面跟的不是 exp 的位置                     |
+|          | `(?<!exp)`     | 匹配前面不是 exp 的位置                         |
+| 注释     | (?#comment)    | 用于提供注释让人阅读                            |
 
 ### Best Practice(提升效率)
 
-- 不使用new RegExp(),使用正则表达式字面量
+- 不使用 new RegExp(),使用正则表达式字面量
 - 将正则表达式赋值给变量，防止正则表达式重复创建
 - 以简单(唯一性)字元开始，如 `^/$ x \u363A [a-z] \b`, 避免以分组表达式开始
 
@@ -3224,17 +3233,17 @@ RegExp.$*;
 #### replace
 
 ```js
-replace(regExp, str/func);
+replace(regExp, str / func);
 ```
 
 ##### replace arguments
 
 第二个参数若为函数式参数,replace 方法会向它传递一系列参数:
 
-- 第一个参数:    匹配结果字符串
-- 第 n 个参数:   子表达式匹配结果字符串
+- 第一个参数: 匹配结果字符串
+- 第 n 个参数: 子表达式匹配结果字符串
 - 倒数第二个参数: 匹配文本在源字符串中的下标位置
-- 最后一个参数:   源字符串自身
+- 最后一个参数: 源字符串自身
 
 ###### replace best practice
 
@@ -3243,15 +3252,15 @@ replace(regExp, str/func);
 
 ```js
 if (!String.prototype.trim) {
-  String.prototype.trim = function () {
+  String.prototype.trim = function() {
     return this.replace(/^\s+/, '').replace(/\s+$/, '');
-  }
+  };
 }
 ```
 
 ```js
 if (!String.prototype.trim) {
-  String.prototype.trim = function () {
+  String.prototype.trim = function() {
     var str = this.replace(/^\s+/, ''),
       end = str.length - 1,
       ws = /\s/;
@@ -3261,7 +3270,7 @@ if (!String.prototype.trim) {
     }
 
     return str.slice(0, end + 1);
-  }
+  };
 }
 ```
 
@@ -3294,7 +3303,7 @@ if (!String.prototype.trim) {
 
 ```js
 function MyError(message) {
-  Error.call(this,arguments);
+  Error.call(this, arguments);
   this.message = message;
 }
 MyError.prototype = new Error();
@@ -3335,19 +3344,14 @@ const users = [
 
 const response = [];
 
-const getUser = (user) => () => {
-  return axios
-    .get(`/users/userId=${user}`)
-    .then((res) => response.push(res));
+const getUser = user => () => {
+  return axios.get(`/users/userId=${user}`).then(res => response.push(res));
 };
 
-const getUsers = (users) => {
-  const [
-    getFirstUser,
-    getSecondUser,
-    getThirdUser,
-    getFourthUser
-  ] = users.map(getUser);
+const getUsers = users => {
+  const [getFirstUser, getSecondUser, getThirdUser, getFourthUser] = users.map(
+    getUser
+  );
 
   getFirstUser()
     .then(getSecondUser)
@@ -3375,8 +3379,8 @@ function getUsers(users) {
   promises[3] = axios.get(`/users/userId=${users[3]}`);
 
   Promise.all(promises)
-    .then((userDataArr) => response = userDataArr)
-    .catch((err) => console.log(err));
+    .then(userDataArr => (response = userDataArr))
+    .catch(err => console.log(err));
 }
 ```
 
@@ -3391,11 +3395,11 @@ Promise.all(urls.map(fetch)).then(responses =>
 ```
 
 ```js
-Promise.all(urls.map(url =>
-    fetch(url).then(resp => resp.text())
-)).then(texts => {
-  //
-})
+Promise.all(urls.map(url => fetch(url).then(resp => resp.text()))).then(
+  texts => {
+    //
+  }
+);
 ```
 
 #### Promise Polyfill
@@ -3507,7 +3511,10 @@ class Promise {
       } else if (this.$state === 'REJECTED') {
         _onRejected(this.$internalValue);
       } else {
-        this.$chained.push({ onFulfilled: _onFulfilled, onRejected: _onRejected });
+        this.$chained.push({
+          onFulfilled: _onFulfilled,
+          onRejected: _onRejected
+        });
       }
     });
   }
@@ -3548,7 +3555,7 @@ async getAuthors(authorIds) {
 
 ```js
 function sleep(time) {
-  return new Promise((resolve) => setTimeout(resolve,time));
+  return new Promise(resolve => setTimeout(resolve, time));
 }
 ```
 
@@ -3557,7 +3564,6 @@ sleep(2000).then(() => {
   //do something after 2000 milliseconds
   console.log('resolved');
 });
-
 
 async function add(n1, n2) {
   await sleep(2222);
@@ -3571,22 +3577,21 @@ add(1, 2);
 
 ```js
 if (window.navigator.geolocation) {
-        //getCurrentPosition第三个参数为可选参数
-        navigator.geolocation.getCurrentPosition(
-          locationSuccess, locationError, {
-        // 指示浏览器获取高精度的位置，默认为false
-        enableHighAccuracy: true,
-        // 指定获取地理位置的超时时间，默认不限时，单位为毫秒
-        timeout: 5000,
-        // 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。
-        maximumAge: 3000
-    });
+  //getCurrentPosition第三个参数为可选参数
+  navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {
+    // 指示浏览器获取高精度的位置，默认为false
+    enableHighAccuracy: true,
+    // 指定获取地理位置的超时时间，默认不限时，单位为毫秒
+    timeout: 5000,
+    // 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。
+    maximumAge: 3000
+  });
 } else {
-    alert("Your browser does not support Geolocation!");
+  alert('Your browser does not support Geolocation!');
 }
 ```
 
-locationError为获取位置信息失败的回调函数，可以根据错误类型提示信息：
+locationError 为获取位置信息失败的回调函数，可以根据错误类型提示信息：
 
 ```js
 locationError: function(error){
@@ -3607,7 +3612,7 @@ locationError: function(error){
 }
 ```
 
-locationSuccess为获取位置信息成功的回调函数，返回的数据中包含经纬度等信息，结合Google Map API 即可在地图中显示当前用户的位置信息，如下：
+locationSuccess 为获取位置信息成功的回调函数，返回的数据中包含经纬度等信息，结合 Google Map API 即可在地图中显示当前用户的位置信息，如下：
 
 ```js
 locationSuccess: function(position){
@@ -3649,7 +3654,11 @@ locationSuccess: function(position){
 ```
 
 ```js
-navigator.geolocation.watchPosition(locationSuccess, locationError, positionOption)
+navigator.geolocation.watchPosition(
+  locationSuccess,
+  locationError,
+  positionOption
+);
 ```
 
 自动更新地理位置
@@ -3685,8 +3694,8 @@ const getNoteDetune = pitch => pitch * 100;
 // oscillator.detune.value = getNoteDetune(7);
 
 const play = (type, delay, pitch, duration) => {
-  const oscillator = audioContext.createOscillator()
-  oscillator.connect(audioContext.destination)
+  const oscillator = audioContext.createOscillator();
+  oscillator.connect(audioContext.destination);
 
   oscillator.type = type;
   oscillator.detune.value = getNoteDetune(pitch);
@@ -3701,8 +3710,8 @@ const play = (type, delay, pitch, duration) => {
 ### From Music Data
 
 ```js
-const sampleSize = 1024;  // number of samples to collect before analyzing data
-const audioUrl = "viper.mp3";
+const sampleSize = 1024; // number of samples to collect before analyzing data
+const audioUrl = 'viper.mp3';
 
 let audioData = null;
 let audioPlaying = false;
@@ -3724,7 +3733,7 @@ javascriptNode.connect(audioContext.destination);
 // setup the event handler that is triggered
 // every time enough samples have been collected
 // trigger the audio analysis and draw the results
-javascriptNode.onaudioprocess = function () {
+javascriptNode.onaudioprocess = function() {
   // get the Time Domain data for this sample
   analyserNode.getByteTimeDomainData(amplitudeArray);
 
@@ -3732,19 +3741,19 @@ javascriptNode.onaudioprocess = function () {
   // if (audioPlaying == true) {
   // requestAnimFrame(drawTimeDomain);
   // }
-}
+};
 
 // Load the audio from the URL via Ajax and store it in global variable audioData
 // Note that the audio load is asynchronous
 function loadSound(url) {
   fetch(url)
-    .then((response) => {
-      audioContext.decodeAudioData(response, (buffer) => {
+    .then(response => {
+      audioContext.decodeAudioData(response, buffer => {
         audioData = buffer;
         playSound(audioData);
       });
     })
-    .catch((error) => {
+    .catch(error => {
       console.error(error);
     });
 }
@@ -3752,7 +3761,7 @@ function loadSound(url) {
 // Play the audio and loop until stopped
 function playSound(buffer) {
   sourceNode.buffer = buffer;
-  sourceNode.start(0);    // Play the sound now
+  sourceNode.start(0); // Play the sound now
   sourceNode.loop = true;
   audioPlaying = true;
 }
@@ -3808,7 +3817,7 @@ draw();
   需要借助 `JSON.parse` 与 `JSON.stringify`
 
 ```js
-if(!localStorage.getItem('bgcolor')) {
+if (!localStorage.getItem('bgcolor')) {
   populateStorage();
 } else {
   setStyles();
@@ -3856,34 +3865,27 @@ WebSocket WebSocket(
 ```
 
 ```js
-function WebSocketTest()
-{
-  if ("WebSocket" in window)
-  {
-     alert("WebSocket is supported by your Browser!");
-     // Let us open a web socket
-     var ws = new WebSocket("ws://localhost:9998/echo");
-     ws.onopen = function()
-     {
-        // Web Socket is connected, send data using send()
-        ws.send("Message to send");
-        alert("Message is sent...");
-     };
-     ws.onmessage = function (evt)
-     {
-        var received_msg = evt.data;
-        alert("Message is received...");
-     };
-     ws.onclose = function()
-     {
-        // websocket is closed.
-        alert("Connection is closed...");
-     };
-  }
-  else
-  {
-     // The browser doesn't support WebSocket
-     alert("WebSocket NOT supported by your Browser!");
+function WebSocketTest() {
+  if ('WebSocket' in window) {
+    alert('WebSocket is supported by your Browser!');
+    // Let us open a web socket
+    var ws = new WebSocket('ws://localhost:9998/echo');
+    ws.onopen = function() {
+      // Web Socket is connected, send data using send()
+      ws.send('Message to send');
+      alert('Message is sent...');
+    };
+    ws.onmessage = function(evt) {
+      var received_msg = evt.data;
+      alert('Message is received...');
+    };
+    ws.onclose = function() {
+      // websocket is closed.
+      alert('Connection is closed...');
+    };
+  } else {
+    // The browser doesn't support WebSocket
+    alert('WebSocket NOT supported by your Browser!');
   }
 }
 ```
@@ -3911,29 +3913,37 @@ function WebSocketTest()
 <script>
   const worker = new Worker('worker.js');
 
-  worker.addEventListener('message', function(e) {
-    console.log(e.data);
-  }, false);
+  worker.addEventListener(
+    'message',
+    function(e) {
+      console.log(e.data);
+    },
+    false
+  );
 
   function startComputation() {
-    worker.postMessage({'cmd': 'average', 'data': [1, 2, 3, 4]});
+    worker.postMessage({ cmd: 'average', data: [1, 2, 3, 4] });
   }
 </script>
 ```
 
 ```js
 // worker.js
-self.addEventListener('message', function(e) {
-  const data = e.data;
-  switch (data.cmd) {
-    case 'average':
-      const result = calculateAverage(data);
-      self.postMessage(result);
-      break;
-    default:
-      self.postMessage('Unknown command');
-  }
-}, false);
+self.addEventListener(
+  'message',
+  function(e) {
+    const data = e.data;
+    switch (data.cmd) {
+      case 'average':
+        const result = calculateAverage(data);
+        self.postMessage(result);
+        break;
+      default:
+        self.postMessage('Unknown command');
+    }
+  },
+  false
+);
 ```
 
 ## Web Animations API
@@ -3943,15 +3953,18 @@ self.addEventListener('message', function(e) {
 
 ```js
 const rabbitDownKeyframes = new KeyframeEffect(
-    whiteRabbit, // element to animate
-    [
-      { transform: 'translateY(0%)' },  // keyframe
-      { transform: 'translateY(100%)' } // keyframe
-    ],
-    { duration: 3000, fill: 'forwards' } // keyframe options
+  whiteRabbit, // element to animate
+  [
+    { transform: 'translateY(0%)' }, // keyframe
+    { transform: 'translateY(100%)' } // keyframe
+  ],
+  { duration: 3000, fill: 'forwards' } // keyframe options
 );
 
-const rabbitDownAnimation = new Animation(rabbitDownKeyFrames, document.timeline);
+const rabbitDownAnimation = new Animation(
+  rabbitDownKeyFrames,
+  document.timeline
+);
 
 whiteRabbit.addEventListener('click', downHandler);
 
@@ -3967,7 +3980,7 @@ function downHandler() {
 const animationKeyframes = [
   {
     transform: 'rotate(0)',
-    color: '#000',
+    color: '#000'
   },
   {
     color: '#431236',
@@ -3975,8 +3988,8 @@ const animationKeyframes = [
   },
   {
     transform: 'rotate(360deg)',
-    color: '#000',
-  },
+    color: '#000'
+  }
 ];
 
 const animationTiming = {
@@ -3984,10 +3997,9 @@ const animationTiming = {
   iterations: Infinity
 };
 
-const animation = document.querySelector('alice').animate(
-  animationKeyframes,
-  animationTiming
-);
+const animation = document
+  .querySelector('alice')
+  .animate(animationKeyframes, animationTiming);
 ```
 
 - `animation.pause()/play()/reverse()/finish()/cancel()`
@@ -4002,12 +4014,12 @@ animation.currentTime = animation.effect.getComputedTiming().duration / 2;
 ### Basic Usage
 
 - 绘制路径 beginPath() -> draw() -> closePath()
-- Path2D对象
+- Path2D 对象
 - 绘制样式: 颜色、渐变、变换、阴影
 - 绘制图形: fill/stroke/clip
 
 ```javascript
- const context = canvas.getContext('2d');
+const context = canvas.getContext('2d');
 ```
 
 ```javascript
@@ -4022,14 +4034,14 @@ function drawLine(fromX, fromY, toX, toY) {
 function drawCircle(x, y, radius, color) {
   context.fillStyle = color;
   context.beginPath();
-  context.arc(x, y, radius, 0, Math.PI*2, true);
+  context.arc(x, y, radius, 0, Math.PI * 2, true);
   context.closePath();
   context.fill();
   context.stroke();
 }
 
 // 改变 canvas 中图形颜色
-function changeColor(color){
+function changeColor(color) {
   context.fillStyle = color;
   context.fill();
 }
@@ -4044,8 +4056,8 @@ for all objects:
 - draw(ctx): use canvas api and object properties (position/size) to render objects
 
 ```js
-let canvas = document.getElementById("gameScreen");
-let ctx = canvas.getContext("2d");
+let canvas = document.getElementById('gameScreen');
+let ctx = canvas.getContext('2d');
 
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
@@ -4109,11 +4121,11 @@ function gamepadHandler(event, connecting) {
   }
 }
 
-window.addEventListener("gamepadconnected", (e) => {
+window.addEventListener('gamepadconnected', e => {
   gamepadHandler(e, true);
 });
 
-window.addEventListener("gamepaddisconnected", (e) => {
+window.addEventListener('gamepaddisconnected', e => {
   gamepadHandler(e, false);
 });
 ```

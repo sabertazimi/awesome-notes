@@ -1,4 +1,3 @@
-
 # Bootstrap Notes
 
 <!-- TOC -->
@@ -88,7 +87,7 @@
 
 ### Basic
 
-- 设置宽度:   col-xs/sm/md/lg-num
+- 设置宽度: col-xs/sm/md/lg-num
 - 设置偏移量: col-xs/sm/md/lg-pull/push/offset-num
 
 ### row
@@ -118,9 +117,12 @@ navbar > container > nav/navbar-header/navbar-nav/navbar-form > li/a
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button
-        type="button" class="navbar-toggle collapsed"
-        data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-        aria-expanded="false">
+        type="button"
+        class="navbar-toggle collapsed"
+        data-toggle="collapse"
+        data-target="#bs-example-navbar-collapse-1"
+        aria-expanded="false"
+      >
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -132,12 +134,19 @@ navbar > container > nav/navbar-header/navbar-nav/navbar-form > li/a
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li class="active">
+          <a href="#">Link <span class="sr-only">(current)</span></a>
+        </li>
         <li><a href="#">Link</a></li>
         <li class="dropdown">
           <a
-          href="#" class="dropdown-toggle" data-toggle="dropdown"
-          role="button" aria-haspopup="true" aria-expanded="false">
+            href="#"
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
             Dropdown<span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
@@ -153,15 +162,21 @@ navbar > container > nav/navbar-header/navbar-nav/navbar-form > li/a
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" placeholder="Search" />
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-          role="button" aria-haspopup="true" aria-expanded="false">
+          <a
+            href="#"
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
             Dropdown <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
@@ -173,43 +188,45 @@ navbar > container > nav/navbar-header/navbar-nav/navbar-form > li/a
           </ul>
         </li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
 </nav>
 ```
 
 ```css
-body{
-  padding:50px 0px 0px 0px;
-  z-index:0;
+body {
+  padding: 50px 0px 0px 0px;
+  z-index: 0;
 }
 
 .navbar-inverse {
-  background: #303F9F;
+  background: #303f9f;
 }
 
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
   color: #fff;
-  background: #1A237E;
+  background: #1a237e;
 }
 
 .navbar-inverse .navbar-nav > .open > a,
 .navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus {
   color: #fff;
-  background: #1A237E;
+  background: #1a237e;
 }
 
-.navbar-inverse .navbar-nav .open .dropdown-menu> li> a,
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a,
 .navbar-inverse .navbar-nav .open .dropdown-menu {
-  background-color: #303F9F;
-  color:#eeeeee;
+  background-color: #303f9f;
+  color: #eeeeee;
 }
 
-.navbar-inverse .navbar-nav .open .dropdown-menu> li> a:hover {
-  color:#000000;
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover {
+  color: #000000;
 }
 ```
 
@@ -221,7 +238,7 @@ body{
 <ol class="breadcrumb">
   <li><a href="#">Home</a></li>
   <li><a href="#">Library</a></li>
-    <li class="active">Data</li>
+  <li class="active">Data</li>
 </ol>
 ```
 
@@ -229,38 +246,39 @@ body{
 
 ```css
 body {
-    position: relative;
+  position: relative;
 }
 
 .affix {
-    top: 100px
+  top: 100px;
 }
-
 ```
 
 ```html
 <body data-spy="scroll" data-target="#navbar-example" data-offset="200">
-
-<nav class="hidden-xs col-sm-2" id="navbar-example">
-    <ul class="nav nav-tabs" role="tablist" data-spy="affix" data-offset-top="400">
-        <li><a href="#history">Our History</a></li>
-        <li><a href="#corporate">Corporate</a></li>
-        <li><a href="#facts">Facts</a></li>
+  <nav class="hidden-xs col-sm-2" id="navbar-example">
+    <ul
+      class="nav nav-tabs"
+      role="tablist"
+      data-spy="affix"
+      data-offset-top="400"
+    >
+      <li><a href="#history">Our History</a></li>
+      <li><a href="#corporate">Corporate</a></li>
+      <li><a href="#facts">Facts</a></li>
     </ul>
-</nav>
+  </nav>
 
-
-<!-- 在某个地方 -->
-<div id="history">
-  ...
-</div>
-<div id="corporate">
-  ...
-</div>
-<div id="facts">
-  ...
-</div>
-
+  <!-- 在某个地方 -->
+  <div id="history">
+    ...
+  </div>
+  <div id="corporate">
+    ...
+  </div>
+  <div id="facts">
+    ...
+  </div>
 </body>
 ```
 
@@ -273,16 +291,22 @@ body {
 ```html
 <ul class="nav nav-tabs/nav-pills nav-justified/nav-stacked">
   <li role="presentation" class="active"><a href="#">Home</a></li>
-    <li role="presentation" class="disabled"><a href="#">Messages</a></li>
+  <li role="presentation" class="disabled"><a href="#">Messages</a></li>
   <li role="presentation" class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-      aria-haspopup="true" aria-expanded="false">
-          Dropdown <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu">
-          ...
-      </ul>
-    </li>
+    <a
+      class="dropdown-toggle"
+      data-toggle="dropdown"
+      href="#"
+      role="button"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Dropdown <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      ...
+    </ul>
+  </li>
 </ul>
 ```
 
@@ -290,17 +314,26 @@ body {
 
 ```html
 <div>
-
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home"
-      role="tab" data-toggle="tab">Home</a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile"
-      role="tab" data-toggle="tab">Profile</a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages"
-      role="tab" data-toggle="tab">Messages</a></li>
-    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab"
-      data-toggle="tab">Settings</a></li>
+    <li role="presentation" class="active">
+      <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
+    </li>
+    <li role="presentation">
+      <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"
+        >Profile</a
+      >
+    </li>
+    <li role="presentation">
+      <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"
+        >Messages</a
+      >
+    </li>
+    <li role="presentation">
+      <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"
+        >Settings</a
+      >
+    </li>
   </ul>
 
   <!-- Tab panes -->
@@ -310,22 +343,21 @@ body {
     <div role="tabpanel" class="tab-pane fade" id="messages">...</div>
     <div role="tabpanel" class="tab-pane fade" id="settings">...</div>
   </div>
-
 </div>
 ```
 
 ### Tab Pane JS API
 
 ```js
-$('#myTabs a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
+$('#myTabs a').click(function(e) {
+  e.preventDefault();
+  $(this).tab('show');
+});
 
-$('#myTabs a[href="#profile"]').tab('show') // Select tab by name
-$('#myTabs a:first').tab('show') // Select first tab
-$('#myTabs a:last').tab('show') // Select last tab
-$('#myTabs li:eq(2) a').tab('show') // Select third tab (0-indexed)
+$('#myTabs a[href="#profile"]').tab('show'); // Select tab by name
+$('#myTabs a:first').tab('show'); // Select first tab
+$('#myTabs a:last').tab('show'); // Select last tab
+$('#myTabs li:eq(2) a').tab('show'); // Select third tab (0-indexed)
 ```
 
 ### Tab Pane JS Events
@@ -338,10 +370,10 @@ $('#myTabs li:eq(2) a').tab('show') // Select third tab (0-indexed)
   the same one as for the show.bs.tab event)
 
 ```js
-$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-  e.target // newly activated tab
-  e.relatedTarget // previous active tab
-})
+$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+  e.target; // newly activated tab
+  e.relatedTarget; // previous active tab
+});
 ```
 
 ## Collapse
@@ -349,14 +381,25 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 href/data-target -> id
 
 ```html
-<a class="btn btn-primary" role="button" data-toggle="collapse"
-href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+<a
+  class="btn btn-primary"
+  role="button"
+  data-toggle="collapse"
+  href="#collapseExample"
+  aria-expanded="false"
+  aria-controls="collapseExample"
+>
   Link with href
 </a>
 
-<button class="btn btn-primary" type="button" data-toggle="collapse"
-data-target="#collapseExample" aria-expanded="false"
-aria-controls="collapseExample">
+<button
+  class="btn btn-primary"
+  type="button"
+  data-toggle="collapse"
+  data-target="#collapseExample"
+  aria-expanded="false"
+  aria-controls="collapseExample"
+>
   Button with data-target
 </button>
 
@@ -364,6 +407,7 @@ aria-controls="collapseExample">
   <div class="well">
     ...
   </div>
+</div>
 ```
 
 ### Accordion
@@ -371,76 +415,114 @@ aria-controls="collapseExample">
 panel-body/list-group
 
 ```html
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div
+  class="panel-group"
+  id="accordion"
+  role="tablist"
+  aria-multiselectable="true"
+>
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion"
-        href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <a
+          role="button"
+          data-toggle="collapse"
+          data-parent="#accordion"
+          href="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
           Collapsible Group Item #1
         </a>
       </h4>
     </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+    <div
+      id="collapseOne"
+      class="panel-collapse collapse in"
+      role="tabpanel"
+      aria-labelledby="headingOne"
+    >
       <div class="panel-body">
         Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
         terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
         skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
         Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-        single-origin coffee nulla assumenda shoreditch et. Nihil anim
-        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-        sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
-        you probably haven't heard of them accusamus labore sustainable VHS.
+        single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
+        helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+        beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+        haven't heard of them accusamus labore sustainable VHS.
       </div>
     </div>
   </div>
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse"
-        data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
-        aria-controls="collapseTwo">
+        <a
+          class="collapsed"
+          role="button"
+          data-toggle="collapse"
+          data-parent="#accordion"
+          href="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+        >
           Collapsible Group Item #2
         </a>
       </h4>
     </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+    <div
+      id="collapseTwo"
+      class="panel-collapse collapse"
+      role="tabpanel"
+      aria-labelledby="headingTwo"
+    >
       <div class="panel-body">
         Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
         terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
         skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
         Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-        single-origin coffee nulla assumenda shoreditch et. Nihil anim
-        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-        sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
-        you probably haven't heard of them accusamus labore sustainable VHS.
+        single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
+        helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+        beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+        haven't heard of them accusamus labore sustainable VHS.
       </div>
     </div>
   </div>
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse"
-        data-parent="#accordion" href="#collapseThree" aria-expanded="false"
-        aria-controls="collapseThree">
+        <a
+          class="collapsed"
+          role="button"
+          data-toggle="collapse"
+          data-parent="#accordion"
+          href="#collapseThree"
+          aria-expanded="false"
+          aria-controls="collapseThree"
+        >
           Collapsible Group Item #3
         </a>
       </h4>
     </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+    <div
+      id="collapseThree"
+      class="panel-collapse collapse"
+      role="tabpanel"
+      aria-labelledby="headingThree"
+    >
       <div class="panel-body">
         Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
         terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
         skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
         Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-        single-origin coffee nulla assumenda shoreditch et. Nihil anim
-        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-        sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
-        you probably haven't heard of them accusamus labore sustainable VHS.
-        </div>
+        single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
+        helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+        beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+        haven't heard of them accusamus labore sustainable VHS.
+      </div>
     </div>
   </div>
 </div>
@@ -455,19 +537,15 @@ panel-body/list-group
 
 ```html
 <!-- type,format,value -->
-<input
-id=”” name=””
+<input id=”” name=””
 type=”text/email/password/radiobutton/checkbox(checked)/submit/number/range/color/date/url”
-value=”(textfield/buttontext)”
-placeholder=”(默认占位文字)”
+value=”(textfield/buttontext)” placeholder=”(默认占位文字)”
 
 <!-- validate input data -->
 
-required
-pattern=”[0-9a-zA-z]{5/13-16}”      <!-- []:可用字符 {}:字符数目 -->
-min=”(number)”
-max=”(number)”
-step=”(步长:指定输入数字必须倍数关系)”
+required pattern=”[0-9a-zA-z]{5/13-16}”
+<!-- []:可用字符 {}:字符数目 -->
+min=”(number)” max=”(number)” step=”(步长:指定输入数字必须倍数关系)”
 <!-- validate input data-->
 />
 ```
@@ -483,46 +561,74 @@ step=”(步长:指定输入数字必须倍数关系)”
   <div class="form-group">
     <label for="firstname" class="col-sm-2 control-label">First Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="firstname" name="firstname"
-      placeholder="Enter First Name">
+      <input
+        type="text"
+        class="form-control"
+        id="firstname"
+        name="firstname"
+        placeholder="Enter First Name"
+      />
     </div>
   </div>
   <!-- input -->
   <div class="form-group">
     <label for="lastname" class="col-sm-2 control-label">Last Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="lastname" name="lastname"
-      placeholder="Enter Last Name">
+      <input
+        type="text"
+        class="form-control"
+        id="lastname"
+        name="lastname"
+        placeholder="Enter Last Name"
+      />
     </div>
   </div>
   <!-- input-addon -->
   <div class="form-group">
-    <label for="telnum" class="col-xs-12 col-sm-2 control-label">Contact Tel.</label>
+    <label for="telnum" class="col-xs-12 col-sm-2 control-label"
+      >Contact Tel.</label
+    >
     <div class="col-xs-5 col-sm-4 col-md-3">
       <div class="input-group">
         <div class="input-group-addon">(</div>
-        <input type="tel" class="form-control" id="areacode" name="areacode"
-        placeholder="Area code">
+        <input
+          type="tel"
+          class="form-control"
+          id="areacode"
+          name="areacode"
+          placeholder="Area code"
+        />
         <div class="input-group-addon">)</div>
       </div>
     </div>
     <div class="col-xs-7 col-sm-6 col-md-7">
-      <input type="tel" class="form-control" id="telnum" name="telnum"
-      placeholder="Tel. number">
+      <input
+        type="tel"
+        class="form-control"
+        id="telnum"
+        name="telnum"
+        placeholder="Tel. number"
+      />
     </div>
   </div>
   <!-- input -->
   <div class="form-group">
     <label for="emailid" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Email">
+      <input
+        type="email"
+        class="form-control"
+        id="emailid"
+        name="emailid"
+        placeholder="Email"
+      />
     </div>
   </div>
   <!-- check box and select -->
   <div class="form-group">
     <div class="checkbox col-sm-5 col-sm-offset-2">
       <label class="checkbox-inline">
-        <input type="checkbox" name="approve" value="">
+        <input type="checkbox" name="approve" value="" />
         <strong>May we contact you?</strong>
       </label>
     </div>
@@ -537,7 +643,12 @@ step=”(步长:指定输入数字必须倍数关系)”
   <div class="form-group">
     <label for="feedback" class="col-sm-2 control-label">Your Feedback</label>
     <div class="col-sm-10">
-      <textarea class="form-control" id="feedback" name="feedback" rows="12"></textarea>
+      <textarea
+        class="form-control"
+        id="feedback"
+        name="feedback"
+        rows="12"
+      ></textarea>
     </div>
   </div>
   <!-- submit button -->
@@ -553,21 +664,29 @@ step=”(步长:指定输入数字必须倍数关系)”
 <form>
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+    <input
+      type="email"
+      class="form-control"
+      id="exampleInputEmail1"
+      placeholder="Email"
+    />
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <input
+      type="password"
+      class="form-control"
+      id="exampleInputPassword1"
+      placeholder="Password"
+    />
   </div>
   <div class="form-group">
     <label for="exampleInputFile">File input</label>
-    <input type="file" id="exampleInputFile">
+    <input type="file" id="exampleInputFile" />
     <p class="help-block">Example block-level help text here.</p>
   </div>
   <div class="checkbox">
-    <label>
-      <input type="checkbox"> Check me out
-    </label>
+    <label> <input type="checkbox" /> Check me out </label>
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
@@ -576,9 +695,15 @@ step=”(步长:指定输入数字必须倍数关系)”
   <div class="col-lg-6">
     <div class="input-group">
       <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle"
-        data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">Action <span class="caret"></span></button>
+        <button
+          type="button"
+          class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Action <span class="caret"></span>
+        </button>
         <ul class="dropdown-menu">
           <li><a href="#">Action</a></li>
           <li><a href="#">Another action</a></li>
@@ -586,10 +711,13 @@ step=”(步长:指定输入数字必须倍数关系)”
           <li role="separator" class="divider"></li>
           <li><a href="#">Separated link</a></li>
         </ul>
-      </div><!-- /btn-group -->
-      <input type="text" class="form-control" aria-label="...">
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
+      </div>
+      <!-- /btn-group -->
+      <input type="text" class="form-control" aria-label="..." />
+    </div>
+    <!-- /input-group -->
+  </div>
+  <!-- /.col-lg-6 -->
 </div>
 ```
 
@@ -599,7 +727,7 @@ step=”(步长:指定输入数字必须倍数关系)”
 <div class="form-group">
   <div class="checkbox col-sm-5 col-sm-offset-2">
     <label class="checkbox-inline">
-      <input type="checkbox" name="approve" value="">
+      <input type="checkbox" name="approve" value="" />
       <strong>May we contact you?</strong>
     </label>
   </div>
@@ -622,29 +750,63 @@ step=”(步长:指定输入数字必须倍数关系)”
 ```html
 <div class="form-group has-success has-feedback">
   <label class="control-label" for="inputSuccess2">Input with success</label>
-  <input type="text" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status">
-  <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+  <input
+    type="text"
+    class="form-control"
+    id="inputSuccess2"
+    aria-describedby="inputSuccess2Status"
+  />
+  <span
+    class="glyphicon glyphicon-ok form-control-feedback"
+    aria-hidden="true"
+  ></span>
   <span id="inputSuccess2Status" class="sr-only">(success)</span>
 </div>
 <div class="form-group has-warning has-feedback">
   <label class="control-label" for="inputWarning2">Input with warning</label>
-  <input type="text" class="form-control" id="inputWarning2" aria-describedby="inputWarning2Status">
-  <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+  <input
+    type="text"
+    class="form-control"
+    id="inputWarning2"
+    aria-describedby="inputWarning2Status"
+  />
+  <span
+    class="glyphicon glyphicon-warning-sign form-control-feedback"
+    aria-hidden="true"
+  ></span>
   <span id="inputWarning2Status" class="sr-only">(warning)</span>
 </div>
 <div class="form-group has-error has-feedback">
   <label class="control-label" for="inputError2">Input with error</label>
-  <input type="text" class="form-control" id="inputError2" aria-describedby="inputError2Status">
-  <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+  <input
+    type="text"
+    class="form-control"
+    id="inputError2"
+    aria-describedby="inputError2Status"
+  />
+  <span
+    class="glyphicon glyphicon-remove form-control-feedback"
+    aria-hidden="true"
+  ></span>
   <span id="inputError2Status" class="sr-only">(error)</span>
 </div>
 <div class="form-group has-success has-feedback">
-  <label class="control-label" for="inputGroupSuccess1">Input group with success</label>
+  <label class="control-label" for="inputGroupSuccess1"
+    >Input group with success</label
+  >
   <div class="input-group">
     <span class="input-group-addon">@</span>
-    <input type="text" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
+    <input
+      type="text"
+      class="form-control"
+      id="inputGroupSuccess1"
+      aria-describedby="inputGroupSuccess1Status"
+    />
   </div>
-  <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+  <span
+    class="glyphicon glyphicon-ok form-control-feedback"
+    aria-hidden="true"
+  ></span>
   <span id="inputGroupSuccess1Status" class="sr-only">(success)</span>
 </div>
 ```
@@ -729,7 +891,9 @@ step=”(步长:指定输入数字必须倍数关系)”
   <blockquote>
     <p>paragraph</p>
     <footer>
-      Yogi Berra,<cite title="Source Title">The Wit and Wisdom of Yogi Berra, 2014</cite>
+      Yogi Berra,<cite title="Source Title"
+        >The Wit and Wisdom of Yogi Berra, 2014</cite
+      >
     </footer>
   </blockquote>
 </div>
@@ -750,7 +914,7 @@ step=”(步长:指定输入数字必须倍数关系)”
 <div class="row">
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img class="img-thumbnail" src="..." alt="...">
+      <img class="img-thumbnail" src="..." alt="..." />
       <div class="caption">
         <h3>Thumbnail label</h3>
         <p>...</p>
@@ -779,7 +943,7 @@ step=”(步长:指定输入数字必须倍数关系)”
   <li class="media">
     <div class="media-left media-middle">
       <a href="#">
-        <img class="media-object" src="..." alt="...">
+        <img class="media-object" src="..." alt="..." />
       </a>
     </div>
     <div class="media-body">
@@ -843,8 +1007,9 @@ step=”(步长:指定输入数字必须倍数关系)”
 
 ```html
 <div class="alert alert-warning alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert"
-  aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
   <strong>Warning!</strong> Better check yourself, you're not looking too good.
   <a href="#" class="alert-link">...</a>
 </div>
@@ -860,30 +1025,54 @@ step=”(步长:指定输入数字必须倍数关系)”
 
 ```html
 <div class="progress">
-  <div class="progress-bar progress-bar-success" role="progressbar"
-  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:
-  40%">
+  <div
+    class="progress-bar progress-bar-success"
+    role="progressbar"
+    aria-valuenow="40"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    style="width:
+  40%"
+  >
     <span class="sr-only">40% Complete (success)</span>
   </div>
 </div>
 <div class="progress">
-  <div class="progress-bar progress-bar-info" role="progressbar"
-  aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:
-  20%">
+  <div
+    class="progress-bar progress-bar-info"
+    role="progressbar"
+    aria-valuenow="20"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    style="width:
+  20%"
+  >
     <span class="sr-only">20% Complete</span>
   </div>
 </div>
 <div class="progress">
-  <div class="progress-bar progress-bar-warning" role="progressbar"
-  aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:
-  60%">
+  <div
+    class="progress-bar progress-bar-warning"
+    role="progressbar"
+    aria-valuenow="60"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    style="width:
+  60%"
+  >
     <span class="sr-only">60% Complete (warning)</span>
   </div>
 </div>
 <div class="progress">
-  <div class="progress-bar progress-bar-danger" role="progressbar"
-  aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:
-  80%">
+  <div
+    class="progress-bar progress-bar-danger"
+    role="progressbar"
+    aria-valuenow="80"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    style="width:
+  80%"
+  >
     <span class="sr-only">80% Complete (danger)</span>
   </div>
 </div>
@@ -897,23 +1086,51 @@ step=”(步长:指定输入数字必须倍数关系)”
 
 ```js
 // manually initialization
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-})
+$(function() {
+  $('[data-toggle="tooltip"]').tooltip();
+});
 ```
 
 ```html
-<button type="button" class="btn btn-default" data-toggle="tooltip"
-data-placement="left" title="Tooltip on left">Tooltip on left</button>
+<button
+  type="button"
+  class="btn btn-default"
+  data-toggle="tooltip"
+  data-placement="left"
+  title="Tooltip on left"
+>
+  Tooltip on left
+</button>
 
-<button type="button" class="btn btn-default" data-toggle="tooltip"
-data-placement="top" title="Tooltip on top">Tooltip on top</button>
+<button
+  type="button"
+  class="btn btn-default"
+  data-toggle="tooltip"
+  data-placement="top"
+  title="Tooltip on top"
+>
+  Tooltip on top
+</button>
 
-<button type="button" class="btn btn-default" data-toggle="tooltip"
-data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+<button
+  type="button"
+  class="btn btn-default"
+  data-toggle="tooltip"
+  data-placement="bottom"
+  title="Tooltip on bottom"
+>
+  Tooltip on bottom
+</button>
 
-<button type="button" class="btn btn-default" data-toggle="tooltip"
-data-placement="right" title="Tooltip on right">Tooltip on right</button>
+<button
+  type="button"
+  class="btn btn-default"
+  data-toggle="tooltip"
+  data-placement="right"
+  title="Tooltip on right"
+>
+  Tooltip on right
+</button>
 ```
 
 ### Popover
@@ -927,34 +1144,59 @@ data-placement="right" title="Tooltip on right">Tooltip on right</button>
 
 ```js
 // manually initialization
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
+$(function() {
+  $('[data-toggle="popover"]').popover();
+});
 ```
 
 ```html
-<button type="button" class="btn btn-default" data-container="body"
-data-toggle="popover" data-placement="left" title="left"
-data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<button
+  type="button"
+  class="btn btn-default"
+  data-container="body"
+  data-toggle="popover"
+  data-placement="left"
+  title="left"
+  data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+>
   Popover on left
 </button>
 
-<button type="button" class="btn btn-default" data-container="body"
-data-toggle="popover" data-placement="top" title="top" data-content="Vivamus
-sagittis lacus vel augue laoreet rutrum faucibus.">
+<button
+  type="button"
+  class="btn btn-default"
+  data-container="body"
+  data-toggle="popover"
+  data-placement="top"
+  title="top"
+  data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus."
+>
   Popover on top
 </button>
 
-<button type="button" class="btn btn-default" data-container="body"
-data-toggle="popover" data-placement="bottom" title="bottom"
-data-content="Vivamus
-sagittis lacus vel augue laoreet rutrum faucibus.">
+<button
+  type="button"
+  class="btn btn-default"
+  data-container="body"
+  data-toggle="popover"
+  data-placement="bottom"
+  title="bottom"
+  data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus."
+>
   Popover on bottom
 </button>
 
-<button type="button" class="btn btn-default" data-container="body"
-data-toggle="popover" data-placement="right" title="right"
-data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<button
+  type="button"
+  class="btn btn-default"
+  data-container="body"
+  data-toggle="popover"
+  data-placement="right"
+  title="right"
+  data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+>
   Popover on right
 </button>
 ```
@@ -967,28 +1209,47 @@ data-dismiss ="modal"
 
 修饰.modal-dialog、.modal-content
 
-$().modal('');
+\$().modal('');
 
 ```html
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+<button
+  type="button"
+  class="btn btn-primary btn-lg"
+  data-toggle="modal"
+  data-target="#myModal"
+>
   Launch demo modal
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div
+  class="modal fade"
+  id="myModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"
-        aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
         ...
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Close
+        </button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
@@ -997,27 +1258,59 @@ $().modal('');
 ```
 
 ```html
-<button type="button" class="btn btn-primary" data-toggle="modal"
-data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
-<button type="button" class="btn btn-primary" data-toggle="modal"
-data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
-<button type="button" class="btn btn-primary" data-toggle="modal"
-data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for
-@getbootstrap</button>
+<button
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#exampleModal"
+  data-whatever="@mdo"
+>
+  Open modal for @mdo
+</button>
+<button
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#exampleModal"
+  data-whatever="@fat"
+>
+  Open modal for @fat
+</button>
+<button
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#exampleModal"
+  data-whatever="@getbootstrap"
+>
+  Open modal for @getbootstrap
+</button>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"
-        aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
         <h4 class="modal-title" id="exampleModalLabel">New message</h4>
       </div>
       <div class="modal-body">
         <form>
           <div class="form-group">
             <label for="recipient-name" class="control-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="recipient-name" />
           </div>
           <div class="form-group">
             <label for="message-text" class="control-label">Message:</label>
@@ -1026,7 +1319,9 @@ data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Close
+        </button>
         <button type="button" class="btn btn-primary">Send message</button>
       </div>
     </div>
@@ -1037,11 +1332,11 @@ data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for
 ## Button
 
 - targets: a/input/button
-- base:    btn
-- color:   btn-primary btn-success btn-warning btn-danger btn-info
-- size:    btn-xs/sm/lg
+- base: btn
+- color: btn-primary btn-success btn-warning btn-danger btn-info
+- size: btn-xs/sm/lg
 - display: btn-block/btn-main
-- group:   btn-toolbar/btn-group/btn-group-vertical/btn-group-lg
+- group: btn-toolbar/btn-group/btn-group-vertical/btn-group-lg
 
 ```html
 <div class="btn-toolbar">
@@ -1059,10 +1354,10 @@ data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for
 </div>
 ```
 
-- other:   btn-social-icon
+- other: btn-social-icon
 
 ```html
-<button data-toggle=”” data-target-”” data-dismiss=””></button>
+<button data-toggle="””" data-target-”” data-dismiss="””"></button>
 ```
 
 ## Jumbotron
@@ -1072,7 +1367,7 @@ data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for
   <div class="container">
     <div class="main">
       <h1>We are Broadway</h1>
-      <a href ="#" class="btn-main">
+      <a href="#" class="btn-main">
         Get started
       </a>
     </div>
@@ -1093,7 +1388,11 @@ data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li
+      data-target="#carousel-example-generic"
+      data-slide-to="0"
+      class="active"
+    ></li>
     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
     <li data-target="#carousel-example-generic" data-slide-to="2"></li>
   </ol>
@@ -1101,13 +1400,13 @@ data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="..." alt="...">
+      <img src="..." alt="..." />
       <div class="carousel-caption">
         ...
       </div>
     </div>
     <div class="item">
-      <img src="..." alt="...">
+      <img src="..." alt="..." />
       <div class="carousel-caption">
         ...
       </div>
@@ -1116,13 +1415,21 @@ data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for
   </div>
 
   <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic"
-  role="button" data-slide="prev">
+  <a
+    class="left carousel-control"
+    href="#carousel-example-generic"
+    role="button"
+    data-slide="prev"
+  >
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="right carousel-control" href="#carousel-example-generic"
-  role="button" data-slide="next">
+  <a
+    class="right carousel-control"
+    href="#carousel-example-generic"
+    role="button"
+    data-slide="next"
+  >
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
@@ -1252,17 +1559,17 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const packageJson = require('./package.json');
 
 const devMode = process.env.NODE_ENV !== 'production';
-const useSass = !!(packageJson.devDependencies['node-sass']);
+const useSass = !!packageJson.devDependencies['node-sass'];
 
 const styleLoader = [
   devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
   {
     loader: 'css-loader',
     options: {
-      minimize: !devMode,
-    },
+      minimize: !devMode
+    }
   },
-  'postcss-loader',
+  'postcss-loader'
 ];
 
 if (useSass) {
@@ -1271,21 +1578,18 @@ if (useSass) {
 
 module.exports = {
   entry: {
-    main: './src/index.js',
+    main: './src/index.js'
   },
   output: {
     filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'build')
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader',
-          'eslint-loader',
-        ],
+        use: ['babel-loader', 'eslint-loader']
       },
       {
         test: /\.html$/,
@@ -1293,34 +1597,34 @@ module.exports = {
           {
             loader: 'html-loader',
             options: {
-              minimize: !devMode,
-            },
-          },
-        ],
+              minimize: !devMode
+            }
+          }
+        ]
       },
       {
         test: /\.(css|scss)$/,
-        use: [...styleLoader],
-      },
-    ],
+        use: [...styleLoader]
+      }
+    ]
   },
   plugins: [
     new CleanWebpackPlugin('build'),
     new HtmlWebpackPlugin({
       hash: true,
       template: './src/index.html',
-      filename: './index.html',
+      filename: './index.html'
     }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
     }),
-    new StyleLintPlugin(),
+    new StyleLintPlugin()
   ],
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx']
   },
-  devtool: 'source-map',
+  devtool: 'source-map'
 };
 ```
 
@@ -1405,12 +1709,11 @@ $enable-deprecation-messages: true !default;
 ```css
 $theme-colors: (
   'primary': #0074d9,
-  'danger': #ff4136
-  'secondary':#495057,
+  'danger': #ff4136 'secondary': #495057,
   'success': #37b24d,
   'info': #1c7ed6,
   'warning': #f59f00,
-  'danger': #f03e3e,
+  'danger': #f03e3e
 );
 
 $colors: (
@@ -1438,15 +1741,15 @@ key variable - `$spacer`:
 - b - for classes that set margin-bottom or padding-bottom
 - l - for classes that set margin-left or padding-left
 - r - for classes that set margin-right or padding-right
-- x - for classes that set both *-left and *-right
-- y - for classes that set both *-top and *-bottom
+- x - for classes that set both _-left and _-right
+- y - for classes that set both _-top and _-bottom
 - blank - for classes that set a margin or padding on all 4 sides of the element
 - 0 - for classes that eliminate the margin or padding by setting it to 0
-- 1 - (by default) for classes that set the margin or padding to $spacer * .25
-- 2 - (by default) for classes that set the margin or padding to $spacer * .5
-- 3 - (by default) for classes that set the margin or padding to $spacer
-- 4 - (by default) for classes that set the margin or padding to $spacer * 1.5
-- 5 - (by default) for classes that set the margin or padding to $spacer * 3
+- 1 - (by default) for classes that set the margin or padding to \$spacer \* .25
+- 2 - (by default) for classes that set the margin or padding to \$spacer \* .5
+- 3 - (by default) for classes that set the margin or padding to \$spacer
+- 4 - (by default) for classes that set the margin or padding to \$spacer \* 1.5
+- 5 - (by default) for classes that set the margin or padding to \$spacer \* 3
 - auto - for classes that set the margin to auto
 
 ```css
@@ -1484,9 +1787,9 @@ $grid-gutter-width: 30px !default;
 ```css
 $border-width: 1px !default;
 $border-color: $gray-300 !default;
-$border-radius: .25rem !default;
-$border-radius-lg: .3rem !default;
-$border-radius-sm: .2rem !default;
+$border-radius: 0.25rem !default;
+$border-radius-lg: 0.3rem !default;
+$border-radius-sm: 0.2rem !default;
 ```
 
 ### Custom Navbar and Navigation

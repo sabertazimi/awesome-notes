@@ -90,7 +90,7 @@
     - [Orientation Sensor](#orientation-sensor)
   - [Best Practice](#best-practice)
     - [Global Context](#global-context)
-    - [用Intent传递对象](#用intent传递对象)
+    - [用 Intent 传递对象](#用-intent-传递对象)
       - [Serializable](#serializable)
       - [Parcelable](#parcelable)
     - [Custom Logger](#custom-logger)
@@ -102,11 +102,11 @@
 ### Dalvik virtual machine
 
 1. register-based machine
-  基于寄存器(不写入内存)
+   基于寄存器(不写入内存)
 2. minimizeing instruction diapath and memory accesses
-  最小化指令分配黑内存访问
+   最小化指令分配黑内存访问
 3. giving more efficient instruction stream(a lot more semantic content)
-  提供更加高效的指令流
+   提供更加高效的指令流
 
 ### Basic Building Blocks
 
@@ -127,7 +127,7 @@
 - getter/setter
 - ViewHolder
 - Parcelable Implemention
-- GsonFormat : 根据JSONObject生成相应类
+- GsonFormat : 根据 JSONObject 生成相应类
 
 ## API Conventions
 
@@ -140,7 +140,7 @@
 
 ### BaseActivity
 
-查看当前界面属于哪个Activity，自定义Activity继承BaseActivity
+查看当前界面属于哪个 Activity，自定义 Activity 继承 BaseActivity
 
 ```java
 public class BaseActivity extends Activity {
@@ -154,7 +154,7 @@ public class BaseActivity extends Activity {
 
 ### Activity Collector
 
-在所有Activity的onCreate方法调用静态的addActivity方法，onDestroy方法调用静态的removeActivity方法。
+在所有 Activity 的 onCreate 方法调用静态的 addActivity 方法，onDestroy 方法调用静态的 removeActivity 方法。
 
 - `ActivityCollector.addActivity(this);`
 - `ActivityCollector.removeActivity(this);`
@@ -186,7 +186,7 @@ public class ActivityCollector {
 
 ### StartActivity
 
-为每个Activity添加静态的actionStart方法，供其他Activity启用此Activity
+为每个 Activity 添加静态的 actionStart 方法，供其他 Activity 启用此 Activity
 
 ```java
 public static void actionStart(Context context, String data1, String data2) {
@@ -212,8 +212,8 @@ e.g web browsers
 
 ```html
 <intent-filter>
-<action android:name="android.intent.action.MAIN" />
-<category android:name="android.intent.category.LAUNCHER" />
+  <action android:name="android.intent.action.MAIN" />
+  <category android:name="android.intent.category.LAUNCHER" />
 </intent-filter>
 ```
 
@@ -227,12 +227,12 @@ e.g web browsers
 
 #### TableLayout
 
-- `<TableLayout android:stretchColumns="1">` 拉伸第2列
-- `android:layout_span="2"` 占2列
+- `<TableLayout android:stretchColumns="1">` 拉伸第 2 列
+- `android:layout_span="2"` 占 2 列
 
 #### Custom Layout
 
-LayoutInflater作用是将layout的xml布局文件实例化为View类对象。
+LayoutInflater 作用是将 layout 的 xml 布局文件实例化为 View 类对象。
 
 ```java
 View view = LayoutInflater.from(context).inflate(R.layout.title, this/null);
@@ -249,11 +249,13 @@ custom Xml
 titie.xml
 
 ```html
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/title_bg" >
-<Button
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="@drawable/title_bg"
+>
+  <button
     android:id="@+id/title_back"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -261,8 +263,9 @@ titie.xml
     android:layout_margin="5dip"
     android:background="@drawable/back_bg"
     android:text="Back"
-    android:textColor="#fff" />
-<TextView
+    android:textColor="#fff"
+  />
+  <TextView
     android:id="@+id/title_text"
     android:layout_width="0dip"
     android:layout_height="wrap_content"
@@ -271,8 +274,9 @@ titie.xml
     android:gravity="center"
     android:text="Title Text"
     android:textColor="#fff"
-    android:textSize="24sp" />
-<Button
+    android:textSize="24sp"
+  />
+  <button
     android:id="@+id/title_edit"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -280,7 +284,8 @@ titie.xml
     android:layout_margin="5dip"
     android:background="@drawable/edit_bg"
     android:text="Edit"
-    android:textColor="#fff" />
+    android:textColor="#fff"
+  />
 </LinearLayout>
 ```
 
@@ -356,9 +361,9 @@ listView.setAdapter(adapter);
 - Custom Sub Xml(单项)
 - Custom ArrayAdapter
   - 重写构造函数
-  - 重写getView方法
-    - 重用convertView提升性能
-    - ViewHolder提升性能
+  - 重写 getView 方法
+    - 重用 convertView 提升性能
+    - ViewHolder 提升性能
 
 ```java
 
@@ -449,13 +454,11 @@ android.app.Fragment
 #### Xml in Activity.xml
 
 ```html
-<fragment
-    android:id="@+id/right_fragment"
-    <!-- custom fragment class -->
-    android:name="com.example.fragmenttest.RightFragment"
-    android:layout_width="0dp"
-    android:layout_height="match_parent"
-    android:layout_weight="1" />
+<fragment android:id="@+id/right_fragment" <!-- custom fragment class -->
+  android:name="com.example.fragmenttest.RightFragment"
+  android:layout_width="0dp" android:layout_height="match_parent"
+  android:layout_weight="1" /></fragment
+>
 ```
 
 #### Create View in Fragment
@@ -535,11 +538,11 @@ In AndroidManifest,xml
 ```html
 <!-- custom receiver class -->
 <receiver android:name=".MyBroadcastReceiver">
-<!-- receiver priority -->
-<intent-filter android:priority="100">
-<!-- custom broadcast -->
-<action android:name="com.example.broadcasttest. MY_BROADCAST"/>
-</intent-filter>
+  <!-- receiver priority -->
+  <intent-filter android:priority="100">
+    <!-- custom broadcast -->
+    <action android:name="com.example.broadcasttest. MY_BROADCAST" />
+  </intent-filter>
 </receiver>
 ```
 
@@ -692,8 +695,8 @@ public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 }
 ```
 
-Custom实现创建、升级数据库的逻辑
-构建出SQLiteOpenHelper 的实例后,再调用`getReadableDatabase()`或`getWritableDatabase()`方法创建数据库
+Custom 实现创建、升级数据库的逻辑
+构建出 SQLiteOpenHelper 的实例后,再调用`getReadableDatabase()`或`getWritableDatabase()`方法创建数据库
 
 ##### establish table
 
@@ -729,7 +732,7 @@ this.openOrCreateDatabase("myDateBase.db",MODE_PRIVATE , null);
 my_DataBase.close();
 ```
 
-- 非查询SQL指令
+- 非查询 SQL 指令
 
 ```java
 //创建一个名为"test"并带两个参数的表
@@ -768,18 +771,18 @@ db.delete("Book", "pages > ?", new String[] { "500"  });
 my_DataBase.execSQL("DROP TABLE test");
 ```
 
-- 查询SQL指令-游标Cursors
+- 查询 SQL 指令-游标 Cursors
   - `query()`
 
-|方法参数|对应 SQL 部分|描述|
-|:------|:----------|:------------|
-|table|from tableName|指定查询的表名|
-|columns|select column1, column2|指定查询的列名|
-|selection|where column = value|指定 where 的约束条件|
-|selectionArgs|-|为 where 中的占位符提供具体的值|
-|groupBy|group by column|指定需要 group by 的列|
-|having|having column = value|对 group by 后的结果进一步约束|
-|orderBy|order by column1, column2|指定查询结果的排序方式|
+| 方法参数      | 对应 SQL 部分             | 描述                            |
+| :------------ | :------------------------ | :------------------------------ |
+| table         | from tableName            | 指定查询的表名                  |
+| columns       | select column1, column2   | 指定查询的列名                  |
+| selection     | where column = value      | 指定 where 的约束条件           |
+| selectionArgs | -                         | 为 where 中的占位符提供具体的值 |
+| groupBy       | group by column           | 指定需要 group by 的列          |
+| having        | having column = value     | 对 group by 后的结果进一步约束  |
+| orderBy       | order by column1, column2 | 指定查询结果的排序方式          |
 
 ```java
 SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -823,7 +826,7 @@ if(cur!=null) {//游标不为空
 
 - SQLiteDatabase 的`beginTransaction()`方法
 - 调用`setTransactionSuccessful()`表示事务已经执行成功
-- finally代码块中调用`endTransaction()`来结束事务
+- finally 代码块中调用`endTransaction()`来结束事务
 
 ---
 
@@ -878,7 +881,7 @@ public class MyProvider extends ContentProvider {
 UriMatcher.addURI(uri, customNumber)/.match(uri)
 ```
 
-- 为传入URI指定自定义常量作为代号
+- 为传入 URI 指定自定义常量作为代号
 
 ---
 
@@ -918,22 +921,22 @@ AsyncTask 中的几个方法才能完成对任务的定制。经常需要去重�
 有以下四个:
 
 1. `onPreExecute()`
-  这个方法会在后台任务开始执行之前调用,用于进行一些界面上的初始化操作,
-  比如显示一个进度条对话框等。
+   这个方法会在后台任务开始执行之前调用,用于进行一些界面上的初始化操作,
+   比如显示一个进度条对话框等。
 2. `doInBackground(Params...)`
-  这个方法中的所有代码都会在子线程中运行,我们应该在这里去处理所有的耗时任务。
-  任务一旦完成就可以通过 return 语句来将任务的执行结果返回,如果 AsyncTask 的
-  第三个泛型参数指定的是 Void,就可以不返回任务执行结果。注意,在这个方法中是不
-  可以进行 UI 操作的,如果需要更新 UI 元素,比如说反馈当前任务的执行进度,
-  可以调用 publishProgress(Progress...)方法来完成。
+   这个方法中的所有代码都会在子线程中运行,我们应该在这里去处理所有的耗时任务。
+   任务一旦完成就可以通过 return 语句来将任务的执行结果返回,如果 AsyncTask 的
+   第三个泛型参数指定的是 Void,就可以不返回任务执行结果。注意,在这个方法中是不
+   可以进行 UI 操作的,如果需要更新 UI 元素,比如说反馈当前任务的执行进度,
+   可以调用 publishProgress(Progress...)方法来完成。
 3. `onProgressUpdate(Progress...)`
-  当在后台任务中调用了 publishProgress(Progress...)方法后,这个方法就会很快被调用,
-  方法中携带的参数就是在后台任务中传递过来的。在这个方法中可以对 UI 进行操作,
-  利用参数中的数值就可以对界面元素进行相应地更新。
+   当在后台任务中调用了 publishProgress(Progress...)方法后,这个方法就会很快被调用,
+   方法中携带的参数就是在后台任务中传递过来的。在这个方法中可以对 UI 进行操作,
+   利用参数中的数值就可以对界面元素进行相应地更新。
 4. `onPostExecute(Result)`
-  当后台任务执行完毕并通过 return 语句进行返回时,这个方法就很快会被调用。
-  返回的数据会作为参数传递到此方法中,可以利用返回的数据来进行一些 UI 操作,
-  比如说提醒任务执行的结果,以及关闭掉进度条对话框等。
+   当后台任务执行完毕并通过 return 语句进行返回时,这个方法就很快会被调用。
+   返回的数据会作为参数传递到此方法中,可以利用返回的数据来进行一些 UI 操作,
+   比如说提醒任务执行的结果,以及关闭掉进度条对话框等。
 
 ```java
 class DownloadTask extends AsyncTask<Void, Integer, Boolean> {
@@ -979,9 +982,7 @@ class DownloadTask extends AsyncTask<Void, Integer, Boolean> {
 ### Basic Service
 
 ```html
-//in AndroidManifest.xml
-<service android:name=".MyService" >
-</service>
+//in AndroidManifest.xml <service android:name=".MyService"> </service>
 ```
 
 ```java
@@ -1092,7 +1093,7 @@ public class MyIntentService extends IntentService {
 
 ### Alarm Service
 
-结合BroadcastReceiver可以实现定时任务
+结合 BroadcastReceiver 可以实现定时任务
 
 ```java
 AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -1100,8 +1101,8 @@ long triggerAtTime = SystemClock.elapsedRealtime() + 10 * 1000;
 manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pendingIntent);
 ```
 
-- Service延时发出广播
-- BroadcastReceiver接受广播后再次启动Service
+- Service 延时发出广播
+- BroadcastReceiver 接受广播后再次启动 Service
 
 ```java
 public int onStartCommand(Intent intent, int flags, int startId) {
@@ -1627,9 +1628,8 @@ Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 ### Global Context
 
 ```html
-<application
-    android:name="com.example.networktest.MyApplication" >
-......
+<application android:name="com.example.networktest.MyApplication">
+  ......
 </application>
 ```
 
@@ -1646,7 +1646,7 @@ public class MyApplication extends Application {
 }
 ```
 
-### 用Intent传递对象
+### 用 Intent 传递对象
 
 #### Serializable
 
@@ -1728,5 +1728,3 @@ public class LogUtil {
     }
 }
 ```
-
----

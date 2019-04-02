@@ -593,7 +593,7 @@
 - [React Testing Utilities](https://github.com/airbnb/enzyme)
 - [React Component hierachy](https://github.com/team-gryff/react-monocle)
 - [React a11y](https://github.com/reactjs/react-a11y)
-- Chrome Extensions -  React Dev Tools/Redux Dev Tools
+- Chrome Extensions - React Dev Tools/Redux Dev Tools
 - [Retoggle - Component Inspector](https://github.com/Raathigesh/retoggle)
 
 ### Unit Testing

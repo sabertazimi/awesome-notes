@@ -74,7 +74,6 @@ refer to parent-selector, only use it on:
   }
 
   &::after {
-
   }
 }
 ```
@@ -91,11 +90,11 @@ refer to parent-selector, only use it on:
 
 #### List
 
-- length($list)
+- length(\$list)
 - nth($list, $n)
-- set-nth($list, $n, $value)
+- set-nth($list, $n, \$value)
 - index($list, $value)
-- list-separator($list)
+- list-separator(\$list)
 - append($list, $value, [$separator])
 
 #### Map
@@ -103,8 +102,8 @@ refer to parent-selector, only use it on:
 - map-get($map, $key)
 - map-merge($map, $map)
 - map-remove($map, $keys)
-- map-keys($map)
-- map-values($map)
+- map-keys(\$map)
+- map-values(\$map)
 - map-has-key($map, $key)
 
 ```scss
@@ -143,7 +142,7 @@ $params: (true, 42, 'kittens');
 $params: (
   'c': 'kittens',
   'a': true,
-  'b': 42,
+  'b': 42
 );
 @include dummy($params...);
 ```
@@ -175,14 +174,11 @@ div {
 @mixin border-stroke($val) {
   @if $val == light {
     border: 1px solid black;
-  }
-  @else if $val == medium {
+  } @else if $val == medium {
     border: 3px solid black;
-  }
-  @else if $val == heavy {
+  } @else if $val == heavy {
     border: 6px solid black;
-  }
-  @else {
+  } @else {
     border: none;
   }
 }
@@ -295,7 +291,7 @@ $x: 1;
   border: 2px solid green;
 }
 
-.big-panel{
+.big-panel {
   @extend .panel;
   width: 150px;
   font-size: 2em;
@@ -365,10 +361,10 @@ or [Devdocs Guide](http://devdocs.io/sass-functions)
 
 #### Math
 
-- round($number)
-- ceil($number)
-- floor($number)
-- abs($number)
+- round(\$number)
+- ceil(\$number)
+- floor(\$number)
+- abs(\$number)
 - max
 - min
 
@@ -383,9 +379,9 @@ whatever {
 
 #### type and unit
 
-- unit($length)
-- unitless($length)
-- type-of($var)
+- unit(\$length)
+- unitless(\$length)
+- type-of(\$var)
 - is-type-of($var, $type)
 
 ## Error Handle
@@ -400,7 +396,7 @@ whatever {
 
 ```scss
 @function add-10($number) {
-  @if type-of($number) != "number" {
+  @if type-of($number) != 'number' {
     @warn "`#{$number}` is not a number of `add-10`.";
     @return false;
   }
@@ -502,7 +498,7 @@ in `main.scss` file:
 
 When working on a very large project with a lot of abstract utilities,
 it might be interesting to group them by topic rather than type,
-for instance typography (_typography.scss), theming (_theming.scss), etc.
+for instance typography (\_typography.scss), theming (\_theming.scss), etc.
 Each file contains all the related helpers: variables, functions, mixins and placeholders.
 
 ## Best Practice

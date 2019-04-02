@@ -33,10 +33,10 @@ parent routes are active when child routes are active
 
 ```jsx
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Redirect
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
 } from 'react-router-dom';
 
 class App extends Component {
@@ -44,14 +44,18 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route exact path='/tags' render={ () => {
-            return <Redirect to='/tags/all'/> }
-          }/>
-          <Route path='/tags/:tagName' component={Tags}/>
-          <Route path='/posts/:mdFile' component={Post}/>
-          <Route path='/book' component={Book}/>
-          <Route component={NotFound}/>
+          <Route exact path="/" component={Home} />
+          <Route
+            exact
+            path="/tags"
+            render={() => {
+              return <Redirect to="/tags/all" />;
+            }}
+          />
+          <Route path="/tags/:tagName" component={Tags} />
+          <Route path="/posts/:mdFile" component={Post} />
+          <Route path="/book" component={Book} />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     );
@@ -65,21 +69,22 @@ Key Notes: In component of parent route, should render {this.props.children}
 
 ```js
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Redirect
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
 } from 'react-router-dom';
 
-render((
-    <Router>
-        <Route path="/" component={App}>
-            <Route path="/repos" component={Repos}>
-                <Route path="/reops/:userName/:repoName" component={Repo} />
-            </ Route>
-        </ Route>
-    </ Router>
-),document.getElementById('app'));
+render(
+  <Router>
+    <Route path="/" component={App}>
+      <Route path="/repos" component={Repos}>
+        <Route path="/reops/:userName/:repoName" component={Repo} />
+      </Route>
+    </Route>
+  </Router>,
+  document.getElementById('app')
+);
 ```
 
 > In App.js: `render() { return (<div>... {this.props.children}</ div>); }`
@@ -127,7 +132,7 @@ const PrivateRoute = ({
 - etc...
 
 ```jsx
-<Route render={(props) => <Component {...props}/>}/>
+<Route render={props => <Component {...props} />} />
 ```
 
 ### Link/URL Props
@@ -195,27 +200,23 @@ export default withRouter(Login);
 ### Relative Path
 
 ```js
-<ConnectedRouter history={history} basename='/react-boilerplate'>
+<ConnectedRouter history={history} basename="/react-boilerplate">
   <Fragment>
     <Switch>
       <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
       <Route path={`${process.env.PUBLIC_URL}/about`} component={About} />
       <Route
         path={`${process.env.PUBLIC_URL}/404`}
-        render={() => (<Redirect to={`${process.env.PUBLIC_URL}/`} />)}
+        render={() => <Redirect to={`${process.env.PUBLIC_URL}/`} />}
       />
     </Switch>
   </Fragment>
-</ConnectedRouter>
+</ConnectedRouter>;
 
 const Header = () => (
   <div>
-    <NavLink to={`${process.env.PUBLIC_URL}/`}>
-      Home
-    </NavLink>
-    <NavLink to={`${process.env.PUBLIC_URL}/about`}>
-      About
-    </NavLink>
+    <NavLink to={`${process.env.PUBLIC_URL}/`}>Home</NavLink>
+    <NavLink to={`${process.env.PUBLIC_URL}/about`}>About</NavLink>
   </div>
 );
 ```
@@ -239,11 +240,11 @@ module.exports = {
   module: {
     rules: [
       { test: /\.(js)$/, use: 'babel-loader' },
-      { test: /\.css$/, use: [ 'style-loader', 'css-loader' ]}
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] }
     ]
   },
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -286,18 +287,18 @@ location / {
 ```jsx
 const instances = [];
 
-const register = (comp) => instances.push(comp);
-const unregister = (comp) => instances.splice(instances.indexOf(comp), 1);
+const register = comp => instances.push(comp);
+const unregister = comp => instances.splice(instances.indexOf(comp), 1);
 
-const historyPush = (path) => {
+const historyPush = path => {
   history.pushState({}, null, path);
   instances.forEach(instance => instance.forceUpdate());
-}
+};
 
-const historyReplace = (path) => {
+const historyReplace = path => {
   history.replaceState({}, null, path);
   instances.forEach(instance => instance.forceUpdate());
-}
+};
 ```
 
 ### Route Component
@@ -310,7 +311,7 @@ const matchPath = (pathname, options) => {
     return {
       path: null,
       url: pathname,
-      isExact: true,
+      isExact: true
     };
   }
 
@@ -335,17 +336,17 @@ const matchPath = (pathname, options) => {
   return {
     path,
     url,
-    isExact,
+    isExact
   };
-}
+};
 
 class Route extends Component {
   static propTypes: {
     path: PropTypes.string,
     exact: PropTypes.bool,
     component: PropTypes.func,
-    render: PropTypes.func,
-  }
+    render: PropTypes.func
+  };
 
   componentWillMount() {
     addEventListener('popstate', this.handlePop);
@@ -359,15 +360,10 @@ class Route extends Component {
 
   handlePop = () => {
     this.forceUpdate();
-  }
+  };
 
   render() {
-    const {
-      path,
-      exact,
-      component,
-      render,
-    } = this.props;
+    const { path, exact, component, render } = this.props;
 
     const match = matchPath(location.pathname, { path, exact });
 
@@ -397,18 +393,18 @@ each `<Route>` will be aware of that and re-match and re-render with `instances`
 class Link extends Component {
   static propTypes = {
     to: PropTypes.string.isRequired,
-    replace: PropTypes.bool,
-  }
+    replace: PropTypes.bool
+  };
 
-  handleClick = (event) => {
+  handleClick = event => {
     const { replace, to } = this.props;
     event.preventDefault();
 
     replace ? historyReplace(to) : historyPush(to);
-  }
+  };
 
   render() {
-    const { to, children} = this.props;
+    const { to, children } = this.props;
 
     return (
       <a href={to} onClick={this.handleClick}>
@@ -425,12 +421,12 @@ class Link extends Component {
 class Redirect extends Component {
   static defaultProps = {
     push: false
-  }
+  };
 
   static propTypes = {
     to: PropTypes.string.isRequired,
-    push: PropTypes.bool.isRequired,
-  }
+    push: PropTypes.bool.isRequired
+  };
 
   componentDidMount() {
     const { to, push } = this.props;

@@ -1,4 +1,3 @@
-
 # Functional Programming Basic Notes
 
 <!-- TOC -->
@@ -45,9 +44,9 @@
 
 > e.g. λx.y λx.(λy.xy)
 
-- 变量 x 本身就是一个有效的lambda项
-- 如果 t 是一个lambda项，而 x 是一个变量，则 λx.t 是一个lambda项（称为lambda抽象）
-- 如果 t 和 s 是lambda项，那么 (ts) 是一个lambda项（称为应用）
+- 变量 x 本身就是一个有效的 lambda 项
+- 如果 t 是一个 lambda 项，而 x 是一个变量，则 λx.t 是一个 lambda 项（称为 lambda 抽象）
+- 如果 t 和 s 是 lambda 项，那么 (ts) 是一个 lambda 项（称为应用）
 
 ### Lambda Reduction
 
@@ -61,7 +60,7 @@
 
 #### eta | η 归约
 
-`λx.M x ≡ M` 用于清除lambda表达式中存在的冗余函数抽象
+`λx.M x ≡ M` 用于清除 lambda 表达式中存在的冗余函数抽象
 
 ### Church Numerals
 
@@ -77,7 +76,7 @@ S ≡ λn.λf.λx.f (n f x)
 ...
 ```
 
-对后继函数S和丘奇数的简单验证如下：
+对后继函数 S 和丘奇数的简单验证如下：
 
 ```haskell
 S 0
@@ -244,7 +243,7 @@ evaluation: whole let result = body_result
 
 ### options
 
-- NONE  : type = 'a option
+- NONE : type = 'a option
 - SOME e: type = `e_type` option
 - isSome: type = 'a option -> bool
 - valOf : type = 'a option -> 'a
@@ -253,7 +252,7 @@ evaluation: whole let result = body_result
 
 - e1 andalso e2: keyword
 - e1 orelse e2 : keyword
-- not e1       : bool -> bool
+- not e1 : bool -> bool
 - `=`(equal) `<>`(not equal) `>` `<` `>=` `<=`: require two same type elem
 
 ### closure

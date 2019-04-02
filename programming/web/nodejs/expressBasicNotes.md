@@ -1,4 +1,3 @@
-
 # Express Basic Notes
 
 <!-- TOC -->
@@ -70,14 +69,14 @@ app.use(middlewareFunction);
 
 #### res.local
 
-res.locals中的所有属性都会传递到模板的上下文中
+res.locals 中的所有属性都会传递到模板的上下文中
 
-在app.js中, use页面控制器之前, 加入:
+在 app.js 中, use 页面控制器之前, 加入:
 
 ```js
-app.use(function (req, res, next) {
-    res.locals.user = req.user;
-    next();
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  next();
 });
 ```
 

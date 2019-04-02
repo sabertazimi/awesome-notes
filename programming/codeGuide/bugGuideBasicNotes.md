@@ -1,4 +1,3 @@
-
 # Bug List
 
 <!-- TOC -->
@@ -22,7 +21,7 @@
 - 栈缓冲区溢出
 - 空指针解引用
 - (隐式)类型转换
-- GOT覆写(Global Offset Table)
+- GOT 覆写(Global Offset Table)
 
 ## 低概率/偶发性 Bug
 

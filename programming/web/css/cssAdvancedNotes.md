@@ -55,7 +55,7 @@ $xs: $base / $ratio / $ratio;
 $sm: $base / $ratio;
 $md: $base;
 $lg: $base * $ratio;
-$xl: $base * $ratio *ratio;
+$xl: $base * $ratio * ratio;
 ```
 
 #### font-size
@@ -138,7 +138,7 @@ to let developers enhance css without any browser updates
 ### CSS Selectors
 
 减少选择器的复杂性，与构造样式本身的其他工作相比，
-选择器复杂性可以占用计算元素样式所需时间的50%以上
+选择器复杂性可以占用计算元素样式所需时间的 50%以上
 
 ### CSS Triggers
 
@@ -157,13 +157,13 @@ or call JS DOM API triggering layout stage (reflow)
 告知浏览器该元素会有哪些变化的方法，这样浏览器可以在元素属性真正发生变化之前提前做好对应的优化准备工作
 
 ```css
-{
+ {
   will-change: auto;
   will-change: scroll-position;
   will-change: contents;
-  will-change: transform;       /* Example of <custom-ident> */
-  will-change: opacity;         /* Example of <custom-ident> */
-  will-change: left, top;       /* Example of two <animateable-feature> */
+  will-change: transform; /* Example of <custom-ident> */
+  will-change: opacity; /* Example of <custom-ident> */
+  will-change: left, top; /* Example of two <animateable-feature> */
 
   will-change: unset;
   will-change: initial;
@@ -283,75 +283,122 @@ window.requestAnimationFrame(step);
 /***** Selector Hacks ******/
 
 /* IE6 and below */
-* html #uno  { color: red }
+* html #uno {
+  color: red;
+}
 
 /* IE7 */
-*:first-child+html #dos { color: red }
+*:first-child + html #dos {
+  color: red;
+}
 
 /* IE7, FF, Saf, Opera  */
-html>body #tres { color: red }
+html > body #tres {
+  color: red;
+}
 
 /* IE8, FF, Saf, Opera (Everything but IE 6,7) */
-html>/**/body #cuatro { color: red }
+html>/**/body #cuatro {
+  color: red;
+}
 
 /* Opera 9.27 and below, safari 2 */
-html:first-child #cinco { color: red }
+html:first-child #cinco {
+  color: red;
+}
 
 /* Safari 2-3 */
-html[xmlns*=""] body:last-child #seis { color: red }
+html[xmlns*=''] body:last-child #seis {
+  color: red;
+}
 
 /* safari 3+, chrome 1+, opera9+, ff 3.5+ */
-body:nth-of-type(1) #siete { color: red }
+body:nth-of-type(1) #siete {
+  color: red;
+}
 
 /* safari 3+, chrome 1+, opera9+, ff 3.5+ */
-body:first-of-type #ocho {  color: red }
+body:first-of-type #ocho {
+  color: red;
+}
 
 /* saf3+, chrome1+ */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
- #diez  { color: red  }
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  #diez {
+    color: red;
+  }
 }
 
 /* iPhone / mobile webkit */
 @media screen and (max-device-width: 480px) {
- #veintiseis { color: red  }
+  #veintiseis {
+    color: red;
+  }
 }
 
 /* Safari 2 - 3.1 */
-html[xmlns*=""]:root #trece  { color: red  }
+html[xmlns*='']:root #trece {
+  color: red;
+}
 
 /* Safari 2 - 3.1, Opera 9.25 */
-*|html[xmlns*=""] #catorce { color: red  }
+*|html[xmlns*=''] #catorce {
+  color: red;
+}
 
 /* Everything but IE6-8 */
-:root *> #quince { color: red  }
+:root * > #quince {
+  color: red;
+}
 
 /* IE7 */
-*+html #dieciocho {  color: red }
+* + html #dieciocho {
+  color: red;
+}
 
 /* Firefox only. 1+ */
-#veinticuatro,  x:-moz-any-link  { color: red }
+#veinticuatro,
+x:-moz-any-link {
+  color: red;
+}
 
 /* Firefox 3.0+ */
-#veinticinco,  x:-moz-any-link, x:default  { color: red  }
+#veinticinco,
+x:-moz-any-link,
+x:default {
+  color: red;
+}
 
 /***** Attribute Hacks ******/
 
 /* IE6 */
-#once { _color: blue }
+#once {
+  _color: blue;
+}
 
 /* IE6, IE7 */
-#doce { *color: blue; /* or #color: blue */ }
+#doce {
+  *color: blue; /* or #color: blue */
+}
 
 /* Everything but IE6 */
-#diecisiete { color/**/: blue }
+#diecisiete {
+  color/**/: blue;
+}
 
 /* IE6, IE7, IE8 */
-#diecinueve { color: blue\9; }
+#diecinueve {
+  color: blue\9;
+}
 
 /* IE7, IE8 */
-#veinte { color/*\**/: blue\9; }
+#veinte {
+  color/*\**/: blue\9;
+}
 
 /* IE6, IE7 -- acts as an !important */
-#veintesiete { color: blue !ie; } /* string after ! can be anything */
+#veintesiete {
+  color: blue !ie;
+} /* string after ! can be anything */
 /* stylelint-enable */
 ```
