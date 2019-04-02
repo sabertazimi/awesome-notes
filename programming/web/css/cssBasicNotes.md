@@ -795,8 +795,8 @@ div {
 }
 
 h2::before {
-  counter-increment: tidbit-counter;
-  content: counter(tidbit-counter) ": ";
+  counter-increment: tidbit-counter 1;
+  content: counter(tidbit-counter, list-style-type) ": ";
 }
 ```
 
