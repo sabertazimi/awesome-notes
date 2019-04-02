@@ -113,6 +113,7 @@
     - [Font Best Practice](#font-best-practice)
   - [CSS Couter](#css-couter)
   - [CSS Filter](#css-filter)
+  - [Object Position/Fit](#object-positionfit)
   - [Animation](#animation)
     - [animation property](#animation-property)
       - [transition+transform](#transitiontransform)
@@ -2138,6 +2139,31 @@ filter: contrast(175%) brightness(3%);
 filter: inherit;
 filter: initial;
 filter: unset;
+```
+
+## Object Position/Fit
+
+object-position/object-fit 只针对替换元素有作用:
+
+- form component
+- img
+- video
+
+object-position/object-fit 之间的关系有点类似于
+background-position/background-size
+
+```css
+.image-container {
+  position: relative;
+  padding-bottom: calc( 2 / 3) * 100%; /* (height / width) ratio */
+}
+
+.image-container > img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 ```
 
 ## Animation
