@@ -194,7 +194,7 @@ specificiy has 4 bits - thousands, hundreds, tens, ones `0000`:
 - tens: class selector, attribute selector, pseudo-class(:)
 - ones: element selector, pseudo-element(::)
 
-> Universal selector (*), combinators (+, >, ~, ' ')
+> Universal selector (\*), combinators (+, >, ~, ' ')
 > negation pseudo-class (:not) have no effect on specificity,
 > but selectors in it have effect on specificity
 
@@ -211,7 +211,7 @@ h1 + p::first-letter {
   specificity: 0003;
 }
 
-li > a[href*="en-US"] > .inline-warning {
+li > a[href*='en-US'] > .inline-warning {
   specificity: 0022;
 }
 
@@ -296,7 +296,7 @@ It is calculated from the specified value by:
 
 1. Handling the special values `inherit`, `initial`, `unset`, and `revert`
 2. Doing the computation needed to reach the value described in the
-  "Computed value" line in the property's definition table
+   "Computed value" line in the property's definition table
 
 ### Used Value
 
@@ -316,14 +316,14 @@ after any necessary approximations have been applied
 The user agent performs four steps to calculate a property's actual (final) value:
 
 1. the specified value is determined based on the result of
-  cascading, inheritance, or using the initial value.
+   cascading, inheritance, or using the initial value.
 2. the computed value is calculated according to the specification
-  (for example, a span with position:
-  absolute will have its computed display changed to block)
+   (for example, a span with position:
+   absolute will have its computed display changed to block)
 3. layout is calculated, resulting in the used value
 4. the used value is transformed according to
-  the limitations of the local environment,
-  resulting in the actual value
+   the limitations of the local environment,
+   resulting in the actual value
 
 > initial -> specified -> computed -> used -> actual value
 
@@ -384,11 +384,11 @@ Size in em if the font-size should be modular
   font-size: 1.2rem;
 }
 
-.container  p {
+.container p {
   font-size: 1em;
 }
 
-.container  small {
+.container small {
   font-size: 0.9em;
 }
 ```
@@ -576,7 +576,7 @@ Size in em if the font-size should be modular
 
 ### CSS Files
 
-- abstracts: $variables, @mixin function
+- abstracts: \$variables, @mixin function
 - vendors: external libraries (font-awesome, bootstrap)
 - base: normalize.css, reset.css, utils.css, font.css, base.css
   (margin-right, text-center, float-right)
@@ -612,7 +612,9 @@ ul li {
 E > F：直接子选择器
 
 ```css
-ul > li {list-style: none;} /* 仅限ul的直接子元素li，忽略嵌套子元素 */
+ul > li {
+  list-style: none;
+} /* 仅限ul的直接子元素li，忽略嵌套子元素 */
 ```
 
 E + F：直接相邻兄弟选择器
@@ -642,19 +644,25 @@ h1 ~ p {
 `E[attr]`
 
 ```scss
-input[required] {border: 1px solid #f00;} //定位页面里所有具有必填属性"required"的input
+input[required] {
+  border: 1px solid #f00;
+} //定位页面里所有具有必填属性"required"的input
 ```
 
 `E[attr=val]`
 
 ```scss
-input[type=password] {border: 1px solid #aaa;} //定位页面里的密码输入框
+input[type='password'] {
+  border: 1px solid #aaa;
+} //定位页面里的密码输入框
 ```
 
 `E[attr|=val]`
 
 ```scss
-p[class|=a] {color: #333;} //定位页面里所有的P段落里具有class属性且属性值为a或是a-开始的，比如class="a"以及class="a-b"
+p[class|='a'] {
+  color: #333;
+} //定位页面里所有的P段落里具有class属性且属性值为a或是a-开始的，比如class="a"以及class="a-b"
 ```
 
 `E[attr~=val]`
@@ -662,26 +670,34 @@ p[class|=a] {color: #333;} //定位页面里所有的P段落里具有class属性
 ```scss
 // 定位页面里所有具有属性title且属性值里拥有完整单词english的div容器
 // 比如title="english"以及title="a english"
-div[title~=english] {color: #f88;}
+div[title~='english'] {
+  color: #f88;
+}
 ```
 
 `E[attr^=val]`
 
 ```scss
-div[class^=a] {color: #666;} //定位页面里具有属性class且属性值以a开头的div容器，比如class="a"以及class="ab"
+div[class^='a'] {
+  color: #666;
+} //定位页面里具有属性class且属性值以a开头的div容器，比如class="a"以及class="ab"
 ```
 
 `E[attr$=val]`
 
 ```scss
-div[class$=a] {color: #f00;}
+div[class$='a'] {
+  color: #f00;
+}
 //定位页面里具有属性class且属性值以a结尾的div窗口，比如class="nba"以及class="cba"
 ```
 
 `E[attr*=val]`
 
 ```scss
-a[title*=link] {text-decoration: underline;}
+a[title*='link'] {
+  text-decoration: underline;
+}
 //定位所有title里具有link字符串的a链接
 ```
 
@@ -693,27 +709,27 @@ a[title*=link] {text-decoration: underline;}
 
 > link - visited - hover order matters
 
-- :active：被激活时的状态，不仅限于链接，可用于任何具有tabindex属性的元素；
-- :focus：获得焦点时状态，不仅限于链接，可用于任何具有tabindex属性的元素：
+- :active：被激活时的状态，不仅限于链接，可用于任何具有 tabindex 属性的元素；
+- :focus：获得焦点时状态，不仅限于链接，可用于任何具有 tabindex 属性的元素：
 - :enabled：已启用的界面元素：`input`
 - :disabled：已禁用的界面元素：`input`
 - :target：该选择器定位当前活动页面内定位点的目标元素, #anchor-name `#info:target {font-size:24px;}`
-- :default：应用于一个或多个作为一组类似元素中的默认元素的UI元素；
-- :valid：应用于输入验证有效元素，基于input的type/pattern属性
+- :default：应用于一个或多个作为一组类似元素中的默认元素的 UI 元素；
+- :valid：应用于输入验证有效元素，基于 input 的 type/pattern 属性
 - :invalid：应用于输入验证无效元素，
-- :in-range：应用于具有范围限制的元素，其中该值位于限制内；比如具有min和max属性的number和range输入框；
-- :out-of-range：与:in-range选择相反，其中该值在限制范围外；
-- :required：应用于具有必填属性required的表单控件；
-- :optional：应用于没有必填属性required的所有表单控件
+- :in-range：应用于具有范围限制的元素，其中该值位于限制内；比如具有 min 和 max 属性的 number 和 range 输入框；
+- :out-of-range：与:in-range 选择相反，其中该值在限制范围外；
+- :required：应用于具有必填属性 required 的表单控件；
+- :optional：应用于没有必填属性 required 的所有表单控件
 - :read-only：应用于其内容无法供用户修改的元素；
 - :read-write：应用于其内容可供用户修改的元素，比如输入框；
-- :root：根元素，始终指html元素；
+- :root：根元素，始终指 html 元素；
 - :placeholder-shown: select `input` with placeholer
 - E :nth-child(n) 选择 E 的第 n 个孩子
-- E F:nth-child(n)：该选择器定位元素E的第n个子元素的元素F,可省略E
-- E F:nth-last-child(n)：该选择器定位元素E的倒数第n个子元素的元素F,可省略E
-- E F:nth-of-type(n)：该选择器定位元素E的第n个 **相同类型** 子元素,可省略E
-- E F:nth-lash-of-type(n)：该选择器定位元素E的导数第n个 **相同类型** 子元素,可省略E
+- E F:nth-child(n)：该选择器定位元素 E 的第 n 个子元素的元素 F,可省略 E
+- E F:nth-last-child(n)：该选择器定位元素 E 的倒数第 n 个子元素的元素 F,可省略 E
+- E F:nth-of-type(n)：该选择器定位元素 E 的第 n 个 **相同类型** 子元素,可省略 E
+- E F:nth-lash-of-type(n)：该选择器定位元素 E 的导数第 n 个 **相同类型** 子元素,可省略 E
 - E F:first-child 第一个孩子
 - E F:last-child 最后一个孩子
 - E F:only-child 单一后代
@@ -758,34 +774,45 @@ input:not(:placeholder-shown) + .msg {
 
 ```css
 //定义选中的文本颜色与背景色
-::selection {background:#444; color:#fff;}
+::selection {
+  background: #444;
+  color: #fff;
+}
 ```
 
 - ::before 与 ::after ：使用 contnet 属性生成额外的内容并插入在标记中：
 
 ```css
-a:after { content: "↗"; }
+a:after {
+  content: '↗';
+}
 ```
 
 attr() – 调用当前元素的属性
 
 ```css
-a:after { content:"(" attr(href) ")"; }
-a:after { content:"(" attr(data-language) ")"; }
+a:after {
+  content: '(' attr(href) ')';
+}
+a:after {
+  content: '(' attr(data-language) ')';
+}
 ```
 
 url() / uri() – 用于引用媒体文件
 
 ```css
-h1::before { content: url(logo.png); }
+h1::before {
+  content: url(logo.png);
+}
 ```
 
-counter() –  调用计数器，可以不使用列表元素实现序号功能,配合CSS3中`counter-increment`和`counter-reset`属性
+counter() – 调用计数器，可以不使用列表元素实现序号功能,配合 CSS3 中`counter-increment`和`counter-reset`属性
 
 ```css
 h2:before {
-    counter-increment: chapter;
-    content: "Chapter " counter(chapter);
+  counter-increment: chapter;
+  content: 'Chapter ' counter(chapter);
 }
 ```
 
@@ -796,7 +823,7 @@ div {
 
 h2::before {
   counter-increment: tidbit-counter 1;
-  content: counter(tidbit-counter, list-style-type) ": ";
+  content: counter(tidbit-counter, list-style-type) ': ';
 }
 ```
 
@@ -818,43 +845,60 @@ nested counters
 
 ```css
 ol {
-  counter-reset: section;                /* 为每个ol元素创建新的计数器实例 */
+  counter-reset: section; /* 为每个ol元素创建新的计数器实例 */
   list-style-type: none;
 }
 
 li:before {
-  counter-increment: section;            /* 只增加计数器的当前实例 */
-  content: counters(section, ".") " ";   /* 为所有计数器实例增加以“.”分隔的值 */
+  counter-increment: section; /* 只增加计数器的当前实例 */
+  content: counters(section, '.') ' '; /* 为所有计数器实例增加以“.”分隔的值 */
 }
 ```
 
 ```html
 <ol>
-  <li>item</li>          <!-- 1     -->
-  <li>item               <!-- 2     -->
+  <li>item</li>
+  <!-- 1     -->
+  <li>
+    item
+    <!-- 2     -->
     <ol>
-      <li>item</li>      <!-- 2.1   -->
-      <li>item</li>      <!-- 2.2   -->
-      <li>item           <!-- 2.3   -->
+      <li>item</li>
+      <!-- 2.1   -->
+      <li>item</li>
+      <!-- 2.2   -->
+      <li>
+        item
+        <!-- 2.3   -->
         <ol>
-          <li>item</li>  <!-- 2.3.1 -->
-          <li>item</li>  <!-- 2.3.2 -->
+          <li>item</li>
+          <!-- 2.3.1 -->
+          <li>item</li>
+          <!-- 2.3.2 -->
         </ol>
         <ol>
-          <li>item</li>  <!-- 2.3.1 -->
-          <li>item</li>  <!-- 2.3.2 -->
-          <li>item</li>  <!-- 2.3.3 -->
+          <li>item</li>
+          <!-- 2.3.1 -->
+          <li>item</li>
+          <!-- 2.3.2 -->
+          <li>item</li>
+          <!-- 2.3.3 -->
         </ol>
       </li>
-      <li>item</li>      <!-- 2.4   -->
+      <li>item</li>
+      <!-- 2.4   -->
     </ol>
   </li>
-  <li>item</li>          <!-- 3     -->
-  <li>item</li>          <!-- 4     -->
+  <li>item</li>
+  <!-- 3     -->
+  <li>item</li>
+  <!-- 4     -->
 </ol>
 <ol>
-  <li>item</li>          <!-- 1     -->
-  <li>item</li>          <!-- 2     -->
+  <li>item</li>
+  <!-- 1     -->
+  <li>item</li>
+  <!-- 2     -->
 </ol>
 ```
 
@@ -862,15 +906,15 @@ li:before {
 
 ```css
 .first-details-intro::after {
-     width: 0;
-     height: 0;
-     content: "";
-     position: absolute;
-     top: 50%;
-     right: 0;
-     border-top: 15px solid transparent;
-     border-right: 25px solid #fff;
-     border-bottom: 15px solid transparent;
+  width: 0;
+  height: 0;
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  border-top: 15px solid transparent;
+  border-right: 25px solid #fff;
+  border-bottom: 15px solid transparent;
 }
 ```
 
@@ -913,7 +957,7 @@ visible,hidden,scroll,auto
 
 ### text-overflow
 
-- clip     切除溢出部分
+- clip 切除溢出部分
 - ellipsis 省略号标志
 
 ```css
@@ -977,7 +1021,7 @@ cal(10em + 3px);
 
 - column-count
 - column-width
-- column-gap         分隔距离
+- column-gap 分隔距离
 - column-rule(style) 分隔线
 
 ## Box Model
@@ -997,14 +1041,14 @@ if `height` of parent is `auto`, it's not working.
 
 ## Block Formatting Context
 
-- 一个BFC包含创建该上下文元素的所有子元素，但不包括创建了新BFC的子元素的内部元素
-- BFC就是页面上的一个隔离的独立容器, 容器里面的子元素不会影响到外面的元素, 反之也如此
-- 一个元素不能同时存在于两个BFC中: 可让处于BFC内部的元素与外部的元素相互隔离
-- 内部的Box会在垂直方向，一个接一个地放置
+- 一个 BFC 包含创建该上下文元素的所有子元素，但不包括创建了新 BFC 的子元素的内部元素
+- BFC 就是页面上的一个隔离的独立容器, 容器里面的子元素不会影响到外面的元素, 反之也如此
+- 一个元素不能同时存在于两个 BFC 中: 可让处于 BFC 内部的元素与外部的元素相互隔离
+- 内部的 Box 会在垂直方向，一个接一个地放置
 - vertical margin collapsing
-- 每个元素的margin box的左边, 与包含块border box的左边相接触
-- BFC的区域不会与 float box 重叠: 自适应分栏布局, 清除外/内部浮动
-- 计算BFC的高度时, 浮动元素也参与计算: 防止内边距塌陷 (margin-top collapse with margin-bottom)
+- 每个元素的 margin box 的左边, 与包含块 border box 的左边相接触
+- BFC 的区域不会与 float box 重叠: 自适应分栏布局, 清除外/内部浮动
+- 计算 BFC 的高度时, 浮动元素也参与计算: 防止内边距塌陷 (margin-top collapse with margin-bottom)
 
 ### Create BFC
 
@@ -1013,7 +1057,7 @@ if `height` of parent is `auto`, it's not working.
 - float: left/right
 - position: absolute/fixed
 - display: inline-block
-- display: table-cell/table-caption/table-*h
+- display: table-cell/table-caption/table-\*h
 - display: flow-root
 - direct children of `display: flex/inline-flex`
 - direct children of `display: grid/inline-grid`
@@ -1039,10 +1083,10 @@ float make element specified value of `display`:
 
 ```css
 .parent {
-    position: fixed;
-    left: 0px;
-    top: 5px;
-    width: 100%;
+  position: fixed;
+  left: 0px;
+  top: 5px;
+  width: 100%;
 }
 ```
 
@@ -1054,7 +1098,7 @@ float make element specified value of `display`:
 ```css
 .clearfix:before,
 .clearfix:after {
-  content: "";
+  content: '';
   display: table;
 }
 .clearfix:after {
@@ -1160,7 +1204,7 @@ position
 
 ### Under the Hood of `flex`
 
-当 flex-basis 设置为 auto 且 width（或者height）不为 auto 时，计算 used size 时会用到 width（或者height）的值
+当 flex-basis 设置为 auto 且 width（或者 height）不为 auto 时，计算 used size 时会用到 width（或者 height）的值
 
 - when there is some free space left:
   true width = `flex-basis` (or `width`) + `flex-grow`/sum of `flex-grow`
@@ -1174,17 +1218,17 @@ position
 
 - `flex:auto`:
 
-元素会根据自身的宽度与高度来确定尺寸，但是会自行伸长以吸收flex容器中额外的自由空间，
+元素会根据自身的宽度与高度来确定尺寸，但是会自行伸长以吸收 flex 容器中额外的自由空间，
 也会缩短至自身最小尺寸以适应容器 equal to`flex: 1 1 auto`
 
 - `flex:initial`:
 
 属性默认值， 元素会根据自身宽高设置尺寸。它会缩短自身以适应容器，
-但不会伸长并吸收flex容器中的额外自由空间来适应容器 equal to `flex: 0 1 auto`
+但不会伸长并吸收 flex 容器中的额外自由空间来适应容器 equal to `flex: 0 1 auto`
 
 - `flex:none`:
 
-元素会根据自身宽高来设置尺寸。它是完全非弹性的：既不会缩短，也不会伸长来适应flex容器 equal to `flex: 0 0 auto`
+元素会根据自身宽高来设置尺寸。它是完全非弹性的：既不会缩短，也不会伸长来适应 flex 容器 equal to `flex: 0 0 auto`
 
 - `flex:<positive-number>`
 
@@ -1204,7 +1248,7 @@ align-items: flex-start/flex-end/center/baseline/stretch;
 ### 子元素属性
 
 ```css
-flex: number;  /*宽/高度权重*/
+flex: number; /*宽/高度权重*/
 order: number; /*显示顺序*/
 flex-basis: number;
 flex-shrink: number;
@@ -1284,25 +1328,25 @@ main {
 .initial {
   /*width: 100px~200px*/
   -webkit-flex: initial;
-          flex: initial;
+  flex: initial;
   width: 200px;
   min-width: 100px;
 }
 .none {
   /*width: 200px*/
   -webkit-flex: none;
-          flex: none;
+  flex: none;
   width: 200px;
 }
 .flex1 {
   /*width: left width * 1/3*/
   -webkit-flex: 1;
-          flex: 1;
+  flex: 1;
 }
 .flex2 {
   /*width: left width * 2/3*/
   -webkit-flex: 2;
-          flex: 2;
+  flex: 2;
 }
 ```
 
@@ -1312,25 +1356,25 @@ main {
   height: 300px;
 
   display: -webkit-flex;
-  display:         flex;
+  display: flex;
 
   -webkit-align-items: center;
-          align-items: center;
+  align-items: center;
   -webkit-justify-content: center;
-          justify-content: center;
+  justify-content: center;
 }
 ```
 
 ```css
 .layer {
-    display: flex;
-    margin: 5px;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    border: 1px solid #000;
-    background-color: #fff;
-    flex-grow: 1;
+  display: flex;
+  margin: 5px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #000;
+  background-color: #fff;
+  flex-grow: 1;
 }
 ```
 
@@ -1351,9 +1395,9 @@ main {
   grid-template-rows: minmax(90px, 1fr);
 
   grid-template-areas:
-    "header header header"
-    "advert content content"
-    "footer footer footer";
+    'header header header'
+    'advert content content'
+    'footer footer footer';
 
   grid-gap: 10px;
   justify-items: center;
@@ -1377,7 +1421,7 @@ main {
 }
 ```
 
-*named* rows and columns
+_named_ rows and columns
 
 ```css
 .main {
@@ -1386,7 +1430,7 @@ main {
   grid-row-gap: 1rem;
   grid-template-rows: [header] 100px [body] auto;
   grid-template-columns:
-    [left-gutter] 1fr [sidebar] 4fr [content] 8fr [right-gutter] 1fr;
+    [left-gutter] 1fr[sidebar] 4fr [content] 8fr [right-gutter] 1fr;
 }
 
 .header {
@@ -1440,21 +1484,21 @@ main {
 
 ```css
 .div-1 {
-    position:relative;
+  position: relative;
 }
 
 .div-1a {
-    position:absolute;
-    top:0;
-    right:0;
-    width:200px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
 }
 
 .div-1b {
-    position:absolute;
-    top:0;
-    left:0;
-    width:200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
 }
 ```
 
@@ -1467,9 +1511,7 @@ position .left and .right with absolute, add margin-left and margin-right to .mi
 #### float to left/right + margin to middle
 
 ```html
-.left
-.right
-.middle
+.left .right .middle
 ```
 
 ```css
@@ -1494,10 +1536,10 @@ margin in the direction of the float will pull the floated element in that direc
 
 1. HTML: .middle first
 2. padding-left and padding-right to .container,
-  `min-width: 2 * (leftWidth + rightWidth)` to container
+   `min-width: 2 * (leftWidth + rightWidth)` to container
 3. Float: `float: left` to .left/.middle/.right
 4. Negative Margin: `margin-left: -100%` to .left,
-  `margin-right: -rightWidth px` to .right
+   `margin-right: -rightWidth px` to .right
 5. Move: `right: leftWidth px` to .left
 
 ```html
@@ -1546,43 +1588,43 @@ margin in the direction of the float will pull the floated element in that direc
 - 将元素改为 inline 型
 
 ```css
-.container{
-    text-align: center;
+.container {
+  text-align: center;
 }
-.container ul{
-    display: inline;
+.container ul {
+  display: inline;
 }
 ```
 
 - 父元素 float, 父子元素 relative
 
 ```css
-.container{
-    float:left;
-    position:relative;
-    left:50%
+.container {
+  float: left;
+  position: relative;
+  left: 50%;
 }
 
-.container ul{
-    position:relative;
-    left:-50%;
+.container ul {
+  position: relative;
+  left: -50%;
 }
 ```
 
 ### 垂直居中问题
 
 ```css
-.container{
-    height:100px;
-    line-height:100px;
+.container {
+  height: 100px;
+  line-height: 100px;
 }
 ```
 
 ```css
-.container{
-    height:300px;
-    display:table-cell;     /* IE8以上及Chrome、Firefox */
-    vertical-align:middle;  /* IE8以上及Chrome、Firefox */
+.container {
+  height: 300px;
+  display: table-cell; /* IE8以上及Chrome、Firefox */
+  vertical-align: middle; /* IE8以上及Chrome、Firefox */
 }
 ```
 
@@ -1592,7 +1634,7 @@ margin in the direction of the float will pull the floated element in that direc
 
 ## list-style-type/image
 
-改变ul/ol前标记类型
+改变 ul/ol 前标记类型
 
 ## align
 
@@ -1667,7 +1709,7 @@ mix transparent with non-transparent border to make shapes (e.g. triangle).
 ### border-image
 
 ```css
-border-image: source slice width outset repeat
+border-image: source slice width outset repeat;
 ```
 
 ## background
@@ -1686,29 +1728,54 @@ awesome gradient buttons
 }
 
 .btn-1 {
-  background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+  background-image: linear-gradient(
+    to right,
+    #f6d365 0%,
+    #fda085 51%,
+    #f6d365 100%
+  );
 }
 
 .btn-2 {
-  background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+  background-image: linear-gradient(
+    to right,
+    #fbc2eb 0%,
+    #a6c1ee 51%,
+    #fbc2eb 100%
+  );
 }
 
 .btn-3 {
-  background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+  background-image: linear-gradient(
+    to right,
+    #84fab0 0%,
+    #8fd3f4 51%,
+    #84fab0 100%
+  );
 }
 
 .btn-4 {
-  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+  background-image: linear-gradient(
+    to right,
+    #a1c4fd 0%,
+    #c2e9fb 51%,
+    #a1c4fd 100%
+  );
 }
 
 .btn-5 {
-  background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 51%, #ffecd2 100%);
+  background-image: linear-gradient(
+    to right,
+    #ffecd2 0%,
+    #fcb69f 51%,
+    #ffecd2 100%
+  );
 }
 ```
 
 ### (moz/webkit)background-clip
 
-指定背景显示范围  content-box/padding-box/border-box
+指定背景显示范围 content-box/padding-box/border-box
 
 ```css
 h1 {
@@ -1719,7 +1786,7 @@ h1 {
 
 ### (moz/webkit)background-origin
 
-指定背景绘制起点  content-box/padding-box/border-box
+指定背景绘制起点 content-box/padding-box/border-box
 
 ### background-size
 
@@ -1764,8 +1831,8 @@ body {
 }
 
 .parallax {
-  min-height: 60%;               /* key */
-  background-attachment: fixed;  /* key */
+  min-height: 60%; /* key */
+  background-attachment: fixed; /* key */
   background-image: url('./images/bg.jpg');
   background-position: center;
   background-size: cover;
@@ -1776,9 +1843,9 @@ body {
 ### Mix Blend Mode
 
 - with `multiply`: black is cutout (keep black)
-  (0 * WHAT = 0)
+  (0 \* WHAT = 0)
 - with `screen`: white is cutout (keep white)
-  (100 - (100 - WHAT) * (100 - 100) = 100)
+  (100 - (100 - WHAT) \* (100 - 100) = 100)
 
 ```html
 <div class="background">
@@ -1792,12 +1859,12 @@ body {
   background-position: center;
   background-size: cover;
   backgorund-repeat: no-repeat;
-  mix-blend-mode: screen;  /* screen or multiply  */
+  mix-blend-mode: screen; /* screen or multiply  */
 }
 
 .background h1 {
   background-color: black; /* mix with background */
-  color: white;            /* keep white */
+  color: white; /* keep white */
 }
 ```
 
@@ -1807,7 +1874,7 @@ body {
 
 ```css
 .jumbotron {
-  background-image: url("");
+  background-image: url('');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -1822,13 +1889,13 @@ body {
 ```css
 .text {
   text-align: center;
-  text-decoration: underline/line-through;  /* 下划线与删除线 */
+  text-decoration: underline/line-through; /* 下划线与删除线 */
 }
 
 .paragraph {
-  text-indent: 2em;     /* 段落缩进 */
-  line-height: 1.5em;   /* 行间距  */
-  word-spacing: 50px;   /* 词间距  */
+  text-indent: 2em; /* 段落缩进 */
+  line-height: 1.5em; /* 行间距  */
+  word-spacing: 50px; /* 词间距  */
   letter-spacing: 50px; /* 字间距  */
 }
 ```
@@ -1852,18 +1919,18 @@ Best Practice
 
 ```css
 html {
-    /*浏览器默认size为16px，此时将html-size自动计算为10px*/
-    font-size:62.5%;
+  /*浏览器默认size为16px，此时将html-size自动计算为10px*/
+  font-size: 62.5%;
 }
 
 small {
-    /*11px*/
-    font-size: 1.1rem;
+  /*11px*/
+  font-size: 1.1rem;
 }
 
 strong {
-    /*18px*/
-    font-size: 1.8rem;
+  /*18px*/
+  font-size: 1.8rem;
 }
 ```
 
@@ -1905,8 +1972,8 @@ whether and when it is downloaded and ready to use:
 ```css
 @font-face {
   font-family: ExampleFont;
-  src: url(/path/to/fonts/examplefont.woff) format('woff'),
-       url(/path/to/fonts/examplefont.eot) format('eot');
+  src: url(/path/to/fonts/examplefont.woff) format('woff'), url(/path/to/fonts/examplefont.eot)
+      format('eot');
   font-weight: 400;
   font-style: normal;
   font-display: fallback;
@@ -1915,62 +1982,61 @@ whether and when it is downloaded and ready to use:
 
 ### custom function - @font-face
 
-使用户使用服务端提供的字体(bootstrap中有使用@font-face)
+使用户使用服务端提供的字体(bootstrap 中有使用@font-face)
 
 ```css
 @font-face {
-    /*:call <SNR>105_SparkupNext()*/
-    font-family:mySpecialFont;
-    font-style/font-weight/font-variant:inherit;
-    src:url(‘./Colleen.ttf’);
+  /*:call <SNR>105_SparkupNext()*/
+  font-family: mySpecialFont;
+  font-style/font-weight/font-variant: inherit;
+  src: url(‘./Colleen.ttf’);
 }
 
 /*selector {*/
-    /*:call <SNR>105_SparkupNext()*/
-    /*font-family:mySpecialFont;*/
+/*:call <SNR>105_SparkupNext()*/
+/*font-family:mySpecialFont;*/
 /*}*/
 ```
 
 ### Font Best Practice
 
 ```css
-  text-decoration: none;
-  text-transform: uppercase;
+text-decoration: none;
+text-transform: uppercase;
 
-    color: black;
-  line-height: 100px;
+color: black;
+line-height: 100px;
 
-    letter-spacing: 1.3px;
-    font-family: sans-serif;
-    font-size: 12px;
-    font-weight: 400;
+letter-spacing: 1.3px;
+font-family: sans-serif;
+font-size: 12px;
+font-weight: 400;
 ```
 
 ```css
 小米米官网: {
-  font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+  font-family: 'Arial', 'Microsoft YaHei', '黑体', '宋体', sans-serif;
 }
 
 淘宝技术研发中心: {
-  font: 12px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif;
+  font: 12px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif;
 }
 
 加网: {
-    font: 14px/1.5 'Microsoft YaHei',arial,tahoma,\5b8b\4f53,sans-serif;
+  font: 14px/1.5 'Microsoft YaHei', arial, tahoma, \5b8b\4f53, sans-serif;
 }
 
-淘宝UED: {
-    font: 12px/1 Tahoma,Helvetica,Arial,"\5b8b\4f53",sans-serif;
+淘宝ued: {
+  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
 }
 
-一淘UX: {
-    font-family: Helvetica, 'Hiragino Sans GB',
-      'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+一淘ux: {
+  font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑',
+    Arial, sans-serif;
 }
 
-{
-    font: 12px/1 Tahoma,Helvetica,Arial,"\5b8b\4f53",sans-serif;
-
+ {
+  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
 }
 ```
 
@@ -2050,20 +2116,20 @@ h3::before {
 
 ## CSS Filter
 
-来源自SVG的滤镜特效
+来源自 SVG 的滤镜特效
 
 ```css
-filter: url(resources.svg);/*引用SVG filter元素*/
-filter: blur(5px);         /*模糊*/
-filter: brightness(0.4);   /*高光*/
-filter: contrast(200%);    /*对比度*/
-filter: drop-shadow(16px 16px 20px blue);  /*阴影*/
-filter: grayscale(50%);    /*灰度*/
+filter: url(resources.svg); /*引用SVG filter元素*/
+filter: blur(5px); /*模糊*/
+filter: brightness(0.4); /*高光*/
+filter: contrast(200%); /*对比度*/
+filter: drop-shadow(16px 16px 20px blue); /*阴影*/
+filter: grayscale(50%); /*灰度*/
 filter: hue-rotate(90deg); /*色相旋转*/
-filter: invert(75%);       /*颜色翻转/反相*/
-filter: opacity(25%);      /*透明度*/
-filter: saturate(30%);     /*饱和度*/
-filter: sepia(60%);        /*老照片*/
+filter: invert(75%); /*颜色翻转/反相*/
+filter: opacity(25%); /*透明度*/
+filter: saturate(30%); /*饱和度*/
+filter: sepia(60%); /*老照片*/
 
 /* Apply multiple filters */
 filter: contrast(175%) brightness(3%);
@@ -2084,12 +2150,12 @@ filter: unset;
 
 ```css
 .div {
-    transform: scaleX(0);
-    transition: **transform** .5s ease;
+  transform: scaleX(0);
+  transition: * * transform * * 0.5s ease;
 }
 
 .div:hover {
-    transform: scaleX(1);
+  transform: scaleX(1);
 }
 ```
 
@@ -2135,7 +2201,7 @@ size animation will start from bottom-right corner).
 ```css
 .element {
   transition: property durtation timing-function delay;
-  transition: transform .5s ease-in-out .2s;
+  transition: transform 0.5s ease-in-out 0.2s;
 }
 ```
 
@@ -2240,10 +2306,10 @@ translateZ 的功能就是让元素在自己的眼前或近或远
 
 #### transform-style
 
-transform-style 属性也是3D效果中经常使用的，
+transform-style 属性也是 3D 效果中经常使用的，
 其两个参数，`flat|preserve-3d`.
-前者flat为默认值，表示平面的；
-后者preserve-3d表示3D透视
+前者 flat 为默认值，表示平面的；
+后者 preserve-3d 表示 3D 透视
 
 #### backface-visibility
 
@@ -2268,57 +2334,57 @@ backface-visibility: hidden;
 
 ```css
 @keyframes body-fade-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 body {
-    animation-name: body-fade-in;
-    animation-duration: 2.5s;
-    animation-timing-function: ease;
-    animation-iteration-count: 1;
+  animation-name: body-fade-in;
+  animation-duration: 2.5s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
 }
 ```
 
 ```css
 @keyframes name {
-    0%/from {
-        color: red;
-    }
-    50% {
-        color: blue;
-    }
-    100%/to {
-        color: green;
-    }
+  0%/from {
+    color: red;
+  }
+  50% {
+    color: blue;
+  }
+  100%/to {
+    color: green;
+  }
 }
 
 /*直接动画*/
 .div {
   animation-name: name;
   animation-duration: 1s;
-  animation-timing-function: cubic-bezier(.42, 0, .58, 1);
-  animation-delay: .5s;
+  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+  animation-delay: 0.5s;
 }
 
 /*hover后再播放动画，高级化transform+transition*/
 .div:hover {
   animation-name: name;
   animation-duration: 1s;
-  animation-timing-function: cubic-bezier(.42, 0, .58, 1);
-  animation-delay: .5s;
+  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+  animation-delay: 0.5s;
 }
 ```
 
 - animation-iteration-count: 执行次数 infinite
 - animation-direction: 执行方向
-  - normal    0%->100%方向
+  - normal 0%->100%方向
   - alternate/alternate-reverse 不断交替方向
-  - reverse   100%->0%方向
+  - reverse 100%->0%方向
 - animation-fill-mode: forwards
 - animatino-play-state: `paused`/`running`
 - DOM events:
@@ -2369,7 +2435,7 @@ setTimeout(() => element.classList.remove('animate'), duration);
 /* first: scale(1), last: scale(1.2) */
 .scale-up {
   transform: scale(0.8);
-  transition: transform .2s linear;
+  transition: transform 0.2s linear;
 }
 
 .scale-up:hover {
@@ -2422,8 +2488,8 @@ use `inline-box` with `width`
 
 ```html
 <picture>
- <source srcset="mdn-logo-wide.png" media="(min-width: 600px)">
- <img src="mdn-logo-narrow.png" alt="MDN">
+  <source srcset="mdn-logo-wide.png" media="(min-width: 600px)" />
+  <img src="mdn-logo-narrow.png" alt="MDN" />
 </picture>
 ```
 
@@ -2433,8 +2499,8 @@ use `inline-box` with `width`
 - definition order matters when media query with a different selector
 
 ```css
-@media (not/only) 设备类型 and ( (not) 设备特性),
-  (not/only) 设备类型 and ( (not) 设备特性-1) and ( (not) 设备特性-2) {
+@media (not/only) 设备类型 and ((not) 设备特性),
+  (not/only) 设备类型 and ((not) 设备特性-1) and ((not) 设备特性-2) {
   /* 样式代码 */
 }
 ```
@@ -2442,9 +2508,9 @@ use `inline-box` with `width`
 ```css
 /*screen size : 500px ~ 1000px*/
 @media screen and (min-width: 500px) and (max-width: 1000px) {
-    .container {
-        width: 750px;
-    }
+  .container {
+    width: 750px;
+  }
 }
 ```
 
@@ -2454,11 +2520,11 @@ use `inline-box` with `width`
 
 ```js
 // https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList
-const mql = window.matchMedia(mediaQueryString)
+const mql = window.matchMedia(mediaQueryString);
 ```
 
 ```js
-if (window.matchMedia("(min-width: 400px)").matches) {
+if (window.matchMedia('(min-width: 400px)').matches) {
   /* the view port is at least 400 pixels wide */
 } else {
   /* the view port is less than 400 pixels wide */
@@ -2467,36 +2533,36 @@ if (window.matchMedia("(min-width: 400px)").matches) {
 
 ### 设备类型
 
-|类型|解释|
-|:---------------|:--------------------|
-|all|所有设备|
-|braille|盲文|
-|embossed|盲文打印|
-|handheld|手持设备|
-|print|文档打印或打印预览模式|
-|projection|项目演示，比如幻灯|
-|screen|彩色电脑屏幕|
-|speech|演讲|
-|tty|固定字母间距的网格的媒体，比如电传打字机|
-|tv|电视|
+| 类型       | 解释                                     |
+| :--------- | :--------------------------------------- |
+| all        | 所有设备                                 |
+| braille    | 盲文                                     |
+| embossed   | 盲文打印                                 |
+| handheld   | 手持设备                                 |
+| print      | 文档打印或打印预览模式                   |
+| projection | 项目演示，比如幻灯                       |
+| screen     | 彩色电脑屏幕                             |
+| speech     | 演讲                                     |
+| tty        | 固定字母间距的网格的媒体，比如电传打字机 |
+| tv         | 电视                                     |
 
 ### 设备特性
 
-|属性|值|Min/Max|描述|
-|:----------|:-------|:-----|:---------------|
-|aspect-ratio|整数/整数|yes|渲染界面的宽高比例|
-|device-aspect-ratio|整数/整数|yes|设备屏幕的宽高比例|
-|color|整数|yes|每种色彩的字节数|
-|color-index|整数|yes|色彩表中的色彩数|
-|height|length|yes|渲染界面的高度|
-|width|length|yes|渲染界面的宽度|
-|device-height|length|yes|设备屏幕的输出高度|
-|device-width|length|yes|设备屏幕的输出宽度|
-|grid|整数|no|是否是基于格栅的设备|
-|monochrome|整数|yes|单色帧缓冲器中每像素字节|
-|resolution|分辨率(“dpi/dpcm”)|yes|分辨率|
-|scan|Progressive interlaced|no|tv媒体类型的扫描方式|
-|orientation|Portrait/landscape|no|横屏或竖屏|
+| 属性                | 值                     | Min/Max | 描述                |
+| :------------------ | :--------------------- | :------ | :------------------|
+| aspect-ratio        | 整数/整数              | yes     | 渲染界面的宽高比例   |
+| device-aspect-ratio | 整数/整数              | yes     | 设备屏幕的宽高比例   |
+| color               | 整数                   | yes     | 每种色彩的字节数     |
+| color-index         | 整数                   | yes     | 色彩表中的色彩数     |
+| height              | length                 | yes     | 渲染界面的高度       |
+| width               | length                 | yes     | 渲染界面的宽度       |
+| device-height       | length                 | yes     | 设备屏幕的输出高度   |
+| device-width        | length                 | yes     | 设备屏幕的输出宽度   |
+| grid                | 整数                   | no      | 是否是基于格栅的设备  |
+| monochrome          | 整数                   | yes     | 缓冲器中每像素字节    |
+| resolution          | 分辨率(“dpi/dpcm”)     | yes     | 分辨率               |
+| scan                | Progressive interlaced | no      | tv 媒体类型的扫描方式 |
+| orientation         | Portrait/landscape     | no      | 横屏或竖屏           |
 
 #### Style for Print PDF
 
@@ -2536,7 +2602,7 @@ h1 {
 ```css
 .jumbotron {
   min-height: 100%;
-  background-image: url("");
+  background-image: url('');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -2564,8 +2630,8 @@ h1 {
 
 ```css
 .parallax {
-  min-height: 60%;               /* key */
-  background-attachment: fixed;  /* key */
+  min-height: 60%; /* key */
+  background-attachment: fixed; /* key */
   background-image: url('./images/bg.jpg');
   background-position: center;
   background-size: cover;
@@ -2595,10 +2661,10 @@ h1 {
 
 h1::before,
 h1::after {
-  content: "";
+  content: '';
   background-color: gray;
-  height: .1em;
-  margin: .2em;
+  height: 0.1em;
+  margin: 0.2em;
   flex: 1;
 }
 ```
@@ -2618,47 +2684,47 @@ h1::after {
 
 ```css
 .custom-select {
-    width: 15%;
-    height: 35px;
-    margin-right: 20px;
+  width: 15%;
+  height: 35px;
+  margin-right: 20px;
 
-    /* 消除默认箭头 */
-    text-indent: 0.01px;
-    text-overflow: "";
+  /* 消除默认箭头 */
+  text-indent: 0.01px;
+  text-overflow: '';
 
-    /* 自定义边框 */
-    border: 0;
+  /* 自定义边框 */
+  border: 0;
 
-    /* 将箭头图片移至右端 */
-    background: url('../img/arrow.png') no-repeat;
-    background-color: #fff;
-    background-position: right;
+  /* 将箭头图片移至右端 */
+  background: url('../img/arrow.png') no-repeat;
+  background-color: #fff;
+  background-position: right;
 
-    /* 消除默认样式 */
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+  /* 消除默认样式 */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .custom-select:focus {
-    border: 1px solid #e74f4d;
+  border: 1px solid #e74f4d;
 }
 
 .custom-select option {
-    width: 100%;
-    height: 25px;
-    padding-left: 30px;
+  width: 100%;
+  height: 25px;
+  padding-left: 30px;
 
-    color: #323333;
-    background-color: #fff;
+  color: #323333;
+  background-color: #fff;
 
-    line-height: 25px;
+  line-height: 25px;
 }
 
 .custom-select option:hover {
-    color: #fff;
-    background: url(../img/tick.png) no-repeat 8px center;
-    background-color: #e74f4d;
+  color: #fff;
+  background: url(../img/tick.png) no-repeat 8px center;
+  background-color: #e74f4d;
 }
 ```
 
@@ -2670,19 +2736,19 @@ h1::after {
 
 ```css
 ul {
-    /* 垂直菜单设置宽度, 水平菜单不设置宽度*/
-    list-style: none;
+  /* 垂直菜单设置宽度, 水平菜单不设置宽度*/
+  list-style: none;
 }
 
 /* 水平菜单 */
 li {
-    float: left;
+  float: left;
 }
 
 a {
-    display: inline-block;
-    text-decoration: none;
-    cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
 }
 ```
 
@@ -2726,12 +2792,12 @@ a::after {
   width: 0;
   height: 3px;
   background-color: #22313f;
-  content: "";
+  content: '';
   transform-origin: bottom-center;
 }
 
 a:hover {
-  color: #22313F;
+  color: #22313f;
 }
 
 a:hover::after {
@@ -2771,28 +2837,29 @@ a.btn-custom {
 ```html
 <body>
   <div class="wrapper">
-      content
+    content
     <div class="push"></div>
   </div>
   <footer class="footer"></footer>
 </body>
 
 <style>
-html, body {
-  height: 100%;
-  margin: 0;
-}
-.wrapper {
-  min-height: 100%;
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+  .wrapper {
+    min-height: 100%;
 
-  /* Equal to height of footer */
-  /* But also accounting for potential margin-bottom of last child */
-  margin-bottom: -50px;
-}
-.footer,
-.push {
-  height: 50px;
-}
+    /* Equal to height of footer */
+    /* But also accounting for potential margin-bottom of last child */
+    margin-bottom: -50px;
+  }
+  .footer,
+  .push {
+    height: 50px;
+  }
 </style>
 ```
 
@@ -2807,21 +2874,22 @@ html, body {
 </body>
 
 <style>
-html, body {
-  height: 100%;
-  margin: 0;
-}
-.content {
-  min-height: 100%;
-}
-.content-inside {
-  padding: 20px;
-  padding-bottom: 50px;
-}
-.footer {
-  height: 50px;
-  margin-top: -50px;
-}
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+  .content {
+    min-height: 100%;
+  }
+  .content-inside {
+    padding: 20px;
+    padding-bottom: 50px;
+  }
+  .footer {
+    height: 50px;
+    margin-top: -50px;
+  }
 </style>
 ```
 
@@ -2834,12 +2902,12 @@ html, body {
 </body>
 
 <style>
-.content {
-  min-height: calc(100vh - 70px);
-}
-.footer {
-  height: 50px;
-}
+  .content {
+    min-height: calc(100vh - 70px);
+  }
+  .footer {
+    height: 50px;
+  }
 </style>
 ```
 
@@ -2852,19 +2920,20 @@ html, body {
 </body>
 
 <style>
-html, body {
-  height: 100%;
-}
-body {
-  display: flex;
-  flex-direction: column;
-}
-.content {
-  flex: 1 0 auto;
-}
-.footer {
-  flex-shrink: 0;
-}
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  .content {
+    flex: 1 0 auto;
+  }
+  .footer {
+    flex-shrink: 0;
+  }
 </style>
 ```
 
@@ -2877,18 +2946,18 @@ body {
 </body>
 
 <style>
-html {
-  height: 100%;
-}
-body {
-  min-height: 100%;
-  display: grid;
-  grid-template-rows: 1fr auto;
-}
-.footer {
-  grid-row-start: 2;
-  grid-row-end: 3;
-}
+  html {
+    height: 100%;
+  }
+  body {
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
+  }
+  .footer {
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
 </style>
 ```
 
@@ -2897,9 +2966,9 @@ body {
 #### 圆形图片
 
 ```css
-{
-    border-radius: 50%;
-    overflow: hidden;
+ {
+  border-radius: 50%;
+  overflow: hidden;
 }
 ```
 
@@ -2934,7 +3003,7 @@ function enter(el, done) {
   setTimeout(() => {
     el.classList.remove('before-enter');
     el.classList.add('enter');
-  }, 20);  
+  }, 20);
 
   setTimeout(() => {
     el.classList.remove('enter');
@@ -3091,7 +3160,7 @@ top-left:
 
 ```css
 body {
-  overflow: hidden;   /* key 1 */
+  overflow: hidden; /* key 1 */
 }
 
 .slide {
@@ -3099,11 +3168,11 @@ body {
   position: absolute; /* key 2 */
   width: 100%;
   height: 100vh;
-  z-index: 0;         /* key 3 */
+  z-index: 0; /* key 3 */
 }
 
 .slide:target {
-  z-index: 1;         /* key 4 */
+  z-index: 1; /* key 4 */
 }
 ```
 
