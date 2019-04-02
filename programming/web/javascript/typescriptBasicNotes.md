@@ -1143,3 +1143,4 @@ const Form = () => <Select<string> items={['a', 'b']} />;
 ## Reference
 
 - [TypeScript Deep Dive](https://github.com/jkchao/typescript-book-chinese)
+- [Clean TypeScript Code](https://github.com/labs42io/clean-code-typescript)
