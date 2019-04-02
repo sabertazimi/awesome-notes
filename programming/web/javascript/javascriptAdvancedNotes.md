@@ -623,6 +623,19 @@ s.includes('Hello', 6) // false
 #### Tagged Templates
 
 ```js
+const boldify = (parts, ...insertedParts) => {
+  return parts.map((s, i) => {
+    if (i === insertedParts.length) return s
+    return `${s}<strong>${insertedParts[i]}</strong>`
+  }).join('')
+}
+
+const name = 'Jamon Holmgren'
+console.log(boldify`Hi, my name is ${name}!`)
+// => "Hi, my name is <strong>Jamon Holmgren</strong>!"
+```
+
+```js
 function template(strings, ...keys) {
   return (function(...values) {
     const dict = values[values.length - 1] || {};
