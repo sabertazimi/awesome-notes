@@ -43,6 +43,7 @@
   - [Closure](#closure)
   - [React with TypeScript](#react-with-typescript)
     - [Props Types](#props-types)
+    - [React Refs Types](#react-refs-types)
     - [Functional Component](#functional-component)
     - [Class Component](#class-component)
     - [Generic Component](#generic-component)
@@ -1001,6 +1002,18 @@ export declare interface AppProps {
 }
 ```
 
+### React Refs Types
+
+```js
+class CssThemeProvider extends React.PureComponent<Props> {
+  private rootRef: React.RefObject<HTMLDivElement> = React.createRef();
+
+  render() {
+    return <div ref={this.rootRef}>{this.props.children}</div>;
+  }
+}
+```
+
 ### Functional Component
 
 ```js
@@ -1015,7 +1028,37 @@ const myComponent: React.FunctionComponent<Props> = props => {
 <MyComponent foo="bar" />;
 ```
 
+```js
+import React, { MouseEvent, SFC } from 'react';
+
+type Props = { onClick(e: MouseEvent<HTMLElement>): void };
+
+const Button: SFC<Props> = ({ onClick: handleClick, children }) => (
+  <button onClick={handleClick}>{children}</button>
+);
+```
+
 ### Class Component
+
+read only state
+
+```js
+import React from 'react';
+import Button from './Button';
+
+const initialState = { clicksCount: 0 };
+type State = Readonly<typeof initialState>;
+
+class ButtonCounter extends React.Component<Props, State> {
+  readonly state: State = initialState;
+
+  render() {
+    ...
+  }
+}
+```
+
+props and state types with `React.Component<>`
 
 ```js
 type Props = {
