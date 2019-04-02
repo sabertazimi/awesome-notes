@@ -31,10 +31,12 @@
     - [RegExp](#regexp)
     - [Number](#number)
     - [Array](#array)
+      - [Array.includes](#arrayincludes)
       - [Array.from](#arrayfrom)
       - [Array.copyWithin](#arraycopywithin)
       - [Array.find](#arrayfind)
       - [Spread Array](#spread-array)
+    - [New Object API](#new-object-api)
     - [Arrow Function](#arrow-function)
     - [Modules](#modules)
     - [Class 语法糖](#class-语法糖)
@@ -804,6 +806,10 @@ BigInt(a) * BigInt(b)
 [...Array(5).keys()] // => [0, 1, 2, 3, 4]
 ```
 
+#### Array.includes
+
+no more `indexOf() > -1`
+
 #### Array.from
 
 强大的**函数式**方法
@@ -880,6 +886,40 @@ arr.findIndex(fn)
 
 ```js
 arr2.push(...arr1)
+```
+
+### New Object API
+
+- Object.keys()
+- Object.values()
+- Object.entries()
+
+```js
+const score = {
+  jamon: 42,
+  todd: 19,
+  ken: 4,
+  gant: 41
+}
+
+Object
+  .keys(score)
+  .map(k => score[k])
+// => [ 42, 19, 4, 41 ]
+
+Object.values(score)
+// => [ 42, 19, 4, 41 ]
+
+Object.entries(score)
+/**
+ * =>
+ * [
+ * [ 'jamon', 42 ],
+ * [ 'todd', 19 ],
+ * [ 'ken', 4 ],
+ * [ 'gant', 41 ],
+ * ]
+ */
 ```
 
 ### Arrow Function
