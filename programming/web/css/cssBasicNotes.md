@@ -171,6 +171,13 @@
   - [CSS Variables](#css-variables)
     - [Variables DOM API](#variables-dom-api)
     - [Scope Variebls](#scope-variebls)
+  - [SVG](#svg)
+    - [Inline SVG](#inline-svg)
+    - [SVG Basic Shape Tags](#svg-basic-shape-tags)
+    - [SVG Text Tag](#svg-text-tag)
+    - [SVG Accessibility Tags](#svg-accessibility-tags)
+    - [SVG Group Tag](#svg-group-tag)
+    - [SVG Defs Tag](#svg-defs-tag)
 
 <!-- /TOC -->
 
@@ -3383,4 +3390,77 @@ const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
   --primary: #fa5252;
   --secondary: #ffe3e3;
 }
+```
+
+## SVG
+
+### Inline SVG
+
+```html
+<svg
+  width="100px"
+  height="100px"
+  viewBox="0 0 100 100"
+  version="1.1"
+  xmlns="..."
+>
+  <title>My Awesome SVG</title>
+  <circle class="circle" cx="50" cy="50" r="50" fill="#FFFF00" />
+</svg>
+```
+
+```css
+.circle {
+  fill: #ffff00;
+}
+```
+
+### SVG Basic Shape Tags
+
+- rectangles and squares: `<rect>`
+- circles: `<circle>`
+- ellipse: `<ellipse>`
+- line: `<line>`
+- polyline: `<polyline>`
+- polygon: `<polygon>`
+- path:`<path>`
+
+### SVG Text Tag
+
+The text tag `<text>` is used to create **selectable** and **accessible** text.
+
+### SVG Accessibility Tags
+
+The title `<title>` and description `<desc>` tags
+are specifically for providing accessibility content.
+
+### SVG Group Tag
+
+The group tag `<g>` is used to group elements together
+to add class names and apply animations, filters, patterns and effects
+to a group of elements.
+
+### SVG Defs Tag
+
+The defs tag `<defs>` is used to define elements for later reuse.
+This is where you create **patterns**, **filters** and **masks** to be reused later.
+This is also used to create **icon systems**.
+
+```html
+<filter id="noise" y="0" x="0">
+  <feTurbulence stitchTiles="stitch" baseFrequency=".75" type="fractalNoise" />
+</filter>
+```
+
+```html
+<pattern ...>
+  ...
+  <rect
+    width="100%"
+    height="100%"
+    fill="white"
+    filter="url(#noise)"
+    opacity=".9"
+  />
+</pattern>
 ```
