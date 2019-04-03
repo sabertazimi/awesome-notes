@@ -24,6 +24,7 @@
     - [Reverting](#reverting)
     - [Meet/Collision Problem](#meetcollision-problem)
   - [String](#string)
+    - [Rotate String](#rotate-string)
   - [Map Theory](#map-theory)
     - [Shortest Paths](#shortest-paths)
     - [Minial Spanning Tree](#minial-spanning-tree)
@@ -473,6 +474,22 @@ getline(cin/sin, strbuf)
 ```
 
 - string::size_type pre, post 指针: 进行逐行匹配
+
+### Rotate String
+
+```cpp
+#include <string>
+#include <algorithm>
+
+string left_rotate(string str, int offset) {
+  int size = str.length();
+  int n = offset % size;
+  reverse(str.begin(), str.begin() + n);
+  reverse(str.begin() + n, str.end());
+  reverse(str.begin(), str.end());
+  return str;
+}
+```
 
 ## Map Theory
 
