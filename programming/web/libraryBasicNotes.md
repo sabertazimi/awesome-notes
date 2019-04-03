@@ -524,6 +524,7 @@
 - [ACE Editor](https://github.com/ajaxorg/ace)
 - [CodeMirror](https://github.com/codemirror/CodeMirror)
 - [React Built In Editor](https://github.com/facebook/draft-js)
+- [Block Editor](https://github.com/codex-team/editor.js)
 
 ## i18n
 
