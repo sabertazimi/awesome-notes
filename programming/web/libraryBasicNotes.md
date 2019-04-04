@@ -73,6 +73,7 @@
   - [Code Analysis](#code-analysis)
   - [Code Optimizer](#code-optimizer)
   - [Terminal](#terminal)
+  - [Keyboard](#keyboard)
   - [Editor](#editor)
     - [Rich Text Editor](#rich-text-editor)
     - [Code Editor](#code-editor)
@@ -424,6 +425,7 @@
 ### Select
 
 - [React Select](https://github.com/JedWatson/react-select)
+- [Select.css](https://github.com/filamentgroup/select-css)
 - [Awesome Chosen](https://github.com/harvesthq/chosen)
 
 ### Validator
@@ -511,6 +513,10 @@
 
 - [React Terminal](https://github.com/rohanchandra/react-terminal-component)
 - [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
+
+## Keyboard
+
+- [Hot Key](https://github.com/github/hotkey)
 
 ## Editor
 
