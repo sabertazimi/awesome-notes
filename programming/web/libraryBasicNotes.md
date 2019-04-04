@@ -104,8 +104,8 @@
 ## Index
 
 - [**Starter Kit Collection**](http://andrewhfarmer.com/starter-project)
-- [Best of JS](https://bestofjs.org/)
-- [micro js](http://microjs.com/)
+- [Best of JS](https://bestofjs.org)
+- [micro js](http://microjs.com)
 
 ## Boilerplate
 
@@ -120,7 +120,7 @@
 ## Solution and Framework
 
 - [Gatsby.js](https://github.com/gatsbyjs/gatsby)
-- [Next.js](https://github.com/zeit/next.js/)
+- [Next.js](https://github.com/zeit/next.js)
 - [React Storybook](https://github.com/storybooks/storybook)
 
 ## UI Framework
@@ -167,7 +167,7 @@
 
 ### Hooks
 
-- [React Hooks Gallery](https://nikgraf.github.io/react-hooks/)
+- [React Hooks Gallery](https://nikgraf.github.io/react-hooks)
 
 ### Other
 
@@ -245,7 +245,7 @@
 
 ## Button
 
-- [Tiny Fab](https://github.com/dericgw/react-tiny-fab/)
+- [Tiny Fab](https://github.com/dericgw/react-tiny-fab)
 
 ## Calendar
 
@@ -258,7 +258,8 @@
 - [day.js](https://github.com/iamkun/dayjs)
 - [Pickadate.js](https://github.com/amsul/pickadate.js)
 - [Moment.js](https://github.com/moment/moment)
-- strftime
+- [Timetable](https://github.com/flightplan-tool/timetable-fns)
+- [strftime](https://github.com/samsonjs/strftime)
 
 ## Slides
 
@@ -285,7 +286,7 @@
 - [fonts.css](https://github.com/zenozeng/fonts.css)
 - [Poppins](https://fonts.google.com/specimen/Poppins)
 - [Raleway](https://fonts.google.com/specimen/Raleway)
-- [Operator](https://www.typography.com/fonts/operator/styles/)
+- [Operator](https://www.typography.com/fonts/operator/styles)
 
 ## Images
 
@@ -297,13 +298,13 @@
 
 - [SVG Logos](https://github.com/gilbarbara/logos)
 - [SVG Icons](https://iconsvg.xyz)
-- [Pure CSS Icons](https://cssicon.space/#/)
+- [Pure CSS Icons](https://cssicon.space)
 - [GreenSock JS](https://github.com/greensock/GreenSock-JS)
 
 ### SVG
 
 - [SVG Optimizer](https://github.com/svg/svgo)
-- [Illustration SVG Gallery](https://gallery.manypixels.co/)
+- [Illustration SVG Gallery](https://gallery.manypixels.co)
 - [A fast DVI to SVG converter](https://github.com/mgieseki/dvisvgm)
 
 ### Size
@@ -317,7 +318,7 @@
 
 ### Gallery
 
-- [Light Gallery](https://github.com/sachinchoolur/lightgallery.js/)
+- [Light Gallery](https://github.com/sachinchoolur/lightgallery.js)
 - [Photo Swipe](https://github.com/dimsemenov/PhotoSwipe)
 
 ### Filter
@@ -329,7 +330,7 @@
 ### Canvas
 
 - [rough.js](https://github.com/pshihn/rough)
-- [Canvas Manipulation](https://github.com/meltingice/CamanJS/)
+- [Canvas Manipulation](https://github.com/meltingice/CamanJS)
 
 ## Media
 
@@ -369,18 +370,19 @@
 
 ### Typing
 
-- [Typed.js](https://github.com/mattboldt/typed.js/)
+- [Typed.js](https://github.com/mattboldt/typed.js)
+- [TypeIt](https://github.com/alexmacarthur/typeit)
 
 ### Loading
 
 - [Vue Skeleton](https://github.com/egoist/vue-content-loader)
 - [Epic Spinners](https://github.com/epicmaxco/epic-spinners)
-- [Loading IO](https://loading.io/)
+- [Loading IO](https://loading.io)
 - [Page Loading Progress](https://github.com/rstacruz/nprogress)
 
 ### Hover
 
-- [Image Hover](http://imagehover.io/)
+- [Image Hover](http://imagehover.io)
 - [Hovering Button Effects](https://github.com/IanLunn/Hover)
 
 ## Message
@@ -522,7 +524,7 @@
 ### Rich Text Editor
 
 - [React Markdown](https://github.com/rexxars/react-markdown)
-- [CKEditor](https://github.com/ckeditor/)
+- [CKEditor](https://github.com/ckeditor)
 - [Wang Editor - Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
 - [Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
 
@@ -537,7 +539,7 @@
 ## i18n
 
 - [React Intl](https://github.com/yahoo/react-intl)
-- [Formatting international numbers and currencies](https://github.com/autoNumeric/autoNumeric/)
+- [Formatting international numbers and currencies](https://github.com/autoNumeric/autoNumeric)
 
 ## CLI
 
