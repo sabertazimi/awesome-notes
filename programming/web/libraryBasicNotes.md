@@ -228,11 +228,10 @@
 
 - [React Scroll Box](https://github.com/smikhalevski/react-scroll-box)
 - [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
-- [Scroll Parallax](https://github.com/Prinzhorn/skrollr)
-- [Smooth Scroll Animation](https://github.com/alexfoxy/laxxx)
 - [Scroll Reveal](https://github.com/scrollreveal/scrollreveal)
-- [Scroll Animation](https://github.com/michalsnik/aos)
 - [Scroll Magic](https://github.com/janpaepke/ScrollMagic)
+- [Scroll Animation](https://github.com/michalsnik/aos)
+- [Smooth Scroll Animation](https://github.com/alexfoxy/laxxx)
 
 ## Mouse
 
