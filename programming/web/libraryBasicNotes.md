@@ -300,6 +300,7 @@
 
 ### Icons
 
+- [Remix Icon Set](https://github.com/Remix-Design/remixicon)
 - [SVG Logos](https://github.com/gilbarbara/logos)
 - [SVG Icons](https://iconsvg.xyz)
 - [Pure CSS Icons](https://cssicon.space)
