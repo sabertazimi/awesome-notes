@@ -106,6 +106,9 @@
 - [**Starter Kit Collection**](http://andrewhfarmer.com/starter-project)
 - [Best of JS](https://bestofjs.org)
 - [micro js](http://microjs.com)
+- [Npm Package Cost](https://github.com/pastelsky/bundlephobia)
+- [Npm Package Quality](https://github.com/alexfernandez/package-quality)
+- [Npm Package Trends](https://github.com/johnmpotter/npm-trends)
 
 ## Boilerplate
 
@@ -584,8 +587,8 @@
 
 ## Encryption
 
-- [npm install blueimp-md5](https://github.com/blueimp/JavaScript-MD5)
-- [npm install base64](https://github.com/dankogai/js-base64)
+- [blueimp-md5](https://github.com/blueimp/JavaScript-MD5)
+- [base64](https://github.com/dankogai/js-base64)
 
 ## Lazy Loading
 
