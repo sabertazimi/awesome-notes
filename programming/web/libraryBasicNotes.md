@@ -80,6 +80,9 @@
   - [CLI](#cli)
   - [Daemon](#daemon)
   - [Network](#network)
+    - [Network Benchmark](#network-benchmark)
+    - [Network Debugging](#network-debugging)
+    - [Prefetch](#prefetch)
   - [DOM](#dom)
   - [Server](#server)
   - [Encryption](#encryption)
@@ -91,7 +94,6 @@
     - [Higher Level Tools](#higher-level-tools)
     - [Coverage](#coverage)
     - [Mock](#mock)
-    - [Network Debugging](#network-debugging)
     - [Monitoring](#monitoring)
     - [Performance](#performance)
     - [Log](#log)
@@ -187,6 +189,7 @@
 
 - [React Chat Widget](https://github.com/Wolox/react-chat-widget)
 - [Matrix](https://github.com/matrix-org/matrix-react-sdk)
+- [jssip - chat library](https://github.com/versatica/JsSIP)
 
 ## Card
 
@@ -548,12 +551,18 @@
 
 ## Network
 
+### Network Benchmark
+
 - [HTTP/HTTPS Troubleshooting and Profiling](https://github.com/trimstray/htrace.sh)
 - [HTTP/HTTPS Benchmarking Tool](https://github.com/mcollina/autocannon)
-- bl
-- concat-stream
-- async
-- [jssip - chat library](https://github.com/versatica/JsSIP)
+
+### Network Debugging
+
+- [Whistle](https://github.com/avwo/whistle)
+
+### Prefetch
+
+- [Google QuickLink](https://github.com/GoogleChromeLabs/quicklink)
 
 ## DOM
 
@@ -632,10 +641,6 @@
 - [Images Placeholder](https://placeholder.com)
 - [Images Mock](http://source.unsplash.com/random)
 - [In Memory Web API](https://github.com/angular/in-memory-web-api)
-
-### Network Debugging
-
-- [Whistle](https://github.com/avwo/whistle)
 
 ### Monitoring
 
