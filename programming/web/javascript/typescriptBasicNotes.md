@@ -37,9 +37,10 @@
     - [Generic Function](#generic-function)
     - [Generic Class](#generic-class)
     - [Specific Instances from Generic Types](#specific-instances-from-generic-types)
-  - [Union Types](#union-types)
-  - [Intersection Types](#intersection-types)
-  - [Mapped Types](#mapped-types)
+  - [Advanced Types](#advanced-types)
+    - [Union Types](#union-types)
+    - [Intersection Types](#intersection-types)
+    - [Mapped Types](#mapped-types)
   - [Mixins](#mixins)
   - [Closure](#closure)
   - [React with TypeScript](#react-with-typescript)
@@ -790,7 +791,11 @@ function id<T>(x: T) {
 const idNum = id as { (x: number): number };
 ```
 
-## Union Types
+## Advanced Types
+
+- [Advanced Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html)
+
+### Union Types
 
 多种类型之一
 
@@ -842,7 +847,7 @@ function area(s: Shape) {
 }
 ```
 
-## Intersection Types
+### Intersection Types
 
 extend 是一种非常常见的模式,
 intersection type 具有所有类型的功能
@@ -914,7 +919,7 @@ export default connect<StateProps, DispatchProps, OwnProps>
   (mapStateToProps, mapDispatchToProps)(MyComponent)
 ```
 
-## Mapped Types
+### Mapped Types
 
 ```js
 type Readonly<T> = { readonly [P in keyof T]: T[P] }
