@@ -33,6 +33,8 @@
   - [CSS Selector](#css-selector)
     - [元素选择器](#元素选择器)
     - [关系选择器](#关系选择器)
+      - [Descendant Selectors](#descendant-selectors)
+      - [Sibling Selectors](#sibling-selectors)
     - [属性选择器](#属性选择器)
     - [伪类](#伪类)
     - [伪元素](#伪元素)
@@ -609,7 +611,10 @@ p {
 
 ### 关系选择器
 
-- E F：所有后代选择器
+#### Descendant Selectors
+
+- `E F`：所有后代选择器
+- `E > F`：直接子选择器
 
 ```css
 ul li {
@@ -617,23 +622,22 @@ ul li {
 }
 ```
 
-E > F：直接子选择器
-
 ```css
 ul > li {
   list-style: none;
 } /* 仅限ul的直接子元素li，忽略嵌套子元素 */
 ```
 
-E + F：直接相邻兄弟选择器
+#### Sibling Selectors
+
+- `E + F`：直接相邻兄弟选择器
+- `E ~ F`：一般兄弟选择器
 
 ```css
 li + li {
   border-top: 1px solid #ddd;
 }
 ```
-
-E ~ F：一般兄弟选择器
 
 ```css
 /* p before h1 */
@@ -644,6 +648,27 @@ p {
 /* 定位具有相同父元素的，h1标签之后的所有p标签 */
 h1 ~ p {
   color: #f00;
+}
+```
+
+checkbox `input` as hidden `click` event listener
+
+```css
+input.checkbox {
+  opacity: 0;
+  visibility: hidden;
+}
+
+nav {
+  transform: scale(0);
+}
+
+input.checkbox:checked + nav {
+  transform: scale(1);
+}
+
+input.checkbox:checked ~ nav {
+  transform: scale(1);
 }
 ```
 
