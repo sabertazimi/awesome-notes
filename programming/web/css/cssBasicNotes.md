@@ -166,6 +166,7 @@
     - [Picture](#picture)
       - [圆形图片](#圆形图片)
     - [Animation Tips](#animation-tips)
+      - [Animated Dots](#animated-dots)
       - [Fade with Class](#fade-with-class)
       - [Accordion Menu Animation](#accordion-menu-animation)
       - [Slides Animation](#slides-animation)
@@ -3159,6 +3160,35 @@ a.btn-custom {
 
 切换动画时, 需要先把之前的动画清除
 (防止出现闪烁 Bug )
+
+#### Animated Dots
+
+```css
+dot {
+  display: inline-block;
+  height: 1em;
+  line-height: 1;
+  text-align: left;
+  vertical-align: -0.25ex;
+  overflow: hidden;
+}
+
+dot::before {
+  display: block;
+  content: '...\A..\A.';
+  white-space: pre-wrap;
+  animation: dot1 3s infinite step-start both;
+}
+
+@keyframes dot1 {
+  33% {
+    transform: translateY(-2em);
+  }
+  66% {
+    transform: translateY(-1em);
+  }
+}
+```
 
 #### Fade with Class
 
