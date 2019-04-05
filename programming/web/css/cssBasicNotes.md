@@ -50,6 +50,7 @@
     - [height](#height)
     - [column](#column)
   - [Box Model](#box-model)
+    - [Margin](#margin)
     - [Percentage of Width/Top](#percentage-of-widthtop)
   - [Block Formatting Context](#block-formatting-context)
     - [Create BFC](#create-bfc)
@@ -1068,6 +1069,13 @@ cal(10em + 3px);
   会生成 inline-level box，并且参与 inline formatting context
 - Flex Formatting Context(FFC)
 - Grid Formatting Context(GFC)
+
+### Margin
+
+- If both margin-left and margin-right are auto, their used values are equal.
+  (CSS2 Visual formatting model details: 10.3.3)
+- If margin-top, or margin-bottom are auto, their used value is 0.
+  (CSS2 Visual formatting model details: 10.6.3)
 
 ### Percentage of Width/Top
 
