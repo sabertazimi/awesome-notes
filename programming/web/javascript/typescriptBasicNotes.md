@@ -43,6 +43,11 @@
     - [Mapped Types](#mapped-types)
   - [Mixins](#mixins)
   - [Closure](#closure)
+  - [Decorators](#decorators)
+    - [Class Decorators](#class-decorators)
+    - [Class Properties Decorators](#class-properties-decorators)
+    - [Method Parameters Decorators](#method-parameters-decorators)
+    - [Methods Decorators](#methods-decorators)
   - [React with TypeScript](#react-with-typescript)
     - [Props Types](#props-types)
     - [React Refs Types](#react-refs-types)
@@ -1016,6 +1021,173 @@ const { called } = new class {
 
 called(); // Called : 1
 called(); // Called : 2
+```
+
+## Decorators
+
+- Attaching to a class:
+  access to the class prototype and its member properties.
+- Attaching to a class property:
+  access to the name and value of that property,
+  along with its class prototype `target`.
+- Attaching to a class method parameter:
+  access to that parameter’s index, name and value.
+- Attaching to a class method:
+  access to the method’s parameters, the metadata associated with the method object,
+  along with its class prototype `target`.
+
+```js
+// class definitions
+@decorator
+class MyComponent extends React.Component<Props, State> {
+  // class properties
+  @decorator
+  private static api_version: string;
+
+  // class method parameters
+  private handleFormSubmit(@decorator myParam: string) {
+  }
+
+  // class methods
+  @decorator
+  private handleFormSubmit() {
+  }
+
+  // accessors
+  @decorator
+  public myAccessor() {
+    return this.privateProperty;
+  }
+}
+```
+
+### Class Decorators
+
+```js
+function classDecorator(options: any[]) {
+  return target => {
+    ...
+  }
+}
+
+@classDecorator
+class ...
+```
+
+```js
+function inject(options: { api_version: string }) {
+  // returns the class decorator implementation
+  return target => {
+    // `target` will give us access to the entire class prototype
+    target.apiVersion = options.api_version;
+  };
+}
+
+function deprecated(target) {
+  console.log(`
+    this class is deprecated and will be removed
+    in a future version of the app
+  `);
+  console.log(`@: ${target}`);
+}
+
+@inject({
+  api_version: '0.3.4'
+})
+@deprecated
+class MyComponent extends React.Component<Props> {
+  static apiVersion: string;
+}
+```
+
+### Class Properties Decorators
+
+first parameter `target` will be
+`class prototype` for normal properties
+and `class constructor` for static properties.
+
+```js
+function prop(target, name) {
+  ...
+}
+
+function staticProp(constructor, name) {
+  ...
+}
+
+class MyComponent extends React.Component<Props> {
+  @prop
+  public member: string
+
+  @staticProp
+  public static apiVersion: string;
+}
+```
+
+### Method Parameters Decorators
+
+`@uppercase`/`@lowercase` for string parameters,
+`@rounded` for number parameters.
+
+```js
+function decorator(
+  class,
+  name: string,
+  index: int,
+) {
+  ...
+}
+class MyComponent extends React.Component<Props> {
+  private handleMethod(@decorator param1: string) {
+    ...
+  }
+}
+```
+
+### Methods Decorators
+
+- `target` parameter will class prototype
+- `propertyKey` will be a string containing the name of the method.
+- `propertyDescriptor` will provide with standard metadata associated with the object:
+  configurable, enumerable, value and writable,
+  as well as get and set.
+
+```js
+function methodDecorator(options: any[]) {
+  return (
+    target: MyComponent,
+    propertyKey: string,
+    propertyDescriptor: PropertyDescriptor
+  ) => {
+    ...
+  }
+}
+
+class MyComponent extends React.Component {
+  @methodDecorator
+  handleSomething() {
+    ...
+  }
+}
+```
+
+```js
+function enumerable(enumerable: boolean) {
+  return (
+    target: MyComponent,
+    propertyKey: string,
+    propertyDescriptor: PropertyDescriptor
+  ) => {
+    propertyDescriptor.enumerable = enumerable;
+  }
+}
+
+class MyComponent extends React.Component {
+  @enumerable(false)
+  handleSomething() {
+    ...
+  }
+}
 ```
 
 ## React with TypeScript
