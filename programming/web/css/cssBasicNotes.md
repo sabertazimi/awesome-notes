@@ -1877,6 +1877,7 @@ body {
 
 ### Blend Mode
 
+- `mix-blend-mode` is used for text styles
 - with `multiply`: black is cutout (keep black)
   (0 \* WHAT = 0)
 - with `screen`: white is cutout (keep white)
@@ -1894,16 +1895,16 @@ body {
   background-position: center;
   background-size: cover;
   backgorund-repeat: no-repeat;
-  mix-blend-mode: screen; /* screen or multiply  */
 }
 
 .background h1 {
   background-color: black; /* mix with background */
   color: white; /* keep white */
+  mix-blend-mode: screen; /* screen or multiply  */
 }
 ```
 
-background-blend-mode use for multiple background images
+`background-blend-mode` is used for multiple background images
 
 ```html
 <div class="container"></div>
