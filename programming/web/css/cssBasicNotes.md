@@ -102,6 +102,7 @@
     - [background-size](#background-size)
     - [background-attachment](#background-attachment)
     - [Blend Mode](#blend-mode)
+    - [Mask Style](#mask-style)
     - [Background Best Practice](#background-best-practice)
       - [单背景极简欢迎首页](#单背景极简欢迎首页)
   - [CSS Text](#css-text)
@@ -1924,6 +1925,20 @@ body {
   background: url($pic1), url($pic2);
   background-size: cover;
   background-blend-mode: lighten;
+}
+```
+
+### Mask Style
+
+```css
+#masked {
+  width: 100px;
+  height: 100px;
+  background-color: #8cffa0;
+  mask-image: url(https://mdn.mozillademos.org/files/12668/MDN.svg),
+              url(https://mdn.mozillademos.org/files/12676/star.svg);
+  mask-size: 100% 100%;
+  mask-composite: add; /* Can be changed in the live sample */
 }
 ```
 
