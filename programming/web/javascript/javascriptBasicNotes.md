@@ -135,9 +135,8 @@
         - [insert](#insert)
       - [node](#node)
         - [Traverse DOM Tree](#traverse-dom-tree)
-        - [Event Check](#event-check)
       - [Frag](#frag)
-    - [DOM HTML](#dom-html)
+    - [HTML DOM](#html-dom)
     - [CSSOM](#cssom)
       - [Inline Styles](#inline-styles)
       - [Get/Set Styles](#getset-styles)
@@ -149,8 +148,10 @@
         - [Keyframe Rule](#keyframe-rule)
         - [Add/Remove CSS Rules](#addremove-css-rules)
     - [DOM Events](#dom-events)
+      - [Events Checking](#events-checking)
       - [Global DOM Event](#global-dom-event)
       - [Tab Visibility Event](#tab-visibility-event)
+      - [Form Events](#form-events)
       - [Input Events](#input-events)
       - [Mouse Events](#mouse-events)
       - [Key Events](#key-events)
@@ -159,12 +160,12 @@
     - [Document](#document)
     - [Window](#window)
       - [location API](#location-api)
-    - [JS DOM API](#js-dom-api)
+    - [Rect API](#rect-api)
       - [width/height](#widthheight)
       - [Window Height](#window-height)
       - [Scroll Size](#scroll-size)
       - [DOM left/top Property](#dom-lefttop-property)
-      - [Mutation Observer API](#mutation-observer-api)
+    - [Mutation Observer API](#mutation-observer-api)
   - [Ajax](#ajax)
     - [基本用法](#基本用法)
     - [简单封装](#简单封装)
@@ -2322,13 +2323,6 @@ node.previousElementSibling;
 node.nextElementSibling;
 ```
 
-##### Event Check
-
-```js
-node.matches(event.target); // return false or true
-node.contains(event.target); // return false or true
-```
-
 #### Frag
 
 减少 DOM 操作次数,减少页面渲染次数
@@ -2361,7 +2355,7 @@ var oldnode = document.getElementById('result'),
 oldnode.parentNode.replaceChild(clone, oldnode);
 ```
 
-### DOM HTML
+### HTML DOM
 
 ```js
 element.innerHTML;
@@ -2591,6 +2585,13 @@ For `click/keydown` events:
 
 `element.dispatchEvent` to trigger events.
 
+#### Events Checking
+
+```js
+node.matches(event.target); // return false or true
+node.contains(event.target); // return false or true
+```
+
 #### Global DOM Event
 
 DOMContentLoaded:
@@ -2647,6 +2648,44 @@ function handleVisibilityChange() {
 }
 
 document.addEventListener('visibilitychange', handleVisibilityChange, false);
+```
+
+#### Form Events
+
+- [checkValidity API](https://developer.mozilla.org/docs/Web/API/HTMLSelectElement/checkValidity)
+- [FromData API](https://developer.mozilla.org/docs/Web/API/FormData)
+
+```js
+// <form className='validated-form' noValidate onSubmit={onSubmit}>
+
+const onSubmit = event => {
+  event.preventDefault();
+
+  const form = event.target;
+  const isValid = form.checkValidity(); // returns true or false
+  const formData = new FormData(form);
+  
+  const validationMessages = Array.from(formData.keys()).reduce((acc, key) => {
+    acc[key] = form.elements[key].validationMessage;
+    return acc;
+  }, {});
+  
+  setErrors(validationMessages);
+
+  console.log({
+    validationMessages,
+    data,
+    isValid
+  });
+
+  if (isValid) {
+    // here you do what you need to do if is valid
+    const data = Array.from(formData.keys()).reduce((acc, key) => {
+      acc[key] = formData.get(key);
+      return acc;
+    }, {});
+  }
+};
 ```
 
 #### Input Events
@@ -2835,7 +2874,7 @@ window.addEventListener(
 );
 ```
 
-### JS DOM API
+### Rect API
 
 - getBoundingClientRect
 
@@ -2901,7 +2940,7 @@ const isElementInViewport = el => {
 };
 ```
 
-#### Mutation Observer API
+### Mutation Observer API
 
 如果文档中连续插入 1000 个 `<li>` 元素，就会连续触发 1000 个插入事件，
 执行每个事件的回调函数，这很可能造成浏览器的卡顿；
