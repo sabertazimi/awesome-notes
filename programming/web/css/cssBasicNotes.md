@@ -124,6 +124,7 @@
     - [animation helper](#animation-helper)
     - [Transition](#transition)
       - [Basic Usage](#basic-usage)
+      - [Transition Internal](#transition-internal)
       - [Transition Direction](#transition-direction)
       - [Class Controls on Transition](#class-controls-on-transition)
     - [transform](#transform)
@@ -2288,6 +2289,35 @@ size animation will start from bottom-right corner).
   transition: property durtation timing-function delay;
   transition: transform 0.5s ease-in-out 0.2s;
 }
+```
+
+#### Transition Internal
+
+`transition` take effect only when
+browser detecing different styles between `style` stage.
+
+```js
+// transition not working
+panel.style.transform = 'scale(0)';
+panel.style.transition = 'transform .5s';
+// previous `transform` is empty
+panel.style.transform = 'scale(1)';
+
+// transition working
+panel.style.transform = 'scale(0)';
+panel.style.transition = 'transform .5s';
+// previous `transform` is `scale(0)`
+requestAnimationFrame(() => {
+  panel.style.transform = 'scale(1)';
+});
+
+// transition working
+panel.style.transform = 'scale(0)';
+// `getComutedStyle(element).property` trigger a new `style` stage
+getComputedStyle(panel).transform;
+panel.style.transition = 'transform .5s';
+// previous `transform` is `scale(0)`
+panel.style.transform = 'scale(1)';
 ```
 
 #### Transition Direction
