@@ -9,9 +9,11 @@
   - [UI Framework](#ui-framework)
   - [Browser](#browser)
   - [JS Utils](#js-utils)
-    - [String](#string)
-    - [React Utils](#react-utils)
+    - [String Utils](#string-utils)
   - [CSS Utils](#css-utils)
+    - [Color Utils](#color-utils)
+    - [Gradients Utils](#gradients-utils)
+    - [Box Shadows Utils](#box-shadows-utils)
   - [State/Data Management](#statedata-management)
     - [Redux](#redux)
     - [Hooks](#hooks)
@@ -63,7 +65,6 @@
   - [Mail](#mail)
   - [Blocks](#blocks)
   - [Table](#table)
-  - [Color](#color)
   - [iFrame](#iframe)
   - [Clipboard](#clipboard)
   - [File](#file)
@@ -147,19 +148,28 @@
 
 - [Cash - jQuery Lite](https://github.com/kenwheeler/cash)
 
-### String
+### String Utils
 
 - [String Manipulation](https://github.com/dleitee/strman)
-
-### React Utils
-
-- [classnames](https://github.com/JedWatson/classnames)
 
 ## CSS Utils
 
 - [CSS Normalize](https://github.com/necolas/normalize.css)
-- [Box Shadows](https://madeas.github.io/box-shadows)
 - [Styled System](https://github.com/styled-system/styled-system)
+- [classnames](https://github.com/JedWatson/classnames)
+
+### Color Utils
+
+- [Color Palettes from Online Website](https://github.com/cloudflare-design/color)
+- [culori](https://github.com/Evercoder/culori)
+
+### Gradients Utils
+
+- [Web Gradients](https://webgradients.com)
+
+### Box Shadows Utils
+
+- [Box Shadows](https://madeas.github.io/box-shadows)
 
 ## State/Data Management
 
@@ -469,11 +479,6 @@
 
 - [jQuery Plugin for Render Data](https://github.com/DataTables/DataTables)
 - [Extended Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
-
-## Color
-
-- [Color Palettes from Online Website](https://github.com/cloudflare-design/color)
-- [culori](https://github.com/Evercoder/culori)
 
 ## iFrame
 
