@@ -103,6 +103,7 @@
     - [background-attachment](#background-attachment)
     - [Blend Mode](#blend-mode)
     - [Mask Style](#mask-style)
+    - [Clip Path](#clip-path)
     - [Background Best Practice](#background-best-practice)
       - [Scroll Indicator](#scroll-indicator)
       - [Jumbotron and Landing Page](#jumbotron-and-landing-page)
@@ -1958,6 +1959,14 @@ movie style
   mask-image: url(https://mdn.mozillademos.org/files/12668/MDN.svg), url(https://mdn.mozillademos.org/files/12676/star.svg);
   mask-size: 100% 100%;
   mask-composite: add; /* Can be changed in the live sample */
+}
+```
+
+### Clip Path
+
+```css
+.polygon {
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
 }
 ```
 
