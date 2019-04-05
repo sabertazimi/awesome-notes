@@ -1928,6 +1928,24 @@ body {
 }
 ```
 
+night mode
+
+```css
+.night {
+  background-blend-mode: darken;
+  filter: brightness(80%) grayscale(20%) contrast(1.2);
+}
+```
+
+movie style
+
+```css
+.movie {
+  background-blend-mode: soft-light;
+  filter: contrast(1.1);
+}
+```
+
 ### Mask Style
 
 ```css
@@ -1935,8 +1953,7 @@ body {
   width: 100px;
   height: 100px;
   background-color: #8cffa0;
-  mask-image: url(https://mdn.mozillademos.org/files/12668/MDN.svg),
-              url(https://mdn.mozillademos.org/files/12676/star.svg);
+  mask-image: url(https://mdn.mozillademos.org/files/12668/MDN.svg), url(https://mdn.mozillademos.org/files/12676/star.svg);
   mask-size: 100% 100%;
   mask-composite: add; /* Can be changed in the live sample */
 }
