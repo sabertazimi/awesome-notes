@@ -178,8 +178,11 @@
       - [相同单元](#相同单元)
       - [元素定位](#元素定位)
     - [Geometry](#geometry)
-      - [Lines](#lines)
+      - [Stretch Line](#stretch-line)
+      - [Dash Line](#dash-line)
+      - [Circle](#circle)
       - [Triangle](#triangle)
+      - [Polygon](#polygon)
   - [CSS Variables](#css-variables)
     - [Variables DOM API](#variables-dom-api)
     - [Scope Variebls](#scope-variebls)
@@ -3484,11 +3487,16 @@ const resetScollX = () => {
 
 ### Geometry
 
-#### Lines
+- background: color/image/gradient/clip-path
+- border
+- box-shadow (inset)
+- pseudo element
+
+#### Stretch Line
 
 - background line
 - border line
-- pseudo element with `line-through`
+- pseudo element with `line-through` `text-decoration`
 
 ```css
 .line {
@@ -3519,9 +3527,75 @@ const resetScollX = () => {
 }
 ```
 
-#### Triangle
+#### Dash Line
+
+- background dash line
+- border dash line
+- pseudo element with `dashed` `text-decoration`
 
 ```css
+.dash {
+  background: linear-gradient(to left, #000 70%, transparent 0);
+  ​background-repeat: repeat-x;
+  background-size: 30px 10px;
+}
+
+.dash {
+  border-top: 10px dashed #000;
+}
+
+.dash::after {
+  text-decoration-style: dashed;
+}
+```
+
+#### Circle
+
+- background circle
+- clip path circle
+- border circle
+- pseudo element circle
+
+```css
+.circle {
+  background-image: radial-gradient(#000 72%, transparent 0);
+}
+
+.circle {
+  clip-path: circle(50%);
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.circle::after {
+  content: '·';
+  line-height: 0;
+  font-size: 120vw;
+}
+```
+
+#### Triangle
+
+- background triangle
+- clip path triangle
+- border triangle
+- pseudo elment triangle
+
+```css
+.triangle {
+  background: linear-gradient(<deg>, #000 50%, transparent 0);
+}
+
+/* clip path */
+.arrow-right {
+  width: 20px;
+  height: 32px;
+  background-color: #e888a3;
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
+}
+
 /* transparent border */
 .arrow-up {
   width: 0;
@@ -3531,15 +3605,6 @@ const resetScollX = () => {
   border-left: 16px solid transparent;
 
   border-bottom: 20px solid #8888e8;
-}
-
-/* clip path */
-.arrow-right {
-  width: 20px;
-  height: 32px;
-  background-color: #e888a3;
-
-  clip-path: polygon(0 0, 0 100%, 100% 50%);
 }
 
 /* pseudo element + hidden overflow */
@@ -3573,6 +3638,24 @@ const resetScollX = () => {
 .arrow::before {
   content: '&#9660';
 }
+```
+
+#### Polygon
+
+```js
+const polygon = (n = 3) => {
+  let deg = (2 * Math.PI) / n;
+  let points = [];
+
+  for (let i = 0; i < n; ++i) {
+    let theta = deg * i;
+    let x = 50 * Math.cos(theta) + 50 + '%';
+    let y = 50 * Math.sin(theta) + 50 + '%';
+    points.push(x + ' ' + y);
+  }
+  
+  return `polygon(${points.join(',')})`;
+};
 ```
 
 ## CSS Variables
