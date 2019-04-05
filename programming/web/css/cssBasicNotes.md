@@ -178,6 +178,7 @@
       - [相同单元](#相同单元)
       - [元素定位](#元素定位)
     - [Geometry](#geometry)
+      - [Lines](#lines)
       - [Triangle](#triangle)
   - [CSS Variables](#css-variables)
     - [Variables DOM API](#variables-dom-api)
@@ -3482,6 +3483,41 @@ const resetScollX = () => {
 - flex
 
 ### Geometry
+
+#### Lines
+
+- background line
+- border line
+- pseudo element with `line-through`
+
+```css
+.line {
+  width: 70%;
+  height: 10px;
+  background-color: #000;
+}
+
+.line {
+  background: linear-gradient(#000, #000) 50% / 70% 10px no-repeat;
+}
+
+.line {
+  border-top: 10px solid #000;
+}
+
+.line::after {
+  /* control line length */
+  content: '_______';
+
+  /* hide content */
+  color: transparent;
+
+  /* set thickness */
+  font-size: 5em;
+
+  text-decoration: line-through #000;
+}
+```
 
 #### Triangle
 
