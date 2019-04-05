@@ -100,7 +100,7 @@
     - [(moz/webkit)background-origin](#mozwebkitbackground-origin)
     - [background-size](#background-size)
     - [background-attachment](#background-attachment)
-    - [Mix Blend Mode](#mix-blend-mode)
+    - [Blend Mode](#blend-mode)
     - [Background Best Practice](#background-best-practice)
       - [单背景极简欢迎首页](#单背景极简欢迎首页)
   - [CSS Text](#css-text)
@@ -1875,7 +1875,7 @@ body {
 }
 ```
 
-### Mix Blend Mode
+### Blend Mode
 
 - with `multiply`: black is cutout (keep black)
   (0 \* WHAT = 0)
@@ -1900,6 +1900,20 @@ body {
 .background h1 {
   background-color: black; /* mix with background */
   color: white; /* keep white */
+}
+```
+
+background-blend-mode use for multiple background images
+
+```html
+<div class="container"></div>
+```
+
+```css
+.container {
+  background: url($pic1), url($pic2);
+  background-size: cover;
+  background-blend-mode: lighten;
 }
 ```
 
