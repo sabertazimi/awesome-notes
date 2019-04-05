@@ -121,7 +121,10 @@
       - [transition+transform](#transitiontransform)
       - [animation+transform](#animationtransform)
     - [animation helper](#animation-helper)
-    - [transition](#transition)
+    - [Transition](#transition)
+      - [Basic Usage](#basic-usage)
+      - [Transition Direction](#transition-direction)
+      - [Class Controls on Transition](#class-controls-on-transition)
     - [transform](#transform)
       - [perspective](#perspective)
       - [transform-style](#transform-style)
@@ -2248,7 +2251,9 @@ can change animation start point
 (e.g bottom: 0, right: 0, change width/height from 0 to 100%,
 size animation will start from bottom-right corner).
 
-### transition
+### Transition
+
+#### Basic Usage
 
 - transition-property: color;
 - transition-duration: 1s;
@@ -2262,7 +2267,42 @@ size animation will start from bottom-right corner).
 }
 ```
 
-With `transition: opacity 0.5s` set,
+#### Transition Direction
+
+By specifying the transition on the element itself,
+define the transition to occur in both directions
+(hover on and hover off).
+
+Change `transition` when `:hvoer` etc state bring magic effect:
+
+```css
+.menu-nav {
+  visibility: hidden;
+  transform: translateX(-100%);
+  transition: all 0.4s ease-in-out;
+}
+
+.menu-link {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.menu-toggle:checked ~ .menu-nav {
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.menu-toggle:checked ~ .menu-nav .menu-link {
+  opacity: 1;
+  /* magic effect for delaying transition */
+  transition: opacity 0.4s ease-in-out 0.4s;
+}
+```
+
+#### Class Controls on Transition
+
+Transition Best Practice:
+with `transition: opacity 0.5s` set,
 fisrt add `.opacity-0` class,
 then replace it with `.opacity-1` class.
 Transition animation get trigger
