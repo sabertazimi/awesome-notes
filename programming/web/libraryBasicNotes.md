@@ -365,14 +365,15 @@
 ## Particles
 
 - [html5 particles](https://github.com/MapleRecall/html5-particles)
+- [React Particle Animation](https://github.com/transitive-bullshit/react-particle-animation)
+- [React Particle Button](https://github.com/transitive-bullshit/react-particle-effect-button)
 
 ## Animation
 
 - [React Spring](https://github.com/react-spring/react-spring)
 - [React Transition Group](https://github.com/reactjs/react-transition-group)
 - [React Animation](https://github.com/FunctionFoundry/react-set-animate)
-- [React Particle Animation](https://github.com/transitive-bullshit/react-particle-animation)
-- [React Particle Button](https://github.com/transitive-bullshit/react-particle-effect-button)
+- [Vanilla JavaScript Animation Library](https://github.com/greensock/GreenSock-JS)
 - [Airbnb After Effect Solution](https://github.com/airbnb/lottie-web)
 - [Awesome Effect Library - Effeckt.css](https://github.com/h5bp/Effeckt.css)
 - [animate.css](https://github.com/daneden/animate.css)
