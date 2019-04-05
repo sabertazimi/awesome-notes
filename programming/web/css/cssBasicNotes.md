@@ -104,7 +104,8 @@
     - [Blend Mode](#blend-mode)
     - [Mask Style](#mask-style)
     - [Background Best Practice](#background-best-practice)
-      - [单背景极简欢迎首页](#单背景极简欢迎首页)
+      - [Scroll Indicator](#scroll-indicator)
+      - [Jumbotron and Landing Page](#jumbotron-and-landing-page)
   - [CSS Text](#css-text)
     - [white-space](#white-space)
   - [CSS Font](#css-font)
@@ -1962,7 +1963,41 @@ movie style
 
 ### Background Best Practice
 
-#### 单背景极简欢迎首页
+#### Scroll Indicator
+
+```css
+body {
+  position: relative;
+}
+
+.indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  background: linear-gradient(to right top, teal 50%, transparent 50%) no-repeat;
+  background-size: 100% calc(100% - 100vh);
+  pointer-events: none;
+  mix-blend-mode: darken;
+}
+
+/* use after element to hidden triangle background gradient */
+/* only show 5px background */
+.indicator::after {
+  content: '';
+  position: fixed;
+  top: 5px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  background: #fff;
+}
+```
+
+#### Jumbotron and Landing Page
 
 ```css
 .jumbotron {
