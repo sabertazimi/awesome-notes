@@ -311,6 +311,8 @@
 ### Icons
 
 - [Remix Icon Set](https://github.com/Remix-Design/remixicon)
+- [Icons8](https://icons8.com)
+- [Icon Font](https://www.iconfont.cn)
 - [SVG Logos](https://github.com/gilbarbara/logos)
 - [SVG Icons](https://iconsvg.xyz)
 - [Pure CSS Icons](https://cssicon.space)
