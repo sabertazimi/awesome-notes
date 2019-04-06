@@ -54,6 +54,7 @@
     - [Functional Component](#functional-component)
     - [Class Component](#class-component)
     - [Generic Component](#generic-component)
+    - [Redux](#redux)
   - [Reference](#reference)
 
 <!-- /TOC -->
@@ -1315,6 +1316,72 @@ class Select<T> extends React.Component<SelectProps<T>, any> {}
 
 // 使用
 const Form = () => <Select<string> items={['a', 'b']} />;
+```
+
+### Redux
+
+```ts
+const initialState = {
+  name: '',
+  points: 0,
+  likesGames: true
+};
+
+type State = typeof initialState;
+```
+
+```ts
+export function updateName(name: string) {
+  return <const>{
+    type: 'UPDATE_NAME',
+    name
+  };
+}
+
+export function addPoints(points: number) {
+  return <const>{
+    type: 'ADD_POINTS',
+    points
+  };
+}
+
+export function setLikesGames(value: boolean) {
+  return <const>{
+    type: 'SET_LIKES_GAMES',
+    value
+  };
+}
+
+type Action = ReturnType<
+  typeof updateName | typeof addPoints | typeof setLikesGames
+>;
+
+// =>
+// type Action = {
+//   readonly type: 'UPDATE_NAME';
+//   readonly name: string;
+// } | {
+//   readonly type: 'ADD_POINTS';
+//   readonly points: number;
+// } | {
+//   readonly type: 'SET_LIKES_GAMES';
+//   readonly value: boolean;
+// }
+```
+
+```js
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'UPDATE_NAME':
+      return { ...state, name: action.name }
+    case 'ADD_POINTS':
+      return { ...state, points: action.points }
+    case 'SET_LIKES_GAMES':
+      return { ...state, likesGames: action.value }
+    default:
+      return state
+  }
+};
 ```
 
 ## Reference
