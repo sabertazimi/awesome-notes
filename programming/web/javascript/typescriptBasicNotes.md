@@ -1320,7 +1320,7 @@ const Form = () => <Select<string> items={['a', 'b']} />;
 
 ### Redux
 
-```ts
+```typescript
 const initialState = {
   name: '',
   points: 0,
@@ -1330,7 +1330,7 @@ const initialState = {
 type State = typeof initialState;
 ```
 
-```ts
+```typescript
 export function updateName(name: string) {
   return <const>{
     type: 'UPDATE_NAME',
