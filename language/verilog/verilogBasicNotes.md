@@ -73,6 +73,11 @@
       - [Test Bench](#test-bench)
   - [有限状态机(FSM)](#有限状态机fsm)
   - [算术状态机(ASM)](#算术状态机asm)
+  - [SystemVerilog](#systemverilog)
+    - [Enum](#enum)
+    - [Struct and Union](#struct-and-union)
+    - [Procedural Block](#procedural-block)
+    - [Interface](#interface)
 
 <!-- /TOC -->
 
@@ -868,3 +873,71 @@ end
 - state box: moore fsm
 - conditional box: mealy fsm
 - decision box: `x_input` = 0/1
+
+## SystemVerilog
+
+### Enum
+
+```verilog
+typedef enum logic [2:0] {
+  RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW
+} color_t;
+
+color_t my_color = GREEN;
+initial $display("The color is %s", my_color.name());
+```
+
+### Struct and Union
+
+```verilog
+typedef struct packed {
+  bit [10:0]  expo;
+  bit         sign;
+  bit [51:0]  mant;
+} FP;
+
+FP zero = 64'b0;
+```
+
+### Procedural Block
+
+- always_comb: 用于组合逻辑电路（相当于Verilog中对所有输入变量电平敏感的always，但always_comb无需手动列出所有输入变量，系统会自动识别）
+- always_ff: 用于触发器及相关的时序逻辑电路（相当于Verilog中对某个或某几个信号有效跳变沿敏感、并带有信号储存特性的always）
+- always_latch: 用于锁存器级相关的时序逻辑电路（相当于Verilog中对某个或某几个信号电平敏感、并带有信号储存特性的的always）
+
+```verilog
+always_comb begin
+  tmp = b * b - 4 * a * c;
+  no_root = (tmp < 0);
+end
+
+always_ff @(posedge clk)
+  count <= count + 1;
+
+
+always_latch
+  if (en) q <= d;
+```
+
+### Interface
+
+```verilog
+interface intf;
+  logic a;
+  logic b;
+  modport in (input a, output b);
+  modport out (input b, output a);
+endinterface
+
+module top;
+  intf i ();
+  u_a m1 (.i1(i));
+  u_b m2 (.i2(i));
+endmodule
+
+module u_a (intf.in i1);
+endmodule
+
+module u_b (intf.out i2);
+endmodule
+```
