@@ -558,6 +558,7 @@
 
 ## CLI
 
+- [oclif - Open CLI Framework](https://github.com/oclif/oclif)
 - [commander](https://github.com/tj/commander.js)
 - [ora spinner](https://github.com/sindresorhus/ora)
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js)
