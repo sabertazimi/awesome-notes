@@ -510,6 +510,7 @@
 ## Persistence/Storage/Store
 
 - [ImmortalDB](https://github.com/gruns/ImmortalDB)
+- [lowdb](https://github.com/typicode/lowdb)
 - [brownies](https://github.com/franciscop/brownies)
 - [store.js](https://github.com/marcuswestin/store.js)
 - [localForage](https://github.com/localForage/localForage)
