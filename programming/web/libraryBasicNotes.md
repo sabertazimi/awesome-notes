@@ -119,7 +119,8 @@
 - [Basic - HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 - [Back-End - Nodejs Hackathon Starter](https://github.com/sahat/hackathon-starter)
 - [Desktop - Electron React Boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
-- [hygen - component generator](https://github.com/jondot/hygen)
+- [hygen - Component Generator](https://github.com/jondot/hygen)
+- [React Chrome Extension](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
 
 ## Solution and Framework
 
