@@ -4137,7 +4137,7 @@ const ctx = canvas.getContext('2d', { alpha: false });
 ### Canvas Reference
 
 - [Canvas on MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API)
-- [Canvas Cheat Sheet](Demo/canvas-cheat-sheet.html)
+- [Canvas Cheat Sheet](https://simon.html5.org/dump/html5-canvas-cheat-sheet.html)
 - [Canvas Perf Tips 1](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
 - [Canvas Perf Tips 2](https://www.html5rocks.com/en/tutorials/canvas/performance/)
 - [Canvas Deep Live](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
