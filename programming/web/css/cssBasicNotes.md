@@ -992,6 +992,8 @@ For `.container ul li a` selector:
 
 auto with `css-sizing`:
 present for `fill-available/max-content/min-content/fit-content`
+with `height`/`width`/`min-width`/`max-width`/`min-height`/`max-height`/
+`grid-template-rows`/`grid-template-columns`/`flex-basis`.
 
 ### z-index
 
