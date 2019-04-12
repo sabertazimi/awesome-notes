@@ -53,6 +53,7 @@
     - [Loading](#loading)
     - [Hover](#hover)
   - [Message](#message)
+    - [Page Indicator](#page-indicator)
     - [Prompt](#prompt)
     - [Alert](#alert)
     - [Focus](#focus)
@@ -415,6 +416,10 @@
 - [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
 - [TheaterJS - Typing Effect](https://github.com/Zhouzi/TheaterJS)
 
+### Page Indicator
+
+- [React Snakke](https://github.com/diogomoretti/react-snakke)
+
 ### Prompt
 
 - [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
@@ -565,6 +570,7 @@
 ## CLI
 
 - [oclif - Open CLI Framework](https://github.com/oclif/oclif)
+- [React in Node CLI App](https://github.com/vadimdemedes/ink)
 - [commander](https://github.com/tj/commander.js)
 - [ora spinner](https://github.com/sindresorhus/ora)
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js)
