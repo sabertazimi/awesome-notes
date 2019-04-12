@@ -14,6 +14,7 @@
     - [Color Utils](#color-utils)
     - [Gradients Utils](#gradients-utils)
     - [Box Shadows Utils](#box-shadows-utils)
+    - [Background Utils](#background-utils)
   - [State/Data Management](#statedata-management)
     - [Redux](#redux)
     - [Hooks](#hooks)
@@ -172,6 +173,10 @@
 ### Box Shadows Utils
 
 - [Box Shadows](https://madeas.github.io/box-shadows)
+
+### Background Utils
+
+- [Clippy - clip-path Maker](https://github.com/bennettfeely/Clippy)
 
 ## State/Data Management
 
