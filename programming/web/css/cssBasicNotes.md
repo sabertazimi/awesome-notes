@@ -755,22 +755,23 @@ a[title*='link'] {
 
 > link - visited - hover order matters
 
-- :active：被激活时的状态，不仅限于链接，可用于任何具有 tabindex 属性的元素；
-- :focus：获得焦点时状态，不仅限于链接，可用于任何具有 tabindex 属性的元素：
-- :enabled：已启用的界面元素：`input`
-- :disabled：已禁用的界面元素：`input`
-- :target：该选择器定位当前活动页面内定位点的目标元素, #anchor-name `#info:target {font-size:24px;}`
-- :default：应用于一个或多个作为一组类似元素中的默认元素的 UI 元素；
-- :valid：应用于输入验证有效元素，基于 input 的 type/pattern 属性
-- :invalid：应用于输入验证无效元素，
-- :in-range：应用于具有范围限制的元素，其中该值位于限制内；比如具有 min 和 max 属性的 number 和 range 输入框；
-- :out-of-range：与:in-range 选择相反，其中该值在限制范围外；
-- :required：应用于具有必填属性 required 的表单控件；
-- :optional：应用于没有必填属性 required 的所有表单控件
-- :read-only：应用于其内容无法供用户修改的元素；
-- :read-write：应用于其内容可供用户修改的元素，比如输入框；
-- :root：根元素，始终指 html 元素；
-- :placeholder-shown: select `input` with placeholer
+- `:active`: 被激活时的状态，不仅限于链接，可用于任何具有 tabindex 属性的元素；
+- `:focus`: 获得焦点时状态，不仅限于链接，可用于任何具有 tabindex 属性的元素：
+- `:enabled`: 已启用的界面元素：`input`
+- `:disabled`: 已禁用的界面元素：`input`
+- `:target`: 该选择器定位当前活动页面内定位点的目标元素, #anchor-name `#info:target {font-size:24px;}`
+- `:default`: 应用于一个或多个作为一组类似元素中的默认元素的 UI 元素；
+- `:valid`: 应用于输入验证有效元素，基于 input 的 type/pattern 属性
+- `:invalid`: 应用于输入验证无效元素，
+- `:in-range`: 应用于具有范围限制的元素，其中该值位于限制内；比如具有 min 和 max 属性的 number 和 range 输入框；
+- `:out-of-range`: 与:in-range 选择相反，其中该值在限制范围外；
+- `:required`: 应用于具有必填属性 required 的表单控件；
+- `:optional`: 应用于没有必填属性 required 的所有表单控件
+- `:read-only`: 应用于其内容无法供用户修改的元素；
+- `:read-write`: 应用于其内容可供用户修改的元素，比如输入框；
+- `:root`: 根元素，始终指 html 元素；
+- `:placeholder-shown`: select `input` with placeholer
+- `:focus-within`: selected when any children focused
 - E :nth-child(n) 选择 E 的第 n 个孩子
 - E F:nth-child(n)：该选择器定位元素 E 的第 n 个子元素的元素 F,可省略 E
 - E F:nth-last-child(n)：该选择器定位元素 E 的倒数第 n 个子元素的元素 F,可省略 E
