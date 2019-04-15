@@ -571,11 +571,11 @@
 
 - [oclif - Open CLI Framework](https://github.com/oclif/oclif)
 - [React in Node CLI App](https://github.com/vadimdemedes/ink)
+- [Nexe - Node EXE Wrapper](https://github.com/nexe/nexe)
 - [commander](https://github.com/tj/commander.js)
-- [ora spinner](https://github.com/sindresorhus/ora)
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js)
 - [chalk](https://github.com/chalk/chalk)
-- [open CLI framework](https://github.com/oclif/oclif)
+- [ora spinner](https://github.com/sindresorhus/ora)
 - [progress](https://github.com/bvaughn/progress-estimator)
 - [Babun - Windows Zsh](https://github.com/babun/babun)
 
