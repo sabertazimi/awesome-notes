@@ -70,6 +70,7 @@
   - [iFrame](#iframe)
   - [Clipboard](#clipboard)
   - [File](#file)
+    - [Utils](#utils)
     - [Upload](#upload)
     - [PDF](#pdf)
   - [Persistence/Storage/Store](#persistencestoragestore)
@@ -84,9 +85,10 @@
   - [CLI](#cli)
   - [Daemon](#daemon)
   - [Network](#network)
+    - [P2P](#p2p)
+    - [Prefetch](#prefetch)
     - [Network Benchmark](#network-benchmark)
     - [Network Debugging](#network-debugging)
-    - [Prefetch](#prefetch)
   - [DOM](#dom)
   - [Server](#server)
   - [Encryption](#encryption)
@@ -506,8 +508,11 @@
 ## File
 
 - [zTree v3](https://github.com/zTree/zTree_v3)
+
+### Utils
+
 - [Human Readable File Size](https://github.com/avoidwork/filesize.js)
-- [FireFox Send](https://github.com/mozilla/send)
+- [globby](https://github.com/sindresorhus/globby)
 
 ### Upload
 
@@ -586,6 +591,14 @@
 
 ## Network
 
+### P2P
+
+- [FireFox Send](https://github.com/mozilla/send)
+
+### Prefetch
+
+- [Google QuickLink](https://github.com/GoogleChromeLabs/quicklink)
+
 ### Network Benchmark
 
 - [HTTP/HTTPS Troubleshooting and Profiling](https://github.com/trimstray/htrace.sh)
@@ -594,10 +607,6 @@
 ### Network Debugging
 
 - [Whistle](https://github.com/avwo/whistle)
-
-### Prefetch
-
-- [Google QuickLink](https://github.com/GoogleChromeLabs/quicklink)
 
 ## DOM
 
