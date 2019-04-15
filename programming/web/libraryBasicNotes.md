@@ -34,10 +34,10 @@
   - [Time/Date](#timedate)
   - [Slides](#slides)
   - [Society](#society)
-  - [Emoji](#emoji)
   - [Fonts](#fonts)
   - [Images](#images)
     - [Icons](#icons)
+    - [Emoji](#emoji)
     - [SVG](#svg)
     - [Size](#size)
     - [Slide](#slide)
@@ -298,11 +298,6 @@
 - [一键分享](https://github.com/overtrue/share.js)
 - [sharing](https://github.com/mxstbr/sharing)
 
-## Emoji
-
-- [OwO Keyboard Emoji](https://github.com/DIYgod/OwO)
-- [Emoji Panel](https://github.com/TimeToKnow/emoji-panel)
-
 ## Fonts
 
 - [Fontmin](https://github.com/ecomfe/fontmin)
@@ -327,6 +322,12 @@
 - [SVG Icons](https://iconsvg.xyz)
 - [Pure CSS Icons](https://cssicon.space)
 - [GreenSock JS](https://github.com/greensock/GreenSock-JS)
+
+### Emoji
+
+- [OwO Keyboard Emoji](https://github.com/DIYgod/OwO)
+- [Emoji Panel](https://github.com/TimeToKnow/emoji-panel)
+- [Twitter Emoji](https://github.com/twitter/twemoji)
 
 ### SVG
 
