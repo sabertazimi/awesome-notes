@@ -345,9 +345,13 @@ componentWillUnmount()
 
 ### Refs
 
-ref 用于返回对元素的引用.
+Refs 用于返回对元素的引用.
 但在大多数情况下, 应该避免使用它们.
-当需要直接访问 DOM 元素或组件的实例时, 它们可能非常有用.
+当需要直接访问 DOM 元素或组件的实例时, 它们可能非常有用:
+
+- Managing focus, text selection, or media playback.
+- Triggering imperative animations.
+- Integrating with third-party DOM libraries.k
 
 #### Forward Refs
 
