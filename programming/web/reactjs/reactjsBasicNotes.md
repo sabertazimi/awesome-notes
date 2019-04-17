@@ -85,6 +85,11 @@
   - [Create React App](#create-react-app)
     - [React Scripts](#react-scripts)
     - [Deployment](#deployment)
+  - [Styled Component](#styled-component)
+    - [Basic Usage](#basic-usage)
+      - [Shared CSS Styles](#shared-css-styles)
+      - [Extend Styled Component](#extend-styled-component)
+      - [Props for Styled Component](#props-for-styled-component)
   - [Interviews](#interviews)
 
 <!-- /TOC -->
@@ -2414,6 +2419,171 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 
 - [Offical Documentation](https://facebook.github.io/create-react-app/docs/deployment)
 - [Deploy Subdirectory](https://medium.com/@svinkle/how-to-deploy-a-react-app-to-a-subdirectory-f694d46427c1)
+
+## Styled Component
+
+### Basic Usage
+
+#### Shared CSS Styles
+
+```js
+// Import React.js, styled-components and css
+import React from 'react';
+import styled, { css } from 'styled-components';
+const container = document.querySelector('.container');
+
+// Define new const with bold style
+const headingStyle = css`
+  font-weight: bold;
+`;
+
+// Define typography styles
+const H1 = styled.h1`
+  font-size: 54px;
+  // Using headingStyle const
+  ${headingStyle}
+`;
+const H2 = styled.h2`
+  font-size: 36px;
+  // Using headingStyle const
+  ${headingStyle}
+`;
+const H3 = styled.h3`
+  font-size: 24px;
+  // Using headingStyle const
+  ${headingStyle}
+`;
+const H4 = styled.h4`
+  font-size: 16px;
+  // Using headingStyle const
+  ${headingStyle}
+`;
+const H5 = styled.h5`
+  font-size: 14px;
+  // Using headingStyle const
+  ${headingStyle}
+`;
+const H6 = styled.h6`
+  font-size: 12px;
+  // Using headingStyle const
+  ${headingStyle}
+`;
+const Text = styled.p`
+  font-size: 16px;
+`;
+const Small = styled.small`
+  font-size: 80%;
+`;
+
+// Use our styles
+const WrapperContainer = () => (
+  <div>
+    <H1>Heading h1</H1>
+    <H2>Heading h2</H2>
+    <H3>Heading h3</H3>
+    <H4>Heading h4</H4>
+    <H5>Heading h5</H5>
+    <H6>Heading h6</H6>
+    <Text>Body text</Text>
+    <Small>Small text</Small>
+  </div>
+);
+
+ReactDOM.render(<WrapperContainer />, container);
+```
+
+#### Extend Styled Component
+
+```js
+// Import React.js and styled-components
+import React from 'react';
+import styled from 'styled-components';
+
+const container = document.querySelector('.container');
+
+const Button = styled.button`
+  padding: 12px 24px;
+  font-size: 16px;
+  color: #fff;
+  border: 0;
+  border-radius: 35px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  cursor: pointer;
+`;
+
+// Using extend to create a red variant of the button
+const RedButton = Button.extend`
+  background-color: #e74c3c;
+`;
+
+// Using extend to create a green variant of the button
+const GreenButton = Button.extend`
+  background-color: #2ecc71;
+`;
+
+// Use our styles
+const WrapperContainer = () => (
+  <div>
+    <Button>Defaul button</Button>
+    <RedButton>Red button</RedButton>
+    <GreenButton>Green button</GreenButton>
+  </div>
+);
+
+ReactDOM.render(<WrapperContainer />, container);
+```
+
+#### Props for Styled Component
+
+```js
+// Import React.js, styled-components and css
+import React from 'react';
+import styled, { css } from 'styled-components';
+
+const container = document.querySelector('.container');
+
+const Button = styled.button`
+  padding: 12px 24px;
+  font-size: 16px;
+  border: 0;
+  border-radius: 35px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  cursor: pointer;
+
+  // Using props to create a gray variant of the button
+  ${props =>
+    props.gray &&
+    css`
+      background-color: #95a5a6;
+    `}
+  // Using props to create a green variant of the button
+  ${props =>
+    props.green &&
+    css`
+      background-color: #2ecc71;
+    `}
+  // Using props to create a red variant of the button
+  ${props =>
+    props.red &&
+    css`
+      background-color: #e74c3c;
+    `}
+  // We can also use a ternary operator for "binary" changes
+  color: ${props => (props.gray ? '#2c3e50' : '#fff')};
+`;
+
+const WrapperContainer = () => (
+  <div>
+    <Button>Defaul button</Button>
+    {/* Button with prop "red" */}
+    <Button red>Red button</Button>
+    {/* Button with prop "green" */}
+    <Button green>Green button</Button>
+  </div>
+);
+
+ReactDOM.render(<WrapperContainer />, container);
+```
 
 ## Interviews
 
