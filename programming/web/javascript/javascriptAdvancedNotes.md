@@ -132,25 +132,6 @@
     - [Awesome Performance Tutorial](#awesome-performance-tutorial)
     - [Perf and Analysis Tools](#perf-and-analysis-tools)
       - [Inspect Android Device](#inspect-android-device)
-  - [JavaScript Style Guide](#javascript-style-guide)
-    - [Naming Style](#naming-style)
-    - [Variable Style](#variable-style)
-    - [Object Style](#object-style)
-    - [Array Style](#array-style)
-    - [Destruct Style](#destruct-style)
-    - [String Style](#string-style)
-    - [Function Style](#function-style)
-    - [Arrow Function Style](#arrow-function-style)
-    - [Module Style](#module-style)
-    - [Iterator and Generator Style](#iterator-and-generator-style)
-    - [Expression Style](#expression-style)
-    - [换行 Style](#换行-style)
-    - [空格 Style](#空格-style)
-    - [注释 Style](#注释-style)
-      - [模块](#模块)
-      - [对象](#对象)
-      - [属性](#属性)
-      - [方法/函数](#方法函数)
   - [Testing and Debugging](#testing-and-debugging)
     - [Log](#log)
     - [Frameworks](#frameworks)
@@ -195,6 +176,25 @@
       - [Layer Panel](#layer-panel)
     - [Rendering Panel](#rendering-panel)
     - [More Tools](#more-tools)
+  - [JavaScript Style Guide](#javascript-style-guide)
+    - [Naming Style](#naming-style)
+    - [Variable Style](#variable-style)
+    - [Object Style](#object-style)
+    - [Array Style](#array-style)
+    - [Destruct Style](#destruct-style)
+    - [String Style](#string-style)
+    - [Function Style](#function-style)
+    - [Arrow Function Style](#arrow-function-style)
+    - [Module Style](#module-style)
+    - [Iterator and Generator Style](#iterator-and-generator-style)
+    - [Expression Style](#expression-style)
+    - [换行 Style](#换行-style)
+    - [空格 Style](#空格-style)
+    - [注释 Style](#注释-style)
+      - [模块](#模块)
+      - [对象](#对象)
+      - [属性](#属性)
+      - [方法/函数](#方法函数)
   - [SSR](#ssr)
   - [PWA](#pwa)
     - [Service Worker](#service-worker)
@@ -2616,6 +2616,379 @@ Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 - link Android and PC with USB cable
 - open `chrome://inspect/#devices` to start inspecting
 
+## Testing and Debugging
+
+### Log
+
+- 时间，包含时区信息和毫秒
+- 日志级别
+- 会话标识
+- 功能标识
+- 精炼的内容: 场景信息（谁，什么功能等），状态信息(开始，中断，结束)以及重要参数
+- 其他信息：版本号，线程号
+
+### Frameworks
+
+#### Unit 测试
+
+- Jasmine
+- Mocha
+
+#### UI 测试
+
+- 用户行为: Karma/Selenium
+- 功能测试: Phantomjs/Slimerjs/Karma
+
+### 可测试代码
+
+- 完整注释
+- 最小复杂度 = (扇入 \* 扇出) ^ 2
+- 可隔离性: 最小依赖性 + 松耦合性
+
+#### 范例
+
+- 使用依赖注入，将外部对象移至函数参数处(不在函数内部调用构造器): 易于构造 mock/stub, 降低扇出(函数复杂度)
+
+### 圈复杂度
+
+V(G) = e - n + 2 **<10**
+
+### 函数复杂度
+
+函数复杂度 = (扇入 \* 扇出) ^ 2
+
+#### 扇出(引用) **<7**
+
+- 所引用外部对象/方法之和
+- 高扇出: 高复杂度/高依赖性/高耦合度
+
+#### 扇入(被引用)
+
+- 其他对象/方法引用此函数的次数之和
+- 顶层抽象代码 与 不常用功能 应保持低扇入
+
+### 耦合度
+
+#### 内容耦合(5)
+
+```js
+O.property = 'tazimi';
+O.method = function() {};
+O.prototype.method = function() {};
+```
+
+#### 公共耦合(4)
+
+共享全局变量
+
+```js
+const Global = 'global';
+
+function A() {
+  Global = 'A';
+}
+function B() {
+  Global = 'B';
+}
+```
+
+#### 控制耦合(3)
+
+```js
+const absFactory = new AbstractFactory({ env: 'TEST' });
+```
+
+#### 印记耦合(2)
+
+```js
+O.prototype.makeBread = function(args) {
+  return new Bread(args.type, args.size);
+};
+
+O.makeBread({ type: wheat, size: 99, name: 'foo' });
+```
+
+#### 数据耦合(1)
+
+#### 无耦合(0)
+
+### 单元测试
+
+#### 测试原则
+
+- 代码覆盖率
+- 非法值测试
+- 边界测试
+- 非边界测试
+
+#### 隔离被测代码
+
+- 编写代码时，保持最小复杂度(最小依赖，最低耦合)
+- 利用 mock/stub 模拟外部依赖/测试数据
+
+#### mock/stub/spy
+
+- mock: 模拟对象中的方法/接口
+- stub: 模拟对象中的返回值
+- spy: 在原有对象的基础上，增加监视用变量/方法 e.g assert/调用次数/参数限制
+
+```js
+const mockery = require('mockery');
+mockery.enable();
+
+describe('Sum suite File', function() {
+  beforeEach(function() {
+    mockery.registerAllowable('./mySumFS', true);
+  });
+
+  afterEach(function() {
+    mockery.deregisterAllowable('./mySumFS');
+  });
+
+  it('Adds Integers!', function() {
+    const filename = 'numbers';
+    const fsMock = {
+      readFileSync: function(path, encoding) {
+        expect(path).toEqual(filename);
+        expect(encoding).toEqual('utf8');
+        return JSON.stringify({ a: 9, b: 3 });
+      }
+    };
+
+    mockery.registerMock('fs', fsMock);
+    const mySum = require('./mySumFS');
+    expect(mySum.sum(filename)).toEqual(12);
+    mockery.deregisterMock('fs');
+  });
+});
+```
+
+### Tools API
+
+#### console API
+
+```js
+var devtools = /./;
+devtools.toString = function() {
+  this.opened = true;
+};
+
+console.log('%c', devtools);
+// devtools.opened will become true if/when the console is opened
+```
+
+```js
+console.log / info / warn / error;
+console.dir / dirxml / table; // different output style
+console.assert;
+console.group / groupEnd;
+console.time / timeEnd;
+console.profile / profileEnd;
+console.count;
+console.trace;
+```
+
+`console.log`
+
+```js
+// `sprinf` style log
+console.log('%d %o %s', integer, object, string);
+console.log('%c ...', 'css style');
+```
+
+`console.table`
+
+```js
+// display array of object (tabular data)
+const transactions = [
+  {
+    id: '7cb1-e041b126-f3b8',
+    seller: 'WAL0412',
+    buyer: 'WAL3023',
+    price: 203450,
+    time: 1539688433
+  },
+  {
+    id: '1d4c-31f8f14b-1571',
+    seller: 'WAL0452',
+    buyer: 'WAL3023',
+    price: 348299,
+    time: 1539688433
+  },
+  {
+    id: 'b12c-b3adf58f-809f',
+    seller: 'WAL0012',
+    buyer: 'WAL2025',
+    price: 59240,
+    time: 1539688433
+  }
+];
+
+console.table(data, ['id', 'price']);
+```
+
+#### JS API
+
+```js
+debugger;
+```
+
+```js
+copy(obj); // to clipborad
+```
+
+```js
+window.onerror = function(errorMessage, scriptURI, lineNo, columnNo, error) {
+  console.log('errorMessage: ' + errorMessage); // 异常信息
+  console.log('scriptURI: ' + scriptURI); // 异常文件路径
+  console.log('lineNo: ' + lineNo); // 异常行号
+  console.log('columnNo: ' + columnNo); // 异常列号
+  console.log('error: ' + error); // 异常堆栈信息
+  // ...
+  // 异常上报
+};
+
+window.addEventListener('error', function() {
+  console.log(error);
+  // ...
+  // 异常上报
+});
+```
+
+##### Trace Property (Vue Internal)
+
+```js
+const traceProperty = (object, property) => {
+  let value = object[property];
+  Object.defineProperty(object, property, {
+    get() {
+      console.trace(`${property} requested`);
+      return value;
+    },
+    set(newValue) {
+      console.trace(`setting ${property} to `, newValue);
+      value = newValue;
+    }
+  });
+};
+```
+
+#### Node API
+
+- node --inspect
+- [ndb](https://github.com/GoogleChromeLabs/ndb)
+
+```bash
+node --inspect
+ndb index.js
+```
+
+### Browser Compatibility
+
+#### 特性检测
+
+**不使用特性/浏览器推断**，往往容易推断错误(且会随着浏览器更新产生新的错误)
+
+```js
+// 特性检测
+if (document.getElementById) {
+  element = document.getElementById(id);
+}
+```
+
+## Chrome Dev Tools
+
+### Shortcuts
+
+- c-d: go to next word
+- c-m: go to next bracket
+- c-p: go to files
+- cs-p: go to anywhere
+- cs-o: go to functions
+
+long click reload: multiple reload options e.g clean cache
+
+### Elements Panel
+
+- break on elements
+
+#### Style Tab
+
+- color picker
+- filter: class filter, pseudo filter, css style filter
+
+### Console Panel
+
+- getEventListeners(dom)
+- monitorEvents(dom, events)
+- unmonitorEvents(dom)
+- debug(fn)
+- undebug(fn)
+- monitor(fn)
+- unmonitor(fn)
+
+#### Console Settings
+
+- preserve log
+- show timestamps
+- Verbose: additional performance log
+- click filename, filter error messages
+- add folder to workspace
+
+#### capture default eventListener
+
+> \$0: the reference to the currently selected element in the Elements panel
+
+```js
+const listener = getEventListeners($0).click[0].listener;
+$0.removeEventListener('click', listener);
+$0.addEventListener('click', e => {
+  // do something
+  // ...
+
+  // then
+  listener(e);
+});
+```
+
+### Source Panel
+
+- multiple breakpoints: source, XHR/fetch, DOM, global/event listeners
+
+### Network Panel
+
+- throtting: simulate different network environment
+- initiator：go to files
+
+### Performance Panel
+
+- script->style->layout->paint->composite timeline
+- performance tips
+- [Timeline Events](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/performance-reference)
+- [Performance Analysis Reference](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
+
+#### Memory Panel
+
+#### JS Profiler Panel
+
+#### Layer Panel
+
+tool for composite stage analysis
+
+### Rendering Panel
+
+- re-paint area
+- FPS monitor
+- scroll event
+- paint flashing
+- layout/layer border
+
+### More Tools
+
+- layers
+- animations
+- coverage
+
 ## JavaScript Style Guide
 
 - [Airbnb Guide](https://github.com/airbnb/javascript)
@@ -3268,379 +3641,6 @@ if (a && b && c) {
  * @return {Number}/{String} instructions
  */
 ```
-
-## Testing and Debugging
-
-### Log
-
-- 时间，包含时区信息和毫秒
-- 日志级别
-- 会话标识
-- 功能标识
-- 精炼的内容: 场景信息（谁，什么功能等），状态信息(开始，中断，结束)以及重要参数
-- 其他信息：版本号，线程号
-
-### Frameworks
-
-#### Unit 测试
-
-- Jasmine
-- Mocha
-
-#### UI 测试
-
-- 用户行为: Karma/Selenium
-- 功能测试: Phantomjs/Slimerjs/Karma
-
-### 可测试代码
-
-- 完整注释
-- 最小复杂度 = (扇入 \* 扇出) ^ 2
-- 可隔离性: 最小依赖性 + 松耦合性
-
-#### 范例
-
-- 使用依赖注入，将外部对象移至函数参数处(不在函数内部调用构造器): 易于构造 mock/stub, 降低扇出(函数复杂度)
-
-### 圈复杂度
-
-V(G) = e - n + 2 **<10**
-
-### 函数复杂度
-
-函数复杂度 = (扇入 \* 扇出) ^ 2
-
-#### 扇出(引用) **<7**
-
-- 所引用外部对象/方法之和
-- 高扇出: 高复杂度/高依赖性/高耦合度
-
-#### 扇入(被引用)
-
-- 其他对象/方法引用此函数的次数之和
-- 顶层抽象代码 与 不常用功能 应保持低扇入
-
-### 耦合度
-
-#### 内容耦合(5)
-
-```js
-O.property = 'tazimi';
-O.method = function() {};
-O.prototype.method = function() {};
-```
-
-#### 公共耦合(4)
-
-共享全局变量
-
-```js
-const Global = 'global';
-
-function A() {
-  Global = 'A';
-}
-function B() {
-  Global = 'B';
-}
-```
-
-#### 控制耦合(3)
-
-```js
-const absFactory = new AbstractFactory({ env: 'TEST' });
-```
-
-#### 印记耦合(2)
-
-```js
-O.prototype.makeBread = function(args) {
-  return new Bread(args.type, args.size);
-};
-
-O.makeBread({ type: wheat, size: 99, name: 'foo' });
-```
-
-#### 数据耦合(1)
-
-#### 无耦合(0)
-
-### 单元测试
-
-#### 测试原则
-
-- 代码覆盖率
-- 非法值测试
-- 边界测试
-- 非边界测试
-
-#### 隔离被测代码
-
-- 编写代码时，保持最小复杂度(最小依赖，最低耦合)
-- 利用 mock/stub 模拟外部依赖/测试数据
-
-#### mock/stub/spy
-
-- mock: 模拟对象中的方法/接口
-- stub: 模拟对象中的返回值
-- spy: 在原有对象的基础上，增加监视用变量/方法 e.g assert/调用次数/参数限制
-
-```js
-const mockery = require('mockery');
-mockery.enable();
-
-describe('Sum suite File', function() {
-  beforeEach(function() {
-    mockery.registerAllowable('./mySumFS', true);
-  });
-
-  afterEach(function() {
-    mockery.deregisterAllowable('./mySumFS');
-  });
-
-  it('Adds Integers!', function() {
-    const filename = 'numbers';
-    const fsMock = {
-      readFileSync: function(path, encoding) {
-        expect(path).toEqual(filename);
-        expect(encoding).toEqual('utf8');
-        return JSON.stringify({ a: 9, b: 3 });
-      }
-    };
-
-    mockery.registerMock('fs', fsMock);
-    const mySum = require('./mySumFS');
-    expect(mySum.sum(filename)).toEqual(12);
-    mockery.deregisterMock('fs');
-  });
-});
-```
-
-### Tools API
-
-#### console API
-
-```js
-var devtools = /./;
-devtools.toString = function() {
-  this.opened = true;
-};
-
-console.log('%c', devtools);
-// devtools.opened will become true if/when the console is opened
-```
-
-```js
-console.log / info / warn / error;
-console.dir / dirxml / table; // different output style
-console.assert;
-console.group / groupEnd;
-console.time / timeEnd;
-console.profile / profileEnd;
-console.count;
-console.trace;
-```
-
-`console.log`
-
-```js
-// `sprinf` style log
-console.log('%d %o %s', integer, object, string);
-console.log('%c ...', 'css style');
-```
-
-`console.table`
-
-```js
-// display array of object (tabular data)
-const transactions = [
-  {
-    id: '7cb1-e041b126-f3b8',
-    seller: 'WAL0412',
-    buyer: 'WAL3023',
-    price: 203450,
-    time: 1539688433
-  },
-  {
-    id: '1d4c-31f8f14b-1571',
-    seller: 'WAL0452',
-    buyer: 'WAL3023',
-    price: 348299,
-    time: 1539688433
-  },
-  {
-    id: 'b12c-b3adf58f-809f',
-    seller: 'WAL0012',
-    buyer: 'WAL2025',
-    price: 59240,
-    time: 1539688433
-  }
-];
-
-console.table(data, ['id', 'price']);
-```
-
-#### JS API
-
-```js
-debugger;
-```
-
-```js
-copy(obj); // to clipborad
-```
-
-```js
-window.onerror = function(errorMessage, scriptURI, lineNo, columnNo, error) {
-  console.log('errorMessage: ' + errorMessage); // 异常信息
-  console.log('scriptURI: ' + scriptURI); // 异常文件路径
-  console.log('lineNo: ' + lineNo); // 异常行号
-  console.log('columnNo: ' + columnNo); // 异常列号
-  console.log('error: ' + error); // 异常堆栈信息
-  // ...
-  // 异常上报
-};
-
-window.addEventListener('error', function() {
-  console.log(error);
-  // ...
-  // 异常上报
-});
-```
-
-##### Trace Property (Vue Internal)
-
-```js
-const traceProperty = (object, property) => {
-  let value = object[property];
-  Object.defineProperty(object, property, {
-    get() {
-      console.trace(`${property} requested`);
-      return value;
-    },
-    set(newValue) {
-      console.trace(`setting ${property} to `, newValue);
-      value = newValue;
-    }
-  });
-};
-```
-
-#### Node API
-
-- node --inspect
-- [ndb](https://github.com/GoogleChromeLabs/ndb)
-
-```bash
-node --inspect
-ndb index.js
-```
-
-### Browser Compatibility
-
-#### 特性检测
-
-**不使用特性/浏览器推断**，往往容易推断错误(且会随着浏览器更新产生新的错误)
-
-```js
-// 特性检测
-if (document.getElementById) {
-  element = document.getElementById(id);
-}
-```
-
-## Chrome Dev Tools
-
-### Shortcuts
-
-- c-d: go to next word
-- c-m: go to next bracket
-- c-p: go to files
-- cs-p: go to anywhere
-- cs-o: go to functions
-
-long click reload: multiple reload options e.g clean cache
-
-### Elements Panel
-
-- break on elements
-
-#### Style Tab
-
-- color picker
-- filter: class filter, pseudo filter, css style filter
-
-### Console Panel
-
-- getEventListeners(dom)
-- monitorEvents(dom, events)
-- unmonitorEvents(dom)
-- debug(fn)
-- undebug(fn)
-- monitor(fn)
-- unmonitor(fn)
-
-#### Console Settings
-
-- preserve log
-- show timestamps
-- Verbose: additional performance log
-- click filename, filter error messages
-- add folder to workspace
-
-#### capture default eventListener
-
-> \$0: the reference to the currently selected element in the Elements panel
-
-```js
-const listener = getEventListeners($0).click[0].listener;
-$0.removeEventListener('click', listener);
-$0.addEventListener('click', e => {
-  // do something
-  // ...
-
-  // then
-  listener(e);
-});
-```
-
-### Source Panel
-
-- multiple breakpoints: source, XHR/fetch, DOM, global/event listeners
-
-### Network Panel
-
-- throtting: simulate different network environment
-- initiator：go to files
-
-### Performance Panel
-
-- script->style->layout->paint->composite timeline
-- performance tips
-- [Timeline Events](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/performance-reference)
-- [Performance Analysis Reference](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
-
-#### Memory Panel
-
-#### JS Profiler Panel
-
-#### Layer Panel
-
-tool for composite stage analysis
-
-### Rendering Panel
-
-- re-paint area
-- FPS monitor
-- scroll event
-- layout/layer border
-
-### More Tools
-
-- rendering
-- layers
-- animations
-- coverage
 
 ## SSR
 
