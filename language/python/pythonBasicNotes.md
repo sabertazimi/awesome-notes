@@ -18,6 +18,8 @@
   - [3D Plot](#3d-plot)
   - [Paper Figures Config](#paper-figures-config)
   - [Paper Standard](#paper-standard)
+  - [Awesome Library](#awesome-library)
+    - [Debugging and Testing](#debugging-and-testing)
 
 <!-- /TOC -->
 
@@ -420,3 +422,9 @@ fig.savefig('plot.pdf')
 ## Paper Standard
 
 - [Matplotlib for Papers](https://github.com/jbmouret/matplotlib_for_papers)
+
+## Awesome Library
+
+### Debugging and Testing
+
+- [PySnooper](https://github.com/cool-RR/PySnooper)
