@@ -361,10 +361,13 @@ Refs 用于返回对元素的引用.
 
 #### Forward Refs
 
+你不能在函数式组件上使用`ref`属性,
+因为它们没有实例, 但可以在函数式组件内部使用`ref`.
 Ref forwarding 是一个特性,
 它允许一些组件获取接收到 ref 对象并将它进一步传递给子组件.
 
 ```js
+// functional component
 const ButtonElement = React.forwardRef((props, ref) => (
   <button ref={ref} className="CustomButton">
     {props.children}
