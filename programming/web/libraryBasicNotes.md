@@ -419,6 +419,7 @@
 
 - [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
 - [TheaterJS - Typing Effect](https://github.com/Zhouzi/TheaterJS)
+- [Guide Tour](https://github.com/shipshapecode/shepherd)
 
 ### Page Indicator
 
