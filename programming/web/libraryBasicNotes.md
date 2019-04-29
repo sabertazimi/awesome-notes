@@ -137,6 +137,7 @@
 - [React Ant Design](https://github.com/ant-design/ant-design)
 - [IceWorks](https://alibaba.github.io/ice/iceworks)
 - [React Semantic UI](https://github.com/Semantic-Org/Semantic-UI-React)
+- [React Base UI](https://github.com/uber-web/baseui)
 - [React Material UI](https://github.com/callemall/material-ui)
 - [React BluePrint](https://github.com/palantir/blueprint)
 - [React Polaris](https://github.com/Shopify/polaris-react)
