@@ -44,6 +44,7 @@
       - [Store Hook](#store-hook)
       - [History Hook](#history-hook)
       - [Debounce Hook](#debounce-hook)
+      - [Context Hook](#context-hook)
       - [Router Hook](#router-hook)
       - [Script Loading Hook](#script-loading-hook)
       - [Form Hook](#form-hook)
@@ -1293,6 +1294,40 @@ const debouncedSearchTerm = useDebounce(searchTerm, 500);
 useEffect(() => {
   ...
 }, [debouncedSearchTerm]);
+```
+
+#### Context Hook
+
+```js
+import React from 'react';
+
+const CountContext = React.createContext();
+
+function CountProvider(props) {
+  const [count, setCount] = React.useState(0);
+  const value = React.useMemo(() => {
+    return {
+      count,
+      setCount
+    };
+  }, [count]);
+  return <CountContext.Provider value={value} {...props} />;
+}
+
+function useCount() {
+  const context = React.useContext(CountContext);
+  if (!context) {
+    throw new Error('useCount must be used within a CountProvider');
+  }
+  const { count, setCount } = context;
+  const increment = () => setCount(c => c + 1);
+  return {
+    count,
+    increment
+  };
+}
+
+export { CountProvider, useCount };
 ```
 
 #### Router Hook
