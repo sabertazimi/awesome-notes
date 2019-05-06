@@ -185,6 +185,7 @@
     - [`sar -n DEV 1`](#sar--n-dev-1)
     - [`sar -n TCP,ETCP 1`](#sar--n-tcpetcp-1)
     - [`top`](#top)
+    - [`perf`](#perf)
 
 <!-- /TOC -->
 
@@ -2002,3 +2003,15 @@ set-window-option -g window-status-current-bg red
 ### `sar -n TCP,ETCP 1`
 
 ### `top`
+
+### `perf`
+
+[Perf Examples](http://www.brendangregg.com/perf.html)
+
+```bash
+perf list # events
+perf stat <command>
+perf stat -e <events> <command>
+perf record -e <events> -a <command>
+perf report
+```
