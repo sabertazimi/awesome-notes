@@ -559,6 +559,7 @@
 ### Rich Text Editor
 
 - [React Markdown](https://github.com/rexxars/react-markdown)
+- [Block Editor](https://github.com/codex-team/editor.js)
 - [CKEditor](https://github.com/ckeditor)
 - [Wang Editor - Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
 - [Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
