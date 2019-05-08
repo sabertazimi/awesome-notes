@@ -2472,6 +2472,9 @@ window.addEventListener('scroll', function(event) {
 - If put JavaScript in `<head>`, in such script can't access DOM directly
   (DOM haven't get parsed)
 
+Best practice: lazy loading scripts not execute immediately
+(**Chrome Coverage Devtools**)
+
 ```html
 <script src="myscript.js"></script>
 <script src="myscript.js" async></script>
