@@ -2474,8 +2474,10 @@ window.addEventListener('scroll', function(event) {
 
 ```html
 <script src="myscript.js"></script>
-<script src="myscript.js" defer></script>
 <script src="myscript.js" async></script>
+<link rel=preload />
+<script src="myscript.js" defer></script>
+<link rel=prefetch />
 ```
 
 ```jsx
