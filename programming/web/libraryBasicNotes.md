@@ -227,8 +227,8 @@
 
 ## List Virtualization/Windowing
 
-- [React Window](https://github.com/bvaughn/react-window)
-- [Large Data List/Table/Scroller](https://github.com/bvaughn/react-virtualized)
+- [React Window - New Tiny React Virtualized](https://github.com/bvaughn/react-window)
+- [React Virtualized](https://github.com/bvaughn/react-virtualized)
 
 ## Navigation
 
@@ -241,6 +241,7 @@
 - [React Chartjs](https://github.com/jhudson8/react-chartjs)
 - [Sigmajs - Graph Drawing](https://github.com/jacomyal/sigma.js)
 - [HTML5 Chart](https://github.com/chartjs/Chart.js)
+- [plotly.js](https://github.com/plotly/plotly.js)
 
 ## Search
 
