@@ -2475,8 +2475,7 @@ window.addEventListener('scroll', function(event) {
 ```html
 <script src="myscript.js"></script>
 <script src="myscript.js" defer></script>
-<script src="myscript.js" async></script
->k
+<script src="myscript.js" async></script>
 ```
 
 ```jsx
