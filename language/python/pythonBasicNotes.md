@@ -6,10 +6,15 @@
   - [CLI Application](#cli-application)
     - [Basic CLI](#basic-cli)
     - [Progress Bar](#progress-bar)
+  - [Process Data Files](#process-data-files)
+    - [CSV File](#csv-file)
+    - [JSON File](#json-file)
+    - [XML File](#xml-file)
+    - [Plain Text File](#plain-text-file)
+    - [Converter](#converter)
   - [Matplotlib Usage](#matplotlib-usage)
     - [Plot Type](#plot-type)
     - [Basic Usage](#basic-usage)
-  - [Process Data File](#process-data-file)
   - [Plot Style](#plot-style)
   - [Plot Axis Tick](#plot-axis-tick)
   - [Plot Legend](#plot-legend)
@@ -116,6 +121,175 @@ if __name__ == '__main__':
     caesar_breaker()
 ```
 
+## Process Data Files
+
+### CSV File
+
+```python
+import csv
+
+filename = "my_data.csv"
+
+fields = []
+rows = []
+
+# Reading csv file
+with open(filename, 'r') as csvfile:
+    # Creating a csv reader object
+    csvreader = csv.reader(csvfile)
+
+    # Extracting field names in the first row
+    fields = csvreader.next()
+
+    # Extracting each data row one by one
+    for row in csvreader:
+        rows.append(row)
+
+# Printing out the first 5 rows
+for row in rows[:5]:
+    print(row)
+```
+
+```python
+import csv
+
+# Field names
+fields = ['Name', 'Goals', 'Assists', 'Shots']
+
+# Rows of data in the csv file
+rows = [ ['Emily', '12', '18', '112'],
+         ['Katie', '8', '24', '96'],
+         ['John', '16', '9', '101'],
+         ['Mike', '3', '14', '82']]
+
+filename = "soccer.csv"
+
+# Writing to csv file
+with open(filename, 'w+') as csvfile:
+    # Creating a csv writer object
+    csvwriter = csv.writer(csvfile)
+
+    # Writing the fields
+    csvwriter.writerow(fields)
+
+    # Writing the data rows
+    csvwriter.writerows(rows)
+```
+
+```python
+import pandas as pd
+
+filename = "my_data.csv"
+
+# Read in the data
+data = pd.read_csv(filename)
+
+# Print the first 5 rows
+print(data.head(5))
+
+# Write the data to file
+data.to_csv("new_data.csv", sep=",", index=False)
+```
+
+### JSON File
+
+```python
+import json
+import pandas as pd
+
+# Read the data from file
+# We now have a Python dictionary
+with open('data.json') as f:
+    data_listofdict = json.load(f)
+
+# We can do the same thing with pandas
+data_df = pd.read_json('data.json', orient='records')
+
+# We can write a dictionary to JSON like so
+# Use 'indent' and 'sort_keys' to make the JSON
+# file look nice
+with open('new_data.json', 'w+') as json_file:
+    json.dump(data_listofdict, json_file, indent=4, sort_keys=True)
+
+# And again the same thing with pandas
+export = data_df.to_json('new_data.json', orient='records')
+```
+
+### XML File
+
+```python
+import xml.etree.ElementTree as ET
+import xmltodict
+import json
+
+tree = ET.parse('output.xml')
+xml_data = tree.getroot()
+
+xmlstr = ET.tostring(xml_data, encoding='utf8', method='xml')
+
+
+data_dict = dict(xmltodict.parse(xmlstr))
+
+print(data_dict)
+
+with open('new_data_2.json', 'w+') as json_file:
+    json.dump(data_dict, json_file, indent=4, sort_keys=True)
+```
+
+### Plain Text File
+
+```python
+import numpy as np
+x, y = np.loadtxt('input.dat', delimiter=',', unpack=True)
+```
+
+### Converter
+
+```python
+import pandas as pd
+from dicttoxml import dicttoxml
+import json
+
+# Building our dataframe
+data = {'Name': ['Emily', 'Katie', 'John', 'Mike'],
+        'Goals': [12, 8, 16, 3],
+        'Assists': [18, 24, 9, 14],
+        'Shots': [112, 96, 101, 82]
+        }
+
+df = pd.DataFrame(data, columns=data.keys())
+
+# Converting the dataframe to a dictionary
+# Then save it to file
+data_dict = df.to_dict(orient="records")
+with open('output.json', "w+") as f:
+    json.dump(data_dict, f, indent=4)
+
+# Converting the dataframe to XML
+# Then save it to file
+xml_data = dicttoxml(data_dict).decode()
+with open("output.xml", "w+") as f:
+    f.write(xml_data)
+```
+
+```python
+import json
+import pandas as pd
+import csv
+
+# Read the data from file
+# We now have a Python dictionary
+with open('data.json') as f:
+    data_listofdict = json.load(f)
+
+# Writing a list of dicts to CSV
+keys = data_listofdict[0].keys()
+with open('saved_data.csv', 'wb') as output_file:
+    dict_writer = csv.DictWriter(output_file, keys)
+    dict_writer.writeheader()
+    dict_writer.writerows(data_listofdict)
+```
+
 ## Matplotlib Usage
 
 ```bash
@@ -176,24 +350,6 @@ plt.title('title')
 plt.legend()
 plt.subplots_adjust()
 plt.show()
-```
-
-## Process Data File
-
-```python
-import csv
-x = []
-y = []
-with open('input.dat','r') as csvfile:
-    plots = csv.reader(csvfile, delimiter=',')
-    for row in plots:
-        x.append(int(row[0]))
-        y.append(int(row[1]))
-```
-
-```python
-import numpy as np
-x, y = np.loadtxt('input.dat', delimiter=',', unpack=True)
 ```
 
 ## Plot Style
