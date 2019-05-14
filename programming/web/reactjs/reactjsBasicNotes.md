@@ -69,6 +69,7 @@
       - [Ref with Context](#ref-with-context)
     - [Error Boundary](#error-boundary)
     - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
+  - [Portals](#portals)
   - [React Performance](#react-performance)
     - [Rerendering Problem](#rerendering-problem)
     - [Code Spliting](#code-spliting)
@@ -2138,6 +2139,93 @@ class Frameworks extends React.Component {
     )
   }
 }
+```
+
+## Portals
+
+Portals provide a first-class way to render children into a DOM node
+that exists **outside** the DOM hierarchy of the parent component
+`ReactDOM.createPortal(child, container)`.
+
+```html
+<div id="root"></div>
+<div id="portal"></div>
+```
+
+```js
+const portalRoot = document.getElementById("portal");
+
+class Portal extends React.Component {
+  constructor() {
+    super();
+    this.el = document.createElement("div");
+  }
+
+  componentDidMount = () => {
+    portalRoot.appendChild(this.el);
+  };
+
+  componentWillUnmount = () => {
+    portalRoot.removeChild(this.el);
+  };
+
+  render() {
+    const { children } = this.props;
+    return ReactDOM.createPortal(children, this.el);
+  }
+}
+
+class Modal extends React.Component {
+  render() {
+    const { children, toggle, on } = this.props;
+    return (
+      <Portal>
+        {on ? (
+          <div className="modal is-active">
+            <div className="modal-background"></div>
+            <div className="modal-content">
+              <div className="box">
+                <h2 class="subtitle">{children}</h2>
+                <button onClick={toggle} className="closeButton button is-info">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </Portal>
+    );
+  }
+}
+
+class App extends React.Component {
+  state = {
+    showModal: false
+  };
+
+  toggleModal = () => {
+    this.setState({
+      showModal: !this.state.showModal
+    });
+  };
+
+  render() {
+    const { showModal } = this.state;
+    return (
+      <div className="box">
+        <h1 class="subtitle">Hello, I am the parent!</h1>
+        <button onClick={this.toggleModal} className="button is-black">
+          Toggle Modal
+        </button>
+        <Modal on={showModal} toggle={this.toggleModal}>
+          {showModal ? <h1>Hello, I am the portal!</h1> : null}
+        </Modal>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
 ## React Performance
