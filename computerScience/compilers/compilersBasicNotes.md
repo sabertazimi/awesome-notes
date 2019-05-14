@@ -1306,7 +1306,8 @@ New reduce rule:
 - stack pair: `<input, state>`
 - state i: if has item X -> α.aβ ,
   goto[i, a] = j then action[i, a] = shift j(shift then to state j)
-- state i: if has item X -> α. , a <- follow(X) then action[i, a] = reduce(X -> α)
+- state i: if has item `X -> α.` , `a <- follow(X)`
+  then `action[i, a] = reduce(X -> α)`
 - state i: if has item S' -> S then action[i, $] = accept
 - otherwise: action[i, a] = error
 

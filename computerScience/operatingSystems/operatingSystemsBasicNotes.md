@@ -579,7 +579,7 @@ typedef struct gdt_ptr {
 
 在页式存储管理基础上, 引入段式存储管理
 
-<--- vsn --- vpn --- vpo ---> 映射为 <--- ppn --- ppo --->
+`<--- vsn --- vpn --- vpo --->` 映射为 `<--- ppn --- ppo --->`
 
 > sn: segment number, pn:page number, po: page offset
 

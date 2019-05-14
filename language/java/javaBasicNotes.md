@@ -1839,7 +1839,9 @@ Logger.getGlobal().info(" ……" + targetVariableName);
 
 ### 泛型变量 T
 
+```java
 <T extends SuperClass & Interface>
+```
 
 类型变量用“，”分隔，限定类型用“&”分隔(一个父类+多个接口)
 
