@@ -37,6 +37,8 @@
       - [Array.from](#arrayfrom)
       - [Array.copyWithin](#arraycopywithin)
       - [Array.find](#arrayfind)
+      - [Array.flat](#arrayflat)
+      - [Array.flatMap](#arrayflatmap)
       - [Spread Array](#spread-array)
     - [New Object API](#new-object-api)
     - [Arrow Function](#arrow-function)
@@ -897,6 +899,14 @@ i32a.copyWithin(0, 2);
 arr.find(fn);
 arr.findIndex(fn);
 ```
+
+#### Array.flat
+
+`[2, [2, 2]] => [2, 2, 2]`
+
+#### Array.flatMap
+
+map + flat
 
 #### Spread Array
 
