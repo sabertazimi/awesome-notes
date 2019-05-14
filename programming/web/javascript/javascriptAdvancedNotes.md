@@ -31,6 +31,7 @@
     - [RegExp](#regexp)
       - [RegExp Group](#regexp-group)
     - [Number](#number)
+    - [Internationalization](#internationalization)
     - [Array](#array)
       - [Array.includes](#arrayincludes)
       - [Array.from](#arrayfrom)
@@ -804,6 +805,14 @@ a * b;
 // => 33334444555566670000
 BigInt(a) * BigInt(b);
 // => 33334444555566667777n
+```
+
+### Internationalization
+
+```js
+const nf = new Intl.NumberFormat('fr');
+nf.format(12345678901234567890n);
+// => 12 345 678 901 234 567 890
 ```
 
 ### Array
