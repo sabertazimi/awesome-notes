@@ -49,6 +49,7 @@
     - [Class 语法糖](#class-语法糖)
     - [Promise](#promise)
     - [Symbol](#symbol)
+    - [WeakMap](#weakmap)
     - [Proxy and Reflect](#proxy-and-reflect)
   - [Functional JavaScript](#functional-javascript)
     - [Pros](#pros)
@@ -1127,6 +1128,22 @@ for (let method of myMethods) {
   console.log(method); // logs methods `toString` and `sumNumbers`
 }
 ```
+
+### WeakMap
+
+WeakMap 结构与 Map 结构基本类似,
+唯一的区别就是 WeakMap 只接受对象作为键名 (null除外),
+而且键名所指向的对象不计入垃圾回收机制.
+
+它的键所对应的对象可能会在将来消失.
+一个对应 DOM 元素的 WeakMap 结构,
+当某个 DOM 元素被清除,
+其所对应的 WeakMap 记录就会自动被移除.
+
+有时候我们会把对象作为一个对象的键用来存放属性值,
+普通集合类型比如简单对象会阻止垃圾回收器对这些作为属性键存在的对象的回收,
+有造成内存泄漏的危险,
+而 WeakMap/WeakSet 则更加安全些.
 
 ### Proxy and Reflect
 
