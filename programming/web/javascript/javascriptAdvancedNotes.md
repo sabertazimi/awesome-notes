@@ -47,6 +47,7 @@
     - [Arrow Function](#arrow-function)
     - [Modules](#modules)
     - [Class 语法糖](#class-语法糖)
+    - [Promise](#promise)
     - [Symbol](#symbol)
     - [Proxy and Reflect](#proxy-and-reflect)
   - [Functional JavaScript](#functional-javascript)
@@ -1084,6 +1085,13 @@ console.log(bb.__proto__ === BB.prototype);
 ```
 
 禁止对复合对象字面量进行导出操作 (array literal, object literal)
+
+### Promise
+
+- `Promise.all`: short-circuits when an input value is rejected
+- `Promise.race`: short-circuits when an input value is settled
+- `Promise.any`: short-circuits when an input value is fulfilled
+- `Promise.allSettled`: does not short-circuits
 
 ### Symbol
 
