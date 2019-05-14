@@ -32,6 +32,9 @@
       - [RegExp Group](#regexp-group)
     - [Number](#number)
     - [Internationalization](#internationalization)
+      - [Number Intl](#number-intl)
+      - [String Intl](#string-intl)
+      - [Time Intl](#time-intl)
     - [Array](#array)
       - [Array.includes](#arrayincludes)
       - [Array.from](#arrayfrom)
@@ -811,10 +814,46 @@ BigInt(a) * BigInt(b);
 
 ### Internationalization
 
+#### Number Intl
+
 ```js
-const nf = new Intl.NumberFormat('fr');
+const nfFrench = new Intl.NumberFormat('fr');
 nf.format(12345678901234567890n);
 // => 12 345 678 901 234 567 890
+```
+
+#### String Intl
+
+```js
+const lfEnglish = new Intl.ListFormat('en');
+// const lfEnglish = new Intl.ListFormat('en', { type: 'disjunction' }); => 'or'
+
+lfEnglish.format(['Ada', 'Grace', 'Ida']);
+// => 'Ada, Grace and Ida'
+```
+
+#### Time Intl
+
+```js
+const rtfEnglish = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+
+rtf.format(-1, 'day');  // 'yesterday'
+rtf.format(0, 'day');   // 'today'
+rtf.format(1, 'day');   // 'tomorrow'
+rtf.format(-1, 'week'); // 'last week'
+rtf.format(0, 'week');  // 'this week'
+rtf.format(1, 'week');  // 'next week'
+```
+
+```js
+const dtfEnglish = new Intl.DateTimeFormat('en', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+dtfEnglish.format(new Date());      // => 'May 7, 2019'
+dtfEnglish.formatRange(start, end); // => 'May 7 - 9, 2019'
 ```
 
 ### Array
@@ -944,6 +983,20 @@ Object.entries(score);
  * [ 'gant', 41 ],
  * ]
  */
+```
+
+```js
+const object = { x: 42, y: 50, abc: 9001 };
+const result = Object.fromEntries(
+  Object.entries(object)
+    .filter(([key, value]) => key.length === 1)
+    map(([key, value]) => [key, value * 2])
+);
+```
+
+```js
+const map = new Map(Object.entries(object));
+const objectCopy = Object.fromEntries(map);
 ```
 
 ### Arrow Function
