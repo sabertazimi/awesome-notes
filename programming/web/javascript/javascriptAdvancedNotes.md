@@ -216,6 +216,8 @@
   - [HTTP/2](#http2)
   - [Security](#security)
     - [Content Security Policy Level 3](#content-security-policy-level-3)
+    - [Trusted Types](#trusted-types)
+    - [CSRF](#csrf)
 
 <!-- /TOC -->
 
@@ -3902,14 +3904,77 @@ CSP help prevent from XSS
 
 ```json
 {
-  'header': {
-    'Content-Security-Policy': script-src 'nonce-random123'
+  "header": {
+    "Content-Security-Policy": "
+      script-src 'nonce-random123' 'strict-dynamic' 'unsafe-eval';
+      object-src 'none'; base-uri 'none'
+    "
   }
 }
 ```
 
-```js
+```html
 <script>alert('xss')</script> // XSS injected by attacker - blocked by CSP
 <script nonce="random123">alert('this is fine!)</script>
 <script nonce="random123" src="https://cdnjs.com/lib.js"></script>
+```
+
+nonce only CSP block 3rd lscripts and dynamic scripts generate by trusted users,
+'strict-dynamic' can tackle it.
+
+```html
+<!-- Content-Security-Policy: script-src 'nonce-random123' 'strict-dynamic' -->
+<script nonce="random123">
+  const s = document.createElement('script)
+  s.src = '/path/to/script.js';
+  document.head.appendChild(s); // can execute correctly
+</script>
+```
+
+### Trusted Types
+
+- TrustedURL
+- TrustedHTML
+- TrustedScript
+- TrustedScriptURL
+
+```js
+// fallback policy
+TrustedTypes.createPolicy('default', {
+  createHTML(s) {
+    console.error('Please fix! Insecure string assignment detected:', s);
+    return s;
+  }
+}, true);
+```
+
+```js
+// Content-Security-Policy-Report-Only: trusted-types myPolicy; report-uri /cspReport
+const SanitizingPolicy = TrustedTypes.createPolicy('myPolicy', {
+  createHTML(s: string) => myCustomSanitizer(s)
+}, false);
+
+const trustedHTML = SanitizingPolicy.createHTML(foo);
+element.innerHTML = trustedHTML;
+```
+
+### CSRF
+
+```python
+# Reject cross-origin requests to protect from
+# CSRF, XSSI & other bugs
+def allow_request(req):
+  # Allow requests from browsers which don't send Fetch Metadata
+  if not req['sec-fetch-site']:
+    return True
+
+  # Allow same-site and browser-initiated requests
+  if req['sec-fetch-site'] in ('same-origin', 'same-site', 'none'):
+    return True
+  
+  # Allow simple top-lelve navigations from anywhere
+  if req['sec-fetch-mode'] == 'navigate' and req.method == 'GET':
+    return True
+  
+  return False
 ```
