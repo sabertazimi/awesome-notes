@@ -49,8 +49,11 @@
     - [Video](#video)
   - [Particles](#particles)
   - [Animation](#animation)
-    - [Typing](#typing)
-    - [Loading](#loading)
+    - [Typing UI](#typing-ui)
+    - [Loading UI](#loading-ui)
+      - [Progress Bar](#progress-bar)
+      - [Skeleton](#skeleton)
+      - [Spinner](#spinner)
     - [Hover](#hover)
   - [Message](#message)
     - [Page Indicator](#page-indicator)
@@ -400,17 +403,25 @@
 - [Mottojs - animated words](https://github.com/jrainlau/motto)
 - [Popmotion](https://github.com/popmotion/popmotion)
 
-### Typing
+### Typing UI
 
 - [Typed.js](https://github.com/mattboldt/typed.js)
 - [TypeIt](https://github.com/alexmacarthur/typeit)
 
-### Loading
+### Loading UI
+
+#### Progress Bar
+
+- [NProgress.js](https://github.com/rstacruz/nprogress)
+
+#### Skeleton
 
 - [Vue Skeleton](https://github.com/egoist/vue-content-loader)
+
+#### Spinner
+
 - [Epic Spinners](https://github.com/epicmaxco/epic-spinners)
 - [Loading IO](https://loading.io)
-- [Page Loading Progress](https://github.com/rstacruz/nprogress)
 
 ### Hover
 
