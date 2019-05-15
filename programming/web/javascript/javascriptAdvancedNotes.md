@@ -2705,6 +2705,7 @@ Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 - use monomorphic fucntion in hot code paths
 - resource optimization
 - code splitting
+- lazy loading
 - offline caching (PWA)
 
 ## Testing and Debugging
