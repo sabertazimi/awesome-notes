@@ -214,6 +214,8 @@
     - [PWA Library](#pwa-library)
     - [PWA Tutorials](#pwa-tutorials)
   - [HTTP/2](#http2)
+  - [Security](#security)
+    - [Content Security Policy Level 3](#content-security-policy-level-3)
 
 <!-- /TOC -->
 
@@ -3891,3 +3893,23 @@ HTTP/2 的多路复用就是为了解决上述的两个性能问题.
 在 HTTP/2 中, 有两个非常重要的概念, 分别是帧（frame）和流（stream）.
 帧代表着最小的数据单位, 每个帧会标识出该帧属于哪个流, 流也就是多个帧组成的数据流.
 多路复用, 就是在一个 TCP 连接中可以存在多条流, 避免队头阻塞问题和连接数过多问题.
+
+## Security
+
+### Content Security Policy Level 3
+
+CSP help prevent from XSS
+
+```json
+{
+  'header': {
+    'Content-Security-Policy': script-src 'nonce-random123'
+  }
+}
+```
+
+```js
+<script>alert('xss')</script> // XSS injected by attacker - blocked by CSP
+<script nonce="random123">alert('this is fine!)</script>
+<script nonce="random123" src="https://cdnjs.com/lib.js"></script>
+```
