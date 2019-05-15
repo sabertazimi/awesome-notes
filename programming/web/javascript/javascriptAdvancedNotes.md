@@ -136,11 +136,10 @@
       - [Object Shape](#object-shape)
       - [Inline Cache](#inline-cache)
       - [V8 Perf Tools](#v8-perf-tools)
-    - [Monkey Patch](#monkey-patch)
-    - [Performance Best Practice](#performance-best-practice)
-    - [Awesome Performance Tutorial](#awesome-performance-tutorial)
+      - [Awesome V8 Performance Tutorial](#awesome-v8-performance-tutorial)
     - [Perf and Analysis Tools](#perf-and-analysis-tools)
       - [Inspect Android Device](#inspect-android-device)
+    - [Performance Best Practice](#performance-best-practice)
   - [Testing and Debugging](#testing-and-debugging)
     - [Log](#log)
     - [Frameworks](#frameworks)
@@ -163,6 +162,7 @@
       - [测试原则](#测试原则)
       - [隔离被测代码](#隔离被测代码)
       - [mock/stub/spy](#mockstubspy)
+    - [Monkey Patch](#monkey-patch)
     - [Tools API](#tools-api)
       - [console API](#console-api)
       - [JS API](#js-api)
@@ -2682,39 +2682,7 @@ V8 use ICs to memorize information (same shape) where to find properties on obje
 - [turbolizer](https://github.com/thlorenz/turbolizer)
 - [v8 map processor](https://github.com/thlorenz/v8-map-processor)
 
-### Monkey Patch
-
-```js
-let _wr = function(type) {
-  let orig = window.history[type];
-
-  return function() {
-    let rv = orig.apply(this, arguments);
-    let e = new Event(type.toLowerCase());
-    e.arguments = arguments;
-    window.dispatchEvent(e);
-    return rv;
-  };
-};
-
-window.history.pushState = _wr('pushState');
-window.history.replaceState = _wr('replaceState');
-
-window.addEventListener('pushstate', function(event) {
-  // doing something
-});
-
-window.addEventListener('replacestate', function(event) {
-  // doing something
-});
-```
-
-### Performance Best Practice
-
-- use monomorphic objects due to shape and inline caches
-- use monomorphic fucntion in hot code paths
-
-### Awesome Performance Tutorial
+#### Awesome V8 Performance Tutorial
 
 - [v8 perf](https://github.com/thlorenz/v8-perf)
 
@@ -2730,6 +2698,14 @@ Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 - enable developmemnt mode and USB debugging in Android Device
 - link Android and PC with USB cable
 - open `chrome://inspect/#devices` to start inspecting
+
+### Performance Best Practice
+
+- use monomorphic objects due to shape and inline caches
+- use monomorphic fucntion in hot code paths
+- resource optimization
+- code splitting
+- offline caching (PWA)
 
 ## Testing and Debugging
 
@@ -2875,6 +2851,33 @@ describe('Sum suite File', function() {
     expect(mySum.sum(filename)).toEqual(12);
     mockery.deregisterMock('fs');
   });
+});
+```
+
+### Monkey Patch
+
+```js
+let _wr = function(type) {
+  let orig = window.history[type];
+
+  return function() {
+    let rv = orig.apply(this, arguments);
+    let e = new Event(type.toLowerCase());
+    e.arguments = arguments;
+    window.dispatchEvent(e);
+    return rv;
+  };
+};
+
+window.history.pushState = _wr('pushState');
+window.history.replaceState = _wr('replaceState');
+
+window.addEventListener('pushstate', function(event) {
+  // doing something
+});
+
+window.addEventListener('replacestate', function(event) {
+  // doing something
 });
 ```
 
