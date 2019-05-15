@@ -3777,6 +3777,9 @@ Progressive Web Apps:
 - provide a manifest
 - register a `ServiceWorker`
   (web cache for offline and performance)
+- consists of website, web app manifest,
+  service worker, expanded capabilities
+  and OS integration
 
 ### Service Worker
 
