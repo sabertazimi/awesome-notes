@@ -2526,7 +2526,7 @@ WebP 25-35% smaller than jpg/png
 
 #### Images Sizing
 
-provide 3~5 different sizes
+responsive images: provide 3~5 different sizes
 reduce image transfer sizes by average of ~20%
 
 - [Sharp](https://github.com/lovell/sharp)
