@@ -285,10 +285,9 @@
 ## Time/Date
 
 - [day.js](https://github.com/iamkun/dayjs)
-- [Pickadate.js](https://github.com/amsul/pickadate.js)
+- [date-dns](https://github.com/date-fns/date-fns)
 - [Moment.js](https://github.com/moment/moment)
 - [Timetable](https://github.com/flightplan-tool/timetable-fns)
-- [strftime](https://github.com/samsonjs/strftime)
 
 ## Slides
 
