@@ -3769,6 +3769,16 @@ if (a && b && c) {
 
 - [Server Side Rendering with Puppeteer](https://developers.google.com/web/tools/puppeteer/articles/ssr)
 
+```js
+if (isBotAgent) {
+  // return pre-rendering static html to search engine crawler
+  // like Gatsby
+} else {
+  // server side rendering at runtime for real interactive users
+  // ReactDOMServer.renderToString()
+}
+```
+
 ## PWA
 
 Progressive Web Apps:
