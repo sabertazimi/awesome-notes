@@ -3,6 +3,18 @@
 <!-- TOC -->
 
 - [Python Basic Notes](#python-basic-notes)
+  - [Python Basics](#python-basics)
+    - [Basic Types](#basic-types)
+      - [Tuples](#tuples)
+    - [Baisc Control Statement](#baisc-control-statement)
+      - [For Loop](#for-loop)
+      - [While Loop](#while-loop)
+    - [Functions](#functions)
+    - [Classes](#classes)
+  - [NumPy Basics](#numpy-basics)
+    - [Numpy Array Creation](#numpy-array-creation)
+    - [Numpy Indexing](#numpy-indexing)
+    - [Numpy Matrix Operations](#numpy-matrix-operations)
   - [CLI Application](#cli-application)
     - [Basic CLI](#basic-cli)
     - [Progress Bar](#progress-bar)
@@ -27,6 +39,127 @@
     - [Debugging and Testing](#debugging-and-testing)
 
 <!-- /TOC -->
+
+## Python Basics
+
+### Basic Types
+
+#### Tuples
+
+tuples in python are immutable
+
+### Baisc Control Statement
+
+#### For Loop
+
+```python
+for i in range(3): # goes from i = 0 to i = 2
+  x += 1
+
+for i in [0, 1, 2]:
+  x += 1
+```
+
+#### While Loop
+
+```python
+while x > 0:
+  x -= 1
+```
+
+### Functions
+
+```python
+def join_name(first_name, last_name):
+  joined_name = first_name + " " + last_name
+  return joined_name
+```
+
+### Classes
+
+```python
+class Pet(object):
+  def __init__(self, species, color, name):
+    self.species = species
+    self.color = color
+    self.name = name
+
+  def __str__(self):
+    return "{0} {1} named {2}.".format(self.color, self.species, self.name)
+
+  def change_name(self, new_name):
+    self.name = new_name
+
+my_dog = Pet(species="dog", color="orange", name="Guiness")
+print(my_dog)
+print(my_dog.name)
+# => output:
+# orange dog named Guiness.
+# Guiness
+```
+
+## NumPy Basics
+
+```python
+import numpy as np
+
+np.random.seed(seed=1234)
+```
+
+### Numpy Array Creation
+
+```python
+x = np.array(6)
+x.ndim
+x.shape
+x.size
+x.dtype
+```
+
+```python
+np.zeros((2, 2))
+np.ones((2, 2))
+np.eye((2))
+np.random.random.((2, 2))
+```
+
+### Numpy Indexing
+
+```python
+x = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+x[:, 1]    # [2, 6, 10]
+x[0, :]    # [1, 2, 3, 4]
+x[:3, 1:3] # [[2, 3], [6, 7], [10, 11]]
+x[[0, 1, 2], [0, 2, 1]] # [1, 7, 10]
+```
+
+```python
+# Boolean array indexing
+x = np.array([[1,2], [3, 4], [5, 6]])
+print ("x:\n", x)
+print ("x > 2:\n", x > 2)
+print ("x[x > 2]:\n", x[x > 2])
+# x:
+#  [[1 2]
+#  [3 4]
+#  [5 6]]
+# x > 2:
+#  [[False False]
+#  [ True  True]
+#  [ True  True]]
+# x[x > 2]:
+#  [3 4 5 6]
+```
+
+### Numpy Matrix Operations
+
+- math: `x+y`/`x-y`/`x*y` `np.add/subtract/multiply`
+- dot product: `a.dot(b)`
+- sum: `np.sum(x)`
+- column sum: `np.sum(x, axis=0)`
+- row sum: `np.sum(x, axis=1)`
+- transposing: `x.T`
+- reshape: `np.reshape(x, (2, 3))`
 
 ## CLI Application
 
