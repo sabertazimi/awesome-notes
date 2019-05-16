@@ -142,6 +142,7 @@
     - [Performance Best Practice](#performance-best-practice)
   - [Testing and Debugging](#testing-and-debugging)
     - [Log](#log)
+    - [Headless Testing](#headless-testing)
     - [Frameworks](#frameworks)
       - [Unit 测试](#unit-测试)
       - [UI 测试](#ui-测试)
@@ -2722,6 +2723,10 @@ Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 - 功能标识
 - 精炼的内容: 场景信息（谁，什么功能等），状态信息(开始，中断，结束)以及重要参数
 - 其他信息：版本号，线程号
+
+### Headless Testing
+
+- [Puppeteer](https://pptr.dev/#?product=Puppeteer&version=v1.16.0&show=api-pageaccessibility)
 
 ### Frameworks
 
