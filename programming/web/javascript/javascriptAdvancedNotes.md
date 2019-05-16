@@ -143,6 +143,12 @@
   - [Testing and Debugging](#testing-and-debugging)
     - [Log](#log)
     - [Headless Testing](#headless-testing)
+      - [Browser Context](#browser-context)
+      - [DOM Testing](#dom-testing)
+      - [Event Testing](#event-testing)
+      - [Operation Simulation Testing](#operation-simulation-testing)
+      - [Tracing Testing](#tracing-testing)
+      - [Other Puppeterr Testing API](#other-puppeterr-testing-api)
     - [Frameworks](#frameworks)
       - [Unit 测试](#unit-测试)
       - [UI 测试](#ui-测试)
@@ -844,22 +850,22 @@ lfEnglish.format(['Ada', 'Grace', 'Ida']);
 ```js
 const rtfEnglish = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 
-rtf.format(-1, 'day');  // 'yesterday'
-rtf.format(0, 'day');   // 'today'
-rtf.format(1, 'day');   // 'tomorrow'
+rtf.format(-1, 'day'); // 'yesterday'
+rtf.format(0, 'day'); // 'today'
+rtf.format(1, 'day'); // 'tomorrow'
 rtf.format(-1, 'week'); // 'last week'
-rtf.format(0, 'week');  // 'this week'
-rtf.format(1, 'week');  // 'next week'
+rtf.format(0, 'week'); // 'this week'
+rtf.format(1, 'week'); // 'next week'
 ```
 
 ```js
 const dtfEnglish = new Intl.DateTimeFormat('en', {
   year: 'numeric',
   month: 'long',
-  day: 'numeric',
+  day: 'numeric'
 });
 
-dtfEnglish.format(new Date());      // => 'May 7, 2019'
+dtfEnglish.format(new Date()); // => 'May 7, 2019'
 dtfEnglish.formatRange(start, end); // => 'May 7 - 9, 2019'
 ```
 
@@ -1137,7 +1143,7 @@ for (let method of myMethods) {
 ### WeakMap
 
 WeakMap 结构与 Map 结构基本类似,
-唯一的区别就是 WeakMap 只接受对象作为键名 (null除外),
+唯一的区别就是 WeakMap 只接受对象作为键名 (null 除外),
 而且键名所指向的对象不计入垃圾回收机制.
 
 它的键所对应的对象可能会在将来消失.
@@ -2594,9 +2600,9 @@ Best practice: lazy loading scripts not execute immediately
 ```html
 <script src="myscript.js"></script>
 <script src="myscript.js" async></script>
-<link rel=preload />
+<link rel="preload" />
 <script src="myscript.js" defer></script>
-<link rel=prefetch />
+<link rel="prefetch" />
 ```
 
 ```jsx
@@ -2726,7 +2732,142 @@ Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 
 ### Headless Testing
 
-- [Puppeteer](https://pptr.dev/#?product=Puppeteer&version=v1.16.0&show=api-pageaccessibility)
+- [Puppeteer](https://pptr.dev/#?product=Puppeteer&version=v1.16.0&show=api-class-page)
+
+```js
+const puppeteer = require('puppeteer');
+
+(async () => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto('https://example.com');
+  await page.screenshot({ path: 'example.png' });
+  await browser.close();
+})();
+```
+
+#### Browser Context
+
+```js
+// Create a new incognito browser context
+const context = await browser.createIncognitoBrowserContext();
+// Create a new page inside context.
+const page = await context.newPage();
+// ... do stuff with page ...
+await page.goto('https://example.com');
+// Dispose context once it's no longer needed.
+await context.close();
+```
+
+#### DOM Testing
+
+`page.$(selector)` same to `querySelector`
+
+#### Event Testing
+
+```js
+// wait for selector
+await page.waitFor('.foo');
+// wait for 1 second
+await page.waitFor(1000);
+// wait for predicate
+await page.waitFor(() => !!document.querySelector('.foo'));
+```
+
+```js
+const puppeteer = require('puppeteer');
+
+puppeteer.launch().then(async browser => {
+  const page = await browser.newPage();
+  const watchDog = page.waitForFunction('window.innerWidth < 100');
+  await page.setViewport({ width: 50, height: 50 });
+  await watchDog;
+  await browser.close();
+});
+```
+
+```js
+const [response] = await Promise.all([
+  page.waitForNavigation(), // The promise resolves after navigation has finished
+  page.click('a.my-link') // Clicking the link will indirectly cause a navigation
+]);
+```
+
+```js
+const firstRequest = await page.waitForRequest('http://example.com/resource');
+const finalRequest = await page.waitForRequest(
+  request =>
+    request.url() === 'http://example.com' && request.method() === 'GET'
+);
+return firstRequest.url();
+```
+
+```js
+const firstResponse = await page.waitForResponse(
+  'https://example.com/resource'
+);
+const finalResponse = await page.waitForResponse(
+  response =>
+    response.url() === 'https://example.com' && response.status() === 200
+);
+return finalResponse.ok();
+```
+
+```js
+await page.evaluate(() => window.open('https://www.example.com/'));
+const newWindowTarget = await browserContext.waitForTarget(
+  target => target.url() === 'https://www.example.com/'
+);
+```
+
+#### Operation Simulation Testing
+
+```js
+const [response] = await Promise.all([
+  page.waitForNavigation(waitOptions),
+  page.click(selector, clickOptions)
+]);
+```
+
+```js
+// Using ‘page.mouse’ to trace a 100x100 square.
+await page.mouse.move(0, 0);
+await page.mouse.down();
+await page.mouse.move(0, 100);
+await page.mouse.move(100, 100);
+await page.mouse.move(100, 0);
+await page.mouse.move(0, 0);
+await page.mouse.up();
+```
+
+```js
+await page.keyboard.type('Hello World!');
+await page.keyboard.press('ArrowLeft');
+
+await page.keyboard.down('Shift');
+for (let i = 0; i < ' World'.length; i++)
+  await page.keyboard.press('ArrowLeft');
+await page.keyboard.up('Shift');
+
+await page.keyboard.press('Backspace');
+// Result text will end up saying 'Hello!'
+```
+
+#### Tracing Testing
+
+```js
+await page.tracing.start({ path: 'trace.json' });
+await page.goto('https://www.google.com');
+await page.tracing.stop();
+```
+
+#### Other Puppeterr Testing API
+
+- `page.setOfflineMode`
+- `page.setGeolocation`
+- `page.metrics`
+- `page.accessibility`
+- `page.coverage`
 
 ### Frameworks
 
@@ -3933,8 +4074,13 @@ CSP help prevent from XSS
 ```
 
 ```html
-<script>alert('xss')</script> // XSS injected by attacker - blocked by CSP
-<script nonce="random123">alert('this is fine!)</script>
+<script>
+  alert('xss');
+</script>
+// XSS injected by attacker - blocked by CSP
+<script nonce="random123">
+  alert('this is fine!)
+</script>
 <script nonce="random123" src="https://cdnjs.com/lib.js"></script>
 ```
 
@@ -3959,12 +4105,16 @@ nonce only CSP block 3rd lscripts and dynamic scripts generate by trusted users,
 
 ```js
 // fallback policy
-TrustedTypes.createPolicy('default', {
-  createHTML(s) {
-    console.error('Please fix! Insecure string assignment detected:', s);
-    return s;
-  }
-}, true);
+TrustedTypes.createPolicy(
+  'default',
+  {
+    createHTML(s) {
+      console.error('Please fix! Insecure string assignment detected:', s);
+      return s;
+    }
+  },
+  true
+);
 ```
 
 ```js
@@ -3990,10 +4140,10 @@ def allow_request(req):
   # Allow same-site and browser-initiated requests
   if req['sec-fetch-site'] in ('same-origin', 'same-site', 'none'):
     return True
-  
+
   # Allow simple top-lelve navigations from anywhere
   if req['sec-fetch-mode'] == 'navigate' and req.method == 'GET':
     return True
-  
+
   return False
 ```
