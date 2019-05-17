@@ -232,6 +232,7 @@
 
 - [React Window - New Tiny React Virtualized](https://github.com/bvaughn/react-window)
 - [React Virtualized](https://github.com/bvaughn/react-virtualized)
+- [React Virtuoso](https://github.com/petyosi/react-virtuoso)
 
 ## Navigation
 
