@@ -1161,6 +1161,7 @@ WeakMap 结构与 Map 结构基本类似,
 modify default object behavior with `Proxy` and `Reflect`
 
 ```js
+// new Proxy(target, handler)
 Proxy(target, {
   set: function(target, name, value, receiver) {
     const success = Reflect.set(target, name, value, receiver);
@@ -1171,6 +1172,22 @@ Proxy(target, {
   }
 });
 ```
+
+APIs of handler:
+
+- get
+- set
+- has
+- apply
+- construct
+- ownKeys
+- deleteProperty
+- defineProperty
+- isExtensible
+- preventExtensions
+- getPrototypeOf
+- setPrototypeOf
+- getOwnPropertyDescriptor
 
 ## Functional JavaScript
 
