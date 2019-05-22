@@ -14,6 +14,7 @@
     - [Testing and Verification](#testing-and-verification)
   - [Timing in Circuits](#timing-in-circuits)
     - [Combinational Circuit Timing](#combinational-circuit-timing)
+    - [Sequential Circuit Timing](#sequential-circuit-timing)
   - [Key Words](#key-words)
   - [Module](#module)
     - [外部端口](#外部端口)
@@ -115,13 +116,86 @@ Schematic
 
 ### Testing and Verification
 
+low-level (circuit) simulation is much slower than high-level (C, HDL) simulation:
+
+- check only functionality at high level (C, HDL)
+- check only timing, power at low level (circuit)
+
+```verilog
+module testbench();
+  reg         clk, reset;           // clock and reset are internal
+  reg         a, b, c, yexpected;   // values from testvectors
+  wire        y;                    // output of circuit
+  reg  [31:0] vectornum, errors;    // bookkeeping variables
+  reg  [3:0]  testvectors[10000:0]; // array of testvectors
+
+  // instantiate device under test
+  sillyfunction dut(.a(a), .b(b), .c(c), .y(y) );
+
+  // generate clock
+  always     // no sensitivity list, so it always executes
+    begin
+      clk = 1; #5; clk = 0; #5;     // 10ns period
+    end
+
+  // at start of test, load vectors and pulse reset
+  initial   // Only executes once
+  begin
+    $readmemb("example.tv", testvectors); // Read vectors: e.g 000_0 001_1 ... xxx_x
+    vectornum = 0; errors = 0;            // Initialize
+    reset = 1; #27; reset = 0;            // Apply reset wait
+  end
+
+  // Note: $readmemh reads testvector files written in
+  // hexadecimal
+  // apply test vectors on rising edge of clk
+  always @(posedge clk)
+  begin
+    #1; {a, b, c, yexpected} = testvectors[vectornum];
+  end
+
+  always @(negedge clk)
+  begin
+    if (~reset) // don’t test during reset
+    begin
+      if (y !== yexpected)
+      begin
+        $display("Error: inputs = %b", {a, b, c});
+        $display("  outputs = %b (%b exp)",y,yexpected);
+        errors = errors + 1;
+      end
+
+      // increment array index and read next testvector
+      vectornum = vectornum + 1;
+
+      if (testvectors[vectornum] === 4'bx)
+      begin
+        $display("%d tests completed with %d errors", vectornum, errors);
+        $finish;                 // End simulation
+      end
+    end
+  end
+endmodule
+```
+
 ## Timing in Circuits
+
+### Combinational Circuit Timing
 
 - contamination delay (`t_cd`): minimum path in circuits, outputs start to change
 - propagation delay (`t_pd`): maximum path in circuits, outputs complete change
 - (delay) heavy dependence on **voltage** and **temperature**
 
-### Combinational Circuit Timing
+### Sequential Circuit Timing
+
+minimize clock skew time:
+requires intelligent **clock network** across a chip,
+making clock arrives at all locations at roughly the same time.
+
+```verilog
+T_clock >= T_pcq + T_pd + (T_setup + T_skew)
+T_ccq + T_cd > (T_hold + T_skew)
+```
 
 ## Key Words
 
@@ -915,9 +989,9 @@ FP zero = 64'b0;
 
 ### Procedural Block
 
-- always_comb: 用于组合逻辑电路（相当于Verilog中对所有输入变量电平敏感的always，但always_comb无需手动列出所有输入变量，系统会自动识别）
-- always_ff: 用于触发器及相关的时序逻辑电路（相当于Verilog中对某个或某几个信号有效跳变沿敏感、并带有信号储存特性的always）
-- always_latch: 用于锁存器级相关的时序逻辑电路（相当于Verilog中对某个或某几个信号电平敏感、并带有信号储存特性的的always）
+- always_comb: 用于组合逻辑电路（相当于 Verilog 中对所有输入变量电平敏感的 always，但 always_comb 无需手动列出所有输入变量，系统会自动识别）
+- always_ff: 用于触发器及相关的时序逻辑电路（相当于 Verilog 中对某个或某几个信号有效跳变沿敏感、并带有信号储存特性的 always）
+- always_latch: 用于锁存器级相关的时序逻辑电路（相当于 Verilog 中对某个或某几个信号电平敏感、并带有信号储存特性的的 always）
 
 ```verilog
 always_comb begin
