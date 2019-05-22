@@ -51,6 +51,10 @@
     - [Symbol](#symbol)
     - [WeakMap](#weakmap)
     - [Proxy and Reflect](#proxy-and-reflect)
+      - [Default Zero Value with Proxy](#default-zero-value-with-proxy)
+      - [Negative Array Indice with Proxy](#negative-array-indice-with-proxy)
+      - [Hiding Properties with Proxy](#hiding-properties-with-proxy)
+      - [Read Only Object with Proxy](#read-only-object-with-proxy)
   - [Functional JavaScript](#functional-javascript)
     - [Pros](#pros)
     - [Cons](#cons)
@@ -1188,6 +1192,79 @@ APIs of handler:
 - getPrototypeOf
 - setPrototypeOf
 - getOwnPropertyDescriptor
+
+#### Default Zero Value with Proxy
+
+```js
+const withZeroValue = (target, zeroValue = 0) => new Proxy(target, {
+  get: (obj, prop) => (prop in obj) ? obj[prop] : zeroValue
+});
+
+let pos = { x: 4, y: 19 };
+console.log(pos.z) // => undefined
+pos = withZeroValue(pos);
+console.log(pos.z) // => 0
+```
+
+#### Negative Array Indice with Proxy
+
+```js
+const negativeArray = (els) => new Proxy(target, {
+  get: (target, propKey, receiver) => Reflect.get(
+    target,
+    (+propKey < 0) ? String(target.length +  +propKey) : propKey,
+    receiver
+  )
+})
+```
+
+#### Hiding Properties with Proxy
+
+```js
+const hide = (target, prefix = '_') => new Proxy(target, {
+  has: (obj, prop) => (!prop.startsWith(prefix) && prop in obj),
+  ownKeys: (obj) => Reflect.ownKeys(obj).filter(prop => (
+    typeof prop !== 'string' || !prop.startsWith(prefix)
+  )),
+  get: (obj, prop, rec) => (prop in rec) ? obj[prop] : undefined
+});
+
+let userData = hide({
+  firstName: 'Tom',
+  mediumHandle: '@tbarrasso',
+  _favoriteRapper: 'Drake'
+});
+
+('_favoriteRapper' in userData); // has: false
+Object.keys(userData);           // ownKeys: ['firstName', 'mediumHandle']
+userData._favoriteRapper;        // get: undefined
+```
+
+#### Read Only Object with Proxy
+
+```js
+const NOPE = () => {
+  throw new Error('Can\'t modify read-only object');
+};
+
+const NOPE_HANDLER = {
+  set: NOPE,
+  defineProperty: NOPE,
+  deleteProperty: NOPE,
+  deleteProperty: NOPE,
+  preventExtensions: NOPE,
+  setPrototypeOf: NOPE
+  get: (obj, prop) => {
+    if (prop in obj) {
+      return Reflect.get(obj, prop);
+    }
+
+    throw new ReferenceError(`Unknown prop "${prop}"`);
+  }
+};
+
+const readOnly = target => new Proxy(target, NODE_HANDLER)
+```
 
 ## Functional JavaScript
 
