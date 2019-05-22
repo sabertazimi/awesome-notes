@@ -4,14 +4,16 @@
 
 - [Verilog Basic Notes](#verilog-basic-notes)
   - [General Flow](#general-flow)
-    - [Create Proj - .v(sources) / .xdc(constraints)](#create-proj---vsources--xdcconstraints)
+    - [Create Project](#create-project)
     - [RTL Analysis](#rtl-analysis)
-    - [Simulate Design - \*\_tb.v(simulation sources)](#simulate-design---\\_tbvsimulation-sources)
+    - [Simulate Design](#simulate-design)
     - [Synthesize Design](#synthesize-design)
     - [Implement Design](#implement-design)
     - [Post-Implementation Timing Simulate Design](#post-implementation-timing-simulate-design)
     - [Generate Bitstream](#generate-bitstream)
     - [Testing and Verification](#testing-and-verification)
+  - [Timing in Circuits](#timing-in-circuits)
+    - [Combinational Circuit Timing](#combinational-circuit-timing)
   - [Key Words](#key-words)
   - [Module](#module)
     - [外部端口](#外部端口)
@@ -83,14 +85,18 @@
 
 ## General Flow
 
-### Create Proj - .v(sources) / .xdc(constraints)
+### Create Project
+
+- `.v` (sources)
+- `.xdc` (constraints)
 
 ### RTL Analysis
 
 Schematic
 
-### Simulate Design - \*\_tb.v(simulation sources)
+### Simulate Design
 
+- `_tb.v`: test bench
 - simulation options: 500ns
 - Scopes -> dut -> swt/led
 - Schematic
@@ -108,6 +114,14 @@ Schematic
 ### Generate Bitstream
 
 ### Testing and Verification
+
+## Timing in Circuits
+
+- contamination delay (`t_cd`): minimum path in circuits, outputs start to change
+- propagation delay (`t_pd`): maximum path in circuits, outputs complete change
+- (delay) heavy dependence on **voltage** and **temperature**
+
+### Combinational Circuit Timing
 
 ## Key Words
 
