@@ -55,6 +55,7 @@
       - [Negative Array Indice with Proxy](#negative-array-indice-with-proxy)
       - [Hiding Properties with Proxy](#hiding-properties-with-proxy)
       - [Read Only Object with Proxy](#read-only-object-with-proxy)
+      - [Range Judgement with Proxy](#range-judgement-with-proxy)
   - [Functional JavaScript](#functional-javascript)
     - [Pros](#pros)
     - [Cons](#cons)
@@ -1264,6 +1265,24 @@ const NOPE_HANDLER = {
 };
 
 const readOnly = target => new Proxy(target, NODE_HANDLER)
+```
+
+#### Range Judgement with Proxy
+
+```js
+const range = (min, max) => new Proxy(Object.create(null), {
+  has: (_, prop) => (+prop >= min && +prop <= max)
+});
+
+const X = 10.5;
+const nums = [1, 5, X, 50, 100];
+
+if (X in range(1, 100)) {
+  // => true
+}
+
+nums.filter(n => n in range(1, 10))
+// => [1, 5]
 ```
 
 ## Functional JavaScript
