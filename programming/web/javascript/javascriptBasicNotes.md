@@ -217,6 +217,7 @@
   - [Gamepad API](#gamepad-api)
   - [URL API](#url-api)
   - [Observer API](#observer-api)
+    - [Intersection Observer](#intersection-observer)
 
 <!-- /TOC -->
 
@@ -4180,3 +4181,27 @@ window.addEventListener('gamepaddisconnected', e => {
 - [Performance Observer](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver)
 - [Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)
 - [Reporting Observer](https://developer.mozilla.org/en-US/docs/Web/API/ReportingObserver)
+
+### Intersection Observer
+
+```js
+// <img class="lzy_img" src="lazy_img.jpg" data-src="real_img.jpg" />
+document.addEventListener('DOMContentLoaded', () => {
+  const imageObserver = new IntersectionObserver((entries, imgObserver) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const lazyImage = entry.target;
+        console.log('Lazy loading ', lazyImage);
+        lazyImage.src = lazyImage.dataset.src;
+
+        // only load image once
+        lazyImage.classList.remove('lzy');
+        imgObserver.unobserve(lazyImage);
+      }
+    });
+  });
+
+  const lazyImages = document.querySelectorAll('img.lzy_img');
+  lazyImages.forEach((lazyImage) => imageObserver.observe(lazyImage));
+});
+```
