@@ -715,6 +715,7 @@
 
 ### Performance
 
+- [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render)
 - [clinic](https://github.com/nearform/node-clinic)
 
 ### Log
