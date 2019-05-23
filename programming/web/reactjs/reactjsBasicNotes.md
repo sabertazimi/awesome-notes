@@ -2233,6 +2233,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
 - use `key` correctly
 - `shouldComponentUpdate`
 - `React.PureComponent`
+- `React.memo`
 - stateless component
 - Immutable.js
 - Isomorphic rendering
@@ -2241,7 +2242,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
 
 ### Rerendering Problem
 
-The major difference between them is that
+The major difference is that
 React.Component doesn’t implement the shouldComponentUpdate() lifecycle method
 while React.PureComponent implements it.
 If component's render() function renders the same result
@@ -2322,6 +2323,60 @@ class App extends Component {
 }
 
 export default App;
+```
+
+prevent useless re-rendering:
+
+- shouldComponentUpdate
+- React.PureComponent
+- React.memo
+- memorized values
+- memorized event handlers
+
+```js
+// BAD
+function App (items) {
+  return (
+    <BigListComponent
+      style={{width: '100%'}}
+      items={items}
+    />
+  );
+}
+
+// GOOD
+const bigListStyle = { width: '100%' };
+
+function App (items) {
+  return (
+    <BigListComponent
+      style={bigListStyle}
+      items={items}
+    />
+  );
+}
+```
+
+```js
+// BAD: Inline function
+function App (items) {
+  return (
+    <BigListComponent
+      onClick={() => dispatchEvent()}
+    />
+  );
+}
+
+// GOOD: Reference to a function
+const clickHandler = () => dispatchEvent();
+
+function App (items) {
+  return (
+    <BigListComponent
+      onClick={clickHandler}
+    />
+  );
+}
 ```
 
 ### Code Spliting

@@ -2665,12 +2665,12 @@ const onSubmit = event => {
   const form = event.target;
   const isValid = form.checkValidity(); // returns true or false
   const formData = new FormData(form);
-  
+
   const validationMessages = Array.from(formData.keys()).reduce((acc, key) => {
     acc[key] = form.elements[key].validationMessage;
     return acc;
   }, {});
-  
+
   setErrors(validationMessages);
 
   console.log({
@@ -4188,7 +4188,7 @@ window.addEventListener('gamepaddisconnected', e => {
 // <img class="lzy_img" src="lazy_img.jpg" data-src="real_img.jpg" />
 document.addEventListener('DOMContentLoaded', () => {
   const imageObserver = new IntersectionObserver((entries, imgObserver) => {
-    entries.forEach((entry) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
         const lazyImage = entry.target;
         console.log('Lazy loading ', lazyImage);
@@ -4202,6 +4202,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const lazyImages = document.querySelectorAll('img.lzy_img');
-  lazyImages.forEach((lazyImage) => imageObserver.observe(lazyImage));
+  lazyImages.forEach(lazyImage => imageObserver.observe(lazyImage));
 });
 ```
