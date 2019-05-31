@@ -81,6 +81,7 @@
     - [Struct and Union](#struct-and-union)
     - [Procedural Block](#procedural-block)
     - [Interface](#interface)
+    - [Testing](#testing)
 
 <!-- /TOC -->
 
@@ -1027,5 +1028,113 @@ module u_a (intf.in i1);
 endmodule
 
 module u_b (intf.out i2);
+endmodule
+```
+
+### Testing
+
+```verilog
+module top;
+  integer num_pkts = $random;
+  reg A, B, C, clk, reset_n;
+  wire D;
+  register_logic dut(A, B, C, clk, reset_n, D);
+
+  // generate clock
+  // ...
+
+  initial begin
+    run();
+  end
+
+  task run();
+    reset_n  = 1;
+    #20 reset_n = 0;
+    @(posedge clk) reset_n <= #1 1;
+    repeat (num_pkts) begin
+      A = $random; B = $random; C = $random;
+      @(posedge clk);
+      $display(A, B, C, D);
+    end
+    $finish;
+  endtask
+endmodule
+```
+
+```verilog
+class Packet;
+  string name;
+  rand bit[3:0] sa, da;
+  rand reg A, B, C;
+
+  function void display(result);
+    $display(A, B, C, result);
+  endfunction
+endclass: Packet
+
+class Packet_da_3 extends Packet;
+  constraint da_3 {
+    da == 3;
+  }
+endclass: Packet_da_3
+
+class Generator;
+  Packet pkt;
+  Channel out_chan;
+  int num_pkts;
+
+  function void gen();
+    pkt = new():
+    pkt.randomize();
+    out_chan.put(pkt);
+  endfunction
+
+  task run();
+    while (num_pkts-- != 0)
+      gen();
+  endtask
+endclass
+
+class Driver;
+  Channel in_chan;
+
+  task send();
+    in_chan.get(pkt);
+    top.A = pkt.A;
+    top.B = pkt.B;
+    top.C = pkt.C;
+    @(posedge top.clk);
+  endtask
+
+  task run();
+    forever send();
+  endtask
+endclass
+
+module top;
+  initial begin
+    build();
+    run();
+  end
+
+  task build();
+    Config cfg = new();
+    Channel chan = new();
+    Generator gen = new();
+    Driver drv = new();
+    gen.out_chan = chan;
+    drv.in_chan = chan;
+
+    cfg.randomize() with { num_pkts > 1500; }
+    gen.num_pkts = cfg.num_pkts;
+  endtask
+
+  task run();
+    fork
+      gen.run();
+      drv.run();
+    join
+    $finish;
+  endtask
 endmodule
 ```
