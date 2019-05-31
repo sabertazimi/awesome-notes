@@ -1072,10 +1072,16 @@ class Packet;
   endfunction
 endclass: Packet
 
+// inheritance
 class Packet_da_3 extends Packet;
   constraint da_3 {
     da == 3;
   }
+
+  function void display(result);
+    super.display(result);
+    $display(sa, da);
+  endfunction
 endclass: Packet_da_3
 
 class Generator;
