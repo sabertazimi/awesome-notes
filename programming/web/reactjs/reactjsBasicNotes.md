@@ -32,6 +32,7 @@
       - [useMemo](#usememo)
       - [useCallback](#usecallback)
       - [useState](#usestate)
+      - [useReducer](#usereducer)
       - [useRef](#useref)
       - [useEffect](#useeffect)
     - [Basic Rules](#basic-rules)
@@ -677,6 +678,37 @@ ChatAPI.subscribeToFriendStatus(300, handleStatusChange); // Run next effect
 // Unmount
 ChatAPI.unsubscribeFromFriendStatus(300, handleStatusChange); // Clean up last effect
 ```
+
+#### useReducer
+
+- Use useState whenever manage a JS **primitive** (e.g. string, boolean, integer).
+- Use useReducer whenever manage an **object** or **array**.
+- It’s best to put states together in one state object
+  when they conditionally dependent on each other (useReducer).
+- Using useReducer over useState gives us predictable state transitions.
+  It comes in very powerful when state changes become more complex.
+
+Use useState if:
+
+- manage JavaScript primitives as state
+- have simple state transitions
+- want to have business logic within components
+- have different properties that don’t change in any correlated manner
+  and can be managed by multiple useState hooks
+- state is co-located to your component
+- for a small application
+
+Use useReducer if:
+
+- manage JavaScript objects or arrays as state
+- have complex state transitions
+- want to move business logic into reducers
+- have different properties that are tied together
+  and should be managed in one state object
+- update state deep down in your component tree
+- for a medium size application
+- for easier testing
+- for more predictable and maintainable state architecture
 
 #### useRef
 
