@@ -160,7 +160,7 @@
       - [内部类调用格式](#内部类调用格式)
       - [局部内部类](#局部内部类)
       - [匿名内部类](#匿名内部类)
-      - [静态内部类：](#静态内部类)
+      - [静态内部类](#静态内部类)
     - [代理类](#代理类)
   - [图形程序设计](#图形程序设计)
     - [Swing 组件继承层次](#swing-组件继承层次)
@@ -206,7 +206,7 @@
     - [复杂布局管理器](#复杂布局管理器)
       - [网格组布局(GridBagLayout 类)](#网格组布局gridbaglayout-类)
         - [基本步骤](#基本步骤)
-      - [组布局(GroupLayout 类)：](#组布局grouplayout-类)
+      - [组布局 (GroupLayout 类)](#组布局-grouplayout-类)
       - [空布局(null，不使用布局管理器)](#空布局null不使用布局管理器)
       - [自定义布局](#自定义布局)
     - [文本组件](#文本组件)
@@ -1233,7 +1233,7 @@ new InterfaceType () //一对括号
 
 - 例子：积分、线程、回调函数(HookFunction)、事件处理(ActionListener)
 
-#### 静态内部类：
+#### 静态内部类
 
 - 只可访问外围类的静态域/静态方法(可视作不可访问外围类)
 - 实例化：new OuterClass.InnerClass()
@@ -1561,7 +1561,7 @@ gridBagPanel.add(component, GridBagConstraints);给每一个组件都构造一�
 
 e. gridBagPanel.add(component, GridBagConstraints);
 
-#### 组布局(GroupLayout 类)：
+#### 组布局 (GroupLayout 类)
 
 通过(嵌套)组的水平与垂直计算(间距与组件)，实现灵活的布局:
 
