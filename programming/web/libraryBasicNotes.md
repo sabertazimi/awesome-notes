@@ -207,6 +207,7 @@
 
 - [Docz](https://github.com/pedronauck/docz)
 - [Gatsby.js](https://github.com/gatsbyjs/gatsby)
+- [Docusaurus](https://github.com/facebook/docusaurus)
 - [Vuepress](https://github.com/vuejs/vuepress)
 - [Intro.js](https://github.com/usablica/intro.js)
 - [wiki.js](https://github.com/Requarks/wiki)
