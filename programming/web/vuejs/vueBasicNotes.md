@@ -19,6 +19,8 @@
     - [Virtual DOM Diff and Patch](#virtual-dom-diff-and-patch)
   - [Router](#router)
     - [Navigation Guards](#navigation-guards)
+  - [Vue CLI](#vue-cli)
+    - [SCSS Config](#scss-config)
 
 <!-- /TOC -->
 
@@ -807,3 +809,66 @@ Array.from(el.getElementsByTagName('input'))
 ### Navigation Guards
 
 - [Offical Documentation of Router Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html)
+
+## Vue CLI
+
+### SCSS Config
+
+- [Build with Bulma](https://css-tricks.com/how-to-increase-your-page-size-by-1500-with-webpack-and-vue/)
+
+Every element and every style for this scoped styled component
+will have a `data-v-2929` on them at runtime.
+If import a Sass file into component that has actual styles in it,
+Vue (via webpack) will pull in those styles and
+"namespace" them with that dynamic `data-` attribute.
+The result is that is include `Bulma` in your **many** times
+with a bunch of `data-v` weirdness in front of it.
+
+```css
+/* bulma-custom.scss */
+@import './variables.scss';
+
+/* UTILTIES */
+@import 'bulma/sass/utilities/animations.sass';
+@import 'bulma/sass/utilities/controls.sass';
+@import 'bulma/sass/utilities/mixins.sass';
+
+/* etc... */
+```
+
+```css
+/* site.scss */
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+@import './bulma-custom.scss';
+
+html,
+body {
+  height: 100%;
+  background-color: #f9fafc;
+}
+
+/* etc... */
+```
+
+```js
+// main.js
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+
+// import styles
+import '@/styles/site.scss';
+```
+
+```js
+// webpack.config.js
+module.exports = {
+  css: {
+    loaderOptions: {
+      sass: {
+        data: `@import "@/styles/variables.scss";`
+      }
+    }
+  }
+};
+```
