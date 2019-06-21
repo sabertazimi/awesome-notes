@@ -2899,6 +2899,10 @@ const height =
 - clientHeight: 内部可视区域大小
 - scrollHeight: 元素内容的高度，包括溢出部分
 
+> In case of transforms,
+> the offsetWidth and offsetHeight returns the layout width and height (all the same),
+> while getBoundingClientRect() returns the rendering width and height.
+
 #### Scroll Size
 
 - scrollTop/scrollY/pageYOffset: 元素内容向上滚动了多少像素，如果没有滚动则为 0
