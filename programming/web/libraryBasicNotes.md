@@ -689,6 +689,7 @@
 - [Webkit API(Chrome)](https://github.com/ariya/phantomjs)
 - [Gecko API(Firefox)](https://github.com/laurentj/slimerjs)
 - [selenium](https://github.com/SeleniumHQ/selenium)
+- [interactor.js](https://github.com/wwilsman/interactor.js)
 
 ### Higher Level Tools
 
