@@ -2293,7 +2293,8 @@ object-position/object-fit 只针对替换元素有作用:
 - video
 
 object-position/object-fit 之间的关系有点类似于
-background-position/background-size
+background-position/background-size,
+可以处理图片拉伸变形问题.
 
 ```css
 .image-container {
@@ -2699,6 +2700,13 @@ setTimeout(() => element.classList.remove('animate'), duration);
 - `max-height`
 - `min-width`
 - `max-width`
+
+```css
+/* responsive images */
+img {
+  max-width: 100%;
+}
+```
 
 #### responsive inline-box
 
