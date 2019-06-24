@@ -324,6 +324,8 @@ function () {
 
 ### Date
 
+- [Definitive Guide](https://css-tricks.com/everything-you-need-to-know-about-date-in-javascript)
+
 ```js
 const now= new Date();
 now.getFullYear(); // 1-n

@@ -1432,15 +1432,18 @@ if there’s any pending call back waiting to be executed:
 - 微任务 Microtask，有特权, 可以插队:
   process.nextTick,
   Promises.then (Promise 构造函数是同步函数),
-  MutationObserver
+  Object.observer, MutationObserver
 - 宏任务 Macrotask，没有特权:
   setTimeout, setInterval,
   setImmediate, I/O,
   MessageChannel, postMessage,
-  UI Interaction Events
+  UI rendering, UI Interaction Events
 - Microtask 优先于 Macrotask
 - 浏览器为了能够使得 JS 内部 (macro)task 与 DOM 任务能够有序的执行,
-  会在一个 (macro)task 执行结束后, 在下一个 (macro)task 执行开始前, 对页面进行重新渲染
+  会在一个 (macro)task 执行结束后, 在下一个 (macro)task 执行开始前, 对页面进行重新渲染.
+  当 JS 引擎从任务队列中取出一个宏任务来执行, 如果执行过程中有遇到微任务,
+  那么执行完该宏任务就会去执行宏任务内的所有微任务, 然后更新 UI.
+  后面就是再从任务队列中取出下一个宏任务来继续执行, 以此类推.
 
 ```js
 for (let ii = 0; ii < macrotask.length; ii++) {

@@ -853,7 +853,8 @@ sudo systemctl restart nginx
 
 ### Semantic HTML
 
-[Semantic HTML Presentation](http://justineo.github.io/slideshows/semantic-html/#/)
+- [Definitive Guide](https://css-tricks.com/how-to-section-your-html)
+- [Semantic HTML Presentation](http://justineo.github.io/slideshows/semantic-html/#/)
 
 ### Structure Access
 
