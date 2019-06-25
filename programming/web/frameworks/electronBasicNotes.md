@@ -149,3 +149,4 @@ global.desktop = {
 ## Electron Cheatsheet
 
 - [Awesome Live Cheatsheet](https://github.com/ConardLi/electron-react)
+- [Electron API Demo App](https://github.com/demopark/electron-api-demos-Zh_CN)
