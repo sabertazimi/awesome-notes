@@ -62,12 +62,17 @@ $xl: $base * $ratio * ratio;
 
 - rem is better
 - em for responsive layout (etc. layer2 font based-on layer1 font in dropdown menu)
+- make text legible: at least `16px`
 
 #### spacing
 
-- margin
+make text breathe:
+
+- margin/padding: at least `15px`
+- line-height: `1.4`
 - word-spacing
 - letter-spacing
+- 60-100 characters per line
 
 #### vertical rhythms
 
