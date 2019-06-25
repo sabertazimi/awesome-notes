@@ -56,6 +56,7 @@
       - [Hiding Properties with Proxy](#hiding-properties-with-proxy)
       - [Read Only Object with Proxy](#read-only-object-with-proxy)
       - [Range Judgement with Proxy](#range-judgement-with-proxy)
+    - [Generator](#generator)
   - [Functional JavaScript](#functional-javascript)
     - [Pros](#pros)
     - [Cons](#cons)
@@ -1197,38 +1198,43 @@ APIs of handler:
 #### Default Zero Value with Proxy
 
 ```js
-const withZeroValue = (target, zeroValue = 0) => new Proxy(target, {
-  get: (obj, prop) => (prop in obj) ? obj[prop] : zeroValue
-});
+const withZeroValue = (target, zeroValue = 0) =>
+  new Proxy(target, {
+    get: (obj, prop) => (prop in obj ? obj[prop] : zeroValue)
+  });
 
 let pos = { x: 4, y: 19 };
-console.log(pos.z) // => undefined
+console.log(pos.z); // => undefined
 pos = withZeroValue(pos);
-console.log(pos.z) // => 0
+console.log(pos.z); // => 0
 ```
 
 #### Negative Array Indice with Proxy
 
 ```js
-const negativeArray = (els) => new Proxy(target, {
-  get: (target, propKey, receiver) => Reflect.get(
-    target,
-    (+propKey < 0) ? String(target.length +  +propKey) : propKey,
-    receiver
-  )
-})
+const negativeArray = els =>
+  new Proxy(target, {
+    get: (target, propKey, receiver) =>
+      Reflect.get(
+        target,
+        +propKey < 0 ? String(target.length + +propKey) : propKey,
+        receiver
+      )
+  });
 ```
 
 #### Hiding Properties with Proxy
 
 ```js
-const hide = (target, prefix = '_') => new Proxy(target, {
-  has: (obj, prop) => (!prop.startsWith(prefix) && prop in obj),
-  ownKeys: (obj) => Reflect.ownKeys(obj).filter(prop => (
-    typeof prop !== 'string' || !prop.startsWith(prefix)
-  )),
-  get: (obj, prop, rec) => (prop in rec) ? obj[prop] : undefined
-});
+const hide = (target, prefix = '_') =>
+  new Proxy(target, {
+    has: (obj, prop) => !prop.startsWith(prefix) && prop in obj,
+    ownKeys: obj =>
+      Reflect.ownKeys(obj).filter(
+        prop => typeof prop !== 'string' || !prop.startsWith(prefix)
+      ),
+    get: (obj, prop, rec) => (prop in rec ? obj[prop] : undefined)
+  });
 
 let userData = hide({
   firstName: 'Tom',
@@ -1236,9 +1242,9 @@ let userData = hide({
   _favoriteRapper: 'Drake'
 });
 
-('_favoriteRapper' in userData); // has: false
-Object.keys(userData);           // ownKeys: ['firstName', 'mediumHandle']
-userData._favoriteRapper;        // get: undefined
+'_favoriteRapper' in userData; // has: false
+Object.keys(userData); // ownKeys: ['firstName', 'mediumHandle']
+userData._favoriteRapper; // get: undefined
 ```
 
 #### Read Only Object with Proxy
@@ -1270,9 +1276,10 @@ const readOnly = target => new Proxy(target, NODE_HANDLER)
 #### Range Judgement with Proxy
 
 ```js
-const range = (min, max) => new Proxy(Object.create(null), {
-  has: (_, prop) => (+prop >= min && +prop <= max)
-});
+const range = (min, max) =>
+  new Proxy(Object.create(null), {
+    has: (_, prop) => +prop >= min && +prop <= max
+  });
 
 const X = 10.5;
 const nums = [1, 5, X, 50, 100];
@@ -1281,8 +1288,67 @@ if (X in range(1, 100)) {
   // => true
 }
 
-nums.filter(n => n in range(1, 10))
+nums.filter(n => n in range(1, 10));
 // => [1, 5]
+```
+
+### Generator
+
+```js
+function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const g = gen();
+
+g.next(); // { value: 1, done: false }
+g.next(); // { value: 2, done: false }
+g.next(); // { value: 3, done: false }
+g.next(); // { value: undefined, done: true }
+g.return(); // { value: undefined, done: true }
+g.return(1); // { value: 1, done: true }
+```
+
+```js
+function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const g = gen();
+
+g.next(); // { value: 1, done: false }
+g.return('foo'); // { value: "foo", done: true }
+g.next(); // { value: undefined, done: true }
+```
+
+```js
+function coroutine(generatorFunc) {
+  const generator = generatorFunc();
+  nextResponse();
+
+  function nextResponse(value) {
+    const response = generator.next(value);
+
+    if (response.done) {
+      return;
+    }
+
+    if (value.then) {
+      value.then(nextResponse);
+    } else {
+      nextResponse(response.value);
+    }
+  }
+}
+
+coroutine(function* bounce() {
+  yield bounceUp;
+  yield bounceDown;
+});
 ```
 
 ## Functional JavaScript
