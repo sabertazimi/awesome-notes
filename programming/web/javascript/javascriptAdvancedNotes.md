@@ -1325,6 +1325,10 @@ g.return('foo'); // { value: "foo", done: true }
 g.next(); // { value: undefined, done: true }
 ```
 
+Generator based control flow goodness for nodejs and the browser,
+using promises, letting you write non-blocking code in a nice-ish way
+(just like [tj/co](https://github.com/tj/co)).
+
 ```js
 function coroutine(generatorFunc) {
   const generator = generatorFunc();
