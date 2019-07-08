@@ -120,6 +120,7 @@
       - [Math 对象](#math-对象)
   - [Browser Performance](#browser-performance)
     - [Browser Caches](#browser-caches)
+      - [Code Caching](#code-caching)
     - [Browser Pefermance Monitoring](#browser-pefermance-monitoring)
       - [合成监控](#合成监控)
       - [真实用户监控](#真实用户监控)
@@ -2586,9 +2587,43 @@ Math.tan(x);
 当依次查找缓存且都没有命中的时候, 才会去请求网络:
 
 - Service Worker: PWA
-- Memory Cache: reload Tab page
-- Disk Cache: big files
+- (In-) Memory Cache: reload Tab page
+- (On-) Disk Cache: big files
 - Push Cache: HTTP/2
+
+```js
+self.addEventListener('install', (event) => {
+  async function buildCache() {
+    const cache = await caches.open(cacheName);
+    return cache.addAll([
+      '/main.css',
+      '/main.mjs',
+      '/offline.html',
+    ]);
+  }
+  event.waitUntil(buildCache());
+});
+
+self.addEventListener('fetch', (event) => {
+  async function cachedFetch(event) {
+    const cache = await caches.open(cacheName);
+    let response = await cache.match(event.request);
+    if (response) return response;
+    response = await fetch(event.request);
+    cache.put(event.request, response.clone());
+    return response;
+  }
+  event.respondWith(cachedFetch(event));
+});
+```
+
+#### Code Caching
+
+- cold run: `download -> compile -> store into on-disk cache`
+- warm run: `fetch from browser cache -> compile -> store metadata`
+- hot run: `fetch scripts and metadata from browser cache -> skip compile`
+- positive case: IIFE function heuristics
+- passive case: too small (`< 1KB`) and inline scripts
 
 ### Browser Pefermance Monitoring
 
