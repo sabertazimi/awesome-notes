@@ -198,6 +198,7 @@
       - [Promise Polyfill](#promise-polyfill)
     - [await/async](#awaitasync)
     - [Sleep Function](#sleep-function)
+    - [Race Condition](#race-condition)
   - [Geolocation API](#geolocation-api)
   - [Web Audio API](#web-audio-api)
     - [From Oscillator](#from-oscillator)
@@ -3617,6 +3618,40 @@ async function add(n1, n2) {
 }
 
 add(1, 2);
+```
+
+### Race Condition
+
+- keep latest updates
+- recover from failures
+- online and offline sync ([PouchDB](https://github.com/pouchdb/pouchdb))
+- tools: [redux-saga](https://github.com/redux-saga/redux-saga)
+
+```js
+export default {
+  data() {
+    return {
+      text: '',
+      results: [],
+      nextRequestId: 1,
+      displayedRequestId: 0,
+    }
+  },
+  watch: {
+    async text(value) {
+      const requestId = this.nextRequestId++;
+      const results = await search(value);
+
+      // guarantee display latest search results (when input keep changing)
+      if (requestId < this.displayedRequestId) {
+        return;
+      }
+
+      this.displayedRequestId = requestId;
+      this.results = results;
+    }
+  }
+}
 ```
 
 ## Geolocation API
