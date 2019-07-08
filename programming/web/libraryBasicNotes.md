@@ -548,6 +548,7 @@
 
 ## Persistence/Storage/Store
 
+- [PouchDB](https://github.com/pouchdb/pouchdb)
 - [ImmortalDB](https://github.com/gruns/ImmortalDB)
 - [lowdb](https://github.com/typicode/lowdb)
 - [brownies](https://github.com/franciscop/brownies)
