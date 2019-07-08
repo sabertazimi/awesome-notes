@@ -613,7 +613,10 @@ function Child({ fetchData }) {
 
 #### useState
 
-read rendered props/state
+- read rendered props/state
+- return value of `useState` is `ref` to `hooks[idx]`:
+  direct change to return value doesn't change state value
+- return function of `useState` (`setState`) is to change value of `hooks[idx]`
 
 ```js
 setState(prevState => {
