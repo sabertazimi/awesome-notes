@@ -713,6 +713,46 @@ Use useReducer if:
 - for easier testing
 - for more predictable and maintainable state architecture
 
+```js
+const insertToHistory = state => {
+  if (state && Array.isArray(state.history)) {
+    // Do not mutate
+    const newHistory = [...state.history];
+    newHistory.push(state);
+    return newHistory;
+  }
+  console.warn(`
+    WARNING! The state was attempting capture but something went wrong.
+    Please check if the state is controlled correctly.
+  `);
+  return state.history || [];
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'set-theme':
+      return { ...state, theme: action.theme, history: insertToHistory(state) };
+    case 'add-friend':
+      return {
+        ...state,
+        friends: [...state.friends, action.friend],
+        history: insertToHistory(state)
+      };
+    case 'undo': {
+      const isEmpty = !state.history.length;
+      if (isEmpty) return state;
+      return { ...state.history[state.history.length - 1] };
+    }
+    case 'reset':
+      return { ...initialState, history: insertToHistory(state) };
+    default:
+      return state;
+  }
+};
+
+const [state, dispatch] = useReducer(reducer, initialState);
+```
+
 #### useRef
 
 `useRef` read rendered props/state from **the future**.
@@ -2188,12 +2228,12 @@ that exists **outside** the DOM hierarchy of the parent component
 ```
 
 ```js
-const portalRoot = document.getElementById("portal");
+const portalRoot = document.getElementById('portal');
 
 class Portal extends React.Component {
   constructor() {
     super();
-    this.el = document.createElement("div");
+    this.el = document.createElement('div');
   }
 
   componentDidMount = () => {
@@ -2217,7 +2257,7 @@ class Modal extends React.Component {
       <Portal>
         {on ? (
           <div className="modal is-active">
-            <div className="modal-background"></div>
+            <div className="modal-background" />
             <div className="modal-content">
               <div className="box">
                 <h2 class="subtitle">{children}</h2>
@@ -2260,7 +2300,7 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
 ## React Performance
@@ -2370,47 +2410,29 @@ prevent useless re-rendering:
 
 ```js
 // BAD
-function App (items) {
-  return (
-    <BigListComponent
-      style={{width: '100%'}}
-      items={items}
-    />
-  );
+function App(items) {
+  return <BigListComponent style={{ width: '100%' }} items={items} />;
 }
 
 // GOOD
 const bigListStyle = { width: '100%' };
 
-function App (items) {
-  return (
-    <BigListComponent
-      style={bigListStyle}
-      items={items}
-    />
-  );
+function App(items) {
+  return <BigListComponent style={bigListStyle} items={items} />;
 }
 ```
 
 ```js
 // BAD: Inline function
-function App (items) {
-  return (
-    <BigListComponent
-      onClick={() => dispatchEvent()}
-    />
-  );
+function App(items) {
+  return <BigListComponent onClick={() => dispatchEvent()} />;
 }
 
 // GOOD: Reference to a function
 const clickHandler = () => dispatchEvent();
 
-function App (items) {
-  return (
-    <BigListComponent
-      onClick={clickHandler}
-    />
-  );
+function App(items) {
+  return <BigListComponent onClick={clickHandler} />;
 }
 ```
 
