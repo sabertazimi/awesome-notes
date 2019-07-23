@@ -4,6 +4,8 @@
 
 - [Security Basic Notes](#security-basic-notes)
   - [Curated List of Vulnerability(漏洞)](#curated-list-of-vulnerability漏洞)
+    - [Object Injection](#object-injection)
+      - [Insecure Object Comparison](#insecure-object-comparison)
     - [SQL Injection](#sql-injection)
       - [SQL Injection Protection](#sql-injection-protection)
     - [Click Jacking](#click-jacking)
@@ -45,6 +47,31 @@
 <!-- /TOC -->
 
 ## Curated List of Vulnerability(漏洞)
+
+### Object Injection
+
+- `__proto__.XX`
+- `constructor`
+- `hasOwnProperty`
+
+#### Insecure Object Comparison
+
+injection:
+
+```js
+const token = req.cookies.token;
+
+// vulnerability:
+// SESSIONS[constructor] => `true`
+if (token && SESSIONS[token]) {
+  next();
+}
+```
+
+solutions:
+
+- `crypto.timiingSafeEqual`
+- `object.hasOwnProperty(token)`
 
 ### SQL Injection
 
@@ -278,6 +305,7 @@ Disable DTD parse in XML parser
 
 #### Information Leakage Protection
 
+- `NODE_ENV=production`
 - 处理/混淆/加密原始数据(raw data)
 - 处理/混淆客户端代码
 - 去除工具库的版本信息
@@ -343,6 +371,7 @@ GET /../../../passwd.key HTTP/1.1
 - [ ] 检查邮件或短信里的重置密码的 token，确保随机性（无法猜测）
 - [ ] 给重置密码的 token 设置过期时间.
 - [ ] 重置密码成功后，将重置使用的 token 失效.
+- [ ] Nodejs 等不使用 sudo 运行
 
 ### 用户数据和权限校验
 
