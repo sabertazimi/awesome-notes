@@ -348,6 +348,7 @@
 - [SVG Optimizer](https://github.com/svg/svgo)
 - [Illustration SVG Gallery](https://gallery.manypixels.co)
 - [A fast DVI to SVG converter](https://github.com/mgieseki/dvisvgm)
+- [Cute React SVG Components](https://github.com/miukimiu/react-kawaii)
 
 ### Size
 
