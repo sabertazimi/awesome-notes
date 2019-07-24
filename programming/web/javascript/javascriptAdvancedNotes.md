@@ -69,7 +69,7 @@
       - [`[]`.filter](#filter)
       - [`[]`.reduce](#reduce)
       - [`[]`.sort](#sort)
-  - [JavaScript Internal](#javascript-internal)
+  - [Internal JavaScript](#internal-javascript)
     - [Variables Lifecycle](#variables-lifecycle)
     - [Exection Context](#exection-context)
       - [Global Exection Context](#global-exection-context)
@@ -232,6 +232,7 @@
     - [Content Security Policy Level 3](#content-security-policy-level-3)
     - [Trusted Types](#trusted-types)
     - [CSRF](#csrf)
+    - [Object Property](#object-property)
 
 <!-- /TOC -->
 
@@ -1456,7 +1457,7 @@ const addFive = schonfinkelize(addOne, 1, 3);
 
 #### `[]`.sort
 
-## JavaScript Internal
+## Internal JavaScript
 
 Under the hood
 
@@ -4368,3 +4369,8 @@ def allow_request(req):
 
   return False
 ```
+
+### Object Property
+
+- `object[constructor]`
+- `object.__proto__`
