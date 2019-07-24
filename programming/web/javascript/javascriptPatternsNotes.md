@@ -723,6 +723,44 @@ cost = adapter.request('78701', '10010', '2 lbs');
 - 保持接口的一致性，动态改变对象的外观/职责
 - ConcreteDecorator 类: private ClassName component;(拥有一个对象引用)
 
+```js
+const __decorate = function(decorators, target, key, desc) {
+  const argumentsLength = arguments.length;
+  let descriptorOrTarget;
+  let decorator;
+
+  if (argumentsLength < 3) {
+    // class decorator
+    descriptorOrTarget = target;
+  } else if (desc === null) {
+    // method decorator
+    descriptorOrTarget = Object.getOwnPropertyDescriptor(target, key);
+  }
+
+  for (let i = decorators.length - 1; i >= 0; i--) {
+    if ((decorator = decorators[i])) {
+      if (argumentsLength < 3) {
+        // if the decorator function returns a value use it;
+        // otherwise use the original.
+        descriptorOrTarget =
+          decorator(descriptorOrTarget) || descriptorOrTarget;
+      } else {
+        // if the decorator function returns a descriptor use it;
+        // otherwise use the original.
+        descriptorOrTarget =
+          decorator(target, key, descriptorOrTarget) || descriptorOrTarget;
+      }
+    }
+  }
+
+  if (argumentsLength > 3 && descriptorOrTarget) {
+    Object.defineProperty(target, key, descriptorOrTarget);
+  }
+
+  return descriptorOrTarget;
+};
+```
+
 #### 实现 1(关键 - 实现传递方式)
 
 两种方式:
