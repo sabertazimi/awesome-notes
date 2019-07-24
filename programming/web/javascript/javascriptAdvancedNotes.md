@@ -974,6 +974,18 @@ map + flat
 arr2.push(...arr1);
 ```
 
+```js
+var obj = { x: 1, y: 2, z: 3 };
+
+obj[Symbol.iterator] = function*() {
+  yield 1;
+  yield 2;
+  yield 3;
+};
+
+[...obj]; // print [1, 2, 3]
+```
+
 ### New Object API
 
 - Object.keys()
