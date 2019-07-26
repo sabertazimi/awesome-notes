@@ -65,6 +65,10 @@
     - [Wiki](#wiki)
       - [Wiki Git Access](#wiki-git-access)
     - [Shorten GitHub URL](#shorten-github-url)
+  - [Git tools](#git-tools)
+    - [diff && patch](#diff--patch)
+    - [Semantic Git Commit Message](#semantic-git-commit-message)
+    - [Changelog Generator](#changelog-generator)
   - [Commands List](#commands-list)
     - [Basic Commands](#basic-commands)
       - [git config](#git-config)
@@ -121,8 +125,6 @@
       - [git reflog](#git-reflog)
       - [git filter-branch](#git-filter-branch)
       - [git-note](#git-note)
-  - [Other tools](#other-tools)
-    - [diff && patch](#diff--patch)
 
 <!-- /TOC -->
 
@@ -1006,6 +1008,35 @@ git clone git@github.com:user/repo.wiki.git
 curl -i http://git.io -F "url=https://github.com/technoweenie" -F "code=t"
 ```
 
+## Git tools
+
+### diff && patch
+
+```bash
+diff -u <src> <dist>
+diff -Nur <src_dir> <dist_dir>
+```
+
+```bash
+patch -p[num] < patchfile
+patch -dry -run -p[num] < patchfile
+```
+
+```bash
+diff -Nur program_1.0 program_2.0 > program_2.0.patch
+patch -p1 <../program_2.0.patch
+```
+
+### Semantic Git Commit Message
+
+- [cz-cli](https://github.com/commitizen/cz-cli)
+- [cz-conventional-changelog](https://github.com/commitizen/cz-conventional-changelog)
+- [commitlint](https://github.com/conventional-changelog/commitlint)
+
+### Changelog Generator
+
+- [standard-version](https://github.com/conventional-changelog/standard-version)
+
 ## Commands List
 
 ### Basic Commands
@@ -1210,22 +1241,3 @@ mbox 的格式来生成一系列的补丁以便你可以发送到一个邮件列
 #### git-note
 
 为特定 commit 添加 note,一个 commit 只能有一个 note
-
-## Other tools
-
-### diff && patch
-
-```bash
-diff -u <src> <dist>
-diff -Nur <src_dir> <dist_dir>
-```
-
-```bash
-patch -p[num] < patchfile
-patch -dry -run -p[num] < patchfile
-```
-
-```bash
-diff -Nur program_1.0 program_2.0 > program_2.0.patch
-patch -p1 <../program_2.0.patch
-```
