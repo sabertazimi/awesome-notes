@@ -4149,6 +4149,7 @@ if (a && b && c) {
 
 - [Server Side Rendering with Puppeteer](https://developers.google.com/web/tools/puppeteer/articles/ssr)
 - [Rendering on the Web](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)
+- [SEO Basics](https://developers.google.com/search/docs/guides/javascript-seo-basics)
 
 ```js
 if (isBotAgent) {
