@@ -87,6 +87,7 @@
     - [img](#img)
       - [src](#src)
       - [alt](#alt)
+      - [Responsive Images](#responsive-images)
     - [a(anchor)](#aanchor)
       - [href](#href)
       - [id/name](#idname)
@@ -743,6 +744,28 @@ figure 可拥有唯一的 0/1 个 figcaption
 #### alt
 
 (图片崩溃时文本)、title(提示信息)、class(CSS 类选择器)
+
+#### Responsive Images
+
+```html
+<!-- `img` element -->
+<img src="foo" alt="bar" />
+
+<!-- `img` element, `srcset` attribute -->
+<img
+  srcset="foo-320w.jpg 320w, foo-480w.jpg 480w, foo-800w.jpg 800w"
+  sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px"
+  src="foo-800w.jpg"
+  alt="bar"
+/>
+
+<!-- `picture` and `source` elements, `srcset` attributes -->
+<picture>
+  <source media="(max-width: 799px)" srcset="foo-480w.jpg" />
+  <source media="(min-width: 800px)" srcset="foo-800w.jpg" />
+  <img src="foo-800w.jpg" alt="bar" />
+</picture>
+```
 
 ### a(anchor)
 
