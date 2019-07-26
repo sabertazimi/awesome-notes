@@ -219,6 +219,9 @@
       - [属性](#属性)
       - [方法/函数](#方法函数)
   - [SSR](#ssr)
+  - [SEO](#seo)
+    - [SEO Tutorials](#seo-tutorials)
+    - [SEO Tips](#seo-tips)
   - [PWA](#pwa)
     - [Service Worker](#service-worker)
       - [SW Pros](#sw-pros)
@@ -4149,7 +4152,6 @@ if (a && b && c) {
 
 - [Server Side Rendering with Puppeteer](https://developers.google.com/web/tools/puppeteer/articles/ssr)
 - [Rendering on the Web](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)
-- [SEO Basics](https://developers.google.com/search/docs/guides/javascript-seo-basics)
 
 ```js
 if (isBotAgent) {
@@ -4160,6 +4162,23 @@ if (isBotAgent) {
   // ReactDOMServer.renderToString()
 }
 ```
+
+## SEO
+
+### SEO Tutorials
+
+- [SEO Basics](https://developers.google.com/search/docs/guides/javascript-seo-basics)
+- [SPA SEO](https://snipcart.com/spa-seo)
+
+### SEO Tips
+
+- [server-side rendering](https://css-tricks.com/server-side-react-rendering)
+  (e.g next.js)
+- [prerendering](https://github.com/chrisvfritz/prerender-spa-plugin)
+- mobile performance optimization
+  (e.g minify resources, code splitting, CDN, lazy loading, minimize reflows)
+- [SEO-friendly routing and URL management](https://reacttraining.com/react-router)
+- [Google webmaster tools](https://www.google.com/webmasters)
 
 ## PWA
 
