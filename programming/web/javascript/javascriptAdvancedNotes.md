@@ -4168,7 +4168,7 @@ if (isBotAgent) {
 ### SEO Tutorials
 
 - [SEO Basics](https://developers.google.com/search/docs/guides/javascript-seo-basics)
-- [SPA SEO](https://snipcart.com/spa-seo)
+- [SPA SEO Basics](https://snipcart.com/spa-seo)
 
 ### SEO Tips
 
