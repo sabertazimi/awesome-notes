@@ -1470,6 +1470,8 @@ main {
 }
 ```
 
+responsive grid layout
+
 ```css
 .items {
   display: grid;
