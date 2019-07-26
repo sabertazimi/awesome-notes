@@ -259,6 +259,11 @@ window.requestAnimationFrame(step);
 - Load CSS as the DOM needs it:
   - This unblocks Start Render and allows progressive rendering.
 
+```html
+<link rel="preload" href="/path/to/split.css" as="style">
+<link rel="stylesheet" href="/path/to/split.css" media="print" onload="this.media='all'">
+```
+
 ### Animation
 
 #### Best Practice
