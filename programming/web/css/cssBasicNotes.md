@@ -2925,6 +2925,8 @@ h1::after {
 
 ### Form
 
+- [Form Design Patterns](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post)
+
 #### Select
 
 ```css

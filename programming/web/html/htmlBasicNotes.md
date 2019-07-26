@@ -316,6 +316,8 @@ but so can every `<article>` and `<section>` element
 
 ## Form
 
+- [Form Design Patterns](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post)
+
 ```html
 <form action="表单提交的后台地址接口" method="post" 提交方式，一般为post>
   <fieldset 若内容比较多，用来分区>
