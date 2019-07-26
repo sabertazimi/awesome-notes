@@ -137,6 +137,7 @@
 - [Gatsby.js](https://github.com/gatsbyjs/gatsby)
 - [Next.js](https://github.com/zeit/next.js)
 - [React Storybook](https://github.com/storybooks/storybook)
+- [Feathers.js](https://github.com/feathersjs/feathers)
 
 ## UI Framework
 
