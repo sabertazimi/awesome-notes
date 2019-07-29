@@ -197,6 +197,7 @@
       - [Promise.all](#promiseall)
       - [Promise Polyfill](#promise-polyfill)
     - [await/async](#awaitasync)
+      - [Await Arrays](#await-arrays)
     - [Sleep Function](#sleep-function)
     - [Race Condition](#race-condition)
   - [Geolocation API](#geolocation-api)
@@ -3595,6 +3596,15 @@ async getAuthors(authorIds) {
   const authors = await Promise.all(promises);
 }
 ```
+
+#### Await Arrays
+
+- If you want to execute await calls in series,
+  use a for-loop (or any loop without a callback).
+- Don't ever use await with `forEach` (`forEach` is not promise-aware),
+  use a for-loop (or any loop without a callback) instead.
+- Don't await inside filter and reduce,
+  always await an array of promises with map, then filter or reduce accordingly.
 
 ### Sleep Function
 

@@ -276,6 +276,7 @@
 - [React Draftjs](https://github.com/draft-js-plugins/draft-js-plugins)
 - [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd)
 - [React DnD - Drag and Drop](https://github.com/react-dnd/react-dnd)
+- [Moveable](https://github.com/daybrush/moveable)
 - [p5.js](https://github.com/processing/p5.js)
 - [nipple.js](https://github.com/yoannmoinet/nipplejs)
 - [interact.js - drag/drop/resizing/multi-touch](https://github.com/taye/interact.js)
