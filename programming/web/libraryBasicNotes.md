@@ -261,6 +261,7 @@
 ## Viewport
 
 - [Viewport Events](https://github.com/robb0wen/tornis)
+- [RobotJS - Node.js Desktop Automation](https://github.com/octalmage/robotjs)
 
 ### Scroll
 
