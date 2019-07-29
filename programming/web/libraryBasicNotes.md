@@ -574,6 +574,7 @@
 
 - [React Terminal](https://github.com/rohanchandra/react-terminal-component)
 - [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
+- [Jay - Supercharged JavaScript REPL](https://github.com/nikersify/jay)
 
 ## Keyboard
 
