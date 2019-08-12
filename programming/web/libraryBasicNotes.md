@@ -402,6 +402,7 @@
 ## Animation
 
 - [React Spring](https://github.com/react-spring/react-spring)
+- [Framer Motion](https://github.com/framer/motion)
 - [React Transition Group](https://github.com/reactjs/react-transition-group)
 - [React Animation](https://github.com/FunctionFoundry/react-set-animate)
 - [Vanilla JavaScript Animation Library](https://github.com/greensock/GreenSock-JS)
