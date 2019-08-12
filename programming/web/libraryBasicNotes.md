@@ -74,8 +74,8 @@
   - [iFrame](#iframe)
   - [Clipboard](#clipboard)
   - [File](#file)
+    - [Uploader](#uploader)
     - [Utils](#utils)
-    - [Upload](#upload)
     - [PDF](#pdf)
   - [Persistence/Storage/Store](#persistencestoragestore)
   - [Code Analysis](#code-analysis)
@@ -537,16 +537,17 @@
 ## File
 
 - [zTree v3](https://github.com/zTree/zTree_v3)
+- [FileAPI](https://github.com/mailru/FileAPI)
+
+### Uploader
+
+- [filepond](https://github.com/pqina/filepond)
+- [Uppy File Uploader](https://github.com/transloadit/uppy/tree/master/packages/%40uppy/react)
 
 ### Utils
 
 - [Human Readable File Size](https://github.com/avoidwork/filesize.js)
 - [globby](https://github.com/sindresorhus/globby)
-
-### Upload
-
-- [filepond](https://github.com/pqina/filepond)
-- [Uppy File Uploader](https://github.com/transloadit/uppy/tree/master/packages/%40uppy/react)
 
 ### PDF
 
