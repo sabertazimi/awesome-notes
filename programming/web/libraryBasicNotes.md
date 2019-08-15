@@ -669,7 +669,7 @@
 - cheerio: jQuery-DOM API
 - iconv-lite: 转码库
 - request
-- http 请求获取页面
+- HTTP 请求获取页面
 - 正则表达式匹配信息
 - 数据持久化数据库
 - 数据可视化
@@ -718,6 +718,7 @@
 
 ### Mock
 
+- [nock](https://github.com/nock/nock)
 - [Mockery](https://github.com/mfncooper/mockery)
 - [Pokemon API](https://github.com/PokeAPI/pokeapi)
 - [JSON Placeholder](http://jsonplaceholder.typicode.com)
