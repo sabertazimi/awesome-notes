@@ -103,6 +103,7 @@
     - [Feature Testing](#feature-testing)
     - [End to End Testing](#end-to-end-testing)
     - [Higher Level Tools](#higher-level-tools)
+    - [Security Tools](#security-tools)
     - [Coverage](#coverage)
     - [Mock](#mock)
     - [Monitoring](#monitoring)
@@ -710,6 +711,12 @@
 
 - [Nightmare - Phantomjs Like Browser Automation Testing](https://github.com/segmentio/nightmare)
 - [NightWatchjs - Selenium/Node Testing Framework](https://github.com/nightwatchjs/nightwatch)
+
+### Security Tools
+
+- [sqlmap](https://github.com/sqlmapproject/sqlmap)
+- [zaproxy](https://github.com/zaproxy/zaproxy)
+- [arachni](https://github.com/Arachni/arachni)
 
 ### Coverage
 
