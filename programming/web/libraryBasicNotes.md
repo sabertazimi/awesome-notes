@@ -245,6 +245,7 @@
 - [okay nav](https://github.com/VPenkov/okayNav)
 - [Animated Nav Burgers](https://github.com/march08/animated-burgers)
 - [Menu Icon Click Animation](https://github.com/jonsuh/hamburgers)
+- [pagemap](https://github.com/lrsjng/pagemap)
 
 ## Charts
 
