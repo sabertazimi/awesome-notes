@@ -2269,6 +2269,25 @@ para.appendChild(txt);
 ##### insert
 
 ```js
+// 4 positions
+//
+// <!-- beforebegin -->
+// <p>
+  // <!-- afterbegin -->
+  // foo
+  // <!-- beforeend -->
+// </p>
+// <!-- afterend -->
+const p = document.querySelector('p');
+
+p.insertAdjacentHTML('beforebegin', '<a></a>');
+p.insertAdjacentText('afterbegin', 'foo');
+
+// simply be moved element, not copied element
+p.insertAdjacentElement('beforebegin', link);
+```
+
+```js
 function insertAfter(newElement, targetElement) {
   var parent = targetElement.parentNode;
   if (parent.lastChild == targetElement) {
@@ -2974,6 +2993,35 @@ mutationObserver.observe(document.documentElement, {
   subtree: true,
   attributeOldValue: true,
   characterDataOldValue: true
+});
+```
+
+```js
+const target = document.querySelector('#container');
+const callback = (mutations, observer) => {
+  mutations.forEach(mutation => {
+    switch (mutation.type) {
+      case 'attributes':
+        // the name of the changed attribute is in
+        // mutation.attributeName
+        // and its old value is in mutation.oldValue
+        // the current value can be retrieved with
+        // target.getAttribute(mutation.attributeName)
+        break;
+      case 'childList':
+        // any added nodes are in mutation.addedNodes
+        // any removed nodes are in mutation.removedNodes
+        break;
+    }
+  });
+};
+
+const observer = new MutationObserver(callback);
+observer.observe(target, {
+  attributes: true,
+  attributeFilter: ['foo'], // only observe attribute 'foo'
+  attributeOldValue: true,
+  childList: true
 });
 ```
 
