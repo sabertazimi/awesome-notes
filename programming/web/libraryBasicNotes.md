@@ -156,6 +156,7 @@
 
 ## Browser
 
+- [Browser Platform Detection](https://github.com/lancedikson/bowser)
 - [Feature/Browser Detection](https://github.com/Modernizr/Modernizr)
 
 ## JS Utils
