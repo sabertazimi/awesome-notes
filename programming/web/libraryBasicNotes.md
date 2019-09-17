@@ -3,7 +3,7 @@
 <!-- TOC -->
 
 - [Library Basic Notes](#library-basic-notes)
-  - [Index](#index)
+  - [Indexing Tools](#indexing-tools)
   - [Boilerplate](#boilerplate)
   - [Solution and Framework](#solution-and-framework)
   - [UI Framework](#ui-framework)
@@ -113,7 +113,7 @@
 
 <!-- /TOC -->
 
-## Index
+## Indexing Tools
 
 - [**Starter Kit Collection**](http://andrewhfarmer.com/starter-project)
 - [Best of JS](https://bestofjs.org)
@@ -125,6 +125,7 @@
 ## Boilerplate
 
 - [Create React App](https://github.com/facebook/create-react-app)
+- [Full Stack Boilerplate](https://github.com/TrillCyborg/fullstack)
 - [nwb - React Component Boilerplate](https://github.com/insin/nwb)
 - [Neutrino.js - More Customizable Boilerplate](https://github.com/neutrinojs/neutrino)
 - [Basic - HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
