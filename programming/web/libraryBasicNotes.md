@@ -10,6 +10,7 @@
   - [Browser](#browser)
   - [JS Utils](#js-utils)
     - [String Utils](#string-utils)
+    - [Functionnal Programming Utils](#functionnal-programming-utils)
   - [CSS Utils](#css-utils)
     - [Color Utils](#color-utils)
     - [Gradients Utils](#gradients-utils)
@@ -166,6 +167,10 @@
 ### String Utils
 
 - [String Manipulation](https://github.com/dleitee/strman)
+
+### Functionnal Programming Utils
+
+- [Immer](https://github.com/immerjs/immer)
 
 ## CSS Utils
 
