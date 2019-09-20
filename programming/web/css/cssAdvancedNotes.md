@@ -10,6 +10,8 @@
       - [vertical rhythms](#vertical-rhythms)
     - [Table](#table)
   - [Grid System](#grid-system)
+  - [Form Design Principles](#form-design-principles)
+    - [Buttons Placement Principles](#buttons-placement-principles)
   - [Graceful Degration](#graceful-degration)
   - [CSS Houdini](#css-houdini)
   - [CSS Performance](#css-performance)
@@ -95,6 +97,19 @@ consistent (and relative) to each other:
 - Must be fluid between breakpoints
 - Must have enough control to decide which columns will transform and at which point
 - Classes should ideally still make sense at all breakpoints
+
+## Form Design Principles
+
+### Buttons Placement Principles
+
+- Align the primary button to the left edge of the inputs
+- Put the back button above the form
+- Put tangentially related actions above the form
+- Place extra buttons based on what they do
+- In some single field forms put the button next to the input (e.g `search` button)
+- Put buttons on multi select forms above the form
+
+> <https://adamsilver.io/articles/where-to-put-buttons-in-forms>
 
 ## Graceful Degration
 
