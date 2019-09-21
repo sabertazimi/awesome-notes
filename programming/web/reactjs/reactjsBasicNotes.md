@@ -2956,6 +2956,19 @@ const WrapperContainer = () => (
 ReactDOM.render(<WrapperContainer />, container);
 ```
 
+## Framework Paradigm
+
+- full-featured frameworks vs composing micro-libs
+
+> Evan You on Vue.js: Seeking the Balance in Framework Design | JSConf.Asia 2019
+
+- functional vs imperative
+- immutable vs mutable
+- referential equality testing vs change tracking
+
+> 打破框架的范式之争, 其实是改变思路. 从思考不同范式之间的竞争关系, 转变成思考多个范式之间的协同关系.
+> useRef in React, Composition in Vue
+
 ## Interviews
 
 - [Reactjs Interview Questions](https://github.com/semlinker/reactjs-interview-questions)
