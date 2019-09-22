@@ -68,7 +68,6 @@
       - [.bz2](#bz2)
       - [.tar.gz/.tar.bz2](#targztarbz2)
       - [.7z](#7z)
-    - [挂载命令](#挂载命令)
     - [用户命令](#用户命令)
     - [用户管理命令](#用户管理命令)
       - [组操作](#组操作)
@@ -87,7 +86,10 @@
       - [ACL 权限](#acl-权限)
       - [sudo 权限](#sudo-权限)
       - [SetUID/SetGID 权限——可执行程序/目录+普通用户临时获得 root 权限 （rws）](#setuidsetgid-权限可执行程序目录普通用户临时获得-root-权限-rws)
+    - [显示器管理命令](#显示器管理命令)
+      - [xrandr](#xrandr)
     - [磁盘管理命令](#磁盘管理命令)
+      - [挂载命令](#挂载命令)
       - [修复命令](#修复命令)
       - [分区命令](#分区命令)
         - [fdisk](#fdisk)
@@ -581,17 +583,6 @@ tar [可选参数] 压缩文件(可指定压缩路径) [-c 解压缩路径]源�
 - -o: specific path
 - -t: type
 
-### 挂载命令
-
-mount [-t 文件系统][-o 特殊选项] 设备文件名 挂载点(挂载目录/media /misc /mnt)
-
-- 无参数 显示当前挂载设备
-- -a 依据/etc/fstab 文件配置,自动挂载
-
-umount 设备文件名/挂载点
-
-fdisk –l
-
 ### 用户命令
 
 - w/who 查看用户详细信息
@@ -725,9 +716,28 @@ finger apacheuser 查看单个用户信息
 - chmod 4xxx 设置 SetUID 权限
 - chmod 6xxx 设置双权限
 
+### 显示器管理命令
+
+#### xrandr
+
+```bash
+xrandr -s 1920x1800 # set resolution
+```
+
 ### 磁盘管理命令
 
 主分区(primary)与延伸分区(extended) 延伸分区可以继续划分成逻辑分区(logical)
+
+#### 挂载命令
+
+mount [-t 文件系统][-o 特殊选项] 设备文件名 挂载点(挂载目录/media /misc /mnt)
+
+- 无参数 显示当前挂载设备
+- -a 依据/etc/fstab 文件配置,自动挂载
+
+umount 设备文件名/挂载点
+
+fdisk –l
 
 #### 修复命令
 
