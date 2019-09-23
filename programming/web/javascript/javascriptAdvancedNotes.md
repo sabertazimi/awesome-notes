@@ -107,6 +107,7 @@
     - [计时器](#计时器)
     - [Web Worker](#web-worker)
       - [运行环境](#运行环境)
+      - [Web Worker Loader](#web-worker-loader)
       - [worker 实例](#worker-实例)
     - [Ajax](#ajax)
       - [数据格式](#数据格式)
@@ -133,7 +134,7 @@
     - [Data Format and Size](#data-format-and-size)
       - [Images Format](#images-format)
       - [Images Compression](#images-compression)
-      - [Images Sizing](#images-sizing)
+      - [Images Scaling](#images-scaling)
     - [Data Loading](#data-loading)
       - [Data Preloading](#data-preloading)
       - [Images Lazy Loading](#images-lazy-loading)
@@ -2775,6 +2776,8 @@ Load 也不一定代表用户看到主要内容.
 
 ### Data Format and Size
 
+- [optimize images for web](https://www.keycdn.com/blog/optimize-images-for-web)
+
 #### Images Format
 
 mp4 smaller than gif
@@ -2800,7 +2803,7 @@ WebP 25-35% smaller than jpg/png
 
 - [Imagemin](https://github.com/Klathmon/imagemin-webpack-plugin)
 
-#### Images Sizing
+#### Images Scaling
 
 responsive images: provide 3~5 different sizes
 reduce image transfer sizes by average of ~20%
