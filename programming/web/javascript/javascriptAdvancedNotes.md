@@ -47,16 +47,15 @@
     - [Arrow Function](#arrow-function)
     - [Modules](#modules)
     - [Class 语法糖](#class-语法糖)
-    - [Promise](#promise)
-    - [Symbol](#symbol)
     - [WeakMap](#weakmap)
+    - [Symbol](#symbol)
+    - [Generator](#generator)
     - [Proxy and Reflect](#proxy-and-reflect)
       - [Default Zero Value with Proxy](#default-zero-value-with-proxy)
       - [Negative Array Indice with Proxy](#negative-array-indice-with-proxy)
       - [Hiding Properties with Proxy](#hiding-properties-with-proxy)
       - [Read Only Object with Proxy](#read-only-object-with-proxy)
       - [Range Judgement with Proxy](#range-judgement-with-proxy)
-    - [Generator](#generator)
   - [Functional JavaScript](#functional-javascript)
     - [Pros](#pros)
     - [Cons](#cons)
@@ -1122,48 +1121,6 @@ console.log(bb.__proto__ === BB.prototype);
 
 禁止对复合对象字面量进行导出操作 (array literal, object literal)
 
-### Promise
-
-- `Promise.all`: short-circuits when an input value is rejected
-- `Promise.race`: short-circuits when an input value is settled
-- `Promise.any`: short-circuits when an input value is fulfilled
-- `Promise.allSettled`: does not short-circuits
-
-### Symbol
-
-implement iterator with `Symbol.iterator`
-
-```js
-function methodsIterator() {
-  let index = 0;
-  let methods = Object.keys(this)
-    .filter(key => {
-      return typeof this[key] === 'function';
-    })
-    .map(key => this[key]);
-  return {
-    next: () => ({
-      // Conform to Iterator protocol
-      done: index >= methods.length,
-      value: methods[index++]
-    })
-  };
-}
-let myMethods = {
-  toString: function() {
-    return '[object myMethods]';
-  },
-  sumNumbers: function(a, b) {
-    return a + b;
-  },
-  numbers: [1, 5, 6],
-  [Symbol.iterator]: methodsIterator // Conform to Iterable Protocol
-};
-for (let method of myMethods) {
-  console.log(method); // logs methods `toString` and `sumNumbers`
-}
-```
-
 ### WeakMap
 
 WeakMap 结构与 Map 结构基本类似,
@@ -1179,6 +1136,119 @@ WeakMap 结构与 Map 结构基本类似,
 普通集合类型比如简单对象会阻止垃圾回收器对这些作为属性键存在的对象的回收,
 有造成内存泄漏的危险,
 而 WeakMap/WeakSet 则更加安全些.
+
+### Symbol
+
+- 一个数据结构只要具有 Symbol.iterator 属性 (其为 function), 就可以认为是 "可遍历的" (iterable)
+- implement iterator with `Symbol.iterator`
+
+```js
+let arr = ['a', 'b', 'c'];
+let iter = arr[Symbol.iterator]();
+
+iter.next() // { value: 'a', done: false }
+iter.next() // { value: 'b', done: false }
+iter.next() // { value: 'c', done: false }
+iter.next() // { value: undefined, done: true }
+```
+
+```js
+function methodsIterator() {
+  let index = 0;
+  let methods = Object.keys(this)
+    .filter(key => {
+      return typeof this[key] === 'function';
+    })
+    .map(key => this[key]);
+
+  // iterator object
+  return {
+    next: () => ({
+      // Conform to Iterator protocol
+      done: index >= methods.length,
+      value: methods[index++]
+    })
+  };
+}
+
+let myMethods = {
+  toString: function() {
+    return '[object myMethods]';
+  },
+  sumNumbers: function(a, b) {
+    return a + b;
+  },
+  numbers: [1, 5, 6],
+  [Symbol.iterator]: methodsIterator // Conform to Iterable Protocol
+};
+
+for (let method of myMethods) {
+  console.log(method); // logs methods `toString` and `sumNumbers`
+}
+```
+
+### Generator
+
+```js
+function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const g = gen();
+
+g.next(); // { value: 1, done: false }
+g.next(); // { value: 2, done: false }
+g.next(); // { value: 3, done: false }
+g.next(); // { value: undefined, done: true }
+g.return(); // { value: undefined, done: true }
+g.return(1); // { value: 1, done: true }
+```
+
+```js
+function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const g = gen();
+
+g.next(); // { value: 1, done: false }
+g.return('foo'); // { value: "foo", done: true }
+g.next(); // { value: undefined, done: true }
+```
+
+Generator based control flow goodness for nodejs and the browser,
+using promises, letting you write non-blocking code in a nice-ish way
+(just like [tj/co](https://github.com/tj/co)).
+
+```js
+function coroutine(generatorFunc) {
+  const generator = generatorFunc();
+  nextResponse();
+
+  function nextResponse(value) {
+    const response = generator.next(value);
+
+    if (response.done) {
+      return;
+    }
+
+    if (value.then) {
+      value.then(nextResponse);
+    } else {
+      nextResponse(response.value);
+    }
+  }
+}
+
+coroutine(function* bounce() {
+  yield bounceUp;
+  yield bounceDown;
+});
+```
 
 ### Proxy and Reflect
 
@@ -1308,69 +1378,6 @@ if (X in range(1, 100)) {
 
 nums.filter(n => n in range(1, 10));
 // => [1, 5]
-```
-
-### Generator
-
-```js
-function* gen() {
-  yield 1;
-  yield 2;
-  yield 3;
-}
-
-const g = gen();
-
-g.next(); // { value: 1, done: false }
-g.next(); // { value: 2, done: false }
-g.next(); // { value: 3, done: false }
-g.next(); // { value: undefined, done: true }
-g.return(); // { value: undefined, done: true }
-g.return(1); // { value: 1, done: true }
-```
-
-```js
-function* gen() {
-  yield 1;
-  yield 2;
-  yield 3;
-}
-
-const g = gen();
-
-g.next(); // { value: 1, done: false }
-g.return('foo'); // { value: "foo", done: true }
-g.next(); // { value: undefined, done: true }
-```
-
-Generator based control flow goodness for nodejs and the browser,
-using promises, letting you write non-blocking code in a nice-ish way
-(just like [tj/co](https://github.com/tj/co)).
-
-```js
-function coroutine(generatorFunc) {
-  const generator = generatorFunc();
-  nextResponse();
-
-  function nextResponse(value) {
-    const response = generator.next(value);
-
-    if (response.done) {
-      return;
-    }
-
-    if (value.then) {
-      value.then(nextResponse);
-    } else {
-      nextResponse(response.value);
-    }
-  }
-}
-
-coroutine(function* bounce() {
-  yield bounceUp;
-  yield bounceDown;
-});
 ```
 
 ## Functional JavaScript

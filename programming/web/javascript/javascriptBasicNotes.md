@@ -3417,7 +3417,10 @@ avoid callback hell with:
 
 - return `new Promise`
 - return `promise.then`
-- `Promise.all`
+- `Promise.all`: short-circuits when an input value is rejected
+- `Promise.race`: short-circuits when an input value is settled
+- `Promise.any`: short-circuits when an input value is fulfilled
+- `Promise.allSettled`: does not short-circuits
 
 resolve only accept **one** value
 
