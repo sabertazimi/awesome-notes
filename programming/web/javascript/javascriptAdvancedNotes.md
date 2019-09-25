@@ -1367,6 +1367,26 @@ function remotePostsAsyncIteratorsFactory() {
 
   return asyncIterableIterator;
 }
+
+;(async() => {
+
+    const ait = remotePostsAsyncIteratorsFactory();
+
+    await ait.next(); // { done:false, value:{id: 1, ...} }
+    await ait.next(); // { done:false, value:{id: 2, ...} }
+    await ait.next(); // { done:false, value:{id: 3, ...} }
+    // ...
+    await ait.next(); // { done:false, value:{id: 100, ...} }
+    await ait.next(); // { done:true, value:undefined }
+
+})();
+```
+
+```js
+// tasks will run in parallel
+ait.next().then(...);
+ait.next().then(...);
+ait.next().then(...);
 ```
 
 ### Generator
