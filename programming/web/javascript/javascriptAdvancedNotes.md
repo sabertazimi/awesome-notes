@@ -56,6 +56,7 @@
     - [Generator](#generator)
       - [Basic Usage](#basic-usage)
       - [Complex Usage](#complex-usage)
+      - [Asynchronous Generator](#asynchronous-generator)
     - [Proxy and Reflect](#proxy-and-reflect)
       - [Default Zero Value with Proxy](#default-zero-value-with-proxy)
       - [Negative Array Indice with Proxy](#negative-array-indice-with-proxy)
@@ -1368,17 +1369,15 @@ function remotePostsAsyncIteratorsFactory() {
   return asyncIterableIterator;
 }
 
-;(async() => {
+(async () => {
+  const ait = remotePostsAsyncIteratorsFactory();
 
-    const ait = remotePostsAsyncIteratorsFactory();
-
-    await ait.next(); // { done:false, value:{id: 1, ...} }
-    await ait.next(); // { done:false, value:{id: 2, ...} }
-    await ait.next(); // { done:false, value:{id: 3, ...} }
-    // ...
-    await ait.next(); // { done:false, value:{id: 100, ...} }
-    await ait.next(); // { done:true, value:undefined }
-
+  await ait.next(); // { done:false, value:{id: 1, ...} }
+  await ait.next(); // { done:false, value:{id: 2, ...} }
+  await ait.next(); // { done:false, value:{id: 3, ...} }
+  // ...
+  await ait.next(); // { done:false, value:{id: 100, ...} }
+  await ait.next(); // { done:true, value:undefined }
 })();
 ```
 
@@ -1544,6 +1543,60 @@ coroutine(function* bounce() {
   yield bounceUp;
   yield bounceDown;
 });
+```
+
+#### Asynchronous Generator
+
+```js
+const asyncSource = {
+  async *[Symbol.asyncIterator]() {
+    yield await new Promise(res => setTimeout(res, 1000, 1));
+  }
+};
+
+async function* remotePostsAsyncGenerator() {
+  let i = 1;
+
+  while (true) {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${i++}`
+    ).then(r => r.json());
+
+    // when no more remote posts will be available,
+    // it will break the infinite loop.
+    // the async iteration will end
+    if (Object.keys(res).length === 0) {
+      break;
+    }
+
+    yield res;
+  }
+}
+```
+
+```js
+// do you remember it?
+function* chunkify(array, n) {
+  yield array.slice(0, n);
+  array.length > n && (yield* chunkify(array.slice(n), n));
+}
+
+async function* getRemoteData() {
+  let hasMore = true;
+  let page;
+
+  while (hasMore) {
+    const { next_page, results } = await fetch(URL, { params: { page } }).then(
+      r => r.json()
+    );
+
+    // return 5 elements with each iteration
+    yield* chunkify(results, 5);
+
+    hasMore = next_page != null;
+    page = next_page;
+  }
+}
 ```
 
 ### Proxy and Reflect
