@@ -1139,6 +1139,9 @@ WeakMap 结构与 Map 结构基本类似,
 
 ### Symbol
 
+- A Symbol is a **unique** and **immutable** primitive value
+  and may be used as the key of an Object property.
+- Symbols don't auto-convert to "strings" and can't convert to numbers
 - 一个数据结构只要具有 Symbol.iterator 属性 (其为 function), 就可以认为是 "可遍历的" (iterable)
 - implement iterator with `Symbol.iterator`
 
