@@ -1449,6 +1449,18 @@ g.next(); // { value: undefined, done: true }
 
 #### Complex Usage
 
+The generator function itself is not iterable, call it to get the iterable-iterator
+
+```js
+for (const v of someOddNumbers) {
+  console.log(v);
+} // => TypeEror: someOddNumbers is not iterable
+
+for (const v of number()) {
+  console.log(v); // 1 3 5 7
+}
+```
+
 messaging system
 
 ```js
