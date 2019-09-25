@@ -51,6 +51,8 @@
     - [WeakMap](#weakmap)
     - [Symbol](#symbol)
     - [Iterator](#iterator)
+      - [Synchronous Iterator](#synchronous-iterator)
+      - [Asynchronous Iterator](#asynchronous-iterator)
     - [Generator](#generator)
       - [Basic Usage](#basic-usage)
       - [Complex Usage](#complex-usage)
@@ -1215,10 +1217,10 @@ WeakMap 结构与 Map 结构基本类似,
 let arr = ['a', 'b', 'c'];
 let iter = arr[Symbol.iterator]();
 
-iter.next() // { value: 'a', done: false }
-iter.next() // { value: 'b', done: false }
-iter.next() // { value: 'c', done: false }
-iter.next() // { value: undefined, done: true }
+iter.next(); // { value: 'a', done: false }
+iter.next(); // { value: 'b', done: false }
+iter.next(); // { value: 'c', done: false }
+iter.next(); // { value: undefined, done: true }
 ```
 
 ### Iterator
@@ -1226,7 +1228,32 @@ iter.next() // { value: undefined, done: true }
 - 一个数据结构只要具有 Symbol.iterator 属性 (其为 function), 就可以认为是 "可遍历的" (iterable)
 - implement iterator with `Symbol.iterator`
 
+#### Synchronous Iterator
+
 ```js
+const Iterable = {
+  [Symbol.iterator]() {
+    return Iterator;
+  }
+};
+
+const Iterator = {
+  next() {
+    return IteratorResult;
+  },
+  return() {
+    return IteratorResult;
+  },
+  throw(e) {
+    throw e;
+  }
+};
+
+const IteratorResult = {
+  value: any,
+  done: boolean
+};
+
 const Iterator = {
   next() {
     return IteratorResult;
@@ -1234,7 +1261,7 @@ const Iterator = {
   [Symbol.iterator]() {
     return this;
   }
-}
+};
 ```
 
 ```js
@@ -1272,7 +1299,79 @@ for (let method of myMethods) {
 }
 ```
 
+#### Asynchronous Iterator
+
+```js
+const AsyncIterable = {
+  [Symbol.asyncIterator]() {
+    return AsyncIterator;
+  }
+};
+
+const AsyncIterator = {
+  next() {
+    return Promise.resolve(IteratorResult);
+  },
+  return() {
+    return Promise.resolve(IteratorResult);
+  },
+  throw(e) {
+    return Promise.reject(e);
+  }
+};
+
+const IteratorResult = {
+  value: any,
+  done: boolean
+};
+```
+
+```js
+function remotePostsAsyncIteratorsFactory() {
+  let i = 1;
+  let done = false;
+
+  const asyncIterableIterator = {
+    // the next method will always return a Promise
+    async next() {
+      // do nothing if we went out-of-bounds
+      if (done) {
+        return Promise.resolve({
+          done: true,
+          value: undefined
+        });
+      }
+
+      const res = await fetch(
+        `https://jsonplaceholder.typicode.com/posts/${i++}`
+      ).then(r => r.json());
+
+      // the posts source is ended
+      if (Object.keys(res).length === 0) {
+        done = true;
+        return Promise.resolve({
+          done: true,
+          value: undefined
+        });
+      } else {
+        return Promise.resolve({
+          done: false,
+          value: res
+        });
+      }
+    },
+    [Symbol.asyncIterator]() {
+      return this;
+    }
+  };
+
+  return asyncIterableIterator;
+}
+```
+
 ### Generator
+
+- [Synchronous Generators](https://dev.to/jfet97/javascript-iterators-and-generators-synchronous-generators-3ai4)
 
 #### Basic Usage
 
@@ -1291,6 +1390,26 @@ g.next(); // { value: 3, done: false }
 g.next(); // { value: undefined, done: true }
 g.return(); // { value: undefined, done: true }
 g.return(1); // { value: 1, done: true }
+```
+
+iterable object
+
+```js
+const users = {
+  james: false,
+  andrew: true,
+  alexander: false,
+  daisy: false,
+  luke: false,
+  clare: true,
+
+  *[Symbol.iterator]() {
+    // this === 'users'
+    for (const key in this) {
+      if (this[key]) yield key;
+    }
+  }
+};
 ```
 
 early return
@@ -1318,7 +1437,7 @@ function* lazyCalculator(operator) {
   const firstOperand = yield;
   const secondOperand = yield;
 
-  switch(operator) {
+  switch (operator) {
     case '+':
       yield firstOperand + secondOperand;
       return;
@@ -1330,29 +1449,31 @@ function* lazyCalculator(operator) {
       return;
     case '/':
       yield firstOperand / secondOperand;
-      return;  
+      return;
   }
 }
 
 const g = gen('*');
-g.next();   // { value: undefined, done: false }
+g.next(); // { value: undefined, done: false }
 g.next(10); // { value: undefined, done: false }
-g.next(2);  // { value: 20, done: false }
-g.next();   // { value: undefined, done: true }
+g.next(2); // { value: 20, done: false }
+g.next(); // { value: undefined, done: true }
 ```
 
 error handling
 
 ```js
 function* generator() {
-    try {
-        yield 1;
-    } catch(e) { console.log(e) }
+  try {
+    yield 1;
+  } catch (e) {
+    console.log(e);
+  }
 
-    yield 2;
-    yield 3;
-    yield 4;
-    yield 5;
+  yield 2;
+  yield 3;
+  yield 4;
+  yield 5;
 }
 
 const it = generator();
@@ -1362,14 +1483,14 @@ it.next(); // {value: 1, done: false}
 // the error will be handled and printed ("Error: Handled!"),
 // then the flow will continue, so we will get the
 // next yielded value as result.
-it.throw(Error("Handled!")); // {value: 2, done: false}
+it.throw(Error('Handled!')); // {value: 2, done: false}
 
 it.next(); // {value: 3, done: false}
 
 // now the generator instance is paused on the
 // third yield that is not inside a try-catch.
 // the error will be re-thrown out
-it.throw(Error("Not handled!")); // !!! Uncaught Error: Not handled! !!!
+it.throw(Error('Not handled!')); // !!! Uncaught Error: Not handled! !!!
 
 // now the iterator is exhausted
 it.next(); // {value: undefined, done: true}
@@ -2390,38 +2511,38 @@ const Timer = {
 
 ```js
 // 文件名为index.js
-function work () {
-  onmessage = ({data: {jobId, message}}) => {
-    console.log ('i am worker, receive:-----' + message);
-    postMessage ({jobId, result: 'message from worker'});
+function work() {
+  onmessage = ({ data: { jobId, message } }) => {
+    console.log('i am worker, receive:-----' + message);
+    postMessage({ jobId, result: 'message from worker' });
   };
 }
 
 const makeWorker = f => {
   let pendingJobs = {};
 
-  const worker = new Worker (
-    URL.createObjectURL (new Blob ([`(${f.toString ()})()`]))
+  const worker = new Worker(
+    URL.createObjectURL(new Blob([`(${f.toString()})()`]))
   );
 
-  worker.onmessage = ({data: {result, jobId}}) => {
+  worker.onmessage = ({ data: { result, jobId } }) => {
     // 调用 resolve, 改变 Promise 状态
-    pendingJobs[jobId] (result);
+    pendingJobs[jobId](result);
     delete pendingJobs[jobId];
   };
 
   return (...message) =>
-    new Promise (resolve => {
-      const jobId = String (Math.random ());
+    new Promise(resolve => {
+      const jobId = String(Math.random());
       pendingJobs[jobId] = resolve;
-      worker.postMessage ({jobId, message});
+      worker.postMessage({ jobId, message });
     });
 };
 
-const testWorker = makeWorker (work);
+const testWorker = makeWorker(work);
 
-testWorker ('message from main thread').then (message => {
-  console.log ('i am main thread, i receive:-----' + message);
+testWorker('message from main thread').then(message => {
+  console.log('i am main thread, i receive:-----' + message);
 });
 ```
 
@@ -2810,19 +2931,15 @@ Math.tan(x);
 - Push Cache: HTTP/2
 
 ```js
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
   async function buildCache() {
     const cache = await caches.open(cacheName);
-    return cache.addAll([
-      '/main.css',
-      '/main.mjs',
-      '/offline.html',
-    ]);
+    return cache.addAll(['/main.css', '/main.mjs', '/offline.html']);
   }
   event.waitUntil(buildCache());
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   async function cachedFetch(event) {
     const cache = await caches.open(cacheName);
     let response = await cache.match(event.request);
