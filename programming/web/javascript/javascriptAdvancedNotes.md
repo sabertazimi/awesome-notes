@@ -47,9 +47,13 @@
     - [Arrow Function](#arrow-function)
     - [Modules](#modules)
     - [Class 语法糖](#class-语法糖)
+    - [Map](#map)
     - [WeakMap](#weakmap)
     - [Symbol](#symbol)
+    - [Iterator](#iterator)
     - [Generator](#generator)
+      - [Basic Usage](#basic-usage)
+      - [Complex Usage](#complex-usage)
     - [Proxy and Reflect](#proxy-and-reflect)
       - [Default Zero Value with Proxy](#default-zero-value-with-proxy)
       - [Negative Array Indice with Proxy](#negative-array-indice-with-proxy)
@@ -1121,6 +1125,70 @@ console.log(bb.__proto__ === BB.prototype);
 
 禁止对复合对象字面量进行导出操作 (array literal, object literal)
 
+### Map
+
+```js
+const map = new Map([
+  // You define a map via an array of 2-element arrays. The first
+  // element of each nested array is the key, and the 2nd is the value
+  ['name', 'Jean-Luc Picard'],
+  ['age', 59],
+  ['rank', 'Captain']
+]);
+
+// To get the value associated with a given `key` in a map, you
+// need to call `map.get(key)`. Using `map.key` will **not** work.
+map.get('name'); // 'Jean-Luc Picard'
+```
+
+```js
+const map = new Map([]);
+
+const n1 = new Number(5);
+const n2 = new Number(5);
+
+map.set(n1, 'One');
+map.set(n2, 'Two');
+
+// `n1` and `n2` are objects, so `n1 !== n2`. That means the map has
+// separate keys for `n1` and `n2`.
+map.get(n1); // 'One'
+map.get(n2); // 'Two'
+map.get(5); // undefined
+
+// If you were to do this with an object, `n2` would overwrite `n1`
+const obj = {};
+obj[n1] = 'One';
+obj[n2] = 'Two';
+
+obj[n1]; // 'Two'
+obj[5]; // 'Two'
+```
+
+```js
+const objectClone = new Map(Object.entries(object));
+const arrayClone = new Map(Array.from(map.entries));
+const map = new Map([
+  ['name', 'Jean-Luc Picard'],
+  ['age', 59],
+  ['rank', 'Captain']
+]);
+
+// The `for/of` loop can loop through iterators
+for (const key of map.keys()) {
+  key; // 'name', 'age', 'rank'
+}
+
+for (const v of map.values()) {
+  v; // 'Jean-Luc Picard', 59, 'Captain'
+}
+
+for (const [key, value] of map.entries()) {
+  key; // 'name', 'age', 'rank'
+  value; // 'Jean-Luc Picard', 59, 'Captain'
+}
+```
+
 ### WeakMap
 
 WeakMap 结构与 Map 结构基本类似,
@@ -1142,8 +1210,6 @@ WeakMap 结构与 Map 结构基本类似,
 - A Symbol is a **unique** and **immutable** primitive value
   and may be used as the key of an Object property.
 - Symbols don't auto-convert to "strings" and can't convert to numbers
-- 一个数据结构只要具有 Symbol.iterator 属性 (其为 function), 就可以认为是 "可遍历的" (iterable)
-- implement iterator with `Symbol.iterator`
 
 ```js
 let arr = ['a', 'b', 'c'];
@@ -1153,6 +1219,22 @@ iter.next() // { value: 'a', done: false }
 iter.next() // { value: 'b', done: false }
 iter.next() // { value: 'c', done: false }
 iter.next() // { value: undefined, done: true }
+```
+
+### Iterator
+
+- 一个数据结构只要具有 Symbol.iterator 属性 (其为 function), 就可以认为是 "可遍历的" (iterable)
+- implement iterator with `Symbol.iterator`
+
+```js
+const Iterator = {
+  next() {
+    return IteratorResult;
+  },
+  [Symbol.iterator]() {
+    return this;
+  }
+}
 ```
 
 ```js
@@ -1192,6 +1274,8 @@ for (let method of myMethods) {
 
 ### Generator
 
+#### Basic Usage
+
 ```js
 function* gen() {
   yield 1;
@@ -1209,6 +1293,8 @@ g.return(); // { value: undefined, done: true }
 g.return(1); // { value: 1, done: true }
 ```
 
+early return
+
 ```js
 function* gen() {
   yield 1;
@@ -1221,6 +1307,72 @@ const g = gen();
 g.next(); // { value: 1, done: false }
 g.return('foo'); // { value: "foo", done: true }
 g.next(); // { value: undefined, done: true }
+```
+
+#### Complex Usage
+
+messaging system
+
+```js
+function* lazyCalculator(operator) {
+  const firstOperand = yield;
+  const secondOperand = yield;
+
+  switch(operator) {
+    case '+':
+      yield firstOperand + secondOperand;
+      return;
+    case '-':
+      yield firstOperand - secondOperand;
+      return;
+    case '*':
+      yield firstOperand * secondOperand;
+      return;
+    case '/':
+      yield firstOperand / secondOperand;
+      return;  
+  }
+}
+
+const g = gen('*');
+g.next();   // { value: undefined, done: false }
+g.next(10); // { value: undefined, done: false }
+g.next(2);  // { value: 20, done: false }
+g.next();   // { value: undefined, done: true }
+```
+
+error handling
+
+```js
+function* generator() {
+    try {
+        yield 1;
+    } catch(e) { console.log(e) }
+
+    yield 2;
+    yield 3;
+    yield 4;
+    yield 5;
+}
+
+const it = generator();
+
+it.next(); // {value: 1, done: false}
+
+// the error will be handled and printed ("Error: Handled!"),
+// then the flow will continue, so we will get the
+// next yielded value as result.
+it.throw(Error("Handled!")); // {value: 2, done: false}
+
+it.next(); // {value: 3, done: false}
+
+// now the generator instance is paused on the
+// third yield that is not inside a try-catch.
+// the error will be re-thrown out
+it.throw(Error("Not handled!")); // !!! Uncaught Error: Not handled! !!!
+
+// now the iterator is exhausted
+it.next(); // {value: undefined, done: true}
 ```
 
 Generator based control flow goodness for nodejs and the browser,
