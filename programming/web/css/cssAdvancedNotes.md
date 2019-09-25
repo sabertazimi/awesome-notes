@@ -25,6 +25,7 @@
     - [CSS Loading Tips](#css-loading-tips)
     - [Animation](#animation)
       - [Best Practice](#best-practice)
+      - [DevTools for Animation](#devtools-for-animation)
       - [Animation Internal](#animation-internal)
   - [CSS Hacks](#css-hacks)
 
@@ -283,14 +284,22 @@ window.requestAnimationFrame(step);
 
 #### Best Practice
 
-[High Performance Tips](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations)
-
+- [High Performance Tips](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations)
 - all animation: `keyframe` animation or `transitions` is best
 - js-based animation: `requestAnimationFrame` is better than `setTimeout`/`setInterval`
 - position animation:`transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`
 - scale animation: `transform: scale(n)` better than `width`/`height`
 - rotation animation: `transform: rotate(ndeg)` is better
 - opacity/visibility animation: `opacity: 0...1` is better
+
+#### DevTools for Animation
+
+- [DevTools for Animation Performance](https://calibreapp.com/blog/investigate-animation-performance-with-devtools)
+- slower CPU simulation in `performance` panel
+- enable paint instrumentation in `performance` panel
+- FPS meter in `rendering` panel
+- paint flashing in `rendering` panel
+- `layers` panel
 
 #### Animation Internal
 
