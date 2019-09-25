@@ -102,6 +102,8 @@
       - [wget](#wget)
       - [Certbot](#certbot)
     - [网络管理命令](#网络管理命令)
+      - [ufw](#ufw)
+      - [nginx](#nginx)
       - [arp -a ——显示地址解析协议(IP 地址—网卡地址)](#arp--a-显示地址解析协议ip-地址网卡地址)
       - [netstat -an——查看本机启用的端口](#netstat--an查看本机启用的端口)
       - [nslookup domain_name——查看 DNS 解析器](#nslookup-domain_name查看-dns-解析器)
@@ -867,6 +869,22 @@ ip route add default via 192.168.0.196
 watch -n 1 "ifconfig eth0"
 watch -n 1 "ifconfig eth1"
 watch -n 1 "ifconfig eth2"
+```
+
+#### ufw
+
+```bash
+ufw status
+ufw enable
+ufw allow ssh
+ufw allow http
+ufw allow https
+```
+
+#### nginx
+
+```bash
+nginx -t # check config syntax
 ```
 
 #### arp -a ——显示地址解析协议(IP 地址—网卡地址)
