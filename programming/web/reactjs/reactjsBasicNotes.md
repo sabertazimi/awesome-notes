@@ -94,6 +94,7 @@
       - [Shared CSS Styles](#shared-css-styles)
       - [Extend Styled Component](#extend-styled-component)
       - [Props for Styled Component](#props-for-styled-component)
+  - [Framework Paradigm](#framework-paradigm)
   - [Interviews](#interviews)
 
 <!-- /TOC -->
@@ -411,6 +412,7 @@ solve:
 
 problem:
 
+- type annotation (flow, TypeScript)
 - indirection issues: which HOC providing a certain prop
 - name collision: overwrite the same name prop silently
 
