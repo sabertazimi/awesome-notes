@@ -156,6 +156,7 @@
 - [Bootstrap](https://github.com/twbs/bootstrap)
 - [Bulma](https://github.com/jgthms/bulma)
 - [Materialize](https://github.com/Dogfalo/materialize)
+- [Vue Admin UI](https://github.com/epicmaxco/vuestic-admin)
 - [HTML Presentation Framework](https://github.com/hakimel/reveal.js)
 
 ## Browser
