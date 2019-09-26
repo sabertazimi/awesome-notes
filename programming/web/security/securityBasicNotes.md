@@ -35,6 +35,7 @@
       - [Package Protection](#package-protection)
     - [正则表达式 DoS 攻击 (ReDoS)](#正则表达式-dos-攻击-redos)
       - [ReDoS Protection](#redos-protection)
+  - [JWT](#jwt)
   - [Security Checklist](#security-checklist)
     - [权限系统 (注册/注册/二次验证/密码重置)](#权限系统-注册注册二次验证密码重置)
     - [用户数据和权限校验](#用户数据和权限校验)
@@ -349,6 +350,13 @@ GET /../../../passwd.key HTTP/1.1
 - 不定义性能消耗过大的正则表达式
 - 不动态构造正则表达式 new RegExp()
 - 禁止用户输入影响正则表达式构建/匹配
+
+## JWT
+
+JSON Web Tokens is small, object-friendly
+(compared to SAML, Security Assertion Markup Language Tokens)
+and security for public/private key pair
+(compared to SWT, Simple Web Tokens)
 
 ## Security Checklist
 
