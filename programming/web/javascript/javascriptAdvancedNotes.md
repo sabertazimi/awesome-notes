@@ -201,6 +201,8 @@
     - [Source Panel](#source-panel)
     - [Network Panel](#network-panel)
     - [Performance Panel](#performance-panel)
+    - [Simulation DevTools](#simulation-devtools)
+    - [Testing DevTools](#testing-devtools)
       - [Memory Panel](#memory-panel)
       - [JS Profiler Panel](#js-profiler-panel)
       - [Layer Panel](#layer-panel)
@@ -3813,6 +3815,7 @@ if (document.getElementById) {
 ### Shortcuts
 
 - c-d: go to next word
+- c-f in `Elements` panel: search DOM node
 - c-m: go to next bracket
 - c-p: go to files
 - cs-p: go to anywhere
@@ -3865,6 +3868,7 @@ $0.addEventListener('click', e => {
 
 ### Source Panel
 
+- add log points
 - multiple breakpoints: source, XHR/fetch, DOM, global/event listeners
 
 ### Network Panel
@@ -3878,6 +3882,16 @@ $0.addEventListener('click', e => {
 - performance tips
 - [Timeline Events](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/performance-reference)
 - [Performance Analysis Reference](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
+
+### Simulation DevTools
+
+- cs-p: type `3G`     (slow network)
+- cs-p: type `sensor` (geolocation)
+
+### Testing DevTools
+
+- cs-p: type `audit`
+- cs-p: type `coverage`
 
 #### Memory Panel
 
