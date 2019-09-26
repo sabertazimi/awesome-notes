@@ -405,12 +405,12 @@ class UserInput extends Component {
 
 ### HOC (Higher-Order Components)
 
-solve:
+Solve:
 
 - reuse code with using ES6 classes
 - compose multiple HOCs
 
-problem:
+Cons:
 
 - type annotation (flow, TypeScript)
 - indirection issues: which HOC providing a certain prop
@@ -476,19 +476,19 @@ class Menu extends React.Component {
 
 ### Render Props (Children as Function)
 
-solve:
+Solve:
 
 - reuse code with using ES6 classes
 - lowest level of indirection
 - no naming collision
 
-advantages:
+Pros:
 
 - separate presentation from logic
 - extendable
 - reusable (abstract same logic)
 
-problem:
+Cons:
 
 - minor memory issues when defining a closure for every render
 - callback hell (when many cross-cutting concerns are applied to a component)
