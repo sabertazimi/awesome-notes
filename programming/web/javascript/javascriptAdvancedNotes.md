@@ -156,6 +156,7 @@
     - [Performance Best Practice](#performance-best-practice)
   - [Testing and Debugging](#testing-and-debugging)
     - [Log](#log)
+      - [Log Clock](#log-clock)
     - [Headless Testing](#headless-testing)
       - [Browser Context](#browser-context)
       - [DOM Testing](#dom-testing)
@@ -2442,7 +2443,9 @@ old.parentNode.replaceChild(clone, old);
 
 #### requestAnimationFrame
 
-run scripts as early as possible
+run scripts as early as possible:
+`requestAnimationFrame()` runs after the CPU work is done (UI events and JS scripts),
+and just before the frame is rendered (layout, paint, composite etc.).
 
 ### CSS
 
@@ -3375,6 +3378,31 @@ Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 - 精炼的内容: 场景信息（谁，什么功能等），状态信息(开始，中断，结束)以及重要参数
 - 其他信息：版本号，线程号
 
+#### Log Clock
+
+- `performance.now()` is more precise (100 us)
+- `performance.now()` is strictly monotonic (unaffected by changes of machine time)
+
+```js
+let lastVisibilityChange = 0;
+window.addEventListener('visibilitychange', () => {
+  lastVisibilityChange = performance.now();
+});
+
+// don’t log any metrics started before the last visibility change
+// don't log any metrics if the page is hidden
+// discard perf data from when the machine was not running app at full speed
+if (metric.start < lastVisibilityChange || document.hidden) return;
+```
+
+```js
+requestAnimationFrame(() => {
+  requestAnimationFrame(timestamp => {
+    metric.finish(timestamp);
+  });
+});
+```
+
 ### Headless Testing
 
 - [Puppeteer](https://pptr.dev/#?product=Puppeteer&version=v1.16.0&show=api-class-page)
@@ -3885,7 +3913,7 @@ $0.addEventListener('click', e => {
 
 ### Simulation DevTools
 
-- cs-p: type `3G`     (slow network)
+- cs-p: type `3G` (slow network)
 - cs-p: type `sensor` (geolocation)
 
 ### Testing DevTools
