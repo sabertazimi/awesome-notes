@@ -16,6 +16,7 @@
         - [引用特性](#引用特性)
         - [非对象特性(基本变量)](#非对象特性基本变量)
         - [基本操作](#基本操作)
+      - [Object Wrappers for Primitive Type](#object-wrappers-for-primitive-type)
     - [引用类型值 Object type](#引用类型值-object-type)
     - [Date](#date)
     - [全局变量](#全局变量)
@@ -314,6 +315,34 @@ console.log(Math.min());                // Infinity
 - 所有 string 量 都是不可变量,当对 string 进行操作后，将先会在堆区创建副本，再通过副本进行修改，并返回副本的索引
 - 没有被任何变量引用的 string: 垃圾回收
 
+```js
+const goodString = "I've been a good string"
+console.log(typeof goodString) // string
+console.log(goodString instanceof String) // false
+console.log(Object.prototype.toString.call(goodString)) // [object String]
+
+const badString = new String("I've been a naughty string")
+console.log(typeof badString) // object
+console.log(badString instanceof String) // true
+console.log(Object.prototype.toString.call(badString)) // [object String]
+
+const isPrimitiveString = value => typeof value === "string"
+console.log(isPrimitiveString(goodString)) // true
+console.log(isPrimitiveString(badString)) // false
+
+const isObjectWrappedString = value => value instanceof String
+console.log(isObjectWrappedString(goodString)) // false
+console.log(isObjectWrappedString(badString)) // true
+
+const isString = value => typeof value === "string" || value instanceof String
+console.log(isString(goodString)) // true
+console.log(isString(badString)) // true
+
+const isStringAlternative = value => Object.prototype.toString.call(badString)==="[object String]"
+console.log(isStringAlternative(goodString)) // true
+console.log(isStringAlternative(badString)) // true
+```
+
 ##### 非对象特性(基本变量)
 
 - 字符串中的字符不可枚举(for in 循环)
@@ -322,6 +351,28 @@ console.log(Math.min());                // Infinity
 ##### 基本操作
 
 +=: 字符串连接操作
+
+#### Object Wrappers for Primitive Type
+
+Using the wrapper function without the new keyword
+is a useful way of coercing a value into a primitive type.
+
+```js
+// Not recommended (primitive object wrapper):
+typeof new String(37) // object
+
+// Safe (type coercion with wrapper function):
+typeof String(37) // string
+
+// Primitive strings:
+"37" === "37" // true
+
+// Object-wrapped string:
+"37" === new String(37) // false
+
+// Type-coerced string:
+"37" === String(37) // true
+```
 
 ### 引用类型值 Object type
 
