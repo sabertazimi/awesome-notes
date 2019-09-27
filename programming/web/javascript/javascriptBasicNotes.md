@@ -10,6 +10,8 @@
       - [null](#null)
       - [float](#float)
       - [非数 NaN](#非数-nan)
+      - [number](#number)
+        - [Infinity](#infinity)
       - [string](#string)
         - [引用特性](#引用特性)
         - [非对象特性(基本变量)](#非对象特性基本变量)
@@ -277,6 +279,20 @@ isFinite();
 function isNumber(value) {
   return typeof value === 'number' && isFinite(value);
 }
+```
+
+#### number
+
+##### Infinity
+
+Infinity represents all values greater than 1.7976931348623157e+308.
+
+```js
+const largeNumber = 1.7976931348623157e+308;
+const largerNumber = 1.7976931348623157e+309;
+
+console.log(largeNumber);  // 1.7976931348623157e+308
+console.log(largerNumber); // Infinity
 ```
 
 #### string
