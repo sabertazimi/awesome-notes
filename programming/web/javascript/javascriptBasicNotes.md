@@ -286,6 +286,7 @@ function isNumber(value) {
 ##### Infinity
 
 Infinity represents all values greater than 1.7976931348623157e+308.
+Infinity will be converted to `null` with `JSON.stringify()`.
 
 ```js
 const largeNumber = 1.7976931348623157e+308;
