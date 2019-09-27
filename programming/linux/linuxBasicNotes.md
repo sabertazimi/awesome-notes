@@ -621,7 +621,9 @@ cat /etc/passwd | awk -F [:] ‘{print $4}’
 
 ##### 增加用户
 
-- useradd [options] LOGIN
+```bash
+useradd [options] LOGIN
+```
 
 Options:
 
@@ -648,11 +650,11 @@ Options:
 
 ```bash
 useradd -s bash -m testuser
-passwd testuser
+passwd testuser # modify `/etc/passwd`, then add to `/etc/sudoers`
 ```
 
-modify `/etc/passwd`,
-then add to `/etc/sudoers`
+`adduser` is a perl script which uses `useradd` binary in back-end,
+`adduser` is more user friendly and interactive.
 
 ##### 修改用户
 
