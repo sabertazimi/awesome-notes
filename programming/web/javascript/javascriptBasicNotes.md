@@ -296,6 +296,13 @@ console.log(largerNumber);              // Infinity
 console.log(46 / 0);                    // Infinity
 console.log(Number.POSITIVE_INFINITY);  // Infinity
 console.log(Number.MAX_VALUE);          // Infinity
+console.log(-1.7976931348623157e+309);  // -Infinity
+console.log(-46 / 0);                   // -Infinity
+console.log(Number.NEGATIVE_INFINITY);  // -Infinity
+console.log(Number.MIN_VALUE);          // -Infinity
+
+console.log(Math.max());                // -Infinity
+console.log(Math.min());                // Infinity
 ```
 
 #### string
