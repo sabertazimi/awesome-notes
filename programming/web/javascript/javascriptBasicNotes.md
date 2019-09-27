@@ -290,21 +290,21 @@ Infinity represents all values greater than 1.7976931348623157e+308.
 Infinity will be converted to `null` with `JSON.stringify()`.
 
 ```js
-const largeNumber = 1.7976931348623157e+308;
-const largerNumber = 1.7976931348623157e+309;
+const largeNumber = 1.7976931348623157e308;
+const largerNumber = 1.7976931348623157e309;
 
-console.log(largeNumber);               // 1.7976931348623157e+308
-console.log(largerNumber);              // Infinity
-console.log(46 / 0);                    // Infinity
-console.log(Number.POSITIVE_INFINITY);  // Infinity
-console.log(Number.MAX_VALUE);          // Infinity
-console.log(-1.7976931348623157e+309);  // -Infinity
-console.log(-46 / 0);                   // -Infinity
-console.log(Number.NEGATIVE_INFINITY);  // -Infinity
-console.log(Number.MIN_VALUE);          // -Infinity
+console.log(largeNumber); // 1.7976931348623157e+308
+console.log(largerNumber); // Infinity
+console.log(46 / 0); // Infinity
+console.log(Number.POSITIVE_INFINITY); // Infinity
+console.log(Number.MAX_VALUE); // Infinity
+console.log(-1.7976931348623157e309); // -Infinity
+console.log(-46 / 0); // -Infinity
+console.log(Number.NEGATIVE_INFINITY); // -Infinity
+console.log(Number.MIN_VALUE); // -Infinity
 
-console.log(Math.max());                // -Infinity
-console.log(Math.min());                // Infinity
+console.log(Math.max()); // -Infinity
+console.log(Math.min()); // Infinity
 ```
 
 #### string
@@ -316,31 +316,32 @@ console.log(Math.min());                // Infinity
 - 没有被任何变量引用的 string: 垃圾回收
 
 ```js
-const goodString = "I've been a good string"
-console.log(typeof goodString) // string
-console.log(goodString instanceof String) // false
-console.log(Object.prototype.toString.call(goodString)) // [object String]
+const goodString = "I've been a good string";
+console.log(typeof goodString); // string
+console.log(goodString instanceof String); // false
+console.log(Object.prototype.toString.call(goodString)); // [object String]
 
-const badString = new String("I've been a naughty string")
-console.log(typeof badString) // object
-console.log(badString instanceof String) // true
-console.log(Object.prototype.toString.call(badString)) // [object String]
+const badString = new String("I've been a naughty string");
+console.log(typeof badString); // object
+console.log(badString instanceof String); // true
+console.log(Object.prototype.toString.call(badString)); // [object String]
 
-const isPrimitiveString = value => typeof value === "string"
-console.log(isPrimitiveString(goodString)) // true
-console.log(isPrimitiveString(badString)) // false
+const isPrimitiveString = value => typeof value === 'string';
+console.log(isPrimitiveString(goodString)); // true
+console.log(isPrimitiveString(badString)); // false
 
-const isObjectWrappedString = value => value instanceof String
-console.log(isObjectWrappedString(goodString)) // false
-console.log(isObjectWrappedString(badString)) // true
+const isObjectWrappedString = value => value instanceof String;
+console.log(isObjectWrappedString(goodString)); // false
+console.log(isObjectWrappedString(badString)); // true
 
-const isString = value => typeof value === "string" || value instanceof String
-console.log(isString(goodString)) // true
-console.log(isString(badString)) // true
+const isString = value => typeof value === 'string' || value instanceof String;
+console.log(isString(goodString)); // true
+console.log(isString(badString)); // true
 
-const isStringAlternative = value => Object.prototype.toString.call(badString)==="[object String]"
-console.log(isStringAlternative(goodString)) // true
-console.log(isStringAlternative(badString)) // true
+const isStringAlternative = value =>
+  Object.prototype.toString.call(badString) === '[object String]';
+console.log(isStringAlternative(goodString)); // true
+console.log(isStringAlternative(badString)); // true
 ```
 
 ##### 非对象特性(基本变量)
@@ -359,19 +360,19 @@ is a useful way of coercing a value into a primitive type.
 
 ```js
 // Not recommended (primitive object wrapper):
-typeof new String(37) // object
+typeof new String(37); // object
 
 // Safe (type coercion with wrapper function):
-typeof String(37) // string
+typeof String(37); // string
 
 // Primitive strings:
-"37" === "37" // true
+'37' === '37'; // true
 
 // Object-wrapped string:
-"37" === new String(37) // false
+'37' === new String(37); // false
 
 // Type-coerced string:
-"37" === String(37) // true
+'37' === String(37); // true
 ```
 
 ### 引用类型值 Object type
@@ -2351,9 +2352,9 @@ para.appendChild(txt);
 //
 // <!-- beforebegin -->
 // <p>
-  // <!-- afterbegin -->
-  // foo
-  // <!-- beforeend -->
+// <!-- afterbegin -->
+// foo
+// <!-- beforeend -->
 // </p>
 // <!-- afterend -->
 const p = document.querySelector('p');
@@ -3771,8 +3772,8 @@ export default {
       text: '',
       results: [],
       nextRequestId: 1,
-      displayedRequestId: 0,
-    }
+      displayedRequestId: 0
+    };
   },
   watch: {
     async text(value) {
@@ -3788,7 +3789,7 @@ export default {
       this.results = results;
     }
   }
-}
+};
 ```
 
 ## Geolocation API
