@@ -291,8 +291,11 @@ Infinity represents all values greater than 1.7976931348623157e+308.
 const largeNumber = 1.7976931348623157e+308;
 const largerNumber = 1.7976931348623157e+309;
 
-console.log(largeNumber);  // 1.7976931348623157e+308
-console.log(largerNumber); // Infinity
+console.log(largeNumber);               // 1.7976931348623157e+308
+console.log(largerNumber);              // Infinity
+console.log(46 / 0);                    // Infinity
+console.log(Number.POSITIVE_INFINITY);  // Infinity
+console.log(Number.MAX_VALUE);          // Infinity
 ```
 
 #### string
