@@ -88,6 +88,8 @@
     - [Code Editor](#code-editor)
   - [i18n](#i18n)
   - [CLI](#cli)
+    - [CLI Compiler/Packer](#cli-compilerpacker)
+    - [CLI Library](#cli-library)
   - [Daemon](#daemon)
   - [Network](#network)
     - [P2P](#p2p)
@@ -619,6 +621,13 @@
 - [Formatting international numbers and currencies](https://github.com/autoNumeric/autoNumeric)
 
 ## CLI
+
+### CLI Compiler/Packer
+
+- [pkg](https://github.com/zeit/pkg)
+- [ncc](https://github.com/zeit/ncc)
+
+### CLI Library
 
 - [oclif - Open CLI Framework](https://github.com/oclif/oclif)
 - [React in Node CLI App](https://github.com/vadimdemedes/ink)
