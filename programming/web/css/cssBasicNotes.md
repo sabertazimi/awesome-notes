@@ -84,7 +84,7 @@
       - [float to left/right + margin to middle](#float-to-leftright--margin-to-middle)
       - [float + negative margin both to left/right](#float--negative-margin-both-to-leftright)
   - [居中问题](#居中问题)
-    - [不定 block 元素水平居中](#不定-block-元素水平居中)
+    - [水平居中问题](#水平居中问题)
     - [垂直居中问题](#垂直居中问题)
     - [混合布局](#混合布局)
   - [list-style-type/image](#list-style-typeimage)
@@ -1640,19 +1640,10 @@ margin in the direction of the float will pull the floated element in that direc
 
 [CSS Tricks - Centering CSS Complete Guide](https://css-tricks.com/centering-css-complete-guide/)
 
-### 不定 block 元素水平居中
+### 水平居中问题
 
-- 将元素改为 inline 型
-
-```css
-.container {
-  text-align: center;
-}
-.container ul {
-  display: inline;
-}
-```
-
+- inline: text-align, flex/grid box
+- block: auto margin, flex/grid box
 - 父元素 float, 父子元素 relative
 
 ```css
@@ -1670,20 +1661,8 @@ margin in the direction of the float will pull the floated element in that direc
 
 ### 垂直居中问题
 
-```css
-.container {
-  height: 100px;
-  line-height: 100px;
-}
-```
-
-```css
-.container {
-  height: 300px;
-  display: table-cell; /* IE8以上及Chrome、Firefox */
-  vertical-align: middle; /* IE8以上及Chrome、Firefox */
-}
-```
+- inline*: padding, line-height, vertical-align, flex/grid box
+- block: top+margin, top+tranlateY, vertical-align, flex/grid box
 
 ### 混合布局
 
