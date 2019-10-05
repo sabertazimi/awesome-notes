@@ -190,6 +190,8 @@
     - [`sar -n TCP,ETCP 1`](#sar--n-tcpetcp-1)
     - [`top`](#top)
     - [`perf`](#perf)
+  - [Linux Tools](#linux-tools)
+    - [FFmpeg](#ffmpeg)
 
 <!-- /TOC -->
 
@@ -2044,4 +2046,71 @@ perf stat <command>
 perf stat -e <events> <command>
 perf record -e <events> -a <command>
 perf report
+```
+
+## Linux Tools
+
+### FFmpeg
+
+```bash
+ffmpeg -global_options -input_1_options -i input_1 -input_2_options -i input_2 \
+  -output_1_options output_1 ...
+```
+
+```bash
+# https://www.yanxurui.cc/posts/tool/2017-10-07-use-ffmpeg-to-edit-video
+
+## info
+ffmpeg -hide_banner -i input.mkv
+
+## transform
+# mkv to mp4
+ffmpeg -i input.mkv -codec copy output.mp4
+# make mkv with video and subtitle
+ffmpeg -i input.avi -i input.srt \
+  -map 0:0 -map 0:1 -map 1:0 -c:v libx264 -c:a aac -c:s srt output.mkv
+# flac to mp3
+ffmpeg -i "Michael Jackson - Billie Jean.flac" \
+  -ab 320k "Michael Jackson - Billie Jean.mp3"
+
+## cut
+# 30s duration
+ffmpeg -ss 00:02:00.0 -i input.mkv -t 30 -c copy output.mkv
+ffmpeg -i input.mkv -ss 00:02:00.0 -t 30 -c copy output.mkv
+ffmpeg -ss 00:01:30.0 -i input.mkv -ss 00:00:30.0 -t 30 output.mkv
+
+## screenshot
+# -vf -> -filter:v
+ffmpeg -ss 00:30:14.435 -i input.mkv -vframes 1 out.png
+ffmpeg -i input.mkv -vf fps=1/60 -strftime 1 out_%Y%m%d%H%M%S.jpg
+
+## compress
+ffmpeg -i input.mkv -c copy -c:v libx264 -vf scale=-2:720 output.mkv
+
+## subtitle
+ffmpeg -i input.mkv -vf subtitles=input.srt output.mp4
+ffmpeg -i input.mkv -vf ass=input.ass output.mp4
+
+## extract
+# extract audio only
+ffmpeg -i cut.mp4 -vn output.mp3
+
+## watermark
+ffmpeg -i input.mkv -i input.png \
+  -filter_complex "overlay=W-w-5:5" -c copy -c:v libx264 output.mkv
+
+## muxing
+# replace audio
+ffmpeg -i input.mkv -i input.mp3 -map 0:v -map 1:a -c copy -shortest output.mp4
+# merge audio
+ffmpeg -i input.mkv -i output.aac \
+  -filter_complex "[0:a][1:a]amerge=inputs=2[a]" -map 0:v -map "[a]" \
+  -c:v copy -c:a aac -ac 2 -shortest output.mp4
+
+## gif
+palette="/tmp/palette.png"
+filters="fps=10,scale=-1:144:flags=lanczos"
+ffmpeg -ss 30 -t 5 -i input.mp4 -vf "$filters,palettegen" -y $palette
+ffmpeg -ss 30 -t 5 -i input.mp4 -i $palette \
+  -filter_complex "$filters [x]; [x][1:v] paletteuse" -y output.gif
 ```
