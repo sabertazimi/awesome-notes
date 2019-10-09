@@ -94,6 +94,15 @@
       - [dmesg](#dmesg)
       - [ILA Trigger](#ila-trigger)
   - [AXI Protocol](#axi-protocol)
+    - [AXI Channels](#axi-channels)
+      - [Read Address Channel](#read-address-channel)
+      - [Read Data Channel](#read-data-channel)
+      - [Write Address Channel](#write-address-channel)
+      - [Write Data Channel](#write-data-channel)
+      - [Write Response Channel](#write-response-channel)
+    - [AXI Burst](#axi-burst)
+      - [Read Burst](#read-burst)
+      - [Write Burst](#write-burst)
 
 <!-- /TOC -->
 
@@ -1298,4 +1307,78 @@ q.enqueueTask(krnl_vadd);
 
 ## AXI Protocol
 
-Advanced eXtensible Interface Protocol
+Advanced eXtensible Interface Protocol:
+
+- handshake protocol: ready-valid protocol
+
+### AXI Channels
+
+#### Read Address Channel
+
+- arburst: burst type
+- araddr: start address
+- arlen: (# of transfers) - 1
+- arsize: bytes/transfer
+- arready (memory to host)
+- arvalid
+
+#### Read Data Channel
+
+- rdata: data
+- rresp: response (failure check)
+- rlast: flag for last piece of data
+- rready (host to memory)
+- rvalid
+
+#### Write Address Channel
+
+- awburst: burst type
+- awaddr: start address
+- awlen: (# of transfers) - 1
+- awsize: bytes/transfer
+- awready (memory to host)
+- awvalid
+
+#### Write Data Channel
+
+- wdata: data
+- wstrb: write strobe -> write mask (1 bit mask for 1 byte data)
+- wlast: flag for last piece of data
+- wready (memory to host)
+- wvalid
+
+#### Write Response Channel
+
+- bresp: response (failure check)
+- bready (host to memory)
+- bvalid
+
+### AXI Burst
+
+|AxBURST[1:0]|Burst Type|
+|---:|:---|
+|0b00|FIXED|
+|0b01|INCR|
+|0b10|WRAP|
+|0b11|Reserved|
+
+burst length = AxLEN[7:0] + 1 (up to 256 transfers in each burst)
+
+|AxSIZE[2:0]|Bytes in Transfer|
+|---:|---:|
+|0b000|1|
+|0b001|2|
+|0b010|4|
+|0b011|8|
+|0b100|16|
+|0b101|32|
+|0b110|64|
+|0b111|128|
+
+#### Read Burst
+
+![Read Burst Example](./figures/AXI_Read_Burst.png)
+
+#### Write Burst
+
+![Write Burst Example](./figures/AXI_Write_Burst.png)
