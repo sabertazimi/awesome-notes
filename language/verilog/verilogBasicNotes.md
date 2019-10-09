@@ -93,6 +93,7 @@
       - [xbutil](#xbutil)
       - [dmesg](#dmesg)
       - [ILA Trigger](#ila-trigger)
+  - [AXI Protocol](#axi-protocol)
 
 <!-- /TOC -->
 
@@ -1294,3 +1295,7 @@ q.enqueueMigrateMemObjects(inBufVec,0/* 0 means from host*/);
 //Launch the Kernel
 q.enqueueTask(krnl_vadd);
 ```
+
+## AXI Protocol
+
+Advanced eXtensible Interface Protocol
