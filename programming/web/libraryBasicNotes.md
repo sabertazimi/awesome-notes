@@ -296,6 +296,7 @@
 - [nipple.js](https://github.com/yoannmoinet/nipplejs)
 - [interact.js - drag/drop/resizing/multi-touch](https://github.com/taye/interact.js)
 - [Drag and Drop Grid Layout](https://github.com/jbaysolutions/vue-grid-layout)
+- [moveable](https://github.com/daybrush/moveable)
 
 ## Button
 
