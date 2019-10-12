@@ -848,6 +848,16 @@ for SSL certificates.
 
 ### 网络管理命令
 
+|用途|net-tool(被淘汰)|iproute2|
+|:---|:---|:---|
+|地址和链路配置|ifconfig|ip addr, ip link|
+|路由表|route|ip route|
+|邻居|arp|ip neigh|
+|VLAN|vconfig|ip link|
+|隧道|iptunnel|ip tunnel|
+|组播|ipmaddr|ip maddr|
+|统计|netstat|ss|
+
 ```bash
 ip link show
 ip address show
