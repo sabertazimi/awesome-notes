@@ -247,6 +247,7 @@
     - [Trusted Types](#trusted-types)
     - [CSRF](#csrf)
     - [Object Property](#object-property)
+  - [HTTP 2](#http-2)
 
 <!-- /TOC -->
 
@@ -4889,3 +4890,12 @@ def allow_request(req):
 
 - `object[constructor]`
 - `object.__proto__`
+
+## HTTP 2
+
+HTTP/2:
+
+- 二进制传输
+- Header 压缩
+- 多路复用
+- Server Push
