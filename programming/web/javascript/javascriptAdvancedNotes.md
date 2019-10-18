@@ -3899,6 +3899,9 @@ $0.addEventListener('click', e => {
 
 - add log points
 - multiple breakpoints: source, XHR/fetch, DOM, global/event listeners
+- open a source file, right click code, `Blackbox script` item
+- [Local Overrides](https://developers.google.com/web/updates/2018/01/devtools#overrides)
+  for persistent changes to css styles
 
 ### Network Panel
 
@@ -3907,6 +3910,8 @@ $0.addEventListener('click', e => {
 
 ### Performance Panel
 
+- C+S+P: performance monitor
+- C+S+P: FPS
 - script->style->layout->paint->composite timeline
 - performance tips
 - [Timeline Events](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/performance-reference)
