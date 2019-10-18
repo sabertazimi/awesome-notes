@@ -42,9 +42,11 @@
       - [自定义对象检测](#自定义对象检测)
       - [属性检测](#属性检测)
     - [强制类型转化(Type Coercion)](#强制类型转化type-coercion)
+      - [对象转换](#对象转换)
   - [运算符](#运算符)
     - [Loose Comparison](#loose-comparison)
     - [条件表达式](#条件表达式)
+    - [Add Operator](#add-operator)
   - [控制流程](#控制流程)
     - [switch/case](#switchcase)
   - [对象](#对象)
@@ -791,10 +793,167 @@ const hasAge = Boolean(age);
 const hasAge = !!age;
 ```
 
+#### 对象转换
+
+对象转换为布尔值:
+
+- 直接转换为 true（包装类型也一样），不调用 valueOf 和 toString
+
+对象转换为数字:
+
+- 如果对象具有 valueOf 方法且返回原始值(string、number、boolean、undefined、null)，
+则将该原始值转换为数字(转换失败会返回 NaN)，并返回这个数字
+- 如果对象具有 toString 方法且返回原始值(string、number、boolean、undefined、null)，
+则将该原始值转换为数字(转换失败会返回 NaN)，并返回这个数字
+- 转换失败，抛出 TypeError
+
+对象转换为字符串:
+
+- 如果对象具有 toString 方法且返回原始值(string、number、boolean、undefined、null)，则将该原始值转换为字符串，并返回该字符串
+- 如果对象具有 valueOf 方法且返回原始值(string、number、boolean、undefined、null)，则将该原始值转换为字符串，并返回该字符串
+  转换失败，抛出 TypeError
+
+```js
+// 保存原始的valueOf
+const valueOf = Object.prototype.valueOf;
+const toString = Object.prototype.toString;
+
+// 添加valueOf日志
+Object.prototype.valueOf = function () {
+    console.log('valueOf');
+    return valueOf.call(this);
+};
+// 添加toString日志
+Object.prototype.toString = function () {
+    console.log('toString');
+    return toString.call(this);
+};
+const a = {};
+const b = new Boolean(false);
+
+if (a) {
+    console.log(1);
+}
+
+if (b) {
+    console.log(2);
+}
+
+// output:
+// 1
+// 2
+// 未调用valueOf和toString，符合 [对象到布尔值] 的转换规则
+```
+
+```js
+// 保存原始的valueOf
+const valueOf = Object.prototype.valueOf;
+const toString = Object.prototype.toString;
+
+// 添加valueOf日志
+Object.prototype.valueOf = function() {
+    console.log('valueOf');
+    return valueOf.call(this);
+};
+// 添加toString日志
+Object.prototype.toString = function() {
+    console.log('toString');
+    return toString.call(this);
+};
+
+let a = {};
+console.log(++a);
+
+// output:
+// valueOf
+// toString
+// NaN
+// 1. valueOf方法返回的是对象本身，不是原始值，继续执行
+// 2. toString方法返回的是”[object Object]”，是原始值(字符串)，将字符串转换为数字NaN
+```
+
+```js
+// 保存原始的valueOf
+const valueOf = Object.prototype.valueOf;
+const toString = Object.prototype.toString;
+
+// 添加valueOf日志
+Object.prototype.valueOf = function () {
+    console.log('valueOf');
+    return "1"; // 强制返回原始值
+};
+// 添加toString日志
+Object.prototype.toString = function () {
+    console.log('toString');
+    return toString.call(this);
+};
+
+let a = {};
+console.log(++a);
+
+// output:
+// valueOf
+// 2
+// valueOf 返回原始值(字符串)，直接将该字符串转换为数字，得到 1
+```
+
+```js
+// 保存原始的valueOf
+const valueOf = Object.prototype.valueOf;
+const toString = Object.prototype.toString;
+
+// 添加valueOf日志
+Object.prototype.valueOf = function () {
+    console.log('valueOf');
+    return valueOf.call(this);
+};
+// 添加toString日志
+Object.prototype.toString = function () {
+    console.log('toString');
+    return toString.call(this);
+};
+
+const a = {};
+alert(a);
+
+// output:
+// toString
+// 弹出 "[object Object]"
+// 调用toString方法，返回了字符串”[object Object]”，对象最终转换为该字符串
+```
+
+```js
+// 保存原始的valueOf
+const valueOf = Object.prototype.valueOf;
+const toString = Object.prototype.toString;
+
+// 添加valueOf日志
+Object.prototype.valueOf = function () {
+    console.log('valueOf');
+    return valueOf.call(this);
+};
+// 添加toString日志
+Object.prototype.toString = function () {
+    console.log('toString');
+    return this;
+};
+
+const a = {};
+alert(a);
+
+// output:
+// toString
+// valueOf
+// Uncaught TypeError: Cannot convert object to primitive value
+// 调用toString方法，返回的不是 primitive value，继续执行
+// 调用valueOf方法，返回的不是 primitive value，继续执行
+// 抛出 TypeError
+```
+
 ## 运算符
 
-- ==与===
-- !=与!==
+- == 与 ===
+- != 与 !==
 
 ### Loose Comparison
 
@@ -812,6 +971,19 @@ const hasAge = !!age;
 ```js
 var i = a ? 1 : b ? 2 : c ? 3 : 4;
 ```
+
+### Add Operator
+
+`a + b`:
+
+- 如果有一个是对象，则遵循对象对原始值的转换过程
+  (Date对象直接调用toString完成转换，
+  其他对象通过valueOf转化，
+  如果转换不成功则调用toString)
+- 如果两个都是对象，两个对象都遵循步骤1转换到字符串
+- 两个数字，进行算数运算
+- 两个字符串，直接拼接
+- 一个字符串一个数字，直接拼接为字符串
 
 ## 控制流程
 
