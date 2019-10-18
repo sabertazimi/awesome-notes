@@ -141,6 +141,7 @@
 
 ## Solution and Framework
 
+- [umi](https://github.com/umijs/umi)
 - [Gatsby.js](https://github.com/gatsbyjs/gatsby)
 - [Next.js](https://github.com/zeit/next.js)
 - [React Storybook](https://github.com/storybooks/storybook)
