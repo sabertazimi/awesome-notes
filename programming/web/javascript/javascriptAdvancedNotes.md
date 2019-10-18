@@ -247,7 +247,9 @@
     - [Trusted Types](#trusted-types)
     - [CSRF](#csrf)
     - [Object Property](#object-property)
-  - [HTTP 2](#http-2)
+  - [HTTP Protocol](#http-protocol)
+    - [HTTP 2](#http-2)
+    - [HTTP 3](#http-3)
 
 <!-- /TOC -->
 
@@ -4891,12 +4893,22 @@ def allow_request(req):
 - `object[constructor]`
 - `object.__proto__`
 
-## HTTP 2
+## HTTP Protocol
 
-HTTP/2:
+### HTTP 2
+
+HTTP/2 = `HTTP` + `HPack / Strem` + `TLS 1.2+` + `TCP`
 
 - 二进制传输 (乱序二进制帧 Stream)
 - Header 压缩 (HPack)
 - 多路复用
 - Server Push
 - 事实加密 (Chrome/Firefox 只支持 HTTP/2 over TLS 1.2+)
+
+### HTTP 3
+
+HTTP/3 = `HTTP` + `QPack / Strem` + `QUIC / TLS 1.3+` + `UDP`
+
+- 解决多次握手高延迟问题
+- 解决队头 (数据重传) 阻塞 (后续数据) 问题
+- QUIC 协议保证传输可靠、实现快速握手、集成 TLS 加密、实现多路复用
