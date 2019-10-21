@@ -47,10 +47,10 @@ Files can be automatically converted from one syntax to the other
 using the `sass-convert` command line tool:
 
     # Convert Sass to SCSS
-    $ sass-convert style.sass style.scss
+    sass-convert style.sass style.scss
 
     # Convert SCSS to Sass
-    $ sass-convert style.scss style.sass
+    sass-convert style.scss style.sass
 
 Note that this command does _not_ generate CSS files. For that, use
 the `sass` command described elsewhere.

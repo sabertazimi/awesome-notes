@@ -104,12 +104,12 @@ Ctrl+Alt+F3
 - makepkg
 
 ```bash
-$ curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/package_name.tar.gz
-$ cd package_name
-$ less PKGBUILD
-$ less package_name.install
+curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/package_name.tar.gz
+cd package_name
+less PKGBUILD
+less package_name.install
 
-$ makepkg -si
+makepkg -si
 # -s sync deps
 # -i install
 # -r rm deps
@@ -127,7 +127,7 @@ $ makepkg -si
 
 ```bash
 # packages' list
-$ wget https://aur.archlinux.org/packages.gz
+wget https://aur.archlinux.org/packages.gz
 ```
 
 ## Ubuntu Set Up

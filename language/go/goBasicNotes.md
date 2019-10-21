@@ -67,11 +67,11 @@ go fmt /path/to/test
 
 ```bash
 # generate library
-$ go build path/to/libpack
-$ go install path/to/libpack
+go build path/to/libpack
+go install path/to/libpack
 
 # generate binary
-$ go install path/to/mainpack
+go install path/to/mainpack
 ```
 
 #### Test

@@ -764,7 +764,7 @@ git merge <giver-branch>/<giver-commit>
 # -w for write into codebase,
 # --stdin for reading from stdin not file
 echo 'test content' | git hash-object -w --stdin
-$ git cat-file -p <object-hash-number>
+git cat-file -p <object-hash-number>
 ```
 
 ```bash
