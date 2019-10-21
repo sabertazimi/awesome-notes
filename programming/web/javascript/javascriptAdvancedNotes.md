@@ -3150,10 +3150,11 @@ Load 也不一定代表用户看到主要内容.
 ### Data Format and Size
 
 - [optimize images for web](https://www.keycdn.com/blog/optimize-images-for-web)
+- [Images Optimization Techniques](https://evilmartians.com/chronicles/images-done-right-web-graphics-good-to-the-last-byte-optimization-techniques)
 
 #### Images Format
 
-mp4 smaller than gif
+mp4 smaller than gif (`ffmpeg`)
 
 ```html
 <!-- ffmpeg -i dog.gif dog.mp4 -->
