@@ -21,6 +21,7 @@
       - [Cache ocality](#cache-ocality)
       - [Cache Layout](#cache-layout)
     - [Memory Latency and Bandwidth](#memory-latency-and-bandwidth)
+  - [Distributed System](#distributed-system)
   - [Reference](#reference)
 
 <!-- /TOC -->
@@ -327,6 +328,20 @@ a new memory access to be started before the current one has completed,
 while an asynchronous memory system had
 to wait for the transfer of half a cache line
 from the previous access before starting a new request.
+
+## Distributed System
+
+- 小型机是专门设计的硬件和专门设计的软件，只面向这种规模（例如几百颗 CPU）的计算
+- 小型机是完全闭源的，不需要考虑扩展性，特定的几种硬件在稳定性上前进了一大步
+- x86 的 IO 性能被架构锁死了，各种总线、PCI、PCIe、USB、SATA、以太网，为了个人计算机的便利性，牺牲了很多的性能和可靠性
+- 小型机使用总线通信，可以实现极高的信息传递效率，极其有效的监控以及极高的故障隔离速度
+
+x86 服务器基于`网络的分布式`具有天然的缺陷:
+
+- 操作系统决定了网络性能不足
+- 网络需要使用事件驱动处理，比总线电路的延迟高几个数量级
+- PC 机的硬件不够可靠，故障率高
+- 很难有效监控，隔离故障速度慢
 
 ## Reference
 
