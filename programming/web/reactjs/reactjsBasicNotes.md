@@ -330,6 +330,14 @@ this.setState((prevState, props) => ({
 
 ### Component Lifecycle
 
+- reconciliation stage: constructor, getDerivedStateFromProps,
+  shouldComponentUpdate, render, getSnapshotBeforeUpdate
+- commit stage: componentDidMount, componentDidUpdate, componentWillUnmount
+
+因为协调阶段可能被中断、恢复，甚至重做,
+React 协调阶段的生命周期钩子可能会被调用多次,
+协调阶段的生命周期钩子不要包含副作用
+
 #### Creation/Mounting
 
 constructor(props, context) -> getDerivedStateFromProps() -> render() -> componentDidMount()
@@ -1375,6 +1383,10 @@ useEffect(() => {
 ```
 
 #### Context Hook
+
+一般都不会裸露地使用 Context.Provider, 而是封装为独立的 Provider 组件,
+将子组件作为 props.children 传入, 这样当 Context 变化时 Provider 不会重新渲染它的子组件,
+由依赖了 context 的子组件自己进行重渲染, 未依赖的子组件不会重新渲染.
 
 ```js
 import React from 'react';
