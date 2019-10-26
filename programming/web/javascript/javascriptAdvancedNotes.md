@@ -82,6 +82,7 @@
       - [Function Exection Context](#function-exection-context)
     - [Event Loop](#event-loop)
   - [Browser Internal](#browser-internal)
+    - [Browser Process](#browser-process)
     - [Render Engine](#render-engine)
       - [HTML Parser](#html-parser)
       - [CSS Parser](#css-parser)
@@ -127,6 +128,7 @@
       - [Math 对象](#math-对象)
   - [Browser Performance](#browser-performance)
     - [Browser Caches](#browser-caches)
+      - [HTTP Cache](#http-cache)
       - [Code Caching](#code-caching)
     - [Browser Pefermance Monitoring](#browser-pefermance-monitoring)
       - [合成监控](#合成监控)
@@ -2098,6 +2100,17 @@ test();
 - Safari: Webkit + JavaScriptCore (Nitro)
 - Edge: Trident/EdgeHTML + Chakra
 
+### Browser Process
+
+- 浏览器进程: 主要负责界面显示、用户交互、子进程管理，同时提供存储等功能.
+- GPU 进程: 实现 3D CSS, 绘制 UI 界面.
+- 网络进程：主要负责页面的网络资源加载.
+- 渲染进程：核心任务是将 HTML、CSS 和 JavaScript 转换为用户可以与之交互的网页,
+  排版引擎 Blink 和 JavaScript 引擎 V8 都是运行在该进程中.
+  默认情况下, Chrome 会为每个 Tab 标签创建一个渲染进程.
+  出于安全考虑, 渲染进程都是运行在沙箱模式下.
+- 插件进程：主要是负责插件的运行, 因插件易崩溃，所以需要通过隔离以保证插件进程崩溃不会对浏览器和页面造成影响.
+
 ### Render Engine
 
 Parser/Script -> DOM Tree -> Styled Tree -> Layout -> Paint -> Composite
@@ -3045,6 +3058,54 @@ self.addEventListener('fetch', event => {
   event.respondWith(cachedFetch(event));
 });
 ```
+
+#### HTTP Cache
+
+浏览器缓存，也称 HTTP 缓存,
+分为强缓存和协商缓存.
+优先级较高的是强缓存,
+在命中强缓存失败的情况下,
+才会走协商缓存.
+
+强缓存是利用 HTTP 头中的 Expires 和 Cache-Control 两个字段来控制的.
+强缓存中, 当请求再次发出时, 浏览器会根据其中的 expires 和 cache-control 判断目标资源是否 `命中` 强缓存,
+若命中则直接从缓存中获取资源, 不会再与服务端发生通信.
+Cache-Control 相对于 expires 更加准确，它的优先级也更高.
+当 Cache-Control 与 expires 同时出现时，以 Cache-Control 为准.
+
+```bash
+expires: Wed, 12 Sep 2019 06:12:18 GMT
+cache-control: max-age=31536000
+```
+
+协商缓存机制下,
+浏览器需要向服务器去询问缓存的相关信息,
+进而判断是重新发起请求、下载完整的响应,
+还是从本地获取缓存的资源.
+如果服务端提示缓存资源未改动 (Not Modified),
+资源会被重定向到浏览器缓存,
+这种情况下网络请求对应的状态码是 `304`.
+
+Last-Modified 是一个时间戳,
+如果启用了协商缓存,
+它会在首次请求时随着 Response Headers 返回:
+
+```bash
+Last-Modified: Fri, 27 Oct 2017 06:35:57 GMT
+```
+
+随后每次请求时, 会带上一个叫 If-Modified-Since 的时间戳字段,
+它的值正是上一次 response 返回给它的 last-modified 值:
+
+```bash
+If-Modified-Since: Fri, 27 Oct 2017 06:35:57 GMT
+```
+
+服务器可能无法正确感知文件的变化 (未实际改动或改动过快),
+为了解决这样的问题, Etag 作为 Last-Modified 的补充出现了.
+Etag 是由服务器为每个资源生成的唯一的标识字符串,
+这个标识字符串可以是基于文件内容编码的,
+因此 Etag 能够精准地感知文件的变化.
 
 #### Code Caching
 
