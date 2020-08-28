@@ -529,7 +529,7 @@ and #(1, 2) u0and [NUM_BITS - 1: 0] (gated_d, din, bypass);
 - 可以有一个/多个输入
 - 只能有一个输出
 - 第一个端口必须是输出端口
-- - 表示 值"无变化"
+- `-` 表示 值"无变化"
 
 ```verilog
 primitive XOR2 (DOUT, X1, X2);

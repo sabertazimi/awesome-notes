@@ -1741,8 +1741,8 @@ key variable - `$spacer`:
 - b - for classes that set margin-bottom or padding-bottom
 - l - for classes that set margin-left or padding-left
 - r - for classes that set margin-right or padding-right
-- x - for classes that set both _-left and _-right
-- y - for classes that set both _-top and _-bottom
+- x - for classes that set both `xxx`-left and `xxx`-right
+- y - for classes that set both `xxx`-top and `xxx`-bottom
 - blank - for classes that set a margin or padding on all 4 sides of the element
 - 0 - for classes that eliminate the margin or padding by setting it to 0
 - 1 - (by default) for classes that set the margin or padding to \$spacer \* .25

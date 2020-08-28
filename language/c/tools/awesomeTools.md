@@ -29,5 +29,5 @@
 - -v Display the programs invoked by the compiler
 - `-o <file>` Place the output into `<file>`
 - -shared Create a shared library
-- - Wall
-- - v --help
+- `-Wall`
+- `-v --help`
