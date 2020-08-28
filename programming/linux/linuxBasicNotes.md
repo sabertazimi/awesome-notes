@@ -161,6 +161,7 @@
     - [Bash IO](#bash-io)
     - [信号](#信号)
     - [Bash Debugging](#bash-debugging)
+    - [Shell Script Best Practices](#shell-script-best-practices)
     - [Interactive Shell Script Tips](#interactive-shell-script-tips)
       - [Check Root Validation](#check-root-validation)
       - [Bash help option](#bash-help-option)
@@ -848,15 +849,15 @@ for SSL certificates.
 
 ### 网络管理命令
 
-|用途|net-tool(被淘汰)|iproute2|
-|:---|:---|:---|
-|地址和链路配置|ifconfig|ip addr, ip link|
-|路由表|route|ip route|
-|邻居|arp|ip neigh|
-|VLAN|vconfig|ip link|
-|隧道|iptunnel|ip tunnel|
-|组播|ipmaddr|ip maddr|
-|统计|netstat|ss|
+| 用途           | net-tool(被淘汰) | iproute2         |
+| :------------- | :--------------- | :--------------- |
+| 地址和链路配置 | ifconfig         | ip addr, ip link |
+| 路由表         | route            | ip route         |
+| 邻居           | arp              | ip neigh         |
+| VLAN           | vconfig          | ip link          |
+| 隧道           | iptunnel         | ip tunnel        |
+| 组播           | ipmaddr          | ip maddr         |
+| 统计           | netstat          | ss               |
 
 ```bash
 ip link show
@@ -1551,7 +1552,7 @@ for 变量 in 值1 值2 值3 …… 值n
         程序
     done
 
-`seq 1 50`  # 1 2 ... 50
+$(seq 1 50)  # 1 2 ... 50
 {1..50}     # 1 2 ... 50
 {0..10..2}  # 0 2 4 6 8 10
 
@@ -1798,6 +1799,30 @@ else
     echo "Number is not equal to 1."
 fi
 set +x # Turn off tracing
+```
+
+### Shell Script Best Practices
+
+- [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
+- 指定默认解释器`cat /etc/shells`
+- 设置`bash strict mode`
+- 条件判断使用`[[ ]]`
+- 使用变量时用双引号把变量包起来 `cp -r "$src_dir" "$dest_dir"`
+- 使用`$()`获取表达式的值
+- 使用`${arr[@]}`进行列表循环
+
+```bash
+#!/usr/bin/env bash
+
+# 设置命令回显
+set -x
+
+# 遇到未声明的变量则报错停止
+set -u
+# 遇到执行错误则停止
+set -e
+# 管道命令其中一步失败则中止
+set -o pipefail
 ```
 
 ### Interactive Shell Script Tips
