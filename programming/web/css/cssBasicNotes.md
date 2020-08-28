@@ -186,6 +186,7 @@
   - [CSS Variables](#css-variables)
     - [Variables DOM API](#variables-dom-api)
     - [Scope Variebls](#scope-variebls)
+    - [Invalid and Empty Value in CSS Variables](#invalid-and-empty-value-in-css-variables)
   - [SVG](#svg)
     - [Inline SVG](#inline-svg)
     - [SVG Basic Shape Tags](#svg-basic-shape-tags)
@@ -1661,7 +1662,7 @@ margin in the direction of the float will pull the floated element in that direc
 
 ### 垂直居中问题
 
-- inline*: padding, line-height, vertical-align, flex/grid box
+- inline\*: padding, line-height, vertical-align, flex/grid box
 - block: top+margin, top+tranlateY, vertical-align, flex/grid box
 
 ### 混合布局
@@ -3647,7 +3648,7 @@ const polygon = (n = 3) => {
     let y = 50 * Math.sin(theta) + 50 + '%';
     points.push(x + ' ' + y);
   }
-  
+
   return `polygon(${points.join(',')})`;
 };
 ```
@@ -3727,6 +3728,82 @@ const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
 .alert-error {
   --primary: #fa5252;
   --secondary: #ffe3e3;
+}
+```
+
+### Invalid and Empty Value in CSS Variables
+
+`--invalid-value: initial;` is invalid value
+leding to `var(--invalid-value)` called failed,
+`--empty-value: ;` is valid empty value
+leding to `var(--empty-value)` called succeeded.
+
+```css
+/**
+ * css-media-vars
+ * BSD 2-Clause License
+ * Copyright (c) James0x57, PropJockey, 2020
+ */
+
+html {
+  --media-print: initial;
+  --media-screen: initial;
+  --media-speech: initial;
+  --media-xs: initial;
+  --media-sm: initial;
+  --media-md: initial;
+  --media-lg: initial;
+  --media-xl: initial;
+  /* ... */
+  --media-pointer-fine: initial;
+  --media-pointer-none: initial;
+}
+
+/* 把当前变量变为空值 */
+@media print {
+  html {
+    --media-print: ;
+  }
+}
+
+@media screen {
+  html {
+    --media-screen: ;
+  }
+}
+
+@media speech {
+  html {
+    --media-speech: ;
+  }
+}
+
+/* 把当前变量变为空值 */
+@media (max-width: 37.499em) {
+  html {
+    --media-xs: ;
+    --media-lte-sm: ;
+    --media-lte-md: ;
+    --media-lte-lg: ;
+  }
+}
+
+/** 移动优先的样式规则 */
+.breakpoints-demo > * {
+  /** 小于 37.5em, 宽度 100%  */
+  --xs-width: var(--media-xs) 100%;
+
+  /** 小于 56.249em, 宽度 49%  */
+  --sm-width: var(--media-sm) 49%;
+
+  --md-width: var(--media-md) 32%;
+  --lg-width: var(--media-gte-lg) 24%;
+
+  width: var(--xs-width, var(--sm-width, var(--md-width, var(--lg-width))));
+
+  --sm-and-down-bg: var(--media-lte-sm) red;
+  --md-and-up-bg: var(--media-gte-md) green;
+  background: var(--sm-and-down-bg, var(--md-and-up-bg));
 }
 ```
 
