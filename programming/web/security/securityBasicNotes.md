@@ -173,11 +173,15 @@ don't trust user:
 利用已认证用户(长期 Cookies), 访问攻击者网站, 并被强制执行脚本,
 在用户不知情的情况下提交 Get/Post Request with Cookies 给被攻击网站.
 
+XSS 利用的是网站对用户(输入)的信任,
+CSRF 利用的是网站对用户网页浏览器的信任.
+
 #### CSRF Protection
 
 - GET request 没有副作用
 - 确保 request 正常渠道发起(hidden token check in form)
-- addition authentication: input password again
+- 开启同源策略(Same Origin Policy)
+- Addition Authentication: input password again
 
 ```js
 express/csurf library
