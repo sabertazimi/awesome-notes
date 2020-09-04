@@ -4,6 +4,7 @@
 
 - [Design Patterns Notes](#design-patterns-notes)
   - [Baisc Patterns](#baisc-patterns)
+    - [SOLID 原则](#solid-原则)
     - [Literal Pattern](#literal-pattern)
     - [Closure and IIFE](#closure-and-iife)
     - [Check Pattern](#check-pattern)
@@ -17,7 +18,7 @@
   - [Modular Patterns](#modular-patterns)
     - [Object Literal](#object-literal)
     - [立即函数模式(IIFE)](#立即函数模式iife)
-    - [[UMD(Universal Module Definition) Pattern](https://github.com/https://github.com/umdjs/umd/tree/master/templates)](#umduniversal-module-definition-patternhttpsgithubcomhttpsgithubcomumdjsumdtreemastertemplates)
+    - [UMD(Universal Module Definition) Pattern](#umduniversal-module-definition-pattern)
   - [Common Design Patterns](#common-design-patterns)
     - [Classification](#classification)
       - [Creational Patterns](#creational-patterns)
@@ -60,6 +61,22 @@
 [Awesome Book](http://www.dofactory.com/javascript/design-patterns)
 
 ## Baisc Patterns
+
+### SOLID 原则
+
+- Single Responsibility Principle 单一功能原则
+- Open/Closed Principle 开闭原则
+- Liskov Substitution Principle 里氏替换原则
+- Interface Segregation Principle 接口隔离原则
+- Dependency Inversion Principle 依赖反转原则
+
+> SOLID Principles
+
+- 单一职责是所有设计原则的基础
+- 开闭原则是设计的终极目标
+- 里氏替换原则强调的是子类替换父类后程序运行时的正确性, 它用来帮助实现开闭原则
+- 接口隔离原则用来帮助实现里氏替换原则, 同时它也体现了单一职责
+- 依赖倒置原则是过程式设计与面向对象设计的分水岭, 同时它也被用来指导接口隔离原则
 
 ### Literal Pattern
 
@@ -239,7 +256,7 @@ myApp.utils = {};
 
 - jQuery Plugin Pattern: 通过给立即函数传参，注入全局变量/其他依赖
 
-### [UMD(Universal Module Definition) Pattern](https://github.com/https://github.com/umdjs/umd/tree/master/templates)
+### UMD(Universal Module Definition) Pattern
 
 - 先判断是否支持 Node.js 的模块(exports)，存在则使用 Node.js 模块模式
 - 再判断是否支持 AMD(define)，存在则使用 AMD 方式加载模块
