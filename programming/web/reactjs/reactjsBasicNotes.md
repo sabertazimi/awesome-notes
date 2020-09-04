@@ -23,6 +23,7 @@
       - [Updating](#updating)
       - [Unmounting](#unmounting)
     - [Refs](#refs)
+      - [String Refs](#string-refs)
       - [Forward Refs](#forward-refs)
       - [Callback Refs](#callback-refs)
     - [HOC (Higher-Order Components)](#hoc-higher-order-components)
@@ -371,6 +372,75 @@ Refs 用于返回对元素的引用.
 - Triggering imperative animations.
 - Integrating with third-party DOM libraries.k
 
+`Ref` 通过将 Fiber 树中的 `instance` 赋给 `ref.current` 实现
+
+```js
+function commitAttachRef(finishedWork: Fiber) {
+  // finishedWork 为含有 Ref effectTag 的 fiber
+  const ref = finishedWork.ref;
+  
+  // 含有 ref prop, 这里是作为数据结构
+  if (ref !== null) {
+    // 获取 ref 属性对应的 Component 实例
+    const instance = finishedWork.stateNode;
+    let instanceToUse;
+    switch (finishedWork.tag) {
+      case HostComponent:
+        // 对于 HostComponent, 实例为对应 DOM 节点
+        instanceToUse = getPublicInstance(instance);
+        break;
+      default:
+        // 其他类型实例为 fiber.stateNode
+        instanceToUse = instance;
+    }
+
+    // 赋值 ref
+    if (typeof ref === 'function') {
+      ref(instanceToUse);
+    } else {
+      ref.current = instanceToUse;
+    }
+  }
+}
+```
+
+#### String Refs
+
+- 尽可能不适用 `String Refs`
+- React 无法获取 `this` 引用, 需要持续追踪当前`render`出的组件, 性能变慢
+
+```js
+class Foo extends Component {
+  render() {
+    return (
+      <input
+        onClick={() => this.action()}
+        ref='input'
+      />
+    );
+  }
+  action() {
+    console.log(this.refs.input.value);
+  }
+}
+```
+
+```js
+class App extends React.Component {
+  renderRow = (index) => {
+    // ref 会绑定到 DataTable 组件实例, 而不是 App 组件实例上
+    return <input ref={'input-' + index} />;
+
+    // 如果使用 function 类型 ref, 则不会有这个问题
+    // return <input ref={input => this['input-' + index] = input} />;
+  }
+
+  render() {
+    return <DataTable data={this.props.data} renderRow={this.renderRow} />
+  }
+}
+```
+
 #### Forward Refs
 
 你不能在函数式组件上使用`ref`属性,
@@ -565,6 +635,22 @@ class Menu extends React.Component {
   more details on
   [Overreacted](https://overreacted.io/how-are-function-components-different-from-classes/)
 
+```js
+// hook 实例
+const hook = {
+  // hook保存的数据
+  memoizedState: null,
+  // 指向下一个hook
+  next: hookForB
+  // 本次更新以 baseState 为基础计算新的state
+  baseState: null,
+  // 本次更新开始时已有的 update 队列
+  baseQueue: null,
+  // 本次更新需要增加的 update 队列
+  queue: null,
+};
+```
+
 ### Default Hooks
 
 #### useMemo
@@ -627,12 +713,30 @@ function Child({ fetchData }) {
 - return value of `useState` is `ref` to `hooks[idx]`:
   direct change to return value doesn't change state value
 - return function of `useState` (`setState`) is to change value of `hooks[idx]`
+- 由于 setState 更新状态 (dispatch action) 时基于 hook.BaseState,
+  `setState(value + 1)` 与 `setState(value => value + 1)` 存在差异
 
 ```js
 setState(prevState => {
   // Object.assign would also work
   return { ...prevState, ...updatedValues };
 });
+```
+
+```js
+let newState = baseState;
+let firstUpdate = hook.baseQueue.next;
+let update = firstUpdate;
+
+// setState(value + 1) 与 setState(value => value + 1) 存在差异
+// 遍历 baseQueue 中的每一个 update
+do {
+  if (typeof update.action === 'function') {
+    newState = update.action(newState);
+  } else {
+    newState = action;
+  }
+} while (update !== firstUpdate)
 ```
 
 ```jsx
@@ -798,7 +902,8 @@ React cleans up the effect for prev props/state,
 React runs the effect for current props/state.
 
 `useEffect` nasty loop:
-The effect hook runs when the component mounts but also when the component updates.
+The effect hook runs when the component `mounts`
+but also when the component `updates`.
 Because we are setting the state after every data fetch,
 the component updates and the effect runs again.
 It fetches the data again and again.
