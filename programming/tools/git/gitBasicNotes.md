@@ -760,6 +760,21 @@ git merge <giver-branch>/<giver-commit>
 
 `.git/objects` is immutable, `.git/refs` is mutable
 
+`blob`持有文件的内容,`树对象`是一个包含`blob`对象和`子树对象`的目录列表.
+`提交对象`是工作目录的一个快照, 包含了一些像时间或提交信息这样的元数据.
+`分支`是`提交对象`的命名引用.
+`工作目录`是一个目录, 有着相应的仓库, `暂存区`(索引)为下一个`提交对象`持有对应的`树对象`,
+而仓库就是一个`提交对象`的集合.
+
+```bash
+git hash-object 创建blob对象
+git cat-file -t
+git cat-file -p
+git update-index --add --cache-info 将文件添加至暂存区
+git write-tree 创建tree对象
+git commit-tree 创建commit对象
+```
+
 ```bash
 # -w for write into codebase,
 # --stdin for reading from stdin not file
