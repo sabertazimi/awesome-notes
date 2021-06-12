@@ -195,6 +195,16 @@
     - [`perf`](#perf)
   - [Linux Tools](#linux-tools)
     - [FFmpeg](#ffmpeg)
+      - [FFmpeg Probe](#ffmpeg-probe)
+      - [FFmpeg Transform](#ffmpeg-transform)
+      - [FFmpeg Cutting](#ffmpeg-cutting)
+      - [FFmpeg Muxing](#ffmpeg-muxing)
+      - [FFmpeg Screenshot](#ffmpeg-screenshot)
+      - [FFmpeg Gif](#ffmpeg-gif)
+      - [FFmpeg Subtitle](#ffmpeg-subtitle)
+      - [FFmpeg Watermark](#ffmpeg-watermark)
+      - [FFmpeg Desktop Recording](#ffmpeg-desktop-recording)
+      - [FFmpeg Live Streaming](#ffmpeg-live-streaming)
 
 <!-- /TOC -->
 
@@ -2099,64 +2109,172 @@ perf report
 ### FFmpeg
 
 ```bash
+# https://www.yanxurui.cc/posts/tool/2017-10-07-use-ffmpeg-to-edit-video
 ffmpeg -global_options -input_1_options -i input_1 -input_2_options -i input_2 \
   -output_1_options output_1 ...
 ```
 
+#### FFmpeg Probe
+
 ```bash
-# https://www.yanxurui.cc/posts/tool/2017-10-07-use-ffmpeg-to-edit-video
-
-## info
+ffprobe input.mp4
 ffmpeg -hide_banner -i input.mkv
+```
 
-## transform
+#### FFmpeg Transform
+
+- `MP4`: `H264`Video + `ACC`Audio
+- `WebM`: `VP8`Video + `Vorbis`Audio
+- `OGG`: `Theora`Video + `Vorbis`Audio
+
+```bash
+# code decoder information
+ffmpeg -codecs
+```
+
+```bash
 # mkv to mp4
 ffmpeg -i input.mkv -codec copy output.mp4
+```
+
+```bash
+# compress
+ffmpeg -i input.mkv -c copy -c:v libx264 -vf scale=-2:720 output.mkv
+```
+
+```bash
 # make mkv with video and subtitle
 ffmpeg -i input.avi -i input.srt \
   -map 0:0 -map 0:1 -map 1:0 -c:v libx264 -c:a aac -c:s srt output.mkv
+```
+
+```bash
 # flac to mp3
 ffmpeg -i "Michael Jackson - Billie Jean.flac" \
   -ab 320k "Michael Jackson - Billie Jean.mp3"
+ffmpeg -i music_flac.flac \
+  -acodec libmp3lame      \
+  -ar 44100               \
+  -ab 320k                \
+  -ac 2 music_flac_mp3.mp3
+# - acodec: Audio Coder Decoder 音频编码解码器
+# - libmp3lame: MP3 解码器
+# - ar: audio rate 音频采样率, 默认用原音频的采样率
+# - ab: audio bit rate 音频比特率, 默认 128K
+# - ac: aduio channels 音频声道, 默认采用源音频的声道数
+```
 
-## cut
-# 30s duration
+```bash
+# mp4 to avi
+ffmpeg -i video.mp4 \
+  -s 1920x1080      \
+  -pix_fmt yuv420p  \
+  -vcodec libx264   \
+  -preset medium    \
+  -profile:v high   \
+  -level:v 4.1      \
+  -crf 23           \
+  -r 30             \
+  -acodec aac       \
+  -ar 44100         \
+  -ac 2             \
+  -b:a 128k video_avi.avi
+# - s: 缩放视频新尺寸 (size)
+# - pix_fmt：pixel format, 设置视频颜色空间
+# - vcodec: Video Coder Decoder, 视频编码解码器
+# - preset: 编码器预设
+# - profile:v: 编码器配置, 与压缩比有关. 实时通讯-baseline, 流媒体-main, 超清视频-high
+# - level:v: 对编码器设置的具体规范和限制, 权衡压缩比和画质
+# - crf: 设置码率控制模式, constant rate factor恒定速率因子模式, 范围 0~51, 数值越小, 画质越高
+# - r:设置视频帧率
+# - b:a: 音频比特率, 大多数网站限制音频比特率 128k, 129k
+```
+
+#### FFmpeg Cutting
+
+```bash
+# audio only
+ffmpeg -i cut.mp4 -vn output.mp3
+ffmpeg -i video.mp4 -vn -acodec copy video_novideo.m4a
+
+# video only
+ffmpeg -i video.mp4 -vcodec copy -an video_silent.mp4
+```
+
+```bash
+# from to cutting
+ffmpeg -i music.mp3 -ss 00:00:30 -to 00:02:00 -acodec copy music_cutout.mp3
+ffmpeg -i in.mp4 -ss 00:01:00 -to 00:01:10 -c copy out.mp4
+ffmpeg -ss 00:01:00 -i in.mp4 -to 00:01:10 -c copy -copyts out.mp4
+
+# 30s duration cutting
 ffmpeg -ss 00:02:00.0 -i input.mkv -t 30 -c copy output.mkv
 ffmpeg -i input.mkv -ss 00:02:00.0 -t 30 -c copy output.mkv
 ffmpeg -ss 00:01:30.0 -i input.mkv -ss 00:00:30.0 -t 30 output.mkv
+```
 
-## screenshot
-# -vf -> -filter:v
-ffmpeg -ss 00:30:14.435 -i input.mkv -vframes 1 out.png
-ffmpeg -i input.mkv -vf fps=1/60 -strftime 1 out_%Y%m%d%H%M%S.jpg
+#### FFmpeg Muxing
 
-## compress
-ffmpeg -i input.mkv -c copy -c:v libx264 -vf scale=-2:720 output.mkv
-
-## subtitle
-ffmpeg -i input.mkv -vf subtitles=input.srt output.mp4
-ffmpeg -i input.mkv -vf ass=input.ass output.mp4
-
-## extract
-# extract audio only
-ffmpeg -i cut.mp4 -vn output.mp3
-
-## watermark
-ffmpeg -i input.mkv -i input.png \
-  -filter_complex "overlay=W-w-5:5" -c copy -c:v libx264 output.mkv
-
-## muxing
+```bash
 # replace audio
 ffmpeg -i input.mkv -i input.mp3 -map 0:v -map 1:a -c copy -shortest output.mp4
-# merge audio
+
+# merge audio and video
+ffmpeg -i video_novideo.m4a -i video_silent.mp4 -c copy video_merge.mp4
+
+ffmpeg -i "concat:01.mp4|02.mp4|03.mp4" -c copy out.mp4
+
 ffmpeg -i input.mkv -i output.aac \
   -filter_complex "[0:a][1:a]amerge=inputs=2[a]" -map 0:v -map "[a]" \
   -c:v copy -c:a aac -ac 2 -shortest output.mp4
+```
 
-## gif
+#### FFmpeg Screenshot
+
+```bash
+# -vf -> -filter:v
+ffmpeg -ss 00:30:14.435 -i input.mkv -vframes 1 out.png
+ffmpeg -i input.mkv -vf fps=1/60 -strftime 1 out_%Y%m%d%H%M%S.jpg
+```
+
+#### FFmpeg Gif
+
+```bash
+ffmpeg -i video.mp4 -ss 7.5 -to 8.5 -s 640x320 -r 15 video_gif.gif
+
 palette="/tmp/palette.png"
 filters="fps=10,scale=-1:144:flags=lanczos"
 ffmpeg -ss 30 -t 5 -i input.mp4 -vf "$filters,palettegen" -y $palette
 ffmpeg -ss 30 -t 5 -i input.mp4 -i $palette \
   -filter_complex "$filters [x]; [x][1:v] paletteuse" -y output.gif
+```
+
+#### FFmpeg Subtitle
+
+```bash
+ffmpeg -i input.mkv -vf subtitles=input.srt output.mp4
+ffmpeg -i input.mkv -vf ass=input.ass output.mp4
+```
+
+#### FFmpeg Watermark
+
+```bash
+ffmpeg -i input.mkv -i input.png \
+  -filter_complex "overlay=W-w-5:5" -c copy -c:v libx264 output.mkv
+```
+
+#### FFmpeg Desktop Recording
+
+```bash
+# windows
+ffmpeg -f gdigrab -i desktop rec.mp4
+
+# linux
+sudo ffmpeg -f fbdev -framerate 10 -i /dev/fb0 rec.mp4
+```
+
+#### FFmpeg Live Streaming
+
+```bash
+ffmpeg -re i rec.mp4 按照网站要求编码 -f flv "你的rtmp地址/你的直播码"
 ```
