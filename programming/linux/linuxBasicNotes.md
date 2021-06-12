@@ -3,8 +3,10 @@
 <!-- TOC -->
 
 - [Linux Basic Notes](#linux-basic-notes)
-  - [重装 Linux](#重装-linux)
-  - [ssh 命令](#ssh-命令)
+  - [Linux Boot System](#linux-boot-system)
+    - [Grub](#grub)
+    - [重装 Linux](#重装-linux)
+  - [SSH 命令](#ssh-命令)
     - [Key](#key)
     - [SSHD](#sshd)
     - [编辑~/.ssh/config 文件](#编辑sshconfig-文件)
@@ -28,7 +30,7 @@
       - [apropos](#apropos)
       - [whereis/whatis 系统命令名](#whereiswhatis-系统命令名)
       - [which 系统命令名(同时查询别名及结果颜色)](#which-系统命令名同时查询别名及结果颜色)
-      - [`find [搜索路径] [可选参数] [文件名](可加"")`](#find-搜索路径-可选参数-文件名可加)
+      - [`find [搜索路径] [可选参数] 文件名`](#find-搜索路径-可选参数-文件名可加)
       - [`grep` `[可选参数] “字符串” 文件名`](#grep-可选参数-字符串-文件名)
     - [Process Command](#process-command)
       - [ps](#ps)
@@ -189,20 +191,29 @@
     - [`free -m`](#free--m)
     - [`sar -n DEV 1`](#sar--n-dev-1)
     - [`sar -n TCP,ETCP 1`](#sar--n-tcpetcp-1)
-    - [`top`](#top)
+    - [`top`](#top-1)
     - [`perf`](#perf)
   - [Linux Tools](#linux-tools)
     - [FFmpeg](#ffmpeg)
 
 <!-- /TOC -->
 
-## 重装 Linux
+## Linux Boot System
+
+### Grub
+
+- `/etc/default/grub`配置文件, 用于一些基本的修改项,
+  如默认启动项, Grub界面等待时长.
+- `/etc/grub.d/*`生成`/boot/grub/grub.cfg`的执行脚本(`update-grub`命令),
+  可以更细致地修改启动项, 如各个启动项的名称、顺序等.
+
+### 重装 Linux
 
 - 自动挂载项 /etc/fstab etc/rc.local
 - 自定义脚本-新建目录(加入环境变量)
 - 自定义别名 ~/.bashrc
 
-## ssh 命令
+## SSH 命令
 
 ### Key
 
