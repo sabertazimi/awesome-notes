@@ -923,6 +923,16 @@ ufw allow https
 nginx -t # check config syntax
 ```
 
+泛域名路径分离: `xxx.test.dev` -> `/usr/local/html/xxx`
+
+```bash
+server {
+  listen 80;
+  server_name ~^([\w-]+)\.test\.dev$;
+  root /usr/local/html/$1;
+}
+```
+
 #### arp -a ——显示地址解析协议(IP 地址—网卡地址)
 
 - 网际互联层：IP 协议(网际)、IGMP 协议(互联网组管理)、ICMP 协议(互联网控制报文)
