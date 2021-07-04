@@ -7,101 +7,100 @@
   - [Boilerplate](#boilerplate)
   - [Solution and Framework](#solution-and-framework)
   - [UI Framework](#ui-framework)
-  - [Browser](#browser)
+  - [State Data Management](#state-data-management)
+    - [Redux](#redux)
+    - [Hooks](#hooks)
+    - [Other](#other)
+  - [Browser Utils](#browser-utils)
   - [JS Utils](#js-utils)
     - [String Utils](#string-utils)
-    - [Functionnal Programming Utils](#functionnal-programming-utils)
+    - [Functional Programming Utils](#functional-programming-utils)
   - [CSS Utils](#css-utils)
     - [Color Utils](#color-utils)
     - [Gradients Utils](#gradients-utils)
     - [Box Shadows Utils](#box-shadows-utils)
     - [Background Utils](#background-utils)
-  - [State/Data Management](#statedata-management)
-    - [Redux](#redux)
-    - [Hooks](#hooks)
-    - [Other](#other)
-  - [Documentation](#documentation)
-  - [Chat](#chat)
-  - [Card](#card)
-  - [List](#list)
-  - [List Virtualization/Windowing](#list-virtualizationwindowing)
-  - [Navigation](#navigation)
-  - [Charts](#charts)
-  - [Search](#search)
-  - [Viewport](#viewport)
-    - [Scroll](#scroll)
-    - [Mouse](#mouse)
-  - [Button](#button)
-  - [Calendar](#calendar)
-  - [Time/Date](#timedate)
-  - [Slides](#slides)
-  - [Society](#society)
-  - [Fonts](#fonts)
-  - [Images](#images)
-    - [Icons](#icons)
-    - [Emoji](#emoji)
-    - [SVG](#svg)
-    - [Size](#size)
-    - [Slide](#slide)
-    - [Gallery](#gallery)
-    - [Filter](#filter)
-    - [Canvas](#canvas)
-  - [Media](#media)
-    - [Audio](#audio)
-    - [Video](#video)
-  - [Particles](#particles)
+  - [Components](#components)
+    - [Layout](#layout)
+    - [Navigation](#navigation)
+    - [Form](#form)
+      - [Input](#input)
+      - [Select](#select)
+      - [Validator](#validator)
+    - [Table](#table)
+    - [Message](#message)
+      - [Page Indicator](#page-indicator)
+      - [Prompt](#prompt)
+      - [Alert](#alert)
+      - [Focus](#focus)
+      - [Tooltip](#tooltip)
+    - [Button](#button)
+    - [Card](#card)
+    - [List](#list)
+      - [List Virtualization Windowing](#list-virtualization-windowing)
+    - [Chat Widgets](#chat-widgets)
+    - [Slides](#slides)
+    - [Charts](#charts)
+    - [iFrame](#iframe)
+  - [Viewport Utils](#viewport-utils)
+    - [Scroll Utils](#scroll-utils)
+    - [Mouse Utils](#mouse-utils)
   - [Animation](#animation)
-    - [Typing UI](#typing-ui)
-    - [Loading UI](#loading-ui)
+    - [Typing Effect Animation](#typing-effect-animation)
+    - [Loading Effect Animation](#loading-effect-animation)
       - [Progress Bar](#progress-bar)
       - [Skeleton](#skeleton)
       - [Spinner](#spinner)
-    - [Hover](#hover)
-  - [Message](#message)
-    - [Page Indicator](#page-indicator)
-    - [Prompt](#prompt)
-    - [Alert](#alert)
-    - [Focus](#focus)
-    - [Tooltip](#tooltip)
-  - [Form](#form)
-    - [Input](#input)
-    - [Select](#select)
-    - [Validator](#validator)
-  - [Layout](#layout)
-  - [Social](#social)
-  - [Mail](#mail)
-  - [Blocks](#blocks)
-  - [Table](#table)
-  - [iFrame](#iframe)
+    - [Hover Effect Animation](#hover-effect-animation)
+  - [Time](#time)
+    - [Date](#date)
+    - [Calendar](#calendar)
+  - [i18n](#i18n)
+  - [Social Sharing](#social-sharing)
+  - [Fonts](#fonts)
+  - [Images](#images)
+    - [Image Color](#image-color)
+    - [Icons](#icons)
+    - [Emoji](#emoji)
+    - [SVG](#svg)
+    - [Image Size](#image-size)
+    - [Slide Images](#slide-images)
+    - [Image Gallery](#image-gallery)
+    - [Image Filter](#image-filter)
+  - [Canvas](#canvas)
+    - [Particles](#particles)
+    - [Blocks](#blocks)
+  - [Media](#media)
+    - [Audio](#audio)
+    - [Video](#video)
   - [Clipboard](#clipboard)
-  - [File](#file)
-    - [Uploader](#uploader)
-    - [Utils](#utils)
-    - [PDF](#pdf)
-  - [Persistence/Storage/Store](#persistencestoragestore)
-  - [Code Analysis](#code-analysis)
-  - [Code Optimizer](#code-optimizer)
-  - [Terminal](#terminal)
   - [Keyboard](#keyboard)
   - [Editor](#editor)
     - [Rich Text Editor](#rich-text-editor)
     - [Code Editor](#code-editor)
-  - [i18n](#i18n)
+  - [Mail](#mail)
+  - [File](#file)
+    - [File Uploader](#file-uploader)
+    - [File Utils](#file-utils)
+    - [PDF](#pdf)
+  - [Persistent Storage](#persistent-storage)
+  - [Search](#search)
   - [CLI](#cli)
-    - [CLI Compiler/Packer](#cli-compilerpacker)
+    - [CLI Compiler](#cli-compiler)
     - [CLI Library](#cli-library)
+    - [Terminal](#terminal)
   - [Daemon](#daemon)
   - [Network](#network)
     - [P2P](#p2p)
-    - [Prefetch](#prefetch)
+    - [Pre-Fetch](#pre-fetch)
+    - [Lazy Loading](#lazy-loading)
     - [Network Benchmark](#network-benchmark)
     - [Network Debugging](#network-debugging)
-  - [DOM](#dom)
   - [Server](#server)
   - [Encryption](#encryption)
-  - [Lazy Loading](#lazy-loading)
-  - [Spider](#spider)
-  - [Debug/Testing](#debugtesting)
+  - [Code Analysis](#code-analysis)
+  - [Code Optimizer](#code-optimizer)
+  - [Debug Testing](#debug-testing)
     - [Unit Testing](#unit-testing)
     - [Feature Testing](#feature-testing)
     - [End to End Testing](#end-to-end-testing)
@@ -114,6 +113,7 @@
     - [Monitoring](#monitoring)
     - [Performance](#performance)
     - [Log](#log)
+  - [Documentation](#documentation)
 
 <!-- /TOC -->
 
@@ -121,27 +121,27 @@
 
 - [**Starter Kit Collection**](http://andrewhfarmer.com/starter-project)
 - [Best of JS](https://bestofjs.org)
-- [micro js](http://microjs.com)
-- [Npm Package Cost](https://github.com/pastelsky/bundlephobia)
-- [Npm Package Quality](https://github.com/alexfernandez/package-quality)
-- [Npm Package Trends](https://github.com/johnmpotter/npm-trends)
+- [Micro.js](http://microjs.com)
+- [NPM Package Cost](https://github.com/pastelsky/bundlephobia)
+- [NPM Package Quality](https://github.com/alexfernandez/package-quality)
+- [NPM Package Trends](https://github.com/johnmpotter/npm-trends)
 
 ## Boilerplate
 
 - [Create React App](https://github.com/facebook/create-react-app)
 - [Full Stack Boilerplate](https://github.com/TrillCyborg/fullstack)
-- [nwb - React Component Boilerplate](https://github.com/insin/nwb)
+- [NWB - React Component Boilerplate](https://github.com/insin/nwb)
 - [Neutrino.js - More Customizable Boilerplate](https://github.com/neutrinojs/neutrino)
 - [Basic - HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 - [Back-End - Nodejs Hackathon Starter](https://github.com/sahat/hackathon-starter)
-- [Desktop - Electron Live Cheatsheet](https://github.com/ConardLi/electron-react)
+- [Desktop - Electron Live Cheat Sheet](https://github.com/ConardLi/electron-react)
 - [Desktop - Electron React Boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
-- [hygen - Component Generator](https://github.com/jondot/hygen)
+- [Hygen - Component Generator](https://github.com/jondot/hygen)
 - [React Chrome Extension](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
 
 ## Solution and Framework
 
-- [umi](https://github.com/umijs/umi)
+- [UMI](https://github.com/umijs/umi)
 - [Gatsby.js](https://github.com/gatsbyjs/gatsby)
 - [Next.js](https://github.com/zeit/next.js)
 - [React Storybook](https://github.com/storybooks/storybook)
@@ -162,53 +162,12 @@
 - [Vue Admin UI](https://github.com/epicmaxco/vuestic-admin)
 - [HTML Presentation Framework](https://github.com/hakimel/reveal.js)
 
-## Browser
-
-- [Browser Platform Detection](https://github.com/lancedikson/bowser)
-- [Feature/Browser Detection](https://github.com/Modernizr/Modernizr)
-
-## JS Utils
-
-- [Cash - jQuery Lite](https://github.com/kenwheeler/cash)
-
-### String Utils
-
-- [String Manipulation](https://github.com/dleitee/strman)
-
-### Functionnal Programming Utils
-
-- [Immer](https://github.com/immerjs/immer)
-
-## CSS Utils
-
-- [CSS Normalize](https://github.com/necolas/normalize.css)
-- [Styled System](https://github.com/styled-system/styled-system)
-- [classnames](https://github.com/JedWatson/classnames)
-- [Awesome Design Tools](https://github.com/LisaDziuba/Awesome-Design-Tools)
-
-### Color Utils
-
-- [Color Palettes from Online Website](https://github.com/cloudflare-design/color)
-- [culori](https://github.com/Evercoder/culori)
-
-### Gradients Utils
-
-- [Web Gradients](https://webgradients.com)
-
-### Box Shadows Utils
-
-- [Box Shadows](https://madeas.github.io/box-shadows)
-
-### Background Utils
-
-- [Clippy - clip-path Maker](https://github.com/bennettfeely/Clippy)
-
-## State/Data Management
+## State Data Management
 
 ### Redux
 
-- [Redux Helpler Tools](https://github.com/reduxjs/redux-starter-kit)
-- [reselect](https://github.com/reactjs/reselect)
+- [Redux Helper Tools](https://github.com/reduxjs/redux-starter-kit)
+- [Reselect](https://github.com/reactjs/reselect)
 
 ### Hooks
 
@@ -220,65 +179,182 @@
 - [React Resolver](https://github.com/ericclemmons/react-resolver)
 - [Baobab](https://github.com/Yomguithereal/baobab)
 
-## Documentation
+## Browser Utils
 
-- [Docz](https://github.com/pedronauck/docz)
-- [Gatsby.js](https://github.com/gatsbyjs/gatsby)
-- [Docusaurus](https://github.com/facebook/docusaurus)
-- [Vuepress](https://github.com/vuejs/vuepress)
-- [Intro.js](https://github.com/usablica/intro.js)
-- [wiki.js](https://github.com/Requarks/wiki)
-- [documentationjs](https://github.com/documentationjs/documentation)
-- [YUI Doc Generator](https://github.com/yui/yuidoc)
-- [YUI Doc Dark Theme](https://github.com/Krxtopher/yuidoc-themes)
+- [Browser Platform Detection](https://github.com/lancedikson/bowser)
+- [Browser Feature Detection](https://github.com/Modernizr/Modernizr)
 
-## Chat
+## JS Utils
 
-- [React Chat Widget](https://github.com/Wolox/react-chat-widget)
-- [Matrix](https://github.com/matrix-org/matrix-react-sdk)
-- [jssip - chat library](https://github.com/versatica/JsSIP)
+- [Cash - jQuery Lite](https://github.com/kenwheeler/cash)
 
-## Card
+### String Utils
+
+- [String Manipulation](https://github.com/dleitee/strman)
+
+### Functional Programming Utils
+
+- [Immer](https://github.com/immerjs/immer)
+
+## CSS Utils
+
+- [CSS Normalize](https://github.com/necolas/normalize.css)
+- [Styled System](https://github.com/styled-system/styled-system)
+- [CSS Classnames](https://github.com/JedWatson/classnames)
+- [Awesome Design Tools](https://github.com/LisaDziuba/Awesome-Design-Tools)
+
+### Color Utils
+
+- [Color Palettes from Online Website](https://github.com/cloudflare-design/color)
+- [Culori](https://github.com/Evercoder/culori)
+- [Color Difference Library](https://github.com/lokesh/color-thief)
+
+### Gradients Utils
+
+- [Web Gradients](https://webgradients.com)
+
+### Box Shadows Utils
+
+- [Box Shadows](https://madeas.github.io/box-shadows)
+
+### Background Utils
+
+- [Clippy - Clip-Path Maker](https://github.com/bennettfeely/Clippy)
+
+## Components
+
+### Layout
+
+- [Full Page Layout](https://github.com/alvarotrigo/fullPage.js)
+- [One Page Layout](https://github.com/davist11/jQuery-One-Page-Nav)
+- [React Panel Group](https://github.com/DanFessler/react-panelgroup)
+- [Bricks Layout](https://github.com/callmecavs/bricks.js)
+- [Brick Layer](https://github.com/ademilter/bricklayer)
+- [Tether - Element Location](https://github.com/HubSpot/tether)
+- [SplitJS](https://github.com/nathancahill/Split.js)
+
+### Navigation
+
+- [Okay nav](https://github.com/VPenkov/okayNav)
+- [Animated Nav Burgers](https://github.com/march08/animated-burgers)
+- [Menu Icon Click Animation](https://github.com/jonsuh/hamburgers)
+- [Pagemap](https://github.com/lrsjng/pagemap)
+
+### Form
+
+- [React Formik](https://github.com/jaredpalmer/formik)
+- [Form Boilerplate](https://github.com/andybelldesign/boilerform)
+
+#### Input
+
+- [Super Placeholder](https://github.com/chinchang/superplaceholder.js)
+- [autoComplete.js](https://github.com/TarekRaafat/autoComplete.js)
+
+#### Select
+
+- [React Select](https://github.com/JedWatson/react-select)
+- [Select.css](https://github.com/filamentgroup/select-css)
+- [Awesome Chosen](https://github.com/harvesthq/chosen)
+
+#### Validator
+
+- [Promise Validator](https://github.com/poppinss/indicative)
+- [Async Validator](https://github.com/yiminghe/async-validator)
+- [Input Format](https://github.com/nosir/cleave.js)
+- [joi](https://github.com/hapijs/joi)
+- [yup](https://github.com/jquense/yup)
+- [jQuery Form Validator](https://github.com/victorjonsson/jQuery-Form-Validator)
+
+### Table
+
+- [DateTables - Plugin for Render Data](https://github.com/DataTables/DataTables)
+- [Extended Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
+
+### Message
+
+- [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
+- [TheaterJS - Typing Effect](https://github.com/Zhouzi/TheaterJS)
+- [Guide Tour](https://github.com/shipshapecode/shepherd)
+
+#### Page Indicator
+
+- [React Snakke](https://github.com/diogomoretti/react-snakke)
+
+#### Prompt
+
+- [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
+- [Popper.js](https://github.com/FezVrasta/popper.js)
+- [Humane.js](https://github.com/wavded/humane-js)
+- [Desktop Notification](https://github.com/Nickersoft/push.js)
+- [Nodejs Notification](https://github.com/mikaelbr/node-notifier)
+
+#### Alert
+
+- [Sweet Alert 2](https://github.com/sweetalert2/sweetalert2)
+- [Sweet Alert](https://github.com/t4t5/sweetalert)
+
+#### Focus
+
+- [driver.js](https://github.com/kamranahmedse/driver.js)
+
+#### Tooltip
+
+- [tippy.js](https://github.com/atomiks/tippyjs)
+- [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
+- [Hint.css - Tooltips](https://github.com/chinchang/hint.css)
+- [React Tooltip](https://github.com/tvkhoa/react-tippy)
+
+### Button
+
+- [React Awesome 3D Button](https://github.com/rcaferati/react-awesome-button)
+- [Tiny Fab](https://github.com/dericgw/react-tiny-fab)
+
+### Card
 
 - [GitHub Information Card](https://github.com/lepture/github-cards)
-- [bootcards](https://github.com/bootcards/bootcards)
+- [Bootcards](https://github.com/bootcards/bootcards)
 
-## List
+### List
 
 - [Sortable](https://github.com/RubaXa/Sortable)
 
-## List Virtualization/Windowing
+#### List Virtualization Windowing
 
 - [React Window - New Tiny React Virtualized](https://github.com/bvaughn/react-window)
 - [React Virtualized](https://github.com/bvaughn/react-virtualized)
 - [React Virtuoso](https://github.com/petyosi/react-virtuoso)
 
-## Navigation
+### Chat Widgets
 
-- [okay nav](https://github.com/VPenkov/okayNav)
-- [Animated Nav Burgers](https://github.com/march08/animated-burgers)
-- [Menu Icon Click Animation](https://github.com/jonsuh/hamburgers)
-- [pagemap](https://github.com/lrsjng/pagemap)
+- [React Chat Widget](https://github.com/Wolox/react-chat-widget)
+- [Matrix](https://github.com/matrix-org/matrix-react-sdk)
+- [JsSIP - Chat Library](https://github.com/versatica/JsSIP)
 
-## Charts
+### Slides
+
+- [MDX Deck](https://github.com/jxnblk/mdx-deck)
+- [One Page Style Vertical Slide](https://github.com/MopTym/doSlide)
+- [Glider.js](https://github.com/NickPiscitelli/Glider.js)
+- [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
+- [Awesome Prezi-Like PPT](https://github.com/impress/impress.js)
+
+### Charts
 
 - [React Chartjs](https://github.com/jhudson8/react-chartjs)
-- [Sigmajs - Graph Drawing](https://github.com/jacomyal/sigma.js)
+- [Sigma.js - Graph Drawing](https://github.com/jacomyal/sigma.js)
 - [HTML5 Chart](https://github.com/chartjs/Chart.js)
-- [plotly.js](https://github.com/plotly/plotly.js)
+- [Plotly.js](https://github.com/plotly/plotly.js)
 
-## Search
+### iFrame
 
-- [React Search Bar](https://github.com/searchkit/searchkit)
-- [SearchKit](https://github.com/searchkit/searchkit)
-- [Full Text Search Engine](https://github.com/olivernn/lunr.js)
+- [Postmate](https://github.com/dollarshaveclub/postmate)
 
-## Viewport
+## Viewport Utils
 
 - [Viewport Events](https://github.com/robb0wen/tornis)
-- [RobotJS - Node.js Desktop Automation](https://github.com/octalmage/robotjs)
+- [Robot.js - Node.js Desktop Automation](https://github.com/octalmage/robotjs)
 
-### Scroll
+### Scroll Utils
 
 - [React Scroll Box](https://github.com/smikhalevski/react-scroll-box)
 - [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
@@ -287,133 +363,17 @@
 - [Scroll Animation](https://github.com/michalsnik/aos)
 - [Smooth Scroll Animation](https://github.com/alexfoxy/laxxx)
 
-### Mouse
+### Mouse Utils
 
-- [React Draftjs](https://github.com/draft-js-plugins/draft-js-plugins)
+- [React Draft.js](https://github.com/draft-js-plugins/draft-js-plugins)
 - [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd)
 - [React DnD - Drag and Drop](https://github.com/react-dnd/react-dnd)
 - [Moveable](https://github.com/daybrush/moveable)
-- [p5.js](https://github.com/processing/p5.js)
-- [nipple.js](https://github.com/yoannmoinet/nipplejs)
-- [interact.js - drag/drop/resizing/multi-touch](https://github.com/taye/interact.js)
+- [P5.js](https://github.com/processing/p5.js)
+- [Nipple.js](https://github.com/yoannmoinet/nipplejs)
+- [Interact.js - drag/drop/resizing/multi-touch](https://github.com/taye/interact.js)
 - [Drag and Drop Grid Layout](https://github.com/jbaysolutions/vue-grid-layout)
-- [moveable](https://github.com/daybrush/moveable)
-
-## Button
-
-- [React Awesome 3D Button](https://github.com/rcaferati/react-awesome-button)
-- [Tiny Fab](https://github.com/dericgw/react-tiny-fab)
-
-## Calendar
-
-- [Big Calendar](https://github.com/intljusticemission/react-big-calendar)
-- [React Calendar](https://github.com/moodydev/react-calendar)
-- [GitHub Style Calendar](https://github.com/DKirwan/calendar-heatmap)
-
-## Time/Date
-
-- [day.js](https://github.com/iamkun/dayjs)
-- [date-dns](https://github.com/date-fns/date-fns)
-- [Moment.js](https://github.com/moment/moment)
-- [Timetable](https://github.com/flightplan-tool/timetable-fns)
-
-## Slides
-
-- [MDX Deck](https://github.com/jxnblk/mdx-deck)
-- [One Page Style Vertical-Silde](https://github.com/MopTym/doSlide)
-- [Glider.js](https://github.com/NickPiscitelli/Glider.js)
-- [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
-- [Awesome PPT/Prezi](https://github.com/impress/impress.js)
-
-## Society
-
-- [一键分享](https://github.com/overtrue/share.js)
-- [sharing](https://github.com/mxstbr/sharing)
-
-## Fonts
-
-- [Fontmin](https://github.com/ecomfe/fontmin)
-- [Chinese WebFont Zip](https://github.com/aui/font-spider)
-- [fonts.css](https://github.com/zenozeng/fonts.css)
-- [Poppins](https://fonts.google.com/specimen/Poppins)
-- [Raleway](https://fonts.google.com/specimen/Raleway)
-- [Operator](https://www.typography.com/fonts/operator/styles)
-
-## Images
-
-- [ICO](https://github.com/kevva/to-ico)
-- [Images API](https://github.com/rsms/node-imagemagick)
-- [JavaScript Load Image](https://github.com/blueimp/JavaScript-Load-Image)
-
-### Icons
-
-- [Remix Icon Set](https://github.com/Remix-Design/remixicon)
-- [Icons8](https://icons8.com)
-- [Icon Font](https://www.iconfont.cn)
-- [ikonate](https://github.com/mikolajdobrucki/ikonate)
-- [SVG Logos](https://github.com/gilbarbara/logos)
-- [SVG Icons](https://iconsvg.xyz)
-- [Pure CSS Icons](https://cssicon.space)
-- [GreenSock JS](https://github.com/greensock/GreenSock-JS)
-
-### Emoji
-
-- [OwO Keyboard Emoji](https://github.com/DIYgod/OwO)
-- [Emoji Panel](https://github.com/TimeToKnow/emoji-panel)
-- [Twitter Emoji](https://github.com/twitter/twemoji)
-
-### SVG
-
-- [SVG Optimizer](https://github.com/svg/svgo)
-- [Illustration SVG Gallery](https://gallery.manypixels.co)
-- [A fast DVI to SVG converter](https://github.com/mgieseki/dvisvgm)
-- [Cute React SVG Components](https://github.com/miukimiu/react-kawaii)
-
-### Size
-
-- [Variant Size Pictures](https://github.com/imulus/retinajs)
-
-### Slide
-
-- [placeholder.js](https://github.com/hustcc/placeholder.js)
-- [Pictures Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
-
-### Gallery
-
-- [Light Gallery](https://github.com/sachinchoolur/lightgallery.js)
-- [Photo Swipe](https://github.com/dimsemenov/PhotoSwipe)
-
-### Filter
-
-- [Pictures Color Style Filter](https://github.com/we-are-next/cssco)
-- [Rainyday Effect](https://github.com/maroslaw/rainyday.js)
-- [js-imagediff](https://github.com/HumbleSoftware/js-imagediff)
-
-### Canvas
-
-- [rough.js](https://github.com/pshihn/rough)
-- [Canvas Manipulation](https://github.com/meltingice/CamanJS)
-
-## Media
-
-### Audio
-
-- [Howler.js](https://github.com/goldfire/howler.js)
-- [Music Helper Utils](https://github.com/madewithlove/music-fns)
-
-### Video
-
-- [React Video Player](https://github.com/zhihu/griffith)
-- [video.js](https://github.com/videojs/video.js)
-- [Griffith](https://github.com/zhihu/griffith)
-- [Video Landingpage](https://github.com/rishabhp/bideo.js)
-- [plyr](https://github.com/selz/plyr)
-
-## Particles
-
-- [html5 particles](https://github.com/MapleRecall/html5-particles)
-- [React Particle Animation](https://github.com/transitive-bullshit/react-particle-animation)
-- [React Particle Button](https://github.com/transitive-bullshit/react-particle-effect-button)
+- [Moveable](https://github.com/daybrush/moveable)
 
 ## Animation
 
@@ -428,16 +388,16 @@
 - [anime.js](https://github.com/juliangarnier/anime)
 - [Velocity Animation](https://github.com/julianshapiro/velocity)
 - [Ramjet](https://github.com/rich-harris/ramjet)
-- [barba.js](https://github.com/luruke/barba.js)
-- [Mottojs - animated words](https://github.com/jrainlau/motto)
+- [Barba.js](https://github.com/luruke/barba.js)
+- [Motto - Animated Words](https://github.com/jrainlau/motto)
 - [Popmotion](https://github.com/popmotion/popmotion)
 
-### Typing UI
+### Typing Effect Animation
 
 - [Typed.js](https://github.com/mattboldt/typed.js)
 - [TypeIt](https://github.com/alexmacarthur/typeit)
 
-### Loading UI
+### Loading Effect Animation
 
 #### Progress Bar
 
@@ -452,149 +412,133 @@
 - [Epic Spinners](https://github.com/epicmaxco/epic-spinners)
 - [Loading IO](https://loading.io)
 
-### Hover
+### Hover Effect Animation
 
 - [Image Hover](http://imagehover.io)
 - [Hovering Button Effects](https://github.com/IanLunn/Hover)
 
-## Message
+## Time
 
-- [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
-- [TheaterJS - Typing Effect](https://github.com/Zhouzi/TheaterJS)
-- [Guide Tour](https://github.com/shipshapecode/shepherd)
+### Date
 
-### Page Indicator
+- [Day.js](https://github.com/iamkun/dayjs)
+- [Date Lodash](https://github.com/date-fns/date-fns)
+- [Moment.js](https://github.com/moment/moment)
+- [Time Table](https://github.com/flightplan-tool/timetable-fns)
 
-- [React Snakke](https://github.com/diogomoretti/react-snakke)
+### Calendar
 
-### Prompt
+- [Big Calendar](https://github.com/intljusticemission/react-big-calendar)
+- [React Calendar](https://github.com/moodydev/react-calendar)
+- [GitHub Style Calendar](https://github.com/DKirwan/calendar-heatmap)
 
-- [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
-- [popper.js](https://github.com/FezVrasta/popper.js)
-- [humane js](https://github.com/wavded/humane-js)
-- [Desktop Notification](https://github.com/Nickersoft/push.js)
-- [Nodejs Notification](https://github.com/mikaelbr/node-notifier)
+## i18n
 
-### Alert
+- [React Intl](https://github.com/yahoo/react-intl)
+- [Formatting international numbers and currencies](https://github.com/autoNumeric/autoNumeric)
 
-- [Sweet Alert 2](https://github.com/sweetalert2/sweetalert2)
-- [Sweet Alert](https://github.com/t4t5/sweetalert)
+## Social Sharing
 
-### Focus
-
-- [driver.js](https://github.com/kamranahmedse/driver.js)
-
-### Tooltip
-
-- [tippy.js](https://github.com/atomiks/tippyjs)
-- [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
-- [Hint.css - Tooltips](https://github.com/chinchang/hint.css)
-- [React Tooltip](https://github.com/tvkhoa/react-tippy)
-
-## Form
-
-- [React Formik](https://github.com/jaredpalmer/formik)
-- [Form Boilerplate](https://github.com/andybelldesign/boilerform)
-
-### Input
-
-- [Super Placeholder](https://github.com/chinchang/superplaceholder.js)
-- [autoComplete.js](https://github.com/TarekRaafat/autoComplete.js)
-
-### Select
-
-- [React Select](https://github.com/JedWatson/react-select)
-- [Select.css](https://github.com/filamentgroup/select-css)
-- [Awesome Chosen](https://github.com/harvesthq/chosen)
-
-### Validator
-
-- [Promise Validator](https://github.com/poppinss/indicative)
-- [Async Validator](https://github.com/yiminghe/async-validator)
-- [Input Format](https://github.com/nosir/cleave.js)
-- [joi](https://github.com/hapijs/joi)
-- [yup](https://github.com/jquense/yup)
-- [jQuery Form Validator](https://github.com/victorjonsson/jQuery-Form-Validator)
-
-## Layout
-
-- [Full Page Layout](https://github.com/alvarotrigo/fullPage.js)
-- [One Page Layout](https://github.com/davist11/jQuery-One-Page-Nav)
-- [React Panel Group](https://github.com/DanFessler/react-panelgroup)
-- [Bricks Layout](https://github.com/callmecavs/bricks.js)
-- [Brick Layer](https://github.com/ademilter/bricklayer)
-- [定位元素 - tether](https://github.com/HubSpot/tether)
-- [SplitJS](https://github.com/nathancahill/Split.js)
-
-## Social
-
+- [One-Key Share](https://github.com/overtrue/share.js)
+- [Sharing](https://github.com/mxstbr/sharing)
 - [Social Share URLs](https://github.com/bradvin/social-share-urls)
 
-## Mail
+## Fonts
 
-- [Mail Generator](https://github.com/eladnava/mailgen)
+- [Fontmin](https://github.com/ecomfe/fontmin)
+- [Chinese WebFont Zip](https://github.com/aui/font-spider)
+- [Fonts.css](https://github.com/zenozeng/fonts.css)
+- [Poppins](https://fonts.google.com/specimen/Poppins)
+- [Raleway](https://fonts.google.com/specimen/Raleway)
+- [Operator](https://www.typography.com/fonts/operator/styles)
 
-## Blocks
+## Images
+
+- [ICO](https://github.com/kevva/to-ico)
+- [Images API](https://github.com/rsms/node-imagemagick)
+- [JavaScript Load Image](https://github.com/blueimp/JavaScript-Load-Image)
+
+### Image Color
+
+- [Color Difference Library](https://github.com/lokesh/color-thief)
+
+### Icons
+
+- [Remix Icon Set](https://github.com/Remix-Design/remixicon)
+- [Icons8](https://icons8.com)
+- [Icon Font](https://www.iconfont.cn)
+- [Ikonate](https://github.com/mikolajdobrucki/ikonate)
+- [SVG Logos](https://github.com/gilbarbara/logos)
+- [SVG Icons](https://iconsvg.xyz)
+- [Pure CSS Icons](https://cssicon.space)
+- [GreenSock](https://github.com/greensock/GreenSock-JS)
+
+### Emoji
+
+- [OwO Keyboard Emoji](https://github.com/DIYgod/OwO)
+- [Emoji Panel](https://github.com/TimeToKnow/emoji-panel)
+- [Twitter Emoji](https://github.com/twitter/twemoji)
+
+### SVG
+
+- [SVG Optimizer](https://github.com/svg/svgo)
+- [Illustration SVG Gallery](https://gallery.manypixels.co)
+- [A Fast DVI to SVG converter](https://github.com/mgieseki/dvisvgm)
+- [Cute React SVG Components](https://github.com/miukimiu/react-kawaii)
+
+### Image Size
+
+- [Variant Size Pictures](https://github.com/imulus/retinajs)
+
+### Slide Images
+
+- [placeholder.js](https://github.com/hustcc/placeholder.js)
+- [Pictures Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
+
+### Image Gallery
+
+- [Light Gallery](https://github.com/sachinchoolur/lightgallery.js)
+- [Photo Swipe](https://github.com/dimsemenov/PhotoSwipe)
+
+### Image Filter
+
+- [Pictures Color Style Filter](https://github.com/we-are-next/cssco)
+- [Rainy Day Effect](https://github.com/maroslaw/rainyday.js)
+- [Image Difference Library](https://github.com/HumbleSoftware/js-imagediff)
+
+## Canvas
+
+- [Rough.js](https://github.com/pshihn/rough)
+- [Canvas Manipulation](https://github.com/meltingice/CamanJS)
+
+### Particles
+
+- [HTML5 Particles](https://github.com/MapleRecall/html5-particles)
+- [React Particle Animation](https://github.com/transitive-bullshit/react-particle-animation)
+- [React Particle Button](https://github.com/transitive-bullshit/react-particle-effect-button)
+
+### Blocks
 
 - [Obelisk.js](https://github.com/nosir/obelisk.js)
 
-## Table
+## Media
 
-- [jQuery Plugin for Render Data](https://github.com/DataTables/DataTables)
-- [Extended Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
+### Audio
 
-## iFrame
+- [Howler.js](https://github.com/goldfire/howler.js)
+- [Music Helper Utils](https://github.com/madewithlove/music-fns)
 
-- [Postmate](https://github.com/dollarshaveclub/postmate)
+### Video
+
+- [React Video Player](https://github.com/zhihu/griffith)
+- [Video.js](https://github.com/videojs/video.js)
+- [Griffith](https://github.com/zhihu/griffith)
+- [Video Landing Page](https://github.com/rishabhp/bideo.js)
+- [Plyr](https://github.com/selz/plyr)
 
 ## Clipboard
 
 - [Clipboard](https://github.com/zenorocha/clipboard.js)
-
-## File
-
-- [zTree v3](https://github.com/zTree/zTree_v3)
-- [FileAPI](https://github.com/mailru/FileAPI)
-
-### Uploader
-
-- [filepond](https://github.com/pqina/filepond)
-- [Uppy File Uploader](https://github.com/transloadit/uppy/tree/master/packages/%40uppy/react)
-
-### Utils
-
-- [Human Readable File Size](https://github.com/avoidwork/filesize.js)
-- [globby](https://github.com/sindresorhus/globby)
-- [file-type](https://github.com/sindresorhus/file-type)
-
-### PDF
-
-- [pdfkit](https://github.com/foliojs/pdfkit)
-
-## Persistence/Storage/Store
-
-- [PouchDB](https://github.com/pouchdb/pouchdb)
-- [ImmortalDB](https://github.com/gruns/ImmortalDB)
-- [lowdb](https://github.com/typicode/lowdb)
-- [brownies](https://github.com/franciscop/brownies)
-- [store.js](https://github.com/marcuswestin/store.js)
-- [localForage](https://github.com/localForage/localForage)
-
-## Code Analysis
-
-- [Babel.js](https://github.com/babel/babel)
-- [AST Explorer](https://astexplorer.net)
-- [Codecrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
-
-## Code Optimizer
-
-- [JavaScript Obfuscator](https://github.com/javascript-obfuscator/javascript-obfuscator)
-
-## Terminal
-
-- [React Terminal](https://github.com/rohanchandra/react-terminal-component)
-- [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
-- [Jay - Supercharged JavaScript REPL](https://github.com/nikersify/jay)
 
 ## Keyboard
 
@@ -615,32 +559,72 @@
 - [React ACE](https://github.com/securingsincity/react-ace)
 - [ACE Editor](https://github.com/ajaxorg/ace)
 - [CodeMirror](https://github.com/codemirror/CodeMirror)
-- [React Built In Editor](https://github.com/facebook/draft-js)
+- [React Built-In Editor](https://github.com/facebook/draft-js)
 - [Block Editor](https://github.com/codex-team/editor.js)
 
-## i18n
+## Mail
 
-- [React Intl](https://github.com/yahoo/react-intl)
-- [Formatting international numbers and currencies](https://github.com/autoNumeric/autoNumeric)
+- [Mail Generator](https://github.com/eladnava/mailgen)
+
+## File
+
+- [zTree v3](https://github.com/zTree/zTree_v3)
+- [FileAPI](https://github.com/mailru/FileAPI)
+
+### File Uploader
+
+- [Filepond](https://github.com/pqina/filepond)
+- [Uppy File Uploader](https://github.com/transloadit/uppy)
+
+### File Utils
+
+- [Human Readable File Size](https://github.com/avoidwork/filesize.js)
+- [Globby](https://github.com/sindresorhus/globby)
+- [File Type](https://github.com/sindresorhus/file-type)
+
+### PDF
+
+- [pdfkit](https://github.com/foliojs/pdfkit)
+
+## Persistent Storage
+
+- [PouchDB](https://github.com/pouchdb/pouchdb)
+- [ImmortalDB](https://github.com/gruns/ImmortalDB)
+- [lowdb](https://github.com/typicode/lowdb)
+- [brownies](https://github.com/franciscop/brownies)
+- [store.js](https://github.com/marcuswestin/store.js)
+- [localForage](https://github.com/localForage/localForage)
+
+## Search
+
+- [React Search Bar](https://github.com/searchkit/searchkit)
+- [SearchKit](https://github.com/searchkit/searchkit)
+- [Full Text Search Engine](https://github.com/olivernn/lunr.js)
 
 ## CLI
 
-### CLI Compiler/Packer
+### CLI Compiler
 
-- [pkg](https://github.com/zeit/pkg)
-- [ncc](https://github.com/zeit/ncc)
+- [PKG](https://github.com/zeit/pkg)
+- [NCC](https://github.com/zeit/ncc)
 
 ### CLI Library
 
-- [oclif - Open CLI Framework](https://github.com/oclif/oclif)
+- [Oclif - Open CLI Framework](https://github.com/oclif/oclif)
 - [React in Node CLI App](https://github.com/vadimdemedes/ink)
 - [Nexe - Node EXE Wrapper](https://github.com/nexe/nexe)
-- [commander](https://github.com/tj/commander.js)
+- [Commander](https://github.com/tj/commander.js)
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js)
-- [chalk](https://github.com/chalk/chalk)
-- [ora spinner](https://github.com/sindresorhus/ora)
-- [progress](https://github.com/bvaughn/progress-estimator)
+- [Chalk](https://github.com/chalk/chalk)
+- [ORA Spinner](https://github.com/sindresorhus/ora)
+- [Progress](https://github.com/bvaughn/progress-estimator)
 - [Babun - Windows Zsh](https://github.com/babun/babun)
+
+### Terminal
+
+- [React Terminal](https://github.com/rohanchandra/react-terminal-component)
+- [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
+- [Jay - Supercharged JavaScript REPL](https://github.com/nikersify/jay)
 
 ## Daemon
 
@@ -653,9 +637,15 @@
 
 - [FireFox Send](https://github.com/mozilla/send)
 
-### Prefetch
+### Pre-Fetch
 
 - [Google QuickLink](https://github.com/GoogleChromeLabs/quicklink)
+
+### Lazy Loading
+
+- [System.js](https://github.com/systemjs/systemjs)
+- [Lazyload.js](https://github.com/rgrove/lazyload)
+- [Await/Async Lazy Loading - Lab.js](https://github.com/getify/LABjs)
 
 ### Network Benchmark
 
@@ -666,44 +656,31 @@
 
 - [Whistle](https://github.com/avwo/whistle)
 
-## DOM
-
-- React DOM Stream
-- [Cheerio - jQuery](https://github.com/cheeriojs/cheerio)
-
 ## Server
 
 - [Parse Server](https://github.com/ParsePlatform/parse-server)
 - [JSON Server](https://github.com/typicode/json-server)
-- [serve]
 
 ## Encryption
 
-- [blueimp-md5](https://github.com/blueimp/JavaScript-MD5)
-- [base64](https://github.com/dankogai/js-base64)
+- [MD5](https://github.com/blueimp/JavaScript-MD5)
+- [Base64](https://github.com/dankogai/js-base64)
 
-## Lazy Loading
+## Code Analysis
 
-- [SystemJS](https://github.com/systemjs/systemjs)
-- [Lazyload.js](https://github.com/rgrove/lazyload)
-- [Await/Async Lazy Load - Labjs](https://github.com/getify/LABjs)
+- [Babel.js](https://github.com/babel/babel)
+- [AST Explorer](https://astexplorer.net)
+- [Codecrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
 
-## Spider
+## Code Optimizer
 
-- async.js
-- cheerio: jQuery-DOM API
-- iconv-lite: 转码库
-- request
-- HTTP 请求获取页面
-- 正则表达式匹配信息
-- 数据持久化数据库
-- 数据可视化
+- [JavaScript Obfuscator](https://github.com/javascript-obfuscator/javascript-obfuscator)
 
-## Debug/Testing
+## Debug Testing
 
 - [Ndb](https://github.com/GoogleChromeLabs/ndb)
 - [React Testing Utilities](https://github.com/airbnb/enzyme)
-- [React Component hierachy](https://github.com/team-gryff/react-monocle)
+- [React Component Hierarchy](https://github.com/team-gryff/react-monocle)
 - [React a11y](https://github.com/reactjs/react-a11y)
 - Chrome Extensions - React Dev Tools/Redux Dev Tools
 - [Retoggle - Component Inspector](https://github.com/Raathigesh/retoggle)
@@ -714,10 +691,10 @@
 - [Jest UI](https://github.com/Raathigesh/majestic)
 - [Enzyme - React Testing](https://github.com/airbnb/enzyme)
 - [React Testing Library](https://github.com/kentcdodds/react-testing-library)
-- [jasmine](https://github.com/jasmine/jasmine)
-- [mocha](https://github.com/mochajs/mocha)
+- [Jasmine](https://github.com/jasmine/jasmine)
+- [Mocha](https://github.com/mochajs/mocha)
 - [Assert](https://github.com/power-assert-js/power-assert)
-- [testem](https://github.com/testem/testem)
+- [Testem](https://github.com/testem/testem)
 
 ### Feature Testing
 
@@ -725,7 +702,7 @@
 - [Webkit API(Chrome)](https://github.com/ariya/phantomjs)
 - [Gecko API(Firefox)](https://github.com/laurentj/slimerjs)
 - [selenium](https://github.com/SeleniumHQ/selenium)
-- [interactor.js](https://github.com/wwilsman/interactor.js)
+- [Interactor.js](https://github.com/wwilsman/interactor.js)
 
 ### End to End Testing
 
@@ -733,14 +710,16 @@
 
 ### Higher Level Tools
 
+- [Puppeteer- Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
+- [Cheerio - jQuery Server Tools](https://github.com/cheeriojs/cheerio)
 - [Nightmare - Phantomjs Like Browser Automation Testing](https://github.com/segmentio/nightmare)
-- [NightWatchjs - Selenium/Node Testing Framework](https://github.com/nightwatchjs/nightwatch)
+- [NightWatch - Selenium/Node Testing Framework](https://github.com/nightwatchjs/nightwatch)
 
 ### Security Tools
 
-- [sqlmap](https://github.com/sqlmapproject/sqlmap)
-- [zaproxy](https://github.com/zaproxy/zaproxy)
-- [arachni](https://github.com/Arachni/arachni)
+- [Sqlmap](https://github.com/sqlmapproject/sqlmap)
+- [Zaproxy](https://github.com/zaproxy/zaproxy)
+- [Arachni](https://github.com/Arachni/arachni)
 
 ### Coverage
 
@@ -757,7 +736,7 @@
 #### Mock API
 
 - [Pokemon API](https://github.com/PokeAPI/pokeapi)
-- [jsonbox](https://github.com/vasanthv/jsonbox)
+- [JSON Box](https://github.com/vasanthv/jsonbox)
 - [JSON Placeholder](http://jsonplaceholder.typicode.com)
 - [Images Placeholder](https://placeholder.com)
 - [Images Mock](http://source.unsplash.com/random)
@@ -770,11 +749,21 @@
 ### Performance
 
 - [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render)
-- [clinic](https://github.com/nearform/node-clinic)
+- [Node Clinic](https://github.com/nearform/node-clinic)
 
 ### Log
 
-- [log4js](https://github.com/nomiddlename/log4js-node)
-- [stacktrace-js](https://github.com/stacktracejs/stacktrace.js)
+- [Log4.js](https://github.com/nomiddlename/log4js-node)
+- [Stacktrace.js](https://github.com/stacktracejs/stacktrace.js)
 - [Stacktrace visualization tools](https://github.com/joyent/node-stackvis)
-- morgan
+- [Morgan](https://github.com/expressjs/morgan)
+
+## Documentation
+
+- [Docz](https://github.com/pedronauck/docz)
+- [Gatsby.js](https://github.com/gatsbyjs/gatsby)
+- [Docusaurus](https://github.com/facebook/docusaurus)
+- [Vuepress](https://github.com/vuejs/vuepress)
+- [Intro.js](https://github.com/usablica/intro.js)
+- [Wiki.js](https://github.com/Requarks/wiki)
+- [Documentation.js](https://github.com/documentationjs/documentation)
