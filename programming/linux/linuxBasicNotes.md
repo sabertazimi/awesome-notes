@@ -294,7 +294,10 @@ rsync -ax -e 'ssh -c blowfish' /root/start_dir root@x.x.x.x:/root/dest_dir
 ```
 
 ```bash
-sshpass -p "$DEPLOY_PASSWORD" scp -o StrictHostKeyChecking=no -P $DEPLOY_PORT -r ./build $DEPLOY_USER@$DEPLOY_ADDR:/var/www/html
+sshpass -p "$DEPLOY_PASSWORD" \
+  scp -o StrictHostKeyChecking=no \
+      -P $DEPLOY_PORT \
+      -r ./build $DEPLOY_USER@$DEPLOY_ADDR:/var/www/html
 ```
 
 ## 命令优先级:(用于区别同名命令)
