@@ -15,6 +15,7 @@
     - [Perf Profiling](#perf-profiling)
     - [Commit Linter](#commit-linter)
     - [Profile Statistics](#profile-statistics)
+  - [Migrate to 5](#migrate-to-5)
   - [Reference](#reference)
 
 <!-- /TOC -->
@@ -189,6 +190,14 @@ webpack --profile --json > stats.json
 ```
 
 - [Webpack Chart](https://github.com/alexkuz/webpack-chart)
+
+## [Migrate to 5](https://webpack.js.org/migrate/5/)
+
+Make sure there's no webpack deprecation warnings.
+
+```bash
+node --trace-deprecation node_modules/webpack/bin/webpack.js
+```
 
 ## Reference
 
