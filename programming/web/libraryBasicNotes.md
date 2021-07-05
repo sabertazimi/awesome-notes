@@ -5,8 +5,12 @@
 - [Library Basic Notes](#library-basic-notes)
   - [Indexing Tools](#indexing-tools)
   - [Boilerplate](#boilerplate)
-  - [Solution and Framework](#solution-and-framework)
   - [UI Framework](#ui-framework)
+  - [Solution and Framework](#solution-and-framework)
+    - [Front-end Solution](#front-end-solution)
+    - [Back-end Solution](#back-end-solution)
+    - [Full-stack Solution](#full-stack-solution)
+    - [Desktop Solution](#desktop-solution)
   - [State Data Management](#state-data-management)
     - [Redux](#redux)
     - [Hooks](#hooks)
@@ -134,18 +138,8 @@
 - [Neutrino.js - More Customizable Boilerplate](https://github.com/neutrinojs/neutrino)
 - [Basic - HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 - [Back-End - Nodejs Hackathon Starter](https://github.com/sahat/hackathon-starter)
-- [Desktop - Electron Live Cheat Sheet](https://github.com/ConardLi/electron-react)
-- [Desktop - Electron React Boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
 - [Hygen - Component Generator](https://github.com/jondot/hygen)
 - [React Chrome Extension](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
-
-## Solution and Framework
-
-- [UMI](https://github.com/umijs/umi)
-- [Gatsby.js](https://github.com/gatsbyjs/gatsby)
-- [Next.js](https://github.com/zeit/next.js)
-- [React Storybook](https://github.com/storybooks/storybook)
-- [Feathers.js](https://github.com/feathersjs/feathers)
 
 ## UI Framework
 
@@ -161,6 +155,27 @@
 - [Materialize](https://github.com/Dogfalo/materialize)
 - [Vue Admin UI](https://github.com/epicmaxco/vuestic-admin)
 - [HTML Presentation Framework](https://github.com/hakimel/reveal.js)
+
+## Solution and Framework
+
+### Front-end Solution
+
+- [UMI](https://github.com/umijs/umi)
+- [Gatsby.js](https://github.com/gatsbyjs/gatsby)
+- [React Storybook](https://github.com/storybooks/storybook)
+
+### Back-end Solution
+
+- [Feathers.js - RESTful API](https://github.com/feathersjs/feathers)
+
+### Full-stack Solution
+
+- [Next.js](https://github.com/zeit/next.js)
+
+### Desktop Solution
+
+- [Electron](https://github.com/electron/electron)
+- [Tauri](https://github.com/tauri-apps/tauri)
 
 ## State Data Management
 
