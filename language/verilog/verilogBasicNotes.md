@@ -1360,25 +1360,25 @@ Advanced eXtensible Interface Protocol:
 
 ### AXI Burst
 
-|AxBURST[1:0]|Burst Type|
-|---:|:---|
-|0b00|FIXED|
-|0b01|INCR|
-|0b10|WRAP|
-|0b11|Reserved|
+| AxBURST[1:0] | Burst Type |
+| -----------: | :--------- |
+|         0b00 | FIXED      |
+|         0b01 | INCR       |
+|         0b10 | WRAP       |
+|         0b11 | Reserved   |
 
 burst length = AxLEN[7:0] + 1 (up to 256 transfers in each burst)
 
-|AxSIZE[2:0]|Bytes in Transfer|
-|---:|---:|
-|0b000|1|
-|0b001|2|
-|0b010|4|
-|0b011|8|
-|0b100|16|
-|0b101|32|
-|0b110|64|
-|0b111|128|
+| AxSIZE[2:0] | Bytes in Transfer |
+| ----------: | ----------------: |
+|       0b000 |                 1 |
+|       0b001 |                 2 |
+|       0b010 |                 4 |
+|       0b011 |                 8 |
+|       0b100 |                16 |
+|       0b101 |                32 |
+|       0b110 |                64 |
+|       0b111 |               128 |
 
 #### Read Burst
 
@@ -1412,7 +1412,7 @@ module tick_divider
     initial begin
         clk_group <= {(DATA_WIDTH){1'b0}};
     end
-    
+
     always @(posedge clk_src) begin
         clk_group <= clk_group + 1;
     end
@@ -1436,7 +1436,7 @@ module integer_to_segment
     input [3:0] int_data,
     output reg [7:0] seg_data
 );
-    
+
     always @(int_data) begin
         case (int_data)
             4'b0000:    seg_data <= 8'b11000000;    // 0
@@ -1477,47 +1477,47 @@ module data_to_segment
     input [(DATA_WIDTH-1):0] data,
     output [(DATA_WIDTH*2)-1:0] seg_data
 );
-    
+
     integer_to_segment trans1 (
         .int_data(data[3:0]),
         .seg_data(seg_data[7:0])
     );
-    
+
     integer_to_segment trans2 (
         .int_data(data[7:4]),
         .seg_data(seg_data[15:8])
     );
-    
+
     integer_to_segment trans3 (
         .int_data(data[11:8]),
         .seg_data(seg_data[23:16])
     );
-    
+
     integer_to_segment trans4 (
         .int_data(data[15:12]),
         .seg_data(seg_data[31:24])
     );
-    
+
     integer_to_segment trans5 (
         .int_data(data[19:16]),
         .seg_data(seg_data[39:32])
     );
-    
+
     integer_to_segment trans6 (
         .int_data(data[23:20]),
         .seg_data(seg_data[47:40])
     );
-    
+
     integer_to_segment trans7 (
         .int_data(data[27:24]),
         .seg_data(seg_data[55:48])
     );
-    
+
     integer_to_segment trans8 (
         .int_data(data[31:28]),
         .seg_data(seg_data[63:56])
     );
-    
+
 endmodule
 ```
 
@@ -1544,13 +1544,13 @@ module led_unit
 
     reg [2:0] count; // 2^3 = 8
     wire [(DATA_WIDTH*2)-1:0] seg_data;
-    
+
     initial begin
         count <= 0;
         anodes <= 0;
         cnodes <= 0;
     end
-    
+
     data_to_segment #(
         .DATA_WIDTH(DATA_WIDTH)
     ) data_to_segment (
@@ -1561,7 +1561,7 @@ module led_unit
     always @(posedge clk_src) begin
         count = count + 1;
     end
-    
+
     always @(count) begin
         case (count)
             3'b000: begin
@@ -1602,7 +1602,7 @@ module led_unit
         end
         endcase
     end
-    
+
 endmodule
 ```
 
@@ -1613,12 +1613,12 @@ endmodule
  * @module counter
  * @author sabertazimi
  * @email sabertazimi@gmail.com
- * @brief up counter 
+ * @brief up counter
  * @param DATA_WIDTH data width
  * @param STEP counting step
  * @input clk clock signal
  * @input rst reset signal
- * @output en enable signal 
+ * @output en enable signal
  * @output count counting value
  */
 module counter
@@ -1651,7 +1651,7 @@ endmodule // counter
  * @brief latch counter (latching when reaching max vlaue)
  * @input clk clock signal
  * @input rst reset signal
- * @output en enable signal 
+ * @output en enable signal
  * @output count counting value
  */
 module latch_counter
@@ -1697,7 +1697,7 @@ endmodule // latch_counter
  * @output of signed overflow flag
  * @output uof unsigned overflow flag
  */
-module alu_flags 
+module alu_flags
 #(parameter DATA_WIDTH = 32)
 (
     input [DATA_WIDTH-1:0] srcA,
@@ -1710,10 +1710,10 @@ module alu_flags
 
     wire [DATA_WIDTH-1:0] sum, diff;
     wire carry1, carry2;
-    
+
     assign {carry1, sum} = srcA + srcB;    // awesome tip
     assign {carry2, diff} = srcA - srcB;    // awesome tip
-    
+
     assign zero = (srcA == srcB);
     assign of = (aluop == 4'd5) ? (
       (srcA[DATA_WIDTH-1] & srcB[DATA_WIDTH-1] & ~sum[DATA_WIDTH-1])
@@ -1725,7 +1725,7 @@ module alu_flags
     assign uof = (aluop == 4'd5) ? (carry1)
                 : (aluop == 4'd6) ? (carry2)
                 : 0;
-    
+
 endmodule // alu_flags
 ```
 
@@ -1757,7 +1757,7 @@ module alu
 
     wire signed [DATA_WIDTH-1:0] signed_srcA;
     wire signed [DATA_WIDTH-1:0] signed_srcB;
-    
+
     assign signed_srcA = $signed(srcA);
     assign signed_srcB = $signed(srcB);
 
@@ -1779,7 +1779,7 @@ module alu
             default: aluout <= 0;
         endcase
     end
-    
+
     alu_flags #(
         .DATA_WIDTH(DATA_WIDTH)
     ) FLAGS  (
@@ -1790,7 +1790,7 @@ module alu
         .of(of),
         .uof(uof)
     );
-    
+
 endmodule // alu
 ```
 
@@ -1870,7 +1870,7 @@ module regfile
 
     ///< three ported regfile contains 32 registers
     reg [DATA_WIDTH-1:0] regfile [0:31];
-    
+
     always @ (posedge clk) begin
         if (rst) begin
             for (i = 0; i < 31; i = i + 1)
@@ -1918,7 +1918,7 @@ module imem
     initial begin
         $readmemh(CODE_FILE, ROM, 0, (2**BUS_WIDTH)-1);
     end
-    
+
     assign rdata = ROM[addr];
 
 endmodule // imem
@@ -1959,9 +1959,9 @@ module dmem
             RAM[addr] <= wdata;
         end
     end
-    
+
     assign rdata = re ? RAM[addr] : {(DATA_WIDTH-1){1'bx}};
     assign led_data = RAM[switch_addr];
-    
+
 endmodule // dmem
 ```

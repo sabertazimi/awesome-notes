@@ -810,21 +810,21 @@ while read line; do
     fi
 
     if echo "$line" | grep -q "^processor"; then
-        p_id=`echo "$line" | awk -F: '{print $2}' | tr -d ' '` 
+        p_id=`echo "$line" | awk -F: '{print $2}' | tr -d ' '`
     fi
 
     if echo "$line" | grep -q "^core id"; then
-        c_id=`echo "$line" | awk -F: '{print $2}' | tr -d ' '` 
+        c_id=`echo "$line" | awk -F: '{print $2}' | tr -d ' '`
     fi
 
     if echo "$line" | grep -q "^physical id"; then
-        s_id=`echo "$line" | awk -F: '{print $2}' | tr -d ' '` 
+        s_id=`echo "$line" | awk -F: '{print $2}' | tr -d ' '`
     fi
 done < /proc/cpuinfo
 
 echo
 
-awk -F: '{ 
+awk -F: '{
     if ($1 ~ /processor/) {
         gsub(/ /,"",$2);
         p_id=$2;
@@ -833,10 +833,10 @@ awk -F: '{
         s_id=$2;
         arr[s_id]=arr[s_id] " " p_id
     }
-} 
+}
 
 END{
-    for (i in arr) 
+    for (i in arr)
         printf "Socket %s:%s\n", i, arr[i];
 }' /proc/cpuinfo
 
