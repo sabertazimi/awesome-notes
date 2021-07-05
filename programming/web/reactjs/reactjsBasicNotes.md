@@ -89,6 +89,12 @@
     - [Enzyme](#enzyme)
   - [Create React App](#create-react-app)
     - [React Scripts](#react-scripts)
+      - [React Scripts Initilization](#react-scripts-initilization)
+      - [React Scripts Commands](#react-scripts-commands)
+      - [React Scripts Configuration](#react-scripts-configuration)
+    - [Other Packages in CRA Repo](#other-packages-in-cra-repo)
+    - [Custom CRA](#custom-cra)
+      - [CRA Templates](#cra-templates)
     - [Deployment](#deployment)
   - [Styled Component](#styled-component)
     - [Basic Usage](#basic-usage)
@@ -148,7 +154,7 @@ class Example extends React.Component {
   constructor() {
     super();
     this.state = {
-      val: 0
+      val: 0,
     };
   }
 
@@ -189,27 +195,27 @@ class MyComponent extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      items: []
+      items: [],
     };
   }
 
   componentDidMount() {
     fetch('https://api.example.com/items')
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(
-        result => {
+        (result) => {
           this.setState({
             isLoaded: true,
-            items: result.items
+            items: result.items,
           });
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
-        error => {
+        (error) => {
           this.setState({
             isLoaded: true,
-            error
+            error,
           });
         }
       );
@@ -224,7 +230,7 @@ class MyComponent extends React.Component {
     } else {
       return (
         <ul>
-          {items.map(item => (
+          {items.map((item) => (
             <li key={item.name}>
               {item.name} {item.price}
             </li>
@@ -325,7 +331,7 @@ ReactDOM.render({
 
 ```js
 this.setState((prevState, props) => ({
-  counter: prevState.counter + props.increment
+  counter: prevState.counter + props.increment,
 }));
 ```
 
@@ -378,7 +384,7 @@ Refs 用于返回对元素的引用.
 function commitAttachRef(finishedWork: Fiber) {
   // finishedWork 为含有 Ref effectTag 的 fiber
   const ref = finishedWork.ref;
-  
+
   // 含有 ref prop, 这里是作为数据结构
   if (ref !== null) {
     // 获取 ref 属性对应的 Component 实例
@@ -412,12 +418,7 @@ function commitAttachRef(finishedWork: Fiber) {
 ```js
 class Foo extends Component {
   render() {
-    return (
-      <input
-        onClick={() => this.action()}
-        ref='input'
-      />
-    );
+    return <input onClick={() => this.action()} ref="input" />;
   }
   action() {
     console.log(this.refs.input.value);
@@ -433,10 +434,10 @@ class App extends React.Component {
 
     // 如果使用 function 类型 ref, 则不会有这个问题
     // return <input ref={input => this['input-' + index] = input} />;
-  }
+  };
 
   render() {
-    return <DataTable data={this.props.data} renderRow={this.renderRow} />
+    return <DataTable data={this.props.data} renderRow={this.renderRow} />;
   }
 }
 ```
@@ -505,7 +506,7 @@ function withToggleable(Clickable) {
     }
 
     toggle() {
-      this.setState(prevState => ({ show: !prevState.show }));
+      this.setState((prevState) => ({ show: !prevState.show }));
     }
 
     render() {
@@ -580,7 +581,7 @@ class Toggleable extends React.Component {
   }
 
   toggle() {
-    this.setState(prevState => ({ show: !prevState.show }));
+    this.setState((prevState) => ({ show: !prevState.show }));
   }
 
   render() {
@@ -588,7 +589,7 @@ class Toggleable extends React.Component {
   }
 }
 
-const ToggleableMenu = props => (
+const ToggleableMenu = (props) => (
   <Toggleable>
     {(show, onClick) => (
       <div>
@@ -717,7 +718,7 @@ function Child({ fetchData }) {
   `setState(value + 1)` 与 `setState(value => value + 1)` 存在差异
 
 ```js
-setState(prevState => {
+setState((prevState) => {
   // Object.assign would also work
   return { ...prevState, ...updatedValues };
 });
@@ -736,7 +737,7 @@ do {
   } else {
     newState = action;
   }
-} while (update !== firstUpdate)
+} while (update !== firstUpdate);
 ```
 
 ```jsx
@@ -828,7 +829,7 @@ Use useReducer if:
 - for more predictable and maintainable state architecture
 
 ```js
-const insertToHistory = state => {
+const insertToHistory = (state) => {
   if (state && Array.isArray(state.history)) {
     // Do not mutate
     const newHistory = [...state.history];
@@ -850,7 +851,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         friends: [...state.friends, action.friend],
-        history: insertToHistory(state)
+        history: insertToHistory(state),
       };
     case 'undo': {
       const isEmpty = !state.history.length;
@@ -953,7 +954,7 @@ const useDataApi = (initialUrl, initialData) => {
     fetchData();
   }, [url]);
 
-  const doFetch = url => {
+  const doFetch = (url) => {
     setUrl(url);
   };
 
@@ -969,7 +970,7 @@ const useDataApi = (initialUrl, initialData) => {
 ### Hooks Internel
 
 ```js
-const MyReact = (function() {
+const MyReact = (function () {
   let hooks = [],
     currentHook = 0; // array of hooks, and an iterator!
   return {
@@ -994,9 +995,9 @@ const MyReact = (function() {
     useState(initialValue) {
       hooks[currentHook] = hooks[currentHook] || initialValue; // type: any
       const setStateHookIndex = currentHook; // for setState's closure!
-      const setState = newState => (hooks[setStateHookIndex] = newState);
+      const setState = (newState) => (hooks[setStateHookIndex] = newState);
       return [hooks[currentHook++], setState];
-    }
+    },
   };
 })();
 ```
@@ -1010,9 +1011,9 @@ function Counter() {
   }, [count, text]);
   return {
     click: () => setCount(count + 1),
-    type: txt => setText(txt),
+    type: (txt) => setText(txt),
     noop: () => setCount(count),
-    render: () => console.log('render', { count, text })
+    render: () => console.log('render', { count, text }),
   };
 }
 
@@ -1047,8 +1048,8 @@ App = MyReact.render(Counter);
 function Component() {
   const [text, setText] = useSplitURL('www.netlify.com');
   return {
-    type: txt => setText(txt),
-    render: () => console.log({ text })
+    type: (txt) => setText(txt),
+    render: () => console.log({ text }),
   };
 }
 
@@ -1077,7 +1078,7 @@ App = MyReact.render(Component);
 componentDidMount
 
 ```js
-const useMount = fn => {
+const useMount = (fn) => {
   useEffect(() => void fn(), []);
 };
 ```
@@ -1085,7 +1086,7 @@ const useMount = fn => {
 componentWillUnmount
 
 ```js
-const useUnmount = fn => {
+const useUnmount = (fn) => {
   useEffect(() => fn, []);
 };
 ```
@@ -1093,7 +1094,7 @@ const useUnmount = fn => {
 componentDidUpdate
 
 ```js
-const useUpdate = fn => {
+const useUpdate = (fn) => {
   const mounting = useRef(true);
 
   useEffect(() => {
@@ -1243,14 +1244,14 @@ function App() {
   return (
     <Fragment>
       <form
-        onSubmit={event =>
+        onSubmit={(event) =>
           doGet(event, `http://hn.algolia.com/api/v1/search?query=${query}`)
         }
       >
         <input
           type="text"
           value={query}
-          onChange={event => setQuery(event.target.value)}
+          onChange={(event) => setQuery(event.target.value)}
         />
         <button type="submit">Search</button>
       </form>
@@ -1261,7 +1262,7 @@ function App() {
         <div>Loading ...</div>
       ) : (
         <ul>
-          {data.hits.map(item => (
+          {data.hits.map((item) => (
             <li key={item.objectID}>
               <a href={item.url}>{item.title}</a>
             </li>
@@ -1331,9 +1332,9 @@ export const store = {
   state: {},
   setState(value) {
     this.state = value;
-    this.setters.forEach(setter => setter(this.state));
+    this.setters.forEach((setter) => setter(this.state));
   },
-  setters: []
+  setters: [],
 };
 
 // Bind the setState function to the store object so
@@ -1364,7 +1365,7 @@ const initialState = {
   // Current state value
   present: null,
   // Will contain "future" state values if we undo (so we can redo)
-  future: []
+  future: [],
 };
 
 // Our reducer function to handle state changes based on action
@@ -1379,7 +1380,7 @@ const reducer = (state, action) => {
       return {
         past: newPast,
         present: previous,
-        future: [present, ...future]
+        future: [present, ...future],
       };
     case 'REDO':
       const next = future[0];
@@ -1388,7 +1389,7 @@ const reducer = (state, action) => {
       return {
         past: [...past, present],
         present: next,
-        future: newFuture
+        future: newFuture,
       };
     case 'SET':
       const { newPresent } = action;
@@ -1399,23 +1400,23 @@ const reducer = (state, action) => {
       return {
         past: [...past, present],
         present: newPresent,
-        future: []
+        future: [],
       };
     case 'CLEAR':
       const { initialPresent } = action;
 
       return {
         ...initialState,
-        present: initialPresent
+        present: initialPresent,
       };
   }
 };
 
 // Hook
-const useHistory = initialPresent => {
+const useHistory = (initialPresent) => {
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
-    present: initialPresent
+    present: initialPresent,
   });
 
   const canUndo = state.past.length !== 0;
@@ -1436,13 +1437,15 @@ const useHistory = initialPresent => {
     }
   }, [canRedo, dispatch]);
 
-  const set = useCallback(newPresent => dispatch({ type: 'SET', newPresent }), [
-    dispatch
-  ]);
+  const set = useCallback(
+    (newPresent) => dispatch({ type: 'SET', newPresent }),
+    [dispatch]
+  );
 
-  const clear = useCallback(() => dispatch({ type: 'CLEAR', initialPresent }), [
-    dispatch
-  ]);
+  const clear = useCallback(
+    () => dispatch({ type: 'CLEAR', initialPresent }),
+    [dispatch]
+  );
 
   // If needed we could also return past and future state
   return { state: state.present, set, undo, redo, clear, canUndo, canRedo };
@@ -1504,7 +1507,7 @@ function CountProvider(props) {
   const value = React.useMemo(() => {
     return {
       count,
-      setCount
+      setCount,
     };
   }, [count]);
   return <CountContext.Provider value={value} {...props} />;
@@ -1516,10 +1519,10 @@ function useCount() {
     throw new Error('useCount must be used within a CountProvider');
   }
   const { count, setCount } = context;
-  const increment = () => setCount(c => c + 1);
+  const increment = () => setCount((c) => c + 1);
   return {
     count,
-    increment
+    increment,
   };
 }
 
@@ -1549,11 +1552,11 @@ const useReactRouter = () => {
 // Hook
 let cachedScripts = [];
 
-const useScript = src => {
+const useScript = (src) => {
   // Keeping track of script loaded and error state
   const [state, setState] = useState({
     loaded: false,
-    error: false
+    error: false,
   });
 
   useEffect(
@@ -1564,7 +1567,7 @@ const useScript = src => {
       if (cachedScripts.includes(src)) {
         setState({
           loaded: true,
-          error: false
+          error: false,
         });
       } else {
         cachedScripts.push(src);
@@ -1578,7 +1581,7 @@ const useScript = src => {
         const onScriptLoad = () => {
           setState({
             loaded: true,
-            error: false
+            error: false,
           });
         };
 
@@ -1590,7 +1593,7 @@ const useScript = src => {
 
           setState({
             loaded: true,
-            error: true
+            error: true,
           });
         };
 
@@ -1619,26 +1622,26 @@ const useScript = src => {
 ```js
 import { useState } from 'react';
 
-const useForm = callback => {
+const useForm = (callback) => {
   const [values, setValues] = useState({});
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     if (event) event.preventDefault();
     callback();
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     event.persist();
-    setValues(values => ({
+    setValues((values) => ({
       ...values,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     }));
   };
 
   return {
     handleChange,
     handleSubmit,
-    values
+    values,
   };
 };
 
@@ -1662,9 +1665,9 @@ export const useField = (
     setValidating(true);
     let formData = form.getFormData();
     let errorMessages = await Promise.all(
-      validations.map(validation => validation(formData, name))
+      validations.map((validation) => validation(formData, name))
     );
-    errorMessages = errorMessages.filter(errorMsg => !!errorMsg);
+    errorMessages = errorMessages.filter((errorMsg) => !!errorMsg);
     if (validateIteration === validateCounter.current) {
       // this is the most recent invocation
       setErrors(errorMessages);
@@ -1685,14 +1688,14 @@ export const useField = (
     errors,
     setErrors,
     pristine,
-    onChange: e => {
+    onChange: (e) => {
       if (pristine) {
         setPristine(false);
       }
       setValue(e.target.value);
     },
     validate,
-    validating
+    validating,
   };
   form.addField(field);
   return field;
@@ -1703,10 +1706,10 @@ export const useForm = ({ onSubmit }) => {
   let [submitting, setSubmitting] = useState(false);
   let fields = [];
 
-  const validateFields = async fieldNames => {
+  const validateFields = async (fieldNames) => {
     let fieldsToValidate;
     if (fieldNames instanceof Array) {
-      fieldsToValidate = fields.filter(field =>
+      fieldsToValidate = fields.filter((field) =>
         fieldNames.includes(field.name)
       );
     } else {
@@ -1714,9 +1717,9 @@ export const useForm = ({ onSubmit }) => {
       fieldsToValidate = fields;
     }
     let fieldsValid = await Promise.all(
-      fieldsToValidate.map(field => field.validate())
+      fieldsToValidate.map((field) => field.validate())
     );
-    let formValid = fieldsValid.every(isValid => isValid === true);
+    let formValid = fieldsValid.every((isValid) => isValid === true);
     return formValid;
   };
 
@@ -1728,7 +1731,7 @@ export const useForm = ({ onSubmit }) => {
   };
 
   return {
-    onSubmit: async e => {
+    onSubmit: async (e) => {
       e.preventDefault();
       setSubmitting(true);
       setSubmitted(true); // User has attempted to submit form at least once
@@ -1737,12 +1740,12 @@ export const useForm = ({ onSubmit }) => {
       setSubmitting(false);
       return returnVal;
     },
-    isValid: () => fields.every(f => f.errors.length === 0),
-    addField: field => fields.push(field),
+    isValid: () => fields.every((f) => f.errors.length === 0),
+    addField: (field) => fields.push(field),
     getFormData,
     validateFields,
     submitted,
-    submitting
+    submitting,
   };
 };
 
@@ -1777,13 +1780,13 @@ const Field = ({
       />
       <FormHelperText component="div">
         {showErrors &&
-          errors.map(errorMsg => <div key={errorMsg}>{errorMsg}</div>)}
+          errors.map((errorMsg) => <div key={errorMsg}>{errorMsg}</div>)}
       </FormHelperText>
     </FormControl>
   );
 };
 
-const App = props => {
+const App = (props) => {
   const form = useForm({
     onSubmit: async (formData, valid) => {
       if (!valid) return;
@@ -1797,35 +1800,36 @@ const App = props => {
           `form valid: ${valid}, form data: ${JSON.stringify(formData)}`
         );
       }
-    }
+    },
   });
 
   const usernameField = useField('username', form, {
     defaultValue: '',
     validations: [
-      async formData => {
+      async (formData) => {
         await timeout(2000);
         return formData.username.length < 6 && 'Username already exists';
-      }
+      },
     ],
-    fieldsToValidateOnChange: []
+    fieldsToValidateOnChange: [],
   });
   const passwordField = useField('password', form, {
     defaultValue: '',
     validations: [
-      formData =>
-        formData.password.length < 6 && 'Password must be at least 6 characters'
+      (formData) =>
+        formData.password.length < 6 &&
+        'Password must be at least 6 characters',
     ],
-    fieldsToValidateOnChange: ['password', 'confirmPassword']
+    fieldsToValidateOnChange: ['password', 'confirmPassword'],
   });
   const confirmPasswordField = useField('confirmPassword', form, {
     defaultValue: '',
     validations: [
-      formData =>
+      (formData) =>
         formData.password !== formData.confirmPassword &&
-        'Passwords do not match'
+        'Passwords do not match',
     ],
-    fieldsToValidateOnChange: ['password', 'confirmPassword']
+    fieldsToValidateOnChange: ['password', 'confirmPassword'],
   });
 
   let requiredFields = [usernameField, passwordField, confirmPasswordField];
@@ -1855,7 +1859,7 @@ const App = props => {
           disabled={
             !form.isValid() ||
             form.submitting ||
-            requiredFields.some(f => f.pristine)
+            requiredFields.some((f) => f.pristine)
           }
         >
           {form.submitting ? 'Submitting' : 'Submit'}
@@ -1895,7 +1899,7 @@ handle(e) {
 
 ```js
 state = {};
-handle = e => {};
+handle = (e) => {};
 ```
 
 ## React Style Guide
@@ -2147,7 +2151,7 @@ const { lazy, Suspense } = React;
 
 const Lazy = lazy(
   () =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       setTimeout(() => {
         resolve({ default: () => <Resource /> });
       }, 4000);
@@ -2180,7 +2184,7 @@ function contextWrapper(WrappedComponent, Context) {
     render() {
       return (
         <Context.Consumer>
-          {context => <WrappedComponent context={context} {...this.props} />}
+          {(context) => <WrappedComponent context={context} {...this.props} />}
         </Context.Consumer>
       );
     }
@@ -2204,11 +2208,11 @@ class Provider extends Component {
   textareaRef = React.createRef();
 
   // input handler
-  onInput = e => {
+  onInput = (e) => {
     const { name, value } = e.target;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -2217,7 +2221,7 @@ class Provider extends Component {
       <ContextProvider
         value={{
           textareaRef: this.textareaRef,
-          onInput: this.onInput
+          onInput: this.onInput,
         }}
       >
         {this.props.children}
@@ -2234,7 +2238,7 @@ import { Consumer } from './Context';
 
 const TextArea = () => (
   <Consumer>
-    {context => (
+    {(context) => (
       <textarea
         ref={context.textareaRef}
         className="app__textarea"
@@ -2266,7 +2270,7 @@ class ErrorBoundary extends React.Component {
   state = {
     hasError: false,
     error: null,
-    info: null
+    info: null,
   };
 
   // key point
@@ -2274,7 +2278,7 @@ class ErrorBoundary extends React.Component {
     this.setState({
       hasError: true,
       error: error,
-      info: info
+      info: info,
     });
   }
 
@@ -2395,12 +2399,12 @@ class Modal extends React.Component {
 
 class App extends React.Component {
   state = {
-    showModal: false
+    showModal: false,
   };
 
   toggleModal = () => {
     this.setState({
-      showModal: !this.state.showModal
+      showModal: !this.state.showModal,
     });
   };
 
@@ -2447,7 +2451,7 @@ use React.PureComponent/React.memo for a performance boost in some cases.
 ```js
 import React, { PureComponent } from 'react';
 
-const Unstable = props => {
+const Unstable = (props) => {
   console.log(' Rendered Unstable component ');
 
   return (
@@ -2459,7 +2463,7 @@ const Unstable = props => {
 
 class App extends PureComponent {
   state = {
-    value: 1
+    value: 1,
   };
 
   componentDidMount() {
@@ -2485,7 +2489,7 @@ export default App;
 ```js
 import React, { Component } from 'react';
 
-const Unstable = React.memo(props => {
+const Unstable = React.memo((props) => {
   console.log(' Rendered this component ');
 
   return (
@@ -2497,7 +2501,7 @@ const Unstable = React.memo(props => {
 
 class App extends Component {
   state = {
-    value: 1
+    value: 1,
   };
 
   componentDidMount() {
@@ -2582,7 +2586,7 @@ export default class App extends Component {
     super();
 
     this.state = {
-      Form: undefined
+      Form: undefined,
     };
   }
 
@@ -2792,7 +2796,7 @@ const result = renderer.getRenderOutput();
 expect(result.type).toBe('div');
 expect(result.props.children).toEqual([
   <span className={'heading'}>{'Title'}</span>,
-  <span className={'description'}>{'Description'}</span>
+  <span className={'description'}>{'Description'}</span>,
 ]);
 ```
 
@@ -2839,7 +2843,7 @@ describe(() => {
     const cols = [
       { header: 'ID', name: 'id' },
       { header: 'Name', name: 'name' },
-      { header: 'Email', name: 'email' }
+      { header: 'Email', name: 'email' },
     ];
     const data = [
       { id: 5, name: 'John', email: 'john@example.com' },
@@ -2849,9 +2853,9 @@ describe(() => {
         id: 8,
         name: 'Oliver',
         email: 'oliver@example.com',
-        hello: 'hello world'
+        hello: 'hello world',
       },
-      { id: 25, name: 'Amelia', email: 'amelia@example.com' }
+      { id: 25, name: 'Amelia', email: 'amelia@example.com' },
     ];
 
     // Shallow render Data Table
@@ -2903,8 +2907,129 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 
 ### React Scripts
 
-- HTML/CSS/JSX boilerplate in `template/` directory
-- config in `config/` directory
+#### React Scripts Initilization
+
+Initialization in `react-scripts/scripts/init.js`:
+
+- 可以用于改变默认 registry
+
+```js
+'use strict';
+
+const registries = {
+  npm: 'https://registry.npmjs.org',
+  yarn: 'https://registry.yarnpkg.com',
+  aliyun: 'https://registry.npm.taobao.org',
+};
+
+module.exports = registries;
+```
+
+- 自定义安装默认依赖 (`react`, `react-dom`, `react-router`, `redux` etc.)
+- 额外安装模板依赖 `packages.dependencies` in `cra-template/template.json`
+- Setup `package.json`:
+  `appPackage.homepage`, `appPackage.dependencies`, `appPackage.scripts`,
+  `appPackage.eslintConfig`, `appPackage.browser`.
+
+#### React Scripts Commands
+
+Locating in `react-scripts/scripts/`:
+
+- `start.js` for `react-scripts start`
+
+```js
+// 增加关机提示信息
+['SIGINT', 'SIGTERM'].forEach(function(sig) {
+  process.on(sig, function() {
+    console.log(chalk.cyan('Gracefully shutting down. Please wait...\n'));
+    devServer.close();
+    process.exit();
+  });
+});
+```
+
+- `build.js` for `react-scripts build`
+- `test.js` for `react-scripts test`
+- `eject.js` for `react-scripts eject`
+
+#### React Scripts Configuration
+
+Config in `react-scripts/config/` directory:
+
+- `env.js`: static environment variables
+- `getHttpsConfig.js`: get HTTPS(SSL) config
+- `modules.js`: locale modules webpack alias with `baseUrl`
+- `paths.js`: configurable paths variables (most for Webpack config)
+- `webpackDevServer.config.js`: Webpack Dev Server configuration
+- `webpack.config.js`: Webpack configuration
+  (paths, deps/devDeps, plugins, loader rules etc.)
+
+```js
+// add support for Ant Design UI
+{
+  test: /\.(js|mjs|jsx|ts|tsx)$/,
+  include: paths.appSrc,
+  loader: require.resolve('babel-loader'),
+  options: {
+    customize: require.resolve(
+      'babel-preset-react-app/webpack-overrides'
+    ),
+    plugins: [
+      [
+        require.resolve('babel-plugin-import'),
+        {
+          "libraryName": "antd",
+          "libraryDirectory": "es",
+          "style": "css",
+        },
+      ],
+    ],
+    cacheDirectory: true,
+    cacheCompression: isEnvProduction,
+    compact: isEnvProduction,
+  },
+}
+```
+
+```js
+// add Webpack bundle analyzer plugin
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
+{
+  plugins: [
+    isEnvDevelopment &&
+      new BundleAnalyzerPlugin({
+        analyzerPort: 5000,
+      }),
+  ]
+}
+```
+
+### Other Packages in CRA Repo
+
+- `babel-preset-react-app`: babel preset configuration
+- `cra-template`/`cra-template-typescript`: CRA default templates
+- `eslint-config-react-app`: eslint configuration
+- `react-app-polyfill`: polyfills for various browsers
+- `react-dev-utils`: most utility functions
+  for paths, helpers, middleware, and webpack plugins.
+
+### Custom CRA
+
+- custom `packages/cra-template-*`: change HTML/CSS/JS boilerplate.
+- custom `packages/react-scripts/config/`:
+  change paths, deps/devDeps, plugins, loader rules etc.
+- custom `packages/react-scripts/scripts/`: change react-scripts CLI behaviors.
+
+#### CRA Templates
+
+HTML/CSS/JSX boilerplate in `react-scripts/template/` directory,
+now Templates are always named in the format cra-template-[template-name]
+in `packages/cra-template` and `packages/cra-template-typescript`.
+
+```bash
+npx create-react-app my-app --template [template-name]
+```
 
 ### Deployment
 
@@ -3038,29 +3163,29 @@ const Button = styled.button`
   font-size: 16px;
   border: 0;
   border-radius: 35px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   cursor: pointer;
 
   // Using props to create a gray variant of the button
-  ${props =>
+  ${(props) =>
     props.gray &&
     css`
       background-color: #95a5a6;
     `}
   // Using props to create a green variant of the button
-  ${props =>
+  ${(props) =>
     props.green &&
     css`
       background-color: #2ecc71;
     `}
   // Using props to create a red variant of the button
-  ${props =>
+  ${(props) =>
     props.red &&
     css`
       background-color: #e74c3c;
     `}
   // We can also use a ternary operator for "binary" changes
-  color: ${props => (props.gray ? '#2c3e50' : '#fff')};
+  color: ${(props) => (props.gray ? '#2c3e50' : '#fff')};
 `;
 
 const WrapperContainer = () => (
