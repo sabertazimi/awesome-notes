@@ -1144,6 +1144,11 @@ git fetch <repo_name> <branch_name>
 
 #### git pull
 
+```bash
+git pull --rebase
+git pull --allow-unrelated-histories
+```
+
 #### git push
 
 #### git remote
