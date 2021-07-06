@@ -215,7 +215,15 @@
 ### Grub
 
 - `/etc/default/grub`配置文件, 用于一些基本的修改项,
-  如默认启动项, Grub 界面等待时长.
+  如默认启动项, Grub 界面等待时长, Grub 主题 etc.
+  More details in `info -f grub -n 'Simple configuration'`
+
+```bash
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=5
+GRUB_THEME="/boot/grub/themes/Tela/theme.txt"
+```
+
 - `/etc/grub.d/*`生成`/boot/grub/grub.cfg`的执行脚本(`update-grub`命令),
   可以更细致地修改启动项, 如各个启动项的名称、顺序等.
 
