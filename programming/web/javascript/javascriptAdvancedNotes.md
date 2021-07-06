@@ -8,6 +8,7 @@
     - [Babel](#babel)
       - [babel-node](#babel-node)
       - [babel-core](#babel-core)
+      - [Codemod](#codemod)
     - [Variable](#variable)
       - [let](#let)
       - [const](#const)
@@ -71,7 +72,7 @@
     - [Partial Application](#partial-application)
     - [Currying](#currying)
     - [API](#api)
-      - [`[]`.map](#map)
+      - [`[]`.map](#map-1)
       - [`[]`.filter](#filter)
       - [`[]`.reduce](#reduce)
       - [`[]`.sort](#sort)
@@ -300,6 +301,11 @@ babel.transformFileSync('filename.js', options);
 babel.transformFromAst(ast, code, options);
 // => { code, map, ast }
 ```
+
+#### Codemod
+
+Use Babel to refactor code,
+like [jscodeshift](https://github.com/facebook/jscodeshift).
 
 ### Variable
 
