@@ -139,27 +139,40 @@
 
 #### Initialize
 
+Basic Configuration
+
 ```bash
 git config --global user.name "sabertazimi"
 git config --global user.email sabertazimi@gmail.com
 git config --global core.editor vim
-git config --global push.default simple
 git config --global credential.helper store
-git config --global commit.template $HOME/.gitmsg.md
-git config --global http.postbuffer 524288000
-# git config --global http.postbuffer 1048576000
-git config --list
 ```
 
+Commit/Push/Pull Configuration
+
 ```bash
+git config --global commit.template $HOME/.gitmsg.md
+git config --global push.default simple
 git config --global pull.rebase true
 git config --global rebase.autoStash true
 ```
 
+HTTP/HTTPS Proxy
+
 ```bash
-git help
+git config --global http.postbuffer 524288000
+# git config --global http.postbuffer 1048576000
+git config --global http.proxy 'socks5://127.0.0.1:1080'
+git config --global https.proxy 'socks5://127.0.0.1:1080'
+```
+
+List and Help
+
+```bash
+git config --list
 git --help
 man git-
+git help
 git help config
 ```
 
