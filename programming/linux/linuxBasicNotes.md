@@ -1197,24 +1197,23 @@ sslocal -c shadowsocks.json -d start
 
 ##### crontab
 
-- /etc/crontab
+- `/etc/crontab`
 - [Crontab Quick Tutorial](https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html)
+- [Crontab Generator](https://crontab.guru)
 
+```bash
 crontab -l(list)
 crontab -e(establish)
+```
 
 - m,n —— 分隔多个时间
 - m-n —— 表示时间范围
 - /n —— 表示每隔 n 时间
 - 天数 与 星期 设置 之间 是 “或”关系
-
 - /var/spool/cron/user_name/
 - /var/log/con
 - /etc/cron.\*ly 时间表
-
-/etc/anacrontab
-
-anacron —— 异步时间表
+- /etc/anacrontab: 异步时间表
 
 #### 后台任务
 
