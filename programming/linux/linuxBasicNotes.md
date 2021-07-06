@@ -101,6 +101,7 @@
       - [rpm 命令](#rpm-命令)
       - [yum](#yum)
       - [源码包安装](#源码包安装)
+      - [Applications Management](#applications-management)
     - [网络连接命令](#网络连接命令)
       - [wget](#wget)
       - [Certbot](#certbot)
@@ -964,6 +965,11 @@ make install
 ```
 
 e.g apche /var/www/html/index.html /usr/local/apache/htdocs/index.html
+
+#### Applications Management
+
+- desktop shortcut: `/usr/share/applications`
+- startup apps: `gnome-session-properties`
 
 ### 网络连接命令
 
