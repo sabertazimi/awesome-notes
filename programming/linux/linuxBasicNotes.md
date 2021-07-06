@@ -5,16 +5,23 @@
 - [Linux Basic Notes](#linux-basic-notes)
   - [Linux Boot System](#linux-boot-system)
     - [Grub](#grub)
+      - [Grub Repair](#grub-repair)
+        - [Windows Repair](#windows-repair)
+        - [Ubuntu Live Repair](#ubuntu-live-repair)
     - [重装 Linux](#重装-linux)
   - [SSH 命令](#ssh-命令)
     - [Key](#key)
     - [SSHD](#sshd)
-    - [编辑~/.ssh/config 文件](#编辑sshconfig-文件)
-    - [`ssh -D`](#ssh--d)
+    - [SSH Config File](#ssh-config-file)
     - [密钥文件](#密钥文件)
     - [远程传输文件](#远程传输文件)
-  - [命令优先级:(用于区别同名命令)](#命令优先级用于区别同名命令)
+  - [命令优先级](#命令优先级)
   - [Linux 文件架构](#linux-文件架构)
+  - [Ubuntu Locale](#ubuntu-locale)
+  - [Arch Linux](#arch-linux)
+    - [Basic Arch Linux Setup](#basic-arch-linux-setup)
+    - [Pacman](#pacman)
+    - [AUR](#aur)
   - [命令操作](#命令操作)
     - [基本处理命令](#基本处理命令)
       - [ls](#ls)
@@ -25,13 +32,13 @@
       - [mv](#mv)
       - [ln](#ln)
     - [基本搜索命令](#基本搜索命令)
-      - [locate 文件名](#locate-文件名)
+      - [locate](#locate)
       - [type](#type)
       - [apropos](#apropos)
-      - [whereis/whatis 系统命令名](#whereiswhatis-系统命令名)
-      - [which 系统命令名(同时查询别名及结果颜色)](#which-系统命令名同时查询别名及结果颜色)
-      - [`find [搜索路径] [可选参数] 文件名`](#find-搜索路径-可选参数-文件名可加)
-      - [`grep` `[可选参数] “字符串” 文件名`](#grep-可选参数-字符串-文件名)
+      - [whereis/whatis](#whereiswhatis)
+      - [which](#which)
+      - [find](#find)
+      - [grep](#grep)
     - [Process Command](#process-command)
       - [ps](#ps)
       - [top](#top)
@@ -49,7 +56,6 @@
       - [cat](#cat)
       - [sort](#sort)
       - [uniq](#uniq)
-      - [grep](#grep)
       - [wc](#wc)
       - [head/tail](#headtail)
       - [tee](#tee)
@@ -59,11 +65,10 @@
       - [pr](#pr)
       - [printf](#printf)
     - [帮助命令](#帮助命令)
-      - [`man` `[可选参数] 命令名称`](#man-可选参数-命令名称)
-      - [系统命令 --help](#系统命令---help)
+      - [man](#man)
       - [help shell 内部命令](#help-shell-内部命令)
       - [info](#info)
-      - [system info](#system-info)
+      - [System Info](#system-info)
     - [压缩命令](#压缩命令)
       - [.zip](#zip)
       - [.gz](#gz)
@@ -87,7 +92,7 @@
       - [普通权限](#普通权限)
       - [ACL 权限](#acl-权限)
       - [sudo 权限](#sudo-权限)
-      - [SetUID/SetGID 权限——可执行程序/目录+普通用户临时获得 root 权限 （rws）](#setuidsetgid-权限可执行程序目录普通用户临时获得-root-权限-rws)
+      - [SetUID/SetGID 权限](#setuidsetgid-权限)
     - [显示器管理命令](#显示器管理命令)
       - [xrandr](#xrandr)
     - [主机信息管理命令](#主机信息管理命令)
@@ -105,23 +110,23 @@
     - [网络连接命令](#网络连接命令)
       - [wget](#wget)
       - [Certbot](#certbot)
+      - [GFW](#gfw)
     - [网络管理命令](#网络管理命令)
       - [ufw](#ufw)
       - [nginx](#nginx)
-      - [arp -a ——显示地址解析协议(IP 地址—网卡地址)](#arp--a-显示地址解析协议ip-地址网卡地址)
-      - [netstat -an——查看本机启用的端口](#netstat--an查看本机启用的端口)
-      - [nslookup domain_name——查看 DNS 解析器](#nslookup-domain_name查看-dns-解析器)
-      - [ping -c ip/domain——探测网络状况](#ping--c-ipdomain探测网络状况)
-      - [`telnet [ip/domain] [端口]——远程管理与端口探测命令`](#telnet-ipdomain-端口远程管理与端口探测命令)
-      - [`traceroute [-n IP] domain —— 路由跟踪命令`](#traceroute--n-ip-domain--路由跟踪命令)
+      - [arp](#arp)
+      - [netstat](#netstat)
+      - [nslookup](#nslookup)
+      - [ping](#ping)
+      - [telnet](#telnet)
+      - [traceroute](#traceroute)
       - [NetFilter 框架](#netfilter-框架)
     - [网络扫描命令](#网络扫描命令)
-      - [`fping -a -u -g -f [target] —— 批量扫描主机地址`](#fping--a--u--g--f-target--批量扫描主机地址)
-      - [`hping -p -S -a —— 可伪造IP地址`](#hping--p--s--a--可伪造ip地址)
-      - [`traceroute -n -I -T -p —— 路由扫描`](#traceroute--n--i--t--p--路由扫描)
-      - [`mtr —— 路由扫描`](#mtr--路由扫描)
-      - [`nmap —— 批量主机服务扫描`](#nmap--批量主机服务扫描)
-      - [ncat —— 批量主机服务扫描](#ncat--批量主机服务扫描)
+      - [fping](#fping)
+      - [hping](#hping)
+      - [mtr](#mtr)
+      - [nmap](#nmap)
+      - [ncat](#ncat)
     - [脚本运行命令](#脚本运行命令)
       - [Systemctl](#systemctl)
       - [定时任务](#定时任务)
@@ -227,6 +232,27 @@ GRUB_THEME="/boot/grub/themes/Tela/theme.txt"
 - `/etc/grub.d/*`生成`/boot/grub/grub.cfg`的执行脚本(`update-grub`命令),
   可以更细致地修改启动项, 如各个启动项的名称、顺序等.
 
+#### Grub Repair
+
+##### Windows Repair
+
+- easyBCD for non-efi loader
+- with efi loader, run command:
+
+```bash
+# root commander
+bcdedit /set "{bootmgr}" path \EFI\ubuntu\grubx64.efi
+```
+
+##### Ubuntu Live Repair
+
+```bash
+sudo add-apt add-apt-repository ppa:yannubuntu/boot-repair
+sudo apt update
+sudo apt install boot-repair
+boot-repair
+```
+
 ### 重装 Linux
 
 - 自动挂载项 /etc/fstab etc/rc.local
@@ -251,7 +277,9 @@ sudo systemctl reload sshd
 sudo service restart sshd
 ```
 
-### 编辑~/.ssh/config 文件
+### SSH Config File
+
+`~/.ssh/config`:
 
 - Host 别名
   - HostName 主机名(ip) `ssh user@ip`
@@ -284,8 +312,6 @@ git clone git@github.com:user/repo
 git clone git@cs.github.com:user/repo
 ```
 
-### `ssh -D`
-
 ```bash
 ssh -qTfnN -D 7070 bwg
 google-chrome socks5 127.0.0.1 7070
@@ -310,7 +336,7 @@ sshpass -p "$DEPLOY_PASSWORD" \
       -r ./build $DEPLOY_USER@$DEPLOY_ADDR:/var/www/html
 ```
 
-## 命令优先级:(用于区别同名命令)
+## 命令优先级
 
 包含路径命令 ./vmtools.pl
 \>别名命令
@@ -326,6 +352,67 @@ man hier
 通过源码包安装的软件，可以通过 ./configure --prefix=/opt/
 
 /usr/src 是内核源码存放的目录
+
+## Ubuntu Locale
+
+```bash
+export LANG=en_US
+xdg-user-dirs-gtk-update
+export LANG=zh_CN
+```
+
+- /var/lib/locales/supported.d/local
+
+```bash
+sudo locale-gen zh_CN.GBK
+sudo locale-gen zh_CN.GB18030
+sudo dpkg-reconfigure locales
+```
+
+## Arch Linux
+
+### Basic Arch Linux Setup
+
+```bash
+less /usr/share/aif/docs/official_installation_guide_en
+pacman -S lynx arch-wiki-docs arch-wiki-lite
+lynx /usr/share/doc/arch-wiki/html/index.html
+```
+
+```bash
+systemctl enable dhcpcd
+reboot
+pacman -S --needed base-devel git wget jshon expac yajl zsh vim
+```
+
+- makepkg
+
+```bash
+curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/package_name.tar.gz
+cd package_name
+less PKGBUILD
+less package_name.install
+
+makepkg -si
+# -s sync deps
+# -i install
+# -r rm deps
+# -c clean up
+```
+
+### Pacman
+
+- /etc/pacman.conf
+- /etc/pacman.d/mirrorlist
+
+### AUR
+
+- [yaourt](https://archlinux.fr/yaourt-en)
+
+```bash
+# packages' list
+wget https://aur.archlinux.org/packages.gz
+```
 
 ## 命令操作
 
@@ -376,7 +463,7 @@ ln -s(创建软链接) [原文件][目标文件]
 
 ### 基本搜索命令
 
-#### locate 文件名
+#### locate
 
 结合 updatedb 命令(该命令一般自动 1 天/次)
 
@@ -388,11 +475,13 @@ indicate how a command name is interpreted
 
 display a list of appropriate commands
 
-#### whereis/whatis 系统命令名
+#### whereis/whatis
 
-#### which 系统命令名(同时查询别名及结果颜色)
+#### which
 
-#### `find [搜索路径] [可选参数] [文件名](可加"")`
+#### find
+
+`find [搜索路径] [可选参数] [文件名](可加"")`:
 
 - -name
 - -iname 不区分大小写
@@ -404,7 +493,9 @@ display a list of appropriate commands
 - -a / -o 逻辑与/逻辑或(左右两端搜索条件)
 - -exec/-ok `system_command_list {} \;对搜索结果执行操作
 
-#### `grep` `[可选参数] “字符串” 文件名`
+#### grep
+
+`grep` `[可选参数] “字符串” 文件名`:
 
 - -I 不区分大小写
 - -v 排除指定字符串
@@ -481,10 +572,6 @@ sort lines of text
 
 report or omit repeated lines
 
-#### grep
-
-print lines matching a pattern
-
 #### wc
 
 print newline, word, and byte counts for each file
@@ -531,7 +618,7 @@ format and print data
 
 ### 帮助命令
 
-#### `man` `[可选参数] 命令名称`
+#### man
 
 - -f 显示操作等级
 - -k 包含匹配
@@ -554,10 +641,6 @@ format and print data
 8. System management commands
    Commands like mount(8), many of which only root can execute.
 
-#### 系统命令 --help
-
-只显示可选参数帮助
-
 #### help shell 内部命令
 
 显示 shell 内部命令帮助，如 cd 命令(shell 内部命令)
@@ -566,7 +649,7 @@ format and print data
 
 显示大型帮助文档 - enter 进入 u 返回 p 上一节 n 下一节 q 退出
 
-#### system info
+#### System Info
 
 ```bash
 sudo add-apt-repository ppa:dawidd0811/neofetch
@@ -754,7 +837,9 @@ finger apacheuser 查看单个用户信息
 
 /etc/sudoers.tmp
 
-#### SetUID/SetGID 权限——可执行程序/目录+普通用户临时获得 root 权限 （rws）
+#### SetUID/SetGID 权限
+
+可执行程序/目录+普通用户临时获得 root 权限 （rws）:
 
 - chmod 0xxx 取消双权限
 - chmod 2xxx 设置 SetGID 权限
@@ -999,6 +1084,24 @@ wget -r -p -np -k -P ~/tmp/ http://java-er.com
 [Certbot](https://github.com/certbot/certbot)
 for SSL certificates.
 
+#### GFW
+
+- [Hosts](https://github.com/racaljk/hosts)
+- [RSS](https://github.com/breakwa11/shadowsocks-rss)
+- [ChinaDNS](https://github.com/shadowsocks/ChinaDNS-Python)
+- [Sshuttle](https://github.com/apenwarr/sshuttle)
+- [ProxyChains](https://github.com/rofl0r/proxychains-ng)
+- [OpenVPN](https://github.com/OpenVPN/openvpn)
+- [VPNGate](https://github.com/waylau/vpngate-mirrors)
+- [DockerVPN](https://github.com/hwdsl2/docker-ipsec-vpn-server)
+
+```bash
+yum install python-setuptools && easy_install pip
+pip install shadowsocks
+echo "nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &" /etc/rc.local
+nohup ssserver -c /etc/shadowsocks.json -d start /dev/null 2>&1 &
+```
+
 ### 网络管理命令
 
 | 用途           | net-tool(被淘汰) | iproute2         |
@@ -1116,19 +1219,25 @@ server {
 }
 ```
 
-#### arp -a ——显示地址解析协议(IP 地址—网卡地址)
+#### arp
+
+`arp -a`显示地址解析协议(IP 地址—网卡地址):
 
 - 网际互联层：IP 协议(网际)、IGMP 协议(互联网组管理)、ICMP 协议(互联网控制报文)
 - 传输层：TCP 协议(传输控制)、UDP 协议(用户数据报)
 
-#### netstat -an——查看本机启用的端口
+#### netstat
+
+`netstat -an`查看本机启用的端口:
 
 - (-a 查看所有连接和监听端口 -n 显示 IP 地址和端口号)
 - -t tcp 协议端口
 - -u udp 协议端口
 - -l 监听状态服务
 
-#### nslookup domain_name——查看 DNS 解析器
+#### nslookup
+
+`nslookup domain_name`查看 DNS 解析器:
 
 /etc/network/interfaces
 
@@ -1136,14 +1245,20 @@ server {
 
 - /etc/hostname
 - /etc/sysconfig/network
-
 - /etc/resolv.conf
 
-#### ping -c ip/domain——探测网络状况
+#### ping
 
-#### `telnet [ip/domain] [端口]——远程管理与端口探测命令`
+`ping -c ip/domain`探测网络状况
 
-#### `traceroute [-n IP] domain —— 路由跟踪命令`
+#### telnet
+
+`telnet [ip/domain] [端口]`远程管理与端口探测命令
+
+#### traceroute
+
+- `traceroute [-n IP] domain`路由跟踪命令
+- `traceroute -n -I -T -p`路由扫描
 
 #### NetFilter 框架
 
@@ -1153,22 +1268,30 @@ nftables 命令行工具：nft
 
 预防策略——SYN 攻击、DDOS 攻击
 
-#### `fping -a -u -g -f [target] —— 批量扫描主机地址`
+#### fping
 
-#### `hping -p -S -a —— 可伪造IP地址`
+`fping -a -u -g -f [target]`批量扫描主机地址
 
-#### `traceroute -n -I -T -p —— 路由扫描`
+#### hping
 
-#### `mtr —— 路由扫描`
+`hping -p -S -a`可伪造IP地址
 
-#### `nmap —— 批量主机服务扫描`
+#### mtr
+
+路由扫描
+
+#### nmap
+
+批量主机服务扫描:
 
 - -P ICMP
 - -sS TCP SYN
 - -sT TCP connect()
 - -sU UDP
 
-#### ncat —— 批量主机服务扫描
+#### ncat
+
+批量主机服务扫描:
 
 - -w 设置超时时间
 - -v 显示命令执行过程
