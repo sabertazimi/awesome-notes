@@ -395,7 +395,8 @@ GTK/Gnome themes located in `/usr/share/themes/` or `~/.themes/`:
 git clone https://github.com/vinceliuice/Vimix-cursors
 sudo ./Vimix-cursors/install.sh
 git clone https://github.com/vinceliuice/WhiteSur-gtk-theme
-sudo ./WhiteSur-gtk-theme/install.sh -c light -c dark -i ubuntu
+sudo ./WhiteSur-gtk-theme/install.sh -t all -i ubuntu
+sudo ./WhiteSur-gtk-theme/tweaks.sh -h
 ```
 
 Repair for not detected HDMI problem:
