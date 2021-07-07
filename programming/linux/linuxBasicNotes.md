@@ -401,7 +401,7 @@ sudo ./WhiteSur-gtk-theme/install.sh -c light -c dark -i ubuntu
 Repair for not detected HDMI problem:
 
 ```bash
-sudo dpkg-reconfigure gdm3                         
+sudo dpkg-reconfigure gdm3
 sudo apt install --reinstall lightdm ubuntu-desktop
 ```
 
