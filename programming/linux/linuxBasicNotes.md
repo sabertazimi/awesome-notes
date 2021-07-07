@@ -5,6 +5,7 @@
 - [Linux Basic Notes](#linux-basic-notes)
   - [Linux Boot System](#linux-boot-system)
     - [Grub](#grub)
+      - [Grub Configuration](#grub-configuration)
       - [Grub Repair](#grub-repair)
         - [Windows Repair](#windows-repair)
         - [Ubuntu Live Repair](#ubuntu-live-repair)
@@ -17,7 +18,9 @@
     - [远程传输文件](#远程传输文件)
   - [命令优先级](#命令优先级)
   - [Linux 文件架构](#linux-文件架构)
-  - [Ubuntu Locale](#ubuntu-locale)
+  - [Ubuntu](#ubuntu)
+    - [Ubuntu Locale Settings](#ubuntu-locale-settings)
+    - [Ubuntu Themes](#ubuntu-themes)
   - [Arch Linux](#arch-linux)
     - [Basic Arch Linux Setup](#basic-arch-linux-setup)
     - [Pacman](#pacman)
@@ -219,13 +222,20 @@
 
 ### Grub
 
+#### Grub Configuration
+
 - `/etc/default/grub`配置文件, 用于一些基本的修改项,
   如默认启动项, Grub 界面等待时长, Grub 主题 etc.
   More details in `info -f grub -n 'Simple configuration'`
 
 ```bash
+# Default Startup OS
 GRUB_DEFAULT=0
+
+# Default Timeout
 GRUB_TIMEOUT=5
+
+# https://github.com/vinceliuice/grub2-themes
 GRUB_THEME="/boot/grub/themes/Tela/theme.txt"
 ```
 
@@ -353,7 +363,9 @@ man hier
 
 /usr/src 是内核源码存放的目录
 
-## Ubuntu Locale
+## Ubuntu
+
+### Ubuntu Locale Settings
 
 ```bash
 export LANG=en_US
@@ -367,6 +379,25 @@ export LANG=zh_CN
 sudo locale-gen zh_CN.GBK
 sudo locale-gen zh_CN.GB18030
 sudo dpkg-reconfigure locales
+```
+
+### Ubuntu Themes
+
+Nightly build for Numix Circle icon:
+
+```bash
+sudo add-apt-repository ppa:numix/ppa
+sudo apt update
+sudo apt install numix-icon-theme-circle
+```
+
+GTK/Gnome themes located in `/usr/share/themes/` or `~/.themes/`:
+
+```bash
+git clone https://github.com/vinceliuice/Vimix-cursors
+sudo ./Vimix-cursors/install.sh
+git clone https://github.com/vinceliuice/WhiteSur-gtk-theme
+sudo ./WhiteSur-gtk-theme/install.sh -c light -c dark -i ubuntu
 ```
 
 ## Arch Linux
