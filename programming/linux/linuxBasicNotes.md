@@ -392,10 +392,20 @@ sudo apt install numix-icon-theme-circle
 GTK/Gnome themes located in `/usr/share/themes/` or `~/.themes/`:
 
 ```bash
+# Vimix Cursors Installation
 git clone https://github.com/vinceliuice/Vimix-cursors
 sudo ./Vimix-cursors/install.sh
+
+# WhiteSur Gnome theme Installation
 git clone https://github.com/vinceliuice/WhiteSur-gtk-theme
 sudo ./WhiteSur-gtk-theme/install.sh -t all -i ubuntu
+# Tweak for Firefox
+sudo ./WhiteSur-gtk-theme/tweaks.sh -f
+# Tweak for Snap Apps
+sudo ./WhiteSur-gtk-theme/tweaks.sh -s
+# Tweak for GDM
+sudo ./WhiteSur-gtk-theme/tweaks.sh -g -i ubuntu
+# Tweak Help Docs
 sudo ./WhiteSur-gtk-theme/tweaks.sh -h
 ```
 
