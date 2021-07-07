@@ -47,7 +47,7 @@
       - [top](#top)
       - [jobs](#jobs)
       - [bg](#bg)
-        - [fg](#fg)
+      - [fg](#fg)
       - [kill](#kill)
       - [killall](#killall)
       - [shutdown](#shutdown)
@@ -192,17 +192,15 @@
         - [Tmux Scroll](#tmux-scroll)
       - [Configuration](#configuration)
   - [Perf Tools](#perf-tools)
-    - [`uptime`](#uptime)
-    - [`dmesg | tail`](#dmesg--tail)
-    - [`vmstat 1`](#vmstat-1)
-    - [`mpstat -P ALL 1`](#mpstat--p-all-1)
-    - [`pidstat 1`](#pidstat-1)
-    - [`iostat -xz 1`](#iostat--xz-1)
-    - [`free -m`](#free--m)
-    - [`sar -n DEV 1`](#sar--n-dev-1)
-    - [`sar -n TCP,ETCP 1`](#sar--n-tcpetcp-1)
-    - [`top`](#top-1)
-    - [`perf`](#perf)
+    - [uptime](#uptime)
+    - [Top Command](#top-command)
+    - [dmesg](#dmesg)
+    - [mpstat](#mpstat)
+    - [pidstat](#pidstat)
+    - [iostat](#iostat)
+    - [free](#free)
+    - [sar](#sar)
+    - [perf](#perf)
   - [Linux Tools](#linux-tools)
     - [FFmpeg](#ffmpeg)
       - [FFmpeg Probe](#ffmpeg-probe)
@@ -556,7 +554,7 @@ list active jobs
 
 place a job in the background
 
-##### fg
+#### fg
 
 place a job in the foreground
 
@@ -2425,27 +2423,55 @@ set-window-option -g window-status-current-bg red
 
 ## Perf Tools
 
-### `uptime`
+### uptime
 
-### `dmesg | tail`
+### Top Command
 
-### `vmstat 1`
+```bash
+top
+```
 
-### `mpstat -P ALL 1`
+### dmesg
 
-### `pidstat 1`
+```bash
+dmesg | tail
+```
 
-### `iostat -xz 1`
+### mpstat
 
-### `free -m`
+```bash
+mpstat -P ALL 1
+```
 
-### `sar -n DEV 1`
+### pidstat
 
-### `sar -n TCP,ETCP 1`
+```bash
+pidstat 1
+```
 
-### `top`
+### iostat
 
-### `perf`
+```bash
+iostat -xz 1
+```
+
+### free
+
+```bash
+free -m
+```
+
+### sar
+
+```bash
+`sar -n DEV 1`
+```
+
+```bash
+`sar -n TCP,ETCP 1`
+```
+
+### perf
 
 [Perf Examples](http://www.brendangregg.com/perf.html)
 
