@@ -135,7 +135,6 @@
 - /etc/gitconfig
 - ~/.gitconfig 或 ~/.config/git/config
 - repo/.git/config
-- git config --global color.ui true
 
 #### Initialize
 
@@ -146,6 +145,7 @@ git config --global user.name "sabertazimi"
 git config --global user.email sabertazimi@gmail.com
 git config --global core.editor vim
 git config --global credential.helper store
+git config --global color.ui true
 ```
 
 Commit/Push/Pull Configuration
@@ -160,8 +160,15 @@ git config --global rebase.autoStash true
 HTTP/HTTPS Proxy
 
 ```bash
+# speed up by cnpmjs
+# git clone/push/pull works
+git config --global url."https://github.com.cnpmjs.org/".insteadOf "https://github.com/"
+
+# post buffer config
 git config --global http.postbuffer 524288000
-# git config --global http.postbuffer 1048576000
+git config --global http.postbuffer 1048576000
+
+# proxy
 git config --global http.proxy 'socks5://127.0.0.1:1080'
 git config --global https.proxy 'socks5://127.0.0.1:1080'
 ```
