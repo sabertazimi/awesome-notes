@@ -5,7 +5,9 @@
 - [Git Basic Note](#git-basic-note)
   - [Basic](#basic)
     - [Config](#config)
-      - [Initialize](#initialize)
+      - [Basic Configuration](#basic-configuration)
+      - [Proxy Configuration](#proxy-configuration)
+      - [List and Help](#list-and-help)
     - [File State](#file-state)
     - [.gitignore](#gitignore)
     - [diff](#diff)
@@ -136,9 +138,7 @@
 - ~/.gitconfig 或 ~/.config/git/config
 - repo/.git/config
 
-#### Initialize
-
-Basic Configuration
+#### Basic Configuration
 
 ```bash
 git config --global user.name "sabertazimi"
@@ -148,8 +148,6 @@ git config --global credential.helper store
 git config --global color.ui true
 ```
 
-Commit/Push/Pull Configuration
-
 ```bash
 git config --global commit.template $HOME/.gitmsg.md
 git config --global push.default simple
@@ -157,7 +155,11 @@ git config --global pull.rebase true
 git config --global rebase.autoStash true
 ```
 
-HTTP/HTTPS Proxy
+#### Proxy Configuration
+
+- github.com.cnpmjs.org
+- hub.fastgit.org
+- raw.fastgit.org
 
 ```bash
 # speed up by cnpmjs
@@ -173,7 +175,7 @@ git config --global http.proxy 'socks5://127.0.0.1:1080'
 git config --global https.proxy 'socks5://127.0.0.1:1080'
 ```
 
-List and Help
+#### List and Help
 
 ```bash
 git config --list
@@ -185,7 +187,10 @@ git help config
 
 ### File State
 
-Untracked Unmodified(**Stable State**) Modified Staged
+- Untracked
+- Unmodified(**Stable State**)
+- Modified
+- Staged
 
 ### .gitignore
 
