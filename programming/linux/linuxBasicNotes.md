@@ -21,6 +21,9 @@
   - [Ubuntu](#ubuntu)
     - [Ubuntu Locale Settings](#ubuntu-locale-settings)
     - [Ubuntu Themes](#ubuntu-themes)
+      - [Icon Themes](#icon-themes)
+      - [GTK Themes](#gtk-themes)
+      - [GNOME Shell Extension](#gnome-shell-extension)
   - [Arch Linux](#arch-linux)
     - [Basic Arch Linux Setup](#basic-arch-linux-setup)
     - [Pacman](#pacman)
@@ -381,6 +384,8 @@ sudo dpkg-reconfigure locales
 
 ### Ubuntu Themes
 
+#### Icon Themes
+
 Nightly build for Numix Circle icon:
 
 ```bash
@@ -389,14 +394,16 @@ sudo apt update
 sudo apt install numix-icon-theme-circle
 ```
 
-GTK/Gnome themes located in `/usr/share/themes/` or `~/.themes/`:
+#### GTK Themes
+
+GTK/GNOME themes located in `/usr/share/themes/` or `~/.themes/`:
 
 ```bash
 # Vimix Cursors Installation
 git clone https://github.com/vinceliuice/Vimix-cursors
 sudo ./Vimix-cursors/install.sh
 
-# WhiteSur Gnome theme Installation
+# WhiteSur GNOME theme Installation
 git clone https://github.com/vinceliuice/WhiteSur-gtk-theme
 sudo ./WhiteSur-gtk-theme/install.sh -t all -i ubuntu
 # Tweak for Firefox
@@ -413,8 +420,14 @@ Repair for not detected HDMI problem:
 
 ```bash
 sudo dpkg-reconfigure gdm3
-sudo apt install --reinstall lightdm ubuntu-desktop
+sudo apt install --reinstall gdm3 lightdm ubuntu-desktop
 ```
+
+#### GNOME Shell Extension
+
+- Install GNOME shell extension for browser.
+- Install local binding app: `sudo apt install chrome-gnome-shell`.
+- Visit `extensions.gnome.org` to install extensions.
 
 ## Arch Linux
 
