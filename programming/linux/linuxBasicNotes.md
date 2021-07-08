@@ -1109,7 +1109,7 @@ e.g apche /var/www/html/index.html /usr/local/apache/htdocs/index.html
 #### Applications Management
 
 - desktop shortcut: `/usr/share/applications`
-- startup apps: `gnome-session-properties`
+- startup apps: `gnome-session-properties` or `gnome-tweaks`
 
 ### 网络连接命令
 
