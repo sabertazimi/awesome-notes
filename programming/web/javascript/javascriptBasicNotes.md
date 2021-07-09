@@ -3735,6 +3735,12 @@ function getUsers(users) {
 
 #### Promise.all
 
+- `Promise.all([...])` fail-fast.
+  If at least one promise in the promises array rejects,
+  then the promise returned rejects too.
+
+
+
 ```js
 Promise.all(urls.map(fetch)).then(responses =>
     Promise.all(responses.map(res => res.text())
