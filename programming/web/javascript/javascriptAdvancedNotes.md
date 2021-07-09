@@ -254,6 +254,8 @@
   - [HTTP Protocol](#http-protocol)
     - [HTTP 2](#http-2)
     - [HTTP 3](#http-3)
+  - [DevOps](#devops)
+    - [Static Assets](#static-assets)
 
 <!-- /TOC -->
 
@@ -4995,3 +4997,25 @@ HTTP/3 = `HTTP` + `QPack / Strem` + `QUIC / TLS 1.3+` + `UDP`
 - 解决多次握手高延迟问题
 - 解决队头 (数据重传) 阻塞 (后续数据) 问题
 - QUIC 协议保证传输可靠、实现快速握手、集成 TLS 加密、实现多路复用
+
+## DevOps
+
+### Static Assets
+
+Fingerprinting is a technique that makes the name of a file,
+dependent on the **contents** of the file,
+not on the **timestamp** differ from servers.
+When the file contents change,
+the filename is also changed.
+For content that is static or infrequently changed,
+this provides an easy way to tell whether two versions of a file are identical,
+even across different servers or deployment dates.
+
+When a filename is unique and based on its content, HTTP headers
+can be set to encourage **caches**(code: `200`) everywhere
+(whether at CDNs, at ISPs, in networking equipment, or in web browsers)
+to keep their own copy of the content.
+When the content is updated(),
+the fingerprint will change.
+This will cause the remote clients to request a new copy of the content.
+This is generally known as cache busting.
