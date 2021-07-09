@@ -209,6 +209,7 @@
 ### String Utils
 
 - [String Manipulation](https://github.com/dleitee/strman)
+- [Fuzzy String Matching](https://github.com/nol13/fuzzball.js)
 
 ### Functional Programming Utils
 
@@ -536,6 +537,8 @@
 
 ## Canvas
 
+- [HTML2Canvas](https://github.com/niklasvh/html2canvas)
+- [Three.js](https://github.com/mrdoob/three.js)
 - [Rough.js](https://github.com/pshihn/rough)
 - [Canvas Manipulation](https://github.com/meltingice/CamanJS)
 
@@ -612,7 +615,8 @@
 
 ### PDF
 
-- [pdfkit](https://github.com/foliojs/pdfkit)
+- [PDFMake](https://github.com/bpampuch/pdfmake)
+- [PDFKit](https://github.com/foliojs/pdfkit)
 
 ## Persistent Storage
 
