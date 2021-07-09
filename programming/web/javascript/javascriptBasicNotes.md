@@ -211,6 +211,7 @@
     - [From Music Data](#from-music-data)
     - [Audio Bar Chart with Canvas](#audio-bar-chart-with-canvas)
   - [Web Storage API](#web-storage-api)
+  - [Web Navigator API](#web-navigator-api)
   - [Web Files API](#web-files-api)
   - [Web Sockets API](#web-sockets-api)
   - [Web RTC API](#web-rtc-api)
@@ -4235,6 +4236,12 @@ function setStyles() {
   pElem.style.fontFamily = currentFont;
   imgElem.setAttribute('src', currentImage);
 }
+```
+
+## Web Navigator API
+
+```js
+navigator.connection.effectiveType // 2G - 5G
 ```
 
 ## Web Files API
