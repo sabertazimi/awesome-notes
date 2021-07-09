@@ -256,6 +256,7 @@
     - [HTTP 3](#http-3)
   - [DevOps](#devops)
     - [Static Assets](#static-assets)
+    - [CI System](#ci-system)
 
 <!-- /TOC -->
 
@@ -5097,3 +5098,8 @@ When the content is updated(),
 the fingerprint will change.
 This will cause the remote clients to request a new copy of the content.
 This is generally known as cache busting.
+
+### CI System
+
+- Full builds upon continuous deployment.
+- Incremental builds are a product of time.
