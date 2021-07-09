@@ -380,6 +380,7 @@
 - [Scroll Magic](https://github.com/janpaepke/ScrollMagic)
 - [Scroll Animation](https://github.com/michalsnik/aos)
 - [Smooth Scroll Animation](https://github.com/alexfoxy/laxxx)
+- [Smooth Scroll Bar](https://github.com/idiotWu/smooth-scrollbar)
 
 ### Mouse Utils
 
