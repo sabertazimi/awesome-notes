@@ -3492,6 +3492,7 @@ requestAnimationFrame(() => {
 ### Headless Testing
 
 - [Puppeteer](https://pptr.dev/#?product=Puppeteer&version=v1.16.0&show=api-class-page)
+- [Puppeteer Recipes](https://addyosmani.com/blog/puppeteer-recipes/)
 
 ```js
 const puppeteer = require('puppeteer');
