@@ -290,6 +290,7 @@
 - [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
 - [TheaterJS - Typing Effect](https://github.com/Zhouzi/TheaterJS)
 - [Guide Tour](https://github.com/shipshapecode/shepherd)
+- [Intro.js](https://github.com/usablica/intro.js)
 
 #### Page Indicator
 
@@ -775,10 +776,9 @@
 
 ## Documentation
 
-- [Docz](https://github.com/pedronauck/docz)
-- [Gatsby.js](https://github.com/gatsbyjs/gatsby)
 - [Docusaurus](https://github.com/facebook/docusaurus)
 - [Vuepress](https://github.com/vuejs/vuepress)
-- [Intro.js](https://github.com/usablica/intro.js)
-- [Wiki.js](https://github.com/Requarks/wiki)
+- [TypeDoc - TypeScript](https://github.com/TypeStrong/typedoc)
+- [Docz](https://github.com/pedronauck/docz)
 - [Documentation.js](https://github.com/documentationjs/documentation)
+- [Wiki.js](https://github.com/Requarks/wiki)
