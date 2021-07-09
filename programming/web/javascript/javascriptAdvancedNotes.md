@@ -148,6 +148,7 @@
       - [Data Preloading](#data-preloading)
       - [Images Lazy Loading](#images-lazy-loading)
       - [JavaScript Lazy Loading](#javascript-lazy-loading)
+      - [Prefetch](#prefetch)
       - [Babel Config for JavaScript](#babel-config-for-javascript)
     - [V8 Good Parts](#v8-good-parts)
       - [Object Shape](#object-shape)
@@ -3320,9 +3321,7 @@ Best practice: lazy loading scripts not execute immediately
 ```html
 <script src="myscript.js"></script>
 <script src="myscript.js" async></script>
-<link rel="preload" />
 <script src="myscript.js" defer></script>
-<link rel="prefetch" />
 ```
 
 ```jsx
@@ -3333,6 +3332,21 @@ const PageComponent = () => {
   </Suspense>;
 };
 ```
+
+#### Prefetch
+
+```html
+<link rel="preload" />
+<link rel="prefetch" />
+```
+
+[Why not to prefetch prerender](https://addyosmani.com/blog/what-not-to-prefetch-prerender/):
+
+- avoid prefetching pages for authentication
+- avoid over-prefetching to limit accidental DOS
+- avoid prefetching pages key to checkout
+- avoid prefetching large resources
+- avoid prefetching cross-origin resources
 
 #### Babel Config for JavaScript
 
