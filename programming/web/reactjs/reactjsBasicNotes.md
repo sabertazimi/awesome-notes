@@ -542,11 +542,18 @@ Solve:
 - reuse code with using ES6 classes
 - compose multiple HOCs
 
+Pros:
+
+- reusable (abstract same logic)
+- HOC is flexible with input data
+  (pass input data as parameters or derive it from props)
+
 Cons:
 
-- type annotation (flow, TypeScript)
+- wrapper hell: `withA(withB(withC(withD(Comp))))`
 - indirection issues: which HOC providing a certain prop
-- name collision: overwrite the same name prop silently
+- name collision/overlap props: overwrite the same name prop silently
+- HOC is not flexible with output data (to WrappedComponent)
 
 ```jsx
 // ToggleableMenu.jsx
@@ -614,16 +621,24 @@ Solve:
 - lowest level of indirection
 - no naming collision
 
+e.g `Context` or `ThemesProvider` is designed base on Render Props.
+
 Pros:
 
 - separate presentation from logic
 - extendable
 - reusable (abstract same logic)
+- Render Props is flexible with output data
+  (children parameters definition free)
 
 Cons:
 
+- wrapper hell (when many cross-cutting concerns are applied to a component)
 - minor memory issues when defining a closure for every render
-- callback hell (when many cross-cutting concerns are applied to a component)
+- unable to optimize code with `React.memo`/`React.PureComponent`
+  due to `render()` function always changes.
+- Render Props is not flexible with input data
+  (restricts children components from using the data at outside field)
 
 ```jsx
 class Toggleable extends React.Component {
@@ -711,6 +726,7 @@ const hook = {
 
 - returns a memoized value
 - only recompute the memoized value when one of the dependencies has changed
+- **shallow compare** diff
 - **optimization** helps to avoid expensive calculations on every render
 
 ```js
@@ -2485,8 +2501,8 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 - use `key` correctly
 - `shouldComponentUpdate`
-- `React.PureComponent`
-- `React.memo`
+- `React.PureComponent`: **shallow compare** diff
+- `React.memo`: **shallow compare** diff
 - stateless component
 - Immutable.js
 - Isomorphic rendering
@@ -2581,8 +2597,8 @@ export default App;
 prevent useless re-rendering:
 
 - shouldComponentUpdate
-- React.PureComponent
-- React.memo
+- React.PureComponent: **shallow compare** diff
+- React.memo: **shallow compare** diff
 - memorized values
 - memorized event handlers
 
