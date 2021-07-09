@@ -6,10 +6,11 @@
   - [Indexing Tools](#indexing-tools)
   - [Boilerplate](#boilerplate)
   - [UI Framework](#ui-framework)
-  - [Solution and Framework](#solution-and-framework)
-    - [Front-end Solution](#front-end-solution)
-    - [Back-end Solution](#back-end-solution)
-    - [Full-stack Solution](#full-stack-solution)
+  - [Framework and Solution](#framework-and-solution)
+    - [Frontend Solution](#frontend-solution)
+    - [Micro Frontends Solution](#micro-frontends-solution)
+    - [Backend Solution](#backend-solution)
+    - [Full Stack Solution](#full-stack-solution)
     - [Desktop Solution](#desktop-solution)
   - [State Data Management](#state-data-management)
     - [Redux](#redux)
@@ -133,43 +134,44 @@
 
 ## Boilerplate
 
+- [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 - [Create React App](https://github.com/facebook/create-react-app)
-- [Full Stack Boilerplate](https://github.com/TrillCyborg/fullstack)
-- [NWB - React Component Boilerplate](https://github.com/insin/nwb)
-- [Neutrino.js - More Customizable Boilerplate](https://github.com/neutrinojs/neutrino)
-- [Basic - HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
-- [Back-End - Nodejs Hackathon Starter](https://github.com/sahat/hackathon-starter)
-- [Hygen - Component Generator](https://github.com/jondot/hygen)
+- [React Component Boilerplate](https://github.com/insin/nwb)
+- [Neutrino.js Customizable Boilerplate](https://github.com/neutrinojs/neutrino)
+- [Hygen Component Generator](https://github.com/jondot/hygen)
 - [React Chrome Extension](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
+- [Vue CLI](https://github.com/vuejs/vue-cli)
+- [Vite](https://github.com/vitejs/vite)
 
 ## UI Framework
 
 - [React Ant Design](https://github.com/ant-design/ant-design)
-- [IceWorks](https://alibaba.github.io/ice/iceworks)
+- [React Mantine with Hooks](https://github.com/mantinedev/mantine)
+- [React Material UI](https://github.com/mui-org/material-ui)
 - [React Semantic UI](https://github.com/Semantic-Org/Semantic-UI-React)
-- [React Base UI](https://github.com/uber-web/baseui)
-- [React Material UI](https://github.com/callemall/material-ui)
 - [React BluePrint](https://github.com/palantir/blueprint)
-- [React Polaris](https://github.com/Shopify/polaris-react)
-- [Bootstrap](https://github.com/twbs/bootstrap)
-- [Bulma](https://github.com/jgthms/bulma)
-- [Materialize](https://github.com/Dogfalo/materialize)
+- [IceWorks](https://alibaba.github.io/ice/iceworks)
 - [Vue Admin UI](https://github.com/epicmaxco/vuestic-admin)
-- [HTML Presentation Framework](https://github.com/hakimel/reveal.js)
+- [Tailwind](https://github.com/tailwindlabs/tailwindcss)
+- [Bootstrap](https://github.com/twbs/bootstrap)
 
-## Solution and Framework
+## Framework and Solution
 
-### Front-end Solution
+### Frontend Solution
 
-- [UMI](https://github.com/umijs/umi)
-- [Gatsby.js](https://github.com/gatsbyjs/gatsby)
 - [React Storybook](https://github.com/storybooks/storybook)
+- [Gatsby.js](https://github.com/gatsbyjs/gatsby)
+- [UMI](https://github.com/umijs/umi)
 
-### Back-end Solution
+### Micro Frontends Solution
+
+- [IceStark Micro Frontends Solution](https://github.com/ice-lab/icestark)
+
+### Backend Solution
 
 - [Feathers.js - RESTful API](https://github.com/feathersjs/feathers)
 
-### Full-stack Solution
+### Full Stack Solution
 
 - [Next.js](https://github.com/zeit/next.js)
 
@@ -364,6 +366,7 @@
 ### Slides
 
 - [MDX Deck](https://github.com/jxnblk/mdx-deck)
+- [Reveal.js - HTML Presentation Framework](https://github.com/hakimel/reveal.js)
 - [One Page Style Vertical Slide](https://github.com/MopTym/doSlide)
 - [Glider.js](https://github.com/NickPiscitelli/Glider.js)
 - [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
