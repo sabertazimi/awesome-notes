@@ -337,9 +337,12 @@ this.setState((prevState, props) => ({
 
 ### Component Lifecycle
 
-- reconciliation stage: constructor, getDerivedStateFromProps,
-  shouldComponentUpdate, render, getSnapshotBeforeUpdate
-- commit stage: componentDidMount, componentDidUpdate, componentWillUnmount
+- reconciliation stage:
+  constructor, getDerivedStateFromProps, getDerivedStateFromError,
+  shouldComponentUpdate, render.
+- commit stage:
+  componentDidMount, getSnapshotBeforeUpdate, componentDidUpdate,
+  componentWillUnmount, componentDidCatch.
 
 因为协调阶段可能被中断、恢复，甚至重做,
 React 协调阶段的生命周期钩子可能会被调用多次,
