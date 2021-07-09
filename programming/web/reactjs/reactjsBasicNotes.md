@@ -109,6 +109,7 @@
       - [Extend Styled Component](#extend-styled-component)
       - [Props for Styled Component](#props-for-styled-component)
   - [Framework Paradigm](#framework-paradigm)
+    - [Third-party Libraries Usage](#third-party-libraries-usage)
   - [Interviews](#interviews)
 
 <!-- /TOC -->
@@ -3356,6 +3357,24 @@ ReactDOM.render(<WrapperContainer />, container);
 
 > 打破框架的范式之争, 其实是改变思路. 从思考不同范式之间的竞争关系, 转变成思考多个范式之间的协同关系.
 > useRef in React, Composition in Vue
+
+### Third-party Libraries Usage
+
+- Look for Libraries that Have Accessibility Built in.
+- Limit the Number of Third-party Libraries Use.
+- Wrap Third-party Dependencies:
+
+```js
+import { DatePicker as LibraryXDatePicker } from 'LibraryX';
+
+const DatePicker = (props) => {
+  return (
+    <LibraryXDatePicker {...props} />
+  );
+}
+
+export default DatePicker;
+```
 
 ## Interviews
 
