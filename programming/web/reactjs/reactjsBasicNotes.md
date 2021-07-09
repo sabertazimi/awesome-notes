@@ -138,13 +138,20 @@ React Fiber 的目标是提高其在动画、布局和手势等领域的适用�
 
 ### setState
 
-在事件处理函数中的 setState 是异步执行的,
-为了防止子组件在处理事件时多次渲染,
-将多个 setState (包括父组件) 移到浏览器事件之后执行
-(Batched Updates: 此时 React 内部变量 isBatchingUpdates 变成 true),
-可以提升 React 性能.
-未来会在更多的可以 Batched Updates 的场景下将 setState 设为异步执行,
-所以编写代码时最好将 setState 总是当做异步执行函数.
+- `setState` Synchronous Way:
+  When it comes `blocking mode`
+  (`ReactDOM.createBlockingRoot(rootNode).render(<App />)`),
+  setState works in synchronous mode.
+- `setState` Asynchronous Way:
+  At most of the other time, setState works in asynchronous mode,
+  including `legacy mode`(`ReactDOM.render(<App />, rootNode)`)
+  and `concurrent mode`(`ReactDOM.createRoot(rootNode).render(<App />)`).
+- 在异步模式下, 为了防止子组件在处理事件时多次渲染,
+  将多个 setState (包括父组件) 移到浏览器事件之后执行
+  (Batched Updates: 此时 React 内部变量 isBatchingUpdates 变成 true),
+  可以提升 React 性能.
+  未来会在更多的可以 Batched Updates 的场景下将 setState 设为异步执行,
+  所以编写代码时最好将 setState 总是当做异步执行函数.
 
 Batch Update: 事件处理,
 Not Bacth Update: Async Work (setTimeout/Promise.then)
