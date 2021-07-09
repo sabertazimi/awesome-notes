@@ -80,7 +80,7 @@
     - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
   - [Portals](#portals)
   - [React Performance](#react-performance)
-    - [Rerendering Problem](#rerendering-problem)
+    - [Re-rendering Problem](#re-rendering-problem)
     - [Code Spliting](#code-spliting)
   - [Server Side Rendering](#server-side-rendering)
     - [Pros of SSR](#pros-of-ssr)
@@ -2509,7 +2509,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 - Webpack bundle analyzer
 - [Progressive React](https://houssein.me/progressive-react)
 
-### Rerendering Problem
+### Re-rendering Problem
 
 The major difference is that
 React.Component doesn’t implement the shouldComponentUpdate() lifecycle method
@@ -2594,13 +2594,86 @@ class App extends Component {
 export default App;
 ```
 
-prevent useless re-rendering:
+Prevent useless re-rendering:
 
 - shouldComponentUpdate
 - React.PureComponent: **shallow compare** diff
 - React.memo: **shallow compare** diff
 - memorized values
 - memorized event handlers
+- 在用`memo`或者`useMemo`做优化前
+  ([Before You Memo](https://overreacted.io/before-you-memo/)),
+  可以从不变的部分里分割出变化的部分.
+  通过将变化部分的`state`向下移动从而抽象出变化的子组件,
+  或者将变化内容提升到父组件从而将不变部分独立出来:
+
+```js
+// BAD
+import { useState } from 'react';
+
+export default function App() {
+  let [color, setColor] = useState('red');
+  return (
+    <div>
+      <input value={color} onChange={(e) => setColor(e.target.value)} />
+      <p style={{ color }}>Hello, world!</p>
+      <ExpensiveTree />
+    </div>
+  );
+}
+
+function ExpensiveTree() {
+  let now = performance.now();
+  while (performance.now() - now < 100) {
+    // Artificial delay -- do nothing for 100ms
+  }
+  return <p>I am a very slow component tree.</p>;
+}
+```
+
+```js
+// GOOD
+export default function App() {
+  return (
+    <>
+      <Form />
+      <ExpensiveTree />
+    </>
+  );
+}
+
+function Form() {
+  let [color, setColor] = useState('red');
+  return (
+    <>
+      <input value={color} onChange={(e) => setColor(e.target.value)} />
+      <p style={{ color }}>Hello, world!</p>
+    </>
+  );
+}
+```
+
+```js
+// GOOD
+export default function App() {
+  return (
+    <ColorPicker>
+      <p>Hello, world!</p>
+      <ExpensiveTree />
+    </ColorPicker>
+  );
+}
+
+function ColorPicker({ children }) {
+  let [color, setColor] = useState("red");
+  return (
+    <div style={{ color }}>
+      <input value={color} onChange={(e) => setColor(e.target.value)} />
+      {children}
+    </div>
+  );
+}
+```
 
 ```js
 // BAD
