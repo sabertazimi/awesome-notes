@@ -287,6 +287,7 @@
 #### List Virtualized Windowing
 
 - [React Virtualized- Original Component](https://github.com/bvaughn/react-virtualized)
+- [React Virtualized Auto Sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)
 - [React Window - Brand New React Virtualized](https://github.com/bvaughn/react-window)
 - [React Virtuoso](https://github.com/petyosi/react-virtuoso)
 
