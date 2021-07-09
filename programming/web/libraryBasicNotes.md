@@ -31,7 +31,10 @@
       - [Input](#input)
       - [Select](#select)
       - [Validator](#validator)
+    - [List](#list)
+      - [List Virtualized Windowing](#list-virtualized-windowing)
     - [Table](#table)
+    - [Charts](#charts)
     - [Message](#message)
       - [Page Indicator](#page-indicator)
       - [Prompt](#prompt)
@@ -40,11 +43,8 @@
       - [Tooltip](#tooltip)
     - [Button](#button)
     - [Card](#card)
-    - [List](#list)
-      - [List Virtualization Windowing](#list-virtualization-windowing)
     - [Chat Widgets](#chat-widgets)
     - [Slides](#slides)
-    - [Charts](#charts)
     - [iFrame](#iframe)
   - [Viewport Utils](#viewport-utils)
     - [Scroll Utils](#scroll-utils)
@@ -280,10 +280,28 @@
 - [yup](https://github.com/jquense/yup)
 - [jQuery Form Validator](https://github.com/victorjonsson/jQuery-Form-Validator)
 
+### List
+
+- [Sortable](https://github.com/RubaXa/Sortable)
+
+#### List Virtualized Windowing
+
+- [React Virtualized- Original Component](https://github.com/bvaughn/react-virtualized)
+- [React Window - Brand New React Virtualized](https://github.com/bvaughn/react-window)
+- [React Virtuoso](https://github.com/petyosi/react-virtuoso)
+
 ### Table
 
-- [DateTables - Plugin for Render Data](https://github.com/DataTables/DataTables)
-- [Extended Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
+- [React Table(with Hooks API)](https://github.com/tannerlinsley/react-table)
+- [React Datasheet](https://github.com/nadbm/react-datasheet)
+- [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
+
+### Charts
+
+- [React Chartjs](https://github.com/jhudson8/react-chartjs)
+- [Sigma.js - Graph Drawing](https://github.com/jacomyal/sigma.js)
+- [HTML5 Chart](https://github.com/chartjs/Chart.js)
+- [Plotly.js](https://github.com/plotly/plotly.js)
 
 ### Message
 
@@ -330,16 +348,6 @@
 - [GitHub Information Card](https://github.com/lepture/github-cards)
 - [Bootcards](https://github.com/bootcards/bootcards)
 
-### List
-
-- [Sortable](https://github.com/RubaXa/Sortable)
-
-#### List Virtualization Windowing
-
-- [React Window - New Tiny React Virtualized](https://github.com/bvaughn/react-window)
-- [React Virtualized](https://github.com/bvaughn/react-virtualized)
-- [React Virtuoso](https://github.com/petyosi/react-virtuoso)
-
 ### Chat Widgets
 
 - [React Chat Widget](https://github.com/Wolox/react-chat-widget)
@@ -353,13 +361,6 @@
 - [Glider.js](https://github.com/NickPiscitelli/Glider.js)
 - [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
 - [Awesome Prezi-Like PPT](https://github.com/impress/impress.js)
-
-### Charts
-
-- [React Chartjs](https://github.com/jhudson8/react-chartjs)
-- [Sigma.js - Graph Drawing](https://github.com/jacomyal/sigma.js)
-- [HTML5 Chart](https://github.com/chartjs/Chart.js)
-- [Plotly.js](https://github.com/plotly/plotly.js)
 
 ### iFrame
 
