@@ -312,29 +312,31 @@ like [jscodeshift](https://github.com/facebook/jscodeshift).
 
 ### Variable
 
-- 一方面规定, var/function 声明的全局变量, 依旧是全局对象的属性
-- 另一方面规定, let/const/class 声明的全局变量, 不属于全局对象的属性
+- 一方面规定, var/function 声明的全局变量,
+  依旧是全局对象的属性, 意味着会`Hoisting`.
+- 另一方面规定, let/const/class 声明的全局变量,
+  不属于全局对象的属性, 意味着不会`Hoisting`.
 
 #### let
 
-- 不存在变量提升
-- 块级作用域(Temporal Dead Zone)
+- 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError
+- 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone)
 
 ```js
 const a = 1;
 
-... // temporal dead zone: throw reference error
+b = 3; // temporal dead zone: throw reference error
 
 let b = 2;
 ```
 
-- 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError
-
 #### const
 
 - const 一旦声明变量，就必须立即初始化，不能留到以后赋值
-- 块级作用域(Temporal Dead Zone)
-- 引用一个引用变量时，只表示此变量地址不可变，但所引用变量的值/属性可变(\* const)
+- 引用一个`Reference`变量时，只表示此变量地址不可变，但所引用变量的值/属性可变
+  (xxx \* const, 即`const`指针, 指向一个变量)
+- 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone)
+- 块级作用域
 
 ### Destructuring(Pattern Matching)
 
