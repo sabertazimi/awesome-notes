@@ -19,6 +19,7 @@
   - [JS Utils](#js-utils)
     - [String Utils](#string-utils)
     - [Functional Programming Utils](#functional-programming-utils)
+    - [TypeScript Utils](#typescript-utils)
   - [CSS Utils](#css-utils)
     - [Color Utils](#color-utils)
     - [Gradients Utils](#gradients-utils)
@@ -210,6 +211,10 @@
 ### Functional Programming Utils
 
 - [Immer](https://github.com/immerjs/immer)
+
+### TypeScript Utils
+
+- [TypeBox - JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
 
 ## CSS Utils
 
