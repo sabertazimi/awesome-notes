@@ -5,9 +5,16 @@
 - [React Basic Notes](#react-basic-notes)
   - [Diff Algorithm (Reconciliation)](#diff-algorithm-reconciliation)
     - [React Fiber](#react-fiber)
-    - [Elements of Different Types](#elements-of-different-types)
-    - [DOM Elements of Same Type](#dom-elements-of-same-type)
-    - [Component Elements of Same Type](#component-elements-of-same-type)
+    - [React Render Stage](#react-render-stage)
+      - [Elements of Different Types](#elements-of-different-types)
+      - [DOM Elements of Same Type](#dom-elements-of-same-type)
+      - [Component Elements of Same Type](#component-elements-of-same-type)
+    - [React Fiber Effects](#react-fiber-effects)
+    - [React Commit Stage](#react-commit-stage)
+      - [BeforeMutation Stage](#beforemutation-stage)
+      - [Mutation Stage](#mutation-stage)
+      - [Layout Stage](#layout-stage)
+      - [useEffect Execution Time](#useeffect-execution-time)
   - [Props and State](#props-and-state)
     - [setState](#setstate)
     - [componentDidMount()](#componentdidmount)
@@ -113,14 +120,16 @@
 - [A Simple React with Fiber Reconciliation](https://github.com/sabertazimi/meactjs)
 
 React Fiber 的目标是提高其在动画、布局和手势等领域的适用性.
-它的主要特性是 incremental rendering: 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
+它的主要特性是`Incremental Rendering`: 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
 
-### Elements of Different Types
+### React Render Stage
+
+#### Elements of Different Types
 
 - rebuild element and children
-- methods: componentDidMount/componentWillUnmount
+- methods: `componentDidMount`/`componentWillUnmount`
 
-### DOM Elements of Same Type
+#### DOM Elements of Same Type
 
 - only update the changed attributes
 - use `key` attribute to match children
@@ -128,11 +137,45 @@ React Fiber 的目标是提高其在动画、布局和手势等领域的适用�
 `Best Practice`: give `key` to `<li>/<tr>/<tc>` elements
 (stable, predictable, unique and not array indexed)
 
-### Component Elements of Same Type
+#### Component Elements of Same Type
 
 - update the props to match the new element
-- methods: componentWillRecevieProps/componentWillUpdate
+- methods: `getDerivedStateFromProps`
 - then `render` called, diff algorithm recurses on the old result and the new result
+
+### React Fiber Effects
+
+- Insert DOM elements: `Placement` tag.
+- Update DOM elements: `Update` tag.
+- Delete DOM elements: `Deletion` tag.
+- Update Ref property: `Ref` tag.
+- `useEffect` callback: `Passive` tag.
+  `useEffect(fn)` got `Passive` effect
+  when `Mount` lifecycle and `Update` lifecycle,
+  `useEffect(fn, [])` got `Passive` effect when `Mount` lifecycle,
+  `useEffect(fn, [deps])` got `Passive` effect
+  when `Mount` lifecycle and `deps` changed.
+
+React create effects when `Render` stage,
+then update effects to real DOM when `Commit` stage.
+
+### React Commit Stage
+
+#### BeforeMutation Stage
+
+#### Mutation Stage
+
+- `Placement` effects: `DOM.appendChild` called.
+
+#### Layout Stage
+
+- `componentDidMount` lifecycle function called **synchronously**.
+- `useLayoutEffect` callback called **synchronously**.
+
+#### useEffect Execution Time
+
+`useEffect` callback called **asynchronously**
+after three stages of `Commit`.
 
 ## Props and State
 
@@ -3227,4 +3270,4 @@ ReactDOM.render(<WrapperContainer />, container);
 
 ## Interviews
 
-- [Reactjs Interview Questions](https://github.com/semlinker/reactjs-interview-questions)
+- [React Interview Questions](https://github.com/semlinker/reactjs-interview-questions)
