@@ -107,6 +107,7 @@
     - [Background Best Practice](#background-best-practice)
       - [Scroll Indicator](#scroll-indicator)
       - [Jumbotron and Landing Page](#jumbotron-and-landing-page)
+      - [Horizontal Scrolling Best Practices](#horizontal-scrolling-best-practices)
   - [CSS Text](#css-text)
     - [white-space](#white-space)
   - [CSS Font](#css-font)
@@ -134,7 +135,7 @@
       - [perspective](#perspective)
       - [transform-style](#transform-style)
       - [backface-visibility](#backface-visibility)
-    - [animation](#animation)
+    - [animation](#animation-1)
       - [Animation Play State](#animation-play-state)
       - [FLIP](#flip)
   - [Responsive Desgin](#responsive-desgin)
@@ -2008,6 +2009,23 @@ body {
   width: 1px;
 }
 ```
+
+#### Horizontal Scrolling Best Practices
+
+[Horizontal Scrolling](https://designshack.net/articles/navigation/horizontal-scrolling-pros-cons/):
+
+- Avoid a full-screen horizontal scroll;
+  ensure that users know there is also content
+  that can be reached using a traditional method.
+- Make scroll interactions obvious and provide instruction.
+- To avoid accessibility issues,
+  ensure that horizontal scrolling elements also work with keyboard navigation.
+- Design horizontal scrolling elements in containers using HTML and CSS.
+- Use visual cues, such as partial images,
+  to show that there is a horizontal scroll action in effect.
+- Use partial horizontal scrolling with a static design element for stability.
+- Design horizontal scroll bars in the same manner as vertical scroll bars
+  to create an element of familiarity for users.
 
 ## CSS Text
 
