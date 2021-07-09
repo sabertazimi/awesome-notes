@@ -558,6 +558,7 @@
 
 - [Howler.js](https://github.com/goldfire/howler.js)
 - [Music Helper Utils](https://github.com/madewithlove/music-fns)
+- [Elementary Audio Tools](https://github.com/nick-thompson/elementary)
 
 ### Video
 
@@ -643,8 +644,9 @@
 ### CLI Library
 
 - [Oclif - Open CLI Framework](https://github.com/oclif/oclif)
-- [React in Node CLI App](https://github.com/vadimdemedes/ink)
+- [INK - React CLI App](https://github.com/vadimdemedes/ink)
 - [Nexe - Node EXE Wrapper](https://github.com/nexe/nexe)
+- [ZX - Ndoe Bash Wrapper](https://github.com/google/zx)
 - [Commander](https://github.com/tj/commander.js)
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js)
 - [Chalk](https://github.com/chalk/chalk)
@@ -721,8 +723,8 @@
 
 - [Jest](https://github.com/facebook/jest)
 - [Jest UI](https://github.com/Raathigesh/majestic)
-- [Enzyme - React Testing](https://github.com/airbnb/enzyme)
-- [React Testing Library](https://github.com/kentcdodds/react-testing-library)
+- [Enzyme - React Testing](https://github.com/enzymejs/enzyme)
+- [React Testing Library](https://github.com/testing-library/react-testing-library)
 - [Jasmine](https://github.com/jasmine/jasmine)
 - [Mocha](https://github.com/mochajs/mocha)
 - [Assert](https://github.com/power-assert-js/power-assert)
@@ -730,10 +732,10 @@
 
 ### Feature Testing
 
-- [karma](https://github.com/karma-runner/karma)
+- [Karma](https://github.com/karma-runner/karma)
 - [Webkit API(Chrome)](https://github.com/ariya/phantomjs)
 - [Gecko API(Firefox)](https://github.com/laurentj/slimerjs)
-- [selenium](https://github.com/SeleniumHQ/selenium)
+- [Selenium](https://github.com/SeleniumHQ/selenium)
 - [Interactor.js](https://github.com/wwilsman/interactor.js)
 
 ### End to End Testing
