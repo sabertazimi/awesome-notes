@@ -3210,9 +3210,9 @@ Load 也不一定代表用户看到主要内容.
 
 #### Speed Tools
 
-- [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools/)
+- [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools)
 - [FID Tracking](https://github.com/GoogleChromeLabs/first-input-delay)
-- [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
+- [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
 - [Lighthouse (`audit` tab)](https://github.com/GoogleChrome/lighthouse)
 
 ### Data Format and Size
@@ -3304,7 +3304,7 @@ window.addEventListener('scroll', function(event) {
 
 #### JavaScript Lazy Loading
 
-- [Script Priorities](https://addyosmani.com/blog/script-priorities/)
+- [Script Priorities](https://addyosmani.com/blog/script-priorities)
 - `defer`: downloads the script while the document is still parsing,
   but waits until the document has finished parsing before executing it
   (**in order**)
@@ -3340,7 +3340,7 @@ const PageComponent = () => {
 <link rel="prefetch" />
 ```
 
-[Why not to prefetch prerender](https://addyosmani.com/blog/what-not-to-prefetch-prerender/):
+[Why not to prefetch prerender](https://addyosmani.com/blog/what-not-to-prefetch-prerender):
 
 - avoid prefetching pages for authentication
 - avoid over-prefetching to limit accidental DOS
@@ -3434,7 +3434,7 @@ V8 use ICs to memorize information (same shape) where to find properties on obje
 ### Perf and Analysis Tools
 
 - [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
-- [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report/)
+- [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report)
 
 Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 
@@ -3492,7 +3492,7 @@ requestAnimationFrame(() => {
 ### Headless Testing
 
 - [Puppeteer](https://pptr.dev/#?product=Puppeteer&version=v1.16.0&show=api-class-page)
-- [Puppeteer Recipes](https://addyosmani.com/blog/puppeteer-recipes/)
+- [Puppeteer Recipes](https://addyosmani.com/blog/puppeteer-recipes)
 
 ```js
 const puppeteer = require('puppeteer');
@@ -4865,7 +4865,7 @@ self.addEventListener('install', e => {
 
 ### PWA Tutorials
 
-- [Extensive Guide](https://www.smashingmagazine.com/2018/11/guide-pwa-progressive-web-applications/)
+- [Extensive Guide](https://www.smashingmagazine.com/2018/11/guide-pwa-progressive-web-applications)
 
 ## HTTP/2
 
