@@ -1071,8 +1071,6 @@ const objectCopy = Object.fromEntries(map);
 
 ### Modules
 
-import and export
-
 ```js
 import { lastName as surname } from './profile.js';
 ```
@@ -1100,8 +1098,61 @@ export { foo as myFoo } from 'my_module';
 export * from 'my_module';
 ```
 
-- CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用
 - CommonJS 模块是运行时加载，ES6 模块是编译时输出接口
+- CommonJS 模块输出的是一个值的拷贝,
+  ES6 模块 Export 分两种情况:
+  `export default xxx`输出`value`,
+  `export xxx`输出`reference`
+
+Export default value:
+
+```js
+// module.js
+let thing = 'initial';
+
+export { thing };
+export default thing;
+
+setTimeout(() => {
+  thing = 'changed';
+}, 500);
+
+// main.js
+import { thing, default as defaultThing } from './module.js';
+import anotherDefaultThing from './module.js';
+
+setTimeout(() => {
+  console.log(thing); // "changed"
+  console.log(defaultThing); // "initial"
+  console.log(anotherDefaultThing); // "initial"
+}, 1000);
+```
+
+Export normal reference:
+
+```js
+// module.js
+export let thing = 'initial';
+
+setTimeout(() => {
+  thing = 'changed';
+}, 500);
+
+// main.js
+import { thing as importedThing } from './module.js';
+const module = await import('./module.js');
+let { thing } = await import('./module.js'); // Destructuring Behavior
+
+setTimeout(() => {
+  console.log(importedThing); // "changed"
+  console.log(module.thing); // "changed"
+  console.log(thing); // "initial"
+}, 1000);
+```
+
+`defaultThing` and `anotherDefaultThing` shows ES6 export default value,
+`importedThing` and `module.thing` shows ES6 export normal reference,
+and `Destructuring Behavior` create a brand new value.
 
 ### Class 语法糖
 
