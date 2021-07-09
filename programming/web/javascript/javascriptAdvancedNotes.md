@@ -1100,9 +1100,17 @@ export * from 'my_module';
 
 - CommonJS 模块是运行时加载，ES6 模块是编译时输出接口
 - CommonJS 模块输出的是一个值的拷贝,
-  ES6 模块 Export 分两种情况:
-  `export default xxx`输出`value`,
-  `export xxx`输出`reference`
+  ES6 模块 Export 分 3 种情况:
+  1. `export default xxx`输出`value`,
+  2. `export xxx`输出`reference`.
+  `defaultThing` and `anotherDefaultThing` shows ES6 export default value,
+  `importedThing` and `module.thing` shows ES6 export normal reference,
+  and `Destructuring Behavior` create a brand new value.
+  3. function/class special case:
+  `export default function/class thing() {}; // function/class expressions`
+  export default reference,
+  `function/class thing() {}; export default thing; // function/class statements`
+  export default value.
 
 Export default value:
 
@@ -1150,9 +1158,26 @@ setTimeout(() => {
 }, 1000);
 ```
 
-`defaultThing` and `anotherDefaultThing` shows ES6 export default value,
-`importedThing` and `module.thing` shows ES6 export normal reference,
-and `Destructuring Behavior` create a brand new value.
+To sum up:
+
+```js
+// These give you a live reference to the exported thing(s):
+import { thing } from './module.js';
+import { thing as otherName } from './module.js';
+import * as module from './module.js';
+const module = await import('./module.js');
+// This assigns the current value of the export to a new identifier:
+let { thing } = await import('./module.js');
+
+// These export a live reference:
+export { thing };
+export { thing as otherName };
+export { thing as default };
+export default function thing() {}
+// These export the current value:
+export default thing;
+export default 'hello!';
+```
 
 ### Class 语法糖
 
