@@ -2027,6 +2027,13 @@ body {
 - Design horizontal scroll bars in the same manner as vertical scroll bars
   to create an element of familiarity for users.
 
+Horizontal Scrolling Methods:
+
+- Rotate 90 deg element.
+- `display: flex; overflow-x: auto;`
+- `grid-auto-flow: column;`
+- `scroll-snap-type: x mandatory; scroll-snap-align: center;`
+
 ## CSS Text
 
 ```css
