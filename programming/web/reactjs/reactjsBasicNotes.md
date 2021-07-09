@@ -1085,7 +1085,8 @@ App = MyReact.render(Component);
 
 #### LifeCycle Hooks
 
-componentDidMount
+componentDidMount: `useLayoutEffect`.
+`useEffect` got invoked after `componentDidMount`.
 
 ```js
 const useMount = (fn) => {
