@@ -581,16 +581,16 @@
 
 - [React Markdown](https://github.com/rexxars/react-markdown)
 - [Block Editor](https://github.com/codex-team/editor.js)
-- [CKEditor](https://github.com/ckeditor)
+- [CKEditor](https://github.com/ckeditor/ckeditor5)
 - [Wang Editor - Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
 - [Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
 
 ### Code Editor
 
+- [React Draft.js Editor](https://github.com/facebook/draft-js)
 - [React ACE](https://github.com/securingsincity/react-ace)
 - [ACE Editor](https://github.com/ajaxorg/ace)
-- [CodeMirror](https://github.com/codemirror/CodeMirror)
-- [React Built-In Editor](https://github.com/facebook/draft-js)
+- [Code Mirror](https://github.com/codemirror/CodeMirror)
 - [Block Editor](https://github.com/codex-team/editor.js)
 
 ## Mail
