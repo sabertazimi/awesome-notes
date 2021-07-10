@@ -252,6 +252,7 @@
     - [CSRF](#csrf)
     - [Object Property](#object-property)
     - [Sandbox](#sandbox)
+    - [User Fingerprint](#user-fingerprint)
   - [HTTP Protocol](#http-protocol)
     - [HTTP 2](#http-2)
     - [HTTP 3](#http-3)
@@ -5097,6 +5098,24 @@ sandbox = new Function(`
 }`)
 
 sandbox().call(window, { window, location, history, document }, code)
+```
+
+### User Fingerprint
+
+Use Canvas or WebGL to generate user
+[fingerprint](https://yinzhicao.org/TrackingFree/crossbrowsertracking_NDSS17.pdf).
+
+```js
+function getCanvasFingerprint () {    
+    var canvas = document.createElement('canvas');    
+    var context = canvas.getContext("2d");    
+    context.font = "18pt Arial";    
+    context.textBaseline = "top";    
+    context.fillText("Hello, user.", 2, 2);    
+    return canvas.toDataURL("image/jpeg");
+}
+
+getCanvasFingerprint()
 ```
 
 ## HTTP Protocol
