@@ -160,6 +160,7 @@
       - [Input Events](#input-events)
       - [Mouse Events](#mouse-events)
       - [Key Events](#key-events)
+      - [Clipboard Event](#clipboard-event)
       - [Frame Events](#frame-events)
       - [User-Defined Handler](#user-defined-handler)
     - [Document](#document)
@@ -2964,8 +2965,19 @@ const onSubmit = event => {
 
 #### Input Events
 
-- focus/focusin/focusout
-- input/change
+- focus/focusin/focusout event
+- input/change event
+- select event
+
+```js
+const input = document.querySelector('input');
+
+input.addEventListener('select', (event) => {
+  const log = document.getElementById('log');
+  const selection = event.target.value.substring(event.target.selectionStart, event.target.selectionEnd);
+  log.textContent = `You selected: ${selection}`;
+});
+```
 
 #### Mouse Events
 
@@ -2986,7 +2998,7 @@ window.addEventListener('click', (event) => {
 });
 ```
 
-[drag event](https://developer.mozilla.org/en-US/docs/Web/API/Document/drag_event):
+[Drag Event](https://developer.mozilla.org/en-US/docs/Web/API/Document/drag_event):
 
 - dragstart
 - dragend
@@ -2994,6 +3006,16 @@ window.addEventListener('click', (event) => {
 - dragenter
 - dragleave
 - drop
+
+[Context Menu Event](https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event):
+
+```js
+const noContext = document.getElementById('noContextMenu');
+
+noContext.addEventListener('contextmenu', e => {
+  e.preventDefault();
+});
+```
 
 #### Key Events
 
@@ -3035,6 +3057,24 @@ document.onkeydown = function(event) {
 'Delete';
 'Redo';
 'Undo';
+```
+
+#### Clipboard Event
+
+- copy
+- cut
+- paste
+
+```js
+const source = document.querySelector('div.source');
+
+source.addEventListener('copy', (event) => {
+    const selection = document.getSelection();
+    event.clipboardData.setData('text/plain',
+      selection.toString().concat('copyrihgt information')
+    );
+    event.preventDefault();
+});
 ```
 
 #### Frame Events
