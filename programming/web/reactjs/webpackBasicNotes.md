@@ -108,7 +108,7 @@ sudo sysctl -p
 - DLL Plugin
 - DLLReference Plugin
 - [AutoDLL Plugin](https://github.com/asfktz/autodll-webpack-plugin)
-- [Thread Loader(https://github.com/webpack-contrib/thread-loader)
+- [Thread Loader](https://github.com/webpack-contrib/thread-loader)
 - [Webpack Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
 - [Webpack Monitor](https://github.com/webpackmonitor/webpackmonitor)
 - [Webpack Browser UI](https://github.com/zouhir/jarvis)
