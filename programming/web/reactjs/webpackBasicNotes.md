@@ -95,51 +95,24 @@ sudo sysctl -p
 
 ## Plugin
 
-```js
-commonsPlugin = new webpack.optimize.CommonsChunkPlugin(
-  'vendor',
-  'vendor.js',
-  Infinity
-);
-uglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
-  output: {
-    comments: false
-  },
-  compress: {
-    warnings: false
-  }
-});
-definePlugin = new webpack.DefinePlugin({
-  'process.env': {
-    NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-  }
-});
-providePlugin = new webpack.ProvidePlugin({
-  $: 'jquery',
-  jQuery: 'jquery',
-  'window.jQuery': 'jquery'
-});
-cleanUpPlugin = new WebpackCleanupPlugin({
-  exclude: ['stats.json', 'important.js']
-});
-dllPlugin = new Webpack.DllPlugin({
-  path: 'manifest.json',
-  name: '[name]',
-  context: __dirname
-});
-dllReferencePlugin = new Webpack.DllReferencePlugin({
-  manifest: require('./manifest.json'),
-  context: __dirname
-});
-```
-
-- imageMinPlugin
-- preload plugin
-- prefetch plugin
-- webpack-bundle-analyzer
-- webpack-monitor
-- [webpack-jarvis - Browser UI](https://github.com/zouhir/jarvis)
-- [webpackbar](https://github.com/nuxt/webpackbar)
+- Commons Chunk Plugin
+- [HTML Plugin](https://github.com/jantimon/html-webpack-plugin)
+- [Optimize CSS Assets Plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin)
+- [UglifyJS Terser Plugin](https://github.com/webpack-contrib/terser-webpack-plugin)
+- [ImageMin Plugin](https://github.com/Klathmon/imagemin-webpack-plugin)
+- Define Plugin
+- Provide Plugin
+- CleanUp Plugin
+- Preload plugin
+- Prefetch plugin
+- DLL Plugin
+- DLLReference Plugin
+- [AutoDLL Plugin](https://github.com/asfktz/autodll-webpack-plugin)
+- [Thread Loader(https://github.com/webpack-contrib/thread-loader)
+- [Webpack Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
+- [Webpack Monitor](https://github.com/webpackmonitor/webpackmonitor)
+- [Webpack Browser UI](https://github.com/zouhir/jarvis)
+- [Webpack CLI UI](https://github.com/unjs/webpackbar)
 
 ## Advanced
 
