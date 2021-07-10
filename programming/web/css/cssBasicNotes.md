@@ -212,7 +212,8 @@
 
 ### Specificity
 
-specificiy has 4 bits - thousands, hundreds, tens, ones `0000`:
+Specificity (Selector Priority)
+has 4 bits - thousands, hundreds, tens, ones `0000`:
 
 - thousands: inline-style
 - hundreds: ID selector
@@ -772,8 +773,15 @@ a[title*='link'] {
 - `:read-only`: 应用于其内容无法供用户修改的元素；
 - `:read-write`: 应用于其内容可供用户修改的元素，比如输入框；
 - `:root`: 根元素，始终指 html 元素；
-- `:placeholder-shown`: select `input` with placeholer
+- `:placeholder-shown`: select `input` with placeholder
+- `:focus-visible`: selected when Tab (shortcut) focused
 - `:focus-within`: selected when any children focused
+- `:empty`：没有子元素的元素，没有子元素包括文本节点；
+- `:not(exception)`：该选择器将选择与括号内的选择器不匹配的元素：
+- `:lang(en)`：具有使用双字母缩写(en)表示的语言的元素；
+- E F:first-of-type **相同类型** 的第一个元素
+- E F:last-of-type **相同类型** 的最后一个元素
+- E F:only-of-type 孩子中只有一种该元素
 - E :nth-child(n) 选择 E 的第 n 个孩子
 - E F:nth-child(n)：该选择器定位元素 E 的第 n 个子元素的元素 F,可省略 E
 - E F:nth-last-child(n)：该选择器定位元素 E 的倒数第 n 个子元素的元素 F,可省略 E
@@ -782,12 +790,6 @@ a[title*='link'] {
 - E F:first-child 第一个孩子
 - E F:last-child 最后一个孩子
 - E F:only-child 单一后代
-- E F:first-of-type **相同类型** 的第一个元素
-- E F:last-of-type **相同类型** 的最后一个元素
-- E F:only-of-type 孩子中只有一种该元素
-- E:empty：没有子元素的元素，没有子元素包括文本节点；
-- E:lang(en)：具有使用双字母缩写(en)表示的语言的元素；
-- E:not(exception)：该选择器将选择与括号内的选择器不匹配的元素：
 
 ```html
 <a href="#p1">p1</a>
