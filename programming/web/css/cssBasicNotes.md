@@ -3798,10 +3798,30 @@ const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
 
 ### Invalid and Empty Value in CSS Variables
 
-`--invalid-value: initial;` is invalid value
-leding to `var(--invalid-value)` called failed,
-`--empty-value: ;` is valid empty value
-leding to `var(--empty-value)` called succeeded.
+- `--invalid-value: initial;` is invalid value
+  leding to `var(--invalid-value)` called failed,
+  `var(--invalid-value, backup-value)` get backup-value.
+- `--empty-value: ;` is valid empty value
+  leding to `var(--empty-value)` called succeeded,
+  `var(--empty-value, backup-value)` get **parent value**.
+- Use Invalid and Empty Value to
+  implement `if (true)` in CSS.
+
+```css
+:root {
+  --ON: initial;
+  --OFF: ;
+}
+
+button {
+  --is-raised: var(--OFF);
+  border: 1px solid var(--is-raised, rgb(0 0 0 / 0.1));
+}
+
+button:hover {
+  --is-raised: var(--ON);
+}
+```
 
 ```css
 /**
