@@ -52,7 +52,7 @@
       - [Implementation](#implementation)
       - [Sample](#sample)
         - [Ajax Callback](#ajax-callback)
-  - [MV\* Pattern](#mv\-pattern)
+  - [MV\* Pattern](#mv-pattern)
   - [jQuery Pattern](#jquery-pattern)
     - [Plugin Pattern](#plugin-pattern)
 
@@ -1172,6 +1172,7 @@ const MenuBar = {
 };
 
 // client: command object
+// command: object with `action` implemented
 const Command = receiver => {
   return function() {
     receiver.action();
@@ -1200,7 +1201,7 @@ MenuCommand.prototype.execute = function() {
 
 const fileActions = new FileActions();
 const EditActions = new EditActions();
-const InsertACtions = new InsertACtions();
+const InsertActions = new InsertActions();
 const HelpActions = new HelpActions();
 
 const appMenuBar = new MenuBar();
@@ -1247,7 +1248,7 @@ document.getElementsByTagName('body')[0].appendChild(appMenuBar.getElement());
 appMenuBar.show();
 ```
 
-command sequences to implement Macro/Batch/Undo command
+Command sequences to implement Macro/Batch/Undo command:
 
 ```js
 const Cursor = function(width, height, parent) {
