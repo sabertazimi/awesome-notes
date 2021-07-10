@@ -251,6 +251,7 @@
     - [Trusted Types](#trusted-types)
     - [CSRF](#csrf)
     - [Object Property](#object-property)
+    - [Sandbox](#sandbox)
   - [HTTP Protocol](#http-protocol)
     - [HTTP 2](#http-2)
     - [HTTP 3](#http-3)
@@ -5072,6 +5073,31 @@ def allow_request(req):
 
 - `object[constructor]`
 - `object.__proto__`
+
+### Sandbox
+
+```js
+// 简化伪代码示例
+frame = document.body.appendChild(document.createElement('iframe',{
+  src: 'about:blank',
+  sandbox: "allow-scripts allow-same-origin allow-popups allow-presentation allow-top-navigation",
+  style: 'display: none;',
+}))
+
+window = new Proxy(frame.contentWindow, { ... })
+document = new Proxy(document, { ... })
+...
+
+
+sandbox = new Function(`
+  return function ({ window, location, history, document }, code){
+    with(window) {
+      ${code}
+    }
+}`)
+
+sandbox().call(window, { window, location, history, document }, code)
+```
 
 ## HTTP Protocol
 
