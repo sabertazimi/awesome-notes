@@ -3359,7 +3359,7 @@ reduce image transfer sizes by average of ~20%
 
 #### Images Lazy Loading
 
-- Lazy Loading Polyfill
+Lazy Loading Polyfill:
 
 ```html
 <img data-src="flower.jpg" class="lazyload" />
@@ -3375,7 +3375,23 @@ window.addEventListener('scroll', function(event) {
 });
 ```
 
-- Native Lazy Loading
+Observer Lazy Loading:
+
+```js
+const observer = new IntersectionObserver(nodes => {
+  nodes.forEach(v => {
+    if (v.isIntersecting) {
+      v.target.src = v.target.dataset.src;
+      observer.unobserve(v.target);
+    }
+  });
+});
+
+const imgs = document.querySelectorAll("img.lazyload");
+imgs.forEach(v => observer.observe(v));
+```
+
+Native Lazy Loading:
 
 ```html
 <img src="flower.jpg" lazyload="auto" />
