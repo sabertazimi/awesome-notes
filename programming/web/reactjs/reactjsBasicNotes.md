@@ -68,6 +68,7 @@
     - [Quotes Style](#quotes-style)
     - [Spacing Style](#spacing-style)
     - [Ordering of Class Component](#ordering-of-class-component)
+    - [Project Structure Best Practice](#project-structure-best-practice)
   - [MVC/MVVM](#mvcmvvm)
     - [Controller](#controller)
     - [Comparsion](#comparsion)
@@ -694,16 +695,16 @@ class Menu extends React.Component {
 
 ## Hooks
 
-- reuse stateful logic between components
+- Reuse stateful logic between components
   (avoid wrapper hell in render props or HOC)
-- split one complex component into smaller functions
-- use more of React's features without classes
-- class components will read `this.props` **too early** or **too late**,
+- Split one complex component into smaller functions
+- Use more of React features **without classes**
+- Class components will read `this.props` **too early** or **too late**,
   because of mutable `this` in React
   (however `props` argument of function components is immutable),
-  that says _function components capture the rendered values_.
+  that says function components capture the **rendered values**.
   more details on
-  [Overreacted](https://overreacted.io/how-are-function-components-different-from-classes/)
+  [Overreacted](https://overreacted.io/how-are-function-components-different-from-classes/).
 
 ```js
 // hook 实例
@@ -2165,6 +2166,17 @@ render() {
 12. getter methods for render like getSelectReason() or getFooterContent()
 13. optional render methods like renderNavigation() or renderProfilePicture()
 14. render
+
+### Project Structure Best Practice
+
+- `components`:
+  - 模块化隔离, 最小依赖, 测试友好.
+  - 每个组件文件夹包含大写并与文件同名的组件,
+    且其中除了注入服务操作外, render return 之前, 无任何代码.
+  - `use`开头并与文件夹同名的服务.
+  - `use`开头, `Service`结尾, 并与文件夹同名的可注入服务.
+- `services`: 服务中只存在基础 Hooks, 自定义 Hooks, 第三方 Hooks,
+  静态数据, 工具函数, 工具类.
 
 ## MVC/MVVM
 
