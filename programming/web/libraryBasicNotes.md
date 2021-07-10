@@ -165,7 +165,8 @@
 
 ### Micro Frontends Solution
 
-- [IceStark Micro Frontends Solution](https://github.com/ice-lab/icestark)
+- [UMI QianKun](https://github.com/umijs/qiankun)
+- [IceStark](https://github.com/ice-lab/icestark)
 
 ### Backend Solution
 
