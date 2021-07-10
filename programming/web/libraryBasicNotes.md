@@ -113,6 +113,7 @@
     - [Higher Level Tools](#higher-level-tools)
     - [Security Tools](#security-tools)
     - [Coverage](#coverage)
+    - [UML Tools](#uml-tools)
     - [Mock Tools and API](#mock-tools-and-api)
       - [Mock Tools](#mock-tools)
       - [Mock API](#mock-api)
@@ -759,8 +760,13 @@
 
 ### Coverage
 
-- [JS code coverage tool](https://github.com/gotwarlost/istanbul)
+- [Istanbul Coverage](https://github.com/gotwarlost/istanbul)
 - [Karma Coverage](https://github.com/karma-runner/karma-coverage)
+
+### UML Tools
+
+- [Draw.io](https://github.com/jgraph/drawio)
+- [PlantUML](https://github.com/plantuml/plantuml)
 
 ### Mock Tools and API
 

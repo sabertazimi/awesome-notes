@@ -5164,3 +5164,6 @@ This is generally known as cache busting.
 
 - Full builds upon continuous deployment.
 - Incremental builds are a product of time.
+- Gray Release
+  (Canary Release)
+  : 全量或增量部署新文件, 并逐步把流量切换至新 CDN URL.
