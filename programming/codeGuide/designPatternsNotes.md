@@ -348,8 +348,8 @@ e.g 从 2 个不同维度上扩展对象
 
 ### IOC and DI
 
-- IOC（inversion of control）控制反转模式；控制反转是将组件间的依赖关系从程序内部提到外部来管理
-- DI（dependency injection）依赖注入模式；依赖注入是指将组件的依赖通过外部以参数或其他形式注入
+- IOC (inversion of control) 控制反转模式；控制反转是将组件间的依赖关系从程序内部提到外部来管理
+- DI (dependency injection) 依赖注入模式；依赖注入是指将组件的依赖通过外部以参数或其他形式注入
 
 ```java
 class DbMysql {
@@ -371,7 +371,7 @@ $c = new Controller($db);
 $c->action();
 ```
 
-with IOC container
+With IOC container:
 
 ```java
 class DbMysql {
@@ -392,7 +392,7 @@ class DbRedis {
   }
 }
 
-class controller {p
+class controller {
   public $mysql;
   public $redis;
   public function __construct($mysql, $redis) {
@@ -418,7 +418,7 @@ class Container {
 }
 
 $app = new Container();
-$app->bind('mysql', function () {return new DbMysql('host', 'name', 'pwd'); });
+$app->bind('mysql', function () { return new DbMysql('host', 'name', 'pwd'); });
 $app->bind('redis', function () { return new DbRedis('host', 'name', 'pwd'); });
 $app->bind('controller', function () use ($app) {
   return new Controller($app->make('mysql'), $app->make('redis'));
@@ -426,6 +426,34 @@ $app->bind('controller', function () use ($app) {
 $controller = $app->make('controller');
 $controller->action();
 /** * 输出： * DbMysql::query * DbRedis::set */
+```
+
+With dependency injection:
+
+```js
+// dependency provider
+export interface IProvider<T> {
+  provide(): T;
+}
+
+@injectable()
+export class NameProvider implements IProvider<string> {
+  provide() {
+    return "World";
+  }
+}
+
+// top module
+import * as React from "react";
+import { IProvider } from "./providers";
+
+export class Hello extends React.Component {
+  private readonly nameProvider: IProvider<string>;
+
+  render() {
+    return <h1>Hello {this.nameProvider.provide()}!</h1>;
+  }
+}
 ```
 
 ### Class Pattern
