@@ -95,12 +95,13 @@
   - [border](#border)
     - [border-radius](#border-radius)
     - [border-image](#border-image)
-  - [background](#background)
-    - [background-image](#background-image)
-    - [(moz/webkit)background-clip](#mozwebkitbackground-clip)
-    - [(moz/webkit)background-origin](#mozwebkitbackground-origin)
-    - [background-size](#background-size)
-    - [background-attachment](#background-attachment)
+  - [CSS Background](#css-background)
+    - [Background Image](#background-image)
+    - [Background Size](#background-size)
+    - [Background Repeat](#background-repeat)
+    - [Background Attachment](#background-attachment)
+    - [Background Clip](#background-clip)
+    - [Background Origin](#background-origin)
     - [Blend Mode](#blend-mode)
     - [Mask Style](#mask-style)
     - [Clip Path](#clip-path)
@@ -814,6 +815,22 @@ div:target {
 
 input:not(:placeholder-shown) + .msg {
   opacity: 1;
+}
+```
+
+```css
+/* Mouse Focus Style */
+button:focus:not(:focus-visible) {
+  outline: 2px dotted #416dea;
+  outline-offset: 2px;
+  box-shadow: 0px 1px 1px #416dea;
+}
+
+/* Tab Focus Style */
+button:focus-visible {
+  outline: 2px solid #416dea;
+  outline-offset: 2px;
+  box-shadow: 0px 1px 1px #416dea;
 }
 ```
 
@@ -1752,9 +1769,9 @@ mix transparent with non-transparent border to make shapes (e.g. triangle).
 border-image: source slice width outset repeat;
 ```
 
-## background
+## CSS Background
 
-### background-image
+### Background Image
 
 - url()
 - linear-gradient()
@@ -1813,22 +1830,7 @@ awesome gradient buttons
 }
 ```
 
-### (moz/webkit)background-clip
-
-指定背景显示范围 content-box/padding-box/border-box
-
-```css
-h1 {
-  background-image: url(bg.jpg);
-  background-clip: text;
-}
-```
-
-### (moz/webkit)background-origin
-
-指定背景绘制起点 content-box/padding-box/border-box
-
-### background-size
+### Background Size
 
 - contain
 - cover
@@ -1843,7 +1845,25 @@ h1 {
 }
 ```
 
-### background-attachment
+### Background Repeat
+
+```css
+/* Keyword values */
+background-repeat: repeat-x;
+background-repeat: repeat-y;
+background-repeat: repeat;
+background-repeat: space;
+background-repeat: round;
+background-repeat: no-repeat;
+
+/* Two-value syntax: horizontal | vertical */
+background-repeat: repeat space;
+background-repeat: repeat repeat;
+background-repeat: round space;
+background-repeat: no-repeat round;
+```
+
+### Background Attachment
 
 - `scroll`: scrolls with the main view, but stays fixed inside the local view
 - `local`: scrolls both with the main view and the local view
@@ -1880,6 +1900,21 @@ body {
 }
 ```
 
+### Background Clip
+
+指定背景显示范围 content-box/padding-box/border-box
+
+```css
+h1 {
+  background-image: url(bg.jpg);
+  background-clip: text;
+}
+```
+
+### Background Origin
+
+指定背景绘制起点 content-box/padding-box/border-box
+
 ### Blend Mode
 
 - `mix-blend-mode` is used for text styles
@@ -1899,7 +1934,7 @@ body {
   background-image: url('bg.png');
   background-position: center;
   background-size: cover;
-  backgorund-repeat: no-repeat;
+  background-repeat: no-repeat;
 }
 
 .background h1 {
@@ -1923,7 +1958,7 @@ body {
 }
 ```
 
-night mode
+Night mode:
 
 ```css
 .night {
@@ -1942,6 +1977,9 @@ movie style
 ```
 
 ### Mask Style
+
+- Black for masking
+- White for showing
 
 ```css
 #masked {
