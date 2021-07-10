@@ -3152,7 +3152,7 @@ self.addEventListener('fetch', event => {
 浏览器缓存，也称 HTTP 缓存,
 分为强缓存和协商缓存.
 优先级较高的是强缓存,
-在命中强缓存失败的情况下,
+在命中强缓存失败的情况下或者`Cache-Control: no-cache`时,
 才会走协商缓存.
 
 强缓存是利用 HTTP 头中的 Expires 和 Cache-Control 两个字段来控制的.
