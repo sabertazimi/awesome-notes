@@ -5106,13 +5106,13 @@ Use Canvas or WebGL to generate user
 [fingerprint](https://yinzhicao.org/TrackingFree/crossbrowsertracking_NDSS17.pdf).
 
 ```js
-function getCanvasFingerprint () {    
-    var canvas = document.createElement('canvas');    
-    var context = canvas.getContext("2d");    
-    context.font = "18pt Arial";    
-    context.textBaseline = "top";    
-    context.fillText("Hello, user.", 2, 2);    
-    return canvas.toDataURL("image/jpeg");
+function getCanvasFingerprint () {
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext("2d");
+  context.font = "18pt Arial";
+  context.textBaseline = "top";
+  context.fillText("Hello, user.", 2, 2);
+  return canvas.toDataURL("image/jpeg");
 }
 
 getCanvasFingerprint()
