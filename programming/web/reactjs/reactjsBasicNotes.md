@@ -1230,6 +1230,9 @@ const useIsMounted = () => {
 
 #### Async Data Hook
 
+- `useState` to store url and data
+- `useEffect` to trigger async `fetch` actions
+
 ```jsx
 import { useState, useEffect } from 'react';
 
