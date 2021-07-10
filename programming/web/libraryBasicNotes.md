@@ -167,6 +167,7 @@
 
 - [UMI QianKun](https://github.com/umijs/qiankun)
 - [IceStark](https://github.com/ice-lab/icestark)
+- [Single SPA](https://github.com/single-spa/single-spa)
 
 ### Backend Solution
 
