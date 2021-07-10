@@ -123,27 +123,30 @@
   - [CSS Filter](#css-filter)
   - [Object Position/Fit](#object-positionfit)
   - [Animation](#animation)
-    - [animation property](#animation-property)
-      - [transition+transform](#transitiontransform)
-      - [animation+transform](#animationtransform)
-    - [animation helper](#animation-helper)
+    - [Animation Property](#animation-property)
+      - [Transition and Transform](#transition-and-transform)
+      - [Animation and Transform](#animation-and-transform)
+    - [Animation Helper](#animation-helper)
     - [Transition](#transition)
       - [Basic Usage](#basic-usage)
       - [Transition Internal](#transition-internal)
       - [Transition Direction](#transition-direction)
       - [Class Controls on Transition](#class-controls-on-transition)
-    - [transform](#transform)
-      - [perspective](#perspective)
-      - [transform-style](#transform-style)
+    - [Transform](#transform)
+      - [Perspective](#perspective)
+      - [Transform Style](#transform-style)
       - [backface-visibility](#backface-visibility)
-    - [animation](#animation-1)
+    - [Animation Details](#animation-details)
       - [Animation Play State](#animation-play-state)
       - [FLIP](#flip)
+    - [GreenSock Library](#greensock-library)
+      - [TweenMax](#tweenmax)
+      - [TimelineMax](#timelinemax)
   - [Responsive Desgin](#responsive-desgin)
-    - [responsive font](#responsive-font)
-    - [responsive length](#responsive-length)
-    - [responsive box](#responsive-box)
-      - [responsive width/height](#responsive-widthheight)
+    - [Responsive Font](#responsive-font)
+    - [Responsive Length](#responsive-length)
+    - [Responsive Box](#responsive-box)
+      - [Responsive Width and Height](#responsive-width-and-height)
       - [responsive inline-box](#responsive-inline-box)
     - [responsive image](#responsive-image)
     - [media query](#media-query)
@@ -2361,9 +2364,9 @@ background-position/background-size,
 
 - [Animation 101 Tutorial](https://github.com/cssanimation/css-animation-101)
 
-### animation property
+### Animation Property
 
-#### transition+transform
+#### Transition and Transform
 
 ```css
 .div {
@@ -2376,9 +2379,9 @@ background-position/background-size,
 }
 ```
 
-#### animation+transform
+#### Animation and Transform
 
-### animation helper
+### Animation Helper
 
 - opacity
 - `overflow: hidden`
@@ -2520,7 +2523,7 @@ setTimeout(() => {
 }, 20);
 ```
 
-### transform
+### Transform
 
 Transformations do affect the visual rendering,
 but have no affect on the CSS layout other than affecting overflow.
@@ -2569,7 +2572,7 @@ which are specified in [CSSOM-VIEW].
 }
 ```
 
-#### perspective
+#### Perspective
 
 translateZ 的功能就是让元素在自己的眼前或近或远
 
@@ -2587,7 +2590,7 @@ translateZ 的功能就是让元素在自己的眼前或近或远
   该元素的大小就会撑满整个屏幕（父辈元素没有 overflow:hidden 的限制）
 - 当 translateZ 值再变大，超过 201 像素的时候，该元素看不见了
 
-#### transform-style
+#### Transform Style
 
 transform-style 属性也是 3D 效果中经常使用的，
 其两个参数，`flat|preserve-3d`.
@@ -2602,7 +2605,7 @@ backface-visibility: hidden;
 
 当元素 `rotateY(180deg)` 时，元素将被隐藏
 
-### animation
+### Animation Details
 
 - transform: scale, translate, rotate, skew
 - animation bounce/cache: first -100, then, +5/+20, finally 0
@@ -2726,22 +2729,52 @@ setTimeout(() => element.classList.remove('animate'), duration);
 }
 ```
 
+### GreenSock Library
+
+#### TweenMax
+
+```js
+TweenMax.fromTo(element, 1, { x: 0 }, { x: 100 });
+```
+
+#### TimelineMax
+
+```js
+const tl = new TimelineMax();
+tl.staggerFrom(
+  [
+    "#Capa_1 > g > path:nth-child(1)",
+    "#Capa_1 > circle:nth-child(7)",
+    "#Capa_1 > path:nth-child(6)",
+    "#Capa_1 > circle:nth-child(5)"
+  ],
+  1,
+  {
+    scaleY: 0,
+    scaleX: 0,
+    transformOrigin: "center",
+    ease: Bounce.easeOut,
+    stagger: 0.2
+  }
+);
+```
+
 ## Responsive Desgin
 
-### responsive font
+### Responsive Font
 
 - `em`/`rem` font-size
 
-### responsive length
+### Responsive Length
 
 - `vw`
 - `vh`
 - `vmin`
 - `vmax`
 
-### responsive box
+### Responsive Box
 
-#### responsive width/height
+#### Responsive Width and Height
 
 - `min-height`
 - `max-height`
