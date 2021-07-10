@@ -299,6 +299,7 @@
 - [React Virtualized Auto Sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)
 - [React Window - Brand New React Virtualized](https://github.com/bvaughn/react-window)
 - [React Virtuoso](https://github.com/petyosi/react-virtuoso)
+- [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
 
 ### Table
 
@@ -384,13 +385,10 @@
 
 ### Scroll Utils
 
-- [React Scroll Box](https://github.com/smikhalevski/react-scroll-box)
-- [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
-- [Scroll Reveal](https://github.com/scrollreveal/scrollreveal)
-- [Scroll Magic](https://github.com/janpaepke/ScrollMagic)
-- [Scroll Animation](https://github.com/michalsnik/aos)
-- [Smooth Scroll Animation](https://github.com/alexfoxy/laxxx)
-- [Smooth Scroll Bar](https://github.com/idiotWu/smooth-scrollbar)
+- [Scroll Reveal](https://github.com/jlmakes/scrollreveal)
+- [AOS Scroll Animation](https://github.com/michalsnik/aos)
+- [Lax Scroll Animation](https://github.com/alexfoxy/laxxx)
+- [Scroll Bar Detection](https://github.com/idiotWu/smooth-scrollbar)
 
 ### Mouse Utils
 
