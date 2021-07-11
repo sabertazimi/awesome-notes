@@ -1049,7 +1049,19 @@ const useDataApi = (initialUrl, initialData) => {
 
 #### Closure BUG in useEffect
 
+- useEffect Hook 会丢弃上一次渲染结果,
+  它会清除上一次 effect,
+  再建立下一个 effect
+  (也会创建新的 Closure),
+  下一个 effect 锁住新的 props 和 state
+  (整个 Counter 函数在 re-render 时会被重复调用一次).
+- setInterval 不会丢弃上一次结果,
+  会引用旧状态 Closure 中的变量,
+  导致其与 useEffect 所预期行为不一致.
+- 可以通过 useRef 解决这一现象.
+
 ```js
+// BUG
 function Counter() {
   let [count, setCount] = useState(0);
 
@@ -1061,6 +1073,35 @@ function Counter() {
   }, []);
 
   return <h1>{count}</h1>;
+}
+```
+
+```js
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  useInterval(() => {
+    setCount(count + 1);
+  }, 1000);
+
+  return <h1>{count}</h1>;
+}
+
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  });
+
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+
+    let id = setInterval(tick, delay);
+    return () => clearInterval(id);
+  }, [delay]);
 }
 ```
 
