@@ -5167,3 +5167,5 @@ This is generally known as cache busting.
 - Gray Release
   (Canary Release)
   : 全量或增量部署新文件, 并逐步把流量切换至新 CDN URL.
+  根据灰度白名单, 将灰度测试用户的 CDN Assets
+  更换至不同 Version Number 或者 Fingerprint 的新版本前端页面文件.
