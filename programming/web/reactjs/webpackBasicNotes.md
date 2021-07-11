@@ -5,7 +5,7 @@
 - [Webpack Basic Notes](#webpack-basic-notes)
   - [Config](#config)
     - [Watch Options](#watch-options)
-    - [Resolve Options](#resolve-options)
+    - [Resolve Path Options](#resolve-path-options)
     - [Flag Options](#flag-options)
   - [Optimization](#optimization)
   - [Plugin](#plugin)
@@ -29,13 +29,19 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 ```
 
-### Resolve Options
+### Resolve Path Options
 
 ```js
 {
   resolve: {
     alias: {
-      '~': resolve(__dirname, 'src'),
+      '#': path.resolve(__dirname, '/'),
+      '~': path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, 'src'),
+      '~@': path.resolve(__dirname, 'src'),
+      'vendor': path.resolve(__dirname, 'src/vendor'),
+      '~component': path.resolve(__dirname, 'src/components'),
+      '~config': path.resolve(__dirname, 'config'),
     },
     extensions: [
       '.js',
@@ -45,7 +51,7 @@ sudo sysctl -p
 }
 ```
 
-`jsconfig.json` for vscode
+`jsconfig.json` for vscode resolve path:
 
 ```js
 {
