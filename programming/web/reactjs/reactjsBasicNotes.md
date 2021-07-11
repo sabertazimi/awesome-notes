@@ -155,12 +155,10 @@ React Fiber 的目标是提高其在动画、布局和手势等领域的适用�
 - Update DOM elements: `Update` tag.
 - Delete DOM elements: `Deletion` tag.
 - Update Ref property: `Ref` tag.
-- `useEffect` callback: `Passive` tag.
-  `useEffect(fn)` got `Passive` effect
-  when `Mount` lifecycle and `Update` lifecycle,
-  `useEffect(fn, [])` got `Passive` effect when `Mount` lifecycle,
-  `useEffect(fn, [deps])` got `Passive` effect
-  when `Mount` lifecycle and `deps` changed.
+- `useEffect` callback: `got Passive` tag.
+  - `useEffect(fn)`: `Mount` and `Update` lifecycle.
+  - `useEffect(fn, [])`: `Mount` lifecycle.
+  - `useEffect(fn, [deps])`: `Mount` lifecycle and `deps` changed.
 
 React create effects when `Render` stage,
 then update effects to real DOM when `Commit` stage.
