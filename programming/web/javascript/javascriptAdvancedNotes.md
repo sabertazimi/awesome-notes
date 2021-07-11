@@ -259,7 +259,13 @@
   - [DevOps](#devops)
     - [Static Assets](#static-assets)
     - [CI System](#ci-system)
+    - [Release System](#release-system)
+    - [Blue Green Deployment](#blue-green-deployment)
+    - [Rolling Update](#rolling-update)
     - [Gray Release](#gray-release)
+      - [Gray Release Introduction](#gray-release-introduction)
+      - [Gray Release Solution](#gray-release-solution)
+      - [Gray Release Performance](#gray-release-performance)
 
 <!-- /TOC -->
 
@@ -5166,21 +5172,54 @@ This is generally known as cache busting.
 - Full builds upon continuous deployment.
 - Incremental builds are a product of time.
 
+### Release System
+
+### Blue Green Deployment
+
+两套系统, 一套稳定的绿色系统, 一套即将发布的蓝色系统.
+不断切换并迭代发布到生产环境中.
+
+### Rolling Update
+
+多个集群实例的服务中, 在不影响服务的情况下,
+停止一个或多个实例, 逐步进行版本更新.
+
 ### Gray Release
+
+#### Gray Release Introduction
 
 Canary Release: 全量或增量部署新文件, 并逐步把流量切换至新 CDN URL.
 根据灰度白名单, 将灰度测试用户的 CDN Assets
 更换至不同 Version Number 或者 Fingerprint 的新版本前端页面文件.
 
-每一个页面都需要去获取灰度规则，这个灰度请求将阻塞页面.
-可以使用 localStrage 存储这个用户是否为灰度用户,
-然后定期的更新 localStrage,
-取代大量的请求造成的体验问题.
+#### Gray Release Solution
 
 通过灰度发布收集用户反馈 (转化率等指标),
 决定后续是否全面将所有流量切至新版本,
 或者完全放弃新版本,
 亦或是通过 FLAGS 结合用户特征图像,
+(如用户级别, UA, Cookie
+Location, IP,
+Feature List 等)
 只向部分流量投放新版本.
 可以实现千人千页,
 每个用户获得由不同的功能 (FLAGS开启关闭) 组成的不同页面.
+
+业界成熟的灰度方案:
+
+- 简单灰度逻辑通过 Nginx 配置做规则判断(路由, 参数, IP等), upstream 到不同的服务器.
+- 复杂灰度逻辑通过 Nginx + Lua 新增一个灰度中心服务,
+  结合业务来做流量的灰度与切换, 控制 HTML 入口文件,
+  使灰度规则与业务代码解耦.
+
+#### Gray Release Performance
+
+- 前端优化:
+  每一个页面都需要去获取灰度规则，这个灰度请求将阻塞页面.
+  可以使用 localStrage 存储这个用户是否为灰度用户,
+  然后定期的更新 localStrage,
+  取代大量的请求造成的体验问题.
+
+- 后端优化:
+  利用 MemCache 在内存中缓存灰度规则与灰度用户列表,
+  提升灰度发布性能.
