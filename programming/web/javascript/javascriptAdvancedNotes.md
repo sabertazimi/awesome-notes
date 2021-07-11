@@ -67,7 +67,7 @@
   - [Functional JavaScript](#functional-javascript)
     - [Pros](#pros)
     - [Cons](#cons)
-    - [闭包(closure)](#闭包closure)
+    - [Closure](#closure)
       - [闭包函数的结构](#闭包函数的结构)
     - [Partial Application](#partial-application)
     - [Currying](#currying)
@@ -331,6 +331,9 @@ like [jscodeshift](https://github.com/facebook/jscodeshift).
 
 - 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError
 - 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone)
+- `let` variable in `for-loop` closure,
+  every closure for each loop
+  binds the block-scoped variable.
 
 ```js
 const a = 1;
@@ -1879,13 +1882,61 @@ const map1 = { 'b': 2 };
 const map2 = map1.set{ 'b': 2 };
 ```
 
-### 闭包(closure)
+### Closure
 
-两个函数都维持着对外部作用域 Counter 的引用，因此总可以访问 Counter 作用域内定义的变量 count(外部局部变量)
+两个函数都维持着对外部作用域 Counter 的引用,
+因此总可以访问 Counter 作用域内定义的变量 count (外部局部变量)
 
 - 函数外部不可对函数内部进行赋值或引用
-- 但函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部，即内部引用外部)
-- 特权性质: 从外部通过闭包方法访问内部(函数作用域)局部变量
+- 函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部, 即内部引用外部)
+- 特权性质: 从外部通过闭包方法访问内部(函数作用域)局部变量 (private getter)
+- local scope -> outer functions scope -> global scope
+- Closure Performance: avoid unnecessary closure creation
+
+```js
+// global scope
+var e = 10;
+function sum(a){
+  return function(b){
+    return function(c){
+      // outer functions scope
+      return function(d){
+        // local scope
+        return a + b + c + d + e;
+      }
+    }
+  }
+}
+
+console.log(sum(1)(2)(3)(4)); // log 20
+```
+
+```js
+// BAD
+function MyObject(name, message) {
+  this.name = name.toString();
+  this.message = message.toString();
+  this.getName = function() {
+    return this.name;
+  };
+
+  this.getMessage = function() {
+    return this.message;
+  };
+}
+
+// GOOD: avoid unnecessary
+function MyObject(name, message) {
+  this.name = name.toString();
+  this.message = message.toString();
+}
+MyObject.prototype.getName = function() {
+  return this.name;
+};
+MyObject.prototype.getMessage = function() {
+  return this.message;
+};
+```
 
 #### 闭包函数的结构
 

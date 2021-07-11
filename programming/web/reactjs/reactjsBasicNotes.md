@@ -46,6 +46,7 @@
         - [useEffect Lifecycle](#useeffect-lifecycle)
         - [useEffect Nasty Loop](#useeffect-nasty-loop)
         - [useEffect Deps List](#useeffect-deps-list)
+      - [Closure BUG in useEffect](#closure-bug-in-useeffect)
     - [Basic Rules](#basic-rules)
     - [Hooks Internel](#hooks-internel)
     - [Custom Hooks](#custom-hooks)
@@ -1044,6 +1045,23 @@ const useDataApi = (initialUrl, initialData) => {
 
   return { data, isLoading, isError, doFetch };
 };
+```
+
+#### Closure BUG in useEffect
+
+```js
+function Counter() {
+  let [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let id = setInterval(() => {
+      setCount(count + 1); // always 1 regardless `count` value change
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return <h1>{count}</h1>;
+}
 ```
 
 ### Basic Rules
