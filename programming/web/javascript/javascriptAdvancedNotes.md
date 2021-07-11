@@ -5258,7 +5258,75 @@ Feature List 等)
 
 业界成熟的灰度方案:
 
-- 简单灰度逻辑通过 Nginx 配置做规则判断(路由, 参数, IP等), upstream 到不同的服务器.
+- 简单灰度逻辑通过 Nginx 配置做规则判断(路由, 参数, IP, Cookie等), upstream 到不同的服务器:
+  - 新代码部署到 A 边.
+  - 符合灰度策略的小部分流量切到 A 边, 剩余大部分流量仍去往 B 边
+  - 验证 A 边功能是否正常可用/好用
+  - 验证无误后, 大部分流量转到 A 边, 灰度流量去往 B 边
+  - 验证 B 边功能是否正常可用/好用
+  - 验证无误后, 流量像往常一样均分到 AB 边
+
+```bash
+# Canary Deployment
+map $COOKIE\_canary $group {
+  # canary account
+  ~\*devui$ server\_canary;
+  default server\_default;
+}
+
+# 流量均分, 注释掉其中某一边, 另一边为灰度流量访问边
+upstream server\_canary {
+  server 11.11.11.11:8000 weight=1 max\_fails=1 fail\_timeout=30s;
+  server 22.22.22.22 weight=1 max\_fails=1 fail\_timeout=30s;
+}
+
+# 流量均分, 注释掉其中某一边, 另一边为正常流量访问边
+upstream server\_default {
+  server 11.11.11.11:8000 weight=2 max\_fails=1 fail\_timeout=30s;
+  server 22.22.22.22 weight=2 max\_fails=1 fail\_timeout=30s;
+}
+
+# 配置 8000 端口的转发规则, 并且 expose port
+server {
+  listen 8000;
+  server\_name \_;
+  root /var/canaryDemo;
+
+  # Load configuration files for the default server block.
+  include /etc/nginx/default.d/\*.conf;
+
+  location / {
+    root /var/canaryDemo;
+    index index.html;
+    try_files $uri $uri/ /index.html;
+  }
+}
+
+server {
+  listen 80 default\_server;
+  listen \[::\]:80 default\_server;
+  server\_name \_;
+  # root /usr/share/nginx/html;
+  root /var/canaryDemo;
+
+  # Load configuration files for the default server block.
+  include /etc/nginx/default.d/\*.conf;
+
+  location / {
+    proxy\_pass http://$group;
+    # root /var/canaryDemo;
+    # index index.html;
+  }
+
+  error\_page 404 /404.html;
+    location = /40x.html {
+  }
+
+  error\_page 500 502 503 504 /50x.html;
+  location = /50x.h
+}
+```
+
 - 复杂灰度逻辑通过 Nginx + Lua 新增一个灰度中心服务,
   结合业务来做流量的灰度与切换, 控制 HTML 入口文件,
   使灰度规则与业务代码解耦.
