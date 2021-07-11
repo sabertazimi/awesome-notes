@@ -1127,6 +1127,8 @@ export function trapTabKey(e, context) {
 
 ### ARIA
 
+[Web Accessibility Initiative - Accessible Rich Internet Applications](https://www.w3.org/WAI/intro/aria):
+
 - `aria-label`
 - `aria-labelledby="dropdownMenuButton"`: dropdown/form
 - `aria-disabled="true"`: disable element
