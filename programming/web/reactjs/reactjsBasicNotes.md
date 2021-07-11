@@ -26,9 +26,9 @@
       - [stateless component](#stateless-component)
       - [stateful component](#stateful-component)
     - [Component Lifecycle](#component-lifecycle)
-      - [Creation/Mounting](#creationmounting)
-      - [Updating](#updating)
-      - [Unmounting](#unmounting)
+      - [Creation and Mounting Stage](#creation-and-mounting-stage)
+      - [Updating Stage](#updating-stage)
+      - [Unmounting Stage](#unmounting-stage)
     - [Refs](#refs)
       - [String Refs](#string-refs)
       - [Forward Refs](#forward-refs)
@@ -43,6 +43,9 @@
       - [useReducer](#usereducer)
       - [useRef](#useref)
       - [useEffect](#useeffect)
+        - [useEffect Lifecycle](#useeffect-lifecycle)
+        - [useEffect Nasty Loop](#useeffect-nasty-loop)
+        - [useEffect Deps List](#useeffect-deps-list)
     - [Basic Rules](#basic-rules)
     - [Hooks Internel](#hooks-internel)
     - [Custom Hooks](#custom-hooks)
@@ -69,16 +72,16 @@
     - [Spacing Style](#spacing-style)
     - [Ordering of Class Component](#ordering-of-class-component)
     - [Project Structure Best Practice](#project-structure-best-practice)
-  - [MVC/MVVM](#mvcmvvm)
+  - [MVC and MVVM](#mvc-and-mvvm)
     - [Controller](#controller)
-    - [Comparsion](#comparsion)
+    - [Comparison](#comparison)
     - [Best Practice](#best-practice)
   - [Modern React](#modern-react)
     - [Lazy and Suspense](#lazy-and-suspense)
     - [Context API](#context-api)
       - [Ref with Context](#ref-with-context)
     - [Error Boundary](#error-boundary)
-    - [`React.Fragment`/`Array Components`](#reactfragmentarray-components)
+    - [React Fragment](#react-fragment)
   - [Portals](#portals)
   - [React Performance](#react-performance)
     - [Re-rendering Problem](#re-rendering-problem)
@@ -400,11 +403,11 @@ this.setState((prevState, props) => ({
 React 协调阶段的生命周期钩子可能会被调用多次,
 协调阶段的生命周期钩子不要包含副作用
 
-#### Creation/Mounting
+#### Creation and Mounting Stage
 
 constructor(props, context) -> getDerivedStateFromProps() -> render() -> componentDidMount()
 
-#### Updating
+#### Updating Stage
 
 update for three reasons:
 
@@ -419,7 +422,7 @@ getSnapshotBeforeUpdate:
 在最新的渲染输出提交给 DOM 前将会立即调用,
 这对于从 DOM 捕获信息（比如：滚动位置）很有用.
 
-#### Unmounting
+#### Unmounting Stage
 
 componentWillUnmount()
 
@@ -729,7 +732,9 @@ const hook = {
 - returns a memoized value
 - only recompute the memoized value when one of the dependencies has changed
 - **shallow compare** diff
-- **optimization** helps to avoid expensive calculations on every render
+- **optimization** helps to
+  avoid expensive calculations on every render
+  (avoid re-render problem)
 
 ```js
 const Button = ({ color, children }) => {
@@ -968,12 +973,14 @@ function Example() {
 
 [Complete Guide](https://overreacted.io/a-complete-guide-to-useeffect)
 
-`useEffect` lifecycle:
-React renders UI for current props/state to screen,
-React cleans up the effect for prev props/state,
-React runs the effect for current props/state.
+##### useEffect Lifecycle
 
-`useEffect` nasty loop:
+1. React renders UI for current props/state to screen.
+2. React cleans up the effect for prev props/state.
+3. React runs the effect for current props/state.
+
+##### useEffect Nasty Loop
+
 The effect hook runs when the component `mounts`
 but also when the component `updates`.
 Because we are setting the state after every data fetch,
@@ -981,7 +988,13 @@ the component updates and the effect runs again.
 It fetches the data again and again.
 That’s a bug and needs to be avoided.
 
-`useEffect` deps list:
+##### useEffect Deps List
+
+无论是将组件编写为类还是函数, 都必须为 effect 响应所有 props 和 state 的更新.
+在传统的 Class Component, 需要编写代码去检测这些 props 和 state 是否变更
+(shouldComponentUpdate, componentDidUpdate).
+在 Function Component, 借助 useEffect Hook 可以实现自动检测.
+
 That’s why provide an **empty array** as second argument to the effect hook
 to avoid activating it on component updates
 but **only for the mounting** of the component.
@@ -993,7 +1006,7 @@ Functions in useEffect:
 - If only use some functions inside an effect, move them directly into that effect.
 - Hoisting functions that don’t need props or state outside of component,
   and pull the ones that are used only by an effect inside of that effect.
-- for useCallback function, it should be in deps list `useEffect(() => {}, [callback])`
+- For useCallback function, it should be in deps list `useEffect(() => {}, [callback])`
 
 ```js
 // https://www.robinwieruch.de/react-hooks-fetch-data
@@ -2178,7 +2191,7 @@ render() {
 - `services`: 服务中只存在基础 Hooks, 自定义 Hooks, 第三方 Hooks,
   静态数据, 工具函数, 工具类.
 
-## MVC/MVVM
+## MVC and MVVM
 
 ### Controller
 
@@ -2187,7 +2200,7 @@ render() {
 - 选择 Model 和 Service
 - 处理 Session 和 Cookies
 
-### Comparsion
+### Comparison
 
 - 初始渲染: Virtual DOM > 脏检查 >= 依赖收集
 - 小量数据更新: 依赖收集 >> Virtual DOM + 优化 > 脏检查（无法优化） > Virtual DOM 无优化
@@ -2384,7 +2397,7 @@ class ErrorBoundary extends React.Component {
 }
 ```
 
-### `React.Fragment`/`Array Components`
+### React Fragment
 
 ```js
 class Items extends React.Component {

@@ -9,14 +9,14 @@
       - [State](#state)
         - [Persisted State](#persisted-state)
     - [Reducers](#reducers)
-    - [map to props](#map-to-props)
+    - [Map to Props](#map-to-props)
   - [Middleware](#middleware)
     - [Middleware Basic Concepts](#middleware-basic-concepts)
     - [Middleware Simple Implementation](#middleware-simple-implementation)
     - [Scheduler Middleware](#scheduler-middleware)
     - [redux-thunk Middleware](#redux-thunk-middleware)
   - [Redux Internal](#redux-internal)
-    - [createStore](#createstore)
+    - [Create Store](#create-store)
     - [Action Validation](#action-validation)
     - [Provider and Connection](#provider-and-connection)
   - [Redux Best Practice](#redux-best-practice)
@@ -103,7 +103,7 @@ const reducer = createReducer(initialState, {
 });
 ```
 
-### map to props
+### Map to Props
 
 dump components implementation
 
@@ -114,7 +114,7 @@ React.render(
   rootEl
 );
 
-// dump conponent
+// dump component
 import { Component } from 'react';
 
 export default class Counter extends Component {
@@ -248,7 +248,7 @@ store.dispatch(addFave());
 
 ## Redux Internal
 
-### createStore
+### Create Store
 
 - use closure to store state and subscribe
 - use middleware to change normal dispatch function
@@ -498,14 +498,17 @@ const fluxStandardAction = {
 ### State Management
 
 - Redux for global state:
-  作为全局状态管理
-- RxJS for redux-middleware:
-  RxJS 管理所有输入的 input -> redux action 的调度过程
-- Mobx for component-state:
-  作为组件局部状态管理器来用。
-- UI 变化很复杂时，用 component 归一化处理
+  作为全局状态管理.
+- RxJS for redux middleware:
+  RxJS 管理所有输入的 input -> redux action 的调度过程.
+- Mobx and `useState` for component state:
+  作为组件局部状态管理器来用.
+  对于只影响单个组件实例的状态,
+  应作为 Local State 交由 `useState` 管理,
+  而不是将其并入 Global Store.
 - state 变化很复杂时，用 action/state 归一化处理
 - data-input 很复杂时，用 RxJS/observable 归一化处理
+- UI 变化很复杂时，用 component 归一化处理
 
 ## Awesome Tools
 
