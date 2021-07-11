@@ -259,6 +259,7 @@
   - [DevOps](#devops)
     - [Static Assets](#static-assets)
     - [CI System](#ci-system)
+    - [Gray Release](#gray-release)
 
 <!-- /TOC -->
 
@@ -5164,8 +5165,14 @@ This is generally known as cache busting.
 
 - Full builds upon continuous deployment.
 - Incremental builds are a product of time.
-- Gray Release
-  (Canary Release)
-  : 全量或增量部署新文件, 并逐步把流量切换至新 CDN URL.
-  根据灰度白名单, 将灰度测试用户的 CDN Assets
-  更换至不同 Version Number 或者 Fingerprint 的新版本前端页面文件.
+
+### Gray Release
+
+Canary Release: 全量或增量部署新文件, 并逐步把流量切换至新 CDN URL.
+根据灰度白名单, 将灰度测试用户的 CDN Assets
+更换至不同 Version Number 或者 Fingerprint 的新版本前端页面文件.
+
+每一个页面都需要去获取灰度规则，这个灰度请求将阻塞页面.
+可以使用 localStrage 存储这个用户是否为灰度用户,
+然后定期的更新 localStrage,
+取代大量的请求造成的体验问题.
