@@ -76,6 +76,7 @@
   - [Canvas](#canvas)
     - [Particles](#particles)
     - [Blocks](#blocks)
+    - [3D Engine](#3d-engine)
   - [Media](#media)
     - [Audio](#audio)
     - [Video](#video)
@@ -541,7 +542,6 @@
 ## Canvas
 
 - [HTML2Canvas](https://github.com/niklasvh/html2canvas)
-- [Three.js](https://github.com/mrdoob/three.js)
 - [Rough.js](https://github.com/pshihn/rough)
 - [Canvas Manipulation](https://github.com/meltingice/CamanJS)
 
@@ -554,6 +554,12 @@
 ### Blocks
 
 - [Obelisk.js](https://github.com/nosir/obelisk.js)
+
+### 3D Engine
+
+- [CSS 3D Engine](https://github.com/shrekshrek/css3d-engine)
+- [Three.js](https://github.com/mrdoob/three.js)
+- [Krpano](https://krpano.com/docu/js/#top)
 
 ## Media
 
