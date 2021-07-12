@@ -29,6 +29,16 @@
   - [Components](#components)
     - [Layout](#layout)
     - [Navigation](#navigation)
+    - [Landing Page](#landing-page)
+    - [Button](#button)
+    - [Card](#card)
+    - [Chat Widgets](#chat-widgets)
+    - [Message](#message)
+      - [Page Indicator](#page-indicator)
+      - [Prompt](#prompt)
+      - [Alert](#alert)
+      - [Focus](#focus)
+      - [Tooltip](#tooltip)
     - [Form](#form)
       - [Input](#input)
       - [Select](#select)
@@ -37,15 +47,6 @@
       - [List Virtualized Windowing](#list-virtualized-windowing)
     - [Table](#table)
     - [Charts](#charts)
-    - [Message](#message)
-      - [Page Indicator](#page-indicator)
-      - [Prompt](#prompt)
-      - [Alert](#alert)
-      - [Focus](#focus)
-      - [Tooltip](#tooltip)
-    - [Button](#button)
-    - [Card](#card)
-    - [Chat Widgets](#chat-widgets)
     - [Slides](#slides)
     - [iFrame](#iframe)
   - [Viewport Utils](#viewport-utils)
@@ -85,9 +86,12 @@
   - [Editor](#editor)
     - [Rich Text Editor](#rich-text-editor)
     - [Code Editor](#code-editor)
-  - [Mail](#mail)
+  - [SMS](#sms)
+    - [Phone](#phone)
+    - [Email](#email)
   - [File](#file)
     - [File Uploader](#file-uploader)
+    - [File Downloader](#file-downloader)
     - [File Utils](#file-utils)
     - [PDF](#pdf)
   - [Persistent Storage](#persistent-storage)
@@ -98,6 +102,7 @@
     - [Terminal](#terminal)
   - [Daemon](#daemon)
   - [Network](#network)
+    - [Network Protocols](#network-protocols)
     - [Web Socket](#web-socket)
     - [P2P](#p2p)
     - [Pre-Fetch](#pre-fetch)
@@ -107,22 +112,24 @@
   - [Server](#server)
     - [Serverless](#serverless)
   - [Encryption](#encryption)
-  - [Code Analysis](#code-analysis)
-  - [Code Optimizer](#code-optimizer)
   - [Debug Testing](#debug-testing)
     - [Unit Testing](#unit-testing)
     - [Feature Testing](#feature-testing)
     - [End to End Testing](#end-to-end-testing)
     - [Higher Level Tools](#higher-level-tools)
+    - [Code Analysis Tools](#code-analysis-tools)
+    - [Code Coverage Tools](#code-coverage-tools)
+    - [Code Quality Tools](#code-quality-tools)
+    - [Inspect Tools](#inspect-tools)
+    - [Monitoring Tools](#monitoring-tools)
+    - [Performance Tools](#performance-tools)
+    - [Log Tools](#log-tools)
+    - [Mock Tools](#mock-tools)
     - [Security Tools](#security-tools)
-    - [Coverage](#coverage)
     - [UML Tools](#uml-tools)
-    - [Mock Tools and API](#mock-tools-and-api)
-      - [Mock Tools](#mock-tools)
-      - [Mock API](#mock-api)
-    - [Monitoring](#monitoring)
-    - [Performance](#performance)
-    - [Log](#log)
+  - [DevOps](#devops)
+    - [Project Tools](#project-tools)
+    - [CI Tools](#ci-tools)
   - [Documentation](#documentation)
 
 <!-- /TOC -->
@@ -157,6 +164,8 @@
 - [Vue Admin UI](https://github.com/epicmaxco/vuestic-admin)
 - [Tailwind](https://github.com/tailwindlabs/tailwindcss)
 - [Bootstrap](https://github.com/twbs/bootstrap)
+- [Paper.css](https://github.com/papercss/papercss)
+- [NES.css](https://github.com/nostalgic-css/NES.css)
 
 ## Framework and Solution
 
@@ -175,6 +184,7 @@
 
 ### Backend Solution
 
+- [Egg.js](https://github.com/eggjs/egg)
 - [Feathers.js - RESTful API](https://github.com/feathersjs/feathers)
 
 ### Full Stack Solution
@@ -270,6 +280,61 @@
 - [Menu Icon Click Animation](https://github.com/jonsuh/hamburgers)
 - [Pagemap](https://github.com/lrsjng/pagemap)
 
+### Landing Page
+
+- [Video Landing Page](https://github.com/rishabhp/bideo.js)
+
+### Button
+
+- [React Awesome 3D Button](https://github.com/rcaferati/react-awesome-button)
+- [Tiny Fab](https://github.com/dericgw/react-tiny-fab)
+
+### Card
+
+- [GitHub Information Card](https://github.com/lepture/github-cards)
+- [Bootcards](https://github.com/bootcards/bootcards)
+
+### Chat Widgets
+
+- [React Chat Widget](https://github.com/Wolox/react-chat-widget)
+- [Matrix](https://github.com/matrix-org/matrix-react-sdk)
+- [JsSIP - Chat Library](https://github.com/versatica/JsSIP)
+
+### Message
+
+- [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
+- [TheaterJS - Typing Effect](https://github.com/Zhouzi/TheaterJS)
+- [Guide Tour](https://github.com/shipshapecode/shepherd)
+- [Intro.js](https://github.com/usablica/intro.js)
+
+#### Page Indicator
+
+- [React Snakke](https://github.com/diogomoretti/react-snakke)
+
+#### Prompt
+
+- [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
+- [Popper.js](https://github.com/FezVrasta/popper.js)
+- [Humane.js](https://github.com/wavded/humane-js)
+- [Desktop Notification](https://github.com/Nickersoft/push.js)
+- [Nodejs Notification](https://github.com/mikaelbr/node-notifier)
+
+#### Alert
+
+- [Sweet Alert 2](https://github.com/sweetalert2/sweetalert2)
+- [Sweet Alert](https://github.com/t4t5/sweetalert)
+
+#### Focus
+
+- [driver.js](https://github.com/kamranahmedse/driver.js)
+
+#### Tooltip
+
+- [tippy.js](https://github.com/atomiks/tippyjs)
+- [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
+- [Hint.css - Tooltips](https://github.com/chinchang/hint.css)
+- [React Tooltip](https://github.com/tvkhoa/react-tippy)
+
 ### Form
 
 - [React Formik](https://github.com/jaredpalmer/formik)
@@ -321,65 +386,16 @@
 - [HTML5 Chart](https://github.com/chartjs/Chart.js)
 - [Plotly.js](https://github.com/plotly/plotly.js)
 
-### Message
-
-- [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
-- [TheaterJS - Typing Effect](https://github.com/Zhouzi/TheaterJS)
-- [Guide Tour](https://github.com/shipshapecode/shepherd)
-- [Intro.js](https://github.com/usablica/intro.js)
-
-#### Page Indicator
-
-- [React Snakke](https://github.com/diogomoretti/react-snakke)
-
-#### Prompt
-
-- [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
-- [Popper.js](https://github.com/FezVrasta/popper.js)
-- [Humane.js](https://github.com/wavded/humane-js)
-- [Desktop Notification](https://github.com/Nickersoft/push.js)
-- [Nodejs Notification](https://github.com/mikaelbr/node-notifier)
-
-#### Alert
-
-- [Sweet Alert 2](https://github.com/sweetalert2/sweetalert2)
-- [Sweet Alert](https://github.com/t4t5/sweetalert)
-
-#### Focus
-
-- [driver.js](https://github.com/kamranahmedse/driver.js)
-
-#### Tooltip
-
-- [tippy.js](https://github.com/atomiks/tippyjs)
-- [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
-- [Hint.css - Tooltips](https://github.com/chinchang/hint.css)
-- [React Tooltip](https://github.com/tvkhoa/react-tippy)
-
-### Button
-
-- [React Awesome 3D Button](https://github.com/rcaferati/react-awesome-button)
-- [Tiny Fab](https://github.com/dericgw/react-tiny-fab)
-
-### Card
-
-- [GitHub Information Card](https://github.com/lepture/github-cards)
-- [Bootcards](https://github.com/bootcards/bootcards)
-
-### Chat Widgets
-
-- [React Chat Widget](https://github.com/Wolox/react-chat-widget)
-- [Matrix](https://github.com/matrix-org/matrix-react-sdk)
-- [JsSIP - Chat Library](https://github.com/versatica/JsSIP)
-
 ### Slides
 
 - [MDX Deck](https://github.com/jxnblk/mdx-deck)
-- [Reveal.js - HTML Presentation Framework](https://github.com/hakimel/reveal.js)
-- [One Page Style Vertical Slide](https://github.com/MopTym/doSlide)
+- [React Spectacle](https://github.com/FormidableLabs/spectacle)
+- [Reveal.js HTML Presentation](https://github.com/hakimel/reveal.js)
 - [Glider.js](https://github.com/NickPiscitelli/Glider.js)
+- [CLI Animation Presentation](https://github.com/neatsoftware/term-sheets)
+- [Awesome Prezi-Like Presentation](https://github.com/impress/impress.js)
 - [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
-- [Awesome Prezi-Like PPT](https://github.com/impress/impress.js)
+- [One Page Vertical Slide](https://github.com/MopTym/doSlide)
 
 ### iFrame
 
@@ -415,15 +431,15 @@
 - [Framer Motion](https://github.com/framer/motion)
 - [React Transition Group](https://github.com/reactjs/react-transition-group)
 - [React Animation](https://github.com/FunctionFoundry/react-set-animate)
-- [Vanilla JavaScript Animation Library](https://github.com/greensock/GreenSock-JS)
-- [Airbnb After Effect Solution](https://github.com/airbnb/lottie-web)
-- [Awesome Effect Library - Effeckt.css](https://github.com/h5bp/Effeckt.css)
+- [GreenSock](https://github.com/greensock/GreenSock-JS)
+- [Airbnb AE Solution](https://github.com/airbnb/lottie-web)
+- [Effeckt.css](https://github.com/h5bp/Effeckt.css)
 - [animate.css](https://github.com/daneden/animate.css)
-- [anime.js](https://github.com/juliangarnier/anime)
+- [Anime](https://github.com/juliangarnier/anime)
 - [Velocity Animation](https://github.com/julianshapiro/velocity)
 - [Ramjet](https://github.com/rich-harris/ramjet)
 - [Barba.js](https://github.com/luruke/barba.js)
-- [Motto - Animated Words](https://github.com/jrainlau/motto)
+- [Motto Animated Words](https://github.com/jrainlau/motto)
 - [Popmotion](https://github.com/popmotion/popmotion)
 
 ### Typing Effect Animation
@@ -499,27 +515,27 @@
 
 ### Icons
 
-- [Remix Icon Set](https://github.com/Remix-Design/remixicon)
-- [Icons8](https://icons8.com)
+- [Remix Icons](https://github.com/Remix-Design/remixicon)
 - [Icon Font](https://www.iconfont.cn)
+- [Icons8](https://icons8.com)
 - [Ikonate](https://github.com/mikolajdobrucki/ikonate)
-- [SVG Logos](https://github.com/gilbarbara/logos)
-- [SVG Icons](https://iconsvg.xyz)
-- [Pure CSS Icons](https://cssicon.space)
-- [GreenSock](https://github.com/greensock/GreenSock-JS)
+- [CSS Icons](https://cssicon.space)
 
 ### Emoji
 
 - [OwO Keyboard Emoji](https://github.com/DIYgod/OwO)
-- [Emoji Panel](https://github.com/TimeToKnow/emoji-panel)
 - [Twitter Emoji](https://github.com/twitter/twemoji)
+- [Emoji Panel](https://github.com/TimeToKnow/emoji-panel)
 
 ### SVG
 
+- [React SVG Components](https://github.com/miukimiu/react-kawaii)
+- [SVG.js](https://github.com/svgdotjs/svg.js)
 - [SVG Optimizer](https://github.com/svg/svgo)
-- [Illustration SVG Gallery](https://gallery.manypixels.co)
-- [A Fast DVI to SVG converter](https://github.com/mgieseki/dvisvgm)
-- [Cute React SVG Components](https://github.com/miukimiu/react-kawaii)
+- [SVG Gallery](https://gallery.manypixels.co)
+- [SVG Logos](https://github.com/gilbarbara/logos)
+- [SVG Icons](https://iconsvg.xyz)
+- [DVI2SVG](https://github.com/mgieseki/dvisvgm)
 
 ### Image Size
 
@@ -570,14 +586,14 @@
 - [Howler.js](https://github.com/goldfire/howler.js)
 - [Music Helper Utils](https://github.com/madewithlove/music-fns)
 - [Elementary Audio Tools](https://github.com/nick-thompson/elementary)
+- [MIDI.js](https://github.com/mudcube/MIDI.js)
 
 ### Video
 
-- [React Video Player](https://github.com/zhihu/griffith)
+- [React Player](https://github.com/zhihu/griffith)
 - [Video.js](https://github.com/videojs/video.js)
-- [Griffith](https://github.com/zhihu/griffith)
-- [Video Landing Page](https://github.com/rishabhp/bideo.js)
 - [Plyr](https://github.com/selz/plyr)
+- [FLV.js](https://github.com/bilibili/flv.js)
 
 ## Clipboard
 
@@ -605,11 +621,20 @@
 - [Code Mirror](https://github.com/codemirror/CodeMirror)
 - [Block Editor](https://github.com/codex-team/editor.js)
 
-## Mail
+## SMS
 
-- [Node Email](https://github.com/nodemailer/nodemailer)
-- [Mail Generator](https://github.com/eladnava/mailgen)
+### Phone
+
+- [Twilio](https://github.com/twilio/twilio-node)
+
+### Email
+
+- [Node Emailer](https://github.com/nodemailer/nodemailer)
+- [Email Parser](https://github.com/nodemailer/mailparser)
+- [Email Generator](https://github.com/eladnava/mailgen)
 - [MJML Markup Language](https://github.com/mjmlio/mjml)
+- [IMAP](https://github.com/mscdex/node-imap)
+- [MailSpring](https://github.com/Foundry376/Mailspring)
 
 ## File
 
@@ -618,8 +643,14 @@
 
 ### File Uploader
 
-- [Filepond](https://github.com/pqina/filepond)
-- [Uppy File Uploader](https://github.com/transloadit/uppy)
+- [React Filepond](https://github.com/pqina/react-filepond)
+- [Vue Filepond](https://github.com/pqina/vue-filepond)
+- [Uppy Uploader](https://github.com/transloadit/uppy)
+
+### File Downloader
+
+- [You Get](https://github.com/soimort/you-get)
+- [Motrix](https://github.com/agalwood/Motrix)
 
 ### File Utils
 
@@ -680,6 +711,11 @@
 
 ## Network
 
+### Network Protocols
+
+- [TelNet](https://github.com/mkozjak/node-telnet-client)
+- [IMAP](https://github.com/mscdex/node-imap)
+
 ### Web Socket
 
 - [Socket.IO](https://github.com/socketio/socket.io)
@@ -710,7 +746,6 @@
 ## Server
 
 - [Parse Server](https://github.com/ParsePlatform/parse-server)
-- [JSON Server](https://github.com/typicode/json-server)
 
 ### Serverless
 
@@ -720,16 +755,6 @@
 
 - [MD5](https://github.com/blueimp/JavaScript-MD5)
 - [Base64](https://github.com/dankogai/js-base64)
-
-## Code Analysis
-
-- [Babel.js](https://github.com/babel/babel)
-- [AST Explorer](https://astexplorer.net)
-- [Codecrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
-
-## Code Optimizer
-
-- [JavaScript Obfuscator](https://github.com/javascript-obfuscator/javascript-obfuscator)
 
 ## Debug Testing
 
@@ -762,6 +787,7 @@
 ### End to End Testing
 
 - [Cypress](https://github.com/cypress-io/cypress)
+- [Web Hint](https://github.com/webhintio/hint)
 
 ### Higher Level Tools
 
@@ -770,53 +796,81 @@
 - [Nightmare - Phantomjs Like Browser Automation Testing](https://github.com/segmentio/nightmare)
 - [NightWatch - Selenium/Node Testing Framework](https://github.com/nightwatchjs/nightwatch)
 
+### Code Analysis Tools
+
+- [Babel.js](https://github.com/babel/babel)
+- [AST Explorer](https://astexplorer.net)
+- [Codecrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
+
+### Code Coverage Tools
+
+- [Istanbul Coverage](https://github.com/gotwarlost/istanbul)
+- [Karma Coverage](https://github.com/karma-runner/karma-coverage)
+
+### Code Quality Tools
+
+- [HTML Head Checklist](https://github.com/joshbuchea/HEAD)
+- [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
+- [CSS Stats Tools](https://github.com/cssstats/cssstats)
+
+### Inspect Tools
+
+- [NDB](https://github.com/GoogleChromeLabs/ndb)
+- [Reactotron](https://github.com/infinitered/reactotron)
+
+### Monitoring Tools
+
+- [NetData](https://github.com/netdata/netdata)
+- [Source Buster](https://github.com/alexfedoseev/sourcebuster-js)
+
+### Performance Tools
+
+- [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render)
+- [Node Clinic](https://github.com/nearform/node-clinic)
+- [Perf Tools](https://github.com/brendangregg/perf-tools)
+- [FlameGraph](https://github.com/brendangregg/FlameGraph)
+
+### Log Tools
+
+- [Log4.js](https://github.com/nomiddlename/log4js-node)
+- [Stacktrace.js](https://github.com/stacktracejs/stacktrace.js)
+- [Stacktrace Visualization](https://github.com/joyent/node-stackvis)
+- [Log Analyzer](https://github.com/allinurl/goaccess)
+- [HTTP Loger](https://github.com/expressjs/morgan)
+
+### Mock Tools
+
+- [Public APIs](https://github.com/public-apis/public-apis)
+- [Mockery Function](https://github.com/mfncooper/mockery)
+- [Nock Server](https://github.com/nock/nock)
+- [JSON Server](https://github.com/typicode/json-server)
+- [Images Mock](http://source.unsplash.com/random)
+- [Images Placeholder](https://placeholder.com)
+- [Pokemon API](https://github.com/PokeAPI/pokeapi)
+
 ### Security Tools
 
 - [Sqlmap](https://github.com/sqlmapproject/sqlmap)
 - [Zaproxy](https://github.com/zaproxy/zaproxy)
 - [Arachni](https://github.com/Arachni/arachni)
-
-### Coverage
-
-- [Istanbul Coverage](https://github.com/gotwarlost/istanbul)
-- [Karma Coverage](https://github.com/karma-runner/karma-coverage)
+- [Naughty Input Strings](https://github.com/minimaxir/big-list-of-naughty-strings))
+- [FatRat](https://github.com/Screetsec/TheFatRat)
+- [Spoof](https://github.com/feross/spoof)
 
 ### UML Tools
 
 - [Draw.io](https://github.com/jgraph/drawio)
 - [PlantUML](https://github.com/plantuml/plantuml)
 
-### Mock Tools and API
+## DevOps
 
-#### Mock Tools
+### Project Tools
 
-- [nock](https://github.com/nock/nock)
-- [Mockery](https://github.com/mfncooper/mockery)
+- [Node Maintenance Tools](https://github.com/maxogden/maintenance-modules)
 
-#### Mock API
+### CI Tools
 
-- [Pokemon API](https://github.com/PokeAPI/pokeapi)
-- [JSON Box](https://github.com/vasanthv/jsonbox)
-- [JSON Placeholder](http://jsonplaceholder.typicode.com)
-- [Images Placeholder](https://placeholder.com)
-- [Images Mock](http://source.unsplash.com/random)
-- [In Memory Web API](https://github.com/angular/in-memory-web-api)
-
-### Monitoring
-
-- [Source Buster](https://github.com/alexfedoseev/sourcebuster-js)
-
-### Performance
-
-- [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render)
-- [Node Clinic](https://github.com/nearform/node-clinic)
-
-### Log
-
-- [Log4.js](https://github.com/nomiddlename/log4js-node)
-- [Stacktrace.js](https://github.com/stacktracejs/stacktrace.js)
-- [Stacktrace visualization tools](https://github.com/joyent/node-stackvis)
-- [Morgan](https://github.com/expressjs/morgan)
+- [ProBot](https://github.com/probot/probot)
 
 ## Documentation
 
