@@ -529,7 +529,8 @@ npx webpack --mode production --profile --json > stats.json
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const childProcess = require('child_process')
-const branch = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().replace(/\s+/, '')
+const branch = childProcess.execSync('git rev-parse --abbrev-ref HEAD')
+                           .toString().replace(/\s+/, '');
 const version = branch.split('/')[1]
 const scripts = [
   'https://cdn.bootcss.com/react-dom/16.9.0-rc.0/umd/react-dom.production.min.js',
@@ -538,22 +539,24 @@ const scripts = [
 
 
 class HotLoad {
-  apply(compiler) { 
+  apply(compiler) {
     compiler.hooks.beforeRun.tap('UpdateVersion', (compilation) => {
       compilation.options.output.publicPath = `./${version}/`
     })
-    
+
     compiler.hooks.compilation.tap('HotLoadPlugin', (compilation) => {
-      HtmlWebpackPlugin.getHooks(compilation).alterAssetTags.tapAsync('HotLoadPlugin', (data, cb) => {
-        scripts.forEach(src => [
-          data.assetTags.scripts.unshift({
-            tagName: 'script',
-            voidTag: false,
-            attributes: { src }
-          })
-        ])
-        cb(null, data)
-      })
+      HtmlWebpackPlugin.getHooks(compilation).alterAssetTags.tapAsync(
+        'HotLoadPlugin', (data, cb) => {
+          scripts.forEach(src => [
+            data.assetTags.scripts.unshift({
+              tagName: 'script',
+              voidTag: false,
+              attributes: { src }
+            })
+          ])
+          cb(null, data)
+        }
+      )
     })
   }
 }
