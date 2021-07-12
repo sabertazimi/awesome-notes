@@ -36,7 +36,7 @@
   - [Branch](#branch)
     - [Basic Workflow Commands](#basic-workflow-commands)
       - [Basic Branch](#basic-branch)
-      - [remote branch](#remote-branch)
+      - [Remote Branch](#remote-branch)
     - [Advanced Branch Workflow](#advanced-branch-workflow)
       - [master 类型 && develop 类型](#master-类型--develop-类型)
       - [feature 类型分支满足](#feature-类型分支满足)
@@ -593,7 +593,7 @@ git checkout -b <new-branch-name>
 git branch -v(详细信息) -vv(详细远程信息) --merged(显示合并至当前分支的分支) --no-merged(显示未合并至当前分支的分支)
 ```
 
-#### remote branch
+#### Remote Branch
 
 本地分支跟踪远程分支(在此本地分支上运行 git pull 自动抓取),2 种方式:
 
