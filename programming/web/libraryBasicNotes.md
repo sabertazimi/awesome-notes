@@ -98,12 +98,14 @@
     - [Terminal](#terminal)
   - [Daemon](#daemon)
   - [Network](#network)
+    - [Web Socket](#web-socket)
     - [P2P](#p2p)
     - [Pre-Fetch](#pre-fetch)
     - [Lazy Loading](#lazy-loading)
     - [Network Benchmark](#network-benchmark)
     - [Network Debugging](#network-debugging)
   - [Server](#server)
+    - [Serverless](#serverless)
   - [Encryption](#encryption)
   - [Code Analysis](#code-analysis)
   - [Code Optimizer](#code-optimizer)
@@ -127,12 +129,11 @@
 
 ## Indexing Tools
 
-- [**Starter Kit Collection**](http://andrewhfarmer.com/starter-project)
-- [Best of JS](https://bestofjs.org)
-- [Micro.js](http://microjs.com)
-- [NPM Package Cost](https://github.com/pastelsky/bundlephobia)
-- [NPM Package Quality](https://github.com/alexfernandez/package-quality)
+- [Open Base](https://openbase.com)
+- [Best of JS](https://github.com/bestofjs/bestofjs-webui)
+- [Micro.js](https://github.com/microjs/microjs.com)
 - [NPM Package Trends](https://github.com/johnmpotter/npm-trends)
+- [NPM Package Cost](https://github.com/pastelsky/bundlephobia)
 
 ## Boilerplate
 
@@ -606,7 +607,9 @@
 
 ## Mail
 
+- [Node Email](https://github.com/nodemailer/nodemailer)
 - [Mail Generator](https://github.com/eladnava/mailgen)
+- [MJML Markup Language](https://github.com/mjmlio/mjml)
 
 ## File
 
@@ -677,6 +680,10 @@
 
 ## Network
 
+### Web Socket
+
+- [Socket.IO](https://github.com/socketio/socket.io)
+
 ### P2P
 
 - [FireFox Send](https://github.com/mozilla/send)
@@ -704,6 +711,10 @@
 
 - [Parse Server](https://github.com/ParsePlatform/parse-server)
 - [JSON Server](https://github.com/typicode/json-server)
+
+### Serverless
+
+- [Serverless Framework](https://github.com/serverless/serverless)
 
 ## Encryption
 
