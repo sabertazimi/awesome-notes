@@ -9,66 +9,66 @@
       - [Proxy Configuration](#proxy-configuration)
       - [List and Help](#list-and-help)
     - [File State](#file-state)
-    - [.gitignore](#gitignore)
-    - [diff](#diff)
-    - [add](#add)
-    - [commit](#commit)
-      - [提交信息格式](#提交信息格式)
-        - [Message Subject(First Line)](#message-subjectfirst-line)
+    - [Git Ignore File](#git-ignore-file)
+    - [Diff](#diff)
+    - [Add](#add)
+    - [Commit](#commit)
+      - [Commit Style Guide](#commit-style-guide)
+        - [Message Subject](#message-subject)
           - [Type Values](#type-values)
           - [Scope Values](#scope-values)
         - [Message Body](#message-body)
         - [Message Footer](#message-footer)
-    - [stash](#stash)
-    - [revert](#revert)
-    - [remove](#remove)
-    - [move](#move)
-    - [log](#log)
-      - [pretty-format](#pretty-format)
-      - [常用选项](#常用选项)
-    - [reflog](#reflog)
-    - [show](#show)
-    - [remote](#remote)
-    - [tag](#tag)
-    - [alias](#alias)
-    - [merge](#merge)
-    - [rebase](#rebase)
+    - [Stash](#stash)
+    - [Revert](#revert)
+    - [Remove](#remove)
+    - [Move](#move)
+    - [Log](#log)
+      - [Pretty Format](#pretty-format)
+      - [Log Options](#log-options)
+    - [Reflog](#reflog)
+    - [Show](#show)
+    - [Remote](#remote)
+    - [Tag](#tag)
+    - [Alias](#alias)
+    - [Merge](#merge)
+    - [Rebase](#rebase)
   - [Branch](#branch)
     - [Basic Workflow Commands](#basic-workflow-commands)
       - [Basic Branch](#basic-branch)
       - [Remote Branch](#remote-branch)
     - [Advanced Branch Workflow](#advanced-branch-workflow)
-      - [master 类型 && develop 类型](#master-类型--develop-类型)
-      - [feature 类型分支满足](#feature-类型分支满足)
-      - [release 类型分支满足](#release-类型分支满足)
-      - [hotfix 类型分支满足](#hotfix-类型分支满足)
-      - [issues 类型分支满足](#issues-类型分支满足)
-      - [trials 类型分支满足](#trials-类型分支满足)
-      - [basedOn 类型分支满足](#basedon-类型分支满足)
-      - [work 类型分支满足](#work-类型分支满足)
-  - [Inside](#inside)
-    - [add detail](#add-detail)
-    - [commit detail](#commit-detail)
-    - [checkout detail](#checkout-detail)
-    - [merge detail](#merge-detail)
-    - [fetch detail](#fetch-detail)
-    - [clone detail](#clone-detail)
-    - [push detail](#push-detail)
-    - [HEAD/branch detail](#headbranch-detail)
-    - [.git/objects](#gitobjects)
+      - [Master Branch and Develop Branch](#master-branch-and-develop-branch)
+      - [Feature Branch](#feature-branch)
+      - [Release Branch](#release-branch)
+      - [Hotfix Branch](#hotfix-branch)
+      - [Issues Branch](#issues-branch)
+      - [Trials Branch](#trials-branch)
+      - [BasedOn Branch](#basedon-branch)
+      - [Work Branch](#work-branch)
+  - [Git Inside](#git-inside)
+    - [Add Inside](#add-inside)
+    - [Commit Inside](#commit-inside)
+    - [Checkout Inside](#checkout-inside)
+    - [Merge Inside](#merge-inside)
+    - [Fetch Inside](#fetch-inside)
+    - [Clone Inside](#clone-inside)
+    - [Push Inside](#push-inside)
+    - [HEAD Branch Inside](#head-branch-inside)
+    - [Git Objects](#git-objects)
   - [GitHub](#github)
     - [LICENSE](#license)
       - [Popular LICENSE](#popular-license)
       - [Unique LICENSE](#unique-license)
     - [Teamwork](#teamwork)
       - [Pull Request Work Flow](#pull-request-work-flow)
-    - [Create Repo without Browser](#create-repo-without-browser)
+    - [GitHub CLI](#github-cli)
     - [Purge](#purge)
     - [Wiki](#wiki)
       - [Wiki Git Access](#wiki-git-access)
     - [Shorten GitHub URL](#shorten-github-url)
-  - [Git tools](#git-tools)
-    - [diff && patch](#diff--patch)
+  - [Git Tools](#git-tools)
+    - [Diff and Patch](#diff-and-patch)
     - [Semantic Git Commit Message](#semantic-git-commit-message)
     - [Changelog Generator](#changelog-generator)
   - [Commands List](#commands-list)
@@ -192,7 +192,7 @@ git help config
 - Modified
 - Staged
 
-### .gitignore
+### Git Ignore File
 
 文件 .gitignore 的格式规范如下：
 
@@ -223,7 +223,7 @@ doc/*.txt
 doc/**/*.pdf
 ```
 
-### diff
+### Diff
 
 查看未暂存(un-staged)差异
 
@@ -243,7 +243,7 @@ git diff --staged
 git diff --check
 ```
 
-### add
+### Add
 
 - 交互式的选择 add 特定部分
 
@@ -251,7 +251,7 @@ git diff --check
 git add -p
 ```
 
-### commit
+### Commit
 
 - -a: 跳过暂存阶段(git add)
 - -v: 显示详细 diff 信息
@@ -266,7 +266,7 @@ git commit -a -v
 git commit --amend -a -v
 ```
 
-#### 提交信息格式
+#### Commit Style Guide
 
 ```html
 firstline -
@@ -281,7 +281,7 @@ firstline -
 ></type>
 ```
 
-##### Message Subject(First Line)
+##### Message Subject
 
 no more than 50 characters
 
@@ -321,7 +321,7 @@ no more than 50 characters
   To migrate your project, change all the commands, where you use `--port-runner`
   to `--runner-port`.
 
-### stash
+### Stash
 
 - git stash: 备份当前的工作区的内容，将当前的工作区内容保存到 Git 栈
 - git stash apply/pop: 从 Git 栈中读取最近一次保存的内容，恢复工作区的相关内容
@@ -334,7 +334,7 @@ no more than 50 characters
 git stash show -p stash@{0} | git apply -R
 ```
 
-### revert
+### Revert
 
 - 重新提交前 n 次的 commit
 
@@ -342,7 +342,7 @@ git stash show -p stash@{0} | git apply -R
 git revert -n
 ```
 
-### remove
+### Remove
 
 完全删除文件
 
@@ -356,13 +356,13 @@ git rm filename
 git rm --cached filename
 ```
 
-### move
+### Move
 
 ```bash
 git mv old_path new_path
 ```
 
-### log
+### Log
 
 - -p: 打印 diff 差异信息
 - -n: n 为十进制数字,显示最近 n 次信息
@@ -380,7 +380,7 @@ git mv old_path new_path
 git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks path_name
 ```
 
-#### pretty-format
+#### Pretty Format
 
 | 选项 | 说明                                       |
 | :--- | :----------------------------------------- |
@@ -400,7 +400,7 @@ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks p
 | %cr  | 提交日期,按多久以前的方式显示              |
 | %s   | 提交说明                                   |
 
-#### 常用选项
+#### Log Options
 
 | 选项               | 说明                                                    |
 | :----------------- | :------------------------------------------------------ |
@@ -415,7 +415,7 @@ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks p
 | --before=/--until= | 限制日志时间 "2008-01-15" "2 years 1 day 3 minutes ago" |
 | --help             |
 
-### reflog
+### Reflog
 
 `git reflog show` is an alias for
 `git log -g --abbrev-commit --pretty=oneline`.
@@ -425,7 +425,7 @@ git reflog
 git reset HEAD@{index}
 ```
 
-### show
+### Show
 
 - 查看其他分支 或 提交点的文件状态
 
@@ -433,7 +433,7 @@ git reset HEAD@{index}
 git show branchName/commitHash:fileName
 ```
 
-### remote
+### Remote
 
 添加与删除远程仓库源
 
@@ -473,7 +473,7 @@ git push origin --delete [remote-branch-name]
 git config --global credential.helper store
 ```
 
-### tag
+### Tag
 
 列出标记及其信息
 
@@ -508,7 +508,7 @@ git push [remote-name] --tags
 git push --follow-tags
 ```
 
-### alias
+### Alias
 
 - !: 执行外部命令
 
@@ -524,11 +524,11 @@ git config --global alias.last 'log -1 HEAD'
 git config --global alias.visual '!gitk'
 ```
 
-### merge
+### Merge
 
 合并的结果是生成一个新的快照(并提交)(新的提交对象)
 
-### rebase
+### Rebase
 
 切换到工作分支,编码开发新特性
 
@@ -573,6 +573,7 @@ git branch <new-branch-name>
 
 ```bash
 git branch -d <branch-name>
+git push origin --delete <remote-branch-name>
 ```
 
 切换分支
@@ -613,6 +614,12 @@ git checkout --track [new-local-branch]
 git checkout -b [new-local-branch] [remotename]/[branch]
 ```
 
+- Delete remote branch
+
+```bash
+git push origin --delete [remote-branch-name]
+```
+
 ### Advanced Branch Workflow
 
 1. master 类型分支，名为?|master 或 master，其中?为开发代号
@@ -630,7 +637,7 @@ git checkout -b [new-local-branch] [remotename]/[branch]
 
 约定:
 
-#### master 类型 && develop 类型
+#### Master Branch and Develop Branch
 
 _多长期分支模式_: master 分支与 develop 分支都是长期分支,区别在于分支的**稳定性等级** - master > develop
 
@@ -651,7 +658,7 @@ git 在每次提交的时候要求输入对此提交的概括，这个概括不�
 > 在使用型任务中使用 gg-work-init 进行版本控制的初始化,
 > 拉取需要使用的稳定版本程序的 master 分支，并初始化对应的 basedOn 分支（见 9）.
 
-#### feature 类型分支满足
+#### Feature Branch
 
 1. 只能从 develop 类型分支上创建
 2. 最终必须合并到 develop 类型分支
@@ -661,7 +668,7 @@ git 在每次提交的时候要求输入对此提交的概括，这个概括不�
 > 在 develop 类型分支上使用 gg-feature-open featureName 建立并转向一个名为 feature/featureName 的新分支
 > 在一个 feature 类型分支上使用 gg-feature-close 把这个分支的工作合并到 develop 类型分支上，删除此分支，完成一个特性的开发
 
-#### release 类型分支满足
+#### Release Branch
 
 1. 只能从 develop 类型分支上创建
 2. 最终必须同时合并到 master 类型分支(发布新的版本)和 develop 类型分支(基于新版本的进一步开发)
@@ -671,7 +678,7 @@ git 在每次提交的时候要求输入对此提交的概括，这个概括不�
 > 在这个分支上允许进行小的改动（比如修改一下 readme 文件中的版本号）,
 > 然后使用 gg-release-close 将此版本合并（发布）到 master 类型分支上，同时合并到 develop 类型分支上，然后删除此分支.
 
-#### hotfix 类型分支满足
+#### Hotfix Branch
 
 1. 只能从 master 类型分支上创建
 2. 最终必须同时合并到 master 类型分支(发布新的热补丁版本)和 develop 类型分支(基于新版本的进一步开发)
@@ -680,7 +687,7 @@ git 在每次提交的时候要求输入对此提交的概括，这个概括不�
 > 当新版本发布后发现必须马上解决的严重 bug 时，使用 gg-hotfix-open versionNum 建立名为 hotfix-versionNum 的临时分支,
 > 在这个分支上完成 bug 的修复，然后使用 gg-hotfix-close 将此版本合并（发布）到 master 类型分支上，同时合并到 develop 类型分支上，然后删除此分支.
 
-#### issues 类型分支满足
+#### Issues Branch
 
 1. 只能从 develop 类型分支上创建
 2. 最终必须合并到 develop 类型分支
@@ -691,7 +698,7 @@ git 在每次提交的时候要求输入对此提交的概括，这个概括不�
 > 在一个 issues 类型分支上使用 gg-issues-close 把这个分支的工作合并到 develop 类型分支上，然后删除此分支，解决了一个复杂的问题
 > issues 类型和 feature 类型的实现方式一模一样，仅仅有名字上面的差别。
 
-#### trials 类型分支满足
+#### Trials Branch
 
 - 可以从除了 release 类型分支以外的任何类型分支上创建
 - 在这个分支上请发挥想象力大胆实验
@@ -702,7 +709,7 @@ git 在每次提交的时候要求输入对此提交的概括，这个概括不�
 > 在满足条件的分支 A 上工作，时不时会冒出一些大胆的想法
 > 这个时候使用 gg-trials-open trialsName 创建并转向一个名为 A/trials.trialsName 的实验分支，在这个分支上进行疯狂的实验
 
-#### basedOn 类型分支满足
+#### BasedOn Branch
 
 1. 从 name|master 建立并初始化为 name|basedOn
 2. 只能从对应的 master 分支 fork 到此分支
@@ -718,26 +725,26 @@ git 在每次提交的时候要求输入对此提交的概括，这个概括不�
 > (init)v1.0===>v0.9=====>v0.8======>v1.3,
 > 这个分支上的 commit 来源于 master，但是其分支提交历史与 master 分支无关
 
-#### work 类型分支满足
+#### Work Branch
 
 1. 只能从 basedOn 类型分支上创建
 2. 可以借助 basedOn 分支升级
 
-## Inside
+## Git Inside
 
-### add detail
+### Add Inside
 
 - create blob objects: contains content of files
 - add files to index list (.git/index)
 
-### commit detail
+### Commit Inside
 
 - create tree objects: each object represent a directory,
   contains blob object refs in this directory
 - create commit object:
   contains root tree object hash number and parent commit object hash number
 
-### checkout detail
+### Checkout Inside
 
 ```bash
 git checkout <commit-hash-id>
@@ -749,7 +756,7 @@ git checkout <commit-hash-id>
 - write .git/index
 - set HEAD to that commit (detached HEAD state)
 
-### merge detail
+### Merge Inside
 
 ```bash
 git merge <giver-branch>/<giver-commit>
@@ -761,28 +768,28 @@ git merge <giver-branch>/<giver-commit>
 - do what `git checkout` do
 - remove `.git/MERGE_HEAD`
 
-### fetch detail
+### Fetch Inside
 
 - get hash of remote commit and its root tree object
 - copy all diff objects in tree graph into .git/objects
 - update `.git/refs/remotes/origin/<branch>`, set `.git/FETCH_HEAD` to it
 
-### clone detail
+### Clone Inside
 
 `git init` + `git remote add origin <repo-url>` + `git pull origin`
 
-### push detail
+### Push Inside
 
 - apply commit to remote repo
 - update remote repo `.git/refs/heads/<branch>` to new commit
 - update local repo `.git/refs/remotes/origin/<branch>` to new commit
 
-### HEAD/branch detail
+### HEAD Branch Inside
 
 - HEAD -> refs/heads/master -> commit object
 - branches are just refs, refs are just files (contain commit hash id)
 
-### .git/objects
+### Git Objects
 
 `.git/objects` is immutable, `.git/refs` is mutable
 
@@ -989,7 +996,7 @@ THE SOFTWARE.
 5. Push to the branch (`git push origin my-new-feature`).
 6. Create new Pull Request.
 
-### Create Repo without Browser
+### GitHub CLI
 
 - 利用 GitHub Repository API 以及 curl 工具创建仓库
 
@@ -1049,9 +1056,9 @@ git clone git@github.com:user/repo.wiki.git
 curl -i http://git.io -F "url=https://github.com/technoweenie" -F "code=t"
 ```
 
-## Git tools
+## Git Tools
 
-### diff && patch
+### Diff and Patch
 
 ```bash
 diff -u <src> <dist>
