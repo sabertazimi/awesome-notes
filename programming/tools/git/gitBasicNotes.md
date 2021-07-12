@@ -622,6 +622,8 @@ git push origin --delete [remote-branch-name]
 
 ### Advanced Branch Workflow
 
+[Git Flow Extension](https://github.com/nvie/gitflow):
+
 1. master 类型分支，名为?|master 或 master，其中?为开发代号
 2. develop 类型分支，名为?|develop 或 develop，其中?为开发代号
 3. feature 类型分支，名为 feature/_或?|feature/_，其中\*为特征描述
@@ -634,8 +636,6 @@ git push origin --delete [remote-branch-name]
    ?为其所基于的分支的开发代号，最后一个\*代表其在？|basedOn 上所基于的分支的版本号或状态名
 
 下面介绍模型中的约定，并定义 gg-\*这样的抽象动作来完成约定中的行为
-
-约定:
 
 #### Master Branch and Develop Branch
 
