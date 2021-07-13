@@ -878,5 +878,6 @@
 - [Vuepress](https://github.com/vuejs/vuepress)
 - [TypeDoc - TypeScript](https://github.com/TypeStrong/typedoc)
 - [Docz](https://github.com/pedronauck/docz)
+- [DUmi](https://github.com/umijs/dumi)
 - [Documentation.js](https://github.com/documentationjs/documentation)
 - [Wiki.js](https://github.com/Requarks/wiki)
