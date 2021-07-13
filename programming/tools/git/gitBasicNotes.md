@@ -62,8 +62,11 @@
       - [Unique LICENSE](#unique-license)
     - [Teamwork](#teamwork)
       - [Pull Request Work Flow](#pull-request-work-flow)
-    - [GitHub CLI](#github-cli)
-    - [Purge](#purge)
+    - [GitHub CLI Tool](#github-cli-tool)
+      - [CLI Installation](#cli-installation)
+      - [GH Issue Usage](#gh-issue-usage)
+      - [GH PR Usage](#gh-pr-usage)
+      - [GH Repo Usage](#gh-repo-usage)
     - [Wiki](#wiki)
       - [Wiki Git Access](#wiki-git-access)
     - [Shorten GitHub URL](#shorten-github-url)
@@ -71,6 +74,7 @@
     - [Diff and Patch](#diff-and-patch)
     - [Semantic Git Commit Message](#semantic-git-commit-message)
     - [Changelog Generator](#changelog-generator)
+    - [Purge Tool](#purge-tool)
   - [Commands List](#commands-list)
     - [Basic Commands](#basic-commands)
       - [git config](#git-config)
@@ -996,50 +1000,80 @@ THE SOFTWARE.
 5. Push to the branch (`git push origin my-new-feature`).
 6. Create new Pull Request.
 
-### GitHub CLI
+### GitHub CLI Tool
 
-- 利用 GitHub Repository API 以及 curl 工具创建仓库
+#### CLI Installation
+
+Install `gh` by `apt`,
+according of [official introduction](https://github.com/cli/cli/blob/trunk/docs/install_linux.md).
 
 ```bash
-curl -u 'username' -d '{"name":"RepoName",
-\ "description":"description string","homepage":"URL",
-\ "auto_init":true, "gitignore_template":"Meteor", "license_template":"mit"}'
-\ https://api.github.com/user/repos
+gh auth login
 ```
 
-- 上传本地代码至远程仓库
+#### GH Issue Usage
+
+```bash
+gh issue create
+gh issue close
+gh issue status
+gh issue list
+```
+
+#### GH PR Usage
+
+```bash
+gh pr checkout
+gh pr create
+gh pr close
+gh pr merge
+gh pr status
+gh pr list
+```
+
+#### GH Repo Usage
+
+Clone repo:
+
+```bash
+gh repo clone cli/cli
+```
+
+Create repo:
+
+```bash
+# create a repository under your account using the current directory name
+$ git init my-project
+$ cd my-project
+$ gh repo create
+
+# create a repository with a specific name
+$ gh repo create my-project
+
+# create a repository in an organization
+$ gh repo create cli/my-project
+
+# disable issues and wiki
+$ gh repo create --enable-issues=false --enable-wiki=false
+```
+
+Push repo:
 
 ```bash
 git init
 
 echo "# RepoName" >> README.md
 git add README.md
-git commit
+git commit -m "Initial commit"
 
 git remote add origin git@github.com:username/RepoName.git
 git push -u origin master
 ```
 
-或
+List repo:
 
 ```bash
-git clone git@github.com:username/RepoName
-
-echo "# RepoName" >> README.md
-git add README.md
-git commit
-git push -u
-```
-
-### Purge
-
-```bash
-git rev-list --objects --all
-\ | grep "$(git verify-pack -v .git/objects/pack/*.idx
-\ | sort -k 3 -n | tail -5 | awk '{print$1}')"
-git filter-branch -f --prune-empty --index-filter
-\ 'git rm -rf --cached --ignore-unmatch your-file-name'
-\ --tag-name-filter cat -- --all
+gh repo list sabertazimi
 ```
 
 ### Wiki
@@ -1084,6 +1118,17 @@ patch -p1 <../program_2.0.patch
 ### Changelog Generator
 
 - [standard-version](https://github.com/conventional-changelog/standard-version)
+
+### Purge Tool
+
+```bash
+git rev-list --objects --all
+\ | grep "$(git verify-pack -v .git/objects/pack/*.idx
+\ | sort -k 3 -n | tail -5 | awk '{print$1}')"
+git filter-branch -f --prune-empty --index-filter
+\ 'git rm -rf --cached --ignore-unmatch your-file-name'
+\ --tag-name-filter cat -- --all
+```
 
 ## Commands List
 
