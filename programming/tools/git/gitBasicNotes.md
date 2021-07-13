@@ -1037,6 +1037,10 @@ Clone repo:
 
 ```bash
 gh repo clone cli/cli
+
+# fastest way to clone authorized user repos
+gh alias set rc 'repo clone'
+gh rc dragon
 ```
 
 Create repo:
