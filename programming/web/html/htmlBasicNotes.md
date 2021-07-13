@@ -304,7 +304,8 @@ but so can every `<article>` and `<section>` element
 
 ## Head Tag
 
-- [Meta Data in `head`](https://gethead.info/)
+`Meta` data list in
+[HEAD](https://github.com/joshbuchea/HEAD).
 
 ### Favicon
 
@@ -312,6 +313,16 @@ but so can every `<article>` and `<section>` element
 <head>
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 </head>
+```
+
+### Theme Color
+
+- [MDN Introduction](https://developer.mozilla.org/docs/Web/HTML/Element/meta/name/theme-color)
+- [HTML Specification](https://html.spec.whatwg.org/multipage/semantics.html#meta-theme-color)
+
+```html
+<meta name="theme-color" content="#319197" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#872e4e" media="(prefers-color-scheme: dark)">
 ```
 
 ## Form
