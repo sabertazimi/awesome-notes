@@ -484,8 +484,9 @@
 
 ## i18n
 
-- [React Intl](https://github.com/yahoo/react-intl)
-- [Formatting international numbers and currencies](https://github.com/autoNumeric/autoNumeric)
+- [React i18n Next](https://github.com/i18next/react-i18next)
+- [React Intl](https://github.com/formatjs/formatjs)
+- [Numbers and Currencies](https://github.com/autoNumeric/autoNumeric)
 
 ## Social Sharing
 
