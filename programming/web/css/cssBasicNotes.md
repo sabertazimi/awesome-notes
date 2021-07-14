@@ -39,7 +39,7 @@
     - [伪类](#伪类)
     - [伪元素](#伪元素)
     - [Descendant Selector](#descendant-selector)
-  - [全局属性值](#全局属性值)
+  - [HTML Body Property](#html-body-property)
   - [Box Style](#box-style)
     - [width](#width)
     - [z-index](#z-index)
@@ -77,24 +77,26 @@
   - [Grid Patterns](#grid-patterns)
     - [Grid Attention Tips](#grid-attention-tips)
     - [Grid Alignment](#grid-alignment)
-  - [分栏问题](#分栏问题)
-    - [两栏布局](#两栏布局)
-    - [三栏布局](#三栏布局)
-      - [absolute to left/right + margin to middle](#absolute-to-leftright--margin-to-middle)
-      - [float to left/right + margin to middle](#float-to-leftright--margin-to-middle)
-      - [float + negative margin both to left/right](#float--negative-margin-both-to-leftright)
-  - [居中问题](#居中问题)
-    - [水平居中问题](#水平居中问题)
-    - [垂直居中问题](#垂直居中问题)
-    - [混合布局](#混合布局)
-  - [list-style-type/image](#list-style-typeimage)
-  - [align](#align)
-    - [text-align](#text-align)
-    - [vertical-align](#vertical-align)
-  - [opacity](#opacity)
-  - [border](#border)
-    - [border-radius](#border-radius)
-    - [border-image](#border-image)
+  - [Column Patterns](#column-patterns)
+    - [Two Column Pattern](#two-column-pattern)
+    - [Three Column Pattern](#three-column-pattern)
+      - [Absolute and Margin Column](#absolute-and-margin-column)
+      - [Float and Margin Column](#float-and-margin-column)
+      - [Float and Negative Margin Column](#float-and-negative-margin-column)
+  - [Centering Patterns](#centering-patterns)
+    - [Horizontal Centering Pattern](#horizontal-centering-pattern)
+    - [Vertical Centering Pattern](#vertical-centering-pattern)
+    - [Mixing Centering Pattern](#mixing-centering-pattern)
+  - [List Style](#list-style)
+  - [Alignment](#alignment)
+    - [Text Align](#text-align)
+    - [Vertical Align](#vertical-align)
+  - [Opacity](#opacity)
+  - [Border](#border)
+    - [Border Radius](#border-radius)
+    - [Border Image](#border-image)
+  - [CSS Colors](#css-colors)
+    - [HSL Color](#hsl-color)
   - [CSS Background](#css-background)
     - [Background Image](#background-image)
     - [Background Size](#background-size)
@@ -1008,7 +1010,7 @@ For `.container ul li a` selector:
 - finally, filter down the above selection to
   the ones contained in an element with the class `.container`
 
-## 全局属性值
+## HTML Body Property
 
 - auto
 - inherit
@@ -1552,12 +1554,12 @@ _named_ rows and columns
   attach to **chilren** css selector
   (effectively adjusts `margin` of children)
 
-## 分栏问题
+## Column Patterns
 
 - float 左右元素 + margin 中间元素
 - float 元素 + width: %
 
-### 两栏布局
+### Two Column Pattern
 
 利用父元素 relative 与 子元素 absolute 进行布局
 
@@ -1588,13 +1590,13 @@ _named_ rows and columns
 }
 ```
 
-### 三栏布局
+### Three Column Pattern
 
-#### absolute to left/right + margin to middle
+#### Absolute and Margin Column
 
 position .left and .right with absolute, add margin-left and margin-right to .middle
 
-#### float to left/right + margin to middle
+#### Float and Margin Column
 
 ```html
 .left .right .middle
@@ -1614,7 +1616,7 @@ position .left and .right with absolute, add margin-left and margin-right to .mi
 }
 ```
 
-#### float + negative margin both to left/right
+#### Float and Negative Margin Column
 
 On a floated element, a negative margin opposite the float direction will decrease
 the float area, causing adjacent elements to overlap the floated element. A negative
@@ -1665,11 +1667,11 @@ margin in the direction of the float will pull the floated element in that direc
 }
 ```
 
-## 居中问题
+## Centering Patterns
 
 [CSS Tricks - Centering CSS Complete Guide](https://css-tricks.com/centering-css-complete-guide/)
 
-### 水平居中问题
+### Horizontal Centering Pattern
 
 - inline: text-align, flex/grid box
 - block: auto margin, flex/grid box
@@ -1688,26 +1690,27 @@ margin in the direction of the float will pull the floated element in that direc
 }
 ```
 
-### 垂直居中问题
+### Vertical Centering Pattern
 
 - inline\*: padding, line-height, vertical-align, flex/grid box
 - block: top+margin, top+tranlateY, vertical-align, flex/grid box
 
-### 混合布局
+### Mixing Centering Pattern
 
 在子容器中在设置新元素即可
 
-## list-style-type/image
+## List Style
 
-改变 ul/ol 前标记类型
+- list-style-type: 改变 ul/ol 前标记类型
+- list-style-image: 改变 ul/ol 前标记类型
 
-## align
+## Alignment
 
-### text-align
+### Text Align
 
 justify(自适应，左右都无空格)
 
-### vertical-align
+### Vertical Align
 
 垂直对齐方式
 
@@ -1719,11 +1722,11 @@ justify(自适应，左右都无空格)
 }
 ```
 
-## opacity
+## Opacity
 
 0 ~ 1, 渐进效果常用属性
 
-## border
+## Border
 
 mix transparent with non-transparent border to make shapes (e.g. triangle).
 
@@ -1769,12 +1772,76 @@ mix transparent with non-transparent border to make shapes (e.g. triangle).
 }
 ```
 
-### border-radius
+### Border Radius
 
-### border-image
+### Border Image
 
 ```css
 border-image: source slice width outset repeat;
+```
+
+## CSS Colors
+
+### HSL Color
+
+- H: hue
+- S: saturation (stay `50%` etc.)
+- L: lightness (easy to theme colors)
+
+```css
+/* Hover Button */
+:root {
+  --primary-h: 221;
+  --primary-s: 72%;
+  --primary-l: 62%;
+}
+
+.button {
+  background-color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+}
+
+.button:hover {
+  --primary-l: 54%;
+}
+```
+
+```css
+/* Custom Buttons */
+:root {
+  --primary-h: 221;
+  --primary-s: 72%;
+  --primary-l: 62%;
+}
+
+.button {
+  background-color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+}
+
+.button--secondary {
+  --primary-l: 90%;
+  color: #222;
+}
+
+.button--ghost {
+  --primary-l: 90%;
+  background-color: transparent;
+  border: 3px solid hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+}
+```
+
+```css
+/* Change lightness to get gradient */
+.section {
+  background: linear-gradient(
+    to left,
+    hsl(var(--primary-h), var(--primary-s), var(--primary-l)),
+    hsl(var(--primary-h), var(--primary-s), 95%)
+  );
+}
+
+.section-2 {
+  --primary-h: 167;
+}
 ```
 
 ## CSS Background
@@ -1994,7 +2061,8 @@ movie style
   width: 100px;
   height: 100px;
   background-color: #8cffa0;
-  mask-image: url(https://mdn.mozillademos.org/files/12668/MDN.svg), url(https://mdn.mozillademos.org/files/12676/star.svg);
+  mask-image: url(https://mdn.mozillademos.org/files/12668/MDN.svg),
+    url(https://mdn.mozillademos.org/files/12676/star.svg);
   mask-size: 100% 100%;
   mask-composite: add; /* Can be changed in the live sample */
 }
@@ -2748,18 +2816,18 @@ TweenMax.fromTo(element, 1, { x: 0 }, { x: 100 });
 const tl = new TimelineMax();
 tl.staggerFrom(
   [
-    "#Capa_1 > g > path:nth-child(1)",
-    "#Capa_1 > circle:nth-child(7)",
-    "#Capa_1 > path:nth-child(6)",
-    "#Capa_1 > circle:nth-child(5)"
+    '#Capa_1 > g > path:nth-child(1)',
+    '#Capa_1 > circle:nth-child(7)',
+    '#Capa_1 > path:nth-child(6)',
+    '#Capa_1 > circle:nth-child(5)',
   ],
   1,
   {
     scaleY: 0,
     scaleX: 0,
-    transformOrigin: "center",
+    transformOrigin: 'center',
     ease: Bounce.easeOut,
-    stagger: 0.2
+    stagger: 0.2,
   }
 );
 ```
@@ -3196,9 +3264,7 @@ a.btn-custom {
 ```html
 <body>
   <div class="content">
-    <div class="content-inside">
-      content
-    </div>
+    <div class="content-inside">content</div>
   </div>
   <footer class="footer"></footer>
 </body>
@@ -3225,9 +3291,7 @@ a.btn-custom {
 
 ```html
 <body>
-  <div class="content">
-    content
-  </div>
+  <div class="content">content</div>
   <footer class="footer"></footer>
 </body>
 
@@ -3243,9 +3307,7 @@ a.btn-custom {
 
 ```html
 <body>
-  <div class="content">
-    content
-  </div>
+  <div class="content">content</div>
   <footer class="footer"></footer>
 </body>
 
@@ -3269,9 +3331,7 @@ a.btn-custom {
 
 ```html
 <body>
-  <div class="content">
-    content
-  </div>
+  <div class="content">content</div>
   <footer class="footer"></footer>
 </body>
 
@@ -3784,13 +3844,9 @@ const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
 ```html
 <div class="alert alert-info">
   <div class="alert-content">
-    <h2 class="alert-title">
-      Info
-    </h2>
+    <h2 class="alert-title">Info</h2>
     <div class="alert-body">
-      <p>
-        Info Message.
-      </p>
+      <p>Info Message.</p>
     </div>
   </div>
 </div>
