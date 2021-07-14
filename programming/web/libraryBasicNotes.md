@@ -813,6 +813,7 @@
 - [HTML Head Checklist](https://github.com/joshbuchea/HEAD)
 - [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
 - [CSS Stats Tools](https://github.com/cssstats/cssstats)
+- [CSS Stats CLI](https://github.com/projectwallace/wallace-cli)
 
 ### Inspect Tools
 
