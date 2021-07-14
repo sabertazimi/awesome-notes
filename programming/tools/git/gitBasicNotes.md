@@ -338,6 +338,13 @@ no more than 50 characters
 git stash show -p stash@{0} | git apply -R
 ```
 
+Pop a single file:
+
+```bash
+git restore -s stash@{0} -- <filename>
+git checkout stash@{0} -- <filename>
+```
+
 ### Revert
 
 - 重新提交前 n 次的 commit
