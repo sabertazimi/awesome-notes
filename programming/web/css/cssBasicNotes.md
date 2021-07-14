@@ -70,7 +70,7 @@
     - [Useful Shorthand of `flex`](#useful-shorthand-of-flex)
     - [父元素属性](#父元素属性)
     - [子元素属性](#子元素属性)
-    - [Flexibity of `float`](#flexibity-of-float)
+    - [Flexibility of Float](#flexibility-of-float)
     - [Pseudo Elements of Flex Box](#pseudo-elements-of-flex-box)
     - [Fixed Sidebar with Flexbox](#fixed-sidebar-with-flexbox)
     - [Flexbox Best Practice](#flexbox-best-practice)
@@ -1343,7 +1343,7 @@ flex-grow: number;
 align-self: auto/flex-start/flex-end/center/baseline/stretch;
 ```
 
-### Flexibity of `float`
+### Flexibility of Float
 
 ```html
 <div class="parent">
