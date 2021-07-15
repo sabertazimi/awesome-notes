@@ -2846,7 +2846,8 @@ Prevent useless re-rendering:
 
 - shouldComponentUpdate
 - React.PureComponent: **shallow compare** diff
-- React.memo: **shallow compare** diff
+- React.memo: **shallow compare** diff,
+  to memorize stateless components that **props not changed often**.
 - memorized values
 - memorized event handlers
 - 在用`memo`或者`useMemo`做优化前
