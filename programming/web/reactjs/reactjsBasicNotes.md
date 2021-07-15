@@ -961,14 +961,16 @@ const [state, dispatch] = useReducer(reducer, initialState);
 #### Ref Values
 
 - Mutable Value:
-  useRef() is useful for for keeping any mutable value around.
-- Lifecycle Value:
+  `useRef()` is useful for for keeping any mutable value around.
+- Lifecycle Persisted Value:
   `useRef()` creates a plain JavaScript object,
-  will give you the **same ref object** on every render.
+  is persisted (stays the same) between component re-renderings.
+- Silent Value:
+  update a ref only trigger shallow re-rendering.
 - Latest Value:
-  `useRef` read rendered props/state from **the future**.
-  Generally should avoid reading or setting refs
-  during rendering because they’re **mutable**.
+  `useRef()` read rendered props/state from **the future**.
+  Generally should avoid reading or setting refs during rendering
+  because they’re **mutable**.
   However, if want to get the **latest** value of a particular prop or state,
   it's good to read/set `ref.current`.
 
@@ -990,9 +992,7 @@ function Example() {
 
 #### Refs Update Mechanism
 
-- Shallow rendering affects just the component and not the children.
-- Deep rendering affects the component itself and all of its children.
-- Update a `ref`, the shallow rendering mechanism works to re-render component.
+- Update a `ref`, no re-renderings happens.
 - Update a `state`, the deep rendering mechanism works to re-render components.
 - Store values in refs and have them updated,
   which is more **efficient** than `useState` (which can be expensive)
@@ -1012,6 +1012,7 @@ function User() {
     name: 'UserName',
     avatarURL: 'https://avatar.com/avatar',
   });
+
   useEffect(() => {
     setTimeout(() => {
       user.current = {
@@ -1020,6 +1021,9 @@ function User() {
       };
     }, 5000);
   });
+
+  // Only output once
+  console.log('Rendered.');
 
   // Both children won't be re-rendered
   // due to shallow rendering mechanism
