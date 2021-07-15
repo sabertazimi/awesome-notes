@@ -789,6 +789,8 @@ function Child({ fetchData }) {
 - return function of `useState` (`setState`) is to change value of `hooks[idx]`
 - 由于 setState 更新状态 (dispatch action) 时基于 hook.BaseState,
   `setState(value + 1)` 与 `setState(value => value + 1)` 存在差异
+- 当在 useEffect 中调用 setState 时, 最好使用 `setState(callback)` 形式,
+  这样可以不用再 Deps List 中显式声明 state, 也可以避免一些 BUG
 
 ```js
 setState((prevState) => {
