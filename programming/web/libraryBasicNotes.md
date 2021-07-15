@@ -844,6 +844,7 @@
 
 - [Public APIs](https://github.com/public-apis/public-apis)
 - [Mockery Function](https://github.com/mfncooper/mockery)
+- [Mock Service Worker][https://github.com/mswjs/msw]
 - [Nock Server](https://github.com/nock/nock)
 - [JSON Server](https://github.com/typicode/json-server)
 - [Images Mock](http://source.unsplash.com/random)
