@@ -36,19 +36,19 @@
     - [HOC (Higher-Order Components)](#hoc-higher-order-components)
     - [Render Props (Children as Function)](#render-props-children-as-function)
   - [Hooks](#hooks)
-    - [Default Hooks](#default-hooks)
-      - [useMemo](#usememo)
-      - [useCallback](#usecallback)
-      - [useState](#usestate)
-      - [useReducer](#usereducer)
-      - [useRef](#useref)
-      - [useEffect](#useeffect)
-        - [useEffect Lifecycle](#useeffect-lifecycle)
-        - [useEffect Nasty Loop](#useeffect-nasty-loop)
-        - [useEffect Deps List](#useeffect-deps-list)
-      - [Closure BUG in useEffect](#closure-bug-in-useeffect)
-    - [Basic Rules](#basic-rules)
-    - [Hooks Internel](#hooks-internel)
+    - [useMemo](#usememo)
+    - [useCallback](#usecallback)
+    - [useState](#usestate)
+    - [useReducer](#usereducer)
+    - [useRef](#useref)
+    - [useEffect](#useeffect)
+      - [useEffect Lifecycle](#useeffect-lifecycle)
+      - [useEffect Nasty Loop](#useeffect-nasty-loop)
+      - [useEffect Deps List](#useeffect-deps-list)
+      - [Closure in useEffect](#closure-in-useeffect)
+      - [useEffect State vs Class State](#useeffect-state-vs-class-state)
+    - [Hooks Usage Rules](#hooks-usage-rules)
+    - [Hooks Internal](#hooks-internal)
     - [Custom Hooks](#custom-hooks)
       - [LifeCycle Hooks](#lifecycle-hooks)
       - [Async Data Hook](#async-data-hook)
@@ -724,9 +724,7 @@ const hook = {
 };
 ```
 
-### Default Hooks
-
-#### useMemo
+### useMemo
 
 - returns a memoized value
 - only recompute the memoized value when one of the dependencies has changed
@@ -750,7 +748,7 @@ const Button = ({ color, children }) => {
 };
 ```
 
-#### useCallback
+### useCallback
 
 - returns a memoized callback
 - 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
@@ -783,7 +781,7 @@ function Child({ fetchData }) {
 }
 ```
 
-#### useState
+### useState
 
 - read rendered props/state
 - return value of `useState` is `ref` to `hooks[idx]`:
@@ -872,7 +870,7 @@ ChatAPI.subscribeToFriendStatus(300, handleStatusChange); // Run next effect
 ChatAPI.unsubscribeFromFriendStatus(300, handleStatusChange); // Clean up last effect
 ```
 
-#### useReducer
+### useReducer
 
 - Use useState whenever manage a JS **primitive** (e.g. string, boolean, integer).
 - Use useReducer whenever manage an **object** or **array**.
@@ -943,7 +941,7 @@ const reducer = (state, action) => {
 const [state, dispatch] = useReducer(reducer, initialState);
 ```
 
-#### useRef
+### useRef
 
 `useRef` read rendered props/state from **the future**.
 Generally, you should avoid reading or setting refs
@@ -968,17 +966,17 @@ function Example() {
 }
 ```
 
-#### useEffect
+### useEffect
 
 [Complete Guide](https://overreacted.io/a-complete-guide-to-useeffect)
 
-##### useEffect Lifecycle
+#### useEffect Lifecycle
 
 1. React renders UI for current props/state to screen.
 2. React cleans up the effect for prev props/state.
 3. React runs the effect for current props/state.
 
-##### useEffect Nasty Loop
+#### useEffect Nasty Loop
 
 The effect hook runs when the component `mounts`
 but also when the component `updates`.
@@ -987,7 +985,7 @@ the component updates and the effect runs again.
 It fetches the data again and again.
 That’s a bug and needs to be avoided.
 
-##### useEffect Deps List
+#### useEffect Deps List
 
 无论是将组件编写为类还是函数, 都必须为 effect 响应所有 props 和 state 的更新.
 在传统的 Class Component, 需要编写代码去检测这些 props 和 state 是否变更
@@ -1045,7 +1043,7 @@ const useDataApi = (initialUrl, initialData) => {
 };
 ```
 
-#### Closure BUG in useEffect
+#### Closure in useEffect
 
 - useEffect Hook 会丢弃上一次渲染结果,
   它会清除上一次 effect,
@@ -1103,12 +1101,61 @@ function useInterval(callback, delay) {
 }
 ```
 
-### Basic Rules
+#### useEffect State vs Class State
+
+- 如同 `Closure in useEffect`, 每次调用 useEffect 时,
+  会捕获那一次 render 时的 props 和 state.
+- Class Component 中的 this.state.xxx 却总是指向最新的 state.
+
+```jsx
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log(`You clicked ${count} times`);
+    }, 3000);
+  });
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+}
+// Output:
+// Mounted: You clicked 0 times
+// Clicked 5 times in 3s
+// You clicked 1 times
+// You clicked 2 times
+// You clicked 3 times
+// You clicked 4 times
+// You clicked 5 times
+```
+
+```js
+componentDidUpdate() {
+  setTimeout(() => {
+    console.log(`You clicked ${this.state.count} times`);
+  }, 3000);
+}
+// Output:
+// Mounted: You clicked 0 times
+// Clicked 5 times in 3s
+// You clicked 5 times
+// You clicked 5 times
+// You clicked 5 times
+// You clicked 5 times
+// You clicked 5 times
+```
+
+### Hooks Usage Rules
 
 - only call Hooks at the top level (don't inside loops, conditions or nested functions)
 - only call Hooks from React function components
 
-### Hooks Internel
+### Hooks Internal
 
 ```js
 const MyReact = (function () {
@@ -2751,7 +2798,7 @@ export default function App() {
 }
 
 function ColorPicker({ children }) {
-  let [color, setColor] = useState("red");
+  let [color, setColor] = useState('red');
   return (
     <div style={{ color }}>
       <input value={color} onChange={(e) => setColor(e.target.value)} />
@@ -3168,8 +3215,8 @@ Locating in `react-scripts/scripts/`:
 
 ```js
 // 增加关机提示信息
-['SIGINT', 'SIGTERM'].forEach(function(sig) {
-  process.on(sig, function() {
+['SIGINT', 'SIGTERM'].forEach(function (sig) {
+  process.on(sig, function () {
     console.log(chalk.cyan('Gracefully shutting down. Please wait...\n'));
     devServer.close();
     process.exit();
@@ -3230,7 +3277,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
       new BundleAnalyzerPlugin({
         analyzerPort: 5000,
       }),
-  ]
+  ];
 }
 ```
 
@@ -3453,10 +3500,8 @@ ReactDOM.render(<WrapperContainer />, container);
 import { DatePicker as LibraryXDatePicker } from 'LibraryX';
 
 const DatePicker = (props) => {
-  return (
-    <LibraryXDatePicker {...props} />
-  );
-}
+  return <LibraryXDatePicker {...props} />;
+};
 
 export default DatePicker;
 ```
