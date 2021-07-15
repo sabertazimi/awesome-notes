@@ -43,6 +43,10 @@
       - [Array.find](#arrayfind)
       - [Array.flat](#arrayflat)
       - [Array.flatMap](#arrayflatmap)
+      - [Array.map](#arraymap)
+      - [Array.filter](#arrayfilter)
+      - [Array.reduce](#arrayreduce)
+      - [Array.sort](#arraysort)
       - [Spread Array](#spread-array)
     - [New Object API](#new-object-api)
     - [Arrow Function](#arrow-function)
@@ -71,11 +75,6 @@
       - [闭包函数的结构](#闭包函数的结构)
     - [Partial Application](#partial-application)
     - [Currying](#currying)
-    - [API](#api)
-      - [`[]`.map](#map-1)
-      - [`[]`.filter](#filter)
-      - [`[]`.reduce](#reduce)
-      - [`[]`.sort](#sort)
   - [Internal JavaScript](#internal-javascript)
     - [Variables Lifecycle](#variables-lifecycle)
     - [Exection Context](#exection-context)
@@ -1011,6 +1010,20 @@ arr.findIndex(fn);
 
 map + flat
 
+#### Array.map
+
+相当于 Haskell 中的 List Map
+
+#### Array.filter
+
+相当于 Haskell 中的 List Filter
+
+#### Array.reduce
+
+相当于 Haskell 中的 fold
+
+#### Array.sort
+
 #### Spread Array
 
 ```js
@@ -1890,8 +1903,9 @@ const map2 = map1.set{ 'b': 2 };
 - 函数外部不可对函数内部进行赋值或引用
 - 函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部, 即内部引用外部)
 - 特权性质: 从外部通过闭包方法访问内部(函数作用域)局部变量 (private getter)
-- local scope -> outer functions scope -> global scope
-- Closure Performance: avoid unnecessary closure creation
+- Local Scope -> Outer Functions Scope -> Global Scope.
+- Closure Performance: avoid unnecessary closure creation.
+- The stale closure captures variables that have outdated values.
 
 ```js
 // global scope
@@ -1981,22 +1995,6 @@ const addOne = schonfinkelize(add, 1);
 const addFive = schonfinkelize(addOne, 1, 3);
 // addFive(4) === 9;
 ```
-
-### API
-
-#### `[]`.map
-
-相当于 Haskell 中的 List Map
-
-#### `[]`.filter
-
-相当于 Haskell 中的 List Filter
-
-#### `[]`.reduce
-
-相当于 Haskell 中的 fold
-
-#### `[]`.sort
 
 ## Internal JavaScript
 
