@@ -41,6 +41,9 @@
     - [useState](#usestate)
     - [useReducer](#usereducer)
     - [useRef](#useref)
+      - [Refs Basis](#refs-basis)
+      - [Ref Values](#ref-values)
+      - [Refs Update Mechanism](#refs-update-mechanism)
     - [useEffect](#useeffect)
       - [useEffect Lifecycle](#useeffect-lifecycle)
       - [useEffect Nasty Loop](#useeffect-nasty-loop)
@@ -948,11 +951,25 @@ const [state, dispatch] = useReducer(reducer, initialState);
 
 ### useRef
 
-- `useRef` read rendered props/state from **the future**.
-  Generally, you should avoid reading or setting refs
-  during rendering because they’re mutable.
-  We want to keep the rendering predictable.
-- However, if we want to get the **latest** value of a particular prop or state,
+#### Refs Basis
+
+- `ref` can bind to HTMLElement.
+- `ref` can either be a state that does not need to change too often.
+- `ref` can either be a state that should change as frequently as possible
+  but should not trigger full re-rendering of the component.
+
+#### Ref Values
+
+- Mutable Value:
+  useRef() is useful for for keeping any mutable value around.
+- Lifecycle Value:
+  `useRef()` creates a plain JavaScript object,
+  will give you the **same ref object** on every render.
+- Latest Value:
+  `useRef` read rendered props/state from **the future**.
+  Generally should avoid reading or setting refs
+  during rendering because they’re **mutable**.
+  However, if want to get the **latest** value of a particular prop or state,
   it's good to read/set `ref.current`.
 
 ```js
@@ -971,10 +988,49 @@ function Example() {
 }
 ```
 
-- useRef() is useful for for keeping any mutable value around.
-- This works because useRef() creates a plain JavaScript object.
-  The only difference between useRef() and creating a {current: ...} object yourself
-  is that useRef will give you **the same ref object on every render**.
+#### Refs Update Mechanism
+
+- Shallow rendering affects just the component and not the children.
+- Deep rendering affects the component itself and all of its children.
+- Update a `ref`, the shallow rendering mechanism works to re-render component.
+- Update a `state`, the deep rendering mechanism works to re-render components.
+- Store values in refs and have them updated,
+  which is more **efficient** than `useState` (which can be expensive)
+  when the values are to be updated multiple times within a second.
+
+```jsx
+function UserAvatar(props) {
+  return <img src={props.src} />;
+}
+
+function Username(props) {
+  return <span>{props.name}</span>;
+}
+
+function User() {
+  const user = useRef({
+    name: 'UserName',
+    avatarURL: 'https://avatar.com/avatar',
+  });
+  useEffect(() => {
+    setTimeout(() => {
+      user.current = {
+        name: 'NewUserName',
+        avatarURL: 'https://avatar.com/newavatar',
+      };
+    }, 5000);
+  });
+
+  // Both children won't be re-rendered
+  // due to shallow rendering mechanism
+  return (
+    <div>
+      <Username name={user.name} />
+      <UserAvatar src={user.avatarURL} />
+    </div>
+  );
+}
+```
 
 ### useEffect
 
