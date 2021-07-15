@@ -185,7 +185,7 @@
 ### Backend Solution
 
 - [Egg.js](https://github.com/eggjs/egg)
-- [Feathers.js - RESTful API](https://github.com/feathersjs/feathers)
+- [Feathers.js: RESTful API](https://github.com/feathersjs/feathers)
 
 ### Full Stack Solution
 
@@ -221,7 +221,7 @@
 
 ## JS Utils
 
-- [Cash - jQuery Lite](https://github.com/kenwheeler/cash)
+- [Cash: jQuery Lite](https://github.com/kenwheeler/cash)
 
 ### String Utils
 
@@ -234,7 +234,7 @@
 
 ### TypeScript Utils
 
-- [TypeBox - JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
+- [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
 
 ## CSS Utils
 
@@ -259,7 +259,7 @@
 
 ### Background Utils
 
-- [Clippy - Clip-Path Maker](https://github.com/bennettfeely/Clippy)
+- [Clippy: Clip-Path Maker](https://github.com/bennettfeely/Clippy)
 
 ## Components
 
@@ -270,7 +270,7 @@
 - [React Panel Group](https://github.com/DanFessler/react-panelgroup)
 - [Bricks Layout](https://github.com/callmecavs/bricks.js)
 - [Brick Layer](https://github.com/ademilter/bricklayer)
-- [Tether - Element Location](https://github.com/HubSpot/tether)
+- [Tether: Element Location](https://github.com/HubSpot/tether)
 - [SplitJS](https://github.com/nathancahill/Split.js)
 
 ### Navigation
@@ -298,12 +298,12 @@
 
 - [React Chat Widget](https://github.com/Wolox/react-chat-widget)
 - [Matrix](https://github.com/matrix-org/matrix-react-sdk)
-- [JsSIP - Chat Library](https://github.com/versatica/JsSIP)
+- [JsSIP: Chat Library](https://github.com/versatica/JsSIP)
 
 ### Message
 
 - [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
-- [TheaterJS - Typing Effect](https://github.com/Zhouzi/TheaterJS)
+- [TheaterJS: Typing Effect](https://github.com/Zhouzi/TheaterJS)
 - [Guide Tour](https://github.com/shipshapecode/shepherd)
 - [Intro.js](https://github.com/usablica/intro.js)
 
@@ -332,7 +332,7 @@
 
 - [tippy.js](https://github.com/atomiks/tippyjs)
 - [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
-- [Hint.css - Tooltips](https://github.com/chinchang/hint.css)
+- [Hint.css Tooltips](https://github.com/chinchang/hint.css)
 - [React Tooltip](https://github.com/tvkhoa/react-tippy)
 
 ### Form
@@ -342,7 +342,7 @@
 
 #### Input
 
-- [IMask.js - Input Mask](https://github.com/uNmAnNeR/imaskjs)
+- [IMask.js: Input Mask](https://github.com/uNmAnNeR/imaskjs)
 - [Super Placeholder](https://github.com/chinchang/superplaceholder.js)
 - [AutoComplete.js](https://github.com/TarekRaafat/autoComplete.js)
 
@@ -369,7 +369,7 @@
 
 - [React Virtualized- Original Component](https://github.com/bvaughn/react-virtualized)
 - [React Virtualized Auto Sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)
-- [React Window - Brand New React Virtualized](https://github.com/bvaughn/react-window)
+- [React Window: Brand New React Virtualized](https://github.com/bvaughn/react-window)
 - [React Virtuoso](https://github.com/petyosi/react-virtuoso)
 - [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
 
@@ -382,7 +382,7 @@
 ### Charts
 
 - [React Chartjs](https://github.com/jhudson8/react-chartjs)
-- [Sigma.js - Graph Drawing](https://github.com/jacomyal/sigma.js)
+- [Sigma.js: Graph Drawing](https://github.com/jacomyal/sigma.js)
 - [HTML5 Chart](https://github.com/chartjs/Chart.js)
 - [Plotly.js](https://github.com/plotly/plotly.js)
 
@@ -404,7 +404,7 @@
 ## Viewport Utils
 
 - [Viewport Events](https://github.com/robb0wen/tornis)
-- [Robot.js - Node.js Desktop Automation](https://github.com/octalmage/robotjs)
+- [Robot.js: Node.js Desktop Automation](https://github.com/octalmage/robotjs)
 
 ### Scroll Utils
 
@@ -417,11 +417,11 @@
 
 - [React Draft.js](https://github.com/draft-js-plugins/draft-js-plugins)
 - [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd)
-- [React DnD - Drag and Drop](https://github.com/react-dnd/react-dnd)
+- [React DnD: Drag and Drop](https://github.com/react-dnd/react-dnd)
 - [Moveable](https://github.com/daybrush/moveable)
 - [P5.js](https://github.com/processing/p5.js)
 - [Nipple.js](https://github.com/yoannmoinet/nipplejs)
-- [Interact.js - drag/drop/resizing/multi-touch](https://github.com/taye/interact.js)
+- [Interact.js: Drag, Drop and Resizing Multi Touch](https://github.com/taye/interact.js)
 - [Drag and Drop Grid Layout](https://github.com/jbaysolutions/vue-grid-layout)
 - [Moveable](https://github.com/daybrush/moveable)
 
@@ -611,7 +611,7 @@
 - [React Markdown](https://github.com/rexxars/react-markdown)
 - [Block Editor](https://github.com/codex-team/editor.js)
 - [CKEditor](https://github.com/ckeditor/ckeditor5)
-- [Wang Editor - Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
+- [Wang Editor](https://github.com/wangfupeng1988/wangEditor)
 - [Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
 
 ### Code Editor
@@ -688,22 +688,22 @@
 
 ### CLI Library
 
-- [Oclif - Open CLI Framework](https://github.com/oclif/oclif)
-- [INK - React CLI App](https://github.com/vadimdemedes/ink)
-- [Nexe - Node EXE Wrapper](https://github.com/nexe/nexe)
-- [ZX - Ndoe Bash Wrapper](https://github.com/google/zx)
+- [Oclif: Open CLI Framework](https://github.com/oclif/oclif)
+- [INK: React CLI App](https://github.com/vadimdemedes/ink)
+- [Nexe: Node EXE Wrapper](https://github.com/nexe/nexe)
+- [ZX: Ndoe Bash Wrapper](https://github.com/google/zx)
 - [Commander](https://github.com/tj/commander.js)
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js)
 - [Chalk](https://github.com/chalk/chalk)
 - [ORA Spinner](https://github.com/sindresorhus/ora)
 - [Progress](https://github.com/bvaughn/progress-estimator)
-- [Babun - Windows Zsh](https://github.com/babun/babun)
+- [Babun: Windows Zsh](https://github.com/babun/babun)
 
 ### Terminal
 
 - [React Terminal](https://github.com/rohanchandra/react-terminal-component)
 - [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
-- [Jay - Supercharged JavaScript REPL](https://github.com/nikersify/jay)
+- [Jay: Supercharged JavaScript REPL](https://github.com/nikersify/jay)
 
 ## Daemon
 
@@ -733,7 +733,7 @@
 
 - [System.js](https://github.com/systemjs/systemjs)
 - [Lazyload.js](https://github.com/rgrove/lazyload)
-- [Await/Async Lazy Loading - Lab.js](https://github.com/getify/LABjs)
+- [LAB.js: Await/Async Lazy Loading](https://github.com/getify/LABjs)
 
 ### Network Benchmark
 
@@ -759,18 +759,17 @@
 
 ## Debug Testing
 
-- [Ndb](https://github.com/GoogleChromeLabs/ndb)
+- [NDB](https://github.com/GoogleChromeLabs/ndb)
 - [React Testing Utilities](https://github.com/airbnb/enzyme)
 - [React Component Hierarchy](https://github.com/team-gryff/react-monocle)
 - [React a11y](https://github.com/reactjs/react-a11y)
-- Chrome Extensions - React Dev Tools/Redux Dev Tools
-- [Retoggle - Component Inspector](https://github.com/Raathigesh/retoggle)
+- [Retoggle: Component Inspector](https://github.com/Raathigesh/retoggle)
 
 ### Unit Testing
 
 - [Jest](https://github.com/facebook/jest)
 - [Jest UI](https://github.com/Raathigesh/majestic)
-- [Enzyme - React Testing](https://github.com/enzymejs/enzyme)
+- [Enzyme](https://github.com/enzymejs/enzyme)
 - [React Testing Library](https://github.com/testing-library/react-testing-library)
 - [Jasmine](https://github.com/jasmine/jasmine)
 - [Mocha](https://github.com/mochajs/mocha)
@@ -880,7 +879,7 @@
 
 - [Docusaurus](https://github.com/facebook/docusaurus)
 - [Vuepress](https://github.com/vuejs/vuepress)
-- [TypeDoc - TypeScript](https://github.com/TypeStrong/typedoc)
+- [TypeDoc](https://github.com/TypeStrong/typedoc)
 - [Docz](https://github.com/pedronauck/docz)
 - [DUmi](https://github.com/umijs/dumi)
 - [Documentation.js](https://github.com/documentationjs/documentation)
