@@ -61,6 +61,7 @@
       - [Router Hook](#router-hook)
       - [Script Loading Hook](#script-loading-hook)
       - [Form Hook](#form-hook)
+    - [Hooks Best Practice](#hooks-best-practice)
   - [ES6 Syntax](#es6-syntax)
     - [Comments](#comments)
     - [binding for this](#binding-for-this)
@@ -2062,6 +2063,42 @@ const App = (props) => {
     </div>
   );
 };
+```
+
+### Hooks Best Practice
+
+如果将一个函数任意地将其放在 useEffect Deps List 中
+可能会导致重复无意义的 useEffect 执行
+(因为每次 render 期间的此函数都会重新定义).
+有两个解决办法:
+
+- 对于被多次复用 Utils 函数 (且不依赖组件的任何值),
+  应该提到组件外面的公共区域去定义.
+- 对于只被特定 Effect Hook 调用的 Utils 函数,
+  可以放到 useEffect 内部定义.
+- 对于其他需要在组件内(或自定义 Hooks 内)定义的函数,
+  可使用 useCallback 包裹函数, 并设置正确的 Deps List,
+  尽可能地减少 render 时重新定义此函数.
+
+```js
+// ✅ Not affected by the data flow
+function getFetchUrl(query) {
+  return 'https://hn.algolia.com/api/v1/search?query=' + query;
+}
+
+function SearchResults() {
+  useEffect(() => {
+    const url = getFetchUrl('react');
+    // ... Fetch data and do something ...
+  }, []); // ✅ Deps are OK
+
+  useEffect(() => {
+    const url = getFetchUrl('redux');
+    // ... Fetch data and do something ...
+  }, []); // ✅ Deps are OK
+
+  // ...
+}
 ```
 
 ## ES6 Syntax
