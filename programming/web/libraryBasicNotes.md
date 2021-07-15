@@ -116,7 +116,7 @@
     - [Unit Testing](#unit-testing)
     - [Feature Testing](#feature-testing)
     - [End to End Testing](#end-to-end-testing)
-    - [Higher Level Tools](#higher-level-tools)
+    - [Headless Web Tools](#headless-web-tools)
     - [Code Analysis Tools](#code-analysis-tools)
     - [Code Coverage Tools](#code-coverage-tools)
     - [Code Quality Tools](#code-quality-tools)
@@ -788,14 +788,15 @@
 ### End to End Testing
 
 - [Cypress](https://github.com/cypress-io/cypress)
-- [Web Hint](https://github.com/webhintio/hint)
+- [NightWatch: End to End Testing Framework](https://github.com/nightwatchjs/nightwatch)
+- [LightHouse](https://github.com/GoogleChrome/lighthouse)
+- [WebPageTest](https://github.com/WPO-Foundation/webpagetest-github-action)
+- [WebHint](https://github.com/webhintio/hint)
 
-### Higher Level Tools
+### Headless Web Tools
 
-- [Puppeteer- Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
-- [Cheerio - jQuery Server Tools](https://github.com/cheeriojs/cheerio)
-- [Nightmare - Phantomjs Like Browser Automation Testing](https://github.com/segmentio/nightmare)
-- [NightWatch - Selenium/Node Testing Framework](https://github.com/nightwatchjs/nightwatch)
+- [Cheerio: jQuery Server Tools](https://github.com/cheeriojs/cheerio)
+- [Puppeteer: Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
 
 ### Code Analysis Tools
 
