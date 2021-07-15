@@ -159,7 +159,9 @@ React Fiber 的目标是提高其在动画、布局和手势等领域的适用�
 - `useEffect` callback: `got Passive` tag.
   - `useEffect(fn)`: `Mount` and `Update` lifecycle.
   - `useEffect(fn, [])`: `Mount` lifecycle.
-  - `useEffect(fn, [deps])`: `Mount` lifecycle and `deps` changed.
+  - `useEffect(fn, [deps])`:
+    `Mount` lifecycle and
+    `Update` lifecycle with `deps` changed.
 
 React create effects when `Render` stage,
 then update effects to real DOM when `Commit` stage.
