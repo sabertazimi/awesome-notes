@@ -42,7 +42,7 @@
     - [useReducer](#usereducer)
     - [useRef](#useref)
       - [Refs Basis](#refs-basis)
-      - [Ref Values](#ref-values)
+      - [Refs Values](#refs-values)
       - [Refs Update Mechanism](#refs-update-mechanism)
     - [useEffect](#useeffect)
       - [useEffect Lifecycle](#useeffect-lifecycle)
@@ -958,21 +958,21 @@ const [state, dispatch] = useReducer(reducer, initialState);
 - `ref` can either be a state that should change as frequently as possible
   but should not trigger full re-rendering of the component.
 
-#### Ref Values
+#### Refs Values
 
 - Mutable Value:
   `useRef()` is useful for for keeping any mutable value around.
+  Updating reference values inside handlers/useEffect callbacks is good,
+  updating reference values during rendering (outside callbacks) is bad.
 - Lifecycle Persisted Value:
   `useRef()` creates a plain JavaScript object,
   is persisted (stays the same) between component re-renderings.
 - Silent Value:
-  update a ref only trigger shallow re-rendering.
+  update reference values don't trigger re-renderings.
 - Latest Value:
   `useRef()` read rendered props/state from **the future**.
-  Generally should avoid reading or setting refs during rendering
-  because they’re **mutable**.
-  However, if want to get the **latest** value of a particular prop or state,
-  it's good to read/set `ref.current`.
+  It's good to get **latest** value of a particular prop or state
+  (the updated reference value is available right away).
 
 ```js
 function Example() {
