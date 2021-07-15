@@ -948,12 +948,12 @@ const [state, dispatch] = useReducer(reducer, initialState);
 
 ### useRef
 
-`useRef` read rendered props/state from **the future**.
-Generally, you should avoid reading or setting refs
-during rendering because they’re mutable.
-We want to keep the rendering predictable.
-However, if we want to get the latest value of a particular prop or state,
-it's good to read/set `ref.current`.
+- `useRef` read rendered props/state from **the future**.
+  Generally, you should avoid reading or setting refs
+  during rendering because they’re mutable.
+  We want to keep the rendering predictable.
+- However, if we want to get the **latest** value of a particular prop or state,
+  it's good to read/set `ref.current`.
 
 ```js
 function Example() {
@@ -970,6 +970,11 @@ function Example() {
   });
 }
 ```
+
+- useRef() is useful for for keeping any mutable value around.
+- This works because useRef() creates a plain JavaScript object.
+  The only difference between useRef() and creating a {current: ...} object yourself
+  is that useRef will give you **the same ref object on every render**.
 
 ### useEffect
 
