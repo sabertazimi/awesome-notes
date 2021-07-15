@@ -2168,6 +2168,12 @@ function SearchResults() {
 }
 ```
 
+- Don't forget to cleanup side effects (return function in useEffect)
+- Don't forget deps list for useEffect (avoid stale closure).
+- setState(state => state + 1) is better (avoid outdated state).
+- Change `useState` to `useRef` when values not for rendering.
+- Don't put any `if` statement before hooks function.
+
 ## ES6 Syntax
 
 ### Comments
