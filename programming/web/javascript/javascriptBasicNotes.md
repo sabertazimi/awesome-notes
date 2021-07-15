@@ -1641,7 +1641,13 @@ Function.__proto__.__proto__ === Object.prototype; // true
 
 #### Implicit Binding
 
-- Function Invocation 普通调用模式: this 绑定至全局对象/`undefined` (`strict mode`)
+- Function Invocation 普通调用模式: `this` 绑定至全局对象/`undefined` (`strict mode`)
+  - setTimeout 和 setInterval 中传入的 Callbacks
+    会自动转变为 Function Invocation,
+    `this` bind to global/undefined object.
+  - 同理, React Class Component 中传入的 Event Handlers
+    会自动转变为 Function Invocation,
+    需要显式地 `this.handleClick = this.handleClick.bind(this);`
 - Method Invocation 方法调用模式: this 绑定至此方法所属的对象
 
 ```js
@@ -1661,6 +1667,22 @@ const obj = {
 };
 
 obj.foo(); // 1
+```
+
+```js
+class Hero {
+  constructor(heroName) {
+    this.heroName = heroName;
+  }
+
+  logName() {
+    console.log(this.heroName);
+  }
+}
+
+const batman = new Hero('Batman');
+setTimeout(batman.logName, 1000);
+// after 1 second logs "undefined"
 ```
 
 #### Explicit Binding

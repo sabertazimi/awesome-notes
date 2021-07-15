@@ -67,7 +67,7 @@
     - [Hooks Best Practice](#hooks-best-practice)
   - [ES6 Syntax](#es6-syntax)
     - [Comments](#comments)
-    - [binding for this](#binding-for-this)
+    - [Binding for This](#binding-for-this)
   - [React Style Guide](#react-style-guide)
     - [Naming Style](#naming-style)
     - [Props Style](#props-style)
@@ -2190,7 +2190,7 @@ render() {
 }
 ```
 
-### binding for this
+### Binding for This
 
 ```js
 constructor() {
