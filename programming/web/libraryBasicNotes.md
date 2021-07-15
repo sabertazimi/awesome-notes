@@ -17,7 +17,7 @@
     - [Hooks](#hooks)
     - [Other](#other)
   - [Browser Utils](#browser-utils)
-  - [JS Utils](#js-utils)
+  - [JavaScript Utils](#javascript-utils)
     - [String Utils](#string-utils)
     - [Functional Programming Utils](#functional-programming-utils)
     - [TypeScript Utils](#typescript-utils)
@@ -33,6 +33,7 @@
     - [Button](#button)
     - [Card](#card)
     - [Chat Widgets](#chat-widgets)
+    - [Comments System](#comments-system)
     - [Message](#message)
       - [Page Indicator](#page-indicator)
       - [Prompt](#prompt)
@@ -219,7 +220,7 @@
 - [Browser Platform Detection](https://github.com/lancedikson/bowser)
 - [Browser Feature Detection](https://github.com/Modernizr/Modernizr)
 
-## JS Utils
+## JavaScript Utils
 
 - [Cash: jQuery Lite](https://github.com/kenwheeler/cash)
 
@@ -299,6 +300,11 @@
 - [React Chat Widget](https://github.com/Wolox/react-chat-widget)
 - [Matrix](https://github.com/matrix-org/matrix-react-sdk)
 - [JsSIP: Chat Library](https://github.com/versatica/JsSIP)
+
+### Comments System
+
+- [Utterances: GitHub Issue Based Comments Widget](https://github.com/utterance/utterances)
+- [Disqus](https://github.com/disqus/disqus-react)
 
 ### Message
 
