@@ -84,11 +84,11 @@
     - [包装类对象](#包装类对象)
     - [错误对象](#错误对象)
   - [函数](#函数)
-    - [函数调用模式 (innovation pattern) (`this` binding types)](#函数调用模式-innovation-pattern-this-binding-types)
-      - [Default/Implicit Binding](#defaultimplicit-binding)
+    - [Invocation Patterns and This Bindings](#invocation-patterns-and-this-bindings)
+      - [Implicit Binding](#implicit-binding)
       - [Explicit Binding](#explicit-binding)
-      - [New Binding](#new-binding)
-      - [`this` in arrow function](#this-in-arrow-function)
+      - [Constructor Binding](#constructor-binding)
+      - [Arrow Function Binding](#arrow-function-binding)
     - [prototype](#prototype)
     - [arguments](#arguments)
       - [arguments.callee](#argumentscallee)
@@ -1637,12 +1637,12 @@ Function.__proto__ === Function.prototype; // true
 Function.__proto__.__proto__ === Object.prototype; // true
 ```
 
-### 函数调用模式 (innovation pattern) (`this` binding types)
+### Invocation Patterns and This Bindings
 
-#### Default/Implicit Binding
+#### Implicit Binding
 
-- 普通调用模式: this 绑定至全局对象/`undefined` (`strict mode`)
-- 方法调用模式(`.`/`[]`): this 绑定至此方法所属的对象
+- Function Invocation 普通调用模式: this 绑定至全局对象/`undefined` (`strict mode`)
+- Method Invocation 方法调用模式: this 绑定至此方法所属的对象
 
 ```js
 add(1, 2); // this -> global
@@ -1665,24 +1665,23 @@ obj.foo(); // 1
 
 #### Explicit Binding
 
-apply/bind/call 调用模式
-
+Apply/Bind/Call Invocation:
 函数引用不可以改变函数定义作用域 (scope)，但可以改变函数执行作用域 (context)
 
 ```js
 this.construct = Foo;
 this.construct(options);
     =>
-Foo.call(this, optiions);
+Foo.call(this, options);
 ```
 
-#### New Binding
+#### Constructor Binding
 
-构造器调用模式(new): this 绑定至传入的空对象
+Constructor Invocation: this 绑定至传入的空对象
 
-#### `this` in arrow function
+#### Arrow Function Binding
 
-- `this` defined where arrow function defined (not called) **lexically**
+- `this` defined where arrow function defined (not called) (**lexical scope**)
 - `apply`/`call`/`bind` can't change `this` in arrow function
 
 ```js
