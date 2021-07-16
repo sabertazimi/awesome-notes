@@ -246,6 +246,21 @@
     - [PWA Tutorials](#pwa-tutorials)
   - [HTTP/2](#http2)
   - [Security](#security)
+    - [Web Authentication](#web-authentication)
+      - [HTTP Basic Authentication](#http-basic-authentication)
+      - [Session Cookie](#session-cookie)
+        - [Session Cookie Basis](#session-cookie-basis)
+        - [Session Cookie Cons](#session-cookie-cons)
+      - [Token Authentication](#token-authentication)
+        - [Token Authentication Basis](#token-authentication-basis)
+        - [Token Authentication Pros](#token-authentication-pros)
+        - [Token Authentication Cons](#token-authentication-cons)
+      - [JSON Web Token](#json-web-token)
+        - [JSON Web Token Basis](#json-web-token-basis)
+        - [JSON Web TOken Pros](#json-web-token-pros)
+        - [JSON Web Token Cons](#json-web-token-cons)
+      - [OAuth Authentication](#oauth-authentication)
+        - [OAuth Authentication Basis](#oauth-authentication-basis)
     - [Content Security Policy Level 3](#content-security-policy-level-3)
     - [Trusted Types](#trusted-types)
     - [CSRF](#csrf)
@@ -5057,6 +5072,150 @@ HTTP/2 的多路复用就是为了解决上述的两个性能问题.
 多路复用, 就是在一个 TCP 连接中可以存在多条流, 避免队头阻塞问题和连接数过多问题.
 
 ## Security
+
+### Web Authentication
+
+#### HTTP Basic Authentication
+
+HTTP basic authentication is 401 authentication:
+
+- 客户端向服务器请求数据:
+
+```js
+Get /index.html HTTP/1.0
+Host:www.google.com
+```
+
+- 服务器向客户端发送验证请求代码 `401` `WWW-Authenticate: Basic realm=”google.com”`
+
+```js
+HTTP/1.0 401 Unauthorised
+Server: SokEvo/1.0
+WWW-Authenticate: Basic realm=”google.com”
+Content-Type: text/html
+Content-Length: xxx
+```
+
+- 当符合 HTTP/1.0 或 HTTP/1.1 的客户端收到 401 返回值时,
+  将自动弹出一个登录窗口, 要求用户输入用户名和密码.
+- 用户输入用户名和密码后, 将用户名及密码以BASE64加密方式加密, 并将密文放入前一条请求信息中
+- 服务器收到上述请求信息后, 将 Authorization 字段后的用户信息取出、解密,
+  将解密后的用户名及密码与用户数据库进行比较验证
+
+```js
+Get /index.html HTTP/1.0
+Host:www.google.com
+Authorization: Basic d2FuZzp3YW5n
+```
+
+#### Session Cookie
+
+##### Session Cookie Basis
+
+HTTP 协议是一个无状态的协议,
+服务器不会知道到底是哪一台浏览器访问了它,
+因此需要一个标识用来让服务器区分不同的浏览器.
+Cookie 就是这个管理服务器与客户端之间状态的标识.
+Response header with `Set-Cookie`, Request header with `Cookie`.
+
+浏览器第一次访问服务端, 服务端就会创建一次 Session, 在会话中保存标识该浏览器的信息.
+Session 缓存在服务端, Cookie 缓存在客户端,
+他们都由服务端生成, 实现 HTTP 协议的状态.
+
+- 客户端发送登录信息 (ID, Password).
+- 服务器收到客户端首次请求并验证成功后,
+  会在服务器端创建 Seesion 并保存唯一的标识字符串 Session ID (Key-Value Store)，
+  在 Response Header 中设置 `Set-Cookie: <Session ID>`.
+- 客户端后续发送请求都需在 Requeset Header 中设置: `Cookie: <Session ID>`.
+- 服务器根据 `<Session ID>` 进行用户验证,
+  利用 Session Cookie 机制可以简单地实现**用户登录状态验证**,
+  保护需要登录权限才能访问的路由服务.
+
+##### Session Cookie Cons
+
+- 认证方式局限于在浏览器 (Cookie).
+- 非 HTTPS 协议下使用 Cookie, 容易受到 CSRF 跨站点请求伪造攻击.
+- Session ID 不包含具体用户信息, 需要 Key-Value Store (eg Redis) 持久化,
+  在分布式环境下需要在每个服务器上都备份, 占用了大量的存储空间.
+
+#### Token Authentication
+
+##### Token Authentication Basis
+
+- 客户端发送登录信息 (ID, Password).
+- 服务端收到请求验证成功后, 服务端会签发一个 Token (包含用户信息) 并发送给客户端.
+- 客户端收到 Token 后存储到 Cookie 或 Local Storge,
+  客户端每次向服务端请求都需在 Request Header 中设置: `Authorization: <Token>`.
+- 服务端收到请求并验证 Token, 成功发送资源 (鉴权成功), 不成功发送 401 错误代码 (鉴权失败).
+
+##### Token Authentication Pros
+
+- Token 认证不局限于浏览器 (Cookie).
+- 不使用 Cookie 可以规避 CSRF 攻击.
+- Token 中包含了用户信息, 不需要 Key-Value Store 持久化, 分布式友好.
+  服务器端变成无状态, 服务器端只需要根据定义的规则校验 Token 合法性.
+  上述两点使得 Token Authentication 具有更好的扩展性.
+
+##### Token Authentication Cons
+
+- Token 认证 (加密解密过程) 比 Session Cookie 更消耗性能.
+- Token (包含用户信息) 比 Session ID 大, 更占带宽.
+- 不保存 Session 状态, 无法中止或更改 Token 权限, Token 到期前会始终有效, 存在盗用风险:
+  - JWT 有效期应短.
+  - JWT 应使用 HTTPS 协议.
+  - 对于重要权限， 需使用二次验证 (Two Factor Authentication).
+
+#### JSON Web Token
+
+##### JSON Web Token Basis
+
+- 基于 Token 的解决方案中最常用的是 JWT.
+- 服务器认证用户密码以后, 生成一个 JSON 对象并签名加密后作为 Token 返回给用户.
+- JSON 对象包含用户信息, 用户身份, 令牌过期时间等:
+  - Header: 明文 Base64 编码 JSON 对象, 描述 JWT 的元数据.
+    一般为 Token 的加密算法和 Token 的类型, 如 `{"alg": "HS256","typ": "JWT"}`.
+  - Payload: 明文 Base64 编码 JSOn 对象，存放实际数据.
+    有 7 个官方字段和部分定义私有字段, 一般存放用户名, 用户身份, JWT 描述字段.
+  - Signature: 对 Header 和 Payload 的签名, 利用签名验证信息的正确性, 防止数据篡改. 签名需要服务端保存的密钥.
+- 把三个部分拼成一个字符串, 每个部分之间用 `.` 分隔: `HeaderBase64.PayloadBase64.Signature`.
+
+##### JSON Web TOken Pros
+
+- JWT 默认是不加密.
+- JWT 不加密的情况下, 不能将秘密数据写入 JWT.
+- JWT 可以加密, 生成原始 Token 以后, 可以用密钥再加密一次.
+- JWT 不仅可用于认证, 也可用于交换信息.
+  有效使用 JWT, 可以降低服务器查询数据库的次数.
+
+##### JSON Web Token Cons
+
+- 不保存 Session 状态, 无法中止或更改 Token 权限, Token 到期前会始终有效, 存在盗用风险:
+  - JWT 有效期应短.
+  - JWT 应使用 HTTPS 协议.
+  - 对于重要权限， 需使用二次验证 (Two Factor Authentication).
+
+#### OAuth Authentication
+
+OAuth (Open Authorization) 是一个开放标准, 作用于第三方授权和第三方访问.
+用户数据的所有者告诉系统, 同意授权第三方应用进入系统, 获取这些数据.
+系统从而产生一个短期进入令牌 (Token), 用来代替密码供第三方应用使用.
+
+第三方应用申请令牌之前, 都必须先到系统备案, 说明自己的身份, 然后会拿到两个身份识别码:
+Client ID 和 Client Secret. 这是为了防止令牌被滥用, 没有备案过的第三方应用拿不到令牌 (Token).
+
+##### OAuth Authentication Basis
+
+- 在 GitHub Developer Settings 中备案第三方应用, 拿到属于它的客户端ID和客户端密钥
+- 在自己的第三方网站提供一个 GitHub 登录链接,
+  用户点击该链接后会跳转到 GitHub OAuth API
+  `https://github.com/login/oauth/authorize/?client_id=${clientID}`.
+- 用户跳转到 GitHub, 通过验证并同意使用 GitHub 身份登录第三方网站,
+  此时就会带着授权码 Code 跳回第三方网站.
+- 第三方网站收到授权码, 利用授权码, 客户端ID, 客户端密钥向 GitHub 请求 `access_token`令牌
+  `https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${code}`
+- 第三方网站收到令牌, 可以暂时拥有 GitHub 一些请求的权限比如用户信息,
+  `https://api.github.com/user?access_token=${accessToken}`
+  可以构建第三方网站自己的 Token, 做进一步相关鉴权操作 (如 Session Cookie).
 
 ### Content Security Policy Level 3
 
