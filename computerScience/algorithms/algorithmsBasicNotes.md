@@ -13,7 +13,7 @@
     - [Radix-Sorts 基数排序(可用于混乱 shuffle 数组)](#radix-sorts-基数排序可用于混乱-shuffle-数组)
   - [Tree Algorithm](#tree-algorithm)
     - [Binary Search Tree](#binary-search-tree)
-    - [2-3Tree Banlance Tree](#2-3tree-banlance-tree)
+    - [2-3 Tree](#2-3-tree)
     - [Red-Black BST](#red-black-bst)
       - [基本性质](#基本性质)
       - [基本操作](#基本操作)
@@ -22,7 +22,7 @@
     - [Fibonacci Heap](#fibonacci-heap)
     - [K-Dimensional Tree](#k-dimensional-tree)
   - [Search Algorithm](#search-algorithm)
-    - [Fisrt Search](#fisrt-search)
+    - [First Search](#first-search)
     - [cycle detection](#cycle-detection)
   - [Dynamic Programming](#dynamic-programming)
     - [子问题](#子问题)
@@ -37,8 +37,8 @@
       - [v.d](#vd)
       - [利用队列实现广度优先遍历](#利用队列实现广度优先遍历)
     - [深度优先遍历](#深度优先遍历)
-      - [`v.color`](#vcolor)
-      - [`v.pi`](#vpi)
+      - [`v.color`](#vcolor-1)
+      - [`v.pi`](#vpi-1)
       - [v.d/v.f](#vdvf)
     - [拓扑排序](#拓扑排序)
       - [Kahn 算法](#kahn-算法)
@@ -219,7 +219,9 @@ void sink(int k) {
 
 Hibbard Deletion
 
-### 2-3Tree Banlance Tree
+### 2-3 Tree
+
+2-3 Tree is Balance Tree:
 
 插入:
 
@@ -515,7 +517,7 @@ e.g 左子树：左下方 右子树：右上方
 
 ## Search Algorithm
 
-### Fisrt Search
+### First Search
 
 - DFS(深度优先)：栈实现
 - BFS(广度优先)：队列实现

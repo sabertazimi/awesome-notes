@@ -43,20 +43,20 @@
   - [HTML Body Property](#html-body-property)
   - [Box Style](#box-style)
     - [width](#width)
-    - [z-index](#z-index)
-    - [overflow/overflow-x/overflow-y](#overflowoverflow-xoverflow-y)
-    - [text-overflow](#text-overflow)
+    - [Z Index](#z-index)
+    - [Overflow](#overflow)
+    - [Text Overflow](#text-overflow)
     - [resize](#resize)
     - [box-sizing](#box-sizing)
     - [height](#height)
     - [column](#column)
   - [Box Model](#box-model)
     - [Margin](#margin)
-    - [Percentage of Width/Top](#percentage-of-widthtop)
+    - [Percentage of Top](#percentage-of-top)
   - [Block Formatting Context](#block-formatting-context)
   - [Stack Context](#stack-context)
     - [Create BFC](#create-bfc)
-    - [Margin Collapsing/Merging](#margin-collapsingmerging)
+    - [Margin Collapsing](#margin-collapsing)
   - [Float Patterns](#float-patterns)
     - [fixed parent](#fixed-parent)
     - [清除浮动](#清除浮动)
@@ -119,13 +119,13 @@
     - [font-style](#font-style)
     - [font-variant](#font-variant)
     - [font-size-adjust](#font-size-adjust)
-    - [font-diplay](#font-diplay)
+    - [Font Display](#font-display)
     - [custom function - @font-face](#custom-function---font-face)
     - [Font Best Practice](#font-best-practice)
-  - [CSS Couter](#css-couter)
+  - [CSS Counter](#css-counter)
   - [CSS Filter](#css-filter)
     - [Backdrop Filter](#backdrop-filter)
-  - [Object Position/Fit](#object-positionfit)
+  - [Object Position and Fit](#object-position-and-fit)
   - [Animation](#animation)
     - [Animation Property](#animation-property)
       - [Transition and Transform](#transition-and-transform)
@@ -146,7 +146,7 @@
     - [GreenSock Library](#greensock-library)
       - [TweenMax](#tweenmax)
       - [TimelineMax](#timelinemax)
-  - [Responsive Desgin](#responsive-desgin)
+  - [Responsive Design](#responsive-design)
     - [Responsive Font](#responsive-font)
     - [Responsive Length](#responsive-length)
     - [Responsive Box](#responsive-box)
@@ -1038,15 +1038,15 @@ present for `fill-available/max-content/min-content/fit-content`
 with `height`/`width`/`min-width`/`max-width`/`min-height`/`max-height`/
 `grid-template-rows`/`grid-template-columns`/`flex-basis`.
 
-### z-index
+### Z Index
 
 数值越大，处于可视的优先级越大
 
-### overflow/overflow-x/overflow-y
+### Overflow
 
 visible,hidden,scroll,auto
 
-### text-overflow
+### Text Overflow
 
 - clip 切除溢出部分
 - ellipsis 省略号标志
@@ -1131,7 +1131,7 @@ cal(10em + 3px);
 - If margin-top, or margin-bottom are auto, their used value is 0.
   (CSS2 Visual formatting model details: 10.6.3)
 
-### Percentage of Width/Top
+### Percentage of Top
 
 positioned elements with `top: percentage`
 depend on `height` of parent,
@@ -1171,7 +1171,7 @@ can use the `z-index` property to adjust its stack level.
 - direct children of `display: flex/inline-flex`
 - direct children of `display: grid/inline-grid`
 
-### Margin Collapsing/Merging
+### Margin Collapsing
 
 - closet sibling: 1's margin-bottom with 2's margin-top
 - parent and it's first/last child: up with up (bottom with bottom)
@@ -2225,7 +2225,7 @@ normal,small-caps(小型大写字母)
 - 使字体保持大小，不随字体类型改变而改变
 - 不同字体有不同的值(x-height/字体尺寸)
 
-### font-diplay
+### Font Display
 
 The font display timeline:
 
@@ -2374,7 +2374,7 @@ font-weight: 400;
 华文新魏：STXinwei
 ```
 
-## CSS Couter
+## CSS Counter
 
 Adjust the appearance of content based on its location in a document.
 
@@ -2435,7 +2435,7 @@ body {
 }
 ```
 
-## Object Position/Fit
+## Object Position and Fit
 
 object-position/object-fit 只针对替换元素有作用:
 
@@ -2860,7 +2860,7 @@ tl.staggerFrom(
 );
 ```
 
-## Responsive Desgin
+## Responsive Design
 
 ### Responsive Font
 
