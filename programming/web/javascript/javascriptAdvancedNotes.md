@@ -5203,9 +5203,17 @@ OAuth (Open Authorization) 是一个开放标准, 作用于第三方授权和第
 第三方应用申请令牌之前, 都必须先到系统备案, 说明自己的身份, 然后会拿到两个身份识别码:
 Client ID 和 Client Secret. 这是为了防止令牌被滥用, 没有备案过的第三方应用拿不到令牌 (Token).
 
+OAuth Token 特征:
+
+1. 授权短 (Short Expire Time)
+2. 可撤销 (Revoke)
+3. 权限小 (Scope)
+
 ##### OAuth Authentication Basis
 
-- 在 GitHub Developer Settings 中备案第三方应用, 拿到属于它的客户端ID和客户端密钥
+- 在 GitHub Developer Settings 中备案第三方应用,
+  拿到属于它的客户端ID和客户端密钥
+  (3rd-Party Server vs Resource Owner)
 - 在自己的第三方网站提供一个 GitHub 登录链接,
   用户点击该链接后会跳转到 GitHub OAuth API
   `https://github.com/login/oauth/authorize/?client_id=${clientID}`.
@@ -5213,9 +5221,11 @@ Client ID 和 Client Secret. 这是为了防止令牌被滥用, 没有备案过�
   此时就会带着授权码 Code 跳回第三方网站.
 - 第三方网站收到授权码, 利用授权码, 客户端ID, 客户端密钥向 GitHub 请求 `access_token`令牌
   `https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${code}`
+  (3rd-Party Server vs Authorization Server)
 - 第三方网站收到令牌, 可以暂时拥有 GitHub 一些请求的权限比如用户信息,
   `https://api.github.com/user?access_token=${accessToken}`
   可以构建第三方网站自己的 Token, 做进一步相关鉴权操作 (如 Session Cookie).
+  (3rd-Party Server vs Resource Server)
 
 ### Content Security Policy Level 3
 
