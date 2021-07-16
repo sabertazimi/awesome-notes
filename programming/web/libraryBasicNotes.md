@@ -861,6 +861,7 @@
 
 ### Monitoring Tools
 
+- [Plausible Analytics](https://github.com/plausible/analytics)
 - [NetData](https://github.com/netdata/netdata)
 - [Source Buster](https://github.com/alexfedoseev/sourcebuster-js)
 - [Uptime Status](https://github.com/yb/uptime-status)
