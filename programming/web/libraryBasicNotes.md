@@ -206,8 +206,9 @@
 
 ### Hooks
 
-- [React Hooks Gallery](https://nikgraf.github.io/react-hooks)
+- [ReactUse Hooks](https://github.com/streamich/react-use)
 - [Ali Hooks](https://github.com/alibaba/hooks)
+- [React Hooks Gallery](https://nikgraf.github.io/react-hooks)
 
 ### Other
 
