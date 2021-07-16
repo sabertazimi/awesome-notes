@@ -2723,9 +2723,14 @@ Paint Order:
 ### Memory Leak
 
 - useless global vars (bind to window or document)
-- useless callback functions (e.g setInterval/setTimeout)
 - useless DOM reference
-- closure
+- incorrect closure
+  - useless callback functions
+  - forgotten timer from setTimeout/setInterval
+- forgotten event listener
+- forgotten subscriber
+- forgotten console log
+- forgotten Set/Map (while WeakSet/WeakMap don't bother GC)
 - circular reference
 
 ### 禁用特性
