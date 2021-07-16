@@ -102,11 +102,14 @@
     - [CLI Compiler](#cli-compiler)
     - [CLI Library](#cli-library)
     - [Terminal](#terminal)
+  - [Compiler](#compiler)
+    - [Parser](#parser)
   - [Daemon](#daemon)
   - [Network](#network)
     - [Network Protocols](#network-protocols)
     - [Web Socket](#web-socket)
-    - [P2P](#p2p)
+    - [Web RTC](#web-rtc)
+    - [Web P2P](#web-p2p)
     - [Pre-Fetch](#pre-fetch)
     - [Lazy Loading](#lazy-loading)
     - [Network Benchmark](#network-benchmark)
@@ -545,6 +548,7 @@
 - [SVG Logos](https://github.com/gilbarbara/logos)
 - [SVG Icons](https://iconsvg.xyz)
 - [DVI2SVG](https://github.com/mgieseki/dvisvgm)
+- [SVG Parser](https://github.com/sebmarkbage/art)
 
 ### Image Size
 
@@ -720,6 +724,15 @@
 - [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
 - [Jay: Supercharged JavaScript REPL](https://github.com/nikersify/jay)
 
+## Compiler
+
+### Parser
+
+- [HTML Parser](https://github.com/taoqf/node-html-parser)
+- [YAML Parser](https://github.com/jonschlinkert/gray-matter)
+- [XML Parser](https://github.com/TobiasNickel/tXml)
+- [SVG Parser](https://github.com/sebmarkbage/art)
+
 ## Daemon
 
 - [PM2](https://github.com/Unitech/pm2)
@@ -736,7 +749,11 @@
 
 - [Socket.IO](https://github.com/socketio/socket.io)
 
-### P2P
+### Web RTC
+
+- [LiveKit](https://github.com/livekit/livekit-react)
+
+### Web P2P
 
 - [FireFox Send](https://github.com/mozilla/send)
 
