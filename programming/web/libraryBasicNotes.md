@@ -7,9 +7,9 @@
   - [Boilerplate](#boilerplate)
   - [UI Framework](#ui-framework)
   - [Framework and Solution](#framework-and-solution)
-    - [Frontend Solution](#frontend-solution)
-    - [Micro Frontends Solution](#micro-frontends-solution)
-    - [Backend Solution](#backend-solution)
+    - [Front-end Solution](#front-end-solution)
+    - [Micro Front-ends Solution](#micro-front-ends-solution)
+    - [Back-end Solution](#back-end-solution)
     - [Full Stack Solution](#full-stack-solution)
     - [Desktop Solution](#desktop-solution)
   - [State Data Management](#state-data-management)
@@ -174,20 +174,21 @@
 
 ## Framework and Solution
 
-### Frontend Solution
+### Front-end Solution
 
 - [React Storybook](https://github.com/storybooks/storybook)
 - [Gatsby.js](https://github.com/gatsbyjs/gatsby)
 - [UMI](https://github.com/umijs/umi)
 
-### Micro Frontends Solution
+### Micro Front-ends Solution
 
 - [Bit](https://github.com/teambit/bit)
 - [UMI QianKun](https://github.com/umijs/qiankun)
 - [IceStark](https://github.com/ice-lab/icestark)
+- [Garfish: ByteDance micro front-end framework](https://github.com/bytedance/garfish)
 - [Single SPA](https://github.com/single-spa/single-spa)
 
-### Backend Solution
+### Back-end Solution
 
 - [Egg.js](https://github.com/eggjs/egg)
 - [Feathers.js: RESTful API](https://github.com/feathersjs/feathers)
