@@ -627,6 +627,7 @@
 - [ACE Editor](https://github.com/ajaxorg/ace)
 - [Code Mirror](https://github.com/codemirror/CodeMirror)
 - [Block Editor](https://github.com/codex-team/editor.js)
+- [React Editor](https://github.com/concrete-utopia/utopia)
 
 ## SMS
 
@@ -642,6 +643,7 @@
 - [MJML Markup Language](https://github.com/mjmlio/mjml)
 - [IMAP](https://github.com/mscdex/node-imap)
 - [MailSpring](https://github.com/Foundry376/Mailspring)
+- [Email Status](https://github.com/reacherhq/check-if-email-exists)
 
 ## File
 
