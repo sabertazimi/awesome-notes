@@ -390,7 +390,7 @@
 ### Table
 
 - [React Table(with Hooks API)](https://github.com/tannerlinsley/react-table)
-- [React Datasheet](https://github.com/nadbm/react-datasheet)
+- [React Data Sheet](https://github.com/nadbm/react-datasheet)
 - [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
 
 ### Charts
@@ -593,7 +593,7 @@
 
 - [CSS 3D Engine](https://github.com/shrekshrek/css3d-engine)
 - [Three.js](https://github.com/mrdoob/three.js)
-- [Krpano](https://krpano.com/docu/js/#top)
+- [Krpano](https://krpano.com/docu/js)
 
 ## Media
 
@@ -712,7 +712,7 @@
 
 - [Oclif: Open CLI Framework](https://github.com/oclif/oclif)
 - [INK: React CLI App](https://github.com/vadimdemedes/ink)
-- [ZX: Ndoe Bash Wrapper](https://github.com/google/zx)
+- [ZX: Node Bash Wrapper](https://github.com/google/zx)
 - [Nexe: Node EXE Wrapper](https://github.com/nexe/nexe)
 - [Babun: Windows Zsh](https://github.com/babun/babun)
 
@@ -878,7 +878,7 @@
 - [Stacktrace.js](https://github.com/stacktracejs/stacktrace.js)
 - [Stacktrace Visualization](https://github.com/joyent/node-stackvis)
 - [Log Analyzer](https://github.com/allinurl/goaccess)
-- [HTTP Loger](https://github.com/expressjs/morgan)
+- [HTTP Logger](https://github.com/expressjs/morgan)
 
 ### Mock Tools
 
