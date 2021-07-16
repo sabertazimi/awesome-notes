@@ -6,6 +6,7 @@
   - [Cascading and Inheritance](#cascading-and-inheritance)
     - [Cascading Order](#cascading-order)
     - [Specificity](#specificity)
+    - [CSS Inheritance](#css-inheritance)
   - [Property Value](#property-value)
     - [Initial Value](#initial-value)
     - [Specified Value](#specified-value)
@@ -308,6 +309,16 @@ h1 {
   color: purple;
 }
 ```
+
+### CSS Inheritance
+
+- Most CSS properties that affect the text node are inherited properties:
+  color, font-size, font-family, etc.
+- Most CSS properties that affect the element node are non-inherited properties.
+- When the `unset` value is set on an inherited property,
+  it resets the property value to its inherited value.
+- `unset` value resets a non-inherited property to its `initial` value.
+- `revert` reverses the CSS default values to the browser user-agent styles.
 
 ## Property Value
 
