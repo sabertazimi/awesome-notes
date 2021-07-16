@@ -4,7 +4,12 @@
 
 - [Design Patterns Notes](#design-patterns-notes)
   - [Baisc Patterns](#baisc-patterns)
-    - [SOLID 原则](#solid-原则)
+    - [SOLID Principles](#solid-principles)
+      - [Single Responsibility Principle](#single-responsibility-principle)
+      - [Open Closed Principle](#open-closed-principle)
+      - [Liskov Substitution Principle](#liskov-substitution-principle)
+      - [Interface Segregation Principle](#interface-segregation-principle)
+      - [Dependency Inversion Principle](#dependency-inversion-principle)
     - [Literal Pattern](#literal-pattern)
     - [Closure and IIFE](#closure-and-iife)
     - [Check Pattern](#check-pattern)
@@ -62,7 +67,7 @@
 
 ## Baisc Patterns
 
-### SOLID 原则
+### SOLID Principles
 
 - Single Responsibility Principle 单一功能原则
 - Open/Closed Principle 开闭原则
@@ -77,6 +82,34 @@
 - 里氏替换原则强调的是子类替换父类后程序运行时的正确性, 它用来帮助实现开闭原则
 - 接口隔离原则用来帮助实现里氏替换原则, 同时它也体现了单一职责
 - 依赖倒置原则是过程式设计与面向对象设计的分水岭, 同时它也被用来指导接口隔离原则
+
+#### Single Responsibility Principle
+
+Too much functionality is in one class and you modify a piece of it,
+it can be difficult to understand how that will affect other dependent modules.
+
+#### Open Closed Principle
+
+Allow users to add new functionalities without changing existing code,
+open for extension, close for modification.
+
+#### Liskov Substitution Principle
+
+Objects of ParentType can be replaced with objects of SubType without altering.
+Altering shows that SubType should not be subtype of ParentType
+(break Open Closed Principle),
+you should re-design ParentType and SubType.
+
+#### Interface Segregation Principle
+
+Clients should not be forced to depend upon interfaces that they do not use.
+
+#### Dependency Inversion Principle
+
+- High-level modules should not depend on low-level modules.
+  Both should depend on abstractions.
+- Abstractions should not depend upon details.
+  Details should depend on abstractions.
 
 ### Literal Pattern
 
