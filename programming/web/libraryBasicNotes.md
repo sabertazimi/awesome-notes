@@ -672,6 +672,7 @@
 - [Human Readable File Size](https://github.com/avoidwork/filesize.js)
 - [Globby](https://github.com/sindresorhus/globby)
 - [File Type](https://github.com/sindresorhus/file-type)
+- [File Size](https://github.com/avoidwork/filesize.js)
 
 ### PDF
 
