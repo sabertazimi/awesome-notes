@@ -100,7 +100,8 @@
   - [Search](#search)
   - [CLI](#cli)
     - [CLI Compiler](#cli-compiler)
-    - [CLI Library](#cli-library)
+    - [CLI Solution](#cli-solution)
+    - [CLI Utils](#cli-utils)
     - [Terminal](#terminal)
   - [Compiler](#compiler)
     - [Parser](#parser)
@@ -706,18 +707,22 @@
 - [PKG](https://github.com/zeit/pkg)
 - [NCC](https://github.com/zeit/ncc)
 
-### CLI Library
+### CLI Solution
 
 - [Oclif: Open CLI Framework](https://github.com/oclif/oclif)
 - [INK: React CLI App](https://github.com/vadimdemedes/ink)
-- [Nexe: Node EXE Wrapper](https://github.com/nexe/nexe)
 - [ZX: Ndoe Bash Wrapper](https://github.com/google/zx)
+- [Nexe: Node EXE Wrapper](https://github.com/nexe/nexe)
+- [Babun: Windows Zsh](https://github.com/babun/babun)
+
+### CLI Utils
+
 - [Commander](https://github.com/tj/commander.js)
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js)
 - [Chalk](https://github.com/chalk/chalk)
 - [ORA Spinner](https://github.com/sindresorhus/ora)
 - [Progress](https://github.com/bvaughn/progress-estimator)
-- [Babun: Windows Zsh](https://github.com/babun/babun)
+- [Code Frame: pointing to source locations](https://github.com/babel/babel/tree/main/packages/babel-code-frame)
 
 ### Terminal
 
