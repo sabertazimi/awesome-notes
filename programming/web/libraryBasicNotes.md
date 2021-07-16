@@ -90,6 +90,7 @@
   - [SMS](#sms)
     - [Phone](#phone)
     - [Email](#email)
+  - [Geolocation](#geolocation)
   - [File](#file)
     - [File Uploader](#file-uploader)
     - [File Downloader](#file-downloader)
@@ -645,6 +646,10 @@
 - [IMAP](https://github.com/mscdex/node-imap)
 - [MailSpring](https://github.com/Foundry376/Mailspring)
 - [Email Status](https://github.com/reacherhq/check-if-email-exists)
+
+## Geolocation
+
+- [Turf: A modular geospatial engine](https://github.com/Turfjs/turf)
 
 ## File
 
