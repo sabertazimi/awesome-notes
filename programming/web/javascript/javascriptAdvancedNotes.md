@@ -261,6 +261,7 @@
         - [JSON Web Token Cons](#json-web-token-cons)
       - [OAuth Authentication](#oauth-authentication)
         - [OAuth Authentication Basis](#oauth-authentication-basis)
+        - [OAuth 2.0](#oauth-20)
     - [Content Security Policy Level 3](#content-security-policy-level-3)
     - [Trusted Types](#trusted-types)
     - [CSRF](#csrf)
@@ -5224,8 +5225,25 @@ OAuth Token 特征:
   (3rd-Party Server vs Authorization Server)
 - 第三方网站收到令牌, 可以暂时拥有 GitHub 一些请求的权限比如用户信息,
   `https://api.github.com/user?access_token=${accessToken}`
+  或者 Request Header `Authorization: token ${accessToken}`.
   可以构建第三方网站自己的 Token, 做进一步相关鉴权操作 (如 Session Cookie).
   (3rd-Party Server vs Resource Server)
+
+##### OAuth 2.0
+
+OAuth 2.0 允许自动更新令牌.
+资源所有者颁发令牌时一次性颁发两个令牌,
+一个用于获取数据 (Acess Token),
+另一个用于获取新的令牌 (Refresh Token）.
+令牌到期前, 第三方网站使用 Refresh Token 发请求更新令牌:
+
+```html
+https://github.com/login/oauth/access_token?
+  client_id=CLIENT_ID&
+  client_secret=CLIENT_SECRET&
+  grant_type=refresh_token&
+  refresh_token=REFRESH_TOKEN
+```
 
 ### Content Security Policy Level 3
 
