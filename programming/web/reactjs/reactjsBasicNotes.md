@@ -2496,6 +2496,9 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ### Context API
 
+Context API provide a Dependency Injection style method,
+to provide values to children components.
+
 ```js
 function contextWrapper(WrappedComponent, Context) {
   return class extends React.Component {
