@@ -33,9 +33,9 @@
       - [RegExp Group](#regexp-group)
     - [Number](#number)
     - [Internationalization](#internationalization)
-      - [Number Intl](#number-intl)
-      - [String Intl](#string-intl)
-      - [Time Intl](#time-intl)
+      - [Number i18n](#number-i18n)
+      - [String i18n](#string-i18n)
+      - [Time i18n](#time-i18n)
     - [Array](#array)
       - [Array.includes](#arrayincludes)
       - [Array.from](#arrayfrom)
@@ -890,7 +890,7 @@ BigInt(a) * BigInt(b);
 
 ### Internationalization
 
-#### Number Intl
+#### Number i18n
 
 ```js
 const nfFrench = new Intl.NumberFormat('fr');
@@ -898,7 +898,7 @@ nf.format(12345678901234567890n);
 // => 12 345 678 901 234 567 890
 ```
 
-#### String Intl
+#### String i18n
 
 ```js
 const lfEnglish = new Intl.ListFormat('en');
@@ -906,9 +906,27 @@ const lfEnglish = new Intl.ListFormat('en');
 
 lfEnglish.format(['Ada', 'Grace', 'Ida']);
 // => 'Ada, Grace and Ida'
+
+const formatter = new Intl.ListFormat('en', {
+  style: 'long',
+  type: 'conjunction',
+});
+console.log(formatter.format(vehicles));
+// expected output: "Motorcycle, Bus, and Car"
+
+const formatter2 = new Intl.ListFormat('de', {
+  style: 'short',
+  type: 'disjunction',
+});
+console.log(formatter2.format(vehicles));
+// expected output: "Motorcycle, Bus oder Car"
+
+const formatter3 = new Intl.ListFormat('en', { style: 'narrow', type: 'unit' });
+console.log(formatter3.format(vehicles));
+// expected output: "Motorcycle Bus Car"
 ```
 
-#### Time Intl
+#### Time i18n
 
 ```js
 const rtfEnglish = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
@@ -5099,7 +5117,7 @@ Content-Length: xxx
 
 - 当符合 HTTP/1.0 或 HTTP/1.1 的客户端收到 401 返回值时,
   将自动弹出一个登录窗口, 要求用户输入用户名和密码.
-- 用户输入用户名和密码后, 将用户名及密码以BASE64加密方式加密, 并将密文放入前一条请求信息中
+- 用户输入用户名和密码后, 将用户名及密码以 BASE64 加密方式加密, 并将密文放入前一条请求信息中
 - 服务器收到上述请求信息后, 将 Authorization 字段后的用户信息取出、解密,
   将解密后的用户名及密码与用户数据库进行比较验证
 
@@ -5213,14 +5231,14 @@ OAuth Token 特征:
 ##### OAuth Authentication Basis
 
 - 在 GitHub Developer Settings 中备案第三方应用,
-  拿到属于它的客户端ID和客户端密钥
+  拿到属于它的客户端 ID 和客户端密钥
   (3rd-Party Server vs Resource Owner)
 - 在自己的第三方网站提供一个 GitHub 登录链接,
   用户点击该链接后会跳转到 GitHub OAuth API
   `https://github.com/login/oauth/authorize/?client_id=${clientID}`.
 - 用户跳转到 GitHub, 通过验证并同意使用 GitHub 身份登录第三方网站,
   此时就会带着授权码 Code 跳回第三方网站.
-- 第三方网站收到授权码, 利用授权码, 客户端ID, 客户端密钥向 GitHub 请求 `access_token`令牌
+- 第三方网站收到授权码, 利用授权码, 客户端 ID, 客户端密钥向 GitHub 请求 `access_token`令牌
   `https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${code}`
   (3rd-Party Server vs Authorization Server)
 - 第三方网站收到令牌, 可以暂时拥有 GitHub 一些请求的权限比如用户信息,
@@ -5238,11 +5256,9 @@ OAuth 2.0 允许自动更新令牌.
 令牌到期前, 第三方网站使用 Refresh Token 发请求更新令牌:
 
 ```html
-https://github.com/login/oauth/access_token?
-  client_id=CLIENT_ID&
-  client_secret=CLIENT_SECRET&
-  grant_type=refresh_token&
-  refresh_token=REFRESH_TOKEN
+https://github.com/login/oauth/access_token? client_id=CLIENT_ID&
+client_secret=CLIENT_SECRET& grant_type=refresh_token&
+refresh_token=REFRESH_TOKEN
 ```
 
 ### Content Security Policy Level 3
