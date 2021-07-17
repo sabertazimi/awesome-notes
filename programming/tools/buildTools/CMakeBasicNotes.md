@@ -1,8 +1,8 @@
-# Cmake Basic Notes
+# CMake Basic Notes
 
 <!-- TOC -->
 
-- [Cmake Basic Notes](#cmake-basic-notes)
+- [CMake Basic Notes](#cmake-basic-notes)
   - [Basic Build System](#basic-build-system)
     - [Basic Options](#basic-options)
   - [Flow Control](#flow-control)

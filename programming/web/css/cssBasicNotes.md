@@ -632,7 +632,7 @@ Size in em if the font-size should be modular
 
 ## CSS Selector
 
-![CSS 3 Selector](images/css3-selector-lest.png)
+![CSS 3 Selector](figures/css3-selector-lest.png)
 
 ### 元素选择器
 
@@ -3122,7 +3122,7 @@ h1::after {
   border: 0;
 
   /* 将箭头图片移至右端 */
-  background: url('../img/arrow.png') no-repeat;
+  background: url('images/arrow.png') no-repeat;
   background-color: #fff;
   background-position: right;
 

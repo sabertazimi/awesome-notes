@@ -22,7 +22,7 @@
         - [Message Loop/Counter](#message-loopcounter)
         - [Child Process](#child-process)
   - [File Module](#file-module)
-    - [fs API](#fs-api)
+    - [FS API](#fs-api)
     - [Buffer Object](#buffer-object)
     - [Path API](#path-api)
   - [Self-Defined Modules](#self-defined-modules)
@@ -283,9 +283,9 @@ cp.exec(
     killSignal: 'SIGTERM',
     setsid: false,
     cwd: null,
-    env: null
+    env: null,
   },
-  function(err, stdout, stderr) {
+  function (err, stdout, stderr) {
     if (!err) {
       console.log(stdout);
       console.log(stderr);
@@ -296,7 +296,7 @@ cp.exec(
 
 ## File Module
 
-### fs API
+### FS API
 
 - fs.createReadStream
 - fs.readdir
@@ -312,10 +312,26 @@ fs.readdir('/path/to/file', function callback(err, fileNameArr) {});
 
 fs.createReadStream();
 
-src
-  .pipe(dst1)
-  .pipe(dst2)
-  .pipe(dst3); //  连接多个 stream
+src.pipe(dst1).pipe(dst2).pipe(dst3); //  连接多个 stream
+```
+
+```js
+module.exports = function ls(dirName, fileType, callback) {
+  var fs = require('fs'),
+    path = require('path');
+
+  fs.readdir(dirName, function (err, list) {
+    if (err) {
+      return callback(err);
+    }
+
+    list = list.filter(function (file) {
+      return path.extname(file) === '.' + fileType;
+    });
+
+    callback(null, list);
+  });
+};
 ```
 
 ### Buffer Object
@@ -382,7 +398,7 @@ foo(a, b, function (err, param) {
 ### Export Modules
 
 ```js
-module.exports = function(args) {
+module.exports = function (args) {
   /* ... */
 };
 ```
@@ -431,9 +447,9 @@ typedef Stream response
 - 监听事件
 
 ```js
-response.on('data', function(data) {});
-response.on('error', function(error) {});
-response.on('end', function() {
+response.on('data', function (data) {});
+response.on('error', function (error) {});
+response.on('end', function () {
   // 结束阶段
   stream.end();
 });
@@ -462,14 +478,14 @@ http.get(url, function callback(response) {});
 ```
 
 ```js
-http.get(url, function(response) {
+http.get(url, function (response) {
   var pipeData = '';
 
   response.setEncoding('utf8');
-  response.on('data', function(data) {
+  response.on('data', function (data) {
     pipeData += data;
   });
-  response.on('end', function() {
+  response.on('end', function () {
     console.log(pipeData.length);
     console.log(pipeData);
   });
@@ -479,7 +495,7 @@ http.get(url, function(response) {
 ### Http Server
 
 ```js
-var server = http.createServer(function(request, response) {
+var server = http.createServer(function (request, response) {
   // 处理请求的逻辑...
 });
 server.listen(8000);
@@ -493,18 +509,18 @@ var chatServer = net.createServer(),
   // 用于检测僵尸客户端,用于及时清楚僵尸客户端
   clientList = [];
 
-chatServer.on('connection', function(client) {
+chatServer.on('connection', function (client) {
   client.name = client.remoteAddress + ':' + client.remotePort;
   client.write('Hi ' + client.name + '!\n');
   clientList.push(client);
 
-  client.on('data', function(data) {
+  client.on('data', function (data) {
     broadcast(data, client);
   });
-  client.on('end', function() {
+  client.on('end', function () {
     clientList.splice(clientList.indexOf(client), 1);
   });
-  client.on('error', function(e) {
+  client.on('error', function (e) {
     console.log(e);
   });
 });
@@ -551,7 +567,7 @@ var http = require('http'),
   sockFile = fs.readFileSync('socket.html');
 
 server = http.createServer();
-server.on('request', function(req, res) {
+server.on('request', function (req, res) {
   res.writeHead(200, { 'content-type': 'text/html' });
   res.end(sockFile);
 });
@@ -560,11 +576,11 @@ server.listen(8080);
 var socket = io.listen(server);
 
 // 命名空间
-socket.of('/upandrunning').on('connection', function(client) {
+socket.of('/upandrunning').on('connection', function (client) {
   console.log('Client connected to Up and Running namespace.');
   client.send("Welcome to 'Up and Running'");
 });
-socket.of('/weather').on('connection', function(client) {
+socket.of('/weather').on('connection', function (client) {
   console.log('Client connected to Weather namespace.');
   client.send("Welcome to 'Weather Updates'");
 });
@@ -611,15 +627,35 @@ url.parse(request.url, true);
 ```js
 var dns = require('dns');
 
-dns.lookup('google.com', 4, function(e, a) {
+dns.lookup('google.com', 4, function (e, a) {
   console.log(a);
 });
 
-dns.resolve('tazimi.tk', 'A', function(e, r) {
+dns.resolve('tazimi.tk', 'A', function (e, r) {
   if (e) {
     console.log(e);
   }
   console.log(JSON.stringify(r, null, 2));
+});
+```
+
+```js
+const dns = require('dns');
+
+dns.resolve('tazimi.dev', 'A', function (err, res) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('A: ' + JSON.stringify(res, null, 2));
+  }
+});
+
+dns.resolve('github.com', 'MX', function (err, res) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('MX: ' + JSON.stringify(res, null, 2));
+  }
 });
 ```
 
@@ -679,7 +715,7 @@ if (cluster.isMaster) {
   for (var i = 0; i < numCPUs; i++) {
     createWorker();
   }
-  setInterval(function() {
+  setInterval(function () {
     var time = new Date().getTime();
     for (pid in workers) {
       if (workers.hasOwnProperty(pid) && workers[pid].lastCb + 5000 < time) {
@@ -693,7 +729,7 @@ if (cluster.isMaster) {
 } else {
   //Server
   http
-    .Server(function(req, res) {
+    .Server(function (req, res) {
       //mess up 1 in 200 reqs
       if (Math.floor(Math.random() * 200) === 4) {
         console.log('Stopped ' + process.pid + ' from ever finishing');
@@ -710,7 +746,7 @@ if (cluster.isMaster) {
     process.send({
       cmd: 'reportMem',
       memory: process.memoryUsage(),
-      process: process.pid
+      process: process.pid,
     });
   }, 1000);
 }
@@ -721,7 +757,7 @@ function createWorker() {
 
   //allow boot time
   workers[worker.pid] = { worker: worker, lastCb: new Date().getTime() - 1000 };
-  worker.on('message', function(m) {
+  worker.on('message', function (m) {
     if (m.cmd === 'reportMem') {
       workers[m.process].lastCb = new Date().getTime();
       if (m.memory.rss > rssWarn) {
@@ -774,7 +810,7 @@ dotenv.config();
 module.exports = {
   endpoint: process.env.API_URL,
   masterKey: process.env.API_KEY,
-  port: process.env.PORT
+  port: process.env.PORT,
 };
 ```
 

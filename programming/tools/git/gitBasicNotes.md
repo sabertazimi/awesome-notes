@@ -884,7 +884,7 @@ print_git_objects
 
 #### Popular LICENSE
 
-![Free Software License](img/6_free_software_licenses.png)
+![Free Software License](figures/6_free_software_licenses.png)
 
 #### Unique LICENSE
 

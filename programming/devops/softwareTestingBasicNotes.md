@@ -1,8 +1,8 @@
-# Notes
+# Software Testing Basic Notes
 
 <!-- TOC -->
 
-- [Notes](#notes)
+- [Software Testing Basic Notes](#software-testing-basic-notes)
   - [测试模型](#测试模型)
     - [PIE 模型](#pie-模型)
     - [启发式测试策略模型(Heuristic Test Strategy Model)——软件功能测试(难以实现完全自动化)](#启发式测试策略模型heuristic-test-strategy-model软件功能测试难以实现完全自动化)
@@ -17,8 +17,12 @@
     - [黑盒/组合测试方法](#黑盒组合测试方法)
     - [定位 Fault](#定位-fault)
     - [模糊测试](#模糊测试)
-  - [移动设备:(机型,屏幕,环境)碎片化 ，耗电量](#移动设备机型屏幕环境碎片化-耗电量)
+  - [移动设备](#移动设备)
   - [Useful Demos/Tools](#useful-demostools)
+  - [Bug List](#bug-list)
+    - [Basic Bug](#basic-bug)
+    - [C Bug](#c-bug)
+    - [低概率/偶发性 Bug](#低概率偶发性-bug)
 
 <!-- /TOC -->
 
@@ -101,7 +105,12 @@ Unit/Module/Integration/System Testing
 
 Fuzzing - 是一种通过向目标系统提供非预期的输入并监视异常结果来发现软件漏洞的方法
 
-## 移动设备:(机型,屏幕,环境)碎片化 ，耗电量
+## 移动设备
+
+- 机型碎片化
+- 屏幕碎片化
+- 环境碎片化
+- 耗电量
 
 ## Useful Demos/Tools
 
@@ -112,3 +121,24 @@ Fuzzing - 是一种通过向目标系统提供非预期的输入并监视异常�
 - Randoop
 - 压力测试(Apache Jmeter)
 - 移动测试(Monkey:Random Testing)
+
+## Bug List
+
+### Basic Bug
+
+- 必须进行输入验证 - 永远不要相信用户输入
+- 永不使用未经验证的数值的长度或大小
+- 必须返回正确的错误状态
+- 注意(隐式)类型转换
+
+### C Bug
+
+- 栈缓冲区溢出
+- 空指针解引用
+- (隐式)类型转换
+- GOT 覆写(Global Offset Table)
+
+### 低概率/偶发性 Bug
+
+- 多进程完全异步编程的复杂性
+- 逐渐地内存泄漏

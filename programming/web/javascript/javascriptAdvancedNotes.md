@@ -2416,7 +2416,7 @@ Under the hood
 
 ### Event Loop
 
-![Event Loop](./images/event_loop.jpg)
+![Event Loop](figures/EventLoop.jpg)
 
 The job of the **event loop** is to look into the call stack
 and determine if the call stack is empty or not.

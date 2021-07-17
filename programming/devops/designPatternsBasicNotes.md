@@ -1,8 +1,8 @@
-# Design Patterns Notes
+# Design Patterns Basic Notes
 
 <!-- TOC -->
 
-- [Design Patterns Notes](#design-patterns-notes)
+- [Design Patterns Basic Notes](#design-patterns-basic-notes)
   - [Baisc Patterns](#baisc-patterns)
     - [SOLID Principles](#solid-principles)
       - [Single Responsibility Principle](#single-responsibility-principle)
@@ -309,6 +309,8 @@ myApp.utils = {};
 ```
 
 ## Common Design Patterns
+
+![Common Design Patterns](figures/DesignPatterns.png)
 
 ### Classification
 
