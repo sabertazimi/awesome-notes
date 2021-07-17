@@ -355,7 +355,7 @@ Each paradigm is defined by a set of programming concepts.
 
 ### Taxonomy of Paradigms
 
-![taxonomy of programming paradigms](figures/ProgrammingParadigms.jpg)
+![Taxonomy of Programming Paradigms](figures/ProgrammingParadigms.jpg)
 
 Nondeterminism is important for real-world interaction.
 Named state is important for modularity.
