@@ -143,6 +143,7 @@
       - [FS Index](#fs-index)
       - [FS Node](#fs-node)
       - [Device](#device)
+    - [ELF File Format](#elf-file-format)
   - [设备管理详解](#设备管理详解)
     - [CGA EGA and ChromaText Video Buffer](#cga-ega-and-chromatext-video-buffer)
     - [Input and Output](#input-and-output)
@@ -1319,6 +1320,93 @@ struct inode_ops {
 一个 inode 节点的成员变量 in_type 的值是 0x1234，
 则此 inode 的成员变量 in_info 将成为一个 device 结构。
 这样 inode 就和一个设备建立了联系，这个 inode 就是一个设备文件
+
+### ELF File Format
+
+```c
+#include "common.h"
+#include <stdlib.h>
+#include <elf.h>
+
+char *exec_file = NULL;
+
+static char *strtab = NULL;
+static Elf32_Sym *symtab = NULL;
+static int nr_symtab_entry;
+
+void load_elf_tables(int argc, char *argv[]) {
+  int ret;
+  Assert(argc == 2, "run NEMU with format 'nemu [program]'");
+  exec_file = argv[1];
+
+  FILE *fp = fopen(exec_file, "rb");
+  Assert(fp, "Can not open '%s'", exec_file);
+
+  uint8_t buf[sizeof(Elf32_Ehdr)];
+  ret = fread(buf, sizeof(Elf32_Ehdr), 1, fp);
+  assert(ret == 1);
+
+  /* The first several bytes contain the ELF header. */
+  Elf32_Ehdr *elf = (void *)buf;
+  char magic[] = {ELFMAG0, ELFMAG1, ELFMAG2, ELFMAG3};
+
+  /* Check ELF header */
+  assert(memcmp(elf->e_ident, magic, 4) == 0); // magic number
+  assert(elf->e_ident[EI_CLASS] == ELFCLASS32); // 32-bit architecture
+  assert(elf->e_ident[EI_DATA] == ELFDATA2LSB); // little-endian
+  assert(elf->e_ident[EI_VERSION] == EV_CURRENT); // current version
+  assert(elf->e_ident[EI_OSABI] == ELFOSABI_SYSV || // UNIX System V ABI
+      elf->e_ident[EI_OSABI] == ELFOSABI_LINUX); // UNIX - GNU
+  assert(elf->e_ident[EI_ABIVERSION] == 0); // should be 0
+  assert(elf->e_type == ET_EXEC); // executable file
+  assert(elf->e_machine == EM_386); // Intel 80386 architecture
+  assert(elf->e_version == EV_CURRENT); // current version
+
+
+  /* Load symbol table and string table for future use */
+
+  /* Load section header table */
+  uint32_t sh_size = elf->e_shentsize * elf->e_shnum;
+  Elf32_Shdr *sh = malloc(sh_size);
+  fseek(fp, elf->e_shoff, SEEK_SET);
+  ret = fread(sh, sh_size, 1, fp);
+  assert(ret == 1);
+
+  /* Load section header string table */
+  char *section_header_string_table = malloc(sh[elf->e_shstrndx].sh_size);
+  fseek(fp, sh[elf->e_shstrndx].sh_offset, SEEK_SET);
+  ret = fread(section_header_string_table  sh[elf->e_shstrndx].sh_size, 1, fp);
+  assert(ret == 1);
+
+  int i;
+  for(i = 0; i < elf->e_shnum; i ++) {
+    if(sh[i].sh_type == SHT_SYMTAB &&
+        strcmp(section_header_string_table + sh[i].sh_name, ".symtab") == 0) {
+      /* Load symbol table from exec_file */
+      symtab = malloc(sh[i].sh_size);
+      fseek(fp, sh[i].sh_offset, SEEK_SET);
+      ret = fread(symtab, sh[i].sh_size, 1, fp);
+      assert(ret == 1);
+      nr_symtab_entry = sh[i].sh_size / sizeof(symtab[0]);
+    }
+    else if(sh[i].sh_type == SHT_STRTAB &&
+        strcmp(section_header_string_table + sh[i].sh_name, ".strtab") == 0) {
+      /* Load string table from exec_file */
+      strtab = malloc(sh[i].sh_size);
+      fseek(fp, sh[i].sh_offset, SEEK_SET);
+      ret = fread(strtab, sh[i].sh_size, 1, fp);
+      assert(ret == 1);
+    }
+  }
+
+  free(sh);
+  free(section_header_string_table ;
+
+  assert(strtab != NULL && symtab != NULL);
+
+  fclose(fp);
+}
+```
 
 ## 设备管理详解
 
