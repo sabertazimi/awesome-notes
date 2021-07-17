@@ -50,14 +50,14 @@
         - [定义](#定义)
       - [静态函数成员](#静态函数成员)
         - [引用形式](#引用形式)
-        - [static function member 特性](#static-function-member-特性)
+        - [Static Function Member](#static-function-member)
       - [静态成员指针](#静态成员指针)
       - [static 关键字](#static-关键字)
     - [友元](#友元)
       - [成员友元函数](#成员友元函数)
     - [单继承](#单继承)
       - [派生控制权限](#派生控制权限)
-      - [父类与子类(public 派生控制权)](#父类与子类public-派生控制权)
+      - [父类与子类](#父类与子类)
     - [虚函数](#虚函数)
       - [virtual function 特性](#virtual-function-特性)
       - [功能](#功能)
@@ -72,13 +72,14 @@
     - [自增/减运算符](#自增减运算符)
     - [成员运算符](#成员运算符)
     - [赋值运算符](#赋值运算符)
-    - [强制类型转换(P172)](#强制类型转换p172)
+    - [强制类型转换](#强制类型转换)
   - [模板](#模板)
     - [模板调用形式](#模板调用形式)
   - [异常](#异常)
     - [异常对象的析构](#异常对象的析构)
   - [多态](#多态)
   - [STL](#stl)
+    - [String](#string)
     - [Input Output](#input-output)
       - [iomanip STL API](#iomanip-stl-api)
     - [Container](#container)
@@ -101,7 +102,7 @@
     - [Mover Algorithms](#mover-algorithms)
     - [Value Algorithms](#value-algorithms)
     - [Functional Algorithms](#functional-algorithms)
-  - [Awesome Tips / Best Practice](#awesome-tips--best-practice)
+  - [Awesome Tips and Best Practice](#awesome-tips-and-best-practice)
     - [静态成员 BP](#静态成员-bp)
     - [友元函数](#友元函数)
     - [单继承 BP](#单继承-bp)
@@ -542,7 +543,7 @@ x = (long)pi;       ///< Error: pi 不能转换为 long int
 - 抽象类型 `List::sort()`
 - 对象实例 `list.sort()`
 
-##### static function member 特性
+##### Static Function Member
 
 - 只能直接修改当前对象静态数据成员
 - 可以通过静态函数成员的函数参数, 传入对象实例指针, 从而间接修改非静态数据成员
@@ -583,7 +584,7 @@ int (*f)() = &CROWD::getnumber;
 - class 缺省为 private 派生控制, struct 缺省为 public 派生控制
 - 只可恢复至基类原权限, 不可随意修改基类成员权限
 
-#### 父类与子类(public 派生控制权)
+#### 父类与子类
 
 - 子类对象地址可以赋值给父类指针, 子类指针可以直接赋值给父类指针
 - 父类对象地址不可以赋值给子类指针, 父类指针即使强制类型转换后也不可以赋值给子类指针
@@ -767,7 +768,7 @@ int main(void) {
 
 - 所有对象都有默认的 = 重载: 浅拷贝赋值运算
 
-### 强制类型转换(P172)
+### 强制类型转换
 
 - 当定义只有一个参数的构造函数时, 进行运算时会自动发生类型转换(利用右值调用此构造函数, 生成中间变量赋给左值)
 
@@ -805,6 +806,102 @@ c.speak("Hello World!") // => "Child: Hello World!"
 ## STL
 
 - 工作方式: copy in, copy out
+
+### String
+
+```cpp
+#include <iostream>
+#include <malloc.h>
+#include <string.h>
+
+using namespace std;
+
+/**
+ *
+ * Demos for operator overload:
+ *  comparison: < == >
+ *  getter: []
+ *  typecast: (const char *)
+ *  contact: +
+ *  assign: = +=
+ */
+
+/**
+ * Notes:
+ *  普通函数成员 与 析构函数 全部定义为虚函数
+ *  不改变对象实例的函数 全部定义为 const 函数
+ *  被改变参数/返回值 全部定义为 引用类型
+ *  深拷贝(赋值)函数参数/返回值 全部定义为 引用类型
+ */
+
+class String {
+    char *s;
+public:
+    virtual int operator>(const String &c) const;
+    virtual int operator==(const String &c) const;
+    virtual int operator<(const String &c) const;
+    virtual char &operator[](int x);
+    virtual operator const char *() const;
+    virtual String operator+(const String &c) const;
+    virtual String &operator=(const String &c);
+    virtual String &operator+=(const String &c);
+    String(const char *c);
+    String(const String &c);
+    virtual ~String();
+};
+
+int String::operator>(const String &c) const {
+    return strcmp(s, c.s) > 0;
+}
+
+int String::operator==(const String &c) const {
+    return strcmp(s, c.s) == 0;
+}
+
+int String::operator<(const String &c) const {
+    return strcmp(s, c.s) < 0;
+}
+
+char &String::operator[](int x) {
+    return s[x];
+}
+
+String::operator const char *() const {
+    return s;
+}
+
+String String::operator+(const String &c) const {
+    char *t = new char[strlen(s)+strlen(c.s)+1];
+    String r(strcat(strcpy(t,s), c.s));
+    delete []t;
+    return r;
+}
+
+String &String::operator=(const String &c) {
+    delete []s;
+    strcpy(s=new char[strlen(c.s)+1], c.s);
+    return *this;
+}
+
+String &String::operator+=(const String &c) {
+    return *this = *this+s;
+}
+
+String::String(const char *c) {
+    strcpy(s=new char[strlen(c)+1], c);
+}
+
+String::String(const String &c) {
+    strcpy(s=new char[strlen(c.s)+1], c.s);
+}
+
+String::~String(void) {
+    if (s) {
+        delete []s;
+        s = 0;
+    }
+}
+```
 
 ### Input Output
 
@@ -1113,7 +1210,7 @@ transform
 for_each
 ```
 
-## Awesome Tips / Best Practice
+## Awesome Tips and Best Practice
 
 - 普通函数成员 与 析构函数 全部定义为虚函数
 - 不改变对象实例的函数 全部定义为 const 函数
