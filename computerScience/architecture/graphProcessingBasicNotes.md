@@ -1,6 +1,6 @@
-# Graph Processing Notes
+# Graph Processing Basic Notes
 
-- [Graph Processing Notes](#graph-processing-notes)
+- [Graph Processing Basic Notes](#graph-processing-basic-notes)
   - [Graph System](#graph-system)
   - [NUMA Architecture](#numa-architecture)
     - [CPU Schedule](#cpu-schedule)

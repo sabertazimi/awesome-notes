@@ -153,6 +153,14 @@
         - [Config](#config)
         - [Run](#run)
       - [GNU ld](#gnu-ld)
+  - [Memory Management Tools](#memory-management-tools)
+    - [perf](#perf)
+    - [trace](#trace)
+    - [vmstat](#vmstat)
+    - [pmap](#pmap)
+    - [Memory Hot Plug](#memory-hot-plug)
+    - [TCMalloc](#tcmalloc)
+    - [Oprofile](#oprofile)
 
 <!-- /TOC -->
 
@@ -1429,3 +1437,37 @@ SECTIONS {
     __kend__ = .; # 内核镜像的结束地址
 }
 ```
+
+## Memory Management Tools
+
+### perf
+
+### trace
+
+### vmstat
+
+check usage of virtual memory and swap region
+
+```sh
+vmstat 2
+```
+
+### pmap
+
+check detailed usage of memory
+
+```sh
+pmap PID
+```
+
+### Memory Hot Plug
+
+- [User Guide](http://www.kernel.org/doc/Documentation/memory-hotplug.txt)
+
+### TCMalloc
+
+Google TCMalloc
+
+### Oprofile
+
+- [User Guide](http://oprofile.sourceforge.net)

@@ -56,7 +56,7 @@
 
 ### Stack Frame
 
-![stack frame](img/stack_frame.png)
+![stack frame](figures/stack_frame.png)
 
 ```c
 # 准备阶段
