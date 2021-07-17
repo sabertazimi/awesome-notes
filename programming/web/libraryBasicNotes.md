@@ -820,13 +820,13 @@
 - [Karma](https://github.com/karma-runner/karma)
 - [Webkit API(Chrome)](https://github.com/ariya/phantomjs)
 - [Gecko API(Firefox)](https://github.com/laurentj/slimerjs)
-- [Selenium](https://github.com/SeleniumHQ/selenium)
 - [Interactor.js](https://github.com/wwilsman/interactor.js)
 
 ### End to End Testing
 
 - [Cypress](https://github.com/cypress-io/cypress)
 - [NightWatch: End to End Testing Framework](https://github.com/nightwatchjs/nightwatch)
+- [Selenium](https://github.com/SeleniumHQ/selenium)
 - [LightHouse](https://github.com/GoogleChrome/lighthouse)
 - [WebPageTest](https://github.com/WPO-Foundation/webpagetest-github-action)
 - [WebHint](https://github.com/webhintio/hint)
