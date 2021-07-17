@@ -19,13 +19,13 @@
       - [指针检查](#指针检查)
   - [类型转换](#类型转换)
     - [机器码转换](#机器码转换)
-  - [Awesome Pointer(Tips and Best Practice)](#awesome-pointertips-and-best-practice)
-    - [Error Prone Pointers(易错点)](#error-prone-pointers易错点)
+  - [Pointer Tips and Best Practice](#pointer-tips-and-best-practice)
+    - [Error Prone Pointers](#error-prone-pointers)
     - [Debugging Malloc](#debugging-malloc)
       - [处理 void 指针](#处理-void-指针)
-    - [利用 void 指针实现泛型(generic)](#利用-void-指针实现泛型generic)
-      - [通用型 swap 函数](#通用型-swap-函数)
-      - [通用型 lsearch 函数](#通用型-lsearch-函数)
+    - [利用 void 指针实现 Generic](#利用-void-指针实现-generic)
+      - [通用型 Swap 函数](#通用型-swap-函数)
+      - [通用型 Search Function](#通用型-search-function)
         - [实现](#实现)
         - [int 实例](#int-实例)
         - [string 实例](#string-实例)
@@ -37,20 +37,23 @@
     - [free](#free)
     - [Strings](#strings)
       - [strdup](#strdup)
-      - [strchr/strstr](#strchrstrstr)
+      - [strchr and strstr](#strchr-and-strstr)
       - [strtok](#strtok)
-      - [strcasecmp 不区分大小写](#strcasecmp-不区分大小写)
+      - [strcasecmp](#strcasecmp)
       - [getopt](#getopt)
     - [I/O](#io)
-      - [sscanf](#sscanf)
+      - [String Scanf](#string-scanf)
     - [Exceptions](#exceptions)
     - [Process](#process)
-      - [fork/execve](#forkexecve)
+      - [Fork and Execve](#fork-and-execve)
       - [Other](#other)
     - [Threads](#threads)
-      - [pthread.h](#pthreadh)
+      - [PThread](#pthread)
       - [Semaphore](#semaphore)
   - [联合体](#联合体)
+  - [Naming Conventions](#naming-conventions)
+    - [常用缩写词](#常用缩写词)
+    - [Header File](#header-file)
 
 <!-- /TOC -->
 
@@ -111,7 +114,7 @@
 
 #### 指针检查
 
-- alloctor 失败，需添加 NULL 检查:
+- Alloctor 失败，需添加 NULL 检查:
   - assert
   - exit
 
@@ -122,9 +125,9 @@
 - 有符号类型转换: 进行符号扩展
 - 无符号类型转换: 进行零扩展
 
-## Awesome Pointer(Tips and Best Practice)
+## Pointer Tips and Best Practice
 
-### Error Prone Pointers(易错点)
+### Error Prone Pointers
 
 ```c
 int i = 37;
@@ -155,9 +158,9 @@ Tips: 中途运用强制类型转换,使得 void 指针可以执行指针加减�
 void *target = (char *)void_pointer + ...;
 ```
 
-### 利用 void 指针实现泛型(generic)
+### 利用 void 指针实现 Generic
 
-#### 通用型 swap 函数
+#### 通用型 Swap 函数
 
 ```c
 void swap(void *vp1, void *vp2, int size) {
@@ -168,16 +171,16 @@ void swap(void *vp1, void *vp2, int size) {
 }
 ```
 
-#### 通用型 lsearch 函数
+#### 通用型 Search Function
 
 ##### 实现
 
 ```c
 void *lsearch(void *key, void *base, int n, int elemSize,
-  int (*cmpfn)(void *, void *)) {
+  int (*cmp_fn)(void *, void *)) {
     for (int i = 0;i < n;i++) {
         void * elemAddr = (char *)base + i * elemSize;
-        if (cmpfn(key, elemAddr) == 0) {
+        if (cmp_fn(key, elemAddr) == 0) {
             return elemAddr;
         }
     }
@@ -234,7 +237,7 @@ char ** found = lsearch(&target, notes, 5, sizeof(char *), StrCmp);
 
 ```c
 typedef struct {
-    void *elems;
+    void *elements;
     int elemSize;
     int logLen;
     int allocLen;
@@ -257,10 +260,10 @@ void StackNew(stack *s, int elemSize) {
     s->elemSize = elemSize;
     s->logLen = 0;
     s->allocLen = 4;
-    s->elems = (int *)malloc(s->allocLen * elemSize);
+    s->elements = (int *)malloc(s->allocLen * elemSize);
 
     // NULL检查
-    if (s->elems == NULL) {
+    if (s->elements == NULL) {
         perror("No Mem");
         exit(0);
     }
@@ -270,10 +273,10 @@ void StackPush(stack *s, void *elemAddr) {
     // 满栈检查
     if (s->logLen == s->allocLen) {
         s->allocLen *= 2;
-        s->elems = (int *)malloc(s->elems, s->allocLen * s->elemSize);
+        s->elements = (int *)malloc(s->elements, s->allocLen * s->elemSize);
     }
 
-    void *target = (char *)s->elems + s->logLen * s->elemSize;
+    void *target = (char *)s->elements + s->logLen * s->elemSize;
     memcpy(target, elemAddr, s->elemSize);
     s->logLen++;
 }
@@ -286,7 +289,7 @@ void StackPop(stack *s, void *elemAddr) {
     }
 
     s->logLen--;
-    void *source = (char *)s->elems + s->logLen * s->elemSize;
+    void *source = (char *)s->elements + s->logLen * s->elemSize;
     memcpy(elemAddr, source, s->elemSize);
 }
 ```
@@ -309,13 +312,13 @@ Valgrind - [GitHub Repo](https://github.com/svn2github/valgrind)
 
 string duplicate - `char *strdup(string)` 封装 allocator 细节
 
-#### strchr/strstr
+#### strchr and strstr
 
 返回字符/串在字符串中出现的位置(地址)
 
 #### strtok
 
-#### strcasecmp 不区分大小写
+#### strcasecmp
 
 #### getopt
 
@@ -323,7 +326,7 @@ string duplicate - `char *strdup(string)` 封装 allocator 细节
 
 ### I/O
 
-####　 sscanf
+#### String Scanf
 
 可以用作简易匹配读取函数
 
@@ -338,11 +341,11 @@ perror(string) - 用来将上一个函数发生错误的原因输出到标准设
 
 ### Process
 
-#### fork/execve
+#### Fork and Execve
 
 - fork(): 创建当前进程的拷贝
 - execve(): 用另一程序的代码代替当前进程的代码
-  - `int execve(char *filename, char *argv[], char *envp[])`
+  - `int execve(char *filename, char *argv[], char *env_p[])`
 
 ```c
 void fork_exec(char *path, char *argv[]) {
@@ -367,7 +370,7 @@ void fork_exec(char *path, char *argv[]) {
 
 ### Threads
 
-#### pthread.h
+#### PThread
 
 ```c
 typedef unsigned long int pthread_t;
@@ -398,7 +401,7 @@ extern int pthread_join __P ((pthread_t __th, void **__thread_return));
  */
 extern void pthread_exit __P ((void *__retval)) __attribute__ ((__noreturn__));
 
-// 一个线程不能被多个线程等待，否则第一个接收到信号的线程成功返回，其余调用pthread_join的线程则返回错误代码ESRCH
+// 一个线程不能被多个线程等待，否则第一个接收到信号的线程成功返回，其余调用pthread_join的线程则返回错误代码 ESRCH
 
 // 以下为互斥锁相关函数
 
@@ -406,7 +409,7 @@ pthread_mutex_init
 pthread_mutexattr_init
 
 /**
- * 设置属性pshared
+ * 设置属性 pshared
  * PTHREAD_PROCESS_PRIVATE
  * PTHREAD_PROCESS_SHARED
  */
@@ -470,3 +473,82 @@ void SellTickets(int agent, int *ticketsNum, Semaphore lock) {
 
 - 机器码 e.g 理解 IEEE 754 标准
 - 区分大/小端模式
+
+## Naming Conventions
+
+### 常用缩写词
+
+| 原词           | 缩写        |
+| :------------- | :---------- |
+| addition       | add         |
+| answer         | ans         |
+| array          | arr         |
+| average        | avg         |
+| buffer         | buf 或 buff |
+| capture        | cap 或 capt |
+| check          | chk         |
+| count          | cnt         |
+| column         | col         |
+| control        | ctrl        |
+| decode         | dec         |
+| define         | def         |
+| delete         | del         |
+| destination    | dst 或 dest |
+| display        | disp        |
+| division       | div         |
+| encode         | enc         |
+| environment    | env         |
+| error          | err         |
+| float          | flt         |
+| frequency      | freq        |
+| header         | hdr         |
+| index          | idx         |
+| image          | img         |
+| increment      | inc         |
+| initialize     | init        |
+| iteration      | itr         |
+| length         | len         |
+| memory         | mem         |
+| middle         | mid         |
+| make           | mk          |
+| message        | msg         |
+| multiplication | mul         |
+| number         | num         |
+| operand        | opnd        |
+| optimization   | opt         |
+| operator       | optr        |
+| packet         | pkt         |
+| position       | pos         |
+| previous       | pre/prev    |
+| payload        | type        |
+| pointer        | ptr/pt      |
+| return         | code        |
+| record         | rcd/rc      |
+| receive        | recv        |
+| result         | res         |
+| return         | ret         |
+| source         | src         |
+| stack          | stk         |
+| string         | str         |
+| subtraction    | sub         |
+| table          | tab         |
+| temporary      | tmp 或 temp |
+| total          | tot         |
+| time           | stamp       |
+| value          | val         |
+
+### Header File
+
+防止其他文件重复#include 本文件
+
+```c
+#ifndef MONGOOSE_HEADER_INCLUDED
+#define    MONGOOSE_HEADER_INCLUDED
+
+/*.................................
+ * do something here
+ *.................................
+ */
+
+#endif /* MONGOOSE_HEADER_INCLUDED */
+```

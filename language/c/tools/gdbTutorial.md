@@ -18,8 +18,8 @@
 - r(run)
 - l(list)
 - b(break)
-  - b linenum
-  - b filename:linenum
+  - b line_num
+  - b filename:line_num
 - display/format address
 
 e.g display/i \$pc
@@ -58,7 +58,7 @@ e.g size:w(2 字节) format:x/d/s(十六进制/十进制/字符串)
 - p print
 - q quit
 - up last stack
-- bt(backtrace) function stack 显示堆栈回溯信息
+- bt(back trace) function stack 显示堆栈回溯信息
 - info breakpoints/register
 
 ## set

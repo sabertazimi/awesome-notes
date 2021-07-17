@@ -6,7 +6,7 @@
   - [Python Basics](#python-basics)
     - [Basic Types](#basic-types)
       - [Tuples](#tuples)
-    - [Baisc Control Statement](#baisc-control-statement)
+    - [Basic Control Statement](#basic-control-statement)
       - [For Loop](#for-loop)
       - [While Loop](#while-loop)
     - [Functions](#functions)
@@ -48,7 +48,7 @@
 
 tuples in python are immutable
 
-### Baisc Control Statement
+### Basic Control Statement
 
 #### For Loop
 
@@ -90,12 +90,12 @@ class Pet(object):
   def change_name(self, new_name):
     self.name = new_name
 
-my_dog = Pet(species="dog", color="orange", name="Guiness")
+my_dog = Pet(species="dog", color="orange", name="Guises")
 print(my_dog)
 print(my_dog.name)
 # => output:
-# orange dog named Guiness.
-# Guiness
+# orange dog named Guises.
+# Guises
 ```
 
 ## NumPy Basics
@@ -201,11 +201,11 @@ def caesar(input_file, output_file, decrypt, key):
         text = click.prompt('Enter a text', hide_input=not decrypt)
     if decrypt:
         key = -key
-    cyphertext = encrypt(text, key)
+    cypherText = encrypt(text, key)
     if output_file:
-        output_file.write(cyphertext)
+        output_file.write(cypherText)
     else:
-        click.echo(cyphertext)
+        click.echo(cypherText)
 
 if __name__ == '__main__':
     caesar()
@@ -233,14 +233,14 @@ from caesar_encryption import encrypt
     required=True,
 )
 def caesar_breaker(input_file, output_file):
-    cyphertext = input_file.read()
-    english_dictionnary = enchant.Dict("en_US")
+    cypherText = input_file.read()
+    english_dictionary = enchant.Dict("en_US")
     best_number_of_english_words = 0
     for key in tqdm(range(26)):
-        plaintext = encrypt(cyphertext, -key)
+        plaintext = encrypt(cypherText, -key)
         number_of_english_words = 0
         for word in plaintext.split(' '):
-            if word and english_dictionnary.check(word):
+            if word and english_dictionary.check(word):
                 number_of_english_words += 1
         if number_of_english_words > best_number_of_english_words:
             best_number_of_english_words = number_of_english_words
@@ -267,15 +267,15 @@ fields = []
 rows = []
 
 # Reading csv file
-with open(filename, 'r') as csvfile:
+with open(filename, 'r') as csvFile:
     # Creating a csv reader object
-    csvreader = csv.reader(csvfile)
+    csvReader = csv.reader(csvFile)
 
     # Extracting field names in the first row
-    fields = csvreader.next()
+    fields = csvReader.next()
 
     # Extracting each data row one by one
-    for row in csvreader:
+    for row in csvReader:
         rows.append(row)
 
 # Printing out the first 5 rows
@@ -298,15 +298,15 @@ rows = [ ['Emily', '12', '18', '112'],
 filename = "soccer.csv"
 
 # Writing to csv file
-with open(filename, 'w+') as csvfile:
+with open(filename, 'w+') as csvFile:
     # Creating a csv writer object
-    csvwriter = csv.writer(csvfile)
+    csvWriter = csv.writer(csvFile)
 
     # Writing the fields
-    csvwriter.writerow(fields)
+    csvWriter.writerow(fields)
 
     # Writing the data rows
-    csvwriter.writerows(rows)
+    csvWriter.writerows(rows)
 ```
 
 ```python
@@ -333,7 +333,7 @@ import pandas as pd
 # Read the data from file
 # We now have a Python dictionary
 with open('data.json') as f:
-    data_listofdict = json.load(f)
+    data_listOfDict = json.load(f)
 
 # We can do the same thing with pandas
 data_df = pd.read_json('data.json', orient='records')
@@ -342,7 +342,7 @@ data_df = pd.read_json('data.json', orient='records')
 # Use 'indent' and 'sort_keys' to make the JSON
 # file look nice
 with open('new_data.json', 'w+') as json_file:
-    json.dump(data_listofdict, json_file, indent=4, sort_keys=True)
+    json.dump(data_listOfDict, json_file, indent=4, sort_keys=True)
 
 # And again the same thing with pandas
 export = data_df.to_json('new_data.json', orient='records')
@@ -358,10 +358,10 @@ import json
 tree = ET.parse('output.xml')
 xml_data = tree.getroot()
 
-xmlstr = ET.tostring(xml_data, encoding='utf8', method='xml')
+xmlStr = ET.tostring(xml_data, encoding='utf8', method='xml')
 
 
-data_dict = dict(xmltodict.parse(xmlstr))
+data_dict = dict(xmltodict.parse(xmlStr))
 
 print(data_dict)
 
@@ -413,14 +413,14 @@ import csv
 # Read the data from file
 # We now have a Python dictionary
 with open('data.json') as f:
-    data_listofdict = json.load(f)
+    data_listOfDict = json.load(f)
 
 # Writing a list of dicts to CSV
-keys = data_listofdict[0].keys()
+keys = data_listOfDict[0].keys()
 with open('saved_data.csv', 'wb') as output_file:
     dict_writer = csv.DictWriter(output_file, keys)
     dict_writer.writeheader()
-    dict_writer.writerows(data_listofdict)
+    dict_writer.writerows(data_listOfDict)
 ```
 
 ## Matplotlib Usage
@@ -499,9 +499,9 @@ plt.style.use('mystylesheet.mplrc')
 ## Plot Axis Tick
 
 ```python
-ax3.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-ax3.xaxis.set_major_locator(mticker.MaxNLocator(10))
-ax1.yaxis.set_major_locator(mticker.MaxNLocator(nbins=5, prune='lower'))
+ax3.xaxis.set_major_formatter(mDates.DateFormatter('%Y-%m-%d'))
+ax3.xaxis.set_major_locator(mTicker.MaxNLocator(10))
+ax1.yaxis.set_major_locator(mTicker.MaxNLocator(nbins=5, prune='lower'))
 
 for label in ax3.xaxis.get_ticklabels():
     label.set_rotation(45)
@@ -522,7 +522,7 @@ leg.get_frame().set_alpha(0.4)
 
 ## Subplot
 
-tall and witdh for grid template
+tall and width for grid template
 
 ```python
 fig = plt.figure()
@@ -606,7 +606,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 
 def latexify(fig_width=None, fig_height=None, columns=1):
-    '''Set up matplotlib's RC params for LaTeX plotting.
+    '''Set up matplotlib RC params for LaTeX plotting.
     Call this before plotting a figure.
 
     Parameters
@@ -690,7 +690,7 @@ plt.rc('xtick', labelsize=8)
 plt.rc('ytick', labelsize=8)
 plt.rc('axes', labelsize=8)
 
-# width as measured in inkscape
+# width as measured in ink scape
 width = 3.487
 height = width / 1.618
 

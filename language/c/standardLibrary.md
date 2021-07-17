@@ -3,21 +3,21 @@
 <!-- TOC -->
 
 - [C Standard Library](#c-standard-library)
-  - [`<assert.h>`](#asserth)
-  - [`<ctype.h>`](#ctypeh)
-  - [`<errno.h>`](#errnoh)
-  - [`<float.h>/<limits.h>`](#floathlimitsh)
-  - [`<locale.h>`](#localeh)
-  - [`<math.h>`](#mathh)
-  - [`<setjmp.h>`](#setjmph)
-  - [`<signal.h>`](#signalh)
-  - [`<stdarg.h>`](#stdargh)
-  - [`<stddef.h>`](#stddefh)
-  - [`<string.h>`](#stringh)
+  - [Assert](#assert)
+  - [C Type](#c-type)
+  - [Errno](#errno)
+  - [Float and Limits](#float-and-limits)
+  - [Locale](#locale)
+  - [Math](#math)
+  - [SetJMP](#setjmp)
+  - [Signal](#signal)
+  - [Stdarg](#stdarg)
+  - [Stddef](#stddef)
+  - [String](#string)
 
 <!-- /TOC -->
 
-## `<assert.h>`
+## Assert
 
 - 关闭断言
 
@@ -33,7 +33,7 @@
 #include <assert.h>
 ```
 
-## `<ctype.h>`
+## C Type
 
 - 可检测字符
 
@@ -45,7 +45,7 @@ getc、fgetc、getchar 函数可返回值(EOF 值/unsigned char 类型)
 
 ![ctype functions](img/ctype.h.jpg)
 
-## `<errno.h>`
+## Errno
 
 - errno 的值在程序启动时为零，但是不会被任何库函数设为零
 
@@ -131,7 +131,7 @@ if (errno != 0) {
 #define ESRMNT 69 /* Srmount error */
 #define ECOMM 70 /* Communication error on send */
 #define EPROTO 71 /* Protocol error */
-#define EMULTIHOP 72 /* Multihop attempted */
+#define EMULTIHOP 72 /* Multi hop attempted */
 #define EDOTDOT 73 /* RFS specific error */
 #define EBADMSG 74 /* Not a data message */
 #define EOVERFLOW 75 /* Value too large for defined data type */
@@ -187,11 +187,11 @@ if (errno != 0) {
 #endif
 ```
 
-## `<float.h>/<limits.h>`
+## Float and Limits
 
 - 宏定义：`CHAR/UCHAR/SCHAR/SHRT/USHRT/INT/UINT/LONG/ULONG/FLT/DBL/LDBL`有关的`MIN/MAX/EPSILON`
 
-## `<locale.h>`
+## Locale
 
 - 实现时间/单位/货币等一系列的国际化
 - 常用函数
@@ -212,11 +212,11 @@ _CRTIMP struct lconv * __cdecl localeconv(void);
 #define LC_TIME         5
 ```
 
-## `<math.h>`
+## Math
 
 数学函数库(包括后缀 f(float)/l(long double))
 
-## `<setjmp.h>`
+## SetJMP
 
 - 常用函数
 
@@ -232,7 +232,7 @@ void longjmp(jmp_buf env, int val);
   1. 实现非本地(局部)跳转(跨越多层函数调用栈进行跳转)
   2. 实现类 Java 异常机制(异常抛出及捕获)
 
-## `<signal.h>`
+## Signal
 
 信号处理程序中所有数据应为 volatile 类型
 
@@ -241,7 +241,7 @@ _CRTIMP int __cdecl raise(int);
 _CRTIMP void (__cdecl * __cdecl signal(int, void (__cdecl *)(int)))(int);
 ```
 
-## `<stdarg.h>`
+## Stdarg
 
 用于编写可变参数函数
 
@@ -259,11 +259,11 @@ void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束
 }
 ```
 
-## `<stddef.h>`
+## Stddef
 
 - 宏
   - NULL Null 指针常量
-  - `offsetof(type, member-desginator)`
+  - `offsetof(type, member-designator)`
     获得字段在结构体中的偏移量
 - 类型
   - `ptrdiff_t`
@@ -273,7 +273,7 @@ void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束
   - `size_t`
     无符号整数类型, 用来表示 sizeof 操作符的结果类型
 
-## `<string.h>`
+## String
 
 - men 系函数：操作任意字符序列
 - strn 系函数：操作非空字符序列

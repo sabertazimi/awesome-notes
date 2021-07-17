@@ -9,7 +9,7 @@
     - [反汇编](#反汇编)
     - [打包](#打包)
   - [Gradle Tool](#gradle-tool)
-    - [build.gradle](#buildgradle)
+    - [Build Gradle](#build-gradle)
   - [基本结构](#基本结构)
     - [数据类型](#数据类型)
       - [整型](#整型)
@@ -28,10 +28,9 @@
     - [运算符](#运算符)
       - [短路与、短路或](#短路与短路或)
       - [移位符](#移位符)
-      - [字符串连接运算符 +](#字符串连接运算符-)
-      - [判断运算符 ==](#判断运算符-)
-      - [()强制类型转换运算符](#强制类型转换运算符)
-      - [+字符串连接符](#字符串连接符)
+      - [字符串连接运算符](#字符串连接运算符)
+      - [判断运算符](#判断运算符)
+      - [强制类型转换运算符](#强制类型转换运算符)
     - [字符串](#字符串)
       - [子串](#子串)
       - [相等](#相等)
@@ -40,7 +39,7 @@
       - [构建字符串](#构建字符串)
     - [输入输出](#输入输出)
       - [Scanner 类](#scanner-类)
-      - [格式化输出方法 System.out.printf()](#格式化输出方法-systemoutprintf)
+      - [格式化输出方法](#格式化输出方法)
       - [文件的输入与输出](#文件的输入与输出)
         - [输入(至内存)](#输入至内存)
         - [输出(至文件)](#输出至文件)
@@ -51,29 +50,27 @@
       - [loop 语句](#loop-语句)
         - [循环五要素](#循环五要素)
         - [for each 循环](#for-each-循环)
-      - [break、continue 语句](#breakcontinue-语句)
-        - [break：跳出当前循环层](#break跳出当前循环层)
-          - [continue：跳过当前这次循环，进入下一次循环](#continue跳过当前这次循环进入下一次循环)
+      - [Break and Continue Statement](#break-and-continue-statement)
+        - [Break Statement](#break-statement)
+          - [Continue Statement](#continue-statement)
     - [大数值](#大数值)
-      - [java.math.BigInteger 类](#javamathbiginteger-类)
-      - [java.math.BigDecimal 类](#javamathbigdecimal-类)
     - [数组](#数组)
       - [定义+引用](#定义引用)
       - [初始化](#初始化)
       - [方法](#方法)
-      - [命令行参数——字符串数组 String[] args](#命令行参数字符串数组-string-args)
+      - [命令行参数](#命令行参数)
       - [排序](#排序)
-      - [多维数组(数组的数组，引用的引用)](#多维数组数组的数组引用的引用)
+      - [多维数组](#多维数组)
   - [对象与类](#对象与类)
     - [面向对象的三大特征](#面向对象的三大特征)
       - [封装性](#封装性)
       - [继承性](#继承性)
       - [多态性](#多态性)
     - [完整的 Java 源文件](#完整的-java-源文件)
-    - [Behavior,State,Identity](#behaviorstateidentity)
+    - [Behavior State and Identity](#behavior-state-and-identity)
     - [预定义类](#预定义类)
-      - [构造器(Constructor)](#构造器constructor)
-      - [GregoriaCalendar 类(日历类)](#gregoriacalendar-类日历类)
+      - [Constructor](#constructor)
+      - [Georgia Calendar](#georgia-calendar)
     - [用户自定义类](#用户自定义类)
       - [完整的类定义](#完整的类定义)
       - [访问器方法(Accessor Method)](#访问器方法accessor-method)
@@ -108,9 +105,9 @@
       - [super 关键字](#super-关键字)
       - [父类与子类的转换(Is-A 关系)](#父类与子类的转换is-a-关系)
     - [Object 类](#object-类)
-      - [equals 方法](#equals-方法)
-      - [hashCode 方法](#hashcode-方法)
-      - [toString 方法](#tostring-方法)
+      - [Equals Method](#equals-method)
+      - [Hash Code Method](#hash-code-method)
+      - [To String Method](#to-string-method)
     - [泛型数组列表](#泛型数组列表)
     - [对象包装器与自动装箱](#对象包装器与自动装箱)
       - [父类：Number](#父类number)
@@ -150,12 +147,12 @@
       - [接口作为方法参数](#接口作为方法参数)
       - [接口变量](#接口变量)
     - [对象克隆](#对象克隆)
-      - [Cloneable 接口](#cloneable-接口)
-      - [Object 类的 clone 方法](#object-类的-clone-方法)
-      - [自定义 clone 方法](#自定义-clone-方法)
+      - [Cloneable Interface](#cloneable-interface)
+      - [Object Clone Method](#object-clone-method)
+      - [Custom Clone Method](#custom-clone-method)
     - [回调](#回调)
       - [回调设计模式](#回调设计模式)
-      - [ActionListener 接口](#actionlistener-接口)
+      - [Action Listener Interface](#action-listener-interface)
     - [内部类](#内部类)
       - [内部类调用格式](#内部类调用格式)
       - [局部内部类](#局部内部类)
@@ -165,29 +162,28 @@
   - [图形程序设计](#图形程序设计)
     - [Swing 组件继承层次](#swing-组件继承层次)
     - [Swing 组件功能层次](#swing-组件功能层次)
-    - [JFrame 内部结构：重点位于 ContentPane](#jframe-内部结构重点位于-contentpane)
+    - [JFrame](#jframe)
     - [框架基础](#框架基础)
       - [位置和大小](#位置和大小)
-      - [属性(get/set、is/set)](#属性getsetisset)
+      - [Property Getter and Setter](#property-getter-and-setter)
     - [自定义绘制组件](#自定义绘制组件)
-      - [继承 JComponent 绘制法 class](#继承-jcomponent-绘制法-class)
-      - [继承 JPanel 绘制法：另类用法](#继承-jpanel-绘制法另类用法)
-      - [实现 Shape 接口绘制法：处理 2D 图形](#实现-shape-接口绘制法处理-2d-图形)
+      - [JComponent Extends](#jcomponent-extends)
+      - [JPanel Extends](#jpanel-extends)
+      - [Shape Interface](#shape-interface)
     - [图形颜色](#图形颜色)
   - [事件处理](#事件处理)
     - [定义与基础](#定义与基础)
       - [事件源与事件监听器](#事件源与事件监听器)
-      - [实现 ActionListner 接口的事件监听器](#实现-actionlistner-接口的事件监听器)
+      - [实现 Action Listener 接口的事件监听器](#实现-action-listener-接口的事件监听器)
         - [适用情况](#适用情况)
         - [事件监听器对象执行其他对象事件源产生事件影响](#事件监听器对象执行其他对象事件源产生事件影响)
-      - [自动创建监听器：EventHandler 类](#自动创建监听器eventhandler-类)
-      - [改变 Swing 组件观感(LookAndFeel)](#改变-swing-组件观感lookandfeel)
-      - [适配器类 XXAdapter 类](#适配器类-xxadapter-类)
+      - [Event Handler Class](#event-handler-class)
+      - [Adapter Class](#adapter-class)
     - [动作](#动作)
-      - [Aciton 接口与 AbstractAction 类](#aciton-接口与-abstractaction-类)
+      - [Action and Abstract Action](#action-and-abstract-action)
       - [基本方法](#基本方法)
-      - [动作与点击按钮：将自定义动作与按钮关联](#动作与点击按钮将自定义动作与按钮关联)
-      - [动作与按键映射：每个组件有三个输入映射和一个动作映射](#动作与按键映射每个组件有三个输入映射和一个动作映射)
+      - [动作与点击按钮](#动作与点击按钮)
+      - [动作与按键映射](#动作与按键映射)
     - [鼠标事件](#鼠标事件)
     - [AWT 事件继承层次](#awt-事件继承层次)
       - [事件类](#事件类)
@@ -195,49 +191,45 @@
       - [事件处理 适配器类](#事件处理-适配器类)
   - [Swing 组件](#swing-组件)
     - [Awt 和 Swing 设计中的设计模式](#awt-和-swing-设计中的设计模式)
-      - [组合(composite)模式](#组合composite模式)
-      - [装饰器(decorator)模式](#装饰器decorator模式)
-      - [策略(strategy)模式](#策略strategy模式)
-      - [模型-视图-控制器(model-view-controller)模式](#模型-视图-控制器model-view-controller模式)
+      - [Composite Pattern](#composite-pattern)
+      - [Decorator Pattern](#decorator-pattern)
+      - [Strategy Pattern](#strategy-pattern)
+      - [Model View Controller Pattern](#model-view-controller-pattern)
     - [简单布局管理器](#简单布局管理器)
-      - [流式布局(FlowLayout 类)](#流式布局flowlayout-类)
-      - [边框布局(BorderLayout 类)](#边框布局borderlayout-类)
-      - [网格布局(GridLayout 类)](#网格布局gridlayout-类)
+      - [Flow Layout Class](#flow-layout-class)
+      - [Border Layout Class](#border-layout-class)
+      - [Grid Layout Class](#grid-layout-class)
     - [复杂布局管理器](#复杂布局管理器)
-      - [网格组布局(GridBagLayout 类)](#网格组布局gridbaglayout-类)
+      - [Grid Bag Layout Class](#grid-bag-layout-class)
         - [基本步骤](#基本步骤)
-      - [组布局 (GroupLayout 类)](#组布局-grouplayout-类)
-      - [空布局(null，不使用布局管理器)](#空布局null不使用布局管理器)
-      - [自定义布局](#自定义布局)
+      - [Group Layout Class](#group-layout-class)
+      - [Null Layout](#null-layout)
+      - [Custom Layout](#custom-layout)
     - [文本组件](#文本组件)
-      - [文本域(JTextField 组件)](#文本域jtextfield-组件)
-      - [标签(JLabel 组件)](#标签jlabel-组件)
-      - [密码域(JPassWordField 组件)](#密码域jpasswordfield-组件)
-      - [文本区(JTextArea 组件)](#文本区jtextarea-组件)
-      - [滚动窗格(JScrollPane 类)](#滚动窗格jscrollpane-类)
+      - [文本域](#文本域)
+      - [标签](#标签)
+      - [密码域](#密码域)
+      - [文本区](#文本区)
+      - [滚动窗格](#滚动窗格)
     - [选择组件](#选择组件)
-      - [复选框(JCheckBox 组件)](#复选框jcheckbox-组件)
-      - [单选按钮(ButtonGroup 类 add JRadioButton 类)](#单选按钮buttongroup-类-add-jradiobutton-类)
+      - [复选框](#复选框)
+      - [单选按钮](#单选按钮)
       - [边框](#边框)
-      - [组合框(JComboBox 组件，泛型类)](#组合框jcombobox-组件泛型类)
-      - [滑动条(JSlider 组件)](#滑动条jslider-组件)
+      - [组合框](#组合框)
+      - [滑动条](#滑动条)
     - [菜单组件](#菜单组件)
       - [创建菜单](#创建菜单)
       - [图标菜单项](#图标菜单项)
       - [单选按钮/复选框菜单项](#单选按钮复选框菜单项)
-      - [弹出菜单(JPopupMenu 组件)](#弹出菜单jpopupmenu-组件)
+      - [弹出菜单](#弹出菜单)
       - [快捷键](#快捷键)
       - [启用/禁用菜单项](#启用禁用菜单项)
-      - [工具栏(JToolBar 组件)](#工具栏jtoolbar-组件)
+      - [工具栏](#工具栏)
     - [对话框(顶级框架)](#对话框顶级框架)
-      - [选项对话框(JOptionPane 组件)](#选项对话框joptionpane-组件)
+      - [选项对话框](#选项对话框)
       - [自定义对话框](#自定义对话框)
-      - [文件对话框(JFileChooser 组件插入对话框)](#文件对话框jfilechooser-组件插入对话框)
-      - [颜色对话框(JColorChooser 组件插入对话框)](#颜色对话框jcolorchooser-组件插入对话框)
-  - [部署应用程序](#部署应用程序)
-    - [JNLP API](#jnlp-api)
-    - [Applet](#applet)
-    - [首选项](#首选项)
+      - [文件对话框](#文件对话框)
+      - [颜色对话框](#颜色对话框)
   - [异常、断言、日志、调试](#异常断言日志调试)
     - [处理错误](#处理错误)
       - [异常分类](#异常分类)
@@ -250,7 +242,7 @@
       - [使用断言](#使用断言)
       - [JUnit 框架单元测试](#junit-框架单元测试)
       - [日志代理](#日志代理)
-      - [Throwable.printStackTrace()](#throwableprintstacktrace)
+      - [Stack Trace](#stack-trace)
       - [GUI 调试](#gui-调试)
   - [泛型](#泛型)
     - [泛型类](#泛型类)
@@ -262,19 +254,19 @@
     - [反射与泛型](#反射与泛型)
   - [集合](#集合)
     - [集合接口](#集合接口)
-      - [Collection 接口：泛型接口](#collection-接口泛型接口)
-        - [AbstractCollection 类：实现 Collection 接口](#abstractcollection-类实现-collection-接口)
-        - [迭代器：泛型接口](#迭代器泛型接口)
-        - [Iterable 接口：泛型接口](#iterable-接口泛型接口)
-      - [Queue 接口与 Deque 接口](#queue-接口与-deque-接口)
+      - [Collection Interface](#collection-interface)
+        - [Abstract Collection](#abstract-collection)
+        - [迭代器](#迭代器)
+        - [Iterable Interface](#iterable-interface)
+      - [Queue Interface and Deque Interface](#queue-interface-and-deque-interface)
     - [具体集合](#具体集合)
-      - [数组列表(ArrayList implements List)](#数组列表arraylist-implements-list)
-      - [链表(LinkedList implements List，Deque)](#链表linkedlist-implements-listdeque)
+      - [数组列表](#数组列表)
+      - [链表](#链表)
       - [散列集](#散列集)
       - [树集](#树集)
       - [比较接口](#比较接口)
-        - [Comparable 接口：泛型接口](#comparable-接口泛型接口)
-        - [Comparator 接口(比较器)：泛型接口](#comparator-接口比较器泛型接口)
+        - [Comparable Interface](#comparable-interface)
+        - [Comparator Interface](#comparator-interface)
       - [队列](#队列)
       - [映射表](#映射表)
     - [集合框架](#集合框架)
@@ -283,31 +275,30 @@
   - [线程](#线程)
     - [线程基础](#线程基础)
     - [线程状态](#线程状态)
-      - [new](#new)
-      - [runnable](#runnable)
-      - [blocked/waiting/timed waiting：不活动状态](#blockedwaitingtimed-waiting不活动状态)
+      - [Create Thread](#create-thread)
+      - [Runnable Thread](#runnable-thread)
+      - [Block Thread](#block-thread)
         - [blocked](#blocked)
         - [waiting](#waiting)
         - [timed waiting](#timed-waiting)
       - [terminated](#terminated)
     - [线程属性](#线程属性)
-      - [优先级：默认情况下继承父线程的优先级](#优先级默认情况下继承父线程的优先级)
-      - [Thread.setDaemon(true)](#threadsetdaemontrue)
+      - [优先级](#优先级)
+      - [Daemon Thread](#daemon-thread)
       - [未捕获异常的处理器](#未捕获异常的处理器)
     - [中断线程](#中断线程)
-      - [Interrupt 方法](#interrupt-方法)
-      - [InterruptedException](#interruptedexception)
-      - [处理 InterruptedException](#处理-interruptedexception)
+      - [Interrupt Method](#interrupt-method)
+      - [Interrupted Exception](#interrupted-exception)
     - [线程同步](#线程同步)
-      - [锁对象(实例域)](#锁对象实例域)
-      - [条件对象(实例域)](#条件对象实例域)
-      - [内部锁：synchronized 关键字](#内部锁synchronized-关键字)
+      - [锁对象 (实例域)](#锁对象-实例域)
+      - [条件对象 (实例域)](#条件对象-实例域)
+      - [内部锁](#内部锁)
       - [截获内部锁](#截获内部锁)
       - [读写锁](#读写锁)
       - [监视器](#监视器)
       - [volatile 关键字:修饰实例域](#volatile-关键字修饰实例域)
       - [死锁](#死锁)
-      - [ThreadLocal 辅助类](#threadlocal-辅助类)
+      - [Thread Local Helper](#thread-local-helper)
     - [线程安全](#线程安全)
       - [原子整数](#原子整数)
       - [线程安全集合](#线程安全集合)
@@ -322,10 +313,27 @@
     - [输出](#输出)
   - [正则表达式](#正则表达式)
     - [基本写法](#基本写法)
-    - [matcher.group(int)](#matchergroupint)
+    - [Group RegExp](#group-regexp)
   - [Garbage Collection](#garbage-collection)
     - [Garbage Collection Optimization](#garbage-collection-optimization)
     - [GC Tools](#gc-tools)
+  - [Java Naming Conventions](#java-naming-conventions)
+    - [使用前注意事项](#使用前注意事项)
+    - [包名的书写规范 （Package）](#包名的书写规范-package)
+      - [Package 一般要求](#package-一般要求)
+      - [Package 实际应用](#package-实际应用)
+    - [类名的书写规范 (Class)](#类名的书写规范-class)
+      - [Class 一般要求](#class-一般要求)
+      - [Class 实际应用](#class-实际应用)
+    - [变量的命名](#变量的命名)
+      - [普通变量](#普通变量)
+        - [Var 一般要求](#var-一般要求)
+        - [Var 实际应用](#var-实际应用)
+        - [变量使用技巧](#变量使用技巧)
+      - [静态变量](#静态变量)
+    - [方法的命名](#方法的命名)
+      - [Method 一般要求](#method-一般要求)
+      - [Method 实际应用](#method-实际应用)
 
 <!-- /TOC -->
 
@@ -355,9 +363,9 @@ jar {c t x u f} [v m e 0 M i][-c 目录] 文件名
 - u：添加文件到 jar 包
 - f：命名 jar 包
 - v：显示详细执行过程报告
-- m：指定 manufest.mf 文件(对 jar 包做相关设置)
+- m：指定 manifest.mf 文件(对 jar 包做相关设置)
 - 0：打包 jar 包是不压缩
-- M：不产生 manufest.mf 文件，覆盖 m 参数的设置
+- M：不产生 manifest.mf 文件，覆盖 m 参数的设置
 - i：创建索引文件
 - C：进入某目录后再执行 jar 命令
 - 生成 API 文档：java doc –d [ ] 类名/包名
@@ -384,7 +392,7 @@ gradle jar
 gradle javadoc
 ```
 
-### build.gradle
+### Build Gradle
 
 ```groovy
 apply plugin: 'java'
@@ -486,24 +494,24 @@ Double.POSITIVE_INFINITY，Double.NEGATIVE_INFINITY，Double.isNaN(检数)
 
 无符号右移>>>:最高位补 0
 
-#### 字符串连接运算符 +
+#### 字符串连接运算符
 
-左右操作数 String 字符串/其他类型(自动被转化为 String)
+`+`: 左右操作数 String 字符串/其他类型(自动被转化为 String)
 
-#### 判断运算符 ==
+#### 判断运算符
+
+`==`:
 
 - 基本类型值相等，引用类型引用相等
 - 基本类型：转换后比较；boolean 型不与 int 型比较
 - 引用类型：指向两个不同对象实例的变量不相等;若判断两个对象实例内容是否相等，必须调用 equals()方法
 
-#### ()强制类型转换运算符
+#### 强制类型转换运算符
+
+`()`
 
 - 只能在继承层次内进行强制类型转换(同一家族)
 - 将父类转换为子类前，应使用 instanceof 运算符进行检查
-
-#### +字符串连接符
-
-调用 toString 方法 x.toString() ""+x;
 
 ### 字符串
 
@@ -530,9 +538,9 @@ StringBuilder 类：单线程，功能同 StringBuffer 类(多线程)
 
 监视器，功能最强大的输入类，new Scanner(System.in)
 
-#### 格式化输出方法 System.out.printf()
+#### 格式化输出方法
 
-静态创建格式化字符串
+System.out.printf(): 静态创建格式化字符串
 
 #### 文件的输入与输出
 
@@ -580,9 +588,9 @@ case 标签变量类型：字符型(包装类)、三整型(包装类)、枚举�
 for (int age : arrayName) {}
 ```
 
-#### break、continue 语句
+#### Break and Continue Statement
 
-##### break：跳出当前循环层
+##### Break Statement
 
 ```java
 label:
@@ -591,7 +599,7 @@ break label;
 } //可跳出任意语句块：跳至标签块末尾
 ```
 
-###### continue：跳过当前这次循环，进入下一次循环
+###### Continue Statement
 
 ```java
   label:
@@ -602,9 +610,8 @@ continue label;
 
 ### 大数值
 
-#### java.math.BigInteger 类
-
-#### java.math.BigDecimal 类
+- java.math.BigInteger
+- java.math.BigDecimal
 
 ### 数组
 
@@ -623,8 +630,8 @@ continue label;
 
 两种不同初始化方式：
 
-- 声明时：`MyDate[] dates = {new Mydate(),……};`
-- 赋值时：`MyDate[] dates = new MyDate[] (匿名数组){new Mydate(),…..};`
+- 声明时：`MyDate[] dates = {new MyDate(),……};`
+- 赋值时：`MyDate[] dates = new MyDate[] (匿名数组){new MyDate(),…..};`
 
 #### 方法
 
@@ -638,19 +645,20 @@ Arrays.copyOf(ArrayName, Array.length); //可用来增长数组长度
 
 - 比较:Arrays.equals(type[] a,type[] b);
 
-#### 命令行参数——字符串数组 String[] args
+#### 命令行参数
 
-args 数组不包括程序名
+字符串数组 String[] args,
+args 数组不包括程序名.
 
 #### 排序
 
 Arrays.sort(ArrayName)快速排序方法
 
-#### 多维数组(数组的数组，引用的引用)
+#### 多维数组
 
 - 多维数组的声明和初始化应按从高维到低维的顺序进行
   - 声明&初始化 int[][] t = new int[3][];
-  - 子数组交换 atemp = a[i];a[i]=a[i+1];a[i+1]=atemp;
+  - 子数组交换 `temp = a[i];a[i]=a[i+1];a[i+1]=temp`;
 - 子数组长度可不一致：可先构造一维长度，再使用循环构造子数组各自长度
 
 ## 对象与类
@@ -693,20 +701,20 @@ public classDefinition                 //属性为public的类定义，0个或1�
 interfaceDefinition and classDefinition  //接口或类定义，0个或多个
 ```
 
-### Behavior,State,Identity
+### Behavior State and Identity
 
 ### 预定义类
 
-#### 构造器(Constructor)
+#### Constructor
 
-#### GregoriaCalendar 类(日历类)
+#### Georgia Calendar
 
 ### 用户自定义类
 
 #### 完整的类定义
 
 ```java
-[public] [abstact|final] class className[extends superclassName]
+[public] [abstract|final] class className[extends superclassName]
 [implements interfaceNameList] {
 
 //成员变量声明，可为多个：
@@ -773,7 +781,7 @@ Java 所有普通方法的参数传递方式:值传递
 ```java
 ClassName (ClassPropertiesVariableTable) {
     //进行输入参数合法化检查
-    Property n = Variablea;
+    Property n = Variable;
     Statement Block;
 }
 ```
@@ -781,7 +789,7 @@ ClassName (ClassPropertiesVariableTable) {
 #### 构造器方法的定义
 
 - 未定义任何构造器方法
-  系统会自动产生一个构造器方法，称为无参空默认构造器方法（defaultconstructor）
+  系统会自动产生一个构造器方法，称为无参空默认构造器方法（default constructor）
   并将所有实例域初始化为默认值
 - 注意事项
   - 不应在构造器中定义实例域同名变量
@@ -956,7 +964,7 @@ Student s = new Person();  //ERROR:e.g. s.getStuID();
 
 ### Object 类
 
-#### equals 方法
+#### Equals Method
 
 - 子类中覆盖(@override)父类 equals 方法：super.equals(superClassName other);
 - 显式参数名：Object otherObject
@@ -966,22 +974,22 @@ Student s = new Person();  //ERROR:e.g. s.getStuID();
 - ClassName other = (ClassName) otherObject;
 - return field == other.field
 
-#### hashCode 方法
+#### Hash Code Method
 
 - String 类 hashCode：ΣStringChar[i]^(n-i-1), (i:0~(n-1))
-- Objec 对象 hashCode：内部 ID(存储地址)
+- Object 对象 hashCode：内部 ID(存储地址)
 - 若重写 equals 方法，也应重写 hashCode 方法，使对象实例 hashCode 分布散列化
   - return 各域 hashCode 值加权和:31x+y rule
     - 引用类型、包装类：hashCode()
     - 数组：Arrays.deepHashCode()
-  - return Objects.hash(field1,..,fieldn); //自动组合各域 hashCode
+  - return Objects.hash(field1,..,fieldN); //自动组合各域 hashCode
   - hash 值：return (key.hashCode() & 0x7fffffff) % M;
 
-#### toString 方法
+#### To String Method
 
 - 设计 return getClass().getName() + ”[“ + field + ”]”;
-- Object 类 toString 方法：用于输出 CassName 和 hashCode
-- 数组直接继承 Object 类 toSrting 方法，输出数组需调用 Arrays.(deep)toString();
+- Object 类 toString 方法：用于输出 ClassName 和 hashCode
+- 数组直接继承 Object 类 toString 方法，输出数组需调用 Arrays.(deep)toString();
 - 自动调用：+ 字符串连接符、println(obj)
 
 ### 泛型数组列表
@@ -1053,7 +1061,7 @@ public>protected(包作用域+)>默认(包作用域)>private(类作用域)
 
 - 定义
   - 若一个类包含 abstract 方法，则必须是 abstract 类
-  - 一个 abstract 类可以不包含 abstrat 方法
+  - 一个 abstract 类可以不包含 abstract 方法
   - 一个 abstract 类可以包含具体数据和具体方法
 - 构造器方法
   - 需要实现构造器方法
@@ -1134,7 +1142,7 @@ interface 类型是引用类型
 //常量声明，可为多个
 [public] [static] [final] type constantName= Value;
 //方法声明，可为多个
-[public] [abstract] retumType methodName( [paramList] );
+[public] [abstract] returnType methodName( [paramList] );
 }
 ```
 
@@ -1167,15 +1175,15 @@ ActionListener myListener = new TimePrinter();
 
 ### 对象克隆
 
-#### Cloneable 接口
+#### Cloneable Interface
 
 标签接口(tagging interface)之一：无方法
 
-#### Object 类的 clone 方法
+#### Object Clone Method
 
 浅拷贝: 无法克隆目标对象实例域中的对象成员
 
-#### 自定义 clone 方法
+#### Custom Clone Method
 
 鉴于默认 clone 方法的局限性，需自定义用户需要的 clone 方法
 
@@ -1189,7 +1197,7 @@ ActionListener myListener = new TimePrinter();
 
 某个特定事件发生时采取某个特定动作
 
-#### ActionListener 接口
+#### Action Listener Interface
 
 ### 内部类
 
@@ -1249,7 +1257,7 @@ new InterfaceType () //一对括号
 
 ### Swing 组件功能层次
 
-### JFrame 内部结构：重点位于 ContentPane
+### JFrame
 
 ### 框架基础
 
@@ -1278,7 +1286,7 @@ setSize(screenWidth / 2, screenHeight / 2);
 setLocationByPlatform(true);
 ```
 
-#### 属性(get/set、is/set)
+#### Property Getter and Setter
 
 - 标题
 
@@ -1311,7 +1319,7 @@ setIconImage(img);
 
 所有绘制都使用 Graphics 类作参数(包含绘制图案、图像、文本等的方法)
 
-#### 继承 JComponent 绘制法 class
+#### JComponent Extends
 
 ```java
 class MyComponent extends JComponent
@@ -1328,7 +1336,7 @@ class MyComponent extends JComponent
 }
 ```
 
-#### 继承 JPanel 绘制法：另类用法
+#### JPanel Extends
 
 ```java
 class MyJPanel extends JPanel
@@ -1341,7 +1349,7 @@ class MyJPanel extends JPanel
 }
 ```
 
-#### 实现 Shape 接口绘制法：处理 2D 图形
+#### Shape Interface
 
 图形类继承关系图
 
@@ -1356,7 +1364,7 @@ class MyJPanel extends JPanel
 
 #### 事件源与事件监听器
 
-#### 实现 ActionListner 接口的事件监听器
+#### 实现 Action Listener 接口的事件监听器
 
 ##### 适用情况
 
@@ -1364,7 +1372,7 @@ class MyJPanel extends JPanel
 - 鼠标双击选择列表框某一选项
 - 选择某一菜单项
 - 文本域键入回车键
-- imer 组件达到指定时间间隔
+- 组件达到指定时间间隔
 
 ##### 事件监听器对象执行其他对象事件源产生事件影响
 
@@ -1373,7 +1381,7 @@ class MyJPanel extends JPanel
 ```java
 .addActionListener(new ActionListener()
 {
-public void actionPerformed(ActionEvevt event)
+public void actionPerformed(ActionEvent event)
 {
 //code for procedure
 }
@@ -1388,11 +1396,9 @@ public void actionPerformed(ActionEvevt event)
 });
 ```
 
-#### 自动创建监听器：EventHandler 类
+#### Event Handler Class
 
-#### 改变 Swing 组件观感(LookAndFeel)
-
-#### 适配器类 XXAdapter 类
+#### Adapter Class
 
 此类实现相应接口所有方法，但每个方法方法体皆空;简化 Listener 实现，只需重写所需方法
 
@@ -1405,7 +1411,7 @@ public void actionPerformed(ActionEvevt event)
 
 ### 动作
 
-#### Aciton 接口与 AbstractAction 类
+#### Action and Abstract Action
 
 Action 接口可连接多个事件源，AbstractAction 类是实现该接口的类(可继承此类编写动作)
 
@@ -1417,12 +1423,14 @@ Action 接口可连接多个事件源，AbstractAction 类是实现该接口的�
 - key 为动作属性的名称，value 为对应具体属性(如 String、ImageIcon)
 - propertyChangeListener：将动作对象属性变化传给监听器，再传给其他组件对象
 
-#### 动作与点击按钮：将自定义动作与按钮关联
+#### 动作与点击按钮
 
-JButton 构造器：JButton(Action act);
+- 将自定义动作与按钮关联
+- JButton 构造器：JButton(Action act);
 
-#### 动作与按键映射：每个组件有三个输入映射和一个动作映射
+#### 动作与按键映射
 
+- 每个组件有三个输入映射和一个动作映射
 - 建立输入映射(三种方式得到(次)顶层组件的输入映射)
 
 ```java
@@ -1438,13 +1446,13 @@ imap.put(  KeyStroke.getKeyStroke(“ctrl Y”)  ,  Object actionMapKeyName );
 - 建立动作映射
 
 ```java
-ActionMap amap = panel.getActionMap();
+ActionMap actionMap = panel.getActionMap();
 ```
 
 - 关联动作映射和动作:put 方法含有两个参数
 
 ```java
-amap.put(Object actionMapkeyName  ,  Action act);
+actionMap.put(Object actionMapKeyName  ,  Action act);
 ```
 
 > 注：将 Object 设为 String ”none” 时 表示 空动作(按键无效)
@@ -1477,13 +1485,13 @@ FocusEvent、MouseEvent、MouseWheelEvent、KeyEvent、WindowEvent
 
 ### Awt 和 Swing 设计中的设计模式
 
-#### 组合(composite)模式
+#### Composite Pattern
 
 将对象组合成树形结构以表示”部分-整体“的层次结构，使得用户对单个对象和组合对象的使用具有一致性
 
 容器与组件(具有共同接口) - 容器与组件具有层次结构,用户可对容器与组件实施同样的操作(点击、删除、输入等)
 
-#### 装饰器(decorator)模式
+#### Decorator Pattern
 
 保持接口，增强性能
 
@@ -1500,7 +1508,7 @@ FocusEvent、MouseEvent、MouseWheelEvent、KeyEvent、WindowEvent
 
 带滚动条的面板 Component：面板,Decorator：滚动条
 
-#### 策略(strategy)模式
+#### Strategy Pattern
 
 动态改变行为
 
@@ -1514,7 +1522,7 @@ FocusEvent、MouseEvent、MouseWheelEvent、KeyEvent、WindowEvent
 
 布局管理器 环境对象：面板，抽象策略：抽象布局管理接口，具体策略：具体布局管理类
 
-#### 模型-视图-控制器(model-view-controller)模式
+#### Model View Controller Pattern
 
 - 组件三要素：外观、内容(状态)、行为
 - 模型类：存储内容(状态) state getter/setter
@@ -1527,11 +1535,11 @@ FocusEvent、MouseEvent、MouseWheelEvent、KeyEvent、WindowEvent
 
 ### 简单布局管理器
 
-#### 流式布局(FlowLayout 类)
+#### Flow Layout Class
 
 逐行填充组件，可设置对齐方式和组件间距
 
-#### 边框布局(BorderLayout 类)
+#### Border Layout Class
 
 改变面板大小时，只有中央组件大小变化
 
@@ -1541,13 +1549,13 @@ FocusEvent、MouseEvent、MouseWheelEvent、KeyEvent、WindowEvent
 frame.add(panel, BorderLayout.CENTER/NORTH/SOUTH/WEST/EAST)
 ```
 
-#### 网格布局(GridLayout 类)
+#### Grid Layout Class
 
 组件按行列排列，且大小一致(只能逐行逐列添加组件)
 
 ### 复杂布局管理器
 
-#### 网格组布局(GridBagLayout 类)
+#### Grid Bag Layout Class
 
 没有行列大小和个数限制的网格布局：行列大小可不一致，可合并相邻行/列(合并单元格)
 
@@ -1564,7 +1572,7 @@ gridBagPanel.add(component, GridBagConstraints);给每一个组件都构造一�
 
 e. gridBagPanel.add(component, GridBagConstraints);
 
-#### 组布局 (GroupLayout 类)
+#### Group Layout Class
 
 通过(嵌套)组的水平与垂直计算(间距与组件)，实现灵活的布局:
 
@@ -1573,9 +1581,9 @@ e. gridBagPanel.add(component, GridBagConstraints);
 - ParallelGroup 类
 - SequentialGroup 类
 
-#### 空布局(null，不使用布局管理器)
+#### Null Layout
 
-#### 自定义布局
+#### Custom Layout
 
 实现 LayoutManager 接口，自定义 setSizes(Container parent)
 
@@ -1585,25 +1593,33 @@ e. gridBagPanel.add(component, GridBagConstraints);
 
 JTextComponent 抽象类
 
-#### 文本域(JTextField 组件)
+#### 文本域
 
-#### 标签(JLabel 组件)
+- JTextField 组件
 
-标签无法响应用户输入事件，只提供标识功能
+#### 标签
 
-#### 密码域(JPassWordField 组件)
+- JLabel 组件: 标签无法响应用户输入事件，只提供标识功能
 
-#### 文本区(JTextArea 组件)
+#### 密码域
 
-#### 滚动窗格(JScrollPane 类)
+- JPassWordField 组件
 
-将文本区组件/其他组件插入到滚动窗格中，可实现文本区/其他组件的滚动
+#### 文本区
+
+- JTextArea 组件
+
+#### 滚动窗格
+
+- JScrollPane:
+  将文本区组件/其他组件插入到滚动窗格中,
+  可实现文本区/其他组件的滚动.
 
 ### 选择组件
 
-#### 复选框(JCheckBox 组件)
+#### 复选框
 
-勾取选项(可自定义选项标签)：勾选/不勾选状态
+- JCheckBox 组件, 勾取选项(可自定义选项标签)：勾选/不勾选状态
 
 ```java
 .addActionListener( if ( .isSelected() ) {……});
@@ -1611,29 +1627,30 @@ JTextComponent 抽象类
 
 多个复选框可共用一个监听器，通过 isSelected 方法检测不同复选框的状态
 
-#### 单选按钮(ButtonGroup 类 add JRadioButton 类)
+#### 单选按钮
 
 - ButtonGroup 对象负责调度任务：保证只有一个 JRadioButton 对象被按下
 - JRadioButton 对象:add 至 JPanel 对象,add 至 ButtonGroup 对象,addActionListener 注册监听器
 
 #### 边框
 
-在面板/子面板(TextPanel、ButtonPanel 功能区等)调用 setBorder 方法填充边框
+在面板/子面板(TextPanel、ButtonPanel 功能区等) 调用 setBorder 方法填充边框
 
-#### 组合框(JComboBox 组件，泛型类)
+#### 组合框
 
-下拉选框(N 个选项 Item)，.addActionListener( getItemAt( getSelectedIndex() ) )
+JComboBox 组件，泛型类,
+下拉选框(N 个选项 Item)，.addActionListener(getItemAt(getSelectedIndex()))
 
-#### 滑动条(JSlider 组件)
+#### 滑动条
 
-可连续选择数值
+JSlider 组件, 可连续选择数值:
 
 ```java
 .addChangeListener(new ChangeListener()
 {
     public void stateChanged(ChangeEvent event)
     {
-        Jslider source = (JSlider) event.getSource();
+        JSlider source = (JSlider) event.getSource();
         int Value = source.getValue();
         code for operating;   //with Value
     }
@@ -1667,8 +1684,9 @@ Action exitAction = new AbstractAction (“ Exit ”) //MenuItems text goes here
 
 将 MenuBar 视作 JPanel 即可
 
-#### 弹出菜单(JPopupMenu 组件)
+#### 弹出菜单
 
+JPopupMenu 组件,
 不依附于 MenuBar 的浮动菜单(Window 系统下右键弹出菜单)
 
 #### 快捷键
@@ -1678,38 +1696,35 @@ Action exitAction = new AbstractAction (“ Exit ”) //MenuItems text goes here
 
 #### 启用/禁用菜单项
 
-#### 工具栏(JToolBar 组件)
+#### 工具栏
 
-- 同样地，JToolBar 构造器/Action.putValue(Action.SHORT_DESCRIPTION,……)；
+- 同样地，JToolBar 构造器/Action.putValue(Action.SHORT_DESCRIPTION)；
 
 ### 对话框(顶级框架)
 
 - 模式对话框：弹出时不允许用户作其他交互
 - 无模式对话框：弹出时允许用户作其他交互(如工具栏)
 
-#### 选项对话框(JOptionPane 组件)
+#### 选项对话框
+
+- JOptionPane 组件
 
 #### 自定义对话框
 
-- 在构造器中调用超类 Jdialog 构造器方法
+- 在构造器中调用超类 JDialog 构造器方法
 - 添加对话框的用户界面组件
 - 添加事件处理器
 - 设置对话框大小
 
-#### 文件对话框(JFileChooser 组件插入对话框)
+#### 文件对话框
 
+- JFileChooser 组件插入对话框
 - 文件选择器
 - 文件过滤器：可添加文件视图类
 
-#### 颜色对话框(JColorChooser 组件插入对话框)
+#### 颜色对话框
 
-## 部署应用程序
-
-### JNLP API
-
-### Applet
-
-### 首选项
+- JColorChooser 组件插入对话框
 
 ## 异常、断言、日志、调试
 
@@ -1789,7 +1804,7 @@ throw new Exception(String)/(String, e);
 
 - 将当前捕获的异常再次抛出：throw e;
 - 重新生成并抛出一个新异常(沿调用堆栈传递)
-  - hrow new Exception("some message");
+  - throw new Exception("some message");
   - throw new Exception("some message"，e);
   - 将原始异常作为新异常的 initCause
 
@@ -1826,7 +1841,9 @@ import static org.JUnit.Assert.\*
 
 Logger.getGlobal().info(" ……" + targetVariableName);
 
-#### Throwable.printStackTrace()
+#### Stack Trace
+
+- `Throwable.PintStackTrace`
 
 #### GUI 调试
 
@@ -1882,27 +1899,27 @@ Logger.getGlobal().info(" ……" + targetVariableName);
 
 ### 集合接口
 
-#### Collection 接口：泛型接口
+#### Collection Interface
 
-##### AbstractCollection 类：实现 Collection 接口
+##### Abstract Collection
 
 将 size 和 iterator 抽象化，将 contains、toString 具体化
 
-##### 迭代器：泛型接口
+##### 迭代器
 
 - 工作位置: 迭代器位于两元素间
 - 工作机制
-  - previos 方法：迭代器越过前一元素，并将该元素的引用作为返回值
+  - previous 方法：迭代器越过前一元素，并将该元素的引用作为返回值
   - next 方法：迭代器越过下一元素，并将该元素的引用作为返回值
 - 工作方法
   - add 方法：将新元素的引用插入至迭代器当前位置
-  - remove 方法：与 previos/next 相互依赖，删除前一次越过元素(不可连续调用 remove 方法)
+  - remove 方法：与 previous/next 相互依赖，删除前一次越过元素(不可连续调用 remove 方法)
   - next->( remove )->next->remove
 - 使用原则
   - 给容器附加多个只读迭代器，单独附加唯一一个读写迭代器
   - 并发修改检测: 只检测结构性改变(改变长度),不检测数值性改变(如 set 方法)
 
-##### Iterable 接口：泛型接口
+##### Iterable Interface
 
 任何实现了 Iterable 接口及其子接口(如 Collection 接口)的对象都可使用 for each 循环
 
@@ -1913,18 +1930,22 @@ public interface Iterable<E>
 }
 ```
 
-#### Queue 接口与 Deque 接口
+#### Queue Interface and Deque Interface
 
 Deque extends Queue extends Collection)
 
 ### 具体集合
 
-#### 数组列表(ArrayList implements List)
+#### 数组列表
+
+ArrayList implements List:
 
 - 随机访问：利用索引值访问元素
 - get/set(int Index)方法：效率高
 
-#### 链表(LinkedList implements List，Deque)
+#### 链表
+
+LinkedList implements List，Deque:
 
 - 非随机存取：必须从头/尾开始遍历链表访问元素
 - E get(int Index)方法：效率极低
@@ -1958,7 +1979,7 @@ TreeSet implements SortedSet，NavigableSet：有序集
 
 #### 比较接口
 
-##### Comparable 接口：泛型接口
+##### Comparable Interface
 
 ```java
 // A<B负值，A==B零，A>B正值(B代表other)
@@ -1968,7 +1989,7 @@ public interface Comparable<T>
 }
 ```
 
-##### Comparator 接口(比较器)：泛型接口
+##### Comparator Interface
 
 ```java
 // A<B负值，A==B零，A>B正值
@@ -1977,7 +1998,7 @@ public interface Comparator<T>
     int compare(T a, T b);
 }
 
-SortedSet<Item> setSortedByName = new TreeSet<>(Comparetor comp)；//实现比较器的类
+SortedSet<Item> setSortedByName = new TreeSet<>(Comparator comp)；//实现比较器的类
 ```
 
 #### 队列
@@ -2012,18 +2033,22 @@ RandomAccess 接口：标记接口，无任何方法，标记一个集合是否�
 
 ### 线程状态
 
-#### new
+#### Create Thread
 
 创建线程的方法：
 
 - 父类:继承 Thread 类，重写 run 方法
 - 接口:new Thread(Runnable Task)实现 Runnable 接口的类：实名类/匿名类/Lambda 表达式
 
-#### runnable
+#### Runnable Thread
 
 thread.start() 线程处于可运行状态：可能在运行，可能不在运行，不必始终保持运行
 
-#### blocked/waiting/timed waiting：不活动状态
+#### Block Thread
+
+- blocked
+- waiting
+- timed waiting
 
 ##### blocked
 
@@ -2045,17 +2070,18 @@ run 方法正常退出或抛出未捕获异常时，进入(自然/意外)死亡�
 
 ### 线程属性
 
-#### 优先级：默认情况下继承父线程的优先级
+#### 优先级
 
+- 默认情况下继承父线程的优先级
 - 需防止低优先级线程被饿死(因此不要依赖优先级进行编程)
 - MIN_PRIORITY(1)~NORM_PRIORITY(5)~MAX_PRIORITY(10)
 - 每当线程调度器选择新线程时,首选具有较高优先级的线程
 
-#### Thread.setDaemon(true)
+#### Daemon Thread
 
-设置为后台线程：随时可能中断
-
-虚拟机会在只有后台线程时退出,后台线程不可访问固有资源(文件、数据库等)
+- Thread.setDaemon(true)
+- 设置为后台线程：随时可能中断
+- 虚拟机会在只有后台线程时退出,后台线程不可访问固有资源(文件、数据库等)
 
 #### 未捕获异常的处理器
 
@@ -2065,37 +2091,34 @@ run 方法正常退出或抛出未捕获异常时，进入(自然/意外)死亡�
 
 ### 中断线程
 
-#### Interrupt 方法
+#### Interrupt Method
 
 对一个线程调用此方法时,线程将进入中断状态
 
-#### InterruptedException
+#### Interrupted Exception
 
 对一个阻塞线程(调用 sleep/wait 方法等)调用 interrupt 方法时，抛出此异常
-
-#### 处理 InterruptedException
 
 ### 线程同步
 
 两个线程都有多个语句，无法保证一个线程所有语句全部执行完再调用另一个线程,必然会出现交错调用不同线程中的语句现象，导致调用混乱现象
 
-#### 锁对象(实例域)
+#### 锁对象 (实例域)
 
 可重复(持有计数)，可共用(共用锁对象的方法可互相调用)
 
-#### 条件对象(实例域)
+#### 条件对象 (实例域)
 
 管理有锁却不能正常工作的线程
 
 一个锁对象可以有多个相关的条件对象
 
-#### 内部锁：synchronized 关键字
+#### 内部锁
 
-每个对象都有一个内部锁，可将静态方法声明为 synchronized
-
-等价于 wait/notifyAll
-
-等价于 await/signalAll
+- synchronized 关键字
+- 每个对象都有一个内部锁，可将静态方法声明为 synchronized
+- 等价于 wait/notifyAll
+- 等价于 await/signalAll
 
 #### 截获内部锁
 
@@ -2113,7 +2136,7 @@ run 方法正常退出或抛出未捕获异常时，进入(自然/意外)死亡�
 
 e.g. 两个线程互相等待状态
 
-#### ThreadLocal 辅助类
+#### Thread Local Helper
 
 ### 线程安全
 
@@ -2124,7 +2147,7 @@ java.util.concurrent 并发 API：线程安全(同时只有一个线程调用某
 ```java
 AtomicInteger.getAndIncrement();     //cnt++;
 AtomicInteger.getAndDecrement();    //cnt—
-AtomicBoolead、AtomicLong、AtomicReference类
+AtomicBoolean、AtomicLong、AtomicReference类
 ```
 
 #### 线程安全集合
@@ -2143,7 +2166,7 @@ AtomicBoolead、AtomicLong、AtomicReference类
 - CachedThreadPool：提交任务多，创建新线程
 - FixedThreadPool：提交任务多，等待当前任务完成再运行其他任务
 - SingleThreadExecutor：逐一执行提交任务
-- ScheduledExecutorServiec 接口：预定执行/重复执行任务
+- ScheduledExecutorService 接口：预定执行/重复执行任务
 
 以上工厂方法返回：实现 ExecutorService 接口的 ThreadPoolExecutor 对象
 
@@ -2169,7 +2192,7 @@ pool.shutdown();
 事件分配线程不应进行 input/output/sleep 调用(可能使线程阻塞)
 
 - Timer 类(亦是线程)：每隔一段时间重复执行 MyTask
-- 更新图形化界面：SwingUtilites.invokeLater(Runnable MyTask);
+- 更新图形化界面：SwingUtilities.invokeLater(Runnable MyTask);
 
 ```java
 EventQueue.invokeLater(new Runnable()
@@ -2200,7 +2223,7 @@ String itemName = ((JRadioButton) e.getSource()).getText();
 
 @override:
 
-- euqals
+- equals
 - hashCode
 - toString
 - Comparable(compareTo)
@@ -2234,9 +2257,10 @@ String itemName = ((JRadioButton) e.getSource()).getText();
 
 ([字符]){数量}\位置
 
-### matcher.group(int)
+### Group RegExp
 
-0 表示整个正则表达式，i 表示第 i 个圆括号
+- matcher.group(int)
+- 0 表示整个正则表达式，i 表示第 i 个圆括号
 
 ## Garbage Collection
 
@@ -2267,9 +2291,131 @@ jstat -gc <pid> <统计间隔时间>  <统计次数>
 
 # jmap：JVM 自带命令行工具, 可用于了解系统运行时的对象分布
 jmap -histo <pid>
-jmap -dump:live,format=b,file=dump.hprof <pid>
+jmap -dump:live,format=b,file=dump.prof <pid>
 
 # 用来查看正在运行的 Java 应用程序的扩展参数
 # 包括 Java System 属性和 JVM 命令行参数
 jinfo <pid>  
 ```
+
+## Java Naming Conventions
+
+### 使用前注意事项
+
+- 由于 Java 面向对象编程的特性, 在命名时应尽量选择名词
+- 驼峰命名法（Camel-Case）
+  - 当变量名或函式名是由一个或多个单字连结在一起，而构成的唯一识别字时，首字母以小写开头，每个单词首字母大写（第一个单词除外）。
+
+### 包名的书写规范 （Package）
+
+推荐使用公司或机构的顶级域名为包名的前缀，目的是保证各公司/机构内所使用的包名的唯一性。包名全部为小写字母，且具有实际的区分意义。
+
+#### Package 一般要求
+
+- 选择有意义的名字，能快速地传达该类的用途。
+- 所有包的命名必须采用小写英文字母。
+
+#### Package 实际应用
+
+应用系统中经常应用分层，Dao 层（数据库访问）、Service 层（业务处理）、Web 层（页面控制 action 类）
+
+- 包名的前几个为固定名称, 如果是网站的话，采用网站的域名的反写，如果域名还没有确定的话，采用公司固定的几个名称。如：net.vschool
+- 在包名的接下来一个单词为模块的名称。如：用户模块，包名为 net.vschool.user
+- 关于模块的访问操作，采用分层形式,一般分为：
+
+Dao 层操作：一般定义在 net.vschool.xxx.dao 中，其中 xxx 为模块名称。  
+Service 层操作：一般定义在 net.vschool.xxx.service 中。  
+web 层操作：一般定义在 net.vschool.xxx.action 中。
+
+> net.vschool.user  
+> net.vschool.user.dao  
+> net.vschool.user.action  
+> net.vschool.user.service
+
+### 类名的书写规范 (Class)
+
+类名必须使用名词，如果一个类名内含多个单词，那么各个单词第一个字母大写，后续字母小写，起伏呈驼峰状，人称驼峰式命名。给类名命名时，必须保证准确、简洁且容易理解。尽量使用完整单词，避免使用缩写词（除了大家公认的）
+类
+
+#### Class 一般要求
+
+- 选择有意义的名字，能快速地传达该类的用途。
+- 参照 java 驼峰命名法，类名的首字母必须采用大写的形式，如果类名为多词组合而成的话，那么每个词的首字母必须采用大写。如：StudentAnswer.java
+- 当要区别接口类和实现类的时候，可以在类的后面加上“Impl”。
+- 推荐实体类没有后缀名。
+- public class 应与.java 文件同名
+
+#### Class 实际应用
+
+应用系统中经常应用分层，Dao 层（数据库访问）、Service 层（业务处理）、Web 层（页面控制 action 类），每一层的类的名称尽量带上该层后缀。
+
+- Dao 层
+  - 接口类：采用 JavaBean+Interface+Dao 的形式来定义,即，实体对象+Interface+Dao
+  - 实现类：采用 JavaBean+Interface+Impl+Dao 的形式来定义,即，实体对象+Interface+Impl+Dao
+- Service 层
+  - 接口类：采用 Xxx+Interface+Service 的形式来定义,即，模块+Interface+Service
+  - 实现类：采用 Xxx+Interface+Impl+Service 的形式来定义,即，模块+Interface+Impl+Service
+- Web 层（action 类）
+
+  - 实现类：采用县 Xxx+Operator+Action 的形式来定义,即，模块+操作+Action
+
+### 变量的命名
+
+#### 普通变量
+
+##### Var 一般要求
+
+- 选择有意义的名字，能快速地传达该变量的用途。
+- 参照 java 驼峰命名法，首字母以小写开头，每个单词首字母大写（第一个单词除外）。
+
+##### Var 实际应用
+
+- 变量命名采用基本结构为 typeVariableName，使用 3 字符前缀来表示数据类型。
+  - 做数组用时，再加前缀-a,如字符串数组：astr，
+  - 自定义类型的变量可以采用本身的名称，把首字母改为小写。
+  - 采用名称要能代表在方法中的意义。如果员工列表：employeeList
+
+| 原词          | 缩写 |
+| :------------ | :--- |
+| byte          | byt  |
+| char          | chr  |
+| float         | flt  |
+| boolean       | bln  |
+| Integer/int   | int  |
+| short         | sht  |
+| Long/long     | lng  |
+| Double/double | dbl  |
+| string        | str  |
+
+##### 变量使用技巧
+
+- 在一段函数中不使用同一个变量表示前后意义不同的两个数值。
+- 除非是在循环中，否则一般不推荐使用单个字母作为变量名，i、j、k 等只作为小型循环的循环索引变量。
+- 避免用 Flag 来命名状态变量。
+- 用 Is 来命名逻辑变量，如：blnFileIsFound。通过这种给布尔变量肯定形式的命名方式，使得其它开发人员能够更为清楚的理解布尔变量所代表的意义。
+- 如果需要对变量名进行缩写时，一定要注意整个代码中缩写规则的一致性。
+  例如，如果在代码的某些区域中使用 intCnt，而在另一些区域中又使用 intCount，就会给代码增加不必要的复杂性.
+  建议变量名中尽量不要出现缩写.
+
+#### 静态变量
+
+- 选择有意义的名字，能快速地传达该变量的用途。
+- 参照 java 驼峰命名法，采用全部大写的形式来书写，对于采用多词合成的变量采用`-`来连接各单词。如：`USER_LIST`
+
+### 方法的命名
+
+#### Method 一般要求
+
+- 选择有意义的名字，能快速地传达该方法的用途。
+- 参照 java 驼峰命名法，首字母以小写开头，每个单词首字母大写（第一个单词除外）。
+
+#### Method 实际应用
+
+- 方法表示一种行为，它代表一种动作，最好是一个动词或者动词词组或者第一个单词为一个动词。
+- 属性方法：以 get/set 开头，其后跟字段名称，字段名称首字母大写。如：getUserName()
+- 数据层方法：只能以 insert（插入）,delete（删除）,update（更新）,select（查找）,count（统计）开头
+  他层方法避免以这个 5 个单词开头，以免造成误解。
+- 服务层方法，根据方法的行为命名，只描述方法的意义，而不采用方法的目的命名.
+  比如系统的添加新用户，用户可以前台注册，也可以管理员后台添加，方法会被重用，所以最好不要用使用 register，采用 add 会更好写.
+  避免使用与 web 层相关的方法.
+- Web 层方法最好是贴近 web 的语言，如 register，login，logout 等方法。

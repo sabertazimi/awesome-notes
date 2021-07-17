@@ -51,4 +51,3 @@ String::~String(void) {
         s = 0;
     }
 }
-

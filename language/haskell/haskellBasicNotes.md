@@ -16,7 +16,7 @@
       - [Double](#double)
       - [Bool](#bool)
       - [Char](#char)
-      - [`[Char]`/String](#charstring)
+      - [String](#string)
       - [Ordering](#ordering)
       - [Word](#word)
       - [Rational](#rational)
@@ -44,9 +44,9 @@
       - [guard 模式 与 where 绑定](#guard-模式-与-where-绑定)
       - [let 绑定](#let-绑定)
       - [case 表达式](#case-表达式)
-  - [Typeclass](#typeclass)
-    - [=>符号](#符号)
-    - [Basic Typeclass](#basic-typeclass)
+  - [Type Class](#type-class)
+    - [=> 符号](#-符号)
+    - [Basic Type Class](#basic-type-class)
       - [Eq](#eq)
       - [Ord](#ord)
       - [Show](#show)
@@ -56,15 +56,15 @@
       - [Num](#num)
       - [Integral](#integral)
       - [Floating](#floating)
-      - [_Functor_](#_functor_)
-      - [Control.Applicative](#controlapplicative)
+      - [_Functor_](#functor)
+      - [Control Applicative](#control-applicative)
         - [Maybe](#maybe)
         - [Collection `[]`](#collection-)
         - [IO](#io)
         - [ZipList](#ziplist)
-        - [多个 functors](#多个-functors)
-        - [高度封装函数: _liftA2_](#高度封装函数-_lifta2_)
-      - [Control.Monad](#controlmonad)
+        - [Multi Functor](#multi-functor)
+        - [高度封装函数](#高度封装函数)
+      - [Control Monad](#control-monad)
         - [Maybe Monad](#maybe-monad)
           - [实现](#实现)
           - [do 表示法](#do-表示法)
@@ -73,8 +73,8 @@
         - [Monad Algorithms](#monad-algorithms)
           - [马走日](#马走日)
       - [Foldable](#foldable)
-      - [Data.Monoid](#datamonoid)
-    - [自定义 Typeclass](#自定义-typeclass)
+      - [Data Monoid](#data-monoid)
+    - [Custom Type Class](#custom-type-class)
     - [`data` type](#data-type)
       - [函数特性](#函数特性)
       - [记录语法(Record Syntax)](#记录语法record-syntax)
@@ -95,14 +95,14 @@
       - [filter 函数](#filter-函数)
       - [fold 函数与 scan 函数](#fold-函数与-scan-函数)
       - [lambda 表达式](#lambda-表达式)
-      - [\$函数](#\函数)
+      - [\$函数](#函数-1)
       - [.函数与 Function composition(函数组合)](#函数与-function-composition函数组合)
     - [常用函数](#常用函数)
       - [无参函数](#无参函数)
       - [前缀函数](#前缀函数)
       - [中缀函数](#中缀函数)
       - [数学函数](#数学函数)
-        - [System.Random](#systemrandom)
+        - [System Random](#system-random)
       - [数字函数](#数字函数)
   - [模块](#模块)
     - [import](#import)
@@ -112,51 +112,49 @@
     - [常用基础模块](#常用基础模块)
       - [Data.List](#datalist)
         - [修正 Prelude 模块](#修正-prelude-模块)
-      - [Data.Char](#datachar)
-      - [Data.Map](#datamap)
-      - [Data.Set](#dataset)
+      - [Data Char](#data-char)
+      - [Data Map](#data-map)
+      - [Data Set](#data-set)
   - [输入与输出](#输入与输出)
     - [IO action](#io-action)
       - [return](#return)
     - [Command Line](#command-line)
-    - [BtyeString](#btyestring)
+    - [ByteString](#bytestring)
     - [常用输入输出函数](#常用输入输出函数)
       - [输出](#输出)
-        - [putChar/putStr/putStrLn](#putcharputstrputstrln)
+        - [Output String](#output-string)
         - [print](#print)
-        - [File/System.IO](#filesystemio)
-          - [writeFile](#writefile)
-          - [appendFile](#appendfile)
+        - [File System IO](#file-system-io)
+          - [Write File](#write-file)
+          - [Append File](#append-file)
       - [输入](#输入)
         - [getChar :: IO Char](#getchar--io-char)
-        - [getContents](#getcontents)
+        - [Get Contents](#get-contents)
         - [File](#file)
           - [handle](#handle)
-          - [withFile](#withfile)
-          - [readFile](#readfile)
+          - [With File](#with-file)
+          - [Read File](#read-file)
       - [Action](#action)
-        - [when](#when)
+        - [When](#when)
         - [sequence](#sequence)
-        - [mapM mapM\_ Control.Monad.forM](#mapm-mapm\_-controlmonadform)
-        - [Control.Monad.forever](#controlmonadforever)
+        - [Map](#map)
+        - [Control Monad forever](#control-monad-forever)
         - [hSetBuffering](#hsetbuffering)
         - [hFlush](#hflush)
       - [Other](#other)
         - [lines](#lines)
         - [interact](#interact)
-        - [System.Directory - removeFile/renameFile](#systemdirectory---removefilerenamefile)
+        - [System Directory](#system-directory)
   - [异常](#异常)
     - [catch](#catch)
   - [Advanced Monad](#advanced-monad)
     - [Writer Monad](#writer-monad)
-      - [Control.Monad.Writer](#controlmonadwriter)
+      - [Control Monad Writer](#control-monad-writer)
     - [Reader Monad](#reader-monad)
     - [State Monad](#state-monad)
-      - [Control.Monad.State](#controlmonadstate)
-      - [Control.Monad.State (MonadState)](#controlmonadstate-monadstate)
-      - [实例](#实例)
+      - [Control Monad State](#control-monad-state)
+      - [State Monad Case](#state-monad-case)
     - [Error Monad](#error-monad)
-    - [Useful Monad Functions](#useful-monad-functions)
       - [liftM](#liftm)
       - [join](#join)
       - [filterM](#filterm)
@@ -165,6 +163,7 @@
     - [Self-Defined Monad](#self-defined-monad)
   - [注释](#注释)
     - [符号](#符号)
+  - [Reference](#reference)
 
 <!-- /TOC -->
 
@@ -187,11 +186,13 @@ atom plugins : language-haskell autocomplete-haskell ide-haskell haskell-ghc-mod
 - :?
 - :k - kind
 - :t - type function
-- :info - data/Typeclass
+- :info - data/TypeClass
 
 ### ghc
 
-`runghc *.hs/*.lhs`
+```bash
+runghc *.hs/*.lhs
+```
 
 ## Unique Mark
 
@@ -261,7 +262,7 @@ True/False
 
 #### Char
 
-#### `[Char]`/String
+#### String
 
 #### Ordering
 
@@ -332,7 +333,7 @@ ghci> drop 100 [1,2,3,4]
 ```
 
 - maximum List 返回最大元素
-- minimun List 返回最小元素
+- minimum List 返回最小元素
 
 - sum List 返回 List 元素和
 - product List 返回 List 元素积
@@ -463,9 +464,9 @@ third (_, _, z) = z
 
 ### 泛型
 
-运用 Type 变量(只可为*单字符*),实现泛型参数与多态函数
+运用 Type 变量(只可为*单字符*), 实现泛型参数与多态函数.
 
-借助 Typeclass 可轻松实现多态函数
+借助 TypeClass 可轻松实现多态函数:
 
 ```haskell
 ghci> :t head
@@ -569,13 +570,13 @@ sum' (x:xs) = x + sum' xs
 - where
   - 可见性: 定义只对本模式可见的(私有)名字与(私有)函数
   - where 定义在最外层,使得各模式共享(私有)名字与(私有)函数
-  - 名字定义时可使用模式匹配 `where (head:_) = firstname`
+  - 名字定义时可使用模式匹配 `where (head:_) = firstName`
 
 ```haskell
 bmiTell :: (RealFloat a) => a -> a -> String
 bmiTell weight height
     | bmi <= skinny = "You're underweight, you emo, you!"
-    | bmi <= normal = "You're supposedly normal. Pffft, I bet you're ugly!"
+    | bmi <= normal = "You're supposedly normal. Pet, I bet you're ugly!"
     | bmi <= fat    = "You're fat! Lose some weight, fatty!"
     | otherwise     = "You're a whale, congratulations!"
     where bmi = weight / height ^ 2
@@ -622,7 +623,7 @@ describeList xs = "The list is " ++ case xs of [] -> "empty."
                                                xs -> "a longer list."
 ```
 
-## Typeclass
+## Type Class
 
 ```haskell
 ghci> :t (==)
@@ -632,12 +633,12 @@ ghci> :t fromIntegral
 fromIntegral :: (Integral a, Num b) => a -> b
 ```
 
-### =>符号
+### => 符号
 
-=>左部: 类约束(Class Constraint)
-=>右部: 函数类型(参数/返回值类型),其中参数类型同属 Class
+=> 左部: 类约束(Class Constraint)
+=> 右部: 函数类型(参数/返回值类型),其中参数类型同属 Class
 
-### Basic Typeclass
+### Basic Type Class
 
 > ghci> :info typeClassName
 
@@ -731,7 +732,7 @@ ghci> :t 20
 - 功能: 成员类型具有数字特征
 - 成员: 浮点型 - Float Double
 
-| typeclass   | method feature          |
+| TypeClass   | Method Feature          |
 | :---------- | :---------------------- |
 | Functor     | f a + (a -> b) -> f b   |
 | Applicative | f a + f (a -> b) -> f b |
@@ -771,7 +772,7 @@ instance Functor IO where
         return (f result)
 ```
 
-#### Control.Applicative
+#### Control Applicative
 
 - 成员: f :: `* -> *` _一元类型构造符(type constructor)_
 - <\*>: 参数为 2 个 functor 实例,其中一个包含一个函数
@@ -781,7 +782,7 @@ instance Functor IO where
 f <$> x = fmap f x
 ```
 
-- 作用: 可以用单一一个函数操作多个 functors
+- 作用: 可以用单一一个函数操作多个 functor
 
 ```haskell
 class (Functor f) => Applicative f where
@@ -825,7 +826,7 @@ instance Applicative ZipList where
         ZipList fs <*> ZipList xs = ZipList (zipWith (\f x -> f x) fs xs)
 ```
 
-##### 多个 functors
+##### Multi Functor
 
 ```haskell
 ghci> pure (+) <*> Just 3 <*> Just 5
@@ -851,9 +852,9 @@ ghci> getZipList $ max <$> ZipList [1,2,3,4,5,3] <*> ZipList [5,3,1,2]
 [5,3,3,4]
 ```
 
-##### 高度封装函数: _liftA2_
+##### 高度封装函数
 
-对两个 applicatives 运用二元函数
+`liftA2`, 对两个 applicative 运用二元函数:
 
 ```haskell
 liftA2 :: (Applicative f) => (a -> b -> c) -> f a -> f b -> f c
@@ -865,7 +866,7 @@ ghci> (:) <$> Just 3 <*> Just [4]
 Just [3,4]
 ```
 
-#### Control.Monad
+#### Control Monad
 
 - 成员: 类型构造符(type constructor)
 
@@ -895,7 +896,7 @@ Nothing
 
 Monad Laws:
 
-- return 满足 Left identity: `retrun x >>= f 等于 f x`
+- return 满足 Left identity: `return x >>= f 等于 f x`
 - return 满足 right identity: `m >>= return 等于 m`
 - Associativity: 结合律 `(m >>= f) >>= g 等于 m >>= (\x -> f x >>= g)`
 
@@ -970,7 +971,7 @@ routine = do
 
 ##### List Monad
 
-- non-detetminism(不确定性)
+- non-determinism(不确定性)
 
 ```haskell
 ghci> (*) <$> [1,2,3] <*> [10,100,1000]
@@ -1074,7 +1075,7 @@ instance F.Foldable Tree where
                                 F.foldMap f r
 ```
 
-#### Data.Monoid
+#### Data Monoid
 
 - 成员: 必须为具体类型(\*不可是类型构造符(type constructor))
 - 准则(Monoid Law):
@@ -1168,7 +1169,7 @@ ghci> getFirst $ First (Just 'a') `mappend` First Nothing
 Just 'a'
 ```
 
-### 自定义 Typeclass
+### Custom Type Class
 
 - 创建新类: _可以只有声明没有实现_
 
@@ -1215,7 +1216,7 @@ instance (Eq m) => Eq (Maybe m) where
 
 ```haskell
 data SelfDefinedTypeName =
-  ValueConstructorName ValueType .. | .. deriving (Typeclass, ..)
+  ValueConstructorName ValueType .. | .. deriving (TypeClass, ..)
 ```
 
 - data 范例
@@ -1577,8 +1578,8 @@ map f (x:xs) = f x : map f xs
 - 如果 map 传入的函数参数的类型为 a -> a -> a,则返回的 List 类型为`[a -> a]`(f x 传参不完全,造成了 Curry 化).
 
 ```haskell
-ghci> let listOfFuns = map (*) [0..]
-ghci> (listOfFuns !! 4) 5
+ghci> let listOfFun = map (*) [0..]
+ghci> (listOfFun !! 4) 5
 20
 ```
 
@@ -1777,7 +1778,7 @@ oddSquareSum =
 “定义”(或者“名字”)
 
 ```haskell
-tazimi = "It's a-me, tazimi!"
+sabertaz = "It's a-me, sabertaz!"
 ```
 
 #### 前缀函数
@@ -1834,7 +1835,7 @@ ghci> [9.4,33.2,96.2,11.2,23.25] !! 1
 - `even arg`
 - `odd arg`
 
-##### System.Random
+##### System Random
 
 - `random :: (RandomGen g, Random a) => g -> (a, g)`
 - getStdGen
@@ -1862,7 +1863,7 @@ import qualified Data.Map
 调用 Map 中的 filter 时,必须使用 Data.Map.filter.
 
 ```haskell
-import quelified Data.Map as M
+import qualified Data.Map as M
 
 Data.Map.filter <-> M.filter
 ```
@@ -2151,8 +2152,8 @@ ghci> let w = "w00t" in zip (inits w) (tails w)
 ```haskell
 search :: (Eq a) => [a] -> [a] -> Bool
 search needle haystack =
-  let nlen = length needle
-  in foldl (\acc x -> if take nlen x == needle then True else acc) False (tails haystack)
+  let nLen = length needle
+  in foldl (\acc x -> if take nLen x == needle then True else acc) False (tails haystack)
 ```
 
 ```haskell
@@ -2353,12 +2354,12 @@ ghci> sortBy (compare `on` length) xs
 [[],[2],[2,2],[1,2,3],[3,5,4,3],[5,4,5,4,4]]
 ```
 
-#### Data.Char
+#### Data Char
 
 - **isControl** 判断一个字符是否是控制字符。
 - **isSpace** 判断一个字符是否是空格字符，包括空格，tab，换行符等.
 - **isLower** 判断一个字符是否为小写.
-- **isUper** 判断一个字符是否为大写。
+- **isUpper** 判断一个字符是否为大写。
 - **isAlpha** 判断一个字符是否为字母.
 - **isAlphaNum** 判断一个字符是否为字母或数字.
 - **isPrint** 判断一个字符是否是可打印的.
@@ -2370,7 +2371,7 @@ ghci> sortBy (compare `on` length) xs
 - **isNumber** 判断一个字符是否为数字.
 - **isPunctuation** 判断一个字符是否为标点符号.
 - **isSymbol**判断一个字符是否为货币符号.
-- **isSeperater** 判断一个字符是否为 unicode 空格或分隔符.
+- **isSeparator** 判断一个字符是否为 unicode 空格或分隔符.
 - **isAscii** 判断一个字符是否在 unicode 字母表的前 128 位。
 - **isLatin1** 判断一个字符是否在 unicode 字母表的前 256 位.
 - **isAsciiUpper** 判断一个字符是否为大写的 ascii 字符.
@@ -2454,7 +2455,7 @@ decode :: Int -> String -> String
 decode shift msg = encode (negate shift) msg
 ```
 
-#### Data.Map
+#### Data Map
 
 ```haskell
 findKey :: (Eq k) => k -> [(k,v)] -> v
@@ -2606,7 +2607,7 @@ ghci> Map.insertWith (+) 3 100 $ Map.fromList [(3,4),(5,103),(6,339)]
 fromList [(3,104),(5,103),(6,339)]
 ```
 
-#### Data.Set
+#### Data Set
 
 内部元素排序且唯一
 
@@ -2722,7 +2723,7 @@ main = do
 - return 功能:将 pure value 包成 I/O actions,不会终止函数/程序
 - return 作用:
   - if condition then I/O action else I/O action
-  - 改变`do block形成的I/O action`的结果值: otherIOaction -> return pureValue
+  - 改变`do block形成的I/O action`的结果值: otherIOAction -> return pureValue
 
 > e.g return "haha" - String -> IO String
 
@@ -2799,12 +2800,12 @@ remove [fileName, numberString] = do
     renameFile tempName fileName
 ```
 
-### BtyeString
+### ByteString
 
 - `Data.ByteString`
 - `Data.ByteString.Lazy`
 
-lazy bytestrings 像装了一堆大小为 64K 的 strict bytestrings 的 list
+lazy byteStrings 像装了一堆大小为 64K 的 strict byteStrings 的 list
 
 ```haskell
 import qualified Data.ByteString.Lazy as B
@@ -2819,7 +2820,9 @@ import qualified Data.ByteString as S
 
 #### 输出
 
-##### putChar/putStr/putStrLn
+##### Output String
+
+`putChar`/`putStr`/`putStrLn`:
 
 ```haskell
 putStr :: String -> IO ()
@@ -2833,16 +2836,16 @@ putStr (x:xs) = do
 
 print = putStrLn . show
 
-##### File/System.IO
+##### File System IO
 
 - `hPutStr`
 - `hPutStrLn`
 
-###### writeFile
+###### Write File
 
 `writefile :: FilePath -> String -> IO ()` - WriteMode, not AppendMode
 
-###### appendFile
+###### Append File
 
 #### 输入
 
@@ -2858,7 +2861,7 @@ main = do
         else return ()
 ```
 
-##### getContents
+##### Get Contents
 
 getContents :: IO String (Lazy I/O) - 内容暂存在文件,需要使用时读取至内存区
 
@@ -2892,7 +2895,7 @@ main = do
     hClose handle
 ```
 
-###### withFile
+###### With File
 
 `withFile :: FilePath -> IOMode -> (Handle -> IO a) -> IO a`
 
@@ -2905,7 +2908,7 @@ main = do
             putStr contents)
 ```
 
-###### readFile
+###### Read File
 
 ```haskell
 contents <- readFile "girlfriend.txt"
@@ -2913,7 +2916,7 @@ contents <- readFile "girlfriend.txt"
 
 #### Action
 
-##### when
+##### When
 
 Control.Monad.when :: (Applicative f) => Bool -> f () -> f ()
 
@@ -2939,7 +2942,9 @@ main = do
     print rs
 ```
 
-##### mapM mapM\_ Control.Monad.forM
+##### Map
+
+mapM, Control.Monad.forM:
 
 = sequence . map
 
@@ -2955,7 +2960,7 @@ ghci> mapM_ print [1,2,3]
 3
 ```
 
-##### Control.Monad.forever
+##### Control Monad forever
 
 接受一个 I/O action 并回传一个永远作同一件事的 I/O action
 
@@ -3019,7 +3024,10 @@ respondPalindromes = unlines . map (\xs ->
         where isPalindrome xs = xs == reverse xs
 ```
 
-##### System.Directory - removeFile/renameFile
+##### System Directory
+
+- removeFile
+- renameFile
 
 ## 异常
 
@@ -3063,11 +3071,11 @@ applyLog (x,log) f = let (y,newLog) = f x in (y,log ++ newLog)
 ```haskell
 ghci> (30, "A freaking platoon.") `applyLog` isBigGang
 (True,"A freaking platoon.Compared gang size to 9")
-ghci> ("Bathcat","Got outlaw name.") `applyLog` (\x -> (length x, "Applied length"))
+ghci> ("BathCat","Got outlaw name.") `applyLog` (\x -> (length x, "Applied length"))
 (7,"Got outlaw name.Applied length")
 ```
 
-#### Control.Monad.Writer
+#### Control Monad Writer
 
 ```haskell
 instance (Monoid w) => Monad (Writer w) where
@@ -3081,8 +3089,8 @@ import Control.Monad.Writer
 logNumber :: Int -> Writer [String] Int
 logNumber x = Writer (x, ["Got number: " ++ show x])
 
-multWithLog :: Writer [String] Int
-multWithLog = do
+multiWithLog :: Writer [String] Int
+multiWithLog = do
     a <- logNumber 3
     b <- logNumber 5
     return (a*b)
@@ -3098,7 +3106,7 @@ instance Monad ((->) r) where
 
 ### State Monad
 
-#### Control.Monad.State
+#### Control Monad State
 
 ```haskell
 newtype State s a = State { runState :: s -> (a,s) }
@@ -3110,14 +3118,12 @@ instance Monad (State s) where
                                     in  g newState
 ```
 
-#### Control.Monad.State (MonadState)
-
 ```haskell
 get = State $ \s -> (s,s)
 put newState = State $ \s -> ((),newState)
 ```
 
-#### 实例
+#### State Monad Case
 
 ```haskell
 import Control.Monad.State
@@ -3128,8 +3134,8 @@ pop = State $ \(x:xs) -> (x,xs)
 push :: Int -> State Stack ()
 push a = State $ \xs -> ((),a:xs)
 
-stackManip :: State Stack Int
-stackManip = do
+stackManipulation :: State Stack Int
+stackManipulation = do
   push 3
   a <- pop
   pop
@@ -3152,10 +3158,6 @@ ghci> strMsg "boom!" :: String
 "boom!"
 ```
 
-### Useful Monad Functions
-
-[HustCSer Repo](https://github.com/HustCSer/learnyouahaskell-zh/blob/online-reading/zh-cn/ch13/for-a-few-monads-more.md)
-
 #### liftM
 
 #### join
@@ -3175,3 +3177,7 @@ ghci> strMsg "boom!" :: String
 - `--` 单行注释
 - `{- -}` 块注释
 - `{-# #-}` (文件头部)编译器参数
+
+## Reference
+
+- [Haskell Book](https://github.com/MnO2/learnyouahaskell-zh)

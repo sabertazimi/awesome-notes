@@ -3,35 +3,34 @@
 <!-- TOC -->
 
 - [Assembly Basic Notes](#assembly-basic-notes)
-  - [GCC/GDB/Kit](#gccgdbkit)
+  - [Tools](#tools)
     - [GCC](#gcc)
     - [GDB](#gdb)
-    - [MASM/LINK/TD](#masmlinktd)
-      - [MASM](#masm)
-      - [LINK](#link)
-      - [TD](#td)
-        - [Basic](#basic)
-        - [Alt](#alt)
-        - [代码区](#代码区)
-        - [数据区](#数据区)
+    - [MASM](#masm)
+    - [LINK](#link)
+    - [TD](#td)
+      - [Basic](#basic)
+      - [Alt](#alt)
+      - [代码区](#代码区)
+      - [数据区](#数据区)
     - [NMAKE](#nmake)
     - [Objdump](#objdump)
   - [位运算](#位运算)
   - [Address](#address)
     - [mov](#mov)
-    - [address](#address)
+    - [address](#address-1)
   - [常用命令](#常用命令)
     - [读取指令](#读取指令)
       - [mov 读取](#mov-读取)
     - [算术命令](#算术命令)
     - [转移命令](#转移命令)
-  - [Control Flow](#control-flow)
-    - [if](#if)
-    - [loop](#loop)
-      - [do/while](#dowhile)
-      - [while/do](#whiledo)
-      - [for](#for)
-    - [switch(**Jump Table**)](#switchjump-table)
+  - [Control Flow Statement](#control-flow-statement)
+    - [If Statement](#if-statement)
+    - [Loop Statement](#loop-statement)
+      - [Do While Statement](#do-while-statement)
+      - [While Do Statement](#while-do-statement)
+      - [For Statement](#for-statement)
+    - [Switch Statement](#switch-statement)
   - [Stack Frame](#stack-frame)
   - [Data Structure](#data-structure)
     - [Arrays](#arrays)
@@ -40,7 +39,7 @@
 
 Load-ALU-Store 模式 - 读入寄存器，算术逻辑单元运算，回写至内存
 
-## GCC/GDB/Kit
+## Tools
 
 ### GCC
 
@@ -58,9 +57,7 @@ Load-ALU-Store 模式 - 读入寄存器，算术逻辑单元运算，回写至�
 - `info register`
 - `x /numsizeformat $pc/rsp/rbp`
 
-### MASM/LINK/TD
-
-#### MASM
+### MASM
 
 ```bash
 masm /Zi/Zd src dist
@@ -68,38 +65,38 @@ masm /I(path)           // 引用 标准库/宏
 masm /I..\include
 ```
 
-#### LINK
+### LINK
 
 ```bash
 link /DEBUG src
 ```
 
-#### TD
+### TD
 
 - `tab` 切换分区
 - `alt` 功能键
 - `ctrl` 子功能键
 
-##### Basic
+#### Basic
 
 - `F2`: break
 - `F7`: step into
 - `F8`: step over
 
-##### Alt
+#### Alt
 
 - `Alt+F5` : 临时跳转至 dos 界面
 - `Alt+Enter`: 全屏
 - `Alt+X` : 退出
 
-##### 代码区
+#### 代码区
 
 - `<C-A>` Assemble: 临时修改汇编指令
 - `<C-C>` Caller : 从子程序处跳回至 Caller 处
 - `<C-F>` Follow : 查看 CALL/JMP/INT 跳转至的子程序处
 - `<C-O>` Origin : 跳转至 cs:ip 指向指令处
 
-##### 数据区
+#### 数据区
 
 - `<C-C>` Change: 临时修改数据
 - `<C-D>` Display: 选择显示格式 e.g Byte/Word/Long/Comp/Float/Real/Double/Extended
@@ -185,7 +182,7 @@ R1 = MEM[SP + 8]
 - Flags
 
   - CF：Carry Flag(unsigned) 进位标志——当有进位时设为 1
-  - OF：OverFolw Flag(signed) 溢出标志——当补码溢出时设为 1
+  - OF：OverFlow Flag(signed) 溢出标志——当补码溢出时设为 1
   - SF：Sign Flag(signed) 符号标志——当 t<0 时设为 1
   - ZF：Zero Flag 零标志——当 t==0 时设为 1
 
@@ -202,22 +199,24 @@ R1 = MEM[SP + 8]
 - setX 命令 根据标志寄存器运算值，将值存入 dest
   `setX dest`
 
-## Control Flow
+## Control Flow Statement
 
-### if
+### If Statement
 
 `cmovC src, dest`(C 表示 Conditional——e/ne 等)
 当条件成立时，src->dest src 与 dest 可分别用于存放两种情况的值
 
-### loop
+### Loop Statement
 
-#### do/while
+#### Do While Statement
 
-#### while/do
+#### While Do Statement
 
-#### for
+#### For Statement
 
-### switch(**Jump Table**)
+### Switch Statement
+
+**Jump Table**:
 
 `break; → leave`
 `ret`

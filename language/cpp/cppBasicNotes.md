@@ -20,7 +20,7 @@
   - [联合(union)](#联合union)
     - [位段](#位段)
   - [函数](#函数)
-    - [参数的默认值(defalut)](#参数的默认值defalut)
+    - [Default Params](#default-params)
     - [内联函数(inline)](#内联函数inline)
   - [类](#类)
     - [访问控制权限](#访问控制权限)
@@ -30,20 +30,20 @@
       - [默认无参构造函数](#默认无参构造函数)
       - [构造顺序](#构造顺序)
       - [深拷贝构造函数](#深拷贝构造函数)
-      - [move constructor](#move-constructor)
+      - [Move Constructor](#move-constructor)
     - [析构函数](#析构函数)
     - [构造与析构(重点)(P148)](#构造与析构重点p148)
       - [派生树](#派生树)
-    - [`new` 与 `delete`/`delete []`](#new-与-deletedelete-)
-      - [stack 与 heap](#stack-与-heap)
+    - [New and Delete](#new-and-delete)
+      - [Stack and Heap](#stack-and-heap)
       - [指针成员](#指针成员)
-    - [this 指针](#this-指针)
+    - [This Pointer](#this-pointer)
     - [成员指针 与 指针成员](#成员指针-与-指针成员)
       - [成员指针 - 指向成员的指针](#成员指针---指向成员的指针)
       - [定义含指针成员的类](#定义含指针成员的类)
     - [函数成员](#函数成员)
-      - [const/volatile 关键字](#constvolatile-关键字)
-      - [mutable 关键字](#mutable-关键字)
+      - [Const and Volatile Member](#const-and-volatile-member)
+      - [Mutable Member](#mutable-member)
     - [静态成员](#静态成员)
       - [静态数据成员](#静态数据成员)
         - [static member 特性](#static-member-特性)
@@ -84,20 +84,20 @@
     - [Container](#container)
       - [unordered_map container](#unordered_map-container)
       - [Container Choosing](#container-choosing)
-      - [empty/size](#emptysize)
-      - [assign/insert/erase](#assigninserterase)
-      - [erase/remove](#eraseremove)
-      - [reserve/swap](#reserveswap)
+      - [List Size](#list-size)
+      - [List Manipulation](#list-manipulation)
+      - [List Remove](#list-remove)
+      - [List Reserve and Swap](#list-reserve-and-swap)
     - [Heap Algorithm](#heap-algorithm)
     - [Sorting Algorithms](#sorting-algorithms)
     - [Partitioning Algorithms](#partitioning-algorithms)
     - [Permutation Algorithms](#permutation-algorithms)
     - [Numeric Algorithms](#numeric-algorithms)
     - [Query Algorithms](#query-algorithms)
-      - [Equal STL Algo](#equal-stl-algo)
-    - [Search Algortihms](#search-algortihms)
-      - [Find STL Algo](#find-stl-algo)
-    - [Set Algortihms](#set-algortihms)
+      - [Equal STL Algorithm](#equal-stl-algorithm)
+    - [Search Algorithms](#search-algorithms)
+      - [Find STL Algorithms](#find-stl-algorithms)
+    - [Set Algorithms](#set-algorithms)
     - [Mover Algorithms](#mover-algorithms)
     - [Value Algorithms](#value-algorithms)
     - [Functional Algorithms](#functional-algorithms)
@@ -274,7 +274,7 @@ class/struct/union 都可定义位段成员, 但类型必须为 char/short/int/e
 
 ## 函数
 
-### 参数的默认值(defalut)
+### Default Params
 
 - 不能在 **函数原型声明** 与 **函数定义** 中 **同时** 定义参数的默认值,会产生默认值冲突
 - 所有缺省参数必须位于参数列表右边
@@ -367,13 +367,13 @@ ARRAY::ARRAY(ARRAY &r) {
 }
 ```
 
-#### move constructor
+#### Move Constructor
 
 ```cpp
 class A {
   A(const A&& a) {
     // move constructor
-    // set a == nullptr
+    // set a == null_ptr
   }
 }
 ```
@@ -440,9 +440,9 @@ String::~String() {
 - 一个对象/对象成员一颗单独的派生树
 - 单独的派生树中, 合并同名虚基类, 不合并同名基类, 并 { name(type), ...} 标示数据成员
 
-### `new` 与 `delete`/`delete []`
+### New and Delete
 
-#### stack 与 heap
+#### Stack and Heap
 
 - string str("sabertazimi") 创建在栈上, 自动析构
 - new/malloc 返回堆指针, delete/free 的对象是**堆指针**/**(&引用变量)**, 完全由程序员管理创建与回收
@@ -463,7 +463,7 @@ delete &q;  // address of x
   不能用 malloc/free(只作用于对象本身,不调用构造/析构函数,即不为指针成员分配/回收内存), 否则会造成**指针成员**未分配内存/内存泄露
 - new 对象数组实质: malloc 对象 + 调用对象无参构造函数
 
-### this 指针
+### This Pointer
 
 普通函数成员比**静态函数**成员多一个隐含参数 this 指针, 其会随着函数类型的不同而改变类型
 
@@ -504,13 +504,13 @@ x = (long)pi;       ///< Error: pi 不能转换为 long int
 
 ### 函数成员
 
-#### const/volatile 关键字
+#### Const and Volatile Member
 
 - 修饰函数成员隐含参数 \* this 对象指针,表示不可修改/挥发对象
 - 被修饰函数成员不能修改对象自身(即对象的**普通数据成员**), 可以修改对象的**非只读静态**数据成员
 - 构造函数/析构函数不可被 const/volatile 修饰: 在构造/析构函数中, 对象必须可以被修改(No const), 且处于稳定状态(No volatile)
 
-#### mutable 关键字
+#### Mutable Member
 
 - mutable 不可修饰引用成员
 - mutable 成员不可用 const/volatile/static 修饰
@@ -863,11 +863,11 @@ return (alias != m_aliases.end() && alias->second == command);
 - Vector vs Set/Map:
   use Set/Map when container is large
 
-#### empty/size
+#### List Size
 
 list.empty() 优于 list.size() == 0
 
-#### assign/insert/erase
+#### List Manipulation
 
 ```cpp
 void container::insert(InputIterator begin, InputIterator end);
@@ -884,7 +884,7 @@ v1.assign(v2.begin() + v2.size() / 2, v2.end());
 v1.insert(v1.end(), v2.begin() + v2.size() / 2, v2.end())   // 将 v2 一半元素插入 v1 尾部
 ```
 
-#### erase/remove
+#### List Remove
 
 - 对于连续内存容器 vector/string/deque:
 
@@ -910,7 +910,7 @@ c.remove_if(badValue);  // higher order function
 c.erase(1963);
 ```
 
-#### reserve/swap
+#### List Reserve and Swap
 
 ```cpp
 v.reserve(1000);    // 强制分配 1000 个元素内存单元, 防止反复回收/释放, 提高执行效率
@@ -991,7 +991,7 @@ lexicographical_compare
 mismatch
 ```
 
-#### Equal STL Algo
+#### Equal STL Algorithm
 
 ```cpp
 template<class InputIt1, class InputIt2>
@@ -1027,7 +1027,7 @@ bool is_palindrome(const std::string& s) {
 }
 ```
 
-### Search Algortihms
+### Search Algorithms
 
 ```cpp
 search
@@ -1047,7 +1047,7 @@ max_element
 minmax_element
 ```
 
-#### Find STL Algo
+#### Find STL Algorithms
 
 ```cpp
 template<class InputIterator, class T>
@@ -1065,7 +1065,7 @@ auto it = std::find_if(begin(g_register_descriptors), end(g_register_descriptors
                       [r](auto&& rd) { return rd.r == r; });
 ```
 
-### Set Algortihms
+### Set Algorithms
 
 ```cpp
 set_difference

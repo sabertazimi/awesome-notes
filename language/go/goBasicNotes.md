@@ -30,10 +30,10 @@
   - [Function](#function)
     - [Parameters and Return Value](#parameters-and-return-value)
     - [Methods](#methods)
-      - [Pointer/Value Receiver](#pointervalue-receiver)
+      - [Receiver](#receiver)
     - [Interface](#interface)
       - [值](#值)
-      - [Type assetions](#type-assetions)
+      - [Type Assertions](#type-assertions)
   - [Concurrent](#concurrent)
     - [goroutine](#goroutine)
     - [channels](#channels)
@@ -474,7 +474,7 @@ func main() {
     fmt.Println(f.Abs())
 ```
 
-#### Pointer/Value Receiver
+#### Receiver
 
 - pointer receiver: 可以改变原值(call by reference)
 - value receive: 不可以改变原值(call by value)
@@ -515,7 +515,7 @@ i = t   // => (nil, *T)
 var i I     // => (nil, nil)
 ```
 
-#### Type assetions
+#### Type Assertions
 
 - 单返回值: 断言失败时产生 panic
 - 双返回值: 断言失败时不产生 panic
@@ -548,13 +548,13 @@ switch v := i.(type) {
 ### goroutine
 
 ```go
-go f(x, y, z)   // => excute in a new goroutine with share memory
+go f(x, y, z)   // => execute in a new goroutine with share memory
 ```
 
 ### channels
 
 - typed conduit(类型管道)
-- block excution
+- block execution
 
 ```go
 var c chan int = make(chan int)

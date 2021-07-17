@@ -10,27 +10,27 @@
     - [Synthesize Design](#synthesize-design)
     - [Implement Design](#implement-design)
     - [Post-Implementation Timing Simulate Design](#post-implementation-timing-simulate-design)
-    - [Generate Bitstream](#generate-bitstream)
+    - [Generate Bit Stream](#generate-bit-stream)
     - [Testing and Verification](#testing-and-verification)
   - [Timing in Circuits](#timing-in-circuits)
-    - [Combinational Circuit Timing](#combinational-circuit-timing)
+    - [Combination Circuit Timing](#combination-circuit-timing)
     - [Sequential Circuit Timing](#sequential-circuit-timing)
   - [Key Words](#key-words)
   - [Module](#module)
     - [外部端口](#外部端口)
   - [function](#function)
     - [task](#task)
-  - [Variable/Data Structure](#variabledata-structure)
+  - [Data Structure](#data-structure)
     - [常量](#常量)
     - [向量](#向量)
       - [部分位选](#部分位选)
     - [数字](#数字)
       - [有符号数](#有符号数)
       - [无符号数](#无符号数)
-    - [Register - reg/integer/time/real/realtime](#register---regintegertimerealrealtime)
+    - [Register](#register)
       - [integer](#integer)
       - [real](#real)
-    - [Net - wire/wand/wor](#net---wirewandwor)
+    - [Net](#net)
   - [Gate Level](#gate-level)
     - [Basic Gate](#basic-gate)
     - [Use Gate](#use-gate)
@@ -45,23 +45,22 @@
     - [语句内/间控制](#语句内间控制)
     - [always](#always)
     - [if-else](#if-else)
-    - [case/casex/casez](#casecasexcasez)
+    - [Case Statement](#case-statement)
     - [for](#for)
     - [repeat loop](#repeat-loop)
     - [forever loop](#forever-loop)
-    - [force/release](#forcerelease)
-    - [Blocking/Non-Blocking](#blockingnon-blocking)
+    - [Force and Release](#force-and-release)
+    - [Blocking and Non-Blocking](#blocking-and-non-blocking)
     - [disable](#disable)
   - [结构建模](#结构建模)
     - [generate 语句](#generate-语句)
   - [Delay(时延)](#delay时延)
   - [预编译指令](#预编译指令)
     - [define 宏](#define-宏)
-    - [默认未连接端口](#默认未连接端口)
   - [Data Path](#data-path)
     - [Multiplexer](#multiplexer)
     - [Adder](#adder)
-    - [Register](#register)
+    - [Register Data Path](#register-data-path)
     - [Memory](#memory)
   - [Demos](#demos)
     - [Binary Multiplier](#binary-multiplier)
@@ -76,7 +75,7 @@
       - [Test Bench](#test-bench)
   - [有限状态机(FSM)](#有限状态机fsm)
   - [算术状态机(ASM)](#算术状态机asm)
-  - [SystemVerilog](#systemverilog)
+  - [System Verilog](#system-verilog)
     - [Enum](#enum)
     - [Struct and Union](#struct-and-union)
     - [Procedural Block](#procedural-block)
@@ -88,9 +87,9 @@
       - [TLP](#tlp)
     - [U280 Tools](#u280-tools)
       - [GDB Based Debugging](#gdb-based-debugging)
-      - [xclbinutil](#xclbinutil)
-      - [xocc xp flag](#xocc-xp-flag)
-      - [xbutil](#xbutil)
+      - [XCL Binary Util](#xcl-binary-util)
+      - [XOCC](#xocc)
+      - [XBUtil](#xbutil)
       - [dmesg](#dmesg)
       - [ILA Trigger](#ila-trigger)
   - [AXI Protocol](#axi-protocol)
@@ -139,7 +138,7 @@ Schematic
 
 ### Post-Implementation Timing Simulate Design
 
-### Generate Bitstream
+### Generate Bit Stream
 
 ### Testing and Verification
 
@@ -149,15 +148,15 @@ low-level (circuit) simulation is much slower than high-level (C, HDL) simulatio
 - check only timing, power at low level (circuit)
 
 ```verilog
-module testbench();
+module testBench();
   reg         clk, reset;           // clock and reset are internal
-  reg         a, b, c, yexpected;   // values from testvectors
+  reg         a, b, c, yExpected;   // values from testVectors
   wire        y;                    // output of circuit
-  reg  [31:0] vectornum, errors;    // bookkeeping variables
-  reg  [3:0]  testvectors[10000:0]; // array of testvectors
+  reg  [31:0] vectorNum, errors;    // bookkeeping variables
+  reg  [3:0]  testVectors[10000:0]; // array of testVectors
 
   // instantiate device under test
-  sillyfunction dut(.a(a), .b(b), .c(c), .y(y) );
+  sillyFunction dut(.a(a), .b(b), .c(c), .y(y) );
 
   // generate clock
   always     // no sensitivity list, so it always executes
@@ -168,36 +167,36 @@ module testbench();
   // at start of test, load vectors and pulse reset
   initial   // Only executes once
   begin
-    $readmemb("example.tv", testvectors); // Read vectors: e.g 000_0 001_1 ... xxx_x
-    vectornum = 0; errors = 0;            // Initialize
+    $readmemb("example.tv", testVectors); // Read vectors: e.g 000_0 001_1 ... xxx_x
+    vectorNum = 0; errors = 0;            // Initialize
     reset = 1; #27; reset = 0;            // Apply reset wait
   end
 
-  // Note: $readmemh reads testvector files written in
+  // Note: $readmemh reads testVector files written in
   // hexadecimal
   // apply test vectors on rising edge of clk
   always @(posedge clk)
   begin
-    #1; {a, b, c, yexpected} = testvectors[vectornum];
+    #1; {a, b, c, yExpected} = testVectors[vectorNum];
   end
 
   always @(negedge clk)
   begin
     if (~reset) // don’t test during reset
     begin
-      if (y !== yexpected)
+      if (y !== yExpected)
       begin
         $display("Error: inputs = %b", {a, b, c});
-        $display("  outputs = %b (%b exp)",y,yexpected);
+        $display("  outputs = %b (%b exp)",y,yExpected);
         errors = errors + 1;
       end
 
-      // increment array index and read next testvector
-      vectornum = vectornum + 1;
+      // increment array index and read next testVector
+      vectorNum = vectorNum + 1;
 
-      if (testvectors[vectornum] === 4'bx)
+      if (testVectors[vectorNum] === 4'bx)
       begin
-        $display("%d tests completed with %d errors", vectornum, errors);
+        $display("%d tests completed with %d errors", vectorNum, errors);
         $finish;                 // End simulation
       end
     end
@@ -207,7 +206,7 @@ endmodule
 
 ## Timing in Circuits
 
-### Combinational Circuit Timing
+### Combination Circuit Timing
 
 - contamination delay (`t_cd`): minimum path in circuits, outputs start to change
 - propagation delay (`t_pd`): maximum path in circuits, outputs complete change
@@ -266,7 +265,7 @@ module moduleName( In1, In2, Out1, Out2, InOut1);
     // assign - dataflow level
     assign #2 Out1 = In1 & In2;
     // always/initial - behavior level
-    allways @(*)
+    always @(*)
         begin
             Out2 = In1 & In2
         end
@@ -365,14 +364,14 @@ endmodule
 
 常用的 task 有: $display("fmt", ...), $monitor("fmt", ...), $time, $finish
 
-## Variable/Data Structure
+## Data Structure
 
 ### 常量
 
 - 0: 逻辑 0
 - 1: 逻辑 1
-- x/X: Unknow/Floating
-- z/Z: 高阻抗状态(High Impendence)
+- x/X: Unknown/Floating
+- z/Z: 高阻抗状态(High Impedance)
 - parameter: #define
 
 ```verilog
@@ -455,8 +454,9 @@ Num = 4'bz01;               // 前两位为z, 后两位为01
 - wire
 - 'xx
 
-### Register - reg/integer/time/real/realtime
+### Register
 
+- reg/integer/time/real/realtime
 - 有记忆性
 - 默认值: x
 
@@ -477,8 +477,9 @@ always @(posedge CLK)
 - real 默认值为 0,不可为 x/z
 - 不可声明位宽
 
-### Net - wire/wand/wor
+### Net
 
+- wire/wand/wor
 - 局部变量, 没有记忆性
 - 默认值: z
 - wire 间不可直接相连, wand/wor 间课直接相连
@@ -537,11 +538,11 @@ and #(1, 2) u0and [NUM_BITS - 1: 0] (gated_d, din, bypass);
 - `-` 表示 值"无变化"
 
 ```verilog
-primitive XOR2 (DOUT, X1, X2);
+primitive XOR2 (D_OUT, X1, X2);
     input X1, X2;
-    output DOUT;
+    output D_OUT;
 
-    table // X1 X2 : DOUT
+    table // X1 X2 : D_OUT
         0 0 : 0;
         0 1 : 1;
         1 0 : 1;
@@ -554,7 +555,9 @@ endprimitive
 
 - assign net = net/reg: **左式只能是 net**
 
-### [Operators](https://hom-wang.gitbooks.io/verilog-hdl/content/Chapter_04.html)
+### Operators
+
+- [Operators List](https://hom-wang.gitbooks.io/verilog-hdl/content/Chapter_04.html)
 
 ```verilog
 赋值: <=, =
@@ -643,7 +646,7 @@ else
     end
 ```
 
-### case/casex/casez
+### Case Statement
 
 - expr: 常量/变量/连接运算符{ }/x/z
 - casex: 当输入某一位为 x/z 时，忽略此位匹配(恒将此位匹配为真)
@@ -684,12 +687,12 @@ for (循环初值; 循环条件; 控制部分)
 
 ```verilog
 // 重复事件控制:
-// 先计算好右值, 等待时钟 tclk 上出现2个负跳变沿, 再把右值赋给 hresult
-hresult = repeat (2) @(negedge tclk) hw_data + hr_data;
+// 先计算好右值, 等待时钟 clk 上出现2个负跳变沿, 再把右值赋给 result
+result = repeat (2) @(negedge clk) hw_data + hr_data;
 
 // repeat 循环语句:
 repeat (2)
-    @(posedge tclk) hresult = hw_data + hr_data;
+    @(posedge clk) result = hw_data + hr_data;
 ```
 
 ```verilog
@@ -698,10 +701,10 @@ initial begin
 
     repeat(4095) @(posedge clk); // bring DAC right up to point of rollover
     inc_DAC = 1’b0;
-    inc_smpl = 1’b1;
+    inc_sym = 1’b1;
 
     repeat(7)@(posedge clk); // bring sample count up to 7
-    inc_smpl = 1’b0;
+    inc_sym = 1’b0;
 end
 
 initial begin
@@ -712,22 +715,22 @@ end
 ### forever loop
 
 ```verilog
-// $stop, $finish 可以终止 forevr loop
+// $stop, $finish 可以终止 forever loop
 forever #10 clk = ~ clk;
 ```
 
-### force/release
+### Force and Release
 
 ```verilog
 initial
     begin
-        force test_reset = penable & rtc_intr;
+        force test_reset = penalty & rtc_intr;
         #5;
         release test_reset;
     end
 ```
 
-### Blocking/Non-Blocking
+### Blocking and Non-Blocking
 
 - Blocking(=): 顺序执行
 - Non-Blocking(<=): 并行执行
@@ -761,14 +764,14 @@ end
 ```verilog
 generate
     for (gv_i = 0; gv_i < SIZE; gv_i = gv_i + 1)
-        begin: sblka
+        begin: blk
             xor uxor (y[gv_i], a[gv_i], b[gv_i]);
         end
 endgenerate
 // =>
-// module.sblka[0].uxor
-// module.sblka[1].uxor
-// module.sblka[2].uxor
+// module.blk[0].uxor
+// module.blk[1].uxor
+// module.blk[2].uxor
 // ...
 ```
 
@@ -789,29 +792,13 @@ sum = (a ^ b) ^ cin;
 
 将多个 define 宏,放至 \_defines.v, 作为全局宏
 
-### 默认未连接端口
-
-```verilog
-`unconnected_drive pull1
-
-// 此区间未连接输入端口为上拉(1)
-
-`nounconnected_drive
-
-`unconnected_drive pull0
-
-// 此区间未连接输入端口为下拉(0)
-
-`nounconnected_drive
-```
-
 ## Data Path
 
 ### Multiplexer
 
 ### Adder
 
-### Register
+### Register Data Path
 
 ### Memory
 
@@ -820,7 +807,7 @@ sum = (a ^ b) ^ cin;
 
 ## Demos
 
-- [gitbooks.io](https://hom-wang.gitbooks.io/verilog-hdl/content/Chapter_07.html)
+- [GitBook](https://hom-wang.gitbooks.io/verilog-hdl/content/Chapter_07.html)
 - [Xilinx Lab](http://www.xilinx.com/support/university/ise/ise-teaching-material/hdl-design.html)
 
 ### Binary Multiplier
@@ -892,10 +879,10 @@ end
     assign DT1 = ...;
 
     always @(DT0) begin
-        Aout <= DT0;
+        AOut <= DT0;
     end
     always @(DT1) begin
-        Bout <= DT1;
+        BOut <= DT1;
     end
 ```
 
@@ -989,7 +976,7 @@ end
 - conditional box: mealy fsm
 - decision box: `x_input` = 0/1
 
-## SystemVerilog
+## System Verilog
 
 ### Enum
 
@@ -1008,7 +995,7 @@ initial $display("The color is %s", my_color.name());
 typedef struct packed {
   bit [10:0]  expo;
   bit         sign;
-  bit [51:0]  mant;
+  bit [51:0]  man;
 } FP;
 
 FP zero = 64'b0;
@@ -1037,7 +1024,7 @@ always_latch
 ### Interface
 
 ```verilog
-interface intf;
+interface interfaceName;
   logic a;
   logic b;
   modport in (input a, output b);
@@ -1045,15 +1032,15 @@ interface intf;
 endinterface
 
 module top;
-  intf i ();
+  interfaceName i ();
   u_a m1 (.i1(i));
   u_b m2 (.i2(i));
 endmodule
 
-module u_a (intf.in i1);
+module u_a (interfaceName.in i1);
 endmodule
 
-module u_b (intf.out i2);
+module u_b (interfaceName.out i2);
 endmodule
 ```
 
@@ -1061,7 +1048,7 @@ endmodule
 
 ```verilog
 module top;
-  integer num_pkts = $random;
+  integer num_packets = $random;
   reg A, B, C, clk, reset_n;
   wire D;
   register_logic dut(A, B, C, clk, reset_n, D);
@@ -1077,7 +1064,7 @@ module top;
     reset_n  = 1;
     #20 reset_n = 0;
     @(posedge clk) reset_n <= #1 1;
-    repeat (num_pkts) begin
+    repeat (num_packets) begin
       A = $random; B = $random; C = $random;
       @(posedge clk);
       $display(A, B, C, D);
@@ -1113,7 +1100,7 @@ endclass: Packet_da_3
 class Generator;
   Packet pkt;
   Channel out_chan;
-  int num_pkts;
+  int num_packets;
 
   function void gen();
     pkt = new():
@@ -1122,7 +1109,7 @@ class Generator;
   endfunction
 
   task run();
-    while (num_pkts-- != 0)
+    while (num_packets-- != 0)
       gen();
   endtask
 endclass
@@ -1157,8 +1144,8 @@ module top;
     gen.out_chan = chan;
     drv.in_chan = chan;
 
-    cfg.randomize() with { num_pkts > 1500; }
-    gen.num_pkts = cfg.num_pkts;
+    cfg.randomize() with { num_packets > 1500; }
+    gen.num_packets = cfg.num_packets;
   endtask
 
   task run();
@@ -1177,7 +1164,7 @@ endmodule
 -xp param (clock frequency etc.)
 -R report level
 -slr SLR region setting
--sp meomry resources mapping
+-sp memory resources mapping
 ```
 
 tools:
@@ -1198,10 +1185,10 @@ tools:
 
 ```cpp
 uint32_t *a, *b, *c, *d = NULL;
-posix_memalign((void **)&a, 4096, BUFSIZE * sizeof(uint32_t));
-posix_memalign((void **)&b, 4096, BUFSIZE * sizeof(uint32_t));
-posix_memalign((void **)&c, 4096, BUFSIZE * sizeof(uint32_t));
-posix_memalign((void **)&d, 4096, BUFSIZE * sizeof(uint32_t));
+posix_memalign((void **)&a, 4096, BUF_SIZE * sizeof(uint32_t));
+posix_memalign((void **)&b, 4096, BUF_SIZE * sizeof(uint32_t));
+posix_memalign((void **)&c, 4096, BUF_SIZE * sizeof(uint32_t));
+posix_memalign((void **)&d, 4096, BUF_SIZE * sizeof(uint32_t));
 ```
 
 - release resources for proper performance profile report
@@ -1232,16 +1219,16 @@ xprint mem [<cl_mem>]
 xprint kernel
 xprint all
 xstatus all
-xstatus --<ipname>
+xstatus --<ipName>
 ```
 
-#### xclbinutil
+#### XCL Binary Util
 
 ```bash
 xclbinutil -i binary_container_1.xclbin --info
 ```
 
-#### xocc xp flag
+#### XOCC
 
 Checking out-of-bound access made by kernel interface buffers (option: address)
 and uninitialized memory access initiated by kernel local to kernel (option: memory).
@@ -1252,7 +1239,7 @@ xocc -l –t sw_emu --xp param:compiler.fsanitize=memory -o bin_kernel.xclbin
 xocc -l –t sw_emu --xp param:compiler.fsanitize=address,memory -o bin_kernel.xclbin
 ```
 
-#### xbutil
+#### XBUtil
 
 ```bash
 sudo /opt/xilinx/xrt/bin/xbutil flash -a <shell_name> # flash the firmware
@@ -1279,11 +1266,11 @@ xbutil status --lapc # check AXI violations
 
 ```cpp
 ....
-std::string binaryFile = xcl::find_binary_file(device_name,"vadd");
+std::string binaryFile = xcl::find_binary_file(device_name,"vAdd");
 cl::Program::Binaries bins = xcl::import_binary_file(binaryFile);
 devices.resize(1);
 cl::Program program(context, devices, bins);
-cl::Kernel krnl_vadd(program,"krnl_vadd_rtl");
+cl::Kernel kernel_vAdd(program,"kernel_vAdd_rtl");
 
 // wait_for_enter("\nPress ENTER to continue after setting up ILA trigger...");
 std::cout << "Pausing to arm ILA trigger. Hit enter here to resume host program..."
@@ -1307,7 +1294,7 @@ q.enqueueMigrateMemObjects(inBufVec,0/* 0 means from host*/);
 // ...
 
 //Launch the Kernel
-q.enqueueTask(krnl_vadd);
+q.enqueueTask(kernel_vAdd);
 ```
 
 ## AXI Protocol
@@ -1400,7 +1387,7 @@ burst length = AxLEN[7:0] + 1 (up to 256 transfers in each burst)
  * @brief simple clock divider
  * @param DATA_WIDTH data width
  * @input clk_src clock signal
- * @ouput clk_group divided clock signals
+ * @output clk_group divided clock signals
  */
 module tick_divider
 #(parameter DATA_WIDTH = 32)
@@ -1429,7 +1416,7 @@ endmodule
  * @brief raw data to segment encoder
  * @param DATA_WIDTH data width
  * @input data raw decimal data (4 bit)
- * @output seg_data bit data for cnodes
+ * @output seg_data bit data for cNodes
  */
 module integer_to_segment
 (
@@ -1469,7 +1456,7 @@ endmodule
  * @brief raw data to segment encoder
  * @param DATA_WIDTH data width
  * @input data raw decimal data
- * @output seg_data bit data for cnodes
+ * @output seg_data bit data for cNodes
  */
 module data_to_segment
 #(parameter DATA_WIDTH = 32)
@@ -1526,20 +1513,20 @@ endmodule
  * @module led_unit
  * @author sabertazimi
  * @email sabertazimi@gmail.com
- * @brief led display module (bind to anodes and cnodes in FPGA)
+ * @brief led display module (bind to aNodes and cNodes in FPGA)
  * @param DATA_WIDTH data width
  * @input clk_src clock signal (light different led on in round turn)
  * @input led_data raw decimal data
- * @output anodes determine which led light on at now
- * @output cnodes determine how led light on (number)
+ * @output aNodes determine which led light on at now
+ * @output cNodes determine how led light on (number)
  */
 module led_unit
 #(parameter DATA_WIDTH = 32)
 (
     input clk_src,
     input [(DATA_WIDTH-1):0] led_data,
-    output reg [7:0] anodes,
-    output reg [7:0] cnodes
+    output reg [7:0] aNodes,
+    output reg [7:0] cNodes
 );
 
     reg [2:0] count; // 2^3 = 8
@@ -1547,8 +1534,8 @@ module led_unit
 
     initial begin
         count <= 0;
-        anodes <= 0;
-        cnodes <= 0;
+        aNodes <= 0;
+        cNodes <= 0;
     end
 
     data_to_segment #(
@@ -1565,40 +1552,40 @@ module led_unit
     always @(count) begin
         case (count)
             3'b000: begin
-            anodes = 8'b11111110;
-            cnodes = seg_data[7:0];
+            aNodes = 8'b11111110;
+            cNodes = seg_data[7:0];
         end
         3'b001: begin
-            anodes = 8'b11111101;
-            cnodes = seg_data[15:8];
+            aNodes = 8'b11111101;
+            cNodes = seg_data[15:8];
         end
         3'b010:  begin
-            anodes = 8'b11111011;
-            cnodes = seg_data[23:16];
+            aNodes = 8'b11111011;
+            cNodes = seg_data[23:16];
         end
         3'b011: begin
-            anodes = 8'b11110111;
-            cnodes = seg_data[31:24];
+            aNodes = 8'b11110111;
+            cNodes = seg_data[31:24];
         end
         3'b100: begin
-            anodes = 8'b11101111;
-            cnodes = seg_data[39:32];
+            aNodes = 8'b11101111;
+            cNodes = seg_data[39:32];
         end
         3'b101: begin
-            anodes = 8'b11011111;
-            cnodes = seg_data[47:40];
+            aNodes = 8'b11011111;
+            cNodes = seg_data[47:40];
         end
         3'b110: begin
-            anodes = 8'b10111111;
-            cnodes = seg_data[55:48];
+            aNodes = 8'b10111111;
+            cNodes = seg_data[55:48];
         end
         3'b111: begin
-            anodes = 8'b01111111;
-            cnodes = seg_data[63:56];
+            aNodes = 8'b01111111;
+            cNodes = seg_data[63:56];
         end
         default: begin
-            anodes = 8'b11111110;
-            cnodes = 8'b11111111;
+            aNodes = 8'b11111110;
+            cNodes = 8'b11111111;
         end
         endcase
     end
@@ -1648,7 +1635,7 @@ endmodule // counter
  * @module latch_counter
  * @author sabertazimi
  * @email sabertazimi@gmail.com
- * @brief latch counter (latching when reaching max vlaue)
+ * @brief latch counter (latching when reaching max value)
  * @input clk clock signal
  * @input rst reset signal
  * @output en enable signal
@@ -1692,7 +1679,7 @@ endmodule // latch_counter
  * @param DATA_WIDTH data width
  * @input srcA A port data
  * @input srcB B port data
- * @input aluop operation code
+ * @input aluOP operation code
  * @output zero equal flag
  * @output of signed overflow flag
  * @output uof unsigned overflow flag
@@ -1702,7 +1689,7 @@ module alu_flags
 (
     input [DATA_WIDTH-1:0] srcA,
     input [DATA_WIDTH-1:0] srcB,
-    input [3:0] aluop,
+    input [3:0] aluOP,
     output zero,
     output of,
     output uof
@@ -1715,15 +1702,15 @@ module alu_flags
     assign {carry2, diff} = srcA - srcB;    // awesome tip
 
     assign zero = (srcA == srcB);
-    assign of = (aluop == 4'd5) ? (
+    assign of = (aluOP == 4'd5) ? (
       (srcA[DATA_WIDTH-1] & srcB[DATA_WIDTH-1] & ~sum[DATA_WIDTH-1])
       | (~srcA[DATA_WIDTH-1] & ~srcB[DATA_WIDTH-1] & sum[DATA_WIDTH-1]))
-                : (aluop == 4'd6) ? (
+                : (aluOP == 4'd6) ? (
       (srcA[DATA_WIDTH-1] & ~srcB[DATA_WIDTH-1] & ~diff[DATA_WIDTH-1])
       | (~srcA[DATA_WIDTH-1] & srcB[DATA_WIDTH-1] & diff[DATA_WIDTH-1]))
                 : 0;
-    assign uof = (aluop == 4'd5) ? (carry1)
-                : (aluop == 4'd6) ? (carry2)
+    assign uof = (aluOP == 4'd5) ? (carry1)
+                : (aluOP == 4'd6) ? (carry2)
                 : 0;
 
 endmodule // alu_flags
@@ -1737,8 +1724,8 @@ endmodule // alu_flags
  * @param DATA_WIDTH data width
  * @input srcA A port data
  * @input srcB B port data
- * @input aluop operation code
- * @ouput aluout calculation result
+ * @input aluOP operation code
+ * @output aluOut calculation result
  * @output zero equal flag
  * @output of signed overflow flag
  * @output uof unsigned overflow flag
@@ -1748,8 +1735,8 @@ module alu
 (
     input [DATA_WIDTH-1:0] srcA,
     input [DATA_WIDTH-1:0] srcB,
-    input [3:0] aluop,
-    output reg [DATA_WIDTH-1:0] aluout,
+    input [3:0] aluOP,
+    output reg [DATA_WIDTH-1:0] aluOut,
     output zero,
     output of,
     output uof
@@ -1762,21 +1749,21 @@ module alu
     assign signed_srcB = $signed(srcB);
 
     always @ ( * ) begin
-        case (aluop)
-            4'd0: aluout <= srcA << srcB;
-            4'd1: aluout <= signed_srcA >>> srcB;
-            4'd2: aluout <= srcA >> srcB;
-            4'd3: aluout <= srcA * srcB;
-            4'd4: aluout <= srcA / srcB;
-            4'd5: aluout <= srcA + srcB;  // awesome tip
-            4'd6: aluout <= srcA - srcB;
-            4'd7: aluout <= srcA & srcB;
-            4'd8: aluout <= srcA | srcB;
-            4'd9: aluout <= srcA ^ srcB;
-            4'd10: aluout <= ~(srcA | srcB);
-            4'd11: aluout <= (signed_srcA < signed_srcB) ? 1 : 0;
-            4'd12: aluout <= (srcA < srcB) ? 1 : 0;
-            default: aluout <= 0;
+        case (aluOP)
+            4'd0: aluOut <= srcA << srcB;
+            4'd1: aluOut <= signed_srcA >>> srcB;
+            4'd2: aluOut <= srcA >> srcB;
+            4'd3: aluOut <= srcA * srcB;
+            4'd4: aluOut <= srcA / srcB;
+            4'd5: aluOut <= srcA + srcB;  // awesome tip
+            4'd6: aluOut <= srcA - srcB;
+            4'd7: aluOut <= srcA & srcB;
+            4'd8: aluOut <= srcA | srcB;
+            4'd9: aluOut <= srcA ^ srcB;
+            4'd10: aluOut <= ~(srcA | srcB);
+            4'd11: aluOut <= (signed_srcA < signed_srcB) ? 1 : 0;
+            4'd12: aluOut <= (srcA < srcB) ? 1 : 0;
+            default: aluOut <= 0;
         endcase
     end
 
@@ -1785,7 +1772,7 @@ module alu
     ) FLAGS  (
         .srcA(srcA),
         .srcB(srcB),
-        .aluop(aluop),
+        .aluOP(aluOP),
         .zero(zero),
         .of(of),
         .uof(uof)
@@ -1801,13 +1788,13 @@ endmodule // alu
  * @module register
  * @author sabertazimi
  * @email sabertazimi@gmail.com
- * @brief D filp flop
+ * @brief D flip flop
  * @param DATA_WIDTH data width
  * @input clk clock signal
  * @input rst reset signal
  * @input en enable signal
  * @input din data in
- * @ouput dout data out
+ * @output dout data out
  */
 module register
 #(parameter DATA_WIDTH = 32)
@@ -1834,7 +1821,7 @@ endmodule // register
 
 ```verilog
 /**
- * @module regfile
+ * @module regFile
  * @author sabertazimi
  * @email sabertazimi@gmail.com
  * @brief register files for MIPS CPU, contains 32 D flip-flop registers
@@ -1844,11 +1831,11 @@ endmodule // register
  * @input raddrA read address (No.register) for A out port
  * @input raddrB read address (No.register) for B out port
  * @input waddr write address (No.register) for wdata (in port)
- * @input wdata data to write into regfile
+ * @input wdata data to write into regFile
  * @output regA A port output
  * @output regB B port output
  */
-module regfile
+module regFile
 #(parameter DATA_WIDTH = 32)
 (
     input clk,
@@ -1868,30 +1855,30 @@ module regfile
 
     reg [4:0] i;
 
-    ///< three ported regfile contains 32 registers
-    reg [DATA_WIDTH-1:0] regfile [0:31];
+    ///< three ported regFile contains 32 registers
+    reg [DATA_WIDTH-1:0] regFile [0:31];
 
     always @ (posedge clk) begin
         if (rst) begin
             for (i = 0; i < 31; i = i + 1)
                 begin
-                    regfile[i] <= 0;
+                    regFile[i] <= 0;
                 end
         end else if (we && waddr != 0) begin
-            regfile[waddr] <= wdata;
+            regFile[waddr] <= wdata;
         end
     end
 
     assign regA = (we && waddr == raddrA) ? wdata
-                : (raddrA != 0) ? regfile[raddrA]
+                : (raddrA != 0) ? regFile[raddrA]
                 : 0;
     assign regB = (we && waddr == raddrB) ? wdata
-                : (raddrB != 0) ? regfile[raddrB]
+                : (raddrB != 0) ? regFile[raddrB]
                 : 0;
-    assign v0_data = regfile[`V0];
-    assign a0_data = regfile[`A0];
+    assign v0_data = regFile[`V0];
+    assign a0_data = regFile[`A0];
 
-endmodule // regfile
+endmodule // regFile
 ```
 
 ```verilog
@@ -1902,7 +1889,7 @@ endmodule // regfile
  * @brief instruction cache memory (ROM)
  * @param DATA_WIDTH data width
  * @param BUS_WIDTH bus width
- * @param CODE_FILE MIPS assembly hexdecimal code file
+ * @param CODE_FILE MIPS assembly hexadecimal code file
  * @input addr memory address
  * @output rdata instruction read out from memory
  */
