@@ -21,7 +21,7 @@ nodal = proc + queue + trans + prop: 总时延 = 产生/到达时延 + 排队时
 - Application Layer Protocol: HTTP SMTP (message, stream of data)
 - Transport Layer Protocol: TCP UDP (segment, segment of data)
 - Network Layer Protocol: IP (因特网的粘合剂) (**unreliable** datagram, packet of data)
-- Data Link Layer Protocol: Wifi PPP(点对点) 以太网 (frame)
+- Data Link Layer Protocol: WiFi PPP(点对点) 以太网 (frame)
 - Physical Layer Protocol
 
 #### Layering Principle
@@ -40,9 +40,9 @@ nodal = proc + queue + trans + prop: 总时延 = 产生/到达时延 + 排队时
 defines:
 
 - types of messages exchanged
-- syntax of various message types(fields defination)
+- syntax of various message types(fields definition)
 - semantics of fields
-- rules fsor when/how to send/respond to messages
+- rules for when/how to send/respond to messages
 
 ### HTTP
 
@@ -77,9 +77,9 @@ entity body
 #### Cookies
 
 - first request header -> without cookie
-- first response header -> Set-cookie: `numebr` to client
+- first response header -> `Set-Cookie: number` to client
 - client store identification number for specific site into cookies files
-- second request header -> cookie: `number`
+- second request header -> `Cookie: number`
   (extract identification number for specific site from cookies files)
 - function: create **User Session Layer** on top of stateless HTTP
 
@@ -94,7 +94,7 @@ entity body
 email                   - SMTP              - TCP
 remote terminal access  - Telnet            - TCP
 Web                     - HTTP/HTTPS        - TCP
-file tranfer            - FTP               - TCP
+file transfer            - FTP               - TCP
 streaming multimedia    - HTTP/HTTPS/RTP    - TCP/UDP
 internet telephony      - SIP/RTP           - UDP
 ```
@@ -118,7 +118,9 @@ internet telephony      - SIP/RTP           - UDP
 - SYN -> SYN/ACK -> ACK
 - FIN(toB) -> [Data+]ACK(toA) -> FIN(toA) -> ACK(toB)
 
-### UDP(User Datagram Protocol)
+### UDP
+
+User Datagram Protocol:
 
 - lightweight and connectionless
 - datagram service
@@ -126,7 +128,9 @@ internet telephony      - SIP/RTP           - UDP
 - udp header: source port(16 bit), destination port(16 bit),
   checksum(16 bit), length(16 bit)
 
-### ICMP (Internet Control Message Protocol)
+### ICMP
+
+Internet Control Message Protocol:
 
 - report error conditions back
 - help diagnose problems
@@ -144,7 +148,7 @@ internet telephony      - SIP/RTP           - UDP
 ### Error Detection
 
 - TCP/IP: checksums(1 bit)
-- Ethernet(Link Layer): cylic redundancy code(2 bit/more)
+- Ethernet(Link Layer): cyclic redundancy code(2 bit/more)
 - SSL(Secure Sockets Layer)/TLS(Transport Layer Security):
   message authentication code(**MAC**)(cryptographic data) - prevent malicious attacks
 
@@ -185,7 +189,7 @@ internet telephony      - SIP/RTP           - UDP
   with dest hardware address as SRC HARDWARE ADDRESS field,
   src hardware address as DEST HARDWARE ADDRESS field and opcode 2(reply)
 - if A and B aren't in same sub-net,
-  they delivery ARP boardcast with third public gateway
+  they delivery ARP broadcast with third public gateway
 
 ### Packet Format
 
@@ -206,9 +210,9 @@ if (packet_port == http_port) {
 }
 ```
 
-## Wireshark
+## WireShark
 
-### Set Up
+### WireShark SetUp
 
 ```bash
 sudo dpkg-reconfigure wireshark-common

@@ -7,10 +7,10 @@
   - [基本概念](#基本概念)
     - [操作系统的特性](#操作系统的特性)
     - [操作系统的资源管理功能](#操作系统的资源管理功能)
-      - [处理机调度](#处理机调度)
+      - [处理器调度](#处理器调度)
       - [存储器管理](#存储器管理)
       - [设备管理](#设备管理)
-      - [文件系统](#文件系统)
+      - [文件资源管理](#文件资源管理)
     - [操作系统的演变](#操作系统的演变)
       - [批处理系统](#批处理系统)
       - [分时系统](#分时系统)
@@ -18,39 +18,36 @@
     - [操作系统虚拟机](#操作系统虚拟机)
       - [用户接口](#用户接口)
     - [操作系统的组织结构](#操作系统的组织结构)
-    - [并发(Concurrent)](#并发concurrent)
+    - [并发](#并发)
       - [程序并发的特点](#程序并发的特点)
   - [启动](#启动)
     - [BIOS](#bios)
     - [启动顺序](#启动顺序)
       - [寄存器](#寄存器)
       - [BIOS Config](#bios-config)
-      - [Bootloader](#bootloader)
-        - [标志(lab1/tools/sign.c)](#标志lab1toolssignc)
+      - [Boot Loader](#boot-loader)
+        - [标志](#标志)
         - [基本功能](#基本功能)
-          - [切换到保护模式, 启动段机制](#切换到保护模式-启动段机制)
-          - [从硬盘上加载 某种(kernel in ELF) 格式的 os kernel(在硬盘中紧邻 MBR) 至内存的固定区域](#从硬盘上加载-某种kernel-in-elf-格式的-os-kernel在硬盘中紧邻-mbr-至内存的固定区域)
-          - [跳转到 os kernel 的入口点(entry point), 转移控制权至 os](#跳转到-os-kernel-的入口点entry-point-转移控制权至-os)
         - [保护模式与段机制](#保护模式与段机制)
   - [物理内存管理](#物理内存管理)
-    - [bootloader 探测机器内存分布](#bootloader-探测机器内存分布)
-    - [bootloader 基本概念](#bootloader-基本概念)
-      - [bootloader 基本目标](#bootloader-基本目标)
+    - [Boot Loader 探测机器内存分布](#boot-loader-探测机器内存分布)
+    - [Boot Loader 基本概念](#boot-loader-基本概念)
+      - [Boot Loader 基本目标](#boot-loader-基本目标)
       - [基本管理方式](#基本管理方式)
       - [地址生成](#地址生成)
         - [地址生成时机](#地址生成时机)
-      - [地址映射(软硬件结合)](#地址映射软硬件结合)
-      - [地址检查(软硬件结合)](#地址检查软硬件结合)
-    - [连续内存分配(malloc/free)](#连续内存分配mallocfree)
+      - [地址映射](#地址映射)
+      - [地址检查](#地址检查)
+    - [连续内存分配](#连续内存分配)
       - [内存碎片](#内存碎片)
       - [动态分配策略](#动态分配策略)
       - [碎片整理策略](#碎片整理策略)
       - [ucore 实现](#ucore-实现)
-        - [紧凑(compaction)](#紧凑compaction)
-        - [分区对换(swapping in/out)](#分区对换swapping-inout)
-      - [malloc 实现策略](#malloc-实现策略)
-        - [启发式(Heuristic)编程](#启发式heuristic编程)
-        - [伙伴系统(Buddy System)](#伙伴系统buddy-system)
+        - [紧凑](#紧凑)
+        - [分区对换](#分区对换)
+      - [Malloc 实现策略](#malloc-实现策略)
+        - [启发式编程](#启发式编程)
+        - [伙伴系统](#伙伴系统)
           - [合并空闲块](#合并空闲块)
     - [非连续内存分配](#非连续内存分配)
       - [段式存储管理](#段式存储管理)
@@ -61,94 +58,94 @@
         - [页表](#页表)
           - [页表结构](#页表结构)
         - [性能问题](#性能问题)
-          - [TLB(translation lookaside buffer)](#tlbtranslation-lookaside-buffer)
+          - [TLB](#tlb)
           - [多级页表](#多级页表)
           - [反置页表](#反置页表)
       - [段页式存储管理](#段页式存储管理)
     - [内存的特权级](#内存的特权级)
       - [特权级检查](#特权级检查)
       - [特权级切换](#特权级切换)
-        - [ring 0 to ring 3](#ring-0-to-ring-3)
-        - [ring 3 to ring 0 (特权级提升)](#ring-3-to-ring-0-特权级提升)
-      - [TSS(Task State Segment)](#tsstask-state-segment)
+        - [Ring 0 to Ring 3](#ring-0-to-ring-3)
+        - [Ring 3 to Ring 0](#ring-3-to-ring-0)
+      - [TSS](#tss)
   - [虚拟内存管理](#虚拟内存管理)
     - [Page Fault](#page-fault)
     - [覆盖与交换](#覆盖与交换)
-      - [覆盖技术(overlay)](#覆盖技术overlay)
-      - [交换技术(swap)](#交换技术swap)
+      - [覆盖技术](#覆盖技术)
+      - [交换技术](#交换技术)
     - [虚拟页式存储管理](#虚拟页式存储管理)
       - [标志位](#标志位)
       - [页面置换算法](#页面置换算法)
         - [局部置换算法](#局部置换算法)
-          - [最远未用算法(Least Recently Used/LRU Algorithm)](#最远未用算法least-recently-usedlru-algorithm)
-          - [时钟算法(Clock Algorithm)](#时钟算法clock-algorithm)
-          - [最不常用算法(Least Frequently Used/LFU Algorithm)](#最不常用算法least-frequently-usedlfu-algorithm)
+          - [最远未用算法](#最远未用算法)
+          - [时钟算法](#时钟算法)
+          - [最不常用算法](#最不常用算法)
         - [全局置换算法](#全局置换算法)
           - [工作集算法](#工作集算法)
           - [缺页率算法](#缺页率算法)
       - [实现](#实现)
-  - [中断(Interrupt Service Routine/Interrupt Quest)](#中断interrupt-service-routineinterrupt-quest)
+  - [中断](#中断)
     - [中断进入](#中断进入)
       - [保护现场](#保护现场)
     - [中断实现](#中断实现)
       - [概述](#概述)
       - [Interrupt 实现](#interrupt-实现)
     - [系统调用](#系统调用)
-  - [进程(资源分配单位)](#进程资源分配单位)
-    - [处理机(进程)的特权级](#处理机进程的特权级)
-    - [进程状态/生命周期](#进程状态生命周期)
-      - [进程控制块(Process Control Block)](#进程控制块process-control-block)
+  - [进程](#进程)
+    - [进程特权级](#进程特权级)
+    - [进程状态与生命周期](#进程状态与生命周期)
+      - [进程控制块](#进程控制块)
     - [进程通信](#进程通信)
-    - [线程(CPU 调度单位)](#线程cpu-调度单位)
-      - [idleproc(0 号内核线程)](#idleproc0-号内核线程)
+    - [线程](#线程)
+      - [IDLE Process](#idle-process)
     - [内核线程与用户进程](#内核线程与用户进程)
     - [Process 实现](#process-实现)
-      - [process context(执行现场)](#process-context执行现场)
-      - [`do_fork` function](#do_fork-function)
+      - [Process Context](#process-context)
+      - [Process Fork Function](#process-fork-function)
       - [Execution function](#execution-function)
-  - [处理机调度(Schedule)](#处理机调度schedule)
+  - [处理机调度](#处理机调度)
     - [调度时机](#调度时机)
       - [六大调度时机](#六大调度时机)
-    - [调度策略/算法](#调度策略算法)
+    - [调度策略](#调度策略)
       - [算法目标](#算法目标)
-      - [先来先服务算法(First Come First Served/FCFS)](#先来先服务算法first-come-first-servedfcfs)
-      - [短进程优先算法(Shortest Process Next/Shortest Remaining Time)](#短进程优先算法shortest-process-nextshortest-remaining-time)
-      - [最高响应比优先算法(Highest Response Ratio Next)](#最高响应比优先算法highest-response-ratio-next)
-      - [时间片轮转算法(Round Robin)](#时间片轮转算法round-robin)
-      - [多级队列调度算法(MQ)](#多级队列调度算法mq)
-      - [多级反馈队列算法(MLFQ)](#多级反馈队列算法mlfq)
+      - [先来先服务算法](#先来先服务算法)
+      - [短进程优先算法](#短进程优先算法)
+      - [最高响应比优先算法](#最高响应比优先算法)
+      - [时间片轮转算法](#时间片轮转算法)
+      - [多级队列调度算法](#多级队列调度算法)
+      - [多级反馈队列算法](#多级反馈队列算法)
   - [同步互斥](#同步互斥)
     - [临界区的访问原则](#临界区的访问原则)
     - [基于软件方法的同步互斥](#基于软件方法的同步互斥)
     - [高级抽象的同步互斥](#高级抽象的同步互斥)
-      - [lock/semaphore](#locksemaphore)
-      - [monitor](#monitor)
+      - [Lock and Semaphore](#lock-and-semaphore)
+      - [Monitor](#monitor)
     - [死锁](#死锁)
-    - [mutex 实现](#mutex-实现)
-      - [P/V 操作](#pv-操作)
-        - [具体实现信号量的 P 操作](#具体实现信号量的-p-操作)
-        - [具体实现信号量的 V 操作](#具体实现信号量的-v-操作)
+    - [Mutex 实现](#mutex-实现)
+      - [Prolaag and Verhoog](#prolaag-and-verhoog)
+        - [Prolaag Semaphore](#prolaag-semaphore)
+        - [Verhoog Semaphore](#verhoog-semaphore)
       - [管程](#管程)
         - [Conditional Variable](#conditional-variable)
-  - [文件系统 (FileSystem)](#文件系统-filesystem)
+  - [文件系统](#文件系统)
     - [文件组成](#文件组成)
     - [文件系统基本数据结构](#文件系统基本数据结构)
-      - [文件卷控制块(superblock)](#文件卷控制块superblock)
-      - [目录项(dentry)](#目录项dentry)
-      - [文件控制块(vnode/inode)](#文件控制块vnodeinode)
+      - [文件卷控制块](#文件卷控制块)
+      - [目录项](#目录项)
+      - [文件控制块](#文件控制块)
       - [文件描述符](#文件描述符)
       - [打开文件表](#打开文件表)
     - [文件分配](#文件分配)
     - [空闲空间管理](#空闲空间管理)
-    - [冗余磁盘阵列(Redundant Array of Inexpensive Disks/RAID)](#冗余磁盘阵列redundant-array-of-inexpensive-disksraid)
+    - [冗余磁盘阵列](#冗余磁盘阵列)
     - [FS 实现](#fs-实现)
-      - [Mount](#mount)
-      - [index](#index)
-      - [inode](#inode)
+      - [FS Mount](#fs-mount)
+      - [FS Index](#fs-index)
+      - [FS Node](#fs-node)
       - [Device](#device)
   - [设备管理详解](#设备管理详解)
-    - [CGA/EGA + Chromatext video buffer](#cgaega--chromatext-video-buffer)
-    - [I/O](#io)
+    - [CGA EGA and ChromaText Video Buffer](#cga-ega-and-chromatext-video-buffer)
+    - [Input and Output](#input-and-output)
   - [实践](#实践)
     - [工具](#工具)
       - [Bochs](#bochs)
@@ -186,7 +183,7 @@ constraints:
 - d = edx
 - D = edi
 - S = esi
-- 0/n = fisrt/nth constraints
+- 0/n = first/nth constraints
 
 ## 基本概念
 
@@ -198,7 +195,7 @@ constraints:
 
 ### 操作系统的资源管理功能
 
-#### 处理机调度
+#### 处理器调度
 
 - 确定进程调度策略
 - 给出进程调度算法
@@ -229,7 +226,7 @@ constraints:
 
 组织设备完成 I/O 操作, 并正确处理中断
 
-#### 文件系统
+#### 文件资源管理
 
 为用户提供一种简便、统一的存取和管理信息的方法, 解决信息的共享/数据的存取控制/数据的保密等问题:
 
@@ -289,7 +286,9 @@ constraints:
 - 可扩展内核(微内核)结构
 - 层次化结构
 
-### 并发(Concurrent)
+### 并发
+
+Concurrent
 
 #### 程序并发的特点
 
@@ -321,9 +320,9 @@ BIOS 的 EPROM(Erasable Programmable Read Only Memory) 处
 
 BIOS 根据设置(硬盘/U 盘/网络启动),
 加载存储设备的主引导扇区(Master Boot Record)(第一个扇区)的 512 字节至内存 0x7c00 处,
-开始执行第一条指令(bootloader)
+开始执行第一条指令(Boot Loader)
 
-#### Bootloader
+#### Boot Loader
 
 实模式与保护模式带来的问题:
 
@@ -341,7 +340,9 @@ BIOS 根据设置(硬盘/U 盘/网络启动),
 - 移动内核镜像至 1MB 之后合适位置
 - 跳转至内核入口(`jmp addr` 用以修改 cs:eip)
 
-##### 标志(lab1/tools/sign.c)
+##### 标志
+
+lab1/tools/sign.c:
 
 - 有效字节小于 510 bytes
 - 结尾为 0x55aa
@@ -349,8 +350,7 @@ BIOS 根据设置(硬盘/U 盘/网络启动),
 
 ##### 基本功能
 
-###### 切换到保护模式, 启动段机制
-
+- 切换到保护模式, 启动段机制
 - 通过 8042 键盘控制器的端口, 开启 A20, 关闭 memory wrap around, 获取足够内存空间
 
 ```c
@@ -380,9 +380,8 @@ empty_8042:
 - 加载全局描述符表
 - 设置各个通用寄存器与段寄存器
 
-###### 从硬盘上加载 某种(kernel in ELF) 格式的 os kernel(在硬盘中紧邻 MBR) 至内存的固定区域
-
-###### 跳转到 os kernel 的入口点(entry point), 转移控制权至 os
+- 从硬盘上加载 某种(kernel in ELF) 格式的 os kernel(在硬盘中紧邻 MBR) 至内存的固定区域
+- 跳转到 os kernel 的入口点(entry point), 转移控制权至 os
 
 ##### 保护模式与段机制
 
@@ -392,13 +391,13 @@ empty_8042:
 
 ## 物理内存管理
 
-### bootloader 探测机器内存分布
+### Boot Loader 探测机器内存分布
 
 为内存管理模块提供基础: 在进入实模式前, 调用 int 15h(88h, e801h, e820h), 借助 BIOS 中断获取内存信息
 
-### bootloader 基本概念
+### Boot Loader 基本概念
 
-#### bootloader 基本目标
+#### Boot Loader 基本目标
 
 - 抽象: 逻辑地址空间(线性物理地址映射)
 - 保护: 独立地址空间(进程间互不影响)
@@ -421,19 +420,26 @@ empty_8042:
 - 加载时
 - 执行时(相对寻址)
 
-#### 地址映射(软硬件结合)
+#### 地址映射
+
+软硬件结合:
 
 逻辑地址 ---> 物理地址
 
 - 硬件(CPU/MMU)完成映射地址
 - 操作系统建立映射规则(页表)
 
-#### 地址检查(软硬件结合)
+#### 地址检查
+
+软硬件结合:
 
 - 操作系统设置的段机制和段长度
 - 硬件(CPU/MMU)根据段信息进行地址检查(内存访问是否异常)
 
-### 连续内存分配(malloc/free)
+### 连续内存分配
+
+- malloc
+- free
 
 #### 内存碎片
 
@@ -453,29 +459,35 @@ empty_8042:
 - 连续存放 n 个 page 结构, 形式表示内存页, 并在连续内存块的首页(header page)保存此连续块的连续页数目
 - 维护一个链表, 链表每项为大块连续内存块的起始页(header page address) 和 连续页数目, 管理分散的连续内存块
 
-##### 紧凑(compaction)
+##### 紧凑
 
-将不同进程占用内存单元移至较为集中的地方:
+Compaction, 将不同进程占用内存单元移至较为集中的地方:
 
 - 只可移动 可动态重定位程序
 - 只可移动 等待状态进程
 
-##### 分区对换(swapping in/out)
+##### 分区对换
+
+Swapping In and Swapping Out:
 
 将等待状态进程的分区对换至外存,以增大可用内存单元
 
-> e.g Linux Swap 分区: 安装系统时一般切割大小为内存大小的 50%~100% 的外存作为 Swao 分区
+> e.g Linux Swap 分区: 安装系统时一般切割大小为内存大小的 50%~100% 的外存作为 Swap 分区
 
-#### malloc 实现策略
+#### Malloc 实现策略
 
-##### 启发式(Heuristic)编程
+##### 启发式编程
+
+Heuristic Programming:
 
 - 建立已分配 void 指针表,free 函数执行时,只回收表中存在的指针;不存在则报错
 - 对 heap 进行分区 - 小/中/大块内存请求,分别从不同区域(8/16/32 最小单位区)分配
 - 记录当前堆块的信息，如长度，空闲状态
 - 记录周围环境信息，如保留上/下一堆块的指针或记录上/下堆块空闲状态
 
-##### 伙伴系统(Buddy System)
+##### 伙伴系统
+
+Buddy System:
 
 - 可分配内存单元总大小为 2^n
 - 总是将大小 **小于**请求大小的**2 倍**且为**2 的幂次方** 的某块内存单元分配出去(大小为 2^(i-1))
@@ -519,7 +531,7 @@ typedef struct gdt_ptr {
 
 ##### 虚拟地址
 
-> TLB(translation lookaside buffer in cpu/pm)
+> TLB (Translation Lookaside Buffer in CPU/PM)
 
 - Virtual Address =
   2^(bits of virtual page offset) \* virtual page number + virtual page offset
@@ -553,7 +565,9 @@ typedef struct gdt_ptr {
 - 两次访存: 第一次获取页表项, 第二次访问实际数据
 - 页表占据大量内存单元
 
-###### TLB(translation lookaside buffer)
+###### TLB
+
+Translation Lookaside Buffer:
 
 缓存页表项 - key: VPN, value: PPN 　不用访问页表
 
@@ -601,19 +615,23 @@ typedef struct gdt_ptr {
 
 #### 特权级切换
 
-##### ring 0 to ring 3
+##### Ring 0 to Ring 3
 
 - interrupt/trap: push SS(**RPL=3**) -> ESP -> EFLAGS
   -> CS(**RPL=3**) -> EIP -> Error Code
 - iret: pop above variables, move to ring 3
 
-##### ring 3 to ring 0 (特权级提升)
+##### Ring 3 to Ring 0
+
+特权级提升:
 
 - interrupt/trap: stack switch
 - push EFLAGS -> CS(**RPL=0**) -> EIP -> Error Code
 - iret: pop above variables, move to ring 0
 
-#### TSS(Task State Segment)
+#### TSS
+
+Task State Segment:
 
 保存不同特权级的堆栈信息(SS/ESP)
 
@@ -638,11 +656,15 @@ allocate TSS memory -> init TSS
 
 ### 覆盖与交换
 
-#### 覆盖技术(overlay)
+#### 覆盖技术
+
+Overlay:
 
 将程序中相互独立的模块分成一组, 为每组按最大模块分配内存单元
 
-#### 交换技术(swap)
+#### 交换技术
+
+Swap:
 
 将挂起进程的整个地址空间换出至外存(swap out), 将需用进程的整个地址空间换入至内存(swap in), 进程交替运行
 
@@ -675,11 +697,15 @@ allocate TSS memory -> init TSS
 
 换入进程 A 的某个页面时, 只可换出进程 A 的某个页面: 为进程分配固定数目的页面
 
-###### 最远未用算法(Least Recently Used/LRU Algorithm)
+###### 最远未用算法
+
+Least Recently Used (LRU) Algorithm:
 
 - 利用**链表等线性结构**维护页面访问时间, 队首为最近一次访问页面(每次访问一个页面后, 把它从线性结构中间抽出至队首), 队尾为最远一次访问页面
 
-###### 时钟算法(Clock Algorithm)
+###### 时钟算法
+
+Clock Algorithm:
 
 - 利用**循环链表**维护页面(指针指向最先换入内存的页面), 页表项访问位维护访问记录(访问后将访问位置 1)
 - 缺页时, 从指针处开始查找页面进行置换: 若访问位为 0, 则进行置换; 若访问位为 1, 则将此页面访问位置 0, 继续查找未访问页面
@@ -693,7 +719,9 @@ allocate TSS memory -> init TSS
 | 1 0           | 0 0           |
 | 1 1           | 0 1           |
 
-###### 最不常用算法(Least Frequently Used/LFU Algorithm)
+###### 最不常用算法
+
+Least Frequently Used (LFU) Algorithm:
 
 - 利用**链表等线性结构**维护页面访问时间, 队首为最多访问次数页面(每次访问一个页面后, 访问次数+1, 并排序), 队尾为最少访问次数页面
 
@@ -742,7 +770,9 @@ typedef struct __vma {
 } vma;
 ```
 
-## 中断(Interrupt Service Routine/Interrupt Quest)
+## 中断
+
+Interrupt Service Routine/Interrupt Quest:
 
 - NMI 中断(Non Maskable Interrupt) 与 INTR 中断(可屏蔽中断)
 - x86PC 中断控制芯片: 8259A PIC
@@ -788,12 +818,14 @@ typedef struct __vma {
 - 保护系统安全, 提升可靠性与安全性
 - 调用: 用户态, 执行: 管态/内核态
 
-## 进程(资源分配单位)
+## 进程
+
+资源分配单位:
 
 - 独立性: 无副作用(确定性), 可重现
 - 并发性(宏观并行, 微观串行): 提升效率, 共享资源, 高度模块化
 
-### 处理机(进程)的特权级
+### 进程特权级
 
 - 处理机的态/处理机的特权级: 根据对资源和机器指令的使用权限, 将处理执行时的工作状态区分为不同的状态
 - 管理(supervisor mode)/系统态: 使用全部机器指令(包括特权指令), 可使用所有资源, 允许访问整个内存区, 运行系统程序
@@ -801,7 +833,7 @@ typedef struct __vma {
   不可**直接**取用资源与改变机器状态, 只可访问自己的存储区域, 运行用户程序
 - 用户态切换至管态: 错误/异常状态(除 0/缺页), 外部中断(I/O), 系统调用, 这一过程是由**硬件完成**的
 
-### 进程状态/生命周期
+### 进程状态与生命周期
 
 创建, 就绪(ready), 运行(running), 等待(wait/sleeping),
 挂起(suspend: 进程由内存换出至外存), 结束(抢占, 唤醒):
@@ -812,11 +844,13 @@ typedef struct __vma {
 - 当到达调度点时,由调度器 sched_class 根据运行队列 rq 的内容来判断一个进程是否应该被运行,
   即把处于 runnable 态的进程转换成 running 状态,从而占用 CPU 执行
 - running 态的进程通过 wait 等系统调用被阻塞,进入 sleeping 态
-- sleeping 态的进程被 wakeup 变成 runnable 态的进程
+- sleeping 态的进程被 wake up 变成 runnable 态的进程
 - running 态的进程主动 exit 变成 zombie 态, 然后由其父进程完成对其资源的最后释放,子进程的进程控制块成为 unused
 - 所有从 runnable 态变成其他状态的进程都要出运行队列(dequeue), 反之，被放入某个运行队列中(enqueue)
 
-#### 进程控制块(Process Control Block)
+#### 进程控制块
+
+Process Control Block:
 
 通过组织管理 PCB(链表/索引表) 来组织管理进程; 在进程创建/终止的同时, 生成/回收改进程的 PCB:
 
@@ -831,18 +865,22 @@ typedef struct __vma {
 - 直接通信: send(proc, msg), receive(proc, msg) `shmctl() shm*`
 - 间接通信: send(msg_que, msg), receive(msg_que, msg) `msgctl() msg*`
 
-### 线程(CPU 调度单位)
+### 线程
+
+CPU 调度单位:
 
 - 进程缺陷: 共享数据不便, 系统开销大
 - 线程共享段表/共享库/数据/代码/环境变量/文件描述符集合/地址空间, 但拥有独立的堆/栈/通用寄存器
 - 线程控制块(Thread Control Block)
 - 用户线程与内核线程: 多为 1 对 1
 
-#### idleproc(0 号内核线程)
+#### IDLE Process
+
+0 号内核线程:
 
 - 工作就是不停地查询，直至有其他内核线程处于就绪状态, 令调度器执行那个内核线程
-- idleproc 内核线程是在操作系统没有其他内核线程可执行的情况下才会被调用
-- 在所有进程中，只有 idleproc(内核创建的第一个内核线程) 没有父进程
+- IDLE 内核线程是在操作系统没有其他内核线程可执行的情况下才会被调用
+- 在所有进程中，只有 IDLE (内核创建的第一个内核线程) 没有父进程
 
 ### 内核线程与用户进程
 
@@ -853,7 +891,9 @@ typedef struct __vma {
 
 ### Process 实现
 
-#### process context(执行现场)
+#### Process Context
+
+执行现场/执行上下文:
 
 - 设置好执行现场后, 一旦调度器选择了 initproc 执行, 就需要根据 initproc->context 中保存的执行现场来恢复 initproc 的执行
 - 通过 proc_run 和进一步的 switch_to 函数完成两个执行现场的切换，具体流程如下:
@@ -863,7 +903,7 @@ typedef struct __vma {
   - 设置 CR3 寄存器的值为 next 内核线程 initproc 的页目录表起始地址 next->cr3
   - 由 switch_to 函数完成具体的两个线程的执行现场切换, 即切换各个寄存器
 
-#### `do_fork` function
+#### Process Fork Function
 
 - 分配并初始化进程控制块(alloc_proc 函数)
 - 分配并初始化内核栈(setup_stack 函数)
@@ -879,17 +919,17 @@ fork() 的主要行为:
 - 设置 ppid 为父进程的 pid
 - 复制用户相关的字段, 如 p_pgrp/p_gid/p_ruid/p_euid/p_rgid/p_egid
 - 复制调度相关的字段, 如 p_cpu/p_nice/p_pri
-- 复制父进程的文件描述符(p_ofile), 并增加引用计数
-- 复制父进程的信号处理例程(p_sigact)
+- 复制父进程的文件描述符 (p_ofile), 并增加引用计数
+- 复制父进程的信号处理例程 (p_sigact)
 - 通过 vm_clone(), 复制父进程的地址空间(p_vm)
-- 复制父进程的寄存器状态(p_contxt)
+- 复制父进程的寄存器状态 (p_context)
 - 复制父进程的中断上下文, 并设置 tf->eax 为 0, 使 fork()在子进程中返回 0。
 
 #### Execution function
 
 exec() 的主要行为:
 
-- 读取文件的第一个块, 检查 Magic Number(NMAGIC) 是否正确
+- 读取文件的第一个块, 检查 Magic Number 是否正确
 - 保存参数(argv)到临时分配的几个物理页, 其中的每个字符串单独一页
 - 清空旧的进程地址空间(vm_clear()), 并结合可执行文件的 header, 初始化新的进程地址空间(vm_renew())
 - 将 argv 与 argc 压入新地址空间中的栈
@@ -898,7 +938,9 @@ exec() 的主要行为:
 - 清理信号处理例程
 - 通过`_retu()`返回用户态
 
-## 处理机调度(Schedule)
+## 处理机调度
+
+Schedule:
 
 - 从就绪队列中挑选下一个占用 CPU 的进程(挑选进程的内核函数)
 - 从多个可用 CPU 中挑选使用 CPU 资源
@@ -919,44 +961,56 @@ exec() 的主要行为:
 - sync.h::lock 在获取锁的过程中,如果无法得到锁,则主动放弃 CPU 控制权
 - trap.c::trap 如果在当前进程在用户态被打断,且当前进程控制块的成员变量 need_resched 设置为 1,则当前线程会放弃 CPU 控制权
 
-### 调度策略/算法
+### 调度策略
 
 #### 算法目标
 
 - CPU 有效使用率
-- 吞吐量(高带宽): 单位时间内完成进程数量
-- 等待时间(低延迟): 进程在就绪队列等待总时间
-- 周转时间(低延迟): 进程从初始化到结束总时间
-- 响应时间(低延迟): 从提交请求到产生响应总时间
+- 吞吐量 (高带宽): 单位时间内完成进程数量
+- 等待时间 (低延迟): 进程在就绪队列等待总时间
+- 周转时间 (低延迟): 进程从初始化到结束总时间
+- 响应时间 (低延迟): 从提交请求到产生响应总时间
 
-#### 先来先服务算法(First Come First Served/FCFS)
+#### 先来先服务算法
+
+First Come First Served (FCFS):
 
 - 依次执行就绪队列中的各进程(先进入就绪队列先执行)
 - CPU 利用率较低
 
-#### 短进程优先算法(Shortest Process Next/Shortest Remaining Time)
+#### 短进程优先算法
+
+Shortest Process Next/Shortest Remaining Time:
 
 - 优先执行周转耗时/剩余耗时最短的进程
 - 若短进程过多, 则导致长进程一直无法执行
 
-#### 最高响应比优先算法(Highest Response Ratio Next)
+#### 最高响应比优先算法
+
+Highest Response Ratio Next:
 
 - R = (waitTime + serviceTime) / serviceTime: 已等待时间越长, 优先级上升
 - 修正短进程优先算法的缺点
 
-#### 时间片轮转算法(Round Robin)
+#### 时间片轮转算法
+
+Round Robin:
 
 - 在 FCFS 基础上, 设定一个基本时间单元, 每经过一个时间单元, 轮转至下一个先到进程(并进行循环轮转)
 - 额外的上下文切换
 - 时间片合适大小: 10 ms
 
-#### 多级队列调度算法(MQ)
+#### 多级队列调度算法
+
+MQ:
 
 - 将就绪队列分成多个独立子队列, 每个队列可采取不同调度算法
 - 前台交互队列使用时间片轮转算法, 后台 IO 队列使用先来先服务算法
 - 队列间使用时间片轮转算法
 
-#### 多级反馈队列算法(MLFQ)
+#### 多级反馈队列算法
+
+MLFQ:
 
 - 优先级高的子队列时间片小, 优先级低的子队列时间片大
 - CPU 密集型进程(耗时高)优先级下降很快
@@ -964,9 +1018,9 @@ exec() 的主要行为:
 
 ## 同步互斥
 
-- 互斥(mutual exclusion)
-- 死锁(deadlock)
-- 饥饿(starvation)
+- 互斥 (Mutual Exclusion)
+- 死锁 (Deadlock)
+- 饥饿 (Starvation)
 
 ### 临界区的访问原则
 
@@ -1021,7 +1075,7 @@ do {
 
 利用原子操作实现互斥数据结构
 
-#### lock/semaphore
+#### Lock and Semaphore
 
 ```cpp
 struct lock/semaphore {
@@ -1040,7 +1094,7 @@ struct lock/semaphore {
 };
 ```
 
-#### monitor
+#### Monitor
 
 - 与 semaphore 相反, 初始 0, `wait(++ && sleep)`, `signal(-- && wakeup)`
 - 管程内可以中断执行, 并 notify 其他等待线程
@@ -1049,11 +1103,11 @@ struct lock/semaphore {
 
 非抢占持有互斥循环等待
 
-### mutex 实现
+### Mutex 实现
 
-#### P/V 操作
+#### Prolaag and Verhoog
 
-##### 具体实现信号量的 P 操作
+##### Prolaag Semaphore
 
 - 关中断
 - 判断当前信号量的 value 是否大于 0
@@ -1061,12 +1115,12 @@ struct lock/semaphore {
 - 如果不是>0，则表明无法获得信号量，故需要将当前的进程加入到等待队列中，并打开中断，然后运行调度器选择另外一个进程执行
 - 如果被 V 操作唤醒，则把自身关联的 wait 从等待队列中删除（此过程需要先关中断，完成后开中断）
 
-##### 具体实现信号量的 V 操作
+##### Verhoog Semaphore
 
 - 关中断
 - 如果信号量对应的 wait queue 中没有进程在等待，直接把信号量的 value 加一，然后开中断返回
-- 如果有进程在等待且进程等待的原因是 semophore 设置的,
-  则调用 wakeup_wait 函数将 waitqueue 中等待的第一个 wait 删除,
+- 如果有进程在等待且进程等待的原因是 semaphore 设置的,
+  则调用 wakeup_wait 函数将 wait queue 中等待的第一个 wait 删除,
   且把此 wait 关联的进程唤醒, 最后开中断返回
 
 #### 管程
@@ -1080,7 +1134,7 @@ struct lock/semaphore {
 - 对局部于管程内部的共享数据设置初始值的语句
 - 成员变量信号量 next: 配合进程对条件变量 cv 的操作而设置的, 由于发出 signal_cv 的进程 A 会唤醒睡眠进程 B,
   进程 B 执行会导致进程 A 睡眠，直到进程 B 离开管程，进程 A 才能继续执行，这个同步过程是通过信号量 next 完成
-- 整形变量 next_count: 表示由于发出 singal_cv 而睡眠的进程个数
+- 整形变量 next_count: 表示由于发出 signal_cv 而睡眠的进程个数
 
 ```c
 typedef struct monitor{
@@ -1088,10 +1142,10 @@ typedef struct monitor{
     // should be initialized to 1
     semaphore_t mutex;
     // the next semaphore is used to down the signaling proc itself,
-    // and the other OR wakeuped
+    // and the other OR woke up
     semaphore_t next;
-    int next_count;     // the number of of sleeped signaling
-    proc condvar_t *cv; // the condvars in monitor
+    int next_count;     // the number of of sleepy signaling
+    proc condvar_t *cv; // the conditional variable in monitor
 } monitor_t;
 ```
 
@@ -1108,10 +1162,12 @@ typedef struct condvar{
 // and the signaling proc should up the waiting
 semaphore_t sem;
 proc int count; // the number of waiters on
-condvar monitor_t \* owner; // the owner(monitor) of this condvar
+condvar monitor_t \* owner; // the owner(monitor) of this conditional variable
 } condvar_t;
 
-## 文件系统 (FileSystem)
+## 文件系统
+
+File System:
 
 - 分配文件磁盘空间: 分配与管理
 - 管理文件集合: 定位, 命名, 文件系统结构
@@ -1128,21 +1184,27 @@ condvar monitor_t \* owner; // the owner(monitor) of this condvar
 
 ### 文件系统基本数据结构
 
-superblock -> dentry -> vnode/inode
+Super Block -> Directory Entry -> vnode/inode
 
-#### 文件卷控制块(superblock)
+#### 文件卷控制块
+
+Super Block:
 
 - 每个文件系统只有一个控制块
 - 描述该文件系统全局信息: 数据块(大小等信息), 空余块信息, 文件指针/引用计数
 
-#### 目录项(dentry)
+#### 目录项
+
+Directory Entry:
 
 - 目录是一类特殊的文件: 其内容为文件索引表(文件名/文件指针), 内部采取哈希表存储
 - 目录与文件构成树状结构
 - 每个目录项属于一个目录, 一个目录可有多个目录项
 - 保存目录相关信息: 指向文件控制块, 父目录/子目录信息
 
-#### 文件控制块(vnode/inode)
+#### 文件控制块
+
+vnode/inode:
 
 - 每个文件有一个文件控制块
 - 保存该文件详细信息: 访问权限, 所属者/组, 文件大小, 数据块位置(索引)
@@ -1171,7 +1233,9 @@ superblock -> dentry -> vnode/inode
 
 - bit 位图, 链表, 琏式索引: 保存空闲数据块位置与顺序
 
-### 冗余磁盘阵列(Redundant Array of Inexpensive Disks/RAID)
+### 冗余磁盘阵列
+
+Redundant Array of Inexpensive Disks (RAID):
 
 - RAID-0: 磁盘条带化
 - RAID-1: 磁盘镜像(冗余拷贝), 提高可靠性
@@ -1181,19 +1245,19 @@ superblock -> dentry -> vnode/inode
 
 ### FS 实现
 
-#### Mount
+#### FS Mount
 
 `sfs_do_mount`函数中:
 
 - 完成了加载位于硬盘上的 SFS 文件系统的超级块 superblock 和 freemap 的工作 l
 - 在内存中有了 SFS 文件系统的全局信息
 
-#### index
+#### FS Index
 
 - 对于普通文件，索引值指向的 block 中保存的是文件中的数据
 - 对于目录，索引值指向的数据保存的是目录下所有的文件名以及对应的索引节点所在的索引块（磁盘块）所形成的数组
 
-#### inode
+#### FS Node
 
 内存 inode 包含了 SFS 的硬盘 inode 信息, 而且还增加了其他一些信息, 这属于是便于进行是判断否改写、互斥操作、回收和快速地定位等作用.
 一个内存 inode 是在打开一个文件后才创建的, 如果关机则相关信息都会消失.
@@ -1253,7 +1317,7 @@ struct inode_ops {
 - CPU 一般都是通过寄存器的形式来访问外部设备
 - 外设的寄存器通常包括控制寄存器、状态寄存器与数据寄存器三类, 分别用于发送命令/读取状态/读写数据.
 
-### CGA/EGA + Chromatext video buffer
+### CGA EGA and ChromaText Video Buffer
 
 在内存的低 1MB 中, 有许多地址被映射至外部设备, 其中就包含文字显示模块(显卡控制显示器):
 
@@ -1262,7 +1326,7 @@ struct inode_ops {
   字符颜色和属性的控制信息
   (back_twinkle, back_r, back_g, back_b, front_light, front_r, front_g, front_b)
 
-### I/O
+### Input and Output
 
 调用 `io_delay()` 函数: 对于一些老式总线的外部设备, 读写 I/O 端口的速度若过快就容易出现丢失数据的现象
 

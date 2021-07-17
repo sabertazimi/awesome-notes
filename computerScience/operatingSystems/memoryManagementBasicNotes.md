@@ -6,7 +6,7 @@
     - [trace](#trace)
     - [vmstat](#vmstat)
     - [pmap](#pmap)
-    - [Memory Hotplug](#memory-hotplug)
+    - [Memory Hot Plug](#memory-hot-plug)
     - [TCMalloc](#tcmalloc)
     - [Oprofile](#oprofile)
 
@@ -32,10 +32,14 @@ check detailed usage of memory
 pmap PID
 ```
 
-### [Memory Hotplug](http://www.kernel.org/doc/Documentation/memory-hotplug.txt)
+### Memory Hot Plug
+
+- [User Guide](http://www.kernel.org/doc/Documentation/memory-hotplug.txt)
 
 ### TCMalloc
 
 Google TCMalloc
 
-### [Oprofile](http://oprofile.sourceforge.net)
+### Oprofile
+
+- [User Guide](http://oprofile.sourceforge.net)

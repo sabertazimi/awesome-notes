@@ -9,10 +9,10 @@
   - [Architecture](#architecture)
     - [Control Signal](#control-signal)
     - [Special Control Signal](#special-control-signal)
-    - [Branch/Loop/Jump](#branchloopjump)
+    - [Procedure Control Signal](#procedure-control-signal)
     - [Forwarding](#forwarding)
     - [Exception](#exception)
-    - [Efficence](#efficence)
+    - [Efficiency](#efficiency)
   - [Optimization](#optimization)
     - [Principles](#principles)
     - [Tips](#tips)
@@ -86,7 +86,7 @@ ret
 | :-------- | :------------------------- |
 | Fetch     | icode,ifun rA,rB valC,valP |
 | Decode    | valA,srcA valB,srcB        |
-| Execute   | valE Cond                  |
+| Execute   | valE Condition             |
 | Memory    | valM read/write            |
 | WriteBack | E port,dstE M port,dstM    |
 | PCUpdate  | PC                         |
@@ -98,10 +98,12 @@ ret
 - mispredicted branch: `E_icode in {IJXX} && !e_Cnd`
 - exception: `m_stat in {SADR, SINS, SHLT} || W_stat in {SADR, SINS, SHLT}`
 
-### Branch/Loop/Jump
+### Procedure Control Signal
+
+Branch, Loop, Jump:
 
 PrectPC | `W_valM`(无法预测) | `M_valP/M_valA`
-(在译码阶段合并信号量 valA 与 valP: PCUpdate 位于 Fetch,无需传递 valP, 只剩 call/jxxx 需要 valP)
+(在译码阶段合并信号量 valA 与 valP: PCUpdate 位于 Fetch,无需传递 valP, 只剩 call/jump 需要 valP)
 
 - AT: always taken
 - NT: never taken
@@ -130,7 +132,7 @@ int d_valA = [
 
 流水线中最深的指令引起的异常, 优先级最高 e.g 访存阶段地址越界异常优先级高于取指阶段地址越界异常优先级
 
-### Efficence
+### Efficiency
 
 CPI = 1.0 + lp + mp + rp:
 
@@ -167,7 +169,7 @@ CPI = 1.0 + lp + mp + rp:
 循环展开: 增大循环的步长 - Duff's Device 以 7 为步长:
 
 - 提升循环的运行效率
-- 一次循环内: 可先将所有数据先读出来(Memory State),将进行计算(Excute State), 从而消除 Load/Use 冒险而产生的 Bubble
+- 一次循环内: 可先将所有数据先读出来(Memory State),将进行计算(Execute State), 从而消除 Load/Use 冒险而产生的 Bubble
 
 ## 异常控制流
 
@@ -253,7 +255,7 @@ int main(void) {
 
 int main(void) {
     int status, i;
-    pid_t pid[N], retpid;
+    pid_t pid[N], ret_pid;
 
     for (i = 0; i < N; i++) {
         if ((pid[i] = fork()) == 0) { // child
@@ -263,12 +265,12 @@ int main(void) {
 
     // parent reaps(回收) N children in order
     i = 0;
-    while((retpid = waitpid(pid[i++], &status, 0)) > 0) {
+    while((ret_pid = waitpid(pid[i++], &status, 0)) > 0) {
         if (WIFEXITED(statue)) {
             printf("child: %d terminated normally with exit status=%d\n",
-              retpid, WEXITSTATUS(status));
+              ret_pid, WEXITSTATUS(status));
         } else {
-            printf("child %d terminated abnormally\n", retpid);
+            printf("child %d terminated abnormally\n", ret_pid);
         }
     }
 
@@ -314,7 +316,7 @@ void handler(int sig) {
 
 int main(void) {
     int i, n;
-    char buf[MAXBUF];
+    char buf[MAX_BUF];
     pid_t pid;
 
     if (signal(SIGCHLD, handler) == SIG_ERR) {
@@ -352,13 +354,13 @@ int main(void) {
 
 ```c
 // how: SIG_BLOCK, SIG_UNBLOCK, SIG_SETMASK, 是否阻塞set中的信号合集
-int sigprocmask(int how, const sigset_t *set, sigset_t *oldset);
+int sigprocmask(int how, const sigset_t *set, sigset_t *old_set);
 
 int sigemptyset(sigset_t *set);
 int sigfillset(sigset_t *set);
-int sigaddset(sigset_t *set, int signum);
-int sigdelset(sigset_t *set, int signum);
-int sigismember(const sigset_t *set， int signum);
+int sigaddset(sigset_t *set, int sig_num);
+int sigdelset(sigset_t *set, int sig_num);
+int sigismember(const sigset_t *set， int sig_num);
 ```
 
 ```c
@@ -366,7 +368,7 @@ void handler(int sig) {
     pid_t pid;
 
     while ((pid = waitpid(-1, NULL, 0)) > 0) {
-        deletejob(pid);
+        delete_job(pid);
     }
 
     if (errno != ECHILD) {
@@ -374,13 +376,13 @@ void handler(int sig) {
     }
 }
 
-// 保证父进程先执行 addjob, 再执行 deletejob
+// 保证父进程先执行 add_job, 再执行 delete_job
 int main(int argc, char **argv) {
     int pid;
     sigset_t mask;
 
     signal(SIGCHLD, handler;)
-    initjob();
+    init_job();
 
     while (1) {
         sigemptyset(&mask);
@@ -394,8 +396,8 @@ int main(int argc, char **argv) {
         }
 
         // parent process
-        addjob(pid);
-        // after addjob, unblock SIGCHLD, make it can handle signal
+        add_job(pid);
+        // after add_job, unblock SIGCHLD, make it can handle signal
         sigprocmask(SIG_UNBLOCK, &mask, NULL);
     }
 }
@@ -414,46 +416,46 @@ int main(int argc, char **argv) {
 
 ```c
 // robust I/O
-ssize_t rio_readn(int fd, void *usrbuf, size_t n) {
-    size_t nleft = n;
-    ssize_t nread;
-    char *bufp = usrbuf;
+ssize_t rio_read_n(int fd, void *usr_buf, size_t n) {
+    size_t n_left = n;
+    ssize_t n_read;
+    char *buf_p = usr_buf;
 
-    while (nleft > 0) {
-        if ((nread = read(fd, bufp, nleft)) < 0) {
+    while (n_left > 0) {
+        if ((n_read = read(fd, buf_p, n_left)) < 0) {
             if (errno == EINTR) {
-                nread = 0; // interrupted by signal_handler, re-call read()
+                n_read = 0; // interrupted by signal_handler, re-call read()
             } else {
                 return -1;
             }
-        } else if (nread == 0) {
+        } else if (n_read == 0) {
             break;
         }
 
-        nleft -= nread;
-        bufp += nread; // remove data from bufp
+        n_left -= n_read;
+        buf_p += n_read; // remove data from buf_p
     }
 
     return (n - left);
 }
 
 
-ssize_t rio_writen(int fd, void *usrbuf, size_t n) {
-    size_t nleft = n;
-    ssize_t nwritten;
-    char *bufp = usrbuf;
+ssize_t rio_write_n(int fd, void *usr_buf, size_t n) {
+    size_t n_left = n;
+    ssize_t n_written;
+    char *buf_p = usr_buf;
 
-    while (nleft > 0) {
-        if ((nwritten = read(fd, bufp, nleft)) < 0) {
+    while (n_left > 0) {
+        if ((n_written = read(fd, buf_p, n_left)) < 0) {
             if (errno == EINTR) {
-                nwritten = 0; // interrupted by signal_handler, re-call read()
+                n_written = 0; // interrupted by signal_handler, re-call read()
             } else {
                 return -1;
             }
         }
 
-        nleft -= nwritten;
-        bufp += nwritten; // remove data from bufp
+        n_left -= n_written;
+        buf_p += n_written; // remove data from buf_p
     }
 
     return n;
@@ -469,8 +471,8 @@ ssize_t rio_writen(int fd, void *usrbuf, size_t n) {
 
 #### I/O 函数的选择
 
-- sprintf+rio_writen: 格式化输出至套接口
-- rio_readlineb+sscanf: 格式化输入
+- sprintf+rio_written: 格式化输出至套接口
+- rio_readlineb + sscanf: 格式化输入
 
 ## 网络
 
@@ -482,7 +484,7 @@ ssize_t rio_writen(int fd, void *usrbuf, size_t n) {
 int main(int argc, char *argv) {
     char **pp;
     struct in_addr addr;
-    struct hostent *hostp;
+    struct hostent *host_p;
 
     if (argc != 2) {
         fprintf(stderr, "usage: %s <domain name or dotted-decimal>\n", argv[0]);
@@ -490,18 +492,18 @@ int main(int argc, char *argv) {
     }
 
     if (inet_aton(argv[1], &addr) != 0) {
-        hostp = gethostbyaddr((const char*)&addr, sizeof(addr), AF_INET);
+        host_p = gethostbyaddr((const char*)&addr, sizeof(addr), AF_INET);
     } else {
-        hostp = gethostbyname(argv[1]);
+        host_p = gethostbyname(argv[1]);
     }
 
-    printf("official hostname: %s\n:", hostp->h_name);
+    printf("official hostname: %s\n:", host_p->h_name);
 
-    for (pp = hostp->h_aliases; *pp != NULL; pp++) {
+    for (pp = host_p->h_aliases; *pp != NULL; pp++) {
         printf("alias: %s\n", *pp);
     }
 
-    for (pp = hostp->h_addr_list; *pp != NULL; pp++) {
+    for (pp = host_p->h_addr_list; *pp != NULL; pp++) {
         addr.s_addr = ((struct in_addr *)*pp)->s_addr;
         printf("address: %s\n", inet_ntoa(addr));
     }
@@ -527,7 +529,7 @@ void unix_error(char *msg) {
 }
 
 void posix_error(int code, char *msg) {
-    fprinf(stderr, "%s: %s\n", msg, strerror(code));
+    fprintf(stderr, "%s: %s\n", msg, strerror(code));
     exit(0);
 }
 
@@ -537,7 +539,7 @@ void dns_error(char *msg) {
 }
 
 void app_error(char *msg) {
-    fprinf(stderr, "%s\n", msg);
+    fprintf(stderr, "%s\n", msg);
     exit(0);
 }
 ```

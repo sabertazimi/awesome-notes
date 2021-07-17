@@ -5,8 +5,8 @@
   - [LXC](#lxc)
     - [Linux Namespaces](#linux-namespaces)
     - [chroot](#chroot)
-    - [Control Groups (cgroups)](#control-groups-cgroups)
-  - [In-memory Computing Thesis Notes](#in-memory-computing-thesis-notes)
+    - [Control Groups](#control-groups)
+  - [In-Memory Computing Thesis Notes](#in-memory-computing-thesis-notes)
     - [单节点内存计算](#单节点内存计算)
       - [内存存储系统](#内存存储系统)
       - [内存数据处理系统](#内存数据处理系统)
@@ -34,8 +34,8 @@
         - [Chunk 副本平衡](#chunk-副本平衡)
         - [垃圾回收](#垃圾回收)
       - [容错性](#容错性)
-    - [MapReduce](#mapreduce)
-    - [Google Bigtable](#google-bigtable)
+    - [Map Reduce](#map-reduce)
+    - [Google Big Table](#google-big-table)
       - [数据模型](#数据模型)
         - [行](#行)
         - [列族](#列族)
@@ -56,14 +56,14 @@
       - [Limits](#limits)
       - [Ecosystem](#ecosystem)
         - [ClickOS](#clickos)
-        - [Rumprun](#rumprun)
+        - [RumpRun](#rumprun)
         - [OSv](#osv)
         - [Mini-OS](#mini-os)
         - [Xen](#xen)
         - [Unik](#unik)
     - [libOS](#libos)
     - [OPAM](#opam)
-    - [MirageOS (Exokernel -> Library Operating System -> Unikernel)](#mirageos-exokernel---library-operating-system---unikernel)
+    - [MirageOS](#mirageos)
       - [Installation](#installation)
       - [Development](#development)
       - [Use of OCaml](#use-of-ocaml)
@@ -79,13 +79,13 @@
       - [Big-memory workload analysis](#big-memory-workload-analysis)
       - [Hardware Support](#hardware-support)
       - [Software Support](#software-support)
-      - [Virtual Machines with direct-segment](#virtual-machines-with-direct-segment)
+      - [Virtual Machines with Direct Segment](#virtual-machines-with-direct-segment)
       - [Results](#results)
     - [Redundant Memory Mappings (RMM)](#redundant-memory-mappings-rmm)
       - [Old Methods](#old-methods)
-      - [multipage mapping](#multipage-mapping)
-      - [transparent huge pages](#transparent-huge-pages)
-      - [direct segment](#direct-segment-1)
+      - [Multi Page mapping](#multi-page-mapping)
+      - [Transparent Huge pages](#transparent-huge-pages)
+      - [Direct Segment Method](#direct-segment-method)
       - [New Methods](#new-methods)
       - [RMM Benefits](#rmm-benefits)
       - [Range Translation](#range-translation)
@@ -138,7 +138,7 @@ func run() {
     cmd.Stdout = os.Stdout
     cmd.Stderr = os.Stderr
     cmd.SysProcAttr = &syscall.SysProcAttr {
-        Cloneflags: syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID
+        CloneFlags: syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID
           | syscall.CLONE_NEWNS | syscall.CLONE_NEWUSER,
         Credential: &syscall.Credential{Uid: 0, Gid: 0},
         UidMappings: []syscall.SysProcIDMap{
@@ -185,9 +185,11 @@ must(syscall.Chdir("/"))
 must(syscall.Mount("proc", "proc", "proc", 0, ""))
 ```
 
-### Control Groups (cgroups)
+### Control Groups
 
-resources limitation: CPU, Memory, Disk I/O, Process numbers, Network, Device
+`cgroups`, resources limitation:
+CPU, Memory, Disk I/O,
+Process numbers, Network, Device.
 
 ```go
 func cg() {
@@ -210,7 +212,7 @@ func cg() {
 - 节点通信问题
 - 能耗问题
 
-## In-memory Computing Thesis Notes
+## In-Memory Computing Thesis Notes
 
 内存计算特点:
 
@@ -259,9 +261,9 @@ func cg() {
 
 ### 混合内存计算
 
-铁电存储器: ferroelectric random accessmemory, 简称 FeRAM
-相变存储器: phase change memory, 简称 PCM
-电阻存储器: resistive randomaccess memory, 简称 RRAM
+铁电存储器: Ferroelectric Random Access Memory, 简称 FeRAM
+相变存储器: Phase Change Memory, 简称 PCM
+电阻存储器: Resistive Random Access Memory, 简称 RRAM
 
 ## Hadoop Thesis Notes
 
@@ -389,7 +391,7 @@ Master 节点基本工作:
 - Master 服务器副本
 - Chunk Checksum 检验数据完整性
 
-### MapReduce
+### Map Reduce
 
 - 分割输入数据 (数据分布)
 - 集群调度 (负载均衡)
@@ -418,9 +420,9 @@ Master 节点基本工作:
 7. 当所有的 Map 和 Reduce 任务都完成之后，master 唤醒用户程序。在这个时候，在用户程序里的对
    MapReduce 调用才返回。
 
-### Google Bigtable
+### Google Big Table
 
-Bigtable 是一个稀疏的、分布式的、持久化存储的多维度排序,
+BigTable 是一个稀疏的、分布式的、持久化存储的多维度排序,
 Map: `(row: string, column: string, time: int64) -> string`.
 
 #### 数据模型
@@ -428,7 +430,7 @@ Map: `(row: string, column: string, time: int64) -> string`.
 ##### 行
 
 - 对同一个行关键字的读或者写操作都是原子的
-- Bigtable 通过行关键字的字典顺序来组织数据
+- BigTable 通过行关键字的字典顺序来组织数据
 - 表中的每个行都可以动态分区, 每个分区叫做一个 "Tablet"
 - Tablet 是数据分布和负载均衡调整的最小单位
 
@@ -440,7 +442,7 @@ Map: `(row: string, column: string, time: int64) -> string`.
 
 ##### 时间戳
 
-- 在 Bigtable 中, 表的每一个数据项都可以包含同一份数据的不同版本
+- 在 BigTable 中, 表的每一个数据项都可以包含同一份数据的不同版本
 - 不同版本的数据通过时间戳来索引
 
 #### 依赖
@@ -454,7 +456,7 @@ Map: `(row: string, column: string, time: int64) -> string`.
 
 ##### Chubby
 
-Bigtable 使用 Chubby 完成以下的几个任务：
+BigTable 使用 Chubby 完成以下的几个任务：
 
 1. 确保在任何给定的时间内最多只有一个活动的 Master 副本
 2. 存储 BigTable 数据的自引导指令的位置
@@ -464,7 +466,7 @@ Bigtable 使用 Chubby 完成以下的几个任务：
 
 #### 组件
 
-Bigtable 包括了三个主要的组件: 链接到客户程序中的库、一个 Master 服务器和多个 Tablet 服务器
+BigTable 包括了三个主要的组件: 链接到客户程序中的库、一个 Master 服务器和多个 Tablet 服务器
 
 ##### Master 服务器
 
@@ -492,9 +494,9 @@ Master 服务器主要负责以下工作：
 
 ##### 服务
 
-- 当写入表时, 先写日志, 再写入内存中的 memtable, 当其大小达到阈值后, 写入 GFS 中 (以 SSTable 存储)
-- 利用 Log-Structured Merge Tree 来表示 memtable 和 SSTable 之间的关系 (内存数据滚动合并至磁盘)
-- 对于一致性的处理，将 SSTable 不可改变化，然后对 memtable 使用 copy-on-write 技术实现读写并行
+- 当写入表时, 先写日志, 再写入内存中的 memTable, 当其大小达到阈值后, 写入 GFS 中 (以 SSTable 存储)
+- 利用 Log-Structured Merge Tree 来表示 memTable 和 SSTable 之间的关系 (内存数据滚动合并至磁盘)
+- 对于一致性的处理，将 SSTable 不可改变化，然后对 memTable 使用 copy-on-write 技术实现读写并行
 
 ## Unikernel
 
@@ -552,7 +554,7 @@ and I see no reason why they will fail to do so now.
 
 network function virtualization (NFV) devices
 
-##### Rumprun
+##### RumpRun
 
 compile most of the programs found on a Linux or Unix-like operating system as unikernels
 
@@ -614,9 +616,11 @@ opam remote
 opam depext
 ```
 
-### MirageOS (Exokernel -> Library Operating System -> Unikernel)
+### MirageOS
 
-- **Unikernels**: specialised, sealed, singlepurpose libOS VMs
+Exokernel -> Library Operating System -> Unikernel:
+
+- **Unikernels**: specialized, sealed, single purpose libOS VMs
   that run directly on the hypervisor
 - A libOS is structured very differently from a conventional OS:
   all services, from the scheduler to the device drivers to the network stack,
@@ -662,7 +666,7 @@ OCaml is a pragmatic system that strikes a balance between imperative languages,
 e.g., C, and pure functional languages, e.g., Haskell.
 It features type inference, algebraic data types, and higher-order functions,
 but also permits references and mutable data structures
-while guaranteeing that all such side-effects are always typesafe
+while guaranteeing that all such side-effects are always type safe
 and will never cause memory corruption.
 
 - (ICFP'10) a full-fledged systems programming language
@@ -680,10 +684,10 @@ and will never cause memory corruption.
 ##### Concurrency
 
 - lightweight control-flow threads for managing I/O and timeouts
-- optimised inter-VM communication for parallel computation
+- optimized inter-VM communication for parallel computation
 
 Each Mirage instance runs as on a single CPU core.
-Communication is optimised dynamically:
+Communication is optimized dynamically:
 if the VMs are running on the same physical machine,
 Mirage uses shared memory channels instead of the network stack.
 
@@ -691,7 +695,7 @@ Mirage uses shared memory channels instead of the network stack.
 
 - The application’s main thread is launched immediately
   after boot and the VM shuts down when it returns.
-- Mirage provides an evaluator that uses domainpoll
+- Mirage provides an evaluator that uses domain poll
   to listen for events and wake up lightweight threads.
   The VM is thus either executing OCaml code or blocked,
   with no internal preemption or asynchronous interrupts.
@@ -704,12 +708,12 @@ Mirage uses shared memory channels instead of the network stack.
 Data arrives to both the network and storage stacks
 as a stream of discrete packets.
 Mirage bridges the gap between packets and streams
-by using channel iteratees that map functions over infinite streams of packets
+by using channel iterates that map functions over infinite streams of packets
 to produce a typed stream.
 
 #### I/O Stack
 
-Mirage implements a Xen blkfront VFS which interacts directly
+Mirage implements a Xen block front VFS which interacts directly
 with a block device without an intervening filesystem.
 
 ## Xen Soft Device
@@ -772,12 +776,12 @@ For the majority of their address space, big-memory workloads do not require:
 - fragmentation mitigation
 - fine-grained per-page protection
 
-- Big-memory workloads pay a cost of pagebased virtual memory:
+- Big-memory workloads pay a cost of page based virtual memory:
   substantial performance lost to TLB misses
 - Big-memory workloads are long-running programs,
   receive little benefit from virtual memory optimizations
   whose primary goal is to allow quick program startup, such as demand paging
-- Big-memory workloads cosume almost all memory resources,
+- Big-memory workloads consume almost all memory resources,
   are sized to match memory capacity
 - Big-memory workloads isolate from other services,
   have one (or a few) primary process(es)
@@ -796,16 +800,17 @@ direct segments add three registers per core as follows:
 Direct segments are aligned to the base page size,
 so page offset bits are omitted from these registers (e.g., 12 bits for 4KB pages)
 
-Without real direct-segment hardware,
-we emulate directsegment functionalities using 4KB pages
+Without real direct segment hardware,
+we emulate direct segment functionalities using 4KB pages
 
 More specifically, we modify Linux’s page fault handler
 so that on a page fault within the primary region
 it calculates the corresponding physical address from the faulting virtual page number.
 
-If VAfault is the 4KB page-aligned virtual address of a faulting page,
-then our modified page-fault handler first checks if BASE ≤ VAfault < LIMIT.
-If so, the handler adds a mapping from VAfault to VAfault + OFFSET to the page table.
+If VA fault is the 4KB page-aligned virtual address of a faulting page,
+then our modified page-fault handler first checks if BASE ≤ VA fault < LIMIT.
+If so,
+the handler adds a mapping from VA fault to VA fault + OFFSET to the page table.
 
 #### Software Support
 
@@ -818,13 +823,13 @@ uses a direct segment at any time (called the primary process)
   and demand paging are not guaranteed for memory allocated within the primary region
 - managing physical memory:
   create contiguous physical memory dynamically through periodic memory compaction
-- managing direct-segment registers:
+- managing direct segment registers:
   When the OS dispatches a thread;
   it loads the BASE, LIMIT, and OFFSET values from the PCB
 - Growing and shrinking direct segment
-  (by updating direct-segment registers and page table entries)
+  (by updating direct segment registers and page table entries)
 
-#### Virtual Machines with direct-segment
+#### Virtual Machines with Direct Segment
 
 In a virtualized environment the memory accesses
 goes through two levels of address translations:
@@ -852,22 +857,22 @@ TLB Reach = (TLB Size) X (Page Size)
 
 #### Old Methods
 
-- clustered TLBs/multipage mappings: mapping multiple pages per page table entry
-- transparent huge pages/superpaging: 使得每个页表项覆盖更大的内存; 但受限于架构, 页面大小最大为 1GB
-- direct segment: 将一个进程所需的虚拟内存直接映射到一个大段中; 但不利用操作系统的动态内存分配
+- Clustered TLBs/Multi-Page Mappings: mapping multiple pages per page table entry
+- Transparent Huge Pages/Super-Paging: 使得每个页表项覆盖更大的内存; 但受限于架构, 页面大小最大为 1GB
+- Direct Segment: 将一个进程所需的虚拟内存直接映射到一个大段中; 但不利用操作系统的动态内存分配
 
-#### multipage mapping
+#### Multi Page mapping
 
 - pack multiple page table entries(PTEs) into a single TLB entry
 - they pack only a small multiple of translations per entry,
   which limits their potential to reduce page-walks for large working sets
 
-#### transparent huge pages
+#### Transparent Huge pages
 
 - memory should be size-aligned and contiguous
 - many commodity processors provide limited numbers of large page TLB entries
 
-#### direct segment
+#### Direct Segment Method
 
 - applications explicitly allocate a direct segment during `startup`
 - OS can reserve a single `large contiguous range` of physical memory for a segment
@@ -923,8 +928,8 @@ rather than at `first-access time` as with demand paging.
 
 #### Contiguous Memory Allocation
 
-- one motivation for demand paging was to
-  limit unnecessary swapping in multiprogrammed workloads,
+- One motivation for demand paging was to
+  limit unnecessary swapping in multi-programmed workloads,
   which modern large memories make less common.
 - RMM trades increased memory for better performance,
   a common tradeoff when memory is cheap and plentiful.
