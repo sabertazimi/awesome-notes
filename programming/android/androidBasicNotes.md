@@ -10,46 +10,45 @@
     - [Plugins](#plugins)
       - [Code generator](#code-generator)
   - [API Conventions](#api-conventions)
-    - [Manager.Service](#managerservice)
+    - [Manager Service](#manager-service)
   - [Activity](#activity)
-    - [BaseActivity](#baseactivity)
+    - [Base Activity](#base-activity)
     - [Activity Collector](#activity-collector)
-    - [StartActivity](#startactivity)
+    - [Start Activity](#start-activity)
   - [UI Design](#ui-design)
     - [Layout](#layout)
       - [Basic](#basic)
-      - [TableLayout](#tablelayout)
+      - [Table Layout](#table-layout)
       - [Custom Layout](#custom-layout)
     - [Component](#component)
       - [Custom Component](#custom-component)
       - [AlertDialog](#alertdialog)
-      - [ListView](#listview)
-        - [Custom ListView Layout](#custom-listview-layout)
-        - [Custom ListView Listener](#custom-listview-listener)
+      - [List View](#list-view)
+        - [Custom List View Layout](#custom-list-view-layout)
+        - [Custom List View Listener](#custom-list-view-listener)
     - [Drawable](#drawable)
   - [Fragment](#fragment)
     - [Basic Fragment](#basic-fragment)
-      - [Xml in Activity.xml](#xml-in-activityxml)
+      - [Activity XML](#activity-xml)
       - [Create View in Fragment](#create-view-in-fragment)
       - [Add Fragment in Activity](#add-fragment-in-activity)
     - [Transfer Information](#transfer-information)
       - [In Activity](#in-activity)
       - [In Fragment](#in-fragment)
     - [Runtime Loop](#runtime-loop)
-      - [Basic Override Funciton](#basic-override-funciton)
+      - [Basic Override Function](#basic-override-function)
   - [Broadcast](#broadcast)
     - [Register Receiver](#register-receiver)
     - [Custom Broadcast](#custom-broadcast)
       - [Normal Broadcast](#normal-broadcast)
       - [Ordered Broadcast](#ordered-broadcast)
     - [Local Broadcast](#local-broadcast)
-      - [Local Brodcast](#local-brodcast)
       - [Local Receiver](#local-receiver)
   - [Data Store](#data-store)
     - [Files Store](#files-store)
-    - [SharedPreferences](#sharedpreferences)
+    - [Shared Preferences](#shared-preferences)
     - [DataBase](#database)
-      - [SQLiteOpenHelper](#sqliteopenhelper)
+      - [SQLite Open Helper](#sqlite-open-helper)
         - [establish table](#establish-table)
       - [Basic Operator](#basic-operator)
       - [Transaction](#transaction)
@@ -58,11 +57,11 @@
     - [Provide App Content](#provide-app-content)
   - [Service](#service)
     - [Handler](#handler)
-    - [AsyncTask](#asynctask)
+    - [Async Task](#async-task)
     - [Basic Service](#basic-service)
       - [IBinder](#ibinder)
     - [ForeGround Service](#foreground-service)
-    - [IntentService(Thread)](#intentservicethread)
+    - [Intent Service](#intent-service)
     - [Alarm Service](#alarm-service)
   - [Media](#media)
     - [Notification](#notification)
@@ -72,14 +71,14 @@
   - [NetWork](#network)
     - [WebView](#webview)
       - [Three Steps](#three-steps)
-    - [HttpURLConnection](#httpurlconnection)
-    - [HttpClient](#httpclient)
+    - [HTTP URL Connection](#http-url-connection)
+    - [HTTP Client](#http-client)
     - [XML](#xml)
       - [Pull](#pull)
       - [SAX](#sax)
-        - [DefaultHandler](#defaulthandler)
+        - [Default Handler](#default-handler)
     - [JSON](#json)
-      - [JSONObject](#jsonobject)
+      - [JSON Object](#json-object)
       - [GSON](#gson)
     - [Network Best Practice](#network-best-practice)
   - [Map](#map)
@@ -103,7 +102,7 @@
 
 1. register-based machine
    基于寄存器(不写入内存)
-2. minimizeing instruction diapath and memory accesses
+2. minimizing instruction dispatch and memory accesses
    最小化指令分配黑内存访问
 3. giving more efficient instruction stream(a lot more semantic content)
    提供更加高效的指令流
@@ -126,19 +125,19 @@
 - Constructor
 - getter/setter
 - ViewHolder
-- Parcelable Implemention
+- Parcelable Implementation
 - GsonFormat : 根据 JSONObject 生成相应类
 
 ## API Conventions
 
-### Manager.Service
+### Manager Service
 
 - PreferenceManager.getDefaultSharedPreferences
 - LocalBroadcastManager.getInstance
 
 ## Activity
 
-### BaseActivity
+### Base Activity
 
 查看当前界面属于哪个 Activity，自定义 Activity 继承 BaseActivity
 
@@ -184,7 +183,7 @@ public class ActivityCollector {
 }
 ```
 
-### StartActivity
+### Start Activity
 
 为每个 Activity 添加静态的 actionStart 方法，供其他 Activity 启用此 Activity
 
@@ -225,7 +224,7 @@ e.g web browsers
 - `android:SingleLine` 单行显示模式
 - `android:ellipsize="end"` 文字过多时缩略方式
 
-#### TableLayout
+#### Table Layout
 
 - `<TableLayout android:stretchColumns="1">` 拉伸第 2 列
 - `android:layout_span="2"` 占 2 列
@@ -244,9 +243,9 @@ View(ViewGroup): e.g button、textbox(文本框)、checkbox(复选框)
 
 #### Custom Component
 
-custom Xml
+custom XML
 
-titie.xml
+title.xml
 
 ```html
 <LinearLayout
@@ -346,7 +345,7 @@ alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 alertDialog.show();
 ```
 
-#### ListView
+#### List View
 
 ```java
 ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -355,7 +354,7 @@ ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 listView.setAdapter(adapter);
 ```
 
-##### Custom ListView Layout
+##### Custom List View Layout
 
 - Custom class
 - Custom Sub Xml(单项)
@@ -409,7 +408,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
 }
 ```
 
-##### Custom ListView Listener
+##### Custom List View Listener
 
 ```java
 listView.setOnItemClickListener(new OnItemClickListener() {
@@ -433,12 +432,12 @@ msgListView.setSelection(msgList.size()); // 将ListView定位到最后一行
 修改特定组件的背景颜色
 
 ```java
-Resources myColor=getBaseContext().getResources();
-//getBaseContext()获得基础Context
-//getResources()获得资源
-Drawable color_M=myColor.getDrawable(R.color. lightgreen );
-//由资源 myColor来获得Drawable
-R.color.lightgreen是颜色值的ID引用
+Resources myColor = getBaseContext().getResources();
+// getBaseContext()获得基础Context
+// getResources()获得资源
+Drawable color_M = myColor.getDrawable(R.color. lightGreen);
+// 由资源 myColor来获得Drawable
+// R.color.lightGreen是颜色值的ID引用
 text.setBackgroundDrawable(color_M);
 //设置背景
 ```
@@ -451,11 +450,11 @@ android.app.Fragment
 
 ### Basic Fragment
 
-#### Xml in Activity.xml
+#### Activity XML
 
 ```html
 <fragment android:id="@+id/right_fragment" <!-- custom fragment class -->
-  android:name="com.example.fragmenttest.RightFragment"
+  android:name="com.example.fragmentTest.RightFragment"
   android:layout_width="0dp" android:layout_height="match_parent"
   android:layout_weight="1" /></fragment
 >
@@ -499,7 +498,7 @@ transaction.commit();
 
 ### Runtime Loop
 
-#### Basic Override Funciton
+#### Basic Override Function
 
 - `onAttach()`
   当碎片和活动建立关联的时候调用。
@@ -541,7 +540,7 @@ In AndroidManifest,xml
   <!-- receiver priority -->
   <intent-filter android:priority="100">
     <!-- custom broadcast -->
-    <action android:name="com.example.broadcasttest. MY_BROADCAST" />
+    <action android:name="com.example.broadcastTest. MY_BROADCAST" />
   </intent-filter>
 </receiver>
 ```
@@ -551,14 +550,14 @@ In AndroidManifest,xml
 #### Normal Broadcast
 
 ```java
-intent intent = new Intent("com.example.broadcasttest.MY_BROADCAST");
+intent intent = new Intent("com.example.broadcastTest.MY_BROADCAST");
 sendBroadcast(intent);
 ```
 
 #### Ordered Broadcast
 
 ```java
-intent intent = new Intent("com.example.broadcasttest.MY_BROADCAST");
+intent intent = new Intent("com.example.broadcastTest.MY_BROADCAST");
 sendOrderedBroadcast(intent, null);
 ```
 
@@ -568,8 +567,6 @@ sendOrderedBroadcast(intent, null);
 // 获取实例
 localBroadcastManager = LocalBroadcastManager.getInstance(this);
 ```
-
-#### Local Brodcast
 
 ```java
 localBroadcastManager.sendBroadcast(intent); // 发送本地广播
@@ -582,13 +579,11 @@ localBroadcastManager.registerReceiver(CustomReceiver, intentFilter);
 localBroadcastManager.unregisterReceiver(CustomReceiver);
 ```
 
----
-
 ## Data Store
 
 ### Files Store
 
-`/data/data/<packagename>/files/`
+`/data/data/<packageName>/files/`
 
 Write
 
@@ -641,9 +636,9 @@ try {
 return content.toString();
 ```
 
-### SharedPreferences
+### Shared Preferences
 
-`/data/data/<packagename>/shared_prefs/`
+`/data/data/<packageName>/shared_preferences/`
 
 Write
 
@@ -678,7 +673,7 @@ boolean married = pref.getBoolean("married", false);
 
 `/data/data/<package name>/databases/`
 
-#### SQLiteOpenHelper
+#### SQLite Open Helper
 
 ```java
 @Override
@@ -702,7 +697,7 @@ Custom 实现创建、升级数据库的逻辑
 
 ```sql
 create table Book (
-    id integer primary key autoincrement,
+    id integer primary key autoIncrement,
     author text,
     price real,
     pages integer,
@@ -737,7 +732,7 @@ my_DataBase.close();
 ```java
 //创建一个名为"test"并带两个参数的表
 my_DataBase.execSQL("CREATE TABLE test (_id INTEGER PRIMARY KEY,
-someNumber INTERGER);");
+someNumber INTEGER);");
 //在数据库中插入一个元组
 my_DataBase.execSQL("INSERT INTO test (_id,someNumber) values(1,8);");
 
@@ -760,7 +755,7 @@ values.put("price", 19.95);
 db.insert("Book", null, values); // 插入第二条数据
 
 //update
-ontentValues values = new ContentValues();
+contentValues values = new ContentValues();
 values.put("price", 10.99);
 db.update("Book", values, "name = ?", new String[] { "The DaVinci Code"  });
 
@@ -844,7 +839,7 @@ getContentResolver().query/insert/delete/update();
 
 ### Provide App Content
 
-With CotentProvider
+With ContentProvider:
 
 ```java
 public class MyProvider extends ContentProvider {
@@ -915,7 +910,7 @@ new Thread(new Runnable() {
 }).start();
 ```
 
-### AsyncTask
+### Async Task
 
 AsyncTask 中的几个方法才能完成对任务的定制。经常需要去重写的方法
 有以下四个:
@@ -1063,7 +1058,7 @@ public void onServiceConnected(ComponentName name, IBinder service) {
 
 ```java
 Notification notification = new Notification(R.drawable.ic_launcher,
-  "Notification comes", System. currentTimeMillis());
+  "Notification comes", System. currentTimeMills());
 Intent notificationIntent = new Intent(this, MainActivity.class);
 PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
   notificationIntent, 0);
@@ -1071,7 +1066,7 @@ notification.setLatestEventInfo(this, "This is title", "This is content", pendin
 startForeground(1, notification);
 ```
 
-### IntentService(Thread)
+### Intent Service
 
 ```java
 public class MyIntentService extends IntentService {
@@ -1137,7 +1132,7 @@ public int onStartCommand(Intent intent, int flags, int startId) {
 NotificationManager manager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
 Notification notification = new Notification(R.drawable.ic_launcher, "This is
-  ticker text", System.currentTimeMillis());
+  ticker text", System.currentTimeMills());
 
 Intent intent = new Intent(this, NotificationActivity.class);
 PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -1159,7 +1154,7 @@ manager.notify(1, notification);
 
 Networked Apps
 
-1. Network latency(网络延迟)——UI thread seperated from data loading thread
+1. Network latency(网络延迟)——UI thread separated from data loading thread
 2. Battery drain(电池耗尽)
 3. Intermittent service(中断服务)
 
@@ -1185,9 +1180,9 @@ webView.setWebViewClient(new WebViewClient() {
 webView.loadUrl("http://www.github.com");
 ```
 
-### HttpURLConnection
+### HTTP URL Connection
 
-### HttpClient
+### HTTP Client
 
 ### XML
 
@@ -1251,7 +1246,7 @@ if (httpResponse.getStatusLine().getStatusCode() == 200) {
 
 #### SAX
 
-##### DefaultHandler
+##### Default Handler
 
 ```java
 public class ContentHandler extends DefaultHandler {
@@ -1330,7 +1325,7 @@ if (httpResponse.getStatusLine().getStatusCode() == 200) {
 
 ### JSON
 
-#### JSONObject
+#### JSON Object
 
 ```java
 HttpClient httpClient = new DefaultHttpClient();
@@ -1415,13 +1410,13 @@ public class HttpUtil {
             }
 
             if (listener != null) {
-                // 回调onFinish()方法
-                // 将respone传入回调方法
+                // 回调 onFinish() 方法
+                // 将 response 传入回调方法
                 listener.onFinish(response.toString());
                 }
             } catch (Exception e) {
                 if (listener != null) {
-                // 回调onError()方法
+                // 回调 onError() 方法
                 listener.onError(e);
                 }
             } finally {
@@ -1586,7 +1581,7 @@ public class MainActivity extends Activity {
 ## Sensor
 
 ```java
-SensorManager senserManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+SensorManager sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
 ```
 
 ```java
@@ -1601,14 +1596,14 @@ SensorEventListener listener = new SensorEventListener() {
 ```
 
 ```java
-senserManager.registerListener(listener, senser, SensorManager.SENSOR_DELAY_NORMAL);
+sensorManager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
 sensorManager.unregisterListener(listener);
 ```
 
 ### Light Sensor
 
 ```java
-Sensor sensor = senserManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 ```
 
 ### Accelerometer Sensor
@@ -1628,7 +1623,7 @@ Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 ### Global Context
 
 ```html
-<application android:name="com.example.networktest.MyApplication">
+<application android:name="com.example.networkTest.MyApplication">
   ......
 </application>
 ```
