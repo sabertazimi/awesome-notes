@@ -1369,11 +1369,11 @@ burst length = AxLEN[7:0] + 1 (up to 256 transfers in each burst)
 
 #### Read Burst
 
-![Read Burst Example](./figures/AXI_Read_Burst.png)
+![Read Burst Example](figures/AXI_Read_Burst.png)
 
 #### Write Burst
 
-![Write Burst Example](./figures/AXI_Write_Burst.png)
+![Write Burst Example](figures/AXI_Write_Burst.png)
 
 ## Verilog Components
 
