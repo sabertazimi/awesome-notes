@@ -9,30 +9,30 @@
     - [Iterator](#iterator)
       - [slice](#slice)
     - [limits](#limits)
-    - [Implementation Pattern(OOP Pattern)](#implementation-patternoop-pattern)
+    - [Implementation Pattern](#implementation-pattern)
     - [algorithm](#algorithm)
       - [sort](#sort)
     - [map](#map)
-    - [Algorithm](#algorithm)
+    - [Algorithm](#algorithm-1)
   - [Search Problem](#search-problem)
     - [Search in Sorted Array](#search-in-sorted-array)
-    - [Max/Min Problem](#maxmin-problem)
-    - [Range Max/Min Query](#range-maxmin-query)
+    - [Max Min Problem](#max-min-problem)
+    - [Range Max Min Query](#range-max-min-query)
   - [Greedy Algorithm](#greedy-algorithm)
   - [Simulation](#simulation)
     - [Painting](#painting)
     - [Reverting](#reverting)
-    - [Meet/Collision Problem](#meetcollision-problem)
+    - [Meet Problem and Collision Problem](#meet-problem-and-collision-problem)
   - [String](#string)
     - [Rotate String](#rotate-string)
   - [Map Theory](#map-theory)
     - [Shortest Paths](#shortest-paths)
-    - [Minial Spanning Tree](#minial-spanning-tree)
-    - [BFS(mark array/queue)](#bfsmark-arrayqueue)
-    - [DFS(mark array/stack/recursion)](#dfsmark-arraystackrecursion)
+    - [Minimal Spanning Tree](#minimal-spanning-tree)
+    - [BFS](#bfs)
+    - [DFS](#dfs)
     - [Connected Component](#connected-component)
       - [Strongly Connected Component](#strongly-connected-component)
-      - [tUnion + tFind](#tunion--tfind)
+      - [Union Find](#union-find)
   - [Dynamic Programming](#dynamic-programming)
     - [典型题目](#典型题目)
     - [Digital Bits Dynamic Programming(数位 DP)](#digital-bits-dynamic-programming数位-dp)
@@ -43,7 +43,7 @@
     - [Mod Power](#mod-power)
   - [Tips](#tips)
     - [Array](#array)
-    - [Map](#map)
+    - [Map](#map-1)
     - [Set](#set)
     - [Two Pointer](#two-pointer)
     - [Float Pointer](#float-pointer)
@@ -57,10 +57,10 @@
 
 #### string and integer
 
-- stringstream
-- to_string
-- stoll
-- atoi/atol/atof
+- String Stream
+- `to_string`
+- `stoll`
+- `atoi`/`atol`/`atof`
 
 ### Iterator
 
@@ -132,7 +132,7 @@ int main(void) {
 }
 ```
 
-### Implementation Pattern(OOP Pattern)
+### Implementation Pattern
 
 ```cpp
 #define FIN             freopen("input.txt","r",stdin)
@@ -144,12 +144,12 @@ typedef long long LL;
 typedef pair < int, int >PII;
 
 const int INF = 0x3f3f3f3f;
-const int MAXN = 500 + 5;
-const int MAXP = 6 + 5;
+const int MAX_N = 500 + 5;
+const int MAX_P = 6 + 5;
 
 int T, N, M, P, res;
-char buf[MAXN];
-int usr[MAXN], usr_cnt;
+char buf[MAX_N];
+int usr[MAX_N], usr_cnt;
 
 struct MST {
     struct Edge {
@@ -159,9 +159,9 @@ struct MST {
         bool operator <(const Edge & e) const {
             return w < e.w;
         }
-    } edges[MAXN * MAXP];
+    } edges[MAX_N * MAX_P];
 
-    int par[MAXN], tot;
+    int par[MAX_N], tot;
 
     void init() {
         memset(par, -1, sizeof(par));
@@ -200,7 +200,7 @@ struct Dijkstra {
         int v, w, next;
         Edge() {}
         Edge(int v, int w, int next):v(v), w(w), next(next) {}
-    } edges[MAXN * MAXP * 2];
+    } edges[MAX_N * MAX_P * 2];
 
     struct QNode {
         int u, w;
@@ -211,9 +211,9 @@ struct Dijkstra {
         }
     } cur;
 
-    int head[MAXN], tot;
-    int dist[MAXN];
-    bool vis[MAXN];
+    int head[MAX_N], tot;
+    int dist[MAX_N];
+    bool vis[MAX_N];
     priority_queue < QNode, vector < QNode >, greater < QNode > >Q;
 
     void init() {
@@ -348,16 +348,16 @@ sort(vec.start(), vec.end(), cmp);
 - Binary Search
 - Divide and Conquer
 
-> leetcode 74/240
+> LeetCode 74/240
 
-### Max/Min Problem
+### Max Min Problem
 
 在某些问题中, 要求满足条件的 max/min, 且可以轻易地判定某个值是否满足该条件, 则可利用二分法进行值的枚举
 
 ```cpp
 // poj 1064
 int N, K;
-double L[maxn];
+double L[max_n];
 
 // judgement
 bool C(double x) {
@@ -383,17 +383,17 @@ void solve(void) {
 }
 ```
 
-### Range Max/Min Query
+### Range Max Min Query
 
 - Segment Tree (线段树)
 - Binary Indexed Tree (树状数组)
 - Bucket Method (Divide and Conquer)
 
 ```cpp
-const int maxn = 1 << 17;
+const int maxN = 1 << 17;
 
 int n;
-int dat[2 * maxn - 1];
+int dat[2 * maxN - 1];
 
 void init(int n_) {
   n = 1;
@@ -452,7 +452,7 @@ int query(int a, int b, int k, int l, int r) {
 - when need to output, calculate bits up
 - combined with dp problem
 
-### Meet/Collision Problem
+### Meet Problem and Collision Problem
 
 将相遇/碰撞的两物体视作插肩而过即可
 
@@ -462,7 +462,7 @@ int query(int a, int b, int k, int l, int r) {
 sstream::stringstream
 
 sort()
-transform(toupper/tolower)
+transform(toUpper/toLower)
 
 string::size_type
 string::npos(vector.end())
@@ -498,16 +498,20 @@ string left_rotate(string str, int offset) {
 - Dijkstra
 - Floyd
 
-### Minial Spanning Tree
+### Minimal Spanning Tree
 
-- Kruskal(tFind/tUnion)
+- Kruskal (tFind/tUnion)
 
-### BFS(mark array/queue)
+### BFS
+
+Mark array/queue:
 
 - Shortest Paths
 - Diameter(直径) of Tree(Two pass for BFS)
 
-### DFS(mark array/stack/recursion)
+### DFS
+
+Mark array/ Mark stack/Recursion:
 
 - Longest Paths
 
@@ -515,9 +519,9 @@ string left_rotate(string str, int offset) {
 
 #### Strongly Connected Component
 
-- Tarjan Alogirthm(v.index(DFS 时此点被访问的顺序) == v.lowlink(从 v 出发经有向边可达到的所有结点中最小的 index))
+- Tarjan Algorithm(v.index(DFS 时此点被访问的顺序) == v.lowLink(从 v 出发经有向边可达到的所有结点中最小的 index))
 
-#### tUnion + tFind
+#### Union Find
 
 quickly figure out connection of map
 

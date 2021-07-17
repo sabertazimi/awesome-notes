@@ -6,10 +6,11 @@
   - [Sorting Algorithm](#sorting-algorithm)
     - [Summary](#summary)
     - [Selection Sort](#selection-sort)
-    - [Insertion Sort/Shell Sort](#insertion-sortshell-sort)
+    - [Insertion Sort](#insertion-sort)
+    - [Shell Sort](#shell-sort)
     - [Merge Sort](#merge-sort)
     - [Quick Sort](#quick-sort)
-    - [Heap Sort(Priority Queue)](#heap-sortpriority-queue)
+    - [Heap Sort](#heap-sort)
     - [Radix-Sorts 基数排序(可用于混乱 shuffle 数组)](#radix-sorts-基数排序可用于混乱-shuffle-数组)
   - [Tree Algorithm](#tree-algorithm)
     - [Binary Search Tree](#binary-search-tree)
@@ -32,14 +33,14 @@
     - [图的表示](#图的表示)
       - [稀疏矩阵](#稀疏矩阵)
     - [广度优先遍历](#广度优先遍历)
-      - [v.color](#vcolor)
-      - [v.pi](#vpi)
-      - [v.d](#vd)
+      - [BFS Node Color](#bfs-node-color)
+      - [BFS Node Parent](#bfs-node-parent)
+      - [BFS Node Distance](#bfs-node-distance)
       - [利用队列实现广度优先遍历](#利用队列实现广度优先遍历)
     - [深度优先遍历](#深度优先遍历)
-      - [`v.color`](#vcolor-1)
-      - [`v.pi`](#vpi-1)
-      - [v.d/v.f](#vdvf)
+      - [DFS Node Color](#dfs-node-color)
+      - [DFS Node Parent](#dfs-node-parent)
+      - [DFS Node Distance](#dfs-node-distance)
     - [拓扑排序](#拓扑排序)
       - [Kahn 算法](#kahn-算法)
       - [DFS(深度优先)](#dfs深度优先)
@@ -49,13 +50,13 @@
       - [Dijkstra Algorithm](#dijkstra-algorithm)
     - [结点对最短路径](#结点对最短路径)
       - [Floyd-Warshall Algorithm](#floyd-warshall-algorithm)
-    - [MaxFLow Problem](#maxflow-problem)
+    - [最大流问题](#最大流问题)
       - [最大流模型](#最大流模型)
       - [残存网络](#残存网络)
-      - [MaxFlow-Mincut Theorem 最大流最小割定理](#maxflow-mincut-theorem-最大流最小割定理)
+      - [最大流最小割定理](#最大流最小割定理)
       - [Ford-Fulkerson Algorithm](#ford-fulkerson-algorithm)
   - [Tree Edit Distance](#tree-edit-distance)
-    - [Defination](#defination)
+    - [Definition](#definition)
 
 <!-- /TOC -->
 
@@ -70,7 +71,12 @@
 - swap: O(n)
 - compare: O(n^2)
 
-### Insertion Sort/Shell Sort
+### Insertion Sort
+
+- swap: O(n^2/4)
+- compare: O(n^2/4)
+
+### Shell Sort
 
 - swap: O(n^2/4)
 - compare: O(n^2/4)
@@ -102,7 +108,7 @@
         return inversions;
     }
 
-    // return the number of inversions in the subarray b[lo..hi]
+    // return the number of inversions in the subArray b[lo..hi]
     // side effect b[lo..hi] is rearranged in ascending order
     private static long count(int[] a, int[] b, int[] aux, int lo, int hi) {
         long inversions = 0;
@@ -121,7 +127,7 @@
      * The argument array is not modified.
      * @param  a the array
      * @return the number of inversions in the array. An inversion is a pair of
-     *         indicies {@code i} and {@code j} such that {@code i < j}
+     *         indices {@code i} and {@code j} such that {@code i < j}
      *         and {@code a[i]} > {@code a[j]}.
      */
     public static long count(int[] a) {
@@ -142,15 +148,15 @@
         }
         int n = a.length;
 
-        int[] ainv = new int[n];
+        int[] ainV = new int[n];
         for (int i = 0; i < n; i++)
-            ainv[a[i]] = i;
+            ainV[a[i]] = i;
 
-        Integer[] bnew = new Integer[n];
+        Integer[] bNew = new Integer[n];
         for (int i = 0; i < n; i++)
-            bnew[i] = ainv[b[i]];
+            bNew[i] = ainV[b[i]];
 
-        return Inversions.count(bnew);
+        return Inversions.count(bNew);
     }
 ```
 
@@ -158,7 +164,7 @@
 
 - partition: 哨兵(最后再将其归位) + 大循环 + 2 小循环, 交换元素法
 - partition: 辅助数组 brr, 3 循环(3 次扫描 arr) 分别将小/等/大于 guard 的数加入 brr
-- partition: 哨兵(最后再将其归位) + lo + hi, 外加 2 个动指针 leftlimit 与 rightlimit, 表示小于区的上界和大于区的上界
+- partition: 哨兵(最后再将其归位) + lo + hi, 外加 2 个动指针 leftLimit 与 rightLimit, 表示小于区的上界和大于区的上界
 
 ```cpp
 // lt eq gt three parts
@@ -179,8 +185,9 @@ void quick3waySort(int *a, int lo, int hi) {
 }
 ```
 
-### Heap Sort(Priority Queue)
+### Heap Sort
 
+- Built on Priority Queue
 - swap: 2NlgN + 2N (2NlgN for sink N times, 2N for construct MaxHeap)
 - compare: NlgN + N (NlgN for sink N times, N for construct MaxHeap)
 
@@ -577,17 +584,17 @@ unordered_map< int, unordered_map<int, int> > // => (row, (col, val))
 
 ### 广度优先遍历
 
-#### v.color
+#### BFS Node Color
 
 - white: 未被发现/访问
 - gray: 已被发现(进入队列), 邻接结点未全部发现
 - black: 已被发现, 邻接结点全部发现
 
-#### v.pi
+#### BFS Node Parent
 
 广度优先树父结点
 
-#### v.d
+#### BFS Node Distance
 
 距离 = v.pi.d + 1
 
@@ -597,7 +604,7 @@ unordered_map< int, unordered_map<int, int> > // => (row, (col, val))
 
 利用 递归/栈 实现深度优先遍历
 
-#### `v.color`
+#### DFS Node Color
 
 - white: 未被发现/访问
 - gray: 已被发现, 未二次访问
@@ -610,11 +617,11 @@ unordered_map< int, unordered_map<int, int> > // => (row, (col, val))
 - v.color == black: 前向边/横向边(v 为较深的结点/子结点)
 - 无向图深度优先遍历不会出现 前向边/横向边
 
-#### `v.pi`
+#### DFS Node Parent
 
 比 v 浅的结点(比 v 更早被发现的结点)
 
-#### v.d/v.f
+#### DFS Node Distance
 
 - v.d = ++time: 被发现的时间戳(入栈)
 - v.f = ++time: 被二次访问的时间戳(出栈)
@@ -696,7 +703,9 @@ Matrix floyd_warshall(Matrix W) {
 }
 ```
 
-### MaxFLow Problem
+### 最大流问题
+
+MaxFlow Problem:
 
 ![Ford Fulkerson Algorithm](img/FordFulkersonAlgorithm.png)
 
@@ -720,7 +729,9 @@ Matrix floyd_warshall(Matrix W) {
 - 若原图 u --> v 总容量 > 0, 则残存网络中 边 u --> v:剩余容量, 边 v --> u: 已用容量
 - 增广路径: 残存网络中一条可行通路
 
-#### MaxFlow-Mincut Theorem 最大流最小割定理
+#### 最大流最小割定理
+
+MaxFlow-MinCut Theorem:
 
 - 切割的净流量: 流出-流入
 - 切割的容量: 流出总容量(无需减流入总容量)
@@ -738,6 +749,6 @@ Matrix floyd_warshall(Matrix W) {
 
 ## Tree Edit Distance
 
-### Defination
+### Definition
 
 Tree Edit Distance: 给定 Cost(edit operation) 时的最小编辑费用
