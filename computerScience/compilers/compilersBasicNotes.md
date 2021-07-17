@@ -4,7 +4,7 @@
 
 - [Compiler Basic Notes](#compiler-basic-notes)
   - [Basic Concepts](#basic-concepts)
-    - [Defination of compilers](#defination-of-compilers)
+    - [Definition of compilers](#definition-of-compilers)
     - [Structure of compilers](#structure-of-compilers)
   - [文法与语言](#文法与语言)
     - [符号与符号串](#符号与符号串)
@@ -14,7 +14,7 @@
       - [文法表示](#文法表示)
       - [形式化表示](#形式化表示)
         - [简易表示](#简易表示)
-        - [巴科斯范式(Backus-Naur Form)](#巴科斯范式backus-naur-form)
+        - [巴科斯范式](#巴科斯范式)
     - [正规文法](#正规文法)
     - [正则语言(Regular Expressions)](#正则语言regular-expressions)
       - [基本定义](#基本定义)
@@ -37,8 +37,8 @@
         - [状态转移表实现 DFA](#状态转移表实现-dfa)
       - [非确定有限状态自动机(Nondeterministic Finite Automaton)](#非确定有限状态自动机nondeterministic-finite-automaton)
     - [自动词法分析器](#自动词法分析器)
-      - [Thompson 算法: RegExp --> NFA](#thompson-算法-regexp----nfa)
-      - [子集构造算法: NFA --> DFA](#子集构造算法-nfa----dfa)
+      - [Thompson 算法](#thompson-算法)
+      - [子集构造算法](#子集构造算法)
       - [Hopcroft 算法](#hopcroft-算法)
       - [实现](#实现)
         - [DFA](#dfa)
@@ -64,8 +64,8 @@
         - [短语(Handles)](#短语handles)
         - [分析表构造](#分析表构造)
         - [驱动代码](#驱动代码)
-        - [解决冲突(SLR/LR(1)/LALR)](#解决冲突slrlr1lalr)
-      - [LALR(k)](#lalrk)
+        - [解决冲突](#解决冲突)
+      - [LALR-K](#lalr-k)
       - [SLR](#slr)
         - [SLR 实现](#slr-实现)
     - [抽象语法树](#抽象语法树)
@@ -85,7 +85,7 @@
     - [作用域检查](#作用域检查)
     - [类型相容性](#类型相容性)
     - [错误诊断](#错误诊断)
-  - [Immediate Representation(IR)](#immediate-representationir)
+  - [Immediate Representation](#immediate-representation)
     - [三地址码](#三地址码)
     - [控制流图](#控制流图)
       - [Block](#block)
@@ -95,7 +95,7 @@
           - [活性分析](#活性分析)
   - [代码优化](#代码优化)
     - [组织管理](#组织管理)
-      - [Activation Record(AR) / Frame](#activation-recordar--frame)
+      - [Activation Record and Frame](#activation-record-and-frame)
       - [全局变量](#全局变量)
       - [堆区](#堆区)
     - [优化类型](#优化类型)
@@ -104,7 +104,7 @@
       - [Dead Code Elimination](#dead-code-elimination)
       - [Constant Propagation](#constant-propagation)
       - [Liveness Analysis](#liveness-analysis)
-      - [寄存器分配(Register Allocation/Graph Coloring)](#寄存器分配register-allocationgraph-coloring)
+      - [寄存器分配](#寄存器分配)
   - [Code Generation(代码生成)](#code-generation代码生成)
     - [递归下降代码生成算法](#递归下降代码生成算法)
       - [基于栈计算机](#基于栈计算机)
@@ -114,14 +114,14 @@
     - [Stop and Copy](#stop-and-copy)
   - [Compilers Exercise](#compilers-exercise)
     - [C Declaration Interpreter](#c-declaration-interpreter)
-    - [Cool(Classrom Object-Oriented Language)](#coolclassrom-object-oriented-language)
-    - [Parser Implemention](#parser-implemention)
+    - [Cool Language](#cool-language)
+    - [Parser Implementation](#parser-implementation)
 
 <!-- /TOC -->
 
 ## Basic Concepts
 
-### Defination of compilers
+### Definition of compilers
 
 - `program_code` ---compiler---> executable
 - data ---executable---> output
@@ -179,7 +179,7 @@ G = (S, N, T, P):
 - S: 开始符
 - N: 非终结符集合
 - T: 终结符集合
-- P: 产生式规则集合 X -> beta1, beta2, ..., betan, X <- N, beta <- N+T
+- P: 产生式规则集合 X -> beta1, beta2, ..., betaN, X <- N, beta <- N+T
 
 #### 形式化表示
 
@@ -206,7 +206,9 @@ E -> num
 
 > S: E, N: E, T: num/id/+/\*
 
-##### 巴科斯范式(Backus-Naur Form)
+##### 巴科斯范式
+
+Backus-Naur Form:
 
 - ::= : "被定义为"
 - "word" : 字符本身
@@ -239,11 +241,11 @@ E -> num
 
 ```js
 // 具有顺序性
-e -> "\0" // basic defination
-  | c // basic defination
-  | e | e // recursive defination
-  | ee // recursive defination
-  | e* // recursive defination
+e -> "\0" // basic definition
+  | c // basic definition
+  | e | e // recursive definition
+  | ee // recursive definition
+  | e* // recursive definition
 ```
 
 #### 正则语法糖(Syntax Sugar)
@@ -252,7 +254,7 @@ e -> "\0" // basic defination
 - c? : 0/1 个 c
 - c+ : 1/n 个 c
 - c{i, j} : i-j 个 c
-- "a*" : a* 自身(非 kleen 闭包)
+- "a*" : a* 自身(非 Kleene Closure)
 - . : 除 ‘\n’ 外的任意字符
 
 ```js
@@ -371,7 +373,7 @@ token nextToken(void) {
 - 读入有效标识符(字符串型)后, 查询关键字哈希表, 检查当前标识符是否为关键字
 
 ```c
-#define KEYWORD_MAXLEN 10
+#define KEYWORD_MAX_LEN 10
 
 hash_one(char *str, int len) {
     unsigned int keyValue = 0;
@@ -380,7 +382,7 @@ hash_one(char *str, int len) {
         keyValue += str[i] * ((int)pow(33, len - i));
     }
 
-    keyValue = (keyValue * 3 + 7) % KEYWORD_MAXLEN;
+    keyValue = (keyValue * 3 + 7) % KEYWORD_MAX_LEN;
   return keyValue;
 }
 ```
@@ -440,7 +442,9 @@ transferFunction 中的次态不确定/不唯一(为一个开集合):
 
 RegExp --Thompson 算法--> NFA --子集构造算法--> DFA --Hopcroft 最小化算法--> 词法分析器代码
 
-#### Thompson 算法: RegExp --> NFA
+#### Thompson 算法
+
+RegExp --> NFA:
 
 - 直接构造基本 RegExp
 - 递归构造复合 RegExp
@@ -450,7 +454,9 @@ RegExp --Thompson 算法--> NFA --子集构造算法--> DFA --Hopcroft 最小化
 - 连接 : i --NFA(RegExp1)--> m --NFA(RegExp2)--> f
 - 闭包 : i --epsilon--> m --epsilon--> f, m --RegExp--> m
 
-#### 子集构造算法: NFA --> DFA
+#### 子集构造算法
+
+NFA --> DFA:
 
 由 Thompson 算法生成的 NFA, 当且仅当输入为 epsilon 时, 次态不唯一
 
@@ -464,7 +470,7 @@ DFA subset_construction(NFA nfa) {
   StateSet += s0;
   enqueue(s0);
 
-  while (workqueue != []) {
+  while (work_queue != []) {
     dequeue(s);
 
     foreach (ch in InputSet) {
@@ -558,7 +564,7 @@ bool top_down_parsing(tokens[]) {
   while (stack != []) {
     if (stack[top] is a terminal t) {
       t == tokens[i] ? pop(i++) : backtrack();
-    } else if (stack[top] is a nonterminal T) {
+    } else if (stack[top] is a non_terminal T) {
       pop();
       push(T next expansion); // 自右向左压栈, e.g pop(S), push(N_right), push(V), push(N_left)
     } else {
@@ -713,7 +719,7 @@ bool ll1_parsing(tokens[]) {
   while (stack != []) {
     if (stack[top] is a terminal t) {
       t == tokens[i] ? pop(i++) : throw new SyntaxError();
-    } else if (stack[top] is a nonterminal T) {
+    } else if (stack[top] is a non_terminal T) {
       pop();
       // push(T correct expansion);
       // 自右向左压栈, e.g pop(S), push(N_right), push(V), push(N_left)
@@ -757,18 +763,18 @@ first(X) = {t | X -_> talpha} U {epsilon | X-_>epsilon} :
 first sets 不动点算法:
 
 ```cpp
-foreach (nonterminal N) {
+foreach (non_terminal N) {
   first(N) = {};
 }
 
 while (some sets is changing) {
-  foreach (production p: N->beta1...betan) {
-    foreach (betai from beta1 upto betan) {
-      if (betai == a) {
+  foreach (production p: N->beta1...beta_n) {
+    foreach (beta_i from beta1 up to beta_n) {
+      if (beta_i == a) {
       // e.g N->abX: first(N) += {a}
         first(N) += {a};
         break;
-      } else if (betai == M) {
+      } else if (beta_i == M) {
         first(N) += first(M);
         if (M is not in nullable) {
           break;
@@ -779,7 +785,7 @@ while (some sets is changing) {
 }
 ```
 
-| Nonterminal | First Set    |
+| NonTerminal | First Set    |
 | :---------- | :----------- |
 | S           | {s, t, g, w} |
 | N           | {s, t, g, w} |
@@ -798,20 +804,20 @@ follow(X) = {t | S -\*> beta X t epsilon} :
 follow sets 不动点算法:
 
 ```cpp
-foreach (nonterminal N) {
+foreach (non_terminal N) {
   follow(N) = {};
 }
 
 while (some sets is changing) {
-  foreach (production p: N->beta1...betan) {
+  foreach (production p: N->beta1...beta_n) {
 
         // temp: follow(left) <- follow(right)
     temp = follow(N);
 
-    foreach (betai from betan downto beta1) {
-      if (betai == a) {
+    foreach (beta_i from beta_n down to beta1) {
+      if (beta_i == a) {
         temp = {a};
-      } else if (betai == M) {
+      } else if (beta_i == M) {
         follow(M) += temp
         temp = (M is not nullable) ? (first(M)) : (temp + first(M))
       }
@@ -831,12 +837,12 @@ foreach (production p) {
   select(p) = {}
 }
 
-calculate_select_set(production p: N->beta1...betan) {
-  foreach (betai from beta1 upto betan) {
-    if (betai == a) {
+calculate_select_set(production p: N->beta1...beta_n) {
+  foreach (beta_i from beta1 up to beta_n) {
+    if (beta_i == a) {
       select(p) += {a};
       break;
-    } else if (betai == M) {
+    } else if (beta_i == M) {
       select(p) += first(M);
       if (M is not in nullable) {
         break;
@@ -908,20 +914,20 @@ X -> +E
 S -> Salpha1
     |Salpha2
     ...
-    |Salphan
+    |Salpha_n
     |beta1
     |beta2
     ...
-    |betam
+    |beta_m
 
 S -> beta1S'
     |beta2S'
     ...
-    |betanS'
+    |beta_nS'
 S'-> alpha1S'
     |alpha2S'
     ...
-    |alphanS'
+    |alpha_nS'
     |epsilon
 ```
 
@@ -1066,7 +1072,7 @@ int Delete(WF *p,int n) {
 }
 
 int main() {
-    ofstream OutFile("jieguo.txt");
+    ofstream OutFile("result.txt");
 
     int i,
       j,
@@ -1228,7 +1234,7 @@ Q = enqueue(p0)
 while (Q is not empty) {
   p = dequeue(Q)
 
-  foreach (x <- Nonterminal||Terminal) {
+  foreach (x <- NonTerminal||Terminal) {
     q = goto(p, x)
 
     if (x <- Terminal) {
@@ -1258,10 +1264,10 @@ while (true) {
   token t = nextToken()
   state s = stack[top]
 
-  if (ACTION[s, t] == shifti) {
+  if (ACTION[s, t] == shift_i) {
     push(t)
-    push(statei)
-  } else if (ACTION[s, t] == reducej) {
+    push(state_i)
+  } else if (ACTION[s, t] == reduce_j) {
     // X is the left side of production j: X->beta
     // beta is the right side of production j: X->beta
 
@@ -1282,15 +1288,18 @@ while (true) {
 }
 ```
 
-##### 解决冲突(SLR/LR(1)/LALR)
+##### 解决冲突
 
+SLR, LR(1), LALR,
 采取与 first/follow/select sets 以及 前看符号 类似策略:
 
-- `production_with_dot_set` 中的 item 修改为 `X -> [beta1 . betan..., a]` 二元组
+- `production_with_dot_set` 中的 item 修改为 `X -> [beta1 . beta_n..., a]` 二元组
 - closure(production_set p) 中闭包规则从 `X -> [a . Y beta,a]`
   修改为 `Y -> [.y, b]` b <- select(beta a)
 
-#### LALR(k)
+#### LALR-K
+
+LALR(k)
 
 #### SLR
 
@@ -1411,7 +1420,7 @@ struct exp_add *new_exp_add(exp *left, exp *right) {
 }
 
 struct exp_times *new_exp_times(exp *left, exp *right) {
-  struct exp_tiems *p = (struct exp_times *)malloc(sizeof(struct exp_times));
+  struct exp_times *p = (struct exp_times *)malloc(sizeof(struct exp_times));
   if (!p) throw new Error();
   p->kind = E_TIMES;
   p->left = left;
@@ -1553,8 +1562,8 @@ O ├ let x: T0 in e1: T1
 
 #### Typing Methods
 
-- Method(ClassName, functionName) = (Type1, ..., Typen, Typen+1)
-- Typen+1 为返回值的类型, 即方法自身的类型
+- Method(ClassName, functionName) = (Type1, ..., Type_n, Type_n+1)
+- Type_n+1 为返回值的类型, 即方法自身的类型
 
 ```c
 [Dispatch]
@@ -1732,7 +1741,9 @@ table:
 - 大量的错误信息
 - 一定的自纠功能
 
-## Immediate Representation(IR)
+## Immediate Representation
+
+IR:
 
 - 树与有向无环图(DAG)
 - 三地址码(3-address code)
@@ -1781,7 +1792,9 @@ table:
 
 ### 组织管理
 
-#### Activation Record(AR) / Frame
+#### Activation Record and Frame
+
+AR:
 
 用于管理过程活性(procedure activation)的信息:
 
@@ -1807,7 +1820,7 @@ new/malloc 得到的变量/对象不存于 AR 中, 存于堆区
 ### 局部优化
 
 - 常量折叠优化: 所有代入常量的地方全部代入常量 `1 + 2 => 3`
-- 代数化简优化: `a=1*b => a=b` `2*a=>a<<1` (all tips from csapp)
+- 代数化简优化: `a=1*b => a=b` `2*a=>a<<1` (all tips from CSAPP)
 - 复制传播(copy propagation)优化: 利用前面计算出来的结果, 直接替换后面所有出现在右边的已计算左式(寄存器)
 
 ### 全局优化
@@ -1822,10 +1835,10 @@ CFG 中(数据流分析-可达定义分析) 常量传播(constant propagation)�
 
 - **forwards analysis**
 - C(stm, x, in) = value of x before stm ; C(stm, x, out) = value of x after stm
-- bottom < c < top => C(stm, x, in) = least_upper_bound{ C(prev_stmi, x, out) }:
+- bottom < c < top => C(stm, x, in) = least_upper_bound{ C(prev_stm_i, x, out) }:
   - C(prev_stm, x, out) = top(nondeterministic) => C(stm, x, in) = top
   - C(prev_stm1, x, out) != C(prev_stm2, x, out) => C(stm, x, in) = top
-  - C(prev_stami, x, out) = c/bottom(dead code) => C(stm, x, in) = c
+  - C(prev_stm_i, x, out) = c/bottom(dead code) => C(stm, x, in) = c
 - C(stm, x, in) = bottom => C(stm, x, out) = bottom
 - C(x := c, x, out) = c
 - C(x := f(), x, out) = top
@@ -1842,7 +1855,9 @@ CFG 中 数据流分析-活性分析(liveness analysis), 可用于复制传播�
 - L(none x, x, in) = L(none x, x, out)
 - init: L(...) = false
 
-#### 寄存器分配(Register Allocation/Graph Coloring)
+#### 寄存器分配
+
+Register Allocation and Graph Coloring:
 
 - 当 t1 与 t2 同时具有活性时, 不可共享寄存器; 反之, t1 与 t2 不同时具有活性, 可以共享寄存器
 - 当 t1 与 t2 同时具有活性时, 添加一条边连接 t1 与 t2, 构建 register interference graph(RIG)
@@ -1980,7 +1995,7 @@ Mem + Reg + ALU
 
 ```c
 // src -> dist
-s: movn n, r
+s: mov_n n, r
  | mov r1, r2
  | load [x], r
  | store r, [x]
@@ -2035,7 +2050,7 @@ reg_t gen_exp(exp_t e) {
   switch (e->kind) {
     case EXP_INT:
       r = random_reg();
-      emit("movn e->value, r");// n
+      emit("mov_n e->value, r");// n
       return r;
     case EXP_ID:
       r = random_reg();
@@ -2043,7 +2058,7 @@ reg_t gen_exp(exp_t e) {
       return r;
     case EXP_BOOL:
       r = random_reg();
-      emit("movn e->value, r");// 1/0
+      emit("mov_n e->value, r");// 1/0
       return r;
     case EXP_ADD:
       r1 = gen_exp(e->left);
@@ -2088,7 +2103,7 @@ while p < top of heap do
     if mark(p) == 1 then
         mark(p) = 0
     else
-        add block p...(p + sizeof(p) - 1)  to freelist
+        add block p...(p + sizeof(p) - 1)  to freeList
     fi
     p += sizeof(p)
 od
@@ -2096,10 +2111,10 @@ od
 
 ### Stop and Copy
 
-copy all reachable objects in old space to new space(reserved for GC):
+Copy all reachable objects in old space to new space(reserved for GC):
 
-- copied objects
-- scaned objects: pointers have been restored
+- Copied objects
+- Scanned objects: pointers have been restored
 
 ## Compilers Exercise
 
@@ -2111,8 +2126,8 @@ copy all reachable objects in old space to new space(reserved for GC):
 #include <ctype.h>
 #include <stdlib.h>
 
-#define MAXTOKENS 100
-#define MAXTOKENLEN 64
+#define MAX_TOKENS 100
+#define MAX_TOKEN_LEN 64
 
 enum type_tag {
     IDENTIFIER,
@@ -2122,11 +2137,11 @@ enum type_tag {
 
 struct token {
     char type;
-    char string[MAXTOKENLEN];
+    char string[MAX_TOKEN_LEN];
 };
 
 int top = -1;
-struct token stack[MAXTOKENS];
+struct token stack[MAX_TOKENS];
 struct token ts;
 
 #define pop stack[top--]
@@ -2157,7 +2172,7 @@ enum type_tag classify_string(void) {
     return IDENTIFIER;
 }
 
-void gettoken(void) {
+void get_token(void) {
     char *p = ts.string;
 
     /* 略过空白字符 */
@@ -2184,30 +2199,30 @@ void gettoken(void) {
 }
 
 void read_to_first_identifer(void) {
-    gettoken();
+    get_token();
 
   // read til identifier
     while (ts.type != IDENTIFIER) {
         push(ts);
-        gettoken();
+        get_token();
     }
 
     printf("%s is ", ts.string);
-    gettoken();
+    get_token();
 }
 
 void deal_with_arrays(void) {
     while (ts.type == '[') {
         printf("array ");
-        gettoken();
+        get_token();
 
     /* 数字或']' */
         if (isdigit(ts.string[0])) {
             printf("0..%d ", atoi(ts.string) - 1);
-            gettoken();
+            get_token();
         }
 
-        gettoken();
+        get_token();
         printf("of ");
     }
 }
@@ -2221,10 +2236,10 @@ void deal_with_pointers(void) {
 
 void deal_with_function_args(void) {
     while (ts.type != ')') {
-        gettoken();
+        get_token();
     }
 
-    gettoken();
+    get_token();
     printf("function returning ");
 }
 
@@ -2246,7 +2261,7 @@ void deal_with_declarator(void) {
     while (top >= 0) {
         if (stack[top].type == '(') {
             pop;
-            gettoken();  //读取')'之后的符号
+            get_token();  //读取')'之后的符号
             deal_with_declarator();
         } else {
             printf("%s", pop.string);
@@ -2265,11 +2280,13 @@ int main(void) {
 }
 ```
 
-### Cool(Classrom Object-Oriented Language)
+### Cool Language
+
+Classroom Object-Oriented Language:
 
 - [Awesome Reference](http://web.stanford.edu/class/cs143/materials/cool-manual.pdf)
 
-### Parser Implemention
+### Parser Implementation
 
 ```cpp
 // 返回下一个Token(只测试该Token，不向前移动Token List的offset指针)

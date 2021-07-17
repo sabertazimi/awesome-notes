@@ -8,26 +8,26 @@
     - [Common Words](#common-words)
   - [Data Format](#data-format)
     - [XML](#xml)
-      - [DTD(Document Type Definition)](#dtddocument-type-definition)
-      - [XSD(XML Schema Definition)](#xsdxml-schema-definition)
-    - [JSON(JavaScript Object Notation)](#jsonjavascript-object-notation)
+      - [DTD](#dtd)
+      - [XSD](#xsd)
+    - [JSON](#json)
   - [Relational Algebra](#relational-algebra)
     - [Operators](#operators)
   - [Higher-Level Database Design Models](#higher-level-database-design-models)
-    - [UML(Unified Modeling Language)](#umlunified-modeling-language)
+    - [UML](#uml)
       - [Classes](#classes)
       - [Associations](#associations)
       - [Associations Classes](#associations-classes)
       - [Subclasses](#subclasses)
       - [Composition and Aggregation](#composition-and-aggregation)
-    - [E/R Model(Entity-Relationship Model)](#er-modelentity-relationship-model)
+    - [Entity Relationship Model](#entity-relationship-model)
   - [SQL](#sql)
   - [Relational Design](#relational-design)
     - [Decomposition](#decomposition)
     - [functional dependencies](#functional-dependencies)
-    - [**BCNF** (boyce-codd normal form)](#bcnf-boyce-codd-normal-form)
-    - [multivalued dependencies](#multivalued-dependencies)
-    - [4NF(forth normal form)](#4nfforth-normal-form)
+    - [BCNF](#bcnf)
+    - [Multi Valued Dependencies](#multi-valued-dependencies)
+    - [4NF](#4nf)
     - [Normalized Design](#normalized-design)
   - [Indexes](#indexes)
   - [Transactions](#transactions)
@@ -40,12 +40,12 @@
     - [Modifications on Views](#modifications-on-views)
       - [Implements Modification with Triggers](#implements-modification-with-triggers)
       - [SQL Standard - Updatable Views](#sql-standard---updatable-views)
-  - [Nosql - MongoDB Basic Notes](#nosql---mongodb-basic-notes)
-    - [Set Up](#set-up)
-      - [Install](#install)
-      - [Not Upgrade](#not-upgrade)
-      - [Start/Stop/Restart](#startstoprestart)
-      - [Uninstall](#uninstall)
+  - [MongoDB Basic Notes](#mongodb-basic-notes)
+    - [MongoDB Set Up](#mongodb-set-up)
+      - [MongoDB Installation](#mongodb-installation)
+      - [MongoDB Not Upgrade](#mongodb-not-upgrade)
+      - [MongoDB Control](#mongodb-control)
+      - [MongoDB Uninstall](#mongodb-uninstall)
     - [Shell Instruction](#shell-instruction)
       - [create and drop](#create-and-drop)
         - [create](#create)
@@ -80,10 +80,10 @@
 - primary/foreign key
 - references
 
-> (id, name, birth, majar, grade) is not normalized,
+> (id, name, birth, major, grade) is not normalized,
 > because grade is not relevant to student id
-> (id, name, birth) + (id, majar, grade) is normalized
-> (name, os, lang) is not mormalized, because os isn't relevant to lang
+> (id, name, birth) + (id, major, grade) is normalized
+> (name, os, lang) is not normalized, because os isn't relevant to lang
 > (name, os) + (name, lang) is normalized
 > Data-intensive applications may not use DBMS/Query Language at all
 > e.g Hadoop, all operations on data stores in files
@@ -96,7 +96,9 @@
 - matched tags with proper nesting
 - unique attributes within elements
 
-#### DTD(Document Type Definition)
+#### DTD
+
+Document Type Definition:
 
 - similar grammar to regular expression(`*?`)
 - ID/IDRef should be unique
@@ -136,19 +138,23 @@
 </Bookstore>
 ```
 
-tools: xmlcopyeditor xmllint
+Tools: XML Copy Editor, XML Linter:
 
 ```bash
 xmllint --valid --noout Bookstore.xml
 ```
 
-#### XSD(XML Schema Definition)
+#### XSD
+
+XML Schema Definition:
 
 ```bash
 xmllint -schema Bookstore.xsd -noout Bookstore.xml
 ```
 
-### JSON(JavaScript Object Notation)
+### JSON
+
+JavaScript Object Notation:
 
 - serializing data objects in files
 - human-readable data
@@ -164,7 +170,7 @@ xmllint -schema Bookstore.xsd -noout Bookstore.xml
 - cross-product operator x: Table1 x Table2,
   m tuples(rows) x n tuples(rows) => m\*n tuples(rows)
 - natural join operator ∞: σ(E1.A1 = E2.A1 ^ E1.A2 = E2.A2 ...) (E1 x E2)
-- theta join operator ∞(cond): σ(cond) (E1 x E2), call cond as ϴ
+- theta join operator ∞(condition): σ(condition) (E1 x E2), call condition as ϴ
 - difference operator -: matching schemas => change rows/tuples
 - union/intersection operator ∪ / ∩: matching schemas => change rows/tuples
 - rename operator ρ: change schemas(attributes name),
@@ -180,7 +186,9 @@ xmllint -schema Bookstore.xsd -noout Bookstore.xml
 
 Higher-Level Database Design Models `-Translator->` Relational implemented by RDBMS
 
-### UML(Unified Modeling Language)
+### UML
+
+Unified Modeling Language: PlantUML
 
 #### Classes
 
@@ -212,7 +220,7 @@ relationships between objects of 2 classes):
 
 ```c
 -----------                   ---------
-| student |                   |collegs|
+| student |                   |college|
 |---------|                   |       |
 |sID   PK |x..y   Apply   m..n|       |
 |sName    |-------------------|       |
@@ -239,7 +247,7 @@ children classes
 
 #### Composition and Aggregation
 
-### E/R Model(Entity-Relationship Model)
+### Entity Relationship Model
 
 ## SQL
 
@@ -305,12 +313,14 @@ CREATE VIEW Standings AS
 - key sets: closure of sets contains all attributes
 
 > assuming relation R(A, B, C, D, ..., G)
-> andclosure of A, B {A, B} + `A->C->D, B->E->F, F->G`
+> and closure of A, B {A, B} + `A->C->D, B->E->F, F->G`
 > => {A, B}+ = {A, B, C, ..., G}
 > then, {A, B} is a key
 > if there no exists such closure, then treat all-attributes as a key
 
-### **BCNF** (boyce-codd normal form)
+### BCNF
+
+boyce-codd normal form:
 
 - for each A -> B having A is super key && B isn't key
 - not exists A -> B -> C
@@ -334,7 +344,7 @@ while (there is relation R' aren't in BCNF) {
 }
 ```
 
-### multivalued dependencies
+### Multi Valued Dependencies
 
 - A -> B && rest attributes => A ->> B
 - A ->> B(1-n mapping), A ->> C(1-n mapping),
@@ -342,7 +352,9 @@ while (there is relation R' aren't in BCNF) {
 - A ->>B && A ->>C => A ->> B∩C
 - A ->>B && B ->>C => A ->> C-B
 
-### 4NF(forth normal form)
+### 4NF
+
+Forth normal form:
 
 - if A ->> B then A is key && B isn't key
 - here's the algorithm:
@@ -397,7 +409,7 @@ DROP INDEX IndexName
 - transaction begins automatically on first SQL statement
 - on "commit": old transaction ends, new one begins
 - on session termination: current transaction ends
-- "autocommit" turns each statement into transaction
+- "AutoCommit" turns each statement into transaction
 
 ### ACID Properties
 
@@ -501,16 +513,16 @@ Action
 - sub-queries cant' refer to table T
 
 ```sql
-CREATE VEIW
+CREATE VIEW
 ...
 WITH CHECK OPTION;
 ```
 
-## Nosql - MongoDB Basic Notes
+## MongoDB Basic Notes
 
-### Set Up
+### MongoDB Set Up
 
-#### Install
+#### MongoDB Installation
 
 ```bash
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
@@ -521,7 +533,7 @@ sudo apt-get install -y mongodb-org mongodb-org-server
 \ mongodb-org-shell mongodb-org-mongos mongodb-org-tools
 ```
 
-#### Not Upgrade
+#### MongoDB Not Upgrade
 
 ```bash
 echo "mongodb-org hold" | sudo dpkg --set-selections
@@ -531,7 +543,7 @@ echo "mongodb-org-mongos hold" | sudo dpkg --set-selections
 echo "mongodb-org-tools hold" | sudo dpkg --set-selections
 ```
 
-#### Start/Stop/Restart
+#### MongoDB Control
 
 ```bash
 sudo service mongod start
@@ -539,7 +551,7 @@ sudo service mongod stop
 sudo service mongod restart
 ```
 
-#### Uninstall
+#### MongoDB Uninstall
 
 ```bash
 sudo service mongod stop
@@ -575,7 +587,7 @@ db.collection.find().pretty()
 #### insert
 
 ```bash
-db.collection.insert(ison);
+db.collection.insert();
 ```
 
 #### information

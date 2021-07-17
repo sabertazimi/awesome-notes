@@ -105,7 +105,7 @@
     - [Process 实现](#process-实现)
       - [process context(执行现场)](#process-context执行现场)
       - [`do_fork` function](#do_fork-function)
-      - [`do_execve` function](#do_execve-function)
+      - [Execution function](#execution-function)
   - [处理机调度(Schedule)](#处理机调度schedule)
     - [调度时机](#调度时机)
       - [六大调度时机](#六大调度时机)
@@ -885,7 +885,7 @@ fork() 的主要行为:
 - 复制父进程的寄存器状态(p_contxt)
 - 复制父进程的中断上下文, 并设置 tf->eax 为 0, 使 fork()在子进程中返回 0。
 
-#### `do_execve` function
+#### Execution function
 
 exec() 的主要行为:
 

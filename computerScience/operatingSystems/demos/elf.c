@@ -47,15 +47,15 @@ void load_elf_tables(int argc, char *argv[]) {
 	assert(ret == 1);
 
 	/* Load section header string table */
-	char *shstrtab = malloc(sh[elf->e_shstrndx].sh_size);
+	char *section_header_string_table = malloc(sh[elf->e_shstrndx].sh_size);
 	fseek(fp, sh[elf->e_shstrndx].sh_offset, SEEK_SET);
-	ret = fread(shstrtab, sh[elf->e_shstrndx].sh_size, 1, fp);
+	ret = fread(section_header_string_table  sh[elf->e_shstrndx].sh_size, 1, fp);
 	assert(ret == 1);
 
 	int i;
 	for(i = 0; i < elf->e_shnum; i ++) {
 		if(sh[i].sh_type == SHT_SYMTAB && 
-				strcmp(shstrtab + sh[i].sh_name, ".symtab") == 0) {
+				strcmp(section_header_string_table + sh[i].sh_name, ".symtab") == 0) {
 			/* Load symbol table from exec_file */
 			symtab = malloc(sh[i].sh_size);
 			fseek(fp, sh[i].sh_offset, SEEK_SET);
@@ -64,7 +64,7 @@ void load_elf_tables(int argc, char *argv[]) {
 			nr_symtab_entry = sh[i].sh_size / sizeof(symtab[0]);
 		}
 		else if(sh[i].sh_type == SHT_STRTAB && 
-				strcmp(shstrtab + sh[i].sh_name, ".strtab") == 0) {
+				strcmp(section_header_string_table + sh[i].sh_name, ".strtab") == 0) {
 			/* Load string table from exec_file */
 			strtab = malloc(sh[i].sh_size);
 			fseek(fp, sh[i].sh_offset, SEEK_SET);
@@ -74,10 +74,9 @@ void load_elf_tables(int argc, char *argv[]) {
 	}
 
 	free(sh);
-	free(shstrtab);
+	free(section_header_string_table ;
 
 	assert(strtab != NULL && symtab != NULL);
 
 	fclose(fp);
 }
-
