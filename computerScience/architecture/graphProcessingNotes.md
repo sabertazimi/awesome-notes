@@ -17,12 +17,12 @@
       - [strict-alias warnings](#strict-alias-warnings)
     - [Time Stamp Counter](#time-stamp-counter)
       - [RDTSC](#rdtsc)
-      - [clock_gettime](#clock_gettime)
+      - [Clock Get Time](#clock-get-time)
     - [NUMA Tool](#numa-tool)
-      - [numactl](#numactl)
+      - [NUMA Control](#numa-control)
         - [installation](#installation)
         - [usage](#usage)
-      - [numastat](#numastat)
+      - [NUMA Status](#numa-status)
 
 ## Graph System
 
@@ -50,15 +50,15 @@
 
 ### CPU Schedule
 
-- cpunodebind: 规定进程运行在某几个 node 之上
-- physcpubind: 精细地规定进程运行在哪些核上
+- CPU Node Bind: 规定进程运行在某几个 node 之上
+- Physical CPU Bind: 精细地规定进程运行在哪些核上
 
 ### Memory Schedule
 
-- localalloc: 从当前node上请求分配内存
-- preferred: 比较宽松地指定了一个推荐的 node 来获取内存, 如果被推荐的 node 上没有足够内存, 进程可以尝试别的 node
-- membind: 可以指定若干个 node,进 程只能从这些指定的 node 上请求分配内存
-- interleave: 规定进程从指定的若干个 node 上以 RR (Round Robin) 交织地请求分配内存
+- Local Allocation: 从当前node上请求分配内存
+- Preferred: 比较宽松地指定了一个推荐的 node 来获取内存, 如果被推荐的 node 上没有足够内存, 进程可以尝试别的 node
+- Memory Bind: 可以指定若干个 node,进 程只能从这些指定的 node 上请求分配内存
+- Interleave: 规定进程从指定的若干个 node 上以 RR (Round Robin) 交织地请求分配内存
 
 NUMA 默认的内存分配策略是优先在进程所在 CPU 的本地内存中分配, 会导致 CPU 节点之间内存分配不均衡.
 当某个 CPU 节点的内存不足时, 会导致 swap 产生, 而不是从远程节点分配内存, 这就是 **swap insanity** 现象
@@ -73,11 +73,11 @@ NUMA 默认的内存分配策略是优先在进程所在 CPU 的本地内存中�
 
 ### Concurrency Lib
 
-- [Taskflow](https://github.com/cpp-taskflow/cpp-taskflow)
+- [TaskFlow](https://github.com/cpp-taskflow/cpp-taskflow)
 
 ### Perf Tools
 
-- [Flame Graph](https://github.com/brendangregg/FlameGraph)
+- [FlameGraph](https://github.com/brendangregg/FlameGraph)
 
 ### Hardware Performance Counter
 
@@ -114,7 +114,7 @@ for strict-aliasing warnings:
 
 #### RDTSC
 
-#### clock_gettime
+#### Clock Get Time
 
 ```bash
 gcc *.c -o *.o ... -lrt # link with librt
@@ -134,7 +134,7 @@ printf("%d %d", ts.tv_sec, ts.tv_nsec);
 grep -i numa /var/log/dmesg
 ```
 
-#### numactl
+#### NUMA Control
 
 ##### installation
 
@@ -147,10 +147,10 @@ sudo apt install -y numactl
 ```bash
 numactl --show
 numactl --hardware
-numactl --interlave=all
+numactl --interleave=all
 ```
 
-#### numastat
+#### NUMA Status
 
 ```bash
 numastat

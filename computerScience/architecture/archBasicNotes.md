@@ -3,7 +3,7 @@
 <!-- TOC -->
 
 - [Architecture Basic Notes](#architecture-basic-notes)
-  - [Superpipeline or Superscalar](#superpipeline-or-superscalar)
+  - [SuperPipeline and SuperScalar](#superpipeline-and-superscalar)
     - [Instructions Dependencies and Latencies](#instructions-dependencies-and-latencies)
     - [Branch Prediction](#branch-prediction)
   - [VLIW (Very Long Instruction Word)](#vliw-very-long-instruction-word)
@@ -18,7 +18,7 @@
   - [Memory](#memory)
     - [Memory Wall](#memory-wall)
     - [Caches](#caches)
-      - [Cache ocality](#cache-ocality)
+      - [Cache Locality](#cache-locality)
       - [Cache Layout](#cache-layout)
     - [Memory Latency and Bandwidth](#memory-latency-and-bandwidth)
   - [Distributed System](#distributed-system)
@@ -26,9 +26,9 @@
 
 <!-- /TOC -->
 
-## Superpipeline or Superscalar
+## SuperPipeline and SuperScalar
 
-A supuerpipelined processor own a 5-20 stage pipeline,
+A superpipeline processor own a 5-20 stage pipeline,
 a superscalar issues 3-8 instructions in parallel
 (more functional units like integer/float units).
 
@@ -66,7 +66,7 @@ was the first architecture with a **fully predicated** instruction set
 In cases where backward compatibility is not an issue,
 it is possible for the instruction set itself to be designed
 to explicitly group instructions to be executed in parallel.
-A VLIW processor's instruction flow is much like a superscalar,
+A VLIW processor's instruction flow is much like a super-scalar,
 except the decode/dispatch stage is much simpler
 and only occurs for each group of sub-instructions.
 No VLIW designs have yet been commercially successful as mainstream CPUs.
@@ -105,7 +105,7 @@ the other side.
 
 Power usage goes up even faster than clock speed does
 (increasing clock speed by 20% with 50% more power usage,
-O(power) = `frequence * Voltage * Voltage`).
+O(power) = `frequency * Voltage * Voltage`).
 Leakage current also goes up as the voltage is increased,
 leakage generally goes up as the temperature increases as well.
 The power and heat problems become unmanageable,
@@ -125,7 +125,7 @@ RISC-like micro-instructions (μops, pronounced "micro-ops"),
 which can then be executed by a fast,
 RISC-style register-renaming OOO superscalar core.
 The pipeline depth of Core i*2/i*3 Sandy/Ivy Bridge
-was shown as 14/19 stages in the earlier section on superpipelining,
+was shown as 14/19 stages in the earlier section on superpipeline,
 it is 14 stages when the processor is running from its L0 μop cache
 (which is the common case),
 but 19 stages when running from the L1 instruction cache
@@ -146,7 +146,7 @@ The instructions come from multiple threads running at the same time,
 all on the one processor core.
 An SMT processor uses just one physical processor core
 to present two or more logical processors to the system.
-Seperate units include the program counter, the architecturally-visible registers,
+Separate units include the program counter, the architecturally-visible registers,
 the memory mappings held in the TLB,
 shared units include the decoders and dispatch logic,
 the functional units, and the caches.
@@ -283,7 +283,7 @@ with around 90% caches hit rates.
 | RAM        | 8+GB   | ~117             | SDRAM DIMMs on motherboard |
 | Swap       | 100+GB | 10000+           | hard disk or SSD           |
 
-#### Cache ocality
+#### Cache Locality
 
 Temporal locality is exploited by merely keeping recently accessed data in the cache.
 To take advantage of spatial locality,
