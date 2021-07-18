@@ -1,8 +1,8 @@
-# CSS 3 Basic Notes
+# CSS Basic Notes
 
 <!-- TOC -->
 
-- [CSS 3 Basic Notes](#css-3-basic-notes)
+- [CSS Basic Notes](#css-basic-notes)
   - [Cascading and Inheritance](#cascading-and-inheritance)
     - [Cascading Order](#cascading-order)
     - [Specificity](#specificity)
@@ -83,6 +83,8 @@
   - [Centering Patterns](#centering-patterns)
     - [Horizontal Centering Pattern](#horizontal-centering-pattern)
     - [Vertical Centering Pattern](#vertical-centering-pattern)
+      - [Vertical Inline element](#vertical-inline-element)
+      - [Vertical Block element](#vertical-block-element)
     - [Mixing Centering Pattern](#mixing-centering-pattern)
   - [CSS ScrollBar](#css-scrollbar)
     - [Custom ScrollBar](#custom-scrollbar)
@@ -1665,21 +1667,26 @@ margin in the direction of the float will pull the floated element in that direc
 
 ### Vertical Centering Pattern
 
-- Inline element:
-  - padding
-  - line-height
-  - vertical-align
-  - flexbox
-  - grid
-- Block element
-  - top + margin
-  - top + translateY
-  - vertical-align
-  - flexbox
-  - grid
+#### Vertical Inline element
+
+- padding
+- line-height
+- vertical-align: middle
+  - 作用环境: parent element `line-height` === `height`.
+  - 作用对象: children element `display: inline-block/inline`.
+- flexbox
+- grid
+
+#### Vertical Block element
+
+- top + margin
+- top + translateY
+- vertical-align
+- flexbox
+- grid
 
 ```css
-.form__item__label {
+.form-item-label {
   display: flex;
   flex-direction: row;
   align-items: center;
