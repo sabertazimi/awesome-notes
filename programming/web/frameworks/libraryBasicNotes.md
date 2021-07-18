@@ -906,6 +906,7 @@
 
 - [Public APIs](https://github.com/public-apis/public-apis)
 - [JSON Server](https://github.com/typicode/json-server)
+- [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter)
 - [YAPI](https://github.com/ymfe/yapi)
 - [Nock Server](https://github.com/nock/nock)
 - [Mock Service Worker][https://github.com/mswjs/msw]
