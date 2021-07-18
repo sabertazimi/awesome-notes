@@ -66,6 +66,7 @@
     - [Relative Position](#relative-position)
     - [Absolute Position](#absolute-position)
     - [Fixed Position](#fixed-position)
+    - [Sticky Position](#sticky-position)
   - [Flex Patterns](#flex-patterns)
     - [Flex Under the Hood](#flex-under-the-hood)
     - [Flex Useful Shorthand](#flex-useful-shorthand)
@@ -1294,6 +1295,21 @@ top/left/width/right/z-index are invalid
 
   top: auto;
   left: 0;
+}
+```
+
+### Sticky Position
+
+`position: sticky` + `top: 0`:
+
+- 粘性定位的元素在它距离视窗顶部大于 0 时， 会按照默认布局， 表现为 Relative Position.
+- 一旦其距离顶部的距离等于 0, 元素会固定在窗口顶部, 表现为 Fixed Position.
+
+```css
+.sticky {
+  position: sticky;
+  top: 0;
+  margin-top: 50px;
 }
 ```
 
