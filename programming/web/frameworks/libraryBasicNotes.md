@@ -864,6 +864,7 @@
 
 - [HTML Head Checklist](https://github.com/joshbuchea/HEAD)
 - [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
+- [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint)
 - [CSS Stats Tools](https://github.com/cssstats/cssstats)
 - [CSS Stats CLI](https://github.com/projectwallace/wallace-cli)
 - [Java CheckStyle](https://github.com/checkstyle/checkstyle)
