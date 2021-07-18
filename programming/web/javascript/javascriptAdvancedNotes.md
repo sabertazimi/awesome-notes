@@ -1942,7 +1942,7 @@ avoid callback hell with:
 resolve only accept **one** value
 
 ```js
-return new Promise(resolve => resolve([a, b]));
+return new Promise((resolve) => resolve([a, b]));
 ```
 
 - promises on the same chain execute orderly
@@ -1953,19 +1953,18 @@ const users = [
   'W8lbAokuirfdlTJpnsNC5kryuHtu1G53',
   'ZinqxnohbXMQdtF6avtlUkxLLknRxCTh',
   'ynQePb3RB2JSx4iziGYMM5eXgkwnufS5',
-  'EtT2haq2sNoWnNjmeyZnfUmZn9Ihfi8w'
+  'EtT2haq2sNoWnNjmeyZnfUmZn9Ihfi8w',
 ];
 
 const response = [];
 
-const getUser = user => () => {
-  return axios.get(`/users/userId=${user}`).then(res => response.push(res));
+const getUser = (user) => () => {
+  return axios.get(`/users/userId=${user}`).then((res) => response.push(res));
 };
 
-const getUsers = users => {
-  const [getFirstUser, getSecondUser, getThirdUser, getFourthUser] = users.map(
-    getUser
-  );
+const getUsers = (users) => {
+  const [getFirstUser, getSecondUser, getThirdUser, getFourthUser] =
+    users.map(getUser);
 
   getFirstUser()
     .then(getSecondUser)
@@ -1980,7 +1979,7 @@ const users = [
   'W8lbAokuirfdlTJpnsNC5kryuHtu1G53',
   'ZinqxnohbXMQdtF6avtlUkxLLknRxCTh',
   'ynQePb3RB2JSx4iziGYMM5eXgkwnufS5',
-  'EtT2haq2sNoWnNjmeyZnfUmZn9Ihfi8w'
+  'EtT2haq2sNoWnNjmeyZnfUmZn9Ihfi8w',
 ];
 
 let response = [];
@@ -1993,8 +1992,8 @@ function getUsers(users) {
   promises[3] = axios.get(`/users/userId=${users[3]}`);
 
   Promise.all(promises)
-    .then(userDataArr => (response = userDataArr))
-    .catch(err => console.log(err));
+    .then((userDataArr) => (response = userDataArr))
+    .catch((err) => console.log(err));
 }
 ```
 
@@ -2013,8 +2012,8 @@ Promise.all(urls.map(fetch)).then(responses =>
 ```
 
 ```js
-Promise.all(urls.map(url => fetch(url).then(resp => resp.text()))).then(
-  texts => {
+Promise.all(urls.map((url) => fetch(url).then((resp) => resp.text()))).then(
+  (texts) => {
     //
   }
 );
@@ -2038,7 +2037,7 @@ class Promise {
     this.$chained = [];
 
     // Implement `resolve()` and `reject()` for the executor function to use
-    const resolve = res => {
+    const resolve = (res) => {
       // A promise is considered "settled" when it is no longer
       // pending, that is, when either `resolve()` or `reject()`
       // was called once. Calling `resolve()` or `reject()` twice
@@ -2071,7 +2070,7 @@ class Promise {
       return res;
     };
 
-    const reject = err => {
+    const reject = (err) => {
       if (this.$state !== 'PENDING') {
         return;
       }
@@ -2104,7 +2103,7 @@ class Promise {
       // Ensure that errors in `onFulfilled()` and `onRejected()` reject the
       // returned promise, otherwise they'll crash the process. Also, ensure
       // that the promise
-      const _onFulfilled = res => {
+      const _onFulfilled = (res) => {
         try {
           // If `onFulfilled()` returns a promise, trust `resolve()` to handle
           // it correctly.
@@ -2115,7 +2114,7 @@ class Promise {
         }
       };
 
-      const _onRejected = err => {
+      const _onRejected = (err) => {
         try {
           // store new value to new Promise
           reject(onRejected(err));
@@ -2131,7 +2130,7 @@ class Promise {
       } else {
         this.$chained.push({
           onFulfilled: _onFulfilled,
-          onRejected: _onRejected
+          onRejected: _onRejected,
         });
       }
     });
@@ -2182,7 +2181,7 @@ async getAuthors(authorIds) {
 
 ```js
 function sleep(time) {
-  return new Promise(resolve => setTimeout(resolve, time));
+  return new Promise((resolve) => setTimeout(resolve, time));
 }
 ```
 
@@ -2214,7 +2213,7 @@ export default {
       text: '',
       results: [],
       nextRequestId: 1,
-      displayedRequestId: 0
+      displayedRequestId: 0,
     };
   },
   watch: {
@@ -2229,8 +2228,8 @@ export default {
 
       this.displayedRequestId = requestId;
       this.results = results;
-    }
-  }
+    },
+  },
 };
 ```
 
@@ -3683,20 +3682,20 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 - 真实用户监控的优缺点
 
 | 优点                                   | 缺点                             |
-| :------------------------------------- | :------------------------------- |
-| 无需配置模拟条件，完全还原真实场景     | 影响真实用户的访问性能及流量消耗 |
-| 不存在登录等需要额外解决的场景         | 无法采集硬件相关指标             |
-| 数据样本足够庞大，可以减少统计误差     | 无法采集完整的资源加载瀑布图     |
-| 新年数据可与其它数据关联，产生更大价值 | 无法可视化展示加载过程           |
+| :-------------------------------------| :--------------------------------|
+| 无需配置模拟条件，完全还原真实场景    | 影响真实用户的访问性能及流量消耗 |
+| 不存在登录等需要额外解决的场景       | 无法采集硬件相关指标           |
+| 数据样本足够庞大，可以减少统计误差    | 无法采集完整的资源加载瀑布图    |
+| 新年数据可与其它数据关联，产生更大价值 | 无法可视化展示加载过程         |
 
 #### 对比
 
 | 对比项         | 合成监控               | 真实用户监控               |
-| :------------- | :--------------------- | :------------------------- |
-| 实现难度及成本 | 较低                   | 较高                       |
-| 采集数据丰富度 | 丰富                   | 基础                       |
-| 数据样本量     | 较小                   | 大(视业务体量)             |
-| 适合场景       | 定性分析, 小数据量分析 | 定量分析, 业务数据深度挖掘 |
+| :-------------| :--------------------- | :------------------------- |
+| 实现难度及成本 | 较低                | 较高                    |
+| 采集数据丰富度 | 丰富                | 基础                    |
+| 数据样本量    | 较小                | 大(视业务体量)            |
+| 适合场景      | 定性分析, 小数据量分析 | 定量分析, 业务数据深度挖掘 |
 
 #### 方案
 
@@ -5376,7 +5375,7 @@ self.addEventListener('install', (e) => {
 // <img class="lzy_img" src="lazy_img.jpg" data-src="real_img.jpg" />
 document.addEventListener('DOMContentLoaded', () => {
   const imageObserver = new IntersectionObserver((entries, imgObserver) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const lazyImage = entry.target;
         console.log('Lazy loading ', lazyImage);
@@ -5390,7 +5389,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const lazyImages = document.querySelectorAll('img.lzy_img');
-  lazyImages.forEach(lazyImage => imageObserver.observe(lazyImage));
+  lazyImages.forEach((lazyImage) => imageObserver.observe(lazyImage));
 });
 ```
 
@@ -5404,7 +5403,7 @@ const rabbitDownKeyframes = new KeyframeEffect(
   whiteRabbit, // element to animate
   [
     { transform: 'translateY(0%)' }, // keyframe
-    { transform: 'translateY(100%)' } // keyframe
+    { transform: 'translateY(100%)' }, // keyframe
   ],
   { duration: 3000, fill: 'forwards' } // keyframe options
 );
@@ -5428,21 +5427,21 @@ function downHandler() {
 const animationKeyframes = [
   {
     transform: 'rotate(0)',
-    color: '#000'
+    color: '#000',
   },
   {
     color: '#431236',
-    offset: 0.3
+    offset: 0.3,
   },
   {
     transform: 'rotate(360deg)',
-    color: '#000'
-  }
+    color: '#000',
+  },
 ];
 
 const animationTiming = {
   duration: 3000,
-  iterations: Infinity
+  iterations: Infinity,
 };
 
 const animation = document
@@ -5578,7 +5577,7 @@ const baseFrequency = 440;
 const getNoteFreq = (base, pitch) => base * Math.pow(2, pitch / 12);
 // oscillator.frequency.value = getNoteFreq(440, 7);
 
-const getNoteDetune = pitch => pitch * 100;
+const getNoteDetune = (pitch) => pitch * 100;
 // oscillator.detune.value = getNoteDetune(7);
 
 const play = (type, delay, pitch, duration) => {
@@ -5621,7 +5620,7 @@ javascriptNode.connect(audioContext.destination);
 // setup the event handler that is triggered
 // every time enough samples have been collected
 // trigger the audio analysis and draw the results
-javascriptNode.onaudioprocess = function() {
+javascriptNode.onaudioprocess = function () {
   // get the Time Domain data for this sample
   analyserNode.getByteTimeDomainData(amplitudeArray);
 
@@ -5635,13 +5634,13 @@ javascriptNode.onaudioprocess = function() {
 // Note that the audio load is asynchronous
 function loadSound(url) {
   fetch(url)
-    .then(response => {
-      audioContext.decodeAudioData(response, buffer => {
+    .then((response) => {
+      audioContext.decodeAudioData(response, (buffer) => {
         audioData = buffer;
         playSound(audioData);
       });
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error);
     });
 }
@@ -5748,7 +5747,7 @@ function setStyles() {
 ## Web Navigator API
 
 ```js
-navigator.connection.effectiveType // 2G - 5G
+navigator.connection.effectiveType; // 2G - 5G
 ```
 
 ## Web Sockets API
@@ -5801,16 +5800,16 @@ function WebSocketTest() {
     alert('WebSocket is supported by your Browser!');
     // Let us open a web socket
     var ws = new WebSocket('ws://localhost:9998/echo');
-    ws.onopen = function() {
+    ws.onopen = function () {
       // Web Socket is connected, send data using send()
       ws.send('Message to send');
       alert('Message is sent...');
     };
-    ws.onmessage = function(evt) {
+    ws.onmessage = function (evt) {
       var received_msg = evt.data;
       alert('Message is received...');
     };
-    ws.onclose = function() {
+    ws.onclose = function () {
       // websocket is closed.
       alert('Connection is closed...');
     };
@@ -5856,7 +5855,7 @@ function WebSocketTest() {
 
   worker.addEventListener(
     'message',
-    function(e) {
+    function (e) {
       console.log(e.data);
     },
     false
@@ -5872,7 +5871,7 @@ function WebSocketTest() {
 // worker.js
 self.addEventListener(
   'message',
-  function(e) {
+  function (e) {
     const data = e.data;
     switch (data.cmd) {
       case 'average':
@@ -5905,11 +5904,11 @@ function gamepadHandler(event, connecting) {
   }
 }
 
-window.addEventListener('gamepadconnected', e => {
+window.addEventListener('gamepadconnected', (e) => {
   gamepadHandler(e, true);
 });
 
-window.addEventListener('gamepaddisconnected', e => {
+window.addEventListener('gamepaddisconnected', (e) => {
   gamepadHandler(e, false);
 });
 ```
@@ -5925,7 +5924,7 @@ if (window.navigator.geolocation) {
     // 指定获取地理位置的超时时间，默认不限时，单位为毫秒
     timeout: 5000,
     // 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。
-    maximumAge: 3000
+    maximumAge: 3000,
   });
 } else {
   alert('Your browser does not support Geolocation!');
