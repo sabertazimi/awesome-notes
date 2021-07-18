@@ -16,7 +16,6 @@
       - [Named State](#named-state)
     - [Functional Programming](#functional-programming)
   - [Code Review](#code-review)
-    - [Code Review Tools](#code-review-tools)
     - [Code Review Basis](#code-review-basis)
     - [Security Review](#security-review)
     - [Documents Review](#documents-review)
@@ -300,12 +299,12 @@ Dependency should be on **abstractions** not concretions:
 ```java
 class XMLHttpService extends XMLHttpRequestService {}
 class Http {
-    constructor(private xmlhttpService: XMLHttpService) { }
+    constructor(private xmlHttpService: XMLHttpService) { }
     get(url: string , options: any) {
-        this.xmlhttpService.request(url,'GET');
+        this.xmlHttpService.request(url,'GET');
     }
     post() {
-        this.xmlhttpService.request(url,'POST');
+        this.xmlHttpService.request(url,'POST');
     }
     //...
 }
@@ -380,14 +379,14 @@ Distinguish three axes of expressiveness, depending on whether the state is:
 - unnamed or named
 - deterministic or nondeterministic
 - sequential or concurrent
-- named, nondeterministic and concurrent paradigmh
+- named, nondeterministic and concurrent paradigm
   as the most expressiveness of state
 - named state for updatable memory (mutable state) and modularity
 
 The least expressive combination is functional programming
 (threaded state: unnamed, deterministic, sequential).
 Adding concurrency gives declarative concurrent programming
-(synchrocells: unnamed, deterministic, concurrent).
+(synchronous cells: unnamed, deterministic, concurrent).
 Adding nondeterministic choice gives concurrent logic programming
 (stream mergers: unnamed, nondeterministic, concurrent).
 Adding ports or cells, gives message passing or shared state
@@ -399,12 +398,6 @@ Based on the concept of first-class function or closure,
 which makes it equivalent to the λ-calculus which is `Turing complete`.
 
 ## Code Review
-
-### Code Review Tools
-
-- checkstyle
-- findbugs
-- pmd
 
 ### Code Review Basis
 
