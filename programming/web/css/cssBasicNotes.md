@@ -159,7 +159,7 @@
     - [设备特性](#设备特性)
       - [Style for Print PDF](#style-for-print-pdf)
   - [Accessibility](#accessibility)
-    - [Screnn Reader Only](#screnn-reader-only)
+    - [Screen Reader Only](#screen-reader-only)
   - [常用组件 (Awesome Demo)](#常用组件-awesome-demo)
     - [Landing Page](#landing-page)
     - [Modal](#modal)
@@ -2419,6 +2419,49 @@ filter: initial;
 filter: unset;
 ```
 
+内投影滤镜
+
+```html
+<svg
+  width="300"
+  height="300"
+  viewBox="0 0 20 20"
+  style="position:absolute;left:-999px;"
+>
+  <filter id="inset-shadow">
+    <!-- 投影偏移 -->
+    <feOffset dx="0" dy="0" />
+    <!-- 投影模糊 -->
+    <feGaussianBlur stdDeviation="6" result="offset-blur" />
+    <!-- 反转投影使其变成内投影 -->
+    <feComposite
+      operator="out"
+      in="SourceGraphic"
+      in2="offset-blur"
+      result="inverse"
+    />
+    <!-- 内投影附加黑色 -->
+    <feFlood flood-color="black" flood-opacity=".95" result="color" />
+    <feComposite operator="in" in="color" in2="inverse" result="shadow" />
+    <!-- 把内投影显示在图像上 -->
+    <feComposite operator="over" in="shadow" in2="SourceGraphic" />
+  </filter>
+</svg>
+```
+
+毛玻璃滤镜
+
+```html
+<svg width="0" height="0" style="position:absolute;">
+  <filter id="blur" color-interpolation-filters="sRGB">
+    <feGaussianBlur stdDeviation="6" edgeMode="duplicate" />
+    <feComponentTransfer>
+      <feFuncA type="discrete" tableValues="0 1" />
+    </feComponentTransfer>
+  </filter>
+</svg>
+```
+
 ### Backdrop Filter
 
 ```css
@@ -2995,7 +3038,7 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 
 ## Accessibility
 
-### Screnn Reader Only
+### Screen Reader Only
 
 ```css
 .sr-only {
