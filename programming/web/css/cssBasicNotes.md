@@ -132,6 +132,7 @@
   - [CSS Interactive](#css-interactive)
     - [Cursor and Pointer](#cursor-and-pointer)
     - [User Select](#user-select)
+    - [CSS Form](#css-form)
   - [Object Position and Fit](#object-position-and-fit)
   - [Animation](#animation)
     - [Animation Property](#animation-property)
@@ -2640,6 +2641,16 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+```
+
+### CSS Form
+
+- 输入框光标颜色
+
+```css
+input {
+  caret-color: red;
 }
 ```
 
