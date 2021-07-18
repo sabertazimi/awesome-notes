@@ -252,7 +252,6 @@ git diff --check
 - 交互式的选择 add 特定部分
 
 ```bash
-git add --interactive
 git add -p
 ```
 
