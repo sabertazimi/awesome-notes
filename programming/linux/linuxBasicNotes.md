@@ -46,8 +46,13 @@
       - [find](#find)
       - [grep](#grep)
     - [Process Command](#process-command)
+      - [uptime](#uptime)
       - [ps](#ps)
       - [top](#top)
+      - [vmstat](#vmstat)
+      - [pidstat](#pidstat)
+      - [mpstat](#mpstat)
+      - [lscpu](#lscpu)
       - [jobs](#jobs)
       - [bg](#bg)
       - [fg](#fg)
@@ -55,8 +60,7 @@
       - [killall](#killall)
       - [shutdown](#shutdown)
       - [pstree](#pstree)
-      - [vmstat](#vmstat)
-      - [xload/tload](#xloadtload)
+      - [xload and tload](#xload-and-tload)
       - [screen](#screen)
     - [I/O Command](#io-command)
       - [cat](#cat)
@@ -185,6 +189,8 @@
       - [Bash error handle](#bash-error-handle)
       - [Bash loading progress](#bash-loading-progress)
   - [Terminal](#terminal)
+    - [Terminal Basis](#terminal-basis)
+    - [Default Terminal](#default-terminal)
     - [Tmux](#tmux)
       - [Basic Tmux Command](#basic-tmux-command)
       - [Basic Hotkeys](#basic-hotkeys)
@@ -194,11 +200,11 @@
         - [Tmux Scroll](#tmux-scroll)
       - [Configuration](#configuration)
   - [Perf Tools](#perf-tools)
-    - [uptime](#uptime)
+    - [uptime](#uptime-1)
     - [Top Command](#top-command)
     - [dmesg](#dmesg)
-    - [mpstat](#mpstat)
-    - [pidstat](#pidstat)
+    - [mpstat](#mpstat-1)
+    - [pidstat](#pidstat-1)
     - [iostat](#iostat)
     - [free](#free)
     - [sar](#sar)
@@ -569,13 +575,61 @@ display a list of appropriate commands
 
 ### Process Command
 
+#### uptime
+
+Average load information
+
 #### ps
 
-report a snapshot of current processes
+Report a snapshot of current processes
+
+```bash
+ps aux
+```
 
 #### top
 
-display tasks
+top/htop:
+
+- Display tasks
+- Average load
+- Process status
+- CPU usage
+
+atop:
+
+- Memory usage
+- Disk I/O usage
+- Network usage
+
+#### vmstat
+
+Outputs a snapshot of system resource usage:
+
+- CPU usage
+- Context switch times
+- Interrupt times (/proc/interrupts)
+- Running and exclusive process status
+- Memory usage
+- Swap space
+- Disk I/O usage
+
+#### pidstat
+
+Process and Thread:
+
+- CPU usage
+- Context switch times
+- Interrupt times (/proc/interrupts)
+
+#### mpstat
+
+- CPU usage
+- Software interrupt times (/proc/interrupts)
+
+#### lscpu
+
+Show `/proc/cpuinfo`.
 
 #### jobs
 
@@ -605,12 +659,7 @@ shutdown or reboot the system
 
 outputs a process list arranged in a tree-like pattern
 
-#### vmstat
-
-outputs a snapshot of system resource usage:
-including memory, swap and disk I/O
-
-#### xload/tload
+#### xload and tload
 
 draws a graph showing system load over time
 
@@ -2261,6 +2310,23 @@ printf -- ' DONE!\n';
 ```
 
 ## Terminal
+
+### Terminal Basis
+
+- 电传打字机 (TeleTypeWriter, TTY) 是物理设备,
+  最初是为电报设计, 后来被连接到计算机上, 发送输入和获取输出.
+- 电传打字机 (TTY) 现在被运行在内核中的模块所模拟,
+  被称为终端模拟器 (Terminal Emulator).
+- 伪终端 (Pseudo Terminal, PTY) 是运行在用户区的终端模拟程序.
+- Shell 由 Terminal fork 出来, 是 Terminal 的子进程.
+  Terminal 处理键盘事件, 负责字符的显示.
+  Shell 负责解释执行用户输入的字符, 返回操作系统底层响应.
+- 可以使用 `stty` 命令对 TTY 设备进行配置.
+- 远程终端 `ssh` 也是一种伪终端 PTY:
+  - Local: PTY Master is Terminal, PTY Slave is `bash` and `ssh client`.
+  - Remote: PTY Master is `ssh server`, PTY Slave is `bash`.
+
+### Default Terminal
 
 ```bash
 sudo update-alternatives --install /usr/bin/x-terminal-emulator
