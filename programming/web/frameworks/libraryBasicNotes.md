@@ -704,8 +704,8 @@
 
 ## Persistent Storage
 
-- [RxDB](https://github.com/pubkey/rxdb)
 - [PouchDB](https://github.com/pouchdb/pouchdb)
+- [RxDB](https://github.com/pubkey/rxdb)
 - [LowDB](https://github.com/typicode/lowdb)
 - [ImmortalDB](https://github.com/gruns/ImmortalDB)
 - [LocalForage](https://github.com/localForage/localForage)
@@ -905,13 +905,13 @@
 ### Mock Tools
 
 - [Public APIs](https://github.com/public-apis/public-apis)
-- [Mockery Function](https://github.com/mfncooper/mockery)
-- [Mock Service Worker][https://github.com/mswjs/msw]
-- [Nock Server](https://github.com/nock/nock)
 - [JSON Server](https://github.com/typicode/json-server)
-- [Images Mock](http://source.unsplash.com/random)
-- [Images Placeholder](https://placeholder.com)
+- [YAPI](https://github.com/ymfe/yapi)
+- [Nock Server](https://github.com/nock/nock)
+- [Mock Service Worker][https://github.com/mswjs/msw]
+- [Mockery Function](https://github.com/mfncooper/mockery)
 - [Pokemon API](https://github.com/PokeAPI/pokeapi)
+- [Images Mock](http://source.unsplash.com/random)
 
 ### Security Tools
 
