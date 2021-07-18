@@ -92,14 +92,14 @@
     - [Custom ScrollBar](#custom-scrollbar)
     - [Hidden ScrollBar](#hidden-scrollbar)
   - [List Style](#list-style)
-  - [Opacity](#opacity)
-  - [Border](#border)
+  - [CSS Opacity](#css-opacity)
+  - [CSS Colors](#css-colors)
+    - [HSL Color](#hsl-color)
+  - [CSS Border](#css-border)
     - [Border Radius](#border-radius)
     - [Border Image](#border-image)
     - [Border Collapse](#border-collapse)
     - [Border Best Practice](#border-best-practice)
-  - [CSS Colors](#css-colors)
-    - [HSL Color](#hsl-color)
   - [CSS Background](#css-background)
     - [Background Image](#background-image)
     - [Background Size](#background-size)
@@ -133,6 +133,9 @@
   - [CSS Filter](#css-filter)
     - [SVG Filter](#svg-filter)
     - [Backdrop Filter](#backdrop-filter)
+  - [CSS Interactive](#css-interactive)
+    - [Cursor and Pointer](#cursor-and-pointer)
+    - [User Select](#user-select)
   - [Object Position and Fit](#object-position-and-fit)
   - [Animation](#animation)
     - [Animation Property](#animation-property)
@@ -1783,11 +1786,75 @@ margin in the direction of the float will pull the floated element in that direc
 - list-style-type: 改变 ul/ol 前标记类型
 - list-style-image: 改变 ul/ol 前标记类型
 
-## Opacity
+## CSS Opacity
 
 0 ~ 1, 渐进效果常用属性
 
-## Border
+## CSS Colors
+
+### HSL Color
+
+- H: hue
+- S: saturation (stay `50%` etc.)
+- L: lightness (easy to theme colors)
+
+```css
+/* Hover Button */
+:root {
+  --primary-h: 221;
+  --primary-s: 72%;
+  --primary-l: 62%;
+}
+
+.button {
+  background-color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+}
+
+.button:hover {
+  --primary-l: 54%;
+}
+```
+
+```css
+/* Custom Buttons */
+:root {
+  --primary-h: 221;
+  --primary-s: 72%;
+  --primary-l: 62%;
+}
+
+.button {
+  background-color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+}
+
+.button--secondary {
+  --primary-l: 90%;
+  color: #222;
+}
+
+.button--ghost {
+  --primary-l: 90%;
+  background-color: transparent;
+  border: 3px solid hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+}
+```
+
+```css
+/* Change lightness to get gradient */
+.section {
+  background: linear-gradient(
+    to left,
+    hsl(var(--primary-h), var(--primary-s), var(--primary-l)),
+    hsl(var(--primary-h), var(--primary-s), 95%)
+  );
+}
+
+.section-2 {
+  --primary-h: 167;
+}
+```
+
+## CSS Border
 
 ### Border Radius
 
@@ -1853,70 +1920,6 @@ Mix transparent with non-transparent border to make shapes (e.g. triangle).
   border-bottom: 16px solid transparent;
 
   border-right: 20px solid #8de698;
-}
-```
-
-## CSS Colors
-
-### HSL Color
-
-- H: hue
-- S: saturation (stay `50%` etc.)
-- L: lightness (easy to theme colors)
-
-```css
-/* Hover Button */
-:root {
-  --primary-h: 221;
-  --primary-s: 72%;
-  --primary-l: 62%;
-}
-
-.button {
-  background-color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
-}
-
-.button:hover {
-  --primary-l: 54%;
-}
-```
-
-```css
-/* Custom Buttons */
-:root {
-  --primary-h: 221;
-  --primary-s: 72%;
-  --primary-l: 62%;
-}
-
-.button {
-  background-color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
-}
-
-.button--secondary {
-  --primary-l: 90%;
-  color: #222;
-}
-
-.button--ghost {
-  --primary-l: 90%;
-  background-color: transparent;
-  border: 3px solid hsl(var(--primary-h), var(--primary-s), var(--primary-l));
-}
-```
-
-```css
-/* Change lightness to get gradient */
-.section {
-  background: linear-gradient(
-    to left,
-    hsl(var(--primary-h), var(--primary-s), var(--primary-l)),
-    hsl(var(--primary-h), var(--primary-s), 95%)
-  );
-}
-
-.section-2 {
-  --primary-h: 167;
 }
 ```
 
@@ -2626,6 +2629,29 @@ body {
   background-color: rgba(17, 25, 40, 0.54);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.125);
+}
+```
+
+## CSS Interactive
+
+### Cursor and Pointer
+
+```css
+.wrap {
+  cursor: default;
+  pointer-events: none;
+}
+```
+
+### User Select
+
+```css
+.wrap {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 ```
 
