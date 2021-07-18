@@ -57,8 +57,8 @@
     - [Create BFC](#create-bfc)
     - [Margin Collapsing](#margin-collapsing)
   - [Float Patterns](#float-patterns)
-    - [fixed parent](#fixed-parent)
-    - [清除浮动](#清除浮动)
+    - [Fixed Parent](#fixed-parent)
+    - [Float ClearFix](#float-clearfix)
     - [Float Best Practice](#float-best-practice)
   - [Position Patterns](#position-patterns)
     - [Static Position](#static-position)
@@ -88,6 +88,9 @@
     - [Horizontal Centering Pattern](#horizontal-centering-pattern)
     - [Vertical Centering Pattern](#vertical-centering-pattern)
     - [Mixing Centering Pattern](#mixing-centering-pattern)
+  - [CSS ScrollBar](#css-scrollbar)
+    - [Custom ScrollBar](#custom-scrollbar)
+    - [Hidden ScrollBar](#hidden-scrollbar)
   - [List Style](#list-style)
   - [Alignment](#alignment)
     - [Text Align](#text-align)
@@ -126,6 +129,7 @@
     - [Font Best Practice](#font-best-practice)
   - [CSS Counter](#css-counter)
   - [CSS Filter](#css-filter)
+    - [SVG Filter](#svg-filter)
     - [Backdrop Filter](#backdrop-filter)
   - [Object Position and Fit](#object-position-and-fit)
   - [Animation](#animation)
@@ -153,9 +157,9 @@
     - [Responsive Length](#responsive-length)
     - [Responsive Box](#responsive-box)
       - [Responsive Width and Height](#responsive-width-and-height)
-      - [responsive inline-box](#responsive-inline-box)
-    - [responsive image](#responsive-image)
-    - [media query](#media-query)
+      - [Responsive Inline Box](#responsive-inline-box)
+    - [Responsive Image](#responsive-image)
+    - [Media Query](#media-query)
       - [JavaScript Media Query API](#javascript-media-query-api)
     - [设备类型](#设备类型)
     - [设备特性](#设备特性)
@@ -594,12 +598,12 @@ Size in em if the font-size should be modular
 - 标志：logo
 - 广告：banner
 - 登陆：login
-- 登录条：loginbar
+- 登录条：login bar
 - 注册：register
 - 搜索：search
 - 功能区：shop
 - 标题：title
-- 加入：joinus
+- 加入：join us
 - 状态：status
 - 按钮：btn
 - 滚动：scroll
@@ -1163,7 +1167,7 @@ float make element specified value of `display`:
 - `inline-table` computed to `table`
 - `inline`/`inline-block`/`table-*` computed to `block`
 
-### fixed parent
+### Fixed Parent
 
 > Floating wont work inside fixed or absolute divs unless specify widthh
 
@@ -1176,7 +1180,7 @@ float make element specified value of `display`:
 }
 ```
 
-### 清除浮动
+### Float ClearFix
 
 **Best Practice**: 为父容器添加 clearfix class
 `display: table` 防止外边距塌陷, `clear: both` 清楚浮动
@@ -1702,6 +1706,57 @@ margin in the direction of the float will pull the floated element in that direc
 ### Mixing Centering Pattern
 
 在子容器中在设置新元素即可
+
+## CSS ScrollBar
+
+### Custom ScrollBar
+
+```css
+.demo::-webkit-scrollbar {
+  /* 滚动条整体样式 */
+  /* 高宽分别对应横竖滚动条的尺寸 */
+  width: 10px;
+  height: 1px;
+}
+
+.demo::-webkit-scrollbar-thumb {
+  /* 滚动条方块 */
+  border-radius: 10px;
+  background-color: blue;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+}
+
+.demo::-webkit-scrollbar-track {
+  /* 滚动条轨道 */
+  border-radius: 10px;
+  background-color: #ededed;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+```
+
+### Hidden ScrollBar
+
+```css
+.demo::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+
+.demo {
+  scrollbar-width: none; /* FireFox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+```
 
 ## List Style
 
@@ -2457,6 +2512,8 @@ filter: initial;
 filter: unset;
 ```
 
+### SVG Filter
+
 内投影滤镜
 
 ```html
@@ -2925,10 +2982,10 @@ TweenMax.fromTo(element, 1, { x: 0 }, { x: 100 });
 const tl = new TimelineMax();
 tl.staggerFrom(
   [
-    '#Capa_1 > g > path:nth-child(1)',
-    '#Capa_1 > circle:nth-child(7)',
-    '#Capa_1 > path:nth-child(6)',
-    '#Capa_1 > circle:nth-child(5)',
+    '#Cap_1 > g > path:nth-child(1)',
+    '#Cap_1 > circle:nth-child(7)',
+    '#Cap_1 > path:nth-child(6)',
+    '#Cap_1 > circle:nth-child(5)',
   ],
   1,
   {
@@ -2970,7 +3027,7 @@ img {
 }
 ```
 
-#### responsive inline-box
+#### Responsive Inline Box
 
 use `inline-box` with `width`
 
@@ -2981,7 +3038,7 @@ use `inline-box` with `width`
 }
 ```
 
-### responsive image
+### Responsive Image
 
 ```css
 .responsive-image {
@@ -2998,10 +3055,11 @@ use `inline-box` with `width`
 </picture>
 ```
 
-### media query
+### Media Query
 
 - `only` for improving compatibility with older browsers
 - definition order matters when media query with a different selector
+- JavaScript API: `window.matchMedia()`
 
 ```css
 @media (not/only) 设备类型 and ((not) 设备特性),
