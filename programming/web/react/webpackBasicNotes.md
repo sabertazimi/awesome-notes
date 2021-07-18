@@ -10,6 +10,7 @@
     - [Loader Configuration](#loader-configuration)
       - [Babel Loader](#babel-loader)
       - [CSS Loader](#css-loader)
+      - [Static Assets Loader](#static-assets-loader)
       - [Thread Loader](#thread-loader)
   - [Optimization](#optimization)
     - [Common Libraries](#common-libraries)
@@ -153,7 +154,28 @@ module.exports = {
     rules: [
       {
         test: /.s?css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        exclude: /node_modules$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                compileType: 'module',
+                localIdentName: '[local]__[hash:base64:5]',
+              },
+            },
+          },
+          'sass-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [['autoprefixer']],
+              },
+            },
+          },
+        ],
       },
     ],
   },
@@ -164,6 +186,23 @@ module.exports = {
     ],
   },
 };
+```
+
+#### Static Assets Loader
+
+- file-loader
+- url-loader
+- raw-loader
+
+```js
+{
+  rules: [
+    {
+      test: /\.(png|jpg|gif|jpeg|webp|svg|eot|ttf|woff|woff2)$/,
+      type: 'asset',
+    },
+  ];
+}
 ```
 
 #### Thread Loader
