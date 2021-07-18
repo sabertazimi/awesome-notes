@@ -252,6 +252,7 @@ git diff --check
 - 交互式的选择 add 特定部分
 
 ```bash
+git add --interactive
 git add -p
 ```
 
@@ -272,17 +273,12 @@ git commit --amend -a -v
 
 #### Commit Style Guide
 
-```html
-firstline -
-<type
-  >(<scope
-    >):
-    <subject>
-      (emptyline)
-      <body>
-        (emptyline)
-        <footer></footer></body></subject></scope
-></type>
+```md
+firstLine - <type>(<scope>): <subject>
+  (emptyLine)
+<body>
+  (emptyLine)
+<footer>
 ```
 
 ##### Message Subject
@@ -896,7 +892,7 @@ print_git_objects
     alt="Creative
 Commons License"
     style="border-width:0"
-    src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png"/></a
+    src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a
 ><br />This work is licensed under a
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"
   >Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a
