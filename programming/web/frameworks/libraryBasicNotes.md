@@ -281,7 +281,7 @@
 - [React Panel Group](https://github.com/DanFessler/react-panelgroup)
 - [Bricks Layout](https://github.com/callmecavs/bricks.js)
 - [Brick Layer](https://github.com/ademilter/bricklayer)
-- [Tether: Element Location](https://github.com/HubSpot/tether)
+- [Tether: Element Location](https://github.com/shipshapecode/tether)
 - [SplitJS](https://github.com/nathancahill/Split.js)
 
 ### Navigation
@@ -850,6 +850,7 @@
 - [AST Explorer](https://astexplorer.net)
 - [CodeCrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
 - [PMD: An extensible multi-language static code analyzer](https://github.com/pmd/pmd)
+- [Java SpotBugs](https://github.com/spotbugs/spotbugs)
 
 ### Code Coverage Tools
 
