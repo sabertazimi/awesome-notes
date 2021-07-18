@@ -77,6 +77,7 @@
     - [Slide Images](#slide-images)
     - [Image Gallery](#image-gallery)
     - [Image Filter](#image-filter)
+    - [Image Editor](#image-editor)
   - [Canvas](#canvas)
     - [Particles](#particles)
     - [Blocks](#blocks)
@@ -582,6 +583,11 @@
 - [Rainy Day Effect](https://github.com/maroslaw/rainyday.js)
 - [Image Difference Library](https://github.com/HumbleSoftware/js-imagediff)
 
+### Image Editor
+
+- [Cropper.js: JavaScript image cropper](https://github.com/fengyuanchen/cropperjs)
+- [Tui Image Editor: Full featured using HTML5 Canvas](https://github.com/nhn/tui.image-editor)
+
 ## Canvas
 
 - [HTML2Canvas](https://github.com/niklasvh/html2canvas)
@@ -697,12 +703,11 @@
 
 ## Persistent Storage
 
+- [RxDB](https://github.com/pubkey/rxdb)
 - [PouchDB](https://github.com/pouchdb/pouchdb)
+- [LowDB](https://github.com/typicode/lowdb)
 - [ImmortalDB](https://github.com/gruns/ImmortalDB)
-- [lowdb](https://github.com/typicode/lowdb)
-- [brownies](https://github.com/franciscop/brownies)
-- [store.js](https://github.com/marcuswestin/store.js)
-- [localForage](https://github.com/localForage/localForage)
+- [LocalForage](https://github.com/localForage/localForage)
 
 ## Search
 
