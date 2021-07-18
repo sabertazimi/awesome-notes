@@ -266,6 +266,7 @@
   - [Web Sockets API](#web-sockets-api)
     - [Web Sockets Message Header](#web-sockets-message-header)
     - [Web Sockets Basic Usage](#web-sockets-basic-usage)
+    - [Web Socket HeartBeat Mechanism](#web-socket-heartbeat-mechanism)
   - [Web RTC API](#web-rtc-api)
   - [Web Workers API](#web-workers-api)
   - [Web Gamepad API](#web-gamepad-api)
@@ -5819,6 +5820,16 @@ function WebSocketTest() {
   }
 }
 ```
+
+### Web Socket HeartBeat Mechanism
+
+连接终止时，Web Socket 不会自动恢复,
+需要自己实现, 通常为了保持连接状态，需要增加心跳机制.
+
+每隔一段时间会向服务器发送一个数据包, 告诉服务器自己 Alive,
+服务器端如果 Alive, 就会回传一个数据包给客户端.
+主要在一些**长时间连接**的应用场景需要考虑心跳机制及重连机制,
+以保证长时间的连接及数据交互.
 
 ## Web RTC API
 
