@@ -3725,10 +3725,11 @@ Load 也不一定代表用户看到主要内容.
 它的优点是相对校准的估算出内容渲染时间, 贴近用户感知.
 但缺点是无原生 API 支持, 算法推导时 DOM 节点不含权重.
 
-- First Contentful Paint
-- First Meaningful Paint
-- First Ipnut Delay
-- Time to Interactive
+- First Contentful Paint (FCP)
+- First Meaningful Paint (FMP)
+- Largest Conentful Paint (LCP)
+- First Ipnut Delay (FID)
+- Time to Interactive (TOI)
 
 #### 上报关联的维度
 
