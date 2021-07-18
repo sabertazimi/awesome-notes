@@ -13,24 +13,20 @@
     - [Computed Value](#computed-value)
     - [Used Value](#used-value)
     - [Actual Value](#actual-value)
-  - [Best Practice](#best-practice)
-    - [Normalize](#normalize)
-    - [gap](#gap)
-    - [rem vs em](#rem-vs-em)
-  - [属性排序](#属性排序)
-    - [概述](#概述)
-      - [显示属性](#显示属性)
-      - [自身属性](#自身属性)
-      - [文本属性](#文本属性)
-    - [详细](#详细)
-      - [显示属性 Detail](#显示属性-detail)
-      - [自身属性 Detail](#自身属性-detail)
-      - [文本属性 Detail](#文本属性-detail)
-  - [命名规范](#命名规范)
-    - [页面结构](#页面结构)
-    - [导航](#导航)
-    - [功能](#功能)
-    - [CSS Files](#css-files)
+  - [Property Order](#property-order)
+    - [Property Order Summary](#property-order-summary)
+      - [Display Property](#display-property)
+      - [Self Property](#self-property)
+      - [Text Property](#text-property)
+    - [Property Order Details](#property-order-details)
+      - [Display Property Details](#display-property-details)
+      - [Self Property Details](#self-property-details)
+      - [Text Property Details](#text-property-details)
+  - [Naming Convention](#naming-convention)
+    - [Layout Structure Naming Convention](#layout-structure-naming-convention)
+    - [Navigation Naming Convention](#navigation-naming-convention)
+    - [Functional Component Naming Convention](#functional-component-naming-convention)
+    - [CSS Files Naming Convention](#css-files-naming-convention)
   - [CSS Selector](#css-selector)
     - [元素选择器](#元素选择器)
     - [关系选择器](#关系选择器)
@@ -40,9 +36,9 @@
     - [伪类](#伪类)
     - [伪元素](#伪元素)
     - [Descendant Selector](#descendant-selector)
-  - [HTML Body Property](#html-body-property)
-  - [Box Style](#box-style)
-    - [width](#width)
+  - [CSS Normalize](#css-normalize)
+  - [CSS Box](#css-box)
+    - [Width](#width)
     - [Z Index](#z-index)
     - [Overflow](#overflow)
     - [Resize Box](#resize-box)
@@ -91,7 +87,6 @@
   - [CSS ScrollBar](#css-scrollbar)
     - [Custom ScrollBar](#custom-scrollbar)
     - [Hidden ScrollBar](#hidden-scrollbar)
-  - [List Style](#list-style)
   - [CSS Opacity](#css-opacity)
   - [CSS Colors](#css-colors)
     - [HSL Color](#hsl-color)
@@ -124,11 +119,11 @@
     - [White Space](#white-space)
   - [CSS Font](#css-font)
     - [Font Size](#font-size)
-    - [font-style](#font-style)
-    - [font-variant](#font-variant)
-    - [font-size-adjust](#font-size-adjust)
+    - [Font Style](#font-style)
+    - [Font Variant](#font-variant)
+    - [Font Size Adjust](#font-size-adjust)
     - [Font Display](#font-display)
-    - [custom function - @font-face](#custom-function---font-face)
+    - [Custom Fonts Function](#custom-fonts-function)
     - [Font Best Practice](#font-best-practice)
   - [CSS Counter](#css-counter)
   - [CSS Filter](#css-filter)
@@ -163,6 +158,7 @@
   - [Responsive Design](#responsive-design)
     - [Responsive Font](#responsive-font)
     - [Responsive Length](#responsive-length)
+    - [Responsive Size](#responsive-size)
     - [Responsive Box](#responsive-box)
       - [Responsive Width and Height](#responsive-width-and-height)
       - [Responsive Inline Box](#responsive-inline-box)
@@ -174,7 +170,7 @@
       - [Style for Print PDF](#style-for-print-pdf)
   - [Accessibility](#accessibility)
     - [Screen Reader Only](#screen-reader-only)
-  - [常用组件 (Awesome Demo)](#常用组件-awesome-demo)
+  - [Awesome Components](#awesome-components)
     - [Landing Page](#landing-page)
     - [Modal](#modal)
     - [Flexiable Heading](#flexiable-heading)
@@ -391,82 +387,20 @@ span {
 } /* display computed to `block` */
 ```
 
-## Best Practice
+## Property Order
 
-### Normalize
-
-```css
-html {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-size: 100%;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-  margin: inherit;
-  padding: inherit;
-}
-
-body {
-  line-height: 1.5;
-}
-```
-
-### gap
-
-```css
-* + * {
-  margin-top: 1.5em;
-}
-```
-
-### rem vs em
-
-- Size in em if the property scales according to it’s font-size
-
-```css
-.container {
-  margin-top: 1.2em;
-}
-```
-
-Size in em if the font-size should be modular
-(relative to it's context/parent): `Modular Font Size`
-
-```css
-.container {
-  font-size: 1.2rem;
-}
-
-.container p {
-  font-size: 1em;
-}
-
-.container small {
-  font-size: 0.9em;
-}
-```
-
-- Size everything else in rem (include media queries)
-
-## 属性排序
-
-### 概述
+### Property Order Summary
 
 > 显示属性 -> 自身属性 -> 文本属性
 
-#### 显示属性
+#### Display Property
 
 - position
 - display
 - float
 - clear
 
-#### 自身属性
+#### Self Property
 
 - width
 - height
@@ -476,7 +410,7 @@ Size in em if the font-size should be modular
 - list-style
 - background
 
-#### 文本属性
+#### Text Property
 
 - color
 - font
@@ -487,9 +421,9 @@ Size in em if the font-size should be modular
 - other text
 - content
 
-### 详细
+### Property Order Details
 
-#### 显示属性 Detail
+#### Display Property Details
 
 - position
 - z-index
@@ -503,7 +437,7 @@ Size in em if the font-size should be modular
 - float
 - clear
 
-#### 自身属性 Detail
+#### Self Property Details
 
 - width
 - min-width
@@ -551,7 +485,7 @@ Size in em if the font-size should be modular
 - background-repeat
 - background-position
 
-#### 文本属性 Detail
+#### Text Property Details
 
 - color
 - font
@@ -572,9 +506,9 @@ Size in em if the font-size should be modular
 - content
 - quotes
 
-## 命名规范
+## Naming Convention
 
-### 页面结构
+### Layout Structure Naming Convention
 
 - 容器: container
 - 页头：header
@@ -587,26 +521,26 @@ Size in em if the font-size should be modular
 - 页面外围控制整体佈局宽度：wrapper
 - 左右中：left right center
 
-### 导航
+### Navigation Naming Convention
 
 - 导航：nav
-- 主导航：mainnav
-- 子导航：subnav
-- 顶导航：topnav
+- 主导航：main-nav
+- 子导航：sub-nav
+- 顶导航：top-nav
 - 边导航：sidebar
-- 左导航：leftsidebar
-- 右导航：rightsidebar
+- 左导航：left-sidebar
+- 右导航：right-sidebar
 - 菜单：menu
-- 子菜单：submenu
+- 子菜单：sub-menu
 - 标题: title
 - 摘要: summary
 
-### 功能
+### Functional Component Naming Convention
 
 - 标志：logo
 - 广告：banner
 - 登陆：login
-- 登录条：login bar
+- 登录条：login-bar
 - 注册：register
 - 搜索：search
 - 功能区：shop
@@ -632,9 +566,9 @@ Size in em if the font-size should be modular
 - 友情链接：link
 - 版权：copyright
 
-### CSS Files
+### CSS Files Naming Convention
 
-- abstracts: \$variables, @mixin function
+- abstracts: `$variables`, `@mixin` function
 - vendors: external libraries (font-awesome, bootstrap)
 - base: normalize.css, reset.css, utils.css, font.css, base.css
   (margin-right, text-center, float-right)
@@ -646,7 +580,7 @@ Size in em if the font-size should be modular
 
 ## CSS Selector
 
-![CSS 3 Selector](figures/css3-selector-lest.png)
+![CSS3 Selector](figures/CSS3SelectorList.png)
 
 ### 元素选择器
 
@@ -680,6 +614,12 @@ ul > li {
 
 - `E + F`：直接相邻兄弟选择器
 - `E ~ F`：一般兄弟选择器
+
+```css
+* + * {
+  margin-top: 1.5em;
+}
+```
 
 ```css
 li + li {
@@ -1036,16 +976,32 @@ For `.container ul li a` selector:
 - finally, filter down the above selection to
   the ones contained in an element with the class `.container`
 
-## HTML Body Property
+## CSS Normalize
 
-- auto
-- inherit
-- initial 指定为默认值，用于消除样式
-- none
+```css
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+}
 
-## Box Style
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: inherit;
+  padding: inherit;
+}
 
-### width
+body {
+  line-height: 1.5;
+}
+```
+
+## CSS Box
+
+### Width
 
 auto with `css-sizing`:
 present for `fill-available/max-content/min-content/fit-content`
@@ -1784,11 +1740,6 @@ margin in the direction of the float will pull the floated element in that direc
 }
 ```
 
-## List Style
-
-- list-style-type: 改变 ul/ol 前标记类型
-- list-style-image: 改变 ul/ol 前标记类型
-
 ## CSS Opacity
 
 0 ~ 1, 渐进效果常用属性
@@ -2299,6 +2250,12 @@ justify: 自适应，左右都无空格
   word-break: normal;
 }
 
+/* 自动换行 */
+pre {
+  word-wrap: break-word; /* IE 5.5-7 */
+  white-space: pre-wrap; /* Modern Browsers */
+}
+
 /* 强制换行 */
 .force-wrap {
   word-break: break-all;
@@ -2358,21 +2315,22 @@ p {
 
 ### White Space
 
-HTML 中, 普通标签内自动忽略空格符, 并将其与空白符转换成一个空格进行输出,
-可用 `white-space` 改变这一行为.
+普通标签内自动忽略空格符,
+并将其与空白符转换成一个空格进行输出,
+可用 `white-space` 改变这一行为:
 
-```css
-p {
-  /* 保留所有特殊符号 */
-  white-space: pre;
-}
-```
+|------------|-----|----------|------|-------|
+| White Space|换行符|空格和制表符|文字换行|行尾空格|
+| normal | 合并 | 合并 | 换行 | 删除 |
+| nowrap | 合并 | 合并 | 不换行 | 删除 |
+| pre | 保留 | 保留 | 不换行 | 保留 |
+| pre-wrap | 保留 | 保留 | 换行 | 挂起 |
+| pre-line | 保留 | 合并 | 换行 | 删除 |
+| break-spaces | 保留 | 保留 | 换行 | 换行 |
 
 ## CSS Font
 
 ### Font Size
-
-Best Practice
 
 ```css
 html {
@@ -2391,15 +2349,18 @@ strong {
 }
 ```
 
-### font-style
+### Font Style
 
-normal,italic,oblique
+- normal
+- italic
+- oblique
 
-### font-variant
+### Font Variant
 
-normal,small-caps(小型大写字母)
+- normal
+- small-caps: 小型大写字母
 
-### font-size-adjust
+### Font Size Adjust
 
 - 使字体保持大小，不随字体类型改变而改变
 - 不同字体有不同的值(x-height/字体尺寸)
@@ -2437,20 +2398,20 @@ whether and when it is downloaded and ready to use:
 }
 ```
 
-### custom function - @font-face
+### Custom Fonts Function
 
-使用户使用服务端提供的字体(bootstrap 中有使用@font-face)
+`@font-face` 使用户使用服务端提供的字体:
 
 ```css
 @font-face {
-  /*:call <SNR>105_SparkupNext()*/
+  /*:call <SNR>105_SparkUpNext()*/
   font-family: mySpecialFont;
   font-style/font-weight/font-variant: inherit;
   src: url(‘./Colleen.ttf’);
 }
 
 /*selector {*/
-/*:call <SNR>105_SparkupNext()*/
+/*:call <SNR>105_SparkUpNext()*/
 /*font-family:mySpecialFont;*/
 /*}*/
 ```
@@ -3142,6 +3103,36 @@ tl.staggerFrom(
 - `vmin`
 - `vmax`
 
+### Responsive Size
+
+- Size in `em` if the property scales according to it’s font-size.
+- **Modular Font Size**:
+  Size in `em` if the font-size should be modular
+  (relative to it's context/parent).
+- Size everything else in `rem` (include media queries).
+
+```css
+/* scales to self font-size */
+.container {
+  margin-top: 1.2em;
+}
+```
+
+```css
+/* modular font size */
+.container {
+  font-size: 1.2rem;
+}
+
+.container p {
+  font-size: 1em;
+}
+
+.container small {
+  font-size: 0.9em;
+}
+```
+
 ### Responsive Box
 
 #### Responsive Width and Height
@@ -3282,7 +3273,7 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 }
 ```
 
-## 常用组件 (Awesome Demo)
+## Awesome Components
 
 ### Landing Page
 
@@ -3428,7 +3419,9 @@ h1::after {
 
 #### 基本原则
 
-对 a 标签进行样式设置
+- `list-style-type`: 改变 `ul`/`ol` 前标记类型
+- `list-style-image`: 改变 `ul`/`ol` 前标记类型
+- 设置 `<a href="#">` 样式
 
 ```css
 ul {
