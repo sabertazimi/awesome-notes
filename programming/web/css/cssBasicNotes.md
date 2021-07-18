@@ -117,10 +117,11 @@
   - [CSS Text](#css-text)
     - [Text Alignment](#text-alignment)
     - [Text Overflow](#text-overflow)
+    - [Text Wrap](#text-wrap)
+    - [Text Transform](#text-transform)
     - [Text Writing Mode](#text-writing-mode)
       - [Vertical Writing Mode](#vertical-writing-mode)
     - [White Space](#white-space)
-    - [Text Wrap](#text-wrap)
   - [CSS Font](#css-font)
     - [Font Size](#font-size)
     - [font-style](#font-style)
@@ -2282,6 +2283,50 @@ justify: 自适应，左右都无空格
 }
 ```
 
+### Text Wrap
+
+```css
+/* 不换行 */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* 自动换行 */
+.auto-wrap {
+  word-wrap: break-word;
+  word-break: normal;
+}
+
+/* 强制换行 */
+.force-wrap {
+  word-break: break-all;
+}
+```
+
+### Text Transform
+
+```css
+p {
+  /* 大写字母 */
+  text-transform: uppercase;
+}
+
+p {
+  /* 小写字母 */
+  text-transform: lowercase;
+}
+
+p {
+  /* 首字母大写 */
+  text-transform: capitalize;
+}
+
+p {
+  /* 小型的大写字母 */
+  font-variant: small-caps;
+}
+```
+
 ### Text Writing Mode
 
 #### Vertical Writing Mode
@@ -2318,26 +2363,6 @@ HTML 中, 普通标签内自动忽略空格符, 并将其与空白符转换成�
 p {
   /* 保留所有特殊符号 */
   white-space: pre;
-}
-```
-
-### Text Wrap
-
-```css
-/* 不换行 */
-.nowrap {
-  white-space: nowrap;
-}
-
-/* 自动换行 */
-.auto-wrap {
-  word-wrap: break-word;
-  word-break: normal;
-}
-
-/* 强制换行 */
-.force-wrap {
-  word-break: break-all;
 }
 ```
 
