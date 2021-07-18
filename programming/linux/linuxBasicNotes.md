@@ -41,7 +41,7 @@
       - [locate](#locate)
       - [type](#type)
       - [apropos](#apropos)
-      - [whereis/whatis](#whereiswhatis)
+      - [whereis and whatis](#whereis-and-whatis)
       - [which](#which)
       - [find](#find)
       - [grep](#grep)
@@ -67,8 +67,8 @@
       - [sort](#sort)
       - [uniq](#uniq)
       - [wc](#wc)
-      - [head/tail](#headtail)
-      - [tee](#tee)
+      - [Head and Tail](#head-and-tail)
+      - [Tee](#tee)
       - [nl](#nl)
       - [fold](#fold)
       - [fmt](#fmt)
@@ -83,7 +83,7 @@
       - [.zip](#zip)
       - [.gz](#gz)
       - [.bz2](#bz2)
-      - [.tar.gz/.tar.bz2](#targztarbz2)
+      - [Tar](#tar)
       - [.7z](#7z)
     - [用户命令](#用户命令)
     - [用户管理命令](#用户管理命令)
@@ -102,7 +102,7 @@
       - [普通权限](#普通权限)
       - [ACL 权限](#acl-权限)
       - [sudo 权限](#sudo-权限)
-      - [SetUID/SetGID 权限](#setuidsetgid-权限)
+      - [SetUID and SetGID](#setuid-and-setgid)
     - [显示器管理命令](#显示器管理命令)
       - [xrandr](#xrandr)
     - [主机信息管理命令](#主机信息管理命令)
@@ -119,7 +119,7 @@
       - [Applications Management](#applications-management)
     - [网络连接命令](#网络连接命令)
       - [wget](#wget)
-      - [Certbot](#certbot)
+      - [Certificate Bot](#certificate-bot)
       - [GFW](#gfw)
     - [网络管理命令](#网络管理命令)
       - [ufw](#ufw)
@@ -128,8 +128,8 @@
       - [nslookup](#nslookup)
       - [ping](#ping)
       - [telnet](#telnet)
-      - [traceroute](#traceroute)
-      - [NetFilter 框架](#netfilter-框架)
+      - [Trace Route](#trace-route)
+      - [Net Filter Framework](#net-filter-framework)
     - [网络扫描命令](#网络扫描命令)
       - [fping](#fping)
       - [hping](#hping)
@@ -200,11 +200,8 @@
         - [Tmux Scroll](#tmux-scroll)
       - [Configuration](#configuration)
   - [Perf Tools](#perf-tools)
-    - [uptime](#uptime-1)
     - [Top Command](#top-command)
     - [dmesg](#dmesg)
-    - [mpstat](#mpstat-1)
-    - [pidstat](#pidstat-1)
     - [iostat](#iostat)
     - [free](#free)
     - [sar](#sar)
@@ -548,7 +545,7 @@ indicate how a command name is interpreted
 
 display a list of appropriate commands
 
-#### whereis/whatis
+#### whereis and whatis
 
 #### which
 
@@ -622,10 +619,18 @@ Process and Thread:
 - Context switch times
 - Interrupt times (/proc/interrupts)
 
+```bash
+pidstat 1
+```
+
 #### mpstat
 
 - CPU usage
 - Software interrupt times (/proc/interrupts)
+
+```bash
+mpstat -P ALL 1
+```
 
 #### lscpu
 
@@ -692,7 +697,7 @@ report or omit repeated lines
 
 print newline, word, and byte counts for each file
 
-#### head/tail
+#### Head and Tail
 
 output the first/last part of a file
 
@@ -701,7 +706,7 @@ head -n 5 filename
 tail -f filename
 ```
 
-#### tee
+#### Tee
 
 read from standard input and write to standard output and files
 
@@ -800,7 +805,9 @@ sudo apt-get install screenfetch
 - bzip2 –d(解压缩) –k(保留压缩文件) 压缩文件
 - bunzip2 –k(保留压缩文件) 压缩文件
 
-#### .tar.gz/.tar.bz2
+#### Tar
+
+tar.gz/.tar.bz2:
 
 tar [可选参数] 压缩文件(可指定压缩路径) [-c 解压缩路径]源文件/源目录
 
@@ -953,7 +960,7 @@ finger apacheuser 查看单个用户信息
 
 /etc/sudoers.tmp
 
-#### SetUID/SetGID 权限
+#### SetUID and SetGID
 
 可执行程序/目录+普通用户临时获得 root 权限 （rws）:
 
@@ -1195,9 +1202,9 @@ e.g apche /var/www/html/index.html /usr/local/apache/htdocs/index.html
 wget -r -p -np -k -P ~/tmp/ http://java-er.com
 ```
 
-#### Certbot
+#### Certificate Bot
 
-[Certbot](https://github.com/certbot/certbot)
+[CertBot](https://github.com/certbot/certbot)
 for SSL certificates.
 
 #### GFW
@@ -1303,12 +1310,12 @@ ufw allow https
 
 `telnet [ip/domain] [端口]`远程管理与端口探测命令
 
-#### traceroute
+#### Trace Route
 
 - `traceroute [-n IP] domain`路由跟踪命令
 - `traceroute -n -I -T -p`路由扫描
 
-#### NetFilter 框架
+#### Net Filter Framework
 
 nftables 命令行工具：nft
 
@@ -2452,8 +2459,6 @@ set-window-option -g window-status-current-bg red
 
 ## Perf Tools
 
-### uptime
-
 ### Top Command
 
 ```bash
@@ -2464,18 +2469,6 @@ top
 
 ```bash
 dmesg | tail
-```
-
-### mpstat
-
-```bash
-mpstat -P ALL 1
-```
-
-### pidstat
-
-```bash
-pidstat 1
 ```
 
 ### iostat
