@@ -62,10 +62,10 @@
     - [清除浮动](#清除浮动)
     - [Float Best Practice](#float-best-practice)
   - [Position Patterns](#position-patterns)
-    - [static](#static)
-    - [relative](#relative)
-    - [absolute](#absolute)
-    - [fixed](#fixed)
+    - [Static Position](#static-position)
+    - [Relative Position](#relative-position)
+    - [Absolute Position](#absolute-position)
+    - [Fixed Position](#fixed-position)
   - [Flex Patterns](#flex-patterns)
     - [Under the Hood of `flex`](#under-the-hood-of-flex)
     - [Useful Shorthand of `flex`](#useful-shorthand-of-flex)
@@ -1225,24 +1225,24 @@ float make element specified value of `display`:
 
 ## Position Patterns
 
-position
+### Static Position
 
-### static
+top/left/width/right/z-index are invalid
 
-- top/left/width/right/z-index are invalid
+### Relative Position
 
-### relative
+- 使元素相对于 `static` 布局, 可使用`top/bottom/left/right`属性进行定位.
+- 初始位置被保留, 不脱离文档流.
 
-使元素相对于 static 布局, 可使用`top/bottom/left/right`属性进行平移
+### Absolute Position
 
-### absolute
-
-- 使元素相对于 浏览器窗口/父元素(`positoin: non-static`) 布局 (包括 `%` 形式的 `width/height`)
-  - 若 body 为 static, 则元素不会随着滚动条滚动, 其相对于初始窗口布局
-- 可使用`top/bottom/left/right`属性进行定位
-- `float: none`
-- display: `inline-table` computed to `table`
-- display: `inline`/`inline-block`/`table-*` computed to `block`
+- 使元素相对于 浏览器窗口/父元素(`position: non-static`) 布局 (包括 `%` 形式的 `width/height`)
+  - 若 body 为 static, 则元素不会随着滚动条滚动, 其相对于初始窗口布局.
+- 可使用 `top/bottom/left/right` 属性进行定位.
+- 初始位置不被保留, 脱离文档流.
+- `float` property computed to `float: none`.
+- `display` `inline-table` computed to `table`.
+- `display` `inline`/`inline-block`/`table-*` computed to `block`.
 
 ```css
 .overlay {
@@ -1274,7 +1274,7 @@ position
 }
 ```
 
-### fixed
+### Fixed Position
 
 - 使元素想对于 浏览器窗口 布局, 但不受滑动条影响
 - 可使用`top/bottom/left/right`属性进行定位
