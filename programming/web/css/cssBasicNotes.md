@@ -46,8 +46,8 @@
     - [Box Height](#box-height)
     - [Box Column](#box-column)
   - [Box Model](#box-model)
-    - [Margin](#margin)
-    - [Percentage of Top](#percentage-of-top)
+    - [Box Margin](#box-margin)
+    - [Box Percentage Length](#box-percentage-length)
   - [Block Formatting Context](#block-formatting-context)
   - [Stack Context](#stack-context)
     - [Create BFC](#create-bfc)
@@ -1070,16 +1070,16 @@ cal(10em + 3px);
 - Flex Formatting Context(FFC)
 - Grid Formatting Context(GFC)
 
-### Margin
+### Box Margin
 
 - If both margin-left and margin-right are auto, their used values are equal.
   (CSS2 Visual formatting model details: 10.3.3)
 - If margin-top, or margin-bottom are auto, their used value is 0.
   (CSS2 Visual formatting model details: 10.6.3)
 
-### Percentage of Top
+### Box Percentage Length
 
-positioned elements with `top: percentage`
+Positioned elements with `top: percentage`
 depend on `height` of parent,
 if `height` of parent is `auto`, it's not working.
 
