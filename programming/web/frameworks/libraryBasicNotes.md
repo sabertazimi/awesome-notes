@@ -13,9 +13,10 @@
     - [Full Stack Solution](#full-stack-solution)
     - [Desktop Solution](#desktop-solution)
   - [State Data Management](#state-data-management)
-    - [Redux](#redux)
-    - [Hooks](#hooks)
-    - [Other](#other)
+    - [React Redux](#react-redux)
+    - [React Query](#react-query)
+    - [React Hooks](#react-hooks)
+    - [Others State Management](#others-state-management)
   - [Browser Utils](#browser-utils)
   - [JavaScript Utils](#javascript-utils)
     - [String Utils](#string-utils)
@@ -209,18 +210,22 @@
 
 ## State Data Management
 
-### Redux
+### React Redux
 
 - [Redux Helper Tools](https://github.com/reduxjs/redux-starter-kit)
 - [Reselect](https://github.com/reactjs/reselect)
 
-### Hooks
+### React Query
+
+- [React Query: Fetching, caching, synchronizing and updating server state](https://github.com/tannerlinsley/react-query)
+
+### React Hooks
 
 - [ReactUse Hooks](https://github.com/streamich/react-use)
 - [Ali Hooks](https://github.com/alibaba/hooks)
 - [React Hooks Gallery](https://nikgraf.github.io/react-hooks)
 
-### Other
+### Others State Management
 
 - [RxJS Middleware](https://github.com/redux-observable/redux-observable)
 - [React Resolver](https://github.com/ericclemmons/react-resolver)
