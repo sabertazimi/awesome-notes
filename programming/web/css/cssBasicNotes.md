@@ -2390,7 +2390,7 @@ whether and when it is downloaded and ready to use:
 ```css
 @font-face {
   font-family: ExampleFont;
-  src: url(/path/to/fonts/examplefont.woff) format('woff'), url(/path/to/fonts/examplefont.eot)
+  src: url(/path/to/fonts/exampleFont.woff) format('woff'), url(/path/to/fonts/exampleFont.eot)
       format('eot');
   font-weight: 400;
   font-style: normal;
@@ -3375,10 +3375,6 @@ h1::after {
   height: 35px;
   margin-right: 20px;
 
-  /* 消除默认箭头 */
-  text-indent: 0.01px;
-  text-overflow: '';
-
   /* 自定义边框 */
   border: 0;
 
@@ -3388,9 +3384,17 @@ h1::after {
   background-position: right;
 
   /* 消除默认样式 */
-  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  appearance: none;
+
+  /* 消除默认箭头 */
+  text-indent: 0.01px;
+  text-overflow: '';
+
+  /* 文本属性 */
+  text-align: center;
+  text-align-last: center;
 }
 
 .custom-select:focus {
@@ -3402,10 +3406,11 @@ h1::after {
   height: 25px;
   padding-left: 30px;
 
-  color: #323333;
   background-color: #fff;
+  color: #323333;
 
   line-height: 25px;
+  direction: rtl;
 }
 
 .custom-select option:hover {
