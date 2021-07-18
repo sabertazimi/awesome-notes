@@ -57,9 +57,25 @@
       - [Implementation](#implementation)
       - [Sample](#sample)
         - [Ajax Callback](#ajax-callback)
-  - [MV\* Pattern](#mv-pattern)
+  - [MVC Pattern](#mvc-pattern)
   - [jQuery Pattern](#jquery-pattern)
     - [Plugin Pattern](#plugin-pattern)
+  - [Domain Driven Design](#domain-driven-design)
+    - [Interface Layer](#interface-layer)
+    - [Application Layer](#application-layer)
+    - [Domain Layer](#domain-layer)
+    - [Infrastructure Layer](#infrastructure-layer)
+  - [高并发系统设计](#高并发系统设计)
+    - [Concurrent Code Layer](#concurrent-code-layer)
+    - [Concurrent DataBase Layer](#concurrent-database-layer)
+    - [Concurrent Architecture Layer](#concurrent-architecture-layer)
+  - [高可用系统设计](#高可用系统设计)
+    - [Load Balance Design](#load-balance-design)
+    - [Idempotence Design](#idempotence-design)
+      - [Write Idempotence Design](#write-idempotence-design)
+    - [CAP Theory](#cap-theory)
+    - [服务熔断](#服务熔断)
+    - [服务降级](#服务降级)
 
 <!-- /TOC -->
 
@@ -1730,7 +1746,7 @@ if (typeof module !== 'undefined' && 'exports' in module) {
 }());
 ```
 
-## MV\* Pattern
+## MVC Pattern
 
 在 MVC 中，视图位于我们架构的顶部，其背后是控制器.
 模型在控制器后面，而因此我们的视图了解得到我们的控制器，而控制器了解得到模型.
@@ -1822,3 +1838,103 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
   };
 })(jQuery, window, document);
 ```
+
+## Domain Driven Design
+
+### Interface Layer
+
+主要负责与外部系统进行交互与通信:
+
+- Dubbo Services
+- RESTful API
+
+### Application Layer
+
+Application Service 层只是很薄的一层,
+它内部并不实现任何逻辑,
+只是负责协调和转发,
+委派业务动作给更下层的领域层.
+
+### Domain Layer
+
+Domain 层是领域模型系统的核心,
+负责维护面向对象的领域模型,
+几乎全部的业务逻辑都会在这一层实现.
+内部主要包含 Entity, ValueObject, Domain Event, Repository.
+
+### Infrastructure Layer
+
+主要为 Interface, Application 和 Domain 三层提供支撑.
+
+## 高并发系统设计
+
+### Concurrent Code Layer
+
+- Mutex Performance
+- Database Caches
+- Update Merge
+- BloomFilter
+- Asynchronous
+- Multi-Thread
+
+### Concurrent DataBase Layer
+
+- DataBase Type: RDBMS -> NoSQL -> NewSQL
+- Table Structure Design
+- Index Design
+- Split Table
+- Read and Write Separation
+- Data Slice and Data Partition
+- Hot Data Cache
+
+### Concurrent Architecture Layer
+
+- Microservices
+- Scale Friendly
+- FailFast
+- Data PreFetch
+- Multi-Level Caches
+
+## 高可用系统设计
+
+### Load Balance Design
+
+- Hardware Load Balance
+- Software Load Balance
+- Load Balance Algorithms:
+  Random, RoundRobin, WeightRoundRobin, ConsistentHash
+- Error Machines Auto Detection
+- Error Services Auto Retirement
+- Services Retry Automation
+- Recovery Services Auto Detection
+
+### Idempotence Design
+
+在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同.
+
+#### Write Idempotence Design
+
+- Mutex
+- Key Index
+- Token
+- Data Version
+- State Machine
+
+### CAP Theory
+
+A distributed system to simultaneously provide
+more than two out of the following three guarantees:
+
+- Consistency:
+  Every read receives the most recent write or an error.
+- Availability:
+  Every request receives a (non-error) response,
+  without the guarantee that it contains the most recent write.
+- Partition tolerance:
+  The system continues to operate
+  despite an arbitrary number of messages
+  being dropped (or delayed) by the network between nodes.
+
+### 服务熔断
+
+### 服务降级
