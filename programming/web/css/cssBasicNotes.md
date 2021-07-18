@@ -45,11 +45,10 @@
     - [width](#width)
     - [Z Index](#z-index)
     - [Overflow](#overflow)
-    - [Text Overflow](#text-overflow)
-    - [resize](#resize)
-    - [box-sizing](#box-sizing)
-    - [height](#height)
-    - [column](#column)
+    - [Resize Box](#resize-box)
+    - [Box Sizing](#box-sizing)
+    - [Box Height](#box-height)
+    - [Box Column](#box-column)
   - [Box Model](#box-model)
     - [Margin](#margin)
     - [Percentage of Top](#percentage-of-top)
@@ -114,9 +113,11 @@
       - [Jumbotron and Landing Page](#jumbotron-and-landing-page)
       - [Horizontal Scrolling Best Practices](#horizontal-scrolling-best-practices)
   - [CSS Text](#css-text)
-    - [white-space](#white-space)
+    - [Text Overflow](#text-overflow)
+    - [White Space](#white-space)
+    - [Text Wrap](#text-wrap)
   - [CSS Font](#css-font)
-    - [font-size](#font-size)
+    - [Font Size](#font-size)
     - [font-style](#font-style)
     - [font-variant](#font-variant)
     - [font-size-adjust](#font-size-adjust)
@@ -1045,34 +1046,9 @@ with `height`/`width`/`min-width`/`max-width`/`min-height`/`max-height`/
 
 ### Overflow
 
-visible,hidden,scroll,auto
+visible, hidden, scroll, auto
 
-### Text Overflow
-
-- clip 切除溢出部分
-- ellipsis 省略号标志
-
-```css
-.truncation-article-container {
-  width: 500px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-```
-
-```css
-.article-container {
-  display: -webkit-box;
-  word-break: break-all;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4; /* 需要显示的行数 */
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-```
-
-### resize
+### Resize Box
 
 前置属性:overflow
 
@@ -1081,11 +1057,11 @@ visible,hidden,scroll,auto
 resize: none/both/horizontal/vertical/inherit;
 ```
 
-### box-sizing
+### Box Sizing
 
 content-box(default), padding-box, border-box
 
-### height
+### Box Height
 
 XXvh(viewport height)
 
@@ -1096,7 +1072,7 @@ cal(50% - 100px);
 cal(10em + 3px);
 ```
 
-### column
+### Box Column
 
 ```css
 /*子元素分列*/
@@ -2188,15 +2164,41 @@ Horizontal Scrolling Methods:
 
 .paragraph {
   text-indent: 2em; /* 段落缩进 */
-  line-height: 1.5em; /* 行间距  */
-  word-spacing: 50px; /* 词间距  */
   letter-spacing: 50px; /* 字间距  */
+  word-spacing: 50px; /* 词间距  */
+  line-height: 1.5em; /* 行间距  */
 }
 ```
 
-### white-space
+### Text Overflow
 
-html 中, 普通标签内自动忽略空格符, 并将其与空白符转换成一个空格进行输出, 可用 white-spacing 改变这一行为
+- clip 切除溢出部分
+- ellipsis 省略号标志 (要设定 width)
+
+```css
+.truncation-article-container {
+  width: 500px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+```
+
+```css
+.article-container {
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* 需要显示的行数 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+```
+
+### White Space
+
+HTML 中, 普通标签内自动忽略空格符, 并将其与空白符转换成一个空格进行输出,
+可用 `white-space` 改变这一行为.
 
 ```css
 p {
@@ -2205,9 +2207,29 @@ p {
 }
 ```
 
+### Text Wrap
+
+```css
+/* 不换行 */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* 自动换行 */
+.auto-wrap {
+  word-wrap: break-word;
+  word-break: normal;
+}
+
+/* 强制换行 */
+.force-wrap {
+  word-break: break-all;
+}
+```
+
 ## CSS Font
 
-### font-size
+### Font Size
 
 Best Practice
 
