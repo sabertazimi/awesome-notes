@@ -16,7 +16,7 @@
     - [Common Libraries](#common-libraries)
     - [Common Chunks](#common-chunks)
     - [Code Minimization](#code-minimization)
-    - [Code Spliting](#code-spliting)
+    - [Code Splitting](#code-splitting)
     - [Tree Shaking](#tree-shaking)
     - [Building Caches](#building-caches)
     - [Perf Profiling](#perf-profiling)
@@ -408,7 +408,7 @@ module.exports = {
 };
 ```
 
-### Code Spliting
+### Code Splitting
 
 - require.ensure([], () => {});
 - async await import
@@ -479,6 +479,22 @@ new HardSourceWebpackPlugin({
     sizeThreshold: 50 * 1024 * 1024
   },
 }),
+```
+
+Webpack 5
+
+```js
+{
+  cache: {
+    type: 'memory'
+  },
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__filename]
+    }
+  },
+}
 ```
 
 ### Perf Profiling
