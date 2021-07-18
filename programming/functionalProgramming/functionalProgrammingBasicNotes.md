@@ -4,13 +4,13 @@
 
 - [Functional Programming Basic Notes](#functional-programming-basic-notes)
   - [Lambda Calculus](#lambda-calculus)
-    - [Lambda-expresion (Lamba-term)](#lambda-expresion-lamba-term)
+    - [Lambda Expression (Lambda-Term)](#lambda-expression-lambda-term)
     - [Lambda Reduction](#lambda-reduction)
       - [alpha | α 转换](#alpha--α-转换)
       - [beta | β 归约](#beta--β-归约)
       - [eta | η 归约](#eta--η-归约)
     - [Church Numerals](#church-numerals)
-  - [Defination for Functionanl Programming](#defination-for-functionanl-programming)
+  - [Definition for Functional Programming](#definition-for-functional-programming)
   - [Datatype](#datatype)
     - [Datatype Binding](#datatype-binding)
     - [Built-in Tagged Constructor](#built-in-tagged-constructor)
@@ -29,14 +29,14 @@
     - [closure](#closure)
       - [lexical scope vs dynamic scope](#lexical-scope-vs-dynamic-scope)
       - [compose and pipeline](#compose-and-pipeline)
-      - [curry and uncurry](#curry-and-uncurry)
+      - [curry and unCurry](#curry-and-uncurry)
   - [Type inference](#type-inference)
 
 <!-- /TOC -->
 
 ## Lambda Calculus
 
-### Lambda-expresion (Lamba-term)
+### Lambda Expression (Lambda-Term)
 
 - Variable: x
 - Abstraction: λx.M
@@ -90,7 +90,7 @@ S 0
 ≡ 1
 ```
 
-## Defination for Functionanl Programming
+## Definition for Functional Programming
 
 - avoid mutation
 - first class functions
@@ -117,8 +117,8 @@ fields for different constructors can't exist at the same time
 type constructor: datatype bindings with variables
 
 ```haskell
-datatype 'a mylist = EMPTY | CONS of 'a * 'a mylist
-mylist isn't a type, int list is a type
+datatype 'a myList = EMPTY | CONS of 'a * 'a myList
+myList isn't a type, int list is a type
 ```
 
 - 'a , 'a equivalent/different
@@ -147,13 +147,13 @@ fun f (x, y, z) = x + y + z seems that takes 3 arguments,
 but truly owing to pattern matching only takes 1 tuple argument
 Likewise, fun f () = 0 takes 1 empty tuple argument.
 
-Futher more, tuples is syntactic sugar for records.
+Further more, tuples is syntactic sugar for records.
 
 > As a whole: all functions only take 1 record argument owing to pattern matching.
 
 ## Tail Position, Tail expression, Tail Call and Tail Recursion
 
-recursive defination for Tail Position:
+recursive definition for Tail Position:
 
 - if E isn't in tail position, then sub expressions of E aren't in tail position
 - if E is in tail position, then some sub expressions of E are in tail position
@@ -204,8 +204,8 @@ evaluation: e1 ? e2 : e3
 ### functions
 
 ```haskell
-syntax: fun name (arg1: type1, .., argn: typen) = body
-type: name = type1 * ... * typen -> body_type
+syntax: fun name (arg1: type1, .., argN: typeN) = body
+type: name = type1 * ... * typeN -> body_type
 lazy evaluation
 ```
 
@@ -273,16 +273,16 @@ fun x !> f = f x
 fun sqrt_of_abs i = i !> abs !> Real.fromInt !> Math.sqrt
 ```
 
-#### curry and uncurry
+#### curry and unCurry
 
 ```haskell
 fun carry f x y = f (x, y)
-fun uncarry f (x, y) = f x y
+fun unCarry f (x, y) = f x y
 
 fun range (i, j) = if i > j then [] else i :: range(i+1, j)
-fun countup = curry range 1
+fun countUp = curry range 1
 
-val arr = countup 7 (* maps to [1, 2, ..., 7] *)
+val arr = countUp 7 (* maps to [1, 2, ..., 7] *)
 ```
 
 ## Type inference

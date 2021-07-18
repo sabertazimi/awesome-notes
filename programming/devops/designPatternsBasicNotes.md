@@ -3,7 +3,7 @@
 <!-- TOC -->
 
 - [Design Patterns Basic Notes](#design-patterns-basic-notes)
-  - [Baisc Patterns](#baisc-patterns)
+  - [Basic Patterns](#basic-patterns)
     - [SOLID Principles](#solid-principles)
       - [Single Responsibility Principle](#single-responsibility-principle)
       - [Open Closed Principle](#open-closed-principle)
@@ -22,11 +22,11 @@
     - [Other](#other)
   - [Modular Patterns](#modular-patterns)
     - [Object Literal](#object-literal)
-    - [立即函数模式(IIFE)](#立即函数模式iife)
-    - [UMD(Universal Module Definition) Pattern](#umduniversal-module-definition-pattern)
+    - [IIFE Pattern](#iife-pattern)
+    - [UMD Pattern](#umd-pattern)
   - [Common Design Patterns](#common-design-patterns)
     - [Classification](#classification)
-      - [Creational Patterns](#creational-patterns)
+      - [Creation Patterns](#creation-patterns)
       - [Structural Patterns](#structural-patterns)
       - [Behavioral Patterns](#behavioral-patterns)
     - [Prototype](#prototype)
@@ -43,8 +43,7 @@
     - [Factory Method](#factory-method)
     - [Adapter Pattern](#adapter-pattern)
     - [Decorator Pattern](#decorator-pattern)
-      - [实现 1(关键 - 实现传递方式)](#实现-1关键---实现传递方式)
-      - [return this.uber.function()](#return-thisuberfunction)
+      - [Decorator Implementation](#decorator-implementation)
       - [Decorators List](#decorators-list)
       - [实现 2](#实现-2)
     - [Facade Pattern](#facade-pattern)
@@ -81,7 +80,7 @@
 
 [Awesome Book](http://www.dofactory.com/javascript/design-patterns)
 
-## Baisc Patterns
+## Basic Patterns
 
 ### SOLID Principles
 
@@ -197,12 +196,12 @@ const MyApp = {
 通过对象字面量创建命名空间
 
 ```javascript
-MYAPP.namespace = function(namespaceString) {
+APP.namespace = function(namespaceString) {
   var parts = namespaceString.split('.'),
-    parent = MYAPP,
+    parent = APP,
     i;
   // strip redundant leading global
-  if (parts[0] === 'MYAPP') {
+  if (parts[0] === 'APP') {
     // remove leading global
     parts = parts.slice(1);
   }
@@ -221,23 +220,23 @@ MYAPP.namespace = function(namespaceString) {
 
 ```javascript
 // assign returned value to a local var
-var module2 = MYAPP.namespace('MYAPP.modules.module2');
-module2 === MYAPP.modules.module2; // true
-// skip initial `MYAPP`
-MYAPP.namespace('modules.module51');
+var module2 = APP.namespace('APP.modules.module2');
+module2 === APP.modules.module2; // true
+// skip initial `APP`
+APP.namespace('modules.module51');
 // long namespace
-MYAPP.namespace('once.upon.a.time.there.was.this.long.nested.property');
+APP.namespace('once.upon.a.time.there.was.this.long.nested.property');
 ```
 
-### 立即函数模式(IIFE)
+### IIFE Pattern
 
-通过调用立即函数，返回一个对象，暴露(exposed to public)公共接口(特权/公共方法):
+立即函数模式, 通过调用立即函数，返回一个对象，暴露(exposed to public)公共接口(特权/公共方法):
 
 - 闭包: 定义私有变量与特权方法
 - 返回对象: 即使通过外部代码改变返回对象的接口，也不会影响原接口
 
 ```js
-var myobj = (function () {
+var obj = (function () {
     // private member
   var name = "tazimi",
 
@@ -275,8 +274,8 @@ var myobj = (function () {
 ```
 
 ```js
-var myApp = myApp || {};
-myApp.utils = {};
+var App = App || {};
+App.utils = {};
 
 (function() {
   var val = 5;
@@ -291,21 +290,23 @@ myApp.utils = {};
 
   // also introduce a new sub-namespace
   this.tools = {};
-}.apply(myApp.utils));
+}.apply(App.utils));
 
-// inject new behaviour into the tools namespace
+// inject new behavior into the tools namespace
 // which we defined via the utilities module
 
 (function() {
   this.diagnose = function() {
     return 'diagnosis';
   };
-}.apply(myApp.utils.tools));
+}.apply(App.utils.tools));
 ```
 
 - jQuery Plugin Pattern: 通过给立即函数传参，注入全局变量/其他依赖
 
-### UMD(Universal Module Definition) Pattern
+### UMD Pattern
+
+Universal Module Definition:
 
 - 先判断是否支持 Node.js 的模块(exports)，存在则使用 Node.js 模块模式
 - 再判断是否支持 AMD(define)，存在则使用 AMD 方式加载模块
@@ -330,7 +331,7 @@ myApp.utils = {};
 
 ### Classification
 
-#### Creational Patterns
+#### Creation Patterns
 
 - Factory Method(工厂方法) | 通过将数据和事件接口化来构建若干个子类。
 - Abstract Factory(抽象工厂) | 建立若干族类的一个实例，这个实例不需要具体类的细节信息。（抽象类）
@@ -633,10 +634,10 @@ var AbstractVehicleFactory = (function() {
     return Vehicle ? new Vehicle(customizations) : null;
   }
   function _registerVehicle(type, Vehicle) {
-    var proto = Vehicle.prototype;
+    var prototype = Vehicle.prototype;
 
     // only register classes that fulfill the vehicle contract
-    if (proto.drive && proto.breakDown) {
+    if (prototype.drive && prototype.breakDown) {
       types[type] = Vehicle;
     }
 
@@ -737,7 +738,7 @@ module.exports = (function() {
       newVehicle.prototype.reform = _reform;
       newVehicle.prototype.addFeature = _addFeature;
 
-      // add private(seperately) feature
+      // add private(separately) feature
 
       // return new obj
       return newVehicle;
@@ -857,14 +858,12 @@ const __decorate = function(decorators, target, key, desc) {
 };
 ```
 
-#### 实现 1(关键 - 实现传递方式)
+#### Decorator Implementation
 
-两种方式:
+关键在于实现传递方式, 两种方式:
 
 - uber 属性获得每次装饰后结果
 - 循环叠加每次装饰后结果
-
-#### return this.uber.function()
 
 ```javascript
 // 构造函数
@@ -878,7 +877,7 @@ Sale.prototype.getPrice = function() {
 // 定义具体装饰器
 // 通过uber属性获得上一次装饰后的结果
 Sale.decorators = {};
-Sale.decorators.fedtax = {
+Sale.decorators.fedTax = {
   getPrice: function() {
     var price = this.uber.getPrice();
     price += (price * 5) / 100;
@@ -907,22 +906,22 @@ Sale.prototype.decorate = function(decorator) {
   var F = function() {},
     overrides = this.constructor.decorators[decorator],
     i,
-    newobj;
+    newObj;
 
   // 临时代理构造函数
   F.prototype = this;
-  newobj = new F();
+  newObj = new F();
   // 传递实现的关键
   // 通过uber属性获得上一次装饰后的结果
-  newobj.uber = F.prototype;
+  newObj.uber = F.prototype;
 
   for (i in overrides) {
     if (overrides.hasOwnProperty(i)) {
-      newobj[i] = overrides[i];
+      newObj[i] = overrides[i];
     }
   }
 
-  return newobj;
+  return newObj;
 };
 ```
 
@@ -940,7 +939,7 @@ Sale.prototype.getPrice = function() {
 
 // 定义具体装饰器
 Sale.decorators = {};
-Sale.decorators.fedtax = {
+Sale.decorators.fedTax = {
   getPrice: function(price) {
     return price + (price * 5) / 100;
   }
@@ -990,25 +989,25 @@ function MacBook() {
 }
 
 // Decorator 1
-function Memory(macbook) {
-  var v = macbook.cost();
-  macbook.cost = function() {
+function Memory(macBook) {
+  var v = macBook.cost();
+  macBook.cost = function() {
     return v + 75;
   };
 }
 
 // Decorator 2
-function Engraving(macbook) {
-  var v = macbook.cost();
-  macbook.cost = function() {
+function Engraving(macBook) {
+  var v = macBook.cost();
+  macBook.cost = function() {
     return v + 200;
   };
 }
 
 // Decorator 3
-function Insurance(macbook) {
-  var v = macbook.cost();
-  macbook.cost = function() {
+function Insurance(macBook) {
+  var v = macBook.cost();
+  macBook.cost = function() {
     return v + 250;
   };
 }
@@ -1176,7 +1175,7 @@ function GeoProxy() {
 有时候需要向某些对象发送请求，但是并不知道请求的接收者是谁 (多个对象中的某个随机对象)，也不知道被请求的操作是什么.
 此时希望用一种松耦合的方式来设计程序，使得请求发送者和请求接收者能够消除彼此的耦合关系
 
-- 将方法/动作封装成对象, 使得外部通过唯一方法 excute/run 调用内部方法/动作
+- 将方法/动作封装成对象, 使得外部通过唯一方法 execute/run 调用内部方法/动作
 - 客户创建命令；调用者执行该命令；接收者在命令执行时执行相应操作
 - 客户通常被包装为一个对象，但是这不是必然的
 - 调用者接过命令并将其保存下来, 它会在某个时候调用该命令对象的 execute 方法
@@ -1186,8 +1185,8 @@ function GeoProxy() {
 client and receiver
 
 ```js
-const SimpleCommand = function(receving) {
-  this.receiving = receving;
+const SimpleCommand = function(receiving) {
+  this.receiving = receiving;
 };
 
 SimpleCommand.prototype.execute = function() {
@@ -1199,7 +1198,7 @@ SimpleCommand.prototype.execute = function() {
 module.exports = (function() {
   var manager = {};
 
-  // command to be encapsulted
+  // command to be encapsulated
   manager.isNull = function(nu) {
     return toString.apply(nu) === '[object Null]';
   };
@@ -1313,7 +1312,7 @@ appMenuBar.add(editMenu);
 
 //------------
 const insertMenu = new Menu('Insert');
-const textBlockCommand = new MenuCommand(InsertACtions.textBlock);
+const textBlockCommand = new MenuCommand(InsertActions.textBlock);
 insertMenu.add(new MenuItem('Text  Block', textBlockCommand));
 appMenuBar.add(insertMenu);
 
@@ -1485,16 +1484,16 @@ function extend(extension, obj) {
 
 #### Implementation
 
-- pubsubz.js
+- pubSub.js
 
 ```js
 module.exports = (function(window, doc, undef) {
-  var pubsubz = {};
+  var pubSub = {};
 
   var topics = {},
     subUid = -1;
 
-  pubsubz.publish = function(topic, args) {
+  pubSub.publish = function(topic, args) {
     // undefined check
     if (!topics[topic]) {
       return false;
@@ -1512,13 +1511,13 @@ module.exports = (function(window, doc, undef) {
     return true;
   };
 
-  pubsubz.subscribe = function(topic, func) {
+  pubSub.subscribe = function(topic, func) {
     // undefined check
     if (!topics[topic]) {
       topics[topic] = [];
     }
 
-    // add observer to observerlist(topics)
+    // add observer to observerList (topics)
     var token = (++subUid).toString();
     topics[topic].push({
       token: token,
@@ -1527,7 +1526,7 @@ module.exports = (function(window, doc, undef) {
     return token;
   };
 
-  pubsubz.unsubscribe = function(token) {
+  pubSub.unsubscribe = function(token) {
     for (var m in topics) {
       if (topics[m]) {
         for (var i = 0, j = topics[m].length; i < j; i++) {
@@ -1541,16 +1540,16 @@ module.exports = (function(window, doc, undef) {
     return false;
   };
 
-  return pubsubz;
+  return pubSub;
 })(this, this.document, undefined);
 ```
 
 - test.js
 
 ```js
-var pubsub = require('./pubsubz.js');
+var pubsub = require('./pubSub.js');
 
-// add observer to observerlist
+// add observer to observerList
 var testFirstSub = pubsub.subscribe('login', function(topic, data) {
   console.log(topic + ': ' + data);
 });
@@ -1577,7 +1576,7 @@ pubsub.subscribe('sum', function(topic, data) {
       var sum = tmp.reduce(function(previous, current) {
         return previous + current;
       }, 0);
-      console.log('sumof ' + data + ' : ' + sum);
+      console.log('Sum of ' + data + ' : ' + sum);
     } else {
       console.log(
         'Please input number array: * ' + data + ' * is not number array!'
@@ -1599,7 +1598,7 @@ pubsub.publish('sum', ['a', 'b', 'c', 'd', 'e']);
 ```js
 // Equivalent to subscribe(topicName, callback)
 $(document).on('topicName', function() {
-  //..perform some behaviour
+  //..perform some behavior
 });
 
 // Equivalent to publish(topicName)
@@ -1616,8 +1615,8 @@ $(document).off('topicName');
  * MicroEvent - to make any js object an event emitter (server or browser)
  *
  * - pure javascript - server compatible, browser compatible
- * - dont rely on the browser doms
- * - super simple - you get it immediatly, no mistery, no magic involved
+ * - don't rely on the browser doms
+ * - super simple - you get it immediately, no mystery, no magic involved
  *
  * - create a MicroEventDebug with goodies to debug
  *   - make it safer to use
@@ -1729,7 +1728,7 @@ if (typeof module !== 'undefined' && 'exports' in module) {
      // Ajax Request
      $.getJSON( "http://api.flickr.com/services/feeds/", {
               tags: tags,
-              tagmode: "any",
+              tagMode: "any",
               format: "json"
             },
 
@@ -1772,7 +1771,7 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
 ```js
 (function($) {
   $.extend($.fn, {
-    myplugin: function() {
+    myPlugin: function() {
       // your plugin logic
     }
   });

@@ -26,7 +26,7 @@
 
 ## 声音设计(音频制作/声音合成)
 
-- 声音包络(ASDR): attack decay sustain release
+- 声音包络 (ASDR): attack decay sustain release
 
 ## 角色设计
 

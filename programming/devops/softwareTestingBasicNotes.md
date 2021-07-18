@@ -18,7 +18,7 @@
     - [定位 Fault](#定位-fault)
     - [模糊测试](#模糊测试)
   - [移动设备](#移动设备)
-  - [Useful Demos/Tools](#useful-demostools)
+  - [Useful Tools](#useful-tools)
   - [Bug List](#bug-list)
     - [Basic Bug](#basic-bug)
     - [C Bug](#c-bug)
@@ -112,7 +112,7 @@ Fuzzing - 是一种通过向目标系统提供非预期的输入并监视异常�
 - 环境碎片化
 - 耗电量
 
-## Useful Demos/Tools
+## Useful Tools
 
 - JUnit
 - SeleniumIDE
