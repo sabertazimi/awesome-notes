@@ -155,6 +155,8 @@
     - [Animation Details](#animation-details)
       - [Animation Play State](#animation-play-state)
       - [FLIP](#flip)
+    - [Animation Best Practice](#animation-best-practice)
+      - [Clear Splash Animation](#clear-splash-animation)
     - [GreenSock Library](#greensock-library)
       - [TweenMax](#tweenmax)
       - [TimelineMax](#timelinemax)
@@ -3072,6 +3074,28 @@ setTimeout(() => element.classList.remove('animate'), duration);
 
 .scale-up:hover {
   transform: none;
+}
+```
+
+### Animation Best Practice
+
+#### Clear Splash Animation
+
+```css
+.cube {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  -webkit-perspective: 1000;
+  perspective: 1000;
+
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+
+  /* Other transform properties here */
 }
 ```
 
