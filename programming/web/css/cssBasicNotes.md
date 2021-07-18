@@ -67,10 +67,10 @@
     - [Absolute Position](#absolute-position)
     - [Fixed Position](#fixed-position)
   - [Flex Patterns](#flex-patterns)
-    - [Under the Hood of `flex`](#under-the-hood-of-flex)
-    - [Useful Shorthand of `flex`](#useful-shorthand-of-flex)
-    - [父元素属性](#父元素属性)
-    - [子元素属性](#子元素属性)
+    - [Flex Under the Hood](#flex-under-the-hood)
+    - [Flex Useful Shorthand](#flex-useful-shorthand)
+    - [Flex Parent Property](#flex-parent-property)
+    - [Flex Children Property](#flex-children-property)
     - [Flexibility of Float](#flexibility-of-float)
     - [Pseudo Elements of Flex Box](#pseudo-elements-of-flex-box)
     - [Fixed Sidebar with Flexbox](#fixed-sidebar-with-flexbox)
@@ -1299,9 +1299,9 @@ top/left/width/right/z-index are invalid
 
 ## Flex Patterns
 
-[Complete Guid to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+[Flexbox Complete Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox)
 
-### Under the Hood of `flex`
+### Flex Under the Hood
 
 当 flex-basis 设置为 auto 且 width（或者 height）不为 auto 时，计算 used size 时会用到 width（或者 height）的值
 
@@ -1311,7 +1311,7 @@ top/left/width/right/z-index are invalid
   true width = `flex-basis` (or `width`) - `flex-shrink`/sum of `flex-shrink`
 - text nodes and pseudo-elements can be flex children
 
-### Useful Shorthand of `flex`
+### Flex Useful Shorthand
 
 `flex: flex-grow flex-shrink flex-basis`
 
@@ -1333,7 +1333,7 @@ top/left/width/right/z-index are invalid
 
 元素会被赋予一个容器中自由空间的指定占比 equal to `flex: <positive-number> 1 0`
 
-### 父元素属性
+### Flex Parent Property
 
 ```css
 display: flex;
@@ -1344,7 +1344,7 @@ align-content: flex-start/flex-end/center/space-between/space-around;
 align-items: flex-start/flex-end/center/baseline/stretch;
 ```
 
-### 子元素属性
+### Flex Children Property
 
 ```css
 flex: number; /*宽/高度权重*/
@@ -1479,7 +1479,7 @@ main {
 
 ## Grid Patterns
 
-[Complete Grid Guide](https://css-tricks.com/snippets/css/complete-guide-grid/)
+[Grid Complete Guide](https://css-tricks.com/snippets/css/complete-guide-grid)
 
 ```css
 .container {
@@ -3964,10 +3964,10 @@ const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
 ### Invalid and Empty Value in CSS Variables
 
 - `--invalid-value: initial;` is invalid value
-  leding to `var(--invalid-value)` called failed,
+  leading to `var(--invalid-value)` called failed,
   `var(--invalid-value, backup-value)` get backup-value.
 - `--empty-value: ;` is valid empty value
-  leding to `var(--empty-value)` called succeeded,
+  leading to `var(--empty-value)` called succeeded,
   `var(--empty-value, backup-value)` get **parent value**.
 - Use Invalid and Empty Value to
   implement `if (true)` in CSS.
