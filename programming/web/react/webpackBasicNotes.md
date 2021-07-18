@@ -414,25 +414,29 @@ module.exports = {
 - async await import
 
 ```js
-splitChunks: {
-  chunks: 'initial',
-  cacheGroups: {
-    common: {
-      chunks: 'initial', // all、async、initial
-      minChunks: 5,
-      name: 'common',
-      priority: 9,
-      enforce: true
-    },
-    vendor: {
-      test: /node_modules/,
+{
+  optimization: {
+    splitChunks: {
       chunks: 'initial',
-      name: 'vendor',
-      priority: 10,
-      enforce: true
-    }
+      cacheGroups: {
+        common: {
+          chunks: 'initial', // all、async、initial
+          minChunks: 5,
+          name: 'common',
+          priority: 9,
+          enforce: true
+        },
+        vendor: {
+          test: /node_modules/,
+          chunks: 'initial',
+          name: 'vendor',
+          priority: 10,
+          enforce: true
+        }
+      }
+    },
   }
-},
+}
 ```
 
 ### Tree Shaking
