@@ -1298,6 +1298,12 @@ top/left/width/right/z-index are invalid
 
 ### Flex Parent Property
 
+- justify-content: defines alignment along main axis.
+- align-items: defines alignment for cross axis.
+- align-content:
+  aligns flex container's lines within
+  when there is extra space in the cross-axis.
+
 ```css
 display: flex;
 flex-direction: row/column;
