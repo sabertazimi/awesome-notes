@@ -264,6 +264,8 @@
     - [Web Files API](#web-files-api)
   - [Web Navigator API](#web-navigator-api)
   - [Web Sockets API](#web-sockets-api)
+    - [Web Sockets Message Header](#web-sockets-message-header)
+    - [Web Sockets Basic Usage](#web-sockets-basic-usage)
   - [Web RTC API](#web-rtc-api)
   - [Web Workers API](#web-workers-api)
   - [Web Gamepad API](#web-gamepad-api)
@@ -5749,6 +5751,34 @@ navigator.connection.effectiveType // 2G - 5G
 ```
 
 ## Web Sockets API
+
+### Web Sockets Message Header
+
+Request Header:
+
+```js
+GET /chat HTTP/1.1
+Host: example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: 16-byte, base64 encoded
+Sec-WebSocket-Version: 13
+Sec-Websocket-Protocol: protocol [,protocol]*
+Sec-Websocket-Extension: extension [,extension]*
+```
+
+Response Header:
+
+```js
+HTTP/1.1 101 "Switching Protocols" or other description
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: 20-byte, MD5 hash in base64
+Sec-Websocket-Protocol: protocol [,protocol]*
+Sec-Websocket-Extension: extension [,extension]*
+```
+
+### Web Sockets Basic Usage
 
 通信功能
 
