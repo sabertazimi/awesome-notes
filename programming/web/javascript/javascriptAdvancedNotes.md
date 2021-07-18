@@ -278,6 +278,7 @@
     - [SEO Tips](#seo-tips)
       - [SEO Metadata](#seo-metadata)
   - [Network](#network)
+    - [HTTPS](#https)
     - [HTTP 2](#http-2)
     - [HTTP 3](#http-3)
   - [Security](#security)
@@ -6070,6 +6071,14 @@ const seo = {
 ```
 
 ## Network
+
+### HTTPS
+
+HyperText Transfer Protocl (HTTP) + Transport Layer Security (TLS):
+
+- CA (Certificate Authority) 认证体系是 HTTPS 防止中间人攻击 (HTTP 明文传输) 的核心,
+  客户端需要对服务器发来的证书进行安全性校验.
+- 通过 CA 认证体系避免了中间人窃取 AES 密钥并发起拦截和修改 HTTP 通讯的报文.
 
 ### HTTP 2
 
