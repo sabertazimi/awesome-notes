@@ -92,13 +92,12 @@
     - [Custom ScrollBar](#custom-scrollbar)
     - [Hidden ScrollBar](#hidden-scrollbar)
   - [List Style](#list-style)
-  - [Alignment](#alignment)
-    - [Text Align](#text-align)
-    - [Vertical Align](#vertical-align)
   - [Opacity](#opacity)
   - [Border](#border)
     - [Border Radius](#border-radius)
     - [Border Image](#border-image)
+    - [Border Collapse](#border-collapse)
+    - [Border Best Practice](#border-best-practice)
   - [CSS Colors](#css-colors)
     - [HSL Color](#hsl-color)
   - [CSS Background](#css-background)
@@ -116,7 +115,10 @@
       - [Jumbotron and Landing Page](#jumbotron-and-landing-page)
       - [Horizontal Scrolling Best Practices](#horizontal-scrolling-best-practices)
   - [CSS Text](#css-text)
+    - [Text Alignment](#text-alignment)
     - [Text Overflow](#text-overflow)
+    - [Text Writing Mode](#text-writing-mode)
+      - [Vertical Writing Mode](#vertical-writing-mode)
     - [White Space](#white-space)
     - [Text Wrap](#text-wrap)
   - [CSS Font](#css-font)
@@ -1700,8 +1702,26 @@ margin in the direction of the float will pull the floated element in that direc
 
 ### Vertical Centering Pattern
 
-- inline\*: padding, line-height, vertical-align, flex/grid box
-- block: top+margin, top+tranlateY, vertical-align, flex/grid box
+- Inline element:
+  - padding
+  - line-height
+  - vertical-align
+  - flexbox
+  - grid
+- Block element
+  - top + margin
+  - top + translateY
+  - vertical-align
+  - flexbox
+  - grid
+
+```css
+.form__item__label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+```
 
 ### Mixing Centering Pattern
 
@@ -1763,31 +1783,36 @@ margin in the direction of the float will pull the floated element in that direc
 - list-style-type: 改变 ul/ol 前标记类型
 - list-style-image: 改变 ul/ol 前标记类型
 
-## Alignment
-
-### Text Align
-
-justify(自适应，左右都无空格)
-
-### Vertical Align
-
-垂直对齐方式
-
-```css
-.form__item__label {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-```
-
 ## Opacity
 
 0 ~ 1, 渐进效果常用属性
 
 ## Border
 
-mix transparent with non-transparent border to make shapes (e.g. triangle).
+### Border Radius
+
+### Border Image
+
+```css
+border-image: source slice width outset repeat;
+```
+
+### Border Collapse
+
+```css
+table,
+tr,
+td {
+  border: 1px solid #666;
+}
+table {
+  border-collapse: collapse;
+}
+```
+
+### Border Best Practice
+
+Mix transparent with non-transparent border to make shapes (e.g. triangle).
 
 ```css
 .arrow-up {
@@ -1829,14 +1854,6 @@ mix transparent with non-transparent border to make shapes (e.g. triangle).
 
   border-right: 20px solid #8de698;
 }
-```
-
-### Border Radius
-
-### Border Image
-
-```css
-border-image: source slice width outset repeat;
 ```
 
 ## CSS Colors
@@ -2225,6 +2242,18 @@ Horizontal Scrolling Methods:
 }
 ```
 
+### Text Alignment
+
+justify: 自适应，左右都无空格
+
+```css
+.wrap {
+  text-justify: distribute-all-lines; /* ie6-8 */
+  text-align: justify;
+  text-align-last: justify; /* 一个块或行的最后一行对齐方式 */
+}
+```
+
 ### Text Overflow
 
 - clip 切除溢出部分
@@ -2247,6 +2276,33 @@ Horizontal Scrolling Methods:
   -webkit-line-clamp: 4; /* 需要显示的行数 */
   overflow: hidden;
   text-overflow: ellipsis;
+}
+```
+
+### Text Writing Mode
+
+#### Vertical Writing Mode
+
+```css
+/* 单列展示 */
+.wrap {
+  width: 25px;
+  height: auto;
+  padding: 8px 5px;
+  line-height: 18px;
+  font-size: 12px;
+  word-wrap: break-word; /* 英文自动换行 */
+}
+
+/* 多列展示 */
+.wrap {
+  height: 200px;
+  line-height: 30px;
+  text-align: justify;
+  writing-mode: vertical-lr; /*从左向右 */
+  writing-mode: vertical-rl; /* 从右向左 */
+  writing-mode: tb-lr; /* IE 从左向右 */
+  writing-mode: tb-rl; /* IE 从右向左 */
 }
 ```
 
