@@ -6115,6 +6115,9 @@ HTTP/3 = `HTTP` + `QPack / Strem` + `QUIC / TLS 1.3+` + `UDP`
 
 ## Security
 
+- [Web Security Checklist](https://eggjs.org/zh-cn/core/security.html)
+- [ESLint Node Security Tool](https://github.com/nodesecurity/eslint-plugin-security)
+
 ### Web Authentication
 
 #### HTTP Basic Authentication

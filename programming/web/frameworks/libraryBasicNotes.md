@@ -921,7 +921,7 @@
 
 ### Security Tools
 
-- [Sqlmap](https://github.com/sqlmapproject/sqlmap)
+- [SqlMap](https://github.com/sqlmapproject/sqlmap)
 - [Zaproxy](https://github.com/zaproxy/zaproxy)
 - [Arachni](https://github.com/Arachni/arachni)
 - [Naughty Input Strings](https://github.com/minimaxir/big-list-of-naughty-strings))
