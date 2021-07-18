@@ -518,11 +518,12 @@ npx webpack --mode production --profile --json > stats.json
 ### Other Plugins
 
 - Commons Chunk Plugin
-- Preload plugin
-- Prefetch plugin
+- PreLoad plugin
+- PreFetch plugin
 - Define Plugin
 - Provide Plugin
 - CleanUp Plugin
+- [Webpack Merge](https://github.com/survivejs/webpack-merge)
 
 ### Custom Plugin
 
