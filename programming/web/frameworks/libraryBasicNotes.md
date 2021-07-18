@@ -849,7 +849,7 @@
 - [Babel](https://github.com/babel/babel)
 - [AST Explorer](https://astexplorer.net)
 - [CodeCrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
-- [PMD: An extensible multilanguage static code analyzer](https://github.com/pmd/pmd)
+- [PMD: An extensible multi-language static code analyzer](https://github.com/pmd/pmd)
 
 ### Code Coverage Tools
 
