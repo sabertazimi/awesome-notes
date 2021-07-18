@@ -846,9 +846,10 @@
 
 ### Code Analysis Tools
 
-- [Babel.js](https://github.com/babel/babel)
+- [Babel](https://github.com/babel/babel)
 - [AST Explorer](https://astexplorer.net)
-- [Codecrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
+- [CodeCrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
+- [PMD: An extensible multilanguage static code analyzer](https://github.com/pmd/pmd)
 
 ### Code Coverage Tools
 
@@ -861,6 +862,7 @@
 - [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
 - [CSS Stats Tools](https://github.com/cssstats/cssstats)
 - [CSS Stats CLI](https://github.com/projectwallace/wallace-cli)
+- [Java CheckStyle](https://github.com/checkstyle/checkstyle)
 
 ### Inspect Tools
 
