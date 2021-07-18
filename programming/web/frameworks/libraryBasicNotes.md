@@ -763,6 +763,8 @@
 ### Web Socket
 
 - [Socket.IO](https://github.com/socketio/socket.io)
+- [uWebSockets: Simple, secure and standards compliant sockets](https://github.com/uNetworking/uWebSockets)
+- [SocketCluster: Highly scalable realtime framework](https://github.com/SocketCluster/socketcluster)
 
 ### Web RTC
 
