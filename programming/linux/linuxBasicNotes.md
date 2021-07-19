@@ -148,7 +148,7 @@
       - [History Shortcuts](#history-shortcuts)
     - [Device Command](#device-command)
       - [Monitor Info](#monitor-info)
-      - [Touchpad Synaptics](#touchpad-synaptics)
+      - [Touch Pad Synoptics](#touch-pad-synoptics)
     - [并行命令](#并行命令)
     - [C/C++ Binary Command](#cc-binary-command)
       - [ldd](#ldd)
@@ -157,14 +157,14 @@
     - [Other Command](#other-command)
       - [Time](#time)
   - [Shell 编程](#shell-编程)
-    - [Warings](#warings)
+    - [Shell Warnings](#shell-warnings)
     - [文件重定向](#文件重定向)
       - [Here Document](#here-document)
     - [变量](#变量)
       - [基本变量](#基本变量)
       - [built-in 变量](#built-in-变量)
       - [环境变量](#环境变量)
-        - [Env Commnad](#env-commnad)
+        - [Environment Command](#environment-command)
     - [数值运算](#数值运算)
       - [declare 命令](#declare-命令)
     - [Bash Expansions](#bash-expansions)
@@ -183,7 +183,7 @@
     - [Interactive Shell Script Tips](#interactive-shell-script-tips)
       - [Check Root Validation](#check-root-validation)
       - [Bash help option](#bash-help-option)
-      - [Bash slient option](#bash-slient-option)
+      - [Bash Silent Option](#bash-silent-option)
       - [Check Command Validation](#check-command-validation)
         - [Get Absolute Path](#get-absolute-path)
       - [Bash error handle](#bash-error-handle)
@@ -211,7 +211,7 @@
       - [FFmpeg Probe](#ffmpeg-probe)
       - [FFmpeg Transform](#ffmpeg-transform)
       - [FFmpeg Cutting](#ffmpeg-cutting)
-      - [FFmpeg Muxing](#ffmpeg-muxing)
+      - [FFmpeg Mixing](#ffmpeg-mixing)
       - [FFmpeg Screenshot](#ffmpeg-screenshot)
       - [FFmpeg Gif](#ffmpeg-gif)
       - [FFmpeg Subtitle](#ffmpeg-subtitle)
@@ -306,17 +306,17 @@ sudo service restart sshd
   - HostName 主机名(ip) `ssh user@ip`
   - Port 可忽略
   - User 登录用户名 `ssh user@ip`
-  - PreferredAuthentications publickey
+  - PreferredAuthentications publicKey
   - IdentityFile 密钥文件完整路径 `ssh -i file`
 
 ```bash
 Host github.com
   HostName github.com
-  PreferredAuthentications publickey
+  PreferredAuthentications publicKey
   IdentityFile ~/.ssh/id_rsa
 Host cs.github.com
   HostName github.com
-  PreferredAuthentications publickey
+  PreferredAuthentications publicKey
   IdentityFile ~/.ssh/cs
 Host cloud
     HostName xx.org
@@ -340,9 +340,9 @@ google-chrome socks5 127.0.0.1 7070
 
 ### 密钥文件
 
-- 登录远程主机：ssh -i hustlyl root@119.29.140.60
-- 文件传输：sftp -i hustlyl root@119.29.140.60
-- 登录数据库：mysql -h 10.66.135.125 -P 3306 -uroot -p
+- 登录远程主机：ssh -i sabertaz root@119.29.140.60
+- 文件传输：sftp -i sabertaz root@119.29.140.60
+- 登录数据库：mysql -h 10.66.135.125 -P 3306 -u root -p
 
 ### 远程传输文件
 
@@ -508,7 +508,7 @@ print working directory
 #### rm
 
 - –r delete directory
-- –f delete forcely
+- –f delete forcedly
 - -i 显示确认信息
 
 #### cp
@@ -711,7 +711,7 @@ tail -f filename
 read from standard input and write to standard output and files
 
 ```bash
-[me@linuxbox ~]$ ls /usr/bin | tee ls.txt | grep zip
+[me@linuxBox ~]$ ls /usr/bin | tee ls.txt | grep zip
 bunzip2
 bzip2
 ....
@@ -856,7 +856,7 @@ groupdel test2
 
 ##### 查看组
 
-- groups someuser
+- groups someUser
 - cat /etc/group
 
 ```bash
@@ -896,8 +896,8 @@ Options:
 - -Z, --selinux-user SEUSER use a specific SEUSER for the SELinux user mapping
 
 ```bash
-useradd -s bash -m testuser
-passwd testuser # modify `/etc/passwd`, then add to `/etc/sudoers`
+useradd -s bash -m testUser
+passwd testUser # modify `/etc/passwd`, then add to `/etc/sudoers`
 ```
 
 `adduser` is a perl script which uses `useradd` binary in back-end,
@@ -928,7 +928,7 @@ w/who 查看当前登录的所有用户
 
 whoami 查看当前登录用户名
 
-finger apacheuser 查看单个用户信息
+finger apacheUser 查看单个用户信息
 
 ##### 限制用户
 
@@ -983,7 +983,6 @@ xrandr -s 1920x1800 # set resolution
 #!/bin/bash
 
 # Simple print cpu topology
-# Author: kodango
 
 # numactl --hardware
 # ls /sys/devices/system/node/node0
@@ -1180,7 +1179,7 @@ yum makecache
 make install
 ```
 
-e.g apche /var/www/html/index.html /usr/local/apache/htdocs/index.html
+e.g apache /var/www/html/index.html /usr/local/apache/htdocs/index.html
 
 #### Applications Management
 
@@ -1212,7 +1211,6 @@ for SSL certificates.
 - [Hosts](https://github.com/racaljk/hosts)
 - [RSS](https://github.com/breakwa11/shadowsocks-rss)
 - [ChinaDNS](https://github.com/shadowsocks/ChinaDNS-Python)
-- [Sshuttle](https://github.com/apenwarr/sshuttle)
 - [ProxyChains](https://github.com/rofl0r/proxychains-ng)
 - [OpenVPN](https://github.com/OpenVPN/openvpn)
 - [VPNGate](https://github.com/waylau/vpngate-mirrors)
@@ -1321,7 +1319,7 @@ nftables 命令行工具：nft
 
 ### 网络扫描命令
 
-预防策略——SYN 攻击、DDOS 攻击
+预防策略——SYN 攻击、DDoS 攻击
 
 #### fping
 
@@ -1406,7 +1404,7 @@ crontab -e(establish)
 - jobs —— 所有作业
 - atq —— 延时作业队列
 
-- at -M(不使用邮件发送运行结果) -f filename deltatime
+- at -M(不使用邮件发送运行结果) -f filename deltaTime
 - atrm 作业号/名
 
 - bg/fg 作业号/名
@@ -1466,7 +1464,7 @@ sudo apt-get install read-edid
 sudo get-edid | parse-edid
 ```
 
-#### Touchpad Synaptics
+#### Touch Pad Synoptics
 
 ```bash
 synclient TouchpadOff=0
@@ -1555,7 +1553,7 @@ sudo timedatectl set-local-rtc 1
 
 ## Shell 编程
 
-### Warings
+### Shell Warnings
 
 - = 左右无空格
 - () [] 内部最好有空格
@@ -1573,7 +1571,7 @@ sudo timedatectl set-local-rtc 1
 #### Here Document
 
 ```bash
-commnad << END
+command << END
 ...
 END
 
@@ -1669,7 +1667,7 @@ done
 - PS1 环境变量——shell 头行打印信息
 - PATH 环境变量
 
-##### Env Commnad
+##### Environment Command
 
 - env——查看环境变量
 - export 变量名=变量值——设置环境变量
@@ -1709,13 +1707,13 @@ fi
 ```
 
 - `[[ xxx ]]`: condition
-- `(( xxx ))`: arithemetic condition
+- `(( xxx ))`: arithmetic condition
 
 | operator              | function                                          |
 | :-------------------- | :------------------------------------------------ |
 | ! EXPRESSION          | The EXPRESSION is false                           |
 | -n STRING             | The length of STRING is greater than zero         |
-| -z STRING             | The lengh of STRING is zero (ie it is empty)      |
+| -z STRING             | The length of STRING is zero (ie it is empty)      |
 | STRING1 == STRING2    | STRING1 is equal to STRING2                       |
 | STRING1 != STRING2    | STRING1 is not equal to STRING2                   |
 | STRING1 > STRING2     | STRING1 sorts after STRING2                       |
@@ -1759,7 +1757,7 @@ aA1b aA2b aB3b aB4b
   - `${parameter^^}` 把 parameter 的值全部转换成大写字母
   - `${parameter^}` 仅仅把 parameter 的第一个字符转换成大写字母
   - `${parameter#pattern}` `${parameter##pattern}`,
-    `${parameter%pattern}` `${parameter%%pattern}`: 从 paramter 所包含的字符串中清除开头/末尾一部分文本
+    `${parameter%pattern}` `${parameter%%pattern}`: 从 parameter 所包含的字符串中清除开头/末尾一部分文本
   - `${parameter/pattern/string}`, `${parameter//pattern/string}`,
     `${parameter/#pattern/string}`, `${parameter/%pattern/string}`: replace
 
@@ -2019,12 +2017,12 @@ echo "Program terminated."
 ```bash
 #!/bin/bash
 # while-read: read lines from a file
-while read distro version release; do
-    printf "Distro: %s\tVersion: %s\tReleased: %s\n" \
-        $distro \
+while read dist version release; do
+    printf "Dist: %s\tVersion: %s\tReleased: %s\n" \
+        $dist \
         $version \
         $release
-done < distros.txt
+done < dist.txt
 ```
 
 #### do while statement
@@ -2243,7 +2241,7 @@ if [[ ${#@} -ne 0 ]] && [[ "${@#"--help"}" = "" ]]; then
 fi;
 ```
 
-#### Bash slient option
+#### Bash Silent Option
 
 ```bash
 #!/bin/sh
@@ -2277,9 +2275,9 @@ fi;
 
 ```bash
 #!/bin/sh
-CURR_DIR="$(dirname $0);"
+CUR_DIR="$(dirname $0);"
 printf -- 'moving application to /opt/app.jar';
-mv "${CURR_DIR}/application.jar" /opt/app.jar;
+mv "${CUR_DIR}/application.jar" /opt/app.jar;
 ```
 
 #### Bash error handle
@@ -2404,9 +2402,9 @@ t        # 显示一个时钟
 
 ##### Tmux Scroll
 
-- `C-a + [` to into scoll mode, `q` to quit scoll mode
-- copy mode can scoll too
-- `set -g mouse on` for enabling mouse scolling
+- `C-a + [` to into scroll mode, `q` to quit scroll mode
+- copy mode can scroll too
+- `set -g mouse on` for enabling mouse scrolling
 
 #### Configuration
 
@@ -2562,7 +2560,7 @@ ffmpeg -i music_flac.flac \
 # - libmp3lame: MP3 解码器
 # - ar: audio rate 音频采样率, 默认用原音频的采样率
 # - ab: audio bit rate 音频比特率, 默认 128K
-# - ac: aduio channels 音频声道, 默认采用源音频的声道数
+# - ac: audio channels 音频声道, 默认采用源音频的声道数
 ```
 
 ```bash
@@ -2596,7 +2594,7 @@ ffmpeg -i video.mp4 \
 ```bash
 # audio only
 ffmpeg -i cut.mp4 -vn output.mp3
-ffmpeg -i video.mp4 -vn -acodec copy video_novideo.m4a
+ffmpeg -i video.mp4 -vn -acodec copy video_noVideo.m4a
 
 # video only
 ffmpeg -i video.mp4 -vcodec copy -an video_silent.mp4
@@ -2614,14 +2612,14 @@ ffmpeg -i input.mkv -ss 00:02:00.0 -t 30 -c copy output.mkv
 ffmpeg -ss 00:01:30.0 -i input.mkv -ss 00:00:30.0 -t 30 output.mkv
 ```
 
-#### FFmpeg Muxing
+#### FFmpeg Mixing
 
 ```bash
 # replace audio
 ffmpeg -i input.mkv -i input.mp3 -map 0:v -map 1:a -c copy -shortest output.mp4
 
 # merge audio and video
-ffmpeg -i video_novideo.m4a -i video_silent.mp4 -c copy video_merge.mp4
+ffmpeg -i video_noVideo.m4a -i video_silent.mp4 -c copy video_merge.mp4
 
 ffmpeg -i "concat:01.mp4|02.mp4|03.mp4" -c copy out.mp4
 
@@ -2677,7 +2675,7 @@ sudo ffmpeg -f fbdev -framerate 10 -i /dev/fb0 rec.mp4
 #### FFmpeg Live Streaming
 
 ```bash
-ffmpeg -re i rec.mp4 按照网站要求编码 -f flv "你的rtmp地址/你的直播码"
+ffmpeg -re i rec.mp4 按照网站要求编码 -f flv "你的 RTMP 地址/你的直播码"
 ```
 
 ### Nginx
