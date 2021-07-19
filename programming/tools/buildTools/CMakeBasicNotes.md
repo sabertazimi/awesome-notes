@@ -27,7 +27,7 @@
       - [Install Demo](#install-demo)
     - [find packages](#find-packages)
       - [Basic Usage of Find](#basic-usage-of-find)
-      - [Find.cmake](#findcmake)
+      - [Find CMake](#find-cmake)
       - [Full Find Demo](#full-find-demo)
   - [Useful Tools](#useful-tools)
   - [Config Command](#config-command)
@@ -43,6 +43,17 @@
       - [Interface vs Private](#interface-vs-private)
     - [Nice Patterns](#nice-patterns)
     - [Anti Patterns](#anti-patterns)
+  - [Makefile Notes](#makefile-notes)
+    - [Makefile Macro](#makefile-macro)
+      - [Built-in Makefile Macro](#built-in-makefile-macro)
+    - [Built-in Makefile Variable](#built-in-makefile-variable)
+    - [Makefile Inexplicit Rules](#makefile-inexplicit-rules)
+      - [Makefile C Rules](#makefile-c-rules)
+      - [Makefile C++ Rules](#makefile-c-rules-1)
+      - [Makefile ASM Rules](#makefile-asm-rules)
+      - [Makefile Object Linking](#makefile-object-linking)
+    - [Makefile Function](#makefile-function)
+    - [Makefile Best Practice](#makefile-best-practice)
   - [Reference](#reference)
 
 <!-- /TOC -->
@@ -62,7 +73,7 @@ add_compile_options(-std=c++11 -Wall -Wextra)
 include_directories(include)
 
 # Can manually add the sources using the set command as follows:
-# set(SOURCES src/mainapp.cpp src/Student.cpp)
+# set(SOURCES src/mainApp.cpp src/Student.cpp)
 
 # However, the file(GLOB...) allows for wildcard additions:
 file(GLOB SOURCES "src/*.cpp")
@@ -103,17 +114,17 @@ cmake_minimum_required(VERSION 2.8.9)
 project(TestLibrary)
 
 # For the shared library:
-set(PROJECT_LINK_LIBS libtestStudent.so)
-link_directories(~/exploringBB/extras/cmake/studentlib_shared/build)
+set(PROJECT_LINK_LIBS libTestStudent.so)
+link_directories(~/exploringBB/extras/cmake/studentLib_shared/build)
 
 # For the static library:
-# set (PROJECT_LINK_LIBS libtestStudent.a)
-# link_directories(~/exploringBB/extras/cmake/studentlib_static/build)
+# set (PROJECT_LINK_LIBS libTestStudent.a)
+# link_directories(~/exploringBB/extras/cmake/studentLib_static/build)
 
-include_directories(~/exploringBB/extras/cmake/studentlib_shared/include)
+include_directories(~/exploringBB/extras/cmake/studentLib_shared/include)
 
-add_executable(libtest libtest.cpp)
-target_link_libraries(libtest ${PROJECT_LINK_LIBS} )
+add_executable(libTest libTest.cpp)
+target_link_libraries(libTest ${PROJECT_LINK_LIBS} )
 
 message(STATUS "CMake demo: use library")
 ```
@@ -148,14 +159,14 @@ build for library and executable
 cmake_minimum_required(VERSION 3.5)
 project(MiniSat VERSION 2.2 LANGUAGES CXX)
 
-add_library(libminisat STATIC
-    minisat/core/Solver.cc
-    minisat/utils/Options.cc
-    minisat/utils/System.cc
-    minisat/simp/SimpSolver.cc
+add_library(libMiniSat STATIC
+    miniSat/core/Solver.cc
+    miniSat/utils/Options.cc
+    miniSat/utils/System.cc
+    miniSat/simp/SimpSolver.cc
 )
 
-target_compile_features(libminisat
+target_compile_features(libMiniSat
     PUBLIC
       cxx_attributes
       cxx_defaulted_functions
@@ -163,16 +174,16 @@ target_compile_features(libminisat
       cxx_final
 )
 
-target_include_directories(libminisat PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(libMiniSat PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_compile_definitions(libminisat PUBLIC __STDC_LIMIT_MACROS __STDC_FORMAT_MACROS)
+target_compile_definitions(libMiniSat PUBLIC __STDC_LIMIT_MACROS __STDC_FORMAT_MACROS)
 
 # Also build the two MiniSat executables
-add_executable(minisat minisat/core/Main.cc)
-target_link_libraries(minisat libminisat)
+add_executable(miniSat miniSat/core/Main.cc)
+target_link_libraries(miniSat libMiniSat)
 
-add_executable(minisat-simp minisat/simp/Main.cc)
-target_link_libraries(minisat-simp libminisat)
+add_executable(miniSat-simp miniSat/simp/Main.cc)
+target_link_libraries(miniSat-simp libMiniSat)
 ```
 
 ### Basic Options
@@ -251,7 +262,7 @@ message("${RESULT}")   # Prints: 8
 ```bash
 function(doubleEach)
     foreach(ARG ${ARGN})           # Iterate over each argument
-        math(EXPR N "${ARG} * 2")  # Double ARG's numeric value
+        math(EXPR N "${ARG} * 2")  # Double ARG numeric value
         message("${N}")            # Print N
     endforeach()
 endfunction()
@@ -348,15 +359,15 @@ set_tests_properties (
 
 ```bash
 # 是否使用我们自己的函数？
-option(USE_MYMATH
+option(USE_MATH
         "Use tutorial provided math implementation" ON)
 
 # add the MathFunctions library?
-if(USE_MYMATH)
+if(USE_MATH)
   include_directories("${PROJECT_SOURCE_DIR}/MathFunctions")
   add_subdirectory(MathFunctions)
   set(EXTRA_LIBS ${EXTRA_LIBS} MathFunctions)
-endif(USE_MYMATH)
+endif(USE_MATH)
 
 # add the executable
 add_executable(Tutorial tutorial.cxx)
@@ -375,7 +386,7 @@ math(${ARGS})                      # Equivalent to calling math(EXPR T "1 + 1")
 ```bash
 set(MY_LIST These are separate arguments)
 list(REMOVE_ITEM MY_LIST "separate")  # Removes "separate" from the list
-message("${MY_LIST}")                 # Prints: These;are;argumentsk
+message("${MY_LIST}")                 # Prints: These;are;arguments
 ```
 
 ### Package Command
@@ -410,10 +421,10 @@ INSTALL(TARGETS targets...
         [OPTIONAL]
         ] [...])
 
-INSTALL(TARGETS myrun mylib mystaticlib
+INSTALL(TARGETS myRun myLib myStaticLib
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION libstatic）
+        ARCHIVE DESTINATION libStatic）
 ```
 
 #### install normal files
@@ -439,7 +450,7 @@ INSTALL(PROGRAMS files... DESTINATION <dir>
      [RENAME <name>] [OPTIONAL])
 
 
-INSTALL(PROGRAMS runhello.sh DESTINATION bin)
+INSTALL(PROGRAMS runHello.sh DESTINATION bin)
 ```
 
 #### install directories
@@ -454,7 +465,7 @@ INSTALL(DIRECTORY dirs... DESTINATION <dir>
      [[PATTERN <pattern> | REGEX <regex>]
      [EXCLUDE] [PERMISSIONS permissions...]] [...])
 
-INSTALL(DIRECTORY icons scripts/ DESTINATION share/myproj
+INSTALL(DIRECTORY icons scripts/ DESTINATION share/myProj
      PATTERN "CVS" EXCLUDE
      PATTERN "scripts/*"
      PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
@@ -496,12 +507,12 @@ cmake --help-module FindBZip2
 #### Basic Usage of Find
 
 ```bash
-project(helloworld)
-add_executable(helloworld hello.c)
+project(helloWorld)
+add_executable(helloWorld hello.c)
 find_package (BZip2)
 if (BZIP2_FOUND)
     include_directories(${BZIP_INCLUDE_DIRS})
-    target_link_libraries(helloworld ${BZIP2_LIBRARIES})
+    target_link_libraries(helloWorld ${BZIP2_LIBRARIES})
 endif (BZIP2_FOUND)
 ```
 
@@ -525,9 +536,9 @@ if(Foo_FOUND AND NOT TARGET Foo::Foo)
 endif()
 ```
 
-#### Find.cmake
+#### Find CMake
 
-add find module for project
+Find.cmake: add find module for project
 
 ```bash
 # cmake/FindDEMO9LIB.cmake
@@ -539,8 +550,8 @@ FIND_PATH(DEMO9LIB_INCLUDE_DIR demo9.h /usr/include/demo9/
         /usr/local/demo9/include/)
 message("./h dir ${DEMO9LIB_INCLUDE_DIR}")
 
-# 将libdemo9_lib.a文件路径赋值给DEMO9LIB_LIBRARY
-FIND_LIBRARY(DEMO9LIB_LIBRARY libdemo9_lib.a /usr/local/demo9/lib/)
+# 将libDemo9_lib.a文件路径赋值给DEMO9LIB_LIBRARY
+FIND_LIBRARY(DEMO9LIB_LIBRARY libDemo9_lib.a /usr/local/demo9/lib/)
 message("lib dir: ${DEMO9LIB_LIBRARY}")
 
 if(DEMO9LIB_INCLUDE_DIR AND DEMO9LIB_LIBRARY)
@@ -557,7 +568,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(demo9)
 
-# create libdemo9_lib.a
+# create libDemo9_lib.a
 set(SRC_LIB demo9.cpp)
 add_library(demo9_lib STATIC ${SRC_LIB})
 
@@ -565,7 +576,7 @@ add_library(demo9_lib STATIC ${SRC_LIB})
 install(TARGETS demo9_lib DESTINATION demo9/lib)
 install(FILES demo9.h DESTINATION demo9/include)
 
-# create demo9_main exectuable
+# create demo9_main executable
 set(SRC_EXE demo9_main.cpp)
 
 # set demo9_lib cmake module path
@@ -794,9 +805,161 @@ whereas private properties model build requirements of targets.
 - Link to built files directly: Always link to targets if available
 - Never skip PUBLIC/PRIVATE when linking
 
+## Makefile Notes
+
+### Makefile Macro
+
+```makefile
+foo := a.o b.o c.o
+bar := $(foo:.o=.c)
+first_second = Hello
+a = first
+b = second
+all = $($a_$b)
+```
+
+这里的`$a_$b` 组成了 `first_second`, 于是, \$(all)的值就是“Hello”。
+
+#### Built-in Makefile Macro
+
+- AR: 函数库打包程序。默认命令是“ar”
+- AS: 汇编语言编译程序。默认命令是“as”
+- CC: C 语言编译程序。默认命令是“cc”
+- CXX: C++语言编译程序。默认命令是“g++”
+- CO: 从 RCS 文件中扩展文件程序。默认命令是“co”
+- CPP: C 程序的预处理器（输出是标准输出设备）。默认命令是“\$(CC) –E”
+- FC: Fortran 和 RatFor 的编译器和预处理程序。默认命令是“f77”
+- GET: 从 SCCS 文件中扩展文件的程序。默认命令是“get”。
+- LEX: Lex 方法分析器程序（针对于 C 或 RatFor）。默认命令是“lex”
+- PC: Pascal 语言编译程序。默认命令是“pc”
+- YACC: Yacc 文法分析器（针对于 C 程序）。默认命令是“yacc”
+- YACCR: Yacc 文法分析器（针对于 RatFor 程序）。默认命令是“yacc –r”
+- MAKEINFO: 转换 TexInfo 源文件（.texi）到 Info 文件程序。默认命令是“makeinfo”
+- TEX: 从 TeX 源文件创建 TeX DVI 文件的程序。默认命令是“tex”
+- TEXI2DVI: 从 TexInfo 源文件创建军 TeX DVI 文件的程序。默认命令是“texi2dvi”
+- WEAVE: 转换 Web 到 TeX 的程序。默认命令是“weave”
+- CWEAVE: 转换 C Web 到 TeX 的程序。默认命令是“cweave”
+- TANGLE: 转换 Web 到 Pascal 语言的程序。默认命令是“tangle”
+- CTANGLE: 转换 C Web 到 C。默认命令是“ctangle”
+- RM: 删除文件命令。默认命令是“rm –f”
+- ARFLAGS: 函数库打包程序 AR 命令的参数。默认值是“rv”
+- ASFLAGS: 汇编语言编译器参数。（当明显地调用“.s”或“.S”文件时）
+- CFLAGS: C 语言编译器参数
+- CXXFLAGS: C++语言编译器参数
+- COFLAGS: RCS 命令参数
+- CPPFLAGS: C 预处理器参数。（ C 和 Fortran 编译器也会用到）
+- FFLAGS: Fortran 语言编译器参数
+- GFLAGS: SCCS “get”程序参数
+- LDFLAGS: 链接器参数。（如：“ld”)
+- LFLAGS: Lex 文法分析器参数
+- PFLAGS: Pascal 语言编译器参数
+- RFLAGS: RatFor 程序的 Fortran 编译器参数
+- YFLAGS: Yacc 文法分析器参数
+
+### Built-in Makefile Variable
+
+- $@: 表示规则中的目标文件集。在模式规则中，如果有多个目标，那么，"$@"就是匹配于目标中模式定义的集合
+- $%: 仅当目标是函数库文件中，表示规则中的目标成员名。
+  例如，如果一个目标是"foo.a(bar.o)"，那么，"$%"就是"bar.o"，"\$@"就是"foo.a"。
+  如果目标不是函数库文件（Unix 下是[.a]，Windows 下是[.lib]），那么，其值为空
+- $<: 依赖目标中的第一个目标名字。如果依赖目标是以模式（即"%"）定义的，
+  那么"$<"将是符合模式的一系列的文件集。注意，其是一个一个取出来的
+- \$?: 所有比目标新的依赖目标的集合。以空格分隔
+- \$^: 所有的依赖目标的集合。以空格分隔。如果在依赖目标中有多个重复的，那个这个变量会去除重复的依赖目标，只保留一份
+- $+: 这个变量很像"$^"，也是所有依赖目标的集合。只是它不去除重复的依赖目标
+- `$*` : 这个变量表示目标模式中"%"及其之前的部分。如果目标是"dir/a.foo.b"，
+  并且目标的模式是`a.%.b`，那么，
+  `$*`的值就是`dir/a.foo`。这个变量对于构造有关联的文件名是比较有较。如果目标中没有模式的定义，那么`$*`也就不能被推导出，
+  但是，如果目标文件的后缀是 make 所识别的，那么`$*`就是除了后缀的那一部分。例如：如果目标是`foo.c`，
+  因为".c"是 make 所能识别的后缀名，所以，`$*`的值就是"foo"。这个特性是 GNU make 的，
+  很有可能不兼容于其它版本的 make，
+  所以，你应该尽量避免使用`$*`，
+  除非是在隐含规则或是静态模式中。
+  如果目标中的后缀是 make 所不能识别的，那么`$*`就是空值
+- $(@D): 表示"$@"的目录部分（不以斜杠作为结尾），
+  如果"$@"值是"dir/foo.o"，那么"$(@D)"就是"dir"，
+  而如果"\$@"中没有包含斜杠的话，其值就是"."（当前目录）
+- $(@F): 表示"$@"的文件部分，如果"$@"值是"dir/foo.o"，那么"$(@F)"就是"foo.o"，
+  "$(@F)"相当于函数"$(notdir \$@)"
+- `$(*D)"/"$(*F)`: 和上面所述的同理，也是取文件的目录部分和文件部分。对于上面的那个例子，`$(*D)`返回"dir"，而`$(*F)`返回"foo"
+- "$(%D)"/"$(%F)": 分别表示了函数包文件成员的目录部分和文件部分。
+  这对于形同"archive(member)"形式的目标中的"member"中包含了不同的目录很有用。
+- "$(<D)"/"$(<F)": 分别表示依赖文件的目录部分和文件部分。
+- "$(^D)"/"$(^F)": 分别表示所有依赖文件的目录部分和文件部分。（无相同的）
+- "$(+D)"/"$(+F)": 分别表示所有依赖文件的目录部分和文件部分。（可以有相同的）
+- "$(?D)"/"$(?F)": 分别表示被更新的依赖文件的目录部分和文件部分。
+
+### Makefile Inexplicit Rules
+
+#### Makefile C Rules
+
+`<n>.o`的目标的依赖目标会自动推导为`<n>.c`，并且其生成命令是“$(CC) –c $(CPPFLAGS) \$(CFLAGS)”
+
+#### Makefile C++ Rules
+
+`<n>.o`的目标的依赖目标会自动推导为`<n>.cc`或是`<n>.C`,
+并且其生成命令是`$(CXX) –c $(CPPFLAGS) \$(CFLAGS)`
+(建议使用`.cc`作为 C++源文件的后缀，而不是`.C`).
+
+#### Makefile ASM Rules
+
+`<n>.o` 的目标的依赖目标会自动推导为`<n>.s`，默认使用编译品“as”，并且其生成命令是：“$(AS) $(ASFLAGS)”。
+`<n>.s` 的目标的依赖目标会自动推导为`<n>.S`，默认使用 C 预编译器“cpp”，并且其生成命令是：“$(AS) $(ASFLAGS)”。
+
+#### Makefile Object Linking
+
+`<n>`目标依赖于`<n>.o`，通过运行 C 的编译器来运行链接程序生成（一般是“ld”），其生成命令是：
+`$(CC) $(LDFLAGS) <n>.o $(LOADLIBES) $(LDLIBS)`
+这个规则对于只有一个源文件的工程有效，同时也对多个 Object 文件（由不同的源文件生成）的也有效。例如如下规则：
+
+x : y.o z.o
+
+并且“x.c”、“y.c”和“z.c”都存在时，隐含规则将执行如下命令：
+
+cc -c x.c -o x.o
+cc -c y.c -o y.o
+cc -c z.c -o z.o
+cc x.o y.o z.o -o x
+rm -f x.o
+rm -f y.o
+rm -f z.o
+
+### Makefile Function
+
+- filter
+- shell
+- subst
+- wildcard
+
+### Makefile Best Practice
+
+```makefile
+$(filter %.o,$(files)): %.o: %.c
+$(filter %.elc,$(files)): %.elc: %.el
+```
+
+```makefile
+$(CC) -c $(CFLAGS) $< -o $@
+```
+
+```makefile
+(%.o) : %.c
+$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $*.o
+$(AR) r $@ $*.o
+$(RM) $*.o
+```
+
+```makefile
+%.d: %.c
+@set -e; rm -f $@; /
+$(CC) -M $(CPPFLAGS) $< > $@.$$$$; /
+sed 's,/($*/)/.o[ :]*,/1.o $@ : ,g' < $@.$$$$ > $@; /
+$(RM) -f $@.$$$$
+```
+
 ## Reference
 
-- [Offical Reference](https://cmake.org/cmake/help/latest)
-- [Cmake Practice](http://file.ncnynl.com/ros/CMake%20Practice.pdf)
+- [Official Reference](https://cmake.org/cmake/help/latest)
+- [CMake Practice](http://file.ncnynl.com/ros/CMake%20Practice.pdf)
 - [CGold CMake](https://cgold.readthedocs.io/en/latest)
 - [Modern CMake](https://cliutils.gitlab.io/modern-cmake)

@@ -28,9 +28,9 @@
       - [替换](#替换)
       - [缩进](#缩进)
         - [>{motion}](#motion)
-        - [={motion}](#motion)
+        - [={motion}](#motion-1)
       - [注释](#注释)
-        - [\\{motion}](#\\motion)
+        - [\\{motion}](#motion-2)
       - [历史记录](#历史记录)
   - [Insert 模式命令](#insert-模式命令)
     - [模式转换](#模式转换)
@@ -62,7 +62,7 @@
   - [宏](#宏)
   - [Tools](#tools)
     - [Vundle](#vundle)
-    - [airline/CtrlP/colorschemes](#airlinectrlpcolorschemes)
+    - [Color Schemes](#color-schemes)
     - [YouCompleteMe](#youcompleteme)
     - [ctags](#ctags)
     - [make](#make)
@@ -162,7 +162,7 @@ _微型宏_: 重复上一次(插入命令 至 `<Esc>`)录制动作
 - 模式串: /patterns
 - 0/\$: 行首/尾
 - 文本对象: i/a
-- 分隔符文本对象(seperator text objects)
+- 分隔符文本对象(separator text objects)
 
 | 分隔符文本对象 | 选择区域                       |
 | :------------- | :----------------------------- |
@@ -178,8 +178,8 @@ _微型宏_: 重复上一次(插入命令 至 `<Esc>`)录制动作
 | i'             | 单引号'single quotes' 内部     |
 | a"             | 一对双引号"double quotes"      |
 | i"             | 双引号"double quotes" 内部     |
-| a\`            | 一对反引号\`backticks\`        |
-| i\`            | 反引号\`backticks\` 内部       |
+| a\`            | 一对反引号\`backTicks\`        |
+| i\`            | 反引号\`backTicks\` 内部       |
 | at             | 一对 XML 标签`<xml>tags</xml>` |
 | it             | XML 标签内部                   |
 
@@ -278,7 +278,7 @@ _微型宏_: 重复上一次(插入命令 至 `<Esc>`)录制动作
 | zb            | current line to bottom of screen  |
 | `<C-u>/<C-d>` | 翻半页                            |
 | `<C-b>/<C-f>` | 翻半页                            |
-| gd            | jump to defination                |
+| gd            | jump to definition                |
 | gi            | jump to last insert position      |
 | #             | jump to previous same word        |
 | \*            | jump to next same word            |
@@ -426,7 +426,7 @@ u: 回退命令
 | :-------------------- | :------------------------------------- |
 | `<C-v>{123}`          | 以十进制字符编码插入字符               |
 | `<C-v>u{1234}`        | 以十六进制字符编码插入字符             |
-| `<C-v>{nondigit}`     | 按原义插入非数字字符                   |
+| `<C-v>{nonDigit}`     | 按原义插入非数字字符                   |
 | `<C-k>{char1}{char2}` | 插入以二合字母{char1}{char2}表示的字符 |
 
 ### I 删除
@@ -470,7 +470,7 @@ u: 回退命令
 
 - :normal 将 Ex 命令与 Normal 指令结合在一起的*黑魔法*
 - :args 文件列表
-- :argdo {Excommands} 对存于文件列表的所有文件执行 Ex 命令
+- :argdo {ExCommands} 对存于文件列表的所有文件执行 Ex 命令
 - :global 对 patterns 执行 EX 命令
 
 | 命令                                          | 作用                          |
@@ -492,8 +492,8 @@ u: 回退命令
 | :[range]global/{pattern}/[cmd]                | 对指定范围内匹配              |
 | :shell                                        | 打开内置 shell                |
 | :!{commands}                                  | 执行外部命令                  |
-| :args {arglist}                               | 文件列表                      |
-| :argdo {Excommands}                           | 对文件列表中的文件执行命令    |
+| :args {argList}                               | 文件列表                      |
+| :argdo {ExCommands}                           | 对文件列表中的文件执行命令    |
 | :grep                                         |                               |
 | :vimgrep                                      |                               |
 | :make                                         |                               |
@@ -557,7 +557,7 @@ q/ 或 q: 弹出历史记录窗口
 
 > Abolish.vim:超级 substitute 命令
 
-`:[range]s[ubstitute]/{pattern}/{string}/[flags]`
+`:[range]s[substitute]/{pattern}/{string}/[flags]`
 
 #### Range 替换原字符
 
@@ -757,7 +757,7 @@ git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
 :PluginInstall
 ```
 
-### airline/CtrlP/colorschemes
+### Color Schemes
 
 - built-in fuzzy file search `:find`
 - need config
@@ -872,8 +872,8 @@ command! MakeTags !ctags -R .
 | :cnfile       | 跳转到下一个文件中的第一项   |
 | :cpfile       | 跳转到上一个文件中的最后一项 |
 | :cc N         | 跳转到第 n 项                |
-| :copen        | 打开 quickfix 窗口           |
-| :cclose       | 关闭 quickfix 窗口           |
+| :copen        | 打开 QuickFix 窗口           |
+| :cclose       | 关闭 QuickFix 窗口           |
 
 ### 内置补全
 
@@ -918,7 +918,7 @@ In insert mode
 
 - `:help ^n`: `<C-n>` docs in normal mode
 - `:help i_^n`: `<C-n>` docs in insert mode
-- `:help c_^n`: `<C-n>` docs in commandline mode
+- `:help c_^n`: `<C-n>` docs in commandLine mode
 - `:helpgrep command`: search docs includes `command`
 
 ## Error

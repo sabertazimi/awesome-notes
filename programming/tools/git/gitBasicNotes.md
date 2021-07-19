@@ -153,7 +153,7 @@ git config --global color.ui true
 ```
 
 ```bash
-git config --global commit.template $HOME/.gitmsg.md
+git config --global commit.template $HOME/.GitCommit.md
 git config --global push.default simple
 git config --global pull.rebase true
 git config --global rebase.autoStash true
@@ -214,7 +214,7 @@ git help config
 # but do track lib.a, even though you're ignoring .a files above
 !lib.a
 
-# only ignore the TODO file in the current directory, not subdir/TODO
+# only ignore the TODO file in the current directory, not subDir/TODO
 /TODO
 
 # ignore all files in the build/ directory
@@ -329,7 +329,7 @@ no more than 50 characters
 - git stash clear: 清空 Git 栈
 
 ```bash
-# git stash unapply
+# git stash popup
 git stash show -p stash@{0} | git apply -R
 ```
 
@@ -486,7 +486,7 @@ git config --global credential.helper store
 ```bash
 git tag
 git tag -l "v1.8-"
-git show <tagname(v1.4)>
+git show <tagName(v1.4)>
 ```
 
 创建标签:
@@ -497,19 +497,19 @@ git show <tagname(v1.4)>
 创建附注(annotated)标签
 
 ```bash
-git tag -a <tagname(v1.4)> [commit序列]
+git tag -a <tagName(v1.4)> [commit序列]
 ```
 
 创建轻量(lightweight)标签
 
 ```bash
-git tag <tagname(v1.4)> [commit序列]
+git tag <tagName(v1.4)> [commit序列]
 ```
 
 共享标签至远程库
 
 ```bash
-git push [remote-name] <tagname>
+git push [remote-name] <tagName>
 git push [remote-name] --tags
 git push --follow-tags
 ```
@@ -547,7 +547,7 @@ git checkout feature-branch
 ```bash
 git rebase master
 
-git rebase [basebranch] [topicbranch]
+git rebase [baseBranch] [topicBranch]
 ```
 
 切换到主分支,合并特性分支
@@ -557,7 +557,7 @@ git checkout master
 git merge feature-branch
 ```
 
-pull with auto reabse and auto stash
+pull with auto rebase and auto stash
 
 ```bash
 git pull --rebase --autostash
@@ -607,7 +607,7 @@ git branch -v(详细信息) -vv(详细远程信息) --merged(显示合并至当�
 - 设置当前所在本地分支跟踪某一远程分支
 
 ```bash
-git branch -u [remotename]/[branch]
+git branch -u [remoteName]/[branch]
 ```
 
 - 创建并切换至新的本地分支(跟踪某一远程分支)
@@ -617,7 +617,7 @@ git branch -u [remotename]/[branch]
 ```bash
 git checkout --track [new-local-branch]
 
-git checkout -b [new-local-branch] [remotename]/[branch]
+git checkout -b [new-local-branch] [remoteName]/[branch]
 ```
 
 - Delete remote branch
@@ -824,7 +824,7 @@ git cat-file -p <object-hash-number>
 ```bash
 #!/bin/bash
 
-function seperator() {
+function separator() {
     for i in {1..20}
     do
         printf "-"
@@ -862,7 +862,7 @@ function print_git_objects() {
         if [ $len -gt 30 ]
         then
             index=$(expr $index + 1)
-            seperator $index
+            separator $index
             echo $file
             git_object_type $file
             git_object_content $file
@@ -920,7 +920,7 @@ that's REALLY being a dick.
 1c. Modifying the original work to contain hidden harmful content.
 That would make you a PROPER dick.
 
-If you become rich through modifications, related worksrvices, or supporting
+If you become rich through modifications, related work services, or supporting
 the original work, share the love. Only a dick would make loads off this work
 and not buy the original works creator(s) a pint.Code is provided with no
 warranty. Using somebody else's code and bitching when it goes wrong makes
@@ -941,7 +941,7 @@ Being a dick includes - but is not limited to - the following instances:
 1b. Reserve a copy of this project and tell your teacher
 that it is your own homework - Plagiarism is shame.
 
-If you become rich through modifications, related worksrvices,
+If you become rich through modifications, related work services,
 or supporting the original work, share the love. Only a dick would make loads
 off this work and not buy the original works creator(s) a pint.Code is
 provided with no warranty. Using somebody else's code and bitching when it
@@ -1106,8 +1106,8 @@ diff -Nur <src_dir> <dist_dir>
 ```
 
 ```bash
-patch -p[num] < patchfile
-patch -dry -run -p[num] < patchfile
+patch -p[num] < patchFile
+patch -dry -run -p[num] < patchFile
 ```
 
 ```bash
@@ -1119,7 +1119,7 @@ patch -p1 <../program_2.0.patch
 
 - [cz-cli](https://github.com/commitizen/cz-cli)
 - [cz-conventional-changelog](https://github.com/commitizen/cz-conventional-changelog)
-- [commitlint](https://github.com/conventional-changelog/commitlint)
+- [Commit Linter](https://github.com/conventional-changelog/commitlint)
 
 ### Changelog Generator
 
@@ -1177,7 +1177,7 @@ git reset $(git merge-base master $(git rev-parse --abbrev-ref HEAD))
 - `git merge-base master $(name of your branch)`
   will find the best common ancestor between master and current branch
 - `git reset $(hash of the branch creation)`
-  will undo all the commits, merges, rebases
+  will undo all the commits, merges, rebase
   (preserving changes to the code)
 
 #### git rm
@@ -1236,7 +1236,7 @@ git pull --allow-unrelated-histories
 - add submodule
 
 ```bash
-git submodule add git://github.com/chneukirchen/rack.git ./lib/rack
+git submodule add git://github.com/rack/rack.git ./lib/rack
 cat .gitmodules
 ```
 
@@ -1304,7 +1304,7 @@ git submodule update --init --force --remote
 
 #### git format-patch
 
-mbox 的格式来生成一系列的补丁以便你可以发送到一个邮件列表中
+mailbox 的格式来生成一系列的补丁以便你可以发送到一个邮件列表中
 
 #### git imap-send
 
