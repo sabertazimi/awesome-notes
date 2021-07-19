@@ -502,9 +502,9 @@ const fluxStandardAction = {
   对于只影响单个组件实例的状态,
   应作为 Local State 交由 `useState` 管理,
   而不是将其并入 Global Store.
-- state 变化很复杂时，用 action/state 归一化处理
-- data-input 很复杂时，用 RxJS/observable 归一化处理
-- UI 变化很复杂时，用 component 归一化处理
+- Complex UI Change: 用 component 归一化处理
+- Complex Data Input: 用 RxJS/observable 归一化处理
+- Complex State Change: 用 action/state 归一化处理
 
 ## Awesome Tools
 
