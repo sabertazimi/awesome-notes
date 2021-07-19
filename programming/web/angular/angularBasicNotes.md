@@ -25,7 +25,7 @@
       - [Transformation Operator](#transformation-operator)
       - [Filter Operator](#filter-operator)
       - [Combination Operator](#combination-operator)
-      - [Multicast Operator](#multicast-operator)
+      - [Multi-Cast Operator](#multi-cast-operator)
       - [Error Handling Operator](#error-handling-operator)
       - [Utils Operator](#utils-operator)
   - [Router](#router)
@@ -33,10 +33,10 @@
   - [Event Binding](#event-binding)
   - [Directives](#directives)
     - [Structural Directives](#structural-directives)
-      - [ngFor](#ngfor)
-      - [ngIf](#ngif)
+      - [For Directive](#for-directive)
+      - [If Directive](#if-directive)
     - [Attribute Directives](#attribute-directives)
-      - [ngClass](#ngclass)
+      - [Class Directive](#class-directive)
   - [Styles](#styles)
     - [CSS Class Binding](#css-class-binding)
 
@@ -347,7 +347,7 @@ of(1, 2, 3).pipe(
 - scan
 - groupBy
 - switch
-- swtichMap: 在每次发出时, 会取消前一个内部 Observable (所提供函数的 retun value) 的订阅,
+- switchMap: 在每次发出时, 会取消前一个内部 Observable (所提供函数的 return value) 的订阅,
   然后订阅一个新的 observable. 即当有新的输入时便不再关心之前请求的响应结果.
 
 借助`switchMap`操作符,
@@ -387,11 +387,11 @@ of(1, 2, 3).pipe(
 - zip: 取各来源数据流最后一个值合并为对象
 - combineLatest: 取各来源数据流最后一个值合并为数组
 
-#### Multicast Operator
+#### Multi-Cast Operator
 
-- multicast
-- publish
-- share
+- MultiCast
+- Publish
+- Share
 
 #### Error Handling Operator
 
@@ -450,13 +450,13 @@ export class AppRoutingModule {}
 
 ### Structural Directives
 
-#### ngFor
+#### For Directive
 
 ```html
 <li *ngFor="let hero of heroes">{{hero.name}}</li>
 ```
 
-#### ngIf
+#### If Directive
 
 ```html
 <div *ngIf="selectedHero">Selected</div>
@@ -464,7 +464,7 @@ export class AppRoutingModule {}
 
 ### Attribute Directives
 
-#### ngClass
+#### Class Directive
 
 same to `[ngStyle]`
 

@@ -176,7 +176,7 @@
   - [Awesome Components](#awesome-components)
     - [Landing Page](#landing-page)
     - [Modal](#modal)
-    - [Flexiable Heading](#flexiable-heading)
+    - [Responsive Heading](#responsive-heading)
     - [Table](#table)
     - [Form](#form)
       - [Select](#select)
@@ -207,7 +207,7 @@
       - [Polygon](#polygon)
   - [CSS Variables](#css-variables)
     - [Variables DOM API](#variables-dom-api)
-    - [Scope Variebls](#scope-variebls)
+    - [Scope Variables](#scope-variables)
     - [Invalid and Empty Value in CSS Variables](#invalid-and-empty-value-in-css-variables)
   - [SVG](#svg)
     - [Inline SVG](#inline-svg)
@@ -826,7 +826,7 @@ button:focus-visible {
 }
 ```
 
-- ::before 与 ::after ：使用 contnet 属性生成额外的内容并插入在标记中：
+- ::before 与 ::after ：使用 content 属性生成额外的内容并插入在标记中：
 
 ```css
 a:after {
@@ -980,6 +980,8 @@ For `.container ul li a` selector:
   the ones contained in an element with the class `.container`
 
 ## CSS Normalize
+
+- `*` selector has poor performance
 
 ```css
 html {
@@ -1136,7 +1138,7 @@ float make element specified value of `display`:
 
 ### Fixed Parent
 
-> Floating wont work inside fixed or absolute divs unless specify widthh
+> Floating wont work inside fixed or absolute `div` unless specify width
 
 ```css
 .parent {
@@ -1532,7 +1534,7 @@ _named_ rows and columns
   attach to **parent** css selector
   (controls `margin` of children )
 - `justify-self`/`align-self` inline element within parent,
-  attach to **chilren** css selector
+  attach to **children** css selector
   (effectively adjusts `margin` of children)
 
 ## Column Patterns
@@ -1627,7 +1629,7 @@ margin in the direction of the float will pull the floated element in that direc
 .container .middle {
   float: left;
   width: 100%;
-  background-color: blueviolet;
+  background-color: violet;
 }
 
 .container .left {
@@ -1644,13 +1646,13 @@ margin in the direction of the float will pull the floated element in that direc
   position: relative;
   width: 200px;
   margin-right: -200px;
-  background-color: darkred;
+  background-color: red;
 }
 ```
 
 ## Centering Patterns
 
-[CSS Tricks - Centering CSS Complete Guide](https://css-tricks.com/centering-css-complete-guide/)
+[Centering CSS Complete Guide](https://css-tricks.com/centering-css-complete-guide/)
 
 ### Horizontal Centering Pattern
 
@@ -2721,7 +2723,7 @@ background-position/background-size,
 - pseudo elements (::before and ::after)
 - pseudo elements with animation
   (opacity, scale, translate, width/height, margin, background-position)
-- :hover/:foucs/:target + animation/transform/transition
+- :hover/:focus/:target + animation/transform/transition
 - transform: scale/translate
 - animation-delay
 - width/height
@@ -2739,7 +2741,7 @@ overflow: hidden;
 z-index: -1;
 ```
 
-Changing top/right/bottom/left of pseduo element
+Changing top/right/bottom/left of pseudo element
 can change animation start point
 (e.g bottom: 0, right: 0, change width/height from 0 to 100%,
 size animation will start from bottom-right corner).
@@ -2755,7 +2757,7 @@ size animation will start from bottom-right corner).
 
 ```css
 .element {
-  transition: property durtation timing-function delay;
+  transition: property duration timing-function delay;
   transition: transform 0.5s ease-in-out 0.2s;
 }
 ```
@@ -2763,7 +2765,7 @@ size animation will start from bottom-right corner).
 #### Transition Internal
 
 `transition` take effect only when
-browser detecing different styles between `style` stage.
+browser detecting different styles between `style` stage.
 
 ```js
 // transition not working
@@ -2782,7 +2784,7 @@ requestAnimationFrame(() => {
 
 // transition working
 panel.style.transform = 'scale(0)';
-// `getComutedStyle(element).property` trigger a new `style` stage
+// `getComputedStyle(element).property` trigger a new `style` stage
 getComputedStyle(panel).transform;
 panel.style.transition = 'transform .5s';
 // previous `transform` is `scale(0)`
@@ -2795,7 +2797,7 @@ By specifying the transition on the element itself,
 define the transition to occur in both directions
 (hover on and hover off).
 
-Change `transition` when `:hvoer` etc state bring magic effect:
+Change `transition` when `:hover` etc state bring magic effect:
 
 ```css
 .menu-nav {
@@ -2825,7 +2827,7 @@ Change `transition` when `:hvoer` etc state bring magic effect:
 
 Transition Best Practice:
 with `transition: opacity 0.5s` set,
-fisrt add `.opacity-0` class,
+first add `.opacity-0` class,
 then replace it with `.opacity-1` class.
 Transition animation get trigger
 as css style of element changed (class changed).
@@ -2871,10 +2873,10 @@ which are specified in [CSSOM-VIEW].
 - rotate/X/Y/Z/3d(): deg
 - skew/X/Y(): deg
 - matrix()/matrix3d()
-- transform-orgin: change transform start point
+- transform-origin: change transform start point
   `top bottom center left right`
 - perspective(): 为 **3D** 转换元素定义透视视图
-- keep translate(-50%, -50%) in keyframe transform peoperty list
+- keep translate(-50%, -50%) in keyframe transform property list
   when using it for alignment
 
 一般需要在容器元素上加上以下样式:
@@ -2890,13 +2892,13 @@ which are specified in [CSSOM-VIEW].
 }
 ```
 
-> :hover should not add to transfromed elements
+> :hover should not add to transformed elements
 > :hover should add to parent element
 
 当旋转绝对定位居中的元素时, 需要改变 `transform-origin`:
 
 ```css
-.roate {
+.rotate {
   position: absolute;
   top: 200px;
   left: 50%;
@@ -3005,7 +3007,7 @@ body {
   - alternate/alternate-reverse 不断交替方向
   - reverse 100%->0%方向
 - animation-fill-mode: forwards
-- animatino-play-state: `paused`/`running`
+- animation-play-state: `paused`/`running`
 - DOM events:
   - animationiteration: triggered after each animation iteration
   - animationend: triggered after an animation completes
@@ -3027,7 +3029,7 @@ animation pattern: 利用 `animation-paly-state`
 与 JS 添加 `.animate` 类控制动画开始和停止.
 
 ```css
-.to-animte {
+.to-animate {
   animation: animationName 1.5s linear;
   animation-play-state: paused;
   animation-iteration-count: infinite;
@@ -3359,7 +3361,7 @@ h1 {
 }
 ```
 
-### Flexiable Heading
+### Responsive Heading
 
 ```css
 h1 {
@@ -3845,7 +3847,7 @@ function leave(el, done) {
 
 ### Resizable Component
 
-[Codepen Demo](https://codepen.io/ZeroX-DG/pen/vjdoYe)
+[CodePen Demo](https://codepen.io/ZeroX-DG/pen/vjdoYe)
 
 ```js
 bottom-right:
@@ -3943,7 +3945,7 @@ body {
 如下:
 
 ```js
-const resetScollX = () => {
+const resetScrollX = () => {
   window.scrollTo(0, 0);
 };
 ```
@@ -4059,7 +4061,7 @@ const resetScollX = () => {
 - background triangle
 - clip path triangle
 - border triangle
-- pseudo elment triangle
+- pseudo element triangle
 
 ```css
 .triangle {
@@ -4159,7 +4161,7 @@ const root = document.documentElement;
 const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
 ```
 
-### Scope Variebls
+### Scope Variables
 
 ```html
 <div class="alert alert-info">

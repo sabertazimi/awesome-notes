@@ -5,16 +5,16 @@
 - [Sass Basic Notes](#sass-basic-notes)
   - [Basis](#basis)
     - [Variable](#variable)
-      - [`$` normal variable](#-normal-variable)
-      - [`#` string variable](#-string-variable)
-      - [`&` nesting varilable](#-nesting-varilable)
+      - [Normal Variable](#normal-variable)
+      - [String Variable](#string-variable)
+      - [Nesting Variable](#nesting-variable)
       - [List](#list)
       - [Map](#map)
       - [arguments list](#arguments-list)
       - [`!default` flag](#default-flag)
     - [Directive](#directive)
-      - [Mixin/Include](#mixininclude)
-      - [if-else](#if-else)
+      - [Mixin and Include Directive](#mixin-and-include-directive)
+      - [If Else Directive](#if-else-directive)
       - [for loop](#for-loop)
       - [while loop](#while-loop)
       - [each](#each)
@@ -45,7 +45,7 @@
 
 ### Variable
 
-#### `$` normal variable
+#### Normal Variable
 
 - start with `$`
 
@@ -57,15 +57,15 @@ h1 {
 }
 ```
 
-#### `#` string variable
+#### String Variable
 
 - `#{$var}`: combine with string
 
-#### `&` nesting varilable
+#### Nesting Variable
 
 refer to parent-selector, only use it on:
 
-- pseduo selectors and pseduo elements
+- pseudo selectors and pseudo elements
 
 ```scss
 .button {
@@ -153,7 +153,7 @@ only assign when variables hadn't been assigned
 
 ### Directive
 
-#### Mixin/Include
+#### Mixin and Include Directive
 
 ```scss
 @mixin box-shadow($x, $y, $blur, $c) {
@@ -168,7 +168,7 @@ div {
 }
 ```
 
-#### if-else
+#### If Else Directive
 
 ```scss
 @mixin border-stroke($val) {
@@ -342,8 +342,7 @@ $x: 1;
 
 ### Built-in Functions
 
-[Offical Documentation](https://sass-lang.com/documentation/Sass/Script/Functions.html)
-or [Devdocs Guide](http://devdocs.io/sass-functions)
+[Official Documentation](https://sass-lang.com/documentation/Sass/Script/Functions.html)
 
 #### Color
 
@@ -544,13 +543,13 @@ Each file contains all the related helpers: variables, functions, mixins and pla
 
 ### Sprite Builder
 
-- [Grunticon](https://github.com/filamentgroup/grunticon)
-- [Grumpicon](http://grumpicon.com)
+- [GruntIcon](https://github.com/filamentgroup/grunticon)
+- [GrumpIcon](http://grumpicon.com)
 
 ### Grid System
 
 - [Susy](http://susy.oddbird.net)
-- [Singulartiy](https://github.com/at-import/Singularity)
+- [Singularity](https://github.com/at-import/Singularity)
 - [CSSWizardry Grids](https://github.com/csswizardry/csswizardry-grids)
 
 ### Media Query

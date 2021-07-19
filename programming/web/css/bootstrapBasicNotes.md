@@ -11,7 +11,7 @@
       - [Class](#class)
       - [Structure](#structure)
     - [BreadCrumb](#breadcrumb)
-    - [ScrollSpy](#scrollspy)
+    - [Scroll Spy](#scroll-spy)
   - [Tabs and Pills](#tabs-and-pills)
     - [Tab Pane](#tab-pane)
     - [Tab Pane JS API](#tab-pane-js-api)
@@ -44,13 +44,13 @@
   - [Button](#button)
   - [Jumbotron](#jumbotron)
   - [Icon-Fonts](#icon-fonts)
-  - [Carousel(Slide Show)](#carouselslide-show)
+  - [Carousel](#carousel)
   - [Common Class](#common-class)
     - [color](#color)
     - [size](#size)
     - [state](#state)
-    - [aniatmion](#aniatmion)
-  - [Boostrap 4](#boostrap-4)
+    - [Bootstrap Animation](#bootstrap-animation)
+  - [Bootstrap 4](#bootstrap-4)
     - [Bootstrap Card](#bootstrap-card)
   - [Custom Bootstrap Theme](#custom-bootstrap-theme)
     - [Webpack Setup](#webpack-setup)
@@ -63,7 +63,7 @@
     - [Custom Borders](#custom-borders)
     - [Custom Navbar and Navigation](#custom-navbar-and-navigation)
     - [Custom Dropdown](#custom-dropdown)
-    - [Custom Listgroup](#custom-listgroup)
+    - [Custom List Group](#custom-list-group)
     - [Custom Card](#custom-card)
     - [Custom Breadcrumb](#custom-breadcrumb)
     - [Custom Form](#custom-form)
@@ -242,7 +242,7 @@ body {
 </ol>
 ```
 
-### ScrollSpy
+### Scroll Spy
 
 ```css
 body {
@@ -270,15 +270,9 @@ body {
   </nav>
 
   <!-- 在某个地方 -->
-  <div id="history">
-    ...
-  </div>
-  <div id="corporate">
-    ...
-  </div>
-  <div id="facts">
-    ...
-  </div>
+  <div id="history">...</div>
+  <div id="corporate">...</div>
+  <div id="facts">...</div>
 </body>
 ```
 
@@ -349,7 +343,7 @@ body {
 ### Tab Pane JS API
 
 ```js
-$('#myTabs a').click(function(e) {
+$('#myTabs a').click(function (e) {
   e.preventDefault();
   $(this).tab('show');
 });
@@ -370,7 +364,7 @@ $('#myTabs li:eq(2) a').tab('show'); // Select third tab (0-indexed)
   the same one as for the show.bs.tab event)
 
 ```js
-$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   e.target; // newly activated tab
   e.relatedTarget; // previous active tab
 });
@@ -404,9 +398,7 @@ href/data-target -> id
 </button>
 
 <div class="collapse in" id="collapseExample">
-  <div class="well">
-    ...
-  </div>
+  <div class="well">...</div>
 </div>
 ```
 
@@ -443,15 +435,7 @@ panel-body/list-group
       aria-labelledby="headingOne"
     >
       <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-        terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
-        skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-        single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-        helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-        beer farm-to-table, raw denim aesthetic synth nesciunt you probably
-        haven't heard of them accusamus labore sustainable VHS.
+        Anim cliche, high life terry richardson ad squid.
       </div>
     </div>
   </div>
@@ -478,15 +462,7 @@ panel-body/list-group
       aria-labelledby="headingTwo"
     >
       <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-        terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
-        skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-        single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-        helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-        beer farm-to-table, raw denim aesthetic synth nesciunt you probably
-        haven't heard of them accusamus labore sustainable VHS.
+        Anim cliche, high life terry richardson ad squid.
       </div>
     </div>
   </div>
@@ -513,15 +489,7 @@ panel-body/list-group
       aria-labelledby="headingThree"
     >
       <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-        terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
-        skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-        single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-        helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-        beer farm-to-table, raw denim aesthetic synth nesciunt you probably
-        haven't heard of them accusamus labore sustainable VHS.
+        Anim cliche, high life terry richardson ad squid.
       </div>
     </div>
   </div>
@@ -539,7 +507,7 @@ panel-body/list-group
 <!-- type,format,value -->
 <input id=”” name=””
 type=”text/email/password/radiobutton/checkbox(checked)/submit/number/range/color/date/url”
-value=”(textfield/buttontext)” placeholder=”(默认占位文字)”
+value=”(textfield/buttonText)” placeholder=”(默认占位文字)”
 
 <!-- validate input data -->
 
@@ -559,43 +527,43 @@ min=”(number)” max=”(number)” step=”(步长:指定输入数字必须�
 <form class="form-horizontal" role="form">
   <!-- input -->
   <div class="form-group">
-    <label for="firstname" class="col-sm-2 control-label">First Name</label>
+    <label for="firstName" class="col-sm-2 control-label">First Name</label>
     <div class="col-sm-10">
       <input
         type="text"
         class="form-control"
-        id="firstname"
-        name="firstname"
+        id="firstName"
+        name="firstName"
         placeholder="Enter First Name"
       />
     </div>
   </div>
   <!-- input -->
   <div class="form-group">
-    <label for="lastname" class="col-sm-2 control-label">Last Name</label>
+    <label for="lastName" class="col-sm-2 control-label">Last Name</label>
     <div class="col-sm-10">
       <input
         type="text"
         class="form-control"
-        id="lastname"
-        name="lastname"
+        id="lastName"
+        name="lastName"
         placeholder="Enter Last Name"
       />
     </div>
   </div>
   <!-- input-addon -->
   <div class="form-group">
-    <label for="telnum" class="col-xs-12 col-sm-2 control-label"
-      >Contact Tel.</label
-    >
+    <label for="telNum" class="col-xs-12 col-sm-2 control-label">
+      Contact Tel
+    </label>
     <div class="col-xs-5 col-sm-4 col-md-3">
       <div class="input-group">
         <div class="input-group-addon">(</div>
         <input
           type="tel"
           class="form-control"
-          id="areacode"
-          name="areacode"
+          id="areaCode"
+          name="areaCode"
           placeholder="Area code"
         />
         <div class="input-group-addon">)</div>
@@ -605,21 +573,21 @@ min=”(number)” max=”(number)” step=”(步长:指定输入数字必须�
       <input
         type="tel"
         class="form-control"
-        id="telnum"
-        name="telnum"
+        id="telNum"
+        name="telNum"
         placeholder="Tel. number"
       />
     </div>
   </div>
   <!-- input -->
   <div class="form-group">
-    <label for="emailid" class="col-sm-2 control-label">Email</label>
+    <label for="emailID" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-10">
       <input
         type="email"
         class="form-control"
-        id="emailid"
-        name="emailid"
+        id="emailID"
+        name="emailID"
         placeholder="Email"
       />
     </div>
@@ -1086,7 +1054,7 @@ min=”(number)” max=”(number)” step=”(步长:指定输入数字必须�
 
 ```js
 // manually initialization
-$(function() {
+$(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
 ```
@@ -1140,11 +1108,11 @@ $(function() {
 - data-trigger="focus"
 - data-placement="left"
 - title="left"
-- data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+- data-content="Button content."
 
 ```js
 // manually initialization
-$(function() {
+$(function () {
   $('[data-toggle="popover"]').popover();
 });
 ```
@@ -1157,7 +1125,7 @@ $(function() {
   data-toggle="popover"
   data-placement="left"
   title="left"
-  data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+  data-content="Button Content."
 >
   Popover on left
 </button>
@@ -1169,8 +1137,7 @@ $(function() {
   data-toggle="popover"
   data-placement="top"
   title="top"
-  data-content="Vivamus
-sagittis lacus vel augue laoreet rutrum faucibus."
+  data-content="Button content."
 >
   Popover on top
 </button>
@@ -1182,8 +1149,7 @@ sagittis lacus vel augue laoreet rutrum faucibus."
   data-toggle="popover"
   data-placement="bottom"
   title="bottom"
-  data-content="Vivamus
-sagittis lacus vel augue laoreet rutrum faucibus."
+  data-content="Button content."
 >
   Popover on bottom
 </button>
@@ -1195,7 +1161,7 @@ sagittis lacus vel augue laoreet rutrum faucibus."
   data-toggle="popover"
   data-placement="right"
   title="right"
-  data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+  data-content="Button content."
 >
   Popover on right
 </button>
@@ -1243,9 +1209,7 @@ data-dismiss ="modal"
         </button>
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
+      <div class="modal-body">...</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">
           Close
@@ -1281,9 +1245,9 @@ data-dismiss ="modal"
   class="btn btn-primary"
   data-toggle="modal"
   data-target="#exampleModal"
-  data-whatever="@getbootstrap"
+  data-whatever="@getBootstrap"
 >
-  Open modal for @getbootstrap
+  Open modal for @getBootstrap
 </button>
 
 <div
@@ -1367,9 +1331,7 @@ data-dismiss ="modal"
   <div class="container">
     <div class="main">
       <h1>We are Broadway</h1>
-      <a href="#" class="btn-main">
-        Get started
-      </a>
+      <a href="#" class="btn-main"> Get started </a>
     </div>
   </div>
 </div>
@@ -1382,7 +1344,9 @@ data-dismiss ="modal"
 <i class="fa fa-phone/fa-fax/fa-envelope"></i>
 ```
 
-## Carousel(Slide Show)
+## Carousel
+
+Slide Show:
 
 ```html
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -1401,15 +1365,11 @@ data-dismiss ="modal"
   <div class="carousel-inner" role="listbox">
     <div class="item active">
       <img src="..." alt="..." />
-      <div class="carousel-caption">
-        ...
-      </div>
+      <div class="carousel-caption">...</div>
     </div>
     <div class="item">
       <img src="..." alt="..." />
-      <div class="carousel-caption">
-        ...
-      </div>
+      <div class="carousel-caption">...</div>
     </div>
     ...
   </div>
@@ -1479,13 +1439,13 @@ Cycles to the next item.
 - active
 - disabled
 
-### aniatmion
+### Bootstrap Animation
 
 - collapse
 - fade
 - in
 
-## Boostrap 4
+## Bootstrap 4
 
 ### Bootstrap Card
 
@@ -1566,10 +1526,10 @@ const styleLoader = [
   {
     loader: 'css-loader',
     options: {
-      minimize: !devMode
-    }
+      minimize: !devMode,
+    },
   },
-  'postcss-loader'
+  'postcss-loader',
 ];
 
 if (useSass) {
@@ -1578,18 +1538,18 @@ if (useSass) {
 
 module.exports = {
   entry: {
-    main: './src/index.js'
+    main: './src/index.js',
   },
   output: {
     filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, 'build')
+    path: path.resolve(__dirname, 'build'),
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader']
+        use: ['babel-loader', 'eslint-loader'],
       },
       {
         test: /\.html$/,
@@ -1597,34 +1557,34 @@ module.exports = {
           {
             loader: 'html-loader',
             options: {
-              minimize: !devMode
-            }
-          }
-        ]
+              minimize: !devMode,
+            },
+          },
+        ],
       },
       {
         test: /\.(css|scss)$/,
-        use: [...styleLoader]
-      }
-    ]
+        use: [...styleLoader],
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin('build'),
     new HtmlWebpackPlugin({
       hash: true,
       template: './src/index.html',
-      filename: './index.html'
+      filename: './index.html',
     }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
     }),
-    new StyleLintPlugin()
+    new StyleLintPlugin(),
   ],
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
 };
 ```
 
@@ -1834,7 +1794,7 @@ $dropdown-item-padding-y: 0.5rem;
 $dropdown-item-padding-x: 3rem;
 ```
 
-### Custom Listgroup
+### Custom List Group
 
 ```css
 $list-group-border-color: $primary;
