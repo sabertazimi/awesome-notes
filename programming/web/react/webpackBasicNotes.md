@@ -41,7 +41,7 @@
 ### Watch Options
 
 ```bash
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+echo fs.notify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 ```
 
@@ -240,7 +240,7 @@ use: [
       poolParallelJobs: 50,
 
       // name of the pool
-      // can be used to create different pools with elsewise identical options
+      // can be used to create different pools with elseWise identical options
       name: 'my-pool',
     },
   },
@@ -452,7 +452,7 @@ module.exports = {
 
 ```js
 new HardSourceWebpackPlugin({
-  // Either an absolute path or relative to webpack's options.context.
+  // Either an absolute path or relative to webpack options.context.
   cacheDirectory: 'node_modules/.cache/hard-source/[confighash]',
   // Either a string of object hash function given a webpack config.
   configHash: function(webpackConfig) {
@@ -636,5 +636,5 @@ node --trace-deprecation node_modules/webpack/bin/webpack.js
 
 ## Reference
 
-- [Webpakc 4 Tutorial](https://nystudio107.com/blog/an-annotated-webpack-4-config-for-frontend-web-development)
+- [Webpack 4 Tutorial](https://nystudio107.com/blog/an-annotated-webpack-4-config-for-frontend-web-development)
 - [Custom Plugin](https://juejin.cn/post/6870055445034172424)

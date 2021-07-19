@@ -18,7 +18,7 @@
     - [Dialog](#dialog)
   - [Electron Security](#electron-security)
   - [Electron Builder](#electron-builder)
-  - [Electron Cheatsheet](#electron-cheatsheet)
+  - [Electron Cheat Sheet](#electron-cheat-sheet)
 
 <!-- /TOC -->
 
@@ -146,7 +146,7 @@ global.desktop = {
 
 ## Electron Builder
 
-## Electron Cheatsheet
+## Electron Cheat Sheet
 
-- [Awesome Live Cheatsheet](https://github.com/ConardLi/electron-react)
+- [Awesome Live CheatSheet](https://github.com/ConardLi/electron-react)
 - [Electron API Demo App](https://github.com/demopark/electron-api-demos-Zh_CN)

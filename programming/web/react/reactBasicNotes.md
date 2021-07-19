@@ -12,13 +12,13 @@
       - [Component Elements of Same Type](#component-elements-of-same-type)
     - [React Fiber Effects](#react-fiber-effects)
     - [React Commit Stage](#react-commit-stage)
-      - [BeforeMutation Stage](#beforemutation-stage)
+      - [Before Mutation Stage](#before-mutation-stage)
       - [Mutation Stage](#mutation-stage)
       - [Layout Stage](#layout-stage)
       - [useEffect Execution Time](#useeffect-execution-time)
   - [Props and State](#props-and-state)
     - [setState](#setstate)
-    - [componentDidMount()](#componentdidmount)
+    - [componentDidMount](#componentdidmount)
     - [Props Validation](#props-validation)
   - [Element and Component](#element-and-component)
     - [JSX](#jsx)
@@ -92,7 +92,7 @@
   - [Portals](#portals)
   - [React Performance](#react-performance)
     - [Re-rendering Problem](#re-rendering-problem)
-    - [Code Spliting](#code-spliting)
+    - [Code Splitting](#code-splitting)
   - [Server Side Rendering](#server-side-rendering)
     - [Pros of SSR](#pros-of-ssr)
       - [Performance](#performance)
@@ -107,7 +107,7 @@
     - [Enzyme](#enzyme)
   - [Create React App](#create-react-app)
     - [React Scripts](#react-scripts)
-      - [React Scripts Initilization](#react-scripts-initilization)
+      - [React Scripts Initialization](#react-scripts-initialization)
       - [React Scripts Commands](#react-scripts-commands)
       - [React Scripts Configuration](#react-scripts-configuration)
     - [Other Packages in CRA Repo](#other-packages-in-cra-repo)
@@ -160,9 +160,10 @@ React Fiber 的目标是提高其在动画、布局和手势等领域的适用�
 
 #### Component Elements of Same Type
 
-- update the props to match the new element
-- methods: `getDerivedStateFromProps`
-- then `render` called, diff algorithm recurses on the old result and the new result
+- Update the props to match the new element
+- Methods: `getDerivedStateFromProps`
+- Then `render` called,
+  diff algorithm recursively on the old result and the new result.
 
 ### React Fiber Effects
 
@@ -182,7 +183,7 @@ then update effects to real DOM when `Commit` stage.
 
 ### React Commit Stage
 
-#### BeforeMutation Stage
+#### Before Mutation Stage
 
 #### Mutation Stage
 
@@ -216,9 +217,8 @@ after three stages of `Commit`.
   可以提升 React 性能.
   未来会在更多的可以 Batched Updates 的场景下将 setState 设为异步执行,
   所以编写代码时最好将 setState 总是当做异步执行函数.
-
-Batch Update: 事件处理,
-Not Bacth Update: Async Work (setTimeout/Promise.then)
+- Batch Update: 事件处理.
+- Not Batch Update: Async Work (setTimeout/Promise.then)
 
 ```js
 class Example extends React.Component {
@@ -253,7 +253,7 @@ class Example extends React.Component {
 // => 0 0 2 3
 ```
 
-### componentDidMount()
+### componentDidMount
 
 - don't `setState` directly in this method
 - can use `setInterval`/`setTimeout`/AJAX request/`fetch` in this method,
@@ -783,7 +783,7 @@ const Button = ({ color, children }) => {
 - 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
   但是每次都是返回新的函数, 使用 `useCallback`, 可以让它使用上次的函数.
   在虚拟 DOM 更新过程中, 如果事件句柄相同, 那么就不用每次都进行
-  `removeEventListner` 与 `addEventListner`.
+  `removeEventListener` 与 `addEventListener`.
 - `useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`
 
 ```js
@@ -2254,7 +2254,7 @@ const ReservationItem = <ReservationCard />;
 const reservationItem = <ReservationCard />;
 ```
 
-- setting displayname for HOC
+- setting displayName for HOC
 
 ```js
 // bad
@@ -2336,7 +2336,7 @@ render() {
   superLongParam="bar"
   anotherSuperLongParam="baz"
 >
-  <Quux />
+  <Bar />
 </Foo>
 
 // bad
@@ -2453,15 +2453,15 @@ render() {
 - 组件细分化
 - 组件
   - 只传入必要的 props
-  - 使用 immutablejs 或者 react.addons.update 实现不可变数据结构
+  - 使用 Immutable.js 或者 react.addons.update 实现不可变数据结构
   - 结合 React.addons.PureRenderMixin 来减少 reRender
 - 在 shouldComponentUpdate 中优化组件减少 reRender
 - 使用 context
 - 少做 dom 操作，始终让 UI 能够基于 State 还原
 - 在 store 和 action 中不 dom 操作或者访问 window.属性，只与数据打交道
 - 推荐使用 ES6
-- npm 的 debug 包，log 组件渲染的每个步骤和动作
-- [Singel](https://github.com/diegohaz/singel)
+- npm 的 debug 包, log 组件渲染的每个步骤和动作
+- [Single Element Pattern](https://github.com/diegohaz/singel)
 
 ## Modern React
 
@@ -2632,7 +2632,7 @@ class ErrorBoundary extends React.Component {
         <div>
           <h1>Oops, something went wrong :(</h1>
           <p>The error: {this.state.error.toString()}</p>
-          <p>Where it occured: {this.state.info.componentStack}</p>
+          <p>Where it occurred: {this.state.info.componentStack}</p>
         </div>
       );
     }
@@ -2980,7 +2980,7 @@ function App(items) {
 }
 ```
 
-### Code Spliting
+### Code Splitting
 
 ```js
 import React, { Component } from 'react';
@@ -3095,7 +3095,7 @@ import React from 'react';
 import ReactDOMServer from "react-dom/server";
 import App from './App.js';
 
-export deafult () => ReactDOMServer.renderToString(<App />);
+export default () => ReactDOMServer.renderToString(<App />);
 ```
 
 index.html.js
@@ -3327,7 +3327,7 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 
 ### React Scripts
 
-#### React Scripts Initilization
+#### React Scripts Initialization
 
 Initialization in `react-scripts/scripts/init.js`:
 
@@ -3453,7 +3453,7 @@ npx create-react-app my-app --template [template-name]
 
 ### Deployment
 
-- [Offical Documentation](https://facebook.github.io/create-react-app/docs/deployment)
+- [Official Documentation](https://facebook.github.io/create-react-app/docs/deployment)
 - [Deploy Subdirectory](https://medium.com/@svinkle/how-to-deploy-a-react-app-to-a-subdirectory-f694d46427c1)
 
 ## Styled Component
@@ -3560,7 +3560,7 @@ const GreenButton = Button.extend`
 // Use our styles
 const WrapperContainer = () => (
   <div>
-    <Button>Defaul button</Button>
+    <Button>Default button</Button>
     <RedButton>Red button</RedButton>
     <GreenButton>Green button</GreenButton>
   </div>
@@ -3610,7 +3610,7 @@ const Button = styled.button`
 
 const WrapperContainer = () => (
   <div>
-    <Button>Defaul button</Button>
+    <Button>Default button</Button>
     {/* Button with prop "red" */}
     <Button red>Red button</Button>
     {/* Button with prop "green" */}

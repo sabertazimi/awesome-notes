@@ -7,7 +7,7 @@
     - [Basic Steps](#basic-steps)
     - [Test Steps](#test-steps)
     - [Publish Steps](#publish-steps)
-      - [Semantic Version(Semver)](#semantic-versionsemver)
+      - [Semantic Version](#semantic-version)
     - [Tab Completion](#tab-completion)
     - [Basic Command](#basic-command)
     - [Link Command](#link-command)
@@ -19,7 +19,7 @@
       - [Process Events](#process-events)
       - [Process Methods](#process-methods)
         - [Get Info](#get-info)
-        - [Message Loop/Counter](#message-loopcounter)
+        - [Message Loop and Counter](#message-loop-and-counter)
         - [Child Process](#child-process)
   - [File Module](#file-module)
     - [FS API](#fs-api)
@@ -30,7 +30,7 @@
     - [Export Modules](#export-modules)
     - [CallBack Function](#callback-function)
   - [Http Module](#http-module)
-    - [Resquest Object](#resquest-object)
+    - [Request Object](#request-object)
       - [属性](#属性)
     - [Response Object](#response-object)
       - [类型](#类型)
@@ -41,7 +41,7 @@
     - [Sample](#sample)
   - [Net Module](#net-module)
     - [Socket Object](#socket-object)
-    - [Socker.IO](#sockerio)
+    - [Socket IO](#socket-io)
     - [Basic Methods](#basic-methods)
   - [URL Module](#url-module)
     - [Basic Method](#basic-method)
@@ -50,20 +50,20 @@
   - [Security Module](#security-module)
     - [Crypto](#crypto)
       - [Hash API](#hash-api)
-      - [Hmac API](#hmac-api)
+      - [HMAC API](#hmac-api)
       - [公钥加密](#公钥加密)
   - [Async Modules](#async-modules)
     - [Cluster Module](#cluster-module)
   - [Test Modules](#test-modules)
     - [assert](#assert)
-  - [Envrionment](#envrionment)
-  - [package.json](#packagejson)
+  - [Environment](#environment)
+  - [Package JSON](#package-json)
     - [bin](#bin)
     - [version](#version)
 
 <!-- /TOC -->
 
-- Main ./index.js, ./server.js, or ./yourentryfile.js in the root
+- Main ./index.js, ./server.js, or ./yourEntryFile.js in the root
 - Supporting files in ./lib/
 - Static HTTP files in ./public/
 - Views or templates in ./views/
@@ -89,7 +89,7 @@ npm init --scope=<username>
 
 # 修改 package.json 可再次运行此命令(不接模块名为自动更新)
 npm install -S <package>
-npm install -D <pacakge>
+npm install -D <package>
 npm prune      # 清除无用包
 npm rm --save  # --save 删除文件的同时更新 package.json 文件
 
@@ -122,7 +122,9 @@ npm dist-tag rm <pkg> <tag>
 npm dist-tag ls [<pkg>]
 ```
 
-#### Semantic Version(Semver)
+#### Semantic Version
+
+Semver:
 
 - patch release: bugfix and other minor changes
 - minor release: new features not breaking API(backward compatible)
@@ -261,7 +263,7 @@ process.stdin.pipe(process.stdout);
 - process.cwd()
 - process.memoryUsage()
 
-##### Message Loop/Counter
+##### Message Loop and Counter
 
 - process.nextTick()
 
@@ -269,7 +271,7 @@ process.stdin.pipe(process.stdout);
 
 - cp.spawn(): 创建子进程, 拥有独立的 stdin/stdout/stderr 文件描述符
 - cp.exec(): 创建子进程, 并会在进程结束时调用传入的回调函数
-- [execa](https://github.com/sindresorhus/execa)
+- [Exec Library](https://github.com/sindresorhus/execa)
 
 ```js
 var cp = require('child_process');
@@ -302,7 +304,7 @@ cp.exec(
 - fs.readdir
 - fs.readFile
 - fs.readFileSync
-- fs.exsits
+- fs.exists
 
 ```js
 var fs = require('fs');
@@ -426,7 +428,7 @@ server.on('request', function(req, res) {
 
 ## Http Module
 
-### Resquest Object
+### Request Object
 
 #### 属性
 
@@ -558,7 +560,7 @@ socket.end(data);
 socket.end();
 ```
 
-### Socker.IO
+### Socket IO
 
 ```js
 var http = require('http'),
@@ -576,7 +578,7 @@ server.listen(8080);
 var socket = io.listen(server);
 
 // 命名空间
-socket.of('/upandrunning').on('connection', function (client) {
+socket.of('/upAndRunning').on('connection', function (client) {
   console.log('Client connected to Up and Running namespace.');
   client.send("Welcome to 'Up and Running'");
 });
@@ -678,7 +680,7 @@ md5.update('foo');
 md5.digest('hex'); // 'acbd18db4cc2f85cedef654fccc4a4d8'
 ```
 
-#### Hmac API
+#### HMAC API
 
 ```bash
 openssl genrsa -out key.pem 1024
@@ -692,7 +694,7 @@ var crypto = require('crypto'),
   hmac = crypto.createHmac('sha1', key);
 
 hmac.update('bar');
-hmac.digest('hex'); // '7fdfeniw012lsda9129dfd9123'
+hmac.digest('hex'); // '7x123'
 ```
 
 #### 公钥加密
@@ -730,7 +732,7 @@ if (cluster.isMaster) {
   //Server
   http
     .Server(function (req, res) {
-      //mess up 1 in 200 reqs
+      //mess up 1 in 200 request
       if (Math.floor(Math.random() * 200) === 4) {
         console.log('Stopped ' + process.pid + ' from ever finishing');
         while (true) {
@@ -791,7 +793,7 @@ assert.notEqual(1, true, 'Truthy');
 assert.ok(0, 'Zero is not truthy');
 ```
 
-## Envrionment
+## Environment
 
 ```js
 // .env file (added to .gitignore)
@@ -820,7 +822,7 @@ const { port } = require('./config');
 console.log(`Your port is ${port}`); // 8626
 ```
 
-## package.json
+## Package JSON
 
 ### bin
 

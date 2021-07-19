@@ -6,10 +6,10 @@
   - [Installation](#installation)
     - [Config](#config)
     - [Webpack for TypeScript](#webpack-for-typescript)
-    - [Intergration](#intergration)
+    - [Integration](#integration)
   - [Modules](#modules)
-    - [globals.d.ts](#globalsdts)
-    - [lib.d.ts](#libdts)
+    - [Globals Definition](#globals-definition)
+    - [Library Definition](#library-definition)
   - [Basic Types](#basic-types)
   - [Enum Types](#enum-types)
     - [Number Enum](#number-enum)
@@ -31,7 +31,7 @@
   - [Literal Types](#literal-types)
   - [Moving Types](#moving-types)
   - [Access Modifiers](#access-modifiers)
-    - [public/proteced/private](#publicprotecedprivate)
+    - [Member Access Modifiers](#member-access-modifiers)
     - [readonly](#readonly)
   - [Generic Types](#generic-types)
     - [Generic Function](#generic-function)
@@ -63,7 +63,7 @@
 
 ### Config
 
-- [Types Defination](https://github.com/DefinitelyTyped/DefinitelyTyped)
+- [Types Definition](https://github.com/DefinitelyTyped/DefinitelyTyped)
 
 ```bash
 npm i -D typescript awesome-typescript-loader source-map-loader
@@ -115,8 +115,8 @@ npm i -D react react-dom @types/react @types/react-dom
     /* Source Map Options */
     "sourceRoot": "./", // 指定调试器应该找到 TypeScript 文件而不是源文件的位置
     "mapRoot": "./", // 指定调试器应该找到映射文件而不是生成文件的位置
-    "inlineSourceMap": true, // 生成单个 soucemaps 文件，而不是将 sourcemaps 生成不同的文件
-    "inlineSources": true, // 将代码与 sourcemaps 生成到一个文件中
+    "inlineSourceMap": true, // 生成单个 sourcemap 文件，而不是将 sourcemaps 生成不同的文件
+    "inlineSources": true, // 将代码与 sourcemap 生成到一个文件中
 
     /* 其他选项 */
     "experimentalDecorators": true, // 启用装饰器
@@ -158,7 +158,7 @@ module.exports = {
 };
 ```
 
-### Intergration
+### Integration
 
 - [TSX-Boilerplate](@typescript-eslint/parser)
 - [ESLint for TypeScript](https://github.com/typescript-eslint/typescript-eslint)
@@ -168,7 +168,9 @@ module.exports = {
 
 - [Types Search](https://microsoft.github.io/TypeSearch/)
 
-### globals.d.ts
+### Globals Definition
+
+globals.d.ts:
 
 ```js
 declare module '*.css';
@@ -179,7 +181,9 @@ declare module '*.css';
 npm i -D @types/react @types/react-dom
 ```
 
-### lib.d.ts
+### Library Definition
+
+lib.d.ts:
 
 ```json
 "compilerOptions": {
@@ -252,7 +256,7 @@ export enum EvidenceTypeEnum {
 ```js
 enum Weekday {
   Monday,
-  Tuseday,
+  Tuesday,
   Wednesday,
   Thursday,
   Friday,
@@ -611,7 +615,9 @@ color = 'anythingElse'; // Error
 
 ## Access Modifiers
 
-### public/proteced/private
+### Member Access Modifiers
+
+Public, Protected and Private:
 
 ```js
 class Singleton {
@@ -633,7 +639,7 @@ class Singleton {
 
 let someThing = new Singleton(); // Error: constructor of 'singleton' is private
 
-let instacne = Singleton.getInstance(); // do some thing with the instance
+let instance = Singleton.getInstance(); // do some thing with the instance
 ```
 
 ### readonly
@@ -713,11 +719,11 @@ class Something extends React.Component<{ foo: number }, { baz: number }> {
 
 ```js
 function reverse<T>(items: T[]): T[] {
-  const toreturn = [];
+  const toReturn = [];
   for (let i = items.length - 1; i >= 0; i--) {
-    toreturn.push(items[i]);
+    toReturn.push(items[i]);
   }
-  return toreturn;
+  return toReturn;
 }
 ```
 
@@ -806,7 +812,7 @@ const idNum = id as { (x: number): number };
 多种类型之一
 
 ```js
-function formatCommandline(command: string[] | string) {
+function formatCommandLine(command: string[] | string) {
   let line = '';
   if (typeof command === 'string') {
     line = command.trim();
@@ -965,7 +971,7 @@ function TimesTamped<TBase extends Constructor>(Base: TBase) {
 }
 
 // 添加属性和方法的混合例子
-function Activatable<TBase extends Constructor>(Base: TBase) {
+function ActiveTable<TBase extends Constructor>(Base: TBase) {
   return class extends Base {
     isActivated = false;
 
@@ -991,8 +997,8 @@ class User {
 // 添加 TimesTamped 的 User
 const TimestampedUser = TimesTamped(User);
 
-// Tina TimesTamped 和 Activatable 的类
-const TimestampedActivatableUser = TimesTamped(Activatable(User));
+// Tina TimesTamped 和 ActiveTable 的类
+const TimestampedActiveTableUser = TimesTamped(ActiveTable(User));
 
 //////////
 // 使用组合类
@@ -1001,9 +1007,9 @@ const TimestampedActivatableUser = TimesTamped(Activatable(User));
 const timestampedUserExample = new TimestampedUser();
 console.log(timestampedUserExample.timestamp);
 
-const timestampedActivatableUserExample = new TimestampedActivatableUser();
-console.log(timestampedActivatableUserExample.timestamp);
-console.log(timestampedActivatableUserExample.isActivated);
+const timestampedActiveTableUserExample = new TimestampedActiveTableUser();
+console.log(timestampedActiveTableUserExample.timestamp);
+console.log(timestampedActiveTableUserExample.isActivated);
 ```
 
 ## Closure
@@ -1190,7 +1196,7 @@ class MyComponent extends React.Component {
 
 ## React with TypeScript
 
-- [React TypeScript Cheatsheet](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)
+- [React TypeScript CheatSheet](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)
 
 ### Props Types
 

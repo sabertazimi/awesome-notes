@@ -511,7 +511,7 @@ export const hyphenate = cached(
 /**
  * Simple bind polyfill for environments that do not support it,
  * e.g., PhantomJS 1.x. Technically, we don't need this anymore
- * since native bind is now performant enough in most browsers.
+ * since native bind is now performance enough in most browsers.
  * But removing it would mean breaking code that was able to run in
  * PhantomJS 1.x, so this must be kept for backward compatibility.
  */
@@ -744,7 +744,7 @@ for (const key in dirs) {
 
 #### Merge Options
 
-- 对于 el、propsData 选项使用默认的合并策略 defaultStrat
+- 对于 el、propsData 选项使用默认的合并策略 defaultStart
 - 对于 data 选项，使用 mergeDataOrFn 函数进行处理，最终结果是 data 选项将变成一个函数，且该函数的执行结果为真正的数据对象
 - 对于 生命周期钩子 选项，将合并成数组，使得父子选项中的钩子函数都能够被执行
 - 对于 directives、filters 以及 components 等资源选项，
@@ -752,8 +752,8 @@ for (const key in dirs) {
 - 对于 watch 选项的合并处理，类似于生命周期钩子，如果父子选项都有相同的观测字段，将被合并为数组，这样观察者都将被执行
 - 对于 props、methods、inject、computed 选项，父选项始终可用，但是子选项会覆盖同名的父选项字段
 - 对于 provide 选项，其合并策略使用与 data 选项相同的 mergeDataOrFn 函数
-- 最后，以上没有提及到的选项都将使默认选项 defaultStrat
-- 最最后，默认合并策略函数 defaultStrat 的策略是：只要子选项不是 undefined 就使用子选项，否则使用父选项
+- 最后，以上没有提及到的选项都将使默认选项 defaultStart
+- 最最后，默认合并策略函数 defaultStart 的策略是：只要子选项不是 undefined 就使用子选项，否则使用父选项
 
 ### Reactive Data Pattern
 
@@ -808,7 +808,7 @@ Array.from(el.getElementsByTagName('input'))
 
 ### Navigation Guards
 
-- [Offical Documentation of Router Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html)
+- [Official Documentation of Router Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html)
 
 ## Vue CLI
 
@@ -828,7 +828,7 @@ with a bunch of `data-v` weirdness in front of it.
 /* bulma-custom.scss */
 @import './variables.scss';
 
-/* UTILTIES */
+/* UTILITIES */
 @import 'bulma/sass/utilities/animations.sass';
 @import 'bulma/sass/utilities/controls.sass';
 @import 'bulma/sass/utilities/mixins.sass';

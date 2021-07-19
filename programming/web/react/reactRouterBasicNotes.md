@@ -9,7 +9,7 @@
     - [Private Route](#private-route)
     - [URL Params](#url-params)
     - [Component Props](#component-props)
-    - [Link/URL Props](#linkurl-props)
+    - [Link and URL Props](#link-and-url-props)
     - [Clean URLs](#clean-urls)
     - [Change Route](#change-route)
   - [Deployment](#deployment)
@@ -79,7 +79,7 @@ render(
   <Router>
     <Route path="/" component={App}>
       <Route path="/repos" component={Repos}>
-        <Route path="/reops/:userName/:repoName" component={Repo} />
+        <Route path="/repos/:userName/:repoName" component={Repo} />
       </Route>
     </Route>
   </Router>,
@@ -127,7 +127,7 @@ const PrivateRoute = ({
 
 ### Component Props
 
-- subroutes
+- subRoutes
 - id/size
 - etc...
 
@@ -135,7 +135,7 @@ const PrivateRoute = ({
 <Route render={props => <Component {...props} />} />
 ```
 
-### Link/URL Props
+### Link and URL Props
 
 ```jsx
 to={
@@ -159,7 +159,7 @@ replace hashHistory for browserHistory
 ### Change Route
 
 - onEnter = { () => store.dispatch(createRouteAction(params))}
-- return `<Redirect />` conditionaly and `withRouter` wrapper (`this.props.history.push('nextURL')`)
+- return `<Redirect />` conditionally and `withRouter` wrapper (`this.props.history.push('nextURL')`)
 
 ```jsx
 class Login = () => {
@@ -281,7 +281,7 @@ location / {
 ## A Simple React Router
 
 - `<Route>` instances listen to `popstate` event to `forceUpdate`.
-- When click `<Link>`/`<Reditect>`, `historyPush` or `historyReplace` get called,
+- When click `<Link>`/`<Redirect>`, `historyPush` or `historyReplace` get called,
   `<Route>` instances re-match and re-render.
 
 ```jsx

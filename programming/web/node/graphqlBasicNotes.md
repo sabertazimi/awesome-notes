@@ -2,18 +2,18 @@
 
 ## Better REST
 
-- no overfetching
-- no underfetching (need multiple RESTful request)
-- flexible (clients can specify their exact data requirements)
+- No OverFetching
+- No UnderFetching (need multiple RESTful request)
+- Flexible (clients can specify their exact data requirements)
 - strong `Schema` and `Type System` (just like database)
 
-## GraphiQL
+## GraphQL Client
 
 - `ctrl+enter`: run query
 - `ctrl+space`: auto complete in `()` or `{}`
 - `shift+ctrl+p`: prettify
 
-## Basic Syntax
+## Basic Query Syntax
 
 ```sql
 {

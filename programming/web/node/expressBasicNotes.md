@@ -10,7 +10,7 @@
     - [Useful Middleware](#useful-middleware)
   - [Http](#http)
     - [Res](#res)
-      - [res.local](#reslocal)
+      - [Response Local](#response-local)
     - [Req](#req)
 
 <!-- /TOC -->
@@ -67,7 +67,7 @@ app.use(middlewareFunction);
 
 ### Res
 
-#### res.local
+#### Response Local
 
 res.locals 中的所有属性都会传递到模板的上下文中
 

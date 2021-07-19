@@ -176,7 +176,7 @@
   - [Awesome Components](#awesome-components)
     - [Landing Page](#landing-page)
     - [Modal](#modal)
-    - [Responsive Heading](#responsive-heading)
+    - [Flexible Heading](#flexible-heading)
     - [Table](#table)
     - [Form](#form)
       - [Select](#select)
@@ -3361,7 +3361,7 @@ h1 {
 }
 ```
 
-### Responsive Heading
+### Flexible Heading
 
 ```css
 h1 {

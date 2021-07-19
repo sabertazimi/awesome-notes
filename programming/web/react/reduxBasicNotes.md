@@ -228,7 +228,7 @@ const store = createStoreWithMiddleware(combineReducers(reducers));
 
 function addFave(tweetId) {
   return (dispatch, getState) => {
-    if (getState.tweets[tweetId] && getState.tweets[tweetId].faved)
+    if (getState.tweets[tweetId] && getState.tweets[tweetId].liked)
         return;
 
     dispatch({type: IS_LOADING});
@@ -268,7 +268,7 @@ const applyMiddleware = (...middlewares) => store => {
 };
 
 const createStore = (reducer, middleware) => {
-  // clousre for storing global state
+  // closure for storing global state
   let state = undefined;
   const subscribers = [];
   const coreDispatch = action => {
@@ -309,7 +309,7 @@ const createStore = (reducer, middleware) => {
   }
 
   coreDispatch({
-    type: INIT_MEDUX
+    type: INIT_REDUX
   });
   return store;
 };
@@ -408,14 +408,12 @@ export const connect = (
 
 ## Redux Best Practice
 
-- 用 ES6, webpack, react-hot-loader....详细内容参照 MERN v2.0
-  Build production ready universal apps easily
-- 区分 smart component (know the state) 和 dump component (stateless)
-- component 里不要出现任何 async calls，交给 action creator 来做
-- reducer 尽量简单，复杂的交给 action creator
-- reducer 里 return 新 state 的时候：
+- 区分 Smart Component (know the state) 和 Dump Component (stateless)
+- Component 里不要出现任何 async calls，交给 action creator 来做
+- Reducer 尽量简单，复杂的交给 action creator
+- Reducer 里 return 新 state 的时候：
 - [Redux Devtools](https://github.com/gaearon/redux-devtools)
-- [Redux React Styleguide](https://github.com/iraycd/React-Redux-Styleguide)
+- [Redux React Style Guide](https://github.com/iraycd/React-Redux-Styleguide)
 - [Simple Redux API](https://github.com/rematch/rematch)
 
 ```js
@@ -521,10 +519,10 @@ const fluxStandardAction = {
 
 #### Middleware Tool
 
-- redux-thunk
-- [redux-sage](https://github.com/yelouafi/redux-saga)
-- [redux-promise](https://github.com/acdlite/redux-promise)
-- [redux-diff-loger](https://github.com/fcomb/redux-diff-logger)
+- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
+- [Redux Sage](https://github.com/yelouafi/redux-saga)
+- [Redux Promise](https://github.com/acdlite/redux-promise)
+- [Redux Diff Logger](https://github.com/fcomb/redux-diff-logger)
 
 #### State Tool
 

@@ -16,12 +16,11 @@
     - [Mouse](#mouse)
     - [Keyboard](#keyboard)
     - [Form](#form)
-    - [Document/Window](#documentwindow)
+    - [Document and Window Event](#document-and-window-event)
     - [常用多态函数](#常用多态函数)
-    - [window](#window)
-  - [Ajax Module](#ajax-module)
-    - [\$.getJSON](#\getjson)
-    - [\$.ajax](#\ajax)
+  - [AJAX Module](#ajax-module)
+    - [JSON API](#json-api)
+    - [AJAX API](#ajax-api)
   - [Animation Module](#animation-module)
     - [Tween Object](#tween-object)
 
@@ -204,15 +203,15 @@ createDocumentFragment:
 然后把文档碎片的内容一次性添加到 document 中，提升性能
 
 ```js
-function domManip(parentEles, target, callback) {
-  const fragment = buildFragment([target], parentEles);
-  callback.call(parentEles);
+function domManipulation(parentElements, target, callback) {
+  const fragment = buildFragment([target], parentElements);
+  callback.call(parentElements);
 }
 
 
 ...
 after() {
-  return this.domManip(arguments, function (elem) {
+  return this.domManipulation(arguments, function (elem) {
     this.parentNode.insertBefore(elem, this.nextSibling);
   });
 }
@@ -268,7 +267,7 @@ $('selector').prop('disable', 'true');
 ### Mouse
 
 - click
-- dblclick
+- dbclick
 - mouseenter
 - mouseleave
 
@@ -285,21 +284,12 @@ $('selector').prop('disable', 'true');
 - focus
 - blur
 
-### Document/Window
+### Document and Window Event
 
 - load
 - resize
 - scroll
 - unload
-
-### 常用多态函数
-
-```js
-data、html、css
-$(document).ready(function(){});
-```
-
-### window
 
 ```js
 $(window).scroll(function(event) {});
@@ -308,9 +298,18 @@ $(window).height(); //返回窗口高度
 $(window).scrollTop(); //返回滚动条距网页顶部距离
 ```
 
-## Ajax Module
+### 常用多态函数
 
-### \$.getJSON
+```js
+data、html、css
+$(document).ready(function(){});
+```
+
+## AJAX Module
+
+### JSON API
+
+`$.getJSON`:
 
 ```javascript
 $.getJSON(url, data, success(data, status, xhr));
@@ -320,7 +319,9 @@ $.getJSON('test.js', function(json) {
 });
 ```
 
-### \$.ajax
+### AJAX API
+
+`$.ajax`:
 
 ```javascript
 $.ajax({
@@ -337,13 +338,13 @@ $.ajax({
 
 - 通过多个 animate 方法形成动画链，那么这个动画链其实都是会加入到 queue 队列里面
 - 在每一次 queue 方法中会把动画数据写到队列中，然后取出队列中的第一个序列通过 dequeue 方法执行
-- 开始执行之前写一个进程锁“inprogress”到 queue 里面，代表这个动画还在执行中，
+- 开始执行之前写一个进程锁 `inProgress` 到 queue 里面， 代表这个动画还在执行中，
   防止同个序列的多个动画重复执行，这个就是异步执行同步收集的处理方案
 - 此时动画开始了，这里注意动画是在异步执行的同步的代码，继续调用下一个 animate
 - 执行同样的 animate 方法逻辑但是此时问题来了，
   动画可能还在执行可是后续的 animate 还在继续调用，所以这个时候后面的动画代码就需要等待了（进程锁）
-- 队列头是有一把“inprogress”进程锁的，那么这时候动画只需要加入队列，
-  但是可以通过 inprogress 是否存在来判断是否执行
+- 队列头是有一把 `inProgress` 进程锁的，那么这时候动画只需要加入队列，
+  但是可以通过 `inProgress` 是否存在来判断是否执行
 - 所有的 animate 方法在加入队列都是按照以上的逻辑依次执行，
   动画执行完毕了就会有一个结束通知，然后从 queue 取出第一个队列继续执行了，如此循环
 
