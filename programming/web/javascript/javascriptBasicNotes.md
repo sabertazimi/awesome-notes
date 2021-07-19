@@ -48,7 +48,7 @@
     - [条件表达式](#条件表达式)
     - [Add Operator](#add-operator)
   - [控制流程](#控制流程)
-    - [switch/case](#switchcase)
+    - [Switch Case Statement](#switch-case-statement)
   - [对象](#对象)
     - [对象三大特征](#对象三大特征)
     - [原型链](#原型链)
@@ -56,7 +56,7 @@
       - [构造对象的三种形式](#构造对象的三种形式)
         - [对象字面量](#对象字面量)
         - [new 构造函数](#new-构造函数)
-        - [Object.create](#objectcreate)
+        - [Object Create API](#object-create-api)
       - [返回值](#返回值)
       - [instanceof](#instanceof)
       - [最佳实践](#最佳实践)
@@ -73,7 +73,7 @@
     - [Class 式继承](#class-式继承)
       - [代理构造函数(运用中继者)](#代理构造函数运用中继者)
       - [类继承(**借用构造函数**)与原型继承(**设置原型**) 混合继承模式](#类继承借用构造函数与原型继承设置原型-混合继承模式)
-      - [kclass 语法糖](#kclass-语法糖)
+      - [Class Simulation](#class-simulation)
     - [原型链继承](#原型链继承)
       - [共享 - 原型代理(prototype)](#共享---原型代理prototype)
       - [独立 - 原型克隆](#独立---原型克隆)
@@ -91,7 +91,7 @@
       - [Arrow Function Binding](#arrow-function-binding)
     - [prototype](#prototype)
     - [arguments](#arguments)
-      - [arguments.callee](#argumentscallee)
+      - [Arguments Callee](#arguments-callee)
     - [作用域链](#作用域链)
       - [全局对象 window](#全局对象-window)
       - [活动对象(Activation Object)](#活动对象activation-object)
@@ -103,9 +103,9 @@
       - [即时函数模式](#即时函数模式)
       - [模式作用](#模式作用)
       - [即时函数返回值](#即时函数返回值)
-    - [call/apply/bind](#callapplybind)
-      - [bind](#bind)
-      - [通过 call/apply 实现 bind 函数](#通过-callapply-实现-bind-函数)
+    - [Bind Invocation](#bind-invocation)
+      - [Function Bind](#function-bind)
+      - [Function Call and Apply](#function-call-and-apply)
     - [多态方法](#多态方法)
     - [eval](#eval)
     - [常用函数](#常用函数)
@@ -114,7 +114,7 @@
       - [解析函数](#解析函数)
       - [数学函数](#数学函数)
       - [时间函数](#时间函数)
-        - [setInterval](#setinterval)
+        - [Interval Function](#interval-function)
     - [常用模式](#常用模式)
       - [API 模式](#api-模式)
         - [回调模式](#回调模式)
@@ -144,14 +144,14 @@
     - [HTML DOM](#html-dom)
     - [CSSOM](#cssom)
       - [Inline Styles](#inline-styles)
-      - [Get/Set Styles](#getset-styles)
+      - [Getter and Setter Styles](#getter-and-setter-styles)
       - [Computed Styles](#computed-styles)
       - [CSS Class](#css-class)
-      - [CSSStyleSheet Interface](#cssstylesheet-interface)
+      - [CSS StyleSheet Interface](#css-stylesheet-interface)
         - [CSS Rules Definition](#css-rules-definition)
         - [Media Rule](#media-rule)
         - [Keyframe Rule](#keyframe-rule)
-        - [Add/Remove CSS Rules](#addremove-css-rules)
+        - [Add and Remove CSS Rules](#add-and-remove-css-rules)
     - [DOM Events](#dom-events)
       - [Events Checking](#events-checking)
       - [Global DOM Event](#global-dom-event)
@@ -167,10 +167,10 @@
     - [Window](#window)
       - [location API](#location-api)
     - [Rect API](#rect-api)
-      - [width/height](#widthheight)
+      - [Width and Height API](#width-and-height-api)
       - [Window Height](#window-height)
       - [Scroll Size](#scroll-size)
-      - [DOM left/top Property](#dom-lefttop-property)
+      - [DOM Left and Top Property](#dom-left-and-top-property)
     - [Mutation Observer API](#mutation-observer-api)
   - [Ajax](#ajax)
     - [基本用法](#基本用法)
@@ -195,7 +195,7 @@
       - [中英文](#中英文)
       - [数字](#数字)
       - [空字符与空格字符](#空字符与空格字符)
-  - [错误处理(Error/Exception)](#错误处理errorexception)
+  - [错误处理](#错误处理)
     - [错误类型](#错误类型)
     - [异常作用](#异常作用)
 
@@ -225,7 +225,7 @@ var undefined = void null;
 var undefined = void 1;
 var undefined = function () {};
 
-;(fucntion (undef) {
+;(function (undef) {
   var undefined = undef;
 })();
 ```
@@ -935,7 +935,7 @@ alert(a);
 - Type(x) === Type(y): return `x === y` (Strict Equality Comparison)
 - Type(x) !== Type(y):
   - x and y are `undefined` or `null`: return true
-  - return comparsion between `ToNumber(x)` and `ToPrimitive(y)`
+  - return comparison between `ToNumber(x)` and `ToPrimitive(y)`
 
 ### 条件表达式
 
@@ -960,7 +960,7 @@ var i = a ? 1 : b ? 2 : c ? 3 : 4;
 
 ## 控制流程
 
-### switch/case
+### Switch Case Statement
 
 用方法查询代替 switch/case 语句
 
@@ -1037,7 +1037,7 @@ Array.__proto__ === Function.prototype;
 // true because of Function is `function Function()` and inherited from `Function.prototype`
 // Function has its own `prototype` property refer to `Function.prototype`
 Function.__proto__ === Function.prototype;
-// true because of Object.protoype is the top of inheritance chains (null is Object.prototype.__proto__)
+// true because of Object.prototype is the top of inheritance chains (null is Object.prototype.__proto__)
 // all `object/function/array instance`.__proto__......__proto__ refer to Object.prototype
 Function.__proto__.__proto__ === Object.prototype;
 
@@ -1096,12 +1096,12 @@ function Employee(name) {
     return this.name};
 }
 
-var employee = newInstance(Empolyee,'Jack');
+var employee = newInstance(Employee,'Jack');
 =>
 var employee = new Employee('Jack');
 ```
 
-##### Object.create
+##### Object Create API
 
 ```js
 Object.create = function(o) {
@@ -1208,7 +1208,7 @@ Best Practice: **即使函数模式 + 揭示模式**
 
 ```javascript
 //匿名即时函数模式
-var myobj = (function () {
+var obj = (function () {
   // private member
   var name = "tazimi";
   // private method
@@ -1247,15 +1247,15 @@ Best Practice:
 
 ```javascript
 // 命名空间模式
-MYAPP.namespace('MYAPP.utilities.array');
+APP.namespace('APP.utilities.array');
 
 //形参: 导入全局变量
-MYAPP.utilities.array = (function (app, global) {
+APP.utilities.array = (function (app, global) {
 // start of var declare
 
 // 依赖模式
-var uobj = MYAPP.utilities.object,
-  ulang = MYAPP.utilities.lang,
+var uObj = APP.utilities.object,
+  uLang = APP.utilities.lang,
 // 私有属性
   arrStr = "[object Array]",
   toStr = Object.prototype.toString;
@@ -1283,7 +1283,7 @@ return {
   indexOf: inArray
 };
 
-}(MYAPP, this));
+}(APP, this));
 ```
 
 ### 普通属性
@@ -1370,12 +1370,12 @@ Child.prototype = new Parent(); // 设置原型链,建立继承关系
 Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor 对象形成闭环
 ```
 
-#### kclass 语法糖
+#### Class Simulation
 
 复制式地继承，将会消耗大量内存单元 **Best Practice**:
 
 ```javascript
-var klass = function(Parent, props) {
+var classSim = function(Parent, props) {
   var Child, F, i;
 
   // 新的构造函数
@@ -1410,7 +1410,7 @@ var klass = function(Parent, props) {
 ```
 
 ```javascript
-var SuperMan = klass(Man, {
+var SuperMan = classSim(Man, {
   _construct: function(what) {
     console.log("SuperMan's constructor");
   },
@@ -1564,7 +1564,7 @@ var greet = 'Hello there';
 // primitive is converted to an object
 // in order to use the split() method
 greet.split(' ')[0]; // "Hello"
-// attemting to augment a primitive is not an error
+// attempting to augment a primitive is not an error
 greet.smile = true;
 // but it doesn't actually work
 typeof greet.smile; // "undefined"
@@ -1706,14 +1706,14 @@ func(); // `this` in `inner` function refer to `window`
 - 不是数组,但有 length 属性(实参个数)
 - Array.prototype/[].func.apply(arguments, ...);
 
-#### arguments.callee
+#### Arguments Callee
 
 - 引用 arguments 所属 function, 可以利用 callee 实现匿名递归函数
 - arguments.callee.length: 形参个数
 
 ```js
 try {
-  if (arguments.length !== arugments.callee.length) {
+  if (arguments.length !== arguments.callee.length) {
     throw new Error('传递的参数个数不匹配');
   }
 } catch (err) {
@@ -1878,7 +1878,7 @@ var foo = function() {
   return foo();
 };
 
-//first run: same behavoir as second run
+//first run: same behavior as second run
 console.log(foo()); // t
 //second run
 console.log(foo()); // t
@@ -1937,7 +1937,7 @@ var getResult = (function() {
 })();
 ```
 
-### call/apply/bind
+### Bind Invocation
 
 - `Function.call(contextObj, arg1, arg2,...)`
 - `Function.apply(contextArray, [arg1, arg2, ...]/arguments)`
@@ -1959,17 +1959,17 @@ String.prototype.stringStaticFunction.call/apply();
 context.function(arguments);
 ```
 
-#### bind
+#### Function Bind
 
 - change function runtime context (ignore innovation pattern `function/method/new/call/apply`)
 - curry function
 - can't change `this` in arrow function
 
 ```js
-const bindedFunc = func.bind(context, arg1, arg2, ...);
+const boundFunc = func.bind(context, arg1, arg2, ...);
 ```
 
-#### 通过 call/apply 实现 bind 函数
+#### Function Call and Apply
 
 ```javascript
 function bind(o, m) {
@@ -1987,9 +1987,9 @@ var one = {
     }
   },
   two = { name: 'another object' },
-  twosay = bind(two, one.say);
+  twoSay = bind(two, one.say);
 
-twosay('yo'); // "yo, another object"
+twoSay('yo'); // "yo, another object"
 ```
 
 ### 多态方法
@@ -2143,7 +2143,7 @@ Math.min / Math.max; // 最小值/最大值
 
 #### 时间函数
 
-##### setInterval
+##### Interval Function
 
 **Tips:** 相当于一重循环
 
@@ -2263,29 +2263,29 @@ var app = {};
 
 ```javascript
 // global object
-var MYAPP = {};
+var APP = {};
 // constructors
-MYAPP.Parent = function() {};
-MYAPP.Child = function() {};
+APP.Parent = function() {};
+APP.Child = function() {};
 // a variable
-MYAPP.some_var = 1;
+APP.some_var = 1;
 // an object container
-MYAPP.modules = {};
+APP.modules = {};
 // nested objects
-MYAPP.modules.module1 = {};
-MYAPP.modules.module1.data = { a: 1, b: 2 };
-MYAPP.modules.module2 = {};
+APP.modules.module1 = {};
+APP.modules.module1.data = { a: 1, b: 2 };
+APP.modules.module2 = {};
 ```
 
 #### 通用命名空间函数
 
 ```javascript
-MYAPP.namespace = function(namespaceString) {
+APP.namespace = function(namespaceString) {
   var parts = namespaceString.split('.'),
-    parent = MYAPP,
+    parent = APP,
     i;
   // strip redundant leading global
-  if (parts[0] === 'MYAPP') {
+  if (parts[0] === 'APP') {
     // remove leading global
     parts = parts.slice(1);
   }
@@ -2304,12 +2304,12 @@ MYAPP.namespace = function(namespaceString) {
 
 ```javascript
 // assign returned value to a local var
-var module2 = MYAPP.namespace('MYAPP.modules.module2');
-module2 === MYAPP.modules.module2; // true
-// skip initial `MYAPP`
-MYAPP.namespace('modules.module51');
+var module2 = APP.namespace('APP.modules.module2');
+module2 === APP.modules.module2; // true
+// skip initial `APP`
+APP.namespace('modules.module51');
 // long namespace
-MYAPP.namespace('once.upon.a.time.there.was.this.long.nested.property');
+APP.namespace('once.upon.a.time.there.was.this.long.nested.property');
 ```
 
 ### 沙盒模式
@@ -2384,7 +2384,7 @@ Sandbox.modules.event = function(box) {
   // access to the Sandbox prototype if needed:
   // box.constructor.prototype.m = "mmm";
   box.attachEvent = function() {};
-  box.dettachEvent = function() {};
+  box.detachEvent = function() {};
 };
 Sandbox.modules.ajax = function(box) {
   box.makeRequest = function() {};
@@ -2409,7 +2409,7 @@ Sandbox(function(box) {
 Sandbox('dom', 'event', function(box) {
   // work with dom and event
   Sandbox('ajax', function(box) {
-    // another sandboxed "box" object
+    // another sandbox "box" object
     // this "box" is not the same as
     // the "box" outside this function
     //...
@@ -2502,10 +2502,10 @@ const showAlert = (type, message, duration = 3) {
 ##### append
 
 ```javascript
-var testdiv = document.getElementById('testdiv');
+var testDiv = document.getElementById('testDiv');
 
 var para = document.createElement('p');
-testdiv.appendChild(para);
+testDiv.appendChild(para);
 
 var txt = document.createTextNode('Hello World');
 para.appendChild(txt);
@@ -2614,12 +2614,12 @@ document.body.appendChild(frag);
 ```
 
 ```javascript
-var oldnode = document.getElementById('result'),
-  clone = oldnode.cloneNode(true);
+var oldNode = document.getElementById('result'),
+  clone = oldNode.cloneNode(true);
 // work with the clone
 
 // when you're done:
-oldnode.parentNode.replaceChild(clone, oldnode);
+oldNode.parentNode.replaceChild(clone, oldNode);
 ```
 
 ### HTML DOM
@@ -2629,7 +2629,7 @@ element.innerHTML;
 element.textContent;
 ```
 
-innerHTML: unconcrete,including all types of childNodes
+innerHTML: non-concrete, including all types of childNodes
 
 `div.innerHTML = <p>Test<em>test</em>Test.</p>`
 
@@ -2668,7 +2668,7 @@ element.style.fontFamily;
 element.style.marginTopWidth;
 ```
 
-#### Get/Set Styles
+#### Getter and Setter Styles
 
 - getPropertyValue
 - setProperty
@@ -2734,7 +2734,7 @@ function addClass(element, value) {
 }
 ```
 
-#### CSSStyleSheet Interface
+#### CSS StyleSheet Interface
 
 ##### CSS Rules Definition
 
@@ -2759,7 +2759,7 @@ for (i of myRules) {
   const myStyle = i.style;
 
   // Set the bg color on the body
-  myStyle.setProperty('background-color', 'peachpuff');
+  myStyle.setProperty('background-color', 'peachPuff');
 
   // Get the font size of the body
   myStyle.getPropertyValue('font-size');
@@ -2822,7 +2822,7 @@ for (i of myRules) {
 }
 ```
 
-##### Add/Remove CSS Rules
+##### Add and Remove CSS Rules
 
 ```js
 let myStylesheet = document.styleSheets[0];
@@ -2847,7 +2847,7 @@ console.log(myStylesheet.cssRules.length); // 7
 
 For `click/keydown` events:
 
-- `event.prevetDefault()`
+- `event.preventDefault()`
 - `event.stopPropagation()`
 
 `element.dispatchEvent` to trigger events.
@@ -2900,7 +2900,7 @@ window.addEventListener('visibilitychange', () => {
 ```js
 const videoElement = document.getElementById('videoElement');
 
-// Autoplay the video if application is visible
+// AutoPlay the video if application is visible
 if (document.visibilityState == 'visible') {
   videoElement.play();
 }
@@ -3063,7 +3063,7 @@ const source = document.querySelector('div.source');
 source.addEventListener('copy', (event) => {
     const selection = document.getSelection();
     event.clipboardData.setData('text/plain',
-      selection.toString().concat('copyrihgt information')
+      selection.toString().concat('copyright information')
     );
     event.preventDefault();
 });
@@ -3141,12 +3141,12 @@ function readyFunction() {
 ```js
 //add more ready function
 function addLoadEvent(func) {
-  var oldonload = window.onload;
+  var oldOnLoad = window.onload;
   if (typeof window.onload != 'function') {
     window.onload = func;
   } else {
     window.onload = function() {
-      oldonload();
+      oldOnLoad();
       func();
     };
   }
@@ -3172,8 +3172,8 @@ window.addEventListener(
   event => {
     // event.oldURL
     // event.nweURL
-    if (location.hash === '#somecoolfeature') {
-      somecoolfeature();
+    if (location.hash === '#someCoolFeature') {
+      someCoolFeature();
     }
   },
   false
@@ -3184,7 +3184,7 @@ window.addEventListener(
 
 - getBoundingClientRect
 
-#### width/height
+#### Width and Height API
 
 - offsetWidth/offsetHeight = content + padding + border
 - clientWidth/clientHeight = content + padding
@@ -3235,7 +3235,7 @@ if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
 }
 ```
 
-#### DOM left/top Property
+#### DOM Left and Top Property
 
 - offsetLeft/offsetTop: 表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent 对象）左上角的距离
 - scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素大小
@@ -3359,7 +3359,7 @@ request.onreadystatechange = function() {
   //do something
   /*
   switch(request.readyState) {
-    case 0: initalize
+    case 0: initialize
     case 1: loading
     case 2: loaded
     case 3: transaction
@@ -3666,7 +3666,9 @@ if (!String.prototype.trim) {
 
 `/[(^\s+)(\s+$)]/g`
 
-## 错误处理(Error/Exception)
+## 错误处理
+
+Error and Exception
 
 ### 错误类型
 

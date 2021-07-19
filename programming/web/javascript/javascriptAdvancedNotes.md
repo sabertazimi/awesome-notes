@@ -8,22 +8,22 @@
     - [Babel](#babel)
       - [babel-node](#babel-node)
       - [babel-core](#babel-core)
-      - [Codemod](#codemod)
+      - [CodeMod Tool](#codemod-tool)
     - [Variable](#variable)
       - [let](#let)
       - [const](#const)
-    - [Destructuring(Pattern Matching)](#destructuringpattern-matching)
+    - [Destructuring Pattern Matching](#destructuring-pattern-matching)
       - [默认值](#默认值)
       - [Sample](#sample)
         - [swap](#swap)
         - [简化函数的参数与返回值](#简化函数的参数与返回值)
         - [解析 JSON 对象](#解析-json-对象)
-        - [遍历 map/list](#遍历-maplist)
+        - [Traverse Map and List](#traverse-map-and-list)
         - [加载特定模块](#加载特定模块)
       - [Array Iterator Style Matching](#array-iterator-style-matching)
       - [Object Style Matching](#object-style-matching)
       - [String Style Matching](#string-style-matching)
-      - [Number/Boolean Style Matching](#numberboolean-style-matching)
+      - [Number and Boolean Style Matching](#number-and-boolean-style-matching)
       - [Function Arguments Style Matching](#function-arguments-style-matching)
     - [String](#string)
       - [Methods](#methods)
@@ -37,16 +37,16 @@
       - [String i18n](#string-i18n)
       - [Time i18n](#time-i18n)
     - [Array](#array)
-      - [Array.includes](#arrayincludes)
-      - [Array.from](#arrayfrom)
-      - [Array.copyWithin](#arraycopywithin)
-      - [Array.find](#arrayfind)
-      - [Array.flat](#arrayflat)
-      - [Array.flatMap](#arrayflatmap)
-      - [Array.map](#arraymap)
-      - [Array.filter](#arrayfilter)
-      - [Array.reduce](#arrayreduce)
-      - [Array.sort](#arraysort)
+      - [Array Includes](#array-includes)
+      - [Array From](#array-from)
+      - [Array CopyWithin](#array-copywithin)
+      - [Array Find](#array-find)
+      - [Array Flat](#array-flat)
+      - [Array FlatMap](#array-flatmap)
+      - [Array Map](#array-map)
+      - [Array Filter](#array-filter)
+      - [Array Reduce](#array-reduce)
+      - [Array Sort](#array-sort)
       - [Spread Array](#spread-array)
     - [New Object API](#new-object-api)
     - [Arrow Function](#arrow-function)
@@ -64,7 +64,7 @@
       - [Asynchronous Generator](#asynchronous-generator)
     - [Proxy and Reflect](#proxy-and-reflect)
       - [Default Zero Value with Proxy](#default-zero-value-with-proxy)
-      - [Negative Array Indice with Proxy](#negative-array-indice-with-proxy)
+      - [Negative Array Indices with Proxy](#negative-array-indices-with-proxy)
       - [Hiding Properties with Proxy](#hiding-properties-with-proxy)
       - [Read Only Object with Proxy](#read-only-object-with-proxy)
       - [Range Judgement with Proxy](#range-judgement-with-proxy)
@@ -85,9 +85,9 @@
     - [Currying](#currying)
   - [Internal JavaScript](#internal-javascript)
     - [Variables Lifecycle](#variables-lifecycle)
-    - [Exection Context](#exection-context)
-      - [Global Exection Context](#global-exection-context)
-      - [Function Exection Context](#function-exection-context)
+    - [Execution Context](#execution-context)
+      - [Global Execution Context](#global-execution-context)
+      - [Function Execution Context](#function-execution-context)
     - [Event Loop](#event-loop)
   - [Browser Internal](#browser-internal)
     - [Browser Process](#browser-process)
@@ -116,7 +116,7 @@
     - [DOM Performance](#dom-performance)
       - [重排与重绘](#重排与重绘)
       - [批量修改 DOM](#批量修改-dom)
-      - [requestAnimationFrame](#requestanimationframe)
+      - [Animation Frame](#animation-frame)
     - [CSS](#css)
     - [定时器(防止脚本阻塞)](#定时器防止脚本阻塞)
     - [计时器](#计时器)
@@ -129,7 +129,7 @@
       - [Ajax 缓存](#ajax-缓存)
     - [Reduce Repeat Manipulation](#reduce-repeat-manipulation)
       - [Debounce and Throttle](#debounce-and-throttle)
-      - [RequestAnimationFrame Throttling](#requestanimationframe-throttling)
+      - [Animation Frame Throttling](#animation-frame-throttling)
     - [First Paint Time](#first-paint-time)
     - [算数逻辑运算](#算数逻辑运算)
       - [位操作](#位操作)
@@ -138,7 +138,7 @@
     - [Browser Caches](#browser-caches)
       - [HTTP Cache](#http-cache)
       - [Code Caching](#code-caching)
-    - [Browser Pefermance Monitoring](#browser-pefermance-monitoring)
+    - [Browser Performance Monitoring](#browser-performance-monitoring)
       - [合成监控](#合成监控)
       - [真实用户监控](#真实用户监控)
       - [对比](#对比)
@@ -155,7 +155,7 @@
       - [Data Preloading](#data-preloading)
       - [Images Lazy Loading](#images-lazy-loading)
       - [JavaScript Lazy Loading](#javascript-lazy-loading)
-      - [Prefetch](#prefetch)
+      - [PreFetch](#prefetch)
       - [Babel Config for JavaScript](#babel-config-for-javascript)
     - [V8 Good Parts](#v8-good-parts)
       - [Object Shape](#object-shape)
@@ -174,7 +174,7 @@
       - [Event Testing](#event-testing)
       - [Operation Simulation Testing](#operation-simulation-testing)
       - [Tracing Testing](#tracing-testing)
-      - [Other Puppeterr Testing API](#other-puppeterr-testing-api)
+      - [Other Puppeteer Testing API](#other-puppeteer-testing-api)
     - [Frameworks](#frameworks)
       - [Unit 测试](#unit-测试)
       - [UI 测试](#ui-测试)
@@ -194,7 +194,7 @@
     - [单元测试](#单元测试)
       - [测试原则](#测试原则)
       - [隔离被测代码](#隔离被测代码)
-      - [mock/stub/spy](#mockstubspy)
+      - [Mock Testing](#mock-testing)
     - [Monkey Patch](#monkey-patch)
     - [Tools API](#tools-api)
       - [console API](#console-api)
@@ -209,7 +209,7 @@
       - [Style Tab](#style-tab)
     - [Console Panel](#console-panel)
       - [Console Settings](#console-settings)
-      - [capture default eventListener](#capture-default-eventlistener)
+      - [Capture Default Event Listener](#capture-default-event-listener)
     - [Source Panel](#source-panel)
     - [Network Panel](#network-panel)
     - [Performance Panel](#performance-panel)
@@ -317,7 +317,7 @@
     - [Zero Trust Access Control](#zero-trust-access-control)
       - [Chain of Trust](#chain-of-trust)
       - [Identity 2.0](#identity-20)
-      - [Continous Access Control](#continous-access-control)
+      - [Continuous Access Control](#continuous-access-control)
       - [Zero Trust Basement](#zero-trust-basement)
 
 <!-- /TOC -->
@@ -368,7 +368,7 @@ babel.transformFromAst(ast, code, options);
 // => { code, map, ast }
 ```
 
-#### Codemod
+#### CodeMod Tool
 
 Use Babel to refactor code,
 like [jscodeshift](https://github.com/facebook/jscodeshift).
@@ -404,7 +404,7 @@ let b = 2;
 - 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone)
 - 块级作用域
 
-### Destructuring(Pattern Matching)
+### Destructuring Pattern Matching
 
 - **建议只要有可能，就不要在模式中放置圆括号**
 - 赋值语句的非模式部分，可以使用圆括号
@@ -498,7 +498,7 @@ console.log(id, status, number);
 // 42, "OK", [867, 5309]
 ```
 
-##### 遍历 map/list
+##### Traverse Map and List
 
 ```js
 const map = new Map();
@@ -627,7 +627,7 @@ let { length: len } = 'hello';
 len; // 5
 ```
 
-#### Number/Boolean Style Matching
+#### Number and Boolean Style Matching
 
 number/boolean 会转化成对象
 
@@ -750,9 +750,9 @@ const boldify = (parts, ...insertedParts) => {
     .join('');
 };
 
-const name = 'Jamon Holmgren';
+const name = 'Sabertaz';
 console.log(boldify`Hi, my name is ${name}!`);
-// => "Hi, my name is <strong>Jamon Holmgren</strong>!"
+// => "Hi, my name is <strong>Sabertaz</strong>!"
 ```
 
 ```js
@@ -994,11 +994,11 @@ dtfEnglish.formatRange(start, end); // => 'May 7 - 9, 2019'
 [...Array(5).keys()]; // => [0, 1, 2, 3, 4]
 ```
 
-#### Array.includes
+#### Array Includes
 
 no more `indexOf() > -1`
 
-#### Array.from
+#### Array From
 
 强大的**函数式**方法
 
@@ -1041,7 +1041,7 @@ Array.from([1, 2, 3], (x) => x * x);
 // [1, 4, 9]
 ```
 
-#### Array.copyWithin
+#### Array CopyWithin
 
 替换数组元素，修改原数组
 
@@ -1064,34 +1064,34 @@ i32a.copyWithin(0, 2);
 // => Int32Array [3, 4, 5, 4, 5]
 ```
 
-#### Array.find
+#### Array Find
 
 ```js
 arr.find(fn);
 arr.findIndex(fn);
 ```
 
-#### Array.flat
+#### Array Flat
 
 `[2, [2, 2]] => [2, 2, 2]`
 
-#### Array.flatMap
+#### Array FlatMap
 
 map + flat
 
-#### Array.map
+#### Array Map
 
 相当于 Haskell 中的 List Map
 
-#### Array.filter
+#### Array Filter
 
 相当于 Haskell 中的 List Filter
 
-#### Array.reduce
+#### Array Reduce
 
 相当于 Haskell 中的 fold
 
-#### Array.sort
+#### Array Sort
 
 #### Spread Array
 
@@ -1119,10 +1119,10 @@ obj[Symbol.iterator] = function* () {
 
 ```js
 const score = {
-  jamon: 42,
+  saber: 42,
   todd: 19,
   ken: 4,
-  gant: 41,
+  gan: 41,
 };
 
 Object.keys(score).map((k) => score[k]);
@@ -1135,10 +1135,10 @@ Object.entries(score);
 /**
  * =>
  * [
- * [ 'jamon', 42 ],
+ * [ 'saber', 42 ],
  * [ 'todd', 19 ],
  * [ 'ken', 4 ],
- * [ 'gant', 41 ],
+ * [ 'gan', 41 ],
  * ]
  */
 ```
@@ -1645,7 +1645,7 @@ The generator function itself is not iterable, call it to get the iterable-itera
 ```js
 for (const v of someOddNumbers) {
   console.log(v);
-} // => TypeEror: someOddNumbers is not iterable
+} // => TypeError: someOddNumbers is not iterable
 
 for (const v of number()) {
   console.log(v); // 1 3 5 7
@@ -1849,7 +1849,7 @@ pos = withZeroValue(pos);
 console.log(pos.z); // => 0
 ```
 
-#### Negative Array Indice with Proxy
+#### Negative Array Indices with Proxy
 
 ```js
 const negativeArray = (els) =>
@@ -1878,7 +1878,7 @@ const hide = (target, prefix = '_') =>
 
 let userData = hide({
   firstName: 'Tom',
-  mediumHandle: '@tbarrasso',
+  mediumHandle: '@bar',
   _favoriteRapper: 'Drake',
 });
 
@@ -1952,15 +1952,10 @@ return new Promise((resolve) => resolve([a, b]));
 ```
 
 - promises on the same chain execute orderly
-- promises on two seperate chains execute in random order
+- promises on two separate chains execute in random order
 
 ```js
-const users = [
-  'W8lbAokuirfdlTJpnsNC5kryuHtu1G53',
-  'ZinqxnohbXMQdtF6avtlUkxLLknRxCTh',
-  'ynQePb3RB2JSx4iziGYMM5eXgkwnufS5',
-  'EtT2haq2sNoWnNjmeyZnfUmZn9Ihfi8w',
-];
+const users = ['User1', 'User2', 'User3', 'User4'];
 
 const response = [];
 
@@ -1981,12 +1976,7 @@ const getUsers = (users) => {
 ```
 
 ```js
-const users = [
-  'W8lbAokuirfdlTJpnsNC5kryuHtu1G53',
-  'ZinqxnohbXMQdtF6avtlUkxLLknRxCTh',
-  'ynQePb3RB2JSx4iziGYMM5eXgkwnufS5',
-  'EtT2haq2sNoWnNjmeyZnfUmZn9Ihfi8w',
-];
+const users = ['User1', 'User2', 'User3', 'User4'];
 
 let response = [];
 
@@ -2373,7 +2363,7 @@ const add = (x) => (y) => x + y;
 ```
 
 ```javascript
-function schonfinkelize(fn) {
+function curry(fn) {
   const slice = Array.prototype.slice,
     stored_args = slice.call(arguments, 1);
 
@@ -2384,9 +2374,9 @@ function schonfinkelize(fn) {
   };
 }
 
-const addOne = schonfinkelize(add, 1);
+const addOne = curry(add, 1);
 // addOne(3) === 4;
-const addFive = schonfinkelize(addOne, 1, 3);
+const addFive = curry(addOne, 1, 3);
 // addFive(4) === 9;
 ```
 
@@ -2401,15 +2391,15 @@ Under the hood
   - Initialization phase: 分配内存, 在作用域中绑定变量 (`undefined`)
 - Execution phase/Assignment phase
 
-### Exection Context
+### Execution Context
 
-#### Global Exection Context
+#### Global Execution Context
 
 - create global object (`window`)
 - create `this` object(refer to `window`)
 - declare and initialize variable(`undefined`)/function, store them into memory
 
-#### Function Exection Context
+#### Function Execution Context
 
 - create arguments object
 - create `this` object
@@ -2547,12 +2537,12 @@ const promise1 = new Promise(function (resolve) {
 });
 
 setTimeout(function () {
-  console.log('settimeout');
+  console.log('setTimeout');
 });
 
 console.log('script end');
 
-// 输出顺序: script start->promise1->promise1 end->script end->promise2->settimeout
+// 输出顺序: script start->promise1->promise1 end->script end->promise2->setTimeout
 ```
 
 `await a(); b()` 等价于 `Promise(a()).then(b())`: a 是同步执行, b 是 microtask
@@ -2638,7 +2628,7 @@ test();
 - Chrome: Blink (based on Webkit) + V8
 - Firefox: Gecko + SpiderMonkey
 - Safari: Webkit + JavaScriptCore (Nitro)
-- Edge: Trident/EdgeHTML + Chakra
+- Edge: Trident/EdgeHTML + Chakra -> Chromium
 
 ### Browser Process
 
@@ -2677,7 +2667,7 @@ CSS is context-free grammar.
 Webkit use flex/bison (bottom-to-up), Gecko use up-to-bottom.
 
 ```js
-ruleset
+ruleSet
   : selector [ ',' S* selector ]*
     '{' S* declaration [ ';' S* declaration ]* '}' S*
   ;
@@ -2746,7 +2736,7 @@ Paint Order:
 - with () {}
 - eval()
 - 少用 new
-- 少用 cotinue
+- 少用 continue
 - 少用 forEach()
 
 ### 局部变量/函数参数
@@ -2915,23 +2905,23 @@ window.onload = function () {
 ```javascript
 function requireScript(file, callback) {
   const script = document.getElementsByTagName('script')[0];
-  const newjs = document.createElement('script');
+  const newJS = document.createElement('script');
 
   // IE
-  newjs.onreadystatechange = function () {
-    if (newjs.readyState === 'loaded' || newjs.readyState === 'complete') {
-      newjs.onreadystatechange = null;
+  newJS.onreadystatechange = function () {
+    if (newJS.readyState === 'loaded' || newJS.readyState === 'complete') {
+      newJS.onreadystatechange = null;
       callback();
     }
   };
   // others
-  newjs.onload = function () {
+  newJS.onload = function () {
     callback();
   };
 
   // 添加至html页面
-  newjs.src = file;
-  script.parentNode.insertBefore(newjs, script);
+  newJS.src = file;
+  script.parentNode.insertBefore(newJS, script);
 }
 
 requireScript('the_rest.js', function () {
@@ -2990,20 +2980,20 @@ getComputedStyle();
 ```js
 const fragment = document.createDocumentFragment();
 appendDataToElement(fragment, data);
-document.getElementById('mylist').appendChild(fragment);
+document.getElementById('myList').appendChild(fragment);
 ```
 
 - oldNode.cloneNode(true);
 
 ```js
-const old = document.getElementById('mylist');
+const old = document.getElementById('myList');
 const clone = old.cloneNode(true);
 
 appendDataToElement(clone, data);
 old.parentNode.replaceChild(clone, old);
 ```
 
-#### requestAnimationFrame
+#### Animation Frame
 
 run scripts as early as possible:
 `requestAnimationFrame()` runs after the CPU work is done (UI events and JS scripts),
@@ -3023,8 +3013,8 @@ script -> style -> layout -> paint -> composite
 ```
 
 Make `script` stage become: read then write.
-Interleaved read and write will triger multiple times
-of relayout/repaint/recomposite.
+Interleaved read and write will trigger multiple times
+of re-layout/repaint/re-composite.
 
 ```js
 // bad
@@ -3205,7 +3195,7 @@ testWorker('message from main thread').then((message) => {
 
 ```js
 /*
- * jsonparser.js
+ * JSONParser.js
  */
 self.onmessage = function (event) {
   const jsonText = event.data,
@@ -3219,9 +3209,9 @@ self.onmessage = function (event) {
 /*
  * main.js
  */
-const worker = new Worker('jsonparse.js';
+const worker = new Worker('JSONParser.js');
 
-worker.onmessage = function(event) {
+worker.onmessage = function (event) {
   const jsonData = event.data;
   evaluateData(jsonData);
 };
@@ -3307,7 +3297,7 @@ function now() {
  *
  * @param  {function} func        回调函数
  * @param  {number}   wait        表示时间窗口的间隔
- * @param  {boolean}  immediate   设置为ture时，是否立即调用函数
+ * @param  {boolean}  immediate   设置为 true 时，是否立即调用函数
  * @return {function}             返回客户调用函数
  */
 function debounce(func, wait = 50, immediate = true) {
@@ -3432,7 +3422,7 @@ _.throttle = function (func, wait, options) {
 };
 ```
 
-#### RequestAnimationFrame Throttling
+#### Animation Frame Throttling
 
 ```js
 let frameId = 0;
@@ -3514,7 +3504,7 @@ function getPerformanceTiming() {
   //【原因】是否太多不必要的操作都放到 onload 回调函数里执行了，考虑过延迟加载、按需加载的策略么？
   times.loadEvent = t.loadEventEnd - t.loadEventStart;
   // DNS 缓存时间
-  times.appcache = t.domainLookupStart - t.fetchStart;
+  times.appCache = t.domainLookupStart - t.fetchStart;
   // 卸载页面的时间
   times.unloadEvent = t.unloadEventEnd - t.unloadEventStart;
   // TCP 建立连接完成握手的时间
@@ -3660,7 +3650,7 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 - positive case: IIFE function heuristics
 - passive case: too small (`< 1KB`) and inline scripts
 
-### Browser Pefermance Monitoring
+### Browser Performance Monitoring
 
 前端性能监控分为两种方式，一种叫做合成监控（Synthetic Monitoring，SYN），另一种是真实用户监控（Real User Monitoring，RUM）。
 
@@ -3669,7 +3659,7 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 在一个模拟场景里, 去提交一个需要做性能审计的页面,
 通过一系列的工具、规则去运行你的页面, 提取一些性能指标, 得出一个审计报告.
 
-常见的工具有 Google 的 Lighthouse，webpagetest，pagespeed 等
+常见的工具有 Google 的 Lighthouse，WebPageTest，PageSpeed 等
 
 | 优点                                   |             缺点             |
 | :------------------------------------- | :--------------------------: |
@@ -3688,20 +3678,20 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 - 真实用户监控的优缺点
 
 | 优点                                   | 缺点                             |
-| :-------------------------------------| :--------------------------------|
-| 无需配置模拟条件，完全还原真实场景    | 影响真实用户的访问性能及流量消耗 |
-| 不存在登录等需要额外解决的场景       | 无法采集硬件相关指标           |
-| 数据样本足够庞大，可以减少统计误差    | 无法采集完整的资源加载瀑布图    |
-| 新年数据可与其它数据关联，产生更大价值 | 无法可视化展示加载过程         |
+| :------------------------------------- | :------------------------------- |
+| 无需配置模拟条件，完全还原真实场景     | 影响真实用户的访问性能及流量消耗 |
+| 不存在登录等需要额外解决的场景         | 无法采集硬件相关指标             |
+| 数据样本足够庞大，可以减少统计误差     | 无法采集完整的资源加载瀑布图     |
+| 新年数据可与其它数据关联，产生更大价值 | 无法可视化展示加载过程           |
 
 #### 对比
 
 | 对比项         | 合成监控               | 真实用户监控               |
-| :-------------| :--------------------- | :------------------------- |
-| 实现难度及成本 | 较低                | 较高                    |
-| 采集数据丰富度 | 丰富                | 基础                    |
-| 数据样本量    | 较小                | 大(视业务体量)            |
-| 适合场景      | 定性分析, 小数据量分析 | 定量分析, 业务数据深度挖掘 |
+| :------------- | :--------------------- | :------------------------- |
+| 实现难度及成本 | 较低                   | 较高                       |
+| 采集数据丰富度 | 丰富                   | 基础                       |
+| 数据样本量     | 较小                   | 大(视业务体量)             |
+| 适合场景       | 定性分析, 小数据量分析 | 定量分析, 业务数据深度挖掘 |
 
 #### 方案
 
@@ -3733,8 +3723,8 @@ Load 也不一定代表用户看到主要内容.
 
 - First Contentful Paint (FCP)
 - First Meaningful Paint (FMP)
-- Largest Conentful Paint (LCP)
-- First Ipnut Delay (FID)
+- Largest Contentful Paint (LCP)
+- First Input Delay (FID)
 - Time to Interactive (TOI)
 
 #### 上报关联的维度
@@ -3845,8 +3835,8 @@ const observer = new IntersectionObserver((nodes) => {
   });
 });
 
-const imgs = document.querySelectorAll('img.lazyload');
-imgs.forEach((v) => observer.observe(v));
+const images = document.querySelectorAll('img.lazyload');
+images.forEach((v) => observer.observe(v));
 ```
 
 Native Lazy Loading:
@@ -3874,9 +3864,9 @@ Best practice: lazy loading scripts not execute immediately
 (**Chrome Coverage Devtools**)
 
 ```html
-<script src="myscript.js"></script>
-<script src="myscript.js" async></script>
-<script src="myscript.js" defer></script>
+<script src="myScript.js"></script>
+<script src="myScript.js" async></script>
+<script src="myScript.js" defer></script>
 ```
 
 ```jsx
@@ -3888,13 +3878,13 @@ const PageComponent = () => {
 };
 ```
 
-#### Prefetch
+#### PreFetch
 
 ```html
 <link rel="preload" /> <link rel="prefetch" />
 ```
 
-[Why not to prefetch prerender](https://addyosmani.com/blog/what-not-to-prefetch-prerender):
+[Why not to PreFetch and PreRender](https://addyosmani.com/blog/what-not-to-prefetch-prerender):
 
 - avoid prefetching pages for authentication
 - avoid over-prefetching to limit accidental DOS
@@ -3930,7 +3920,7 @@ const PageComponent = () => {
 ### V8 Good Parts
 
 - source code (parser) AST (interpreter) bytecode
-- send profilling data from bytecode to optimizing compiler, generate optimized code
+- send profiling data from bytecode to optimizing compiler, generate optimized code
 - **Ignition** interpreter
 - **TurboFan** optimizing compiler (2 for SpiderMonkey/Edge, 3 for Safari)
 
@@ -3977,8 +3967,8 @@ V8 use ICs to memorize information (same shape) where to find properties on obje
 
 #### V8 Perf Tools
 
-- [deoptigate](https://github.com/thlorenz/deoptigate)
-- [turbolizer](https://github.com/thlorenz/turbolizer)
+- [Deoptigate](https://github.com/thlorenz/deoptigate)
+- [Turbolizer](https://github.com/thlorenz/turbolizer)
 - [v8 map processor](https://github.com/thlorenz/v8-map-processor)
 
 #### Awesome V8 Performance Tutorial
@@ -3994,14 +3984,14 @@ Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 
 #### Inspect Android Device
 
-- enable developmemnt mode and USB debugging in Android Device
+- enable development mode and USB debugging in Android Device
 - link Android and PC with USB cable
 - open `chrome://inspect/#devices` to start inspecting
 
 ### Performance Best Practice
 
 - use monomorphic objects due to shape and inline caches
-- use monomorphic fucntion in hot code paths
+- use monomorphic function in hot code paths
 - resource optimization
 - code splitting
 - lazy loading
@@ -4175,7 +4165,7 @@ await page.goto('https://www.google.com');
 await page.tracing.stop();
 ```
 
-#### Other Puppeterr Testing API
+#### Other Puppeteer Testing API
 
 - `page.setOfflineMode`
 - `page.setGeolocation`
@@ -4193,7 +4183,7 @@ await page.tracing.stop();
 #### UI 测试
 
 - 用户行为: Karma/Selenium
-- 功能测试: Phantomjs/Slimerjs/Karma
+- 功能测试: Phantom.js/Slimer.js/Karma
 
 ### 可测试代码
 
@@ -4282,7 +4272,7 @@ O.makeBread({ type: wheat, size: 99, name: 'foo' });
 - 编写代码时，保持最小复杂度(最小依赖，最低耦合)
 - 利用 mock/stub 模拟外部依赖/测试数据
 
-#### mock/stub/spy
+#### Mock Testing
 
 - mock: 模拟对象中的方法/接口
 - stub: 模拟对象中的返回值
@@ -4417,7 +4407,7 @@ debugger;
 ```
 
 ```js
-copy(obj); // to clipborad
+copy(obj); // to clipboard
 ```
 
 ```js
@@ -4519,7 +4509,7 @@ long click reload: multiple reload options e.g clean cache
 - click filename, filter error messages
 - add folder to workspace
 
-#### capture default eventListener
+#### Capture Default Event Listener
 
 > \$0: the reference to the currently selected element in the Elements panel
 
@@ -4545,7 +4535,7 @@ $0.addEventListener('click', (e) => {
 
 ### Network Panel
 
-- throtting: simulate different network environment
+- throttling: simulate different network environment
 - initiator：go to files
 
 ### Performance Panel
@@ -4612,26 +4602,26 @@ tool for composite stage analysis
 // bad
 let i,
   len,
-  dragonball,
+  dragonBall,
   items = getItems(),
   goSportsTeam = true;
 
 // bad
 let i;
 const items = getItems();
-let dragonball;
+let dragonBall;
 const goSportsTeam = true;
 let len;
 
 // good
 const goSportsTeam = true;
 const items = getItems();
-let dragonball;
+let dragonBall;
 let i;
 let length;
 ```
 
-- no chains assignment (create implict global variable)
+- no chains assignment (create implicit global variable)
 
 ```js
 // bad
@@ -4691,7 +4681,7 @@ const item = {};
 ```js
 // bad
 const atom = {
-  lukeSkywalker: lukeSkywalker,
+  lukeSkyWalker: lukeSkyWalker,
   addValue: function (value) {
     return atom.value + value;
   },
@@ -4699,14 +4689,14 @@ const atom = {
 
 // good
 const atom = {
-  lukeSkywalker,
+  lukeSkyWalker,
   addValue(value) {
     return atom.value + value;
   },
 };
 ```
 
-- use Object.prototype.XX not object.xx
+- use `Object.prototype.XX` not `object.xx`
 
 ```js
 // bad
@@ -5189,7 +5179,7 @@ if (a && b && c) {
   a += d;
 }
 
-// antipattern
+// anti pattern
 // missing or inconsistent spaces
 // make the code confusing
 let d = 0,
@@ -5217,8 +5207,8 @@ if (a && b && c) {
 
 ```js
 /*
- * @module myapp
- * @namespace MYAPP
+ * @module app
+ * @namespace APP
  */
 ```
 
@@ -5313,7 +5303,7 @@ const cacheEnd = performance.now();
 ```js
 // Check that service workers are registered
 if ('serviceWorker' in navigator) {
-  // Use the window load event to keep the page load performant
+  // Use the window load event to keep the page load performance
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js');
   });
@@ -5505,8 +5495,8 @@ function changeColor(color) {
 
 for all objects:
 
-- constructor: `positon{x, y}`, `speed{x, y}`, `size{x, y}`
-- update(deltatime): change position or speed
+- constructor: `position{x, y}`, `speed{x, y}`, `size{x, y}`
+- update(deltaTime): change position or speed
 - draw(ctx): use canvas api and object properties (position/size) to render objects
 
 ```js
@@ -5720,14 +5710,14 @@ draw();
   需要借助 `JSON.parse` 与 `JSON.stringify`
 
 ```js
-if (!localStorage.getItem('bgcolor')) {
+if (!localStorage.getItem('bgColor')) {
   populateStorage();
 } else {
   setStyles();
 }
 
 function populateStorage() {
-  localStorage.setItem('bgcolor', document.getElementById('bgcolor').value);
+  localStorage.setItem('bgColor', document.getElementById('bgColor').value);
   localStorage.setItem('font', document.getElementById('font').value);
   localStorage.setItem('image', document.getElementById('image').value);
 
@@ -5735,11 +5725,11 @@ function populateStorage() {
 }
 
 function setStyles() {
-  var currentColor = localStorage.getItem('bgcolor');
+  var currentColor = localStorage.getItem('bgColor');
   var currentFont = localStorage.getItem('font');
   var currentImage = localStorage.getItem('image');
 
-  document.getElementById('bgcolor').value = currentColor;
+  document.getElementById('bgColor').value = currentColor;
   document.getElementById('font').value = currentFont;
   document.getElementById('image').value = currentImage;
 
@@ -5851,7 +5841,7 @@ function WebSocketTest() {
   包括：iframes、浏览器中的不同 tab 页 (browsing context)
 - Web Workers 无法访问一些非常关键的 JavaScript 特性:
   DOM(它会造成线程不安全), window 对象, document 对象, parent 对象.
-- Usecase: Graphic App (Ray Tracing), Encryption, Prefetching Data,
+- Use Case: Graphic App (Ray Tracing), Encryption, Prefetching Data,
   PWA (Service Worker), Spell Checking
 
 ```html
@@ -5944,7 +5934,7 @@ locationError 为获取位置信息失败的回调函数，可以根据错误类
 locationError: function(error){
     switch(error.code) {
         case error.TIMEOUT:
-            showError("A timeout occured! Please try again!");
+            showError("A timeout occurred! Please try again!");
             break;
         case error.POSITION_UNAVAILABLE:
             showError('We can\'t detect your location. Sorry!');
@@ -5953,7 +5943,7 @@ locationError: function(error){
             showError('Please allow geolocation access for this to work.');
             break;
         case error.UNKNOWN_ERROR:
-            showError('An unknown error occured!');
+            showError('An unknown error occurred!');
             break;
     }
 }
@@ -5990,13 +5980,13 @@ locationSuccess: function(position){
         map: myMap
     });
     //创建标注窗口
-    var infowindow = new google.maps.InfoWindow({
+    var infoWindow = new google.maps.InfoWindow({
         content:"您在这里<br/>纬度："+
             coords.latitude+
             "<br/>经度："+coords.longitude
     });
     //打开标注窗口
-    infowindow.open(myMap,marker);
+    infoWindow.open(myMap,marker);
 }
 ```
 
@@ -6040,7 +6030,7 @@ if (isBotAgent) {
 
 - [server-side rendering](https://css-tricks.com/server-side-react-rendering)
   (e.g next.js)
-- [prerendering](https://github.com/chrisvfritz/prerender-spa-plugin)
+- [PreRendering](https://github.com/chrisvfritz/prerender-spa-plugin)
 - mobile performance optimization
   (e.g minify resources, code splitting, CDN, lazy loading, minimize reflows)
 - [SEO-friendly routing and URL management](https://reacttraining.com/react-router)
@@ -6079,7 +6069,7 @@ const seo = {
 
 ### HTTPS
 
-HyperText Transfer Protocl (HTTP) + Transport Layer Security (TLS):
+HyperText Transfer Protocol (HTTP) + Transport Layer Security (TLS):
 
 - CA (Certificate Authority) 认证体系是 HTTPS 防止中间人攻击 (HTTP 明文传输) 的核心,
   客户端需要对服务器发来的证书进行安全性校验.
@@ -6097,7 +6087,7 @@ HTTP/2 的多路复用就是为了解决上述的两个性能问题.
 帧代表着最小的数据单位, 每个帧会标识出该帧属于哪个流, 流也就是多个帧组成的数据流.
 多路复用, 就是在一个 TCP 连接中可以存在多条流, 避免队头阻塞问题和连接数过多问题.
 
-HTTP/2 = `HTTP` + `HPack / Strem` + `TLS 1.2+` + `TCP`
+HTTP/2 = `HTTP` + `HPack / Stream` + `TLS 1.2+` + `TCP`
 
 - 二进制传输 (乱序二进制帧 Stream)
 - Header 压缩 (HPack)
@@ -6107,7 +6097,7 @@ HTTP/2 = `HTTP` + `HPack / Strem` + `TLS 1.2+` + `TCP`
 
 ### HTTP 3
 
-HTTP/3 = `HTTP` + `QPack / Strem` + `QUIC / TLS 1.3+` + `UDP`
+HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`
 
 - 解决多次握手高延迟问题
 - 解决队头 (数据重传) 阻塞 (后续数据) 问题
@@ -6134,7 +6124,7 @@ Host:www.google.com
 - 服务器向客户端发送验证请求代码 `401` `WWW-Authenticate: Basic realm=”google.com”`
 
 ```js
-HTTP/1.0 401 Unauthorised
+HTTP/1.0 401 Unauthorized
 Server: SokEvo/1.0
 WWW-Authenticate: Basic realm=”google.com”
 Content-Type: text/html
@@ -6169,9 +6159,9 @@ Session 缓存在服务端, Cookie 缓存在客户端,
 
 - 客户端发送登录信息 (ID, Password).
 - 服务器收到客户端首次请求并验证成功后,
-  会在服务器端创建 Seesion 并保存唯一的标识字符串 Session ID (Key-Value Store)，
+  会在服务器端创建 Session 并保存唯一的标识字符串 Session ID (Key-Value Store)，
   在 Response Header 中设置 `Set-Cookie: <Session ID>`.
-- 客户端后续发送请求都需在 Requeset Header 中设置: `Cookie: <Session ID>`.
+- 客户端后续发送请求都需在 Request Header 中设置: `Cookie: <Session ID>`.
 - 服务器根据 `<Session ID>` 进行用户验证,
   利用 Session Cookie 机制可以简单地实现**用户登录状态验证**,
   保护需要登录权限才能访问的路由服务.
@@ -6189,7 +6179,7 @@ Session 缓存在服务端, Cookie 缓存在客户端,
 
 - 客户端发送登录信息 (ID, Password).
 - 服务端收到请求验证成功后, 服务端会签发一个 Token (包含用户信息) 并发送给客户端.
-- 客户端收到 Token 后存储到 Cookie 或 Local Storge,
+- 客户端收到 Token 后存储到 Cookie 或 Local Storage,
   客户端每次向服务端请求都需在 Request Header 中设置: `Authorization: <Token>`.
 - 服务端收到请求并验证 Token, 成功发送资源 (鉴权成功), 不成功发送 401 错误代码 (鉴权失败).
 
@@ -6277,7 +6267,7 @@ OAuth Token 特征:
 
 OAuth 2.0 允许自动更新令牌.
 资源所有者颁发令牌时一次性颁发两个令牌,
-一个用于获取数据 (Acess Token),
+一个用于获取数据 (Access Token),
 另一个用于获取新的令牌 (Refresh Token）.
 令牌到期前, 第三方网站使用 Refresh Token 发请求更新令牌:
 
@@ -6313,7 +6303,7 @@ CSP help prevent from XSS
 <script nonce="random123" src="https://cdnjs.com/lib.js"></script>
 ```
 
-nonce only CSP block 3rd lscripts and dynamic scripts generate by trusted users,
+nonce only CSP block 3rd scripts and dynamic scripts generate by trusted users,
 'strict-dynamic' can tackle it.
 
 ```html
@@ -6370,7 +6360,7 @@ def allow_request(req):
   if req['sec-fetch-site'] in ('same-origin', 'same-site', 'none'):
     return True
 
-  # Allow simple top-lelve navigations from anywhere
+  # Allow simple top-level navigation from anywhere
   if req['sec-fetch-mode'] == 'navigate' and req.method == 'GET':
     return True
 
@@ -6564,8 +6554,8 @@ server {
 
 - 前端优化:
   每一个页面都需要去获取灰度规则，这个灰度请求将阻塞页面.
-  可以使用 localStrage 存储这个用户是否为灰度用户,
-  然后定期的更新 localStrage,
+  可以使用 localStorage 存储这个用户是否为灰度用户,
+  然后定期的更新 localStorage,
   取代大量的请求造成的体验问题.
 
 - 后端优化:
@@ -6596,7 +6586,7 @@ server {
   机器的身份的信任根.
 - 源代码和可信编译 (Trusted Build):
   软件的信任根.
-  
+
 #### Identity 2.0
 
 身份 2.0 是对于以上的信任链的标准化,
@@ -6613,7 +6603,7 @@ server {
 - 访问方式: 软件 C
 - 访问地点: 机器 D
 
-#### Continous Access Control
+#### Continuous Access Control
 
 持续访问控制会在软件开发和运行的各个环节持续地进行访问控制:
 
@@ -6639,7 +6629,7 @@ server {
 - 可信启动 (Trusted Boot)
 - 可验证编译 (Verifiable Build)
 - 软件完整性验证 (Software Integrity Verification)
-- 双向TLS (mTLS)
+- 双向 TLS (mTLS)
 - 基于服务的访问策略 (Service Access Policy)
 - 终端用户令牌 (End User Context Tokens)
 - 配置即代码 (Configuration as Code)
