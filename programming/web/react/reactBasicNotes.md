@@ -3,8 +3,9 @@
 <!-- TOC -->
 
 - [React Basic Notes](#react-basic-notes)
-  - [Diff Algorithm (Reconciliation)](#diff-algorithm-reconciliation)
+  - [Core of React](#core-of-react)
     - [React Fiber](#react-fiber)
+      - [React Fiber Metadata](#react-fiber-metadata)
     - [React Render Stage](#react-render-stage)
       - [Elements of Different Types](#elements-of-different-types)
       - [DOM Elements of Same Type](#dom-elements-of-same-type)
@@ -21,14 +22,15 @@
     - [Props Validation](#props-validation)
   - [Element and Component](#element-and-component)
     - [JSX](#jsx)
-    - [functional/class component](#functionalclass-component)
-    - [stateful/stateless component](#statefulstateless-component)
-      - [stateless component](#stateless-component)
-      - [stateful component](#stateful-component)
+    - [Functional and Class component](#functional-and-class-component)
+    - [Stateless and Stateful component](#stateless-and-stateful-component)
+      - [Stateless component](#stateless-component)
+      - [Stateful component](#stateful-component)
     - [Component Lifecycle](#component-lifecycle)
       - [Creation and Mounting Stage](#creation-and-mounting-stage)
       - [Updating Stage](#updating-stage)
       - [Unmounting Stage](#unmounting-stage)
+    - [Render Function](#render-function)
     - [Refs](#refs)
       - [String Refs](#string-refs)
       - [Forward Refs](#forward-refs)
@@ -123,7 +125,7 @@
 
 <!-- /TOC -->
 
-## Diff Algorithm (Reconciliation)
+## Core of React
 
 ### React Fiber
 
@@ -131,6 +133,15 @@
 
 React Fiber 的目标是提高其在动画、布局和手势等领域的适用性.
 它的主要特性是`Incremental Rendering`: 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
+
+#### React Fiber Metadata
+
+[Fiber](https://github.com/facebook/react/blob/v17.0.0/packages/react-reconciler/src/ReactInternalTypes.js):
+
+- Component type.
+- Current props and state.
+- Pointers to parent, sibling, and child components.
+- Other internal metadata to track rendering process.
 
 ### React Render Stage
 
@@ -373,18 +384,18 @@ ReactDOM.render({
 <Component /> 将被转换为 React.createElement(Component)
 ```
 
-### functional/class component
+### Functional and Class component
 
 - 函数型组件没有实例, 类型组件具有实例, 但实例化的工作由 react 自动完成
 - class component 具有更多特性: state, lifecycle hook, performance optimizations(shouldComponentUpdate()回调方法)
 
-### stateful/stateless component
+### Stateless and Stateful component
 
-#### stateless component
+#### Stateless component
 
 采用函数型声明, 不使用 setState(), 一般作为表现型组件
 
-#### stateful component
+#### Stateful component
 
 - 采用类型声明, 使用 setState(), 一般作为容器型组件(containers)
 - 结合 Redux 中的 connect 方法, 将 store 中的 state 作为此类组件的 props
@@ -430,6 +441,18 @@ getSnapshotBeforeUpdate:
 #### Unmounting Stage
 
 componentWillUnmount()
+
+### Render Function
+
+- Default render behavior (without any `memo`/`useMemo`/`PureComponent`):
+  when a parent component renders,
+  React will recursively render all child components inside of it
+  (because `props.children` is always a new reference when parent re-rendering).
+- Render logic:
+  - Can't mutate existing variables and objects.
+  - Can't create random values like `Math.random()` or `Date.now()`.
+  - Can't make network requests.
+  - Can't queue state updates.
 
 ### Refs
 
