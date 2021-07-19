@@ -2775,7 +2775,9 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 - use `key` correctly
 - `shouldComponentUpdate`
-- `React.PureComponent`: **shallow compare** diff
+- `React.memo/React.useMemo/React.PureComponent`:
+  **shallow compare** on components,
+  to prevent unnecessary re-renders caused by parent components.
 - `React.memo`: **shallow compare** diff
 - stateless component
 - Immutable.js
