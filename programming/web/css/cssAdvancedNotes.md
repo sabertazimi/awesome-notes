@@ -3,6 +3,7 @@
 <!-- TOC -->
 
 - [CSS Advanced Notes](#css-advanced-notes)
+  - [CSS Framework Key Points](#css-framework-key-points)
   - [Typography Principles](#typography-principles)
     - [font-size and spacing](#font-size-and-spacing)
       - [font-size](#font-size)
@@ -35,8 +36,17 @@
 
 <!-- /TOC -->
 
-content -> centering -> font family -> spacing -> color&contrast
--> balance(position) -> primary/secondary color -> custom font -> images/links
+## CSS Framework Key Points
+
+- Content
+- Centering
+- Font Family
+- Spacing
+- Color and Contrast
+- Balance (Position)
+- Primary and Secondary Color
+- Custom Text (Font)
+- Images and Links
 
 ## Typography Principles
 
@@ -278,8 +288,13 @@ window.requestAnimationFrame(step);
   - This unblocks Start Render and allows progressive rendering.
 
 ```html
-<link rel="preload" href="/path/to/split.css" as="style">
-<link rel="stylesheet" href="/path/to/split.css" media="print" onload="this.media='all'">
+<link rel="preload" href="/path/to/split.css" as="style" />
+<link
+  rel="stylesheet"
+  href="/path/to/split.css"
+  media="print"
+  onload="this.media='all'"
+/>
 ```
 
 ### Animation
