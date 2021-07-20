@@ -1,8 +1,8 @@
-# Git Basic Note
+# Git Basic Notes
 
 <!-- TOC -->
 
-- [Git Basic Note](#git-basic-note)
+- [Git Basic Notes](#git-basic-notes)
   - [Basic](#basic)
     - [Config](#config)
       - [Basic Configuration](#basic-configuration)

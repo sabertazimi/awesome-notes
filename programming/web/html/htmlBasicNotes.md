@@ -1,8 +1,8 @@
-# HTML5 Basic Notes
+# HTML Basic Notes
 
 <!-- TOC -->
 
-- [HTML5 Basic Notes](#html5-basic-notes)
+- [HTML Basic Notes](#html-basic-notes)
   - [Emmet](#emmet)
     - [嵌套操作](#嵌套操作)
     - [属性操作](#属性操作)

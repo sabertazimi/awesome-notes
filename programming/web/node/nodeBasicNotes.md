@@ -1,8 +1,8 @@
-# Nodejs Basic Notes
+# Node Basic Notes
 
 <!-- TOC -->
 
-- [Nodejs Basic Notes](#nodejs-basic-notes)
+- [Node Basic Notes](#node-basic-notes)
   - [Npm Cli](#npm-cli)
     - [Basic Steps](#basic-steps)
     - [Test Steps](#test-steps)

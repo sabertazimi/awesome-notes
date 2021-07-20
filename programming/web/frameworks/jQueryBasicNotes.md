@@ -1,8 +1,8 @@
-# JQuery
+# jQuery Basic Notes
 
 <!-- TOC -->
 
-- [JQuery](#jquery)
+- [jQuery Basic Notes](#jquery-basic-notes)
   - [Callbacks Queue](#callbacks-queue)
   - [Deferred Queue](#deferred-queue)
   - [Sizzle Selector Engine](#sizzle-selector-engine)

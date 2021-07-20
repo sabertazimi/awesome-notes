@@ -1,8 +1,8 @@
-# Bootstrap Notes
+# Bootstrap Basic Notes
 
 <!-- TOC -->
 
-- [Bootstrap Notes](#bootstrap-notes)
+- [Bootstrap Basic Notes](#bootstrap-basic-notes)
   - [Grid System](#grid-system)
     - [Basic](#basic)
     - [row](#row)
