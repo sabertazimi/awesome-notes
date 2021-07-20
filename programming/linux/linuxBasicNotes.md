@@ -222,7 +222,7 @@
       - [Nginx Basic Configuration](#nginx-basic-configuration)
     - [Docker](#docker)
       - [Docker Installation](#docker-installation)
-      - [Docker  Uninstallation](#docker--uninstallation)
+      - [Docker Uninstallation](#docker-uninstallation)
       - [Docker Basic Usage](#docker-basic-usage)
         - [Build Docker Image](#build-docker-image)
         - [Run Docker Image](#run-docker-image)
@@ -1274,7 +1274,7 @@ ufw allow https
 
 #### arp
 
-`arp -a`显示地址解析协议(IP 地址—网卡地址):
+`arp -a`显示地址解析协议 (IP 地址—网卡地址):
 
 - 网际互联层：IP 协议(网际)、IGMP 协议(互联网组管理)、ICMP 协议(互联网控制报文)
 - 传输层：TCP 协议(传输控制)、UDP 协议(用户数据报)
@@ -1327,7 +1327,7 @@ nftables 命令行工具：nft
 
 #### hping
 
-`hping -p -S -a`可伪造IP地址
+`hping -p -S -a`可伪造 IP 地址
 
 #### mtr
 
@@ -1713,7 +1713,7 @@ fi
 | :-------------------- | :------------------------------------------------ |
 | ! EXPRESSION          | The EXPRESSION is false                           |
 | -n STRING             | The length of STRING is greater than zero         |
-| -z STRING             | The length of STRING is zero (ie it is empty)      |
+| -z STRING             | The length of STRING is zero (ie it is empty)     |
 | STRING1 == STRING2    | STRING1 is equal to STRING2                       |
 | STRING1 != STRING2    | STRING1 is not equal to STRING2                   |
 | STRING1 > STRING2     | STRING1 sorts after STRING2                       |
@@ -1728,7 +1728,7 @@ fi
 | -w FILE               | FILE exists and the write permission is granted   |
 | -x FILE               | FILE exists and the execute permission is granted |
 | `AND -a &&`           |                                                   |
-| `OR -o ||`            |                                                   |
+| `OR -o \|\|`          |                                                   |
 | `NOT ! !`             |                                                   |
 
 - {}: group regexp
@@ -2776,7 +2776,7 @@ sudo systemctl status docker
 sudo usermod -aG docker $USER
 ```
 
-#### Docker  Uninstallation
+#### Docker Uninstallation
 
 ```bash
 docker container stop $(docker container ls -aq)
