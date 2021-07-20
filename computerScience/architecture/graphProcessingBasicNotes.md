@@ -26,27 +26,27 @@
 
 ## Graph System
 
-|分类|In-memory|Out-of-core|
-|:---------:|:--------------------:|:--------------------:|
-|Single machine|Ligra|GraphChi|
-||Polymer|X-Stream|
-||Galois|GridGraph|
-|||Mosaic|
-|Distributed|Pregel|Chaos|
-||PowerGraph||
-||PowerLyra||
-||Gemini||
+| Classification | In-memory  | Out-of-core |
+| :------------: | :--------: | :---------: |
+| Single machine |   Ligra    |  GraphChi   |
+|                |  Polymer   |  X-Stream   |
+|                |   Galois   |  GridGraph  |
+|                |            |   Mosaic    |
+|  Distributed   |   Pregel   |    Chaos    |
+|                | PowerGraph |             |
+|                | PowerLyra  |             |
+|                |   Gemini   |             |
 
 ## NUMA Architecture
 
-引入了 node 和 distance:
+引入了 Node 和 Distance:
 
 - 对于 CPU 和 Memory 这两种最宝贵的硬件资源,
-  NUMA 用近乎严格的方式划分了所属的资源组 (node), 而每个资源组内的 CPU 和 Memory 几乎相等
+  NUMA 用近乎严格的方式划分了所属的资源组 (Node), 而每个资源组内的 CPU 和 Memory 几乎相等
 - 资源组的数量取决于物理 CPU 的个数
-- distance 用来定义各个node之间调用资源的开销, 为资源调度优化算法提供数据支持
+- Distance 用来定义各个 Node 之间调用资源的开销, 为资源调度优化算法提供数据支持
 
-每个进程(或线程)都会从父进程继承NUMA策略, 并分配有一个优先node. 如果NUMA策略允许的话，进程可以调用其他node上的资源.
+每个进程(或线程)都会从父进程继承 NUMA 策略, 并分配有一个优先 node. 如果 NUMA 策略允许的话，进程可以调用其他 node 上的资源.
 
 ### CPU Schedule
 
@@ -55,7 +55,7 @@
 
 ### Memory Schedule
 
-- Local Allocation: 从当前node上请求分配内存
+- Local Allocation: 从当前 Node 上请求分配内存
 - Preferred: 比较宽松地指定了一个推荐的 node 来获取内存, 如果被推荐的 node 上没有足够内存, 进程可以尝试别的 node
 - Memory Bind: 可以指定若干个 node,进 程只能从这些指定的 node 上请求分配内存
 - Interleave: 规定进程从指定的若干个 node 上以 RR (Round Robin) 交织地请求分配内存
@@ -104,7 +104,7 @@ for strict-aliasing warnings:
 
 1. use a union to represent the memory need to reinterpret
 2. use a reinterpret_cast, cast via `char *` at the point where reinterpret
-  the memory - `char *` are defined as being able to alias anything
+   the memory - `char *` are defined as being able to alias anything
 3. use a type which has `__attribute__((__may_alias__))`
 4. turn off the aliasing assumptions globally using -fno-strict-aliasing
 
