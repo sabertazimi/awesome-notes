@@ -2282,7 +2282,10 @@ GC 优化的核心思路:
 
 - 监控告警系统：Zabbix、Prometheus、Open-Falcon
 - jdk 自动实时内存监控工具：VisualVM
-- 堆外内存监控：Java VisualVM 安装 Buffer Pools 插件、google perf工具、Java NMT(Native Memory Tracking)工具
+- 堆外内存监控：
+  Java VisualVM 安装 Buffer Pools 插件,
+  google perf 工具,
+  Java NMT (Native Memory Tracking) 工具
 - GC 日志分析：GCViewer、gceasy
 
 ```bash
@@ -2295,7 +2298,7 @@ jmap -dump:live,format=b,file=dump.prof <pid>
 
 # 用来查看正在运行的 Java 应用程序的扩展参数
 # 包括 Java System 属性和 JVM 命令行参数
-jinfo <pid>  
+jinfo <pid>
 ```
 
 ## Java Naming Conventions
