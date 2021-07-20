@@ -184,8 +184,7 @@
     - [常用限定符](#常用限定符)
     - [反向引用](#反向引用)
     - [RegExp 静态属性](#regexp-静态属性)
-    - [分组语法](#分组语法)
-    - [Best Practice(提升效率)](#best-practice提升效率)
+    - [RegExp Best Practice](#regexp-best-practice)
     - [RegExp 常用函数](#regexp-常用函数)
       - [test](#test)
       - [replace](#replace)
@@ -225,7 +224,7 @@ var undefined = void null;
 var undefined = void 1;
 var undefined = function () {};
 
-;(function (undef) {
+(function (undef) {
   var undefined = undef;
 })();
 ```
@@ -301,19 +300,20 @@ console.log(typeof badString); // object
 console.log(badString instanceof String); // true
 console.log(Object.prototype.toString.call(badString)); // [object String]
 
-const isPrimitiveString = value => typeof value === 'string';
+const isPrimitiveString = (value) => typeof value === 'string';
 console.log(isPrimitiveString(goodString)); // true
 console.log(isPrimitiveString(badString)); // false
 
-const isObjectWrappedString = value => value instanceof String;
+const isObjectWrappedString = (value) => value instanceof String;
 console.log(isObjectWrappedString(goodString)); // false
 console.log(isObjectWrappedString(badString)); // true
 
-const isString = value => typeof value === 'string' || value instanceof String;
+const isString = (value) =>
+  typeof value === 'string' || value instanceof String;
 console.log(isString(goodString)); // true
 console.log(isString(badString)); // true
 
-const isStringAlternative = value =>
+const isStringAlternative = (value) =>
   Object.prototype.toString.call(badString) === '[object String]';
 console.log(isStringAlternative(goodString)); // true
 console.log(isStringAlternative(badString)); // true
@@ -418,7 +418,7 @@ const nextMonth = (year, month) => {
 ```js
 const getDateItemList = (year, month) => {
   const days = daysOfMonth(year, month);
-  const currentDateItemList = [...Array(days).keys()].map(index => {
+  const currentDateItemList = [...Array(days).keys()].map((index) => {
     return DateItem(year, month, 1 + index);
   });
 
@@ -429,7 +429,7 @@ const getDateItemList = (year, month) => {
   const prefixFirstDay = lastMonthDays - prefixDays + 1;
   const prefixYear = prevYear(year);
   const prefixMonth = prevMonth(year, month);
-  const prefixDateItemList = [...Array(prefixDays).keys()].map(index => {
+  const prefixDateItemList = [...Array(prefixDays).keys()].map((index) => {
     return DateItem(prefixYear, prefixMonth, prefixFirstDay + index);
   });
 
@@ -438,14 +438,14 @@ const getDateItemList = (year, month) => {
   const suffixDays = lastDayWeekday === 6 ? 7 : 6 - lastDayWeekday;
   const suffixYear = nextYear(year);
   const suffixMonth = nextMonth(year, month);
-  const suffixDateItemList = [...Array(suffixDays).keys()].map(index => {
+  const suffixDateItemList = [...Array(suffixDays).keys()].map((index) => {
     return DateItem(suffixYear, suffixMonth, 1 + index);
   });
 
   const dateItemList = [
     ...prefixDateItemList,
     ...currentDateItemList,
-    ...suffixDateItemList
+    ...suffixDateItemList,
   ];
 
   return dateItemList;
@@ -536,7 +536,7 @@ new Array(3.14); // RangeError
 
 ```javascript
 if (typeof Array.isArray === 'undefined') {
-  Array.isArray = function(arg) {
+  Array.isArray = function (arg) {
     // 其余对象返回值 [object Object/Number/String/Boolean]
     return Object.prototype.toString.call(arg) === '[object Array]';
   };
@@ -552,7 +552,7 @@ arr.sort(toExchange);
 ```
 
 ```js
-var toExchange = function(a, b) {
+var toExchange = function (a, b) {
   return 1; // a, b 交换位置
   return -1; // a, b 不交换位置
 };
@@ -595,7 +595,7 @@ string(charArray).split('割断点'); // 选择割断符,返回字符串数组
 ##### Array Traverse
 
 ```javascript
-[] / obj.forEach(function(val) {}); // 遍历数组/对象所有元素(val为单个元素)
+[] / obj.forEach(function (val) {}); // 遍历数组/对象所有元素(val为单个元素)
 ```
 
 ##### Deep Clone of Array
@@ -622,10 +622,7 @@ console.log(nestedArray); //  1, [ 2 ], 3 ]
 ```javascript
 // Tips
 // 反转字符串
-var reverseStr = normalizedStr
-  .split('')
-  .reverse()
-  .join('');
+var reverseStr = normalizedStr.split('').reverse().join('');
 ```
 
 ##### Array Tips
@@ -635,15 +632,12 @@ var reverseStr = normalizedStr
 ```javascript
 str
   .split('')
-  .map(function(subStr) {
+  .map(function (subStr) {
     return decode(subStr.charCodeAt(0));
   })
   .join('');
 
-str
-  .split('')
-  .someOperator()
-  .join('');
+str.split('').someOperator().join('');
 ```
 
 - 实现 contains 方法
@@ -705,7 +699,7 @@ function typeOf(o) {
       '[object Date]': 'date',
       '[object RegExp]': 'regexp',
       '[object Error]': 'error',
-      '[object JSON]': 'json'
+      '[object JSON]': 'json',
     };
 
   return _type[typeof o] || _type[_toString.call(o)] || (o ? 'object' : 'null');
@@ -776,9 +770,9 @@ const hasAge = !!age;
 对象转换为数字:
 
 - 如果对象具有 valueOf 方法且返回原始值(string、number、boolean、undefined、null)，
-则将该原始值转换为数字(转换失败会返回 NaN)，并返回这个数字
+  则将该原始值转换为数字(转换失败会返回 NaN)，并返回这个数字
 - 如果对象具有 toString 方法且返回原始值(string、number、boolean、undefined、null)，
-则将该原始值转换为数字(转换失败会返回 NaN)，并返回这个数字
+  则将该原始值转换为数字(转换失败会返回 NaN)，并返回这个数字
 - 转换失败，抛出 TypeError
 
 对象转换为字符串:
@@ -794,23 +788,23 @@ const toString = Object.prototype.toString;
 
 // 添加valueOf日志
 Object.prototype.valueOf = function () {
-    console.log('valueOf');
-    return valueOf.call(this);
+  console.log('valueOf');
+  return valueOf.call(this);
 };
 // 添加toString日志
 Object.prototype.toString = function () {
-    console.log('toString');
-    return toString.call(this);
+  console.log('toString');
+  return toString.call(this);
 };
 const a = {};
 const b = new Boolean(false);
 
 if (a) {
-    console.log(1);
+  console.log(1);
 }
 
 if (b) {
-    console.log(2);
+  console.log(2);
 }
 
 // output:
@@ -825,14 +819,14 @@ const valueOf = Object.prototype.valueOf;
 const toString = Object.prototype.toString;
 
 // 添加valueOf日志
-Object.prototype.valueOf = function() {
-    console.log('valueOf');
-    return valueOf.call(this);
+Object.prototype.valueOf = function () {
+  console.log('valueOf');
+  return valueOf.call(this);
 };
 // 添加toString日志
-Object.prototype.toString = function() {
-    console.log('toString');
-    return toString.call(this);
+Object.prototype.toString = function () {
+  console.log('toString');
+  return toString.call(this);
 };
 
 let a = {};
@@ -853,13 +847,13 @@ const toString = Object.prototype.toString;
 
 // 添加valueOf日志
 Object.prototype.valueOf = function () {
-    console.log('valueOf');
-    return "1"; // 强制返回原始值
+  console.log('valueOf');
+  return '1'; // 强制返回原始值
 };
 // 添加toString日志
 Object.prototype.toString = function () {
-    console.log('toString');
-    return toString.call(this);
+  console.log('toString');
+  return toString.call(this);
 };
 
 let a = {};
@@ -878,13 +872,13 @@ const toString = Object.prototype.toString;
 
 // 添加valueOf日志
 Object.prototype.valueOf = function () {
-    console.log('valueOf');
-    return valueOf.call(this);
+  console.log('valueOf');
+  return valueOf.call(this);
 };
 // 添加toString日志
 Object.prototype.toString = function () {
-    console.log('toString');
-    return toString.call(this);
+  console.log('toString');
+  return toString.call(this);
 };
 
 const a = {};
@@ -903,13 +897,13 @@ const toString = Object.prototype.toString;
 
 // 添加valueOf日志
 Object.prototype.valueOf = function () {
-    console.log('valueOf');
-    return valueOf.call(this);
+  console.log('valueOf');
+  return valueOf.call(this);
 };
 // 添加toString日志
 Object.prototype.toString = function () {
-    console.log('toString');
-    return this;
+  console.log('toString');
+  return this;
 };
 
 const a = {};
@@ -951,10 +945,10 @@ var i = a ? 1 : b ? 2 : c ? 3 : 4;
 `a + b`:
 
 - 如果有一个是对象，则遵循对象对原始值的转换过程
-  (Date对象直接调用toString完成转换，
-  其他对象通过valueOf转化，
-  如果转换不成功则调用toString)
-- 如果两个都是对象，两个对象都遵循步骤1转换到字符串
+  (Date 对象直接调用 toString 完成转换，
+  其他对象通过 valueOf 转化，
+  如果转换不成功则调用 toString)
+- 如果两个都是对象，两个对象都遵循步骤 1 转换到字符串
 - 两个数字，进行算数运算
 - 两个字符串，直接拼接
 - 一个字符串一个数字，直接拼接为字符串
@@ -968,17 +962,17 @@ var i = a ? 1 : b ? 2 : c ? 3 : 4;
 ```javascript
 function doAction(action) {
   var actions = {
-    hack: function() {
+    hack: function () {
       return 'hack';
     },
 
-    slash: function() {
+    slash: function () {
       return 'slash';
     },
 
-    run: function() {
+    run: function () {
       return 'run';
-    }
+    },
   };
 
   if (typeof actions[action] !== 'function') {
@@ -1060,7 +1054,7 @@ Function instanceof Object; // true
 
 ```js
 var obj = {
-  name: 'sabertazimi'
+  name: 'sabertazimi',
 };
 
 console.log(obj.__proto__ === Object.prototype); // true
@@ -1105,7 +1099,7 @@ var employee = new Employee('Jack');
 ##### Object Create API
 
 ```js
-Object.create = function(o) {
+Object.create = function (o) {
   if (arguments.length > 1) {
     throw new Error(
       'Object.create implementation' + ' only accepts the first parameter.'
@@ -1123,7 +1117,7 @@ Object.create = function(o) {
 - 当返回值为**基本类型**时,仍然可得到 this 指针指向的原有对象
 
 ```javascript
-var ObjectMaker = function() {
+var ObjectMaker = function () {
   this.name = 'This is it';
   //user-defined literal object
   //直接忽略this.name
@@ -1164,7 +1158,7 @@ function Waffle() {
 ```javascript
 //立即函数模式:
 //此时返回值不是函数本身,而是函数执行后的return语句返回值
-var global = (function() {
+var global = (function () {
   //返回全局对象
   return this;
 })();
@@ -1181,7 +1175,7 @@ function Gadget() {
   // private member
   var name = 'iPod';
   // public function
-  this.getName = function() {
+  this.getName = function () {
     return name;
   };
 }
@@ -1196,7 +1190,7 @@ function Gadget() {
   // private member
   var pref = {};
   // public function
-  this.getPref = function() {
+  this.getPref = function () {
     return pref.clone();
   };
 }
@@ -1235,7 +1229,7 @@ var obj = (function () {
 直接向构造函数添加方法
 
 ```javascript
-Object.isArray = function() {};
+Object.isArray = function () {};
 ```
 
 ### 模块化对象
@@ -1297,7 +1291,7 @@ return {
 
 ```javascript
 if (typeof Function.prototype.method !== 'function') {
-  Function.prototype.method = function(name, implementation) {
+  Function.prototype.method = function (name, implementation) {
     this.prototype[name] = implementation;
     return this;
   };
@@ -1305,13 +1299,13 @@ if (typeof Function.prototype.method !== 'function') {
 ```
 
 ```javascript
-var Person = function(name) {
+var Person = function (name) {
   this.name = name;
 }
-  .method('getName', function() {
+  .method('getName', function () {
     return this.name;
   })
-  .method('setName', function(name) {
+  .method('setName', function (name) {
     this.name = name;
     return this;
   });
@@ -1324,11 +1318,11 @@ var Person = function(name) {
 可用于所有继承模式中,减少内存消耗 **Best Practice**:
 
 ```javascript
-var inherit = (function() {
+var inherit = (function () {
   // 减少继承过程中父类的实例化,减少资源消耗
   // 实例化一个空类所需资源更少
-  var F = function() {};
-  return function(C, P) {
+  var F = function () {};
+  return function (C, P) {
     // c.__proto__ = C.prototype = f
     // f.__proto__ = F.prototype
     // F.prototype = P.prototype
@@ -1342,7 +1336,7 @@ var inherit = (function() {
 ```
 
 ```js
-Child.prototype.add = function() {
+Child.prototype.add = function () {
   return Child.super.add.call(this);
 };
 ```
@@ -1359,7 +1353,7 @@ function Parent(name) {
   this.name = name || 'Adam';
 }
 // adding functionality to the prototype
-Parent.prototype.say = function() {
+Parent.prototype.say = function () {
   return this.name;
 };
 
@@ -1376,11 +1370,11 @@ Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor �
 复制式地继承，将会消耗大量内存单元 **Best Practice**:
 
 ```javascript
-var classSim = function(Parent, props) {
+var classSim = function (Parent, props) {
   var Child, F, i;
 
   // 新的构造函数
-  Child = function() {
+  Child = function () {
     if (Child.uber && Child.uber.hasOwnProperty('_construct')) {
       Child.uber._construct.apply(this, arguments);
     }
@@ -1392,7 +1386,7 @@ var classSim = function(Parent, props) {
   // 类式继承
   Parent = Parent || Object;
   // 代理构造函数F
-  F = function() {};
+  F = function () {};
   F.prototype = Parent.prototype;
   Child.prototype = new F();
   Child.uber = Parent.prototype;
@@ -1412,13 +1406,13 @@ var classSim = function(Parent, props) {
 
 ```javascript
 var SuperMan = classSim(Man, {
-  _construct: function(what) {
+  _construct: function (what) {
     console.log("SuperMan's constructor");
   },
-  getName: function() {
+  getName: function () {
     var name = SuperMan.uber.getName.call(this);
     return 'I am ' + name;
-  }
+  },
 });
 ```
 
@@ -1434,7 +1428,7 @@ f.prototype = o;
 
 ```javascript
 if (!Object.create) {
-  Object.create = function(o) {
+  Object.create = function (o) {
     if (arguments.length > 1) {
       throw new Error(
         'Object.create implementation' + ' only accepts the first parameter.'
@@ -1458,7 +1452,7 @@ var switchProto = {
     return this;
   },
 
-  state: false
+  state: false,
 };
 
 var switchInstance = Object.create(switchProto);
@@ -1471,8 +1465,8 @@ var switchInstance = Object.create(switchProto);
 ##### 浅克隆
 
 ```javascript
-_.extend = function(obj) {
-  each(slice.call(arguments, 1), function(source) {
+_.extend = function (obj) {
+  each(slice.call(arguments, 1), function (source) {
     for (var prop in source) {
       obj[prop] = source[prop];
     }
@@ -1540,14 +1534,14 @@ var cake = mix(
 ```js
 function factory() {
   var highlander = {
-    name: 'MacLeod'
+    name: 'MacLeod',
   };
 
   //利用闭包，返回私有对象，实现工厂方法
   return {
     get: function get() {
       return highlander;
-    }
+    },
   };
 }
 ```
@@ -1627,7 +1621,7 @@ add(1, 2); // this -> global
 
 const obj = {
   value: 1,
-  foo: function() {
+  foo: function () {
     // 若不将 this 赋值给 that, 而在内部函数中直接使用 this.value
     // 则会发生错误: 内部函数的 this 指向全局对象而不是obj
     const that = this;
@@ -1635,7 +1629,7 @@ const obj = {
       return that.value;
     }
     return inner();
-  }
+  },
 };
 
 obj.foo(); // 1
@@ -1680,13 +1674,13 @@ Constructor Invocation: this 绑定至传入的空对象
 
 ```js
 const obj = {
-  foo: function() {
+  foo: function () {
     const inner = () => {
       return this.value;
     };
 
     return inner();
-  }
+  },
 };
 
 const func = obj.foo;
@@ -1748,7 +1742,7 @@ function foo() {}
 //函数表达式
 var foo = function foo() {};
 var obj = {
-  say: function say() {}
+  say: function say() {},
 };
 
 //变量提升
@@ -1777,7 +1771,7 @@ var b = 10;
 ```javascript
 // 除非必要,否则不改变原有对象
 var obj = {
-  value: 2
+  value: 2,
 };
 
 function setValue(obj, val) {
@@ -1789,7 +1783,7 @@ function setValue(obj, val) {
 ```javascript
 // 好习惯: 改变新对象,返回新对象
 var obj = {
-  value: 2
+  value: 2,
 };
 
 function setValue(obj, val) {
@@ -1813,7 +1807,7 @@ if (callback) {
 ```
 
 ```javascript
-var findNodes = function(callback) {
+var findNodes = function (callback) {
   var i = 100000,
     nodes = [],
     found;
@@ -1841,13 +1835,13 @@ var findNodes = function(callback) {
 当回调函数为对象方法时(特别时方法中使用 this 指针),需同时传入对象参数,并利用 apply/call 改变执行环境
 
 ```javascript
-var findNodes = function(callbackObj, callback) {
+var findNodes = function (callbackObj, callback) {
   if (typeof callback === 'function') {
     callback.call(callbackObj, found);
   }
 };
 
-var findNodes = function(callbackObj, callback) {
+var findNodes = function (callbackObj, callback) {
   if (typeof callback === 'string') {
     callback = callbackObj[callback];
   }
@@ -1867,11 +1861,11 @@ var findNodes = function(callbackObj, callback) {
 
 ```javascript
 //definition
-var foo = function() {
+var foo = function () {
   // initialize code;
   var t = new Date();
 
-  foo = function() {
+  foo = function () {
     return t;
   };
 
@@ -1886,12 +1880,12 @@ console.log(foo()); // t
 ```
 
 ```js
-var addEvent = function(el, type, handle) {
+var addEvent = function (el, type, handle) {
   addEvent = el.addEventListener
-    ? function(el, type, handle) {
+    ? function (el, type, handle) {
         el.addEventListener(type, handle, false);
       }
-    : function(el, type, handle) {
+    : function (el, type, handle) {
         el.attachEvent('on' + type, handle);
       };
 
@@ -1911,7 +1905,7 @@ var addEvent = function(el, type, handle) {
 - 将整个函数置于括号内
 
 ```javascript
-(function() {
+(function () {
   console.log('watch out');
 })();
 ```
@@ -1930,9 +1924,9 @@ foo 不被赋予 function 值,而被赋予函数执行后的返回值;
 此返回值可设为函数可产生闭包。
 
 ```javascript
-var getResult = (function() {
+var getResult = (function () {
   var res = 2 + 2;
-  return function() {
+  return function () {
     return res;
   };
 })();
@@ -1974,7 +1968,7 @@ const boundFunc = func.bind(context, arg1, arg2, ...);
 
 ```javascript
 function bind(o, m) {
-  return function() {
+  return function () {
     return m.apply(o, [].slice.call(arguments));
   };
 }
@@ -1983,9 +1977,9 @@ function bind(o, m) {
 ```javascript
 var one = {
     name: 'object',
-    say: function(greet) {
+    say: function (greet) {
       return greet + ', ' + this.name;
-    }
+    },
   },
   two = { name: 'another object' },
   twoSay = bind(two, one.say);
@@ -2038,7 +2032,7 @@ setTimeout('myFunc()', 1000);
 setTimeout('myFunc(1, 2, 3)', 1000);
 // preferred
 setTimeout(myFunc, 1000);
-setTimeout(function() {
+setTimeout(function () {
   myFunc(1, 2, 3);
 }, 1000);
 ```
@@ -2051,10 +2045,10 @@ setTimeout(function() {
 
 ```js
 var o = Object.create({
-  say: function() {
+  say: function () {
     alert(this.name);
   },
-  name: 'Byron'
+  name: 'Byron',
 });
 ```
 
@@ -2094,14 +2088,14 @@ Object.defineProperties(o, {
     value: 24,
     writable: true,
     enumerable: true,
-    configurable: true
+    configurable: true,
   },
   sex: {
     value: 'male',
     writable: false,
     enumerable: false,
-    configurable: false
-  }
+    configurable: false,
+  },
 });
 ```
 
@@ -2158,7 +2152,7 @@ let animation = setInterval(() => {
     setTimeout(() => {
       for (let n = 0; n < length; n++) {
         ele_arr[n].className = 'data-list__item finish';
-        (function(index) {
+        (function (index) {
           setTimeout(() => {
             ele_arr[index].className = 'data-list__item';
           }, 500);
@@ -2178,7 +2172,7 @@ let animation = setInterval(() => {
     );
     data_queue[j] = data_queue[j - 1];
     ele_arr[j].className = 'data-list__item change';
-    (function(index) {
+    (function (index) {
       setTimeout(() => {
         ele_arr[index].className = 'data-list__item';
       }, 200);
@@ -2248,12 +2242,12 @@ if (typeof target === 'undefined') {
 ```javascript
 var app = {};
 
-(function(exports) {
-  (function(exports) {
+(function (exports) {
+  (function (exports) {
     var api = {
       moduleExists: function test() {
         return true;
-      }
+      },
     };
     //闭包式继承,扩展exports对象为api对象
     $.extend(exports, api);
@@ -2266,8 +2260,8 @@ var app = {};
 // global object
 var APP = {};
 // constructors
-APP.Parent = function() {};
-APP.Child = function() {};
+APP.Parent = function () {};
+APP.Child = function () {};
 // a variable
 APP.some_var = 1;
 // an object container
@@ -2281,7 +2275,7 @@ APP.modules.module2 = {};
 #### 通用命名空间函数
 
 ```javascript
-APP.namespace = function(namespaceString) {
+APP.namespace = function (namespaceString) {
   var parts = namespaceString.split('.'),
     parent = APP,
     i;
@@ -2366,9 +2360,9 @@ function Sandbox() {
 Sandbox.prototype = {
   name: 'My Application',
   version: '1.0',
-  getName: function() {
+  getName: function () {
     return this.name;
-  }
+  },
 };
 ```
 
@@ -2376,40 +2370,40 @@ Sandbox.prototype = {
 
 ```javascript
 Sandbox.modules = {};
-Sandbox.modules.dom = function(box) {
-  box.getElement = function() {};
-  box.getStyle = function() {};
+Sandbox.modules.dom = function (box) {
+  box.getElement = function () {};
+  box.getStyle = function () {};
   box.foo = 'bar';
 };
-Sandbox.modules.event = function(box) {
+Sandbox.modules.event = function (box) {
   // access to the Sandbox prototype if needed:
   // box.constructor.prototype.m = "mmm";
-  box.attachEvent = function() {};
-  box.detachEvent = function() {};
+  box.attachEvent = function () {};
+  box.detachEvent = function () {};
 };
-Sandbox.modules.ajax = function(box) {
-  box.makeRequest = function() {};
-  box.getResponse = function() {};
+Sandbox.modules.ajax = function (box) {
+  box.makeRequest = function () {};
+  box.getResponse = function () {};
 };
 ```
 
 #### 沙盒使用方式
 
 ```javascript
-Sandbox(['ajax', 'event'], function(box) {
+Sandbox(['ajax', 'event'], function (box) {
   // console.log(box);
 });
 
-Sandbox('*', function(box) {
+Sandbox('*', function (box) {
   // console.log(box);
 });
-Sandbox(function(box) {
+Sandbox(function (box) {
   // console.log(box);
 });
 
-Sandbox('dom', 'event', function(box) {
+Sandbox('dom', 'event', function (box) {
   // work with dom and event
-  Sandbox('ajax', function(box) {
+  Sandbox('ajax', function (box) {
     // another sandbox "box" object
     // this "box" is not the same as
     // the "box" outside this function
@@ -2876,7 +2870,7 @@ DOMContentLoaded:
   而所有资源加载完成之后, **load** 事件才会被触发
 
 ```js
-document.addEventListener('DOMContentLoaded', event => {
+document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed.');
 });
 ```
@@ -2926,7 +2920,7 @@ document.addEventListener('visibilitychange', handleVisibilityChange, false);
 ```js
 // <form className='validated-form' noValidate onSubmit={onSubmit}>
 
-const onSubmit = event => {
+const onSubmit = (event) => {
   event.preventDefault();
 
   const form = event.target;
@@ -2943,7 +2937,7 @@ const onSubmit = event => {
   console.log({
     validationMessages,
     data,
-    isValid
+    isValid,
   });
 
   if (isValid) {
@@ -2967,7 +2961,10 @@ const input = document.querySelector('input');
 
 input.addEventListener('select', (event) => {
   const log = document.getElementById('log');
-  const selection = event.target.value.substring(event.target.selectionStart, event.target.selectionEnd);
+  const selection = event.target.value.substring(
+    event.target.selectionStart,
+    event.target.selectionEnd
+  );
   log.textContent = `You selected: ${selection}`;
 });
 ```
@@ -3005,7 +3002,7 @@ window.addEventListener('click', (event) => {
 ```js
 const noContext = document.getElementById('noContextMenu');
 
-noContext.addEventListener('contextmenu', e => {
+noContext.addEventListener('contextmenu', (e) => {
   e.preventDefault();
 });
 ```
@@ -3015,7 +3012,7 @@ noContext.addEventListener('contextmenu', e => {
 `onkeypress/up/down`
 
 ```javascript
-document.onkeydown = function(event) {
+document.onkeydown = function (event) {
   var e = event || window.event || arguments.callee.caller.arguments[0];
   if (e && e.keyCode == 13) {
     // enter 键
@@ -3062,11 +3059,12 @@ document.onkeydown = function(event) {
 const source = document.querySelector('div.source');
 
 source.addEventListener('copy', (event) => {
-    const selection = document.getSelection();
-    event.clipboardData.setData('text/plain',
-      selection.toString().concat('copyright information')
-    );
-    event.preventDefault();
+  const selection = document.getSelection();
+  event.clipboardData.setData(
+    'text/plain',
+    selection.toString().concat('copyright information')
+  );
+  event.preventDefault();
 });
 ```
 
@@ -3146,7 +3144,7 @@ function addLoadEvent(func) {
   if (typeof window.onload != 'function') {
     window.onload = func;
   } else {
-    window.onload = function() {
+    window.onload = function () {
       oldOnLoad();
       func();
     };
@@ -3170,7 +3168,7 @@ function addLoadEvent(func) {
 ```js
 window.addEventListener(
   'hashchange',
-  event => {
+  (event) => {
     // event.oldURL
     // event.nweURL
     if (location.hash === '#someCoolFeature') {
@@ -3242,7 +3240,7 @@ if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
 - scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素大小
 
 ```js
-const isElementInViewport = el => {
+const isElementInViewport = (el) => {
   const { top, height, left, width } = el.getBoundingClientRect();
   const w = window.innerWidth || document.documentElement.clientWidth;
   const h = window.innerHeight || document.documentElement.clientHeight;
@@ -3264,8 +3262,8 @@ Mutation Observer 有以下特点:
 - 它即可以观察发生在 DOM 节点的所有变动，也可以观察某一类变动
 
 ```js
-const mutationObserver = new MutationObserver(mutations => {
-  mutations.forEach(mutation => {
+const mutationObserver = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
     console.log(mutation);
   });
 });
@@ -3277,14 +3275,14 @@ mutationObserver.observe(document.documentElement, {
   childList: true,
   subtree: true,
   attributeOldValue: true,
-  characterDataOldValue: true
+  characterDataOldValue: true,
 });
 ```
 
 ```js
 const target = document.querySelector('#container');
 const callback = (mutations, observer) => {
-  mutations.forEach(mutation => {
+  mutations.forEach((mutation) => {
     switch (mutation.type) {
       case 'attributes':
         // the name of the changed attribute is in
@@ -3306,7 +3304,7 @@ observer.observe(target, {
   attributes: true,
   attributeFilter: ['foo'], // only observe attribute 'foo'
   attributeOldValue: true,
-  childList: true
+  childList: true,
 });
 ```
 
@@ -3315,21 +3313,21 @@ observer.observe(target, {
 ### 基本用法
 
 ```javascript
-var XHR = (function() {
+var XHR = (function () {
   var standard = {
-      createXHR: function() {
+      createXHR: function () {
         return new XMLHttpRequest();
-      }
+      },
     },
     newActionXObject = {
-      createXHR: function() {
+      createXHR: function () {
         return new ActionXObject('Msxml12.XMLHTTP');
-      }
+      },
     },
     oldActionXObject = {
-      createXHR: function() {
+      createXHR: function () {
         return new ActionXObject('Microsoft.XMLHTTP');
-      }
+      },
     };
 
   // 根据兼容性返回对应的工厂对象
@@ -3356,7 +3354,7 @@ var request = XHR.createXHR();
 // 3rd argument : async mode
 request.open('GET', 'example.txt', true);
 
-request.onreadystatechange = function() {
+request.onreadystatechange = function () {
   //do something
   /*
   switch(request.readyState) {
@@ -3386,12 +3384,12 @@ ajax({
   type: 'POST', //请求方式
   data: { name: 'super', age: 20 }, //请求参数
   dataType: 'json',
-  success: function(response, xml) {
+  success: function (response, xml) {
     // 此处放成功后执行的代码
   },
-  fail: function(status) {
+  fail: function (status) {
     // 此处放失败后执行的代码
-  }
+  },
 });
 
 function ajax(options) {
@@ -3409,7 +3407,7 @@ function ajax(options) {
   }
 
   //接收 - 第三步
-  xhr.onreadystatechange = function() {
+  xhr.onreadystatechange = function () {
     if (xhr.readyState == 4) {
       var status = xhr.status;
       if (status >= 200 && status < 300) {
@@ -3478,7 +3476,7 @@ var json = JSON.stringify(obj);
 ### jQuery
 
 ```javascript
-$.getJSON('/json/cats.json', function(json) {
+$.getJSON('/json/cats.json', function (json) {
   $('.message').html(JSON.stringify(json));
 });
 ```
@@ -3556,32 +3554,7 @@ RegExp.$+;
 RegExp.$*;
 ```
 
-| 长名         | 短名                       | 说明                     |
-| :----------- | :------------------------- | :----------------------- |
-| input        | \$\_                       | 最后用于匹配的格式字符串 |
-| lastMatch    | `$&`                       | 最后匹配的结果字符       |
-| lastParen    | \$+                        | 最后匹配的分组/子表达式  |
-| leftContext  | \$`|匹配结果字符串前的字符 |
-| rightContext | \$\'                       | 匹配结果字符串后的字符   |
-| multiline    | \$\*                       | 指定是否开启多行模式     |
-
-### 分组语法
-
-- group
-- lookahead (零宽断言)
-
-| 分类     | 代码/语法      | 说明                                            |
-| :------- | :------------- | :---------------------------------------------- |
-| 捕获     | (exp)          | 匹配 exp,并捕获文本到自动命名的组里             |
-|          | `(?<name>exp)` | 匹配 exp,并捕获文本到名称为 name 的组里         |
-|          | (?:exp)        | 匹配 exp,不捕获匹配的文本，也不给此分组分配组号 |
-| 零宽断言 | (?=exp)        | 匹配 exp 前面的位置                             |
-|          | (?<=exp)       | 匹配 exp 后面的位置                             |
-|          | (?!exp)        | 匹配后面跟的不是 exp 的位置                     |
-|          | `(?<!exp)`     | 匹配前面不是 exp 的位置                         |
-| 注释     | (?#comment)    | 用于提供注释让人阅读                            |
-
-### Best Practice(提升效率)
+### RegExp Best Practice
 
 - 不使用 new RegExp(),使用正则表达式字面量
 - 将正则表达式赋值给变量，防止正则表达式重复创建
@@ -3631,7 +3604,7 @@ replace(regExp, str / func);
 
 ```js
 if (!String.prototype.trim) {
-  String.prototype.trim = function() {
+  String.prototype.trim = function () {
     return this.replace(/^\s+/, '').replace(/\s+$/, '');
   };
 }
@@ -3639,7 +3612,7 @@ if (!String.prototype.trim) {
 
 ```js
 if (!String.prototype.trim) {
-  String.prototype.trim = function() {
+  String.prototype.trim = function () {
     var str = this.replace(/^\s+/, ''),
       end = str.length - 1,
       ws = /\s/;
