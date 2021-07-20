@@ -1484,7 +1484,7 @@ main {
 }
 ```
 
-responsive grid layout
+Responsive `grid` layout
 
 ```css
 .items {
@@ -1522,18 +1522,18 @@ _named_ rows and columns
 
 ### Grid Attention Tips
 
-- `grid-column` will refactor template of grid (`grid-template-columns`)
-- `grid-row` will refactor template of grid (`grid-template-rows`)
+- `grid-column` will refactor template of `grid` (`grid-template-columns`)
+- `grid-row` will refactor template of `grid` (`grid-template-rows`)
 
 ### Grid Alignment
 
 - `justify-content`/`align-content` content within element,
   attach to **parent** css selector
   (effectively adjusts `padding` of parent)
-- `justify-items`/`align-items` inline items inside box,
+- `justify-items`/`align-items` `inline` items inside box,
   attach to **parent** css selector
   (controls `margin` of children )
-- `justify-self`/`align-self` inline element within parent,
+- `justify-self`/`align-self` `inline` element within parent,
   attach to **children** css selector
   (effectively adjusts `margin` of children)
 
@@ -1544,14 +1544,14 @@ _named_ rows and columns
 
 ### Two Column Pattern
 
-利用父元素 relative 与 子元素 absolute 进行布局
+利用父元素 `relative` 与 子元素 `absolute` 进行布局
 
-- inline-block + inline-block
-- float + float
-- float + margin-left
+- `inline-block` + `inline-block`
+- `float` + `float`
+- `float` + `margin-left`
   (block element ignore float element, inline element surround float element)
-- absolute + margin-left (absolute element not in normal flow)
-- float + BFC
+- `absolute` + `margin-left` (absolute element not in normal flow)
+- `float` + BFC
 
 ```css
 .div-1 {
