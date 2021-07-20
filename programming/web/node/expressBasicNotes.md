@@ -25,13 +25,13 @@
 
 ```js
 function (req, res, next) {
-    next();
-    // OR res.send();
+  next();
+  // OR res.send();
 }
 
 function (err, req, res, next) {
-    next(err);
-    // OR res.send();
+  next(err);
+  // OR res.send();
 }
 ```
 
@@ -74,7 +74,7 @@ res.locals 中的所有属性都会传递到模板的上下文中
 在 app.js 中, use 页面控制器之前, 加入:
 
 ```js
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.user = req.user;
   next();
 });
