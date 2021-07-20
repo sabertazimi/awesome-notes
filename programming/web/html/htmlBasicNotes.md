@@ -322,8 +322,16 @@ but so can every `<article>` and `<section>` element
 - [HTML Specification](https://html.spec.whatwg.org/multipage/semantics.html#meta-theme-color)
 
 ```html
-<meta name="theme-color" content="#319197" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#872e4e" media="(prefers-color-scheme: dark)">
+<meta
+  name="theme-color"
+  content="#319197"
+  media="(prefers-color-scheme: light)"
+/>
+<meta
+  name="theme-color"
+  content="#872e4e"
+  media="(prefers-color-scheme: dark)"
+/>
 ```
 
 ## Form
@@ -621,9 +629,9 @@ style="display: none";
       <label for="courses">Select Courses</label>
       <select id="courses" name="student_courses">
         <optgroup label="Engineering">
-          <option value="computer_engineering"
-            >Computer Science Engineering</option
-          >
+          <option value="computer_engineering">
+            Computer Science Engineering
+          </option>
           <option value="electrical_engineering">Electrical Engineering</option>
           <option value="mechanical_engineering">Mechanical Engineering</option>
           <option value="civil_engineering">Civil Engineering</option>
@@ -633,9 +641,9 @@ style="display: none";
           <option value="finance_management">Finance Management</option>
           <option value="technology_management">Technology Management</option>
           <option value="marketing_management">Marketing Management</option>
-          <option value="business_administration"
-            >Business Administration</option
-          >
+          <option value="business_administration">
+            Business Administration
+          </option>
         </optgroup>
       </select>
 
@@ -844,11 +852,11 @@ boolean 代表当前`<time>`表示整个网页的时间
 ```
 
 ```js
-const onChange = event => {
+const onChange = (event) => {
   const {
     currentTarget: {
-      dataset: { row, column }
-    }
+      dataset: { row, column },
+    },
   } = event;
 };
 ```
@@ -1177,7 +1185,7 @@ export function trapTabKey(e, context) {
 const listExpander = document.querySelector('.list-expander');
 const list = document.querySelector('#expandable-list-1');
 
-listExpander.addEventListener('click', e => {
+listExpander.addEventListener('click', (e) => {
   if (list.getAttribute('aria-expanded') === 'true') {
     list.setAttribute('aria-expanded', 'false');
   } else {
