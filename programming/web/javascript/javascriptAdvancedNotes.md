@@ -6627,7 +6627,7 @@ server {
 - 数据中心安全 (Data Center Security)
 - 网络安全 (Network Security)
 - 主机安全 (Host Security)
-- 容器隔离 (Container Isolation，gVisor)
+- 容器隔离 (Container Isolation, gVisor)
 - 可信启动 (Trusted Boot)
 - 可验证编译 (Verifiable Build)
 - 软件完整性验证 (Software Integrity Verification)

@@ -459,7 +459,7 @@
 
 ### Social Forum
 
- -[NodeBB](https://github.com/NodeBB/NodeBB)
+- [NodeBB](https://github.com/NodeBB/NodeBB)
 
 ## Animation
 
