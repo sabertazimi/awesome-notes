@@ -36,19 +36,19 @@ const Tab = san.defineComponent({
     '<div>' +
     '  <header><slot name="title">slot fallback content</slot></header>' +
     '  <main><slot>slot fallback content</slot></main>' +
-    '</div>'
+    '</div>',
 });
 
 const MyComponent = san.defineComponent({
   components: {
-    'ui-tab': Tab
+    'ui-tab': Tab,
   },
 
   template:
     '<div><ui-tab>' +
     '<h3 slot="title">1</h3><p>one</p>' +
     '<h3 slot="title">2</h3><p>two<a slot="title">slot fail</a></p>' +
-    '</ui-tab></div>'
+    '</ui-tab></div>',
 });
 
 /* MyComponent 渲染结果，a 元素无法被插入 title slot
@@ -99,35 +99,35 @@ export default Vue;
 
 ```js
 // initMixin(Vue)    src/core/instance/init.js **************************************************
-Vue.prototype._init = function(options?: Object) {};
+Vue.prototype._init = function (options?: Object) {};
 
 // stateMixin(Vue)    src/core/instance/state.js **************************************************
 Vue.prototype.$data;
 Vue.prototype.$props;
 Vue.prototype.$set = set;
 Vue.prototype.$delete = del;
-Vue.prototype.$watch = function(
+Vue.prototype.$watch = function (
   expOrFn: string | Function,
   cb: any,
   options?: Object
 ): Function {};
 
 // eventsMixin(Vue)    src/core/instance/events.js **************************************************
-Vue.prototype.$on = function(
+Vue.prototype.$on = function (
   event: string | Array<string>,
   fn: Function
 ): Component {};
-Vue.prototype.$once = function(event: string, fn: Function): Component {};
-Vue.prototype.$off = function(
+Vue.prototype.$once = function (event: string, fn: Function): Component {};
+Vue.prototype.$off = function (
   event?: string | Array<string>,
   fn?: Function
 ): Component {};
-Vue.prototype.$emit = function(event: string): Component {};
+Vue.prototype.$emit = function (event: string): Component {};
 
 // lifecycleMixin(Vue)    src/core/instance/lifecycle.js **************************************************
-Vue.prototype._update = function(vnode: VNode, hydrating?: boolean) {};
-Vue.prototype.$forceUpdate = function() {};
-Vue.prototype.$destroy = function() {};
+Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {};
+Vue.prototype.$forceUpdate = function () {};
+Vue.prototype.$destroy = function () {};
 
 // renderMixin(Vue)    src/core/instance/render.js **************************************************
 // installRenderHelpers 函数中
@@ -146,24 +146,24 @@ Vue.prototype._v = createTextVNode;
 Vue.prototype._e = createEmptyVNode;
 Vue.prototype._u = resolveScopedSlots;
 Vue.prototype._g = bindObjectListeners;
-Vue.prototype.$nextTick = function(fn: Function) {};
-Vue.prototype._render = function(): VNode {};
+Vue.prototype.$nextTick = function (fn: Function) {};
+Vue.prototype._render = function (): VNode {};
 
 // core/index.js 文件中
 Object.defineProperty(Vue.prototype, '$isServer', {
-  get: isServerRendering
+  get: isServerRendering,
 });
 
 Object.defineProperty(Vue.prototype, '$ssrContext', {
   get() {
     /* istanbul ignore next */
     return this.$vnode && this.$vnode.ssrContext;
-  }
+  },
 });
 
 // 在 runtime/index.js 文件中
 Vue.prototype.__patch__ = inBrowser ? patch : noop;
-Vue.prototype.$mount = function(
+Vue.prototype.$mount = function (
   el?: string | Element,
   hydrating?: boolean
 ): Component {
@@ -172,7 +172,7 @@ Vue.prototype.$mount = function(
 };
 
 // 在入口文件 entry-runtime-with-compiler.js 中重写了 Vue.prototype.$mount 方法
-Vue.prototype.$mount = function(
+Vue.prototype.$mount = function (
   el?: string | Element,
   hydrating?: boolean
 ): Component {
@@ -189,14 +189,14 @@ Vue.util = {
   warn,
   extend,
   mergeOptions,
-  defineReactive
+  defineReactive,
 };
 Vue.set = set;
 Vue.delete = del;
 Vue.nextTick = nextTick;
 Vue.options = {
   components: {
-    KeepAlive
+    KeepAlive,
     // Transition 和 TransitionGroup 组件在 runtime/index.js 文件中被添加
     // Transition,
     // TransitionGroup
@@ -208,28 +208,31 @@ Vue.options = {
   // show
   // },
   filters: Object.create(null),
-  _base: Vue
+  _base: Vue,
 };
 
 // initUse ***************** global-api/use.js
-Vue.use = function(plugin: Function | Object) {};
+Vue.use = function (plugin: Function | Object) {};
 
 // initMixin ***************** global-api/mixin.js
-Vue.mixin = function(mixin: Object) {};
+Vue.mixin = function (mixin: Object) {};
 
 // initExtend ***************** global-api/extend.js
 Vue.cid = 0;
-Vue.extend = function(extendOptions: Object): Function {};
+Vue.extend = function (extendOptions: Object): Function {};
 
 // initAssetRegisters ***************** global-api/assets.js
-Vue.component = Vue.directive = Vue.filter = function(
-  id: string,
-  definition: Function | Object
-): Function | Object | void {};
+Vue.component =
+  Vue.directive =
+  Vue.filter =
+    function (
+      id: string,
+      definition: Function | Object
+    ): Function | Object | void {};
 
 // expose FunctionalRenderContext for ssr runtime helper installation
 Object.defineProperty(Vue, 'FunctionalRenderContext', {
-  value: FunctionalRenderContext
+  value: FunctionalRenderContext,
 });
 
 Vue.version = '__VERSION__';
@@ -301,23 +304,23 @@ vm._provided;
 
 ```js
 const dataDef = {};
-dataDef.get = function() {
+dataDef.get = function () {
   return this._data;
 };
 const propsDef = {};
-propsDef.get = function() {
+propsDef.get = function () {
   return this._props;
 };
 
 if (process.env.NODE_ENV !== 'production') {
-  dataDef.set = function(newData: Object) {
+  dataDef.set = function (newData: Object) {
     warn(
       'Avoid replacing instance root $data. ' +
         'Use nested data properties instead.',
       this
     );
   };
-  propsDef.set = function() {
+  propsDef.set = function () {
     warn(`$props is readonly.`, this);
   };
 }
@@ -435,7 +438,7 @@ export function makeMap(
   for (let i = 0; i < list.length; i++) {
     map[list[i]] = true;
   }
-  return expectsLowerCase ? val => map[val.toLowerCase()] : val => map[val];
+  return expectsLowerCase ? (val) => map[val.toLowerCase()] : (val) => map[val];
 }
 
 /**
@@ -483,30 +486,24 @@ export function cached<F: Function>(fn: F): F {
  * Camelize a hyphen-delimited string.
  */
 const camelizeRE = /-(\w)/g;
-export const camelize = cached(
-  (str: string): string => {
-    return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ''));
-  }
-);
+export const camelize = cached((str: string): string => {
+  return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ''));
+});
 
 /**
  * Capitalize a string.
  */
-export const capitalize = cached(
-  (str: string): string => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
-);
+export const capitalize = cached((str: string): string => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+});
 
 /**
  * Hyphenate a camelCase string.
  */
 const hyphenateRE = /\B([A-Z])/g;
-export const hyphenate = cached(
-  (str: string): string => {
-    return str.replace(hyphenateRE, '-$1').toLowerCase();
-  }
-);
+export const hyphenate = cached((str: string): string => {
+  return str.replace(hyphenateRE, '-$1').toLowerCase();
+});
 
 /**
  * Simple bind polyfill for environments that do not support it,
@@ -631,7 +628,7 @@ export function looseEqual(a: any, b: any): boolean {
         const keysB = Object.keys(b);
         return (
           keysA.length === keysB.length &&
-          keysA.every(key => {
+          keysA.every((key) => {
             return looseEqual(a[key], b[key]);
           })
         );
@@ -667,7 +664,7 @@ export function looseIndexOf(arr: Array<mixed>, val: mixed): number {
  */
 export function once(fn: Function): Function {
   let called = false;
-  return function() {
+  return function () {
     if (!called) {
       called = true;
       fn.apply(this, arguments);
@@ -774,7 +771,7 @@ View-Model 主要做了两件微小的事情：
 
 ```js
 const _data = {
-  name: 'mark'
+  name: 'mark',
 };
 
 // new Proxy(target, handler);
@@ -782,21 +779,21 @@ let changeName = new Proxy(_data, {
   set(obj, name, value) {
     obj[name] = value;
     render();
-  }
+  },
 });
 ```
 
 ```js
 Array.from(el.getElementsByTagName('input'))
-  .filter(ele => {
+  .filter((ele) => {
     return ele.getAttribute('v-model');
   })
-  .forEach(input => {
+  .forEach((input) => {
     let name = input.getAttribute('v-model');
     input.value = changeName[name];
 
     // DOM Event Listener (listen to the changes of view)
-    input.oninput = function() {
+    input.oninput = function () {
       changeName[name] = this.value;
     };
   });
@@ -866,9 +863,9 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        data: `@import "@/styles/variables.scss";`
-      }
-    }
-  }
+        data: `@import "@/styles/variables.scss";`,
+      },
+    },
+  },
 };
 ```
