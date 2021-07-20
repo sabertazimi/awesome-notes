@@ -139,7 +139,7 @@ response.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
   instead of passing them in **HTTP cookies**
 
 ```js
-req.session.regenerate(function(err) {
+req.session.regenerate(function (err) {
   // New session here
 });
 ```
@@ -147,7 +147,7 @@ req.session.regenerate(function(err) {
 - what: generate complex session IDs
 
 ```js
-const generateSessionId = session => uid(24);
+const generateSessionId = (session) => uid(24);
 ```
 
 - how: reset session IDs after set up session successfully
