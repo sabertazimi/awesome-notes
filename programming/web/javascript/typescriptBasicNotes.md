@@ -136,25 +136,25 @@ module.exports = {
   entry: './src/index.tsx',
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   devtool: 'source-map',
   resolve: {
-    extensions: ['.js', '.json', '.ts', '.tsx']
+    extensions: ['.js', '.json', '.ts', '.tsx'],
   },
   module: {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        loader: 'awesome-typescript-loader'
+        loader: 'awesome-typescript-loader',
       },
-      { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
-    ]
+      { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
+    ],
   },
   externals: {
     react: 'React',
-    'react-dom': 'ReactDOM'
-  }
+    'react-dom': 'ReactDOM',
+  },
 };
 ```
 
@@ -394,7 +394,7 @@ const num = overloaded(123); // num 被推断为 'number'
 在一个以 number 类型为参数，以 string 类型为返回值的函数中:
 
 ```js
-const simple: (foo: number) => string = foo => foo.toString();
+const simple: (foo: number) => string = (foo) => foo.toString();
 ```
 
 ### Weak Overload
@@ -454,18 +454,18 @@ interface Name {
 let name: Name;
 name = {
   first: 'John',
-  second: 'Doe'
+  second: 'Doe',
 };
 
 name = {
   // Error: 'Second is missing'
-  first: 'John'
+  first: 'John',
 };
 
 name = {
   // Error: 'Second is the wrong type'
   first: 'John',
-  second: 1337
+  second: 1337,
 };
 ```
 
@@ -493,7 +493,7 @@ let myPoint.z // Allowed!
 ```js
 interface Crazy {
   new(): {
-    hello: number
+    hello: number,
   };
 }
 
@@ -537,7 +537,7 @@ interface Bar {
 
 ```js
 type FieldState = {
-  value: string
+  value: string,
 };
 
 type FormState = { isValid: boolean } & { [fieldName: string]: FieldState };
@@ -690,7 +690,7 @@ Readonly generic type
 ```js
 type Foo = {
   bar: number,
-  bas: number
+  bas: number,
 };
 
 type FooReadonly = Readonly<Foo>;
@@ -1015,13 +1015,13 @@ console.log(timestampedActiveTableUserExample.isActivated);
 ## Closure
 
 ```js
-const { called } = new class {
+const { called } = new (class {
   count = 0;
   called = () => {
     this.count++;
     console.log(`Called : ${this.count}`);
   };
-}();
+})();
 
 called(); // Called : 1
 called(); // Called : 2
@@ -1081,7 +1081,7 @@ class ...
 ```js
 function inject(options: { api_version: string }) {
   // returns the class decorator implementation
-  return target => {
+  return (target) => {
     // `target` will give us access to the entire class prototype
     target.apiVersion = options.api_version;
   };
@@ -1096,7 +1096,7 @@ function deprecated(target) {
 }
 
 @inject({
-  api_version: '0.3.4'
+  api_version: '0.3.4',
 })
 @deprecated
 class MyComponent extends React.Component<Props> {
@@ -1225,10 +1225,10 @@ class CssThemeProvider extends React.PureComponent<Props> {
 
 ```js
 type Props = {
-  foo: string
+  foo: string,
 };
 
-const myComponent: React.FunctionComponent<Props> = props => {
+const myComponent: React.FunctionComponent<Props> = (props) => {
   return <span>{props.foo}</span>;
 };
 
@@ -1269,7 +1269,7 @@ props and state types with `React.Component<>`
 
 ```js
 type Props = {
-  foo: string
+  foo: string,
 };
 
 class MyComponent extends React.Component<Props, {}> {
@@ -1285,7 +1285,7 @@ class MyComponent extends React.Component<Props, {}> {
 class FocusingInput extends React.Component<
   {
     value: string,
-    onChange: (value: string) => any
+    onChange: (value: string) => any,
   },
   {}
 > {
@@ -1294,9 +1294,9 @@ class FocusingInput extends React.Component<
   render() {
     return (
       <input
-        ref={input => (this.input = input)}
+        ref={(input) => (this.input = input)}
         value={this.props.value}
-        onChange={e => {
+        onChange={(e) => {
           this.props.onChange(e.target.value);
         }}
       />
@@ -1327,7 +1327,7 @@ const Form = () => <Select<string> items={['a', 'b']} />;
 const initialState = {
   name: '',
   points: 0,
-  likesGames: true
+  likesGames: true,
 };
 
 type State = typeof initialState;
@@ -1337,21 +1337,21 @@ type State = typeof initialState;
 export function updateName(name: string) {
   return <const>{
     type: 'UPDATE_NAME',
-    name
+    name,
   };
 }
 
 export function addPoints(points: number) {
   return <const>{
     type: 'ADD_POINTS',
-    points
+    points,
   };
 }
 
 export function setLikesGames(value: boolean) {
   return <const>{
     type: 'SET_LIKES_GAMES',
-    value
+    value,
   };
 }
 
@@ -1376,13 +1376,13 @@ type Action = ReturnType<
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'UPDATE_NAME':
-      return { ...state, name: action.name }
+      return { ...state, name: action.name };
     case 'ADD_POINTS':
-      return { ...state, points: action.points }
+      return { ...state, points: action.points };
     case 'SET_LIKES_GAMES':
-      return { ...state, likesGames: action.value }
+      return { ...state, likesGames: action.value };
     default:
-      return state
+      return state;
   }
 };
 ```
