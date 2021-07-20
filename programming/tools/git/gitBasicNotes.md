@@ -274,7 +274,8 @@ git commit --amend -a -v
 
 ```md
 firstLine - <type>(<scope>): <subject>
-  (emptyLine)
+(emptyLine)
+
 <body>
   (emptyLine)
 <footer>
