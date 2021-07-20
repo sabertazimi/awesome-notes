@@ -6,9 +6,9 @@
   - [Lambda Calculus](#lambda-calculus)
     - [Lambda Expression (Lambda-Term)](#lambda-expression-lambda-term)
     - [Lambda Reduction](#lambda-reduction)
-      - [alpha | α 转换](#alpha--α-转换)
-      - [beta | β 归约](#beta--β-归约)
-      - [eta | η 归约](#eta--η-归约)
+      - [α 转换](#α-转换)
+      - [β 归约](#β-归约)
+      - [η 归约](#η-归约)
     - [Church Numerals](#church-numerals)
   - [Definition for Functional Programming](#definition-for-functional-programming)
   - [Datatype](#datatype)
@@ -50,15 +50,15 @@
 
 ### Lambda Reduction
 
-#### alpha | α 转换
+#### α 转换
 
 `α: λx.x ≡ λy.y` 等价变量替换
 
-#### beta | β 归约
+#### β 归约
 
 `β: ((λV.E) E′) ≡ E[V := E′]` 函数抽象应用(apply)于参数的过程
 
-#### eta | η 归约
+#### η 归约
 
 `λx.M x ≡ M` 用于清除 lambda 表达式中存在的冗余函数抽象
 

@@ -414,7 +414,7 @@ cpack --config CPackSourceConfig.cmake
 INSTALL(TARGETS targets...
         [[ARCHIVE|LIBRARY|RUNTIME]
         [DESTINATION < dir >]
-        [PERMISSIONS permissions...]  
+        [PERMISSIONS permissions...]
         [CONFIGURATIONS
         [Debug|Release|...]]
         [COMPONENT < component >]

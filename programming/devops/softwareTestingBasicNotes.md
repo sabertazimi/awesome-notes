@@ -5,8 +5,8 @@
 - [Software Testing Basic Notes](#software-testing-basic-notes)
   - [测试模型](#测试模型)
     - [PIE 模型](#pie-模型)
-    - [启发式测试策略模型(Heuristic Test Strategy Model)——软件功能测试(难以实现完全自动化)](#启发式测试策略模型heuristic-test-strategy-model软件功能测试难以实现完全自动化)
-    - [用户体验测试(对软件功能测试的有益补充)](#用户体验测试对软件功能测试的有益补充)
+    - [启发式测试策略模型](#启发式测试策略模型)
+    - [用户体验测试](#用户体验测试)
   - [测试规模](#测试规模)
   - [基础概念](#基础概念)
   - [测试方法](#测试方法)
@@ -14,15 +14,15 @@
     - [数据流覆盖方法](#数据流覆盖方法)
     - [逻辑覆盖方法](#逻辑覆盖方法)
     - [随机测试方法](#随机测试方法)
-    - [黑盒/组合测试方法](#黑盒组合测试方法)
-    - [定位 Fault](#定位-fault)
+    - [黑盒测试方法](#黑盒测试方法)
+    - [Fault Location](#fault-location)
     - [模糊测试](#模糊测试)
   - [移动设备](#移动设备)
   - [Useful Tools](#useful-tools)
   - [Bug List](#bug-list)
     - [Basic Bug](#basic-bug)
     - [C Bug](#c-bug)
-    - [低概率/偶发性 Bug](#低概率偶发性-bug)
+    - [偶发性 Bug](#偶发性-bug)
 
 <!-- /TOC -->
 
@@ -32,7 +32,9 @@
 
 (Execution)Fault,(Infection)Error,(Propagation)Failure
 
-### 启发式测试策略模型(Heuristic Test Strategy Model)——软件功能测试(难以实现完全自动化)
+### 启发式测试策略模型
+
+Heuristic Test Strategy Model - 软件功能测试 (难以实现完全自动化):
 
 - 关注价值(Value)：用户得到价值
 - 风险驱动(Risk)：降低价值/用户体验的风险项
@@ -46,7 +48,9 @@
 - 时间(Time):影响产品的时间因素
 - 组合元素:测试产品功能间协作
 
-### 用户体验测试(对软件功能测试的有益补充)
+### 用户体验测试
+
+对软件功能测试的有益补充:
 
 - 功能性体验
 - 易用性体验
@@ -84,7 +88,7 @@ Unit/Module/Integration/System Testing
 
 - ART(随机测试):每个用例间"距离"尽可能远
 
-### 黑盒/组合测试方法
+### 黑盒测试方法
 
 - 等价类划分:合法输入(软件功能),非法输入(异常处理)
 - 等价类的边界值分析:合法 MIN,MIN+,MAX-,MAX 非法:MIN-,MAX+
@@ -93,7 +97,7 @@ Unit/Module/Integration/System Testing
   - 约束用例:需避开约束输入(输入相关性,同时输入会成为无效输入)
   - 测试用例约简+测试用例优先级:额外贪心算法进行化简+排序测试用例求得近似解
 
-### 定位 Fault
+### Fault Location
 
 - 代码可疑度=
   (失败测试用例经过数/失败测试用例总数)/
@@ -138,7 +142,7 @@ Fuzzing - 是一种通过向目标系统提供非预期的输入并监视异常�
 - (隐式)类型转换
 - GOT 覆写(Global Offset Table)
 
-### 低概率/偶发性 Bug
+### 偶发性 Bug
 
 - 多进程完全异步编程的复杂性
 - 逐渐地内存泄漏
