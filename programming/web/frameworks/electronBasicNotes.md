@@ -59,7 +59,7 @@ electron-forge start
 ```js
 // main process
 global.sharedObject = {
-  someProperty: 'default value'
+  someProperty: 'default value',
 };
 
 // render process 1

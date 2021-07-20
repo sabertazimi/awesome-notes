@@ -110,7 +110,7 @@ refer to parent-selector, only use it on:
 $colors: (
   color1: blue,
   color2: red,
-  color3: green
+  color3: green,
 );
 
 @each $key, $color in $colors {
@@ -142,7 +142,7 @@ $params: (true, 42, 'kittens');
 $params: (
   'c': 'kittens',
   'a': true,
-  'b': 42
+  'b': 42,
 );
 @include dummy($params...);
 ```

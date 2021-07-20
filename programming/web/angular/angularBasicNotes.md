@@ -117,7 +117,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `<app-child (valueChange)='displayCounter($event)'></app-child>`
+  template: `<app-child (valueChange)="displayCounter($event)"></app-child>`,
 })
 export class AppComponent implements OnInit {
   ngOnInit() {}
@@ -135,7 +135,9 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-child',
-  template: `<button class='btn btn-primary' (click)="handleClick()">Click me</button>`
+  template: `<button class="btn btn-primary" (click)="handleClick()">
+    Click me
+  </button>`,
 })
 export class AppChildComponent {
   @Output() valueChange: EventEmitter<number> = new EventEmitter();
@@ -163,12 +165,8 @@ import { MessageService } from '../message.service';
 ```html
 <div *ngIf="messageService.messages.length">
   <h2>Messages</h2>
-  <button class="clear" (click)="messageService.clear()">
-    Clear
-  </button>
-  <div *ngFor="let message of messageService.messages">
-    {{message}}
-  </div>
+  <button class="clear" (click)="messageService.clear()">Clear</button>
+  <div *ngFor="let message of messageService.messages">{{message}}</div>
 </div>
 ```
 
@@ -182,9 +180,7 @@ import { MessageService } from '../message.service';
     >Hero name:
     <input #heroName />
   </label>
-  <button (click)="add(heroName.value); heroName.value=''">
-    add
-  </button>
+  <button (click)="add(heroName.value); heroName.value=''">add</button>
 </div>
 ```
 
@@ -268,9 +264,9 @@ const myObservable = of(1, 2, 3);
 
 // Create observer object
 const myObserver = {
-  next: x => console.log('Observer got a next value: ' + x),
-  error: err => console.error('Observer got an error: ' + err),
-  complete: () => console.log('Observer got a complete notification')
+  next: (x) => console.log('Observer got a next value: ' + x),
+  error: (err) => console.error('Observer got an error: ' + err),
+  complete: () => console.log('Observer got a complete notification'),
 };
 
 // Execute with the observer object
@@ -314,7 +310,7 @@ RxJS 提供了 pipe 辅助函数,
 import { take, map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
-map.call(take.call(of(1, 2, 3), 2), val => val + 2);
+map.call(take.call(of(1, 2, 3), 2), (val) => val + 2);
 
 // to
 import { take, map } from 'rxjs/operators';
@@ -322,7 +318,7 @@ import { of } from 'rxjs/observable/of';
 
 of(1, 2, 3).pipe(
   take(2),
-  map(val => val + 2)
+  map((val) => val + 2)
 );
 ```
 
@@ -421,13 +417,13 @@ import { HeroesComponent } from './heroes/heroes.component';
 const routes: Routes = [
   {
     path: 'heroes',
-    component: HeroesComponent
-  }
+    component: HeroesComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
 ```
