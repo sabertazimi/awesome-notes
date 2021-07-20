@@ -22,18 +22,18 @@
     - [全局变量](#全局变量)
     - [局部变量](#局部变量)
     - [变量提升 Hoisting](#变量提升-hoisting)
-    - [数组(与 Object 同源)](#数组与-object-同源)
-      - [length](#length)
-      - [数组字面量](#数组字面量)
-      - [常用方法](#常用方法)
-        - [sort](#sort)
-        - [堆栈](#堆栈)
-        - [分割/合并](#分割合并)
-        - [替换](#替换)
-        - [查询](#查询)
-        - [遍历](#遍历)
+    - [Array](#array)
+      - [Array Length](#array-length)
+      - [Array Literals](#array-literals)
+      - [Array Methods](#array-methods)
+        - [Array Sort](#array-sort)
+        - [Array Stack](#array-stack)
+        - [Array Slice and Merge](#array-slice-and-merge)
+        - [Array Replace](#array-replace)
+        - [Array Query](#array-query)
+        - [Array Traverse](#array-traverse)
         - [Deep Clone of Array](#deep-clone-of-array)
-        - [其他](#其他)
+        - [Array Other Methods](#array-other-methods)
         - [Array Tips](#array-tips)
         - [高阶函数](#高阶函数)
     - [类型检测](#类型检测)
@@ -510,21 +510,22 @@ function example() {
 }
 ```
 
-### 数组(与 Object 同源)
+### Array
 
+- 与 Object 同源
 - 关联数组：`arrayName[“string”] = value;` 实际为 Array 对象添加属性`{string:value}`
 - 缓存数组长度:`int l = list.length`(访问`length`造成运算)
 - `[]`数组，`{}`对象
 
 数组在 数值运算环境 中转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN 数组)
 
-#### length
+#### Array Length
 
 - 数组下标满足 [0, 2^32-1) 即可
 - 运用大于 length 的下标, length 自动增大，不会发生数组边界错误
 - length 等于 数组最后一个整数属性名+1, length 不一定等于 数组中有效元素个数
 
-#### 数组字面量
+#### Array Literals
 
 不使用构造函数,使用数组字面量创建数组
 
@@ -542,9 +543,9 @@ if (typeof Array.isArray === 'undefined') {
 }
 ```
 
-#### 常用方法
+#### Array Methods
 
-##### sort
+##### Array Sort
 
 ```js
 arr.sort(toExchange);
@@ -557,7 +558,7 @@ var toExchange = function(a, b) {
 };
 ```
 
-##### 堆栈
+##### Array Stack
 
 ```javascript
 arr.unshift(value); // 添加数组首元素
@@ -566,7 +567,7 @@ arr.shift(); // 删除数组首元素
 arr.pop(); // 删除数组尾元素
 ```
 
-##### 分割/合并
+##### Array Slice and Merge
 
 - slice 不改变原数组, splice 改变原数组
 
@@ -578,20 +579,20 @@ string(charArray).split('割断点'); // 选择割断符,返回字符串数组
 [].splice(); // 功能强大的多态方法
 ```
 
-##### 替换
+##### Array Replace
 
 ```javascript
 [].replace(oldSubStr, newStr);
 ```
 
-##### 查询
+##### Array Query
 
 ```javascript
 ''.substr(start, end);
 [].indexOf(char); // -1 or other
 ```
 
-##### 遍历
+##### Array Traverse
 
 ```javascript
 [] / obj.forEach(function(val) {}); // 遍历数组/对象所有元素(val为单个元素)
@@ -612,7 +613,7 @@ console.log(arrayCopy); // [ '1', [ '3' ], 3 ]
 console.log(nestedArray); //  1, [ 2 ], 3 ]
 ```
 
-##### 其他
+##### Array Other Methods
 
 ```javascript
 [].reverse();
