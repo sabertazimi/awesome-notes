@@ -55,6 +55,7 @@
     - [Class Component](#class-component)
     - [Generic Component](#generic-component)
     - [Redux](#redux)
+  - [Monorepo](#monorepo)
   - [Reference](#reference)
 
 <!-- /TOC -->
@@ -1387,7 +1388,13 @@ const reducer = (state: State, action: Action): State => {
 };
 ```
 
+## Monorepo
+
+- [TypeScript Monorepo][TypeScript MonoRepo]
+
 ## Reference
 
 - [TypeScript Deep Dive](https://github.com/jkchao/typescript-book-chinese)
 - [Clean TypeScript Code](https://github.com/labs42io/clean-code-typescript)
+
+[TypeScript MonoRepo]: https://2ality.com/2021/07/simple-monorepos.html "TypeScript Monorepo"
