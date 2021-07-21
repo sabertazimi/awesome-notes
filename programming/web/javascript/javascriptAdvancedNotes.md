@@ -72,6 +72,7 @@
       - [Promise](#promise)
         - [Promise All](#promise-all)
         - [Promise Polyfill](#promise-polyfill)
+        - [Promise Thenable and Catch](#promise-thenable-and-catch)
       - [Await and Async](#await-and-async)
         - [Await Arrays](#await-arrays)
       - [Sleep Function](#sleep-function)
@@ -2137,6 +2138,15 @@ class Promise {
   }
 }
 ```
+
+##### Promise Thenable and Catch
+
+The main difference between the forms
+`promise.then(success, error)` and
+`promise.then(success).catch(error)`:
+
+in case if success callback returns a rejected promise,
+then only the second form is going to catch that rejection.
 
 #### Await and Async
 
