@@ -76,7 +76,7 @@
     - [strong](#strong)
     - [small](#small)
     - [hr](#hr)
-    - [`<progress value="" max="">`](#progress-value-max)
+    - [progress](#progress)
     - [meter](#meter)
       - [value](#value)
       - [min](#min)
@@ -759,9 +759,15 @@ underline text
 
 下划线
 
-### `<progress value="" max="">`
+### progress
 
 value/max 百分比
+
+```html
+<label for="file">File progress:</label>
+
+<progress id="file" max="100" value="70">70%</progress>
+```
 
 ### meter
 
