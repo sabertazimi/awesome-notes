@@ -51,6 +51,7 @@
     - [New Object API](#new-object-api)
     - [Arrow Function](#arrow-function)
     - [Modules](#modules)
+      - [CommonJS vs ES6 Module](#commonjs-vs-es6-module)
     - [Class 语法糖](#class-语法糖)
     - [Map](#map)
     - [WeakMap](#weakmap)
@@ -1196,7 +1197,12 @@ export { foo as myFoo } from 'my_module';
 export * from 'my_module';
 ```
 
-- CommonJS 模块是运行时加载，ES6 模块是编译时输出接口
+#### CommonJS vs ES6 Module
+
+- CommonJS 模块是运行时加载，ES6 模块是编译时输出接口.
+- CommonJS 是单个值导出, ES6 Module 可以导出多个.
+- CommonJS 是动态语法可以写在判断里, ES6 Module 静态语法只能写在顶层.
+- CommonJS 的 `this` 是当前模块, ES6 Module 的 `this` 是 `undefined`.
 - CommonJS 模块输出的是一个值的拷贝,
   ES6 模块 Export 分 3 种情况:
   1. `export default xxx`输出`value`,
