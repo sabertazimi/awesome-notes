@@ -167,6 +167,7 @@
       - [Responsive Inline Box](#responsive-inline-box)
     - [Responsive Image](#responsive-image)
     - [Media Query](#media-query)
+      - [Media Query Support Detection](#media-query-support-detection)
       - [JavaScript Media Query API](#javascript-media-query-api)
     - [设备类型](#设备类型)
     - [设备特性](#设备特性)
@@ -3223,6 +3224,39 @@ use `inline-box` with `width`
     width: 750px;
   }
 }
+```
+
+#### Media Query Support Detection
+
+Detecting media query support in CSS:
+
+```css
+@media not all and (prefers-reduced-data), (prefers-reduced-data) {
+}
+```
+
+- No support:
+  not all and (prefers-reduced-data): false,
+  (prefers-reduced-data): false,
+  Combined: false.
+- Support, but off:
+  not all and (prefers-reduced-data): true,
+  (prefers-reduced-data): false,
+  Combined: true.
+- Support, and on:
+  not all and (prefers-reduced-data): false,
+  (prefers-reduced-data): true,
+  Combined: true.
+
+Detecting media query support in JavaScript:
+
+```js
+const query = '(prefers-reduced-data)';
+
+// window.matchMedia(query).media return 'not all' or original query string
+const resolvedMediaQuery = window.matchMedia(query).media;
+
+const isSupported = query === resolvedMediaQuery;
 ```
 
 #### JavaScript Media Query API
