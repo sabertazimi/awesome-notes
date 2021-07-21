@@ -109,7 +109,8 @@
     - [多态方法](#多态方法)
     - [eval](#eval)
     - [常用函数](#常用函数)
-      - [Object](#object)
+      - [Object Descriptor](#object-descriptor)
+      - [Object Functions](#object-functions)
       - [类型判断](#类型判断)
       - [解析函数](#解析函数)
       - [数学函数](#数学函数)
@@ -2040,48 +2041,39 @@ setTimeout(function () {
 
 ### 常用函数
 
-#### Object
+#### Object Descriptor
 
-- `Object.create(prototype[,descriptors])`
-
-```js
-var o = Object.create({
-  say: function () {
-    alert(this.name);
-  },
-  name: 'Byron',
-});
-```
+对象的属性描述符:
 
 - Object.defineProperty(O,Prop,descriptor)
 - Object.defineProperties(O,descriptors)
 
-```js
-// value：值，默认是undefined
-// writable：是否是只读property，默认是false,有点像C#中的const
-// enumerable：是否可以被枚举(for in)，默认false
-// configurable：是否可以被删除，默认false
-```
+数据描述符:
 
-````js
-// get:返回property的值得方法，默认是undefined
-// set：为property设置值的方法，默认是undefined
-```js
+- configurable：是否可以被删除，默认 false
+- enumerable：是否可以被枚举(for in)，默认 false
+- writable：是否是只读 property，默认是 false,有点像 C#中的 const
+- value：值，默认是 undefined
+
+存取描述符:
+
+- get: 返回 property 值的方法, 默认是 undefined
+- set：为 property 设置值的方法, 默认是 undefined
 
 ```js
-Object.defineProperty(o,'age', {
-      value: 24,
-      writable: true,
-      enumerable: true,
-      configurable: true
+Object.defineProperty(o, 'age', {
+  value: 24,
+  writable: true,
+  enumerable: true,
+  configurable: true,
 });
 Object.defineProperty(o, 'sex', {
-      value: 'male',
-      writable: false,    //  不可赋值
-      enumerable: false,  //  不可遍历/枚举
-      configurable: false
+  value: 'male',
+  writable: false, //  不可赋值
+  enumerable: false, //  不可遍历/枚举
+  configurable: false,
 });
-````
+```
 
 ```js
 Object.defineProperties(o, {
@@ -2097,6 +2089,19 @@ Object.defineProperties(o, {
     enumerable: false,
     configurable: false,
   },
+});
+```
+
+#### Object Functions
+
+- `Object.create(prototype[,descriptors])`
+
+```js
+var o = Object.create({
+  say: function () {
+    alert(this.name);
+  },
+  name: 'Byron',
 });
 ```
 
