@@ -763,6 +763,13 @@ figure 可拥有唯一的 0/1 个 figcaption
 
 `<figcaption>figure_title</figcaption>`
 
+```html
+<figure>
+  <img src="/media/cc0-images/elephant-660-480.jpg" alt="Elephant at sunset" />
+  <figcaption>An elephant at sunset</figcaption>
+</figure>
+```
+
 ### img
 
 **Attr** -
