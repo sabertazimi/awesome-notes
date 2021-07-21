@@ -106,6 +106,7 @@
     - [CLI Compiler](#cli-compiler)
     - [CLI Solution](#cli-solution)
     - [CLI Utils](#cli-utils)
+    - [CLI Cheat Sheet](#cli-cheat-sheet)
     - [Terminal](#terminal)
   - [Compiler](#compiler)
     - [Parser](#parser)
@@ -744,6 +745,10 @@
 - [ORA Spinner](https://github.com/sindresorhus/ora)
 - [Progress](https://github.com/bvaughn/progress-estimator)
 - [Code Frame: pointing to source locations](https://github.com/babel/babel/tree/main/packages/babel-code-frame)
+
+### CLI Cheat Sheet
+
+- [TLDR: Help pages for command-line tools](https://github.com/tldr-pages/tldr)
 
 ### Terminal
 
