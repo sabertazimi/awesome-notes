@@ -10,7 +10,8 @@
     - [缺省元素](#缺省元素)
   - [Structure](#structure)
     - [section](#section)
-    - [header footer](#header-footer)
+    - [Header](#header)
+    - [Footer](#footer)
     - [hgroup](#hgroup)
     - [nav](#nav)
     - [main](#main)
@@ -45,6 +46,7 @@
         - [Form Url](#form-url)
         - [Form Email](#form-email)
         - [Form DateTime](#form-datetime)
+        - [Form Datalist](#form-datalist)
       - [indeterminate](#indeterminate)
       - [`list` && `autocomplete`](#list--autocomplete)
       - [pattern](#pattern)
@@ -59,7 +61,8 @@
     - [datalist](#datalist)
     - [Form Demo](#form-demo)
   - [Content](#content)
-    - [details > summary | datalist](#details--summary--datalist)
+    - [Details](#details)
+      - [Details Summary](#details-summary)
       - [Data Grid](#data-grid)
       - [配合 AutoComplete 属性](#配合-autocomplete-属性)
       - [Open](#open)
@@ -268,10 +271,15 @@ table>.row*4>.cell*3 = table>tr.row*4>td.cell*3
 
 必须含有**hx**标题子标签
 
-### header footer
+### Header
 
-not only can the page `<body>` contain a header and a footer,
-but so can every `<article>` and `<section>` element
+Not only can the page `<body>` contain a header,
+but also can every `<article>` and `<section>` element.
+
+### Footer
+
+Not only can the page `<body>` contain a footer,
+but also can every `<article>` and `<section>` element.
 
 ### hgroup
 
@@ -513,6 +521,21 @@ stepDown();
 input.valueAsNumber input.valueAsDate
 ```
 
+##### Form Datalist
+
+```html
+<label for="myBrowser">Choose a browser from this list:</label>
+<input list="browsers" id="myBrowser" name="myBrowser" />
+<datalist id="browsers">
+  <option value="Chrome"></option>
+  <option value="Firefox"></option>
+  <option value="Internet Explorer"></option>
+  <option value="Opera"></option>
+  <option value="Safari"></option>
+  <option value="Microsoft Edge"></option>
+</datalist>
+```
+
 #### indeterminate
 
 javascript tips：检查 type=checkbox 的状态
@@ -675,9 +698,16 @@ style="display: none";
 
 ## Content
 
-### details > summary | datalist
+### Details
 
-**Attr** -
+#### Details Summary
+
+```html
+<details>
+  <summary>Details</summary>
+  Something small enough to escape casual notice.
+</details>
+```
 
 #### Data Grid
 
