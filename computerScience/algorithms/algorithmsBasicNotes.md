@@ -11,7 +11,7 @@
     - [Merge Sort](#merge-sort)
     - [Quick Sort](#quick-sort)
     - [Heap Sort](#heap-sort)
-    - [Radix-Sorts 基数排序(可用于混乱 shuffle 数组)](#radix-sorts-基数排序可用于混乱-shuffle-数组)
+    - [Radix Sort](#radix-sort)
   - [Tree Algorithm](#tree-algorithm)
     - [Binary Search Tree](#binary-search-tree)
     - [2-3 Tree](#2-3-tree)
@@ -211,7 +211,9 @@ void sink(int k) {
 }
 ```
 
-### Radix-Sorts 基数排序(可用于混乱 shuffle 数组)
+### Radix Sort
+
+基数排序 (可用于混乱 shuffle 数组):
 
 - 从个位到高位放入桶
 - 从高位到个位放入桶
