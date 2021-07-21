@@ -64,6 +64,7 @@
       - [Complex Usage](#complex-usage)
       - [Asynchronous Generator](#asynchronous-generator)
     - [Proxy and Reflect](#proxy-and-reflect)
+      - [Proxy vs DefineProperty](#proxy-vs-defineproperty)
       - [Default Zero Value with Proxy](#default-zero-value-with-proxy)
       - [Negative Array Indices with Proxy](#negative-array-indices-with-proxy)
       - [Hiding Properties with Proxy](#hiding-properties-with-proxy)
@@ -1841,6 +1842,17 @@ APIs of handler:
 - getPrototypeOf
 - setPrototypeOf
 - getOwnPropertyDescriptor
+
+#### Proxy vs DefineProperty
+
+- Proxy 使用上比 Object.defineProperty 方便.
+- Proxy 代理整个对象, Object.defineProperty 只代理对象上的某个属性.
+- 如果对象内部要全部递归代理, 则 Proxy 可以只在调用时递归.
+  而 Object.defineProperty 需要在一开始就全部递归.
+  Proxy 性能优于 Object.defineProperty.
+- 对象上定义新属性时, 只有 Proxy 可以监听到.
+- 数组新增删除修改时, 只有 Proxy 可以监听到.
+- Proxy 不兼容 IE, Object.defineProperty 不兼容 IE8 及以下.
 
 #### Default Zero Value with Proxy
 
