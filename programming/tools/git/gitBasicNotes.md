@@ -70,6 +70,10 @@
     - [Wiki](#wiki)
       - [Wiki Git Access](#wiki-git-access)
     - [Shorten GitHub URL](#shorten-github-url)
+    - [GitHub Flavored Markdown](#github-flavored-markdown)
+      - [Link](#link)
+        - [Tooltip of Link](#tooltip-of-link)
+        - [Label of Link](#label-of-link)
   - [Git Tools](#git-tools)
     - [Diff and Patch](#diff-and-patch)
     - [Semantic Git Commit Message](#semantic-git-commit-message)
@@ -1095,6 +1099,37 @@ git clone git@github.com:user/repo.wiki.git
 
 ```bash
 curl -i http://git.io -F "url=https://github.com/technoweenie" -F "code=t"
+```
+
+### GitHub Flavored Markdown
+
+#### Link
+
+##### Tooltip of Link
+
+```md
+This is a [link to a web page](https://url.com 'This title will appear as a tooltip').
+```
+
+```md
+![Alt text](https://imageurl.com 'This is a title')
+```
+
+##### Label of Link
+
+```md
+This is a [link to a web page][mylabel].
+
+Then at the end of the document …
+
+[mylabel]: https://url.com 'Optional title'
+[mylabel]: https://url.com 'Optional title'
+```
+
+```md
+![Alt text][mylabel]
+
+[mylabel]: https://imageurl.com 'This is a title'
 ```
 
 ## Git Tools
