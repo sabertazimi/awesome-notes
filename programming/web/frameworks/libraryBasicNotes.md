@@ -449,6 +449,7 @@
 - [Drag and Drop Grid Layout](https://github.com/jbaysolutions/vue-grid-layout)
 - [Moveable](https://github.com/daybrush/moveable)
 - [TransMat: Share data beyond boundaries of browser](https://github.com/google/transmat)
+- [Spacers: drag for more space](https://github.com/actuallyakash/spacers)
 
 ## Social Utils
 
