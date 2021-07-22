@@ -5,10 +5,6 @@
 - [JavaScript Advanced Notes](#javascript-advanced-notes)
   - [Modern JavaScript](#modern-javascript)
     - [TC39](#tc39)
-    - [Babel](#babel)
-      - [babel-node](#babel-node)
-      - [babel-core](#babel-core)
-      - [CodeMod Tool](#codemod-tool)
     - [Variable](#variable)
       - [let](#let)
       - [const](#const)
@@ -323,6 +319,43 @@
       - [Identity 2.0](#identity-20)
       - [Continuous Access Control](#continuous-access-control)
       - [Zero Trust Basement](#zero-trust-basement)
+  - [Babel](#babel)
+    - [Babel Node](#babel-node)
+    - [Babel Core](#babel-core)
+    - [CodeMod Tool](#codemod-tool)
+    - [Babel Transform Plugin](#babel-transform-plugin)
+    - [Babel Preset Plugin](#babel-preset-plugin)
+  - [Webpack](#webpack)
+    - [Webpack Configuration](#webpack-configuration)
+      - [Webpack Watch Options](#webpack-watch-options)
+      - [Webpack Resolve Path Options](#webpack-resolve-path-options)
+      - [Webpack Flag Options](#webpack-flag-options)
+      - [Webpack Loader Configuration](#webpack-loader-configuration)
+        - [Webpack Babel Loader](#webpack-babel-loader)
+        - [Webpack CSS Loader](#webpack-css-loader)
+        - [Webpack Static Assets Loader](#webpack-static-assets-loader)
+        - [Webpack Thread Loader](#webpack-thread-loader)
+    - [Webpack Optimization](#webpack-optimization)
+      - [Common Libraries](#common-libraries)
+      - [Common Chunks](#common-chunks)
+      - [Code Minimization](#code-minimization)
+      - [Code Splitting](#code-splitting)
+      - [Tree Shaking](#tree-shaking)
+      - [Building Caches](#building-caches)
+      - [Webpack Perf Profiling](#webpack-perf-profiling)
+      - [Commit Linter](#commit-linter)
+    - [Webpack Plugins](#webpack-plugins)
+      - [Webpack HTML Plugins](#webpack-html-plugins)
+      - [Webpack JavaScript Plugins](#webpack-javascript-plugins)
+      - [Webpack CSS Plugins](#webpack-css-plugins)
+      - [Webpack Images Plugins](#webpack-images-plugins)
+      - [Webpack Building Work Plugins](#webpack-building-work-plugins)
+      - [Webpack Bundles UI Plugins](#webpack-bundles-ui-plugins)
+      - [Webpack DLL Plugins](#webpack-dll-plugins)
+      - [Webpack Other Plugins](#webpack-other-plugins)
+      - [Webpack Custom Plugin](#webpack-custom-plugin)
+    - [Webpack Migrate to 5](#webpack-migrate-to-5)
+    - [Webpack Reference](#webpack-reference)
 
 <!-- /TOC -->
 
@@ -331,51 +364,6 @@
 ### TC39
 
 - [New Feature Process](http://tc39.github.io/process-document)
-
-### Babel
-
-```bash
-babel example.js -o compiled.js
-babel src -d lib -s
-```
-
-#### babel-node
-
-A read-eval-print loop(REPL) can replace node REPL.
-
-#### babel-core
-
-提供 babel 转码 API
-
-```bash
-npm install babel-core --save
-```
-
-```js
-const babel = require('babel-core');
-
-// 字符串转码
-babel.transform('code();', options);
-// => { code, map, ast }
-
-// 文件转码（异步）
-babel.transformFile('filename.js', options, function (err, result) {
-  result; // => { code, map, ast }
-});
-
-// 文件转码（同步）
-babel.transformFileSync('filename.js', options);
-// => { code, map, ast }
-
-// Babel AST转码
-babel.transformFromAst(ast, code, options);
-// => { code, map, ast }
-```
-
-#### CodeMod Tool
-
-Use Babel to refactor code,
-like [jscodeshift](https://github.com/facebook/jscodeshift).
 
 ### Variable
 
@@ -6674,3 +6662,759 @@ server {
 - 终端用户令牌 (End User Context Tokens)
 - 配置即代码 (Configuration as Code)
 - 标准化开发和部署 (Standard Development and Deployment)
+
+## Babel
+
+```bash
+babel example.js -o compiled.js
+babel src -d lib -s
+```
+
+### Babel Node
+
+A read-eval-print loop(REPL) can replace node REPL.
+
+### Babel Core
+
+提供 babel 转码 API
+
+```bash
+npm install babel-core --save
+```
+
+```js
+const babel = require('babel-core');
+
+// 字符串转码
+babel.transform('code();', options);
+// => { code, map, ast }
+
+// 文件转码（异步）
+babel.transformFile('filename.js', options, function (err, result) {
+  result; // => { code, map, ast }
+});
+
+// 文件转码（同步）
+babel.transformFileSync('filename.js', options);
+// => { code, map, ast }
+
+// Babel AST转码
+babel.transformFromAst(ast, code, options);
+// => { code, map, ast }
+```
+
+### CodeMod Tool
+
+Use Babel to refactor code,
+like [jscodeshift](https://github.com/facebook/jscodeshift).
+
+### Babel Transform Plugin
+
+- Visitor pattern with Babel.
+- Named `babel-plugin-transform-xxx`.
+
+```json
+{
+  "main": "index.js"
+}
+```
+
+```js
+// index.js
+module.exports = (babel) => {
+  const t = babel.types;
+  let isJSXExisted = false;
+  let isMeactContextEnabled = false;
+
+  return {
+    visitor: {
+      Program: {
+        exit(path) {
+          if (isJSXExisted === true && isMeactContextEnabled === false) {
+            throw path.buildCodeFrameError(`Meact isn't in current context!`);
+          }
+        },
+      },
+      ImportDeclaration(path, state) {
+        if (path.node.specifiers[0].local.name === 'Meact') {
+          isMeactContextEnabled = true;
+        }
+      },
+      MemberExpression(path, state) {
+        if (
+          path.node.object.name === 'React' &&
+          path.node.property.name === 'createElement'
+        ) {
+          isJSXExisted = true;
+          path.replaceWith(
+            t.MemberExpression(
+              t.identifier('Meact'),
+              t.identifier('createElement')
+            )
+          );
+        }
+      },
+    },
+  };
+};
+```
+
+### Babel Preset Plugin
+
+- Just like `.babelrc`.
+- Named `babel-preset-xxx`.
+
+```json
+// package.json
+{
+  "main": "index.js",
+  "dependencies": {
+    "babel-plugin-transform-meact-jsx": "^0.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.7.0"
+  }
+}
+```
+
+```js
+// index.js
+const defaultTargets = {
+  android: 30,
+  chrome: 35,
+  edge: 14,
+  explorer: 9,
+  firefox: 52,
+  safari: 8,
+  ucandroid: 1,
+};
+
+const buildTargets = (options) => {
+  return Object.assign({}, defaultTargets, options.additionalTargets);
+};
+
+module.exports = function buildMeactPreset(context, options) {
+  const transpileTargets =
+    (options && options.targets) || buildTargets(options || {});
+
+  return {
+    presets: [
+      require('babel-preset-env').default(null, {
+        targets: transpileTargets,
+      }),
+    ],
+    plugins: [
+      require('babel-plugin-transform-object-rest-spread'),
+      require('babel-plugin-transform-react-jsx'),
+      require('babel-plugin-transform-meact-jsx'),
+    ].filter(Boolean),
+  };
+};
+```
+
+## Webpack
+
+### Webpack Configuration
+
+#### Webpack Watch Options
+
+```bash
+echo fs.notify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+```
+
+#### Webpack Resolve Path Options
+
+```js
+{
+  resolve: {
+    alias: {
+      '#': path.resolve(__dirname, '/'),
+      '~': path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, 'src'),
+      '~@': path.resolve(__dirname, 'src'),
+      'vendor': path.resolve(__dirname, 'src/vendor'),
+      '~component': path.resolve(__dirname, 'src/components'),
+      '~config': path.resolve(__dirname, 'config'),
+    },
+    extensions: [
+      '.js',
+      '.jsx',
+    ],
+  },
+}
+```
+
+`jsconfig.json` for vscode resolve path:
+
+```js
+{
+  'compilerOptions': {
+    // This must be specified if 'paths' is set
+    'baseUrl': '.',
+    // Relative to 'baseUrl'
+    'paths': {
+      '*': ['*', 'src/*']
+    }
+  }
+}
+
+{
+  'compilerOptions': {
+    'target': 'es2017',
+    'allowSyntheticDefaultImports': false,
+    'baseUrl': './',
+    'paths': {
+      'Config/*': ['src/config/*'],
+      'Components/*': ['src/components/*'],
+      'Ducks/*': ['src/ducks/*'],
+      'Shared/*': ['src/shared/*'],
+      'App/*': ['src/*']
+    }
+  },
+  'exclude': ['node_modules', 'dist']
+}
+```
+
+#### Webpack Flag Options
+
+- --progress
+- --colors
+- -p
+
+#### Webpack Loader Configuration
+
+##### Webpack Babel Loader
+
+```js
+{
+  test: /\.(js|mjs|jsx|ts|tsx)$/,
+  include: path.resolve('src'),
+  use: [
+    'thread-loader',
+    {
+      loader: require.resolve('babel-loader');
+    }
+  ]
+  options: {
+    customize: require.resolve(
+      'babel-preset-react-app/webpack-overrides'
+    ),
+    plugins: [
+      [
+        require.resolve('babel-plugin-named-asset-import'),
+        {
+          loaderMap: {
+            svg: {
+              ReactComponent:
+                '@svgr/webpack?-svgo,+titleProp,+ref![path]',
+            },
+          },
+        },
+      ],
+      ['lodash'],
+    ],
+    cacheDirectory: true,
+    cacheCompression: false,
+    compact: isEnvProduction,
+  },
+}
+```
+
+##### Webpack CSS Loader
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /.s?css$/,
+        exclude: /node_modules$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                compileType: 'module',
+                localIdentName: '[local]__[hash:base64:5]',
+              },
+            },
+          },
+          'sass-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [['autoprefixer']],
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      // `...`,
+      new CssMinimizerPlugin(),
+    ],
+  },
+};
+```
+
+##### Webpack Static Assets Loader
+
+- file-loader
+- url-loader
+- raw-loader
+
+```js
+{
+  rules: [
+    {
+      test: /\.(png|jpg|gif|jpeg|webp|svg|eot|ttf|woff|woff2)$/,
+      type: 'asset',
+    },
+  ];
+}
+```
+
+##### Webpack Thread Loader
+
+```js
+use: [
+  {
+    loader: 'thread-loader',
+    // loaders with equal options will share worker pools
+    options: {
+      // the number of spawned workers, defaults to (number of cpus - 1) or
+      // fallback to 1 when require('os').cpus() is undefined
+      workers: 2,
+
+      // number of jobs a worker processes in parallel
+      // defaults to 20
+      workerParallelJobs: 50,
+
+      // additional node.js arguments
+      workerNodeArgs: ['--max-old-space-size=1024'],
+
+      // Allow to respawn a dead worker pool
+      // respawning slows down the entire compilation
+      // and should be set to false for development
+      poolRespawn: false,
+
+      // timeout for killing the worker processes when idle
+      // defaults to 500 (ms)
+      // can be set to Infinity for watching builds to keep workers alive
+      poolTimeout: 2000,
+
+      // number of jobs the poll distributes to the workers
+      // defaults to 200
+      // decrease of less efficient but more fair distribution
+      poolParallelJobs: 50,
+
+      // name of the pool
+      // can be used to create different pools with elseWise identical options
+      name: 'my-pool',
+    },
+  },
+  // your expensive loader (e.g babel-loader)
+];
+```
+
+```js
+const threadLoader = require('thread-loader');
+
+threadLoader.warmup(
+  {
+    // pool options, like passed to loader options
+    // must match loader options to boot the correct pool
+  },
+  [
+    // modules to load
+    // can be any module, i. e.
+    'babel-loader',
+    'babel-preset-es2015',
+    'sass-loader',
+  ]
+);
+```
+
+### Webpack Optimization
+
+- CDN
+- 服务器端渲染
+- 提取公共库
+- 代码压缩
+- 代码分割: Chunks
+- 代码分割: 按需加载
+- 多核构建
+- 构建缓存
+
+#### Common Libraries
+
+```js
+externals: {
+  moment: 'window.moment',
+  antd: 'window.antd',
+  lodash: 'window._',
+  react: 'window.React',
+  'react-dom': 'window.ReactDOM',
+}
+```
+
+#### Common Chunks
+
+```js
+new webpack.optimize.CommonsChunkPlugin({
+  name: string, // or
+  names: string[],
+  // The chunk name of the commons chunk.
+  // An existing chunk can be selected by passing a name of an existing chunk.
+  // If an array of strings is passed this is equal to
+  // invoking the plugin multiple times for each chunk name.
+  // If omitted and `options.async` or `options.children`
+  // is set all chunks are used, otherwise `options.filename`
+  // is used as chunk name.
+  // When using `options.async` to create common chunks
+  // from other async chunks you must specify an entry-point
+  // chunk name here instead of omitting the `option.name`.
+
+  filename: string,
+  // The filename template for the commons chunk.
+  // Can contain the same placeholders as `output.filename`.
+  // If omitted the original filename is not modified
+  // (usually `output.filename` or `output.chunkFilename`).
+  // This option is not permitted if you're using `options.async` as well,
+  // see below for more details.
+
+  minChunks: number|Infinity|function(module, count) => boolean,
+  // The minimum number of chunks which need to contain a module
+  // before it's moved into the commons chunk.
+  // The number must be greater than or equal 2
+  // and lower than or equal to the number of chunks.
+  // Passing `Infinity` creates the commons chunk, but moves no modules into it.
+  // By providing a `function` you can add custom logic.
+  // (Defaults to the number of chunks)
+
+  chunks: string[],
+  // Select the source chunks by chunk names.
+  // The chunk must be a child of the commons chunk.
+  // If omitted all entry chunks are selected.
+
+  children: boolean,
+  // If `true` all children of the commons chunk are selected
+
+  deepChildren: boolean,
+  // If `true` all descendants of the commons chunk are selected
+
+  async: boolean|string,
+  // If `true` a new async commons chunk is created
+  // as child of `options.name` and sibling of `options.chunks`.
+  // It is loaded in parallel with `options.chunks`.
+  // Instead of using `option.filename`,
+  // it is possible to change the name of the output file by providing
+  // the desired string here instead of `true`.
+
+  minSize: number,
+  // Minimum size of all common module before a commons chunk is created.
+});
+```
+
+#### Code Minimization
+
+```js
+const TerserPlugin = require("terser-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(js|mjs|jsx|ts|tsx)$/,
+        include: path.resolve('src'),
+        use: [
+          'thread-loader',
+          {
+            loader: require.resolve('babel-loader');
+          }
+      },
+      {
+        test: /.s?css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+    ],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          parse: {
+            ecma: 8,
+          },
+          compress: {
+            ecma: 5,
+            warnings: false,
+            drop_console: true,
+            comparisons: false,
+            inline: 2,
+          },
+          mangle: {
+            safari10: true,
+          },
+          keep_classnames: isEnvProductionProfile,
+          keep_fnames: isEnvProductionProfile,
+          output: {
+            ecma: 5,
+            comments: false,
+            ascii_only: true,
+          },
+        },
+        parallel: true,
+        cache: true,
+        sourceMap: shouldUseSourceMap,
+      }),
+      new CssMinimizerPlugin(),
+    ],
+  },
+};
+```
+
+#### Code Splitting
+
+- require.ensure([], () => {});
+- async await import
+
+```js
+{
+  optimization: {
+    splitChunks: {
+      chunks: 'initial',
+      cacheGroups: {
+        common: {
+          chunks: 'initial', // all、async、initial
+          minChunks: 5,
+          name: 'common',
+          priority: 9,
+          enforce: true
+        },
+        vendor: {
+          test: /node_modules/,
+          chunks: 'initial',
+          name: 'vendor',
+          priority: 10,
+          enforce: true
+        }
+      }
+    },
+  }
+}
+```
+
+#### Tree Shaking
+
+1. 尽量不写带有副作用的代码: 诸如编写了立即执行函数, 在函数里又使用了外部变量等
+2. 如果对 ES6 语义特性要求不是特别严格, 可以开启 babel 的 loose 模式 etc. 是否真的要不可枚举 class 的属性
+3. 如果是开发 JavaScript 库, 使用 rollup(ES6 module export + code flow static analysis),
+   并且提供 ES6 module 的版本, 入口文件地址设置到 package.json 的 module 字段
+4. 如果 JavaScript 库开发中, 难以避免的产生各种副作用代码, 可以将功能函数或者组件, 打包成单独的文件或目录,
+   以便于用户可以通过目录去加载.如有条件，也可为自己的库开发单独的 webpack-loader, 便于用户按需加载
+
+#### Building Caches
+
+```js
+new HardSourceWebpackPlugin({
+  // Either an absolute path or relative to webpack options.context.
+  cacheDirectory: 'node_modules/.cache/hard-source/[confighash]',
+  // Either a string of object hash function given a webpack config.
+  configHash: function(webpackConfig) {
+    // node-object-hash on npm can be used to build this.
+    return require('node-object-hash')({sort: false}).hash(webpackConfig);
+  },
+  // Either false, a string, an object, or a project hashing function.
+  environmentHash: {
+    root: process.cwd(),
+    directories: [],
+    files: ['package-lock.json', 'yarn.lock'],
+  },
+  // An object.
+  info: {
+    // 'none' or 'test'.
+    mode: 'none',
+    // 'debug', 'log', 'info', 'warn', or 'error'.
+    level: 'debug',
+  },
+  // Clean up large, old caches automatically.
+  cachePrune: {
+    // Caches younger than `maxAge` are not considered for deletion. They must
+    // be at least this (default: 2 days) old in milliseconds.
+    maxAge: 2 * 24 * 60 * 60 * 1000,
+    // All caches together must be larger than `sizeThreshold` before any
+    // caches will be deleted. Together they must be at least this
+    // (default: 50 MB) big in bytes.
+    sizeThreshold: 50 * 1024 * 1024
+  },
+}),
+```
+
+Webpack 5
+
+```js
+{
+  cache: {
+    type: 'memory'
+  },
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__filename]
+    }
+  },
+}
+```
+
+#### Webpack Perf Profiling
+
+```js
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+
+const smp = new SpeedMeasurePlugin();
+
+const webpackConfig = smp.wrap({
+  plugins: [new MyPlugin(), new MyOtherPlugin()],
+});
+```
+
+```bash
+npx webpack --mode production --profile --json > stats.json
+```
+
+- [Optimize Helper](https://github.com/jakoblind/webpack-optimize-helper)
+- [Statics Chart](https://github.com/alexkuz/webpack-chart)
+
+#### Commit Linter
+
+```json
+{
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e -V",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx, ts, tsx}": ["eslint --fix", "git add"],
+    "src/**/*.{css, scss}": ["stylelint --fix", "git add"]
+  }
+}
+```
+
+### Webpack Plugins
+
+#### Webpack HTML Plugins
+
+- [HTML Plugin](https://github.com/jantimon/html-webpack-plugin)
+
+#### Webpack JavaScript Plugins
+
+- [UglifyJS Terser Plugin](https://github.com/webpack-contrib/terser-webpack-plugin)
+
+#### Webpack CSS Plugins
+
+- [Mini CSS Extract Plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
+- [CSS Minimizer Plugin](https://github.com/webpack-contrib/css-minimizer-webpack-plugin)
+
+#### Webpack Images Plugins
+
+- [ImageMin Plugin](https://github.com/Klathmon/imagemin-webpack-plugin)
+
+#### Webpack Building Work Plugins
+
+- [Thread Loader](https://github.com/webpack-contrib/thread-loader)
+- [Hard Source Plugin](https://github.com/mzgoddard/hard-source-webpack-plugin)
+- [Speed Measure Plugin](https://github.com/stephencookdev/speed-measure-webpack-plugin)
+
+#### Webpack Bundles UI Plugins
+
+- [Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
+- [Monitor](https://github.com/webpackmonitor/webpackmonitor)
+- [Browser UI](https://github.com/zouhir/jarvis)
+- [CLI UI](https://github.com/unjs/webpackbar)
+
+#### Webpack DLL Plugins
+
+- [AutoDLL Plugin](https://github.com/asfktz/autodll-webpack-plugin)
+- DLLReference Plugin
+
+#### Webpack Other Plugins
+
+- Commons Chunk Plugin
+- PreLoad plugin
+- PreFetch plugin
+- Define Plugin
+- Provide Plugin
+- CleanUp Plugin
+- [Webpack Merge](https://github.com/survivejs/webpack-merge)
+
+#### Webpack Custom Plugin
+
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const childProcess = require('child_process');
+const branch = childProcess
+  .execSync('git rev-parse --abbrev-ref HEAD')
+  .toString()
+  .replace(/\s+/, '');
+const version = branch.split('/')[1];
+const scripts = [
+  'https://cdn.bootcss.com/react-dom/16.9.0-rc.0/umd/react-dom.production.min.js',
+  'https://cdn.bootcss.com/react/16.9.0/umd/react.production.min.js',
+];
+
+class HotLoad {
+  apply(compiler) {
+    compiler.hooks.beforeRun.tap('UpdateVersion', (compilation) => {
+      compilation.options.output.publicPath = `./${version}/`;
+    });
+
+    compiler.hooks.compilation.tap('HotLoadPlugin', (compilation) => {
+      HtmlWebpackPlugin.getHooks(compilation).alterAssetTags.tapAsync(
+        'HotLoadPlugin',
+        (data, cb) => {
+          scripts.forEach((src) => [
+            data.assetTags.scripts.unshift({
+              tagName: 'script',
+              voidTag: false,
+              attributes: { src },
+            }),
+          ]);
+          cb(null, data);
+        }
+      );
+    });
+  }
+}
+
+module.exports = HotLoad;
+```
+
+### Webpack Migrate to 5
+
+[Migrate 5 Guide](https://webpack.js.org/migrate/5/):
+
+Make sure there's no webpack deprecation warnings.
+
+```bash
+node --trace-deprecation node_modules/webpack/bin/webpack.js
+```
+
+### Webpack Reference
+
+- [Webpack 4 Tutorial](https://nystudio107.com/blog/an-annotated-webpack-4-config-for-frontend-web-development)
+- [Custom Plugin](https://juejin.cn/post/6870055445034172424)
