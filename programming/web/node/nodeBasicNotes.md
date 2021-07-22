@@ -13,6 +13,7 @@
     - [Link Command](#link-command)
     - [Security Command](#security-command)
     - [npx](#npx)
+    - [NPM Dependencies](#npm-dependencies)
   - [Basic Node Modules](#basic-node-modules)
     - [Process Module](#process-module)
       - [Process Properties](#process-properties)
@@ -218,6 +219,14 @@ run remote repo/gist code
 npx user/repo#branch
 npx gistUrl
 ```
+
+### NPM Dependencies
+
+- peerDependencies:
+  提示宿主环境去安装满足插件 peerDependencies 所指定依赖的包,
+  然后在插件 import 或者 require 所依赖的包的时候,
+  永远都是引用宿主环境统一安装的 npm 包,
+  最终解决插件与所依赖包不一致的问题.
 
 ## Basic Node Modules
 
