@@ -6927,6 +6927,8 @@ sudo sysctl -p
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
+const devMode = process.env.NODE_ENV !== 'production';
+
 module.exports = {
   module: {
     rules: [
@@ -6934,7 +6936,7 @@ module.exports = {
         test: /.s?css$/,
         exclude: /node_modules$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
