@@ -370,8 +370,6 @@ and security for public/private key pair
 
 ## Security Checklist
 
-[返回目录](README-zh.md)
-
 ### 权限系统 (注册/注册/二次验证/密码重置)
 
 - [ ] 任何地方都使用 HTTPS.

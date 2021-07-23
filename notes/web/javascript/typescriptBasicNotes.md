@@ -161,7 +161,7 @@ module.exports = {
 
 ### Integration
 
-- [TSX-Boilerplate](@typescript-eslint/parser)
+- @typescript-eslint/parser
 - [ESLint for TypeScript](https://github.com/typescript-eslint/typescript-eslint)
 - [TSLint Config Airbnb](https://github.com/progre/tslint-config-airbnb)
 
