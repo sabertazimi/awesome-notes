@@ -765,6 +765,7 @@
 - [YAML Parser](https://github.com/jonschlinkert/gray-matter)
 - [XML Parser](https://github.com/TobiasNickel/tXml)
 - [SVG Parser](https://github.com/sebmarkbage/art)
+- [Markdown Parser](https://github.com/yozorajs/yozora)
 
 ## Daemon
 
