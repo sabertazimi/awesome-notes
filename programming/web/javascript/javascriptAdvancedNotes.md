@@ -152,6 +152,7 @@
       - [Images Compression](#images-compression)
       - [Images Scaling](#images-scaling)
     - [Data Loading](#data-loading)
+      - [Data Loading Tips](#data-loading-tips)
       - [Data Preloading](#data-preloading)
       - [Images Lazy Loading](#images-lazy-loading)
       - [JavaScript Lazy Loading](#javascript-lazy-loading)
@@ -3823,6 +3824,12 @@ reduce image transfer sizes by average of ~20%
 ### Data Loading
 
 - [Resources Priority](https://developers.google.com/web/fundamentals/performance/resource-prioritization)
+
+#### Data Loading Tips
+
+- 非必要静态资源上传 CDN
+- 冷启动开启数据预拉取
+- 页面路由切换时进行数据预拉取 (并缓存数据)
 
 #### Data Preloading
 
