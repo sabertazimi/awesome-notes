@@ -220,7 +220,7 @@ after three stages of `Commit`.
 - Batch Update: 事件处理.
 - Not Batch Update: Async Work (setTimeout/Promise.then)
 
-```js
+```jsx
 class Example extends React.Component {
   constructor() {
     super();
@@ -259,7 +259,7 @@ class Example extends React.Component {
 - can use `setInterval`/`setTimeout`/AJAX request/`fetch` in this method,
   and call `setState` as `callback` inside these functions
 
-```js
+```jsx
 class MyComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -315,7 +315,7 @@ class MyComponent extends React.Component {
 
 ### Props Validation
 
-```js
+```jsx
 static PropTypes = {
     arrayProps: React.PropTypes.array
     // array/bool/func/number/object/string/symbol/node/element
@@ -331,7 +331,7 @@ static PropTypes = {
 react element 实际上是纯对象, 可由 React.createElement()/JSX/element factory helper 创建,
 并被 react 在必要时渲染成真实的 DOM 结点
 
-```js
+```jsx
 ReactDOM.render({
   type: Form,
   props: {
@@ -378,7 +378,7 @@ ReactDOM.render({
 在 JSX 中, 小写标签被认为是 HTML 标签.
 但是, 含有 `.` 的大写和小写标签名却不是.
 
-```js
+```jsx
 <component /> 将被转换为 React.createElement('component') (i.e, HTML 标签)
 <obj.component /> 将被转换为 React.createElement(obj.component)
 <Component /> 将被转换为 React.createElement(Component)
@@ -400,7 +400,7 @@ ReactDOM.render({
 - 采用类型声明, 使用 setState(), 一般作为容器型组件(containers)
 - 结合 Redux 中的 connect 方法, 将 store 中的 state 作为此类组件的 props
 
-```js
+```jsx
 this.setState((prevState, props) => ({
   counter: prevState.counter + props.increment,
 }));
@@ -466,7 +466,7 @@ Refs 用于返回对元素的引用.
 
 `Ref` 通过将 Fiber 树中的 `instance` 赋给 `ref.current` 实现
 
-```js
+```jsx
 function commitAttachRef(finishedWork: Fiber) {
   // finishedWork 为含有 Ref effectTag 的 fiber
   const ref = finishedWork.ref;
@@ -501,7 +501,7 @@ function commitAttachRef(finishedWork: Fiber) {
 - 尽可能不适用 `String Refs`
 - React 无法获取 `this` 引用, 需要持续追踪当前`render`出的组件, 性能变慢
 
-```js
+```jsx
 class Foo extends Component {
   render() {
     return <input onClick={() => this.action()} ref="input" />;
@@ -512,7 +512,7 @@ class Foo extends Component {
 }
 ```
 
-```js
+```jsx
 class App extends React.Component {
   renderRow = (index) => {
     // ref 会绑定到 DataTable 组件实例, 而不是 App 组件实例上
@@ -535,7 +535,7 @@ class App extends React.Component {
 Ref forwarding 是一个特性,
 它允许一些组件获取接收到 ref 对象并将它进一步传递给子组件.
 
-```js
+```jsx
 // functional component
 const ButtonElement = React.forwardRef((props, ref) => (
   <button ref={ref} className="CustomButton">
@@ -551,7 +551,7 @@ const ref = React.createRef();
 
 #### Callback Refs
 
-```js
+```jsx
 class UserInput extends Component {
   setSearchInput = (input) => {
     this.input = input;
@@ -737,7 +737,7 @@ class Menu extends React.Component {
   more details on
   [Overreacted](https://overreacted.io/how-are-function-components-different-from-classes/).
 
-```js
+```jsx
 // hook 实例
 const hook = {
   // hook保存的数据
@@ -762,7 +762,7 @@ const hook = {
   avoid expensive calculations on every render
   (avoid re-render problem)
 
-```js
+```jsx
 const Button = ({ color, children }) => {
   const textColor = useMemo(
     () => slowlyCalculateTextColor(color),
@@ -786,7 +786,7 @@ const Button = ({ color, children }) => {
   `removeEventListener` 与 `addEventListener`.
 - `useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`
 
-```js
+```jsx
 function Parent() {
   const [query, setQuery] = useState('react');
 
@@ -821,14 +821,14 @@ function Child({ fetchData }) {
 - 当在 useEffect 中调用 setState 时, 最好使用 `setState(callback)` 形式,
   这样可以不用再 Deps List 中显式声明 state, 也可以避免一些 BUG
 
-```js
+```jsx
 setState((prevState) => {
   // Object.assign would also work
   return { ...prevState, ...updatedValues };
 });
 ```
 
-```js
+```jsx
 let newState = baseState;
 let firstUpdate = hook.baseQueue.next;
 let update = firstUpdate;
@@ -932,7 +932,7 @@ Use useReducer if:
 - for easier testing
 - for more predictable and maintainable state architecture
 
-```js
+```jsx
 const insertToHistory = (state) => {
   if (state && Array.isArray(state.history)) {
     // Do not mutate
@@ -997,7 +997,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
   It's good to get **latest** value of a particular prop or state
   (the updated reference value is available right away).
 
-```js
+```jsx
 function Example() {
   const [count, setCount] = useState(0);
   const latestCount = useRef(count);
@@ -1098,7 +1098,7 @@ Functions in useEffect:
   and pull the ones that are used only by an effect inside of that effect.
 - For useCallback function, it should be in deps list `useEffect(() => {}, [callback])`
 
-```js
+```jsx
 // https://www.robinwieruch.de/react-hooks-fetch-data
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -1149,7 +1149,7 @@ const useDataApi = (initialUrl, initialData) => {
   导致其与 useEffect 所预期行为不一致.
 - 可以通过 useRef 解决这一现象.
 
-```js
+```jsx
 // BUG
 function Counter() {
   let [count, setCount] = useState(0);
@@ -1165,7 +1165,7 @@ function Counter() {
 }
 ```
 
-```js
+```jsx
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -1227,7 +1227,7 @@ function Counter() {
 // You clicked 5 times
 ```
 
-```js
+```jsx
 componentDidUpdate() {
   setTimeout(() => {
     console.log(`You clicked ${this.state.count} times`);
@@ -1250,7 +1250,7 @@ componentDidUpdate() {
 
 ### Hooks Internal
 
-```js
+```jsx
 const MyReact = (function () {
   let hooks = [],
     currentHook = 0; // array of hooks, and an iterator!
@@ -1283,7 +1283,7 @@ const MyReact = (function () {
 })();
 ```
 
-```js
+```jsx
 function Counter() {
   const [count, setCount] = MyReact.useState(0);
   const [text, setText] = MyReact.useState('foo'); // 2nd state hook!
@@ -1325,7 +1325,7 @@ App = MyReact.render(Counter);
 // render {count: 2, text: 'bar'}
 ```
 
-```js
+```jsx
 function Component() {
   const [text, setText] = useSplitURL('www.netlify.com');
   return {
@@ -1359,7 +1359,7 @@ App = MyReact.render(Component);
 componentDidMount: `useLayoutEffect`.
 `useEffect` got invoked after `componentDidMount`.
 
-```js
+```jsx
 const useMount = (fn) => {
   useEffect(() => void fn(), []);
 };
@@ -1367,7 +1367,7 @@ const useMount = (fn) => {
 
 componentWillUnmount
 
-```js
+```jsx
 const useUnmount = (fn) => {
   useEffect(() => fn, []);
 };
@@ -1375,7 +1375,7 @@ const useUnmount = (fn) => {
 
 componentDidUpdate
 
-```js
+```jsx
 const useUpdate = (fn) => {
   const mounting = useRef(true);
 
@@ -1393,11 +1393,11 @@ const useUpdate = (fn) => {
 
 Force Update
 
-```js
+```jsx
 const useUpdate = () => useState(0)[1];
 ```
 
-```js
+```jsx
 // @ts-ignore
 import { useState } from 'react';
 
@@ -1424,7 +1424,7 @@ export default useForceUpdate;
 
 isMounted
 
-```js
+```jsx
 const useIsMounted = () => {
   const [isMount, setIsMount] = useState(false);
 
@@ -1610,7 +1610,7 @@ function usePrevious(value) {
 
 #### Store Hook
 
-```js
+```jsx
 import { useState } from 'react';
 
 export const store = {
@@ -1640,7 +1640,7 @@ export function useStore() {
 
 #### History Hook
 
-```js
+```jsx
 import { useReducer, useCallback } from 'react';
 
 // Initial state that we pass into useReducer
@@ -1739,7 +1739,7 @@ const useHistory = (initialPresent) => {
 
 #### Debounce Hook
 
-```js
+```jsx
 // Hook
 function useDebounce(value, delay) {
   // State and setters for debounced value
@@ -1782,7 +1782,7 @@ useEffect(() => {
 由依赖了 context 的子组件自己进行重渲染, 未依赖的子组件不会重新渲染.
 使用 `useMemo` 使得 value 不会重复创建.
 
-```js
+```jsx
 import React from 'react';
 
 const CountContext = React.createContext();
@@ -1816,7 +1816,7 @@ export { CountProvider, useCount };
 
 #### Router Hook
 
-```js
+```jsx
 import { useContext, useEffect } from 'react';
 import { __RouterContext } from 'react-router';
 import useForceUpdate from 'use-force-update';
@@ -1833,7 +1833,7 @@ const useReactRouter = () => {
 
 #### Script Loading Hook
 
-```js
+```jsx
 // Hook
 let cachedScripts = [];
 
@@ -1904,7 +1904,7 @@ const useScript = (src) => {
 
 #### Form Hook
 
-```js
+```jsx
 import { useState } from 'react';
 
 const useForm = (callback) => {
@@ -2170,7 +2170,7 @@ const App = (props) => {
   可使用 useCallback 包裹函数, 并设置正确的 Deps List,
   尽可能地减少 render 时重新定义此函数.
 
-```js
+```jsx
 // ✅ Not affected by the data flow
 function getFetchUrl(query) {
   return 'https://hn.algolia.com/api/v1/search?query=' + query;
@@ -2215,7 +2215,7 @@ render() {
 
 ### Binding for This
 
-```js
+```jsx
 constructor() {
   this.handle = this.handle.bind(this);
 }
@@ -2227,7 +2227,7 @@ handle(e) {
 }
 ```
 
-```js
+```jsx
 state = {};
 handle = (e) => {};
 ```
@@ -2240,7 +2240,7 @@ handle = (e) => {};
 - use camelCase for component instance reference
 - use camelCase for props name
 
-```js
+```jsx
 // bad
 import reservationCard from './ReservationCard';
 
@@ -2256,7 +2256,7 @@ const reservationItem = <ReservationCard />;
 
 - setting displayName for HOC
 
-```js
+```jsx
 // bad
 export default function withFoo(WrappedComponent) {
   return function WithFoo(props) {
@@ -2284,7 +2284,7 @@ export default function withFoo(WrappedComponent) {
 - use `prop` not `prop={true}`
 - filter out unnecessary props
 
-```js
+```jsx
 // bad
 render() {
   const { irrelevantProp, ...relevantProps  } = this.props;
@@ -2302,7 +2302,7 @@ render() {
 
 - use callback refs
 
-```js
+```jsx
 // bad
 // deprecated
 <Foo
@@ -2317,7 +2317,7 @@ render() {
 
 ### Alignment Style
 
-```js
+```jsx
 // bad
 <Foo superLongParam="bar"
      anotherSuperLongParam="baz" />
@@ -2363,7 +2363,7 @@ render() {
 
 - use `"` for JSX attributes, use `'` for all other JS
 
-```js
+```jsx
 // bad
 <Foo bar='bar' />
 
@@ -2382,7 +2382,7 @@ render() {
 - a single space in self-closing tag
 - no pad JSX curly spaces
 
-```js
+```jsx
 // bad
 <Foo/>
 
@@ -2397,7 +2397,7 @@ render() {
 <Foo />
 ```
 
-```js
+```jsx
 // bad
 <Foo bar={ baz } />
 
@@ -2467,7 +2467,7 @@ render() {
 
 ### Lazy and Suspense
 
-```js
+```jsx
 import React, { lazy, Suspense } from 'react';
 
 const Product = lazy(() => import('./ProductHandler'));
@@ -2487,7 +2487,7 @@ const App = () => (
 );
 ```
 
-```js
+```jsx
 const { lazy, Suspense } = React;
 
 const Lazy = lazy(
@@ -2522,7 +2522,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 Context API provide a Dependency Injection style method,
 to provide values to children components.
 
-```js
+```jsx
 function contextWrapper(WrappedComponent, Context) {
   return class extends React.Component {
     render() {
@@ -2538,7 +2538,7 @@ function contextWrapper(WrappedComponent, Context) {
 
 #### Ref with Context
 
-```js
+```jsx
 // Context.js
 import React, { Component, createContext } from 'react';
 
@@ -2575,7 +2575,7 @@ class Provider extends Component {
 }
 ```
 
-```js
+```jsx
 // TextArea.jsx
 import React from 'react';
 import { Consumer } from './Context';
@@ -2609,7 +2609,7 @@ const TextArea = () => (
 - 在服务端渲染期间
 - 错误边界代码本身中引发错误时
 
-```js
+```jsx
 class ErrorBoundary extends React.Component {
   state = {
     hasError: false,
@@ -2644,7 +2644,7 @@ class ErrorBoundary extends React.Component {
 
 ### React Fragment
 
-```js
+```jsx
 class Items extends React.Component {
   render() {
     return (
@@ -2695,7 +2695,7 @@ that exists **outside** the DOM hierarchy of the parent component
 <div id="portal"></div>
 ```
 
-```js
+```jsx
 const portalRoot = document.getElementById('portal');
 
 class Portal extends React.Component {
@@ -2794,7 +2794,7 @@ If component's render() function renders the same result
 given the same props and state,
 use React.PureComponent/React.memo for a performance boost in some cases.
 
-```js
+```jsx
 import React, { PureComponent } from 'react';
 
 const Unstable = (props) => {
@@ -2832,7 +2832,7 @@ class App extends PureComponent {
 export default App;
 ```
 
-```js
+```jsx
 import React, { Component } from 'react';
 
 const Unstable = React.memo((props) => {
@@ -2884,7 +2884,7 @@ Prevent useless re-rendering:
   通过将变化部分的`state`向下移动从而抽象出变化的子组件,
   或者将变化内容提升到父组件从而将不变部分独立出来:
 
-```js
+```jsx
 // BAD
 import { useState } from 'react';
 
@@ -2908,7 +2908,7 @@ function ExpensiveTree() {
 }
 ```
 
-```js
+```jsx
 // GOOD
 export default function App() {
   return (
@@ -2930,7 +2930,7 @@ function Form() {
 }
 ```
 
-```js
+```jsx
 // GOOD
 export default function App() {
   return (
@@ -2952,7 +2952,7 @@ function ColorPicker({ children }) {
 }
 ```
 
-```js
+```jsx
 // BAD
 function App(items) {
   return <BigListComponent style={{ width: '100%' }} items={items} />;
@@ -2966,7 +2966,7 @@ function App(items) {
 }
 ```
 
-```js
+```jsx
 // BAD: Inline function
 function App(items) {
   return <BigListComponent onClick={() => dispatchEvent()} />;
@@ -2982,7 +2982,7 @@ function App(items) {
 
 ### Code Splitting
 
-```js
+```jsx
 import React, { Component } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -2998,7 +2998,7 @@ export default class Form extends Component {
 }
 ```
 
-```js
+```jsx
 import React, { Component } from 'react';
 
 export default class App extends Component {
@@ -3066,7 +3066,7 @@ the client takes over and the website becomes a SPA.
 
 webpack config
 
-```js
+```jsx
 module.exports = [
   webConfig,
   nodeConfig,
@@ -3090,7 +3090,7 @@ const nodeConfig = {
 
 start.server.js
 
-```js
+```jsx
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import App from './App.js';
@@ -3100,7 +3100,7 @@ export default () => ReactDOMServer.renderToString(<App />);
 
 index.html.js
 
-```js
+```jsx
 const startApp = require('../dist/server.js').default;
 
 module.exports = () => `<!DOCTYPE html>
@@ -3116,7 +3116,7 @@ module.exports = () => `<!DOCTYPE html>
 
 start.client.js
 
-```js
+```jsx
 import React from 'react';
 import ReactDOMServer from 'react-dom';
 import App from './App.js';
@@ -3126,7 +3126,7 @@ ReactDOM.hydrate(<App />, document.getElementById('app'));
 
 - async fetch out of `<App />`
 
-```js
+```jsx
 const data = await fetchData();
 const app = <App {...data} />
 
@@ -3142,7 +3142,7 @@ return {
 
 #### Simple Intl
 
-```js
+```jsx
 // locale/zh.js
 export default ({
    hello: '你好，{name}'
@@ -3154,7 +3154,7 @@ export default ({
 }) ;
 ```
 
-```js
+```jsx
 import IntlMessageFormat from 'intl-messageformat';
 import zh from '../locale/zh';
 import en from '../locale/en';
@@ -3194,7 +3194,7 @@ export default Intl;
 浅层渲染 (Shallow Renderer) 对于在 React 中编写单元测试用例很有用.
 它允许渲染一个一级深的组件并断言其渲染方法返回的内容, 而不必担心子组件未实例化或渲染.
 
-```js
+```jsx
 function MyComponent() {
   return (
     <div>
@@ -3205,7 +3205,7 @@ function MyComponent() {
 }
 ```
 
-```js
+```jsx
 import ShallowRenderer from 'react-test-renderer/shallow';
 
 const renderer = new ShallowRenderer();
@@ -3227,7 +3227,7 @@ expect(result.props.children).toEqual([
 该包可以轻松获取由 ReactDOM 或 React Native 平台所渲染的视图层次结构 (类似于 DOM 树) 的快照,
 而无需使用浏览器或 jsdom.
 
-```js
+```jsx
 import TestRenderer from 'react-test-renderer';
 
 const Link = ({ page, children }) => <a href={page}>{children}</a>;
@@ -3250,7 +3250,7 @@ console.log(testRenderer.toJSON());
 npm install --save-dev enzyme enzyme-adapter-react-16
 ```
 
-```js
+```jsx
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -3320,7 +3320,7 @@ describe(() => {
 
 - [Custom React Scripts](https://auth0.com/blog/how-to-configure-create-react-app/)
 
-```js
+```jsx
 npx create-react-app app-name --scripts-version @sabertazimi/react-scripts --use-npm
 npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-npm
 ```
@@ -3333,7 +3333,7 @@ Initialization in `react-scripts/scripts/init.js`:
 
 - 可以用于改变默认 registry
 
-```js
+```jsx
 'use strict';
 
 const registries = {
@@ -3357,7 +3357,7 @@ Locating in `react-scripts/scripts/`:
 
 - `start.js` for `react-scripts start`
 
-```js
+```jsx
 // 增加关机提示信息
 ['SIGINT', 'SIGTERM'].forEach(function (sig) {
   process.on(sig, function () {
@@ -3384,7 +3384,7 @@ Config in `react-scripts/config/` directory:
 - `webpack.config.js`: Webpack configuration
   (paths, deps/devDeps, plugins, loader rules etc.)
 
-```js
+```jsx
 // add support for Ant Design UI
 {
   test: /\.(js|mjs|jsx|ts|tsx)$/,
@@ -3411,7 +3411,7 @@ Config in `react-scripts/config/` directory:
 }
 ```
 
-```js
+```jsx
 // add Webpack bundle analyzer plugin
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
@@ -3462,7 +3462,7 @@ npx create-react-app my-app --template [template-name]
 
 #### Shared CSS Styles
 
-```js
+```jsx
 // Import React.js, styled-components and css
 import React from 'react';
 import styled, { css } from 'styled-components';
@@ -3530,7 +3530,7 @@ ReactDOM.render(<WrapperContainer />, container);
 
 #### Extend Styled Component
 
-```js
+```jsx
 // Import React.js and styled-components
 import React from 'react';
 import styled from 'styled-components';
@@ -3571,7 +3571,7 @@ ReactDOM.render(<WrapperContainer />, container);
 
 #### Props for Styled Component
 
-```js
+```jsx
 // Import React.js, styled-components and css
 import React from 'react';
 import styled, { css } from 'styled-components';
@@ -3640,7 +3640,7 @@ ReactDOM.render(<WrapperContainer />, container);
 - Limit the Number of Third-party Libraries Use.
 - Wrap Third-party Dependencies:
 
-```js
+```jsx
 import { DatePicker as LibraryXDatePicker } from 'LibraryX';
 
 const DatePicker = (props) => {

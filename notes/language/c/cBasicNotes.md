@@ -603,7 +603,7 @@ getc、fgetc、getchar 函数可返回值(EOF 值/unsigned char 类型)
 
 非 EOF 值/非 unsigned char 类型(_会引发严重错误_)
 
-![CType Functions](figures/ctype.h.jpg)
+![CType Functions](./figures/ctype.h.jpg)
 
 ### Errno
 

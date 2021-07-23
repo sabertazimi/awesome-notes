@@ -586,7 +586,7 @@ span {
 
 ## CSS Selector
 
-![CSS3 Selector](figures/CSS3SelectorList.png)
+![CSS3 Selector](./figures/CSS3SelectorList.png)
 
 ### 元素选择器
 

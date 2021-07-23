@@ -2441,7 +2441,7 @@ Under the hood
 
 ### Event Loop
 
-![Event Loop](figures/EventLoop.jpg)
+![Event Loop](./figures/EventLoop.jpg)
 
 The job of the **event loop** is to look into the call stack
 and determine if the call stack is empty or not.
@@ -6155,14 +6155,14 @@ HTTP basic authentication is 401 authentication:
 
 - 客户端向服务器请求数据:
 
-```js
+```http
 Get /index.html HTTP/1.0
 Host:www.google.com
 ```
 
 - 服务器向客户端发送验证请求代码 `401` `WWW-Authenticate: Basic realm=”google.com”`
 
-```js
+```http
 HTTP/1.0 401 Unauthorized
 Server: SokEvo/1.0
 WWW-Authenticate: Basic realm=”google.com”
@@ -6176,7 +6176,7 @@ Content-Length: xxx
 - 服务器收到上述请求信息后, 将 Authorization 字段后的用户信息取出、解密,
   将解密后的用户名及密码与用户数据库进行比较验证
 
-```js
+```http
 Get /index.html HTTP/1.0
 Host:www.google.com
 Authorization: Basic d2FuZzp3YW5n
@@ -6310,10 +6310,12 @@ OAuth 2.0 允许自动更新令牌.
 另一个用于获取新的令牌 (Refresh Token）.
 令牌到期前, 第三方网站使用 Refresh Token 发请求更新令牌:
 
-```html
-https://github.com/login/oauth/access_token? client_id=CLIENT_ID&
-client_secret=CLIENT_SECRET& grant_type=refresh_token&
-refresh_token=REFRESH_TOKEN
+```http
+https://github.com/login/oauth/access_token
+?client_id=CLIENT_ID
+&client_secret=CLIENT_SECRET
+&grant_type=refresh_token
+&refresh_token=REFRESH_TOKEN
 ```
 
 ### Content Security Policy Level 3

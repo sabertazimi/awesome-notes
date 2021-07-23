@@ -103,7 +103,7 @@ const reducer = createReducer(initialState, {
 
 dump components implementation
 
-```js
+```jsx
 // app.js
 React.render(
   <Provider store={store}>{() => <MyRootComponent />}</Provider>,
@@ -120,7 +120,7 @@ export default class Counter extends Component {
 }
 ```
 
-```js
+```jsx
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -349,7 +349,7 @@ const validateAction = (action) => {
   - use Consumer in Connect higher order component
     `<Consumer>{store => (<WrapperComponent store={store}>)}</Consumer>`
 
-```js
+```jsx
 export const Provider = ({ store, children }) => {
   const StoreContext = React.createContext(store);
 

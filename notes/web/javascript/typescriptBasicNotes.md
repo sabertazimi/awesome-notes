@@ -130,7 +130,7 @@ npm i -D react react-dom @types/react @types/react-dom
 
 ### Webpack for TypeScript
 
-```js
+```ts
 const path = require('path');
 
 module.exports = {
@@ -173,7 +173,7 @@ module.exports = {
 
 globals.d.ts:
 
-```js
+```ts
 declare module '*.css';
 // import * as foo from './some/file.css';
 ```
@@ -199,7 +199,7 @@ tsc --target es5 --lib dom,es6
 
 ## Basic Types
 
-```js
+```ts
 let num: number;
 let str: string;
 let bool: boolean;
@@ -224,7 +224,7 @@ function log(message: string): void {
 
 ### Number Enum
 
-```js
+```ts
 enum CardSuit {
   Clubs = 1,
   Diamonds, // 2
@@ -241,7 +241,7 @@ Card = 'not a member of card suit'; // Error: string 不能赋值给 `CardSuit` 
 
 ### String Enum
 
-```js
+```ts
 export enum EvidenceTypeEnum {
   UNKNOWN = '',
   PASSPORT_VISA = 'passport_visa',
@@ -254,7 +254,7 @@ export enum EvidenceTypeEnum {
 
 ### Enum with Functions
 
-```js
+```ts
 enum Weekday {
   Monday,
   Tuesday,
@@ -286,7 +286,7 @@ console.log(Weekday.isBusinessDay(sun));
 
 ### Enum as Flags
 
-```js
+```ts
 enum AnimalFlags {
   None        = 0,
   HasClaws    = 1 << 0,
@@ -326,7 +326,7 @@ printAnimalAbilities(animal); // animal has claws, animal can fly
 
 ### Internal of Enum
 
-```js
+```ts
 enum Tristate {
   False,
   True,
@@ -350,7 +350,7 @@ console.log(Tristate[Tristate.False]); // 'False' because `Tristate.False == 0`
 
 ### Function Interface
 
-```js
+```ts
 interface ReturnString {
   (): string;
 }
@@ -360,13 +360,13 @@ declare const foo: ReturnString;
 const bar = foo(); // bar 被推断为一个字符串
 ```
 
-```js
+```ts
 interface Complex {
   (foo: string, bar?: number, ...others: boolean[]): number;
 }
 ```
 
-```js
+```ts
 interface Overloaded {
   (foo: string): string;
   (foo: number): number;
@@ -394,13 +394,13 @@ const num = overloaded(123); // num 被推断为 'number'
 
 在一个以 number 类型为参数，以 string 类型为返回值的函数中:
 
-```js
+```ts
 const simple: (foo: number) => string = (foo) => foo.toString();
 ```
 
 ### Weak Overload
 
-```js
+```ts
 // 重载
 function padding(all: number);
 function padding(topAndBottom: number, leftAndRight: number);
@@ -433,12 +433,12 @@ padding(1, 1, 1); // Error: Not a part of the available overloads
 
 > `as` is better in `.jsx`
 
-```js
+```ts
 let foo: any;
 let bar = <string>foo; // 现在 bar 的类型是 'string'
 ```
 
-```js
+```ts
 function handler(event: Event) {
   const mouseEvent = event as MouseEvent;
 }
@@ -446,7 +446,7 @@ function handler(event: Event) {
 
 ## Interface
 
-```js
+```ts
 interface Name {
   first: string;
   second: string;
@@ -472,7 +472,7 @@ name = {
 
 ### Extends Interface
 
-```js
+```ts
 // Lib a.d.ts
 interface Point {
   x: number,
@@ -491,7 +491,7 @@ let myPoint.z // Allowed!
 
 ### Implements Interface
 
-```js
+```ts
 interface Crazy {
   new(): {
     hello: number,
@@ -510,7 +510,7 @@ const crazy = new CrazyClass(); // crazy would be { hello:123 }
 
 ## Index Signature
 
-```js
+```ts
 let x: { foo: number, [x: string]: any };
 
 x = { foo: 1, baz: 2 }; // ok, 'baz' 属性匹配于索引签名
@@ -518,7 +518,7 @@ x = { foo: 1, baz: 2 }; // ok, 'baz' 属性匹配于索引签名
 
 当你声明一个索引签名时，所有明确的成员都必须符合索引签名
 
-```js
+```ts
 // ok
 interface Foo {
   [key: string]: number;
@@ -536,7 +536,7 @@ interface Bar {
 
 使用交叉类型可以解决上述问题
 
-```js
+```ts
 type FieldState = {
   value: string,
 };
@@ -546,7 +546,7 @@ type FormState = { isValid: boolean } & { [fieldName: string]: FieldState };
 
 ### Select Index
 
-```js
+```ts
 type Index = 'a' | 'b' | 'c';
 type FromIndex = { [k in Index]?: number };
 
@@ -558,13 +558,13 @@ const good: FromIndex = { b: 1, c: 2 };
 const bad: FromIndex = { b: 1, c: 2, d: 3 };
 ```
 
-```js
+```ts
 type FromSomeIndex<K extends string> = { [key in K]: number };
 ```
 
 ## Alias Types
 
-```js
+```ts
 type Text = string | { text: string };
 type Coordinates = [number, number];
 type Callback = (data: string) => void;
@@ -572,7 +572,7 @@ type Callback = (data: string) => void;
 
 ## Literal Types
 
-```js
+```ts
 type CardinalDirection = 'North' | 'East' | 'South' | 'West';
 
 function move(distance: number, direction: CardinalDirection) {
@@ -588,7 +588,7 @@ type Bools = true | false;
 
 ## Moving Types
 
-```js
+```ts
 // 捕获字符串的类型与值
 const foo = 'Hello World';
 
@@ -600,7 +600,7 @@ bar = 'Hello World'; // ok
 bar = 'anything else'; // Error
 ```
 
-```js
+```ts
 const colors = {
   red: 'red',
   blue: 'blue'
@@ -620,7 +620,7 @@ color = 'anythingElse'; // Error
 
 Public, Protected and Private:
 
-```js
+```ts
 class Singleton {
   private static instance: Singleton;
   private constructor() {
@@ -647,7 +647,7 @@ let instance = Singleton.getInstance(); // do some thing with the instance
 
 readonly type
 
-```js
+```ts
 type Foo = {
   readonly bar: number;
   readonly bas: number;
@@ -662,7 +662,7 @@ foo.bar = 456; // Error: foo.bar 为仅读属性
 
 readonly indexable signature
 
-```js
+```ts
 interface Foo {
   readonly [x: number]: number;
 }
@@ -676,7 +676,7 @@ foo[0] = 456; // Error: 属性只读
 
 readonly properties of class
 
-```js
+```ts
 class Foo {
   readonly bar = 1; // OK
   readonly baz: string;
@@ -688,7 +688,7 @@ class Foo {
 
 Readonly generic type
 
-```js
+```ts
 type Foo = {
   bar: number,
   bas: number,
@@ -705,7 +705,7 @@ fooReadonly.bar = 456; // Error: bar 属性只读
 
 in React
 
-```js
+```ts
 class Something extends React.Component<{ foo: number }, { baz: number }> {
   someMethod() {
     this.props.foo = 123; // Error: props 是不可变的
@@ -718,7 +718,7 @@ class Something extends React.Component<{ foo: number }, { baz: number }> {
 
 ### Generic Function
 
-```js
+```ts
 function reverse<T>(items: T[]): T[] {
   const toReturn = [];
   for (let i = items.length - 1; i >= 0; i--) {
@@ -730,7 +730,7 @@ function reverse<T>(items: T[]): T[] {
 
 ### Generic Class
 
-```js
+```ts
 // 创建一个泛型类
 class Queue<T> {
   private data = [];
@@ -744,7 +744,7 @@ queue.push(0);
 queue.push('1'); // Error：不能推入一个 `string`，只有 number 类型被允许
 ```
 
-```js
+```ts
 export interface Listener<T> {
   (event: T): any;
 }
@@ -790,7 +790,7 @@ export class TypedEvent<T> {
 
 ### Specific Instances from Generic Types
 
-```js
+```ts
 class Foo<T> {
   foo: T;
 }
@@ -812,7 +812,7 @@ const idNum = id as { (x: number): number };
 
 多种类型之一
 
-```js
+```ts
 function formatCommandLine(command: string[] | string) {
   let line = '';
   if (typeof command === 'string') {
@@ -825,7 +825,7 @@ function formatCommandLine(command: string[] | string) {
 }
 ```
 
-```js
+```ts
 interface Square {
   kind: 'square';
   size: number;
@@ -865,7 +865,7 @@ function area(s: Shape) {
 extend 是一种非常常见的模式,
 intersection type 具有所有类型的功能
 
-```js
+```ts
 function extend<T, U>(first: T, second: U): T & U {
   const result = <T & U>{};
   for (let id in first) {
@@ -889,7 +889,7 @@ const b = x.b;
 
 `connect` in React
 
-```js
+```ts
 import * as React from 'react'
 import * as Redux from 'redux'
 
@@ -934,7 +934,7 @@ export default connect<StateProps, DispatchProps, OwnProps>
 
 ### Mapped Types
 
-```js
+```ts
 type Readonly<T> = { readonly [P in keyof T]: T[P] }
 type Partial<T> = { [P in keyof T]?: T[P] }
 type ReadonlyPartial<T> = { readonly [P in keyof T]?: T[P] }
@@ -956,7 +956,7 @@ type Proxy<T> = {
 
 ## Mixins
 
-```js
+```ts
 // 所有 mixins 都需要
 type Constructor<T = {}> = new (...args: any[]) => T;
 
@@ -1015,7 +1015,7 @@ console.log(timestampedActiveTableUserExample.isActivated);
 
 ## Closure
 
-```js
+```ts
 const { called } = new (class {
   count = 0;
   called = () => {
@@ -1041,7 +1041,7 @@ called(); // Called : 2
   access to the method’s parameters, the metadata associated with the method object,
   along with its class prototype `target`.
 
-```js
+```ts
 // class definitions
 @decorator
 class MyComponent extends React.Component<Props, State> {
@@ -1068,7 +1068,7 @@ class MyComponent extends React.Component<Props, State> {
 
 ### Class Decorators
 
-```js
+```ts
 function classDecorator(options: any[]) {
   return target => {
     ...
@@ -1079,7 +1079,7 @@ function classDecorator(options: any[]) {
 class ...
 ```
 
-```js
+```ts
 function inject(options: { api_version: string }) {
   // returns the class decorator implementation
   return (target) => {
@@ -1111,7 +1111,7 @@ first parameter `target` will be
 `class prototype` for normal properties
 and `class constructor` for static properties.
 
-```js
+```ts
 function prop(target, name) {
   ...
 }
@@ -1134,7 +1134,7 @@ class MyComponent extends React.Component<Props> {
 `@uppercase`/`@lowercase` for string parameters,
 `@rounded` for number parameters.
 
-```js
+```ts
 function decorator(
   class,
   name: string,
@@ -1157,7 +1157,7 @@ class MyComponent extends React.Component<Props> {
   configurable, enumerable, value and writable,
   as well as get and set.
 
-```js
+```ts
 function methodDecorator(options: any[]) {
   return (
     target: MyComponent,
@@ -1176,7 +1176,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-```js
+```ts
 function enumerable(enumerable: boolean) {
   return (
     target: MyComponent,
@@ -1201,7 +1201,7 @@ class MyComponent extends React.Component {
 
 ### Props Types
 
-```js
+```ts
 export declare interface AppProps {
   children: React.ReactNode; // best
   style?: React.CSSProperties; // for style
@@ -1212,7 +1212,7 @@ export declare interface AppProps {
 
 ### React Refs Types
 
-```js
+```ts
 class CssThemeProvider extends React.PureComponent<Props> {
   private rootRef: React.RefObject<HTMLDivElement> = React.createRef();
 
@@ -1224,7 +1224,7 @@ class CssThemeProvider extends React.PureComponent<Props> {
 
 ### Functional Component
 
-```js
+```ts
 type Props = {
   foo: string,
 };
@@ -1236,7 +1236,7 @@ const myComponent: React.FunctionComponent<Props> = (props) => {
 <MyComponent foo="bar" />;
 ```
 
-```js
+```ts
 import React, { MouseEvent, SFC } from 'react';
 
 type Props = { onClick(e: MouseEvent<HTMLElement>): void };
@@ -1250,7 +1250,7 @@ const Button: SFC<Props> = ({ onClick: handleClick, children }) => (
 
 read only state
 
-```js
+```ts
 import React from 'react';
 import Button from './Button';
 
@@ -1268,7 +1268,7 @@ class ButtonCounter extends React.Component<Props, State> {
 
 props and state types with `React.Component<>`
 
-```js
+```ts
 type Props = {
   foo: string,
 };
@@ -1282,7 +1282,7 @@ class MyComponent extends React.Component<Props, {}> {
 <MyComponent foo="bar" />;
 ```
 
-```js
+```ts
 class FocusingInput extends React.Component<
   {
     value: string,
@@ -1313,7 +1313,7 @@ class FocusingInput extends React.Component<
 
 ### Generic Component
 
-```js
+```ts
 // 一个泛型组件
 type SelectProps<T> = { items: T[] };
 class Select<T> extends React.Component<SelectProps<T>, any> {}
@@ -1373,7 +1373,7 @@ type Action = ReturnType<
 // }
 ```
 
-```js
+```ts
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'UPDATE_NAME':

@@ -67,7 +67,7 @@ class App extends Component {
 
 Key Notes: In component of parent route, should render {this.props.children}
 
-```js
+```jsx
 import {
   BrowserRouter as Router,
   Switch,
@@ -115,11 +115,11 @@ const PrivateRoute = ({
 
 ### URL Params
 
-```js
+```jsx
 <Route path="/repos/:userName/:repoName" component={Repo} />
 ```
 
-```js
+```jsx
 // In Repo.js
 <div>{this.props.params.userName}</ div>
 <div>{this.props.params.repoName}</ div>
@@ -199,7 +199,7 @@ export default withRouter(Login);
 
 ### Relative Path
 
-```js
+```jsx
 <ConnectedRouter history={history} basename="/react-boilerplate">
   <Fragment>
     <Switch>
@@ -226,7 +226,7 @@ const Header = () => (
 - `publicPath: '/'`
 - `historyApiFallback: true`
 
-```javascript
+```js
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -267,7 +267,7 @@ app.get('*', (req, res) => {
 
 ### Nginx Config
 
-```c
+```nginx
 # always serve index.html for any request (react-router for single page application)
 root /var/www/blog/html/build;
 index index.html;

@@ -608,7 +608,7 @@ the kernel is event-driven via an I/O loop that polls Xen devices
 
 modern modular, functional and type-safe programming language
 
-```sh
+```bash
 opam install
 opam update -u
 opam switch
@@ -634,7 +634,7 @@ Exokernel -> Library Operating System -> Unikernel:
 
 #### Installation
 
-```sh
+```bash
 opam init
 opam remote
 ocaml -version
@@ -644,7 +644,7 @@ opam list
 opam install mirage
 ```
 
-```sh
+```bash
 mirage --help
 mirage configure --xen
 make depend
@@ -656,7 +656,7 @@ bzip2 -9 console.xen
 
 #### Development
 
-```sh
+```bash
 opam source repo.name --dev-repo --pin
 ```
 

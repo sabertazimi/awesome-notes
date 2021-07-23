@@ -326,7 +326,7 @@ Universal Module Definition:
 
 ## Common Design Patterns
 
-![Common Design Patterns](figures/DesignPatterns.png)
+![Common Design Patterns](./figures/DesignPatterns.png)
 
 ### Classification
 

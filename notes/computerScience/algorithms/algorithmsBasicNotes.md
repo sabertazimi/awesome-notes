@@ -220,7 +220,7 @@ void sink(int k) {
 
 > Sorting Algorithms Performance
 
-![Performance](figures/SortingPerformance.png)
+![Performance](./figures/SortingPerformance.png)
 
 ## Tree Algorithm
 
@@ -531,7 +531,7 @@ e.g 左子树：左下方 右子树：右上方
 - DFS(深度优先)：栈实现
 - BFS(广度优先)：队列实现
 
-![Search Algorithm Performance](figures/SearchPerformance.jpg)
+![Search Algorithm Performance](./figures/SearchPerformance.jpg)
 
 ### cycle detection
 
@@ -709,7 +709,7 @@ Matrix floyd_warshall(Matrix W) {
 
 MaxFlow Problem:
 
-![Ford Fulkerson Algorithm](figures/FordFulkersonAlgorithm.png)
+![Ford Fulkerson Algorithm](./figures/FordFulkersonAlgorithm.png)
 
 #### 最大流模型
 
