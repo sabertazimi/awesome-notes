@@ -5,7 +5,7 @@ module.exports = {
 
   markdown: {
     lineNumbers: true,
-    toc: { includeLevel: [1, 2, 3] },
+    toc: { includeLevel: [1, 2] },
   },
 
   themeConfig: {
@@ -36,7 +36,7 @@ module.exports = {
       {
         text: 'Web',
         link: '/web/javascript/javascriptBasicNotes',
-        activeMatch: '^/programming/',
+        activeMatch: '^/web/',
       },
     ],
 
@@ -44,6 +44,7 @@ module.exports = {
       '/computerScience/': getSidebar(),
       '/language/': getSidebar(),
       '/programming/': getSidebar(),
+      '/web/': getSidebar(),
       '/': getSidebar(),
     },
   },
