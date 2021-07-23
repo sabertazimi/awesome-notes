@@ -20,31 +20,31 @@ module.exports = {
       { text: 'Notes', link: '/', activeMatch: '^/$' },
       {
         text: 'Computer Science',
-        link: '/computerScience/algorithms/algorithmsBasicNotes',
+        link: '/computerScience/virtualization/virtBasicNotes',
         activeMatch: '^/computerScience/',
       },
       {
         text: 'Language',
-        link: '/language/assembly/assemblyBasicNotes',
+        link: '/language/verilog/verilogBasicNotes',
         activeMatch: '^/language/',
       },
       {
         text: 'Programming',
-        link: '/programming/android/androidBasicNotes',
+        link: '/programming/tools/vim/vimBasicNotes',
         activeMatch: '^/programming/',
       },
       {
         text: 'Web',
-        link: '/web/javascript/javascriptBasicNotes',
+        link: '/web/security/securityBasicNotes',
         activeMatch: '^/web/',
       },
     ],
 
     sidebar: {
-      '/computerScience/': getSidebar(),
-      '/language/': getSidebar(),
-      '/programming/': getSidebar(),
-      '/web/': getSidebar(),
+      '/computerScience/': [getSidebar()[0]],
+      '/language/': [getSidebar()[1]],
+      '/programming/': [getSidebar()[2]],
+      '/web/': [getSidebar()[3]],
       '/': getSidebar(),
     },
   },
@@ -96,23 +96,23 @@ function getSidebar() {
       text: 'Language',
       children: [
         {
-          text: 'Assembly Basic Notes',
+          text: 'Assembly',
           link: '/language/assembly/assemblyBasicNotes',
         },
-        { text: 'C Basic Notes', link: '/language/c/cBasicNotes' },
-        { text: 'Cpp Basic Notes', link: '/language/cpp/cppBasicNotes' },
-        { text: 'Go Basic Notes', link: '/language/go/goBasicNotes' },
+        { text: 'C', link: '/language/c/cBasicNotes' },
+        { text: 'C++', link: '/language/cpp/cppBasicNotes' },
+        { text: 'Go', link: '/language/go/goBasicNotes' },
         {
-          text: 'Haskell Basic Notes',
+          text: 'Haskell',
           link: '/language/haskell/haskellBasicNotes',
         },
-        { text: 'Java Basic Notes', link: '/language/java/javaBasicNotes' },
+        { text: 'Java', link: '/language/java/javaBasicNotes' },
         {
-          text: 'Python Basic Notes',
+          text: 'Python',
           link: '/language/python/pythonBasicNotes',
         },
         {
-          text: 'Verilog Basic Notes',
+          text: 'Verilog',
           link: '/language/verilog/verilogBasicNotes',
         },
       ],
@@ -121,43 +121,43 @@ function getSidebar() {
       text: 'Programming',
       children: [
         {
-          text: 'Android Basic Notes',
+          text: 'Android',
           link: '/programming/android/androidBasicNotes',
         },
         {
-          text: 'Clean Code Basic Notes',
+          text: 'Clean Code',
           link: '/programming/devops/cleanCodeBasicNotes',
         },
         {
-          text: 'Design Patterns Basic Notes',
+          text: 'Design Patterns',
           link: '/programming/devops/designPatternsBasicNotes',
         },
         {
-          text: 'Software Testing Basic Notes',
+          text: 'Software Testing',
           link: '/programming/devops/softwareTestingBasicNotes',
         },
         {
-          text: 'Functional Programming Basic Notes',
+          text: 'Functional Programming',
           link: '/programming/functionalProgramming/functionalProgrammingBasicNotes',
         },
         {
-          text: 'Game Design Basic Notes',
+          text: 'Game Design',
           link: '/programming/game/gameDesignBasicNotes',
         },
         {
-          text: 'Linux Basic Notes',
+          text: 'Linux',
           link: '/programming/linux/linuxBasicNotes',
         },
         {
-          text: 'CMake Basic Notes',
+          text: 'CMake',
           link: '/programming/tools/buildTools/CMakeBasicNotes',
         },
         {
-          text: 'Git Basic Notes',
+          text: 'Git',
           link: '/programming/tools/git/gitBasicNotes',
         },
         {
-          text: 'Vim Basic Notes',
+          text: 'Vim',
           link: '/programming/tools/vim/vimBasicNotes',
         },
       ],
@@ -166,88 +166,88 @@ function getSidebar() {
       text: 'Web',
       children: [
         {
-          text: 'Angular Basic Notes',
-          link: '/web/angular/angularBasicNotes',
-        },
-        {
-          text: 'Bootstrap Basic Notes',
-          link: '/web/css/bootstrapBasicNotes',
-        },
-        {
-          text: 'CSS Advanced Notes',
-          link: '/web/css/cssAdvancedNotes',
-        },
-        {
-          text: 'CSS Basic Notes',
-          link: '/web/css/cssBasicNotes',
-        },
-        {
-          text: 'Sass Basic Notes',
-          link: '/web/css/sassBasicNotes',
-        },
-        {
-          text: 'Electron Basic Notes',
-          link: '/web/frameworks/electronBasicNotes',
-        },
-        {
-          text: 'jQuery Basic Notes',
-          link: '/web/frameworks/jQueryBasicNotes',
-        },
-        {
-          text: 'Library Basic Notes',
-          link: '/web/frameworks/libraryBasicNotes',
-        },
-        {
-          text: 'HTML Basic Notes',
+          text: 'HTML',
           link: '/web/html/htmlBasicNotes',
         },
         {
-          text: 'JavaScript Advanced Notes',
-          link: '/web/javascript/javascriptAdvancedNotes',
+          text: 'CSS',
+          link: '/web/css/cssBasicNotes',
         },
         {
-          text: 'JavaScript Basic Notes',
+          text: 'Advanced CSS',
+          link: '/web/css/cssAdvancedNotes',
+        },
+        {
+          text: 'Sass',
+          link: '/web/css/sassBasicNotes',
+        },
+        {
+          text: 'Bootstrap',
+          link: '/web/css/bootstrapBasicNotes',
+        },
+        {
+          text: 'JavaScript',
           link: '/web/javascript/javascriptBasicNotes',
         },
         {
-          text: 'TypeScript Basic Notes',
+          text: 'Advanced JavaScript',
+          link: '/web/javascript/javascriptAdvancedNotes',
+        },
+        {
+          text: 'TypeScript',
           link: '/web/javascript/typescriptBasicNotes',
         },
         {
-          text: 'Express Basic Notes',
-          link: '/web/node/expressBasicNotes',
+          text: 'Angular',
+          link: '/web/angular/angularBasicNotes',
         },
         {
-          text: 'Graphql Basic Notes',
-          link: '/web/node/graphqlBasicNotes',
-        },
-        {
-          text: 'Message Queue Basic Notes',
-          link: '/web/node/messageQueueBasicNotes',
-        },
-        {
-          text: 'Node Basic Notes',
-          link: '/web/node/nodeBasicNotes',
-        },
-        {
-          text: 'React Basic Notes',
+          text: 'React',
           link: '/web/react/reactBasicNotes',
         },
         {
-          text: 'React Router Basic Notes',
+          text: 'React Router',
           link: '/web/react/reactRouterBasicNotes',
         },
         {
-          text: 'Redux Basic Notes',
+          text: 'Redux',
           link: '/web/react/reduxBasicNotes',
         },
         {
-          text: 'Security Basic Notes',
-          link: '/web/security/securityBasicNotes',
+          text: 'Vue',
+          link: '/web/vue/vueBasicNotes',
         },
         {
-          text: 'Vue Basic Notes',
-          link: '/web/vue/vueBasicNotes',
+          text: 'Library',
+          link: '/web/frameworks/libraryBasicNotes',
+        },
+        {
+          text: 'jQuery',
+          link: '/web/frameworks/jQueryBasicNotes',
+        },
+        {
+          text: 'Electron',
+          link: '/web/frameworks/electronBasicNotes',
+        },
+        {
+          text: 'Node',
+          link: '/web/node/nodeBasicNotes',
+        },
+        {
+          text: 'Express',
+          link: '/web/node/expressBasicNotes',
+        },
+        {
+          text: 'GraphQL',
+          link: '/web/node/graphqlBasicNotes',
+        },
+        {
+          text: 'Message Queue',
+          link: '/web/node/messageQueueBasicNotes',
+        },
+        {
+          text: 'Web Security',
+          link: '/web/security/securityBasicNotes',
         },
       ],
     },
