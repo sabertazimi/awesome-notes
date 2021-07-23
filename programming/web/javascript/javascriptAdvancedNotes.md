@@ -2855,6 +2855,10 @@ try {
 - 使用事件委托，只需在 DOM 树中尽量最高的层次上添加一个事件处理程序
 - increases performance and reduces memory consumption
 - no need to register new event listeners for newer children
+- DOM Event:
+  Event Capturing (default false) ->
+  Event Target ->
+  Event Bubbling (default true).
 
 ```js
 window.onload = function () {
