@@ -106,6 +106,8 @@
     - [CLI Compiler](#cli-compiler)
     - [CLI Solution](#cli-solution)
     - [CLI Utils](#cli-utils)
+      - [CLI Input Utils](#cli-input-utils)
+      - [CLI Output Utils](#cli-output-utils)
     - [CLI Cheat Sheet](#cli-cheat-sheet)
     - [Terminal](#terminal)
   - [Compiler](#compiler)
@@ -740,8 +742,14 @@
 
 ### CLI Utils
 
+#### CLI Input Utils
+
 - [Commander](https://github.com/tj/commander.js)
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js)
+
+#### CLI Output Utils
+
+- [Consola](https://github.com/unjs/consola)
 - [Chalk](https://github.com/chalk/chalk)
 - [ORA Spinner](https://github.com/sindresorhus/ora)
 - [Progress](https://github.com/bvaughn/progress-estimator)
@@ -908,6 +916,7 @@
 
 ### Log Tools
 
+- [Winston: A logger for just about everything](https://github.com/winstonjs/winston)
 - [Log4.js](https://github.com/nomiddlename/log4js-node)
 - [Stacktrace.js](https://github.com/stacktracejs/stacktrace.js)
 - [Stacktrace Visualization](https://github.com/joyent/node-stackvis)
