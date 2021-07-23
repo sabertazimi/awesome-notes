@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Awesome Notes',
   description: 'Daily Notes I Learned.',
-  base: '/awesome-notes',
+  base: '/awesome-notes/',
 
   markdown: {
     lineNumbers: true,
