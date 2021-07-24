@@ -38,6 +38,10 @@ module.exports = {
         link: '/web/security/securityBasicNotes',
         activeMatch: '^/web/',
       },
+      {
+        text: 'GitBook',
+        link: 'https://notes.tazimi.dev',
+      },
     ],
 
     sidebar: {
