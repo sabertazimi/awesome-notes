@@ -1,30 +1,6 @@
 # Software Testing Basic Notes
 
-<!-- TOC -->
-
-- [Software Testing Basic Notes](#software-testing-basic-notes)
-  - [测试模型](#测试模型)
-    - [PIE 模型](#pie-模型)
-    - [启发式测试策略模型](#启发式测试策略模型)
-    - [用户体验测试](#用户体验测试)
-  - [测试规模](#测试规模)
-  - [基础概念](#基础概念)
-  - [测试方法](#测试方法)
-    - [图结构覆盖方法](#图结构覆盖方法)
-    - [数据流覆盖方法](#数据流覆盖方法)
-    - [逻辑覆盖方法](#逻辑覆盖方法)
-    - [随机测试方法](#随机测试方法)
-    - [黑盒测试方法](#黑盒测试方法)
-    - [Fault Location](#fault-location)
-    - [模糊测试](#模糊测试)
-  - [移动设备](#移动设备)
-  - [Useful Tools](#useful-tools)
-  - [Bug List](#bug-list)
-    - [Basic Bug](#basic-bug)
-    - [C Bug](#c-bug)
-    - [偶发性 Bug](#偶发性-bug)
-
-<!-- /TOC -->
+[[toc]]
 
 ## 测试模型
 

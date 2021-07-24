@@ -1,46 +1,6 @@
 # Go Basic Notes
 
-<!-- TOC -->
-
-- [Go Basic Notes](#go-basic-notes)
-  - [CLI](#cli)
-    - [Installation](#installation)
-    - [Basic Command](#basic-command)
-      - [Build](#build)
-      - [Test](#test)
-      - [Clean](#clean)
-      - [Modules](#modules)
-  - [Packages](#packages)
-    - [package and import](#package-and-import)
-  - [Variable](#variable)
-    - [Type Declaration](#type-declaration)
-    - [Type conversions](#type-conversions)
-    - [struct](#struct)
-    - [array](#array)
-    - [slice](#slice)
-    - [map](#map)
-  - [Flow Control](#flow-control)
-    - [if](#if)
-    - [for](#for)
-    - [switch](#switch)
-    - [defer](#defer)
-      - [执行时机](#执行时机)
-      - [实质](#实质)
-      - [应用场景](#应用场景)
-  - [Function](#function)
-    - [Parameters and Return Value](#parameters-and-return-value)
-    - [Methods](#methods)
-      - [Receiver](#receiver)
-    - [Interface](#interface)
-      - [值](#值)
-      - [Type Assertions](#type-assertions)
-  - [Concurrent](#concurrent)
-    - [goroutine](#goroutine)
-    - [channels](#channels)
-      - [select](#select)
-      - [Worker Pools](#worker-pools)
-
-<!-- /TOC -->
+[[toc]]
 
 ## CLI
 

@@ -1,44 +1,6 @@
 # Python Basic Notes
 
-<!-- TOC -->
-
-- [Python Basic Notes](#python-basic-notes)
-  - [Python Basics](#python-basics)
-    - [Basic Types](#basic-types)
-      - [Tuples](#tuples)
-    - [Basic Control Statement](#basic-control-statement)
-      - [For Loop](#for-loop)
-      - [While Loop](#while-loop)
-    - [Functions](#functions)
-    - [Classes](#classes)
-  - [NumPy Basics](#numpy-basics)
-    - [Numpy Array Creation](#numpy-array-creation)
-    - [Numpy Indexing](#numpy-indexing)
-    - [Numpy Matrix Operations](#numpy-matrix-operations)
-  - [CLI Application](#cli-application)
-    - [Basic CLI](#basic-cli)
-    - [Progress Bar](#progress-bar)
-  - [Process Data Files](#process-data-files)
-    - [CSV File](#csv-file)
-    - [JSON File](#json-file)
-    - [XML File](#xml-file)
-    - [Plain Text File](#plain-text-file)
-    - [Converter](#converter)
-  - [Matplotlib Usage](#matplotlib-usage)
-    - [Plot Type](#plot-type)
-    - [Basic Usage](#basic-usage)
-  - [Plot Style](#plot-style)
-  - [Plot Axis Tick](#plot-axis-tick)
-  - [Plot Legend](#plot-legend)
-  - [Subplot](#subplot)
-    - [Double y-axis](#double-y-axis)
-  - [3D Plot](#3d-plot)
-  - [Paper Figures Config](#paper-figures-config)
-  - [Paper Standard](#paper-standard)
-  - [Awesome Library](#awesome-library)
-    - [Debugging and Testing](#debugging-and-testing)
-
-<!-- /TOC -->
+[[toc]]
 
 ## Python Basics
 

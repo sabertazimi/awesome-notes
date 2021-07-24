@@ -1,41 +1,8 @@
 # Assembly Basic Notes
 
-<!-- TOC -->
+[[toc]]
 
-- [Assembly Basic Notes](#assembly-basic-notes)
-  - [Tools](#tools)
-    - [GCC](#gcc)
-    - [GDB](#gdb)
-    - [MASM](#masm)
-    - [LINK](#link)
-    - [TD](#td)
-      - [Basic](#basic)
-      - [Alt](#alt)
-      - [代码区](#代码区)
-      - [数据区](#数据区)
-    - [NMAKE](#nmake)
-    - [Objdump](#objdump)
-  - [位运算](#位运算)
-  - [Address](#address)
-    - [mov](#mov)
-    - [address](#address-1)
-  - [常用命令](#常用命令)
-    - [读取指令](#读取指令)
-      - [mov 读取](#mov-读取)
-    - [算术命令](#算术命令)
-    - [转移命令](#转移命令)
-  - [Control Flow Statement](#control-flow-statement)
-    - [If Statement](#if-statement)
-    - [Loop Statement](#loop-statement)
-      - [Do While Statement](#do-while-statement)
-      - [While Do Statement](#while-do-statement)
-      - [For Statement](#for-statement)
-    - [Switch Statement](#switch-statement)
-  - [Stack Frame](#stack-frame)
-  - [Data Structure](#data-structure)
-    - [Arrays](#arrays)
-
-<!-- /TOC -->
+## Assembly Execution Model
 
 Load-ALU-Store 模式 - 读入寄存器，算术逻辑单元运算，回写至内存
 

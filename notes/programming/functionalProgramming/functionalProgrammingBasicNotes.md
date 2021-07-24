@@ -1,38 +1,6 @@
 # Functional Programming Basic Notes
 
-<!-- TOC -->
-
-- [Functional Programming Basic Notes](#functional-programming-basic-notes)
-  - [Lambda Calculus](#lambda-calculus)
-    - [Lambda Expression (Lambda-Term)](#lambda-expression-lambda-term)
-    - [Lambda Reduction](#lambda-reduction)
-      - [α 转换](#α-转换)
-      - [β 归约](#β-归约)
-      - [η 归约](#η-归约)
-    - [Church Numerals](#church-numerals)
-  - [Definition for Functional Programming](#definition-for-functional-programming)
-  - [Datatype](#datatype)
-    - [Datatype Binding](#datatype-binding)
-    - [Built-in Tagged Constructor](#built-in-tagged-constructor)
-    - [Type Constructor](#type-constructor)
-  - [Pattern Matching](#pattern-matching)
-  - [Tail Position, Tail expression, Tail Call and Tail Recursion](#tail-position-tail-expression-tail-call-and-tail-recursion)
-  - [Rules for expressions](#rules-for-expressions)
-    - [samples](#samples)
-  - [Standard ML](#standard-ml)
-    - [functions](#functions)
-    - [tuples](#tuples)
-    - [lists](#lists)
-    - [let expressions](#let-expressions)
-    - [options](#options)
-    - [boolean operations](#boolean-operations)
-    - [closure](#closure)
-      - [lexical scope vs dynamic scope](#lexical-scope-vs-dynamic-scope)
-      - [compose and pipeline](#compose-and-pipeline)
-      - [curry and unCurry](#curry-and-uncurry)
-  - [Type inference](#type-inference)
-
-<!-- /TOC -->
+[[toc]]
 
 ## Lambda Calculus
 

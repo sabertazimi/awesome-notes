@@ -1,28 +1,6 @@
 # Clean Code Basic Notes
 
-<!-- TOC -->
-
-- [Clean Code Basic Notes](#clean-code-basic-notes)
-  - [Programming Principles](#programming-principles)
-    - [SOLID principle](#solid-principle)
-      - [Single Responsibility Principle](#single-responsibility-principle)
-      - [Open-Closed Principle](#open-closed-principle)
-      - [Liskov Substitution Principle](#liskov-substitution-principle)
-      - [Interface Segregation Principle](#interface-segregation-principle)
-      - [Dependency Inversion Principle](#dependency-inversion-principle)
-  - [Programming Paradigms](#programming-paradigms)
-    - [Taxonomy of Paradigms](#taxonomy-of-paradigms)
-      - [Observable Nondeterminism](#observable-nondeterminism)
-      - [Named State](#named-state)
-    - [Functional Programming](#functional-programming)
-  - [Code Review](#code-review)
-    - [Code Review Basis](#code-review-basis)
-    - [Security Review](#security-review)
-    - [Documents Review](#documents-review)
-    - [Comments Review](#comments-review)
-    - [Test Review](#test-review)
-
-<!-- /TOC -->
+[[toc]]
 
 ## Programming Principles
 
