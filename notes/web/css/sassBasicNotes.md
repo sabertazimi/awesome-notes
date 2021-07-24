@@ -1,47 +1,8 @@
 # Sass Basic Notes
 
-<!-- TOC -->
+[[toc]]
 
-- [Sass Basic Notes](#sass-basic-notes)
-  - [Basis](#basis)
-    - [Variable](#variable)
-      - [Normal Variable](#normal-variable)
-      - [String Variable](#string-variable)
-      - [Nesting Variable](#nesting-variable)
-      - [List](#list)
-      - [Map](#map)
-      - [arguments list](#arguments-list)
-      - [`!default` flag](#default-flag)
-    - [Directive](#directive)
-      - [Mixin and Include Directive](#mixin-and-include-directive)
-      - [If Else Directive](#if-else-directive)
-      - [for loop](#for-loop)
-      - [while loop](#while-loop)
-      - [each](#each)
-      - [import](#import)
-      - [extend](#extend)
-        - [Media Queries with extend](#media-queries-with-extend)
-    - [Built-in Functions](#built-in-functions)
-      - [Color](#color)
-      - [Math](#math)
-      - [type and unit](#type-and-unit)
-  - [Error Handle](#error-handle)
-    - [function error handle](#function-error-handle)
-    - [mixin error handle](#mixin-error-handle)
-    - [Lists Check](#lists-check)
-  - [Project Structure](#project-structure)
-  - [Best Practice](#best-practice)
-    - [Performance](#performance)
-    - [Children Selector](#children-selector)
-  - [Tools](#tools)
-    - [Framework](#framework)
-    - [Sprite Builder](#sprite-builder)
-    - [Grid System](#grid-system)
-    - [Media Query](#media-query)
-
-<!-- /TOC -->
-
-## Basis
+## Sass Basis
 
 ### Variable
 

@@ -1,46 +1,6 @@
 # Angular Basic Notes
 
-<!-- TOC -->
-
-- [Angular Basic Notes](#angular-basic-notes)
-  - [Basic](#basic)
-    - [CLI](#cli)
-  - [Module](#module)
-  - [Component](#component)
-    - [Props](#props)
-    - [Event](#event)
-    - [Attributes](#attributes)
-    - [Reference](#reference)
-    - [Pipe](#pipe)
-      - [Pure Pipe](#pure-pipe)
-      - [Impure Pipe](#impure-pipe)
-      - [Async Pipe](#async-pipe)
-  - [Service](#service)
-    - [Injection Provider](#injection-provider)
-  - [RxJS](#rxjs)
-    - [Basis](#basis)
-    - [RxJS Pipe Helper](#rxjs-pipe-helper)
-    - [Operator](#operator)
-      - [Creation Operator](#creation-operator)
-      - [Transformation Operator](#transformation-operator)
-      - [Filter Operator](#filter-operator)
-      - [Combination Operator](#combination-operator)
-      - [Multi-Cast Operator](#multi-cast-operator)
-      - [Error Handling Operator](#error-handling-operator)
-      - [Utils Operator](#utils-operator)
-  - [Router](#router)
-  - [Form](#form)
-  - [Event Binding](#event-binding)
-  - [Directives](#directives)
-    - [Structural Directives](#structural-directives)
-      - [For Directive](#for-directive)
-      - [If Directive](#if-directive)
-    - [Attribute Directives](#attribute-directives)
-      - [Class Directive](#class-directive)
-  - [Styles](#styles)
-    - [CSS Class Binding](#css-class-binding)
-
-<!-- /TOC -->
+[[toc]]
 
 ## Basic
 

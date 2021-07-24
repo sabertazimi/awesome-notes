@@ -1,35 +1,6 @@
 ﻿# Redux Basic Notes
 
-<!-- TOC -->
-
-- [Redux Basic Notes](#redux-basic-notes)
-  - [Basic Concepts](#basic-concepts)
-    - [Store and State](#store-and-state)
-      - [Store](#store)
-      - [State](#state)
-        - [Persisted State](#persisted-state)
-    - [Reducers](#reducers)
-    - [Map to Props](#map-to-props)
-  - [Middleware](#middleware)
-    - [Middleware Basic Concepts](#middleware-basic-concepts)
-    - [Middleware Simple Implementation](#middleware-simple-implementation)
-    - [Scheduler Middleware](#scheduler-middleware)
-    - [redux-thunk Middleware](#redux-thunk-middleware)
-  - [Redux Internal](#redux-internal)
-    - [Create Store](#create-store)
-    - [Action Validation](#action-validation)
-    - [Provider and Connection](#provider-and-connection)
-  - [Redux Best Practice](#redux-best-practice)
-    - [State Management](#state-management)
-  - [Awesome Tools](#awesome-tools)
-    - [Libs](#libs)
-      - [Data Types](#data-types)
-      - [Network](#network)
-      - [Middleware Tool](#middleware-tool)
-      - [State Tool](#state-tool)
-    - [Debugging](#debugging)
-
-<!-- /TOC -->
+[[toc]]
 
 ## Basic Concepts
 

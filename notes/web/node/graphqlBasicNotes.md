@@ -1,5 +1,7 @@
 # GraphQL Basic Notes
 
+[[toc]]
+
 ## Better REST
 
 - No OverFetching

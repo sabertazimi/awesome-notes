@@ -1,40 +1,6 @@
 # CSS Advanced Notes
 
-<!-- TOC -->
-
-- [CSS Advanced Notes](#css-advanced-notes)
-  - [CSS Framework Key Points](#css-framework-key-points)
-  - [Typography Principles](#typography-principles)
-    - [font-size and spacing](#font-size-and-spacing)
-      - [font-size](#font-size)
-      - [spacing](#spacing)
-      - [vertical rhythms](#vertical-rhythms)
-    - [Table](#table)
-  - [Grid System](#grid-system)
-  - [Form Design Principles](#form-design-principles)
-    - [Buttons Placement Principles](#buttons-placement-principles)
-  - [Graceful Degradation](#graceful-degradation)
-  - [CSS Houdini](#css-houdini)
-  - [CSS Performance](#css-performance)
-    - [Basic Perf Tips](#basic-perf-tips)
-    - [CSS Selectors](#css-selectors)
-    - [CSS Triggers](#css-triggers)
-    - [will-change](#will-change)
-    - [contain](#contain)
-    - [Animation Frame](#animation-frame)
-    - [CSS Loading Tips](#css-loading-tips)
-    - [Animation](#animation)
-      - [Best Practice](#best-practice)
-      - [DevTools for Animation](#devtools-for-animation)
-      - [Animation Internal](#animation-internal)
-  - [CSS Hacks](#css-hacks)
-  - [Design Principles](#design-principles)
-    - [费茨定律](#费茨定律)
-    - [米勒定律](#米勒定律)
-    - [席克定律](#席克定律)
-    - [泰斯勒定律](#泰斯勒定律)
-
-<!-- /TOC -->
+[[toc]]
 
 ## CSS Framework Key Points
 

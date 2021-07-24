@@ -1,51 +1,6 @@
 # Security Basic Notes
 
-<!-- TOC -->
-
-- [Security Basic Notes](#security-basic-notes)
-  - [Curated List of Vulnerability(漏洞)](#curated-list-of-vulnerability漏洞)
-    - [Object Injection](#object-injection)
-      - [Insecure Object Comparison](#insecure-object-comparison)
-    - [SQL Injection](#sql-injection)
-      - [SQL Injection Protection](#sql-injection-protection)
-    - [Click Jacking](#click-jacking)
-      - [Click Jacking Protection](#click-jacking-protection)
-    - [Session Fixation](#session-fixation)
-      - [Protection](#protection)
-    - [XSS Attack](#xss-attack)
-      - [XSS Protection](#xss-protection)
-    - [CSRF](#csrf)
-      - [CSRF Protection](#csrf-protection)
-    - [File Upload Vulnerabilities](#file-upload-vulnerabilities)
-      - [File Upload Protection](#file-upload-protection)
-    - [Malicious Redirects](#malicious-redirects)
-      - [Malicious Redirects Protection](#malicious-redirects-protection)
-    - [User Enumeration](#user-enumeration)
-      - [User Enumeration Protection](#user-enumeration-protection)
-        - [Login Protection](#login-protection)
-        - [Sign Up or Reset Protection](#sign-up-or-reset-protection)
-    - [Inline Document Type Definition in XML](#inline-document-type-definition-in-xml)
-      - [XML Protection](#xml-protection)
-    - [Information Leakage](#information-leakage)
-      - [Information Leakage Protection](#information-leakage-protection)
-    - [Secure Treatment of Passwords](#secure-treatment-of-passwords)
-    - [目录遍历攻击](#目录遍历攻击)
-      - [Directory Protection](#directory-protection)
-    - [病毒 NPM 包](#病毒-npm-包)
-      - [Package Protection](#package-protection)
-    - [正则表达式 DoS 攻击 (ReDoS)](#正则表达式-dos-攻击-redos)
-      - [ReDoS Protection](#redos-protection)
-  - [JWT](#jwt)
-  - [Security Checklist](#security-checklist)
-    - [权限系统 (注册/注册/二次验证/密码重置)](#权限系统-注册注册二次验证密码重置)
-    - [用户数据和权限校验](#用户数据和权限校验)
-    - [安卓和 iOS APP](#安卓和-ios-app)
-    - [安全头信息和配置](#安全头信息和配置)
-    - [过滤输入](#过滤输入)
-    - [操作](#操作)
-    - [关于人](#关于人)
-
-<!-- /TOC -->
+[[toc]]
 
 ## Curated List of Vulnerability(漏洞)
 

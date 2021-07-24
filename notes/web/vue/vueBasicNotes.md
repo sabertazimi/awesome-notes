@@ -1,28 +1,6 @@
 # Vue Basic Notes
 
-<!-- TOC -->
-
-- [Vue Basic Notes](#vue-basic-notes)
-  - [Slot](#slot)
-  - [Internal of Vue](#internal-of-vue)
-    - [Vue Constructor](#vue-constructor)
-    - [prototype of Vue](#prototype-of-vue)
-    - [Global API of Vue](#global-api-of-vue)
-    - [Vue Instance](#vue-instance)
-    - [Read-only property](#read-only-property)
-    - [Shared Utils](#shared-utils)
-    - [Options of Vue](#options-of-vue)
-      - [Normalize Options](#normalize-options)
-      - [Merge Options](#merge-options)
-    - [Reactive Data Pattern](#reactive-data-pattern)
-    - [Two-Way Binding](#two-way-binding)
-    - [Virtual DOM Diff and Patch](#virtual-dom-diff-and-patch)
-  - [Router](#router)
-    - [Navigation Guards](#navigation-guards)
-  - [Vue CLI](#vue-cli)
-    - [SCSS Config](#scss-config)
-
-<!-- /TOC -->
+[[toc]]
 
 ## Slot
 

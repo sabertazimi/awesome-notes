@@ -1,6 +1,8 @@
 # Message Queue Basic Notes
 
-## Intro to Message Queue
+[[toc]]
+
+## Message Queue Basis
 
 Pros:
 

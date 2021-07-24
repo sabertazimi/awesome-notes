@@ -1,30 +1,6 @@
 # jQuery Basic Notes
 
-<!-- TOC -->
-
-- [jQuery Basic Notes](#jquery-basic-notes)
-  - [Callbacks Queue](#callbacks-queue)
-  - [Deferred Queue](#deferred-queue)
-  - [Sizzle Selector Engine](#sizzle-selector-engine)
-  - [DOM Module](#dom-module)
-    - [DOM Internal](#dom-internal)
-    - [structure](#structure)
-    - [class](#class)
-    - [style](#style)
-  - [Events Module](#events-module)
-    - [Events Internal](#events-internal)
-    - [Mouse](#mouse)
-    - [Keyboard](#keyboard)
-    - [Form](#form)
-    - [Document and Window Event](#document-and-window-event)
-    - [常用多态函数](#常用多态函数)
-  - [AJAX Module](#ajax-module)
-    - [JSON API](#json-api)
-    - [AJAX API](#ajax-api)
-  - [Animation Module](#animation-module)
-    - [Tween Object](#tween-object)
-
-<!-- /TOC -->
+[[toc]]
 
 ## Callbacks Queue
 

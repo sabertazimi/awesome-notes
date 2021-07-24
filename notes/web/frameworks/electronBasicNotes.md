@@ -1,26 +1,6 @@
 # Electron Basic Notes
 
-<!-- TOC -->
-
-- [Electron Basic Notes](#electron-basic-notes)
-  - [Getting Started](#getting-started)
-  - [Basic Concepts](#basic-concepts)
-    - [Process](#process)
-    - [Shared Data](#shared-data)
-  - [Process Communication](#process-communication)
-    - [Main to Render](#main-to-render)
-    - [Render to Main](#render-to-main)
-    - [Render to Render](#render-to-render)
-  - [Native UI](#native-ui)
-    - [Menu](#menu)
-      - [Application Menu](#application-menu)
-      - [Contextual Menu](#contextual-menu)
-    - [Dialog](#dialog)
-  - [Electron Security](#electron-security)
-  - [Electron Builder](#electron-builder)
-  - [Electron Cheat Sheet](#electron-cheat-sheet)
-
-<!-- /TOC -->
+[[toc]]
 
 ## Getting Started
 

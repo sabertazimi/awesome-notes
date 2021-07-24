@@ -1,19 +1,6 @@
 # Express Basic Notes
 
-<!-- TOC -->
-
-- [Express Basic Notes](#express-basic-notes)
-  - [Middleware Function](#middleware-function)
-    - [Principle](#principle)
-    - [Template](#template)
-    - [Use](#use)
-    - [Useful Middleware](#useful-middleware)
-  - [Http](#http)
-    - [Res](#res)
-      - [Response Local](#response-local)
-    - [Req](#req)
-
-<!-- /TOC -->
+[[toc]]
 
 ## Middleware Function
 
