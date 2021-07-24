@@ -2,15 +2,14 @@
 
 [[toc]]
 
-## Installation
+## TypeScript Configuration
 
-### Config
-
-- [Types Definition](https://github.com/DefinitelyTyped/DefinitelyTyped)
+### TypeScript Installation
 
 ```bash
-npm i -D typescript awesome-typescript-loader source-map-loader
+npm i -D typescript
 npm i -D react react-dom @types/react @types/react-dom
+npx tsc --init
 ```
 
 ```json
@@ -72,6 +71,10 @@ npm i -D react react-dom @types/react @types/react-dom
 
 ### Webpack for TypeScript
 
+```bash
+npm i -D typescript ts-loader source-map-loader
+```
+
 ```ts
 const path = require('path');
 
@@ -89,7 +92,7 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        loader: 'awesome-typescript-loader',
+        loader: 'ts-loader',
       },
       { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
     ],
@@ -101,15 +104,29 @@ module.exports = {
 };
 ```
 
-### Integration
+### Lint Tools
 
-- @typescript-eslint/parser
+#### ESLint
+
 - [ESLint for TypeScript](https://github.com/typescript-eslint/typescript-eslint)
+
+```bash
+npx eslint --init
+```
+
+#### TSLint
+
 - [TSLint Config Airbnb](https://github.com/progre/tslint-config-airbnb)
+
+### Defined Types Tools
+
+- [Types Definition](https://github.com/DefinitelyTyped/DefinitelyTyped)
+- [DTSGen: Creates starter TypeScript definition files for any module or library](https://github.com/Microsoft/dts-gen)
+- [DTSLint: A utility built on TSLint for linting TypeScript declaration files](https://github.com/microsoft/dtslint)
 
 ## Modules
 
-- [Types Search](https://microsoft.github.io/TypeSearch/)
+- [Types Search](https://microsoft.github.io/TypeSearch)
 
 ### Globals Definition
 
