@@ -744,6 +744,33 @@ print_git_objects
 
 ## GitHub
 
+### GPG Usage
+
+```bash
+# Generate GPG key
+gpg --full-generate-key
+# List GPG keys
+gpg --list-keys
+
+# Generate GPG public key string
+gpg --armor --export <pub-keyID>
+# Copy output to GitHub GPG textarea
+
+# Git global configuration for GPG signature commits
+git config --global user.signingkey <pub-keyID>
+git config --global commit.gpgsign true
+
+# Single signature commit
+git commit -S -m "..."
+
+# Import GitHub signature
+curl https://github.com/web-flow.gpg | gpg --import
+gpg --sign-key <GitHub-keyID>
+
+# Log git signature
+git log --show-signature
+```
+
 ### LICENSE
 
 #### Popular LICENSE
