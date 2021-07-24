@@ -796,7 +796,7 @@
 - [SqlMap](https://github.com/sqlmapproject/sqlmap)
 - [Zaproxy](https://github.com/zaproxy/zaproxy)
 - [Arachni](https://github.com/Arachni/arachni)
-- [Naughty Input Strings](https://github.com/minimaxir/big-list-of-naughty-strings))
+- [Naughty Input Strings](https://github.com/minimaxir/big-list-of-naughty-strings)
 - [FatRat](https://github.com/Screetsec/TheFatRat)
 - [Spoof](https://github.com/feross/spoof)
 
