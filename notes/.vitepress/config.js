@@ -10,7 +10,9 @@ module.exports = {
 
   themeConfig: {
     repo: 'sabertazimi/awesome-notes',
-    docsDir: 'docs',
+    logo: '/logo.svg',
+    docsDir: 'notes',
+    docsBranch: 'main',
 
     editLinks: true,
     editLinkText: 'Edit this page on GitHub',
@@ -37,6 +39,23 @@ module.exports = {
         text: 'Web',
         link: '/web/security/securityBasicNotes',
         activeMatch: '^/web/',
+      },
+      {
+        text: 'Links',
+        items: [
+          {
+            text: 'Twitter',
+            link: 'https://twitter.com/sabertazimi',
+          },
+          {
+            text: 'Facebook',
+            link: 'https://facebook.com/sabertazimi',
+          },
+          {
+            text: 'Weibo',
+            link: 'https://weibo.com/sabertazimi',
+          },
+        ],
       },
       {
         text: 'GitBook',
