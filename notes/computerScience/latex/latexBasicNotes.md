@@ -1,19 +1,6 @@
 # Latex Basic Notes
 
-- [Latex Basic Notes](#latex-basic-notes)
-  - [Workflow](#workflow)
-    - [Installation](#installation)
-    - [Build Script](#build-script)
-  - [Basis](#basis)
-    - [Layout](#layout)
-      - [Page Size](#page-size)
-      - [Font Size](#font-size)
-  - [Math](#math)
-    - [Symbol](#symbol)
-  - [template](#template)
-  - [Tools](#tools)
-    - [PDF to Tex](#pdf-to-tex)
-    - [tlmgr](#tlmgr)
+[[toc]]
 
 ## Workflow
 

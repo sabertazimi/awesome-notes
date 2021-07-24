@@ -1,49 +1,6 @@
 # Computer Systems: A Programmer's Perspective - System Basic Notes
 
-<!-- TOC -->
-
-- [Computer Systems: A Programmer's Perspective - System Basic Notes](#computer-systems-a-programmers-perspective---system-basic-notes)
-  - [机器码与进制转换](#机器码与进制转换)
-    - [浮点数](#浮点数)
-    - [Stack Frame](#stack-frame)
-  - [Architecture](#architecture)
-    - [Control Signal](#control-signal)
-    - [Special Control Signal](#special-control-signal)
-    - [Procedure Control Signal](#procedure-control-signal)
-    - [Forwarding](#forwarding)
-    - [Exception](#exception)
-    - [Efficiency](#efficiency)
-  - [Optimization](#optimization)
-    - [Principles](#principles)
-    - [Tips](#tips)
-      - [Replacement](#replacement)
-      - [Branch](#branch)
-      - [Code Motion](#code-motion)
-      - [Unrolling (Duff's Device)](#unrolling-duffs-device)
-  - [异常控制流](#异常控制流)
-    - [异常](#异常)
-      - [分类](#分类)
-      - [异常处理程序](#异常处理程序)
-    - [进程](#进程)
-      - [上下文](#上下文)
-      - [进程控制](#进程控制)
-        - [创建和终止进程](#创建和终止进程)
-        - [回收子进程](#回收子进程)
-    - [信号](#信号)
-      - [处理信号](#处理信号)
-      - [阻塞信号](#阻塞信号)
-    - [非本地跳转](#非本地跳转)
-  - [系统级 I/O](#系统级-io)
-    - [socket I/O](#socket-io)
-      - [限制](#限制)
-      - [I/O 函数的选择](#io-函数的选择)
-  - [网络](#网络)
-  - [并发](#并发)
-    - [锁](#锁)
-  - [调试/测试](#调试测试)
-    - [日志](#日志)
-
-<!-- /TOC -->
+[[toc]]
 
 ## 机器码与进制转换
 

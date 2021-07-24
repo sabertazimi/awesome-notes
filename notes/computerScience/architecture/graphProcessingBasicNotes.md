@@ -1,28 +1,6 @@
 # Graph Processing Basic Notes
 
-- [Graph Processing Basic Notes](#graph-processing-basic-notes)
-  - [Graph System](#graph-system)
-  - [NUMA Architecture](#numa-architecture)
-    - [CPU Schedule](#cpu-schedule)
-    - [Memory Schedule](#memory-schedule)
-  - [Dataset](#dataset)
-  - [Tools](#tools)
-    - [Concurrency Lib](#concurrency-lib)
-    - [Perf Tools](#perf-tools)
-    - [Hardware Performance Counter](#hardware-performance-counter)
-    - [Parallel Programming](#parallel-programming)
-    - [Other Libs](#other-libs)
-    - [DRAMSim2](#dramsim2)
-    - [GCC](#gcc)
-      - [strict-alias warnings](#strict-alias-warnings)
-    - [Time Stamp Counter](#time-stamp-counter)
-      - [RDTSC](#rdtsc)
-      - [Clock Get Time](#clock-get-time)
-    - [NUMA Tool](#numa-tool)
-      - [NUMA Control](#numa-control)
-        - [installation](#installation)
-        - [usage](#usage)
-      - [NUMA Status](#numa-status)
+[[toc]]
 
 ## Graph System
 

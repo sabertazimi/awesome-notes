@@ -1,30 +1,6 @@
 # Architecture Basic Notes
 
-<!-- TOC -->
-
-- [Architecture Basic Notes](#architecture-basic-notes)
-  - [SuperPipeline and SuperScalar](#superpipeline-and-superscalar)
-    - [Instructions Dependencies and Latencies](#instructions-dependencies-and-latencies)
-    - [Branch Prediction](#branch-prediction)
-  - [VLIW (Very Long Instruction Word)](#vliw-very-long-instruction-word)
-  - [Out of Order Execution (OoO or OoE)](#out-of-order-execution-ooo-or-ooe)
-    - [The Brainiac vs Speed-demon Debate](#the-brainiac-vs-speed-demon-debate)
-    - [Power Wall and ILP Wall](#power-wall-and-ilp-wall)
-    - [Decoupled x86 microarchitecture](#decoupled-x86-microarchitecture)
-  - [SMT (Hardware Threads)](#smt-hardware-threads)
-    - [More cores or Wider cores](#more-cores-or-wider-cores)
-  - [DLP (data-level parallelism)](#dlp-data-level-parallelism)
-    - [SIMD Vector Instructions](#simd-vector-instructions)
-  - [Memory](#memory)
-    - [Memory Wall](#memory-wall)
-    - [Caches](#caches)
-      - [Cache Locality](#cache-locality)
-      - [Cache Layout](#cache-layout)
-    - [Memory Latency and Bandwidth](#memory-latency-and-bandwidth)
-  - [Distributed System](#distributed-system)
-  - [Reference](#reference)
-
-<!-- /TOC -->
+[[toc]]
 
 ## SuperPipeline and SuperScalar
 

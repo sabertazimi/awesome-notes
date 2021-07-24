@@ -1,55 +1,6 @@
 # OJ Basic Notes
 
-<!-- TOC -->
-
-- [OJ Basic Notes](#oj-basic-notes)
-  - [C++ Notes for OJ](#c-notes-for-oj)
-    - [Format](#format)
-      - [string and integer](#string-and-integer)
-    - [Iterator](#iterator)
-      - [slice](#slice)
-    - [limits](#limits)
-    - [Implementation Pattern](#implementation-pattern)
-    - [algorithm](#algorithm)
-      - [sort](#sort)
-    - [map](#map)
-    - [Algorithm](#algorithm-1)
-  - [Search Problem](#search-problem)
-    - [Search in Sorted Array](#search-in-sorted-array)
-    - [Max Min Problem](#max-min-problem)
-    - [Range Max Min Query](#range-max-min-query)
-  - [Greedy Algorithm](#greedy-algorithm)
-  - [Simulation](#simulation)
-    - [Painting](#painting)
-    - [Reverting](#reverting)
-    - [Meet Problem and Collision Problem](#meet-problem-and-collision-problem)
-  - [String](#string)
-    - [Rotate String](#rotate-string)
-  - [Map Theory](#map-theory)
-    - [Shortest Paths](#shortest-paths)
-    - [Minimal Spanning Tree](#minimal-spanning-tree)
-    - [BFS](#bfs)
-    - [DFS](#dfs)
-    - [Connected Component](#connected-component)
-      - [Strongly Connected Component](#strongly-connected-component)
-      - [Union Find](#union-find)
-  - [Dynamic Programming](#dynamic-programming)
-    - [典型题目](#典型题目)
-    - [Digital Bits Dynamic Programming(数位 DP)](#digital-bits-dynamic-programming数位-dp)
-      - [题目模式](#题目模式)
-      - [解题模式](#解题模式)
-  - [Math](#math)
-    - [Matrix Fast Power](#matrix-fast-power)
-    - [Mod Power](#mod-power)
-  - [Tips](#tips)
-    - [Array](#array)
-    - [Map](#map-1)
-    - [Set](#set)
-    - [Two Pointer](#two-pointer)
-    - [Float Pointer](#float-pointer)
-    - [bit 表示法](#bit-表示法)
-
-<!-- /TOC -->
+[[toc]]
 
 ## C++ Notes for OJ
 
