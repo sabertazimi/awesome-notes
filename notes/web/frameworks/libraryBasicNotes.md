@@ -609,6 +609,7 @@
 - [ORA Spinner](https://github.com/sindresorhus/ora)
 - [Progress](https://github.com/bvaughn/progress-estimator)
 - [Code Frame: pointing to source locations](https://github.com/babel/babel/tree/main/packages/babel-code-frame)
+- [EnvInfo: Generate a report about development environment for debugging and issue reporting](https://github.com/tabrindle/envinfo)
 
 ### CLI Cheat Sheet
 
@@ -785,7 +786,7 @@
 - [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter)
 - [YAPI](https://github.com/ymfe/yapi)
 - [Nock Server](https://github.com/nock/nock)
-- [Mock Service Worker][https://github.com/mswjs/msw]
+- [Mock Service Worker](https://github.com/mswjs/msw)
 - [Mockery Function](https://github.com/mfncooper/mockery)
 - [Pokemon API](https://github.com/PokeAPI/pokeapi)
 - [Images Mock](http://source.unsplash.com/random)
