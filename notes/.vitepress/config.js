@@ -6,7 +6,12 @@ module.exports = {
 
   markdown: {
     lineNumbers: true,
-    toc: { includeLevel: [1, 2] },
+
+    // config for markdown-it-table-of-contents
+    toc: {
+      includeLevel: [1, 2],
+      markerPattern: /^\[toc\]/im, // match to VSCode markdown-preview-enhanced extension
+    },
   },
 
   themeConfig: {
