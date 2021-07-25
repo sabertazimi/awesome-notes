@@ -472,7 +472,7 @@ const crazy = new CrazyClass(); // crazy would be { hello:123 }
 - Type aliases may not participate in declaration merging, but interfaces can.
 - Interfaces may only be used to declare the shapes of object, not re-name primitives.
 - The key distinction is that a type cannot be re-opened to add new properties,
-an interface which is always extendable.
+  an interface which is always extendable.
 
 ```ts
 type Window = {
@@ -575,6 +575,23 @@ move(1, 'Nurth'); // Error
 
 type OneToFive = 1 | 2 | 3 | 4 | 5;
 type Bools = true | false;
+```
+
+```ts
+interface Options {
+  width: number;
+}
+
+function configure(x: Options | 'auto') {
+  // ...
+}
+
+configure({ width: 100 });
+configure('auto');
+configure('automatic');
+// ERROR:
+// Argument of type '"automatic"' is not assignable
+// to parameter of type 'Options | "auto"'.
 ```
 
 ## Moving Types
