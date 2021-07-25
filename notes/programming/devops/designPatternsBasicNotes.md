@@ -1858,6 +1858,8 @@ more than two out of the following three guarantees:
 
 ### 服务熔断
 
+### 服务限流
+
 ### 服务降级
 
 ## Reference
