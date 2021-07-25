@@ -1,6 +1,6 @@
 ﻿# Redux Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Basic Concepts
 

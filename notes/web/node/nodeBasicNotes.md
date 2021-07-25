@@ -1,6 +1,6 @@
 # Node Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Node App Structure
 

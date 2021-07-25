@@ -1,6 +1,6 @@
 # HTML Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Emmet
 

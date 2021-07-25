@@ -1,6 +1,6 @@
 # Express Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Middleware Function
 

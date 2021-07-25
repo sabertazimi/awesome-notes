@@ -1,6 +1,6 @@
 # CSS Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Cascading and Inheritance
 

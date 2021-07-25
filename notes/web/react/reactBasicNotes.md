@@ -1,6 +1,6 @@
 # React Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Core of React
 

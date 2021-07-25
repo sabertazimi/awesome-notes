@@ -1,6 +1,6 @@
 # CSS Advanced Notes
 
-[[toc]]
+[TOC]
 
 ## CSS Framework Key Points
 

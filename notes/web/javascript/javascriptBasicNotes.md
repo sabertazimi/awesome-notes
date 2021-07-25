@@ -1,6 +1,6 @@
 # JavaScript Basic Notes
 
-[[toc]]
+[TOC]
 
 ## 常量
 

@@ -1,6 +1,6 @@
 # Vue Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Slot
 

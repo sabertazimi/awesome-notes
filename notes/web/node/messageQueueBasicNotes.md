@@ -1,6 +1,6 @@
 # Message Queue Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Message Queue Basis
 

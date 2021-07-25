@@ -1,6 +1,6 @@
 # jQuery Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Callbacks Queue
 

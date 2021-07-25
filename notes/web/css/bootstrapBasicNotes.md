@@ -1,6 +1,6 @@
 # Bootstrap Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Bootstrap Basis
 

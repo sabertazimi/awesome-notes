@@ -1,6 +1,6 @@
 # TypeScript Basic Notes
 
-[[toc]]
+[TOC]
 
 ## TypeScript Configuration
 

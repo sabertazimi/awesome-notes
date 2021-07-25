@@ -1,6 +1,6 @@
 # Security Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Curated List of Vulnerability(漏洞)
 

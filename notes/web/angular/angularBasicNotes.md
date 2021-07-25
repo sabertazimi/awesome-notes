@@ -1,6 +1,6 @@
 # Angular Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Basic
 

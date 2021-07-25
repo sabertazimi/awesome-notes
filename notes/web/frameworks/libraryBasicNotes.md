@@ -1,6 +1,6 @@
 # Library Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Indexing Tools
 

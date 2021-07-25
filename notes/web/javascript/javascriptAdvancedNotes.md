@@ -1,6 +1,6 @@
 # JavaScript Advanced Notes
 
-[[toc]]
+[TOC]
 
 ## Modern JavaScript
 

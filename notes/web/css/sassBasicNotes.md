@@ -1,6 +1,6 @@
 # Sass Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Sass Basis
 

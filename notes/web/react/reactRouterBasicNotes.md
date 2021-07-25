@@ -1,6 +1,6 @@
 # React Router Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Router and Route
 

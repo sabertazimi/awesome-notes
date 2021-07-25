@@ -1,6 +1,6 @@
 # Electron Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Getting Started
 

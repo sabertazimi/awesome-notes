@@ -1,6 +1,6 @@
 # GraphQL Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Better REST
 
