@@ -137,6 +137,17 @@ declare module '*.css';
 // import * as foo from './some/file.css';
 ```
 
+```ts
+declare global {
+  namespace JSX {
+    interface Element extends React.ReactElement<any, any> {}
+    interface ElementClass extends React.Component<any> {
+      render(): React.ReactNode;
+    }
+  }
+}
+```
+
 ```bash
 npm i -D @types/react @types/react-dom
 ```
@@ -154,6 +165,39 @@ lib.d.ts:
 
 ```bash
 tsc --target es5 --lib dom,es6
+```
+
+### Namespace
+
+Namespace aliases:
+
+```ts
+namespace Shapes {
+  export namespace Polygons {
+    export class Triangle {}
+    export class Square {}
+  }
+}
+
+import polygons = Shapes.Polygons;
+let sq = new polygons.Square(); // Same as 'new Shapes.Polygons.Square()'
+```
+
+Library namespace declaration:
+
+```ts
+export = React;
+export as namespace React;
+
+declare namespace React {
+  type ElementType<P = any> =
+    | {
+        [K in keyof JSX.IntrinsicElements]: P extends JSX.IntrinsicElements[K]
+          ? K
+          : never;
+      }[keyof JSX.IntrinsicElements]
+    | ComponentType<P>;
+}
 ```
 
 ## Basic Types
@@ -946,7 +990,7 @@ export default connect<StateProps, DispatchProps, OwnProps>
 type Readonly<T> = { readonly [P in keyof T]: T[P] };
 type Partial<T> = { [P in keyof T]?: T[P] };
 type ReadonlyPartial<T> = { readonly [P in keyof T]?: T[P] };
-type Required<T> = { [P in keyof T]-?: T[P] }; 
+type Required<T> = { [P in keyof T]-?: T[P] };
 type Nullable<T> = { [P in keyof T]: T[P] | null };
 
 // Key Types
