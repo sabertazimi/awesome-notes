@@ -820,6 +820,21 @@ git log --show-signature
 
 #### Popular LICENSE
 
+```mermaid
+graph TD
+License --> A{Open Source}
+A -->|Yes| B{Same License}
+A -->|No| D{List Copyright on Changed}
+B -->|Yes| GPL
+B -->|No| C{Change Docs}
+C -->|Yes| Mozilla
+C -->|No| LGPL
+D -->|Yes| Apache
+D -->|No| E{Enterprise}
+E -->|Yes| MIT
+E -->|No| BSD
+```
+
 ![Free Software License](./figures/6_free_software_licenses.png)
 
 #### Unique LICENSE
