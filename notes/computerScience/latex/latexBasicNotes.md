@@ -1,6 +1,6 @@
 # Latex Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Workflow
 

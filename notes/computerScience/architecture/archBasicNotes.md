@@ -1,6 +1,6 @@
 # Architecture Basic Notes
 
-[[toc]]
+[TOC]
 
 ## SuperPipeline and SuperScalar
 

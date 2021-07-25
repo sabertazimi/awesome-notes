@@ -1,6 +1,6 @@
 # Virtualization Basic Notes
 
-[[toc]]
+[TOC]
 
 ## How to read paper
 

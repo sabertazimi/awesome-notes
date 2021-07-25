@@ -1,6 +1,6 @@
 # Compiler Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Basic Concepts
 

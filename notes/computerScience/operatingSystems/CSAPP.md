@@ -1,6 +1,6 @@
 # Computer Systems: A Programmer's Perspective - System Basic Notes
 
-[[toc]]
+[TOC]
 
 ## 机器码与进制转换
 

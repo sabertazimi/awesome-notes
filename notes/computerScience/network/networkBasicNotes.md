@@ -1,6 +1,6 @@
 # Computer NetWorking Notes
 
-[[toc]]
+[TOC]
 
 ## Computer Network and Internet
 

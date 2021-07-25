@@ -1,6 +1,6 @@
 # OJ Basic Notes
 
-[[toc]]
+[TOC]
 
 ## C++ Notes for OJ
 

@@ -1,6 +1,6 @@
 # Graph Processing Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Graph System
 

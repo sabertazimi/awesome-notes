@@ -1,6 +1,6 @@
 # Database Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Basic Concepts
 

@@ -1,6 +1,6 @@
 # Algorithm Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Sorting Algorithm
 

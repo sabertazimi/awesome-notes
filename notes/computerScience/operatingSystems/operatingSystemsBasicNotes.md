@@ -1,6 +1,6 @@
 # Operating System Basic Notes
 
-[[toc]]
+[TOC]
 
 ## OS Definition
 
