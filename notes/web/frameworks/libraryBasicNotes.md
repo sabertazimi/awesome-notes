@@ -841,4 +841,5 @@
 
 ### API Documentation
 
+- [Swagger: OpenAPI](https://github.com/swagger-api/swagger-ui)
 - [DevDocs](https://github.com/freeCodeCamp/devdocs)
