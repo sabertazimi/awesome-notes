@@ -257,23 +257,24 @@ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks p
 
 #### Pretty Format
 
-| 选项 | 说明                                       |
-| :--- | :----------------------------------------- |
-| %H   | 提交对象(commit)的完整哈希字串             |
-| %h   | 提交对象的简短哈希字串                     |
-| %T   | 树对象(tree)的完整哈希字串                 |
-| %t   | 树对象的简短哈希字串                       |
-| %P   | 父对象(parent)的完整哈希字串               |
-| %p   | 父对象的简短哈希字串                       |
-| %an  | 作者(author)的名字                         |
-| %ae  | 作者的电子邮件地址                         |
-| %ad  | 作者修订日期(可以用\|-date=\|选项定制格式) |
-| %ar  | 作者修订日期，按多久以前的方式显示         |
-| %cn  | 提交者(committer)的名字                    |
-| %ce  | 提交者的电子邮件地址                       |
-| %cd  | 提交日期                                   |
-| %cr  | 提交日期,按多久以前的方式显示              |
-| %s   | 提交说明                                   |
+| 选项 | 说明                                        |
+| :--- | :------------------------------------------ |
+| %H   | 提交对象(commit)的完整哈希字串              |
+| %h   | 提交对象的简短哈希字串                      |
+| %T   | 树对象(tree)的完整哈希字串                  |
+| %t   | 树对象的简短哈希字串                        |
+| %P   | 父对象(parent)的完整哈希字串                |
+| %p   | 父对象的简短哈希字串                        |
+| %an  | 作者(author)的名字                          |
+| %ae  | 作者的电子邮件地址                          |
+| %ad  | 作者修订日期 (可以用\|-date=\|选项定制格式) |
+| %at  | 作者修订日期 (ms)                           |
+| %ar  | 作者修订日期，按多久以前的方式显示          |
+| %cn  | 提交者(committer)的名字                     |
+| %ce  | 提交者的电子邮件地址                        |
+| %cd  | 提交日期                                    |
+| %cr  | 提交日期,按多久以前的方式显示               |
+| %s   | 提交说明                                    |
 
 #### Log Options
 
@@ -630,6 +631,50 @@ git checkout <commit-hash-id>
 - write file entries by root tree object (tree graph)
 - write .git/index
 - set HEAD to that commit (detached HEAD state)
+
+```js
+// Get file commit history
+const Git = require('nodegit');
+let repo;
+
+Git.Repository.open(path.resolve('./.git'))
+  .then(function (r) {
+    repo = r;
+    return repo.getMasterCommit();
+  })
+  .then(function (firstCommitOnMaster) {
+    const walker = repo.createRevWalk();
+    walker.push(firstCommitOnMaster.sha());
+    walker.sorting(Git.Revwalk.SORT.Time);
+
+    return walker.fileHistoryWalk(historyFile, 2);
+  })
+  .then((resultingArrayOfCommits) => {
+    if (resultingArrayOfCommits.length > 0) {
+      const commit = resultingArrayOfCommits[0].commit;
+      const date = commit.date();
+    }
+  });
+
+const getGitLastUpdatedTimeStamp = (filePath) => {
+  let lastUpdated = 0;
+
+  try {
+    lastUpdated =
+      parseInt(
+        spawn
+          .sync('git', ['log', '-1', '--format=%at', path.basename(filePath)], {
+            cwd: path.dirname(filePath),
+          })
+          .stdout.toString('utf-8')
+      ) * 1000;
+  } catch (e) {
+    /* do not handle for now */
+  }
+
+  return lastUpdated;
+};
+```
 
 ### Merge Inside
 
