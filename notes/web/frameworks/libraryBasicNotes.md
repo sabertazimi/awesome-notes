@@ -820,12 +820,23 @@
 
 ## Documentation
 
-- [JSDoc](https://github.com/jsdoc/jsdoc)
-- [Docusaurus](https://github.com/facebook/docusaurus)
-- [Vuepress](https://github.com/vuejs/vuepress)
-- [TypeDoc](https://github.com/TypeStrong/typedoc)
-- [Docz](https://github.com/pedronauck/docz)
-- [DUmi](https://github.com/umijs/dumi)
-- [Documentation.js](https://github.com/documentationjs/documentation)
-- [Wiki.js](https://github.com/Requarks/wiki)
+### Markdown Documentation
+
+- [Docusaurus: Easy to maintain documentation websites with React stack](https://github.com/facebook/docusaurus)
+- [VuePress: Minimalistic Vue-powered static site generator](https://github.com/vuejs/vuepress)
+- [Wiki.js: A modern and powerful wiki app built on Node.js](https://github.com/Requarks/wiki)
+
+### JavaScript Documentation
+
+- [JSDoc: An API documentation generator for JavaScript](https://github.com/jsdoc/jsdoc)
+- [TypeDoc: Documentation generator for TypeScript projects](https://github.com/TypeStrong/typedoc)
+- [Documentation.js: Documentation for modern JavaScript](https://github.com/documentationjs/documentation)
+
+### React Documentation
+
+- [Docz: React component documentation tool built on Gatsby](https://github.com/pedronauck/docz)
+- [DUmi: Documentation generator of React component](https://github.com/umijs/dumi)
+
+### API Documentation
+
 - [DevDocs](https://github.com/freeCodeCamp/devdocs)
