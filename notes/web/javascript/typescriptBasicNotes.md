@@ -946,19 +946,30 @@ export default connect<StateProps, DispatchProps, OwnProps>
 type Readonly<T> = { readonly [P in keyof T]: T[P] };
 type Partial<T> = { [P in keyof T]?: T[P] };
 type ReadonlyPartial<T> = { readonly [P in keyof T]?: T[P] };
+type Required<T> = { [P in keyof T]-?: T[P] }; 
 type Nullable<T> = { [P in keyof T]: T[P] | null };
-type Required<T> = { [P in keyof T]-?: T[P] };
+
+// Key Types
 type Pick<T, K extends keyof T> = { [P in K]: T[P] };
-type Extract<T, K extends keyof T> = { [P in K]: T[P] };
+type Omit<Type, K extends keyof T> = { [P not in K]: T[P] }
+type Record<K extends keyof any, T> = { [P in K]: T };
+
+// Union Types
 type Filter<T, U> = T extends U ? T : never;
 type Exclude<T, U> = T extends U ? never : T;
-type Record<T, K extends keyof any> = { [P in K]: T };
-type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
+type Extract<T, U> = U extends T ? T : never;
 
+// Proxy Types
+type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
 type Proxy<T> = {
   get(): T;
   set(value: T): void;
 };
+
+// Function Types
+type Parameters<Type>
+type ConstructorParameters<ConstructorType>
+type ReturnType<Type>
 ```
 
 ## Mixins
