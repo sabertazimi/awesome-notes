@@ -1,6 +1,6 @@
 # CMake Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Basic Build System
 

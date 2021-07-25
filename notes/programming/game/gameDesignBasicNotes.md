@@ -1,6 +1,6 @@
 # Game Design Basic Notes
 
-[[toc]]
+[TOC]
 
 ## 游戏心理学
 

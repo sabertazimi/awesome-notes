@@ -1,6 +1,6 @@
 # Git Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Basic
 

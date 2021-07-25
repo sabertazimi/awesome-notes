@@ -1,6 +1,6 @@
 # Linux Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Linux Boot System
 

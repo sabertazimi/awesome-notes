@@ -1,6 +1,6 @@
 # Functional Programming Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Lambda Calculus
 

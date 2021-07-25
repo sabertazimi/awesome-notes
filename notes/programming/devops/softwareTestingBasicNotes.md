@@ -1,6 +1,6 @@
 # Software Testing Basic Notes
 
-[[toc]]
+[TOC]
 
 ## 测试模型
 

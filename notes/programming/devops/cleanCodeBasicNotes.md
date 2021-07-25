@@ -1,6 +1,6 @@
 # Clean Code Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Programming Principles
 

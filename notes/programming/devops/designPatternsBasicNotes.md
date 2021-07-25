@@ -1,6 +1,6 @@
 # Design Patterns Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Basic Patterns
 

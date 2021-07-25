@@ -1,6 +1,6 @@
 # Vim Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Normal 模式命令
 

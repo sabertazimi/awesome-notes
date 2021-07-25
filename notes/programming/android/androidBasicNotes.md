@@ -1,6 +1,6 @@
 # Android Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Android Framework
 
