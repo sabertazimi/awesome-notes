@@ -2437,7 +2437,7 @@ str = str + 'one' + 'two';
 
 ### 循环
 
-#### **倒序**循环可提升性能
+#### 倒序循环可提升性能
 
 ```js
 for (let i = item.length; i--; ) {
@@ -2455,7 +2455,7 @@ do {
 } while (k--);
 ```
 
-#### Duff's Device(达夫设备)
+#### Duff's Device
 
 ```js
 let i = items.length % 8;
@@ -2492,7 +2492,7 @@ try {
 }
 ```
 
-### Event Delegate(事件委托)
+### Event Delegation
 
 - 事件委托利用的是事件冒泡机制，只制定一事件处理程序，就可以管理某一类型的所有事件
 - 使用事件委托，只需在 DOM 树中尽量最高的层次上添加一个事件处理程序
@@ -5697,6 +5697,15 @@ if (isBotAgent) {
   // ReactDOMServer.renderToString()
 }
 ```
+
+## RESTful API
+
+- Client - Server architecture
+- Stateless
+- Cacheable
+- Layer system
+- Code via need
+- Isomorphic interface
 
 ## SEO
 
