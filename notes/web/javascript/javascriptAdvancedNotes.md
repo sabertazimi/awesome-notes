@@ -751,6 +751,7 @@ obj[Symbol.iterator] = function* () {
 - Object.keys()
 - Object.values()
 - Object.entries()
+- Object.fromEntries()
 
 ```js
 const score = {
@@ -1059,6 +1060,9 @@ iter.next(); // { value: undefined, done: true }
 
 - 一个数据结构只要具有 Symbol.iterator 属性 (其为 function), 就可以认为是 "可遍历的" (iterable)
 - implement iterator with `Symbol.iterator`
+- 只有 `for...in` 可以遍历到原型上的属性
+- Object.getOwnPropertyNames, Object.getOwnPropertySymbols 和 Reflect.ownKeys 可获取到不可枚举的属性
+- Object.getOwnPropertySymbols 和 Reflect.ownKeys 可获取到 Symbol 属性
 
 #### Synchronous Iterator
 
