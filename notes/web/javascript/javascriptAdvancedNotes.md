@@ -1466,7 +1466,9 @@ APIs of handler:
 - has
 - apply
 - construct
-- ownKeys
+- `Reflect.ownKeys`:
+  `Object.getOwnPropertyNames` + `Object.getOwnPropertySymbols`,
+  all keys include Symbols.
 - deleteProperty
 - defineProperty
 - isExtensible
