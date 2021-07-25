@@ -257,11 +257,9 @@ makepkg -si
 wget https://aur.archlinux.org/packages.gz
 ```
 
-## 命令操作
+## 基本处理命令
 
-### 基本处理命令
-
-#### ls
+### ls
 
 - -lh(long human)
 - -ld(long directory)
@@ -269,22 +267,22 @@ wget https://aur.archlinux.org/packages.gz
 
 权限(user/group/other) 引用计数 user group 文件大小 文件修改时间 文件名
 
-#### cd
+### cd
 
 - -上次目录
 - ..上级目录
 
-#### pwd
+### pwd
 
 print working directory
 
-#### rm
+### rm
 
 - –r delete directory
 - –f delete forcedly
 - -i 显示确认信息
 
-#### cp
+### cp
 
 - -r copy directory
 - -p copy property
@@ -292,37 +290,37 @@ print working directory
 - -a --all(-pdr)
 - -i 显示确认信息
 
-#### mv
+### mv
 
 无需参数(改名+移动)
 
 - -i 显示确认信息
 
-#### ln
+### ln
 
 link 命令 .bak/.hard(硬链接) .soft(软链接：创建链接时填写绝对路径)
 
 ln -s(创建软链接) [原文件][目标文件]
 
-### 基本搜索命令
+## 基本搜索命令
 
-#### locate
+### locate
 
 结合 updatedb 命令(该命令一般自动 1 天/次)
 
-#### type
+### type
 
 indicate how a command name is interpreted
 
-#### apropos
+### apropos
 
 display a list of appropriate commands
 
-#### whereis and whatis
+### whereis and whatis
 
-#### which
+### which
 
-#### find
+### find
 
 `find [搜索路径] [可选参数] [文件名](可加"")`:
 
@@ -336,20 +334,20 @@ display a list of appropriate commands
 - -a / -o 逻辑与/逻辑或(左右两端搜索条件)
 - -exec/-ok `system_command_list {} \;对搜索结果执行操作
 
-#### grep
+### grep
 
 `grep` `[可选参数] “字符串” 文件名`:
 
 - -I 不区分大小写
 - -v 排除指定字符串
 
-### Process Command
+## Process Command
 
-#### uptime
+### uptime
 
 Average load information
 
-#### ps
+### ps
 
 Report a snapshot of current processes
 
@@ -357,7 +355,7 @@ Report a snapshot of current processes
 ps aux
 ```
 
-#### top
+### top
 
 top/htop:
 
@@ -372,7 +370,7 @@ atop:
 - Disk I/O usage
 - Network usage
 
-#### vmstat
+### vmstat
 
 Outputs a snapshot of system resource usage:
 
@@ -384,7 +382,7 @@ Outputs a snapshot of system resource usage:
 - Swap space
 - Disk I/O usage
 
-#### pidstat
+### pidstat
 
 Process and Thread:
 
@@ -396,7 +394,7 @@ Process and Thread:
 pidstat 1
 ```
 
-#### mpstat
+### mpstat
 
 - CPU usage
 - Software interrupt times (/proc/interrupts)
@@ -405,43 +403,43 @@ pidstat 1
 mpstat -P ALL 1
 ```
 
-#### lscpu
+### lscpu
 
 Show `/proc/cpuinfo`.
 
-#### jobs
+### jobs
 
 list active jobs
 
-#### bg
+### bg
 
 place a job in the background
 
-#### fg
+### fg
 
 place a job in the foreground
 
-#### kill
+### kill
 
 send a signal to a process
 
-#### killall
+### killall
 
 kill processes by name
 
-#### shutdown
+### shutdown
 
 shutdown or reboot the system
 
-#### pstree
+### pstree
 
 outputs a process list arranged in a tree-like pattern
 
-#### xload and tload
+### xload and tload
 
 draws a graph showing system load over time
 
-#### screen
+### screen
 
 ```bash
 screen -S screenName
@@ -452,25 +450,25 @@ screen -r
 - Ctrl+d // detach window
 - Ctrl+k // kill window
 
-### I/O Command
+## CLI Input Output Command
 
-#### cat
+### cat
 
 concatenate files
 
-#### sort
+### sort
 
 sort lines of text
 
-#### uniq
+### uniq
 
 report or omit repeated lines
 
-#### wc
+### wc
 
 print newline, word, and byte counts for each file
 
-#### Head and Tail
+### Head and Tail
 
 output the first/last part of a file
 
@@ -479,7 +477,7 @@ head -n 5 filename
 tail -f filename
 ```
 
-#### Tee
+### Tee
 
 read from standard input and write to standard output and files
 
@@ -490,29 +488,29 @@ bzip2
 ....
 ```
 
-#### nl
+### nl
 
 number lines
 
-#### fold
+### fold
 
 wrap each line to a specified length
 
-#### fmt
+### fmt
 
 a simple text formatter
 
-#### pr
+### pr
 
 prepare text for printing
 
-#### printf
+### printf
 
 format and print data
 
-### 帮助命令
+## 帮助命令
 
-#### man
+### man
 
 - -f 显示操作等级
 - -k 包含匹配
@@ -535,15 +533,15 @@ format and print data
 8. System management commands
    Commands like mount(8), many of which only root can execute.
 
-#### help shell 内部命令
+### help shell 内部命令
 
 显示 shell 内部命令帮助，如 cd 命令(shell 内部命令)
 
-#### info
+### info
 
 显示大型帮助文档 - enter 进入 u 返回 p 上一节 n 下一节 q 退出
 
-#### System Info
+### System Info
 
 ```bash
 sudo add-apt-repository ppa:dawidd0811/neofetch
@@ -555,14 +553,14 @@ sudo apt-get install neofetch
 sudo apt-get install screenfetch
 ```
 
-### 压缩命令
+## 压缩命令
 
-#### .zip
+### Zip
 
 - zip -r(目录) 压缩文件 源文件/源目录
 - unzip 源文件 -d 指定路径
 
-#### .gz
+### Gz
 
 - gzip 源文件
 - gzip –c 源文件 > 压缩文件
@@ -570,7 +568,7 @@ sudo apt-get install screenfetch
 - gzip –d(解压缩) 文件
 - gunzip 压缩文件
 
-#### .bz2
+### Bz2
 
 不可压缩目录
 
@@ -578,7 +576,7 @@ sudo apt-get install screenfetch
 - bzip2 –d(解压缩) –k(保留压缩文件) 压缩文件
 - bunzip2 –k(保留压缩文件) 压缩文件
 
-#### Tar
+### Tar
 
 tar.gz/.tar.bz2:
 
@@ -592,7 +590,7 @@ tar [可选参数] 压缩文件(可指定压缩路径) [-c 解压缩路径]源�
 - -C 指定解压缩路径
 - -zcvf/-zxvf/-ztcf -jcvf/-jxvf/-jtvf
 
-#### .7z
+### 7z
 
 ```bash
 7z x manager.7z -r -o /home/xx
@@ -605,29 +603,27 @@ tar [可选参数] 压缩文件(可指定压缩路径) [-c 解压缩路径]源�
 - -o: specific path
 - -t: type
 
-### 用户命令
+## User and Group Command
 
 - w/who 查看用户详细信息
 - last 显示所有用户登陆信息(/var/log/wtmp)
 - lastlog 显示所有用户最后一次登陆时间(/var/log/lastlog)
 
-### 用户管理命令
+### 组操作
 
-#### 组操作
-
-##### 创建组
+#### 创建组
 
 groupadd test
 
-##### 修改组
+#### 修改组
 
 groupmod -n test2 test -g
 
-##### 删除组
+#### 删除组
 
 groupdel test2
 
-##### 查看组
+#### 查看组
 
 - groups someUser
 - cat /etc/group
@@ -637,9 +633,9 @@ cat /etc/passwd | awk -F [:] ‘{print $4}’
 \ |sort|uniq | getent group |awk -F [:] ‘{print $1}’
 ```
 
-#### 用户操作
+### 用户操作
 
-##### 增加用户
+#### 增加用户
 
 ```bash
 useradd [options] LOGIN
@@ -676,7 +672,7 @@ passwd testUser # modify `/etc/passwd`, then add to `/etc/sudoers`
 `adduser` is a perl script which uses `useradd` binary in back-end,
 `adduser` is more user friendly and interactive.
 
-##### 修改用户
+#### 修改用户
 
 usermod -d /home/test -G test2 test
 
@@ -691,11 +687,11 @@ gpasswd -d test test2 将用户 test 从 test2 组中移出
 usermod -aG sudo <username>
 ```
 
-##### 删除用户
+#### 删除用户
 
 userdel test -r 同时删除用户登录目录(/home/xxx)
 
-##### 查看用户
+#### 查看用户
 
 w/who 查看当前登录的所有用户
 
@@ -703,15 +699,15 @@ whoami 查看当前登录用户名
 
 finger apacheUser 查看单个用户信息
 
-##### 限制用户
+#### 限制用户
 
 - passwd -l 用户名 锁定用户
 - passwd -u 用户名 解锁用户
 - passwd -d 用户名 清除用户密码
 
-### 权限管理命令
+## 权限管理命令
 
-#### 普通权限
+### 普通权限
 
 - chown 用户名：组名 文件名
 - chgrp 组名 文件名
@@ -720,7 +716,7 @@ finger apacheUser 查看单个用户信息
 - 目录默认权限 = 目录默认最大权限 rwx(777) 减去 umask 值
 - `id <username>`
 
-#### ACL 权限
+### ACL 权限
 
 - 查看分区 ACL 权限是否开启 dumpe2fs -h 设备分区名
 - 临时开启分区 ACL 权限 mount -o remount,acl 设备分区名
@@ -729,11 +725,11 @@ finger apacheUser 查看单个用户信息
 - setfacl -m (d:默认权限) u/g:用户名/组名:权限(rwx) 文件名
 - getfacl 文件名——查看文件 ACL 权限
 
-#### sudo 权限
+### sudo 权限
 
 /etc/sudoers.tmp
 
-#### SetUID and SetGID
+### SetUID and SetGID
 
 可执行程序/目录+普通用户临时获得 root 权限 （rws）:
 
@@ -742,15 +738,15 @@ finger apacheUser 查看单个用户信息
 - chmod 4xxx 设置 SetUID 权限
 - chmod 6xxx 设置双权限
 
-### 显示器管理命令
+## 显示器管理命令
 
-#### xrandr
+### xrandr
 
 ```bash
 xrandr -s 1920x1800 # set resolution
 ```
 
-### 主机信息管理命令
+## 主机信息管理命令
 
 ```bash
 #!/bin/bash
@@ -858,11 +854,11 @@ echo
 echo '===== END ====='
 ```
 
-### 磁盘管理命令
+## 磁盘管理命令
 
 主分区(primary)与延伸分区(extended) 延伸分区可以继续划分成逻辑分区(logical)
 
-#### 挂载命令
+### 挂载命令
 
 mount [-t 文件系统][-o 特殊选项] 设备文件名 挂载点(挂载目录/media /misc /mnt)
 
@@ -873,22 +869,22 @@ umount 设备文件名/挂载点
 
 fdisk –l
 
-#### 修复命令
+### 修复命令
 
 ```bash
 sudo debugfs /dev/sda9
 > debugfs: lsdel
 ```
 
-#### 分区命令
+### 分区命令
 
-##### fdisk
+#### fdisk
 
 分区表类型 MBR
 
 n p e l 新 主 逻辑 扩展 分区 w 激活
 
-##### parted
+#### parted
 
 分区表类型 MBR/GPT
 
@@ -899,9 +895,24 @@ n p e l 新 主 逻辑 扩展 分区 w 激活
 - unit 选择单位
 - quit 结束分区
 
-### 包管理命令
+## Device Command
 
-#### rpm 命令
+### Monitor Info
+
+```bash
+sudo apt-get install read-edid
+sudo get-edid | parse-edid
+```
+
+### Touch Pad Synoptics
+
+```bash
+synclient TouchpadOff=0
+```
+
+## 包管理命令
+
+### rpm 命令
 
 安装和卸载时同时存在依赖性(包依赖、库依赖)
 
@@ -919,7 +930,7 @@ rpm 校验(查看 Cracker 信息):
 
 - -V 校验已安装包 相应信息不是.号便是被修改项 可用于找回丢失的系统命令
 
-#### yum
+### yum
 
 源配置文件:/etc/yum.repos.d
 
@@ -939,7 +950,7 @@ yum makecache
 - yum groupinstall 软件组名
 - yum groupremove 软件组名
 
-#### 源码包安装
+### 源码包安装
 
 指定位置:
 
@@ -954,14 +965,14 @@ make install
 
 e.g apache /var/www/html/index.html /usr/local/apache/htdocs/index.html
 
-#### Applications Management
+### Applications Management
 
 - desktop shortcut: `/usr/share/applications`
 - startup apps: `gnome-session-properties` or `gnome-tweaks`
 
-### 网络连接命令
+## 网络连接命令
 
-#### wget
+### wget
 
 - 下载全站资料
 - -P 表示下载到哪个目录
@@ -974,12 +985,12 @@ e.g apache /var/www/html/index.html /usr/local/apache/htdocs/index.html
 wget -r -p -np -k -P ~/tmp/ http://java-er.com
 ```
 
-#### Certificate Bot
+### Certificate Bot
 
 [CertBot](https://github.com/certbot/certbot)
 for SSL certificates.
 
-#### GFW
+### GFW
 
 - [Hosts](https://github.com/racaljk/hosts)
 - [RSS](https://github.com/breakwa11/shadowsocks-rss)
@@ -996,7 +1007,7 @@ echo "nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &" /etc/rc.local
 nohup ssserver -c /etc/shadowsocks.json -d start /dev/null 2>&1 &
 ```
 
-### 网络管理命令
+## 网络管理命令
 
 | 用途           | net-tool(被淘汰) | iproute2         |
 | :------------- | :--------------- | :--------------- |
@@ -1035,7 +1046,7 @@ watch -n 1 "ifconfig eth1"
 watch -n 1 "ifconfig eth2"
 ```
 
-#### ufw
+### ufw
 
 ```bash
 ufw status
@@ -1045,14 +1056,14 @@ ufw allow http
 ufw allow https
 ```
 
-#### arp
+### arp
 
 `arp -a`显示地址解析协议 (IP 地址—网卡地址):
 
 - 网际互联层：IP 协议(网际)、IGMP 协议(互联网组管理)、ICMP 协议(互联网控制报文)
 - 传输层：TCP 协议(传输控制)、UDP 协议(用户数据报)
 
-#### netstat
+### netstat
 
 `netstat -an`查看本机启用的端口:
 
@@ -1061,7 +1072,7 @@ ufw allow https
 - -u udp 协议端口
 - -l 监听状态服务
 
-#### nslookup
+### nslookup
 
 `nslookup domain_name`查看 DNS 解析器:
 
@@ -1073,40 +1084,40 @@ ufw allow https
 - /etc/sysconfig/network
 - /etc/resolv.conf
 
-#### ping
+### ping
 
 `ping -c ip/domain`探测网络状况
 
-#### telnet
+### telnet
 
 `telnet [ip/domain] [端口]`远程管理与端口探测命令
 
-#### Trace Route
+### Trace Route
 
 - `traceroute [-n IP] domain`路由跟踪命令
 - `traceroute -n -I -T -p`路由扫描
 
-#### Net Filter Framework
+### Net Filter Framework
 
 nftables 命令行工具：nft
 
-### 网络扫描命令
+## 网络扫描命令
 
 预防策略——SYN 攻击、DDoS 攻击
 
-#### fping
+### fping
 
 `fping -a -u -g -f [target]`批量扫描主机地址
 
-#### hping
+### hping
 
 `hping -p -S -a`可伪造 IP 地址
 
-#### mtr
+### mtr
 
 路由扫描
 
-#### nmap
+### nmap
 
 批量主机服务扫描:
 
@@ -1115,7 +1126,7 @@ nftables 命令行工具：nft
 - -sT TCP connect()
 - -sU UDP
 
-#### ncat
+### ncat
 
 批量主机服务扫描:
 
@@ -1124,12 +1135,12 @@ nftables 命令行工具：nft
 - -z 一个输入输出模式
 - -u UDP 协议
 
-### 脚本运行命令
+## 脚本运行命令
 
 exec 1>>output.log
 exec 2>>error.log
 
-#### Systemctl
+### Systemctl
 
 ```bash
 systemctl enable local
@@ -1150,9 +1161,9 @@ in `/etc/init.d/local`
 sslocal -c shadowsocks.json -d start
 ```
 
-#### 定时任务
+### 定时任务
 
-##### crontab
+#### crontab
 
 - `/etc/crontab`
 - [Crontab Quick Tutorial](https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html)
@@ -1172,7 +1183,7 @@ crontab -e(establish)
 - /etc/cron.\*ly 时间表
 - /etc/anacrontab: 异步时间表
 
-#### 后台任务
+### 后台任务
 
 - jobs —— 所有作业
 - atq —— 延时作业队列
@@ -1188,15 +1199,15 @@ crontab -e(establish)
 - nice -n number 作业号/名
 - renice number -p PID
 
-#### 开机任务
+### 开机任务
 
 - /etc/rc.local —— 系统开机任务
 - /etc/profile/ /etc/bash.bashrc —— bash 启动任务/远程登陆任务
 - /etc/bash.bashrc —— SSH 连接任务
 
-### 历史记录命令
+## 历史记录命令
 
-#### history
+### history
 
 - -c 清除历史命令
 - -w (~/.bash_history) 保存历史命令
@@ -1208,14 +1219,14 @@ crontab -e(establish)
 !number
 ```
 
-#### ctrl-r
+### ctrl-r
 
 press ctrl-r 提示符改变，显示我们正在执行反向增量搜索。
 搜索过程是”反向的”，因为我们按照从”现在”到过去 某个时间段的顺序来搜寻。
 下一步，我们开始输入要查找的文本搜索返回我们需要的结果。
 (enter to execute, ctrl-j to copy)
 
-#### History Shortcuts
+### History Shortcuts
 
 | command | function                             |
 | :------ | :----------------------------------- |
@@ -1228,22 +1239,7 @@ press ctrl-r 提示符改变，显示我们正在执行反向增量搜索。
 | Alt-n   | 向前搜索，非增量                     |
 | Ctrl-o  | 执行历史列表中的当前项，并移到下一个 |
 
-### Device Command
-
-#### Monitor Info
-
-```bash
-sudo apt-get install read-edid
-sudo get-edid | parse-edid
-```
-
-#### Touch Pad Synoptics
-
-```bash
-synclient TouchpadOff=0
-```
-
-### 并行命令
+## 并行命令
 
 命令间插入符
 
@@ -1254,21 +1250,21 @@ synclient TouchpadOff=0
 
 > e.g ls && echo yes >> .log || echo no >> .log
 
-### C/C++ Binary Command
+## C/C++ Binary Command
 
-#### ldd
+### ldd
 
 ```bash
 ldd ./lib.sio
 ```
 
-#### nm
+### nm
 
 ```bash
 nm -Ca ./lib.so
 ```
 
-### Plot Command
+## Plot Command
 
 chart.gp
 
@@ -1300,9 +1296,9 @@ plot ARG1 using 1:7 title "snd_cwnd", \
      ARG1 using 1:($8>=2147483647 ? 0 : $8) title "snd_ssthresh"
 ```
 
-### Other Command
+## Other Command
 
-#### Time
+### Time
 
 ```bash
 date
