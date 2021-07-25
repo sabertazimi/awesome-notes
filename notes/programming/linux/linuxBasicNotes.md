@@ -854,7 +854,7 @@ echo
 echo '===== END ====='
 ```
 
-## 磁盘管理命令
+## Disk IO
 
 主分区(primary)与延伸分区(extended) 延伸分区可以继续划分成逻辑分区(logical)
 
@@ -894,6 +894,13 @@ n p e l 新 主 逻辑 扩展 分区 w 激活
 - rm 删除分区
 - unit 选择单位
 - quit 结束分区
+
+### Zero Copy
+
+- `read` + `write`: 4 context switch, 4 data copy (2 DMA, 2 CPU).
+- `mmap` + `write`: 4 context switch, 3 data copy (2 DMA, 1 CPU).
+- `sendfile`: 2 context switch, 3 data copy (2 DMA, 1 CPU).
+- scatter and gather `sendfile`: 2 context switch, 2 data copy (1 DMA, 1 SG-DMA).
 
 ## Device Command
 
