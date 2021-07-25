@@ -116,6 +116,17 @@ h1 {
 - `unset` value resets a non-inherited property to its `initial` value.
 - `revert` reverses the CSS default values to the browser user-agent styles.
 
+#### Inherited CSS Property
+
+- all elements： visibility, cursor.
+- inline elements：
+  letter-spacing, word-spacing, white-space, line-height,
+  color, font, font-family, font-size, font-style, font-variant, font-weight,
+  text-decoration, text-transform, direction
+- block elements： text-indent, text-align
+- list elements： list-style, list-style-type, list-style-position, list-style-image
+- table elements： border-collapse
+
 ## Property Value
 
 ### Initial Value
