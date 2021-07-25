@@ -901,6 +901,16 @@ n p e l 新 主 逻辑 扩展 分区 w 激活
 - `mmap` + `write`: 4 context switch, 3 data copy (2 DMA, 1 CPU).
 - `sendfile`: 2 context switch, 3 data copy (2 DMA, 1 CPU).
 - scatter and gather `sendfile`: 2 context switch, 2 data copy (1 DMA, 1 SG-DMA).
+- 传输大文件 (无法命中内核 PageCache) 使用 `异步 I/O` + `直接 I/O`,
+  传输小文件使用 Zero Copy.
+
+```nginx
+location /video/ {
+    sendfile on;
+    aio on;
+    directio 1024m;
+}
+```
 
 ## Device Command
 
