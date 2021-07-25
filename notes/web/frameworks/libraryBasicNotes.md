@@ -601,7 +601,9 @@
 #### CLI Input Utils
 
 - [Commander](https://github.com/tj/commander.js)
+- [Enquirer](https://github.com/enquirer/enquirer)
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js)
+- [SemVer](https://www.npmjs.com/package/semver)
 
 #### CLI Output Utils
 
