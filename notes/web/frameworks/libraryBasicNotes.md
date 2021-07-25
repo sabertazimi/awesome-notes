@@ -807,6 +807,8 @@
 
 - [Draw.io](https://github.com/jgraph/drawio)
 - [PlantUML](https://github.com/plantuml/plantuml)
+- [Mermaid.js](https://github.com/mermaid-js/mermaid)
+- [Flowchart.js](https://github.com/adrai/flowchart.js)
 
 ## DevOps
 
