@@ -187,8 +187,8 @@ function log(message: string): void {
 enum CardSuit {
   Clubs = 1,
   Diamonds, // 2
-  Hearts,   // 3
-  Spades    // 4
+  Hearts, // 3
+  Spades, // 4
 }
 
 // 简单的使用枚举类型
@@ -207,7 +207,7 @@ export enum EvidenceTypeEnum {
   PASSPORT = 'passport',
   SIGHTED_STUDENT_CARD = 'sighted_tertiary_edu_id',
   SIGHTED_KEYPASS_CARD = 'sighted_keypass_card',
-  SIGHTED_PROOF_OF_AGE_CARD = 'sighted_proof_of_age_card'
+  SIGHTED_PROOF_OF_AGE_CARD = 'sighted_proof_of_age_card',
 }
 ```
 
@@ -221,7 +221,7 @@ enum Weekday {
   Thursday,
   Friday,
   Saturday,
-  Sunday
+  Sunday,
 }
 
 namespace Weekday {
@@ -247,12 +247,12 @@ console.log(Weekday.isBusinessDay(sun));
 
 ```ts
 enum AnimalFlags {
-  None        = 0,
-  HasClaws    = 1 << 0,
-  CanFly      = 1 << 1,
-  EatsFish    = 1 << 2,
-  Endangered  = 1 << 3,
-  EndangeredFlyingClawedFishEating = HasClaws | CanFly | EatsFish | Endangered
+  None = 0,
+  HasClaws = 1 << 0,
+  CanFly = 1 << 1,
+  EatsFish = 1 << 2,
+  Endangered = 1 << 3,
+  EndangeredFlyingClawedFishEating = HasClaws | CanFly | EatsFish | Endangered,
 }
 
 interface Animal {
@@ -289,12 +289,12 @@ printAnimalAbilities(animal); // animal has claws, animal can fly
 enum Tristate {
   False,
   True,
-  Unknown
-};
+  Unknown,
+}
 
 // compiles to
 var Tristate;
-(function(Tristate) {
+(function (Tristate) {
   Tristate[(Tristate['False'] = 0)] = 'False';
   Tristate[(Tristate['True'] = 1)] = 'True';
   Tristate[(Tristate['Unknown'] = 2)] = 'Unknown';
@@ -375,7 +375,7 @@ function padding(a: number, b?: number, c?: number, d?: number) {
     top: a,
     right: b,
     bottom: c,
-    left: d
+    left: d,
   };
 }
 
@@ -452,8 +452,8 @@ let myPoint.z // Allowed!
 
 ```ts
 interface Crazy {
-  new(): {
-    hello: number,
+  new (): {
+    hello: number;
   };
 }
 
@@ -467,10 +467,42 @@ class CrazyClass implements Crazy {
 const crazy = new CrazyClass(); // crazy would be { hello:123 }
 ```
 
+### Interface vs Type Alias
+
+- Type aliases may not participate in declaration merging, but interfaces can.
+- Interfaces may only be used to declare the shapes of object, not re-name primitives.
+- The key distinction is that a type cannot be re-opened to add new properties,
+an interface which is always extendable.
+
+```ts
+type Window = {
+  title: string;
+};
+
+type Window = {
+  ts: TypeScriptAPI;
+};
+
+// Error: Duplicate identifier 'Window'.
+```
+
+```ts
+interface Window {
+  title: string;
+}
+
+interface Window {
+  ts: TypeScriptAPI;
+}
+
+const src = 'const a = "Hello World"';
+window.ts.transpileModule(src, {});
+```
+
 ## Index Signature
 
 ```ts
-let x: { foo: number, [x: string]: any };
+let x: { foo: number; [x: string]: any };
 
 x = { foo: 1, baz: 2 }; // ok, 'baz' 属性匹配于索引签名
 ```
@@ -497,7 +529,7 @@ interface Bar {
 
 ```ts
 type FieldState = {
-  value: string,
+  value: string;
 };
 
 type FormState = { isValid: boolean } & { [fieldName: string]: FieldState };
@@ -562,7 +594,7 @@ bar = 'anything else'; // Error
 ```ts
 const colors = {
   red: 'red',
-  blue: 'blue'
+  blue: 'blue',
 };
 
 type Colors = keyof typeof colors;
@@ -649,8 +681,8 @@ Readonly generic type
 
 ```ts
 type Foo = {
-  bar: number,
-  bas: number,
+  bar: number;
+  bas: number;
 };
 
 type FooReadonly = Readonly<Foo>;
@@ -720,7 +752,7 @@ export class TypedEvent<T> {
     this.listeners.push(listener);
 
     return {
-      dispose: () => this.off(listener)
+      dispose: () => this.off(listener),
     };
   };
 
@@ -734,15 +766,15 @@ export class TypedEvent<T> {
   };
 
   public emit = (event: T) => {
-    this.listeners.forEach(listener => listener(event));
+    this.listeners.forEach((listener) => listener(event));
 
-    this.listenersOncer.forEach(listener => listener(event));
+    this.listenersOncer.forEach((listener) => listener(event));
 
     this.listenersOncer = [];
   };
 
   public pipe = (te: TypedEvent<T>): Disposable => {
-    return this.on(e => te.emit(e));
+    return this.on((e) => te.emit(e));
   };
 }
 ```
@@ -894,23 +926,22 @@ export default connect<StateProps, DispatchProps, OwnProps>
 ### Mapped Types
 
 ```ts
-type Readonly<T> = { readonly [P in keyof T]: T[P] }
-type Partial<T> = { [P in keyof T]?: T[P] }
-type ReadonlyPartial<T> = { readonly [P in keyof T]?: T[P] }
-type Nullable<T> = { [P in keyof T]: T[P] | null }
-type Required<T> = { [P in keyof T]-?: T[P] }
-type Pick<T, K extends keyof T> = { [P in K]: T[P] }
-type Extract<T, K extends keyof T> = { [P in K]: T[P] }
-type Filter<T, U> = T extends U ? T : never
-type Exclude<T, U> = T extends U ? never : T
-type Record<T, K extends keyof any> = { [P in K]: T }
-type Proxify<T> = { [P in keyof T]: Proxy<T[P]> }
+type Readonly<T> = { readonly [P in keyof T]: T[P] };
+type Partial<T> = { [P in keyof T]?: T[P] };
+type ReadonlyPartial<T> = { readonly [P in keyof T]?: T[P] };
+type Nullable<T> = { [P in keyof T]: T[P] | null };
+type Required<T> = { [P in keyof T]-?: T[P] };
+type Pick<T, K extends keyof T> = { [P in K]: T[P] };
+type Extract<T, K extends keyof T> = { [P in K]: T[P] };
+type Filter<T, U> = T extends U ? T : never;
+type Exclude<T, U> = T extends U ? never : T;
+type Record<T, K extends keyof any> = { [P in K]: T };
+type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
 
 type Proxy<T> = {
-    get(): T;
-    set(value: T): void;
-}
-
+  get(): T;
+  set(value: T): void;
+};
 ```
 
 ## Mixins
@@ -1009,13 +1040,11 @@ class MyComponent extends React.Component<Props, State> {
   private static api_version: string;
 
   // class method parameters
-  private handleFormSubmit(@decorator myParam: string) {
-  }
+  private handleFormSubmit(@decorator myParam: string) {}
 
   // class methods
   @decorator
-  private handleFormSubmit() {
-  }
+  private handleFormSubmit() {}
 
   // accessors
   @decorator
@@ -1165,7 +1194,7 @@ export declare interface AppProps {
   children: React.ReactNode; // best
   style?: React.CSSProperties; // for style
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void; // form events!
-  props: Props & React.HTMLProps<HTMLButtonElement>
+  props: Props & React.HTMLProps<HTMLButtonElement>;
 }
 ```
 
@@ -1185,7 +1214,7 @@ class CssThemeProvider extends React.PureComponent<Props> {
 
 ```ts
 type Props = {
-  foo: string,
+  foo: string;
 };
 
 const myComponent: React.FunctionComponent<Props> = (props) => {
@@ -1229,7 +1258,7 @@ props and state types with `React.Component<>`
 
 ```ts
 type Props = {
-  foo: string,
+  foo: string;
 };
 
 class MyComponent extends React.Component<Props, {}> {
@@ -1244,8 +1273,8 @@ class MyComponent extends React.Component<Props, {}> {
 ```ts
 class FocusingInput extends React.Component<
   {
-    value: string,
-    onChange: (value: string) => any,
+    value: string;
+    onChange: (value: string) => any;
   },
   {}
 > {
