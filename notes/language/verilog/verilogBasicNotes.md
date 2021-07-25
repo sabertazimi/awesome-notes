@@ -1,6 +1,6 @@
 ﻿# Verilog Basic Notes
 
-[[toc]]
+[TOC]
 
 ## General Flow
 

@@ -1,6 +1,6 @@
 # Java Basic Notes
 
-[[toc]]
+[TOC]
 
 ## CLI Tools
 

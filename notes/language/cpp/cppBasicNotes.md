@@ -1,6 +1,6 @@
 # C++ Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Basic Workflow
 

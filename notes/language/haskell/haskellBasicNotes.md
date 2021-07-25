@@ -1,6 +1,6 @@
 # Haskell Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Platform
 

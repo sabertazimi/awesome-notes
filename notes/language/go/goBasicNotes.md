@@ -1,6 +1,6 @@
 # Go Basic Notes
 
-[[toc]]
+[TOC]
 
 ## CLI
 

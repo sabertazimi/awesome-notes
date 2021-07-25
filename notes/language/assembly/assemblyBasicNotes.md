@@ -1,6 +1,6 @@
 # Assembly Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Assembly Execution Model
 

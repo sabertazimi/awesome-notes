@@ -1,6 +1,6 @@
 # Python Basic Notes
 
-[[toc]]
+[TOC]
 
 ## Python Basics
 

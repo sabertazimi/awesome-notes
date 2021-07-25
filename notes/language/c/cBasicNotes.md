@@ -1,6 +1,6 @@
 # C Basic Notes
 
-[[toc]]
+[TOC]
 
 ## 编程习惯
 
