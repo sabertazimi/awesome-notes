@@ -1818,6 +1818,8 @@ Domain 层是领域模型系统的核心,
 
 ## 高可用系统设计
 
+### Resource Isolation
+
 ### Load Balance Design
 
 - Hardware Load Balance
