@@ -8,12 +8,34 @@
 
 ```bash
 npm i -D typescript
-npm i -D react react-dom @types/react @types/react-dom
+npm i -D react react-dom @types/node @types/react @types/react-dom
+```
+
+### TypeScript Config File
+
+```bash
+npm i -D @tsconfig/create-react-app
 npx tsc --init
 ```
 
+Basic [tsconfig](https://www.typescriptlang.org/tsconfig):
+
+- [extends](https://github.com/tsconfig/bases):
+  - `@tsconfig/recommended/tsconfig.json`
+  - `@tsconfig/create-react-app/tsconfig.json`
+  - `@tsconfig/node16/tsconfig.json`
+  - `@tsconfig/deno/tsconfig.json`
+- include
+- exclude
+- buildOptions
+- compilerOptions
+- watchOptions
+- tsNode
+
 ```json
 {
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "build", "dist", "coverage"],
   "compilerOptions": {
     /* 基本选项 */
     "target": "es5", // 'ES3', 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'
@@ -63,9 +85,7 @@ npx tsc --init
     /* 其他选项 */
     "experimentalDecorators": true, // 启用装饰器
     "emitDecoratorMetadata": true // 为装饰器提供元数据的支持
-  },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules"]
+  }
 }
 ```
 
