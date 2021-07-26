@@ -695,8 +695,8 @@ figure 可拥有唯一的 0/1 个 figcaption
 <!-- `img` element, `srcset` attribute -->
 <img
   srcset="foo-320w.jpg 320w, foo-480w.jpg 480w, foo-800w.jpg 800w"
-  sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px"
-  src="foo-800w.jpg"
+  sizes="(max-width: 480px) 440px, 320px"
+  src="foo-320w.jpg"
   alt="bar"
 />
 ```
