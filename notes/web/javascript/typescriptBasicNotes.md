@@ -880,6 +880,16 @@ function id<T>(x: T) {
 const idNum = id as { (x: number): number };
 ```
 
+### Generic Types for Types Programming
+
+- 在类型编程里, 泛型就是变量.
+
+```ts
+function pick<T extends object, U extends keyof T>(obj: T, keys: U[]): T[U][] {
+  return keys.map((key) => obj[key]);
+}
+```
+
 ## Advanced Types
 
 - [Advanced Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html)
