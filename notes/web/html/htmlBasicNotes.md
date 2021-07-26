@@ -676,7 +676,7 @@ figure 可拥有唯一的 0/1 个 figcaption
 </figure>
 ```
 
-### img
+### Image
 
 **Attr** -
 
@@ -699,12 +699,37 @@ figure 可拥有唯一的 0/1 个 figcaption
   src="foo-800w.jpg"
   alt="bar"
 />
+```
 
+### Picture
+
+- Multiple `<source>` and only one `<img>`
+
+```html
 <!-- `picture` and `source` elements, `srcset` attributes -->
 <picture>
   <source media="(max-width: 799px)" srcset="foo-480w.jpg" />
   <source media="(min-width: 800px)" srcset="foo-800w.jpg" />
   <img src="foo-800w.jpg" alt="bar" />
+</picture>
+```
+
+- Multiple width images
+
+```html
+<picture>
+  <source srcset="128px.jpg, 256px.jpg 2x, 512px.jpg 3x" />
+  <img src="foo.jpg" alt="bar" />
+</picture>
+```
+
+- Multiple type images
+
+```html
+<picture>
+  <source srcset="foo.avif" type="image/avif">
+  <source srcset="foo.webp" type="image/webp">
+  <img src="foo.jpg">
 </picture>
 ```
 
