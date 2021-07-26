@@ -334,12 +334,21 @@ display a list of appropriate commands
 - -a / -o 逻辑与/逻辑或(左右两端搜索条件)
 - -exec/-ok `system_command_list {} \;对搜索结果执行操作
 
-### grep
+### Grep
 
-`grep` `[可选参数] “字符串” 文件名`:
+`grep` `[可选参数] '字符串' 文件名`:
 
-- -I 不区分大小写
-- -v 排除指定字符串
+- `-I`: 不区分大小写
+- `-v`: 排除指定字符串
+- `-r`: recursive on directory
+- `-l`: only print matched filename
+- `--exclude`
+
+Find `FunctionalComponent` in files and open them all:
+
+```bash
+grep -lr FunctionalComponent src --exclude=\*.md | xargs code
+```
 
 ## Process Command
 
