@@ -1472,6 +1472,19 @@ const reducer = (state: State, action: Action): State => {
 
 - [TypeScript Monorepo][typescript monorepo]
 
+## TypeScript Tools
+
+- [TS Config](https://github.com/tsconfig/bases)
+- [TS Node](https://github.com/TypeStrong/ts-node)
+- [TS Jest](https://github.com/kulshekhar/ts-jest)
+
+```bash
+npm i -D jest typescript
+npm i -D ts-jest @types/jest
+npx ts-jest config:init
+npx jest
+```
+
 ## Reference
 
 - [TypeScript Deep Dive](https://github.com/jkchao/typescript-book-chinese)
