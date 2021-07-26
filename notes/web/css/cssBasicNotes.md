@@ -2125,6 +2125,10 @@ p {
 
 ### White Space
 
+- Web Default: 空格被解析为换行
+- Web Default: 换行被解析为空格
+- Web Default: 自动合并空格
+
 普通标签内自动忽略空格符,
 并将其与空白符转换成一个空格进行输出,
 可用 `white-space` 改变这一行为:
