@@ -796,7 +796,7 @@ function doAction(action) {
 
 即共用方法,单独属性,封装细节
 
-### 原型链
+### Prototype Chain
 
 ![原型链](./figures/Prototype.png)
 
@@ -807,6 +807,9 @@ function doAction(action) {
 - 除`Object.create()`外, 所新建对象的 `__proto__` 指向构造该对象的构造函数的`原型对象(prototype)`
 - 除`typeof Function.prototype` 为 'function' 外, 其余函数/构造函数的原型对象都为 '对象'(`typeof` 为 'object')
 - 先有`Object.prototype`(原型链顶端), `Function.prototype` 继承`Object.prototype`而产生, 最后`Object/Function/Array/其它构造函数`继承`Function.prototype`而产生
+- `__proto__`:
+  `[[proto]]` getter is `Object.getPrototypeOf(object)`,
+  `[[proto]]` setter is `Object.setPrototypeOf(object, prototype)`.
 
 > `Object` ---`__proto__`--> `Function.prototype` ---`__proto__`
 > --> `Object.prototype` ---`__proto__`--> `null`
@@ -872,29 +875,31 @@ new 构造函数作用原理如下:
   - Prototype.constructor = Constructor
 
 ```js
-function newInstance(constructor){
-  //var this = Object.create(Person.prototype);
+function newInstance(constructor) {
+  // var this = Object.create(Person.prototype);
   // this.__proto__ = F.prototype
   // F.prototype = Person.prototype
   // 即 this.__proto__ = Person.prototype;
-    var obj = {};
-    obj.__proto__ = constructor.prototype;
-    constructor.apply(obj,sliceArguments(arguments,1));
-    return obj;
+  var obj = {};
+  obj.__proto__ = constructor.prototype;
+  constructor.apply(obj, sliceArguments(arguments, 1));
+  return obj;
 }
-=>
+
+// =>
 new Constructor(arguments);
 ```
 
 ```js
 function Employee(name) {
-    this.name = name;
-    this.getName = function () {
-    return this.name};
+  this.name = name;
+  this.getName = function () {
+    return this.name;
+  };
 }
 
-var employee = newInstance(Employee,'Jack');
-=>
+var employee = newInstance(Employee, 'Jack');
+// =>
 var employee = new Employee('Jack');
 ```
 
@@ -911,6 +916,10 @@ Object.create = function (o) {
   F.prototype = o;
   return new F();
 };
+
+// new F() lead to `f.__proto__ === F.prototype` true
+// `F.prototype === o` true
+// `f.__proto__ === o` true
 ```
 
 #### 返回值
