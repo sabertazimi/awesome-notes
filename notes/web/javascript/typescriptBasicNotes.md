@@ -1402,6 +1402,13 @@ class Select<T> extends React.Component<SelectProps<T>, any> {}
 const Form = () => <Select<string> items={['a', 'b']} />;
 ```
 
+In `.tsx` file, `<T>` maybe considered `JSX.Element`,
+use `extends {}` to avoid it:
+
+```tsx
+const foo = <T extends {}>(arg: T) => arg;
+```
+
 ### Redux
 
 ```typescript
