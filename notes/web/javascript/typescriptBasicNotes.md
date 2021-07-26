@@ -672,6 +672,10 @@ bar = 'Hello World'; // ok
 bar = 'anything else'; // Error
 ```
 
+### Keyof Types
+
+`keyof foo` get literal types of `foo` keys (`Object.keys`):
+
 ```ts
 const colors = {
   red: 'red',
@@ -680,7 +684,7 @@ const colors = {
 
 type Colors = keyof typeof colors;
 
-let color: Colors; // color 的类型是 'red' | 'blue'
+let color: Colors; // color 的类型是 'red' | 'blue' (literal types)
 color = 'red'; // ok
 color = 'blue'; // ok
 color = 'anythingElse'; // Error
