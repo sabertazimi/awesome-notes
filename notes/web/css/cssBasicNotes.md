@@ -1499,6 +1499,24 @@ margin in the direction of the float will pull the floated element in that direc
 
 在子容器中在设置新元素即可
 
+## CSS Logical Properties and Values
+
+### CSS Logical Basis
+
+In positioning/sizing/margin/padding/border/text alignment:
+
+- `block-start` for `top`
+- `block-end` for `bottom`
+- `block` for vertical
+- `inline-start` for `left`
+- `inline-end` for `right`
+- `inline` for horizontal
+
+### CSS Logical Reference
+
+- [W3C CSS Logical Draft](https://drafts.csswg.org/css-logical)
+- [CSS Tricks CSS Logical Guide](https://css-tricks.com/css-logical-properties-and-values)
+
 ## CSS ScrollBar
 
 ### Custom ScrollBar
