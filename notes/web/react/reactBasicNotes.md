@@ -264,7 +264,9 @@ ReactDOM.render({
 ### Functional and Class component
 
 - 函数型组件没有实例, 类型组件具有实例, 但实例化的工作由 react 自动完成
-- class component 具有更多特性: state, lifecycle hook, performance optimizations(shouldComponentUpdate()回调方法)
+- With React Hooks, functional component can get
+  `state`, `lifecycle hooks` and performance optimization
+  consistent to class component.
 
 ### Stateless and Stateful component
 
