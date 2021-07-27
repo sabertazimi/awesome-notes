@@ -1320,7 +1320,7 @@ class MyComponent extends React.Component {
 
 ## React with TypeScript
 
-- [React TypeScript CheatSheet](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)
+- [React TypeScript CheatSheet](https://github.com/typescript-cheatsheets/react)
 
 ### Props Types
 
