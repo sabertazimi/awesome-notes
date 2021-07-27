@@ -24,10 +24,16 @@ git config --global color.ui true
 git config --global commit.template $HOME/.GitCommit.md
 git config --global commit.gpgsign true
 git config --global user.signingkey <pub-keyID>
+
 git config --global push.default simple
 git config --global merge.conflictstyle diff3
 git config --global pull.rebase true
 git config --global rebase.autoStash true
+```
+
+```bash
+# after 1s, git auto correct wrong command
+git config --global help.autocorrect 10
 ```
 
 #### Proxy Configuration
