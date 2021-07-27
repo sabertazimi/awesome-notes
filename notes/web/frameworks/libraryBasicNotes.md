@@ -111,6 +111,9 @@
 
 ### TypeScript Utils
 
+- [TS Config](https://github.com/tsconfig/bases)
+- [TS Node](https://github.com/TypeStrong/ts-node)
+- [TS Jest](https://github.com/kulshekhar/ts-jest)
 - [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
 
 ## CSS Utils
