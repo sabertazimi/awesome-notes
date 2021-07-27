@@ -847,6 +847,10 @@
 
 ## Documentation
 
+### Changelog
+
+- [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog)
+
 ### Markdown Documentation
 
 - [Docusaurus: Easy to maintain documentation websites with React stack](https://github.com/facebook/docusaurus)
