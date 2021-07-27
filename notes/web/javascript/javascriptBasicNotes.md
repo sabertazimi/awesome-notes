@@ -1440,6 +1440,20 @@ catch (e) {
 }
 ```
 
+Avoid using try-catch inside a loop:
+
+```js
+const object = ['foo', 'bar'];
+
+try {
+  for (let i = 0; i < object.length; i++) {
+    // do something that throws an exception
+  }
+} catch (e) {
+  // handle exception
+}
+```
+
 ## 函数
 
 - 函数是对象
