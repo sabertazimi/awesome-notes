@@ -447,7 +447,11 @@ class UserInput extends Component {
 }
 ```
 
-### HOC (Higher-Order Components)
+## React Reusability Patterns
+
+### HOC
+
+Higher Order Components.
 
 Solve:
 
@@ -463,7 +467,7 @@ Pros:
 Cons:
 
 - wrapper hell: `withA(withB(withC(withD(Comp))))`
-- indirection issues: which HOC providing a certain prop
+- implicit dependencies: which HOC providing a certain prop
 - name collision/overlap props: overwrite the same name prop silently
 - HOC is not flexible with output data (to WrappedComponent)
 
@@ -604,6 +608,18 @@ class Menu extends React.Component {
   }
 }
 ```
+
+### Awesome React Hooks
+
+- No wrapper hell: every hook is just one line of code.
+- No implicit dependencies: explicit one certain call for one certian hook.
+- Flexible data usage.
+- No name colision and overlap props due to flexible data usage.
+- Flexible optimization methods:
+  - avoid re-render with hook deps list
+  - `useMemo` hook for memorized values
+  - `useCallback` hook for memorized functions
+  - `useRef` hook for lifecycle persistent values
 
 ## Hooks
 
