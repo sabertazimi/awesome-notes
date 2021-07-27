@@ -28,11 +28,9 @@
 - [React Ant Design](https://github.com/ant-design/ant-design)
 - [React Mantine with Hooks](https://github.com/mantinedev/mantine)
 - [React Material UI](https://github.com/mui-org/material-ui)
-- [React Semantic UI](https://github.com/Semantic-Org/Semantic-UI-React)
 - [React BluePrint](https://github.com/palantir/blueprint)
 - [IceWorks](https://alibaba.github.io/ice/iceworks)
 - [Vue Admin UI](https://github.com/epicmaxco/vuestic-admin)
-- [Tailwind](https://github.com/tailwindlabs/tailwindcss)
 - [Bootstrap](https://github.com/twbs/bootstrap)
 - [Paper.css](https://github.com/papercss/papercss)
 - [NES.css](https://github.com/nostalgic-css/NES.css)
@@ -118,9 +116,20 @@
 
 ## CSS Utils
 
+### Ordinary CSS Utils
+
 - [CSS Normalize](https://github.com/necolas/normalize.css)
-- [Styled System](https://github.com/styled-system/styled-system)
+- [Tailwind](https://github.com/tailwindlabs/tailwindcss)
+
+### CSS in JS Utils
+
 - [CSS Classnames](https://github.com/JedWatson/classnames)
+- [Styled System: Style props for rapid UI development](https://github.com/styled-system/styled-system)
+- [Linaria: Zero-runtime CSS in JS library](https://github.com/callstack/linaria)
+- [Compiled: Performant compile time CSS-in-JS library](https://github.com/atlassian-labs/compiled)
+
+### CSS Design Tools
+
 - [Awesome Design Tools](https://github.com/LisaDziuba/Awesome-Design-Tools)
 
 ### Color Utils
