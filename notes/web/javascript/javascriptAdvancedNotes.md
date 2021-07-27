@@ -5425,6 +5425,130 @@ function setStyles() {
 }
 ```
 
+### IndexDB API
+
+```js
+export class IndexedDB {
+  constructor(dbName, dbVersion, dbUpgrade) {
+    return new Promise((resolve, reject) => {
+      this.db = null;
+
+      if (!('indexedDB' in window)) reject('not supported');
+
+      const dbOpen = indexedDB.open(dbName, dbVersion);
+
+      if (dbUpgrade) {
+        dbOpen.onupgradeneeded = (e) => {
+          dbUpgrade(dbOpen.result, e.oldVersion, e.newVersion);
+        };
+      }
+
+      dbOpen.onsuccess = () => {
+        this.db = dbOpen.result;
+        resolve(this);
+      };
+
+      dbOpen.onerror = (e) => {
+        reject(`IndexedDB error: ${e.target.errorCode}`);
+      };
+    });
+  }
+
+  get(storeName, name) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction(storeName, 'readonly');
+      const store = transaction.objectStore(storeName);
+      const request = store.get(name);
+
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
+
+      request.onerror = () => {
+        reject(request.error);
+      };
+    });
+  }
+
+  set(storeName, name, value) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction(storeName, 'readwrite');
+      const store = transaction.objectStore(storeName);
+
+      store.put(value, name);
+
+      transaction.oncomplete = () => {
+        resolve(true);
+      };
+
+      transaction.onerror = () => {
+        reject(transaction.error);
+      };
+    });
+  }
+}
+```
+
+```js
+// IndexedDB usage
+import { IndexedDB } from './indexedDB.js';
+
+export class State {
+  static dbName = 'stateDB';
+  static dbVersion = 1;
+  static storeName = 'state';
+  static DB = null;
+  static target = new EventTarget();
+
+  constructor(observed, updateCallback) {
+    this.updateCallback = updateCallback;
+    this.observed = new Set(observed);
+
+    // subscribe `set` event with `updateCallback`
+    State.target.addEventListener('set', (e) => {
+      if (this.updateCallback && this.observed.has(e.detail.name)) {
+        this.updateCallback(e.detail.name, e.detail.value);
+      }
+    });
+  }
+
+  async dbConnect() {
+    State.DB =
+      State.DB ||
+      (await new IndexedDB(
+        State.dbName,
+        State.dbVersion,
+        (db, oldVersion, newVersion) => {
+          // upgrade database
+          switch (oldVersion) {
+            case 0: {
+              db.createObjectStore(State.storeName);
+            }
+          }
+        }
+      ));
+
+    return State.DB;
+  }
+
+  async get(name) {
+    this.observedSet.add(name);
+    const db = await this.dbConnect();
+    return await db.get(State.storeName, name);
+  }
+
+  async set(name, value) {
+    this.observed.add(name);
+    const db = await this.dbConnect();
+    await db.set(State.storeName, name, value);
+
+    // publish event to subscriber
+    const event = new CustomEvent('set', { detail: { name, value } });
+    State.target.dispatchEvent(event);
+  }
+}
+```
+
 ### Web Files API
 
 ## Web Navigator API
