@@ -951,10 +951,17 @@ Foo instance of Bar
 
 #### Constructor Best Practice
 
+```js
+function Foo() {
+  if (!new.target) {
+    throw 'Foo() must be called with new';
+  }
+}
+```
+
 ```javascript
 function Waffle() {
-  // 当未使用new关键字时,this指向全局对象
-  // 此时进入if语句
+  // 当未使用 `new` 关键字时, `this` 指向全局对象
   if (!(this instanceof Waffle)) {
     return new Waffle();
   }
@@ -962,6 +969,37 @@ function Waffle() {
   // 正常构造函数
   this.tastes = 'yummy';
 }
+```
+
+```js
+class A {
+  constructor() {
+    console.log(new.target.name);
+  }
+}
+
+class B extends A {
+  constructor() {
+    super();
+  }
+}
+
+let a = new A(); // logs "A"
+let b = new B(); // logs "B"
+
+class C {
+  constructor() {
+    console.log(new.target);
+  }
+}
+class D extends C {
+  constructor() {
+    super();
+  }
+}
+
+let c = new C(); // logs class C{constructor(){console.log(new.target);}}
+let d = new D(); // logs class D extends C{constructor(){super();}}
 ```
 
 ### 全局对象
