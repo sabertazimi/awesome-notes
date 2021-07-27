@@ -119,6 +119,10 @@
 - [TS Jest](https://github.com/kulshekhar/ts-jest)
 - [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
 
+#### IOC and DI Utils
+
+- [InversifyJS: Powerful and lightweight inversion of control container](https://github.com/inversify/InversifyJS)
+
 ## CSS Utils
 
 ### Ordinary CSS Utils

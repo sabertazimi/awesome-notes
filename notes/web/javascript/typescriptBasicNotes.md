@@ -1312,6 +1312,12 @@ class MyComponent extends React.Component {
 }
 ```
 
+### TypeScript Decorator Utils
+
+#### IOC and DI Utils
+
+- [InversifyJS: Powerful and lightweight inversion of control container](https://github.com/inversify/InversifyJS)
+
 ## React with TypeScript
 
 - [React TypeScript CheatSheet](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)
