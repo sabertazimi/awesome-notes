@@ -786,6 +786,7 @@
 - [Node Clinic](https://github.com/nearform/node-clinic)
 - [Perf Tools](https://github.com/brendangregg/perf-tools)
 - [FlameGraph](https://github.com/brendangregg/FlameGraph)
+- [Brotli compression format](https://github.com/google/brotli)
 
 ### Log Tools
 
