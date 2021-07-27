@@ -4212,9 +4212,7 @@ This is also used to create **icon systems**.
 </pattern>
 ```
 
-## CSS Tools
-
-### StyleLint
+## StyleLint Tool
 
 stylelint-config-mass plugin `index.js`:
 
@@ -4422,4 +4420,53 @@ module.exports = {
     ],
   },
 };
+```
+
+## Tailwind
+
+### Tailwind Directives
+
+```css
+@layer base {
+  h1 {
+    @apply text-3xl;
+  }
+}
+
+@layer components {
+  .primary-btn {
+    @apply bg-yellow-600 hover:bg-yellow-800 text-black font-bold py-4 px-6 shadow-md;
+  }
+}
+
+@layer utilities {
+  @variants hover {
+    .padding-large {
+      padding: 30px;
+    }
+  }
+
+  @variants focus hover {
+    .border-small {
+      border: 1px solid #30485e;
+    }
+    .border-medium-dashed {
+      border: 7px dashed #30485e;
+    }
+  }
+
+  @responsive {
+    /* generate for all breakpoints */
+    .border-solid {
+      border: 10px solid #30485e;
+    }
+  }
+
+  @screen sm {
+    /* generate for small screen breakpoint */
+    .border-solid {
+      border: 10px solid #30485e;
+    }
+  }
+}
 ```
