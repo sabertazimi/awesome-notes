@@ -42,7 +42,6 @@
 - [React Storybook](https://github.com/storybooks/storybook)
 - [Gatsby.js: static site generator](https://github.com/gatsbyjs/gatsby)
 - [UMI](https://github.com/umijs/umi)
-- [Uni APP: for mobile development](https://github.com/dcloudio/uni-app)
 
 ### Micro Front-ends Solution
 
@@ -65,6 +64,12 @@
 
 - [Electron](https://github.com/electron/electron)
 - [Tauri](https://github.com/tauri-apps/tauri)
+
+### Mobile Solution
+
+- [Taro: Cross-Platform/Cross-Framework solution to develop mini-programs](https://github.com/NervJS/taro)
+- [Expo: Making universal native apps with React on Android, iOS and web](https://github.com/expo/expo)
+- [Uni APP: Vue for mobile development](https://github.com/dcloudio/uni-app)
 
 ## State Data Management
 
