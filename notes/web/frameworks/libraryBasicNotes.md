@@ -559,7 +559,7 @@
 
 ## Geolocation
 
-- [Turf: A modular geospatial engine](https://github.com/Turfjs/turf)
+- [Turf: Modular geospatial engine](https://github.com/Turfjs/turf)
 
 ## File
 
@@ -760,7 +760,7 @@
 - [Babel](https://github.com/babel/babel)
 - [AST Explorer](https://astexplorer.net)
 - [CodeCrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
-- [PMD: An extensible multi-language static code analyzer](https://github.com/pmd/pmd)
+- [PMD: Extensible multi-language static code analyzer](https://github.com/pmd/pmd)
 - [Java SpotBugs](https://github.com/spotbugs/spotbugs)
 
 ### Code Coverage Tools
@@ -800,7 +800,7 @@
 
 ### Log Tools
 
-- [Winston: A logger for just about everything](https://github.com/winstonjs/winston)
+- [Winston: Logger for just about everything](https://github.com/winstonjs/winston)
 - [Log4.js](https://github.com/nomiddlename/log4js-node)
 - [Stacktrace.js](https://github.com/stacktracejs/stacktrace.js)
 - [Stacktrace Visualization](https://github.com/joyent/node-stackvis)
@@ -851,11 +851,11 @@
 
 - [Docusaurus: Easy to maintain documentation websites with React stack](https://github.com/facebook/docusaurus)
 - [VuePress: Minimalistic Vue-powered static site generator](https://github.com/vuejs/vuepress)
-- [Wiki.js: A modern and powerful wiki app built on Node.js](https://github.com/Requarks/wiki)
+- [Wiki.js: Modern and powerful wiki app built on Node.js](https://github.com/Requarks/wiki)
 
 ### JavaScript Documentation
 
-- [JSDoc: An API documentation generator for JavaScript](https://github.com/jsdoc/jsdoc)
+- [JSDoc: API documentation generator for JavaScript](https://github.com/jsdoc/jsdoc)
 - [TypeDoc: Documentation generator for TypeScript projects](https://github.com/TypeStrong/typedoc)
 - [Documentation.js: Documentation for modern JavaScript](https://github.com/documentationjs/documentation)
 
