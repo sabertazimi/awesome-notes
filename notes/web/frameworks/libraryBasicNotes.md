@@ -670,8 +670,9 @@
 - [uWebSockets: Simple, secure and standards compliant sockets](https://github.com/uNetworking/uWebSockets)
 - [SocketCluster: Highly scalable realtime framework](https://github.com/SocketCluster/socketcluster)
 
-### Web RTC
+### WebRTC
 
+- [PeerJS: Simple peer-to-peer with WebRTC](https://github.com/peers/peerjs)
 - [LiveKit](https://github.com/livekit/livekit-react)
 
 ### Web P2P
