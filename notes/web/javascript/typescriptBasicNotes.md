@@ -1052,14 +1052,19 @@ type Clone<T> = { [P in keyof T]: T[P] };
 
 Function Types:
 
-- `type Parameters<FunctionType>`
-- `type ConstructorParameters<ConstructorType>`
-- `type ReturnType<FunctionType>`
+```ts
+type Parameters<T> = T extends (...args: infer R ? R : any): any;
+type ConstructorParameters<T> = T extends (...args: infer R ? R : any): object;
+type ReturnType<T extends (...args: any) => any> = T extends (
+  ...args: any[]
+) => infer R
+  ? R
+  : any;
+```
 
 ## Conditional Types
 
-- Conditional types can be nested.
-- 通过嵌套条件类型, 可以将类型约束收拢到精确范围.
+### Basic Conditional Types
 
 ```ts
 interface Animal {
@@ -1074,6 +1079,86 @@ type Example1 = Dog extends Animal ? number : string;
 
 type Example2 = RegExp extends Animal ? number : string;
 // => type Example2 = string
+```
+
+### Nested Conditional Types
+
+- Conditional types can be nested.
+- 通过嵌套条件类型, 可以将类型约束收拢到精确范围.
+
+```ts
+type TypeName<T> = T extends string
+  ? 'string'
+  : T extends number
+  ? 'number'
+  : T extends boolean
+  ? 'boolean'
+  : T extends undefined
+  ? 'undefined'
+  : T extends Function
+  ? 'function'
+  : 'object';
+```
+
+### Distributive Conditional Types
+
+- Conditional types in which checked type is `naked type parameter` are called DCT.
+- DCT are automatically distributed over union types during instantiation.
+- `( A | B | C ) extends T ? X : Y` 相当于
+  `(A extends T ? X : Y) | (B extends T ? X : Y) | (B extends T ? X : Y)`
+- 没有被额外包装的联合类型参数, 在条件类型进行判定时会将联合类型分发, 分别进行判断.
+
+```ts
+// "string" | "function"
+type T1 = TypeName<string | (() => void)>;
+
+// "string" | "object"
+type T2 = TypeName<string | string[]>;
+
+// "object"
+type T3 = TypeName<string[] | number[]>;
+```
+
+```ts
+type Naked<T> = T extends boolean ? 'Y' : 'N';
+type Wrapped<T> = [T] extends [boolean] ? 'Y' : 'N';
+
+/*
+ * 先分发到 Naked<number> | Naked<boolean>
+ * 结果是 "N" | "Y"
+ */
+type Distributed = Naked<number | boolean>;
+
+/*
+ * 不会分发 直接是 [number | boolean] extends [boolean]
+ * 结果是 "N"
+ */
+type NotDistributed = Wrapped<number | boolean>;
+```
+
+## Type Inference
+
+- 类型系统在获得足够的信息后,
+  能将 infer 后跟随的类型参数推导出来,
+  最后返回这个推导结果
+
+```ts
+type Parameters<T> = T extends (...args: infer R ? R : any): any;
+type ConstructorParameters<T> = T extends (...args: infer R ? R : any): object;
+type ReturnType<T extends (...args: any) => any> = T extends (
+  ...args: any[]
+) => infer R
+  ? R
+  : any;
+```
+
+```ts
+const foo = (): string => {
+  return 'sabertaz';
+};
+
+// string
+type FooReturnType = ReturnType<typeof foo>;
 ```
 
 ## Mixins
