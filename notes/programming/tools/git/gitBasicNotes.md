@@ -22,7 +22,10 @@ git config --global color.ui true
 
 ```bash
 git config --global commit.template $HOME/.GitCommit.md
+git config --global commit.gpgsign true
+git config --global user.signingkey <pub-keyID>
 git config --global push.default simple
+git config --global merge.conflictstyle diff3
 git config --global pull.rebase true
 git config --global rebase.autoStash true
 ```
