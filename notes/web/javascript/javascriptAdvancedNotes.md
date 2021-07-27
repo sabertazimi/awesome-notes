@@ -6,7 +6,7 @@
 
 ### TC39
 
-- [Technical Committees 39](https://www.ecma-international.org/technical-committees/tc39 "TC39")
+- [Technical Committees 39](https://www.ecma-international.org/technical-committees/tc39 'TC39')
 - [New Feature Process](http://tc39.github.io/process-document)
 
 ### Variable
@@ -1671,6 +1671,26 @@ Promise.all(urls.map((url) => fetch(url).then((resp) => resp.text()))).then(
     //
   }
 );
+```
+
+- `Promise.all` with `async`/`await`
+
+```js
+const loadData = async () => {
+  try {
+    const urls = ['...', '...'];
+
+    const results = await Promise.all(urls.map(fetch));
+    const dataPromises = await results.map((result) => result.json());
+    const finalData = Promise.all(dataPromises);
+
+    return finalData;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const data = loadData().then((data) => console.log(data));
 ```
 
 ##### Promise Polyfill
@@ -3385,7 +3405,7 @@ Cumulative Layout Shift:
 
 ##### Best Practice Tips for Accessibility
 
-- [Web Accessibility Initiative-Accessible Rich Internet Applications](https://www.sitepoint.com/wai-aria "WAI-ARIA")
+- [Web Accessibility Initiative-Accessible Rich Internet Applications](https://www.sitepoint.com/wai-aria 'WAI-ARIA')
 - Don't use `aria-hidden` on the `<body>` element.
 - Make sure `IDs` and `Keys` of elements are unique.
 - Make sure `document` has a `title` element (with tool like `react-helmet`).
