@@ -183,7 +183,7 @@ function () {
 - [Definitive Guide](https://css-tricks.com/everything-you-need-to-know-about-date-in-javascript)
 
 ```js
-const now= new Date();
+const now = new Date();
 now.getFullYear(); // 1-n
 now.getMonth();    // Warn: 0-11
 now.getDate();     // 1-n
@@ -865,7 +865,7 @@ var obj = {
 console.log(obj.__proto__ === Object.prototype); // true
 ```
 
-##### new 构造函数
+##### New Constructor
 
 new 构造函数作用原理如下:
 
@@ -922,7 +922,7 @@ Object.create = function (o) {
 // `f.__proto__ === o` true
 ```
 
-#### 返回值
+#### Constructor Return Value
 
 - 返回 this 或 user-defined literal object
 - 当返回值为**基本类型**时,仍然可得到 this 指针指向的原有对象
@@ -938,7 +938,7 @@ var ObjectMaker = function () {
 };
 ```
 
-#### instanceof
+#### Instance Of Constructor
 
 若 在实例对象的原型链(`__proto__`)中 能找到 构造函数的`prototype`属性(Prototype 对象), 则返回`true`, 否则返回`false`
 
@@ -949,17 +949,17 @@ var ObjectMaker = function () {
 Foo instance of Bar
 ```
 
-#### 最佳实践
+#### Constructor Best Practice
 
 ```javascript
 function Waffle() {
-  //当未使用new关键字时,this指向全局对象
-  //此时进入if语句
+  // 当未使用new关键字时,this指向全局对象
+  // 此时进入if语句
   if (!(this instanceof Waffle)) {
     return new Waffle();
   }
 
-  //正常构造函数
+  // 正常构造函数
   this.tastes = 'yummy';
 }
 ```
@@ -1470,7 +1470,7 @@ Apply/Bind/Call Invocation:
 ```js
 this.construct = Foo;
 this.construct(options);
-    =>
+// =>
 Foo.call(this, options);
 ```
 
