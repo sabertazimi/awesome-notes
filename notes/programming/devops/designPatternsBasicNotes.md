@@ -81,6 +81,10 @@ Clients should not be forced to depend upon interfaces that they do not use.
   Both should depend on abstractions.
 - Abstractions should not depend upon details.
   Details should depend on abstractions.
+- Pros:
+  - Loosely coupled modules.
+  - Better reusability.
+  - Better testability.
 
 ### Literal Pattern
 
