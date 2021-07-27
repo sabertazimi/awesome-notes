@@ -3347,6 +3347,48 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 | 不影响真实用户的访问性能               |       单次数据不够稳定       |
 | 可以提供页面加载幻灯片等可视化分析途径 | 数据量较小，无法发挥更大价值 |
 
+#### LightHouse Best Practice
+
+##### Performant Tips for FCP
+
+First Contentful Paint:
+
+- Add the `defer` or `async` attributes to `<script>` tags.
+- Minify the JavaScript and CSS files.
+- Remove unused CSS (e.g Tailwind.css JIT mode).
+- Lazy importing components not for first page.
+- Server side rendering.
+- Reduce server response time (e.g CDN).
+- TBT (Total Blocking Time) = TTI (Time to Interactive) - FCP (First Contentful Paint).
+
+##### Performant Tips for LCP
+
+Largest Contentful Paint:
+
+- Use a CDN for assets like images and video.
+- Compress images:
+  - Minify images.
+  - Convert images from JPEG/PNG to WebP.
+- Responsive images:
+  size image based on device size with `srcset` on `<img>` or `<picture>`.
+
+##### Performant Tips for CLS
+
+Cumulative Layout Shift:
+
+- Set `height` and `width` attributes of image or video,
+  so that it won’t move content around it once it’s loaded.
+- Avoid using `popups` or `overlays`
+  unless they appear when the user interacts with the page.
+- When it’s necessary to move elements, use `transform` animations.
+
+##### Best Practice Tips for Accessibility
+
+- [Web Accessibility Initiative-Accessible Rich Internet Applications](https://www.sitepoint.com/wai-aria "WAI-ARIA")
+- Don't use `aria-hidden` on the `<body>` element.
+- Make sure `IDs` and `Keys` of elements are unique.
+- Make sure `document` has a `title` element (with tool like `react-helmet`).
+
 #### 真实用户监控
 
 用户在页面访问之后就会产生各种各样的性能指标,
@@ -3421,7 +3463,7 @@ Load 也不一定代表用户看到主要内容.
 - [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools)
 - [FID Tracking](https://github.com/GoogleChromeLabs/first-input-delay)
 - [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
-- [Lighthouse (`audit` tab)](https://github.com/GoogleChrome/lighthouse)
+- [Lighthouse audit tab)](https://github.com/GoogleChrome/lighthouse)
 
 ### Data Format and Size
 
@@ -5847,13 +5889,15 @@ if (isBotAgent) {
 
 ### SEO Tips
 
-- [server-side rendering](https://css-tricks.com/server-side-react-rendering)
-  (e.g next.js)
-- [PreRendering](https://github.com/chrisvfritz/prerender-spa-plugin)
-- mobile performance optimization
-  (e.g minify resources, code splitting, CDN, lazy loading, minimize reflows)
-- [SEO-friendly routing and URL management](https://reacttraining.com/react-router)
+- [Server side rendering](https://css-tricks.com/server-side-react-rendering)
+  (e.g Next.js).
+- [Pre-Rendering](https://github.com/chrisvfritz/prerender-spa-plugin)
+- Mobile performance optimization
+  (e.g minify resources, code splitting, CDN, lazy loading, minimize reflows).
+- SEO-friendly [routing](https://reacttraining.com/react-router) and URL management.
 - [Google webmaster tools](https://www.google.com/webmasters)
+- `<title>` and `<meta>` in `<head>` (with tool like `react-helmet`).
+- Includes a `robots.txt` file.
 
 #### SEO Metadata
 
