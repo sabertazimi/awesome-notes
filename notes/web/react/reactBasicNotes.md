@@ -525,7 +525,9 @@ class Menu extends React.Component {
 }
 ```
 
-### Render Props (Children as Function)
+### Render Props
+
+Children/Props as render function:
 
 Solve:
 
