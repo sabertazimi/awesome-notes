@@ -1058,6 +1058,9 @@ Function Types:
 
 ## Conditional Types
 
+- Conditional types can be nested.
+- 通过嵌套条件类型, 可以将类型约束收拢到精确范围.
+
 ```ts
 interface Animal {
   live(): void;
