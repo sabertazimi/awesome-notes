@@ -1514,7 +1514,7 @@ const reducer = (state: State, action: Action): State => {
 
 ## Monorepo
 
-- [TypeScript Monorepo][typescript monorepo]
+- [TypeScript Monorepo](https://2ality.com/2021/07/simple-monorepos.html 'TypeScript Monorepo')
 
 ## TypeScript Tools
 
@@ -1533,5 +1533,3 @@ npx jest
 
 - [TypeScript Deep Dive](https://github.com/jkchao/typescript-book-chinese)
 - [Clean TypeScript Code](https://github.com/labs42io/clean-code-typescript)
-
-[typescript monorepo]: https://2ality.com/2021/07/simple-monorepos.html 'TypeScript Monorepo'
