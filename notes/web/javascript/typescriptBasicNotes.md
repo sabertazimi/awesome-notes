@@ -890,11 +890,7 @@ function pick<T extends object, U extends keyof T>(obj: T, keys: U[]): T[U][] {
 }
 ```
 
-## Advanced Types
-
-- [Advanced Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html)
-
-### Union Types
+## Union Types
 
 多种类型之一
 
@@ -946,7 +942,7 @@ function area(s: Shape) {
 }
 ```
 
-### Intersection Types
+## Intersection Types
 
 extend 是一种非常常见的模式,
 intersection type 具有所有类型的功能
@@ -1018,7 +1014,9 @@ export default connect<StateProps, DispatchProps, OwnProps>
   (mapStateToProps, mapDispatchToProps)(MyComponent)
 ```
 
-### Mapped Types
+## Mapped Types
+
+Some useful mapped types:
 
 ```ts
 type Readonly<T> = { readonly [P in keyof T]: T[P] };
@@ -1043,11 +1041,36 @@ type Proxy<T> = {
   get(): T;
   set(value: T): void;
 };
+```
 
-// Function Types
-type Parameters<Type>
-type ConstructorParameters<ConstructorType>
-type ReturnType<Type>
+More Mapped Types:
+
+```ts
+type Stringify<T> = { [P in keyof T]: string };
+type Clone<T> = { [P in keyof T]: T[P] };
+```
+
+Function Types:
+
+- `type Parameters<FunctionType>`
+- `type ConstructorParameters<ConstructorType>`
+- `type ReturnType<FunctionType>`
+
+## Conditional Types
+
+```ts
+interface Animal {
+  live(): void;
+}
+interface Dog extends Animal {
+  woof(): void;
+}
+
+type Example1 = Dog extends Animal ? number : string;
+// => type Example1 = number
+
+type Example2 = RegExp extends Animal ? number : string;
+// => type Example2 = string
 ```
 
 ## Mixins
