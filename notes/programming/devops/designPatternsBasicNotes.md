@@ -7,7 +7,7 @@
 ### SOLID Principles
 
 - Single Responsibility Principle 单一功能原则
-- Open/Closed Principle 开闭原则
+- Open-closed Principle 开闭原则
 - Liskov Substitution Principle 里氏替换原则
 - Interface Segregation Principle 接口隔离原则
 - Dependency Inversion Principle 依赖反转原则
@@ -25,10 +25,44 @@
 Too much functionality is in one class and you modify a piece of it,
 it can be difficult to understand how that will affect other dependent modules.
 
-#### Open Closed Principle
+#### Open-Closed Principle
 
 Allow users to add new functionalities without changing existing code,
 open for extension, close for modification.
+
+```js
+class Coder {
+  constructor(fullName, language, hobby, education, workplace, position) {
+    this.fullName = fullName;
+    this.language = language;
+    this.hobby = hobby;
+    this.education = education;
+    this.workplace = workplace;
+    this.position = position;
+  }
+}
+
+// BAD: filter by any other new property have to change CodeFilter's code.
+class CoderFilter {
+  filterByName(coders, fullName) {
+    return coders.filter((coder) => coder.fullName === fullName);
+  }
+
+  filterByLang(coders, language) {
+    return coders.filter((coder) => coder.language === language);
+  }
+
+  filterByHobby(coders, hobby) {
+    return coders.filter((coder) => coder.hobby === hobby);
+  }
+}
+
+// GOOD
+class CoderFilter {
+  filterByProp = (array, propName, value) =>
+    array.filter((element) => element[propName] === value);
+}
+```
 
 #### Liskov Substitution Principle
 
