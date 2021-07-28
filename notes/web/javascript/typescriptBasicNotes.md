@@ -1016,7 +1016,7 @@ export default connect<StateProps, DispatchProps, OwnProps>
 
 ## Mapped Types
 
-### Useful Mapped Types
+### Basic Mapped Types
 
 ```ts
 type Readonly<T> = { readonly [P in keyof T]: T[P] };
@@ -1024,33 +1024,37 @@ type Partial<T> = { [P in keyof T]?: T[P] };
 type ReadonlyPartial<T> = { readonly [P in keyof T]?: T[P] };
 type Required<T> = { [P in keyof T]-?: T[P] };
 type Nullable<T> = { [P in keyof T]: T[P] | null };
+type Clone<T> = { [P in keyof T]: T[P] };
+type Stringify<T> = { [P in keyof T]: string };
+```
 
-// Key Types
+### Key Mapped Types
+
+```ts
 type Pick<T, K extends keyof T> = { [P in K]: T[P] };
 type Omit<Type, K extends keyof T> = { [P not in K]: T[P] }
 type Record<K extends keyof any, T> = { [P in K]: T };
+```
 
-// Union Types
+### Union Mapped Types
+
+```ts
 type Filter<T, U> = T extends U ? T : never;
 type Exclude<T, U> = T extends U ? never : T;
 type Extract<T, U> = U extends T ? T : never;
+```
 
-// Proxy Types
-type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
+### Proxy Mapped Types
+
+```ts
 type Proxy<T> = {
   get(): T;
   set(value: T): void;
 };
+type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
 ```
 
-More Mapped Types:
-
-```ts
-type Stringify<T> = { [P in keyof T]: string };
-type Clone<T> = { [P in keyof T]: T[P] };
-```
-
-Function Types:
+### Function Mapped Types
 
 ```ts
 type Parameters<T> = T extends (...args: infer R ? R : any): any;
@@ -1060,6 +1064,97 @@ type ReturnType<T extends (...args: any) => any> = T extends (
 ) => infer R
   ? R
   : any;
+```
+
+### Custom Mapped Types
+
+Combine with:
+
+- `in keyof`
+- `readonly`
+- `?`
+- `-`
+- `as`
+- Template literal types.
+- Conditional types.
+- Built-in types.
+- Other mapped types.
+- Other custom types.
+- etc.
+
+```ts
+// Removes 'readonly' attributes from a type's properties
+type Mutable<Type> = {
+  -readonly [Property in keyof Type]: Type[Property];
+};
+
+type LockedAccount = {
+  readonly id: string;
+  readonly name: string;
+};
+
+type UnlockedAccount = Mutable<LockedAccount>;
+// type UnlockedAccount = {
+//   id: string;
+//   name: string;
+// };
+```
+
+```ts
+// Mapped types via `as` type
+type Getters<Type> = {
+  [Property in keyof Type as `get${Capitalize<
+    string & Property
+  >}`]: () => Type[Property];
+};
+
+interface Person {
+  name: string;
+  age: number;
+  location: string;
+}
+
+type LazyPerson = Getters<Person>;
+// type LazyPerson = {
+//   getName: () => string;
+//   getAge: () => number;
+//   getLocation: () => string;
+// }
+```
+
+```ts
+// Remove the 'kind' property
+type RemoveKindField<Type> = {
+  [Property in keyof Type as Exclude<Property, 'kind'>]: Type[Property];
+};
+
+interface Circle {
+  kind: 'circle';
+  radius: number;
+}
+
+type KindlessCircle = RemoveKindField<Circle>;
+// type KindlessCircle = {
+//   radius: number;
+// }
+```
+
+```ts
+// Mapped type via conditional type
+type ExtractPII<Type> = {
+  [Property in keyof Type]: Type[Property] extends { pii: true } ? true : false;
+};
+
+type DBFields = {
+  id: { format: "incrementing" };
+  name: { type: string; pii: true };
+};
+
+type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>;
+// type ObjectsNeedingGDPRDeletion = {
+//   id: false;
+//   name: true;
+// }
 ```
 
 ## Template Literal Types
