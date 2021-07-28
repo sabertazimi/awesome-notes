@@ -1931,9 +1931,33 @@ movie style
 
 ### Clip Path
 
+#### Basic Clip Path
+
 ```css
 .polygon {
   clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+```
+
+#### SVG Clip Path
+
+<!-- markdownlint-disable line-length -->
+
+```html
+<svg class="svg">
+  <clipPath id="circle" clipPathUnits="objectBoundingBox">
+    <path
+      d="M0.5,0 C0.776,0,1,0.224,1,0.5 C1,0.603,0.969,0.7,0.915,0.779 C0.897,0.767,0.876,0.76,0.853,0.76 C0.794,0.76,0.747,0.808,0.747,0.867 C0.747,0.888,0.753,0.908,0.764,0.925 C0.687,0.972,0.597,1,0.5,1 C0.224,1,0,0.776,0,0.5 C0,0.224,0.224,0,0.5,0"
+    ></path>
+  </clipPath>
+</svg>
+```
+
+<!-- markdownlint-enable line-length -->
+
+```css
+.item {
+  clip-path: url('#circle');
 }
 ```
 
@@ -4228,6 +4252,36 @@ This is also used to create **icon systems**.
     opacity=".9"
   />
 </pattern>
+```
+
+### SVG Mask
+
+Avatar with circle status indicator:
+
+```html
+<svg role="none">
+  <mask id="circle">
+    <circle fill="white" cx="100" cy="100" r="100"></circle>
+    <circle fill="black" cx="86%" cy="86%" r="18"></circle>
+  </mask>
+  <g mask="url(#circle)">
+    <image
+      x="0"
+      y="0"
+      width="100%"
+      height="100%"
+      xlink:href="avatar.jpg"
+    ></image>
+    <circle
+      fill="none"
+      cx="100"
+      cy="100"
+      r="100"
+      stroke="rgba(0,0,0,0.1)"
+      stroke-width="2"
+    ></circle>
+  </g>
+</svg>
 ```
 
 ## StyleLint Tool
