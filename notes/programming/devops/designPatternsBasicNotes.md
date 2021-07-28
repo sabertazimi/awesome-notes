@@ -1798,6 +1798,17 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
 })(jQuery, window, document);
 ```
 
+## Scalability Design
+
+- Prefer composables over mixins.
+- Always clone objects between components.
+- Use namespaced state store modules.
+- Write robust tests.
+- Interact with REST API via services/SDK.
+- Wrap third-party libraries other using them directly:
+  - Abstract: changing dependencies without changing interface.
+  - Extendability: More obvious route to extending functionality.
+
 ## Domain Driven Design
 
 ### Interface Layer
