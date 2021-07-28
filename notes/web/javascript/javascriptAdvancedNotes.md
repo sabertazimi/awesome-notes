@@ -2339,7 +2339,15 @@ test();
 
 ### Render Engine
 
-Parser/Script -> DOM Tree -> Styled Tree -> Layout -> Paint -> Composite
+- Download HTML
+- Parser/Script
+- DOM and CSSOM Construction
+- Render Tree = DOM Tree + Styled Tree
+- Layout
+- Paint
+- Composite
+
+[![RenderEngine](./figures/CriticalRenderPath.svg)](https://sia.codes/posts/render-blocking-resources/#critical-render-path-js)
 
 #### HTML Parser
 
