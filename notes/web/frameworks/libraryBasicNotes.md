@@ -108,6 +108,10 @@
 - [String Manipulation](https://github.com/dleitee/strman)
 - [Fuzzy String Matching](https://github.com/nol13/fuzzball.js)
 
+### Hash Utils
+
+- [UUID](https://github.com/uuidjs/uuid)
+
 ### Functional Programming Utils
 
 - [Immer](https://github.com/immerjs/immer)
