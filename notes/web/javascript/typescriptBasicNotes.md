@@ -449,24 +449,6 @@ padding(1, 1, 1, 1); // Okay: top, right, bottom, left
 padding(1, 1, 1); // Error: Not a part of the available overloads
 ```
 
-## Type Assertion
-
-- `<type>`
-- `as type`
-
-> `as` is better in `.jsx`
-
-```ts
-let foo: any;
-let bar = <string>foo; // 现在 bar 的类型是 'string'
-```
-
-```ts
-function handler(event: Event) {
-  const mouseEvent = event as MouseEvent;
-}
-```
-
 ## Interface
 
 ```ts
@@ -615,6 +597,28 @@ const bad: FromIndex = { b: 1, c: 2, d: 3 };
 
 ```ts
 type FromSomeIndex<K extends string> = { [key in K]: number };
+```
+
+### Indexed Access Types
+
+```ts
+const MyArray = [
+  { name: "Alice", age: 15 },
+  { name: "Bob", age: 23 },
+  { name: "Eve", age: 38 },
+];
+
+type Person = typeof MyArray[number];
+// type Person = {
+//   name: string;
+//   age: number;
+// }
+
+type Age = typeof MyArray[number]["age"];
+// type Age = number
+
+type Age2 = Person["age"];
+// type Age2 = number
 ```
 
 ## Alias Types
@@ -1153,20 +1157,22 @@ type Clone<T> = { [P in keyof T]: T[P] };
 type Stringify<T> = { [P in keyof T]: string };
 ```
 
+### Union Mapped Types
+
+With distributive conditional type:
+
+```ts
+type Extract<T, U> = T extends U ? T : never;
+type Exclude<T, U> = T extends U ? never : T;
+type Filter<T, U> = U extends T ? T : never;
+```
+
 ### Key Mapped Types
 
 ```ts
 type Pick<T, K extends keyof T> = { [P in K]: T[P] };
-type Omit<Type, K extends keyof T> = { [P not in K]: T[P] }
+type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 type Record<K extends keyof any, T> = { [P in K]: T };
-```
-
-### Union Mapped Types
-
-```ts
-type Filter<T, U> = T extends U ? T : never;
-type Exclude<T, U> = T extends U ? never : T;
-type Extract<T, U> = U extends T ? T : never;
 ```
 
 ### Proxy Mapped Types
@@ -1370,6 +1376,24 @@ function getArea(shape: Shape) {
 Type 'Triangle' is not assignable to type 'never'.
       return _exhaustiveCheck;
   }
+}
+```
+
+## Type Assertion
+
+- `<type>`
+- `as type`
+
+> `as` is better in `.jsx`
+
+```ts
+let foo: any;
+let bar = <string>foo; // 现在 bar 的类型是 'string'
+```
+
+```ts
+function handler(event: Event) {
+  const mouseEvent = event as MouseEvent;
 }
 ```
 
