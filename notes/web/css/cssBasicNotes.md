@@ -2563,7 +2563,7 @@ background-position/background-size,
 - pseudo elements (`::before` and `::after`)
 - pseudo elements with animation
   (opacity, scale, translate, width/height, margin, background-position)
-- :hover/:focus/:target + animation/transform/transition
+- `:hover`/`:focus`/`:target` + animation/transform/transition
 - transform: scale/translate
 - animation-delay
 - width/height
