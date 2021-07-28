@@ -703,9 +703,9 @@ type FromSomeIndex<K extends string> = { [key in K]: number };
 
 ```ts
 const MyArray = [
-  { name: "Alice", age: 15 },
-  { name: "Bob", age: 23 },
-  { name: "Eve", age: 38 },
+  { name: 'Alice', age: 15 },
+  { name: 'Bob', age: 23 },
+  { name: 'Eve', age: 38 },
 ];
 
 type Person = typeof MyArray[number];
@@ -714,10 +714,10 @@ type Person = typeof MyArray[number];
 //   age: number;
 // }
 
-type Age = typeof MyArray[number]["age"];
+type Age = typeof MyArray[number]['age'];
 // type Age = number
 
-type Age2 = Person["age"];
+type Age2 = Person['age'];
 // type Age2 = number
 ```
 
@@ -1156,7 +1156,6 @@ With distributive conditional type:
 ```ts
 type Extract<T, U> = T extends U ? T : never;
 type Exclude<T, U> = T extends U ? never : T;
-type Filter<T, U> = U extends T ? T : never;
 ```
 
 ### Key Mapped Types
@@ -1180,8 +1179,15 @@ type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
 ### Function Mapped Types
 
 ```ts
-type Parameters<T> = T extends (...args: infer R ? R : any): any;
-type ConstructorParameters<T> = T extends (...args: infer R ? R : any): object;
+type Parameters<T extends (...args: any) => any> = T extends (
+  ...args: infer P
+) => any
+  ? P
+  : never;
+
+type ConstructorParameters<T extends new (...args: any) => any> =
+  T extends new (...args: infer P) => any ? P : never;
+
 type ReturnType<T extends (...args: any) => any> = T extends (
   ...args: any[]
 ) => infer R
@@ -1269,7 +1275,7 @@ type ExtractPII<Type> = {
 };
 
 type DBFields = {
-  id: { format: "incrementing" };
+  id: { format: 'incrementing' };
   name: { type: string; pii: true };
 };
 
@@ -1287,8 +1293,15 @@ type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>;
   最后返回这个推导结果
 
 ```ts
-type Parameters<T> = T extends (...args: infer R ? R : any): any;
-type ConstructorParameters<T> = T extends (...args: infer R ? R : any): object;
+type Parameters<T extends (...args: any) => any> = T extends (
+  ...args: infer P
+) => any
+  ? P
+  : never;
+
+type ConstructorParameters<T extends new (...args: any) => any> =
+  T extends new (...args: infer P) => any ? P : never;
+
 type ReturnType<T extends (...args: any) => any> = T extends (
   ...args: any[]
 ) => infer R
