@@ -112,6 +112,10 @@
 
 - [UUID](https://github.com/uuidjs/uuid)
 
+### DevOps Utils
+
+- [DotEnv](https://github.com/motdotla/dotenv)
+
 ### Functional Programming Utils
 
 - [Immer](https://github.com/immerjs/immer)
