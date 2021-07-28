@@ -157,7 +157,19 @@
 
 ### Gradients Utils
 
+#### Gradients Collection
+
 - [Web Gradients](https://github.com/itmeo/webgradients)
+- [Gradient Magic](https://www.gradientmagic.com)
+
+#### Gradients Tools
+
+- [PostCSS Gradients Plugin](https://github.com/larsenwork/postcss-easing-gradients)
+
+#### Gradients Editor
+
+- [CSS Gradient](https://cssgradient.io)
+- [Easing Gradients](https://larsenwork.com/easing-gradients/#editor)
 - [Gradient Art](https://github.com/GradientArt/issues)
 
 ### Box Shadows Utils
@@ -356,23 +368,19 @@
 
 - [React Spring](https://github.com/react-spring/react-spring)
 - [Framer Motion](https://github.com/framer/motion)
+- [Popmotion](https://github.com/popmotion/popmotion)
 - [React Transition Group](https://github.com/reactjs/react-transition-group)
-- [React Animation](https://github.com/FunctionFoundry/react-set-animate)
 - [GreenSock](https://github.com/greensock/GreenSock-JS)
 - [Airbnb AE Solution](https://github.com/airbnb/lottie-web)
-- [Effeckt.css](https://github.com/h5bp/Effeckt.css)
-- [animate.css](https://github.com/daneden/animate.css)
-- [Anime](https://github.com/juliangarnier/anime)
-- [Velocity Animation](https://github.com/julianshapiro/velocity)
-- [Ramjet](https://github.com/rich-harris/ramjet)
-- [Barba.js](https://github.com/luruke/barba.js)
-- [Motto Animated Words](https://github.com/jrainlau/motto)
-- [Popmotion](https://github.com/popmotion/popmotion)
+- [Animate.css](https://github.com/daneden/animate.css)
+- [Velocity: Accelerated JavaScript animation](https://github.com/julianshapiro/velocity)
+- [Barba.js: Smooth transition between pages](https://github.com/luruke/barba.js)
 
 ### Typing Effect Animation
 
 - [Typed.js](https://github.com/mattboldt/typed.js)
 - [TypeIt](https://github.com/alexmacarthur/typeit)
+- [Motto Animated Words](https://github.com/jrainlau/motto)
 
 ### Loading Effect Animation
 
