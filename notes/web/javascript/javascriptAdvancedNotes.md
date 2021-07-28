@@ -2415,6 +2415,12 @@ They interrupt one or more of the steps:
   CSSOM -> CSS block JS -> JS block HTML parser.
 - Images and fonts are not render blocking.
 
+##### Render Blocking Best Practice
+
+- Reduce CSS and JavaScript bytes.
+- Lazy loading non-critical CSS and JavaScript.
+- Use the `defer`, `async`, or `module` attribute on scripts.
+
 #### Layout
 
 为避免对所有细小更改都进行整体布局，浏览器采用了一种“dirty 位”系统。
