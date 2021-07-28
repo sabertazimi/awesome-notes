@@ -2347,7 +2347,7 @@ test();
 - Paint
 - Composite
 
-[![RenderEngine](./figures/CriticalRenderPath.svg)](https://sia.codes/posts/render-blocking-resources/#critical-render-path-js)
+[![Critical Render Path](./figures/CriticalRenderPath.svg)](https://sia.codes/posts/render-blocking-resources/#critical-render-path-js)
 
 #### HTML Parser
 
@@ -3584,18 +3584,21 @@ Native Lazy Loading:
 #### JavaScript Lazy Loading
 
 - [Script Priorities](https://addyosmani.com/blog/script-priorities)
+- `async`: downloads the script during parsing the document,
+  but will **pause** the parser to execute the script.
 - `defer`: downloads the script while the document is still parsing,
   but waits until the document has finished parsing before executing it
-  (**in order**)
-- `async`: downloads the script during parsing the document,
-  but will **pause** the parser to execute the script
-- If the scripts rely on each other, use defer
-- If the script is independent, use async
-- If put JavaScript in `<head>`, in such script can't access DOM directly
-  (DOM haven't get parsed)
+  (**in order**).
+- If the script is independent, use `async`.
+- If the scripts rely on each other, use `defer`.
+- If put JavaScript in `<head>`,
+  in such script can't access DOM directly
+  (DOM haven't get parsed).
 
-Best practice: lazy loading scripts not execute immediately
+Best practice: lazy loading scripts not execute immediately.
 (**Chrome Coverage Devtools**)
+
+[![Scripting Type](./figures/ScriptingType.svg)](https://sia.codes/posts/render-blocking-resources/#deep-dive%3A-optimizing-javascript-for-the-critical-rendering-path)
 
 ```html
 <script src="myScript.js"></script>
