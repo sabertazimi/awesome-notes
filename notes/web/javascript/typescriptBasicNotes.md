@@ -545,82 +545,6 @@ const src = 'const a = "Hello World"';
 window.ts.transpileModule(src, {});
 ```
 
-## Index Signature
-
-```ts
-let x: { foo: number; [x: string]: any };
-
-x = { foo: 1, baz: 2 }; // ok, 'baz' 属性匹配于索引签名
-```
-
-当你声明一个索引签名时，所有明确的成员都必须符合索引签名
-
-```ts
-// ok
-interface Foo {
-  [key: string]: number;
-  x: number;
-  y: number;
-}
-
-// Error
-interface Bar {
-  [key: string]: number;
-  x: number;
-  y: string; // Error: y 属性必须为 number 类型
-}
-```
-
-使用交叉类型可以解决上述问题
-
-```ts
-type FieldState = {
-  value: string;
-};
-
-type FormState = { isValid: boolean } & { [fieldName: string]: FieldState };
-```
-
-### Select Index
-
-```ts
-type Index = 'a' | 'b' | 'c';
-type FromIndex = { [k in Index]?: number };
-
-const good: FromIndex = { b: 1, c: 2 };
-
-// Error:
-// `{ b: 1, c: 2, d: 3 }` 不能分配给 'FromIndex'
-// 对象字面量只能指定已知类型，'d' 不存在 'FromIndex' 类型上
-const bad: FromIndex = { b: 1, c: 2, d: 3 };
-```
-
-```ts
-type FromSomeIndex<K extends string> = { [key in K]: number };
-```
-
-### Indexed Access Types
-
-```ts
-const MyArray = [
-  { name: "Alice", age: 15 },
-  { name: "Bob", age: 23 },
-  { name: "Eve", age: 38 },
-];
-
-type Person = typeof MyArray[number];
-// type Person = {
-//   name: string;
-//   age: number;
-// }
-
-type Age = typeof MyArray[number]["age"];
-// type Age = number
-
-type Age2 = Person["age"];
-// type Age2 = number
-```
-
 ## Access Modifiers
 
 ### Member Access Modifiers
@@ -719,6 +643,82 @@ class Something extends React.Component<{ foo: number }, { baz: number }> {
     this.state.baz = 456; // Error: 你应该使用 this.setState()
   }
 }
+```
+
+## Index Signature
+
+```ts
+let x: { foo: number; [x: string]: any };
+
+x = { foo: 1, baz: 2 }; // ok, 'baz' 属性匹配于索引签名
+```
+
+当你声明一个索引签名时，所有明确的成员都必须符合索引签名
+
+```ts
+// ok
+interface Foo {
+  [key: string]: number;
+  x: number;
+  y: number;
+}
+
+// Error
+interface Bar {
+  [key: string]: number;
+  x: number;
+  y: string; // Error: y 属性必须为 number 类型
+}
+```
+
+使用交叉类型可以解决上述问题
+
+```ts
+type FieldState = {
+  value: string;
+};
+
+type FormState = { isValid: boolean } & { [fieldName: string]: FieldState };
+```
+
+### Select Index Types
+
+```ts
+type Index = 'a' | 'b' | 'c';
+type FromIndex = { [k in Index]?: number };
+
+const good: FromIndex = { b: 1, c: 2 };
+
+// Error:
+// `{ b: 1, c: 2, d: 3 }` 不能分配给 'FromIndex'
+// 对象字面量只能指定已知类型，'d' 不存在 'FromIndex' 类型上
+const bad: FromIndex = { b: 1, c: 2, d: 3 };
+```
+
+```ts
+type FromSomeIndex<K extends string> = { [key in K]: number };
+```
+
+### Indexed Access Types
+
+```ts
+const MyArray = [
+  { name: "Alice", age: 15 },
+  { name: "Bob", age: 23 },
+  { name: "Eve", age: 38 },
+];
+
+type Person = typeof MyArray[number];
+// type Person = {
+//   name: string;
+//   age: number;
+// }
+
+type Age = typeof MyArray[number]["age"];
+// type Age = number
+
+type Age2 = Person["age"];
+// type Age2 = number
 ```
 
 ## Literal Types
