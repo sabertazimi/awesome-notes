@@ -3352,9 +3352,11 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 
 ### Browser Performance Monitoring
 
-前端性能监控分为两种方式，一种叫做合成监控（Synthetic Monitoring，SYN），另一种是真实用户监控（Real User Monitoring，RUM）。
+前端性能监控分为两种方式,
+一种叫做合成监控 (Synthetic Monitoring, SYN),
+另一种是真实用户监控 (Real User Monitoring, RUM).
 
-#### 合成监控
+#### Syncthetic Monitoring
 
 在一个模拟场景里, 去提交一个需要做性能审计的页面,
 通过一系列的工具、规则去运行你的页面, 提取一些性能指标, 得出一个审计报告.
@@ -3368,49 +3370,7 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 | 不影响真实用户的访问性能               |       单次数据不够稳定       |
 | 可以提供页面加载幻灯片等可视化分析途径 | 数据量较小，无法发挥更大价值 |
 
-#### LightHouse Best Practice
-
-##### Performant Tips for FCP
-
-First Contentful Paint:
-
-- Add the `defer` or `async` attributes to `<script>` tags.
-- Minify the JavaScript and CSS files.
-- Remove unused CSS (e.g Tailwind.css JIT mode).
-- Lazy importing components not for first page.
-- Server side rendering.
-- Reduce server response time (e.g CDN).
-- TBT (Total Blocking Time) = TTI (Time to Interactive) - FCP (First Contentful Paint).
-
-##### Performant Tips for LCP
-
-Largest Contentful Paint:
-
-- Use a CDN for assets like images and video.
-- Compress images:
-  - Minify images.
-  - Convert images from JPEG/PNG to WebP.
-- Responsive images:
-  size image based on device size with `srcset` on `<img>` or `<picture>`.
-
-##### Performant Tips for CLS
-
-Cumulative Layout Shift:
-
-- Set `height` and `width` attributes of image or video,
-  so that it won’t move content around it once it’s loaded.
-- Avoid using `popups` or `overlays`
-  unless they appear when the user interacts with the page.
-- When it’s necessary to move elements, use `transform` animations.
-
-##### Best Practice Tips for Accessibility
-
-- [Web Accessibility Initiative-Accessible Rich Internet Applications](https://www.sitepoint.com/wai-aria 'WAI-ARIA')
-- Don't use `aria-hidden` on the `<body>` element.
-- Make sure `IDs` and `Keys` of elements are unique.
-- Make sure `document` has a `title` element (with tool like `react-helmet`).
-
-#### 真实用户监控
+#### Real User Monitoring
 
 用户在页面访问之后就会产生各种各样的性能指标,
 之后会将这些性能指标上传的我们的日志服务器上,
@@ -3426,7 +3386,7 @@ Cumulative Layout Shift:
 | 数据样本足够庞大，可以减少统计误差     | 无法采集完整的资源加载瀑布图     |
 | 新年数据可与其它数据关联，产生更大价值 | 无法可视化展示加载过程           |
 
-#### 对比
+#### Difference between SYN and RUM
 
 | 对比项         | 合成监控               | 真实用户监控               |
 | :------------- | :--------------------- | :------------------------- |
@@ -3435,7 +3395,7 @@ Cumulative Layout Shift:
 | 数据样本量     | 较小                   | 大(视业务体量)             |
 | 适合场景       | 定性分析, 小数据量分析 | 定量分析, 业务数据深度挖掘 |
 
-#### 方案
+#### Performance Monitoring Methods
 
 在真实用户性能数据采集时, 要关注四个方面的东西:
 
@@ -3444,13 +3404,13 @@ Cumulative Layout Shift:
 - 采集正确的数据
 - 上报关联的维度
 
-#### 使用标准的 API
+#### Monitoring Standard API
 
 采集性能数据时先抹平 Navigation Timing spec 差异
 优先使用 PerformanceTimeline API
 (在复杂场景，亦可考虑优先使用 PerformanceObserver)
 
-#### 定义合适的指标
+#### Monitoring Statistics Data
 
 First Meaningful Paint: 首次有效渲染时长,
 它的一个核心的想法是渲染并不一定代表着用户看到了主要内容,
@@ -3469,7 +3429,7 @@ Load 也不一定代表用户看到主要内容.
 - First Input Delay (FID)
 - Time to Interactive (TOI)
 
-#### 上报关联的维度
+#### Monitoring Report Dimension
 
 不同的页面操作/页面打开方式/浏览器环境都会对我们页面加载的性能会有影响,
 需要上报这些维度的数据, 以便深入性能分析:
@@ -3744,6 +3704,39 @@ Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 - code splitting
 - lazy loading
 - offline caching (PWA)
+
+#### Performant Tips for FCP
+
+First Contentful Paint:
+
+- Add the `defer` or `async` attributes to `<script>` tags.
+- Minify the JavaScript and CSS files.
+- Remove unused CSS (e.g Tailwind.css JIT mode).
+- Lazy importing components not for first page.
+- Server side rendering.
+- Reduce server response time (e.g CDN).
+- TBT (Total Blocking Time) = TTI (Time to Interactive) - FCP (First Contentful Paint).
+
+#### Performant Tips for LCP
+
+Largest Contentful Paint:
+
+- Use a CDN for assets like images and video.
+- Compress images:
+  - Minify images.
+  - Convert images from JPEG/PNG to WebP.
+- Responsive images:
+  size image based on device size with `srcset` on `<img>` or `<picture>`.
+
+#### Performant Tips for CLS
+
+Cumulative Layout Shift:
+
+- Set `height` and `width` attributes of image or video,
+  so that it won’t move content around it once it’s loaded.
+- Avoid using `popups` or `overlays`
+  unless they appear when the user interacts with the page.
+- When it’s necessary to move elements, use `transform` animations.
 
 ## Testing and Debugging
 
