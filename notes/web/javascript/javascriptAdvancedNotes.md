@@ -2346,6 +2346,7 @@ test();
 - Layout
 - Paint
 - Composite
+- [Chrome Rendering Architecture](https://developer.chrome.com/blog/renderingng-architecture)
 
 [![Critical Render Path](./figures/CriticalRenderPath.svg)](https://sia.codes/posts/render-blocking-resources/#critical-render-path-js)
 
