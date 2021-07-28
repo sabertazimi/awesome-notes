@@ -149,7 +149,8 @@
 
 ### Gradients Utils
 
-- [Web Gradients](https://webgradients.com)
+- [Web Gradients](https://github.com/itmeo/webgradients)
+- [Gradient Art](https://github.com/GradientArt/issues)
 
 ### Box Shadows Utils
 
