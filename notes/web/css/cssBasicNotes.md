@@ -407,6 +407,19 @@ ul > li {
 } /* 仅限ul的直接子元素li，忽略嵌套子元素 */
 ```
 
+Using the descendant selector without more specificity can be really expensive.
+The browser is going to check every descendant element for a match
+because the relationship isn’t restricted to parent and child.
+
+For `.container ul li a` selector:
+
+- match every `<a>` on the page
+- find every `<a>` contained in a `<li>`
+- use the previous matches and narrow down to
+  the ones contained in a `<ul>`
+- finally, filter down the above selection to
+  the ones contained in an element with the class `.container`
+
 #### Sibling Selectors
 
 - `E + F`：直接相邻兄弟选择器
@@ -457,7 +470,7 @@ input.checkbox:checked ~ nav {
 }
 ```
 
-### 属性选择器
+### Attribute Selectors
 
 `E[attr]`
 
@@ -519,7 +532,7 @@ a[title*='link'] {
 //定位所有title里具有link字符串的a链接
 ```
 
-### 伪类
+### Pseudo Class Selectors
 
 - :link：未访问的链接；
 - :visited：已访问的链接，不建议使用；
@@ -606,11 +619,13 @@ button:focus-visible {
 }
 ```
 
-### 伪元素
+### Pseudo Element Selectors
 
-- ::first-line：匹配文本首行；
-- ::first-letter：匹配文本首字母；
-- ::selection：匹配突出显示的文本：
+- `::first-line`: 匹配文本首行.
+- `::first-letter`: 匹配文本首字母.
+- `::selection`: 匹配突出显示的文本.
+- `::before`
+- `::after`
 
 ```css
 //定义选中的文本颜色与背景色
@@ -620,10 +635,10 @@ button:focus-visible {
 }
 ```
 
-- ::before 与 ::after ：使用 content 属性生成额外的内容并插入在标记中：
+- `::before` 与 `::after`: 使用 content 属性生成额外的内容并插入在标记中.
 
 ```css
-a:after {
+a::after {
   content: '↗';
 }
 ```
@@ -631,10 +646,10 @@ a:after {
 attr() – 调用当前元素的属性
 
 ```css
-a:after {
+a::after {
   content: '(' attr(href) ')';
 }
-a:after {
+a::after {
   content: '(' attr(data-language) ')';
 }
 ```
@@ -650,7 +665,7 @@ h1::before {
 counter() – 调用计数器，可以不使用列表元素实现序号功能,配合 CSS3 中`counter-increment`和`counter-reset`属性
 
 ```css
-h2:before {
+h2::before {
   counter-increment: chapter;
   content: 'Chapter ' counter(chapter);
 }
@@ -681,7 +696,7 @@ h2::before {
 output -->
 ```
 
-nested counters
+Nested counters:
 
 ```css
 ol {
@@ -689,7 +704,7 @@ ol {
   list-style-type: none;
 }
 
-li:before {
+li::before {
   counter-increment: section; /* 只增加计数器的当前实例 */
   content: counters(section, '.') ' '; /* 为所有计数器实例增加以“.”分隔的值 */
 }
@@ -757,21 +772,6 @@ li:before {
   border-bottom: 15px solid transparent;
 }
 ```
-
-### Descendant Selector
-
-using the descendant selector without more specificity can be really expensive.
-The browser is going to check every descendant element for a match
-because the relationship isn’t restricted to parent and child.
-
-For `.container ul li a` selector:
-
-- match every `<a>` on the page
-- find every `<a>` contained in a `<li>`
-- use the previous matches and narrow down to
-  the ones contained in a `<ul>`
-- finally, filter down the above selection to
-  the ones contained in an element with the class `.container`
 
 ## CSS Normalize
 
@@ -949,12 +949,12 @@ float make element specified value of `display`:
 `display: table` 防止外边距塌陷, `clear: both` 清楚浮动
 
 ```css
-.clearfix:before,
-.clearfix:after {
+.clearfix::before,
+.clearfix::after {
   content: '';
   display: table;
 }
-.clearfix:after {
+.clearfix::after {
   clear: both;
 }
 .clearfix {
@@ -2560,7 +2560,7 @@ background-position/background-size,
 
 - opacity
 - `overflow: hidden`
-- pseudo elements (::before and ::after)
+- pseudo elements (`::before` and `::after`)
 - pseudo elements with animation
   (opacity, scale, translate, width/height, margin, background-position)
 - :hover/:focus/:target + animation/transform/transition
