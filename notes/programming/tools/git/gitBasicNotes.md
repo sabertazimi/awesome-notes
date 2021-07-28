@@ -481,7 +481,13 @@ git branch -v(详细信息) -vv(详细远程信息) --merged(显示合并至当�
 
 #### Remote Branch
 
-本地分支跟踪远程分支(在此本地分支上运行 git pull 自动抓取),2 种方式:
+- Show all remote branch:
+
+```bash
+git branch -r
+```
+
+本地分支跟踪远程分支(在此本地分支上运行 git pull 自动抓取), 2 种方式:
 
 - 设置当前所在本地分支跟踪某一远程分支
 
