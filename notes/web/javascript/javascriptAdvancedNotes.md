@@ -5904,6 +5904,40 @@ navigator.geolocation.watchPosition(
 
 自动更新地理位置
 
+## Web Fetch API
+
+Get and Post:
+
+```js
+const response = await fetch('/api/names', {
+  headers: {
+    Accept: 'application/json',
+  },
+});
+
+const response = await fetch('/api/names', {
+  method: 'POST',
+  body: JSON.stringify(object),
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+```
+
+Request object:
+
+```js
+const request = new Request('/api/names', {
+  method: 'POST',
+  body: JSON.stringify(object),
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+const response = await fetch(request);
+```
+
 ## Web URL API
 
 - [URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams)
