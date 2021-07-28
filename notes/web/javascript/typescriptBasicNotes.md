@@ -1014,6 +1014,131 @@ export default connect<StateProps, DispatchProps, OwnProps>
   (mapStateToProps, mapDispatchToProps)(MyComponent)
 ```
 
+## Template Literal Types
+
+- Based on literal types.
+- 4 intrinsic String Manipulation Types:
+  - `Uppercase<StringType>`
+  - `Lowercase<StringType>`
+  - `Capitalize<StringType>`
+  - `Uncapitalize<StringType>`
+
+```ts
+type PropEventSource<Type> = {
+  on<Key extends string & keyof Type>(
+    eventName: `${Key}Changed`,
+    callback: (newValue: Type[Key]) => void
+  ): void;
+};
+
+// Create a "watched object" with an 'on' method
+// so that you can watch for changes to properties.
+declare function makeWatchedObject<Type>(
+  obj: Type
+): Type & PropEventSource<Type>;
+
+const person = makeWatchedObject({
+  firstName: 'Yi',
+  lastName: 'Long',
+  age: 26,
+});
+
+person.on('firstNameChanged', (newName) => {
+  // (parameter) newName: string
+  console.log(`new name is ${newName.toUpperCase()}`);
+});
+
+person.on('ageChanged', (newAge) => {
+  // (parameter) newAge: number
+  if (newAge < 0) {
+    console.warn('warning! negative age');
+  }
+});
+
+// It's typo-resistent
+person.on('firstName', () => {});
+// Argument of type '"firstName"' is not assignable to
+// parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
+
+person.on('fstNameChanged', () => {});
+// Argument of type '"fstNameChanged"' is not assignable to
+// parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
+```
+
+## Conditional Types
+
+### Basic Conditional Types
+
+```ts
+interface Animal {
+  live(): void;
+}
+interface Dog extends Animal {
+  woof(): void;
+}
+
+type Example1 = Dog extends Animal ? number : string;
+// => type Example1 = number
+
+type Example2 = RegExp extends Animal ? number : string;
+// => type Example2 = string
+```
+
+### Nested Conditional Types
+
+- Conditional types can be nested.
+- 通过嵌套条件类型, 可以将类型约束收拢到精确范围.
+
+```ts
+type TypeName<T> = T extends string
+  ? 'string'
+  : T extends number
+  ? 'number'
+  : T extends boolean
+  ? 'boolean'
+  : T extends undefined
+  ? 'undefined'
+  : T extends Function
+  ? 'function'
+  : 'object';
+```
+
+### Distributive Conditional Types
+
+- Conditional types in which checked type is `naked type parameter` are called DCT.
+- DCT are automatically distributed over union types during instantiation.
+- `( A | B | C ) extends T ? X : Y` 相当于
+  `(A extends T ? X : Y) | (B extends T ? X : Y) | (B extends T ? X : Y)`
+- 没有被额外包装的联合类型参数, 在条件类型进行判定时会将联合类型分发, 分别进行判断.
+
+```ts
+// "string" | "function"
+type T1 = TypeName<string | (() => void)>;
+
+// "string" | "object"
+type T2 = TypeName<string | string[]>;
+
+// "object"
+type T3 = TypeName<string[] | number[]>;
+```
+
+```ts
+type Naked<T> = T extends boolean ? 'Y' : 'N';
+type Wrapped<T> = [T] extends [boolean] ? 'Y' : 'N';
+
+/*
+ * 先分发到 Naked<number> | Naked<boolean>
+ * 结果是 "N" | "Y"
+ */
+type Distributed = Naked<number | boolean>;
+
+/*
+ * 不会分发 直接是 [number | boolean] extends [boolean]
+ * 结果是 "N"
+ */
+type NotDistributed = Wrapped<number | boolean>;
+```
+
 ## Mapped Types
 
 ### Basic Mapped Types
@@ -1155,131 +1280,6 @@ type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>;
 //   id: false;
 //   name: true;
 // }
-```
-
-## Template Literal Types
-
-- Based on literal types.
-- 4 intrinsic String Manipulation Types:
-  - `Uppercase<StringType>`
-  - `Lowercase<StringType>`
-  - `Capitalize<StringType>`
-  - `Uncapitalize<StringType>`
-
-```ts
-type PropEventSource<Type> = {
-  on<Key extends string & keyof Type>(
-    eventName: `${Key}Changed`,
-    callback: (newValue: Type[Key]) => void
-  ): void;
-};
-
-// Create a "watched object" with an 'on' method
-// so that you can watch for changes to properties.
-declare function makeWatchedObject<Type>(
-  obj: Type
-): Type & PropEventSource<Type>;
-
-const person = makeWatchedObject({
-  firstName: 'Yi',
-  lastName: 'Long',
-  age: 26,
-});
-
-person.on('firstNameChanged', (newName) => {
-  // (parameter) newName: string
-  console.log(`new name is ${newName.toUpperCase()}`);
-});
-
-person.on('ageChanged', (newAge) => {
-  // (parameter) newAge: number
-  if (newAge < 0) {
-    console.warn('warning! negative age');
-  }
-});
-
-// It's typo-resistent
-person.on('firstName', () => {});
-// Argument of type '"firstName"' is not assignable to
-// parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
-
-person.on('fstNameChanged', () => {});
-// Argument of type '"fstNameChanged"' is not assignable to
-// parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
-```
-
-## Conditional Types
-
-### Basic Conditional Types
-
-```ts
-interface Animal {
-  live(): void;
-}
-interface Dog extends Animal {
-  woof(): void;
-}
-
-type Example1 = Dog extends Animal ? number : string;
-// => type Example1 = number
-
-type Example2 = RegExp extends Animal ? number : string;
-// => type Example2 = string
-```
-
-### Nested Conditional Types
-
-- Conditional types can be nested.
-- 通过嵌套条件类型, 可以将类型约束收拢到精确范围.
-
-```ts
-type TypeName<T> = T extends string
-  ? 'string'
-  : T extends number
-  ? 'number'
-  : T extends boolean
-  ? 'boolean'
-  : T extends undefined
-  ? 'undefined'
-  : T extends Function
-  ? 'function'
-  : 'object';
-```
-
-### Distributive Conditional Types
-
-- Conditional types in which checked type is `naked type parameter` are called DCT.
-- DCT are automatically distributed over union types during instantiation.
-- `( A | B | C ) extends T ? X : Y` 相当于
-  `(A extends T ? X : Y) | (B extends T ? X : Y) | (B extends T ? X : Y)`
-- 没有被额外包装的联合类型参数, 在条件类型进行判定时会将联合类型分发, 分别进行判断.
-
-```ts
-// "string" | "function"
-type T1 = TypeName<string | (() => void)>;
-
-// "string" | "object"
-type T2 = TypeName<string | string[]>;
-
-// "object"
-type T3 = TypeName<string[] | number[]>;
-```
-
-```ts
-type Naked<T> = T extends boolean ? 'Y' : 'N';
-type Wrapped<T> = [T] extends [boolean] ? 'Y' : 'N';
-
-/*
- * 先分发到 Naked<number> | Naked<boolean>
- * 结果是 "N" | "Y"
- */
-type Distributed = Naked<number | boolean>;
-
-/*
- * 不会分发 直接是 [number | boolean] extends [boolean]
- * 结果是 "N"
- */
-type NotDistributed = Wrapped<number | boolean>;
 ```
 
 ## Type Inference
