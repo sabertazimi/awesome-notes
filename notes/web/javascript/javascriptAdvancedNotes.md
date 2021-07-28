@@ -2397,6 +2397,24 @@ pseudo
   ;
 ```
 
+#### Render Blocking Resources
+
+Render blocking resources are files that 'press pause'
+on the critical rendering path.
+They interrupt one or more of the steps:
+
+- HTML is technically render blocking resources
+  (but not usually the cause of rendering performance problem)
+- CSS is render blocking:
+  render tree can't continue until both the CSSOM and DOM are created.
+- JavaScript can be render blocking:
+  when browser encounters a script meant to run synchronously,
+  it will stop DOM creation until script finished.
+- If CSS appears before a script,
+  the script will not be executed until the CSSOM is created:
+  CSSOM -> CSS block JS -> JS block HTML parser.
+- Images and fonts are not render blocking.
+
 #### Layout
 
 为避免对所有细小更改都进行整体布局，浏览器采用了一种“dirty 位”系统。
@@ -4302,10 +4320,14 @@ $0.addEventListener('click', (e) => {
 - cs-p: type `3G` (slow network)
 - cs-p: type `sensor` (geolocation)
 
-### Testing DevTools
+### Audit DevTool
 
 - cs-p: type `audit`
+
+### Coverage Tool
+
 - cs-p: type `coverage`
+- Use to eliminate **unused** CSS/JS code.
 
 #### Memory Panel
 
@@ -4327,7 +4349,6 @@ tool for composite stage analysis
 
 - layers
 - animations
-- coverage
 
 ## JavaScript Style Guide
 
