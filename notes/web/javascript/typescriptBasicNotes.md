@@ -621,12 +621,104 @@ type Age2 = Person["age"];
 // type Age2 = number
 ```
 
-## Alias Types
+## Access Modifiers
+
+### Member Access Modifiers
+
+Public, Protected and Private:
 
 ```ts
-type Text = string | { text: string };
-type Coordinates = [number, number];
-type Callback = (data: string) => void;
+class Singleton {
+  private static instance: Singleton;
+  private constructor() {
+    // ..
+  }
+
+  public static getInstance() {
+    if (!Singleton.instance) {
+      Singleton.instance = new Singleton();
+    }
+
+    return Singleton.instance;
+  }
+
+  someMethod() {}
+}
+
+let someThing = new Singleton(); // Error: constructor of 'singleton' is private
+
+let instance = Singleton.getInstance(); // do some thing with the instance
+```
+
+### Readonly Types
+
+Readonly type
+
+```ts
+type Foo = {
+  readonly bar: number;
+  readonly bas: number;
+};
+
+// 初始化
+const foo: Foo = { bar: 123, bas: 456 };
+
+// 不能被改变
+foo.bar = 456; // Error: foo.bar 为仅读属性
+```
+
+Readonly indexable signature
+
+```ts
+interface Foo {
+  readonly [x: number]: number;
+}
+
+// 使用
+
+const foo: Foo = { 0: 123, 2: 345 };
+console.log(foo[0]); // ok（读取）
+foo[0] = 456; // Error: 属性只读
+```
+
+Readonly properties of class
+
+```ts
+class Foo {
+  readonly bar = 1; // OK
+  readonly baz: string;
+  constructor() {
+    this.baz = 'hello'; // OK
+  }
+}
+```
+
+Readonly generic type
+
+```ts
+type Foo = {
+  bar: number;
+  bas: number;
+};
+
+type FooReadonly = Readonly<Foo>;
+
+const foo: Foo = { bar: 123, bas: 456 };
+const fooReadonly: FooReadonly = { bar: 123, bas: 456 };
+
+foo.bar = 456; // ok
+fooReadonly.bar = 456; // Error: bar 属性只读
+```
+
+In React
+
+```ts
+class Something extends React.Component<{ foo: number }, { baz: number }> {
+  someMethod() {
+    this.props.foo = 123; // Error: props 是不可变的
+    this.state.baz = 456; // Error: 你应该使用 this.setState()
+  }
+}
 ```
 
 ## Literal Types
@@ -662,6 +754,57 @@ configure('automatic');
 // to parameter of type 'Options | "auto"'.
 ```
 
+## Template Literal Types
+
+- Based on literal types.
+- 4 intrinsic String Manipulation Types:
+  - `Uppercase<StringType>`
+  - `Lowercase<StringType>`
+  - `Capitalize<StringType>`
+  - `Uncapitalize<StringType>`
+
+```ts
+type PropEventSource<Type> = {
+  on<Key extends string & keyof Type>(
+    eventName: `${Key}Changed`,
+    callback: (newValue: Type[Key]) => void
+  ): void;
+};
+
+// Create a "watched object" with an 'on' method
+// so that you can watch for changes to properties.
+declare function makeWatchedObject<Type>(
+  obj: Type
+): Type & PropEventSource<Type>;
+
+const person = makeWatchedObject({
+  firstName: 'Yi',
+  lastName: 'Long',
+  age: 26,
+});
+
+person.on('firstNameChanged', (newName) => {
+  // (parameter) newName: string
+  console.log(`new name is ${newName.toUpperCase()}`);
+});
+
+person.on('ageChanged', (newAge) => {
+  // (parameter) newAge: number
+  if (newAge < 0) {
+    console.warn('warning! negative age');
+  }
+});
+
+// It's typo-resistent
+person.on('firstName', () => {});
+// Argument of type '"firstName"' is not assignable to
+// parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
+
+person.on('fstNameChanged', () => {});
+// Argument of type '"fstNameChanged"' is not assignable to
+// parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
+```
+
 ## Moving Types
 
 ```ts
@@ -692,106 +835,6 @@ let color: Colors; // color 的类型是 'red' | 'blue' (literal types)
 color = 'red'; // ok
 color = 'blue'; // ok
 color = 'anythingElse'; // Error
-```
-
-## Access Modifiers
-
-### Member Access Modifiers
-
-Public, Protected and Private:
-
-```ts
-class Singleton {
-  private static instance: Singleton;
-  private constructor() {
-    // ..
-  }
-
-  public static getInstance() {
-    if (!Singleton.instance) {
-      Singleton.instance = new Singleton();
-    }
-
-    return Singleton.instance;
-  }
-
-  someMethod() {}
-}
-
-let someThing = new Singleton(); // Error: constructor of 'singleton' is private
-
-let instance = Singleton.getInstance(); // do some thing with the instance
-```
-
-### readonly
-
-readonly type
-
-```ts
-type Foo = {
-  readonly bar: number;
-  readonly bas: number;
-};
-
-// 初始化
-const foo: Foo = { bar: 123, bas: 456 };
-
-// 不能被改变
-foo.bar = 456; // Error: foo.bar 为仅读属性
-```
-
-readonly indexable signature
-
-```ts
-interface Foo {
-  readonly [x: number]: number;
-}
-
-// 使用
-
-const foo: Foo = { 0: 123, 2: 345 };
-console.log(foo[0]); // ok（读取）
-foo[0] = 456; // Error: 属性只读
-```
-
-readonly properties of class
-
-```ts
-class Foo {
-  readonly bar = 1; // OK
-  readonly baz: string;
-  constructor() {
-    this.baz = 'hello'; // OK
-  }
-}
-```
-
-Readonly generic type
-
-```ts
-type Foo = {
-  bar: number;
-  bas: number;
-};
-
-type FooReadonly = Readonly<Foo>;
-
-const foo: Foo = { bar: 123, bas: 456 };
-const fooReadonly: FooReadonly = { bar: 123, bas: 456 };
-
-foo.bar = 456; // ok
-fooReadonly.bar = 456; // Error: bar 属性只读
-```
-
-in React
-
-```ts
-class Something extends React.Component<{ foo: number }, { baz: number }> {
-  someMethod() {
-    this.props.foo = 123; // Error: props 是不可变的
-    this.state.baz = 456; // Error: 你应该使用 this.setState()
-  }
-}
 ```
 
 ## Generic Types
@@ -1016,57 +1059,6 @@ function mapDispatchToProps(
 
 export default connect<StateProps, DispatchProps, OwnProps>
   (mapStateToProps, mapDispatchToProps)(MyComponent)
-```
-
-## Template Literal Types
-
-- Based on literal types.
-- 4 intrinsic String Manipulation Types:
-  - `Uppercase<StringType>`
-  - `Lowercase<StringType>`
-  - `Capitalize<StringType>`
-  - `Uncapitalize<StringType>`
-
-```ts
-type PropEventSource<Type> = {
-  on<Key extends string & keyof Type>(
-    eventName: `${Key}Changed`,
-    callback: (newValue: Type[Key]) => void
-  ): void;
-};
-
-// Create a "watched object" with an 'on' method
-// so that you can watch for changes to properties.
-declare function makeWatchedObject<Type>(
-  obj: Type
-): Type & PropEventSource<Type>;
-
-const person = makeWatchedObject({
-  firstName: 'Yi',
-  lastName: 'Long',
-  age: 26,
-});
-
-person.on('firstNameChanged', (newName) => {
-  // (parameter) newName: string
-  console.log(`new name is ${newName.toUpperCase()}`);
-});
-
-person.on('ageChanged', (newAge) => {
-  // (parameter) newAge: number
-  if (newAge < 0) {
-    console.warn('warning! negative age');
-  }
-});
-
-// It's typo-resistent
-person.on('firstName', () => {});
-// Argument of type '"firstName"' is not assignable to
-// parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
-
-person.on('fstNameChanged', () => {});
-// Argument of type '"fstNameChanged"' is not assignable to
-// parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
 ```
 
 ## Conditional Types
