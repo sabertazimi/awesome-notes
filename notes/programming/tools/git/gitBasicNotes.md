@@ -508,7 +508,7 @@ git checkout -b [new-local-branch] [remoteName]/[branch]
 - Delete remote branch
 
 ```bash
-git push origin --delete [remote-branch-name]
+git push --delete origin [remote-branch-name]
 ```
 
 ### Advanced Branch Workflow
