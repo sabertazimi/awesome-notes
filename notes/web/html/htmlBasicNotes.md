@@ -846,7 +846,7 @@ sudo systemctl restart nginx
 - [Definitive Guide](https://css-tricks.com/how-to-section-your-html)
 - [Semantic HTML Presentation](http://justineo.github.io/slideshows/semantic-html/#/)
 
-### Structure Access
+### Structure Accessibility
 
 - header
 - main
@@ -856,7 +856,7 @@ sudo systemctl restart nginx
 - nav
 - aside
 
-#### Body Access
+#### Body Accessibility
 
 ```html
 <header>
@@ -872,7 +872,7 @@ sudo systemctl restart nginx
 <footer></footer>
 ```
 
-#### Article Access
+#### Article Accessibility
 
 The `<article>` element is used to represent a fully self-contained region of content
 
@@ -912,9 +912,9 @@ The `<article>` element is used to represent a fully self-contained region of co
 </form>
 ```
 
-### Element Access
+### Element Accessibility
 
-#### Reference Access
+#### Reference Accessibility
 
 - `<cite>`
 - `<q>`
@@ -941,7 +941,7 @@ The `<article>` element is used to represent a fully self-contained region of co
 <cite>– Ados Huxley, Brave New World</cite>
 ```
 
-#### Text Access
+#### Text Accessibility
 
 - `<b>`
 - `<strong>`
@@ -955,20 +955,20 @@ The `<article>` element is used to represent a fully self-contained region of co
 - `<em>` 强调文本
 - `<mark>` 元素表示某些相关性的文本
 
-#### Button Access
+#### Button Accessibility
 
 Use `<button>` for clickable elements
 
-#### Image Access
+#### Image Accessibility
 
 - alt=""
 
-#### Audio Source Access
+#### Audio Source Accessibility
 
 - src=""
 - type=""
 
-#### Figure Access
+#### Figure Accessibility
 
 ```html
 <figure>
@@ -978,7 +978,7 @@ Use `<button>` for clickable elements
 </figure>
 ```
 
-#### Form Access
+#### Form Accessibility
 
 - label[for] input
 
@@ -989,13 +989,13 @@ Use `<button>` for clickable elements
 </form>
 ```
 
-#### Time Access
+#### Time Accessibility
 
 ```html
 <time datetime="2016-09-15">Thursday, September 15<sup>th</sup></time>
 ```
 
-#### Address Access
+#### Address Accessibility
 
 ```html
 <footer>
@@ -1021,7 +1021,7 @@ Use `<button>` for clickable elements
 
 - more than 4.5:1 ratio
 
-#### Access key and Tabindex
+#### Keys and Tabindex Accessibility
 
 ```html
 <a id="second" href="" accesskey="c"></a>
@@ -1131,3 +1131,10 @@ listExpander.addEventListener('click', (e) => {
   }
 });
 ```
+
+### Best Practice Tips for Accessibility
+
+- [Web Accessibility Initiative-Accessible Rich Internet Applications](https://www.sitepoint.com/wai-aria 'WAI-ARIA')
+- Don't use `aria-hidden` on the `<body>` element.
+- Make sure `IDs` and `Keys` of elements are unique.
+- Make sure `document` has a `title` element (with tool like `react-helmet`).
