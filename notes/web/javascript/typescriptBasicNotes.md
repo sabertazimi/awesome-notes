@@ -1016,7 +1016,7 @@ export default connect<StateProps, DispatchProps, OwnProps>
 
 ## Mapped Types
 
-Some useful mapped types:
+### Useful Mapped Types
 
 ```ts
 type Readonly<T> = { readonly [P in keyof T]: T[P] };
@@ -1060,6 +1060,57 @@ type ReturnType<T extends (...args: any) => any> = T extends (
 ) => infer R
   ? R
   : any;
+```
+
+## Template Literal Types
+
+- Based on literal types.
+- 4 intrinsic String Manipulation Types:
+  - `Uppercase<StringType>`
+  - `Lowercase<StringType>`
+  - `Capitalize<StringType>`
+  - `Uncapitalize<StringType>`
+
+```ts
+type PropEventSource<Type> = {
+  on<Key extends string & keyof Type>(
+    eventName: `${Key}Changed`,
+    callback: (newValue: Type[Key]) => void
+  ): void;
+};
+
+// Create a "watched object" with an 'on' method
+// so that you can watch for changes to properties.
+declare function makeWatchedObject<Type>(
+  obj: Type
+): Type & PropEventSource<Type>;
+
+const person = makeWatchedObject({
+  firstName: 'Yi',
+  lastName: 'Long',
+  age: 26,
+});
+
+person.on('firstNameChanged', (newName) => {
+  // (parameter) newName: string
+  console.log(`new name is ${newName.toUpperCase()}`);
+});
+
+person.on('ageChanged', (newAge) => {
+  // (parameter) newAge: number
+  if (newAge < 0) {
+    console.warn('warning! negative age');
+  }
+});
+
+// It's typo-resistent
+person.on('firstName', () => {});
+// Argument of type '"firstName"' is not assignable to
+// parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
+
+person.on('fstNameChanged', () => {});
+// Argument of type '"fstNameChanged"' is not assignable to
+// parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
 ```
 
 ## Conditional Types
@@ -1159,6 +1210,72 @@ const foo = (): string => {
 
 // string
 type FooReturnType = ReturnType<typeof foo>;
+```
+
+## Type Guards
+
+### Type Predicates
+
+- `is` keyword for type predicate.
+
+```ts
+export type Falsy = false | '' | 0 | null | undefined;
+
+export const isFalsy = (val: unknown): val is Falsy => !val;
+```
+
+### In Type Guard
+
+```ts
+type Fish = { swim: () => void };
+type Bird = { fly: () => void };
+
+function move(animal: Fish | Bird) {
+  if ('swim' in animal) {
+    return animal.swim();
+  }
+
+  return animal.fly();
+}
+```
+
+### Instance Type Guard
+
+```ts
+function logValue(x: Date | string) {
+  if (x instanceof Date) {
+    console.log(x.toUTCString());
+  } else {
+    console.log(x.toUpperCase());
+  }
+}
+```
+
+### Never Type
+
+- The `never` type is assignable to every type.
+- No type is assignable to `never` (except `never` itself).
+
+```ts
+interface Triangle {
+  kind: "triangle";
+  sideLength: number;
+}
+
+type Shape = Circle | Square | Triangle;
+
+function getArea(shape: Shape) {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2;
+    case "square":
+      return shape.sideLength ** 2;
+    default:
+      const _exhaustiveCheck: never = shape;
+Type 'Triangle' is not assignable to type 'never'.
+      return _exhaustiveCheck;
+  }
+}
 ```
 
 ## Mixins
