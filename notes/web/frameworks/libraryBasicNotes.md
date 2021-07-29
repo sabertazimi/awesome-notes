@@ -756,10 +756,9 @@
 
 - [Jest](https://github.com/facebook/jest)
 - [Jest UI](https://github.com/Raathigesh/majestic)
-- [Enzyme](https://github.com/enzymejs/enzyme)
 - [React Testing Library](https://github.com/testing-library/react-testing-library)
-- [Jasmine](https://github.com/jasmine/jasmine)
 - [Mocha](https://github.com/mochajs/mocha)
+- [Jasmine](https://github.com/jasmine/jasmine)
 - [Assert](https://github.com/power-assert-js/power-assert)
 - [Testem](https://github.com/testem/testem)
 
