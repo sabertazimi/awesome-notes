@@ -7489,6 +7489,15 @@ describe('Link should', () => {
   benefiting for a11y components
   (write tests > build accessible components > tests pass).
 
+But sometimes may need to test the internals of the component
+when just testing the DOM from user’s perspective may not make sense.
+
+So depending on the use cases,
+we can choose between these two libraries
+or just install them all for individual use cases.
+
+> Enzyme for Internal API, React testing library for user behavior.
+
 #### React Testing Library Installation
 
 <!-- markdownlint-disable line-length -->
