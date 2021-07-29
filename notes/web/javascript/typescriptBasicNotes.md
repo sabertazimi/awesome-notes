@@ -1145,6 +1145,7 @@ type Partial<T> = { [P in keyof T]?: T[P] };
 type ReadonlyPartial<T> = { readonly [P in keyof T]?: T[P] };
 type Required<T> = { [P in keyof T]-?: T[P] };
 type Nullable<T> = { [P in keyof T]: T[P] | null };
+type NonNullable<T> = T extends null | undefined ? never : T;
 type Clone<T> = { [P in keyof T]: T[P] };
 type Stringify<T> = { [P in keyof T]: string };
 ```
@@ -1292,6 +1293,48 @@ type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>;
 // }
 ```
 
+## Utility Types
+
+### Null Type
+
+```ts
+type Nullish = null | undefined;
+type Nullable<T> = T | null;
+type NonUndefinedable<A> = A extends undefined ? never : A;
+type NonNullable<T> = T extends null | undefined ? never : T;
+```
+
+### Boolean Type
+
+```ts
+type Falsy = false | '' | 0 | null | undefined;
+const isFalsy = (val: unknown): val is Falsy => !val;
+```
+
+### Primitive
+
+```ts
+type Primitive = string | number | boolean | bigint | symbol | null | undefined;
+
+const isPrimitive = (val: unknown): val is Primitive => {
+  if (val === null || val === undefined) {
+    return true;
+  }
+
+  const typeDef = typeof val;
+
+  const primitiveNonNullishTypes = [
+    'string',
+    'number',
+    'bigint',
+    'boolean',
+    'symbol',
+  ];
+
+  return primitiveNonNullishTypes.indexOf(typeDef) !== -1;
+};
+```
+
 ## Type Inference
 
 - 类型系统在获得足够的信息后,
@@ -1337,9 +1380,8 @@ type FooReturnType = ReturnType<typeof foo>;
 - `is` keyword for type predicate.
 
 ```ts
-export type Falsy = false | '' | 0 | null | undefined;
-
-export const isFalsy = (val: unknown): val is Falsy => !val;
+type Falsy = false | '' | 0 | null | undefined;
+const isFalsy = (val: unknown): val is Falsy => !val;
 ```
 
 ### In Type Guard
