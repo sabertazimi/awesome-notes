@@ -721,6 +721,32 @@ type Age2 = Person['age'];
 // type Age2 = number
 ```
 
+`{ [K in keyof T]: ... }[keyof T]`: 返回键名 (键名组成的联合类型)
+
+```ts
+type PickByValueType<T, ValueType> = Pick<
+  T,
+  { [Key in keyof T]-?: T[Key] extends ValueType ? Key : never }[keyof T]
+>;
+
+type OmitByValueType<T, ValueType> = Pick<
+  T,
+  { [Key in keyof T]-?: T[Key] extends ValueType ? never : Key }[keyof T]
+>;
+
+type RequiredKeys<T> = {
+  [K in keyof T]-?: {} extends Pick<T, K> ? never : K;
+}[keyof T];
+
+type OptionalKeys<T> = {
+  [K in keyof T]-?: {} extends Pick<T, K> ? K : never;
+}[keyof T];
+
+type FunctionTypeKeys<T extends object> = {
+  [K in keyof T]-?: T[K] extends Function ? K : never;
+}[keyof T];
+```
+
 ## Literal Types
 
 ```ts
@@ -1348,8 +1374,20 @@ type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
 ### Recursive Types
 
 ```ts
+export type DeepReadonly<T> = {
+  +readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];
+};
+
+export type DeepMutable<T> = {
+  -readonly [P in keyof T]: T[P] extends object ? DeepMutable<T[P]> : T[P];
+};
+
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
+
+export type DeepRequired<T> = {
+  [P in keyof T]-?: T[P] extends object | undefined ? DeepRequired<T[P]> : T[P];
 };
 ```
 
