@@ -1089,6 +1089,14 @@ export default connect<StateProps, DispatchProps, OwnProps>
 
 ## Conditional Types
 
+- Basic conditional types
+  just like `if else` statement.
+- Nested conditional types
+  just like `switch case` statement.
+- Distributive conditional types
+  just like `map` statement (`loop` statement) on `union` type.
+- COnditional types make TypeScript become real programing type system.
+
 ### Basic Conditional Types
 
 ```ts
