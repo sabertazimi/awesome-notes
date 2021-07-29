@@ -1167,16 +1167,6 @@ type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 type Record<K extends keyof any, T> = { [P in K]: T };
 ```
 
-### Proxy Mapped Types
-
-```ts
-type Proxy<T> = {
-  get(): T;
-  set(value: T): void;
-};
-type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
-```
-
 ### Function Mapped Types
 
 ```ts
@@ -1332,6 +1322,34 @@ const isPrimitive = (val: unknown): val is Primitive => {
   ];
 
   return primitiveNonNullishTypes.indexOf(typeDef) !== -1;
+};
+```
+
+### Promise Types
+
+```ts
+// Get naked Promise<T> type
+export type PromiseType<T extends Promise<any>> = T extends Promise<infer U>
+  ? U
+  : never;
+```
+
+### Proxy Types
+
+```ts
+type Proxy<T> = {
+  get(): T;
+  set(value: T): void;
+};
+
+type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
+```
+
+### Recursive Types
+
+```ts
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 ```
 
