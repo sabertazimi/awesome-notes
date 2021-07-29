@@ -7352,7 +7352,7 @@ node --trace-deprecation node_modules/webpack/bin/webpack.js
 ### Jest Installation
 
 ```bash
-npm i -D jest ts-jest @types/jest enzyme enzyme-adapter-react-16 @types/enzyme
+npm i -D jest ts-jest @types/jest react-test-renderer
 ```
 
 ### Jest Configuration
@@ -7417,7 +7417,7 @@ import * as EnzymeAdapter from 'enzyme-adapter-react-16';
 configure({ adapter: new EnzymeAdapter() });
 ```
 
-### Basic Jest Testing
+### Jest Basic Testing
 
 ```ts
 import * as React from 'react';
@@ -7434,7 +7434,7 @@ describe('Checkbox should', () => {
 });
 ```
 
-### Snapshot Testing
+### Jest Snapshot Testing
 
 - When you run jest first time,
   it will produce an snapshot file.
@@ -7473,15 +7473,30 @@ describe('Link should', () => {
 });
 ```
 
+### Enzyme
+
+`React Internals`:
+
+- Enzyme tests ultimately prevent from modifying component without changing the test.
+- Enzyme tests slowed down development speed and productivity,
+  since every small change requires rewriting some part of tests.
+- Enzyme provide access the DOM of the component.
+  So using enzyme,
+  we are not bound to test the internals
+  but we can test the DOM too.
+
+#### Enzyme Installation
+
+```bash
+npm i -D enzyme enzyme-adapter-react-16 @types/enzyme
+```
+
 ### React Testing Library
 
 #### React Testing Library Mindset
 
 `User behavior` and `A11Y`:
 
-- Enzyme tests ultimately prevent from modifying component without changing the test.
-- Enzyme tests slowed down development speed and productivity,
-  since every small change requires rewriting some part of tests.
 - Rather than tests focusing on the **implementation** (props and state) (Enzyme),
   tests are more focused on **user behavior** (react-testing-library).
 - React testing library enforce to
