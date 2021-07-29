@@ -7367,8 +7367,45 @@ module.exports = {
   },
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  moduleNameMapper: {
+    '^Components/(.*)': '<rootDir>/src/components/$1',
+  },
+  globals: {
+    window: {},
+    'ts-jest': {
+      tsConfig: './tsconfig.json',
+    },
+  },
+  setupFiles: ['./jest.stubs.js'],
+  testURL: 'http://localhost/',
   setupTestFrameworkScriptFile: '<rootDir>/src/setupEnzyme.ts',
 };
+```
+
+`jest.stubs.js`:
+
+```js
+// Global/Window object Stubs for Jest
+window.matchMedia =
+  window.matchMedia ||
+  function () {
+    return {
+      matches: false,
+      addListener: function () {},
+      removeListener: function () {},
+    };
+  };
+
+window.requestAnimationFrame = function (callback) {
+  setTimeout(callback);
+};
+
+window.localStorage = {
+  getItem: function () {},
+  setItem: function () {},
+};
+
+Object.values = () => [];
 ```
 
 `setupEnzyme.ts`:
