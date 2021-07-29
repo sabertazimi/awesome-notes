@@ -230,29 +230,34 @@
 - [Utterances: GitHub Issue Based Comments Widget](https://github.com/utterance/utterances)
 - [Disqus](https://github.com/disqus/disqus-react)
 
-### Message
+### Modal
 
-- [Awesome Prompt Messenger](https://github.com/HubSpot/messenger)
-- [TheaterJS: Typing Effect](https://github.com/Zhouzi/TheaterJS)
-- [Guide Tour](https://github.com/shipshapecode/shepherd)
-- [Intro.js](https://github.com/usablica/intro.js)
+- [WinBox: HTML5 window manager for the web](https://github.com/nextapps-de/winbox)
+
+### Message
 
 #### Page Indicator
 
 - [React Snakke](https://github.com/diogomoretti/react-snakke)
 
-#### Prompt
+#### Prompt Message
 
 - [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
 - [Popper.js](https://github.com/FezVrasta/popper.js)
 - [Humane.js](https://github.com/wavded/humane-js)
 - [Desktop Notification](https://github.com/Nickersoft/push.js)
 - [Nodejs Notification](https://github.com/mikaelbr/node-notifier)
+- [Messenger: Awesome prompt message](https://github.com/HubSpot/messenger)
 
-#### Alert
+#### Alert Message
 
 - [Sweet Alert 2](https://github.com/sweetalert2/sweetalert2)
 - [Sweet Alert](https://github.com/t4t5/sweetalert)
+
+### Guide Message
+
+- [Shepherd: Guide tour library](https://github.com/shipshapecode/shepherd)
+- [Intro.js](https://github.com/usablica/intro.js)
 
 #### Focus
 
