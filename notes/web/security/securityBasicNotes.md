@@ -435,5 +435,5 @@ and security for public/private key pair
 - XSS Protection.
 - Setting a `Context-Security-Policy` header.
 - Ensure all connections to be HTTPS.
-- Avoid Clickingjacking using `X-Frame-Options`.
+- Avoid Clicking-jacking using `X-Frame-Options`.
 - Disable the `X-Powered-By` header.

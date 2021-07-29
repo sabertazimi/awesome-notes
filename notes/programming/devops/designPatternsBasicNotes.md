@@ -1800,7 +1800,7 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
 
 ## Scalability Design
 
-- Prefer composables over mixins.
+- Prefer composites over mixins.
 - Always clone objects between components.
 - Use namespaced state store modules.
 - Write robust tests.

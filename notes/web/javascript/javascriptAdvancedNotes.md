@@ -3389,7 +3389,7 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 一种叫做合成监控 (Synthetic Monitoring, SYN),
 另一种是真实用户监控 (Real User Monitoring, RUM).
 
-#### Syncthetic Monitoring
+#### Synthetic Monitoring
 
 在一个模拟场景里, 去提交一个需要做性能审计的页面,
 通过一系列的工具、规则去运行你的页面, 提取一些性能指标, 得出一个审计报告.
