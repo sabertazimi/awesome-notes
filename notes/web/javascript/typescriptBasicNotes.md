@@ -1129,6 +1129,8 @@ type TypeName<T> = T extends string
 
 - Conditional types in which checked type is `naked type parameter` are called DCT.
 - DCT are automatically distributed over union types during instantiation.
+- When conditional types act on a generic type,
+  they become distributive when given a union type.
 - `( A | B | C ) extends T ? X : Y` 相当于
   `(A extends T ? X : Y) | (B extends T ? X : Y) | (B extends T ? X : Y)`
 - 没有被额外包装的联合类型参数, 在条件类型进行判定时会将联合类型分发, 分别进行判断.
