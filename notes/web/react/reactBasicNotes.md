@@ -27,6 +27,31 @@ React Fiber 的目标是提高其在动画、布局和手势等领域的适用�
 - Pointers to parent, sibling, and child components.
 - Other internal metadata to track rendering process.
 
+#### React Fiber Effects
+
+- Insert DOM elements: `Placement` tag.
+- Update DOM elements: `Update` tag.
+- Delete DOM elements: `Deletion` tag.
+- Update Ref property: `Ref` tag.
+- `useEffect` callback: `got Passive` tag.
+  - `useEffect(fn)`: `Mount` and `Update` lifecycle.
+  - `useEffect(fn, [])`: `Mount` lifecycle.
+  - `useEffect(fn, [deps])`:
+    `Mount` lifecycle and
+    `Update` lifecycle with `deps` changed.
+
+React create effects when `Render` stage,
+then update effects to real DOM when `Commit` stage.
+
+#### React Fiber Trees
+
+- current fiber tree: rendered to screen.
+- workInProgress fiber tree: under reconciliation.
+- When workInProgress fiber tree complete `render` + `commit`,
+  swap 2 fiber tree:
+  - reuse fiber objects.
+  - reduce memory usage and GC time.
+
 ### React Render Stage
 
 #### Elements of Different Types
@@ -48,22 +73,6 @@ React Fiber 的目标是提高其在动画、布局和手势等领域的适用�
 - Methods: `getDerivedStateFromProps`
 - Then `render` called,
   diff algorithm recursively on the old result and the new result.
-
-### React Fiber Effects
-
-- Insert DOM elements: `Placement` tag.
-- Update DOM elements: `Update` tag.
-- Delete DOM elements: `Deletion` tag.
-- Update Ref property: `Ref` tag.
-- `useEffect` callback: `got Passive` tag.
-  - `useEffect(fn)`: `Mount` and `Update` lifecycle.
-  - `useEffect(fn, [])`: `Mount` lifecycle.
-  - `useEffect(fn, [deps])`:
-    `Mount` lifecycle and
-    `Update` lifecycle with `deps` changed.
-
-React create effects when `Render` stage,
-then update effects to real DOM when `Commit` stage.
 
 ### React Commit Stage
 
