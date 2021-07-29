@@ -7475,6 +7475,8 @@ describe('Link should', () => {
 
 ### Enzyme
 
+#### Enzyme Mindset
+
 `React Internals`:
 
 - Enzyme tests ultimately prevent from modifying component without changing the test.
@@ -7556,6 +7558,10 @@ describe('Welcome should', () => {
   });
 });
 ```
+
+#### React Testing Library Reference
+
+- [React testing library cheat sheet](https://testing-library.com/docs/react-testing-library/cheatsheet)
 
 ## E2E Testing
 
