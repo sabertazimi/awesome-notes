@@ -7346,3 +7346,51 @@ node --trace-deprecation node_modules/webpack/bin/webpack.js
 
 - [Webpack 4 Tutorial](https://nystudio107.com/blog/an-annotated-webpack-4-config-for-frontend-web-development)
 - [Custom Plugin](https://juejin.cn/post/6870055445034172424)
+
+## Jest Testing
+
+### Jest Installation
+
+```bash
+npm i -D jest ts-jest @types/jest enzyme enzyme-adapter-react-16 @types/enzyme
+```
+
+### Jest Basic Configuration
+
+`jest.config.js`:
+
+```js
+module.exports = {
+  roots: ['<rootDir>/src'],
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest',
+  },
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  setupTestFrameworkScriptFile: '<rootDir>/src/setupEnzyme.ts',
+};
+```
+
+`setupEnzyme.ts`:
+
+```ts
+import { configure } from 'enzyme';
+import * as EnzymeAdapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new EnzymeAdapter() });
+```
+
+### Basic Jest Testing
+
+```ts
+import * as React from 'react';
+import { shallow } from 'enzyme';
+import { Checkbox } from './Checkbox';
+
+test('Checkbox changes the text after click', () => {
+  const checkbox = shallow(<Checkbox labelOn="On" labelOff="Off" />);
+  expect(checkbox.text()).toEqual('Off');
+  checkbox.find('input').simulate('change');
+  expect(checkbox.text()).toEqual('On');
+});
+```
