@@ -5943,6 +5943,15 @@ const response = await fetch(request);
 
 - [URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams)
 
+## RESTful API
+
+- Client - Server architecture
+- Stateless
+- Cacheable
+- Layer system
+- Code via need
+- Isomorphic interface
+
 ## SSR
 
 - [Server Side Rendering with Puppeteer](https://developers.google.com/web/tools/puppeteer/articles/ssr)
@@ -5957,15 +5966,6 @@ if (isBotAgent) {
   // ReactDOMServer.renderToString()
 }
 ```
-
-## RESTful API
-
-- Client - Server architecture
-- Stateless
-- Cacheable
-- Layer system
-- Code via need
-- Isomorphic interface
 
 ## SEO
 
