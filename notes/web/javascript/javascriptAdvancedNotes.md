@@ -7355,7 +7355,7 @@ node --trace-deprecation node_modules/webpack/bin/webpack.js
 npm i -D jest ts-jest @types/jest enzyme enzyme-adapter-react-16 @types/enzyme
 ```
 
-### Jest Basic Configuration
+### Jest Configuration
 
 `jest.config.js`:
 
@@ -7392,5 +7392,94 @@ test('Checkbox changes the text after click', () => {
   expect(checkbox.text()).toEqual('Off');
   checkbox.find('input').simulate('change');
   expect(checkbox.text()).toEqual('On');
+});
+```
+
+## E2E Testing
+
+### Cypress Installation
+
+```bash
+mkdir e2e
+cd e2e
+npm init -y
+npm install cypress webpack @cypress/webpack-preprocessor typescript ts-loader
+npx cypress open
+```
+
+`cypress open` will initialize the cypress folder structure for us.
+
+### Cypress Configuration
+
+`e2e/plugins/index.js`: setup TypeScript to transpile tests:
+
+```js
+const wp = require('@cypress/webpack-preprocessor');
+
+module.exports = (on) => {
+  const options = {
+    webpackOptions: {
+      resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      },
+      module: {
+        rules: [
+          {
+            test: /\.tsx?$/,
+            loader: 'ts-loader',
+            options: { transpileOnly: true },
+          },
+        ],
+      },
+    },
+  };
+
+  on('file:preprocessor', wp(options));
+};
+```
+
+`e2e/tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["DOM", "ES6"],
+    "jsx": "react",
+    "experimentalDecorators": true
+  },
+  "compileOnSave": false
+}
+```
+
+`e2e/package.json`:
+
+```json
+{
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  }
+}
+```
+
+### Basic Cypress Testing
+
+`integration/component.spec.ts`:
+
+```ts
+/// <reference types="cypress"/>
+
+describe('component', () => {
+  it('should work', () => {
+    cy.visit('http://localhost:8000');
+    cy.get('#onOff')
+      .should('have.text', 'off')
+      .click()
+      .should('have.text', 'on');
+  });
 });
 ```
