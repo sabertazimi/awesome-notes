@@ -265,7 +265,7 @@ Card = 'not a member of card suit'; // Error: string 不能赋值给 `CardSuit` 
 ### String Enum
 
 ```ts
-export enum EvidenceTypeEnum {
+enum EvidenceTypeEnum {
   UNKNOWN = '',
   PASSPORT_VISA = 'passport_visa',
   PASSPORT = 'passport',
@@ -894,15 +894,15 @@ queue.push('1'); // Error：不能推入一个 `string`，只有 number 类型�
 ```
 
 ```ts
-export interface Listener<T> {
+interface Listener<T> {
   (event: T): any;
 }
 
-export interface Disposable {
+interface Disposable {
   dispose(): any;
 }
 
-export class TypedEvent<T> {
+class TypedEvent<T> {
   private listeners: Listener<T>[] = [];
   private listenersOncer: Listener<T>[] = [];
 
@@ -1365,7 +1365,7 @@ const isPrimitive = (val: unknown): val is Primitive => {
 
 ```ts
 // Get naked Promise<T> type
-export type PromiseType<T extends Promise<any>> = T extends Promise<infer U>
+type PromiseType<T extends Promise<any>> = T extends Promise<infer U>
   ? U
   : never;
 ```
@@ -1384,21 +1384,27 @@ type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
 ### Recursive Types
 
 ```ts
-export type DeepReadonly<T> = {
+type DeepReadonly<T> = {
   +readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];
 };
 
-export type DeepMutable<T> = {
+type DeepMutable<T> = {
   -readonly [P in keyof T]: T[P] extends object ? DeepMutable<T[P]> : T[P];
 };
 
-export type DeepPartial<T> = {
+type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
-export type DeepRequired<T> = {
+type DeepRequired<T> = {
   [P in keyof T]-?: T[P] extends object | undefined ? DeepRequired<T[P]> : T[P];
 };
+```
+
+### Lodash Types
+
+```ts
+type Flatten<Type> = Type extends Array<infer Item> ? Item : Type;
 ```
 
 ## Type Inference
