@@ -7475,23 +7475,29 @@ describe('Link should', () => {
 
 ### React Testing Library
 
-The primary purpose of the React Testing Library is to give confidence
-by testing components in the way the **user will use them**.
-Instead of accessing the components internal API (props and state),
-it's more confident by writing tests based on the component output.
+#### React Testing Library Mindset
 
-Enzyme allows (and encourages) developers to test **implementation details**.
-Such Tests ultimately prevent from modifying component without changing the test.
+`User behavior` and `A11Y`:
 
-As a result, the tests slowed down development speed and productivity,
-since every small change requires rewriting some part of tests,
-even if the change does not affect the component output.
+- Enzyme tests ultimately prevent from modifying component without changing the test.
+- Enzyme tests slowed down development speed and productivity,
+  since every small change requires rewriting some part of tests.
+- Rather than tests focusing on the **implementation** (props and state) (Enzyme),
+  tests are more focused on **user behavior** (react-testing-library).
+- React testing library enforce to
+  use `placeholder`, `aria`, `test-ids` to access elements,
+  benefiting for a11y components
+  (write tests > build accessible components > tests pass).
 
 #### React Testing Library Installation
 
+<!-- markdownlint-disable line-length -->
+
 ```bash
-npm i -D @testing-library/react @testing-library/jest-dom
+npm i -D @testing-library/react @testing-library/dom @testing-library/jest-dom @testing-library/user-event
 ```
+
+<!-- markdownlint-enable line-length -->
 
 #### React Testing Library Basis
 
@@ -7503,6 +7509,7 @@ import React from 'react';
  * screen: finding elements along with user
  **/
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('Welcome should', () => {
   test('has correct welcome message', () => {
@@ -7516,6 +7523,12 @@ describe('Welcome should', () => {
       firstName: 'John',
       lastName: 'Doe',
     });
+  });
+
+  test('handles click correctly', () => {
+    render(<Checkbox />);
+    userEvent.click(screen.getByText('Check'));
+    expect(screen.getByLabelText('Check')).toBeChecked();
   });
 });
 ```
