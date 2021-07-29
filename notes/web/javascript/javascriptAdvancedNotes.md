@@ -7424,11 +7424,52 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { Checkbox } from './Checkbox';
 
-test('Checkbox changes the text after click', () => {
-  const checkbox = shallow(<Checkbox labelOn="On" labelOff="Off" />);
-  expect(checkbox.text()).toEqual('Off');
-  checkbox.find('input').simulate('change');
-  expect(checkbox.text()).toEqual('On');
+describe('Checkbox should', () => {
+  test('changes the text after click', () => {
+    const checkbox = shallow(<Checkbox labelOn="On" labelOff="Off" />);
+    expect(checkbox.text()).toEqual('Off');
+    checkbox.find('input').simulate('change');
+    expect(checkbox.text()).toEqual('On');
+  });
+});
+```
+
+### Snapshot Testing
+
+- When you run jest first time,
+  it will produce an snapshot file.
+- The next time run the tests,
+  rendered output will be compared to previously created snapshot.
+- If change is expected,
+  use `jest -u` to overwrite existing snapshot.
+
+```ts
+// Link.react.test.js
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Link from '@components/Link';
+
+describe('Link should', () => {
+  test('changes the class when hovered', () => {
+    const component = renderer.create(
+      <Link page="http://www.facebook.com">Facebook</Link>
+    );
+
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+
+    // manually trigger the callback
+    tree.props.onMouseEnter();
+    // re-rendering
+    tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+
+    // manually trigger the callback
+    tree.props.onMouseLeave();
+    // re-rendering
+    tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
 ```
 
@@ -7445,6 +7486,39 @@ Such Tests ultimately prevent from modifying component without changing the test
 As a result, the tests slowed down development speed and productivity,
 since every small change requires rewriting some part of tests,
 even if the change does not affect the component output.
+
+#### React Testing Library Installation
+
+```bash
+npm i -D @testing-library/react @testing-library/jest-dom
+```
+
+#### React Testing Library Basis
+
+```ts
+import React from 'react';
+
+/**
+ * render: render the component
+ * screen: finding elements along with user
+ **/
+import { render, screen } from '@testing-library/react';
+
+describe('Welcome should', () => {
+  test('has correct welcome message', () => {
+    render(<Welcome firstName="John" lastName="Doe" />);
+    expect(screen.getByRole('heading')).toHaveTextContent('Welcome, John Doe');
+  });
+
+  test('has correct input value', () => {
+    render(<Welcome firstName="John" lastName="Doe" />);
+    expect(screen.getByRole('form')).toHaveFormValues({
+      firstName: 'John',
+      lastName: 'Doe',
+    });
+  });
+});
+```
 
 ## E2E Testing
 
