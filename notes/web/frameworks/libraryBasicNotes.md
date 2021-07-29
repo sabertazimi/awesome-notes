@@ -319,6 +319,7 @@
 - [React Spectacle](https://github.com/FormidableLabs/spectacle)
 - [Reveal.js HTML Presentation](https://github.com/hakimel/reveal.js)
 - [Glider.js](https://github.com/NickPiscitelli/Glider.js)
+- [SliDev](https://github.com/slidevjs/slidev)
 - [CLI Animation Presentation](https://github.com/neatsoftware/term-sheets)
 - [Awesome Prezi-Like Presentation](https://github.com/impress/impress.js)
 - [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
