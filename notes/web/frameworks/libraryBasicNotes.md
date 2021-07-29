@@ -108,6 +108,10 @@
 - [String Manipulation](https://github.com/dleitee/strman)
 - [Fuzzy String Matching](https://github.com/nol13/fuzzball.js)
 
+### Asynchronous Utils
+
+[GRFN: Executes a dependency graph of async functions concurrently](https://github.com/TomerAberbach/grfn))
+
 ### Hash Utils
 
 - [UUID](https://github.com/uuidjs/uuid)
@@ -584,9 +588,6 @@
 
 ## File
 
-- [zTree v3](https://github.com/zTree/zTree_v3)
-- [FileAPI](https://github.com/mailru/FileAPI)
-
 ### File Uploader
 
 - [React Filepond](https://github.com/pqina/react-filepond)
@@ -600,8 +601,9 @@
 
 ### File Utils
 
-- [Human Readable File Size](https://github.com/avoidwork/filesize.js)
+- [FileAPI](https://github.com/mailru/FileAPI)
 - [Globby](https://github.com/sindresorhus/globby)
+- [Steno: Specialized fast async file writer](https://github.com/typicode/steno)
 - [File Type](https://github.com/sindresorhus/file-type)
 - [File Size](https://github.com/avoidwork/filesize.js)
 
