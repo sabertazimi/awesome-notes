@@ -4,6 +4,13 @@
 
 ## Core of React
 
+### React Virtual DOM
+
+- Reduce rendering times with reconciliation algorithm,
+  improving rendering efficiency.
+- Cross platform code.
+- Functional programming without details on DOM manipulation.
+
 ### React Fiber
 
 - [A Simple React with Fiber Reconciliation](https://github.com/sabertazimi/meactjs)
