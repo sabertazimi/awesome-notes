@@ -1909,6 +1909,11 @@ use `extends {}` to avoid it:
 const foo = <T extends {}>(arg: T) => arg;
 ```
 
+#### Component Return Type
+
+- `JSX.Element`: return value of `React.createElement`.
+- `React.ReactNode`: return value of a component.
+
 ### Redux
 
 ```typescript
