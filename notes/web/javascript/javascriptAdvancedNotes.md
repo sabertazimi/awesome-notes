@@ -7432,6 +7432,20 @@ test('Checkbox changes the text after click', () => {
 });
 ```
 
+### React Testing Library
+
+The primary purpose of the React Testing Library is to give confidence
+by testing components in the way the **user will use them**.
+Instead of accessing the components internal API (props and state),
+it's more confident by writing tests based on the component output.
+
+Enzyme allows (and encourages) developers to test **implementation details**.
+Such Tests ultimately prevent from modifying component without changing the test.
+
+As a result, the tests slowed down development speed and productivity,
+since every small change requires rewriting some part of tests,
+even if the change does not affect the component output.
+
 ## E2E Testing
 
 ### Cypress Installation
