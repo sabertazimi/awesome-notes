@@ -1193,6 +1193,12 @@ type ReturnType<T extends (...args: any) => any> = T extends (
 ) => infer R
   ? R
   : any;
+
+type InstanceType<T extends new (...args: any) => any> = T extends new (
+  ...args: any
+) => infer R
+  ? R
+  : any;
 ```
 
 ### Custom Mapped Types
@@ -1304,6 +1310,12 @@ type ConstructorParameters<T extends new (...args: any) => any> =
 
 type ReturnType<T extends (...args: any) => any> = T extends (
   ...args: any[]
+) => infer R
+  ? R
+  : any;
+
+type InstanceType<T extends new (...args: any) => any> = T extends new (
+  ...args: any
 ) => infer R
   ? R
   : any;
