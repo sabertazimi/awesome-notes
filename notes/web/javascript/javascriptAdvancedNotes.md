@@ -7559,6 +7559,13 @@ describe('Welcome should', () => {
 });
 ```
 
+#### React Testing Library Events
+
+- `fireEvent` trigger DOM event: `fireEvent(node, event)`.
+- `fireEvent.*` helpers for default event types:
+  - click fireEvent.click(node).
+  - See [all supported events](https://github.com/testing-library/dom-testing-library/blob/main/src/event-map.js).
+
 #### React Testing Library Reference
 
 - [React testing library cheat sheet](https://testing-library.com/docs/react-testing-library/cheatsheet)
