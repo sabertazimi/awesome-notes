@@ -52,6 +52,11 @@ then update effects to real DOM when `Commit` stage.
   - reuse fiber objects.
   - reduce memory usage and GC time.
 
+### React Diff Stage
+
+- O(n) incomplete tree comparison: only compare same level nodes.
+- `key` prop to hint for nodes reuse.
+
 ### React Render Stage
 
 #### Elements of Different Types
