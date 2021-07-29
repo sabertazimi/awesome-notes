@@ -126,6 +126,8 @@
 - [TS Node](https://github.com/TypeStrong/ts-node)
 - [TS Jest](https://github.com/kulshekhar/ts-jest)
 - [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
+- [TypeFest: TypeScript Utility Types](https://github.com/sindresorhus/type-fest)
+- [UtilTypes: TypeScript Utility Types](https://github.com/piotrwitek/utility-types)
 
 #### IOC and DI Utils
 
