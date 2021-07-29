@@ -1401,6 +1401,8 @@ type DeepRequired<T> = {
 };
 ```
 
+- [`PathOf<Form>` complex recursive types](https://mp.weixin.qq.com/s/KJdUdwbLN4g4M7xy34m-fA)
+
 ### Lodash Types
 
 ```ts
