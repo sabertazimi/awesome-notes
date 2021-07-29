@@ -306,7 +306,7 @@
 
 ### Table
 
-- [React Table(with Hooks API)](https://github.com/tannerlinsley/react-table)
+- [React Table (with Hooks API)](https://github.com/tannerlinsley/react-table)
 - [React Data Sheet](https://github.com/nadbm/react-datasheet)
 - [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
 
@@ -760,8 +760,7 @@
 ### Feature Testing
 
 - [Karma](https://github.com/karma-runner/karma)
-- [Webkit API(Chrome)](https://github.com/ariya/phantomjs)
-- [Gecko API(Firefox)](https://github.com/laurentj/slimerjs)
+- [Gecko API](https://github.com/laurentj/slimerjs)
 - [Interactor.js](https://github.com/wwilsman/interactor.js)
 
 ### End to End Testing
@@ -775,8 +774,9 @@
 
 ### Headless Web Tools
 
-- [Cheerio: jQuery Server Tools](https://github.com/cheeriojs/cheerio)
 - [Puppeteer: Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
+- [Webkit API](https://github.com/ariya/phantomjs)
+- [Cheerio: jQuery Server Tools](https://github.com/cheeriojs/cheerio)
 
 ### Code Analysis Tools
 
@@ -833,15 +833,24 @@
 
 ### Mock Tools
 
-- [Public APIs](https://github.com/public-apis/public-apis)
+#### Mock Servers
+
 - [JSON Server](https://github.com/typicode/json-server)
-- [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter)
-- [YAPI](https://github.com/ymfe/yapi)
 - [Nock Server](https://github.com/nock/nock)
+- [Prism: Mocking and contract testing with OpenAPI](https://github.com/stoplightio/prism)
+
+#### Mock APIs
+
+- [YAPI](https://github.com/ymfe/yapi)
+- [Public APIs](https://github.com/public-apis/public-apis)
+- [Pokemon API](https://github.com/PokeAPI/pokeapi)
+- [Images API](http://source.unsplash.com/random)
+
+#### Mock Utils
+
+- [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter)
 - [Mock Service Worker](https://github.com/mswjs/msw)
 - [Mockery Function](https://github.com/mfncooper/mockery)
-- [Pokemon API](https://github.com/PokeAPI/pokeapi)
-- [Images Mock](http://source.unsplash.com/random)
 
 ### Security Tools
 
