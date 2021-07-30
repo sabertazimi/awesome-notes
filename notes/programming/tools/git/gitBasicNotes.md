@@ -2,15 +2,13 @@
 
 [TOC]
 
-## Basic
-
-### Config
+## Git Configuration
 
 - /etc/gitconfig
 - ~/.gitconfig 或 ~/.config/git/config
 - repo/.git/config
 
-#### Basic Configuration
+### Basic Configuration
 
 ```bash
 git config --global user.name "sabertazimi"
@@ -36,7 +34,7 @@ git config --global rebase.autoStash true
 git config --global help.autocorrect 10
 ```
 
-#### Proxy Configuration
+### Proxy Configuration
 
 - github.com.cnpmjs.org
 - hub.fastgit.org
@@ -56,7 +54,7 @@ git config --global http.proxy 'socks5://127.0.0.1:1080'
 git config --global https.proxy 'socks5://127.0.0.1:1080'
 ```
 
-#### List and Help
+### List and Help
 
 ```bash
 git config --list
@@ -66,14 +64,14 @@ git help
 git help config
 ```
 
-### File State
+## File State
 
 - Untracked
 - Unmodified(**Stable State**)
 - Modified
 - Staged
 
-### Git Ignore File
+## Git Ignore File
 
 文件 .gitignore 的格式规范如下：
 
@@ -104,7 +102,7 @@ doc/*.txt
 doc/**/*.pdf
 ```
 
-### Diff
+## Diff
 
 查看未暂存(un-staged)差异
 
@@ -124,7 +122,7 @@ git diff --staged
 git diff --check
 ```
 
-### Add
+## Add
 
 - 交互式的选择 add 特定部分
 
@@ -132,7 +130,7 @@ git diff --check
 git add -p
 ```
 
-### Commit
+## Commit
 
 - -a: 跳过暂存阶段(git add)
 - -v: 显示详细 diff 信息
@@ -147,10 +145,14 @@ git commit -a -v
 git commit --amend -a -v
 ```
 
-#### Commit Style Guide
+### Commit Style Guide
+
+```bash
+npx commitizen init cz-conventional-changelog --save-dev --save-exact
+```
 
 ```md
-firstLine - <type>(<scope>): <subject>
+<type>(<scope>): <subject>
 (emptyLine)
 
 <body>
@@ -158,23 +160,25 @@ firstLine - <type>(<scope>): <subject>
 <footer>
 ```
 
-##### Message Subject
+#### Message Subject
 
 no more than 50 characters
 
-###### Type Values
+#### Commit Type
 
-- (production code change)
-  - feat (new feature for the user)
-  - fix (bug fix for the user)
-  - docs (changes to the documentation)
-  - refactor (refactoring production code, e.g. renaming a variable)
-- (no production code change)
-  - style (formatting, missing semi colons)
-  - test (adding missing tests, refactoring tests)
-  - chore (updating grunt tasks etc)
+- feat: 新增了一个功能 (MINOR Version).
+- fix: 修复了一个 bug (PATCH Version）.
+- docs: 只是更改文档.
+- style: 不影响代码含义的变化 (空白、格式化、缺少分号等).
+- refactor: 代码重构, 既不修复错误也不添加功能.
+- perf: 改进性能的代码更改.
+- test: 添加确实测试或更正现有的测试.
+- build: 影响构建系统或外部依赖关系的更改 (示例范围: gulp, broccoli, NPM).
+- ci: 更改持续集成文件和脚本 (示例范围: Travis, Circle, BrowserStack, SauceLabs).
+- chore:  其他不修改 src 或 test 文件.
+- revert: commit 回退.
 
-###### Scope Values
+#### Scope Values
 
 - init
 - runner
@@ -184,21 +188,21 @@ no more than 50 characters
 - proxy
 - empty
 
-##### Message Body
+#### Message Body
 
 - uses the imperative, present tense: “change” not “changed” nor “changes”
 - includes **motivation** for the change and contrasts with previous behavior
 
-##### Message Footer
+#### Message Footer
 
 - referencing issues e.g. close #666, #888
-- breaking changes 碎片式更改(特别是**用户端**)
+- BREAKING CHANGE (MAJOR Version)
   e.g.`port-runner` command line option has changed to `runner-port`,
   so that it is consistent with the configuration file syntax.
   To migrate your project, change all the commands, where you use `--port-runner`
   to `--runner-port`.
 
-### Stash
+## Stash
 
 - git stash: 备份当前的工作区的内容，将当前的工作区内容保存到 Git 栈
 - git stash apply/pop: 从 Git 栈中读取最近一次保存的内容，恢复工作区的相关内容
@@ -218,7 +222,7 @@ git restore -s stash@{0} -- <filename>
 git checkout stash@{0} -- <filename>
 ```
 
-### Revert
+## Revert
 
 - 重新提交前 n 次的 commit
 
@@ -226,7 +230,7 @@ git checkout stash@{0} -- <filename>
 git revert -n
 ```
 
-### Remove
+## Remove
 
 完全删除文件
 
@@ -240,13 +244,13 @@ git rm filename
 git rm --cached filename
 ```
 
-### Move
+## Move
 
 ```bash
 git mv old_path new_path
 ```
 
-### Log
+## Log
 
 - -p: 打印 diff 差异信息
 - -n: n 为十进制数字,显示最近 n 次信息
@@ -264,7 +268,7 @@ git mv old_path new_path
 git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks path_name
 ```
 
-#### Pretty Format
+### Pretty Format
 
 | 选项 | 说明                                        |
 | :--- | :------------------------------------------ |
@@ -285,7 +289,7 @@ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks p
 | %cr  | 提交日期,按多久以前的方式显示               |
 | %s   | 提交说明                                    |
 
-#### Log Options
+### Log Options
 
 | 选项               | 说明                                                    |
 | :----------------- | :------------------------------------------------------ |
@@ -300,7 +304,7 @@ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks p
 | --before=/--until= | 限制日志时间 "2008-01-15" "2 years 1 day 3 minutes ago" |
 | --help             |
 
-### Reflog
+## Reflog
 
 `git reflog show` is an alias for
 `git log -g --abbrev-commit --pretty=oneline`.
@@ -310,7 +314,7 @@ git reflog
 git reset HEAD@{index}
 ```
 
-### Show
+## Show
 
 - 查看其他分支 或 提交点的文件状态
 
@@ -318,7 +322,7 @@ git reset HEAD@{index}
 git show branchName/commitHash:fileName
 ```
 
-### Remote
+## Remote
 
 添加与删除远程仓库源
 
@@ -358,7 +362,7 @@ git push origin --delete [remote-branch-name]
 git config --global credential.helper store
 ```
 
-### Tag
+## Tag
 
 列出标记及其信息
 
@@ -393,7 +397,7 @@ git push [remote-name] --tags
 git push --follow-tags
 ```
 
-### Alias
+## Alias
 
 - !: 执行外部命令
 
@@ -409,11 +413,11 @@ git config --global alias.last 'log -1 HEAD'
 git config --global alias.visual '!gitk'
 ```
 
-### Merge
+## Merge
 
 合并的结果是生成一个新的快照(并提交)(新的提交对象)
 
-### Rebase
+## Rebase
 
 切换到工作分支,编码开发新特性
 
