@@ -117,9 +117,10 @@
 - [Globby: User-friendly glob matching](https://github.com/sindresorhus/globby)
 - [Git URL Parse](https://github.com/IonicaBizau/git-url-parse)
 
-### Asynchronous Utils
+### Concurrent and Parallel Programming Utils
 
-[GRFN: Executes a dependency graph of async functions concurrently](https://github.com/TomerAberbach/grfn))
+- [WorkerPool](https://github.com/josdejong/workerpool)
+- [GRFN: Executes a dependency graph of async functions concurrently](https://github.com/TomerAberbach/grfn)
 
 ### Hash Utils
 
