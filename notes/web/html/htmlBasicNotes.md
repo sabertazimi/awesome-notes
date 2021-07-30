@@ -727,9 +727,9 @@ figure 可拥有唯一的 0/1 个 figcaption
 
 ```html
 <picture>
-  <source srcset="foo.avif" type="image/avif">
-  <source srcset="foo.webp" type="image/webp">
-  <img src="foo.jpg">
+  <source srcset="foo.avif" type="image/avif" />
+  <source srcset="foo.webp" type="image/webp" />
+  <img src="foo.jpg" />
 </picture>
 ```
 
