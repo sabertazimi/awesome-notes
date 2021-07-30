@@ -54,7 +54,11 @@
 ### Back-end Solution
 
 - [Egg.js](https://github.com/eggjs/egg)
-- [Feathers.js: RESTful API](https://github.com/feathersjs/feathers)
+- [Nest: Enterprise-grade server-side applications on top of TypeScript](https://github.com/nestjs/nest)
+- [Koa: Expressive middleware using ES2017 async functions](https://github.com/koajs/koa)
+- [Fastify: Fast and low overhead web framework](https://github.com/fastify/fastify)
+- [Sails: Realtime MVC framework](https://github.com/balderdashy/sails)
+- [Feathers.js: REST APIs with TypeScript](https://github.com/feathersjs/feathers)
 
 ### Full Stack Solution
 
@@ -700,6 +704,7 @@
 ### Web Socket
 
 - [Socket.IO](https://github.com/socketio/socket.io)
+- [WebSockets](https://github.com/websockets/ws)
 - [uWebSockets: Simple, secure and standards compliant sockets](https://github.com/uNetworking/uWebSockets)
 - [SocketCluster: Highly scalable realtime framework](https://github.com/SocketCluster/socketcluster)
 
