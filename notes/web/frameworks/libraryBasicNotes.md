@@ -112,6 +112,10 @@
 - [String Manipulation](https://github.com/dleitee/strman)
 - [Fuzzy String Matching](https://github.com/nol13/fuzzball.js)
 - [SemVer](https://www.npmjs.com/package/semver)
+- [Glob: Glob functionality for Node](https://github.com/isaacs/node-glob)
+- [Minimatch: Glob matcher](https://github.com/isaacs/minimatch)
+- [Globby: User-friendly glob matching](https://github.com/sindresorhus/globby)
+- [Git URL Parse](https://github.com/IonicaBizau/git-url-parse)
 
 ### Asynchronous Utils
 
