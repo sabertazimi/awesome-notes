@@ -111,6 +111,7 @@
 
 - [String Manipulation](https://github.com/dleitee/strman)
 - [Fuzzy String Matching](https://github.com/nol13/fuzzball.js)
+- [SemVer](https://www.npmjs.com/package/semver)
 
 ### Asynchronous Utils
 
@@ -119,10 +120,6 @@
 ### Hash Utils
 
 - [UUID](https://github.com/uuidjs/uuid)
-
-### DevOps Utils
-
-- [DotEnv](https://github.com/motdotla/dotenv)
 
 ### Functional Programming Utils
 
@@ -658,7 +655,6 @@
 - [Commander](https://github.com/tj/commander.js)
 - [Enquirer](https://github.com/enquirer/enquirer)
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js)
-- [SemVer](https://www.npmjs.com/package/semver)
 
 #### CLI Output Utils
 
@@ -667,7 +663,6 @@
 - [ORA Spinner](https://github.com/sindresorhus/ora)
 - [Progress](https://github.com/bvaughn/progress-estimator)
 - [Code Frame: pointing to source locations](https://github.com/babel/babel/tree/main/packages/babel-code-frame)
-- [EnvInfo: Generate a report about development environment for debugging and issue reporting](https://github.com/tabrindle/envinfo)
 
 ### CLI Cheat Sheet
 
@@ -878,15 +873,21 @@
 - [Mermaid.js](https://github.com/mermaid-js/mermaid)
 - [Flowchart.js](https://github.com/adrai/flowchart.js)
 
-## DevOps
+## DevOps Tools
 
-### Project Tools
+### DevOps Project Tools
 
 - [Node Maintenance Tools](https://github.com/maxogden/maintenance-modules)
+- [BeachBall: Sunniest semantic version bumper](https://github.com/microsoft/beachball)
 
-### CI Tools
+### DevOps CI Tools
 
 - [ProBot](https://github.com/probot/probot)
+
+### DevOps Config Tools
+
+- [DotEnv](https://github.com/motdotla/dotenv)
+- [EnvInfo: Generate a report about development environment for debugging and issue reporting](https://github.com/tabrindle/envinfo)
 
 ## Documentation
 
