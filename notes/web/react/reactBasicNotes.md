@@ -52,12 +52,66 @@ then update effects to real DOM when `Commit` stage.
   - reuse fiber objects.
   - reduce memory usage and GC time.
 
+### React Scheduler
+
+Polyfill for `requestIdleCallback` with priority control.
+
+```js
+const performWork = (deadline) => {
+  if (!nextUnitOfWork) {
+    resetNextUnitOfWork();
+  }
+
+  // whether current status is idle status or not
+  while (nextUnitOfWork && deadline.timeRemaining() > ENOUGH_TIME) {
+    nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+  }
+
+  if (pendingCommit) {
+    commitAllWork(pendingCommit);
+  }
+
+  // checks if there's pending work
+  // if exist, performWork in **next frame** when idle
+  if (nextUnitOfWork || updateQueue.length > 0) {
+    requestIdleCallback(performWork);
+  }
+};
+
+const scheduleUpdate = (instance, partialState) => {
+  updateQueue.push({
+    from: CLASS_COMPONENT,
+    instance,
+    partialState,
+  });
+
+  requestIdleCallback(performWork);
+};
+
+// React.render function
+const render = (elements, container) => {
+  updateQueue.push({
+    from: HOST_ROOT,
+    dom: container,
+    newProps: {
+      children: elements,
+    },
+  });
+
+  requestIdleCallback(performWork);
+};
+```
+
 ### React Diff Stage
+
+Reconciler
 
 - O(n) incomplete tree comparison: only compare same level nodes.
 - `key` prop to hint for nodes reuse.
 
 ### React Render Stage
+
+Reconciler
 
 #### Elements of Different Types
 
@@ -80,6 +134,8 @@ then update effects to real DOM when `Commit` stage.
   diff algorithm recursively on the old result and the new result.
 
 ### React Commit Stage
+
+Renderer
 
 #### Before Mutation Stage
 
