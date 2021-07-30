@@ -304,6 +304,69 @@ npm version minor
 npm version patch
 ```
 
+## Self-Defined Modules
+
+### Basic Modular Pattern
+
+编写具有回调函数参数的模块
+
+- 定义模块
+
+```js
+function foo(x, y, callback) {
+    try {
+        if (param not valid ) {
+            throw new Error（）;
+        } else {
+            callback(null, param);
+        }
+    } catch (error) {
+        callback(error, param);
+    }
+}
+```
+
+- 使用模块
+
+```js
+foo(a, b, function (err, param) {
+    if(err) {
+
+    } else {
+
+    }
+})；
+```
+
+### Export Modules
+
+```js
+module.exports = function (args) {
+  /* ... */
+};
+```
+
+### CallBack Function
+
+- 向定义最内层回调,可避免回套嵌套
+
+```js
+server.on('request', function(req, res) {
+    var render = function(wsData) {
+        page = pageRender(req, session, userData, wsData);
+    };
+    var getWsInfo = function(userData) {
+        ws.get(req, render);
+    };
+    var getDbInfo = function(session) {
+        db.get(session.user, getWsInfo);
+    };
+    var getMemCached = function(req, res) {
+        memcached.getSession(req, getDbInfo);
+    };
+}
+```
+
 ## Process Module
 
 ### Process Properties
@@ -376,6 +439,78 @@ cp.exec(
 );
 ```
 
+## Worker Threads Module
+
+Worker threads use threads to execute the work
+within the same process of the main application:
+
+- Worker threads are lightweight compared to child processes.
+- Worker threads can share memory (can transfer `ArrayBuffer`).
+- Each Node.js worker thread has its own independent Node.js runtime
+  (including its own V8 instance, event loop, etc.)
+  with its own isolated context,
+  therefore **no thread synchronization** is usually needed.
+
+```js
+// fibonacci-worker.js
+const {
+  Worker,
+  isMainThread,
+  parentPort,
+  workerData,
+} = require('worker_threads');
+
+function fibonacci(num) {
+  if (num <= 1) return num;
+  return fibonacci(num - 1) + fibonacci(num - 2);
+}
+
+if (isMainThread) {
+  module.exports = (n) =>
+    new Promise((resolve, reject) => {
+      const worker = new Worker(__filename, {
+        workerData: n,
+      });
+      worker.on('message', resolve);
+      worker.on('error', reject);
+      worker.on('exit', (code) => {
+        if (code !== 0) {
+          reject(new Error(`Worker stopped with exit code ${code}`));
+        }
+      });
+    });
+} else {
+  const result = fibonacci(workerData);
+  parentPort.postMessage(result);
+  process.exit(0);
+}
+```
+
+```js
+const http = require('http');
+const fibonacciWorker = require('./fibonacci-worker');
+
+const port = 3000;
+
+http.createServer(async (req, res) => {
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    console.log('Incoming request to:', url.pathname);
+
+    if (url.pathname === '/fibonacci') {
+      const n = Number(url.searchParams.get('n'));
+      console.log('Calculating fibonacci for', n);
+
+      const result = await fibonacciWorker(n);
+      res.writeHead(200);
+      return res.end(`Result: ${result}\n`);
+    } else {
+      res.writeHead(200);
+      return res.end('Hello World!');
+    }
+  })
+  .listen(port, () => console.log(`Listening on port ${port}...`));
+```
+
 ## File Module
 
 ### FS API
@@ -441,69 +576,6 @@ path.basename(p, [ext])
 path.extname(p)
 path.sep
 path.delimiter
-```
-
-## Self-Defined Modules
-
-### Basic Modular Pattern
-
-编写具有回调函数参数的模块
-
-- 定义模块
-
-```js
-function foo(x, y, callback) {
-    try {
-        if (param not valid ) {
-            throw new Error（）;
-        } else {
-            callback(null, param);
-        }
-    } catch (error) {
-        callback(error, param);
-    }
-}
-```
-
-- 使用模块
-
-```js
-foo(a, b, function (err, param) {
-    if(err) {
-
-    } else {
-
-    }
-})；
-```
-
-### Export Modules
-
-```js
-module.exports = function (args) {
-  /* ... */
-};
-```
-
-### CallBack Function
-
-- 向定义最内层回调,可避免回套嵌套
-
-```js
-server.on('request', function(req, res) {
-    var render = function(wsData) {
-        page = pageRender(req, session, userData, wsData);
-    };
-    var getWsInfo = function(userData) {
-        ws.get(req, render);
-    };
-    var getDbInfo = function(session) {
-        db.get(session.user, getWsInfo);
-    };
-    var getMemCached = function(req, res) {
-        memcached.getSession(req, getDbInfo);
-    };
-}
 ```
 
 ## Http Module
