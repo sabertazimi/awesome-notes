@@ -7387,6 +7387,7 @@ module.exports = {
   setupFiles: ['./jest.stubs.js'],
   testURL: 'http://localhost/',
   setupTestFrameworkScriptFile: '<rootDir>/src/setupEnzyme.ts',
+  collectCoverage: true,
 };
 ```
 
