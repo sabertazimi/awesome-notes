@@ -3348,19 +3348,33 @@ $.getJSON('/json/cats.json', function (json) {
 });
 ```
 
-## 正则表达式
+## Regular Expression
 
 ```js
 var re = /pattern/gim;
 ```
 
-### Flags
+### RegExp Flags
 
 - g 全局匹配
 - m 多行匹配
 - i 大小写敏感匹配
+- u 修饰符
+- y (粘连全局符) 修饰符号隐含了头部匹配的标志
 
-### 元字符
+```js
+function codePointLength(text) {
+  var result = text.match(/[\s\S]/gu);
+  return result ? result.length : 0;
+}
+
+const s = '𠮷𠮷';
+
+s.length; // 4
+codePointLength(s); // 2
+```
+
+### RegExp Character Classes
 
 | 符号     | 说明                                       |
 | :------- | :----------------------------------------- |
@@ -3379,7 +3393,7 @@ var re = /pattern/gim;
 | [^x]     | 匹配除了 x 以外的任意字符                  |
 | [^aeiou] | 匹配除了 aeiou 这几个字母以外的任意字符    |
 
-### 常用限定符
+### RegExp Quantifiers
 
 | 符号  | 说明              |
 | :---- | :---------------- |
@@ -3430,7 +3444,7 @@ RegExp.$*;
 | rightContext | \$\' | 匹配结果字符串后的字符   |
 | multiline    | \$\* | 指定是否开启多行模式     |
 
-### 分组语法
+### RegExp Group and Ranges
 
 - group
 - lookahead (零宽断言)
@@ -3445,6 +3459,17 @@ RegExp.$*;
 |          | (?!exp)        | 匹配后面跟的不是 exp 的位置                     |
 |          | `(?<!exp)`     | 匹配前面不是 exp 的位置                         |
 | 注释     | (?#comment)    | 用于提供注释让人阅读                            |
+
+```js
+const string = 'Favorite GitHub Repos: tc39/ecma262 v8/v8.dev';
+const regex = /\b(?<owner>[a-z0-9]+)\/(?<repo>[a-z0-9\.]+)\b/g;
+
+for (const match of string.matchAll(regex)) {
+  console.log(`${match[0]} at ${match.index} with '${match.input}'`);
+  console.log(`owner: ${match.groups.owner}`);
+  console.log(`repo: ${match.groups.repo}`);
+}
+```
 
 ### RegExp Best Practice
 
@@ -3472,6 +3497,39 @@ RegExp.$*;
 /Reg/Flags.test(str); // 返回值为 Boolean
 
 /[a-z|A-Z|0-9]/gmi.test(str);
+```
+
+```js
+const ignoreList = [
+  // # All
+  '^npm-debug\\.log$', // Error log for npm
+  '^\\..*\\.swp$', // Swap file for vim state
+
+  // # macOS
+  '^\\.DS_Store$', // Stores custom folder attributes
+  '^\\.AppleDouble$', // Stores additional file resources
+  '^\\.LSOverride$', // Contains the absolute path to the app to be used
+  '^Icon\\r$', // Custom Finder icon: http://superuser.com/questions/298785/icon-file-on-os-x-desktop
+  '^\\._.*', // Thumbnail
+  '^\\.Spotlight-V100(?:$|\\/)', // Directory that might appear on external disk
+  '\\.Trashes', // File that might appear on external disk
+  '^__MACOSX$', // Resource fork
+
+  // # Linux
+  '~$', // Backup file
+
+  // # Windows
+  '^Thumbs\\.db$', // Image file cache
+  '^ehthumbs\\.db$', // Folder config file
+  '^Desktop\\.ini$', // Stores custom folder attributes
+  '@eaDir$', // "hidden" folder where the server stores thumbnails
+];
+
+export const junkRegex = new RegExp(ignoreList.join('|'));
+
+export function isJunk(filename) {
+  return junkRegex.test(filename);
+}
 ```
 
 #### replace

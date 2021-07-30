@@ -514,36 +514,6 @@ class HelloWorldApp {
 HelloWorldApp.main();
 ```
 
-### RegExp
-
-- u 修饰符
-- y (粘连全局符) 修饰符号隐含了头部匹配的标志
-
-```js
-function codePointLength(text) {
-  var result = text.match(/[\s\S]/gu);
-  return result ? result.length : 0;
-}
-
-const s = '𠮷𠮷';
-
-s.length; // 4
-codePointLength(s); // 2
-```
-
-#### RegExp Group
-
-```js
-const string = 'Favorite GitHub Repos: tc39/ecma262 v8/v8.dev';
-const regex = /\b(?<owner>[a-z0-9]+)\/(?<repo>[a-z0-9\.]+)\b/g;
-
-for (const match of string.matchAll(regex)) {
-  console.log(`${match[0]} at ${match.index} with '${match.input}'`);
-  console.log(`owner: ${match.groups.owner}`);
-  console.log(`repo: ${match.groups.repo}`);
-}
-```
-
 ### Number
 
 - 0bxxx/0Bxxx
