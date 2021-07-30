@@ -634,6 +634,7 @@
 - [LowDB](https://github.com/typicode/lowdb)
 - [ImmortalDB](https://github.com/gruns/ImmortalDB)
 - [LocalForage](https://github.com/localForage/localForage)
+- [JSCookie](https://github.com/js-cookie/js-cookie)
 
 ## Search
 
