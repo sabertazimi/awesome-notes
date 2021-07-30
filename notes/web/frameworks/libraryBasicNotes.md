@@ -457,6 +457,7 @@
 - [Images API](https://github.com/rsms/node-imagemagick)
 - [JavaScript Load Image](https://github.com/blueimp/JavaScript-Load-Image)
 - [Sharp](https://github.com/lovell/sharp)
+- [HTML2Image](https://github.com/bubkoo/html-to-image)
 
 ### Image Color
 
