@@ -120,6 +120,7 @@
 ### Concurrent and Parallel Programming Utils
 
 - [WorkerPool](https://github.com/josdejong/workerpool)
+- [Comlink: Shared class between Web Workers](https://github.com/GoogleChromeLabs/comlink)
 - [GRFN: Executes a dependency graph of async functions concurrently](https://github.com/TomerAberbach/grfn)
 
 ### Hash Utils
