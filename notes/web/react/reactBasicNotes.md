@@ -16,7 +16,7 @@
 - [A Simple React with Fiber Reconciliation](https://github.com/sabertazimi/meactjs)
 
 React Fiber 的目标是提高其在动画、布局和手势等领域的适用性.
-它的主要特性是`Incremental Rendering`: 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
+它的主要特性是 `Incremental Rendering` : 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
 
 #### React Fiber Metadata
 
@@ -353,6 +353,71 @@ componentWillUnmount()
   - Can't create random values like `Math.random()` or `Date.now()`.
   - Can't make network requests.
   - Can't queue state updates.
+
+### React Element API
+
+#### React Clone Element API
+
+Modify children properties:
+
+```jsx
+const CreateTextWithProps = ({ text, ASCIIChar, ...props }) => {
+  return (
+    <span {...props}>
+      {text}
+      {ASCIIChar}
+    </span>
+  );
+};
+
+const RepeatCharacters = ({ times, children }) => {
+  return React.cloneElement(children, {
+    ASCIIChar: children.props.ASCIIChar.repeat(times),
+  });
+};
+
+function App() {
+  return (
+    <div>
+      <RepeatCharacters times={3}>
+        <CreateTextWithProps text="Foo Text" ASCIIChar="." />
+      </RepeatCharacters>
+    </div>
+  );
+}
+```
+
+```jsx
+const RadioGroup = (props) => {
+  const RenderChildren = () =>
+    React.Children.map(props.children, (child) => {
+      return React.cloneElement(child, {
+        name: props.name,
+      });
+    });
+
+  return <div>{<RenderChildren />}</div>;
+};
+
+const RadioButton = (props) => {
+  return (
+    <label>
+      <input type="radio" value={props.value} name={props.name} />
+      {props.children}
+    </label>
+  );
+};
+
+function App() {
+  return (
+    <RadioGroup name="numbers">
+      <RadioButton value="first">First</RadioButton>
+      <RadioButton value="second">Second</RadioButton>
+      <RadioButton value="third">Third</RadioButton>
+    </RadioGroup>
+  );
+}
+```
 
 ### Refs
 
@@ -3376,7 +3441,7 @@ npx create-react-app my-app --template [template-name]
 
 ## Styled Component
 
-### Basic Usage
+### Styled Basic Usage
 
 #### Shared CSS Styles
 
