@@ -491,6 +491,7 @@
 ### Image Size
 
 - [Variant Size Pictures](https://github.com/imulus/retinajs)
+- [Carver: Content-aware image resizer and object remover based on Seam Carving algorithm](https://github.com/trekhleb/js-image-carver)
 
 ### Slide Images
 
