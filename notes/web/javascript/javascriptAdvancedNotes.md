@@ -2080,6 +2080,8 @@ Under the hood
 
 ### Event Loop
 
+#### Browser Event Loop
+
 ![Event Loop](./figures/EventLoop.jpg)
 
 The job of the **event loop** is to look into the call stack
@@ -2288,6 +2290,23 @@ test();
 // children3
 // children3-1
 ```
+
+#### Node Event Loop
+
+Node.js can run I/O operations in a non-blocking way,
+meaning other code (and even other I/O operations) can be executed
+while an I/O operation is in progress.
+
+Instead of having to ‘wait’ for an I/O operation to complete
+(and essentially waste CPU cycles sitting idle),
+Node.js can use the time to execute other tasks.
+
+When the I/O operation completes,
+**event loop** give back control to the piece of code
+that is waiting for the result of that I/O operation.
+
+The Node.js execution model was designed to cater to the needs of most web servers,
+which tend to be **I/O-intensive** (due to non-blocking I/O).
 
 ## Browser Internal
 
