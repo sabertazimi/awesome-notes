@@ -811,6 +811,7 @@
 - [CSS Stats CLI](https://github.com/projectwallace/wallace-cli)
 - [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
 - [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint)
+- [Commit Lint](https://github.com/conventional-changelog/commitlint)
 - [JSCPD: Copy paste detector](https://github.com/kucherenko/jscpd)
 - [Java CheckStyle](https://github.com/checkstyle/checkstyle)
 
