@@ -86,6 +86,10 @@
 
 - [React Query: Fetching, caching, synchronizing and updating server state](https://github.com/tannerlinsley/react-query)
 
+### React Recoil
+
+- [React Recoil](https://github.com/facebookexperimental/Recoil)
+
 ### React Hooks
 
 - [ReactUse Hooks](https://github.com/streamich/react-use)
