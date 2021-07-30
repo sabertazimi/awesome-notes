@@ -185,7 +185,7 @@ function updatePackage(version) {
 main().catch((err) => console.error(err));
 ```
 
-#### Semantic Version
+### Semantic Version
 
 Semver:
 
@@ -248,7 +248,7 @@ npm audit fix
 npm audit fix --force
 ```
 
-### npx
+### NPX Command
 
 run local node_modules
 
@@ -290,15 +290,23 @@ npx gistUrl
   永远都是引用宿主环境统一安装的 npm 包,
   最终解决插件与所依赖包不一致的问题.
 
-## Basic Node Modules
+### Package JSON
 
-> exports 和 module.exports 的区别
+#### bin
 
-exports 是 module.exports 的引用, 改变 exports 值无法改变 module.exports 值
+当设置了 bin 字段后, 在 package.json script 字段中，可以使用简写编写命令(但是局部安装无法使得 shell 下可使用简写)
 
-### Process Module
+#### version
 
-#### Process Properties
+```bash
+npm version major
+npm version minor
+npm version patch
+```
+
+## Process Module
+
+### Process Properties
 
 ```js
 process.pid：当前进程的进程号。
@@ -318,15 +326,13 @@ process.stdin.resume();
 process.stdin.pipe(process.stdout);
 ```
 
-#### Process Events
+### Process Events
 
 - uncaughtException
 - SIGINT
 - exit
 
-#### Process Methods
-
-##### Get Info
+### Process Information
 
 - process.on()
 - process.uptime(): 进程运行时长
@@ -334,18 +340,18 @@ process.stdin.pipe(process.stdout);
 - process.cwd()
 - process.memoryUsage()
 
-##### Message Loop and Counter
+### Process Event Loop and Counter
 
 - process.nextTick()
 
-##### Child Process
+### Child Process
 
 - cp.spawn(): 创建子进程, 拥有独立的 stdin/stdout/stderr 文件描述符
 - cp.exec(): 创建子进程, 并会在进程结束时调用传入的回调函数
 - [Exec Library](https://github.com/sindresorhus/execa)
 
 ```js
-var cp = require('child_process');
+const cp = require('child_process');
 
 cp.exec(
   'ls -l',
@@ -891,18 +897,4 @@ module.exports = {
 // server.js
 const { port } = require('./config');
 console.log(`Your port is ${port}`); // 8626
-```
-
-## Package JSON
-
-### bin
-
-当设置了 bin 字段后, 在 package.json script 字段中，可以使用简写编写命令(但是局部安装无法使得 shell 下可使用简写)
-
-### version
-
-```bash
-npm version major
-npm version minor
-npm version patch
 ```
