@@ -346,9 +346,12 @@ process.stdin.pipe(process.stdout);
 
 ### Child Process
 
-- cp.spawn(): 创建子进程, 拥有独立的 stdin/stdout/stderr 文件描述符
-- cp.exec(): 创建子进程, 并会在进程结束时调用传入的回调函数
+- `cp.spawn()`: 创建子进程, 拥有独立的 stdin/stdout/stderr 文件描述符
+- `cp.exec()`: 创建子进程, 并会在进程结束时调用传入的回调函数
 - [Exec Library](https://github.com/sindresorhus/execa)
+- Each spawned Node.js child process is independent
+  and has its own memory, event-loop, and V8 instance.
+- Use `process.on` to communicate between parent and child process.
 
 ```js
 const cp = require('child_process');
