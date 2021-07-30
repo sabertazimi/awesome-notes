@@ -6729,16 +6729,14 @@ module.exports = function buildMeactPreset(context, options) {
 
 ## Webpack
 
-### Webpack Configuration
-
-#### Webpack Watch Options
+### Webpack Watch Options
 
 ```bash
 echo fs.notify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 ```
 
-#### Webpack Resolve Path Options
+### Webpack Resolve Path Options
 
 ```js
 {
@@ -6791,15 +6789,15 @@ sudo sysctl -p
 }
 ```
 
-#### Webpack Flag Options
+### Webpack Flag Options
 
 - --progress
 - --colors
 - -p
 
-#### Webpack Loader Configuration
+### Webpack Loader Configuration
 
-##### Webpack Babel Loader
+#### Webpack Babel Loader
 
 ```js
 {
@@ -6836,7 +6834,7 @@ sudo sysctl -p
 }
 ```
 
-##### Webpack CSS Loader
+#### Webpack CSS Loader
 
 ```js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -6883,7 +6881,7 @@ module.exports = {
 };
 ```
 
-##### Webpack Static Assets Loader
+#### Webpack Static Assets Loader
 
 - file-loader
 - url-loader
@@ -6900,7 +6898,7 @@ module.exports = {
 }
 ```
 
-##### Webpack Thread Loader
+#### Webpack Thread Loader
 
 ```js
 use: [
@@ -6959,6 +6957,27 @@ threadLoader.warmup(
     'sass-loader',
   ]
 );
+```
+
+#### Webpack Web Worker Loader
+
+[Worker Loader](https://github.com/Webpack-contrib/worker-loader):
+
+```bash
+npm i -D worker-loader
+```
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.worker\.js$/,
+        use: { loader: 'worker-loader' },
+      },
+    ],
+  },
+};
 ```
 
 ### Webpack Optimization
