@@ -1909,12 +1909,12 @@ use `extends {}` to avoid it:
 const foo = <T extends {}>(arg: T) => arg;
 ```
 
-#### Component Return Type
+### Component Return Type
 
 - `JSX.Element`: return value of `React.createElement`.
 - `React.ReactNode`: return value of a component.
 
-### Redux
+### React Redux
 
 ```typescript
 const initialState = {
@@ -1980,6 +1980,35 @@ const reducer = (state: State, action: Action): State => {
 };
 ```
 
+### React Hooks
+
+- `Dispatch`
+- `SetStateAction`
+
+```ts
+import { Dispatch, SetStateAction, useState } from 'react';
+
+interface ReturnType {
+  value: boolean;
+  setValue: Dispatch<SetStateAction<boolean>>;
+  setTrue: () => void;
+  setFalse: () => void;
+  toggle: () => void;
+}
+
+function useBoolean(defaultValue?: boolean): ReturnType {
+  const [value, setValue] = useState(!!defaultValue);
+
+  const setTrue = () => setValue(true);
+  const setFalse = () => setValue(false);
+  const toggle = () => setValue((x) => !x);
+
+  return { value, setValue, setTrue, setFalse, toggle };
+}
+
+export default useBoolean;
+```
+
 ## Monorepo
 
 - [TypeScript Monorepo](https://2ality.com/2021/07/simple-monorepos.html 'TypeScript Monorepo')
@@ -1991,8 +2020,7 @@ const reducer = (state: State, action: Action): State => {
 - [TS Jest](https://github.com/kulshekhar/ts-jest)
 
 ```bash
-npm i -D jest typescript
-npm i -D ts-jest @types/jest
+npm i -D jest typescript ts-jest @types/jest
 npx ts-jest config:init
 npx jest
 ```
