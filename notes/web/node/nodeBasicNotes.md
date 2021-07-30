@@ -511,6 +511,14 @@ http.createServer(async (req, res) => {
   .listen(port, () => console.log(`Listening on port ${port}...`));
 ```
 
+Worker pool is needed:
+
+- Creating a new worker/process is expensive.
+  For best performance, they should be reused.
+- No control over the number of workers/processes created without worker pool.
+  This leaves vulnerable to DoS attacks.
+- [Worker pool library](https://github.com/josdejong/workerpool)
+
 ## File Module
 
 ### FS API
