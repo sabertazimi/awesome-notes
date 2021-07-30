@@ -3663,6 +3663,7 @@ ReactDOM.render(<WrapperContainer />, container);
 ## Framework Paradigm
 
 - full-featured frameworks vs composing micro-libs
+- JSX vs templates
 
 > Evan You on Vue.js: Seeking the Balance in Framework Design | JSConf.Asia 2019
 
