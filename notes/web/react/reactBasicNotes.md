@@ -1724,6 +1724,36 @@ function Todos() {
 }
 ```
 
+#### Store Hook
+
+```jsx
+import { useState } from 'react';
+
+export const store = {
+  state: {},
+  setState(value) {
+    this.state = value;
+    this.setters.forEach((setter) => setter(this.state));
+  },
+  setters: [],
+};
+
+// Bind the setState function to the store object so
+// we don't lose context when calling it elsewhere
+store.setState = store.setState.bind(store);
+
+// this is the custom hook we'll call on components.
+export function useStore() {
+  const [state, set] = useState(store.state);
+
+  if (!store.setters.includes(set)) {
+    store.setters.push(set);
+  }
+
+  return [state, store.setState];
+}
+```
+
 #### Previous Hook
 
 ```jsx
@@ -1775,34 +1805,70 @@ function useInterval(callback: () => void, delay: number | null) {
 export default useInterval;
 ```
 
-#### Store Hook
+#### Observer Hook
+
+```ts
+import { RefObject, useEffect, useState } from 'react';
+
+interface Args extends IntersectionObserverInit {
+  freezeOnceVisible?: boolean;
+}
+
+function useIntersectionObserver(
+  elementRef: RefObject<Element>,
+  {
+    threshold = 0,
+    root = null,
+    rootMargin = '0%',
+    freezeOnceVisible = false,
+  }: Args
+): IntersectionObserverEntry | undefined {
+  const [entry, setEntry] = useState<IntersectionObserverEntry>();
+
+  const frozen = entry?.isIntersecting && freezeOnceVisible;
+
+  // Update first entry
+  const updateEntry = ([entry]: IntersectionObserverEntry[]): void => {
+    setEntry(entry);
+  };
+
+  useEffect(() => {
+    const node = elementRef?.current; // DOM Ref
+    const hasIOSupport = !!window.IntersectionObserver;
+
+    if (!hasIOSupport || frozen || !node) return;
+
+    const observerParams = { threshold, root, rootMargin };
+    const observer = new IntersectionObserver(updateEntry, observerParams);
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [elementRef, threshold, root, rootMargin, frozen]);
+
+  return entry;
+}
+
+export default useIntersectionObserver;
+```
+
+#### Router Hook
 
 ```jsx
-import { useState } from 'react';
+import { useContext, useEffect } from 'react';
+import { __RouterContext } from 'react-router';
+import useForceUpdate from 'use-force-update';
 
-export const store = {
-  state: {},
-  setState(value) {
-    this.state = value;
-    this.setters.forEach((setter) => setter(this.state));
-  },
-  setters: [],
+const useReactRouter = () => {
+  const forceUpdate = useForceUpdate();
+  const routerContext = useContext(__RouterContext);
+
+  useEffect(() => routerContext.history.listen(forceUpdate), [routerContext]);
+
+  return routerContext;
 };
-
-// Bind the setState function to the store object so
-// we don't lose context when calling it elsewhere
-store.setState = store.setState.bind(store);
-
-// this is the custom hook we'll call on components.
-export function useStore() {
-  const [state, set] = useState(store.state);
-
-  if (!store.setters.includes(set)) {
-    store.setters.push(set);
-  }
-
-  return [state, store.setState];
-}
 ```
 
 #### History Hook
@@ -1979,23 +2045,6 @@ function useCount() {
 }
 
 export { CountProvider, useCount };
-```
-
-#### Router Hook
-
-```jsx
-import { useContext, useEffect } from 'react';
-import { __RouterContext } from 'react-router';
-import useForceUpdate from 'use-force-update';
-
-const useReactRouter = () => {
-  const forceUpdate = useForceUpdate();
-  const routerContext = useContext(__RouterContext);
-
-  useEffect(() => routerContext.history.listen(forceUpdate), [routerContext]);
-
-  return routerContext;
-};
 ```
 
 #### Script Loading Hook
