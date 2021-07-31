@@ -6117,6 +6117,14 @@ Session 缓存在服务端, Cookie 缓存在客户端,
 - 服务器根据 `<Session ID>` 进行用户验证,
   利用 Session Cookie 机制可以简单地实现**用户登录状态验证**,
   保护需要登录权限才能访问的路由服务.
+- `Max-Age` priority higher than `Expires`.
+  When both to `null`, cookie become **session cookie**.
+
+```http
+Set-Cookie: username=tazimi; domain=github.com
+Set-Cookie: height=100; domain=me.github.com
+Set-Cookie: weight=100; domain=me.github.com
+```
 
 ##### Session Cookie Cons
 
