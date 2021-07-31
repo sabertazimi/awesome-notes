@@ -26,10 +26,9 @@
 ## UI Framework
 
 - [React Ant Design](https://github.com/ant-design/ant-design)
-- [React Mantine with Hooks](https://github.com/mantinedev/mantine)
 - [React Material UI](https://github.com/mui-org/material-ui)
 - [React BluePrint](https://github.com/palantir/blueprint)
-- [IceWorks](https://alibaba.github.io/ice/iceworks)
+- [IceWorks](https://github.com/alibaba/ice)
 - [Vue Admin UI](https://github.com/epicmaxco/vuestic-admin)
 - [Bootstrap](https://github.com/twbs/bootstrap)
 - [Paper.css](https://github.com/papercss/papercss)
