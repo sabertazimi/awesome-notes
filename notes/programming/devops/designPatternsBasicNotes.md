@@ -1815,6 +1815,7 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
 
 主要负责与外部系统进行交互与通信:
 
+- 做参数的基本处理, 比如入参校验, 回参 DTO 转换 (拆包, 组包)
 - Dubbo Services
 - RESTful API
 
@@ -1822,7 +1823,7 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
 
 Application Service 层只是很薄的一层,
 它内部并不实现任何逻辑,
-只是负责协调和转发,
+只是负责协调和转发 (流程编排),
 委派业务动作给更下层的领域层.
 
 ### Domain Layer
@@ -1834,7 +1835,11 @@ Domain 层是领域模型系统的核心,
 
 ### Infrastructure Layer
 
-主要为 Interface, Application 和 Domain 三层提供支撑.
+主要为 Interface, Application 和 Domain 三层提供支撑:
+
+- 封装基础资源服务, 通过依赖注入方式解耦.
+- Third-party tools, Message Queue, File, Cache, Database, Search etc.
+- 实现仓储接口 DB, 通常真正读写 DB.
 
 ## 高并发系统设计
 
