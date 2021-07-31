@@ -1,8 +1,10 @@
+const prefix = '/awesome-notes/';
+
 module.exports = {
   title: 'Awesome Notes',
   description: 'Daily Notes I Learned.',
-  base: '/awesome-notes/',
-  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
+  base: prefix,
+  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: `${prefix}logo.svg` }]],
 
   markdown: {
     lineNumbers: true,
