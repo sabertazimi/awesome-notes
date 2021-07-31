@@ -3529,6 +3529,332 @@ class Intl {
 export default Intl;
 ```
 
+## React with TypeScript
+
+- [React TypeScript CheatSheet](https://github.com/typescript-cheatsheets/react)
+
+### Props Types
+
+```ts
+export declare interface AppProps {
+  children: React.ReactNode; // best
+  style?: React.CSSProperties; // for style
+  onChange?: (e: React.FormEvent<HTMLInputElement>) => void; // form events!
+  props: Props & React.HTMLProps<HTMLButtonElement>;
+}
+```
+
+### React Refs Types
+
+```ts
+class CssThemeProvider extends React.PureComponent<Props> {
+  private rootRef: React.RefObject<HTMLDivElement> = React.createRef();
+
+  render() {
+    return <div ref={this.rootRef}>{this.props.children}</div>;
+  }
+}
+```
+
+### Functional Component
+
+Don't use `React.FC`/`React.FunctionComponent`:
+
+- Unnecessary addition of children (hide some run-time error).
+- `React.FC` doesn't support generic components.
+- Barrier for `<Comp>` with `<Comp.Sub>` types (**component as namespace pattern**).
+- `React.FC` doesn't work correctly with `defaultProps`.
+
+```tsx
+// Declaring type of props
+interface AppProps = {
+  message: string;
+}
+
+// Inferred return type
+const App = ({ message }: AppProps) => <div>{message}</div>;
+
+// Explicit return type annotation
+const App = ({ message }: AppProps): JSX.Element => <div>{message}</div>;
+
+// Inline types annotation
+const App = ({ message }: { message: string }) => <div>{message}</div>;
+```
+
+### Class Component
+
+```ts
+import React from 'react';
+import Button from './Button';
+
+interface Props {
+  foo: string;
+}
+
+const initialState = { clicksCount: 0 };
+type State = Readonly<typeof initialState>;
+
+class ButtonCounter extends React.Component<Props, State> {
+  readonly state: State = initialState;
+
+  render() {
+    return <span>{this.props.foo}</span>;
+  }
+}
+```
+
+### Generic Component
+
+```ts
+// 一个泛型组件
+type SelectProps<T> = { items: T[] };
+class Select<T> extends React.Component<SelectProps<T>, any> {}
+
+// 使用
+const Form = () => <Select<string> items={['a', 'b']} />;
+```
+
+In `.tsx` file, `<T>` maybe considered `JSX.Element`,
+use `extends {}` to avoid it:
+
+```tsx
+const foo = <T extends {}>(arg: T) => arg;
+```
+
+### Component Return Type
+
+- `JSX.Element`: return value of `React.createElement`.
+- `React.ReactNode`: return value of a component.
+
+### React Redux
+
+```typescript
+const initialState = {
+  name: '',
+  points: 0,
+  likesGames: true,
+};
+
+type State = typeof initialState;
+```
+
+```typescript
+export function updateName(name: string) {
+  return <const>{
+    type: 'UPDATE_NAME',
+    name,
+  };
+}
+
+export function addPoints(points: number) {
+  return <const>{
+    type: 'ADD_POINTS',
+    points,
+  };
+}
+
+export function setLikesGames(value: boolean) {
+  return <const>{
+    type: 'SET_LIKES_GAMES',
+    value,
+  };
+}
+
+type Action = ReturnType<
+  typeof updateName | typeof addPoints | typeof setLikesGames
+>;
+
+// =>
+// type Action = {
+//   readonly type: 'UPDATE_NAME';
+//   readonly name: string;
+// } | {
+//   readonly type: 'ADD_POINTS';
+//   readonly points: number;
+// } | {
+//   readonly type: 'SET_LIKES_GAMES';
+//   readonly value: boolean;
+// }
+```
+
+```ts
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'UPDATE_NAME':
+      return { ...state, name: action.name };
+    case 'ADD_POINTS':
+      return { ...state, points: action.points };
+    case 'SET_LIKES_GAMES':
+      return { ...state, likesGames: action.value };
+    default:
+      return state;
+  }
+};
+```
+
+### React Hooks
+
+- `Dispatch<T>`
+- `SetStateAction<T>`
+- `RefObject<T>`
+- `useState<T>`
+- More [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts).
+
+```ts
+import { Dispatch, SetStateAction, useState } from 'react';
+
+interface ReturnType {
+  value: boolean;
+  setValue: Dispatch<SetStateAction<boolean>>;
+  setTrue: () => void;
+  setFalse: () => void;
+  toggle: () => void;
+}
+
+function useBoolean(defaultValue?: boolean): ReturnType {
+  const [value, setValue] = useState(!!defaultValue);
+
+  const setTrue = () => setValue(true);
+  const setFalse = () => setValue(false);
+  const toggle = () => setValue((x) => !x);
+
+  return { value, setValue, setTrue, setFalse, toggle };
+}
+
+export default useBoolean;
+```
+
+```ts
+import { RefObject, useEffect, useRef } from 'react';
+
+function useEventListener<T extends HTMLElement = HTMLDivElement>(
+  eventName: keyof WindowEventMap,
+  handler: (event: Event) => void,
+  element?: RefObject<T>
+) {
+  // Create a ref that stores handler
+  const savedHandler = useRef<(event: Event) => void>();
+
+  useEffect(() => {
+    // Define the listening target
+    const targetElement: T | Window = element?.current || window;
+    if (!(targetElement && targetElement.addEventListener)) {
+      return;
+    }
+
+    // Update saved handler if necessary
+    if (savedHandler.current !== handler) {
+      savedHandler.current = handler;
+    }
+
+    // Create event listener that calls handler function stored in ref
+    const eventListener = (event: Event) => {
+      savedHandler?.current(event);
+    };
+
+    targetElement.addEventListener(eventName, eventListener);
+
+    // Remove event listener on cleanup
+    return () => {
+      targetElement.removeEventListener(eventName, eventListener);
+    };
+  }, [eventName, element, handler]);
+}
+
+export default useEventListener;
+```
+
+```ts
+import { useEffect, useReducer, useRef } from 'react';
+
+import axios, { AxiosRequestConfig } from 'axios';
+
+// State & hook output
+interface State<T> {
+  status: 'init' | 'fetching' | 'error' | 'fetched';
+  data?: T;
+  error?: string;
+}
+
+interface Cache<T> {
+  [url: string]: T;
+}
+
+// discriminated union type
+type Action<T> =
+  | { type: 'request' }
+  | { type: 'success'; payload: T }
+  | { type: 'failure'; payload: string };
+
+function useFetch<T = unknown>(
+  url?: string,
+  options?: AxiosRequestConfig
+): State<T> {
+  const cache = useRef<Cache<T>>({});
+  const cancelRequest = useRef<boolean>(false);
+
+  const initialState: State<T> = {
+    status: 'init',
+    error: undefined,
+    data: undefined,
+  };
+
+  // Keep state logic separated
+  const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
+    switch (action.type) {
+      case 'request':
+        return { ...initialState, status: 'fetching' };
+      case 'success':
+        return { ...initialState, status: 'fetched', data: action.payload };
+      case 'failure':
+        return { ...initialState, status: 'error', error: action.payload };
+      default:
+        return state;
+    }
+  };
+
+  const [state, dispatch] = useReducer(fetchReducer, initialState);
+
+  useEffect(() => {
+    if (!url) {
+      return;
+    }
+
+    const fetchData = async () => {
+      dispatch({ type: 'request' });
+
+      if (cache.current[url]) {
+        dispatch({ type: 'success', payload: cache.current[url] });
+      } else {
+        try {
+          const response = await axios(url, options);
+          cache.current[url] = response.data;
+
+          if (cancelRequest.current) return;
+
+          dispatch({ type: 'success', payload: response.data });
+        } catch (error) {
+          if (cancelRequest.current) return;
+
+          dispatch({ type: 'failure', payload: error.message });
+        }
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      cancelRequest.current = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url]);
+
+  return state;
+}
+
+export default useFetch;
+```
+
 ## Testing
 
 - [Complete Tutorial](https://www.robinwieruch.de/react-testing-tutorial/#react-enzyme-test-setup)
