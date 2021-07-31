@@ -3043,7 +3043,7 @@ use `inline-box` with `width`
 </picture>
 ```
 
-### Media Query
+## Media Query
 
 - `only` for improving compatibility with older browsers
 - definition order matters when media query with a different selector
@@ -3062,56 +3062,6 @@ use `inline-box` with `width`
   .container {
     width: 750px;
   }
-}
-```
-
-#### Media Query Support Detection
-
-Detecting media query support in CSS:
-
-```css
-@media not all and (prefers-reduced-data), (prefers-reduced-data) {
-}
-```
-
-- No support:
-  not all and (prefers-reduced-data): false,
-  (prefers-reduced-data): false,
-  Combined: false.
-- Support, but off:
-  not all and (prefers-reduced-data): true,
-  (prefers-reduced-data): false,
-  Combined: true.
-- Support, and on:
-  not all and (prefers-reduced-data): false,
-  (prefers-reduced-data): true,
-  Combined: true.
-
-Detecting media query support in JavaScript:
-
-```js
-const query = '(prefers-reduced-data)';
-
-// window.matchMedia(query).media return 'not all' or original query string
-const resolvedMediaQuery = window.matchMedia(query).media;
-
-const isSupported = query === resolvedMediaQuery;
-```
-
-#### JavaScript Media Query API
-
-- [MDN Media Query Tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)
-
-```js
-// https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList
-const mql = window.matchMedia(mediaQueryString);
-```
-
-```js
-if (window.matchMedia('(min-width: 400px)').matches) {
-  /* the view port is at least 400 pixels wide */
-} else {
-  /* the view port is less than 400 pixels wide */
 }
 ```
 
@@ -3148,10 +3098,77 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 | scan                | Progressive interlaced | no      | tv 媒体扫描方式      |
 | orientation         | Portrait/landscape     | no      | 横屏或竖屏           |
 
+#### Prefer Color Scheme
+
+```css
+.day { background: #eee; color: black; }
+.night { background: #333; color: white; }
+
+@media (prefers-color-scheme: dark) {
+  .day.dark-scheme   { background:  #333; color: white; }
+  .night.dark-scheme { background: black; color:  #ddd; }
+}
+
+@media (prefers-color-scheme: light) {
+  .day.light-scheme   { background: white; color:  #555; }
+  .night.light-scheme { background:  #eee; color: black; }
+}
+```
+
 #### Style for Print PDF
 
 - [Page Style Standard](https://developer.mozilla.org/en-US/docs/Web/CSS/@page)
 - [PDF Style Tutorial](https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/)
+
+### Media Query Support Detection
+
+Detecting media query support in CSS:
+
+```css
+@media not all and (prefers-reduced-data), (prefers-reduced-data) {
+}
+```
+
+- No support:
+  not all and (prefers-reduced-data): false,
+  (prefers-reduced-data): false,
+  Combined: false.
+- Support, but off:
+  not all and (prefers-reduced-data): true,
+  (prefers-reduced-data): false,
+  Combined: true.
+- Support, and on:
+  not all and (prefers-reduced-data): false,
+  (prefers-reduced-data): true,
+  Combined: true.
+
+Detecting media query support in JavaScript:
+
+```js
+const query = '(prefers-reduced-data)';
+
+// window.matchMedia(query).media return 'not all' or original query string
+const resolvedMediaQuery = window.matchMedia(query).media;
+
+const isSupported = query === resolvedMediaQuery;
+```
+
+### JavaScript Media Query API
+
+- [MDN Media Query Tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)
+
+```js
+// https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList
+const mql = window.matchMedia(mediaQueryString);
+```
+
+```js
+if (window.matchMedia('(min-width: 400px)').matches) {
+  /* the view port is at least 400 pixels wide */
+} else {
+  /* the view port is less than 400 pixels wide */
+}
+```
 
 ## Accessibility
 
