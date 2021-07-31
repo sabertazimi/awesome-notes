@@ -751,7 +751,7 @@ class Menu extends React.Component {
 }
 ```
 
-### Awesome React Hooks
+### React Hooks Reuse Pattern
 
 - No wrapper hell: every hook is just one line of code.
 - No implicit dependencies: explicit one certain call for one certain hook.
@@ -763,7 +763,7 @@ class Menu extends React.Component {
   - `useCallback` hook for memorized functions
   - `useRef` hook for lifecycle persistent values
 
-## Hooks
+## React Hooks
 
 - Reuse stateful logic between components
   (avoid wrapper hell in render props or HOC)
@@ -3556,7 +3556,7 @@ class CssThemeProvider extends React.PureComponent<Props> {
 }
 ```
 
-### Functional Component
+### Functional Component Types
 
 Don't use `React.FC`/`React.FunctionComponent`:
 
@@ -3581,7 +3581,7 @@ const App = ({ message }: AppProps): JSX.Element => <div>{message}</div>;
 const App = ({ message }: { message: string }) => <div>{message}</div>;
 ```
 
-### Class Component
+### Class Component Types
 
 ```ts
 import React from 'react';
@@ -3603,7 +3603,7 @@ class ButtonCounter extends React.Component<Props, State> {
 }
 ```
 
-### Generic Component
+### Generic Component Types
 
 ```ts
 // 一个泛型组件
@@ -3626,7 +3626,7 @@ const foo = <T extends {}>(arg: T) => arg;
 - `JSX.Element`: return value of `React.createElement`.
 - `React.ReactNode`: return value of a component.
 
-### React Redux
+### React Redux Types
 
 ```typescript
 const initialState = {
@@ -3692,7 +3692,7 @@ const reducer = (state: State, action: Action): State => {
 };
 ```
 
-### React Hooks
+### React Hooks Types
 
 - `Dispatch<T>`
 - `SetStateAction<T>`
