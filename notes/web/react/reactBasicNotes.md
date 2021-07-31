@@ -3678,7 +3678,9 @@ type Action = ReturnType<
 ```
 
 ```ts
-const reducer = (state: State, action: Action): State => {
+import { Reducer } from 'redux';
+
+const reducer = (state: State, action: Action): Reducer<State, Action> => {
   switch (action.type) {
     case 'UPDATE_NAME':
       return { ...state, name: action.name };
@@ -3694,11 +3696,62 @@ const reducer = (state: State, action: Action): State => {
 
 ### React Hooks Types
 
+- `useState<T>`
 - `Dispatch<T>`
 - `SetStateAction<T>`
 - `RefObject<T>`
-- `useState<T>`
 - More [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts).
+
+#### Use State Hook Type
+
+```ts
+const [user, setUser] = React.useState<IUser>({} as IUser);
+
+setUser(newUser);
+```
+
+#### Use Reducer Hook Type
+
+- Use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#discriminated-unions)
+  for reducer actions.
+
+```ts
+const initialState = { count: 0 };
+type State = typeof initialState;
+
+type Action =
+  | { type: 'increment'; payload: number }
+  | { type: 'decrement'; payload: string };
+
+function reducer(state: State, action: Action) {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + action.payload };
+    case 'decrement':
+      return { count: state.count - Number(action.payload) };
+    default:
+      throw new Error();
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({ type: 'decrement', payload: '5' })}>
+        -
+      </button>
+      <button onClick={() => dispatch({ type: 'increment', payload: 5 })}>
+        +
+      </button>
+    </>
+  );
+}
+```
+
+#### Custom Hooks Types
 
 ```ts
 import { Dispatch, SetStateAction, useState } from 'react';
