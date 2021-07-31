@@ -1804,35 +1804,38 @@ class CssThemeProvider extends React.PureComponent<Props> {
 
 ### Functional Component
 
-```ts
-type Props = {
-  foo: string;
-};
+Don't use `React.FC`/`React.FunctionComponent`:
 
-const myComponent: React.FunctionComponent<Props> = (props) => {
-  return <span>{props.foo}</span>;
-};
+- Unnecessary addition of children (hide some run-time error).
+- `React.FC` doesn't support generic components.
+- Barrier for `<Comp>` with `<Comp.Sub>` types (**component as namespace pattern**).
+- `React.FC` doesn't work correctly with `defaultProps`.
 
-<MyComponent foo="bar" />;
-```
+```tsx
+// Declaring type of props
+interface AppProps = {
+  message: string;
+}
 
-```ts
-import React, { MouseEvent, SFC } from 'react';
+// Inferred return type
+const App = ({ message }: AppProps) => <div>{message}</div>;
 
-type Props = { onClick(e: MouseEvent<HTMLElement>): void };
+// Explicit return type annotation
+const App = ({ message }: AppProps): JSX.Element => <div>{message}</div>;
 
-const Button: SFC<Props> = ({ onClick: handleClick, children }) => (
-  <button onClick={handleClick}>{children}</button>
-);
+// Inline types annotation
+const App = ({ message }: { message: string }) => <div>{message}</div>;
 ```
 
 ### Class Component
 
-read only state
-
 ```ts
 import React from 'react';
 import Button from './Button';
+
+interface Props {
+  foo: string;
+}
 
 const initialState = { clicksCount: 0 };
 type State = Readonly<typeof initialState>;
@@ -1841,52 +1844,7 @@ class ButtonCounter extends React.Component<Props, State> {
   readonly state: State = initialState;
 
   render() {
-    ...
-  }
-}
-```
-
-props and state types with `React.Component<>`
-
-```ts
-type Props = {
-  foo: string;
-};
-
-class MyComponent extends React.Component<Props, {}> {
-  render() {
     return <span>{this.props.foo}</span>;
-  }
-}
-
-<MyComponent foo="bar" />;
-```
-
-```ts
-class FocusingInput extends React.Component<
-  {
-    value: string;
-    onChange: (value: string) => any;
-  },
-  {}
-> {
-  input: HTMLInputElement | null = null;
-
-  render() {
-    return (
-      <input
-        ref={(input) => (this.input = input)}
-        value={this.props.value}
-        onChange={(e) => {
-          this.props.onChange(e.target.value);
-        }}
-      />
-    );
-  }
-  focus() {
-    if (this.input != null) {
-      this.input.focus();
-    }
   }
 }
 ```
