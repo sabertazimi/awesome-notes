@@ -1984,7 +1984,7 @@ const reducer = (state: State, action: Action): State => {
 
 - `Dispatch`
 - `SetStateAction`
-- [More Examples.](https://github.com/juliencrn/useHooks.ts)
+- More [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts).
 
 ```ts
 import { Dispatch, SetStateAction, useState } from 'react';
