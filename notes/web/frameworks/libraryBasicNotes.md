@@ -790,16 +790,15 @@
 
 - [Cypress](https://github.com/cypress-io/cypress)
 - [NightWatch: End to End Testing Framework](https://github.com/nightwatchjs/nightwatch)
-- [Selenium](https://github.com/SeleniumHQ/selenium)
-- [LightHouse](https://github.com/GoogleChrome/lighthouse)
-- [WebPageTest](https://github.com/WPO-Foundation/webpagetest-github-action)
 - [WebHint](https://github.com/webhintio/hint)
 
-### Headless Web Tools
+### Headless Automation Tools
 
 - [Puppeteer: Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
 - [Webkit API](https://github.com/ariya/phantomjs)
 - [Cheerio: jQuery Server Tools](https://github.com/cheeriojs/cheerio)
+- [Selenium](https://github.com/SeleniumHQ/selenium)
+- [Appium](https://github.com/appium/appium)
 
 ### Code Analysis Tools
 
@@ -842,6 +841,8 @@
 
 ### Performance Tools
 
+- [LightHouse](https://github.com/GoogleChrome/lighthouse)
+- [WebPageTest](https://github.com/WPO-Foundation/webpagetest-github-action)
 - [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render)
 - [Node Clinic](https://github.com/nearform/node-clinic)
 - [Perf Tools](https://github.com/brendangregg/perf-tools)
