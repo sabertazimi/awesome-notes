@@ -6173,6 +6173,11 @@ Set-Cookie: weight=100; domain=me.github.com
     有 7 个官方字段和部分定义私有字段, 一般存放用户名, 用户身份, JWT 描述字段.
   - Signature: 对 Header 和 Payload 的签名, 利用签名验证信息的正确性, 防止数据篡改. 签名需要服务端保存的密钥.
 - 把三个部分拼成一个字符串, 每个部分之间用 `.` 分隔: `HeaderBase64.PayloadBase64.Signature`.
+- 业务接口用来鉴权的 token 为 `access token`.
+  越是权限敏感的业务, `access token` 有效期足够短, 以避免被盗用.
+- 一个专门生成 `access token` 的 token, 称为 refresh token.
+  refresh token 用来获取 access token, 有效期更长,
+  通过独立服务和严格的请求方式增加安全性.
 
 ##### JSON Web TOken Pros
 
