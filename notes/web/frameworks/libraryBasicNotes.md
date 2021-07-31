@@ -96,6 +96,7 @@
 - [Alibaba Hooks](https://github.com/alibaba/hooks)
 - [React Hooks Gallery](https://nikgraf.github.io/react-hooks)
 - [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
+- [Platform Hooks](https://github.com/jaredpalmer/the-platform)
 
 ### Others State Management
 
