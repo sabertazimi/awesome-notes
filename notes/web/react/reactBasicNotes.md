@@ -792,7 +792,7 @@ const hook = {
 };
 ```
 
-### useMemo
+### UseMemo
 
 - returns a memoized value
 - only recompute the memoized value when one of the dependencies has changed
@@ -816,7 +816,7 @@ const Button = ({ color, children }) => {
 };
 ```
 
-### useCallback
+### UseCallback
 
 - returns a memoized callback
 - 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
@@ -849,7 +849,7 @@ function Child({ fetchData }) {
 }
 ```
 
-### useState
+### UseState
 
 - read rendered props/state
 - return value of `useState` is `ref` to `hooks[idx]`:
@@ -940,7 +940,7 @@ ChatAPI.subscribeToFriendStatus(300, handleStatusChange); // Run next effect
 ChatAPI.unsubscribeFromFriendStatus(300, handleStatusChange); // Clean up last effect
 ```
 
-### useReducer
+### UseReducer
 
 - Use useState whenever manage a JS **primitive** (e.g. string, boolean, integer).
 - Use useReducer whenever manage an **object** or **array**.
@@ -1011,7 +1011,7 @@ const reducer = (state, action) => {
 const [state, dispatch] = useReducer(reducer, initialState);
 ```
 
-### useRef
+### UseRef
 
 #### Refs Basis
 
@@ -1098,17 +1098,56 @@ function User() {
 }
 ```
 
-### useEffect
+### UseContext
+
+一般都不会裸露地使用 Context.Provider, 而是封装为独立的 Provider 组件,
+将子组件作为 props.children 传入, 这样当 Context 变化时 Provider 不会重新渲染它的子组件,
+由依赖了 context 的子组件自己进行重渲染, 未依赖的子组件不会重新渲染.
+使用 `useMemo` 使得 value 不会重复创建.
+
+```jsx
+import React from 'react';
+
+const CountContext = React.createContext();
+
+function CountProvider(props) {
+  const [count, setCount] = React.useState(0);
+  const value = React.useMemo(() => {
+    return {
+      count,
+      setCount,
+    };
+  }, [count]);
+  return <CountContext.Provider value={value} {...props} />;
+}
+
+function useCount() {
+  const context = React.useContext(CountContext);
+  if (!context) {
+    throw new Error('useCount must be used within a CountProvider');
+  }
+  const { count, setCount } = context;
+  const increment = () => setCount((c) => c + 1);
+  return {
+    count,
+    increment,
+  };
+}
+
+export { CountProvider, useCount };
+```
+
+### UseEffect
 
 [Complete Guide](https://overreacted.io/a-complete-guide-to-useeffect)
 
-#### useEffect Lifecycle
+#### UseEffect Lifecycle
 
 1. React renders UI for current props/state to screen.
 2. React cleans up the effect for prev props/state.
 3. React runs the effect for current props/state.
 
-#### useEffect Nasty Loop
+#### UseEffect Nasty Loop
 
 The effect hook runs when the component `mounts`
 but also when the component `updates`.
@@ -1117,7 +1156,7 @@ the component updates and the effect runs again.
 It fetches the data again and again.
 That’s a bug and needs to be avoided.
 
-#### useEffect Deps List
+#### UseEffect Deps List
 
 无论是将组件编写为类还是函数, 都必须为 effect 响应所有 props 和 state 的更新.
 在传统的 Class Component, 需要编写代码去检测这些 props 和 state 是否变更
@@ -1175,7 +1214,7 @@ const useDataApi = (initialUrl, initialData) => {
 };
 ```
 
-#### Closure in useEffect
+#### Closure in UseEffect
 
 - useEffect Hook 会丢弃上一次渲染结果,
   它会清除上一次 effect,
@@ -1235,7 +1274,7 @@ function useInterval(callback, delay) {
 }
 ```
 
-#### useEffect State vs Class State
+#### UseEffect State vs Class State
 
 - 如同 `Closure in useEffect`, 每次调用 useEffect 时,
   会捕获那一次 render 时的 props 和 state.
@@ -1282,6 +1321,42 @@ componentDidUpdate() {
 // You clicked 5 times
 // You clicked 5 times
 // You clicked 5 times
+```
+
+### UseLayoutEffect
+
+### UseDebugValue
+
+```ts
+const date = new Date();
+useDebugValue(date, date => date.toISOString());
+```
+
+### UseImperativeHandle
+
+```ts
+export interface MyInputHandles {
+  focus(): void;
+}
+
+const MyInput: RefForwardingComponent<MyInputHandles, MyInputProps> = (
+  props,
+  ref
+) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    },
+  }));
+
+  return <input {...props} ref={inputRef} />;
+};
+
+export default forwardRef(MyInput);
 ```
 
 ### Hooks Usage Rules
@@ -2006,45 +2081,6 @@ const debouncedSearchTerm = useDebounce(searchTerm, 500);
 useEffect(() => {
   ...
 }, [debouncedSearchTerm]);
-```
-
-#### Context Hook
-
-一般都不会裸露地使用 Context.Provider, 而是封装为独立的 Provider 组件,
-将子组件作为 props.children 传入, 这样当 Context 变化时 Provider 不会重新渲染它的子组件,
-由依赖了 context 的子组件自己进行重渲染, 未依赖的子组件不会重新渲染.
-使用 `useMemo` 使得 value 不会重复创建.
-
-```jsx
-import React from 'react';
-
-const CountContext = React.createContext();
-
-function CountProvider(props) {
-  const [count, setCount] = React.useState(0);
-  const value = React.useMemo(() => {
-    return {
-      count,
-      setCount,
-    };
-  }, [count]);
-  return <CountContext.Provider value={value} {...props} />;
-}
-
-function useCount() {
-  const context = React.useContext(CountContext);
-  if (!context) {
-    throw new Error('useCount must be used within a CountProvider');
-  }
-  const { count, setCount } = context;
-  const increment = () => setCount((c) => c + 1);
-  return {
-    count,
-    increment,
-  };
-}
-
-export { CountProvider, useCount };
 ```
 
 #### Script Loading Hook
