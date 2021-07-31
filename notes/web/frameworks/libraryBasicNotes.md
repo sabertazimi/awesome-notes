@@ -92,9 +92,11 @@
 
 ### React Hooks
 
+- [Use Hooks](https://github.com/uidotdev/usehooks)
 - [ReactUse Hooks](https://github.com/streamich/react-use)
-- [Ali Hooks](https://github.com/alibaba/hooks)
+- [Alibaba Hooks](https://github.com/alibaba/hooks)
 - [React Hooks Gallery](https://nikgraf.github.io/react-hooks)
+- [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
 
 ### Others State Management
 

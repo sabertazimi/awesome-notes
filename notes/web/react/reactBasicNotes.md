@@ -1391,7 +1391,11 @@ App = MyReact.render(Component);
 
 ### Custom Hooks
 
-- [More Custom Hooks](https://usehooks.com)
+- [Use Hooks](https://github.com/uidotdev/usehooks)
+- [ReactUse Hooks](https://github.com/streamich/react-use)
+- [Alibaba Hooks](https://github.com/alibaba/hooks)
+- [React Hooks Gallery](https://nikgraf.github.io/react-hooks)
+- [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
 
 #### LifeCycle Hooks
 
