@@ -3700,6 +3700,7 @@ const reducer = (state: State, action: Action): Reducer<State, Action> => {
 - `Dispatch<T>`
 - `SetStateAction<T>`
 - `RefObject<T>`
+- `MutableRefObject<T>`
 - More [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts).
 
 #### Use State Hook Type
@@ -3751,7 +3752,65 @@ function Counter() {
 }
 ```
 
+#### Use Ref Hook Type
+
+##### DOM Element Ref Type
+
+- If possible, prefer as specific as possible.
+- Return type is `RefObject<T>`.
+
+```ts
+function Foo() {
+  const divRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!divRef.current) throw Error('divRef is not assigned');
+
+    doSomethingWith(divRef.current);
+  });
+
+  return <div ref={divRef}>etc</div>;
+}
+```
+
+##### Mutable Value Ref
+
+- Return type is `MutableRefObject<T>`.
+
+```ts
+function Foo() {
+  const intervalRef = useRef<number | null>(null);
+
+  // You manage the ref yourself (that's why it's called MutableRefObject!)
+  useEffect(() => {
+    intervalRef.current = setInterval(...);
+    return () => clearInterval(intervalRef.current);
+  }, []);
+
+  // The ref is not passed to any element's "ref" prop
+  return <button onClick={/* clearInterval the ref */}>Cancel timer</button>;
+}
+```
+
 #### Custom Hooks Types
+
+Use `as const` type assertion to avoid type inference
+(especially for `[first, second]` type).
+
+```ts
+export function useLoading() {
+  const [isLoading, setState] = React.useState(false);
+  const load = () => {
+    setState(true);
+  };
+
+  // return `[boolean, () => void]` as want
+  // instead of `(boolean | () => void)[]`
+  return [isLoading, load] as const;
+}
+```
+
+More hooks
 
 ```ts
 import { Dispatch, SetStateAction, useState } from 'react';
