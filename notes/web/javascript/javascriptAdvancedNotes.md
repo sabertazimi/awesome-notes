@@ -4112,7 +4112,11 @@ window.addEventListener('replacestate', function (event) {
 
 ### Tools API
 
-#### console API
+#### Console Functions
+
+- `console.XXX`.
+- `copy`: copy complex object to clipboard.
+- `monitor`: monitor object.
 
 ```js
 var devtools = /./;
