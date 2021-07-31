@@ -614,6 +614,7 @@
 - [React Filepond](https://github.com/pqina/react-filepond)
 - [Vue Filepond](https://github.com/pqina/vue-filepond)
 - [Uppy Uploader](https://github.com/transloadit/uppy)
+- [TypeScript Slice Uploader](https://github.com/shadowings-zy/easy-file-uploader)
 
 ### File Downloader
 
