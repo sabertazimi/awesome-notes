@@ -1841,6 +1841,10 @@ Domain 层是领域模型系统的核心,
 - Third-party tools, Message Queue, File, Cache, Database, Search etc.
 - 实现仓储接口 DB, 通常真正读写 DB.
 
+### DDD Layout
+
+- [DDD Layout in Golang](https://github.com/lupguo/ddd-layout)
+
 ## 高并发系统设计
 
 ### Concurrent Code Layer
