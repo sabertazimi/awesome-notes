@@ -3630,7 +3630,7 @@ import Button from './Button';
 
 type Props = typeof ButtonCounter.defaultProps & {
   name: string;
-}
+};
 
 const initialState = { clicksCount: 0 };
 type State = Readonly<typeof initialState>;
@@ -3677,6 +3677,116 @@ const foo = <T extends {}>(arg: T) => arg;
 
 - `JSX.Element`: return value of `React.createElement`.
 - `React.ReactNode`: return value of a component.
+
+### React Event Types
+
+- `React.SyntheticEvent`.
+- `React.AnimationEvent`:
+  CSS animations.
+- `React.ChangeEvent`:
+  `<input>`/`<select>`/`<textarea>` change events.
+- `React.ClipboardEvent`:
+  copy/paste/cut events.
+- `React.CompositionEvent`:
+  user indirectly entering text events.
+- `React.DragEvent`:
+  drag/drop interaction events.
+- `React.FocusEvent`:
+  elements gets/loses focus events.
+- `React.FormEvent<HTMLElement>`:
+  form focus/change/submit events.
+- `React.InvalidEvent`:
+  validity restrictions of inputs fails.
+- `React.KeyboardEvent`:
+  keyboard interaction events.
+- `React.MouseEvent`:
+  pointing device interaction events (e.g mouse).
+- `React.TouchEvent`:
+  touch device interaction events.
+  Extends UIEvent.
+- `React.PointerEvent`:
+  advanced pointing device interaction events
+  (includes mouse, pen/stylus, touchscreen),
+  recommended for modern browser.
+  Extends `UIEvent`.
+- `React.TransitionEvent`:
+  CSS transition.
+  Extends UIEvent.
+- `React.UIEvent`:
+  base event for Mouse/Touch/Pointer events.
+- `React.WheelEvent`:
+  mouse wheel scrolling events.
+
+#### React Event Handler Types
+
+- `React.ChangeEventHandler<HTMLElement>`.
+
+#### React Form Event Types
+
+```tsx
+type State = {
+  text: string;
+};
+
+class App extends React.Component<Props, State> {
+  state = {
+    text: '',
+  };
+
+  // typing on RIGHT hand side of =
+  onChange = (e: React.FormEvent<HTMLInputElement>): void => {
+    this.setState({ text: e.currentTarget.value });
+  };
+
+  // typing on LEFT hand side of =
+  onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    this.setState({ text: e.currentTarget.value });
+  };
+
+  render() {
+    return (
+      <div>
+        <input type="text" value={this.state.text} onChange={this.onChange} />
+      </div>
+    );
+  }
+}
+```
+
+```tsx
+const Form = () => (
+  <form
+    ref={formRef}
+    onSubmit={(e: React.SyntheticEvent) => {
+      e.preventDefault();
+
+      const target = e.target as typeof e.target & {
+        email: { value: string };
+        password: { value: string };
+      };
+
+      const email = target.email.value; // Type Checks
+      const password = target.password.value; // Type Checks
+    }}
+  >
+    <div>
+      <label>
+        Email:
+        <input type="email" name="email" />
+      </label>
+    </div>
+    <div>
+      <label>
+        Password:
+        <input type="password" name="password" />
+      </label>
+    </div>
+    <div>
+      <input type="submit" value="Log in" />
+    </div>
+  </form>
+);
+```
 
 ### React Redux Types
 
