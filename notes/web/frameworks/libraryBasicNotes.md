@@ -907,6 +907,7 @@
 ### DepOps Automation CI and CD Tools
 
 - [Probot: Framework for building GitHub Apps to automate workflow](https://github.com/probot/probot)
+- [Actions Toolkit: Building GitHub Actions in Node.js](https://github.com/JasonEtco/actions-toolkit)
 
 ### DevOps Config Tools
 
