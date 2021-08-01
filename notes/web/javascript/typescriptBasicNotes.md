@@ -148,6 +148,18 @@ npx eslint --init
 
 - [Types Search](https://microsoft.github.io/TypeSearch)
 
+| Declaration Type | Namespace | Type | Value |
+| :--------------- | :-------- | :--- | :---- |
+| Namespace        | X         |      | X     |
+| Class            |           | X    | X     |
+| Enum             |           | X    | X     |
+| Interface        |           | X    |       |
+| Type Alias       |           | X    |       |
+| Function         |           |      | X     |
+| Variable         |           |      | X     |
+
+> **Value** means truly output JavaScript.
+
 ### Globals Definition
 
 globals.d.ts:
@@ -203,7 +215,8 @@ import polygons = Shapes.Polygons;
 let sq = new polygons.Square(); // Same as 'new Shapes.Polygons.Square()'
 ```
 
-Library namespace declaration:
+Library namespace declaration
+with [Declaration Merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-namespaces-with-classes-functions-and-enums):
 
 ```ts
 export = React;
@@ -462,12 +475,12 @@ function partialCall<T extends Arr, U extends Arr, R>(
 
 const foo = (x: string, y: number, z: boolean) => {};
 const f1 = partialCall(foo, 100);
-const f2 = partialCall(foo, "hello", 100, true, "oops");
-const f3 = partialCall(foo, "hello");
+const f2 = partialCall(foo, 'hello', 100, true, 'oops');
+const f3 = partialCall(foo, 'hello');
 
 f3(123, true);
 f3();
-f3(123, "hello");
+f3(123, 'hello');
 ```
 
 ## Interface
@@ -1066,27 +1079,27 @@ const b = x.b;
 `connect` in React
 
 ```ts
-import * as React from 'react'
-import * as Redux from 'redux'
+import * as React from 'react';
+import * as Redux from 'redux';
 
-import { MyReduxState } from './my-root-reducer.ts'
+import { MyReduxState } from './my-root-reducer.ts';
 
 export interface OwnProps {
-  propFromParent: number
+  propFromParent: number;
 }
 
 interface StateProps {
-  propFromReduxStore: string
+  propFromReduxStore: string;
 }
 
 interface DispatchProps {
-  onSomeEvent: () => void
+  onSomeEvent: () => void;
 }
 
-type Props = StateProps & DispatchProps & OwnProps
+type Props = StateProps & DispatchProps & OwnProps;
 
 interface State {
-  internalComponentStateField: string
+  internalComponentStateField: string;
 }
 
 class MyComponent extends React.Component<Props, State> {
@@ -1104,8 +1117,10 @@ function mapDispatchToProps(
   // ...
 }
 
-export default connect<StateProps, DispatchProps, OwnProps>
-  (mapStateToProps, mapDispatchToProps)(MyComponent)
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(MyComponent);
 ```
 
 ## Conditional Types
@@ -1719,7 +1734,7 @@ function staticProp(constructor, name) {
 
 class MyComponent extends React.Component<Props> {
   @prop
-  public member: string
+  public member: string;
 
   @staticProp
   public static apiVersion: string;
@@ -1762,7 +1777,7 @@ function methodDecorator(options: any[]) {
     propertyDescriptor: PropertyDescriptor
   ) => {
     // ...
-  }
+  };
 }
 
 class MyComponent extends React.Component {
@@ -1781,7 +1796,7 @@ function enumerable(enumerable: boolean) {
     propertyDescriptor: PropertyDescriptor
   ) => {
     propertyDescriptor.enumerable = enumerable;
-  }
+  };
 }
 
 class MyComponent extends React.Component {
