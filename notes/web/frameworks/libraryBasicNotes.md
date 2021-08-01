@@ -798,9 +798,9 @@
 
 - [Puppeteer: Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
 - [Webkit API](https://github.com/ariya/phantomjs)
-- [Cheerio: jQuery Server Tools](https://github.com/cheeriojs/cheerio)
 - [Selenium](https://github.com/SeleniumHQ/selenium)
 - [Appium](https://github.com/appium/appium)
+- [Cheerio: jQuery Server Tools](https://github.com/cheeriojs/cheerio)
 
 ### Code Analysis Tools
 
@@ -904,9 +904,9 @@
 - [Node Maintenance Tools](https://github.com/maxogden/maintenance-modules)
 - [BeachBall: Sunniest semantic version bumper](https://github.com/microsoft/beachball)
 
-### DevOps CI Tools
+### DepOps Automation CI and CD Tools
 
-- [ProBot](https://github.com/probot/probot)
+- [Probot: Framework for building GitHub Apps to automate workflow](https://github.com/probot/probot)
 
 ### DevOps Config Tools
 
