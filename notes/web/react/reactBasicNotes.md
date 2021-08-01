@@ -2306,6 +2306,32 @@ function useLockedBody(initialLocked = false): ReturnType {
 export default useLockedBody;
 ```
 
+#### Media Query Hook
+
+```tsx
+const useMedia = <T>(queries: string[], values: T[], defaultValue: T) => {
+  // Array containing a media query list for each query
+  const mediaQueryLists = queries.map((q) => window.matchMedia(q));
+
+  const getValue = () => {
+    // Get index of first media query that matches
+    const index = mediaQueryLists.findIndex((mql) => mql.matches);
+    return values?.[index] || defaultValue;
+  };
+
+  // State and setter for matched value
+  const [value, setValue] = useState<T>(getValue);
+
+  useEffect(() => {
+    const handler = () => setValue(getValue);
+    mediaQueryLists.forEach((mql) => mql.addListener(handler));
+    return () => mediaQueryLists.forEach((mql) => mql.removeListener(handler));
+  }, []);
+
+  return value;
+};
+```
+
 #### Form Hook
 
 ```jsx
