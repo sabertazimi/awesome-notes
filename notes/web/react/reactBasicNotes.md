@@ -3724,6 +3724,21 @@ const AlertButton: React.FC<AlertButtonProps> = (props) => (
 );
 ```
 
+Typing existing untyped React components:
+
+```ts
+declare module 'react-router-dom' {
+  import * as React from 'react';
+
+  type NavigateProps<T> = {
+    to: string | number,
+    replace?: boolean,
+    state?: T
+  }
+
+  export class Navigate<T = any> extends React.Component<NavigateProps<T>>{}
+```
+
 ### Component Return Type
 
 - `JSX.Element`: return value of `React.createElement`.
