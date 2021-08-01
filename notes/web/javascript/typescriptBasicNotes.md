@@ -1069,18 +1069,18 @@ interface State {
 }
 
 class MyComponent extends React.Component<Props, State> {
-  ...
+  // ...
 }
 
 function mapStateToProps(state: MyReduxState, ownProps: OwnProps): StateProps {
-  ...
+  // ...
 }
 
 function mapDispatchToProps(
   dispatch: Redux.Dispatch<any>,
   ownProps: OwnProps
 ): DispatchProps {
-  ...
+  // ...
 }
 
 export default connect<StateProps, DispatchProps, OwnProps>
@@ -1645,12 +1645,12 @@ class MyComponent extends React.Component<Props, State> {
 ```ts
 function classDecorator(options: any[]) {
   return target => {
-    ...
+    // ...
   }
 }
 
 @classDecorator
-class ...
+class // ...
 ```
 
 ```ts
@@ -1687,11 +1687,11 @@ and `class constructor` for static properties.
 
 ```ts
 function prop(target, name) {
-  ...
+  // ...
 }
 
 function staticProp(constructor, name) {
-  ...
+  // ...
 }
 
 class MyComponent extends React.Component<Props> {
@@ -1714,11 +1714,11 @@ function decorator(
   name: string,
   index: int,
 ) {
-  ...
+  // ...
 }
 class MyComponent extends React.Component<Props> {
   private handleMethod(@decorator param1: string) {
-    ...
+    // ...
   }
 }
 ```
@@ -1738,14 +1738,14 @@ function methodDecorator(options: any[]) {
     propertyKey: string,
     propertyDescriptor: PropertyDescriptor
   ) => {
-    ...
+    // ...
   }
 }
 
 class MyComponent extends React.Component {
   @methodDecorator
   handleSomething() {
-    ...
+    // ...
   }
 }
 ```
@@ -1764,7 +1764,7 @@ function enumerable(enumerable: boolean) {
 class MyComponent extends React.Component {
   @enumerable(false)
   handleSomething() {
-    ...
+    // ...
   }
 }
 ```
