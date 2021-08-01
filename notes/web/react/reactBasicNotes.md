@@ -3008,10 +3008,12 @@ const TextArea = () => (
 
 以下是错误边界不起作用的情况:
 
-- 在事件处理器内
-- setTimeout 或 requestAnimationFrame 回调中的异步代码
-- 在服务端渲染期间
-- 错误边界代码本身中引发错误时
+- 在事件处理器内.
+- setTimeout 或 requestAnimationFrame 回调中的异步代码.
+- 在服务端渲染期间.
+- 错误边界代码本身中引发错误时.
+
+[React Error Boundary](https://github.com/bvaughn/react-error-boundary) library:
 
 ```jsx
 class ErrorBoundary extends React.Component {
