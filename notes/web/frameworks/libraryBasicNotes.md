@@ -96,7 +96,7 @@
 - [Alibaba Hooks](https://github.com/alibaba/hooks)
 - [React Hooks Gallery](https://nikgraf.github.io/react-hooks)
 - [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
-- [Platform Hooks](https://github.com/jaredpalmer/the-platform)
+- [Platform Hooks: Browser APIs turned into Hooks](https://github.com/jaredpalmer/the-platform)
 
 ### Others State Management
 
@@ -286,7 +286,7 @@
 ### Form
 
 - [React Form Hooks](https://github.com/react-hook-form/react-hook-form)
-- [React Formik](https://github.com/jaredpalmer/formik)
+- [React Formik](https://github.com/formium/formik)
 - [XRender: Alibaba low code form/table/chart render](https://github.com/alibaba/x-render)
 - [Form Boilerplate](https://github.com/andybelldesign/boilerform)
 
