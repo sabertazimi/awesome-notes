@@ -1813,6 +1813,11 @@ class MyComponent extends React.Component {
 
 - [InversifyJS: Powerful and lightweight inversion of control container](https://github.com/inversify/InversifyJS)
 
+## Project Reference
+
+[Project Reference](https://www.typescriptlang.org/docs/handbook/project-references.html)
+for TypeScript compile and build [Speed](https://github.com/typescript-cheatsheets/speed).
+
 ## Monorepo
 
 - [TypeScript Monorepo](https://2ality.com/2021/07/simple-monorepos.html 'TypeScript Monorepo')
