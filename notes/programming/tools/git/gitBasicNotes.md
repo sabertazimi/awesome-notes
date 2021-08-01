@@ -196,7 +196,7 @@ no more than 50 characters
 #### Message Footer
 
 - referencing issues e.g. close #666, #888
-- BREAKING CHANGE (MAJOR Version)
+- BREAKING CHANGE (`<type>!`) (MAJOR Version)
   e.g.`port-runner` command line option has changed to `runner-port`,
   so that it is consistent with the configuration file syntax.
   To migrate your project, change all the commands, where you use `--port-runner`
