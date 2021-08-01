@@ -3648,6 +3648,17 @@ const App = ({ message }: { message: string }) => <div>{message}</div>;
 - `static getDerivedStateFromProps`
 
 ```ts
+class MyComponent extends React.Component<{
+  message?: string;
+}> {
+  render() {
+    const { message = 'default' } = this.props;
+    return <div>{message}</div>;
+  }
+}
+```
+
+```ts
 import React from 'react';
 import Button from './Button';
 
