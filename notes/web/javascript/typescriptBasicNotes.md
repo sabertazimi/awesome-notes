@@ -1194,6 +1194,8 @@ type NotDistributed = Wrapped<number | boolean>;
 
 ## Mapped Types
 
+[Built-in Mapped Types](https://github.com/microsoft/TypeScript/blob/main/src/lib/es5.d.ts#L1448-L1546).
+
 ### Basic Mapped Types
 
 ```ts
