@@ -449,6 +449,27 @@ padding(1, 1, 1, 1); // Okay: top, right, bottom, left
 padding(1, 1, 1); // Error: Not a part of the available overloads
 ```
 
+### Rest Parameters
+
+```ts
+type Arr = readonly unknown[];
+function partialCall<T extends Arr, U extends Arr, R>(
+  f: (...args: [...T, ...U]) => R,
+  ...headArgs: T
+) {
+  return (...tailArgs: U) => f(...headArgs, ...tailArgs);
+}
+
+const foo = (x: string, y: number, z: boolean) => {};
+const f1 = partialCall(foo, 100);
+const f2 = partialCall(foo, "hello", 100, true, "oops");
+const f3 = partialCall(foo, "hello");
+
+f3(123, true);
+f3();
+f3(123, "hello");
+```
+
 ## Interface
 
 ```ts
