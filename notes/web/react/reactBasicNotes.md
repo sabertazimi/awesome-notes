@@ -3090,7 +3090,7 @@ class Frameworks extends React.Component {
 }
 ```
 
-## Portals
+## React Portals
 
 Portals provide a first-class way to render children into a DOM node
 that exists **outside** the DOM hierarchy of the parent component
@@ -3809,6 +3809,69 @@ const Form = () => (
     </div>
   </form>
 );
+```
+
+### React Portals Types
+
+```tsx
+const modalRoot = document.getElementById('modal-root') as HTMLElement;
+
+export class Modal extends React.Component {
+  el: HTMLElement = document.createElement('div');
+
+  componentDidMount() {
+    modalRoot.appendChild(this.el);
+  }
+
+  componentWillUnmount() {
+    modalRoot.removeChild(this.el);
+  }
+
+  render() {
+    return ReactDOM.createPortal(this.props.children, this.el);
+  }
+}
+```
+
+```tsx
+import React, { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
+
+const modalRoot = document.querySelector('#modal-root') as HTMLElement;
+
+const Modal: React.FC<{}> = ({ children }) => {
+  const el = useRef(document.createElement('div'));
+
+  useEffect(() => {
+    const current = el.current;
+    modalRoot!.appendChild(current);
+    return () => void modalRoot!.removeChild(current);
+  }, []);
+
+  return createPortal(children, el.current);
+};
+
+export default Modal;
+```
+
+```tsx
+function App() {
+  const [showModal, setShowModal] = React.useState(false);
+  return (
+    <div>
+      <div id="modal-root"></div>
+      {showModal && (
+        <Modal>
+          <div>
+            I'm a modal!{' '}
+            <button onClick={() => setShowModal(false)}>close</button>
+          </div>
+        </Modal>
+      )}
+      <button onClick={() => setShowModal(true)}>show Modal</button>
+    </div>
+  );
+}
 ```
 
 ### React Redux Types
