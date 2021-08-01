@@ -148,8 +148,9 @@ git commit --amend -a -v
 ### Commit Style Guide
 
 - [Conventional Commits Specification](https://github.com/conventional-commits/conventionalcommits.org)
-- [Standard Version: Automate versioning and CHANGELOG generation](https://github.com/conventional-changelog/standard-version)
+- [Commit Lint](https://github.com/conventional-changelog/commitlint)
 - [Commitizen: Conventional commits CLI tool](https://github.com/commitizen/cz-cli)
+- [Standard Version: Automate versioning and CHANGELOG generation](https://github.com/conventional-changelog/standard-version)
 
 ```bash
 npm i -D standard-version
