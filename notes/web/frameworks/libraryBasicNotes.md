@@ -903,6 +903,8 @@
 
 - [Node Maintenance Tools](https://github.com/maxogden/maintenance-modules)
 - [BeachBall: Sunniest semantic version bumper](https://github.com/microsoft/beachball)
+- [Standard Version: Automate versioning and CHANGELOG generation](https://github.com/conventional-changelog/standard-version)
+- [Commitizen: Conventional commits CLI tool](https://github.com/commitizen/cz-cli)
 
 ### DepOps Automation CI and CD Tools
 
