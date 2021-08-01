@@ -3707,10 +3707,35 @@ use `extends {}` to avoid it:
 const foo = <T extends {}>(arg: T) => arg;
 ```
 
+### Component Props Type
+
+- `React.ComponentProps`
+- `React.ComponentPropsWithRef`
+- `React.ComponentPropsWithoutRef`
+
+```tsx
+import { Button } from 'library';
+
+type ButtonProps = React.ComponentProps<typeof Button>;
+type AlertButtonProps = Omit<ButtonProps, 'onClick'>;
+
+const AlertButton: React.FC<AlertButtonProps> = (props) => (
+  <Button onClick={() => alert('hello')} {...props} />
+);
+```
+
 ### Component Return Type
 
 - `JSX.Element`: return value of `React.createElement`.
 - `React.ReactNode`: return value of a component.
+
+```tsx
+function foo(bar: string) {
+  return { baz: 1 };
+}
+
+type FooReturn = ReturnType<typeof foo>; // { baz: number }
+```
 
 ### React Event Types
 
