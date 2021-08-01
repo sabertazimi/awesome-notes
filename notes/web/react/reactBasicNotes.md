@@ -3821,6 +3821,10 @@ type FooReturn = ReturnType<typeof foo>; // { baz: number }
   base event for Mouse/Touch/Pointer events.
 - `React.WheelEvent`:
   mouse wheel scrolling events.
+- Missing `InputEvent` (extends `UIEvent`):
+  `InputEvent` is still an experimental interface
+  and not fully supported by all browsers.
+  Use `SyntheticEvent` instead.
 
 #### React Event Handler Types
 
