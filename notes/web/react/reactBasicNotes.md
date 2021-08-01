@@ -1329,7 +1329,7 @@ componentDidUpdate() {
 
 ```ts
 const date = new Date();
-useDebugValue(date, date => date.toISOString());
+useDebugValue(date, (date) => date.toISOString());
 ```
 
 ### UseImperativeHandle
@@ -3592,7 +3592,7 @@ class CssThemeProvider extends React.PureComponent<Props> {
 }
 ```
 
-### Functional Component Types
+### Function Component Types
 
 Don't use `React.FC`/`React.FunctionComponent`:
 
@@ -3619,12 +3619,17 @@ const App = ({ message }: { message: string }) => <div>{message}</div>;
 
 ### Class Component Types
 
+- `React.Component<P, S>`
+- `readonly state: State`
+- `static defaultProps`
+- `static getDerivedStateFromProps`
+
 ```ts
 import React from 'react';
 import Button from './Button';
 
-interface Props {
-  foo: string;
+type Props = typeof ButtonCounter.defaultProps & {
+  name: string;
 }
 
 const initialState = { clicksCount: 0 };
@@ -3632,6 +3637,17 @@ type State = Readonly<typeof initialState>;
 
 class ButtonCounter extends React.Component<Props, State> {
   readonly state: State = initialState;
+
+  static defaultProps = {
+    name: 'count',
+  };
+
+  static getDerivedStateFromProps(
+    props: Props,
+    state: State
+  ): Partial<State> | null {
+    // ...
+  }
 
   render() {
     return <span>{this.props.foo}</span>;
