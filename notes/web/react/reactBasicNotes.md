@@ -402,7 +402,7 @@ componentWillUnmount()
 
 - Default render behavior (without any `memo`/`useMemo`/`PureComponent`):
   when a parent component renders,
-  React will recursively render all child components inside of it
+  React will recursively render **all child components** inside of it
   (because `props.children` is always a new reference when parent re-rendering).
 - Render logic:
   - Can't mutate existing variables and objects.
@@ -3179,26 +3179,30 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ## React Performance
 
-- use `key` correctly
-- `shouldComponentUpdate`
+- Use `key` correctly.
+- `shouldComponentUpdate`.
 - `React.memo/React.useMemo/React.PureComponent`:
-  **shallow compare** on components,
-  to prevent unnecessary re-renders caused by parent components.
-- `React.memo`: **shallow compare** diff
-- stateless component
-- Immutable.js
-- Isomorphic rendering
-- Webpack bundle analyzer
-- [Progressive React](https://houssein.me/progressive-react)
+  **shallow compare** on components
+  to prevent unnecessary re-rendering **caused by parent components**.
+- `React.memo`: **shallow compare** diff.
+- Stateless component.
+- Immutable.js.
+- Isomorphic rendering.
+- Webpack bundle analyzer.
+- [Progressive React](https://houssein.me/progressive-react).
 
 ### Re-rendering Problem
 
+React will recursively render **all child components** inside of it
+(because `props.children` is always a new reference when parent re-rendering).
+
 The major difference is that
-React.Component doesn’t implement the shouldComponentUpdate() lifecycle method
-while React.PureComponent implements it.
-If component's render() function renders the same result
+`React.Component` doesn’t implement `shouldComponentUpdate()` lifecycle method
+while `React.PureComponent` implements it.
+
+If component `render()` function renders the same result
 given the same props and state,
-use React.PureComponent/React.memo for a performance boost in some cases.
+use `React.PureComponent/React.memo` for a performance boost in some cases.
 
 ```jsx
 import React, { PureComponent } from 'react';
