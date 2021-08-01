@@ -517,6 +517,16 @@ function commitAttachRef(finishedWork: Fiber) {
 }
 ```
 
+```tsx
+class CssThemeProvider extends React.PureComponent<Props> {
+  private rootRef = React.createRef<HTMLDivElement>();
+
+  render() {
+    return <div ref={this.rootRef}>{this.props.children}</div>;
+  }
+}
+```
+
 #### String Refs
 
 - 尽可能不适用 `String Refs`
@@ -551,7 +561,7 @@ class App extends React.Component {
 
 #### Forward Refs
 
-你不能在函数式组件上使用`ref`属性,
+不能在函数式组件上使用`ref`属性,
 因为它们没有实例, 但可以在函数式组件内部使用`ref`.
 Ref forwarding 是一个特性,
 它允许一些组件获取接收到 ref 对象并将它进一步传递给子组件.
@@ -568,6 +578,17 @@ const ButtonElement = React.forwardRef((props, ref) => (
 // get ref to `<button>`
 const ref = React.createRef();
 <ButtonElement ref={ref}>{'Forward Ref'}</ButtonElement>;
+```
+
+```tsx
+type Ref = HTMLButtonElement;
+type Props = { children: React.ReactNode; type: 'submit' | 'button' };
+
+const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
+  <button ref={ref} className="MyClassName" type={props.type}>
+    {props.children}
+  </button>
+));
 ```
 
 #### Callback Refs
@@ -1336,7 +1357,7 @@ useDebugValue(date, (date) => date.toISOString());
 ### UseImperativeHandle Hook
 
 ```ts
-export interface MyInputHandles {
+interface MyInputHandles {
   focus(): void;
 }
 
@@ -1357,7 +1378,7 @@ const MyInput: RefForwardingComponent<MyInputHandles, MyInputProps> = (
   return <input {...props} ref={inputRef} />;
 };
 
-export default forwardRef(MyInput);
+export default React.forwardRef(MyInput);
 ```
 
 ### Hooks Usage Rules
@@ -3487,14 +3508,13 @@ index.html.js
 const startApp = require('../dist/server.js').default;
 
 module.exports = () => `<!DOCTYPE html>
-<head>
-  ...
-</head>
-<body>
-  <div id="app">${startApp()}</div>
-  <script src="/static/client.js"></script>
-</body>
-</html>
+    <head>
+    </head>
+    <body>
+      <div id="app">${startApp()}</div>
+      <script src="/static/client.js"></script>
+    </body>
+  </html>`;
 ```
 
 start.client.js
