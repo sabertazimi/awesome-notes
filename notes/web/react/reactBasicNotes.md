@@ -3621,6 +3621,7 @@ export default Intl;
 ## React with TypeScript
 
 - [React TypeScript CheatSheet](https://github.com/typescript-cheatsheets/react)
+- [@types/react API](https://github.com/typescript-cheatsheets/react/blob/main/docs/advanced/types-react-ap.md)
 
 ### Props Types
 
