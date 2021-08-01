@@ -3822,6 +3822,15 @@ const Form = () => (
 );
 ```
 
+### React HTML and CSS Types
+
+- `React.DOMAttributes<HTMLElement>`
+- `React.AriaAttributes<HTMLElement>`
+- `React.SVGAttributes<HTMLElement>`
+- `React.HTMLAttributes<HTMLElement>`
+- `React.ButtonHTMLAttributes<HTMLButtonElement>`
+- `React.CSSProperties`
+
 ### React Portals Types
 
 ```tsx
