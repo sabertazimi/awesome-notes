@@ -792,7 +792,7 @@ const hook = {
 };
 ```
 
-### UseMemo
+### UseMemo Hook
 
 - returns a memoized value
 - only recompute the memoized value when one of the dependencies has changed
@@ -816,7 +816,7 @@ const Button = ({ color, children }) => {
 };
 ```
 
-### UseCallback
+### UseCallback Hook
 
 - returns a memoized callback
 - 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
@@ -849,7 +849,7 @@ function Child({ fetchData }) {
 }
 ```
 
-### UseState
+### UseState Hook
 
 - read rendered props/state
 - return value of `useState` is `ref` to `hooks[idx]`:
@@ -940,7 +940,7 @@ ChatAPI.subscribeToFriendStatus(300, handleStatusChange); // Run next effect
 ChatAPI.unsubscribeFromFriendStatus(300, handleStatusChange); // Clean up last effect
 ```
 
-### UseReducer
+### UseReducer Hook
 
 - Use useState whenever manage a JS **primitive** (e.g. string, boolean, integer).
 - Use useReducer whenever manage an **object** or **array**.
@@ -1011,7 +1011,7 @@ const reducer = (state, action) => {
 const [state, dispatch] = useReducer(reducer, initialState);
 ```
 
-### UseRef
+### UseRef Hook
 
 #### Refs Basis
 
@@ -1098,12 +1098,13 @@ function User() {
 }
 ```
 
-### UseContext
+### UseContext Hook
 
-一般都不会裸露地使用 Context.Provider, 而是封装为独立的 Provider 组件,
-将子组件作为 props.children 传入, 这样当 Context 变化时 Provider 不会重新渲染它的子组件,
-由依赖了 context 的子组件自己进行重渲染, 未依赖的子组件不会重新渲染.
-使用 `useMemo` 使得 value 不会重复创建.
+- 一般都不会裸露地使用 Context.Provider, 而是封装为独立的 Provider 组件,
+  将子组件作为 props.children 传入, 这样当 Context 变化时 Provider 不会重新渲染它的子组件,
+  由依赖了 context 的子组件自己进行重渲染, 未依赖的子组件不会重新渲染.
+  使用 `useMemo` 使得 value 不会重复创建.
+- `const { state, update } = React.useContext(MyContext);`.
 
 ```jsx
 import React from 'react';
@@ -1137,7 +1138,7 @@ function useCount() {
 export { CountProvider, useCount };
 ```
 
-### UseEffect
+### UseEffect Hook
 
 [Complete Guide](https://overreacted.io/a-complete-guide-to-useeffect)
 
@@ -1323,16 +1324,16 @@ componentDidUpdate() {
 // You clicked 5 times
 ```
 
-### UseLayoutEffect
+### UseLayoutEffect Hook
 
-### UseDebugValue
+### UseDebugValue Hook
 
 ```ts
 const date = new Date();
 useDebugValue(date, (date) => date.toISOString());
 ```
 
-### UseImperativeHandle
+### UseImperativeHandle Hook
 
 ```ts
 export interface MyInputHandles {
@@ -3865,7 +3866,7 @@ const reducer = (state: State, action: Action): Reducer<State, Action> => {
 - `MutableRefObject<T>`
 - More [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts).
 
-#### Use State Hook Type
+#### UseState Hook Type
 
 ```ts
 const [user, setUser] = React.useState<IUser>({} as IUser);
@@ -3873,7 +3874,7 @@ const [user, setUser] = React.useState<IUser>({} as IUser);
 setUser(newUser);
 ```
 
-#### Use Reducer Hook Type
+#### UseReducer Hook Type
 
 - Use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#discriminated-unions)
   for reducer actions.
@@ -3914,7 +3915,7 @@ function Counter() {
 }
 ```
 
-#### Use Ref Hook Type
+#### UseRef Hook Type
 
 ##### DOM Element Ref Type
 
