@@ -822,7 +822,6 @@
 - [CSS Stats CLI](https://github.com/projectwallace/wallace-cli)
 - [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
 - [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint)
-- [Commit Lint](https://github.com/conventional-changelog/commitlint)
 - [JSCPD: Copy paste detector](https://github.com/kucherenko/jscpd)
 - [Size Limit: Calculate real cost to keep good performance](https://github.com/ai/size-limit)
 - [Java CheckStyle](https://github.com/checkstyle/checkstyle)
@@ -903,8 +902,10 @@
 
 - [Node Maintenance Tools](https://github.com/maxogden/maintenance-modules)
 - [BeachBall: Sunniest semantic version bumper](https://github.com/microsoft/beachball)
-- [Standard Version: Automate versioning and CHANGELOG generation](https://github.com/conventional-changelog/standard-version)
+- [Commit Lint](https://github.com/conventional-changelog/commitlint)
 - [Commitizen: Conventional commits CLI tool](https://github.com/commitizen/cz-cli)
+- [Standard Version: Automate versioning and CHANGELOG generation](https://github.com/conventional-changelog/standard-version)
+- [Semantic Release: Fully automated version management and package publishing](https://github.com/semantic-release/semantic-release)
 
 ### DepOps Automation CI and CD Tools
 
