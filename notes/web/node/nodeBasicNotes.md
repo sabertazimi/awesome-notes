@@ -41,7 +41,6 @@ npm outdated   # 去除过期包
 ### Test Steps
 
 ```json
-// in package.json
 "scripts": {
     "test": "node test.js"
 },
@@ -302,6 +301,32 @@ npx gistUrl
 npm version major
 npm version minor
 npm version patch
+```
+
+### NPM Workspaces
+
+In root `package.json`:
+
+```json
+{
+  "workspaces": [
+    "./packages/*",
+    "./css/*",
+    "./angular/*",
+    "./react/*",
+    "./vue/*"
+  ]
+}
+```
+
+In root `cwd`:
+
+```bash
+npm i
+npm run lint -ws
+npm run test -w package-a
+npm i lodash -w package-b
+npm i -D eslint -w package-c
 ```
 
 ## Self-Defined Modules
