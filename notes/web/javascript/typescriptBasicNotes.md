@@ -360,6 +360,38 @@ animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly;
 printAnimalAbilities(animal); // animal has claws, animal can fly
 ```
 
+### Enum Index Signature
+
+`keyof typeof EnumType`:
+
+```ts
+enum ColorPalette {
+  red = '#f03e3e',
+  pink = '#d7336c',
+  grape = '#ae3ec9',
+  violet = '#7048e8',
+  indigo = '#4263eb',
+  blue = '#1890ff',
+  cyan = '#1098ad',
+  teal = '#0ca678',
+  green = '#37b24d',
+  lime = '#74b816',
+  yellow = '#f59f00',
+  orange = '#f76707',
+}
+
+const hashString = (name = '') => {
+  return name.length;
+};
+
+const getColorByName = (name = ''): string => {
+  const palette = Object.keys(ColorPalette);
+  const colorIdx = hashString(name) % palette.length;
+  const paletteIdx = palette[colorIdx] as keyof typeof ColorPalette;
+  return ColorPalette[paletteIdx];
+};
+```
+
 ### Internal of Enum
 
 ```ts
