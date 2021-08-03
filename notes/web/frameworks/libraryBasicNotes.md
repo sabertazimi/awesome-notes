@@ -58,6 +58,7 @@
 - [Fastify: Fast and low overhead web framework](https://github.com/fastify/fastify)
 - [Sails: Realtime MVC framework](https://github.com/balderdashy/sails)
 - [Feathers.js: REST APIs with TypeScript](https://github.com/feathersjs/feathers)
+- [tRPC: End-to-end type-safe APIs server](https://github.com/trpc/trpc)
 
 ### Full Stack Solution
 
