@@ -3904,7 +3904,44 @@ const Form = () => (
 - `React.SVGAttributes<HTMLElement>`
 - `React.HTMLAttributes<HTMLElement>`
 - `React.ButtonHTMLAttributes<HTMLButtonElement>`
+- `React.HTMLProps<HTMLElement>`
 - `React.CSSProperties`
+
+#### React Input Types
+
+```ts
+type StringChangeHandler = (newValue: string) => void;
+type NumberChangeHandler = (newValue: number) => void;
+type BooleanChangeHandler = (newValue: boolean) => void;
+
+interface BaseInputDefinition {
+  id: string;
+  label: string;
+}
+
+interface TextInputDefinition extends BaseInputDefinition {
+  type: 'text';
+  value: string;
+  onChange: StringChangeHandler;
+}
+
+interface NumberInputDefinition extends BaseInputDefinition {
+  type: 'number';
+  value: number;
+  onChange: NumberChangeHandler;
+}
+
+interface CheckboxInputDefinition extends BaseInputDefinition {
+  type: 'checkbox';
+  value: boolean;
+  onChange: BooleanChangeHandler;
+}
+
+type Input =
+  | TextInputDefinition
+  | NumberInputDefinition
+  | CheckboxInputDefinition;
+```
 
 ### React Portals Types
 
