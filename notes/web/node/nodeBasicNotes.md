@@ -426,6 +426,27 @@ server.on('request', function(req, res) {
 }
 ```
 
+### Module Resolution
+
+`const x = require('./module')`:
+
+- `/root/src/module.js`
+- `/root/src/module/package.json` + `{ "main": "lib/mainModule.js" }`
+  = `/root/src/module/lib/mainModule.js`
+- `/root/src/module/index.js`
+
+`const x = require('module')`:
+
+- `/root/src/node_modules/module.js`
+- `/root/src/node_modules/module/package.json` (if it specifies a `main` property)
+- `/root/src/node_modules/module/index.js`
+- `/root/node_modules/module.js`
+- `/root/node_modules/module/package.json` (if it specifies a `main` property)
+- `/root/node_modules/module/index.js`
+- `/node_modules/module.js`
+- `/node_modules/module/package.json` (if it specifies a `main` property)
+- `/node_modules/module/index.js`
+
 ## Process Module
 
 ### Process Properties
