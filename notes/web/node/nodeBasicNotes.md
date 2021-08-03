@@ -291,11 +291,14 @@ npx gistUrl
 
 ### Package JSON
 
-#### bin
+#### Bin
 
-当设置了 bin 字段后, 在 package.json script 字段中，可以使用简写编写命令(但是局部安装无法使得 shell 下可使用简写)
+当设置了 `bin` 字段后,
+在 `package.json` `script` 字段中，
+可以使用简写编写命令
+(但是局部安装无法在 shell 下使用, 需 `npx <bin-name>`).
 
-#### version
+#### Version
 
 ```bash
 npm version major
@@ -327,6 +330,37 @@ npm run lint -ws
 npm run test -w package-a
 npm i lodash -w package-b
 npm i -D eslint -w package-c
+```
+
+### Exports
+
+`exports` configures the JavaScript level:
+
+File `packages/rest/build/gen/util/regexp-tools.js`
+can be imported via `@github/rest/gen/util/regexp-tools`.
+
+It bring two pros:
+
+- Don’t need to mention directory `build`/`dist` in module specifiers.
+- Don’t need to mention `.js`/`.ts` in module specifiers.
+
+> `typesVersions` for TypeScript finds type definitions (`.d.ts` files).
+
+```json
+{
+  "name": "@github/rest",
+  "private": true,
+  "exports": {
+    "./gen/*": "./build/gen/*.js",
+    "./client/*": "./build/client/*.js"
+  },
+  "typesVersions": {
+    "*": {
+      "gen/*": ["build/gen/*"],
+      "client/*": ["build/client/*"]
+    }
+  }
+}
 ```
 
 ## Self-Defined Modules
@@ -517,7 +551,8 @@ const fibonacciWorker = require('./fibonacci-worker');
 
 const port = 3000;
 
-http.createServer(async (req, res) => {
+http
+  .createServer(async (req, res) => {
     const url = new URL(req.url, `http://${req.headers.host}`);
     console.log('Incoming request to:', url.pathname);
 
