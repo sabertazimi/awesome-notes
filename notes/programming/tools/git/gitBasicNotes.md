@@ -1111,6 +1111,11 @@ Then at the end of the document …
 [mylabel]: https://imageurl.com 'This is a title'
 ```
 
+### GitHub Pages
+
+In `https://github.com/<user>/<repo>/settings/pages`,
+setup `source` of pages and `Enforce HTTPS`.
+
 ## Git Tools
 
 ### Diff and Patch
