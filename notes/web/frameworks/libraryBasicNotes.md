@@ -160,9 +160,10 @@
 ### CSS in JS Utils
 
 - [CSS Classnames](https://github.com/JedWatson/classnames)
+- [Linaria: Zero-runtime CSS-in-TypeScript library](https://github.com/callstack/linaria)
+- [Vanilla Extract: Zero-runtime CSS-in-TypeScript](https://github.com/seek-oss/vanilla-extract)
+- [Compiled: Performant compile time CSS-in-TypeScript library](https://github.com/atlassian-labs/compiled)
 - [Styled System: Style props for rapid UI development](https://github.com/styled-system/styled-system)
-- [Linaria: Zero-runtime CSS in JS library](https://github.com/callstack/linaria)
-- [Compiled: Performant compile time CSS-in-JS library](https://github.com/atlassian-labs/compiled)
 
 ### CSS Design Tools
 
