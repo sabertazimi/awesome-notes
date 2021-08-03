@@ -1759,3 +1759,7 @@ $input-btn-padding-x: 1.5rem;
 $input-btn-focus-width: 0; /* remove focus box-shadow */
 $custom-control-indicator-checked-color: $primary;
 ```
+
+## Reference
+
+- [BootStrap 5 CheatSheet](https://github.com/themeselection/bootstrap-cheatsheet)
