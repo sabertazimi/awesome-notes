@@ -352,12 +352,17 @@ It bring two pros:
   "private": true,
   "exports": {
     "./gen/*": "./build/gen/*.js",
-    "./client/*": "./build/client/*.js"
+    "./client/*": "./build/client/*.js",
+    "./contract": "./build/contract.js",
+    "./state": "./build/state.js",
+    "./package.json": "./package.json"
   },
   "typesVersions": {
     "*": {
       "gen/*": ["build/gen/*"],
-      "client/*": ["build/client/*"]
+      "client/*": ["build/client/*"],
+      "contract": ["build/contract.d.ts"],
+      "state": ["build/state.d.ts"]
     }
   }
 }
