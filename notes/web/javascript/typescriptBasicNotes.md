@@ -70,7 +70,26 @@ Basic [tsconfig](https://www.typescriptlang.org/tsconfig):
     /* 模块解析选项 */
     "moduleResolution": "node", // 选择模块解析策略： 'node' (Node.js) or 'classic'
     "baseUrl": "./", // 用于解析非相对模块名称的基目录
-    "paths": {}, // 模块名到基于 baseUrl 的路径映射的列表
+    "paths": {
+      "@components": ["src/components"],
+      "@components/*": ["src/components/*"],
+      "@config": ["src/config"],
+      "@config/*": ["src/config/*"],
+      "@hooks": ["src/hooks"],
+      "@hooks/*": ["src/hooks/*"],
+      "@images": ["src/images"],
+      "@images/*": ["src/images/*"],
+      "@layouts": ["src/layouts"],
+      "@layouts/*": ["src/layouts/*"],
+      "@pages": ["src/pages"],
+      "@pages/*": ["src/pages/*"],
+      "@styles": ["src/styles"],
+      "@styles/*": ["src/styles/*"],
+      "@templates": ["src/templates"],
+      "@templates/*": ["src/templates/*"],
+      "@types": ["src/types"],
+      "@types/*": ["src/types/*"]
+    }, // 模块名到基于 baseUrl 的路径映射的列表
     "rootDirs": [], // 根文件夹列表，其组合内容表示项目运行时的结构内容
     "typeRoots": [], // 包含类型声明的文件列表
     "types": [], // 需要包含的类型声明文件名列表
