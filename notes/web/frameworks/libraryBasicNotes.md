@@ -5,6 +5,7 @@
 ## Indexing Tools
 
 - [Open Base](https://openbase.com)
+- [Moiva](https://github.com/aantipov/moiva)
 - [Best of JS](https://github.com/bestofjs/bestofjs-webui)
 - [Micro.js](https://github.com/microjs/microjs.com)
 - [NPM Package Advisor](https://snyk.io/advisor)
