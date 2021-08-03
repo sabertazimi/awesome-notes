@@ -1931,7 +1931,10 @@ for TypeScript compile and build [Speed](https://github.com/typescript-cheatshee
 
 ## Monorepo
 
-- [TypeScript Monorepo](https://2ality.com/2021/07/simple-monorepos.html 'TypeScript Monorepo')
+[TypeScript Monorepo](https://2ality.com/2021/07/simple-monorepos.html 'TypeScript Monorepo'):
+
+- NPM workspaces.
+- TypeScript references.
 
 ## TypeScript Tools
 
