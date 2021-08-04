@@ -135,7 +135,7 @@ table>.row*4>.cell*3 = table>tr.row*4>td.cell*3
 
 ## Structure
 
-[Reference Website](http://www.html5jscss.com/html5-semantics-section.html)
+- [Semantics Section Reference](http://www.html5jscss.com/html5-semantics-section.html)
 
 ### section
 
@@ -587,49 +587,99 @@ style="display: none";
 
 默认 open=false
 
-### Table Cells
+### Description List
 
-- `dl > (multi)dt + (multi)dd`:
-  defined list > defined tab + defined data
+- `<dl>`: description list.
+- `<dt>`: description Term.
+- `<dd>`: description details.
+
+```html
+<h1>Review your data</h1>
+<p>Please review the data you entered in the previous step to ensure it is correct:</p>
+<dl>
+    <dt>First name</dt>
+    <dd>Marc</dd>
+
+    <dt>Last name</dt>
+    <dd>Simmons</dd>
+
+    <dt>Date of Birth</dt>
+    <dd><time datetime="1990-05-15">May 15 1990</time></dd>
+
+</dl>
+```
 
 ### Summary
 
 折叠/收缩时触发 toggle 事件
 
+### Table
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Col Header 1</th>
+      <th scope="col">Col Header 2</th>
+      <th scope="col">Col Header 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Row Header 1</th>
+      <td>Row 1 Col 2</td>
+      <td>Row 1 Col 3</td>
+    </tr>
+    <tr>
+    <th scope="row">Row Header 2</th>
+      <td>Row 2 Col 2</td>
+      <td>Row 2 Col 3</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th scope="row">Summary</th>
+      <td>Col 2 summary</td>
+      <td>Col 3 summary</td>
+    </tr>
+  </tfoot>
+</table>
+```
+
 ### Mark
 
 突出/高亮显示，无关原文作者
 
-### ins
+### Ins
 
-insert text
+Insert text
 
-### del
+### Del
 
-delete text
+Delete text
 
-### u
+### U
 
 underline text
 
-### em
+### Em
 
-原文作者文章重点
+文章重点
 
-### strong
+### Strong
 
-原文作者段落强调
+段落强调
 
-### small
+### Small
 
 - 免责声明、注意事项、法律规定、版权声明
 - 不改变文字样式
 
-### hr
+### Hr
 
 下划线
 
-### progress
+### Progress
 
 value/max 百分比
 
@@ -639,31 +689,31 @@ value/max 百分比
 <progress id="file" max="100" value="70">70%</progress>
 ```
 
-### meter
+### Meter
 
-#### value
+#### Value
 
-#### min
+#### Min
 
-#### max
+#### Max
 
-#### low
+#### Low
 
-#### high
+#### High
 
-#### optimum
+#### Optimum
 
-### wbr
+### Wbr
 
 软换行
 
 ## Media
 
-### figure
+### Figure
 
 流内容 如代码、文件、图片、音频、视频
 
-### figcaption
+### Figcaption
 
 figure 可拥有唯一的 0/1 个 figcaption
 
@@ -680,9 +730,9 @@ figure 可拥有唯一的 0/1 个 figcaption
 
 **Attr** -
 
-#### src
+#### Src
 
-#### alt
+#### Alt
 
 (图片崩溃时文本)、title(提示信息)、class(CSS 类选择器)
 
@@ -835,12 +885,6 @@ sudo systemctl restart nginx
 
 ## Accessibility
 
-- 不要将颜色作为传达信息的唯一手段 (色盲/弱)
-- 确保文本与其背景保持足够的对比
-- 提供输入焦点的视觉提示
-- 注意表单
-- 避免组件识别障碍
-
 ### Semantic HTML
 
 - [Definitive Guide](https://css-tricks.com/how-to-section-your-html)
@@ -848,15 +892,14 @@ sudo systemctl restart nginx
 
 ### Structure Accessibility
 
+- [Semantics Section Reference](http://www.html5jscss.com/html5-semantics-section.html)
 - header
+- nav
 - main
-- footer
+- aside
 - section
 - article
-- nav
-- aside
-
-#### Body Accessibility
+- footer
 
 ```html
 <header>
@@ -867,12 +910,64 @@ sudo systemctl restart nginx
   </nav>
 </header>
 
-<main></main>
+<main>
+  <section></section>
+</main>
 
 <footer></footer>
 ```
 
-#### Article Accessibility
+### Heading Accessibility
+
+- 7 heading levels: `<div role="heading" aria-level="7"></div>`
+- One `<h1>` per page
+
+### Navigation Accessibility
+
+- Have a HTML sitemap.
+- Support keyboard navigation (Key and Tab Index).
+- Breadcrumbs a11y:
+  - `aria-label="breadcrumbs"`
+  - `aria-label="page"`
+
+```html
+<nav aria-label="breadcrumbs">
+  <ol>
+    <li>
+      <a href="https://example.com/"> Home </a>
+    </li>
+    <li>
+      <a href="https://example.com/products"> Products </a>
+    </li>
+    <li>
+      <a href="https://example.com/products/childrens-clothing">
+        Children's clothing
+      </a>
+    </li>
+    <li>
+      <a
+        href="https://example.com/products/childrens-clothing/shoes"
+        aria-current="page"
+      >
+        Shoes
+      </a>
+    </li>
+  </ol>
+</nav>
+```
+
+### Section Accessibility
+
+```html
+<section aria-labelledby="sectionHeader1">
+  <h2 id="sectionHeader1">A great section</h2>
+</section>
+<section aria-labelledby="sectionHeader2">
+  <h2 id="sectionHeader2">An even better section</h2>
+</section>
+```
+
+### Article Accessibility
 
 The `<article>` element is used to represent a fully self-contained region of content
 
@@ -896,25 +991,7 @@ The `<article>` element is used to represent a fully self-contained region of co
 </article>
 ```
 
-#### Radio Group with `fieldset` and `legend`
-
-```html
-<form>
-  <fieldset>
-    <legend>Choose one of these three items:</legend>
-    <input id="one" type="radio" name="items" value="one" />
-    <label for="one">Choice One</label><br />
-    <input id="two" type="radio" name="items" value="two" />
-    <label for="two">Choice Two</label><br />
-    <input id="three" type="radio" name="items" value="three" />
-    <label for="three">Choice Three</label>
-  </fieldset>
-</form>
-```
-
-### Element Accessibility
-
-#### Reference Accessibility
+### Reference Accessibility
 
 - `<cite>`
 - `<q>`
@@ -941,13 +1018,24 @@ The `<article>` element is used to represent a fully self-contained region of co
 <cite>– Ados Huxley, Brave New World</cite>
 ```
 
-#### Text Accessibility
+### Link Accessibility
+
+```html
+<article>
+  <h2 id="article1-title">My article</h2>
+  <p>Article brief description with truncation...</p>
+  <a href="article1-url" aria-labelledby="article1-title">Read more</a>
+</article>
+```
+
+### Text Accessibility
 
 - `<b>`
 - `<strong>`
 - `<mark>`
 - `<ins>`
 - `<del>`
+- `<abbr>`: 专有名词解释 `<abbr title="HyperText Markup Language">HTML</abbr>`
 
 不要将 `<b>` 元素与 `<strong>`、`<em>` 或 `<mark>` 元素混淆:
 
@@ -955,20 +1043,51 @@ The `<article>` element is used to represent a fully self-contained region of co
 - `<em>` 强调文本
 - `<mark>` 元素表示某些相关性的文本
 
-#### Button Accessibility
+#### Text Color A11Y
+
+- Devtool inspect elements A11Y for color contrast ratio.
+- Don't forget `::selection`.
+
+#### Text Spacing A11Y
+
+- `line-height` of blocks of text should be **1.5**.
+- space between paragraphs should be **1.5 times** the `line-height`
+  (so a minimum of `2.25 rem`).
+- Line height (line spacing) to at least **1.5 times** the font size.
+- Spacing following paragraphs to at least **2 times** the font size.
+- Letter spacing (tracking) to at least **0.12** times the font size.
+- Word spacing to at least **0.16** times the font size.
+
+### Button Accessibility
 
 Use `<button>` for clickable elements
 
-#### Image Accessibility
+### Image Accessibility
 
-- alt=""
+- `alt=""`
 
-#### Audio Source Accessibility
+### SVG Accessibility
 
-- src=""
-- type=""
+- `<title>`
+- `<desc>`
 
-#### Figure Accessibility
+```html
+<svg width="100" height="75">
+  <title>Dark rectangle</title>
+  <desc>A grey rectangle with rounded corners and a dark green border</desc>
+  <rect
+    width="75"
+    height="50"
+    rx="20"
+    ry="20"
+    fill="#666"
+    stroke="#229b23"
+    stroke-fill="1"
+  />
+</svg>
+```
+
+### Figure Accessibility
 
 ```html
 <figure>
@@ -978,9 +1097,35 @@ Use `<button>` for clickable elements
 </figure>
 ```
 
-#### Form Accessibility
+### Audio Source Accessibility
 
-- label[for] input
+- `src=""`
+- `type=""`
+
+### Form Accessibility
+
+#### Group Related Fields
+
+With `fieldset` and `legend`:
+
+```html
+<form>
+  <fieldset>
+    <legend>Choose one of these three items:</legend>
+    <input id="one" type="radio" name="items" value="one" />
+    <label for="one">Choice One</label><br />
+    <input id="two" type="radio" name="items" value="two" />
+    <label for="two">Choice Two</label><br />
+    <input id="three" type="radio" name="items" value="three" />
+    <label for="three">Choice Three</label>
+  </fieldset>
+</form>
+```
+
+#### Input Accessibility
+
+- `label[for]` input.
+- `aria-describedby` and `aria-invalid` for input error.
 
 ```html
 <form>
@@ -989,13 +1134,28 @@ Use `<button>` for clickable elements
 </form>
 ```
 
-#### Time Accessibility
+```html
+<form>
+  <label for="email-address"> Your Email Address </label>
+  <span id="email-error">
+    Error: Your email address must contain an @ symbol
+  </span>
+  <input
+    id="email-address"
+    type="email"
+    aria-describedby="email-error"
+    aria-invalid="true"
+  />
+</form>
+```
+
+### Time Accessibility
 
 ```html
 <time datetime="2016-09-15">Thursday, September 15<sup>th</sup></time>
 ```
 
-#### Address Accessibility
+### Address Accessibility
 
 ```html
 <footer>
@@ -1017,11 +1177,11 @@ Use `<button>` for clickable elements
 </footer>
 ```
 
-#### Color Contrast
+### Color Contrast
 
 - more than 4.5:1 ratio
 
-#### Keys and Tabindex Accessibility
+### Keys and Tabindex Accessibility
 
 ```html
 <a id="second" href="" accesskey="c"></a>
@@ -1138,8 +1298,14 @@ listExpander.addEventListener('click', (e) => {
 - Don't use `aria-hidden` on the `<body>` element.
 - Make sure `IDs` and `Keys` of elements are unique.
 - Make sure `document` has a `title` element (with tool like `react-helmet`).
+- 不要将颜色作为传达信息的唯一手段 (色盲/弱)
+- 确保文本与其背景保持足够的对比
+- 提供输入焦点的视觉提示
+- 注意表单
+- 避免组件识别障碍
 
 ### Accessibility Checklist
 
 - [WebAIM WCAG 2 Checklist](https://webaim.org/standards/wcag/checklist)
 - [A11Y Project](https://github.com/a11yproject/a11yproject.com)
+- [A11Y 101](https://dev.to/inhuofficial/101-digital-accessibility-tips-and-tricks-4728)
