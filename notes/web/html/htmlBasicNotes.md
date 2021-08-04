@@ -1316,7 +1316,7 @@ listExpander.addEventListener('click', (e) => {
 
 ### Accessibility Checklist
 
-- [WebAIM WCAG 2 Checklist](https://webaim.org/standards/wcag/checklist)
+- [WebAIM WCAG (Web Content Accessibility Guidelines) 2 Checklist](https://webaim.org/standards/wcag/checklist)
 - [A11Y Project](https://github.com/a11yproject/a11yproject.com)
 - [A11Y 101](https://dev.to/inhuofficial/101-digital-accessibility-tips-and-tricks-4728)
 
