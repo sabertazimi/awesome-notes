@@ -1257,7 +1257,7 @@ export function trapTabKey(e, context) {
 - `aria-label`
 - `aria-labelledby="dropdownMenuButton"`: dropdown/form
 - `aria-disabled="true"`: disable element
-- `aria-controls="navbarSupportedContent"`: navigation
+- `aria-controls="navbarSupportedContent"`: navigation/select
 - `aria-expanded="false"`: dropdown
 - `aria-haspopup="true"`: dropdown/popup
 - `aria-current="pages`: breadcrumb
@@ -1273,6 +1273,28 @@ export function trapTabKey(e, context) {
   - `<footer>`: `role="contentinfo"`
   - `<form role="form">`
   - 7 heading levels: `<div role="heading" aria-level="7"></div>`
+  - `role="button"`
+  - `role="checkbox"`
+  - `role="gridcell"`
+  - `role="link"`
+  - `role="menuitem"`
+  - `role="menuitemcheckbox"`
+  - `role="menuitemradio"`
+  - `role="option"`
+  - `role="progressbar"`
+  - `role="radio"`
+  - `role="scrollbar"`
+  - `role="searchbox"`
+  - `role="separator (when focusable)"`
+  - `role="slider"`
+  - `role="spinbutton"`
+  - `role="switch"`
+  - `role="tab"`
+  - `role="tabpanel"`
+  - `role="textbox"`
+  - `role="treeitem"`
+  - `role="presentation"`
+  - `role="application"`
 
 ```html
 <button
