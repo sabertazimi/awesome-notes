@@ -966,6 +966,12 @@ float make element specified value of `display`:
 
 - 段中部分元素浮动(结合 margin/padding), 可实现内嵌效果
 - 分栏布局
+- `shape-outside` provides a way to customize wrapping,
+  making it possible to wrap text around complex objects rather than simple boxes.
+
+```css
+shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+```
 
 ## Position Patterns
 
@@ -3101,17 +3107,35 @@ use `inline-box` with `width`
 #### Prefer Color Scheme
 
 ```css
-.day { background: #eee; color: black; }
-.night { background: #333; color: white; }
+.day {
+  background: #eee;
+  color: black;
+}
+.night {
+  background: #333;
+  color: white;
+}
 
 @media (prefers-color-scheme: dark) {
-  .day.dark-scheme   { background:  #333; color: white; }
-  .night.dark-scheme { background: black; color:  #ddd; }
+  .day.dark-scheme {
+    background: #333;
+    color: white;
+  }
+  .night.dark-scheme {
+    background: black;
+    color: #ddd;
+  }
 }
 
 @media (prefers-color-scheme: light) {
-  .day.light-scheme   { background: white; color:  #555; }
-  .night.light-scheme { background:  #eee; color: black; }
+  .day.light-scheme {
+    background: white;
+    color: #555;
+  }
+  .night.light-scheme {
+    background: #eee;
+    color: black;
+  }
 }
 ```
 
