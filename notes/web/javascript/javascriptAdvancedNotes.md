@@ -7401,10 +7401,13 @@ const paths = pathsToModuleNameMapper(compilerOptions.paths, {
 
 module.exports = {
   roots: ['<rootDir>/src'],
+  collectCoverage: true,
+  coverageDirectory: 'coverage',
   transform: {
+    '^.+\\.jsx?$': '<rootDir>/jest.transformer.js',
     '^.+\\.tsx?$': 'ts-jest',
   },
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
+  transformIgnorePatterns: ['node_modules/(?!(gatsby)/)'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   moduleNameMapper: {
     '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
@@ -7416,20 +7419,22 @@ module.exports = {
     '^@layouts/(.*)$': '<rootDir>/src/layouts/$1',
     '^@types/(.*)$': '<rootDir>/src/types/$1',
   },
+  testPathIgnorePatterns: ['node_modules', '\\.cache', '<rootDir>.*/build'],
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   globals: {
     window: {},
     'ts-jest': {
       tsConfig: './tsconfig.json',
     },
   },
-  setupFiles: ['./jest.stubs.js'],
-  testURL: 'http://localhost/',
+  testURL: 'http://localhost',
+  testEnvironment: 'jsdom',
+  setupFiles: ['<rootDir>/jest.setup.js'],
   setupTestFrameworkScriptFile: '<rootDir>/src/setupEnzyme.ts',
-  collectCoverage: true,
 };
 ```
 
-`jest.stubs.js`:
+`jest.setup.js`:
 
 ```js
 // Global/Window object Stubs for Jest
