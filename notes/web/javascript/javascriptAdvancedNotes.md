@@ -7430,6 +7430,7 @@ module.exports = {
   testURL: 'http://localhost',
   testEnvironment: 'jsdom',
   setupFiles: ['<rootDir>/jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest.env.setup.js'],
   setupTestFrameworkScriptFile: '<rootDir>/src/setupEnzyme.ts',
 };
 ```
@@ -7458,6 +7459,12 @@ window.localStorage = {
 };
 
 Object.values = () => [];
+```
+
+`jest.env.setup.js`: inject more expect DOM assertion
+
+```js
+import '@testing-library/jest-dom/extend-expect';
 ```
 
 `setupEnzyme.ts`:
