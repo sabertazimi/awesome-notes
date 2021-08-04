@@ -453,6 +453,12 @@
 - [Dinero: Create, calculate, and format money in TypeScript](https://github.com/dinerojs/dinero.js)
 - [Numbers and Currencies](https://github.com/autoNumeric/autoNumeric)
 
+## Accessibility Tools
+
+- [AXE DevTools](https://github.com/dequelabs/axe-core)
+- [ESLint JSX A11Y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
+- [React A11Y](https://github.com/reactjs/react-a11y)
+
 ## Fonts
 
 - [Fontmin](https://github.com/ecomfe/fontmin)
@@ -770,10 +776,7 @@
 
 ## Debug Testing
 
-- [NDB](https://github.com/GoogleChromeLabs/ndb)
-- [React Testing Utilities](https://github.com/airbnb/enzyme)
 - [React Component Hierarchy](https://github.com/team-gryff/react-monocle)
-- [React a11y](https://github.com/reactjs/react-a11y)
 - [Retoggle: Component Inspector](https://github.com/Raathigesh/retoggle)
 
 ### Unit Testing

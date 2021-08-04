@@ -1309,3 +1309,10 @@ listExpander.addEventListener('click', (e) => {
 - [WebAIM WCAG 2 Checklist](https://webaim.org/standards/wcag/checklist)
 - [A11Y Project](https://github.com/a11yproject/a11yproject.com)
 - [A11Y 101](https://dev.to/inhuofficial/101-digital-accessibility-tips-and-tricks-4728)
+
+### Accessibility Tools
+
+- [LightHouse](https://github.com/GoogleChrome/lighthouse)
+- [AXE DevTools](https://github.com/dequelabs/axe-core)
+- [ESLint JSX A11Y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
+- [React A11Y](https://github.com/reactjs/react-a11y)
