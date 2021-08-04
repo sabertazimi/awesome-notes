@@ -7393,6 +7393,12 @@ npm i -D jest ts-jest @types/jest react-test-renderer
 `jest.config.js`:
 
 ```js
+const { compilerOptions } = require('./tsconfig.json');
+const { pathsToModuleNameMapper } = require('ts-jest/utils');
+const paths = pathsToModuleNameMapper(compilerOptions.paths, {
+  prefix: '<rootDir>/',
+});
+
 module.exports = {
   roots: ['<rootDir>/src'],
   transform: {
@@ -7401,7 +7407,14 @@ module.exports = {
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   moduleNameMapper: {
-    '^Components/(.*)': '<rootDir>/src/components/$1',
+    '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
+    '.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/__mocks__/jest.mock.js',
+    ...paths,
+    '^@components/(.*)$': '<rootDir>/src/components/$1',
+    '^@hooks/(.*)$': '<rootDir>/src/hooks/$1',
+    '^@layouts/(.*)$': '<rootDir>/src/layouts/$1',
+    '^@types/(.*)$': '<rootDir>/src/types/$1',
   },
   globals: {
     window: {},
