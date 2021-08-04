@@ -4262,7 +4262,8 @@ long click reload: multiple reload options e.g clean cache
 
 ### Elements Panel
 
-- break on elements
+- Break on elements.
+- Inspect elements a11y.
 
 #### Style Tab
 
