@@ -808,13 +808,49 @@ class Something extends React.Component<{ foo: number }, { baz: number }> {
 
 ## Index Signature
 
+For `JavaScript`,
+implicitly calls `toString` on any object index signature:
+
+```js
+let obj = {
+  toString(){
+    console.log('toString called')
+    return 'Hello'
+  }
+}
+
+let foo: any = {};
+foo[obj] = 'World'; // toString called
+console.log(foo[obj]); // toString called, World
+console.log(foo['Hello']); // World
+```
+
+TypeScript will give an error to prevent beginners
+from doing such things.
+
+**Index Signature Error**: `Element implicitly has an 'any' type
+because expression of type 'string' can't be used to index type XXX`
+can fixed with
+
+- `Record<string, T>`.
+- explicit **const** propertyName type:
+
+```ts
+// propertyName should be extends keyof T
+function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
+  return o[propertyName]; // o[propertyName] is of type T[K]
+}
+```
+
+### Index Signature Type Checking
+
 ```ts
 let x: { foo: number; [x: string]: any };
 
 x = { foo: 1, baz: 2 }; // ok, 'baz' 属性匹配于索引签名
 ```
 
-当你声明一个索引签名时，所有明确的成员都必须符合索引签名
+当你声明一个索引签名时，所有明确的成员都必须符合索引签名:
 
 ```ts
 // ok
@@ -832,7 +868,7 @@ interface Bar {
 }
 ```
 
-使用交叉类型可以解决上述问题
+使用交叉类型可以解决上述问题:
 
 ```ts
 type FieldState = {
