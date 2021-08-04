@@ -181,11 +181,27 @@ npx eslint --init
 
 ### Globals Definition
 
-globals.d.ts:
+```json
+{
+  "include": ["./src/**/*", "globals.d.ts", "index.d.ts"]
+}
+```
 
 ```ts
 declare module '*.css';
-// import * as foo from './some/file.css';
+//=> import * as foo from './some/file.css';
+
+declare module '*.png' {
+  const value: unknown;
+  export = value;
+}
+//=> import logo from './logo.png';
+// <img src={logo as string} />
+
+declare module '*.jpg' {
+  const value: unknown;
+  export = value;
+}
 ```
 
 ```ts
