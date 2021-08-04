@@ -893,13 +893,13 @@ sudo systemctl restart nginx
 ### Structure Accessibility
 
 - [Semantics Section Reference](http://www.html5jscss.com/html5-semantics-section.html)
-- header
-- nav
-- main
-- aside
-- section
-- article
-- footer
+- `<header>`: `role="banner"`
+- `<nav>`: `role="navigation"`
+- `<main>`: `role="main"`
+- `<aside>`: `role="complementary"`
+- `<section>`: `role="region"`
+- `<article>`: `role="article"`
+- `<footer>`: `role="contentinfo"`
 
 ```html
 <header>
@@ -1109,7 +1109,7 @@ Use `<button>` for clickable elements
 With `fieldset` and `legend`:
 
 ```html
-<form>
+<form role="form">
   <fieldset>
     <legend>Choose one of these three items:</legend>
     <input id="one" type="radio" name="items" value="one" />
@@ -1128,14 +1128,14 @@ With `fieldset` and `legend`:
 - `aria-describedby` and `aria-invalid` for input error.
 
 ```html
-<form>
+<form role="form">
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" />
 </form>
 ```
 
 ```html
-<form>
+<form role="form">
   <label for="email-address"> Your Email Address </label>
   <span id="email-error">
     Error: Your email address must contain an @ symbol
@@ -1263,6 +1263,16 @@ export function trapTabKey(e, context) {
 - `aria-current="pages`: breadcrumb
 - `aria-valuenow`/`aria-valuemin`/`aria-valuemax`: progress
 - `aria-describedBy`: input + small
+- [role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles)
+  - `<header>`: `role="banner"`
+  - `<nav>`: `role="navigation"`
+  - `<main>`: `role="main"`
+  - `<aside>`: `role="complementary"`
+  - `<section>`: `role="region"`
+  - `<article>`: `role="article"`
+  - `<footer>`: `role="contentinfo"`
+  - `<form role="form">`
+  - 7 heading levels: `<div role="heading" aria-level="7"></div>`
 
 ```html
 <button
