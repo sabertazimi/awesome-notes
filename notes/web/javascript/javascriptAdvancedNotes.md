@@ -7461,7 +7461,10 @@ window.localStorage = {
 Object.values = () => [];
 ```
 
-`jest.env.setup.js`: inject more expect DOM assertion
+`jest.env.setup.js`:
+
+- Inject more expect DOM assertion.
+- [Jest DOM Expect API](https://github.com/testing-library/jest-dom)
 
 ```js
 import '@testing-library/jest-dom/extend-expect';
