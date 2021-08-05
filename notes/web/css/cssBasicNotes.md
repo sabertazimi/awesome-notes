@@ -1112,6 +1112,8 @@ top/left/width/right/z-index are invalid
 - align-content:
   aligns flex container's lines within
   when there is extra space in the cross-axis.
+- `*-content` adjust parent padding,
+  `*-items` and `*-self` adjust children margin.
 
 ```css
 display: flex;
