@@ -147,6 +147,7 @@
 - [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
 - [TypeFest: TypeScript Utility Types](https://github.com/sindresorhus/type-fest)
 - [UtilTypes: TypeScript Utility Types](https://github.com/piotrwitek/utility-types)
+- [AutoMapper: Object to object auto mapper](https://github.com/nartc/mapper)
 
 #### IOC and DI Utils
 
