@@ -7429,15 +7429,33 @@ module.exports = {
   },
   testURL: 'http://localhost',
   testEnvironment: 'jsdom',
-  setupFiles: ['<rootDir>/jest.setup.js'],
-  setupFilesAfterEnv: ['<rootDir>/jest.env.setup.js'],
+  setupFiles: ['<rootDir>/jest.env.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   setupTestFrameworkScriptFile: '<rootDir>/src/setupEnzyme.ts',
 };
 ```
 
-`jest.setup.js`:
+`jest.env.setup.js`:
 
 ```js
+import path from 'path';
+import dotenv from 'dotenv';
+
+console.log(`============ env-setup Loaded ===========`);
+dotenv.config({
+  path: path.resolve(process.cwd(), 'tests', 'settings', '.test.env'),
+});
+```
+
+`jest.setup.js`:
+
+- Mock missing JSDOM functions.
+- Inject more expect DOM assertion.
+- [Jest DOM Expect API](https://github.com/testing-library/jest-dom)
+
+```js
+import '@testing-library/jest-dom/extend-expect';
+
 // Global/Window object Stubs for Jest
 window.matchMedia =
   window.matchMedia ||
@@ -7449,6 +7467,20 @@ window.matchMedia =
     };
   };
 
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // deprecated
+    removeListener: jest.fn(), // deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
+
 window.requestAnimationFrame = function (callback) {
   setTimeout(callback);
 };
@@ -7459,15 +7491,6 @@ window.localStorage = {
 };
 
 Object.values = () => [];
-```
-
-`jest.env.setup.js`:
-
-- Inject more expect DOM assertion.
-- [Jest DOM Expect API](https://github.com/testing-library/jest-dom)
-
-```js
-import '@testing-library/jest-dom/extend-expect';
 ```
 
 `setupEnzyme.ts`:
