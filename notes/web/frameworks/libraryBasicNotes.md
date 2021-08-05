@@ -404,6 +404,7 @@
 - [Animate.css](https://github.com/daneden/animate.css)
 - [Velocity: Accelerated JavaScript animation](https://github.com/julianshapiro/velocity)
 - [Barba.js: Smooth transition between pages](https://github.com/luruke/barba.js)
+- [Tilt: Smooth 3D tilt javascript library](https://github.com/micku7zu/vanilla-tilt.js)
 
 ### Typing Effect Animation
 
