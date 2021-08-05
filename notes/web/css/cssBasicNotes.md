@@ -1485,6 +1485,17 @@ margin in the direction of the float will pull the floated element in that direc
 - flexbox
 - grid
 
+Button label (`<a>`) vertical alignment:
+
+```css
+a.button:before {
+  content: '';
+  display: inline-block;
+  height: 16px;
+  vertical-align: middle;
+}
+```
+
 #### Vertical Block element
 
 - top + margin
