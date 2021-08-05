@@ -841,6 +841,13 @@ cal(10em + 3px);
 
 ### Box Column
 
+Multiple-column layout:
+
+- `column-count`
+- `column-width`
+- `column-gap`
+- `column-rule`
+
 ```css
 /*子元素分列*/
 .three-column {
