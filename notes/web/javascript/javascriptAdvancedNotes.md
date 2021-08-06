@@ -7688,6 +7688,13 @@ configure({ adapter: new EnzymeAdapter() });
 
 ### Jest Basic Testing
 
+- `describe` block.
+- `test` statement.
+- `it` statement.
+- `test.todo`:
+  - Skip empty todo tests.
+  - Skip temporary broken tests.
+
 ```ts
 import * as React from 'react';
 import { shallow } from 'enzyme';
@@ -7740,6 +7747,64 @@ describe('Link should', () => {
     expect(tree).toMatchSnapshot();
   });
 });
+```
+
+### Jest Mocks
+
+`__mocks__`:
+
+- `jest.createMockFromModule('moduleName')`.
+- `jest.requireActual('moduleName')`.
+
+```js
+// react-dom.js
+import React from 'react';
+const reactDom = jest.requireActual('react-dom');
+
+function mockCreatePortal(element, target) {
+  return (
+    <div>
+      <div id="content">{element}</div>
+      <div id="target" data-target-tag-name={target.tagName}></div>
+    </div>
+  );
+}
+
+reactDom.createPortal = mockCreatePortal;
+
+module.exports = reactDom;
+```
+
+```js
+// gatsby.js
+import React from 'react';
+const gatsby = jest.requireActual('gatsby');
+
+module.exports = {
+  ...gatsby,
+  graphql: jest.fn(),
+  Link: jest
+    .fn()
+    .mockImplementation(
+      ({
+        activeClassName,
+        activeStyle,
+        getProps,
+        innerRef,
+        partiallyActive,
+        ref,
+        replace,
+        to,
+        ...rest
+      }) =>
+        React.createElement('a', {
+          ...rest,
+          href: to,
+        })
+    ),
+  StaticQuery: jest.fn(),
+  useStaticQuery: jest.fn(),
+};
 ```
 
 ### Enzyme
