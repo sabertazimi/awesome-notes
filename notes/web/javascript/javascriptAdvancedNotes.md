@@ -298,6 +298,25 @@ move(); // [0, 0]
 // [ 1, 'yes', 3 ]
 ```
 
+### Logical Operators
+
+- Optional Chaining Operator `?.`:
+  Legible property chains that don't throw an error
+  if a requested reference is missing.
+- Nullish coalescing operator `??`:
+  Binary operator.
+  If the value of left side expression is `null` or `undefined`,
+  right side of the operator is evaluated.
+- Logical assignment operators
+  `&&=`, `||=`, `??=`):
+  All of them are binary operators.
+  For `&&=`, if left side is truthy,
+  right-side expression is assigned to left side.
+  For `||=` if left side is falsy,
+  right-side expression is assigned to left side.
+  With the `??=`, if left-side value is `null` or `undefined`,
+  right-side expression is assigned to left side.
+
 ### String
 
 ```js
@@ -358,6 +377,40 @@ s.includes('Hello', 6); // false
 
 '12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-MM-12"
 '09-12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-09-12"
+```
+
+- `trimLeft()`/`trimStart()`: remove start whitespace.
+- `trimRight()`/`trimEnd()`: remove end whitespace.
+- `matchAll(regexp)`
+- `replaceAll`:
+  - `replaceAll(regexp, newSubstr)`.
+  - `replaceAll(regexp, replacerFunction)`.
+  - `replaceAll(substr, newSubstr)`.
+  - `replaceAll(substr, replacerFunction)`.
+
+```js
+const regexp = new RegExp('foo[a-z]*','g');
+const str = 'table football, foosball';
+const matches = str.matchAll(regexp);
+
+for (const match of matches) {
+  console.log(`Found ${match[0]} start=${match.index} end=${match.index + match[0].length}.`);
+}
+// expected output: "Found football start=6 end=14."
+// expected output: "Found foosball start=16 end=24."
+
+// matches iterator is exhausted after the for..of iteration
+// Call matchAll again to create a new iterator
+Array.from(str.matchAll(regexp), m => m[0]);
+// Array [ "football", "foosball" ]
+```
+
+```js
+'aabbcc'.replaceAll('b', '.');
+//=> 'aa..cc'
+
+'aabbcc'.replaceAll(/b/g, '.');
+//=> 'aa..cc'
 ```
 
 #### Template String
@@ -617,13 +670,13 @@ no more `indexOf() > -1`
 // Set
 // Map
 
-// NodeList对象
+// NodeList 对象
 const ps = document.querySelectorAll('p');
 Array.from(ps).forEach(function (p) {
   console.log(p);
 });
 
-// arguments对象
+// arguments 对象
 function foo() {
   const args = Array.from(arguments);
   // ...
@@ -645,6 +698,10 @@ Array.from(arrayLike).map((x) => x * x);
 
 Array.from([1, 2, 3], (x) => x * x);
 // [1, 4, 9]
+
+// random array generation
+Array.from(Array(5).keys());
+// [0, 1, 2, 3, 4]
 ```
 
 #### Array CopyWithin
@@ -1451,6 +1508,7 @@ APIs of handler:
 - getPrototypeOf
 - setPrototypeOf
 - getOwnPropertyDescriptor
+- getOwnPropertyDescriptors
 
 #### Proxy vs DefineProperty
 
@@ -1567,18 +1625,14 @@ nums.filter((n) => n in range(1, 10));
 // => [1, 5]
 ```
 
-### Asynchronous Programming
+### Promise
 
-#### Promise
+Avoid callback hell with:
 
-avoid callback hell with:
-
-- return `new Promise`
-- return `promise.then`
-- `Promise.all`: short-circuits when an input value is rejected
-- `Promise.race`: short-circuits when an input value is settled
-- `Promise.any`: short-circuits when an input value is fulfilled
-- `Promise.allSettled`: does not short-circuits
+- return `new Promise`.
+- return `promise.then((value) => {})`.
+- error handle with `promise.catch((err) => {})`.
+- cleanup with `promise.finally(() => {})`.
 
 resolve only accept **one** value
 
@@ -1628,11 +1682,21 @@ function getUsers(users) {
 }
 ```
 
-##### Promise All
+#### Promise Array Functions
 
-- `Promise.all([...])` fail-fast.
-  If at least one promise in the promises array rejects,
+- `Promise.all(iterable)` fail-fast:
+  if at least one promise in the promises array rejects,
   then the promise returned rejects too.
+  Short-circuits when an input value is rejected.
+- `Promise.any(iterable)`:
+  resolves if any of the given promises are resolved.
+  Short-circuits when an input value is fulfilled.
+- `Promise.race(iterable)`:
+  Short-circuits when an input value is settled
+  (fulfilled or rejected).
+- `Promise.allSettled(iterable)`:
+  returns when all given promises are settled
+  (rejected or fulfilled, doesn't matter).
 
 ```js
 Promise.all(urls.map(fetch)).then(responses =>
@@ -1670,7 +1734,7 @@ const loadData = async () => {
 const data = loadData().then((data) => console.log(data));
 ```
 
-##### Promise Polyfill
+#### Promise Polyfill
 
 ```js
 class Promise {
@@ -1790,10 +1854,14 @@ class Promise {
   catch(onRejected) {
     return this.then(null, onRejected);
   }
+
+  finally() {
+    return this.then(null, null);
+  }
 }
 ```
 
-##### Promise Thenable and Catch
+#### Promise Thenable and Catch
 
 The main difference between the forms
 `promise.then(success, error)` and
@@ -1802,7 +1870,7 @@ The main difference between the forms
 in case if success callback returns a rejected promise,
 then only the second form is going to catch that rejection.
 
-#### Await and Async
+### Await and Async
 
 avoid wrong parallel logic (too sequential)
 
@@ -1828,7 +1896,7 @@ async getAuthors(authorIds) {
 }
 ```
 
-##### Await Arrays
+#### Await Arrays
 
 - If you want to execute await calls in series,
   use a for-loop (or any loop without a callback).
@@ -1836,6 +1904,8 @@ async getAuthors(authorIds) {
   use a for-loop (or any loop without a callback) instead.
 - Don't await inside filter and reduce,
   always await an array of promises with map, then filter or reduce accordingly.
+
+### Asynchronous Programming
 
 #### Sleep Function
 
