@@ -502,6 +502,16 @@ const fluxStandardAction = {
 - redux-undo
 - reselect: memorize state transformation
 
+## Performance
+
+- All `reducers` are called to produce the `next` store state.
+- All `mapStateToProps`/`useSelectors` of mounted components are called.
+- As every `mapStateToProps`/`useSelector`
+  that returned a different reference
+  from the previous render,
+  the associated components are rendered
+  (**re-rendering** problem).
+
 ### Debugging
 
 - [Redux Devtools](https://github.com/gaearon/redux-devtools)
