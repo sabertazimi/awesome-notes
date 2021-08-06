@@ -7597,6 +7597,8 @@ window.requestAnimationFrame = function (callback) {
   setTimeout(callback);
 };
 
+window.cancelAnimationFrame = window.clearTimeout;
+
 window.localStorage = {
   getItem: function () {},
   setItem: function () {},
