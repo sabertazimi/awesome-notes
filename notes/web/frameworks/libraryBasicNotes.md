@@ -480,6 +480,7 @@
 - [JavaScript Load Image](https://github.com/blueimp/JavaScript-Load-Image)
 - [Sharp](https://github.com/lovell/sharp)
 - [HTML2Image](https://github.com/bubkoo/html-to-image)
+- [Tesseract: Image recognition Tesseract OCR engine](https://github.com/naptha/tesseract.js)
 
 ### Image Color
 
@@ -568,6 +569,7 @@
 - [Elementary Audio Tools](https://github.com/nick-thompson/elementary)
 - [MIDI.js](https://github.com/mudcube/MIDI.js)
 - [TypeScript Audio](https://github.com/EvandroLG/ts-audio)
+- [Meyda: Audio feature extraction](https://github.com/meyda/meyda)
 
 ### Video
 
