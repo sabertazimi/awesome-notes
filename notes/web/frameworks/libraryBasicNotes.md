@@ -274,6 +274,7 @@
 
 ### Guide Message
 
+- [JoyRide: Awesome guided tours](https://github.com/gilbarbara/react-joyride)
 - [Shepherd: Guide tour library](https://github.com/shipshapecode/shepherd)
 - [Intro.js](https://github.com/usablica/intro.js)
 
