@@ -7963,3 +7963,7 @@ describe('component', () => {
   });
 });
 ```
+
+### Cypress Reference
+
+- [Blank page test](https://glebbahmutov.com/blog/visit-blank-page-between-tests)
