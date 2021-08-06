@@ -258,8 +258,9 @@
 
 - [React Snakke](https://github.com/diogomoretti/react-snakke)
 
-#### Prompt Message
+#### Prompt and Toast Message
 
+- [React Hot Toast](https://github.com/timolins/react-hot-toast)
 - [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
 - [Popper.js](https://github.com/FezVrasta/popper.js)
 - [Humane.js](https://github.com/wavded/humane-js)
