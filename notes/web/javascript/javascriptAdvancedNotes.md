@@ -7803,6 +7803,10 @@ test('allows users to add items to their list', async () => {
 
 ## E2E Testing
 
+When it comes to test heavy visual features,
+(e.g fixed navigation based on window scroll event),
+E2E testing helps a lot.
+
 ### Cypress Installation
 
 ```bash
