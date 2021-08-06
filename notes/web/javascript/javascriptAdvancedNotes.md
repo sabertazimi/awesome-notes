@@ -6908,9 +6908,15 @@ module.exports = {
 
 #### Webpack Static Assets Loader
 
-- file-loader
-- url-loader
-- raw-loader
+- [ImageMin Loader](https://github.com/tcoopman/image-webpack-loader)
+- `asset/resource` emits separate file and exports the URL
+  (`file-loader`).
+- `asset/inline` exports data URI of the asset
+  (url-loader).
+- `asset/source` exports source code of the asset
+  (raw-loader).
+- `asset` automatically chooses between exporting data URI and separate file
+  (`url-loader` with asset size limit, default `8kb`).
 
 ```js
 {
@@ -6918,9 +6924,115 @@ module.exports = {
     {
       test: /\.(png|jpg|gif|jpeg|webp|svg|eot|ttf|woff|woff2)$/,
       type: 'asset',
+      parser: {
+        dataUrlCondition: {
+          maxSize: 4 * 1024, // 4kb
+        },
+      },
     },
   ];
 }
+```
+
+##### Webpack Resource Assets
+
+```js
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+   assetModuleFilename: 'images/[hash][ext][query]'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.png/,
+        type: 'asset/resource'
+     }
+     },
+     {
+       test: /\.html/,
+       type: 'asset/resource',
+       generator: {
+         filename: 'static/[hash][ext][query]'
+       }
+     }
+    ]
+  },
+};
+```
+
+```js
+import mainImage from './images/main.png';
+
+img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
+```
+
+##### Webpack Inline Assets
+
+```js
+const path = require('path');
+const svgToMiniDataURI = require('mini-svg-data-uri');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.svg/,
+        type: 'asset/inline',
+        generator: {
+          dataUrl: (content) => {
+            content = content.toString();
+            return svgToMiniDataURI(content);
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+```js
+import metroMap from './images/metro.svg';
+
+block.style.background = `url(${metroMap})`;
+//=> url(data:image/svg+xml;base64,PHN2ZyB4bW0iaHR0cDo...vc3ZnPgo=)
+```
+
+##### Webpack Source Assets
+
+```js
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.txt/,
+        type: 'asset/source',
+      },
+    ],
+  },
+};
+```
+
+```js
+import exampleText from './example.txt';
+
+block.textContent = exampleText; // 'Hello world'
 ```
 
 #### Webpack Thread Loader
