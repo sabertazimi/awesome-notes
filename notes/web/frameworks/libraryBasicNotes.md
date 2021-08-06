@@ -565,6 +565,7 @@
 - [Music Helper Utils](https://github.com/madewithlove/music-fns)
 - [Elementary Audio Tools](https://github.com/nick-thompson/elementary)
 - [MIDI.js](https://github.com/mudcube/MIDI.js)
+- [TypeScript Audio](https://github.com/EvandroLG/ts-audio)
 
 ### Video
 
