@@ -924,6 +924,10 @@
 
 ## DevOps Tools
 
+### DevOps Platform
+
+- [KubeSphere](https://github.com/kubesphere/kubesphere)
+
 ### DevOps Project Tools
 
 - [Node Maintenance Tools](https://github.com/maxogden/maintenance-modules)
