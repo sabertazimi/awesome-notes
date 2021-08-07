@@ -566,6 +566,12 @@ const str = overloaded(''); // str 被推断为 'string'
 const num = overloaded(123); // num 被推断为 'number'
 ```
 
+WangCai extends Dog extends Animal.
+Animal => WangCai 是 Dog => Dog 的子类型:
+
+- 函数参数的类型兼容是反向的, 称之为逆变.
+- 返回值的类型兼容是正向的, 称之为协变.
+
 ### Arrow Function
 
 在一个以 number 类型为参数，以 string 类型为返回值的函数中:
@@ -1695,6 +1701,20 @@ function move(animal: Fish | Bird) {
   }
 
   return animal.fly();
+}
+```
+
+### TypeOf Type Guard
+
+```ts
+function fn(x: string | number) {
+  if (typeof x === 'string') {
+    // x is string
+    return x.length;
+  } else {
+    // x is number
+    // .....
+  }
 }
 ```
 
