@@ -8068,3 +8068,13 @@ describe('component', () => {
 ### Cypress Reference
 
 - [Blank page test](https://glebbahmutov.com/blog/visit-blank-page-between-tests)
+
+## Methodology
+
+### JamStack
+
+JamStack 指的是一套用于构建现代网站的技术栈:
+
+- JavaScript: enhancing with JavaScript.
+- APIs: supercharging with services.
+- Markup: pre-rendering.
