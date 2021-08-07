@@ -811,13 +811,13 @@ class Something extends React.Component<{ foo: number }, { baz: number }> {
 For `JavaScript`,
 implicitly calls `toString` on any object index signature:
 
-```js
+```ts
 let obj = {
-  toString(){
-    console.log('toString called')
-    return 'Hello'
-  }
-}
+  toString() {
+    console.log('toString called');
+    return 'Hello';
+  },
+};
 
 let foo: any = {};
 foo[obj] = 'World'; // toString called
@@ -828,8 +828,7 @@ console.log(foo['Hello']); // World
 TypeScript will give an error to prevent beginners
 from doing such things.
 
-**Index Signature Error**: `Element implicitly has an 'any' type
-because expression of type 'string' can't be used to index type XXX`
+**Index Signature Error**: `Element implicitly has an 'any' type because expression of type 'string' can't be used to index type XXX`
 can fixed with
 
 - `Record<string, T>`.
@@ -1841,6 +1840,15 @@ class MyComponent extends React.Component<Props, State> {
 }
 ```
 
+### Decorators Pros
+
+- 实现 Open-closed 原则.
+- 分离辅助性功能逻辑 (Before/After 钩子, Trace, Log, Report, Debounce/Throttle)
+  与业务逻辑.
+- 抽象公有功能函数.
+- 装饰器模式是 Class 继承的一个替代模式.
+  (类似于组合模式)
+
 ### Class Decorators
 
 ```ts
@@ -1968,6 +1976,70 @@ class MyComponent extends React.Component {
     // ...
   }
 }
+```
+
+### Decorators Execution Order
+
+- 不同级装饰器:
+  1. 实例成员: (参数 > 方法) -> 访问器 -> 属性 装饰器 (按顺序).
+  2. 静态成员: (参数 > 方法) -> 访问器 -> 属性 装饰器 (按顺序).
+  3. 构造器: 参数装饰器.
+  4. 类装饰器.
+- 同级装饰器: 先从外到内进入，然后由内向外执行.
+
+```ts
+function f(key: string): any {
+  return function () {
+    console.log('执行: ', key);
+  };
+}
+
+@f('8. 类')
+class C {
+  @f('4. 静态属性')
+  static prop?: number;
+
+  @f('5. 静态方法')
+  static method(@f('6. 静态方法参数') foo) {}
+
+  constructor(@f('7. 构造器参数') foo) {}
+
+  @f('2. 实例方法')
+  method(@f('1. 实例方法参数') foo) {}
+
+  @f('3. 实例属性')
+  prop?: number;
+}
+
+// "执行: ",  "1. 实例方法参数"
+// "执行: ",  "2. 实例方法"
+// "执行: ",  "3. 实例属性"
+// "执行: ",  "4. 静态属性"
+// "执行: ",  "6. 静态方法参数"
+// "执行: ",  "5. 静态方法"
+// "执行: ",  "7. 构造器参数"
+// "执行: ",  "8. 类"
+```
+
+```ts
+function dec(id) {
+  console.log('装饰器初始化', id);
+
+  return function (target, property, descriptor) {
+    console.log('装饰器执行', id);
+  };
+}
+
+class Example {
+  @dec(1)
+  @dec(2)
+  method() {}
+}
+
+// 装饰器初始化 1
+// 装饰器初始化 2
+// 装饰器执行 2
+// 装饰器执行 1
 ```
 
 ### TypeScript Decorator Utils
