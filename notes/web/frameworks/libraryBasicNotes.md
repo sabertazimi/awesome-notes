@@ -39,9 +39,10 @@
 
 ### Front-end Solution
 
-- [React Storybook](https://github.com/storybooks/storybook)
-- [Gatsby.js: static site generator](https://github.com/gatsbyjs/gatsby)
+- [Next](https://github.com/vercel/next.js)
+- [Gatsby: static site generator](https://github.com/gatsbyjs/gatsby)
 - [UMI](https://github.com/umijs/umi)
+- [Nuxt](https://github.com/nuxt/nuxt.js)
 
 ### Micro Front-ends Solution
 
@@ -60,6 +61,13 @@
 - [Sails: Realtime MVC framework](https://github.com/balderdashy/sails)
 - [Feathers.js: REST APIs with TypeScript](https://github.com/feathersjs/feathers)
 - [tRPC: End-to-end type-safe APIs server](https://github.com/trpc/trpc)
+
+### Headless CMS
+
+- [Ghost](https://github.com/TryGhost/Ghost)
+- [StrAPI](https://github.com/strapi/strapi)
+- [NetlifyCMS](https://github.com/netlify/netlify-cms)
+- [TinaCMS](https://github.com/tinacms/tinacms)
 
 ### Full Stack Solution
 
@@ -336,8 +344,9 @@
 - [React Data Sheet](https://github.com/nadbm/react-datasheet)
 - [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
 
-### Charts
+### Charts Visualization
 
+- [AntV](https://github.com/antvis)
 - [React Chartjs](https://github.com/jhudson8/react-chartjs)
 - [Sigma.js: Graph Drawing](https://github.com/jacomyal/sigma.js)
 - [HTML5 Chart](https://github.com/chartjs/Chart.js)
@@ -957,6 +966,7 @@
 
 - [Docz: React component documentation tool built on Gatsby](https://github.com/pedronauck/docz)
 - [DUmi: Documentation generator of React component](https://github.com/umijs/dumi)
+- [React Storybook: live component documentation](https://github.com/storybooks/storybook)
 
 ### API Documentation
 
