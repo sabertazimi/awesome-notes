@@ -829,6 +829,7 @@
 
 ### Code Analysis Tools
 
+- [SourceGraph: Universal code search](https://github.com/sourcegraph/sourcegraph)
 - [Babel](https://github.com/babel/babel)
 - [AST Explorer](https://astexplorer.net)
 - [CodeCrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
