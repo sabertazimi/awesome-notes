@@ -875,6 +875,7 @@
 - [Perf Tools](https://github.com/brendangregg/perf-tools)
 - [FlameGraph](https://github.com/brendangregg/FlameGraph)
 - [Brotli compression format](https://github.com/google/brotli)
+- [V8 Compile Cache](https://github.com/zertosh/v8-compile-cache)
 
 ### Log Tools
 
