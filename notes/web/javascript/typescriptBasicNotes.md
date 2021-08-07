@@ -330,6 +330,19 @@ declare namespace React {
 
 ## Basic Types
 
+- boolean
+- number
+- string
+- array
+- tuple
+- enum
+- void
+- null
+- undefined
+- any
+- unknown: 任何类型都能分配给 unknown, 但 unknown 不能分配给其他基本类型.
+- never: switch default case guard.
+
 ```ts
 let num: number;
 let str: string;
@@ -562,6 +575,12 @@ const simple: (foo: number) => string = (foo) => foo.toString();
 ```
 
 ### Weak Overload
+
+函数签名的类型重载:
+
+- 多个重载签名和一个实现签名.
+- 定义了重载签名, 则实现签名**对外不可见**.
+- 实现签名必须兼容重载签名.
 
 ```ts
 // 重载
