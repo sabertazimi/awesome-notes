@@ -4353,9 +4353,9 @@ if (document.getElementById) {
 }
 ```
 
-## Chrome Dev Tools
+## Chrome DevTools
 
-### Shortcuts
+### Chrome DevTools Shortcuts
 
 - c-d: go to next word
 - c-f in `Elements` panel: search DOM node
@@ -4429,6 +4429,7 @@ $0.addEventListener('click', (e) => {
 - C+S+P: FPS
 - script->style->layout->paint->composite timeline
 - performance tips
+- Memory
 - [Timeline Events](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/performance-reference)
 - [Performance Analysis Reference](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
 
@@ -4446,13 +4447,15 @@ $0.addEventListener('click', (e) => {
 - cs-p: type `coverage`
 - Use to eliminate **unused** CSS/JS code.
 
-#### Memory Panel
+### Memory Panel
 
-#### JS Profiler Panel
+- Heap snapshot
 
-#### Layer Panel
+### JS Profiler Panel
 
-tool for composite stage analysis
+### Layer Panel
+
+Tool for composite stage analysis
 
 ### Rendering Panel
 
