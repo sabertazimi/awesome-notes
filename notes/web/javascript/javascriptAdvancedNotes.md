@@ -389,19 +389,23 @@ s.includes('Hello', 6); // false
   - `replaceAll(substr, replacerFunction)`.
 
 ```js
-const regexp = new RegExp('foo[a-z]*','g');
+const regexp = new RegExp('foo[a-z]*', 'g');
 const str = 'table football, foosball';
 const matches = str.matchAll(regexp);
 
 for (const match of matches) {
-  console.log(`Found ${match[0]} start=${match.index} end=${match.index + match[0].length}.`);
+  console.log(
+    `Found ${match[0]} start=${match.index} end=${
+      match.index + match[0].length
+    }.`
+  );
 }
 // expected output: "Found football start=6 end=14."
 // expected output: "Found foosball start=16 end=24."
 
 // matches iterator is exhausted after the for..of iteration
 // Call matchAll again to create a new iterator
-Array.from(str.matchAll(regexp), m => m[0]);
+Array.from(str.matchAll(regexp), (m) => m[0]);
 // Array [ "football", "foosball" ]
 ```
 
@@ -4155,6 +4159,11 @@ describe('Sum suite File', function () {
 
 ### Monkey Patch
 
+#### Window State Injection
+
+Inject trace function (log, monitor, report service)
+to window `pushState` and `replaceState`.
+
 ```js
 let _wr = function (type) {
   let orig = window.history[type];
@@ -4172,11 +4181,38 @@ window.history.pushState = _wr('pushState');
 window.history.replaceState = _wr('replaceState');
 
 window.addEventListener('pushstate', function (event) {
-  // doing something
+  console.trace('pushState');
 });
 
 window.addEventListener('replacestate', function (event) {
-  // doing something
+  console.trace('replaceState');
+});
+```
+
+#### Event Propagation Injection
+
+```js
+const originalStopPropagation = MouseEvent.prototype.stopPropagation;
+
+MouseEvent.prototype.stopPropagation = function (...args) {
+  console.trace('stopPropagation');
+  originalStopPropagation.call(this, ...args);
+};
+```
+
+#### Window Scroll Injection
+
+```js
+const originalScrollTop = element.scrollTop;
+
+Object.defineProperty(element, 'scrollTop', {
+  get: function () {
+    return originalScrollTop;
+  },
+  set: function (newVal) {
+    console.trace('scrollTop');
+    originalScrollTop = newVal;
+  },
 });
 ```
 

@@ -2707,12 +2707,9 @@ console.log(myStylesheet.cssRules.length); // 7
 
 ### DOM Events
 
-For `click/keydown` events:
-
 - `event.preventDefault()`
 - `event.stopPropagation()`
-
-`element.dispatchEvent` to trigger events.
+- `element.dispatchEvent(event)` to trigger events.
 
 #### Events Checking
 
