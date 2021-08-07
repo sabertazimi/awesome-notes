@@ -1180,6 +1180,23 @@ function id<T>(x: T) {
 const idNum = id as { (x: number): number };
 ```
 
+### Generic Types Constraints
+
+```ts
+type Lengthwise = {
+  length: number;
+};
+
+function createList<T extends number | Lengthwise>(): T[] {
+  return [] as T[];
+}
+
+const numberList = createList<number>(); // ok
+const stringList = createList<string>(); // ok
+const arrayList = createList<any[]>(); // ok
+const boolList = createList<boolean>(); // error
+```
+
 ### Generic Types for Types Programming
 
 - 在类型编程里, 泛型就是变量.
