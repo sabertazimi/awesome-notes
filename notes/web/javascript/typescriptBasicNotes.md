@@ -828,8 +828,14 @@ console.log(foo['Hello']); // World
 TypeScript will give an error to prevent beginners
 from doing such things.
 
-**Index Signature Error**: `Element implicitly has an 'any' type because expression of type 'string' can't be used to index type XXX`
-can fixed with
+**Index Signature Error**:
+
+```bash
+Element implicitly has an 'any' type
+because expression of type 'string' can't be used to index type XXX.
+```
+
+can fixed with:
 
 - `Record<string, T>`.
 - explicit **const** propertyName type:

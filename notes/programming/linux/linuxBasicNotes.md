@@ -1190,7 +1190,7 @@ sslocal -c shadowsocks.json -d start
 内存控制
 
 ```bash
-sysctl vm [-options] CONFIG 
+sysctl vm [-options] CONFIG
 swapoff
 ```
 

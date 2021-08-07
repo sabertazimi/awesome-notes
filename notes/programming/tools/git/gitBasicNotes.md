@@ -184,7 +184,7 @@ no more than 50 characters
 - test: 添加确实测试或更正现有的测试.
 - build: 影响构建系统或外部依赖关系的更改 (示例范围: gulp, broccoli, NPM).
 - ci: 更改持续集成文件和脚本 (示例范围: Travis, Circle, BrowserStack, SauceLabs).
-- chore:  其他不修改 src 或 test 文件 e.g `chore(release)`.
+- chore: 其他不修改 src 或 test 文件 e.g `chore(release)`.
 - revert: commit 回退.
 
 #### Scope Values

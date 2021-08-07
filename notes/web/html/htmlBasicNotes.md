@@ -595,17 +595,19 @@ style="display: none";
 
 ```html
 <h1>Review your data</h1>
-<p>Please review the data you entered in the previous step to ensure it is correct:</p>
+<p>
+  Please review the data you entered in the previous step to ensure it is
+  correct:
+</p>
 <dl>
-    <dt>First name</dt>
-    <dd>Marc</dd>
+  <dt>First name</dt>
+  <dd>Marc</dd>
 
-    <dt>Last name</dt>
-    <dd>Simmons</dd>
+  <dt>Last name</dt>
+  <dd>Simmons</dd>
 
-    <dt>Date of Birth</dt>
-    <dd><time datetime="1990-05-15">May 15 1990</time></dd>
-
+  <dt>Date of Birth</dt>
+  <dd><time datetime="1990-05-15">May 15 1990</time></dd>
 </dl>
 ```
 
@@ -631,7 +633,7 @@ style="display: none";
       <td>Row 1 Col 3</td>
     </tr>
     <tr>
-    <th scope="row">Row Header 2</th>
+      <th scope="row">Row Header 2</th>
       <td>Row 2 Col 2</td>
       <td>Row 2 Col 3</td>
     </tr>
