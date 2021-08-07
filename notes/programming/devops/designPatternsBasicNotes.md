@@ -100,7 +100,7 @@ Clients should not be forced to depend upon interfaces that they do not use.
 - `if (typeof v === " ")`
 - `toString. apply(var)`
 
-### 函数(function)
+### Function Patterns
 
 #### 参数
 
@@ -145,7 +145,7 @@ const MyApp = {
 - use `Number.isNaN` not `isNaN`
 - use `Number.isFinite` not `isFinite`
 
-### Other
+### Other Patterns
 
 !!result 转化成 Boolean
 
@@ -289,329 +289,42 @@ Universal Module Definition:
 
 ![Common Design Patterns](./figures/DesignPatterns.png)
 
-### Classification
+### Patterns Classification
 
 #### Creation Patterns
 
-- Factory Method(工厂方法) | 通过将数据和事件接口化来构建若干个子类。
-- Abstract Factory(抽象工厂) | 建立若干族类的一个实例，这个实例不需要具体类的细节信息。（抽象类）
-- Builder(建造者) | 将对象的构建方法和其表现形式分离开来，总是构建相同类型的对象。
-- Prototype(原型) | 一个完全初始化的实例，用于拷贝或者克隆。
-- Singleton(单例) | 一个类只有唯一的一个实例，这个实例在整个程序中有一个全局的访问点。
+- Factory Method (工厂方法): 通过将数据和事件接口化来构建若干个子类.
+- Abstract Factory (抽象工厂): 建立若干族类的一个实例，这个实例不需要具体类的细节信息 (抽象类).
+- Builder (建造者): 将对象的构建方法和其表现形式分离开来，总是构建相同类型的对象.
+- Prototype (原型): 一个完全初始化的实例，用于拷贝或者克隆.
+- Singleton (单例): 一个类只有唯一的一个实例，这个实例在整个程序中有一个全局的访问点.
 
 #### Structural Patterns
 
-- Adapter(适配器) : 将不同类的接口进行匹配，调整，这样尽管内部接口不兼容但是不同的类还是可以协同工作的。
-- Bridge(桥接模式) : 将对象的接口从其实现中分离出来，这样对象的实现和接口可以独立的变化。
-- Composite(组合模式) : 通过将简单可组合的对象组合起来，构成一个完整的对象，这个对象的能力将会超过这些组成部分的能力的总和，即会有新的能力产生。
-- Decorator(装饰器) : 动态给对象增加一些可替换的处理流程。
-- Facade(外观模式) : 一个类隐藏了内部子系统的复杂度，只暴露出一些简单的接口。
-- Flyweight(享元模式) : 一个细粒度对象，用于将包含在其它地方的信息 在不同对象之间高效地共享。
-- Proxy(代理模式) : 一个充当占位符的对象用来代表一个真实的对象。
+- Adapter (适配器): 将不同类的接口进行匹配，调整，这样尽管内部接口不兼容但是不同的类还是可以协同工作的.
+- Bridge (桥接模式): 将对象的接口从其实现中分离出来，这样对象的实现和接口可以独立的变化.
+- Composite (组合模式):
+  通过将简单可组合的对象组合起来，构成一个完整的对象,
+  这个对象的能力将会超过这些组成部分的能力的总和，即会有新的能力产生.
+- Decorator (装饰器): 动态给对象增加一些可替换的处理流程。
+- Facade (外观模式): 一个类隐藏了内部子系统的复杂度，只暴露出一些简单的接口。
+- Flyweight (享元模式) 一个细粒度对象，用于将包含在其它地方的信息 在不同对象之间高效地共享。
+- Proxy (代理模式): 一个充当占位符的对象用来代表一个真实的对象。
 
 #### Behavioral Patterns
 
-- Interpreter(解释器) : 将语言元素包含在一个应用中的一种方式，用于匹配目标语言的语法。
-- Template Method(模板方法) : 在一个方法中为某个算法建立一层外壳，将算法的具体步骤交付给子类去做。
-- Chain of Responsibility(响应链) : 一种将请求在一串对象中传递的方式，寻找可以处理这个请求的对象。
-- Command(命令) : 封装命令请求为一个对象，从而使记录日志，队列缓存请求，未处理请求进行错误处理 这些功能称为可能。
-- Iterator(迭代器) : 在不需要直到集合内部工作原理的情况下，顺序访问一个集合里面的元素。
-- Mediator(中介者模式) : 在类之间定义简化的通信方式，用于避免类之间显式的持有彼此的引用。
-- Observer(观察者模式) : 用于将变化通知给多个类的方式，可以保证类之间的一致性。
-- State(状态) : 当对象状态改变时，改变对象的行为。
-- Strategy(策略) : 将算法封装到类中，将选择和实现分离开来。
-- Visitor(访问者) : 为类增加新的操作而不改变类本身。
+- Interpreter (解释器): 将语言元素包含在一个应用中的一种方式，用于匹配目标语言的语法.
+- Template Method (模板方法): 在一个方法中为某个算法建立一层外壳，将算法的具体步骤交付给子类去做.
+- Chain of Responsibility (响应链): 一种将请求在一串对象中传递的方式，寻找可以处理这个请求的对象.
+- Command (命令): 封装命令请求为一个对象，从而使记录日志，队列缓存请求，未处理请求进行错误处理 这些功能称为可能.
+- Iterator (迭代器): 在不需要直到集合内部工作原理的情况下，顺序访问一个集合里面的元素.
+- Mediator (中介者模式): 在类之间定义简化的通信方式，用于避免类之间显式的持有彼此的引用.
+- Observer (观察者模式): 用于将变化通知给多个类的方式，可以保证类之间的一致性.
+- State (状态): 当对象状态改变时，改变对象的行为.
+- Strategy (策略): 将算法封装到类中，将选择和实现分离开来.
+- Visitor (访问者): 为类增加新的操作而不改变类本身.
 
-### Prototype
-
-关键方法 clone()
-
-### Bridge
-
-分离抽象和实现/分离对象的两种不同属性
-
-e.g 从 2 个不同维度上扩展对象
-
-### Composite
-
-树形结构:
-
-- 根结点
-  - Component 抽象对象/接口 采用最大宽接口,定义内点和叶点的操作
-  - 将内点特有的操作集设为缺省操作集(空实现)
-- 内点
-  - 持有父结点和子节点的引用(可使用 Flyweight 模式实现共享)
-  - 操作集:内点操作集(可添加/删除组件)
-- 叶点
-  - 持有父结点引用
-  - 操作集：叶点操作集(不可添加/删除组件)
-
-### Strategy
-
-改变对象的内核/算法, 一个 Strategy 对象封装一个算法
-
-### State
-
-一个 State 对象封装一个与状态相关的行为
-
-### Iterator
-
-一个 Iterator 对象封装访问和遍历一个聚集对象中的各个构件的方法
-
-### IOC and DI
-
-- IOC (inversion of control) 控制反转模式；控制反转是将组件间的依赖关系从程序内部提到外部来管理
-- DI (dependency injection) 依赖注入模式；依赖注入是指将组件的依赖通过外部以参数或其他形式注入
-
-```java
-class DbMysql {
-  public function query(){}
-}
-
-class Controller {
-  public $db;
-  public function __construct($dbMysql) {
-    $this->db = $dbMysql;
-  }
-  public function action(){
-    $this->db->query();
-  }
-}
-
-$db = new DbMysql();
-$c = new Controller($db);
-$c->action();
-```
-
-With IOC container:
-
-```java
-class DbMysql {
-  public function __construct($host, $name, $pwd) {
-    // do something
-  }
-  public function query() {
-    echo __METHOD__ . PHP_EOL;
-  }
-}
-
-class DbRedis {
-  public function __construct($host, $name, $pwd) {
-    // do something
-  }
-  public function set() {
-    echo __METHOD__ . PHP_EOL;
-  }
-}
-
-class controller {
-  public $mysql;
-  public $redis;
-  public function __construct($mysql, $redis) {
-    $this->mysql = $mysql;
-    $this->redis = $redis;
-  }
-  public function action() {
-    $this->mysql->query();
-    $this->redis->set();}
-  }
-}
-
-
-class Container {
-  public $bindings = [];
-  public function bind($key, Closure $value) {
-    $this->bindings[$key] = $value;
-  }
-  public function make($key) {
-    $new = $this->bindings[$key];
-    return $new();
-  }
-}
-
-$app = new Container();
-$app->bind('mysql', function () { return new DbMysql('host', 'name', 'pwd'); });
-$app->bind('redis', function () { return new DbRedis('host', 'name', 'pwd'); });
-$app->bind('controller', function () use ($app) {
-  return new Controller($app->make('mysql'), $app->make('redis'));
-});
-$controller = $app->make('controller');
-$controller->action();
-/** * 输出： * DbMysql::query * DbRedis::set */
-```
-
-With dependency injection:
-
-```js
-// dependency provider
-export interface IProvider<T> {
-  provide(): T;
-}
-
-@injectable()
-export class NameProvider implements IProvider<string> {
-  provide() {
-    return "World";
-  }
-}
-
-// top module
-import * as React from "react";
-import { IProvider } from "./providers";
-
-export class Hello extends React.Component {
-  private readonly nameProvider: IProvider<string>;
-
-  render() {
-    return <h1>Hello {this.nameProvider.provide()}!</h1>;
-  }
-}
-```
-
-### Class Pattern
-
-```js
-var Person = function (firstName, lastName) {
-  this.firstName = firstName;
-  this.lastName = lastName;
-  this.gender = 'male';
-};
-
-// Define a subclass constructor for for "Superhero":
-var Superhero = function (firstName, lastName, powers) {
-  // Invoke the superclass constructor on the new object
-  // then use .call() to invoke the constructor as a method of
-  // the object to be initialized.
-  Person.call(this, firstName, lastName);
-
-  // Finally, store their powers, a new array of traits not found in a normal "Person"
-  this.powers = powers;
-};
-SuperHero.prototype = Object.create(Person.prototype);
-```
-
-```js
-var superman = new Superhero('Clark', 'Kent', ['flight', 'heat-vision']);
-console.log(superman);
-```
-
-### Mix-In Pattern
-
-将多个对象的属性混入同一个对象,达到继承/扩展/组合的效果
-
-- 不改变原型链
-
-```js
-function mix() {
-  var arg,
-    prop,
-    child = {};
-
-  for (arg = 0; arg < arguments.length; arg += 1) {
-    for (prop in arguments[arg]) {
-      if (arguments[arg].hasOwnProperty(prop)) {
-        child[prop] = arguments[arg][prop];
-      }
-    }
-  }
-
-  return child;
-}
-```
-
-```js
-var cake = mix(
-  { eggs: 2, large: true },
-  { butter: 1, salted: true },
-  { flour: '3 cups' },
-  { sugar: 'sure!' }
-);
-```
-
-- 改变原型链
-
-```js
-// Extend an existing object with a method from another
-function mix(receivingClass, givingClass) {
-  // mix-in provide certain methods
-  if (arguments[2]) {
-    for (var i = 2, len = arguments.length; i < len; i++) {
-      receivingClass.prototype[arguments[i]] =
-        givingClass.prototype[arguments[i]];
-    }
-  }
-  // mix-in provide obj
-  else {
-    for (var methodName in givingClass.prototype) {
-      if (!receivingClass.prototype[methodName]) {
-        receivingClass.prototype[methodName] =
-          givingClass.prototype[methodName];
-      }
-    }
-  }
-}
-```
-
-### Singleton Pattern
-
-原型与构造函数指针运作正常
-
-```javascript
-function Universe() {
-  // 缓存实例
-  var instance;
-
-  // anti-Self-Defined Function Pattern
-  // 反-自定义函数模式: 先重写,再初始化
-  Universe = function Universe() {
-    return instance;
-  };
-
-  // 保存原型,使其一直保持于同一位置
-  // (this指针指向不重要)
-  Universe.prototype = this;
-
-  instance = new Universe();
-  // 重定向constructor指针
-  instance.constructor = Universe;
-  // 功能代码
-  instance.start_time = 0;
-  instance.bang = 'Big';
-
-  return instance;
-}
-```
-
-### Abstract Factory
-
-```js
-var AbstractVehicleFactory = (function () {
-  // Storage for our vehicle types
-  var types = {};
-
-  function _getVehicle(type, customizations) {
-    var Vehicle = types[type];
-    return Vehicle ? new Vehicle(customizations) : null;
-  }
-  function _registerVehicle(type, Vehicle) {
-    var prototype = Vehicle.prototype;
-
-    // only register classes that fulfill the vehicle contract
-    if (prototype.drive && prototype.breakDown) {
-      types[type] = Vehicle;
-    }
-
-    return AbstractVehicleFactory;
-  }
-
-  return {
-    getVehicle: _getVehicle,
-    registerVehicle: _registerVehicle,
-  };
-})();
-```
-
-### Factory Method
+### Factory Method Pattern
 
 ```js
 module.exports = (function () {
@@ -713,12 +426,78 @@ module.exports = (function () {
 })();
 ```
 
+### Abstract Factory Pattern
+
+```js
+var AbstractVehicleFactory = (function () {
+  // Storage for our vehicle types
+  var types = {};
+
+  function _getVehicle(type, customizations) {
+    var Vehicle = types[type];
+    return Vehicle ? new Vehicle(customizations) : null;
+  }
+  function _registerVehicle(type, Vehicle) {
+    var prototype = Vehicle.prototype;
+
+    // only register classes that fulfill the vehicle contract
+    if (prototype.drive && prototype.breakDown) {
+      types[type] = Vehicle;
+    }
+
+    return AbstractVehicleFactory;
+  }
+
+  return {
+    getVehicle: _getVehicle,
+    registerVehicle: _registerVehicle,
+  };
+})();
+```
+
+### Prototype Pattern
+
+可以使用原型模式来减少创建新对象的成本.
+关键方法 `Object.create()`/`clone()`.
+
+### Singleton Pattern
+
+使用场景: Redux, VueX 等状态管理工具, window 对象, 全局缓存等.
+
+```javascript
+function Universe() {
+  // 缓存实例
+  var instance;
+
+  // anti-Self-Defined Function Pattern
+  // 反-自定义函数模式: 先重写,再初始化
+  Universe = function Universe() {
+    return instance;
+  };
+
+  // 保存原型,使其一直保持于同一位置
+  // (this指针指向不重要)
+  Universe.prototype = this;
+
+  instance = new Universe();
+  // 重定向constructor指针
+  instance.constructor = Universe;
+  // 功能代码
+  instance.start_time = 0;
+  instance.bang = 'Big';
+
+  return instance;
+}
+```
+
 ### Adapter Pattern
 
-适配器通过内部使用新接口规定的属性/方法, 创建一个外观与旧接口一致 的方法
+适配器通过内部使用新接口规定的属性/方法, 创建一个外观与旧接口一致的方法
+(兼容旧代码):
 
-- old.method();
-- adapter.method(); // 实现此 method 时,使用了新接口规定的属性/方法
+- old.method().
+- adapter.method().
+  实现此 method 时, 使用了新接口规定的属性/方法.
 
 ```js
 // old interface
@@ -772,6 +551,26 @@ log.add('Old cost: ' + cost);
 cost = adapter.request('78701', '10010', '2 lbs');
 ```
 
+### Bridge Pattern
+
+分离抽象和实现/分离对象的两种不同属性.
+
+e.g 从 2 个不同维度上扩展对象.
+
+### Composite Pattern
+
+树形结构:
+
+- 根结点
+  - Component 抽象对象/接口 采用最大宽接口,定义内点和叶点的操作
+  - 将内点特有的操作集设为缺省操作集(空实现)
+- 内点
+  - 持有父结点和子节点的引用(可使用 Flyweight 模式实现共享)
+  - 操作集:内点操作集(可添加/删除组件)
+- 叶点
+  - 持有父结点引用
+  - 操作集：叶点操作集(不可添加/删除组件)
+
 ### Decorator Pattern
 
 - 重写/重载/扩展对象原有的行为(method),但不改变对象原有属性
@@ -824,6 +623,8 @@ const __decorate = function (decorators, target, key, desc) {
 
 - uber 属性获得每次装饰后结果
 - 循环叠加每次装饰后结果
+
+符合开放封闭原则和单一职责模式.
 
 ```javascript
 // 构造函数
@@ -935,7 +736,7 @@ Sale.prototype.getPrice = function () {
 };
 ```
 
-#### 实现 2
+#### Decorator Pattern Example
 
 ```js
 // The constructor to decorate
@@ -988,7 +789,10 @@ console.log(mb.screenSize());
 
 ### Facade Pattern
 
-将多个复杂的子系统封装+合并，实现一个复杂功能，但只暴露一个简单的接口 - 封装复杂逻辑
+将多个复杂的子系统封装+合并,
+实现一个复杂功能,
+但只暴露一个简单的接口:
+封装复杂逻辑.
 
 ```js
 var sabertazimi = {};
@@ -1088,7 +892,11 @@ function ComputerCollection() {
 
 ### Proxy Pattern
 
-通过一个代理对象，临时存储原对象方法调用产生的一系列结果(新建对象),减少重复对象的产生
+通过一个代理对象,
+临时存储原对象方法调用产生的一系列结果 (新建对象),
+减少重复对象的产生.
+
+使用场景: 图片预加载, 缓存服务器, 处理跨域, 拦截器等.
 
 ```js
 function GeoCoder() {
@@ -1333,6 +1141,13 @@ Cursor.prototype = {
 };
 ```
 
+### Iterator Pattern
+
+一个 Iterator 对象封装访问和遍历一个聚集对象中的各个构件的方法.
+实现统一遍历接口, 符合单一功能和开放封闭原则.
+
+使用场景: 遍历对象.
+
 ### Mediator Pattern
 
 一个 Mediator 对象封装对象间的协议:
@@ -1340,8 +1155,14 @@ Cursor.prototype = {
 
 ### Observer Pattern
 
-- 被观察者(Subject)维护一组观察者列表，每当被观察者状态改变时，调用 notify 函数，此函数中调用观察者(Observer)的 update 函数(可自定义)
-- decouple subject and observer: each depends on `Abstraction` not `Implementation`
+- 被观察者(Subject)维护一组观察者列表,
+  每当被观察者状态改变时,
+  调用 notify 函数,
+  此函数中调用观察者(Observer)的 update 函数(可自定义).
+- decouple subject and observer:
+  each depends on `Abstraction` not `Implementation`.
+
+使用场景: 解耦, 跨层级通信, 事件绑定.
 
 ```js
 function ObserverList() {
@@ -1439,10 +1260,12 @@ function extend(extension, obj) {
 
 ### Pub-Sub Pattern
 
-- 观察者模式中主体和观察者是互相感知
-- 发布-订阅模式是借助第三方来实现调度, 发布者和订阅者之间互不感知
+- 观察者模式中主体和观察者是互相感知.
+- 发布-订阅模式是借助第三方来实现调度, 发布者和订阅者之间互不感知.
 
-#### Implementation
+e.g Event Bus in Vue, Event Emitter in Node.
+
+#### Pub-Sub Pattern Implementation
 
 - pubSub.js
 
@@ -1631,7 +1454,7 @@ if (typeof module !== 'undefined' && 'exports' in module) {
 }
 ```
 
-#### Sample
+#### Pub-Sub Pattern Sample
 
 ##### Ajax Callback
 
@@ -1703,6 +1526,239 @@ if (typeof module !== 'undefined' && 'exports' in module) {
 
    });
 }());
+```
+
+### State Pattern
+
+一个 State 对象封装一个与状态相关的行为
+
+### Strategy Pattern
+
+改变对象的内核/算法, 一个 Strategy 对象封装一个算法.
+
+使用场景: 表单验证, 存在大量 if-else 场景, 各种重构等.
+
+```js
+// 违反开放封闭原则
+const activity = (type, price) => {
+  if (type === 'pre') {
+    return price * 0.95;
+  } else if (type === 'onSale') {
+    return price * 0.9;
+  } else if (type === 'back') {
+    return price * 0.85;
+  } else if (type === 'limit') {
+    return price * 0.8;
+  }
+};
+```
+
+```js
+const activity = new Map([
+  ['pre', (price) => price * 0.95],
+  ['onSale', (price) => price * 0.9],
+  ['back', (price) => price * 0.85],
+  ['limit', (price) => price * 0.8],
+]);
+
+const getActivityPrice = (type, price) => activity.get(type)(price);
+
+// 新增新手活动
+activity.set('newcomer', (price) => price * 0.7);
+```
+
+### IOC and DI Pattern
+
+- IOC (inversion of control) 控制反转模式；控制反转是将组件间的依赖关系从程序内部提到外部来管理
+- DI (dependency injection) 依赖注入模式；依赖注入是指将组件的依赖通过外部以参数或其他形式注入
+
+```java
+class DbMysql {
+  public function query(){}
+}
+
+class Controller {
+  public $db;
+  public function __construct($dbMysql) {
+    $this->db = $dbMysql;
+  }
+  public function action(){
+    $this->db->query();
+  }
+}
+
+$db = new DbMysql();
+$c = new Controller($db);
+$c->action();
+```
+
+With IOC container:
+
+```java
+class DbMysql {
+  public function __construct($host, $name, $pwd) {
+    // do something
+  }
+  public function query() {
+    echo __METHOD__ . PHP_EOL;
+  }
+}
+
+class DbRedis {
+  public function __construct($host, $name, $pwd) {
+    // do something
+  }
+  public function set() {
+    echo __METHOD__ . PHP_EOL;
+  }
+}
+
+class controller {
+  public $mysql;
+  public $redis;
+  public function __construct($mysql, $redis) {
+    $this->mysql = $mysql;
+    $this->redis = $redis;
+  }
+  public function action() {
+    $this->mysql->query();
+    $this->redis->set();}
+  }
+}
+
+
+class Container {
+  public $bindings = [];
+  public function bind($key, Closure $value) {
+    $this->bindings[$key] = $value;
+  }
+  public function make($key) {
+    $new = $this->bindings[$key];
+    return $new();
+  }
+}
+
+$app = new Container();
+$app->bind('mysql', function () { return new DbMysql('host', 'name', 'pwd'); });
+$app->bind('redis', function () { return new DbRedis('host', 'name', 'pwd'); });
+$app->bind('controller', function () use ($app) {
+  return new Controller($app->make('mysql'), $app->make('redis'));
+});
+$controller = $app->make('controller');
+$controller->action();
+/** * 输出： * DbMysql::query * DbRedis::set */
+```
+
+With dependency injection:
+
+```js
+// dependency provider
+export interface IProvider<T> {
+  provide(): T;
+}
+
+@injectable()
+export class NameProvider implements IProvider<string> {
+  provide() {
+    return "World";
+  }
+}
+
+// top module
+import * as React from "react";
+import { IProvider } from "./providers";
+
+export class Hello extends React.Component {
+  private readonly nameProvider: IProvider<string>;
+
+  render() {
+    return <h1>Hello {this.nameProvider.provide()}!</h1>;
+  }
+}
+```
+
+### Class Pattern
+
+```js
+var Person = function (firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.gender = 'male';
+};
+
+// Define a subclass constructor for for "Superhero":
+var Superhero = function (firstName, lastName, powers) {
+  // Invoke the superclass constructor on the new object
+  // then use .call() to invoke the constructor as a method of
+  // the object to be initialized.
+  Person.call(this, firstName, lastName);
+
+  // Finally, store their powers, a new array of traits not found in a normal "Person"
+  this.powers = powers;
+};
+SuperHero.prototype = Object.create(Person.prototype);
+```
+
+```js
+var superman = new Superhero('Clark', 'Kent', ['flight', 'heat-vision']);
+console.log(superman);
+```
+
+### Mix-In Pattern
+
+将多个对象的属性混入同一个对象,达到继承/扩展/组合的效果
+
+- 不改变原型链
+
+```js
+function mix() {
+  var arg,
+    prop,
+    child = {};
+
+  for (arg = 0; arg < arguments.length; arg += 1) {
+    for (prop in arguments[arg]) {
+      if (arguments[arg].hasOwnProperty(prop)) {
+        child[prop] = arguments[arg][prop];
+      }
+    }
+  }
+
+  return child;
+}
+```
+
+```js
+var cake = mix(
+  { eggs: 2, large: true },
+  { butter: 1, salted: true },
+  { flour: '3 cups' },
+  { sugar: 'sure!' }
+);
+```
+
+- 改变原型链
+
+```js
+// Extend an existing object with a method from another
+function mix(receivingClass, givingClass) {
+  // mix-in provide certain methods
+  if (arguments[2]) {
+    for (var i = 2, len = arguments.length; i < len; i++) {
+      receivingClass.prototype[arguments[i]] =
+        givingClass.prototype[arguments[i]];
+    }
+  }
+  // mix-in provide obj
+  else {
+    for (var methodName in givingClass.prototype) {
+      if (!receivingClass.prototype[methodName]) {
+        receivingClass.prototype[methodName] =
+          givingClass.prototype[methodName];
+      }
+    }
+  }
+}
 ```
 
 ## MVC Pattern
