@@ -4059,9 +4059,16 @@ const resetScrollX = () => {
 ### Geometry
 
 - background: color/image/gradient/clip-path
+- pseudo elements
 - border
 - box-shadow (inset)
-- pseudo element
+- clip-path
+- mask
+- svg
+  - svg icon
+  - svg filter
+  - svg clip-path
+  - svg mask
 
 #### Stretch Line
 
