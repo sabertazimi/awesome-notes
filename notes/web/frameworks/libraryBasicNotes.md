@@ -171,7 +171,7 @@
 
 ### CSS in JS Utils
 
-- [CSS Classnames](https://github.com/JedWatson/classnames)
+- [Classnames](https://github.com/JedWatson/classnames)
 - [Linaria: Zero-runtime CSS-in-TypeScript library](https://github.com/callstack/linaria)
 - [Vanilla Extract: Zero-runtime CSS-in-TypeScript](https://github.com/seek-oss/vanilla-extract)
 - [Compiled: Performant compile time CSS-in-TypeScript library](https://github.com/atlassian-labs/compiled)
@@ -179,7 +179,10 @@
 
 ### CSS Design Tools
 
-- [Awesome Design Tools](https://github.com/LisaDziuba/Awesome-Design-Tools)
+- [CodyHouse components](https://codyhouse.co)
+- [Awesome design tools](https://github.com/LisaDziuba/Awesome-Design-Tools)
+- [Need design resources](https://neede.co/#/)
+- [Interface design resources](https://interfacer.xyz)
 
 ### Color Utils
 
@@ -502,7 +505,7 @@
 - [Icon Font](https://www.iconfont.cn)
 - [Icons8](https://icons8.com)
 - [Ikonate](https://github.com/mikolajdobrucki/ikonate)
-- [CSS Icons](https://cssicon.space)
+- [CSS Icons](https://github.com/wentin/cssicon)
 
 ### Emoji
 
