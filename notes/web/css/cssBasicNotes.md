@@ -3323,6 +3323,25 @@ h1::after {
 - `table-layout: fixed` to contain cells with same width
 - implement filter or pagination with `display: none` applied to `<tr>`
 
+```css
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+th:first-child,
+td:first-child {
+  padding-left: 0;
+}
+
+th:last-child,
+td:last-child {
+  padding-right: 0;
+}
+```
+
 ### Form
 
 - [Form Design Patterns](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post)
