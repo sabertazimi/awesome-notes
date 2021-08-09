@@ -3327,7 +3327,128 @@ h1::after {
 
 - [Form Design Patterns](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post)
 
-#### Select
+#### Custom Form
+
+```css
+input[type='email'],
+input[type='number'],
+input[type='search'],
+input[type='text'],
+input[type='tel'],
+input[type='url'],
+input[type='password'],
+textarea,
+select {
+  box-sizing: border-box;
+  height: 38px;
+  border: 1px solid #d1d1d1;
+  border-radius: 4px;
+  padding: 6px 10px;
+  background-color: #fff;
+  box-shadow: none;
+}
+
+/* Removes awkward default styles on some inputs for iOS */
+input[type='email'],
+input[type='number'],
+input[type='search'],
+input[type='text'],
+input[type='tel'],
+input[type='url'],
+input[type='password'],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+textarea {
+  min-height: 65px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+input[type='email']:focus,
+input[type='number']:focus,
+input[type='search']:focus,
+input[type='text']:focus,
+input[type='tel']:focus,
+input[type='url']:focus,
+input[type='password']:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #33c3f0;
+  outline: 0;
+}
+
+label,
+legend {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+fieldset {
+  padding: 0;
+  border-width: 0;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  display: inline;
+}
+
+label > .label-body {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-weight: normal;
+}
+```
+
+#### Custom Checkbox Widget
+
+```css
+input[type='checkbox'] + label::before {
+  content: '';
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  background: white;
+}
+
+input[type='checkbox']:checked + label::before {
+  background: #5ac5c9;
+}
+
+input[type='checkbox']:checked + label::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 27px;
+  border-left: 2px solid black;
+  border-bottom: 2px solid black;
+  height: 6px;
+  width: 13px;
+  transform: rotate(-45deg);
+}
+
+input[type='checkbox']:focus + label::before {
+  outline: #5d9dd5 solid 1px;
+  box-shadow: 0 0px 8px #5e9ed6;
+}
+
+input[type='checkbox']:disabled + label {
+  color: #575757;
+}
+
+input[type='checkbox']:disabled + label::before {
+  background: #ddd;
+}
+```
+
+#### Custom Select Widget
 
 ```css
 .custom-select {
