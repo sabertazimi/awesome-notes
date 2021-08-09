@@ -1116,6 +1116,15 @@ Then at the end of the document …
 In `https://github.com/<user>/<repo>/settings/pages`,
 setup `source` of pages and `Enforce HTTPS`.
 
+### GitHub Git Attributes
+
+`.gitattributes`:
+
+```yaml
+*.md linguist-detectable=true
+*.md linguist-documentation=false
+```
+
 ## Git Tools
 
 ### Diff and Patch
