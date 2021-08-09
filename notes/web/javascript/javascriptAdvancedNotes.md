@@ -6892,6 +6892,20 @@ sudo sysctl -p
 }
 ```
 
+get `baseUrl`and `paths` from `tsconfig.json`:
+
+```js
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+
+module.exports = {
+  resolve: {
+    plugins: [
+      new TsconfigPathsPlugin({ configFile: './tsconfig.json' }),
+    ],
+  },
+};
+```
+
 `jsconfig.json` for vscode resolve path:
 
 ```js
