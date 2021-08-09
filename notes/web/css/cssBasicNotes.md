@@ -1739,7 +1739,7 @@ Mix transparent with non-transparent border to make shapes (e.g. triangle).
 - linear-gradient()
 - radial-gradient()
 
-awesome gradient buttons
+Awesome gradient buttons:
 
 ```css
 .btn:hover {
@@ -3627,6 +3627,23 @@ a {
 
 a:hover {
   background-size: 100% 2px;
+}
+```
+
+```css
+a {
+  padding: 5px;
+  display: inline-block;
+  text-decoration: none;
+  transition: all 0.3s;
+  background-size: 100% 200%;
+  background-image: linear-gradient(to top, #333 50%, #fff 50%);
+  color: #333;
+}
+
+a:hover {
+  background-position: 0 100%;
+  color: #fff;
 }
 ```
 
