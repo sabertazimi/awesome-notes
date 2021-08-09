@@ -4073,7 +4073,9 @@ const resetScrollX = () => {
 - float
 - flex
 
-### Geometry
+### Geometry and Shape
+
+> CSS Shape on [CSS Tricks](https://css-tricks.com/the-shapes-of-css).
 
 - background: color/image/gradient/clip-path
 - pseudo elements
@@ -4086,6 +4088,8 @@ const resetScrollX = () => {
   - svg filter
   - svg clip-path
   - svg mask
+
+> [CSSIcon](https://github.com/wentin/cssicon): Pure CSS Icons
 
 #### Stretch Line
 
