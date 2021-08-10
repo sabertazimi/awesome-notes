@@ -7987,10 +7987,40 @@ test('allows users to add items to their list', async () => {
 
 ### React Testing Library Events
 
+#### FireEvent API
+
 - `fireEvent` trigger DOM event: `fireEvent(node, event)`.
 - `fireEvent.*` helpers for default event types:
   - click fireEvent.click(node).
   - See [all supported events](https://github.com/testing-library/dom-testing-library/blob/main/src/event-map.js).
+
+#### UserEvent API
+
+[User Event](https://testing-library.com/docs/ecosystem-user-event)
+provides more advanced simulation of browser interactions
+than the built-in `fireEvent method`.
+
+```bash
+npm i -D @testing-library/user-event @testing-library/dom
+```
+
+```js
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+test('click', () => {
+  render(
+    <div>
+      <label htmlFor="checkbox">Check</label>
+      <input id="checkbox" type="checkbox" />
+    </div>
+  );
+
+  userEvent.click(screen.getByText('Check'));
+  expect(screen.getByLabelText('Check')).toBeChecked();
+});
+```
 
 ### React Hooks Testing Library
 
