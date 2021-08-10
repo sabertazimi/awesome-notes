@@ -6899,9 +6899,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   resolve: {
-    plugins: [
-      new TsconfigPathsPlugin({ configFile: './tsconfig.json' }),
-    ],
+    plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
 };
 ```
@@ -7984,6 +7982,111 @@ test('allows users to add items to their list', async () => {
 - `fireEvent.*` helpers for default event types:
   - click fireEvent.click(node).
   - See [all supported events](https://github.com/testing-library/dom-testing-library/blob/main/src/event-map.js).
+
+### React Hooks Testing Library
+
+#### Basic Hook Testing
+
+```js
+import { useState, useCallback } from 'react';
+
+export default function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue);
+  const increment = useCallback(() => setCount((x) => x + 1), []);
+  const reset = useCallback(() => setCount(initialValue), [initialValue]);
+  return { count, increment, reset };
+}
+```
+
+```js
+import { renderHook, act } from '@testing-library/react-hooks';
+import useCounter from './useCounter';
+
+test('should reset counter to updated initial value', () => {
+  const { result, rerender } = renderHook(
+    ({ initialValue }) => useCounter(initialValue),
+    {
+      initialProps: { initialValue: 0 },
+    }
+  );
+
+  rerender({ initialValue: 10 });
+
+  act(() => {
+    result.current.reset();
+  });
+
+  expect(result.current.count).toBe(10);
+});
+```
+
+#### Async Hook Testing
+
+```js
+import React, { useState, useContext, useCallback } from 'react';
+
+export default function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue);
+  const step = useContext(CounterStepContext);
+  const increment = useCallback(() => setCount((x) => x + step), [step]);
+  const incrementAsync = useCallback(
+    () => setTimeout(increment, 100),
+    [increment]
+  );
+  const reset = useCallback(() => setCount(initialValue), [initialValue]);
+  return { count, increment, incrementAsync, reset };
+}
+```
+
+```js
+import { renderHook } from '@testing-library/react-hooks';
+import useCounter from './useCounter';
+
+test('should increment counter after delay', async () => {
+  const { result, waitForNextUpdate } = renderHook(() => useCounter());
+  result.current.incrementAsync();
+  await waitForNextUpdate();
+  expect(result.current.count).toBe(1);
+});
+```
+
+#### Error Hook Testing
+
+```js
+import React, { useState, useContext, useCallback } from 'react';
+
+export default function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue);
+  const step = useContext(CounterStepContext);
+  const increment = useCallback(() => setCount((x) => x + step), [step]);
+  const incrementAsync = useCallback(
+    () => setTimeout(increment, 100),
+    [increment]
+  );
+  const reset = useCallback(() => setCount(initialValue), [initialValue]);
+
+  if (count > 9000) {
+    throw Error("It's over 9000!");
+  }
+
+  return { count, increment, incrementAsync, reset };
+}
+```
+
+```js
+import { renderHook, act } from '@testing-library/react-hooks';
+import { useCounter } from './useCounter';
+
+it('should throw when over 9000', () => {
+  const { result } = renderHook(() => useCounter(9000));
+
+  act(() => {
+    result.current.increment();
+  });
+
+  expect(result.error).toEqual(Error("It's over 9000!"));
+});
+```
 
 #### React Testing Library Reference
 
