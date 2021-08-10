@@ -7800,6 +7800,15 @@ describe('Link should', () => {
 });
 ```
 
+### Jest Async Testing
+
+Jest async [guide](https://jestjs.io/docs/tutorial-async):
+
+```js
+await expect(asyncCall()).resolves.toEqual('Expected');
+await expect(asyncCall()).rejects.toThrowError();
+```
+
 ### Jest Mocks
 
 `__mocks__`:
@@ -7858,9 +7867,9 @@ module.exports = {
 };
 ```
 
-### Enzyme
+## Enzyme
 
-#### Enzyme Mindset
+### Enzyme Mindset
 
 `React Internals`:
 
@@ -7872,15 +7881,15 @@ module.exports = {
   we are not bound to test the internals
   but we can test the DOM too.
 
-#### Enzyme Installation
+### Enzyme Installation
 
 ```bash
 npm i -D enzyme enzyme-adapter-react-16 @types/enzyme
 ```
 
-### React Testing Library
+## React Testing Library
 
-#### React Testing Library Mindset
+### React Testing Library Mindset
 
 `User behavior` and `A11Y`:
 
@@ -7900,7 +7909,7 @@ or just install them all for individual use cases.
 
 > Enzyme for Internal API, React testing library for user behavior.
 
-#### React Testing Library Installation
+### React Testing Library Installation
 
 <!-- markdownlint-disable line-length -->
 
@@ -7910,7 +7919,7 @@ npm i -D @testing-library/react @testing-library/dom @testing-library/jest-dom @
 
 <!-- markdownlint-enable line-length -->
 
-#### React Testing Library Basis
+### React Testing Library Basis
 
 ```ts
 import React from 'react';
@@ -7976,7 +7985,7 @@ test('allows users to add items to their list', async () => {
 });
 ```
 
-#### React Testing Library Events
+### React Testing Library Events
 
 - `fireEvent` trigger DOM event: `fireEvent(node, event)`.
 - `fireEvent.*` helpers for default event types:
@@ -8088,7 +8097,7 @@ it('should throw when over 9000', () => {
 });
 ```
 
-#### React Testing Library Reference
+### React Testing Library Reference
 
 - [React testing library cheat sheet](https://testing-library.com/docs/react-testing-library/cheatsheet)
 
