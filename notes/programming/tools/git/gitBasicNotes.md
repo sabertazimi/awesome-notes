@@ -313,6 +313,57 @@ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks p
 | --before=/--until= | 限制日志时间 "2008-01-15" "2 years 1 day 3 minutes ago" |
 | --help             |
 
+### Log Filter
+
+#### Log by Amount
+
+```bash
+git log -3
+```
+
+#### Log by Date
+
+- `before` and `until`
+- `after` and `since`
+
+```bash
+git log --before="yesterday"
+git log --after="1 week ago"
+git log --after="2014-7-1" --before="2014-7-4"
+```
+
+#### Log by Author
+
+```bash
+git log --author="John\|Mary"
+```
+
+#### Log by Commit Message
+
+```bash
+git log --grep="feat"
+git log --grep="fix"
+```
+
+#### Log by File
+
+```bash
+git log -- src/components/ErrorBoundary/ErrorBoundary.test.tsx
+git log -- "*.test.tsx"
+```
+
+#### Log by Content
+
+```bash
+git log -S"Hello, World!"
+```
+
+#### Log by Range
+
+```bash
+git log main..feature
+```
+
 ## Reflog
 
 `git reflog show` is an alias for
