@@ -2778,8 +2778,9 @@ document.addEventListener('visibilitychange', handleVisibilityChange, false);
 
 #### Form Events
 
-- [checkValidity API](https://developer.mozilla.org/docs/Web/API/HTMLSelectElement/checkValidity)
+- [CheckValidity API](https://developer.mozilla.org/docs/Web/API/HTMLSelectElement/checkValidity)
 - [FromData API](https://developer.mozilla.org/docs/Web/API/FormData)
+- [Forms Constraint Validation](https://www.sitepoint.com/html-forms-constraint-validation-complete-guide)
 
 ```js
 // <form className='validated-form' noValidate onSubmit={onSubmit}>
@@ -2812,6 +2813,29 @@ const onSubmit = (event) => {
     }, {});
   }
 };
+```
+
+```js
+function validateForm(e) {
+  const form = e.target;
+
+  if (form.checkValidity()) {
+    // form is valid - make further checks
+  } else {
+    // form is invalid - cancel submit
+    e.preventDefault();
+    // apply invalid class
+    Array.from(form.elements).forEach((i) => {
+      if (i.checkValidity()) {
+        // field is valid - remove class
+        i.parentElement.classList.remove('invalid');
+      } else {
+        // field is invalid - add class
+        i.parentElement.classList.add('invalid');
+      }
+    });
+  }
+}
 ```
 
 #### Input Events
