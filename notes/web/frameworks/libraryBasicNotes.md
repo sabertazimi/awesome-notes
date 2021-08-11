@@ -12,6 +12,7 @@
 - [NPM Package Compare](https://npmcompare.com)
 - [NPM Package Trends](https://github.com/johnmpotter/npm-trends)
 - [NPM Package Cost](https://github.com/pastelsky/bundlephobia)
+- [CodeHouse: Whole new world developer cheatsheets](https://github.com/saviomartin/codehouse)
 
 ## Boilerplate
 
