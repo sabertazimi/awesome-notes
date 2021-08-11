@@ -4684,6 +4684,30 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
   change paths, deps/devDeps, plugins, loader rules etc.
 - custom `packages/react-scripts/scripts/`: change react-scripts CLI behaviors.
 
+#### Custom React Scripts
+
+In `Create React App`
+[code](https://github.com/facebook/create-react-app/blob/main/packages/create-react-app/createReactApp.js):
+
+```js
+const templatesVersionMinimum = '3.3.0';
+
+// Assume compatibility if we can't test the version.
+if (!semver.valid(packageVersion)) {
+  packageVersion = templatesVersionMinimum;
+}
+
+// Only support templates when used alongside new react-scripts versions.
+const supportsTemplates = semver.gte(packageVersion, templatesVersionMinimum);
+if (supportsTemplates) {
+  allDependencies.push(templateToInstall);
+}
+```
+
+Due to version checking for template feature,
+custom react scripts should
+publish with version `^3.3.0` or `^4.x.x`.
+
 #### CRA Templates
 
 HTML/CSS/JSX boilerplate in `react-scripts/template/` directory,
