@@ -4721,6 +4721,20 @@ npx create-react-app my-app --template [template-name]
 Dependencies in `template.json`
 will bump to latest minor version automatically.
 
+In `react-scripts/scripts/utils/verifyTypeScriptSetup.js`,
+if template `src` don't exist `react-app-env.d.ts` file,
+it will create automatically with `reference` to `react-scripts` types:
+
+```js
+// Reference `react-scripts` types
+if (!fs.existsSync(paths.appTypeDeclarations)) {
+  fs.writeFileSync(
+    paths.appTypeDeclarations,
+    `/// <reference types="react-scripts" />${os.EOL}`
+  );
+}
+```
+
 ### Deployment
 
 - [Official Documentation](https://facebook.github.io/create-react-app/docs/deployment)
