@@ -957,6 +957,10 @@
 - [CosmiConfig: Find and load configuration](https://github.com/davidtheclark/cosmiconfig)
 - [EnvInfo: Generate a report about development environment for debugging and issue reporting](https://github.com/tabrindle/envinfo)
 
+### DevOps Registry and Mirrors
+
+- [Verdaccio: Lightweight private proxy registry build in Node](https://github.com/verdaccio/verdaccio)
+
 ## Documentation
 
 ### Changelog
