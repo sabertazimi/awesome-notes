@@ -215,6 +215,7 @@
 ### Background Utils
 
 - [Clippy: Clip-Path Maker](https://github.com/bennettfeely/Clippy)
+- [Wicked Background](https://wickedbackgrounds.com/backgrounds.html)
 
 ## Components
 
