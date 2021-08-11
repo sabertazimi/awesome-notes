@@ -4718,6 +4718,9 @@ in `packages/cra-template` and `packages/cra-template-typescript`.
 npx create-react-app my-app --template [template-name]
 ```
 
+Dependencies in `template.json`
+will bump to latest minor version automatically.
+
 ### Deployment
 
 - [Official Documentation](https://facebook.github.io/create-react-app/docs/deployment)
