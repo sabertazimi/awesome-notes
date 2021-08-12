@@ -4935,6 +4935,10 @@ const DatePicker = (props) => {
 export default DatePicker;
 ```
 
+## SPA Deployment
+
+- Deployment services [guide](https://hiddedevries.nl/en/blog/2020-06-27-how-deployment-services-make-client-side-routing-work).
+
 ## Interviews
 
 - [React Interview Questions](https://github.com/semlinker/reactjs-interview-questions)
