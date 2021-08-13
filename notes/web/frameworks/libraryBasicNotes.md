@@ -150,15 +150,28 @@
 
 ### TypeScript Utils
 
+#### TS Basic Utils
+
 - [TS Config](https://github.com/tsconfig/bases)
 - [TS Node](https://github.com/TypeStrong/ts-node)
 - [TS Jest](https://github.com/kulshekhar/ts-jest)
-- [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
+
+#### TS Utility Types
+
 - [TypeFest: TypeScript Utility Types](https://github.com/sindresorhus/type-fest)
 - [UtilTypes: TypeScript Utility Types](https://github.com/piotrwitek/utility-types)
+
+#### TS Schema Utils
+
+- [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
 - [AutoMapper: Object to object auto mapper](https://github.com/nartc/mapper)
 
-#### IOC and DI Utils
+#### TS AST Utils
+
+- [TS morph](https://github.com/nadeesha/ts-morph)
+- [TS prune](https://github.com/nadeesha/ts-prune)
+
+#### TS IOC and DI Utils
 
 - [InversifyJS: Powerful and lightweight inversion of control container](https://github.com/inversify/InversifyJS)
 
