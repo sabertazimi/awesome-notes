@@ -3361,8 +3361,6 @@ Math.tan(x);
 
 ## Browser Performance
 
-- [Performance 工具指北](https://zhuanlan.zhihu.com/p/41017888)
-
 ### Browser Caches
 
 - [Dive into Browser Caches](https://github.com/ljianshu/Blog/issues/23)
@@ -3843,6 +3841,10 @@ Cumulative Layout Shift:
 - Avoid using `popups` or `overlays`
   unless they appear when the user interacts with the page.
 - When it’s necessary to move elements, use `transform` animations.
+
+### Performance Reference
+
+- [Web Vitals 优化实例](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw)
 
 ## Testing and Debugging
 
@@ -4431,6 +4433,7 @@ $0.addEventListener('click', (e) => {
 - performance tips
 - Memory
 - [Timeline Events](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/performance-reference)
+- [Performance 工具指南](https://zhuanlan.zhihu.com/p/41017888)
 - [Performance Analysis Reference](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
 
 ### Simulation DevTools
