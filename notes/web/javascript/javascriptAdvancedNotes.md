@@ -6474,7 +6474,11 @@ sandbox = new Function(`
 sandbox().call(window, { window, location, history, document }, code)
 ```
 
-### User Fingerprint
+### User Privacy
+
+- [Browser Leaks](https://browserleaks.com)
+
+#### User Fingerprint
 
 Use Canvas or WebGL to generate user
 [fingerprint](https://yinzhicao.org/TrackingFree/crossbrowsertracking_NDSS17.pdf).
