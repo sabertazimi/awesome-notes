@@ -289,6 +289,16 @@ npx gistUrl
   永远都是引用宿主环境统一安装的 npm 包,
   最终解决插件与所依赖包不一致的问题.
 
+#### NPM Invalid Dependencies
+
+```bash
+$ npm ls
+package@version invalid
+```
+
+modify `package-lock.json`
+to remove locked invalid package version.
+
 ### Package JSON
 
 #### Bin
