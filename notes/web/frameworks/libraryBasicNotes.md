@@ -876,6 +876,7 @@
 - [LightHouse](https://github.com/GoogleChrome/lighthouse)
 - [WebPageTest](https://github.com/WPO-Foundation/webpagetest-github-action)
 - [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render)
+- [React benchmark component](https://github.com/paularmstrong/react-component-benchmark)
 - [Node Clinic](https://github.com/nearform/node-clinic)
 - [Perf Tools](https://github.com/brendangregg/perf-tools)
 - [FlameGraph](https://github.com/brendangregg/FlameGraph)
