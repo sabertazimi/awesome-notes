@@ -1266,7 +1266,12 @@ git reset $(git merge-base master $(git rev-parse --abbrev-ref HEAD))
 
 #### git clean
 
-从工作区中移除不想要的文件。可以是编译的临时文件或者合并冲突的文件。
+Remove untracked files from the working tree:
+
+```bash
+# Recursive force clean
+git clean -df
+```
 
 #### git branch
 
