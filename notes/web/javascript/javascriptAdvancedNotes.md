@@ -7417,6 +7417,8 @@ module.exports = {
 
 #### Tree Shaking
 
+Live code inclusion (AST analysis) + dead code elimination:
+
 1. 尽量不写带有副作用的代码: 诸如编写了立即执行函数, 在函数里又使用了外部变量等
 2. 如果对 ES6 语义特性要求不是特别严格, 可以开启 babel 的 loose 模式 etc. 是否真的要不可枚举 class 的属性
 3. 如果是开发 JavaScript 库, 使用 rollup(ES6 module export + code flow static analysis),
