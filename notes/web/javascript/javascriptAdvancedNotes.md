@@ -3540,6 +3540,14 @@ Load 也不一定代表用户看到主要内容.
 - 是否启用 HTTP2
 - 是否启用 Service Worker
 
+#### Monitoring Report Performance
+
+解决上报对性能的影响问题有以下方案：
+
+- 延迟合并上报: 延迟到 `onload` 事件后, 并合并多个上报请求.
+- 使用 [Beacon API](https://developer.mozilla.org/en-US/docs/Web/API/Beacon_API).
+- 使用 `post` 上报.
+
 #### Speed Tools
 
 - [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools)
