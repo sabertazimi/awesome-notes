@@ -855,6 +855,7 @@
 - [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint)
 - [JSCPD: Copy paste detector](https://github.com/kucherenko/jscpd)
 - [Size Limit: Calculate real cost to keep good performance](https://github.com/ai/size-limit)
+- [TypeScript unused exports detection](https://github.com/pzavolinsky/ts-unused-exports)
 - [Java CheckStyle](https://github.com/checkstyle/checkstyle)
 
 ### Inspect Tools
