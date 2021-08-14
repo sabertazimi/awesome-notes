@@ -124,6 +124,10 @@
 
 - [Cash: jQuery Lite](https://github.com/kenwheeler/cash)
 
+### Math Utils
+
+- [HyperFormula: Excel-like calculation engine](https://github.com/handsontable/hyperformula)
+
 ### String Utils
 
 - [String Manipulation](https://github.com/dleitee/strman)
@@ -148,32 +152,32 @@
 
 - [Immer](https://github.com/immerjs/immer)
 
-### TypeScript Utils
+### IOC and DI Utils
 
-#### TS Basic Utils
+- [InversifyJS: Powerful and lightweight inversion of control container](https://github.com/inversify/InversifyJS)
+
+## TypeScript Utils
+
+### TS Basic Utils
 
 - [TS Config](https://github.com/tsconfig/bases)
 - [TS Node](https://github.com/TypeStrong/ts-node)
 - [TS Jest](https://github.com/kulshekhar/ts-jest)
 
-#### TS Utility Types
+### TS Utility Types
 
 - [TypeFest: TypeScript Utility Types](https://github.com/sindresorhus/type-fest)
 - [UtilTypes: TypeScript Utility Types](https://github.com/piotrwitek/utility-types)
 
-#### TS Schema Utils
+### TS Schema Utils
 
 - [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
 - [AutoMapper: Object to object auto mapper](https://github.com/nartc/mapper)
 
-#### TS AST Utils
+### TS AST Utils
 
 - [TS morph](https://github.com/nadeesha/ts-morph)
 - [TS prune](https://github.com/nadeesha/ts-prune)
-
-#### TS IOC and DI Utils
-
-- [InversifyJS: Powerful and lightweight inversion of control container](https://github.com/inversify/InversifyJS)
 
 ## CSS Utils
 
