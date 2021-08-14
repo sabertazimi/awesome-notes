@@ -4494,6 +4494,69 @@ Tool for composite stage analysis
 
 - [Airbnb Guide](https://github.com/airbnb/javascript)
 
+### ESLint
+
+- [ESLint Promise](https://github.com/xjamundx/eslint-plugin-promise)
+- [ESLint Unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
+- [ESLint JSX A11Y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
+- [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
+- [ESLint TypeScript Import Resolver](https://github.com/alexgorbatchev/eslint-import-resolver-typescript)
+
+```json
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:unicorn/recommended",
+    "plugin:promise/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "import",
+    "jsx-a11y",
+    "react",
+    "react-hooks",
+    "@typescript-eslint"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./"
+      }
+    }
+  },
+  "rules": {
+    "react/prop-types": 0,
+    "react/jsx-props-no-spreading": 0
+  }
+}
+```
+
 ### Naming Style
 
 - 变量: 名词前缀
