@@ -2172,22 +2172,28 @@ it looks into the **ES6 job queue** and **message queue** to see
 if there’s any pending call back waiting to be executed:
 
 - ES6 job queue: used by `Promises` (higher priority)
-- message queue: used by `setTimeout`, `DOM events`
+- Message queue: used by `setTimeout`, `DOM events`
 - 微任务 Microtask，有特权, 可以插队:
-  process.nextTick,
-  Promises.then (Promise 构造函数是同步函数),
-  Object.observer, MutationObserver
+  - `process.nextTick`.
+  - `Promises.then` (Promise 构造函数是同步函数).
+  - `Object.observer`, `MutationObserver`.
+  - `catch finally`.
 - 宏任务 Macrotask，没有特权:
-  setTimeout, setInterval,
-  setImmediate, I/O,
-  MessageChannel, postMessage,
-  UI rendering, UI Interaction Events
-- Microtask 优先于 Macrotask
+  - `setImmediate`, `I/O`.
+  - `setTimeout`, `setInterval`.
+  - `MessageChannel`, `postMessage`.
+  - `XHR` callback function.
+  - `requestAnimationFrame`.
+  - UI interaction `events` callback function.
+  - UI rendering.
+- Microtask 优先于 Macrotask.
 - 浏览器为了能够使得 JS 内部 (macro)task 与 DOM 任务能够有序的执行,
   会在一个 (macro)task 执行结束后, 在下一个 (macro)task 执行开始前, 对页面进行重新渲染.
   当 JS 引擎从任务队列中取出一个宏任务来执行, 如果执行过程中有遇到微任务,
   那么执行完该宏任务就会去执行宏任务内的所有微任务, 然后更新 UI.
   后面就是再从任务队列中取出下一个宏任务来继续执行, 以此类推.
+
+> 宏任务队列取宏任务 -> 执行 1 个宏任务 -> 检查微任务队列并执行所有微任务 -> 浏览器渲染 -> 宏任务队列
 
 ```js
 for (let ii = 0; ii < macrotask.length; ii++) {
