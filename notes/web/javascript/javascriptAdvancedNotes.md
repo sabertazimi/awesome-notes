@@ -136,6 +136,9 @@ console.log(id, status, number);
 
 ##### Traverse Map and List
 
+- `for index in Iterable<T>`: key.
+- `for [key, value] of Iterable<T>`: entry.
+
 ```js
 const map = new Map();
 map.set('first', 'hello');
