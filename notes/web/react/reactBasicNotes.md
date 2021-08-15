@@ -4701,6 +4701,14 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 - Change `homepage` in `package.json`.
 - Use `path={`${process.env.PUBLIC_URL}/about`}`
   in `Routes.js` when using `react-router-dom`.
+- Or use `basename` for `react-router@^4`.
+
+```jsx
+// renders <a href="/calendar/today">
+<BrowserRouter basename="/calendar">
+  <Link to="/today" />
+</BrowserRouter>
+```
 
 ### Custom CRA
 
