@@ -4696,6 +4696,12 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 - `react-dev-utils`: most utility functions
   for paths, helpers, middleware, and webpack plugins.
 
+### CRA Deployment
+
+- Change `homepage` in `package.json`.
+- Use `path={`${process.env.PUBLIC_URL}/about`}`
+  in `Routes.js` when using `react-router-dom`.
+
 ### Custom CRA
 
 - custom `packages/cra-template-*`: change HTML/CSS/JS boilerplate.
