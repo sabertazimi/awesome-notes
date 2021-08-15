@@ -4568,6 +4568,16 @@ npx create-react-app app-name --scripts-version @sabertazimi/react-scripts --use
 npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-npm
 ```
 
+### Create React APP CLI
+
+`createReactApp.js`:
+
+`init` -> commander setup -> `createApp()`
+-> process CLI args -> `run()`
+-> process `react-scripts@version` and `cra-template-xxx@version`
+-> install `react`, `react-dom`, `react-scripts` and `cra-template-xxx`
+-> invoke `react-scripts init` for further process.
+
 ### React Scripts
 
 #### React Scripts Initialization
@@ -4591,8 +4601,17 @@ module.exports = registries;
 - 自定义安装默认依赖 (`react`, `react-dom`, `react-router`, `redux` etc.)
 - 额外安装模板依赖 `packages.dependencies` in `cra-template/template.json`
 - Setup `package.json`:
-  `appPackage.homepage`, `appPackage.dependencies`, `appPackage.scripts`,
-  `appPackage.eslintConfig`, `appPackage.browser`.
+  `appPackage.eslintConfig`, `appPackage.browserslist`.
+  `appPackage.dependencies`, `appPackage.scripts`
+  and merge rest config in `packages` in `cra-template/template.json`
+  (ignore `).
+- Copy template files from `cra-template-xxx/template` directory.
+- Setup git repository.
+- Install deps and devDeps list from `react-scripts` and `cra-template-xxx`.
+- Uninstall `cra-template-xxx` package.
+- Setup first git commit.
+- Print available scripts.
+- Done.
 
 #### React Scripts Commands
 
