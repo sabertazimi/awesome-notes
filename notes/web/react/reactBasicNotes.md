@@ -4618,21 +4618,17 @@ module.exports = registries;
 Locating in `react-scripts/scripts/`:
 
 - `start.js` for `react-scripts start`
-
-```jsx
-// 增加关机提示信息
-['SIGINT', 'SIGTERM'].forEach(function (sig) {
-  process.on(sig, function () {
-    console.log(chalk.cyan('Gracefully shutting down. Please wait...\n'));
-    devServer.close();
-    process.exit();
-  });
-});
-```
-
 - `build.js` for `react-scripts build`
 - `test.js` for `react-scripts test`
 - `eject.js` for `react-scripts eject`
+
+##### React Scripts Start
+
+When develop `react-scripts` locally
+with `react-scripts start`,
+it will use `templatePath` located in
+`react-scripts/config/paths.js`
+to find local template.
 
 #### React Scripts Configuration
 
