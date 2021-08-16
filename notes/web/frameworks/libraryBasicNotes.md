@@ -958,7 +958,12 @@
 
 ### DevOps Project Tools
 
+- [NX](https://github.com/nrwl/nx)
+- [Lerna](https://github.com/lerna/lerna)
 - [Node Maintenance Tools](https://github.com/maxogden/maintenance-modules)
+
+### DevOps Version Tools
+
 - [BeachBall: Sunniest semantic version bumper](https://github.com/microsoft/beachball)
 - [Commit Lint](https://github.com/conventional-changelog/commitlint)
 - [Commitizen: Conventional commits CLI tool](https://github.com/commitizen/cz-cli)
