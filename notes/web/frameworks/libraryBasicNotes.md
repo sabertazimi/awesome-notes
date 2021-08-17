@@ -292,7 +292,7 @@
 
 - [React Hot Toast](https://github.com/timolins/react-hot-toast)
 - [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
-- [Popper.js](https://github.com/FezVrasta/popper.js)
+- [Popper.js](https://github.com/popperjs/popper-core)
 - [Humane.js](https://github.com/wavded/humane-js)
 - [Desktop Notification](https://github.com/Nickersoft/push.js)
 - [Nodejs Notification](https://github.com/mikaelbr/node-notifier)
