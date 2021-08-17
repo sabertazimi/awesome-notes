@@ -525,6 +525,7 @@
 - [Icons8](https://icons8.com)
 - [Ikonate](https://github.com/mikolajdobrucki/ikonate)
 - [CSS Icons](https://github.com/wentin/cssicon)
+- [Open Source Icons](https://www.smashingmagazine.com/2021/08/open-source-icons)
 
 ### Emoji
 
