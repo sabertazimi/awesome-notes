@@ -544,6 +544,7 @@
 - [SVG Icons](https://iconsvg.xyz)
 - [DVI2SVG](https://github.com/mgieseki/dvisvgm)
 - [SVG Parser](https://github.com/sebmarkbage/art)
+- [Random SVG Geometry](https://www.blobbb.fun)
 
 ### Image Size
 
@@ -897,6 +898,7 @@
 
 - [LightHouse](https://github.com/GoogleChrome/lighthouse)
 - [WebPageTest](https://github.com/WPO-Foundation/webpagetest-github-action)
+- [SpeedVitals: Optimize website for core web vitals](https://speedvitals.com)
 - [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render)
 - [React benchmark component](https://github.com/paularmstrong/react-component-benchmark)
 - [Node Clinic](https://github.com/nearform/node-clinic)
