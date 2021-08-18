@@ -4760,6 +4760,52 @@ render() {
 }
 ```
 
+#### CRA Environment Variables
+
+- Create custom environment variables beginning with `REACT_APP_`.
+  Any other variables except `NODE_ENV` will be ignored.
+- HTML access environment variables `%REACT_APP_XXX%`.
+- JavaScript access environment variables via `process.env.REACT_APP_XXX`.
+- [`.env`](https://github.com/motdotla/dotenv)
+  file define permanent environment variables:
+  - `npm start`: `.env.development.local`>`.env.local`>`.env.development`>`.env`.
+  - `npm run build`: `.env.production.local`>`.env.local`>`.env.production`>`.env`.
+  - `npm test`: `.env.test.local`>`.env.test`>`.env`.
+
+```bash
+REACT_APP_NOT_SECRET_CODE=abcdef
+```
+
+```html
+<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+<title>%REACT_APP_WEBSITE_NAME%</title>
+```
+
+```jsx
+const App = () => (
+  <div>
+    <small>
+      You are running this application in <b>{process.env.NODE_ENV}</b> mode.
+    </small>
+    <form>
+      <input
+        type="hidden"
+        defaultValue={process.env.REACT_APP_NOT_SECRET_CODE}
+      />
+    </form>
+  </div>
+);
+```
+
+```html
+<div>
+  <small>You are running this application in <b>development</b> mode.</small>
+  <form>
+    <input type="hidden" value="abcdef" />
+  </form>
+</div>
+```
+
 #### CRA Deployment
 
 - [Official Documentation](https://facebook.github.io/create-react-app/docs/deployment).
