@@ -452,6 +452,7 @@
 #### Progress Bar
 
 - [NProgress.js](https://github.com/rstacruz/nprogress)
+- [Pace: Site progress bar](https://github.com/CodeByZach/pace)
 
 #### Skeleton
 
