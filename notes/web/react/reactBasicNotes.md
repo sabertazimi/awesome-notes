@@ -4695,7 +4695,6 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 #### CRA Deployment
 
-
 - [Official Documentation](https://facebook.github.io/create-react-app/docs/deployment).
 - [Deploy Subdirectory](https://medium.com/@svinkle/how-to-deploy-a-react-app-to-a-subdirectory-f694d46427c1).
 - Change `homepage` in `package.json`.
