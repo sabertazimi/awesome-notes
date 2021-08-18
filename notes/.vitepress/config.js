@@ -11,7 +11,7 @@ module.exports = {
 
     // config for markdown-it-table-of-contents
     toc: {
-      includeLevel: [1, 2],
+      includeLevel: [1, 2, 3],
       markerPattern: /^\[toc\]/im, // match to VSCode markdown-preview-enhanced extension
     },
   },
