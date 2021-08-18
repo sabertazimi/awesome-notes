@@ -4739,6 +4739,27 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 /* rest of app styles */
 ```
 
+#### CRA Public Folder
+
+- None of the files in public folder get post-processed or minified.
+- Missing files will not be called at compilation time,
+  and will cause `404` errors for your users.
+- Result filenames won’t include `content hashes`
+  so you’ll need to add query arguments or rename them every time they change.
+
+```html
+<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+```
+
+```tsx
+render() {
+  // Note: this is an escape hatch and should be used sparingly!
+  // Normally recommend using `import` for getting asset URLs
+  // as described in “Adding Images and Fonts” section.
+  return <img src={process.env.PUBLIC_URL + '/img/logo.png'} />;
+}
+```
+
 #### CRA Deployment
 
 - [Official Documentation](https://facebook.github.io/create-react-app/docs/deployment).
