@@ -58,7 +58,7 @@ class Promise {
     this.$chained = [];
 
     // Implement `resolve()` and `reject()` for the executor function to use
-    const resolve = (res) => {
+    const resolve = res => {
       // A promise is considered "settled" when it is no longer
       // pending, that is, when either `resolve()` or `reject()`
       // was called once. Calling `resolve()` or `reject()` twice
@@ -91,7 +91,7 @@ class Promise {
       return res;
     };
 
-    const reject = (err) => {
+    const reject = err => {
       if (this.$state !== 'PENDING') {
         return;
       }
@@ -124,7 +124,7 @@ class Promise {
       // Ensure that errors in `onFulfilled()` and `onRejected()` reject the
       // returned promise, otherwise they'll crash the process. Also, ensure
       // that the promise
-      const _onFulfilled = (res) => {
+      const _onFulfilled = res => {
         try {
           // If `onFulfilled()` returns a promise, trust `resolve()` to handle
           // it correctly.
@@ -135,7 +135,7 @@ class Promise {
         }
       };
 
-      const _onRejected = (err) => {
+      const _onRejected = err => {
         try {
           // store new value to new Promise
           reject(onRejected(err));

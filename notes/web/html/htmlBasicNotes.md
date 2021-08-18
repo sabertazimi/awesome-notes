@@ -842,7 +842,7 @@ boolean 代表当前`<time>`表示整个网页的时间
 ```
 
 ```js
-const onChange = (event) => {
+const onChange = event => {
   const {
     currentTarget: {
       dataset: { row, column },
@@ -1317,7 +1317,7 @@ export function trapTabKey(e, context) {
 const listExpander = document.querySelector('.list-expander');
 const list = document.querySelector('#expandable-list-1');
 
-listExpander.addEventListener('click', (e) => {
+listExpander.addEventListener('click', e => {
   if (list.getAttribute('aria-expanded') === 'true') {
     list.setAttribute('aria-expanded', 'false');
   } else {

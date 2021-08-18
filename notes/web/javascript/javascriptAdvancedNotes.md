@@ -408,7 +408,7 @@ for (const match of matches) {
 
 // matches iterator is exhausted after the for..of iteration
 // Call matchAll again to create a new iterator
-Array.from(str.matchAll(regexp), (m) => m[0]);
+Array.from(str.matchAll(regexp), m => m[0]);
 // Array [ "football", "foosball" ]
 ```
 
@@ -699,11 +699,11 @@ Array.from(namesSet); // ['a', 'b']
 Array.from([1, 2, 3]);
 // => [1, 2, 3]
 
-Array.from(arrayLike, (x) => x * x);
+Array.from(arrayLike, x => x * x);
 // =>
-Array.from(arrayLike).map((x) => x * x);
+Array.from(arrayLike).map(x => x * x);
 
-Array.from([1, 2, 3], (x) => x * x);
+Array.from([1, 2, 3], x => x * x);
 // [1, 4, 9]
 
 // random array generation
@@ -796,7 +796,7 @@ const score = {
   gan: 41,
 };
 
-Object.keys(score).map((k) => score[k]);
+Object.keys(score).map(k => score[k]);
 // => [ 42, 19, 4, 41 ]
 
 Object.values(score);
@@ -1139,10 +1139,10 @@ const Iterator = {
 function methodsIterator() {
   let index = 0;
   let methods = Object.keys(this)
-    .filter((key) => {
+    .filter(key => {
       return typeof this[key] === 'function';
     })
-    .map((key) => this[key]);
+    .map(key => this[key]);
 
   // iterator object
   return {
@@ -1215,7 +1215,7 @@ function remotePostsAsyncIteratorsFactory() {
 
       const res = await fetch(
         `https://jsonplaceholder.typicode.com/posts/${i++}`
-      ).then((r) => r.json());
+      ).then(r => r.json());
 
       // the posts source is ended
       if (Object.keys(res).length === 0) {
@@ -1432,7 +1432,7 @@ coroutine(function* bounce() {
 ```js
 const asyncSource = {
   async *[Symbol.asyncIterator]() {
-    yield await new Promise((res) => setTimeout(res, 1000, 1));
+    yield await new Promise(res => setTimeout(res, 1000, 1));
   },
 };
 
@@ -1442,7 +1442,7 @@ async function* remotePostsAsyncGenerator() {
   while (true) {
     const res = await fetch(
       `https://jsonplaceholder.typicode.com/posts/${i++}`
-    ).then((r) => r.json());
+    ).then(r => r.json());
 
     // when no more remote posts will be available,
     // it will break the infinite loop.
@@ -1469,7 +1469,7 @@ async function* getRemoteData() {
 
   while (hasMore) {
     const { next_page, results } = await fetch(URL, { params: { page } }).then(
-      (r) => r.json()
+      r => r.json()
     );
 
     // return 5 elements with each iteration
@@ -1552,7 +1552,7 @@ console.log(pos.z); // => 0
 #### Negative Array Indices with Proxy
 
 ```js
-const negativeArray = (els) =>
+const negativeArray = els =>
   new Proxy(target, {
     get: (target, propKey, receiver) =>
       Reflect.get(
@@ -1569,9 +1569,9 @@ const negativeArray = (els) =>
 const hide = (target, prefix = '_') =>
   new Proxy(target, {
     has: (obj, prop) => !prop.startsWith(prefix) && prop in obj,
-    ownKeys: (obj) =>
+    ownKeys: obj =>
       Reflect.ownKeys(obj).filter(
-        (prop) => typeof prop !== 'string' || !prop.startsWith(prefix)
+        prop => typeof prop !== 'string' || !prop.startsWith(prefix)
       ),
     get: (obj, prop, rec) => (prop in rec ? obj[prop] : undefined),
   });
@@ -1628,7 +1628,7 @@ if (X in range(1, 100)) {
   // => true
 }
 
-nums.filter((n) => n in range(1, 10));
+nums.filter(n => n in range(1, 10));
 // => [1, 5]
 ```
 
@@ -1644,7 +1644,7 @@ Avoid callback hell with:
 resolve only accept **one** value
 
 ```js
-return new Promise((resolve) => resolve([a, b]));
+return new Promise(resolve => resolve([a, b]));
 ```
 
 - promises on the same chain execute orderly
@@ -1655,11 +1655,11 @@ const users = ['User1', 'User2', 'User3', 'User4'];
 
 const response = [];
 
-const getUser = (user) => () => {
-  return axios.get(`/users/userId=${user}`).then((res) => response.push(res));
+const getUser = user => () => {
+  return axios.get(`/users/userId=${user}`).then(res => response.push(res));
 };
 
-const getUsers = (users) => {
+const getUsers = users => {
   const [getFirstUser, getSecondUser, getThirdUser, getFourthUser] =
     users.map(getUser);
 
@@ -1684,8 +1684,8 @@ function getUsers(users) {
   promises[3] = axios.get(`/users/userId=${users[3]}`);
 
   Promise.all(promises)
-    .then((userDataArr) => (response = userDataArr))
-    .catch((err) => console.log(err));
+    .then(userDataArr => (response = userDataArr))
+    .catch(err => console.log(err));
 }
 ```
 
@@ -1714,8 +1714,8 @@ Promise.all(urls.map(fetch)).then(responses =>
 ```
 
 ```js
-Promise.all(urls.map((url) => fetch(url).then((resp) => resp.text()))).then(
-  (texts) => {
+Promise.all(urls.map(url => fetch(url).then(resp => resp.text()))).then(
+  texts => {
     //
   }
 );
@@ -1729,7 +1729,7 @@ const loadData = async () => {
     const urls = ['...', '...'];
 
     const results = await Promise.all(urls.map(fetch));
-    const dataPromises = await results.map((result) => result.json());
+    const dataPromises = await results.map(result => result.json());
     const finalData = Promise.all(dataPromises);
 
     return finalData;
@@ -1738,7 +1738,7 @@ const loadData = async () => {
   }
 };
 
-const data = loadData().then((data) => console.log(data));
+const data = loadData().then(data => console.log(data));
 ```
 
 #### Promise Polyfill
@@ -1759,7 +1759,7 @@ class Promise {
     this.$chained = [];
 
     // Implement `resolve()` and `reject()` for the executor function to use
-    const resolve = (res) => {
+    const resolve = res => {
       // A promise is considered "settled" when it is no longer
       // pending, that is, when either `resolve()` or `reject()`
       // was called once. Calling `resolve()` or `reject()` twice
@@ -1792,7 +1792,7 @@ class Promise {
       return res;
     };
 
-    const reject = (err) => {
+    const reject = err => {
       if (this.$state !== 'PENDING') {
         return;
       }
@@ -1825,7 +1825,7 @@ class Promise {
       // Ensure that errors in `onFulfilled()` and `onRejected()` reject the
       // returned promise, otherwise they'll crash the process. Also, ensure
       // that the promise
-      const _onFulfilled = (res) => {
+      const _onFulfilled = res => {
         try {
           // If `onFulfilled()` returns a promise, trust `resolve()` to handle
           // it correctly.
@@ -1836,7 +1836,7 @@ class Promise {
         }
       };
 
-      const _onRejected = (err) => {
+      const _onRejected = err => {
         try {
           // store new value to new Promise
           reject(onRejected(err));
@@ -1918,7 +1918,7 @@ async getAuthors(authorIds) {
 
 ```js
 function sleep(time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
+  return new Promise(resolve => setTimeout(resolve, time));
 }
 ```
 
@@ -2109,7 +2109,7 @@ const partial = (fn, ...args) => {
 chain of multiple single argument functions
 
 ```js
-const add = (x) => (y) => x + y;
+const add = x => y => x + y;
 ```
 
 ```javascript
@@ -2231,8 +2231,8 @@ const foo = () => {
   new Promise((resolve, reject) => {
     resolve('Promise resolved');
   })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
   baz();
 };
 
@@ -2972,7 +2972,7 @@ function work() {
   };
 }
 
-const makeWorker = (f) => {
+const makeWorker = f => {
   let pendingJobs = {};
 
   const worker = new Worker(
@@ -2986,7 +2986,7 @@ const makeWorker = (f) => {
   };
 
   return (...message) =>
-    new Promise((resolve) => {
+    new Promise(resolve => {
       const jobId = String(Math.random());
       pendingJobs[jobId] = resolve;
       worker.postMessage({ jobId, message });
@@ -2995,7 +2995,7 @@ const makeWorker = (f) => {
 
 const testWorker = makeWorker(work);
 
-testWorker('message from main thread').then((message) => {
+testWorker('message from main thread').then(message => {
   console.log('i am main thread, i receive:-----' + message);
 });
 ```
@@ -3383,7 +3383,7 @@ Math.tan(x);
 - Push Cache: HTTP/2
 
 ```js
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
   async function buildCache() {
     const cache = await caches.open(cacheName);
     return cache.addAll(['/main.css', '/main.mjs', '/offline.html']);
@@ -3391,7 +3391,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(buildCache());
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   async function cachedFetch(event) {
     const cache = await caches.open(cacheName);
     let response = await cache.match(event.request);
@@ -3641,7 +3641,7 @@ Lazy Loading Polyfill:
 
 ```js
 window.addEventListener('scroll', function (event) {
-  Array.from(document.querySelectorAll('.lazyload')).forEach((image) => {
+  Array.from(document.querySelectorAll('.lazyload')).forEach(image => {
     if (image.slideIntoView(event.getBoundingClientRect())) {
       image.setAttribute('src', image.dataset.src);
     }
@@ -3652,8 +3652,8 @@ window.addEventListener('scroll', function (event) {
 Observer Lazy Loading:
 
 ```js
-const observer = new IntersectionObserver((nodes) => {
-  nodes.forEach((v) => {
+const observer = new IntersectionObserver(nodes => {
+  nodes.forEach(v => {
     if (v.isIntersecting) {
       v.target.src = v.target.dataset.src;
       observer.unobserve(v.target);
@@ -3662,7 +3662,7 @@ const observer = new IntersectionObserver((nodes) => {
 });
 
 const images = document.querySelectorAll('img.lazyload');
-images.forEach((v) => observer.observe(v));
+images.forEach(v => observer.observe(v));
 ```
 
 Native Lazy Loading:
@@ -3893,7 +3893,7 @@ if (metric.start < lastVisibilityChange || document.hidden) return;
 
 ```js
 requestAnimationFrame(() => {
-  requestAnimationFrame((timestamp) => {
+  requestAnimationFrame(timestamp => {
     metric.finish(timestamp);
   });
 });
@@ -3947,7 +3947,7 @@ await page.waitFor(() => !!document.querySelector('.foo'));
 ```js
 const puppeteer = require('puppeteer');
 
-puppeteer.launch().then(async (browser) => {
+puppeteer.launch().then(async browser => {
   const page = await browser.newPage();
   const watchDog = page.waitForFunction('window.innerWidth < 100');
   await page.setViewport({ width: 50, height: 50 });
@@ -3966,7 +3966,7 @@ const [response] = await Promise.all([
 ```js
 const firstRequest = await page.waitForRequest('http://example.com/resource');
 const finalRequest = await page.waitForRequest(
-  (request) =>
+  request =>
     request.url() === 'http://example.com' && request.method() === 'GET'
 );
 return firstRequest.url();
@@ -3977,7 +3977,7 @@ const firstResponse = await page.waitForResponse(
   'https://example.com/resource'
 );
 const finalResponse = await page.waitForResponse(
-  (response) =>
+  response =>
     response.url() === 'https://example.com' && response.status() === 200
 );
 return finalResponse.ok();
@@ -3986,7 +3986,7 @@ return finalResponse.ok();
 ```js
 await page.evaluate(() => window.open('https://www.example.com/'));
 const newWindowTarget = await browserContext.waitForTarget(
-  (target) => target.url() === 'https://www.example.com/'
+  target => target.url() === 'https://www.example.com/'
 );
 ```
 
@@ -4420,7 +4420,7 @@ long click reload: multiple reload options e.g clean cache
 ```js
 const listener = getEventListeners($0).click[0].listener;
 $0.removeEventListener('click', listener);
-$0.addEventListener('click', (e) => {
+$0.addEventListener('click', e => {
   // do something
   // ...
 
@@ -4821,19 +4821,19 @@ function handleThings(opts = {}) {
 
 ```js
 // bad
-arr.map((x) => x + 1);
+arr.map(x => x + 1);
 arr.map((x, index) => x + index);
-[1, 2, 3].map((x) => {
+[1, 2, 3].map(x => {
   const y = x + 1;
   return x * y;
 });
 
 // good
-arr.map((x) => x + 1);
+arr.map(x => x + 1);
 arr.map((x, index) => {
   return x + index;
 });
-[1, 2, 3].map((x) => {
+[1, 2, 3].map(x => {
   const y = x + 1;
   return x * y;
 });
@@ -4843,7 +4843,7 @@ arr.map((x, index) => {
 
 ```js
 // bad
-['get', 'post', 'put'].map((httpMethod) =>
+['get', 'post', 'put'].map(httpMethod =>
   Object.prototype.hasOwnProperty.call(
     httpMagicObjectWithAVeryLongName,
     httpMethod
@@ -4851,7 +4851,7 @@ arr.map((x, index) => {
 );
 
 // good
-['get', 'post', 'put'].map((httpMethod) =>
+['get', 'post', 'put'].map(httpMethod =>
   Object.prototype.hasOwnProperty.call(
     httpMagicObjectWithAVeryLongName,
     httpMethod
@@ -4935,7 +4935,7 @@ sum === 15;
 
 // good
 let sum = 0;
-numbers.forEach((num) => {
+numbers.forEach(num => {
   sum += num;
 });
 sum === 15;
@@ -4952,12 +4952,12 @@ for (let i = 0; i < numbers.length; i++) {
 
 // good
 const increasedByOne = [];
-numbers.forEach((num) => {
+numbers.forEach(num => {
   increasedByOne.push(num + 1);
 });
 
 // best (keeping it functional)
-const increasedByOne = numbers.map((num) => num + 1);
+const increasedByOne = numbers.map(num => num + 1);
 ```
 
 - use `function*` for generator
@@ -5123,7 +5123,7 @@ const numberInArray = [1, 2];
 // good
 const foo = superLongLongLongLongLongLongLongLongFunctionName();
 
-['get', 'post', 'put'].map((httpMethod) =>
+['get', 'post', 'put'].map(httpMethod =>
   Object.prototype.hasOwnProperty.call(
     httpMagicObjectWithAVeryLongName,
     httpMethod
@@ -5291,10 +5291,10 @@ function isImage(fetchRequest) {
   return fetchRequest.method === 'GET' && fetchRequest.destination === 'image';
 }
 
-self.addEventListener('fetch', (e) => {
+self.addEventListener('fetch', e => {
   e.respondWith(
     fetch(e.request)
-      .then((response) => {
+      .then(response => {
         if (response.ok) return response;
 
         // User is online, but response was not ok
@@ -5303,7 +5303,7 @@ self.addEventListener('fetch', (e) => {
           return caches.match('/broken.png');
         }
       })
-      .catch((err) => {
+      .catch(err => {
         // User is probably offline
         if (isImage(e.request)) {
           // Get broken image placeholder from cache
@@ -5313,10 +5313,10 @@ self.addEventListener('fetch', (e) => {
   );
 });
 
-self.addEventListener('install', (e) => {
+self.addEventListener('install', e => {
   self.skipWaiting();
   e.waitUntil(
-    caches.open('precache').then((cache) => {
+    caches.open('precache').then(cache => {
       // Add /broken.png to "precache"
       cache.add('/broken.png');
     })
@@ -5346,7 +5346,7 @@ self.addEventListener('install', (e) => {
 // <img class="lzy_img" src="lazy_img.jpg" data-src="real_img.jpg" />
 document.addEventListener('DOMContentLoaded', () => {
   const imageObserver = new IntersectionObserver((entries, imgObserver) => {
-    entries.forEach((entry) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
         const lazyImage = entry.target;
         console.log('Lazy loading ', lazyImage);
@@ -5360,7 +5360,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const lazyImages = document.querySelectorAll('img.lzy_img');
-  lazyImages.forEach((lazyImage) => imageObserver.observe(lazyImage));
+  lazyImages.forEach(lazyImage => imageObserver.observe(lazyImage));
 });
 ```
 
@@ -5548,7 +5548,7 @@ const baseFrequency = 440;
 const getNoteFreq = (base, pitch) => base * Math.pow(2, pitch / 12);
 // oscillator.frequency.value = getNoteFreq(440, 7);
 
-const getNoteDetune = (pitch) => pitch * 100;
+const getNoteDetune = pitch => pitch * 100;
 // oscillator.detune.value = getNoteDetune(7);
 
 const play = (type, delay, pitch, duration) => {
@@ -5605,13 +5605,13 @@ javascriptNode.onaudioprocess = function () {
 // Note that the audio load is asynchronous
 function loadSound(url) {
   fetch(url)
-    .then((response) => {
-      audioContext.decodeAudioData(response, (buffer) => {
+    .then(response => {
+      audioContext.decodeAudioData(response, buffer => {
         audioData = buffer;
         playSound(audioData);
       });
     })
-    .catch((error) => {
+    .catch(error => {
       console.error(error);
     });
 }
@@ -5726,7 +5726,7 @@ export class IndexedDB {
       const dbOpen = indexedDB.open(dbName, dbVersion);
 
       if (dbUpgrade) {
-        dbOpen.onupgradeneeded = (e) => {
+        dbOpen.onupgradeneeded = e => {
           dbUpgrade(dbOpen.result, e.oldVersion, e.newVersion);
         };
       }
@@ -5736,7 +5736,7 @@ export class IndexedDB {
         resolve(this);
       };
 
-      dbOpen.onerror = (e) => {
+      dbOpen.onerror = e => {
         reject(`IndexedDB error: ${e.target.errorCode}`);
       };
     });
@@ -5793,7 +5793,7 @@ export class State {
     this.observed = new Set(observed);
 
     // subscribe `set` event with `updateCallback`
-    State.target.addEventListener('set', (e) => {
+    State.target.addEventListener('set', e => {
       if (this.updateCallback && this.observed.has(e.detail.name)) {
         this.updateCallback(e.detail.name, e.detail.value);
       }
@@ -5999,11 +5999,11 @@ function gamepadHandler(event, connecting) {
   }
 }
 
-window.addEventListener('gamepadconnected', (e) => {
+window.addEventListener('gamepadconnected', e => {
   gamepadHandler(e, true);
 });
 
-window.addEventListener('gamepaddisconnected', (e) => {
+window.addEventListener('gamepaddisconnected', e => {
   gamepadHandler(e, false);
 });
 ```
@@ -6857,7 +6857,7 @@ like [jscodeshift](https://github.com/facebook/jscodeshift).
 
 ```js
 // index.js
-module.exports = (babel) => {
+module.exports = babel => {
   const t = babel.types;
   let isJSXExisted = false;
   let isMeactContextEnabled = false;
@@ -6925,7 +6925,7 @@ const defaultTargets = {
   ucandroid: 1,
 };
 
-const buildTargets = (options) => {
+const buildTargets = options => {
   return Object.assign({}, defaultTargets, options.additionalTargets);
 };
 
@@ -7197,7 +7197,7 @@ module.exports = {
         test: /\.svg/,
         type: 'asset/inline',
         generator: {
-          dataUrl: (content) => {
+          dataUrl: content => {
             content = content.toString();
             return svgToMiniDataURI(content);
           },
@@ -7664,15 +7664,15 @@ const scripts = [
 
 class HotLoad {
   apply(compiler) {
-    compiler.hooks.beforeRun.tap('UpdateVersion', (compilation) => {
+    compiler.hooks.beforeRun.tap('UpdateVersion', compilation => {
       compilation.options.output.publicPath = `./${version}/`;
     });
 
-    compiler.hooks.compilation.tap('HotLoadPlugin', (compilation) => {
+    compiler.hooks.compilation.tap('HotLoadPlugin', compilation => {
       HtmlWebpackPlugin.getHooks(compilation).alterAssetTags.tapAsync(
         'HotLoadPlugin',
         (data, cb) => {
-          scripts.forEach((src) => [
+          scripts.forEach(src => [
             data.assetTags.scripts.unshift({
               tagName: 'script',
               voidTag: false,
@@ -7793,7 +7793,7 @@ window.matchMedia =
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation((query) => ({
+  value: jest.fn().mockImplementation(query => ({
     matches: false,
     media: query,
     onchange: null,
@@ -8122,7 +8122,7 @@ import { useState, useCallback } from 'react';
 
 export default function useCounter(initialValue = 0) {
   const [count, setCount] = useState(initialValue);
-  const increment = useCallback(() => setCount((x) => x + 1), []);
+  const increment = useCallback(() => setCount(x => x + 1), []);
   const reset = useCallback(() => setCount(initialValue), [initialValue]);
   return { count, increment, reset };
 }
@@ -8158,7 +8158,7 @@ import React, { useState, useContext, useCallback } from 'react';
 export default function useCounter(initialValue = 0) {
   const [count, setCount] = useState(initialValue);
   const step = useContext(CounterStepContext);
-  const increment = useCallback(() => setCount((x) => x + step), [step]);
+  const increment = useCallback(() => setCount(x => x + step), [step]);
   const incrementAsync = useCallback(
     () => setTimeout(increment, 100),
     [increment]
@@ -8188,7 +8188,7 @@ import React, { useState, useContext, useCallback } from 'react';
 export default function useCounter(initialValue = 0) {
   const [count, setCount] = useState(initialValue);
   const step = useContext(CounterStepContext);
-  const increment = useCallback(() => setCount((x) => x + step), [step]);
+  const increment = useCallback(() => setCount(x => x + step), [step]);
   const incrementAsync = useCallback(
     () => setTimeout(increment, 100),
     [increment]
@@ -8247,7 +8247,7 @@ npx cypress open
 ```js
 const wp = require('@cypress/webpack-preprocessor');
 
-module.exports = (on) => {
+module.exports = on => {
   const options = {
     webpackOptions: {
       resolve: {

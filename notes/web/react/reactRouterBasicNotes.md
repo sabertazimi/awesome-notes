@@ -109,7 +109,7 @@ const PrivateRoute = ({
 - etc...
 
 ```jsx
-<Route render={(props) => <Component {...props} />} />
+<Route render={props => <Component {...props} />} />
 ```
 
 ### Link and URL Props
@@ -264,17 +264,17 @@ location / {
 ```jsx
 const instances = [];
 
-const register = (comp) => instances.push(comp);
-const unregister = (comp) => instances.splice(instances.indexOf(comp), 1);
+const register = comp => instances.push(comp);
+const unregister = comp => instances.splice(instances.indexOf(comp), 1);
 
-const historyPush = (path) => {
+const historyPush = path => {
   history.pushState({}, null, path);
-  instances.forEach((instance) => instance.forceUpdate());
+  instances.forEach(instance => instance.forceUpdate());
 };
 
-const historyReplace = (path) => {
+const historyReplace = path => {
   history.replaceState({}, null, path);
-  instances.forEach((instance) => instance.forceUpdate());
+  instances.forEach(instance => instance.forceUpdate());
 };
 ```
 
@@ -373,7 +373,7 @@ class Link extends Component {
     replace: PropTypes.bool,
   };
 
-  handleClick = (event) => {
+  handleClick = event => {
     const { replace, to } = this.props;
     event.preventDefault();
 

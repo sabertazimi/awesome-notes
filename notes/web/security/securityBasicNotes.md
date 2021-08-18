@@ -102,7 +102,7 @@ req.session.regenerate(function (err) {
 - what: generate complex session IDs
 
 ```js
-const generateSessionId = (session) => uid(24);
+const generateSessionId = session => uid(24);
 ```
 
 - how: reset session IDs after set up session successfully

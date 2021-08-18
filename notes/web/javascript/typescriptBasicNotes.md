@@ -577,7 +577,7 @@ Animal => WangCai 是 Dog => Dog 的子类型:
 在一个以 number 类型为参数，以 string 类型为返回值的函数中:
 
 ```ts
-const simple: (foo: number) => string = (foo) => foo.toString();
+const simple: (foo: number) => string = foo => foo.toString();
 ```
 
 ### Weak Overload
@@ -1036,12 +1036,12 @@ const person = makeWatchedObject({
   age: 26,
 });
 
-person.on('firstNameChanged', (newName) => {
+person.on('firstNameChanged', newName => {
   // (parameter) newName: string
   console.log(`new name is ${newName.toUpperCase()}`);
 });
 
-person.on('ageChanged', (newAge) => {
+person.on('ageChanged', newAge => {
   // (parameter) newAge: number
   if (newAge < 0) {
     console.warn('warning! negative age');
@@ -1151,15 +1151,15 @@ class TypedEvent<T> {
   };
 
   public emit = (event: T) => {
-    this.listeners.forEach((listener) => listener(event));
+    this.listeners.forEach(listener => listener(event));
 
-    this.listenersOncer.forEach((listener) => listener(event));
+    this.listenersOncer.forEach(listener => listener(event));
 
     this.listenersOncer = [];
   };
 
   public pipe = (te: TypedEvent<T>): Disposable => {
-    return this.on((e) => te.emit(e));
+    return this.on(e => te.emit(e));
   };
 }
 ```
@@ -1203,7 +1203,7 @@ const boolList = createList<boolean>(); // error
 
 ```ts
 function pick<T extends object, U extends keyof T>(obj: T, keys: U[]): T[U][] {
-  return keys.map((key) => obj[key]);
+  return keys.map(key => obj[key]);
 }
 ```
 
@@ -1927,7 +1927,7 @@ class // ...
 ```ts
 function inject(options: { api_version: string }) {
   // returns the class decorator implementation
-  return (target) => {
+  return target => {
     // `target` will give us access to the entire class prototype
     target.apiVersion = options.api_version;
   };

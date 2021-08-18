@@ -224,8 +224,8 @@ const myObservable = of(1, 2, 3);
 
 // Create observer object
 const myObserver = {
-  next: (x) => console.log('Observer got a next value: ' + x),
-  error: (err) => console.error('Observer got an error: ' + err),
+  next: x => console.log('Observer got a next value: ' + x),
+  error: err => console.error('Observer got an error: ' + err),
   complete: () => console.log('Observer got a complete notification'),
 };
 
@@ -270,7 +270,7 @@ RxJS 提供了 pipe 辅助函数,
 import { take, map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
-map.call(take.call(of(1, 2, 3), 2), (val) => val + 2);
+map.call(take.call(of(1, 2, 3), 2), val => val + 2);
 
 // to
 import { take, map } from 'rxjs/operators';
@@ -278,7 +278,7 @@ import { of } from 'rxjs/observable/of';
 
 of(1, 2, 3).pipe(
   take(2),
-  map((val) => val + 2)
+  map(val => val + 2)
 );
 ```
 

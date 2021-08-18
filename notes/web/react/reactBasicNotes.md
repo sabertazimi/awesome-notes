@@ -57,7 +57,7 @@ then update effects to real DOM when `Commit` stage.
 Polyfill for `requestIdleCallback` with priority control.
 
 ```js
-const performWork = (deadline) => {
+const performWork = deadline => {
   if (!nextUnitOfWork) {
     resetNextUnitOfWork();
   }
@@ -226,9 +226,9 @@ class MyComponent extends React.Component {
 
   componentDidMount() {
     fetch('https://api.example.com/items')
-      .then((res) => res.json())
+      .then(res => res.json())
       .then(
-        (result) => {
+        result => {
           this.setState({
             isLoaded: true,
             items: result.items,
@@ -237,7 +237,7 @@ class MyComponent extends React.Component {
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
-        (error) => {
+        error => {
           this.setState({
             isLoaded: true,
             error,
@@ -255,7 +255,7 @@ class MyComponent extends React.Component {
     } else {
       return (
         <ul>
-          {items.map((item) => (
+          {items.map(item => (
             <li key={item.name}>
               {item.name} {item.price}
             </li>
@@ -490,9 +490,9 @@ function App() {
 ```
 
 ```jsx
-const RadioGroup = (props) => {
+const RadioGroup = props => {
   const RenderChildren = () =>
-    React.Children.map(props.children, (child) => {
+    React.Children.map(props.children, child => {
       return React.cloneElement(child, {
         name: props.name,
       });
@@ -501,7 +501,7 @@ const RadioGroup = (props) => {
   return <div>{<RenderChildren />}</div>;
 };
 
-const RadioButton = (props) => {
+const RadioButton = props => {
   return (
     <label>
       <input type="radio" value={props.value} name={props.name} />
@@ -670,7 +670,7 @@ class Foo extends Component {
 
 ```jsx
 class App extends React.Component {
-  renderRow = (index) => {
+  renderRow = index => {
     // ref 会绑定到 DataTable 组件实例, 而不是 App 组件实例上
     return <input ref={'input-' + index} />;
 
@@ -770,7 +770,7 @@ function withToggleable(Clickable) {
     }
 
     toggle() {
-      this.setState((prevState) => ({ show: !prevState.show }));
+      this.setState(prevState => ({ show: !prevState.show }));
     }
 
     render() {
@@ -855,7 +855,7 @@ class Toggleable extends React.Component {
   }
 
   toggle() {
-    this.setState((prevState) => ({ show: !prevState.show }));
+    this.setState(prevState => ({ show: !prevState.show }));
   }
 
   render() {
@@ -863,7 +863,7 @@ class Toggleable extends React.Component {
   }
 }
 
-const ToggleableMenu = (props) => (
+const ToggleableMenu = props => (
   <Toggleable>
     {(show, onClick) => (
       <div>
@@ -1007,7 +1007,7 @@ function Child({ fetchData }) {
   这样可以不用再 Deps List 中显式声明 state, 也可以避免一些 BUG
 
 ```jsx
-setState((prevState) => {
+setState(prevState => {
   // Object.assign would also work
   return { ...prevState, ...updatedValues };
 });
@@ -1118,7 +1118,7 @@ Use useReducer if:
 - for more predictable and maintainable state architecture
 
 ```jsx
-const insertToHistory = (state) => {
+const insertToHistory = state => {
   if (state && Array.isArray(state.history)) {
     // Do not mutate
     const newHistory = [...state.history];
@@ -1274,7 +1274,7 @@ function useCount() {
     throw new Error('useCount must be used within a CountProvider');
   }
   const { count, setCount } = context;
-  const increment = () => setCount((c) => c + 1);
+  const increment = () => setCount(c => c + 1);
   return {
     count,
     increment,
@@ -1353,7 +1353,7 @@ const useDataApi = (initialUrl, initialData) => {
     fetchData();
   }, [url]);
 
-  const doFetch = (url) => {
+  const doFetch = url => {
     setUrl(url);
   };
 
@@ -1476,7 +1476,7 @@ componentDidUpdate() {
 
 ```ts
 const date = new Date();
-useDebugValue(date, (date) => date.toISOString());
+useDebugValue(date, date => date.toISOString());
 ```
 
 ### UseImperativeHandle Hook
@@ -1539,7 +1539,7 @@ const MyReact = (function () {
     useState(initialValue) {
       hooks[currentHook] = hooks[currentHook] || initialValue; // type: any
       const setStateHookIndex = currentHook; // for setState's closure!
-      const setState = (newState) => (hooks[setStateHookIndex] = newState);
+      const setState = newState => (hooks[setStateHookIndex] = newState);
       return [hooks[currentHook++], setState];
     },
   };
@@ -1555,7 +1555,7 @@ function Counter() {
   }, [count, text]);
   return {
     click: () => setCount(count + 1),
-    type: (txt) => setText(txt),
+    type: txt => setText(txt),
     noop: () => setCount(count),
     render: () => console.log('render', { count, text }),
   };
@@ -1592,7 +1592,7 @@ App = MyReact.render(Counter);
 function Component() {
   const [text, setText] = useSplitURL('www.netlify.com');
   return {
-    type: (txt) => setText(txt),
+    type: txt => setText(txt),
     render: () => console.log({ text }),
   };
 }
@@ -1627,7 +1627,7 @@ componentDidMount: `useLayoutEffect`.
 `useEffect` got invoked after `componentDidMount`.
 
 ```jsx
-const useMount = (fn) => {
+const useMount = fn => {
   useEffect(() => void fn(), []);
 };
 ```
@@ -1635,7 +1635,7 @@ const useMount = (fn) => {
 componentWillUnmount
 
 ```jsx
-const useUnmount = (fn) => {
+const useUnmount = fn => {
   useEffect(() => fn, []);
 };
 ```
@@ -1643,7 +1643,7 @@ const useUnmount = (fn) => {
 componentDidUpdate
 
 ```jsx
-const useUpdate = (fn) => {
+const useUpdate = fn => {
   const mounting = useRef(true);
 
   useEffect(() => {
@@ -1796,14 +1796,14 @@ function App() {
   return (
     <Fragment>
       <form
-        onSubmit={(event) =>
+        onSubmit={event =>
           doGet(event, `http://hn.algolia.com/api/v1/search?query=${query}`)
         }
       >
         <input
           type="text"
           value={query}
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={event => setQuery(event.target.value)}
         />
         <button type="submit">Search</button>
       </form>
@@ -1814,7 +1814,7 @@ function App() {
         <div>Loading ...</div>
       ) : (
         <ul>
-          {data.hits.map((item) => (
+          {data.hits.map(item => (
             <li key={item.objectID}>
               <a href={item.url}>{item.title}</a>
             </li>
@@ -1955,7 +1955,7 @@ export const store = {
   state: {},
   setState(value) {
     this.state = value;
-    this.setters.forEach((setter) => setter(this.state));
+    this.setters.forEach(setter => setter(this.state));
   },
   setters: [],
 };
@@ -2153,7 +2153,7 @@ const reducer = (state, action) => {
 };
 
 // Hook
-const useHistory = (initialPresent) => {
+const useHistory = initialPresent => {
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     present: initialPresent,
@@ -2178,7 +2178,7 @@ const useHistory = (initialPresent) => {
   }, [canRedo, dispatch]);
 
   const set = useCallback(
-    (newPresent) => dispatch({ type: 'SET', newPresent }),
+    newPresent => dispatch({ type: 'SET', newPresent }),
     [dispatch]
   );
 
@@ -2309,7 +2309,7 @@ export default useScript;
 ```jsx
 let cachedScripts = [];
 
-const useScript = (src) => {
+const useScript = src => {
   // Keeping track of script loaded and error state
   const [state, setState] = useState({
     loaded: false,
@@ -2436,11 +2436,11 @@ export default useLockedBody;
 ```tsx
 const useMedia = <T>(queries: string[], values: T[], defaultValue: T) => {
   // Array containing a media query list for each query
-  const mediaQueryLists = queries.map((q) => window.matchMedia(q));
+  const mediaQueryLists = queries.map(q => window.matchMedia(q));
 
   const getValue = () => {
     // Get index of first media query that matches
-    const index = mediaQueryLists.findIndex((mql) => mql.matches);
+    const index = mediaQueryLists.findIndex(mql => mql.matches);
     return values?.[index] || defaultValue;
   };
 
@@ -2449,8 +2449,8 @@ const useMedia = <T>(queries: string[], values: T[], defaultValue: T) => {
 
   useEffect(() => {
     const handler = () => setValue(getValue);
-    mediaQueryLists.forEach((mql) => mql.addListener(handler));
-    return () => mediaQueryLists.forEach((mql) => mql.removeListener(handler));
+    mediaQueryLists.forEach(mql => mql.addListener(handler));
+    return () => mediaQueryLists.forEach(mql => mql.removeListener(handler));
   }, []);
 
   return value;
@@ -2462,17 +2462,17 @@ const useMedia = <T>(queries: string[], values: T[], defaultValue: T) => {
 ```jsx
 import { useState } from 'react';
 
-const useForm = (callback) => {
+const useForm = callback => {
   const [values, setValues] = useState({});
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     if (event) event.preventDefault();
     callback();
   };
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     event.persist();
-    setValues((values) => ({
+    setValues(values => ({
       ...values,
       [event.target.name]: event.target.value,
     }));
@@ -2505,9 +2505,9 @@ export const useField = (
     setValidating(true);
     let formData = form.getFormData();
     let errorMessages = await Promise.all(
-      validations.map((validation) => validation(formData, name))
+      validations.map(validation => validation(formData, name))
     );
-    errorMessages = errorMessages.filter((errorMsg) => !!errorMsg);
+    errorMessages = errorMessages.filter(errorMsg => !!errorMsg);
     if (validateIteration === validateCounter.current) {
       // this is the most recent invocation
       setErrors(errorMessages);
@@ -2528,7 +2528,7 @@ export const useField = (
     errors,
     setErrors,
     pristine,
-    onChange: (e) => {
+    onChange: e => {
       if (pristine) {
         setPristine(false);
       }
@@ -2546,10 +2546,10 @@ export const useForm = ({ onSubmit }) => {
   let [submitting, setSubmitting] = useState(false);
   let fields = [];
 
-  const validateFields = async (fieldNames) => {
+  const validateFields = async fieldNames => {
     let fieldsToValidate;
     if (fieldNames instanceof Array) {
-      fieldsToValidate = fields.filter((field) =>
+      fieldsToValidate = fields.filter(field =>
         fieldNames.includes(field.name)
       );
     } else {
@@ -2557,9 +2557,9 @@ export const useForm = ({ onSubmit }) => {
       fieldsToValidate = fields;
     }
     let fieldsValid = await Promise.all(
-      fieldsToValidate.map((field) => field.validate())
+      fieldsToValidate.map(field => field.validate())
     );
-    let formValid = fieldsValid.every((isValid) => isValid === true);
+    let formValid = fieldsValid.every(isValid => isValid === true);
     return formValid;
   };
 
@@ -2571,7 +2571,7 @@ export const useForm = ({ onSubmit }) => {
   };
 
   return {
-    onSubmit: async (e) => {
+    onSubmit: async e => {
       e.preventDefault();
       setSubmitting(true);
       setSubmitted(true); // User has attempted to submit form at least once
@@ -2580,8 +2580,8 @@ export const useForm = ({ onSubmit }) => {
       setSubmitting(false);
       return returnVal;
     },
-    isValid: () => fields.every((f) => f.errors.length === 0),
-    addField: (field) => fields.push(field),
+    isValid: () => fields.every(f => f.errors.length === 0),
+    addField: field => fields.push(field),
     getFormData,
     validateFields,
     submitted,
@@ -2620,13 +2620,13 @@ const Field = ({
       />
       <FormHelperText component="div">
         {showErrors &&
-          errors.map((errorMsg) => <div key={errorMsg}>{errorMsg}</div>)}
+          errors.map(errorMsg => <div key={errorMsg}>{errorMsg}</div>)}
       </FormHelperText>
     </FormControl>
   );
 };
 
-const App = (props) => {
+const App = props => {
   const form = useForm({
     onSubmit: async (formData, valid) => {
       if (!valid) return;
@@ -2646,7 +2646,7 @@ const App = (props) => {
   const usernameField = useField('username', form, {
     defaultValue: '',
     validations: [
-      async (formData) => {
+      async formData => {
         await timeout(2000);
         return formData.username.length < 6 && 'Username already exists';
       },
@@ -2656,7 +2656,7 @@ const App = (props) => {
   const passwordField = useField('password', form, {
     defaultValue: '',
     validations: [
-      (formData) =>
+      formData =>
         formData.password.length < 6 &&
         'Password must be at least 6 characters',
     ],
@@ -2665,7 +2665,7 @@ const App = (props) => {
   const confirmPasswordField = useField('confirmPassword', form, {
     defaultValue: '',
     validations: [
-      (formData) =>
+      formData =>
         formData.password !== formData.confirmPassword &&
         'Passwords do not match',
     ],
@@ -2699,7 +2699,7 @@ const App = (props) => {
           disabled={
             !form.isValid() ||
             form.submitting ||
-            requiredFields.some((f) => f.pristine)
+            requiredFields.some(f => f.pristine)
           }
         >
           {form.submitting ? 'Submitting' : 'Submit'}
@@ -2784,7 +2784,7 @@ handle(e) {
 
 ```jsx
 state = {};
-handle = (e) => {};
+handle = e => {};
 ```
 
 ## React Style Guide
@@ -3047,7 +3047,7 @@ const { lazy, Suspense } = React;
 
 const Lazy = lazy(
   () =>
-    new Promise((resolve) => {
+    new Promise(resolve => {
       setTimeout(() => {
         resolve({ default: () => <Resource /> });
       }, 4000);
@@ -3083,7 +3083,7 @@ function contextWrapper(WrappedComponent, Context) {
     render() {
       return (
         <Context.Consumer>
-          {(context) => <WrappedComponent context={context} {...this.props} />}
+          {context => <WrappedComponent context={context} {...this.props} />}
         </Context.Consumer>
       );
     }
@@ -3107,7 +3107,7 @@ class Provider extends Component {
   textareaRef = React.createRef();
 
   // input handler
-  onInput = (e) => {
+  onInput = e => {
     const { name, value } = e.target;
 
     this.setState({
@@ -3137,7 +3137,7 @@ import { Consumer } from './Context';
 
 const TextArea = () => (
   <Consumer>
-    {(context) => (
+    {context => (
       <textarea
         ref={context.textareaRef}
         className="app__textarea"
@@ -3358,7 +3358,7 @@ use `React.PureComponent/React.memo` for a performance boost in some cases.
 ```jsx
 import React, { PureComponent } from 'react';
 
-const Unstable = (props) => {
+const Unstable = props => {
   console.log(' Rendered Unstable component ');
 
   return (
@@ -3396,7 +3396,7 @@ export default App;
 ```jsx
 import React, { Component } from 'react';
 
-const Unstable = React.memo((props) => {
+const Unstable = React.memo(props => {
   console.log(' Rendered this component ');
 
   return (
@@ -3453,7 +3453,7 @@ export default function App() {
   let [color, setColor] = useState('red');
   return (
     <div>
-      <input value={color} onChange={(e) => setColor(e.target.value)} />
+      <input value={color} onChange={e => setColor(e.target.value)} />
       <p style={{ color }}>Hello, world!</p>
       <ExpensiveTree />
     </div>
@@ -3484,7 +3484,7 @@ function Form() {
   let [color, setColor] = useState('red');
   return (
     <>
-      <input value={color} onChange={(e) => setColor(e.target.value)} />
+      <input value={color} onChange={e => setColor(e.target.value)} />
       <p style={{ color }}>Hello, world!</p>
     </>
   );
@@ -3506,7 +3506,7 @@ function ColorPicker({ children }) {
   let [color, setColor] = useState('red');
   return (
     <div style={{ color }}>
-      <input value={color} onChange={(e) => setColor(e.target.value)} />
+      <input value={color} onChange={e => setColor(e.target.value)} />
       {children}
     </div>
   );
@@ -3875,7 +3875,7 @@ import { Button } from 'library';
 type ButtonProps = React.ComponentProps<typeof Button>;
 type AlertButtonProps = Omit<ButtonProps, 'onClick'>;
 
-const AlertButton: React.FC<AlertButtonProps> = (props) => (
+const AlertButton: React.FC<AlertButtonProps> = props => (
   <Button onClick={() => alert('hello')} {...props} />
 );
 ```
@@ -3973,7 +3973,7 @@ class App extends React.Component<Props, State> {
   };
 
   // typing on LEFT hand side of =
-  onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  onChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     this.setState({ text: e.currentTarget.value });
   };
 
@@ -4333,7 +4333,7 @@ function useBoolean(defaultValue?: boolean): ReturnType {
 
   const setTrue = () => setValue(true);
   const setFalse = () => setValue(false);
-  const toggle = () => setValue((x) => !x);
+  const toggle = () => setValue(x => !x);
 
   return { value, setValue, setTrue, setFalse, toggle };
 }
@@ -4953,25 +4953,25 @@ const Button = styled.button`
   cursor: pointer;
 
   // Using props to create a gray variant of the button
-  ${(props) =>
+  ${props =>
     props.gray &&
     css`
       background-color: #95a5a6;
     `}
   // Using props to create a green variant of the button
-  ${(props) =>
+  ${props =>
     props.green &&
     css`
       background-color: #2ecc71;
     `}
   // Using props to create a red variant of the button
-  ${(props) =>
+  ${props =>
     props.red &&
     css`
       background-color: #e74c3c;
     `}
   // We can also use a ternary operator for "binary" changes
-  color: ${(props) => (props.gray ? '#2c3e50' : '#fff')};
+  color: ${props => (props.gray ? '#2c3e50' : '#fff')};
 `;
 
 const WrapperContainer = () => (
@@ -5010,7 +5010,7 @@ ReactDOM.render(<WrapperContainer />, container);
 ```jsx
 import { DatePicker as LibraryXDatePicker } from 'LibraryX';
 
-const DatePicker = (props) => {
+const DatePicker = props => {
   return <LibraryXDatePicker {...props} />;
 };
 

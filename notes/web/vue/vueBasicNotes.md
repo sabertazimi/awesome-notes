@@ -416,7 +416,7 @@ export function makeMap(
   for (let i = 0; i < list.length; i++) {
     map[list[i]] = true;
   }
-  return expectsLowerCase ? (val) => map[val.toLowerCase()] : (val) => map[val];
+  return expectsLowerCase ? val => map[val.toLowerCase()] : val => map[val];
 }
 
 /**
@@ -606,7 +606,7 @@ export function looseEqual(a: any, b: any): boolean {
         const keysB = Object.keys(b);
         return (
           keysA.length === keysB.length &&
-          keysA.every((key) => {
+          keysA.every(key => {
             return looseEqual(a[key], b[key]);
           })
         );
@@ -763,10 +763,10 @@ let changeName = new Proxy(_data, {
 
 ```js
 Array.from(el.getElementsByTagName('input'))
-  .filter((ele) => {
+  .filter(ele => {
     return ele.getAttribute('v-model');
   })
-  .forEach((input) => {
+  .forEach(input => {
     let name = input.getAttribute('v-model');
     input.value = changeName[name];
 

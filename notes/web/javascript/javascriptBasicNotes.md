@@ -102,20 +102,19 @@ console.log(typeof badString); // object
 console.log(badString instanceof String); // true
 console.log(Object.prototype.toString.call(badString)); // [object String]
 
-const isPrimitiveString = (value) => typeof value === 'string';
+const isPrimitiveString = value => typeof value === 'string';
 console.log(isPrimitiveString(goodString)); // true
 console.log(isPrimitiveString(badString)); // false
 
-const isObjectWrappedString = (value) => value instanceof String;
+const isObjectWrappedString = value => value instanceof String;
 console.log(isObjectWrappedString(goodString)); // false
 console.log(isObjectWrappedString(badString)); // true
 
-const isString = (value) =>
-  typeof value === 'string' || value instanceof String;
+const isString = value => typeof value === 'string' || value instanceof String;
 console.log(isString(goodString)); // true
 console.log(isString(badString)); // true
 
-const isStringAlternative = (value) =>
+const isStringAlternative = value =>
   Object.prototype.toString.call(badString) === '[object String]';
 console.log(isStringAlternative(goodString)); // true
 console.log(isStringAlternative(badString)); // true
@@ -220,7 +219,7 @@ const nextMonth = (year, month) => {
 ```js
 const getDateItemList = (year, month) => {
   const days = daysOfMonth(year, month);
-  const currentDateItemList = [...Array(days).keys()].map((index) => {
+  const currentDateItemList = [...Array(days).keys()].map(index => {
     return DateItem(year, month, 1 + index);
   });
 
@@ -231,7 +230,7 @@ const getDateItemList = (year, month) => {
   const prefixFirstDay = lastMonthDays - prefixDays + 1;
   const prefixYear = prevYear(year);
   const prefixMonth = prevMonth(year, month);
-  const prefixDateItemList = [...Array(prefixDays).keys()].map((index) => {
+  const prefixDateItemList = [...Array(prefixDays).keys()].map(index => {
     return DateItem(prefixYear, prefixMonth, prefixFirstDay + index);
   });
 
@@ -240,7 +239,7 @@ const getDateItemList = (year, month) => {
   const suffixDays = lastDayWeekday === 6 ? 7 : 6 - lastDayWeekday;
   const suffixYear = nextYear(year);
   const suffixMonth = nextMonth(year, month);
-  const suffixDateItemList = [...Array(suffixDays).keys()].map((index) => {
+  const suffixDateItemList = [...Array(suffixDays).keys()].map(index => {
     return DateItem(suffixYear, suffixMonth, 1 + index);
   });
 
@@ -2734,7 +2733,7 @@ DOMContentLoaded:
   而所有资源加载完成之后, **load** 事件才会被触发
 
 ```js
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', event => {
   console.log('DOM fully loaded and parsed.');
 });
 ```
@@ -2785,7 +2784,7 @@ document.addEventListener('visibilitychange', handleVisibilityChange, false);
 ```js
 // <form className='validated-form' noValidate onSubmit={onSubmit}>
 
-const onSubmit = (event) => {
+const onSubmit = event => {
   event.preventDefault();
 
   const form = event.target;
@@ -2825,7 +2824,7 @@ function validateForm(e) {
     // form is invalid - cancel submit
     e.preventDefault();
     // apply invalid class
-    Array.from(form.elements).forEach((i) => {
+    Array.from(form.elements).forEach(i => {
       if (i.checkValidity()) {
         // field is valid - remove class
         i.parentElement.classList.remove('invalid');
@@ -2847,7 +2846,7 @@ function validateForm(e) {
 ```js
 const input = document.querySelector('input');
 
-input.addEventListener('select', (event) => {
+input.addEventListener('select', event => {
   const log = document.getElementById('log');
   const selection = event.target.value.substring(
     event.target.selectionStart,
@@ -2890,7 +2889,7 @@ window.addEventListener('click', (event) => {
 ```js
 const noContext = document.getElementById('noContextMenu');
 
-noContext.addEventListener('contextmenu', (e) => {
+noContext.addEventListener('contextmenu', e => {
   e.preventDefault();
 });
 ```
@@ -2946,7 +2945,7 @@ document.onkeydown = function (event) {
 ```js
 const source = document.querySelector('div.source');
 
-source.addEventListener('copy', (event) => {
+source.addEventListener('copy', event => {
   const selection = document.getSelection();
   event.clipboardData.setData(
     'text/plain',
@@ -3056,7 +3055,7 @@ function addLoadEvent(func) {
 ```js
 window.addEventListener(
   'hashchange',
-  (event) => {
+  event => {
     // event.oldURL
     // event.nweURL
     if (location.hash === '#someCoolFeature') {
@@ -3128,7 +3127,7 @@ if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
 - scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素大小
 
 ```js
-const isElementInViewport = (el) => {
+const isElementInViewport = el => {
   const { top, height, left, width } = el.getBoundingClientRect();
   const w = window.innerWidth || document.documentElement.clientWidth;
   const h = window.innerHeight || document.documentElement.clientHeight;
@@ -3150,8 +3149,8 @@ Mutation Observer 有以下特点:
 - 它即可以观察发生在 DOM 节点的所有变动，也可以观察某一类变动
 
 ```js
-const mutationObserver = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
+const mutationObserver = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
     console.log(mutation);
   });
 });
@@ -3170,7 +3169,7 @@ mutationObserver.observe(document.documentElement, {
 ```js
 const target = document.querySelector('#container');
 const callback = (mutations, observer) => {
-  mutations.forEach((mutation) => {
+  mutations.forEach(mutation => {
     switch (mutation.type) {
       case 'attributes':
         // the name of the changed attribute is in

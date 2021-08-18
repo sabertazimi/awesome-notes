@@ -45,22 +45,22 @@ class Coder {
 // BAD: filter by any other new property have to change CodeFilter's code.
 class CoderFilter {
   filterByName(coders, fullName) {
-    return coders.filter((coder) => coder.fullName === fullName);
+    return coders.filter(coder => coder.fullName === fullName);
   }
 
   filterByLang(coders, language) {
-    return coders.filter((coder) => coder.language === language);
+    return coders.filter(coder => coder.language === language);
   }
 
   filterByHobby(coders, hobby) {
-    return coders.filter((coder) => coder.hobby === hobby);
+    return coders.filter(coder => coder.hobby === hobby);
   }
 }
 
 // GOOD
 class CoderFilter {
   filterByProp = (array, propName, value) =>
-    array.filter((element) => element[propName] === value);
+    array.filter(element => element[propName] === value);
 }
 ```
 
@@ -1019,7 +1019,7 @@ const MenuBar = {
 
 // client: command object
 // command: object with `action` implemented
-const Command = (receiver) => {
+const Command = receiver => {
   return function () {
     receiver.action();
   };
@@ -1027,12 +1027,12 @@ const Command = (receiver) => {
 const RefreshMenuBarCommand = Command(MenuBar);
 
 // executor
-button.setCommand = (command) => {
+button.setCommand = command => {
   button.command = command;
 };
 button.setCommand(RefreshMenuBarCommand);
 
-button.addEventLister('click', (event) => {
+button.addEventLister('click', event => {
   button.command();
 });
 ```
@@ -1555,16 +1555,16 @@ const activity = (type, price) => {
 
 ```js
 const activity = new Map([
-  ['pre', (price) => price * 0.95],
-  ['onSale', (price) => price * 0.9],
-  ['back', (price) => price * 0.85],
-  ['limit', (price) => price * 0.8],
+  ['pre', price => price * 0.95],
+  ['onSale', price => price * 0.9],
+  ['back', price => price * 0.85],
+  ['limit', price => price * 0.8],
 ]);
 
 const getActivityPrice = (type, price) => activity.get(type)(price);
 
 // 新增新手活动
-activity.set('newcomer', (price) => price * 0.7);
+activity.set('newcomer', price => price * 0.7);
 ```
 
 ### IOC and DI Pattern

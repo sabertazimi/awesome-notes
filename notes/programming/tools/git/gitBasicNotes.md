@@ -776,14 +776,14 @@ Git.Repository.open(path.resolve('./.git'))
 
     return walker.fileHistoryWalk(historyFile, 2);
   })
-  .then((resultingArrayOfCommits) => {
+  .then(resultingArrayOfCommits => {
     if (resultingArrayOfCommits.length > 0) {
       const commit = resultingArrayOfCommits[0].commit;
       const date = commit.date();
     }
   });
 
-const getGitLastUpdatedTimeStamp = (filePath) => {
+const getGitLastUpdatedTimeStamp = filePath => {
   let lastUpdated = 0;
 
   try {

@@ -92,11 +92,11 @@ const currentVersion = require('../package.json').version;
 
 const versionIncrements = ['patch', 'minor', 'major'];
 
-const inc = (i) => semver.inc(currentVersion, i);
-const bin = (name) => path.resolve(__dirname, `../node_modules/.bin/${name}`);
+const inc = i => semver.inc(currentVersion, i);
+const bin = name => path.resolve(__dirname, `../node_modules/.bin/${name}`);
 const run = (bin, args, opts = {}) =>
   execa(bin, args, { stdio: 'inherit', ...opts });
-const step = (msg) => console.log(chalk.cyan(msg));
+const step = msg => console.log(chalk.cyan(msg));
 
 async function main() {
   let targetVersion;
@@ -105,9 +105,7 @@ async function main() {
     type: 'select',
     name: 'release',
     message: 'Select release type',
-    choices: versionIncrements
-      .map((i) => `${i} (${inc(i)})`)
-      .concat(['custom']),
+    choices: versionIncrements.map(i => `${i} (${inc(i)})`).concat(['custom']),
   });
 
   if (release === 'custom') {
@@ -198,7 +196,7 @@ function updatePackage(version) {
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
 }
 
-main().catch((err) => console.error(err));
+main().catch(err => console.error(err));
 ```
 
 ### Semantic Version
@@ -578,14 +576,14 @@ function fibonacci(num) {
 }
 
 if (isMainThread) {
-  module.exports = (n) =>
+  module.exports = n =>
     new Promise((resolve, reject) => {
       const worker = new Worker(__filename, {
         workerData: n,
       });
       worker.on('message', resolve);
       worker.on('error', reject);
-      worker.on('exit', (code) => {
+      worker.on('exit', code => {
         if (code !== 0) {
           reject(new Error(`Worker stopped with exit code ${code}`));
         }
