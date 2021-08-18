@@ -6475,6 +6475,14 @@ nonce only CSP block 3rd scripts and dynamic scripts generate by trusted users,
 </script>
 ```
 
+```html
+<!-- Given this CSP header -->
+Content-Security-Policy: script-src https://example.com/
+
+<!-- The following third-party script will not be loaded or executed -->
+<script src="https://not-example.com/js/library.js"></script>
+```
+
 ### Trusted Types
 
 - TrustedURL
