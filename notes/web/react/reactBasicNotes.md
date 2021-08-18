@@ -4683,17 +4683,21 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 }
 ```
 
-### Other Packages in CRA Repo
+### CRA Usage
 
-- `babel-preset-react-app`: babel preset configuration
-- `cra-template`/`cra-template-typescript`: CRA default templates
-- `eslint-config-react-app`: eslint configuration
-- `react-app-polyfill`: polyfills for various browsers
-- `react-dev-utils`: most utility functions
-  for paths, helpers, middleware, and webpack plugins.
+#### CRA CSS
 
-### CRA Deployment
+```css
+@import-normalize; /* bring in normalize.css styles */
 
+/* rest of app styles */
+```
+
+#### CRA Deployment
+
+
+- [Official Documentation](https://facebook.github.io/create-react-app/docs/deployment).
+- [Deploy Subdirectory](https://medium.com/@svinkle/how-to-deploy-a-react-app-to-a-subdirectory-f694d46427c1).
 - Change `homepage` in `package.json`.
 - Use `path={`${process.env.PUBLIC_URL}/about`}`
   in `Routes.js` when using `react-router-dom`.
@@ -4712,6 +4716,15 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 - custom `packages/react-scripts/config/`:
   change paths, deps/devDeps, plugins, loader rules etc.
 - custom `packages/react-scripts/scripts/`: change react-scripts CLI behaviors.
+
+#### Other Packages in CRA Repo
+
+- `babel-preset-react-app`: babel preset configuration
+- `cra-template`/`cra-template-typescript`: CRA default templates
+- `eslint-config-react-app`: eslint configuration
+- `react-app-polyfill`: polyfills for various browsers
+- `react-dev-utils`: most utility functions
+  for paths, helpers, middleware, and webpack plugins.
 
 #### Custom React Scripts
 
@@ -4737,7 +4750,7 @@ Due to version checking for template feature,
 custom react scripts should
 publish with version `^3.3.0` or `^4.x.x`.
 
-#### CRA Templates
+#### Custom CRA Templates
 
 HTML/CSS/JSX boilerplate in `react-scripts/template/` directory,
 now Templates are always named in the format cra-template-[template-name]
@@ -4763,11 +4776,6 @@ if (!fs.existsSync(paths.appTypeDeclarations)) {
   );
 }
 ```
-
-### Deployment
-
-- [Official Documentation](https://facebook.github.io/create-react-app/docs/deployment)
-- [Deploy Subdirectory](https://medium.com/@svinkle/how-to-deploy-a-react-app-to-a-subdirectory-f694d46427c1)
 
 ## Styled Component
 
