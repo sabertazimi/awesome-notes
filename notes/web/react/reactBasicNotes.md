@@ -338,6 +338,52 @@ ReactDOM.render({
 <Component /> 将被转换为 React.createElement(Component)
 ```
 
+#### JSX Transform
+
+- [New JSX transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
+
+```js
+import React from 'react';
+
+function App() {
+  return React.createElement('h1', null, 'Hello world');
+}
+```
+
+```js
+// Inserted by a compiler
+import { jsx as _jsx } from 'react/jsx-runtime';
+
+function App() {
+  return _jsx('h1', { children: 'Hello world' });
+}
+```
+
+ESLint config for new JSX transform:
+
+```json
+{
+  "rules": {
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
+  }
+}
+```
+
+TypeScript config for new JSX transform:
+
+```json
+{
+  "include": ["./src/**/*"],
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es2015",
+    "jsx": "react-jsx",
+    "strict": true
+  }
+}
+```
+
 ### Functional and Class component
 
 - 函数型组件没有实例, 类型组件具有实例, 但实例化的工作由 react 自动完成
