@@ -678,6 +678,7 @@
 
 - [FileAPI](https://github.com/mailru/FileAPI)
 - [Globby](https://github.com/sindresorhus/globby)
+- [Chokidar: Efficient cross-platform file watching library](https://github.com/paulmillr/chokidar)
 - [Steno: Specialized fast async file writer](https://github.com/typicode/steno)
 - [JS Zip](https://github.com/Stuk/jszip)
 - [File Type](https://github.com/sindresorhus/file-type)
