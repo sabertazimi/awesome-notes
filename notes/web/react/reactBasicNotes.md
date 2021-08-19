@@ -4817,7 +4817,9 @@ const App = () => (
 - `Cache-Control: max-age=31536000` for `build/static` assets,
   `Cache-Control: no-cache` for everything else.
   `build/static` file contents hash is embedded into the filename.
-- Change `homepage` in `package.json`.
+- Change `homepage` in `package.json`:
+  - `"homepage": "."`.
+  - `"homepage": "https://example.com/relative/path/"`.
 - Use `path={`${process.env.PUBLIC_URL}/about`}`
   in `Routes.js` when using `react-router-dom`.
 - Or use `basename` for `react-router@^4`.
