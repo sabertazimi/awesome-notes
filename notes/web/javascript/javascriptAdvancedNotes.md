@@ -7483,8 +7483,16 @@ module.exports = {
 
 #### Code Splitting
 
-- require.ensure([], () => {});
-- async await import
+- `require.ensure([], () => {});`.
+- async/await `import`.
+- `React.Suspense` and `React.lazy`.
+- Route-based [code splitting](https://reactjs.org/docs/code-splitting.html#route-based-code-splitting).
+- `vendor.[hash].chunk.js`:
+  splitting vendor and application code
+  is to enable long term caching techniques
+  Since vendor code tends to change less often than the actual application code,
+  browser will be able to cache them separately,
+  and won't re-download them each time the app code changes.
 
 ```js
 {
