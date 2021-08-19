@@ -4771,6 +4771,7 @@ render() {
   - `npm start`: `.env.development.local`>`.env.local`>`.env.development`>`.env`.
   - `npm run build`: `.env.production.local`>`.env.local`>`.env.production`>`.env`.
   - `npm test`: `.env.test.local`>`.env.test`>`.env`.
+- Environment variables [list](https://create-react-app.dev/docs/advanced-configuration).
 
 ```bash
 REACT_APP_NOT_SECRET_CODE=abcdef
