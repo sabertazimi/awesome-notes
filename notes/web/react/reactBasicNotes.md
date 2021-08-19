@@ -4814,6 +4814,9 @@ const App = () => (
 
 - [Official Documentation](https://facebook.github.io/create-react-app/docs/deployment).
 - [Deploy Subdirectory](https://medium.com/@svinkle/how-to-deploy-a-react-app-to-a-subdirectory-f694d46427c1).
+- `Cache-Control: max-age=31536000` for `build/static` assets,
+  `Cache-Control: no-cache` for everything else.
+  `build/static` file contents hash is embedded into the filename.
 - Change `homepage` in `package.json`.
 - Use `path={`${process.env.PUBLIC_URL}/about`}`
   in `Routes.js` when using `react-router-dom`.
