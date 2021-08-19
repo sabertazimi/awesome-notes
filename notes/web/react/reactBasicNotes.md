@@ -4806,6 +4806,10 @@ const App = () => (
 </div>
 ```
 
+#### CRA Service Worker
+
+- [PWA Template](https://github.com/cra-template/pwa)
+
 #### CRA Deployment
 
 - [Official Documentation](https://facebook.github.io/create-react-app/docs/deployment).
