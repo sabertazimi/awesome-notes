@@ -272,6 +272,7 @@
 - [React Chat Widget](https://github.com/Wolox/react-chat-widget)
 - [Matrix](https://github.com/matrix-org/matrix-react-sdk)
 - [JsSIP: Chat Library](https://github.com/versatica/JsSIP)
+- [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
 
 ### Comments System
 
@@ -290,35 +291,26 @@
 
 #### Prompt and Toast Message
 
-- [React Hot Toast](https://github.com/timolins/react-hot-toast)
-- [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
-- [Popper.js](https://github.com/popperjs/popper-core)
-- [Humane.js](https://github.com/wavded/humane-js)
-- [Desktop Notification](https://github.com/Nickersoft/push.js)
-- [Nodejs Notification](https://github.com/mikaelbr/node-notifier)
-- [Messenger: Awesome prompt message](https://github.com/HubSpot/messenger)
-
-#### Alert Message
-
 - [Sweet Alert 2](https://github.com/sweetalert2/sweetalert2)
-- [Sweet Alert](https://github.com/t4t5/sweetalert)
+- [React Hot Toast](https://github.com/timolins/react-hot-toast)
+- [NotiStack: Highly customizable notification snack bars](https://github.com/iamhosseindhv/notistack)
+- [Popper.js](https://github.com/popperjs/popper-core)
+- [Push.js: Browser notification framework](https://github.com/Nickersoft/push.js)
+- [Notifier: Native desktop notification](https://github.com/mikaelbr/node-notifier)
 
-### Guide Message
-
-- [JoyRide: Awesome guided tours](https://github.com/gilbarbara/react-joyride)
-- [Shepherd: Guide tour library](https://github.com/shipshapecode/shepherd)
-- [Intro.js](https://github.com/usablica/intro.js)
-
-#### Focus
-
-- [driver.js](https://github.com/kamranahmedse/driver.js)
-
-#### Tooltip
+#### Tooltip Message
 
 - [tippy.js](https://github.com/atomiks/tippyjs)
 - [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
 - [Hint.css Tooltips](https://github.com/chinchang/hint.css)
 - [React Tooltip](https://github.com/tvkhoa/react-tippy)
+
+#### Guide Message
+
+- [JoyRide: Awesome guided tours](https://github.com/gilbarbara/react-joyride)
+- [Shepherd: Guide tour library](https://github.com/shipshapecode/shepherd)
+- [Intro.js](https://github.com/usablica/intro.js)
+- [driver.js](https://github.com/kamranahmedse/driver.js)
 
 ### Form
 
@@ -605,6 +597,7 @@
 - [MIDI.js](https://github.com/mudcube/MIDI.js)
 - [TypeScript Audio](https://github.com/EvandroLG/ts-audio)
 - [Meyda: Audio feature extraction](https://github.com/meyda/meyda)
+- [WaveSurfer: Navigable waveform built on Web Audio and Canvas](https://github.com/katspaugh/wavesurfer.js)
 
 ### Video
 
