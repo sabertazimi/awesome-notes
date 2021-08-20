@@ -2445,6 +2445,12 @@ initial -> before HTML -> before head -> in head -> after head
 -> in body -> after body -> after after body -> EOF token
 ```
 
+HTML parser performance:
+
+- `<= 1500` DOM nodes.
+- `<= 60` children nodes.
+- `<= 32` levels.
+
 #### CSS Parser
 
 CSS is context-free grammar.
