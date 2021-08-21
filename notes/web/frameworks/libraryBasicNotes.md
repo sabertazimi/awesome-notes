@@ -634,6 +634,14 @@
 - [Block Editor](https://github.com/codex-team/editor.js)
 - [React Editor](https://github.com/concrete-utopia/utopia)
 
+### Live Editor and Playground
+
+- [React Live: A flexible playground for live editing React components](https://github.com/FormidableLabs/react-live)
+
+### Markdown Render
+
+- [Prism React Renderer](https://github.com/FormidableLabs/prism-react-renderer)
+
 ## SMS
 
 ### Phone
@@ -751,10 +759,6 @@
 - [XML Parser](https://github.com/TobiasNickel/tXml)
 - [SVG Parser](https://github.com/sebmarkbage/art)
 - [Yozora: Markdown parser](https://github.com/yozorajs/yozora)
-
-### Render
-
-- [Prism React Renderer](https://github.com/FormidableLabs/prism-react-renderer)
 
 ## Daemon
 
