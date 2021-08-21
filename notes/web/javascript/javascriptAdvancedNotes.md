@@ -2534,16 +2534,25 @@ Paint Order:
 
 ### Memory Leak
 
-- useless global vars (bind to window or document)
-- useless DOM reference
-- incorrect closure
-  - useless callback functions
-  - forgotten timer from setTimeout/setInterval
-- forgotten event listener
-- forgotten subscriber
-- forgotten console log
-- forgotten Set/Map (while WeakSet/WeakMap don't bother GC)
-- circular reference
+- Useless global vars (bind to window or document).
+- Useless DOM reference.
+- Incorrect closure.
+  - Useless callback functions.
+  - Forgotten timer from setTimeout/setInterval.
+- Forgotten tick timer.
+- Forgotten event listener.
+- Forgotten subscriber.
+- Forgotten console log.
+- Forgotten Set/Map (while WeakSet/WeakMap don't bother GC).
+- Circular reference.
+
+#### Bad Delete Operator
+
+`delete` 操作符并不会释放内存,
+而且会使得附加到对象上的 `hidden class`
+(`V8` 为了优化属性访问时间而创建的隐藏类)
+失效,
+让对象变成 `slow object`.
 
 ### 禁用特性
 
