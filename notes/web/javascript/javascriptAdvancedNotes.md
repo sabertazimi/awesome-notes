@@ -4518,6 +4518,7 @@ Tool for composite stage analysis
 ### ESLint
 
 - [ESLint Promise](https://github.com/xjamundx/eslint-plugin-promise)
+- [ESLint Import](https://github.com/import-js/eslint-plugin-import)
 - [ESLint Unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
 - [ESLint JSX A11Y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
 - [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
@@ -7646,6 +7647,7 @@ npx webpack --mode production --profile --json > stats.json
 #### Webpack JavaScript Plugins
 
 - [UglifyJS Terser Plugin](https://github.com/webpack-contrib/terser-webpack-plugin)
+- [Circular Dependency Plugin](https://github.com/aackerman/circular-dependency-plugin)
 
 #### Webpack CSS Plugins
 
