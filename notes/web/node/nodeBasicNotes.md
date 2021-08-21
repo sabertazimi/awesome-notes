@@ -477,6 +477,27 @@ server.on('request', function(req, res) {
 - `/node_modules/module/package.json` (if it specifies a `main` property)
 - `/node_modules/module/index.js`
 
+## Node Module
+
+### CommonJS Module
+
+- `CommonJS` 模块一般由包管理器提供的运行时实现.
+- 由于 `require` 语句直接分割了执行的代码块,
+  `CommonJS` 模块的导入导出语句的位置会影响模块代码语句的执行结果.
+
+### EcmaScript Module
+
+- `ES6` 模块借助 `JS` 引擎实现.
+  `JS` 引擎实现了 `ES6` 模块的底层核心逻辑.
+- `ES6` 模块有 5 种状态,
+  分别为 `unlinked`, `linking`, `linked`, `evaluating` and `evaluated`
+  (Module Environment Records).
+- 由于连接阶段会给导入模块变量创建绑定并初始化为子模块的对应变量,
+  子模块的对应变量在评估阶段会先被赋值,
+  所以导入模块变量获得了和函数声明变量一样的提升效果.
+  `ES6` 模块的 `import/export` 位置不影响模块代码语句的执行结果.
+- Experimental `.mjs` file.
+
 ## Process Module
 
 ### Process Properties
