@@ -12,6 +12,8 @@
 - Functional programming without details on DOM manipulation.
 - Virtual Dom 很多时候都不是最优的操作,
   但它具有普适性, 在效率与可维护性之间达到平衡.
+- [SnabbDOM](https://github.com/snabbdom/snabbdom):
+  virtual DOM library focus on modularity and performance.
 
 ### React Fiber
 
