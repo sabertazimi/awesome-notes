@@ -1498,7 +1498,9 @@ assert 表达式:字符串信息
 
 #### JUnit 框架单元测试
 
+```java
 import static org.JUnit.Assert.\*
+```
 
 为每个类构置一个 main 方法进行单元测试
 
