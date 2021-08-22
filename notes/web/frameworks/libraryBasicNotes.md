@@ -706,7 +706,9 @@
 
 - [React Search Bar](https://github.com/searchkit/searchkit)
 - [SearchKit](https://github.com/searchkit/searchkit)
-- [Full Text Search Engine](https://github.com/olivernn/lunr.js)
+- [Lunr.js: Full text search engine](https://github.com/olivernn/lunr.js)
+- [Solr: A solr client for node.js](https://github.com/lbdremy/solr-node-client)
+- [Docusaurus plugin: Local search plugin based on lunr.js](https://github.com/easyops-cn/docusaurus-search-local)
 
 ## CLI
 
