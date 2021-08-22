@@ -674,6 +674,7 @@
 
 ### File Downloader
 
+- [FileSaver: HTML5 `saveAs` implementation](https://github.com/eligrey/FileSaver.js/)
 - [You Get](https://github.com/soimort/you-get)
 - [Motrix](https://github.com/agalwood/Motrix)
 
