@@ -475,7 +475,7 @@ e.g 左子树：左下方 右子树：右上方
 
 ![Search Algorithm Performance](./figures/SearchPerformance.jpg)
 
-### cycle detection
+### Cycle Detection
 
 - 许多图论算法不适用于存在环路的复杂图,故使用循环检测剔除意外情况
 
