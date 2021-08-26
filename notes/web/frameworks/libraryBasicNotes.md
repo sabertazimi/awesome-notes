@@ -366,7 +366,7 @@
 - [HTML5 Chart](https://github.com/chartjs/Chart.js)
 - [Plotly.js](https://github.com/plotly/plotly.js)
 
-### Slides
+### Slides and Presentation
 
 - [MDX Deck](https://github.com/jxnblk/mdx-deck)
 - [React Spectacle](https://github.com/FormidableLabs/spectacle)
@@ -681,6 +681,7 @@
 ### File Utils
 
 - [FileAPI](https://github.com/mailru/FileAPI)
+- [FS Extra](https://github.com/jprichardson/node-fs-extra)
 - [Globby](https://github.com/sindresorhus/globby)
 - [Chokidar: Efficient cross-platform file watching library](https://github.com/paulmillr/chokidar)
 - [Steno: Specialized fast async file writer](https://github.com/typicode/steno)
