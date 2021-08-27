@@ -138,6 +138,7 @@
 - [Minimatch: Glob matcher](https://github.com/isaacs/minimatch)
 - [Globby: User-friendly glob matching](https://github.com/sindresorhus/globby)
 - [Git URL Parse](https://github.com/IonicaBizau/git-url-parse)
+- [Regex101](https://github.com/firasdib/Regex101)
 
 ### Concurrent and Parallel Programming Utils
 
