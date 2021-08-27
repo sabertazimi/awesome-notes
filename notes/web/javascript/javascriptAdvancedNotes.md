@@ -4395,6 +4395,81 @@ if (document.getElementById) {
 
 ## Chrome DevTools
 
+### DevTools Detection
+
+- [DevTools detection guide](https://github.com/546669204/fuck-debugger-extensions)
+
+#### Console DevTools Detection
+
+```js
+const x = document.createElement('div');
+
+Object.defineProperty(x, 'id', {
+  get: function () {
+    // devtool opened
+  },
+});
+
+console.log(x);
+```
+
+```js
+const c = new RegExp('1');
+
+c.toString = function () {
+  // devtool opened
+};
+
+console.log(c);
+```
+
+> Anti Method: hook `console` object, disable all outputs.
+
+#### Debugger Detection
+
+```js
+(function () {}.constructor('debugger')());
+```
+
+```js
+(() => {
+  function block() {
+    if (
+      window.outerHeight - window.innerHeight > 200 ||
+      window.outerWidth - window.innerWidth > 200
+    ) {
+      document.body.innerHTML = 'Debug detected, please reload page!';
+    }
+
+    setInterval(() => {
+      (function () {
+        return false;
+      }
+        ['constructor']('debugger')
+        ['call']());
+    }, 50);
+  }
+
+  try {
+    block();
+  } catch (err) {}
+})();
+```
+
+```js
+const startTime = new Date();
+debugger;
+const endTime = new Date();
+const isDev = endTime - startTime > 100;
+
+while (true) {
+  debugger;
+}
+```
+
+> Anti Method: use chrome protocol to block all `debugger` request.
+> Anti Method: hook `Function.prototype.constructor` and replace `debugger` string.
+
 ### Chrome DevTools Shortcuts
 
 - c-d: go to next word
