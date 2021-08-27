@@ -89,6 +89,7 @@
 
 ### React Redux
 
+- [Rematch: Redux framework](https://github.com/rematch/rematch)
 - [Redux Helper Tools](https://github.com/reduxjs/redux-starter-kit)
 - [Reselect](https://github.com/reactjs/reselect)
 
