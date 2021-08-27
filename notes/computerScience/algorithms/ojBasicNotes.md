@@ -177,6 +177,12 @@ string left_rotate(string str, int offset) {
 }
 ```
 
+### Palindrome Problem
+
+- Reverse: `reverse === original`.
+- Recursion: `s[0] === s[length - 1] && isPalindrome(s.slice(1, length - 1))`
+- Dynamic programming: `s[i] === s[j] && dp[i+1][j-1]`.
+
 ## Map Theory
 
 ### Shortest Paths
