@@ -295,6 +295,7 @@
 
 - [Sweet Alert 2](https://github.com/sweetalert2/sweetalert2)
 - [React Hot Toast](https://github.com/timolins/react-hot-toast)
+- [React Toast Notifications](https://github.com/jossmac/react-toast-notifications)
 - [NotiStack: Highly customizable notification snack bars](https://github.com/iamhosseindhv/notistack)
 - [Popper.js](https://github.com/popperjs/popper-core)
 - [Push.js: Browser notification framework](https://github.com/Nickersoft/push.js)
