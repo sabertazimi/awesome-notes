@@ -477,7 +477,7 @@
 
 ## Internationalization Utils
 
-- [React i18n Next](https://github.com/i18next/react-i18next)
+- [React i18n](https://github.com/i18next/react-i18next)
 - [React Intl](https://github.com/formatjs/formatjs)
 - [Globalize: Leverages official Unicode CLDR JSON data](https://github.com/globalizejs/globalize)
 - [Dinero: Create, calculate, and format money in TypeScript](https://github.com/dinerojs/dinero.js)
