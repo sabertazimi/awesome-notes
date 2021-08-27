@@ -294,19 +294,19 @@
 #### Prompt and Toast Message
 
 - [Sweet Alert 2](https://github.com/sweetalert2/sweetalert2)
+- [React Toastify](https://github.com/fkhadra/react-toastify)
 - [React Hot Toast](https://github.com/timolins/react-hot-toast)
-- [React Toast Notifications](https://github.com/jossmac/react-toast-notifications)
 - [NotiStack: Highly customizable notification snack bars](https://github.com/iamhosseindhv/notistack)
-- [Popper.js](https://github.com/popperjs/popper-core)
 - [Push.js: Browser notification framework](https://github.com/Nickersoft/push.js)
 - [Notifier: Native desktop notification](https://github.com/mikaelbr/node-notifier)
 
 #### Tooltip Message
 
-- [tippy.js](https://github.com/atomiks/tippyjs)
+- [React Tippy](https://github.com/tvkhoa/react-tippy)
+- [Tippy.js](https://github.com/atomiks/tippyjs)
+- [Popper.js](https://github.com/popperjs/popper-core)
 - [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
 - [Hint.css Tooltips](https://github.com/chinchang/hint.css)
-- [React Tooltip](https://github.com/tvkhoa/react-tippy)
 
 #### Guide Message
 
@@ -364,7 +364,8 @@
 ### Charts Visualization
 
 - [AntV](https://github.com/antvis)
-- [React Chartjs](https://github.com/jhudson8/react-chartjs)
+- [ReaFlow: TSX library for building workflow editors, flow charts and diagrams](https://github.com/reaviz/reaflow)
+- [React ChartJS](https://github.com/jhudson8/react-chartjs)
 - [Sigma.js: Graph Drawing](https://github.com/jacomyal/sigma.js)
 - [HTML5 Chart](https://github.com/chartjs/Chart.js)
 - [Plotly.js](https://github.com/plotly/plotly.js)
