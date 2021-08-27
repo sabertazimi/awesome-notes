@@ -6980,6 +6980,10 @@ module.exports = function buildMeactPreset(context, options) {
 
 ## Webpack
 
+### Webpack Internals
+
+- [Webpack source code guide](https://segmentfault.com/a/1190000039956437)
+
 ### Webpack Watch Options
 
 ```bash
