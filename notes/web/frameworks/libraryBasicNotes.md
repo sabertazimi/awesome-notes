@@ -369,17 +369,19 @@
 - [HTML5 Chart](https://github.com/chartjs/Chart.js)
 - [Plotly.js](https://github.com/plotly/plotly.js)
 
+### Carousel
+
+- [React responsive carousel](https://github.com/leandrowd/react-responsive-carousel)
+- [Glider.js: Native scrolling carousel](https://github.com/NickPiscitelli/Glider.js)
+- [Slick: Gallery carousel](https://github.com/kenwheeler/slick)
+
 ### Slides and Presentation
 
+- [Reveal: HTML presentation framework](https://github.com/hakimel/reveal.js)
 - [MDX Deck](https://github.com/jxnblk/mdx-deck)
-- [React Spectacle](https://github.com/FormidableLabs/spectacle)
-- [Reveal.js HTML Presentation](https://github.com/hakimel/reveal.js)
-- [Glider.js](https://github.com/NickPiscitelli/Glider.js)
-- [SliDev](https://github.com/slidevjs/slidev)
-- [CLI Animation Presentation](https://github.com/neatsoftware/term-sheets)
-- [Awesome Prezi-Like Presentation](https://github.com/impress/impress.js)
-- [Awesome Slide Gallery](https://github.com/kenwheeler/slick)
-- [One Page Vertical Slide](https://github.com/MopTym/doSlide)
+- [Spectacle: React based presentation slides](https://github.com/FormidableLabs/spectacle)
+- [SliDev: Vue based presentation slides](https://github.com/slidevjs/slidev)
+- [Impress: Prezi-like presentation slides](https://github.com/impress/impress.js)
 
 ### iFrame
 
@@ -435,6 +437,10 @@
 - [Velocity: Accelerated JavaScript animation](https://github.com/julianshapiro/velocity)
 - [Barba.js: Smooth transition between pages](https://github.com/luruke/barba.js)
 - [Tilt: Smooth 3D tilt javascript library](https://github.com/micku7zu/vanilla-tilt.js)
+
+### CLI Animation
+
+- [CLI Animation](https://github.com/neatsoftware/term-sheets)
 
 ### Typing Effect Animation
 
