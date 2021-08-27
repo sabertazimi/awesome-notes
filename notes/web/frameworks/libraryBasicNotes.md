@@ -877,11 +877,11 @@
 
 ### Code Quality Tools
 
+- [Front End CheckList](https://github.com/thedaviddias/Front-End-Checklist)
 - [HTML Head Checklist](https://github.com/joshbuchea/HEAD)
 - [CSS Stats Tools](https://github.com/cssstats/cssstats)
 - [CSS Stats CLI](https://github.com/projectwallace/wallace-cli)
 - [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
-- [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint)
 - [JSCPD: Copy paste detector](https://github.com/kucherenko/jscpd)
 - [Size Limit: Calculate real cost to keep good performance](https://github.com/ai/size-limit)
 - [TypeScript unused exports detection](https://github.com/pzavolinsky/ts-unused-exports)
