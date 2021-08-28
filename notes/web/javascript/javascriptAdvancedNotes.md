@@ -3535,6 +3535,17 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 优先使用 PerformanceTimeline API
 (在复杂场景，亦可考虑优先使用 PerformanceObserver)
 
+```js
+重定向耗时 = redirectEnd - redirectStart;
+DNS 查询耗时 = domainLookupEnd - domainLookupStart;
+TCP 链接耗时 = connectEnd - connectStart;
+HTTP 请求耗时 = responseEnd - responseStart;
+解析 DOM 树耗时 = domComplete - domInteractive;
+白屏时间 = responseStart - navigationStart;
+DOMReady 时间 = domContentLoadedEventEnd - navigationStart;
+onload 时间 = loadEventEnd - navigationStart;
+```
+
 #### Monitoring Statistics Data
 
 First Meaningful Paint: 首次有效渲染时长,
