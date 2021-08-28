@@ -100,12 +100,12 @@ void update(int k, int a) {
 
 int query(int a, int b, int k, int l, int r) {
   // failed
-  if (r <= a || b <= 1) {
+  if (r <= a || b <= l) {
     return (numeric_limits<int>::max)();
   }
 
   // [l, r) <= [a, b)
-  if (a <= 1 && r <= b) {
+  if (a <= l && r <= b) {
     return dat[k];
   } else {
     int vl = query(a, b, k * 2 + 1, l, (l + r) / 2);
