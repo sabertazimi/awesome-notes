@@ -3340,13 +3340,16 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ## React Performance
 
+Less render times, less render nodes, less render calculations:
+
 - Use `key` correctly.
-- `shouldComponentUpdate`.
-- `React.memo/React.useMemo/React.PureComponent`:
+- `React.useMemo` and `React.useCallback` (no anonymous functions).
+- `shouldComponentUpdate`/`React.memo`/`React.PureComponent`:
   **shallow compare** on components
   to prevent unnecessary re-rendering **caused by parent components**.
-- `React.memo`: **shallow compare** diff.
-- Stateless component.
+- Lazy loading components (`React.lazy` and `React.Suspense`).
+- Virtualized Lists.
+- Stateless component: less props, less state, less nest (HOC or render props).
 - Immutable.js.
 - Isomorphic rendering.
 - Webpack bundle analyzer.
