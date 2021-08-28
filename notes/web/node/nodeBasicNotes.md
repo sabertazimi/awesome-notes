@@ -493,6 +493,54 @@ server.on('request', function(req, res) {
 - 由于 `require` 语句直接分割了执行的代码块,
   `CommonJS` 模块的导入导出语句的位置会影响模块代码语句的执行结果.
 
+```js
+const path = require('path');
+const fs = require('fs');
+const vm = require('vm');
+
+function Module(id) {
+  this.id = id;
+  this.exports = {};
+}
+
+Module.wrapper = [
+  '(function(exports, module, Require, __dirname, __filename) {',
+  '})',
+];
+
+Module._extensions = {
+  '.js'(module) {
+    const content = fs.readFileSync(module.id, 'utf8');
+    const fnStr = Module.wrapper[0] + content + Module.wrapper[1];
+    const fn = vm.runInThisContext(fnStr);
+    fn.call(
+      module.exports, // Bind `this` to `module.exports`
+      module.exports,
+      module,
+      Require,
+      _dirname
+      _filename,
+    );
+  },
+  '.json'(module) {
+    const json = fs.readFileSync(module.id, 'utf8');
+    module.exports = JSON.parse(json); // 把文件的结果放在exports属性上
+  },
+};
+
+function Require(modulePath) {
+  let absPathname = path.resolve(__dirname, modulePath);
+  const module = new Module(absPathname);
+  tryModuleLoad(module);
+  return module.exports;
+}
+
+function tryModuleLoad(module) {
+  const extension = path.extname(module.id);
+  Module._extensions[extension](module);
+}
+```
+
 ### EcmaScript Module
 
 - `ES6` 模块借助 `JS` 引擎实现.
