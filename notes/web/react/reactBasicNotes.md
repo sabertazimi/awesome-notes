@@ -3081,6 +3081,12 @@ ReactDOM.render(<App />, document.getElementById('root'));
 Context API provide a Dependency Injection style method,
 to provide values to children components.
 
+Context 中只定义被大多数组件所共用的属性,
+例如当前用户的信息, 主题或者选择的语言.
+频繁的 Context value 更改会导致依赖 value 的组件
+穿透 `shouldComponentUpdate`/`React.memo` 进行 `forceUpdate`,
+增加 `render` 次数, 从而导致性能问题.
+
 ```jsx
 function contextWrapper(WrappedComponent, Context) {
   return class extends React.Component {
