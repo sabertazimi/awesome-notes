@@ -93,13 +93,13 @@
 - [Redux Helper Tools](https://github.com/reduxjs/redux-starter-kit)
 - [Reselect](https://github.com/reactjs/reselect)
 
-### React Query
-
-- [React Query: Fetching, caching, synchronizing and updating server state](https://github.com/tannerlinsley/react-query)
-
 ### React Recoil
 
 - [React Recoil](https://github.com/facebookexperimental/Recoil)
+
+### React Query
+
+- [React Query: Fetching, caching, synchronizing and updating server state](https://github.com/tannerlinsley/react-query)
 
 ### React Hooks
 
