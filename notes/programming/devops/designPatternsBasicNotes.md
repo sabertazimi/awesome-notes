@@ -313,18 +313,52 @@ Universal Module Definition:
 
 #### Behavioral Patterns
 
-- Interpreter (解释器): 将语言元素包含在一个应用中的一种方式，用于匹配目标语言的语法.
-- Template Method (模板方法): 在一个方法中为某个算法建立一层外壳，将算法的具体步骤交付给子类去做.
 - Chain of Responsibility (响应链): 一种将请求在一串对象中传递的方式，寻找可以处理这个请求的对象.
 - Command (命令): 封装命令请求为一个对象，从而使记录日志，队列缓存请求，未处理请求进行错误处理 这些功能称为可能.
+- Interpreter (解释器): 将语言元素包含在一个应用中的一种方式，用于匹配目标语言的语法.
 - Iterator (迭代器): 在不需要直到集合内部工作原理的情况下，顺序访问一个集合里面的元素.
 - Mediator (中介者模式): 在类之间定义简化的通信方式，用于避免类之间显式的持有彼此的引用.
 - Observer (观察者模式): 用于将变化通知给多个类的方式，可以保证类之间的一致性.
-- State (状态): 当对象状态改变时，改变对象的行为.
 - Strategy (策略): 将算法封装到类中，将选择和实现分离开来.
+- State (状态): 当对象状态改变时，改变对象的行为.
+- Template Method (模板方法): 在一个方法中为某个算法建立一层外壳，将算法的具体步骤交付给子类去做.
 - Visitor (访问者): 为类增加新的操作而不改变类本身.
 
 ### Factory Method Pattern
+
+Creating objects without specify exact object class
+(not calling a constructor directly).
+
+```js
+CoordinateSystem = {
+  CARTESIAN: 0,
+  POLAR: 1,
+};
+
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  static get factory() {
+    return new PointFactory();
+  }
+}
+
+class PointFactory {
+  static newCartesianPoint(x, y) {
+    return new Point(x, y);
+  }
+
+  static newPolarPoint(rho, theta) {
+    return new Point(rho * Math.cos(theta), rho * Math.sin(theta));
+  }
+}
+
+const point = PointFactory.newPolarPoint(5, Math.PI / 2);
+const point2 = PointFactory.newCartesianPoint(5, 6);
+```
 
 ```js
 module.exports = (function () {
@@ -428,6 +462,50 @@ module.exports = (function () {
 
 ### Abstract Factory Pattern
 
+Encapsulate **a group of individual factories**
+that have a common theme without
+specifying their concrete classes.
+
+```js
+class Drink {
+  consume() {}
+}
+
+class Tea extends Drink {
+  consume() {
+    console.log('This is Tea');
+  }
+}
+
+class Coffee extends Drink {
+  consume() {
+    console.log(`This is Coffee`);
+  }
+}
+
+class DrinkFactory {
+  prepare(amount)
+}
+
+class TeaFactory extends DrinkFactory {
+  makeTea() {
+   console.log(`Tea Created`);
+   return new Tea();
+  }
+}
+
+class CoffeeFactory extends DrinkFactory {
+   makeCoffee() {
+   console.log(`Coffee Created`);
+   return new Coffee();
+  }
+}
+
+const teaDrinkFactory = new TeaFactory();
+const tea = teaDrinkFactory.makeTea()
+tea.consume()
+```
+
 ```js
 var AbstractVehicleFactory = (function () {
   // Storage for our vehicle types
@@ -455,14 +533,145 @@ var AbstractVehicleFactory = (function () {
 })();
 ```
 
+### Builder Pattern
+
+Flexible object creation with chain style calls.
+
+```js
+class Person {
+  constructor() {
+    this.streetAddress = '';
+    this.postcode = '';
+    this.city = '';
+    this.companyName = '';
+    this.position = '';
+    this.annualIncome = 0;
+  }
+
+  toString() {
+    return (
+      `Person lives at ${this.streetAddress}, ${this.city}, ${this.postcode}\n` +
+      `and works at ${this.companyName} as a ${this.position} earning ${this.annualIncome}`
+    );
+  }
+}
+
+class PersonBuilder {
+  constructor(person = new Person()) {
+    this.person = person;
+  }
+
+  get lives() {
+    return new PersonAddressBuilder(this.person);
+  }
+
+  get works() {
+    return new PersonJobBuilder(this.person);
+  }
+
+  build() {
+    return this.person;
+  }
+}
+
+class PersonJobBuilder extends PersonBuilder {
+  constructor(person) {
+    super(person);
+  }
+
+  at(companyName) {
+    this.person.companyName = companyName;
+    return this;
+  }
+
+  asA(position) {
+    this.person.position = position;
+    return this;
+  }
+
+  earning(annualIncome) {
+    this.person.annualIncome = annualIncome;
+    return this;
+  }
+}
+
+class PersonAddressBuilder extends PersonBuilder {
+  constructor(person) {
+    super(person);
+  }
+
+  at(streetAddress) {
+    this.person.streetAddress = streetAddress;
+    return this;
+  }
+
+  withPostcode(postcode) {
+    this.person.postcode = postcode;
+    return this;
+  }
+
+  in(city) {
+    this.person.city = city;
+    return this;
+  }
+}
+
+const personBuilder = new PersonBuilder();
+const person = personBuilder.lives
+  .at('ABC Road')
+  .in('Multan')
+  .withPostcode('66000')
+  .works.at('Beijing')
+  .asA('Engineer')
+  .earning(10000)
+  .build();
+```
+
 ### Prototype Pattern
 
 可以使用原型模式来减少创建新对象的成本.
 关键方法 `Object.create()`/`clone()`.
 
+```js
+class Car {
+  constructor(name, model) {
+    this.name = name;
+    this.model = model;
+  }
+
+  SetName(name) {
+    console.log(`${name}`);
+  }
+
+  clone() {
+    return new Car(this.name, this.model);
+  }
+}
+
+const car = new Car();
+car.SetName('Audi');
+
+const car2 = car.clone();
+car2.SetName('BMW');
+```
+
 ### Singleton Pattern
 
-使用场景: Redux, VueX 等状态管理工具, window 对象, 全局缓存等.
+> Use Case: Redux, VueX 等状态管理工具, window 对象, 全局缓存等.
+
+```js
+class Singleton {
+  constructor() {
+    const instance = this.constructor.instance;
+    if (instance) return instance;
+    this.constructor.instance = this;
+  }
+
+  say() {
+    console.log('Saying...');
+  }
+}
+```
 
 ```javascript
 function Universe() {
@@ -495,9 +704,51 @@ function Universe() {
 适配器通过内部使用新接口规定的属性/方法, 创建一个外观与旧接口一致的方法
 (兼容旧代码):
 
-- old.method().
-- adapter.method().
+- `old.method()`.
+- `adapter.method()`:
   实现此 method 时, 使用了新接口规定的属性/方法.
+
+```js
+class Calculator1 {
+  constructor() {
+    this.operations = function (value1, value2, operation) {
+      switch (operation) {
+        case 'add':
+          return value1 + value2;
+        case 'sub':
+          return value1 - value2;
+      }
+    };
+  }
+}
+
+class Calculator2 {
+  constructor() {
+    this.add = function (value1, value2) {
+      return value1 + value2;
+    };
+
+    this.sub = function (value1, value2) {
+      return value1 - value2;
+    };
+  }
+}
+
+class CalcAdapter {
+  constructor() {
+    const cal2 = new Calculator2();
+
+    this.operations = function (value1, value2, operation) {
+      switch (operation) {
+        case 'add':
+          return cal2.add(value1, value2);
+        case 'sub':
+          return cal2.sub(value1, value2);
+      }
+    };
+  }
+}
+```
 
 ```js
 // old interface
@@ -553,9 +804,52 @@ cost = adapter.request('78701', '10010', '2 lbs');
 
 ### Bridge Pattern
 
-分离抽象和实现/分离对象的两种不同属性.
+- Split large class or set of closely related classes
+  into two separate hierarchies:
+  - 分离抽象和实现 (Separate abstracts and implements).
+  - 分离对象的两种不同属性. `e.g` 从 2 个不同维度上扩展对象.
 
-e.g 从 2 个不同维度上扩展对象.
+```js
+class VectorRenderer {
+  renderCircle(radius) {
+    console.log(`Drawing a circle of radius ${radius}`);
+  }
+}
+
+class RasterRenderer {
+  renderCircle(radius) {
+    console.log(`Drawing pixels for circle of radius ${radius}`);
+  }
+}
+
+class Shape {
+  constructor(renderer) {
+    this.renderer = renderer;
+  }
+}
+
+class Circle extends Shape {
+  constructor(renderer, radius) {
+    super(renderer);
+    this.radius = radius;
+  }
+
+  draw() {
+    this.renderer.renderCircle(this.radius);
+  }
+
+  resize(factor) {
+    this.radius *= factor;
+  }
+}
+
+const raster = new RasterRenderer();
+const vector = new VectorRenderer();
+const circle = new Circle(vector, 5);
+circle.draw();
+circle.resize(2);
+circle.draw();
+```
 
 ### Composite Pattern
 
@@ -573,7 +867,7 @@ e.g 从 2 个不同维度上扩展对象.
 
 ### Decorator Pattern
 
-- 重写/重载/扩展对象原有的行为(method),但不改变对象原有属性
+- 重写/重载/扩展对象原有的行为 (method), 但不改变对象原有属性
 - 可以添加新属性，并围绕新属性扩展对象的原行为 e.g 原对象只会说中文，装饰后同时说中文与英文
 - 避免了通过继承来为类型添加新的职责的形式可取，通过继承的方式容易造成子类的膨胀
 - 保持接口的一致性，动态改变对象的外观/职责
@@ -795,8 +1089,55 @@ console.log(mb.screenSize());
 封装复杂逻辑.
 
 ```js
-var sabertazimi = {};
+class CPU {
+  freeze() {
+    console.log('Freezed....');
+  }
 
+  jump(position) {
+    console.log('Go....');
+  }
+
+  execute() {
+    console.log('Run....');
+  }
+}
+
+class Memory {
+  load(position, data) {
+    console.log('Load....');
+  }
+}
+
+class HardDrive {
+  read(lba, size) {
+    console.log('Read....');
+  }
+}
+
+class ComputerFacade {
+  constructor() {
+    this.processor = new CPU();
+    this.ram = new Memory();
+    this.hd = new HardDrive();
+  }
+
+  start() {
+    this.processor.freeze();
+    this.ram.load(
+      this.BOOT_ADDRESS,
+      this.hd.read(this.BOOT_SECTOR, this.SECTOR_SIZE)
+    );
+    this.processor.jump(this.BOOT_ADDRESS);
+    this.processor.execute();
+  }
+}
+
+const computer = new ComputerFacade();
+computer.start();
+```
+
+```js
 sabertazimi.addMyEvent = function (el, ev, fn) {
   if (el.addEventListener) {
     el.addEventListener(ev, fn, false);
@@ -896,7 +1237,27 @@ function ComputerCollection() {
 临时存储原对象方法调用产生的一系列结果 (新建对象),
 减少重复对象的产生.
 
-使用场景: 图片预加载, 缓存服务器, 处理跨域, 拦截器等.
+> Use Case: 图片预加载, 缓存服务器, 处理跨域, 拦截器等.
+
+```js
+class Percentage {
+  constructor(percent) {
+    this.percent = percent;
+  }
+
+  toString() {
+    return `${this.percent}&`;
+  }
+
+  valueOf() {
+    return this.percent / 100;
+  }
+}
+
+const fivePercent = new Percentage(5);
+console.log(fivePercent.toString());
+console.log(`5% of 50 is ${50 * fivePercent}`);
+```
 
 ```js
 function GeoCoder() {
@@ -916,8 +1277,8 @@ function GeoCoder() {
 }
 
 function GeoProxy() {
-  var geocoder = new GeoCoder();
-  var geocache = {};
+  const geocoder = new GeoCoder();
+  const geocache = {};
 
   return {
     getLatLng: function (address) {
@@ -928,7 +1289,7 @@ function GeoProxy() {
       return geocache[address];
     },
     getCount: function () {
-      var count = 0;
+      let count = 0;
       for (var code in geocache) {
         count++;
       }
@@ -936,6 +1297,91 @@ function GeoProxy() {
     },
   };
 }
+```
+
+### Chain of Responsibility Pattern
+
+一种将请求在一串对象中传递的方式，寻找可以处理这个请求的对象.
+
+> Use Case: Middlewares (Redux, Express, Koa).
+
+```js
+class Creature {
+  constructor(name, attack, defense) {
+    this.name = name;
+    this.attack = attack;
+    this.defense = defense;
+  }
+
+  toString() {
+    return `${this.name} (${this.attack}/${this.defense})`;
+  }
+}
+
+class CreatureModifier {
+  constructor(creature) {
+    this.creature = creature;
+    this.next = null;
+  }
+
+  // Build chains.
+  add(modifier) {
+    if (this.next) this.next.add(modifier);
+    else this.next = modifier;
+  }
+
+  // Pass objects along to chains.
+  handle() {
+    if (this.next) this.next.handle();
+  }
+}
+
+class NoBonusesModifier extends CreatureModifier {
+  constructor(creature) {
+    super(creature);
+  }
+
+  handle() {
+    console.log('No bonuses for you!');
+  }
+}
+
+class DoubleAttackModifier extends CreatureModifier {
+  constructor(creature) {
+    super(creature);
+  }
+
+  handle() {
+    console.log(`Doubling ${this.creature.name}'s attack`);
+    this.creature.attack *= 2;
+    super.handle(); // Call next();
+  }
+}
+
+class IncreaseDefenseModifier extends CreatureModifier {
+  constructor(creature) {
+    super(creature);
+  }
+
+  handle() {
+    if (this.creature.attack <= 2) {
+      console.log(`Increasing ${this.creature.name}'s defense`);
+      this.creature.defense++;
+    }
+    super.handle(); // Call next();
+  }
+}
+
+const peekachu = new Creature('Peekachu', 1, 1);
+console.log(peekachu.toString());
+
+const root = new CreatureModifier(peekachu);
+root.add(new DoubleAttackModifier(peekachu));
+root.add(new IncreaseDefenseModifier(peekachu));
+// Chain: creatureModifier -> doubleAttackModifier -> increaseDefenseModifier.
+root.handle();
+
+console.log(peekachu.toString());
 ```
 
 ### Command Pattern
@@ -1146,12 +1592,117 @@ Cursor.prototype = {
 一个 Iterator 对象封装访问和遍历一个聚集对象中的各个构件的方法.
 实现统一遍历接口, 符合单一功能和开放封闭原则.
 
-使用场景: 遍历对象.
+> Use Case: 遍历对象.
+
+```js
+class Stuff {
+  constructor() {
+    this.a = 11;
+    this.b = 22;
+  }
+
+  [Symbol.iterator]() {
+    const self = this;
+    let i = 0;
+
+    return {
+      next: function () {
+        return {
+          done: i > 1,
+          value: self[i++ === 0 ? 'a' : 'b'],
+        };
+      },
+    };
+  }
+
+  get backwards() {
+    const self = this;
+    let i = 0;
+
+    return {
+      next: function () {
+        return {
+          done: i > 1,
+          value: self[i++ === 0 ? 'b' : 'a'],
+        };
+      },
+      // Make iterator iterable
+      [Symbol.iterator]: function () {
+        return this;
+      },
+    };
+  }
+}
+
+const stuff = new Stuff();
+for (const item of stuff) console.log(`${item}`);
+for (const item of stuff.backwards) console.log(`${item}`);
+```
 
 ### Mediator Pattern
 
 一个 Mediator 对象封装对象间的协议:
 中央集权的控制中心 - 所有观察者共享一个共有的被观察者(所有订阅者订阅同一个节点).
+
+Defines an object that encapsulates how a set of objects interact:
+
+```js
+class Person {
+  constructor(name) {
+    this.name = name;
+    this.chatLog = [];
+  }
+
+  receive(sender, message) {
+    const s = `${sender}: '${message}'`;
+    console.log(`[${this.name}'s chat session] ${s}`);
+    this.chatLog.push(s);
+  }
+
+  say(message) {
+    this.room.broadcast(this.name, message);
+  }
+
+  pm(who, message) {
+    this.room.message(this.name, who, message);
+  }
+}
+
+class ChatRoom {
+  constructor() {
+    this.people = [];
+  }
+
+  broadcast(source, message) {
+    for (const p of this.people)
+      if (p.name !== source) p.receive(source, message);
+  }
+
+  join(p) {
+    const joinMsg = `${p.name} joins the chat`;
+    this.broadcast('room', joinMsg);
+    p.room = this;
+    this.people.push(p);
+  }
+
+  message(source, destination, message) {
+    for (const p of this.people)
+      if (p.name === destination) p.receive(source, message);
+  }
+}
+
+const room = new ChatRoom();
+const zee = new Person('Zee');
+const shan = new Person('Shan');
+
+room.join(zee);
+room.join(shan);
+zee.say('Hello!!');
+
+const doe = new Person('Doe');
+room.join(doe);
+doe.say('Hello everyone!');
+```
 
 ### Observer Pattern
 
@@ -1162,7 +1713,56 @@ Cursor.prototype = {
 - decouple subject and observer:
   each depends on `Abstraction` not `Implementation`.
 
-使用场景: 解耦, 跨层级通信, 事件绑定.
+> Use Case: 解耦, 跨层级通信, 事件绑定.
+
+```js
+class Event {
+  constructor() {
+    this.handlers = new Map();
+    this.count = 0;
+  }
+
+  subscribe(handler) {
+    this.handlers.set(++this.count, handler);
+    return this.count;
+  }
+
+  unsubscribe(idx) {
+    this.handlers.delete(idx);
+  }
+
+  fire(sender, args) {
+    this.handlers.forEach((v, k) => v(sender, args));
+  }
+}
+
+class FallsIllArgs {
+  constructor(address) {
+    this.address = address;
+  }
+}
+
+class Person {
+  constructor(address) {
+    this.address = address;
+    this.fallsIll = new Event();
+  }
+
+  catchCold() {
+    this.fallsIll.fire(this, new FallsIllArgs(this.address));
+  }
+}
+
+const person = new Person('ABC road');
+const sub = person.fallsIll.subscribe((s, a) => {
+  console.log(`A doctor has been called to ${a.address}`);
+});
+person.catchCold();
+person.catchCold();
+
+person.fallsIll.unsubscribe(sub);
+person.catchCold();
+```
 
 ```js
 function ObserverList() {
@@ -1530,13 +2130,148 @@ if (typeof module !== 'undefined' && 'exports' in module) {
 
 ### State Pattern
 
-一个 State 对象封装一个与状态相关的行为
+一个 State 对象封装一个与状态相关的行为,
+运用有限状态机 (Finite State Machines)
+根据 Object State 改变 Object Behavior.
+
+```js
+class Switch {
+  constructor() {
+    this.state = new OffState();
+  }
+
+  on() {
+    this.state.on(this);
+  }
+
+  off() {
+    this.state.off(this);
+  }
+}
+
+class State {
+  constructor() {
+    if (this.constructor === State) throw new Error('abstract!');
+  }
+
+  on(sw) {
+    console.log('Light is already on.');
+  }
+
+  off(sw) {
+    console.log('Light is already off.');
+  }
+}
+
+class OnState extends State {
+  constructor() {
+    super();
+    console.log('Light turned on.');
+  }
+
+  off(sw) {
+    console.log('Turning light off...');
+    sw.state = new OffState();
+  }
+}
+
+class OffState extends State {
+  constructor() {
+    super();
+    console.log('Light turned off.');
+  }
+
+  on(sw) {
+    console.log('Turning light on...');
+    sw.state = new OnState();
+  }
+}
+
+const switch = new Switch();
+switch.on();
+switch.off();
+```
 
 ### Strategy Pattern
 
 改变对象的内核/算法, 一个 Strategy 对象封装一个算法.
 
-使用场景: 表单验证, 存在大量 if-else 场景, 各种重构等.
+> Use Case: 表单验证, 存在大量 if-else 场景, 各种重构等.
+
+```js
+const OutputFormat = Object.freeze({
+  markdown: 0,
+  html: 1,
+});
+
+class ListStrategy {
+  start(buffer) {}
+  end(buffer) {}
+  addListItem(buffer, item) {}
+}
+
+class MarkdownListStrategy extends ListStrategy {
+  addListItem(buffer, item) {
+    buffer.push(` * ${item}`);
+  }
+}
+
+class HtmlListStrategy extends ListStrategy {
+  start(buffer) {
+    buffer.push('<ul>');
+  }
+
+  end(buffer) {
+    buffer.push('</ul>');
+  }
+
+  addListItem(buffer, item) {
+    buffer.push(`  <li>${item}</li>`);
+  }
+}
+
+class TextProcessor {
+  constructor(outputFormat) {
+    this.buffer = [];
+    this.setOutputFormat(outputFormat);
+  }
+
+  setOutputFormat(format) {
+    switch (format) {
+      case OutputFormat.markdown:
+        this.listStrategy = new MarkdownListStrategy();
+        break;
+      case OutputFormat.html:
+        this.listStrategy = new HtmlListStrategy();
+        break;
+    }
+  }
+
+  appendList(items) {
+    this.listStrategy.start(this.buffer);
+    for (let item of items) this.listStrategy.addListItem(this.buffer, item);
+    this.listStrategy.end(this.buffer);
+  }
+
+  clear() {
+    this.buffer = [];
+  }
+
+  toString() {
+    return this.buffer.join('\n');
+  }
+}
+
+const tp = new TextProcessor();
+tp.setOutputFormat(OutputFormat.markdown);
+tp.appendList(['one', 'two', 'three']);
+console.log(tp.toString());
+
+tp.clear();
+tp.setOutputFormat(OutputFormat.html);
+tp.appendList(['one', 'two', 'three']);
+console.log(tp.toString());
+```
 
 ```js
 // 违反开放封闭原则
@@ -1551,9 +2286,8 @@ const activity = (type, price) => {
     return price * 0.8;
   }
 };
-```
 
-```js
+// 利用 Strategy Pattern 进行重构
 const activity = new Map([
   ['pre', price => price * 0.95],
   ['onSale', price => price * 0.9],
@@ -1565,6 +2299,103 @@ const getActivityPrice = (type, price) => activity.get(type)(price);
 
 // 新增新手活动
 activity.set('newcomer', price => price * 0.7);
+```
+
+### Template Method Pattern
+
+Abstract superclass defines the skeleton of an operation
+in terms of a number of high-level steps.
+
+```js
+class Game {
+  constructor(numberOfPlayers) {
+    this.numberOfPlayers = numberOfPlayers;
+    this.currentPlayer = 0;
+  }
+
+  run() {
+    this.start();
+    while (!this.haveWinner) {
+      this.takeTurn();
+    }
+    console.log(`Player ${this.winningPlayer} wins.`);
+  }
+
+  start() {}
+  get haveWinner() {}
+  takeTurn() {}
+  get winningPlayer() {}
+}
+
+class Chess extends Game {
+  constructor() {
+    super(2);
+    this.maxTurns = 10;
+    this.turn = 1;
+  }
+
+  start() {
+    console.log(
+      `Starting a game of chess with ${this.numberOfPlayers} players.`
+    );
+  }
+
+  get haveWinner() {
+    return this.turn === this.maxTurns;
+  }
+
+  takeTurn() {
+    console.log(`Turn ${this.turn++} taken by player ${this.currentPlayer}.`);
+    this.currentPlayer = (this.currentPlayer + 1) % this.numberOfPlayers;
+  }
+
+  get winningPlayer() {
+    return this.currentPlayer;
+  }
+}
+
+const chess = new Chess();
+chess.run();
+```
+
+### Visitor Pattern
+
+Separating an algorithm from an object structure on which it operates.
+
+> Use Case: Tree, Compiler (Abstract Syntax Tree).
+
+```js
+class NumberExpression {
+  constructor(value) {
+    this.value = value;
+  }
+
+  print(buffer) {
+    buffer.push(this.value.toString());
+  }
+}
+
+class AdditionExpression {
+  constructor(left, right) {
+    this.left = left;
+    this.right = right;
+  }
+
+  print(buffer) {
+    buffer.push('(');
+    this.left.print(buffer);
+    buffer.push('+');
+    this.right.print(buffer);
+    buffer.push(')');
+  }
+}
+
+const e = new AdditionExpression(
+  new NumberExpression(5),
+  new AdditionExpression(new NumberExpression(1), new NumberExpression(9))
+);
+const buffer = [];
+e.print(buffer);
 ```
 
 ### IOC and DI Pattern
