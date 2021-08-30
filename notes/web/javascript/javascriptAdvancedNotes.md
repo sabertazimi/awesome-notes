@@ -7763,6 +7763,7 @@ npx webpack --mode production --profile --json > stats.json
 
 - [Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
 - [Monitor](https://github.com/webpackmonitor/webpackmonitor)
+- [WebpackBar: elegant progressbar and profiler](https://github.com/unjs/webpackbar)
 - [Browser UI](https://github.com/zouhir/jarvis)
 - [CLI UI](https://github.com/unjs/webpackbar)
 
