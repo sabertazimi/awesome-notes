@@ -1014,7 +1014,7 @@ type Age2 = Person['age'];
 // type Age2 = number
 ```
 
-`{ [K in keyof T]: ... }[keyof T]`: 返回键名 (键名组成的联合类型)
+`{ [K in keyof T]: indexedType }[keyof T]`: 返回键名 (键名组成的联合类型)
 
 ```ts
 type PickByValueType<T, ValueType> = Pick<
