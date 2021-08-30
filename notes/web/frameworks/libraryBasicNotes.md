@@ -755,6 +755,13 @@
 - [Progress](https://github.com/bvaughn/progress-estimator)
 - [Code Frame: pointing to source locations](https://github.com/babel/babel/tree/main/packages/babel-code-frame)
 
+#### Node Utils
+
+- [Cross Spawn](https://github.com/moxystudio/node-cross-spawn)
+- [Execa](https://github.com/sindresorhus/execa)
+- [FS Extra](https://github.com/jprichardson/node-fs-extra)
+- [Node Fetch](https://github.com/node-fetch/node-fetch)
+
 ### CLI Cheat Sheet
 
 - [TLDR: Help pages for command-line tools](https://github.com/tldr-pages/tldr)
