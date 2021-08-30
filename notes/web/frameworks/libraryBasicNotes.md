@@ -634,6 +634,7 @@
 - [CKEditor](https://github.com/ckeditor/ckeditor5)
 - [Wang Editor](https://github.com/wangfupeng1988/wangEditor)
 - [Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
+- [MilkDown Editor](https://github.com/Saul-Mirone/milkdown)
 
 ### Code Editor
 
