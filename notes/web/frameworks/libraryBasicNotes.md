@@ -109,6 +109,7 @@
 - [React Hooks Gallery](https://nikgraf.github.io/react-hooks)
 - [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
 - [Platform Hooks: Browser APIs turned into Hooks](https://github.com/jaredpalmer/the-platform)
+- [Optimistic state hook](https://github.com/perceived-dev/optimistic-state)
 
 ### Others State Management
 
