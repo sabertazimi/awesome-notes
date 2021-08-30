@@ -844,10 +844,7 @@
 - [MD5](https://github.com/blueimp/JavaScript-MD5)
 - [Base64](https://github.com/dankogai/js-base64)
 
-## Debug Testing
-
-- [React Component Hierarchy](https://github.com/team-gryff/react-monocle)
-- [Retoggle: Component Inspector](https://github.com/Raathigesh/retoggle)
+## Debugging and Testing
 
 ### Unit Testing
 
@@ -910,6 +907,9 @@
 - [NDB](https://github.com/GoogleChromeLabs/ndb)
 - [Reactotron](https://github.com/infinitered/reactotron)
 - [React Tracking](https://github.com/nytimes/react-tracking)
+- [React render tracker](https://github.com/lahmatiy/react-render-tracker)
+- [React Component Hierarchy](https://github.com/team-gryff/react-monocle)
+- [Retoggle: Component Inspector](https://github.com/Raathigesh/retoggle)
 
 ### Monitoring Tools
 
