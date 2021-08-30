@@ -952,6 +952,7 @@
 - [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter)
 - [Mock Service Worker](https://github.com/mswjs/msw)
 - [Mockery Function](https://github.com/mfncooper/mockery)
+- [In-memory Node file system API](https://github.com/streamich/memfs)
 
 ### Security Tools
 
