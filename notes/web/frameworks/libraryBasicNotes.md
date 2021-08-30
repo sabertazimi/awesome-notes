@@ -946,6 +946,7 @@
 #### Mock Servers
 
 - [JSON Server](https://github.com/typicode/json-server)
+- [JSON GraphQL Server](https://github.com/marmelab/json-graphql-server)
 - [Nock Server](https://github.com/nock/nock)
 - [Prism: Mocking and contract testing with OpenAPI](https://github.com/stoplightio/prism)
 
