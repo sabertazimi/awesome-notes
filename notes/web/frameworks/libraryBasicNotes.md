@@ -361,6 +361,7 @@
 - [React Table (with Hooks API)](https://github.com/tannerlinsley/react-table)
 - [React Data Sheet](https://github.com/nadbm/react-datasheet)
 - [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
+- [SheetJS](https://github.com/SheetJS/sheetjs)
 
 ### Charts Visualization
 
