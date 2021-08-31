@@ -101,6 +101,7 @@
 ### React Query
 
 - [React Query: Fetching, caching, synchronizing and updating server state](https://github.com/tannerlinsley/react-query)
+- [SWR: React Hooks for remote data fetching](https://github.com/vercel/swr)
 
 ### React Hooks
 
