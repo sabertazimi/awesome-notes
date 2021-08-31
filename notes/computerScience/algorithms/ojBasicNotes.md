@@ -177,6 +177,12 @@ string left_rotate(string str, int offset) {
 }
 ```
 
+### Repeated String
+
+- Combine with `Rotate String` to get solutions.
+- Find two same character as boundary.
+- `(s + s).slice(1, -1).includes(s)`.
+
 ### Palindrome Problem
 
 - Reverse: `reverse === original`.
