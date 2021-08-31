@@ -2,147 +2,7 @@
 
 [TOC]
 
-## List Problem
-
-### Two Pointers Algorithm
-
-Slow and fast pointer:
-
-- Judge cycle.
-- Find middle node.
-
-## Search Problem
-
-### Search in Sorted Array
-
-- Binary Search
-- Divide and Conquer
-
-> LeetCode 74/240
-
-```ts
-let lo = 0;
-let hi = nums.length - 1;
-
-while (lo <= hi) {
-  const mid = lo + ((hi - lo) >> 1);
-  if (nums[mid] === target) return nums[mid];
-  else if (nums[mid] < target) lo = mid + 1;
-  else hi = mid - 1;
-}
-```
-
-### Max Min Problem
-
-在某些问题中, 要求满足条件的 max/min, 且可以轻易地判定某个值是否满足该条件, 则可利用二分法进行值的枚举
-
-```cpp
-// poj 1064
-int N, K;
-double L[max_n];
-
-// judgement
-bool C(double x) {
-  int num = 0;
-
-  for (int i = 0; i < N; i++) {
-    num += (int)(L[i] / x);
-  }
-
-  return num >= K;
-}
-
-void solve(void) {
-  double lb = 0, ub = numeric_limits<double>::max();
-
-  for (int i = 0; i < 100; i++) {
-    double mid = (lb + ub) / 2;
-    if (C(mid)) lb = mid;
-    else ub = mid;
-  }
-
-  printf("%.2f\n", floor(ub * 100) / 100);
-}
-```
-
-### Range Max Min Query
-
-- Segment Tree (线段树)
-- Binary Indexed Tree (树状数组)
-- Bucket Method (Divide and Conquer)
-
-```cpp
-const int maxN = 1 << 17;
-
-int n;
-int dat[2 * maxN - 1];
-
-void init(int n_) {
-  n = 1;
-
-  // padding to 2^n
-  while (n < n_) n *= 2;
-
-  for (int i = 0; i < 2 * n - 1; i++) {
-    dat[i] = (numeric_limits<int>::max)();
-  }
-}
-
-void update(int k, int a) {
-  k += n - 1;
-  dat[k] = a;
-
-  while (k > 0) {
-    k = (k - 1) / 2;
-    dat[k] = min(dat[k * 2 + 1], dat[k * 2 + 2]);
-  }
-}
-
-int query(int a, int b, int k, int l, int r) {
-  // failed
-  if (r <= a || b <= l) {
-    return (numeric_limits<int>::max)();
-  }
-
-  // [l, r) <= [a, b)
-  if (a <= l && r <= b) {
-    return dat[k];
-  } else {
-    int vl = query(a, b, k * 2 + 1, l, (l + r) / 2);
-    int vr = query(a, b, k * 2 + 2, (l + r) / 2, r);
-    return min(vl, vr);
-  }
-}
-```
-
-## Greedy Algorithm
-
-- 字典排序比较问题
-- Huffman Tree
-
-## Simulation
-
-### Zig Zag Simulation
-
-### Matrix Traversal
-
-### Painting
-
-- 对于实际操作, 直接覆写至状态数组即可, 无需关心边界条件(效果会立即生效)
-
-> e.g 交接处方块 , 2 次写 1, maps[i][j] = 1, 不用担心重复计数
-
-### Reverting
-
-- using 1 bit to simulate operation
-- when need to output, calculate bits up
-- combined with dp problem
-
-### Meet Problem and Collision Problem
-
-将相遇/碰撞的两物体视作插肩而过即可
-
-## String
+## String Problem
 
 ```cpp
 sstream::stringstream
@@ -266,46 +126,244 @@ string left_rotate(string str, int offset) {
 - Find two same character as boundary.
 - `(s + s).slice(1, -1).includes(s)`.
 
-### Palindrome Problem
+### Palindrome String Problem
 
 - Reverse: `reverse === original`.
 - Recursion: `s[0] === s[length - 1] && isPalindrome(s.slice(1, length - 1))`
 - Two pointers: `s[i] !== s[j]; i++, j--;`.
 - Dynamic programming: `s[i] === s[j] && dp[i+1][j-1]`.
 
-## Map Theory
+## Search Problem
 
-### Shortest Paths
+### Sorted Array Search Problem
 
-- Dijkstra
-- Floyd
+- Binary Search
+- Divide and Conquer
 
-### Minimal Spanning Tree
+> LeetCode 74/240
+
+```ts
+let lo = 0;
+let hi = nums.length - 1;
+
+while (lo <= hi) {
+  const mid = lo + ((hi - lo) >> 1);
+  if (nums[mid] === target) return nums[mid];
+  else if (nums[mid] < target) lo = mid + 1;
+  else hi = mid - 1;
+}
+```
+
+### Max Min Search Problem
+
+```ts
+Math.min(...nums);
+Math.max(...nums);
+```
+
+在某些问题中, 要求满足条件的 max/min, 且可以轻易地判定某个值是否满足该条件, 则可利用二分法进行值的枚举
+
+```cpp
+// poj 1064
+int N, K;
+double L[max_n];
+
+// judgement
+bool C(double x) {
+  int num = 0;
+
+  for (int i = 0; i < N; i++) {
+    num += (int)(L[i] / x);
+  }
+
+  return num >= K;
+}
+
+void solve(void) {
+  double lb = 0, ub = numeric_limits<double>::max();
+
+  for (int i = 0; i < 100; i++) {
+    double mid = (lb + ub) / 2;
+    if (C(mid)) lb = mid;
+    else ub = mid;
+  }
+
+  printf("%.2f\n", floor(ub * 100) / 100);
+}
+```
+
+### Range Max Min Query and Search Problem
+
+- Segment Tree (线段树)
+- Binary Indexed Tree (树状数组)
+- Bucket Method (Divide and Conquer)
+
+```cpp
+const int maxN = 1 << 17;
+
+int n;
+int dat[2 * maxN - 1];
+
+void init(int n_) {
+  n = 1;
+
+  // padding to 2^n
+  while (n < n_) n *= 2;
+
+  for (int i = 0; i < 2 * n - 1; i++) {
+    dat[i] = (numeric_limits<int>::max)();
+  }
+}
+
+void update(int k, int a) {
+  k += n - 1;
+  dat[k] = a;
+
+  while (k > 0) {
+    k = (k - 1) / 2;
+    dat[k] = min(dat[k * 2 + 1], dat[k * 2 + 2]);
+  }
+}
+
+int query(int a, int b, int k, int l, int r) {
+  // failed
+  if (r <= a || b <= l) {
+    return (numeric_limits<int>::max)();
+  }
+
+  // [l, r) <= [a, b)
+  if (a <= l && r <= b) {
+    return dat[k];
+  } else {
+    int vl = query(a, b, k * 2 + 1, l, (l + r) / 2);
+    int vr = query(a, b, k * 2 + 2, (l + r) / 2, r);
+    return min(vl, vr);
+  }
+}
+```
+
+## Math Problem
+
+### Radix Problem
+
+```ts
+while (n) {
+  const bit = n % radix;
+  n = Math.floor(n / radix);
+}
+```
+
+### Matrix Fast Power Algorithm
+
+```cpp
+typedef vector<vector> mat;
+
+mat mul(mat& A, mat& B) {
+    mat C(A.size(), vec(B[0].size()));
+    for(int i = 0; i < (int)A.size(); ++i)
+        for(int j = 0; j < (int)B[0].size(); ++j)
+                for(int k = 0; k < (int)B.size(); ++k)
+                        C[i][j] ^= A[i][k] & B[k][j];
+    return C;
+}
+
+mat pow(mat A, int p) {
+    mat E(A.size(), vec(A.size()));
+    for(int i = 0; i < (int)A.size(); ++i) E[i][i] = 1;
+    while(p){
+        if(p & 1) E = mul(E, A);
+        A = mul(A, A);
+        p >>= 1;
+    }
+    return E;
+}
+```
+
+### Mod Power Algorithm
+
+```cpp
+typedef long long ll;
+
+ll mod_pow(ll x, ll n, ll mod) {
+    ll res = 1;
+
+    while (n > 0) {
+        if (n & 1) res = res * x % mod;
+
+        x = x * x % mod;
+        n >>= 1;
+    }
+
+    return res;
+}
+```
+
+### XOR Operator Usage
+
+- Binary add via `^`.
+- Remove duplicates via `^`.
+- Find difference via `^`.
+
+## Simulation
+
+### Zig Zag Simulation
+
+### Matrix Traversal Simulation
+
+### Painting Simulation
+
+- 对于实际操作, 直接覆写至状态数组即可, 无需关心边界条件(效果会立即生效)
+
+> e.g 交接处方块 , 2 次写 1, maps[i][j] = 1, 不用担心重复计数
+
+### Reverting Simulation
+
+- Using 1 bit to simulate operation.
+- When need to output, calculate bits up.
+- Combined with dynamic programming problem.
+
+### Meet and Collision Problem
+
+追及碰撞问题: 将相遇/碰撞的两物体视作插肩而过即可.
+
+## Graph and Map Problem
+
+### Shortest Paths Algorithm
+
+- Dijkstra (BFS)
+- Floyd (Greedy)
+
+### Minimal Spanning Tree Algorithm
 
 - Kruskal (tFind/tUnion)
 
-### BFS
+### BFS Algorithm
 
 Mark array/queue:
 
 - Shortest Paths
 - Diameter(直径) of Tree(Two pass for BFS)
 
-### DFS
+### DFS Algorithm
 
 Mark array/ Mark stack/Recursion:
 
 - Longest Paths
 
-### Connected Component
+### Connected Component Problem
 
-#### Strongly Connected Component
+#### Strongly Connected Component Problem
 
 - Tarjan Algorithm(v.index(DFS 时此点被访问的顺序) == v.lowLink(从 v 出发经有向边可达到的所有结点中最小的 index))
 
-#### Union Find
+#### Union Find Algorithm
 
-quickly figure out connection of map
+Quickly figure out connection of map.
+
+## Greedy Algorithm
+
+- 字典排序比较问题
+- Huffman Tree
 
 ## Dynamic Programming
 
@@ -313,7 +371,7 @@ quickly figure out connection of map
 
 > dp[m][n] => dp[2][n] (dp[i & 1][j])
 
-### 典型题目
+### Basic Dynamic Programming Problem
 
 关键: 最优子结构 + 状态无后效性
 
@@ -323,20 +381,16 @@ quickly figure out connection of map
 - 多重部分和问题 e.g 数组中是否存在一对数的和为 xx
 - 计数问题/分组问题/分划问题
 
-### Digital Bits Dynamic Programming
+### Digital Bits Dynamic Programming Problem
 
-数位 DP
-
-#### 题目模式
+数位 DP:
 
 - 给定区间 [a, b], 求满足特定要求的数, 要求一般与大小无关, 与数位的组成相关
 - 规模巨大, 无法枚举
 
 > 递增数: 1234, 2579; 双峰数: 19280, 26193; 含 49: 49, 149, 1492; 整除 13: 26, 39 ...
 
-#### 解题模式
-
-f(a, b) = f(b, 0) - f(a - 1, 0)
+`f(a, b) = f(b, 0) - f(a - 1, 0)`.
 
 暴力 + 存储 = 记忆化搜索:
 
@@ -464,85 +518,50 @@ int main(void) {
 }
 ```
 
-## Math Algorithm
-
-### Radix Algorithm
-
-```ts
-while (n) {
-  const bit = n % radix;
-  n = Math.floor(n / radix);
-}
-```
-
-### Matrix Fast Power
-
-```cpp
-typedef vector<vector> mat;
-
-mat mul(mat& A, mat& B) {
-    mat C(A.size(), vec(B[0].size()));
-    for(int i = 0; i < (int)A.size(); ++i)
-        for(int j = 0; j < (int)B[0].size(); ++j)
-                for(int k = 0; k < (int)B.size(); ++k)
-                        C[i][j] ^= A[i][k] & B[k][j];
-    return C;
-}
-
-mat pow(mat A, int p) {
-    mat E(A.size(), vec(A.size()));
-    for(int i = 0; i < (int)A.size(); ++i) E[i][i] = 1;
-    while(p){
-        if(p & 1) E = mul(E, A);
-        A = mul(A, A);
-        p >>= 1;
-    }
-    return E;
-}
-```
-
-### Mod Power
-
-```cpp
-typedef long long ll;
-
-ll mod_pow(ll x, ll n, ll mod) {
-    ll res = 1;
-
-    while (n > 0) {
-        if (n & 1) res = res * x % mod;
-
-        x = x * x % mod;
-        n >>= 1;
-    }
-
-    return res;
-}
-```
-
-### XOR Operator
-
-- Binary add via `^`.
-- Remove duplicates via `^`.
-- Find difference via `^`.
-
 ## Data Structure
 
 ### Array
 
 - 可以利用数组元素的正负性表示存在性（或其他特殊意义）
 
-#### Two Pointers
+#### Array Two Pointers
 
 - 可以在**有穷时间内**判断是否存在**循环**: 一个快指针, 一个慢指针, 当两者相遇时, 表示存在循环.
 - Slide Window: `window = [lo, hi]`.
 
-#### Float Pointer
+#### Array Float Pointer
 
 利用浮动指针解决相关问题:
 
 - 字符串比较
 - 连续区间问题(尺取法)
+
+### List
+
+#### List Two Pointers
+
+Slow and fast pointer:
+
+- Judge cycle.
+- Find middle node.
+
+### Stack
+
+#### Monotonic Stack
+
+单调栈: 寻找下一个更小/更大 (Smaller/Greater) 元素.
+
+```ts
+const stack: number[] = [];
+const greaterMap = new Map<number, number>();
+
+for (const num of nums) {
+  while (stack.length && stack[stack.length - 1] < num) {
+    greaterMap.set(stack.pop() as number, num);
+  }
+  stack.push(num);
+}
+```
 
 ### Map
 
