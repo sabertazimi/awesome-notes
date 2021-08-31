@@ -697,6 +697,7 @@
 
 - [FileAPI](https://github.com/mailru/FileAPI)
 - [FS Extra](https://github.com/jprichardson/node-fs-extra)
+- [Graceful FS](https://www.npmjs.com/package/graceful-fs)
 - [In-memory Node file system API](https://github.com/streamich/memfs)
 - [Globby](https://github.com/sindresorhus/globby)
 - [Chokidar: Efficient cross-platform file watching library](https://github.com/paulmillr/chokidar)
@@ -769,6 +770,7 @@
 - [Execa](https://github.com/sindresorhus/execa)
 - [Node Fetch](https://github.com/node-fetch/node-fetch)
 - [FS Extra](https://github.com/jprichardson/node-fs-extra)
+- [Graceful FS](https://www.npmjs.com/package/graceful-fs)
 - [In-memory Node file system API](https://github.com/streamich/memfs)
 - [Globby](https://github.com/sindresorhus/globby)
 - [Chokidar: Efficient cross-platform file watching library](https://github.com/paulmillr/chokidar)
