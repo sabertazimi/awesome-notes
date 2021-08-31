@@ -634,6 +634,7 @@
 
 - [React Markdown](https://github.com/rexxars/react-markdown)
 - [Block Editor](https://github.com/codex-team/editor.js)
+- [TinyMCE: World #1 JavaScript library for rich text editing](https://github.com/tinymce/tinymce)
 - [CKEditor](https://github.com/ckeditor/ckeditor5)
 - [Wang Editor](https://github.com/wangfupeng1988/wangEditor)
 - [Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
