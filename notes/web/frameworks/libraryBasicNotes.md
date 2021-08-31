@@ -694,8 +694,11 @@
 
 - [FileAPI](https://github.com/mailru/FileAPI)
 - [FS Extra](https://github.com/jprichardson/node-fs-extra)
+- [In-memory Node file system API](https://github.com/streamich/memfs)
 - [Globby](https://github.com/sindresorhus/globby)
 - [Chokidar: Efficient cross-platform file watching library](https://github.com/paulmillr/chokidar)
+- [Mkdirp](https://github.com/isaacs/node-mkdirp)
+- [RimRaf](https://github.com/isaacs/rimraf)
 - [Steno: Specialized fast async file writer](https://github.com/typicode/steno)
 - [JS Zip](https://github.com/Stuk/jszip)
 - [File Type](https://github.com/sindresorhus/file-type)
@@ -761,8 +764,13 @@
 
 - [Cross Spawn](https://github.com/moxystudio/node-cross-spawn)
 - [Execa](https://github.com/sindresorhus/execa)
-- [FS Extra](https://github.com/jprichardson/node-fs-extra)
 - [Node Fetch](https://github.com/node-fetch/node-fetch)
+- [FS Extra](https://github.com/jprichardson/node-fs-extra)
+- [In-memory Node file system API](https://github.com/streamich/memfs)
+- [Globby](https://github.com/sindresorhus/globby)
+- [Chokidar: Efficient cross-platform file watching library](https://github.com/paulmillr/chokidar)
+- [Mkdirp](https://github.com/isaacs/node-mkdirp)
+- [RimRaf](https://github.com/isaacs/rimraf)
 
 ### CLI Cheat Sheet
 
