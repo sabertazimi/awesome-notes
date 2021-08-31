@@ -96,6 +96,7 @@
 ### React Recoil
 
 - [React Recoil](https://github.com/facebookexperimental/Recoil)
+- [Primitive and flexible state management for React](https://github.com/pmndrs/jotai)
 
 ### React Query
 
