@@ -1039,6 +1039,7 @@
 ### Markdown Documentation
 
 - [Docusaurus: Easy to maintain documentation websites with React stack](https://github.com/facebook/docusaurus)
+- [Nextra: Next.js documentation static site generator](https://github.com/shuding/nextra)
 - [VuePress: Minimalistic Vue-powered static site generator](https://github.com/vuejs/vuepress)
 - [Wiki.js: Modern and powerful wiki app built on Node.js](https://github.com/Requarks/wiki)
 
