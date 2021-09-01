@@ -196,6 +196,7 @@
 ### CSS in JS Utils
 
 - [Classnames](https://github.com/JedWatson/classnames)
+- [Tailwind Merge: Merge Tailwind CSS classes without style conflicts](https://github.com/dcastil/tailwind-merge)
 - [Linaria: Zero-runtime CSS-in-TypeScript library](https://github.com/callstack/linaria)
 - [Vanilla Extract: Zero-runtime CSS-in-TypeScript](https://github.com/seek-oss/vanilla-extract)
 - [Compiled: Performant compile time CSS-in-TypeScript library](https://github.com/atlassian-labs/compiled)
