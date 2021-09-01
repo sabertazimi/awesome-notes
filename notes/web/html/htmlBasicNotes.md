@@ -1256,49 +1256,66 @@ export function trapTabKey(e, context) {
 
 [Web Accessibility Initiative - Accessible Rich Internet Applications](https://www.w3.org/WAI/intro/aria):
 
-- `aria-label`
-- `aria-labelledby="dropdownMenuButton"`: dropdown/form
-- `aria-disabled="true"`: disable element
-- `aria-controls="navbarSupportedContent"`: navigation/select
-- `aria-expanded="false"`: dropdown
-- `aria-haspopup="true"`: dropdown/popup
-- `aria-current="pages`: breadcrumb
-- `aria-valuenow`/`aria-valuemin`/`aria-valuemax`: progress
-- `aria-describedBy`: input + small
-- [role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles)
-  - `<header>`: `role="banner"`
-  - `<nav>`: `role="navigation"`
-  - `<main>`: `role="main"`
-  - `<aside>`: `role="complementary"`
-  - `<section>`: `role="region"`
-  - `<article>`: `role="article"`
-  - `<footer>`: `role="contentinfo"`
-  - `<form role="form">`
-  - 7 heading levels: `<div role="heading" aria-level="7"></div>`
-  - `role="button"`
-  - `role="checkbox"`
-  - `role="gridcell"`
-  - `role="link"`
-  - `role="menuitem"`
-  - `role="menuitemcheckbox"`
-  - `role="menuitemradio"`
-  - `role="option"`
-  - `role="progressbar"`
-  - `role="radio"`
-  - `role="scrollbar"`
-  - `role="searchbox"`
-  - `role="separator (when focusable)"`
-  - `role="slider"`
-  - `role="spinbutton"`
-  - `role="switch"`
-  - `role="tab"`
-  - `role="tabpanel"`
-  - `role="textbox"`
-  - `role="treeitem"`
+- `aria-label`.
+- `aria-labelledby="dropdownMenuButton"`: dropdown/form>.
+- `aria-describedBy`: input + small.
+
+```html
+<label id="l1" for="f3">label text</label>
+<input type="text" id="f3" aria-labelledby="l1 l2" />
+<p>other content</p>
+<span tabindex="-1" id="l2">more label text</span>
+
+<div aria-describedby="test">text</div>
+<div id="test" role="tooltip">tooltip text</div>
+
+<div role="dialog" aria-label="login" aria-describedby="log1">
+  <div id="log1" tabindex="-1">Provide user name and password to login.</div>
+</div>
+```
+
+- `aria-disabled="true"`: disable element.
+- `aria-hidden="true"`.
+- `aria-controls="navbarSupportedContent"`: navigation/select.
+- `aria-expanded="false"`: dropdown.
+- `aria-haspopup="true"`: dropdown/popup.
+- `aria-current="pages`: breadcrumb.
+- `aria-valuenow`/`aria-valuemin`/`aria-valuemax`: progress.
+- [role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles).
+  - `<header>`: `role="banner"`.
+  - `<nav>`: `role="navigation"`.
+  - `<main>`: `role="main"`.
+  - `<section>`: `role="region"`.
+  - `<article>`: `role="article"`.
+  - `<aside>`: `role="complementary"`.
+  - `<footer>`: `role="contentinfo"`.
+  - `<form>`: `role="form"`.
+  - 7th heading level: `<div role="heading" aria-level="7"></div>`.
+  - `role="button"`.
+  - `role="checkbox"`.
+  - `role="gridcell"`.
+  - `role="link"`.
+  - `role="menuitem"`.
+  - `role="menuitemcheckbox"`.
+  - `role="menuitemradio"`.
+  - `role="option"`.
+  - `role="progressbar"`.
+  - `role="radio"`.
+  - `role="scrollbar"`.
+  - `role="searchbox"`.
+  - `role="separator (when focusable)"`.
+  - `role="slider"`.
+  - `role="spinbutton"`.
+  - `role="switch"`.
+  - `role="tab"`.
+  - `role="tabpanel"`.
+  - `role="textbox"`.
+  - `role="tooltip"`.
+  - `role="treeitem"`.
   - `role="presentation"`: removes the semantics of an element.
-  If set an interactive or focusable element to `role="presentation"`,
-  assistive technology user will not know what it is or how to use it.
-  - `role="application"`
+    If set an interactive or focusable element to `role="presentation"`,
+    assistive technology user will not know what it is or how to use it.
+  - `role="application"`.
 
 ```html
 <button
