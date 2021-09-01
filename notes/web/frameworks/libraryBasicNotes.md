@@ -176,8 +176,9 @@
 
 ### TS Utility Types
 
-- [TypeFest: TypeScript Utility Types](https://github.com/sindresorhus/type-fest)
-- [UtilTypes: TypeScript Utility Types](https://github.com/piotrwitek/utility-types)
+- [TypeFest](https://github.com/sindresorhus/type-fest)
+- [TS ToolBelt](https://github.com/millsp/ts-toolbelt)
+- [UtilityTypes](https://github.com/piotrwitek/utility-types)
 
 ### TS Schema Utils
 
