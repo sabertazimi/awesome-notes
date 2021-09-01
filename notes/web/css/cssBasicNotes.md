@@ -4058,6 +4058,37 @@ const resetScrollX = () => {
 };
 ```
 
+### Timeline and Steps
+
+Use pseudo elements to construct circle and line:
+
+```css
+/* The separator line */
+.c-timeline__item:not(:last-child) .c-timeline__content:before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background-color: #d3d3d3;
+}
+
+/* The circle */
+.c-timeline__content:after {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  z-index: 1;
+  border: 2px solid #d3d3d3;
+  border-radius: 50%;
+}
+```
+
 ### Layout
 
 #### 相同单元
