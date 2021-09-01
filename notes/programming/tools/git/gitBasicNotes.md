@@ -1264,6 +1264,15 @@ git filter-branch -f --prune-empty --index-filter
 \ --tag-name-filter cat -- --all
 ```
 
+### Reverse List
+
+Lists commit objects in reverse chronological order:
+
+```bash
+git rev-list --count HEAD
+git rev-parse --short HEAD
+```
+
 ## Commands List
 
 ### Basic Commands
