@@ -89,9 +89,10 @@
 
 ### React Redux
 
-- [Rematch: Redux framework](https://github.com/rematch/rematch)
-- [Redux Helper Tools](https://github.com/reduxjs/redux-starter-kit)
+- [Redux ToolKit: Official core set for efficient Redux development](https://github.com/reduxjs/redux-toolkit)
 - [Reselect](https://github.com/reactjs/reselect)
+- [Rematch: Redux framework](https://github.com/rematch/rematch)
+- [ImmerJS: Create next immutable state by mutating current one](https://github.com/immerjs/immer)
 
 ### React Recoil
 
