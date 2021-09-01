@@ -1295,7 +1295,9 @@ export function trapTabKey(e, context) {
   - `role="tabpanel"`
   - `role="textbox"`
   - `role="treeitem"`
-  - `role="presentation"`
+  - `role="presentation"`: removes the semantics of an element.
+  If set an interactive or focusable element to `role="presentation"`,
+  assistive technology user will not know what it is or how to use it.
   - `role="application"`
 
 ```html
@@ -1326,6 +1328,33 @@ listExpander.addEventListener('click', e => {
 });
 ```
 
+### HTML First over ARIA
+
+```html
+<!--div role="banner"-->
+<header></header>
+
+<!--div role="navigation"-->
+<nav></nav>
+
+<!--div role="main"-->
+<main></main>
+
+<!--div role="region"-->
+<section [accessible name]></section>
+
+<!--div role="complementary"-->
+<aside></aside>
+
+<!--div role="contentinfo"-->
+<footer></footer>
+
+<!--div role="form"-->
+<form></form>
+
+<div role="search"></div>
+```
+
 ### Best Practice Tips for Accessibility
 
 - [Web Accessibility Initiative-Accessible Rich Internet Applications](https://www.sitepoint.com/wai-aria 'WAI-ARIA')
@@ -1340,6 +1369,7 @@ listExpander.addEventListener('click', e => {
 
 ### Accessibility Checklist
 
+- [W3C ARIA Usage Rule](https://www.w3.org/TR/aria-in-html)
 - [WebAIM WCAG (Web Content Accessibility Guidelines) 2 Checklist](https://webaim.org/standards/wcag/checklist)
 - [A11Y Project](https://github.com/a11yproject/a11yproject.com)
 - [A11Y 101](https://dev.to/inhuofficial/101-digital-accessibility-tips-and-tricks-4728)
