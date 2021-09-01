@@ -3599,54 +3599,6 @@ a:hover::after {
 }
 ```
 
-### Button
-
-- padding
-
-```css
-a.btn-custom {
-  padding: 10px 40px;
-  border-radius: 0;
-  background-color: #000;
-  line-height: 100px;
-  text-align: center;
-}
-```
-
-#### Gradient Button
-
-```css
-a {
-  text-decoration: none;
-  background-image: linear-gradient(currentColor, currentColor);
-  background-position: 0% 100%;
-  background-repeat: no-repeat;
-  background-size: 0% 2px;
-  transition: background-size 0.3s;
-}
-
-a:hover {
-  background-size: 100% 2px;
-}
-```
-
-```css
-a {
-  padding: 5px;
-  display: inline-block;
-  text-decoration: none;
-  transition: all 0.3s;
-  background-size: 100% 200%;
-  background-image: linear-gradient(to top, #333 50%, #fff 50%);
-  color: #333;
-}
-
-a:hover {
-  background-position: 0 100%;
-  color: #fff;
-}
-```
-
 ### Footer
 
 #### Sticky Footer
@@ -3779,6 +3731,54 @@ a:hover {
     grid-row-end: 3;
   }
 </style>
+```
+
+### Button
+
+- padding
+
+```css
+a.btn-custom {
+  padding: 10px 40px;
+  border-radius: 0;
+  background-color: #000;
+  line-height: 100px;
+  text-align: center;
+}
+```
+
+#### Gradient Button
+
+```css
+a {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size 0.3s;
+}
+
+a:hover {
+  background-size: 100% 2px;
+}
+```
+
+```css
+a {
+  padding: 5px;
+  display: inline-block;
+  text-decoration: none;
+  transition: all 0.3s;
+  background-size: 100% 200%;
+  background-image: linear-gradient(to top, #333 50%, #fff 50%);
+  color: #333;
+}
+
+a:hover {
+  background-position: 0 100%;
+  color: #fff;
+}
 ```
 
 ### Picture
