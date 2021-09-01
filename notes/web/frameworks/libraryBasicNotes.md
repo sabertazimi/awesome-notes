@@ -887,6 +887,7 @@
 ### Headless Automation Tools
 
 - [Puppeteer: Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
+- [PlayWright: Automate Chromium, Firefox and WebKit with a single API](https://github.com/Microsoft/playwright)
 - [Webkit API](https://github.com/ariya/phantomjs)
 - [Selenium](https://github.com/SeleniumHQ/selenium)
 - [Appium](https://github.com/appium/appium)
