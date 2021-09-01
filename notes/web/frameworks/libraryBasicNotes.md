@@ -85,7 +85,7 @@
 - [Expo: Making universal native apps with React on Android, iOS and web](https://github.com/expo/expo)
 - [Uni APP: Vue for mobile development](https://github.com/dcloudio/uni-app)
 
-## State Data Management
+## Data and State Management
 
 ### React Redux
 
@@ -113,6 +113,10 @@
 - [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
 - [Platform Hooks: Browser APIs turned into Hooks](https://github.com/jaredpalmer/the-platform)
 - [Optimistic state hook](https://github.com/perceived-dev/optimistic-state)
+
+### Vue Composite and Reactive API
+
+- [VueUse](https://github.com/vueuse/vueuse)
 
 ### Others State Management
 
