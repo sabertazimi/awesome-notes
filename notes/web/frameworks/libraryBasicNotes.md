@@ -501,6 +501,7 @@
 ## Accessibility Tools
 
 - [AXE DevTools](https://github.com/dequelabs/axe-core)
+- [Cypress AXE](https://github.com/component-driven/cypress-axe)
 - [ESLint JSX A11Y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
 - [React A11Y](https://github.com/reactjs/react-a11y)
 
