@@ -952,7 +952,7 @@ export default thing;
 export default 'hello!';
 ```
 
-### Class 语法糖
+### Class
 
 ```js
 class A {
@@ -994,6 +994,80 @@ console.log(bb.__proto__ === BB.prototype);
 ```
 
 禁止对复合对象字面量进行导出操作 (array literal, object literal)
+
+#### Class Static Blocks
+
+Static blocks have access to class private member.
+Its mainly useful whenever set up multiple static fields.
+
+```js
+class Foo {
+  static #count = 0;
+
+  get count() {
+    return Foo.#count;
+  }
+
+  static {
+    try {
+      const lastInstances = loadLastInstances();
+      Foo.#count += lastInstances.length;
+    } catch {}
+  }
+}
+```
+
+```js
+class Translator {
+  static translations = {
+    yes: 'ja',
+  };
+  static englishWords = [];
+  static germanWords = [];
+  static {
+    for (const [english, german] of Object.entries(translations)) {
+      this.englishWords.push(english);
+      this.germanWords.push(german);
+    }
+  }
+}
+```
+
+```js
+class SuperClass {
+  static superField1 = console.log('superField1');
+  static {
+    assert.equal(this, SuperClass);
+    console.log('static block 1 SuperClass');
+  }
+  static superField2 = console.log('superField2');
+  static {
+    console.log('static block 2 SuperClass');
+  }
+}
+
+class SubClass extends SuperClass {
+  static subField1 = console.log('subField1');
+  static {
+    assert.equal(this, SubClass);
+    console.log('static block 1 SubClass');
+  }
+  static subField2 = console.log('subField2');
+  static {
+    console.log('static block 2 SubClass');
+  }
+}
+
+// Output:
+// 'superField1'
+// 'static block 1 SuperClass'
+// 'superField2'
+// 'static block 2 SuperClass'
+// 'subField1'
+// 'static block 1 SubClass'
+// 'subField2'
+// 'static block 2 SubClass'
+```
 
 ### Map
 
