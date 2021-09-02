@@ -978,6 +978,7 @@
 
 #### Mock APIs
 
+- [Faker.js: Generate massive amounts of realistic fake data](https://github.com/Marak/Faker.js)
 - [YAPI](https://github.com/ymfe/yapi)
 - [Public APIs](https://github.com/public-apis/public-apis)
 - [Pokemon API](https://github.com/PokeAPI/pokeapi)
