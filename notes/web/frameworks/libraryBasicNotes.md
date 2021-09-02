@@ -973,23 +973,23 @@
 
 - [JSON Server](https://github.com/typicode/json-server)
 - [JSON GraphQL Server](https://github.com/marmelab/json-graphql-server)
-- [Nock Server](https://github.com/nock/nock)
 - [Prism: Mocking and contract testing with OpenAPI](https://github.com/stoplightio/prism)
-
-#### Mock APIs
-
-- [Faker.js: Generate massive amounts of realistic fake data](https://github.com/Marak/Faker.js)
-- [YAPI](https://github.com/ymfe/yapi)
-- [Public APIs](https://github.com/public-apis/public-apis)
-- [Pokemon API](https://github.com/PokeAPI/pokeapi)
-- [Images API](http://source.unsplash.com/random)
 
 #### Mock Utils
 
+- [Nock: HTTP server mocking and expectations library](https://github.com/nock/nock)
+- [Faker.js: Generate massive amounts of realistic fake data](https://github.com/Marak/Faker.js)
 - [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter)
 - [Mock Service Worker](https://github.com/mswjs/msw)
 - [Mockery Function](https://github.com/mfncooper/mockery)
 - [In-memory Node file system API](https://github.com/streamich/memfs)
+
+#### Mock APIs
+
+- [YAPI](https://github.com/ymfe/yapi)
+- [Public APIs](https://github.com/public-apis/public-apis)
+- [Pokemon API](https://github.com/PokeAPI/pokeapi)
+- [Images API](http://source.unsplash.com/random)
 
 ### Security Tools
 
