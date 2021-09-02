@@ -3081,7 +3081,8 @@ ReactDOM.render(<App />, document.getElementById('root'));
 Context API provide a Dependency Injection style method,
 to provide values to children components.
 
-Context 中只定义被大多数组件所共用的属性:
+Context 中只定义被大多数组件所共用的属性
+(avoid **Prop Drilling**):
 
 - Global state.
 - Theme.
