@@ -379,6 +379,17 @@ export const connect =
   };
 ```
 
+## Server State
+
+- Tracking loading state in order to show UI spinners.
+- Avoiding duplicate requests for the same data.
+- Optimistic updates to make the UI feel faster
+  - Requires asynchronous APIs for fetching and updating.
+  - Updating `out of date` data in the background.
+- Managing cache lifetimes as the user interacts with the UI.
+- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview).
+- [React Query](https://github.com/tannerlinsley/react-query).
+
 ## Redux Best Practice
 
 - 区分 Smart Component (know the state) 和 Dump Component (stateless)

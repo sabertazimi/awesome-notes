@@ -90,9 +90,9 @@
 ### React Redux
 
 - [Redux ToolKit: Official core set for efficient Redux development](https://github.com/reduxjs/redux-toolkit)
-- [Reselect](https://github.com/reactjs/reselect)
-- [Rematch: Redux framework](https://github.com/rematch/rematch)
+- [Reselect: Selector library for Redux](https://github.com/reactjs/reselect)
 - [ImmerJS: Create next immutable state by mutating current one](https://github.com/immerjs/immer)
+- [Rematch: Redux framework](https://github.com/rematch/rematch)
 
 ### React Recoil
 
@@ -101,8 +101,11 @@
 
 ### React Query
 
+- [RTK Query: Redux toolkit server state solution](https://redux-toolkit.js.org/rtk-query/overview)
 - [React Query: Fetching, caching, synchronizing and updating server state](https://github.com/tannerlinsley/react-query)
 - [SWR: React Hooks for remote data fetching](https://github.com/vercel/swr)
+- [Apollo GraphQL: Fully-featured, production ready caching GraphQL client](https://github.com/apollographql/apollo-client)
+- [URQL: Highly customizable and versatile GraphQL client](https://github.com/FormidableLabs/urql)
 
 ### React Hooks
 
