@@ -7154,23 +7154,23 @@ sudo sysctl -p
 ### Webpack Resolve Path Options
 
 ```js
-{
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+
+module.exports = {
   resolve: {
     alias: {
       '#': path.resolve(__dirname, '/'),
       '~': path.resolve(__dirname, 'src'),
       '@': path.resolve(__dirname, 'src'),
       '~@': path.resolve(__dirname, 'src'),
-      'vendor': path.resolve(__dirname, 'src/vendor'),
+      vendor: path.resolve(__dirname, 'src/vendor'),
       '~component': path.resolve(__dirname, 'src/components'),
       '~config': path.resolve(__dirname, 'config'),
     },
-    extensions: [
-      '.js',
-      '.jsx',
-    ],
+    extensions: ['.tsx', '.ts', '.jsx', '.js'],
+    plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
-}
+};
 ```
 
 get `baseUrl`and `paths` from `tsconfig.json`:
