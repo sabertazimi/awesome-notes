@@ -5700,7 +5700,7 @@ const ctx = canvas.getContext('2d', { alpha: false });
 - [Canvas on MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API)
 - [Canvas Cheat Sheet](https://simon.html5.org/dump/html5-canvas-cheat-sheet.html)
 - [Canvas Perf Tips 1](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
-- [Canvas Perf Tips 2](https://www.html5rocks.com/en/tutorials/canvas/performance/)
+- [Canvas Perf Tips 2](https://www.html5rocks.com/en/tutorials/canvas/performance)
 - [Canvas Deep Live](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
 
 ## Web Audio API
@@ -7234,6 +7234,8 @@ module.exports = {
 
 ### Webpack Cache Configuration
 
+#### Build Cache
+
 `cache` is set to `type: 'memory'` in development mode
 and disabled in production mode.
 `cache: true` is an alias to `cache: { type: 'memory' }`.
@@ -7247,6 +7249,11 @@ module.exports = {
   },
 };
 ```
+
+#### Browser Caching
+
+- [Webpack caching guide](https://webpack.js.org/guides/caching).
+- Use `[contenthash]` and long-term browser cache to improve second access time.
 
 ### Webpack Loader Configuration
 
@@ -7932,7 +7939,7 @@ module.exports = HotLoad;
 
 ### Webpack Migrate to 5
 
-[Migrate 5 Guide](https://webpack.js.org/migrate/5/):
+[Migrate 5 Guide](https://webpack.js.org/migrate/5):
 
 Make sure there's no webpack deprecation warnings.
 
