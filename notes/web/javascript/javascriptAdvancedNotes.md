@@ -7563,6 +7563,7 @@ module.exports = {
 - 多核构建
 - 构建缓存
 - [优化构建速度](https://webpack.js.org/guides/build-performance).
+- [JD Webpack optimization guide](https://jelly.jd.com/article/61179aa26bea510187770aa3).
 
 #### Common Libraries
 
