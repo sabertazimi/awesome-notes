@@ -1951,6 +1951,45 @@ The main difference between the forms
 in case if success callback returns a rejected promise,
 then only the second form is going to catch that rejection.
 
+#### Memorize Async Function
+
+```js
+const memo = {};
+const progressQueues = {};
+
+function memoProcessData(key) {
+  return new Promise((resolve, reject) => {
+    if (memo.hasOwnProperty(key)) {
+      resolve(memo[key]);
+      return;
+    }
+
+    if (!progressQueues.hasOwnProperty(key)) {
+      // Called for a new key
+      // Create an entry for it in progressQueues
+      progressQueues[key] = [[resolve, reject]];
+    } else {
+      // Called for a key that's still being processed
+      // Enqueue it's handlers and exit.
+      progressQueues[key].push([resolve, reject]);
+      return;
+    }
+
+    processData(key)
+      .then(data => {
+        memo[key] = data;
+        for (let [resolver] of progressQueues[key]) resolver(data);
+      })
+      .catch(error => {
+        for (let [, rejector] of progressQueues[key]) rejector(error);
+      })
+      .finally(() => {
+        delete progressQueues[key];
+      });
+  });
+}
+```
+
 ### Await and Async
 
 avoid wrong parallel logic (too sequential)
