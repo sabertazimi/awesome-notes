@@ -7555,6 +7555,7 @@ module.exports = {
 - 代码分割: 按需加载
 - 多核构建
 - 构建缓存
+- [优化构建速度](https://webpack.js.org/guides/build-performance).
 
 #### Common Libraries
 
