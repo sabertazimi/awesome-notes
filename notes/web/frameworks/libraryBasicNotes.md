@@ -152,6 +152,7 @@
 - [Globby: User-friendly glob matching](https://github.com/sindresorhus/globby)
 - [Git URL Parse](https://github.com/IonicaBizau/git-url-parse)
 - [Regex101](https://github.com/firasdib/Regex101)
+- [Domain Parser](https://github.com/peerigon/parse-domain)
 
 ### Concurrent and Parallel Programming Utils
 
