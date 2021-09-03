@@ -17,7 +17,7 @@
 
 ### React Fiber
 
-- [A Simple React with Fiber Reconciliation](https://github.com/sabertazimi/meactjs)
+- [A Simple React with Fiber Reconciliation](https://github.com/sabertazimi/meact)
 
 React Fiber 的目标是提高其在动画、布局和手势等领域的适用性.
 它的主要特性是 `Incremental Rendering` : 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
