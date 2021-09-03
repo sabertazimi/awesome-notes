@@ -7232,6 +7232,22 @@ module.exports = {
 | eval-cheap-module-source-map | slow    | fast    | no         | lines only   |
 | eval-source-map              | slowest | ok      | no         | lines + rows |
 
+### Webpack Cache Configuration
+
+`cache` is set to `type: 'memory'` in development mode
+and disabled in production mode.
+`cache: true` is an alias to `cache: { type: 'memory' }`.
+
+Accelerate second build time:
+
+```js
+module.exports = {
+  cache: {
+    type: 'filesystem',
+  },
+};
+```
+
 ### Webpack Loader Configuration
 
 #### Webpack Babel Loader
@@ -7853,8 +7869,7 @@ npx webpack --mode production --profile --json > stats.json
 
 #### Webpack DLL Plugins
 
-- [AutoDLL Plugin](https://github.com/asfktz/autodll-webpack-plugin)
-- DLLReference Plugin
+Webpack 5 support out of box cache.
 
 #### Webpack Other Plugins
 
