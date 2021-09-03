@@ -374,6 +374,7 @@
 - [React Data Sheet](https://github.com/nadbm/react-datasheet)
 - [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
 - [SheetJS](https://github.com/SheetJS/sheetjs)
+- [HyperFormula](https://github.com/handsontable/hyperformula)
 
 ### Charts Visualization
 
