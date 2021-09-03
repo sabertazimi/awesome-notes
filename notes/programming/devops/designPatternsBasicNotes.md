@@ -2403,6 +2403,17 @@ e.print(buffer);
 - IOC (inversion of control) 控制反转模式；控制反转是将组件间的依赖关系从程序内部提到外部来管理
 - DI (dependency injection) 依赖注入模式；依赖注入是指将组件的依赖通过外部以参数或其他形式注入
 
+```js
+class Component {
+  run(context, options) {
+    const dep1 = context.getDep1();
+    const dep2 = context.getDep2();
+    dep1.run();
+    dep2.run();
+  }
+}
+```
+
 ```java
 class DbMysql {
   public function query(){}
