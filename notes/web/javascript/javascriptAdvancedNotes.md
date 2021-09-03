@@ -7854,6 +7854,7 @@ npx webpack --mode production --profile --json > stats.json
 
 - [Mini CSS Extract Plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
 - [CSS Minimizer Plugin](https://github.com/webpack-contrib/css-minimizer-webpack-plugin)
+- [CSS Tree Shaking](https://github.com/FullHuman/purgecss)
 
 #### Webpack Images Plugins
 
