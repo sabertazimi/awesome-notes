@@ -739,6 +739,99 @@ class UserInput extends Component {
 }
 ```
 
+### Compound Components
+
+[Compound components example](https://dev.to/alexi_be3/react-component-patterns-49ho):
+
+```tsx
+import * as React from 'react';
+
+interface Props {
+  onStateChange?(e: string): void;
+  defaultValue?: string;
+}
+
+interface State {
+  currentValue: string;
+  defaultValue?: string;
+}
+
+interface RadioInputProps {
+  label: string;
+  value: string;
+  name: string;
+  imgSrc: string;
+  key: string | number;
+  currentValue?: string;
+  onChange?(e: React.ChangeEvent<HTMLInputElement>): void;
+}
+
+const RadioImageForm = ({
+  children,
+  onStateChange,
+  defaultValue,
+}: React.PropsWithChildren<Props>): React.ReactElement => {
+  const [state, setState] = React.useState<State>({
+    currentValue: '',
+    defaultValue,
+  });
+
+  // Memoized so that providerState isn't recreated on each render
+  const providerState = React.useMemo(
+    () => ({
+      onChange: (event: React.ChangeEvent<HTMLInputElement>): void => {
+        const value = event.target.value;
+        setState({
+          currentValue: value,
+        });
+        onStateChange?.(value);
+      },
+      ...state,
+    }),
+    [state, onStateChange]
+  );
+
+  return (
+    <div>
+      <form>
+        {React.Children.map(children, (child: React.ReactElement) =>
+          React.cloneElement(child, {
+            ...providerState,
+          })
+        )}
+      </form>
+    </div>
+  );
+};
+
+const RadioInput = ({
+  currentValue,
+  onChange,
+  label,
+  value,
+  name,
+  imgSrc,
+  key,
+}: RadioInputProps): React.ReactElement => (
+  <label className="radio-button-group" key={key}>
+    <input
+      type="radio"
+      name={name}
+      value={value}
+      aria-label={label}
+      onChange={onChange}
+      checked={currentValue === value}
+      aria-checked={currentValue === value}
+    />
+    <img alt="" src={imgSrc} />
+  </label>
+);
+
+RadioImageForm.RadioInput = RadioInput;
+
+export default RadioImageForm;
+```
+
 ## React Reusability Patterns
 
 ### HOC
