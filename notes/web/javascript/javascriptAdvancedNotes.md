@@ -7222,6 +7222,16 @@ module.exports = {
 - --colors
 - -p
 
+### Webpack Devtool Source Map Configuration
+
+| devtool                      | build   | rebuild | production | quality      |
+| ---------------------------- | ------- | ------- | ---------- | ------------ |
+| (none) / false               | fastest | fastest | yes        | bundle       |
+| eval                         | fast    | fastest | no         | generated    |
+| eval-cheap-source-map        | ok      | fast    | no         | transformed  |
+| eval-cheap-module-source-map | slow    | fast    | no         | lines only   |
+| eval-source-map              | slowest | ok      | no         | lines + rows |
+
 ### Webpack Loader Configuration
 
 #### Webpack Babel Loader
