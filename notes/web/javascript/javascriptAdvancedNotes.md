@@ -7708,6 +7708,7 @@ module.exports = {
 ```js
 {
   optimization: {
+    runtimeChunk: true,
     splitChunks: {
       chunks: 'initial',
       cacheGroups: {
