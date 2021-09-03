@@ -4950,6 +4950,30 @@ const App = () => (
 </div>
 ```
 
+#### CRA Code Splitting
+
+Code splitting for [production build](https://create-react-app.dev/docs/production-build)
+with `import('dep').then();`:
+
+```ts
+import { ReportHandler } from 'web-vitals';
+
+const reportWebVitals = (onPerfEntry?: ReportHandler) => {
+  if (onPerfEntry && onPerfEntry instanceof Function) {
+    // Code splitting into separate chunk
+    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      getCLS(onPerfEntry);
+      getFID(onPerfEntry);
+      getFCP(onPerfEntry);
+      getLCP(onPerfEntry);
+      getTTFB(onPerfEntry);
+    });
+  }
+};
+
+export default reportWebVitals;
+```
+
 #### CRA Service Worker
 
 - [PWA Template](https://github.com/cra-template/pwa)
