@@ -81,9 +81,11 @@
 
 ### Mobile Solution
 
+- [Uni APP: Vue for mobile development](https://github.com/dcloudio/uni-app)
 - [Taro: Cross-Platform/Cross-Framework solution to develop mini-programs](https://github.com/NervJS/taro)
 - [Expo: Making universal native apps with React on Android, iOS and web](https://github.com/expo/expo)
-- [Uni APP: Vue for mobile development](https://github.com/dcloudio/uni-app)
+- [Rax: Progressive React framework for building universal application](https://github.com/alibaba/rax)
+- [Universal API: Universal apis for web, WeChat miniapp and AliPay miniapp](https://github.com/raxjs/universal-api)
 
 ## Data and State Management
 
