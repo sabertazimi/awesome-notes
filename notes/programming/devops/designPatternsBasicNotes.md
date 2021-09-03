@@ -2698,6 +2698,8 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
 
 ## Domain Driven Design
 
+- [Front-end domain driven design guide](https://dev.to/bespoyasov/clean-architecture-on-frontend-4311).
+
 ### Interface Layer
 
 主要负责与外部系统进行交互与通信:
