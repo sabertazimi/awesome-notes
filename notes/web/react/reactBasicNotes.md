@@ -4916,6 +4916,7 @@ render() {
 - Environment variables [list](https://create-react-app.dev/docs/advanced-configuration).
 
 ```bash
+GENERATE_SOURCEMAP=false
 REACT_APP_NOT_SECRET_CODE=abcdef
 ```
 
