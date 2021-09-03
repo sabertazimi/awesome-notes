@@ -7630,9 +7630,14 @@ new webpack.optimize.CommonsChunkPlugin({
 #### Code Minimization
 
 ```js
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
+const isEnvProduction = process.env.NODE_ENV === 'production';
+const isEnvProductionProfile =
+  isEnvProduction && process.argv.includes('--profile');
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
 module.exports = {
   module: {
@@ -7643,8 +7648,9 @@ module.exports = {
         use: [
           'thread-loader',
           {
-            loader: require.resolve('babel-loader');
-          }
+            loader: require.resolve('babel-loader'),
+          },
+        ],
       },
       {
         test: /.s?css$/,
@@ -7656,6 +7662,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
+        parallel: true,
         terserOptions: {
           parse: {
             ecma: 8,
@@ -7678,9 +7685,6 @@ module.exports = {
             ascii_only: true,
           },
         },
-        parallel: true,
-        cache: true,
-        sourceMap: shouldUseSourceMap,
       }),
       new CssMinimizerPlugin(),
     ],
