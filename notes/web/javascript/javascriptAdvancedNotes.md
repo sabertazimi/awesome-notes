@@ -7757,20 +7757,25 @@ module.exports = {
   optimization: {
     runtimeChunk: true,
     splitChunks: {
-      chunks: 'initial',
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 6,
+      maxInitialRequests: 4,
+      automaticNameDelimiter: '-',
       cacheGroups: {
+        vendors: {
+          name: 'chunk-vendors',
+          priority: -10,
+          chunks: 'initial',
+          test: /[\\/]node_modules[\\/]/,
+        },
         common: {
-          name: 'common',
-          priority: 9,
+          name: 'chunk-common',
+          priority: -20,
           chunks: 'initial',
           minChunks: 2,
           reuseExistingChunk: true,
-        },
-        vendor: {
-          name: 'vendor',
-          priority: 10,
-          chunks: 'initial',
-          test: /[\\/]node_modules[\\/]/,
         },
       },
     },
