@@ -2,7 +2,7 @@
 
 [TOC]
 
-## Curated List of Vulnerability(漏洞)
+## Curated List of Vulnerability
 
 ### Object Injection
 
@@ -112,7 +112,8 @@ const generateSessionId = session => uid(24);
 
 Cross-Site Scripting:
 
-- Reflected XSS: url input(search pages)
+- Reflected XSS: url input (search pages) `http://localhost:8080/test?name=<script>alert('attack')</script>`.
+- Stored XSS: store script into database.
 
 user input: `<script> malicious code </script>`
 
@@ -128,7 +129,7 @@ don't trust user:
 
 Cross-Site Request Forgery - 跨站请求伪造:
 
-挟制用户在当前已登录的 Web 应用程序上执行非本意的操作,
+挟制用户在当前已登录的 Web 应用程序上执行**非本意**的操作,
 利用已认证用户(长期 Cookies), 访问攻击者网站, 并被强制执行脚本,
 在用户不知情的情况下提交 Get/Post Request with Cookies 给被攻击网站.
 
@@ -166,6 +167,15 @@ function openUrl(url) {
   newTab.location = url;
 }
 ```
+
+### Distributed Denial of Service
+
+DDoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
+
+- Web服务.
+- 邮件服务.
+- DNS服务.
+- 即时通讯服务.
 
 ### File Upload Vulnerabilities
 
