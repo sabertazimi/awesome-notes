@@ -2511,6 +2511,103 @@ that is waiting for the result of that I/O operation.
 The Node.js execution model was designed to cater to the needs of most web servers,
 which tend to be **I/O-intensive** (due to non-blocking I/O).
 
+## V8 Good Parts
+
+- source code (parser) AST (interpreter) bytecode
+- send profiling data from bytecode to optimizing compiler, generate optimized code
+- **Ignition** interpreter
+- **TurboFan** optimizing compiler (2 for SpiderMonkey/Edge, 3 for Safari)
+
+### V8 Object Shape
+
+- [Shapes ICS](https://mathiasbynens.be/notes/shapes-ics)
+
+```js
+// o1 and o2 have the same shape
+// JSObject(1, 2) => Shape('x', 'y')
+// JSObject(3, 4) => Shape('x', 'y')
+// 'x' => 0 Offset, Writable, Enumerable, Configurable
+// 'y' => 1 Offset, Writable, Enumerable, Configurable
+const o1 = { x: 1, y: 2 };
+const o2 = { x: 3, y: 4 };
+```
+
+Shape Transform
+
+```js
+// Shape chain: Shape(empty) => Shape(x) => Shape(x, y)
+const o = {};
+o.x = 1;
+o.y = 2;
+
+// Shape chain: Shape(empty) => Shape(y) => Shape(y, x)
+const o = {};
+o.y = 2;
+o.x = 1;
+
+// Shape chain: Shape(x)
+const o = { x: 1 };
+```
+
+array shape: Shape('length'), 'length' => 0 Offset, Writable
+
+### V8 Inline Cache
+
+V8 use ICs to memorize information (same shape) where to find properties on objects:
+
+- always initialize objects in the same way (generate the same shape)
+- don't add property to objects dynamically (invalid inline cache)
+- don't mess with property attributes of array elements
+
+### V8 Garbage Collection
+
+- [Introduction](https://mp.weixin.qq.com/s/VbAUPGt3sUVzEQHxWYmlBw)
+  to V8 garbage collection.
+
+V8 分代垃圾回收算法, 将堆分为两个空间:
+
+- 新生代: 存放短周期对象, 空间小, 使用 `Scavenge` 回收算法, 副垃圾回收器.
+- 老生代: 存放长周期对象, 空间大, 使用 `Mark-Sweep-Compact` 回收算法, 主垃圾回收器.
+
+#### V8 Scavenge GC Algorithm
+
+- 空间换时间算法 (复制算法).
+- 标记活动对象和非活动对象.
+- 复制 from-space 中的活动对象到 to-space 中并进行排序.
+- 清除 from-space 中的所有对象.
+- 将 from-space 和 to-space 进行角色互换, 等待下一次 GC.
+- 新生代对象晋升 (计算存活周期, 初始为 nursery 子代):
+  allocation -> nursery 子代 -> intermediate 子代 -> 老生代.
+
+#### V8 Mark-Sweep-Compact GC Algorithm
+
+- 老生代空间大, 无法使用空间换时间 (复制) 算法.
+- 标记阶段: 对老生代对象进行第一次扫描, 对活动对象进行标记.
+- 清理阶段: 对老生代对象进行第二次扫描, 清除未标记的对象.
+- 压缩阶段: 每次清理完非活动对象, 把剩下活动对象整理到内存的一侧, 回收掉边界上的内存 (以备后续大对象老生代).
+
+#### V8 GC Stop-The-World
+
+垃圾回收优先于代码执行, 会先停止代码的执行,
+等到垃圾回收完毕, 再执行JS代码, 成为全停顿.
+
+Orinoco 优化 (优化全停顿现象):
+
+- Incremental marking (time slice): `JS + Mark + JS + Mark ...`.
+- Lazy sweeping.
+- Concurrent GC.
+- Parallel GC.
+
+### V8 Performance Tools
+
+- [Deoptigate](https://github.com/thlorenz/deoptigate)
+- [Turbolizer](https://github.com/thlorenz/turbolizer)
+- [v8 map processor](https://github.com/thlorenz/v8-map-processor)
+
+### V8 Performance Tutorial
+
+- [v8 perf](https://github.com/thlorenz/v8-perf)
+
 ## Browser Internal
 
 - Chrome: Blink (based on Webkit) + V8
@@ -3896,63 +3993,6 @@ const PageComponent = () => {
 <script nomodule src="legacy.js"></script>
 ```
 
-### V8 Good Parts
-
-- source code (parser) AST (interpreter) bytecode
-- send profiling data from bytecode to optimizing compiler, generate optimized code
-- **Ignition** interpreter
-- **TurboFan** optimizing compiler (2 for SpiderMonkey/Edge, 3 for Safari)
-
-#### Object Shape
-
-- [Shapes ICS](https://mathiasbynens.be/notes/shapes-ics)
-
-```js
-// o1 and o2 have the same shape
-// JSObject(1, 2) => Shape('x', 'y')
-// JSObject(3, 4) => Shape('x', 'y')
-// 'x' => 0 Offset, Writable, Enumerable, Configurable
-// 'y' => 1 Offset, Writable, Enumerable, Configurable
-const o1 = { x: 1, y: 2 };
-const o2 = { x: 3, y: 4 };
-```
-
-Shape Transform
-
-```js
-// Shape chain: Shape(empty) => Shape(x) => Shape(x, y)
-const o = {};
-o.x = 1;
-o.y = 2;
-
-// Shape chain: Shape(empty) => Shape(y) => Shape(y, x)
-const o = {};
-o.y = 2;
-o.x = 1;
-
-// Shape chain: Shape(x)
-const o = { x: 1 };
-```
-
-array shape: Shape('length'), 'length' => 0 Offset, Writable
-
-#### Inline Cache
-
-V8 use ICs to memorize information (same shape) where to find properties on objects:
-
-- always initialize objects in the same way (generate the same shape)
-- don't add property to objects dynamically (invalid inline cache)
-- don't mess with property attributes of array elements
-
-#### V8 Perf Tools
-
-- [Deoptigate](https://github.com/thlorenz/deoptigate)
-- [Turbolizer](https://github.com/thlorenz/turbolizer)
-- [v8 map processor](https://github.com/thlorenz/v8-map-processor)
-
-#### Awesome V8 Performance Tutorial
-
-- [v8 perf](https://github.com/thlorenz/v8-perf)
 
 ### Perf and Analysis Tools
 
