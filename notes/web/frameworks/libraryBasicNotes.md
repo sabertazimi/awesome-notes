@@ -416,6 +416,7 @@
 - [Scroll Reveal](https://github.com/jlmakes/scrollreveal)
 - [AOS Scroll Animation](https://github.com/michalsnik/aos)
 - [Lax Scroll Animation](https://github.com/alexfoxy/laxxx)
+- [Rellax: Lightweight, vanilla javascript parallax library](https://github.com/dixonandmoe/rellax)
 - [Scroll Bar Detection](https://github.com/idiotWu/smooth-scrollbar)
 
 ### Mouse Utils
