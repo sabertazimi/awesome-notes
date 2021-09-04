@@ -7752,6 +7752,25 @@ module.exports = {
   browser will be able to cache them separately,
   and won't re-download them each time the app code changes.
 
+Split chunks configuration:
+
+- chunks:
+  - async: 只提取异步加载的模块出来打包到一个文件中.
+  - initial: 提取同步加载和异步加载模块, 分别打包到不同的文件中.
+  - all: 不管异步加载还是同步加载的模块都提取出来, 打包到一个文件中.
+- minSize: 超过 minSize 才会被提取.
+- maxSize: 超过 maxSize 会被进一步分割.
+- minChunks: 引用次数 >= minChunks 值才被提取.
+- maxAsyncRequests: 最大的按需 (异步) 加载次数 (default: 6).
+- maxInitialRequests: 入口文件加载最大数 (default: 4).
+- automaticNameDelimiter: 文件名分割符.
+- name: chunk 文件名.
+- cacheGroups: 配置提取模块的方案, 里面每一项代表一个提取模块的方案.
+  - priority: 值越大优先级越大.
+  - test：匹配模块路径或名称.
+  - reuseExistingChunk: `true` / `false`.
+  - enforce：`true` / `false`.
+
 ```js
 module.exports = {
   optimization: {
@@ -7776,6 +7795,28 @@ module.exports = {
           chunks: 'initial',
           minChunks: 2,
           reuseExistingChunk: true,
+        },
+        element: {
+          name: 'element-ui',
+          priority: 0,
+          chunks: 'all',
+          test: /[\\/]element-ui[\\/]/,
+        },
+        api: {
+          name: 'api',
+          priority: 0,
+          test: /[\\/]api[\\/]/,
+        },
+        subApi: {
+          name: 'subApi',
+          priority: 10,
+          minChunks: 2,
+          test: /[\\/]api[\\/]subApi[\\/]/,
+        },
+        mixin: {
+          name: 'mixin',
+          priority: 0,
+          test: /[\\/]mixin[\\/]/,
         },
       },
     },
