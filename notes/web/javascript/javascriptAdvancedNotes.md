@@ -7753,30 +7753,29 @@ module.exports = {
   and won't re-download them each time the app code changes.
 
 ```js
-{
+module.exports = {
   optimization: {
     runtimeChunk: true,
     splitChunks: {
       chunks: 'initial',
       cacheGroups: {
         common: {
-          chunks: 'initial', // all、async、initial
-          minChunks: 5,
           name: 'common',
           priority: 9,
-          enforce: true
+          chunks: 'initial',
+          minChunks: 2,
+          reuseExistingChunk: true,
         },
         vendor: {
-          test: /node_modules/,
-          chunks: 'initial',
           name: 'vendor',
           priority: 10,
-          enforce: true
-        }
-      }
+          chunks: 'initial',
+          test: /[\\/]node_modules[\\/]/,
+        },
+      },
     },
-  }
-}
+  },
+};
 ```
 
 #### Tree Shaking
