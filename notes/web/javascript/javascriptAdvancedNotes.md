@@ -2651,12 +2651,17 @@ Paint Order:
 - Useless DOM reference.
 - Incorrect closure.
   - Useless callback functions.
-  - Forgotten timer from setTimeout/setInterval.
+  - Forgotten timer from `setTimeout`/`setInterval`:
+    clear with `clearTimeout`/`clearInterval`.
 - Forgotten tick timer.
-- Forgotten event listener.
-- Forgotten subscriber.
-- Forgotten console log.
-- Forgotten Set/Map (while WeakSet/WeakMap don't bother GC).
+- Forgotten event listener:
+  clear with `removeEventListener`.
+- Forgotten subscriber:
+  clear with `unsubscribe(id)`.
+- Forgotten console log:
+  clear with `babel`/`tsc`.
+- Forgotten `Set`/`Map`:
+  `WeakSet`/`WeakMap` don't bother GC.
 - Circular reference.
 
 #### Bad Delete Operator
@@ -6448,8 +6453,8 @@ HyperText Transfer Protocol (HTTP) + Transport Layer Security (TLS):
 
 证书获取及验证过程 (CA 认证体系)：
 
-- 浏览器发起一个HTTPS的请求.
-- 服务器接收到请求, 返回一个HTTPS证书, 该证书内包含服务器私钥对应的公钥信息.
+- 浏览器发起一个 HTTPS 的请求.
+- 服务器接收到请求, 返回一个 HTTPS 证书, 该证书内包含服务器私钥对应的公钥信息.
 - 浏览器通过 CA 认证体系 (CA 服务器) 验证证书是否合法 (浏览器地址栏进行相应提示).
 
 加密密钥传输 (B 端加密 - 传输 - S 端解密):
