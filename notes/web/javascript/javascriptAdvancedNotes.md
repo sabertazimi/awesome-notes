@@ -2589,7 +2589,7 @@ V8 分代垃圾回收算法, 将堆分为两个空间:
 #### V8 GC Stop-The-World
 
 垃圾回收优先于代码执行, 会先停止代码的执行,
-等到垃圾回收完毕, 再执行JS代码, 成为全停顿.
+等到垃圾回收完毕, 再执行 JS 代码, 成为全停顿.
 
 Orinoco 优化 (优化全停顿现象):
 
@@ -3992,7 +3992,6 @@ const PageComponent = () => {
 <script type="module" src="main.mjs"></script>
 <script nomodule src="legacy.js"></script>
 ```
-
 
 ### Perf and Analysis Tools
 
