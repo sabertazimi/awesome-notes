@@ -6445,29 +6445,32 @@ HyperText Transfer Protocol (HTTP) + Transport Layer Security (TLS):
 
 在 HTTP/1.x 中，每次请求都会建立一次 HTTP 连接:
 
-- 串行的文件传输. 当请求 a 文件时, b 文件只能等待
-- 连接数过多
+- 串行的文件传输. 当请求 a 文件时, b 文件只能等待.
+- 连接数过多.
 
 HTTP/2 的多路复用就是为了解决上述的两个性能问题.
 在 HTTP/2 中, 有两个非常重要的概念, 分别是帧（frame）和流（stream）.
 帧代表着最小的数据单位, 每个帧会标识出该帧属于哪个流, 流也就是多个帧组成的数据流.
 多路复用, 就是在一个 TCP 连接中可以存在多条流, 避免队头阻塞问题和连接数过多问题.
 
-HTTP/2 = `HTTP` + `HPack / Stream` + `TLS 1.2+` + `TCP`
+HTTP/2 = `HTTP` + `HPack / Stream` + `TLS 1.2+` + `TCP`:
 
-- 二进制传输 (乱序二进制帧 Stream)
-- Header 压缩 (HPack)
-- 多路复用
-- Server Push
-- 事实加密 (Chrome/Firefox 只支持 HTTP/2 over TLS 1.2+)
+- 二进制传输 (乱序二进制帧 Stream).
+- Header 压缩 (HPack).
+- 多路复用.
+- Server Push.
+- 事实加密 (Chrome/Firefox 只支持 HTTP/2 over TLS 1.2+).
+
+HTTP/2 虽然通过多路复用解决了 HTTP 层的队头阻塞, 但仍然存在 TCP 层的队头阻塞.
 
 ### HTTP 3
 
-HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`
+HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`:
 
-- 解决多次握手高延迟问题
-- 解决队头 (数据重传) 阻塞 (后续数据) 问题
-- QUIC 协议保证传输可靠、实现快速握手、集成 TLS 加密、实现多路复用
+- 解决多次握手高延迟问题.
+- 解决队头 (数据重传) 阻塞 (后续数据) 问题.
+- QUIC 协议保证传输可靠、实现快速握手、集成 TLS 加密、实现多路复用.
+- QUIC 给每个请求流 (Stream ID) 都分配一个独立的滑动窗口, 实现无队头阻塞的多路复用, 解决 TCP 层的队头阻塞.
 
 ## Security
 
