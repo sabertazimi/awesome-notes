@@ -1,3 +1,11 @@
+---
+author: Sabertazimi
+authorTitle: Web Developer
+authorURL: https://github.com/sabertazimi
+authorImageURL: https://github.com/sabertazimi.png
+tags: [CS, Algorithm, OJ]
+---
+
 # OJ Basic Notes
 
 [TOC]

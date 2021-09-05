@@ -1,3 +1,11 @@
+---
+author: Sabertazimi
+authorTitle: Web Developer
+authorURL: https://github.com/sabertazimi
+authorImageURL: https://github.com/sabertazimi.png
+tags: [Programming, Functional Programming]
+---
+
 # Functional Programming Basic Notes
 
 [TOC]

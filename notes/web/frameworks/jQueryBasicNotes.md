@@ -1,3 +1,11 @@
+---
+author: Sabertazimi
+authorTitle: Web Developer
+authorURL: https://github.com/sabertazimi
+authorImageURL: https://github.com/sabertazimi.png
+tags: [Web, Framework, jQuery]
+---
+
 # jQuery Basic Notes
 
 [TOC]

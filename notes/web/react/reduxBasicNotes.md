@@ -1,4 +1,12 @@
-﻿# Redux Basic Notes
+---
+author: Sabertazimi
+authorTitle: Web Developer
+authorURL: https://github.com/sabertazimi
+authorImageURL: https://github.com/sabertazimi.png
+tags: [Web, React, Redux, State Management]
+---
+
+# Redux Basic Notes
 
 [TOC]
 

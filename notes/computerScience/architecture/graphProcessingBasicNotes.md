@@ -1,3 +1,11 @@
+---
+author: Sabertazimi
+authorTitle: Web Developer
+authorURL: https://github.com/sabertazimi
+authorImageURL: https://github.com/sabertazimi.png
+tags: [CS, System, Architecture, Graph Processing]
+---
+
 # Graph Processing Basic Notes
 
 [TOC]
