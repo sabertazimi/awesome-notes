@@ -50,6 +50,51 @@ const appStore.subscribe(throttle(() => {
 }, 1000));
 ```
 
+### Action
+
+Because of `ActionCreator.toString()` override,
+action creators returned by `createAction()`
+can be used directly as **keys** for `case reducers` passed to `createReducer()`.
+
+```ts
+import { createAction } from '@reduxjs/toolkit';
+
+const increment = createAction<number | undefined>('counter/increment');
+
+let action = increment(); // { type: 'counter/increment' }
+action = increment(3); // returns { type: 'counter/increment', payload: 3 }
+console.log(increment.toString());
+console.log(`The action type is: ${increment}`);
+// 'counter/increment'
+// 'The action type is: counter/increment'
+```
+
+```ts
+import { createAction, nanoid } from '@reduxjs/toolkit';
+
+const addTodo = createAction('todos/add', function prepare(text: string) {
+  return {
+    payload: {
+      text,
+      id: nanoid(),
+      createdAt: new Date().toISOString(),
+    },
+  };
+});
+
+console.log(addTodo('Write more docs'));
+/**
+ * {
+ *   type: 'todos/add',
+ *   payload: {
+ *     text: 'Write more docs',
+ *     id: '4AJvwMsWeHCChcWYga3dj',
+ *     createdAt: '2019-10-03T07:53:36.581Z'
+ *   }
+ * }
+ **/
+```
+
 ### Reducers
 
 - [Reducing Boilerplate](https://redux.js.org/recipes/reducing-boilerplate)
