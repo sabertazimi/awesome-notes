@@ -2345,6 +2345,7 @@ parentElement.appendChild(childElement);
 parentElement.insertBefore(newElement, targetElement);
 parentElement.removeChild();
 parentElement.replaceChild();
+parentElement.replaceChildren();
 parentElement.hasChildNode();
 
 setAttribute();
@@ -2366,9 +2367,7 @@ const showAlert = (type, message, duration = 3) {
 };
 ```
 
-#### dynamic creation
-
-##### append
+#### Append DOM Node
 
 ```javascript
 var testDiv = document.getElementById('testDiv');
@@ -2380,7 +2379,7 @@ var txt = document.createTextNode('Hello World');
 para.appendChild(txt);
 ```
 
-##### insert
+#### Insert DOM Node
 
 ```js
 // 4 positions
@@ -2410,6 +2409,13 @@ function insertAfter(newElement, targetElement) {
     parent.insertBefore(newElement, targetElement.nextSibling);
   }
 }
+```
+
+#### Replace DOM Node
+
+```js
+node.replaceChild(document.createTextNode(text), node.firstChild);
+node.replaceChildren(...nodeList);
 ```
 
 #### node
