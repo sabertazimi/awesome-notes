@@ -226,7 +226,10 @@ const todosReducer = createReducer([] as Todo[], builder => {
 });
 ```
 
+:::tip Reducer Pitfall
 Ensure that either mutate state argument or return a new state, but **not both**.
+:::
+
 Following reducer would throw an exception if a toggleTodo action is passed:
 
 ```ts
@@ -262,53 +265,101 @@ Other pitfalls for `State Proxy` in [ImmerJS](https://immerjs.github.io/immer/pi
   - Use `original` instead: `const index = original(list).indexOf(element)`.
   - Use unique `id` field instead.
 
-### Map to Props
+### Slices
 
-dump components implementation
+Slice API is standard approach for writing Redux logic.
+Internally, it uses `createAction` and `createReducer`,
+also use `Immer` to write immutable updates.
 
-```jsx
-// app.js
-React.render(
-  <Provider store={store}>{() => <MyRootComponent />}</Provider>,
-  rootEl
-);
+```ts
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// dump component
-import { Component } from 'react';
-
-export default class Counter extends Component {
-  render() {
-    return <button onClick={this.props.onIncrement}>{this.props.value}</button>;
-  }
+interface CounterState {
+  value: number;
 }
+
+const initialState = { value: 0 } as CounterState;
+
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState,
+  reducers: {
+    increment(state) {
+      state.value++;
+    },
+    decrement(state) {
+      state.value--;
+    },
+    incrementByAmount(state, action: PayloadAction<number>) {
+      state.value += action.payload;
+    },
+  },
+});
+
+export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export default counterSlice.reducer;
 ```
 
-```jsx
-import { Component } from 'react';
-import { connect } from 'react-redux';
+`extraReducers` allows `createSlice` to respond to
+**other** action types besides the types it has generated.
 
-import Counter from '../components/Counter';
-import { increment } from '../actionsCreators';
+If two fields from reducers and extraReducers
+happen to end up with the **same** action type string,
+the function from **reducers** will be used to handle that action type.
 
-// Which part of the Redux global state does our component want to receive as props?
-function mapStateToProps(state) {
-  return {
-    value: state.counter,
-  };
+```ts
+import { createAction, createSlice, Action, AnyAction } from '@reduxjs/toolkit';
+
+interface RejectedAction extends Action {
+  error: Error;
 }
 
-// Which action creators does it want to receive by props?
-function mapDispatchToProps(dispatch) {
-  return {
-    onIncrement: () => dispatch(increment()),
-  };
+interface Item {
+  id: string;
+  text: string;
 }
 
-export default connect(
-  // Line 20
-  mapStateToProps,
-  mapDispatchToProps
-)(Counter);
+// Counter actions
+const incrementBy = createAction<number>('incrementBy');
+const decrement = createAction('decrement');
+
+function isRejectedAction(action: AnyAction): action is RejectedAction {
+  return action.type.endsWith('rejected');
+}
+
+const todosSlice = createSlice({
+  name: 'todo',
+  initialState: [] as Item[],
+  // Todo reducers
+  reducers: {
+    addTodo: {
+      reducer: (state, action: PayloadAction<Item>) => {
+        state.push(action.payload);
+      },
+      // Action creator prepare callback
+      prepare: (text: string) => {
+        const id = nanoid();
+        return { payload: { id, text } };
+      },
+    },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(incrementBy, (state, action) => {
+        // action is inferred correctly here if using TS
+      })
+      // You can chain calls, or have separate `builder.addCase()` lines each time
+      .addCase(decrement, (state, action) => {})
+      // You can match a range of action types
+      .addMatcher(
+        isRejectedAction,
+        // `action` will be inferred as a RejectedAction
+        (state, action) => {}
+      )
+      // and provide a default case if no other handlers matched
+      .addDefaultCase((state, action) => {});
+  },
+});
 ```
 
 ## Middleware
