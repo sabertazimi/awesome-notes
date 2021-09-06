@@ -141,6 +141,13 @@ const todosReducer = createReducer([] as Todo[], builder => {
 });
 ```
 
+Other pitfalls for `State Proxy` in [ImmerJS](https://immerjs.github.io/immer/pitfalls):
+
+- `Draft` objects in `Immer` are wrapped in `Proxy`,
+  so you cannot use `==` or `===` to test equality:
+  - Use `original` instead: `const index = original(list).indexOf(element)`.
+  - Use unique `id` field instead.
+
 ### Map to Props
 
 dump components implementation
