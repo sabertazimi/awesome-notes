@@ -78,6 +78,41 @@ const reducer = createReducer(initialState, {
 });
 ```
 
+`createReducer`: `builder.addCase` and `builder.addMatcher`:
+
+- If there is an exact match for the action type,
+  the corresponding `case reducer` will execute first.
+- Any matchers that return true
+  will execute in the order they were defined.
+- If a default case reducer is provided,
+  and no case or matcher reducers ran,
+  the default case reducer will execute.
+- If no case or matcher reducers ran,
+  the original existing state value will be returned unchanged.
+
+```ts
+import { createReducer } from '@reduxjs/toolkit';
+
+const reducer = createReducer(0, builder => {
+  builder
+    .addCase('increment', state => state + 1)
+    .addMatcher(
+      action => action.startsWith('i'),
+      state => state * 5
+    )
+    .addMatcher(
+      action => action.endsWith('t'),
+      state => state + 2
+    );
+});
+
+console.log(reducer(0, { type: 'increment' }));
+// Returns 7, as the 'increment' case and both matchers all ran in sequence:
+// - case 'increment": 0 => 1
+// - matcher starts with 'i': 1 => 5
+// - matcher ends with 't': 5 => 7
+```
+
 `createReducer` uses [immer](https://github.com/immerjs/immer)
 to let you write reducers as if they were mutating the state directly.
 In reality, the reducer receives a proxy state
