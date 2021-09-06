@@ -95,6 +95,40 @@ console.log(addTodo('Write more docs'));
  **/
 ```
 
+:::tip RTK Pitfall
+Strongly recommend to only use string action types.
+:::
+
+Redux Toolkit rests on the assumption that you use string action types.
+Specifically, some of its features rely on the fact that with strings,
+`toString()` method of `createAction()` action creator returns matching action type.
+
+This is not the case for non-string action types because `toString()`
+will return the string-converted type value rather than the type **itself**.
+
+```ts
+const INCREMENT = Symbol('increment');
+const increment = createAction(INCREMENT);
+
+increment.toString();
+// returns the string 'Symbol(increment)',
+// not the INCREMENT symbol itself
+
+increment.toString() === INCREMENT;
+// false
+
+const counterReducer = createReducer(0, {
+  // The following case reducer will NOT trigger for
+  // increment() actions because `increment` will be
+  // interpreted as a string, rather than being evaluated
+  // to the INCREMENT symbol.
+  [increment]: (state, action) => state + action.payload,
+
+  // You would need to use the action type explicitly instead.
+  [INCREMENT]: (state, action) => state + action.payload,
+});
+```
+
 ### Reducers
 
 - [Reducing Boilerplate](https://redux.js.org/recipes/reducing-boilerplate)
