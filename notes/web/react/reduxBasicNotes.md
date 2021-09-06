@@ -78,6 +78,69 @@ const reducer = createReducer(initialState, {
 });
 ```
 
+`createReducer` uses [immer](https://github.com/immerjs/immer)
+to let you write reducers as if they were mutating the state directly.
+In reality, the reducer receives a proxy state
+that translates all mutations into equivalent copy operations.
+
+```ts
+import { createAction, createReducer } from '@reduxjs/toolkit';
+
+interface Todo {
+  text: string;
+  completed: boolean;
+}
+
+const addTodo = createAction<Todo>('todos/add');
+const toggleTodo = createAction<number>('todos/toggle');
+
+const todosReducer = createReducer([] as Todo[], builder => {
+  builder
+    .addCase(addTodo, (state, action) => {
+      // This push() operation gets translated into
+      // the same extended-array creation as in the previous example.
+      const todo = action.payload;
+      state.push(todo);
+    })
+    .addCase(toggleTodo, (state, action) => {
+      // The "mutating" version of this case reducer is
+      // much more direct than the explicitly pure one.
+      const index = action.payload;
+      const todo = state[index];
+      todo.completed = !todo.completed;
+    });
+});
+```
+
+Ensure that either mutate state argument or return a new state, but **not both**.
+Following reducer would throw an exception if a toggleTodo action is passed:
+
+```ts
+import { createAction, createReducer } from '@reduxjs/toolkit';
+
+interface Todo {
+  text: string;
+  completed: boolean;
+}
+
+const toggleTodo = createAction<number>('todos/toggle');
+
+const todosReducer = createReducer([] as Todo[], builder => {
+  builder.addCase(toggleTodo, (state, action) => {
+    const index = action.payload;
+    const todo = state[index];
+
+    // This case reducer both mutates the passed-in state...
+    todo.completed = !todo.completed;
+
+    // And returns a new value.
+    // This will throw an exception.
+    // In this example, the easiest fix is to remove the `return` statement.
+    return [...state.slice(0, index), todo, ...state.slice(index + 1)];
+  });
+});
+```
+
 ### Map to Props
 
 dump components implementation
