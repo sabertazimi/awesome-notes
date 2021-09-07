@@ -635,6 +635,17 @@ export const connect =
 
 ## Redux Best Practice
 
+### Redux Necessity
+
+Necessity for importing Redux
+(状态多, 变化快, 更新复杂):
+
+- Lots of state.
+- Frequent update state.
+- Complex update state.
+
+### Redux Tips
+
 - 区分 Smart Component (know the state) 和 Dump Component (stateless)
 - Component 里不要出现任何 async calls，交给 action creator 来做
 - Reducer 尽量简单，复杂的交给 action creator
