@@ -192,7 +192,8 @@ console.log(reducer(0, { type: 'increment' }));
 // - matcher ends with 't': 5 => 7
 ```
 
-`createReducer` uses [immer](https://github.com/immerjs/immer)
+`createReducer` and `createSlice`
+uses [immer](https://github.com/immerjs/immer)
 to let you write reducers as if they were mutating the state directly.
 In reality, the reducer receives a proxy state
 that translates all mutations into equivalent copy operations.
