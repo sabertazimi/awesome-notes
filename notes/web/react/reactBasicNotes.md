@@ -2132,6 +2132,76 @@ function useInterval(callback: () => void, delay: number | null) {
 export default useInterval;
 ```
 
+#### Debounce Hook
+
+```jsx
+// Hook
+function useDebounce(value, delay) {
+  // State and setters for debounced value
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(
+    () => {
+      // Update debounced value after delay
+      const handler = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay);
+
+      // Cancel the timeout if value changes (also on delay change or unmount)
+      // This is how we prevent debounced value
+      // from updating if value is changed ...
+      // .. within the delay period. Timeout gets cleared and restarted.
+      return () => {
+        clearTimeout(handler);
+      };
+    },
+    [value, delay] // Only re-call effect if value or delay changes
+  );
+
+  return debouncedValue;
+}
+
+// Usage
+const [searchTerm, setSearchTerm] = useState('');
+const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+useEffect(() => {
+  ...
+}, [debouncedSearchTerm]);
+```
+
+#### EventListener Hook
+
+```js
+import { useCallback, useEffect } from 'react';
+
+export default function useKeydown() {
+  const handleKeydown = useCallback(() => {
+    alert('key is pressed.');
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeydown);
+    return () => {
+      document.removeEventListener('keydown', handleKeydown);
+    };
+  }, []);
+}
+```
+
+```js
+import { useEffect } from 'react';
+
+export default function useEventListener({ event, handler }) {
+  useEffect(() => {
+    document.addEventListener(event, handler);
+    return () => {
+      document.removeEventListener(event, handler);
+    };
+  }, []);
+}
+```
+
 #### Observer Hook
 
 ```ts
@@ -2295,44 +2365,6 @@ const useHistory = initialPresent => {
   // If needed we could also return past and future state
   return { state: state.present, set, undo, redo, clear, canUndo, canRedo };
 };
-```
-
-#### Debounce Hook
-
-```jsx
-// Hook
-function useDebounce(value, delay) {
-  // State and setters for debounced value
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(
-    () => {
-      // Update debounced value after delay
-      const handler = setTimeout(() => {
-        setDebouncedValue(value);
-      }, delay);
-
-      // Cancel the timeout if value changes (also on delay change or unmount)
-      // This is how we prevent debounced value
-      // from updating if value is changed ...
-      // .. within the delay period. Timeout gets cleared and restarted.
-      return () => {
-        clearTimeout(handler);
-      };
-    },
-    [value, delay] // Only re-call effect if value or delay changes
-  );
-
-  return debouncedValue;
-}
-
-// Usage
-const [searchTerm, setSearchTerm] = useState('');
-const debouncedSearchTerm = useDebounce(searchTerm, 500);
-
-useEffect(() => {
-  ...
-}, [debouncedSearchTerm]);
 ```
 
 #### Script Loading Hook
