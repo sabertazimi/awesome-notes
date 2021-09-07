@@ -107,7 +107,8 @@ tags: [Web, Framework, Library]
 ### React Recoil
 
 - [React Recoil](https://github.com/facebookexperimental/Recoil)
-- [Primitive and flexible state management for React](https://github.com/pmndrs/jotai)
+- [JoTai: Primitive and flexible state management for React](https://github.com/pmndrs/jotai)
+- [Zustand: Small, fast and scalable bear-bones state-management solution](https://github.com/pmndrs/zustand)
 
 ### React Query
 
