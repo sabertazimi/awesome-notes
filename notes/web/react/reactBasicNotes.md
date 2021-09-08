@@ -2631,27 +2631,26 @@ export const useField = (
   form,
   { defaultValue, validations = [], fieldsToValidateOnChange = [name] } = {}
 ) => {
-  let [value, setValue] = useState(defaultValue);
-  let [errors, setErrors] = useState([]);
-  let [pristine, setPristine] = useState(true);
-  let [validating, setValidating] = useState(false);
-  let validateCounter = useRef(0);
+  const [value, setValue] = useState(defaultValue);
+  const [errors, setErrors] = useState([]);
+  const [pristine, setPristine] = useState(true);
+  const [validating, setValidating] = useState(false);
+  const validateCounter = useRef(0);
 
   const validate = async () => {
-    let validateIteration = ++validateCounter.current;
+    const validateIteration = ++validateCounter.current;
     setValidating(true);
-    let formData = form.getFormData();
+    const formData = form.getFormData();
     let errorMessages = await Promise.all(
       validations.map(validation => validation(formData, name))
     );
-    errorMessages = errorMessages.filter(errorMsg => !!errorMsg);
+    errorMessages = errorMessages.filter(Boolean);
     if (validateIteration === validateCounter.current) {
       // this is the most recent invocation
       setErrors(errorMessages);
       setValidating(false);
     }
-    let fieldValid = errorMessages.length === 0;
-    return fieldValid;
+    return errorMessages.length === 0;
   };
 
   useEffect(() => {
@@ -2659,7 +2658,7 @@ export const useField = (
     form.validateFields(fieldsToValidateOnChange);
   }, [value]);
 
-  let field = {
+  const field = {
     name,
     value,
     errors,
@@ -2679,9 +2678,9 @@ export const useField = (
 };
 
 export const useForm = ({ onSubmit }) => {
-  let [submitted, setSubmitted] = useState(false);
-  let [submitting, setSubmitting] = useState(false);
-  let fields = [];
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const fields = [];
 
   const validateFields = async fieldNames => {
     let fieldsToValidate;
@@ -2693,11 +2692,10 @@ export const useForm = ({ onSubmit }) => {
       //if fieldNames not provided, validate all fields
       fieldsToValidate = fields;
     }
-    let fieldsValid = await Promise.all(
+    const fieldsValid = await Promise.all(
       fieldsToValidate.map(field => field.validate())
     );
-    let formValid = fieldsValid.every(isValid => isValid === true);
-    return formValid;
+    return fieldsValid.every(Boolean);
   };
 
   const getFormData = () => {
@@ -2712,8 +2710,8 @@ export const useForm = ({ onSubmit }) => {
       e.preventDefault();
       setSubmitting(true);
       setSubmitted(true); // User has attempted to submit form at least once
-      let formValid = await validateFields();
-      let returnVal = await onSubmit(getFormData(), formValid);
+      const formValid = await validateFields();
+      const returnVal = await onSubmit(getFormData(), formValid);
       setSubmitting(false);
       return returnVal;
     },
@@ -2739,7 +2737,8 @@ const Field = ({
   formSubmitted,
   ...other
 }) => {
-  let showErrors = (!pristine || formSubmitted) && !!errors.length;
+  const showErrors = (!pristine || formSubmitted) && !!errors.length;
+
   return (
     <FormControl className="field" error={showErrors}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
@@ -2809,7 +2808,7 @@ const App = props => {
     fieldsToValidateOnChange: ['password', 'confirmPassword'],
   });
 
-  let requiredFields = [usernameField, passwordField, confirmPasswordField];
+  const requiredFields = [usernameField, passwordField, confirmPasswordField];
 
   return (
     <div id="form-container">
