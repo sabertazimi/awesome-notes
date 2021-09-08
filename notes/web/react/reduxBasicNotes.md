@@ -363,6 +363,14 @@ const todosSlice = createSlice({
 });
 ```
 
+### Select
+
+- Extract data getting and normalization logic.
+- Memorize state changes.
+
+Making change to data format in reducers -> change reusable selector in `slice.ts`.
+No need to change `Component.tsx` logic.
+
 ### Thunk
 
 Redux Toolkit `configureStore` function automatically
