@@ -730,9 +730,9 @@ figure 可拥有唯一的 0/1 个 figcaption
 `<figcaption>figure_title</figcaption>`
 
 ```html
-<figure>
+<figure aria-labelledby="image-alt">
   <img src="/media/cc0-images/elephant-660-480.jpg" alt="Elephant at sunset" />
-  <figcaption>An elephant at sunset</figcaption>
+  <figcaption id="image-alt">An elephant at sunset</figcaption>
 </figure>
 ```
 
@@ -1100,10 +1100,10 @@ Use `<button>` for clickable elements
 ### Figure Accessibility
 
 ```html
-<figure>
+<figure aria-labelledby="image-alt">
   <img src="" alt="" />
   <br />
-  <figcaption></figcaption>
+  <figcaption id="image-alt"></figcaption>
 </figure>
 ```
 
