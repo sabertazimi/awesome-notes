@@ -6418,7 +6418,50 @@ const response = await fetch(request);
 - Code via need
 - Isomorphic interface
 
-## SSR
+## JamStack
+
+JamStack 指的是一套用于构建现代网站的技术栈:
+
+- JavaScript: enhancing with JavaScript.
+- APIs: supercharging with services.
+- Markup: pre-rendering.
+
+CSR (Client Side Rendering): SPA
+-> SSR (Server Side Rendering): SPA with SEO
+-> SSG (Static Site Generation): SPA with pre-rendering
+-> ISR (Incremental Static Regeneration) = SSG + SSR.
+
+- SSR + CSR: HomePage with SSR, dynamic with CSR.
+- SSG + CSR: HomePage with SSG, dynamic with CSR.
+- SSG + SSR: static with SSG, dynamic with SSR.
+
+### CSR
+
+- CSR hit API after the page loads (LOADING indicator).
+- Data is fetched on every page request.
+
+```tsx
+export default function CSRPage() {
+  const [dateTime, setDateTime] = React.useState<string>();
+
+  React.useEffect(() => {
+    axios
+      .get('https://worldtimeapi.org/api/ip')
+      .then((res) => {
+        setDateTime(res.data.datetime);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
+  return (
+    <main>
+      <TimeSection dateTime={dateTime} />
+    </main>
+  );
+}
+```
+
+### SSR
 
 - [Server Side Rendering with Puppeteer](https://developers.google.com/web/tools/puppeteer/articles/ssr)
 - [Rendering on the Web](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)
@@ -6431,6 +6474,79 @@ if (isBotAgent) {
   // server side rendering at runtime for real interactive users
   // ReactDOMServer.renderToString()
 }
+```
+
+- SSR hit API before the page loads (DELAY before render, and no LOADING indicator).
+- Data is fetched on every page request.
+
+```tsx
+export default function SSRPage({ dateTime }: SSRPageProps) {
+  return (
+    <main>
+      <TimeSection dateTime={dateTime} />
+    </main>
+  );
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await axios.get('https://worldtimeapi.org/api/ip');
+
+  return {
+    props: { dateTime: res.data.datetime },
+  };
+};
+```
+
+### SSG
+
+- Reloading did not change anything.
+- Hit API when running `npm run build`.
+- Data will not change because no further fetch.
+
+```tsx
+export default function SSGPage({ dateTime }: SSGPageProps) {
+  return (
+    <main>
+      <TimeSection dateTime={dateTime} />
+    </main>
+  );
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await axios.get('https://worldtimeapi.org/api/ip');
+
+  return {
+    props: { dateTime: res.data.datetime },
+  };
+};
+```
+
+### ISR
+
+- Based on SSG, with **revalidate limit**.
+- Cooldown state: reloading doesn't trigger changes and pages rebuilds.
+- First person that visits when cooldown state is off,
+  is going to trigger a rebuild.
+  That person won't be seeing changes.
+  But, the changes will be served for the next full reload.
+
+```tsx
+export default function ISR20Page({ dateTime }: ISR20PageProps) {
+    return (
+    <main>
+      <TimeSection dateTime={dateTime} />
+    </main>
+  );
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await axios.get('https://worldtimeapi.org/api/ip');
+
+  return {
+    props: { dateTime: res.data.datetime },
+    revalidate: 20,
+  };
+};
 ```
 
 ## SEO
@@ -8733,22 +8849,3 @@ describe('component', () => {
 ### Cypress Reference
 
 - [Blank page test](https://glebbahmutov.com/blog/visit-blank-page-between-tests)
-
-## Methodology
-
-### JamStack
-
-JamStack 指的是一套用于构建现代网站的技术栈:
-
-- JavaScript: enhancing with JavaScript.
-- APIs: supercharging with services.
-- Markup: pre-rendering.
-
-CSR (Client Side Rendering): SPA
--> SSR (Server Side Rendering): SPA with SEO
--> SSG (Static Site Generation): SPA with pre-rendering
--> ISR (Incremental Static Regeneration) = SSG + SSR.
-
-- SSR + CSR: HomePage with SSR, dynamic with CSR.
-- SSG + CSR: HomePage with SSG, dynamic with CSR.
-- SSG + SSR: static with SSG, dynamic with SSR.
