@@ -6767,8 +6767,8 @@ Set-Cookie: weight=100; domain=me.github.com
 - Token 认证 (加密解密过程) 比 Session Cookie 更消耗性能.
 - Token (包含用户信息) 比 Session ID 大, 更占带宽.
 - 不保存 Session 状态, 无法中止或更改 Token 权限, Token 到期前会始终有效, 存在盗用风险:
-  - JWT 有效期应短.
-  - JWT 应使用 HTTPS 协议.
+  - Token 有效期应短.
+  - Token 应使用 HTTPS 协议.
   - 对于重要权限， 需使用二次验证 (Two Factor Authentication).
 
 #### JSON Web Token
@@ -6786,8 +6786,8 @@ Set-Cookie: weight=100; domain=me.github.com
 - 把三个部分拼成一个字符串, 每个部分之间用 `.` 分隔: `HeaderBase64.PayloadBase64.Signature`.
 - 业务接口用来鉴权的 token 为 `access token`.
   越是权限敏感的业务, `access token` 有效期足够短, 以避免被盗用.
-- 一个专门生成 `access token` 的 token, 称为 refresh token.
-  refresh token 用来获取 access token, 有效期更长,
+- 一个专门生成 `access token` 的 token, 称为 `refresh token`.
+  `refresh token` 用来获取 `access token`, 有效期更长,
   通过独立服务和严格的请求方式增加安全性.
 
 ##### JSON Web TOken Pros
