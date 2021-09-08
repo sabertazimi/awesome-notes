@@ -365,6 +365,10 @@ const todosSlice = createSlice({
 
 ### Thunk
 
+Redux Toolkit `configureStore` function automatically
+sets up the thunk middleware by default,
+recommend using thunks as the standard approach for writing async logic with Redux.
+
 ```js
 function createThunkMiddleware(extraArgument) {
   return ({ dispatch, getState }) =>
