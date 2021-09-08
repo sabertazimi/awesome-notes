@@ -363,22 +363,60 @@ const todosSlice = createSlice({
 });
 ```
 
+### Thunk
+
+```js
+function createThunkMiddleware(extraArgument) {
+  return ({ dispatch, getState }) =>
+    next =>
+    action => {
+      if (typeof action === 'function') {
+        return action(dispatch, getState, extraArgument);
+      }
+
+      return next(action);
+    };
+}
+
+const thunk = createThunkMiddleware();
+thunk.withExtraArgument = createThunkMiddleware;
+
+export default thunk;
+```
+
 ## Middleware
 
 ### Middleware Basic Concepts
 
-每一个 Middleware 可以得到:
+每一个 Middleware 可以通过上下文获取:
 
-1. 最初的 store 对象 (dispatch 属性还是原来的)，
-   因此，可以通过 store.getState 获得最近的状态，
-   以及通过原本的 dispatch 对象直接发布 action 对象，
-   跳过其他 Middleware dispatch 方法（next）。
-   上面 vanillaPromise 演示了这样的用法。
-2. next 方法: 前一个 Middleware 返回的 dispatch 方法。
-   当前 Middleware 可以根据自己对 action 的判断和处理结果，
-   决定是否调用 next 方法，以及传入什么样的参数。
+- original `store`:
+  - original `store.dispatch`.
+  - get state by `store.getState`.
+  - 通过 `dispatch` 对象直接发布 `action` 对象.
+- `next` 方法: 前一个 Middleware 返回的 `dispatch` 方法.
+  当前 Middleware 可以根据自己对 action 的判断和处理结果,
+  决定是否调用 `next` 方法 (是否跳过其他 Middleware 的 `dispatch`),
+  以及传入什么样的参数.
+
+从而实现如下功能:
+
+- Execute extra logic when any action is dispatched.
+- Pause, modify, delay, replace, or halt dispatched actions.
+- Write extra code that has access to `dispatch` and `getState`.
+- Teach `dispatch` how to accept other values besides plain action objects,
+  such as **functions** (`action(dispatch, getState, extraArgument)`) and promises,
+  by intercepting them and dispatching real action objects instead.
 
 ### Middleware Simple Implementation
+
+- Raw Middleware: `store => next => action => T`.
+- `middleware(store)`: `next => action => T`.
+- `middleware(store)(next)`: `action => T`.
+- `next`: `action => T`.
+- `dispatch`: `action => T`.
+- After `middlewares.forEach`, set `next` to `store.dispatch`,
+  make new `dispatch` get all functions from `middlewares`.
 
 ```js
 function applyMiddleware(store, middlewares) {
