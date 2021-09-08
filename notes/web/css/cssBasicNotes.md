@@ -847,6 +847,23 @@ cal(50% - 100px);
 cal(10em + 3px);
 ```
 
+#### Mobile Box Viewport
+
+```css
+.my-element {
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+}
+```
+
+```js
+window.addEventListener('resize', () => {
+  // Get viewport height and multiple it by 1% to get a value for a vh unit
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+```
+
 ### Box Column
 
 Multiple-column layout:
