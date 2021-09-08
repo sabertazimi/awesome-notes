@@ -3132,7 +3132,11 @@ use `inline-box` with `width`
 | scan                | Progressive interlaced | no      | tv 媒体扫描方式      |
 | orientation         | Portrait/landscape     | no      | 横屏或竖屏           |
 
-#### Prefer Color Scheme
+- `prefers-contrast`: `less`, `more`.
+- `prefers-color-scheme`: `light`, `dark`.
+- `prefers-reduced-motion`: `no-preference`, `reduce`.
+
+#### Prefers Color Scheme
 
 ```css
 .day {
@@ -3163,6 +3167,16 @@ use `inline-box` with `width`
   .night.light-scheme {
     background: #eee;
     color: black;
+  }
+}
+```
+
+#### Prefers Reduced Motion
+
+```css
+@media (prefers-reduced-motion) {
+  .animated {
+    animation: none;
   }
 }
 ```
