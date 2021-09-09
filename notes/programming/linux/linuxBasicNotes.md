@@ -153,7 +153,11 @@ man hier
 
 通过源码包安装的软件，可以通过 ./configure --prefix=/opt/
 
-/usr/src 是内核源码存放的目录
+- `/usr/src`: Kernel source code.
+- `/usr/share/applications`: Desktop shortcuts.
+- `/usr/share/fonts/opentype`: Open Type Fonts (OTF).
+- `/usr/share/fonts/truetype`: True Type Fonts (TTF).
+- `/etc/nginx`: Nginx.
 
 ## Ubuntu
 
@@ -219,6 +223,15 @@ sudo apt install --reinstall gdm3 lightdm ubuntu-desktop
 - Install GNOME shell extension for browser.
 - Install local binding app: `sudo apt install chrome-gnome-shell`.
 - Visit `extensions.gnome.org` to install extensions.
+
+### Ubuntu Fonts
+
+```bash
+mkdir -p ~/.local/share/fonts/
+cp -fr code-fonts ~/.local/share/fonts/
+fc-cache -f -v
+fc-list
+```
 
 ## Arch Linux
 
