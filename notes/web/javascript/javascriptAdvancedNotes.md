@@ -6447,10 +6447,10 @@ export default function CSRPage() {
   React.useEffect(() => {
     axios
       .get('https://worldtimeapi.org/api/ip')
-      .then((res) => {
+      .then(res => {
         setDateTime(res.data.datetime);
       })
-      .catch((error) => console.error(error));
+      .catch(error => console.error(error));
   }, []);
 
   return (
@@ -6532,7 +6532,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 ```tsx
 export default function ISR20Page({ dateTime }: ISR20PageProps) {
-    return (
+  return (
     <main>
       <TimeSection dateTime={dateTime} />
     </main>

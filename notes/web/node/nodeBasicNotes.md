@@ -250,10 +250,10 @@ main().catch(err => console.error(err));
 
 Semver:
 
-- Patch release: bugfix and other minor changes
-- Minor release: new features not breaking API(backward compatible)
-- Major release: new features breaking API(not backward compatible)
-- Alpha (α): 预览版 (内部测试版), 会有很多Bug, 一般只有测试人员使用.
+- Patch release: bugfix and other minor changes.
+- Minor release: new features not breaking API (backward compatible).
+- Major release: new features breaking API (not backward compatible).
+- Alpha (α): 预览版 (内部测试版), 会有很多 Bug, 一般只有测试人员使用.
 - Beta (β): 测试版 (或者叫公开测试版), 会一直加入新的功能.
 - RC (Release Candidate): 最终测试版本, 可能成为最终产品的候选版本.
 - 多数开源软件会推出两个 RC 版本, 最后的 RC2 则成为正式版本.
