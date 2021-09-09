@@ -162,6 +162,7 @@ tags: [Web, Framework, Library]
 - [Git URL Parse](https://github.com/IonicaBizau/git-url-parse)
 - [Regex101](https://github.com/firasdib/Regex101)
 - [Domain Parser](https://github.com/peerigon/parse-domain)
+- [Crontab Parser](https://github.com/harrisiirak/cron-parser)
 
 ### Concurrent and Parallel Programming Utils
 
@@ -802,6 +803,7 @@ tags: [Web, Framework, Library]
 - [Chokidar: Efficient cross-platform file watching library](https://github.com/paulmillr/chokidar)
 - [Mkdirp](https://github.com/isaacs/node-mkdirp)
 - [RimRaf](https://github.com/isaacs/rimraf)
+- [ReNamer: rename files in bulk](https://github.com/75lb/renamer)
 
 ### CLI Cheat Sheet
 
@@ -834,6 +836,7 @@ tags: [Web, Framework, Library]
 
 - [TelNet](https://github.com/mkozjak/node-telnet-client)
 - [IMAP](https://github.com/mscdex/node-imap)
+- [SSH2: SSH2 client and server modules](https://github.com/mscdex/ssh2)
 
 ### Web Socket
 
