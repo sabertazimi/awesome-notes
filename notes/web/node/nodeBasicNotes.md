@@ -408,7 +408,7 @@ npm i lodash -w package-b
 npm i -D eslint -w package-c
 ```
 
-#### Exports
+#### Exports Field
 
 `exports` configures the JavaScript level:
 
@@ -471,6 +471,29 @@ module.exports = {
 // server.js
 const { port } = require('./config');
 console.log(`Your port is ${port}`); // 8626
+```
+
+### Corepack
+
+[Corepack](https://github.com/nodejs/corepack) is a tool to help with
+managing versions of your package managers (package manager manager).
+
+It exposes binary proxies for each supported package manager.
+It will identify whatever package manager is configured for current project,
+transparently install it if needed,
+and finally run it without requiring explicit user interactions.
+
+```bash
+# In npm project
+corepack yarn
+
+# In npm project
+corepack pnpm
+```
+
+```bash
+corepack enable yarn
+corepack disable pnpm
 ```
 
 ## Self-Defined Module
