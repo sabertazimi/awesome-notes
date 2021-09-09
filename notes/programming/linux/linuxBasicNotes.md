@@ -231,6 +231,7 @@ mkdir -p ~/.local/share/fonts/
 cp -fr code-fonts ~/.local/share/fonts/
 fc-cache -f -v
 fc-list
+fc-list : family | sort | uniq
 ```
 
 ## Arch Linux
