@@ -6989,8 +6989,44 @@ sandbox().call(window, { window, location, history, document }, code)
 
 #### User Fingerprint
 
-Use Canvas or WebGL to generate user
-[fingerprint](https://yinzhicao.org/TrackingFree/crossbrowsertracking_NDSS17.pdf).
+- Use Canvas or WebGL to generate user
+  [fingerprint](https://yinzhicao.org/TrackingFree/crossbrowsertracking_NDSS17.pdf).
+- Location information:
+  - Country.
+  - Region.
+  - City.
+  - Zip code.
+  - Latitude.
+  - Longitude.
+  - Timezone.
+- Connection information:
+  - IP address.
+  - Internet service provider.
+  - Organization.
+  - ASN.
+  - Tor browser detection.
+- Software information:
+  - Browser.
+  - Browser plugins detection.
+  - Operation system.
+  - User agent.
+  - Preferred language.
+  - Cookies enabled detection.
+  - Java enabled detection.
+  - DNT header enabled detection.
+  - Automated browser detection.
+  - Content filters detection: Adblock detection.
+- Hardware information:
+  - Screen resolution.
+  - Color resolution.
+  - Device type.
+  - Device memory.
+  - CPU cores.
+  - Max touch points.
+  - WebGL vendor.
+  - WebGL renderer.
+  - Battery level.
+  - Batter status.
 
 ```js
 function getCanvasFingerprint() {
