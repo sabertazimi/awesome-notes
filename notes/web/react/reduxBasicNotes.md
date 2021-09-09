@@ -661,6 +661,19 @@ function addFave(tweetId) {
 store.dispatch(addFave());
 ```
 
+## RTK Query
+
+### Server State Management
+
+- Tracking loading state in order to show UI spinners.
+- Avoiding duplicate requests for the same data.
+- Optimistic updates to make the UI feel faster
+  - Requires asynchronous APIs for fetching and updating.
+  - Updating `out of date` data in the background.
+- Managing cache lifetimes as the user interacts with the UI.
+- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview).
+- [React Query](https://github.com/tannerlinsley/react-query).
+
 ## Redux Internal
 
 ### Create Store
@@ -954,17 +967,6 @@ const fluxStandardAction = {
 - Complex UI Change: 用 component 归一化处理
 - Complex Data Input: 用 RxJS/observable 归一化处理
 - Complex State Change: 用 action/state 归一化处理
-
-## Server State
-
-- Tracking loading state in order to show UI spinners.
-- Avoiding duplicate requests for the same data.
-- Optimistic updates to make the UI feel faster
-  - Requires asynchronous APIs for fetching and updating.
-  - Updating `out of date` data in the background.
-- Managing cache lifetimes as the user interacts with the UI.
-- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview).
-- [React Query](https://github.com/tannerlinsley/react-query).
 
 ## Redux Tools
 
