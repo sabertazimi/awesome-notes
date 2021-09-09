@@ -828,6 +828,8 @@ export const connect =
 
 ## Redux Performance
 
+### Redux Performance Pitfalls
+
 - All `reducers` are called to produce the `next` store state.
 - All `mapStateToProps`/`useSelectors` of mounted components are called.
 - As every `mapStateToProps`/`useSelector`
@@ -835,6 +837,14 @@ export const connect =
   from the previous render,
   the associated components are rendered
   (**re-rendering** problem).
+
+### Redux Performance Best Practice
+
+- Normal React performance tips: `React.memo`, `useMemo`, `useCallback` etc.
+- Normalize large array state via `createEntityAdapter` API:
+  - Use `Ids` array as minimal core data (other than whole `Data[]`).
+  - Fast element lookup in normalized state (other than slow `Array.find()`).
+- Create memorized selectors via `createSelector` API.
 
 ## Redux Best Practice
 
