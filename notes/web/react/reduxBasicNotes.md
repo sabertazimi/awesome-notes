@@ -10,15 +10,13 @@ tags: [Web, React, Redux, State Management]
 
 [TOC]
 
-## Basic Concepts
+## Redux Concepts
 
 - 单一数据源: 整个应用程序的状态存储在单个对象树中 (容易跟踪/调试)
 - 状态只读: 通过 dispatch(action) 间接更改状态, 不直接写入状态
 - 纯函数更改状态: reducer(state, action) => newState
 
-### Store and State
-
-#### Store
+## Store
 
 Redux 中只有一个全局唯一 store 状态树, 且由 reducers 创建 store.
 
@@ -26,7 +24,7 @@ Redux 中只有一个全局唯一 store 状态树, 且由 reducers 创建 store.
 export default appStore = createStore(rootReducers, initState);
 ```
 
-#### State
+## State
 
 在 Redux 中 State 并不显式定义:
 
@@ -37,7 +35,7 @@ export default appStore = createStore(rootReducers, initState);
 - reducer 只保存最基本的 state, 可计算出的 state 放在 mapStateToProps(selector) 中直接计算后绑定至 props
 - 将数据保存在 Redux 存储中, 并在组件内部保持 UI 相关状态
 
-##### Persisted State
+### Persisted State
 
 ```js
 // localStorage.getItem('state')/localStorage.setItem('state', serializedState)
@@ -50,7 +48,7 @@ const appStore.subscribe(throttle(() => {
 }, 1000));
 ```
 
-### Action
+## Action
 
 Because of `ActionCreator.toString()` override,
 action creators returned by `createAction()`
@@ -129,7 +127,7 @@ const counterReducer = createReducer(0, {
 });
 ```
 
-### Reducers
+## Reducer
 
 - [Reducing Boilerplate](https://redux.js.org/recipes/reducing-boilerplate)
 
@@ -266,7 +264,7 @@ Other pitfalls for `State Proxy` in [ImmerJS](https://immerjs.github.io/immer/pi
   - Use `original` instead: `const index = original(list).indexOf(element)`.
   - Use unique `id` field instead.
 
-### Slices
+## Slice
 
 Slice API is standard approach for writing Redux logic.
 Internally, it uses `createAction` and `createReducer`,
@@ -530,7 +528,7 @@ const timeoutScheduler = store => next => action => {
 };
 ```
 
-### redux-thunk Middleware
+### Thunk Middleware
 
 ```js
 // thunk middleware
@@ -727,16 +725,15 @@ export const connect =
   };
 ```
 
-## Server State
+## Redux Performance
 
-- Tracking loading state in order to show UI spinners.
-- Avoiding duplicate requests for the same data.
-- Optimistic updates to make the UI feel faster
-  - Requires asynchronous APIs for fetching and updating.
-  - Updating `out of date` data in the background.
-- Managing cache lifetimes as the user interacts with the UI.
-- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview).
-- [React Query](https://github.com/tannerlinsley/react-query).
+- All `reducers` are called to produce the `next` store state.
+- All `mapStateToProps`/`useSelectors` of mounted components are called.
+- As every `mapStateToProps`/`useSelector`
+  that returned a different reference
+  from the previous render,
+  the associated components are rendered
+  (**re-rendering** problem).
 
 ## Redux Best Practice
 
@@ -847,41 +844,36 @@ const fluxStandardAction = {
 - Complex Data Input: 用 RxJS/observable 归一化处理
 - Complex State Change: 用 action/state 归一化处理
 
-## Awesome Tools
+## Server State
 
-### Libs
+- Tracking loading state in order to show UI spinners.
+- Avoiding duplicate requests for the same data.
+- Optimistic updates to make the UI feel faster
+  - Requires asynchronous APIs for fetching and updating.
+  - Updating `out of date` data in the background.
+- Managing cache lifetimes as the user interacts with the UI.
+- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview).
+- [React Query](https://github.com/tannerlinsley/react-query).
 
-#### Data Types
+## Redux Tools
 
-- immutable.js: decrease useless copy and memory occupation
+### Immutable Data Tools
 
-#### Network
+- ImmerJS.
+- Immutable.js: decrease useless copy and memory occupation.
 
-- node-fetch
-- isomorphic-fetch
-
-#### Middleware Tool
+### Middleware Tools
 
 - [Redux Thunk](https://github.com/reduxjs/redux-thunk)
 - [Redux Sage](https://github.com/yelouafi/redux-saga)
 - [Redux Promise](https://github.com/acdlite/redux-promise)
 - [Redux Diff Logger](https://github.com/fcomb/redux-diff-logger)
 
-#### State Tool
+### State Tools
 
-- redux-undo
-- reselect: memorize state transformation
+- Reselect: memorize state transformation.
+- Redux undo.
 
-## Performance
-
-- All `reducers` are called to produce the `next` store state.
-- All `mapStateToProps`/`useSelectors` of mounted components are called.
-- As every `mapStateToProps`/`useSelector`
-  that returned a different reference
-  from the previous render,
-  the associated components are rendered
-  (**re-rendering** problem).
-
-### Debugging
+### Debugging Tools
 
 - [Redux Devtools](https://github.com/gaearon/redux-devtools)
