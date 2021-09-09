@@ -44,6 +44,45 @@ npm config set sqlite3_binary_site https://npm.taobao.org/mirrors/sqlite3/
 npm config set python_mirror https://npm.taobao.org/mirrors/python/
 ```
 
+### Node Version Manager
+
+- [NVM](https://github.com/nvm-sh/nvm).
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```
+
+```bash
+# Install and use the latest version
+nvm install node
+nvm use node
+nvm alias default node
+
+# Install and use the latest LTS version
+nvm install --lts
+nvm use --lts
+```
+
+```bash
+# Install and use specific version
+nvm install 16
+nvm use 16
+nvm ls
+```
+
+```bash
+# Update to latest version
+nvm install 16
+nvm install node
+```
+
+```bash
+# Remove version
+nvm uninstall 14
+nvm uninstall 12
+```
+
 ### Basic Steps
 
 ```bash
