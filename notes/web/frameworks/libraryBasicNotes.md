@@ -894,6 +894,7 @@ tags: [Web, Framework, Library]
 - [Jasmine](https://github.com/jasmine/jasmine)
 - [Assert](https://github.com/power-assert-js/power-assert)
 - [Testem](https://github.com/testem/testem)
+- [Malabi: Tracing based JavaScript assertions](https://github.com/aspecto-io/malabi)
 
 ### Feature Testing
 
