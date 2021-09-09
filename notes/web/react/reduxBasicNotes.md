@@ -48,6 +48,107 @@ const appStore.subscribe(throttle(() => {
 }, 1000));
 ```
 
+### Normalized State
+
+- Only have one copy of each particular piece of data in state (no duplication).
+- Normalized data is kept in lookup table (key-value store),
+  where item IDs are keys, items themselves are values.
+- There may also be an array of all of the IDs for a particular item type.
+- [Redux normalizing state shape](https://redux.js.org/usage/structuring-reducers/normalizing-state-shape).
+- [createEntityAdapter](https://redux-toolkit.js.org/api/createEntityAdapter):
+  - Build normalized state.
+  - Return normalized state CURD operation reducers.
+  - Get data selectors by `getSelectors`.
+
+```ts
+const state = {
+  users: {
+    ids: ['user1', 'user2', 'user3'],
+    entities: {
+      user1: { id: 'user1', firstName, lastName },
+      user2: { id: 'user2', firstName, lastName },
+      user3: { id: 'user3', firstName, lastName },
+    },
+  },
+};
+
+const userId = 'user2';
+const userObject = state.users.entities[userId];
+```
+
+```ts
+import {
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+} from '@reduxjs/toolkit';
+import { client } from './api';
+
+const postsAdapter = createEntityAdapter({
+  sortComparer: (a, b) => b.date.localeCompare(a.date),
+});
+
+// State = { ids: [], entities: {}, status: 'idle', error: null };
+const initialState = postsAdapter.getInitialState({
+  status: 'idle',
+  error: null,
+});
+
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await client.get('/fakeApi/posts');
+  return response.data;
+});
+
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    reactionAdded(state, action) {
+      const { postId, reaction } = action.payload;
+      const existingPost = state.entities[postId];
+      if (existingPost) {
+        existingPost.reactions[reaction]++;
+      }
+    },
+    postUpdated(state, action) {
+      const { id, title, content } = action.payload;
+      const existingPost = state.entities[id];
+      if (existingPost) {
+        existingPost.title = title;
+        existingPost.content = content;
+      }
+    },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        // Use the `upsertMany` reducer as a mutating update utility
+        postsAdapter.upsertMany(state, action.payload);
+      })
+      // Use the `addOne` reducer for the fulfilled case
+      .addCase(addNewPost.fulfilled, postsAdapter.addOne);
+  },
+});
+
+export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions;
+
+// Export the customized selectors for this adapter using `getSelectors`
+export const {
+  selectAll: selectAllPosts,
+  selectById: selectPostById,
+  selectIds: selectPostIds,
+  // Pass in a selector that returns the posts slice of state
+} = postsAdapter.getSelectors(state => state.posts);
+
+export const selectPostsByUser = createSelector(
+  [selectAllPosts, (state, userId) => userId],
+  (posts, userId) => posts.filter(post => post.user === userId)
+);
+
+export default postsSlice.reducer;
+```
+
 ## Action
 
 Because of `ActionCreator.toString()` override,
