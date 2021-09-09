@@ -674,6 +674,149 @@ store.dispatch(addFave());
 - [RTK Query](https://redux-toolkit.js.org/rtk-query/overview).
 - [React Query](https://github.com/tannerlinsley/react-query).
 
+### Basic RTK Query Usage
+
+- Query hooks.
+- Mutation hooks.
+- Refetch function.
+- Cache tags.
+
+```ts
+// Import the RTK Query methods from the React-specific entry point.
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+// Define our single API slice object.
+export const apiSlice = createApi({
+  // The cache reducer expects to be added at `state.api`.
+  reducerPath: 'api',
+  // All of our requests will have URLs starting with '/fakeApi'.
+  baseQuery: fetchBaseQuery({ baseUrl: '/fakeApi' }),
+  tagTypes: ['Post'],
+  // The "endpoints" represent operations and requests for this server.
+  endpoints: builder => ({
+    getPost: builder.query({
+      query: postId => `/posts/${postId}`,
+    }),
+    // The `getPosts` endpoint is a "query" operation that returns data.
+    getPosts: builder.query({
+      // The URL for the request is '/fakeApi/posts'.
+      query: () => '/posts',
+      providesTags: ['Post'],
+    }),
+    addNewPost: builder.mutation({
+      query: initialPost => ({
+        url: '/posts',
+        method: 'POST',
+        // Include the entire post object as the body of the request
+        body: initialPost,
+      }),
+      invalidatesTags: ['Post'],
+    }),
+  }),
+});
+
+// Export the auto-generated hook for the `getPost` query endpoint
+export const { useGetPostQuery, useGetPostsQuery, useAddNewPostMutation } =
+  apiSlice;
+```
+
+```ts
+import { apiSlice } from '../features/api/apiSlice';
+
+export default configureStore({
+  reducer: {
+    // ... Other reducers.
+    [apiSlice.reducerPath]: apiSlice.reducer,
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
+});
+```
+
+```tsx
+import React from 'react';
+import { useGetPostsQuery } from '../api';
+import { PostExcerpt, Spinner } from '../components';
+
+export const PostsList = () => {
+  const {
+    data: posts = [],
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+    refetch,
+  } = useGetPostsQuery();
+
+  const sortedPosts = useMemo(
+    () => posts.slice().sort((a, b) => b.date.localeCompare(a.date)),
+    [posts]
+  );
+
+  let content;
+
+  if (isLoading) {
+    content = <Spinner text="Loading..." />;
+  } else if (isSuccess) {
+    content = sortedPosts.map(post => (
+      <PostExcerpt key={post.id} post={post} />
+    ));
+  } else if (isError) {
+    content = <div>{error.toString()}</div>;
+  }
+
+  return (
+    <section className="posts-list">
+      <h2>Posts</h2>
+      <button onClick={refetch}>Refetch Posts</button>
+      {content}
+    </section>
+  );
+};
+```
+
+```tsx
+import React, { useState } from 'react';
+import { useAddNewPostMutation } from '../api';
+
+export const AddPostForm = () => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [userId, setUserId] = useState('');
+
+  const [addNewPost, { isLoading }] = useAddNewPostMutation();
+
+  const canSave = [title, content, userId].every(Boolean) && !isLoading;
+
+  const onSavePostClicked = async () => {
+    if (canSave) {
+      try {
+        await addNewPost({ title, content, user: userId }).unwrap();
+        setTitle('');
+        setContent('');
+        setUserId('');
+      } catch (err) {
+        console.error('Failed to save the post: ', err);
+      }
+    }
+  };
+};
+```
+
+### RTK Query Cache Mechanism
+
+RTK Query creates a **cache key** for each `unique endpoint` + `argument` combination,
+and stores the results for each cache key separately.
+
+Use the same query hook multiple times,
+pass it different query parameters,
+and each result will be cached separately in Redux `store`.
+
+It iss important to note that the query parameter must be a **single value**
+(a primitive value or an object containing multiple fields, same as with `createAsyncThunk`).
+RTK Query will do **shallow stable** comparison of fields,
+and re-fetch the data if any of them have changed.
+
 ## Redux Internal
 
 ### Create Store
