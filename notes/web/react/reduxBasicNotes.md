@@ -363,15 +363,69 @@ const todosSlice = createSlice({
 });
 ```
 
-### Select
+## Selector
 
 - Extract data getting and normalization logic.
-- Memorize state changes.
 
 Making change to data format in reducers -> change reusable selector in `slice.ts`.
 No need to change `Component.tsx` logic.
 
-### Thunk
+- Memorize state changes.
+
+Keep `useSelector` away from returns a new array reference:
+
+```ts
+// Bad
+const postsForUser = useSelector(state => {
+  const allPosts = selectAllPosts(state);
+  // Returns a new array reference every time.
+  return allPosts.filter(post => post.user === userId);
+});
+```
+
+`createSelector` API
+([Reselect](https://github.com/reduxjs/reselect) under the hood)
+takes one or more **Input Selector** functions,
+plus an **Output Selector** function as arguments.
+`Output Selector` will only re-run when outputs of `Input Selector` have changed.
+With `createSelector` to write memorized selector functions:
+
+```ts
+// Good
+const selectAllPosts = state => state.posts.posts;
+const selectPostById = (state, postId) =>
+  state.posts.posts.find(post => post.id === postId);
+
+// Memorized selector function
+const selectPostsByUser = createSelector(
+  [selectAllPosts, (state, userId) => userId],
+  // Output selector will only re-run when `posts` or `userId` has changed.
+  (posts, userId) => posts.filter(post => post.user === userId)
+);
+```
+
+```ts
+const state1 = getState();
+// Output selector runs, because it's the first call.
+selectPostsByUser(state1, 'user1');
+// Output selector does _not_ run, because the arguments haven't changed.
+selectPostsByUser(state1, 'user1');
+// Output selector runs, because `userId` changed.
+selectPostsByUser(state1, 'user2');
+
+dispatch(reactionAdded());
+const state2 = getState();
+// Output selector does not run, because `posts` and `userId` are the same.
+selectPostsByUser(state2, 'user2');
+
+// Add some more posts.
+dispatch(addNewPost());
+const state3 = getState();
+// Output selector runs, because `posts` has changed.
+selectPostsByUser(state3, 'user2');
+```
+
+## Thunk
 
 Redux Toolkit `configureStore` function automatically
 sets up the thunk middleware by default,
