@@ -382,7 +382,7 @@ npm version minor
 npm version patch
 ```
 
-### NPM Workspaces
+#### NPM Workspaces
 
 In root `package.json`:
 
@@ -408,7 +408,7 @@ npm i lodash -w package-b
 npm i -D eslint -w package-c
 ```
 
-### Exports
+#### Exports
 
 `exports` configures the JavaScript level:
 
@@ -444,7 +444,36 @@ It bring two pros:
 }
 ```
 
-## Self-Defined Modules
+### CLI Environment
+
+```js
+// .env file (added to .gitignore)
+NODE_ENV=development
+PORT=8626
+# Set your database/API connection information here
+API_KEY=**************************
+API_URL=**************************
+```
+
+```js
+// config.js
+const dotenv = require('dotenv');
+dotenv.config();
+
+module.exports = {
+  endpoint: process.env.API_URL,
+  masterKey: process.env.API_KEY,
+  port: process.env.PORT,
+};
+```
+
+```js
+// server.js
+const { port } = require('./config');
+console.log(`Your port is ${port}`); // 8626
+```
+
+## Self-Defined Module
 
 ### Basic Modular Pattern
 
@@ -478,7 +507,7 @@ foo(a, b, function (err, param) {
 })；
 ```
 
-### Export Modules
+### Export Module
 
 ```js
 module.exports = function (args) {
@@ -1169,7 +1198,7 @@ function createWorker() {
 }
 ```
 
-## Test Modules
+## Test Module
 
 ### assert
 
@@ -1192,33 +1221,120 @@ assert.notEqual(1, true, 'Truthy');
 assert.ok(0, 'Zero is not truthy');
 ```
 
-## Environment
+## Node Web Crawler
+
+[Simple example](https://www.zenrows.com/blog/web-scraping-with-javascript-and-nodejs):
 
 ```js
-// .env file (added to .gitignore)
-NODE_ENV=development
-PORT=8626
-# Set your database/API connection information here
-API_KEY=**************************
-API_URL=**************************
-```
+const axios = require('axios');
+const playwright = require('playwright');
+const cheerio = require('cheerio');
 
-```js
-// config.js
-const dotenv = require('dotenv');
-dotenv.config();
+const url = 'https://scrapeme.live/shop/page/1/';
+const useHeadless = false; // "true" to use playwright
+const maxVisits = 30; // Arbitrary number for the maximum of links visited
+const visited = new Set();
+const allProducts = [];
 
-module.exports = {
-  endpoint: process.env.API_URL,
-  masterKey: process.env.API_KEY,
-  port: process.env.PORT,
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const getHtmlPlaywright = async url => {
+  const browser = await playwright.firefox.launch();
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  await page.goto(url);
+  const html = await page.content();
+  await browser.close();
+
+  return html;
 };
-```
 
-```js
-// server.js
-const { port } = require('./config');
-console.log(`Your port is ${port}`); // 8626
+const getHtmlAxios = async url => {
+  const { data } = await axios.get(url);
+
+  return data;
+};
+
+const getHtml = async url => {
+  return useHeadless ? await getHtmlPlaywright(url) : await getHtmlAxios(url);
+};
+
+const extractContent = $ =>
+  $('.product')
+    .map((_, product) => {
+      const $product = $(product);
+
+      return {
+        id: $product.find('a[data-product_id]').attr('data-product_id'),
+        title: $product.find('h2').text(),
+        price: $product.find('.price').text(),
+      };
+    })
+    .toArray();
+
+const extractLinks = $ => [
+  ...new Set(
+    $('.page-numbers a')
+      .map((_, a) => $(a).attr('href'))
+      .toArray()
+  ),
+];
+
+const crawl = async url => {
+  visited.add(url);
+  console.log('Crawl: ', url);
+  const html = await getHtml(url);
+  const $ = cheerio.load(html);
+  const content = extractContent($);
+  const links = extractLinks($);
+  links
+    .filter(link => !visited.has(link))
+    .forEach(link => {
+      q.enqueue(crawlTask, link);
+    });
+  allProducts.push(...content);
+
+  // We can see how the list grows. Gotta catch 'em all!
+  console.log(allProducts.length);
+};
+
+// Change the default concurrency or pass it as param
+const queue = (concurrency = 4) => {
+  let running = 0;
+  const tasks = [];
+
+  return {
+    enqueue: async (task, ...params) => {
+      tasks.push({ task, params });
+      if (running >= concurrency) {
+        return;
+      }
+
+      ++running;
+      while (tasks.length) {
+        const { task, params } = tasks.shift();
+        await task(...params);
+      }
+      --running;
+    },
+  };
+};
+
+const crawlTask = async url => {
+  if (visited.size >= maxVisits) {
+    console.log('Over Max Visits, exiting');
+    return;
+  }
+
+  if (visited.has(url)) {
+    return;
+  }
+
+  await crawl(url);
+};
+
+const q = queue();
+q.enqueue(crawlTask, url);
 ```
 
 ## Node Reference
