@@ -3976,7 +3976,12 @@ const PageComponent = () => {
 - avoid prefetching large resources
 - avoid prefetching cross-origin resources
 
-#### Babel Config for JavaScript
+#### Babel Configuration for JavaScript
+
+- `modules`: always `false`, keep `esm` for bundler (e.g webpack) tree shaking.
+- `useBuiltIns`:
+  - `entry`: 将 `core-js import` 替换为特性列表.
+  - `usage`: 按使用引入用到的特性列表.
 
 ```json
 {
@@ -3989,6 +3994,7 @@ const PageComponent = () => {
           "node": ">= 8",
           "browsers": "> 0.25%"
         },
+        "modules": false,
         "useBuiltIns": "usage"
       }
     ]
@@ -7359,7 +7365,7 @@ module.exports = babel => {
 
 ### Babel Preset Plugin
 
-- Just like `.babelrc`.
+- Just like `.babelrc.js`.
 - Named `babel-preset-xxx`.
 
 ```json
@@ -7368,9 +7374,10 @@ module.exports = babel => {
   "main": "index.js",
   "dependencies": {
     "babel-plugin-transform-meact-jsx": "^0.1.2",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.7.0"
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-react-jsx": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0"
   }
 }
 ```
@@ -7397,14 +7404,16 @@ module.exports = function buildMeactPreset(context, options) {
 
   return {
     presets: [
-      require('babel-preset-env').default(null, {
+      require('@babel/preset-env').default(null, {
         targets: transpileTargets,
+        modules: false,
       }),
     ],
     plugins: [
-      require('babel-plugin-transform-object-rest-spread'),
-      require('babel-plugin-transform-react-jsx'),
+      require('@babel/plugin-proposal-object-rest-spread'),
+      require('@babel/plugin-transform-react-jsx'),
       require('babel-plugin-transform-meact-jsx'),
+      require('@babel/plugin-transform-runtime'),
     ].filter(Boolean),
   };
 };
@@ -8100,7 +8109,10 @@ Live code inclusion (AST analysis) + dead code elimination:
 - 尽量不写带有副作用的代码: 诸如编写了立即执行函数, 在函数里又使用了外部变量等.
 - 如果对 ES6 语义特性要求不是特别严格, 可以开启 babel 的 loose 模式 etc. 是否真的要不可枚举 class 的属性
   (babel 将 Class 转化为 ES5 过程中会产生 Side Effect, 导致 Tree Shaking 失效).
-- 禁止 Babel 将模块导入导出语句 (`babel-preset-env`: `{ modules: false }`) 转译成 `CommonJS` 形式.
+- 禁止 Babel 将模块导入导出语句转译成 `CommonJS` 形式.
+  - `@babel/preset-env`: always `{ "modules": false }`.
+  - Babel 作为编译器不应该处理 `modules` 类型的转换.
+  - Webpack 要依赖 `esm` 模块进行 tree shaking.
 - 如果是开发 JavaScript 库, 使用 `rollup` (ES6 module export + code flow static analysis),
   并且提供 ES6 module 的版本, 入口文件地址设置到 `package.json` 的 module 字段.
 - 如果 JavaScript 库开发中, 难以避免的产生各种副作用代码,
