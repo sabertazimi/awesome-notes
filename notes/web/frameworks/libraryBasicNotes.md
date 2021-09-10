@@ -837,7 +837,7 @@ tags: [Web, Framework, Library]
 
 - [Babel](https://www.npmjs.com/package/@babel/parser)
 - [Acorn](https://github.com/acornjs/acorn)
-- [AST Explorer](https://astexplorer.net)
+- [AST Explorer](https://github.com/fkling/astexplorer)
 
 ### Parser
 
@@ -947,7 +947,7 @@ tags: [Web, Framework, Library]
 - [SourceGraph: Universal code search](https://github.com/sourcegraph/sourcegraph)
 - [Babel](https://github.com/babel/babel)
 - [Acorn](https://github.com/acornjs/acorn)
-- [AST Explorer](https://astexplorer.net)
+- [AST Explorer](https://github.com/fkling/astexplorer)
 - [CodeCrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
 - [PMD: Extensible multi-language static code analyzer](https://github.com/pmd/pmd)
 - [Java SpotBugs](https://github.com/spotbugs/spotbugs)
