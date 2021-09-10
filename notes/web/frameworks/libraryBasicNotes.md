@@ -1053,6 +1053,7 @@ tags: [Web, Framework, Library]
 - [Probot: Framework for building GitHub Apps to automate workflow](https://github.com/probot/probot)
 - [Actions Toolkit: Building GitHub Actions in Node.js](https://github.com/JasonEtco/actions-toolkit)
 - [Chokidar: Minimal cross-platform file watching library](https://github.com/paulmillr/chokidar)
+- [ACT: Local GitHub action runner](https://github.com/nektos/act)
 
 ### DevOps Config Tools
 
