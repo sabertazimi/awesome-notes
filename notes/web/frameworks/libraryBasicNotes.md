@@ -379,7 +379,7 @@ tags: [Web, Framework, Library]
 
 #### List Virtualized Windowing
 
-- [React Virtualized- Original Component](https://github.com/bvaughn/react-virtualized)
+- [React Virtualized - Original Component](https://github.com/bvaughn/react-virtualized)
 - [React Virtualized Auto Sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)
 - [React Window: Brand New React Virtualized](https://github.com/bvaughn/react-window)
 - [React Virtuoso](https://github.com/petyosi/react-virtuoso)
@@ -387,7 +387,7 @@ tags: [Web, Framework, Library]
 
 ### Table
 
-- [React Table (with Hooks API)](https://github.com/tannerlinsley/react-table)
+- [React Table](https://github.com/tannerlinsley/react-table)
 - [React Data Sheet](https://github.com/nadbm/react-datasheet)
 - [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
 - [SheetJS](https://github.com/SheetJS/sheetjs)
@@ -491,10 +491,12 @@ tags: [Web, Framework, Library]
 
 #### Skeleton
 
+- [React Skeleton](https://github.com/danilowoz/react-content-loader)
 - [Vue Skeleton](https://github.com/egoist/vue-content-loader)
 
 #### Spinner
 
+- [React Spinners](https://github.com/davidhu2000/react-spinners)
 - [Epic Spinners](https://github.com/epicmaxco/epic-spinners)
 - [Loading IO](https://loading.io)
 
