@@ -7416,6 +7416,40 @@ module.exports = function buildMeactPreset(context, options) {
 
 - [Webpack source code guide](https://segmentfault.com/a/1190000039956437)
 
+### Webpack Configuration Intellisense
+
+Enable webpack configuration types intellisense:
+
+```bash
+npm i -D webpack webpack-cli webpack-dev-server
+```
+
+Enable `devServer` type intellisense:
+
+```bash
+# Add `devServer` type to `webpack.Configuration`
+npm i -D @types/webpack-dev-server
+```
+
+```js
+/** @type {import('webpack').Configuration} */
+module.exports = {
+  entry: {
+    main: './src/index.ts',
+  },
+  output: {
+    filename: devMode ? '[name].js' : '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'build'),
+  },
+  mode: devMode ? 'development' : 'production',
+  devServer: {
+    hot: true,
+    open: true,
+    port: 2333,
+  },
+};
+```
+
 ### Webpack Watch Options
 
 ```bash
@@ -8290,6 +8324,7 @@ const paths = pathsToModuleNameMapper(compilerOptions.paths, {
   prefix: '<rootDir>/',
 });
 
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
   roots: ['<rootDir>/src'],
   collectCoverage: true,
