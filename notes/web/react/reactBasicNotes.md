@@ -3419,7 +3419,7 @@ class Frameworks extends React.Component {
 }
 ```
 
-## React Portals
+### React Portals
 
 Portals provide a first-class way to render children into a DOM node
 that exists **outside** the DOM hierarchy of the parent component
@@ -3798,15 +3798,15 @@ the client takes over and the website becomes a SPA.
 - Search engine usually stop after a while (roughly 10 seconds)
 - SPAs can't set meaningful HTTP status codes
 
-#### Awesome Library
+### SSR Library
 
 - [Next.js for Isomorphic rendering](https://nextjs.org)
 
-### Basic Example
+### SSR Example
 
 [presentation](http://peerigon.github.io/talks/2018-07-20-js-camp-barcelona-bumpy-road-universal-javascript/#1)
 
-webpack config
+Webpack configuration:
 
 ```jsx
 module.exports = [
@@ -3830,7 +3830,7 @@ const nodeConfig = {
 };
 ```
 
-start.server.js
+`start.server.js`:
 
 ```jsx
 import React from 'react';
@@ -3855,7 +3855,7 @@ module.exports = () => `<!DOCTYPE html>
   </html>`;
 ```
 
-start.client.js
+`start.client.js`:
 
 ```jsx
 import React from 'react';
@@ -3865,7 +3865,7 @@ import App from './App.js';
 ReactDOM.hydrate(<App />, document.getElementById('app'));
 ```
 
-- async fetch out of `<App />`
+Async fetch out of `<App />`:
 
 ```jsx
 const data = await fetchData();
@@ -3875,53 +3875,6 @@ return {
   html: ReactDOMServer.renderToString(app);
   state: { data }
 };
-```
-
-### Internationalization
-
-- [react-intl](https://github.com/alibaba/react-intl-universal)
-
-#### Simple Intl
-
-```jsx
-// locale/zh.js
-export default ({
-   hello: '你好，{name}'
-});
-
-// locale/en.js
-export default ({
-   hello: 'Hello，{name}'
-}) ;
-```
-
-```jsx
-import IntlMessageFormat from 'intl-messageformat';
-import zh from '../locale/zh';
-import en from '../locale/en';
-const MESSAGES = { en, zh };
-const LOCALE = 'en'; // 这里写上决定语言的方法，例如可以从 cookie 判断语言
-
-class Intl {
-  get(key, defaultMessage, options) {
-    let msg = MESSAGES[LOCALE][key];
-
-    if (msg == null) {
-      if (defaultMessage != null) {
-        return defaultMessage;
-      }
-      return key;
-    }
-
-    if (options) {
-      msg = new IntlMessageFormat(msg, LOCALE);
-      return msg.format(options);
-    }
-    return msg;
-  }
-}
-
-export default Intl;
 ```
 
 ## React with TypeScript
@@ -5104,6 +5057,66 @@ if (!fs.existsSync(paths.appTypeDeclarations)) {
   );
 }
 ```
+
+## React Internationalization
+
+- [XLIFF](https://en.wikipedia.org/wiki/XLIFF):
+  XML Localization Interchange File Format.
+- [ICU](https://github.com/unicode-org/icu):
+  International Components for Unicode.
+- [BCP 47](https://github.com/wooorm/bcp-47):
+  IETF BCP 47 language tag.
+
+### Simple i18n Implementation
+
+```jsx
+// locale/zh-CN.js
+export default ({
+   hello: '你好，{name}'
+});
+
+// locale/en-US.js
+export default ({
+   hello: 'Hello，{name}'
+}) ;
+```
+
+```jsx
+import IntlMessageFormat from 'intl-messageformat';
+import zh from '../locale/zh';
+import en from '../locale/en';
+const MESSAGES = { en, zh };
+const LOCALE = 'en'; // 这里写上决定语言的方法，例如可以从 cookie 判断语言
+
+class Intl {
+  get(key, defaultMessage, options) {
+    let msg = MESSAGES[LOCALE][key];
+
+    if (msg == null) {
+      if (defaultMessage != null) {
+        return defaultMessage;
+      }
+      return key;
+    }
+
+    if (options) {
+      msg = new IntlMessageFormat(msg, LOCALE);
+      return msg.format(options);
+    }
+    return msg;
+  }
+}
+
+export default Intl;
+```
+
+### React i18n Library
+
+- [react-intl](https://github.com/alibaba/react-intl-universal)
+
+### i18n Solution
+
+- [奇安信前端国际化平台](https://mp.weixin.qq.com/s/QfTf02GrEXrbCnQswnWFuQ)
 
 ## Styled Component
 
