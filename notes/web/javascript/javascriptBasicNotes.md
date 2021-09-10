@@ -729,17 +729,40 @@ alert(a);
 
 ## 运算符
 
-- == 与 ===
-- != 与 !==
-
 ### Loose Comparison
 
-[JS Loose Comparison](https://felix-kling.de/js-loose-comparison):
+`==` 与 `!=`, [JS Loose Comparison](https://felix-kling.de/js-loose-comparison):
 
 - Type(x) === Type(y): return `x === y` (Strict Equality Comparison)
 - Type(x) !== Type(y):
   - x and y are `undefined` or `null`: return true
   - return comparison between `ToNumber(x)` and `ToPrimitive(y)`
+
+### Strict Equal
+
+`===` 与 `!==`:
+
+- strings: same length, same characters in corresponding positions.
+- numbers: numerically equal.
+- objects: refer to same Object.
+- Positive and negative `0` are equal to one another.
+- `NaN` is not equal to anything, including `NaN`.
+- `null` and `undefined` types are not equal with `===`, but equal with `==`.
+
+```js
+const true1 = 0 == false; // true
+const false1 = 0 === false; // false
+const true2 = 1 == '1'; // true
+const false2 = 1 === '1'; // false
+const true3 = null == undefined; // true
+const false3 = null === undefined; // false
+const true4 = '0' == false; // true
+const false4 = '0' === false; // false
+const false5 = [] == []; // false, refer different objects in memory
+const false6 = [] === []; // false, refer different objects in memory
+const false7 = {} == {}; // false, refer different objects in memory
+const false8 = {} === {}; //false, refer different objects in memory
+```
 
 ### 条件表达式
 
