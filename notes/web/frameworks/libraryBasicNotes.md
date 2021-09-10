@@ -1062,6 +1062,14 @@ tags: [Web, Framework, Library]
 - [Chokidar: Minimal cross-platform file watching library](https://github.com/paulmillr/chokidar)
 - [ACT: Local GitHub action runner](https://github.com/nektos/act)
 
+#### GitHub Actions
+
+- [Checkout](https://github.com/actions/checkout)
+- [Node](https://github.com/actions/setup-node)
+- [GitHub Pages](https://github.com/peaceiris/actions-gh-pages)
+- [Issues Helper](https://github.com/actions-cool/issues-helper)
+- [CodeQL](https://github.com/github/codeql-action)
+
 ### DevOps Config Tools
 
 - [DotEnv](https://github.com/motdotla/dotenv)
