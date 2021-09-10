@@ -414,6 +414,7 @@ tags: [Web, Framework, Library]
 
 - [React responsive carousel](https://github.com/leandrowd/react-responsive-carousel)
 - [Glider.js: Native scrolling carousel](https://github.com/NickPiscitelli/Glider.js)
+- [Flicking: Reliable, flexible and extendable carousel](https://github.com/naver/egjs-flicking)
 - [Slick: Gallery carousel](https://github.com/kenwheeler/slick)
 
 ### Slides and Presentation
