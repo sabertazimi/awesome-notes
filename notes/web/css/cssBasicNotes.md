@@ -2466,6 +2466,29 @@ filter: initial;
 filter: unset;
 ```
 
+### Fusion Effect
+
+- Parent element: `background-color` + `filter: contrast()`.
+- Child element: `filter: blur()`.
+
+```html
+<div class="container">
+  <div class="circle circle-1"></div>
+  <div class="circle circle-2"></div>
+</div>
+```
+
+```css
+.container {
+  background: #fff; /* Required */
+  filter: contrast(30);
+}
+
+.circle {
+  filter: blur(10px);
+}
+```
+
 ### SVG Filter
 
 内投影滤镜
