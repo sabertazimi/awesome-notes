@@ -121,13 +121,14 @@ tags: [Web, Framework, Library]
 
 ### React Hooks
 
-- [Use Hooks](https://github.com/uidotdev/usehooks)
 - [ReactUse Hooks](https://github.com/streamich/react-use)
+- [LibReact](https://github.com/streamich/libreact)
 - [Alibaba Hooks](https://github.com/alibaba/hooks)
-- [React Hooks Gallery](https://nikgraf.github.io/react-hooks)
-- [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
 - [Platform Hooks: Browser APIs turned into Hooks](https://github.com/jaredpalmer/the-platform)
+- [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
 - [Optimistic state hook](https://github.com/perceived-dev/optimistic-state)
+- [Use Hooks Gallery](https://github.com/uidotdev/usehooks)
+- [React Hooks Gallery](https://github.com/nikgraf/react-hooks)
 
 ### Vue Composite and Reactive API
 
