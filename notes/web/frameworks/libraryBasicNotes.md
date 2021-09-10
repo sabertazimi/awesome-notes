@@ -832,6 +832,12 @@ tags: [Web, Framework, Library]
 
 ## Compiler
 
+### JavaScript Parser
+
+- [Babel](https://www.npmjs.com/package/@babel/parser)
+- [Acorn](https://github.com/acornjs/acorn)
+- [AST Explorer](https://astexplorer.net)
+
 ### Parser
 
 - [HTML Parser](https://github.com/taoqf/node-html-parser)
@@ -939,6 +945,7 @@ tags: [Web, Framework, Library]
 
 - [SourceGraph: Universal code search](https://github.com/sourcegraph/sourcegraph)
 - [Babel](https://github.com/babel/babel)
+- [Acorn](https://github.com/acornjs/acorn)
 - [AST Explorer](https://astexplorer.net)
 - [CodeCrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
 - [PMD: Extensible multi-language static code analyzer](https://github.com/pmd/pmd)
