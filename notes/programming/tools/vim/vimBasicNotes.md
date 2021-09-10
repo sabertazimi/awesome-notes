@@ -874,3 +874,7 @@ set enc=utf8
 set fencs=utf8,gbk,gb2312,gb18030
 set termencoding=utf-8
 ```
+
+## NeoVim
+
+- [NeoVim Configuration](https://github.com/NvChad/NvChad)
