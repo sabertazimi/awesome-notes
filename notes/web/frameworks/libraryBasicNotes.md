@@ -1042,8 +1042,9 @@ tags: [Web, Framework, Library]
 
 ### DevOps Project Tools
 
-- [NX](https://github.com/nrwl/nx)
 - [Lerna](https://github.com/lerna/lerna)
+- [Bit](https://github.com/teambit/bit)
+- [NX](https://github.com/nrwl/nx)
 - [Node Maintenance Tools](https://github.com/maxogden/maintenance-modules)
 
 ### DevOps Version Tools
