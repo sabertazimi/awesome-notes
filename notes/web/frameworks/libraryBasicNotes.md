@@ -172,6 +172,7 @@ tags: [Web, Framework, Library]
 - [Domain Parser](https://github.com/peerigon/parse-domain)
 - [Git URL Parser](https://github.com/IonicaBizau/git-url-parse)
 - [SemVer Parser](https://www.npmjs.com/package/semver)
+- [RE2: Fast, safe alternative to backtracking regular expression engines](https://github.com/uhop/node-re2)
 
 ### Concurrent and Parallel Programming Utils
 
