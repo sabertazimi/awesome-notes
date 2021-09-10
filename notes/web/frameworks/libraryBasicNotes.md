@@ -35,9 +35,10 @@ tags: [Web, Framework, Library]
 
 ## UI Framework
 
-- [React Ant Design](https://github.com/ant-design/ant-design)
-- [React Material UI](https://github.com/mui-org/material-ui)
-- [React BluePrint](https://github.com/palantir/blueprint)
+- [Ant Design](https://github.com/ant-design/ant-design)
+- [Material UI](https://github.com/mui-org/material-ui)
+- [Chakra UI](https://github.com/chakra-ui/chakra-ui)
+- [BluePrint](https://github.com/palantir/blueprint)
 - [IceWorks](https://github.com/alibaba/ice)
 - [Vue Admin UI](https://github.com/epicmaxco/vuestic-admin)
 - [Bootstrap](https://github.com/twbs/bootstrap)
@@ -107,8 +108,8 @@ tags: [Web, Framework, Library]
 ### React Recoil
 
 - [React Recoil](https://github.com/facebookexperimental/Recoil)
-- [JoTai: Primitive and flexible state management for React](https://github.com/pmndrs/jotai)
 - [Zustand: Small, fast and scalable bear-bones state-management solution](https://github.com/pmndrs/zustand)
+- [JoTai: Primitive and flexible state management for React](https://github.com/pmndrs/jotai)
 
 ### React Query
 
@@ -218,10 +219,11 @@ tags: [Web, Framework, Library]
 
 - [Classnames](https://github.com/JedWatson/classnames)
 - [Tailwind Merge: Merge Tailwind CSS classes without style conflicts](https://github.com/dcastil/tailwind-merge)
+- [Styled Components](https://github.com/styled-components/styled-components)
+- [Emotion](https://github.com/emotion-js/emotion)
 - [Linaria: Zero-runtime CSS-in-TypeScript library](https://github.com/callstack/linaria)
 - [Vanilla Extract: Zero-runtime CSS-in-TypeScript](https://github.com/seek-oss/vanilla-extract)
 - [Compiled: Performant compile time CSS-in-TypeScript library](https://github.com/atlassian-labs/compiled)
-- [Styled System: Style props for rapid UI development](https://github.com/styled-system/styled-system)
 
 ### CSS Design Tools
 
