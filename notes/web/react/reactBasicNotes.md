@@ -3508,7 +3508,15 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ## React Performance
 
-Less render times, less render nodes, less render calculations:
+### React Performance Mental Model
+
+**3L** - Less render times, less render calculations, less render nodes:
+
+- 数据: 利用缓存, 减少 re-render 次数.
+- 计算: 精确判断更新时机和范围, 减少计算量.
+- 渲染: 精细粒度, 降低组件复杂度.
+
+### React Performance Best Practice
 
 - Use `key` correctly.
 - `React.useMemo` and `React.useCallback` (no anonymous functions).
