@@ -7580,6 +7580,27 @@ module.exports = {
 - [Webpack caching guide](https://webpack.js.org/guides/caching).
 - Use `[contenthash]` and long-term browser cache to improve second access time.
 
+### Webpack Library Configuration
+
+```js
+const path = require('path');
+
+module.exports = {
+  entry: {
+    'bod-cli.min': path.join(__dirname, './src/index.js'),
+    'bod-cli': path.join(__dirname, './src/index.js'),
+  },
+  output: {
+    path: path.join(__dirname, './dist'),
+    filename: '[name].[contenthash].js',
+    library: 'bod',
+    libraryExport: 'default',
+    libraryTarget: 'esm',
+    globalObject: 'this',
+  },
+};
+```
+
 ### Webpack Loader Configuration
 
 #### Webpack Babel Loader
