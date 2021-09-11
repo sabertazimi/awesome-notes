@@ -1066,10 +1066,11 @@ tags: [Web, Framework, Library]
 ### DevOps Version Tools
 
 - [BeachBall: Sunniest semantic version bumper](https://github.com/microsoft/beachball)
+- [ChangeSets: Manage monorepo versioning and changelogs](https://github.com/atlassian/changesets)
 - [Commit Lint](https://github.com/conventional-changelog/commitlint)
 - [Commitizen: Conventional commits CLI tool](https://github.com/commitizen/cz-cli)
-- [Standard Version: Automate versioning and CHANGELOG generation](https://github.com/conventional-changelog/standard-version)
 - [Semantic Release: Fully automated version management and package publishing](https://github.com/semantic-release/semantic-release)
+- [Standard Version: Automate versioning and CHANGELOG generation](https://github.com/conventional-changelog/standard-version)
 
 ### DepOps Automation CI and CD Tools
 
