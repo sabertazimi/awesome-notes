@@ -3540,9 +3540,9 @@ The major difference is that
 `React.Component` doesn’t implement `shouldComponentUpdate()` lifecycle method
 while `React.PureComponent` implements it.
 
-If component `render()` function renders the same result
-given the same props and state,
-use `React.PureComponent/React.memo` for a performance boost in some cases.
+If component `render()` function renders
+the same result given the same props and state,
+use `React.PureComponent`/`React.memo` for a performance boost in some cases.
 
 ```jsx
 import React, { PureComponent } from 'react';
@@ -3625,7 +3625,8 @@ Prevent useless re-rendering:
 - shouldComponentUpdate
 - React.PureComponent: **shallow compare** diff
 - React.memo: **shallow compare** diff,
-  to memorize stateless components that **props not changed often**.
+  to memorize stateless components that **props not changed often**,
+  `export default React.memo(MyComponent, areEqual)`.
 - memorized values
 - memorized event handlers
 - 在用`memo`或者`useMemo`做优化前
