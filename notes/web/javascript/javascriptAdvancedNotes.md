@@ -8273,6 +8273,25 @@ Webpack 5 support out of box cache.
 #### Webpack Custom Plugin
 
 ```js
+module.exports = {
+  plugins: [
+    function () {
+      this.hooks.done.tap('done', stats => {
+        if (
+          stats.compilation.errors &&
+          stats.compilation.errors.length &&
+          process.argv.indexOf('--watch') == -1
+        ) {
+          // Process build errors.
+          process.exit(1);
+        }
+      });
+    },
+  ],
+};
+```
+
+```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const childProcess = require('child_process');
 const branch = childProcess
