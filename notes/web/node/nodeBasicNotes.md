@@ -507,6 +507,40 @@ corepack enable yarn
 corepack disable pnpm
 ```
 
+## Yarn 2
+
+[Yarn Berry](https://yarnpkg.com/getting-started/migration):
+
+```bash
+# Modify `/etc/hosts`
+npm i -g yarn
+cd project/
+yarn set version berry
+```
+
+Setup basic configuration `.yarnrc.yml`:
+
+```yml
+yarnPath: '.yarn/releases/yarn-berry.cjs'
+nodeLinker: 'node-modules'
+npmPublishAccess: 'public'
+npmPublishRegistry: 'https://registry.npmjs.org'
+npmRegistryServer: 'https://registry.npmjs.org'
+```
+
+Update `.gitignore` file:
+
+```bash
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp/
+.pnp.js
+```
+
 ## Self-Defined Module
 
 ### Basic Modular Pattern
