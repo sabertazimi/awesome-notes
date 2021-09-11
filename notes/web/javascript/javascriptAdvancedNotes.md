@@ -6950,6 +6950,11 @@ element.innerHTML = trustedHTML;
 
 ### CSRF
 
+- 确保 `GET request` 没有副作用.
+- 确保 `request` 正常渠道发起 (Hidden token check in form).
+- 开启同源策略 (**Same Origin Policy**).
+- Addition Authentication: input password again.
+
 ```python
 # Reject cross-origin requests to protect from
 # CSRF, XSSI & other bugs

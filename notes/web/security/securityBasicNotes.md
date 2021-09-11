@@ -146,10 +146,10 @@ CSRF 利用的是网站对用户网页浏览器的信任.
 
 #### CSRF Protection
 
-- GET request 没有副作用
-- 确保 request 正常渠道发起(hidden token check in form)
-- 开启同源策略(Same Origin Policy)
-- Addition Authentication: input password again
+- 确保 `GET request` 没有副作用.
+- 确保 `request` 正常渠道发起 (Hidden token check in form).
+- 开启同源策略 (**Same Origin Policy**).
+- Addition Authentication: input password again.
 
 ```js
 express/csurf library
