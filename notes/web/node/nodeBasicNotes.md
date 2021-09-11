@@ -349,11 +349,22 @@ npx gistUrl
 
 ### NPM Dependencies
 
-- peerDependencies:
-  提示宿主环境去安装满足插件 peerDependencies 所指定依赖的包,
-  然后在插件 import 或者 require 所依赖的包的时候,
-  永远都是引用宿主环境统一安装的 npm 包,
+- `peerDependencies`:
+  提示宿主环境去安装满足插件 `peerDependencies` 所指定依赖的包,
+  然后在插件 `import` 或者 `require` 所依赖的包的时候,
+  永远都是引用宿主环境统一安装的 NPM 包,
   最终解决插件与所依赖包不一致的问题.
+- 构建依赖树的过程中, 版本确认需要结合 `package.json` 和 `package-lock.json`:
+  - 先确认 `package-lock.json` 安装版本,
+    符合规则就以此为准,
+    否则由 `package.json` 声明的版本范围重新确认.
+  - 若是在开发中手动更改包信息,
+    会导致 **lockfile** 版本信息异常,
+    也由 `package.json` 重新确认.
+  - 确认好的依赖树会存到 `package-lock.json` 文件中.
+- 同一个依赖, 更高版本的包会安装到顶层 `node_modules` 目录,
+  低版本的包会分散在某些依赖的 `node_modules` 目录.
+- **lockfile** 的存在, 保证了项目依赖结构的确定性, 保障了项目在多环境运行的稳定性.
 
 #### NPM Invalid Dependencies
 
