@@ -6738,6 +6738,9 @@ Session 缓存在服务端, Cookie 缓存在客户端,
   When both to `null`, cookie become **session cookie**.
 
 ```http
+Set-Cookie: username=tazimi; domain=tazimi.dev; Expires=Wed, 21 Oct 2022 08:00:00
+Set-Cookie: username=tazimi; domain=tazimi.dev; path=/blog
+Set-Cookie: username=tazimi; domain=tazimi.dev; path=/blog; Secure; HttpOnly
 Set-Cookie: username=tazimi; domain=github.com
 Set-Cookie: height=100; domain=me.github.com
 Set-Cookie: weight=100; domain=me.github.com
@@ -6747,7 +6750,7 @@ Set-Cookie: weight=100; domain=me.github.com
 
 - 认证方式局限于在浏览器 (Cookie).
 - 非 HTTPS 协议下使用 Cookie, 容易受到 CSRF 跨站点请求伪造攻击.
-- Session ID 不包含具体用户信息, 需要 Key-Value Store (eg Redis) 持久化,
+- Session ID 不包含具体用户信息, 需要 Key-Value Store (e.g **Redis**) 持久化,
   在分布式环境下需要在每个服务器上都备份, 占用了大量的存储空间.
 
 #### Token Authentication
@@ -6861,6 +6864,13 @@ https://github.com/login/oauth/access_token
 &refresh_token=REFRESH_TOKEN
 ```
 
+#### Single Sign On
+
+`SSO`:
+单点登录要求不同域下的系统**一次登录，全线通用**,
+通常由独立的 `SSO` 系统记录登录状态, 下发 `ticket`,
+各业务系统配合存储和认证 `ticket`.
+
 ### Content Security Policy Level 3
 
 CSP help prevent from XSS
@@ -6958,11 +6968,6 @@ def allow_request(req):
 
   return False
 ```
-
-### Object Property
-
-- `object[constructor]`
-- `object.__proto__`
 
 ### Sandbox
 
