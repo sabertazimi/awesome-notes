@@ -1734,7 +1734,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/module-type-aliases@npm:^2.0.0-beta.6":
+"@docusaurus/module-type-aliases@npm:2.0.0-beta.ff31de0ff":
   version: 2.0.0-beta.ff31de0ff
   resolution: "@docusaurus/module-type-aliases@npm:2.0.0-beta.ff31de0ff"
   checksum: c0d87501d7fc1f39f61a52442a4161a7dd6389b5fc84e04b86cf68d3edbf03893f1ccdf650a16320e26adde024dbea757d50bdf765837587b3926dc0f1ba12bc
@@ -3324,7 +3324,7 @@ __metadata:
   resolution: "awesome-notes@workspace:."
   dependencies:
     "@docusaurus/core": 2.0.0-beta.6
-    "@docusaurus/module-type-aliases": ^2.0.0-beta.6
+    "@docusaurus/module-type-aliases": 2.0.0-beta.ff31de0ff
     "@docusaurus/preset-classic": 2.0.0-beta.6
     "@easyops-cn/docusaurus-search-local": ^0.19.1
     "@mdx-js/react": ^1.6.21
