@@ -507,7 +507,7 @@ corepack enable yarn
 corepack disable pnpm
 ```
 
-## Yarn 2
+## Yarn
 
 [Yarn Berry](https://yarnpkg.com/getting-started/migration):
 
@@ -540,6 +540,15 @@ Update `.gitignore` file:
 .pnp/
 .pnp.js
 ```
+
+### Yarn Berry Read World Case
+
+- [Gatsby](https://github.com/gatsbyjs/gatsby):
+  yarn 1 with `.yarn/` directory.
+- [Redux ToolKit](https://github.com/reduxjs/redux-toolkit):
+  yarn 2.
+- [StoryBook](https://github.com/storybookjs/storybook):
+  yarn 3.
 
 ## Self-Defined Module
 
