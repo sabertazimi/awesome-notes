@@ -2461,7 +2461,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/docusaurus@npm:^1.0.4":
+"@tsconfig/docusaurus@npm:1.0.4":
   version: 1.0.4
   resolution: "@tsconfig/docusaurus@npm:1.0.4"
   checksum: 720ca04baa47cbd7ec9c4f6ce18c5fcc2117a077ceff9fe89b7ac66be4968a9ea37bbf8c72e91e517ed57953b38ce6d1c7e05380623f2c579ae4021fb59f0632
@@ -2623,7 +2623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-helmet@npm:^6.1.2":
+"@types/react-helmet@npm:6.1.2":
   version: 6.1.2
   resolution: "@types/react-helmet@npm:6.1.2"
   dependencies:
@@ -2632,7 +2632,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-router-dom@npm:^5.1.8":
+"@types/react-router-dom@npm:5.1.8":
   version: 5.1.8
   resolution: "@types/react-router-dom@npm:5.1.8"
   dependencies:
@@ -2653,7 +2653,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^17.0.20":
+"@types/react@npm:*, @types/react@npm:17.0.20":
   version: 17.0.20
   resolution: "@types/react@npm:17.0.20"
   dependencies:
@@ -3329,22 +3329,22 @@ __metadata:
     "@easyops-cn/docusaurus-search-local": ^0.19.1
     "@mdx-js/react": ^1.6.21
     "@svgr/webpack": ^5.5.0
-    "@tsconfig/docusaurus": ^1.0.4
-    "@types/react": ^17.0.20
-    "@types/react-helmet": ^6.1.2
-    "@types/react-router-dom": ^5.1.8
+    "@tsconfig/docusaurus": 1.0.4
+    "@types/react": 17.0.20
+    "@types/react-helmet": 6.1.2
+    "@types/react-router-dom": 5.1.8
     clsx: ^1.1.1
     file-loader: ^6.2.0
-    markdownlint-cli: ^0.28.1
+    markdownlint-cli: 0.28.1
     nodejieba: ^2.5.2
-    prettier: ^2.4.0
+    prettier: 2.4.0
     prism-react-renderer: ^1.2.1
     react: ^17.0.1
     react-dom: ^17.0.1
-    standard-version: ^9.3.1
-    typescript: ^4.4.2
+    standard-version: 9.3.1
+    typescript: 4.4.3
     url-loader: ^4.1.1
-    webpack: ^5.52.1
+    webpack: 5.52.1
   languageName: unknown
   linkType: soft
 
@@ -8469,7 +8469,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"markdownlint-cli@npm:^0.28.1":
+"markdownlint-cli@npm:0.28.1":
   version: 0.28.1
   resolution: "markdownlint-cli@npm:0.28.1"
   dependencies:
@@ -10306,7 +10306,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.4.0":
+"prettier@npm:2.4.0":
   version: 2.4.0
   resolution: "prettier@npm:2.4.0"
   bin:
@@ -12007,7 +12007,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"standard-version@npm:^9.3.1":
+"standard-version@npm:9.3.1":
   version: 9.3.1
   resolution: "standard-version@npm:9.3.1"
   dependencies:
@@ -12678,7 +12678,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-typescript@^4.4.2:
+typescript@4.4.3:
   version: 4.4.3
   resolution: "typescript@npm:4.4.3"
   bin:
@@ -12688,7 +12688,7 @@ typescript@^4.4.2:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.4.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.4.3#~builtin<compat/typescript>":
   version: 4.4.3
   resolution: "typescript@patch:typescript@npm%3A4.4.3#~builtin<compat/typescript>::version=4.4.3&hash=32657b"
   bin:
@@ -13358,7 +13358,7 @@ typescript@^4.4.2:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.37.0, webpack@npm:^5.40.0, webpack@npm:^5.52.1":
+"webpack@npm:5.52.1, webpack@npm:^5.37.0, webpack@npm:^5.40.0":
   version: 5.52.1
   resolution: "webpack@npm:5.52.1"
   dependencies:
