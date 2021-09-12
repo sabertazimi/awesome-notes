@@ -541,6 +541,26 @@ Update `.gitignore` file:
 .pnp.js
 ```
 
+### Yarn Patch
+
+Modify package in `node_modules` conveniently:
+
+- Run `yarn patch <package>` will create copy of `package` to `tmp/xfs-xxxxxxxx/user/`.
+- After modify source code of `package`,
+  run `yarn patch-commit /tmp/xfs-xxxxxxxx/user --save`.
+
+### Yarn Workspace
+
+```bash
+yarn workspace packageName build
+```
+
+### Yarn Plugin
+
+```bash
+yarn plugin list
+```
+
 ### Yarn Berry Read World Case
 
 - [Gatsby](https://github.com/gatsbyjs/gatsby):
