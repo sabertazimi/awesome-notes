@@ -3567,8 +3567,8 @@ __metadata:
   linkType: hard
 
 "boxen@npm:^5.0.0, boxen@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "boxen@npm:5.0.1"
+  version: 5.1.0
+  resolution: "boxen@npm:5.1.0"
   dependencies:
     ansi-align: ^3.0.0
     camelcase: ^6.2.0
@@ -3578,7 +3578,7 @@ __metadata:
     type-fest: ^0.20.2
     widest-line: ^3.1.0
     wrap-ansi: ^7.0.0
-  checksum: a5fd6e48ec3bf929dcfa8543ce41e6df0217e4d11a0c95c394c53e230bc59dcecbdfe3c1aa37cdacf6e80b6bd814dfab8f384dbab9563ac2f1cfd6e43e7a6940
+  checksum: 1071216b6bf8101c94e09141a68bfc5ed229c6805f37b852a7d1269b753b245eb02e40e68802122c8c5f8ed2e8ab0e50e610b9f925c4e94fcb5a3f9e85be460d
   languageName: node
   linkType: hard
 
@@ -10237,13 +10237,13 @@ fsevents@~2.3.2:
   linkType: hard
 
 "postcss-sort-media-queries@npm:^3.10.11":
-  version: 3.11.12
-  resolution: "postcss-sort-media-queries@npm:3.11.12"
+  version: 3.12.13
+  resolution: "postcss-sort-media-queries@npm:3.12.13"
   dependencies:
-    sort-css-media-queries: 1.5.4
+    sort-css-media-queries: 2.0.4
   peerDependencies:
-    postcss: ^8.3.1
-  checksum: efc8236d1a67b5fef74397bd99b94daca908d93b481bdb67201f6555ec6d0a721224bc4f8ad7e0557801c81a3f2bc3750a350d733b510955f8e06000d610feb0
+    postcss: ^8.3.6
+  checksum: ef453016bfc9711a4d065674aec129e26aa25d86cd83811c922fb50d58138d4e71bdc38183a8c9b946bd3de874514360f075ac9ce0c6bad2dca7ed1d062dfbdc
   languageName: node
   linkType: hard
 
@@ -11817,10 +11817,10 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"sort-css-media-queries@npm:1.5.4":
-  version: 1.5.4
-  resolution: "sort-css-media-queries@npm:1.5.4"
-  checksum: f228cd2112b33b3aaf4fab052d3fd2b96b841e4e6259291c8a96537aed1aa0c924af70efca2d0dddab224e45ec973cd893b015cff073d6522e1f43739ca6f005
+"sort-css-media-queries@npm:2.0.4":
+  version: 2.0.4
+  resolution: "sort-css-media-queries@npm:2.0.4"
+  checksum: 610661adf57c9cdb8da5de80cdc4753b4ebec6cd14081e7aca95384bd62a4dea7677c5018cdcb111352b2ae6f3c2ac0591f24381c74096dd3972c87e489dc5b7
   languageName: node
   linkType: hard
 
