@@ -455,6 +455,12 @@ It bring two pros:
 }
 ```
 
+### Lockfile
+
+When kept in sync with its associated package.json,
+a lock file will further lock down the exact dependencies and sub-dependencies,
+so that everyone running `npm i` or `yarn` will install the exact same dependencies.
+
 ### CLI Environment
 
 ```js
