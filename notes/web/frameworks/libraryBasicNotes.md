@@ -793,6 +793,7 @@ tags: [Web, Framework, Library]
 
 #### CLI Input Utils
 
+- [CLI Panion: Type-safe CLI library with no runtime dependencies](https://github.com/arcanis/clipanion)
 - [Commander](https://github.com/tj/commander.js)
 - [Yargs](https://github.com/yargs/yargs)
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js)
