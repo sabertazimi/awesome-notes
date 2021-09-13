@@ -455,11 +455,24 @@ It bring two pros:
 }
 ```
 
-### Lockfile
+### Lock File
 
-When kept in sync with its associated package.json,
+[Dependency pinning](https://docs.renovatebot.com/dependency-pinning):
+
+When kept in sync with its associated `package.json`,
 a lock file will further lock down the exact dependencies and sub-dependencies,
 so that everyone running `npm i` or `yarn` will install the exact same dependencies.
+
+If the `package.json` contains a range,
+and a new in-range version is released that would break the build,
+then essentially `package.json` is in a state of **broken**,
+even if the lock file is still holding things together.
+
+- Apps (web or Node.js) that aren't `require()` by other packages
+  should pin all types of dependencies for greatest reliability/predictability.
+- Libraries that are `consumed`/`required()` by others
+  should keep using SemVer ranges for **dependencies** (purge multiple version `node_modules`)
+  but can use pinned devDependencies.
 
 ### CLI Environment
 
