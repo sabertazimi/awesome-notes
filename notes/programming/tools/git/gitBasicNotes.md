@@ -999,45 +999,23 @@ Commons License"
 ```
 
 ```markdown
-DBAD : DON'T BE A DICK PUBLIC LICENSE:
-
-Do whatever you like with the original work, just don't be a dick.
-
-Being a dick includes - but is not limited to - the following instances:
-
-1a. Outright copyright infringement - Don't just copy this and change the name.
-1b. Selling the unmodified original with no work done what-so-ever,
-that's REALLY being a dick.
-1c. Modifying the original work to contain hidden harmful content.
-That would make you a PROPER dick.
-
-If you become rich through modifications, related work services, or supporting
-the original work, share the love. Only a dick would make loads off this work
-and not buy the original works creator(s) a pint.Code is provided with no
-warranty. Using somebody else's code and bitching when it goes wrong makes
-you a DONKEY dick. Fix the problem yourself. A non-dick would submit the fix
-back.
-```
-
-```markdown
 Homework Public License(HPL)
 
-Copyright (c) 2016 Yilong Liu
+Copyright (c) 2016 Sabertaz
 
-This is for your reference only,not for your cheating - Just don't be a dick.
+This is for your reference only,not for your cheating.
 
-Being a dick includes - but is not limited to - the following instances:
+Don't:
 
 1a. Outright copyright infringement - Don't just copy this and change the name.
 1b. Reserve a copy of this project and tell your teacher
 that it is your own homework - Plagiarism is shame.
 
 If you become rich through modifications, related work services,
-or supporting the original work, share the love. Only a dick would make loads
+or supporting the original work, share the love. Only a poor guy would make loads
 off this work and not buy the original works creator(s) a pint.Code is
 provided with no warranty. Using somebody else's code and bitching when it
-goes wrong makes you a DONKEY dick. Fix the problem yourself. A non-dick
-would submit the fix back.
+goes wrong makes you stupid. Fix the problem yourself.
 ```
 
 ```markdown
@@ -1230,6 +1208,53 @@ setup `source` of pages and `Enforce HTTPS`.
 ```yaml
 *.md linguist-detectable=true
 *.md linguist-documentation=false
+```
+
+### GitHub Actions
+
+```yml
+name: Dependencies
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+jobs:
+  update:
+    name: Update
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 1
+      - name: Setup Node environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          architecture: x64
+          registry-url: https://registry.npmjs.org/
+          cache: 'yarn'
+      - name: Installation
+        run: |
+          yarn
+      - name: Update dependencies
+        run: |
+          yarn up '*'
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v3.1.0
+        with:
+          commit-message: 'build(deps): update all dependencies'
+          branch: build/deps-update
+          delete-branch: true
+          title: 'build(deps): update all dependencies'
+          body: An updated update of all NPM dependencies.
+          labels: dependencies
+          assignees: sabertazimi
+          reviewers: sabertazimi
+
 ```
 
 ## Git Tools
