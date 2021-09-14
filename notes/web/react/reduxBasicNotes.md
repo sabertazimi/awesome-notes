@@ -817,12 +817,139 @@ It iss important to note that the query parameter must be a **single value**
 RTK Query will do **shallow stable** comparison of fields,
 and re-fetch the data if any of them have changed.
 
+By default, **unused data is removed from the cache after 60 seconds**,
+can be configured in root API slice definition
+or overridden in individual endpoint definitions using `keepUnusedDataFor` flag.
+
+```ts
+export const apiSlice = createApi({
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({ baseUrl: '/fakeApi' }),
+  tagTypes: ['Post'],
+  endpoints: builder => ({
+    getPosts: builder.query({
+      query: () => '/posts',
+      providesTags: (result = [], error, arg) => [
+        'Post',
+        ...result.map(({ id }) => ({ type: 'Post', id })),
+      ],
+    }),
+    getPost: builder.query({
+      query: postId => `/posts/${postId}`,
+      providesTags: (result, error, arg) => [{ type: 'Post', id: arg }],
+    }),
+    addNewPost: builder.mutation({
+      query: initialPost => ({
+        url: '/posts',
+        method: 'POST',
+        body: initialPost,
+      }),
+      invalidatesTags: ['Post'],
+    }),
+    editPost: builder.mutation({
+      query: post => ({
+        url: `posts/${post.id}`,
+        method: 'PATCH',
+        body: post,
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: 'Post', id: arg.id }],
+    }),
+  }),
+});
+```
+
+1. The `PATCH /posts/:postId` from the editPost mutation.
+2. A `GET /posts/:postId` as the getPost query is refetched.
+3. A `GET /posts` as the getPosts query is refetched.
+
+### RTK Query Selector
+
+```ts
+import {
+  createEntityAdapter,
+  createSelector,
+  createSlice,
+} from '@reduxjs/toolkit';
+import { apiSlice } from '../api/apiSlice';
+
+const emptyUsers = [];
+
+export const selectUsersResult = apiSlice.endpoints.getUsers.select();
+
+export const selectAllUsers = createSelector(
+  selectUsersResult,
+  usersResult => usersResult?.data ?? emptyUsers
+);
+
+export const selectUserById = createSelector(
+  selectAllUsers,
+  (state, userId) => userId,
+  (users, userId) => users.find(user => user.id === userId)
+);
+```
+
+### Injecting Query Endpoints
+
+- `injectEndpoints()` mutates original API slice object
+  to add additional endpoint definitions
+  and then returns it.
+- `apiSlice` and `extendedApiSlice` are the same object.
+
+```ts
+import { apiSlice } from '../api/apiSlice';
+
+export const extendedApiSlice = apiSlice.injectEndpoints({
+  endpoints: builder => ({
+    getUsers: builder.query({
+      query: () => '/users',
+    }),
+  }),
+});
+
+export const { useGetUsersQuery } = extendedApiSlice;
+
+export const selectUsersResult = extendedApiSlice.endpoints.getUsers.select();
+```
+
+### Transform Query Response
+
+```ts
+import { apiSlice } from '../api/apiSlice';
+
+const usersAdapter = createEntityAdapter();
+
+const initialState = usersAdapter.getInitialState();
+
+export const extendedApiSlice = apiSlice.injectEndpoints({
+  endpoints: builder => ({
+    getUsers: builder.query({
+      query: () => '/users',
+      transformResponse: responseData => {
+        return usersAdapter.setAll(initialState, responseData);
+      },
+    }),
+  }),
+});
+
+export const { useGetUsersQuery } = extendedApiSlice;
+
+const selectUsersResult = extendedApiSlice.endpoints.getUsers.select();
+
+const selectUsersData = createSelector(
+  selectUsersResult,
+  usersResult => usersResult.data
+);
+
+export const { selectAll: selectAllUsers, selectById: selectUserById } =
+  usersAdapter.getSelectors(state => selectUsersData(state) ?? initialState);
+```
+
 ## Redux Internal
 
 ### Create Store
 
-- use closure to store state and subscribe
-- use middleware to change normal dispatch function
+- Use closure to store state and subscribe.
+- Use middleware to change normal dispatch function.
 
 ```js
 const applyMiddleware =
