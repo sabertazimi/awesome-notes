@@ -21,6 +21,7 @@ tags: [Programming, Tools, Git]
 ```bash
 git config --global user.name "sabertazimi"
 git config --global user.email sabertazimi@gmail.com
+git config --global core.autocrlf false
 git config --global core.editor vim
 git config --global credential.helper store
 git config --global color.ui true
