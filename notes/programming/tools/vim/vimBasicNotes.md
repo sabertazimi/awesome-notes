@@ -908,6 +908,10 @@ set termencoding=utf-8
 
 ## NeoVim
 
+```bash
+sudo snap install nvim --classic
+```
+
 - [NeoVim Configuration](https://github.com/NvChad/NvChad)
 
 ```bash
