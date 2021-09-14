@@ -875,6 +875,78 @@ set fencs=utf8,gbk,gb2312,gb18030
 set termencoding=utf-8
 ```
 
+## VSCode Vim
+
+### Easy Motion
+
+- `<leader><leader> w`: start of word forwards.
+- `<leader><leader> b`: start of word backwards.
+- `<leader><leader> j`: start of line forwards.
+- `<leader><leader> k`: start of line backwards.
+
+| Motion Command                      | Description                           |
+| ----------------------------------- | ------------------------------------- |
+| `<leader><leader> s <char>`         | Search character                      |
+| `<leader><leader> f <char>`         | Find character forwards               |
+| `<leader><leader> F <char>`         | Find character backwards              |
+| `<leader><leader> t <char>`         | Til character forwards                |
+| `<leader><leader> T <char>`         | Til character backwards               |
+| `<leader><leader> w`                | Start of word forwards                |
+| `<leader><leader> b`                | Start of word backwards               |
+| `<leader><leader> l`                | Matches begin & end of word forwards  |
+| `<leader><leader> h`                | Matches begin & end of word backwards |
+| `<leader><leader> e`                | End of word forwards                  |
+| `<leader><leader> ge`               | End of word backwards                 |
+| `<leader><leader> j`                | Start of line forwards                |
+| `<leader><leader> k`                | Start of line backwards               |
+| `<leader><leader> / <char>... <CR>` | Search n-character                    |
+| `<leader><leader><leader> bdt`      | Til character                         |
+| `<leader><leader><leader> bdw`      | Start of word                         |
+| `<leader><leader><leader> bde`      | End of word                           |
+| `<leader><leader><leader> bdjk`     | Start of line                         |
+| `<leader><leader><leader> j`        | JumpToAnywhere motion                 |
+
 ## NeoVim
 
 - [NeoVim Configuration](https://github.com/NvChad/NvChad)
+
+```bash
+mv ~/.config/nvim ~/.config/NVIM.BAK
+git clone https://github.com/NvChad/NvChad ~/.config/nvim
+nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
+```
+
+### NvChad Key Mapping
+
+- `<leader>` is set to `<SPACE>`.
+- `<SPACE>uk`: view key mappings.
+- `<SPACE>uu`: update NvChad.
+
+| Key mapping | Action                   | Notes                              |
+| ----------- | ------------------------ | ---------------------------------- |
+| `jk`        | ESC to normal mode       |                                    |
+| `<SHIFT>t`  | open a new buffer        |                                    |
+| `<SPACE>x`  | close current buffer     | (hides a terminal)                 |
+| `<TAB>`     | cycle active buffer      | `<SHIFT><TAB>` for previous buffer |
+| `<CTRL>n`   | open NvimTree explorer   | `<ENTER>` to select                |
+| `<SPACE>uk` | view key mappings        |                                    |
+| `<SPACE>uu` | update NvChad            |                                    |
+| `<SPACE>/`  | toggle commenting a line |                                    |
+| `<SPACE>ff` | find a file              | Telescope picker                   |
+| `<SPACE>gs` | git status               | Telescope picker                   |
+
+### NvChad Configuration
+
+- `~/.config/nvim/lua/chadrc.lua`: Main config file.
+- `~/.config/nvim/lua/colors/init.lua`: Loads syntax theme and highlights.
+- `~/.config/nvim/lua/colors/highlights.lua`: All highlights definition.
+- `~/.config/nvim/lua/core/mappings.lua`: All key mappings.
+- `~/.config/nvim/lua/core/options.lua`: All options.
+- `~/.config/nvim/lua/plugins/init.lua`: Plugins configuration.
+- `~/.config/nvim/lua/plugins/packerInit.lua`: `Packer` configuration.
+- `~/.config/nvim/lua/plugins/config/*.lua`: Configs of various plugins.
+
+### NvChad Plugins
+
+1. Add `use "plugin_author/plugin_name"` to `lua/plugins/init.lua`
+2. Use `:PackerSync` to install that plugin.
