@@ -920,6 +920,16 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim
 nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 ```
 
+### NeoVim Language Server
+
+```bash
+# html cssls jsonls
+npm i -g vscode-langservers-extracted
+
+# tsserver
+npm install -g typescript typescript-language-server
+```
+
 ### NvChad Key Mapping
 
 - `<leader>` is set to `<SPACE>`.
