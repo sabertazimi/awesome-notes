@@ -243,9 +243,11 @@ tags: [Web, Framework, Library]
 
 ### Color Utils
 
-- [Color Palettes from Online Website](https://github.com/cloudflare-design/color)
-- [Culori](https://github.com/Evercoder/culori)
-- [Color Difference Library](https://github.com/lokesh/color-thief)
+- [Chroma: All kinds of color manipulations](https://github.com/gka/chroma.js/)
+- [Color: Color conversion and manipulation](https://github.com/Qix-/color)
+- [Culori: Color conversion, interpolation, difference formulas, blending functions](https://github.com/Evercoder/culori)
+- [CloudFlareColor: Online website color palette grab tool](https://github.com/cloudflare/color)
+- [ColorThief: Image color palette grab tool](https://github.com/lokesh/color-thief)
 
 ### Gradients Utils
 
