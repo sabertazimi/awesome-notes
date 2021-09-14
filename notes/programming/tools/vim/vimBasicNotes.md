@@ -912,7 +912,13 @@ set termencoding=utf-8
 sudo snap install nvim --classic
 ```
 
-- [NeoVim Configuration](https://github.com/NvChad/NvChad)
+- [LunarVim](https://github.com/LunarVim/LunarVim)
+- [NvChad/MegaChad](https://github.com/NvChad/NvChad)
+
+```bash
+git clone https://github.com/LunarVim/LunarVim
+bash LunarVim/utils/installer/install.sh
+```
 
 ```bash
 mv ~/.config/nvim ~/.config/NVIM.BAK
@@ -928,6 +934,12 @@ npm i -g vscode-langservers-extracted
 
 # tsserver
 npm install -g typescript typescript-language-server
+```
+
+With [LSPInstall](https://github.com/kabouzeid/nvim-lspinstall):
+
+```bash
+:LspInstall typescript
 ```
 
 ### NeoVim TreeSitter
