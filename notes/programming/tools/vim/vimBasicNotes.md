@@ -930,6 +930,12 @@ npm i -g vscode-langservers-extracted
 npm install -g typescript typescript-language-server
 ```
 
+### NeoVim TreeSitter
+
+```bash
+:TSInstall html css javascript typescript tsx vue json jsonc yaml bash
+```
+
 ### NvChad Key Mapping
 
 - `<leader>` is set to `<SPACE>`.
