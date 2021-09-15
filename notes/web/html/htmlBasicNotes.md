@@ -1405,3 +1405,7 @@ listExpander.addEventListener('click', e => {
 - [AXE DevTools](https://github.com/dequelabs/axe-core)
 - [ESLint JSX A11Y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
 - [React A11Y](https://github.com/reactjs/react-a11y)
+
+### Accessibility Reference
+
+- [Semantic search element](https://www.sarasoueidan.com/blog/in-quest-of-search)
