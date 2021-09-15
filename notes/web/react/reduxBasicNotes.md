@@ -341,6 +341,10 @@ to let you write reducers as if they were mutating the state directly.
 In reality, the reducer receives a proxy state
 that translates all mutations into equivalent copy operations.
 
+:::danger Mutating State Case
+Only write **mutating** logic in RTK `createSlice` and `createReducer` API.
+:::
+
 ```ts
 import { createAction, createReducer } from '@reduxjs/toolkit';
 
