@@ -482,6 +482,17 @@ const postsForUser = useSelector(state => {
 });
 ```
 
+### UseSelector Hook
+
+`useSelector` automatically subscribes to Redux store,
+any time an action is dispatched,
+it will call its selector function again right away.
+
+If the value returned by selector changes from last time it ran,
+`useSelector` will force component to re-render with the new data.
+
+### CreateSelector API
+
 `createSelector` API
 ([Reselect](https://github.com/reduxjs/reselect) under the hood)
 takes one or more **Input Selector** functions,
