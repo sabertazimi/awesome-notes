@@ -548,11 +548,14 @@ If value returned by selector changes from last time it ran
 ### CreateSelector API
 
 `createSelector` API
-([Reselect](https://github.com/reduxjs/reselect) under the hood)
-takes one or more **Input Selector** functions,
-plus an **Output Selector** function as arguments.
-`Output Selector` will only re-run when outputs of `Input Selector` have changed.
-With `createSelector` to write memorized selector functions:
+([Reselect](https://github.com/reduxjs/reselect) under the hood):
+
+- Takes one or more **Input Selector** functions,
+  plus an **Output Selector** function as arguments.
+- `Output Selector` will only re-run when outputs of `Input Selector` have changed.
+  With `createSelector` to write memorized selector functions:
+- `Input Selector` should usually just extract and return values,
+  `Output Selector` should do expensive transformation work.
 
 ```ts
 // Good
@@ -567,6 +570,11 @@ const selectPostsByUser = createSelector(
   (posts, userId) => posts.filter(post => post.user === userId)
 );
 ```
+
+`Reselect` will run input selectors with all of given arguments,
+If any of input selectors results are `===` different than before,
+it will re-run output selector.
+Otherwise it will skip re-running and just return cached final result from before.
 
 ```ts
 const state1 = getState();
@@ -587,6 +595,26 @@ dispatch(addNewPost());
 const state3 = getState();
 // Output selector runs, because `posts` has changed.
 selectPostsByUser(state3, 'user2');
+```
+
+### Selector Best Practice and Pitfalls
+
+```ts
+// ❌ DO NOT memoize: will always return a consistent reference
+const selectTodos = state => state.todos;
+const selectNestedValue = state => state.some.deeply.nested.field;
+const selectTodoById = (state, todoId) => state.todos[todoId];
+
+// ❌ DO NOT memoize: deriving data, but will return a consistent result
+const selectItemsTotal = state => {
+  return state.items.reduce((result, item) => {
+    return result + item.total;
+  }, 0);
+};
+const selectAllCompleted = state => state.todos.every(todo => todo.completed);
+
+// ✅ SHOULD memoize: returns new references when called
+const selectTodoDescriptions = state => state.todos.map(todo => todo.text);
 ```
 
 ## Thunk
