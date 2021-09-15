@@ -50,15 +50,20 @@ const appStore.subscribe(throttle(() => {
 
 ### Normalized State
 
+[Redux normalizing state shape](https://redux.js.org/usage/structuring-reducers/normalizing-state-shape):
+
 - Only have one copy of each particular piece of data in state (no duplication).
 - Normalized data is kept in lookup table (key-value store),
   where item IDs are keys, items themselves are values.
 - There may also be an array of all of the IDs for a particular item type.
-- [Redux normalizing state shape](https://redux.js.org/usage/structuring-reducers/normalizing-state-shape).
-- [createEntityAdapter](https://redux-toolkit.js.org/api/createEntityAdapter):
-  - Build normalized state.
-  - Return normalized state CURD operation reducers.
-  - Get data selectors by `getSelectors`.
+
+Normalizing data:
+
+- Each type of data gets its own `table` in state.
+- Each `data table` should store individual items in an `{ key, value }` object:
+  `"p1" : { id : "p1", author : "user1", comments : ["comment1", "comment2"] }`.
+- Any references to individual items should be item ID.
+- Arrays of IDs should be used to indicate ordering.
 
 ```ts
 const state = {
@@ -75,6 +80,45 @@ const state = {
 const userId = 'user2';
 const userObject = state.users.entities[userId];
 ```
+
+Normalize nesting data with [Normalizr](https://github.com/paularmstrong/normalizr):
+
+```ts
+const data = {
+  entities: {
+    authors: { byId: {}, allIds: [] },
+    books: { byId: {}, allIds: [] },
+    authorBook: {
+      byId: {
+        1: {
+          id: 1,
+          authorId: 5,
+          bookId: 22,
+        },
+        2: {
+          id: 2,
+          authorId: 5,
+          bookId: 15,
+        },
+        3: {
+          id: 3,
+          authorId: 42,
+          bookId: 12,
+        },
+      },
+      allIds: [1, 2, 3],
+    },
+  },
+};
+```
+
+#### Entity Adapter Tool
+
+[createEntityAdapter](https://redux-toolkit.js.org/api/createEntityAdapter):
+
+- Build normalized state.
+- Return normalized state CURD operation reducers.
+- Get data selectors by `getSelectors`.
 
 ```ts
 import {
