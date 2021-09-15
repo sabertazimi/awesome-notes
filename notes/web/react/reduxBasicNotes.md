@@ -589,8 +589,11 @@ function applyMiddleware(store, middlewares) {
   middlewares.reverse();
 
   let next = store.dispatch;
+  // Reduce middlewares with reverse order in Redux.
   middlewares.forEach(middleware => (next = middleware(store)(next)));
 
+  // When user app execute `dispatch` function,
+  // middlewares execute with forward order.
   return Object.assign({}, store, { dispatch: next });
 }
 ```
