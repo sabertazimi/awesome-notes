@@ -1565,7 +1565,7 @@ async function* getRemoteData() {
 
 ### Proxy and Reflect
 
-modify default object behavior with `Proxy` and `Reflect`
+Modify default object behavior with `Proxy` and `Reflect`:
 
 ```js
 // new Proxy(target, handler)
@@ -1582,22 +1582,25 @@ Proxy(target, {
 
 APIs of handler:
 
-- get
-- set
-- has
-- apply
-- construct
+- `get`.
+- `set`.
+- `has`.
+- `apply`.
+- `construct`.
 - `Reflect.ownKeys`:
   `Object.getOwnPropertyNames` + `Object.getOwnPropertySymbols`,
   all keys include Symbols.
-- deleteProperty
-- defineProperty
-- isExtensible
-- preventExtensions
-- getPrototypeOf
-- setPrototypeOf
-- getOwnPropertyDescriptor
-- getOwnPropertyDescriptors
+- `deleteProperty`.
+- `defineProperty`.
+- `isExtensible`.
+- `preventExtensions`.
+- `getPrototypeOf`.
+- `setPrototypeOf`.
+- `getOwnPropertyDescriptor`.
+- `getOwnPropertyDescriptors`.
+
+Change original object will change proxy object,
+change proxy object will change original object via `set` related API.
 
 #### Proxy vs DefineProperty
 
@@ -1679,7 +1682,6 @@ const NOPE = () => {
 const NOPE_HANDLER = {
   set: NOPE,
   defineProperty: NOPE,
-  deleteProperty: NOPE,
   deleteProperty: NOPE,
   preventExtensions: NOPE,
   setPrototypeOf: NOPE
