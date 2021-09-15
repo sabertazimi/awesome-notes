@@ -236,7 +236,7 @@ fc-list : family | sort | uniq
 
 ## Arch Linux
 
-### Basic Arch Linux Setup
+### Setup Arch Linux Configuration
 
 ```bash
 less /usr/share/aif/docs/official_installation_guide_en
@@ -279,7 +279,7 @@ makepkg -si
 wget https://aur.archlinux.org/packages.gz
 ```
 
-## 基本处理命令
+## Basic Commands
 
 ### ls
 
@@ -324,7 +324,39 @@ link 命令 .bak/.hard(硬链接) .soft(软链接：创建链接时填写绝对�
 
 ln -s(创建软链接) [原文件][目标文件]
 
-## 基本搜索命令
+### history
+
+- -c 清除历史命令
+- -w (~/.bash_history) 保存历史命令
+
+/etc/profile 中修改 HISTSIZE !n/!!/!字符串 重复执行第 n 条/上一条/指定开头的历史命令
+
+```bash
+# repeat history command
+!number
+```
+
+### ctrl-r
+
+press ctrl-r 提示符改变，显示我们正在执行反向增量搜索。
+搜索过程是”反向的”，因为我们按照从”现在”到过去 某个时间段的顺序来搜寻。
+下一步，我们开始输入要查找的文本搜索返回我们需要的结果。
+(enter to execute, ctrl-j to copy)
+
+### History Shortcuts
+
+| command | function                             |
+| :------ | :----------------------------------- |
+| Ctrl-p  | 移动到上一个历史条目                 |
+| Ctrl-n  | 移动到下一个历史条目                 |
+| Alt-<   | 移动到历史列表开头                   |
+| Alt->   | 移动到历史列表结尾                   |
+| Ctrl-r  | 反向增量搜索                         |
+| Alt-p   | 反向搜索，非增量搜索                 |
+| Alt-n   | 向前搜索，非增量                     |
+| Ctrl-o  | 执行历史列表中的当前项，并移到下一个 |
+
+## Find and Search Commands
 
 ### locate
 
@@ -372,7 +404,7 @@ Find `FunctionalComponent` in files and open them all:
 grep -lr FunctionalComponent src --exclude=\*.md | xargs code
 ```
 
-## Process Command
+## CPU and Process Commands
 
 ### uptime
 
@@ -481,7 +513,7 @@ screen -r
 - Ctrl+d // detach window
 - Ctrl+k // kill window
 
-## CLI Input Output Command
+## CLI Input Output Commands
 
 ### cat
 
@@ -539,7 +571,7 @@ prepare text for printing
 
 format and print data
 
-## 帮助命令
+## Helper and Documentation Commands
 
 ### man
 
@@ -584,7 +616,7 @@ sudo apt-get install neofetch
 sudo apt-get install screenfetch
 ```
 
-## 压缩命令
+## Compress and Extract Commands
 
 ### Zip
 
@@ -634,7 +666,7 @@ tar [可选参数] 压缩文件(可指定压缩路径) [-c 解压缩路径]源�
 - -o: specific path
 - -t: type
 
-## User and Group Command
+## User and Group Commands
 
 - w/who 查看用户详细信息
 - last 显示所有用户登陆信息(/var/log/wtmp)
@@ -736,9 +768,9 @@ finger apacheUser 查看单个用户信息
 - passwd -u 用户名 解锁用户
 - passwd -d 用户名 清除用户密码
 
-## 权限管理命令
+## Privilege Management Commands
 
-### 普通权限
+### Common Privilege Management
 
 - chown 用户名：组名 文件名
 - chgrp 组名 文件名
@@ -747,7 +779,7 @@ finger apacheUser 查看单个用户信息
 - 目录默认权限 = 目录默认最大权限 rwx(777) 减去 umask 值
 - `id <username>`
 
-### ACL 权限
+### ACL Privilege Management
 
 - 查看分区 ACL 权限是否开启 dumpe2fs -h 设备分区名
 - 临时开启分区 ACL 权限 mount -o remount,acl 设备分区名
@@ -756,7 +788,7 @@ finger apacheUser 查看单个用户信息
 - setfacl -m (d:默认权限) u/g:用户名/组名:权限(rwx) 文件名
 - getfacl 文件名——查看文件 ACL 权限
 
-### sudo 权限
+### Sudo Privilege Management
 
 /etc/sudoers.tmp
 
@@ -769,15 +801,67 @@ finger apacheUser 查看单个用户信息
 - chmod 4xxx 设置 SetUID 权限
 - chmod 6xxx 设置双权限
 
-## 显示器管理命令
+## Disk IO Commands
 
-### xrandr
+主分区(primary)与延伸分区(extended) 延伸分区可以继续划分成逻辑分区(logical)
+
+### 挂载命令
+
+mount [-t 文件系统][-o 特殊选项] 设备文件名 挂载点(挂载目录/media /misc /mnt)
+
+- 无参数 显示当前挂载设备
+- -a 依据/etc/fstab 文件配置,自动挂载
+
+umount 设备文件名/挂载点
+
+fdisk –l
+
+### 修复命令
 
 ```bash
-xrandr -s 1920x1800 # set resolution
+sudo debugfs /dev/sda9
+> debugfs: lsdel
 ```
 
-## 主机信息管理命令
+### 分区命令
+
+#### fdisk
+
+分区表类型 MBR
+
+n p e l 新 主 逻辑 扩展 分区 w 激活
+
+#### parted
+
+分区表类型 MBR/GPT
+
+- mklabel 选择分区表类型
+- print 打印分区信息
+- mkpart 新建分区
+- rm 删除分区
+- unit 选择单位
+- quit 结束分区
+
+### Zero Copy
+
+- `read` + `write`: 4 context switch, 4 data copy (2 DMA, 2 CPU).
+- `mmap` + `write`: 4 context switch, 3 data copy (2 DMA, 1 CPU).
+- `sendfile`: 2 context switch, 3 data copy (2 DMA, 1 CPU).
+- scatter and gather `sendfile`: 2 context switch, 2 data copy (1 DMA, 1 SG-DMA).
+- 传输大文件 (无法命中内核 PageCache) 使用 `异步 I/O` + `直接 I/O`,
+  传输小文件使用 Zero Copy.
+
+```nginx
+location /video/ {
+    sendfile on;
+    aio on;
+    directio 1024m;
+}
+```
+
+## Device Management Commands
+
+### Host System Info Commands
 
 ```bash
 #!/bin/bash
@@ -885,67 +969,15 @@ echo
 echo '===== END ====='
 ```
 
-## Disk IO
+### Screen Monitor Commands
 
-主分区(primary)与延伸分区(extended) 延伸分区可以继续划分成逻辑分区(logical)
-
-### 挂载命令
-
-mount [-t 文件系统][-o 特殊选项] 设备文件名 挂载点(挂载目录/media /misc /mnt)
-
-- 无参数 显示当前挂载设备
-- -a 依据/etc/fstab 文件配置,自动挂载
-
-umount 设备文件名/挂载点
-
-fdisk –l
-
-### 修复命令
+#### xrandr
 
 ```bash
-sudo debugfs /dev/sda9
-> debugfs: lsdel
+xrandr -s 1920x1800 # set resolution
 ```
 
-### 分区命令
-
-#### fdisk
-
-分区表类型 MBR
-
-n p e l 新 主 逻辑 扩展 分区 w 激活
-
-#### parted
-
-分区表类型 MBR/GPT
-
-- mklabel 选择分区表类型
-- print 打印分区信息
-- mkpart 新建分区
-- rm 删除分区
-- unit 选择单位
-- quit 结束分区
-
-### Zero Copy
-
-- `read` + `write`: 4 context switch, 4 data copy (2 DMA, 2 CPU).
-- `mmap` + `write`: 4 context switch, 3 data copy (2 DMA, 1 CPU).
-- `sendfile`: 2 context switch, 3 data copy (2 DMA, 1 CPU).
-- scatter and gather `sendfile`: 2 context switch, 2 data copy (1 DMA, 1 SG-DMA).
-- 传输大文件 (无法命中内核 PageCache) 使用 `异步 I/O` + `直接 I/O`,
-  传输小文件使用 Zero Copy.
-
-```nginx
-location /video/ {
-    sendfile on;
-    aio on;
-    directio 1024m;
-}
-```
-
-## Device Command
-
-### Monitor Info
+#### Monitor Info
 
 ```bash
 sudo apt-get install read-edid
@@ -958,9 +990,9 @@ sudo get-edid | parse-edid
 synclient TouchpadOff=0
 ```
 
-## 包管理命令
+## Package Manager Commands
 
-### rpm 命令
+### RPM Commands
 
 安装和卸载时同时存在依赖性(包依赖、库依赖)
 
@@ -978,7 +1010,7 @@ rpm 校验(查看 Cracker 信息):
 
 - -V 校验已安装包 相应信息不是.号便是被修改项 可用于找回丢失的系统命令
 
-### yum
+### YUM Commands
 
 源配置文件:/etc/yum.repos.d
 
@@ -998,7 +1030,7 @@ yum makecache
 - yum groupinstall 软件组名
 - yum groupremove 软件组名
 
-### 源码包安装
+### Source Code Installation
 
 指定位置:
 
@@ -1013,12 +1045,29 @@ make install
 
 e.g apache /var/www/html/index.html /usr/local/apache/htdocs/index.html
 
-### Applications Management
+### Applications Management Commands
 
 - desktop shortcut: `/usr/share/applications`
 - startup apps: `gnome-session-properties` or `gnome-tweaks`
 
-## 网络连接命令
+### Default Management Commands
+
+`update-alternatives`: maintain symbolic links determining default commands.
+
+```bash
+sudo update-alternatives --get-selections
+```
+
+```bash
+sudo update-alternatives --install /usr/bin/x-terminal-emulator
+ \ x-terminal-emulator /opt/Hyper/hyper 50
+```
+
+```bash
+sudo update-alternatives --config x-terminal-emulator
+```
+
+## Network Commands
 
 ### wget
 
@@ -1055,7 +1104,7 @@ echo "nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &" /etc/rc.local
 nohup ssserver -c /etc/shadowsocks.json -d start /dev/null 2>&1 &
 ```
 
-## 网络管理命令
+### NetWork Management Commands
 
 | 用途           | net-tool(被淘汰) | iproute2         |
 | :------------- | :--------------- | :--------------- |
@@ -1149,10 +1198,6 @@ ufw allow https
 
 nftables 命令行工具：nft
 
-## 网络扫描命令
-
-预防策略——SYN 攻击、DDoS 攻击
-
 ### fping
 
 `fping -a -u -g -f [target]`批量扫描主机地址
@@ -1183,7 +1228,7 @@ nftables 命令行工具：nft
 - -z 一个输入输出模式
 - -u UDP 协议
 
-## 脚本运行命令
+## Shell Execution Commands
 
 exec 1>>output.log
 exec 2>>error.log
@@ -1216,9 +1261,7 @@ sysctl vm [-options] CONFIG
 swapoff
 ```
 
-### 定时任务
-
-#### crontab
+### Crontab Commands
 
 - `/etc/crontab`
 - [Crontab Quick Tutorial](https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html)
@@ -1238,7 +1281,7 @@ crontab -e(establish)
 - /etc/cron.\*ly 时间表
 - /etc/anacrontab: 异步时间表
 
-### 后台任务
+### Background Job Commands
 
 - jobs —— 所有作业
 - atq —— 延时作业队列
@@ -1254,47 +1297,13 @@ crontab -e(establish)
 - nice -n number 作业号/名
 - renice number -p PID
 
-### 开机任务
+### Startup Job Commands
 
 - /etc/rc.local —— 系统开机任务
 - /etc/profile/ /etc/bash.bashrc —— bash 启动任务/远程登陆任务
 - /etc/bash.bashrc —— SSH 连接任务
 
-## 历史记录命令
-
-### history
-
-- -c 清除历史命令
-- -w (~/.bash_history) 保存历史命令
-
-/etc/profile 中修改 HISTSIZE !n/!!/!字符串 重复执行第 n 条/上一条/指定开头的历史命令
-
-```bash
-# repeat history command
-!number
-```
-
-### ctrl-r
-
-press ctrl-r 提示符改变，显示我们正在执行反向增量搜索。
-搜索过程是”反向的”，因为我们按照从”现在”到过去 某个时间段的顺序来搜寻。
-下一步，我们开始输入要查找的文本搜索返回我们需要的结果。
-(enter to execute, ctrl-j to copy)
-
-### History Shortcuts
-
-| command | function                             |
-| :------ | :----------------------------------- |
-| Ctrl-p  | 移动到上一个历史条目                 |
-| Ctrl-n  | 移动到下一个历史条目                 |
-| Alt-<   | 移动到历史列表开头                   |
-| Alt->   | 移动到历史列表结尾                   |
-| Ctrl-r  | 反向增量搜索                         |
-| Alt-p   | 反向搜索，非增量搜索                 |
-| Alt-n   | 向前搜索，非增量                     |
-| Ctrl-o  | 执行历史列表中的当前项，并移到下一个 |
-
-## 并行命令
+### Parallel Execution
 
 命令间插入符
 
@@ -1305,7 +1314,7 @@ press ctrl-r 提示符改变，显示我们正在执行反向增量搜索。
 
 > e.g ls && echo yes >> .log || echo no >> .log
 
-## C/C++ Binary Command
+## C/C++ Binary Commands
 
 ### ldd
 
@@ -1319,7 +1328,7 @@ ldd ./lib.sio
 nm -Ca ./lib.so
 ```
 
-## Plot Command
+## Plot Commands
 
 chart.gp
 
@@ -1351,7 +1360,7 @@ plot ARG1 using 1:7 title "snd_cwnd", \
      ARG1 using 1:($8>=2147483647 ? 0 : $8) title "snd_ssthresh"
 ```
 
-## Other Command
+## Other Commands
 
 ### Time
 
@@ -1375,7 +1384,7 @@ use local time (not UTC time)
 sudo timedatectl set-local-rtc 1
 ```
 
-## Shell 编程
+## Shell Scripts
 
 ### Shell Warnings
 
@@ -2157,6 +2166,12 @@ printf -- ' DONE!\n';
 
 ### Default Terminal
 
+`update-alternatives`: maintain symbolic links determining default commands.
+
+```bash
+sudo update-alternatives --get-selections
+```
+
 ```bash
 sudo update-alternatives --install /usr/bin/x-terminal-emulator
  \ x-terminal-emulator /opt/Hyper/hyper 50
@@ -2168,7 +2183,7 @@ sudo update-alternatives --config x-terminal-emulator
 
 ### Tmux
 
-#### Basic Tmux Command
+#### Basic Tmux Commands
 
 ```bash
 tmux ls
@@ -2230,7 +2245,7 @@ t        # 显示一个时钟
 - copy mode can scroll too
 - `set -g mouse on` for enabling mouse scrolling
 
-#### Configuration
+#### Tmux Configuration
 
 ```bash
 # C-b is not acceptable -- Vim uses it
