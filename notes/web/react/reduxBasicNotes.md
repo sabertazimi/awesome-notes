@@ -1360,3 +1360,7 @@ const fluxStandardAction = {
 ### Debugging Tools
 
 - [Redux Devtools](https://github.com/gaearon/redux-devtools)
+
+## Redux Reference
+
+- Redux ToolKit quick start [guide](https://redux.js.org/tutorials/fundamentals/part-8-modern-redux).
