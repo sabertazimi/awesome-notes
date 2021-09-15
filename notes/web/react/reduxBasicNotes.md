@@ -488,7 +488,8 @@ const postsForUser = useSelector(state => {
 any time an action is dispatched,
 it will call its selector function again right away.
 
-If the value returned by selector changes from last time it ran,
+If value returned by selector changes from last time it ran
+(**strict `===` reference comparisons**),
 `useSelector` will force component to re-render with the new data.
 
 ### CreateSelector API
