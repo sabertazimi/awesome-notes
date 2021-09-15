@@ -108,11 +108,8 @@ then write modern browser css code
 ```css
 .grid {
   display: flex;
-}
 
-/* old browser don't support this rule */
-/* old browser will ignore this rule */
-.grid {
+  /* old browser will ignore this rule */
   display: grid;
 }
 ```

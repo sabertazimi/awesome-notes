@@ -19,6 +19,8 @@ tags: [Web, CSS, Sass]
 - start with `$`
 
 ```scss
+/* stylelint-disable at-rule-no-unknown */
+
 $heading-color: green;
 
 h1 {
@@ -38,11 +40,13 @@ refer to parent-selector, only use it on:
 
 ```scss
 .button {
-  &:hover {
+  &:hover,
+  &:focus {
     color: $color-button-hover;
   }
 
   &::after {
+    color: $color-after;
   }
 }
 ```
@@ -133,7 +137,7 @@ only assign when variables hadn't been assigned
 }
 
 div {
-  @include box-shadow(0px, 0px, 4px, #fff);
+  @include box-shadow(0, 0, 4px, #fff);
 }
 ```
 
@@ -228,9 +232,9 @@ $x: 1;
 
 // This CSS will print because %message-shared is extended.
 %message-shared {
-  border: 1px solid #ccc;
   padding: 10px;
   color: #333;
+  border: 1px solid #ccc;
 }
 
 .message {
@@ -239,29 +243,33 @@ $x: 1;
 
 .success {
   @extend %message-shared;
+
   border-color: green;
 }
 
 .error {
   @extend %message-shared;
+
   border-color: red;
 }
 
 .warning {
   @extend %message-shared;
+
   border-color: yellow;
 }
 ```
 
 ```scss
 .panel {
-  background-color: red;
   height: 70px;
+  background-color: red;
   border: 2px solid green;
 }
 
 .big-panel {
   @extend .panel;
+
   width: 150px;
   font-size: 2em;
 }
@@ -273,7 +281,9 @@ $x: 1;
 %foo {
   content: 'foo';
 }
+```
 
+```scss
 // Wrong
 @media print {
   .bar {
@@ -290,7 +300,9 @@ $x: 1;
     }
   }
 }
+```
 
+```scss
 // Right
 %foo {
   content: 'foo';
@@ -340,7 +352,7 @@ $x: 1;
 $value: 13.37;
 $length: $value * 1em;
 
-whatever {
+.whatever {
   padding-top: round($length); // 13em
 }
 ```

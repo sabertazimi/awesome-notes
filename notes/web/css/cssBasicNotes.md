@@ -37,38 +37,56 @@ has 4 bits - thousands, hundreds, tens, ones `0000`:
 > but selectors in it have effect on specificity
 
 ```scss
+/* stylelint-disable at-rule-no-unknown */
+
+/* specificity: 0001 */
 h1 {
-  specificity: 0001;
+  color: red;
 }
 
+/* specificity: 0100 */
 #id {
-  specificity: 0100;
+  color: green;
 }
 
+/* specificity: 0003 */
 h1 + p::first-letter {
-  specificity: 0003;
+  color: blue;
 }
 
+/* specificity: 0022 */
 li > a[href*='en-US'] > .inline-warning {
-  specificity: 0022;
-}
-
-/* <h1 style="color: black">Hello</h1> */
-inline-style {
-  specificity: 1000;
+  color: yellow;
 }
 ```
 
+```html
+<!-- specificity: 1000; -->
+<h1 style="color: black">Hello</h1>
+```
+
 ```css
+/* specificity: 0023 */
+div li:nth-child(2) a:hover,
+div li:nth-child(2) a:focus {
+  border: 10px dashed black;
+}
+
+/* specificity: 0024 */
+div div li:nth-child(2) a:hover,
+div div li:nth-child(2) a:focus {
+  border: 10px solid black;
+}
+
+/* specificity: 0033 */
+div div .nav:nth-child(2) a:hover,
+div div .nav:nth-child(2) a:focus {
+  border: 10px double black;
+}
+
 /* specificity: 0101 */
 #outer a {
   background-color: red;
-}
-
-/* specificity: 0201 */
-/* win */
-#outer #inner a {
-  background-color: blue;
 }
 
 /* specificity: 0104 */
@@ -77,25 +95,13 @@ inline-style {
 }
 
 /* specificity: 0113 */
-/* win */
 #outer div ul .nav a {
   color: white;
 }
 
-/* specificity: 0024 */
-div div li:nth-child(2) a:hover {
-  border: 10px solid black;
-}
-
-/* specificity: 0023 */
-div li:nth-child(2) a:hover {
-  border: 10px dashed black;
-}
-
-/* specificity: 0033 */
-/* win */
-div div .nav:nth-child(2) a:hover {
-  border: 10px double black;
+/* specificity: 0201 */
+#outer #inner a {
+  background-color: blue;
 }
 ```
 
@@ -461,8 +467,8 @@ checkbox `input` as hidden `click` event listener
 
 ```css
 input.checkbox {
-  opacity: 0;
   visibility: hidden;
+  opacity: 0;
 }
 
 nav {
@@ -601,6 +607,13 @@ div:target {
 ```
 
 ```css
+@media screen and (prefers-reduced-motion: reduce) {
+  .msg {
+    opacity: 0;
+    transition: none;
+  }
+}
+
 .msg {
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
@@ -612,18 +625,18 @@ input:not(:placeholder-shown) + .msg {
 ```
 
 ```css
-/* Mouse Focus Style */
-button:focus:not(:focus-visible) {
-  outline: 2px dotted #416dea;
-  outline-offset: 2px;
-  box-shadow: 0px 1px 1px #416dea;
-}
-
 /* Tab Focus Style */
 button:focus-visible {
   outline: 2px solid #416dea;
   outline-offset: 2px;
-  box-shadow: 0px 1px 1px #416dea;
+  box-shadow: 0 1px 1px #416dea;
+}
+
+/* Mouse Focus Style */
+button:focus:not(:focus-visible) {
+  outline: 2px dotted #416dea;
+  outline-offset: 2px;
+  box-shadow: 0 1px 1px #416dea;
 }
 ```
 
@@ -636,10 +649,10 @@ button:focus-visible {
 - `::after`
 
 ```css
-//定义选中的文本颜色与背景色
+/* 定义选中的文本颜色与背景色 */
 ::selection {
-  background: #444;
   color: #fff;
+  background: #444;
 }
 ```
 
@@ -657,7 +670,8 @@ attr() – 调用当前元素的属性
 a::after {
   content: '(' attr(href) ')';
 }
-a::after {
+
+b::after {
   content: '(' attr(data-language) ')';
 }
 ```
@@ -674,8 +688,8 @@ counter() – 调用计数器，可以不使用列表元素实现序号功能,�
 
 ```css
 h2::before {
-  counter-increment: chapter;
   content: 'Chapter ' counter(chapter);
+  counter-increment: chapter;
 }
 ```
 
@@ -685,8 +699,8 @@ div {
 }
 
 h2::before {
-  counter-increment: tidbit-counter 1;
   content: counter(tidbit-counter, list-style-type) ': ';
+  counter-increment: tidbit-counter 1;
 }
 ```
 
@@ -708,13 +722,13 @@ Nested counters:
 
 ```css
 ol {
-  counter-reset: section; /* 为每个ol元素创建新的计数器实例 */
   list-style-type: none;
+  counter-reset: section; /* 为每个ol元素创建新的计数器实例 */
 }
 
 li::before {
-  counter-increment: section; /* 只增加计数器的当前实例 */
   content: counters(section, '.') ' '; /* 为所有计数器实例增加以“.”分隔的值 */
+  counter-increment: section; /* 只增加计数器的当前实例 */
 }
 ```
 
@@ -769,12 +783,12 @@ li::before {
 
 ```css
 .first-details-intro::after {
-  width: 0;
-  height: 0;
-  content: '';
   position: absolute;
   top: 50%;
   right: 0;
+  width: 0;
+  height: 0;
+  content: '';
   border-top: 15px solid transparent;
   border-right: 25px solid #fff;
   border-bottom: 15px solid transparent;
@@ -788,8 +802,8 @@ li::before {
 ```css
 html {
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
+  margin: 0;
   font-size: 100%;
 }
 
@@ -797,8 +811,8 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
-  margin: inherit;
   padding: inherit;
+  margin: inherit;
 }
 
 body {
@@ -828,7 +842,7 @@ visible, hidden, scroll, auto
 前置属性:overflow
 
 ```css
-/*允许用户修改元素尺寸*/
+/* 允许用户修改元素尺寸 */
 resize: none/both/horizontal/vertical/inherit;
 ```
 
@@ -874,15 +888,15 @@ Multiple-column layout:
 - `column-rule`
 
 ```css
-/*子元素分列*/
+/* 子元素分列 */
 .three-column {
+  -moz-column-gap: 1em;
+  -webkit-column-gap: 1em;
+  column-gap: 1em;
   padding: 1em;
   -moz-column-count: 3;
-  -moz-column-gap: 1em;
   -webkit-column-count: 3;
-  -webkit-column-gap: 1em;
   column-count: 3;
-  column-gap: 1em;
 }
 ```
 
@@ -969,8 +983,8 @@ float make element specified value of `display`:
 ```css
 .parent {
   position: fixed;
-  left: 0px;
   top: 5px;
+  left: 0;
   width: 100%;
 }
 ```
@@ -983,8 +997,8 @@ float make element specified value of `display`:
 ```css
 .clearfix::before,
 .clearfix::after {
-  content: '';
   display: table;
+  content: '';
 }
 .clearfix::after {
   clear: both;
@@ -1031,10 +1045,10 @@ top/left/width/right/z-index are invalid
   position: absolute;
   top: 0;
   left: 0;
+  z-index: -50;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: -50;
 }
 ```
 
@@ -1043,11 +1057,11 @@ top/left/width/right/z-index are invalid
   position: absolute;
   top: 0;
   left: 0;
+  z-index: -100;
   width: 100%;
   height: 100vh;
-  background-size: cover;
   overflow: hidden;
-  z-index: -100;
+  background-size: cover;
 }
 
 .fullscreen-video video {
@@ -1065,7 +1079,7 @@ top/left/width/right/z-index are invalid
 - display: `inline`/`inline-block`/`table-*` computed to `block`
 
 ```css
-/* 使子元素可以相对于父元素布局*/
+/* 使子元素可以相对于父元素布局 */
 
 .parent {
   position: relative;
@@ -1073,7 +1087,6 @@ top/left/width/right/z-index are invalid
 
 .children {
   position: absolute;
-
   top: auto;
   left: 0;
 }
@@ -1144,20 +1157,20 @@ top/left/width/right/z-index are invalid
 display: flex;
 flex-direction: row/column;
 flex-wrap: nowrap/wrap/wrap-reverse;
-justify-content: flex-start/flex-end/center/space-between/space-around;
 align-content: flex-start/flex-end/center/space-between/space-around;
 align-items: flex-start/flex-end/center/baseline/stretch;
+justify-content: flex-start/flex-end/center/space-between/space-around;
 ```
 
 ### Flex Children Property
 
 ```css
-flex: number; /*宽/高度权重*/
-order: number; /*显示顺序*/
+flex: number; /* 宽/高度权重 */
 flex-basis: number;
-flex-shrink: number;
 flex-grow: number;
+flex-shrink: number;
 align-self: auto/flex-start/flex-end/center/baseline/stretch;
+order: number; /* 显示顺序 */
 ```
 
 ### Flexibility of Float
@@ -1206,9 +1219,9 @@ will change width of pseudo elements.
 
 ```css
 body {
+  display: flex;
   height: 100vh;
   margin: 0;
-  display: flex;
 }
 
 aside {
@@ -1230,55 +1243,53 @@ main {
 }
 
 .initial {
-  /*width: 100px~200px*/
+  /* width: 100px~200px */
   -webkit-flex: initial;
   flex: initial;
   width: 200px;
   min-width: 100px;
 }
 .none {
-  /*width: 200px*/
+  /* width: 200px */
   -webkit-flex: none;
   flex: none;
   width: 200px;
 }
 .flex1 {
-  /*width: left width * 1/3*/
+  /* width: left width * 1/3 */
   -webkit-flex: 1;
   flex: 1;
 }
 .flex2 {
-  /*width: left width * 2/3*/
+  /* width: left width * 2/3 */
   -webkit-flex: 2;
   flex: 2;
 }
 ```
 
 ```css
-/*子元素全部居中对齐*/
+/* 子元素全部居中对齐 */
 .vertical-container {
-  height: 300px;
-
   display: -webkit-flex;
   display: flex;
-
   -webkit-align-items: center;
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
+  height: 300px;
 }
 ```
 
 ```css
 .layer {
   display: flex;
-  margin: 5px;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  border: 1px solid #000;
-  background-color: #fff;
   flex-grow: 1;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 5px;
+  background-color: #fff;
+  border: 1px solid #000;
 }
 ```
 
@@ -1288,8 +1299,11 @@ main {
 
 ```css
 .container {
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    'header header header'
+    'advert content content'
+    'footer footer footer';
+
   /*
    * grid-template-columns:
    *   repeat([auto-fit / auto-fill / numbers], minmax(60px, 1fr));
@@ -1297,24 +1311,21 @@ main {
 
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-rows: minmax(90px, 1fr);
-
-  grid-template-areas:
-    'header header header'
-    'advert content content'
-    'footer footer footer';
-
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
-  justify-items: center;
   align-items: end;
+  justify-items: center;
 }
 
 .item {
+  grid-area: footer;
   grid-row: start / end; /* 2 / -1 */
   grid-column: start / end;
-  grid-area: footer;
+  align-self: end;
+
   /* grid-area: hstart / vstart / hend / vend */
   justify-self: center;
-  align-self: end;
 }
 ```
 
@@ -1332,10 +1343,10 @@ _named_ rows and columns
 ```css
 .main {
   display: grid;
-  grid-column-gap: 2rem;
-  grid-row-gap: 1rem;
   grid-template-rows: [header] 100px [body] auto;
-  grid-template-columns: [l-gutter] 1fr[sidebar] 4fr [content] 8fr [r-gutter] 1fr;
+  grid-template-columns: [l-gutter] 1fr [sidebar] 4fr [content] 8fr [r-gutter] 1fr;
+  grid-row-gap: 1rem;
+  grid-column-gap: 2rem;
 }
 
 .header {
@@ -1467,17 +1478,17 @@ margin in the direction of the float will pull the floated element in that direc
 }
 
 .container .left {
-  float: left;
   position: relative;
   right: 300px;
+  float: left;
   width: 300px;
   margin-left: -100%;
   background-color: darkblue;
 }
 
 .container .right {
-  float: left;
   position: relative;
+  float: left;
   width: 200px;
   margin-right: -200px;
   background-color: red;
@@ -1496,9 +1507,9 @@ margin in the direction of the float will pull the floated element in that direc
 
 ```css
 .container {
-  float: left;
   position: relative;
   left: 50%;
+  float: left;
 }
 
 .container ul {
@@ -1522,11 +1533,11 @@ margin in the direction of the float will pull the floated element in that direc
 Button label (`<a>`) vertical alignment:
 
 ```css
-a.button:before {
-  content: '';
+a.button::before {
   display: inline-block;
   height: 16px;
   vertical-align: middle;
+  content: '';
 }
 ```
 
@@ -1575,14 +1586,13 @@ In positioning/sizing/margin/padding/border/text alignment:
 ```css
 .demo::-webkit-scrollbar {
   /* 滚动条整体样式 */
+
   /* 高宽分别对应横竖滚动条的尺寸 */
   width: 10px;
   height: 1px;
 }
 
 .demo::-webkit-scrollbar-thumb {
-  /* 滚动条方块 */
-  border-radius: 10px;
   background-color: blue;
   background-image: -webkit-linear-gradient(
     45deg,
@@ -1594,12 +1604,16 @@ In positioning/sizing/margin/padding/border/text alignment:
     transparent 75%,
     transparent
   );
+
+  /* 滚动条方块 */
+  border-radius: 10px;
 }
 
 .demo::-webkit-scrollbar-track {
+  background-color: #ededed;
+
   /* 滚动条轨道 */
   border-radius: 10px;
-  background-color: #ededed;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 ```
@@ -1607,15 +1621,15 @@ In positioning/sizing/margin/padding/border/text alignment:
 ### Hidden ScrollBar
 
 ```css
-.demo::-webkit-scrollbar {
-  display: none; /* Chrome Safari */
-}
-
 .demo {
   scrollbar-width: none; /* FireFox */
   -ms-overflow-style: none; /* IE 10+ */
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.demo::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
 }
 ```
 
@@ -1643,7 +1657,8 @@ In positioning/sizing/margin/padding/border/text alignment:
   background-color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
   --primary-l: 54%;
 }
 ```
@@ -1662,11 +1677,13 @@ In positioning/sizing/margin/padding/border/text alignment:
 
 .button--secondary {
   --primary-l: 90%;
+
   color: #222;
 }
 
 .button--ghost {
   --primary-l: 90%;
+
   background-color: transparent;
   border: 3px solid hsl(var(--primary-h), var(--primary-s), var(--primary-l));
 }
@@ -1718,41 +1735,33 @@ Mix transparent with non-transparent border to make shapes (e.g. triangle).
 .arrow-up {
   width: 0;
   height: 0;
-
   border-right: 16px solid transparent;
-  border-left: 16px solid transparent;
-
   border-bottom: 20px solid #8888e8;
+  border-left: 16px solid transparent;
 }
 
 .arrow-right {
   width: 0;
   height: 0;
-
   border-top: 16px solid transparent;
   border-bottom: 16px solid transparent;
-
   border-left: 20px solid #e888a3;
 }
 
 .arrow-down {
   width: 0;
   height: 0;
-
+  border-top: 20px solid #f7df6c;
   border-right: 16px solid transparent;
   border-left: 16px solid transparent;
-
-  border-top: 20px solid #f7df6c;
 }
 
 .arrow-left {
   width: 0;
   height: 0;
-
   border-top: 16px solid transparent;
-  border-bottom: 16px solid transparent;
-
   border-right: 20px solid #8de698;
+  border-bottom: 16px solid transparent;
 }
 ```
 
@@ -1767,7 +1776,8 @@ Mix transparent with non-transparent border to make shapes (e.g. triangle).
 Awesome gradient buttons:
 
 ```css
-.btn:hover {
+.btn:hover,
+.btn:focus {
   background-position: right center; /* change the direction of the change here */
 }
 
@@ -1827,8 +1837,8 @@ Awesome gradient buttons:
 .video {
   min-width: 100%;
   min-height: 100%;
-  background-size: cover;
   overflow: hidden;
+  background-size: cover;
 }
 ```
 
@@ -1873,17 +1883,17 @@ body {
   box-sizing: border-box;
   width: 100%;
   height: 100vh;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 .parallax {
   min-height: 60%; /* key */
-  background-attachment: fixed; /* key */
   background-image: url('./images/bg.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* key */
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
 }
 ```
 
@@ -1919,14 +1929,14 @@ h1 {
 ```css
 .background {
   background-image: url('bg.png');
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .background h1 {
-  background-color: black; /* mix with background */
   color: white; /* keep white */
+  background-color: black; /* mix with background */
   mix-blend-mode: screen; /* screen or multiply  */
 }
 ```
@@ -1949,8 +1959,8 @@ Night mode:
 
 ```css
 .night {
-  background-blend-mode: darken;
   filter: brightness(80%) grayscale(20%) contrast(1.2);
+  background-blend-mode: darken;
 }
 ```
 
@@ -1958,8 +1968,8 @@ movie style
 
 ```css
 .movie {
-  background-blend-mode: soft-light;
   filter: contrast(1.1);
+  background-blend-mode: soft-light;
 }
 ```
 
@@ -2025,25 +2035,26 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  left: 0;
   bottom: 0;
+  left: 0;
   z-index: 1;
+  pointer-events: none;
   background: linear-gradient(to right top, teal 50%, transparent 50%) no-repeat;
   background-size: 100% calc(100% - 100vh);
-  pointer-events: none;
   mix-blend-mode: darken;
 }
 
 /* use after element to hidden triangle background gradient */
+
 /* only show 5px background */
 .indicator::after {
-  content: '';
   position: fixed;
   top: 5px;
-  bottom: 0;
   right: 0;
+  bottom: 0;
   left: 0;
   z-index: 1;
+  content: '';
   background: #fff;
 }
 ```
@@ -2052,13 +2063,12 @@ body {
 
 ```css
 .jumbotron {
-  background-image: url('');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-
-  height: 1px;
   width: 1px;
+  height: 1px;
+  background-image: url('');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 ```
 
@@ -2095,10 +2105,10 @@ Horizontal Scrolling Methods:
 }
 
 .paragraph {
+  line-height: 1.5em; /* 行间距  */
   text-indent: 2em; /* 段落缩进 */
   letter-spacing: 50px; /* 字间距  */
   word-spacing: 50px; /* 词间距  */
-  line-height: 1.5em; /* 行间距  */
 }
 ```
 
@@ -2108,9 +2118,9 @@ justify: 自适应，左右都无空格
 
 ```css
 .wrap {
-  text-justify: distribute-all-lines; /* ie6-8 */
   text-align: justify;
   text-align-last: justify; /* 一个块或行的最后一行对齐方式 */
+  text-justify: distribute-all-lines; /* ie6-8 */
 }
 ```
 
@@ -2131,11 +2141,11 @@ justify: 自适应，左右都无空格
 ```css
 .article-container {
   display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
   word-break: break-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4; /* 需要显示的行数 */
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 ```
 
@@ -2149,8 +2159,8 @@ justify: 自适应，左右都无空格
 
 /* 自动换行 */
 .auto-wrap {
-  word-wrap: break-word;
   word-break: normal;
+  word-wrap: break-word;
 }
 
 /* 自动换行 */
@@ -2169,23 +2179,10 @@ pre {
 
 ```css
 p {
-  /* 大写字母 */
-  text-transform: uppercase;
-}
-
-p {
-  /* 小写字母 */
-  text-transform: lowercase;
-}
-
-p {
-  /* 首字母大写 */
-  text-transform: capitalize;
-}
-
-p {
-  /* 小型的大写字母 */
-  font-variant: small-caps;
+  font-variant: small-caps; /* 小型的大写字母 */
+  text-transform: uppercase; /* 大写字母 */
+  text-transform: lowercase; /* 小写字母 */
+  text-transform: capitalize; /* 首字母大写 */
 }
 ```
 
@@ -2195,21 +2192,21 @@ p {
 
 ```css
 /* 单列展示 */
-.wrap {
+.wrap-single {
   width: 25px;
   height: auto;
   padding: 8px 5px;
-  line-height: 18px;
   font-size: 12px;
+  line-height: 18px;
   word-wrap: break-word; /* 英文自动换行 */
 }
 
 /* 多列展示 */
-.wrap {
+.wrap-multiple {
   height: 200px;
   line-height: 30px;
   text-align: justify;
-  writing-mode: vertical-lr; /*从左向右 */
+  writing-mode: vertical-lr; /* 从左向右 */
   writing-mode: vertical-rl; /* 从右向左 */
   writing-mode: tb-lr; /* IE 从左向右 */
   writing-mode: tb-rl; /* IE 从右向左 */
@@ -2241,17 +2238,17 @@ p {
 
 ```css
 html {
-  /*浏览器默认size为16px，此时将html-size自动计算为10px*/
+  /* 浏览器默认size为16px，此时将html-size自动计算为10px */
   font-size: 62.5%;
 }
 
 small {
-  /*11px*/
+  /* 11px */
   font-size: 1.1rem;
 }
 
 strong {
-  /*18px*/
+  /* 18px */
   font-size: 1.8rem;
 }
 ```
@@ -2297,10 +2294,10 @@ whether and when it is downloaded and ready to use:
 ```css
 @font-face {
   font-family: ExampleFont;
+  font-style: normal;
+  font-weight: 400;
   src: url(/path/to/fonts/exampleFont.woff) format('woff'), url(/path/to/fonts/exampleFont.eot)
       format('eot');
-  font-weight: 400;
-  font-style: normal;
   font-display: fallback;
 }
 ```
@@ -2311,31 +2308,34 @@ whether and when it is downloaded and ready to use:
 
 ```css
 @font-face {
-  /*:call <SNR>105_SparkUpNext()*/
+  /* :call <SNR>105_SparkUpNext() */
   font-family: mySpecialFont;
-  font-style/font-weight/font-variant: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  font-variant: inherit;
   src: url(‘./Colleen.ttf’);
 }
 
-/*selector {*/
-/*:call <SNR>105_SparkUpNext()*/
-/*font-family:mySpecialFont;*/
-/*}*/
+/* selector { */
+
+/* :call <SNR>105_SparkUpNext() */
+
+/* font-family:mySpecialFont; */
+
+/* } */
 ```
 
 ### Font Best Practice
 
 ```css
-text-decoration: none;
-text-transform: uppercase;
-
-color: black;
-line-height: 100px;
-
-letter-spacing: 1.3px;
 font-family: sans-serif;
 font-size: 12px;
 font-weight: 400;
+line-height: 100px;
+color: black;
+text-decoration: none;
+text-transform: uppercase;
+letter-spacing: 1.3px;
 ```
 
 ```css
@@ -2432,10 +2432,11 @@ body {
 }
 
 /* Increment the value of section counter by 1 */
+
 /* Display the value of section counter */
 h3::before {
-  counter-increment: section;
   content: counter(section);
+  counter-increment: section;
 }
 ```
 
@@ -2445,17 +2446,17 @@ h3::before {
 - [Instagram Filter](https://github.com/una/CSSgram)
 
 ```css
-filter: url(resources.svg); /*引用SVG filter元素*/
-filter: blur(5px); /*模糊*/
-filter: brightness(0.4); /*高光*/
-filter: contrast(200%); /*对比度*/
-filter: drop-shadow(16px 16px 20px blue); /*阴影*/
-filter: grayscale(50%); /*灰度*/
-filter: hue-rotate(90deg); /*色相旋转*/
-filter: invert(75%); /*颜色翻转/反相*/
-filter: opacity(25%); /*透明度*/
-filter: saturate(30%); /*饱和度*/
-filter: sepia(60%); /*老照片*/
+filter: url(resources.svg); /* 引用SVG filter元素 */
+filter: blur(5px); /* 模糊 */
+filter: brightness(0.4); /* 高光 */
+filter: contrast(200%); /* 对比度 */
+filter: drop-shadow(16px 16px 20px blue); /* 阴影 */
+filter: grayscale(50%); /* 灰度 */
+filter: hue-rotate(90deg); /* 色相旋转 */
+filter: invert(75%); /* 颜色翻转/反相 */
+filter: opacity(25%); /* 透明度 */
+filter: saturate(30%); /* 饱和度 */
+filter: sepia(60%); /* 老照片 */
 
 /* Apply multiple filters */
 filter: contrast(175%) brightness(3%);
@@ -2543,10 +2544,10 @@ body {
 }
 
 .card {
-  backdrop-filter: blur(12px) saturate(200%);
   background-color: rgba(17, 25, 40, 0.54);
-  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 12px;
+  backdrop-filter: blur(12px) saturate(200%);
 }
 ```
 
@@ -2556,8 +2557,8 @@ body {
 
 ```css
 .wrap {
-  cursor: default;
   pointer-events: none;
+  cursor: default;
 }
 ```
 
@@ -2618,12 +2619,20 @@ background-position/background-size,
 #### Transition and Transform
 
 ```css
-.div {
-  transform: scaleX(0);
-  transition: * * transform * * 0.5s ease;
+@media screen and (prefers-reduced-motion: reduce) {
+  .div {
+    transition: none;
+    transform: scaleX(0);
+  }
 }
 
-.div:hover {
+.div {
+  transition: * * transform * * 0.5s ease;
+  transform: scaleX(0);
+}
+
+.div:hover,
+.div:focus {
   transform: scaleX(1);
 }
 ```
@@ -2651,8 +2660,8 @@ background-position/background-size,
 - multiple box-shadow
 
 ```css
-overflow: hidden;
 z-index: -1;
+overflow: hidden;
 ```
 
 Changing top/right/bottom/left of pseudo element
@@ -2670,6 +2679,11 @@ size animation will start from bottom-right corner).
 - transition-delay: .5s;
 
 ```css
+@media screen and (prefers-reduced-motion: reduce) {
+  .element {
+    transition: none;
+  }
+}
 .element {
   transition: property duration timing-function delay;
   transition: transform 0.5s ease-in-out 0.2s;
@@ -2714,10 +2728,25 @@ define the transition to occur in both directions
 Change `transition` when `:hover` etc state bring magic effect:
 
 ```css
+@media screen and (prefers-reduced-motion: reduce) {
+  .menu-nav {
+    visibility: hidden;
+    transition: none;
+    transform: translateX(-100%);
+  }
+}
+
 .menu-nav {
   visibility: hidden;
-  transform: translateX(-100%);
   transition: all 0.4s ease-in-out;
+  transform: translateX(-100%);
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .menu-link {
+    opacity: 0;
+    transition: none;
+  }
 }
 
 .menu-link {
@@ -2730,8 +2759,18 @@ Change `transition` when `:hover` etc state bring magic effect:
   transform: translateX(0);
 }
 
+@media screen and (prefers-reduced-motion: reduce) {
+  .menu-toggle:checked ~ .menu-nav .menu-link {
+    opacity: 1;
+
+    /* magic effect for delaying transition */
+    transition: none;
+  }
+}
+
 .menu-toggle:checked ~ .menu-nav .menu-link {
   opacity: 1;
+
   /* magic effect for delaying transition */
   transition: opacity 0.4s ease-in-out 0.4s;
 }
@@ -2747,6 +2786,12 @@ Transition animation get trigger
 as css style of element changed (class changed).
 
 ```css
+@media screen and (prefers-reduced-motion: reduce) {
+  .element {
+    transition: none;
+  }
+}
+
 .element {
   transition: opacity 0.5s;
 }
@@ -2860,6 +2905,11 @@ backface-visibility: hidden;
 - animation bounce/cache: first -100, then, +5/+20, finally 0
 
 ```css
+@media screen and (prefers-reduced-motion: reduce) {
+  .element {
+    animation: none;
+  }
+}
 .element {
   animation: name duration timing-function delay iteration-count direction;
 }
@@ -2874,6 +2924,15 @@ backface-visibility: hidden;
   }
   to {
     opacity: 1;
+  }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+    animation-duration: 2.5s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
   }
 }
 
@@ -2898,7 +2957,15 @@ body {
   }
 }
 
-/*直接动画*/
+/* 直接动画 */
+@media screen and (prefers-reduced-motion: reduce) {
+  .div {
+    animation: none;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    animation-delay: 0.5s;
+  }
+}
 .div {
   animation-name: name;
   animation-duration: 1s;
@@ -2906,12 +2973,15 @@ body {
   animation-delay: 0.5s;
 }
 
-/*hover后再播放动画，高级化transform+transition*/
-.div:hover {
-  animation-name: name;
-  animation-duration: 1s;
-  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
-  animation-delay: 0.5s;
+/* hover 后再播放动画, 高级化 transform + transition */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .div:hover,
+  .div:focus {
+    animation-name: name;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    animation-delay: 0.5s;
+  }
 }
 ```
 
@@ -2943,6 +3013,14 @@ animation pattern: 利用 `animation-paly-state`
 与 JS 添加 `.animate` 类控制动画开始和停止.
 
 ```css
+@media screen and (prefers-reduced-motion: reduce) {
+  .to-animate {
+    animation: none;
+    animation-play-state: paused;
+    animation-iteration-count: infinite;
+  }
+}
+
 .to-animate {
   animation: animationName 1.5s linear;
   animation-play-state: paused;
@@ -2968,12 +3046,19 @@ setTimeout(() => element.classList.remove('animate'), duration);
 
 ```css
 /* first: scale(1), last: scale(1.2) */
+@media screen and (prefers-reduced-motion: reduce) {
+  .scale-up {
+    transition: none;
+    transform: scale(0.8);
+  }
+}
 .scale-up {
-  transform: scale(0.8);
   transition: transform 0.2s linear;
+  transform: scale(0.8);
 }
 
-.scale-up:hover {
+.scale-up:hover,
+.scale-up:focus {
   transform: none;
 }
 ```
@@ -2986,13 +3071,10 @@ setTimeout(() => element.classList.remove('animate'), duration);
 .cube {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-
   -webkit-perspective: 1000;
   perspective: 1000;
-
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
-
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 
@@ -3124,14 +3206,16 @@ use `inline-box` with `width`
 - JavaScript API: `window.matchMedia()`
 
 ```css
-@media (not/only) 设备类型 and ((not) 设备特性),
-  (not/only) 设备类型 and ((not) 设备特性-1) and ((not) 设备特性-2) {
+/* stylelint-disable */
+@media (not / only) 设备类型 and ((not) 设备特性),
+  (not / only) 设备类型 and ((not) 设备特性-1) and ((not) 设备特性-2) {
   /* 样式代码 */
 }
+/* stylelint-enable */
 ```
 
 ```css
-/*screen size : 500px ~ 1000px*/
+/* screen size : 500px ~ 1000px */
 @media screen and (min-width: 500px) and (max-width: 1000px) {
   .container {
     width: 750px;
@@ -3180,33 +3264,33 @@ use `inline-box` with `width`
 
 ```css
 .day {
-  background: #eee;
   color: black;
+  background: #eee;
 }
 .night {
-  background: #333;
   color: white;
+  background: #333;
 }
 
 @media (prefers-color-scheme: dark) {
   .day.dark-scheme {
-    background: #333;
     color: white;
+    background: #333;
   }
   .night.dark-scheme {
-    background: black;
     color: #ddd;
+    background: black;
   }
 }
 
 @media (prefers-color-scheme: light) {
   .day.light-scheme {
-    background: white;
     color: #555;
+    background: white;
   }
   .night.light-scheme {
-    background: #eee;
     color: black;
+    background: #eee;
   }
 }
 ```
@@ -3231,7 +3315,9 @@ use `inline-box` with `width`
 Detecting media query support in CSS:
 
 ```css
+/* stylelint-disable-next-line */
 @media not all and (prefers-reduced-data), (prefers-reduced-data) {
+  color: blue;
 }
 ```
 
@@ -3285,13 +3371,13 @@ if (window.matchMedia('(min-width: 400px)').matches) {
   position: absolute;
   width: 1px;
   height: 1px;
-  margin: -1px;
   padding: 0;
-  border: 0;
-  clip: rect(0 0 0 0);
-  clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
-  white-space: nowrap;
+  margin: -1px;
   overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: polygon(0 0, 0 0, 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 ```
 
@@ -3310,9 +3396,9 @@ h1 {
 .jumbotron {
   min-height: 100%;
   background-image: url('');
-  background-size: cover;
-  background-position: center center;
   background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
   opacity: 0.8;
 }
 ```
@@ -3322,11 +3408,11 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: -100;
   width: 100%;
   height: 100vh;
-  background-size: cover;
   overflow: hidden;
-  z-index: -100;
+  background-size: cover;
 }
 
 .fullscreen-video video {
@@ -3338,11 +3424,11 @@ h1 {
 ```css
 .parallax {
   min-height: 60%; /* key */
-  background-attachment: fixed; /* key */
   background-image: url('./images/bg.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* key */
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
 }
 ```
 
@@ -3362,17 +3448,17 @@ h1 {
 ```css
 h1 {
   display: flex;
-  width: 100%;
   align-items: center;
+  width: 100%;
 }
 
 h1::before,
 h1::after {
-  content: '';
-  background-color: gray;
+  flex: 1;
   height: 0.1em;
   margin: 0.2em;
-  flex: 1;
+  content: '';
+  background-color: gray;
 }
 ```
 
@@ -3422,10 +3508,10 @@ textarea,
 select {
   box-sizing: border-box;
   height: 38px;
-  border: 1px solid #d1d1d1;
-  border-radius: 4px;
   padding: 6px 10px;
   background-color: #fff;
+  border: 1px solid #d1d1d1;
+  border-radius: 4px;
   box-shadow: none;
 }
 
@@ -3490,12 +3576,12 @@ label > .label-body {
 
 ```css
 input[type='checkbox'] + label::before {
-  content: '';
   position: relative;
   display: inline-block;
-  margin-right: 10px;
   width: 20px;
   height: 20px;
+  margin-right: 10px;
+  content: '';
   background: white;
 }
 
@@ -3504,20 +3590,20 @@ input[type='checkbox']:checked + label::before {
 }
 
 input[type='checkbox']:checked + label::after {
-  content: '';
   position: absolute;
   top: 3px;
   left: 27px;
-  border-left: 2px solid black;
-  border-bottom: 2px solid black;
-  height: 6px;
   width: 13px;
+  height: 6px;
+  content: '';
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
   transform: rotate(-45deg);
 }
 
 input[type='checkbox']:focus + label::before {
   outline: #5d9dd5 solid 1px;
-  box-shadow: 0 0px 8px #5e9ed6;
+  box-shadow: 0 0 8px #5e9ed6;
 }
 
 input[type='checkbox']:disabled + label {
@@ -3537,26 +3623,26 @@ input[type='checkbox']:disabled + label::before {
   height: 35px;
   margin-right: 20px;
 
-  /* 自定义边框 */
-  border: 0;
+  /* 文本属性 */
+  text-align: center;
+  text-align-last: center;
+
+  /* 消除默认箭头 */
+  text-indent: 0.01px;
+  text-overflow: '';
 
   /* 将箭头图片移至右端 */
   background: url('images/arrow.png') no-repeat;
   background-color: #fff;
   background-position: right;
 
+  /* 自定义边框 */
+  border: 0;
+
   /* 消除默认样式 */
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-
-  /* 消除默认箭头 */
-  text-indent: 0.01px;
-  text-overflow: '';
-
-  /* 文本属性 */
-  text-align: center;
-  text-align-last: center;
 }
 
 .custom-select:focus {
@@ -3567,15 +3653,14 @@ input[type='checkbox']:disabled + label::before {
   width: 100%;
   height: 25px;
   padding-left: 30px;
-
-  background-color: #fff;
-  color: #323333;
-
   line-height: 25px;
+  color: #323333;
+  background-color: #fff;
   direction: rtl;
 }
 
-.custom-select option:hover {
+.custom-select option:hover,
+.custom-select option:focus {
   color: #fff;
   background: url(../img/tick.png) no-repeat 8px center;
   background-color: #e74f4d;
@@ -3592,7 +3677,7 @@ input[type='checkbox']:disabled + label::before {
 
 ```css
 ul {
-  /* 垂直菜单设置宽度, 水平菜单不设置宽度*/
+  /* 垂直菜单设置宽度, 水平菜单不设置宽度 */
   list-style: none;
 }
 
@@ -3622,10 +3707,10 @@ li {
 
 ```css
 a {
-  opacity: 0;
-  cursor: default;
-  pointer-events: none;
   text-decoration: none;
+  pointer-events: none;
+  cursor: default;
+  opacity: 0;
 }
 ```
 
@@ -3647,16 +3732,18 @@ a::after {
   left: 0;
   width: 0;
   height: 3px;
-  background-color: #22313f;
   content: '';
+  background-color: #22313f;
   transform-origin: bottom-center;
 }
 
-a:hover {
+a:hover,
+a:focus {
   color: #22313f;
 }
 
-a:hover::after {
+a:hover::after,
+a:focus::after {
   width: 100%;
 }
 ```
@@ -3695,6 +3782,7 @@ a:hover::after {
     min-height: 100%;
 
     /* Equal to height of footer */
+
     /* But also accounting for potential margin-bottom of last child */
     margin-bottom: -50px;
   }
@@ -3784,9 +3872,9 @@ a:hover::after {
     height: 100%;
   }
   body {
-    min-height: 100%;
     display: grid;
     grid-template-rows: 1fr auto;
+    min-height: 100%;
   }
   .footer {
     grid-row-start: 2;
@@ -3802,44 +3890,69 @@ a:hover::after {
 ```css
 a.btn-custom {
   padding: 10px 40px;
-  border-radius: 0;
-  background-color: #000;
   line-height: 100px;
   text-align: center;
+  background-color: #000;
+  border-radius: 0;
 }
 ```
 
 #### Gradient Button
 
 ```css
+@media screen and (prefers-reduced-motion: reduce) {
+  a {
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0% 100%;
+    background-size: 0% 2px;
+    transition: none;
+  }
+}
+
 a {
   text-decoration: none;
   background-image: linear-gradient(currentColor, currentColor);
-  background-position: 0% 100%;
   background-repeat: no-repeat;
+  background-position: 0% 100%;
   background-size: 0% 2px;
   transition: background-size 0.3s;
 }
 
-a:hover {
+a:hover,
+a:focus {
   background-size: 100% 2px;
 }
 ```
 
 ```css
-a {
-  padding: 5px;
-  display: inline-block;
-  text-decoration: none;
-  transition: all 0.3s;
-  background-size: 100% 200%;
-  background-image: linear-gradient(to top, #333 50%, #fff 50%);
-  color: #333;
+@media screen and (prefers-reduced-motion: reduce) {
+  a {
+    display: inline-block;
+    padding: 5px;
+    color: #333;
+    text-decoration: none;
+    background-image: linear-gradient(to top, #333 50%, #fff 50%);
+    background-size: 100% 200%;
+    transition: none;
+  }
 }
 
-a:hover {
-  background-position: 0 100%;
+a {
+  display: inline-block;
+  padding: 5px;
+  color: #333;
+  text-decoration: none;
+  background-image: linear-gradient(to top, #333 50%, #fff 50%);
+  background-size: 100% 200%;
+  transition: all 0.3s;
+}
+
+a:hover,
+a:focus {
   color: #fff;
+  background-position: 0 100%;
 }
 ```
 
@@ -3849,8 +3962,8 @@ a:hover {
 
 ```css
  {
-  border-radius: 50%;
   overflow: hidden;
+  border-radius: 50%;
 }
 ```
 
@@ -3862,20 +3975,25 @@ a:hover {
 #### Animated Dots
 
 ```css
-dot {
+.dot {
   display: inline-block;
   height: 1em;
+  overflow: hidden;
   line-height: 1;
   text-align: left;
   vertical-align: -0.25ex;
-  overflow: hidden;
 }
 
-dot::before {
+@media screen and (prefers-reduced-motion: no-preference) {
+  .dot::before {
+    animation: dot1 3s infinite step-start both;
+  }
+}
+
+.dot::before {
   display: block;
-  content: '...\A..\A.';
   white-space: pre-wrap;
-  animation: dot1 3s infinite step-start both;
+  content: '...\A..\A.';
 }
 
 @keyframes dot1 {
@@ -3891,9 +4009,11 @@ dot::before {
 #### Fade with Class
 
 ```css
-.enter,
-.leave {
-  transition: opacity 0.5s;
+@media screen and (prefers-reduced-motion: no-preference) {
+  .enter,
+  .leave {
+    transition: opacity 0.5s;
+  }
 }
 
 .before-enter,
@@ -3940,14 +4060,22 @@ function leave(el, done) {
 #### Accordion Menu Animation
 
 ```css
+@media screen and (prefers-reduced-motion: reduce) {
+  .menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: none;
+  }
+}
+
 .menu {
-  overflow: hidden;
   max-height: 0;
+  overflow: hidden;
   transition: max-height, 0.3s;
 }
 
-.container:hover .menu,
-.menu:focus {
+.menu:focus,
+.container:hover .menu {
   max-height: 1em;
 }
 ```
@@ -4075,11 +4203,11 @@ body {
 }
 
 .slide {
-  box-sizing: border-box;
   position: absolute; /* key 2 */
+  z-index: 0; /* key 3 */
+  box-sizing: border-box;
   width: 100%;
   height: 100vh;
-  z-index: 0; /* key 3 */
 }
 
 .slide:target {
@@ -4089,11 +4217,19 @@ body {
 
 ```css
 /* Rotate Fade-In Animation */
+@media screen and (prefers-reduced-motion: reduce) {
+  .slide {
+    z-index: 0;
+    transition: none;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+  }
+}
 .slide {
   z-index: 0;
+  transition: transform 1s, opacity 0.8s;
   transform: rotate(90deg);
   transform-origin: 0 0;
-  transition: transform 1s, opacity 0.8s;
 }
 
 .slide:target {
@@ -4102,8 +4238,8 @@ body {
 }
 
 .slide:target ~ section {
-  transform: rotate(-90deg);
   opacity: 0;
+  transform: rotate(-90deg);
 }
 ```
 
@@ -4126,26 +4262,26 @@ Use pseudo elements to construct circle and line:
 
 ```css
 /* The separator line */
-.c-timeline__item:not(:last-child) .c-timeline__content:before {
-  content: '';
+.c-timeline__item:not(:last-child) .c-timeline__content::before {
   position: absolute;
-  right: 100%;
   top: 0;
-  height: 100%;
+  right: 100%;
   width: 2px;
+  height: 100%;
+  content: '';
   background-color: #d3d3d3;
 }
 
 /* The circle */
-.c-timeline__content:after {
-  content: '';
+.c-timeline__content::after {
   position: absolute;
-  left: -12px;
   top: 0;
+  left: -12px;
+  z-index: 1;
   width: 20px;
   height: 20px;
+  content: '';
   background-color: #fff;
-  z-index: 1;
   border: 2px solid #d3d3d3;
   border-radius: 50%;
 }
@@ -4202,25 +4338,27 @@ Use pseudo elements to construct circle and line:
   background-color: #000;
 }
 
-.line {
+.line,
+.line-background {
   background: linear-gradient(#000, #000) 50% / 70% 10px no-repeat;
 }
 
-.line {
+.line,
+.line-border {
   border-top: 10px solid #000;
 }
 
+.line,
 .line::after {
-  /* control line length */
-  content: '_______';
-
-  /* hide content */
-  color: transparent;
-
   /* set thickness */
   font-size: 5em;
 
+  /* hide content */
+  color: transparent;
   text-decoration: line-through #000;
+
+  /* control line length */
+  content: '_______';
 }
 ```
 
@@ -4231,13 +4369,13 @@ Use pseudo elements to construct circle and line:
 - pseudo element with `dashed` `text-decoration`
 
 ```css
-.dash {
+.dash-background {
   background: linear-gradient(to left, #000 70%, transparent 0);
-  ​background-repeat: repeat-x;
+  background-repeat: repeat-x;
   background-size: 30px 10px;
 }
 
-.dash {
+.dash-border {
   border-top: 10px dashed #000;
 }
 
@@ -4254,22 +4392,22 @@ Use pseudo elements to construct circle and line:
 - pseudo element circle
 
 ```css
-.circle {
+.circle-background {
   background-image: radial-gradient(#000 72%, transparent 0);
 }
 
-.circle {
+.circle-clip-path {
   clip-path: circle(50%);
 }
 
-.circle {
+.circle-border {
   border-radius: 50%;
 }
 
 .circle::after {
-  content: '·';
-  line-height: 0;
   font-size: 120vw;
+  line-height: 0;
+  content: '·';
 }
 ```
 
@@ -4289,36 +4427,34 @@ Use pseudo elements to construct circle and line:
 .arrow-right {
   width: 20px;
   height: 32px;
-  background-color: #e888a3;
   clip-path: polygon(0 0, 0 100%, 100% 50%);
+  background-color: #e888a3;
 }
 
 /* transparent border */
 .arrow-up {
   width: 0;
   height: 0;
-
   border-right: 16px solid transparent;
-  border-left: 16px solid transparent;
-
   border-bottom: 20px solid #8888e8;
+  border-left: 16px solid transparent;
 }
 
 /* pseudo element + hidden overflow */
 .arrow-down {
+  position: relative;
   width: 40px;
   height: 40px;
-  position: relative;
   overflow: hidden;
 
   &::before {
-    content: '';
-    display: block;
-    width: calc(40px / 1.41);
-    height: calc(40px / 1.41);
     position: absolute;
     top: 0;
     left: 0;
+    display: block;
+    width: calc(40px / 1.41);
+    height: calc(40px / 1.41);
+    content: '';
     background: #f7df6c;
     transform: rotate(-45deg);
     transform-origin: 0 0;
@@ -4326,6 +4462,7 @@ Use pseudo elements to construct circle and line:
 }
 
 /* HTML Entities */
+
 /**
  * ◄ : &#9668;
  * ► : &#9658;
@@ -4396,8 +4533,8 @@ const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
   --primary: #777;
   --secondary: #ccc;
 
-  border: 1px solid var(--primary);
   background-color: var(--secondary);
+  border: 1px solid var(--primary);
 }
 
 .alert::before {
@@ -4448,10 +4585,12 @@ const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
 
 button {
   --is-raised: var(--OFF);
+
   border: 1px solid var(--is-raised, rgb(0 0 0 / 0.1));
 }
 
-button:hover {
+button:hover,
+button:focus {
   --is-raised: var(--ON);
 }
 ```
@@ -4472,6 +4611,7 @@ html {
   --media-md: initial;
   --media-lg: initial;
   --media-xl: initial;
+
   /* ... */
   --media-pointer-fine: initial;
   --media-pointer-none: initial;
@@ -4513,7 +4653,6 @@ html {
 
   /** 小于 56.249em, 宽度 49%  */
   --sm-width: var(--media-sm) 49%;
-
   --md-width: var(--media-md) 32%;
   --lg-width: var(--media-gte-lg) 24%;
 
@@ -4521,6 +4660,7 @@ html {
 
   --sm-and-down-bg: var(--media-lte-sm) red;
   --md-and-up-bg: var(--media-gte-md) green;
+
   background: var(--sm-and-down-bg, var(--md-and-up-bg));
 }
 ```
@@ -4544,7 +4684,7 @@ html {
 
 ```css
 .circle {
-  fill: #ffff00;
+  fill: #ff0;
 }
 ```
 
@@ -4929,7 +5069,6 @@ or call JS DOM API triggering layout stage (reflow)
   will-change: transform; /* Example of <custom-ident> */
   will-change: opacity; /* Example of <custom-ident> */
   will-change: left, top; /* Example of two <animate-feature> */
-
   will-change: unset;
   will-change: initial;
   will-change: inherit;
@@ -4944,10 +5083,10 @@ contain 属性允许开发者声明当前元素和它的内容尽可能的独立
 这使得浏览器在重新计算布局、样式、绘图或它们的组合的时候，只会影响到有限的 DOM 区域，而不是整个页面
 
 ```css
-/* 无布局包含*/
+/* 无布局包含 */
 contain: none;
 
-/* 布局包含 layout、style、paint 和 size*/
+/* 布局包含 layout、style、paint 和 size */
 contain: strict;
 
 /* 布局包含layout、style 和 paint */

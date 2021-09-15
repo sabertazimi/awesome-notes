@@ -139,17 +139,17 @@ navbar > container > nav/navbar-header/navbar-nav/navbar-form > li/a
 
 ```css
 body {
-  padding: 50px 0px 0px 0px;
   z-index: 0;
+  padding: 50px 0 0 0;
 }
 
 .navbar-inverse {
   background: #303f9f;
 }
 
-.navbar-inverse .navbar-nav > .active > a,
-.navbar-inverse .navbar-nav > .active > a:hover,
-.navbar-inverse .navbar-nav > .active > a:focus {
+.navbar-inverse > .active > a,
+.navbar-inverse > .active > a:hover,
+.navbar-inverse > .active > a:focus {
   color: #fff;
   background: #1a237e;
 }
@@ -163,12 +163,13 @@ body {
 
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a,
 .navbar-inverse .navbar-nav .open .dropdown-menu {
+  color: #eee;
   background-color: #303f9f;
-  color: #eeeeee;
 }
 
-.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover {
-  color: #000000;
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+  color: #000;
 }
 ```
 
@@ -1559,7 +1560,8 @@ Some useful best practices:
 - `@import '~bootstrap/scss/functions';`
 - `@import '~bootstrap/scss/mixins';`
 
-```css
+```scss
+/* stylelint-disable at-rule-no-unknown */
 @function color($key: 'blue') {
   @return map-get($colors, $key);
 }
@@ -1582,8 +1584,8 @@ Some useful best practices:
 
 /* color contrast: color-yiq(color) */
 .custom-element {
-  background-color: color-yiq(#000);
   color: color-yiq(theme-color('dark'));
+  background-color: color-yiq(#000);
 }
 ```
 
