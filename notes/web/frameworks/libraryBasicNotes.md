@@ -187,6 +187,7 @@ tags: [Web, Framework, Library]
 ### Functional Programming Utils
 
 - [Immer](https://github.com/immerjs/immer)
+- [Proxy Memoize: Intuitive magical memoization with Proxy and WeakMap](https://github.com/dai-shi/proxy-memoize)
 
 ### IOC and DI Utils
 
