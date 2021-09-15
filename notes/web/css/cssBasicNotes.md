@@ -4170,17 +4170,22 @@ Use pseudo elements to construct circle and line:
 
 > CSS Shape on [CSS Tricks](https://css-tricks.com/the-shapes-of-css).
 
-- background: color/image/gradient/clip-path
-- pseudo elements
-- border
-- box-shadow (inset)
-- clip-path
-- mask
-- svg
-  - svg icon
-  - svg filter
-  - svg clip-path
-  - svg mask
+- Background: `color`/`size`/`image`/`gradient`/`clip-path`.
+  In modern browsers `background`/`gradient`/`clip-path`
+  with `transition`/`transform`
+  better than `pseudo elements`.
+- `border`.
+- `box-shadow` (inset).
+- `clip-path`
+- `filter`.
+- `mask`
+- `aspect-ratio`.
+- SVG:
+  - SVG icon.
+  - SVG filter.
+  - SVG clip-path.
+  - SVG mask.
+- pseudo elements.
 
 > [CSSIcon](https://github.com/wentin/cssicon): Pure CSS Icons
 
