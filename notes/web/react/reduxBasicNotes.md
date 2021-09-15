@@ -464,9 +464,18 @@ const todosSlice = createSlice({
 
 ## Selector
 
-- Extract data getting and normalization logic.
+- Keep the Redux state minimal,
+  derive additional values from root state whenever possible.
 
-Making change to data format in reducers -> change reusable selector in `slice.ts`.
+The actual state is easier to read.
+Less logic is needed to calculate those additional values
+and keep them in sync with rest of data.
+The original state is still there as a reference and isn't being replaced.
+
+- Extract data getting and normalization logic from components.
+
+Making change to data format in reducers,
+then change reusable selector in `slice.ts`.
 No need to change `Component.tsx` logic.
 
 - Memorize state changes.
@@ -474,7 +483,7 @@ No need to change `Component.tsx` logic.
 Keep `useSelector` away from returns a new array reference:
 
 ```ts
-// Bad
+// ❌ Bad: cause always re-render problem
 const postsForUser = useSelector(state => {
   const allPosts = selectAllPosts(state);
   // Returns a new array reference every time.
