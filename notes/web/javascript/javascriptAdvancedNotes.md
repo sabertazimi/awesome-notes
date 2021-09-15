@@ -2645,9 +2645,15 @@ Orinoco 优化 (优化全停顿现象):
 - Layout
 - Paint
 - Composite
-- [Chrome Rendering Architecture](https://developer.chrome.com/blog/renderingng-architecture)
 
 [![Critical Render Path](./figures/CriticalRenderPath.svg)](https://sia.codes/posts/render-blocking-resources/#critical-render-path-js)
+
+### Browser Internal Reference
+
+- Chromium rendering engine: [RenderingNG](https://developer.chrome.com/blog/renderingng).
+- Chromium RenderingNG [architecture](https://developer.chrome.com/blog/renderingng-architecture).
+- Chromium RenderingNG [key data structures](https://developer.chrome.com/blog/renderingng-data-structures).
+- Chromium [video rendering architecture](https://developer.chrome.com/blog/videong).
 
 #### HTML Parser
 
