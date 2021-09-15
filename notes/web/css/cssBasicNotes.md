@@ -2945,14 +2945,23 @@ body {
 ```
 
 ```css
-@keyframes name {
-  0%/from {
+@keyframes name1 {
+  0% {
     color: red;
   }
   50% {
     color: blue;
   }
-  100%/to {
+  100% {
+    color: green;
+  }
+}
+
+@keyframes name2 {
+  from {
+    color: red;
+  }
+  to {
     color: green;
   }
 }
@@ -2966,6 +2975,7 @@ body {
     animation-delay: 0.5s;
   }
 }
+
 .div {
   animation-name: name;
   animation-duration: 1s;
