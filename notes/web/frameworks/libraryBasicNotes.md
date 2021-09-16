@@ -787,10 +787,9 @@ tags: [Web, Framework, Library]
 ### CLI Solution
 
 - [Oclif: Open CLI Framework](https://github.com/oclif/oclif)
-- [INK: React CLI App](https://github.com/vadimdemedes/ink)
+- [Ink: React CLI App](https://github.com/vadimdemedes/ink)
 - [ZX: Node Bash Wrapper](https://github.com/google/zx)
 - [Nexe: Node EXE Wrapper](https://github.com/nexe/nexe)
-- [Babun: Windows Zsh](https://github.com/babun/babun)
 
 ### CLI Utils
 
@@ -809,7 +808,8 @@ tags: [Web, Framework, Library]
 - [Chalk](https://github.com/chalk/chalk)
 - [ORA Spinner](https://github.com/sindresorhus/ora)
 - [Progress](https://github.com/bvaughn/progress-estimator)
-- [Code Frame: pointing to source locations](https://github.com/babel/babel/tree/main/packages/babel-code-frame)
+- [Code Frame: Pointing to source locations](https://github.com/babel/babel/tree/main/packages/babel-code-frame)
+- [Tasuku: Minimal task runner built on Ink React CLI](https://github.com/privatenumber/tasuku)
 
 #### Node Utils
 
