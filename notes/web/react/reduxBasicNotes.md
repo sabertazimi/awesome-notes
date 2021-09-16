@@ -686,8 +686,8 @@ Redux middleware were designed to enable writing side effects logic:
 - I/O: logging, saving files.
 - AJAX HTTP request.
 - Async timer.
-- Modifying state exists outside of function.
-- mutating arguments to function.
+- Modifying state outside of `reducer` function.
+- Mutating arguments to `dispatch` function.
 - Generating random numbers or unique random IDs
   (e.g `uuid()`/`Math.random()`/`Date.now()`).
 
