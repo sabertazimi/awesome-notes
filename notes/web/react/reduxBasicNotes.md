@@ -1077,6 +1077,102 @@ export const { selectAll: selectAllUsers, selectById: selectUserById } =
   usersAdapter.getSelectors(state => selectUsersData(state) ?? initialState);
 ```
 
+## Redux Server Side Rendering
+
+- Client side:
+  a new Redux store will be created with state provided from server.
+- Server side:
+  provide the initial state of app.
+
+`client.jsx`:
+
+```jsx
+import React from 'react';
+import { hydrate } from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import App from './containers/App';
+import counterApp from './reducers';
+
+const preloadedState = window.__PRELOADED_STATE__;
+
+delete window.__PRELOADED_STATE__;
+
+const store = createStore(counterApp, preloadedState);
+
+hydrate(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+```
+
+`server.js`:
+
+```js
+import path from 'path';
+import Express from 'express';
+import qs from 'qs';
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import counterApp from './reducers';
+import App from './containers/App';
+
+const app = Express();
+const port = 3000;
+
+app.use('/static', Express.static('static'));
+
+app.use(handleRender);
+
+function handleRender(req, res) {
+  // `parseInt` to prevent XSS attack
+  const params = qs.parse(req.query);
+  const counter = parseInt(params.counter, 10) || 0;
+
+  const preloadedState = { counter };
+  const store = createStore(counterApp, preloadedState);
+
+  const html = renderToString(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+
+  const finalState = store.getState();
+  res.send(renderFullPage(html, finalState));
+}
+
+function renderFullPage(html, preloadedState) {
+  // `replace(/</g, '\\u003c')` to prevent XSS attack
+  return `
+    <!doctype html>
+    <html>
+      <head>
+        <title>Redux Universal Example</title>
+      </head>
+      <body>
+        <div id="root">${html}</div>
+        <script>
+          // WARNING: See the following for security issues around embedding JSON in HTML:
+          // https://redux.js.org/usage/server-rendering#security-considerations
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
+            /</g,
+            '\\u003c'
+          )}
+        </script>
+        <script src="/static/bundle.js"></script>
+      </body>
+    </html>
+    `;
+}
+
+app.listen(port);
+```
+
 ## Redux Internal
 
 ### Create Store
