@@ -336,7 +336,7 @@ const reducer = createReducer(initialState, {
 `createReducer`: `builder.addCase` and `builder.addMatcher`:
 
 - If there is an exact match for the action type,
-  the corresponding `case reducer` will execute first.
+  the corresponding `case reducer` (`CaseReducer<State, Action>`) will execute first.
 - Any matchers that return true
   will execute in the order they were defined.
 - If a default case reducer is provided,
@@ -344,6 +344,8 @@ const reducer = createReducer(initialState, {
   the default case reducer will execute.
 - If no case or matcher reducers ran,
   the original existing state value will be returned unchanged.
+- `ActionCreator` from RTK has method `ActionCreator.match(action: Action)`,
+  can used to TypeScript type narrowing.
 
 ```ts
 import { createReducer } from '@reduxjs/toolkit';
@@ -660,6 +662,8 @@ Redux Toolkit `configureStore` function automatically
 sets up the thunk middleware by default,
 recommend using thunks as the standard approach for writing async logic with Redux.
 
+### Thunk Middleware Implementation
+
 ```js
 function createThunkMiddleware(extraArgument) {
   return ({ dispatch, getState }) =>
@@ -677,6 +681,46 @@ const thunk = createThunkMiddleware();
 thunk.withExtraArgument = createThunkMiddleware;
 
 export default thunk;
+```
+
+### Typed Async Thunk
+
+```ts
+import { Action, ThunkAction } from '@reduxjs/toolkit';
+
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
+```
+
+```ts
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
+const fetchUserById = createAsyncThunk<
+  // Return type of the payload creator
+  ReturnType,
+  // First argument to the payload creator
+  number,
+  {
+    // Optional fields for defining thunkApi field types
+    dispatch: AppDispatch;
+    state: State;
+    extra: {
+      jwt: string;
+    };
+  }
+>('users/fetchById', async (userId, thunkApi) => {
+  const response = await fetch(`https://reqres.in/api/users/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${thunkApi.extra.jwt}`,
+    },
+  });
+
+  return (await response.json()) as ReturnType;
+});
 ```
 
 ## Middleware
@@ -802,6 +846,28 @@ function addFave(tweetId) {
 }
 
 store.dispatch(addFave());
+```
+
+### Typed Middleware
+
+```ts
+export interface Middleware<
+  DispatchExt = {}, // optional override return behavior of `dispatch`
+  S = any, // type of the Redux store state
+  D extends Dispatch = Dispatch // type of the dispatch method
+>
+```
+
+```ts
+import { Middleware } from 'redux';
+import { RootState } from '../store';
+
+export const exampleMiddleware: Middleware<
+  {}, // Most middleware do not modify the dispatch return value
+  RootState
+> = store => next => action => {
+  const state = store.getState(); // correctly typed as RootState
+};
 ```
 
 ## RTK Query
