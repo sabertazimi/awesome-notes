@@ -24,6 +24,39 @@ Redux 中只有一个全局唯一 store 状态树, 且由 reducers 创建 store.
 export default appStore = createStore(rootReducers, initState);
 ```
 
+### Configure Store
+
+By default, `configureStore` from Redux Toolkit will:
+
+- Call `applyMiddleware` with a default list of middlewares
+  - [Async thunk middleware](https://github.com/reduxjs/redux-thunk).
+  - [Immutability check middleware](https://redux-toolkit.js.org/api/immutabilityMiddleware):
+    throw error when detecting mutations in reducers during a dispatch.
+  - [Serializability check middleware](https://redux-toolkit.js.org/api/serializabilityMiddleware):
+    throw error when deeply detecing non-serializable values in state tree
+    (functions, promises, symbols, and other non-plain-data values).
+- Call `composeWithDevTools` to set up the Redux DevTools Extension.
+
+```ts
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import loggerMiddleware from './middleware/logger';
+import rootReducer from './reducers';
+
+export default function configureAppStore(preloadedState) {
+  const store = configureStore({
+    reducer: rootReducer,
+    middleware: [loggerMiddleware, ...getDefaultMiddleware()],
+    preloadedState,
+  });
+
+  if (process.env.NODE_ENV === 'development' && module.hot) {
+    module.hot.accept('./reducers', () => store.replaceReducer(rootReducer));
+  }
+
+  return store;
+}
+```
+
 ## State
 
 在 Redux 中 State 并不显式定义:
