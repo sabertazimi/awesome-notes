@@ -33,7 +33,7 @@ By default, `configureStore` from Redux Toolkit will:
   - [Immutability check middleware](https://redux-toolkit.js.org/api/immutabilityMiddleware):
     throw error when detecting mutations in reducers during a dispatch.
   - [Serializability check middleware](https://redux-toolkit.js.org/api/serializabilityMiddleware):
-    throw error when deeply detecing non-serializable values in state tree
+    throw error when deeply detecting non-serializable values in state tree
     (functions, promises, symbols, and other non-plain-data values).
 - Call `composeWithDevTools` to set up the Redux DevTools Extension.
 
@@ -1147,6 +1147,7 @@ function handleRender(req, res) {
 }
 
 function renderFullPage(html, preloadedState) {
+  // https://redux.js.org/usage/server-rendering#security-considerations
   // `replace(/</g, '\\u003c')` to prevent XSS attack
   return `
     <!doctype html>
@@ -1157,7 +1158,7 @@ function renderFullPage(html, preloadedState) {
       <body>
         <div id="root">${html}</div>
         <script>
-          // WARNING: See the following for security issues around embedding JSON in HTML:
+          // WARNING: security issues around embedding JSON in HTML:
           // https://redux.js.org/usage/server-rendering#security-considerations
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
             /</g,
@@ -1340,6 +1341,13 @@ export const connect =
 
 ## Redux Performance
 
+### Redux Code Splitting
+
+- [Redux Code Splitting Guide](https://redux.js.org/usage/code-splitting).
+- [Redux Dynamic Modules](https://github.com/microsoft/redux-dynamic-modules):
+  Modularize Redux by dynamically loading reducers and middlewares
+  (contribute to **code splitting**).
+
 ### Redux Performance Pitfalls
 
 - All `reducers` are called to produce the `next` store state.
@@ -1480,6 +1488,9 @@ const fluxStandardAction = {
 - [Redux Sage](https://github.com/yelouafi/redux-saga)
 - [Redux Promise](https://github.com/acdlite/redux-promise)
 - [Redux Diff Logger](https://github.com/fcomb/redux-diff-logger)
+- [Redux Dynamic Modules](https://github.com/microsoft/redux-dynamic-modules):
+  Modularize Redux by dynamically loading reducers and middlewares
+  (contribute to **code splitting**).
 
 ### State Tools
 
