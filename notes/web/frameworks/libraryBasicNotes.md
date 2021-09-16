@@ -50,7 +50,7 @@ tags: [Web, Framework, Library]
 ### Front-end Solution
 
 - [Next](https://github.com/vercel/next.js)
-- [Gatsby: static site generator](https://github.com/gatsbyjs/gatsby)
+- [Gatsby: Static site generator](https://github.com/gatsbyjs/gatsby)
 - [UMI](https://github.com/umijs/umi)
 - [Nuxt](https://github.com/nuxt/nuxt.js)
 
@@ -178,7 +178,7 @@ tags: [Web, Framework, Library]
 
 - [WorkerPool](https://github.com/josdejong/workerpool)
 - [Comlink: Shared class between Web Workers](https://github.com/GoogleChromeLabs/comlink)
-- [GRFN: Executes a dependency graph of async functions concurrently](https://github.com/TomerAberbach/grfn)
+- [GRFN: Executes dependency graph of async functions concurrently](https://github.com/TomerAberbach/grfn)
 
 ### Hash Utils
 
@@ -323,7 +323,7 @@ tags: [Web, Framework, Library]
 
 ### Modal
 
-- [WinBox: HTML5 window manager for the web](https://github.com/nextapps-de/winbox)
+- [WinBox: HTML5 window manager for web](https://github.com/nextapps-de/winbox)
 
 ### Message
 
@@ -458,7 +458,7 @@ tags: [Web, Framework, Library]
 - [Drag and Drop Grid Layout](https://github.com/jbaysolutions/vue-grid-layout)
 - [Moveable](https://github.com/daybrush/moveable)
 - [TransMat: Share data beyond boundaries of browser](https://github.com/google/transmat)
-- [Spacers: drag for more space](https://github.com/actuallyakash/spacers)
+- [Spacers: Drag for more space](https://github.com/actuallyakash/spacers)
 
 ## Social Utils
 
@@ -697,7 +697,7 @@ tags: [Web, Framework, Library]
 
 ### Live Editor and Playground
 
-- [React Live: A flexible playground for live editing React components](https://github.com/FormidableLabs/react-live)
+- [React Live: Flexible playground for live editing React components](https://github.com/FormidableLabs/react-live)
 
 ### Markdown Render
 
@@ -761,8 +761,8 @@ tags: [Web, Framework, Library]
 
 ## Persistent Storage
 
-- [PouchDB](https://github.com/pouchdb/pouchdb)
 - [RxDB](https://github.com/pubkey/rxdb)
+- [PouchDB](https://github.com/pouchdb/pouchdb)
 - [LowDB](https://github.com/typicode/lowdb)
 - [ImmortalDB](https://github.com/gruns/ImmortalDB)
 - [LocalForage](https://github.com/localForage/localForage)
@@ -773,7 +773,7 @@ tags: [Web, Framework, Library]
 - [React Search Bar](https://github.com/searchkit/searchkit)
 - [SearchKit](https://github.com/searchkit/searchkit)
 - [Lunr.js: Full text search engine](https://github.com/olivernn/lunr.js)
-- [Solr: A solr client for node.js](https://github.com/lbdremy/solr-node-client)
+- [Solr: Solr client for node.js](https://github.com/lbdremy/solr-node-client)
 - [JieBa: Chinese text segmentation](https://github.com/yanyiwu/nodejieba)
 - [Docusaurus plugin: Local search plugin based on lunr.js](https://github.com/easyops-cn/docusaurus-search-local)
 
@@ -823,7 +823,7 @@ tags: [Web, Framework, Library]
 - [Chokidar: Efficient cross-platform file watching library](https://github.com/paulmillr/chokidar)
 - [Mkdirp](https://github.com/isaacs/node-mkdirp)
 - [RimRaf](https://github.com/isaacs/rimraf)
-- [ReNamer: rename files in bulk](https://github.com/75lb/renamer)
+- [ReNamer: Rename files in bulk](https://github.com/75lb/renamer)
 
 ### CLI Cheat Sheet
 
@@ -940,7 +940,7 @@ tags: [Web, Framework, Library]
 ### Headless Automation Tools
 
 - [Puppeteer: Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
-- [PlayWright: Automate Chromium, Firefox and WebKit with a single API](https://github.com/Microsoft/playwright)
+- [PlayWright: Automate Chromium, Firefox and WebKit with single API](https://github.com/Microsoft/playwright)
 - [Webkit API](https://github.com/ariya/phantomjs)
 - [Selenium](https://github.com/SeleniumHQ/selenium)
 - [Appium](https://github.com/appium/appium)
@@ -1096,7 +1096,7 @@ tags: [Web, Framework, Library]
 
 - [DotEnv](https://github.com/motdotla/dotenv)
 - [CosmiConfig: Find and load configuration](https://github.com/davidtheclark/cosmiconfig)
-- [EnvInfo: Generate a report about development environment for debugging and issue reporting](https://github.com/tabrindle/envinfo)
+- [EnvInfo: Generate report about development environment for debugging and issue reporting](https://github.com/tabrindle/envinfo)
 - [Unleash: Open source feature toggle service](https://github.com/Unleash/unleash)
 
 ### DevOps Registry and Mirrors
@@ -1126,7 +1126,7 @@ tags: [Web, Framework, Library]
 
 - [Docz: React component documentation tool built on Gatsby](https://github.com/pedronauck/docz)
 - [DUmi: Documentation generator of React component](https://github.com/umijs/dumi)
-- [React Storybook: live component documentation](https://github.com/storybooks/storybook)
+- [React Storybook: Live component documentation](https://github.com/storybooks/storybook)
 
 ### API Documentation
 
