@@ -681,6 +681,16 @@ export default thunk;
 
 ## Middleware
 
+Redux middleware were designed to enable writing side effects logic:
+
+- I/O: logging, saving files.
+- AJAX HTTP request.
+- Async timer.
+- Modifying state exists outside of function.
+- mutating arguments to function.
+- Generating random numbers or unique random IDs
+  (e.g `uuid()`/`Math.random()`/`Date.now()`).
+
 ### Middleware Basic Concepts
 
 每一个 Middleware 可以通过上下文获取:
