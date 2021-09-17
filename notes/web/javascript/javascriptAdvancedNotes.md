@@ -4467,14 +4467,35 @@ console.log('%c', devtools);
 ```
 
 ```js
-console.log / info / warn / error;
-console.dir / dirxml / table; // different output style
+// Basic console functions
 console.assert;
-console.group / groupEnd;
-console.time / timeEnd;
-console.profile / profileEnd;
-console.count;
+console.clear;
+console.log;
+console.debug
+console.info;
+console.warn;
+console.error;
+
+// Different output styles
+console.dir;
+console.dirxml;
+console.table;
+console.group;
+console.groupCollapsed
+console.groupEnd;
+
+// Trace console functions
 console.trace;
+console.count;
+console.countReset;
+console.time;
+console.timeEnd;
+console.timeLog
+
+// Non-standard console functions
+console.profile;
+console.profileEnd;
+console.timeStamp
 ```
 
 `console.log`
@@ -8878,28 +8899,28 @@ A simple
 implementation:
 
 ```ts
-import { promises as fs } from 'fs'
-import { basename, dirname, join } from 'path'
-import { pathToFileURL } from 'url'
+import { promises as fs } from 'fs';
+import { basename, dirname, join } from 'path';
+import { pathToFileURL } from 'url';
 
 async function* walk(dir: string): AsyncGenerator<string> {
   for await (const d of await fs.opendir(dir)) {
-    const entry = join(dir, d.name)
-    if (d.isDirectory()) yield* walk(entry)
-    else if (d.isFile()) yield entry
+    const entry = join(dir, d.name);
+    if (d.isDirectory()) yield* walk(entry);
+    else if (d.isFile()) yield entry;
   }
 }
 
 async function runTestFile(file: string): Promise<void> {
   for (const value of Object.values(
-    await import(pathToFileURL(file).toString()),
+    await import(pathToFileURL(file).toString())
   )) {
     if (typeof value === 'function') {
       try {
-        await value()
+        await value();
       } catch (e) {
-        console.error(e instanceof Error ? e.stack : e)
-        process.exit(1)
+        console.error(e instanceof Error ? e.stack : e);
+        process.exit(1);
       }
     }
   }
@@ -8907,20 +8928,20 @@ async function runTestFile(file: string): Promise<void> {
 
 async function run(arg = '.') {
   if ((await fs.lstat(arg)).isFile()) {
-    return runTestFile(arg)
+    return runTestFile(arg);
   }
   for await (const file of walk(arg)) {
     if (
       !dirname(file).includes('node_modules') &&
       (basename(file) === 'test.js' || file.endsWith('.test.js'))
     ) {
-      console.log(file)
-      await runTestFile(file)
+      console.log(file);
+      await runTestFile(file);
     }
   }
 }
 
-void run(process.argv[2])
+void run(process.argv[2]);
 ```
 
 ## Enzyme
