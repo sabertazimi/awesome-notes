@@ -1652,6 +1652,18 @@ Necessity for importing Redux
 - Frequent update state.
 - Complex update state.
 
+### Redux Style Guide
+
+Redux style [guide](https://redux.js.org/style-guide/style-guide):
+
+- Only one store per app.
+- Avoid mutate state without ImmerJS.
+- Avoid side effects in reducers.
+- Avoid non-serializable values in state store.
+- Normalize complex nested/relational state.
+- Keep state minimal and derive additional values.
+- Split large data selection into multiple small `useSelector`.
+
 ### Redux Tips
 
 - 区分 Smart Component (know the state) 和 Dump Component (stateless)
