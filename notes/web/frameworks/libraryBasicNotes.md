@@ -408,12 +408,15 @@ tags: [Web, Framework, Library]
 
 ### Charts Visualization
 
-- [AntV](https://github.com/antvis)
+- [D3: Bring data to life with SVG, Canvas and HTML](https://github.com/d3/d3)
+- [Chart.js: HTML5 canvas charts](https://github.com/chartjs/Chart.js)
+- [AntV: React chart library based on G2Plot, G6, X6, L7](https://github.com/ant-design/ant-design-charts)
+- [ReCharts: Redefined chart library built with React and D3](https://github.com/recharts/recharts)
+- [HighCharts: TypeScript charting framework](https://github.com/highcharts/highcharts)
+- [TuiChart: TOAST UI Chart](https://github.com/nhn/tui.chart)
 - [ReaFlow: TSX library for building workflow editors, flow charts and diagrams](https://github.com/reaviz/reaflow)
-- [React ChartJS](https://github.com/jhudson8/react-chartjs)
-- [Sigma.js: Graph Drawing](https://github.com/jacomyal/sigma.js)
-- [HTML5 Chart](https://github.com/chartjs/Chart.js)
-- [Plotly.js](https://github.com/plotly/plotly.js)
+- [Sigma: Dedicated to graph drawing](https://github.com/jacomyal/sigma.js)
+- [Plotly.js: Charting library behind Plotly and Dash](https://github.com/plotly/plotly.js)
 
 ### Charts Draw Utils
 
