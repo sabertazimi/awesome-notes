@@ -2845,8 +2845,10 @@ export function useStore() {
 
 ### Custom Recoil Hook
 
+Recoil [minimal implementation](https://github.com/bennetthardwick/recoil-clone):
+
 ```ts
-type Disconnecter = { disconnect: () => void };
+type Disconnector = { disconnect: () => void };
 
 class Stateful<T> {
   private listeners = new Set<(value: T) => void>();
@@ -2862,7 +2864,13 @@ class Stateful<T> {
     return this.value;
   }
 
-  subscribe(callback: (value: T) => void): Disconnecter {
+  emit() {
+    for (const listener of this.listeners) {
+      listener(this.snapshot());
+    }
+  }
+
+  subscribe(callback: (value: T) => void): Disconnector {
     this.listeners.add(callback);
     return {
       disconnect: () => {
@@ -2877,10 +2885,54 @@ class Atom<T> extends Stateful<T> {
     super._update(value);
   }
 }
-```
 
-```ts
-export function useCoiledValue<T>(value: Atom<T>): T {
+interface GeneratorContext {
+  get: <V>(dependency: Stateful<V>) => V;
+}
+
+type SelectorGenerator<T> = (context: GeneratorContext) => T;
+
+export class Selector<T> extends Stateful<T> {
+  private registeredDeps = new Set<Stateful>();
+
+  constructor(private readonly generate: SelectorGenerator<T>) {
+    super(undefined as any);
+    const context = { get: dep => this.getDep(dep) };
+    this.value = generate(context);
+  }
+
+  private getDep<V>(dep: Stateful<V>): V {
+    if (!this.registeredDeps.has(dep)) {
+      // Update when parent Atom changed.
+      dep.subscribe(() => this.updateSelector());
+      this.registeredDeps.add(dep);
+    }
+
+    return dep.snapshot();
+  }
+
+  private updateSelector() {
+    const context = { get: dep => this.getDep(dep) };
+    this.update(this.generate(context));
+  }
+}
+
+export function atom<V>(
+  value: { key: string; default: V }
+): Atom<V> {
+  return new Atom(value.default);
+}
+
+export function selector<V>(value: {
+  key: string;
+  get: SelectorGenerator<V>;
+}): Selector<V> {
+  return new Selector(value.get);
+}
+
+// This hook will re-render whenever the supplied `Stateful` value changes.
+// It can be used with `Selector` or `Atom`.
+export function useCoiledValue<T>(value: Stateful<T>): T {
   const [, updateState] = useState({});
 
   // Force update when value changed.
@@ -2892,6 +2944,8 @@ export function useCoiledValue<T>(value: Atom<T>): T {
   return value.snapshot();
 }
 
+// Similar to the above method, but it also lets set state.
+// It only can be used with `Atom`.
 export function useCoiledState<T>(atom: Atom<T>): [T, (value: T) => void] {
   const value = useCoiledValue(atom);
   return [value, useCallback(value => atom.update(value), [atom])];
