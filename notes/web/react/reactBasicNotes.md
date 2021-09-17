@@ -165,7 +165,7 @@ Renderer
 `useEffect` callback called **asynchronously**
 after three stages of `Commit`.
 
-## Props and State
+## Props and States
 
 ### setState
 
@@ -2910,38 +2910,6 @@ function SearchResults() {
 - Change `useState` to `useRef` when values not for rendering.
 - Don't put any `if` statement before hooks function.
 
-## ES6 Syntax
-
-### Comments
-
-```jsx
-render() {
-  {/* */}
-  {/*
-
-  */}
-}
-```
-
-### Binding for This
-
-```jsx
-constructor() {
-  this.handle = this.handle.bind(this);
-}
-
-handle(e) {
-  this.setState({
-    ...
-  });
-}
-```
-
-```jsx
-state = {};
-handle = e => {};
-```
-
 ## React Style Guide
 
 ### Naming Style
@@ -3143,37 +3111,41 @@ render() {
 - `services`: 服务中只存在基础 Hooks, 自定义 Hooks, 第三方 Hooks,
   静态数据, 工具函数, 工具类.
 
-## MVC and MVVM
+### React Style Best Practice
 
-### Controller
-
-- 处理请求的参数
-- 渲染和重定向
-- 选择 Model 和 Service
-- 处理 Session 和 Cookies
-
-### Comparison
-
-- 初始渲染: Virtual DOM > 脏检查 >= 依赖收集
-- 小量数据更新: 依赖收集 >> Virtual DOM + 优化 > 脏检查（无法优化） > Virtual DOM 无优化
-- 大量数据更新: 脏检查 + 优化 >= 依赖收集 + 优化 > Virtual DOM（无法/无需优化）>> MVVM 无优化
-
-### Best Practice
-
-- 组件细分化
-- 组件
-  - 只传入必要的 props
-  - 使用 Immutable.js 或者 react.addons.update 实现不可变数据结构
-  - 结合 React.addons.PureRenderMixin 来减少 reRender
-- 在 shouldComponentUpdate 中优化组件减少 reRender
-- 使用 context
-- 少做 dom 操作，始终让 UI 能够基于 State 还原
-- 在 store 和 action 中不 dom 操作或者访问 window.属性，只与数据打交道
-- 推荐使用 ES6
-- npm 的 debug 包, log 组件渲染的每个步骤和动作
-- [Single Element Pattern](https://github.com/diegohaz/singel)
+- 组件细分化.
+- 组件:
+  - 只传入必要的 props.
+  - 使用 `Immutable.js` 或者 `React.addons.update` 实现不可变数据结构.
+  - 结合 `React.addons.PureRenderMixin` 来减少 reRender.
+- 在 `shouldComponentUpdate` 中优化组件减少 reRender.
+- 使用 Context API.
+- 少做 DOM 操作，始终让 UI 能够基于 state 还原.
+- 在 store 和 action 中不 DOM 操作或者访问 `window.属性`，只与数据打交道.
+- 推荐使用 ES6.
+- npm 的 debug 包, log 组件渲染的每个步骤和动作.
+- [Single Element Pattern](https://github.com/diegohaz/singel).
 
 ## Modern React
+
+### ES6 Binding for This
+
+```jsx
+constructor() {
+  this.handle = this.handle.bind(this);
+}
+
+handle(e) {
+  this.setState({
+    ...
+  });
+}
+```
+
+```jsx
+state = {};
+handle = e => {};
+```
 
 ### Lazy and Suspense
 
@@ -5019,6 +4991,10 @@ export default reportWebVitals;
 </BrowserRouter>
 ```
 
+#### SPA Deployment
+
+- Deployment services [guide](https://hiddedevries.nl/en/blog/2020-06-27-how-deployment-services-make-client-side-routing-work).
+
 ### Custom CRA
 
 - custom `packages/cra-template-*`: change HTML/CSS/JS boilerplate.
@@ -5325,11 +5301,6 @@ ReactDOM.render(<WrapperContainer />, container);
 > 打破框架的范式之争, 其实是改变思路. 从思考不同范式之间的竞争关系, 转变成思考多个范式之间的协同关系.
 > useRef in React, Composition in Vue
 
-### Framework Paradigm Reference
-
-- Even You presentation on [JSConf Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s).
-- Framework paradigm [guide](https://mp.weixin.qq.com/s/mZ7KuFjyCWNCAq7HnXg96A).
-
 ### Third-party Libraries Usage
 
 - Look for Libraries that Have Accessibility Built in.
@@ -5346,9 +5317,26 @@ const DatePicker = props => {
 export default DatePicker;
 ```
 
-## SPA Deployment
+### MVC and MVVM
 
-- Deployment services [guide](https://hiddedevries.nl/en/blog/2020-06-27-how-deployment-services-make-client-side-routing-work).
+#### Controller
+
+- 处理请求的参数
+- 渲染和重定向
+- 选择 Model 和 Service
+- 处理 Session 和 Cookies
+
+### Framework Paradigm Comparison
+
+- 初始渲染: Virtual DOM > 脏检查 >= 依赖收集
+- 小量数据更新: 依赖收集 >> Virtual DOM + 优化 > 脏检查（无法优化） > Virtual DOM 无优化
+- 大量数据更新: 脏检查 + 优化 >= 依赖收集 + 优化 > Virtual DOM（无法/无需优化）>> MVVM 无优化
+- Angular: 脏检查, React: Virtual DOM, Vue: Watch.
+
+### Framework Paradigm Reference
+
+- Even You presentation on [JSConf Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s).
+- Framework paradigm [guide](https://mp.weixin.qq.com/s/mZ7KuFjyCWNCAq7HnXg96A).
 
 ## Interviews
 
