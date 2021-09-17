@@ -1739,13 +1739,16 @@ App = MyReact.render(Component);
 
 ### Custom Hooks
 
-- [Use Hooks](https://github.com/uidotdev/usehooks)
 - [ReactUse Hooks](https://github.com/streamich/react-use)
+- [LibReact](https://github.com/streamich/libreact)
 - [Alibaba Hooks](https://github.com/alibaba/hooks)
-- [React Hooks Gallery](https://nikgraf.github.io/react-hooks)
+- [Platform Hooks: Browser APIs turned into Hooks](https://github.com/jaredpalmer/the-platform)
 - [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
+- [Optimistic state hook](https://github.com/perceived-dev/optimistic-state)
+- [Use Hooks Gallery](https://github.com/uidotdev/usehooks)
+- [React Hooks Gallery](https://github.com/nikgraf/react-hooks)
 
-#### LifeCycle Hooks
+### Custom LifeCycle Hooks
 
 componentDidMount: `useLayoutEffect`.
 `useEffect` got invoked after `componentDidMount`.
@@ -1830,7 +1833,7 @@ const useIsMounted = () => {
 };
 ```
 
-#### Async Data Hook
+### Custom Async Data Hook
 
 - `useState` to store url and data
 - `useEffect` to trigger async `fetch` actions
@@ -2045,62 +2048,7 @@ function useFetch<T = unknown>(
 export default useFetch;
 ```
 
-#### Reducer Hook
-
-```jsx
-function useReducer(reducer, initialState) {
-  const [state, setState] = useState(initialState);
-
-  function dispatch(action) {
-    const nextState = reducer(state, action);
-    setState(nextState);
-  }
-
-  return [state, dispatch];
-}
-
-function Todos() {
-  const [todos, dispatch] = useReducer(todosReducer, []);
-
-  function handleAddClick(text) {
-    dispatch({ type: 'add', text });
-  }
-
-  // ...
-}
-```
-
-#### Store Hook
-
-```jsx
-import { useState } from 'react';
-
-export const store = {
-  state: {},
-  setState(value) {
-    this.state = value;
-    this.setters.forEach(setter => setter(this.state));
-  },
-  setters: [],
-};
-
-// Bind the setState function to the store object so
-// we don't lose context when calling it elsewhere
-store.setState = store.setState.bind(store);
-
-// this is the custom hook we'll call on components.
-export function useStore() {
-  const [state, set] = useState(store.state);
-
-  if (!store.setters.includes(set)) {
-    store.setters.push(set);
-  }
-
-  return [state, store.setState];
-}
-```
-
-#### Previous Hook
+### Custom Previous Hook
 
 ```jsx
 function Counter() {
@@ -2122,7 +2070,7 @@ function usePrevious(value) {
 }
 ```
 
-#### Interval Hook
+### Custom Interval Hook
 
 ```ts
 import { useEffect, useRef } from 'react';
@@ -2151,7 +2099,7 @@ function useInterval(callback: () => void, delay: number | null) {
 export default useInterval;
 ```
 
-#### Debounce Hook
+### Custom Debounce Hook
 
 ```jsx
 // Hook
@@ -2189,7 +2137,7 @@ useEffect(() => {
 }, [debouncedSearchTerm]);
 ```
 
-#### EventListener Hook
+### Custom EventListener Hook
 
 ```js
 import { useCallback, useEffect } from 'react';
@@ -2221,7 +2169,7 @@ export default function useEventListener({ event, handler }) {
 }
 ```
 
-#### Observer Hook
+### Custom Observer Hook
 
 ```ts
 import { RefObject, useEffect, useState } from 'react';
@@ -2270,7 +2218,7 @@ function useIntersectionObserver(
 export default useIntersectionObserver;
 ```
 
-#### Router Hook
+### Custom Router Hook
 
 ```jsx
 import { useContext, useEffect } from 'react';
@@ -2287,7 +2235,7 @@ const useReactRouter = () => {
 };
 ```
 
-#### History Hook
+### Custom History Hook
 
 ```jsx
 import { useReducer, useCallback } from 'react';
@@ -2386,7 +2334,7 @@ const useHistory = initialPresent => {
 };
 ```
 
-#### Script Loading Hook
+### Custom Script Loading Hook
 
 ```ts
 import { useEffect, useState } from 'react';
@@ -2530,7 +2478,7 @@ const useScript = src => {
 };
 ```
 
-#### Locked Body Hook
+### Custom Locked Body Hook
 
 ```ts
 import { useEffect, useLayoutEffect, useState } from 'react';
@@ -2587,7 +2535,7 @@ function useLockedBody(initialLocked = false): ReturnType {
 export default useLockedBody;
 ```
 
-#### Media Query Hook
+### Custom Media Query Hook
 
 ```tsx
 const useMedia = <T>(queries: string[], values: T[], defaultValue: T) => {
@@ -2613,7 +2561,7 @@ const useMedia = <T>(queries: string[], values: T[], defaultValue: T) => {
 };
 ```
 
-#### Form Hook
+### Custom Form Hook
 
 ```jsx
 import { useState } from 'react';
@@ -2863,6 +2811,91 @@ const App = props => {
     </div>
   );
 };
+```
+
+### Custom Store Hook
+
+```jsx
+import { useState } from 'react';
+
+export const store = {
+  state: {},
+  setState(value) {
+    this.state = value;
+    this.setters.forEach(setter => setter(this.state));
+  },
+  setters: [],
+};
+
+// Bind the setState function to the store object so
+// we don't lose context when calling it elsewhere
+store.setState = store.setState.bind(store);
+
+// this is the custom hook we'll call on components.
+export function useStore() {
+  const [state, set] = useState(store.state);
+
+  if (!store.setters.includes(set)) {
+    store.setters.push(set);
+  }
+
+  return [state, store.setState];
+}
+```
+
+### Custom Recoil Hook
+
+```ts
+type Disconnecter = { disconnect: () => void };
+
+class Stateful<T> {
+  private listeners = new Set<(value: T) => void>();
+
+  constructor(private value: T) {}
+
+  protected _update(value: T) {
+    this.value = value;
+    this.emit();
+  }
+
+  snapshot(): T {
+    return this.value;
+  }
+
+  subscribe(callback: (value: T) => void): Disconnecter {
+    this.listeners.add(callback);
+    return {
+      disconnect: () => {
+        this.listeners.delete(callback);
+      },
+    };
+  }
+}
+
+class Atom<T> extends Stateful<T> {
+  update(value: T) {
+    super._update(value);
+  }
+}
+```
+
+```ts
+export function useCoiledValue<T>(value: Atom<T>): T {
+  const [, updateState] = useState({});
+
+  // Force update when value changed.
+  useEffect(() => {
+    const { disconnect } = value.subscribe(() => updateState({}));
+    return () => disconnect();
+  }, [value]);
+
+  return value.snapshot();
+}
+
+export function useCoiledState<T>(atom: Atom<T>): [T, (value: T) => void] {
+  const value = useCoiledValue(atom);
+  return [value, useCallback(value => atom.update(value), [atom])];
+}
 ```
 
 ### Hooks Best Practice
