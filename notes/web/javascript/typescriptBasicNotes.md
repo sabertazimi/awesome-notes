@@ -2213,3 +2213,4 @@ npx jest
 - [TypeScript Deep Dive](https://github.com/basarat/typescript-book)
 - [Clean TypeScript Code](https://github.com/labs42io/clean-code-typescript)
 - [Effective TypeScript](https://github.com/danvk/effective-typescript)
+- [TypeScript Compiler Internal](https://mp.weixin.qq.com/s/XF8tWJlwZC04WTdmltmXNQ)
