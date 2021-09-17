@@ -96,7 +96,7 @@ f([1, 2, 3])
 function f({x, y, z}) { ... }
 f({z: 3, y: 2, x: 1})
 
-// 可省略 var foo = config.foo || 'default foo';
+// 可省略 const foo = config.foo || 'default foo';
 jQuery.ajax = function (url, {
   async = true,
   beforeSend = function () {},
@@ -207,8 +207,9 @@ z; // []
 
 // Generator 函数
 function* fibs() {
-  var a = 0;
-  var b = 1;
+  let a = 0;
+  let b = 1;
+
   while (true) {
     yield a;
     [a, b] = [b, a + b];
@@ -492,7 +493,7 @@ function compile(template) {
   template = 'echo(`' + template + '`);';
 
   const script = `(function parse(data){
-      var output = "";
+      let output = "";
 
       function echo(html){
         output += html;
@@ -508,7 +509,7 @@ function compile(template) {
 
 const template = `
 <ul>
-  <% for(var i=0; i < data.supplies.length; i++) { %>
+  <% for(let i=0; i < data.supplies.length; i++) { %>
     <li><%= data.supplies[i] %></li>
   <% } %>
 </ul>
@@ -778,7 +779,7 @@ arr2.push(...arr1);
 ```
 
 ```js
-var obj = { x: 1, y: 2, z: 3 };
+const obj = { x: 1, y: 2, z: 3 };
 
 obj[Symbol.iterator] = function* () {
   yield 1;
@@ -2149,7 +2150,8 @@ regardless of where it is executed later:
 
 ```js
 // global scope
-var e = 10;
+const e = 10;
+
 function sum(a) {
   return function (b) {
     return function (c) {
@@ -3424,14 +3426,15 @@ function throttle(action) {
  * @return {function}             返回客户调用函数
  */
 _.throttle = function (func, wait, options) {
-  var context, args, result;
-  var timeout = null;
+  let context, args, result;
+  let timeout = null;
   // 之前的时间戳
-  var previous = 0;
+  let previous = 0;
   // 如果 options 没传则设为空对象
   if (!options) options = {};
+
   // 定时器回调函数
-  var later = function () {
+  const later = function () {
     // 如果设置了 leading，就将 previous 设为 0
     // 用于下面函数的第一个 if 判断
     previous = options.leading === false ? 0 : _.now();
@@ -3440,18 +3443,22 @@ _.throttle = function (func, wait, options) {
     result = func.apply(context, args);
     if (!timeout) context = args = null;
   };
+
   return function () {
     // 获得当前时间戳
-    var now = _.now();
+    const now = _.now();
+
     // 首次进入前者肯定为 true
     // 如果需要第一次不执行函数
     // 就将上次时间戳设为当前的
     // 这样在接下来计算 remaining 的值时会大于0
     if (!previous && options.leading === false) previous = now;
+
     // 计算剩余时间
-    var remaining = wait - (now - previous);
+    const remaining = wait - (now - previous);
     context = this;
     args = arguments;
+
     // 如果当前调用已经大于上次调用时间 + wait
     // 或者用户手动调了时间
     // 如果设置了 trailing，只会进入这个条件
@@ -3466,6 +3473,7 @@ _.throttle = function (func, wait, options) {
         clearTimeout(timeout);
         timeout = null;
       }
+
       previous = now;
       result = func.apply(context, args);
       if (!timeout) context = args = null;
@@ -3475,6 +3483,7 @@ _.throttle = function (func, wait, options) {
       // 并且不能不能同时设置 leading 和 trailing
       timeout = setTimeout(later, remaining);
     }
+
     return result;
   };
 };
@@ -4457,7 +4466,7 @@ Object.defineProperty(element, 'scrollTop', {
 - `monitor`: monitor object.
 
 ```js
-var devtools = /./;
+const devtools = /./;
 devtools.toString = function () {
   this.opened = true;
 };
@@ -6009,9 +6018,9 @@ function populateStorage() {
 }
 
 function setStyles() {
-  var currentColor = localStorage.getItem('bgColor');
-  var currentFont = localStorage.getItem('font');
-  var currentImage = localStorage.getItem('image');
+  const currentColor = localStorage.getItem('bgColor');
+  const currentFont = localStorage.getItem('font');
+  const currentImage = localStorage.getItem('image');
 
   document.getElementById('bgColor').value = currentColor;
   document.getElementById('font').value = currentFont;
@@ -6204,16 +6213,19 @@ function WebSocketTest() {
   if ('WebSocket' in window) {
     alert('WebSocket is supported by your Browser!');
     // Let us open a web socket
-    var ws = new WebSocket('ws://localhost:9998/echo');
+    const ws = new WebSocket('ws://localhost:9998/echo');
+
     ws.onopen = function () {
       // Web Socket is connected, send data using send()
       ws.send('Message to send');
       alert('Message is sent...');
     };
+
     ws.onmessage = function (evt) {
-      var received_msg = evt.data;
+      const received_msg = evt.data;
       alert('Message is received...');
     };
+
     ws.onclose = function () {
       // websocket is closed.
       alert('Connection is closed...');
@@ -6361,14 +6373,14 @@ locationSuccess 为获取位置信息成功的回调函数，返回的数据中�
 
 ```js
 locationSuccess: function(position){
-    var coords = position.coords;
-    var latlng = new google.maps.LatLng(
+    const coords = position.coords;
+    const latlng = new google.maps.LatLng(
         // 维度
         coords.latitude,
         // 精度
         coords.longitude
     );
-    var myOptions = {
+    const myOptions = {
         // 地图放大倍数
         zoom: 12,
         // 地图中心设为指定坐标点
@@ -6376,24 +6388,28 @@ locationSuccess: function(position){
         // 地图类型
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+
     // 创建地图并输出到页面
-    var myMap = new google.maps.Map(
+    const myMap = new google.maps.Map(
         document.getElementById("map"),myOptions
     );
+
     // 创建标记
-    var marker = new google.maps.Marker({
+    const marker = new google.maps.Marker({
         // 标注指定的经纬度坐标点
         position: latlng,
         // 指定用于标注的地图
         map: myMap
     });
-    //创建标注窗口
-    var infoWindow = new google.maps.InfoWindow({
+
+    // 创建标注窗口
+    const infoWindow = new google.maps.InfoWindow({
         content:"您在这里<br/>纬度："+
             coords.latitude+
             "<br/>经度："+coords.longitude
     });
-    //打开标注窗口
+
+    // 打开标注窗口
     infoWindow.open(myMap,marker);
 }
 ```
