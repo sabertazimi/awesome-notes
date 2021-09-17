@@ -9220,6 +9220,21 @@ it('should throw when over 9000', () => {
 });
 ```
 
+### React Testing Library API
+
+- `getByXXX` queries: common use case.
+- `queryByXXX` queries: not throw error when nothing match.
+- `findByXXX` queries: `getBy` queries + `waitFor`.
+
+| API        | No Match | 1 Match | 1+ Match | Await |
+| ---------- | -------- | ------- | -------- | ----- |
+| getBy      | throw    | return  | throw    | No    |
+| queryBy    | null     | return  | throw    | No    |
+| findBy     | throw    | return  | throw    | Yes   |
+| getAllBy   | throw    | array   | array    | No    |
+| queryAllBy | []       | array   | array    | No    |
+| findAllBy  | throw    | array   | array    | Yes   |
+
 ### React Testing Library Reference
 
 - [React testing library cheat sheet](https://testing-library.com/docs/react-testing-library/cheatsheet)
