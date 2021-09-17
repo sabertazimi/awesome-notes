@@ -4480,7 +4480,7 @@ console.log('%c', devtools);
 console.assert;
 console.clear;
 console.log;
-console.debug
+console.debug;
 console.info;
 console.warn;
 console.error;
@@ -4490,7 +4490,7 @@ console.dir;
 console.dirxml;
 console.table;
 console.group;
-console.groupCollapsed
+console.groupCollapsed;
 console.groupEnd;
 
 // Trace console functions
@@ -4499,12 +4499,12 @@ console.count;
 console.countReset;
 console.time;
 console.timeEnd;
-console.timeLog
+console.timeLog;
 
 // Non-standard console functions
 console.profile;
 console.profileEnd;
-console.timeStamp
+console.timeStamp;
 ```
 
 `console.log`
