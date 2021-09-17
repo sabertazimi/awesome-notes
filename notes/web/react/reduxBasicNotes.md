@@ -424,6 +424,8 @@ const counterReducer = createReducer(0, {
 必须保持无任何副作用: 不修改传入参数, 不调用副作用函数
 `(api/date.now()/math.random())`
 
+### Reducer Boilerplate
+
 ```js
 function createReducer(initialState, handlers) {
   return function reducer(state = initialState, action) {
@@ -444,6 +446,85 @@ const reducer = createReducer(initialState, {
   },
 });
 ```
+
+### Reducer Enhancer
+
+Higher order reducer:
+
+```js
+function undoable(reducer) {
+  // Call the reducer with empty action to populate the initial state
+  const initialState = {
+    past: [],
+    present: reducer(undefined, {}),
+    future: [],
+  };
+
+  // Return a reducer that handles undo and redo
+  return function (state = initialState, action) {
+    const { past, present, future } = state;
+
+    switch (action.type) {
+      case 'UNDO':
+        const previous = past[past.length - 1];
+        const newPast = past.slice(0, past.length - 1);
+        return {
+          past: newPast,
+          present: previous,
+          future: [present, ...future],
+        };
+      case 'REDO':
+        const next = future[0];
+        const newFuture = future.slice(1);
+        return {
+          past: [...past, present],
+          present: next,
+          future: newFuture,
+        };
+      default:
+        // Delegate handling the action to the passed reducer
+        const newPresent = reducer(present, action);
+        if (present === newPresent) {
+          return state;
+        }
+        return {
+          past: [...past, present],
+          present: newPresent,
+          future: [],
+        };
+    }
+  };
+}
+```
+
+```js
+// This is a reducer
+function todos(state = [], action) {
+  /* ... */
+}
+
+// This is also a reducer!
+const undoableTodos = undoable(todos);
+
+import { createStore } from 'redux';
+const store = createStore(undoableTodos);
+
+store.dispatch({
+  type: 'ADD_TODO',
+  text: 'Use Redux',
+});
+
+store.dispatch({
+  type: 'ADD_TODO',
+  text: 'Implement Undo',
+});
+
+store.dispatch({
+  type: 'UNDO',
+});
+```
+
+### RTK Reducer API
 
 `createReducer`: `builder.addCase` and `builder.addMatcher`:
 
