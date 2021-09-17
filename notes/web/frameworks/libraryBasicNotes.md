@@ -685,13 +685,13 @@ tags: [Web, Framework, Library]
 
 ### Rich Text Editor
 
-- [React Markdown](https://github.com/rexxars/react-markdown)
+- [React Markdown](https://github.com/remarkjs/react-markdown)
+- [MilkDown Editor](https://github.com/Saul-Mirone/milkdown)
+- [Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
 - [Block Editor](https://github.com/codex-team/editor.js)
 - [TinyMCE: World #1 JavaScript library for rich text editing](https://github.com/tinymce/tinymce)
 - [CKEditor](https://github.com/ckeditor/ckeditor5)
 - [Wang Editor](https://github.com/wangfupeng1988/wangEditor)
-- [Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
-- [MilkDown Editor](https://github.com/Saul-Mirone/milkdown)
 
 ### Code Editor
 
@@ -706,10 +706,6 @@ tags: [Web, Framework, Library]
 ### Live Editor and Playground
 
 - [React Live: Flexible playground for live editing React components](https://github.com/FormidableLabs/react-live)
-
-### Markdown Render
-
-- [Prism React Renderer](https://github.com/FormidableLabs/prism-react-renderer)
 
 ## SMS
 
@@ -857,7 +853,14 @@ tags: [Web, Framework, Library]
 - [YAML Parser](https://github.com/jonschlinkert/gray-matter)
 - [XML Parser](https://github.com/TobiasNickel/tXml)
 - [SVG Parser](https://github.com/sebmarkbage/art)
-- [Yozora: Markdown parser](https://github.com/yozorajs/yozora)
+
+#### Markdown Parser and Render
+
+- [Prism React Renderer](https://github.com/FormidableLabs/prism-react-renderer)
+- [Marked](https://github.com/markedjs/marked)
+- [MarkdownIt](https://github.com/markdown-it/markdown-it)
+- [Remark](https://github.com/remarkjs/remark)
+- [Yozora: TypeScript markdown parser](https://github.com/yozorajs/yozora)
 
 ## Daemon
 
