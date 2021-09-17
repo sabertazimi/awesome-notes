@@ -2847,6 +2847,9 @@ export function useStore() {
 
 Recoil [minimal implementation](https://github.com/bennetthardwick/recoil-clone):
 
+- `Atom`: collect children callbacks as `listeners`, notify children when value changed.
+- `Selector`: collect parent `Atoms` as `deps`, update value when parent Atoms notified.
+
 ```ts
 type Disconnector = { disconnect: () => void };
 
@@ -2917,9 +2920,7 @@ export class Selector<T> extends Stateful<T> {
   }
 }
 
-export function atom<V>(
-  value: { key: string; default: V }
-): Atom<V> {
+export function atom<V>(value: { key: string; default: V }): Atom<V> {
   return new Atom(value.default);
 }
 
@@ -2930,7 +2931,7 @@ export function selector<V>(value: {
   return new Selector(value.get);
 }
 
-// This hook will re-render whenever the supplied `Stateful` value changes.
+// This hook will re-render whenever supplied `Stateful` value changes.
 // It can be used with `Selector` or `Atom`.
 export function useCoiledValue<T>(value: Stateful<T>): T {
   const [, updateState] = useState({});
@@ -2944,11 +2945,26 @@ export function useCoiledValue<T>(value: Stateful<T>): T {
   return value.snapshot();
 }
 
-// Similar to the above method, but it also lets set state.
+// Similar to above method, but it also lets set state.
 // It only can be used with `Atom`.
 export function useCoiledState<T>(atom: Atom<T>): [T, (value: T) => void] {
   const value = useCoiledValue(atom);
   return [value, useCallback(value => atom.update(value), [atom])];
+}
+```
+
+```ts
+function generate(context) {
+  // Register NameAtom as a dependency and get its snapshot value:
+  // get(nameAtom) => selector.getDep(nameAtom)
+  // => nameAtom.subscribe(() => selector.updateSelector) + selector.deps.add(nameAtom)
+  const name = context.get(nameAtom);
+  // Do the same for AgeAtom
+  const age = context.get(ageAtom);
+
+  // Return new value using parent atoms.
+  // E.g. 'Bob is 20 years old'.
+  return `${name} is ${age} years old.`;
 }
 ```
 
