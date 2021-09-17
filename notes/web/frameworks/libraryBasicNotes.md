@@ -1112,12 +1112,13 @@ tags: [Web, Framework, Library]
 
 #### GitHub Actions
 
-- [Checkout](https://github.com/actions/checkout)
-- [Node](https://github.com/actions/setup-node)
+- [Checkout Action](https://github.com/actions/checkout)
+- [Node Action](https://github.com/actions/setup-node)
+- [Stale Action](https://github.com/actions/stale)
 - [GitHub Pages](https://github.com/peaceiris/actions-gh-pages)
 - [Issues Helper](https://github.com/actions-cool/issues-helper)
 - [PR Creator](https://github.com/peter-evans/create-pull-request)
-- [CodeQL](https://github.com/github/codeql-action)
+- [CodeQL Action](https://github.com/github/codeql-action)
 
 ### DevOps Config Tools
 
