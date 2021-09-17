@@ -760,6 +760,7 @@ tags: [Web, Framework, Library]
 
 ### PDF
 
+- [jsPDF: Client-side JavaScript PDF generation](https://github.com/MrRio/jsPDF)
 - [PDFMake](https://github.com/bpampuch/pdfmake)
 - [PDFKit](https://github.com/foliojs/pdfkit)
 
