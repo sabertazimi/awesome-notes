@@ -12,17 +12,21 @@ tags: [Web, JavaScript]
 
 ## 常量
 
-常数值 **加括号** 可转化为对象
+常数值 **加括号** 可转化为对象.
 
 ## 变量
 
-### 原始数据类型值 Primitive type
+### Primitive Values
 
-- Undefined
-- Null
-- Boolean
-- Number
-- String
+Primitive data types:
+
+- Null.
+- Undefined.
+- Boolean.
+- Number.
+- String.
+- Symbol.
+- BigInt.
 
 #### undefined
 
