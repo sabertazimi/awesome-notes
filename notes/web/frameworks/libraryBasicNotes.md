@@ -844,8 +844,10 @@ tags: [Web, Framework, Library]
 
 ### JavaScript Parser
 
-- [Babel](https://www.npmjs.com/package/@babel/parser)
 - [Acorn](https://github.com/acornjs/acorn)
+- [Babel](https://www.npmjs.com/package/@babel/parser)
+- [Espree](https://github.com/eslint/espree)
+- [Esprima](https://github.com/jquery/esprima)
 - [AST Explorer](https://github.com/fkling/astexplorer)
 
 ### Parser
