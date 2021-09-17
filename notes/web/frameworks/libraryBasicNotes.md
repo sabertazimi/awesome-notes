@@ -12,7 +12,7 @@ tags: [Web, Framework, Library]
 
 ## Indexing Tools
 
-- [Open Base](https://openbase.com)
+- [OpenBase](https://openbase.com)
 - [Moiva](https://github.com/aantipov/moiva)
 - [Best of JS](https://github.com/bestofjs/bestofjs-webui)
 - [Micro.js](https://github.com/microjs/microjs.com)
@@ -906,7 +906,20 @@ tags: [Web, Framework, Library]
 
 ## Server
 
-- [Parse Server](https://github.com/ParsePlatform/parse-server)
+- [Parse Server](https://github.com/parse-community/parse-server)
+
+### Middlewares
+
+- [Body Parser](https://github.com/expressjs/body-parser)
+- [Cookie Parser](https://github.com/expressjs/cookie-parser)
+- [Cookie Session](https://github.com/expressjs/cookie-session)
+- [Compression](https://github.com/expressjs/compression)
+- [Cross Origin Resource Sharing](https://github.com/expressjs/cors)
+- [Cross Site Request Forgery Protection](https://github.com/expressjs/csurf)
+- [JWT](https://github.com/auth0/node-jsonwebtoken)
+- [Logger](https://github.com/expressjs/morgan)
+- [HTTP Proxy](https://github.com/chimurai/http-proxy-middleware)
+- [Rate Limit](https://github.com/nfriedly/express-rate-limit)
 
 ### Serverless
 
