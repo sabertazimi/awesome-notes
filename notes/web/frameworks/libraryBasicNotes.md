@@ -269,7 +269,8 @@ tags: [Web, Framework, Library]
 
 ### Box Shadows Utils
 
-- [Box Shadows](https://madeas.github.io/box-shadows)
+- [Neumorphism: Generate CSS for Neumorphism/Soft UI design](https://github.com/adamgiebl/neumorphism)
+- [Box Shadows: Cross-browser collection of CSS box-shadows](https://github.com/madeas/box-shadows.css)
 
 ### Background Utils
 
