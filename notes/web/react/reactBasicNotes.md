@@ -4711,9 +4711,10 @@ export default useFetch;
 
 ## Testing
 
-- [Complete Tutorial](https://www.robinwieruch.de/react-testing-tutorial/#react-enzyme-test-setup)
-- [Jest and Enzyme Snapshots Testing](https://medium.com/codeclan/testing-react-with-jest-and-enzyme-20505fec4675)
-- [Cypress - Testing Framework](https://www.cypress.io/)
+- [Jest and Enzyme snapshots testing](https://medium.com/codeclan/testing-react-with-jest-and-enzyme-20505fec4675).
+- [Cypress: E2E testing framework](https://github.com/cypress-io/cypress).
+- [GitHub CI for UI testing](https://storybook.js.org/blog/how-to-automate-ui-tests-with-github-actions).
+- [React testing tutorial](https://www.robinwieruch.de/react-testing-tutorial).
 
 ### Shallow Renderer
 
