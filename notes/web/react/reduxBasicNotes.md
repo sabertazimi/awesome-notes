@@ -449,7 +449,8 @@ const reducer = createReducer(initialState, {
 
 ### Reducer Enhancer
 
-Higher order reducer:
+Implement reducer enhander with `higher order reducer`,
+like [Redux Undo](https://github.com/omnidan/redux-undo):
 
 ```js
 function undoable(reducer) {
