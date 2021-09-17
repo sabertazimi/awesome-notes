@@ -957,6 +957,8 @@ Redux middleware were designed to enable writing side effects logic:
 - `middleware(store)(next)`: `action => T`.
 - `next`: `action => T`.
 - `dispatch`: `action => T`.
+- `middleware(store)(next)`, `next` and `dispatch` have same function signature:
+  `type Dispatch = (action: Action | AsyncAction) => any`.
 - After `middlewares.forEach`, set `next` to `store.dispatch`,
   make new `dispatch` get all functions from `middlewares`.
 
