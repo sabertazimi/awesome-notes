@@ -5325,6 +5325,11 @@ ReactDOM.render(<WrapperContainer />, container);
 > 打破框架的范式之争, 其实是改变思路. 从思考不同范式之间的竞争关系, 转变成思考多个范式之间的协同关系.
 > useRef in React, Composition in Vue
 
+### Framework Paradigm Reference
+
+- Even You presentation on [JSConf Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s).
+- Framework paradigm [guide](https://mp.weixin.qq.com/s/mZ7KuFjyCWNCAq7HnXg96A).
+
 ### Third-party Libraries Usage
 
 - Look for Libraries that Have Accessibility Built in.
