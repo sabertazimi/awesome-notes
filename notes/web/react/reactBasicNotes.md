@@ -1351,35 +1351,54 @@ function User() {
 
 ### UseContext Hook
 
-- 一般都不会裸露地使用 Context.Provider, 而是封装为独立的 Provider 组件,
+- create custom `XXXContextProvider`:
+  一般都不会裸露地使用 Context.Provider, 而是封装为独立的 Provider 组件,
   将子组件作为 props.children 传入, 这样当 Context 变化时 Provider 不会重新渲染它的子组件,
   由依赖了 context 的子组件自己进行重渲染, 未依赖的子组件不会重新渲染.
   使用 `useMemo` 使得 value 不会重复创建.
-- `const { state, update } = React.useContext(MyContext);`.
+- create custom `useXXXContext` hook:
+  - check whether component under `XXXContextProvider`.
+  - wrap complex context logic and only expose simple API.
+  - use `useMemo`/`useCallback` to memorize values and functions.
+- Context 中只定义被大多数组件所共用的属性 (avoid **Prop Drilling**).
 
 ```jsx
-import React from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 
-const CountContext = React.createContext();
+const CountContext = createContext();
 
 function CountProvider(props) {
-  const [count, setCount] = React.useState(0);
-  const value = React.useMemo(() => {
+  const [count, setCount] = useState(0);
+
+  // Use `useMemo`/`useCallback` to memorize values and functions.
+  const value = useMemo(() => {
     return {
       count,
       setCount,
     };
-  }, [count]);
+  }, [count, setCount]);
+
   return <CountContext.Provider value={value} {...props} />;
 }
 
 function useCount() {
-  const context = React.useContext(CountContext);
+  const context = useContext(CountContext);
+
+  // Check whether component under `XXXContextProvider`.
   if (!context) {
     throw new Error('useCount must be used within a CountProvider');
   }
+
+  // Wrap complex context logic, only expose simple API.
   const { count, setCount } = context;
-  const increment = () => setCount(c => c + 1);
+  const increment = useCallback(() => setCount(c => c + 1), [setCount]);
+
   return {
     count,
     increment,
