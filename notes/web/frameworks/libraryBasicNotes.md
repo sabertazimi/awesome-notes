@@ -415,6 +415,10 @@ tags: [Web, Framework, Library]
 - [HTML5 Chart](https://github.com/chartjs/Chart.js)
 - [Plotly.js](https://github.com/plotly/plotly.js)
 
+### Charts Draw Utils
+
+- [iDraw: Simple JavaScript framework for Drawing on web](https://github.com/idrawjs/idraw)
+
 ### Carousel
 
 - [React responsive carousel](https://github.com/leandrowd/react-responsive-carousel)
@@ -1048,10 +1052,10 @@ tags: [Web, Framework, Library]
 
 ### UML Tools
 
+- [Mermaid: Generation of diagram and flowchart from text or markdown](https://github.com/mermaid-js/mermaid)
 - [Draw.io](https://github.com/jgraph/drawio)
-- [PlantUML](https://github.com/plantuml/plantuml)
-- [Mermaid.js](https://github.com/mermaid-js/mermaid)
-- [Flowchart.js](https://github.com/adrai/flowchart.js)
+- [FlowChart: Draws simple SVG flow chart diagrams from textual representation of diagram](https://github.com/adrai/flowchart.js)
+- [PlantUML: Generate UML diagram from textual description](https://github.com/plantuml/plantuml)
 
 ## DevOps Tools
 
