@@ -3606,9 +3606,9 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 **3L** - Less render times, less render calculations, less render nodes:
 
-- 数据: 利用缓存, 减少 re-render 次数.
-- 计算: 精确判断更新时机和范围, 减少计算量.
-- 渲染: 精细粒度, 降低组件复杂度.
+- 数据: 利用缓存 (复用数据与 VNode), 减少 re-render 次数.
+- 计算: 精确判断更新时机和范围, 减少计算量, 优化 render 过程.
+- 渲染: 精细粒度, 降低组件复杂度, 减少 DOM 数量.
 
 ### React Performance Best Practice
 
