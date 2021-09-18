@@ -7516,6 +7516,46 @@ module.exports = {
 };
 ```
 
+### Webpack Hot Module Replacement
+
+HMR:
+
+- 使用 WDS 托管静态资源, 同时以 Runtime 方式注入 HMR 客户端代码.
+- 浏览器加载页面后，与 WDS 建立 WebSocket 连接.
+- Webpack 监听到文件变化后, 增量构建发生变更的模块, 并通过 WebSocket 发送 hash 事件.
+- 浏览器接收到 hash 事件后, 请求 manifest (`[hash].hot-update.json`) 资源文件, 确认增量变更范围.
+- 浏览器加载发生变更的增量模块.
+- Webpack 运行时触发变更模块的 `module.hot.accept` 回调, 执行代码变更逻辑.
+
+`module.hot.accept` 有两种调用模式:
+
+- 无参调用模式 `module.hot.accept()`: 当前文件修改后, 重头执行当前文件代码.
+- 回调调用模式 `module.hot.accept(path, callback)`: 常用模式, 监听模块变更, 执行代码变更逻辑.
+
+```ts
+// 该模块修改后, `console.log('bar')` 会重新执行
+console.log('bar');
+module.hot.accept();
+```
+
+```ts
+import component from './component';
+
+let demoComponent = component();
+document.body.appendChild(demoComponent);
+
+if (module.hot) {
+  module.hot.accept('./component', () => {
+    const nextComponent = component();
+    document.body.replaceChild(nextComponent, demoComponent);
+    demoComponent = nextComponent;
+  });
+}
+```
+
+`react-refresh-webpack-plugin`/`vue-loader`/`style-loader`
+利用 `module.hot.accept` 实现了 HMR (forceUpdate), 无需开发者编写热模块更新逻辑.
+
 ### Webpack Watch Options
 
 ```bash
