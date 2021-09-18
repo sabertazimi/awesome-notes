@@ -1415,7 +1415,8 @@ export default connect<StateProps, DispatchProps, OwnProps>(
   just like `switch case` statement.
 - Distributive conditional types
   just like `map` statement (`loop` statement) on `union` type.
-- COnditional types make TypeScript become real programing type system.
+- Conditional types make TypeScript become real programing type system:
+  [TypeScripts Type System Turing Complete](https://github.com/microsoft/TypeScript/issues/14833).
 
 ### Basic Conditional Types
 
