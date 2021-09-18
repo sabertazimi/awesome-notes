@@ -3700,8 +3700,8 @@ __metadata:
     nodejieba: ^2.5.2
     prettier: ^2.4.1
     prism-react-renderer: ^1.2.1
-    react: ^17.0.1
-    react-dom: ^17.0.1
+    react: ^17.0.2
+    react-dom: ^17.0.2
     standard-version: ^9.3.1
     stylelint: ^13.13.1
     stylelint-config-bod: ^5.3.8
@@ -11864,7 +11864,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^17.0.1":
+"react-dom@npm:^17.0.2":
   version: 17.0.2
   resolution: "react-dom@npm:17.0.2"
   dependencies:
@@ -12028,7 +12028,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"react@npm:^17.0.1":
+"react@npm:^17.0.2":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
   dependencies:
