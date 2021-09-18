@@ -2299,7 +2299,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:^1.6.21":
+"@mdx-js/react@npm:^1.6.21, @mdx-js/react@npm:^1.6.22":
   version: 1.6.22
   resolution: "@mdx-js/react@npm:1.6.22"
   peerDependencies:
@@ -3684,7 +3684,7 @@ __metadata:
     "@docusaurus/module-type-aliases": 2.0.0-beta.6
     "@docusaurus/preset-classic": 2.0.0-beta.6
     "@easyops-cn/docusaurus-search-local": ^0.19.1
-    "@mdx-js/react": ^1.6.21
+    "@mdx-js/react": ^1.6.22
     "@svgr/webpack": ^5.5.0
     "@tsconfig/docusaurus": ^1.0.4
     "@types/react": ^17.0.21
