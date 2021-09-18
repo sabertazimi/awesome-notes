@@ -282,59 +282,59 @@ declare namespace React {
 
 `import { a } from './module'`:
 
-- `/root/src/folder/module.ts`
-- `/root/src/folder/module.d.ts`
+- `/root/src/folder/module.ts`.
+- `/root/src/folder/module.d.ts`.
 
 `import { a } from 'module'`:
 
-- `/root/src/folder/module.ts`
-- `/root/src/folder/module.d.ts`
-- `/root/src/module.ts`
-- `/root/src/module.d.ts`
-- `/root/module.ts`
-- `/root/module.d.ts`
-- `/module.ts`
-- `/module.d.ts`
+- `/root/src/folder/module.ts`.
+- `/root/src/folder/module.d.ts`.
+- `/root/src/module.ts`.
+- `/root/src/module.d.ts`.
+- `/root/module.ts`.
+- `/root/module.d.ts`.
+- `/module.ts`.
+- `/module.d.ts`.
 
 #### Node Module Resolution
 
 `const x = require('./module')`:
 
-- `/root/src/module.ts`
-- `/root/src/module.tsx`
-- `/root/src/module.d.ts`
+- `/root/src/module.ts`.
+- `/root/src/module.tsx`.
+- `/root/src/module.d.ts`.
 - `/root/src/module/package.json` + `{ "types": "lib/mainModule.ts" }`
-  = `/root/src/module/lib/mainModule.ts`
-- `/root/src/module/index.ts`
-- `/root/src/module/index.tsx`
-- `/root/src/module/index.d.ts`
+  = `/root/src/module/lib/mainModule.ts`.
+- `/root/src/module/index.ts`.
+- `/root/src/module/index.tsx`.
+- `/root/src/module/index.d.ts`.
 
 `const x = require('module')`:
 
-- `/root/src/node_modules/module.ts`
-- `/root/src/node_modules/module.tsx`
-- `/root/src/node_modules/module.d.ts`
-- `/root/src/node_modules/module/package.json` (if it specifies a `types` property)
-- `/root/src/node_modules/@types/module.d.ts`
-- `/root/src/node_modules/module/index.ts`
-- `/root/src/node_modules/module/index.tsx`
-- `/root/src/node_modules/module/index.d.ts`
-- `/root/node_modules/module.ts`
-- `/root/node_modules/module.tsx`
-- `/root/node_modules/module.d.ts`
-- `/root/node_modules/module/package.json` (if it specifies a `types` property)
-- `/root/node_modules/@types/module.d.ts`
-- `/root/node_modules/module/index.ts`
-- `/root/node_modules/module/index.tsx`
-- `/root/node_modules/module/index.d.ts`
-- `/node_modules/module.ts`
-- `/node_modules/module.tsx`
-- `/node_modules/module.d.ts`
-- `/node_modules/module/package.json` (if it specifies a `types` property)
-- `/node_modules/@types/module.d.ts`
-- `/node_modules/module/index.ts`
-- `/node_modules/module/index.tsx`
-- `/node_modules/module/index.d.ts`
+- `/root/src/node_modules/module.ts`.
+- `/root/src/node_modules/module.tsx`.
+- `/root/src/node_modules/module.d.ts`.
+- `/root/src/node_modules/module/package.json` (if it specifies a `types` property).
+- `/root/src/node_modules/@types/module.d.ts`.
+- `/root/src/node_modules/module/index.ts`.
+- `/root/src/node_modules/module/index.tsx`.
+- `/root/src/node_modules/module/index.d.ts`.
+- `/root/node_modules/module.ts`.
+- `/root/node_modules/module.tsx`.
+- `/root/node_modules/module.d.ts`.
+- `/root/node_modules/module/package.json` (if it specifies a `types` property).
+- `/root/node_modules/@types/module.d.ts`.
+- `/root/node_modules/module/index.ts`.
+- `/root/node_modules/module/index.tsx`.
+- `/root/node_modules/module/index.d.ts`.
+- `/node_modules/module.ts`.
+- `/node_modules/module.tsx`.
+- `/node_modules/module.d.ts`.
+- `/node_modules/module/package.json` (if it specifies a `types` property).
+- `/node_modules/@types/module.d.ts`.
+- `/node_modules/module/index.ts`.
+- `/node_modules/module/index.tsx`.
+- `/node_modules/module/index.d.ts`.
 
 ## Basic Types
 
@@ -342,7 +342,8 @@ declare namespace React {
 - number
 - string
 - array
-- tuple
+- tuple:
+  array with **fixed number** of elements whose types are known (no need to be same).
 - enum
 - void
 - null
