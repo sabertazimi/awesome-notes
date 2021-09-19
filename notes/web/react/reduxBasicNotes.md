@@ -905,7 +905,12 @@ thunk.withExtraArgument = createThunkMiddleware;
 export default thunk;
 ```
 
-### Typed Async Thunk
+### Create Async Thunk API
+
+`createAsyncThunk` API provides:
+
+- Less boilerplate code for `state.status` (`idle | loading | error`) maniplulation.
+- **Typed** async thunk function.
 
 ```ts
 import { Action, ThunkAction } from '@reduxjs/toolkit';
