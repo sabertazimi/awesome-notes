@@ -3109,7 +3109,9 @@ window.addEventListener(
 
 ### Rect API
 
-- getBoundingClientRect
+`getBoundingClientRect`:
+
+[![Client Rect](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect/element-box-diagram.png)](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
 
 #### Width and Height API
 
