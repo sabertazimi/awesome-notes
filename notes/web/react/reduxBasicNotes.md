@@ -912,6 +912,8 @@ export default thunk;
 - Less boilerplate code for `state.status` (`idle | loading | error`) maniplulation.
 - **Typed** async thunk function.
 
+`AppThunk` type definition:
+
 ```ts
 import { Action, ThunkAction } from '@reduxjs/toolkit';
 
@@ -922,6 +924,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >;
 ```
+
+**Typed** async thunk function:
 
 ```ts
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -948,6 +952,41 @@ const fetchUserById = createAsyncThunk<
 
   return (await response.json()) as ReturnType;
 });
+```
+
+State status manipulation:
+
+```ts
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { userAPI } from './userAPI';
+
+// First, create the thunk.
+const fetchUserById = createAsyncThunk(
+  'users/fetchByIdStatus',
+  async (userId, thunkAPI) => {
+    const response = await userAPI.fetchById(userId);
+    return response.data;
+  }
+);
+
+// Then, handle actions in your reducers:
+const usersSlice = createSlice({
+  name: 'users',
+  initialState: { entities: [], loading: 'idle' },
+  reducers: {
+    // Standard reducer logic, with auto-generated action types per reducer.
+  },
+  extraReducers: builder => {
+    // Add reducers for additional action types and handle loading state as needed.
+    builder.addCase(fetchUserById.fulfilled, (state, action) => {
+      // Add user to the state array.
+      state.entities.push(action.payload);
+    });
+  },
+});
+
+// Later, dispatch the thunk as needed in the app.
+dispatch(fetchUserById(123));
 ```
 
 ## Middleware
