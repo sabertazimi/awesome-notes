@@ -565,7 +565,7 @@ git pull --rebase --autostash
 
 ## Branch
 
-### Basic Workflow Commands
+### Basic Branch Workflow
 
 #### Basic Branch
 
@@ -630,6 +630,14 @@ git checkout -b [new-local-branch] [remoteName]/[branch]
 
 ```bash
 git push --delete origin [remote-branch-name]
+```
+
+#### Upstream Branch
+
+```bash
+git status -sb
+git branch -avv
+git remote show origin
 ```
 
 ### Advanced Branch Workflow
