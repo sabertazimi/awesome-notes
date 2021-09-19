@@ -909,7 +909,7 @@ export default thunk;
 
 `createAsyncThunk` API provides:
 
-- Less boilerplate code for `state.status` (`idle | loading | error`) maniplulation.
+- Less boilerplate code for `state.status` (`idle | loading | error`) manipulation.
 - **Typed** async thunk function.
 
 `AppThunk` type definition:
