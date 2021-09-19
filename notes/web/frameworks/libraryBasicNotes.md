@@ -785,11 +785,6 @@ tags: [Web, Framework, Library]
 
 ## CLI
 
-### CLI Compiler
-
-- [PKG](https://github.com/zeit/pkg)
-- [NCC](https://github.com/zeit/ncc)
-
 ### CLI Solution
 
 - [Oclif: Open CLI Framework](https://github.com/oclif/oclif)
@@ -840,6 +835,16 @@ tags: [Web, Framework, Library]
 - [React Terminal](https://github.com/rohanchandra/react-terminal-component)
 - [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
 - [Jay: Supercharged JavaScript REPL](https://github.com/nikersify/jay)
+
+### CLI Tools
+
+#### CLI Compiler
+
+- [NCC](https://github.com/vercel/ncc)
+
+#### CLI Packager
+
+- [PKG](https://github.com/vercel/pkg)
 
 ## Compiler
 
