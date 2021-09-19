@@ -24,6 +24,34 @@ Redux 中只有一个全局唯一 store 状态树, 且由 reducers 创建 store.
 export default appStore = createStore(rootReducers, initState);
 ```
 
+### Create Store
+
+```ts
+import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunkMiddleware from 'redux-thunk';
+
+import monitorReducersEnhancer from './enhancers/monitorReducers';
+import loggerMiddleware from './middleware/logger';
+import rootReducer from './reducers';
+
+export default function configureStore(preloadedState) {
+  const middlewares = [loggerMiddleware, thunkMiddleware];
+  const middlewareEnhancer = applyMiddleware(...middlewares);
+
+  const enhancers = [middlewareEnhancer, monitorReducersEnhancer];
+  const composedEnhancers = composeWithDevTools(...enhancers);
+
+  const store = createStore(rootReducer, preloadedState, composedEnhancers);
+
+  if (process.env.NODE_ENV !== 'production' && module.hot) {
+    module.hot.accept('./reducers', () => store.replaceReducer(rootReducer));
+  }
+
+  return store;
+}
+```
+
 ### Configure Store
 
 By default, `configureStore` from Redux Toolkit will:
@@ -1452,7 +1480,7 @@ app.listen(port);
 
 ## Redux Internal
 
-### Create Store
+### Store Constructor Implementation
 
 - Use closure to store state and subscribe.
 - Use middleware to change normal dispatch function.
