@@ -1120,6 +1120,8 @@ tags: [Web, Framework, Library]
 - [Issues Helper](https://github.com/actions-cool/issues-helper)
 - [PR Creator](https://github.com/peter-evans/create-pull-request)
 - [CodeQL Action](https://github.com/github/codeql-action)
+- [Auto Approve Review](https://github.com/hmarr/auto-approve-action)
+- [Auto Approve Workflow](https://github.com/mheap/automatic-approve-action)
 
 ### DevOps Config Tools
 
