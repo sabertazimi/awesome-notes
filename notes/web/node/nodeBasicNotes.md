@@ -116,7 +116,7 @@ npm test
 
 ### Publish Steps
 
-`latest` or `alpha`
+`latest` or `alpha`:
 
 ```bash
 npm publish
@@ -124,6 +124,13 @@ npm publish --tag [<tag>]
 npm dist-tag add <pkg>@<version> [<tag>]
 npm dist-tag rm <pkg> <tag>
 npm dist-tag ls [<pkg>]
+```
+
+NPM registry token configuration:
+
+```bash
+npm config set @orgName:registry https://registry.example.com
+npm config set //registry.example.com/:_authToken XXXXXTokenXXXXX
 ```
 
 Release script from VitePress:
