@@ -567,13 +567,24 @@ Update `.gitignore` file:
 .pnp.js
 ```
 
-### Yarn Patch
+### Yarn Configuration
 
-Modify package in `node_modules` conveniently:
+```bash
+yarn config set nodeLinker node-modules --home
+yarn config set npmPublishAccess public --home
+yarn config set npmRegistryServer "https://registry.npmjs.org" --home
+yarn config set yarnPath .yarn/releases/yarn-berry.cjs --home
+yarn config set unsafeHttpWhitelist --json '["localhost", "*.example.com", "example.com"]'
+```
 
-- Run `yarn patch <package>` will create copy of `package` to `tmp/xfs-xxxxxxxx/user/`.
-- After modify source code of `package`,
-  run `yarn patch-commit /tmp/xfs-xxxxxxxx/user --save`.
+### Yarn Updates
+
+One line to update all deps in monorepo:
+
+```bash
+yarn up @types/node
+yarn up @types/react
+```
 
 ### Yarn Workspace
 
@@ -587,15 +598,13 @@ yarn workspace packageName build
 yarn plugin list
 ```
 
-### Yarn Configuration
+### Yarn Patch
 
-```bash
-yarn config set nodeLinker node-modules --home
-yarn config set npmPublishAccess public --home
-yarn config set npmRegistryServer "https://registry.npmjs.org" --home
-yarn config set yarnPath .yarn/releases/yarn-berry.cjs --home
-yarn config set unsafeHttpWhitelist --json '["localhost", "*.example.com", "example.com"]'
-```
+Modify package in `node_modules` conveniently:
+
+- Run `yarn patch <package>` will create copy of `package` to `tmp/xfs-xxxxxxxx/user/`.
+- After modify source code of `package`,
+  run `yarn patch-commit /tmp/xfs-xxxxxxxx/user --save`.
 
 ### Yarn Berry Read World Case
 
