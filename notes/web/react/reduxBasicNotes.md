@@ -1512,6 +1512,73 @@ export const { selectAll: selectAllUsers, selectById: selectUserById } =
 
 - RTK Query real world [example](https://www.toptal.com/react/redux-toolkit-and-rtk-query).
 
+## React Redux Binding Library
+
+- `useSelector`.
+- `useDispatch`:
+  dispatch function reference will be stable
+  as long as same store instance is being passed to the `<Provider>`.
+
+### Typed React Redux Hooks
+
+```ts
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import store from './store';
+
+type AppDispatch = typeof store.dispatch;
+type RootState = ReturnType<typeof store.getState>;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+```
+
+### Custom React Redux Hooks
+
+```ts
+import { useSelector, shallowEqual } from 'react-redux';
+
+export default function useShallowEqualSelector(selector) {
+  return useSelector(selector, shallowEqual);
+}
+```
+
+```ts
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
+import { useMemo } from 'react';
+
+export default function useActions(actions, deps) {
+  const dispatch = useDispatch();
+  return useMemo(
+    () => {
+      if (Array.isArray(actions)) {
+        return actions.map(a => bindActionCreators(a, dispatch));
+      }
+      return bindActionCreators(actions, dispatch);
+    },
+    deps ? [dispatch, ...deps] : [dispatch]
+  );
+}
+```
+
+### React Redux API Reference
+
+[`batch`](https://react-redux.js.org/api/batch):
+
+```ts
+import { batch } from 'react-redux';
+
+function myThunk() {
+  return (dispatch, getState) => {
+    // Only result in one combined re-render, not two.
+    batch(() => {
+      dispatch(increment());
+      dispatch(increment());
+    });
+  };
+}
+```
+
 ## Redux Server Side Rendering
 
 - Client side:
