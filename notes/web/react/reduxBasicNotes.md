@@ -1378,6 +1378,8 @@ By default, **unused data is removed from the cache after 60 seconds**,
 can be configured in root API slice definition
 or overridden in individual endpoint definitions using `keepUnusedDataFor` flag.
 
+RTK query [cache utils](https://redux-toolkit.js.org/rtk-query/api/created-api/cache-management-utils):
+
 ```ts
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -1445,7 +1447,7 @@ export const selectUserById = createSelector(
 );
 ```
 
-### Spliting Query Endpoints
+### Splitting Query Endpoints
 
 [RTK query code splitting](https://redux-toolkit.js.org/rtk-query/usage/code-splitting):
 
