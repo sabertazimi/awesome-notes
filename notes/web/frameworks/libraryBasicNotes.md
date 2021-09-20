@@ -1129,6 +1129,7 @@ tags: [Web, Framework, Library]
 - [PR Creator](https://github.com/peter-evans/create-pull-request)
 - [Auto Approve Review](https://github.com/hmarr/auto-approve-action)
 - [Auto Approve Workflow](https://github.com/mheap/automatic-approve-action)
+- [Bundle Size](https://github.com/preactjs/compressed-size-action)
 
 ### DevOps Config Tools
 
