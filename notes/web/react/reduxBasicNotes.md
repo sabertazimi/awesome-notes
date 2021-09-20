@@ -1445,11 +1445,16 @@ export const selectUserById = createSelector(
 );
 ```
 
-### Injecting Query Endpoints
+### Spliting Query Endpoints
 
-- `injectEndpoints()` mutates original API slice object
+[RTK query code splitting](https://redux-toolkit.js.org/rtk-query/usage/code-splitting):
+
+- `injectEndpoints()`:
+  mutates original API slice object
   to add additional endpoint definitions
   and then returns it.
+- `enhanceEndpoints()`:
+  merged together on a per-definition basis.
 - `apiSlice` and `extendedApiSlice` are the same object.
 
 ```ts
