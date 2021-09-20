@@ -580,6 +580,16 @@ yarn workspace packageName build
 yarn plugin list
 ```
 
+### Yarn Configuration
+
+```bash
+yarn config set nodeLinker node-modules --home
+yarn config set npmPublishAccess public --home
+yarn config set npmRegistryServer "https://registry.npmjs.org" --home
+yarn config set yarnPath .yarn/releases/yarn-berry.cjs --home
+yarn config set unsafeHttpWhitelist --json '["localhost", "*.example.com", "example.com"]'
+```
+
 ### Yarn Berry Read World Case
 
 - [Gatsby](https://github.com/gatsbyjs/gatsby):
