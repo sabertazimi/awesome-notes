@@ -570,6 +570,15 @@ store.dispatch({
   can used to TypeScript type narrowing.
 
 ```ts
+// Simple matcher
+function isNumberValueAction(
+  action: AnyAction
+): action is PayloadAction<{ value: number }> {
+  return typeof action.payload.value === 'number';
+}
+```
+
+```ts
 import { createReducer } from '@reduxjs/toolkit';
 
 const reducer = createReducer(0, builder => {
