@@ -1120,11 +1120,12 @@ tags: [Web, Framework, Library]
 
 - [Checkout Action](https://github.com/actions/checkout)
 - [Node Action](https://github.com/actions/setup-node)
-- [Stale Action](https://github.com/actions/stale)
+- [CodeQL Action](https://github.com/github/codeql-action)
 - [GitHub Pages](https://github.com/peaceiris/actions-gh-pages)
 - [Issues Helper](https://github.com/actions-cool/issues-helper)
+- [Lock Action](https://github.com/dessant/lock-threads)
+- [Stale Action](https://github.com/actions/stale)
 - [PR Creator](https://github.com/peter-evans/create-pull-request)
-- [CodeQL Action](https://github.com/github/codeql-action)
 - [Auto Approve Review](https://github.com/hmarr/auto-approve-action)
 - [Auto Approve Workflow](https://github.com/mheap/automatic-approve-action)
 
