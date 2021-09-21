@@ -920,7 +920,7 @@ tags: [Web, Framework, Library]
 
 - [Whistle](https://github.com/avwo/whistle)
 
-## Server
+## Back End Server
 
 - [Parse Server](https://github.com/parse-community/parse-server)
 
@@ -940,6 +940,11 @@ tags: [Web, Framework, Library]
 ### Serverless
 
 - [Serverless Framework](https://github.com/serverless/serverless)
+
+### API Tools
+
+- [Swagger Codegen: Template-driven engine to generate documentation, API clients and server stubs](https://github.com/swagger-api/swagger-codegen)
+- [Swagger UI: Generate beautiful documentation from Swagger-compliant API](https://github.com/swagger-api/swagger-ui)
 
 ## Encryption
 
@@ -1170,5 +1175,5 @@ tags: [Web, Framework, Library]
 
 ### API Documentation
 
-- [Swagger: OpenAPI](https://github.com/swagger-api/swagger-ui)
+- [Swagger UI: Generate beautiful documentation from Swagger-compliant API](https://github.com/swagger-api/swagger-ui)
 - [DevDocs](https://github.com/freeCodeCamp/devdocs)
