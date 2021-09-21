@@ -5741,8 +5741,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ## Web Animations API
 
-- `KeyframeEffect`
-- `Animation`
+- `KeyframeEffect`.
+- `Animation`.
 
 ```js
 const rabbitDownKeyframes = new KeyframeEffect(
@@ -5767,7 +5767,7 @@ function downHandler() {
 }
 ```
 
-- `element.animate`
+- `element.animate`.
 
 ```js
 const animationKeyframes = [
@@ -5795,7 +5795,9 @@ const animation = document
   .animate(animationKeyframes, animationTiming);
 ```
 
-- `animation.pause()/play()/reverse()/finish()/cancel()`
+- `animation.currentTime`.
+- `animation.playState`.
+- `animation.pause()/play()/reverse()/finish()/cancel()`.
 
 ```js
 animation.pause();
