@@ -4794,11 +4794,13 @@ $0.addEventListener('click', e => {
 
 ### Source Panel
 
-- add log points
-- multiple breakpoints: source, XHR/fetch, DOM, global/event listeners
-- open a source file, right click code, `Blackbox script` item
+- Add log points.
+- Multiple breakpoints: source, XHR/fetch, DOM, global/event listeners.
+- Open a source file, right click code, `Blackbox script` item.
 - [Local Overrides](https://developers.google.com/web/updates/2018/01/devtools#overrides)
-  for persistent changes to css styles
+  for persistent changes to css styles.
+
+Same thing in `VSCode` debug panel (log points, break points etc).
 
 ### Network Panel
 
