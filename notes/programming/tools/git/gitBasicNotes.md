@@ -220,6 +220,27 @@ no more than 50 characters
   To migrate your project, change all the commands, where you use `--port-runner`
   to `--runner-port`.
 
+### Git Commit Tool
+
+[Commitizen CLI](https://github.com/commitizen/cz-cli):
+
+```bash
+npm i -g commitizen cz-conventional-changelog
+echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
+git cz # replace for `git commit`
+```
+
+[CommitLint](https://github.com/conventional-changelog/commitlint):
+
+```bash
+yarn add -D @commitlint/config-conventional @commitlint/cli
+echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
+
+yarn add -D husky
+yarn husky install
+yarn husky add .husky/commit-msg 'yarn commitlint --edit "$1"'
+```
+
 ### Git Commit Emoji
 
 - [GitEmoji](https://github.com/carloscuesta/gitmoji)
