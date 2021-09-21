@@ -936,6 +936,7 @@ tags: [Web, Framework, Library]
 - [Logger](https://github.com/expressjs/morgan)
 - [HTTP Proxy](https://github.com/chimurai/http-proxy-middleware)
 - [Rate Limit](https://github.com/nfriedly/express-rate-limit)
+- [Graceful Shutdown](https://github.com/godaddy/terminus)
 
 ### Serverless
 
