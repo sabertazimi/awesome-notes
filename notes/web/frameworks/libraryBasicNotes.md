@@ -1110,7 +1110,7 @@ tags: [Web, Framework, Library]
 - [Semantic Release: Fully automated version management and package publishing](https://github.com/semantic-release/semantic-release)
 - [Standard Version: Automate versioning and CHANGELOG generation](https://github.com/conventional-changelog/standard-version)
 
-### DepOps Automation CI and CD Tools
+### DevOps Automation CI and CD Tools
 
 - [Probot: Framework for building GitHub Apps to automate workflow](https://github.com/probot/probot)
 - [Actions Toolkit: Building GitHub Actions in Node.js](https://github.com/JasonEtco/actions-toolkit)
@@ -1129,7 +1129,8 @@ tags: [Web, Framework, Library]
 - [PR Creator](https://github.com/peter-evans/create-pull-request)
 - [Auto Approve Review](https://github.com/hmarr/auto-approve-action)
 - [Auto Approve Workflow](https://github.com/mheap/automatic-approve-action)
-- [Bundle Size](https://github.com/preactjs/compressed-size-action)
+- [Limit Bundle Size](https://github.com/andresz1/size-limit-action)
+- [Compressed Bundle Size](https://github.com/preactjs/compressed-size-action)
 
 ### DevOps Config Tools
 
