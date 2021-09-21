@@ -589,6 +589,10 @@ tags: [Web, Framework, Library]
 - [CSS Icons](https://github.com/wentin/cssicon)
 - [Open Source Icons](https://www.smashingmagazine.com/2021/08/open-source-icons)
 
+### Avatar
+
+- [DiceBear: Random avatar generation library](https://github.com/dicebear/dicebear)
+
 ### Emoji
 
 - [OwO Keyboard Emoji](https://github.com/DIYgod/OwO)
