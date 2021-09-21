@@ -5797,11 +5797,36 @@ const animation = document
 
 - `animation.currentTime`.
 - `animation.playState`.
+- `animation.effect`.
 - `animation.pause()/play()/reverse()/finish()/cancel()`.
 
 ```js
 animation.pause();
 animation.currentTime = animation.effect.getComputedTiming().duration / 2;
+
+function currentTime(time = 0) {
+  animations.forEach(function (animation) {
+    if (typeof animation.currentTime === 'function') {
+      animation.currentTime(time);
+    } else {
+      animation.currentTime = time;
+    }
+  });
+}
+
+function createPlayer(animations) {
+  return Object.freeze({
+    play: function () {
+      animations.forEach(animation => animation.play());
+    },
+    pause: function () {
+      animations.forEach(animation => animation.pause());
+    },
+    currentTime: function (time = 0) {
+      animations.forEach(animation => (animation.currentTime = time));
+    },
+  });
+}
 ```
 
 ## Web Canvas API
