@@ -3279,9 +3279,9 @@ worker.onmessage = function (event) {
 worker.postMessage(jsonText);
 ```
 
-### Ajax
+### AJAX
 
-#### 数据格式
+#### AJAX Data Format
 
 | Format                           | Size (bytes) | Download (ms) | Parse (ms) |
 | :------------------------------- | -----------: | ------------: | ---------: |
@@ -3296,7 +3296,7 @@ worker.postMessage(jsonText);
 | Custom Format (script insertion) |      222,912 |          66.3 |       11.7 |
 | Custom Format (XHR)              |      222,892 |          63.1 |       14.5 |
 
-#### Ajax 缓存
+#### AJAX Cache
 
 ```js
 const localCache = {};
@@ -3332,6 +3332,51 @@ function xhrRequest(url, callback) {
 req.open('GET', url, true);
 // req.set();
 req.send(null);
+```
+
+#### AJAX Alternatives
+
+- `client.request(config)`.
+- `client.get(url[, config])`.
+- `client.delete(url[, config])`.
+- `client.head(url[, config])`.
+- `client.options(url[, config])`.
+- `client.post(url[, data[, config]])`.
+- `client.put(url[, data[, config]])`.
+- `client.patch(url[, data[, config]])`.
+- `client.getUri([config])`.
+
+```ts
+const client = axios.create({
+  baseURL: 'https://some-domain.com/api/',
+  timeout: 1000,
+  headers: { 'X-Custom-Header': 'foobar' },
+});
+
+// Add a request interceptor
+client.interceptors.request.use(
+  config => {
+    // Do something before request is sent.
+    return config;
+  },
+  error => {
+    // Do something with request error.
+    return Promise.reject(error);
+  }
+);
+
+client.interceptors.response.use(
+  response => {
+    // Any status code that lie within the range of 2xx trigger this function.
+    // Do something with response data.
+    return response;
+  },
+  error => {
+    // Any status codes that falls outside the range of 2xx trigger this function.
+    // Do something with response error.
+    return Promise.reject(error);
+  }
+);
 ```
 
 ### Reduce Repeat Manipulation
