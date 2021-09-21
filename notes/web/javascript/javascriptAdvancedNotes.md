@@ -4762,14 +4762,14 @@ $0.addEventListener('click', e => {
 
 ### Performance Panel
 
-- C+S+P: performance monitor
-- C+S+P: FPS
-- script->style->layout->paint->composite timeline
-- performance tips
-- Memory
-- [Timeline Events](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/performance-reference)
-- [Performance 工具指南](https://zhuanlan.zhihu.com/p/41017888)
-- [Performance Analysis Reference](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
+- `C+S+P`: performance monitor.
+- `C+S+P`: FPS.
+- Performance tips.
+- Memory panel.
+- Timeline events: `script -> style -> layout -> paint -> composite`.
+- Timeline events [reference](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/performance-reference).
+- Performance analysis [reference](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference).
+- Performance tools [guide](https://zhuanlan.zhihu.com/p/41017888).
 
 #### Performance API
 
