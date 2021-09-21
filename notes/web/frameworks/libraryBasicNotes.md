@@ -1135,6 +1135,7 @@ tags: [Web, Framework, Library]
 - [PR Creator](https://github.com/peter-evans/create-pull-request)
 - [Auto Approve Review](https://github.com/hmarr/auto-approve-action)
 - [Auto Approve Workflow](https://github.com/mheap/automatic-approve-action)
+- [NPM Publish Action](https://github.com/JS-DevTools/npm-publish)
 - [Limit Bundle Size](https://github.com/andresz1/size-limit-action)
 - [Compressed Bundle Size](https://github.com/preactjs/compressed-size-action)
 
