@@ -5828,7 +5828,7 @@ requestAnimationFrame(gameLoop);
 
 ### Canvas Performance
 
-- canvas buffer
+Canvas buffer:
 
 ```js
 frontCanvasContext.drawImage(bufferCanvas, 0, 0);
@@ -5839,6 +5839,22 @@ frontCanvasContext.drawImage(bufferCanvas, 0, 0);
 
 ```js
 const ctx = canvas.getContext('2d', { alpha: false });
+```
+
+Offscreen canvas:
+
+```ts
+// index.js
+const offscreenCanvas = document.querySelector('#frame2');
+const offscreen = offscreenCanvas.transferControlToOffscreen();
+const worker = new Worker('./worker.js');
+worker.postMessage({ canvas: offscreen }, [offscreen]);
+
+// worker.js
+onmessage = function (event) {
+  canvas = event.data.canvas;
+  context = canvas.getContext('2d');
+};
 ```
 
 ### Canvas Reference
