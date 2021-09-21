@@ -4771,6 +4771,15 @@ $0.addEventListener('click', e => {
 - [Performance 工具指南](https://zhuanlan.zhihu.com/p/41017888)
 - [Performance Analysis Reference](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
 
+#### Performance API
+
+```ts
+performance.mark('mainThread-start');
+expensiveCalculation();
+performance.mark('mainThread-stop');
+performance.measure('mainThread', 'mainThread-start', 'mainThread-stop');
+```
+
 ### Simulation DevTools
 
 - cs-p: type `3G` (slow network)
