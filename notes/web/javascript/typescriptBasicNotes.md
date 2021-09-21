@@ -22,8 +22,12 @@ npm i -D react react-dom @types/node @types/react @types/react-dom
 ### TypeScript Config File
 
 ```bash
-npm i -D @tsconfig/create-react-app
+npx tsconfig.json
 npx tsc --init
+```
+
+```bash
+npm i -D @tsconfig/create-react-app
 ```
 
 Basic [tsconfig](https://www.typescriptlang.org/tsconfig):
