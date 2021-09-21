@@ -612,6 +612,8 @@ Modify package in `node_modules` conveniently:
   yarn 1 with `.yarn/` directory.
 - [Redux ToolKit](https://github.com/reduxjs/redux-toolkit):
   yarn 2.
+- [Babel](https://github.com/babel/babel):
+  yarn 3.
 - [StoryBook](https://github.com/storybookjs/storybook):
   yarn 3.
 
