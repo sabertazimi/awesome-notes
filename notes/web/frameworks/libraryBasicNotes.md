@@ -980,6 +980,7 @@ tags: [Web, Framework, Library]
 
 - [Cypress](https://github.com/cypress-io/cypress)
 - [NightWatch: End to End Testing Framework](https://github.com/nightwatchjs/nightwatch)
+- [WebDriver: Next-gen browser and mobile automation test framework](https://github.com/webdriverio/webdriverio)
 - [WebHint](https://github.com/webhintio/hint)
 
 ### Headless Automation Tools
