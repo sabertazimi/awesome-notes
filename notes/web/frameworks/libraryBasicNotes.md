@@ -679,14 +679,6 @@ tags: [Web, Framework, Library]
 - [Plyr](https://github.com/selz/plyr)
 - [FLV.js](https://github.com/bilibili/flv.js)
 
-## Clipboard
-
-- [Clipboard](https://github.com/zenorocha/clipboard.js)
-
-## Keyboard
-
-- [Hot Key](https://github.com/github/hotkey)
-
 ## Editor
 
 ### Rich Text Editor
@@ -712,6 +704,15 @@ tags: [Web, Framework, Library]
 ### Live Editor and Playground
 
 - [React Live: Flexible playground for live editing React components](https://github.com/FormidableLabs/react-live)
+
+### Clipboard
+
+- [Clipboard](https://github.com/zenorocha/clipboard.js)
+
+### Keyboard
+
+- [Hot Key](https://github.com/github/hotkey)
+- [KBar: Fast, portable, and extensible command+k interface](https://github.com/timc1/kbar)
 
 ## SMS
 
