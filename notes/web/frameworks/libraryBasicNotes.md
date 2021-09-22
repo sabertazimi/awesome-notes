@@ -582,6 +582,7 @@ tags: [Web, Framework, Library]
 
 ### Icons
 
+- [React Icons: SVG icons of popular icon packs](https://github.com/react-icons/react-icons)
 - [Remix Icons](https://github.com/Remix-Design/remixicon)
 - [Icon Font](https://www.iconfont.cn)
 - [Icons8](https://icons8.com)
