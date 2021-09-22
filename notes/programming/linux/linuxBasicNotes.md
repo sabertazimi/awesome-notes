@@ -2147,6 +2147,23 @@ done;
 printf -- ' DONE!\n';
 ```
 
+### Zsh
+
+```bash
+# Install zsh and powerline
+sudo apt install zsh powerline powerline-status
+# Install oh-my-zsh
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# Install zsh themes
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+git clone --depth=1 https://github.com/sabertazimi/dragon-zsh-theme.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/dragon
+# Install zsh plugins
+plugins=(
+  command-not-found fzf git git-prompt github
+  history lighthouse man node npm nvm pm2 vi-mode yarn
+)
+```
+
 ## Terminal
 
 ### Terminal Basis
