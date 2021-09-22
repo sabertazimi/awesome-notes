@@ -10,11 +10,11 @@ tags: [Web, Vue]
 
 [TOC]
 
-## Slot
+## Vue Slot
 
 - [Web Slot](https://developers.google.com/web/fundamentals/web-components/shadowdom#slots)
-- `name` attr
-- `fallback` content
+- `name` attribute.
+- `fallback` content.
 
 ```javascript
 const Tab = san.defineComponent({
@@ -45,9 +45,7 @@ const MyComponent = san.defineComponent({
 */
 ```
 
-## Internal of Vue
-
-- [vue-design](http://hcysun.me/vue-design)
+## Vue Internal
 
 ### Vue Constructor
 
@@ -81,7 +79,7 @@ renderMixin(Vue);
 export default Vue;
 ```
 
-### prototype of Vue
+### Vue Prototype
 
 ```js
 // initMixin(Vue)    src/core/instance/init.js **************************************************
@@ -166,7 +164,7 @@ Vue.prototype.$mount = function (
 };
 ```
 
-### Global API of Vue
+### Vue Global API
 
 ```js
 // initGlobalAPI
@@ -286,7 +284,7 @@ vm._props = {};
 vm._provided;
 ```
 
-### Read-only property
+### Vue ReadOnly property
 
 ```js
 const dataDef = {};
@@ -315,7 +313,7 @@ Object.defineProperty(Vue.prototype, '$data', dataDef);
 Object.defineProperty(Vue.prototype, '$props', propsDef);
 ```
 
-### Shared Utils
+### Vue Shared Utils
 
 ```js
 /* @flow */
@@ -659,7 +657,7 @@ export function once(fn: Function): Function {
 }
 ```
 
-### Options of Vue
+### Vue Options
 
 ```js
 vm.$options = mergeOptions(
@@ -688,7 +686,7 @@ vm.$options = mergeOptions(
 )
 ```
 
-#### Normalize Options
+#### Vue Normalize Options
 
 props
 
@@ -725,7 +723,7 @@ for (const key in dirs) {
 }
 ```
 
-#### Merge Options
+#### Vue Merge Options
 
 - 对于 el、propsData 选项使用默认的合并策略 defaultStart
 - 对于 data 选项，使用 mergeDataOrFn 函数进行处理，最终结果是 data 选项将变成一个函数，且该函数的执行结果为真正的数据对象
@@ -738,7 +736,7 @@ for (const key in dirs) {
 - 最后，以上没有提及到的选项都将使默认选项 defaultStart
 - 最最后，默认合并策略函数 defaultStart 的策略是：只要子选项不是 undefined 就使用子选项，否则使用父选项
 
-### Reactive Data Pattern
+### Vue Reactive Data Pattern
 
 data getter/setter -- notify -> watcher -- trigger --> render
 
@@ -747,7 +745,7 @@ data.a; // getHook() get called
 data.a = 2; // setHook() get called
 ```
 
-### Two-Way Binding
+### Vue Two-Way Binding
 
 View-Model 主要做了两件微小的事情：
 
@@ -785,11 +783,9 @@ Array.from(el.getElementsByTagName('input'))
   });
 ```
 
-### Virtual DOM Diff and Patch
+## Vue Router
 
-## Router
-
-### Navigation Guards
+### Navigation Guard Router
 
 - [Official Documentation of Router Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html)
 
@@ -797,7 +793,7 @@ Array.from(el.getElementsByTagName('input'))
 
 ### SCSS Config
 
-- [Build with Bulma](https://css-tricks.com/how-to-increase-your-page-size-by-1500-with-webpack-and-vue/)
+[Build with Bulma](https://css-tricks.com/how-to-increase-your-page-size-by-1500-with-webpack-and-vue):
 
 Every element and every style for this scoped styled component
 will have a `data-v-2929` on them at runtime.
