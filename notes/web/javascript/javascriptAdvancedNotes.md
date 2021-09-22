@@ -393,7 +393,7 @@ s.includes('Hello', 6); // false
 
 - `trimLeft()`/`trimStart()`: remove start whitespace.
 - `trimRight()`/`trimEnd()`: remove end whitespace.
-- `matchAll(regexp)`
+- `matchAll(regexp)`.
 - `replaceAll`:
   - `replaceAll(regexp, newSubstr)`.
   - `replaceAll(regexp, replacerFunction)`.
