@@ -14,6 +14,14 @@ tags: [Web, Vue]
 
 ### Attributes Binding
 
+```html
+<template>
+  <a :href="url">Dynamic Link</a>
+  <img :src="link" :alt="description" />
+  <button :disabled="item.length === 0">Save Item</button>
+</template>
+```
+
 ### Class and Style Binding
 
 - Static class.
