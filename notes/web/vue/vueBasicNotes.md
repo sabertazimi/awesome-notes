@@ -10,7 +10,29 @@ tags: [Web, Vue]
 
 [TOC]
 
-## Vue Slot
+## Directives
+
+### Attributes Binding
+
+### Class and Style Binding
+
+- Static class.
+- Array binding.
+- Object binding.
+
+```html
+<template>
+  <div class="static"></div>
+  <div :class="{ active: isActive, 'text-danger': hasError }"></div>
+  <div :class="[isActive ? activeClass : '', errorClass]"></div>
+  <div :class="[{ active: isActive }, errorClass]"></div>
+  <div :style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+  <div :style="[baseStyles, overridingStyles]"></div>
+  <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
+</template>
+```
+
+## Slots
 
 - [Web Slot](https://developers.google.com/web/fundamentals/web-components/shadowdom#slots)
 - `name` attribute.
@@ -284,7 +306,7 @@ vm._props = {};
 vm._provided;
 ```
 
-### Vue ReadOnly property
+### Vue ReadOnly Property
 
 ```js
 const dataDef = {};
@@ -688,7 +710,7 @@ vm.$options = mergeOptions(
 
 #### Vue Normalize Options
 
-props
+Props:
 
 ```js
 props: {
@@ -702,7 +724,7 @@ props: {
 }
 ```
 
-injects
+Injects:
 
 ```js
 inject: {
@@ -712,7 +734,7 @@ inject: {
 }
 ```
 
-directives
+Directives:
 
 ```js
 for (const key in dirs) {
@@ -745,7 +767,7 @@ data.a; // getHook() get called
 data.a = 2; // setHook() get called
 ```
 
-### Vue Two-Way Binding
+### Vue Two-Way Data Binding
 
 View-Model 主要做了两件微小的事情：
 
