@@ -12,7 +12,23 @@ tags: [Web, Vue]
 
 ## Directives
 
-### Attributes Binding
+### Control Flow Directives
+
+```html
+<template>
+  <p v-if="isShow">Show</p>
+  <p v-if="isEnabled">Enabled</p>
+  <p v-else>Disabled</p>
+  <p v-if="inventory > 10">In Stock</p>
+  <p v-else-if="inventory <= 10 && inventory > 0">Almost Sold Out</p>
+  <p v-else>Out of Stock</p>
+  <ul>
+    <li v-for="item in items" :key="item.id">{{ item.value }}</li>
+  </ul>
+</template>
+```
+
+### Attributes Binding Directive
 
 ```html
 <template>
@@ -22,7 +38,7 @@ tags: [Web, Vue]
 </template>
 ```
 
-### Class and Style Binding
+### Class and Style Binding Directive
 
 - Static class.
 - Array binding.
