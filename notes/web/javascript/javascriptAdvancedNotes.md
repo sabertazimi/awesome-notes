@@ -2530,6 +2530,7 @@ which tend to be **I/O-intensive** (due to non-blocking I/O).
 - send profiling data from bytecode to optimizing compiler, generate optimized code
 - **Ignition** interpreter
 - **TurboFan** optimizing compiler (2 for SpiderMonkey/Edge, 3 for Safari)
+- JavaScript implementation [list](https://notes.eatonphil.com/javascript-implementations.html).
 
 ### V8 Object Shape
 
