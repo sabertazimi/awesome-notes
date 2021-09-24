@@ -724,7 +724,7 @@ tags: [Web, Framework, Library]
 
 ### Keyboard
 
-- [Hot Key](https://github.com/github/hotkey)
+- [HotKey: Trigger action on element with keyboard shortcut](https://github.com/github/hotkey)
 - [KBar: Fast, portable, and extensible command+k interface](https://github.com/timc1/kbar)
 
 ## SMS
