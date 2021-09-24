@@ -504,6 +504,7 @@ tags: [Web, Framework, Library]
 - [Velocity: Accelerated JavaScript animation](https://github.com/julianshapiro/velocity)
 - [Barba.js: Smooth transition between pages](https://github.com/luruke/barba.js)
 - [Tilt: Smooth 3D tilt javascript library](https://github.com/micku7zu/vanilla-tilt.js)
+- [CountUp: Count up animation](https://github.com/glennreyes/react-countup)
 - [TheatreJS: Motion design editor for web](https://github.com/ariaminaei/theatre)
 
 ### CLI Animation
