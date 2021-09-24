@@ -86,7 +86,8 @@ tags: [Web, Framework, Library]
 ### Desktop Solution
 
 - [Electron](https://github.com/electron/electron)
-- [Tauri](https://github.com/tauri-apps/tauri)
+- [Tauri: Smaller, faster, and more secure Rust application](https://github.com/tauri-apps/tauri)
+- [Neutralino: Portable and lightweight cross-platform C++ application](https://github.com/neutralinojs/neutralinojs)
 
 ### Mobile Solution
 
