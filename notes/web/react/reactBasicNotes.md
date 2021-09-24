@@ -908,6 +908,11 @@ RadioImageForm.RadioInput = RadioInput;
 export default RadioImageForm;
 ```
 
+## React Synthetic Events
+
+- React 16: delegate events handlers on `document` node.
+- React 17: delegate events handlers on `app` root node.
+
 ## React Reusability Patterns
 
 ### HOC
