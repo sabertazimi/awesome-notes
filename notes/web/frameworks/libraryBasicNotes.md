@@ -110,6 +110,7 @@ tags: [Web, Framework, Library]
 - [React Recoil](https://github.com/facebookexperimental/Recoil)
 - [Zustand: Small, fast and scalable bear-bones state-management solution](https://github.com/pmndrs/zustand)
 - [JoTai: Primitive and flexible state management for React](https://github.com/pmndrs/jotai)
+- [Valtio: Proxy-state simple for React and VanillaJS](https://github.com/pmndrs/valtio)
 
 ### React Query
 
