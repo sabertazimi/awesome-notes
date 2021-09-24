@@ -1703,6 +1703,58 @@ const MyInput: RefForwardingComponent<MyInputHandles, MyInputProps> = (
 export default React.forwardRef(MyInput);
 ```
 
+### UseDeferredValue Hook
+
+Debounce:
+
+```js
+import { useDeferredValue } from 'react';
+
+function App() {
+  const [text, setText] = useState('hello');
+
+  // Debounced value.
+  const deferredText = useDeferredValue(text, { timeoutMs: 2000 });
+
+  return (
+    <div>
+      <input value={text} onChange={handleChange} />
+      <List text={deferredText} />
+    </div>
+  );
+}
+```
+
+### UseTransition Hook
+
+`startTransition` 回调中的更新都会被认为是**非紧急处理**,
+如果出现更紧急的更新 (User Input), 则上面的更新都会被中断,
+直到没有其他紧急操作之后才会去继续执行更新.
+
+Debounce:
+
+```js
+import { useRef, useState, useTransition } from 'react';
+import Spinner from './Spinner';
+
+function App() {
+  const input = useRef('');
+  const [searchInputValue, setSearchInputValue] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isPending, startTransition] = useTransition();
+
+  // Urgent: show what was typed.
+  setSearchInputValue(input);
+
+  // Debounced callback.
+  startTransition(() => {
+    setSearchQuery(input);
+  });
+
+  return <div>{isPending && <Spinner />}</div>;
+}
+```
+
 ### Hooks Usage Rules
 
 - only call Hooks at the top level (don't inside loops, conditions or nested functions)
