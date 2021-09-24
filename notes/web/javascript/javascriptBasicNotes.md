@@ -2315,7 +2315,7 @@ Sandbox('dom', 'event', function (box) {
 });
 ```
 
-## JavaScript DOM Basic Notes
+## JavaScript DOM API
 
 - DOM Level 0
 - DOM Level 1
@@ -2341,11 +2341,11 @@ if (document.implementation) {
 }
 ```
 
-### DOM - O
+### DOM Tree
 
-- native object: JavaScript Native e.g. Array
-- host object: provided by Browser e.g. HTML5 API
-- user-defined object
+- Native object: JavaScript Native e.g. Array.
+- Host object: provided by Browser e.g. HTML5 API.
+- User-defined object.
 
 ```html
 <table>
@@ -2396,6 +2396,13 @@ const showAlert = (type, message, duration = 3) {
 
 #### Append DOM Node
 
+| Method             | Node | HTML | Text | IE  | Event Listeners | Secure  |
+| ------------------ | ---- | ---- | ---- | --- | --------------- | ------- |
+| append             | Yes  | No   | Yes  | No  | Preserves       | Yes     |
+| appendChild        | Yes  | No   | No   | Yes | Preserves       | Yes     |
+| innerHTML          | No   | Yes  | Yes  | Yes | Loses           | Careful |
+| insertAdjacentHTML | No   | Yes  | Yes  | Yes | Preserves       | Careful |
+
 ```javascript
 var testDiv = document.getElementById('testDiv');
 
@@ -2445,9 +2452,11 @@ node.replaceChild(document.createTextNode(text), node.firstChild);
 node.replaceChildren(...nodeList);
 ```
 
-#### node
+#### DOM Node Type
 
-node 除包括元素结点(tag)外，包括许多其它结点(甚至空格符视作一个结点),需借助 nodeType 找出目标结点
+Node 除包括元素结点 (tag) 外,
+包括许多其它结点 (甚至空格符视作一个结点),
+需借助 nodeType 找出目标结点.
 
 ```js
 node.nodeType;
