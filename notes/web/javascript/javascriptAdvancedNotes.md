@@ -24,7 +24,7 @@ tags: [Web, JavaScript, ECMAScript]
 - 另一方面规定, let/const/class 声明的全局变量,
   不属于全局对象的属性, 意味着不会`Hoisting`.
 
-#### let
+#### Let Variable
 
 - 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError
 - 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone)
@@ -40,7 +40,7 @@ b = 3; // temporal dead zone: throw reference error
 let b = 2;
 ```
 
-#### const
+#### Const Variable
 
 - const 一旦声明变量，就必须立即初始化，不能留到以后赋值
 - 引用一个`Reference`变量时，只表示此变量地址不可变，但所引用变量的值/属性可变
@@ -50,10 +50,14 @@ let b = 2;
 
 ### Destructuring Pattern Matching
 
-- **建议只要有可能，就不要在模式中放置圆括号**
-- 赋值语句的非模式部分，可以使用圆括号
+- **建议只要有可能，就不要在模式中放置圆括号**.
+- 赋值语句的非模式部分，可以使用圆括号.
+- Every time access value via `.`:
+  stop and think whether use destructuring instead.
+- Destructure as early as possible.
+- Remember to include default values, especially in nested destructuring.
 
-#### 默认值
+#### Default Value in Destructuring
 
 - ES6 内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
 - 如果一个数组成员不严格等于 undefined，默认值不会生效
@@ -73,19 +77,18 @@ let [x = 1, y = x] = [1, 2]; // x=1; y=2
 let [x = y, y = 1] = []; // ReferenceError
 ```
 
-#### Sample
-
-##### swap
+#### Swap Value with Destructuring
 
 ```js
 [x, y] = [y, x];
 ```
 
-##### 简化函数的参数与返回值
+#### Function Parameters and Return Value Destructuring
 
-- 可用于工厂(factory)/设置(options)模式: 传参一般为 options 对象，具有固定的属性名
-- 一次性定义多个参数
-- 一次性定义多个参数的默认值
+- 可用于工厂 (`factory`) / 设置 (`options`) 模式传参一般为 `options` 对象,
+- 具有固定的属性名.
+- 一次性定义多个参数.
+- 一次性定义多个参数的默认值.
 
 ```js
 // 参数是一组有次序的值
@@ -127,7 +130,28 @@ function example() {
 const { foo, bar } = example();
 ```
 
-##### 解析 JSON 对象
+```js
+function add([x, y]) {
+  return x + y;
+}
+add([1, 2]) // 3
+  [([1, 2], [3, 4])].map(([a, b]) => a + b);
+// [ 3, 7 ]
+
+function move({ x = 0, y = 0 } = {}) {
+  return [x, y];
+}
+move({ x: 3, y: 8 }); // [3, 8]
+move({ x: 3 }); // [3, 0]
+move({}); // [0, 0]
+move(); // [0, 0]
+
+// 严格为 undefined 时，触发默认值设置
+[1, undefined, 3].map((x = 'yes') => x);
+// [ 1, 'yes', 3 ]
+```
+
+#### Parse JSON Object with Destructuring
 
 ```js
 const jsonData = {
@@ -142,7 +166,7 @@ console.log(id, status, number);
 // 42, "OK", [867, 5309]
 ```
 
-##### Traverse Map and List
+#### Traverse Map and List with Destructuring
 
 - `for index in Iterable<T>`: key.
 - `for [key, value] of Iterable<T>`: entry.
@@ -169,19 +193,19 @@ for (let [, value] of map) {
 }
 ```
 
-##### 加载特定模块
+#### Import with Destructuring
 
 ```js
 const { SourceMapConsumer, SourceNode } = require('source-map');
 ```
 
-#### Array Iterator Style Matching
+#### Array Iterator Destructuring
 
-等号右边必须为数组等实现了 Iterator 接口的对象,否则报错
+等号右边必须为数组等实现了 Iterator 接口的对象, 否则报错:
 
-- Array
-- Set
-- Generator 函数
+- Array.
+- Set.
+- Generator function.
 
 ```js
 const [foo, [[bar], baz]] = [1, [[2], 3]];
@@ -220,16 +244,16 @@ const [first, second, third, fourth, fifth, sixth] = fibs();
 sixth; // 5
 ```
 
-#### Object Style Matching
+#### Object Destructuring
 
-- 真正被赋值的是后者，而不是前者
+- 真正被赋值的是后者，而不是前者.
 
 ```js
 const { pattern: variable } = { key: value };
 ```
 
-- 解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象
-- undefined/null 无法转化为对象
+- 解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象.
+- undefined/null 无法转化为对象.
 
 ```js
 const { prop: x } = undefined; // TypeError
@@ -261,7 +285,7 @@ l; // 'world'
 const { log, sin, cos } = Math;
 ```
 
-#### String Style Matching
+#### String Destructuring
 
 ```js
 const [a, b, c, d, e] = 'hello';
@@ -275,9 +299,9 @@ let { length: len } = 'hello';
 len; // 5
 ```
 
-#### Number and Boolean Style Matching
+#### Number and Boolean Destructuring
 
-number/boolean 会转化成对象
+`number`/`boolean` 会转化成对象:
 
 ```js
 let { toString: s } = 123;
@@ -285,29 +309,6 @@ s === Number.prototype.toString; // true
 
 let { toString: s } = true;
 s === Boolean.prototype.toString; // true
-```
-
-#### Function Arguments Style Matching
-
-```js
-function add([x, y]) {
-  return x + y;
-}
-add([1, 2]) // 3
-  [([1, 2], [3, 4])].map(([a, b]) => a + b);
-// [ 3, 7 ]
-
-function move({ x = 0, y = 0 } = {}) {
-  return [x, y];
-}
-move({ x: 3, y: 8 }); // [3, 8]
-move({ x: 3 }); // [3, 0]
-move({}); // [0, 0]
-move(); // [0, 0]
-
-// 严格为 undefined 时，触发默认值设置
-[1, undefined, 3].map((x = 'yes') => x);
-// [ 1, 'yes', 3 ]
 ```
 
 ### Logical Operators
@@ -329,7 +330,7 @@ move(); // [0, 0]
   With the `??=`, if left-side value is `null` or `undefined`,
   right-side expression is assigned to left side.
 
-### String
+### ES6 String
 
 ```js
 'z' === 'z'; // true
@@ -339,7 +340,7 @@ move(); // [0, 0]
 '\u{7A}' === 'z'; // true
 ```
 
-#### Methods
+#### String Methods
 
 - string.codePointAt(index): 正确处理 4 字节存储字符
 - string.fromCodePoint(codePoint)
