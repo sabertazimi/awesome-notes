@@ -486,7 +486,7 @@ tags: [Web, Framework, Library]
 
 ## Animation
 
-- [React Spring](https://github.com/react-spring/react-spring)
+- [React Spring](https://github.com/pmndrs/react-spring)
 - [Framer Motion](https://github.com/framer/motion)
 - [Popmotion](https://github.com/popmotion/popmotion)
 - [React Transition Group](https://github.com/reactjs/react-transition-group)
@@ -642,6 +642,7 @@ tags: [Web, Framework, Library]
 
 ## Canvas
 
+- [React Three Fiber: React renderer for Three.js](https://github.com/pmndrs/react-three-fiber)
 - [HTML2Canvas](https://github.com/niklasvh/html2canvas)
 - [Rough.js](https://github.com/pshihn/rough)
 - [Canvas Manipulation](https://github.com/meltingice/CamanJS)
