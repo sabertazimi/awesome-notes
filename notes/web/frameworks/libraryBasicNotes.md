@@ -221,6 +221,14 @@ tags: [Web, Framework, Library]
 
 ## CSS Utils
 
+### CSS Design Tools
+
+- [CodyHouse components](https://codyhouse.co)
+- [Awesome design tools](https://github.com/LisaDziuba/Awesome-Design-Tools)
+- [Need design resources](https://neede.co/#/)
+- [Interface design resources](https://interfacer.xyz)
+- [CC Create](https://cccreate.co/)
+
 ### Ordinary CSS Utils
 
 - [CSS Normalize](https://github.com/necolas/normalize.css)
@@ -236,13 +244,6 @@ tags: [Web, Framework, Library]
 - [Linaria: Zero-runtime CSS-in-TypeScript library](https://github.com/callstack/linaria)
 - [Vanilla Extract: Zero-runtime CSS-in-TypeScript](https://github.com/seek-oss/vanilla-extract)
 - [Compiled: Performant compile time CSS-in-TypeScript library](https://github.com/atlassian-labs/compiled)
-
-### CSS Design Tools
-
-- [CodyHouse components](https://codyhouse.co)
-- [Awesome design tools](https://github.com/LisaDziuba/Awesome-Design-Tools)
-- [Need design resources](https://neede.co/#/)
-- [Interface design resources](https://interfacer.xyz)
 
 ### Color Utils
 
@@ -279,6 +280,11 @@ tags: [Web, Framework, Library]
 - [Doodle: Web component for drawing patterns with CSS](https://github.com/css-doodle/css-doodle)
 - [Clippy: Clip-Path Maker](https://github.com/bennettfeely/Clippy)
 - [Wicked Background](https://wickedbackgrounds.com/backgrounds.html)
+
+### Clip and Shapes Utils
+
+- [Clippy: Clip-path editor](https://github.com/bennettfeely/Clippy)
+- [Fancy Border Radius](https://github.com/9elements/fancy-border-radius)
 
 ## Components
 
