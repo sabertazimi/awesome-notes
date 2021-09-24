@@ -603,6 +603,12 @@ function App() {
 
 #### React Children API
 
+- `React.Children.toArray(children)`.
+- `React.Children.forEach(children, fn)`.
+- `React.Children.map(children, fn)`.
+- `React.Children.count(children)`.
+- `React.Children.only(children)`.
+
 ```jsx
 import { Children, cloneElement } from 'react';
 
