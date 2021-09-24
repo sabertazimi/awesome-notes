@@ -224,11 +224,11 @@ tags: [Web, Framework, Library]
 
 ### CSS Design Tools
 
-- [CodyHouse components](https://codyhouse.co)
 - [Awesome design tools](https://github.com/LisaDziuba/Awesome-Design-Tools)
-- [Need design resources](https://neede.co/#/)
+- [CodyHouse components](https://codyhouse.co)
+- [CC Create](https://cccreate.co)
+- [Need design resources](https://neede.co)
 - [Interface design resources](https://interfacer.xyz)
-- [CC Create](https://cccreate.co/)
 
 ### Ordinary CSS Utils
 
@@ -248,7 +248,7 @@ tags: [Web, Framework, Library]
 
 ### Color Utils
 
-- [Chroma: All kinds of color manipulations](https://github.com/gka/chroma.js/)
+- [Chroma: All kinds of color manipulations](https://github.com/gka/chroma.js)
 - [Color: Color conversion and manipulation](https://github.com/Qix-/color)
 - [Culori: Color conversion, interpolation, difference formulas, blending functions](https://github.com/Evercoder/culori)
 - [CloudFlareColor: Online website color palette grab tool](https://github.com/cloudflare/color)
@@ -759,7 +759,7 @@ tags: [Web, Framework, Library]
 
 ### File Downloader
 
-- [FileSaver: HTML5 `saveAs` implementation](https://github.com/eligrey/FileSaver.js/)
+- [FileSaver: HTML5 `saveAs` implementation](https://github.com/eligrey/FileSaver.js)
 - [You Get](https://github.com/soimort/you-get)
 - [Motrix](https://github.com/agalwood/Motrix)
 
