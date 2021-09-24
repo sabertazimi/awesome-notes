@@ -951,6 +951,7 @@ tags: [Web, Framework, Library]
 - [Cross Origin Resource Sharing](https://github.com/expressjs/cors)
 - [Cross Site Request Forgery Protection](https://github.com/expressjs/csurf)
 - [JWT](https://github.com/auth0/node-jsonwebtoken)
+- [PassportJS: Simple, unobtrusive authentication for Node.js](https://github.com/jaredhanson/passport)
 - [Morgan: Express official logger](https://github.com/expressjs/morgan)
 - [Pino: Super fast, all natural json logger](https://github.com/pinojs/pino)
 - [HTTP Proxy](https://github.com/chimurai/http-proxy-middleware)
