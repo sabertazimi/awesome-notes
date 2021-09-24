@@ -1988,6 +1988,10 @@ const fluxStandardAction = {
 - Complex UI Change: 用 component 归一化处理
 - Complex Data Input: 用 RxJS/observable 归一化处理
 - Complex State Change: 用 action/state 归一化处理
+- `Jotai`/`Recoil`:
+  Split state into different atoms.
+  Atoms can be imported for any specific component **without single-entry point**.
+  Each atom handling different app domain/context (reducer).
 
 ## Redux Tools
 
