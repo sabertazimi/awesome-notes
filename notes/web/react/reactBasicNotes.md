@@ -3907,6 +3907,53 @@ class App extends React.Component {
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
+### Concurrent Mode
+
+```js
+import * as ReactDOM from 'react-dom';
+import App from 'App';
+
+// Create a root by using ReactDOM.createRoot():
+const root = ReactDOM.createRoot(document.getElementById('app'));
+
+// Render the main <App/> element to the root:
+root.render(<App />);
+```
+
+Automatic batching in promises, async code and native event handlers:
+
+```js
+function handleClick() {
+  // React 17: Re-rendering happens after both of the states are updated.
+  // This is called batching.
+  // This is also the default behavior of React 18.
+  setIsBirthday(b => !b);
+  setAge(a => a + 1);
+}
+
+// For the following code blocks,
+// React 18 does automatic batching, but React 17 doesn't.
+// 1. Promises:
+function handleClick() {
+  fetchSomething().then(() => {
+    setIsBirthday(b => !b);
+    setAge(a => a + 1);
+  });
+}
+
+// 2. Async code:
+setInterval(() => {
+  setIsBirthday(b => !b);
+  setAge(a => a + 1);
+}, 5000);
+
+// 3. Native event handlers:
+element.addEventListener('click', () => {
+  setIsBirthday(b => !b);
+  setAge(a => a + 1);
+});
+```
+
 ## React Performance
 
 ### React Performance Mental Model
