@@ -3881,7 +3881,8 @@ Load 也不一定代表用户看到主要内容.
 - [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools)
 - [FID Tracking](https://github.com/GoogleChromeLabs/first-input-delay)
 - [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
-- [Lighthouse audit tab)](https://github.com/GoogleChrome/lighthouse)
+- [Lighthouse Audit Tab)](https://github.com/GoogleChrome/lighthouse)
+- [LightHouse CI Action](https://github.com/treosh/lighthouse-ci-action)
 
 ### Data Format and Size
 
@@ -9558,4 +9559,5 @@ describe('payment', () => {
 
 ### Cypress Reference
 
-- [Blank page test](https://glebbahmutov.com/blog/visit-blank-page-between-tests)
+- Blank page [testing](https://glebbahmutov.com/blog/visit-blank-page-between-tests).
+- Cypress CI [action](https://github.com/cypress-io/github-action).

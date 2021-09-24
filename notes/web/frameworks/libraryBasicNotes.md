@@ -1131,21 +1131,37 @@ tags: [Web, Framework, Library]
 - [Chokidar: Minimal cross-platform file watching library](https://github.com/paulmillr/chokidar)
 - [ACT: Local GitHub action runner](https://github.com/nektos/act)
 
-#### GitHub Actions
+### GitHub Actions
 
-- [Checkout Action](https://github.com/actions/checkout)
-- [Node Action](https://github.com/actions/setup-node)
-- [CodeQL Action](https://github.com/github/codeql-action)
-- [GitHub Pages](https://github.com/peaceiris/actions-gh-pages)
+#### Basic Actions
+
+- [Checkout](https://github.com/actions/checkout)
+- [Node](https://github.com/actions/setup-node)
+
+#### Project Actions
+
+- [Lock Threads](https://github.com/dessant/lock-threads)
+- [Stale Bot](https://github.com/actions/stale)
 - [Issues Helper](https://github.com/actions-cool/issues-helper)
-- [Lock Action](https://github.com/dessant/lock-threads)
-- [Stale Action](https://github.com/actions/stale)
 - [PR Creator](https://github.com/peter-evans/create-pull-request)
-- [Auto Approve Review](https://github.com/hmarr/auto-approve-action)
-- [Auto Approve Workflow](https://github.com/mheap/automatic-approve-action)
-- [NPM Publish Action](https://github.com/JS-DevTools/npm-publish)
-- [Limit Bundle Size](https://github.com/andresz1/size-limit-action)
+- [Approve Review](https://github.com/hmarr/auto-approve-action)
+- [Approve Workflow](https://github.com/mheap/automatic-approve-action)
+
+#### Testing Actions
+
+- [Cypress E2E Testing](https://github.com/cypress-io/github-action)
+- [LightHouse Report](https://github.com/treosh/lighthouse-ci-action)
+
+#### Analysis Actions
+
+- [CodeQL Analysis](https://github.com/github/codeql-action)
 - [Compressed Bundle Size](https://github.com/preactjs/compressed-size-action)
+- [Limit Bundle Size](https://github.com/andresz1/size-limit-action)
+
+#### Deployment Actions
+
+- [GitHub Pages](https://github.com/peaceiris/actions-gh-pages)
+- [NPM Publish](https://github.com/JS-DevTools/npm-publish)
 
 ### DevOps Config Tools
 
