@@ -1762,6 +1762,8 @@ function App() {
 
 ### Hooks Internal
 
+`hooks` 的值都存在组件的 `fiberNode` 的 `memorizedState` 属性上.
+
 ```jsx
 const MyReact = (function () {
   let hooks = [],
