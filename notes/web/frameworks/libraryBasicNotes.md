@@ -1016,6 +1016,7 @@ tags: [Web, Framework, Library]
 - [CodeCrumbs](https://github.com/Bogdan-Lyashenko/codecrumbs)
 - [PMD: Extensible multi-language static code analyzer](https://github.com/pmd/pmd)
 - [Java SpotBugs](https://github.com/spotbugs/spotbugs)
+- [Code2Flow: Call graphs generation for dynamic languages](https://github.com/scottrogowski/code2flow)
 
 ### Code Coverage Tools
 
