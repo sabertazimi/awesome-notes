@@ -182,6 +182,7 @@ tags: [Web, Framework, Library]
 
 ### Hash Utils
 
+- [NanoID](https://github.com/ai/nanoid)
 - [UUID](https://github.com/uuidjs/uuid)
 
 ### Functional Programming Utils
