@@ -1153,6 +1153,7 @@ tags: [Web, Framework, Library]
 
 - [Checkout](https://github.com/actions/checkout)
 - [Node](https://github.com/actions/setup-node)
+- [Add and Commit](https://github.com/EndBug/add-and-commit)
 
 #### Project Actions
 
