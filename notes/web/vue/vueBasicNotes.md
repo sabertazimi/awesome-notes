@@ -142,6 +142,45 @@ Vue.createApp({
 }).mount('#inline-handler');
 ```
 
+Custom events:
+
+```js
+app.component('custom-form', {
+  emits: {
+    // 没有验证
+    click: null,
+
+    // 验证 submit 事件
+    submit: ({ email, password }) => {
+      if (email && password) {
+        return true;
+      } else {
+        console.warn('Invalid submit event payload!');
+        return false;
+      }
+    },
+  },
+  methods: {
+    customEvent() {
+      this.$emit('custom-event');
+    },
+    submitForm(email, password) {
+      this.$emit('submit', { email, password });
+    },
+  },
+});
+```
+
+```html
+<custom-form
+  @click="handleClick"
+  @submit="handleSubmit"
+  @custom-event="handleEvent"
+></custom-form>
+```
+
+### Modal Directives
+
 ## Components
 
 ### Computed Value
