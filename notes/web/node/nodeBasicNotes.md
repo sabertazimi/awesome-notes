@@ -373,6 +373,21 @@ npx gistUrl
   低版本的包会分散在某些依赖的 `node_modules` 目录.
 - **lockfile** 的存在, 保证了项目依赖结构的确定性, 保障了项目在多环境运行的稳定性.
 
+#### NPM Ghost Dependencies
+
+- Imported packages from `dependencies of dependencies`:
+  When update `dependencies` to minor version,
+  `dependencies of dependencies` may get major BREAKING version
+  (It's legal for `semver`, when `dependencies` API don't change).
+- Imported packages from `devDependencies`:
+  When others install your library,
+  such imported packages will missing,
+  cause they aren't located in library `package.json`.
+- Imported packages from root `node_modules` in monorepo.
+  When others install your library,
+  such imported packages will missing,
+  cause they aren't located in library `package.json`.
+
 #### NPM Invalid Dependencies
 
 ```bash
