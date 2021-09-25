@@ -1178,6 +1178,7 @@ tags: [Web, Framework, Library]
 
 #### Deployment Actions
 
+- [GitHub Release](https://github.com/softprops/action-gh-release)
 - [GitHub Pages](https://github.com/peaceiris/actions-gh-pages)
 - [NPM Publish](https://github.com/JS-DevTools/npm-publish)
 
