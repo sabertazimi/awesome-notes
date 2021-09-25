@@ -24,6 +24,9 @@ tags: [Web, Vue]
   <p v-else>Out of Stock</p>
   <ul>
     <li v-for="item in items" :key="item.id">{{ item.value }}</li>
+    <li v-for="(item, index) in items">
+      {{ parentMessage }} - {{ index }} - {{ item.message }}
+    </li>
   </ul>
 </template>
 ```
@@ -137,6 +140,53 @@ Vue.createApp({
     },
   },
 }).mount('#inline-handler');
+```
+
+## Components
+
+### Computed Value
+
+```html
+<div id="computed-basics">
+  <p>Has published books:</p>
+  <span>{{ publishedBooksMessage }}</span>
+</div>
+```
+
+```js
+Vue.createApp({
+  data() {
+    return {
+      author: {
+        name: 'John Doe',
+        books: [
+          'Vue 2 - Advanced Guide',
+          'Vue 3 - Basic Guide',
+          'Vue 4 - The Mystery',
+        ],
+      },
+    };
+  },
+  computed: {
+    // 计算属性的 getter
+    publishedBooksMessage() {
+      // `this` 指向 vm 实例
+      return this.author.books.length > 0 ? 'Yes' : 'No';
+    },
+    fullName: {
+      // getter
+      get() {
+        return this.firstName + ' ' + this.lastName;
+      },
+      // setter
+      set(newValue) {
+        const names = newValue.split(' ');
+        this.firstName = names[0];
+        this.lastName = names[names.length - 1];
+      },
+    },
+  },
+}).mount('#computed-basics');
 ```
 
 ## Slots
