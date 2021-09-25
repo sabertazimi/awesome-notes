@@ -183,6 +183,11 @@ app.component('custom-form', {
 
 本质为语法糖:
 
+```html
+<input v-model="searchText" />
+<input :value="searchText" @input="searchText = $event.target.value" />
+```
+
 - `checkbox`/`radio`:
   `checked` property and `@change` event.
 - Multiple `checkbox`:
@@ -225,6 +230,29 @@ app.component('custom-form', {
 <input v-model.number="age" type="number" />
 <!-- 自动过滤用户输入的首尾空白字符 -->
 <input v-model.trim="msg" /
+```
+
+Component `v-model` directive:
+
+```html
+<custom-input v-model="searchText"></custom-input>
+<custom-input
+  :model-value="searchText"
+  @update:model-value="searchText = $event"
+></custom-input>
+```
+
+```js
+app.component('custom-input', {
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
+  template: `
+    <input
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
+    >
+  `
+})
 ```
 
 ## Components
