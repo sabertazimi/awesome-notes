@@ -181,6 +181,52 @@ app.component('custom-form', {
 
 ### Modal Directives
 
+本质为语法糖:
+
+- `checkbox`/`radio`:
+  `checked` property and `@change` event.
+- Multiple `checkbox`:
+  value array.
+- `select`:
+  `value` property and `@change` event.
+- `text`/`textarea`:
+  `value` property and `@input` event.
+
+```html
+<input v-model="message" placeholder="edit me" />
+<textarea v-model="message" placeholder="add multiple lines"></textarea>
+
+<input type="radio" id="one" value="One" v-model="picked" />
+<input type="radio" id="two" value="Two" v-model="picked" />
+
+<input type="checkbox" id="checkbox" v-model="checked" />
+<label for="checkbox">{{ checked }}</label>
+
+<input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+<input type="checkbox" id="john" value="John" v-model="checkedNames" />
+<input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
+
+<select v-model="selected">
+  <option disabled value="">Please select one</option>
+  <option>A</option>
+  <option>B</option>
+  <option>C</option>
+</select>
+
+<select v-model="selected" multiple>
+  <option>A</option>
+  <option>B</option>
+  <option>C</option>
+</select>
+
+<!-- Debounce -->
+<input v-model.lazy="msg" />
+<!-- 自动将用户的输入值转为数值类型 -->
+<input v-model.number="age" type="number" />
+<!-- 自动过滤用户输入的首尾空白字符 -->
+<input v-model.trim="msg" /
+```
+
 ## Components
 
 ### Computed Value
