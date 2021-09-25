@@ -1161,3 +1161,22 @@ module.exports = {
   },
 };
 ```
+
+## Vue Best Practice
+
+When it comes to Vue 3,
+Evan You [recommended](https://github.com/vuejs/rfcs/discussions/378):
+
+- Use SFC + `<script setup>` + Composition API (drop Options API).
+- Use VSCode + [Volar](https://github.com/johnsoncodehk/volar).
+- Not strictly required for TS, but if applicable, use Vite for build tooling.
+
+:::tip Composition API vs Options API
+Original intention for supporting both APIs:
+existing Options-API-based codebases can benefit from Composition API-based libraries,
+It's not for new codebases to mix Composition API and Options API.
+
+Intentionally mixing Composition API and Options API
+should be avoided except in existing Options API codebases,
+to either replace mixins or leverage a Composition API-based library.
+:::
