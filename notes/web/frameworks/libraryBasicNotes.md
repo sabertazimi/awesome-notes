@@ -329,7 +329,8 @@ tags: [Web, Framework, Library]
 
 ### Comments System
 
-- [Utterances: GitHub Issue Based Comments Widget](https://github.com/utterance/utterances)
+- [GitTalk: Modern comment component based on Github Issue and Preact](https://github.com/gitalk/gitalk)
+- [Utterances: Lightweight comments widget built on GitHub issues](https://github.com/utterance/utterances)
 - [Disqus](https://github.com/disqus/disqus-react)
 
 ### Modal
