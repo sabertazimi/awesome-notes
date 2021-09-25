@@ -241,6 +241,28 @@ yarn husky install
 yarn husky add .husky/commit-msg 'yarn commitlint --edit "$1"'
 ```
 
+[Husky](https://github.com/typicode/husky):
+
+```bash
+npx husky-init
+npx husky add .husky/pre-commit "lint-staged"
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
+```
+
+```json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
+    "*.{md,mdx}": ["prettier --write"]
+  }
+}
+```
+
 ### Git Commit Emoji
 
 - [GitEmoji](https://github.com/carloscuesta/gitmoji)
