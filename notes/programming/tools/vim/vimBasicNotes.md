@@ -926,17 +926,22 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim
 nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 ```
 
-### NeoVim Language Server
+### NeoVim Language server
+
+[LSPConfig](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md):
 
 ```bash
 # html cssls jsonls
 npm i -g vscode-langservers-extracted
 
 # tsserver
-npm install -g typescript typescript-language-server
+npm i -g typescript typescript-language-server
+
+# volar: Vue SFC
+npm i -g @volar/server
 ```
 
-With [LSPInstall](https://github.com/kabouzeid/nvim-lspinstall):
+[LSPInstall](https://github.com/kabouzeid/nvim-lspinstall):
 
 ```bash
 :LspInstall typescript
