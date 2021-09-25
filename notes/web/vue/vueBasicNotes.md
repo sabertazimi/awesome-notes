@@ -56,6 +56,89 @@ tags: [Web, Vue]
 </template>
 ```
 
+### Event Handlers Directive
+
+```html
+<div id="handler">
+  <button @click="warn('Warn message.', $event)">Submit</button>
+  <button @click="one($event), two($event)">Submit</button>
+
+  <!-- 阻止单击事件继续传播 -->
+  <a @click.stop="doThis"></a>
+
+  <!-- 提交事件不再重载页面 -->
+  <form @submit.prevent="onSubmit"></form>
+
+  <!-- 修饰符可以串联 -->
+  <a @click.stop.prevent="doThat"></a>
+
+  <!-- 只有修饰符 -->
+  <form @submit.prevent></form>
+
+  <!-- 添加事件监听器时使用事件捕获模式 -->
+  <!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 -->
+  <div @click.capture="doThis">...</div>
+
+  <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+  <!-- 即事件不是从内部元素触发的 -->
+  <div @click.self="doThat">...</div>
+
+  <!-- 点击事件将只会触发一次 -->
+  <a @click.once="doThis"></a>
+
+  <!-- 滚动事件的默认行为 (即滚动行为) 将会立即触发   -->
+  <!-- 而不会等待 `onScroll` 完成                   -->
+  <!-- 这其中包含 `event.preventDefault()` 的情况   -->
+  <div @scroll.passive="onScroll">...</div>
+
+  <input @keyup.enter="submit" />
+  <input @keyup.tab="submit" />
+  <input @keyup.delete="submit" />
+  <input @keyup.esc="submit" />
+  <input @keyup.space="submit" />
+  <input @keyup.up="submit" />
+  <input @keyup.down="submit" />
+  <input @keyup.left="submit" />
+  <input @keyup.right="submit" />
+  <input @keyup.page-down="onPageDown" />
+  <input @keyup.ctrl.enter="clear" />
+  <input @keyup.alt.space="clear" />
+  <input @keyup.shift.up="clear" />
+  <input @keyup.meta.right="clear" />
+
+  <!-- Ctrl + Click -->
+  <div @click.ctrl="doSomething">Do something</div>
+  <!-- 即使 Alt 或 Shift 被一同按下时也会触发 -->
+  <button @click.ctrl="onClick">A</button>
+  <!-- 有且只有 Ctrl 被按下的时候才触发 -->
+  <button @click.ctrl.exact="onCtrlClick">A</button>
+  <!-- 没有任何系统修饰符被按下的时候才触发 -->
+  <button @click.exact="onClick">A</button>
+  <button @click.left="onClick">Left click</button>
+  <button @click.right="onClick">Right click</button>
+  <button @click.middle="onClick">Middle click</button>
+</div>
+```
+
+```js
+Vue.createApp({
+  methods: {
+    warn(message, event) {
+      if (event) event.preventDefault();
+      alert(message);
+    },
+    one(event) {
+      if (event) event.preventDefault();
+      console.log('one');
+    },
+    two(event) {
+      if (event) event.preventDefault();
+      console.log('two');
+    },
+  },
+}).mount('#inline-handler');
+```
+
 ## Slots
 
 - [Web Slot](https://developers.google.com/web/fundamentals/web-components/shadowdom#slots)
