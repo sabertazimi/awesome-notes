@@ -1101,7 +1101,7 @@ Array.from(el.getElementsByTagName('input'))
 
 ## Vue CLI
 
-### SCSS Config
+### SCSS Configuration
 
 [Build with Bulma](https://css-tricks.com/how-to-increase-your-page-size-by-1500-with-webpack-and-vue):
 
