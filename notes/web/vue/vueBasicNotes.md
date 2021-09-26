@@ -478,6 +478,66 @@ const MyComponent = san.defineComponent({
 }
 ```
 
+### Transition Hooks
+
+`:css="false"` tells Vue don't handle transition classes,
+we're relying on JavaScript hooks instead.
+
+When it comes to JavaScript animation library,
+transition JavaScript hooks helps a lot.
+
+```html
+<transition
+  @before-enter="beforeEnter"
+  @enter="enter"
+  @after-enter="afterEnter"
+  @enter-cancelled="enterCancelled"
+  @before-leave="beforeLeave"
+  @leave="leave"
+  @after-leave="afterLeave"
+  @leave-cancelled="leaveCancelled"
+  :css="false"
+>
+  <div>Modal</div>
+</transition>
+
+<transition-group
+  @before-enter="beforeEnter"
+  @enter="enter"
+  @after-enter="afterEnter"
+  @enter-cancelled="enterCancelled"
+  @before-leave="beforeLeave"
+  @leave="leave"
+  @after-leave="afterLeave"
+  @leave-cancelled="leaveCancelled"
+  :css="false"
+>
+  >
+  <div class="card" v-for="card in cards" :key="card.id">
+    <p>{{ card.title }}</p>
+  </div>
+</transition-group>
+```
+
+```ts
+export default {
+  methods: {
+    beforeEnter(el) {},
+    enter(el, done) {
+      done();
+    },
+    afterEnter(el) {},
+    enterCancelled(el) {},
+    beforeLeave(el) {},
+    leave(el, done) {
+      done();
+    },
+    afterLeave(el) {},
+    leaveCancelled(el) {},
+  },
+};
+```
+
 ## Modern Vue
 
 ### Suspense
