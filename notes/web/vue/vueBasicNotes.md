@@ -381,6 +381,185 @@ const MyComponent = san.defineComponent({
 </template>
 ```
 
+## Vue Router
+
+### Basic Router
+
+```ts
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import Home from '../views/Home.vue';
+
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: () =>
+      import(/* webpackChunkName: "about" */ '../views/About.vue'),
+  },
+];
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes,
+});
+
+export default router;
+```
+
+```ts
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+
+createApp(App).use(store).use(router).mount('#app');
+```
+
+### Dynamic Router
+
+```ts
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import Home from '../views/Home.vue';
+import EventDetails from '../views/EventDetails.vue';
+
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+  },
+  {
+    path: '/event/:id',
+    name: 'EventDetails',
+    props: true,
+    component: EventDetails,
+  },
+];
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes,
+});
+
+export default router;
+```
+
+```html
+<template>
+  <router-link
+    class="event-link"
+    :to="{ name: 'EventDetails', params: { id: event.id } }"
+  >
+    <div class="event-card">
+      <span>@{{ event.time }} on {{ event.date }}</span>
+      <h4>{{ event.title }}</h4>
+    </div>
+  </router-link>
+</template>
+```
+
+```html
+<script setup lang="ts">
+import { useRoute } from 'vue-router';
+import { getEvent } from '@/services';
+import type { Event } from '@/services';
+
+const route = useRoute();
+const event: Event = await getEvent(route.params.id);
+</script>
+```
+
+### Navigation Guard Router
+
+- [Official Documentation of Router Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html)
+
+## Vue CLI
+
+### SCSS Configuration
+
+[Build with Bulma](https://css-tricks.com/how-to-increase-your-page-size-by-1500-with-webpack-and-vue):
+
+Every element and every style for this scoped styled component
+will have a `data-v-2929` on them at runtime.
+If import a Sass file into component that has actual styles in it,
+Vue (via webpack) will pull in those styles and
+"namespace" them with that dynamic `data-` attribute.
+The result is that is include `Bulma` in your **many** times
+with a bunch of `data-v` weirdness in front of it.
+
+```css
+/* bulma-custom.scss */
+@import './variables.scss';
+
+/* UTILITIES */
+@import 'bulma/sass/utilities/animations.sass';
+@import 'bulma/sass/utilities/controls.sass';
+@import 'bulma/sass/utilities/mixins.sass';
+
+/* etc... */
+```
+
+```css
+/* site.scss */
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+@import './bulma-custom.scss';
+
+html,
+body {
+  height: 100%;
+  background-color: #f9fafc;
+}
+
+/* etc... */
+```
+
+```js
+// main.js
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+
+// import styles
+import '@/styles/site.scss';
+```
+
+```js
+// webpack.config.js
+module.exports = {
+  css: {
+    loaderOptions: {
+      sass: {
+        data: `@import "@/styles/variables.scss";`,
+      },
+    },
+  },
+};
+```
+
+## Vue Best Practice
+
+When it comes to Vue 3,
+Evan You [recommended](https://github.com/vuejs/rfcs/discussions/378):
+
+- Use SFC + `<script setup>` + Composition API (drop Options API).
+- Use VSCode + [Volar](https://github.com/johnsoncodehk/volar).
+- Not strictly required for TS, but if applicable, use Vite for build tooling.
+
+:::tip Composition API vs Options API
+Original intention for supporting both APIs:
+existing Options-API-based codebases can benefit from Composition API-based libraries,
+It's not for new codebases to mix Composition API and Options API.
+
+Intentionally mixing Composition API and Options API
+should be avoided except in existing Options API codebases,
+to either replace mixins or leverage a Composition API-based library.
+:::
+
 ## Vue Internal
 
 ### Vue Constructor
@@ -1118,91 +1297,3 @@ Array.from(el.getElementsByTagName('input'))
     };
   });
 ```
-
-## Vue Router
-
-### Navigation Guard Router
-
-- [Official Documentation of Router Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html)
-
-## Vue CLI
-
-### SCSS Configuration
-
-[Build with Bulma](https://css-tricks.com/how-to-increase-your-page-size-by-1500-with-webpack-and-vue):
-
-Every element and every style for this scoped styled component
-will have a `data-v-2929` on them at runtime.
-If import a Sass file into component that has actual styles in it,
-Vue (via webpack) will pull in those styles and
-"namespace" them with that dynamic `data-` attribute.
-The result is that is include `Bulma` in your **many** times
-with a bunch of `data-v` weirdness in front of it.
-
-```css
-/* bulma-custom.scss */
-@import './variables.scss';
-
-/* UTILITIES */
-@import 'bulma/sass/utilities/animations.sass';
-@import 'bulma/sass/utilities/controls.sass';
-@import 'bulma/sass/utilities/mixins.sass';
-
-/* etc... */
-```
-
-```css
-/* site.scss */
-@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
-@import './bulma-custom.scss';
-
-html,
-body {
-  height: 100%;
-  background-color: #f9fafc;
-}
-
-/* etc... */
-```
-
-```js
-// main.js
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
-
-// import styles
-import '@/styles/site.scss';
-```
-
-```js
-// webpack.config.js
-module.exports = {
-  css: {
-    loaderOptions: {
-      sass: {
-        data: `@import "@/styles/variables.scss";`,
-      },
-    },
-  },
-};
-```
-
-## Vue Best Practice
-
-When it comes to Vue 3,
-Evan You [recommended](https://github.com/vuejs/rfcs/discussions/378):
-
-- Use SFC + `<script setup>` + Composition API (drop Options API).
-- Use VSCode + [Volar](https://github.com/johnsoncodehk/volar).
-- Not strictly required for TS, but if applicable, use Vite for build tooling.
-
-:::tip Composition API vs Options API
-Original intention for supporting both APIs:
-existing Options-API-based codebases can benefit from Composition API-based libraries,
-It's not for new codebases to mix Composition API and Options API.
-
-Intentionally mixing Composition API and Options API
-should be avoided except in existing Options API codebases,
-to either replace mixins or leverage a Composition API-based library.
-:::
