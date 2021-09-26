@@ -327,7 +327,7 @@ Vue.createApp({
 }).mount('#computed-basics');
 ```
 
-## Slots
+### Slots
 
 - [Web Slot](https://developers.google.com/web/fundamentals/web-components/shadowdom#slots)
 - `name` attribute.
@@ -360,6 +360,90 @@ const MyComponent = san.defineComponent({
   <main><p>one</p><p>two<a>slot fail</a></p></main>
 </div>
 */
+```
+
+## Animation and Transition
+
+- `v-enter`.
+- `v-enter-to`: CSS defaults.
+- `v-enter-active`.
+- `v-leave`: CSS defaults.
+- `v-leave-to`.
+- `v-leave-active`.
+- `name`: transition name (different from `v`).
+- `mode`:
+  - `out-in`: rectify router components transition.
+  - `in-out`.
+
+```css
+.v-enter {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 2s;
+  }
+}
+
+.v-leave-to {
+  opacity: 0;
+}
+```
+
+### Fade Transition
+
+```html
+<template>
+  <div>
+    <h1>This is the modal page</h1>
+    <button @click="toggleModal">Open</button>
+    <transition name="fade" mode="out-in">
+      <div v-if="isOpen" class="modal">
+        <p><button @click="toggleModal">Close</button></p>
+      </div>
+    </transition>
+  </div>
+</template>
+```
+
+```css
+.fade-enter {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s ease-out;
+  }
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+```
+
+### Slide Transition
+
+```css
+.slide-fade-enter {
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .slide-fade-enter-active,
+  .slide-fade-leave-active {
+    transition: all 0.2s ease;
+  }
+}
+
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-10px);
+}
 ```
 
 ## Modern Vue
