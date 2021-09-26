@@ -434,6 +434,7 @@ app.component('TodoList', {
 
 ```html
 <TodoList>
+  <!-- `default` can be other named slots -->
   <template v-slot:default="slotProps">
     <i class="fas fa-check"></i>
     <span class="green">{{ slotProps.item }}</span>
