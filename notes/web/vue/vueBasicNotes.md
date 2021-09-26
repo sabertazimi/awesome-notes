@@ -442,7 +442,8 @@ app.component('TodoList', {
 </TodoList>
 ```
 
-Slot props shorthand:
+Slot props shorthand
+(`default` can be other named slots):
 
 ```html
 <TodoList v-slot="slotProps">
