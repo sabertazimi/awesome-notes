@@ -275,6 +275,8 @@ app.component('custom-input', {
 
 ## Components
 
+- [SFC with `setup`](https://v3.vuejs.org/api/sfc-script-setup.html).
+
 ### Computed Value
 
 ```html
@@ -382,6 +384,8 @@ const MyComponent = san.defineComponent({
 ```
 
 ## Vue Router
+
+- [Composition API Reference](https://next.router.vuejs.org/guide/advanced/composition-api.html)
 
 ### Basic Router
 
