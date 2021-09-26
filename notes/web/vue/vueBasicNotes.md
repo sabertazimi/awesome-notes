@@ -429,7 +429,9 @@ createApp(App).use(store).use(router).mount('#app');
 Two methods to access route `params` in components:
 
 - Composition route API: `const { params } = useRoute()`.
-- Passing route props to component: `const props = defineProps<{ id: string }>()`.
+- Passing route props to component: `const props = defineProps<{ id: string }>()`:
+  - `props` better testing friendly.
+  - `props` better TypeScript types inference.
 
 ```html
 <template>
