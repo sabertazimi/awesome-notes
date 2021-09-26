@@ -495,14 +495,13 @@ tags: [Web, Framework, Library]
 ## Animation
 
 - [React Spring](https://github.com/pmndrs/react-spring)
-- [GreenSock](https://github.com/greensock/GreenSock-JS)
+- [GSAP: GreenSock animation platform](https://github.com/greensock/GSAP)
 - [Motion](https://www.npmjs.com/package/motion)
 - [Framer Motion](https://github.com/framer/motion)
 - [Popmotion](https://github.com/popmotion/popmotion)
 - [React Transition Group](https://github.com/reactjs/react-transition-group)
 - [Airbnb AE Solution](https://github.com/airbnb/lottie-web)
 - [Animate.css](https://github.com/daneden/animate.css)
-- [Velocity: Accelerated JavaScript animation](https://github.com/julianshapiro/velocity)
 - [Barba.js: Smooth transition between pages](https://github.com/luruke/barba.js)
 - [Tilt: Smooth 3D tilt javascript library](https://github.com/micku7zu/vanilla-tilt.js)
 - [CountUp: Count up animation](https://github.com/glennreyes/react-countup)
