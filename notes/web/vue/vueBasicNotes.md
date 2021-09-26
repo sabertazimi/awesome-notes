@@ -469,12 +469,12 @@ export default router;
 
 ```html
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
-import { getEvent } from '@/services';
-import type { Event } from '@/services';
+  import { useRoute } from 'vue-router';
+  import { getEvent } from '@/services';
+  import type { Event } from '@/services';
 
-const route = useRoute();
-const event: Event = await getEvent(route.params.id);
+  const route = useRoute();
+  const event: Event = await getEvent(route.params.id);
 </script>
 ```
 
