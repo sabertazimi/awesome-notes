@@ -333,33 +333,124 @@ Vue.createApp({
 - `name` attribute.
 - `fallback` content.
 
-```javascript
-const Tab = san.defineComponent({
-  template:
-    '<div>' +
-    '  <header><slot name="title">slot fallback content</slot></header>' +
-    '  <main><slot>slot fallback content</slot></main>' +
-    '</div>',
-});
+#### Fallback Slots
 
-const MyComponent = san.defineComponent({
-  components: {
-    'ui-tab': Tab,
-  },
+```html
+<!-- SubmitButton -->
+<button type="submit">
+  <slot>Submit</slot>
+</button>
+```
 
-  template:
-    '<div><ui-tab>' +
-    '<h3 slot="title">1</h3><p>one</p>' +
-    '<h3 slot="title">2</h3><p>two<a slot="title">slot fail</a></p>' +
-    '</ui-tab></div>',
-});
+```html
+<SubmitButton></SubmitButton>
+```
 
-/* MyComponent 渲染结果，a 元素无法被插入 title slot
-<div>
-  <header><h3>1</h3><h3>2</h3></header>
-  <main><p>one</p><p>two<a>slot fail</a></p></main>
+render to
+
+```html
+<button type="submit">Submit</button>
+```
+
+```html
+<SubmitButton>Save</SubmitButton>
+```
+
+render to
+
+```html
+<button type="submit">Save</button>
+```
+
+#### Named Slots
+
+- `#`: `v-slot` directive shorthand.
+
+```html
+<!-- Layout -->
+<div class="container">
+  <header>
+    <slot name="header"></slot>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
 </div>
-*/
+```
+
+```html
+<Layout>
+  <template v-slot:header>
+    <h1>Here might be a page title</h1>
+  </template>
+  <template v-slot:default>
+    <p>A paragraph for the main content.</p>
+    <p>And another one.</p>
+  </template>
+  <template #footer>
+    <p>Here's some contact info</p>
+  </template>
+</Layout>
+```
+
+#### Scoped Slots
+
+```js
+app.component('TodoList', {
+  data() {
+    return {
+      items: ['Feed a cat', 'Buy milk'],
+    };
+  },
+  template: `
+    <ul>
+      <li v-for="( item, index ) in items">
+        <slot :item="item"></slot>
+      </li>
+    </ul>
+  `,
+});
+```
+
+```html
+<TodoList>
+  <template v-slot:default="slotProps">
+    <i class="fas fa-check"></i>
+    <span class="green">{{ slotProps.item }}</span>
+  </template>
+</TodoList>
+```
+
+Slot props shorthand:
+
+```html
+<TodoList v-slot="slotProps">
+  <i class="fas fa-check"></i>
+  <span class="green">{{ slotProps.item }}</span>
+</TodoList>
+
+<TodoList v-slot="{ item }">
+  <i class="fas fa-check"></i>
+  <span class="green">{{ item }}</span>
+</TodoList>
+
+<TodoList v-slot="{ item: todo }">
+  <i class="fas fa-check"></i>
+  <span class="green">{{ todo }}</span>
+</TodoList>
+
+<TodoList v-slot="{ item = 'Placeholder' }">
+  <i class="fas fa-check"></i>
+  <span class="green">{{ item }}</span>
+</TodoList>
+
+<TodoList #default="{ item }">
+  <i class="fas fa-check"></i>
+  <span class="green">{{ item }}</span>
+</TodoList>
 ```
 
 ## Animation and Transition
