@@ -429,7 +429,7 @@ import store from './store';
 createApp(App).use(store).use(router).mount('#app');
 ```
 
-### Dynamic Router
+### Dynamic Route Matching
 
 Two methods to access route `params` in components:
 
@@ -523,9 +523,32 @@ export default router;
 </script>
 ```
 
+### Named Routes
+
+```ts
+const routes = [
+  {
+    path: '/user/:username',
+    name: 'User',
+    component: User,
+  },
+];
+```
+
+```html
+<router-link :to="{ name: 'User', params: { username: 'sabertaz' }}">
+  User
+</router-link>
+```
+
+```ts
+router.push({ name: 'User', params: { username: 'sabertaz' } });
+```
+
 ### Navigation Guard Router
 
-- [Official Documentation of Router Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html)
+Official documentation for
+[Router Guards](https://next.router.vuejs.org/guide/advanced/navigation-guards.html).
 
 ## Vue CLI
 
