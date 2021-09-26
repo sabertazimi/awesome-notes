@@ -355,6 +355,32 @@ const MyComponent = san.defineComponent({
 */
 ```
 
+## Modern Vue
+
+### Suspense
+
+```html
+<!-- Events.vue -->
+<script setup lang="ts">
+  import { getEvents } from '@/services';
+  import type { Event } from '@/services';
+  const events: Event[] = await getEvents();
+</script>
+```
+
+```html
+<template>
+  <suspense>
+    <template #default>
+      <Events />
+    </template>
+    <template #fallback>
+      <div>Loading events list ...</div>
+    </template>
+  </suspense>
+</template>
+```
+
 ## Vue Internal
 
 ### Vue Constructor
