@@ -446,6 +446,38 @@ const MyComponent = san.defineComponent({
 }
 ```
 
+### Transition Group
+
+```html
+<template>
+  <div>
+    <input type="text" v-model="newContact" placeholder="Name" />
+    <button @click="addContact">Add Contact</button>
+    <button @click="sortContacts">Sort</button>
+    <transition-group name="slide-up" tag="ul" appear>
+      <li v-for="contact in contacts" :key="contact">{{ contact }}</li>
+    </transition-group>
+  </div>
+</template>
+```
+
+```css
+.slide-up-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .slide-up-enter-active {
+    transition: all 0.2s ease;
+  }
+
+  .slide-up-move {
+    transition: transform 0.8s ease-in;
+  }
+}
+```
+
 ## Modern Vue
 
 ### Suspense
