@@ -426,32 +426,10 @@ createApp(App).use(store).use(router).mount('#app');
 
 ### Dynamic Router
 
-```ts
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import Home from '../views/Home.vue';
-import EventDetails from '../views/EventDetails.vue';
+Two methods to access route `params` in components:
 
-const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/event/:id',
-    name: 'EventDetails',
-    props: true,
-    component: EventDetails,
-  },
-];
-
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
-});
-
-export default router;
-```
+- Composition route API: `const { params } = useRoute()`.
+- Passing route props to component: `const props = defineProps<{ id: string }>()`.
 
 ```html
 <template>
@@ -467,14 +445,69 @@ export default router;
 </template>
 ```
 
+#### Composition Route API
+
+```ts
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import EventDetails from '../views/EventDetails.vue';
+
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/event/:id',
+    name: 'EventDetails',
+    component: EventDetails,
+  },
+];
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes,
+});
+
+export default router;
+```
+
 ```html
 <script setup lang="ts">
   import { useRoute } from 'vue-router';
   import { getEvent } from '@/services';
   import type { Event } from '@/services';
 
-  const route = useRoute();
-  const event: Event = await getEvent(route.params.id);
+  const { params } = useRoute();
+  const event: Event = await getEvent(Number.parseInt(params.id));
+</script>
+```
+
+#### Passing Route Props
+
+```ts
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import EventDetails from '../views/EventDetails.vue';
+
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/event/:id',
+    name: 'EventDetails',
+    component: EventDetails,
+    props: true /* Passing route props to component */,
+  },
+];
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes,
+});
+
+export default router;
+```
+
+```html
+<script setup lang="ts">
+  import { getEvent } from '@/services';
+  import type { Event } from '@/services';
+
+  const props = defineProps<{ id: string }>();
+  const event: Event = await getEvent(Number.parseInt(props.id));
 </script>
 ```
 
