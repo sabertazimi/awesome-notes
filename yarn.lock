@@ -1724,17 +1724,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dg-scripts/stylelint-config@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "@dg-scripts/stylelint-config@npm:1.1.1"
+"@dg-scripts/stylelint-config@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@dg-scripts/stylelint-config@npm:1.1.2"
   dependencies:
-    stylelint-config-bod: ^5.3.10
+    stylelint-config-bod: ^5.3.11
     stylelint-config-prettier: ^8.0.2
     stylelint-prettier: ^1.2.0
   peerDependencies:
     prettier: ^2.4.0
     stylelint: ^13.13.0
-  checksum: a0611f2a358c05fcfce5bcf42048c40cc15bf89118ae06b9066fdbada8d9fc5f767fe965c371f7b170ae092c6f01af49d3484311620e2238a6acd1b772dc49f2
+  checksum: fdfc538d77037ddbb7a7eb9efa689c08f2221dc197e03b2adc32ec749d0f661a1e4b7becec06500e8cc8e150b13ad0ccaf7f6ae2f35dbe5e8182676e693c463c
   languageName: node
   linkType: hard
 
@@ -3770,7 +3770,7 @@ __metadata:
   resolution: "awesome-notes@workspace:."
   dependencies:
     "@dg-scripts/eslint-config": ^1.1.1
-    "@dg-scripts/stylelint-config": ^1.1.1
+    "@dg-scripts/stylelint-config": ^1.1.2
     "@docusaurus/core": 2.0.0-beta.6
     "@docusaurus/module-type-aliases": 2.0.0-beta.6
     "@docusaurus/preset-classic": 2.0.0-beta.6
@@ -13996,16 +13996,16 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"stylelint-config-bod@npm:^5.3.10":
-  version: 5.3.10
-  resolution: "stylelint-config-bod@npm:5.3.10"
+"stylelint-config-bod@npm:^5.3.11":
+  version: 5.3.11
+  resolution: "stylelint-config-bod@npm:5.3.11"
   dependencies:
     stylelint-a11y: ^1.2.3
     stylelint-config-recess-order: ^2.5.0
     stylelint-config-standard: ^22.0.0
   peerDependencies:
     stylelint: ^13.13.0
-  checksum: ee54d051cb486932e06bad136f61d502f9b77a49ff82c7df3d41d2e4704c16421214de5c00380c9e5be30b8d0334a7d2192c5939a1453e192a57ce868e125dc8
+  checksum: 212379f6a0fe5dc4fdf0e68e225d0db433370c6ac81ab8a14bcf10d3d4f4d1ef05c16be7bc7f908868e2bba967083f156945b9da0f4f27c7c3ec2c5a501e5ce7
   languageName: node
   linkType: hard
 
