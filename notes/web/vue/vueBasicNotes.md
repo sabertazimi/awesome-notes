@@ -179,7 +179,7 @@ app.component('custom-form', {
 ></custom-form>
 ```
 
-### Modal Directives
+### Model Directives
 
 本质为语法糖:
 
@@ -276,6 +276,11 @@ app.component('custom-input', {
 ## Components
 
 - [SFC with `setup`](https://v3.vuejs.org/api/sfc-script-setup.html).
+
+:::tip
+Can't access to `this` inside of `setup`,
+we cannot directly access `this.$emit` or `this.$route` anymore.
+:::
 
 ### Computed Value
 
@@ -446,6 +451,11 @@ Two methods to access route `params` in components:
   </router-link>
 </template>
 ```
+
+:::tip
+Can't access to `this` inside of `setup`,
+we cannot directly access `this.$router` or `this.$route` anymore.
+:::
 
 #### Composition Route API
 
