@@ -314,6 +314,9 @@ tags: [Web, Framework, Library]
 
 - [React Awesome 3D Button](https://github.com/rcaferati/react-awesome-button)
 - [Tiny Fab](https://github.com/dericgw/react-tiny-fab)
+- [Tailwind Buttons](https://devdojo.com/tailwindcss/buttons)
+- [Button Generator](https://markodenic.com/tools/buttons-generator)
+- [CSS Buttons](https://cssbuttons.io)
 
 ### Card
 
