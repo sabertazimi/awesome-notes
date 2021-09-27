@@ -3929,7 +3929,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-react-app@npm:11.0.0-next.81":
+"babel-preset-react-app@npm:^11.0.0-next.81":
   version: 11.0.0-next.81
   resolution: "babel-preset-react-app@npm:11.0.0-next.81"
   dependencies:
@@ -4827,10 +4827,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"confusing-browser-globals@npm:2.0.0-next.75":
-  version: 2.0.0-next.75
-  resolution: "confusing-browser-globals@npm:2.0.0-next.75"
-  checksum: beca00f70bbba32457774331b99307a4477dda5619c7a9a6ca4ad1d724605ae04e134e32945052081626358e3c213dcc5d4da807e56974b236b67e784b92fe21
+"confusing-browser-globals@npm:^2.0.0-next.81":
+  version: 2.0.0-next.fb6e6f70
+  resolution: "confusing-browser-globals@npm:2.0.0-next.fb6e6f70"
+  checksum: 8be5a9745daec343bdd70ad586e21f486dd58e440449cda460637de726c7cfe4acd9932807d1a689a255e8bc6fb805155b489a0e1e2644effeabbe8db68e9e1b
   languageName: node
   linkType: hard
 
@@ -6209,16 +6209,16 @@ __metadata:
   linkType: hard
 
 "eslint-config-bod@npm:^5.3.11":
-  version: 5.3.11
-  resolution: "eslint-config-bod@npm:5.3.11"
+  version: 5.3.12
+  resolution: "eslint-config-bod@npm:5.3.12"
   dependencies:
     "@babel/core": 7.15.5
     "@babel/eslint-parser": ^7.15.7
     "@rushstack/eslint-patch": ^1.0.7
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
-    babel-preset-react-app: 11.0.0-next.81
-    confusing-browser-globals: 2.0.0-next.75
+    babel-preset-react-app: ^11.0.0-next.81
+    confusing-browser-globals: ^2.0.0-next.81
     eslint-plugin-flowtype: ^6.1.0
     eslint-plugin-import: ^2.24.2
     eslint-plugin-jest: ^24.4.2
@@ -6228,7 +6228,7 @@ __metadata:
     eslint-plugin-testing-library: ^4.12.4
   peerDependencies:
     eslint: ^7.30.0
-  checksum: 6476e38d1dd13f254ab876299ab99523ba0e06d03b065c8ccdf10031a584b978b93afb738c8599c17b6a8775f6ecdf43f829424b92c67d9b67a02e009de43b7d
+  checksum: 0eda56fa9cd56f59155772006cfd079b0013f89c78cfccb5f685d657dd396495077ea5f428b071c2d14768a93672644f4a2f4912785b343801ae2e802e359576
   languageName: node
   linkType: hard
 
@@ -14030,15 +14030,15 @@ resolve@^2.0.0-next.3:
   linkType: hard
 
 "stylelint-config-bod@npm:^5.3.11":
-  version: 5.3.11
-  resolution: "stylelint-config-bod@npm:5.3.11"
+  version: 5.3.12
+  resolution: "stylelint-config-bod@npm:5.3.12"
   dependencies:
     stylelint-a11y: ^1.2.3
     stylelint-config-recess-order: ^2.5.0
     stylelint-config-standard: ^22.0.0
   peerDependencies:
     stylelint: ^13.13.0
-  checksum: 212379f6a0fe5dc4fdf0e68e225d0db433370c6ac81ab8a14bcf10d3d4f4d1ef05c16be7bc7f908868e2bba967083f156945b9da0f4f27c7c3ec2c5a501e5ce7
+  checksum: a287295de258506f8eaf56800345fb605f48150336d718ccdd5d59ad5f9870fe1901a71786ea125773f0dedc597bad2b127a20f6f0aaf5e74edf4a0edfdc6002
   languageName: node
   linkType: hard
 
