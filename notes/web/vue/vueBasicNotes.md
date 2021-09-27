@@ -919,27 +919,33 @@ Official documentation for
 ```ts
 // store.ts
 import { InjectionKey } from 'vue';
-import { createStore, Store } from 'vuex';
+import { createStore, useStore, Store } from 'vuex';
 
 // define your typings for the store state
-export interface State {
+interface State {
   count: number;
 }
 
 // define injection key
-export const key: InjectionKey<Store<State>> = Symbol();
+const key: InjectionKey<Store<State>> = Symbol();
 
-export const store = createStore<State>({
+const store = createStore<State>({
   state: {
     count: 0,
   },
 });
+
+const useAppStore = () => useStore<State>(key);
+
+export { key, useAppStore };
+export type { State };
+export default store;
 ```
 
 ```ts
 // main.ts
 import { createApp } from 'vue'
-import { store, key } from './store'
+import store, { key } from './store'
 
 const app = createApp({ ... })
 
@@ -951,12 +957,11 @@ app.mount('#app')
 
 ```ts
 // in a vue component
-import { useStore } from 'vuex';
-import { key } from './store';
+import { useAppStore } from './store';
 
 export default {
   setup() {
-    const store = useStore(key);
+    const store = useAppStore();
 
     store.state.count; // typed as number
   },
