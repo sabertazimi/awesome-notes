@@ -708,7 +708,7 @@ export default {
 
 - [Composition API Reference](https://next.router.vuejs.org/guide/advanced/composition-api.html)
 
-### Basic Router
+### Basic Routes
 
 ```ts
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
@@ -745,7 +745,7 @@ import store from './store';
 createApp(App).use(store).use(router).mount('#app');
 ```
 
-### Dynamic Route Matching
+### Dynamic Routes
 
 Two methods to access route `params` in components:
 
@@ -773,7 +773,7 @@ Can't access to `this` inside of `setup`,
 we cannot directly access `this.$router` or `this.$route` anymore.
 :::
 
-#### Composition Route API
+#### Routes Composition API
 
 ```ts
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
@@ -806,7 +806,7 @@ export default router;
 </script>
 ```
 
-#### Passing Route Props
+#### Passing Routes Props
 
 ```ts
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
@@ -861,7 +861,53 @@ const routes = [
 router.push({ name: 'User', params: { username: 'sabertaz' } });
 ```
 
-### Navigation Guard Router
+### Nested Routes
+
+```ts
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'board',
+    component: Board,
+    children: [
+      {
+        path: 'task/:id',
+        name: 'task',
+        component: Task,
+        props: true,
+      },
+    ],
+  },
+];
+```
+
+```html
+<!-- App.vue -->
+<!-- Root router view -->
+<template><router-view /></template>
+```
+
+```html
+<!-- Board.vue -->
+<!-- Nested router view -->
+<template>
+  <div>Board View</div>
+  <router-view />
+</template>
+```
+
+```html
+<!-- Task.vue -->
+<script setup lang="ts">
+  defineProps<{ id: string }>();
+</script>
+
+<template>
+  <div>Task View {{ id }}</div>
+</template>
+```
+
+### Guard Routes
 
 Official documentation for
 [Router Guards](https://next.router.vuejs.org/guide/advanced/navigation-guards.html).
