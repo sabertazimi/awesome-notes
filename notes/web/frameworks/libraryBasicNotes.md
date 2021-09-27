@@ -56,7 +56,7 @@ tags: [Web, Framework, Library]
 
 ### Micro Front-ends Solution
 
-- [UMI QianKun](https://github.com/umijs/qiankun)
+- [QianKun](https://github.com/umijs/qiankun)
 - [IceStark](https://github.com/ice-lab/icestark)
 - [Bit](https://github.com/teambit/bit)
 - [Garfish: ByteDance micro front-end framework](https://github.com/bytedance/garfish)
@@ -81,7 +81,8 @@ tags: [Web, Framework, Library]
 
 ### Full Stack Solution
 
-- [Next.js](https://github.com/zeit/next.js)
+- [Next](https://github.com/vercel/next.js)
+- [Blitz: Fullstack React framework](https://github.com/blitz-js/blitz)
 
 ### Desktop Solution
 
