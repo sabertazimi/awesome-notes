@@ -912,6 +912,57 @@ const routes: Array<RouteRecordRaw> = [
 Official documentation for
 [Router Guards](https://next.router.vuejs.org/guide/advanced/navigation-guards.html).
 
+## Vuex
+
+### Vuex Types
+
+```ts
+// store.ts
+import { InjectionKey } from 'vue';
+import { createStore, Store } from 'vuex';
+
+// define your typings for the store state
+export interface State {
+  count: number;
+}
+
+// define injection key
+export const key: InjectionKey<Store<State>> = Symbol();
+
+export const store = createStore<State>({
+  state: {
+    count: 0,
+  },
+});
+```
+
+```ts
+// main.ts
+import { createApp } from 'vue'
+import { store, key } from './store'
+
+const app = createApp({ ... })
+
+// pass the injection key
+app.use(store, key)
+
+app.mount('#app')
+```
+
+```ts
+// in a vue component
+import { useStore } from 'vuex';
+import { key } from './store';
+
+export default {
+  setup() {
+    const store = useStore(key);
+
+    store.state.count; // typed as number
+  },
+};
+```
+
 ## Vue CLI
 
 ### SCSS Configuration
