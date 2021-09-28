@@ -907,6 +907,29 @@ const routes: Array<RouteRecordRaw> = [
 </template>
 ```
 
+### Programmatic Routes Navigation
+
+```ts
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+// literal string path
+router.push('/users/eduardo');
+
+// object with path
+router.push({ path: '/users/eduardo' });
+
+// named route with params to let the router build the url
+router.push({ name: 'user', params: { username: 'eduardo' } });
+
+// with query, resulting in /register?plan=private
+router.push({ path: '/register', query: { plan: 'private' } });
+
+// with hash, resulting in /about#team
+router.push({ path: '/about', hash: '#team' });
+```
+
 ### Guard Routes
 
 Official documentation for
