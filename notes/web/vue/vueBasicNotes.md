@@ -474,10 +474,10 @@ Slot props shorthand
 
 ## Animation and Transition
 
-- `v-enter`.
+- `v-enter-from`.
 - `v-enter-to`: CSS defaults.
 - `v-enter-active`.
-- `v-leave`: CSS defaults.
+- `v-leave-from`: CSS defaults.
 - `v-leave-to`.
 - `v-leave-active`.
 - `name`: transition name (different from `v`).
@@ -486,14 +486,14 @@ Slot props shorthand
   - `in-out`.
 
 ```css
-.v-enter {
+.v-enter-from {
   opacity: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .v-enter-active,
   .v-leave-active {
-    transition: opacity 2s;
+    transition: opacity 0.3s ease-out;
   }
 }
 
@@ -519,7 +519,7 @@ Slot props shorthand
 ```
 
 ```css
-.fade-enter {
+.fade-enter-from {
   opacity: 0;
 }
 
@@ -538,7 +538,7 @@ Slot props shorthand
 ### Slide Transition
 
 ```css
-.slide-fade-enter {
+.slide-fade-enter-from {
   opacity: 0;
   transform: translateX(10px);
 }
@@ -572,7 +572,7 @@ Slot props shorthand
 ```
 
 ```css
-.slide-up-enter {
+.slide-up-enter-from {
   opacity: 0;
   transform: translateY(10px);
 }
