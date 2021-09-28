@@ -970,6 +970,8 @@ export default {
 
 ## Vite
 
+### Basic Configuration
+
 ```ts
 import path from 'path';
 import { defineConfig } from 'vite';
@@ -984,6 +986,38 @@ export default defineConfig({
     },
   },
 });
+```
+
+### Environment Variables and Modes
+
+- `import.meta.env.MODE`: {string} running mode.
+- `import.meta.env.BASE_URL`: {string} vite `base` url.
+- `import.meta.env.PROD`: {boolean} whether in production.
+- `import.meta.env.DEV`: {boolean} whether in development.
+
+```ts
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes,
+});
+```
+
+```ts
+interface ImportMetaEnv extends Readonly<Record<string, string>> {
+  readonly VITE_APP_TITLE: string;
+  // More environment variables...
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+```
+
+```bash
+.env                # Loaded in all cases.
+.env.local          # Loaded in all cases, ignored by git.
+.env.[mode]         # Only loaded in specified mode.
+.env.[mode].local   # Only loaded in specified mode, ignored by git.
 ```
 
 ## Vue CLI
