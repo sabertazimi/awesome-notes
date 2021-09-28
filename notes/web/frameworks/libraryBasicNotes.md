@@ -1175,9 +1175,13 @@ tags: [Web, Framework, Library]
 
 #### Analysis Actions
 
+- [ReviewDog ESLint](https://github.com/reviewdog/action-eslint)
+- [ReviewDog StyleLint](https://github.com/reviewdog/action-stylelint)
+- [ReviewDog MarkdownLint](https://github.com/reviewdog/action-markdownlint)
 - [CodeQL Analysis](https://github.com/github/codeql-action)
 - [Compressed Bundle Size](https://github.com/preactjs/compressed-size-action)
 - [Limit Bundle Size](https://github.com/andresz1/size-limit-action)
+- [License Compliance](https://github.com/fossas/fossa-action)
 
 #### Deployment Actions
 
