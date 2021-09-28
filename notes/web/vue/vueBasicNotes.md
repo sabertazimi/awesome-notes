@@ -913,7 +913,23 @@ const routes: Array<RouteRecordRaw> = [
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+```
 
+#### Navigate to Different Location
+
+```ts
+const username = 'eduardo';
+// we can manually build the url but we will have to handle the encoding ourselves
+router.push(`/user/${username}`); // -> /user/eduardo
+// same as
+router.push({ path: `/user/${username}` }); // -> /user/eduardo
+// if possible use `name` and `params` to benefit from automatic URL encoding
+router.push({ name: 'user', params: { username } }); // -> /user/eduardo
+// `params` cannot be used alongside `path`
+router.push({ path: '/user', params: { username } }); // -> /user
+```
+
+```ts
 // literal string path
 router.push('/users/eduardo');
 
@@ -928,6 +944,32 @@ router.push({ path: '/register', query: { plan: 'private' } });
 
 // with hash, resulting in /about#team
 router.push({ path: '/about', hash: '#team' });
+```
+
+#### Replace Current Location
+
+```ts
+// replace current location
+router.push({ path: '/home', replace: true });
+// equivalent to
+router.replace({ path: '/home' });
+```
+
+#### Traverse Routes History
+
+```ts
+// go forward by one record, the same as router.forward()
+router.go(1);
+
+// go back by one record, the same as router.back()
+router.go(-1);
+
+// go forward by 3 records
+router.go(3);
+
+// fails silently if there aren't that many records
+router.go(-100);
+router.go(100);
 ```
 
 ### Guard Routes
