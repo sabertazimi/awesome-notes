@@ -2756,9 +2756,10 @@ console.log(myStylesheet.cssRules.length); // 7
 
 ### DOM Events
 
-- `event.preventDefault()`
-- `event.stopPropagation()`
+- `event.preventDefault()`.
+- `event.stopPropagation()`.
 - `element.dispatchEvent(event)` to trigger events.
+- Default `bubble` mode, can change to `capture` mode.
 
 #### Events Checking
 
