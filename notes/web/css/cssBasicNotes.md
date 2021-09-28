@@ -3554,8 +3554,12 @@ input[type='url']:focus,
 input[type='password']:focus,
 textarea:focus,
 select:focus {
+  /* Custom border color */
   border: 1px solid #33c3f0;
-  outline: 0;
+
+  /* Key point: remove default outline */
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 label,
