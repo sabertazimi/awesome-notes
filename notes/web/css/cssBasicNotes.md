@@ -5212,6 +5212,10 @@ window.requestAnimationFrame(step);
 - `cursor`/`z-index`/`transform`/`opacity` in `Composite Layers` stage
 - `top`/`left` has very large time to `paint` each frame
 
+### CSS Performance Reference
+
+- CSS optimization [guide](https://kinsta.com/blog/optimize-css).
+
 ## CSS Hacks
 
 - [Browser Hacks](https://github.com/4ae9b8/browserhacks)
