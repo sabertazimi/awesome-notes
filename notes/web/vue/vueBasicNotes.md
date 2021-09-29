@@ -61,6 +61,8 @@ tags: [Web, Vue]
 
 ### Event Handlers Directive
 
+#### Event Handlers and Modifiers
+
 ```html
 <div id="handler">
   <button @click="warn('Warn message.', $event)">Submit</button>
@@ -142,7 +144,9 @@ Vue.createApp({
 }).mount('#inline-handler');
 ```
 
-Custom events:
+#### Custom Events
+
+Form events:
 
 ```js
 app.component('custom-form', {
@@ -177,6 +181,60 @@ app.component('custom-form', {
   @submit="handleSubmit"
   @custom-event="handleEvent"
 ></custom-form>
+```
+
+Drag and Drop events:
+
+```html
+<!-- Drag.vue -->
+<template>
+  <div
+    draggable="true"
+    @dragenter.prevent
+    @dragover.prevent
+    @dragstart.self="onDrag"
+  >
+    <slot />
+  </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      transferData: {
+        type: Object,
+        required: true,
+      },
+    },
+    methods: {
+      onDrag(e) {
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.dropEffect = 'move';
+        e.dataTransfer.setData('payload', JSON.stringify(this.transferData));
+      },
+    },
+  };
+</script>
+```
+
+```html
+<!-- Drop.vue -->
+<template>
+  <div @dragenter.prevent @dragover.prevent @drop.stop="onDrop">
+    <slot />
+  </div>
+</template>
+
+<script>
+  export default {
+    methods: {
+      onDrop(e) {
+        const transferData = JSON.parse(e.dataTransfer.getData('payload'));
+        this.$emit('drop', transferData);
+      },
+    },
+  };
+</script>
 ```
 
 ### Model Directives

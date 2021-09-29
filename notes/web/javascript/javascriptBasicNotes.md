@@ -2926,7 +2926,7 @@ window.addEventListener('click', (event) => {
 });
 ```
 
-[Drag Event](https://developer.mozilla.org/en-US/docs/Web/API/Document/drag_event):
+[Drag Event](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent):
 
 - dragstart: start point.
 - dragend
@@ -2934,6 +2934,14 @@ window.addEventListener('click', (event) => {
 - dragover: call `event.preventDefault()` in drop zone.
 - dragleave
 - drop: end point.
+
+Key point for implementing DnD widget is
+[DataTransfer](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer):
+
+- Bindings between Drag Zone and Drop Zone.
+- `DataTransfer.dropEffect` and `DataTransfer.effectAllowed` to define DnD UI type.
+- `DataTransfer.getData` and `DataTransfer.setData` to transfer data.
+- `DataTransfer.files` and `DataTransfer.items` to transfer data.
 
 [Context Menu Event](https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event):
 
