@@ -2928,12 +2928,12 @@ window.addEventListener('click', (event) => {
 
 [Drag Event](https://developer.mozilla.org/en-US/docs/Web/API/Document/drag_event):
 
-- dragstart
+- dragstart: start point.
 - dragend
-- dragover
-- dragenter
+- dragenter: call `event.preventDefault()` in drop zone.
+- dragover: call `event.preventDefault()` in drop zone.
 - dragleave
-- drop
+- drop: end point.
 
 [Context Menu Event](https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event):
 
