@@ -845,6 +845,7 @@ tags: [Web, Framework, Library]
 - [Cross Spawn](https://github.com/moxystudio/node-cross-spawn)
 - [Execa](https://github.com/sindresorhus/execa)
 - [Node Fetch](https://github.com/node-fetch/node-fetch)
+- [Undici: HTTP/1.1 client written from scratch for Node](https://github.com/nodejs/undici)
 - [FS Extra](https://github.com/jprichardson/node-fs-extra)
 - [Graceful FS](https://www.npmjs.com/package/graceful-fs)
 - [In-memory Node file system API](https://github.com/streamich/memfs)
