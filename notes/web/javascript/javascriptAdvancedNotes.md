@@ -4937,13 +4937,13 @@ Tool for composite stage analysis
 
 ### Naming Style
 
-- 变量: 名词前缀
-- 方法/函数: 动词前缀
-- \_method: 表示私有化方法
-- 普通函数: 驼峰命名法(camelCase)
-- 构造函数: 帕斯卡命名法(PascalCase)
-- 缩略词和缩写都必须是全部大写/小写
-- 对于 jQuery 对象的变量使用 \$ 作为前缀
+- 变量: 名词前缀.
+- 方法 / 函数: 动词前缀.
+- `_method`: 表示私有化方法.
+- 普通函数: 驼峰命名法 (camelCase).
+- 构造函数: 帕斯卡命名法 (PascalCase).
+- 缩略词和缩写都必须是全部大写 / 小写.
+- 对于 `jQuery` 对象的变量使用 `$` 作为前缀.
 
 ### Variable Style
 
