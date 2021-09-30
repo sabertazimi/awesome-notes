@@ -6832,12 +6832,17 @@ HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`:
   - 202 Accepted.
 - Redirects: 300–399.
   - 301 Moved Permanently.
+  - 302 Found.
   - 304 Not Modified.
+  - 307 Temporary Redirect.
+  - 308 Permanent Redirect.
 - Client errors: 400–499.
   - 400 Bad Request.
   - 401 Unauthorized.
+  - 403 Forbidden.
   - 404 Not Found.
   - 405 Method Not Allowed.
+  - 406 Not Acceptable.
 - Server errors: 500–599.
   - 500 Internal Server Error.
   - 501 Not Implemented.
@@ -6986,7 +6991,9 @@ Set-Cookie: weight=100; domain=me.github.com
 
 - HTTP request with credential data (email/password) for first request,
   get token data or error code from first response.
-- Intercept token to `fetch`/`axios` request headers for rest requests.
+- Intercept token to `fetch`/`axios` request headers for rest requests
+  - Sent requests with token data.
+  - Logout whenever token data inspire or deleted.
 - Store token in `Redux`/`Vuex` global state.
 - Store token in `localStorage`/`sessionStorage`.
 
