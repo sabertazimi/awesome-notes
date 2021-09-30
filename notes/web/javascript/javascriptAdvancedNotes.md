@@ -6821,14 +6821,9 @@ HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`:
 - QUIC 协议保证传输可靠、实现快速握手、集成 TLS 加密、实现多路复用.
 - QUIC 给每个请求流 (Stream ID) 都分配一个独立的滑动窗口, 实现无队头阻塞的多路复用, 解决 TCP 层的队头阻塞.
 
-## Security
+## Web Authentication
 
-- [Web Security Checklist](https://eggjs.org/zh-cn/core/security.html)
-- [ESLint Node Security Tool](https://github.com/nodesecurity/eslint-plugin-security)
-
-### Web Authentication
-
-#### HTTP Basic Authentication
+### HTTP Basic Authentication
 
 HTTP basic authentication is 401 authentication:
 
@@ -6861,9 +6856,9 @@ Host:www.google.com
 Authorization: Basic d2FuZzp3YW5n
 ```
 
-#### Session Cookie
+### Session Cookie
 
-##### Session Cookie Basis
+#### Session Cookie Basis
 
 HTTP 协议是一个无状态的协议,
 服务器不会知道到底是哪一台浏览器访问了它,
@@ -6895,16 +6890,16 @@ Set-Cookie: height=100; domain=me.github.com
 Set-Cookie: weight=100; domain=me.github.com
 ```
 
-##### Session Cookie Cons
+#### Session Cookie Cons
 
 - 认证方式局限于在浏览器 (Cookie).
 - 非 HTTPS 协议下使用 Cookie, 容易受到 CSRF 跨站点请求伪造攻击.
 - Session ID 不包含具体用户信息, 需要 Key-Value Store (e.g **Redis**) 持久化,
   在分布式环境下需要在每个服务器上都备份, 占用了大量的存储空间.
 
-#### Token Authentication
+### Token Authentication
 
-##### Token Authentication Basis
+#### Token Authentication Basis
 
 - 客户端发送登录信息 (ID, Password).
 - 服务端收到请求验证成功后, 服务端会签发一个 Token (包含用户信息) 并发送给客户端.
@@ -6912,7 +6907,7 @@ Set-Cookie: weight=100; domain=me.github.com
   客户端每次向服务端请求都需在 Request Header 中设置: `Authorization: <Token>`.
 - 服务端收到请求并验证 Token, 成功发送资源 (鉴权成功), 不成功发送 401 错误代码 (鉴权失败).
 
-##### Token Authentication Pros
+#### Token Authentication Pros
 
 - Token 认证不局限于浏览器 (Cookie).
 - 不使用 Cookie 可以规避 CSRF 攻击.
@@ -6920,7 +6915,7 @@ Set-Cookie: weight=100; domain=me.github.com
   服务器端变成无状态, 服务器端只需要根据定义的规则校验 Token 合法性.
   上述两点使得 Token Authentication 具有更好的扩展性.
 
-##### Token Authentication Cons
+#### Token Authentication Cons
 
 - Token 认证 (加密解密过程) 比 Session Cookie 更消耗性能.
 - Token (包含用户信息) 比 Session ID 大, 更占带宽.
@@ -6929,9 +6924,9 @@ Set-Cookie: weight=100; domain=me.github.com
   - Token 应使用 HTTPS 协议.
   - 对于重要权限， 需使用二次验证 (Two Factor Authentication).
 
-#### JSON Web Token
+### JSON Web Token
 
-##### JSON Web Token Basis
+#### JSON Web Token Basis
 
 - 基于 Token 的解决方案中最常用的是 JWT.
 - 服务器认证用户密码以后, 生成一个 JSON 对象并签名加密后作为 Token 返回给用户.
@@ -6948,7 +6943,7 @@ Set-Cookie: weight=100; domain=me.github.com
   `refresh token` 用来获取 `access token`, 有效期更长,
   通过独立服务和严格的请求方式增加安全性.
 
-##### JSON Web TOken Pros
+#### JSON Web TOken Pros
 
 - JWT 默认是不加密.
 - JWT 不加密的情况下, 不能将秘密数据写入 JWT.
@@ -6956,14 +6951,22 @@ Set-Cookie: weight=100; domain=me.github.com
 - JWT 不仅可用于认证, 也可用于交换信息.
   有效使用 JWT, 可以降低服务器查询数据库的次数.
 
-##### JSON Web Token Cons
+#### JSON Web Token Cons
 
 - 不保存 Session 状态, 无法中止或更改 Token 权限, Token 到期前会始终有效, 存在盗用风险:
   - JWT 有效期应短.
   - JWT 应使用 HTTPS 协议.
   - 对于重要权限， 需使用二次验证 (Two Factor Authentication).
 
-#### OAuth Authentication
+#### JWT Client
+
+- HTTP request with credential data (email/password) for first request,
+  get token data or error code from first response.
+- Intercept token to `fetch`/`axios` request headers for rest requests.
+- Store token in `Redux`/`Vuex` global state.
+- Store token in `localStorage`/`sessionStorage`.
+
+### OAuth Authentication
 
 OAuth (Open Authorization) 是一个开放标准, 作用于第三方授权和第三方访问.
 用户数据的所有者告诉系统, 同意授权第三方应用进入系统, 获取这些数据.
@@ -6978,7 +6981,7 @@ OAuth Token 特征:
 2. 可撤销 (Revoke)
 3. 权限小 (Scope)
 
-##### OAuth Authentication Basis
+#### OAuth Authentication Basis
 
 - 在 GitHub Developer Settings 中备案第三方应用,
   拿到属于它的客户端 ID 和客户端密钥
@@ -6997,7 +7000,7 @@ OAuth Token 特征:
   可以构建第三方网站自己的 Token, 做进一步相关鉴权操作 (如 Session Cookie).
   (3rd-Party Server vs Resource Server)
 
-##### OAuth 2.0
+#### OAuth 2.0
 
 OAuth 2.0 允许自动更新令牌.
 资源所有者颁发令牌时一次性颁发两个令牌,
@@ -7013,12 +7016,17 @@ https://github.com/login/oauth/access_token
 &refresh_token=REFRESH_TOKEN
 ```
 
-#### Single Sign On
+### Single Sign On
 
 `SSO`:
 单点登录要求不同域下的系统**一次登录，全线通用**,
 通常由独立的 `SSO` 系统记录登录状态, 下发 `ticket`,
 各业务系统配合存储和认证 `ticket`.
+
+## Security
+
+- [Web Security Checklist](https://eggjs.org/zh-cn/core/security.html)
+- [ESLint Node Security Tool](https://github.com/nodesecurity/eslint-plugin-security)
 
 ### Content Security Policy Level 3
 
