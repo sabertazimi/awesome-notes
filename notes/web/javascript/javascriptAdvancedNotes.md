@@ -6821,6 +6821,30 @@ HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`:
 - QUIC 协议保证传输可靠、实现快速握手、集成 TLS 加密、实现多路复用.
 - QUIC 给每个请求流 (Stream ID) 都分配一个独立的滑动窗口, 实现无队头阻塞的多路复用, 解决 TCP 层的队头阻塞.
 
+### HTTP Response Status Codes
+
+[RFC 2616](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status):
+
+- Informational responses: 100–199.
+- Successful responses: 200–299.
+  - 200 OK.
+  - 201 Created.
+  - 202 Accepted.
+- Redirects: 300–399.
+  - 301 Moved Permanently.
+  - 304 Not Modified.
+- Client errors: 400–499.
+  - 400 Bad Request.
+  - 401 Unauthorized.
+  - 404 Not Found.
+  - 405 Method Not Allowed.
+- Server errors: 500–599.
+  - 500 Internal Server Error.
+  - 501 Not Implemented.
+  - 502 Bad Gateway.
+  - 503 Service Unavailable.
+  - 504 Gateway Timeout.
+
 ## Web Authentication
 
 ### HTTP Basic Authentication
