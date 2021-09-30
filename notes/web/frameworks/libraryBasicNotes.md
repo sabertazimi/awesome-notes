@@ -828,7 +828,6 @@ tags: [Web, Framework, Library]
 - [Commander](https://github.com/tj/commander.js)
 - [Yargs](https://github.com/yargs/yargs)
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js)
-- [Enquirer](https://github.com/enquirer/enquirer)
 - [Prompts](https://github.com/terkelg/prompts)
 
 #### CLI Output Utils
