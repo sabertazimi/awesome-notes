@@ -1030,10 +1030,78 @@ router.go(-100);
 router.go(100);
 ```
 
-### Guard Routes
+### Navigation Guard Routes
 
-Official documentation for
-[Router Guards](https://next.router.vuejs.org/guide/advanced/navigation-guards.html).
+#### Guard Routes Configuration
+
+```ts
+const routes = [
+  {
+    path: '/users/:id',
+    component: UserDetails,
+    beforeEnter: (to, from) => {
+      // reject the navigation
+      return false;
+    },
+  },
+];
+```
+
+:::caution
+`beforeEnter` guards only trigger when entering the route,
+don't trigger when the params, query or hash change.
+
+Going from `/users/2` to `/users/3` or going from `/users/2#info` to `/users/2#projects`
+don't trigger `beforeEnter` guards.
+:::
+
+#### Global Navigation Guards
+
+```ts
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' });
+  else next();
+});
+```
+
+```ts
+router.beforeResolve(async to => {
+  if (to.meta.requiresCamera) {
+    try {
+      await askForCameraPermission();
+    } catch (error) {
+      if (error instanceof NotAllowedError) {
+        // Handle the error and then cancel the navigation.
+        return false;
+      } else {
+        // Unexpected error: cancel the navigation and pass error to global handler.
+        throw error;
+      }
+    }
+  }
+});
+```
+
+```ts
+router.afterEach((to, from, failure) => {
+  if (!failure) sendToAnalytics(to.fullPath);
+});
+```
+
+#### Full Navigation Resolution Flow
+
+- Navigation triggered.
+- Call `beforeRouteLeave` guards in deactivated components.
+- Call global `beforeEach` guards.
+- Call `beforeRouteUpdate` guards in reused components.
+- Call `beforeEnter` in route configs.
+- Resolve async route components.
+- Call `beforeRouteEnter` in activated components.
+- Call global `beforeResolve` guards.
+- Navigation is confirmed.
+- Call global `afterEach` hooks.
+- DOM updates triggered.
+- Call `next` callbacks in `beforeRouteEnter` guards with instantiated instances.
 
 ## Vuex
 
