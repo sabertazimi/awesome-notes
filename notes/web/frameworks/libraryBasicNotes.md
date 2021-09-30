@@ -727,6 +727,10 @@ tags: [Web, Framework, Library]
 
 - [React Live: Flexible playground for live editing React components](https://github.com/FormidableLabs/react-live)
 
+### Web IDE
+
+- [CodeServer: VS Code in browser](https://github.com/cdr/code-server)
+
 ### Clipboard
 
 - [Clipboard](https://github.com/zenorocha/clipboard.js)
