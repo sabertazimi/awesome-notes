@@ -1169,8 +1169,10 @@ tags: [Web, Framework, Library]
 
 #### Basic Actions
 
+- [Cancel Workflow](https://github.com/styfle/cancel-workflow-action)
 - [Checkout](https://github.com/actions/checkout)
 - [Node](https://github.com/actions/setup-node)
+- [NPM Installation](https://github.com/bahmutov/npm-install)
 - [Add and Commit](https://github.com/EndBug/add-and-commit)
 
 #### Project Actions
