@@ -1430,16 +1430,17 @@ function User() {
 
 ### UseContext Hook
 
-- create custom `XXXContextProvider`:
+- Create custom `XXXContextProvider`:
   一般都不会裸露地使用 Context.Provider, 而是封装为独立的 Provider 组件,
   将子组件作为 props.children 传入, 这样当 Context 变化时 Provider 不会重新渲染它的子组件,
   由依赖了 context 的子组件自己进行重渲染, 未依赖的子组件不会重新渲染.
-  使用 `useMemo` 使得 value 不会重复创建.
-- create custom `useXXXContext` hook:
-  - check whether component under `XXXContextProvider`.
-  - wrap complex context logic and only expose simple API.
-  - use `useMemo`/`useCallback` to memorize values and functions.
-- Context 中只定义被大多数组件所共用的属性 (avoid **Prop Drilling**).
+  **使用 `useMemo` 使得 value 不会导致不必要的重复渲染 (Re-rendering)**.
+- Create custom `useXXXContext` hook:
+  - Check whether component under `XXXContextProvider`.
+  - Wrap complex context logic and only expose simple API (Facade design pattern).
+  - Use `useMemo`/`useCallback` to **memorize values and functions**.
+- Context 中只定义被大多数组件所共用的属性,
+  use context to avoid **Prop Drilling**.
 
 ```jsx
 import React, {
