@@ -5454,6 +5454,36 @@ export default reportWebVitals;
 
 - Deployment services [guide](https://hiddedevries.nl/en/blog/2020-06-27-how-deployment-services-make-client-side-routing-work).
 
+`vercel.json`:
+
+```json
+{
+  "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
+}
+```
+
+```json
+{
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
+  ]
+}
+```
+
+[Netlify](https://docs.netlify.com/routing/redirects/rewrites-proxies/#history-pushstate-and-single-page-apps):
+
+```bash
+/*    /index.html   200
+```
+
+GitHub Pages:
+
+```bash
+# 404 fallback
+ln -s index.html 404.html
+```
+
 ### Custom CRA
 
 - custom `packages/cra-template-*`: change HTML/CSS/JS boilerplate.
