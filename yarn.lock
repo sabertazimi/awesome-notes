@@ -2886,14 +2886,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^17.0.24":
-  version: 17.0.24
-  resolution: "@types/react@npm:17.0.24"
+"@types/react@npm:*, @types/react@npm:^17.0.26":
+  version: 17.0.26
+  resolution: "@types/react@npm:17.0.26"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 99383e2cbaa85831984cc17ec4a5fe7fd091aa21ef023855570440d8d0b5038efb8159701e8e2a0f6ddff3efae655922ded690190e7d172653608cbde016cb66
+  checksum: 943fe7e912ea6d664910fb9391a96d8f31c985265fb768d448461123dd970080494b7987a9bd54ca664c8675cb09680c8763823ff18622222e302c8d121b7d31
   languageName: node
   linkType: hard
 
@@ -3778,7 +3778,7 @@ __metadata:
     "@mdx-js/react": ^1.6.22
     "@svgr/webpack": ^5.5.0
     "@tsconfig/docusaurus": ^1.0.4
-    "@types/react": ^17.0.24
+    "@types/react": ^17.0.26
     "@types/react-helmet": ^6.1.2
     "@types/react-router-dom": ^5.3.0
     clsx: ^1.1.1
