@@ -3771,18 +3771,14 @@ a:focus::after {
 
 5 种方法:
 
-- negative bottom margin content-wrapper with **fixed height** footer
-- negative top margin on **fixed height** footer
-- `calc` on **fixed height** footer
-- use `flex` on `body`
-- use `grid` on `body`
+- negative bottom margin content-wrapper with **fixed height** footer.
 
 ```html
 <body>
-  <div class="wrapper">
+  <main class="wrapper">
     content
     <div class="push"></div>
-  </div>
+  </main>
   <footer class="footer"></footer>
 </body>
 
@@ -3792,6 +3788,7 @@ a:focus::after {
     height: 100%;
     margin: 0;
   }
+
   .wrapper {
     min-height: 100%;
 
@@ -3800,6 +3797,7 @@ a:focus::after {
     /* But also accounting for potential margin-bottom of last child */
     margin-bottom: -50px;
   }
+
   .footer,
   .push {
     height: 50px;
@@ -3807,11 +3805,13 @@ a:focus::after {
 </style>
 ```
 
+- negative top margin on **fixed height** footer.
+
 ```html
 <body>
-  <div class="content">
-    <div class="content-inside">content</div>
-  </div>
+  <main class="content">
+    <section class="content-inside">content</section>
+  </main>
   <footer class="footer"></footer>
 </body>
 
@@ -3821,13 +3821,16 @@ a:focus::after {
     height: 100%;
     margin: 0;
   }
+
   .content {
     min-height: 100%;
   }
+
   .content-inside {
     padding: 20px;
     padding-bottom: 50px;
   }
+
   .footer {
     height: 50px;
     margin-top: -50px;
@@ -3835,9 +3838,11 @@ a:focus::after {
 </style>
 ```
 
+- `calc` on **fixed height** footer.
+
 ```html
 <body>
-  <div class="content">content</div>
+  <main class="content">content</main>
   <footer class="footer"></footer>
 </body>
 
@@ -3845,15 +3850,18 @@ a:focus::after {
   .content {
     min-height: calc(100vh - 70px);
   }
+
   .footer {
     height: 50px;
   }
 </style>
 ```
 
+- Use `flex` on `body`.
+
 ```html
 <body>
-  <div class="content">content</div>
+  <main class="content">content</main>
   <footer class="footer"></footer>
 </body>
 
@@ -3862,22 +3870,27 @@ a:focus::after {
   body {
     height: 100%;
   }
+
   body {
     display: flex;
     flex-direction: column;
   }
+
   .content {
     flex: 1 0 auto;
   }
+
   .footer {
     flex-shrink: 0;
   }
 </style>
 ```
 
+- Use `grid` on `body`.
+
 ```html
 <body>
-  <div class="content">content</div>
+  <main class="content">content</main>
   <footer class="footer"></footer>
 </body>
 
@@ -3885,14 +3898,42 @@ a:focus::after {
   html {
     height: 100%;
   }
+
   body {
     display: grid;
     grid-template-rows: 1fr auto;
     min-height: 100%;
   }
+
   .footer {
     grid-row-start: 2;
     grid-row-end: 3;
+  }
+</style>
+```
+
+- Use `gird` with `min-content`.
+
+```html
+<body>
+  <div class="grid">
+    <header>
+      <!-- ... -->
+    </header>
+    <main>
+      <!-- ... -->
+    </div>
+    <footer>
+      <!-- ... -->
+    </footer>
+  </div>
+</body>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-rows: min-content auto min-content;
+    height: 100vh;
   }
 </style>
 ```
