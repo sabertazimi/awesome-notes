@@ -816,6 +816,11 @@ tags: [Web, Framework, Library]
 - [JieBa: Chinese text segmentation](https://github.com/yanyiwu/nodejieba)
 - [Docusaurus plugin: Local search plugin based on lunr.js](https://github.com/easyops-cn/docusaurus-search-local)
 
+## SEO
+
+- [React Helmet: Document head manager](https://github.com/nfl/react-helmet)
+- [Vue Meta: Components HTML metadata manager with SSR support](https://github.com/nuxt/vue-meta)
+
 ## CLI
 
 ### CLI Solution
