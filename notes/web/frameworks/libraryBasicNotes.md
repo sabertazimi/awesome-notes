@@ -1028,6 +1028,7 @@ tags: [Web, Framework, Library]
 
 - [Puppeteer: Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
 - [PlayWright: Automate Chromium, Firefox and WebKit with single API](https://github.com/Microsoft/playwright)
+- [RRWeb: Record and replay web](https://github.com/rrweb-io/rrweb)
 - [Webkit API](https://github.com/ariya/phantomjs)
 - [Selenium](https://github.com/SeleniumHQ/selenium)
 - [Appium](https://github.com/appium/appium)
