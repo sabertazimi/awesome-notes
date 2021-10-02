@@ -151,6 +151,7 @@ tags: [Web, Framework, Library]
 ## JavaScript Utils
 
 - [Cash: jQuery Lite](https://github.com/kenwheeler/cash)
+- [ConstructJS: Byte level data structures](https://github.com/francisrstokes/construct-js)
 
 ### Math Utils
 
@@ -179,6 +180,7 @@ tags: [Web, Framework, Library]
 
 ### Concurrent and Parallel Programming Utils
 
+- [Threads.js](https://github.com/andywer/threads.js)
 - [WorkerPool](https://github.com/josdejong/workerpool)
 - [Comlink: Shared class between Web Workers](https://github.com/GoogleChromeLabs/comlink)
 - [GRFN: Executes dependency graph of async functions concurrently](https://github.com/TomerAberbach/grfn)
@@ -434,6 +436,7 @@ tags: [Web, Framework, Library]
 - [ReaFlow: TSX library for building workflow editors, flow charts and diagrams](https://github.com/reaviz/reaflow)
 - [Sigma: Dedicated to graph drawing](https://github.com/jacomyal/sigma.js)
 - [Plotly.js: Charting library behind Plotly and Dash](https://github.com/plotly/plotly.js)
+- [JSXGraph: Interactive geometry, function plotting, charting, and data visualization in browser](https://github.com/jsxgraph/jsxgraph)
 
 ### Charts Draw Utils
 
@@ -453,6 +456,7 @@ tags: [Web, Framework, Library]
 - [Spectacle: React based presentation slides](https://github.com/FormidableLabs/spectacle)
 - [SliDev: Vue based presentation slides](https://github.com/slidevjs/slidev)
 - [Impress: Prezi-like presentation slides](https://github.com/impress/impress.js)
+- [PPTX: TypeScript PowerPoint presentations](https://github.com/gitbrent/PptxGenJS/)
 
 ### iFrame
 
@@ -792,11 +796,13 @@ tags: [Web, Framework, Library]
 - [File Type](https://github.com/sindresorhus/file-type)
 - [File Size](https://github.com/avoidwork/filesize.js)
 
-### PDF
+#### PDF Utils
 
+- [React PDF](https://github.com/wojtekmaj/react-pdf)
 - [jsPDF: Client-side JavaScript PDF generation](https://github.com/MrRio/jsPDF)
 - [PDFMake](https://github.com/bpampuch/pdfmake)
 - [PDFKit](https://github.com/foliojs/pdfkit)
+- [Docx: Easily generate docx files with TS](https://github.com/dolanmiu/docx)
 
 ## Persistent Storage
 
@@ -974,7 +980,8 @@ tags: [Web, Framework, Library]
 - [Morgan: Express official logger](https://github.com/expressjs/morgan)
 - [Pino: Super fast, all natural json logger](https://github.com/pinojs/pino)
 - [HTTP Proxy](https://github.com/chimurai/http-proxy-middleware)
-- [Rate Limit](https://github.com/nfriedly/express-rate-limit)
+- [Express Rate Limiter](https://github.com/nfriedly/express-rate-limit)
+- [Node Rate Limier](https://github.com/animir/node-rate-limiter-flexible)
 - [Graceful Shutdown](https://github.com/godaddy/terminus)
 
 ### Serverless
@@ -1174,6 +1181,7 @@ tags: [Web, Framework, Library]
 - [Node](https://github.com/actions/setup-node)
 - [NPM Installation](https://github.com/bahmutov/npm-install)
 - [Add and Commit](https://github.com/EndBug/add-and-commit)
+- [Workflow Scripts](https://github.com/actions/github-script)
 
 #### Project Actions
 
