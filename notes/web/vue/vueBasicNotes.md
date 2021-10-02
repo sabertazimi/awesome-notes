@@ -31,6 +31,11 @@ tags: [Web, Vue]
 </template>
 ```
 
+:::tip
+Prefer `v-show` if you need to toggle something very often,
+and prefer `v-if` if the condition is unlikely to change at runtime.
+:::
+
 ### Attributes Binding Directive
 
 ```html
