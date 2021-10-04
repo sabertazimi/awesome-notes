@@ -892,6 +892,8 @@ tags: [Web, Framework, Library]
 
 ## Compiler
 
+- [UnifiedJS: Interface for parsing, inspecting, transforming, and serializing content through syntax trees](https://github.com/unifiedjs/unified)
+
 ### JavaScript Parser
 
 - [Acorn](https://github.com/acornjs/acorn)
