@@ -815,11 +815,13 @@ figure 可拥有唯一的 0/1 个 figcaption
 - top 在整个窗口中打开被链接文档
 - framename 在指定的框架中打开被链接文档
 
-### embed
+### Embed
 
-插入媒体流
+插入媒体流:
 
-### command
+- Embed [best practice](https://web.dev/embed-best-practices).
+
+### Command
 
 ## Information
 
