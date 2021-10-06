@@ -471,6 +471,8 @@ Named slot directive shorthand:
 
 #### Scoped Slots
 
+Pass data from child to parent:
+
 ```js
 app.component('TodoList', {
   data() {
