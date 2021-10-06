@@ -2222,20 +2222,36 @@ data.a = 2; // setHook() get called.
 - `dep` -> `effects`.
 
 ```js
-/* eslint-disable no-console */
+type Effect<T> = () => T;
+
+const runningEffects = [];
+
 const targetMap = new WeakMap();
 
-function track(target: object, key: string | symbol) {
-  let depsMap = targetMap.get(target);
-  if (!depsMap) targetMap.set(target, (depsMap = new Map()));
+// runEffect -> effect -> proxy.get -> track.
+function createEffect<T>(effect: Effect<T>) {
+  const runEffect = () => {
+    runningEffects.push(effect);
+    effect();
+    runningEffects.pop();
+  };
 
-  let dep = depsMap.get(key);
-  if (!dep) depsMap.set(key, (dep = new Set()));
-
-  dep.add(effect);
+  runEffect();
 }
 
-function trigger(target: object, key: string | symbol) {
+function track<T extends object>(target: T, key: string | symbol) {
+  for (const effect of runningEffects) {
+    let depsMap = targetMap.get(target);
+    if (!depsMap) targetMap.set(target, (depsMap = new Map()));
+
+    let dep = depsMap.get(key);
+    if (!dep) depsMap.set(key, (dep = new Set()));
+
+    dep.add(effect);
+  }
+}
+
+function trigger<T extends object>(target: T, key: string | symbol) {
   const depsMap = targetMap.get(target);
   if (!depsMap) return;
 
@@ -2261,7 +2277,9 @@ function reactive<T extends object>(target: T) {
 
   return new Proxy(target, handler);
 }
+```
 
+```js
 interface Product {
   price: number;
   quantity: number;
@@ -2269,16 +2287,37 @@ interface Product {
 
 const product = reactive<Product>({ price: 5, quantity: 2 });
 let total = 0;
+let salePrice = 0;
 
-const effect = () => {
+createEffect(() => {
   total = product.price * product.quantity;
-  console.log(total);
-};
+  console.log(`Effect total: ${total}.`);
+});
+// Effect total: 10.
 
-effect(); // '10'
-product.quantity = 3; // '15'
-product.quantity = 3; // no console log
-product.quantity = 4; // '20'
-product.price = 5; // no console log
-product.price = 6; // '24'
+createEffect(() => {
+  salePrice = product.price * 0.9;
+  console.log(`Effect salePrice: ${salePrice}.`);
+});
+// Effect salePrice: 4.5.
+
+product.quantity = 3;
+// Effect total: 15.
+
+product.quantity = 3;
+// No log.
+
+product.quantity = 4;
+// Effect total: 20.
+
+product.price = 5;
+// No log.
+
+product.price = 6;
+// Effect total: 24.
+// Effect salePrice: 5.4.
+
+product.price = 10;
+// Effect total: 40.
+// Effect salePrice: 9.
 ```
