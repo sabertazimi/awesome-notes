@@ -1756,26 +1756,26 @@ export const emptyObject = Object.freeze({});
 
 // These helpers produce better VM code in JS engines due to their
 // explicitness and function inlining.
-export function isUndef(v: any): boolean %checks {
+export function isUndef(v: any): boolean {
   return v === undefined || v === null;
 }
 
-export function isDef(v: any): boolean %checks {
+export function isDef(v: any): boolean {
   return v !== undefined && v !== null;
 }
 
-export function isTrue(v: any): boolean %checks {
+export function isTrue(v: any): boolean {
   return v === true;
 }
 
-export function isFalse(v: any): boolean %checks {
+export function isFalse(v: any): boolean {
   return v === false;
 }
 
 /**
  * Check if value is primitive.
  */
-export function isPrimitive(value: any): boolean %checks {
+export function isPrimitive(value: any): boolean {
   return (
     typeof value === 'string' ||
     typeof value === 'number' ||
@@ -1790,7 +1790,7 @@ export function isPrimitive(value: any): boolean %checks {
  * Objects from primitive values when we know the value
  * is a JSON-compliant type.
  */
-export function isObject(obj: mixed): boolean %checks {
+export function isObject(obj: mixed): boolean {
   return obj !== null && typeof obj === 'object';
 }
 
@@ -2222,16 +2222,10 @@ data.a = 2; // setHook() get called.
 - `dep` -> `effects`.
 
 ```js
-const product = { price: 5, quantity: 2 };
-let total = 0;
-
-const effect = () => {
-  total = price * total;
-};
-
+/* eslint-disable no-console */
 const targetMap = new WeakMap();
 
-const track = (target, key) => {
+function track(target: object, key: string | symbol) {
   let depsMap = targetMap.get(target);
   if (!depsMap) targetMap.set(target, (depsMap = new Map()));
 
@@ -2239,18 +2233,52 @@ const track = (target, key) => {
   if (!dep) depsMap.set(key, (dep = new Set()));
 
   dep.add(effect);
-};
+}
 
-const trigger = (target, key) => {
+function trigger(target: object, key: string | symbol) {
   const depsMap = targetMap.get(target);
   if (!depsMap) return;
 
   const dep = depsMap.get(key);
   if (dep) dep.forEach(effect => effect());
+}
+
+function reactive<T extends object>(target: T) {
+  const handler: ProxyHandler<T> = {
+    get(target, key, receiver) {
+      const value = Reflect.get(target, key, receiver);
+      track(target, key);
+      if (value !== null && typeof value === 'object') return reactive(value);
+      else return value;
+    },
+    set(target, key, value, receiver) {
+      const oldValue = Reflect.get(target, key, receiver);
+      const result = Reflect.set(target, key, value, receiver);
+      if (result && oldValue !== value) trigger(target, key);
+      return result;
+    },
+  };
+
+  return new Proxy(target, handler);
+}
+
+interface Product {
+  price: number;
+  quantity: number;
+}
+
+const product = reactive<Product>({ price: 5, quantity: 2 });
+let total = 0;
+
+const effect = () => {
+  total = product.price * product.quantity;
+  console.log(total);
 };
 
-track(product, 'quantity');
-effect(); // total = 10;
-product.quantity = 3; // total = 10;
-trigger(product, 'quantity'); // total = 15;
+effect(); // '10'
+product.quantity = 3; // '15'
+product.quantity = 3; // no console log
+product.quantity = 4; // '20'
+product.price = 5; // no console log
+product.price = 6; // '24'
 ```
