@@ -2211,6 +2211,16 @@ Array.from(el.getElementsByTagName('input'))
   });
 ```
 
+### Vue Template and Compiler
+
+Performant improvements:
+
+- Shorten template helper function with prefix `_v`/`_s` etc.
+- Hoist static template blocks,
+  eliminate unnecessary virtual DOM diff effort,
+  only track dynamic VNode.
+- Cache event handlers (like `useCallback` in React).
+
 ### Vue Reactivity
 
 Data `getter`/`setter` -> Notify -> Watcher -> Trigger --> Renderer:
