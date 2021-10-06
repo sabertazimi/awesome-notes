@@ -2222,20 +2222,15 @@ data.a = 2; // setHook() get called.
 - `dep` -> `effects`.
 
 ```js
+type Primitive = string | number | boolean;
+type Key = string | symbol;
 type Effect<T> = () => T;
 
 const runningEffects = [];
 
 const targetMap = new WeakMap();
 
-// runEffect -> effect -> proxy.get -> track.
-function createEffect<T>(effect: Effect<T>) {
-  runningEffects.push(effect);
-  effect();
-  runningEffects.pop();
-}
-
-function track<T extends object>(target: T, key: string | symbol) {
+function track<T extends object>(target: T, key: Key) {
   for (const effect of runningEffects) {
     let depsMap = targetMap.get(target);
     if (!depsMap) targetMap.set(target, (depsMap = new Map()));
@@ -2247,7 +2242,7 @@ function track<T extends object>(target: T, key: string | symbol) {
   }
 }
 
-function trigger<T extends object>(target: T, key: string | symbol) {
+function trigger<T extends object>(target: T, key: Key) {
   const depsMap = targetMap.get(target);
   if (!depsMap) return;
 
@@ -2274,18 +2269,31 @@ function reactive<T extends object>(target: T) {
   return new Proxy(target, handler);
 }
 
-function ref<T>(raw: T) {
+function ref<T extends Primitive>(raw?: T) {
   const refObject = {
     get value() {
       track(refObject, 'value');
       return raw;
     },
-    set value(newValue) {
+    set value(newValue: T) {
       raw = newValue;
       trigger(refObject, 'value');
     },
   };
 
+  return refObject;
+}
+
+// runEffect -> effect -> proxy.get -> track.
+function createEffect<T>(effect: Effect<T>) {
+  runningEffects.push(effect);
+  effect();
+  runningEffects.pop();
+}
+
+function computed<T extends Primitive>(getter: () => T) {
+  const refObject = ref<T>();
+  createEffect(() => (refObject.value = getter()));
   return refObject;
 }
 ```
@@ -2297,32 +2305,23 @@ interface Product {
 }
 
 const product = reactive<Product>({ price: 5, quantity: 2 });
-const salePrice = ref(0);
-let total = 0;
-
-createEffect(() => {
-  salePrice.value = product.price * 0.9;
-});
+const salePrice = computed(() => product.price * 0.9);
+const total = computed(() => salePrice.value * product.quantity);
 
 console.assert(salePrice.value === 4.5);
-
-createEffect(() => {
-  total = salePrice.value * product.quantity;
-});
-
-console.assert(total === 9);
+console.assert(total.value === 9);
 
 product.quantity = 3;
-console.assert(total === 13.5);
+console.assert(total.value === 13.5);
 
 product.quantity = 4;
-console.assert(total === 18);
+console.assert(total.value === 18);
 
 product.price = 6;
 console.assert(salePrice.value === 5.4);
-console.assert(total === 21.6);
+console.assert(total.value === 21.6);
 
 product.price = 10;
 console.assert(salePrice.value === 9);
-console.assert(total === 36);
+console.assert(total.value === 36);
 ```
