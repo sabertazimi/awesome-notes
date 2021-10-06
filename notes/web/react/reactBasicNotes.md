@@ -1085,13 +1085,14 @@ class Menu extends React.Component {
 
 - No wrapper hell: every hook is just one line of code.
 - No implicit dependencies: explicit one certain call for one certain hook.
-- Flexible data usage.
 - No name collision and overlap props due to flexible data usage.
+- No need for `JSX`.
+- Flexible data usage.
 - Flexible optimization methods:
-  - avoid re-render with hook deps list
-  - `useMemo` hook for memorized values
-  - `useCallback` hook for memorized functions
-  - `useRef` hook for lifecycle persistent values
+  - Avoid re-render with hook deps list.
+  - `useMemo` hook for memorized values.
+  - `useCallback` hook for memorized functions.
+  - `useRef` hook for lifecycle persistent values.
 
 ## React Hooks
 
