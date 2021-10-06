@@ -2170,15 +2170,6 @@ for (const key in dirs) {
 - 最后，以上没有提及到的选项都将使默认选项 defaultStart
 - 最最后，默认合并策略函数 defaultStart 的策略是：只要子选项不是 undefined 就使用子选项，否则使用父选项
 
-### Vue Reactive Data Pattern
-
-data getter/setter -- notify -> watcher -- trigger --> render
-
-```js
-data.a; // getHook() get called
-data.a = 2; // setHook() get called
-```
-
 ### Vue Two-Way Data Binding
 
 View-Model 主要做了两件微小的事情：
@@ -2215,4 +2206,51 @@ Array.from(el.getElementsByTagName('input'))
       changeName[name] = this.value;
     };
   });
+```
+
+### Vue Reactivity
+
+Data `getter`/`setter` -> Notify -> Watcher -> Trigger --> Renderer:
+
+```js
+data.a; // getHook() get called.
+data.a = 2; // setHook() get called.
+```
+
+- `targetMap` -> `key: depsMap`: key is reactive object.
+- `depsMap` -> `key: dep`: key is object property name.
+- `dep` -> `effects`.
+
+```js
+const product = { price: 5, quantity: 2 };
+let total = 0;
+
+const effect = () => {
+  total = price * total;
+};
+
+const targetMap = new WeakMap();
+
+const track = (target, key) => {
+  let depsMap = targetMap.get(target);
+  if (!depsMap) targetMap.set(target, (depsMap = new Map()));
+
+  let dep = depsMap.get(key);
+  if (!dep) depsMap.set(key, (dep = new Set()));
+
+  dep.add(effect);
+};
+
+const trigger = (target, key) => {
+  const depsMap = targetMap.get(target);
+  if (!depsMap) return;
+
+  const dep = depsMap.get(key);
+  if (dep) dep.forEach(effect => effect());
+};
+
+track(product, 'quantity');
+effect(); // total = 10;
+product.quantity = 3; // total = 10;
+trigger(product, 'quantity'); // total = 15;
 ```
