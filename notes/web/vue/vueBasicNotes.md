@@ -533,7 +533,7 @@ Slot props shorthand
 
 ## Composition API
 
-- [SFC with `setup`](https://v3.vuejs.org/api/sfc-script-setup.html).
+- [SFC with Script Setup](https://v3.vuejs.org/api/sfc-script-setup.html).
 
 :::tip
 Can't access to `this` inside of `setup`,
