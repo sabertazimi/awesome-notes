@@ -338,14 +338,7 @@ app.component('custom-input', {
 
 ## Components
 
-- [SFC with `setup`](https://v3.vuejs.org/api/sfc-script-setup.html).
-
-:::tip
-Can't access to `this` inside of `setup`,
-we cannot directly access `this.$emit` or `this.$route` anymore.
-:::
-
-### Computed Value
+### Computed Properties
 
 ```html
 <div id="computed-basics">
@@ -533,6 +526,188 @@ Slot props shorthand
   <i class="fas fa-check"></i>
   <span class="green">{{ item }}</span>
 </TodoList>
+```
+
+## Composition API
+
+- [SFC with `setup`](https://v3.vuejs.org/api/sfc-script-setup.html).
+
+:::tip
+Can't access to `this` inside of `setup`,
+we cannot directly access `this.$emit` or `this.$route` anymore.
+:::
+
+### Setup Method
+
+- Executes before
+  `Components`,
+  `Props`,
+  `Data`,
+  `Methods`,
+  `Computed` properties,
+  `Lifecycle` methods.
+- Can't access `this`.
+- Can access `props` and `context`:
+  - `props`.
+  - `context.attrs`.
+  - `context.slots`.
+  - `context.emit`.
+  - `context.expose`.
+  - `context.parent`.
+  - `context.root`.
+
+```js
+import { ref, toRefs } from 'vue';
+
+export default {
+  setup(props, { attrs, slots, emit, expose }) {
+    const { title } = toRefs(props);
+
+    const count = ref(0);
+    const increment = () => ++count.value;
+
+    console.log(title.value);
+
+    return { title, increment };
+  },
+};
+```
+
+### Hooks Method
+
+- `onBeforeMount`.
+- `onMounted`.
+- `onBeforeUpdate`.
+- `onUpdated`.
+- `onBeforeUnmount`.
+- `onUnmounted`.
+- `onErrorCaptured`.
+- `onRenderTracked`.
+- `onRenderTriggered`.
+- `onActivated`.
+- `onDeactivated`.
+
+### Reactivity
+
+#### Reactive Value
+
+```js
+import { reactive, toRefs } from 'vue';
+
+const book = reactive({
+  author: 'Vue Team',
+  year: '2020',
+  title: 'Vue 3 Guide',
+  description: 'You are reading this book right now ;)',
+  price: 'free',
+});
+
+const { author, title } = toRefs(book);
+
+title.value = 'Vue 3 Detailed Guide';
+console.log(book.title); // 'Vue 3 Detailed Guide'
+```
+
+#### Computed Value
+
+```js
+const count = ref(1);
+const plusOne = computed(() => count.value + 1);
+
+console.log(plusOne.value); // 2
+
+plusOne.value++; // error
+```
+
+```js
+const count = ref(1);
+const plusOne = computed({
+  get: () => count.value + 1,
+  set: val => {
+    count.value = val - 1;
+  },
+});
+
+plusOne.value = 1;
+console.log(count.value); // 0
+```
+
+#### Watch Value
+
+Watch single value:
+
+```js
+// watching a getter
+const state = reactive({ count: 0 });
+watch(
+  () => state.count,
+  (count, prevCount) => {
+    /* ... */
+  }
+);
+
+// directly watching a ref
+const count = ref(0);
+watch(count, (count, prevCount) => {
+  /* ... */
+});
+```
+
+Watch multiple value:
+
+```js
+const firstName = ref('');
+const lastName = ref('');
+
+watch([firstName, lastName], (newValues, prevValues) => {
+  console.log(newValues, prevValues);
+});
+
+firstName.value = 'John'; // logs: ["John", ""] ["", ""]
+lastName.value = 'Smith'; // logs: ["John", "Smith"] ["John", ""]
+```
+
+Watch reactive value:
+
+```js
+const numbers = reactive([1, 2, 3, 4]);
+
+watch(
+  () => [...numbers],
+  (numbers, prevNumbers) => {
+    console.log(numbers, prevNumbers);
+  }
+);
+
+numbers.push(5); // logs: [1,2,3,4,5] [1,2,3,4]
+```
+
+Watch deep object:
+
+```js
+const state = reactive({
+  id: 1,
+  attributes: {
+    name: '',
+  },
+});
+
+watch(
+  () => state,
+  (state, prevState) => {
+    console.log('not deep', state.attributes.name, prevState.attributes.name);
+  }
+);
+
+watch(
+  () => state,
+  (state, prevState) => {
+    console.log('deep', state.attributes.name, prevState.attributes.name);
+  },
+  { deep: true }
+);
+
+state.attributes.name = 'Alex'; // Logs: "deep" "Alex" "Alex"
 ```
 
 ## Animation and Transition
