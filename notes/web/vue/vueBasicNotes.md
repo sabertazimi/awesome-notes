@@ -2217,11 +2217,10 @@ data.a; // getHook() get called.
 data.a = 2; // setHook() get called.
 ```
 
-- `targetMap` -> `key: depsMap`: key is reactive object.
-- `depsMap` -> `key: dep`: key is object property name.
-- `dep` -> `effects`.
+- `targetMap` -> `key: effectsMap`: key is reactive object.
+- `effectsMap` -> `key: effects`: key is object property name.
 
-```js
+```ts
 type Primitive = string | number | boolean;
 type Key = string | symbol;
 type Effect<T> = () => T;
@@ -2230,24 +2229,31 @@ const runningEffects = [];
 
 const targetMap = new WeakMap();
 
+// runEffect -> effect -> proxy.get -> track.
+function createEffect<T>(effect: Effect<T>) {
+  runningEffects.push(effect);
+  effect();
+  runningEffects.pop();
+}
+
 function track<T extends object>(target: T, key: Key) {
   for (const effect of runningEffects) {
-    let depsMap = targetMap.get(target);
-    if (!depsMap) targetMap.set(target, (depsMap = new Map()));
+    let effectsMap = targetMap.get(target);
+    if (!effectsMap) targetMap.set(target, (effectsMap = new Map()));
 
-    let dep = depsMap.get(key);
-    if (!dep) depsMap.set(key, (dep = new Set()));
+    let effects = effectsMap.get(key);
+    if (!effects) effectsMap.set(key, (effects = new Set()));
 
-    dep.add(effect);
+    effects.add(effect);
   }
 }
 
 function trigger<T extends object>(target: T, key: Key) {
-  const depsMap = targetMap.get(target);
-  if (!depsMap) return;
+  const effectsMap = targetMap.get(target);
+  if (!effectsMap) return;
 
-  const dep = depsMap.get(key);
-  if (dep) dep.forEach(effect => effect());
+  const effects = effectsMap.get(key);
+  if (effects) effects.forEach(effect => effect());
 }
 
 function reactive<T extends object>(target: T) {
@@ -2284,13 +2290,6 @@ function ref<T extends Primitive>(raw?: T) {
   return refObject;
 }
 
-// runEffect -> effect -> proxy.get -> track.
-function createEffect<T>(effect: Effect<T>) {
-  runningEffects.push(effect);
-  effect();
-  runningEffects.pop();
-}
-
 function computed<T extends Primitive>(getter: () => T) {
   const refObject = ref<T>();
   createEffect(() => (refObject.value = getter()));
@@ -2298,7 +2297,7 @@ function computed<T extends Primitive>(getter: () => T) {
 }
 ```
 
-```js
+```ts
 interface Product {
   price: number;
   quantity: number;
