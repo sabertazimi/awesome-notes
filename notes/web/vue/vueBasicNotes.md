@@ -2230,13 +2230,9 @@ const targetMap = new WeakMap();
 
 // runEffect -> effect -> proxy.get -> track.
 function createEffect<T>(effect: Effect<T>) {
-  const runEffect = () => {
-    runningEffects.push(effect);
-    effect();
-    runningEffects.pop();
-  };
-
-  runEffect();
+  runningEffects.push(effect);
+  effect();
+  runningEffects.pop();
 }
 
 function track<T extends object>(target: T, key: string | symbol) {
@@ -2277,6 +2273,21 @@ function reactive<T extends object>(target: T) {
 
   return new Proxy(target, handler);
 }
+
+function ref<T>(raw: T) {
+  const refObject = {
+    get value() {
+      track(refObject, 'value');
+      return raw;
+    },
+    set value(newValue) {
+      raw = newValue;
+      trigger(refObject, 'value');
+    },
+  };
+
+  return refObject;
+}
 ```
 
 ```js
@@ -2286,38 +2297,32 @@ interface Product {
 }
 
 const product = reactive<Product>({ price: 5, quantity: 2 });
+const salePrice = ref(0);
 let total = 0;
-let salePrice = 0;
 
 createEffect(() => {
-  total = product.price * product.quantity;
-  console.log(`Effect total: ${total}.`);
+  salePrice.value = product.price * 0.9;
 });
-// Effect total: 10.
+
+console.assert(salePrice.value === 4.5);
 
 createEffect(() => {
-  salePrice = product.price * 0.9;
-  console.log(`Effect salePrice: ${salePrice}.`);
+  total = salePrice.value * product.quantity;
 });
-// Effect salePrice: 4.5.
+
+console.assert(total === 9);
 
 product.quantity = 3;
-// Effect total: 15.
-
-product.quantity = 3;
-// No log.
+console.assert(total === 13.5);
 
 product.quantity = 4;
-// Effect total: 20.
-
-product.price = 5;
-// No log.
+console.assert(total === 18);
 
 product.price = 6;
-// Effect total: 24.
-// Effect salePrice: 5.4.
+console.assert(salePrice.value === 5.4);
+console.assert(total === 21.6);
 
 product.price = 10;
-// Effect total: 40.
-// Effect salePrice: 9.
+console.assert(salePrice.value === 9);
+console.assert(total === 36);
 ```
