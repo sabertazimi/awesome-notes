@@ -927,21 +927,21 @@ Higher Order Components.
 
 Solve:
 
-- reuse code with using ES6 classes
-- compose multiple HOCs
+- Reuse code with using ES6 classes.
+- Compose multiple HOCs.
 
 Pros:
 
-- reusable (abstract same logic)
+- Reusable (abstract same logic).
 - HOC is flexible with input data
-  (pass input data as parameters or derive it from props)
+  (pass input data as parameters or derive it from props).
 
 Cons:
 
-- wrapper hell: `withA(withB(withC(withD(Comp))))`
-- implicit dependencies: which HOC providing a certain prop
-- name collision/overlap props: overwrite the same name prop silently
-- HOC is not flexible with output data (to WrappedComponent)
+- Wrapper hell: `withA(withB(withC(withD(Comp))))`.
+- Implicit dependencies: which HOC providing a certain prop.
+- Name collision/overlap props: overwrite the same name prop silently.
+- HOC is not flexible with output data (to WrappedComponent).
 
 ```jsx
 // ToggleableMenu.jsx
@@ -1007,28 +1007,28 @@ Children/Props as render function:
 
 Solve:
 
-- reuse code with using ES6 classes
-- lowest level of indirection
-- no naming collision
+- Reuse code with using ES6 classes.
+- Lowest level of indirection.
+- No naming collision.
 
 e.g `Context` or `ThemesProvider` is designed base on Render Props.
 
 Pros:
 
-- separate presentation from logic
-- extendable
-- reusable (abstract same logic)
+- Separate presentation from logic.
+- Extendable.
+- Reusable (abstract same logic).
 - Render Props is flexible with output data
-  (children parameters definition free)
+  (children parameters definition free).
 
 Cons:
 
-- wrapper hell (when many cross-cutting concerns are applied to a component)
-- minor memory issues when defining a closure for every render
-- unable to optimize code with `React.memo`/`React.PureComponent`
+- Wrapper hell (when many cross-cutting concerns are applied to a component).
+- Minor memory issues when defining a closure for every render.
+- Unable to optimize code with `React.memo`/`React.PureComponent`
   due to `render()` function always changes.
 - Render Props is not flexible with input data
-  (restricts children components from using the data at outside field)
+  (restricts children components from using the data at outside field).
 
 ```jsx
 class Toggleable extends React.Component {
