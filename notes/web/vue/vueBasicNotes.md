@@ -573,7 +573,7 @@ export default {
 };
 ```
 
-### Hooks Method
+### Composition LifeCycle Hooks
 
 - `onBeforeMount`.
 - `onMounted`.
@@ -586,6 +586,10 @@ export default {
 - `onRenderTriggered`.
 - `onActivated`.
 - `onDeactivated`.
+
+`beforeCreate` -> `setup` -> `created`:
+No need for `onBeforeCreate` and `onCreated` hooks,
+just put code in `setup` methods.
 
 ### Reactivity
 
