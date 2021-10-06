@@ -2354,12 +2354,12 @@ Vue 2:
 
 ```js
 Vue.set(app.items, indexOfItem, newValue);
-Vue.set(app.data, newField, newValue);
+Vue.set(app.product, newField, newValue);
 ```
 
 Vue 3:
 
 ```js
 app.items[indexOfItem] = newValue;
-app.data[newField] = newValue;
+app.product[newField] = newValue;
 ```
