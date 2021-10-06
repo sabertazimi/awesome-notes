@@ -2328,5 +2328,7 @@ console.assert(total.value === 36);
 - `effect.ts`: `effect`, `track`, `trigger`.
 - `baseHandlers.ts`: proxy handler (`get` and `set`).
 - `reactive.ts`: `reactive` using ES6 Proxy.
-- `ref.ts`: reactive reference using Object Accessors.
+- `ref.ts`:
+  - reactive reference using Object Accessors.
+  - `ref` performant over `reactive`.
 - `computed.ts`: `computed` using `effect` and return a `ref`.
