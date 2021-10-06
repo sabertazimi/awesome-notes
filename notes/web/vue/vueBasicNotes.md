@@ -2332,3 +2332,34 @@ console.assert(total.value === 36);
   - reactive reference using Object Accessors.
   - `ref` performant over `reactive`.
 - `computed.ts`: `computed` using `effect` and return a `ref`.
+
+#### ES6 Reactive Proxy
+
+- Simple: `Proxy` 使用上比 Object.defineProperty 方便.
+  - `Object.defineProperty` 只能监听对象, 导致 `Vue 2` `data` 属性必须通过一个返回对象的函数方式初始化,
+  - `Vue 3` 更加多元化, 可以监听任意数据.
+- Performant: `Proxy` 代理整个对象, Object.defineProperty 只代理对象上的某个属性.
+  - `Object.defineProperty` 由于每次只能监听对象一个键的 `get`/`set`, 导致需要循环监听浪费性能.
+  - `Proxy` 可以一次性监听到所有属性.
+- Lazy: Proxy 性能优于 Object.defineProperty.
+  - 如果对象内部要全部递归代理, 则 Proxy 可以只在调用时递归.
+  - Object.defineProperty 需要在一开始就全部递归.
+- Feature:
+  - 对象上定义新属性时, 只有 Proxy 可以监听到.
+  - 数组新增删除修改时, 只有 Proxy 可以监听到.
+  - `Object.defineProperty` 无法监听数组, `Proxy` 则可以直接监听数组变化.
+- Proxy 不兼容 IE, Object.defineProperty 不兼容 IE8 及以下.
+
+Vue 2:
+
+```js
+Vue.set(app.items, indexOfItem, newValue);
+Vue.set(app.data, newField, newValue);
+```
+
+Vue 3:
+
+```js
+app.items[indexOfItem] = newValue;
+app.data[newField] = newValue;
+```
