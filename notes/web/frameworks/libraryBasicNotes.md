@@ -800,6 +800,7 @@ tags: [Web, Framework, Library]
 #### PDF Utils
 
 - [React PDF](https://github.com/wojtekmaj/react-pdf)
+- [PDF.js](https://github.com/mozilla/pdf.js)
 - [jsPDF: Client-side JavaScript PDF generation](https://github.com/MrRio/jsPDF)
 - [PDFMake](https://github.com/bpampuch/pdfmake)
 - [PDFKit](https://github.com/foliojs/pdfkit)
