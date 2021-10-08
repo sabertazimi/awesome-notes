@@ -5607,15 +5607,15 @@ Progressive Web Apps:
 
 #### SW Pros
 
-- cache
-- offline
-- background
-- custom request to minimize network
-- [Notification API](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification)
+- Cache.
+- Offline.
+- Background.
+- Custom request to minimize network.
+- [Notification API](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification).
 
 #### SW Costs
 
-- need startup time
+- Need startup time.
 
 ```js
 // 20~100 ms for desktop
@@ -5648,8 +5648,8 @@ const cacheEnd = performance.now();
 
 #### SW Demo
 
-- SW Serving Strategy
-- SW Caching Strategy
+- SW Serving Strategy.
+- SW Caching Strategy.
 
 ```js
 // Check that service workers are registered
@@ -5708,6 +5708,7 @@ self.addEventListener('install', e => {
 ### PWA Tutorials
 
 - [Extensive Guide](https://www.smashingmagazine.com/2018/11/guide-pwa-progressive-web-applications)
+- [Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers).
 
 ## Web Observer API
 
