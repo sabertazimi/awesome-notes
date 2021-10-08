@@ -26,7 +26,12 @@ tags: [Web, Framework, Library]
 
 - [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 - [Create React App](https://github.com/facebook/create-react-app)
-- [React Component Boilerplate](https://github.com/insin/nwb)
+- [Create React Native App](https://github.com/expo/create-react-native-app)
+- [React Electron Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
+- [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
+- [React BulletProof Boilerplate](https://github.com/alan2207/bulletproof-react)
+- [React CRA Boilerplate](https://github.com/react-boilerplate/react-boilerplate-cra-template)
+- [NWB: React Component Boilerplate](https://github.com/insin/nwb)
 - [Neutrino.js Customizable Boilerplate](https://github.com/neutrinojs/neutrino)
 - [Hygen Component Generator](https://github.com/jondot/hygen)
 - [React Chrome Extension](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
