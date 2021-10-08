@@ -1665,7 +1665,7 @@ type Falsy = false | '' | 0 | null | undefined;
 const isFalsy = (val: unknown): val is Falsy => !val;
 ```
 
-### Primitive
+### Primitive Type
 
 ```ts
 type Primitive = string | number | boolean | bigint | symbol | null | undefined;
@@ -1689,16 +1689,24 @@ const isPrimitive = (val: unknown): val is Primitive => {
 };
 ```
 
-### Promise Types
+### Promise Type
 
 ```ts
-// Get naked Promise<T> type
-type PromiseType<T extends Promise<any>> = T extends Promise<infer U>
-  ? U
-  : never;
+// TypeScript 4.5.
+// Get naked Promise<T> type.
+type Awaited<T extends any> = T extends Promise<infer U> ? Awaited<U> : T;
+
+// A = string.
+type A = Awaited<Promise<string>>;
+
+// B = number.
+type B = Awaited<Promise<Promise<number>>>;
+
+// C = boolean | number.
+type C = Awaited<boolean | Promise<number>>;
 ```
 
-### Proxy Types
+### Proxy Type
 
 ```ts
 type Proxy<T> = {
@@ -1709,7 +1717,7 @@ type Proxy<T> = {
 type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
 ```
 
-### Recursive Types
+### Recursive Type
 
 ```ts
 type DeepReadonly<T> = {
