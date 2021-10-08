@@ -3034,9 +3034,9 @@ getComputedStyle();
 
 #### 批量修改 DOM
 
-- 先 display="none", 修改完成后，display=""
-- 使待修改 DOM 元素脱离标准文档流(改变布局／定位方式)，可减少其他元素的重绘次数
-- document.createDocumentFragment()
+- 先 `display="none"`, 修改完成后, `display=""`.
+- 使待修改 DOM 元素脱离标准文档流(改变布局／定位方式)，可减少其他元素的重绘次数.
+- `document.createDocumentFragment()`.
 
 ```js
 const fragment = document.createDocumentFragment();
