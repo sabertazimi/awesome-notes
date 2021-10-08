@@ -887,6 +887,8 @@ tags: [Web, Framework, Library]
 
 - [React Terminal](https://github.com/rohanchandra/react-terminal-component)
 - [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
+- [Hyper: Terminal built on Web](https://github.com/vercel/hyper)
+- [Xterm.js: Terminal for Web](https://github.com/xtermjs/xterm.js)
 - [Jay: Supercharged JavaScript REPL](https://github.com/nikersify/jay)
 
 ### CLI Tools
