@@ -345,6 +345,7 @@ tags: [Web, Framework, Library]
 - [GitTalk: Modern comment component based on Github Issue and Preact](https://github.com/gitalk/gitalk)
 - [Utterances: Lightweight comments widget built on GitHub issues](https://github.com/utterance/utterances)
 - [Disqus](https://github.com/disqus/disqus-react)
+- [Waline: Simple, Safe Comment System inspired by Valine](https://github.com/walinejs/waline)
 
 ### Modal
 
