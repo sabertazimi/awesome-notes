@@ -2269,7 +2269,7 @@ function trigger<T extends object>(target: T, key: Key) {
   if (effects) effects.forEach(effect => effect());
 }
 
-function reactive<T extends object>(target: T) {
+export function reactive<T extends object>(target: T) {
   const handler: ProxyHandler<T> = {
     get(target, key, receiver) {
       const value = Reflect.get(target, key, receiver);
@@ -2288,7 +2288,7 @@ function reactive<T extends object>(target: T) {
   return new Proxy(target, handler);
 }
 
-function ref<T extends Primitive>(raw?: T) {
+export function ref<T extends Primitive>(raw?: T) {
   const refObject = {
     get value() {
       track(refObject, 'value');
@@ -2303,7 +2303,7 @@ function ref<T extends Primitive>(raw?: T) {
   return refObject;
 }
 
-function computed<T extends Primitive>(getter: () => T) {
+export function computed<T extends Primitive>(getter: () => T) {
   const refObject = ref<T>();
   createEffect(() => (refObject.value = getter()));
   return refObject;
