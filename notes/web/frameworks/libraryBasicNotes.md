@@ -481,6 +481,7 @@ tags: [Web, Framework, Library]
 - [Lax Scroll Animation](https://github.com/alexfoxy/laxxx)
 - [Rellax: Lightweight, vanilla javascript parallax library](https://github.com/dixonandmoe/rellax)
 - [Scroll Bar Detection](https://github.com/idiotWu/smooth-scrollbar)
+- [Atropos: 3D Parallax Effects](https://github.com/nolimits4web/atropos)
 
 ### Mouse Utils
 
