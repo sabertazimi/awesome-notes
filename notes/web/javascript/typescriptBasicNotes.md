@@ -1421,7 +1421,7 @@ export default connect<StateProps, DispatchProps, OwnProps>(
 - Distributive conditional types
   just like `map` statement (`loop` statement) on `union` type.
 - Conditional types make TypeScript become real programing type system:
-  [TypeScripts Type System Turing Complete](https://github.com/microsoft/TypeScript/issues/14833).
+  TypeScript type system is [Turing Complete](https://github.com/microsoft/TypeScript/issues/14833).
 
 ### Basic Conditional Types
 
@@ -2197,6 +2197,87 @@ class Example {
 #### IOC and DI Utils
 
 - [InversifyJS: Powerful and lightweight inversion of control container](https://github.com/inversify/InversifyJS)
+
+## Type System
+
+TypeScript Type System is
+[Turing Complete](https://github.com/microsoft/TypeScript/issues/14833).
+
+### Covariance
+
+Covariance (协变性):
+
+Type `T` is **covariant** if having `S <: P`, then `T<S> <: T<P>`.
+
+```ts
+type IsSubtype<S, P> = S extends P ? true : false;
+
+type T1 = IsSubtype<Admin, User>;
+// type T1 = true
+
+type T2 = IsSubtype<Promise<Admin>, Promise<User>>;
+// type T2 = true
+
+type T3 = IsSubtype<'Hello', string>;
+// type T3 = true
+
+type T4 = IsSubtype<Capitalize<'Hello'>, Capitalize<string>>;
+// type T4 = true
+```
+
+### Contravariance
+
+Contravariance (逆变性):
+
+Type `T` is **contravariant** if having `S <: P`, then `T<P> <: T<S>`.
+
+```ts
+type IsSubtype<S, P> = S extends P ? true : false;
+
+type Func<Param> = (param: Param) => void;
+
+type T1 = IsSubtype<Admin, User>;
+// type T1 = true
+
+type T2 = IsSubtype<Func<Admin>, Func<User>>;
+// type T2 = false
+
+type T3 = IsSubtype<Func<User>, Func<Admin>>;
+// type T3 = true
+```
+
+```ts
+const logAdmin: Func<Admin> = (admin: Admin): void => {
+  console.log(`Name: ${admin.userName}`);
+  console.log(`Is super admin: ${admin.isSuperAdmin.toString()}`);
+}
+
+const logUser: Func<User> = (user: User): void => {
+  console.log(`Name: ${user.userName}`);
+}
+
+const admin = new Admin('admin1', true);
+
+let logger: Func<Admin>;
+
+logger = logUser;
+logger(admin); // OK
+
+logger = logAdmin;
+logger(admin); // OK
+
+const user = new User('user1');
+
+let logger: Func<User>;
+
+logger = logUser;
+logger(user); // OK
+
+logger = logAdmin;
+// Type 'Func<Admin>' is not assignable to type 'Func<User>'.
+//   Property 'isSuperAdmin' is missing in type 'User' but required in type 'Admin'.
+logger(user); // Oops! `user.isSuperAdmin` is undefined.
+```
 
 ## Project Reference
 
