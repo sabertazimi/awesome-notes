@@ -2250,11 +2250,11 @@ type T3 = IsSubtype<Func<User>, Func<Admin>>;
 const logAdmin: Func<Admin> = (admin: Admin): void => {
   console.log(`Name: ${admin.userName}`);
   console.log(`Is super admin: ${admin.isSuperAdmin.toString()}`);
-}
+};
 
 const logUser: Func<User> = (user: User): void => {
   console.log(`Name: ${user.userName}`);
-}
+};
 
 const admin = new Admin('admin1', true);
 
