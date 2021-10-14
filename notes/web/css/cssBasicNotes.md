@@ -5260,3 +5260,7 @@ window.requestAnimationFrame(step);
 ## CSS Hacks
 
 - [Browser Hacks](https://github.com/4ae9b8/browserhacks)
+
+## Modern CSS
+
+- New CSS features in 2021: [Hover 2021](https://2021-hover-conf-new-in-css.netlify.app).
