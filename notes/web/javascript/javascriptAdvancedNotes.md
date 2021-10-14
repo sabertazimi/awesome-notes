@@ -6850,6 +6850,37 @@ HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`:
   - 503 Service Unavailable.
   - 504 Gateway Timeout.
 
+### CORS
+
+Cross Origin Resource Sharing:
+
+- Same origin:
+  URLs (Uniform Resource Locator) with same `protocol + host + port`.
+- CORS-safeListed response header:
+  `Cache-Control`, `Content-Language`, `Content-Length`, `Content-Type`,
+  `Expires`, `Last-Modified`, `Pragma`.
+
+```bash
+Access-Control-Allow-Origin: *
+```
+
+```bash
+Access-Control-Expose-Headers: X-Custom-Header, Content-Encoding
+Access-Control-Expose-Headers: *
+```
+
+```bash
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: https://example.com
+Vary: Cookie, Origin
+```
+
+```bash
+Access-Control-Max-Age: 600
+Access-Control-Allow-Methods: Custom-Method, CUSTOM-METHOD
+Access-Control-Allow-Headers: X-Custom-Header
+```
+
 ## Web Authentication
 
 ### HTTP Basic Authentication
