@@ -8527,6 +8527,7 @@ npx webpack --mode production --profile --json > stats.json
 - [Thread Loader](https://github.com/webpack-contrib/thread-loader)
 - [Hard Source Plugin](https://github.com/mzgoddard/hard-source-webpack-plugin)
 - [Speed Measure Plugin](https://github.com/stephencookdev/speed-measure-webpack-plugin)
+- [Compression Plugin](https://github.com/webpack-contrib/compression-webpack-plugin)
 
 #### Webpack Bundles UI Plugins
 
@@ -8611,7 +8612,7 @@ class HotLoad {
 module.exports = HotLoad;
 ```
 
-Typed webpack plugin from `laravel-mix/
+Typed webpack plugin from `laravel-mix/`:
 
 ```js
 const _ = require('lodash');
