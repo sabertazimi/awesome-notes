@@ -1169,7 +1169,6 @@ tags: [Web, Framework, Library]
 - [Bit](https://github.com/teambit/bit)
 - [NX](https://github.com/nrwl/nx)
 - [RushStack](https://github.com/microsoft/rushstack)
-- [Node Maintenance Tools](https://github.com/maxogden/maintenance-modules)
 
 ### DevOps Version Tools
 
