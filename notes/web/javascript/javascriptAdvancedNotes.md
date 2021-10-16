@@ -3197,89 +3197,6 @@ const Timer = {
 }
 ```
 
-### Web Worker
-
-#### 运行环境
-
-- navigation 对象: appName, appVersion, userAgent, platform
-- location 对象: 所有属性只读
-- ECMAScript 对象: Object/Array/Date
-- XMLHttpRequest 方法
-- setTimeout/setInterval 方法
-- self 对象: 指向全局 worker 对象
-- importScripts 方法: 加载外部依赖
-- close 方法: 停止 worker
-
-#### Web Worker Loader
-
-```js
-// 文件名为index.js
-function work() {
-  onmessage = ({ data: { jobId, message } }) => {
-    console.log('i am worker, receive:-----' + message);
-    postMessage({ jobId, result: 'message from worker' });
-  };
-}
-
-const makeWorker = f => {
-  let pendingJobs = {};
-
-  const worker = new Worker(
-    URL.createObjectURL(new Blob([`(${f.toString()})()`]))
-  );
-
-  worker.onmessage = ({ data: { result, jobId } }) => {
-    // 调用 resolve, 改变 Promise 状态
-    pendingJobs[jobId](result);
-    delete pendingJobs[jobId];
-  };
-
-  return (...message) =>
-    new Promise(resolve => {
-      const jobId = String(Math.random());
-      pendingJobs[jobId] = resolve;
-      worker.postMessage({ jobId, message });
-    });
-};
-
-const testWorker = makeWorker(work);
-
-testWorker('message from main thread').then(message => {
-  console.log('i am main thread, i receive:-----' + message);
-});
-```
-
-#### worker 实例
-
-- 先 on ,后 post
-- main.js/worker.js 的 onmessage 与 postMessage 相互触发
-
-```js
-/*
- * JSONParser.js
- */
-self.onmessage = function (event) {
-  const jsonText = event.data,
-    jsonData = JSON.parse(jsonText);
-
-  self.postMessage(jsonData);
-};
-```
-
-```js
-/*
- * main.js
- */
-const worker = new Worker('JSONParser.js');
-
-worker.onmessage = function (event) {
-  const jsonData = event.data;
-  evaluateData(jsonData);
-};
-
-worker.postMessage(jsonText);
-```
-
 ### AJAX
 
 #### AJAX Data Format
@@ -6403,6 +6320,87 @@ self.addEventListener(
   },
   false
 );
+```
+
+### Web Worker Runtime
+
+- navigation 对象: appName, appVersion, userAgent, platform
+- location 对象: 所有属性只读
+- ECMAScript 对象: Object/Array/Date
+- XMLHttpRequest 方法
+- setTimeout/setInterval 方法
+- self 对象: 指向全局 worker 对象
+- importScripts 方法: 加载外部依赖
+- close 方法: 停止 worker
+
+### Web Worker Loader
+
+```js
+// 文件名为index.js
+function work() {
+  onmessage = ({ data: { jobId, message } }) => {
+    console.log('i am worker, receive:-----' + message);
+    postMessage({ jobId, result: 'message from worker' });
+  };
+}
+
+const makeWorker = f => {
+  let pendingJobs = {};
+
+  const worker = new Worker(
+    URL.createObjectURL(new Blob([`(${f.toString()})()`]))
+  );
+
+  worker.onmessage = ({ data: { result, jobId } }) => {
+    // 调用 resolve, 改变 Promise 状态
+    pendingJobs[jobId](result);
+    delete pendingJobs[jobId];
+  };
+
+  return (...message) =>
+    new Promise(resolve => {
+      const jobId = String(Math.random());
+      pendingJobs[jobId] = resolve;
+      worker.postMessage({ jobId, message });
+    });
+};
+
+const testWorker = makeWorker(work);
+
+testWorker('message from main thread').then(message => {
+  console.log('i am main thread, i receive:-----' + message);
+});
+```
+
+### Web Worker Use Case
+
+- 先 on ,后 post
+- main.js/worker.js 的 onmessage 与 postMessage 相互触发
+
+```js
+/*
+ * JSONParser.js
+ */
+self.onmessage = function (event) {
+  const jsonText = event.data,
+    jsonData = JSON.parse(jsonText);
+
+  self.postMessage(jsonData);
+};
+```
+
+```js
+/*
+ * main.js
+ */
+const worker = new Worker('JSONParser.js');
+
+worker.onmessage = function (event) {
+  const jsonData = event.data;
+  evaluateData(jsonData);
+};
+
+worker.postMessage(jsonText);
 ```
 
 ## Web Gamepad API
