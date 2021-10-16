@@ -3483,66 +3483,6 @@ useEffect(() => {
 });
 ```
 
-### First Paint Time
-
-```js
-document.addEventListener('DOMContentLoaded', function () {
-  console.log('DOM 挂载时间: ', Date.now() - timerStart);
-  // 性能日志上报
-});
-
-window.addEventListener('load', function () {
-  console.log('所有资源加载完成时间: ', Date.now() - timerStart);
-  // 性能日志上报
-});
-```
-
-```js
-// 计算加载时间
-function getPerformanceTiming() {
-  const performance = window.performance;
-  if (!performance) {
-    // 当前浏览器不支持
-    console.log('你的浏览器不支持 performance 接口');
-    return;
-  }
-
-  const t = performance.timing;
-  const times = {};
-  //【重要】页面加载完成的时间
-  //【原因】这几乎代表了用户等待页面可用的时间
-  times.loadPage = t.loadEventEnd - t.navigationStart;
-  //【重要】解析 DOM 树结构的时间
-  //【原因】反省下你的 DOM 树嵌套是不是太多了！
-  times.domReady = t.domComplete - t.responseEnd;
-  //【重要】重定向的时间
-  //【原因】拒绝重定向！比如，http://example.com/ 就不该写成 http://example.com
-  times.redirect = t.redirectEnd - t.redirectStart;
-  //【重要】DNS 查询时间
-  //【原因】DNS 预加载做了么？页面内是不是使用了太多不同的域名导致域名查询的时间太长？
-  // 可使用 HTML5 Prefetch 预查询 DNS ，见：[HTML5 prefetch](http://segmentfault.com/a/1190000000633364)
-  times.lookupDomain = t.domainLookupEnd - t.domainLookupStart;
-  //【重要】读取页面第一个字节的时间
-  //【原因】这可以理解为用户拿到你的资源占用的时间，加异地机房了么，加CDN 处理了么？加带宽了么？加 CPU 运算速度了么？
-  // TTFB 即 Time To First Byte 的意思
-  // 维基百科：https://en.wikipedia.org/wiki/Time_To_First_Byte
-  times.ttfb = t.responseStart - t.navigationStart;
-  //【重要】内容加载完成的时间
-  //【原因】页面内容经过 gzip 压缩了么，静态资源 css/js 等压缩了么？
-  times.request = t.responseEnd - t.requestStart;
-  //【重要】执行 onload 回调函数的时间
-  //【原因】是否太多不必要的操作都放到 onload 回调函数里执行了，考虑过延迟加载、按需加载的策略么？
-  times.loadEvent = t.loadEventEnd - t.loadEventStart;
-  // DNS 缓存时间
-  times.appCache = t.domainLookupStart - t.fetchStart;
-  // 卸载页面的时间
-  times.unloadEvent = t.unloadEventEnd - t.unloadEventStart;
-  // TCP 建立连接完成握手的时间
-  times.connect = t.connectEnd - t.connectStart;
-  return times;
-}
-```
-
 ### 算数逻辑运算
 
 #### 位操作
@@ -4012,6 +3952,97 @@ Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 - lazy loading
 - offline caching (PWA)
 
+#### Performance API
+
+```ts
+performance.mark('mainThread-start');
+expensiveCalculation();
+performance.mark('mainThread-stop');
+performance.measure('mainThread', 'mainThread-start', 'mainThread-stop');
+```
+
+#### First Paint Time
+
+```js
+const entryHandler = list => {
+  for (const entry of list.getEntries()) {
+    if (entry.name === 'first-paint') {
+      observer.disconnect();
+    }
+
+    console.log(entry);
+  }
+};
+
+const observer = new PerformanceObserver(entryHandler);
+observer.observe({ type: 'paint', buffered: true });
+
+// {
+//   duration: 0,
+//   entryType: "paint",
+//   name: "first-paint",
+//   startTime: 359,
+// }
+```
+
+```js
+document.addEventListener('DOMContentLoaded', function () {
+  console.log('DOM 挂载时间: ', Date.now() - timerStart);
+  // 性能日志上报
+});
+
+window.addEventListener('load', function () {
+  console.log('所有资源加载完成时间: ', Date.now() - timerStart);
+  // 性能日志上报
+});
+```
+
+```js
+// 计算加载时间
+function getPerformanceTiming() {
+  const performance = window.performance;
+  if (!performance) {
+    // 当前浏览器不支持
+    console.log('你的浏览器不支持 performance 接口');
+    return;
+  }
+
+  const t = performance.timing;
+  const times = {};
+  //【重要】页面加载完成的时间
+  //【原因】这几乎代表了用户等待页面可用的时间
+  times.loadPage = t.loadEventEnd - t.navigationStart;
+  //【重要】解析 DOM 树结构的时间
+  //【原因】反省下你的 DOM 树嵌套是不是太多了！
+  times.domReady = t.domComplete - t.responseEnd;
+  //【重要】重定向的时间
+  //【原因】拒绝重定向！比如，http://example.com/ 就不该写成 http://example.com
+  times.redirect = t.redirectEnd - t.redirectStart;
+  //【重要】DNS 查询时间
+  //【原因】DNS 预加载做了么？页面内是不是使用了太多不同的域名导致域名查询的时间太长？
+  // 可使用 HTML5 Prefetch 预查询 DNS ，见：[HTML5 prefetch](http://segmentfault.com/a/1190000000633364)
+  times.lookupDomain = t.domainLookupEnd - t.domainLookupStart;
+  //【重要】读取页面第一个字节的时间
+  //【原因】这可以理解为用户拿到你的资源占用的时间，加异地机房了么，加CDN 处理了么？加带宽了么？加 CPU 运算速度了么？
+  // TTFB 即 Time To First Byte 的意思
+  // 维基百科：https://en.wikipedia.org/wiki/Time_To_First_Byte
+  times.ttfb = t.responseStart - t.navigationStart;
+  //【重要】内容加载完成的时间
+  //【原因】页面内容经过 gzip 压缩了么，静态资源 css/js 等压缩了么？
+  times.request = t.responseEnd - t.requestStart;
+  //【重要】执行 onload 回调函数的时间
+  //【原因】是否太多不必要的操作都放到 onload 回调函数里执行了，考虑过延迟加载、按需加载的策略么？
+  times.loadEvent = t.loadEventEnd - t.loadEventStart;
+  // DNS 缓存时间
+  times.appCache = t.domainLookupStart - t.fetchStart;
+  // 卸载页面的时间
+  times.unloadEvent = t.unloadEventEnd - t.unloadEventStart;
+  // TCP 建立连接完成握手的时间
+  times.connect = t.connectEnd - t.connectStart;
+  return times;
+}
+```
+
 #### Performant Tips for FCP
 
 First Contentful Paint:
@@ -4024,6 +4055,28 @@ First Contentful Paint:
 - Reduce server response time (e.g CDN).
 - TBT (Total Blocking Time) = TTI (Time to Interactive) - FCP (First Contentful Paint).
 
+```js
+const entryHandler = list => {
+  for (const entry of list.getEntries()) {
+    if (entry.name === 'first-contentful-paint') {
+      observer.disconnect();
+    }
+
+    console.log(entry);
+  }
+};
+
+const observer = new PerformanceObserver(entryHandler);
+observer.observe({ type: 'paint', buffered: true });
+
+// {
+//   duration: 0,
+//   entryType: "paint",
+//   name: "first-contentful-paint",
+//   startTime: 459,
+// }
+```
+
 #### Performant Tips for LCP
 
 Largest Contentful Paint:
@@ -4035,6 +4088,34 @@ Largest Contentful Paint:
 - Responsive images:
   size image based on device size with `srcset` on `<img>` or `<picture>`.
 
+```js
+const entryHandler = list => {
+  if (observer) {
+    observer.disconnect();
+  }
+
+  for (const entry of list.getEntries()) {
+    console.log(entry);
+  }
+};
+
+const observer = new PerformanceObserver(entryHandler);
+observer.observe({ type: 'largest-contentful-paint', buffered: true });
+
+// {
+//   duration: 0,
+//   element: p,
+//   entryType: 'largest-contentful-paint',
+//   id: '',
+//   loadTime: 0,
+//   name: '',
+//   renderTime: 1021.299,
+//   size: 37932,
+//   startTime: 1021.299,
+//   url: '',
+// }
+```
+
 #### Performant Tips for CLS
 
 Cumulative Layout Shift:
@@ -4045,9 +4126,70 @@ Cumulative Layout Shift:
   unless they appear when the user interacts with the page.
 - When it’s necessary to move elements, use `transform` animations.
 
+```js
+let sessionValue = 0;
+let sessionEntries = [];
+const cls = {
+  subType: 'layout-shift',
+  name: 'layout-shift',
+  type: 'performance',
+  pageURL: getPageURL(),
+  value: 0,
+};
+
+const entryHandler = list => {
+  for (const entry of list.getEntries()) {
+    // Only count layout shifts without recent user input.
+    if (!entry.hadRecentInput) {
+      const firstSessionEntry = sessionEntries[0];
+      const lastSessionEntry = sessionEntries[sessionEntries.length - 1];
+
+      // If the entry occurred less than 1 second after the previous entry and
+      // less than 5 seconds after the first entry in the session, include the
+      // entry in the current session. Otherwise, start a new session.
+      if (
+        sessionValue &&
+        entry.startTime - lastSessionEntry.startTime < 1000 &&
+        entry.startTime - firstSessionEntry.startTime < 5000
+      ) {
+        sessionValue += entry.value;
+        sessionEntries.push(formatCLSEntry(entry));
+      } else {
+        sessionValue = entry.value;
+        sessionEntries = [formatCLSEntry(entry)];
+      }
+
+      // If the current session value is larger than the current CLS value,
+      // update CLS and the entries contributing to it.
+      if (sessionValue > cls.value) {
+        cls.value = sessionValue;
+        cls.entries = sessionEntries;
+        cls.startTime = performance.now();
+        lazyReportCache(deepCopy(cls));
+      }
+    }
+  }
+};
+
+const observer = new PerformanceObserver(entryHandler);
+observer.observe({ type: 'layout-shift', buffered: true });
+
+// {
+//   duration: 0,
+//   entryType: "layout-shift",
+//   hadRecentInput: false,
+//   lastInputTime: 0,
+//   name: "",
+//   sources: (2) [LayoutShiftAttribution, LayoutShiftAttribution],
+//   startTime: 1176.199999999255,
+//   value: 0.000005752046026677329,
+// }
+```
+
 ### Performance Reference
 
-- [Web Vitals 优化实例](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw)
+- Web Vitals Real World [Case](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw).
+- Web Monitor Real World [Case](https://zhuanlan.zhihu.com/p/420330110).
 
 ## Testing and Debugging
 
@@ -4736,15 +4878,6 @@ Same thing in `VSCode` debug panel (log points, break points etc).
 - Timeline events [reference](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/performance-reference).
 - Performance analysis [reference](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference).
 - Performance tools [guide](https://zhuanlan.zhihu.com/p/41017888).
-
-#### Performance API
-
-```ts
-performance.mark('mainThread-start');
-expensiveCalculation();
-performance.mark('mainThread-stop');
-performance.measure('mainThread', 'mainThread-start', 'mainThread-stop');
-```
 
 ### Simulation DevTools
 
