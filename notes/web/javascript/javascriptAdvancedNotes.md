@@ -8510,6 +8510,7 @@ npx webpack --mode production --profile --json > stats.json
 #### Webpack JavaScript Plugins
 
 - [UglifyJS Terser Plugin](https://github.com/webpack-contrib/terser-webpack-plugin)
+- [JavaScript Obfuscator](https://github.com/javascript-obfuscator/webpack-obfuscator)
 - [Circular Dependency Plugin](https://github.com/aackerman/circular-dependency-plugin)
 
 #### Webpack CSS Plugins
