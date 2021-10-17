@@ -9122,13 +9122,13 @@ fsevents@~2.3.2:
   linkType: hard
 
 "jest-worker@npm:^27.0.2, jest-worker@npm:^27.0.6":
-  version: 27.2.5
-  resolution: "jest-worker@npm:27.2.5"
+  version: 27.3.0
+  resolution: "jest-worker@npm:27.3.0"
   dependencies:
     "@types/node": "*"
     merge-stream: ^2.0.0
     supports-color: ^8.0.0
-  checksum: e058057849f7202d8f19d1f57f50ecbce4484991244cff97f6793114f662d58d552d3fb90f8fd4adeeac7140a063d32445cc0ddd133a218cef81e6d2ec917762
+  checksum: 1fd375f22a2a70606b69ec828381aac5f9d751b697a72e4922d2898b5bf52700dc3b6b618a1b850ea44ddb7adf785e0d20df1c917f477b58a789c193dec5515b
   languageName: node
   linkType: hard
 
