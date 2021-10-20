@@ -1178,6 +1178,7 @@ tags: [Web, Framework, Library]
 - [Commit Lint](https://github.com/conventional-changelog/commitlint)
 - [Commitizen: Conventional commits CLI tool](https://github.com/commitizen/cz-cli)
 - [Semantic Release: Fully automated version management and package publishing](https://github.com/semantic-release/semantic-release)
+- [Google Release Bot](https://github.com/googleapis/release-please)
 - [Standard Version: Automate versioning and CHANGELOG generation](https://github.com/conventional-changelog/standard-version)
 
 ### DevOps Automation CI and CD Tools
