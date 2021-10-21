@@ -715,6 +715,7 @@ tags: [Web, Framework, Library]
 - [Video.js](https://github.com/videojs/video.js)
 - [Plyr](https://github.com/selz/plyr)
 - [FLV.js](https://github.com/bilibili/flv.js)
+- [VDX: FFmpeg CLI](https://github.com/yuanqing/vdx)
 
 ## Editor
 
