@@ -3988,59 +3988,108 @@ observer.observe({ type: 'paint', buffered: true });
 ```js
 document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM 挂载时间: ', Date.now() - timerStart);
-  // 性能日志上报
+
+  // 性能日志上报...
 });
 
 window.addEventListener('load', function () {
   console.log('所有资源加载完成时间: ', Date.now() - timerStart);
-  // 性能日志上报
+
+  // 性能日志上报...
 });
 ```
 
 ```js
-// 计算加载时间
+// 计算加载时间.
 function getPerformanceTiming() {
   const performance = window.performance;
+
   if (!performance) {
-    // 当前浏览器不支持
+    // 当前浏览器不支持.
     console.log('你的浏览器不支持 performance 接口');
     return;
   }
 
   const t = performance.timing;
   const times = {};
-  //【重要】页面加载完成的时间
-  //【原因】这几乎代表了用户等待页面可用的时间
+
+  //【重要】页面加载完成的时间.
+  //【原因】几乎代表了用户等待页面可用的时间.
   times.loadPage = t.loadEventEnd - t.navigationStart;
-  //【重要】解析 DOM 树结构的时间
-  //【原因】反省下你的 DOM 树嵌套是不是太多了！
+
+  //【重要】解析 DOM 树结构的时间.
+  //【原因】DOM 树嵌套过多.
   times.domReady = t.domComplete - t.responseEnd;
-  //【重要】重定向的时间
-  //【原因】拒绝重定向！比如，http://example.com/ 就不该写成 http://example.com
+
+  //【重要】重定向的时间.
+  //【原因】拒绝重定向. e.g http://example.com/ 不应写成 http://example.com.
   times.redirect = t.redirectEnd - t.redirectStart;
-  //【重要】DNS 查询时间
-  //【原因】DNS 预加载做了么？页面内是不是使用了太多不同的域名导致域名查询的时间太长？
-  // 可使用 HTML5 Prefetch 预查询 DNS ，见：[HTML5 prefetch](http://segmentfault.com/a/1190000000633364)
+
+  //【重要】DNS 查询时间.
+  //【原因】DNS 预加载做了么? 页面内是不是使用了太多不同的域名导致域名查询的时间太长?
+  // 可使用 HTML5 Prefetch 预查询 DNS, 见: [HTML5 prefetch](http://segmentfault.com/a/1190000000633364).
   times.lookupDomain = t.domainLookupEnd - t.domainLookupStart;
-  //【重要】读取页面第一个字节的时间
-  //【原因】这可以理解为用户拿到你的资源占用的时间，加异地机房了么，加CDN 处理了么？加带宽了么？加 CPU 运算速度了么？
-  // TTFB 即 Time To First Byte 的意思
-  // 维基百科：https://en.wikipedia.org/wiki/Time_To_First_Byte
+
+  //【重要】读取页面第一个字节的时间.
+  //【原因】这可以理解为用户拿到你的资源占用的时间, 加异地机房了么, 加CDN 处理了么? 加带宽了么? 加 CPU 运算速度了么?
+  // TTFB 即 Time To First Byte 的意思.
+  // 维基百科: https://en.wikipedia.org/wiki/Time_To_First_Byte.
   times.ttfb = t.responseStart - t.navigationStart;
-  //【重要】内容加载完成的时间
-  //【原因】页面内容经过 gzip 压缩了么，静态资源 css/js 等压缩了么？
+
+  //【重要】内容加载完成的时间.
+  //【原因】页面内容经过 gzip 压缩了么, 静态资源 `CSS`/`JS` 等压缩了么?
   times.request = t.responseEnd - t.requestStart;
-  //【重要】执行 onload 回调函数的时间
-  //【原因】是否太多不必要的操作都放到 onload 回调函数里执行了，考虑过延迟加载、按需加载的策略么？
+
+  //【重要】执行 onload 回调函数的时间.
+  //【原因】是否太多不必要的操作都放到 onload 回调函数里执行了, 考虑过延迟加载/按需加载的策略么?
   times.loadEvent = t.loadEventEnd - t.loadEventStart;
-  // DNS 缓存时间
+
+  // DNS 缓存时间.
   times.appCache = t.domainLookupStart - t.fetchStart;
-  // 卸载页面的时间
+
+  // 卸载页面的时间.
   times.unloadEvent = t.unloadEventEnd - t.unloadEventStart;
-  // TCP 建立连接完成握手的时间
+
+  // TCP 建立连接完成握手的时间.
   times.connect = t.connectEnd - t.connectStart;
   return times;
 }
+```
+
+```js
+const [pageNav] = performance.getEntriesByType('navigation');
+
+// Measuring DNS lookup time.
+const totalLookupTime = pageNav.domainLookupEnd - pageNav.domainLookupStart;
+
+// Quantifying total connection time.
+const connectionTime = pageNav.connectEnd - pageNav.connectStart;
+let tlsTime = 0; // <-- Assume 0 to start with
+
+// Was there TLS negotiation?
+if (pageNav.secureConnectionStart > 0) {
+  // Awesome! Calculate it!
+  tlsTime = pageNav.connectEnd - pageNav.secureConnectionStart;
+}
+
+// Cache seek plus response time of the current document.
+const fetchTime = pageNav.responseEnd - pageNav.fetchStart;
+
+// Service worker time plus response time.
+let workerTime = 0;
+
+if (pageNav.workerStart > 0) {
+  workerTime = pageNav.responseEnd - pageNav.workerStart;
+}
+
+// Request time only (excluding redirects, DNS, and connection/TLS time).
+const requestTime = pageNav.responseStart - pageNav.requestStart;
+
+// Response time only (download).
+const responseTime = pageNav.responseEnd - pageNav.responseStart;
+
+// Request + response time.
+const requestResponseTime = pageNav.responseEnd - pageNav.requestStart;
 ```
 
 #### Performant Tips for FCP
