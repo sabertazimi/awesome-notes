@@ -521,6 +521,7 @@ tags: [Web, Framework, Library]
 - [Motion](https://www.npmjs.com/package/motion)
 - [Framer Motion](https://github.com/framer/motion)
 - [Popmotion](https://github.com/popmotion/popmotion)
+- [TweenJS: TypeScript animation engine](https://github.com/tweenjs/tween.js/)
 - [React Transition Group](https://github.com/reactjs/react-transition-group)
 - [Airbnb AE Solution](https://github.com/airbnb/lottie-web)
 - [Animate.css](https://github.com/daneden/animate.css)
@@ -676,6 +677,7 @@ tags: [Web, Framework, Library]
 ## Canvas
 
 - [React Three Fiber: React renderer for Three.js](https://github.com/pmndrs/react-three-fiber)
+- [PixiJS: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer](https://github.com/pixijs/pixijs)
 - [HTML2Canvas](https://github.com/niklasvh/html2canvas)
 - [Rough.js](https://github.com/pshihn/rough)
 - [Canvas Manipulation](https://github.com/meltingice/CamanJS)
