@@ -252,7 +252,7 @@ tags: [Web, Framework, Library]
 - [Classnames](https://github.com/JedWatson/classnames)
 - [Tailwind Merge: Merge Tailwind CSS classes without style conflicts](https://github.com/dcastil/tailwind-merge)
 - [Styled Components](https://github.com/styled-components/styled-components)
-- [Emotion](https://github.com/emotion-js/emotion)
+- [Stitches: Near Zero-runtime, SSR, Multi-variant Support](https://github.com/modulz/stitches)
 - [Linaria: Zero-runtime CSS-in-TypeScript library](https://github.com/callstack/linaria)
 - [Vanilla Extract: Zero-runtime CSS-in-TypeScript](https://github.com/seek-oss/vanilla-extract)
 - [Compiled: Performant compile time CSS-in-TypeScript library](https://github.com/atlassian-labs/compiled)
@@ -824,6 +824,8 @@ tags: [Web, Framework, Library]
 - [ImmortalDB](https://github.com/gruns/ImmortalDB)
 - [LocalForage](https://github.com/localForage/localForage)
 - [JSCookie](https://github.com/js-cookie/js-cookie)
+- [React Cookie](https://github.com/reactivestack/cookies)
+- [Nookies: Cookie Helpers for Next.js](https://github.com/maticzav/nookies)
 
 ## Search
 
