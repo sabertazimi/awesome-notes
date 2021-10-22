@@ -6585,6 +6585,10 @@ worker.onmessage = function (event) {
 worker.postMessage(jsonText);
 ```
 
+### Web Worker Performance
+
+- Web Worker performance [guide](https://mp.weixin.qq.com/s/IJHI9JB3nMQPi46b6yGVWw).
+
 ## Web Gamepad API
 
 [Gamepad API Tutorials](https://developer.mozilla.org/zh-CN/docs/Games/Techniques/Controls_Gamepad_API)
