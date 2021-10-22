@@ -201,6 +201,7 @@ tags: [Web, Framework, Library]
 
 - [Immer](https://github.com/immerjs/immer)
 - [Proxy Memoize: Intuitive magical memoization with Proxy and WeakMap](https://github.com/dai-shi/proxy-memoize)
+- [MemoizeOne: Latest Invocation Memoization](https://github.com/alexreardon/memoize-one)
 
 ### IOC and DI Utils
 
