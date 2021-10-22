@@ -873,6 +873,7 @@ tags: [Web, Framework, Library]
 
 #### Node Utils
 
+- [ShellJS: Portable Unix shell commands](https://github.com/shelljs/shelljs)
 - [Cross Spawn](https://github.com/moxystudio/node-cross-spawn)
 - [Execa](https://github.com/sindresorhus/execa)
 - [Node Fetch](https://github.com/node-fetch/node-fetch)
