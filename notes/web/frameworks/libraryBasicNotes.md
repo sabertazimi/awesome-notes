@@ -1117,11 +1117,11 @@ tags: [Web, Framework, Library]
 ### Log Tools
 
 - [Winston: Logger for just about everything](https://github.com/winstonjs/winston)
+- [Pino: Super fast, all natural json logger](https://github.com/pinojs/pino)
 - [Log4.js](https://github.com/nomiddlename/log4js-node)
-- [Stacktrace.js](https://github.com/stacktracejs/stacktrace.js)
-- [Stacktrace Visualization](https://github.com/joyent/node-stackvis)
-- [Log Analyzer](https://github.com/allinurl/goaccess)
-- [HTTP Logger](https://github.com/expressjs/morgan)
+- [GoAccess: Real-time web log analyzer and interactive viewer](https://github.com/allinurl/goaccess)
+- [Morgan: Express HTTP Logger](https://github.com/expressjs/morgan)
+- [Stacktrace.js: Generate, parse, and enhance JavaScript stack traces in web browsers](https://github.com/stacktracejs/stacktrace.js)
 
 ### Mock Tools
 
