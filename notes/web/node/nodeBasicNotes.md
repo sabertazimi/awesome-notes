@@ -31,7 +31,6 @@ tags: [Web, Node]
 
 ```bash
 npm config set disturl https://npm.taobao.org/mirrors/node/
-npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/
 npm config set sharp_dist_base_url https://npm.taobao.org/mirrors/sharp-libvips/
 npm config set electron_mirror https://npm.taobao.org/mirrors/electron/
 npm config set puppeteer_download_host https://npm.taobao.org/mirrors/
