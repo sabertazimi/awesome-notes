@@ -3604,6 +3604,9 @@ label > .label-body {
 
 #### Custom Checkbox Widget
 
+Input itself as border shape,
+Pseudo elements as center shape (checked transform animation):
+
 ```css
 input[type='checkbox'] + label::before {
   position: relative;
