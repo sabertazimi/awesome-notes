@@ -191,6 +191,7 @@ tags: [Web, Framework, Library]
 - [WorkerPool](https://github.com/josdejong/workerpool)
 - [Comlink: Shared class between Web Workers](https://github.com/GoogleChromeLabs/comlink)
 - [GRFN: Executes dependency graph of async functions concurrently](https://github.com/TomerAberbach/grfn)
+- [Bull: Premium Queue package for handling distributed jobs and messages](https://github.com/OptimalBits/bull)
 
 ### Hash Utils
 
