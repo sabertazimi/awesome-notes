@@ -431,6 +431,7 @@ tags: [Web, Framework, Library]
 
 - [React Table](https://github.com/tannerlinsley/react-table)
 - [React Data Sheet](https://github.com/nadbm/react-datasheet)
+- [MUI Data Table](https://github.com/gregnb/mui-datatables)
 - [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
 - [SheetJS](https://github.com/SheetJS/sheetjs)
 - [HyperFormula](https://github.com/handsontable/hyperformula)
