@@ -352,8 +352,8 @@ tags: [Web, Framework, Library]
 
 ### Modal
 
-- [Golden: Multi window layout manager for webapps](https://github.com/golden-layout/golden-layout)
-- [WinBox: HTML5 window manager for web](https://github.com/nextapps-de/winbox)
+- [Golden: Multi Window Layout Manager for Web Apps](https://github.com/golden-layout/golden-layout)
+- [WinBox: HTML5 Window Manager for Web](https://github.com/nextapps-de/winbox)
 
 ### Message
 
