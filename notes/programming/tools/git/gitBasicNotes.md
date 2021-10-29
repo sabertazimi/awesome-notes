@@ -1122,6 +1122,7 @@ THE SOFTWARE.
 4. Commit changes (`git commit -am 'Add some feature'`).
 5. Push to the branch (`git push origin my-new-feature`).
 6. Create new Pull Request.
+7. Check `Allow edits from maintainers`.
 
 ### GitHub CLI Tool
 
