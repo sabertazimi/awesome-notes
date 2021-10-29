@@ -504,6 +504,10 @@ tags: [Web, Framework, Library]
 - [TransMat: Share data beyond boundaries of browser](https://github.com/google/transmat)
 - [Spacers: Drag for more space](https://github.com/actuallyakash/spacers)
 
+### Cursor Utils
+
+- [Blobity: Next Level Cursor Style Library](https://github.com/gmrchk/blobity)
+
 ### Detection Utils
 
 - [React Device Detect](https://github.com/duskload/react-device-detect)
