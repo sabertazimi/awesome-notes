@@ -450,6 +450,7 @@ tags: [Web, Framework, Library]
 - [Sigma: Dedicated to graph drawing](https://github.com/jacomyal/sigma.js)
 - [Plotly.js: Charting library behind Plotly and Dash](https://github.com/plotly/plotly.js)
 - [JSXGraph: Interactive geometry, function plotting, charting, and data visualization in browser](https://github.com/jsxgraph/jsxgraph)
+- [Cytoscape.js: Graph Theory (Network) Library for Visualization and Analysis](https://github.com/cytoscape/cytoscape.js)
 
 ### Charts Draw Utils
 
