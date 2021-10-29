@@ -352,6 +352,7 @@ tags: [Web, Framework, Library]
 
 ### Modal
 
+- [Golden: Multi window layout manager for webapps](https://github.com/golden-layout/golden-layout)
 - [WinBox: HTML5 window manager for web](https://github.com/nextapps-de/winbox)
 
 ### Message
@@ -429,12 +430,13 @@ tags: [Web, Framework, Library]
 
 ### Table
 
-- [React Table](https://github.com/tannerlinsley/react-table)
-- [React Data Sheet](https://github.com/nadbm/react-datasheet)
-- [MUI Data Table](https://github.com/gregnb/mui-datatables)
+- [React DataTable: Hooks for Building Fast and Extendable Data Tables and Grids](https://github.com/tannerlinsley/react-table)
+- [React DataSheet: Excel-like Data Tables and Grids component](https://github.com/nadbm/react-datasheet)
+- [MUI DataTable: Data Tables for React using Material UI](https://github.com/gregnb/mui-datatables)
 - [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
-- [SheetJS](https://github.com/SheetJS/sheetjs)
-- [HyperFormula](https://github.com/handsontable/hyperformula)
+- [Tabulator: Interactive Tables and Data Grids for JavaScript](https://github.com/olifolkerd/tabulator)
+- [SheetJS: Spreadsheet Data Toolkit](https://github.com/SheetJS/sheetjs)
+- [HyperFormula: Complete Excel-like Calculation Engine Written in TypeScript](https://github.com/handsontable/hyperformula)
 
 ### Charts Visualization
 
