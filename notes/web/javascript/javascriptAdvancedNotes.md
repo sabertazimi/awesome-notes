@@ -6188,6 +6188,12 @@ let draw = () => {
 draw();
 ```
 
+## Media Session API
+
+- [W3C Media Session Specification](https://w3c.github.io/mediasession/)
+- [MDN Media Session Documentation](https://developer.mozilla.org/en-US/docs/Web/API/MediaSession/)
+- [Google Media Session Blog](https://web.dev/media-session/)
+
 ## Web Storage API
 
 - Cookie for session state.
