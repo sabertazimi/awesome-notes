@@ -27,6 +27,7 @@ tags: [Web, Framework, Library]
 - [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 - [Create React App](https://github.com/facebook/create-react-app)
 - [Create React Native App](https://github.com/expo/create-react-native-app)
+- [Modern: Meta-framework Suite Designed for Frontend-focused Modern Web Development](https://github.com/modern-js-dev/modern.js)
 - [React Electron Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
 - [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
 - [React BulletProof Boilerplate](https://github.com/alan2207/bulletproof-react)
