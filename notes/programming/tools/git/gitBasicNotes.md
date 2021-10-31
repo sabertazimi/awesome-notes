@@ -1290,7 +1290,7 @@ jobs:
           architecture: x64
           registry-url: https://registry.npmjs.org/
           cache: 'yarn'
-      - name: Installation
+      - name: Install dependencies
         run: |
           yarn
       - name: Update dependencies
@@ -1307,6 +1307,25 @@ jobs:
           labels: dependencies
           assignees: sabertazimi
           reviewers: sabertazimi
+```
+
+### GitHub Dependabot
+
+```yml
+version: 2
+updates:
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "14:00"
+      timezone: "Asia/Shanghai"
+    open-pull-requests-limit: 10
+    versioning-strategy: increase
+    assignees:
+      - "sabertazimi"
+
 ```
 
 ## Git Tools
