@@ -469,6 +469,8 @@ git log main..feature
 `git reflog show` is an alias for
 `git log -g --abbrev-commit --pretty=oneline`.
 
+`git reflog` is useful for trace local git manipulation history.
+
 ```bash
 git reflog
 git reset HEAD@{index}
@@ -1314,18 +1316,17 @@ jobs:
 ```yml
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: 'npm' # See documentation for possible values
+    directory: '/' # Location of package manifests
     schedule:
-      interval: "weekly"
-      day: "sunday"
-      time: "14:00"
-      timezone: "Asia/Shanghai"
+      interval: 'weekly'
+      day: 'sunday'
+      time: '14:00'
+      timezone: 'Asia/Shanghai'
     open-pull-requests-limit: 10
     versioning-strategy: increase
     assignees:
-      - "sabertazimi"
-
+      - 'sabertazimi'
 ```
 
 ## Git Tools
