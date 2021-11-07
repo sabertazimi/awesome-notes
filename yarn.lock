@@ -2831,7 +2831,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-helmet@npm:*, @types/react-helmet@npm:^6.1.4":
+"@types/react-helmet@npm:*":
   version: 6.1.4
   resolution: "@types/react-helmet@npm:6.1.4"
   dependencies:
@@ -2851,7 +2851,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-router-dom@npm:*, @types/react-router-dom@npm:^5.3.2":
+"@types/react-router-dom@npm:*":
   version: 5.3.2
   resolution: "@types/react-router-dom@npm:5.3.2"
   dependencies:
@@ -2872,7 +2872,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^17.0.34":
+"@types/react@npm:*":
   version: 17.0.34
   resolution: "@types/react@npm:17.0.34"
   dependencies:
@@ -3687,9 +3687,6 @@ __metadata:
     "@docusaurus/preset-classic": 2.0.0-beta.9
     "@easyops-cn/docusaurus-search-local": ^0.19.1
     "@tsconfig/docusaurus": ^1.0.4
-    "@types/react": ^17.0.34
-    "@types/react-helmet": ^6.1.4
-    "@types/react-router-dom": ^5.3.2
     clsx: ^1.1.1
     eslint: ^8.2.0
     markdownlint-cli: ^0.29.0
