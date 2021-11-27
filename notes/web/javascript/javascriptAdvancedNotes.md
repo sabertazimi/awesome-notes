@@ -5969,7 +5969,7 @@ function changeColor(color) {
 }
 ```
 
-### Game Loop With Canvas
+### Canvas Game Loop
 
 for all objects:
 
@@ -6040,6 +6040,7 @@ onmessage = function (event) {
 - [Canvas Perf Tips 1](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
 - [Canvas Perf Tips 2](https://www.html5rocks.com/en/tutorials/canvas/performance)
 - [Canvas Deep Live](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
+- [Canvas Real World Case](https://zhuanlan.zhihu.com/p/438142235)
 
 ## Web Audio API
 
