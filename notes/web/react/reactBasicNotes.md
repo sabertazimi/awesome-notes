@@ -2673,7 +2673,11 @@ export default useLockedBody;
 ### Custom Media Query Hook
 
 ```tsx
-const useMedia = <T>(queries: string[], values: T[], defaultValue: T) => {
+export default function useMedia<T>(
+  queries: string[],
+  values: T[],
+  defaultValue: T
+) {
   // Array containing a media query list for each query
   const mediaQueryLists = queries.map(q => window.matchMedia(q));
 
@@ -2693,7 +2697,7 @@ const useMedia = <T>(queries: string[], values: T[], defaultValue: T) => {
   }, []);
 
   return value;
-};
+}
 ```
 
 ### Custom Form Hook
