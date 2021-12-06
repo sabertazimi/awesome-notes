@@ -735,6 +735,7 @@ tags: [Web, Framework, Library]
 ### Rich Text Editor
 
 - [React Markdown](https://github.com/remarkjs/react-markdown)
+- [Vditor: Multiple Mode Markdown Editor](https://github.com/Vanessa219/vditor)
 - [MilkDown Editor](https://github.com/Saul-Mirone/milkdown)
 - [Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
 - [Block Editor](https://github.com/codex-team/editor.js)
