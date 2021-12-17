@@ -2262,9 +2262,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@easyops-cn/docusaurus-search-local@npm:^0.21.1":
-  version: 0.21.1
-  resolution: "@easyops-cn/docusaurus-search-local@npm:0.21.1"
+"@easyops-cn/docusaurus-search-local@npm:^0.21.4":
+  version: 0.21.4
+  resolution: "@easyops-cn/docusaurus-search-local@npm:0.21.4"
   dependencies:
     "@docusaurus/utils": ^2.0.0-beta.4
     "@docusaurus/utils-validation": ^2.0.0-beta.4
@@ -2278,7 +2278,7 @@ __metadata:
     lunr-languages: ^1.4.0
     mark.js: ^8.11.1
     tslib: ^2.2.0
-  checksum: 0cf5f8ca290f0303e2368fe9383cd73bb4a3df3b615ea59ff0822bbc69de56a1632cf56c012bf4bdda199519bcf5148c5f0d7481120e8a6bf93297b2c3191db4
+  checksum: f96eb0ddbbd0b9bac9ea23da16741850f3a74b58bcaaccd1a3024668b08f49091e751e9f6a5795e64182de6c43008f51a33a33dc182154f1f7b68a06af6b66bd
   languageName: node
   linkType: hard
 
@@ -3727,7 +3727,7 @@ __metadata:
     "@docusaurus/core": 2.0.0-beta.13
     "@docusaurus/module-type-aliases": 2.0.0-beta.13
     "@docusaurus/preset-classic": 2.0.0-beta.13
-    "@easyops-cn/docusaurus-search-local": ^0.21.1
+    "@easyops-cn/docusaurus-search-local": ^0.21.4
     "@tsconfig/docusaurus": ^1.0.4
     eslint: ^8.4.1
     markdownlint-cli: ^0.30.0
