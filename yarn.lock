@@ -3760,7 +3760,7 @@ __metadata:
     "@tsconfig/docusaurus": ^1.0.4
     eslint: ^8.6.0
     markdownlint-cli: ^0.30.0
-    nodejieba: ^2.5.2
+    nodejieba: ^2.6.0
     prettier: ^2.5.1
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -9670,13 +9670,13 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"nodejieba@npm:^2.5.2":
-  version: 2.5.2
-  resolution: "nodejieba@npm:2.5.2"
+"nodejieba@npm:^2.6.0":
+  version: 2.6.0
+  resolution: "nodejieba@npm:2.6.0"
   dependencies:
     "@mapbox/node-pre-gyp": ^1.0.4
     node-addon-api: ^3.0.2
-  checksum: 51c98e50eeb235a3748cbefea2000349c831a2f874a5c5a581b11f121b21bacf7ebaecb9a5f7012945044c685b565b3c37a2efcaebc2ffa825d26768a4d635da
+  checksum: 6e36b752620942a9639eaf6c4a6387663cbbae45e8801ef2bf7c443854945b269aa47535d5171d95602f45b44a9765469328ff2d970ec5c30c638e0d03f36881
   languageName: node
   linkType: hard
 
