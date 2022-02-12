@@ -307,7 +307,7 @@ third (_, _, z) = z
 
 ### 泛型
 
-运用 Type 变量(只可为*单字符*), 实现泛型参数与多态函数.
+运用 Type 变量(只可为_单字符_), 实现泛型参数与多态函数.
 
 借助 TypeClass 可轻松实现多态函数:
 
@@ -527,7 +527,7 @@ _Tips_: 结合 Show, 可用于字符串与数值之间的转化
 
 #### Enum
 
-- 功能: 连续性(可枚举), 其成员类型可用于*Range*中
+- 功能: 连续性(可枚举), 其成员类型可用于_Range_中
 - 成员: () Bool Char Ordering Int Integer Float Double
 
 ```haskell
@@ -1042,7 +1042,7 @@ instance Show TrafficLight where
 ```
 
 - 创建新类和实现实例时,使用 class constraint
-  - 可达到*类似于*继承的效果
+  - 可达到_类似于_继承的效果
   - 可达到限制类型的效果
 
 ```haskell
@@ -1760,7 +1760,7 @@ import Geometry
 
 把 `Geometry` 分成三个子模块
 
-建立一个 `Geometry` 文件夹(注意*首字母*要大写),新建三个文件
+建立一个 `Geometry` 文件夹(注意_首字母_要大写),新建三个文件
 
 - sphere.hs
 
@@ -1847,7 +1847,7 @@ ghci> map sum $ transpose [[0,3,5,9],[10,0,0,9],[8,5,1,-1]]
 [18,8,6,17]
 ```
 
-**foldl'** 和 **foldl1'** 是它们各自惰性实现的严格版本,可*防止溢出*问题.
+**foldl'** 和 **foldl1'** 是它们各自惰性实现的严格版本,可_防止溢出_问题.
 
 **concat** - 移除一级嵌套
 
