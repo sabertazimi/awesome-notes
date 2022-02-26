@@ -565,7 +565,7 @@ unordered_map< int, unordered_map<int, int> > // => (row, (col, val))
 当第一个访问 edge(u,v) 时:
 
 - v.color == white: 树边
-- v.color == gray : 后向边(v 为 深度优先\*_森林_- 的祖父结点)
+- v.color == gray : 后向边(v 为 深度优先*森林*的祖父结点)
 - v.color == black: 前向边/横向边(v 为较深的结点/子结点)
 - 无向图深度优先遍历不会出现 前向边/横向边
 
