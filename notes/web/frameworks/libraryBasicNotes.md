@@ -1143,7 +1143,7 @@ tags: [Web, Framework, Library]
 #### Mock Utils
 
 - [Nock: HTTP Server Mocking and Expectations Library](https://github.com/nock/nock)
-- [Faker.js: Generate Massive Amounts of Realistic Fake Data](https://github.com/Marak/Faker.js)
+- [Faker.js: Generate Massive Amounts of Realistic Fake Data](https://github.com/faker-js/faker)
 - [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter)
 - [Mock Service Worker](https://github.com/mswjs/msw)
 - [Mockery Function](https://github.com/mfncooper/mockery)
