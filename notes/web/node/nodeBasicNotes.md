@@ -29,18 +29,26 @@ tags: [Web, Node]
 
 ### NPM Mirrors
 
+[NPM mirror list](https://github.com/cnpm/binary-mirror-config):
+
 ```bash
-npm config set disturl https://npm.taobao.org/mirrors/node/
-npm config set sharp_dist_base_url https://npm.taobao.org/mirrors/sharp-libvips/
-npm config set electron_mirror https://npm.taobao.org/mirrors/electron/
-npm config set puppeteer_download_host https://npm.taobao.org/mirrors/
-npm config set phantomjs_cdnurl https://npm.taobao.org/mirrors/phantomjs/
-npm config set chromedriver_cdnurl http://npm.taobao.org/mirrors/chromedriver/
-npm config set operadriver_cdnurl http://npm.taobao.org/mirrors/operadriver/
-npm config set profiler_binary_host_mirror http://npm.taobao.org/mirrors/node-inspector/
-npm config set sentrycli_cdnurl https://npm.taobao.org/mirrors/sentry-cli/
-npm config set sqlite3_binary_site https://npm.taobao.org/mirrors/sqlite3/
-npm config set python_mirror https://npm.taobao.org/mirrors/python/
+npm config set disturl https://npmmirror.com/mirrors/node/
+npm config set chromedriver_cdnurl http://npmmirror.com/mirrors/chromedriver/
+npm config set electron_mirror https://npmmirror.com/mirrors/electron/
+npm config set electron_builder_binaries_mirror https://npmmirror.com/mirrors/electron-builder-binaries/
+npm config set operadriver_cdnurl http://npmmirror.com/mirrors/operadriver/
+npm config set phantomjs_cdnurl https://npmmirror.com/mirrors/phantomjs/
+npm config set profiler_binary_host_mirror http://npmmirror.com/mirrors/node-inspector/
+npm config set puppeteer_download_host https://npmmirror.com/mirrors/
+npm config set python_mirror https://npmmirror.com/mirrors/python/
+npm config set robotjs_binary_host https://npmmirror.com/mirrors/robotjs/
+npm config set sass_binary_site https://npmmirror.com/mirrors/node-sass/
+npm config set saucectl_install_binary_mirror https://npmmirror.com/mirrors/saucectl/
+npm config set sentrycli_cdnurl https://npmmirror.com/mirrors/sentry-cli/
+npm config set sharp_binary_host https://npmmirror.com/mirrors/sharp/
+npm config set sharp_libvips_binary_host https://npmmirror.com/mirrors/sharp-libvips/
+npm config set sqlite3_binary_site https://npmmirror.com/mirrors/sqlite3/
+npm config set swc_binary_site https://npmmirror.com/mirrors/node-swc/
 ```
 
 ### Node Version Manager
