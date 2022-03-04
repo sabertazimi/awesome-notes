@@ -7350,6 +7350,7 @@ https://github.com/login/oauth/access_token
 
 - [Web Security Checklist](https://eggjs.org/zh-cn/core/security.html)
 - [ESLint Node Security Tool](https://github.com/nodesecurity/eslint-plugin-security)
+- [Defensive Design and Programming](https://mp.weixin.qq.com/s/G4pME9xFHdWnFckgytnofQ)
 
 ### Content Security Policy Level 3
 
