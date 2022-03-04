@@ -1068,6 +1068,7 @@ tags: [Web, Framework, Library]
 ### Code Analysis Tools
 
 - [SourceGraph: Universal Code Search](https://github.com/sourcegraph/sourcegraph)
+- [SonarSource: Static Analyzer for JavaScript and TypeScript](https://github.com/SonarSource/SonarJS)
 - [Babel](https://github.com/babel/babel)
 - [Acorn](https://github.com/acornjs/acorn)
 - [AST Explorer](https://github.com/fkling/astexplorer)
