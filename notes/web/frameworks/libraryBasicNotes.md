@@ -141,6 +141,7 @@ tags: [Web, Framework, Library]
 - [Optimistic State Hooks](https://github.com/perceived-dev/optimistic-state)
 - [Use Hooks Gallery](https://github.com/uidotdev/usehooks)
 - [React Hooks Gallery](https://github.com/nikgraf/react-hooks)
+- [React Media Query Hook](https://github.com/yocontra/react-responsive)
 
 ### Vue Composite and Reactive API
 
@@ -301,6 +302,7 @@ tags: [Web, Framework, Library]
 
 - [Clippy: Clip-path Editor](https://github.com/bennettfeely/Clippy)
 - [Fancy Border Radius](https://github.com/9elements/fancy-border-radius)
+- [React CSS Shape](https://github.com/ashutosh1919/react-awesome-shapes)
 
 ## Components
 
