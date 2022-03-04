@@ -134,7 +134,6 @@ tags: [Web, Framework, Library]
 ### React Hooks
 
 - [ReactUse Hooks](https://github.com/streamich/react-use)
-- [LibReact](https://github.com/streamich/libreact)
 - [Alibaba Hooks](https://github.com/alibaba/hooks)
 - [Platform Hooks: Browser APIs Turned into Hooks](https://github.com/jaredpalmer/the-platform)
 - [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
@@ -816,7 +815,7 @@ tags: [Web, Framework, Library]
 - [FileAPI](https://github.com/mailru/FileAPI)
 - [FS Extra](https://github.com/jprichardson/node-fs-extra)
 - [Graceful FS](https://www.npmjs.com/package/graceful-fs)
-- [In-memory Node File System API](https://github.com/streamich/memfs)
+- [MemFS: In-memory Node File System](https://github.com/streamich/memfs)
 - [Globby](https://github.com/sindresorhus/globby)
 - [Chokidar: Efficient Cross-platform File Watching Library](https://github.com/paulmillr/chokidar)
 - [Mkdirp](https://github.com/isaacs/node-mkdirp)
@@ -897,7 +896,7 @@ tags: [Web, Framework, Library]
 - [Undici: HTTP/1.1 Client Written from Scratch for Node](https://github.com/nodejs/undici)
 - [FS Extra](https://github.com/jprichardson/node-fs-extra)
 - [Graceful FS](https://www.npmjs.com/package/graceful-fs)
-- [In-memory Node File System API](https://github.com/streamich/memfs)
+- [MemFS: In-memory Node File System](https://github.com/streamich/memfs)
 - [Globby](https://github.com/sindresorhus/globby)
 - [Chokidar: Efficient Cross-platform File Watching Library](https://github.com/paulmillr/chokidar)
 - [Mkdirp](https://github.com/isaacs/node-mkdirp)
@@ -1150,7 +1149,7 @@ tags: [Web, Framework, Library]
 - [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter)
 - [Mock Service Worker](https://github.com/mswjs/msw)
 - [Mockery Function](https://github.com/mfncooper/mockery)
-- [MemFS: In-memory Node File System API](https://github.com/streamich/memfs)
+- [MemFS: In-memory Node File System](https://github.com/streamich/memfs)
 
 #### Mock APIs
 
