@@ -1717,6 +1717,76 @@ nums.filter(n => n in range(1, 10));
 // => [1, 5]
 ```
 
+#### Handle Exception with Proxy
+
+```js
+function createExceptionProxy(target) {
+  return new Proxy(target, {
+    get: (target, prop) => {
+      if (!(prop in target)) {
+        return;
+      }
+
+      if (typeof target[prop] === 'function') {
+        return createExceptionZone(target, prop);
+      }
+
+      return target[prop];
+    },
+  });
+}
+
+function createExceptionZone(target, prop) {
+  return (...args) => {
+    let result;
+    ExceptionsZone.run(() => {
+      result = target[prop](...args);
+    });
+    return result;
+  };
+}
+
+class ExceptionsZone {
+  static exceptionHandler = new ExceptionHandler();
+
+  static run(callback) {
+    try {
+      callback();
+    } catch (e) {
+      this.exceptionHandler.handle(e);
+    }
+  }
+}
+
+class ExceptionHandler {
+  handle(exception) {
+    console.log('记录错误：', exception.message, exception.stack);
+  }
+}
+```
+
+```js
+const obj = {
+    name: 'obj',
+    say() {
+        console.log('Hi, I\'m ' + this.name);
+    },
+    coding() {
+        //xxx
+        throw new Error('bug');
+    }
+    coding2() {
+        //xxx
+        throw new Error('bug2');
+    }
+}
+
+const proxy = createProxy(obj);
+
+proxy.say();
+proxy.coding();
+```
+
 ### Promise
 
 Avoid callback hell with:
