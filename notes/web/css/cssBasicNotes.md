@@ -5273,12 +5273,13 @@ contain: paint;
 
 `window.requestAnimationFrame`:
 
-- reflow: `javascript -> style -> layout -> paint -> composite`
-- repaint: `paint -> composite`
+- Reflow: `JavaScript -> Style -> Layout -> Paint -> Composite`.
+- Repaint: `Paint -> Composite`.
 
-告诉浏览器希望执行动画并请求浏览器在下一次重绘之前调用指定的函数来更新动画。该方法使用一个回调函数作为参数，这个回调函数会在浏览器重绘之前调用
+告诉浏览器希望执行动画并请求浏览器在下一次重绘之前调用指定的函数来更新动画.
+该方法使用一个回调函数作为参数，这个回调函数会在浏览器重绘之前调用.
 
-> 若想要在下次重绘时产生另一个动画画面，callback 必须调用 requestAnimationFrame
+> 若想要在下次重绘时产生另一个动画画面，callback 必须调用 requestAnimationFrame.
 
 ```js
 const start = null;
@@ -5333,29 +5334,31 @@ window.requestAnimationFrame(step);
 
 #### Best Practice
 
-- [High Performance Tips](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations)
-- all animation: `keyframe` animation or `transitions` is best
-- js-based animation: `requestAnimationFrame` is better than `setTimeout`/`setInterval`
-- position animation:`transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`
-- scale animation: `transform: scale(n)` better than `width`/`height`
-- rotation animation: `transform: rotate(deg)` is better
-- opacity/visibility animation: `opacity: 0...1` is better
+- [High Performance Tips](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations).
+- All animation: `keyframe` animation or `transitions` is best.
+- JS-based animation: `requestAnimationFrame` is better than `setTimeout`/`setInterval`.
+- Position animation:`transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`.
+- Scale animation: `transform: scale(n)` better than `width`/`height`.
+- Rotation animation: `transform: rotate(deg)` is better.
+- Opacity/visibility animation: `opacity: 0...1` is better.
 
 #### DevTools for Animation
 
-- [DevTools for Animation Performance](https://calibreapp.com/blog/investigate-animation-performance-with-devtools)
-- slower CPU simulation in `performance` panel
-- enable paint instrumentation in `performance` panel
-- FPS meter in `rendering` panel
-- paint flashing in `rendering` panel
-- `layers` panel
+- [DevTools for Animation Performance](https://calibreapp.com/blog/investigate-animation-performance-with-devtools).
+- Slower CPU simulation in `performance` panel.
+- Enable paint instrumentation in `performance` panel.
+- FPS meter in `rendering` panel.
+- Paint flashing in `rendering` panel.
+- `layers` panel.
 
 #### Animation Internal
 
-- `width`/`height`/`margin`/`left`/`top` in `Layout` stage
-- `box-shadow`/`border-radius`/`background`/`outline`/`color` in `Paint` stage
-- `cursor`/`z-index`/`transform`/`opacity` in `Composite Layers` stage
-- `top`/`left` has very large time to `paint` each frame
+[CSS Triggers List](https://github.com/GoogleChromeLabs/css-triggers):
+
+- `width`/`height`/`margin`/`left`/`top` in `Layout` stage.
+- `box-shadow`/`border-radius`/`background`/`outline`/`color` in `Paint` stage.
+- `cursor`/`z-index`/`transform`/`opacity` in `Composite Layers` stage.
+- `top`/`left` has very large time to `paint` each frame.
 
 ### CSS Performance Reference
 
