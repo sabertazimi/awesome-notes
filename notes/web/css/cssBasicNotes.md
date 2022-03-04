@@ -1175,7 +1175,7 @@ align-self: auto/flex-start/flex-end/center/baseline/stretch;
 order: number; /* 显示顺序 */
 ```
 
-### Flexibility of Float
+### Flexibility of Float and Alignment
 
 ```html
 <div class="parent">
@@ -1194,7 +1194,7 @@ order: number; /* 显示顺序 */
 }
 ```
 
-### Pseudo Elements of Flex Box
+### Pseudo Elements of FlexBox
 
 set `flex` to pseudo elements of flex box
 will change width of pseudo elements.
