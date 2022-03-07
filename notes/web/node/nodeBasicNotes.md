@@ -329,36 +329,53 @@ npm audit fix --force
 
 ### NPX Command
 
-run local node_modules
+Run local node_modules:
 
 ```bash
 npm install eslint -D
 npx eslint .
 ```
 
-run global package (not installed)
+Run global package (not installed):
 
 ```bash
 npx create-react-app react-app
 ```
 
-run specific version
+Run specific version:
 
 ```bash
 npx -p package1@next -p package2@next -c "command"
 ```
 
-run scripts with different node version
+Run scripts with different node version:
 
 ```bash
 npx -p node@version -- node index.js
 ```
 
-run remote repo/gist code
+Run remote repo/gist code:
 
 ```bash
 npx user/repo#branch
 npx gistUrl
+```
+
+:::tip NPX Cache
+NPX cache packages in `~/.npm/_npx`.
+:::
+
+To get latest version package:
+
+```bash
+# https://github.com/return-0x0/node-clear-npx-cache.
+# https://github.com/npm/cli/issues/2329.
+# https://github.com/npm/cli/issues/2395.
+# https://github.com/npm/cli/pull/2592.
+# https://github.com/facebook/create-react-app/issues/10601.
+# https://github.com/facebook/create-react-app/issues/12022.
+npx clear-npx-cache
+npx create-react-app app
 ```
 
 ### NPM Dependencies
