@@ -15,3 +15,15 @@ tags: [Language, Rust]
 ```bash
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 ```
+
+## Cargo
+
+```bash
+cargo new hello_world
+cargo run
+cargo build
+cargo run --release
+cargo build --release
+cargo check
+cargo generate-lockfile
+```
