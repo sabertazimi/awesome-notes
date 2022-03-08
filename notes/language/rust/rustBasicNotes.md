@@ -10,13 +10,15 @@ tags: [Language, Rust]
 
 [TOC]
 
-## Rust Installation
+## Rust Toolchain
+
+### Rust Installation
 
 ```bash
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 ```
 
-## Cargo
+### Cargo Basis
 
 ```bash
 cargo new hello_world
@@ -26,4 +28,62 @@ cargo run --release
 cargo build --release
 cargo check
 cargo generate-lockfile
+```
+
+### Rust GitHub Action
+
+```yml
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  pages:
+    name: Building and Deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 1
+      - name: Cache cargo binaries and registry
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - name: Install mdbook
+        continue-on-error: true
+        run: |
+          cargo install mdbook || exit 0
+      - name: Check toolchain version
+        run: |
+          rustc -V
+          cargo -V
+          mdbook -V
+      - name: Build book
+        run: |
+          mdbook build
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: ${{ github.event.head_commit.message }}
 ```
