@@ -30,6 +30,16 @@ cargo check
 cargo generate-lockfile
 ```
 
+```bash
+cargo fmt --check
+cargo clippy
+cargo test
+```
+
+```bash
+cargo install cargo-edit cargo-release cargo-workspaces
+```
+
 ### Rust GitHub Action
 
 ```yml
