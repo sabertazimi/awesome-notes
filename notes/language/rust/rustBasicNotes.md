@@ -43,6 +43,23 @@ cargo install cargo-tarpaulin
 cargo install cargo-workspaces
 ```
 
+Cargo release configuration:
+
+```toml
+[workspace.metadata.release]
+# cargo install cargo-release
+# cargo release -x
+sign-commit = true
+sign-tag = true
+release = false
+push = false
+publish = false
+shared-version = true
+pre-release-commit-message = "chore(release): {{version}}"
+post-release-commit-message = "chore(release): {{version}}"
+tag-message = "{{tag_name}}"
+```
+
 ### Rust GitHub Action
 
 ```yml
