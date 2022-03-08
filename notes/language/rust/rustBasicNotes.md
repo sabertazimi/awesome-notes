@@ -94,10 +94,10 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - name: Install mdbook
-        continue-on-error: true
-        run: |
-          cargo install mdbook || exit 0
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v1
+        with:
+          mdbook-version: 'latest'
       - name: Check toolchain version
         run: |
           rustc -V
