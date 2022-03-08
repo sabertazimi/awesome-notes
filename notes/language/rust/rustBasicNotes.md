@@ -37,7 +37,10 @@ cargo test
 ```
 
 ```bash
-cargo install cargo-edit cargo-release cargo-workspaces
+cargo install cargo-edit
+cargo install cargo-release
+cargo install cargo-tarpaulin
+cargo install cargo-workspaces
 ```
 
 ### Rust GitHub Action
