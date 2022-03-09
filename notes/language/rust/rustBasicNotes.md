@@ -267,3 +267,92 @@ fn main() {
     assert_eq!(s3,"hello,world!");
 }
 ```
+
+## Smart Pointer
+
+### Deref Trait
+
+- `&smart_pointer`
+  => `smart_pointer.defer()`.
+- `*smart_pointer`
+  => `*(smart_pointer.defer())`.
+- `smart_pointer.method()`
+  => `(&smart_pointer).method()`
+  => `(smart_pointer.defer()).method()`.
+- When `T: Deref<Target=U>`, then `&T => &U`.
+- When `T: DerefMut<Target=U>`, then `&mut T => &mut U`.
+- When `T: Deref<Target=U>`, then `&mut T => &U`.
+
+```rust
+use core::ops::{self};
+use crate::str::{self, from_boxed_utf8_unchecked};
+use crate::vec::Vec;
+
+struct String {
+    vec: Vec<u8>,
+}
+
+impl ops::Deref for String {
+    type Target = str;
+
+    fn deref(&self) -> &str {
+        unsafe { str::from_utf8_unchecked(&self.vec) }
+    }
+}
+
+struct MyBox<T>(T);
+
+impl<T> MyBox<T> {
+    fn new(x: T) -> MyBox<T> {
+        MyBox(x)
+    }
+}
+
+impl<T> ops::Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+fn main() {
+    let x = MyBox::new(5);
+    assert_eq!(5, *x);
+    // => *(x.deref())
+    // => *(&x.0)
+    // => x.0
+
+    let s = MyBox::new(String::from("hello world"));
+    display(&s);
+    // => &MyBox
+    // => MyBox.deref()
+    // => &String
+    // => String.deref()
+    // => &str
+
+    let hello_world = MyBox::new(String::from("hello, world"));
+    let s1: &str = &hello_world;
+    // => &MyBox<String>
+    // => MyBox<String>.deref()
+    // => &String
+    // => String.deref()
+    // => &str
+    let s2: String = hello_world.to_string();
+    // => MyBox<String>.to_string()
+    // => (&MyBox<String>).to_string()
+    // => (MyBox<String>.defer()).to_string()
+    // => (&String).to_string()
+    let ptr: *const u8 = hello_world.as_ptr();
+    // => MyBox<String>.as_ptr()
+    // => (&MyBox<String>).as_ptr()
+    // => (MyBox<String>.defer()).as_ptr()
+    // => (&String).as_ptr()
+    // => (String.defer()).as_ptr()
+    // => (&str).as_ptr()
+}
+
+fn display(s: &str) {
+    println!("{}", s);
+}
+```
