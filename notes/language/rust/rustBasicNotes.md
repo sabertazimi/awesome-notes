@@ -40,6 +40,7 @@ cargo test
 cargo install cargo-edit
 cargo install cargo-release
 cargo install cargo-tarpaulin
+cargo install cargo-watch
 cargo install cargo-workspaces
 ```
 
