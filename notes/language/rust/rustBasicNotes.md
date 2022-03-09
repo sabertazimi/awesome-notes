@@ -272,6 +272,118 @@ fn main() {
 }
 ```
 
+## Struct Type
+
+```rust
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+fn build_user(email: String, username: String) -> User {
+    User {
+        email,
+        username,
+        active: true,
+        sign_in_count: 1,
+    }
+}
+
+let user1 = User {
+    email: String::from("someone@example.com"),
+    username: String::from("username123"),
+    active: true,
+    sign_in_count: 1,
+};
+
+let user2 = User {
+    email: String::from("another@example.com"),
+    ..user1
+};
+
+// Tuple Struct.
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+let black = Color(0, 0, 0);
+let origin = Point(0, 0, 0);
+
+// Unit-like Struct.
+struct AlwaysEqual;
+let subject = AlwaysEqual;
+impl SomeTrait for AlwaysEqual {}
+```
+
+## Enum Type
+
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+fn main() {
+    let m1 = Message::Quit;
+    let m2 = Message::Move{x: 1, y: 1};
+    let m3 = Message::ChangeColor(255, 255, 0);
+}
+```
+
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,
+        Some(i) => Some(i + 1),
+    }
+}
+
+let five = Some(5);
+let six = plus_one(five);
+let none = plus_one(None);
+```
+
+## Array Type
+
+```rust
+let a: [i32; 5] = [1, 2, 3, 4, 5];
+let b = [3; 5];
+let slice: &[i32] = &a[1..3];
+assert_eq!(slice, &[2, 3]);
+
+fn main() {
+  let one             = [1, 2, 3];
+  let two: [u8; 3]    = [1, 2, 3];
+  let blank1          = [0; 3];
+  let blank2: [u8; 3] = [0; 3];
+
+  let arrays: [[u8; 3]; 4]  = [one, two, blank1, blank2];
+
+  for a in &arrays {
+    print!("{:?}: ", a);
+
+    for n in a.iter() {
+      print!("\t{} + 10 = {}", n, n+10);
+    }
+
+    let mut sum = 0;
+
+    for i in 0..a.len() {
+      sum += a[i];
+    }
+
+    println!("\t({:?} = {})", a, sum);
+  }
+}
+```
+
 ## Smart Pointer
 
 ### Deref Trait
@@ -360,3 +472,7 @@ fn display(s: &str) {
     println!("{}", s);
 }
 ```
+
+## Reference
+
+- [Rust Course](https://github.com/sunface/rust-course).
