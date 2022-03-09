@@ -67,9 +67,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 env:
   CARGO_TERM_COLOR: always
@@ -129,7 +129,7 @@ Copyable type (implement `Copy` trait):
 - Float type.
 - Char type.
 - Copyable Tuple type, e.g `(i32, i32)`.
-- Reference type.
+- Reference type (**borrowing** ownership).
 
 ```rust
 fn main() {
@@ -161,5 +161,60 @@ fn main() {
     // Move occurs because `s1` has type `std::string::String`,
     // which does not implement the `Copy` trait.
     println!("{}, world!", s1);
+}
+```
+
+### Reference Type
+
+Borrowing ownership with reference type:
+
+- At same time, only one mutable reference or multiple immutable reference.
+- Reference should be valid (rustc will report dangling reference error).
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let len = calculate_length(&s1);
+    println!("The length of '{}' is {}.", s1, len);
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+    // Leave function without drop `s`,
+    // due to `s` not owner string.
+}
+```
+
+Mutable reference:
+
+- Only one mutable reference for a value in a scope).
+- Can't mutable borrow an already immutable borrowed value.
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    change(&mut s);
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
+
+```rust
+fn main() {
+   let mut s = String::from("hello");
+
+    let r1 = &s;
+    let r2 = &s;
+    let r3 = &mut s;
+
+    // Error.
+    println!("{}, {} and {}", r1, r2, r3);
+    // End of r1 and r2 borrowing.
+
+    // Correct.
+    let r4 = &mut s;
+    println!("{}", r4);
 }
 ```
