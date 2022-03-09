@@ -118,9 +118,9 @@ jobs:
           commit_message: ${{ github.event.head_commit.message }}
 ```
 
-## Rust Basis
+## Rust Ownership
 
-### Rust Ownership
+### Copy Trait
 
 Copyable type (implement `Copy` trait):
 
@@ -216,5 +216,54 @@ fn main() {
     // Correct.
     let r4 = &mut s;
     println!("{}", r4);
+}
+```
+
+## String Type
+
+`&str` string slice type:
+
+- Borrowing type.
+- UTF-8 encode (1 ~ 4 bytes).
+- String literal is `&str` type.
+
+```rust
+let s = String::from("hello world");
+let len = s.len();
+
+let hello = &s[0..5];
+let world = &s[6..11];
+let slice1 = &s[0..2];
+let slice2 = &s[..2];
+let slice3 = &s[4..len];
+let slice4 = &s[4..];
+let slice5 = &s[0..len];
+let slice6 = &s[..];
+```
+
+`String` type:
+
+- Ownership type.
+- UTF-8 encode (1 ~ 4 bytes).
+
+```rust
+fn main() {
+    let mut s = String::new();
+    s.push_str("hello,world");
+    s.push('!');
+    assert_eq!(s,"hello,world!");
+
+    let mut s = "hello,world".to_string();
+    s.push('!');
+    assert_eq!(s,"hello,world!");
+
+    let mut s = String::from("你好, 世界");
+    s.push('!');
+    assert_eq!(s,"你好, 世界!");
+
+    let s1 = String::from("hello,");
+    let s2 = String::from("world!");
+    let s3 = s1 + &s2;
+    assert_eq!(s3,"hello,world!");
 }
 ```
