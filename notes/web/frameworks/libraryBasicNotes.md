@@ -1246,6 +1246,10 @@ tags: [Web, Framework, Library]
 - [Limit Bundle Size](https://github.com/andresz1/size-limit-action)
 - [License Compliance](https://github.com/fossas/fossa-action)
 
+#### Building Actions
+
+- [LaTeX](https://github.com/xu-cheng/latex-action)
+
 #### Deployment Actions
 
 - [GitHub Release](https://github.com/softprops/action-gh-release)
