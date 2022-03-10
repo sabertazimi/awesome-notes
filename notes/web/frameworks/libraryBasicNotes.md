@@ -1246,6 +1246,7 @@ tags: [Web, Framework, Library]
 - [GitHub Release](https://github.com/softprops/action-gh-release)
 - [GitHub Pages](https://github.com/peaceiris/actions-gh-pages)
 - [NPM Publish](https://github.com/JS-DevTools/npm-publish)
+- [Vercel Deployment](https://github.com/amondnet/vercel-action)
 
 ### DevOps Config Tools
 
