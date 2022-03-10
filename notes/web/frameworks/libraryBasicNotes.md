@@ -63,6 +63,8 @@ tags: [Web, Framework, Library]
 - [Next](https://github.com/vercel/next.js)
 - [Gatsby](https://github.com/gatsbyjs/gatsby)
 - [UMI](https://github.com/umijs/umi)
+- [Remix: Full Stack Web Framework](https://github.com/remix-run/remix)
+- [Blitz: Full Stack React Framework](https://github.com/blitz-js/blitz)
 - [Nuxt](https://github.com/nuxt/nuxt.js)
 
 ### Micro Front-ends Solution
@@ -83,7 +85,6 @@ tags: [Web, Framework, Library]
 - [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify)
 - [Sails: Realtime MVC Framework](https://github.com/balderdashy/sails)
 - [RedWood](https://github.com/redwoodjs/redwood)
-- [Blitz: Fullstack React Framework](https://github.com/blitz-js/blitz)
 
 ### Headless CMS
 
