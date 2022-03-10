@@ -1067,6 +1067,19 @@ sudo update-alternatives --install /usr/bin/x-terminal-emulator
 sudo update-alternatives --config x-terminal-emulator
 ```
 
+### APT Key Commands
+
+```bash
+# Add key
+sudo apt-add-repository ppa:user/repo
+sudo apt update
+
+# Delete key via last 8 bits
+sudo apt-key list
+sudo apt-key del 73C62A18
+sudo apt update
+```
+
 ## Network Commands
 
 ### wget
