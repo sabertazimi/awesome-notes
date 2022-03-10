@@ -22,22 +22,26 @@ tags: [Web, Framework, Library]
 - [NPM Package Trends](https://github.com/johnmpotter/npm-trends)
 - [CodeHouse: Whole New World Developer Cheatsheets](https://github.com/saviomartin/codehouse)
 
-## Boilerplate
+## Web Boilerplate
 
-- [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
+### Generators and CLI Tools
+
 - [Create React App](https://github.com/facebook/create-react-app)
 - [Create React Native App](https://github.com/expo/create-react-native-app)
 - [Modern: Meta-framework Suite Designed for Frontend-focused Modern Web Development](https://github.com/modern-js-dev/modern.js)
-- [React Electron Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
-- [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
-- [React BulletProof Boilerplate](https://github.com/alan2207/bulletproof-react)
-- [React CRA Boilerplate](https://github.com/react-boilerplate/react-boilerplate-cra-template)
-- [NWB: React Component Boilerplate](https://github.com/insin/nwb)
-- [Neutrino.js Customizable Boilerplate](https://github.com/neutrinojs/neutrino)
-- [Hygen Component Generator](https://github.com/jondot/hygen)
-- [React Chrome Extension](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
+- [Projen: New Generation of Project Generators](https://github.com/projen/projen)
+- [Hygen: Component Generator](https://github.com/jondot/hygen)
 - [Vue CLI](https://github.com/vuejs/vue-cli)
 - [Vite](https://github.com/vitejs/vite)
+
+### Boilerplate and Templates
+
+- [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
+- [React BulletProof Boilerplate](https://github.com/alan2207/bulletproof-react)
+- [React CRA Boilerplate](https://github.com/react-boilerplate/react-boilerplate-cra-template)
+- [React Electron Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
+- [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
+- [React Chrome Extension](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
 
 ## UI Framework
 
@@ -79,6 +83,7 @@ tags: [Web, Framework, Library]
 - [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify)
 - [Sails: Realtime MVC Framework](https://github.com/balderdashy/sails)
 - [RedWood](https://github.com/redwoodjs/redwood)
+- [Blitz: Fullstack React Framework](https://github.com/blitz-js/blitz)
 
 ### Headless CMS
 
@@ -87,11 +92,6 @@ tags: [Web, Framework, Library]
 - [NetlifyCMS](https://github.com/netlify/netlify-cms)
 - [TinaCMS](https://github.com/tinacms/tinacms)
 - [KeyStone](https://github.com/keystonejs/keystone)
-
-### Full Stack Solution
-
-- [Next](https://github.com/vercel/next.js)
-- [Blitz: Fullstack React Framework](https://github.com/blitz-js/blitz)
 
 ### Desktop Solution
 
@@ -152,11 +152,6 @@ tags: [Web, Framework, Library]
 - [React Resolver](https://github.com/ericclemmons/react-resolver)
 - [Baobab](https://github.com/Yomguithereal/baobab)
 
-## Browser Utils
-
-- [Browser Platform Detection](https://github.com/lancedikson/bowser)
-- [Browser Feature Detection](https://github.com/Modernizr/Modernizr)
-
 ## JavaScript Utils
 
 - [Cash: jQuery Lite](https://github.com/kenwheeler/cash)
@@ -209,6 +204,11 @@ tags: [Web, Framework, Library]
 ### IOC and DI Utils
 
 - [InversifyJS: Powerful and Lightweight Inversion of Control Container](https://github.com/inversify/InversifyJS)
+
+### Browser Utils
+
+- [Browser Platform Detection](https://github.com/lancedikson/bowser)
+- [Browser Feature Detection](https://github.com/Modernizr/Modernizr)
 
 ## TypeScript Utils
 
@@ -1188,6 +1188,8 @@ tags: [Web, Framework, Library]
 - [Bit](https://github.com/teambit/bit)
 - [NX](https://github.com/nrwl/nx)
 - [RushStack](https://github.com/microsoft/rushstack)
+- [TurboRepo: High-performance Build System for JavaScript and TypeScript Codebases](https://github.com/vercel/turborepo)
+- [Projen: New Generation of Project Generators](https://github.com/projen/projen)
 
 ### DevOps Version Tools
 
