@@ -459,6 +459,77 @@ fn main() {
 }
 ```
 
+## Flow Control
+
+### If Statement
+
+`if` expression:
+
+```rust
+let number = if condition {
+    5
+} else {
+    6
+};
+```
+
+`if let` expression:
+
+```rust
+let o = Some(3);
+let v = if let Some(x) = o {
+    x
+} else {
+    0
+};
+```
+
+### Loop Statement
+
+#### For Loop Statement
+
+```rust
+for i in 1..=5 {}
+for _ in 0..10 {}
+for item in collection {}
+for item in &collection {}
+for item in &mut collection {}
+for (i, v) in collection.iter().enumerate() {}
+```
+
+#### While Loop Statement
+
+```rust
+fn main() {
+    let mut n = 0;
+
+    while n <= 5  {
+        println!("{}!", n);
+        n = n + 1;
+    }
+}
+```
+
+#### Loop Expression
+
+```rust
+fn main() {
+    let mut counter = 0;
+
+    let result = loop {
+        counter += 1;
+
+        if counter == 10 {
+            break counter * 2;
+        }
+    };
+
+    println!("The result is {}", result);
+}
+```
+
+## Pattern Matching
+
 ## Smart Pointer
 
 ### Deref Trait
