@@ -1166,6 +1166,8 @@ tags: [Web, Framework, Library]
 - [Naughty Input Strings](https://github.com/minimaxir/big-list-of-naughty-strings)
 - [FatRat](https://github.com/Screetsec/TheFatRat)
 - [Spoof](https://github.com/feross/spoof)
+- [Snyk: NPM Package Security](https://github.com/marketplace/snyk)
+- [Socket: NPM Package Security](https://github.com/apps/socket-security)
 
 ### UML Tools
 
