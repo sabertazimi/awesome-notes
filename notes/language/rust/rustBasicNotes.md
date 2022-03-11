@@ -619,6 +619,53 @@ fn display(s: &str) {
 }
 ```
 
+## Rust Web Development
+
+- [Neon](https://github.com/neon-bindings/neon):
+  `Rust` bindings for safe and fast native `Node.js` modules.
+
+```rust
+use neon::context::{Context, ModuleContext, FunctionContext};
+use neon::types::JsNumber;
+use neon::result::JsResult;
+use neon::result::NeonResult;
+
+fn fibonacci(n: i32) -> i32 {
+    return match n {
+        n if n < 1 => 0,
+        n if n <= 2 => 1,
+        _ => fibonacci(n - 1) + fibonacci(n - 2)
+  }
+}
+
+fn fibonacci_api(mut cx: FunctionContext) -> JsResult<JsNumber> {
+    let handle = cx.argument::<JsNumber>(0).unwrap();
+    let res = fibonacci(handle.value(&mut cx) as i32);
+    Ok(cx.number(res))
+}
+
+#[neon::main]
+fn main(mut cx: ModuleContext) -> NeonResult<()> {
+    cx.export_function("fibonacci_rs", fibonacci_api)?;
+    Ok(())
+}
+```
+
+```js
+const {fibonacci_rs} = require("./index.node");
+
+const value = process.argv[2] || null;
+const number = parseInt(value);
+
+if (isNaN(number)) {
+  console.log("Provided value is not a number");
+  return;
+}
+
+const result = fibonacci_rs(number);
+console.log(result);
+```
+
 ## Reference
 
 - [Rust Course](https://github.com/sunface/rust-course).
