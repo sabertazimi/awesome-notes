@@ -2297,13 +2297,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@easyops-cn/docusaurus-search-local@npm:^0.22.0":
-  version: 0.22.0
-  resolution: "@easyops-cn/docusaurus-search-local@npm:0.22.0"
+"@easyops-cn/docusaurus-search-local@npm:^0.23.0":
+  version: 0.23.0
+  resolution: "@easyops-cn/docusaurus-search-local@npm:0.23.0"
   dependencies:
     "@docusaurus/utils": ^2.0.0-beta.4
     "@docusaurus/utils-validation": ^2.0.0-beta.4
     "@easyops-cn/autocomplete.js": ^0.38.1
+    "@node-rs/jieba": ^1.6.0
     cheerio: ^1.0.0-rc.3
     clsx: ^1.1.1
     debug: ^4.2.0
@@ -2313,7 +2314,7 @@ __metadata:
     lunr-languages: ^1.4.0
     mark.js: ^8.11.1
     tslib: ^2.2.0
-  checksum: 28fe8b98d76e34bfd9a840cead3524a9e9a69dec08a1c31d72a7d00ad2ee5b050daafe18a017925faa45f76b906a26ff76a32e047de62cc94d7bceacc11f00e9
+  checksum: 2dd5368783d1fc584e82ae434194a5142fed34819e99ff8248ca3cfb76b0ebbe8909133b5bc4345985730cc69fa1f52f187d7a5e08c4fb0003ffa3831981f570
   languageName: node
   linkType: hard
 
@@ -2465,6 +2466,145 @@ __metadata:
   version: 1.6.22
   resolution: "@mdx-js/util@npm:1.6.22"
   checksum: 4b393907e39a1a75214f0314bf72a0adfa5e5adffd050dd5efe9c055b8549481a3cfc9f308c16dfb33311daf3ff63added7d5fd1fe52db614c004f886e0e559a
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-android-arm-eabi@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-android-arm-eabi@npm:1.6.0"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-android-arm64@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-android-arm64@npm:1.6.0"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-darwin-arm64@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-darwin-arm64@npm:1.6.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-darwin-x64@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-darwin-x64@npm:1.6.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-freebsd-x64@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-freebsd-x64@npm:1.6.0"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-linux-arm-gnueabihf@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-linux-arm-gnueabihf@npm:1.6.0"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-linux-arm64-gnu@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-linux-arm64-gnu@npm:1.6.0"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-linux-arm64-musl@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-linux-arm64-musl@npm:1.6.0"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-linux-x64-gnu@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-linux-x64-gnu@npm:1.6.0"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-linux-x64-musl@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-linux-x64-musl@npm:1.6.0"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-win32-arm64-msvc@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-win32-arm64-msvc@npm:1.6.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-win32-ia32-msvc@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-win32-ia32-msvc@npm:1.6.0"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba-win32-x64-msvc@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba-win32-x64-msvc@npm:1.6.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@node-rs/jieba@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "@node-rs/jieba@npm:1.6.0"
+  dependencies:
+    "@node-rs/jieba-android-arm-eabi": 1.6.0
+    "@node-rs/jieba-android-arm64": 1.6.0
+    "@node-rs/jieba-darwin-arm64": 1.6.0
+    "@node-rs/jieba-darwin-x64": 1.6.0
+    "@node-rs/jieba-freebsd-x64": 1.6.0
+    "@node-rs/jieba-linux-arm-gnueabihf": 1.6.0
+    "@node-rs/jieba-linux-arm64-gnu": 1.6.0
+    "@node-rs/jieba-linux-arm64-musl": 1.6.0
+    "@node-rs/jieba-linux-x64-gnu": 1.6.0
+    "@node-rs/jieba-linux-x64-musl": 1.6.0
+    "@node-rs/jieba-win32-arm64-msvc": 1.6.0
+    "@node-rs/jieba-win32-ia32-msvc": 1.6.0
+    "@node-rs/jieba-win32-x64-msvc": 1.6.0
+  dependenciesMeta:
+    "@node-rs/jieba-android-arm-eabi":
+      optional: true
+    "@node-rs/jieba-android-arm64":
+      optional: true
+    "@node-rs/jieba-darwin-arm64":
+      optional: true
+    "@node-rs/jieba-darwin-x64":
+      optional: true
+    "@node-rs/jieba-freebsd-x64":
+      optional: true
+    "@node-rs/jieba-linux-arm-gnueabihf":
+      optional: true
+    "@node-rs/jieba-linux-arm64-gnu":
+      optional: true
+    "@node-rs/jieba-linux-arm64-musl":
+      optional: true
+    "@node-rs/jieba-linux-x64-gnu":
+      optional: true
+    "@node-rs/jieba-linux-x64-musl":
+      optional: true
+    "@node-rs/jieba-win32-arm64-msvc":
+      optional: true
+    "@node-rs/jieba-win32-ia32-msvc":
+      optional: true
+    "@node-rs/jieba-win32-x64-msvc":
+      optional: true
+  checksum: 9421920f75117d7c365f3b8e031ae3c308cfd186f91087fd518ffadc474a3fa8877c6f19bd4e4a44b4a279a27930a6cef8a33438f9576157f29a3a3f971c64ba
   languageName: node
   linkType: hard
 
@@ -3877,7 +4017,7 @@ __metadata:
     "@docusaurus/core": 2.0.0-beta.17
     "@docusaurus/module-type-aliases": 2.0.0-beta.17
     "@docusaurus/preset-classic": 2.0.0-beta.17
-    "@easyops-cn/docusaurus-search-local": ^0.22.0
+    "@easyops-cn/docusaurus-search-local": ^0.23.0
     "@tsconfig/docusaurus": ^1.0.4
     eslint: ^8.10.0
     markdownlint-cli: ^0.31.1
