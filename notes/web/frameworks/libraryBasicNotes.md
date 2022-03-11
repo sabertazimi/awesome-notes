@@ -1093,6 +1093,7 @@ tags: [Web, Framework, Library]
 - [CSS Stats Tools](https://github.com/cssstats/cssstats)
 - [CSS Stats CLI](https://github.com/projectwallace/wallace-cli)
 - [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
+- [TextLint](https://github.com/textlint/textlint)
 - [JSCPD: Copy Paste Detector](https://github.com/kucherenko/jscpd)
 - [Size Limit: Calculate Real Cost to Keep Good Performance](https://github.com/ai/size-limit)
 - [Java CheckStyle](https://github.com/checkstyle/checkstyle)
@@ -1203,6 +1204,7 @@ tags: [Web, Framework, Library]
 - [Commitizen: Conventional Commits CLI Tool](https://github.com/commitizen/cz-cli)
 - [Semantic Release: Fully Automated Version Management and Package Publishing](https://github.com/semantic-release/semantic-release)
 - [Google Release Bot](https://github.com/googleapis/release-please)
+- [Release It: Automate Versioning and Package Publishing](https://github.com/release-it/release-it)
 - [Standard Version: Automate Versioning and Changelog Generation](https://github.com/conventional-changelog/standard-version)
 
 ### DevOps Automation CI and CD Tools
