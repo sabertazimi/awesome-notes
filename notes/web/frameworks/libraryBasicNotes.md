@@ -188,6 +188,7 @@ tags: [Web, Framework, Library]
 
 - [Threads.js](https://github.com/andywer/threads.js)
 - [WorkerPool](https://github.com/josdejong/workerpool)
+- [PartyTown: Relocate Resource Intensive scripts into Web Workers](https://github.com/BuilderIO/partytown)
 - [Comlink: Shared Class between Web Workers](https://github.com/GoogleChromeLabs/comlink)
 - [GRFN: Executes Dependency Graph of Async Functions Concurrently](https://github.com/TomerAberbach/grfn)
 - [Bull: Premium Queue Package for Handling Distributed Jobs and Messages](https://github.com/OptimalBits/bull)
@@ -476,7 +477,7 @@ tags: [Web, Framework, Library]
 - [Spectacle: React Based Presentation Slides](https://github.com/FormidableLabs/spectacle)
 - [SliDev: Vue Based Presentation Slides](https://github.com/slidevjs/slidev)
 - [Impress: Prezi-like Presentation Slides](https://github.com/impress/impress.js)
-- [PPTX: TypeScript PowerPoint Presentations](https://github.com/gitbrent/PptxGenJS/)
+- [PPTX: TypeScript PowerPoint Presentations](https://github.com/gitbrent/PptxGenJS)
 
 ### iFrame
 
@@ -537,7 +538,7 @@ tags: [Web, Framework, Library]
 - [Motion](https://www.npmjs.com/package/motion)
 - [Framer Motion](https://github.com/framer/motion)
 - [Popmotion](https://github.com/popmotion/popmotion)
-- [TweenJS: TypeScript Animation Engine](https://github.com/tweenjs/tween.js/)
+- [TweenJS: TypeScript Animation Engine](https://github.com/tweenjs/tween.js)
 - [React Transition Group](https://github.com/reactjs/react-transition-group)
 - [Airbnb AE Solution](https://github.com/airbnb/lottie-web)
 - [Animate.css](https://github.com/daneden/animate.css)
