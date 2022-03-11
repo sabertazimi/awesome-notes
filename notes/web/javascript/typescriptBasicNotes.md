@@ -377,6 +377,25 @@ function log(message: string): void {
 }
 ```
 
+```ts
+function unknownColor(x: never): never {
+  throw new Error('unknown color');
+}
+
+type Color = 'red' | 'green' | 'blue';
+
+function getColorName(c: Color): string {
+  switch (c) {
+    case 'red':
+      return 'is red';
+    case 'green':
+      return 'is green';
+    default:
+      return unknownColor(c);
+  }
+}
+```
+
 ## Enum Types
 
 ### Number Enum
