@@ -1051,12 +1051,12 @@ type Age2 = Person['age'];
 ```ts
 type PickByValueType<T, ValueType> = Pick<
   T,
-  { [Key in keyof T]-?: T[Key] extends ValueType ? Key : never }[keyof T]
+  { [K in keyof T]-?: T[K] extends ValueType ? K : never }[keyof T]
 >;
 
 type OmitByValueType<T, ValueType> = Pick<
   T,
-  { [Key in keyof T]-?: T[Key] extends ValueType ? never : Key }[keyof T]
+  { [K in keyof T]-?: T[K] extends ValueType ? never : K }[keyof T]
 >;
 
 type RequiredKeys<T> = {
@@ -1070,6 +1070,10 @@ type OptionalKeys<T> = {
 type FunctionTypeKeys<T extends object> = {
   [K in keyof T]-?: T[K] extends Function ? K : never;
 }[keyof T];
+
+type Filter<T extends object, ValueType> = {
+  [K in keyof T] as ValueType extends T[K] ? K :never]: T[K]
+} // Filter<{name: string; id: number;}, string> => {name: string;}
 ```
 
 ## Literal Types
