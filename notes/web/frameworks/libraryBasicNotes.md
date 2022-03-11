@@ -28,6 +28,7 @@ tags: [Web, Framework, Library]
 
 - [Create React App](https://github.com/facebook/create-react-app)
 - [Create React Native App](https://github.com/expo/create-react-native-app)
+- [Craco: Create React App Configuration Override Tool](https://github.com/gsoft-inc/craco)
 - [Modern: Meta-framework Suite Designed for Frontend-focused Modern Web Development](https://github.com/modern-js-dev/modern.js)
 - [Projen: New Generation of Project Generators](https://github.com/projen/projen)
 - [Hygen: Component Generator](https://github.com/jondot/hygen)
