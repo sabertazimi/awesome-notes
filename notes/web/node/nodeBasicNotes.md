@@ -295,7 +295,7 @@ source ~/.zshrc
 best practice: `npm ci` for cache install (speed up installation)
 
 ```bash
-// with package-lock.json exists
+// With package-lock.json exists:
 npm ci
 ```
 
@@ -380,6 +380,13 @@ npx create-react-app app
 
 ### NPM Dependencies
 
+- Dependency Nesting/Hell (NPM v1).
+- Dependency Flatten/Hoist (NPM v3).
+- Dependency Consistent Lockfile (NPM v5 and Yarn).
+- Dependency Hard/Symbol Links (PNPM):
+  - Hard links for global `.pnpm` store to save disk storage.
+  - Symbol links for local require shortpath to
+    rectify **doppelgangers** and **ghost/phantom dependencies** problem.
 - `peerDependencies`:
   提示宿主环境去安装满足插件 `peerDependencies` 所指定依赖的包,
   然后在插件 `import` 或者 `require` 所依赖的包的时候,
@@ -395,9 +402,16 @@ npx create-react-app app
   - 确认好的依赖树会存到 `package-lock.json` 文件中.
 - 同一个依赖, 更高版本的包会安装到顶层 `node_modules` 目录,
   低版本的包会分散在某些依赖的 `node_modules` 目录.
-- **lockfile** 的存在, 保证了项目依赖结构的确定性, 保障了项目在多环境运行的稳定性.
+- **Lockfile** 保证项目依赖结构的确定性, 保障项目在多环境运行的稳定性.
 
-#### NPM Ghost Dependencies
+#### NPM Doppelgangers
+
+- Singleton conflict: multiple version of same package in `node_modules`.
+- Types conflict: global `types` naming conflict.
+
+#### NPM Ghost Dependency
+
+NPM ghost (phantom) dependency:
 
 - Imported packages from `dependencies of dependencies`:
   When update `dependencies` to minor version,
@@ -412,14 +426,14 @@ npx create-react-app app
   such imported packages will missing,
   cause they aren't located in library `package.json`.
 
-#### NPM Invalid Dependencies
+#### NPM Invalid Dependency
 
 ```bash
 $ npm ls
 package@version invalid
 ```
 
-modify `package-lock.json`
+Modify `package-lock.json`
 to remove locked invalid package version.
 
 ### Package JSON
@@ -501,18 +515,18 @@ It bring two pros:
 }
 ```
 
-### Lock File
+### Package Lockfile
 
 [Dependency pinning](https://docs.renovatebot.com/dependency-pinning):
 
 When kept in sync with its associated `package.json`,
-a lock file will further lock down the exact dependencies and sub-dependencies,
+a lockfile will further lock down the exact dependencies and sub-dependencies,
 so that everyone running `npm i` or `yarn` will install the exact same dependencies.
 
 If the `package.json` contains a range,
 and a new in-range version is released that would break the build,
 then essentially `package.json` is in a state of **broken**,
-even if the lock file is still holding things together.
+even if the lockfile is still holding things together.
 
 - Apps (web or Node.js) that aren't `require()` by other packages
   should pin all types of dependencies for greatest reliability/predictability.
