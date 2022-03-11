@@ -320,9 +320,16 @@ print working directory
 
 ### ln
 
-link 命令 .bak/.hard(硬链接) .soft(软链接：创建链接时填写绝对路径)
+link: create `.bak/.hard` (硬链接) and `.soft` (软链接：创建链接时填写绝对路径).
 
-ln -s(创建软链接) [原文件][目标文件]
+- A hard link always points a filename to data on a storage device.
+- A soft link always points a filename to another filename,
+  which then points to information on a storage device.
+
+```bash
+ln [源文件] [New Hard Link File]
+ln -s [源文件] [New Soft Link File]
+```
 
 ### history
 
