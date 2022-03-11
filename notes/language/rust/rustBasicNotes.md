@@ -652,13 +652,13 @@ fn main(mut cx: ModuleContext) -> NeonResult<()> {
 ```
 
 ```js
-const {fibonacci_rs} = require("./index.node");
+const { fibonacci_rs } = require('./index.node');
 
 const value = process.argv[2] || null;
 const number = parseInt(value);
 
 if (isNaN(number)) {
-  console.log("Provided value is not a number");
+  console.log('Provided value is not a number');
   return;
 }
 
