@@ -1046,6 +1046,105 @@ for (key, value) in &scores {
 let from_list: HashMap<_,_> = some_list.into_iter().collect();
 ```
 
+## Type Conversion
+
+### Explicit Type Conversion
+
+```rust
+fn main() {
+    let a = 3.1 as i8;
+    let b = 100_i8 as i32;
+    let c = 'a' as u8;
+    println!("{}, {}, {}", a, b, c)
+
+    let x: i16 = 1500;
+    let x_: u8 = match x.try_into() {
+        Ok(x1) => x1,
+        Err(e) => {
+            println!("{:?}", e.to_string());
+            0
+        }
+    };
+}
+```
+
+### Implicit Type Conversion
+
+`target.method()`:
+
+1. Call by value: `T::method(target)`.
+2. Call by reference: `T::method(&target)` or `T::method(&mut target)`.
+3. Call by deref: when `T: Deref<Target = U>`, then `(&T).method() => (&U).method()`.
+4. Length-non-determined collection to length-determined slice.
+5. Panic.
+
+```rust
+let array: Rc<Box<[T; 3]>> = ...;
+let first_entry = array[0];
+// 1. `Index` trait grammar sugar: array[0] => array.index(0).
+// 2. Call by: value: `Rc<Box<[T; 3]>>` not impl `Index` trait.
+// 3. Call by reference: `&Rc<Box<[T; 3]>>` not impl `Index` trait.
+// 4. Call by reference: `&mut Rc<Box<[T; 3]>>` not impl `Index` trait.
+// 5. Call by deref -> Call by value: `Box<[T; 3]>` not impl `Index` trait.
+// 6. Call by deref -> Call by reference: `&Box<[T; 3]>` not impl `Index` trait.
+// 7. Call by deref -> Call by reference: `&mut Box<[T; 3]>` not impl `Index` trait.
+// 8. Call by deref -> Call by deref: `[T; 3]` not impl `Index` trait.
+// 9. `[T; 3]` => `[T]` impl `Index` trait.
+```
+
+## Error Handling
+
+### Result Type
+
+```rust
+use std::fs::File;
+use std::io::ErrorKind;
+
+fn main() {
+    let f = File::open("hello.txt");
+
+    let f = match f {
+        Ok(file) => file,
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => match File::create("hello.txt") {
+                Ok(fc) => fc,
+                Err(e) => panic!("Problem creating the file: {:?}", e),
+            },
+            other_error => panic!("Problem opening the file: {:?}", other_error),
+        },
+    };
+}
+```
+
+### Error Handling Macro
+
+`?` for `Result` type:
+
+```rust
+use std::fs::File;
+use std::io;
+use std::io::Read;
+
+fn open_file() -> Result<File, Box<dyn std::error::Error>> {
+    let mut f = File::open("hello.txt")?;
+    Ok(f)
+}
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut s = String::new();
+    File::open("hello.txt")?.read_to_string(&mut s)?;
+    Ok(s)
+}
+```
+
+`?` for `Option` type:
+
+```rust
+fn last_char_of_first_line(text: &str) -> Option<char> {
+    text.lines().next()?.chars().last()
+}
+```
+
 ## Smart Pointer
 
 ### Deref Trait
