@@ -798,11 +798,155 @@ impl Point<f32> {
 }
 
 
-fn add<T: std::ops::Add<Output = T>>(a:T, b:T) -> T {
+fn add<T: std::ops::Add<T, Output = T>>(a:T, b:T) -> T {
     a + b
 }
 
-fn largest<T: std::cmp::PartialOrd>(list: &[T]) -> T {}
+fn largest<T: PartialOrd>(list: &[T]) -> T {}
+```
+
+## Traits
+
+```rust
+pub struct Post {
+    pub username: String,
+    pub content: String
+}
+
+pub trait Summary {
+    fn summarize_author(&self) -> String;
+
+    fn summarize(&self) -> String {
+        format!("(Read more from {}...)", self.summarize_author())
+    }
+}
+
+impl Summary for Post {
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.username)
+    }
+}
+
+fn main() {
+    let post = Post{username: "username".to_string(),content: "content".to_string()};
+    println!("1 new post: {}", post.summarize());
+}
+```
+
+### Orphan rule
+
+Rust can’t implement external traits on external types:
+can’t implement the `Display` trait on `Vec<T>` in `some_package` crate,
+because `Display` and `Vec<T>` are **both** defined out of `some_package`.
+This restriction is part of a property of programs called coherence,
+ensures that other people’s code can’t break your code and vice versa.
+
+### Trait Bound
+
+```rust
+fn notify(item: &impl Summary) {}
+fn notify(item: &(impl Summary + Display)) {}
+fn notify<T: Summary>(item: &T) {}
+fn notify<T: Summary + Display>(item: &T) {}
+fn notify<T, U>(t: &T, u: &U) -> i32
+    where T: Display + Clone,
+          U: Clone + Debug
+{}
+```
+
+```rust
+trait SomeTrait: BoundTrait {}
+```
+
+```rust
+// 可以对任何实现了 Display 特征的类型调用 ToString 特征中方法.
+impl<T: Display> ToString for T {}
+```
+
+### Trait Derive
+
+```rust
+#[derive(Debug)]
+#[derive(PartialEq)]
+#[derive(Eq)]
+#[derive(PartialOrd)]
+#[derive(Ord)]
+#[derive(Clone)]
+#[derive(Copy)]
+#[derive(Hash)]
+#[derive(Default)]
+```
+
+### Trait Object
+
+- Define trait object:
+  - `Box<dyn some_trait>`.
+  - `&dyn some_trait`.
+- A trait can have trait object only when
+  it is `object safe`:
+  - all methods can't return `Self`.
+  - all methods can't be generics.
+- Trait object stand for dynamic distributing (runtime),
+  generics stand for static distributing (compile time).
+
+```rust
+trait Draw {
+    fn draw(&self) -> String;
+}
+
+impl Draw for u8 {
+    fn draw(&self) -> String {
+        format!("u8: {}", *self)
+    }
+}
+
+impl Draw for f64 {
+    fn draw(&self) -> String {
+        format!("f64: {}", *self)
+    }
+}
+
+fn draw1(x: Box<dyn Draw>) {
+    x.draw();
+}
+
+fn draw2(x: &dyn Draw) {
+    x.draw();
+}
+
+fn main() {
+    let x = 1.1f64;
+    let y = 8u8;
+
+    draw1(Box::new(x));
+    draw1(Box::new(y));
+    draw2(&x);
+    draw2(&y);
+}
+```
+
+### Associated Types
+
+Associated types make code become readable and concise:
+
+```rust
+trait Container<A,B> {
+    fn contains(&self,a: A,b: B) -> bool;
+}
+
+fn difference<A,B,C>(container: &C) -> i32
+  where
+    C : Container<A,B> {}
+```
+
+```rust
+trait Container{
+    type A;
+    type B;
+    fn contains(&self, a: &Self::A, b: &Self::B) -> bool;
+}
+
+fn difference<C: Container>(container: &C) {}
 ```
 
 ## Smart Pointer
