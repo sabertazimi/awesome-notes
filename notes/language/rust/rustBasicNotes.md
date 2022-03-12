@@ -833,7 +833,7 @@ fn main() {
 }
 ```
 
-### Orphan rule
+### Orphan Rule
 
 Rust can’t implement external traits on external types:
 can’t implement the `Display` trait on `Vec<T>` in `some_package` crate,
