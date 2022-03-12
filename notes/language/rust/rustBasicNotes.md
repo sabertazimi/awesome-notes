@@ -765,6 +765,46 @@ fn main() {
 }
 ```
 
+## Generics
+
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Point<T> {
+    fn x(&self) -> &T {
+        &self.x
+    }
+
+    fn mixup<U>(self, other: Point<U>) {}
+}
+
+impl Point<f32> {
+    fn distance_from_origin(&self) -> f32 {
+        (self.x.powi(2) + self.y.powi(2)).sqrt()
+    }
+}
+
+
+fn add<T: std::ops::Add<Output = T>>(a:T, b:T) -> T {
+    a + b
+}
+
+fn largest<T: std::cmp::PartialOrd>(list: &[T]) -> T {}
+```
+
 ## Smart Pointer
 
 ### Deref Trait
