@@ -1145,6 +1145,23 @@ fn last_char_of_first_line(text: &str) -> Option<char> {
 }
 ```
 
+## Comments
+
+```rust
+// Line Comments
+/* Block Comments */
+/// Document Line Comments
+/** Document Block Comments */
+//! Crate Line Comments
+/*! Crate Block Comments */
+
+/// [`Option`]
+/// [`Type`](struct@Type)
+/// [`Type`](fn@Type)
+
+#[doc(alias = "alias" )]
+```
+
 ## Smart Pointer
 
 ### Deref Trait
