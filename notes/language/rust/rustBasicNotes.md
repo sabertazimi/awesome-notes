@@ -692,6 +692,79 @@ fn main() {
 }
 ```
 
+## Method
+
+```rust
+struct Circle {
+    x: f64,
+    y: f64,
+    radius: f64,
+}
+
+impl Circle {
+    fn new(x: f64, y: f64, radius: f64) -> Circle {
+        Circle {
+            x,
+            y,
+            radius,
+        }
+    }
+
+    fn area(&self) -> f64 {
+        std::f64::consts::PI * (self.radius * self.radius)
+    }
+}
+```
+
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+impl Message {
+    fn call(&self) {}
+}
+
+fn main() {
+    let m = Message::Write(String::from("hello"));
+    m.call();
+}
+```
+
+### Self
+
+- `self`: 所有权转移.
+- `&self`: 不可变借用.
+- `&mut self`: 可变借用.
+
+```rust
+pub struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    pub fn new(width: u32, height: u32) -> Self {
+        Rectangle { width, height }
+    }
+    pub fn width(&self) -> u32 {
+        return self.width;
+    }
+    pub fn height(&self) -> u32 {
+        return self.height;
+    }
+}
+
+fn main() {
+    let rect = Rectangle::new(30, 50);
+    println!("{}", rect.width());
+    println!("{}", rect.height());
+}
+```
+
 ## Smart Pointer
 
 ### Deref Trait
