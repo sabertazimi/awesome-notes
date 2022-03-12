@@ -1351,6 +1351,22 @@ const result = fibonacci_rs(number);
 console.log(result);
 ```
 
+## Rust Library
+
+- [Num: Numeric Types and Traits](https://github.com/rust-num/num)
+- [Rand: Random Number Generator](https://github.com/rust-random/rand)
+- [Chrono: DateTime Library](https://github.com/chronotope/chrono)
+- [Tokio: Asynchronous Runtime](https://github.com/tokio-rs/tokio)
+- [Rayon: Data Parallelism Library](https://github.com/rayon-rs/rayon)
+- [Log: Logging Library](https://github.com/rust-lang/log)
+- [Tracing: Tracing Library](https://github.com/tokio-rs/tracing)
+- [Request: HTTP Client](https://github.com/seanmonstar/reqwest)
+- [Clap: CLI Parser](https://github.com/clap-rs/clap)
+- [Syn: Source Code Parser](https://github.com/dtolnay/syn)
+- [Napi: Node.js Bindings Library](https://github.com/napi-rs/napi-rs):
+- [Neon: Node.js Bindings Library](https://github.com/neon-bindings/neon):
+- [Git: Git Bindings Library](https://github.com/rust-lang/git2-rs)
+
 ## Reference
 
 - [Rust Course](https://github.com/sunface/rust-course).
