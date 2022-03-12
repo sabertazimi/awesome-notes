@@ -1234,6 +1234,18 @@ fn display(s: &str) {
 }
 ```
 
+## Rust Asynchronous Programming
+
+### Concurrency Programming Model
+
+| Name         | Pros                 | Cons                                   |
+| ------------ | -------------------- | -------------------------------------- |
+| OS Thread    | simple, native model | consistent and context switch overhead |
+| Event Driven | perf model           | non-liner logic, callback hell         |
+| Coroutines   | perf model           | non-system abstraction                 |
+| Actor        | distributed model    | complex flow control and retry logic   |
+| Async/Await  | perf, native model   | complex internal logic                 |
+
 ## Rust Web Development
 
 ### Node.js Bindings
