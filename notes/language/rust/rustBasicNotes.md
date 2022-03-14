@@ -541,6 +541,53 @@ let first_entry = array[0];
 // 9. `[T; 3]` => `[T]` impl `Index` trait.
 ```
 
+## Dynamically Sized Type
+
+DST:
+
+- DST 无法单独被使用, 必须要通过 `&`/`Box`/`Rc` 来间接使用.
+- `str`, `[T]`, `dyn Trait`.
+
+```rust
+// Error!
+let s1: str = "Hello there!";
+let s2: str = "How's it going?";
+
+// Ok.
+let s3: &str = "on?"
+let s4: Box<str> = "Hello there!".into();
+```
+
+```rust
+// Error!
+fn my_function(n: usize) {
+    let array = [123; n];
+}
+```
+
+```rust
+fn foobar_1(thing: &dyn MyThing) {}     // OK.
+fn foobar_2(thing: Box<dyn MyThing>) {} // OK.
+fn foobar_3(thing: Rc<dyn MyThing>) {}  // OK.
+fn foobar_4(thing: MyThing) {}          // ERROR!
+```
+
+### Sized Trait
+
+Implicit sized trait:
+
+```rust
+fn generic<T>(t: T) {}
+// Auto-transform to by Rust compiler
+fn generic<T: Sized>(t: T) {}
+```
+
+Dynamic sized generics:
+
+```rust
+fn generic<T: ?Sized>(t: &T) {}
+```
+
 ## Flow Control
 
 ### If Statement
