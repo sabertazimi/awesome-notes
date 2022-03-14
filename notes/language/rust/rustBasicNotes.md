@@ -1948,8 +1948,10 @@ console.log(result);
 - [Rayon: Data Parallelism Library](https://github.com/rayon-rs/rayon)
 - [Log: Logging Library](https://github.com/rust-lang/log)
 - [Tracing: Tracing Library](https://github.com/tokio-rs/tracing)
+- [Rocket: Web Framework](https://github.com/SergioBenitez/Rocket)
+- [Actix: Web Framework](https://github.com/actix/actix-web)
+- [Warp: Web Framework](https://github.com/seanmonstar/warp)
 - [Request: HTTP Client](https://github.com/seanmonstar/reqwest)
-- [Warp: Web Server Framework](https://github.com/seanmonstar/warp)
 - [Clap: CLI Parser](https://github.com/clap-rs/clap)
 - [Syn: Source Code Parser](https://github.com/dtolnay/syn)
 - [Napi: Node.js Bindings Library](https://github.com/napi-rs/napi-rs):
