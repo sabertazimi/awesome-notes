@@ -1387,6 +1387,23 @@ _named_ rows and columns
   attach to **children** css selector
   (effectively adjusts `margin` of children)
 
+### Grid Pseudo Elements
+
+```css
+h1.lines {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1em;
+}
+
+h1.lines::before,
+h1.lines::after {
+  content: '';
+  border-top: 1px solid black;
+  align-self: center;
+}
+```
+
 ## Column Patterns
 
 - float 左右元素 + margin 中间元素
