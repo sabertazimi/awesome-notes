@@ -3388,6 +3388,22 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 }
 ```
 
+### Container Query
+
+```css
+.sidebar {
+  container-type: inline-size;
+  container-name: sidebar;
+}
+
+@container sidebar (min-width: 400px) {
+  .card {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+}
+```
+
 ## Accessibility
 
 ### Screen Reader Only
