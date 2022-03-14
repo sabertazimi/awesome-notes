@@ -1457,11 +1457,11 @@ module.exports = (function () {
 })();
 ```
 
-command pattern in UI development, bind command to UI components:
+Command pattern in UI development, bind command to UI components:
 
-- executor: UI components
-- client and receiver: background tasks or other UI components
-- executor -> client: command.execute() -> receiver: receiver.action()
+- Executor: UI components.
+- Client and receiver: background tasks or other UI components.
+- Executor -> client: command.execute() -> receiver: receiver.action().
 
 e.g click `button` -> refresh `menu`
 
