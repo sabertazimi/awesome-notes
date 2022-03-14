@@ -736,6 +736,7 @@ tags: [Web, Framework, Library]
 - [Plyr](https://github.com/selz/plyr)
 - [FLV.js](https://github.com/bilibili/flv.js)
 - [VDX: FFmpeg CLI](https://github.com/yuanqing/vdx)
+- [Remotion: Create Videos Programmatically in React](https://github.com/remotion-dev/remotion)
 
 ## Editor
 
