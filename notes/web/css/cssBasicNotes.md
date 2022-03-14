@@ -1115,35 +1115,44 @@ top/left/width/right/z-index are invalid
 
 ### Flex Under the Hood
 
-当 flex-basis 设置为 auto 且 width（或者 height）不为 auto 时，计算 used size 时会用到 width（或者 height）的值
+当 `flex-basis` 设置为 `auto`
+且 `width` 或者 (`height`）不为`auto`时,
+计算 used size 时会用 `width` 或者 (`height`) 代替 `flex-basis`:
 
-- when there is some free space left:
-  true width = `flex-basis` (or `width`) + `flex-grow`/sum of `flex-grow`
-- when there is not enough space:
-  true width = `flex-basis` (or `width`) - `flex-shrink`/sum of `flex-shrink`
-- text nodes and pseudo-elements can be flex children
+- When there is some free space left:
+  true width = `flex-basis` + `flex-grow`/sum of `flex-grow`.
+- When there is not enough space:
+  true width = `flex-basis` - `flex-shrink`/sum of `flex-shrink`.
+- Text nodes and pseudo-elements can be flex children.
 
 ### Flex Useful Shorthand
 
-`flex: flex-grow flex-shrink flex-basis`
+`flex: flex-grow flex-shrink flex-basis`.
 
-- `flex:auto`:
+- `flex: auto`:
 
-元素会根据自身的宽度与高度来确定尺寸，但是会自行伸长以吸收 flex 容器中额外的自由空间，
-也会缩短至自身最小尺寸以适应容器 equal to`flex: 1 1 auto`
+元素会根据自身的宽度与高度来确定尺寸,
+但是会自行伸长以吸收 flex 容器中额外的自由空间,
+也会缩短至自身最小尺寸以适应容器.
+Equal to `flex: 1 1 auto`.
 
-- `flex:initial`:
+- `flex: initial`:
 
-属性默认值， 元素会根据自身宽高设置尺寸。它会缩短自身以适应容器，
-但不会伸长并吸收 flex 容器中的额外自由空间来适应容器 equal to `flex: 0 1 auto`
+属性默认值, 元素会根据自身宽高设置尺寸.
+它会缩短自身以适应容器,
+但不会伸长并吸收 flex 容器中的额外自由空间来适应容器.
+Equal to `flex: 0 1 auto`.
 
-- `flex:none`:
+- `flex: none`:
 
-元素会根据自身宽高来设置尺寸。它是完全非弹性的：既不会缩短，也不会伸长来适应 flex 容器 equal to `flex: 0 0 auto`
+元素会根据自身宽高来设置尺寸.
+它是完全非弹性的: 既不会缩短, 也不会伸长来适应 flex 容器.
+Equal to `flex: 0 0 auto`.
 
-- `flex:<positive-number>`
+- `flex: <positive-number>`
 
-元素会被赋予一个容器中自由空间的指定占比 equal to `flex: <positive-number> 1 0`
+元素会被赋予一个容器中自由空间的指定占比.
+Equal to `flex: <positive-number> 1 0`.
 
 ### Flex Parent Property
 
