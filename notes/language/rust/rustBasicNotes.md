@@ -475,6 +475,26 @@ fn main() {
 }
 ```
 
+## Type Alias
+
+```rust
+type Meters = i32;
+
+let x: u32 = 5;
+let y: Meters = 5;
+
+println!("x + y = {}", x + y);
+```
+
+```rust
+type Result<T> = std::result::Result<T, std::io::Error>;
+type Thunk = Box<dyn Fn() + Send + 'static>;
+
+let f: Thunk = Box::new(|| println!("hi"));
+fn takes_long_type(f: Thunk) {}
+fn returns_long_type() -> Thunk {}
+```
+
 ## Flow Control
 
 ### If Statement
