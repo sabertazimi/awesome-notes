@@ -12,6 +12,8 @@ tags: [Programming, DevOps, Design Pattern]
 
 ## Basic Patterns
 
+> Software design is the art of managing dependencies and abstractions.
+
 ### SOLID Principles
 
 - Single Responsibility Principle 单一功能原则
