@@ -1677,6 +1677,42 @@ componentDidUpdate() {
 
 ### UseLayoutEffect Hook
 
+`useLayoutEffect` callback called **synchronously**
+(fires synchronously after all DOM mutations),
+substitute for `componentDidMount` lifecycle function.
+
+If need to mutate the DOM or do need to perform DOM measurements,
+`useLayoutEffect` is better than `useEffect`.
+
+### UseInsertionEffect Hook
+
+Allows CSS-in-JS libraries to address performance
+issues of injecting styles in render.
+This hook will run after the DOM is mutated,
+but before layout effects read the new layout.
+
+```js
+function useCSS(rule) {
+  if (!canUseDOM) {
+    collectedRulesSet.add(rule);
+  }
+
+  useInsertionEffect(() => {
+    if (!isInserted.has(rule)) {
+      isInserted.add(rule);
+      document.head.appendChild(getStyleForRule(rule));
+    }
+  });
+
+  return rule;
+}
+
+function Component() {
+  let className = useCSS(rule);
+  return <div className={className} />;
+}
+```
+
 ### UseDebugValue Hook
 
 ```ts
@@ -1761,6 +1797,45 @@ function App() {
 
   return <div>{isPending && <Spinner />}</div>;
 }
+```
+
+### UseId Hook
+
+Generating unique IDs on client and server.
+
+```js
+function Checkbox() {
+  const id = useId();
+
+  return (
+    <>
+      <label htmlFor={id}>Do you like React?</label>
+      <input type="checkbox" name="react" id={id} />
+    </>
+  );
+);
+```
+
+### UseSyncExternalStore Hook
+
+Allows external stores to support concurrent reads
+by forcing updates to the store to be synchronous.
+
+```js
+import { useSyncExternalStore } from 'react';
+
+// We will also publish a backwards compatible shim
+// It will prefer the native API, when available
+import { useSyncExternalStore } from 'use-sync-external-store/shim';
+
+// Basic usage. getSnapshot must return a cached/memoized result
+const state = useSyncExternalStore(store.subscribe, store.getSnapshot);
+
+// Selecting a specific field using an inline getSnapshot
+const selectedField = useSyncExternalStore(
+  store.subscribe,
+  () => store.getSnapshot().selectedField
+);
 ```
 
 ### Hooks Usage Rules
@@ -3958,6 +4033,26 @@ element.addEventListener('click', () => {
   setIsBirthday(b => !b);
   setAge(a => a + 1);
 });
+```
+
+### Batching Updates
+
+All updates will be automatically batched,
+including updates inside of
+**timeouts, promises, native event handlers**:
+
+```js
+function handleClick() {
+  setCount(c => c + 1);
+  setFlag(f => !f);
+  // React 18+ will only re-render once at the end (that's batching!)
+}
+
+setTimeout(() => {
+  setCount(c => c + 1);
+  setFlag(f => !f);
+  // React 18+ will only re-render once at the end (that's batching!)
+}, 1000);
 ```
 
 ## React Performance
