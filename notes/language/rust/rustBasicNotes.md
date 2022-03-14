@@ -377,14 +377,30 @@ let user2 = User {
     email: String::from("another@example.com"),
     ..user1
 };
+```
 
-// Tuple Struct.
+### Tuple Struct
+
+```rust
 struct Color(i32, i32, i32);
 struct Point(i32, i32, i32);
 let black = Color(0, 0, 0);
 let origin = Point(0, 0, 0);
+```
 
-// Unit-like Struct.
+`newtype`: Wrap type into tuple struct:
+
+- Make code more readable.
+- Implement 3rd traits for 3rd types.
+- Hide internal details of types.
+
+```rust
+struct Meters(u32);
+```
+
+### Unit-like Struct
+
+```rust
 struct AlwaysEqual;
 let subject = AlwaysEqual;
 impl SomeTrait for AlwaysEqual {}
