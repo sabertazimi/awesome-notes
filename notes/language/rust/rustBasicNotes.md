@@ -1389,8 +1389,13 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### Static Lifetime
 
-生命周期`'static`意味着能和程序活得一样久,
+生命周期`'static`表示持续整个程序,
 例如字符串字面量和特征对象.
+
+### Lifetime Constraint
+
+- `'a: 'b`: `'a` 生命周期更长.
+- `T: 'a`: `T` 生命周期更长.
 
 ## Smart Pointer
 
