@@ -1232,23 +1232,23 @@ fn main() {
 ```rust
 fn main() {
     // 以下全部输出 "Hello x    !"
-    // 为"x"后面填充空格，补齐宽度5
+    // 为"x"后面填充空格, 补齐宽度5
     println!("Hello {:5}!", "x");
     // 使用参数5来指定宽度
     println!("Hello {:1$}!", "x", 5);
-    // 使用x作为占位符输出内容，同时使用5作为宽度
+    // 使用x作为占位符输出内容, 同时使用5作为宽度
     println!("Hello {1:0$}!", 5, "x");
     // 使用有名称的参数作为宽度
     println!("Hello {:width$}!", "x", width = 5);
 
-    // 使用参数5为参数x指定宽度，同时在结尾输出参数5 => Hello x    !5
+    // 使用参数5为参数x指定宽度, 同时在结尾输出参数5 => Hello x    !5
     println!("Hello {:1$}!{}", "x", 5);
 
     // 宽度是5 => Hello     5!
     println!("Hello {:5}!", 5);
     // 显式的输出正号 => Hello +5!
     println!("Hello {:+}!", 5);
-    // 宽度5，使用0进行填充 => Hello 00005!
+    // 宽度5, 使用0进行填充 => Hello 00005!
     println!("Hello {:05}!", 5);
     // 负号也要占用一位宽度 => Hello -0005!
     println!("Hello {:05}!", -5);
@@ -1284,13 +1284,13 @@ fn main() {
     println!("{:+.2}", v);
     // 不带小数 => 3
     println!("{:.0}", v);
-    // 通过参数来设定精度 => 3.1416，相当于{:.4}
+    // 通过参数来设定精度 => 3.1416, 相当于{:.4}
     println!("{:.1$}", v, 4);
 
     let s = "hello I'm some one";
     // 保留字符串前三个字符 => hel
     println!("{:.3}", s);
-    // {:.*} 接收两个参数，第一个是精度，第二个是被格式化的值 => Hello abc!
+    // {:.*} 接收两个参数, 第一个是精度, 第二个是被格式化的值 => Hello abc!
     println!("Hello {:.*}!", 3, "abcdefg");
 }
 ```
@@ -1313,7 +1313,7 @@ fn main() {
     // 不带前缀的十六进制 => 1b!
     println!("{:x}!", 27);
 
-    // 使用0填充二进制，宽度为10 => 0b00011011!
+    // 使用0填充二进制, 宽度为10 => 0b00011011!
     println!("{:#010b}!", 27);
 
     println!("{:2e}", 1000000000); // => 1e9
@@ -1353,7 +1353,7 @@ impl fmt::Display for Person {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(
             f,
-            "My name is {}，{} year old.",
+            "My name is {}, {} year old.",
             self.name, self.age
         )
     }
