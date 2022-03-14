@@ -2721,6 +2721,22 @@ Orinoco 优化 (优化全停顿现象):
 
 [![Critical Render Path](./figures/CriticalRenderPath.svg)](https://sia.codes/posts/render-blocking-resources/#critical-render-path-js)
 
+RenderNG pipeline
+(Main Thread + Compositor Thread + Viz Process):
+
+- Animate.
+- Style.
+- Layout.
+- Pre-paint.
+- Scroll.
+- Paint.
+- Commit.
+- Layerize.
+- Raster, decode and paint worklet.
+- Activate.
+- Aggregate.
+- Draw.
+
 ### Browser Internal Reference
 
 - Chromium rendering engine: [RenderingNG](https://developer.chrome.com/blog/renderingng).
