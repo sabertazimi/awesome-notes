@@ -1215,6 +1215,7 @@ tags: [Web, Framework, Library]
 - [Actions Toolkit: Building GitHub Actions in Node.js](https://github.com/JasonEtco/actions-toolkit)
 - [Chokidar: Minimal Cross-platform File Watching Library](https://github.com/paulmillr/chokidar)
 - [ACT: Local GitHub Action Runner](https://github.com/nektos/act)
+- [TerraForm](https://github.com/hashicorp/terraform)
 
 ### GitHub Actions
 
