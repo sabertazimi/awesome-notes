@@ -1203,9 +1203,9 @@ order: number; /* 显示顺序 */
 }
 ```
 
-### Pseudo Elements of FlexBox
+### Flexbox Pseudo Elements
 
-set `flex` to pseudo elements of flex box
+Set `flex` to pseudo elements of flex box
 will change width of pseudo elements.
 
 ```css
