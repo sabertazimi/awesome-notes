@@ -296,7 +296,7 @@ fn main() {
 
 ## String Type
 
-`&str` string slice type:
+`&str` string slice reference type:
 
 - Borrowing type.
 - UTF-8 encode (1 ~ 4 bytes).
