@@ -2752,6 +2752,7 @@ console.log(result);
 - [Neon: Node.js Bindings Library](https://github.com/neon-bindings/neon):
 - [Git: Git Bindings Library](https://github.com/rust-lang/git2-rs)
 - [PrettyAssertions](https://github.com/colin-kiegel/rust-pretty-assertions)
+- [Criterion: Benchmarking Library](https://github.com/bheisler/criterion.rs)
 
 ## Reference
 
