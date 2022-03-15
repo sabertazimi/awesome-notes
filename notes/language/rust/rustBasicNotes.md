@@ -1857,6 +1857,13 @@ fn display(s: &str) {
 }
 ```
 
+### Drop Trait
+
+Drop order:
+
+- 变量级别, 按照逆序的方式, 先创建的变量后 drop.
+- 结构体内部, 按照顺序的方式, 结构体中的字段按照定义中的顺序依次 drop.
+
 ## Rust Asynchronous Programming
 
 ### Concurrency Programming Model
