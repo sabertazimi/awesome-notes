@@ -2597,6 +2597,34 @@ Send and Sync:
 - `try_`: 尝试一次, 失败则返回或报错.
 - `_mut`: 可变借用.
 
+## Rust Unit Tests
+
+```rust
+fn greeting(name: &str) -> String {
+    format!("Hello {}!", name)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    #[ignore]
+    #[should_panic]
+    #[should_panic(expected = "Panic message.")]
+    fn greeting_contains_name() {
+        let target = "name";
+        let result = greeting("Name");
+        assert!(
+            result.contains(target),
+            "Expect: `{}`, Result: `{}`",
+            target,
+            result
+        );
+    }
+}
+```
+
 ## Rust Web Development
 
 ### Node.js Bindings
@@ -2722,6 +2750,7 @@ console.log(result);
 - [Napi: Node.js Bindings Library](https://github.com/napi-rs/napi-rs):
 - [Neon: Node.js Bindings Library](https://github.com/neon-bindings/neon):
 - [Git: Git Bindings Library](https://github.com/rust-lang/git2-rs)
+- [PrettyAssertions](https://github.com/colin-kiegel/rust-pretty-assertions)
 
 ## Reference
 
