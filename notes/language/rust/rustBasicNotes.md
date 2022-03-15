@@ -1979,6 +1979,71 @@ fn main() {
 }
 ```
 
+### Circle Reference
+
+`Weak` 通过 `use std::rc::Weak` 引入, 具有以下特点:
+
+- 可访问, 但没有所有权, 不增加引用计数, 不影响 drop.
+- 可由 `Rc<T>` 调用 `downgrade` 方法转换成 `Weak<T>`.
+- `Weak<T>` 可使用 `upgrade` 方法转换成 `Option<Rc<T>>`,
+  如果资源已经被释放, 则 `Option` 的值是 `None`.
+- 常用于解决循环引用的问题.
+
+```rust
+use std::cell::RefCell;
+use std::rc::{Rc, Weak};
+
+#[derive(Debug)]
+struct Node {
+    value: i32,
+    parent: RefCell<Weak<Node>>,
+    children: RefCell<Vec<Rc<Node>>>,
+}
+
+fn main() {
+    let leaf = Rc::new(Node {
+        value: 3,
+        parent: RefCell::new(Weak::new()),
+        children: RefCell::new(vec![]),
+    });
+
+    println!(
+        "leaf strong = {}, weak = {}",
+        Rc::strong_count(&leaf),
+        Rc::weak_count(&leaf),
+    );
+
+    {
+        let branch = Rc::new(Node {
+            value: 5,
+            parent: RefCell::new(Weak::new()),
+            children: RefCell::new(vec![Rc::clone(&leaf)]),
+        });
+
+        *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
+
+        println!(
+            "branch strong = {}, weak = {}",
+            Rc::strong_count(&branch),
+            Rc::weak_count(&branch),
+        );
+
+        println!(
+            "leaf strong = {}, weak = {}",
+            Rc::strong_count(&leaf),
+            Rc::weak_count(&leaf),
+        );
+    }
+
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+    println!(
+        "leaf strong = {}, weak = {}",
+        Rc::strong_count(&leaf),
+        Rc::weak_count(&leaf),
+    );
+}
+```
+
 ## Rust Asynchronous Programming
 
 ### Concurrency Programming Model
