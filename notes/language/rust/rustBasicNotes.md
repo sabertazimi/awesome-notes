@@ -1900,6 +1900,85 @@ fn main() {
 }
 ```
 
+### Cell and RefCell Type
+
+`Cell` for copyable type.
+
+```rust
+use std::cell::Cell;
+
+fn main() {
+    let c = Cell::new("abc");
+    let one = c.get();
+    c.set("xyz");
+    let two = c.get();
+    println!("{}, {}", one, two); // abc, xyz
+}
+```
+
+```rust
+use std::cell::Cell;
+
+fn retain_even(nums: &mut Vec<i32>) {
+    let slice: &[Cell<i32>] = Cell::from_mut(&mut nums[..])
+        .as_slice_of_cells();
+
+    let mut i = 0;
+
+    for num in slice.iter().filter(|num| is_even(num.get())) {
+        slice[i].set(num.get());
+        i += 1;
+    }
+
+    nums.truncate(i);
+}
+```
+
+`RefCell` for borrowing reference:
+实现编译期**可变借用**与**不可变借用**共存,
+但会引起运行时 `panic`:
+
+```rust
+use std::cell::RefCell;
+
+fn main() {
+    let s = RefCell::new(String::from("hello, world"));
+    let s1 = s.borrow();
+    let s2 = s.borrow_mut();
+
+    println!("{}, {}", s1, s2);
+}
+```
+
+通过包裹一层 `RefCell`,
+将不可变借用 `&self` 的成员成为一个可变值,
+然后实现修改:
+
+```rust
+use std::cell::RefCell;
+
+pub trait Messenger {
+    fn send(&self, msg: String);
+}
+
+pub struct MsgQueue {
+    msg_cache: RefCell<Vec<String>>,
+}
+
+impl Messenger for MsgQueue {
+    fn send(&self, msg: String) {
+        self.msg_cache.borrow_mut().push(msg)
+    }
+}
+
+fn main() {
+    let mq = MsgQueue {
+        msg_cache: RefCell::new(Vec::new()),
+    };
+    mq.send("hello, world".to_string());
+}
+```
+
 ## Rust Asynchronous Programming
 
 ### Concurrency Programming Model
