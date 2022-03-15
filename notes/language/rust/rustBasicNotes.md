@@ -1864,6 +1864,42 @@ Drop order:
 - 变量级别, 按照逆序的方式, 先创建的变量后 drop.
 - 结构体内部, 按照顺序的方式, 结构体中的字段按照定义中的顺序依次 drop.
 
+### Reference Counting Type
+
+通过引用计数的方式, 允许一个数据资源在同一时刻拥有多个所有者.
+
+```rust
+use std::rc::Rc;
+
+fn main() {
+    let a = Rc::new(String::from("hello, world"));
+    let b = Rc::clone(&a); // 复制了智能指针并增加了引用计数, 并没有克隆底层数据.
+    assert_eq!(2, Rc::strong_count(&a));
+    assert_eq!(Rc::strong_count(&a), Rc::strong_count(&b))
+}
+```
+
+- `Rc`/`Arc` 是不可变引用, 无法修改它指向的值.
+- `Rc<T>` 是一个智能指针, 实现了 `Deref` 特征, 可以直接使用 `T`.
+- 一旦最后一个拥有者消失, 则资源会自动被回收.
+- `Arc`: Atomic reference counting.
+
+```rust
+use std::sync::Arc;
+use std::thread;
+
+fn main() {
+    let s = Arc::new(String::from("Multiple threads walker"));
+
+    for _ in 0..10 {
+        let s = Arc::clone(&s);
+        let handle = thread::spawn(move || {
+           println!("{}", s)
+        });
+    }
+}
+```
+
 ## Rust Asynchronous Programming
 
 ### Concurrency Programming Model
