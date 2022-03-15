@@ -2132,6 +2132,60 @@ fn main() {
 }
 ```
 
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
+}
+```
+
+Read and write mutex:
+
+- 同时允许多个读, 但最多只能有一个写.
+- 读和写不能同时存在.
+- 可以使用 `read`/`try_read`/`write`/`try_write`.
+
+```rust
+use std::sync::RwLock;
+
+fn main() {
+    let lock = RwLock::new(5);
+
+    // 同一时间允许多个读.
+    {
+        let r1 = lock.read().unwrap();
+        let r2 = lock.read().unwrap();
+        assert_eq!(*r1, 5);
+        assert_eq!(*r2, 5);
+    } // Drop.
+
+    // 同一时间只允许一个写.
+    {
+        let mut w = lock.write().unwrap();
+        *w += 1;
+        assert_eq!(*w, 6);
+    } // Drop.
+}
+```
+
 ### Threads Communication
 
 Message channel:
@@ -2256,6 +2310,168 @@ fn main() {
     }
 }
 ```
+
+### Tokio Semaphore
+
+```rust
+use std::sync::Arc;
+use tokio::sync::Semaphore;
+
+#[tokio::main]
+async fn main() {
+    let semaphore = Arc::new(Semaphore::new(3));
+    let mut join_handles = Vec::new();
+
+    for _ in 0..5 {
+        let permit = semaphore.clone().acquire_owned().await.unwrap();
+        join_handles.push(tokio::spawn(async move {
+            /**
+             * Task here ...
+             */
+            drop(permit);
+        }));
+    }
+
+    for handle in join_handles {
+        handle.await.unwrap();
+    }
+}
+```
+
+### Atomic Primitives
+
+```rust
+use std::ops::Sub;
+use std::sync::atomic::{AtomicU64, Ordering};
+use std::thread::{self, JoinHandle};
+use std::time::Instant;
+
+const N_TIMES: u64 = 10000000;
+const N_THREADS: usize = 10;
+
+static R: AtomicU64 = AtomicU64::new(0);
+
+fn add_n_times(n: u64) -> JoinHandle<()> {
+    thread::spawn(move || {
+        for _ in 0..n {
+            R.fetch_add(1, Ordering::Relaxed);
+        }
+    })
+}
+
+fn main() {
+    let s = Instant::now();
+    let mut threads = Vec::with_capacity(N_THREADS);
+
+    for _ in 0..N_THREADS {
+        threads.push(add_n_times(N_TIMES));
+    }
+
+    for thread in threads {
+        thread.join().unwrap();
+    }
+
+    assert_eq!(N_TIMES * N_THREADS as u64, R.load(Ordering::Relaxed));
+
+    println!("{:?}",Instant::now().sub(s));
+}
+```
+
+`Ordering` 内存顺序:
+
+- Relaxed: 乱序.
+- Release: 设置内存屏障, 保证它之前的操作永远在它之前.
+- Acquire: 设置内存屏障, 保证它之后的操作永远在它之后.
+- AcqRel: Acquire + Release.
+- SeqCst: 顺序一致性.
+
+```rust
+use std::thread::{self, JoinHandle};
+use std::sync::atomic::{Ordering, AtomicBool};
+
+static mut DATA: u64 = 0;
+static READY: AtomicBool = AtomicBool::new(false);
+
+fn reset() {
+    unsafe {
+        DATA = 0;
+    }
+    READY.store(false, Ordering::Relaxed);
+}
+
+fn producer() -> JoinHandle<()> {
+    thread::spawn(move || {
+        unsafe {
+            DATA = 100;                                 // A
+        }
+        READY.store(true, Ordering::Release);           // B: 内存屏障 ↑
+    })
+}
+
+fn consumer() -> JoinHandle<()> {
+    thread::spawn(move || {
+        while !READY.load(Ordering::Acquire) {}         // C: 内存屏障 ↓
+
+        assert_eq!(100, unsafe { DATA });               // D
+    })
+}
+
+
+fn main() {
+    loop {
+        reset();
+
+        let t_producer = producer();
+        let t_consumer = consumer();
+
+        t_producer.join().unwrap();
+        t_consumer.join().unwrap();
+    }
+}
+```
+
+Spinlock:
+
+```rust
+use std::sync::Arc;
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::{hint, thread};
+
+fn main() {
+    let spinlock = Arc::new(AtomicUsize::new(1));
+    let spinlock_clone = Arc::clone(&spinlock);
+    let thread = thread::spawn(move|| {
+        spinlock_clone.store(0, Ordering::SeqCst);
+    });
+
+    // 等待其它线程释放锁.
+    while spinlock.load(Ordering::SeqCst) != 0 {
+        hint::spin_loop();
+    }
+
+    if let Err(panic) = thread.join() {
+        println!("Thread had an error: {:?}", panic);
+    }
+}
+```
+
+### Send and Sync Trait
+
+Send and Sync:
+
+- Marker trait.
+- 实现 `Send` 的类型可以在线程间安全的传递其所有权,
+  实现 `Sync` 的类型可以在线程间安全的共享 (通过引用).
+  若 `&T: Send`, 则 `T: Sync`.
+- 绝大部分类型都实现了 `Send`/`Sync`,
+  例外: 原生指针, `Cell`/`RefCell`, `Rc`.
+
+## Rust Standard Library
+
+- `as_`.
+- `into_`.
+- `try_`: 尝试一次, 失败则返回或报错.
+- `_mut`: 可变借用.
 
 ## Rust Web Development
 
