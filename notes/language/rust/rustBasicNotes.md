@@ -10,9 +10,9 @@ tags: [Language, Rust]
 
 [TOC]
 
-## Rust Toolchain
+## Toolchain
 
-### Rust Installation
+### Installation
 
 ```bash
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
@@ -61,7 +61,7 @@ post-release-commit-message = "chore(release): {{version}}"
 tag-message = "{{tag_name}}"
 ```
 
-### Rust GitHub Action
+### GitHub Action
 
 ```yml
 name: CI
@@ -193,7 +193,7 @@ jobs:
           path-to-lcov: './lcov.info'
 ```
 
-## Rust Ownership
+## Ownership
 
 ### Copy Trait
 
@@ -2168,7 +2168,7 @@ fn main() {
 }
 ```
 
-## Rust Asynchronous Programming
+## Concurrent Programming
 
 ### Concurrency Programming Model
 
@@ -2590,14 +2590,7 @@ Send and Sync:
 - 绝大部分类型都实现了 `Send`/`Sync`,
   例外: 原生指针, `Cell`/`RefCell`, `Rc`.
 
-## Rust Standard Library
-
-- `as_`.
-- `into_`.
-- `try_`: 尝试一次, 失败则返回或报错.
-- `_mut`: 可变借用.
-
-## Rust Unit Tests
+## Tests
 
 ```rust
 fn greeting(name: &str) -> String {
@@ -2625,7 +2618,14 @@ mod tests {
 }
 ```
 
-## Rust Web Development
+## Standard Library
+
+- `as_`.
+- `into_`.
+- `try_`: 尝试一次, 失败则返回或报错.
+- `_mut`: 可变借用.
+
+## Web Development
 
 ### Node.js Bindings
 
@@ -2730,7 +2730,7 @@ const result = fibonacci_rs(number);
 console.log(result);
 ```
 
-## Rust Library
+## Library
 
 - [Num: Numeric Types and Traits](https://github.com/rust-num/num)
 - [Rand: Random Number Generator](https://github.com/rust-random/rand)
