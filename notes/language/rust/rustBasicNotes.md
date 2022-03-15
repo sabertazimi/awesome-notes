@@ -2180,6 +2180,9 @@ fn main() {
 | Actor        | distributed model    | complex flow control and retry logic   |
 | Async/Await  | perf, native model   | complex internal logic                 |
 
+`OS Threads` for CPU intensive task (parallel computing),
+`Async/Await` for I/O intensive task (blocking I/O).
+
 ### Threads
 
 ```rust
@@ -2589,6 +2592,8 @@ Send and Sync:
   若 `&T: Send`, 则 `T: Sync`.
 - 绝大部分类型都实现了 `Send`/`Sync`,
   例外: 原生指针, `Cell`/`RefCell`, `Rc`.
+
+## Asynchronous Programming
 
 ## Tests
 
