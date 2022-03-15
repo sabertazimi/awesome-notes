@@ -2368,6 +2368,7 @@ console.log(result);
 - [Rand: Random Number Generator](https://github.com/rust-random/rand)
 - [Chrono: DateTime Library](https://github.com/chronotope/chrono)
 - [AsyncStd: Asynchronous Version Standard Library](https://github.com/async-rs/async-std)
+- [Crossbeam: Concurrent Programming Tools](https://github.com/crossbeam-rs/crossbeam)
 - [Tokio: Asynchronous Runtime](https://github.com/tokio-rs/tokio)
 - [Rayon: Data Parallelism Library](https://github.com/rayon-rs/rayon)
 - [Log: Logging Library](https://github.com/rust-lang/log)
