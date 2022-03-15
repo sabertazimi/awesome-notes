@@ -2734,6 +2734,7 @@ console.log(result);
 
 - [Num: Numeric Types and Traits](https://github.com/rust-num/num)
 - [Rand: Random Number Generator](https://github.com/rust-random/rand)
+- [Regex: Regular Expression Engine](https://github.com/rust-lang/regex)
 - [Chrono: DateTime Library](https://github.com/chronotope/chrono)
 - [AsyncStd: Asynchronous Version Standard Library](https://github.com/async-rs/async-std)
 - [Crossbeam: Concurrent Programming Tools](https://github.com/crossbeam-rs/crossbeam)
