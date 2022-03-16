@@ -61,6 +61,20 @@ post-release-commit-message = "chore(release): {{version}}"
 tag-message = "{{tag_name}}"
 ```
 
+`~/.cargo/`:
+
+- `config.toml`: global configuration.
+- `credentials.toml`: `cargo login` related file.
+- `.crates.toml`/`.crates2.json`: installed package information.
+- `bin/`: installed binaries.
+- `git/`: installed rust git repositories.
+  - `git/db/`: installed git repositories.
+  - `git/checkouts/`: branches of git repositories.
+- `registry/`:  `crates.io` metadata and packages.
+  - `registry/index/`: metadata git repository.
+  - `registry/cache/`: dependencies cache (`.crate` gzip files).
+  - `registry/src/`: package source files.
+
 ### GitHub Action
 
 ```yml
