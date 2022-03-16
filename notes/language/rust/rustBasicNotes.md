@@ -18,7 +18,9 @@ tags: [Language, Rust]
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 ```
 
-### Cargo Basis
+### Cargo
+
+#### Cargo Basic Commands
 
 ```bash
 cargo new hello_world
@@ -61,6 +63,8 @@ post-release-commit-message = "chore(release): {{version}}"
 tag-message = "{{tag_name}}"
 ```
 
+#### Cargo Cache
+
 `~/.cargo/`:
 
 - `config.toml`: global configuration.
@@ -74,6 +78,55 @@ tag-message = "{{tag_name}}"
   - `registry/index/`: metadata git repository.
   - `registry/cache/`: dependencies cache (`.crate` gzip files).
   - `registry/src/`: package source files.
+
+#### Cargo Configuration
+
+- `cargo-features`: 只能用于 `nightly`版本的 `feature`.
+- `[package]`: 定义项目( `package` )的元信息.
+  - `name`: 名称.
+  - `version`: 版本.
+  - `authors`: 开发作者.
+  - `edition`: Rust edition..
+  - `rust-version`: 支持的最小化 Rust 版本.
+  - `description`: 描述.
+  - `documentation`: 文档 URL.
+  - `readme`: README 文件的路径.
+  - `homepage`: 主页 URL.
+  - `repository`: 源代码仓库的 URL.
+  - `license`: 开源协议 License..
+  - `license-file`: License 文件的路径..
+  - `keywords`: 项目的关键词.
+  - `categories`: 项目分类.
+  - `workspace`: 工作空间 workspace 的路径.
+  - `build`: 构建脚本的路径.
+  - `links`: 本地链接库的名称.
+  - `exclude`: 发布时排除的文件.
+  - `include`: 发布时包含的文件.
+  - `publish`: 用于阻止项目的发布.
+  - `metadata`: 额外的配置信息，用于提供给外部工具.
+  - `default-run`: [`cargo run`] 所使用的默认可执行文件( binary ).
+  - `autobins`: 禁止可执行文件的自动发现.
+  - `autoexamples`: 禁止示例文件的自动发现.
+  - `autotests`: 禁止测试文件的自动发现.
+  - `autobenches`: 禁止 bench 文件的自动发现.
+  - `resolver`: 设置依赖解析器( dependency resolver).
+- Cargo target configuration:
+  - `[lib]`: Library target.
+  - `[bin]`: Binary target.
+  - `[example]`: Example target.
+  - `[test]`: Test target.
+  - `[bench]`: Benchmark target.
+- Dependency tables:
+  - `[dependencies]`: 项目依赖包.
+  - `[dev-dependencies]`:
+    用于 examples、tests 和 benchmarks 的依赖包.
+  - `[build-dependencies]`: 用于构建脚本的依赖包.
+  - `[target]`: 平台特定的依赖包.
+- `[badges]`: 维护状态.
+- `[features]`: `features` 可以用于条件编译.
+- `[patch]`: 推荐使用的依赖覆盖方式.
+- `[profile]`: 编译器设置和优化.
+- `[workspace]`: 工作空间的定义.
 
 ### GitHub Action
 
