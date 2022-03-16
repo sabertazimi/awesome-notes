@@ -2597,6 +2597,7 @@ Send and Sync:
 
 ```rust
 use futures::executor::block_on;
+use futures::join;
 
 async fn learn_song() -> Song { /* ... */ }
 async fn sing_song(song: Song) { /* ... */ }
@@ -2610,11 +2611,197 @@ async fn learn_and_sing() {
 async fn async_main() {
     let f1 = learn_and_sing();
     let f2 = dance();
-    futures::join!(f1, f2);
+    join!(f1, f2);
 }
 
 fn main() {
     block_on(async_main());
+}
+```
+
+```rust
+use futures::future;
+use futures::select;
+
+pub fn main() {
+    let mut a_fut = future::ready(4);
+    let mut b_fut = future::ready(6);
+    let mut total = 0;
+
+    loop {
+        select! {
+            a = a_fut => total += a,
+            b = b_fut => total += b,
+            complete => break,
+            default => panic!(), // 该分支永远不会运行.
+        };
+    }
+
+    assert_eq!(total, 10);
+}
+```
+
+### Future Trait
+
+```rust
+trait Future {
+    type Output;
+    fn poll(
+        self: Pin<&mut Self>,
+        cx: &mut Context<'_>,
+    ) -> Poll<Self::Output>;
+}
+```
+
+```rust
+
+use std::{
+    future::Future,
+    pin::Pin,
+    sync::{Arc, Mutex},
+    task::{Context, Poll, Waker},
+    thread,
+    time::Duration,
+};
+
+pub struct TimerFuture {
+    shared_state: Arc<Mutex<SharedState>>,
+}
+
+struct SharedState {
+    completed: bool,
+    waker: Option<Waker>,
+}
+
+impl Future for TimerFuture {
+    type Output = ();
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+        let mut shared_state = self.shared_state.lock().unwrap();
+
+        if shared_state.completed {
+            Poll::Ready(())
+        } else {
+            shared_state.waker = Some(cx.waker().clone());
+            Poll::Pending
+        }
+    }
+}
+
+impl TimerFuture {
+    pub fn new(duration: Duration) -> Self {
+        let shared_state = Arc::new(Mutex::new(SharedState {
+            completed: false,
+            waker: None,
+        }));
+
+        let thread_shared_state = shared_state.clone();
+
+        thread::spawn(move || {
+            thread::sleep(duration);
+            let mut shared_state = thread_shared_state.lock().unwrap();
+            shared_state.completed = true;
+            if let Some(waker) = shared_state.waker.take() {
+                waker.wake()
+            }
+        });
+
+        TimerFuture { shared_state }
+    }
+}
+```
+
+### Asynchronous Runtime
+
+```rust
+use {
+    futures::{
+        future::{BoxFuture, FutureExt},
+        task::{waker_ref, ArcWake},
+    },
+    std::{
+        future::Future,
+        sync::mpsc::{sync_channel, Receiver, SyncSender},
+        sync::{Arc, Mutex},
+        task::{Context, Poll},
+        time::Duration,
+    },
+    // 引入之前实现的定时器模块
+    timer_future::TimerFuture,
+};
+
+struct Task {
+    future: Mutex<Option<BoxFuture<'static, ()>>>,
+    task_sender: SyncSender<Arc<Task>>,
+}
+
+impl ArcWake for Task {
+    fn wake_by_ref(arc_self: &Arc<Self>) {
+        let cloned = arc_self.clone();
+        arc_self
+            .task_sender
+            .send(cloned)
+            .expect("任务队列已满");
+    }
+}
+
+#[derive(Clone)]
+struct Spawner {
+    task_sender: SyncSender<Arc<Task>>,
+}
+
+impl Spawner {
+    fn spawn(&self, future: impl Future<Output = ()> + 'static + Send) {
+        let future = future.boxed();
+        let task = Arc::new(Task {
+            future: Mutex::new(Some(future)),
+            task_sender: self.task_sender.clone(),
+        });
+        self.task_sender.send(task).expect("任务队列已满");
+    }
+}
+
+struct Executor {
+    ready_queue: Receiver<Arc<Task>>,
+}
+
+impl Executor {
+    fn run(&self) {
+        while let Ok(task) = self.ready_queue.recv() {
+            let mut future_slot = task.future.lock().unwrap();
+
+            if let Some(mut future) = future_slot.take() {
+                let waker = waker_ref(&task);
+                let context = &mut Context::from_waker(&*waker);
+
+                if future.as_mut().poll(context).is_pending() {
+                    // Future 未执行完，, 将它放回任务中, 等待下次被 poll.
+                    *future_slot = Some(future);
+                }
+            }
+        }
+    }
+}
+
+fn new_executor_and_spawner() -> (Executor, Spawner) {
+    const MAX_QUEUED_TASKS: usize = 10_000;
+    let (task_sender, ready_queue) = sync_channel(MAX_QUEUED_TASKS);
+    (Executor { ready_queue }, Spawner { task_sender })
+}
+
+fn main() {
+    let (executor, spawner) = new_executor_and_spawner();
+
+    spawner.spawn(async {
+        println!("howdy!");
+        TimerFuture::new(Duration::new(2, 0)).await;
+        println!("done!");
+    });
+
+    drop(spawner);
+
+    // 运行执行器直到任务队列为空.
+    // 任务运行后, 会先打印 `howdy!`, 暂停 2 秒, 接着打印 `done!`.
+    executor.run();
 }
 ```
 
