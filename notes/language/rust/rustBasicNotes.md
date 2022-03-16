@@ -112,10 +112,10 @@ tag-message = "{{tag_name}}"
   - `resolver`: 设置依赖解析器( dependency resolver).
 - Cargo target configuration:
   - `[lib]`: Library target.
-  - `[bin]`: Binary target.
-  - `[example]`: Example target.
-  - `[test]`: Test target.
-  - `[bench]`: Benchmark target.
+  - `[[bin]]`: Binary target.
+  - `[[example]]`: Example target.
+  - `[[test]]`: Test target.
+  - `[[bench]]`: Benchmark target.
 - Dependency tables:
   - `[dependencies]`: 项目依赖包.
   - `[dev-dependencies]`:
