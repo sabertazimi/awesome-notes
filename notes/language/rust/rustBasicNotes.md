@@ -1805,6 +1805,12 @@ impl<I: Iterator> IntoIterator for I {
 - `into_iter`: 改变所有权.
 
 ```rust
+fn iter(&self) -> Iter             // Iter implements Iterator<Item = &U>
+fn iter_mut(&mut self) -> IterMut  // IterMut implements Iterator<Item = &mut U>
+fn into_iter(self) -> IntoIter     // IntoIter implements Iterator<Item = U>
+```
+
+```rust
 fn main() {
     let values = vec![1, 2, 3];
 
@@ -3146,7 +3152,7 @@ mod tests {
 ## Standard Library
 
 - `as_`: `borrowed` -> `borrowed`.
-- `into_`: `owned` -> `owned`.
+- `into_`: `owned` -> `owned` (移除所有权).
 - `to_`:
   `borrowed` -> `borrowed`,
   `borrowed` -> `owned` on non-copy types,
