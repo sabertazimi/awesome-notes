@@ -3267,6 +3267,7 @@ console.log(result);
 - [Rayon: Data Parallelism Library](https://github.com/rayon-rs/rayon)
 - [Log: Logging Library](https://github.com/rust-lang/log)
 - [Tracing: Tracing Library](https://github.com/tokio-rs/tracing)
+- [Axum: Tokio Web Framework](https://github.com/tokio-rs/axum)
 - [Rocket: Web Framework](https://github.com/SergioBenitez/Rocket)
 - [Actix: Web Framework](https://github.com/actix/actix-web)
 - [Warp: Web Framework](https://github.com/seanmonstar/warp)
