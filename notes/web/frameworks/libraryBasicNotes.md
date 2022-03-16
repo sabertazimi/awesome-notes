@@ -1136,6 +1136,8 @@ tags: [Web, Framework, Library]
 - [FlameGraph](https://github.com/brendangregg/FlameGraph)
 - [Brotli Compression Format](https://github.com/google/brotli)
 - [V8 Compile Cache](https://github.com/zertosh/v8-compile-cache)
+- [HyperFine: CLI Benchmark Tool](https://github.com/sharkdp/hyperfine)
+- [ByteHound: Memory Profiler](https://github.com/koute/bytehound)
 
 ### Log Tools
 
