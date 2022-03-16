@@ -1086,6 +1086,7 @@ impl<T: Display> ToString for T {}
   it is `object safe`:
   - all methods can't return `Self`.
   - all methods can't be generics.
+- Trait object has `'static` lifetime.
 - Trait object stand for dynamic distributing (runtime),
   generics stand for static distributing (compile time).
 
