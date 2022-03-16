@@ -77,6 +77,8 @@ tag-message = "{{tag_name}}"
 
 ### GitHub Action
 
+- Use [tool](https://github.com/mozilla/sccache) to speed up compilation.
+
 ```yml
 name: CI
 
