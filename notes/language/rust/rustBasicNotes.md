@@ -3277,12 +3277,17 @@ console.log(result);
 - [Rayon: Data Parallelism Library](https://github.com/rayon-rs/rayon)
 - [Log: Logging Library](https://github.com/rust-lang/log)
 - [Tracing: Tracing Library](https://github.com/tokio-rs/tracing)
+- [Serde: Serialization Framework](https://github.com/serde-rs/serde)
 - [Axum: Tokio Web Framework](https://github.com/tokio-rs/axum)
 - [Rocket: Web Framework](https://github.com/SergioBenitez/Rocket)
 - [Actix: Web Framework](https://github.com/actix/actix-web)
 - [Warp: Web Framework](https://github.com/seanmonstar/warp)
 - [Request: HTTP Client](https://github.com/seanmonstar/reqwest)
-- [Clap: CLI Parser](https://github.com/clap-rs/clap)
+- [Quiche: QUIC and HTTP/3 Library](https://github.com/cloudflare/quiche)
+- [Tonic: gPRC Framework](https://github.com/hyperium/tonic)
+- [QuickWit: Distributed Search Engine](https://github.com/quickwit-oss/quickwit)
+- [MeiliSearch: Realtime Search Engine](https://github.com/meilisearch/MeiliSearch)
+- [Clap: CLI Framework](https://github.com/clap-rs/clap)
 - [Syn: Source Code Parser](https://github.com/dtolnay/syn)
 - [Napi: Node.js Bindings Library](https://github.com/napi-rs/napi-rs):
 - [Neon: Node.js Bindings Library](https://github.com/neon-bindings/neon):
