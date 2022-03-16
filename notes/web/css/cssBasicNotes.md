@@ -991,10 +991,17 @@ float make element specified value of `display`:
 
 ### Float ClearFix
 
-**Best Practice**: 为父容器添加 clearfix class
-`display: table` 防止外边距塌陷, `clear: both` 清楚浮动
+**Best Practice**:
+为父容器 (`.row`) 添加 `.clearfix`,
+`display: table` 防止外边距塌陷, `clear: both` 清除浮动.
 
 ```css
+.row {
+  max-width: --var(row-max-width);
+  width: 100%;
+  margin: 0 auto;
+}
+
 .clearfix::before,
 .clearfix::after {
   display: table;
