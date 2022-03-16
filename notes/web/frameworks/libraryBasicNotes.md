@@ -1122,6 +1122,7 @@ tags: [Web, Framework, Library]
 - [Source Buster](https://github.com/alexfedoseev/sourcebuster-js)
 - [Uptime Status](https://github.com/yb/uptime-status)
 - [Sentry: Application Monitoring Focus on Error Reporting](https://github.com/getsentry/sentry)
+- [OpenTelemetry: Traces and Metrics Framework](https://github.com/open-telemetry/opentelemetry-js)
 
 ### Performance Tools
 
