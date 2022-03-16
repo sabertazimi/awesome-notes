@@ -2595,6 +2595,11 @@ Send and Sync:
 
 ## Asynchronous Programming
 
+### Async and Await
+
+- 在 `.await` 执行期间, 任务可能会在线程间转移.
+- `.await` 只能用于 async fn 函数中.
+
 ```rust
 use futures::executor::block_on;
 use futures::join;
@@ -2707,6 +2712,42 @@ impl TimerFuture {
 
         TimerFuture { shared_state }
     }
+}
+```
+
+```rust
+use std::future::Future;
+use std::pin::Pin;
+use std::task::{Context, Poll};
+use std::time::{Duration, Instant};
+
+struct Delay {
+    when: Instant,
+}
+
+impl Future for Delay {
+    type Output = &'static str;
+
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>)
+        -> Poll<&'static str>
+    {
+        if Instant::now() >= self.when {
+            println!("Hello world");
+            Poll::Ready("done")
+        } else {
+            cx.waker().wake_by_ref();
+            Poll::Pending
+        }
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let when = Instant::now() + Duration::from_millis(10);
+    let future = Delay { when };
+
+    let out = future.await;
+    assert_eq!(out, "done");
 }
 ```
 
