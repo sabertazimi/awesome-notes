@@ -3145,8 +3145,12 @@ mod tests {
 
 ## Standard Library
 
-- `as_`.
-- `into_`: 移除所有权.
+- `as_`: `borrowed` -> `borrowed`.
+- `into_`: `owned` -> `owned`.
+- `to_`:
+  `borrowed` -> `borrowed`,
+  `borrowed` -> `owned` on non-copy types,
+  `owned` -> `owned` on copy types.
 - `try_`: 尝试一次, 失败则返回或报错.
 - `_mut`: 可变借用.
 
