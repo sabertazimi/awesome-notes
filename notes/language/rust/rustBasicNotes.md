@@ -3146,7 +3146,7 @@ mod tests {
 ## Standard Library
 
 - `as_`.
-- `into_`.
+- `into_`: 移除所有权.
 - `try_`: 尝试一次, 失败则返回或报错.
 - `_mut`: 可变借用.
 
