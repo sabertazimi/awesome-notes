@@ -81,6 +81,8 @@ tag-message = "{{tag_name}}"
 
 #### Cargo Configuration
 
+`Cargo.toml`:
+
 - `cargo-features`: 只能用于 `nightly`版本的 `feature`.
 - `[package]`: 定义项目( `package` )的元信息.
   - `name`: 名称.
