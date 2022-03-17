@@ -3258,6 +3258,16 @@ mod tests {
 }
 ```
 
+## Unsafe Code
+
+`unsafe {}`:
+
+- 对原始指针进行解引用.
+- 调用`不安全`的函数 (包括 C 函数, 编译器内建指令, 原始分配器).
+- 实现`不安全`的特性.
+- 访问`union`字段.
+- 改变静态数据.
+
 ## Standard Library
 
 - `as_`: `borrowed` -> `borrowed`.
