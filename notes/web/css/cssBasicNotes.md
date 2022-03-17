@@ -3761,6 +3761,42 @@ input[type='checkbox']:disabled + label::before {
 }
 ```
 
+#### Custom Switch Widget
+
+Pseudo element switch from circle to circle:
+
+- thumb-size: 2rem.
+- track-width: `2 * thumb-size`.
+- track-height: thumb-size.
+- pseudo-element border-radius: 50%.
+- track border-radius: track-size.
+- checked transform:
+  track `background-color`,
+  pseudo element `translateX`.
+
+```css
+.gui-switch > input {
+  appearance: none;
+
+  inline-size: var(--track-size);
+  block-size: var(--thumb-size);
+  padding: var(--track-padding);
+  border-radius: var(--track-size);
+
+  flex-shrink: 0;
+  display: grid;
+  align-items: center;
+  grid: [track] 1fr / [track] 1fr;
+}
+
+.gui-switch > input::before {
+  content: '';
+  grid-area: track;
+  inline-size: var(--thumb-size);
+  block-size: var(--thumb-size);
+}
+```
+
 ### Navigation
 
 #### Navigation Basis
