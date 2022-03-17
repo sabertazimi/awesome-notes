@@ -928,7 +928,7 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
 ### NeoVim Language server
 
-[LSPConfig](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md):
+[LSPConfig](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md):
 
 ```bash
 # html cssls jsonls
@@ -938,10 +938,10 @@ npm i -g vscode-langservers-extracted
 npm i -g typescript typescript-language-server
 
 # volar: Vue SFC
-npm i -g @volar/server
+npm install -g @volar/vue-language-server
 ```
 
-[LSPInstall](https://github.com/kabouzeid/nvim-lspinstall):
+[LSPInstall](https://github.com/williamboman/nvim-lsp-installer):
 
 ```bash
 :LspInstall typescript
@@ -974,7 +974,6 @@ npm i -g @volar/server
 
 ### NvChad Configuration
 
-- `~/.config/nvim/lua/chadrc.lua`: Main config file.
 - `~/.config/nvim/lua/colors/init.lua`: Loads syntax theme and highlights.
 - `~/.config/nvim/lua/colors/highlights.lua`: All highlights definition.
 - `~/.config/nvim/lua/core/mappings.lua`: All key mappings.
@@ -983,7 +982,119 @@ npm i -g @volar/server
 - `~/.config/nvim/lua/plugins/packerInit.lua`: `Packer` configuration.
 - `~/.config/nvim/lua/plugins/config/*.lua`: Configs of various plugins.
 
-### NvChad Plugins
+```lua
+-- ~/.config/nvim/lua/custom/chadrc.lua
 
-1. Add `use "plugin_author/plugin_name"` to `lua/plugins/init.lua`
-2. Use `:PackerSync` to install that plugin.
+local M = {}
+
+-- make sure you maintain the structure of `core/default_config.lua` here,
+-- example of changing theme:
+
+M.ui = {
+   theme = "onedark", -- default theme
+}
+
+M.plugins = {
+   default_plugin_config_replace = {
+      nvim_treesitter = {
+        ensure_installed = {
+          "html",
+          "css",
+          "scss",
+          "javascript",
+          "typescript",
+          "vue",
+          "lua",
+          "rust",
+          "vim",
+          "latex",
+          "markdown",
+          "jsonc",
+       },
+     }
+   },
+   options = {
+      lspconfig = {
+         setup_lspconf = "custom.lspconfig",
+      },
+   },
+   install = {
+     { "williamboman/nvim-lsp-installer" },
+   }
+}
+
+return M
+```
+
+```lua
+-- ~/.config/nvim/lua/custom/lspconfig.lua
+local M = {}
+
+M.setup_lsp = function(attach, capabilities)
+   local lspconfig = require "lspconfig"
+
+   -- lspservers with default config
+   local servers = { "html", "cssls", "tsserver", "volar", "rust_analyzer" }
+
+   for _, lsp in ipairs(servers) do
+      lspconfig[lsp].setup {
+         on_attach = attach,
+         capabilities = capabilities,
+         flags = {
+            debounce_text_changes = 150,
+         },
+      }
+   end
+end
+
+return M
+```
+
+```lua
+local M = {}
+
+M.setup_lsp = function(attach, capabilities)
+   local lsp_installer = require "nvim-lsp-installer"
+
+   lsp_installer.settings {
+      ui = {
+         icons = {
+            server_installed = "﫟" ,
+            server_pending = "",
+            server_uninstalled = "✗",
+         },
+      },
+   }
+
+   lsp_installer.on_server_ready(function(server)
+      local opts = {
+         on_attach = attach,
+         capabilities = capabilities,
+         flags = {
+            debounce_text_changes = 150,
+         },
+         settings = {},
+      }
+
+      -- Basic example to edit lsp server's options.
+      -- Disabling tsserver's inbuilt formatter.
+      if server.name == 'tsserver' then
+        opts.on_attach = function(client, bufnr)
+           client.resolved_capabilities.document_formatting = false
+           vim.api.nvim_buf_set_keymap(
+              bufnr,
+              "n",
+              "<space>fm",
+              "<cmd>lua vim.lsp.buf.formatting()<CR>",
+              {}
+           )
+         end
+      end
+
+      server:setup(opts)
+      vim.cmd [[ do User LspAttachBuffers ]]
+   end)
+end
+
+return M
+```
