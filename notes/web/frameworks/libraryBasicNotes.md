@@ -551,6 +551,10 @@ tags: [Web, Framework, Library]
 
 - [CLI Animation](https://github.com/neatsoftware/term-sheets)
 
+### Transform Animation
+
+- [AnimateGrid](https://github.com/aholachek/animate-css-grid)
+
 ### Typing Effect Animation
 
 - [Typed.js](https://github.com/mattboldt/typed.js)
