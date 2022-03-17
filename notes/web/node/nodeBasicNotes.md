@@ -385,7 +385,7 @@ npx create-react-app app
 - Dependency Consistent Lockfile (NPM v5 and Yarn).
 - Dependency Hard/Symbol Links (PNPM):
   - Hard links for global `.pnpm` store to save disk storage.
-  - Symbol links for local require shortpath to
+  - Symbol links for local require short path to
     rectify **doppelgangers** and **ghost/phantom dependencies** problem.
 - `peerDependencies`:
   提示宿主环境去安装满足插件 `peerDependencies` 所指定依赖的包,

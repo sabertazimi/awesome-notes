@@ -2089,7 +2089,7 @@ void get_token(void) {
     return;
 }
 
-void read_to_first_identifer(void) {
+void read_to_first_identifier(void) {
     get_token();
 
   // read til identifier
@@ -2162,7 +2162,7 @@ void deal_with_declarator(void) {
 
 int main(void) {
     /* 将标记压入堆栈中, 直到遇见标识符 */
-    read_to_first_identifer();
+    read_to_first_identifier();
     deal_with_declarator();
     printf("\n");
 
