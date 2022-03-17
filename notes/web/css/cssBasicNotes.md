@@ -4773,6 +4773,25 @@ const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
 }
 ```
 
+```css
+:root {
+  --primary: hsl(260, 95%, 70%);
+  --secondary: hsl(320, 95%, 60%);
+}
+
+.button {
+  background-color: var(--button-background, transparent);
+}
+
+.button-primary {
+  --button-background: var(--primary);
+}
+
+.button-secondary {
+  --button-background: var(--secondary);
+}
+```
+
 ### Invalid and Empty Value in CSS Variables
 
 - `--invalid-value: initial;` is invalid value
