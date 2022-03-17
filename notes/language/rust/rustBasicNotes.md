@@ -277,6 +277,9 @@ Copyable type (implement `Copy` trait):
 - Copyable Tuple type, e.g `(i32, i32)`.
 - Reference type (**borrowing** ownership).
 
+Most these types store on stack
+(including reference type with vtable).
+
 ```rust
 fn main() {
     // Primitive type.
