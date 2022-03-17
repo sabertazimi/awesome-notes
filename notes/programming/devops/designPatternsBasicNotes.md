@@ -2165,7 +2165,9 @@ if (typeof module !== 'undefined' && 'exports' in module) {
 
 一个 State 对象封装一个与状态相关的行为,
 运用有限状态机 (Finite State Machines)
-根据 Object State 改变 Object Behavior.
+根据 Object State 改变 Object Behavior:
+`object` set `state` as its **member**,
+`state` set `object` as its **method parameter**.
 
 ```js
 class Switch {
