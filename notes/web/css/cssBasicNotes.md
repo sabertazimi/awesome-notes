@@ -2623,6 +2623,18 @@ input {
 }
 ```
 
+## SVG Styles
+
+```css
+svg {
+  fill: red;
+  stroke: blue;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+```
+
 ## Object Position and Fit
 
 object-position/object-fit 只针对替换元素有作用:
