@@ -2140,8 +2140,12 @@ fn retain_even(nums: &mut Vec<i32>) {
 ```
 
 `RefCell` for borrowing reference:
-实现编译期**可变借用**与**不可变借用**共存,
-但会引起运行时 `panic`:
+
+- 实现内部可变性: 不可变值的可变借用.
+  `imut_self.refcell_member.borrow_mut().changeMember()`.
+- `Rc<RefCell<T>>`: 实现多个可变数据所有者.
+- 实现编译期**可变借用**与**不可变借用**共存,
+  但会引起运行时 `panic`.
 
 ```rust
 use std::cell::RefCell;
