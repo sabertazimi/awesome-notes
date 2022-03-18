@@ -736,6 +736,7 @@ tags: [Web, Framework, Library]
 - [TypeScript Audio](https://github.com/EvandroLG/ts-audio)
 - [Meyda: Audio Feature Extraction](https://github.com/meyda/meyda)
 - [WaveSurfer: Navigable Waveform Built on Web Audio and Canvas](https://github.com/katspaugh/wavesurfer.js)
+- [Wave.js: Audio Visualizer](https://github.com/foobar404/Wave.js)
 
 ### Video
 
