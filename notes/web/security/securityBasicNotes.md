@@ -350,8 +350,10 @@ Case:
 
 Solution:
 
+- 代码质量.
 - 测试完备性.
 - 文档完备性.
+- 工程完备性 (DevOps).
 - 开发人员构成.
 - 兼容性:
 - 流行度.
@@ -359,6 +361,11 @@ Solution:
 - 重复实现复杂度.
 - 使用时长.
 - 后续依赖版本更新策略.
+
+Example:
+
+- [OpenBase](https://openbase.com)
+- [NPM Package Advisor](https://snyk.io/advisor)
 
 ## JWT
 
