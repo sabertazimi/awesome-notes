@@ -210,6 +210,7 @@ tags: [Web, Framework, Library]
 
 - [InversifyJS: Powerful and Lightweight Inversion of Control Container](https://github.com/inversify/InversifyJS)
 - [Awilix: Powerful Inversion of Control Container](https://github.com/jeffijoe/awilix)
+- [TypeDI: Powerful Dependency Injection Tool](https://github.com/typestack/typedi)
 
 ### Browser Utils
 
