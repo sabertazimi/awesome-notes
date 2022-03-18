@@ -6805,6 +6805,12 @@ navigator.geolocation.watchPosition(
 
 ## Web Fetch API
 
+- GET: read resources
+- POST: create resources
+- PUT: fully update resources
+- PATCH: partially update resources
+- DELETE: delete resources
+
 Get and Post:
 
 ```js
@@ -7126,6 +7132,17 @@ HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`:
   - 502 Bad Gateway.
   - 503 Service Unavailable.
   - 504 Gateway Timeout.
+
+Use reasonable HTTP status codes:
+
+- 200: general success.
+- 201: successful creation.
+- 400: bad requests from client.
+- 401: unauthorized requests.
+- 403: missing permissions.
+- 404: missing resources.
+- 429: too many requests.
+- 5xx: internal errors (these should be avoided at all costs).
 
 ### CORS
 
