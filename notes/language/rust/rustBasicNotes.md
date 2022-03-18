@@ -74,7 +74,7 @@ tag-message = "{{tag_name}}"
 - `git/`: installed rust git repositories.
   - `git/db/`: installed git repositories.
   - `git/checkouts/`: branches of git repositories.
-- `registry/`:  `crates.io` metadata and packages.
+- `registry/`: `crates.io` metadata and packages.
   - `registry/index/`: metadata git repository.
   - `registry/cache/`: dependencies cache (`.crate` gzip files).
   - `registry/src/`: package source files.
@@ -2370,6 +2370,60 @@ fn main() {
         Rc::strong_count(&leaf),
         Rc::weak_count(&leaf),
     );
+}
+```
+
+## Phantom Type
+
+虚类型/幽灵类型参数是一种在**运行时不出现**,
+仅进行**静态编译检查**的类型参数.
+
+```rust
+use std::marker::PhantomData;
+
+struct Iter<'a, T: 'a> {
+    ptr: *const T,
+    end: *const T,
+    _marker: PhantomData<&'a T>,
+}
+
+struct Vec<T> {
+    data: *const T,
+    len: usize,
+    cap: usize,
+    _marker: PhantomData<T>,
+}
+```
+
+```rust
+use std::marker::PhantomData;
+
+#[derive(PartialEq)]
+struct PhantomTuple<A, B>(A, PhantomData<B>);
+
+#[derive(PartialEq)]
+struct PhantomStruct<A, B> { first: A, phantom: PhantomData<B> }
+
+fn main() {
+    let _tuple1: PhantomTuple<char, f32> = PhantomTuple('Q', PhantomData);
+    let _tuple2: PhantomTuple<char, f64> = PhantomTuple('Q', PhantomData);
+
+    let _struct1: PhantomStruct<char, f32> = PhantomStruct {
+        first: 'Q',
+        phantom: PhantomData,
+    };
+    let _struct2: PhantomStruct<char, f64> = PhantomStruct {
+        first: 'Q',
+        phantom: PhantomData,
+    };
+
+    // 编译期错误！类型不匹配，所以这些值不能够比较：
+    println!("_tuple1 == _tuple2 yields: {}",
+              _tuple1 == _tuple2);
+
+    // 编译期错误！类型不匹配，所以这些值不能够比较：
+    println!("_struct1 == _struct2 yields: {}",
+              _struct1 == _struct2);
 }
 ```
 
