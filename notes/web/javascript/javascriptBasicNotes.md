@@ -163,31 +163,59 @@ typeof String(37); // string
 '37' === String(37); // true
 ```
 
-### 引用类型值 Object type
+### Variable Hoisting
 
-- Object e.g Date
-- Array
-- Function
+`var` 表达式和 `function` 声明都将会被提升到当前作用域 (全局作用域/函数作用域) 顶部,
+其余表达式顺序不变.
 
-**反模式**:
-
-- 隐式全局变量(未使用 var 声明便使用变量)
-
-实质:隐式全局变量不是真正的变量，而是全局对象(在浏览器环境中为 window 对象)的属性;可以**`delete`**删除隐式全局量
-
-```javascript
-//函数外隐式全局变量
-global = 1;
-//函数内隐式全局变量
-function () {
-  global = 1;
+```js
+// 我们知道这个行不通 (假设没有未定义的全局变量)
+function example() {
+  console.log(notDefined); // => throws a ReferenceError
 }
-//链式赋值
-function () {
-  //b为隐式全局变量
-  var a = b = 1;
+
+// 在引用变量后创建变量声明将会因变量提升而起作用。
+// 注意: 真正的值 `true` 不会被提升。
+function example() {
+  console.log(declaredButNotAssigned); // => undefined
+  var declaredButNotAssigned = true;
+}
+
+// 解释器将变量提升到函数的顶部
+// 这意味着我们可以将上边的例子重写为：
+function example() {
+  let declaredButNotAssigned;
+  console.log(declaredButNotAssigned); // => undefined
+  declaredButNotAssigned = true;
+}
+
+// 使用 const 和 let
+function example() {
+  console.log(declaredButNotAssigned); // => throws a ReferenceError
+  console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
+  const declaredButNotAssigned = true;
 }
 ```
+
+```js
+function example() {
+  console.log(named); // => undefined
+
+  named(); // => TypeError named is not a function
+
+  superPower(); // => ReferenceError superPower is not defined
+
+  var named = function superPower() {
+    console.log('Flying');
+  };
+}
+```
+
+### Reference Values
+
+- Object e.g Date.
+- Array.
+- Function.
 
 ### Date
 
@@ -263,64 +291,6 @@ const getDateItemList = (year, month) => {
 
   return dateItemList;
 };
-```
-
-### 全局变量
-
-定义在函数体外，在函数体内不使用 var 关键字引用
-
-### 局部变量
-
-函数体内使用 var 关键字定义
-
-- 不使用 var 声明变量将会导致隐式的全局变量
-- 声明局部变量时绝对不要遗漏 var 关键字
-
-### 变量提升 Hoisting
-
-var 表达式和 function 声明都将会被提升到当前作用域(全局作用域/函数作用域)的顶部, 其余表达式顺序不变
-
-```js
-// 我们知道这个行不通 (假设没有未定义的全局变量)
-function example() {
-  console.log(notDefined); // => throws a ReferenceError
-}
-
-// 在引用变量后创建变量声明将会因变量提升而起作用。
-// 注意: 真正的值 `true` 不会被提升。
-function example() {
-  console.log(declaredButNotAssigned); // => undefined
-  var declaredButNotAssigned = true;
-}
-
-// 解释器将变量提升到函数的顶部
-// 这意味着我们可以将上边的例子重写为：
-function example() {
-  let declaredButNotAssigned;
-  console.log(declaredButNotAssigned); // => undefined
-  declaredButNotAssigned = true;
-}
-
-// 使用 const 和 let
-function example() {
-  console.log(declaredButNotAssigned); // => throws a ReferenceError
-  console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
-  const declaredButNotAssigned = true;
-}
-```
-
-```js
-function example() {
-  console.log(named); // => undefined
-
-  named(); // => TypeError named is not a function
-
-  superPower(); // => ReferenceError superPower is not defined
-
-  var named = function superPower() {
-    console.log('Flying');
-  };
-}
 ```
 
 ### Array
@@ -788,6 +758,23 @@ var i = a ? 1 : b ? 2 : c ? 3 : 4;
 - 两个数字，进行算数运算
 - 两个字符串，直接拼接
 - 一个字符串一个数字，直接拼接为字符串
+
+### Dot Operator
+
+`.` 优先级高于 `=`:
+`el.data` 优先求值, 引用 `old`, 指向 `old.data`.
+`5` => `el`, `5` => `el.data` (`old.data`).
+
+```js
+let el = { data: 1 };
+const old = el;
+
+el.data = el = 5;
+console.log(el);       // 5
+console.log(el.data);  // undefined
+console.log(old);      // { data: 5 }
+console.log(old.data); // 5
+```
 
 ## 控制流程
 
