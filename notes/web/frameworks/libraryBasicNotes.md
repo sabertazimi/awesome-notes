@@ -1192,6 +1192,7 @@ tags: [Web, Framework, Library]
 - [Spoof](https://github.com/feross/spoof)
 - [Snyk: NPM Package Security](https://github.com/marketplace/snyk)
 - [Socket: NPM Package Security](https://github.com/apps/socket-security)
+- [NCU: NPM Dependencies Updater](https://github.com/raineorshine/npm-check-updates)
 
 ### UML Tools
 
