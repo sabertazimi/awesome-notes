@@ -175,10 +175,11 @@ tags: [Web, Framework, Library]
 - [Glob: Glob Functionality for Node](https://github.com/isaacs/node-glob)
 - [Minimatch: Glob Matcher](https://github.com/isaacs/minimatch)
 
-#### RegExp Utils
+#### Regular Expression Utils
 
 - [Validator: Common String Patterns](https://github.com/validatorjs/validator.js)
 - [Regex101](https://github.com/firasdib/Regex101)
+- [Regex Visualization](https://github.com/Bowen7/regex-vis)
 - [Crontab Parser](https://github.com/harrisiirak/cron-parser)
 - [Domain Parser](https://github.com/peerigon/parse-domain)
 - [Git URL Parser](https://github.com/IonicaBizau/git-url-parse)
