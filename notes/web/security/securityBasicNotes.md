@@ -337,6 +337,29 @@ GET /../../../passwd.key HTTP/1.1
 - 不动态构造正则表达式 new RegExp()
 - 禁止用户输入影响正则表达式构建/匹配
 
+### Supply Chain Attack
+
+Case:
+
+- left-pad.
+- eslint-scope.
+- antd.
+- faker.js.
+- colors.js.
+- node-ipc.
+
+Solution:
+
+- 测试完备性.
+- 文档完备性.
+- 开发人员构成.
+- 兼容性:
+- 流行度.
+- 历史遗留 Bug.
+- 重复实现复杂度.
+- 使用时长.
+- 后续依赖版本更新策略.
+
 ## JWT
 
 JSON Web Tokens is small, object-friendly
