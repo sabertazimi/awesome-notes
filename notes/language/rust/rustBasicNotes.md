@@ -1541,7 +1541,13 @@ fn main() {
 }
 ```
 
-- Radix placeholder.
+- Radix placeholder: `boxXeE`.
+  - `fmt::Binary` trait.
+  - `fmt::Octal` trait.
+  - `fmt::LowerHex` trait.
+  - `fmt::UpperHex` trait.
+  - `fmt::LowerExp` trait.
+  - `fmt::UpperExp` trait.
 
 ```rust
 fn main() {
