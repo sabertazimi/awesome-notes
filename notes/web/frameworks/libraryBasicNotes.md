@@ -977,6 +977,10 @@ tags: [Web, Framework, Library]
 - [IMAP](https://github.com/mscdex/node-imap)
 - [SSH2: SSH2 Client and Server Modules](https://github.com/mscdex/ssh2)
 
+### HTTP Tools
+
+- [MKCert: Make Locally Trusted Development Certificates](https://github.com/FiloSottile/mkcert)
+
 ### Web Socket
 
 - [Socket.IO](https://github.com/socketio/socket.io)
