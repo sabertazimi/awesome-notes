@@ -209,6 +209,7 @@ tags: [Web, Framework, Library]
 ### IOC and DI Utils
 
 - [InversifyJS: Powerful and Lightweight Inversion of Control Container](https://github.com/inversify/InversifyJS)
+- [Awilix: Powerful Inversion of Control Container](https://github.com/jeffijoe/awilix)
 
 ### Browser Utils
 
