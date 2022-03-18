@@ -183,7 +183,7 @@ tags: [Web, Framework, Library]
 - [Crontab Parser](https://github.com/harrisiirak/cron-parser)
 - [Domain Parser](https://github.com/peerigon/parse-domain)
 - [Git URL Parser](https://github.com/IonicaBizau/git-url-parse)
-- [SemVer Parser](https://www.npmjs.com/package/semver)
+- [SemVer Parser](https://github.com/npm/node-semver)
 - [RE2: Fast, Safe Alternative to Backtracking Regular Expression Engines](https://github.com/uhop/node-re2)
 
 ### Concurrent and Parallel Programming Utils
@@ -538,7 +538,6 @@ tags: [Web, Framework, Library]
 
 - [React Spring](https://github.com/pmndrs/react-spring)
 - [GSAP: GreenSock Animation Platform](https://github.com/greensock/GSAP)
-- [Motion](https://www.npmjs.com/package/motion)
 - [Framer Motion](https://github.com/framer/motion)
 - [Popmotion](https://github.com/popmotion/popmotion)
 - [TweenJS: TypeScript Animation Engine](https://github.com/tweenjs/tween.js)
@@ -826,7 +825,7 @@ tags: [Web, Framework, Library]
 
 - [FileAPI](https://github.com/mailru/FileAPI)
 - [FS Extra](https://github.com/jprichardson/node-fs-extra)
-- [Graceful FS](https://www.npmjs.com/package/graceful-fs)
+- [Graceful FS](https://github.com/isaacs/node-graceful-fs)
 - [MemFS: In-memory Node File System](https://github.com/streamich/memfs)
 - [Globby](https://github.com/sindresorhus/globby)
 - [Chokidar: Efficient Cross-platform File Watching Library](https://github.com/paulmillr/chokidar)
@@ -907,7 +906,7 @@ tags: [Web, Framework, Library]
 - [Node Fetch](https://github.com/node-fetch/node-fetch)
 - [Undici: HTTP/1.1 Client Written from Scratch for Node](https://github.com/nodejs/undici)
 - [FS Extra](https://github.com/jprichardson/node-fs-extra)
-- [Graceful FS](https://www.npmjs.com/package/graceful-fs)
+- [Graceful FS](https://github.com/isaacs/node-graceful-fs)
 - [MemFS: In-memory Node File System](https://github.com/streamich/memfs)
 - [Globby](https://github.com/sindresorhus/globby)
 - [Chokidar: Efficient Cross-platform File Watching Library](https://github.com/paulmillr/chokidar)
@@ -945,7 +944,7 @@ tags: [Web, Framework, Library]
 ### JavaScript Parser
 
 - [Acorn](https://github.com/acornjs/acorn)
-- [Babel](https://www.npmjs.com/package/@babel/parser)
+- [Babel](https://github.com/babel/babel)
 - [Espree](https://github.com/eslint/espree)
 - [Esprima](https://github.com/jquery/esprima)
 - [AST Explorer](https://github.com/fkling/astexplorer)
