@@ -1125,12 +1125,37 @@ const hook = {
 
 ### UseMemo Hook
 
-- returns a memoized value
-- only recompute the memoized value when one of the dependencies has changed
-- **shallow compare** diff
-- **optimization** helps to
+- Returns a memoized value.
+- Only recompute the memoized value when one of the dependencies has changed.
+- **Shallow compare** diff.
+- **Optimization** helps to
   avoid expensive calculations on every render
-  (avoid re-render problem)
+  (avoid re-render problem).
+
+```ts
+function updateMemo<T>(
+  nextCreate: () => T,
+  deps: Array<mixed> | void | null
+): T {
+  const hook = updateWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  const prevState = hook.memoizedState;
+
+  if (prevState !== null) {
+    if (nextDeps !== null) {
+      const prevDeps: Array<mixed> | null = prevState[1];
+
+      if (areHookInputsEqual(nextDeps, prevDeps)) {
+        return prevState[0];
+      }
+    }
+  }
+
+  const nextValue = nextCreate();
+  hook.memoizedState = [nextValue, nextDeps];
+  return nextValue;
+}
+```
 
 ```jsx
 const Button = ({ color, children }) => {
@@ -1149,12 +1174,33 @@ const Button = ({ color, children }) => {
 
 ### UseCallback Hook
 
-- returns a memoized callback
+- Returns a memoized callback.
 - 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
   但是每次都是返回新的函数, 使用 `useCallback`, 可以让它使用上次的函数.
   在虚拟 DOM 更新过程中, 如果事件句柄相同, 那么就不用每次都进行
   `removeEventListener` 与 `addEventListener`.
-- `useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`
+- `useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`.
+
+```ts
+function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
+  const hook = updateWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  const prevState = hook.memoizedState;
+
+  if (prevState !== null) {
+    if (nextDeps !== null) {
+      const prevDeps: Array<mixed> | null = prevState[1];
+
+      if (areHookInputsEqual(nextDeps, prevDeps)) {
+        return prevState[0];
+      }
+    }
+  }
+
+  hook.memoizedState = [callback, nextDeps];
+  return callback;
+}
+```
 
 ```jsx
 function Parent() {
