@@ -1211,6 +1211,9 @@ trait Container{
 fn difference<C: Container>(container: &C) {}
 ```
 
+For all **generic trait**,
+use associated types better than `<T>`.
+
 ## Collection
 
 ### Vector
