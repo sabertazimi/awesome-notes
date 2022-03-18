@@ -3982,7 +3982,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     standard-version: ^9.3.2
-    stylelint: ^14.5.3
+    stylelint: ^14.6.0
     typescript: ^4.6.2
   languageName: unknown
   linkType: soft
@@ -10949,14 +10949,14 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.2.4, postcss@npm:^8.3.11, postcss@npm:^8.3.5, postcss@npm:^8.4.0, postcss@npm:^8.4.5, postcss@npm:^8.4.6, postcss@npm:^8.4.7":
-  version: 8.4.7
-  resolution: "postcss@npm:8.4.7"
+"postcss@npm:^8.2.4, postcss@npm:^8.3.11, postcss@npm:^8.3.5, postcss@npm:^8.4.0, postcss@npm:^8.4.12, postcss@npm:^8.4.5, postcss@npm:^8.4.7":
+  version: 8.4.12
+  resolution: "postcss@npm:8.4.12"
   dependencies:
     nanoid: ^3.3.1
     picocolors: ^1.0.0
     source-map-js: ^1.0.2
-  checksum: a515ed36622edbee1d3ba153298d3b62ae9826dfa6de19204c2a6f975c8d3ad36808423b5119a9d82b78efd486de3ce35a1faf882a36ac8aa09492be4fbb7fe1
+  checksum: 248e3d0f9bbb8efaafcfda7f91627a29bdc9a19f456896886330beb28c5abea0e14c7901b35191928602e2eccbed496b1e94097d27a0b2a980854cd00c7a835f
   languageName: node
   linkType: hard
 
@@ -12953,9 +12953,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"stylelint@npm:^14.5.3":
-  version: 14.5.3
-  resolution: "stylelint@npm:14.5.3"
+"stylelint@npm:^14.6.0":
+  version: 14.6.0
+  resolution: "stylelint@npm:14.6.0"
   dependencies:
     balanced-match: ^2.0.0
     colord: ^2.9.2
@@ -12982,7 +12982,7 @@ resolve@^2.0.0-next.3:
     normalize-path: ^3.0.0
     normalize-selector: ^0.2.0
     picocolors: ^1.0.0
-    postcss: ^8.4.6
+    postcss: ^8.4.12
     postcss-media-query-parser: ^0.2.3
     postcss-resolve-nested-selector: ^0.1.1
     postcss-safe-parser: ^6.0.0
@@ -13000,7 +13000,7 @@ resolve@^2.0.0-next.3:
     write-file-atomic: ^4.0.1
   bin:
     stylelint: bin/stylelint.js
-  checksum: 5fadb61263e003fe791d6c8a31c48825e015a5fee909b0a484baad8d4a46622425409f18d2734a01e91405c825a5b3ccad943ed2298cd4f7df4a0a605c4d0292
+  checksum: cb28abd153b0edea03ad0133bc9be789a315f9138e7254f5da372677cef67954da081cffb696a59fee7958d3d3781566acb9e8ab99e453fe4398ef91f0495378
   languageName: node
   linkType: hard
 
