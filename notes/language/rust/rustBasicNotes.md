@@ -1958,11 +1958,15 @@ fn main() {
   - collect.
   - fold.
   - sum.
-- 迭代性适配器: 惰性方法.
+- 迭代性适配器: 惰性方法 (Lazy Iterator)
   - enumerate.
   - filter.
   - map.
+  - take_while.
   - zip.
+- Ordinary iterator methods:
+  - Iterator::any.
+  - Iterator::find.
 
 More adapter methods see `Iterator` trait
 [documentation](https://doc.rust-lang.org/std/iter/trait.Iterator.html).
