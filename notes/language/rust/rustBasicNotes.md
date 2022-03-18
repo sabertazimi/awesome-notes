@@ -1242,6 +1242,40 @@ fn difference<C: Container>(container: &C) {}
 For all **generic trait**,
 use associated types better than `<T>`.
 
+### Common Traits
+
+- `std::fmt::Display` (better than `std::string::ToString`).
+- `std::fmt::Debug`.
+- `std::ops::Add`/`Mul`/`Div`/`BitAnd`/`BitOr`/`Not`/`Neg`: operators overload.
+- `std::ops::Fn`/`FnMut`/`FnOnce`.
+- `std::ops::Deref`.
+- `std::ops::Drop`.
+- `std::clone::Clone`.
+- `std::iter::Iterator`.
+
+`std::prelude`:
+
+- `std::marker::{Copy, Send, Sized, Sync, Unpin}`.
+- `std::ops::{Drop, Fn, FnMut, FnOnce}`.
+- `std::mem::drop`.
+- `std::boxed::Box`.
+- `std::borrow::ToOwned`.
+- `std::clone::Clone`.
+- `std::cmp::{PartialEq, PartialOrd, Eq, Ord}`.
+- `std::convert::{AsRef, AsMut, Into, From}`.
+- `std::default::Default`.
+- `std::iter::{Iterator, Extend, IntoIterator, DoubleEndedIterator, ExactSizeIterator}`.
+- `std::option::Option::{self, Some, None}`.
+- `std::result::Result::{self, Ok, Err}`.
+- `std::string::{String, ToString}`.
+- `std::vec::Vec`.
+- `std::convert::{TryFrom, TryInto}`.
+- `std::iter::FromIterator`.
+
+```rust
+use std::io::prelude::*;
+```
+
 ## Collection
 
 ### Vector
