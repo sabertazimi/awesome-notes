@@ -4057,6 +4057,7 @@ console.log(result);
 - [Git: Git Bindings Library](https://github.com/rust-lang/git2-rs)
 - [PrettyAssertions](https://github.com/colin-kiegel/rust-pretty-assertions)
 - [Criterion: Benchmarking Library](https://github.com/bheisler/criterion.rs)
+- [Clog: Conventional Changelog](https://github.com/clog-tool/clog-cli)
 
 ## Reference
 
