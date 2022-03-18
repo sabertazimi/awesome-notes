@@ -2086,10 +2086,12 @@ fn main() {
 - 消费性适配器: 获取迭代器的所有权, 并消耗迭代器中所有元素.
   - collect.
   - fold.
+  - partition.
   - sum.
 - 迭代性适配器: 惰性方法 (Lazy Iterator)
   - enumerate.
   - filter.
+  - filter_map.
   - map.
   - take_while.
   - zip.
