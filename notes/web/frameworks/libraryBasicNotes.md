@@ -144,8 +144,9 @@ tags: [Web, Framework, Library]
 - [React Hooks Gallery](https://github.com/nikgraf/react-hooks)
 - [React Media Query Hook](https://github.com/yocontra/react-responsive)
 
-### Vue Composite and Reactive API
+### Vue Composition API
 
+- [Pinia: Next Generation Vue Store](https://github.com/vuejs/pinia)
 - [VueUse](https://github.com/vueuse/vueuse)
 
 ### Others State Management
