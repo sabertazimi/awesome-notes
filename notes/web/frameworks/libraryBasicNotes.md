@@ -216,6 +216,7 @@ tags: [Web, Framework, Library]
 
 - [Browser Platform Detection](https://github.com/lancedikson/bowser)
 - [Browser Feature Detection](https://github.com/Modernizr/Modernizr)
+- [UAParser: User-Agent Data Parser](https://github.com/faisalman/ua-parser-js)
 
 ## TypeScript Utils
 
