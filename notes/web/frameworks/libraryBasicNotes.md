@@ -914,6 +914,7 @@ tags: [Web, Framework, Library]
 - [Mkdirp](https://github.com/isaacs/node-mkdirp)
 - [RimRaf](https://github.com/isaacs/rimraf)
 - [ReNamer: Rename Files in Bulk](https://github.com/75lb/renamer)
+- [ImportLocal: Use Locally Installed Version](https://github.com/sindresorhus/import-local)
 - [Patch: Fix Broken Node Modules Instantly](https://github.com/ds300/patch-package)
 
 ### CLI Cheat Sheet
