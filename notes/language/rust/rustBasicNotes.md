@@ -1696,6 +1696,55 @@ fn main() {
 #[doc(alias = "alias" )]
 ```
 
+## Attributes
+
+- Crate scope:`#![crate_attribute]`.
+- Module/Function scope: `#[item_attribute]`.
+
+```rust
+#[attribute = "value"]
+#[attribute(key = "value")]
+#[attribute(value)]
+```
+
+### Crate Attributes
+
+```rust
+#![crate_type = "lib"]
+#![crate_name = "rand"]
+```
+
+### Linter Attributes
+
+```rust
+#[allow(dead_code)]
+#[allow(unused)]
+```
+
+### Compile Attributes
+
+```rust
+#[cfg(target_os = "linux")]
+fn are_you_on_linux() {
+    println!("You are running linux!")
+}
+
+#[cfg(not(target_os = "linux"))]
+fn are_you_on_linux() {
+    println!("You are *not* running linux!")
+}
+
+fn main() {
+    are_you_on_linux();
+
+    if cfg!(target_os = "linux") {
+        println!("Yes. It's definitely linux!");
+    } else {
+        println!("Yes. It's definitely *not* linux!");
+    }
+}
+```
+
 ## Lifetime
 
 显式地使用生命周期, 可以让编译器正确地认识到多个**引用**之间的关系.
