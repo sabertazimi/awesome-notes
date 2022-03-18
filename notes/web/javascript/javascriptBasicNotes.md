@@ -3416,17 +3416,31 @@ $.ajax({
 
 ## JSON
 
-```javascript
+```js
 var obj = JSON.parse(json);
 var json = JSON.stringify(obj);
 ```
 
-### jQuery
+`JSON.stringify`:
 
-```javascript
-$.getJSON('/json/cats.json', function (json) {
-  $('.message').html(JSON.stringify(json));
-});
+- `Symbol`/`function`/`NaN`/`Infinity`/`undefined`: `null`/ignored.
+- `BitInt`: throw `TypeError`.
+- Circular reference object: throw `TypeError`.
+- `toJSON` method:
+
+```js
+const obj = {
+  name: 'zc',
+  toJSON(){
+    return 'return toJSON'
+  }
+}
+
+// return toJSON
+console.log(JSON.stringify(obj));
+
+// "2022-03-06T08:24:56.138Z"
+JSON.stringify(new Date())
 ```
 
 ## Regular Expression
