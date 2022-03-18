@@ -1373,6 +1373,15 @@ for (key, value) in &scores {
 let from_list: HashMap<_,_> = some_list.into_iter().collect();
 ```
 
+### HashSet
+
+- insert.
+- contains.
+- union.
+- difference.
+- intersection.
+- symmetric_difference.
+
 ## Error Handling
 
 ### Result Type
