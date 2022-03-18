@@ -1472,6 +1472,7 @@ fn render() -> Result<String, Box<dyn Error>> {
 #### Custom Error Type
 
 ```rust
+use std::error;
 use std::fmt;
 
 #[derive(Debug)]
@@ -1480,6 +1481,20 @@ struct AppError;
 impl fmt::Display for AppError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "An Error Occurred, Please Try Again!")
+    }
+}
+
+impl error::Error for AppError {
+    fn description(&self) -> &str {
+        "Invalid App"
+    }
+
+    fn source(&self) -> Option<&(dyn error::Error + 'static)> {
+        None
+    }
+
+    fn cause(&self) -> Option<&dyn error::Error> {
+        None
     }
 }
 
