@@ -4051,6 +4051,7 @@ console.log(result);
 - [QuickWit: Distributed Search Engine](https://github.com/quickwit-oss/quickwit)
 - [MeiliSearch: Realtime Search Engine](https://github.com/meilisearch/MeiliSearch)
 - [Clap: CLI Framework](https://github.com/clap-rs/clap)
+- [Console: ProgressBar](https://github.com/console-rs/indicatif)
 - [Syn: Source Code Parser](https://github.com/dtolnay/syn)
 - [Napi: Node.js Bindings Library](https://github.com/napi-rs/napi-rs):
 - [Neon: Node.js Bindings Library](https://github.com/neon-bindings/neon):
