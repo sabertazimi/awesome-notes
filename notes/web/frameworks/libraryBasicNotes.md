@@ -763,7 +763,7 @@ tags: [Web, Framework, Library]
 ### Code Editor
 
 - [Monaco: Powers VS Code](https://github.com/Microsoft/monaco-editor)
-- [React Draft.js Editor](https://github.com/facebook/draft-js)
+- [Draft: React Text Editor Framework](https://github.com/facebook/draft-js)
 - [React ACE](https://github.com/securingsincity/react-ace)
 - [ACE Editor](https://github.com/ajaxorg/ace)
 - [Code Mirror](https://github.com/codemirror/CodeMirror)
