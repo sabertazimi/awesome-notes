@@ -1399,17 +1399,17 @@ fn main() {
 
 ### Result Type Compositor
 
-- or: logic or.
-- and: logic and.
-- or_else: logic or function.
-- and_then: logic and function.
-- filter: `Option` filter function.
-- map: `Ok`/`Some` map function.
-- map_or: `Ok`/`Some` map function with defaults value.
-- map_or_else: `Ok`/`Some` map function with defaults function.
-- map_err: `Err` map function.
-- ok_or: `Option` -> `Result` with error message.
-- ok_or_else: `Option` -> `Result` with error message function.
+- `or`: logic or.
+- `and`: logic and.
+- `or_else`: logic or function.
+- `and_then`: logic and function.
+- `filter`: `Option` filter function.
+- `map`: `Ok`/`Some` map function.
+- `map_or`: `Ok`/`Some` map function with defaults value.
+- `map_or_else`: `Ok`/`Some` map function with defaults function.
+- `map_err`: `Err` map function.
+- `ok_or`: `Option` -> `Result` with error message.
+- `ok_or_else`: `Option` -> `Result` with error message function.
 
 ### Error Handling Macro
 
