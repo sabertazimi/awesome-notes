@@ -1107,20 +1107,145 @@ class Menu extends React.Component {
   more details on
   [Overreacted](https://overreacted.io/how-are-function-components-different-from-classes/).
 
-```jsx
-// hook 实例
-const hook = {
-  // hook保存的数据
-  memoizedState: null,
-  // 指向下一个hook
-  next: hookForB
-  // 本次更新以 baseState 为基础计算新的state
-  baseState: null,
-  // 本次更新开始时已有的 update 队列
-  baseQueue: null,
-  // 本次更新需要增加的 update 队列
-  queue: null,
-};
+### Hooks Internal
+
+- useXXX -> mountXXX -> updateXXX.
+- mountXXX: mountWorkInProgressHook -> separated creation logic.
+- updateXXX: updateWorkInProgressHook -> separated update logic.
+- `hooks` 的值都存在组件的 `fiberNode` 的 `memorizedState` 属性上.
+
+```js
+function mountWorkInProgressHook() {
+  // hook 实例
+  const hook = {
+    // hook 保存的数据.
+    memoizedState: null,
+    // 指向下一个 hook.
+    next: hookForB
+    // 本次更新以 baseState 为基础计算新的 state.
+    baseState: null,
+    // 本次更新开始时已有的 update 队列.
+    baseQueue: null,
+    // 本次更新需要增加的 update 队列.
+    queue: null,
+  };
+
+  if (workInProgressHook === null) {
+    // Fist hook in the list.
+    currentlyRenderingFiber.memoizedState = workInProgressHook = hook;
+  } else {
+    // Append to the end of list.
+    workInProgressHook = workInProgressHook.next = hook;
+  }
+}
+```
+
+| Hooks       | Memoized State                                 |
+| ----------- | ---------------------------------------------- |
+| useRef      | `ref: { current }`                             |
+| useMemo     | `[nextValue, deps]`                            |
+| useCallback | `[callback, deps]`                             |
+| useState    | `state`                                        |
+| useEffect   | `effect: { tag, create, destroy, deps, next }` |
+
+```js
+const MyReact = (function () {
+  let hooks = [],
+    currentHook = 0; // array of hooks, and an iterator!
+  return {
+    render(Component) {
+      const Comp = Component(); // run effects
+      Comp.render();
+      currentHook = 0; // reset for next render
+      return Comp;
+    },
+    useEffect(callback, depArray) {
+      const hasNoDeps = !depArray;
+      const deps = hooks[currentHook]; // type: array | undefined
+      const hasChangedDeps = deps
+        ? !depArray.every((el, i) => el === deps[i])
+        : true;
+      if (hasNoDeps || hasChangedDeps) {
+        callback();
+        hooks[currentHook] = depArray;
+      }
+      currentHook++; // done with this hook
+    },
+    useState(initialValue) {
+      hooks[currentHook] = hooks[currentHook] || initialValue; // type: any
+      const setStateHookIndex = currentHook; // for setState's closure!
+      const setState = newState => (hooks[setStateHookIndex] = newState);
+      return [hooks[currentHook++], setState];
+    },
+  };
+})();
+```
+
+```js
+function Counter() {
+  const [count, setCount] = MyReact.useState(0);
+  const [text, setText] = MyReact.useState('foo'); // 2nd state hook!
+  MyReact.useEffect(() => {
+    console.log('effect', count, text);
+  }, [count, text]);
+  return {
+    click: () => setCount(count + 1),
+    type: txt => setText(txt),
+    noop: () => setCount(count),
+    render: () => console.log('render', { count, text }),
+  };
+}
+
+let App;
+
+App = MyReact.render(Counter);
+// effect 0 foo
+// render {count: 0, text: 'foo'}
+
+App.click();
+App = MyReact.render(Counter);
+// effect 1 foo
+// render {count: 1, text: 'foo'}
+
+App.type('bar');
+App = MyReact.render(Counter);
+// effect 1 bar
+// render {count: 1, text: 'bar'}
+
+App.noop();
+App = MyReact.render(Counter);
+// // no effect run
+// render {count: 1, text: 'bar'}
+
+App.click();
+App = MyReact.render(Counter);
+// effect 2 bar
+// render {count: 2, text: 'bar'}
+```
+
+```js
+function Component() {
+  const [text, setText] = useSplitURL('www.netlify.com');
+  return {
+    type: txt => setText(txt),
+    render: () => console.log({ text }),
+  };
+}
+
+function useSplitURL(str) {
+  const [text, setText] = MyReact.useState(str);
+  const masked = text.split('.');
+  return [masked, setText];
+}
+
+let App;
+
+App = MyReact.render(Component);
+// { text: [ 'www', 'netlify', 'com' ] }
+
+App.type('www.reactjs.org');
+App = MyReact.render(Component);
+// { text: [ 'www', 'reactjs', 'org' ] }}
 ```
 
 ### UseMemo Hook
@@ -1133,6 +1258,17 @@ const hook = {
   (avoid re-render problem).
 
 ```ts
+function mountMemo<T>(
+  nextCreate: () => T,
+  deps: Array<mixed> | void | null
+): T {
+  const hook = mountWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  const nextValue = nextCreate();
+  hook.memoizedState = [nextValue, nextDeps];
+  return nextValue.
+}
+
 function updateMemo<T>(
   nextCreate: () => T,
   deps: Array<mixed> | void | null
@@ -1182,6 +1318,13 @@ const Button = ({ color, children }) => {
 - `useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`.
 
 ```ts
+function mountCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
+  const hook = mountWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  hook.memoizedState = [callback, nextDeps];
+  return callback.
+}
+
 function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
   const hook = updateWorkInProgressHook();
   const nextDeps = deps === undefined ? null : deps;
@@ -1237,14 +1380,42 @@ function Child({ fetchData }) {
 - 当在 useEffect 中调用 setState 时, 最好使用 `setState(callback)` 形式,
   这样可以不用再 Deps List 中显式声明 state, 也可以避免一些 BUG
 
-```jsx
+```ts
+function mountState<T>(initialState: T) {
+  const hook = mountWorkInProgressHook();
+
+  if (typeof initialState === 'function') {
+    initialState = initialState();
+  }
+
+  hook.memoizedState = hook.baseState = initialState;
+  const queue = (hook.queue = {
+    pending: null,
+    dispatch: null,
+    lastRenderedReducer: basicStateReducer,
+    lastRenderedState: initialState,
+  });
+  const dispatch = (queue.dispatch = dispatchAction.bind(
+    null,
+    currentlyRenderingFiber,
+    queue
+  ));
+  return [hook.memoizedState, dispatch];
+}
+
+function updateState<T>(initialState: T) {
+  return updateReducer(basicStateReducer);
+}
+```
+
+```js
 setState(prevState => {
   // Object.assign would also work
   return { ...prevState, ...updatedValues };
 });
 ```
 
-```jsx
+```js
 let newState = baseState;
 let firstUpdate = hook.baseQueue.next;
 let update = firstUpdate;
@@ -1389,6 +1560,23 @@ const [state, dispatch] = useReducer(reducer, initialState);
 ```
 
 ### UseRef Hook
+
+```ts
+function mountRef<T>(initialValue: T) {
+  const hook = mountWorkInProgressHook();
+  const ref = {
+    current: initialValue,
+  };
+  Object.seal(ref);
+  hook.memoizedState = ref;
+  return ref;
+}
+
+function updateRef<T>(initialValue: T) {
+  const hook = updateWorkInProgressHook();
+  return hook.memoizedState;
+}
+```
 
 #### Refs Basis
 
@@ -1538,6 +1726,77 @@ export { CountProvider, useCount };
 ### UseEffect Hook
 
 [Complete Guide](https://overreacted.io/a-complete-guide-to-useeffect)
+
+Circular effect list:
+
+```js
+function mountEffect(fiberFlags, hookFlags, create, deps) {
+  const hook = mountWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  currentlyRenderingFiber.flags |= fiberFlags;
+  hook.memoizedState = pushEffect(
+    HasEffect | hookFlags,
+    create,
+    undefined,
+    nextDeps
+  );
+}
+
+function updateEffect(fiberFlags, hookFlags, create, deps) {
+  const hook = updateWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  let destroy = undefined;
+
+  if (currentHook !== null) {
+    const prevEffect = currentHook.memoizedState;
+    destroy = prevEffect.destroy;
+
+    if (nextDeps !== null) {
+      const prevDeps = prevEffect.deps;
+
+      if (areHookInputsEqual(nextDeps, prevDeps)) {
+        pushEffect(hookFlags, create, destroy, nextDeps);
+        return;
+      }
+    }
+  }
+
+  currentlyRenderingFiber.flags |= fiberFlags;
+  hook.memoizedState = pushEffect(HasEffect | hookFlags, create, destroy, nextDeps);
+}
+
+function pushEffect(tag, create, destroy, deps) {
+  const effect = {
+    tag,
+    create,
+    destroy,
+    deps,
+    next: null,
+  };
+
+  let componentUpdateQueue = currentlyRenderingFiber.updateQueue;
+
+  if (componentUpdateQueue === null) {
+    componentUpdateQueue = createFunctionComponentUpdateQueue();
+    currentlyRenderingFiber.updateQueue = componentUpdateQueue;
+    componentUpdateQueue.lastEffect = effect.next = effect;
+  } else {
+    const lastEffect = componentUpdateQueue.lastEffect;
+
+    if (lastEffect === null) {
+      componentUpdateQueue.lastEffect = effect.next = effect;
+    } else {
+      // Circular effect list.
+      const firstEffect = lastEffect.next;
+      lastEffect.next = effect;
+      effect.next = firstEffect;
+      componentUpdateQueue.lastEffect = effect;
+    }
+  }
+
+  return effect;
+}
+```
 
 #### UseEffect Lifecycle
 
@@ -1882,115 +2141,6 @@ const selectedField = useSyncExternalStore(
   store.subscribe,
   () => store.getSnapshot().selectedField
 );
-```
-
-### Hooks Usage Rules
-
-- only call Hooks at the top level (don't inside loops, conditions or nested functions)
-- only call Hooks from React function components
-
-### Hooks Internal
-
-`hooks` 的值都存在组件的 `fiberNode` 的 `memorizedState` 属性上.
-
-```jsx
-const MyReact = (function () {
-  let hooks = [],
-    currentHook = 0; // array of hooks, and an iterator!
-  return {
-    render(Component) {
-      const Comp = Component(); // run effects
-      Comp.render();
-      currentHook = 0; // reset for next render
-      return Comp;
-    },
-    useEffect(callback, depArray) {
-      const hasNoDeps = !depArray;
-      const deps = hooks[currentHook]; // type: array | undefined
-      const hasChangedDeps = deps
-        ? !depArray.every((el, i) => el === deps[i])
-        : true;
-      if (hasNoDeps || hasChangedDeps) {
-        callback();
-        hooks[currentHook] = depArray;
-      }
-      currentHook++; // done with this hook
-    },
-    useState(initialValue) {
-      hooks[currentHook] = hooks[currentHook] || initialValue; // type: any
-      const setStateHookIndex = currentHook; // for setState's closure!
-      const setState = newState => (hooks[setStateHookIndex] = newState);
-      return [hooks[currentHook++], setState];
-    },
-  };
-})();
-```
-
-```jsx
-function Counter() {
-  const [count, setCount] = MyReact.useState(0);
-  const [text, setText] = MyReact.useState('foo'); // 2nd state hook!
-  MyReact.useEffect(() => {
-    console.log('effect', count, text);
-  }, [count, text]);
-  return {
-    click: () => setCount(count + 1),
-    type: txt => setText(txt),
-    noop: () => setCount(count),
-    render: () => console.log('render', { count, text }),
-  };
-}
-
-let App;
-
-App = MyReact.render(Counter);
-// effect 0 foo
-// render {count: 0, text: 'foo'}
-
-App.click();
-App = MyReact.render(Counter);
-// effect 1 foo
-// render {count: 1, text: 'foo'}
-
-App.type('bar');
-App = MyReact.render(Counter);
-// effect 1 bar
-// render {count: 1, text: 'bar'}
-
-App.noop();
-App = MyReact.render(Counter);
-// // no effect run
-// render {count: 1, text: 'bar'}
-
-App.click();
-App = MyReact.render(Counter);
-// effect 2 bar
-// render {count: 2, text: 'bar'}
-```
-
-```jsx
-function Component() {
-  const [text, setText] = useSplitURL('www.netlify.com');
-  return {
-    type: txt => setText(txt),
-    render: () => console.log({ text }),
-  };
-}
-
-function useSplitURL(str) {
-  const [text, setText] = MyReact.useState(str);
-  const masked = text.split('.');
-  return [masked, setText];
-}
-
-let App;
-
-App = MyReact.render(Component);
-// { text: [ 'www', 'netlify', 'com' ] }
-
-App.type('www.reactjs.org');
-App = MyReact.render(Component);
-// { text: [ 'www', 'reactjs', 'org' ] }}
 ```
 
 ### Custom Hooks
@@ -3521,6 +3671,8 @@ function SearchResults() {
 - setState(state => state + 1) is better (avoid outdated state).
 - Change `useState` to `useRef` when values not for rendering.
 - Don't put any `if` statement before hooks function.
+- Only call Hooks at the top level (don't inside loops, conditions or nested functions).
+- Only call Hooks from React function components.
 
 ## React Style Guide
 
