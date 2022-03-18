@@ -50,7 +50,10 @@ SELECT *
 
 #### SQL Injection Protection
 
-parameterized statements
+- Don’t allow multiple statements.
+- Validate user input.
+- Allowlist user input.
+- Parameterized statements: use placeholders instead of variable interpolation.
 
 ```js
 // Construct the SQL statement we want to run, specifying the parameter.
