@@ -1762,7 +1762,12 @@ function updateEffect(fiberFlags, hookFlags, create, deps) {
   }
 
   currentlyRenderingFiber.flags |= fiberFlags;
-  hook.memoizedState = pushEffect(HasEffect | hookFlags, create, destroy, nextDeps);
+  hook.memoizedState = pushEffect(
+    HasEffect | hookFlags,
+    create,
+    destroy,
+    nextDeps
+  );
 }
 
 function pushEffect(tag, create, destroy, deps) {
@@ -6224,7 +6229,7 @@ export default DatePicker;
 #### Styles Isolation
 
 - Shadow DOM container.
-- CSS scoped / CSS selector  renaming.
+- CSS scoped / CSS selector renaming.
 
 #### Scripts Isolation
 

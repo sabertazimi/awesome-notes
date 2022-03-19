@@ -770,9 +770,9 @@ let el = { data: 1 };
 const old = el;
 
 el.data = el = 5;
-console.log(el);       // 5
-console.log(el.data);  // undefined
-console.log(old);      // { data: 5 }
+console.log(el); // 5
+console.log(el.data); // undefined
+console.log(old); // { data: 5 }
 console.log(old.data); // 5
 ```
 
@@ -3418,16 +3418,16 @@ var json = JSON.stringify(obj);
 ```js
 const obj = {
   name: 'zc',
-  toJSON(){
-    return 'return toJSON'
-  }
-}
+  toJSON() {
+    return 'return toJSON';
+  },
+};
 
 // return toJSON
 console.log(JSON.stringify(obj));
 
 // "2022-03-06T08:24:56.138Z"
-JSON.stringify(new Date())
+JSON.stringify(new Date());
 ```
 
 ## Regular Expression
