@@ -1066,6 +1066,11 @@ fn add<T: std::ops::Add<T, Output = T>>(a:T, b:T) -> T {
 fn largest<T: PartialOrd>(list: &[T]) -> T {}
 ```
 
+- TurboFish:
+  - `generics_struct::<T>::method()`.
+  - `struct.generics_method::<T>()`.
+- Use associated types in traits.
+
 ## Traits
 
 ```rust
