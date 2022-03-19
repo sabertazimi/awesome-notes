@@ -2027,10 +2027,10 @@ fn main() {
 ### Adapter Methods
 
 - 消费性适配器: 获取迭代器的所有权, 并消耗迭代器中所有元素.
-  - collect.
+  - `collect::<T>()`.
   - fold.
   - partition.
-  - sum.
+  - `sum::<T>()`.
 - 迭代性适配器: 惰性方法 (Lazy Iterator)
   - enumerate.
   - filter.
