@@ -773,6 +773,7 @@ tags: [Web, Framework, Library]
 - [Code Mirror](https://github.com/codemirror/CodeMirror)
 - [Block Editor](https://github.com/codex-team/editor.js)
 - [React Editor](https://github.com/concrete-utopia/utopia)
+- [Xi: Code Editor Philosophy](https://github.com/xi-editor/xi-editor)
 
 ### Live Editor and Playground
 
