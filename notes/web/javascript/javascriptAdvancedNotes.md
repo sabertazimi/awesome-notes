@@ -1365,7 +1365,7 @@ g.return(); // { value: undefined, done: true }
 g.return(1); // { value: 1, done: true }
 ```
 
-iterable object
+Iterable object:
 
 ```js
 const users = {
@@ -1385,7 +1385,7 @@ const users = {
 };
 ```
 
-early return
+Early return:
 
 ```js
 function* gen() {
@@ -1403,7 +1403,7 @@ g.next(); // { value: undefined, done: true }
 
 #### Complex Usage
 
-The generator function itself is not iterable, call it to get the iterable-iterator
+The generator function itself is not iterable, call it to get the iterable-iterator:
 
 ```js
 for (const v of someOddNumbers) {
@@ -1415,7 +1415,7 @@ for (const v of number()) {
 }
 ```
 
-messaging system
+Messaging system:
 
 ```js
 function* lazyCalculator(operator) {
@@ -1445,7 +1445,7 @@ g.next(2); // { value: 20, done: false }
 g.next(); // { value: undefined, done: true }
 ```
 
-error handling
+Error handling:
 
 ```js
 function* generator() {
@@ -1541,7 +1541,6 @@ async function* remotePostsAsyncGenerator() {
 ```
 
 ```js
-// do you remember it?
 function* chunkify(array, n) {
   yield array.slice(0, n);
   array.length > n && (yield* chunkify(array.slice(n), n));
@@ -1556,13 +1555,69 @@ async function* getRemoteData() {
       r => r.json()
     );
 
-    // return 5 elements with each iteration
+    // Return 5 elements with each iteration.
     yield* chunkify(results, 5);
 
     hasMore = next_page != null;
     page = next_page;
   }
 }
+```
+
+当为 `next` 传递值进行调用时,
+传入的值会被当作上一次生成器函数暂停时 `yield` 关键字的返回值处理.
+第一次调用 `g.next()` 传入参数是毫无意义,
+因为首次调用 `next` 函数时,
+生成器函数并没有在 `yield` 关键字处暂停.
+
+```js
+function promise1() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('1');
+    }, 1000);
+  });
+}
+
+function promise2(value) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('value:' + value);
+    }, 1000);
+  });
+}
+
+function* readFile() {
+  const value = yield promise1();
+  const result = yield promise2(value);
+  return result;
+}
+
+function co(gen) {
+  return new Promise((resolve, reject) => {
+    const g = gen();
+
+    function next(param) {
+      const { done, value } = g.next(param);
+
+      if (!done) {
+        // Resolve chain.
+        Promise.resolve(value).then(res => next(res));
+      } else {
+        resolve(value);
+      }
+    }
+
+    // First invoke g.next() without params.
+    next();
+  });
+}
+
+co(readFile).then(res => console.log(res));
+// const g = readFile();
+// const value = g.next();
+// const result = g.next(value);
+// resolve(result);
 ```
 
 ### Proxy and Reflect
