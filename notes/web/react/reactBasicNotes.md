@@ -6200,6 +6200,42 @@ export default DatePicker;
 - Even You presentation on [JSConf Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s).
 - Framework paradigm [guide](https://mp.weixin.qq.com/s/mZ7KuFjyCWNCAq7HnXg96A).
 
+### Micro Frontend
+
+通过 `single-spa` 包装的主应用是一个基座,
+它提供相应的协议,
+子应用按照协议进行包装就可以接入主应用.
+主应用就像插座,
+子应用就像不同的电器,
+只要遵循某种协议就可以轻松实现可插拔操作.
+
+`single-spa` 子项目的的挂载、更新、卸载等操作,
+并不是 `single-spa` 原生提供的,
+用户可以根据自己的需要来自行实现子应用的挂载, 卸载及更新等逻辑.
+`single-spa` 通过 `reroute` 和路由控制来调用子应用.
+在 `single-spa` 的开发过程中,
+需要自己手动去写调用子应用的方法.
+
+#### Application EntryPoint
+
+- HTML Entry.
+- JavaScript Entry.
+
+#### Styles Isolation
+
+- Shadow DOM container.
+- CSS scoped / CSS selector  renaming.
+
+#### Scripts Isolation
+
+- Runtime sandbox.
+- `window` proxy.
+
+#### Application Communication
+
+- Pub-Sub Pattern.
+- Callback registration.
+
 ## Interviews
 
 - [React Interview Questions](https://github.com/semlinker/reactjs-interview-questions)
