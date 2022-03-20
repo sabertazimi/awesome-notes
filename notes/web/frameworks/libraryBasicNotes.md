@@ -1326,6 +1326,7 @@ tags: [Web, Framework, Library]
 - [Docz: React Component Documentation Tool Built on Gatsby](https://github.com/pedronauck/docz)
 - [DUmi: Documentation Generator of React Component](https://github.com/umijs/dumi)
 - [React Storybook: Live Component Documentation](https://github.com/storybooks/storybook)
+- [Ladle: Faster Storybook](https://github.com/tajo/ladle)
 
 ### API Documentation
 
