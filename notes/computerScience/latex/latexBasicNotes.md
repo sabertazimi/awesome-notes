@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [CS, LaTex]
 ---
 
-# Latex Basic Notes
+# LaTeX Basic Notes
 
 [TOC]
 
