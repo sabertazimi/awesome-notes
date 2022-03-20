@@ -71,7 +71,7 @@ console.log(require('remote').getGlobal('sharedObject').someProperty);
 
 ```js
 const { BrowserWindow } = require('electron').remote;
-let win = new BrowserWindow({ width: 800, height: 600 });
+const win = new BrowserWindow({ width: 800, height: 600 });
 win.loadURL('https://github.com');
 ```
 
@@ -91,14 +91,12 @@ win.loadURL('https://github.com');
 
 ### Dialog
 
-```js
-openFile
-openDirectory
-multiSelections
-createDirectory
-showHiddenFiles
-promptToCreate (Windows Only)
-```
+- openFile
+- openDirectory
+- multiSelections
+- createDirectory
+- showHiddenFiles
+- promptToCreate: windows only.
 
 ## Electron Security
 
@@ -117,8 +115,8 @@ const createBrowserWindow = () => {
     title: 'Electron App',
     webPreferences: {
       nodeIntegration: false,
-      preload: path.join(__dirname, 'preload.js');
-    }
+      preload: path.join(__dirname, 'preload.js'),
+    },
   });
 };
 ```
@@ -128,8 +126,8 @@ const createBrowserWindow = () => {
 const fs = require('fs');
 
 global.desktop = {
-  files: () => fs.readdirSync(__dirname);
-}
+  files: () => fs.readdirSync(__dirname),
+};
 ```
 
 ## Electron Builder

@@ -357,8 +357,8 @@ but also can every `<article>` and `<section>` element.
 
 javascript tips：通过 control 属性改变标签对应表单元素的值
 
-```javascript
-var textbox = $('#label_id').control;
+```js
+const textbox = $('#label_id').control;
 textbox.value = '666666'; //  等同于 input.value = '666666';
 ```
 
@@ -390,7 +390,7 @@ name 相同时, 多个 radio 组成一个 radio group
 
 date/month/week/time/datetime-local:
 
-```javascript
+```js
 stepUp();
 stepDown();
 ```
@@ -418,11 +418,14 @@ input.valueAsNumber input.valueAsDate
 
 javascript tips：检查 type=checkbox 的状态
 
-```javascript
+```js
 if (checkbox.indeterminate) {
+  doSomething();
 } else {
   if (checkbox.checked) {
+    doSomething();
   } else {
+    doSomething();
   }
 }
 ```
@@ -621,9 +624,9 @@ Accordion list without JavaScript:
   }
 
   details {
-    border: 0.1em solid black;
     padding: 1em;
     margin-bottom: 1em;
+    border: 0.1em solid black;
     border-radius: 1em;
   }
 
@@ -1256,34 +1259,36 @@ With `fieldset` and `legend`:
 ```
 
 ```js
-document.addEventListener('keyup', (event) => {
-    switch (event.keyCode) {
-        // escape
-        case 27:
-            // exit
-            break;
-        // enter || space bar
-        case 13 || 32:
-            // submit or something
-            break;
-        // left arrow
-        case 37:
-            // move back / previous
-            break;
-        // right arrow
-        case 39:
-            // move forward
-            break;
-        // up arrow
-        case 38:
-            // move up
-            break;
-        // down arrow
-        case 40:
-            // move down
-            break;
-       }
-}
+document.addEventListener('keyup', event => {
+  switch (event.keyCode) {
+    // escape
+    case 27:
+      // exit
+      break;
+    // enter || space bar
+    case 13 || 32:
+      // submit or something
+      break;
+    // left arrow
+    case 37:
+      // move back / previous
+      break;
+    // right arrow
+    case 39:
+      // move forward
+      break;
+    // up arrow
+    case 38:
+      // move up
+      break;
+    // down arrow
+    case 40:
+      // move down
+      break;
+    default:
+      throw new Error('Unsupported key!');
+  }
+});
 ```
 
 ```js
@@ -1299,18 +1304,18 @@ document.addEventListener('keyup', (event) => {
 export function trapTabKey(e, context) {
   if (e.key !== 'Tab') return;
 
-  let focusableItems = getFocusable(context);
-  let focusedItem = document.activeElement;
+  const focusableItems = getFocusable(context);
+  const focusedItem = document.activeElement;
 
-  let focusedItemIndex = focusableItems.indexOf(focusedItem);
+  const focusedItemIndex = focusableItems.indexOf(focusedItem);
 
   if (e.shiftKey) {
-    if (focusedItemIndex == 0) {
+    if (focusedItemIndex === 0) {
       focusableItems[focusableItems.length - 1].focus();
       e.preventDefault();
     }
   } else {
-    if (focusedItemIndex == focusableItems.length - 1) {
+    if (focusedItemIndex === focusableItems.length - 1) {
       focusableItems[0].focus();
       e.preventDefault();
     }

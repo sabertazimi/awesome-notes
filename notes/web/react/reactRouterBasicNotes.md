@@ -246,7 +246,7 @@ app.use(express.static(path.resolve(__dirname, 'build')));
 
 // always serve index.html for any request
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html');
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
 ```
 

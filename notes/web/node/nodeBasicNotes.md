@@ -112,9 +112,11 @@ npm outdated   # 去除过期包
 ### Test Steps
 
 ```json
-"scripts": {
+{
+  "scripts": {
     "test": "node test.js"
-},
+  }
+}
 ```
 
 ```bash
@@ -254,7 +256,7 @@ function updatePackage(version) {
 
   pkg.version = version;
 
-  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
+  fs.writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`);
 }
 
 main().catch(err => console.error(err));
@@ -441,7 +443,7 @@ to remove locked invalid package version.
 #### Bin
 
 当设置了 `bin` 字段后,
-在 `package.json` `script` 字段中，
+在 `package.json` `script` 字段中,
 可以使用简写编写命令
 (但是局部安装无法在 shell 下使用, 需 `npx <bin-name>`).
 
@@ -536,8 +538,8 @@ even if the lockfile is still holding things together.
 
 ### CLI Environment
 
-```js
-// .env file (added to .gitignore)
+```bash
+# .env file (added to .gitignore)
 NODE_ENV=development
 PORT=8626
 # Set your database/API connection information here
@@ -600,9 +602,9 @@ yarn set version berry
 Setup basic configuration `.yarnrc.yml`:
 
 ```yml
-yarnPath: '.yarn/releases/yarn-berry.cjs'
-nodeLinker: 'node-modules'
-npmPublishAccess: 'public'
+yarnPath: .yarn/releases/yarn-berry.cjs
+nodeLinker: node-modules
+npmPublishAccess: public
 npmPublishRegistry: 'https://registry.npmjs.org'
 npmRegistryServer: 'https://registry.npmjs.org'
 ```
@@ -680,15 +682,15 @@ Modify package in `node_modules` conveniently:
 
 ```js
 function foo(x, y, callback) {
-    try {
-        if (param not valid ) {
-            throw new Error（）;
-        } else {
-            callback(null, param);
-        }
-    } catch (error) {
-        callback(error, param);
+  try {
+    if (paramNotValid()) {
+      throw new Error('Invalid parameters!');
+    } else {
+      callback(null, param);
     }
+  } catch (error) {
+    callback(error, param);
+  }
 }
 ```
 
@@ -696,12 +698,12 @@ function foo(x, y, callback) {
 
 ```js
 foo(a, b, function (err, param) {
-    if(err) {
-
-    } else {
-
-    }
-})；
+  if (err) {
+    processError();
+  } else {
+    process();
+  }
+});
 ```
 
 ### Export Module
@@ -717,20 +719,20 @@ module.exports = function (args) {
 - 向定义最内层回调,可避免回套嵌套
 
 ```js
-server.on('request', function(req, res) {
-    var render = function(wsData) {
-        page = pageRender(req, session, userData, wsData);
-    };
-    var getWsInfo = function(userData) {
-        ws.get(req, render);
-    };
-    var getDbInfo = function(session) {
-        db.get(session.user, getWsInfo);
-    };
-    var getMemCached = function(req, res) {
-        memcached.getSession(req, getDbInfo);
-    };
-}
+server.on('request', function (req, res) {
+  const render = function (wsData) {
+    page = pageRender(req, session, userData, wsData);
+  };
+  const getWsInfo = function (userData) {
+    ws.get(req, render);
+  };
+  const getDbInfo = function (session) {
+    db.get(session.user, getWsInfo);
+  };
+  const getMemCached = function (req, res) {
+    memcached.getSession(req, getDbInfo);
+  };
+});
 ```
 
 ### Module Resolution
@@ -786,7 +788,7 @@ Module.wrapper = [
 ];
 
 Module._extensions = {
-  '.js'(module) {
+  '.js': function (module) {
     const content = fs.readFileSync(module.id, 'utf8');
     const fnStr = Module.wrapper[0] + content + Module.wrapper[1];
     const fn = vm.runInThisContext(fnStr);
@@ -795,18 +797,18 @@ Module._extensions = {
       module.exports,
       module,
       Require,
-      _dirname
-      _filename,
+      _dirname,
+      _filename
     );
   },
-  '.json'(module) {
+  '.json': function (module) {
     const json = fs.readFileSync(module.id, 'utf8');
     module.exports = JSON.parse(json); // 把文件的结果放在exports属性上
   },
 };
 
 function Require(modulePath) {
-  let absPathname = path.resolve(__dirname, modulePath);
+  const absPathname = path.resolve(__dirname, modulePath);
   const module = new Module(absPathname);
   tryModuleLoad(module);
   return module.exports;
@@ -835,18 +837,16 @@ function tryModuleLoad(module) {
 
 ### Process Properties
 
-```js
-process.pid：当前进程的进程号。
-process.version：Node的版本，比如v0.10.18。
-process.platform：当前系统平台，比如Linux。
-process.title：默认值为“node”，可以自定义该值。
-process.argv：当前进程的命令行参数数组。
-process.env：指向当前shell的环境变量，比如process.env.HOME。
-process.execPath：运行当前进程的可执行文件的绝对路径。
-process.stdout：指向标准输出。
-process.stdin：指向标准输入。
-process.stderr：指向标准错误。
-```
+- `process.pid`: 当前进程的进程号.
+- `process.version`: Node 的版本, 比如 v0.10.18.
+- `process.platform`: 当前系统平台, 比如 Linux.
+- `process.title`: 默认值为“node”, 可以自定义该值.
+- `process.argv`: 当前进程的命令行参数数组.
+- `process.env`: 指向当前 shell 的环境变量, 比如 process.env.HOME.
+- `process.execPath`: 运行当前进程的可执行文件的绝对路径.
+- `process.stdout`: 指向标准输出.
+- `process.stdin`: 指向标准输入.
+- `process.stderr`: 指向标准错误.
 
 ```js
 process.stdin.resume();
@@ -1043,10 +1043,10 @@ Worker pool is needed:
 - fs.exists
 
 ```js
-var fs = require('fs');
-var buf = fs.readFileSync('/path/to/file', [charSet]);
-fs.readFile('/path/to/file', [charSet], function callback(err, dataBuf) {});
-fs.readdir('/path/to/file', function callback(err, fileNameArr) {});
+const fs = require('fs');
+const buf = fs.readFileSync('/path/to/file', 'utf-8');
+fs.readFile('/path/to/file', 'utf-8', callback);
+fs.readdir('/path/to/file', callback);
 
 fs.createReadStream();
 
@@ -1055,8 +1055,8 @@ src.pipe(dst1).pipe(dst2).pipe(dst3); //  连接多个 stream
 
 ```js
 module.exports = function ls(dirName, fileType, callback) {
-  var fs = require('fs'),
-    path = require('path');
+  const fs = require('fs');
+  const path = require('path');
 
   fs.readdir(dirName, function (err, list) {
     if (err) {
@@ -1064,7 +1064,7 @@ module.exports = function ls(dirName, fileType, callback) {
     }
 
     list = list.filter(function (file) {
-      return path.extname(file) === '.' + fileType;
+      return path.extname(file) === `.${fileType}`;
     });
 
     callback(null, list);
@@ -1075,7 +1075,7 @@ module.exports = function ls(dirName, fileType, callback) {
 ### Buffer Object
 
 ```js
-var str = buf.toString();
+const str = buf.toString();
 ```
 
 ### Path API
@@ -1084,19 +1084,19 @@ var str = buf.toString();
 - path.extname: 返回文件类型
 
 ```js
-var path = require('path');
+const path = require('path');
 
-console.log(path.extname("index.html"));   // .html
+console.log(path.extname('index.html')); // .html
 
-path.normalize(p)
-path.join([path1], [path2], [...])
-path.resolve([from ...], to)
-path.relative(from, to)
-path.dirname(p)
-path.basename(p, [ext])
-path.extname(p)
-path.sep
-path.delimiter
+path.normalize(p);
+path.join([path1], [path2], [pathN]);
+path.resolve(from, to);
+path.relative(from, to);
+path.dirname(p);
+path.basename(p, [ext]);
+path.extname(p);
+path.sep;
+path.delimiter;
 ```
 
 ## Http Module
@@ -1122,10 +1122,13 @@ typedef Stream response
 - 监听事件
 
 ```js
-response.on('data', function (data) {});
-response.on('error', function (error) {});
+response.on('data', function (data) {
+  process(data);
+});
+response.on('error', function (err) {
+  console.error(err);
+});
 response.on('end', function () {
-  // 结束阶段
   stream.end();
 });
 ```
@@ -1154,7 +1157,7 @@ http.get(url, function callback(response) {});
 
 ```js
 http.get(url, function (response) {
-  var pipeData = '';
+  let pipeData = '';
 
   response.setEncoding('utf8');
   response.on('data', function (data) {
@@ -1170,7 +1173,7 @@ http.get(url, function (response) {
 ### Http Server
 
 ```js
-var server = http.createServer(function (request, response) {
+const server = http.createServer(function (request, response) {
   // 处理请求的逻辑...
 });
 server.listen(8000);
@@ -1179,14 +1182,14 @@ server.listen(8000);
 ### Sample
 
 ```js
-var net = require('net');
-var chatServer = net.createServer(),
-  // 用于检测僵尸客户端,用于及时清楚僵尸客户端
-  clientList = [];
+const net = require('net');
+const chatServer = net.createServer();
+// 用于检测僵尸客户端,用于及时清楚僵尸客户端
+const clientList = [];
 
 chatServer.on('connection', function (client) {
-  client.name = client.remoteAddress + ':' + client.remotePort;
-  client.write('Hi ' + client.name + '!\n');
+  client.name = `${client.remoteAddress}:${client.remotePort}`;
+  client.write(`Hi ${client.name}!\n`);
   clientList.push(client);
 
   client.on('data', function (data) {
@@ -1201,12 +1204,13 @@ chatServer.on('connection', function (client) {
 });
 
 function broadcast(message, client) {
-  var cleanup = [];
-  for (var i = 0; i < clientList.length; i += 1) {
+  const cleanup = [];
+
+  for (let i = 0; i < clientList.length; i += 1) {
     // 向其他人(排除自身)发送消息
     if (client !== clientList[i]) {
       if (clientList[i].writable) {
-        clientList[i].write(client.name + ' says ' + message);
+        clientList[i].write(`${client.name} says ${message}`);
       } else {
         cleanup.push(clientList[i]);
         clientList[i].destroy();
@@ -1215,7 +1219,7 @@ function broadcast(message, client) {
   }
 
   // 清楚僵尸客户端
-  for (i = 0; i < cleanup.length; i += 1) {
+  for (let i = 0; i < cleanup.length; i += 1) {
     clientList.splice(clientList.indexOf(cleanup[i]), 1);
   }
 }
@@ -1236,10 +1240,10 @@ socket.end();
 ### Socket IO
 
 ```js
-var http = require('http'),
-  io = require('socket.io'),
-  fs = require('fs'),
-  sockFile = fs.readFileSync('socket.html');
+const http = require('http');
+const fs = require('fs');
+const io = require('socket.io');
+const sockFile = fs.readFileSync('socket.html');
 
 server = http.createServer();
 server.on('request', function (req, res) {
@@ -1248,7 +1252,7 @@ server.on('request', function (req, res) {
 });
 server.listen(8080);
 
-var socket = io.listen(server);
+const socket = io.listen(server);
 
 // 命名空间
 socket.of('/upAndRunning').on('connection', function (client) {
@@ -1264,7 +1268,7 @@ socket.of('/weather').on('connection', function (client) {
 ### Basic Methods
 
 ```js
-var serverInstance = net.createServer(function callback(socket) {});
+const serverInstance = net.createServer(function callback(socket) {});
 
 serverInstance.listen(portNumber); // 开始监听特定端口
 ```
@@ -1300,7 +1304,7 @@ url.parse(request.url, true);
 - dns.lookup
 
 ```js
-var dns = require('dns');
+const dns = require('dns');
 
 dns.lookup('google.com', 4, function (e, a) {
   console.log(a);
@@ -1321,7 +1325,7 @@ dns.resolve('tazimi.dev', 'A', function (err, res) {
   if (err) {
     console.log(err);
   } else {
-    console.log('A: ' + JSON.stringify(res, null, 2));
+    console.log(`A: ${JSON.stringify(res, null, 2)}`);
   }
 });
 
@@ -1329,7 +1333,7 @@ dns.resolve('github.com', 'MX', function (err, res) {
   if (err) {
     console.log(err);
   } else {
-    console.log('MX: ' + JSON.stringify(res, null, 2));
+    console.log(`MX: ${JSON.stringify(res, null, 2)}`);
   }
 });
 ```
@@ -1346,8 +1350,8 @@ dns.resolve('github.com', 'MX', function (err, res) {
 #### Hash API
 
 ```js
-var crypto = require('crypto'),
-  md5 = crypto.createHash('md5');
+const crypto = require('crypto');
+const md5 = crypto.createHash('md5');
 
 md5.update('foo');
 md5.digest('hex'); // 'acbd18db4cc2f85cedef654fccc4a4d8'
@@ -1360,11 +1364,11 @@ openssl genrsa -out key.pem 1024
 ```
 
 ```js
-var crypto = require('crypto'),
-  fs = require('fs'),
-  pem = fs.readFileSync('key.pem'),
-  key = pem.toString('ascii'),
-  hmac = crypto.createHmac('sha1', key);
+const crypto = require('crypto');
+const fs = require('fs');
+const pem = fs.readFileSync('key.pem');
+const key = pem.toString('ascii');
+const hmac = crypto.createHmac('sha1', key);
 
 hmac.update('bar');
 hmac.digest('hex'); // '7x123'
@@ -1379,22 +1383,25 @@ hmac.digest('hex'); // '7x123'
 ### Cluster Module
 
 ```js
-var cluster = require('cluster'),
-  http = require('http'),
-  numCPUs = require('os').cpus().length;
-var rssWarn = 50 * 1024 * 1024,
-  heapWarn = 50 * 1024 * 1024;
-var workers = {};
+const cluster = require('cluster');
+const http = require('http');
+const numCPUs = require('os').cpus().length;
+const rssWarn = 50 * 1024 * 1024;
+const heapWarn = 50 * 1024 * 1024;
+const workers = {};
 
 if (cluster.isMaster) {
-  for (var i = 0; i < numCPUs; i++) {
+  for (let i = 0; i < numCPUs; i++) {
     createWorker();
   }
   setInterval(function () {
-    var time = new Date().getTime();
+    const time = new Date().getTime();
     for (pid in workers) {
-      if (workers.hasOwnProperty(pid) && workers[pid].lastCb + 5000 < time) {
-        console.log('Long running worker ' + pid + ' killed');
+      if (
+        Object.prototype.hasOwnProperty.call(workers, pid) &&
+        workers[pid].lastCb + 5000 < time
+      ) {
+        console.log(`Long running worker ${pid} killed`);
         workers[pid].worker.kill();
         delete workers[pid];
         createWorker();
@@ -1402,21 +1409,21 @@ if (cluster.isMaster) {
     }
   }, 1000);
 } else {
-  //Server
+  // Server
   http
     .Server(function (req, res) {
-      //mess up 1 in 200 request
+      // mess up 1 in 200 request
       if (Math.floor(Math.random() * 200) === 4) {
-        console.log('Stopped ' + process.pid + ' from ever finishing');
+        console.log(`Stopped ${process.pid} from ever finishing`);
         while (true) {
           continue;
         }
       }
       res.writeHead(200);
-      res.end('hello world from ' + process.pid + '\n');
+      res.end(`hello world from ${process.pid}\n`);
     })
     .listen(8000);
-  //Report stats once a second
+  // Report stats once a second
   setInterval(function report() {
     process.send({
       cmd: 'reportMem',
@@ -1427,16 +1434,16 @@ if (cluster.isMaster) {
 }
 
 function createWorker() {
-  var worker = cluster.fork();
-  console.log('Created worker: ' + worker.pid);
+  const worker = cluster.fork();
+  console.log(`Created worker: ${worker.pid}`);
 
-  //allow boot time
-  workers[worker.pid] = { worker: worker, lastCb: new Date().getTime() - 1000 };
+  // allow boot time
+  workers[worker.pid] = { worker, lastCb: new Date().getTime() - 1000 };
   worker.on('message', function (m) {
     if (m.cmd === 'reportMem') {
       workers[m.process].lastCb = new Date().getTime();
       if (m.memory.rss > rssWarn) {
-        console.log('Worker ' + m.process + ' using too much memory.');
+        console.log(`Worker ${m.process} using too much memory.`);
       }
     }
   });
@@ -1458,7 +1465,7 @@ function createWorker() {
 - assert.doesNotThrow(fn): 测试方法是否抛出异常
 
 ```js
-var assert = require('assert');
+const assert = require('assert');
 
 assert.equal(1, true, 'Truthy');
 assert.notEqual(1, true, 'Truthy');

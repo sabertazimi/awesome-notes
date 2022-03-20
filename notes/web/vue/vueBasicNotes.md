@@ -154,7 +154,7 @@ Vue.createApp({
 Form events:
 
 ```js
-app.component('custom-form', {
+app.component('CustomForm', {
   emits: {
     // 没有验证
     click: null,
@@ -306,7 +306,7 @@ Component `v-model` directive:
 ```
 
 ```js
-app.component('custom-input', {
+app.component('CustomInput', {
   props: ['modelValue'],
   emits: ['update:modelValue'],
   template: `
@@ -316,13 +316,12 @@ app.component('custom-input', {
     >
   `,
 });
+```
 
-app.component('custom-input', {
+```js
+app.component('CustomInput', {
   props: ['modelValue'],
   emits: ['update:modelValue'],
-  template: `
-    <input v-model="value">
-  `,
   computed: {
     value: {
       get() {
@@ -333,6 +332,9 @@ app.component('custom-input', {
       },
     },
   },
+  template: `
+    <input v-model="value">
+  `,
 });
 ```
 
@@ -370,7 +372,7 @@ Vue.createApp({
     fullName: {
       // getter
       get() {
-        return this.firstName + ' ' + this.lastName;
+        return `${this.firstName} ${this.lastName}`;
       },
       // setter
       set(newValue) {
@@ -562,6 +564,7 @@ we cannot directly access `this.$emit` or `this.$route` anymore.
 ```js
 import { ref, toRefs } from 'vue';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   setup(props, { attrs, slots, emit, expose }) {
     const { title } = toRefs(props);
@@ -875,6 +878,7 @@ transition JavaScript hooks helps a lot.
 ```
 
 ```ts
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   methods: {
     beforeEnter(el) {},
@@ -956,7 +960,8 @@ export default {
 ### Basic Routes
 
 ```ts
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 
 const routes: Array<RouteRecordRaw> = [
@@ -1021,7 +1026,8 @@ we cannot directly access `this.$router` or `this.$route` anymore.
 #### Routes Composition API
 
 ```ts
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import EventDetails from '../views/EventDetails.vue';
 
 const routes: Array<RouteRecordRaw> = [
@@ -1054,7 +1060,8 @@ export default router;
 #### Passing Routes Props
 
 ```ts
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import EventDetails from '../views/EventDetails.vue';
 
 const routes: Array<RouteRecordRaw> = [
@@ -1157,7 +1164,9 @@ const routes: Array<RouteRecordRaw> = [
 ```ts
 import { useRouter } from 'vue-router';
 
-const router = useRouter();
+function App() {
+  const router = useRouter();
+}
 ```
 
 #### Navigate to Different Location
@@ -1298,8 +1307,9 @@ router.afterEach((to, from, failure) => {
 
 ```ts
 // store.ts
-import { InjectionKey } from 'vue';
-import { createStore, useStore, Store } from 'vuex';
+import type { InjectionKey } from 'vue';
+import type { Store } from 'vuex';
+import { createStore, useStore } from 'vuex';
 
 // define your typings for the store state
 interface State {
@@ -1307,7 +1317,7 @@ interface State {
 }
 
 // define injection key
-const key: InjectionKey<Store<State>> = Symbol();
+const key: InjectionKey<Store<State>> = Symbol('key');
 
 const store = createStore<State>({
   state: {
@@ -1324,26 +1334,27 @@ export default store;
 
 ```ts
 // main.ts
-import { createApp } from 'vue'
-import store, { key } from './store'
+import { createApp } from 'vue';
+import store, { key } from './store';
 
-const app = createApp({ ... })
+const app = createApp({});
 
 // pass the injection key
-app.use(store, key)
+app.use(store, key);
 
-app.mount('#app')
+app.mount('#app');
 ```
 
 ```ts
 // in a vue component
 import { useAppStore } from './store';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   setup() {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const store = useAppStore();
-
-    store.state.count; // typed as number
+    const count = store.state.count; // typed as number
   },
 };
 ```
@@ -1490,12 +1501,12 @@ to either replace mixins or leverage a Composition API-based library.
 
 ```js
 // 从五个文件导入五个方法（不包括 warn）
+import { warn } from '../util/index';
 import { initMixin } from './init';
 import { stateMixin } from './state';
 import { renderMixin } from './render';
 import { eventsMixin } from './events';
 import { lifecycleMixin } from './lifecycle';
-import { warn } from '../util/index';
 
 // 定义 Vue 构造函数
 function Vue(options) {
@@ -1673,8 +1684,8 @@ vm._renderProxy = vm; // 渲染函数作用域代理
 vm._self = vm; // 实例本身
 
 // initLifecycle(vm)    src/core/instance/lifecycle.js **************************************************
-vm.$parent = parent;
-vm.$root = parent ? parent.$root : vm;
+vm.$parent = vmParent;
+vm.$root = vmParent ? vmParent.$root : vm;
 
 vm.$children = [];
 vm.$refs = {};
@@ -1752,7 +1763,7 @@ Object.defineProperty(Vue.prototype, '$props', propsDef);
 
 ### Vue Shared Utils
 
-```js
+```ts
 /* @flow */
 
 export const emptyObject = Object.freeze({});
@@ -1895,12 +1906,12 @@ export function hasOwn(obj: Object | Array<*>, key: string): boolean {
 /**
  * Create a cached version of a pure function.
  */
-export function cached<F: Function>(fn: F): F {
+export function cached<F extends Function>(fn: F): F {
   const cache = Object.create(null);
-  return (function cachedFn(str: string) {
+  return function cachedFn(str: string) {
     const hit = cache[str];
     return hit || (cache[str] = fn(str));
-  }: any);
+  };
 }
 
 /**
@@ -1940,7 +1951,8 @@ function polyfillBind(fn: Function, ctx: Object): Function {
     const l = arguments.length;
     return l
       ? l > 1
-        ? fn.apply(ctx, arguments)
+        ? // eslint-disable-next-line prefer-rest-params
+          fn.apply(ctx, arguments)
         : fn.call(ctx, a)
       : fn.call(ctx);
   }
@@ -2085,10 +2097,11 @@ export function looseIndexOf(arr: Array<mixed>, val: mixed): number {
  */
 export function once(fn: Function): Function {
   let called = false;
-  return function () {
+
+  return function (...args) {
     if (!called) {
       called = true;
-      fn.apply(this, arguments);
+      fn.apply(this, args);
     }
   };
 }
@@ -2101,26 +2114,26 @@ vm.$options = mergeOptions(
   // resolveConstructorOptions(vm.constructor)
   {
     components: {
-      KeepAlive
+      KeepAlive,
       Transition,
-      TransitionGroup
+      TransitionGroup,
     },
-    directives:{
+    directives: {
       model,
-      show
+      show,
     },
     filters: Object.create(null),
-    _base: Vue
+    _base: Vue,
   },
   // options || {}
   {
     el: '#app',
     data: {
-      test: 1
-    }
+      test: 1,
+    },
   },
   vm
-)
+);
 ```
 
 #### Vue Normalize Options
@@ -2128,25 +2141,31 @@ vm.$options = mergeOptions(
 Props:
 
 ```js
-props: {
-  someData1: {
-    type: Number
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  props: {
+    someData1: {
+      type: Number,
+    },
+    someData2: {
+      type: String,
+      default: '',
+    },
   },
-  someData2: {
-    type: String,
-    default: ''
-  }
-}
+};
 ```
 
 Injects:
 
 ```js
-inject: {
-  'data1': { from: 'data1' },
-  'd2': { from: 'data2' },
-  'data3': { from: 'data3', someProperty: 'someValue' }
-}
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  inject: {
+    data1: { from: 'data1' },
+    d2: { from: 'data2' },
+    data3: { from: 'data3', someProperty: 'someValue' },
+  },
+};
 ```
 
 Directives:
@@ -2254,7 +2273,7 @@ const _data = {
 };
 
 // new Proxy(target, handler);
-let changeName = new Proxy(_data, {
+const changeName = new Proxy(_data, {
   set(obj, name, value) {
     obj[name] = value;
     render();
@@ -2268,7 +2287,7 @@ Array.from(el.getElementsByTagName('input'))
     return ele.getAttribute('v-model');
   })
   .forEach(input => {
-    let name = input.getAttribute('v-model');
+    const name = input.getAttribute('v-model');
     input.value = changeName[name];
 
     // DOM Event Listener (listen to the changes of view)

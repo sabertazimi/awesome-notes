@@ -19,20 +19,18 @@ fire callbacks when events happen.
 ```js
 function Callbacks(options) {
   let list = [];
-  const self;
-
-  self = {
+  const self = {
     add(fn) {
-      if (options == 'unique') {
-        if (-1 === list.indexOf(fn)) {
-          list.push(fn)
+      if (options === 'unique') {
+        if (!list.includes(fn)) {
+          list.push(fn);
         }
       } else {
-        list.push(fn)
+        list.push(fn);
       }
     },
     fire(args) {
-      list.forEach((fn) => {
+      list.forEach(fn => {
         fn(args);
       });
 
@@ -57,7 +55,7 @@ class Promise {
   // the async operation succeeded (resolved) or failed (rejected).
   constructor(executor) {
     if (typeof executor !== 'function') {
-      throw new Error('Executor must be a function');
+      throw new TypeError('Executor must be a function');
     }
 
     // Internal state. `$state` is the state of the promise, and `$chained` is
@@ -192,10 +190,8 @@ function domManipulation(parentElements, target, callback) {
   callback.call(parentElements);
 }
 
-
-...
-after() {
-  return this.domManipulation(arguments, function (elem) {
+function after(...args) {
+  return this.domManipulation(...args, function (elem) {
     this.parentNode.insertBefore(elem, this.nextSibling);
   });
 }
@@ -203,7 +199,7 @@ after() {
 
 ### structure
 
-```javascript
+```js
 $('selector').html('tag+text');
 $('selector').text('text');
 
@@ -221,18 +217,18 @@ $('selector').index();
 
 ### class
 
-```javascript
+```js
 $('selector').addClass('');
 $('selector').removeClass('');
 ```
 
-```javascript
+```js
 hidden;
 ```
 
 ### style
 
-```javascript
+```js
 $('selector').css('color', 'red');
 $('selector').prop('disable', 'true');
 ```
@@ -277,16 +273,18 @@ $('selector').prop('disable', 'true');
 
 ```js
 $(window).scroll(function (event) {});
-$(document).height(); //返回整个网页的高度
-$(window).height(); //返回窗口高度
-$(window).scrollTop(); //返回滚动条距网页顶部距离
+$(document).height(); // 返回整个网页的高度
+$(window).height(); // 返回窗口高度
+$(window).scrollTop(); // 返回滚动条距网页顶部距离
 ```
 
 ### 常用多态函数
 
 ```js
-data、html、css
-$(document).ready(function(){});
+$(selector).data();
+$(selector).html();
+$(selector).css();
+$(document).ready(function () {});
 ```
 
 ## AJAX Module
@@ -295,11 +293,11 @@ $(document).ready(function(){});
 
 `$.getJSON`:
 
-```javascript
-$.getJSON(url, data, success(data, status, xhr));
+```js
+$.getJSON(url, data, success(data, statusCode, xhr));
 
 $.getJSON('test.js', function (json) {
-  alert('JSON Data: ' + json.users[3].name);
+  alert(`JSON Data: ${json.users[3].name}`);
 });
 ```
 
@@ -307,14 +305,14 @@ $.getJSON('test.js', function (json) {
 
 `$.ajax`:
 
-```javascript
+```js
 $.ajax({
-    url: 'http://localhost:3000',
-    type: 'GET'/'POST'/'PUT'/'DELETE',
-    data: dataSchema,
-    dataType: 'json'
-    success: successCallback,
-    error: errorHandle,
+  url: 'http://localhost:3000',
+  type: 'GET' / 'POST' / 'PUT' / 'DELETE',
+  data: dataSchema,
+  dataType: 'json',
+  success: successCallback,
+  error: errorHandle,
 });
 ```
 

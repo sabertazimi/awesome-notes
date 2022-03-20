@@ -129,24 +129,22 @@ Clients should not be forced to depend upon interfaces that they do not use.
 
 ```js
 const MyApp = {
+  // 事件处理函数
+  handleClick(event) {
+    /* 将事件的属性作为参数，传递给应用逻辑函数
+     * 使得应用逻辑函数不依赖于 event 对象，易于解耦与测试
+     */
+    this.showPopup(event.clientX, event.clientY);
+  },
 
-    // 事件处理函数
-    handleClick: function(event) {
-
-        /* 将事件的属性作为参数，传递给应用逻辑函数
-         * 使得应用逻辑函数不依赖于 event 对象，易于解耦与测试
-         */
-        this.showPopup(event.clientX, event.clientY);
-    }
-
-    // 应用逻辑函数
-    showPopup: function(x, y) {
-        const popup = document.getElementById('popup');
-        popup.style.left = x + 'px';
-        popup.style.top  = y + 'px';
-        popup.className = 'reveal';
-    }
-}
+  // 应用逻辑函数
+  showPopup(x, y) {
+    const popup = document.getElementById('popup');
+    popup.style.left = `${x}px`;
+    popup.style.top = `${y}px`;
+    popup.className = 'reveal';
+  },
+};
 ```
 
 ### Env and Config
@@ -168,32 +166,34 @@ const MyApp = {
 
 通过对象字面量创建命名空间
 
-```javascript
+```js
 APP.namespace = function (namespaceString) {
-  var parts = namespaceString.split('.'),
-    parent = APP,
-    i;
+  let parts = namespaceString.split('.');
+  let parent = APP;
+
   // strip redundant leading global
   if (parts[0] === 'APP') {
     // remove leading global
     parts = parts.slice(1);
   }
-  for (i = 0; i < parts.length; i += 1) {
+
+  for (let i = 0; i < parts.length; i += 1) {
     // create a property if it doesn't exist
     if (typeof parent[parts[i]] === 'undefined') {
       parent[parts[i]] = {};
     }
-    //关键: 向内嵌套
+    // 关键: 向内嵌套
     parent = parent[parts[i]];
   }
+
   // 返回最内层模块
   return parent;
 };
 ```
 
-```javascript
+```js
 // assign returned value to a local var
-var module2 = APP.namespace('APP.modules.module2');
+const module2 = APP.namespace('APP.modules.module2');
 module2 === APP.modules.module2; // true
 // skip initial `APP`
 APP.namespace('modules.module51');
@@ -209,49 +209,49 @@ APP.namespace('once.upon.a.time.there.was.this.long.nested.property');
 - 返回对象: 即使通过外部代码改变返回对象的接口，也不会影响原接口
 
 ```js
-var obj = (function () {
-    // private member
-  var name = "tazimi",
+const obj = (function () {
+  // private member
+  let name = 'tazimi';
 
-    // private method
-    // excluded in return object
+  // private method
+  // excluded in return object
 
-      // privileged method
-      function getName() {
-        return name;
-      },
-    function setName(n) {
-      if (typeof n === 'string') {
-          name = n;
-      }
-      return this;
-    },
+  // privileged method
+  function getName() {
+    return name;
+  }
 
-    // public method
-    function logName() {
-      console.log(name);
-    };
+  function setName(n) {
+    if (typeof n === 'string') {
+      name = n;
+    }
+    return this;
+  }
 
-    // 闭包
-    return {
-    // 公共接口: 特权/公共方法
+  // public method
+  function logName() {
+    console.log(name);
+  }
 
-        // 特权方法
-      getName: getName,
-    setName: setName,
+  // 闭包
+  // 公共接口: 特权/公共方法
+  return {
+    // 特权方法
+    getName,
+    setName,
 
     // 公共方法
-    log: logName;
-    };
-}());
+    log: logName,
+  };
+})();
 ```
 
 ```js
-var App = App || {};
+const App = App || {};
 App.utils = {};
 
 (function () {
-  var val = 5;
+  let val = 5;
 
   this.getValue = function () {
     return val;
@@ -294,7 +294,7 @@ Universal Module Definition:
     window.eventUtil = factory();
   }
 })(this, function () {
-  //module ...
+  // module ...
 });
 ```
 
@@ -376,7 +376,7 @@ const point2 = PointFactory.newCartesianPoint(5, 6);
 ```js
 module.exports = (function () {
   function VehicleFactory() {
-    var publicVehicle = new Object();
+    const publicVehicle = {};
 
     // specific factory
     function Car(options) {
@@ -395,21 +395,17 @@ module.exports = (function () {
     }
 
     // public features of vehicle , added to __proto__
-    function _run() {
-      var args = [].slice.call(arguments);
-
+    function _run(...args) {
       if (args.length === 0) {
-        console.log(this.type + ' - run with: ' + this.speed + 'km/s');
+        console.log(`${this.type} - run with: ${this.speed}km/s`);
       } else if (toString.apply(args[0]) === '[object Number]') {
         this.speed = args[0];
       }
     }
-    function _withColor() {
-      var args = [].slice.call(arguments);
-
+    function _withColor(...args) {
       if (args.length === 0) {
         console.log(
-          'The color of this ' + this.type + ' product is : ' + this.color
+          `The color of this ${this.type} product is : ${this.color}`
         );
       } else if (toString.apply(args[0]) === '[object String]') {
         this.color = args[0];
@@ -437,8 +433,8 @@ module.exports = (function () {
 
     // core: create method
     this.create = function (options) {
-      var vehicleClass = '',
-        newVehicle = {};
+      let vehicleClass = '';
+      let newVehicle = {};
 
       if (options.type === 'car') {
         vehicleClass = Car;
@@ -447,9 +443,9 @@ module.exports = (function () {
       }
 
       // create new vehicle with options, by pre-defined specific constructor
-      newVehicle = new vehicleClass(options);
+      newVehicle = new VehicleClass(options);
       // set up prototype
-      newVehicle.__proto__ = publicVehicle;
+      newVehicle[[proto]] = publicVehicle;
       newVehicle.prototype = publicVehicle;
 
       // add public feature
@@ -497,39 +493,39 @@ class Coffee extends Drink {
 }
 
 class DrinkFactory {
-  prepare(amount)
+  prepare(amount) {}
 }
 
 class TeaFactory extends DrinkFactory {
   makeTea() {
-   console.log(`Tea Created`);
-   return new Tea();
+    console.log(`Tea Created`);
+    return new Tea();
   }
 }
 
 class CoffeeFactory extends DrinkFactory {
-   makeCoffee() {
-   console.log(`Coffee Created`);
-   return new Coffee();
+  makeCoffee() {
+    console.log(`Coffee Created`);
+    return new Coffee();
   }
 }
 
 const teaDrinkFactory = new TeaFactory();
-const tea = teaDrinkFactory.makeTea()
-tea.consume()
+const tea = teaDrinkFactory.makeTea();
+tea.consume();
 ```
 
 ```js
-var AbstractVehicleFactory = (function () {
+const AbstractVehicleFactory = (function () {
   // Storage for our vehicle types
-  var types = {};
+  const types = {};
 
   function _getVehicle(type, customizations) {
-    var Vehicle = types[type];
+    const Vehicle = types[type];
     return Vehicle ? new Vehicle(customizations) : null;
   }
   function _registerVehicle(type, Vehicle) {
-    var prototype = Vehicle.prototype;
+    const prototype = Vehicle.prototype;
 
     // only register classes that fulfill the vehicle contract
     if (prototype.drive && prototype.breakDown) {
@@ -686,13 +682,14 @@ class Singleton {
 }
 ```
 
-```javascript
+```js
 function Universe() {
   // 缓存实例
-  var instance;
+  let instance;
 
   // anti-Self-Defined Function Pattern
   // 反-自定义函数模式: 先重写,再初始化
+  // eslint-disable-next-line no-func-assign
   Universe = function Universe() {
     return instance;
   };
@@ -730,6 +727,8 @@ class Calculator1 {
           return value1 + value2;
         case 'sub':
           return value1 - value2;
+        default:
+          throw new Error('Unsupported operations!');
       }
     };
   }
@@ -757,6 +756,8 @@ class CalcAdapter {
           return cal2.add(value1, value2);
         case 'sub':
           return cal2.sub(value1, value2);
+        default:
+          throw new Error('Unsupported operations!');
       }
     };
   }
@@ -790,12 +791,12 @@ function AdvancedShipping() {
 
 // adapter interface
 function AdapterShipping(credentials) {
-  var shipping = new AdvancedShipping();
+  const shipping = new AdvancedShipping();
 
   shipping.login(credentials);
 
   return {
-    request: function (zipStart, zipEnd, weight) {
+    request(zipStart, zipEnd, weight) {
       shipping.setStart(zipStart);
       shipping.setDestination(zipEnd);
       return shipping.calculate(weight);
@@ -805,12 +806,12 @@ function AdapterShipping(credentials) {
 ```
 
 ```js
-var shipping = new Shipping();
-var adapterShipping = new AdapterShipping(credentials);
+const shipping = new Shipping();
+const adapterShipping = new AdapterShipping(credentials);
 
 // original shipping object and interface
-var cost = shipping.request('78701', '10010', '2 lbs');
-log.add('Old cost: ' + cost);
+let cost = shipping.request('78701', '10010', '2 lbs');
+log.add(`Old cost: ${cost}`);
 // new shipping object with adapted interface
 cost = adapter.request('78701', '10010', '2 lbs');
 ```
@@ -901,7 +902,9 @@ const __decorate = function (decorators, target, key, desc) {
   }
 
   for (let i = decorators.length - 1; i >= 0; i--) {
-    if ((decorator = decorators[i])) {
+    if (decorators[i]) {
+      decorator = decorators[i];
+
       if (argumentsLength < 3) {
         // if the decorator function returns a value use it;
         // otherwise use the original.
@@ -933,7 +936,7 @@ const __decorate = function (decorators, target, key, desc) {
 
 符合开放封闭原则和单一职责模式.
 
-```javascript
+```js
 // 构造函数
 function Sale(price) {
   this.price = price || 100;
@@ -946,45 +949,44 @@ Sale.prototype.getPrice = function () {
 // 通过uber属性获得上一次装饰后的结果
 Sale.decorators = {};
 Sale.decorators.fedTax = {
-  getPrice: function () {
-    var price = this.uber.getPrice();
+  getPrice() {
+    let price = this.uber.getPrice();
     price += (price * 5) / 100;
     return price;
   },
 };
 Sale.decorators.quebec = {
-  getPrice: function () {
-    var price = this.uber.getPrice();
+  getPrice() {
+    let price = this.uber.getPrice();
     price += (price * 7.5) / 100;
     return price;
   },
 };
 Sale.decorators.money = {
-  getPrice: function () {
-    return '$' + this.uber.getPrice().toFixed(2);
+  getPrice() {
+    return `$${this.uber.getPrice().toFixed(2)}`;
   },
 };
 Sale.decorators.cdn = {
-  getPrice: function () {
-    return 'CDN$ ' + this.uber.getPrice().toFixed(2);
+  getPrice() {
+    return `CDN$ ${this.uber.getPrice().toFixed(2)}`;
   },
 };
 
 Sale.prototype.decorate = function (decorator) {
-  var F = function () {},
-    overrides = this.constructor.decorators[decorator],
-    i,
-    newObj;
+  const F = function () {};
+  const overrides = this.constructor.decorators[decorator];
 
   // 临时代理构造函数
   F.prototype = this;
-  newObj = new F();
+  const newObj = new F();
+
   // 传递实现的关键
   // 通过uber属性获得上一次装饰后的结果
   newObj.uber = F.prototype;
 
-  for (i in overrides) {
-    if (overrides.hasOwnProperty(i)) {
+  for (const i in overrides) {
+    if (Object.prototype.hasOwnProperty.call(overrides, i)) {
       newObj[i] = overrides[i];
     }
   }
@@ -995,7 +997,7 @@ Sale.prototype.decorate = function (decorator) {
 
 #### Decorators List
 
-```javascript
+```js
 // 构造函数
 function Sale(price) {
   this.price = price > 0 || 100;
@@ -1008,18 +1010,18 @@ Sale.prototype.getPrice = function () {
 // 定义具体装饰器
 Sale.decorators = {};
 Sale.decorators.fedTax = {
-  getPrice: function (price) {
+  getPrice(price) {
     return price + (price * 5) / 100;
   },
 };
 Sale.decorators.quebec = {
-  getPrice: function (price) {
+  getPrice(price) {
     return price + (price * 7.5) / 100;
   },
 };
 Sale.decorators.money = {
-  getPrice: function (price) {
-    return '$' + price.toFixed(2);
+  getPrice(price) {
+    return `$${price.toFixed(2)}`;
   },
 };
 
@@ -1027,13 +1029,11 @@ Sale.prototype.decorate = function (decorator) {
   this.decorators_list.push(decorator);
 };
 Sale.prototype.getPrice = function () {
-  var price = this.price,
-    i,
-    max = this.decorators_list.length,
-    name;
+  let price = this.price;
+  const max = this.decorators_list.length;
 
-  for (i = 0; i < max; i += 1) {
-    name = this.decorators_list[i];
+  for (let i = 0; i < max; i += 1) {
+    const name = this.decorators_list[i];
     // 传递实现的关键
     // 通过循环叠加上一次装饰后的结果
     price = Sale.decorators[name].getPrice(price);
@@ -1058,7 +1058,7 @@ function MacBook() {
 
 // Decorator 1
 function Memory(macBook) {
-  var v = macBook.cost();
+  const v = macBook.cost();
   macBook.cost = function () {
     return v + 75;
   };
@@ -1066,7 +1066,7 @@ function Memory(macBook) {
 
 // Decorator 2
 function Engraving(macBook) {
-  var v = macBook.cost();
+  const v = macBook.cost();
   macBook.cost = function () {
     return v + 200;
   };
@@ -1074,7 +1074,7 @@ function Engraving(macBook) {
 
 // Decorator 3
 function Insurance(macBook) {
-  var v = macBook.cost();
+  const v = macBook.cost();
   macBook.cost = function () {
     return v + 250;
   };
@@ -1082,7 +1082,7 @@ function Insurance(macBook) {
 ```
 
 ```js
-var mb = new MacBook();
+const mb = new MacBook();
 Memory(mb);
 Engraving(mb);
 Insurance(mb);
@@ -1155,9 +1155,9 @@ sabertazimi.addMyEvent = function (el, ev, fn) {
   if (el.addEventListener) {
     el.addEventListener(ev, fn, false);
   } else if (el.attachEvent) {
-    el.attachEvent('on' + ev, fn);
+    el.attachEvent(`on${ev}`, fn);
   } else {
-    el['on' + ev] = fn;
+    el[`on${ev}`] = fn;
   }
 };
 ```
@@ -1178,11 +1178,11 @@ function Flyweight(make, model, processor) {
   this.processor = processor;
 }
 
-var FlyWeightFactory = (function () {
-  var flyweights = {};
+const FlyWeightFactory = (function () {
+  const flyweights = {};
 
   return {
-    get: function (make, model, processor) {
+    get(make, model, processor) {
       // 不存在所需享元，新建新享元
       if (!flyweights[make + model]) {
         flyweights[make + model] = new Flyweight(make, model, processor);
@@ -1191,15 +1191,15 @@ var FlyWeightFactory = (function () {
       return flyweights[make + model];
     },
 
-    getCount: function () {
-      var count = 0;
-      for (var f in flyweights) count++;
+    getCount() {
+      let count = 0;
+      for (const f in flyweights) count++;
       return count;
     },
   };
 })();
 
-var Computer = function (make, model, processor, memory, tag) {
+const Computer = function (make, model, processor, memory, tag) {
   this.flyweight = FlyWeightFactory.get(make, model, processor);
   this.memory = memory;
   this.tag = tag;
@@ -1210,27 +1210,27 @@ var Computer = function (make, model, processor, memory, tag) {
 };
 
 function ComputerCollection() {
-  var computers = {};
-  var count = 0;
+  const computers = {};
+  let count = 0;
 
   return {
-    add: function (make, model, processor, memory, tag) {
+    add(make, model, processor, memory, tag) {
       computers[tag] = new Computer(make, model, processor, memory, tag);
       count++;
     },
 
-    get: function (tag) {
+    get(tag) {
       return computers[tag];
     },
 
-    getCount: function () {
+    getCount() {
       return count;
     },
   };
 }
 
 (function () {
-  var computers = new ComputerCollection();
+  const computers = new ComputerCollection();
 
   computers.add('Dell', 'Studio XPS', 'Intel', '5G', 'Y755P');
   computers.add('Dell', 'Studio XPS', 'Intel', '6G', 'X997T');
@@ -1239,8 +1239,8 @@ function ComputerCollection() {
   computers.add('HP', 'Envy', 'Intel', '4G', 'CNU883701');
   computers.add('HP', 'Envy', 'Intel', '2G', 'TXU003283');
 
-  console.log('Computers: ' + computers.getCount());
-  console.log('Flyweights: ' + FlyWeightFactory.getCount());
+  console.log(`Computers: ${computers.getCount()}`);
+  console.log(`Flyweights: ${FlyWeightFactory.getCount()}`);
 })();
 ```
 
@@ -1294,16 +1294,16 @@ function GeoProxy() {
   const geocache = {};
 
   return {
-    getLatLng: function (address) {
+    getLatLng(address) {
       if (!geocache[address]) {
         geocache[address] = geocoder.getLatLng(address);
       }
-      log.add(address + ': ' + geocache[address]);
+      log.add(`${address}: ${geocache[address]}`);
       return geocache[address];
     },
-    getCount: function () {
+    getCount() {
       let count = 0;
-      for (var code in geocache) {
+      for (const code in geocache) {
         count++;
       }
       return count;
@@ -1328,7 +1328,7 @@ const reactive = new Proxy(original, {
   },
 });
 
-reactive.name; // 'Tracking: name'
+console.log(reactive.name); // 'Tracking: name'
 reactive.name = 'bob'; // 'updating UI...'
 ```
 
@@ -1443,7 +1443,7 @@ SimpleCommand.prototype.execute = function () {
 
 ```js
 module.exports = (function () {
-  var manager = {};
+  const manager = {};
 
   // command to be encapsulated
   manager.isNull = function (nu) {
@@ -1457,22 +1457,16 @@ module.exports = (function () {
   };
 
   // public api
-  function execute(command) {
-    return (
-      manager[command] &&
-      manager[command].apply(manager, [].slice.call(arguments, 1))
-    );
+  function execute(command, ...args) {
+    return manager[command] && manager[command](...args);
   }
   function run(command) {
-    return (
-      manager[command] &&
-      manager[command].apply(manager, [].slice.call(arguments, 1))
-    );
+    return manager[command] && manager[command](...arg);
   }
 
   return {
-    execute: execute,
-    run: run,
+    execute,
+    run,
   };
 })();
 ```
@@ -1530,7 +1524,7 @@ const InsertActions = new InsertActions();
 const HelpActions = new HelpActions();
 
 const appMenuBar = new MenuBar();
-//-----------
+// -----------
 const fileMenu = new Menu('File');
 const openCommand = new MenuCommand(fileActions.open);
 const closeCommand = new MenuCommand(fileActions.close);
@@ -1543,7 +1537,7 @@ fileMenu.add(new MenuItem('Save', saveCommand));
 fileMenu.add(new MenuItem('Close', saveAsCommand));
 
 appMenuBar.add(fileMenu);
-//--------------
+// --------------
 const editMenu = new Menu('Edit');
 const cutCommand = new MenuCommand(EditActions.cut);
 const copyCommand = new MenuCommand(EditActions.copy);
@@ -1557,13 +1551,13 @@ editMenu.add(new MenuItem('Delete', deleteCommand));
 
 appMenuBar.add(editMenu);
 
-//------------
+// ------------
 const insertMenu = new Menu('Insert');
 const textBlockCommand = new MenuCommand(InsertActions.textBlock);
 insertMenu.add(new MenuItem('Text  Block', textBlockCommand));
 appMenuBar.add(insertMenu);
 
-//------------
+// ------------
 const helpMenu = new Menu('Help');
 const showHelpCommand = new MenuCommand(HelpActions.showHelp());
 helpMenu.add(new MenuItem('Show Help', showHelpCommand));
@@ -1592,28 +1586,28 @@ const Cursor = function (width, height, parent) {
 };
 
 Cursor.prototype = {
-  move: function (x, y) {
-    var _this = this;
-    this.commandStack.push(function () {
-      _this.lineTo(x, y);
+  move(x, y) {
+    this.commandStack.push(() => {
+      // `this` point to `Cursor`.
+      this.lineTo(x, y);
     });
   },
-  lineTo: function (x, y) {
+  lineTo(x, y) {
     this.position.x += x;
     this.position.y += y;
     this.ctx.lineTo(this.position.x, this.position.y);
   },
-  executeCommands: function () {
+  executeCommands() {
     this.position = { x: this.width / 2, y: this.height / 2 };
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.ctx.beginPath();
     this.ctx.moveTo(this.position.x, this.position.y);
-    for (var i = 0; i < this.commandStack.length; i++) {
+    for (let i = 0; i < this.commandStack.length; i++) {
       this.commandStack[i]();
     }
     this.ctx.stroke();
   },
-  undo: function () {
+  undo() {
     this.commandStack.pop();
     this.executeCommands();
   },
@@ -1635,11 +1629,12 @@ class Stuff {
   }
 
   [Symbol.iterator]() {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
     let i = 0;
 
     return {
-      next: function () {
+      next() {
         return {
           done: i > 1,
           value: self[i++ === 0 ? 'a' : 'b'],
@@ -1649,18 +1644,19 @@ class Stuff {
   }
 
   get backwards() {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
     let i = 0;
 
     return {
-      next: function () {
+      next() {
         return {
           done: i > 1,
           value: self[i++ === 0 ? 'b' : 'a'],
         };
       },
       // Make iterator iterable
-      [Symbol.iterator]: function () {
+      [Symbol.iterator]() {
         return this;
       },
     };
@@ -1821,7 +1817,7 @@ ObserverList.prototype.Get = function (index) {
 };
 
 ObserverList.prototype.Insert = function (obj, index) {
-  var pointer = -1;
+  let pointer = -1;
 
   if (index === 0) {
     this.observerList.unshift(obj);
@@ -1835,8 +1831,8 @@ ObserverList.prototype.Insert = function (obj, index) {
 };
 
 ObserverList.prototype.IndexOf = function (obj, startIndex) {
-  var i = startIndex,
-    pointer = -1;
+  let i = startIndex;
+  let pointer = -1;
 
   while (i < this.observerList.length) {
     if (this.observerList[i] === obj) {
@@ -1870,8 +1866,8 @@ Subject.prototype.RemoveObserver = function (observer) {
 };
 
 Subject.prototype.Notify = function (context) {
-  var observerCount = this.observers.Count();
-  for (var i = 0; i < observerCount; i++) {
+  const observerCount = this.observers.Count();
+  for (let i = 0; i < observerCount; i++) {
     this.observers.Get(i).Update(context);
   }
 };
@@ -1885,7 +1881,7 @@ function Observer() {
 
 // Extend an object with an extension
 function extend(extension, obj) {
-  for (var key in extension) {
+  for (const key in extension) {
     obj[key] = extension[key];
   }
 }
@@ -1904,10 +1900,10 @@ e.g Event Bus in Vue, Event Emitter in Node.
 
 ```js
 module.exports = (function (window, doc, undef) {
-  var pubSub = {};
+  const pubSub = {};
 
-  var topics = {},
-    subUid = -1;
+  const topics = {};
+  let subUid = -1;
 
   pubSub.publish = function (topic, args) {
     // undefined check
@@ -1916,8 +1912,8 @@ module.exports = (function (window, doc, undef) {
     }
 
     setTimeout(function () {
-      var subscribers = topics[topic],
-        len = subscribers ? subscribers.length : 0;
+      const subscribers = topics[topic];
+      let len = subscribers ? subscribers.length : 0;
 
       while (len--) {
         subscribers[len].func(topic, args);
@@ -1934,18 +1930,18 @@ module.exports = (function (window, doc, undef) {
     }
 
     // add observer to observerList (topics)
-    var token = (++subUid).toString();
+    const token = (++subUid).toString();
     topics[topic].push({
-      token: token,
-      func: func,
+      token,
+      func,
     });
     return token;
   };
 
   pubSub.unsubscribe = function (token) {
-    for (var m in topics) {
+    for (const m in topics) {
       if (topics[m]) {
-        for (var i = 0, j = topics[m].length; i < j; i++) {
+        for (let i = 0, j = topics[m].length; i < j; i++) {
           if (topics[m][i].token === token) {
             topics[m].splice(i, 1);
             return token;
@@ -1963,11 +1959,11 @@ module.exports = (function (window, doc, undef) {
 - test.js
 
 ```js
-var pubsub = require('./pubSub.js');
+const pubsub = require('./pubSub.js');
 
 // add observer to observerList
-var testFirstSub = pubsub.subscribe('login', function (topic, data) {
-  console.log(topic + ': ' + data);
+const testFirstSub = pubsub.subscribe('login', function (topic, data) {
+  console.log(`${topic}: ${data}`);
 });
 
 // subject broadcast/notify, observer update
@@ -1982,20 +1978,20 @@ setTimeout(function () {
 // permanent subscribe
 pubsub.subscribe('sum', function (topic, data) {
   if (toString.apply(data) !== '[object Array]') {
-    console.log('Please input array: * ' + data + ' * is not array!');
+    console.log(`Please input array: * ${data} * is not array!`);
   } else {
-    var tmp = data.filter(function (item) {
+    const tmp = data.filter(function (item) {
       return toString.apply(item) === '[object Number]';
     });
 
     if (tmp.length) {
-      var sum = tmp.reduce(function (previous, current) {
+      const sum = tmp.reduce(function (previous, current) {
         return previous + current;
       }, 0);
-      console.log('Sum of ' + data + ' : ' + sum);
+      console.log(`Sum of ${data} : ${sum}`);
     } else {
       console.log(
-        'Please input number array: * ' + data + ' * is not number array!'
+        `Please input number array: * ${data} * is not number array!`
       );
     }
   }
@@ -2014,7 +2010,7 @@ pubsub.publish('sum', ['a', 'b', 'c', 'd', 'e']);
 ```js
 // Equivalent to subscribe(topicName, callback)
 $(document).on('topicName', function () {
-  //..perform some behavior
+  // ..perform some behavior
 });
 
 // Equivalent to publish(topicName)
@@ -2038,26 +2034,23 @@ $(document).off('topicName');
  *   - make it safer to use
  */
 
-var MicroEvent = function () {};
+const MicroEvent = function () {};
 MicroEvent.prototype = {
-  bind: function (event, fct) {
+  bind(event, fct) {
     this._events = this._events || {};
     this._events[event] = this._events[event] || [];
     this._events[event].push(fct);
   },
-  unbind: function (event, fct) {
+  unbind(event, fct) {
     this._events = this._events || {};
     if (event in this._events === false) return;
     this._events[event].splice(this._events[event].indexOf(fct), 1);
   },
-  trigger: function (event /* , args... */) {
+  trigger(event, ...args) {
     this._events = this._events || {};
     if (event in this._events === false) return;
-    for (var i = 0; i < this._events[event].length; i++) {
-      this._events[event][i].apply(
-        this,
-        Array.prototype.slice.call(arguments, 1)
-      );
+    for (let i = 0; i < this._events[event].length; i++) {
+      this._events[event][i].apply(this, args);
     }
   },
 };
@@ -2070,8 +2063,8 @@ MicroEvent.prototype = {
  * @param {Object} the object which will support MicroEvent
  */
 MicroEvent.mixin = function (destObject) {
-  var props = ['bind', 'unbind', 'trigger'];
-  for (var i = 0; i < props.length; i++) {
+  const props = ['bind', 'unbind', 'trigger'];
+  for (let i = 0; i < props.length; i++) {
     if (typeof destObject === 'function') {
       destObject.prototype[props[i]] = MicroEvent.prototype[props[i]];
     } else {
@@ -2098,67 +2091,56 @@ if (typeof module !== 'undefined' && 'exports' in module) {
 
 ```js
 (function ($) {
+  // Pre-compile template and "cache" it using closure
+  const resultTemplate = _.template($('#resultTemplate').html());
 
-   // Pre-compile template and "cache" it using closure
-   var resultTemplate = _.template($( "#resultTemplate" ).html());
+  // Subscribe to the new search tags topic
+  $.subscribe('/search/tags', function (tags) {
+    $('#searchResults').html(`Searched for: ${tags}`);
+  });
 
-   // Subscribe to the new search tags topic
-   $.subscribe( "/search/tags" , function( tags ) {
-       $( "#searchResults" )
-                .html("
+  // Subscribe to the new results topic
+  $.subscribe('/search/resultSet', function (results) {
+    $('#searchResults').append(resultTemplate(results));
+  });
 
+  // Submit a search query and publish tags on the /search/tags topic
+  $('#flickrSearch').submit(function (e) {
+    e.preventDefault();
+    const tags = $(this).find('#query').val();
 
-  Searched for:" + tags + "
+    if (!tags) {
+      return;
+    }
 
-");
-   });
+    $.publish('/search/tags', [$.trim(tags)]);
+  });
 
-   // Subscribe to the new results topic
-   $.subscribe( "/search/resultSet" , function( results ){
+  // Subscribe to new tags being published and perform
+  // a search query using them. Once data has returned
+  // publish this data for the rest of the application
+  // to consume
 
-       $( "#searchResults" ).append(resultTemplate( results ));
+  $.subscribe('/search/tags', function (tags) {
+    // Ajax Request
+    $.getJSON(
+      'http://api.flickr.com/services/feeds/',
+      {
+        tags,
+        tagMode: 'any',
+        format: 'json',
+      },
 
-   });
+      function (data) {
+        if (!data.items.length) {
+          return;
+        }
 
-   // Submit a search query and publish tags on the /search/tags topic
-   $( "#flickrSearch" ).submit( function( e ) {
-
-       e.preventDefault();
-       var tags = $(this).find( "#query").val();
-
-       if ( !tags ){
-        return;
-       }
-
-       $.publish( "/search/tags" , [ $.trim(tags) ]);
-
-   });
-
-
-   // Subscribe to new tags being published and perform
-   // a search query using them. Once data has returned
-   // publish this data for the rest of the application
-   // to consume
-
-   $.subscribe("/search/tags", function( tags ) {
-     // Ajax Request
-     $.getJSON( "http://api.flickr.com/services/feeds/", {
-              tags: tags,
-              tagMode: "any",
-              format: "json"
-            },
-
-          function( data ){
-
-              if( !data.items.length ) {
-                return;
-              }
-
-              $.publish( "/search/resultSet" , data.items  );
-       });
-
-   });
-}());
+        $.publish('/search/resultSet', data.items);
+      }
+    );
+  });
+})();
 ```
 
 ### State Pattern
@@ -2222,9 +2204,9 @@ class OffState extends State {
   }
 }
 
-const switch = new Switch();
-switch.on();
-switch.off();
+const button = new Switch();
+button.on();
+button.off();
 ```
 
 ### Strategy Pattern
@@ -2279,12 +2261,14 @@ class TextProcessor {
       case OutputFormat.html:
         this.listStrategy = new HtmlListStrategy();
         break;
+      default:
+        throw new Error('Unsupported output format!');
     }
   }
 
   appendList(items) {
     this.listStrategy.start(this.buffer);
-    for (let item of items) this.listStrategy.addListItem(this.buffer, item);
+    for (const item of items) this.listStrategy.addListItem(this.buffer, item);
     this.listStrategy.end(this.buffer);
   }
 
@@ -2357,9 +2341,15 @@ class Game {
   }
 
   start() {}
-  get haveWinner() {}
   takeTurn() {}
-  get winningPlayer() {}
+
+  get haveWinner() {
+    return this.haveWinner;
+  }
+
+  get winningPlayer() {
+    return this.winningPlayer;
+  }
 }
 
 class Chess extends Game {
@@ -2528,8 +2518,12 @@ $controller->action();
 
 With dependency injection:
 
-```js
+```tsx
 // dependency provider
+// top module
+import * as React from 'react';
+import type { IProvider } from './providers';
+
 export interface IProvider<T> {
   provide(): T;
 }
@@ -2537,13 +2531,9 @@ export interface IProvider<T> {
 @injectable()
 export class NameProvider implements IProvider<string> {
   provide() {
-    return "World";
+    return 'World';
   }
 }
-
-// top module
-import * as React from "react";
-import { IProvider } from "./providers";
 
 export class Hello extends React.Component {
   private readonly nameProvider: IProvider<string>;
@@ -2557,14 +2547,14 @@ export class Hello extends React.Component {
 ### Class Pattern
 
 ```js
-var Person = function (firstName, lastName) {
+const Person = function (firstName, lastName) {
   this.firstName = firstName;
   this.lastName = lastName;
   this.gender = 'male';
 };
 
 // Define a subclass constructor for for "Superhero":
-var Superhero = function (firstName, lastName, powers) {
+const Superhero = function (firstName, lastName, powers) {
   // Invoke the superclass constructor on the new object
   // then use .call() to invoke the constructor as a method of
   // the object to be initialized.
@@ -2577,7 +2567,7 @@ SuperHero.prototype = Object.create(Person.prototype);
 ```
 
 ```js
-var superman = new Superhero('Clark', 'Kent', ['flight', 'heat-vision']);
+const superman = new Superhero('Clark', 'Kent', ['flight', 'heat-vision']);
 console.log(superman);
 ```
 
@@ -2588,15 +2578,15 @@ console.log(superman);
 - 不改变原型链
 
 ```js
-function mix() {
-  var arg,
-    prop,
-    child = {};
+function mix(...args) {
+  let arg;
+  let prop;
+  const child = {};
 
-  for (arg = 0; arg < arguments.length; arg += 1) {
-    for (prop in arguments[arg]) {
-      if (arguments[arg].hasOwnProperty(prop)) {
-        child[prop] = arguments[arg][prop];
+  for (arg = 0; arg < args.length; arg += 1) {
+    for (prop in args[arg]) {
+      if (Object.prototype.hasOwnProperty.call(args[arg], prop)) {
+        child[prop] = args[arg][prop];
       }
     }
   }
@@ -2606,7 +2596,7 @@ function mix() {
 ```
 
 ```js
-var cake = mix(
+const cake = mix(
   { eggs: 2, large: true },
   { butter: 1, salted: true },
   { flour: '3 cups' },
@@ -2618,17 +2608,18 @@ var cake = mix(
 
 ```js
 // Extend an existing object with a method from another
-function mix(receivingClass, givingClass) {
+function mix(...args) {
+  const receivingClass = args[0];
+  const givingClass = args[1];
+
   // mix-in provide certain methods
-  if (arguments[2]) {
-    for (var i = 2, len = arguments.length; i < len; i++) {
-      receivingClass.prototype[arguments[i]] =
-        givingClass.prototype[arguments[i]];
+  if (args[2]) {
+    for (let i = 2, len = args.length; i < len; i++) {
+      receivingClass.prototype[args[i]] = givingClass.prototype[args[i]];
     }
-  }
-  // mix-in provide obj
-  else {
-    for (var methodName in givingClass.prototype) {
+  } else {
+    // mix-in provide obj
+    for (const methodName in givingClass.prototype) {
       if (!receivingClass.prototype[methodName]) {
         receivingClass.prototype[methodName] =
           givingClass.prototype[methodName];
@@ -2664,7 +2655,7 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
 ```js
 (function ($) {
   $.extend($.fn, {
-    myPlugin: function () {
+    myPlugin() {
       // your plugin logic
     },
   });
@@ -2675,6 +2666,7 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
 // the semi-colon before the function invocation is a safety
 // net against concatenated scripts and/or other plugins
 // that are not closed properly.
+// eslint-disable-next-line no-shadow-restricted-names
 (function ($, window, document, undefined) {
   // undefined is used here as the undefined global
   // variable in ECMAScript 3 and is mutable (i.e. it can
@@ -2690,10 +2682,10 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
   // regularly referenced in our plugin).
 
   // Create the defaults once
-  var pluginName = 'defaultPluginName',
-    defaults = {
-      propertyName: 'value',
-    };
+  const pluginName = 'defaultPluginName';
+  const defaults = {
+    propertyName: 'value',
+  };
 
   // The actual plugin constructor
   function Plugin(element, options) {
@@ -2723,8 +2715,8 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
   // preventing against multiple instantiations
   $.fn[pluginName] = function (options) {
     return this.each(function () {
-      if (!$.data(this, 'plugin_' + pluginName)) {
-        $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+      if (!$.data(this, `plugin_${pluginName}`)) {
+        $.data(this, `plugin_${pluginName}`, new Plugin(this, options));
       }
     });
   };

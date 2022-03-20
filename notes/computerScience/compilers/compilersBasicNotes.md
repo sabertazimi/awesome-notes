@@ -130,13 +130,13 @@ Backus-Naur Form:
 
 #### 形式表示
 
-```js
-// 具有顺序性
-e -> "\0" // basic definition
-  | c // basic definition
-  | e | e // recursive definition
-  | ee // recursive definition
-  | e* // recursive definition
+```bash
+# 具有顺序性
+e -> "\0" # basic definition
+  | c # basic definition
+  | e | e # recursive definition
+  | ee # recursive definition
+  | e* # recursive definition
 ```
 
 #### 正则语法糖(Syntax Sugar)
@@ -150,13 +150,13 @@ e -> "\0" // basic definition
 
 ```js
 // 标识符
-[a-zA-Z\_][a-zA-Z\_0-9]*
+const identifier = /[a-zA-Z\_][a-zA-Z\_0-9]*/g;
 
 // decimal integer
-(+|-)?(0|[1-9][0-9]*)
+const integer = /(+|-)?(0|[1-9][0-9]*)/g;
 
 // decimal float
-(+|-)?(0|[1-9][0-9]*|)?\.[0-9]+
+const float = /(+|-)?(0|[1-9][0-9]*|)?\.[0-9]+/g;
 ```
 
 ### 分析树
