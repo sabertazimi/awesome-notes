@@ -254,14 +254,13 @@ jobs:
       - name: Run cargo-tarpaulin
         uses: actions-rs/tarpaulin@v0.1
         with:
-          args: '--all-features --workspace --ignore-tests --out Lcov'
+          args: --all-features --workspace --ignore-tests --out Lcov
       - name: Upload to Coveralls
-        # upload only if push
         if: ${{ github.event_name == 'push' }}
         uses: coverallsapp/github-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: './lcov.info'
+          path-to-lcov: ./lcov.info
 ```
 
 ## Ownership
