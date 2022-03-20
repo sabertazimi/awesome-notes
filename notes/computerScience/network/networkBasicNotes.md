@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [CS, Network]
 ---
 
-# Computer NetWorking Notes
+# Computer Networking Notes
 
 [TOC]
 
