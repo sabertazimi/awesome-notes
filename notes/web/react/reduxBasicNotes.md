@@ -102,11 +102,14 @@ export default function configureAppStore(preloadedState) {
 // localStorage.getItem('state')/localStorage.setItem('state', serializedState)
 const persistedState = loadLocalStorageState();
 const appStore = createStore(rootReducers, persistedState);
-const appStore.subscribe(throttle(() => {
+
+appStore.subscribe(
+  throttle(() => {
     saveLocalStorageState({
-        todos: store.getState().todos
+      todos: store.getState().todos,
     });
-}, 1000));
+  }, 1000)
+);
 ```
 
 ### Normalized State
@@ -427,11 +430,10 @@ const INCREMENT = Symbol('increment');
 const increment = createAction(INCREMENT);
 
 increment.toString();
-// returns the string 'Symbol(increment)',
-// not the INCREMENT symbol itself
 
-increment.toString() === INCREMENT;
-// false
+// returns the string 'Symbol(increment)',
+// not the INCREMENT symbol itself.
+assert(increment.toString() === INCREMENT, false);
 
 const counterReducer = createReducer(0, {
   // The following case reducer will NOT trigger for
@@ -457,21 +459,19 @@ const counterReducer = createReducer(0, {
 ```js
 function createReducer(initialState, handlers) {
   return function reducer(state = initialState, action) {
-    if (handlers.hasOwnProperty(action.type)) {
-      return handlers[action.type](state, action)
+    if (Object.prototype.hasOwnProperty.call(handlers, action.type)) {
+      return handlers[action.type](state, action);
     } else {
-      return state
+      return state;
     }
-  }
+  };
 }
 
 const reducer = createReducer(initialState, {
   reset: () => initialState,
-  increment: state => ({ count: state.count + 1}),
-  decrement: state => ({ count: state.count + 1}),
-  [ActionTypes.ADD_TODO]: (state, action) => {
-    ...;
-  },
+  increment: state => ({ count: state.count + 1 }),
+  decrement: state => ({ count: state.count + 1 }),
+  [ActionTypes.ADD_TODO]: (state, action) => {},
 });
 ```
 
@@ -494,7 +494,7 @@ function undoable(reducer) {
     const { past, present, future } = state;
 
     switch (action.type) {
-      case 'UNDO':
+      case 'UNDO': {
         const previous = past[past.length - 1];
         const newPast = past.slice(0, past.length - 1);
         return {
@@ -502,7 +502,8 @@ function undoable(reducer) {
           present: previous,
           future: [present, ...future],
         };
-      case 'REDO':
+      }
+      case 'REDO': {
         const next = future[0];
         const newFuture = future.slice(1);
         return {
@@ -510,7 +511,8 @@ function undoable(reducer) {
           present: next,
           future: newFuture,
         };
-      default:
+      }
+      default: {
         // Delegate handling the action to the passed reducer
         const newPresent = reducer(present, action);
         if (present === newPresent) {
@@ -521,6 +523,7 @@ function undoable(reducer) {
           present: newPresent,
           future: [],
         };
+      }
     }
   };
 }
@@ -528,14 +531,14 @@ function undoable(reducer) {
 
 ```js
 // This is a reducer
+import { createStore } from 'redux';
+
 function todos(state = [], action) {
   /* ... */
 }
 
 // This is also a reducer!
 const undoableTodos = undoable(todos);
-
-import { createStore } from 'redux';
 const store = createStore(undoableTodos);
 
 store.dispatch({
@@ -686,7 +689,8 @@ Internally, it uses `createAction` and `createReducer`,
 also use `Immer` to write immutable updates.
 
 ```ts
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface CounterState {
   value: number;
@@ -722,7 +726,8 @@ happen to end up with the **same** action type string,
 the function from **reducers** will be used to handle that action type.
 
 ```ts
-import { createAction, createSlice, Action, AnyAction } from '@reduxjs/toolkit';
+import type { Action, AnyAction } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 
 interface RejectedAction extends Action {
   error: Error;
@@ -798,11 +803,13 @@ Keep `useSelector` away from returns a new array reference:
 
 ```ts
 // ❌ Bad: cause always re-render problem
-const postsForUser = useSelector(state => {
-  const allPosts = selectAllPosts(state);
-  // Returns a new array reference every time.
-  return allPosts.filter(post => post.user === userId);
-});
+function App() {
+  const postsForUser = useSelector(state => {
+    const allPosts = selectAllPosts(state);
+    // Returns a new array reference every time.
+    return allPosts.filter(post => post.user === userId);
+  });
+}
 ```
 
 ### UseSelector Hook
@@ -924,7 +931,7 @@ export default thunk;
 `AppThunk` type definition:
 
 ```ts
-import { Action, ThunkAction } from '@reduxjs/toolkit';
+import type { Action, ThunkAction } from '@reduxjs/toolkit';
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
@@ -1131,17 +1138,17 @@ function applyMiddleware(store, middlewares) {
 ```
 
 ```js
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 
 // applyMiddleware takes createStore() and returns
 // a function with a compatible API.
-let createStoreWithMiddleware = applyMiddleware(
+const createStoreWithMiddleware = applyMiddleware(
   logger,
   crashReporter
 )(createStore);
 
 // Use it like you would use createStore()let todoApp = combineReducers(reducers);
-let store = createStoreWithMiddleware(todoApp);
+const store = createStoreWithMiddleware(todoApp);
 ```
 
 ### Scheduler Middleware
@@ -1156,7 +1163,7 @@ const timeoutScheduler = store => next => action => {
     return next(action);
   }
 
-  let intervalId = setTimeout(() => next(action), action.meta.delay);
+  const intervalId = setTimeout(() => next(action), action.meta.delay);
 
   return function cancel() {
     clearInterval(intervalId);
@@ -1169,27 +1176,33 @@ const timeoutScheduler = store => next => action => {
 ```js
 // thunk middleware
 const thunk = store => next => action =>
-  typeof action === 'function' ?
-    action(store.dispatch, store.getState) :
-    next(action);
+  typeof action === 'function'
+    ? action(store.dispatch, store.getState)
+    : next(action);
 
 const createStoreWithMiddleware = applyMiddleware(
-  logger，
-  thunk
+  logger,
+  thunk,
   timeoutScheduler
 )(createStore);
 const store = createStoreWithMiddleware(combineReducers(reducers));
 
 function addFave(tweetId) {
   return (dispatch, getState) => {
-    if (getState.tweets[tweetId] && getState.tweets[tweetId].liked)
-        return;
+    if (getState.tweets[tweetId] && getState.tweets[tweetId].liked) {
+      return;
+    }
 
-    dispatch({type: IS_LOADING});
+    dispatch({ type: IS_LOADING });
     // Yay, that could be sync or async dispatching
     remote.addFave(tweetId).then(
-      (res) => { dispatch({type: ADD_FAVE_SUCCEED}) },
-      (err) => { dispatch({type: ADD_FAVE_FAILED, err: err}) },
+      res => {
+        dispatch({ type: ADD_FAVE_SUCCEED });
+      },
+      err => {
+        dispatch({ type: ADD_FAVE_FAILED, err });
+      }
+    );
   };
 }
 
@@ -1203,12 +1216,14 @@ export interface Middleware<
   DispatchExt = {}, // optional override return behavior of `dispatch`
   S = any, // type of the Redux store state
   D extends Dispatch = Dispatch // type of the dispatch method
->
+> {
+  ext: DispatchExt;
+}
 ```
 
 ```ts
-import { Middleware } from 'redux';
-import { RootState } from '../store';
+import type { Middleware } from 'redux';
+import type { RootState } from '../store';
 
 export const exampleMiddleware: Middleware<
   {}, // Most middleware do not modify the dispatch return value
@@ -1522,8 +1537,9 @@ export const { selectAll: selectAllUsers, selectById: selectUserById } =
 ### Typed React Redux Hooks
 
 ```ts
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import store from './store';
+import type { TypedUseSelectorHook } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import type store from './store';
 
 type AppDispatch = typeof store.dispatch;
 type RootState = ReturnType<typeof store.getState>;
@@ -1535,7 +1551,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 ### Custom React Redux Hooks
 
 ```ts
-import { useSelector, shallowEqual } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 export default function useShallowEqualSelector(selector) {
   return useSelector(selector, shallowEqual);
@@ -1547,17 +1563,15 @@ import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 
-export default function useActions(actions, deps) {
+export default function useActions(actions) {
   const dispatch = useDispatch();
-  return useMemo(
-    () => {
-      if (Array.isArray(actions)) {
-        return actions.map(a => bindActionCreators(a, dispatch));
-      }
-      return bindActionCreators(actions, dispatch);
-    },
-    deps ? [dispatch, ...deps] : [dispatch]
-  );
+
+  return useMemo(() => {
+    if (Array.isArray(actions)) {
+      return actions.map(a => bindActionCreators(a, dispatch));
+    }
+    return bindActionCreators(actions, dispatch);
+  }, [actions, dispatch]);
 }
 ```
 
@@ -1705,7 +1719,7 @@ const applyMiddleware =
 
 const createStore = (reducer, middleware) => {
   // closure for storing global state
-  let state = undefined;
+  let state;
   const subscribers = [];
   const coreDispatch = action => {
     validateAction(action);
@@ -1755,7 +1769,7 @@ const createStore = (reducer, middleware) => {
 
 ```js
 const isValidKey = key => {
-  return ['type', 'payload', 'error', 'meta'].indexOf(key) > -1;
+  return ['type', 'payload', 'error', 'meta'].includes(key);
 };
 
 const validateAction = action => {
@@ -1764,7 +1778,7 @@ const validateAction = action => {
   }
 
   if (typeof action.type === 'undefined') {
-    throw new Error('Action must have a type!');
+    throw new TypeError('Action must have a type!');
   }
 
   if (!Object.keys(action).every(isValidKey)) {
@@ -1904,24 +1918,24 @@ Redux style [guide](https://redux.js.org/style-guide/style-guide):
 ```js
 // add new item to state array
 // bad and does not work case "ADD":
-return state.push(newItem);
+state.push(newItem);
 // Good case "ADD":
-return [...state, newItem];
+[...state, newItem];
 
 // delete new item to state array
 // bad and does not work case "DELETE":
-return state.splice(index, 1);
+state.splice(index, 1);
 // Good case "DELETE":
-return state.slice(0, index).concat(state.slice(index + 1));
+state.slice(0, index).concat(state.slice(index + 1));
 
 // update new item to state array
 // First way case "EDIT":
-return state
+state
   .slice(0, index)
   .concat([{ id: 'id', value: 'newValue' }])
   .slice(index + 1);
 // Second way case "EDIT":
-return state.map(item => {
+state.map(item => {
   if (item.id === 'id') {
     return {
       ...item,
@@ -1933,7 +1947,7 @@ return state.map(item => {
 });
 ```
 
-- action creator 里，用 promise/async/await 以及 redux-thunk 来帮助你完成想要的功能
+- Action creator: 用 promise/async/await 以及 redux-thunk 实现异步操作.
 
 ```js
 // bad
@@ -1955,21 +1969,18 @@ const loadTodo = (id, todos) => dispatch => {
 };
 ```
 
-- 在 test 里不管你用 tape 还是 mocha，请用 [enzyme.js](http://airbnb.io/enzyme/)
-- 有些时候有些项目你并不需要 redux
-
 ```js
 const fluxStandardAction = {
   type: 'ADD_TODO',
   payload: {
     text: 'Do something',
   },
-  meta: meta,
+  meta,
 };
 
 const fluxStandardAction = {
   type: 'ADD_TODO',
-  payload: new Error(),
+  payload: new Error('Error'),
   error: true,
 };
 ```

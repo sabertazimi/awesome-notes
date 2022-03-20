@@ -55,8 +55,8 @@ SELECT *
 - Allowlist user input.
 - Parameterized statements: use placeholders instead of variable interpolation.
 
-```js
-// Construct the SQL statement we want to run, specifying the parameter.
+```sql
+-- Construct the SQL statement we want to run, specifying the parameter.
 String sql = "SELECT * FROM users WHERE email = ?";
 ```
 
@@ -106,7 +106,7 @@ response.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
 
 ```js
 req.session.regenerate(function (err) {
-  // New session here
+  process(err);
 });
 ```
 
@@ -153,19 +153,16 @@ CSRF 利用的是网站对用户网页浏览器的信任.
 - 确保 `request` 正常渠道发起 (Hidden token check in form).
 - 开启同源策略 (**Same Origin Policy**).
 - Addition Authentication: input password again.
-
-```js
-express/csurf library
-```
+- Express: `csurf` library.
 
 ```html
 <a
   href="https://an.evil.site"
   target="_blank"
-  rel="noopener noreferrer
-nofollow"
-  >进入一个“邪恶”的网站</a
+  rel="noopener noreferrer nofollow"
 >
+  进入一个“邪恶”的网站
+</a>
 ```
 
 ```js
@@ -173,7 +170,7 @@ nofollow"
 'use strict';
 
 function openUrl(url) {
-  var newTab = window.open();
+  const newTab = window.open();
   newTab.opener = null;
   newTab.location = url;
 }
@@ -273,21 +270,23 @@ Disable DTD parse in XML parser
 - Code Information
 
 ```json
-{
-    Server: Apache/1.3.23
-    Accept-Ranges:  bytes
-    Content-length: 196
-    Connection: close
-    Content-Type: text/html
-    Cookie: SESSION_ID=XXXXX
-}
-{
-    Server: Microsoft-IIS/5.0
-    Content-Type: text/html
-    Accept-Ranges: bytes
-    ETag: "b0aac0542e25c31"
-    Content-Length: 7369
-}
+[
+  {
+    "Server": "Apache/1.3.23",
+    "Accept-Ranges": "bytes",
+    "Content-length": 196,
+    "Connection": "close",
+    "Content-Type": "text/html",
+    "Cookie": "SESSION_ID=XXXXX"
+  },
+  {
+    "Server": "Microsoft-IIS/5.0",
+    "Content-Type": "text/html",
+    "Accept-Ranges": "bytes",
+    "ETag": "b0aac0542e25c31",
+    "Content-Length": 7369
+  }
+]
 ```
 
 #### Information Leakage Protection

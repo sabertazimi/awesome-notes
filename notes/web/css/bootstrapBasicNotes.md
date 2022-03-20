@@ -140,7 +140,7 @@ navbar > container > nav/navbar-header/navbar-nav/navbar-form > li/a
 ```css
 body {
   z-index: 0;
-  padding: 50px 0 0 0;
+  padding: 50px 0 0;
 }
 
 .navbar-inverse {
@@ -1340,31 +1340,17 @@ Slide Show:
 ```
 
 ```js
-.carousel(options)
-
-Initializes the carousel with an optional options object
-and starts cycling through items.
-Copy
-
+// Initializes the carousel with an optional options object
+// and starts cycling through items.
 $('.carousel').carousel({
-  interval: 2000
-})
+  interval: 2000,
+});
 
-.carousel('cycle')
-
-Cycles through the carousel items from left to right.
-.carousel('pause')
-
-Stops the carousel from cycling through items.
-.carousel(number)
-
-Cycles the carousel to a particular frame (0 based, similar to an array).
-.carousel('prev')
-
-Cycles to the previous item.
-.carousel('next')
-
-Cycles to the next item.
+$('.carousel').carousel('cycle');
+$('.carousel').carousel('pause');
+$('.carousel').carousel(number);
+$('.carousel').carousel('prev');
+$('.carousel').carousel('next');
 ```
 
 ## Common Class
@@ -1443,7 +1429,9 @@ Some useful best practices:
 }
 
 @function theme-color-level($color-name: 'primary', $level: 0) {
+  /* stylelint-disable-next-line function-no-unknown */
   $color: theme-color($color-name);
+  /* stylelint-disable-next-line function-no-unknown */
   $color-base: if($level > 0, #000, #fff);
   $level: abs($level);
 
@@ -1452,7 +1440,9 @@ Some useful best practices:
 
 /* color contrast: color-yiq(color) */
 .custom-element {
+  /* stylelint-disable-next-line function-no-unknown */
   color: color-yiq(theme-color('dark'));
+  /* stylelint-disable-next-line function-no-unknown */
   background-color: color-yiq(#000);
 }
 ```
@@ -1626,6 +1616,7 @@ $card-bg: $violet-0;
 $breadcrumb-bg: $violet-0;
 $breadcrumb-divider-color: $gray-600 !default;
 $breadcrumb-active-color: $violet-3;
+/* stylelint-disable-next-line function-no-unknown */
 $breadcrumb-divider: quote('>');
 ```
 

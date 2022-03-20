@@ -105,6 +105,7 @@ $colors: (
 
 // Yep but nope
 $params: (true, 42, 'kittens');
+// stylelint-disable-next-line function-no-unknown
 $value: dummy(nth($params, 1), nth($params, 2), nth($params, 3));
 
 // Yep
@@ -130,9 +131,12 @@ only assign when variables hadn't been assigned
 
 ```scss
 @mixin box-shadow($x, $y, $blur, $c) {
-  -webkit-box-shadow: $x, $y, $blur, $c;
-  -moz-box-shadow: $x, $y, $blur, $c;
-  -ms-box-shadow: $x, $y, $blur, $c;
+  box-shadow: $x, $y, $blur, $c;
+  // stylelint-disable-next-line declaration-block-no-duplicate-properties
+  box-shadow: $x, $y, $blur, $c;
+  // stylelint-disable-next-line declaration-block-no-duplicate-properties
+  box-shadow: $x, $y, $blur, $c;
+  // stylelint-disable-next-line declaration-block-no-duplicate-properties
   box-shadow: $x, $y, $blur, $c;
 }
 

@@ -793,7 +793,10 @@ const ref = React.createRef();
 
 ```tsx
 type Ref = HTMLButtonElement;
-type Props = { children: React.ReactNode; type: 'submit' | 'button' };
+interface Props {
+  children: React.ReactNode;
+  type: 'submit' | 'button';
+}
 
 const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
   <button ref={ref} className="MyClassName" type={props.type}>
@@ -1121,7 +1124,7 @@ function mountWorkInProgressHook() {
     // hook 保存的数据.
     memoizedState: null,
     // 指向下一个 hook.
-    next: hookForB
+    next: hookForB,
     // 本次更新以 baseState 为基础计算新的 state.
     baseState: null,
     // 本次更新开始时已有的 update 队列.
@@ -1150,8 +1153,8 @@ function mountWorkInProgressHook() {
 
 ```js
 const MyReact = (function () {
-  let hooks = [],
-    currentHook = 0; // array of hooks, and an iterator!
+  const hooks = [];
+  let currentHook = 0; // array of hooks, and an iterator!
   return {
     render(Component) {
       const Comp = Component(); // run effects
@@ -1266,7 +1269,7 @@ function mountMemo<T>(
   const nextDeps = deps === undefined ? null : deps;
   const nextValue = nextCreate();
   hook.memoizedState = [nextValue, nextDeps];
-  return nextValue.
+  return nextValue;
 }
 
 function updateMemo<T>(
@@ -1322,7 +1325,7 @@ function mountCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
   const hook = mountWorkInProgressHook();
   const nextDeps = deps === undefined ? null : deps;
   hook.memoizedState = [callback, nextDeps];
-  return callback.
+  return callback;
 }
 
 function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
@@ -1417,7 +1420,7 @@ setState(prevState => {
 
 ```js
 let newState = baseState;
-let firstUpdate = hook.baseQueue.next;
+const firstUpdate = hook.baseQueue.next;
 let update = firstUpdate;
 
 // setState(value + 1) 与 setState(value => value + 1) 存在差异
@@ -1428,6 +1431,8 @@ do {
   } else {
     newState = action;
   }
+
+  update = reconciler();
 } while (update !== firstUpdate);
 ```
 
@@ -1745,7 +1750,7 @@ function mountEffect(fiberFlags, hookFlags, create, deps) {
 function updateEffect(fiberFlags, hookFlags, create, deps) {
   const hook = updateWorkInProgressHook();
   const nextDeps = deps === undefined ? null : deps;
-  let destroy = undefined;
+  let destroy;
 
   if (currentHook !== null) {
     const prevEffect = currentHook.memoizedState;
@@ -2018,7 +2023,7 @@ function useCSS(rule) {
 }
 
 function Component() {
-  let className = useCSS(rule);
+  const className = useCSS(rule);
   return <div className={className} />;
 }
 ```
@@ -2026,13 +2031,15 @@ function Component() {
 ### UseDebugValue Hook
 
 ```ts
-const date = new Date();
-useDebugValue(date, date => date.toISOString());
+function App() {
+  const date = new Date();
+  useDebugValue(date, date => date.toISOString());
+}
 ```
 
 ### UseImperativeHandle Hook
 
-```ts
+```tsx
 interface MyInputHandles {
   focus(): void;
 }
@@ -2061,7 +2068,7 @@ export default React.forwardRef(MyInput);
 
 Debounce:
 
-```js
+```jsx
 import { useDeferredValue } from 'react';
 
 function App() {
@@ -2123,7 +2130,7 @@ function Checkbox() {
       <input type="checkbox" name="react" id={id} />
     </>
   );
-);
+}
 ```
 
 ### UseSyncExternalStore Hook
@@ -2138,14 +2145,16 @@ import { useSyncExternalStore } from 'react';
 // It will prefer the native API, when available
 import { useSyncExternalStore } from 'use-sync-external-store/shim';
 
-// Basic usage. getSnapshot must return a cached/memoized result
-const state = useSyncExternalStore(store.subscribe, store.getSnapshot);
+function App() {
+  // Basic usage. getSnapshot must return a cached/memoized result
+  const state = useSyncExternalStore(store.subscribe, store.getSnapshot);
 
-// Selecting a specific field using an inline getSnapshot
-const selectedField = useSyncExternalStore(
-  store.subscribe,
-  () => store.getSnapshot().selectedField
-);
+  // Selecting a specific field using an inline getSnapshot
+  const selectedField = useSyncExternalStore(
+    store.subscribe,
+    () => store.getSnapshot().selectedField
+  );
+}
 ```
 
 ### Custom Hooks
@@ -2371,7 +2380,8 @@ TypeScript fetch hook with caches:
 ```ts
 import { useEffect, useReducer, useRef } from 'react';
 
-import axios, { AxiosRequestConfig } from 'axios';
+import type { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
 // State & hook output
 interface State<T> {
@@ -2380,9 +2390,7 @@ interface State<T> {
   error?: string;
 }
 
-interface Cache<T> {
-  [url: string]: T;
-}
+type Cache<T> = Record<string, T>;
 
 // discriminated union type
 type Action<T> =
@@ -2558,12 +2566,12 @@ export default function useKeydown() {
     alert('key is pressed.');
   }, []);
 
-  useEffect(() => {
+  useMount(() => {
     document.addEventListener('keydown', handleKeydown);
     return () => {
       document.removeEventListener('keydown', handleKeydown);
     };
-  }, []);
+  });
 }
 ```
 
@@ -2571,19 +2579,20 @@ export default function useKeydown() {
 import { useEffect } from 'react';
 
 export default function useEventListener({ event, handler }) {
-  useEffect(() => {
+  useMount(() => {
     document.addEventListener(event, handler);
     return () => {
       document.removeEventListener(event, handler);
     };
-  }, []);
+  });
 }
 ```
 
 ### Custom Observer Hook
 
 ```ts
-import { RefObject, useEffect, useState } from 'react';
+import type { RefObject } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Args extends IntersectionObserverInit {
   freezeOnceVisible?: boolean;
@@ -2966,11 +2975,11 @@ export default function useMedia<T>(
   // State and setter for matched value
   const [value, setValue] = useState<T>(getValue);
 
-  useEffect(() => {
+  useMount(() => {
     const handler = () => setValue(getValue);
     mediaQueryLists.forEach(mql => mql.addListener(handler));
     return () => mediaQueryLists.forEach(mql => mql.removeListener(handler));
-  }, []);
+  });
 
   return value;
 }
@@ -3265,15 +3274,15 @@ Complex [implementation](https://github.com/timc1/kbar):
 ```ts
 import { deepEqual } from 'fast-equals';
 import * as React from 'react';
-import {
+import type {
   Action,
   ActionId,
   ActionTree,
+  KBarOptions,
   KBarProviderProps,
   KBarState,
-  KBarOptions,
-  VisualState,
 } from './types';
+import { VisualState } from './types';
 
 type useStoreProps = KBarProviderProps;
 
@@ -3298,12 +3307,12 @@ export default function useStore(props: useStoreProps) {
   currentState.current = state;
 
   const getState = React.useCallback(() => currentState.current, []);
-  const publisher = React.useMemo(() => new Publisher(getState), []);
+  const publisher = React.useMemo(() => new Publisher(getState), [getState]);
 
   React.useEffect(() => {
     currentState.current = state;
     publisher.notify();
-  }, [state]);
+  }, [publisher, state]);
 
   const optionsRef = React.useRef((props.options || {}) as KBarOptions);
 
@@ -3368,7 +3377,7 @@ export default function useStore(props: useStoreProps) {
         cb: <C>(collected: C) => void
       ) => publisher.subscribe(collector, cb),
     };
-  }, [getState, publisher]);
+  }, [getState, publisher, registerActions]);
 }
 
 class Publisher {
@@ -3440,7 +3449,9 @@ Recoil [minimal implementation](https://github.com/bennetthardwick/recoil-clone)
 - `Selector`: collect parent `Atoms` as `deps`, update value when parent Atoms notified.
 
 ```ts
-type Disconnector = { disconnect: () => void };
+interface Disconnector {
+  disconnect: () => void;
+}
 
 class Stateful<T> {
   private listeners = new Set<(value: T) => void>();
@@ -3565,14 +3576,8 @@ Simple global store based on:
 - UseState hook.
 
 ```ts
-import {
-  useRef,
-  useEffect,
-  MutableRefObject,
-  Dispatch,
-  SetStateAction,
-  useState,
-} from 'react';
+import type { Dispatch, MutableRefObject, SetStateAction } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 
 const store = new Map<string, any>();
@@ -3583,6 +3588,7 @@ class Atom<T> {
     MutableRefObject<boolean>,
     Dispatch<SetStateAction<T>>
   >();
+
   private _current: T;
 
   constructor(initialState: T) {
@@ -3604,7 +3610,7 @@ class Atom<T> {
   setState(nextState: T) {
     this._current = nextState;
     store.set(this.key, nextState);
-    this.subscribers.forEach(action => action.call(null, nextState));
+    this.subscribers.forEach(action => action(nextState));
   }
 
   get current() {
@@ -3622,7 +3628,7 @@ export const useAtomValue = <T>(atom: Atom<T>) => {
     ref.current = true;
     atom.subscribe(ref, setState);
   }
-  useEffect(() => () => atom.unsubscribe(ref), []);
+  useMount(() => () => atom.unsubscribe(ref));
   return state;
 };
 
@@ -4731,7 +4737,7 @@ export declare interface AppProps {
 
 ### React Refs Types
 
-```ts
+```tsx
 class CssThemeProvider extends React.PureComponent<Props> {
   private rootRef: React.RefObject<HTMLDivElement> = React.createRef();
 
@@ -4752,7 +4758,7 @@ Don't use `React.FC`/`React.FunctionComponent`:
 
 ```tsx
 // Declaring type of props
-interface AppProps = {
+interface AppProps {
   message: string;
 }
 
@@ -4773,7 +4779,7 @@ const App = ({ message }: { message: string }) => <div>{message}</div>;
 - `static defaultProps`
 - `static getDerivedStateFromProps`
 
-```ts
+```tsx
 class MyComponent extends React.Component<{
   message?: string;
 }> {
@@ -4784,7 +4790,7 @@ class MyComponent extends React.Component<{
 }
 ```
 
-```ts
+```tsx
 import React from 'react';
 import Button from './Button';
 
@@ -4817,9 +4823,12 @@ class ButtonCounter extends React.Component<Props, State> {
 
 ### Generic Component Types
 
-```ts
+```tsx
 // 一个泛型组件
-type SelectProps<T> = { items: T[] };
+interface SelectProps<T> {
+  items: T[];
+}
+
 class Select<T> extends React.Component<SelectProps<T>, any> {}
 
 // 使用
@@ -4856,13 +4865,14 @@ Typing existing untyped React components:
 declare module 'react-router-dom' {
   import * as React from 'react';
 
-  type NavigateProps<T> = {
-    to: string | number,
-    replace?: boolean,
-    state?: T
+  interface NavigateProps<T> {
+    to: string | number;
+    replace?: boolean;
+    state?: T;
   }
 
-  export class Navigate<T = any> extends React.Component<NavigateProps<T>>{}
+  export class Navigate<T = any> extends React.Component<NavigateProps<T>> {}
+}
 ```
 
 ### Component Return Type
@@ -4928,9 +4938,9 @@ type FooReturn = ReturnType<typeof foo>; // { baz: number }
 #### React Form Event Types
 
 ```tsx
-type State = {
+interface State {
   text: string;
-};
+}
 
 class App extends React.Component<Props, State> {
   state = {
@@ -5061,7 +5071,8 @@ export class Modal extends React.Component {
 ```
 
 ```tsx
-import React, { useEffect, useRef } from 'react';
+import type React from 'react';
+import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 const modalRoot = document.querySelector('#modal-root') as HTMLElement;
@@ -5072,7 +5083,7 @@ const Modal: React.FC<{}> = ({ children }) => {
   useEffect(() => {
     const current = el.current;
     modalRoot!.appendChild(current);
-    return () => void modalRoot!.removeChild(current);
+    return () => modalRoot!.removeChild(current);
   }, []);
 
   return createPortal(children, el.current);
@@ -5082,6 +5093,8 @@ export default Modal;
 ```
 
 ```tsx
+import { Modal } from '@components';
+
 function App() {
   const [showModal, setShowModal] = React.useState(false);
   return (
@@ -5103,7 +5116,7 @@ function App() {
 
 ### React Redux Types
 
-```typescript
+```ts
 const initialState = {
   name: '',
   points: 0,
@@ -5113,7 +5126,7 @@ const initialState = {
 type State = typeof initialState;
 ```
 
-```typescript
+```ts
 export function updateName(name: string) {
   return <const>{
     type: 'UPDATE_NAME',
@@ -5153,7 +5166,7 @@ type Action = ReturnType<
 ```
 
 ```ts
-import { Reducer } from 'redux';
+import type { Reducer } from 'redux';
 
 const reducer = (state: State, action: Action): Reducer<State, Action> => {
   switch (action.type) {
@@ -5180,10 +5193,11 @@ const reducer = (state: State, action: Action): Reducer<State, Action> => {
 
 #### UseState Hook Type
 
-```ts
-const [user, setUser] = React.useState<IUser>({} as IUser);
-
-setUser(newUser);
+```tsx
+function App() {
+  const [user, setUser] = React.useState<IUser>({} as IUser);
+  setUser(newUser);
+}
 ```
 
 #### UseReducer Hook Type
@@ -5191,7 +5205,7 @@ setUser(newUser);
 - Use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#discriminated-unions)
   for reducer actions.
 
-```ts
+```tsx
 const initialState = { count: 0 };
 type State = typeof initialState;
 
@@ -5206,7 +5220,7 @@ function reducer(state: State, action: Action) {
     case 'decrement':
       return { count: state.count - Number(action.payload) };
     default:
-      throw new Error();
+      throw new Error('Error');
   }
 }
 
@@ -5234,12 +5248,12 @@ function Counter() {
 - If possible, prefer as specific as possible.
 - Return type is `RefObject<T>`.
 
-```ts
+```tsx
 function Foo() {
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!divRef.current) throw Error('divRef is not assigned');
+    if (!divRef.current) throw new Error('divRef is not assigned');
 
     doSomethingWith(divRef.current);
   });
@@ -5252,18 +5266,22 @@ function Foo() {
 
 - Return type is `MutableRefObject<T>`.
 
-```ts
+```tsx
 function Foo() {
   const intervalRef = useRef<number | null>(null);
 
   // You manage the ref yourself (that's why it's called MutableRefObject!)
   useEffect(() => {
-    intervalRef.current = setInterval(...);
+    intervalRef.current = setInterval();
     return () => clearInterval(intervalRef.current);
   }, []);
 
   // The ref is not passed to any element's "ref" prop
-  return <button onClick={/* clearInterval the ref */}>Cancel timer</button>;
+  return (
+    <button onClick={() => clearInterval(intervalRef.current)}>
+      Cancel timer
+    </button>
+  );
 }
 ```
 
@@ -5288,7 +5306,8 @@ export function useLoading() {
 More hooks
 
 ```ts
-import { Dispatch, SetStateAction, useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 
 interface ReturnType {
   value: boolean;
@@ -5312,7 +5331,8 @@ export default useBoolean;
 ```
 
 ```ts
-import { RefObject, useEffect, useRef } from 'react';
+import type { RefObject } from 'react';
+import { useEffect, useRef } from 'react';
 
 function useEventListener<T extends HTMLElement = HTMLDivElement>(
   eventName: keyof WindowEventMap,
@@ -5354,7 +5374,8 @@ export default useEventListener;
 ```ts
 import { useEffect, useReducer, useRef } from 'react';
 
-import axios, { AxiosRequestConfig } from 'axios';
+import type { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
 // State & hook output
 interface State<T> {
@@ -5363,9 +5384,7 @@ interface State<T> {
   error?: string;
 }
 
-interface Cache<T> {
-  [url: string]: T;
-}
+type Cache<T> = Record<string, T>;
 
 // discriminated union type
 type Action<T> =
@@ -5723,11 +5742,13 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 ```
 
 ```tsx
-render() {
-  // Note: this is an escape hatch and should be used sparingly!
-  // Normally recommend using `import` for getting asset URLs
-  // as described in “Adding Images and Fonts” section.
-  return <img src={process.env.PUBLIC_URL + '/img/logo.png'} />;
+class Component {
+  render() {
+    // Note: this is an escape hatch and should be used sparingly!
+    // Normally recommend using `import` for getting asset URLs
+    // as described in “Adding Images and Fonts” section.
+    return <img src={`${process.env.PUBLIC_URL}/img/logo.png`} alt="Here" />;
+  }
 }
 ```
 
@@ -5785,7 +5806,7 @@ Code splitting for [production build](https://create-react-app.dev/docs/producti
 with `import('dep').then();`:
 
 ```ts
-import { ReportHandler } from 'web-vitals';
+import type { ReportHandler } from 'web-vitals';
 
 const reportWebVitals = (onPerfEntry?: ReportHandler) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {

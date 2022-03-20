@@ -201,13 +201,13 @@ npx eslint --init
 
 ```ts
 declare module '*.css';
-//=> import * as foo from './some/file.css';
+// => import * as foo from './some/file.css';
 
 declare module '*.png' {
   const value: unknown;
   export = value;
 }
-//=> import logo from './logo.png';
+// => import logo from './logo.png';
 // <img src={logo as string} />
 
 declare module '*.jpg' {
@@ -236,9 +236,11 @@ npm i -D @types/react @types/react-dom
 lib.d.ts:
 
 ```json
-"compilerOptions": {
-  "target": "es5",
-  "lib": ["es6", "dom"]
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es6", "dom"]
+  }
 }
 ```
 
@@ -251,15 +253,15 @@ tsc --target es5 --lib dom,es6
 Namespace aliases:
 
 ```ts
+import polygons = Shapes.Polygons;
+
 namespace Shapes {
   export namespace Polygons {
     export class Triangle {}
     export class Square {}
   }
 }
-
-import polygons = Shapes.Polygons;
-let sq = new polygons.Square(); // Same as 'new Shapes.Polygons.Square()'
+const sq = new polygons.Square(); // Same as 'new Shapes.Polygons.Square()'
 ```
 
 Library namespace declaration
@@ -478,14 +480,14 @@ interface Animal {
 }
 
 function printAnimalAbilities(animal: Animal) {
-  var animalFlags = animal.flags;
+  const animalFlags = animal.flags;
   if (animalFlags & AnimalFlags.HasClaws) {
     console.log('animal has claws');
   }
   if (animalFlags & AnimalFlags.CanFly) {
     console.log('animal can fly');
   }
-  if (animalFlags == AnimalFlags.None) {
+  if (animalFlags === AnimalFlags.None) {
     console.log('nothing');
   }
 }
@@ -542,15 +544,15 @@ enum Tristate {
 }
 
 // compiles to
-var Tristate;
+let Tristate;
 (function (Tristate) {
-  Tristate[(Tristate['False'] = 0)] = 'False';
-  Tristate[(Tristate['True'] = 1)] = 'True';
-  Tristate[(Tristate['Unknown'] = 2)] = 'Unknown';
+  Tristate[(Tristate.False = 0)] = 'False';
+  Tristate[(Tristate.True = 1)] = 'True';
+  Tristate[(Tristate.Unknown = 2)] = 'Unknown';
 })(Tristate || (Tristate = {}));
 
 console.log(Tristate[0]); // 'False'
-console.log(Tristate['False']); // 0
+console.log(Tristate.False); // 0
 console.log(Tristate[Tristate.False]); // 'False' because `Tristate.False == 0`
 ```
 
@@ -698,18 +700,18 @@ name = {
 ```ts
 // Lib a.d.ts
 interface Point {
-  x: number,
-  y: number
+  x: number;
+  y: number;
 }
-declare const myPoint: Point
+declare const myPoint: Point;
 
 // Lib b.d.ts
 interface Point {
-  z: number
+  z: number;
 }
 
 // Your code
-let myPoint.z // Allowed!
+const z = myPoint.z; // Allowed!
 ```
 
 ### Implements Interface
@@ -739,13 +741,13 @@ const crazy = new CrazyClass(); // crazy would be { hello:123 }
   an interface which is always extendable.
 
 ```ts
-type Window = {
+interface Window {
   title: string;
-};
+}
 
-type Window = {
+interface Window {
   ts: TypeScriptAPI;
-};
+}
 
 // Error: Duplicate identifier 'Window'.
 ```
@@ -787,9 +789,9 @@ class Singleton {
   someMethod() {}
 }
 
-let someThing = new Singleton(); // Error: constructor of 'singleton' is private
+const someThing = new Singleton(); // Error: constructor of 'singleton' is private
 
-let instance = Singleton.getInstance(); // do some thing with the instance
+const instance = Singleton.getInstance(); // do some thing with the instance
 ```
 
 ### Readonly Types
@@ -797,10 +799,10 @@ let instance = Singleton.getInstance(); // do some thing with the instance
 Readonly type
 
 ```ts
-type Foo = {
+interface Foo {
   readonly bar: number;
   readonly bas: number;
-};
+}
 
 // 初始化
 const foo: Foo = { bar: 123, bas: 456 };
@@ -812,9 +814,7 @@ foo.bar = 456; // Error: foo.bar 为仅读属性
 Readonly indexable signature
 
 ```ts
-interface Foo {
-  readonly [x: number]: number;
-}
+type Foo = Readonly<Record<number, number>>;
 
 // 使用
 
@@ -838,10 +838,10 @@ class Foo {
 Readonly generic type
 
 ```ts
-type Foo = {
+interface Foo {
   bar: number;
   bas: number;
-};
+}
 
 type FooReadonly = Readonly<Foo>;
 
@@ -858,6 +858,7 @@ In React
 class Something extends React.Component<{ foo: number }, { baz: number }> {
   someMethod() {
     this.props.foo = 123; // Error: props 是不可变的
+    // eslint-disable-next-line react/no-direct-mutation-state
     this.state.baz = 456; // Error: 你应该使用 this.setState()
   }
 }
@@ -869,17 +870,17 @@ For `JavaScript`,
 implicitly calls `toString` on any object index signature:
 
 ```ts
-let obj = {
+const obj = {
   toString() {
     console.log('toString called');
     return 'Hello';
   },
 };
 
-let foo: any = {};
+const foo: any = {};
 foo[obj] = 'World'; // toString called
 console.log(foo[obj]); // toString called, World
-console.log(foo['Hello']); // World
+console.log(foo.Hello); // World
 ```
 
 TypeScript will give an error to prevent beginners
@@ -907,8 +908,7 @@ function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 ### Index Signature Type Checking
 
 ```ts
-let x: { foo: number; [x: string]: any };
-
+const x: { foo: number; [x: string]: any };
 x = { foo: 1, baz: 2 }; // ok, 'baz' 属性匹配于索引签名
 ```
 
@@ -933,11 +933,11 @@ interface Bar {
 使用交叉类型可以解决上述问题:
 
 ```ts
-type FieldState = {
+interface FieldState {
   value: string;
-};
+}
 
-type FormState = { isValid: boolean } & { [fieldName: string]: FieldState };
+type FormState = { isValid: boolean } & Record<string, FieldState>;
 ```
 
 ### Select Index Types
@@ -963,32 +963,28 @@ type FromSomeIndex<K extends string> = { [key in K]: number };
 From [typescript v4.4.0](https://github.com/microsoft/TypeScript/pull/44512):
 
 ```ts
-type SymbolMap<T> = {
-  [key: symbol]: T;
-};
+type SymbolMap<T> = Record<symbol, T>;
 ```
 
 ```ts
-type PropertyMap = {
+interface PropertyMap {
   [key: string]: string;
   [key: number]: string;
   [key: symbol]: string;
-};
+}
 ```
 
 ```ts
-interface Colors {
-  [sym: symbol]: number;
-}
+type Colors = Record<symbol, number>;
 
 const red = Symbol('red');
 const green = Symbol('green');
 const blue = Symbol('blue');
 
-let colors: Colors = {};
+const colors: Colors = {};
 
 colors[red] = 255; // Assignment of a number is allowed
-let redVal = colors[red]; // 'redVal' has the type 'number'
+const redVal = colors[red]; // 'redVal' has the type 'number'
 
 colors[blue] = 'da ba dee'; // Error: Type 'string' is not assignable to type 'number'.
 ```
@@ -998,16 +994,15 @@ colors[blue] = 'da ba dee'; // Error: Type 'string' is not assignable to type 'n
 From [typescript v4.4.0](https://github.com/microsoft/TypeScript/pull/44512):
 
 ```ts
-type DataProps = {
-  [key: `data-${string}`]: string;
-};
+type DataProps = Record<`data-${string}`, string>;
 
+// eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
 interface OptionsWithDataProps extends Options {
   // Permit any property starting with 'data-'.
   [optName: `data-${string}`]: unknown;
 }
 
-let b: OptionsWithDataProps = {
+const b: OptionsWithDataProps = {
   width: 100,
   height: 100,
   'data-blah': true, // Works!
@@ -1019,9 +1014,9 @@ let b: OptionsWithDataProps = {
 type Thing<T> = Record<'a' | `foo${T}` | symbol, string>;
 
 type StringThing = Thing<string>;
-//=> { [a: string, [x: `foo${string}`]: string, [x: symbol]: string }
+// => { [a: string, [x: `foo${string}`]: string, [x: symbol]: string }
 type BarThing = Thing<'bar'>;
-//=> { [a: string, foobar: string, [x: symbol]: string }
+// => { [a: string, foobar: string, [x: symbol]: string }
 ```
 
 ### Indexed Access Types
@@ -1072,8 +1067,8 @@ type FunctionTypeKeys<T extends object> = {
 }[keyof T];
 
 type Filter<T extends object, ValueType> = {
-  [K in keyof T] as ValueType extends T[K] ? K :never]: T[K]
-} // Filter<{name: string; id: number;}, string> => {name: string;}
+  [K in keyof T as ValueType extends T[K] ? K : never]: T[K];
+}; // Filter<{name: string; id: number;}, string> => {name: string;}
 ```
 
 ## Literal Types
@@ -1119,12 +1114,12 @@ configure('automatic');
   - `Uncapitalize<StringType>`
 
 ```ts
-type PropEventSource<Type> = {
+interface PropEventSource<Type> {
   on<Key extends string & keyof Type>(
     eventName: `${Key}Changed`,
     callback: (newValue: Type[Key]) => void
   ): void;
-};
+}
 
 // Create a "watched object" with an 'on' method
 // so that you can watch for changes to properties.
@@ -1285,9 +1280,9 @@ const idNum = id as { (x: number): number };
 ### Generic Types Constraints
 
 ```ts
-type Lengthwise = {
+interface Lengthwise {
   length: number;
-};
+}
 
 function createList<T extends number | Lengthwise>(): T[] {
   return [] as T[];
@@ -1355,8 +1350,10 @@ function area(s: Shape) {
       return s.width * s.height;
     case 'circle':
       return Math.PI * s.radius ** 2;
-    default:
+    default: {
       const _exhaustiveCheck: never = s;
+      return _exhaustiveCheck;
+    }
   }
 }
 ```
@@ -1368,13 +1365,13 @@ intersection type 具有所有类型的功能
 
 ```ts
 function extend<T, U>(first: T, second: U): T & U {
-  const result = <T & U>{};
-  for (let id in first) {
-    (<T>result)[id] = first[id];
+  const result = {} as T & U;
+  for (const id in first) {
+    (result as T)[id] = first[id];
   }
-  for (let id in second) {
-    if (!result.hasOwnProperty(id)) {
-      (<U>result)[id] = second[id];
+  for (const id in second) {
+    if (!Object.prototype.hasOwnProperty.call(result, id)) {
+      (result as U)[id] = second[id];
     }
   }
 
@@ -1392,9 +1389,9 @@ const b = x.b;
 
 ```ts
 import * as React from 'react';
-import * as Redux from 'redux';
+import type * as Redux from 'redux';
 
-import { MyReduxState } from './my-root-reducer.ts';
+import type { MyReduxState } from './my-root-reducer.ts';
 
 export interface OwnProps {
   propFromParent: number;
@@ -1601,10 +1598,10 @@ type Mutable<Type> = {
   -readonly [Property in keyof Type]: Type[Property];
 };
 
-type LockedAccount = {
+interface LockedAccount {
   readonly id: string;
   readonly name: string;
-};
+}
 
 type UnlockedAccount = Mutable<LockedAccount>;
 // type UnlockedAccount = {
@@ -1658,10 +1655,10 @@ type ExtractPII<Type> = {
   [Property in keyof Type]: Type[Property] extends { pii: true } ? true : false;
 };
 
-type DBFields = {
+interface DBFields {
   id: { format: 'incrementing' };
   name: { type: string; pii: true };
-};
+}
 
 type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>;
 // type ObjectsNeedingGDPRDeletion = {
@@ -1708,7 +1705,7 @@ const isPrimitive = (val: unknown): val is Primitive => {
     'symbol',
   ];
 
-  return primitiveNonNullishTypes.indexOf(typeDef) !== -1;
+  return primitiveNonNullishTypes.includes(typeDef);
 };
 ```
 
@@ -1717,7 +1714,7 @@ const isPrimitive = (val: unknown): val is Primitive => {
 ```ts
 // TypeScript 4.5.
 // Get naked Promise<T> type.
-type Awaited<T extends any> = T extends Promise<infer U> ? Awaited<U> : T;
+type Awaited<T> = T extends Promise<infer U> ? Awaited<U> : T;
 
 // A = string.
 type A = Awaited<Promise<string>>;
@@ -1732,10 +1729,10 @@ type C = Awaited<boolean | Promise<number>>;
 ### Proxy Type
 
 ```ts
-type Proxy<T> = {
+interface Proxy<T> {
   get(): T;
   set(value: T): void;
-};
+}
 
 type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
 ```
@@ -1820,8 +1817,12 @@ const isFalsy = (val: unknown): val is Falsy => !val;
 ### In Type Guard
 
 ```ts
-type Fish = { swim: () => void };
-type Bird = { fly: () => void };
+interface Fish {
+  swim: () => void;
+}
+interface Bird {
+  fly: () => void;
+}
 
 function move(animal: Fish | Bird) {
   if ('swim' in animal) {
@@ -1837,11 +1838,9 @@ function move(animal: Fish | Bird) {
 ```ts
 function fn(x: string | number) {
   if (typeof x === 'string') {
-    // x is string
     return x.length;
   } else {
-    // x is number
-    // .....
+    return x + 1;
   }
 }
 ```
@@ -1865,7 +1864,7 @@ function logValue(x: Date | string) {
 
 ```ts
 interface Triangle {
-  kind: "triangle";
+  kind: 'triangle';
   sideLength: number;
 }
 
@@ -1873,14 +1872,15 @@ type Shape = Circle | Square | Triangle;
 
 function getArea(shape: Shape) {
   switch (shape.kind) {
-    case "circle":
+    case 'circle':
       return Math.PI * shape.radius ** 2;
-    case "square":
+    case 'square':
       return shape.sideLength ** 2;
-    default:
+    default: {
+      // Type 'Triangle' is not assignable to type 'never'.
       const _exhaustiveCheck: never = shape;
-Type 'Triangle' is not assignable to type 'never'.
       return _exhaustiveCheck;
+    }
   }
 }
 ```
@@ -1894,7 +1894,7 @@ Type 'Triangle' is not assignable to type 'never'.
 
 ```ts
 let foo: any;
-let bar = <string>foo; // 现在 bar 的类型是 'string'
+const bar = foo as string; // 现在 bar 的类型是 'string'
 ```
 
 ```ts
@@ -2028,11 +2028,11 @@ class MyComponent extends React.Component<Props, State> {
 function classDecorator(options: any[]) {
   return target => {
     // ...
-  }
+  };
 }
 
 @classDecorator
-class // ...
+class Component {}
 ```
 
 ```ts
@@ -2091,13 +2091,10 @@ class MyComponent extends React.Component<Props> {
 `@rounded` for number parameters.
 
 ```ts
-function decorator(
-  class,
-  name: string,
-  index: int,
-) {
+function decorator<T>(classPrototype: T, name: string, index: int) {
   // ...
 }
+
 class MyComponent extends React.Component<Props> {
   private handleMethod(@decorator param1: string) {
     // ...
@@ -2175,7 +2172,9 @@ class C {
   @f('5. 静态方法')
   static method(@f('6. 静态方法参数') foo) {}
 
-  constructor(@f('7. 构造器参数') foo) {}
+  constructor(@f('7. 构造器参数') foo) {
+    super(foo);
+  }
 
   @f('2. 实例方法')
   method(@f('1. 实例方法参数') foo) {}

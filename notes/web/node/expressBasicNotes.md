@@ -19,12 +19,14 @@ tags: [Web, Node, Express]
 ### Template
 
 ```js
-function (req, res, next) {
+function middleware(req, res, next) {
   next();
   // OR res.send();
 }
+```
 
-function (err, req, res, next) {
+```js
+function middleware(err, req, res, next) {
   next(err);
   // OR res.send();
 }

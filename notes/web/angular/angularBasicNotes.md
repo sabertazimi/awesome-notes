@@ -60,28 +60,31 @@ NgModule 为其中的组件提供了一个编译上下文环境.
 
 ### Props
 
-```js
+```ts
 import { Input } from '@angular/core';
 
-... {
+class InputComponent {
   @Input() hero: Hero;
 }
 ```
 
 private props
 
-```js
-import { HeroService } from '../hero.service';
+```ts
+import type { HeroService } from '../hero.service';
 
-constructor(private heroService: HeroService) { }
+class HeroComponent {
+  constructor(private heroService: HeroService) {}
+}
 ```
 
 ### Event
 
 parent
 
-```js
-import { Component, OnInit } from '@angular/core';
+```ts
+import type { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -98,8 +101,8 @@ export class AppComponent implements OnInit {
 
 child
 
-```js
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+```ts
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-child',
@@ -122,10 +125,10 @@ export class AppChildComponent {
 
 Angular 只会绑定到组件的公共属性
 
-```js
-import { MessageService } from '../message.service';
+```ts
+import type { MessageService } from '../message.service';
 
-... {
+class MessageComponent {
   constructor(public messageService: MessageService) {}
 }
 ```
@@ -178,10 +181,11 @@ Angular 会在每个组件的变更检测周期中执行非纯管道.
 
 ### Injection Provider
 
-```js
+```ts
 @Injectable({
   providedIn: 'root',
 })
+class Logger {}
 ```
 
 ## RxJS
@@ -226,14 +230,14 @@ Subject 既是可观察对象的数据源, 本身也是 Observable.
 可以像订阅任何 Observable 一样订阅 Subject.
 还可以通过调用它的 next(value) 方法往 Observable 中推送一些值.
 
-```js
+```ts
 // Create simple observable that emits three values
 const myObservable = of(1, 2, 3);
 
 // Create observer object
 const myObserver = {
-  next: x => console.log('Observer got a next value: ' + x),
-  error: err => console.error('Observer got an error: ' + err),
+  next: x => console.log(`Observer got a next value: ${x}`),
+  error: err => console.error(`Observer got an error: ${err}`),
   complete: () => console.log('Observer got a complete notification'),
 };
 
@@ -246,8 +250,8 @@ const subscription = myObservable.subscribe(myObserver);
 // Observer got a complete notification
 ```
 
-```js
-... {
+```ts
+class Component {
   search(term: string): void {
     this.searchTerms.next(term);
   }
@@ -262,7 +266,7 @@ const subscription = myObservable.subscribe(myObserver);
 
       // switch to new search observable each time the term changes
       // return another Observable
-      switchMap((term: string) => this.heroService.searchHeroes(term)),
+      switchMap((term: string) => this.heroService.searchHeroes(term))
     );
   }
 }
@@ -274,15 +278,11 @@ RxJS 提供了 pipe 辅助函数,
 它存在于 Observable 上,
 它缓解了操作符不在原型上所带来的问题.
 
-```js
-import { take, map } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
+```ts
+import { map, take } from '@rxjs/operators';
+import { of } from '@rxjs/observable';
 
 map.call(take.call(of(1, 2, 3), 2), val => val + 2);
-
-// to
-import { take, map } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
 
 of(1, 2, 3).pipe(
   take(2),
@@ -377,9 +377,10 @@ of(1, 2, 3).pipe(
 
 `<router-outlet>` 会告诉路由器要在哪里显示路由的视图.
 
-```js
+```ts
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import type { Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { HeroesComponent } from './heroes/heroes.component';
 
 const routes: Routes = [
@@ -438,16 +439,18 @@ same to `[ngStyle]`
 </div>
 ```
 
-```js
-currentClasses: {};
+```ts
+class Component {
+  currentClasses;
 
-setCurrentClasses() {
-  // CSS classes: added/removed per current state of component properties
-  this.currentClasses = {
-    'saveable': this.canSave,
-    'modified': !this.isUnchanged,
-    'special':  this.isSpecial
-  };
+  setCurrentClasses() {
+    // CSS classes: added/removed per current state of component properties
+    this.currentClasses = {
+      saveable: this.canSave,
+      modified: !this.isUnchanged,
+      special: this.isSpecial,
+    };
+  }
 }
 ```
 

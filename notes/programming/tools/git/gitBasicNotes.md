@@ -1260,7 +1260,7 @@ setup `source` of pages and `Enforce HTTPS`.
 
 `.gitattributes`:
 
-```yaml
+```bash
 *.md linguist-detectable=true
 *.md linguist-documentation=false
 ```
@@ -1291,7 +1291,7 @@ jobs:
           node-version: 16
           architecture: x64
           registry-url: https://registry.npmjs.org/
-          cache: 'yarn'
+          cache: yarn
       - name: Install dependencies
         run: |
           yarn
@@ -1328,17 +1328,17 @@ with:
 ```yml
 version: 2
 updates:
-  - package-ecosystem: 'npm' # See documentation for possible values
-    directory: '/' # Location of package manifests
+  - package-ecosystem: npm # See documentation for possible values
+    directory: / # Location of package manifests
     schedule:
-      interval: 'weekly'
-      day: 'sunday'
+      interval: weekly
+      day: sunday
       time: '14:00'
-      timezone: 'Asia/Shanghai'
+      timezone: Asia/Shanghai
     open-pull-requests-limit: 10
     versioning-strategy: increase
     assignees:
-      - 'sabertazimi'
+      - sabertazimi
 ```
 
 ## Git Tools
