@@ -964,7 +964,6 @@ npm install -g @volar/vue-language-server
 - `<CTRL>hjkl`: switch window.
 - `<TAB>`: switch buffer.
 
-
 | Key mapping | Action                   | Notes                              |
 | ----------- | ------------------------ | ---------------------------------- |
 | `jk`        | ESC to normal mode       |                                    |

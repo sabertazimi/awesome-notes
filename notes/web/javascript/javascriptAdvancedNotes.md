@@ -2437,7 +2437,6 @@ const addFive = curry(addOne, 1, 3);
 - snakeCase.
 - camelCase.
 
-
 ## Internal JavaScript
 
 Under the hood
