@@ -956,8 +956,14 @@ npm install -g @volar/vue-language-server
 ### NvChad Key Mapping
 
 - `<leader>` is set to `<SPACE>`.
-- `<SPACE>uk`: view key mappings.
+- `<SPACE>ch`: view key mappings.
 - `<SPACE>uu`: update NvChad.
+- `<SPACE>ff`: find files.
+- `<SPACE>/`: comments.
+- `<CTRL>n`: file tree.
+- `<CTRL>hjkl`: switch window.
+- `<TAB>`: switch buffer.
+
 
 | Key mapping | Action                   | Notes                              |
 | ----------- | ------------------------ | ---------------------------------- |
