@@ -2417,6 +2417,27 @@ const addFive = curry(addOne, 1, 3);
 // addFive(4) === 9;
 ```
 
+### Functional JavaScript Library
+
+#### Lodash
+
+- chunk.
+- shuffle.
+- take.
+- difference.
+- intersection.
+- isEmpty.
+- orderBy.
+- merge.
+- cloneDeep.
+- debounce.
+- throttle.
+- startCase.
+- kebabCase.
+- snakeCase.
+- camelCase.
+
+
 ## Internal JavaScript
 
 Under the hood
