@@ -163,6 +163,7 @@ tags: [Web, Framework, Library]
 ### Math Utils
 
 - [HyperFormula: Excel-like Calculation Engine](https://github.com/handsontable/hyperformula)
+- [DanFoJS: High Performance Structured Data Manipulating and Processing](https://github.com/javascriptdata/danfojs)
 
 ### String Utils
 
