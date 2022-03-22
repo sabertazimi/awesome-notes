@@ -51,6 +51,7 @@ tags: [Web, Framework, Library]
 - [Material UI](https://github.com/mui-org/material-ui)
 - [Chakra UI](https://github.com/chakra-ui/chakra-ui)
 - [Headless UI](https://github.com/tailwindlabs/headlessui)
+- [Mantine](https://github.com/mantinedev/mantine)
 - [BluePrint](https://github.com/palantir/blueprint)
 - [IceWorks](https://github.com/alibaba/ice)
 - [Vue Admin UI](https://github.com/epicmaxco/vuestic-admin)
