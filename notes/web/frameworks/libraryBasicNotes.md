@@ -1054,8 +1054,9 @@ tags: [Web, Framework, Library]
 
 - [Serverless Framework](https://github.com/serverless/serverless)
 
-## Encryption
+## Encryption and Security
 
+- [SuperTokens: Open Source Alternative to Auth0 / Firebase Auth / AWS Cognito](https://github.com/supertokens/supertokens-website)
 - [MD5](https://github.com/blueimp/JavaScript-MD5)
 - [Base64](https://github.com/dankogai/js-base64)
 
