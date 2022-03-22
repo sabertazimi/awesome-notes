@@ -81,7 +81,6 @@ tags: [Web, Framework, Library]
 
 - [Nest: Enterprise-grade Server-side Applications on Top of TypeScript](https://github.com/nestjs/nest)
 - [Feathers.js: REST APIs with TypeScript](https://github.com/feathersjs/feathers)
-- [tRPC: End-to-end Type-safe APIs Server](https://github.com/trpc/trpc)
 - [Egg.js](https://github.com/eggjs/egg)
 - [Koa: Expressive Middleware using ES2017 Async Functions](https://github.com/koajs/koa)
 - [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify)
@@ -862,6 +861,7 @@ tags: [Web, Framework, Library]
 - [JSCookie](https://github.com/js-cookie/js-cookie)
 - [React Cookie](https://github.com/reactivestack/cookies)
 - [Nookies: Cookie Helpers for Next.js](https://github.com/maticzav/nookies)
+- [NoCoDB: No Code Database](https://github.com/nocodb/nocodb)
 
 ## Search
 
@@ -1053,6 +1053,14 @@ tags: [Web, Framework, Library]
 ### Serverless
 
 - [Serverless Framework](https://github.com/serverless/serverless)
+
+### API Development
+
+- [tRPC: End-to-end Type-safe APIs Server](https://github.com/trpc/trpc)
+- [HopScotch: Open Source API Development Ecosystem](https://github.com/hoppscotch/hoppscotch)
+- [Swagger Codegen: Template-driven Engine to Generate Documentation, API Clients and Server Stubs](https://github.com/swagger-api/swagger-codegen)
+- [Swagger UI: Generate Beautiful Documentation from Swagger-compliant API](https://github.com/swagger-api/swagger-ui)
+- [DevDocs](https://github.com/freeCodeCamp/devdocs)
 
 ## Encryption and Security
 
@@ -1329,9 +1337,3 @@ tags: [Web, Framework, Library]
 - [DUmi: Documentation Generator of React Component](https://github.com/umijs/dumi)
 - [React Storybook: Live Component Documentation](https://github.com/storybooks/storybook)
 - [Ladle: Faster Storybook](https://github.com/tajo/ladle)
-
-### API Documentation
-
-- [Swagger Codegen: Template-driven Engine to Generate Documentation, API Clients and Server Stubs](https://github.com/swagger-api/swagger-codegen)
-- [Swagger UI: Generate Beautiful Documentation from Swagger-compliant API](https://github.com/swagger-api/swagger-ui)
-- [DevDocs](https://github.com/freeCodeCamp/devdocs)
