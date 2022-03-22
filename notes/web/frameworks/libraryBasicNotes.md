@@ -87,6 +87,7 @@ tags: [Web, Framework, Library]
 - [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify)
 - [Sails: Realtime MVC Framework](https://github.com/balderdashy/sails)
 - [RedWood](https://github.com/redwoodjs/redwood)
+- [Amplication: Low Code but High Quality Node.js Applications](https://github.com/amplication/amplication)
 
 ### Headless CMS
 
