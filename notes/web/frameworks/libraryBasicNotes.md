@@ -1027,6 +1027,7 @@ tags: [Web, Framework, Library]
 ### PWA
 
 - [Workbox: Progressive Web Apps Toolbox](https://github.com/GoogleChrome/workbox)
+- [PartyTown: 3rd Scripts Web Worker](https://github.com/BuilderIO/partytown)
 
 ## Back End Server
 
