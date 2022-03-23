@@ -723,9 +723,29 @@ Accordion list without JavaScript:
 
 Insert text
 
+```html
+<ins
+  cite="https://bugzilla.mozilla.org/show_bug.cgi?id=1620467"
+  datetime="2020-07-23"
+>
+  The <code>appearance</code> property, previously only available prefixed in
+  Firefox, can now be used in all modern browsers un-prefixed.
+</ins>
+```
+
 ### Del
 
 Delete text
+
+```html
+<del
+  cite="https://bugzilla.mozilla.org/show_bug.cgi?id=1620467"
+  datetime="2020-07-23"
+>
+  Firefox doesn't support CSS's standard <code>appearance</code> property, so
+  you can only use it prefixed.
+</del>
+```
 
 ### U
 
