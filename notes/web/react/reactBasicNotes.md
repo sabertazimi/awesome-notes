@@ -1258,7 +1258,9 @@ App = MyReact.render(Component);
 - **Shallow compare** diff.
 - **Optimization** helps to
   avoid expensive calculations on every render
-  (avoid re-render problem).
+  (avoid re-render problem):
+  - **Good use** for complex objects or expensive calculations.
+  - **Donn't use** for primitive values or simple calculations.
 
 ```ts
 function mountMemo<T>(
