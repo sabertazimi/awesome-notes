@@ -4342,18 +4342,22 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-Extract loading/skeleton/placeholder components into single place:
+#### Suspense for SSR
+
+React v18+: enable `Suspense` on the server:
+
+- One slow part doesn't slow down whole page.
+- Show initial HTML early and stream the rest HTML.
+- Enable code splitting for SSR.
 
 ```jsx
-const App = () => (
-  <Suspense fallback={<Skeleton />}>
-    <Header />
-    <Suspense fallback={<ListPlaceholder />}>
-      <ListLayout>
-        <List pageId={pageId} />
-      </ListLayout>
+const LandingPage = () => (
+  <div>
+    <FastComponent />
+    <Suspense fallback={<Spinner />}>
+      <Comments />
     </Suspense>
-  </Suspense>
+  </div>
 );
 ```
 
