@@ -4233,7 +4233,11 @@ const root = ReactDOM.createRoot(document.getElementById('app'));
 root.render(<App />);
 ```
 
-Automatic batching in promises, async code and native event handlers:
+### Batching Updates
+
+All updates will be automatically batched,
+including updates inside of
+**promises, async code and native event handlers**:
 
 ```js
 function handleClick() {
@@ -4265,26 +4269,6 @@ element.addEventListener('click', () => {
   setIsBirthday(b => !b);
   setAge(a => a + 1);
 });
-```
-
-### Batching Updates
-
-All updates will be automatically batched,
-including updates inside of
-**timeouts, promises, native event handlers**:
-
-```js
-function handleClick() {
-  setCount(c => c + 1);
-  setFlag(f => !f);
-  // React 18+ will only re-render once at the end (that's batching!)
-}
-
-setTimeout(() => {
-  setCount(c => c + 1);
-  setFlag(f => !f);
-  // React 18+ will only re-render once at the end (that's batching!)
-}, 1000);
 ```
 
 ### Lazy and Suspense
