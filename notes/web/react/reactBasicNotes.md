@@ -4271,6 +4271,8 @@ element.addEventListener('click', () => {
 });
 ```
 
+`ReactDOM.flushSync` can opt-out of automatic batching.
+
 ### Suspense
 
 Extract loading/skeleton/placeholder components into single place:
