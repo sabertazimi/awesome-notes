@@ -2201,6 +2201,107 @@ function App() {
 }
 ```
 
+Migrate from `useState` + `useEffect` + `useRef` to `useSyncExternalStore`
+for 3rd external stores libraries (e.g `Redux`):
+
+```jsx
+import React, { useCallback, useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'use-sync-external-store/shim';
+
+const createStore = initialState => {
+  let state = initialState;
+  const listeners = new Set();
+
+  const getState = () => state;
+  const setState = fn => {
+    state = fn(state);
+    listeners.forEach(listener => listener());
+  };
+  const subscribe = listener => {
+    listeners.add(listener);
+    return () => listeners.delete(listener);
+  };
+
+  return {
+    getState,
+    setState,
+    subscribe,
+  };
+};
+
+// Explicitly process external store for React v17.
+// Sync external store state to React internal state
+// with `useState` and `store.subscribe`:
+// store.setState -> updater -> setState.
+const useStoreLegacy = (store, selector) => {
+  const [state, setState] = useState(selector(store.getState()));
+
+  useEffect(() => {
+    const updater = () => setState(selector(store.getState()));
+    const unsubscribe = store.subscribe(updater);
+    updater();
+    return unsubscribe;
+  }, [store, selector]);
+
+  return state;
+};
+
+// Use `useSyncExternalStore` for React v18+.
+const useStore = (store, selector) => {
+  return useSyncExternalStore(
+    store.subscribe,
+    useCallback(() => selector(store.getState()), [store, selector])
+  );
+};
+
+const store = createStore({ count: 0, text: 'hello' });
+
+const Counter = () => {
+  const count = useStore(
+    store,
+    useCallback(state => state.count, [])
+  );
+
+  const handleClick = () =>
+    store.setState(state => ({ ...state, count: state.count + 1 }));
+
+  return (
+    <div>
+      {count}
+      <button onClick={handleClick}>+1</button>
+    </div>
+  );
+};
+
+const TextBox = () => {
+  const text = useStore(
+    store,
+    useCallback(state => state.text, [])
+  );
+
+  const handleChange = event => {
+    store.setState(state => ({ ...state, text: event.target.value }));
+  };
+
+  return (
+    <div>
+      <input type="text" value={text} onChange={handleChange} />
+    </div>
+  );
+};
+
+const App = () => (
+  <div>
+    <Counter />
+    <Counter />
+    <TextBox />
+    <TextBox />
+  </div>
+);
+
+React.createRoot(document.querySelector('#root')).render(<App />);
+```
+
 ### Custom Hooks
 
 - [ReactUse Hooks](https://github.com/streamich/react-use)
