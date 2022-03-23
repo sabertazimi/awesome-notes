@@ -4348,8 +4348,8 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 React v18+: enable `Suspense` on the server:
 
-- One slow part doesn't slow down whole page.
-- Show initial HTML early and stream the rest HTML.
+- Selective Hydration: one slow part doesn't slow down whole page.
+- Streaming HTML: show initial HTML early and stream the rest HTML.
 - Enable code splitting for SSR.
 
 ```jsx
