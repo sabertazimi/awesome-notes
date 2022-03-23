@@ -3974,6 +3974,21 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
+Extract loading/skeleton/placeholder components into single place:
+
+```jsx
+const App = () => (
+  <Suspense fallback={<Skeleton />}>
+    <Header />
+    <Suspense fallback={<ListPlaceholder />}>
+      <ListLayout>
+        <List pageId={pageId} />
+      </ListLayout>
+    </Suspense>
+  </Suspense>
+);
+```
+
 ### Context API
 
 Context API provide a Dependency Injection style method,
