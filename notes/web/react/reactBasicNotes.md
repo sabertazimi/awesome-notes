@@ -3922,73 +3922,6 @@ state = {};
 handle = e => {};
 ```
 
-### Lazy and Suspense
-
-```jsx
-import React, { lazy, Suspense } from 'react';
-
-const Product = lazy(() => import('./ProductHandler'));
-
-const App = () => (
-  <div className="product-list">
-    <h1>My Awesome Product</h1>
-    <Suspense fallback={<h2>Product list is loading...</h2>}>
-      <p>Take a look at my product:</p>
-      <section>
-        <Product id="PDT-49-232" />
-        <Product id="PDT-50-233" />
-        <Product id="PDT-51-234" />
-      </section>
-    </Suspense>
-  </div>
-);
-```
-
-```jsx
-const { lazy, Suspense } = React;
-
-const Lazy = lazy(
-  () =>
-    new Promise(resolve => {
-      setTimeout(() => {
-        resolve({ default: () => <Resource /> });
-      }, 4000);
-    })
-);
-
-const Resource = () => (
-  <div className="box">
-    <h1>React Lazy</h1>
-    <p>This component loaded after 4 seconds, using React Lazy and Suspense</p>
-  </div>
-);
-
-const App = () => {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Lazy />
-    </Suspense>
-  );
-};
-
-ReactDOM.render(<App />, document.getElementById('root'));
-```
-
-Extract loading/skeleton/placeholder components into single place:
-
-```jsx
-const App = () => (
-  <Suspense fallback={<Skeleton />}>
-    <Header />
-    <Suspense fallback={<ListPlaceholder />}>
-      <ListLayout>
-        <List pageId={pageId} />
-      </ListLayout>
-    </Suspense>
-  </Suspense>
-);
-```
-
 ### Context API
 
 Context API provide a Dependency Injection style method,
@@ -4287,7 +4220,7 @@ class App extends React.Component {
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-### Concurrent Mode
+### Concurrent Features
 
 ```js
 import * as ReactDOM from 'react-dom';
@@ -4352,6 +4285,73 @@ setTimeout(() => {
   setFlag(f => !f);
   // React 18+ will only re-render once at the end (that's batching!)
 }, 1000);
+```
+
+### Lazy and Suspense
+
+```jsx
+import React, { lazy, Suspense } from 'react';
+
+const Product = lazy(() => import('./ProductHandler'));
+
+const App = () => (
+  <div className="product-list">
+    <h1>My Awesome Product</h1>
+    <Suspense fallback={<h2>Product list is loading...</h2>}>
+      <p>Take a look at my product:</p>
+      <section>
+        <Product id="PDT-49-232" />
+        <Product id="PDT-50-233" />
+        <Product id="PDT-51-234" />
+      </section>
+    </Suspense>
+  </div>
+);
+```
+
+```jsx
+const { lazy, Suspense } = React;
+
+const Lazy = lazy(
+  () =>
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve({ default: () => <Resource /> });
+      }, 4000);
+    })
+);
+
+const Resource = () => (
+  <div className="box">
+    <h1>React Lazy</h1>
+    <p>This component loaded after 4 seconds, using React Lazy and Suspense</p>
+  </div>
+);
+
+const App = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Lazy />
+    </Suspense>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+Extract loading/skeleton/placeholder components into single place:
+
+```jsx
+const App = () => (
+  <Suspense fallback={<Skeleton />}>
+    <Header />
+    <Suspense fallback={<ListPlaceholder />}>
+      <ListLayout>
+        <List pageId={pageId} />
+      </ListLayout>
+    </Suspense>
+  </Suspense>
+);
 ```
 
 ## React Performance
