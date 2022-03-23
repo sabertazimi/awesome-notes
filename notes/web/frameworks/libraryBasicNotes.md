@@ -755,6 +755,15 @@ tags: [Web, Framework, Library]
 - [Remotion: Create Videos Programmatically in React](https://github.com/remotion-dev/remotion)
 - [Liqvid: React Interactive Video Library](https://github.com/liqvidjs/liqvid)
 
+### Camera
+
+- [React Web Camera](https://github.com/mozmorris/react-webcam)
+
+### Geolocation
+
+- [React MapBox](https://github.com/visgl/react-map-gl)
+- [Turf: Modular Geospatial Engine](https://github.com/Turfjs/turf)
+
 ## Editor
 
 ### Rich Text Editor
@@ -814,10 +823,6 @@ tags: [Web, Framework, Library]
 - [IMAP](https://github.com/mscdex/node-imap)
 - [MailSpring](https://github.com/Foundry376/Mailspring)
 - [Email Status](https://github.com/reacherhq/check-if-email-exists)
-
-## Geolocation
-
-- [Turf: Modular Geospatial Engine](https://github.com/Turfjs/turf)
 
 ## File
 
