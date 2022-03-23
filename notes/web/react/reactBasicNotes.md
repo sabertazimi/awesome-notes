@@ -2135,15 +2135,50 @@ function Checkbox() {
 
 ### UseSyncExternalStore Hook
 
-Allows external stores to support concurrent reads
+`Props`/`Context`/`useState`/`useReducer` are internal states
+not affected by concurrent features.
+
+External stores affected by concurrent features including:
+
+- Global variables:
+  - `document.body`.
+- Date.
+- Redux store.
+- Zustand store.
+
+`useSyncExternalStore` allows external stores to support concurrent reads
 by forcing updates to the store to be synchronous.
 
-```js
+```ts
+type UseSyncExternalStore = (
+  subscribe: (callback: Callback) => Unsubscribe,
+  getSnapshot: () => State
+) => State;
+```
+
+```jsx
 import { useSyncExternalStore } from 'react';
 
 // We will also publish a backwards compatible shim
 // It will prefer the native API, when available
 import { useSyncExternalStore } from 'use-sync-external-store/shim';
+
+const store = {
+  state: { count: 0 },
+  listeners: new Set(),
+  setState: fn => {
+    store.state = fn(store.state);
+    store.listeners.forEach(listener => listener());
+  },
+  subscribe: callback => {
+    store.listeners.add(callback);
+    return () => store.listeners.delete(callback);
+  },
+  getSnapshot: () => {
+    const snap = Object.freeze(store.state);
+    return snap;
+  },
+};
 
 function App() {
   // Basic usage. getSnapshot must return a cached/memoized result
@@ -2152,7 +2187,14 @@ function App() {
   // Selecting a specific field using an inline getSnapshot
   const selectedField = useSyncExternalStore(
     store.subscribe,
-    () => store.getSnapshot().selectedField
+    () => store.getSnapshot().count
+  );
+
+  return (
+    <div>
+      {state.count}
+      {selectedField}
+    </div>
   );
 }
 ```
