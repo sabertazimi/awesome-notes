@@ -2094,7 +2094,7 @@ function App() {
 如果出现更紧急的更新 (User Input), 则上面的更新都会被中断,
 直到没有其他紧急操作之后才会去继续执行更新.
 
-Debounce:
+Opt-in concurrent features (implementing debounce-like function):
 
 ```js
 import { useRef, useState, useTransition } from 'react';
