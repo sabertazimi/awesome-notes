@@ -12,7 +12,9 @@ tags: [Programming, DevOps, Design Pattern]
 
 ## Basic Patterns
 
-> Software design is the art of managing dependencies and abstractions.
+:::tip Design Patterns
+Software design is the art of managing dependencies and abstractions.
+:::
 
 - Minimizing dependencies.
 - Introduce fitting abstractions.
