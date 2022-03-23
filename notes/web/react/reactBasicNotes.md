@@ -4532,6 +4532,7 @@ const LandingPage = () => (
 - Isomorphic rendering.
 - Webpack bundle analyzer.
 - [Progressive React](https://houssein.me/progressive-react).
+- `useDeferredValue`/`useTransition` hook for debounce concurrent features.
 
 ### Re-rendering Problem
 
