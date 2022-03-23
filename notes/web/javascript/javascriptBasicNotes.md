@@ -849,7 +849,8 @@ function doAction(action) {
 
 ![原型链](./figures/Prototype.png)
 
-- 实例化对象仅有属性`__proto__`, 没有属性`prototype`, 函数才具有属性 `prototype` (指向引擎为其自动创建的原型对象)
+- 实例化对象仅有属性`__proto__`, 没有属性`prototype`, 函数才具有属性 `prototype` (指向引擎为其自动创建的原型对象):
+  `Instance.__proto__ === Constructor.prototype`.
 - 所有引用类型 (包括对象/数组/函数/构造函数) 都有属性`__proto__`(隐式原型)
 - 所有函数/构造函数的 `__proto__` 都指向 `Function.prototype`
 - 除`Object.prototype.__proto__`指向 null 外, 其余函数/构造函数的原型对象的`__proto__` 都指向 `Object.prototype`
