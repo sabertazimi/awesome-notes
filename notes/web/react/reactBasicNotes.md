@@ -2156,6 +2156,8 @@ type UseSyncExternalStore = (
 ) => State;
 ```
 
+Simple demo from [React Conf 2021](https://www.youtube.com/watch?v=oPfSC5bQPR8):
+
 ```jsx
 import { useSyncExternalStore } from 'react';
 
