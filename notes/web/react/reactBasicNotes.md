@@ -4271,7 +4271,26 @@ element.addEventListener('click', () => {
 });
 ```
 
-### Lazy and Suspense
+### Suspense
+
+Extract loading/skeleton/placeholder components into single place:
+
+```jsx
+const App = () => (
+  <Suspense fallback={<Skeleton />}>
+    <Header />
+    <Suspense fallback={<ListPlaceholder />}>
+      <ListLayout>
+        <List pageId={pageId} />
+      </ListLayout>
+    </Suspense>
+  </Suspense>
+);
+```
+
+#### Suspense and Lazy
+
+Lazy loading and code splitting:
 
 ```jsx
 import React, { lazy, Suspense } from 'react';
