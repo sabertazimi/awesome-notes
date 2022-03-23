@@ -1145,6 +1145,7 @@ tags: [Web, Framework, Library]
 - [Reactotron](https://github.com/infinitered/reactotron)
 - [React Tracking](https://github.com/nytimes/react-tracking)
 - [React Render Tracker](https://github.com/lahmatiy/react-render-tracker)
+- [ReactTracked: State Usage Tracking with Proxies](https://github.com/dai-shi/react-tracked)
 - [React Component Hierarchy](https://github.com/team-gryff/react-monocle)
 - [Retoggle: Component Inspector](https://github.com/Raathigesh/retoggle)
 
