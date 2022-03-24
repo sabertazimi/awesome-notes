@@ -471,6 +471,56 @@ input 元素的镜像元素
 
 ### dialog
 
+```html
+<button class="btn" data-toggle="#dialog">Open modal</button>
+
+<button class="btn" data-toggle="#dialog-tall">Open tall modal</button>
+
+<dialog id="dialog">
+  <header>
+    Example modal
+    <button class="btn btn-close" data-close>
+      <svg width="16" height="16"><use xlink:href="#x" /></svg>
+    </button>
+  </header>
+  Some basic text inside the modal to demonstrate how it all looks and works.
+</dialog>
+
+<dialog id="dialog-tall">
+  <header>
+    Super tall modal
+    <button class="btn btn-close" data-close>
+      <svg width="16" height="16"><use xlink:href="#x" /></svg>
+    </button>
+  </header>
+  <p>Line breaks to push the height out.</p>
+  <button type="button" class="btn" data-close>Close</button>
+</dialog>
+```
+
+```js
+const togglers = document.querySelectorAll('[data-toggle]');
+const closers = document.querySelectorAll('[data-close]');
+
+togglers?.forEach(toggler => {
+  const target = toggler.getAttribute('data-toggle');
+  const dialogs = document.querySelectorAll(target);
+
+  toggler.addEventListener('click', _event => {
+    dialogs.forEach(dialog => {
+      dialog.showModal();
+    });
+  });
+});
+
+closers?.forEach(closer => {
+  closer.addEventListener('click', _event => {
+    const dialog = closer.closest('dialog');
+    dialog.close();
+  });
+});
+```
+
 ### datalist
 
 ```html
