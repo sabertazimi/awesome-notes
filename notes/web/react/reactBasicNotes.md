@@ -26,6 +26,8 @@ tags: [Web, React]
 其中 `Reconciler` 构建 Fiber Tree 的过程被包装成一个回调函数, 传入 `Scheduler` 模块等待调度.
 `Scheduler` 将回调函数进一步包装成任务对象, 放入多优先级调度的任务队列, 循环消费任务队列, 直至队列清空.
 
+[![React Core Packages](./figures/ReactCorePackages.png)](https://7kms.github.io/react-illustration-series/main/macro-structure)
+
 ### React Virtual DOM
 
 - Reduce rendering times with reconciliation algorithm,
