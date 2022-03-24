@@ -234,6 +234,7 @@ Renderer:
   - Web: DOM node.
   - Native: native UI.
   - Server: SSR strings.
+- Real renderer [demo](https://github.com/sabertazimi/awesome-web/tree/main/packages/react-renderer/src/renderer).
 
 #### Before Mutation Stage
 
