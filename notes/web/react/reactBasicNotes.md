@@ -236,6 +236,41 @@ Renderer:
   - Server: SSR strings.
 - Real renderer [demo](https://github.com/sabertazimi/awesome-web/tree/main/packages/react-renderer/src/renderer).
 
+#### HostConfig Protocol
+
+- `isPrimaryRender: true`.
+- `supportsHydration: true`: SSR renderer.
+- `supportsMutation: true`: React DOM renderer.
+- `supportsPersistence: true`: React Native renderer.
+- Platform timer functions:
+  - now.
+  - scheduleTimeout.
+  - cancelTimeout.
+- Creation operations:
+  - createInstance.
+  - createTextInstance.
+- UI tree operations:
+  - appendInitialChild.
+  - appendChild.
+  - appendChildToContainer.
+  - removeChildFromContainer.
+  - removeChild.
+  - clearContainer.
+- Update props operations:
+  - finalizeInitialChildren.
+  - prepareUpdate.
+  - commitUpdate.
+  - commitTextUpdate.
+  - shouldSetTextContent.
+  - resetTextContent.
+- Context and schedule operations:
+  - getRootHostContext.
+  - getChildHostContext.
+  - getPublicInstance.
+  - prepareForCommit.
+  - resetAfterCommit.
+  - preparePortalMount.
+
 #### Before Mutation Stage
 
 #### Mutation Stage
