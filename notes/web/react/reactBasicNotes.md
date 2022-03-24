@@ -12,9 +12,19 @@ tags: [Web, React]
 
 ## Core of React
 
-- `Scheduler` 调度器: 度任务的优先级, 高优任务优先进入 `Reconciler`.
-- `Reconciler` 协调器: 负责找出变化的组件.
-- `Renderer` 渲染器: 负责将变化的组件渲染到页面上.
+- `Scheduler` 调度器: 调度任务的优先级, 高优任务优先进入 `Reconciler`.
+- `Reconciler` 协调器:
+  - 装载 `Renderer`.
+  - 接收 `ReactDOM` 和 `React` 模块 (用户代码) 发起的更新请求:
+    - `setState`.
+    - `dispatchAction`.
+  - 找出变化组件, 构建 Fiber Tree.
+- `Renderer` 渲染器:
+  - 引导 `React` 应用启动 (e.g `ReactDOM.createRoot(rootNode).render(<App />)`).
+  - 实现 `HostConfig` 协议, 将变化的组件渲染到页面上.
+
+其中 `Reconciler` 构建 Fiber Tree 的过程被包装成一个回调函数, 传入 `Scheduler` 模块等待调度.
+`Scheduler` 将回调函数进一步包装成任务对象, 放入多优先级调度的任务队列, 循环消费任务队列, 直至队列清空.
 
 ### React Virtual DOM
 
@@ -36,7 +46,7 @@ React Fiber 的目标是提高其在动画、布局和手势等领域的适用�
 
 #### React Fiber Metadata
 
-[Fiber](https://github.com/facebook/react/blob/v17.0.0/packages/react-reconciler/src/ReactInternalTypes.js):
+[Fiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactInternalTypes.js):
 
 - Component type.
 - Current props and state.
@@ -184,14 +194,14 @@ export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000
 
 ### React Diff Stage
 
-Reconciler
+Reconciler:
 
 - O(n) incomplete tree comparison: only compare same level nodes.
 - `key` prop to hint for nodes reuse.
 
 ### React Render Stage
 
-Reconciler
+Reconciler.
 
 #### Elements of Different Types
 
@@ -215,7 +225,13 @@ Reconciler
 
 ### React Commit Stage
 
-Renderer
+Renderer:
+
+- Implementing `HostConfig` [protocol](https://github.com/facebook/react/blob/main/packages/react-reconciler/README.md).
+- Rendering fiber tree to real contents
+  - Web: DOM node.
+  - Native: native UI.
+  - Server: SSR strings.
 
 #### Before Mutation Stage
 
