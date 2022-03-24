@@ -874,6 +874,7 @@ tags: [Web, Framework, Library]
 - [React Cookie](https://github.com/reactivestack/cookies)
 - [Nookies: Cookie Helpers for Next.js](https://github.com/maticzav/nookies)
 - [NoCoDB: No Code Database](https://github.com/nocodb/nocodb)
+- [Directus: Open Source Data Platform](https://github.com/directus/directus)
 
 ## Search
 
