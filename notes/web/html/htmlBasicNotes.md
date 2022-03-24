@@ -950,6 +950,19 @@ figure 可拥有唯一的 0/1 个 figcaption
 
 - Embed [best practice](https://web.dev/embed-best-practices).
 
+### SVG
+
+```js
+const svgElement = document.createElementNS(
+  'http://www.w3.org/2000/svg',
+  'svg'
+);
+const svgRectElement = document.createElementNS(
+  'http://www.w3.org/2000/svg',
+  'rect'
+);
+```
+
 ### Command
 
 ## Information

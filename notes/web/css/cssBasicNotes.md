@@ -2618,6 +2618,17 @@ svg {
 }
 ```
 
+```js
+const svgElement = document.createElementNS(
+  'http://www.w3.org/2000/svg',
+  'svg'
+);
+const svgRectElement = document.createElementNS(
+  'http://www.w3.org/2000/svg',
+  'rect'
+);
+```
+
 ## Object Position and Fit
 
 object-position/object-fit 只针对替换元素有作用:
