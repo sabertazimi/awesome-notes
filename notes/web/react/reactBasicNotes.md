@@ -194,14 +194,14 @@ export const IdleLane: Lanes = /*                       */ 0b0100000000000000000
 export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;
 ```
 
-### React Diff Stage
+### React Diff Phase
 
 Reconciler:
 
 - O(n) incomplete tree comparison: only compare same level nodes.
 - `key` prop to hint for nodes reuse.
 
-### React Render Stage
+### React Render Phase
 
 Reconciler.
 
@@ -225,7 +225,7 @@ Reconciler.
 - Then `render` called,
   diff algorithm recursively on the old result and the new result.
 
-### React Commit Stage
+### React Commit Phase
 
 Renderer:
 
@@ -271,13 +271,13 @@ Renderer:
   - resetAfterCommit.
   - preparePortalMount.
 
-#### Before Mutation Stage
+#### Before Mutation Phase
 
-#### Mutation Stage
+#### Mutation Phase
 
 - `Placement` effects: `DOM.appendChild` called.
 
-#### Layout Stage
+#### Layout Phase
 
 - `componentDidMount` lifecycle function called **synchronously**.
 - `useLayoutEffect` callback called **synchronously**.
@@ -555,11 +555,11 @@ this.setState((prevState, props) => ({
 React 协调阶段的生命周期钩子可能会被调用多次,
 协调阶段的生命周期钩子不要包含副作用
 
-#### Creation and Mounting Stage
+#### Creation and Mounting Phase
 
 constructor(props, context) -> getDerivedStateFromProps() -> render() -> componentDidMount()
 
-#### Updating Stage
+#### Updating Phase
 
 update for three reasons:
 
@@ -574,7 +574,7 @@ getSnapshotBeforeUpdate:
 在最新的渲染输出提交给 DOM 前将会立即调用,
 这对于从 DOM 捕获信息（比如：滚动位置）很有用.
 
-#### Unmounting Stage
+#### Unmounting Phase
 
 componentWillUnmount()
 
