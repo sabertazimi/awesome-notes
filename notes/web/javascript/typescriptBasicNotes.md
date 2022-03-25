@@ -1574,6 +1574,10 @@ type InstanceType<T extends new (...args: any) => any> = T extends new (
 ) => infer R
   ? R
   : any;
+
+type ThisParameterType<T> = T extends (this: infer U, ...args: any[]) => any
+  ? U
+  : unknown;
 ```
 
 ### Custom Mapped Types
