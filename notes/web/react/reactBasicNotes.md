@@ -6584,7 +6584,10 @@ export default DatePicker;
 #### Styles Isolation
 
 - Shadow DOM container.
-- CSS scoped / CSS selector renaming.
+- CSS module.
+- CSS scoped namespace
+- CSS selector renaming.
+- CSS in JS.
 
 #### Scripts Isolation
 
