@@ -1951,7 +1951,7 @@ state.map(item => {
 
 ```js
 // bad
-const loadTodo = id => (dispatch, getState) => {
+const loadTodo = id => async (dispatch, getState) => {
   // only fetch the todo if it isn't already loaded
   if (!getState().todos.includes(id)) {
     const todo = await fetch(`/todos/${id}`);
@@ -1960,7 +1960,7 @@ const loadTodo = id => (dispatch, getState) => {
 };
 
 // good
-const loadTodo = (id, todos) => dispatch => {
+const loadTodo = (id, todos) => async dispatch => {
   // only fetch the todo if it isn't already loaded
   if (!todos.includes(id)) {
     const todo = await fetch(`/todos/${id}`);

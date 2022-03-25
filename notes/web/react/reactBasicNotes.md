@@ -5462,24 +5462,24 @@ type State = typeof initialState;
 
 ```ts
 export function updateName(name: string) {
-  return <const>{
+  return {
     type: 'UPDATE_NAME',
     name,
-  };
+  } as const;
 }
 
 export function addPoints(points: number) {
-  return <const>{
+  return {
     type: 'ADD_POINTS',
     points,
-  };
+  } as const;
 }
 
 export function setLikesGames(value: boolean) {
-  return <const>{
+  return {
     type: 'SET_LIKES_GAMES',
     value,
-  };
+  } as const;
 }
 
 type Action = ReturnType<

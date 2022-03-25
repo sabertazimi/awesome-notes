@@ -5969,7 +5969,7 @@ if (entry.transferSize === 0) {
 ```
 
 ```js
-function handleRequest(event) {
+async function handleRequest(event) {
   const cacheStart = performance.now();
   const response = await caches.match(event.request);
   const cacheEnd = performance.now();
