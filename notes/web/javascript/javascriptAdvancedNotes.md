@@ -7653,6 +7653,40 @@ def allow_request(req):
 
 ### Sandbox
 
+- `eval()`:
+  它能访问执行上下文中的局部变量, 也能访问所有全局变量, 是一个非常危险的函数.
+- `new Function()`:
+  在全局作用域中被创建, 不会创建闭包.
+  当运行函数时, 只能访问本地变量和全局变量,
+  不能访问 Function 构造器被调用生成的上下文的作用域.
+- `with () {}`:
+  它首先会在传入的对象中查找对应的变量,
+  如果找不到就会往更上层的全局作用域去查找,
+  导致全局环境污染.
+
+ProxySandbox:
+
+```js
+function sandbox(code) {
+  code = `with (sandbox) {${code}}`;
+  // eslint-disable-next-line no-new-func
+  const fn = new Function('sandbox', code);
+
+  return function (sandbox) {
+    const sandboxProxy = new Proxy(sandbox, {
+      has(target, key) {
+        return true;
+      },
+      get(target, key) {
+        if (key === Symbol.unscopables) return undefined;
+        return target[key];
+      },
+    });
+    return fn(sandboxProxy);
+  };
+}
+```
+
 ```js
 // 简化伪代码示例
 const frame = document.body.appendChild(
