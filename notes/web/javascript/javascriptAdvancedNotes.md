@@ -1727,24 +1727,24 @@ Proxy(target, {
 });
 ```
 
-APIs of handler:
+`Reflect` handlers:
 
-- `get`.
-- `set`.
-- `has`.
-- `apply`.
-- `construct`.
-- `Reflect.ownKeys`:
+- `Reflect.get(target, propKey)`.
+- `Reflect.set(target, propKey, value)`.
+- `Reflect.has(target, propKey)`.
+- `Reflect.apply(target, thisArgument, argumentsList)`.
+- `Reflect.construct(target, argumentsList)`:
+  `new target(...argumentsList)`.
+- `Reflect.ownKeys(target)`:
   `Object.getOwnPropertyNames` + `Object.getOwnPropertySymbols`,
   all keys include Symbols.
-- `deleteProperty`.
-- `defineProperty`.
-- `isExtensible`.
-- `preventExtensions`.
-- `getPrototypeOf`.
-- `setPrototypeOf`.
-- `getOwnPropertyDescriptor`.
-- `getOwnPropertyDescriptors`.
+- `Reflect.getPrototypeOf(target)`.
+- `Reflect.setPrototypeOf(target, prototype)`.
+- `Reflect.getOwnPropertyDescriptor(target, propKey)`.
+- `Reflect.defineProperty(target, propKey, attributes)`.
+- `Reflect.deleteProperty(target, propKey)`.
+- `Reflect.isExtensible(target)`.
+- `Reflect.preventExtensions(target)`.
 
 Change original object will change proxy object,
 change proxy object will change original object via `set` related API.
