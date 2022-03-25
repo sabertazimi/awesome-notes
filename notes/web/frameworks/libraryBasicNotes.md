@@ -351,14 +351,14 @@ tags: [Web, Framework, Library]
 - [GitHub Information Card](https://github.com/lepture/github-cards)
 - [Bootcards](https://github.com/bootcards/bootcards)
 
-### Chat Widgets
+### Chat
 
 - [React Chat Widget](https://github.com/Wolox/react-chat-widget)
 - [Matrix](https://github.com/matrix-org/matrix-react-sdk)
 - [JsSIP: Chat Library](https://github.com/versatica/JsSIP)
 - [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
 
-### Comments System
+### Comments
 
 - [GitTalk: Modern Comment Component Based on Github Issue and Preact](https://github.com/gitalk/gitalk)
 - [Utterances: Lightweight Comments Widget Built on GitHub Issues](https://github.com/utterance/utterances)
@@ -369,6 +369,7 @@ tags: [Web, Framework, Library]
 
 - [Golden: Multi Window Layout Manager for Web Apps](https://github.com/golden-layout/golden-layout)
 - [WinBox: HTML5 Window Manager for Web](https://github.com/nextapps-de/winbox)
+- [NiceModal: eBay React Modal Manager](https://github.com/eBay/nice-modal-react)
 
 ### Message
 
