@@ -774,25 +774,26 @@ tags: [Web, Framework, Library]
 
 ### Rich Text Editor
 
-- [React Markdown](https://github.com/remarkjs/react-markdown)
-- [Vditor: Multiple Mode Markdown Editor](https://github.com/Vanessa219/vditor)
-- [MilkDown Editor](https://github.com/Saul-Mirone/milkdown)
-- [Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
-- [Block Editor](https://github.com/codex-team/editor.js)
+- [Slate: Customizable Rich Text Editor Framework](https://github.com/ianstormtaylor/slate)
+- [EditorJS: Block-styled Rich Text Editor](https://github.com/codex-team/editor.js)
+- [WangEditor: Lightweight Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
 - [TinyMCE: World #1 JavaScript Library for Rich Text Editing](https://github.com/tinymce/tinymce)
-- [CKEditor](https://github.com/ckeditor/ckeditor5)
-- [Wang Editor](https://github.com/wangfupeng1988/wangEditor)
 - [StyloJS: TypeScript Rich Text Editor](https://github.com/papyrs/stylo)
+- [Draft: React Text Editor Framework](https://github.com/facebook/draft-js)
+
+### Markdown Editor
+
+- [MilkDown: Plugin Driven WYSIWYG Markdown Editor framework](https://github.com/Saul-Mirone/milkdown)
+- [Vditor: Multiple Mode Markdown Editor](https://github.com/Vanessa219/vditor)
+- [React Markdown Component](https://github.com/remarkjs/react-markdown)
 
 ### Code Editor
 
 - [Monaco: Powers VS Code](https://github.com/Microsoft/monaco-editor)
-- [Draft: React Text Editor Framework](https://github.com/facebook/draft-js)
 - [React ACE](https://github.com/securingsincity/react-ace)
 - [ACE Editor](https://github.com/ajaxorg/ace)
 - [Code Mirror](https://github.com/codemirror/CodeMirror)
-- [Block Editor](https://github.com/codex-team/editor.js)
-- [React Editor](https://github.com/concrete-utopia/utopia)
+- [Utopia: React IDE](https://github.com/concrete-utopia/utopia)
 - [Xi: Code Editor Philosophy](https://github.com/xi-editor/xi-editor)
 
 ### Live Editor and Playground
