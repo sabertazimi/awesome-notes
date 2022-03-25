@@ -857,12 +857,40 @@ function doAction(action) {
 - 除`Object.create()`外, 所新建对象的 `__proto__` 指向构造该对象的构造函数的`原型对象(prototype)`
 - 除`typeof Function.prototype` 为 'function' 外, 其余函数/构造函数的原型对象都为 '对象'(`typeof` 为 'object')
 - 先有`Object.prototype`(原型链顶端), `Function.prototype` 继承`Object.prototype`而产生, 最后`Object/Function/Array/其它构造函数`继承`Function.prototype`而产生
-- `__proto__`:
-  `[[proto]]` getter is `Object.getPrototypeOf(object)`,
-  `[[proto]]` setter is `Object.setPrototypeOf(object, prototype)`.
 
-> `Object` ---`__proto__`--> `Function.prototype` ---`__proto__`
-> --> `Object.prototype` ---`__proto__`--> `null`
+:::tip Prototype Chain
+`Object`---`__proto__`
+--> `Function.prototype`---`__proto__`
+--> `Object.prototype`---`__proto__`
+--> `null`
+:::
+
+`__proto__`:
+
+- `[[proto]]` getter is `Object.getPrototypeOf(object)`.
+- `[[proto]]` setter is `Object.setPrototypeOf(object, prototype)`.
+
+下面五种操作（方法/属性/运算符）可以触发 JS 引擎读取一个对象的原型，
+可以触发 `getPrototypeOf()` 代理方法的运行：
+
+```js
+const obj = {};
+const p = new Proxy(obj, {
+  getPrototypeOf(target) {
+    return Array.prototype;
+  },
+});
+
+console.log(
+  Object.getPrototypeOf(p) === Array.prototype, // true
+  Reflect.getPrototypeOf(p) === Array.prototype, // true
+  // eslint-disable-next-line no-prototype-builtins
+  Array.prototype.isPrototypeOf(p), // true
+  // eslint-disable-next-line no-proto
+  p.__proto__ === Array.prototype, // true
+  p instanceof Array // true
+);
+```
 
 ```js
 function Foo(value) {
