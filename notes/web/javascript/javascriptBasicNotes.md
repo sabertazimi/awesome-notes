@@ -1671,6 +1671,7 @@ try {
 - 每个执行环境拥有独立的作用域链,例如 独立全局对象、独立**活动对象**,
 - 可动态改变作用域链的语句: with/try catch(异常对象入列，位于作用域链链首)
 - `scope` -> `(list) [0]活动对象` -> `[1]全局对象`.
+- Global Scope -> Function Scope -> ES6 Block Scope.
 
 #### 全局对象 window
 
