@@ -1764,6 +1764,7 @@ change proxy object will change original object via `set` related API.
   - 对象上定义新属性时, 只有 Proxy 可以监听到.
   - 数组新增删除修改时, 只有 Proxy 可以监听到.
   - `Object.defineProperty` 无法监听数组, `Proxy` 则可以直接监听数组变化.
+  - Vue2: 重写数组方法监听数组变化, Vue3: `Proxy` 监听数组变化.
 - Proxy 不兼容 IE, Object.defineProperty 不兼容 IE8 及以下.
 
 #### Default Zero Value with Proxy
