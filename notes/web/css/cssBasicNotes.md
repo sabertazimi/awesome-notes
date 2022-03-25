@@ -3458,6 +3458,10 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 }
 ```
 
+- `display: none`: 元素不在 DOM 流.
+- `visibility: hidden`: 元素在 DOM 流, 隐藏不可见, 不可触发事件.
+- `opacity: 0`: 元素在 DOM 流, 透明度为 0, 可触发事件.
+
 ## Awesome Components
 
 ### Landing Page
