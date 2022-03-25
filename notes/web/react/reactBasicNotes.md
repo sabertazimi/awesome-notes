@@ -740,6 +740,75 @@ export default function App() {
 }
 ```
 
+React `SubComponents` pattern:
+
+```tsx
+import type { CSSProperties, ReactNode } from 'react';
+import React from 'react';
+
+interface Props {
+  children: ReactNode;
+  style?: CSSProperties;
+  rest?: any;
+}
+
+const Header = ({ children, style, ...rest }: Props): JSX.Element => (
+  <div style={{ ...style }} {...rest}>
+    {children}
+  </div>
+);
+
+const Body = ({ children, style, ...rest }: Props): JSX.Element => (
+  <div style={{ ...style }} {...rest}>
+    {children}
+  </div>
+);
+
+const Footer = ({ children, style, ...rest }: Props): JSX.Element => (
+  <div style={{ ...style }} {...rest}>
+    {children}
+  </div>
+);
+
+const getChildrenOnDisplayName = (children: ReactNode[], displayName: string) =>
+  React.Children.map(children, child =>
+    child.displayName === displayName ? child : null
+  );
+
+const Card = ({ children }: { children: ReactNode[] }): JSX.Element => {
+  const header = getChildrenOnDisplayName(children, 'Header');
+  const body = getChildrenOnDisplayName(children, 'Body');
+  const footer = getChildrenOnDisplayName(children, 'Footer');
+
+  return (
+    <div className="card">
+      {header && <div className="card-header">{header}</div>}
+      <div className="card-body">{body}</div>
+      {footer && <div className="card-footer">{footer}</div>}
+    </div>
+  );
+};
+
+Header.displayName = 'Header';
+Body.displayName = 'Body';
+Footer.displayName = 'Footer';
+Card.Header = Header;
+Card.Body = Body;
+Card.Footer = Footer;
+
+const App = () => (
+  <div>
+    <Card>
+      <Card.Header>Header</Card.Header>
+      <Card.Body>Body</Card.Body>
+      <Card.Footer>Footer</Card.Footer>
+    </Card>
+  </div>
+);
+
+export default App;
+```
+
 ### Refs
 
 Refs 用于返回对元素的引用.
