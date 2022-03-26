@@ -3959,13 +3959,20 @@ Load 也不一定代表用户看到主要内容.
 就是用户看到主要内容的一个时间点.
 
 它的优点是相对校准的估算出内容渲染时间, 贴近用户感知.
-但缺点是无原生 API 支持, 算法推导时 DOM 节点不含权重.
+但缺点是无原生 API 支持, 算法推导时 DOM 节点含权重.
 
-- First Contentful Paint (FCP)
+- First Paint (FP): 0 ~ 1 ~ 2.5s.
+- First Contentful Paint (FCP): 0 ~ 2 ~ 4s.
 - First Meaningful Paint (FMP)
-- Largest Contentful Paint (LCP)
-- First Input Delay (FID)
-- Time to Interactive (TOI)
+- Largest Contentful Paint (LCP): 0 ~ 2.5 ~ 4s.
+- Time to Interactive (TTI): 0 ~ 3.8 ~ 7.3s.
+- First Input Delay (FID): 0 ~ 0.1 ~ 0.3s.
+
+Google Core Web Vitals:
+
+- 加载 (Loading): LCP.
+- 交互 (Interactivity): FID.
+- 视觉稳定 (Visual Stability): CLS.
 
 #### Monitoring Report Dimension
 
