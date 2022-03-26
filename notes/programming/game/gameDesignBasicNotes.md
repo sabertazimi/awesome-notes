@@ -8,8 +8,6 @@ tags: [Programming, Game Design]
 
 # Game Design Basic Notes
 
-[TOC]
-
 ## 游戏心理学
 
 - 代入感/角色扮演

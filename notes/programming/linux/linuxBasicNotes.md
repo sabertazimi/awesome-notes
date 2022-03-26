@@ -8,8 +8,6 @@ tags: [Programming, OS, Linux]
 
 # Linux Basic Notes
 
-[TOC]
-
 ## Linux Boot System
 
 ### Grub

@@ -8,8 +8,6 @@ tags: [CS, Compiler]
 
 # Compiler Basic Notes
 
-[TOC]
-
 ## Basic Concepts
 
 ### Definition of compilers

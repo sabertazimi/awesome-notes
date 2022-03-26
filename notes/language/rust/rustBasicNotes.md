@@ -8,8 +8,6 @@ tags: [Language, Rust]
 
 # Rust Basic Notes
 
-[TOC]
-
 ## Toolchain
 
 ### Installation

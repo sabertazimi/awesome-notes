@@ -8,8 +8,6 @@ tags: [CS, LaTex]
 
 # LaTeX Basic Notes
 
-[TOC]
-
 ## Workflow
 
 ### Installation

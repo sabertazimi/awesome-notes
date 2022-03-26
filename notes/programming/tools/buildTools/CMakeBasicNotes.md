@@ -8,8 +8,6 @@ tags: [Programming, Tools, CMake]
 
 # CMake Basic Notes
 
-[TOC]
-
 ## Basic Build System
 
 build for executable

@@ -8,8 +8,6 @@ tags: [Language, C]
 
 # C Basic Notes
 
-[TOC]
-
 ## 编程习惯
 
 ### Macro(宏)

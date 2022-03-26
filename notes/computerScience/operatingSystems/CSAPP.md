@@ -8,8 +8,6 @@ tags: [CS, System, OS, Architecture]
 
 # Computer Systems: A Programmer's Perspective Basic Notes
 
-[TOC]
-
 ## 机器码与进制转换
 
 ### 浮点数

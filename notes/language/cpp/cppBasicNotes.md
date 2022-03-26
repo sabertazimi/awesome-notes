@@ -8,8 +8,6 @@ tags: [Language, CPP]
 
 # C++ Basic Notes
 
-[TOC]
-
 ## Basic Workflow
 
 ### 初始化与回收

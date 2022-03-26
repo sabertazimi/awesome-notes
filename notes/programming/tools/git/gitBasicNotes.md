@@ -8,8 +8,6 @@ tags: [Programming, Tools, Git]
 
 # Git Basic Notes
 
-[TOC]
-
 ## Git Configuration
 
 - /etc/gitconfig

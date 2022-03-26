@@ -8,8 +8,6 @@ tags: [Web, Framework, Library]
 
 # Library Basic Notes
 
-[TOC]
-
 ## Indexing Tools
 
 - [OpenBase](https://openbase.com)

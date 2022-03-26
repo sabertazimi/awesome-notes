@@ -8,8 +8,6 @@ tags: [Web, React, Router]
 
 # React Router Basic Notes
 
-[TOC]
-
 ## Router and Route
 
 parent routes are active when child routes are active

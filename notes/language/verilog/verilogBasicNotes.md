@@ -8,8 +8,6 @@ tags: [Language, Verilog]
 
 # Verilog Basic Notes
 
-[TOC]
-
 ## General Flow
 
 ### Create Project

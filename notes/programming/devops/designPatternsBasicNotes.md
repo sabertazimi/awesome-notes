@@ -8,8 +8,6 @@ tags: [Programming, DevOps, Design Pattern]
 
 # Design Patterns Basic Notes
 
-[TOC]
-
 ## Basic Patterns
 
 :::tip Design Patterns

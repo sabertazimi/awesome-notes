@@ -8,8 +8,6 @@ tags: [Language, Assembly]
 
 # Assembly Basic Notes
 
-[TOC]
-
 ## Assembly Execution Model
 
 Load-ALU-Store 模式 - 读入寄存器，算术逻辑单元运算，回写至内存

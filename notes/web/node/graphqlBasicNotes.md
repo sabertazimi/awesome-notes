@@ -8,8 +8,6 @@ tags: [Web, Node, GraphQL]
 
 # GraphQL Basic Notes
 
-[TOC]
-
 ## Better REST
 
 - No OverFetching

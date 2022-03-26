@@ -8,8 +8,6 @@ tags: [Web, JavaScript, TypeScript]
 
 # TypeScript Basic Notes
 
-[TOC]
-
 ## TypeScript Configuration
 
 ### TypeScript Installation

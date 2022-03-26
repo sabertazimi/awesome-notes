@@ -8,8 +8,6 @@ tags: [Web, Security]
 
 # Security Basic Notes
 
-[TOC]
-
 ## Curated List of Vulnerability
 
 ### Object Injection

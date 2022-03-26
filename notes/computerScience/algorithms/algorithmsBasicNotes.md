@@ -8,8 +8,6 @@ tags: [CS, Algorithm]
 
 # Algorithm Basic Notes
 
-[TOC]
-
 ## Sorting Algorithm
 
 ### Summary

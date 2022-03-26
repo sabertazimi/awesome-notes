@@ -8,8 +8,6 @@ tags: [CS, Architecture]
 
 # Architecture Basic Notes
 
-[TOC]
-
 ## SuperPipeline and SuperScalar
 
 A superpipeline processor own a 5-20 stage pipeline,

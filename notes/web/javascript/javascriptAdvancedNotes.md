@@ -8,8 +8,6 @@ tags: [Web, JavaScript, ECMAScript]
 
 # JavaScript Advanced Notes
 
-[TOC]
-
 ## Modern JavaScript
 
 ### TC39

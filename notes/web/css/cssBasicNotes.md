@@ -8,8 +8,6 @@ tags: [Web, CSS]
 
 # CSS Basic Notes
 
-[TOC]
-
 ## Cascading and Inheritance
 
 ### Cascading Order

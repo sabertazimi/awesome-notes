@@ -8,8 +8,6 @@ tags: [Programming, DevOps, Testing]
 
 # Software Testing Basic Notes
 
-[TOC]
-
 ## 测试模型
 
 ### PIE 模型

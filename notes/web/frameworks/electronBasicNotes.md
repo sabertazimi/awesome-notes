@@ -8,8 +8,6 @@ tags: [Web, Framework, Electron]
 
 # Electron Basic Notes
 
-[TOC]
-
 ## Getting Started
 
 - [Electron Forge](https://electronforge.io)

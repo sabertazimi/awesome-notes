@@ -8,8 +8,6 @@ tags: [Programming, DevOps, Design Pattern, Code Guide]
 
 # Clean Code Basic Notes
 
-[TOC]
-
 ## Programming Principles
 
 ### SOLID principle

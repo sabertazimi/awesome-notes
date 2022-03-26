@@ -8,8 +8,6 @@ tags: [CS, System, Architecture, Graph Processing]
 
 # Graph Processing Basic Notes
 
-[TOC]
-
 ## Graph System
 
 | Classification | In-memory  | Out-of-core |

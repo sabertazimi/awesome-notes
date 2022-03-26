@@ -8,8 +8,6 @@ tags: [Language, Java]
 
 # Java Basic Notes
 
-[TOC]
-
 ## CLI Tools
 
 ### 编译

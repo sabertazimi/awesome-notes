@@ -8,8 +8,6 @@ tags: [Web, CSS, Bootstrap]
 
 # Bootstrap Basic Notes
 
-[TOC]
-
 ## Bootstrap Basis
 
 ```html

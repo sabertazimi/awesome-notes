@@ -8,8 +8,6 @@ tags: [Programming, Tools, Vim]
 
 # Vim Basic Notes
 
-[TOC]
-
 ## Normal 模式命令
 
 ### 重复命令

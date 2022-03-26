@@ -8,8 +8,6 @@ tags: [CS, Algorithm, OJ]
 
 # OJ Basic Notes
 
-[TOC]
-
 ## String Problem
 
 ```cpp

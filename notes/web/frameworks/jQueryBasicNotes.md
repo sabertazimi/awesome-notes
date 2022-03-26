@@ -8,8 +8,6 @@ tags: [Web, Framework, jQuery]
 
 # jQuery Basic Notes
 
-[TOC]
-
 ## Callbacks Queue
 
 callback queue use `Observer` pattern to

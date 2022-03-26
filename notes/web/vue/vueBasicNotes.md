@@ -8,8 +8,6 @@ tags: [Web, Vue]
 
 # Vue Basic Notes
 
-[TOC]
-
 ## Directives
 
 ### Control Flow Directives

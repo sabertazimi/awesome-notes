@@ -8,8 +8,6 @@ tags: [Web, HTML]
 
 # HTML Basic Notes
 
-[TOC]
-
 ## Emmet
 
 ### 嵌套操作

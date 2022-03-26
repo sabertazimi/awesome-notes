@@ -8,8 +8,6 @@ tags: [Web, Angular]
 
 # Angular Basic Notes
 
-[TOC]
-
 ## Basic
 
 - [Installation](https://angular.io/guide/quickstart)

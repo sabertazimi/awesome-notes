@@ -8,8 +8,6 @@ tags: [Web, Node]
 
 # Node Basic Notes
 
-[TOC]
-
 ## Node App Structure
 
 - Main ./index.js, ./server.js, or ./yourEntryFile.js in the root

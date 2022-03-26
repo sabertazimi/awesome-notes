@@ -8,8 +8,6 @@ tags: [Programming, Android]
 
 # Android Basic Notes
 
-[TOC]
-
 ## Android Framework
 
 ### Dalvik virtual machine

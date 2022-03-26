@@ -8,8 +8,6 @@ tags: [CS, Database]
 
 # Database Basic Notes
 
-[TOC]
-
 ## Basic Concepts
 
 ### Feature

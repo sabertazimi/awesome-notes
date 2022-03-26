@@ -8,8 +8,6 @@ tags: [CS, Network]
 
 # Computer Networking Notes
 
-[TOC]
-
 ## Computer Network and Internet
 
 ### What is Internet

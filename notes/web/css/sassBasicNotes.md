@@ -8,8 +8,6 @@ tags: [Web, CSS, Sass]
 
 # Sass Basic Notes
 
-[TOC]
-
 ## Sass Basis
 
 ### Variable

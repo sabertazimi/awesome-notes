@@ -8,8 +8,6 @@ tags: [Web, JavaScript]
 
 # JavaScript Basic Notes
 
-[TOC]
-
 ## 常量
 
 常数值 **加括号** 可转化为对象.

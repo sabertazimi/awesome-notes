@@ -8,8 +8,6 @@ tags: [Language, Python]
 
 # Python Basic Notes
 
-[TOC]
-
 ## Python Basics
 
 ### Basic Types

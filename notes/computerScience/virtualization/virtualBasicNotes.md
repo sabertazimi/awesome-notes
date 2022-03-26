@@ -8,8 +8,6 @@ tags: [CS, System, Virtualization]
 
 # Virtualization Basic Notes
 
-[TOC]
-
 ## How to read paper
 
 - abstract, introduction, related works, conclusion

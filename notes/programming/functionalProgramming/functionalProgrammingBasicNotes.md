@@ -8,8 +8,6 @@ tags: [Programming, Functional Programming]
 
 # Functional Programming Basic Notes
 
-[TOC]
-
 ## Lambda Calculus
 
 ### Lambda Expression (Lambda-Term)

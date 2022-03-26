@@ -8,8 +8,6 @@ tags: [Web, Node, Express]
 
 # Express Basic Notes
 
-[TOC]
-
 ## Middleware Function
 
 ### Principle

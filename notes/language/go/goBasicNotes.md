@@ -8,8 +8,6 @@ tags: [Language, Go]
 
 # Go Basic Notes
 
-[TOC]
-
 ## CLI
 
 ### Installation

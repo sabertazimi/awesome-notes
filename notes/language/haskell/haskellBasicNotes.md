@@ -8,8 +8,6 @@ tags: [Language, Haskell]
 
 # Haskell Basic Notes
 
-[TOC]
-
 ## Platform
 
 ```bash

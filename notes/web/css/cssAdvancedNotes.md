@@ -8,8 +8,6 @@ tags: [Web, CSS]
 
 # CSS Advanced Notes
 
-[TOC]
-
 ## CSS Framework Key Points
 
 - Content

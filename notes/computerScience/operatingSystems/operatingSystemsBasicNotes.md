@@ -8,8 +8,6 @@ tags: [CS, System, OS]
 
 # Operating System Basic Notes
 
-[TOC]
-
 ## OS Definition
 
 操作系统是一个大型的程序系统, 它负责(处理机管理, 存储管理, 设备管理, 文件系统):

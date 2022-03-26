@@ -8,8 +8,6 @@ tags: [Web, Node, Message Queue]
 
 # Message Queue Basic Notes
 
-[TOC]
-
 ## Message Queue Basis
 
 Pros:
