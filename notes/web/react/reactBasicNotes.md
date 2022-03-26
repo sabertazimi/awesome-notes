@@ -25,6 +25,21 @@ tags: [Web, React]
 
 其中 `Reconciler` 构建 Fiber Tree 的过程被包装成一个回调函数, 传入 `Scheduler` 模块等待调度.
 `Scheduler` 将回调函数进一步包装成任务对象, 放入多优先级调度的任务队列, 循环消费任务队列, 直至队列清空.
+Scheduler Work Loop (任务调度循环) 负责调度 `Task`,
+Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
+
+`React` runtime main logic:
+
+- Updates: `Add`/`Delete`/`Mutation` updates from `User Code`.
+- Registration:
+  - `Reconciler` receive updates request from `User Code`.
+  - `Scheduler` register new `Task`.
+- Execution:
+  - `Scheduler` consume `Task` in `TaskQueue` in work loop.
+  - `Reconciler` execute `Task` work.
+    - `Fiber` 构造循环: construct `Fiber` tree.
+    - `commitRoot`: render `Fiber` tree with `Renderer`.
+- 任务调度循环与 `Fiber` 构造循环相互配合可实现**可中断渲染**.
 
 [![React Core Packages](./figures/ReactCorePackages.png)](https://7kms.github.io/react-illustration-series/main/macro-structure)
 
@@ -82,53 +97,10 @@ then update effects to real DOM when `Commit` stage.
 
 ### React Scheduler
 
-Polyfill for `requestIdleCallback` with priority control.
-
-```js
-const performWork = deadline => {
-  if (!nextUnitOfWork) {
-    resetNextUnitOfWork();
-  }
-
-  // whether current status is idle status or not
-  while (nextUnitOfWork && deadline.timeRemaining() > ENOUGH_TIME) {
-    nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
-  }
-
-  if (pendingCommit) {
-    commitAllWork(pendingCommit);
-  }
-
-  // checks if there's pending work
-  // if exist, performWork in **next frame** when idle
-  if (nextUnitOfWork || updateQueue.length > 0) {
-    requestIdleCallback(performWork);
-  }
-};
-
-const scheduleUpdate = (instance, partialState) => {
-  updateQueue.push({
-    from: CLASS_COMPONENT,
-    instance,
-    partialState,
-  });
-
-  requestIdleCallback(performWork);
-};
-
-// React.render function
-const render = (elements, container) => {
-  updateQueue.push({
-    from: HOST_ROOT,
-    dom: container,
-    newProps: {
-      children: elements,
-    },
-  });
-
-  requestIdleCallback(performWork);
-};
-```
+Work loop in scheduler focus on **Task Scheduling**,
+not only including `Reconciler.performSyncWorkOnRoot`/`Reconciler.performConcurrentWorkOnRoot`,
+but also for non-react tasks
+(meaning `Scheduler` module can work standalone without `React`).
 
 #### Priority Scheduler
 
@@ -192,6 +164,56 @@ export const IdleHydrationLane: Lane = /*               */ 0b0010000000000000000
 export const IdleLane: Lanes = /*                       */ 0b0100000000000000000000000000000;
 
 export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;
+```
+
+### React Reconciler
+
+Polyfill for `requestIdleCallback` with priority control.
+
+```js
+const performWork = deadline => {
+  if (!nextUnitOfWork) {
+    resetNextUnitOfWork();
+  }
+
+  // whether current status is idle status or not
+  while (nextUnitOfWork && deadline.timeRemaining() > ENOUGH_TIME) {
+    nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+  }
+
+  if (pendingCommit) {
+    commitAllWork(pendingCommit);
+  }
+
+  // checks if there's pending work
+  // if exist, performWork in **next frame** when idle
+  if (nextUnitOfWork || updateQueue.length > 0) {
+    requestIdleCallback(performWork);
+  }
+};
+
+const scheduleUpdate = (instance, partialState) => {
+  updateQueue.push({
+    from: CLASS_COMPONENT,
+    instance,
+    partialState,
+  });
+
+  requestIdleCallback(performWork);
+};
+
+// React.render function
+const render = (elements, container) => {
+  updateQueue.push({
+    from: HOST_ROOT,
+    dom: container,
+    newProps: {
+      children: elements,
+    },
+  });
+
+  requestIdleCallback(performWork);
+};
 ```
 
 ### React Diff Phase
@@ -282,10 +304,10 @@ Renderer:
 - `componentDidMount` lifecycle function called **synchronously**.
 - `useLayoutEffect` callback called **synchronously**.
 
-#### useEffect Execution Time
+#### UseEffect Execution Timing
 
 `useEffect` callback called **asynchronously**
-after three stages of `Commit`.
+after above three `Commit` phases.
 
 ## Props and States
 
