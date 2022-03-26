@@ -2703,6 +2703,25 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
 视图可以绑定到视图模型的属性上面，视图模型则去将包含在模型中的数据暴露给视图。
 像我们所提到过的，对视图的抽象意味着其背后的代码需要较少的逻辑。
 
+## AOP Pattern
+
+AOP (Aspect Oriented Programming)
+把通用逻辑抽离出来,
+通过切面的方式添加到某个地方,
+可以复用和动态增删切面逻辑.
+
+Nest.js:
+Middleware, Guard, Interceptor, Pipe, ExceptionFilter 通过 AOP 思想,
+灵活地作用在某个路由或者全部路由.
+
+Middleware 在最外层, 到达某个路由之后,
+先调用 Guard, Guard 用于判断路由有没有权限访问,
+再调用 Interceptor, 对 Controller 前后扩展一些逻辑,
+在到达目标 Controller 之前, 会调用 Pipe 来对参数做验证和转换.
+所有的 HttpException 的异常都会被 ExceptionFilter 处理, 返回不同的响应.
+
+Nest.js 通过 AOP 的架构方式, 实现了松耦合, 易于维护与扩展的架构.
+
 ## jQuery Pattern
 
 ### Plugin Pattern
