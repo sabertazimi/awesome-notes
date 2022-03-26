@@ -356,7 +356,7 @@ class Example extends React.Component {
   }
 
   render() {
-    return null;
+    return <div>Example</div>;
   }
 }
 
@@ -425,62 +425,80 @@ class MyComponent extends React.Component {
 
 ### Props Validation
 
-```jsx
-static PropTypes = {
-    arrayProps: React.PropTypes.array
-    // array/bool/func/number/object/string/symbol/node/element
-    // React.PropTypes.instanceOf/oneOf/oneOfType
-    // React.PropTypes.arrayOf(React.PropsTypes.number)
-    // React.PropTypes.objectOf(React.PropsTypes.number)
-    // React.PropTypes.any.isRequired
-}
-```
+- `React.PropTypes.array/bool/func/number/object/string/symbol/node/element`.
+- `React.PropTypes.any.isRequired`.
+- `React.PropTypes.objectOf(React.PropsTypes.number)`.
+- `React.PropTypes.arrayOf(React.PropsTypes.number)`.
+- `React.PropTypes.instanceOf/oneOf/oneOfType(type)`.
 
 ## Element and Component
 
-react element 实际上是纯对象, 可由 React.createElement()/JSX/element factory helper 创建,
-并被 react 在必要时渲染成真实的 DOM 结点
+React Element 实际上是纯对象,
+可由 `React.createElement()`/`JSX`/`Element Factory Helper` 创建,
+并被 React 在必要时渲染成真实的 DOM Nodes.
 
-```jsx
-ReactDOM.render({
-  type: Form,
-  props: {
-    isSubmitted: false,
-    buttonText: 'OK!'
-  }
-}, document.getElementById('root'));
+```ts
+export interface ReactElement<Props, Type> {
+  $$typeof: any;
+  key: string | number;
+  type: Type;
+  props: Props;
+  ref: Ref;
+
+  // ReactFiber
+  _owner: any;
+
+  // __DEV__
+  _store: { validated: boolean };
+  _self: React$Element<any>;
+  _shadowChildren: any;
+  _source: Source;
+}
+```
+
+```js
+ReactDOM.render(
+  {
+    type: Form,
+    props: {
+      isSubmitted: false,
+      buttonText: 'OK!',
+    },
+  },
+  document.getElementById('root')
+);
 
 // React: You told me this...
-{
+const FormElement = {
   type: Form,
   props: {
     isSubmitted: false,
-    buttonText: 'OK!'
-  }
-}
+    buttonText: 'OK!',
+  },
+};
 
 // React: ...And Form told me this...
-{
+const ButtonElement = {
   type: Button,
   props: {
     children: 'OK!',
-    color: 'blue'
-  }
-}
+    color: 'blue',
+  },
+};
 
 // React: ...and Button told me this! I guess I'm done.
-{
+const HTMLButtonElement = {
   type: 'button',
   props: {
     className: 'button button-blue',
     children: {
       type: 'b',
       props: {
-        children: 'OK!'
-      }
-    }
-  }
-}
+        children: 'OK!',
+      },
+    },
+  },
+};
 ```
 
 ### JSX
@@ -488,11 +506,9 @@ ReactDOM.render({
 在 JSX 中, 小写标签被认为是 HTML 标签.
 但是, 含有 `.` 的大写和小写标签名却不是.
 
-```jsx
-<component /> 将被转换为 React.createElement('component') (i.e, HTML 标签)
-<obj.component /> 将被转换为 React.createElement(obj.component)
-<Component /> 将被转换为 React.createElement(Component)
-```
+- `<component />`: 转换为 `React.createElement('component')` (e.g HTML Native Tag).
+- `<obj.component />`: 转换为 `React.createElement(obj.component)`.
+- `<Component />`: 转换为 `React.createElement(Component)`.
 
 #### JSX Transform
 
@@ -559,38 +575,56 @@ TypeScript config for new JSX transform:
 - 结合 Redux 中的 connect 方法, 将 store 中的 state 作为此类组件的 props
 
 ```jsx
-this.setState((prevState, props) => ({
-  counter: prevState.counter + props.increment,
-}));
+class Component {
+  render() {
+    this.setState((prevState, props) => ({
+      counter: prevState.counter + props.increment,
+    }));
+
+    return <div>Component</div>;
+  }
+}
 ```
 
 ### Component Lifecycle
 
-- reconciliation stage:
-  constructor, getDerivedStateFromProps, getDerivedStateFromError,
-  shouldComponentUpdate, render.
-- commit stage:
-  componentDidMount, getSnapshotBeforeUpdate, componentDidUpdate,
-  componentWillUnmount, componentDidCatch.
+- Reconciliation phase:
+  - constructor.
+  - getDerivedStateFromProps.
+  - getDerivedStateFromError.
+  - shouldComponentUpdate.
+  - render.
+- Commit phase:
+  - componentDidMount.
+  - getSnapshotBeforeUpdate.
+  - componentDidUpdate.
+  - componentWillUnmount.
+  - componentDidCatch.
 
 因为协调阶段可能被中断、恢复，甚至重做,
 React 协调阶段的生命周期钩子可能会被调用多次,
-协调阶段的生命周期钩子不要包含副作用
+**协调阶段的生命周期钩子不要包含副作用**: e.g `fetch` promises, `async` functions.
 
 #### Creation and Mounting Phase
 
-constructor(props, context) -> getDerivedStateFromProps() -> render() -> componentDidMount()
+`constructor(props, context)`
+-> `getDerivedStateFromProps()`
+-> `render()`
+-> `componentDidMount()`.
 
 #### Updating Phase
 
-update for three reasons:
+Update for three reasons:
 
-- parent/top (re-)render
-- this.setState() called
-- this.forceUpdate() called
+- Parent/top components (re-)rendering.
+- `this.setState()` called.
+- `this.forceUpdate()` called.
 
-getDerivedStateFromProps() -> shouldComponentUpdate(nextProps, nextState)
--> render() -> getSnapshotBeforeUpdate() -> componentDidUpdate(prevProps, prevState)
+`getDerivedStateFromProps()`
+-> `shouldComponentUpdate(nextProps, nextState)`
+-> `render()`
+-> `getSnapshotBeforeUpdate()`
+-> `componentDidUpdate(prevProps, prevState)`.
 
 getSnapshotBeforeUpdate:
 在最新的渲染输出提交给 DOM 前将会立即调用,
@@ -843,7 +877,7 @@ Refs 用于返回对元素的引用.
 
 `Ref` 通过将 Fiber 树中的 `instance` 赋给 `ref.current` 实现
 
-```jsx
+```ts
 function commitAttachRef(finishedWork: Fiber) {
   // finishedWork 为含有 Ref effectTag 的 fiber
   const ref = finishedWork.ref;
@@ -1599,8 +1633,8 @@ function Example() {
 }
 ```
 
-```jsx
-import { useState, useEffect } from 'react';
+```js
+import { useEffect, useState } from 'react';
 
 function FriendStatus(props) {
   const [isOnline, setIsOnline] = useState(null);
@@ -1620,6 +1654,7 @@ function FriendStatus(props) {
   if (isOnline === null) {
     return 'Loading...';
   }
+
   return isOnline ? 'Online' : 'Offline';
 }
 
@@ -1708,7 +1743,10 @@ const reducer = (state, action) => {
   }
 };
 
-const [state, dispatch] = useReducer(reducer, initialState);
+const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return <div>App</div>;
+};
 ```
 
 ### UseRef Hook
@@ -1766,6 +1804,8 @@ function Example() {
       console.log(`You clicked ${latestCount.current} times`);
     }, 3000);
   });
+
+  return <div>Example</div>;
 }
 ```
 
@@ -1959,7 +1999,8 @@ function pushEffect(tag, create, destroy, deps) {
 
 1. React renders UI for current props/state to screen.
 2. React cleans up the effect for prev props/state.
-3. React runs the effect for current props/state.
+3. React runs the effect for current props/state
+   (`useEffect` got invoked after `componentDidMount`).
 
 #### UseEffect Nasty Loop
 
@@ -1990,9 +2031,9 @@ Functions in useEffect:
   and pull the ones that are used only by an effect inside of that effect.
 - For useCallback function, it should be in deps list `useEffect(() => {}, [callback])`
 
-```jsx
+```js
 // https://www.robinwieruch.de/react-hooks-fetch-data
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const useDataApi = (initialUrl, initialData) => {
@@ -2122,10 +2163,23 @@ function Counter() {
 ```
 
 ```jsx
-componentDidUpdate() {
-  setTimeout(() => {
-    console.log(`You clicked ${this.state.count} times`);
-  }, 3000);
+class Counter {
+  componentDidUpdate() {
+    setTimeout(() => {
+      console.log(`You clicked ${this.state.count} times`);
+    }, 3000);
+  }
+
+  render() {
+    const { count } = this.props;
+
+    return (
+      <div>
+        <p>You clicked {count} times</p>
+        <button onClick={() => this.setState(count + 1)}>Click me</button>
+      </div>
+    );
+  }
 }
 // Output:
 // Mounted: You clicked 0 times
@@ -2142,6 +2196,7 @@ componentDidUpdate() {
 `useLayoutEffect` callback called **synchronously**
 (fires synchronously after all DOM mutations),
 substitute for `componentDidMount` lifecycle function.
+`useEffect` got invoked after `componentDidMount`.
 
 If need to mutate the DOM or do need to perform DOM measurements,
 `useLayoutEffect` is better than `useEffect`.
@@ -2462,26 +2517,27 @@ React.createRoot(document.querySelector('#root')).render(<App />);
 
 ### Custom LifeCycle Hooks
 
-componentDidMount: `useLayoutEffect`.
-`useEffect` got invoked after `componentDidMount`.
+`componentDidMount`:
 
-```jsx
+```js
 const useMount = fn => {
-  useEffect(() => void fn(), []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => fn(), []);
 };
 ```
 
-componentWillUnmount
+componentWillUnmount:
 
-```jsx
+```js
 const useUnmount = fn => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => fn, []);
 };
 ```
 
-componentDidUpdate
+componentDidUpdate:
 
-```jsx
+```js
 const useUpdate = fn => {
   const mounting = useRef(true);
 
@@ -2497,14 +2553,13 @@ const useUpdate = fn => {
 };
 ```
 
-Force Update
+Force Update:
 
-```jsx
+```js
 const useUpdate = () => useState(0)[1];
 ```
 
-```jsx
-// @ts-ignore
+```ts
 import { useState } from 'react';
 
 interface VoidFunction {
@@ -2515,7 +2570,7 @@ interface VoidFunctionCreator {
   (): VoidFunction;
 }
 
-const max: number = 9007199254740990; // Number.MAX_SAFE_INTEGER - 1;
+const max = 9007199254740990; // Number.MAX_SAFE_INTEGER - 1;
 
 const useForceUpdate: VoidFunctionCreator = (): VoidFunction => {
   const [, setState] = useState(0);
@@ -2528,9 +2583,9 @@ const useForceUpdate: VoidFunctionCreator = (): VoidFunction => {
 export default useForceUpdate;
 ```
 
-isMounted
+`isMounted`:
 
-```jsx
+```js
 const useIsMounted = () => {
   const [isMount, setIsMount] = useState(false);
 
@@ -2539,6 +2594,7 @@ const useIsMounted = () => {
       setIsMount(true);
     }
     return () => setIsMount(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return isMount;
@@ -2550,8 +2606,8 @@ const useIsMounted = () => {
 - `useState` to store url and data
 - `useEffect` to trigger async `fetch` actions
 
-```jsx
-import { useState, useEffect } from 'react';
+```js
+import { useEffect, useState } from 'react';
 
 function useFriendStatus(friendID) {
   const [isOnline, setIsOnline] = useState(null);
@@ -2569,7 +2625,9 @@ function useFriendStatus(friendID) {
 
   return isOnline;
 }
+```
 
+```jsx
 function FriendStatus(props) {
   const isOnline = useFriendStatus(props.friend.id);
 
@@ -2588,8 +2646,8 @@ function FriendListItem(props) {
 }
 ```
 
-```jsx
-import React, { Fragment, useState, useEffect } from 'react';
+```js
+import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 
 const useDataApi = (initialUrl, initialData) => {
@@ -2598,7 +2656,7 @@ const useDataApi = (initialUrl, initialData) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setIsError(false);
     setIsLoading(true);
 
@@ -2611,11 +2669,11 @@ const useDataApi = (initialUrl, initialData) => {
     }
 
     setIsLoading(false);
-  };
+  }, [url]);
 
   useEffect(() => {
     fetchData();
-  }, [url]);
+  }, [fetchData]);
 
   const doGet = (event, url) => {
     setUrl(url);
@@ -2624,7 +2682,9 @@ const useDataApi = (initialUrl, initialData) => {
 
   return { data, isLoading, isError, doGet };
 };
+```
 
+```jsx
 function App() {
   const [query, setQuery] = useState('redux');
   const { data, isLoading, isError, doGet } = useDataApi(
@@ -2812,7 +2872,7 @@ export default useInterval;
 
 ### Custom Debounce Hook
 
-```jsx
+```js
 // Hook
 function useDebounce(value, delay) {
   // State and setters for debounced value
@@ -2838,14 +2898,18 @@ function useDebounce(value, delay) {
 
   return debouncedValue;
 }
+```
 
-// Usage
-const [searchTerm, setSearchTerm] = useState('');
-const debouncedSearchTerm = useDebounce(searchTerm, 500);
+```jsx
+function App() {
+  // Usage
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-useEffect(() => {
-  ...
-}, [debouncedSearchTerm]);
+  useEffect(() => {}, [debouncedSearchTerm]);
+
+  return <div>App</div>;
+}
 ```
 
 ### Custom EventListener Hook
@@ -2932,7 +2996,7 @@ export default useIntersectionObserver;
 
 ### Custom Router Hook
 
-```jsx
+```js
 import { useContext, useEffect } from 'react';
 import { __RouterContext } from 'react-router';
 import useForceUpdate from 'use-force-update';
@@ -2941,7 +3005,10 @@ const useReactRouter = () => {
   const forceUpdate = useForceUpdate();
   const routerContext = useContext(__RouterContext);
 
-  useEffect(() => routerContext.history.listen(forceUpdate), [routerContext]);
+  useEffect(
+    () => routerContext.history.listen(forceUpdate),
+    [forceUpdate, routerContext]
+  );
 
   return routerContext;
 };
@@ -2949,8 +3016,8 @@ const useReactRouter = () => {
 
 ### Custom History Hook
 
-```jsx
-import { useReducer, useCallback } from 'react';
+```js
+import { useCallback, useReducer } from 'react';
 
 // Initial state that we pass into useReducer
 const initialState = {
@@ -2967,7 +3034,7 @@ const reducer = (state, action) => {
   const { past, present, future } = state;
 
   switch (action.type) {
-    case 'UNDO':
+    case 'UNDO': {
       const previous = past[past.length - 1];
       const newPast = past.slice(0, past.length - 1);
 
@@ -2976,7 +3043,8 @@ const reducer = (state, action) => {
         present: previous,
         future: [present, ...future],
       };
-    case 'REDO':
+    }
+    case 'REDO': {
       const next = future[0];
       const newFuture = future.slice(1);
 
@@ -2985,24 +3053,30 @@ const reducer = (state, action) => {
         present: next,
         future: newFuture,
       };
-    case 'SET':
+    }
+    case 'SET': {
       const { newPresent } = action;
 
       if (newPresent === present) {
         return state;
       }
+
       return {
         past: [...past, present],
         present: newPresent,
         future: [],
       };
-    case 'CLEAR':
+    }
+    case 'CLEAR': {
       const { initialPresent } = action;
 
       return {
         ...initialState,
         present: initialPresent,
       };
+    }
+    default:
+      throw new Error('Unsupported action type!');
   }
 };
 
@@ -3023,13 +3097,13 @@ const useHistory = initialPresent => {
     if (canUndo) {
       dispatch({ type: 'UNDO' });
     }
-  }, [canUndo, dispatch]);
+  }, [dispatch, canUndo]);
 
   const redo = useCallback(() => {
     if (canRedo) {
       dispatch({ type: 'REDO' });
     }
-  }, [canRedo, dispatch]);
+  }, [dispatch, canRedo]);
 
   const set = useCallback(
     newPresent => dispatch({ type: 'SET', newPresent }),
@@ -3038,7 +3112,7 @@ const useHistory = initialPresent => {
 
   const clear = useCallback(
     () => dispatch({ type: 'CLEAR', initialPresent }),
-    [dispatch]
+    [dispatch, initialPresent]
   );
 
   // If needed we could also return past and future state
@@ -3122,8 +3196,8 @@ function useScript(src: string): Status {
 export default useScript;
 ```
 
-```jsx
-let cachedScripts = [];
+```js
+const cachedScripts = [];
 
 const useScript = src => {
   // Keeping track of script loaded and error state
@@ -3146,7 +3220,7 @@ const useScript = src => {
         cachedScripts.push(src);
 
         // Create script
-        let script = document.createElement('script');
+        const script = document.createElement('script');
         script.src = src;
         script.async = true;
 
@@ -3249,7 +3323,7 @@ export default useLockedBody;
 
 ### Custom Media Query Hook
 
-```tsx
+```ts
 export default function useMedia<T>(
   queries: string[],
   values: T[],
@@ -3279,7 +3353,7 @@ export default function useMedia<T>(
 
 ### Custom Form Hook
 
-```jsx
+```js
 import { useState } from 'react';
 
 const useForm = callback => {
@@ -3984,10 +4058,10 @@ export const setAtomValue =
   可使用 useCallback 包裹函数, 并设置正确的 Deps List,
   尽可能地减少 render 时重新定义此函数.
 
-```jsx
+```js
 // ✅ Not affected by the data flow
 function getFetchUrl(query) {
-  return 'https://hn.algolia.com/api/v1/search?query=' + query;
+  return `https://hn.algolia.com/api/v1/search?query=${query}`;
 }
 
 function SearchResults() {
@@ -4237,20 +4311,23 @@ render() {
 ### ES6 Binding for This
 
 ```jsx
-constructor() {
-  this.handle = this.handle.bind(this);
-}
+class Component extends React.Component {
+  state = {};
+  handleES6 = event => {};
 
-handle(e) {
-  this.setState({
-    ...
-  });
-}
-```
+  constructor(props) {
+    super(props);
+    this.handleLegacy = this.handleLegacy.bind(this);
+  }
 
-```jsx
-state = {};
-handle = e => {};
+  handleLegacy(event) {
+    this.setState(prev => ({ ...prev }));
+  }
+
+  render() {
+    return <div>Component</div>;
+  }
+}
 ```
 
 ### Context API
@@ -4501,6 +4578,7 @@ class Portal extends React.Component {
 class Modal extends React.Component {
   render() {
     const { children, toggle, on } = this.props;
+
     return (
       <Portal>
         {on ? (
@@ -4714,7 +4792,7 @@ const LandingPage = () => (
 - Lazy loading components (`React.lazy` and `React.Suspense`).
 - Virtualized Lists.
 - Stateless component: less props, less state, less nest (HOC or render props).
-- Immutable.js.
+- `Immutable.js`.
 - Isomorphic rendering.
 - Webpack bundle analyzer.
 - [Progressive React](https://houssein.me/progressive-react).
@@ -4811,17 +4889,17 @@ export default App;
 
 Prevent useless re-rendering:
 
-- shouldComponentUpdate
-- React.PureComponent: **shallow compare** diff
-- React.memo: **shallow compare** diff,
+- `shouldComponentUpdate`.
+- `React.PureComponent`: **shallow compare** diff.
+- `React.memo`: **shallow compare** diff,
   to memorize stateless components that **props not changed often**,
   `export default React.memo(MyComponent, areEqual)`.
-- memorized values
-- memorized event handlers
-- 在用`memo`或者`useMemo`做优化前
+- Memorized values.
+- Memorized event handlers.
+- 在用 `memo` 或者 `useMemo` 做优化前
   ([Before You Memo](https://overreacted.io/before-you-memo/)),
   可以从不变的部分里分割出变化的部分.
-  通过将变化部分的`state`向下移动从而抽象出变化的子组件,
+  通过将变化部分的 `state` 向下移动从而抽象出变化的子组件,
   或者将变化内容提升到父组件从而将不变部分独立出来:
 
 ```jsx
@@ -5006,13 +5084,10 @@ the client takes over and the website becomes a SPA.
 
 Webpack configuration:
 
-```jsx
-module.exports = [
-  webConfig,
-  nodeConfig,
-];
+```js
+const baseConfig = require('./baseConfig');
 
-const webConfig = {}
+const webConfig = {
   ...baseConfig,
   target: 'web',
 };
@@ -5026,6 +5101,8 @@ const nodeConfig = {
   },
   externals: [require('webpack-node-externals')()],
 };
+
+module.exports = { webConfig, nodeConfig };
 ```
 
 `start.server.js`:
@@ -5038,9 +5115,9 @@ import App from './App.js';
 export default () => ReactDOMServer.renderToString(<App />);
 ```
 
-index.html.js
+`index.html.js`:
 
-```jsx
+```js
 const startApp = require('../dist/server.js').default;
 
 module.exports = () => `<!DOCTYPE html>
@@ -5067,10 +5144,10 @@ Async fetch out of `<App />`:
 
 ```jsx
 const data = await fetchData();
-const app = <App {...data} />
+const App = <App {...data} />
 
 return {
-  html: ReactDOMServer.renderToString(app);
+  html: ReactDOMServer.renderToString(App);
   state: { data }
 };
 ```
@@ -5236,7 +5313,7 @@ declare module 'react-router-dom' {
 - `JSX.Element`: return value of `React.createElement`.
 - `React.ReactNode`: return value of a component.
 
-```tsx
+```ts
 function foo(bar: string) {
   return { baz: 1 };
 }
@@ -5406,7 +5483,7 @@ type Input =
 
 ### React Portals Types
 
-```tsx
+```jsx
 const modalRoot = document.getElementById('modal-root') as HTMLElement;
 
 export class Modal extends React.Component {
@@ -5453,6 +5530,7 @@ import { Modal } from '@components';
 
 function App() {
   const [showModal, setShowModal] = React.useState(false);
+
   return (
     <div>
       <div id="modal-root"></div>
@@ -5552,7 +5630,9 @@ const reducer = (state: State, action: Action): Reducer<State, Action> => {
 ```tsx
 function App() {
   const [user, setUser] = React.useState<IUser>({} as IUser);
-  setUser(newUser);
+  const handleClick = () => setUser(newUser);
+
+  return <div>App</div>;
 }
 ```
 
@@ -5964,8 +6044,11 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 
 `createReactApp.js`:
 
-`init` -> commander setup -> `createApp()`
--> process CLI args -> `run()`
+`init`
+-> commander setup
+-> `createApp()`
+-> process CLI args
+-> `run()`
 -> process `react-scripts@version` and `cra-template-xxx@version`
 -> install `react`, `react-dom`, `react-scripts` and `cra-template-xxx`
 -> invoke `react-scripts init` for further process.
@@ -5976,9 +6059,9 @@ npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-n
 
 Initialization in `react-scripts/scripts/init.js`:
 
-- 可以用于改变默认 registry
+- 可以用于改变默认 registry:
 
-```jsx
+```js
 'use strict';
 
 const registries = {
@@ -6009,10 +6092,10 @@ module.exports = registries;
 
 Locating in `react-scripts/scripts/`:
 
-- `start.js` for `react-scripts start`
-- `build.js` for `react-scripts build`
-- `test.js` for `react-scripts test`
-- `eject.js` for `react-scripts eject`
+- `start.js` for `react-scripts start`.
+- `build.js` for `react-scripts build`.
+- `test.js` for `react-scripts test`.
+- `eject.js` for `react-scripts eject`.
 
 ##### React Scripts Start
 
@@ -6026,31 +6109,29 @@ to find local template.
 
 Config in `react-scripts/config/` directory:
 
-- `env.js`: static environment variables
-- `getHttpsConfig.js`: get HTTPS(SSL) config
-- `modules.js`: locale modules webpack alias with `baseUrl`
-- `paths.js`: configurable paths variables (most for Webpack config)
-- `webpackDevServer.config.js`: Webpack Dev Server configuration
+- `env.js`: static environment variables.
+- `getHttpsConfig.js`: get HTTPS(SSL) config.
+- `modules.js`: locale modules webpack alias with `baseUrl`.
+- `paths.js`: configurable paths variables (most for Webpack config).
+- `webpackDevServer.config.js`: Webpack Dev Server configuration.
 - `webpack.config.js`: Webpack configuration
-  (paths, deps/devDeps, plugins, loader rules etc.)
+  (paths, deps/devDeps, plugins, loader rules etc.).
 
-```jsx
-// add support for Ant Design UI
-{
+```js
+// Add support for Ant Design UI.
+const webpackConfig = {
   test: /\.(js|mjs|jsx|ts|tsx)$/,
   include: paths.appSrc,
   loader: require.resolve('babel-loader'),
   options: {
-    customize: require.resolve(
-      'babel-preset-react-app/webpack-overrides'
-    ),
+    customize: require.resolve('babel-preset-react-app/webpack-overrides'),
     plugins: [
       [
         require.resolve('babel-plugin-import'),
         {
-          "libraryName": "antd",
-          "libraryDirectory": "es",
-          "style": "css",
+          libraryName: 'antd',
+          libraryDirectory: 'es',
+          style: 'css',
         },
       ],
     ],
@@ -6058,21 +6139,21 @@ Config in `react-scripts/config/` directory:
     cacheCompression: isEnvProduction,
     compact: isEnvProduction,
   },
-}
+};
 ```
 
-```jsx
-// add Webpack bundle analyzer plugin
+```js
+// Add Webpack bundle analyzer plugin.
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-{
+const webpackConfig = {
   plugins: [
     isEnvDevelopment &&
       new BundleAnalyzerPlugin({
         analyzerPort: 5000,
       }),
-  ];
-}
+  ].filter(Boolean),
+};
 ```
 
 ### CRA Usage
@@ -6097,7 +6178,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
 ```
 
-```tsx
+```jsx
 class Component {
   render() {
     // Note: this is an escape hatch and should be used sparingly!
@@ -6200,9 +6281,13 @@ export default reportWebVitals;
 
 ```jsx
 // renders <a href="/calendar/today">
-<BrowserRouter basename="/calendar">
-  <Link to="/today" />
-</BrowserRouter>
+function App() {
+  return (
+    <BrowserRouter basename="/calendar">
+      <Link to="/today" />
+    </BrowserRouter>
+  );
+}
 ```
 
 #### SPA Deployment
@@ -6317,19 +6402,23 @@ if (!fs.existsSync(paths.appTypeDeclarations)) {
 
 ### Simple i18n Implementation
 
-```jsx
+```js
 // locale/zh-CN.js
-export default ({
-   hello: '你好，{name}'
-});
-
-// locale/en-US.js
-export default ({
-   hello: 'Hello，{name}'
-}) ;
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  hello: '你好，{name}',
+};
 ```
 
-```jsx
+```js
+// locale/en-US.js
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  hello: 'Hello，{name}',
+};
+```
+
+```js
 import IntlMessageFormat from 'intl-messageformat';
 import zh from '../locale/zh';
 import en from '../locale/en';
@@ -6344,6 +6433,7 @@ class Intl {
       if (defaultMessage != null) {
         return defaultMessage;
       }
+
       return key;
     }
 
@@ -6351,6 +6441,7 @@ class Intl {
       msg = new IntlMessageFormat(msg, LOCALE);
       return msg.format(options);
     }
+
     return msg;
   }
 }
