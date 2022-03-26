@@ -591,9 +591,15 @@ TypeScript config for new JSX transform:
 
 ### Stateless and Stateful component
 
+React Component
+[definition](https://github.com/facebook/react/blob/main/packages/react/src/ReactBaseClasses.js):
+
+- `React.Component`.
+- `React.PureComponent`.
+
 #### Stateless component
 
-采用函数型声明, 不使用 setState(), 一般作为表现型组件
+采用函数型声明, 不使用 `setState()`, 一般作为表现型组件.
 
 #### Stateful component
 
