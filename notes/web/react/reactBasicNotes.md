@@ -438,10 +438,36 @@ React Element 实际上是纯对象,
 并被 React 在必要时渲染成真实的 DOM Nodes.
 
 ```ts
-export interface ReactElement<Props, Type> {
+type ReactInternalType =
+  | 'react.element'
+  | 'react.portal'
+  | 'react.fragment'
+  | 'react.strict_mode'
+  | 'react.profiler'
+  | 'react.provider'
+  | 'react.context'
+  | 'react.forward_ref'
+  | 'react.suspense'
+  | 'react.suspense_list'
+  | 'react.memo'
+  | 'react.lazy'
+  | 'react.block'
+  | 'react.server.block'
+  | 'react.fundamental'
+  | 'react.scope'
+  | 'react.opaque.id'
+  | 'react.debug_trace_mode'
+  | 'react.offscreen'
+  | 'react.legacy_hidden';
+
+export interface ReactElement<Props> {
   $$typeof: any;
-  key: string | number;
-  type: Type;
+  key: string | number | null;
+  type:
+    | string
+    | ((props: Props) => ReactElement<any>)
+    | (new (props: Props) => ReactComponent<any>)
+    | ReactInternalType;
   props: Props;
   ref: Ref;
 
