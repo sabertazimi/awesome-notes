@@ -56,19 +56,159 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
 
 ### React Fiber
 
-- [A Simple React with Fiber Reconciliation](https://github.com/sabertazimi/meact)
-
 React Fiber 的目标是提高其在动画、布局和手势等领域的适用性.
 它的主要特性是 `Incremental Rendering` : 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
+A [minimal React](https://github.com/sabertazimi/meact) with Fiber Reconciliation.
 
 #### React Fiber Metadata
 
-[Fiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactInternalTypes.js):
+`Fiber` [definition](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactInternalTypes.js):
 
 - Component type.
 - Current props and state.
 - Pointers to parent, sibling, and child components.
 - Other internal metadata to track rendering process.
+
+```ts
+export interface Fiber {
+  tag: WorkTag;
+  key: string | null;
+  elementType: any;
+  type: any;
+  stateNode: any;
+  ref: (((handle: mixed) => void) & { _stringRef: ?string }) | RefObject | null;
+
+  // Singly Linked List Tree Structure.
+  return: Fiber | null; // DFS parent Fiber node.
+  child: Fiber | null;
+  sibling: Fiber | null;
+  index: number;
+
+  // Props and state for output.
+  pendingProps: any;
+  memoizedProps: any;
+  updateQueue: mixed; // Updates from diff(pendingProps, memoizedProps).
+  memoizedState: any;
+
+  dependencies: Dependencies | null; // (contexts, events) deps.
+
+  mode: TypeOfMode; // NoMode/BlockingMode/ConcurrentMode bit.
+
+  // Effects.
+  flags: Flags;
+  subtreeFlags: Flags;
+  deletions: Array<Fiber> | null;
+  nextEffect: Fiber | null; // Next effect Fiber node.
+  firstEffect: Fiber | null; // First effect Fiber node.
+  lastEffect: Fiber | null; // Last effect Fiber node.
+
+  // Priority.
+  lanes: Lanes;
+  childLanes: Lanes;
+  alternate: Fiber | null; // `current` Fiber and `workInpProgress` Fiber.
+
+  // Performance statistics for React DevTool.
+  actualDuration?: number;
+  actualStartTime?: number;
+  selfBaseDuration?: number;
+  treeBaseDuration?: number;
+}
+```
+
+常见的 Fiber [类型](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactWorkTags.js):
+
+- HostComponent: HTML native tag.
+- ClassComponent.
+- FunctionComponent.
+
+```ts
+type WorkTag =
+  | 'FunctionComponent'
+  | 'ClassComponent'
+  | 'IndeterminateComponent'
+  | 'HostRoot'
+  | 'HostPortal'
+  | 'HostComponent'
+  | 'HostText'
+  | 'Fragment'
+  | 'Mode'
+  | 'ContextConsumer'
+  | 'ContextProvider'
+  | 'ForwardRef'
+  | 'Profiler'
+  | 'SuspenseComponent'
+  | 'MemoComponent'
+  | 'SimpleMemoComponent'
+  | 'LazyComponent'
+  | 'IncompleteClassComponent'
+  | 'DehydratedFragment'
+  | 'SuspenseListComponent'
+  | 'FundamentalComponent'
+  | 'ScopeComponent'
+  | 'Block'
+  | 'OffscreenComponent'
+  | 'LegacyHiddenComponent';
+```
+
+[更新与更新队列](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+
+```ts
+interface Update<State> {
+  lane: Lane;
+  tag: 'UpdateState' | 'ReplaceState' | 'ForceUpdate' | 'CaptureUpdate';
+  payload: any;
+  callback: (() => mixed) | null;
+  next: Update<State> | null;
+  _eventTime: number;
+}
+
+interface SharedQueue<State> {
+  pending: Update<State> | null;
+}
+
+interface UpdateQueue<State> {
+  baseState: State;
+  firstBaseUpdate: Update<State> | null;
+  lastBaseUpdate: Update<State> | null;
+  shared: SharedQueue<State>;
+  effects: Array<Update<State>> | null; // Updates with `callback`.
+}
+```
+
+常见的 Effect [标志位](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberFlags.js):
+
+```ts
+type Flags = number;
+
+const NoFlags = /*                      */ 0b000000000000000000;
+const PerformedWork = /*                */ 0b000000000000000001;
+const Placement = /*                    */ 0b000000000000000010;
+const Update = /*                       */ 0b000000000000000100;
+const PlacementAndUpdate = /*           */ 0b000000000000000110;
+const Deletion = /*                     */ 0b000000000000001000;
+const ContentReset = /*                 */ 0b000000000000010000;
+const Callback = /*                     */ 0b000000000000100000;
+const DidCapture = /*                   */ 0b000000000001000000;
+const Ref = /*                          */ 0b000000000010000000;
+const Snapshot = /*                     */ 0b000000000100000000;
+const Passive = /*                      */ 0b000000001000000000;
+const PassiveUnmountPendingDev = /*     */ 0b000010000000000000;
+const Hydrating = /*                    */ 0b000000010000000000;
+const HydratingAndUpdate = /*           */ 0b000000010000000100;
+const LifecycleEffectMask = /*          */ 0b000000001110100100;
+const HostEffectMask = /*               */ 0b000000011111111111;
+const Incomplete = /*                   */ 0b000000100000000000;
+const ShouldCapture = /*                */ 0b000001000000000000;
+const ForceUpdateForLegacySuspense = /* */ 0b000100000000000000;
+const PassiveStatic = /*                */ 0b001000000000000000;
+const BeforeMutationMask = /*           */ 0b000000001100001010;
+const MutationMask = /*                 */ 0b000000010010011110;
+const LayoutMask = /*                   */ 0b000000000010100100;
+const PassiveMask = /*                  */ 0b000000001000001000;
+const StaticMask = /*                   */ 0b001000000000000000;
+const MountLayoutDev = /*               */ 0b010000000000000000;
+const MountPassiveDev = /*              */ 0b100000000000000000;
+```
 
 #### React Fiber Effects
 
@@ -102,9 +242,23 @@ not only including `Reconciler.performSyncWorkOnRoot`/`Reconciler.performConcurr
 but also for non-react tasks
 (meaning `Scheduler` module can work standalone without `React`).
 
+TaskQueue is a MinHeap, storing Tasks.
+
+```js
+const newTask = {
+  id: taskIdCounter++,
+  callback, // Work from reconciler.
+  priorityLevel,
+  startTime,
+  expirationTime,
+  sortIndex: -1, // MinHeap queue indexing.
+};
+```
+
 #### Priority Scheduler
 
-React 16, unstable concurrent mode:
+React 16, unstable concurrent mode with
+[`Priorities`](https://github.com/facebook/react/blob/main/packages/scheduler/src/SchedulerPriorities.js):
 
 - ImmediatePriority: 立即执行优先级, 级别最高, `expirationTime = -1`.
 - UserBlockingPriority: 用户阻塞优先级, `expirationTime = 250`.
@@ -112,7 +266,8 @@ React 16, unstable concurrent mode:
 - LowPriority: 低优先级, `expirationTime = 10000`.
 - IdlePriority: 可闲置优先级, `expirationTime = maxSigned31BitInt`.
 
-React 17, stable concurrent mode with `Lanes`:
+React 17, stable concurrent mode with
+[`Lanes`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js):
 
 ```js
 export const TotalLanes = 31;
@@ -532,7 +687,7 @@ const HTMLButtonElement = {
 在 JSX 中, 小写标签被认为是 HTML 标签.
 但是, 含有 `.` 的大写和小写标签名却不是.
 
-- `<component />`: 转换为 `React.createElement('component')` (e.g HTML Native Tag).
+- `<component />`: 转换为 `React.createElement('component')` (e.g HTML native tag).
 - `<obj.component />`: 转换为 `React.createElement(obj.component)`.
 - `<Component />`: 转换为 `React.createElement(Component)`.
 
@@ -1383,22 +1538,91 @@ class Menu extends React.Component {
 - useXXX -> mountXXX -> updateXXX.
 - mountXXX: mountWorkInProgressHook -> separated creation logic.
 - updateXXX: updateWorkInProgressHook -> separated update logic.
-- `hooks` 的值都存在组件的 `fiberNode` 的 `memorizedState` 属性上.
+- 对于 `FunctionComponent` Fiber, `fiber.memoizedState` 指向第一个 `Hook`.
+
+Hooks
+[definition](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js):
+
+```ts
+interface Hook {
+  // hook 保存的数据.
+  memoizedState: any;
+  // 本次更新以 baseState 为基础计算新的 state.
+  baseState: any;
+  // 本次更新开始时已有的 update 队列.
+  baseQueue: Update<any, any> | null;
+  // 本次更新需要增加的 update 队列.
+  queue: UpdateQueue<any, any> | null;
+  // 指向下一个 hook.
+  next: Hook | null;
+}
+
+interface Update<S, A> {
+  lane: Lane;
+  action: A;
+  hasEagerState: boolean;
+  eagerState: S | null;
+  next: Update<S, A>;
+}
+
+interface UpdateQueue<S, A> {
+  pending: Update<S, A> | null;
+  interleaved: Update<S, A> | null;
+  dispatch: ((A) => mixed) | null;
+  lanes: Lanes;
+  lastRenderedReducer: ((S, A) => S) | null;
+  lastRenderedState: S | null;
+}
+
+interface Effect {
+  tag: HookFlags;
+  create: () => (() => void) | void;
+  destroy: (() => void) | void;
+  deps: Array<mixed> | null;
+  next: Effect;
+}
+
+type HookType =
+  | 'useState'
+  | 'useReducer'
+  | 'useContext'
+  | 'useRef'
+  | 'useEffect'
+  | 'useInsertionEffect'
+  | 'useLayoutEffect'
+  | 'useCallback'
+  | 'useMemo'
+  | 'useImperativeHandle'
+  | 'useDebugValue'
+  | 'useDeferredValue'
+  | 'useTransition'
+  | 'useMutableSource'
+  | 'useSyncExternalStore'
+  | 'useId'
+  | 'useCacheRefresh';
+```
+
+#### Hooks Memoized State
+
+| Hooks       | Memoized State                                 |
+| ----------- | ---------------------------------------------- |
+| useRef      | `ref: { current }`                             |
+| useMemo     | `[nextValue, deps]`                            |
+| useCallback | `[callback, deps]`                             |
+| useState    | `state`                                        |
+| useEffect   | `effect: { tag, create, destroy, deps, next }` |
+
+#### WorkInProgress Hook
 
 ```js
 function mountWorkInProgressHook() {
   // hook 实例
   const hook = {
-    // hook 保存的数据.
     memoizedState: null,
-    // 指向下一个 hook.
-    next: hookForB,
-    // 本次更新以 baseState 为基础计算新的 state.
     baseState: null,
-    // 本次更新开始时已有的 update 队列.
     baseQueue: null,
-    // 本次更新需要增加的 update 队列.
     queue: null,
+    next: hookForB,
   };
 
   if (workInProgressHook === null) {
@@ -1411,13 +1635,7 @@ function mountWorkInProgressHook() {
 }
 ```
 
-| Hooks       | Memoized State                                 |
-| ----------- | ---------------------------------------------- |
-| useRef      | `ref: { current }`                             |
-| useMemo     | `[nextValue, deps]`                            |
-| useCallback | `[callback, deps]`                             |
-| useState    | `state`                                        |
-| useEffect   | `effect: { tag, create, destroy, deps, next }` |
+#### Minimal Hooks Implementation
 
 ```js
 const MyReact = (function () {
