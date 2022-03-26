@@ -1006,8 +1006,10 @@ class CssThemeProvider extends React.PureComponent<Props> {
 
 #### String Refs
 
-- 尽可能不适用 `String Refs`
-- React 无法获取 `this` 引用, 需要持续追踪当前`render`出的组件, 性能变慢
+**不建议使用** [`String Refs`](https://github.com/facebook/react/pull/8333#issuecomment-271648615):
+
+- React 无法获取 `this` 引用, 需要持续追踪当前`render`出的组件, 性能变慢.
+- `String Refs` 不可组合化, `Callback Refs` 可组合化.
 
 ```jsx
 class Foo extends Component {
