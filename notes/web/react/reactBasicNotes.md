@@ -597,6 +597,61 @@ React Component
 - `React.Component`.
 - `React.PureComponent`.
 
+```ts
+interface NewLifecycle<P, S, SS> {
+  getSnapshotBeforeUpdate?(
+    prevProps: Readonly<P>,
+    prevState: Readonly<S>
+  ): SS | null;
+
+  componentDidUpdate?(
+    prevProps: Readonly<P>,
+    prevState: Readonly<S>,
+    snapshot?: SS
+  ): void;
+}
+
+interface ComponentLifecycle<P, S, SS = any> extends NewLifecycle<P, S, SS> {
+  componentDidMount?(): void;
+
+  shouldComponentUpdate?(
+    nextProps: Readonly<P>,
+    nextState: Readonly<S>,
+    nextContext: any
+  ): boolean;
+
+  componentWillUnmount?(): void;
+
+  componentDidCatch?(error: Error, errorInfo: ErrorInfo): void;
+}
+
+interface Component<P = {}, S = {}, SS = any>
+  extends ComponentLifecycle<P, S, SS> {}
+
+class Component<P, S> {
+  readonly props: Readonly<P> & Readonly<{ children?: ReactNode | undefined }>;
+  state: Readonly<S>;
+
+  static contextType?: Context<any> | undefined;
+  context: any;
+
+  constructor(props: Readonly<P> | P);
+
+  setState<K extends keyof S>(
+    state:
+      | ((prevState: Readonly<S>, props: Readonly<P>) => Pick<S, K> | S | null)
+      | (Pick<S, K> | S | null),
+    callback?: () => void
+  ): void;
+
+  forceUpdate(callback?: () => void): void;
+
+  render(): ReactNode;
+}
+
+class PureComponent<P = {}, S = {}, SS = any> extends Component<P, S, SS> {}
+```
+
 #### Stateless component
 
 采用函数型声明, 不使用 `setState()`, 一般作为表现型组件.
