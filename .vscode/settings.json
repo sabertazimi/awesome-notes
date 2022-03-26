@@ -1577,6 +1577,7 @@
     "undoable",
     "unfetch",
     "ungetc",
+    "unhandledrejection",
     "Unik",
     "unikernel",
     "unikernels",

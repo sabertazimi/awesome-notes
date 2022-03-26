@@ -3123,6 +3123,20 @@ try {
 }
 ```
 
+#### Exception Handling
+
+- `try catch`.
+- `Promise.catch`.
+- `window.addEventListener('error', handler, true)`.
+- `window.addEventListener('unhandledrejection', handler, true)`.
+- Web Worker heartbeat monitoring.
+- `process.on('uncaughtException', handleError)`.
+- `process.on('SIGHUP', handleExit)`.
+- `process.on('SIGINT', handleExit)`.
+- `process.on('SIGQUIT', handleExit)`.
+- `process.on('SIGTERM', handleExit)`.
+- AOP (Aspect Oriented Programming): Middleware/Interceptor/Monkey Patch.
+
 ### Event Delegation
 
 - 事件委托利用的是事件冒泡机制，只制定一事件处理程序，就可以管理某一类型的所有事件
