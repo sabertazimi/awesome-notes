@@ -41,7 +41,7 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
 
 [![React Core Packages](./figures/ReactCorePackages.png)](https://7kms.github.io/react-illustration-series/main/macro-structure)
 
-### React Virtual DOM
+## React Virtual DOM
 
 - Reduce rendering times with reconciliation algorithm,
   improving rendering efficiency.
@@ -52,13 +52,617 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
 - [SnabbDOM](https://github.com/snabbdom/snabbdom):
   virtual DOM library focus on modularity and performance.
 
-### React Fiber
+## React Internal Logic
+
+### Create RootContainer
+
+#### Legacy Root
+
+- [react-dom/src/client/ReactDOMLegacy](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMLegacy.js):
+  - **render**.
+  - legacyRenderSubtreeIntoContainer.
+  - legacyCreateRootFromDOMContainer.
+- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.new.js):
+  - **createContainer**.
+- [react-dom/src/client/ReactDOMComponentTree](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponentTree.js):
+  - markContainerAsRoot.
+- [react-reconciler/src/ReactFiberRoot](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRoot.new.js):
+  - **createFiberRoot**.
+- [react-reconciler/src/ReactFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.new.js):
+  - createHostRootFiber.
+- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+  - **initializeUpdateQueue**.
+- [react-dom/src/events/DOMPluginEventSystem](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/DOMPluginEventSystem.js):
+  - listenToAllSupportedEvents:
+    事件统一在 rootContainer 上处理 dispatchDiscreteEvent.
+
+#### Concurrent Root
+
+- [react-dom/src/client/ReactDOMRoot](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMRoot.js):
+  - **createRoot**.
+- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.new.js):
+  - **createContainer**.
+- [react-dom/src/client/ReactDOMComponentTree](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponentTree.js):
+  - markContainerAsRoot.
+- [react-reconciler/src/ReactFiberRoot](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRoot.new.js):
+  - **createFiberRoot**.
+- [react-reconciler/src/ReactFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.new.js):
+  - createHostRootFiber.
+- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+  - **initializeUpdateQueue**.
+- [react-dom/src/events/DOMPluginEventSystem](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/DOMPluginEventSystem.js):
+  - listenToAllSupportedEvents:
+    事件统一在 rootContainer 上处理 dispatchDiscreteEvent.
+- `ReactDOMRoot.render(<App />)`.
+
+### Update RootContainer
+
+- [react-dom/src/client/ReactDOMLegacy](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMLegacy.js):
+  - render.
+  - legacyRenderSubtreeIntoContainer.
+- [react-dom/src/client/ReactDOMRoot](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMRoot.js):
+  - render.
+- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.new.js):
+  - **updateContainer**.
+- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+  - createUpdate.
+  - enqueueUpdate.
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+  - **scheduleUpdateOnFiber**.
+  - **ensureRootIsScheduled**.
+- [react-reconciler/src/ReactFiberSyncTaskQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberSyncTaskQueue.new.js):
+  - flushSyncCallbacks.
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+  - **performSyncWorkOnRoot**.
+  - renderRootSync.
+  - workLoopSync.
+  - **performUnitOfWork**.
+- [react-dom/src/client/ReactDOMComponent](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponent.js):
+  - createElement.
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+  - **commitRoot**.
+- [react-dom/src/client/ReactDOMHostConfig](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js):
+  - appendChildToContainer.
+  - finalizeInitialChildren.
+- [react-dom/src/client/ReactDOMComponent](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponent.js):
+  - setInitialProperties:
+    设置初始化属性, 处理特殊元素和事件.
+
+```ts
+// Legacy Mode
+import type { ReactElement } from 'react';
+import Reconciler from './reconciler';
+import type { Container } from './types';
+
+const Renderer = {
+  render: (
+    element: ReactElement,
+    container: Container | null,
+    callback?: Function
+  ): void => {
+    if (container) {
+      const root = Reconciler.createContainer(container, 0, false, null);
+      Reconciler.updateContainer(element, root, null);
+    }
+  },
+};
+
+export default Renderer;
+```
+
+```ts
+// Modern Mode
+import type { ReactElement } from 'react';
+import Reconciler from './reconciler';
+import type { Container, OpaqueRoot } from './types';
+
+const Renderer = {
+  createRoot: (
+    container: Container | null,
+    callback?: Function
+  ): OpaqueRoot => {
+    if (container) {
+      const root = Reconciler.createContainer(container, 0, false, null);
+
+      root.render = function (element: ReactElement) {
+        Reconciler.updateContainer(element, this, null);
+      };
+
+      return root;
+    }
+  },
+};
+
+export default Renderer;
+```
+
+### ReactComponent SetState
+
+- [react-dom/src/events/ReactDOMEventListener](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/ReactDOMEventListener.js):
+  - dispatchDiscreteEvent.
+- [react/src/ReactBaseClasses](https://github.com/facebook/react/blob/main/packages/react/src/ReactBaseClasses.js):
+  - **setState**.
+- [react-reconciler/src/ReactFiberClassComponent](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.new.js):
+  - enqueueSetState.
+- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+  - enqueueUpdate.
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+  - **scheduleUpdateOnFiber**.
+  - discreteUpdates.
+- [react-reconciler/src/ReactFiberSyncTaskQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberSyncTaskQueue.new.js):
+  - flushSyncCallbacks.
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+  - **performSyncWorkOnRoot**.
+  - workLoopSync.
+  - **performUnitOfWork**.
+- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+  - **beginWork**.
+  - **updateXXXComponent**.
+  - reconcileChildren.
+- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
+  - reconcileChildFibers.
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+  - completeUnitOfWork.
+- [react-reconciler/src/ReactFiberCompleteWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCompleteWork.new.js)
+  - **completeWork**.
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+  - **commitRoot**.
+  - commitMutationEffects.
+- [react-reconciler/src/ReactFiberCommitWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.new.js):
+  - commitWork.
+- [react-dom/src/client/ReactDOMHostConfig](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js):
+  - commitUpdate.
+- [react-dom/src/client/ReactDOMComponentTree](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponentTree.js):
+  - updateFiberProps.
+- [react-dom/src/client/ReactDOMComponent](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponent.js):
+  - updateProperties:
+    Apply the diff.
+
+### ClassComponent Update
+
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+  - performSyncWorkOnRoot.
+  - workLoopSync.
+  - performUnitOfWork.
+- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+  - beginWork
+  - **updateClassComponent**.
+- [react-reconciler/src/ReactFiberClassComponent](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.new.js):
+  - updateClassInstance.
+- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+  - finishClassComponent.
+  - **instance.render** (User defined Component).
+  - **reconcileChildren**.
+- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
+  - reconcileChildFibers.
+
+### FunctionComponent Update
+
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+  - performSyncWorkOnRoot.
+  - workLoopSync.
+  - performUnitOfWork.
+- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+  - beginWork.
+  - **updateFunctionComponent**.
+- [react-reconciler/src/ReactFiberHooks](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js):
+  - renderWithHooks.
+  - **FunctionComponent()** (User defined Function).
+  - **Hooks**: useXXX -> mountXXX -> updateXXX.
+- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+  - **reconcileChildren**.
+- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
+  - reconcileChildFibers.
+
+## React Scheduler
+
+Work loop in scheduler focus on **Task Scheduling**,
+not only including `Reconciler.performSyncWorkOnRoot`/`Reconciler.performConcurrentWorkOnRoot`,
+but also for non-react tasks
+(meaning `Scheduler` module can work standalone without `React`).
+
+### Scheduler Priority
+
+React 16, unstable concurrent mode with
+[`Priorities`](https://github.com/facebook/react/blob/main/packages/scheduler/src/SchedulerPriorities.js):
+
+- ImmediatePriority: 立即执行优先级, 级别最高, `expirationTime = -1`.
+- UserBlockingPriority: 用户阻塞优先级, `expirationTime = 250`.
+- NormalPriority: 正常优先级, `expirationTime = 5000`.
+- LowPriority: 低优先级, `expirationTime = 10000`.
+- IdlePriority: 可闲置优先级, `expirationTime = maxSigned31BitInt`.
+
+React 17, stable concurrent mode with
+[`Lanes`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js):
+
+```js
+export type Lanes = number;
+export type Lane = number;
+
+export const TotalLanes = 31;
+
+export const NoLanes: Lanes = /*                        */ 0b0000000000000000000000000000000;
+export const NoLane: Lane = /*                          */ 0b0000000000000000000000000000000;
+
+export const SyncLane: Lane = /*                        */ 0b0000000000000000000000000000001;
+
+export const InputContinuousHydrationLane: Lane = /*    */ 0b0000000000000000000000000000010;
+export const InputContinuousLane: Lanes = /*            */ 0b0000000000000000000000000000100;
+
+export const DefaultHydrationLane: Lane = /*            */ 0b0000000000000000000000000001000;
+export const DefaultLane: Lanes = /*                    */ 0b0000000000000000000000000010000;
+
+const TransitionHydrationLane: Lane = /*                */ 0b0000000000000000000000000100000;
+const TransitionLanes: Lanes = /*                       */ 0b0000000001111111111111111000000;
+const TransitionLane1: Lane = /*                        */ 0b0000000000000000000000001000000;
+const TransitionLane2: Lane = /*                        */ 0b0000000000000000000000010000000;
+const TransitionLane3: Lane = /*                        */ 0b0000000000000000000000100000000;
+const TransitionLane4: Lane = /*                        */ 0b0000000000000000000001000000000;
+const TransitionLane5: Lane = /*                        */ 0b0000000000000000000010000000000;
+const TransitionLane6: Lane = /*                        */ 0b0000000000000000000100000000000;
+const TransitionLane7: Lane = /*                        */ 0b0000000000000000001000000000000;
+const TransitionLane8: Lane = /*                        */ 0b0000000000000000010000000000000;
+const TransitionLane9: Lane = /*                        */ 0b0000000000000000100000000000000;
+const TransitionLane10: Lane = /*                       */ 0b0000000000000001000000000000000;
+const TransitionLane11: Lane = /*                       */ 0b0000000000000010000000000000000;
+const TransitionLane12: Lane = /*                       */ 0b0000000000000100000000000000000;
+const TransitionLane13: Lane = /*                       */ 0b0000000000001000000000000000000;
+const TransitionLane14: Lane = /*                       */ 0b0000000000010000000000000000000;
+const TransitionLane15: Lane = /*                       */ 0b0000000000100000000000000000000;
+const TransitionLane16: Lane = /*                       */ 0b0000000001000000000000000000000;
+
+const RetryLanes: Lanes = /*                            */ 0b0000111110000000000000000000000;
+const RetryLane1: Lane = /*                             */ 0b0000000010000000000000000000000;
+const RetryLane2: Lane = /*                             */ 0b0000000100000000000000000000000;
+const RetryLane3: Lane = /*                             */ 0b0000001000000000000000000000000;
+const RetryLane4: Lane = /*                             */ 0b0000010000000000000000000000000;
+const RetryLane5: Lane = /*                             */ 0b0000100000000000000000000000000;
+
+export const SomeRetryLane: Lane = RetryLane1;
+
+export const SelectiveHydrationLane: Lane = /*          */ 0b0001000000000000000000000000000;
+
+const NonIdleLanes = /*                                 */ 0b0001111111111111111111111111111;
+
+export const IdleHydrationLane: Lane = /*               */ 0b0010000000000000000000000000000;
+export const IdleLane: Lanes = /*                       */ 0b0100000000000000000000000000000;
+
+export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;
+```
+
+Lanes model [use case](https://github.com/facebook/react/pull/18796):
+
+```js
+// task 与 batchTask 的优先级是否重叠:
+// 1. expirationTime:
+const isTaskIncludedInBatch = priorityOfTask >= priorityOfBatch;
+// 2. Lanes:
+const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+
+// 当同时处理一组任务, 该组内有多个任务, 且每个任务的优先级不一致:
+// 1. expirationTime:
+const isTaskIncludedInBatch =
+  taskPriority <= highestPriorityInRange &&
+  taskPriority >= lowestPriorityInRange;
+// 2. Lanes:
+const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+
+// 从 group 中增删 task:
+// 1. expirationTime (need list):
+task.prev.next = task.next;
+
+let current = queue;
+while (task.expirationTime >= current.expirationTime) {
+  current = current.next;
+}
+task.next = current.next;
+current.next = task;
+
+const isTaskIncludedInBatch =
+  taskPriority <= highestPriorityInRange &&
+  taskPriority >= lowestPriorityInRange;
+
+// 2. Lanes:
+batchOfTasks &= ~task; // Delete task.
+batchOfTasks |= task; // Add task.
+const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+```
+
+### Scheduler Main Logic
+
+Scheduler main [API](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js):
+
+`scheduleCallback(callback)`
+-> `push(queue, newTask)` (Wrap `callback` into `task`)
+(For delayed task -> `requestHostTimeout(handleTimeout, delayTime)`)
+-> `requestHostCallback(flushWork)`
+-> `messageChannelPort.postMessage(null)`
+-> `performWorkUntilDeadline()`
+-> `flushWork(hasTimeRemaining, currentTime)`:
+-> `workLoop(hasTimeRemaining, currentTime)`:
+
+将 Reconciler 的工作 (Callback)
+包装成 Task 组成 Task Queue,
+按照时间分片机制,
+不断地消费 Task Queue.
+
+对于延时任务 (Delayed Task),
+会将其先放入 Timer Queue,
+等待延时完成后再将其放入 Task Queue.
+
+### Scheduler Time Slicing
+
+```js
+// 时间切片周期, 默认是 5ms.
+// 如果一个 task 运行超过该周期, 下一个 task 执行前, 会把控制权归还浏览器.
+const yieldInterval = 5;
+const maxYieldInterval = 300;
+
+let deadline = 0; // currentTime + yieldInterval.
+let needsPaint = false;
+let isMessageLoopRunning = false;
+let scheduledHostCallback = null;
+
+const channel = new MessageChannel();
+const port = channel.port2;
+channel.port1.onmessage = performWorkUntilDeadline;
+
+const scheduling = navigator.scheduling;
+const getCurrentTime = performance.now;
+
+// 请求回调:
+const requestHostCallback = callback => {
+  // 1. 保存 callback.
+  scheduledHostCallback = callback;
+
+  if (!isMessageLoopRunning) {
+    isMessageLoopRunning = true;
+    // 2. 通过 MessageChannel 发送消息.
+    port.postMessage(null);
+  }
+};
+
+// 取消回调:
+const cancelHostCallback = () => {
+  scheduledHostCallback = null;
+};
+
+const requestHostTimeout = (callback, ms) => {
+  taskTimeoutID = setTimeout(() => {
+    callback(getCurrentTime());
+  }, ms);
+};
+
+const cancelHostTimeout = () => {
+  clearTimeout(taskTimeoutID);
+  taskTimeoutID = -1;
+};
+
+// 是否让出主线程 (time slice):
+const shouldYieldToHost = () => {
+  const currentTime = getCurrentTime();
+
+  if (currentTime >= deadline) {
+    if (needsPaint || scheduling.isInputPending()) {
+      // There is either a pending paint or a pending input.
+      return true;
+    }
+
+    // There's no pending input.
+    // Only yield if we've reached the max yield interval.
+    return currentTime >= maxYieldInterval;
+  } else {
+    // There's still time left in the frame.
+    return false;
+  }
+};
+
+// 请求绘制:
+const requestPaint = () => {
+  needsPaint = true;
+};
+
+// 实际回调函数处理:
+const performWorkUntilDeadline = () => {
+  if (scheduledHostCallback !== null) {
+    // 1. 设置 currentTime 与 deadline.
+    const currentTime = getCurrentTime();
+    deadline = currentTime + yieldInterval;
+    const hasTimeRemaining = true;
+
+    try {
+      // 2. 执行回调, 返回是否有还有剩余任务.
+      const hasMoreWork = scheduledHostCallback(hasTimeRemaining, currentTime);
+
+      if (!hasMoreWork) {
+        // 没有剩余任务, 退出.
+        isMessageLoopRunning = false;
+        scheduledHostCallback = null;
+      } else {
+        port.postMessage(null); // 有剩余任务, 发起新的调度.
+      }
+    } catch (error) {
+      port.postMessage(null); // 如有异常, 重新发起调度.
+      throw error;
+    }
+  } else {
+    isMessageLoopRunning = false;
+  }
+
+  needsPaint = false; // Reset.
+};
+```
+
+### Scheduler Task Queue
+
+Task queue is [MinHeap](https://github.com/facebook/react/blob/main/packages/scheduler/src/SchedulerMinHeap.js),
+storing Tasks.
+
+```js
+const newTask = {
+  id: taskIdCounter++,
+  callback, // Work from reconciler.
+  priorityLevel,
+  startTime,
+  expirationTime,
+  sortIndex: -1, // MinHeap queue indexing.
+};
+```
+
+```js
+const scheduleCallback = (priorityLevel, callback, options) => {
+  const currentTime = getCurrentTime();
+  const startTime = currentTime;
+  const expirationTime = startTime + timeout[priorityLevel]; // -1/250/5000/10000/MAX_INT.
+  const newTask = {
+    id: taskIdCounter++,
+    callback,
+    priorityLevel,
+    startTime,
+    expirationTime,
+    sortIndex: -1,
+  };
+
+  if (startTime > currentTime) {
+    // Delayed task.
+    newTask.sortIndex = startTime;
+    push(timerQueue, newTask);
+
+    // All tasks are delayed, and this is the task with the earliest delay.
+    if (peek(taskQueue) === null && newTask === peek(timerQueue)) {
+      if (isHostTimeoutScheduled) {
+        // Cancel an existing timeout.
+        cancelHostTimeout();
+      } else {
+        isHostTimeoutScheduled = true;
+      }
+
+      // Schedule a timeout.
+      requestHostTimeout(handleTimeout, startTime - currentTime);
+    }
+  } else {
+    // Normal task.
+    newTask.sortIndex = expirationTime;
+    push(taskQueue, newTask);
+
+    if (!isHostCallbackScheduled && !isPerformingWork) {
+      isHostCallbackScheduled = true;
+      requestHostCallback(flushWork);
+    }
+  }
+
+  return newTask;
+};
+
+const handleTimeout = currentTime => {
+  isHostTimeoutScheduled = false;
+  advanceTimers(currentTime);
+
+  if (!isHostCallbackScheduled) {
+    if (peek(taskQueue) !== null) {
+      isHostCallbackScheduled = true;
+      requestHostCallback(flushWork);
+    } else {
+      const firstTimer = peek(timerQueue);
+
+      if (firstTimer !== null) {
+        requestHostTimeout(handleTimeout, firstTimer.startTime - currentTime);
+      }
+    }
+  }
+};
+```
+
+### Scheduler Work Loop
+
+```js
+function flushWork(hasTimeRemaining, initialTime) {
+  // We'll need a host callback the next time work is scheduled.
+  isHostCallbackScheduled = false;
+
+  if (isHostTimeoutScheduled) {
+    // We scheduled a timeout but it's no longer needed. Cancel it.
+    isHostTimeoutScheduled = false;
+    cancelHostTimeout();
+  }
+
+  isPerformingWork = true; // Lock.
+  const previousPriorityLevel = currentPriorityLevel;
+
+  try {
+    return workLoop(hasTimeRemaining, initialTime);
+  } finally {
+    // Restore context.
+    currentTask = null;
+    currentPriorityLevel = previousPriorityLevel;
+    isPerformingWork = false;
+  }
+}
+
+function workLoop(hasTimeRemaining, initialTime) {
+  let currentTime = initialTime;
+  advanceTimers(currentTime);
+  currentTask = peek(taskQueue);
+
+  while (currentTask !== null) {
+    if (
+      currentTask.expirationTime > currentTime &&
+      (!hasTimeRemaining || shouldYieldToHost())
+    ) {
+      // This currentTask hasn't expired, and we've reached the deadline.
+      break;
+    }
+
+    const callback = currentTask.callback;
+
+    if (typeof callback === 'function') {
+      currentTask.callback = null;
+      currentPriorityLevel = currentTask.priorityLevel;
+      const didUserCallbackTimeout = currentTask.expirationTime <= currentTime;
+      const continuationCallback = callback(didUserCallbackTimeout);
+      currentTime = getCurrentTime();
+
+      if (typeof continuationCallback === 'function') {
+        // 产生了连续回调 (如 Fiber树太大, 出现了中断渲染), 保留 currentTask.
+        currentTask.callback = continuationCallback;
+      } else {
+        if (currentTask === peek(taskQueue)) {
+          pop(taskQueue);
+        }
+      }
+
+      advanceTimers(currentTime);
+    } else {
+      // 如果任务被取消 (currentTask.callback = null), 将其移出队列.
+      pop(taskQueue);
+    }
+
+    currentTask = peek(taskQueue);
+  }
+
+  // Return whether there's additional work.
+  if (currentTask !== null) {
+    return true;
+  } else {
+    const firstTimer = peek(timerQueue);
+
+    // 存在延时任务, 继续进行调度.
+    if (firstTimer !== null) {
+      requestHostTimeout(handleTimeout, firstTimer.startTime - currentTime);
+    }
+
+    return false;
+  }
+}
+```
+
+## React Fiber
 
 React Fiber 的目标是提高其在动画、布局和手势等领域的适用性.
 它的主要特性是 `Incremental Rendering` : 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
 A [minimal React](https://github.com/sabertazimi/meact) with Fiber Reconciliation.
 
-#### React Fiber Metadata
+### React Fiber Metadata
 
 `Fiber` [definition](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactInternalTypes.js):
 
@@ -223,7 +827,7 @@ const MountLayoutDev = /*               */ 0b010000000000000000;
 const MountPassiveDev = /*              */ 0b100000000000000000;
 ```
 
-#### React Fiber Effects
+### React Fiber Effects
 
 - Insert DOM elements: `Placement` tag.
 - Update DOM elements: `Update` tag.
@@ -239,622 +843,16 @@ const MountPassiveDev = /*              */ 0b100000000000000000;
 React create effects when `Render` stage,
 then update effects to real DOM when `Commit` stage.
 
-#### React Fiber Trees
+### React Fiber Trees
 
-- current fiber tree: rendered to screen.
-- workInProgress fiber tree: under reconciliation.
-- When workInProgress fiber tree complete `render` + `commit`,
-  swap 2 fiber tree:
-  - reuse fiber objects.
+- `current` Fiber tree: rendered to screen.
+- `workInProgress` Fiber tree: under reconciliation.
+- When workInProgress Fiber tree complete `render` + `commit`,
+  swap 2 Fiber tree:
+  - reuse Fiber objects.
   - reduce memory usage and GC time.
 
-### React Internal Synchronous Logic
-
-#### Create RootContainer
-
-##### Legacy Root
-
-- [react-dom/src/client/ReactDOMLegacy](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMLegacy.js):
-  - **render**.
-  - legacyRenderSubtreeIntoContainer.
-  - legacyCreateRootFromDOMContainer.
-- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.new.js):
-  - **createContainer**.
-- [react-dom/src/client/ReactDOMComponentTree](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponentTree.js):
-  - markContainerAsRoot.
-- [react-reconciler/src/ReactFiberRoot](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRoot.new.js):
-  - **createFiberRoot**.
-- [react-reconciler/src/ReactFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.new.js):
-  - createHostRootFiber.
-- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
-  - **initializeUpdateQueue**.
-- [react-dom/src/events/DOMPluginEventSystem](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/DOMPluginEventSystem.js):
-  - listenToAllSupportedEvents:
-    事件统一在 rootContainer 上处理 dispatchDiscreteEvent.
-
-##### Concurrent Root
-
-- [react-dom/src/client/ReactDOMRoot](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMRoot.js):
-  - **createRoot**.
-- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.new.js):
-  - **createContainer**.
-- [react-dom/src/client/ReactDOMComponentTree](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponentTree.js):
-  - markContainerAsRoot.
-- [react-reconciler/src/ReactFiberRoot](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRoot.new.js):
-  - **createFiberRoot**.
-- [react-reconciler/src/ReactFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.new.js):
-  - createHostRootFiber.
-- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
-  - **initializeUpdateQueue**.
-- [react-dom/src/events/DOMPluginEventSystem](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/DOMPluginEventSystem.js):
-  - listenToAllSupportedEvents:
-    事件统一在 rootContainer 上处理 dispatchDiscreteEvent.
-- `ReactDOMRoot.render(<App />)`.
-
-#### Update RootContainer
-
-- [react-dom/src/client/ReactDOMLegacy](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMLegacy.js):
-  - render.
-  - legacyRenderSubtreeIntoContainer.
-- [react-dom/src/client/ReactDOMRoot](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMRoot.js):
-  - render.
-- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.new.js):
-  - **updateContainer**.
-- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
-  - createUpdate.
-  - enqueueUpdate.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
-  - **scheduleUpdateOnFiber**.
-  - **ensureRootIsScheduled**.
-- [react-reconciler/src/ReactFiberSyncTaskQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberSyncTaskQueue.new.js):
-  - flushSyncCallbacks.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
-  - **performSyncWorkOnRoot**.
-  - renderRootSync.
-  - workLoopSync.
-  - **performUnitOfWork**.
-- [react-dom/src/client/ReactDOMComponent](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponent.js):
-  - createElement.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
-  - **commitRoot**.
-- [react-dom/src/client/ReactDOMHostConfig](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js):
-  - appendChildToContainer.
-  - finalizeInitialChildren.
-- [react-dom/src/client/ReactDOMComponent](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponent.js):
-  - setInitialProperties:
-    设置初始化属性, 处理特殊元素和事件.
-
-```ts
-// Legacy Mode
-import type { ReactElement } from 'react';
-import Reconciler from './reconciler';
-import type { Container } from './types';
-
-const Renderer = {
-  render: (
-    element: ReactElement,
-    container: Container | null,
-    callback?: Function
-  ): void => {
-    if (container) {
-      const root = Reconciler.createContainer(container, 0, false, null);
-      Reconciler.updateContainer(element, root, null);
-    }
-  },
-};
-
-export default Renderer;
-```
-
-```ts
-// Modern Mode
-import type { ReactElement } from 'react';
-import Reconciler from './reconciler';
-import type { Container, OpaqueRoot } from './types';
-
-const Renderer = {
-  createRoot: (
-    container: Container | null,
-    callback?: Function
-  ): OpaqueRoot => {
-    if (container) {
-      const root = Reconciler.createContainer(container, 0, false, null);
-
-      root.render = function (element: ReactElement) {
-        Reconciler.updateContainer(element, this, null);
-      };
-
-      return root;
-    }
-  },
-};
-
-export default Renderer;
-```
-
-#### ReactComponent SetState
-
-- [react-dom/src/events/ReactDOMEventListener](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/ReactDOMEventListener.js):
-  - dispatchDiscreteEvent.
-- [react/src/ReactBaseClasses](https://github.com/facebook/react/blob/main/packages/react/src/ReactBaseClasses.js):
-  - **setState**.
-- [react-reconciler/src/ReactFiberClassComponent](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.new.js):
-  - enqueueSetState.
-- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
-  - enqueueUpdate.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
-  - **scheduleUpdateOnFiber**.
-  - discreteUpdates.
-- [react-reconciler/src/ReactFiberSyncTaskQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberSyncTaskQueue.new.js):
-  - flushSyncCallbacks.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
-  - **performSyncWorkOnRoot**.
-  - workLoopSync.
-  - **performUnitOfWork**.
-- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
-  - **beginWork**.
-  - **updateXXXComponent**.
-  - reconcileChildren.
-- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
-  - reconcileChildFibers.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
-  - completeUnitOfWork.
-- [react-reconciler/src/ReactFiberCompleteWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCompleteWork.new.js)
-  - **completeWork**.
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
-  - **commitRoot**.
-  - commitMutationEffects.
-- [react-reconciler/src/ReactFiberCommitWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.new.js):
-  - commitWork.
-- [react-dom/src/client/ReactDOMHostConfig](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js):
-  - commitUpdate.
-- [react-dom/src/client/ReactDOMComponentTree](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponentTree.js):
-  - updateFiberProps.
-- [react-dom/src/client/ReactDOMComponent](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponent.js):
-  - updateProperties:
-    Apply the diff.
-
-#### ClassComponent Update
-
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
-  - performSyncWorkOnRoot.
-  - workLoopSync.
-  - performUnitOfWork.
-- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
-  - beginWork
-  - **updateClassComponent**.
-- [react-reconciler/src/ReactFiberClassComponent](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.new.js):
-  - updateClassInstance.
-- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
-  - finishClassComponent.
-  - **instance.render** (User defined Component).
-  - **reconcileChildren**.
-- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
-  - reconcileChildFibers.
-
-#### FunctionComponent Update
-
-- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
-  - performSyncWorkOnRoot.
-  - workLoopSync.
-  - performUnitOfWork.
-- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
-  - beginWork.
-  - **updateFunctionComponent**.
-- [react-reconciler/src/ReactFiberHooks](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js):
-  - renderWithHooks.
-  - **FunctionComponent()** (User defined Function).
-  - **Hooks**: useXXX -> mountXXX -> updateXXX.
-- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
-  - **reconcileChildren**.
-- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
-  - reconcileChildFibers.
-
-### React Scheduler
-
-Work loop in scheduler focus on **Task Scheduling**,
-not only including `Reconciler.performSyncWorkOnRoot`/`Reconciler.performConcurrentWorkOnRoot`,
-but also for non-react tasks
-(meaning `Scheduler` module can work standalone without `React`).
-
-#### Priority Scheduler
-
-React 16, unstable concurrent mode with
-[`Priorities`](https://github.com/facebook/react/blob/main/packages/scheduler/src/SchedulerPriorities.js):
-
-- ImmediatePriority: 立即执行优先级, 级别最高, `expirationTime = -1`.
-- UserBlockingPriority: 用户阻塞优先级, `expirationTime = 250`.
-- NormalPriority: 正常优先级, `expirationTime = 5000`.
-- LowPriority: 低优先级, `expirationTime = 10000`.
-- IdlePriority: 可闲置优先级, `expirationTime = maxSigned31BitInt`.
-
-React 17, stable concurrent mode with
-[`Lanes`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js):
-
-```js
-export type Lanes = number;
-export type Lane = number;
-
-export const TotalLanes = 31;
-
-export const NoLanes: Lanes = /*                        */ 0b0000000000000000000000000000000;
-export const NoLane: Lane = /*                          */ 0b0000000000000000000000000000000;
-
-export const SyncLane: Lane = /*                        */ 0b0000000000000000000000000000001;
-
-export const InputContinuousHydrationLane: Lane = /*    */ 0b0000000000000000000000000000010;
-export const InputContinuousLane: Lanes = /*            */ 0b0000000000000000000000000000100;
-
-export const DefaultHydrationLane: Lane = /*            */ 0b0000000000000000000000000001000;
-export const DefaultLane: Lanes = /*                    */ 0b0000000000000000000000000010000;
-
-const TransitionHydrationLane: Lane = /*                */ 0b0000000000000000000000000100000;
-const TransitionLanes: Lanes = /*                       */ 0b0000000001111111111111111000000;
-const TransitionLane1: Lane = /*                        */ 0b0000000000000000000000001000000;
-const TransitionLane2: Lane = /*                        */ 0b0000000000000000000000010000000;
-const TransitionLane3: Lane = /*                        */ 0b0000000000000000000000100000000;
-const TransitionLane4: Lane = /*                        */ 0b0000000000000000000001000000000;
-const TransitionLane5: Lane = /*                        */ 0b0000000000000000000010000000000;
-const TransitionLane6: Lane = /*                        */ 0b0000000000000000000100000000000;
-const TransitionLane7: Lane = /*                        */ 0b0000000000000000001000000000000;
-const TransitionLane8: Lane = /*                        */ 0b0000000000000000010000000000000;
-const TransitionLane9: Lane = /*                        */ 0b0000000000000000100000000000000;
-const TransitionLane10: Lane = /*                       */ 0b0000000000000001000000000000000;
-const TransitionLane11: Lane = /*                       */ 0b0000000000000010000000000000000;
-const TransitionLane12: Lane = /*                       */ 0b0000000000000100000000000000000;
-const TransitionLane13: Lane = /*                       */ 0b0000000000001000000000000000000;
-const TransitionLane14: Lane = /*                       */ 0b0000000000010000000000000000000;
-const TransitionLane15: Lane = /*                       */ 0b0000000000100000000000000000000;
-const TransitionLane16: Lane = /*                       */ 0b0000000001000000000000000000000;
-
-const RetryLanes: Lanes = /*                            */ 0b0000111110000000000000000000000;
-const RetryLane1: Lane = /*                             */ 0b0000000010000000000000000000000;
-const RetryLane2: Lane = /*                             */ 0b0000000100000000000000000000000;
-const RetryLane3: Lane = /*                             */ 0b0000001000000000000000000000000;
-const RetryLane4: Lane = /*                             */ 0b0000010000000000000000000000000;
-const RetryLane5: Lane = /*                             */ 0b0000100000000000000000000000000;
-
-export const SomeRetryLane: Lane = RetryLane1;
-
-export const SelectiveHydrationLane: Lane = /*          */ 0b0001000000000000000000000000000;
-
-const NonIdleLanes = /*                                 */ 0b0001111111111111111111111111111;
-
-export const IdleHydrationLane: Lane = /*               */ 0b0010000000000000000000000000000;
-export const IdleLane: Lanes = /*                       */ 0b0100000000000000000000000000000;
-
-export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;
-```
-
-Lanes model [use case](https://github.com/facebook/react/pull/18796):
-
-```js
-// task 与 batchTask 的优先级是否重叠:
-// 1. expirationTime:
-const isTaskIncludedInBatch = priorityOfTask >= priorityOfBatch;
-// 2. Lanes:
-const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
-
-// 当同时处理一组任务, 该组内有多个任务, 且每个任务的优先级不一致:
-// 1. expirationTime:
-const isTaskIncludedInBatch =
-  taskPriority <= highestPriorityInRange &&
-  taskPriority >= lowestPriorityInRange;
-// 2. Lanes:
-const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
-
-// 从 group 中增删 task:
-// 1. expirationTime (need list):
-task.prev.next = task.next;
-
-let current = queue;
-while (task.expirationTime >= current.expirationTime) {
-  current = current.next;
-}
-task.next = current.next;
-current.next = task;
-
-const isTaskIncludedInBatch =
-  taskPriority <= highestPriorityInRange &&
-  taskPriority >= lowestPriorityInRange;
-
-// 2. Lanes:
-batchOfTasks &= ~task; // Delete task.
-batchOfTasks |= task; // Add task.
-const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
-```
-
-#### Scheduler Main Logic
-
-Scheduler main [API](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js):
-
-`scheduleCallback(callback)`
--> `push(queue, newTask)` (Wrap `callback` into `task`)
-(For delayed task -> `requestHostTimeout(handleTimeout, delayTime)`)
--> `requestHostCallback(flushWork)`
--> `messageChannelPort.postMessage(null)`
--> `performWorkUntilDeadline()`
--> `flushWork(hasTimeRemaining, currentTime)`:
--> `workLoop(hasTimeRemaining, currentTime)`:
-
-将 Reconciler 的工作 (Callback)
-包装成 Task 组成 Task Queue,
-按照时间分片机制,
-不断地消费 Task Queue.
-
-对于延时任务 (Delayed Task),
-会将其先放入 Timer Queue,
-等待延时完成后再将其放入 Task Queue.
-
-#### Scheduler Time Slicing
-
-```js
-// 时间切片周期, 默认是 5ms.
-// 如果一个 task 运行超过该周期, 下一个 task 执行前, 会把控制权归还浏览器.
-const yieldInterval = 5;
-const maxYieldInterval = 300;
-
-let deadline = 0; // currentTime + yieldInterval.
-let needsPaint = false;
-let isMessageLoopRunning = false;
-let scheduledHostCallback = null;
-
-const channel = new MessageChannel();
-const port = channel.port2;
-channel.port1.onmessage = performWorkUntilDeadline;
-
-const scheduling = navigator.scheduling;
-const getCurrentTime = performance.now;
-
-// 请求回调:
-const requestHostCallback = callback => {
-  // 1. 保存 callback.
-  scheduledHostCallback = callback;
-
-  if (!isMessageLoopRunning) {
-    isMessageLoopRunning = true;
-    // 2. 通过 MessageChannel 发送消息.
-    port.postMessage(null);
-  }
-};
-
-// 取消回调:
-const cancelHostCallback = () => {
-  scheduledHostCallback = null;
-};
-
-const requestHostTimeout = (callback, ms) => {
-  taskTimeoutID = setTimeout(() => {
-    callback(getCurrentTime());
-  }, ms);
-};
-
-const cancelHostTimeout = () => {
-  clearTimeout(taskTimeoutID);
-  taskTimeoutID = -1;
-};
-
-// 是否让出主线程 (time slice):
-const shouldYieldToHost = () => {
-  const currentTime = getCurrentTime();
-
-  if (currentTime >= deadline) {
-    if (needsPaint || scheduling.isInputPending()) {
-      // There is either a pending paint or a pending input.
-      return true;
-    }
-
-    // There's no pending input.
-    // Only yield if we've reached the max yield interval.
-    return currentTime >= maxYieldInterval;
-  } else {
-    // There's still time left in the frame.
-    return false;
-  }
-};
-
-// 请求绘制:
-const requestPaint = () => {
-  needsPaint = true;
-};
-
-// 实际回调函数处理:
-const performWorkUntilDeadline = () => {
-  if (scheduledHostCallback !== null) {
-    // 1. 设置 currentTime 与 deadline.
-    const currentTime = getCurrentTime();
-    deadline = currentTime + yieldInterval;
-    const hasTimeRemaining = true;
-
-    try {
-      // 2. 执行回调, 返回是否有还有剩余任务.
-      const hasMoreWork = scheduledHostCallback(hasTimeRemaining, currentTime);
-
-      if (!hasMoreWork) {
-        // 没有剩余任务, 退出.
-        isMessageLoopRunning = false;
-        scheduledHostCallback = null;
-      } else {
-        port.postMessage(null); // 有剩余任务, 发起新的调度.
-      }
-    } catch (error) {
-      port.postMessage(null); // 如有异常, 重新发起调度.
-      throw error;
-    }
-  } else {
-    isMessageLoopRunning = false;
-  }
-
-  needsPaint = false; // Reset.
-};
-```
-
-#### Scheduler Task Queue
-
-Task queue is [MinHeap](https://github.com/facebook/react/blob/main/packages/scheduler/src/SchedulerMinHeap.js),
-storing Tasks.
-
-```js
-const newTask = {
-  id: taskIdCounter++,
-  callback, // Work from reconciler.
-  priorityLevel,
-  startTime,
-  expirationTime,
-  sortIndex: -1, // MinHeap queue indexing.
-};
-```
-
-```js
-const scheduleCallback = (priorityLevel, callback, options) => {
-  const currentTime = getCurrentTime();
-  const startTime = currentTime;
-  const expirationTime = startTime + timeout[priorityLevel]; // -1/250/5000/10000/MAX_INT.
-  const newTask = {
-    id: taskIdCounter++,
-    callback,
-    priorityLevel,
-    startTime,
-    expirationTime,
-    sortIndex: -1,
-  };
-
-  if (startTime > currentTime) {
-    // Delayed task.
-    newTask.sortIndex = startTime;
-    push(timerQueue, newTask);
-
-    // All tasks are delayed, and this is the task with the earliest delay.
-    if (peek(taskQueue) === null && newTask === peek(timerQueue)) {
-      if (isHostTimeoutScheduled) {
-        // Cancel an existing timeout.
-        cancelHostTimeout();
-      } else {
-        isHostTimeoutScheduled = true;
-      }
-
-      // Schedule a timeout.
-      requestHostTimeout(handleTimeout, startTime - currentTime);
-    }
-  } else {
-    // Normal task.
-    newTask.sortIndex = expirationTime;
-    push(taskQueue, newTask);
-
-    if (!isHostCallbackScheduled && !isPerformingWork) {
-      isHostCallbackScheduled = true;
-      requestHostCallback(flushWork);
-    }
-  }
-
-  return newTask;
-};
-
-const handleTimeout = currentTime => {
-  isHostTimeoutScheduled = false;
-  advanceTimers(currentTime);
-
-  if (!isHostCallbackScheduled) {
-    if (peek(taskQueue) !== null) {
-      isHostCallbackScheduled = true;
-      requestHostCallback(flushWork);
-    } else {
-      const firstTimer = peek(timerQueue);
-
-      if (firstTimer !== null) {
-        requestHostTimeout(handleTimeout, firstTimer.startTime - currentTime);
-      }
-    }
-  }
-};
-```
-
-#### Scheduler Work Loop
-
-```js
-function flushWork(hasTimeRemaining, initialTime) {
-  // We'll need a host callback the next time work is scheduled.
-  isHostCallbackScheduled = false;
-
-  if (isHostTimeoutScheduled) {
-    // We scheduled a timeout but it's no longer needed. Cancel it.
-    isHostTimeoutScheduled = false;
-    cancelHostTimeout();
-  }
-
-  isPerformingWork = true; // Lock.
-  const previousPriorityLevel = currentPriorityLevel;
-
-  try {
-    return workLoop(hasTimeRemaining, initialTime);
-  } finally {
-    // Restore context.
-    currentTask = null;
-    currentPriorityLevel = previousPriorityLevel;
-    isPerformingWork = false;
-  }
-}
-
-function workLoop(hasTimeRemaining, initialTime) {
-  let currentTime = initialTime;
-  advanceTimers(currentTime);
-  currentTask = peek(taskQueue);
-
-  while (currentTask !== null) {
-    if (
-      currentTask.expirationTime > currentTime &&
-      (!hasTimeRemaining || shouldYieldToHost())
-    ) {
-      // This currentTask hasn't expired, and we've reached the deadline.
-      break;
-    }
-
-    const callback = currentTask.callback;
-
-    if (typeof callback === 'function') {
-      currentTask.callback = null;
-      currentPriorityLevel = currentTask.priorityLevel;
-      const didUserCallbackTimeout = currentTask.expirationTime <= currentTime;
-      const continuationCallback = callback(didUserCallbackTimeout);
-      currentTime = getCurrentTime();
-
-      if (typeof continuationCallback === 'function') {
-        // 产生了连续回调 (如 Fiber树太大, 出现了中断渲染), 保留 currentTask.
-        currentTask.callback = continuationCallback;
-      } else {
-        if (currentTask === peek(taskQueue)) {
-          pop(taskQueue);
-        }
-      }
-
-      advanceTimers(currentTime);
-    } else {
-      // 如果任务被取消 (currentTask.callback = null), 将其移出队列.
-      pop(taskQueue);
-    }
-
-    currentTask = peek(taskQueue);
-  }
-
-  // Return whether there's additional work.
-  if (currentTask !== null) {
-    return true;
-  } else {
-    const firstTimer = peek(timerQueue);
-
-    // 存在延时任务, 继续进行调度.
-    if (firstTimer !== null) {
-      requestHostTimeout(handleTimeout, firstTimer.startTime - currentTime);
-    }
-
-    return false;
-  }
-}
-```
-
-### React Reconciler
-
-#### React Fiber Work Loop
+### React Fiber Work Loop
 
 [![React Fiber Work Loop](./figures/ReactFiberWorkLoop.png)](https://7kms.github.io/react-illustration-series/main/reconciler-workflow)
 
@@ -926,62 +924,16 @@ function performConcurrentWorkOnRoot(root) {
 }
 ```
 
-#### Minimal Reconciler Implementation
+## React Reconciler
 
-```js
-const performWork = deadline => {
-  if (!nextUnitOfWork) {
-    resetNextUnitOfWork();
-  }
-
-  // whether current status is idle status or not
-  while (nextUnitOfWork && deadline.timeRemaining() > ENOUGH_TIME) {
-    nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
-  }
-
-  if (pendingCommit) {
-    commitAllWork(pendingCommit);
-  }
-
-  // checks if there's pending work
-  // if exist, performWork in **next frame** when idle
-  if (nextUnitOfWork || updateQueue.length > 0) {
-    requestIdleCallback(performWork);
-  }
-};
-
-const scheduleUpdate = (instance, partialState) => {
-  updateQueue.push({
-    from: CLASS_COMPONENT,
-    instance,
-    partialState,
-  });
-
-  requestIdleCallback(performWork);
-};
-
-// React.render function
-const render = (elements, container) => {
-  updateQueue.push({
-    from: HOST_ROOT,
-    dom: container,
-    newProps: {
-      children: elements,
-    },
-  });
-
-  requestIdleCallback(performWork);
-};
-```
-
-### React Diff Phase
+### React Fiber Diff Phase
 
 Reconciler:
 
 - O(n) incomplete tree comparison: only compare same level nodes.
 - `key` prop to hint for nodes reuse.
 
-### React Render Phase
+### React Fiber Render Phase
 
 Reconciler:
 
@@ -1007,7 +959,7 @@ Reconciler:
 - Then `render` called,
   diff algorithm recursively on the old result and the new result.
 
-### React Commit Phase
+### React Fiber Commit Phase
 
 Renderer:
 
@@ -1132,6 +1084,54 @@ Process Fiber nodes:
 
 `useEffect` callback called **asynchronously**
 after above three `Commit` phases.
+
+### Minimal Reconciler Implementation
+
+```js
+const performWork = deadline => {
+  if (!nextUnitOfWork) {
+    resetNextUnitOfWork();
+  }
+
+  // whether current status is idle status or not
+  while (nextUnitOfWork && deadline.timeRemaining() > ENOUGH_TIME) {
+    nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+  }
+
+  if (pendingCommit) {
+    commitAllWork(pendingCommit);
+  }
+
+  // checks if there's pending work
+  // if exist, performWork in **next frame** when idle
+  if (nextUnitOfWork || updateQueue.length > 0) {
+    requestIdleCallback(performWork);
+  }
+};
+
+const scheduleUpdate = (instance, partialState) => {
+  updateQueue.push({
+    from: CLASS_COMPONENT,
+    instance,
+    partialState,
+  });
+
+  requestIdleCallback(performWork);
+};
+
+// React.render function
+const render = (elements, container) => {
+  updateQueue.push({
+    from: HOST_ROOT,
+    dom: container,
+    newProps: {
+      children: elements,
+    },
+  });
+
+  requestIdleCallback(performWork);
+};
+```
 
 ## Props and States
 
@@ -1790,7 +1790,7 @@ Refs 用于返回对元素的引用.
 
 ```ts
 function commitAttachRef(finishedWork: Fiber) {
-  // finishedWork 为含有 Ref effectTag 的 fiber
+  // finishedWork 为含有 Ref effectTag 的 Fiber
   const ref = finishedWork.ref;
 
   // 含有 ref prop, 这里是作为数据结构
@@ -5714,7 +5714,7 @@ element.addEventListener('click', () => {
 
 Reconciler 注册调度任务时, 会通过节流与防抖提升调度性能:
 
-- 在 Task 注册完成后, 会设置 FiberRoot 的属性, 代表现在已经处于调度进行中.
+- 在 Task 注册完成后, 会设置 `FiberRoot` 的属性, 代表现在已经处于调度进行中.
 - 再次进入 `ensureRootIsScheduled` 时
   (比如连续 2 次 `setState`, 第二次 `setState` 同样会触发 Reconciler 与 Scheduler 执行),
   如果发现处于调度中, 则会通过节流与防抖, 保证调度性能.
