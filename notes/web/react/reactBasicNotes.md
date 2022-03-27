@@ -847,10 +847,13 @@ then update effects to real DOM when `Commit` stage.
 
 - `current` Fiber tree: rendered to screen.
 - `workInProgress` Fiber tree: under reconciliation.
-- When workInProgress Fiber tree complete `render` + `commit`,
+- When `workInProgress` Fiber tree complete `render` + `commit`,
   swap 2 Fiber tree:
-  - reuse Fiber objects.
-  - reduce memory usage and GC time.
+  - Reuse Fiber objects.
+  - Reduce memory usage and GC time.
+- `ReactElement` tree -> `Fiber` tree -> `DOM` tree.
+
+[![React Fiber Trees](./figures/ReactFiberTrees.png)](https://7kms.github.io/react-illustration-series/main/fibertree-prepare)
 
 ### React Fiber Work Loop
 
