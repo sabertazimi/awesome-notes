@@ -876,6 +876,96 @@ export function requestUpdateLane(fiber: Fiber): Lane {
 }
 ```
 
+[Global render lane](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js):
+
+Fiber 树构造过程中 (`Render Phase`),
+若 Fiber 对象或 Update 对象优先级 (`fiber.lanes`/`update.lane`) 比全局渲染优先级低,
+则将会被忽略.
+
+```ts
+export function getNextLanes(root: FiberRoot, wipLanes: Lanes): Lanes {
+  const pendingLanes = root.pendingLanes;
+
+  if (pendingLanes === NoLanes) {
+    return NoLanes;
+  }
+
+  let nextLanes = NoLanes;
+  const suspendedLanes = root.suspendedLanes;
+  const pingedLanes = root.pingedLanes;
+  const nonIdlePendingLanes = pendingLanes & NonIdleLanes;
+
+  if (nonIdlePendingLanes !== NoLanes) {
+    const nonIdleUnblockedLanes = nonIdlePendingLanes & ~suspendedLanes;
+
+    if (nonIdleUnblockedLanes !== NoLanes) {
+      nextLanes = getHighestPriorityLanes(nonIdleUnblockedLanes);
+    } else {
+      const nonIdlePingedLanes = nonIdlePendingLanes & pingedLanes;
+
+      if (nonIdlePingedLanes !== NoLanes) {
+        nextLanes = getHighestPriorityLanes(nonIdlePingedLanes);
+      }
+    }
+  } else {
+    const unblockedLanes = pendingLanes & ~suspendedLanes;
+
+    if (unblockedLanes !== NoLanes) {
+      nextLanes = getHighestPriorityLanes(unblockedLanes);
+    } else {
+      if (pingedLanes !== NoLanes) {
+        nextLanes = getHighestPriorityLanes(pingedLanes);
+      }
+    }
+  }
+
+  if (nextLanes === NoLanes) {
+    return NoLanes;
+  }
+
+  if (
+    wipLanes !== NoLanes &&
+    wipLanes !== nextLanes &&
+    (wipLanes & suspendedLanes) === NoLanes
+  ) {
+    const nextLane = getHighestPriorityLane(nextLanes);
+    const wipLane = getHighestPriorityLane(wipLanes);
+
+    if (
+      nextLane >= wipLane ||
+      (nextLane === DefaultLane && (wipLane & TransitionLanes) !== NoLanes)
+    ) {
+      return wipLanes;
+    }
+  }
+
+  if (
+    allowConcurrentByDefault &&
+    (root.current.mode & ConcurrentUpdatesByDefaultMode) !== NoMode
+  ) {
+    // Do nothing, use the lanes as they were assigned.
+  } else if ((nextLanes & InputContinuousLane) !== NoLanes) {
+    nextLanes |= pendingLanes & DefaultLane;
+  }
+
+  const entangledLanes = root.entangledLanes;
+
+  if (entangledLanes !== NoLanes) {
+    const entanglements = root.entanglements;
+    let lanes = nextLanes & entangledLanes;
+
+    while (lanes > 0) {
+      const index = pickArbitraryLaneIndex(lanes);
+      const lane = 1 << index;
+      nextLanes |= entanglements[index];
+      lanes &= ~lane;
+    }
+  }
+
+  return nextLanes;
+}
+```
+
 Lanes model [use case](https://github.com/facebook/react/pull/18796):
 
 ```js
