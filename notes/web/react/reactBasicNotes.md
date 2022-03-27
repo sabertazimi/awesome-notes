@@ -148,6 +148,21 @@ type WorkTag =
   | 'LegacyHiddenComponent';
 ```
 
+React [运行模式](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactTypeOfMode.js):
+所有 `Fiber.mode` 保持一致 (包括 `FiberRoot`).
+
+```ts
+type TypeOfMode = number;
+
+const NoMode = /*                         */ 0b000000;
+const ConcurrentMode = /*                 */ 0b000001;
+const ProfileMode = /*                    */ 0b000010;
+const DebugTracingMode = /*               */ 0b000100;
+const StrictLegacyMode = /*               */ 0b001000;
+const StrictEffectsMode = /*              */ 0b010000;
+const ConcurrentUpdatesByDefaultMode = /* */ 0b100000;
+```
+
 [更新与更新队列](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
 
 ```ts
