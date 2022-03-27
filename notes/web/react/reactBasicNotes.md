@@ -1614,10 +1614,12 @@ type HookType =
 
 #### WorkInProgress Hook
 
-```js
-function mountWorkInProgressHook() {
+[ReactReconciler/ReactFiberHooks](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js):
+
+```ts
+function mountWorkInProgressHook(): Hook {
   // hook 实例
-  const hook = {
+  const hook: Hook = {
     memoizedState: null,
     baseState: null,
     baseQueue: null,
@@ -1632,6 +1634,60 @@ function mountWorkInProgressHook() {
     // Append to the end of list.
     workInProgressHook = workInProgressHook.next = hook;
   }
+
+  return workInProgressHook;
+}
+
+function updateWorkInProgressHook(): Hook {
+  let nextCurrentHook: Hook | null;
+  let nextWorkInProgressHook: Hook | null;
+
+  if (currentHook === null) {
+    const current = currentlyRenderingFiber.alternate;
+    nextCurrentHook = current ? current.memoizedState : null;
+  } else {
+    nextCurrentHook = currentHook.next;
+  }
+
+  if (workInProgressHook === null) {
+    nextWorkInProgressHook = currentlyRenderingFiber.memoizedState;
+  } else {
+    nextWorkInProgressHook = workInProgressHook.next;
+  }
+
+  if (nextWorkInProgressHook !== null) {
+    // There's already a work-in-progress. Reuse it.
+    workInProgressHook = nextWorkInProgressHook;
+    nextWorkInProgressHook = workInProgressHook.next;
+    currentHook = nextCurrentHook;
+  } else {
+    // Clone from the current hook.
+    if (nextCurrentHook === null) {
+      throw new Error('Rendered more hooks than during the previous render.');
+    }
+
+    currentHook = nextCurrentHook;
+
+    const newHook: Hook = {
+      memoizedState: currentHook.memoizedState,
+
+      baseState: currentHook.baseState,
+      baseQueue: currentHook.baseQueue,
+      queue: currentHook.queue,
+
+      next: null,
+    };
+
+    if (workInProgressHook === null) {
+      // This is the first hook in the list.
+      currentlyRenderingFiber.memoizedState = workInProgressHook = newHook;
+    } else {
+      // Append to the end of the list.
+      workInProgressHook = workInProgressHook.next = newHook;
+    }
+  }
+
+  return workInProgressHook;
 }
 ```
 
