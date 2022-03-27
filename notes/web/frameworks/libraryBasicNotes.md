@@ -151,11 +151,12 @@ tags: [Web, Framework, Library]
 - [Pinia: Next Generation Vue Store](https://github.com/vuejs/pinia)
 - [VueUse](https://github.com/vueuse/vueuse)
 
-### Others State Management
+### Reactive State Management
 
 - [RxJS Middleware](https://github.com/redux-observable/redux-observable)
 - [React Resolver](https://github.com/ericclemmons/react-resolver)
 - [Baobab](https://github.com/Yomguithereal/baobab)
+- [XState: State Machines and State Charts for Modern Web](https://github.com/statelyai/xstate)
 
 ## JavaScript Utils
 
