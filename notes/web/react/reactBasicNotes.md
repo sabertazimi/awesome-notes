@@ -321,6 +321,8 @@ export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000
 
 ### React Reconciler
 
+[![React Fiber Work Loop](./figures/ReactFiberWorkLoop.png)](https://7kms.github.io/react-illustration-series/main/reconciler-workflow)
+
 Polyfill for `requestIdleCallback` with priority control.
 
 ```js
