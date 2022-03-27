@@ -574,7 +574,9 @@ Reconciler:
 
 ### React Render Phase
 
-Reconciler.
+Reconciler:
+
+- Construct Fiber tree.
 
 #### Elements of Different Types
 
@@ -642,16 +644,80 @@ Renderer:
   - resetAfterCommit.
   - preparePortalMount.
 
+#### Commit Root
+
+```js
+function commitRootImpl(root, renderPriorityLevel) {
+  const finishedWork = root.finishedWork;
+  const lanes = root.finishedLanes;
+
+  // 清空 FiberRoot 对象上的属性.
+  root.finishedWork = null;
+  root.finishedLanes = NoLanes;
+  root.callbackNode = null;
+
+  // 提交阶段.
+  const firstEffect = finishedWork.firstEffect;
+
+  if (firstEffect !== null) {
+    const prevExecutionContext = executionContext;
+    executionContext |= CommitContext;
+
+    // 阶段1: DOM 突变之前.
+    nextEffect = firstEffect;
+
+    do {
+      commitBeforeMutationEffects();
+    } while (nextEffect !== null);
+
+    // 阶段2: DOM 突变, 界面发生改变.
+    nextEffect = firstEffect;
+
+    do {
+      commitMutationEffects(root, renderPriorityLevel);
+    } while (nextEffect !== null);
+
+    root.current = finishedWork;
+
+    // 阶段3: layout 阶段, 调用生命周期 componentDidUpdate 和回调函数.
+    nextEffect = firstEffect;
+
+    do {
+      commitLayoutEffects(root, lanes);
+    } while (nextEffect !== null);
+
+    nextEffect = null;
+    executionContext = prevExecutionContext;
+  }
+
+  ensureRootIsScheduled(root, now());
+  return null;
+}
+```
+
 #### Before Mutation Phase
+
+Process Fiber nodes:
+
+- `Snapshot` effects.
+- `Passive` effects.
 
 #### Mutation Phase
 
+Process Fiber nodes:
+
 - `Placement` effects: `DOM.appendChild` called.
+- `Update` effects.
+- `Deletion` effects.
+- `Hydrating` effects.
 
 #### Layout Phase
 
-- `componentDidMount` lifecycle function called **synchronously**.
-- `useLayoutEffect` callback called **synchronously**.
+Process Fiber nodes:
+
+- `Update | Callback` effects:
+  - `componentDidMount` lifecycle function called **synchronously**.
+  - `useLayoutEffect` callback called **synchronously**.
 
 #### UseEffect Execution Timing
 
