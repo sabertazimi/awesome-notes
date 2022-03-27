@@ -445,9 +445,79 @@ export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000
 
 ### React Reconciler
 
+#### React Fiber Work Loop
+
 [![React Fiber Work Loop](./figures/ReactFiberWorkLoop.png)](https://7kms.github.io/react-illustration-series/main/reconciler-workflow)
 
-Polyfill for `requestIdleCallback` with priority control.
+`performConcurrentWorkOnRoot` 支持可中断渲染:
+
+- 此函数首先检查是否处于 render 过程中,
+  是否需要恢复上一次渲染.
+- 如果本次渲染被中断,
+  此函数最后返回一个新的 `performConcurrentWorkOnRoot` 函数,
+  等待下一次 Scheduler 调度.
+
+```js
+function performConcurrentWorkOnRoot(root) {
+  const originalCallbackNode = root.callbackNode;
+
+  // 1. 刷新 pending 状态的 effects, 有可能某些 effect 会取消本次任务.
+  const didFlushPassiveEffects = flushPassiveEffects();
+
+  if (didFlushPassiveEffects) {
+    if (root.callbackNode !== originalCallbackNode) {
+      // 任务被取消, 退出调用.
+      return null;
+    } else {
+      // Current task was not canceled. Continue.
+    }
+  }
+
+  // 2. 获取本次渲染的优先级.
+  const lanes = getNextLanes(
+    root,
+    root === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes
+  );
+
+  // 3. 构造 Fiber 树.
+  const exitStatus = renderRootConcurrent(root, lanes);
+
+  if (
+    includesSomeLane(
+      workInProgressRootIncludedLanes,
+      workInProgressRootUpdatedLanes
+    )
+  ) {
+    // 如果在 render 过程中产生了新 update, 且新 update 的优先级与最初 render 的优先级有交集.
+    // 那么最初 render 无效, 丢弃最初 render 的结果, 等待下一次调度.
+    prepareFreshStack(root, NoLanes);
+  } else if (exitStatus !== RootIncomplete) {
+    // 4. 异常处理: 有可能fiber构造过程中出现异常.
+    if (exitStatus === RootError) {
+      processError();
+    }
+
+    const finishedWork = root.current.alternate; // Fiber
+    root.finishedWork = finishedWork;
+    root.finishedLanes = lanes;
+
+    // 5. 输出: 渲染 Fiber树.
+    finishConcurrentRender(root, exitStatus, lanes);
+  }
+
+  // 退出前再次检测, 是否还有其他更新, 是否需要发起新调度.
+  ensureRootIsScheduled(root, now());
+
+  if (root.callbackNode === originalCallbackNode) {
+    // 渲染被阻断, 返回一个新的 performConcurrentWorkOnRoot 函数, 等待下一次调度.
+    return performConcurrentWorkOnRoot.bind(null, root);
+  }
+
+  return null;
+}
+```
+
+#### Minimal Reconciler Implementation
 
 ```js
 const performWork = deadline => {
