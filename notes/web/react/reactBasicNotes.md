@@ -485,6 +485,9 @@ React 17, stable concurrent mode with
 [`Lanes`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js):
 
 ```js
+export type Lanes = number;
+export type Lane = number;
+
 export const TotalLanes = 31;
 
 export const NoLanes: Lanes = /*                        */ 0b0000000000000000000000000000000;
