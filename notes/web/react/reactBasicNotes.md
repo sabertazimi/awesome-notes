@@ -309,6 +309,54 @@ then update effects to real DOM when `Commit` stage.
   - setInitialProperties:
     设置初始化属性, 处理特殊元素和事件.
 
+```ts
+// Legacy Mode
+import type { ReactElement } from 'react';
+import Reconciler from './reconciler';
+import type { Container } from './types';
+
+const Renderer = {
+  render: (
+    element: ReactElement,
+    container: Container | null,
+    callback?: Function
+  ): void => {
+    if (container) {
+      const root = Reconciler.createContainer(container, 0, false, null);
+      Reconciler.updateContainer(element, root, null);
+    }
+  },
+};
+
+export default Renderer;
+```
+
+```ts
+// Modern Mode
+import type { ReactElement } from 'react';
+import Reconciler from './reconciler';
+import type { Container, OpaqueRoot } from './types';
+
+const Renderer = {
+  createRoot: (
+    container: Container | null,
+    callback?: Function
+  ): OpaqueRoot => {
+    if (container) {
+      const root = Reconciler.createContainer(container, 0, false, null);
+
+      root.render = function (element: ReactElement) {
+        Reconciler.updateContainer(element, this, null);
+      };
+
+      return root;
+    }
+  },
+};
+
+export default Renderer;
+```
+
 #### ReactComponent SetState
 
 - [react-dom/src/events/ReactDOMEventListener](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/ReactDOMEventListener.js):
