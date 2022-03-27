@@ -185,6 +185,7 @@ export default Renderer;
 - [react-reconciler/src/ReactFiberClassComponent](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.new.js):
   - enqueueSetState.
 - [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+  - createUpdate.
   - enqueueUpdate.
 - [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
   - **scheduleUpdateOnFiber**.
@@ -328,44 +329,6 @@ export const IdleHydrationLane: Lane = /*               */ 0b0010000000000000000
 export const IdleLane: Lanes = /*                       */ 0b0100000000000000000000000000000;
 
 export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;
-```
-
-Lanes model [use case](https://github.com/facebook/react/pull/18796):
-
-```js
-// task 与 batchTask 的优先级是否重叠:
-// 1. expirationTime:
-const isTaskIncludedInBatch = priorityOfTask >= priorityOfBatch;
-// 2. Lanes:
-const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
-
-// 当同时处理一组任务, 该组内有多个任务, 且每个任务的优先级不一致:
-// 1. expirationTime:
-const isTaskIncludedInBatch =
-  taskPriority <= highestPriorityInRange &&
-  taskPriority >= lowestPriorityInRange;
-// 2. Lanes:
-const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
-
-// 从 group 中增删 task:
-// 1. expirationTime (need list):
-task.prev.next = task.next;
-
-let current = queue;
-while (task.expirationTime >= current.expirationTime) {
-  current = current.next;
-}
-task.next = current.next;
-current.next = task;
-
-const isTaskIncludedInBatch =
-  taskPriority <= highestPriorityInRange &&
-  taskPriority >= lowestPriorityInRange;
-
-// 2. Lanes:
-batchOfTasks &= ~task; // Delete task.
-batchOfTasks |= task; // Add task.
-const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
 ```
 
 ### Scheduler Main Logic
@@ -717,6 +680,8 @@ export interface Fiber {
 }
 ```
 
+#### React Fiber Work Tag
+
 常见的 Fiber [类型](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactWorkTags.js):
 
 - HostComponent: HTML native tag.
@@ -752,6 +717,8 @@ type WorkTag =
   | 'LegacyHiddenComponent';
 ```
 
+#### React Fiber Mode
+
 React [运行模式](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactTypeOfMode.js):
 所有 `Fiber.mode` 保持一致 (包括 `FiberRoot`).
 
@@ -766,6 +733,8 @@ const StrictLegacyMode = /*               */ 0b001000;
 const StrictEffectsMode = /*              */ 0b010000;
 const ConcurrentUpdatesByDefaultMode = /* */ 0b100000;
 ```
+
+### React Fiber Update Queue
 
 [更新与更新队列](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
 
@@ -791,6 +760,22 @@ interface UpdateQueue<State> {
   effects: Array<Update<State>> | null; // Updates with `callback`.
 }
 ```
+
+### React Fiber Effects
+
+- Insert DOM elements: `Placement` tag.
+- Update DOM elements: `Update` tag.
+- Delete DOM elements: `Deletion` tag.
+- Update Ref property: `Ref` tag.
+- `useEffect` callback: `got Passive` tag.
+  - `useEffect(fn)`: `Mount` and `Update` lifecycle.
+  - `useEffect(fn, [])`: `Mount` lifecycle.
+  - `useEffect(fn, [deps])`:
+    `Mount` lifecycle and
+    `Update` lifecycle with `deps` changed.
+
+React create effects when `Render` stage,
+then update effects to real DOM when `Commit` stage.
 
 常见的 Effect [标志位](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberFlags.js):
 
@@ -827,21 +812,107 @@ const MountLayoutDev = /*               */ 0b010000000000000000;
 const MountPassiveDev = /*              */ 0b100000000000000000;
 ```
 
-### React Fiber Effects
+### React Fiber Lanes
 
-- Insert DOM elements: `Placement` tag.
-- Update DOM elements: `Update` tag.
-- Delete DOM elements: `Deletion` tag.
-- Update Ref property: `Ref` tag.
-- `useEffect` callback: `got Passive` tag.
-  - `useEffect(fn)`: `Mount` and `Update` lifecycle.
-  - `useEffect(fn, [])`: `Mount` lifecycle.
-  - `useEffect(fn, [deps])`:
-    `Mount` lifecycle and
-    `Update` lifecycle with `deps` changed.
+[Assign `Lane` to `Update`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
 
-React create effects when `Render` stage,
-then update effects to real DOM when `Commit` stage.
+- Legacy 模式: 返回 SyncLane.
+- Blocking 模式: 返回 SyncLane.
+- Concurrent 模式:
+  - 正常情况: 根据当前的调度优先级来生成一个 lane.
+  - 处于 Suspense 过程中: 会优先选择 `TransitionLanes` 通道中的空闲通道 (或最高优先级).
+
+```ts
+export function requestUpdateLane(fiber: Fiber): Lane {
+  const mode = fiber.mode;
+
+  if ((mode & BlockingMode) === NoMode) {
+    // Legacy 模式.
+    return SyncLane;
+  } else if ((mode & ConcurrentMode) === NoMode) {
+    // Blocking 模式.
+    return getCurrentPriorityLevel() === ImmediateSchedulerPriority
+      ? SyncLane
+      : SyncBatchedLane;
+  }
+
+  // Concurrent 模式.
+  if (currentEventWipLanes === NoLanes) {
+    currentEventWipLanes = workInProgressRootIncludedLanes;
+  }
+
+  const isTransition = requestCurrentTransition() !== NoTransition;
+
+  if (isTransition) {
+    // 特殊情况, 处于 Suspense 过程中.
+    if (currentEventPendingLanes !== NoLanes) {
+      currentEventPendingLanes =
+        mostRecentlyUpdatedRoot !== null
+          ? mostRecentlyUpdatedRoot.pendingLanes
+          : NoLanes;
+    }
+
+    return findTransitionLane(currentEventWipLanes, currentEventPendingLanes);
+  }
+
+  // 正常情况, 获取调度优先级.
+  let lane;
+  const schedulerPriority = getCurrentPriorityLevel();
+
+  if (
+    (executionContext & DiscreteEventContext) !== NoContext &&
+    schedulerPriority === UserBlockingSchedulerPriority
+  ) {
+    // `executionContext` 存在输入事件, 且调度优先级是用户阻塞性质.
+    lane = findUpdateLane(InputDiscreteLanePriority, currentEventWipLanes);
+  } else {
+    // 调度优先级转换为车道模型.
+    const schedulerLanePriority =
+      schedulerPriorityToLanePriority(schedulerPriority);
+    lane = findUpdateLane(schedulerLanePriority, currentEventWipLanes);
+  }
+
+  return lane;
+}
+```
+
+Lanes model [use case](https://github.com/facebook/react/pull/18796):
+
+```js
+// task 与 batchTask 的优先级是否重叠:
+// 1. expirationTime:
+const isTaskIncludedInBatch = priorityOfTask >= priorityOfBatch;
+// 2. Lanes:
+const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+
+// 当同时处理一组任务, 该组内有多个任务, 且每个任务的优先级不一致:
+// 1. expirationTime:
+const isTaskIncludedInBatch =
+  taskPriority <= highestPriorityInRange &&
+  taskPriority >= lowestPriorityInRange;
+// 2. Lanes:
+const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+
+// 从 group 中增删 task:
+// 1. expirationTime (need list):
+task.prev.next = task.next;
+
+let current = queue;
+while (task.expirationTime >= current.expirationTime) {
+  current = current.next;
+}
+task.next = current.next;
+current.next = task;
+
+const isTaskIncludedInBatch =
+  taskPriority <= highestPriorityInRange &&
+  taskPriority >= lowestPriorityInRange;
+
+// 2. Lanes:
+batchOfTasks &= ~task; // Delete task.
+batchOfTasks |= task; // Add task.
+const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+```
 
 ### React Fiber Trees
 
@@ -928,6 +999,10 @@ function performConcurrentWorkOnRoot(root) {
 ```
 
 ## React Reconciler
+
+- 创建 `Update` 时机 (`createUpdate`/`enqueueUpdate`):
+  - `ReactFiberReconciler.updateContainer`.
+  - `ReactFiberClassComponent.setState`.
 
 ### React Fiber Diff Phase
 
