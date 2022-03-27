@@ -237,16 +237,44 @@ then update effects to real DOM when `Commit` stage.
 
 #### Create RootContainer
 
+##### Legacy Root
+
 - [react-dom/src/client/ReactDOMLegacy](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMLegacy.js):
-  - render.
+  - **render**.
   - legacyRenderSubtreeIntoContainer.
   - legacyCreateRootFromDOMContainer.
-- [react-dom/src/client/ReactDOMLegacy](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMLegacy.js):
-  - createLegacyRoot.
-  - createRootImpl.
+- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.new.js):
+  - **createContainer**.
+- [react-dom/src/client/ReactDOMComponentTree](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponentTree.js):
+  - markContainerAsRoot.
+- [react-reconciler/src/ReactFiberRoot](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRoot.new.js):
+  - **createFiberRoot**.
+- [react-reconciler/src/ReactFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.new.js):
+  - createHostRootFiber.
+- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+  - **initializeUpdateQueue**.
 - [react-dom/src/events/DOMPluginEventSystem](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/DOMPluginEventSystem.js):
   - listenToAllSupportedEvents:
     事件统一在 rootContainer 上处理 dispatchDiscreteEvent.
+
+##### Concurrent Root
+
+- [react-dom/src/client/ReactDOMRoot](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMRoot.js):
+  - **createRoot**.
+- [react-reconciler/src/ReactFiberReconciler](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.new.js):
+  - **createContainer**.
+- [react-dom/src/client/ReactDOMComponentTree](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponentTree.js):
+  - markContainerAsRoot.
+- [react-reconciler/src/ReactFiberRoot](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRoot.new.js):
+  - **createFiberRoot**.
+- [react-reconciler/src/ReactFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.new.js):
+  - createHostRootFiber.
+- [react-reconciler/src/ReactUpdateQueue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+  - **initializeUpdateQueue**.
+- [react-dom/src/events/DOMPluginEventSystem](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/DOMPluginEventSystem.js):
+  - listenToAllSupportedEvents:
+    事件统一在 rootContainer 上处理 dispatchDiscreteEvent.
+- `ReactDOMRoot.render(<App />)`.
 
 #### Update RootContainer
 
