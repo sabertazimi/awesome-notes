@@ -876,11 +876,11 @@ export function requestUpdateLane(fiber: Fiber): Lane {
 }
 ```
 
-[Global render lane](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js):
+[Global `renderLanes`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js):
 
 Fiber 树构造过程中 (`Render Phase`),
 若 Fiber 对象或 Update 对象优先级 (`fiber.lanes`/`update.lane`) 比全局渲染优先级低,
-则将会被忽略.
+则将会被忽略 (节点未更新, 可以直接复用).
 
 ```ts
 export function getNextLanes(root: FiberRoot, wipLanes: Lanes): Lanes {
