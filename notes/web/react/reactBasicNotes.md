@@ -457,19 +457,6 @@ not only including `Reconciler.performSyncWorkOnRoot`/`Reconciler.performConcurr
 but also for non-react tasks
 (meaning `Scheduler` module can work standalone without `React`).
 
-TaskQueue is a MinHeap, storing Tasks.
-
-```js
-const newTask = {
-  id: taskIdCounter++,
-  callback, // Work from reconciler.
-  priorityLevel,
-  startTime,
-  expirationTime,
-  sortIndex: -1, // MinHeap queue indexing.
-};
-```
-
 #### Priority Scheduler
 
 React 16, unstable concurrent mode with
@@ -575,6 +562,294 @@ const isTaskIncludedInBatch =
 batchOfTasks &= ~task; // Delete task.
 batchOfTasks |= task; // Add task.
 const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+```
+
+#### Scheduler Main Logic
+
+Scheduler main [API](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js):
+
+`scheduleCallback(callback)`
+-> `push(queue, newTask)` (Wrap `callback` into `task`)
+(For delayed task -> `requestHostTimeout(handleTimeout, delayTime)`)
+-> `requestHostCallback(flushWork)`
+-> `messageChannelPort.postMessage(null)`
+-> `performWorkUntilDeadline()`
+-> `flushWork(hasTimeRemaining, currentTime)`:
+-> `workLoop(hasTimeRemaining, currentTime)`:
+
+将 Reconciler 的工作 (Callback)
+包装成 Task 组成 Task Queue,
+按照时间分片机制,
+不断地消费 Task Queue.
+
+对于延时任务 (Delayed Task),
+会将其先放入 Timer Queue,
+等待延时完成后再将其放入 Task Queue.
+
+#### Scheduler Time Slicing
+
+```js
+// 时间切片周期, 默认是 5ms.
+// 如果一个 task 运行超过该周期, 下一个 task 执行前, 会把控制权归还浏览器.
+const yieldInterval = 5;
+const maxYieldInterval = 300;
+
+let deadline = 0; // currentTime + yieldInterval.
+let needsPaint = false;
+let isMessageLoopRunning = false;
+let scheduledHostCallback = null;
+
+const channel = new MessageChannel();
+const port = channel.port2;
+channel.port1.onmessage = performWorkUntilDeadline;
+
+const scheduling = navigator.scheduling;
+const getCurrentTime = performance.now;
+
+// 请求回调:
+const requestHostCallback = callback => {
+  // 1. 保存 callback.
+  scheduledHostCallback = callback;
+
+  if (!isMessageLoopRunning) {
+    isMessageLoopRunning = true;
+    // 2. 通过 MessageChannel 发送消息.
+    port.postMessage(null);
+  }
+};
+
+// 取消回调:
+const cancelHostCallback = () => {
+  scheduledHostCallback = null;
+};
+
+const requestHostTimeout = (callback, ms) => {
+  taskTimeoutID = setTimeout(() => {
+    callback(getCurrentTime());
+  }, ms);
+};
+
+const cancelHostTimeout = () => {
+  clearTimeout(taskTimeoutID);
+  taskTimeoutID = -1;
+};
+
+// 是否让出主线程 (time slice):
+const shouldYieldToHost = () => {
+  const currentTime = getCurrentTime();
+
+  if (currentTime >= deadline) {
+    if (needsPaint || scheduling.isInputPending()) {
+      // There is either a pending paint or a pending input.
+      return true;
+    }
+
+    // There's no pending input.
+    // Only yield if we've reached the max yield interval.
+    return currentTime >= maxYieldInterval;
+  } else {
+    // There's still time left in the frame.
+    return false;
+  }
+};
+
+// 请求绘制:
+const requestPaint = () => {
+  needsPaint = true;
+};
+
+// 实际回调函数处理:
+const performWorkUntilDeadline = () => {
+  if (scheduledHostCallback !== null) {
+    // 1. 设置 currentTime 与 deadline.
+    const currentTime = getCurrentTime();
+    deadline = currentTime + yieldInterval;
+    const hasTimeRemaining = true;
+
+    try {
+      // 2. 执行回调, 返回是否有还有剩余任务.
+      const hasMoreWork = scheduledHostCallback(hasTimeRemaining, currentTime);
+
+      if (!hasMoreWork) {
+        // 没有剩余任务, 退出.
+        isMessageLoopRunning = false;
+        scheduledHostCallback = null;
+      } else {
+        port.postMessage(null); // 有剩余任务, 发起新的调度.
+      }
+    } catch (error) {
+      port.postMessage(null); // 如有异常, 重新发起调度.
+      throw error;
+    }
+  } else {
+    isMessageLoopRunning = false;
+  }
+
+  needsPaint = false; // Reset.
+};
+```
+
+#### Scheduler Task Queue
+
+Task queue is [MinHeap](https://github.com/facebook/react/blob/main/packages/scheduler/src/SchedulerMinHeap.js),
+storing Tasks.
+
+```js
+const newTask = {
+  id: taskIdCounter++,
+  callback, // Work from reconciler.
+  priorityLevel,
+  startTime,
+  expirationTime,
+  sortIndex: -1, // MinHeap queue indexing.
+};
+```
+
+```js
+const scheduleCallback = (priorityLevel, callback, options) => {
+  const currentTime = getCurrentTime();
+  const startTime = currentTime;
+  const expirationTime = startTime + timeout[priorityLevel]; // -1/250/5000/10000/MAX_INT.
+  const newTask = {
+    id: taskIdCounter++,
+    callback,
+    priorityLevel,
+    startTime,
+    expirationTime,
+    sortIndex: -1,
+  };
+
+  if (startTime > currentTime) {
+    // Delayed task.
+    newTask.sortIndex = startTime;
+    push(timerQueue, newTask);
+
+    // All tasks are delayed, and this is the task with the earliest delay.
+    if (peek(taskQueue) === null && newTask === peek(timerQueue)) {
+      if (isHostTimeoutScheduled) {
+        // Cancel an existing timeout.
+        cancelHostTimeout();
+      } else {
+        isHostTimeoutScheduled = true;
+      }
+
+      // Schedule a timeout.
+      requestHostTimeout(handleTimeout, startTime - currentTime);
+    }
+  } else {
+    // Normal task.
+    newTask.sortIndex = expirationTime;
+    push(taskQueue, newTask);
+
+    if (!isHostCallbackScheduled && !isPerformingWork) {
+      isHostCallbackScheduled = true;
+      requestHostCallback(flushWork);
+    }
+  }
+
+  return newTask;
+};
+
+const handleTimeout = currentTime => {
+  isHostTimeoutScheduled = false;
+  advanceTimers(currentTime);
+
+  if (!isHostCallbackScheduled) {
+    if (peek(taskQueue) !== null) {
+      isHostCallbackScheduled = true;
+      requestHostCallback(flushWork);
+    } else {
+      const firstTimer = peek(timerQueue);
+
+      if (firstTimer !== null) {
+        requestHostTimeout(handleTimeout, firstTimer.startTime - currentTime);
+      }
+    }
+  }
+};
+```
+
+#### Scheduler Work Loop
+
+```js
+function flushWork(hasTimeRemaining, initialTime) {
+  // We'll need a host callback the next time work is scheduled.
+  isHostCallbackScheduled = false;
+
+  if (isHostTimeoutScheduled) {
+    // We scheduled a timeout but it's no longer needed. Cancel it.
+    isHostTimeoutScheduled = false;
+    cancelHostTimeout();
+  }
+
+  isPerformingWork = true; // Lock.
+  const previousPriorityLevel = currentPriorityLevel;
+
+  try {
+    return workLoop(hasTimeRemaining, initialTime);
+  } finally {
+    // Restore context.
+    currentTask = null;
+    currentPriorityLevel = previousPriorityLevel;
+    isPerformingWork = false;
+  }
+}
+
+function workLoop(hasTimeRemaining, initialTime) {
+  let currentTime = initialTime;
+  advanceTimers(currentTime);
+  currentTask = peek(taskQueue);
+
+  while (currentTask !== null) {
+    if (
+      currentTask.expirationTime > currentTime &&
+      (!hasTimeRemaining || shouldYieldToHost())
+    ) {
+      // This currentTask hasn't expired, and we've reached the deadline.
+      break;
+    }
+
+    const callback = currentTask.callback;
+
+    if (typeof callback === 'function') {
+      currentTask.callback = null;
+      currentPriorityLevel = currentTask.priorityLevel;
+      const didUserCallbackTimeout = currentTask.expirationTime <= currentTime;
+      const continuationCallback = callback(didUserCallbackTimeout);
+      currentTime = getCurrentTime();
+
+      if (typeof continuationCallback === 'function') {
+        // 产生了连续回调 (如 Fiber树太大, 出现了中断渲染), 保留 currentTask.
+        currentTask.callback = continuationCallback;
+      } else {
+        if (currentTask === peek(taskQueue)) {
+          pop(taskQueue);
+        }
+      }
+
+      advanceTimers(currentTime);
+    } else {
+      // 如果任务被取消 (currentTask.callback = null), 将其移出队列.
+      pop(taskQueue);
+    }
+
+    currentTask = peek(taskQueue);
+  }
+
+  // Return whether there's additional work.
+  if (currentTask !== null) {
+    return true;
+  } else {
+    const firstTimer = peek(timerQueue);
+
+    // 存在延时任务, 继续进行调度.
+    if (firstTimer !== null) {
+      requestHostTimeout(handleTimeout, firstTimer.startTime - currentTime);
+    }
+
+    return false;
+  }
+}
 ```
 
 ### React Reconciler
@@ -5401,9 +5676,9 @@ root.render(<App />);
 
 ### Batching Updates
 
-All updates will be automatically batched,
-including updates inside of
-**promises, async code and native event handlers**:
+- All updates will be automatically batched,
+  including updates inside of **promises, async code and native event handlers**.
+- `ReactDOM.flushSync` can opt-out of automatic batching.
 
 ```js
 function handleClick() {
@@ -5437,7 +5712,89 @@ element.addEventListener('click', () => {
 });
 ```
 
-`ReactDOM.flushSync` can opt-out of automatic batching.
+Reconciler 注册调度任务时, 会通过节流与防抖提升调度性能:
+
+- 在 Task 注册完成后, 会设置 FiberRoot 的属性, 代表现在已经处于调度进行中.
+- 再次进入 `ensureRootIsScheduled` 时
+  (比如连续 2 次 `setState`, 第二次 `setState` 同样会触发 Reconciler 与 Scheduler 执行),
+  如果发现处于调度中, 则会通过节流与防抖, 保证调度性能.
+- 节流:
+  `existingCallbackPriority === newCallbackPriority`,
+  新旧更新的优先级相同, 则无需注册新 Task, 继续沿用上一个优先级相同的 Task, 直接退出调用.
+- 防抖:
+  `existingCallbackPriority !== newCallbackPriority`,
+  新旧更新的优先级不同, 则取消旧 Task, 重新注册新 Task.
+
+[EnsureRootIsScheduled](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+
+```ts
+function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
+  const existingCallbackNode = root.callbackNode;
+  const nextLanes = getNextLanes(
+    root,
+    root === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes
+  );
+
+  if (nextLanes === NoLanes) {
+    if (existingCallbackNode !== null) {
+      cancelCallback(existingCallbackNode);
+    }
+
+    root.callbackNode = null;
+    root.callbackPriority = NoLane;
+    return;
+  }
+
+  const newCallbackPriority = getHighestPriorityLane(nextLanes);
+  const existingCallbackPriority = root.callbackPriority;
+
+  // Debounce.
+  if (existingCallbackPriority === newCallbackPriority) {
+    // The priority hasn't changed. We can reuse the existing task. Exit.
+    return;
+  }
+
+  // Throttle.
+  if (existingCallbackNode != null) {
+    // Cancel the existing callback. We'll schedule a new one below.
+    cancelCallback(existingCallbackNode);
+  }
+
+  // Schedule a new callback.
+  let newCallbackNode;
+
+  if (newCallbackPriority === SyncLane) {
+    if (root.tag === LegacyRoot) {
+      scheduleLegacySyncCallback(performSyncWorkOnRoot.bind(null, root));
+    } else {
+      scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root));
+    }
+
+    if (supportsMicrotasks) {
+      scheduleMicrotask(() => {
+        if (executionContext === NoContext) {
+          flushSyncCallbacks();
+        }
+      });
+    } else {
+      scheduleCallback(ImmediateSchedulerPriority, flushSyncCallbacks);
+    }
+
+    newCallbackNode = null;
+  } else {
+    const eventPriority = lanesToEventPriority(nextLanes);
+    const schedulerPriorityLevel =
+      eventPriorityToSchedulePriority(eventPriority);
+    newCallbackNode = scheduleCallback(
+      schedulerPriorityLevel,
+      performConcurrentWorkOnRoot.bind(null, root)
+    );
+  }
+
+  root.callbackPriority = newCallbackPriority;
+  root.callbackNode = newCallbackNode;
+}
+```
 
 ### Suspense
 
