@@ -772,6 +772,7 @@ tags: [Web, Framework, Library]
 
 ### Rich Text Editor
 
+- [Quill: Modern WYSIWYG Editor Built for Compatibility and Extensibility](https://github.com/quilljs/quill)
 - [Slate: Customizable Rich Text Editor Framework](https://github.com/ianstormtaylor/slate)
 - [EditorJS: Block-styled Rich Text Editor](https://github.com/codex-team/editor.js)
 - [WangEditor: Lightweight Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
@@ -807,6 +808,7 @@ tags: [Web, Framework, Library]
 ### Low Code Editor
 
 - [LowCodeEngine: Enterprise-class Low-code Technology Stack](https://github.com/alibaba/lowcode-engine)
+- [ToolJet: Extensible Low-code Framework for Building Business Applications](https://github.com/ToolJet/ToolJet)
 
 ### Clipboard
 
