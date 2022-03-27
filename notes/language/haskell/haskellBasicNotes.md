@@ -37,23 +37,10 @@ runghc *.hs/*.lhs
 
 ## Unique Mark
 
-`:+`
-
-复数符 - 2 :+ 3 -> 2+3i
-
-`_`
-
-泛匹配符: 表示不关心此部分具体内容
-
-`<-`
-
-属于符号,用于 ListRange 中.
-
-`=>`
-
-类型约束分隔符
-
-`->`
+- `:+`: 复数符, `2 :+ 3 -> 2+3i`.
+- `_`: 泛匹配符, 表示不关心此部分具体内容.
+- `<-`: 属于符号, 用于 ListRange 中.
+- `=>`: 类型约束分隔符
 
 ## Expression
 
@@ -121,19 +108,18 @@ Data.Word - unsigned int
 
 #### Operator
 
-- ++
-- :
-- !!
-- \>/</==
+- `++`.
+- `:`.
+- `!!`.
+- `>`/`<`/`==`.
 
 #### Function
 
-- head List 首元素
-- last List 尾元素
-- init List 除去尾元素的部分
-- tail List 除去首元素的部分
-
-- length List 长度
+- head List 首元素.
+- last List 尾元素.
+- init List 除去尾元素的部分.
+- tail List 除去首元素的部分.
+- length List 长度.
 
 _Tips_:
 
@@ -207,7 +193,7 @@ ghci> sum (takeWhile (<10000) (filter odd (map (^2) [1..])))
 
 #### Range
 
-三要素: , 与 ..
+三要素: `,` 与 `..`
 
 - 上限
 - 下限
@@ -218,16 +204,15 @@ ghci> sum (takeWhile (<10000) (filter odd (map (^2) [1..])))
 步长为2: [2,4..20]
 步长为13无限List: [13,26..]
 take 24 [13,26..]
-
 ```
 
-#### List Comprehension(数学定义)
+#### List Comprehension
 
 由类似集合定义的离散数学定义,来定义复杂的 List:
 
 `[expression | filter]`
 
-`[expression | x <\- Range, Predicate(断言/限制条件)]`
+`[expression | x <- Range, Predicate(断言/限制条件)]`
 
 - Range: `,`分隔多个 Range(一般为 List)
 - Predicate: `,`分隔多个断言;每个断言均为 Boolean 表达式
@@ -262,7 +247,7 @@ ghci> [ [ x | x <- xs, even x ] | xs <- xxs]
 [[2,2,4],[2,4,6,8],[2,4,2,6,2,6]]
 ```
 
-### Tuple(原组)
+### Tuple
 
 #### 内部差异性
 
@@ -278,9 +263,8 @@ ghci> [ [ x | x <- xs, even x ] | xs <- xxs]
 
 ##### 二元组
 
-fst/snd tuple 返回首项/尾项
-
-zip List1 List2 对应项配对,组成二元组 List
+- `fst/snd tuple`: 返回首项/尾项.
+- `zip List1 List2`: 对应项配对, 组成二元组 List.
 
 ```haskell
 ghci> zip [5,3,2,6,2,7,2,5,4,6,6] ["im","a","turtle"]
@@ -305,7 +289,7 @@ third (_, _, z) = z
 
 ### 泛型
 
-运用 Type 变量(只可为**单字符**), 实现泛型参数与多态函数.
+运用 Type 变量 (只可为**单字符**), 实现泛型参数与多态函数.
 
 借助 TypeClass 可轻松实现多态函数:
 
@@ -339,30 +323,13 @@ addThree :: Int -> Int -> Int -> Int
 addThree x y z = x + y + z
 ```
 
-## 基本语法
-
-### 名字/函数定义
-
-#### 模式匹配(Pattern Matching)
+## Pattern Matching
 
 当函数拥有多个函数体(模式)时,会从上至下进行匹配各模式,一旦匹配则只应用这一函数体.
 
-##### Best Practice
+### As Pattern Matching
 
-- 代替 if-else/switch 语句
-- 递归算法(将递归基础作为首模式,递归函数体作为尾模式)
-- List Range 中亦可使用模式匹配
-
-```haskell
-addVectors :: (Num a) => (a, a) -> (a, a) -> (a, a)
-addVectors (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
-```
-
-##### 常用模式
-
-###### as 模式
-
-all@(pattern) - all 为指向 pattern 整体的引用
+`all@(pattern)`: all 为指向 pattern 整体的引用.
 
 ```haskell
 all@(x:y:xs) -- 其中all与(x:y:xs)等价
@@ -374,10 +341,10 @@ capital "" = "Empty string, whoops!"
 capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
 ```
 
-###### List 模式
+### List Pattern Matching
 
-- x:xs
-- x:y:z:xs
+- `x:xs`
+- `x:y:z:xs`.
 
 ```haskell
 head' :: [a] -> a
@@ -397,21 +364,21 @@ sum' [] = 0
 sum' (x:xs) = x + sum' xs
 ```
 
-###### Tuple
+### Tuple Pattern Matching
 
 - (x, y)
 - (x, y, z)
 
-#### guard 模式 与 where 绑定
+### Guard Pattern Matching and Where Binding
 
-子模式匹配: 运用布尔表达式实现判断,应用对应函数体
+子模式匹配: 运用布尔表达式实现判断, 应用对应函数体:
 
-- 关键符号: | 与 where
-- | 分隔函数体
-- where
-  - 可见性: 定义只对本模式可见的(私有)名字与(私有)函数
-  - where 定义在最外层,使得各模式共享(私有)名字与(私有)函数
-  - 名字定义时可使用模式匹配 `where (head:_) = firstName`
+- 关键符号: | 与 where.
+- | 分隔函数体.
+- where:
+  - 可见性: 定义只对本模式可见的 (私有) 名字与 (私有) 函数.
+  - where 定义在最外层, 使得各模式共享 (私有) 名字与 (私有) 函数.
+  - 名字定义时可使用模式匹配 `where (head:_) = firstName`.
 
 ```haskell
 bmiTell :: (RealFloat a) => a -> a -> String
@@ -426,9 +393,9 @@ bmiTell weight height
           fat = 30.0
 ```
 
-#### let 绑定
+### Let Binding
 
-类似 where,绑定对象为表达式/函数
+类似 where, 绑定对象为表达式/函数:
 
 ```haskell
 let bindings
@@ -441,14 +408,15 @@ let sideArea = 2 * pi * r * h
 in  sideArea + 2 * topArea
 ```
 
-- 可见性:in 作用域,只对本 guard 可见
-- 可使用模式匹配
-- 可用于 List Range 中
+- 可见性: in 作用域, 只对本 guard 可见.
+- 可使用模式匹配.
+- 可用于 List Range 中.
 
-#### case 表达式
+### Case Pattern Matching
 
-- 模式匹配是 case 表达式的特殊情况(语法糖:简化写法)
-- 在函数中,模式匹配只能用于参数定义中,而 case 表达式可用于其他地方(let/where 绑定 普通表达式 guard 语句)
+- 模式匹配是 case 表达式的特殊情况(语法糖:简化写法).
+- 在函数中, 模式匹配只能用于参数定义中, case 表达式可用于其他地方
+  (let/where 绑定, 普通表达式, guard 语句).
 
 ```haskell
 case expression of pattern -> result
@@ -462,6 +430,17 @@ describeList :: [a] -> String
 describeList xs = "The list is " ++ case xs of [] -> "empty."
                                                [x] -> "a singleton list."
                                                xs -> "a longer list."
+```
+
+### Pattern Matching Best Practice
+
+- 代替 if-else/switch 语句
+- 递归算法(将递归基础作为首模式,递归函数体作为尾模式)
+- List Range 中亦可使用模式匹配
+
+```haskell
+addVectors :: (Num a) => (a, a) -> (a, a) -> (a, a)
+addVectors (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
 ```
 
 ## Type Class
