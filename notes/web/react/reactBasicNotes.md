@@ -539,6 +539,44 @@ export const IdleLane: Lanes = /*                       */ 0b0100000000000000000
 export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;
 ```
 
+Lanes model [use case](https://github.com/facebook/react/pull/18796):
+
+```js
+// task 与 batchTask 的优先级是否重叠:
+// 1. expirationTime:
+const isTaskIncludedInBatch = priorityOfTask >= priorityOfBatch;
+// 2. Lanes:
+const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+
+// 当同时处理一组任务, 该组内有多个任务, 且每个任务的优先级不一致:
+// 1. expirationTime:
+const isTaskIncludedInBatch =
+  taskPriority <= highestPriorityInRange &&
+  taskPriority >= lowestPriorityInRange;
+// 2. Lanes:
+const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+
+// 从 group 中增删 task:
+// 1. expirationTime (need list):
+task.prev.next = task.next;
+
+let current = queue;
+while (task.expirationTime >= current.expirationTime) {
+  current = current.next;
+}
+task.next = current.next;
+current.next = task;
+
+const isTaskIncludedInBatch =
+  taskPriority <= highestPriorityInRange &&
+  taskPriority >= lowestPriorityInRange;
+
+// 2. Lanes:
+batchOfTasks &= ~task; // Delete task.
+batchOfTasks |= task; // Add task.
+const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+```
+
 ### React Reconciler
 
 #### React Fiber Work Loop
