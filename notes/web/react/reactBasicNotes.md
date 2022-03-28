@@ -635,7 +635,7 @@ React Fiber 的目标是提高其在动画、布局和手势等领域的适用�
 它的主要特性是 `Incremental Rendering` : 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
 A [minimal React](https://github.com/sabertazimi/meact) with Fiber Reconciliation.
 
-### React Fiber Metadata
+### React Fiber Type
 
 `Fiber` [definition](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactInternalTypes.js):
 
@@ -691,7 +691,7 @@ export interface Fiber {
 }
 ```
 
-#### React Fiber Work Tag
+### React Fiber Work Tag
 
 常见的 Fiber [类型](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactWorkTags.js):
 
@@ -728,7 +728,7 @@ type WorkTag =
   | 'LegacyHiddenComponent';
 ```
 
-#### React Fiber Mode
+### React Fiber Mode
 
 React [运行模式](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactTypeOfMode.js):
 所有 `Fiber.mode` 保持一致 (包括 `FiberRoot`).
