@@ -1092,6 +1092,7 @@ Reconciler construct Fiber tree:
 - flushSyncCallbacks.
 - performSyncWorkOnRoot / performConcurrentWorkOnRoot.
 - renderRootSync / renderRootConcurrent:
+  - 此函数会调用 `prepareFreshStack`, 重置 FiberRoot 上的全局属性, 重置 Fiber Work Loop 全局变量.
   - 此函数会设置 `workInProgressRoot = FiberRoot`, 表示正在进行 render.
   - 此函数退出前, 会重置 `workInProgressRoot = null`, 表示没有正在进行中的 render.
   - 此函数退出前, 会挂载 `FiberRoot.finishedWork = workInProgressHostRootFiber`.
@@ -1182,7 +1183,7 @@ function renderRootSync(root: FiberRoot, lanes: Lanes) {
 
   // 如果 FiberRoot 变动, 或者 update.lane 变动, 都会刷新栈帧, 丢弃上一次渲染进度.
   if (workInProgressRoot !== root || workInProgressRootRenderLanes !== lanes) {
-    // 刷新栈帧, Legacy 模式下都会进入.
+    // 刷新栈帧.
     prepareFreshStack(root, lanes);
   }
   do {
@@ -1199,6 +1200,83 @@ function renderRootSync(root: FiberRoot, lanes: Lanes) {
   workInProgressRoot = null;
   workInProgressRootRenderLanes = NoLanes;
   return workInProgressRootExitStatus;
+}
+
+function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
+  const prevExecutionContext = executionContext;
+  executionContext |= RenderContext;
+  const prevDispatcher = pushDispatcher();
+
+  // 如果 FiberRoot 变动, 或者 update.lane变动, 都会刷新栈帧, 丢弃上一次渲染进度.
+  if (workInProgressRoot !== root || workInProgressRootRenderLanes !== lanes) {
+    resetRenderTimer();
+    // 刷新栈帧.
+    prepareFreshStack(root, lanes);
+    startWorkOnPendingInteractions(root, lanes);
+  }
+
+  const prevInteractions = pushInteractions(root);
+
+  do {
+    try {
+      workLoopConcurrent();
+      break;
+    } catch (thrownValue) {
+      handleError(root, thrownValue);
+    }
+  } while (true);
+
+  // 重置全局变量.
+  resetContextDependencies();
+  popDispatcher(prevDispatcher);
+  executionContext = prevExecutionContext;
+
+  // Check if the tree has completed.
+  if (workInProgress !== null) {
+    // Still work remaining.
+    return RootIncomplete;
+  } else {
+    // Completed the tree.
+    // Set this to null to indicate there's no in-progress render.
+    workInProgressRoot = null;
+    workInProgressRootRenderLanes = NoLanes;
+
+    // Return the final exit status.
+    return workInProgressRootExitStatus;
+  }
+}
+
+function prepareFreshStack(root: FiberRoot, lanes: Lanes) {
+  // 重置 FiberRoot 上的属性.
+  root.finishedWork = null;
+  root.finishedLanes = NoLanes;
+  const timeoutHandle = root.timeoutHandle;
+
+  if (timeoutHandle !== noTimeout) {
+    root.timeoutHandle = noTimeout;
+    cancelTimeout(timeoutHandle);
+  }
+
+  if (workInProgress !== null) {
+    let interruptedWork = workInProgress.return;
+    while (interruptedWork !== null) {
+      unwindInterruptedWork(interruptedWork);
+      interruptedWork = interruptedWork.return;
+    }
+  }
+
+  // 重置全局变量.
+  workInProgressRoot = root;
+  workInProgress = createWorkInProgress(root.current, null); // currentHostRootFiber.alternate.
+  workInProgressRootRenderLanes =
+    subtreeRenderLanes =
+    workInProgressRootIncludedLanes =
+      lanes;
+  workInProgressRootExitStatus = RootIncomplete;
+  workInProgressRootFatalError = null;
+  workInProgressRootSkippedLanes = NoLanes;
+  workInProgressRootUpdatedLanes = NoLanes;
+  workInProgressRootPingedLanes = NoLanes;
 }
 
 function workLoopSync() {
