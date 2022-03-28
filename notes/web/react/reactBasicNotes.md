@@ -745,38 +745,6 @@ const StrictEffectsMode = /*              */ 0b010000;
 const ConcurrentUpdatesByDefaultMode = /* */ 0b100000;
 ```
 
-### React Fiber Update Queue
-
-[更新与更新队列](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
-
-- 创建 `Update` 时机 (`createUpdate`/`enqueueUpdate`):
-  - `ReactFiberReconciler.updateContainer`.
-  - `ReactFiberClassComponent.setState`.
-  - `ReactFiberHooks.dispatchAction`.
-
-```ts
-interface Update<State> {
-  lane: Lane;
-  tag: 'UpdateState' | 'ReplaceState' | 'ForceUpdate' | 'CaptureUpdate';
-  payload: any;
-  callback: (() => mixed) | null;
-  next: Update<State> | null;
-  _eventTime: number;
-}
-
-interface SharedQueue<State> {
-  pending: Update<State> | null;
-}
-
-interface UpdateQueue<State> {
-  baseState: State;
-  firstBaseUpdate: Update<State> | null;
-  lastBaseUpdate: Update<State> | null;
-  shared: SharedQueue<State>;
-  effects: Array<Update<State>> | null; // Updates with `callback`.
-}
-```
-
 ### React Fiber Effects
 
 - Insert DOM elements: `Placement` tag.
@@ -1484,6 +1452,101 @@ Reconciler:
 
 - O(n) incomplete tree comparison: only compare same level nodes.
 - `key` prop to hint for nodes reuse.
+
+#### React Fiber Update Queue
+
+[更新与更新队列](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+
+- `UpdateQueue` 是一个**循环队列**.
+- 创建 `Update` 时机 (`createUpdate`/`enqueueUpdate`):
+  - `ReactFiberReconciler.updateContainer`.
+  - `ReactFiberClassComponent.setState`.
+  - `ReactFiberHooks.dispatchAction`.
+
+```ts
+interface Update<State> {
+  lane: Lane;
+  tag: 'UpdateState' | 'ReplaceState' | 'ForceUpdate' | 'CaptureUpdate';
+  payload: any;
+  callback: (() => mixed) | null;
+  next: Update<State> | null;
+  _eventTime: number;
+}
+
+interface SharedQueue<State> {
+  pending: Update<State> | null;
+}
+
+interface UpdateQueue<State> {
+  baseState: State;
+  firstBaseUpdate: Update<State> | null;
+  lastBaseUpdate: Update<State> | null;
+  shared: SharedQueue<State>;
+  effects: Array<Update<State>> | null; // Updates with `callback`.
+}
+```
+
+[ReactFiberClassComponent.setState](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.new.js):
+
+```js
+const classComponentUpdater = {
+  isMounted,
+  enqueueSetState(inst, payload, callback) {
+    // 1. 获取 ClassComponent 实例对应的 Fiber 节点.
+    const fiber = getInstance(inst);
+    // 2. 创建 Update 对象.
+    const eventTime = requestEventTime();
+    const lane = requestUpdateLane(fiber);
+    const update = createUpdate(eventTime, lane);
+    update.payload = payload;
+
+    if (callback !== undefined && callback !== null) {
+      update.callback = callback;
+    }
+
+    // 3. 将 Update 对象添加到当前 Fiber 节点的 updateQueue.
+    enqueueUpdate(fiber, update);
+    // 4. 请求调度, 进入 Reconciler.
+    scheduleUpdateOnFiber(fiber, lane, eventTime);
+  },
+};
+```
+
+[ReactFiberHooks.dispatchAction](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js):
+
+```ts
+function dispatchAction<S, A>(
+  fiber: Fiber,
+  queue: UpdateQueue<S, A>,
+  action: A
+) {
+  // 1. 创建 Update 对象.
+  const eventTime = requestEventTime();
+  const lane = requestUpdateLane(fiber);
+  const update: Update<S, A> = {
+    lane,
+    action,
+    eagerReducer: null,
+    eagerState: null,
+    next: null,
+  };
+
+  // 2. 将 Update 对象添加到当前 Hook 对象的 updateQueue.
+  const pending = queue.pending;
+
+  if (pending === null) {
+    update.next = update;
+  } else {
+    update.next = pending.next;
+    pending.next = update;
+  }
+
+  queue.pending = update;
+
+  // 3. 请求调度, 进入 Reconciler.
+  scheduleUpdateOnFiber(fiber, lane, eventTime);
+}
+```
 
 #### Different Types Elements
 
