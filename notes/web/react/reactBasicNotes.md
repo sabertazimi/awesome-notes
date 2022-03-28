@@ -343,7 +343,7 @@ export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000
 
 ### Scheduler Workflow
 
-Scheduler main [API](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js):
+Scheduler main [workflow](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js):
 
 `scheduleCallback(callback)`
 -> `push(queue, newTask)` (Wrap `callback` into `task`)
@@ -1097,7 +1097,7 @@ Reconciler construct Fiber tree:
   - 此函数退出前, 会挂载 `FiberRoot.finishedWork = workInProgressHostRootFiber`.
     此时 `HostRootFiber` 上挂载了副作用队列, 层级越深子节点副作用越靠前.
 - workLoopSync / workLoopConcurrent.
-- **performUnitOfWork**: 多次调用此函数.
+- **performUnitOfWork**: 重复调用此函数.
 - **beginWork**:
   - 根据 `ReactElement` 对象创建所有的 Fiber 节点, 最终构造出 Fiber 树形结构
     (设置 `return` 和 `sibling` 指针).
@@ -1561,6 +1561,71 @@ function dispatchAction<S, A>(
   scheduleUpdateOnFiber(fiber, lane, eventTime);
 }
 ```
+
+- createUpdate.
+- enqueueUpdate.
+- scheduleUpdateOnFiber.
+- **markUpdateLaneFromFiberToRoot**:
+  找出 Fiber 树中受到本次 `Update` 影响的所有节点 (存在更新可能),
+  设置这些节点的 `fiber.lanes` 或 `fiber.childLanes`.
+- ensureRootIsScheduled.
+- flushSyncCallbacks.
+- performSyncWorkOnRoot / performConcurrentWorkOnRoot.
+- renderRootSync / renderRootConcurrent.
+- workLoopSync / workLoopConcurrent.
+- **performUnitOfWork**: 重复调用此函数.
+- **beginWork**.
+- **updateHostRoot/updateXXXComponent**.
+- ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent().
+- **reconcileChildren**.
+- reconcileChildFibers.
+- **completeUnitOfWork**.
+- **completeWork**.
+
+```ts
+// 标记所有可能存在更新的节点, 并设置 fiber.lanes 与 fiber.childLanes.
+function markUpdateLaneFromFiberToRoot(
+  sourceFiber: Fiber, // 被更新的节点.
+  lane: Lane
+): FiberRoot | null {
+  // 设置 sourceFiber.lanes.
+  sourceFiber.lanes = mergeLanes(sourceFiber.lanes, lane);
+  let alternate = sourceFiber.alternate;
+  if (alternate !== null) {
+    // 同时设置 sourceFiber.alternate.lanes.
+    alternate.lanes = mergeLanes(alternate.lanes, lane);
+  }
+
+  // 从 sourceFiber 开始, 向上遍历所有 Fiber, 直到 HostRootFiber.
+  // 设置沿途所有 fiber.childLanes 与 fiber.alternate.childLanes.
+  let node = sourceFiber;
+  let parent = sourceFiber.return;
+
+  while (parent !== null) {
+    parent.childLanes = mergeLanes(parent.childLanes, lane);
+    alternate = parent.alternate;
+    if (alternate !== null) {
+      alternate.childLanes = mergeLanes(alternate.childLanes, lane);
+    }
+    node = parent;
+    parent = parent.return;
+  }
+
+  if (node.tag === HostRoot) {
+    const root: FiberRoot = node.stateNode;
+    return root;
+  } else {
+    return null;
+  }
+}
+```
+
+### Reconciler Diff Workflow
+
+Reconciler:
+
+- O(n) incomplete tree comparison: only compare same level nodes.
+- `key` prop to hint for Fiber nodes reuse.
 
 #### Different Types Elements
 
