@@ -640,7 +640,8 @@ A [minimal React](https://github.com/sabertazimi/meact) with Fiber Reconciliatio
 
 - Component type.
 - Current props and state.
-- Pointers to parent, sibling, and child components.
+- Pointers to parent, sibling, and child components,
+- Pointer to DOM/class instance.
 - Other internal metadata to track rendering process.
 
 ```ts
@@ -649,7 +650,7 @@ export interface Fiber {
   key: string | null;
   elementType: any;
   type: any;
-  stateNode: any;
+  stateNode: any; // DOM/class instance.
   ref: (((handle: mixed) => void) & { _stringRef: ?string }) | RefObject | null;
 
   // Singly Linked List Tree Structure.
