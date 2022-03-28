@@ -1125,7 +1125,7 @@ Reconciler construct Fiber tree:
 - **reconcileChildren**.
 - reconcileChildFibers.
 - **completeUnitOfWork**:
-  - 当 `reconcilerChildren` 返回值为 `null` 时, 表示 DFS 进行到子叶节点, 调用 `completeUnitOfWork`.
+  - 当 `reconcileChildren` 返回值为 `null` 时, 表示 DFS 进行到子叶节点, 调用 `completeUnitOfWork`.
   - 调用 `completeWork` 进行 `render`.
   - 把当前 Fiber 对象的副作用队列 (`firstEffect` 与 `lastEffect`)
     加到父节点的副作用队列之后, 更新父节点的 `firstEffect` 和 `lastEffect` 指针.
@@ -1668,8 +1668,8 @@ function dispatchAction<S, A>(
   - 对于 `Deletion` Fiber, 在 `beginWork` 阶段提前将其添加到父节点的 Effects 队列中
     (该节点会脱离 Fiber 树, 不会再进入 `completeWork` 阶段, 无法在此阶段收集此节点副作用).
 - reconcileChildFibers.
-- **completeUnitOfWork**.
-- **completeWork**.
+- **completeUnitOfWork**: 收集副作用.
+- **completeWork**: 收集副作用.
 
 ```ts
 // 标记所有可能存在更新的节点, 并设置 fiber.lanes 与 fiber.childLanes.
