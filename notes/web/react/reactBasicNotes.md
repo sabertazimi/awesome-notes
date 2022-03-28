@@ -748,6 +748,10 @@ const ConcurrentUpdatesByDefaultMode = /* */ 0b100000;
 
 [更新与更新队列](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
 
+- 创建 `Update` 时机 (`createUpdate`/`enqueueUpdate`):
+  - `ReactFiberReconciler.updateContainer`.
+  - `ReactFiberClassComponent.setState`.
+
 ```ts
 interface Update<State> {
   lane: Lane;
@@ -1106,10 +1110,6 @@ function performConcurrentWorkOnRoot(root) {
 ```
 
 ## React Reconciler
-
-- 创建 `Update` 时机 (`createUpdate`/`enqueueUpdate`):
-  - `ReactFiberReconciler.updateContainer`.
-  - `ReactFiberClassComponent.setState`.
 
 ### Reconciler Render Phase
 
