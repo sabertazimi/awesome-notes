@@ -1115,12 +1115,12 @@ Reconciler construct Fiber tree:
 - performSyncWorkOnRoot / performConcurrentWorkOnRoot.
 - renderRootSync / renderRootConcurrent.
 - workLoopSync / workLoopConcurrent.
-- performUnitOfWork.
-- beginWork:
+- **performUnitOfWork**: 多次调用此函数.
+- **beginWork**:
   - 根据 `ReactElement` 对象创建所有的 Fiber 节点, 最终构造出 Fiber 树形结构
     (设置 `return` 和 `sibling` 指针).
   - 调用 `updateXXX`, 设置 `fiber.flags`/`fiber.stateNode` 等状态.
-- updateHostRoot/updateXXXComponent:
+- **updateHostRoot/updateXXXComponent**:
   - 根据 `fiber.pendingProps`/`fiber.updateQueue` 等输入数据状态,
     计算 `fiber.memoizedState` 作为输出状态.
   - ClassComponent:
@@ -1139,9 +1139,9 @@ Reconciler construct Fiber tree:
   - 根据实际情况, 设置 `fiber.flags`.
   - 根据 `ReactElement` 对象, 调用 `reconcileChildren` 生成 `Fiber` 子节点 (只生成次级子节点).
 - ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent().
-- reconcileChildren.
+- **reconcileChildren**.
 - reconcileChildFibers.
-- completeUnitOfWork.
+- **completeUnitOfWork**.
   - 当 `reconcilerChildren` 返回值为 `null` 时, 表示 DFS 进行到子叶节点, 调用 `completeUnitOfWork`.
   - 调用 `completeWork` 进行 `render`.
   - 把当前 Fiber 对象的副作用队列 (`firstEffect` 与 `lastEffect`)
@@ -1150,9 +1150,9 @@ Reconciler construct Fiber tree:
     若当前 Fiber 存在副作用 (Effects),
     则将当前 Fiber 加入到父节点的 Effects 队列,
     等待 Commit 阶段处理.
-  - 将 workInProgress 设置为 siblingFiber (DFS 遍历) 或 returnFiber (DFS回溯),
+  - 将 workInProgress 设置为 siblingFiber (DFS 遍历) 或 returnFiber (DFS 回溯),
     继续构建 Fiber 树.
-- completeWork.
+- **completeWork**.
   - 创建 DOM 实例, 绑定至 `HostComponent`/`HostText` `fiber.stateNode` (局部状态).
   - 设置 DOM 节点属性, 绑定事件.
   - 设置 `fiber.flags`.
