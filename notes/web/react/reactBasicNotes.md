@@ -1173,7 +1173,7 @@ function performSyncWorkOnRoot(root) {
   const finishedWork: Fiber = root.current.alternate;
   root.finishedWork = finishedWork;
   root.finishedLanes = lanes;
-  // 4. 进入 commit 阶段.
+  // 4. 进入 Commit 阶段.
   commitRoot(root);
 }
 
@@ -1421,6 +1421,7 @@ function completeWork(
   renderLanes: Lanes
 ): Fiber | null {
   const newProps = workInProgress.pendingProps;
+
   switch (workInProgress.tag) {
     case HostRoot: {
       const fiberRoot: FiberRoot = workInProgress.stateNode;
@@ -1769,12 +1770,101 @@ function bailoutOnAlreadyFinishedWork(
 ): Fiber | null {
   if (!includesSomeLane(renderLanes, workInProgress.childLanes)) {
     // 渲染优先级不包括 workInProgress.childLanes, 表明子节点也无需更新.
-    // 返回null, 直接进入回溯阶段.
+    // 返回 null, 直接进入回溯阶段.
     return null;
   } else {
     // Fiber 自身无需更新, 但子节点需要更新, clone 并返回子节点.
     cloneChildFibers(current, workInProgress);
     return workInProgress.child;
+  }
+}
+
+function completeWork(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  renderLanes: Lanes
+): Fiber | null {
+  const newProps = workInProgress.pendingProps;
+
+  switch (workInProgress.tag) {
+    case HostComponent: {
+      // 非文本节点.
+      popHostContext(workInProgress);
+      const rootContainerInstance = getRootHostContainer();
+      const type = workInProgress.type;
+
+      if (current !== null && workInProgress.stateNode !== null) {
+        // 处理改动.
+        updateHostComponent(
+          current,
+          workInProgress,
+          type,
+          newProps,
+          rootContainerInstance
+        );
+
+        if (current.ref !== workInProgress.ref) {
+          markRef(workInProgress);
+        }
+      }
+
+      return null;
+    }
+    case HostText: {
+      // 文本节点.
+      const newText = newProps;
+
+      if (current !== null && workInProgress.stateNode !== null) {
+        const oldText = current.memoizedProps;
+        // 处理改动.
+        updateHostText(current, workInProgress, oldText, newText);
+      }
+
+      return null;
+    }
+  }
+}
+
+function updateHostComponent(
+  current: Fiber,
+  workInProgress: Fiber,
+  type: Type,
+  newProps: Props,
+  rootContainerInstance: Container
+) {
+  const oldProps = current.memoizedProps;
+
+  if (oldProps === newProps) {
+    return;
+  }
+
+  const instance: Instance = workInProgress.stateNode;
+  const currentHostContext = getHostContext();
+  const updatePayload = prepareUpdate(
+    instance,
+    type,
+    oldProps,
+    newProps,
+    rootContainerInstance,
+    currentHostContext
+  );
+  workInProgress.updateQueue = updatePayload;
+
+  // 如果有属性变动, 设置 fiber.flags |= Update, 等待 Commit 阶段处理.
+  if (updatePayload) {
+    markUpdate(workInProgress);
+  }
+}
+
+function updateHostText(
+  current: Fiber,
+  workInProgress: Fiber,
+  oldText: string,
+  newText: string
+) {
+  // 如果有属性变动, 设置 fiber.flags |= Update, 等待 Commit 阶段处理.
+  if (oldText !== newText) {
+    markUpdate(workInProgress);
   }
 }
 ```
