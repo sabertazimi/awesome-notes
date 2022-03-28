@@ -14,6 +14,7 @@ tags: [Web, React]
 - `Reconciler` 协调器:
   - 装载 `Renderer`.
   - 接收 `ReactDOM` 和 `React` 模块 (用户代码) 发起的更新请求:
+    - `ReactFiberReconciler.updateContainer`.
     - `ReactFiberClassComponent.setState`.
     - `ReactFiberHooks.dispatchAction`.
   - 找出变化组件, 构建 Fiber Tree.
