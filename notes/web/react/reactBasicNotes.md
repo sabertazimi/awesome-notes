@@ -53,7 +53,7 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
 - [SnabbDOM](https://github.com/snabbdom/snabbdom):
   virtual DOM library focus on modularity and performance.
 
-## React Internal Logic
+## React Core Workflow
 
 ### Create RootContainer
 
@@ -341,7 +341,7 @@ export const IdleLane: Lanes = /*                       */ 0b0100000000000000000
 export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;
 ```
 
-### Scheduler Main Logic
+### Scheduler Workflow
 
 Scheduler main [API](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js):
 
@@ -1081,13 +1081,13 @@ function performConcurrentWorkOnRoot(root) {
 
 ## React Reconciler
 
-### Reconciler Render Phase
+### Reconciler Render Workflow
 
 Reconciler construct Fiber tree:
 
-- createUpdate.
-- enqueueUpdate.
-- scheduleUpdateOnFiber.
+- scheduleUpdateOnFiber:
+  - 首次 render 直接调用 `performWorkOnRoot`.
+  - 再次 render 需要调用 `ensureRootIsScheduled`.
 - ensureRootIsScheduled.
 - flushSyncCallbacks.
 - performSyncWorkOnRoot / performConcurrentWorkOnRoot.
@@ -1446,14 +1446,7 @@ function updateHostComponent(
 
 #### Function Component Fiber Rendering
 
-### Reconciler Diff Phase
-
-Reconciler:
-
-- O(n) incomplete tree comparison: only compare same level nodes.
-- `key` prop to hint for nodes reuse.
-
-#### React Fiber Update Queue
+### Reconciler Update Workflow
 
 [更新与更新队列](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
 
@@ -1568,7 +1561,7 @@ function dispatchAction<S, A>(
 - Then `render` called,
   diff algorithm recursively on the old result and the new result.
 
-### Reconciler Commit Phase
+### Reconciler Commit Workflow
 
 Renderer:
 
@@ -1615,6 +1608,10 @@ Renderer:
   - preparePortalMount.
 
 #### Commit Root
+
+- `BeforeMutation` phase.
+- `Mutation` phase.
+- `Layout` phase.
 
 ```js
 function commitRootImpl(root, renderPriorityLevel) {
