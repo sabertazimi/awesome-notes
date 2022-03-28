@@ -14,8 +14,8 @@ tags: [Web, React]
 - `Reconciler` 协调器:
   - 装载 `Renderer`.
   - 接收 `ReactDOM` 和 `React` 模块 (用户代码) 发起的更新请求:
-    - `setState`.
-    - `dispatchAction`.
+    - `ReactFiberClassComponent.setState`.
+    - `ReactFiberHooks.dispatchAction`.
   - 找出变化组件, 构建 Fiber Tree.
 - `Renderer` 渲染器:
   - 引导 `React` 应用启动 (e.g `ReactDOM.createRoot(rootNode).render(<App />)`).
@@ -751,6 +751,7 @@ const ConcurrentUpdatesByDefaultMode = /* */ 0b100000;
 - 创建 `Update` 时机 (`createUpdate`/`enqueueUpdate`):
   - `ReactFiberReconciler.updateContainer`.
   - `ReactFiberClassComponent.setState`.
+  - `ReactFiberHooks.dispatchAction`.
 
 ```ts
 interface Update<State> {
