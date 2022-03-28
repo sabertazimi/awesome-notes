@@ -904,11 +904,11 @@ Multiple-column layout:
 ## Box Model
 
 - block-level box: display 属性为 block, list-item, table 的元素,
-  会生成 block-level box，并且参与 block formatting context
+  会生成 block-level box，并且参与 block formatting context.
 - inline-level box: display 属性为 inline, inline-block, inline-table 的元素，
-  会生成 inline-level box，并且参与 inline formatting context
-- Flex Formatting Context(FFC)
-- Grid Formatting Context(GFC)
+  会生成 inline-level box，并且参与 inline formatting context.
+- Flex Formatting Context(FFC).
+- Grid Formatting Context(GFC).
 
 ### Box Margin
 
@@ -947,21 +947,21 @@ can use the `z-index` property to adjust its stack level.
 
 ### Create BFC
 
-- 根元素或其它包含它的元素
-- overflow: not visible (i.e hidden)
-- float: left/right
-- position: absolute/fixed
-- display: inline-block
-- display: table-cell/table-caption/table-\*h
-- display: flow-root
-- direct children of `display: flex/inline-flex`
-- direct children of `display: grid/inline-grid`
+- 根元素或其它包含它的元素.
+- overflow: not visible (i.e hidden).
+- float: left/right.
+- position: absolute/fixed.
+- display: inline-block.
+- display: table-cell/table-caption/table-\*h.
+- display: flow-root.
+- direct children of `display: flex/inline-flex`.
+- direct children of `display: grid/inline-grid`.
 
 ### Margin Collapsing
 
-- closet sibling: 1's margin-bottom with 2's margin-top
-- parent and it's first/last child: up with up (bottom with bottom)
-- empty block: margin-top with margin-bottom
+- closet sibling: 1's margin-bottom with 2's margin-top.
+- parent and it's first/last child: up with up (bottom with bottom).
+- empty block: margin-top with margin-bottom.
 
 Best Practice: only use `margin-bottom: 1em/1rem` for spacing.
 
@@ -969,8 +969,8 @@ Best Practice: only use `margin-bottom: 1em/1rem` for spacing.
 
 float make element specified value of `display`:
 
-- `inline-table` computed to `table`
-- `inline`/`inline-block`/`table-*` computed to `block`
+- `inline-table` computed to `table`.
+- `inline`/`inline-block`/`table-*` computed to `block`.
 
 ### Fixed Parent
 
@@ -2629,14 +2629,14 @@ const svgRectElement = document.createElementNS(
 
 ## Object Position and Fit
 
-object-position/object-fit 只针对替换元素有作用:
+`object-position`/`object-fit` 只针对替换元素有作用:
 
-- form component
-- img
-- video
+- `form` component.
+- `img`.
+- `video`.
 
-object-position/object-fit 之间的关系有点类似于
-background-position/background-size,
+`object-position`/`object-fit` 之间的关系有点类似于
+`background-position`/`background-size`,
 可以处理图片拉伸变形问题.
 
 ```css
@@ -3213,17 +3213,22 @@ tl.staggerFrom(
 
 #### Responsive Width and Height
 
-- `min-height`
-- `max-height`
-- `min-width`
-- `max-width`
+- `min-height`.
+- `max-height`.
+- `min-width`.
+- `max-width`.
 
 ```css
 /* responsive images */
 img {
+  display: block;
   max-width: 100%;
 }
 ```
+
+:::caution Image Display
+Image `display` set to `inline` default.
+:::
 
 #### Responsive Inline Box
 
