@@ -1103,14 +1103,7 @@ function performConcurrentWorkOnRoot(root) {
   - `ReactFiberReconciler.updateContainer`.
   - `ReactFiberClassComponent.setState`.
 
-### React Fiber Diff Phase
-
-Reconciler:
-
-- O(n) incomplete tree comparison: only compare same level nodes.
-- `key` prop to hint for nodes reuse.
-
-### React Fiber Render Phase
+### Reconciler Render Phase
 
 Reconciler construct Fiber tree:
 
@@ -1123,20 +1116,367 @@ Reconciler construct Fiber tree:
 - renderRootSync / renderRootConcurrent.
 - workLoopSync / workLoopConcurrent.
 - performUnitOfWork.
-- beginWork.
-- updateHostRoot/updateXXXComponent.
+- beginWork:
+  - 根据 `ReactElement` 对象创建所有的 Fiber 节点, 最终构造出 Fiber 树形结构
+    (设置 `return` 和 `sibling` 指针).
+  - 调用 `updateXXX`, 设置 `fiber.flags`/`fiber.stateNode` 等状态.
+- updateHostRoot/updateXXXComponent:
+  - 根据 `fiber.pendingProps`/`fiber.updateQueue` 等输入数据状态,
+    计算 `fiber.memoizedState` 作为输出状态.
+  - ClassComponent:
+    - 构建 `React.Component` 实例.
+    - 把新实例挂载到 `fiber.stateNode` 上.
+    - 执行 `render` 之前的生命周期函数.
+    - 执行 `render` 方法, 获取下级 `ReactElement`.
+    - 设置 `fiber.flags`.
+  - FunctionComponent:
+    - 执行 `FunctionComponent()`, 获取下级 `ReactElement`.
+    - 设置 `fiber.flags`.
+  - HostComponent.
+    - `pendingProps.children` 作为下级 `ReactElement`.
+    - 如果下级节点是文本节点, 则设置下级节点为 `null` (进入 `completeUnitOfWork` 阶段).
+    - 设置 `fiber.flags`.
+  - 根据实际情况, 设置 `fiber.flags`.
+  - 根据 `ReactElement` 对象, 调用 `reconcileChildren` 生成 `Fiber` 子节点 (只生成次级子节点).
 - ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent().
 - reconcileChildren.
 - reconcileChildFibers.
 - completeUnitOfWork.
+  - 当 `reconcilerChildren` 返回值为 `null` 时, 表示 DFS 进行到子叶节点, 调用 `completeUnitOfWork`.
+  - 调用 `completeWork` 进行 `render`.
+  - 把当前 Fiber 对象的副作用队列 (`firstEffect` 与 `lastEffect`)
+    加到父节点的副作用队列之后, 更新父节点的 `firstEffect` 和 `lastEffect` 指针.
+  - 识别 `beginWork` 阶段设置的 `fiber.flags`,
+    若当前 Fiber 存在副作用 (Effects),
+    则将当前 Fiber 加入到父节点的 Effects 队列,
+    等待 Commit 阶段处理.
+  - 将 workInProgress 设置为 siblingFiber (DFS 遍历) 或 returnFiber (DFS回溯),
+    继续构建 Fiber 树.
 - completeWork.
+  - 创建 DOM 实例, 绑定至 `HostComponent`/`HostText` `fiber.stateNode` (局部状态).
+  - 设置 DOM 节点属性, 绑定事件.
+  - 设置 `fiber.flags`.
 
-#### Elements of Different Types
+#### Reconciler Render Main Logic
+
+```ts
+function performSyncWorkOnRoot(root) {
+  // 1. 获取本次render的优先级, 初次构造返回 NoLanes.
+  const lanes = getNextLanes(root, NoLanes);
+  // 2. 从root节点开始, 至上而下更新.
+  const exitStatus = renderRootSync(root, lanes);
+  // 3. 将最新的 Fiber 树挂载到 root.finishedWork 节点上.
+  const finishedWork: Fiber = root.current.alternate;
+  root.finishedWork = finishedWork;
+  root.finishedLanes = lanes;
+  // 4. 进入 commit 阶段.
+  commitRoot(root);
+}
+
+function renderRootSync(root: FiberRoot, lanes: Lanes) {
+  const prevExecutionContext = executionContext;
+  executionContext |= RenderContext;
+
+  // 如果 FiberRoot 变动, 或者 update.lane 变动, 都会刷新栈帧, 丢弃上一次渲染进度.
+  if (workInProgressRoot !== root || workInProgressRootRenderLanes !== lanes) {
+    // 刷新栈帧, Legacy 模式下都会进入.
+    prepareFreshStack(root, lanes);
+  }
+  do {
+    try {
+      workLoopSync();
+      break;
+    } catch (thrownValue) {
+      handleError(root, thrownValue);
+    }
+  } while (true);
+
+  // 重置全局变量, 表明 render 结束.
+  executionContext = prevExecutionContext;
+  workInProgressRoot = null;
+  workInProgressRootRenderLanes = NoLanes;
+  return workInProgressRootExitStatus;
+}
+
+function workLoopSync() {
+  while (workInProgress !== null) {
+    performUnitOfWork(workInProgress);
+  }
+}
+
+function workLoopConcurrent() {
+  // Perform work until Scheduler asks us to yield.
+  while (workInProgress !== null && !shouldYield()) {
+    performUnitOfWork(workInProgress);
+  }
+}
+
+function performUnitOfWork(unitOfWork: Fiber): void {
+  // unitOfWork 就是被传入的 workInProgress.
+  const current = unitOfWork.alternate;
+  const next = beginWork(current, unitOfWork, subtreeRenderLanes);
+  unitOfWork.memoizedProps = unitOfWork.pendingProps;
+
+  if (next === null) {
+    // 如果没有派生出新的节点, 则进入 completeWork 阶段, 传入的是当前 unitOfWork.
+    completeUnitOfWork(unitOfWork);
+  } else {
+    workInProgress = next;
+  }
+}
+
+function beginWork(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  renderLanes: Lanes
+): Fiber | null {
+  // 1. 设置 workInProgress 优先级为 NoLanes (最高优先级).
+  const updateLanes = workInProgress.lanes;
+  didReceiveUpdate = false;
+  workInProgress.lanes = NoLanes;
+
+  // 2. 根据 workInProgress 节点的类型, 用不同的方法派生出子节点.
+  switch (workInProgress.tag) {
+    case ClassComponent: {
+      const Component = workInProgress.type;
+      const unresolvedProps = workInProgress.pendingProps;
+      const resolvedProps =
+        workInProgress.elementType === Component
+          ? unresolvedProps
+          : resolveDefaultProps(Component, unresolvedProps);
+      return updateClassComponent(
+        current,
+        workInProgress,
+        Component,
+        resolvedProps,
+        renderLanes
+      );
+    }
+    case HostRoot:
+      return updateHostRoot(current, workInProgress, renderLanes);
+    case HostComponent:
+      return updateHostComponent(current, workInProgress, renderLanes);
+    case HostText:
+      return updateHostText(current, workInProgress);
+    case Fragment:
+      return updateFragment(current, workInProgress, renderLanes);
+  }
+}
+
+function completeUnitOfWork(unitOfWork: Fiber): void {
+  let completedWork = unitOfWork;
+
+  // 外层循环控制并移动指针 (workInProgress/completedWork).
+  do {
+    const current = completedWork.alternate;
+    const returnFiber = completedWork.return;
+
+    if ((completedWork.flags & Incomplete) === NoFlags) {
+      // 1. 处理 Fiber 节点, 会调用渲染器 (关联 Fiber 节点和 DOM 对象, 绑定事件等).
+      const next = completeWork(current, completedWork, subtreeRenderLanes);
+
+      if (next !== null) {
+        // 如果派生出其他的子节点, 则回到 beginWork 阶段进行处理.
+        workInProgress = next;
+        return;
+      }
+
+      // 重置子节点的优先级.
+      resetChildLanes(completedWork);
+
+      if (
+        returnFiber !== null &&
+        (returnFiber.flags & Incomplete) === NoFlags
+      ) {
+        // 2. 收集当前 Fiber 节点以及其子树的副作用 Effects.
+        // 2.1 把子节点的副作用队列添加到父节点上.
+        if (returnFiber.firstEffect === null) {
+          returnFiber.firstEffect = completedWork.firstEffect;
+        }
+
+        if (completedWork.lastEffect !== null) {
+          if (returnFiber.lastEffect !== null) {
+            returnFiber.lastEffect.nextEffect = completedWork.firstEffect;
+          }
+
+          returnFiber.lastEffect = completedWork.lastEffect;
+        }
+
+        // 2.2 如果当前 Fiber 节点有副作用, 将其添加到子节点的副作用队列之后.
+        const flags = completedWork.flags;
+
+        if (returnFiber.lastEffect !== null) {
+          returnFiber.lastEffect.nextEffect = completedWork;
+        } else {
+          returnFiber.firstEffect = completedWork;
+        }
+
+        returnFiber.lastEffect = completedWork;
+      }
+    }
+
+    const siblingFiber = completedWork.sibling;
+
+    if (siblingFiber !== null) {
+      // 如果有兄弟节点, 返回之后再次进入 beginWork 阶段.
+      workInProgress = siblingFiber;
+      return;
+    }
+
+    // 移动指针, 指向下一个节点.
+    completedWork = returnFiber;
+    workInProgress = completedWork;
+  } while (completedWork !== null);
+
+  // 已回溯到根节点, 设置 workInProgressRootExitStatus = RootCompleted.
+  if (workInProgressRootExitStatus === RootIncomplete) {
+    workInProgressRootExitStatus = RootCompleted;
+  }
+}
+
+function completeWork(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  renderLanes: Lanes
+): Fiber | null {
+  const newProps = workInProgress.pendingProps;
+  switch (workInProgress.tag) {
+    case HostRoot: {
+      const fiberRoot: FiberRoot = workInProgress.stateNode;
+
+      if (fiberRoot.pendingContext) {
+        fiberRoot.context = fiberRoot.pendingContext;
+        fiberRoot.pendingContext = null;
+      }
+
+      if (current === null || current.child === null) {
+        // 设置 fiber.flags.
+        workInProgress.flags |= Snapshot;
+      }
+
+      return null;
+    }
+    case HostComponent: {
+      popHostContext(workInProgress);
+      const rootContainerInstance = getRootHostContainer();
+      const type = workInProgress.type;
+      const currentHostContext = getHostContext();
+
+      // 1. 创建 DOM 对象.
+      const instance = createInstance(
+        type,
+        newProps,
+        rootContainerInstance,
+        currentHostContext,
+        workInProgress
+      );
+
+      // 2. 把子树中的 DOM 对象 append 到本节点的 DOM 对象之后.
+      appendAllChildren(instance, workInProgress, false, false);
+
+      // 3. 设置 stateNode 属性, 指向 DOM 对象.
+      workInProgress.stateNode = instance;
+
+      if (
+        // 4. 设置DOM对象的属性, 绑定事件等.
+        finalizeInitialChildren(
+          instance,
+          type,
+          newProps,
+          rootContainerInstance,
+          currentHostContext
+        )
+      ) {
+        // 设置 fiber.flags (Update).
+        markUpdate(workInProgress);
+      }
+
+      if (workInProgress.ref !== null) {
+        // 设置 fiber.flags (Ref).
+        markRef(workInProgress);
+      }
+
+      return null;
+    }
+  }
+}
+```
+
+#### Host Root Fiber Rendering
+
+```ts
+function updateHostRoot(current, workInProgress, renderLanes) {
+  // 1. 状态计算, 更新整合到 workInProgress.memoizedState.
+  const updateQueue = workInProgress.updateQueue;
+  const nextProps = workInProgress.pendingProps;
+  const prevState = workInProgress.memoizedState;
+  const prevChildren = prevState !== null ? prevState.element : null;
+  cloneUpdateQueue(current, workInProgress);
+  // 遍历 updateQueue.shared.pending, 提取有足够优先级的 update对象, 计算出最终的状态 workInProgress.memoizedState.
+  processUpdateQueue(workInProgress, nextProps, null, renderLanes);
+  const nextState = workInProgress.memoizedState;
+
+  // 2. 获取下级 ReactElement 对象.
+  const nextChildren = nextState.element;
+  const root: FiberRoot = workInProgress.stateNode;
+
+  // 3. 根据 ReactElement 对象, 调用 reconcileChildren 生成 Fiber 子节点 (只生成次级子节点).
+  reconcileChildren(current, workInProgress, nextChildren, renderLanes);
+  return workInProgress.child;
+}
+```
+
+#### Host Component Fiber Rendering
+
+```ts
+function updateHostComponent(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  renderLanes: Lanes
+) {
+  // 1. 状态计算, 由于 HostComponent 是无状态组件, 只需要收集 nextProps.
+  const type = workInProgress.type;
+  const nextProps = workInProgress.pendingProps;
+  const prevProps = current !== null ? current.memoizedProps : null;
+
+  // 2. 获取下级 ReactElement 对象.
+  let nextChildren = nextProps.children;
+  const isDirectTextChild = shouldSetTextContent(type, nextProps);
+
+  if (isDirectTextChild) {
+    // 如果子节点只有一个文本节点, 不用再创建一个 HostText 类型的 Fiber.
+    nextChildren = null;
+  } else if (prevProps !== null && shouldSetTextContent(type, prevProps)) {
+    // 设置 fiber.flags.
+    workInProgress.flags |= ContentReset;
+  }
+
+  // 设置 fiber.flags.
+  markRef(current, workInProgress);
+
+  // 3. 根据 ReactElement 对象, 调用 reconcileChildren 生成 Fiber 子节点(只生成次级子节点)
+  reconcileChildren(current, workInProgress, nextChildren, renderLanes);
+  return workInProgress.child;
+}
+```
+
+#### Class Component Fiber Rendering
+
+#### Function Component Fiber Rendering
+
+### Reconciler Diff Phase
+
+Reconciler:
+
+- O(n) incomplete tree comparison: only compare same level nodes.
+- `key` prop to hint for nodes reuse.
+
+#### Different Types Elements
 
 - rebuild element and children
 - methods: `componentDidMount`/`componentWillUnmount`
 
-#### DOM Elements of Same Type
+#### Same Type DOM Elements
 
 - only update the changed attributes
 - use `key` attribute to match children
@@ -1144,14 +1484,14 @@ Reconciler construct Fiber tree:
 `Best Practice`: give `key` to `<li>/<tr>/<tc>` elements
 (stable, predictable, unique and not array indexed)
 
-#### Component Elements of Same Type
+#### Same Type Component Elements
 
 - Update the props to match the new element
 - Methods: `getDerivedStateFromProps`
 - Then `render` called,
   diff algorithm recursively on the old result and the new result.
 
-### React Fiber Commit Phase
+### Reconciler Commit Phase
 
 Renderer:
 
