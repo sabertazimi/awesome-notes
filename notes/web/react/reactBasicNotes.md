@@ -1111,15 +1111,15 @@ Reconciler construct Fiber tree:
     - 把新实例挂载到 `fiber.stateNode` 上.
     - 执行 `render` 之前的生命周期函数.
     - 执行 `render` 方法, 获取下级 `ReactElement`.
-    - 设置 `fiber.flags`.
+    - 设置 `fiber.flags`, 标记副作用.
   - FunctionComponent:
     - 执行 `FunctionComponent()`, 获取下级 `ReactElement`.
-    - 设置 `fiber.flags`.
+    - 设置 `fiber.flags`, 标记副作用.
   - HostComponent.
     - `pendingProps.children` 作为下级 `ReactElement`.
     - 如果下级节点是文本节点, 则设置下级节点为 `null` (进入 `completeUnitOfWork` 阶段).
-    - 设置 `fiber.flags`.
-  - 根据实际情况, 设置 `fiber.flags`.
+    - 设置 `fiber.flags`, 标记副作用.
+  - 根据实际情况, 设置 `fiber.flags`, 标记副作用.
   - 根据 `ReactElement` 对象, 调用 `reconcileChildren` 生成 `Fiber` 子节点 (只生成次级子节点).
 - ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent().
 - **reconcileChildren**.
@@ -1138,7 +1138,7 @@ Reconciler construct Fiber tree:
 - **completeWork**:
   - 创建 DOM 实例, 绑定至 `HostComponent`/`HostText` `fiber.stateNode` (局部状态).
   - 设置 DOM 节点属性, 绑定事件.
-  - 设置 `fiber.flags`.
+  - 设置 `fiber.flags`, 收集副作用.
 
 ```ts
 export function scheduleUpdateOnFiber(
