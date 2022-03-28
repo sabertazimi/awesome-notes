@@ -1652,7 +1652,14 @@ function dispatchAction<S, A>(
 - renderRootSync / renderRootConcurrent.
 - workLoopSync / workLoopConcurrent.
 - **performUnitOfWork**: 重复调用此函数.
-- **beginWork**.
+- **beginWork**:
+  - 若判断当前 Fiber 节点无需更新, 调用 `bailoutOnAlreadyFinishedWork` 循环检测子节点是否需要更新.
+  - 若判断当前 Fiber 节点需要更新, 调用 `UpdateXXXComponent` 进行更新.
+- **bailoutOnAlreadyFinishedWork**:
+  - 若 `includesSomeLane(renderLanes, workInProgress.childLanes) === false`
+    表明子节点无需更新, 可直接进入回溯阶段 (`completeUnitOfWork`).
+  - 若 `includesSomeLane(renderLanes, workInProgress.childLanes) === true`,
+    表明子节点需要更新, clone 并返回子节点.
 - **updateHostRoot/updateXXXComponent**.
 - ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent().
 - **reconcileChildren**.
@@ -1694,6 +1701,77 @@ function markUpdateLaneFromFiberToRoot(
     return root;
   } else {
     return null;
+  }
+}
+
+function beginWork(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  renderLanes: Lanes
+): Fiber | null {
+  const updateLanes = workInProgress.lanes;
+
+  if (current !== null) {
+    // 进入对比.
+    const oldProps = current.memoizedProps;
+    const newProps = workInProgress.pendingProps;
+    if (
+      oldProps !== newProps ||
+      hasLegacyContextChanged() ||
+      (__DEV__ ? workInProgress.type !== current.type : false)
+    ) {
+      didReceiveUpdate = true;
+    } else if (!includesSomeLane(renderLanes, updateLanes)) {
+      // 当前渲染优先级 renderLanes 不包括 fiber.lanes, 表明当前 Fiber 节点无需更新.
+      didReceiveUpdate = false;
+      // 调用 bailoutOnAlreadyFinishedWork 循环检测子节点是否需要更新.
+      return bailoutOnAlreadyFinishedWork(current, workInProgress, renderLanes);
+    }
+  }
+
+  // 当前节点需要更新.
+  workInProgress.lanes = NoLanes; // 最高优先级
+
+  switch (workInProgress.tag) {
+    case ClassComponent: {
+      const Component = workInProgress.type;
+      const unresolvedProps = workInProgress.pendingProps;
+      const resolvedProps =
+        workInProgress.elementType === Component
+          ? unresolvedProps
+          : resolveDefaultProps(Component, unresolvedProps);
+      return updateClassComponent(
+        current,
+        workInProgress,
+        Component,
+        resolvedProps,
+        renderLanes
+      );
+    }
+    case HostRoot:
+      return updateHostRoot(current, workInProgress, renderLanes);
+    case HostComponent:
+      return updateHostComponent(current, workInProgress, renderLanes);
+    case HostText:
+      return updateHostText(current, workInProgress);
+    case Fragment:
+      return updateFragment(current, workInProgress, renderLanes);
+  }
+}
+
+function bailoutOnAlreadyFinishedWork(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  renderLanes: Lanes
+): Fiber | null {
+  if (!includesSomeLane(renderLanes, workInProgress.childLanes)) {
+    // 渲染优先级不包括 workInProgress.childLanes, 表明子节点也无需更新.
+    // 返回null, 直接进入回溯阶段.
+    return null;
+  } else {
+    // Fiber 自身无需更新, 但子节点需要更新, clone 并返回子节点.
+    cloneChildFibers(current, workInProgress);
+    return workInProgress.child;
   }
 }
 ```
