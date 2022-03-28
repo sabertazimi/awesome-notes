@@ -1139,9 +1139,30 @@ Reconciler construct Fiber tree:
   - 设置 DOM 节点属性, 绑定事件.
   - 设置 `fiber.flags`.
 
-#### Reconciler Render Main Logic
-
 ```ts
+export function scheduleUpdateOnFiber(
+  fiber: Fiber,
+  lane: Lane,
+  eventTime: number
+) {
+  const root = markUpdateLaneFromFiberToRoot(fiber, lane);
+
+  if (lane === SyncLane) {
+    if (
+      (executionContext & LegacyUnbatchedContext) !== NoContext &&
+      (executionContext & (RenderContext | CommitContext)) === NoContext
+    ) {
+      // 初次渲染.
+      performSyncWorkOnRoot(root);
+    } else {
+      // 对比更新.
+      ensureRootIsScheduled(root, eventTime);
+    }
+  }
+
+  mostRecentlyUpdatedRoot = root;
+}
+
 function performSyncWorkOnRoot(root) {
   // 1. 获取本次render的优先级, 初次构造返回 NoLanes.
   const lanes = getNextLanes(root, NoLanes);
