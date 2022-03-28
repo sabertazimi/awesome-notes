@@ -117,8 +117,17 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
   - renderRootSync.
   - workLoopSync.
   - **performUnitOfWork**.
-- [react-dom/src/client/ReactDOMComponent](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMComponent.js):
-  - createElement.
+- [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+  - **beginWork**.
+  - **updateHostRoot**/**updateXXXComponent**.
+  - ReactDOMComponent.createElement.
+  - reconcileChildren.
+- [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
+  - reconcileChildFibers.
+- [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
+  - **completeUnitOfWork**.
+- [react-reconciler/src/ReactFiberCompleteWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCompleteWork.new.js)
+  - **completeWork**.
 - [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
   - **commitRoot**.
 - [react-dom/src/client/ReactDOMHostConfig](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js):
@@ -203,7 +212,7 @@ export default Renderer;
 - [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
   - reconcileChildFibers.
 - [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
-  - completeUnitOfWork.
+  - **completeUnitOfWork**.
 - [react-reconciler/src/ReactFiberCompleteWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCompleteWork.new.js)
   - **completeWork**.
 - [react-reconciler/src/ReactFiberWorkLoop](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js):
@@ -1103,9 +1112,24 @@ Reconciler:
 
 ### React Fiber Render Phase
 
-Reconciler:
+Reconciler construct Fiber tree:
 
-- Construct Fiber tree.
+- createUpdate.
+- enqueueUpdate.
+- scheduleUpdateOnFiber.
+- ensureRootIsScheduled.
+- flushSyncCallbacks.
+- performSyncWorkOnRoot / performConcurrentWorkOnRoot.
+- renderRootSync / renderRootConcurrent.
+- workLoopSync / workLoopConcurrent.
+- performUnitOfWork.
+- beginWork.
+- updateHostRoot/updateXXXComponent.
+- ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent().
+- reconcileChildren.
+- reconcileChildFibers.
+- completeUnitOfWork.
+- completeWork.
 
 #### Elements of Different Types
 
