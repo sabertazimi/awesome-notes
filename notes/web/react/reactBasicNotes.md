@@ -1021,6 +1021,13 @@ const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
   swap 2 Fiber tree:
   - Reuse Fiber objects.
   - Reduce memory usage and GC time.
+- `FiberRoot`:
+  - `FiberRoot.current = currentHostRootFiber`.
+  - `FiberRoot.finishedWork = workInProgressHostRootFiber`.
+  - `currentHostRootFiber.stateNode = FiberRoot`.
+  - `workInProgressHostRootFiber.stateNode = FiberRoot`.
+  - `currentHostRootFiber.alternate = workInProgressHostRootFiber`
+  - `workInProgressHostRootFiber.alternate = currentHostRootFiber`
 - `ReactElement` tree -> `Fiber` tree -> `DOM` tree.
 
 [![React Fiber Trees](./figures/ReactFiberTrees.png)](https://7kms.github.io/react-illustration-series/main/fibertree-prepare)
@@ -1113,7 +1120,11 @@ Reconciler construct Fiber tree:
 - ensureRootIsScheduled.
 - flushSyncCallbacks.
 - performSyncWorkOnRoot / performConcurrentWorkOnRoot.
-- renderRootSync / renderRootConcurrent.
+- renderRootSync / renderRootConcurrent:
+  - 此函数会设置 `workInProgressRoot = FiberRoot`, 表示正在进行 render.
+  - 此函数退出前, 会重置 `workInProgressRoot = null`, 表示没有正在进行中的 render.
+  - 此函数退出前, 会挂载 `FiberRoot.finishedWork = workInProgressHostRootFiber`.
+    此时 `HostRootFiber` 上挂载了副作用队列, 层级越深子节点副作用越靠前.
 - workLoopSync / workLoopConcurrent.
 - **performUnitOfWork**: 多次调用此函数.
 - **beginWork**:
