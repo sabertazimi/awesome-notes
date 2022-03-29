@@ -4399,6 +4399,7 @@ Largest Contentful Paint:
   - Convert images from JPEG/PNG to WebP.
 - Responsive images:
   size image based on device size with `srcset` on `<img>` or `<picture>`.
+- LCP optimization [guide](https://csswizardry.com/2022/03/optimising-largest-contentful-paint).
 
 ```js
 const entryHandler = list => {
