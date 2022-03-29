@@ -1970,7 +1970,7 @@ Reconciler:
   - Process
     `Passive`/`Snapshot`/`Deletion`
     effects fiber.
-  - `getSnapshotBeforeUpdate` called.
+  - `instance.getSnapshotBeforeUpdate`.
 - `Mutation` phase.
   - Mutate the host tree, render UI.
   - Process
@@ -1979,8 +1979,9 @@ Reconciler:
 - `Layout` phase.
   - After DOM mutation.
   - Process `Update | Callback` effects fiber.
-  - `componentDidMount` lifecycle called **synchronously**.
-  - `useLayoutEffect` callback called **synchronously**.
+  - `instance.componentDidMount/componentDidUpdate` (**synchronous**).
+  - `instance` callback for `setState`.
+  - `useLayoutEffect` (**synchronous**).
 - `CommitEffects` functions located in
   [ReactFiberCommitWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.new.js).
 
@@ -2147,6 +2148,21 @@ function commitRootImpl(
 }
 ```
 
+```ts
+const BeforeMutationMask = Update | Snapshot | ChildDeletion | Visibility;
+
+const MutationMask =
+  Placement |
+  Update |
+  ChildDeletion |
+  ContentReset |
+  Ref |
+  Hydrating |
+  Visibility;
+
+const LayoutMask = Update | Callback | Ref | Visibility;
+```
+
 #### Before Mutation Phase
 
 - `Passive` effects:
@@ -2177,7 +2193,6 @@ function commitBeforeMutationEffects(root: FiberRoot, firstChild: Fiber) {
   // DFS traverse.
   while (nextEffect !== null) {
     const fiber = nextEffect;
-    const child = fiber.child;
     const deletions = fiber.deletions;
 
     if (deletions !== null) {
@@ -2186,6 +2201,8 @@ function commitBeforeMutationEffects(root: FiberRoot, firstChild: Fiber) {
         commitBeforeMutationEffectsDeletion(deletion);
       }
     }
+
+    const child = fiber.child;
 
     if (
       (fiber.subtreeFlags & BeforeMutationMask) !== NoFlags &&
@@ -2300,7 +2317,6 @@ export function commitMutationEffects(
 
   while (nextEffect !== null) {
     const fiber = nextEffect;
-    const child = fiber.child;
     const deletions = fiber.deletions;
 
     if (deletions !== null) {
@@ -2309,6 +2325,8 @@ export function commitMutationEffects(
         commitDeletion(root, childToDelete, fiber);
       }
     }
+
+    const child = fiber.child;
 
     if ((fiber.subtreeFlags & MutationMask) !== NoFlags && child !== null) {
       // 1. Visit children.
@@ -2433,16 +2451,179 @@ function commitMutationEffectsOnFiber(
 
 #### Layout Phase
 
-Process Fiber nodes:
-
 - `Update | Callback` effects:
-  - `componentDidMount` lifecycle function called **synchronously**.
-  - `useLayoutEffect` callback called **synchronously**.
+  - `instance.componentDidMount/componentDidUpdate` (**synchronous**).
+  - `instance` callback for `setState`.
+  - `useLayoutEffect` (**synchronous**).
+  - `HostConfig.getPublicInstance/commitMount`.
 
-#### UseEffect Execution Timing
+```ts
+function commitLayoutEffects(
+  finishedWork: Fiber,
+  root: FiberRoot,
+  committedLanes: Lanes
+): void {
+  inProgressLanes = committedLanes;
+  inProgressRoot = root;
+  nextEffect = finishedWork;
 
-`useEffect` callback called **asynchronously**
-after above three `Commit` phases.
+  while (nextEffect !== null) {
+    const fiber = nextEffect;
+    const firstChild = fiber.child;
+
+    if ((fiber.subtreeFlags & LayoutMask) !== NoFlags && firstChild !== null) {
+      // 1. Visit children.
+      nextEffect = firstChild;
+    } else {
+      while (nextEffect !== null) {
+        const fiber = nextEffect;
+
+        if ((fiber.flags & LayoutMask) !== NoFlags) {
+          const current = fiber.alternate;
+          commitLayoutEffectOnFiber(root, current, fiber, committedLanes);
+        }
+
+        // Complete `commitLayoutEffects`.
+        if (fiber === subtreeRoot) {
+          nextEffect = null;
+          break;
+        }
+
+        const sibling = fiber.sibling;
+
+        // 2. Visit sibling.
+        if (sibling !== null) {
+          nextEffect = sibling;
+          break;
+        }
+
+        nextEffect = fiber.return;
+      }
+    }
+  }
+
+  inProgressLanes = null;
+  inProgressRoot = null;
+}
+
+function commitLayoutEffectOnFiber(
+  finishedRoot: FiberRoot,
+  current: Fiber | null,
+  finishedWork: Fiber,
+  committedLanes: Lanes
+): void {
+  if ((finishedWork.flags & LayoutMask) !== NoFlags) {
+    switch (finishedWork.tag) {
+      case FunctionComponent:
+      case ForwardRef:
+      case SimpleMemoComponent: {
+        if (
+          !enableSuspenseLayoutEffectSemantics ||
+          !offscreenSubtreeWasHidden
+        ) {
+          commitHookEffectListMount(HookLayout | HookHasEffect, finishedWork);
+        }
+
+        break;
+      }
+      case ClassComponent: {
+        const instance = finishedWork.stateNode;
+
+        if (finishedWork.flags & Update) {
+          if (!offscreenSubtreeWasHidden) {
+            if (current === null) {
+              instance.componentDidMount();
+            } else {
+              const prevProps =
+                finishedWork.elementType === finishedWork.type
+                  ? current.memoizedProps
+                  : resolveDefaultProps(
+                      finishedWork.type,
+                      current.memoizedProps
+                    );
+              const prevState = current.memoizedState;
+
+              instance.componentDidUpdate(
+                prevProps,
+                prevState,
+                instance.__reactInternalSnapshotBeforeUpdate
+              );
+            }
+          }
+        }
+
+        const updateQueue = finishedWork.updateQueue;
+
+        if (updateQueue !== null) {
+          // 处理 update 回调函数, e.g: `this.setState({}, callback)`.
+          commitUpdateQueue(finishedWork, updateQueue, instance);
+        }
+
+        break;
+      }
+      case HostRoot: {
+        const updateQueue = finishedWork.updateQueue;
+
+        if (updateQueue !== null) {
+          let instance = null;
+
+          if (finishedWork.child !== null) {
+            switch (finishedWork.child.tag) {
+              case HostComponent:
+                instance = getPublicInstance(finishedWork.child.stateNode);
+                break;
+              case ClassComponent:
+                instance = finishedWork.child.stateNode;
+                break;
+            }
+          }
+
+          // 处理 update 回调函数, e.g: `this.setState({}, callback)`.
+          commitUpdateQueue(finishedWork, updateQueue, instance);
+        }
+
+        break;
+      }
+      case HostComponent: {
+        const instance: Instance = finishedWork.stateNode;
+
+        if (current === null && finishedWork.flags & Update) {
+          const type = finishedWork.type;
+          const props = finishedWork.memoizedProps;
+          commitMount(instance, type, props, finishedWork);
+        }
+
+        break;
+      }
+      case SuspenseComponent: {
+        commitSuspenseHydrationCallbacks(finishedRoot, finishedWork);
+        break;
+      }
+      case HostText:
+      case HostPortal:
+      case Profiler:
+      case SuspenseListComponent:
+      case IncompleteClassComponent:
+      case ScopeComponent:
+      case OffscreenComponent:
+      case LegacyHiddenComponent: {
+        break;
+      }
+
+      default:
+        throw new Error(
+          'This unit of work tag should not have side-effects. This error is ' +
+            'likely caused by a bug in React. Please file an issue.'
+        );
+    }
+  }
+
+  // 重新设置ref.
+  if (finishedWork.flags & Ref) {
+    commitAttachRef(finishedWork);
+  }
+}
+```
 
 ### Minimal Reconciler Implementation
 
