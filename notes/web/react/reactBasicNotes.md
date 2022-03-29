@@ -1039,7 +1039,11 @@ Reconciler construct Fiber tree:
   循环调用 `performUnitOfWork`,
   直到 `workInProgress === null` 或用完当前时间分片.
 - **performUnitOfWork(workInProgress)**:
-  - `beginWork` -> `completeUnitOfWork`.
+  - 存在子节点， `beginWork` 与 `completeUnitOfWork` 不在同一次循环里调用:
+    执行完 `beginWork` 后,
+    优先向下遍历, 执行子节点的 `beginWork` 与 `completeUnitOfWork`,
+    在 N 次循环后再向上回溯.
+  - 不存在子节点， `beginWork` 与 `completeUnitOfWork` 在同一次循环里调用.
   - 若 `beginWork` 返回 `next` 节点,
     则设置 `workInProgress = next` 进行 DFS 遍历,
     再次调用此函数.
