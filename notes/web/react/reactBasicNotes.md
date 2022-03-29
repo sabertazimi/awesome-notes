@@ -1890,27 +1890,30 @@ function updateHostText(
 Reconciler:
 
 - O(n) incomplete tree comparison: only compare same level nodes.
+- `ReactElement` + Old Children Fiber -> New Children Fiber.
+- Create new children fiber (non exist/need update),
+  drop useless children fiber,
+  reuse old children fiber,
+  set `fiber.flags`: `Placement`/`Deletion`.
+  prepare for `Commit` stage.
 - `key` prop to hint for Fiber nodes reuse.
+- Detailed diff [algorithm](https://7kms.github.io/react-illustration-series/algorithm/diff).
 
 #### Different Types Elements
 
-- rebuild element and children
-- methods: `componentDidMount`/`componentWillUnmount`
+- Rebuild element and children.
 
 #### Same Type DOM Elements
 
-- only update the changed attributes
-- use `key` attribute to match children
+- Only update the changed attributes.
+- Use `key` attribute to match children.
 
 `Best Practice`: give `key` to `<li>/<tr>/<tc>` elements
-(stable, predictable, unique and not array indexed)
+(stable, predictable, unique and not array indexed).
 
 #### Same Type Component Elements
 
-- Update the props to match the new element
-- Methods: `getDerivedStateFromProps`
-- Then `render` called,
-  diff algorithm recursively on the old result and the new result.
+- Update the props to match the new element.
 
 ### Reconciler Commit Workflow
 
