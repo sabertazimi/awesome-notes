@@ -2174,6 +2174,7 @@ const LayoutMask = Update | Callback | Ref | Visibility;
     schedule a callback (**asynchronous**) to process them,
     **as early as possible** before anything else in commit phase.
   - `useXXX` hooks normally run in **asynchronous** mode.
+  - `useEffect` (**asynchronous**) run after `useLayoutEffect`.
 - `Snapshot` effects:
   - `HostRoot` fiber: `HostConfig.clearContainer`.
   - `ClassComponent` fiber: `instance.getSnapShotBeforeUpdate`.
