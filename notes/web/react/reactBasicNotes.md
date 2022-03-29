@@ -1967,12 +1967,14 @@ Reconciler:
   - 最新 DOM 对象挂载在 HostComponent Fiber 上 (`fiber.stateNode`).
 - `BeforeMutation` phase:
   - Read the state of the host tree right before DOM mutation.
-  - Process `Passive`/`Snapshot` effects fiber.
+  - Process
+    `Passive`/`Snapshot`/`Deletion`
+    effects fiber.
   - `getSnapshotBeforeUpdate` called.
 - `Mutation` phase.
   - Mutate the host tree, render UI.
   - Process
-    `ContentReset`/`Ref`/`Placement`/`Update`/`Deletion`/`Hydrating`
+    `ContentReset`/`Ref`/`Visibility`/`Placement`/`Update`/`Deletion`/`Hydrating`
     effects fiber.
 - `Layout` phase.
   - After DOM mutation.
@@ -2147,8 +2149,6 @@ function commitRootImpl(
 
 #### Before Mutation Phase
 
-Process Fiber nodes:
-
 - `Passive` effects:
   - `FunctionComponent` fiber (hooks):
     If there are pending passive effects,
@@ -2156,8 +2156,9 @@ Process Fiber nodes:
     **as early as possible** before anything else in commit phase.
   - `useXXX` hooks normally run in **asynchronous** mode.
 - `Snapshot` effects:
-  - `HostRoot` fiber: `HostConfig.clearContainer(root.ContainerInfo)`.
-  - `ClassComponent` fiber: `getSnapShotBeforeUpdate(current.memoizedProps, current.memoizedState)`.
+  - `HostRoot` fiber: `HostConfig.clearContainer`.
+  - `ClassComponent` fiber: `instance.getSnapShotBeforeUpdate`.
+- `Deletion` effects: `commitBeforeMutationEffectsDeletion` -> `HostConfig.beforeActiveInstanceBlur`.
 
 ```ts
 // `Passive` effects.
@@ -2177,6 +2178,14 @@ function commitBeforeMutationEffects(root: FiberRoot, firstChild: Fiber) {
   while (nextEffect !== null) {
     const fiber = nextEffect;
     const child = fiber.child;
+    const deletions = fiber.deletions;
+
+    if (deletions !== null) {
+      for (let i = 0; i < deletions.length; i++) {
+        const deletion = deletions[i];
+        commitBeforeMutationEffectsDeletion(deletion);
+      }
+    }
 
     if (
       (fiber.subtreeFlags & BeforeMutationMask) !== NoFlags &&
@@ -2253,16 +2262,174 @@ function commitBeforeMutationEffectsOnFiber(finishedWork: Fiber) {
     }
   }
 }
+
+function commitBeforeMutationEffectsDeletion(deletion: Fiber) {
+  if (doesFiberContain(deletion, focusedInstanceHandle)) {
+    shouldFireAfterActiveInstanceBlur = true;
+    beforeActiveInstanceBlur(deletion);
+  }
+}
 ```
 
 #### Mutation Phase
 
-Process Fiber nodes:
-
-- `Placement` effects: `DOM.appendChild` called.
-- `Update` effects.
-- `Deletion` effects.
+- `ContentReset` effects: `commitResetTextContent` -> `HostConfig.resetTextContext`.
+- `Ref` effects: `commitAttachRef`/`commitDetachRef` -> `HostConfig.getPublicInstance`.
+- `Visibility` effects:
+  - `SuspenseComponent` fiber:
+    `markCommitTimeOfFallback`.
+  - `OffscreenComponent` fiber:
+    `hideOrUnhideAllChildren` -> `HostConfig.hideInstance/hideTextInstance/unhideInstance/unhideTextInstance`.
+- `Placement` effects:
+  `commitPlacement`
+  -> `insertOrAppendPlacementNode`/`insertOrAppendPlacementNodeIntoContainer`
+  -> `HostConfig.appendChild/insertBefore/appendChildToContainer/insertInContainerBefore`.
+- `Update` effects: `commitWork` -> `HostConfig.commitUpdate/commitTextUpdate/commitHydratedContainer/replaceContainerChildren`.
+- `Deletion` effects: `commitDeletion` -> `HostConfig.removeChild/removeChildFromContainer/clearSuspenseBoundaryFromContainer`.
 - `Hydrating` effects.
+
+```ts
+export function commitMutationEffects(
+  root: FiberRoot,
+  firstChild: Fiber,
+  committedLanes: Lanes
+) {
+  inProgressLanes = committedLanes;
+  inProgressRoot = root;
+  nextEffect = firstChild;
+
+  while (nextEffect !== null) {
+    const fiber = nextEffect;
+    const child = fiber.child;
+    const deletions = fiber.deletions;
+
+    if (deletions !== null) {
+      for (let i = 0; i < deletions.length; i++) {
+        const childToDelete = deletions[i];
+        commitDeletion(root, childToDelete, fiber);
+      }
+    }
+
+    if ((fiber.subtreeFlags & MutationMask) !== NoFlags && child !== null) {
+      // 1. Visit children.
+      nextEffect = child;
+    } else {
+      while (nextEffect !== null) {
+        const fiber = nextEffect;
+        commitMutationEffectsOnFiber(fiber, root, lanes);
+        const sibling = fiber.sibling;
+
+        // 2. Visit sibling.
+        if (sibling !== null) {
+          nextEffect = sibling;
+          break;
+        }
+
+        nextEffect = fiber.return;
+      }
+    }
+  }
+
+  inProgressLanes = null;
+  inProgressRoot = null;
+}
+
+function commitMutationEffectsOnFiber(
+  finishedWork: Fiber,
+  root: FiberRoot,
+  lanes: Lanes
+) {
+  const flags = finishedWork.flags;
+
+  if (flags & ContentReset) {
+    commitResetTextContent(finishedWork);
+  }
+
+  if (flags & Ref) {
+    const current = finishedWork.alternate;
+
+    if (current !== null) {
+      // 先清空 ref, 在第三阶段 (Layout), 再重新赋值.
+      commitDetachRef(current);
+    }
+
+    if (finishedWork.tag === ScopeComponent) {
+      commitAttachRef(finishedWork);
+    }
+  }
+
+  if (flags & Visibility) {
+    switch (finishedWork.tag) {
+      case SuspenseComponent: {
+        const newState: OffscreenState | null = finishedWork.memoizedState;
+        const isHidden = newState !== null;
+
+        if (isHidden) {
+          const current = finishedWork.alternate;
+          const wasHidden = current !== null && current.memoizedState !== null;
+
+          if (!wasHidden) {
+            markCommitTimeOfFallback();
+          }
+        }
+
+        break;
+      }
+      case OffscreenComponent: {
+        const newState: OffscreenState | null = finishedWork.memoizedState;
+        const isHidden = newState !== null;
+        const current = finishedWork.alternate;
+        const wasHidden = current !== null && current.memoizedState !== null;
+        const offscreenBoundary: Fiber = finishedWork;
+
+        if (supportsMutation) {
+          hideOrUnhideAllChildren(offscreenBoundary, isHidden);
+        }
+
+        break;
+      }
+    }
+  }
+
+  const primaryFlags = flags & (Placement | Update | Hydrating);
+
+  switch (primaryFlags) {
+    case Placement: {
+      // Placement
+      commitPlacement(finishedWork);
+      finishedWork.flags &= ~Placement; // Clear bit.
+      break;
+    }
+    case PlacementAndUpdate: {
+      // Placement
+      commitPlacement(finishedWork);
+      finishedWork.flags &= ~Placement; // Clear bit.
+
+      // Update
+      const current = finishedWork.alternate;
+      commitWork(current, finishedWork);
+      break;
+    }
+    case Hydrating: {
+      finishedWork.flags &= ~Hydrating; // Clear bit.
+      break;
+    }
+    case HydratingAndUpdate: {
+      finishedWork.flags &= ~Hydrating; // Clear bit.
+
+      // Update
+      const current = finishedWork.alternate;
+      commitWork(current, finishedWork);
+      break;
+    }
+    case Update: {
+      const current = finishedWork.alternate;
+      commitWork(current, finishedWork);
+      break;
+    }
+  }
+}
+```
 
 #### Layout Phase
 
