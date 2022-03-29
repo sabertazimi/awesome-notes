@@ -1914,7 +1914,9 @@ Reconciler:
 
 ### Reconciler Commit Workflow
 
-Renderer:
+#### Renderer and HostConfig Protocol
+
+`Renderer`:
 
 - Implementing `HostConfig` [protocol](https://github.com/facebook/react/blob/main/packages/react-reconciler/README.md).
 - Rendering fiber tree to real contents:
@@ -1923,7 +1925,7 @@ Renderer:
   - Server: SSR strings.
 - Real renderer [demo](https://github.com/sabertazimi/awesome-web/tree/main/packages/react-renderer/src/renderer).
 
-#### HostConfig Protocol
+`HostConfig` protocol:
 
 - `isPrimaryRender: true`.
 - `supportsHydration: true`: SSR renderer.
@@ -1965,16 +1967,20 @@ Renderer:
   - 最新 DOM 对象挂载在 HostComponent Fiber 上 (`fiber.stateNode`).
 - `BeforeMutation` phase:
   - Read the state of the host tree right before DOM mutation.
-  - Process `Snapshot`/`Passive` effects fiber.
+  - Process `Passive`/`Snapshot` effects fiber.
   - `getSnapshotBeforeUpdate` called.
 - `Mutation` phase.
   - Mutate the host tree, render UI.
-  - Process `Placement`/`Update`/`Deletion`/`Hydrating` effects fiber.
+  - Process
+    `ContentReset`/`Ref`/`Placement`/`Update`/`Deletion`/`Hydrating`
+    effects fiber.
 - `Layout` phase.
   - After DOM mutation.
   - Process `Update | Callback` effects fiber.
   - `componentDidMount` lifecycle called **synchronously**.
   - `useLayoutEffect` callback called **synchronously**.
+- `CommitEffects` functions located in
+  [ReactFiberCommitWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.new.js).
 
 ```ts
 function commitRoot(root: FiberRoot, recoverableErrors: null | Array<mixed>) {
@@ -2027,7 +2033,6 @@ function commitRootImpl(
     finishedWork.lanes,
     finishedWork.childLanes
   );
-  markRootFinished(root, remainingLanes);
 
   if (root === workInProgressRoot) {
     // We can reset these now that they are finished.
@@ -2037,8 +2042,7 @@ function commitRootImpl(
   }
 
   // If there are pending passive effects, schedule a callback to process them.
-  // Do this as early as possible,
-  // so it is queued before anything else that might get scheduled in commit phase.
+  // Do this as early as possible before anything else in commit phase.
   if (
     (finishedWork.subtreeFlags & PassiveMask) !== NoFlags ||
     (finishedWork.flags & PassiveMask) !== NoFlags
@@ -2145,8 +2149,111 @@ function commitRootImpl(
 
 Process Fiber nodes:
 
-- `Snapshot` effects.
-- `Passive` effects.
+- `Passive` effects:
+  - `FunctionComponent` fiber (hooks):
+    If there are pending passive effects,
+    schedule a callback (**asynchronous**) to process them,
+    **as early as possible** before anything else in commit phase.
+  - `useXXX` hooks normally run in **asynchronous** mode.
+- `Snapshot` effects:
+  - `HostRoot` fiber: `HostConfig.clearContainer(root.ContainerInfo)`.
+  - `ClassComponent` fiber: `getSnapShotBeforeUpdate(current.memoizedProps, current.memoizedState)`.
+
+```ts
+// `Passive` effects.
+scheduleCallback(NormalSchedulerPriority, () => {
+  flushPassiveEffects();
+  return null;
+});
+```
+
+```ts
+// `Snapshot` effects.
+function commitBeforeMutationEffects(root: FiberRoot, firstChild: Fiber) {
+  HostConfig.prepareForCommit(root.containerInfo);
+  nextEffect = firstChild;
+
+  // DFS traverse.
+  while (nextEffect !== null) {
+    const fiber = nextEffect;
+    const child = fiber.child;
+
+    if (
+      (fiber.subtreeFlags & BeforeMutationMask) !== NoFlags &&
+      child !== null
+    ) {
+      // 1. Visit children.
+      nextEffect = child;
+    } else {
+      while (nextEffect !== null) {
+        const fiber = nextEffect;
+        commitBeforeMutationEffectsOnFiber(fiber);
+        const sibling = fiber.sibling;
+
+        // 2. Visit sibling.
+        if (sibling !== null) {
+          nextEffect = sibling;
+          break;
+        }
+
+        nextEffect = fiber.return;
+      }
+    }
+  }
+}
+
+function commitBeforeMutationEffectsOnFiber(finishedWork: Fiber) {
+  const current = finishedWork.alternate;
+  const flags = finishedWork.flags;
+
+  if ((flags & Snapshot) !== NoFlags) {
+    switch (finishedWork.tag) {
+      case ClassComponent: {
+        if (current !== null) {
+          const prevProps = current.memoizedProps;
+          const prevState = current.memoizedState;
+          const instance = finishedWork.stateNode;
+
+          // We could update instance props and state here,
+          // but instead we rely on them being set during last render.
+          const snapshot = instance.getSnapshotBeforeUpdate(
+            finishedWork.elementType === finishedWork.type
+              ? prevProps
+              : resolveDefaultProps(finishedWork.type, prevProps),
+            prevState
+          );
+          instance.__reactInternalSnapshotBeforeUpdate = snapshot;
+        }
+
+        break;
+      }
+      case HostRoot: {
+        if (supportsMutation) {
+          const root = finishedWork.stateNode;
+          HostConfig.clearContainer(root.containerInfo);
+        }
+
+        break;
+      }
+      case FunctionComponent:
+      case ForwardRef:
+      case SimpleMemoComponent:
+      case HostComponent:
+      case HostText:
+      case HostPortal:
+      case IncompleteClassComponent:
+        // Nothing to do for these component types.
+        break;
+      default: {
+        throw new Error(
+          'This unit of work tag should not have side-effects. This error is ' +
+            'likely caused by a bug in React. Please file an issue.'
+        );
+      }
+    }
+  }
+}
+```
 
 #### Mutation Phase
 
