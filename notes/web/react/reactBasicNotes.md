@@ -1077,7 +1077,7 @@ Reconciler construct Fiber tree:
     - 如果下级节点是文本节点, 则设置下级节点为 `null` (进入 `completeUnitOfWork` 阶段).
     - 设置 `fiber.flags`, 标记副作用.
   - 根据实际情况, 设置 `fiber.flags`, 标记副作用.
-  - 根据 `ReactElement` 对象, 调用 `reconcileChildren` 生成 `Fiber` 子节点 (只生成次级子节点).
+  - 根据获取的下级 `ReactElement` 对象, 调用 `reconcileChildren` 生成 `Fiber` 子节点 (只生成次级子节点).
 - ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent().
 - **reconcileChildren**.
 - reconcileChildFibers.
