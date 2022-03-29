@@ -1917,7 +1917,7 @@ Reconciler:
 Renderer:
 
 - Implementing `HostConfig` [protocol](https://github.com/facebook/react/blob/main/packages/react-reconciler/README.md).
-- Rendering fiber tree to real contents
+- Rendering fiber tree to real contents:
   - Web: DOM node.
   - Native: native UI.
   - Server: SSR strings.
@@ -1960,55 +1960,183 @@ Renderer:
 
 #### Commit Root
 
-- `BeforeMutation` phase.
+- `FiberRoot.finishedWork`:
+  - 副作用队列挂载在根节点上 (`finishedWork.firstEffect`).
+  - 最新 DOM 对象挂载在 HostComponent Fiber 上 (`fiber.stateNode`).
+- `BeforeMutation` phase:
+  - Read the state of the host tree right before DOM mutation.
+  - Process `Snapshot`/`Passive` effects fiber.
+  - `getSnapshotBeforeUpdate` called.
 - `Mutation` phase.
+  - Mutate the host tree, render UI.
+  - Process `Placement`/`Update`/`Deletion`/`Hydrating` effects fiber.
 - `Layout` phase.
+  - After DOM mutation.
+  - Process `Update | Callback` effects fiber.
+  - `componentDidMount` lifecycle called **synchronously**.
+  - `useLayoutEffect` callback called **synchronously**.
 
-```js
-function commitRootImpl(root, renderPriorityLevel) {
+```ts
+function commitRoot(root: FiberRoot, recoverableErrors: null | Array<mixed>) {
+  const previousUpdateLanePriority = getCurrentUpdatePriority();
+  const prevTransition = ReactCurrentBatchConfig.transition;
+
+  try {
+    ReactCurrentBatchConfig.transition = null;
+    setCurrentUpdatePriority(DiscreteEventPriority);
+    commitRootImpl(root, recoverableErrors, previousUpdateLanePriority);
+  } finally {
+    ReactCurrentBatchConfig.transition = prevTransition;
+    setCurrentUpdatePriority(previousUpdateLanePriority);
+  }
+
+  return null;
+}
+
+function commitRootImpl(
+  root: FiberRoot,
+  recoverableErrors: null | Array<mixed>,
+  renderPriorityLevel: EventPriority
+) {
+  do {
+    flushPassiveEffects();
+  } while (rootWithPendingPassiveEffects !== null);
+
+  flushRenderPhaseStrictModeWarningsInDEV();
+
+  if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
+    throw new Error('Should not already be working.');
+  }
+
   const finishedWork = root.finishedWork;
   const lanes = root.finishedLanes;
+
+  if (finishedWork === null) {
+    return null;
+  }
 
   // 清空 FiberRoot 对象上的属性.
   root.finishedWork = null;
   root.finishedLanes = NoLanes;
   root.callbackNode = null;
+  root.callbackPriority = NoLane;
 
-  // 提交阶段.
-  const firstEffect = finishedWork.firstEffect;
+  // Update the first and last pending times on this root.
+  // The new first pending time is whatever is left on the root fiber.
+  const remainingLanes = mergeLanes(
+    finishedWork.lanes,
+    finishedWork.childLanes
+  );
+  markRootFinished(root, remainingLanes);
 
-  if (firstEffect !== null) {
-    const prevExecutionContext = executionContext;
-    executionContext |= CommitContext;
-
-    // 阶段1: DOM 突变之前.
-    nextEffect = firstEffect;
-
-    do {
-      commitBeforeMutationEffects();
-    } while (nextEffect !== null);
-
-    // 阶段2: DOM 突变, 界面发生改变.
-    nextEffect = firstEffect;
-
-    do {
-      commitMutationEffects(root, renderPriorityLevel);
-    } while (nextEffect !== null);
-
-    root.current = finishedWork;
-
-    // 阶段3: layout 阶段, 调用生命周期 componentDidUpdate 和回调函数.
-    nextEffect = firstEffect;
-
-    do {
-      commitLayoutEffects(root, lanes);
-    } while (nextEffect !== null);
-
-    nextEffect = null;
-    executionContext = prevExecutionContext;
+  if (root === workInProgressRoot) {
+    // We can reset these now that they are finished.
+    workInProgressRoot = null;
+    workInProgress = null;
+    workInProgressRootRenderLanes = NoLanes;
   }
 
+  // If there are pending passive effects, schedule a callback to process them.
+  // Do this as early as possible,
+  // so it is queued before anything else that might get scheduled in commit phase.
+  if (
+    (finishedWork.subtreeFlags & PassiveMask) !== NoFlags ||
+    (finishedWork.flags & PassiveMask) !== NoFlags
+  ) {
+    if (!rootDoesHavePassiveEffects) {
+      rootDoesHavePassiveEffects = true;
+      pendingPassiveEffectsRemainingLanes = remainingLanes;
+      scheduleCallback(NormalSchedulerPriority, () => {
+        flushPassiveEffects();
+        return null;
+      });
+    }
+  }
+
+  // Check if there are any effects in the whole tree.
+  const subtreeHasEffects =
+    (finishedWork.subtreeFlags &
+      (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask)) !==
+    NoFlags;
+  const rootHasEffect =
+    (finishedWork.flags &
+      (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask)) !==
+    NoFlags;
+
+  if (subtreeHasEffects || rootHasEffect) {
+    // Store context.
+    const prevTransition = ReactCurrentBatchConfig.transition;
+    const previousPriority = getCurrentUpdatePriority();
+    const prevExecutionContext = executionContext;
+    ReactCurrentBatchConfig.transition = null;
+    setCurrentUpdatePriority(DiscreteEventPriority);
+    executionContext |= CommitContext;
+
+    // Reset this to null before calling life cycles.
+    ReactCurrentOwner.current = null;
+
+    // `BeforeMutation` phase:
+    // read the state of the host tree right before we mutate it.
+    // `getSnapshotBeforeUpdate` is called.
+    commitBeforeMutationEffects(root, finishedWork);
+
+    // `Mutation` phase:
+    // mutate the host tree.
+    commitMutationEffects(root, finishedWork, lanes);
+
+    resetAfterCommit(root.containerInfo);
+
+    // The workInProgress tree is now the current tree (during `componentDidMount`/`Update`).
+    root.current = finishedWork;
+
+    // `Layout` phase:
+    // `useLayoutEffect` is called.
+    commitLayoutEffects(finishedWork, root, lanes);
+
+    // Tell Scheduler to yield at the end of the frame,
+    // so the browser has an opportunity to paint.
+    requestPaint();
+
+    // Restore context.
+    executionContext = prevExecutionContext;
+    setCurrentUpdatePriority(previousPriority);
+    ReactCurrentBatchConfig.transition = prevTransition;
+  } else {
+    // No effects.
+    root.current = finishedWork;
+  }
+
+  const rootDidHavePassiveEffects = rootDoesHavePassiveEffects;
+
+  if (rootDoesHavePassiveEffects) {
+    // This commit has passive effects:
+    // Stash a reference to them.
+    rootDoesHavePassiveEffects = false;
+    rootWithPendingPassiveEffects = root;
+    pendingPassiveEffectsLanes = lanes;
+  } else {
+    // There were no passive effects:
+    // immediately release the cache pool for this render.
+    releaseRootPooledCache(root, remainingLanes);
+  }
+
+  // Always call this before exiting `commitRoot`,
+  // to ensure that any additional work on this root is scheduled.
   ensureRootIsScheduled(root, now());
+
+  // If the passive effects are the result of a discrete render,
+  // flush them synchronously at the end of the current task
+  // so that the result is immediately observable.
+  if (
+    includesSomeLane(pendingPassiveEffectsLanes, SyncLane) &&
+    root.tag !== LegacyRoot
+  ) {
+    flushPassiveEffects();
+  }
+
+  // If layout work was scheduled, flush it now.
+  flushSyncCallbacks();
+
   return null;
 }
 ```
