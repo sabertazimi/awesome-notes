@@ -1670,7 +1670,10 @@ function dispatchAction<S, A>(
 - workLoopSync / workLoopConcurrent.
 - **performUnitOfWork(workInProgress)**.
 - **beginWork**:
-  - 若判断当前 Fiber 节点无需更新, 调用 `bailoutOnAlreadyFinishedWork` 循环检测子节点是否需要更新.
+  - 若判断当前 Fiber 节点无需更新, 调用 `bailoutOnAlreadyFinishedWork` 循环检测子节点是否需要更新:
+    - `instance.shouldComponentUpdate() === false`.
+    - compare `fiber.pendingProps` (newProps) and `fiber.memoizedProps`.
+    - compare `fiber.lanes` and `renderLanes`.
   - 若判断当前 Fiber 节点需要更新, 调用 `UpdateXXXComponent` 进行更新.
 - **bailoutOnAlreadyFinishedWork**:
   - 若 `includesSomeLane(renderLanes, workInProgress.childLanes) === false`
