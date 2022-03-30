@@ -715,8 +715,9 @@ tags: [Web, Framework, Library]
 ### Image Gallery
 
 - [Zoom: Zooming Images Like Medium](https://github.com/francoischalifour/medium-zoom)
-- [Light Gallery](https://github.com/sachinchoolur/lightgallery.js)
-- [Photo Swipe](https://github.com/dimsemenov/PhotoSwipe)
+- [LightGallery](https://github.com/sachinchoolur/lightgallery.js)
+- [PhotoSwipe](https://github.com/dimsemenov/PhotoSwipe)
+- [PhotoView](https://github.com/MinJieLiu/react-photo-view)
 
 ### Image Filter
 
