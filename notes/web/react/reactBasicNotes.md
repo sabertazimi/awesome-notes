@@ -1923,6 +1923,22 @@ Reconciler:
 
 - Update the props to match the new element.
 
+#### Reconcile Array Elements
+
+- 第一次循环: 比较公共序列:
+  - 从左到右逐一遍历, 遇到一个无法复用的节点则退出循环.
+- 第二次循环: 比较非公共序列
+  - 在第一次循环的基础上, 如果 oldFiber 队列遍历完成, 证明 newChildren 队列中剩余的对象全部都是新增.
+  - 此时继续遍历剩余的 newChildren 队列即可, 没有额外的 diff 比较.
+  - 在第一次循环的基础上, 如果 oldFiber 队列没有遍历完,
+    需要将 oldFiber 队列中剩余的对象都添加到一个 Map 集合中, 以 oldFiber.key 作为键.
+  - 此时继续遍历剩余的 newChildren 队列, 需要用 newChild.key 到 Map 集合中进行查找,
+    将匹配上的 oldFiber 取出与 newChild 进行 diff 比较.
+- 清理工作:
+  - 在第二次循环结束后,
+    若 Map 集合中还有剩余的 oldFiber,
+    则说明 oldFiber 都是被删除的节点, 需要打上删除标记 (`Deletion`).
+
 ### Reconciler Commit Workflow
 
 #### Renderer and HostConfig Protocol
