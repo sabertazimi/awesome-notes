@@ -2701,6 +2701,13 @@ function commitLayoutEffectOnFiber(
 }
 ```
 
+### Reconciler Performance Tips
+
+- Render: 通过一些启发式算法跳过没有发生变更的子树.
+- Commit: 维护了一个列表用于记录变化的 Fiber, 不再访问其他 Fiber.
+- GC: Reuse `OldFiber` objects.
+- GC: `current` Fiber tree and `workInProgress` Fiber tree for `Double Buffering`.
+
 ### Minimal Reconciler Implementation
 
 ```js
@@ -8480,8 +8487,8 @@ function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
       scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root));
     }
 
-    if (supportsMicrotasks) {
-      scheduleMicrotask(() => {
+    if (supportsMicroTasks) {
+      scheduleMicroTask(() => {
         if (executionContext === NoContext) {
           flushSyncCallbacks();
         }
