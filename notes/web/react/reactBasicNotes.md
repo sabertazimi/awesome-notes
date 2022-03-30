@@ -1080,7 +1080,12 @@ Reconciler construct Fiber tree:
   - 根据获取的下级 `ReactElement` 对象, 调用 `reconcileChildren` 生成 `Fiber` 子节点 (只生成次级子节点).
 - ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent().
 - **reconcileChildren**.
-- reconcileChildFibers.
+- reconcileChildFibers:
+  - `reconcileSingleElement`.
+  - `reconcileSingleTextNode`.
+  - `reconcileSinglePortal`.
+  - `reconcileChildrenArray`.
+  - `reconcileChildrenIterator`.
 - **completeUnitOfWork**:
   - 当 `reconcileChildren` 返回值为 `null` 时, 表示 DFS 进行到子叶节点,
     `performUnitOfWork` 会调用 `completeUnitOfWork` 函数.
