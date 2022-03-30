@@ -2736,7 +2736,7 @@ const render = (elements, container) => {
   When it comes `blocking mode`
   (`ReactDOM.createBlockingRoot(rootNode).render(<App />)`),
   `setState` works in synchronous mode:
-  `scheduleUpdateOnFiber` -> `ensureRootIsScheduled` -> `flushSyncCallbackQueue`.
+  `scheduleUpdateOnFiber` -> `ensureRootIsScheduled` -> **`flushSyncCallbackQueue`**.
 - `setState` Asynchronous Way:
   At most of the other time, `setState` works in asynchronous mode,
   including `legacy mode`(`ReactDOM.render(<App />, rootNode)`)
