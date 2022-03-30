@@ -2532,12 +2532,12 @@ if there’s any pending call back waiting to be executed:
 
 - ES6 job queue: used by `Promises` (higher priority)
 - Message queue: used by `setTimeout`, `DOM events`
-- 微任务 Microtask (Jobs)，有特权, 可以插队:
+- 微任务 MicroTask (Jobs)，有特权, 可以插队:
   - `process.nextTick`.
   - `Promises.then` (**Promise 构造函数是同步函数**).
   - `Object.observer`, `MutationObserver`.
   - `catch finally`.
-- 宏任务 Macrotask (Tasks)，没有特权:
+- 宏任务 MacroTask (Tasks)，没有特权:
   - `scripts`: 整体脚本视作一个宏任务.
   - `setImmediate`, `I/O`.
   - `setTimeout`, `setInterval`.
@@ -2546,35 +2546,37 @@ if there’s any pending call back waiting to be executed:
   - `requestAnimationFrame`.
   - UI interaction `events` callback function.
   - UI rendering.
-- Microtask 优先于 Macrotask.
+- MicroTask 优先于 MacroTask.
 - 浏览器为了能够使得 JS 内部 (macro)task 与 DOM 任务能够有序的执行,
   会在一个 (macro)task 执行结束后, 在下一个 (macro)task 执行开始前, 对页面进行重新渲染.
   当 JS 引擎从任务队列中取出一个宏任务来执行, 如果执行过程中有遇到微任务,
   那么执行完该宏任务就会去执行宏任务内的所有微任务, 然后更新 UI.
   后面就是再从任务队列中取出下一个宏任务来继续执行, 以此类推.
-- Event Loop 与 Call Stack 有且仅有一个, Task/Job/Message Queue 可以有多个.
+- `Event Loop` 与 `Call Stack` 有且仅有一个, `Task/Job/Message Queue` 可以有多个.
 
 :::tip Event Loop
 宏任务队列取宏任务 -> 执行 1 个宏任务 -> 检查微任务队列并执行所有微任务 -> 浏览器渲染 -> 宏任务队列取宏任务
 :::
 
-```js
-for (let ii = 0; ii < macrotask.length; ii++) {
-  // eslint-disable-next-line no-eval
-  eval(macrotask[ii])();
+`Event Loop` simple model:
 
-  if (microtask.length !== 0) {
-    // process all microtasks
-    for (let __i = 0; __i < microtask.length; __i++) {
+```js
+for (let ii = 0; ii < macroTask.length; ii++) {
+  // eslint-disable-next-line no-eval
+  eval(macroTask[ii])();
+
+  if (microTask.length !== 0) {
+    // Process all MicroTasks.
+    for (let __i = 0; __i < microTask.length; __i++) {
       // eslint-disable-next-line no-eval
-      eval(microtask[__i])();
+      eval(microTask[__i])();
     }
 
-    // empty microtask
-    microtask = [];
+    // Empty MicroTask.
+    microTask = [];
   }
 
-  // next macrotask in next loop iteration
+  // Next MacroTask in next loop iteration.
 }
 ```
 
@@ -2673,7 +2675,7 @@ console.log('script end');
 // setTimeout.
 ```
 
-`await a(); b()` 等价于 `Promise(a()).then(b())`: a 是同步执行, b 是 microtask:
+`await a(); b()` 等价于 `Promise(a()).then(b())`: a 是同步执行, b 是 MicroTask:
 
 ```js
 async function async1() {
