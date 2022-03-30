@@ -4271,7 +4271,7 @@ function mountState<T>(initialState: T) {
     initialState = initialState();
   }
 
-  // Setup hook.
+  // Setup Hook.
   hook.memoizedState = hook.baseState = initialState;
   const queue = (hook.queue = {
     pending: null,
@@ -4285,12 +4285,57 @@ function mountState<T>(initialState: T) {
     queue
   ));
 
-  // Return hook state and dispatch action.
+  // Return Hook state and dispatch action.
   return [hook.memoizedState, dispatch];
 }
 
 function updateState<T>(initialState: T) {
+  const basicStateReducer = (state, action) => {
+    return typeof action === 'function' ? action(state) : action;
+  };
+
   return updateReducer(basicStateReducer);
+}
+
+function dispatchAction<S, A>(
+  fiber: Fiber,
+  queue: UpdateQueue<S, A>,
+  action: A
+) {
+  // 1. 创建 Update 对象.
+  const eventTime = requestEventTime();
+  const lane = requestUpdateLane(fiber);
+  const update: Update<S, A> = {
+    lane,
+    action,
+    eagerReducer: null,
+    eagerState: null,
+    next: null,
+  };
+
+  // 2. 将 Update 对象添加到 hook.queue.pending 队列.
+  const pending = queue.pending;
+  if (pending === null) {
+    // 首个 Update, 创建一个环形链表.
+    update.next = update;
+  } else {
+    update.next = pending.next;
+    pending.next = update;
+  }
+  queue.pending = update;
+
+  const alternate = fiber.alternate;
+  if (
+    fiber === currentlyRenderingFiber ||
+    (alternate !== null && alternate === currentlyRenderingFiber)
+  ) {
+    // 渲染时更新, 做好全局标记.
+    didScheduleRenderPhaseUpdateDuringThisPass = didScheduleRenderPhaseUpdate =
+      true;
+  } else {
+    // 3. 发起调度更新, 进入 Reconciler.
+    scheduleUpdateOnFiber(fiber, lane, eventTime);
+  }
 }
 ```
 
@@ -4390,6 +4435,185 @@ ChatAPI.unsubscribeFromFriendStatus(300, handleStatusChange); // Clean up last e
 
 #### UseReducer Hooks Dispatcher
 
+```ts
+function mountReducer<S, I, A>(
+  reducer: (S, A) => S,
+  initialArg: I,
+  init?: (I) => S
+): [S, Dispatch<A>] {
+  // 1. Create Hook.
+  const hook = mountWorkInProgressHook();
+  let initialState;
+
+  if (init !== undefined) {
+    initialState = init(initialArg);
+  } else {
+    initialState = initialArg;
+  }
+
+  // 2. Setup Hook.
+  // 2.1 Set hook.memoizedState/hook.baseState.
+  hook.memoizedState = hook.baseState = initialState;
+  // 2.2 Set hook.queue.
+  const queue = (hook.queue = {
+    pending: null,
+    dispatch: null,
+    lastRenderedReducer: reducer,
+    lastRenderedState: initialState,
+  });
+  // 2.3 Set hook.dispatch.
+  const dispatch: Dispatch<A> = (queue.dispatch = dispatchAction.bind(
+    null,
+    currentlyRenderingFiber,
+    queue
+  ));
+
+  // 3. Return Hook state and dispatch action.
+  return [hook.memoizedState, dispatch];
+}
+
+function updateReducer<S, I, A>(
+  reducer: (S, A) => S,
+  initialArg: I,
+  init?: (I) => S
+): [S, Dispatch<A>] {
+  const hook = updateWorkInProgressHook();
+  const queue = hook.queue;
+  queue.lastRenderedReducer = reducer;
+  const current: Hook = currentHook;
+
+  // The last rebase update that is NOT part of the base state.
+  let baseQueue = current.baseQueue;
+  // The last pending update that hasn't been processed yet.
+  const pendingQueue = queue.pending;
+
+  if (pendingQueue !== null) {
+    // We have new updates that haven't been processed yet.
+    // We'll add them to the base queue.
+    if (baseQueue !== null) {
+      // Merge the pending queue and the base queue.
+      const baseFirst = baseQueue.next;
+      const pendingFirst = pendingQueue.next;
+      baseQueue.next = pendingFirst;
+      pendingQueue.next = baseFirst;
+    }
+
+    current.baseQueue = baseQueue = pendingQueue;
+    queue.pending = null;
+  }
+
+  if (baseQueue !== null) {
+    // We have a queue to process.
+    const first = baseQueue.next;
+    let newState = current.baseState;
+
+    let newBaseState = null;
+    let newBaseQueueFirst = null;
+    let newBaseQueueLast = null;
+    let update = first;
+
+    do {
+      const updateLane = update.lane;
+
+      if (!isSubsetOfLanes(renderLanes, updateLane)) {
+        // Skip this update.
+        // If this is the first skipped update,
+        // the previous update/state is the new base update/state.
+        const clone: Update<S, A> = {
+          lane: updateLane,
+          action: update.action,
+          hasEagerState: update.hasEagerState,
+          eagerState: update.eagerState,
+          next: null,
+        };
+
+        if (newBaseQueueLast === null) {
+          newBaseQueueFirst = newBaseQueueLast = clone;
+          newBaseState = newState;
+        } else {
+          newBaseQueueLast = newBaseQueueLast.next = clone;
+        }
+
+        // Update the remaining priority in the queue.
+        currentlyRenderingFiber.lanes = mergeLanes(
+          currentlyRenderingFiber.lanes,
+          updateLane
+        );
+        markSkippedUpdateLanes(updateLane);
+      } else {
+        // This update does have sufficient priority.
+        if (newBaseQueueLast !== null) {
+          const clone: Update<S, A> = {
+            lane: NoLane,
+            action: update.action,
+            hasEagerState: update.hasEagerState,
+            eagerState: update.eagerState,
+            next: null,
+          };
+          newBaseQueueLast = newBaseQueueLast.next = clone;
+        }
+
+        // Process this update.
+        if (update.hasEagerState) {
+          // If this update is a state update (not a reducer) and was processed eagerly,
+          // we can use the eagerly computed state
+          newState = update.eagerState;
+        } else {
+          const action = update.action;
+          newState = reducer(newState, action);
+        }
+      }
+
+      update = update.next;
+    } while (update !== null && update !== first);
+
+    if (newBaseQueueLast === null) {
+      newBaseState = newState;
+    } else {
+      newBaseQueueLast.next = newBaseQueueFirst;
+    }
+
+    // Mark that the fiber performed work,
+    // but only if the new state is different from the current state.
+    if (!is(newState, hook.memoizedState)) {
+      markWorkInProgressReceivedUpdate();
+    }
+
+    hook.memoizedState = newState;
+    hook.baseState = newBaseState;
+    hook.baseQueue = newBaseQueueLast;
+    queue.lastRenderedState = newState;
+  }
+
+  // Interleaved updates are stored on a separate queue.
+  // We aren't going to process them during this render,
+  // but we do need to track which lanes are remaining.
+  const lastInterleaved = queue.interleaved;
+
+  if (lastInterleaved !== null) {
+    let interleaved = lastInterleaved;
+
+    do {
+      const interleavedLane = interleaved.lane;
+      currentlyRenderingFiber.lanes = mergeLanes(
+        currentlyRenderingFiber.lanes,
+        interleavedLane
+      );
+      markSkippedUpdateLanes(interleavedLane);
+      interleaved = interleaved.next;
+    } while (interleaved !== lastInterleaved);
+  } else if (baseQueue === null) {
+    // `queue.lanes` is used for entangling transitions.
+    // We can set it back to zero once the queue is empty.
+    queue.lanes = NoLanes;
+  }
+
+  // Return Hook state and dispatch action.
+  const dispatch: Dispatch<A> = queue.dispatch;
+  return [hook.memoizedState, dispatch];
+}
+```
+
 #### UseReducer Hooks Usage
 
 Use useState if:
@@ -4413,6 +4637,26 @@ Use useReducer if:
 - for a medium size application
 - for easier testing
 - for more predictable and maintainable state architecture
+
+```js
+function App() {
+  const [state, dispatch] = useState({ count: 0 });
+
+  // 等价于
+  const [state, dispatch] = useReducer(
+    function basicStateReducer(state, action) {
+      return typeof action === 'function' ? action(state) : action;
+    },
+    { count: 0 }
+  );
+
+  // 当需要更新 state 时, 有 2 种方式:
+  // 1. 直接设置:
+  dispatch({ count: 1 });
+  // 2.通过回调函数设置:
+  dispatch(state => ({ count: state.count + 1 }));
+}
+```
 
 ```jsx
 const insertToHistory = state => {
@@ -4507,7 +4751,6 @@ function updateMemo<T>(
 ```
 
 #### UseMemo Hooks Usage
-
 
 ```jsx
 const Button = ({ color, children }) => {
