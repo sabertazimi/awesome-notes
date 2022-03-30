@@ -2532,12 +2532,13 @@ if there’s any pending call back waiting to be executed:
 
 - ES6 job queue: used by `Promises` (higher priority)
 - Message queue: used by `setTimeout`, `DOM events`
-- 微任务 Microtask，有特权, 可以插队:
+- 微任务 Microtask (Jobs)，有特权, 可以插队:
   - `process.nextTick`.
   - `Promises.then` (Promise 构造函数是同步函数).
   - `Object.observer`, `MutationObserver`.
   - `catch finally`.
-- 宏任务 Macrotask，没有特权:
+- 宏任务 Macrotask (Tasks)，没有特权:
+  - `scripts`: 整体脚本视作一个宏任务.
   - `setImmediate`, `I/O`.
   - `setTimeout`, `setInterval`.
   - `MessageChannel`, `postMessage`.
@@ -2552,7 +2553,9 @@ if there’s any pending call back waiting to be executed:
   那么执行完该宏任务就会去执行宏任务内的所有微任务, 然后更新 UI.
   后面就是再从任务队列中取出下一个宏任务来继续执行, 以此类推.
 
-> 宏任务队列取宏任务 -> 执行 1 个宏任务 -> 检查微任务队列并执行所有微任务 -> 浏览器渲染 -> 宏任务队列
+:::tip Event Loop
+宏任务队列取宏任务 -> 执行 1 个宏任务 -> 检查微任务队列并执行所有微任务 -> 浏览器渲染 -> 宏任务队列取宏任务
+:::
 
 ```js
 for (let ii = 0; ii < macrotask.length; ii++) {
