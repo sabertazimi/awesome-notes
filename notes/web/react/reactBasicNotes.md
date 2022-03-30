@@ -3817,7 +3817,7 @@ type HookType =
   | 'useCacheRefresh';
 ```
 
-#### Hooks Memoized State
+### Hooks Memoized State
 
 | Hooks       | Memoized State                                 |
 | ----------- | ---------------------------------------------- |
@@ -3906,7 +3906,7 @@ function updateWorkInProgressHook(): Hook {
 }
 ```
 
-#### Minimal Hooks Implementation
+### Minimal Hooks Implementation
 
 ```js
 const MyReact = (function () {
