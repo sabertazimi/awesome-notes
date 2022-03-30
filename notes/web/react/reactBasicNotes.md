@@ -5016,8 +5016,6 @@ export { CountProvider, useCount };
 
 #### UseEffect Hooks Dispatcher
 
-Circular effect list:
-
 ```js
 function mountEffect(fiberFlags, hookFlags, create, deps) {
   const hook = mountWorkInProgressHook();
@@ -5290,13 +5288,40 @@ class Counter {
 
 ### UseLayoutEffect Hook
 
-`useLayoutEffect` callback called **synchronously**
-(fires synchronously after all DOM mutations),
-substitute for `componentDidMount` lifecycle function.
-`useEffect` got invoked after `componentDidMount`.
+- `useLayoutEffect` callback called **synchronously**
+  (fires synchronously after all DOM mutations),
+  substitute for `componentDidMount` lifecycle function:
+  `Update` effect flags.
+- `useEffect` got invoked after `componentDidMount` **asynchronously**:
+  `Update | Passive` effect flags.
+- If need to mutate the DOM or do need to perform DOM measurements,
+  `useLayoutEffect` is better than `useEffect`.
 
-If need to mutate the DOM or do need to perform DOM measurements,
-`useLayoutEffect` is better than `useEffect`.
+```ts
+function mountEffect(
+  create: () => (() => void) | void,
+  deps: Array<mixed> | void | null
+): void {
+  return mountEffectImpl(
+    UpdateEffect | PassiveEffect, // Fiber Flags
+    HookPassive, // Hook Flags
+    create,
+    deps
+  );
+}
+
+function mountLayoutEffect(
+  create: () => (() => void) | void,
+  deps: Array<mixed> | void | null
+): void {
+  return mountEffectImpl(
+    UpdateEffect, // Fiber Flags
+    HookLayout, // Hook Flags
+    create,
+    deps
+  );
+}
+```
 
 ### UseInsertionEffect Hook
 
