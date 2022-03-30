@@ -3831,11 +3831,248 @@ type HookType =
 | useState    | `state`                                        |
 | useEffect   | `effect: { tag, create, destroy, deps, next }` |
 
-#### WorkInProgress Hook
+### Hooks Workflow
+
+- `Reconciler.Render`/`Reconciler.Update`:
+  `performUnitOfWork` -> `beginWork` -> `updateFunctionComponent`
+  -> `renderWithHooks` -> `mountXXX`/`updateXXX`/`rerenderXXX`
+  -> `reconcileChildren`.
+- `Reconciler.Commit`:
+  `commitHooksListMount` -> `commitHooksListUnmount`.
+- `FunctionComponent` Fiber: `fiber.memoizedState` 指向第一个 `Hook`.
+- `renderWithHooks`:
+  - `HooksDispatcherOnMount`: `mountXXX`.
+  - `HooksDispatcherOnUpdate`: `updateXXX`.
+  - `HooksDispatcherOnRerender`: `updateXXX`/`rerenderXXX`.
+- **`mountXXX`**: `mountWorkInProgressHook` -> respective mount logic.
+- **`updateXXX`**: `updateWorkInProgressHook` -> respective update logic.
+
+[ReactReconciler/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
+
+```ts
+function beginWork(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  renderLanes: Lanes
+): Fiber | null {
+  const updateLanes = workInProgress.lanes;
+
+  switch (workInProgress.tag) {
+    case FunctionComponent: {
+      const Component = workInProgress.type;
+      const unresolvedProps = workInProgress.pendingProps;
+      const resolvedProps =
+        workInProgress.elementType === Component
+          ? unresolvedProps
+          : resolveDefaultProps(Component, unresolvedProps);
+      return updateFunctionComponent(
+        current,
+        workInProgress,
+        Component,
+        resolvedProps,
+        renderLanes
+      );
+    }
+  }
+}
+
+function updateFunctionComponent(
+  current,
+  workInProgress,
+  Component,
+  nextProps: any,
+  renderLanes
+) {
+  const context = prepareToReadContext(workInProgress, renderLanes);
+
+  // 进入 Hooks 相关逻辑, 最后返回下级 ReactElement 对象.
+  const nextChildren = renderWithHooks(
+    current,
+    workInProgress,
+    Component,
+    nextProps,
+    context,
+    renderLanes
+  );
+
+  const hasId = checkDidRenderIdHook();
+
+  if (current !== null && !didReceiveUpdate) {
+    bailoutHooks(current, workInProgress, renderLanes);
+    return bailoutOnAlreadyFinishedWork(current, workInProgress, renderLanes);
+  }
+
+  if (getIsHydrating() && hasId) {
+    pushMaterializedTreeId(workInProgress);
+  }
+
+  // React DevTools reads this flag.
+  workInProgress.flags |= PerformedWork;
+
+  // 进入 Reconcile 函数, 生成下级 Fiber 节点.
+  reconcileChildren(current, workInProgress, nextChildren, renderLanes);
+  // 返回下级 Fiber 节点.
+  return workInProgress.child;
+}
+```
 
 [ReactReconciler/ReactFiberHooks](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js):
 
 ```ts
+// 渲染优先级.
+let renderLanes: Lanes = NoLanes;
+
+// 当前正在构造的 Fiber, 等同于 workInProgress.
+let currentlyRenderingFiber: Fiber = null;
+
+// Hooks 链表被存储在 fiber.memoizedState:
+// currentHook = fiber(current).memoizedState.
+let currentHook: Hook | null = null;
+// workInProgressHook = fiber(workInProgress).memoizedState.
+let workInProgressHook: Hook | null = null;
+
+// 在 FunctionComponent 的执行过程中, 是否再次发起了更新.
+// 只有 FunctionComponent 被完全执行之后才会重置.
+// 当 render 异常时, 通过该变量可以决定是否清除 render 过程中的更新.
+let didScheduleRenderPhaseUpdate = false;
+
+// 在本次 FunctionComponent 的执行过程中, 是否再次发起了更新.
+// 每一次调用 FunctionComponent 都会被重置.
+let didScheduleRenderPhaseUpdateDuringThisPass = false;
+
+// 在本次 FunctionComponent 的执行过程中, 重新发起更新的最大次数.
+const RE_RENDER_LIMIT = 25;
+
+export function renderWithHooks<Props, SecondArg>(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  Component: (p: Props, arg: SecondArg) => any,
+  props: Props,
+  secondArg: SecondArg,
+  nextRenderLanes: Lanes
+): any {
+  // Store context.
+  renderLanes = nextRenderLanes;
+  currentlyRenderingFiber = workInProgress;
+
+  workInProgress.memoizedState = null;
+  workInProgress.updateQueue = null;
+  workInProgress.lanes = NoLanes;
+
+  // Mount or Update hooks dispatcher.
+  ReactCurrentDispatcher.current =
+    current === null || current.memoizedState === null
+      ? HooksDispatcherOnMount
+      : HooksDispatcherOnUpdate;
+
+  // 执行 FunctionComponent 函数, 执行 `useXXX`.
+  let children = Component(props, secondArg);
+
+  // Check if there was a render phase update
+  if (didScheduleRenderPhaseUpdateDuringThisPass) {
+    // Keep rendering in a loop for as long as render phase updates continue.
+    // Use a counter to prevent infinite loops.
+    let numberOfReRenders = 0;
+
+    do {
+      didScheduleRenderPhaseUpdateDuringThisPass = false;
+      localIdCounter = 0;
+
+      if (numberOfReRenders >= RE_RENDER_LIMIT) {
+        throw new Error(
+          'Too many re-renders. React limits the number of renders to prevent ' +
+            'an infinite loop.'
+        );
+      }
+
+      numberOfReRenders += 1;
+
+      // Start over from the beginning of the list
+      currentHook = null;
+      workInProgressHook = null;
+      workInProgress.updateQueue = null;
+      // Rerender hooks dispatcher.
+      ReactCurrentDispatcher.current = HooksDispatcherOnRerender;
+
+      children = Component(props, secondArg);
+    } while (didScheduleRenderPhaseUpdateDuringThisPass);
+  }
+
+  // Restore context.
+  ReactCurrentDispatcher.current = ContextOnlyDispatcher;
+  renderLanes = NoLanes;
+  currentlyRenderingFiber = null;
+  currentHook = null;
+  workInProgressHook = null;
+  didScheduleRenderPhaseUpdate = false;
+
+  return children;
+}
+
+const HooksDispatcherOnMount: Dispatcher = {
+  useCallback: mountCallback,
+  useContext: readContext,
+  useEffect: mountEffect,
+  useImperativeHandle: mountImperativeHandle,
+  useLayoutEffect: mountLayoutEffect,
+  useInsertionEffect: mountInsertionEffect,
+  useMemo: mountMemo,
+  useReducer: mountReducer,
+  useRef: mountRef,
+  useState: mountState,
+  useDebugValue: mountDebugValue,
+  useDeferredValue: mountDeferredValue,
+  useTransition: mountTransition,
+  useMutableSource: mountMutableSource,
+  useSyncExternalStore: mountSyncExternalStore,
+  useId: mountId,
+  unstable_isNewReconciler: enableNewReconciler,
+  readContext,
+};
+
+const HooksDispatcherOnUpdate: Dispatcher = {
+  useCallback: updateCallback,
+  useContext: readContext,
+  useEffect: updateEffect,
+  useImperativeHandle: updateImperativeHandle,
+  useInsertionEffect: updateInsertionEffect,
+  useLayoutEffect: updateLayoutEffect,
+  useMemo: updateMemo,
+  useReducer: updateReducer,
+  useRef: updateRef,
+  useState: updateState,
+  useDebugValue: updateDebugValue,
+  useDeferredValue: updateDeferredValue,
+  useTransition: updateTransition,
+  useMutableSource: updateMutableSource,
+  useSyncExternalStore: updateSyncExternalStore,
+  useId: updateId,
+  unstable_isNewReconciler: enableNewReconciler,
+  readContext,
+};
+
+const HooksDispatcherOnRerender: Dispatcher = {
+  useCallback: updateCallback,
+  useContext: readContext,
+  useEffect: updateEffect,
+  useImperativeHandle: updateImperativeHandle,
+  useInsertionEffect: updateInsertionEffect,
+  useLayoutEffect: updateLayoutEffect,
+  useMemo: updateMemo,
+  useReducer: rerenderReducer,
+  useRef: updateRef,
+  useState: rerenderState,
+  useDebugValue: updateDebugValue,
+  useDeferredValue: rerenderDeferredValue,
+  useTransition: rerenderTransition,
+  useMutableSource: updateMutableSource,
+  useSyncExternalStore: updateSyncExternalStore,
+  useId: updateId,
+  unstable_isNewReconciler: enableNewReconciler,
+  readContext,
+};
+
+// 创建 Hook, 挂载到 Hooks 链表.
 function mountWorkInProgressHook(): Hook {
   // hook 实例
   const hook: Hook = {
@@ -3857,6 +4094,7 @@ function mountWorkInProgressHook(): Hook {
   return workInProgressHook;
 }
 
+// 移动 Hooks 链表指针, 获取 workInProgressHook.
 function updateWorkInProgressHook(): Hook {
   let nextCurrentHook: Hook | null;
   let nextWorkInProgressHook: Hook | null;
