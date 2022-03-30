@@ -482,6 +482,7 @@ tags: [Web, Framework, Library]
 - [Plotly.js: Charting Library behind Plotly and Dash](https://github.com/plotly/plotly.js)
 - [JSXGraph: Interactive Geometry, Function Plotting, Charting and Data Visualization in Browser](https://github.com/jsxgraph/jsxgraph)
 - [Cytoscape.js: Graph Theory (Network) Library for Visualization and Analysis](https://github.com/cytoscape/cytoscape.js)
+- [Airbnb: Visualization Components](https://github.com/airbnb/visx)
 
 ### Charts Draw Utils
 
