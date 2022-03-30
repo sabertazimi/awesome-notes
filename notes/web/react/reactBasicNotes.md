@@ -1678,8 +1678,10 @@ function dispatchAction<S, A>(
 - **beginWork**:
   - 若判断当前 Fiber 节点无需更新, 调用 `bailoutOnAlreadyFinishedWork` 循环检测子节点是否需要更新:
     - `instance.shouldComponentUpdate() === false`.
-    - compare `fiber.pendingProps` (newProps) and `fiber.memoizedProps`.
-    - compare `fiber.lanes` and `renderLanes`.
+    - `workInProgress.pendingProps === current.memoizedProps`.
+    - `hasLegacyContextChange() === false`.
+    - `checkIfContextChanged(fiber.dependencies) === false`.
+    - `includesSomeLane(fiber.lanes, renderLanes) === false`.
   - 若判断当前 Fiber 节点需要更新, 调用 `UpdateXXXComponent` 进行更新.
 - **bailoutOnAlreadyFinishedWork**:
   - 若 `includesSomeLane(renderLanes, workInProgress.childLanes) === false`
@@ -1705,6 +1707,7 @@ function markUpdateLaneFromFiberToRoot(
   // 设置 sourceFiber.lanes.
   sourceFiber.lanes = mergeLanes(sourceFiber.lanes, lane);
   let alternate = sourceFiber.alternate;
+
   if (alternate !== null) {
     // 同时设置 sourceFiber.alternate.lanes.
     alternate.lanes = mergeLanes(alternate.lanes, lane);
@@ -1718,9 +1721,11 @@ function markUpdateLaneFromFiberToRoot(
   while (parent !== null) {
     parent.childLanes = mergeLanes(parent.childLanes, lane);
     alternate = parent.alternate;
+
     if (alternate !== null) {
       alternate.childLanes = mergeLanes(alternate.childLanes, lane);
     }
+
     node = parent;
     parent = parent.return;
   }
