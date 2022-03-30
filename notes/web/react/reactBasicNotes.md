@@ -8737,10 +8737,13 @@ Prevent useless re-rendering:
   ([Before You Memo](https://overreacted.io/before-you-memo/)),
   可以从不变的部分里分割出变化的部分.
   通过将变化部分的 `state` 向下移动从而抽象出变化的子组件,
-  或者将变化内容提升到父组件从而将不变部分独立出来:
+  或者将**变化内容**提升到父组件从而将不变部分独立出来:
 
 ```jsx
 // BAD
+// When <App> re-rendering, <ExpensiveTree> will re-rendering:
+// <ExpensiveTree /> is actually <ExpensiveTree props={}>.
+// Every time <App> re-rendering will pass a new `{}` reference to <ExpensiveTree>.
 import { useState } from 'react';
 
 export default function App() {
@@ -8765,6 +8768,7 @@ function ExpensiveTree() {
 
 ```jsx
 // GOOD
+// <ExpensiveTree> will not re-rendering.
 export default function App() {
   return (
     <>
@@ -8787,6 +8791,7 @@ function Form() {
 
 ```jsx
 // GOOD
+// <ExpensiveTree> will not re-rendering.
 export default function App() {
   return (
     <ColorPicker>
