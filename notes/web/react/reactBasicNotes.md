@@ -8734,10 +8734,10 @@ Prevent useless re-rendering:
 - Memorized values.
 - Memorized event handlers.
 - 在用 `memo` 或者 `useMemo` 做优化前
-  ([Before You Memo](https://overreacted.io/before-you-memo/)),
+  ([Before You Memo](https://overreacted.io/before-you-memo)),
   可以从不变的部分里分割出变化的部分.
   通过将变化部分的 `state` 向下移动从而抽象出变化的子组件,
-  或者将**变化内容**提升到父组件从而将不变部分独立出来:
+  或者将**变化内容提升** (**Lift Up**) 到父组件从而将不变部分独立出来:
 
 ```jsx
 // BAD
@@ -8837,6 +8837,18 @@ const clickHandler = () => dispatchEvent();
 
 function App(items) {
   return <BigListComponent onClick={clickHandler} />;
+}
+```
+
+```jsx
+function Parent({ children, lastChild }) {
+  return (
+    <div className="parent">
+      <ChildA /> {/* Only ChildA gets re-rendered */}
+      {children} {/* Bailed out */}
+      {lastChild} {/* Bailed out */}
+    </div>
+  );
 }
 ```
 
