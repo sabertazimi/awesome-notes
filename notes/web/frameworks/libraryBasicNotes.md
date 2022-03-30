@@ -494,6 +494,10 @@ tags: [Web, Framework, Library]
 - [Impress: Prezi-like Presentation Slides](https://github.com/impress/impress.js)
 - [PPTX: TypeScript PowerPoint Presentations](https://github.com/gitbrent/PptxGenJS)
 
+### Picker
+
+- [React Roulette](https://github.com/effectussoftware/react-custom-roulette)
+
 ### iFrame
 
 - [Postmate](https://github.com/dollarshaveclub/postmate)
