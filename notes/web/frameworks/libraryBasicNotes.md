@@ -323,6 +323,7 @@ tags: [Web, Framework, Library]
 - [Clippy: Clip-path Editor](https://github.com/bennettfeely/Clippy)
 - [Fancy Border Radius](https://github.com/9elements/fancy-border-radius)
 - [React CSS Shape](https://github.com/ashutosh1919/react-awesome-shapes)
+- [CSSGenerators: Generate Borders, Corners, Dividers and Shapes](https://css-generators.com)
 
 ## Components
 
