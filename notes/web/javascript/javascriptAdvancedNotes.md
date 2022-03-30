@@ -2552,6 +2552,7 @@ if there’s any pending call back waiting to be executed:
   当 JS 引擎从任务队列中取出一个宏任务来执行, 如果执行过程中有遇到微任务,
   那么执行完该宏任务就会去执行宏任务内的所有微任务, 然后更新 UI.
   后面就是再从任务队列中取出下一个宏任务来继续执行, 以此类推.
+- Event Loop 与 Call Stack 有且仅有一个, Task/Job/Message Queue 可以有多个.
 
 :::tip Event Loop
 宏任务队列取宏任务 -> 执行 1 个宏任务 -> 检查微任务队列并执行所有微任务 -> 浏览器渲染 -> 宏任务队列取宏任务
