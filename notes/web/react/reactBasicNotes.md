@@ -3886,7 +3886,13 @@ type HookType =
   -> `renderWithHooks` -> `mountXXX`/`updateXXX`/`rerenderXXX`
   -> `reconcileChildren`.
 - `Reconciler.Commit`:
-  `commitWork`/`commitLifeCycles` -> `commitHooksEffectListMount`/`commitHooksEffectListUnmount`.
+  - `Update` layout effect (`useLayoutEffect`):
+    - `Mutation` phase: `commitWork` -> `commitHooKEffectListUnmount` -> `effect.destroy`.
+    - `Layout` phase: `commitLifeCycles` -> `commitHookEffectListMount` -> `effect.create`.
+  - `Update | Passive` passive effect (`useEffect`):
+    - `Layout` phase: `commitLifeCycles` -> `schedulePassiveEffects`, 收集 Effects.
+    - `scheduleCallback` -> `flushPassiveEffects` -> `effect.destroy` -> `effect.create`.
+  - 只有 `effect.tag` 包含 `HasEffect` 时才会调用 `effect.destroy` 和 `effect.create`.
 - `FunctionComponent` Fiber: `fiber.memoizedState` 指向第一个 `Hook`.
 - `renderWithHooks`:
   - `HooksDispatcherOnMount`: `mountXXX`.
