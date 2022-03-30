@@ -1070,7 +1070,7 @@ Reconciler construct Fiber tree:
     - 执行 `render` 方法, 获取下级 `ReactElement`.
     - 设置 `fiber.flags`, 标记副作用.
   - FunctionComponent:
-    - 执行 `FunctionComponent()`, 获取下级 `ReactElement`.
+    - 执行 `renderWithHooks()` -> `FunctionComponent()`, 获取下级 `ReactElement`.
     - 设置 `fiber.flags`, 标记副作用.
   - HostComponent.
     - `pendingProps.children` 作为下级 `ReactElement`.
