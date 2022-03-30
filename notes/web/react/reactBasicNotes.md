@@ -3605,8 +3605,302 @@ export default RadioImageForm;
 
 ## React Synthetic Events
 
-- React 16: delegate events handlers on `document` node.
-- React 17: delegate events handlers on `app` root node.
+- Events Delegation:
+  - React 16: delegate events handlers on `document` DOM node.
+  - React 17: delegate events handlers on `app` root DOM node.
+- Events Dispatching: dispatch native events to `React.onXXX` handlers by `SyntheticEvent`.
+  - 收集监听器: `const listeners = accumulateSinglePhaseListeners(targetFiber, eventName)`.
+  - 派发合成事件: `dispatchQueue.push({ new SyntheticEvent(eventName), listeners })`.
+  - 执行派发:
+    `processDispatchQueue(dispatchQueue, eventSystemFlags)`
+    -> `executeDispatch(event, listener, currentTarget)`.
+  - Capture event: 从上至下调用 Fiber 树中绑定的回调函数.
+  - Bubble event: 从下至上调用 Fiber 树中绑定的回调函数.
+
+[![React Synthetic Events](./figures/ReactSyntheticEvents.png)](https://7kms.github.io/react-illustration-series/main/synthetic-event)
+
+[react-dom/src/events/DOMPluginEventSystem](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/DOMPluginEventSystem.js):
+
+```ts
+function listenToAllSupportedEvents(rootContainerElement: EventTarget) {
+  if (enableEagerRootListeners) {
+    // 1. 节流优化, 保证全局注册只被调用一次.
+    if (rootContainerElement[listeningMarker]) {
+      return;
+    }
+
+    rootContainerElement[listeningMarker] = true;
+
+    // 2. 遍历 allNativeEvents 监听冒泡和捕获阶段的事件.
+    allNativeEvents.forEach(domEventName => {
+      if (!nonDelegatedEvents.has(domEventName)) {
+        listenToNativeEvent(
+          domEventName,
+          false, // 冒泡阶段监听.
+          rootContainerElement,
+          null
+        );
+      }
+
+      listenToNativeEvent(
+        domEventName,
+        true, // 捕获阶段监听.
+        rootContainerElement,
+        null
+      );
+    });
+  }
+}
+
+function listenToNativeEvent(
+  domEventName: DOMEventName,
+  isCapturePhaseListener: boolean,
+  rootContainerElement: EventTarget,
+  targetElement: Element | null,
+  eventSystemFlags?: EventSystemFlags = 0
+): void {
+  const target = rootContainerElement;
+  const listenerSet = getEventListenerSet(target);
+  const listenerSetKey = getListenerSetKey(
+    domEventName,
+    isCapturePhaseListener
+  );
+
+  // 利用 Set 数据结构, 保证相同的事件类型只会被注册一次.
+  if (!listenerSet.has(listenerSetKey)) {
+    if (isCapturePhaseListener) {
+      eventSystemFlags |= IS_CAPTURE_PHASE;
+    }
+
+    // 注册事件监听.
+    addTrappedEventListener(
+      target,
+      domEventName,
+      eventSystemFlags,
+      isCapturePhaseListener
+    );
+    listenerSet.add(listenerSetKey);
+  }
+}
+
+function addTrappedEventListener(
+  targetContainer: EventTarget,
+  domEventName: DOMEventName,
+  eventSystemFlags: EventSystemFlags,
+  isCapturePhaseListener: boolean,
+  isDeferredListenerForLegacyFBSupport?: boolean
+) {
+  // 1. 构造 listener.
+  const listener = createEventListenerWrapperWithPriority(
+    targetContainer,
+    domEventName,
+    eventSystemFlags
+  );
+
+  // 2. 注册事件监听.
+  let unsubscribeListener;
+
+  if (isCapturePhaseListener) {
+    unsubscribeListener = addEventCaptureListener(
+      targetContainer,
+      domEventName,
+      listener
+    );
+  } else {
+    unsubscribeListener = addEventBubbleListener(
+      targetContainer,
+      domEventName,
+      listener
+    );
+  }
+}
+
+// 注册原生冒泡事件.
+function addEventBubbleListener(
+  target: EventTarget,
+  eventType: string,
+  listener: Function
+): Function {
+  target.addEventListener(eventType, listener, false);
+  return listener;
+}
+
+// 注册原生捕获事件.
+function addEventCaptureListener(
+  target: EventTarget,
+  eventType: string,
+  listener: Function
+): Function {
+  target.addEventListener(eventType, listener, true);
+  return listener;
+}
+```
+
+[react-dom/src/events/ReactDOMEventListener](https://github.com/facebook/react/blob/main/packages/react-dom/src/events/ReactDOMEventListener.js):
+
+```ts
+// 派发原生事件至 React.onXXX.
+function createEventListenerWrapperWithPriority(
+  targetContainer: EventTarget,
+  domEventName: DOMEventName,
+  eventSystemFlags: EventSystemFlags
+): Function {
+  // 1. 根据优先级设置 listenerWrapper.
+  const eventPriority = getEventPriorityForPluginSystem(domEventName);
+  let listenerWrapper;
+
+  switch (eventPriority) {
+    case DiscreteEvent:
+      listenerWrapper = dispatchDiscreteEvent;
+      break;
+    case UserBlockingEvent:
+      listenerWrapper = dispatchUserBlockingUpdate;
+      break;
+    case ContinuousEvent:
+    default:
+      listenerWrapper = dispatchEvent;
+      break;
+  }
+
+  // 2. 返回 listenerWrapper.
+  return listenerWrapper.bind(
+    null,
+    domEventName,
+    eventSystemFlags,
+    targetContainer
+  );
+}
+
+function dispatchDiscreteEvent(
+  domEventName,
+  eventSystemFlags,
+  container,
+  nativeEvent
+) {
+  const previousPriority = getCurrentUpdatePriority();
+  const prevTransition = ReactCurrentBatchConfig.transition;
+  ReactCurrentBatchConfig.transition = null;
+
+  try {
+    setCurrentUpdatePriority(DiscreteEventPriority);
+    dispatchEvent(domEventName, eventSystemFlags, container, nativeEvent);
+  } finally {
+    setCurrentUpdatePriority(previousPriority);
+    ReactCurrentBatchConfig.transition = prevTransition;
+  }
+}
+
+function dispatchContinuousEvent(
+  domEventName,
+  eventSystemFlags,
+  container,
+  nativeEvent
+) {
+  const previousPriority = getCurrentUpdatePriority();
+  const prevTransition = ReactCurrentBatchConfig.transition;
+  ReactCurrentBatchConfig.transition = null;
+
+  try {
+    setCurrentUpdatePriority(ContinuousEventPriority);
+    dispatchEvent(domEventName, eventSystemFlags, container, nativeEvent);
+  } finally {
+    setCurrentUpdatePriority(previousPriority);
+    ReactCurrentBatchConfig.transition = prevTransition;
+  }
+}
+
+function dispatchEvent(
+  domEventName: DOMEventName,
+  eventSystemFlags: EventSystemFlags,
+  targetContainer: EventTarget,
+  nativeEvent: AnyNativeEvent
+) {
+  let blockedOn = findInstanceBlockingEvent(
+    domEventName,
+    eventSystemFlags,
+    targetContainer,
+    nativeEvent
+  );
+
+  if (blockedOn === null) {
+    dispatchEventForPluginEventSystem(
+      domEventName,
+      eventSystemFlags,
+      nativeEvent,
+      return_targetInst,
+      targetContainer
+    );
+    clearIfContinuousEvent(domEventName, nativeEvent);
+    return;
+  }
+
+  if (
+    queueIfContinuousEvent(
+      blockedOn,
+      domEventName,
+      eventSystemFlags,
+      targetContainer,
+      nativeEvent
+    )
+  ) {
+    nativeEvent.stopPropagation();
+    return;
+  }
+
+  // We need to clear only if we didn't queue because queueing is accumulative.
+  clearIfContinuousEvent(domEventName, nativeEvent);
+
+  if (
+    eventSystemFlags & IS_CAPTURE_PHASE &&
+    isDiscreteEventThatRequiresHydration(domEventName)
+  ) {
+    while (blockedOn !== null) {
+      const fiber = getInstanceFromNode(blockedOn);
+
+      if (fiber !== null) {
+        attemptSynchronousHydration(fiber);
+      }
+
+      const nextBlockedOn = findInstanceBlockingEvent(
+        domEventName,
+        eventSystemFlags,
+        targetContainer,
+        nativeEvent
+      );
+
+      if (nextBlockedOn === null) {
+        dispatchEventForPluginEventSystem(
+          domEventName,
+          eventSystemFlags,
+          nativeEvent,
+          return_targetInst,
+          targetContainer
+        );
+      }
+
+      if (nextBlockedOn === blockedOn) {
+        break;
+      }
+
+      blockedOn = nextBlockedOn;
+    }
+
+    if (blockedOn !== null) {
+      nativeEvent.stopPropagation();
+    }
+
+    return;
+  }
+
+  dispatchEventForPluginEventSystem(
+    domEventName,
+    eventSystemFlags,
+    nativeEvent,
+    null,
+    targetContainer
+  );
+}
+```
 
 ## React Reusability Patterns
 
@@ -5060,6 +5354,175 @@ function User() {
   - Use `useMemo`/`useCallback` to **memorize values and functions**.
 - Context 中只定义被大多数组件所共用的属性,
   use context to avoid **Prop Drilling**.
+
+#### UseContext Hooks Dispatcher
+
+- `HooksDispatcherOnMount.useContext = readContext`.
+- `HooksDispatcherOnUpdate.useContext = readContext`.
+- `HooksDispatcherOnRerender.useContext = readContext`.
+
+```ts
+export function createContext<T>(
+  defaultValue: T,
+  calculateChangedBits: ?((a: T, b: T) => number)
+): ReactContext<T> {
+  if (calculateChangedBits === undefined) {
+    calculateChangedBits = null;
+  }
+
+  const context: ReactContext<T> = {
+    $$typeof: REACT_CONTEXT_TYPE,
+    _calculateChangedBits: calculateChangedBits,
+    _currentValue: defaultValue,
+    _currentValue2: defaultValue,
+    _threadCount: 0,
+    Provider: null,
+    Consumer: null,
+  };
+  context.Provider = {
+    $$typeof: REACT_PROVIDER_TYPE,
+    _context: context,
+  };
+  context.Consumer = context;
+  return context;
+}
+
+function beginWork(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  renderLanes: Lanes
+): Fiber | null {
+  const updateLanes = workInProgress.lanes;
+  workInProgress.lanes = NoLanes;
+
+  switch (workInProgress.tag) {
+    case ContextProvider:
+      return updateContextProvider(current, workInProgress, renderLanes);
+    case ContextConsumer:
+      return updateContextConsumer(current, workInProgress, renderLanes);
+  }
+}
+
+function updateContextProvider(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  renderLanes: Lanes
+) {
+  const providerType: ReactProviderType<any> = workInProgress.type;
+  const context: ReactContext<any> = providerType._context;
+
+  const newProps = workInProgress.pendingProps;
+  const oldProps = workInProgress.memoizedProps;
+  const newValue = newProps.value; // <Provider value={}>{children}</Provider>
+
+  // 更新 ContextProvider._currentValue:
+  // workInProgress.type._context._currentValue = newValue;
+  pushProvider(workInProgress, newValue);
+
+  if (oldProps !== null) {
+    // 更新阶段.
+    // 对比 newValue 和 oldValue
+    const oldValue = oldProps.value;
+    const changedBits = calculateChangedBits(context, newValue, oldValue);
+
+    if (changedBits === 0) {
+      // value 没有变动, 进入 Bailout 逻辑.
+      if (
+        oldProps.children === newProps.children &&
+        !hasLegacyContextChanged()
+      ) {
+        return bailoutOnAlreadyFinishedWork(
+          current,
+          workInProgress,
+          renderLanes
+        );
+      }
+    } else {
+      // value变动, 查找对应的 Consumers, 并使其能够被更新.
+      // 向下遍历:
+      // 从 ContextProvider 节点开始,
+      // 向下查找所有 fiber.dependencies 依赖该 context 的节点.
+      // 向上遍历:
+      // 从 ContextConsumer 节点开始,
+      // 向上遍历, 修改父路径上所有节点的 fiber.childLanes 属性, 表明其子节点有改动, 子节点会进入更新逻辑.
+      propagateContextChange(workInProgress, context, changedBits, renderLanes);
+    }
+  }
+
+  // 生成下级 Fiber.
+  const newChildren = newProps.children;
+  reconcileChildren(current, workInProgress, newChildren, renderLanes);
+  return workInProgress.child;
+}
+
+function updateContextConsumer(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  renderLanes: Lanes
+) {
+  const context: ReactContext<any> = workInProgress.type;
+  const newProps = workInProgress.pendingProps;
+  const render = newProps.children;
+
+  // 读取 context.
+  prepareToReadContext(workInProgress, renderLanes);
+  const newValue = readContext(context, newProps.unstable_observedBits);
+
+  // 生成下级 Fiber.
+  const newChildren = render(newValue);
+  reconcileChildren(current, workInProgress, newChildren, renderLanes);
+  return workInProgress.child;
+}
+
+function prepareToReadContext(workInProgress: Fiber, renderLanes: Lanes): void {
+  // Setup.
+  currentlyRenderingFiber = workInProgress;
+  lastContextDependency = null;
+  lastContextWithAllBitsObserved = null;
+  const dependencies = workInProgress.dependencies;
+
+  if (dependencies !== null) {
+    const firstContext = dependencies.firstContext;
+
+    if (firstContext !== null) {
+      if (includesSomeLane(dependencies.lanes, renderLanes)) {
+        // Context list has a pending update.
+        // Mark that this fiber performed work.
+        markWorkInProgressReceivedUpdate();
+      }
+
+      // Reset the work-in-progress list
+      dependencies.firstContext = null;
+    }
+  }
+}
+
+function readContext<T>(
+  context: ReactContext<T>,
+  observedBits: void | number | boolean
+): T {
+  const contextItem = {
+    context: context as ReactContext<mixed>,
+    observedBits: resolvedObservedBits,
+    next: null,
+  };
+
+  // 1. 构造一个 contextItem, 加入到 workInProgress.dependencies 链表.
+  if (lastContextDependency === null) {
+    lastContextDependency = contextItem;
+    currentlyRenderingFiber.dependencies = {
+      lanes: NoLanes,
+      firstContext: contextItem,
+      responders: null,
+    };
+  } else {
+    lastContextDependency = lastContextDependency.next = contextItem;
+  }
+
+  // 2. 返回 currentValue.
+  return isPrimaryRenderer ? context._currentValue : context._currentValue2;
+}
+```
 
 #### UseContext Hooks Usage
 
