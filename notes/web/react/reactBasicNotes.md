@@ -666,7 +666,8 @@ export interface Fiber {
   updateQueue: mixed; // Updates from diff(pendingProps, memoizedProps).
   memoizedState: any;
 
-  dependencies: Dependencies | null; // (contexts, events) deps.
+  // Context API.
+  dependencies: Dependencies | null; // (Contexts, Events) dependencies.
 
   mode: TypeOfMode; // NoMode/BlockingMode/ConcurrentMode bit.
 
