@@ -2189,6 +2189,54 @@ scheduleCallback(NormalSchedulerPriority, () => {
   flushPassiveEffects();
   return null;
 });
+
+function flushPassiveEffects(): boolean {
+  // Returns whether passive effects were flushed.
+  if (pendingPassiveEffectsRenderPriority !== NoSchedulerPriority) {
+    const priorityLevel =
+      pendingPassiveEffectsRenderPriority > NormalSchedulerPriority
+        ? NormalSchedulerPriority
+        : pendingPassiveEffectsRenderPriority;
+    pendingPassiveEffectsRenderPriority = NoSchedulerPriority;
+    return runWithPriority(priorityLevel, flushPassiveEffectsImpl);
+  }
+
+  return false;
+}
+
+function flushPassiveEffectsImpl() {
+  if (rootWithPendingPassiveEffects === null) {
+    return false;
+  }
+
+  rootWithPendingPassiveEffects = null;
+  pendingPassiveEffectsLanes = NoLanes;
+
+  // 1. 执行 effect.destroy().
+  const unmountEffects = pendingPassiveHookEffectsUnmount;
+  pendingPassiveHookEffectsUnmount = [];
+
+  for (let i = 0; i < unmountEffects.length; i += 2) {
+    const effect = unmountEffects[i];
+    const fiber = unmountEffects[i + 1];
+    const destroy = effect.destroy;
+    effect.destroy = undefined;
+
+    if (typeof destroy === 'function') {
+      destroy();
+    }
+  }
+
+  // 2. 执行新 effect.create(), 重新赋值到 effect.destroy.
+  const mountEffects = pendingPassiveHookEffectsMount;
+  pendingPassiveHookEffectsMount = [];
+
+  for (let i = 0; i < mountEffects.length; i += 2) {
+    const effect = mountEffects[i];
+    const fiber = mountEffects[i + 1];
+    effect.destroy = create();
+  }
+}
 ```
 
 ```ts
@@ -3838,7 +3886,7 @@ type HookType =
   -> `renderWithHooks` -> `mountXXX`/`updateXXX`/`rerenderXXX`
   -> `reconcileChildren`.
 - `Reconciler.Commit`:
-  `commitHooksListMount` -> `commitHooksListUnmount`.
+  `commitWork`/`commitLifeCycles` -> `commitHooksEffectListMount`/`commitHooksEffectListUnmount`.
 - `FunctionComponent` Fiber: `fiber.memoizedState` 指向第一个 `Hook`.
 - `renderWithHooks`:
   - `HooksDispatcherOnMount`: `mountXXX`.
@@ -4145,6 +4193,51 @@ function updateWorkInProgressHook(): Hook {
   }
 
   return workInProgressHook;
+}
+
+function commitHookEffectListMount(tag: number, finishedWork: Fiber) {
+  const updateQueue: FunctionComponentUpdateQueue | null =
+    finishedWork.updateQueue;
+  const lastEffect = updateQueue !== null ? updateQueue.lastEffect : null;
+
+  if (lastEffect !== null) {
+    const firstEffect = lastEffect.next;
+    let effect = firstEffect;
+
+    do {
+      if ((effect.tag & tag) === tag) {
+        const create = effect.create;
+        effect.destroy = create();
+      }
+
+      effect = effect.next;
+    } while (effect !== firstEffect);
+  }
+}
+
+function commitHookEffectListUnmount(tag: number, finishedWork: Fiber) {
+  const updateQueue: FunctionComponentUpdateQueue | null =
+    finishedWork.updateQueue;
+  const lastEffect = updateQueue !== null ? updateQueue.lastEffect : null;
+
+  if (lastEffect !== null) {
+    const firstEffect = lastEffect.next;
+    let effect = firstEffect;
+
+    do {
+      if ((effect.tag & tag) === tag) {
+        // 根据传入的 tag 过滤 Effects 链表.
+        const destroy = effect.destroy;
+        effect.destroy = undefined;
+
+        if (destroy !== undefined) {
+          destroy();
+        }
+      }
+
+      effect = effect.next;
+    } while (effect !== firstEffect);
+  }
 }
 ```
 
@@ -5017,19 +5110,38 @@ export { CountProvider, useCount };
 #### UseEffect Hooks Dispatcher
 
 ```js
-function mountEffect(fiberFlags, hookFlags, create, deps) {
+function mountEffect(
+  create: () => (() => void) | void,
+  deps: Array<mixed> | void | null
+): void {
+  return mountEffectImpl(
+    UpdateEffect | PassiveEffect,
+    HookPassive,
+    create,
+    deps
+  );
+}
+
+function mountEffectImpl(fiberFlags, hookFlags, create, deps) {
   const hook = mountWorkInProgressHook();
   const nextDeps = deps === undefined ? null : deps;
-  currentlyRenderingFiber.flags |= fiberFlags;
+  currentlyRenderingFiber.flags |= fiberFlags; // UpdateEffect | PassiveEffect.
   hook.memoizedState = pushEffect(
-    HasEffect | hookFlags,
+    HasEffect | hookFlags, // PassiveHook.
     create,
     undefined,
     nextDeps
   );
 }
 
-function updateEffect(fiberFlags, hookFlags, create, deps) {
+function updateEffect(
+  create: () => (() => void) | void,
+  deps: Array<mixed> | void | null
+): void {
+  return updateEffectImpl(PassiveEffect, HookPassive, create, deps);
+}
+
+function updateEffectImpl(fiberFlags, hookFlags, create, deps) {
   const hook = updateWorkInProgressHook();
   const nextDeps = deps === undefined ? null : deps;
   let destroy;
@@ -5042,12 +5154,16 @@ function updateEffect(fiberFlags, hookFlags, create, deps) {
       const prevDeps = prevEffect.deps;
 
       if (areHookInputsEqual(nextDeps, prevDeps)) {
+        // 如果依赖不变, 新建 Effect (tag 不含 HookHasEffect).
+        // Reconciler.Commit 阶段会跳过此 Effect.
         pushEffect(hookFlags, create, destroy, nextDeps);
         return;
       }
     }
   }
 
+  // 如果依赖改变, 更改 fiber.flags, 新建 Effect.
+  // Reconciler.Commit 阶段会再次执行此 Effect.
   currentlyRenderingFiber.flags |= fiberFlags;
   hook.memoizedState = pushEffect(
     HasEffect | hookFlags,
@@ -5060,9 +5176,9 @@ function updateEffect(fiberFlags, hookFlags, create, deps) {
 function pushEffect(tag, create, destroy, deps) {
   const effect = {
     tag,
-    create,
-    destroy,
-    deps,
+    create, // User code: effect callback.
+    destroy, // User code: destroy callback.
+    deps, // User code: deps list.
     next: null,
   };
 
@@ -5291,13 +5407,25 @@ class Counter {
 - `useLayoutEffect` callback called **synchronously**
   (fires synchronously after all DOM mutations),
   substitute for `componentDidMount` lifecycle function:
-  `Update` effect flags.
+  `Update` effect flags, `HasEffect | Layout` hook flags.
 - `useEffect` got invoked after `componentDidMount` **asynchronously**:
-  `Update | Passive` effect flags.
+  `Update | Passive` effect flags, `HasEffect | Passive` hook flags.
 - If need to mutate the DOM or do need to perform DOM measurements,
   `useLayoutEffect` is better than `useEffect`.
 
 ```ts
+function mountLayoutEffect(
+  create: () => (() => void) | void,
+  deps: Array<mixed> | void | null
+): void {
+  return mountEffectImpl(
+    UpdateEffect, // Fiber Flags
+    HookLayout, // Hook Flags
+    create,
+    deps
+  );
+}
+
 function mountEffect(
   create: () => (() => void) | void,
   deps: Array<mixed> | void | null
@@ -5310,16 +5438,18 @@ function mountEffect(
   );
 }
 
-function mountLayoutEffect(
+function updateLayoutEffect(
   create: () => (() => void) | void,
   deps: Array<mixed> | void | null
 ): void {
-  return mountEffectImpl(
-    UpdateEffect, // Fiber Flags
-    HookLayout, // Hook Flags
-    create,
-    deps
-  );
+  return updateEffectImpl(UpdateEffect, HookLayout, create, deps);
+}
+
+function updateEffect(
+  create: () => (() => void) | void,
+  deps: Array<mixed> | void | null
+): void {
+  return updateEffectImpl(PassiveEffect, HookPassive, create, deps);
 }
 ```
 
