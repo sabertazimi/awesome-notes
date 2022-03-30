@@ -588,6 +588,11 @@ tags: [Web, Framework, Library]
 - [TypeIt](https://github.com/alexmacarthur/typeit)
 - [Motto Animated Words](https://github.com/jrainlau/motto)
 
+### Hover Effect Animation
+
+- [Image Hover](http://imagehover.io)
+- [Hovering Button Effects](https://github.com/IanLunn/Hover)
+
 ### Loading Effect Animation
 
 #### Progress Bar
@@ -606,10 +611,9 @@ tags: [Web, Framework, Library]
 - [Epic Spinners](https://github.com/epicmaxco/epic-spinners)
 - [Loading IO](https://loading.io)
 
-### Hover Effect Animation
+### MicroInteraction Animation
 
-- [Image Hover](http://imagehover.io)
-- [Hovering Button Effects](https://github.com/IanLunn/Hover)
+- [ReactRewards](https://github.com/thedevelobear/react-rewards)
 
 ## Time Utils
 
