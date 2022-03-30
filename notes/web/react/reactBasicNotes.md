@@ -4260,6 +4260,10 @@ App = MyReact.render(Component);
   `setState(value + 1)` 与 `setState(value => value + 1)` 存在差异.
 - 当在 useEffect 中调用 setState 时, 最好使用 `setState(callback)` 形式,
   这样可以不用再 Deps List 中显式声明 state, 也可以避免一些 BUG.
+- `dispatchAction`:
+  - 创建 `Update` 对象.
+  - 将 Update 对象添加到 hook.queue.pending 队列.
+  - 根据 reducerEagerState 与 currentState, 决定是否发起新的 Reconciler 调度.
 
 #### UseState Hooks Dispatcher
 
@@ -4333,6 +4337,27 @@ function dispatchAction<S, A>(
     didScheduleRenderPhaseUpdateDuringThisPass = didScheduleRenderPhaseUpdate =
       true;
   } else {
+    if (
+      fiber.lanes === NoLanes &&
+      (alternate === null || alternate.lanes === NoLanes)
+    ) {
+      const lastRenderedReducer = queue.lastRenderedReducer;
+
+      if (lastRenderedReducer !== null) {
+        let prevDispatcher;
+        const currentState: S = queue.lastRenderedState;
+        const eagerState = lastRenderedReducer(currentState, action);
+        update.eagerReducer = lastRenderedReducer;
+        update.eagerState = eagerState;
+
+        // 若在 Render 阶段, reducerEagerState === currentState,
+        // 则可以无需再次计算状态, 跳过调度阶段, 后续直接使用 update.eagerState.
+        if (is(eagerState, currentState)) {
+          return;
+        }
+      }
+    }
+
     // 3. 发起调度更新, 进入 Reconciler.
     scheduleUpdateOnFiber(fiber, lane, eventTime);
   }
@@ -4477,6 +4502,7 @@ function updateReducer<S, I, A>(
   initialArg: I,
   init?: (I) => S
 ): [S, Dispatch<A>] {
+  // Get workInProgressHook.
   const hook = updateWorkInProgressHook();
   const queue = hook.queue;
   queue.lastRenderedReducer = reducer;
@@ -4487,6 +4513,7 @@ function updateReducer<S, I, A>(
   // The last pending update that hasn't been processed yet.
   const pendingQueue = queue.pending;
 
+  // Append hook.queue.pending to current.baseQueue.
   if (pendingQueue !== null) {
     // We have new updates that haven't been processed yet.
     // We'll add them to the base queue.
@@ -4502,6 +4529,7 @@ function updateReducer<S, I, A>(
     queue.pending = null;
   }
 
+  // Calculate Hook state.
   if (baseQueue !== null) {
     // We have a queue to process.
     const first = baseQueue.next;
@@ -4516,9 +4544,7 @@ function updateReducer<S, I, A>(
       const updateLane = update.lane;
 
       if (!isSubsetOfLanes(renderLanes, updateLane)) {
-        // Skip this update.
-        // If this is the first skipped update,
-        // the previous update/state is the new base update/state.
+        // 优先级不够: 加入到 baseQueue, 等待下一次 render.
         const clone: Update<S, A> = {
           lane: updateLane,
           action: update.action,
@@ -4541,8 +4567,10 @@ function updateReducer<S, I, A>(
         );
         markSkippedUpdateLanes(updateLane);
       } else {
-        // This update does have sufficient priority.
+        // This update does have sufficient priority (优先级足够).
+        // Merge state.
         if (newBaseQueueLast !== null) {
+          // Update baseQueue
           const clone: Update<S, A> = {
             lane: NoLane,
             action: update.action,
@@ -4555,10 +4583,12 @@ function updateReducer<S, I, A>(
 
         // Process this update.
         if (update.hasEagerState) {
+          // 性能优化:
           // If this update is a state update (not a reducer) and was processed eagerly,
           // we can use the eagerly computed state
           newState = update.eagerState;
         } else {
+          // 调用 Reducer 获取最新状态.
           const action = update.action;
           newState = reducer(newState, action);
         }
@@ -4579,33 +4609,11 @@ function updateReducer<S, I, A>(
       markWorkInProgressReceivedUpdate();
     }
 
+    // 把计算后结果更新到 workInProgressHook.
     hook.memoizedState = newState;
     hook.baseState = newBaseState;
     hook.baseQueue = newBaseQueueLast;
     queue.lastRenderedState = newState;
-  }
-
-  // Interleaved updates are stored on a separate queue.
-  // We aren't going to process them during this render,
-  // but we do need to track which lanes are remaining.
-  const lastInterleaved = queue.interleaved;
-
-  if (lastInterleaved !== null) {
-    let interleaved = lastInterleaved;
-
-    do {
-      const interleavedLane = interleaved.lane;
-      currentlyRenderingFiber.lanes = mergeLanes(
-        currentlyRenderingFiber.lanes,
-        interleavedLane
-      );
-      markSkippedUpdateLanes(interleavedLane);
-      interleaved = interleaved.next;
-    } while (interleaved !== lastInterleaved);
-  } else if (baseQueue === null) {
-    // `queue.lanes` is used for entangling transitions.
-    // We can set it back to zero once the queue is empty.
-    queue.lanes = NoLanes;
   }
 
   // Return Hook state and dispatch action.
