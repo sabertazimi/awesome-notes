@@ -2534,7 +2534,7 @@ if there’s any pending call back waiting to be executed:
 - Message queue: used by `setTimeout`, `DOM events`
 - 微任务 Microtask (Jobs)，有特权, 可以插队:
   - `process.nextTick`.
-  - `Promises.then` (Promise 构造函数是同步函数).
+  - `Promises.then` (**Promise 构造函数是同步函数**).
   - `Object.observer`, `MutationObserver`.
   - `catch finally`.
 - 宏任务 Macrotask (Tasks)，没有特权:
@@ -2578,6 +2578,9 @@ for (let ii = 0; ii < macrotask.length; ii++) {
 }
 ```
 
+Using `setTimeout` with `0` seconds timer
+helps to defer execution of `Promise` and `bar` until the **stack** is **empty**.
+
 ```js
 const bar = () => {
   console.log('bar');
@@ -2606,8 +2609,7 @@ foo();
 // bar
 ```
 
-As above code, using `setTimeout` with `0` seconds timer
-helps to defer execution of `Promise` and `bar` until the **stack** is **empty**.
+`process.nextTick()` run before `Promise.then()`:
 
 ```js
 console.log('1');
@@ -2643,7 +2645,7 @@ console.log('10');
 // 1 10 8 9 5 7 2 3 4 6
 ```
 
-Promise 构造函数本身是同步函数
+Promise 构造函数本身是同步函数:
 
 ```js
 console.log('script start');
@@ -2662,10 +2664,16 @@ setTimeout(function () {
 
 console.log('script end');
 
-// 输出顺序: script start->promise1->promise1 end->script end->promise2->setTimeout
+// 输出顺序:
+// script start
+// promise1
+// promise1 end
+// script end
+// promise2
+// setTimeout.
 ```
 
-`await a(); b()` 等价于 `Promise(a()).then(b())`: a 是同步执行, b 是 microtask
+`await a(); b()` 等价于 `Promise(a()).then(b())`: a 是同步执行, b 是 microtask:
 
 ```js
 async function async1() {
@@ -2694,19 +2702,18 @@ new Promise(function (resolve) {
 
 console.log('script end');
 
-/*
-script start
-async1 start
-async2
-promise1
-script end
-async1 end
-promise2
-setTimeout
-*/
+// script start
+// async1 start
+// async2
+// promise1
+// script end
+// async1 end
+// promise2
+// setTimeout
 ```
 
-当调用栈没有同步函数时, 直接执行任务队列里的函数
+当调用栈没有同步函数时, 清空 MicroTask 任务队列里的函数,
+再从 MacroTask 任务队列里取出一个函数执行 (第二次 Event Loop):
 
 ```js
 function test() {
@@ -2729,6 +2736,7 @@ function test() {
   Promise.resolve().then(() => {
     console.log('children1');
   });
+
   console.log('end');
 }
 
@@ -2759,6 +2767,109 @@ that is waiting for the result of that I/O operation.
 
 The Node.js execution model was designed to cater to the needs of most web servers,
 which tend to be **I/O-intensive** (due to non-blocking I/O).
+
+```js
+console.log('glob1');
+
+setTimeout(function () {
+  console.log('timeout1');
+  process.nextTick(function () {
+    console.log('timeout1_nextTick');
+  });
+  new Promise(function (resolve) {
+    console.log('timeout1_promise');
+    resolve();
+  }).then(function () {
+    console.log('timeout1_then');
+  });
+});
+
+setImmediate(function () {
+  console.log('immediate1');
+  process.nextTick(function () {
+    console.log('immediate1_nextTick');
+  });
+  new Promise(function (resolve) {
+    console.log('immediate1_promise');
+    resolve();
+  }).then(function () {
+    console.log('immediate1_then');
+  });
+});
+
+process.nextTick(function () {
+  console.log('glob1_nextTick');
+});
+new Promise(function (resolve) {
+  console.log('glob1_promise');
+  resolve();
+}).then(function () {
+  console.log('glob1_then');
+});
+
+setTimeout(function () {
+  console.log('timeout2');
+  process.nextTick(function () {
+    console.log('timeout2_nextTick');
+  });
+  new Promise(function (resolve) {
+    console.log('timeout2_promise');
+    resolve();
+  }).then(function () {
+    console.log('timeout2_then');
+  });
+});
+
+process.nextTick(function () {
+  console.log('glob2_nextTick');
+});
+new Promise(function (resolve) {
+  console.log('glob2_promise');
+  resolve();
+}).then(function () {
+  console.log('glob2_then');
+});
+
+setImmediate(function () {
+  console.log('immediate2');
+  process.nextTick(function () {
+    console.log('immediate2_nextTick');
+  });
+  new Promise(function (resolve) {
+    console.log('immediate2_promise');
+    resolve();
+  }).then(function () {
+    console.log('immediate2_then');
+  });
+});
+
+console.log('glob2');
+
+// glob1
+// glob1_promise
+// glob2_promise
+// glob2
+// glob1_nextTick
+// glob2_nextTick
+// glob1_then
+// glob2_then
+// timeout1
+// timeout1_promise
+// timeout1_nextTick
+// timeout1_then
+// timeout2
+// timeout2_promise
+// timeout2_nextTick
+// timeout2_then
+// immediate1
+// immediate1_promise
+// immediate1_nextTick
+// immediate1_then
+// immediate2
+// immediate2_promise
+// immediate2_nextTick
+// immediate2_then
+```
 
 ## V8 Good Parts
 
