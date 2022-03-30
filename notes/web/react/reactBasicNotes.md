@@ -4250,139 +4250,18 @@ App = MyReact.render(Component);
 // { text: [ 'www', 'reactjs', 'org' ] }}
 ```
 
-### UseMemo Hook
-
-- Returns a memoized value.
-- Only recompute the memoized value when one of the dependencies has changed.
-- **Shallow compare** diff.
-- **Optimization** helps to
-  avoid expensive calculations on every render
-  (avoid re-render problem):
-  - **Good use** for complex objects or expensive calculations.
-  - **Donn't use** for primitive values or simple calculations.
-
-```ts
-function mountMemo<T>(
-  nextCreate: () => T,
-  deps: Array<mixed> | void | null
-): T {
-  const hook = mountWorkInProgressHook();
-  const nextDeps = deps === undefined ? null : deps;
-  const nextValue = nextCreate();
-  hook.memoizedState = [nextValue, nextDeps];
-  return nextValue;
-}
-
-function updateMemo<T>(
-  nextCreate: () => T,
-  deps: Array<mixed> | void | null
-): T {
-  const hook = updateWorkInProgressHook();
-  const nextDeps = deps === undefined ? null : deps;
-  const prevState = hook.memoizedState;
-
-  if (prevState !== null) {
-    if (nextDeps !== null) {
-      const prevDeps: Array<mixed> | null = prevState[1];
-
-      if (areHookInputsEqual(nextDeps, prevDeps)) {
-        return prevState[0];
-      }
-    }
-  }
-
-  const nextValue = nextCreate();
-  hook.memoizedState = [nextValue, nextDeps];
-  return nextValue;
-}
-```
-
-```jsx
-const Button = ({ color, children }) => {
-  const textColor = useMemo(
-    () => slowlyCalculateTextColor(color),
-    [color] // ✅ Don’t recalculate until `color` changes
-  );
-
-  return (
-    <button className={'Button-' + color + ' Button-text-' + textColor}>
-      {children}
-    </button>
-  );
-};
-```
-
-### UseCallback Hook
-
-- Returns a memoized callback.
-- 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
-  但是每次都是返回新的函数, 使用 `useCallback`, 可以让它使用上次的函数.
-  在虚拟 DOM 更新过程中, 如果事件句柄相同, 那么就不用每次都进行
-  `removeEventListener` 与 `addEventListener`.
-- `useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`.
-
-```ts
-function mountCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
-  const hook = mountWorkInProgressHook();
-  const nextDeps = deps === undefined ? null : deps;
-  hook.memoizedState = [callback, nextDeps];
-  return callback;
-}
-
-function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
-  const hook = updateWorkInProgressHook();
-  const nextDeps = deps === undefined ? null : deps;
-  const prevState = hook.memoizedState;
-
-  if (prevState !== null) {
-    if (nextDeps !== null) {
-      const prevDeps: Array<mixed> | null = prevState[1];
-
-      if (areHookInputsEqual(nextDeps, prevDeps)) {
-        return prevState[0];
-      }
-    }
-  }
-
-  hook.memoizedState = [callback, nextDeps];
-  return callback;
-}
-```
-
-```jsx
-function Parent() {
-  const [query, setQuery] = useState('react');
-
-  // ✅ Preserves identity until query changes
-  const fetchData = useCallback(() => {
-    const url = 'https://hn.algolia.com/api/v1/search?query=' + query;
-    // ... Fetch data and return it ...
-  }, [query]); // ✅ Callback deps are OK
-
-  return <Child fetchData={fetchData} />;
-}
-
-function Child({ fetchData }) {
-  let [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetchData().then(setData);
-  }, [fetchData]); // ✅ Effect deps are OK
-
-  // ...
-}
-```
-
 ### UseState Hook
 
-- read rendered props/state
-- return value of `useState` is `ref` to `hooks[idx]`:
-  direct change to return value doesn't change state value
-- return function of `useState` (`setState`) is to change value of `hooks[idx]`
+- Read rendered props/state.
+- Return value of `useState` is `ref` to `hooks[idx]`:
+  direct change to return value doesn't change state value.
+- Return function of `useState` (`setState`) is to change value of `hooks[idx]`.
 - 由于 setState 更新状态 (dispatch action) 时基于 hook.BaseState,
-  `setState(value + 1)` 与 `setState(value => value + 1)` 存在差异
+  `setState(value + 1)` 与 `setState(value => value + 1)` 存在差异.
 - 当在 useEffect 中调用 setState 时, 最好使用 `setState(callback)` 形式,
-  这样可以不用再 Deps List 中显式声明 state, 也可以避免一些 BUG
+  这样可以不用再 Deps List 中显式声明 state, 也可以避免一些 BUG.
+
+#### UseState Hooks Dispatcher
 
 ```ts
 function mountState<T>(initialState: T) {
@@ -4392,6 +4271,7 @@ function mountState<T>(initialState: T) {
     initialState = initialState();
   }
 
+  // Setup hook.
   hook.memoizedState = hook.baseState = initialState;
   const queue = (hook.queue = {
     pending: null,
@@ -4404,6 +4284,8 @@ function mountState<T>(initialState: T) {
     currentlyRenderingFiber,
     queue
   ));
+
+  // Return hook state and dispatch action.
   return [hook.memoizedState, dispatch];
 }
 
@@ -4411,6 +4293,8 @@ function updateState<T>(initialState: T) {
   return updateReducer(basicStateReducer);
 }
 ```
+
+#### UseState Hooks Usage
 
 ```js
 setState(prevState => {
@@ -4504,6 +4388,10 @@ ChatAPI.unsubscribeFromFriendStatus(300, handleStatusChange); // Clean up last e
 - Using useReducer over useState gives us predictable state transitions.
   It comes in very powerful when state changes become more complex.
 
+#### UseReducer Hooks Dispatcher
+
+#### UseReducer Hooks Usage
+
 Use useState if:
 
 - manage JavaScript primitives as state
@@ -4569,7 +4457,141 @@ const App = () => {
 };
 ```
 
+### UseMemo Hook
+
+- Returns a memoized value.
+- Only recompute the memoized value when one of the dependencies has changed.
+- **Shallow compare** diff.
+- **Optimization** helps to
+  avoid expensive calculations on every render
+  (avoid re-render problem):
+  - **Good use** for complex objects or expensive calculations.
+  - **Donn't use** for primitive values or simple calculations.
+
+#### UseMemo Hooks Dispatcher
+
+```ts
+function mountMemo<T>(
+  nextCreate: () => T,
+  deps: Array<mixed> | void | null
+): T {
+  const hook = mountWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  const nextValue = nextCreate();
+  hook.memoizedState = [nextValue, nextDeps];
+  return nextValue;
+}
+
+function updateMemo<T>(
+  nextCreate: () => T,
+  deps: Array<mixed> | void | null
+): T {
+  const hook = updateWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  const prevState = hook.memoizedState;
+
+  if (prevState !== null) {
+    if (nextDeps !== null) {
+      const prevDeps: Array<mixed> | null = prevState[1];
+
+      if (areHookInputsEqual(nextDeps, prevDeps)) {
+        return prevState[0];
+      }
+    }
+  }
+
+  const nextValue = nextCreate();
+  hook.memoizedState = [nextValue, nextDeps];
+  return nextValue;
+}
+```
+
+#### UseMemo Hooks Usage
+
+
+```jsx
+const Button = ({ color, children }) => {
+  const textColor = useMemo(
+    () => slowlyCalculateTextColor(color),
+    [color] // ✅ Don’t recalculate until `color` changes
+  );
+
+  return (
+    <button className={'Button-' + color + ' Button-text-' + textColor}>
+      {children}
+    </button>
+  );
+};
+```
+
+### UseCallback Hook
+
+- Returns a memoized callback.
+- 对事件句柄进行缓存, `useState` 的第二个返回值是 `dispatch`,
+  但是每次都是返回新的函数, 使用 `useCallback`, 可以让它使用上次的函数.
+  在虚拟 DOM 更新过程中, 如果事件句柄相同, 那么就不用每次都进行
+  `removeEventListener` 与 `addEventListener`.
+- `useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`.
+
+#### UseCallback Hooks Dispatcher
+
+```ts
+function mountCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
+  const hook = mountWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  hook.memoizedState = [callback, nextDeps];
+  return callback;
+}
+
+function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
+  const hook = updateWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  const prevState = hook.memoizedState;
+
+  if (prevState !== null) {
+    if (nextDeps !== null) {
+      const prevDeps: Array<mixed> | null = prevState[1];
+
+      if (areHookInputsEqual(nextDeps, prevDeps)) {
+        return prevState[0];
+      }
+    }
+  }
+
+  hook.memoizedState = [callback, nextDeps];
+  return callback;
+}
+```
+
+#### UseCallback Hooks Usage
+
+```jsx
+function Parent() {
+  const [query, setQuery] = useState('react');
+
+  // ✅ Preserves identity until query changes
+  const fetchData = useCallback(() => {
+    const url = 'https://hn.algolia.com/api/v1/search?query=' + query;
+    // ... Fetch data and return it ...
+  }, [query]); // ✅ Callback deps are OK
+
+  return <Child fetchData={fetchData} />;
+}
+
+function Child({ fetchData }) {
+  let [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetchData().then(setData);
+  }, [fetchData]); // ✅ Effect deps are OK
+
+  // ...
+}
+```
+
 ### UseRef Hook
+
+#### UseRef Hooks Dispatcher
 
 ```ts
 function mountRef<T>(initialValue: T) {
@@ -4689,6 +4711,8 @@ function User() {
 - Context 中只定义被大多数组件所共用的属性,
   use context to avoid **Prop Drilling**.
 
+#### UseContext Hooks Usage
+
 ```jsx
 import React, {
   createContext,
@@ -4737,7 +4761,9 @@ export { CountProvider, useCount };
 
 ### UseEffect Hook
 
-[Complete Guide](https://overreacted.io/a-complete-guide-to-useeffect)
+- `useEffect` complete [guide](https://overreacted.io/a-complete-guide-to-useeffect).
+
+#### UseEffect Hooks Dispatcher
 
 Circular effect list:
 
@@ -4889,7 +4915,7 @@ const useDataApi = (initialUrl, initialData) => {
 };
 ```
 
-#### Closure in UseEffect
+#### UseEffect Closure
 
 - useEffect Hook 会丢弃上一次渲染结果,
   它会清除上一次 effect,
@@ -4949,9 +4975,9 @@ function useInterval(callback, delay) {
 }
 ```
 
-#### UseEffect State vs Class State
+#### UseEffect State
 
-- 如同 `Closure in useEffect`, 每次调用 useEffect 时,
+- 如 `UseEffect Closure` 所述, 每次调用 useEffect 时,
   会捕获那一次 render 时的 props 和 state.
 - Class Component 中的 this.state.xxx 却总是指向最新的 state.
 
