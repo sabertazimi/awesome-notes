@@ -3748,15 +3748,19 @@ class Menu extends React.Component {
   more details on
   [Overreacted](https://overreacted.io/how-are-function-components-different-from-classes/).
 
-### Hooks Internal
-
-- useXXX -> mountXXX -> updateXXX.
-- mountXXX: mountWorkInProgressHook -> separated creation logic.
-- updateXXX: updateWorkInProgressHook -> separated update logic.
-- 对于 `FunctionComponent` Fiber, `fiber.memoizedState` 指向第一个 `Hook`.
+### Hooks Types
 
 Hooks
 [definition](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js):
+
+- 从 React 内部 (Reconciler) 看, Hooks 可分为三类:
+  - State Hooks (`useState/useReducer/useContext/useRef/useCallback/useMemo`):
+    主要作用于 `Reconciler.Render` 阶段, `fiber.pendingProps/memoizedProps/memoizedState/updateQueue`.
+  - Effect Hooks (`useLayoutEffect`/`useEffect`):
+    在 `Reconciler.Render` 阶段设置 `fiber.flags` (effects flags),
+    主要作用于 `Reconciler.Commit` 阶段, 功能接近 `ClassComponent.LifeCycle`.
+  - Hybrid Hooks (`useDeferredValue/useTransition/useId/useMutableSource`):
+    State + Effect Hooks, 既保存状态, 又产生副作用.
 
 ```ts
 interface Hook {
