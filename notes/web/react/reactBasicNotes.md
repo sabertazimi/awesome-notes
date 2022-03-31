@@ -633,7 +633,6 @@ function workLoop(hasTimeRemaining, initialTime) {
 
 React Fiber 的目标是提高其在动画、布局和手势等领域的适用性.
 它的主要特性是 `Incremental Rendering` : 将渲染任务拆分为小的任务块并将任务分配到多个帧上的能力.
-A [minimal React](https://github.com/sabertazimi/meact) with Fiber Reconciliation.
 
 ### React Fiber Type
 
