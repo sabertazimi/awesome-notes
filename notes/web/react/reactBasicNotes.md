@@ -50,7 +50,7 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
   improving rendering efficiency.
 - Cross platform code.
 - Functional programming without details on DOM manipulation.
-- Virtual Dom 很多时候都不是最优的操作,
+- Virtual DOM 很多时候都不是最优的操作,
   但它具有普适性, 在效率与可维护性之间达到平衡.
 - [SnabbDOM](https://github.com/snabbdom/snabbdom):
   virtual DOM library focus on modularity and performance.
