@@ -527,9 +527,10 @@ tags: [Web, Framework, Library]
 
 ### Scroll Utils
 
-- [Scroll Reveal](https://github.com/jlmakes/scrollreveal)
-- [AOS Scroll Animation](https://github.com/michalsnik/aos)
-- [Lax Scroll Animation](https://github.com/alexfoxy/laxxx)
+- [ReactScrollParallax](https://github.com/jscottsmith/react-scroll-parallax)
+- [ScrollReveal](https://github.com/jlmakes/scrollreveal)
+- [AOS: Scroll Animation](https://github.com/michalsnik/aos)
+- [Lax: Scroll Animation](https://github.com/alexfoxy/laxxx)
 - [Rellax: Lightweight, Vanilla JavaScript Parallax Library](https://github.com/dixonandmoe/rellax)
 - [Scroll Bar Detection](https://github.com/idiotWu/smooth-scrollbar)
 - [Atropos: 3D Parallax Effects](https://github.com/nolimits4web/atropos)
