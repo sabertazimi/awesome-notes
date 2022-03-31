@@ -128,6 +128,7 @@ tags: [Web, Framework, Library]
 - [Rematch: Redux Framework](https://github.com/rematch/rematch)
 - [Reselect: Selector Library for Redux](https://github.com/reduxjs/reselect)
 - [ImmerJS: Create Next Immutable State by Mutating Current One](https://github.com/immerjs/immer)
+- [ReduxObservable: RxJS Middleware for Redux](https://github.com/redux-observable/redux-observable)
 
 ### React Recoil
 
