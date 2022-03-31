@@ -651,7 +651,7 @@ export interface Fiber {
   tag: WorkTag;
   key: string | null;
   elementType: any;
-  type: any;
+  type: any; // Tag/Class/Function.
   stateNode: any; // DOM/class instance.
   ref: (((handle: mixed) => void) & { _stringRef: ?string }) | RefObject | null;
 
