@@ -2567,10 +2567,26 @@ body {
 }
 
 .card {
-  background-color: rgb(17 25 40 / 54%);
   border: 1px solid rgb(255 255 255 / 12.5%);
   border-radius: 12px;
+  background-color: rgb(17 25 40 / 54%);
   backdrop-filter: blur(12px) saturate(200%);
+}
+
+.hero {
+  --inset-shadow: inset 0 0 1px 1px hsl(204, 100%, 90%, 1);
+  --shadow: 10px 10px 60px 20px hsl(194, 100%, 9%, 0.5);
+  border: 1px solid hsl(176, 87%, 7%, 0.6);
+  border-radius: 5px;
+  box-shadow: var(--inset-shadow), var(--shadow);
+  background-color: hsl(27, 10%, 90%, 0.9);
+}
+
+@supports (backdrop-filter: blur(25px) brightness(170%)) {
+  .hero {
+    background-color: hsl(27, 10%, 90%, 0.5);
+    backdrop-filter: blur(25px) brightness(170%);
+  }
 }
 ```
 
