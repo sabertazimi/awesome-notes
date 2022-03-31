@@ -8172,8 +8172,10 @@ babel.transformFromAst(ast, code, options);
 
 ### CodeMod Tool
 
-Use Babel to refactor code,
-like [jscodeshift](https://github.com/facebook/jscodeshift).
+Use Babel to refactor code:
+
+- [JSCodeshift](https://github.com/facebook/jscodeshift)
+- [ReactCodemod](https://github.com/reactjs/react-codemod)
 
 ### Babel Transform Plugin
 
