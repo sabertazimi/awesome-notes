@@ -38,7 +38,9 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
   - `Reconciler` execute `Task` work.
     - `Fiber` 构造循环: construct `Fiber` tree.
     - `commitRoot`: render `Fiber` tree with `Renderer`.
-- 任务调度循环与 `Fiber` 构造循环相互配合可实现**可中断渲染**.
+- 任务调度循环与 `Fiber` 构造循环相互配合可实现**可中断渲染**:
+  - 存在更高优先级任务 (Priority Scheduling).
+  - 当前帧没有剩余时间 (Time Slicing).
 
 [![React Core Packages](./figures/ReactCorePackages.png)](https://7kms.github.io/react-illustration-series/main/macro-structure)
 
