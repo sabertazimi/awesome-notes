@@ -739,6 +739,7 @@ tags: [Web, Framework, Library]
 ### Image Editor
 
 - [Cropper.js: JavaScript Image Cropper](https://github.com/fengyuanchen/cropperjs)
+- [Crop: React Image Cropping Tool](https://github.com/DominicTobias/react-image-crop)
 - [Tui Image Editor: Full Featured using HTML5 Canvas](https://github.com/nhn/tui.image-editor)
 
 ## Canvas
