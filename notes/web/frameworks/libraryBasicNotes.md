@@ -454,8 +454,9 @@ tags: [Web, Framework, Library]
 
 #### List Virtualized Windowing
 
-- [React Virtualized](https://github.com/bvaughn/react-virtualized)
-- [React Window: Brand New React Virtualized](https://github.com/bvaughn/react-window)
+- [ReactVirtualized](https://github.com/bvaughn/react-virtualized)
+- [ReactWindow: Brand New React Virtualized](https://github.com/bvaughn/react-window)
+- [ReactVirtual: Hooks for Virtualizing Scrollable Elements](https://github.com/TanStack/react-virtual)
 - [React Virtualized Auto Sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)
 - [React Virtuoso](https://github.com/petyosi/react-virtuoso)
 - [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
