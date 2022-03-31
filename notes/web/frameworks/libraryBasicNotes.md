@@ -382,13 +382,13 @@ tags: [Web, Framework, Library]
 - [WinBox: HTML5 Window Manager for Web](https://github.com/nextapps-de/winbox)
 - [NiceModal: eBay React Modal Manager](https://github.com/eBay/nice-modal-react)
 
-### Message
+### Information and Message
 
 #### Page Indicator
 
 - [React Snakke](https://github.com/diogomoretti/react-snakke)
 
-#### Prompt and Toast Message
+#### Prompt and Toast
 
 - [Sweet Alert 2](https://github.com/sweetalert2/sweetalert2)
 - [React Toastify](https://github.com/fkhadra/react-toastify)
@@ -397,7 +397,7 @@ tags: [Web, Framework, Library]
 - [Push.js: Browser Notification Framework](https://github.com/Nickersoft/push.js)
 - [Notifier: Native Desktop Notification](https://github.com/mikaelbr/node-notifier)
 
-#### Tooltip Message
+#### Tooltip
 
 - [React Tippy](https://github.com/tvkhoa/react-tippy)
 - [Tippy.js](https://github.com/atomiks/tippyjs)
@@ -405,12 +405,16 @@ tags: [Web, Framework, Library]
 - [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
 - [Hint.css Tooltips](https://github.com/chinchang/hint.css)
 
-#### Guide Message
+#### Guide
 
 - [JoyRide: Awesome Guided Tours](https://github.com/gilbarbara/react-joyride)
 - [Shepherd: Guide Tour Library](https://github.com/shipshapecode/shepherd)
 - [Intro.js](https://github.com/usablica/intro.js)
 - [Driver.js](https://github.com/kamranahmedse/driver.js)
+
+#### Rating
+
+- [ReactRating](https://github.com/awran5/react-simple-star-rating)
 
 ### Form
 
