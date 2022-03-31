@@ -2567,24 +2567,25 @@ body {
 }
 
 .card {
+  background-color: rgb(17 25 40 / 54%);
   border: 1px solid rgb(255 255 255 / 12.5%);
   border-radius: 12px;
-  background-color: rgb(17 25 40 / 54%);
   backdrop-filter: blur(12px) saturate(200%);
 }
 
 .hero {
-  --inset-shadow: inset 0 0 1px 1px hsl(204, 100%, 90%, 1);
-  --shadow: 10px 10px 60px 20px hsl(194, 100%, 9%, 0.5);
-  border: 1px solid hsl(176, 87%, 7%, 0.6);
+  --inset-shadow: inset 0 0 1px 1px hsl(204deg 100% 90% / 100%);
+  --shadow: 10px 10px 60px 20px hsl(194deg 100% 9% / 50%);
+
+  background-color: hsl(27deg 10% 90% / 90%);
+  border: 1px solid hsl(176deg 87% 7% / 60%);
   border-radius: 5px;
   box-shadow: var(--inset-shadow), var(--shadow);
-  background-color: hsl(27, 10%, 90%, 0.9);
 }
 
 @supports (backdrop-filter: blur(25px) brightness(170%)) {
   .hero {
-    background-color: hsl(27, 10%, 90%, 0.5);
+    background-color: hsl(27deg 10% 90% / 50%);
     backdrop-filter: blur(25px) brightness(170%);
   }
 }
@@ -3349,8 +3350,8 @@ use `inline-box` with `width`
 ```css
 input[type='checkbox'] {
   appearance: none;
-  border: solid;
   margin: 0;
+  border: solid;
 }
 
 input[type='checkbox']:checked {
@@ -3361,8 +3362,8 @@ input[type='checkbox']:checked {
   input[type='checkbox'] {
     width: 15px;
     height: 15px;
-    border-width: 1px;
     border-color: blue;
+    border-width: 1px;
   }
 }
 
@@ -3370,8 +3371,8 @@ input[type='checkbox']:checked {
   input[type='checkbox'] {
     width: 30px;
     height: 30px;
-    border-width: 2px;
     border-color: red;
+    border-width: 2px;
   }
 }
 
