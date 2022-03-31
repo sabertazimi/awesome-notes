@@ -343,6 +343,8 @@ if (typeof Array.isArray === 'undefined') {
 
 ```js
 arr.sort(toExchange);
+strings.sort((a, b) => a.localeCompare(b));
+strings.sort((a, b) => new Intl.Collator('en').compare(a, b));
 ```
 
 ##### Array Stack
