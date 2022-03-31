@@ -55,6 +55,7 @@ tags: [Web, Framework, Library]
 - [Mantine](https://github.com/mantinedev/mantine)
 - [BluePrint](https://github.com/palantir/blueprint)
 - [IceWorks](https://github.com/alibaba/ice)
+- [Desktop: macOS and Windows Style Components](https://github.com/gabrielbull/react-desktop)
 
 ### CSS UI Framework
 
