@@ -463,10 +463,6 @@ tags: [Web, Framework, Library]
 - [React Virtuoso](https://github.com/petyosi/react-virtuoso)
 - [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
 
-### Tree
-
-- [Arborist: React Sortable, Virtual and Customizable Tree Component](https://github.com/brimdata/react-arborist)
-
 ### Table
 
 - [React DataTable: Hooks for Building Fast and Extendable Data Tables and Grids](https://github.com/tannerlinsley/react-table)
@@ -477,6 +473,15 @@ tags: [Web, Framework, Library]
 - [Tabulator: Interactive Tables and Data Grids for JavaScript](https://github.com/olifolkerd/tabulator)
 - [SheetJS: Spreadsheet Data Toolkit](https://github.com/SheetJS/sheetjs)
 - [HyperFormula: Complete Excel-like Calculation Engine Written in TypeScript](https://github.com/handsontable/hyperformula)
+
+### Grid
+
+- [ReactGridLayout: Drag and Drop Grid Layout](https://github.com/react-grid-layout/react-grid-layout)
+- [VueGridLayout: Drag and Drop Grid Layout](https://github.com/jbaysolutions/vue-grid-layout)
+
+### Tree
+
+- [Arborist: React Sortable, Virtual and Customizable Tree Component](https://github.com/brimdata/react-arborist)
 
 ### Charts Visualization
 
@@ -546,7 +551,6 @@ tags: [Web, Framework, Library]
 - [P5.js](https://github.com/processing/p5.js)
 - [Nipple.js](https://github.com/yoannmoinet/nipplejs)
 - [Interact.js: Drag, Drop and Resizing Multi Touch](https://github.com/taye/interact.js)
-- [Drag and Drop Grid Layout](https://github.com/jbaysolutions/vue-grid-layout)
 - [Moveable](https://github.com/daybrush/moveable)
 - [TransMat: Share Data beyond Boundaries of Browser](https://github.com/google/transmat)
 - [Spacers: Drag for More Space](https://github.com/actuallyakash/spacers)
