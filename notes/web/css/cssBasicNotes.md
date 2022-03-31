@@ -3260,9 +3260,9 @@ use `inline-box` with `width`
 
 ## Media Query
 
-- `only` for improving compatibility with older browsers
-- definition order matters when media query with a different selector
-- JavaScript API: `window.matchMedia()`
+- `only` for improving compatibility with older browsers.
+- Definition order matters when media query with a different selector.
+- JavaScript API: `window.matchMedia()`.
 
 ```css
 /* stylelint-disable */
@@ -3282,7 +3282,7 @@ use `inline-box` with `width`
 }
 ```
 
-### 设备类型
+### Device Type Query
 
 | 类型       | 解释                                     |
 | :--------- | :--------------------------------------- |
@@ -3297,7 +3297,7 @@ use `inline-box` with `width`
 | tty        | 固定字母间距的网格的媒体，比如电传打字机 |
 | tv         | 电视                                     |
 
-### 设备特性
+### Device Feature Query
 
 | 属性                | 值                     | Min/Max | 描述                 |
 | :------------------ | :--------------------- | :------ | :------------------- |
@@ -3315,11 +3315,106 @@ use `inline-box` with `width`
 | scan                | Progressive interlaced | no      | tv 媒体扫描方式      |
 | orientation         | Portrait/landscape     | no      | 横屏或竖屏           |
 
-- `prefers-contrast`: `less`, `more`.
-- `prefers-color-scheme`: `light`, `dark`.
-- `prefers-reduced-motion`: `no-preference`, `reduce`.
+### Print Device Query
 
-#### Prefers Color Scheme
+- Page style standard [specification](https://developer.mozilla.org/en-US/docs/Web/CSS/@page).
+- PDF style [tutorial](https://www.smashingmagazine.com/2015/01/designing-for-print-with-css).
+
+### Pointer Device Query
+
+- `none`: no pointer device (e.g phones).
+- `coarse`: limited accuracy pointer device (e.g smart TV, video game consoles).
+- `fine`: accurate pointer device (e.g mouse, touch pads, stylus).
+
+```html
+<input id="test" type="checkbox" /> <label for="test">Look at me!</label>
+```
+
+```css
+input[type='checkbox'] {
+  appearance: none;
+  border: solid;
+  margin: 0;
+}
+
+input[type='checkbox']:checked {
+  background: gray;
+}
+
+@media (pointer: fine) {
+  input[type='checkbox'] {
+    width: 15px;
+    height: 15px;
+    border-width: 1px;
+    border-color: blue;
+  }
+}
+
+@media (pointer: coarse) {
+  input[type='checkbox'] {
+    width: 30px;
+    height: 30px;
+    border-width: 2px;
+    border-color: red;
+  }
+}
+
+@media (any-pointer: fine) {
+  input[type='checkbox'] {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid blue;
+  }
+}
+
+@media (any-pointer: coarse) {
+  input[type='checkbox'] {
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border: 2px solid red;
+  }
+}
+```
+
+### Hover Device Query
+
+```html
+<a href="#">Try hovering over me!</a>
+```
+
+```css
+@media (hover: hover) {
+  a:hover {
+    background: yellow;
+  }
+}
+
+@media (any-hover: hover) {
+  a:hover {
+    background: yellow;
+  }
+}
+```
+
+| Hover Query | Pointer Query | Device                                 |
+| ----------- | ------------- | -------------------------------------- |
+| none        | coarse        | smartphones, touch screens             |
+| none        | fine          | stylus-based screens                   |
+| hover       | coarse        | smart TVs, video game consoles         |
+| hover       | fine          | desktop computers, laptops, touch pads |
+
+### Contrast Query
+
+- `prefers-contrast: less`.
+- `prefers-contrast: more`.
+
+### Color Scheme Query
+
+- `color-scheme: light dark`.
+- `prefers-color-scheme: light`.
+- `prefers-color-scheme: dark`.
 
 ```css
 .day {
@@ -3357,7 +3452,9 @@ use `inline-box` with `width`
 }
 ```
 
-#### Prefers Reduced Motion
+### Reduced Motion Query
+
+- `prefers-reduced-motion`: `no-preference`, `reduce`.
 
 ```css
 @media (prefers-reduced-motion) {
@@ -3367,12 +3464,25 @@ use `inline-box` with `width`
 }
 ```
 
-#### Style for Print PDF
+### Container Query
 
-- [Page Style Standard](https://developer.mozilla.org/en-US/docs/Web/CSS/@page)
-- [PDF Style Tutorial](https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/)
+```css
+.sidebar {
+  /* stylelint-disable-next-line  property-no-unknown */
+  container-type: inline-size;
+  /* stylelint-disable-next-line  property-no-unknown */
+  container-name: sidebar;
+}
 
-### Media Query Support Detection
+@container sidebar (min-width: 400px) {
+  .card {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+}
+```
+
+### Support Detection Query
 
 Detecting media query support in CSS:
 
@@ -3407,7 +3517,7 @@ const resolvedMediaQuery = window.matchMedia(query).media;
 const isSupported = query === resolvedMediaQuery;
 ```
 
-### JavaScript Media Query API
+### Media Query JavaScript API
 
 - [MDN Media Query Tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)
 
@@ -3421,24 +3531,6 @@ if (window.matchMedia('(min-width: 400px)').matches) {
   /* the view port is at least 400 pixels wide */
 } else {
   /* the view port is less than 400 pixels wide */
-}
-```
-
-### Container Query
-
-```css
-.sidebar {
-  /* stylelint-disable-next-line  property-no-unknown */
-  container-type: inline-size;
-  /* stylelint-disable-next-line  property-no-unknown */
-  container-name: sidebar;
-}
-
-@container sidebar (min-width: 400px) {
-  .card {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-  }
 }
 ```
 
