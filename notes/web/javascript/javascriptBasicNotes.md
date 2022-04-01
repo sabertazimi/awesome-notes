@@ -2239,7 +2239,6 @@ APP.namespace('once.upon.a.time.there.was.this.long.nested.property');
 
 #### Namespace Module Usage
 
-
 通过传参匿名函数, 创建命名空间, 进行模块包裹:
 
 ```js
@@ -2377,6 +2376,36 @@ Sandbox('dom', 'event', function (box) {
   });
   // no trace of Ajax module here
 });
+```
+
+### UMD Pattern
+
+```js
+/**
+ * UMD Boilerplate.
+ */
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define([], function () {
+      return factory(root);
+    });
+  } else if (typeof exports === 'object') {
+    module.exports = factory(root);
+  } else {
+    root.myPlugin = factory(root);
+  }
+})(
+  typeof global !== 'undefined'
+    ? global
+    : typeof window !== 'undefined'
+    ? window
+    : this,
+  function (window) {
+    'use strict';
+
+    // Module code goes here...
+  }
+);
 ```
 
 ## JavaScript DOM API
