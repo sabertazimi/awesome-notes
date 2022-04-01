@@ -2556,7 +2556,7 @@ if there’s any pending call back waiting to be executed:
 
 :::tip Event Loop
 宏任务队列取宏任务 -> 执行 1 个宏任务 -> 检查微任务队列并执行所有微任务
--> requestAnimationFrame -> 浏览器重绘/重排 -> requestIdleCallback
+-> requestAnimationFrame -> 浏览器重排/重绘 -> requestIdleCallback
 -> 宏任务队列取宏任务
 :::
 
