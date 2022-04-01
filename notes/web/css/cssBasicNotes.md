@@ -1923,12 +1923,44 @@ body {
 
 ### Background Clip
 
-指定背景显示范围 content-box/padding-box/border-box
+指定背景显示范围 `content-box`/`padding-box`/`border-box`:
 
 ```css
 h1 {
+  color: transparent;
   background-image: url('bg.jpg');
   background-clip: text;
+}
+```
+
+```css
+@property --offset {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 5px;
+}
+
+@keyframes move {
+  to {
+    --offset: 15px;
+  }
+}
+
+p {
+  color: #000;
+
+  &:hover {
+    color: transparent;
+    background: repeating-radial-gradient(
+      circle at 0 0,
+      #000 calc(var(--offset) - 5px),
+      #000 var(--offset),
+      #fff var(--offset),
+      #fff calc(var(--offset) + 5px)
+    );
+    background-clip: text;
+    animation: move 0.5s infinite linear;
+  }
 }
 ```
 
