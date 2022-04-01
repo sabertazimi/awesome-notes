@@ -1084,7 +1084,50 @@ console.log(BB.prototype[[proto]] === AA.prototype);
 console.log(bb[[proto]] === BB.prototype);
 ```
 
-禁止对复合对象字面量进行导出操作 (array literal, object literal)
+禁止对复合对象字面量进行导出操作 (array literal, object literal).
+
+#### Class Private Member
+
+```js
+class Dong {
+  constructor() {
+    this.#name = 'dog';
+    this.#age = 20;
+    this.friend = 'cat';
+  }
+
+  hello() {
+    return `I'm ${this.#name} ${this.#age} years old`;
+  }
+}
+```
+
+```js
+const classPrivateFieldGet = (receiver, state) => {
+  return state.get(receiver);
+};
+
+const classPrivateFieldSet = (receiver, state, value) => {
+  state.set(receiver, value);
+};
+
+const dongName = new WeakMap();
+const dongAge = new WeakMap();
+
+class Dong {
+  constructor() {
+    classPrivateFieldSet(this, dongName, 'dong');
+    classPrivateFieldSet(this, dongAge, 20);
+  }
+
+  hello() {
+    return `I'm ${classPrivateFieldGet(this, dongName)}, ${classPrivateFieldGet(
+      this,
+      dongAge
+    )} years old`;
+  }
+}
+```
 
 #### Class Static Blocks
 
