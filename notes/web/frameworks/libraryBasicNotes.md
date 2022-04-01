@@ -488,6 +488,7 @@ tags: [Web, Framework, Library]
 ### Charts Visualization
 
 - [D3: Bring Data to Life with SVG, Canvas and HTML](https://github.com/d3/d3)
+- [ECharts: Powerful, Interactive Charting and Data Visualization](https://github.com/apache/echarts)
 - [Chart.js: HTML5 Canvas Charts](https://github.com/chartjs/Chart.js)
 - [AntV: React Chart Library Based on G2Plot, G6, X6, L7](https://github.com/ant-design/ant-design-charts)
 - [ReCharts: Redefined Chart Library Built with React and D3](https://github.com/recharts/recharts)
