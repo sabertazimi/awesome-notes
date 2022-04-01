@@ -39,8 +39,11 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
     - `Fiber` 构造循环: construct `Fiber` tree.
     - `commitRoot`: render `Fiber` tree with `Renderer`.
 - 任务调度循环与 `Fiber` 构造循环相互配合可实现**可中断渲染**:
-  - 存在更高优先级任务 (Priority Scheduling).
-  - 当前帧没有剩余时间 (Time Slicing).
+  - 渲染中断 (`Reconciler.renderRootConcurrent().shouldYield()`):
+    - 存在更高优先级任务 (Priority Scheduling).
+    - 当前帧没有剩余时间 (Time Slicing).
+  - 渲染恢复 (`Scheduler.workLoop()`):
+    将 `callback()` 返回的任务放入任务队列, 继续进行调度直至清空任务队列.
 
 [![React Core Packages](./figures/ReactCorePackages.png)](https://7kms.github.io/react-illustration-series/main/macro-structure)
 
@@ -549,6 +552,9 @@ const handleTimeout = currentTime => {
 ```
 
 ### Scheduler Work Loop
+
+当 `callback()` 返回函数时, 表明产生连续回调 (e.g 出现更高优先任务/时间分片用完, 渲染中断),
+需将返回的函数再次放入任务队列, 继续进行调度直至清空任务队列 (渲染恢复).
 
 ```js
 function flushWork(hasTimeRemaining, initialTime) {
