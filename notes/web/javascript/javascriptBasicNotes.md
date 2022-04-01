@@ -2198,46 +2198,11 @@ if (typeof target === 'undefined') {
 }
 ```
 
-## 模块化
+## Modules Pattern
 
-### 命名空间
+### Namespace Module Pattern
 
-通过传参匿名函数,创建命名空间,进行模块包裹
-
-```js
-const app = {};
-
-(function (exports) {
-  (function (exports) {
-    const api = {
-      moduleExists: function test() {
-        return true;
-      },
-    };
-    // 闭包式继承,扩展exports对象为api对象
-    $.extend(exports, api);
-  })(typeof exports === 'undefined' ? window : exports);
-  // 将api对象绑定至app对象上
-})(app);
-```
-
-```js
-// global object
-const APP = {};
-// constructors
-APP.Parent = function () {};
-APP.Child = function () {};
-// a variable
-APP.some_var = 1;
-// an object container
-APP.modules = {};
-// nested objects
-APP.modules.module1 = {};
-APP.modules.module1.data = { a: 1, b: 2 };
-APP.modules.module2 = {};
-```
-
-#### 通用命名空间函数
+#### Namespace Module Constructor
 
 ```js
 APP.namespace = function (namespaceString) {
@@ -2272,12 +2237,50 @@ APP.namespace('modules.module51');
 APP.namespace('once.upon.a.time.there.was.this.long.nested.property');
 ```
 
-### 沙盒模式
+#### Namespace Module Usage
 
-#### 实现沙盒构造函数
 
-- 私有属性绑定至 this/prototype
-- 特权方法绑定至 modules/prototype
+通过传参匿名函数, 创建命名空间, 进行模块包裹:
+
+```js
+const app = {};
+
+(function (exports) {
+  (function (exports) {
+    const api = {
+      moduleExists: function test() {
+        return true;
+      },
+    };
+    // 闭包式继承,扩展exports对象为api对象
+    $.extend(exports, api);
+  })(typeof exports === 'undefined' ? window : exports);
+  // 将api对象绑定至app对象上
+})(app);
+```
+
+```js
+// global object
+const APP = {};
+// constructors
+APP.Parent = function () {};
+APP.Child = function () {};
+// a variable
+APP.some_var = 1;
+// an object container
+APP.modules = {};
+// nested objects
+APP.modules.module1 = {};
+APP.modules.module1.data = { a: 1, b: 2 };
+APP.modules.module2 = {};
+```
+
+### Sandbox Module Pattern
+
+#### Sandbox Module Constructor
+
+- 私有属性绑定至 this/prototype.
+- 特权方法绑定至 modules/prototype.
 
 ```js
 function Sandbox(...args) {
@@ -2328,7 +2331,7 @@ Sandbox.prototype = {
 };
 ```
 
-静态属性 - 使用添加的方法/模块
+静态属性: 使用添加的方法/模块:
 
 ```js
 Sandbox.modules = {};
@@ -2349,7 +2352,7 @@ Sandbox.modules.ajax = function (box) {
 };
 ```
 
-#### 沙盒使用方式
+#### Sandbox Module Usage
 
 ```js
 Sandbox(['ajax', 'event'], function (box) {
