@@ -4226,6 +4226,10 @@ type HookType =
 
 ### Hooks Memoized State
 
+- `FunctionComponent` 内部所有 Hooks memoized state
+  组成 `FunctionComponent` `Fiber` memoized state.
+- `FunctionComponent` `Fiber`: `fiber.memoizedState` 指向第一个 `Hook`.
+
 | Hooks       | Memoized State                                 |
 | ----------- | ---------------------------------------------- |
 | useRef      | `ref: { current }`                             |
@@ -4248,7 +4252,6 @@ type HookType =
     - `Layout` phase: `commitLifeCycles` -> `schedulePassiveEffects`, 收集 Effects.
     - `scheduleCallback` -> `flushPassiveEffects` -> `effect.destroy` -> `effect.create`.
   - 只有 `effect.tag` 包含 `HasEffect` 时才会调用 `effect.destroy` 和 `effect.create`.
-- `FunctionComponent` Fiber: `fiber.memoizedState` 指向第一个 `Hook`.
 - `renderWithHooks`:
   - `HooksDispatcherOnMount`: `mountXXX`.
   - `HooksDispatcherOnUpdate`: `updateXXX`.
