@@ -1082,7 +1082,9 @@ Reconciler construct Fiber tree:
   - 根据获取的下级 `ReactElement` 对象, 调用 `reconcileChildren` 生成 `Fiber` 子节点 (只生成次级子节点).
 - ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent().
 - **reconcileChildren**.
-- reconcileChildFibers:
+- mountChildFibers/reconcileChildFibers:
+  - `mountChildFibers`: similar logic, not tracking side effects.
+  - `reconcileChildFibers`: similar logic, tracking side effects.
   - `reconcileSingleElement`.
   - `reconcileSingleTextNode`.
   - `reconcileSinglePortal`.
@@ -2719,9 +2721,13 @@ function commitLayoutEffectOnFiber(
 ### Reconciler Performance Tips
 
 - Render: 通过一些启发式算法跳过没有发生变更的子树.
-- Commit: 维护了一个列表用于记录变化的 Fiber, 不再访问其他 Fiber.
-- GC: Reuse `OldFiber` objects.
-- GC: `current` Fiber tree and `workInProgress` Fiber tree for `Double Buffering`.
+- Commit:
+  - 维护了一个列表用于记录变化的 Fiber, 不再访问其他 Fiber.
+  - 首次渲染 (Mount) 时只有 `HostRootFiber.flags` 会设置 `Placement`,
+    在 Commit 阶段只会执行一次插入操作.
+- GC:
+  - Reuse `OldFiber` objects.
+  - `current` Fiber tree and `workInProgress` Fiber tree for `Double Buffering`.
 
 ### Minimal Reconciler Implementation
 
