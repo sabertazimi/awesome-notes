@@ -2539,9 +2539,9 @@ if there’s any pending call back waiting to be executed:
   - `catch finally`.
 - 宏任务 MacroTask (Tasks)，没有特权:
   - `scripts`: 整体脚本视作一个宏任务.
+  - `MessageChannel`, `postMessage`.
   - `setImmediate`, `I/O`.
   - `setTimeout`, `setInterval`.
-  - `MessageChannel`, `postMessage`.
   - `XHR` callback function.
   - `requestAnimationFrame`.
   - UI interaction `events` callback function.
@@ -2555,7 +2555,9 @@ if there’s any pending call back waiting to be executed:
 - `Event Loop` 与 `Call Stack` 有且仅有一个, `Task/Job/Message Queue` 可以有多个.
 
 :::tip Event Loop
-宏任务队列取宏任务 -> 执行 1 个宏任务 -> 检查微任务队列并执行所有微任务 -> 浏览器渲染 -> 宏任务队列取宏任务
+宏任务队列取宏任务 -> 执行 1 个宏任务 -> 检查微任务队列并执行所有微任务
+-> requestAnimationFrame -> 浏览器重绘/重排 -> requestIdleCallback
+-> 宏任务队列取宏任务
 :::
 
 `Event Loop` simple model:
