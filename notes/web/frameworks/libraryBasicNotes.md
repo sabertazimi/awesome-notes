@@ -177,7 +177,8 @@ tags: [Web, Framework, Library]
 
 ## JavaScript Utils
 
-- [Cash: jQuery Lite](https://github.com/kenwheeler/cash)
+- [Cash: jQuery Lite](https://github.com/fabiospampinato/cash)
+- [HappyDOM: Browser API for Node.js](https://github.com/capricorn86/happy-dom)
 - [ConstructJS: Byte Level Data Structures](https://github.com/francisrstokes/construct-js)
 
 ### Math Utils
