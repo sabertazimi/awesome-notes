@@ -1052,6 +1052,27 @@ src.pipe(dst1).pipe(dst2).pipe(dst3); //  连接多个 stream
 ```
 
 ```js
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+const traverse = async directory => {
+  const files = await fs.readdir(directory);
+
+  files.forEach(async file => {
+    const filePath = path.join(directory, file);
+    const fileStat = await fs.stat(filePath);
+
+    if (fileStat.isFile()) {
+      const content = await fs.readFile(filePath, 'utf-8');
+      console.log(content);
+    } else if (fileStat.isDirectory()) {
+      await traverse(filePath);
+    }
+  });
+};
+```
+
+```js
 module.exports = function ls(dirName, fileType, callback) {
   const fs = require('fs');
   const path = require('path');
