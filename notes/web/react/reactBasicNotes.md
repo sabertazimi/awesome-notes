@@ -2726,7 +2726,7 @@ function commitLayoutEffectOnFiber(
   - 首次渲染 (Mount) 时只有 `HostRootFiber.flags` 会设置 `Placement`,
     在 Commit 阶段只会执行一次插入操作.
 - GC:
-  - Reuse `OldFiber` objects.
+  - Reuse `OldFiber` objects when `Bailout`.
   - `current` Fiber tree and `workInProgress` Fiber tree for `Double Buffering`.
 
 ### Minimal Reconciler Implementation
