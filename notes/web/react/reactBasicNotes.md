@@ -1587,13 +1587,16 @@ function updateHostComponent(
 
 ### Reconciler Update Workflow
 
-[更新与更新队列](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
+[Update and Update Queue](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactUpdateQueue.new.js):
 
 - `UpdateQueue` 是一个**循环队列**.
 - 创建 `Update` 时机 (`createUpdate`/`enqueueUpdate`):
   - `ReactFiberReconciler.updateContainer`.
   - `ReactFiberClassComponent.setState`.
   - `ReactFiberHooks.dispatchAction`.
+- `Reconciler.Render` 阶段, 调用 `XXXClassInstance`/`useXXX`,
+  遍历处理 Update Queue (`processUpdateQueue`/`HooksDispatcherOnUpdate`), 计算出 memoizedState,
+  利用 pendingProps 与 memoizedState 产生新的 ReactElement (`ClassComponent.render()`/`FunctionComponent()`).
 
 ```ts
 interface Update<State> {
@@ -1706,8 +1709,9 @@ function dispatchAction<S, A>(
   - 若 `includesSomeLane(renderLanes, workInProgress.childLanes) === true`,
     表明子节点需要更新, clone 并返回子节点.
 - **updateHostRoot/updateXXXComponent**.
-- ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent():
-  遍历处理 Update Queue, 计算出 memoizedState, 产生新的 ReactElement.
+- ReactClassComponent.render() / ReactFunctionComponent() / ReactDOMComponent.createElement():
+  遍历处理 Update Queue (`processUpdateQueue`/`HooksDispatcherOnUpdate`), 计算出 memoizedState,
+  利用 pendingProps 与 memoizedState 产生新的 ReactElement.
 - **reconcileChildren**:
   - 通过 ReactElement 与 OldFiber, 产生或复用 ChildFiber.
   - 设置 `fiber.flags`, 标记副作用: `Placement`/`Deletion`/etc.
