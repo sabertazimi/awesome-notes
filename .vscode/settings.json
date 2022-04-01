@@ -1150,6 +1150,7 @@
     "pgdir",
     "pgrp",
     "PGSIZE",
+    "Pico",
     "pids",
     "pidstat",
     "pifont",
