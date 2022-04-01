@@ -1322,11 +1322,19 @@ function performUnitOfWork(unitOfWork: Fiber): void {
   unitOfWork.memoizedProps = unitOfWork.pendingProps;
 
   if (next === null) {
-    // 如果没有派生出新的节点, 则进入 completeWork 阶段, 传入的是当前 unitOfWork.
+    // 如果没有派生出新的下级节点, 则进入 completeWork 阶段, 传入的是当前 unitOfWork.
     completeUnitOfWork(unitOfWork);
   } else {
+    // 如果派生出新的下级节点, 则递归处理.
     workInProgress = next;
   }
+}
+
+function _performUnitOfWork_Recursive(unitOfWork: Fiber): void {
+  beginWork(unitOfWork.alternate, unitOfWork, subtreeRenderLanes);
+  if (unitOfWork.child) _performUnitOfWork_Recursive(unitOfWork.child);
+  completeUnitOfWork(unitOfWork);
+  if (unitOfWork.sibling) _performUnitOfWork_Recursive(unitOfWork.sibling);
 }
 
 function beginWork(
