@@ -19,19 +19,21 @@ Software design is the art of managing dependencies and abstractions.
 
 ### SOLID Principles
 
-- Single Responsibility Principle 单一功能原则
-- Open-closed Principle 开闭原则
-- Liskov Substitution Principle 里氏替换原则
-- Interface Segregation Principle 接口隔离原则
-- Dependency Inversion Principle 依赖反转原则
+- Single Responsibility Principle: 单一功能原则.
+- Open-closed Principle: 开闭原则.
+- Liskov Substitution Principle: 里氏替换原则.
+- Interface Segregation Principle: 接口隔离原则.
+- Dependency Inversion Principle: 依赖反转原则.
 
-> SOLID Principles
+:::tip SOLID Principles
 
-- 单一职责是所有设计原则的基础
-- 开闭原则是设计的终极目标
-- 里氏替换原则强调的是子类替换父类后程序运行时的正确性, 它用来帮助实现开闭原则
-- 接口隔离原则用来帮助实现里氏替换原则, 同时它也体现了单一职责
-- 依赖倒置原则是过程式设计与面向对象设计的分水岭, 同时它也被用来指导接口隔离原则
+- 单一职责是所有设计原则的基础.
+- 开闭原则是设计的终极目标.
+- 里氏替换原则强调的是子类替换父类后程序运行时的正确性, 它用来帮助实现开闭原则.
+- 接口隔离原则用来帮助实现里氏替换原则, 同时它也体现了单一职责.
+- 依赖倒置原则是过程式设计与面向对象设计的分水岭, 同时它也被用来指导接口隔离原则.
+
+:::
 
 #### Single Responsibility Principle
 
