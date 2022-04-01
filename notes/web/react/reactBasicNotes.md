@@ -1700,8 +1700,10 @@ function dispatchAction<S, A>(
   - 若 `includesSomeLane(renderLanes, workInProgress.childLanes) === true`,
     表明子节点需要更新, clone 并返回子节点.
 - **updateHostRoot/updateXXXComponent**.
-- ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent().
+- ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent():
+  遍历处理 Update Queue, 计算出 memoizedState, 产生新的 ReactElement.
 - **reconcileChildren**:
+  - 通过 ReactElement 与 OldFiber, 产生或复用 ChildFiber.
   - 设置 `fiber.flags`, 标记副作用: `Placement`/`Deletion`/etc.
   - 对于 `Deletion` Fiber, 在 `beginWork` 阶段提前将其添加到父节点的 Effects 队列中
     (该节点会脱离 Fiber 树, 不会再进入 `completeWork` 阶段, 无法在此阶段收集此节点副作用).
