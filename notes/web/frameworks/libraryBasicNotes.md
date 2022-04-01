@@ -171,6 +171,10 @@ tags: [Web, Framework, Library]
 - [Baobab](https://github.com/Yomguithereal/baobab)
 - [XState: State Machines and State Charts for Modern Web](https://github.com/statelyai/xstate)
 
+### Router State Management
+
+- [Navigo: Simple Vanilla Router](https://github.com/krasimir/navigo)
+
 ## JavaScript Utils
 
 - [Cash: jQuery Lite](https://github.com/kenwheeler/cash)
