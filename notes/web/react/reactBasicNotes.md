@@ -3159,7 +3159,13 @@ class Component {
   - getDerivedStateFromProps.
   - getDerivedStateFromError.
   - shouldComponentUpdate.
-  - render.
+  - `ClassComponent` `render` function.
+  - `setState` updater functions.
+  - `FunctionComponent` body function.
+  - `useState`/`useReducer`/`useMemo` updater functions.
+  - `UNSAFE_componentWillMount`.
+  - `UNSAFE_componentWillReceiveProps`.
+  - `UNSAFE_componentWillUpdate`.
 - Commit phase:
   - componentDidMount.
   - getSnapshotBeforeUpdate.
