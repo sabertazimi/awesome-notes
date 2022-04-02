@@ -2592,6 +2592,8 @@ h3::before {
 
 ### Backdrop Filter
 
+毛玻璃效果 (`Frosted Glass`: `bg-white/30 shadow-lg backdrop-blur-sm`):
+
 ```css
 body {
   background-image: url('https://images.unsplash.com/image');
