@@ -40,6 +40,37 @@ Software design is the art of managing dependencies and abstractions.
 Too much functionality is in one class and you modify a piece of it,
 it can be difficult to understand how that will affect other dependent modules.
 
+```ts
+// BAD
+class Animal {
+  constructor(name) {
+    super(name);
+  }
+
+  getAnimalName() {
+    return this.name;
+  }
+
+  saveAnimal(animal) {}
+}
+
+// GOOD
+class Animal {
+  constructor(name) {
+    super(name);
+  }
+
+  getAnimalName() {
+    return this.name;
+  }
+}
+
+class AnimalDB {
+  getAnimal(animal) {}
+  saveAnimal(animal) {}
+}
+```
+
 #### Open-Closed Principle
 
 Allow users to add new functionalities without changing existing code,
@@ -79,6 +110,79 @@ class CoderFilter {
 }
 ```
 
+```java
+const animals: Array<Animal> = [
+    new Animal('lion'),
+    new Animal('mouse')
+];
+
+function AnimalSound(a: Array<Animal>) {
+    for(int i = 0; i <= a.length; i++) {
+        if(a[i].name == 'lion')
+            log('roar');
+        if(a[i].name == 'mouse')
+            log('squeak');
+    }
+}
+AnimalSound(animals);
+```
+
+```java
+class Animal {
+        makeSound();
+        //...
+}
+class Lion extends Animal {
+    makeSound() {
+        return 'roar';
+    }
+}
+class Squirrel extends Animal {
+    makeSound() {
+        return 'squeak';
+    }
+}
+class Snake extends Animal {
+    makeSound() {
+        return 'hiss';
+    }
+}
+//...
+function AnimalSound(a: Array<Animal>) {
+    for(int i = 0; i <= a.length; i++) {
+        log(a[i].makeSound());
+    }
+}
+AnimalSound(animals);
+```
+
+```java
+class Discount {
+    giveDiscount() {
+        if(this.customer == 'fav') {
+            return this.price * 0.2;
+        }
+        if(this.customer == 'vip') {
+            return this.price * 0.4;
+        }
+    }
+}
+```
+
+```java
+class VIPDiscount: Discount {
+    getDiscount() {
+        return super.getDiscount() * 2;
+    }
+}
+
+class SuperVIPDiscount: VIPDiscount {
+    getDiscount() {
+        return super.getDiscount() * 2;
+    }
+}
+```
+
 #### Liskov Substitution Principle
 
 Objects of ParentType can be replaced with objects of SubType without altering.
@@ -86,45 +190,250 @@ Altering shows that SubType should not be subtype of ParentType
 (break Open Closed Principle),
 you should re-design ParentType and SubType.
 
+```java
+function AnimalLegCount(a: Array<Animal>) {
+    for(int i = 0; i <= a.length; i++) {
+        if(typeof a[i] == Lion)
+            log(LionLegCount(a[i]));
+        if(typeof a[i] == Mouse)
+            log(MouseLegCount(a[i]));
+        if(typeof a[i] == Snake)
+            log(SnakeLegCount(a[i]));
+    }
+}
+AnimalLegCount(animals);
+```
+
+```java
+class Animal {
+    //...
+    LegCount();
+}
+
+//...
+class Lion extends Animal{
+    //...
+    LegCount() {
+        //...
+    }
+}
+//...
+
+function AnimalLegCount(a: Array<Animal>) {
+    for(let i = 0; i <= a.length; i++) {
+        a[i].LegCount();
+    }
+}
+AnimalLegCount(animals);
+```
+
 #### Interface Segregation Principle
 
-Clients should not be forced to depend upon interfaces that they do not use.
+- Make **fine grained** interfaces that are client specific.
+- Clients should not be forced to depend upon interfaces that they do not use.
+
+```java
+// BAD.
+interface IShape {
+    drawCircle();
+    drawSquare();
+    drawRectangle();
+}
+
+class Circle implements IShape {
+    drawCircle(){
+        //...
+    }
+    drawSquare(){
+        //...
+    }
+    drawRectangle(){
+        //...
+    }
+}
+class Square implements IShape {
+    drawCircle(){
+        //...
+    }
+    drawSquare(){
+        //...
+    }
+    drawRectangle(){
+        //...
+    }
+}
+class Rectangle implements IShape {
+    drawCircle(){
+        //...
+    }
+    drawSquare(){
+        //...
+    }
+    drawRectangle(){
+        //...
+    }
+}
+```
+
+```java
+// GOOD.
+interface IShape {
+    draw();
+}
+interface ICircle {
+    drawCircle();
+}
+interface ISquare {
+    drawSquare();
+}
+interface IRectangle {
+    drawRectangle();
+}
+interface ITriangle {
+    drawTriangle();
+}
+class Circle implements ICircle {
+    drawCircle() {
+        //...
+    }
+}
+class Square implements ISquare {
+    drawSquare() {
+        //...
+    }
+}
+class Rectangle implements IRectangle {
+    drawRectangle() {
+        //...
+    }
+}
+class Triangle implements ITriangle {
+    drawTriangle() {
+        //...
+    }
+}
+class CustomShape implements IShape {
+   draw(){
+      //...
+   }
+}
+```
+
+```java
+// GOOD.
+class Circle implements IShape {
+    draw(){
+        //...
+    }
+}
+
+class Triangle implements IShape {
+    draw(){
+        //...
+    }
+}
+
+class Square implements IShape {
+    draw(){
+        //...
+    }
+}
+
+class Rectangle implements IShape {
+    draw(){
+        //...
+    }
+}
+```
 
 #### Dependency Inversion Principle
 
-- High-level modules should not depend on low-level modules.
-  Both should depend on abstractions.
-- Abstractions should not depend upon details.
-  Details should depend on abstractions.
+Dependency should be on **abstractions** not concretions:
+
+- High-level modules should not depend upon low-level modules.
+  Both should depend upon **abstractions**
+- Abstractions should not depend on details.
+  Details should depend upon abstractions
 - Pros:
   - Loosely coupled modules.
   - Better reusability.
   - Better testability.
 
+```java
+class XMLHttpService extends XMLHttpRequestService {}
+class Http {
+    constructor(private xmlHttpService: XMLHttpService) { }
+    get(url: string , options: any) {
+        this.xmlHttpService.request(url,'GET');
+    }
+    post() {
+        this.xmlHttpService.request(url,'POST');
+    }
+    //...
+}
+```
+
+```java
+interface Connection {
+    request(url: string, opts:any);
+}
+
+// Abstraction not upon on details (but upon on abstractions)
+class Http {
+    constructor(private httpConnection: Connection) { }
+    get(url: string , options: any) {
+        this.httpConnection.request(url,'GET');
+    }
+    post() {
+        this.httpConnection.request(url,'POST');
+    }
+    //...
+}
+
+class XMLHttpService implements Connection {
+    const xhr = new XMLHttpRequest();
+    //...
+    request(url: string, opts:any) {
+        xhr.open();
+        xhr.send();
+    }
+}
+class NodeHttpService implements Connection {
+    request(url: string, opts:any) {
+        //...
+    }
+}
+class MockHttpService implements Connection {
+    request(url: string, opts:any) {
+        //...
+    }
+}
+```
+
 ### Literal Pattern
 
-- 不要使用 new Boolean()/new Number()/new String()
-- 避免使用 new Object()/new Array()
+- 不要使用 `new Boolean()`/`new Number()`/`new String()`.
+- 避免使用 `new Object()`/`new Array()`.
 
-### Closure and IIFE
+### Closure and IIFE Pattern
 
 ### Check Pattern
 
-- `O || {}` `O || (O = {})`
-- `if (O && O.property)`
-- `if (typeof v === " ")`
-- `toString. apply(var)`
+- `O || {}` `O || (O = {})`.
+- `if (O && O.property)`.
+- `if (typeof v === " ")`.
+- `toString. apply(var)`.
 
 ### Function Patterns
 
-#### 参数
+#### Parameters Patterns
 
-- 函数不应依赖于全局变量，实现与执行全局环境的的解耦
-- 全局变量应以函数参数/依赖的形式，注入函数内部
+- 函数不应依赖于全局变量，实现与执行全局环境的的解耦.
+- 全局变量应以函数参数/依赖的形式，注入函数内部.
 
-### 解耦
+### Decouple
 
-#### 事件处理与 UI 逻辑
+#### Event Handlers and UI Logic
 
 - 事件处理函数与应用逻辑函数分开成单独函数,提高代码重用率
 - 应用逻辑函数不依赖于 event 对象，其属性值作为参数传入，易于解耦与测试
@@ -149,24 +458,20 @@ const MyApp = {
 };
 ```
 
-### Env and Config
+### Environment and Configuration
 
-配置文件以 .env/JS(Object)/JSON/JSONP/XML/YML 格式单独存放，方便读取
+配置文件以 `.env`/`JS(Object)`/`JSON`/`JSONP`/`XML`/`YML` 格式单独存放，方便读取.
 
 ### Stand Library Idioms
 
-- use `Number.isNaN` not `isNaN`
-- use `Number.isFinite` not `isFinite`
-
-### Other Patterns
-
-!!result 转化成 Boolean
+- use `Number.isNaN` not `isNaN`.
+- use `Number.isFinite` not `isFinite`.
 
 ## Modular Patterns
 
 ### Object Literal
 
-通过对象字面量创建命名空间
+通过对象字面量创建命名空间:
 
 ```js
 APP.namespace = function (namespaceString) {
@@ -2686,6 +2991,56 @@ function mix(...args) {
 }
 ```
 
+## Programming Paradigms
+
+Each programming language realizes one or more paradigms.
+Each paradigm is defined by a set of programming concepts.
+
+### Taxonomy of Paradigms
+
+![Taxonomy of Programming Paradigms](./figures/ProgrammingParadigms.jpg)
+
+Nondeterminism is important for real-world interaction.
+Named state is important for modularity.
+
+#### Observable Nondeterminism
+
+During the execution, this choice is made by
+a part of the run-time system called the scheduler.
+The nondeterminism is observable
+if a user can see **different results** from executions
+that start at the **same internal configuration**.
+
+- concurrency or race condition (timing effects)
+- shared-state concurrency or message-passing concurrency
+- concurrent programming language e.g Java
+
+#### Named State
+
+State is the ability to remember information (a sequence of values in time).
+Distinguish three axes of expressiveness, depending on whether the state is:
+
+- unnamed or named
+- deterministic or nondeterministic
+- sequential or concurrent
+- named, nondeterministic and concurrent paradigm
+  as the most expressiveness of state
+- named state for updatable memory (mutable state) and modularity
+
+The least expressive combination is functional programming
+(threaded state: unnamed, deterministic, sequential).
+Adding concurrency gives declarative concurrent programming
+(synchronous cells: unnamed, deterministic, concurrent).
+Adding nondeterministic choice gives concurrent logic programming
+(stream mergers: unnamed, nondeterministic, concurrent).
+Adding ports or cells, gives message passing or shared state
+(named, nondeterministic, concurrent).
+
+### Functional Programming
+
+Based on the concept of first-class function or closure,
+which makes it equivalent to the λ-calculus which is `Turing complete`.
+
 ## MVC Pattern
 
 在 MVC 中，视图位于我们架构的顶部，其背后是控制器.
@@ -2799,17 +3154,6 @@ Nest.js 通过 AOP 的架构方式, 实现了松耦合, 易于维护与扩展的
 })(jQuery, window, document);
 ```
 
-## Scalability Design
-
-- Prefer composites over mixins.
-- Always clone objects between components.
-- Use namespaced state store modules.
-- Write robust tests.
-- Interact with REST API via services/SDK.
-- Wrap third-party libraries other using them directly:
-  - Abstract: changing dependencies without changing interface.
-  - Extendability: More obvious route to extending functionality.
-
 ## Domain Driven Design
 
 - [Front-end domain driven design guide](https://dev.to/bespoyasov/clean-architecture-on-frontend-4311).
@@ -2847,6 +3191,17 @@ Domain 层是领域模型系统的核心,
 ### DDD Layout
 
 - [DDD Layout in Golang](https://github.com/lupguo/ddd-layout)
+
+## Scalability Design
+
+- Prefer composites over mixins.
+- Always clone objects between components.
+- Use namespaced state store modules.
+- Write robust tests.
+- Interact with REST API via services/SDK.
+- Wrap third-party libraries other using them directly:
+  - Abstract: changing dependencies without changing interface.
+  - Extendability: More obvious route to extending functionality.
 
 ## 高并发系统设计
 
