@@ -1843,7 +1843,13 @@ Vue.compile = compileToFunctions;
 ### Vue Instance
 
 ```ts
-// Vue.prototype._init
+// Vue.prototype._init: core/instance/init.js
+// eslint-disable-next-line @typescript-eslint/no-this-alias
+const vm: Component = this;
+```
+
+```ts
+// Vue.prototype._init: core/instance/init.js
 vm._uid = uid++; // 每个Vue实例都拥有一个唯一的 id
 vm._isVue = true; // 这个表示用于避免Vue实例对象被观测(observed)
 vm.$options = options; // 当前 Vue 实例的初始化选项，注意：这是经过 mergeOptions() 后的
@@ -1886,17 +1892,142 @@ vm.$listeners = listeners;
 vm._watchers = [];
 vm._data = data;
 
-// mountComponent()   core/instance/lifecycle.js
+// mountComponent(): core/instance/lifecycle.js
 vm.$el = el;
 
-// initComputed()   core/instance/state.js
+// initComputed(): core/instance/state.js
 vm._computedWatchers = Object.create(null);
 
-// initProps()    core/instance/state.js
+// initProps(): core/instance/state.js
 vm._props = {};
 
-// initProvide()    core/instance/inject.js
+// initProvide(): core/instance/inject.js
 vm._provided = provided;
+```
+
+### Vue Mounting Workflow
+
+- `new Vue()`.
+- `Vue.prototype._init`.
+- `Vue.prototype.$mount`.
+- `vm.$options.render = compileToFunctions(vm.$options.template)`:
+  - `vue-loader` for static transform:
+    `.vue` -> `.js` in build time.
+  - `compileToFunctions` for runtime transform:
+    bundle `compiler` and `runtime` into `vue.js`.
+- `mountComponent(vm, el)`.
+- `Vue.prototype._render`.
+- `Vue.prototype._update`.
+
+```ts
+const app = new Vue({ el: '#app', ...restOptionsAPI });
+vm._init(...restOptionsAPI);
+if (vm.$options.el) vm.$mount(vm.$options.el);
+vm.$options.render = compileToFunctions(vm.$options.template);
+mountComponent(vm, el);
+```
+
+`core/instance/init.js`:
+
+- 合并配置.
+- 初始化生命周期.
+- 初始化事件中心.
+- 初始化渲染.
+- 初始化 data/props/computed/watcher.
+
+```ts
+// initMixin(Vue)
+Vue.prototype._init = function (options?: Object) {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const vm: Component = this;
+
+  // uid
+  vm._uid = uid++;
+
+  // a flag to avoid this being observed
+  vm._isVue = true;
+
+  // merge options
+  if (options && options._isComponent) {
+    initInternalComponent(vm, options);
+  } else {
+    vm.$options = mergeOptions(
+      resolveConstructorOptions(vm.constructor),
+      options || {},
+      vm
+    );
+  }
+
+  vm._renderProxy = vm;
+
+  // expose real self
+  vm._self = vm;
+  initLifecycle(vm);
+  initEvents(vm);
+  initRender(vm);
+  callHook(vm, 'beforeCreate');
+  initInjections(vm); // resolve injections before data/props
+  initState(vm);
+  initProvide(vm); // resolve provide after data/props
+  callHook(vm, 'created');
+
+  if (vm.$options.el) {
+    vm.$mount(vm.$options.el);
+  }
+};
+```
+
+`core/instance/lifecycle.js`:
+
+```ts
+export function mountComponent(
+  vm: Component,
+  el: ?Element,
+  hydrating?: boolean
+): Component {
+  vm.$el = el;
+
+  if (!vm.$options.render) {
+    vm.$options.render = createEmptyVNode;
+  }
+
+  callHook(vm, 'beforeMount');
+
+  const updateComponent = () => {
+    vm._update(vm._render(), hydrating);
+  };
+
+  // we set this to vm._watcher inside the watcher's constructor
+  // since the watcher's initial patch may call $forceUpdate
+  // (e.g. inside child component's mounted hook),
+  // which relies on vm._watcher being already defined.
+  // eslint-disable-next-line no-new
+  new Watcher(
+    vm,
+    updateComponent,
+    noop,
+    {
+      before() {
+        if (vm._isMounted) {
+          callHook(vm, 'beforeUpdate');
+        }
+      },
+    },
+    true /* isRenderWatcher */
+  );
+
+  hydrating = false;
+
+  // manually mounted instance, call mounted on self
+  // mounted is called for render-created child components in its inserted hook
+  // vm.$vnode 表示 Vue 实例的父虚拟 Node.
+  if (vm.$vnode == null) {
+    vm._isMounted = true;
+    callHook(vm, 'mounted');
+  }
+
+  return vm;
+}
 ```
 
 ### Vue ReadOnly Property
