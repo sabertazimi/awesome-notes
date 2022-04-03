@@ -1779,6 +1779,8 @@ export default Vue;
 
 ### Vue Global API
 
+`core/global-api/index.js` 添加 `Vue.XXX` 静态方法:
+
 ```ts
 // initGlobalAPI
 Vue.config = config;
@@ -1808,17 +1810,17 @@ Vue.options = {
   _base: Vue,
 };
 
-// initUse ***************** global-api/use.js
+// initUse: global-api/use.js
 Vue.use = function (plugin: Function | Object) {};
 
-// initMixin ***************** global-api/mixin.js
+// initMixin: global-api/mixin.js
 Vue.mixin = function (mixin: Object) {};
 
-// initExtend ***************** global-api/extend.js
+// initExtend: global-api/extend.js
 Vue.cid = 0;
 Vue.extend = function (extendOptions: Object): Function {};
 
-// initAssetRegisters ***************** global-api/assets.js
+// initAssetRegisters: global-api/assets.js
 Vue.component =
   Vue.directive =
   Vue.filter =
@@ -1848,7 +1850,7 @@ vm.$options = options; // 当前 Vue 实例的初始化选项，注意：这是�
 vm._renderProxy = vm; // 渲染函数作用域代理
 vm._self = vm; // 实例本身
 
-// initLifecycle(vm)    core/instance/lifecycle.js **************************************************
+// initLifecycle(vm): core/instance/lifecycle.js
 vm.$parent = vmParent;
 vm.$root = vmParent ? vmParent.$root : vm;
 
@@ -1862,11 +1864,11 @@ vm._isMounted = false;
 vm._isDestroyed = false;
 vm._isBeingDestroyed = false;
 
-// initEvents(vm)   core/instance/events.js **************************************************
+// initEvents(vm): core/instance/events.js
 vm._events = Object.create(null);
 vm._hasHookEvent = false;
 
-// initRender(vm)   core/instance/render.js **************************************************
+// initRender(vm): core/instance/render.js
 vm._vnode = null; // the root of the child tree
 vm._staticTrees = null; // v-once cached trees
 
@@ -1880,7 +1882,7 @@ vm.$createElement = createElement;
 vm.$attrs = attrs;
 vm.$listeners = listeners;
 
-// initState(vm)   core/instance/state.js **************************************************
+// initState(vm): core/instance/state.js
 vm._watchers = [];
 vm._data = data;
 
