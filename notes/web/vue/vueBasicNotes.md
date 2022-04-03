@@ -1907,6 +1907,8 @@ vm._provided = provided;
 
 ### Vue Mounting Workflow
 
+`new Vue()` -> 初始化 -> 编译 -> 渲染 -> 挂载 -> 更新:
+
 - `new Vue()`.
 - `Vue.prototype._init`.
 - `Vue.prototype.$mount`.
@@ -1919,6 +1921,26 @@ vm._provided = provided;
 - `Vue.prototype._render`.
 - `VDOM.createElement(vm)`.
 - `Vue.prototype._update`.
+- `Vue.prototype.__patch__` (`platforms/web/runtime/patch.js`):
+  - `backend.nodeOps` (`platforms/web/runtime/node-ops`).
+    - `createElement`.
+    - `createElementNS`.
+    - `createTextNode`.
+    - `createComment`.
+    - `insertBefore`.
+    - `appendChild`.
+    - `removeChild`.
+    - `parentNode`.
+    - `nextSibling`.
+    - `tagName`.
+    - `setTextContent`.
+    - `setStyleScope`.
+  - `backend.hooksModules` (`core/vdom/modules` + `platforms/web/runtime/modules`):
+    - `create`.
+    - `activate`.
+    - `update`.
+    - `remove`.
+    - `destroy`.
 
 ```ts
 const app = new Vue({ el: '#app', ...restOptionsAPI });
@@ -2169,6 +2191,48 @@ export function _createElement(
     return createEmptyVNode();
   }
 }
+```
+
+`core/instance/lifecycle.js`:
+
+```ts
+Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const vm: Component = this;
+  const prevEl = vm.$el;
+  const prevVnode = vm._vnode;
+  const restoreActiveInstance = setActiveInstance(vm);
+  vm._vnode = vnode;
+
+  // Vue.prototype.__patch__ is injected in entry points
+  // based on the rendering backend used.
+  if (!prevVnode) {
+    // initial render
+    vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */);
+  } else {
+    // updates
+    vm.$el = vm.__patch__(prevVnode, vnode);
+  }
+
+  restoreActiveInstance();
+
+  // update __vue__ reference
+  if (prevEl) {
+    prevEl.__vue__ = null;
+  }
+
+  if (vm.$el) {
+    vm.$el.__vue__ = vm;
+  }
+
+  // if parent is an HOC, update its $el as well
+  if (vm.$vnode && vm.$parent && vm.$vnode === vm.$parent._vnode) {
+    vm.$parent.$el = vm.$el;
+  }
+
+  // updated hook is called by the scheduler
+  // to ensure that children are updated in a parent's updated hook.
+};
 ```
 
 ### Vue Options API
