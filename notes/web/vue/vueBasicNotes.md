@@ -1608,7 +1608,6 @@ Vue.prototype.$mount = function (
 ```ts
 import config from 'core/config';
 import { cached } from 'core/util/index';
-import { mark, measure } from 'core/util/perf';
 
 import Vue from './runtime/index';
 import { compileToFunctions } from './compiler/index';
@@ -1674,16 +1673,13 @@ Vue.prototype.$mount = function (
         if (process.env.NODE_ENV !== 'production') {
           warn(`invalid template option: ${template}`, this);
         }
+
         return this;
       }
     } else if (el) {
       template = getOuterHTML(el);
     }
     if (template) {
-      if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
-        mark('compile');
-      }
-
       const { render, staticRenderFns } = compileToFunctions(
         template,
         {
@@ -1696,13 +1692,9 @@ Vue.prototype.$mount = function (
       );
       options.render = render;
       options.staticRenderFns = staticRenderFns;
-
-      if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
-        mark('compile end');
-        measure(`vue ${this._name} compile`, 'compile', 'compile end');
-      }
     }
   }
+
   return mount.call(this, el, hydrating);
 };
 
