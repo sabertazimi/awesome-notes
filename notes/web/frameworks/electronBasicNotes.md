@@ -42,7 +42,7 @@ electron-forge start
 - [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
 - Electron IPC
 
-```js
+```ts
 // main process
 global.sharedObject = {
   someProperty: 'default value',
@@ -67,7 +67,7 @@ console.log(require('remote').getGlobal('sharedObject').someProperty);
 
 - remote module
 
-```js
+```ts
 const { BrowserWindow } = require('electron').remote;
 const win = new BrowserWindow({ width: 800, height: 600 });
 win.loadURL('https://github.com');
@@ -103,7 +103,7 @@ win.loadURL('https://github.com');
 - don't trust external resources
 - disable nodejs in renderers that display remote content
 
-```js
+```ts
 let win;
 
 const createBrowserWindow = () => {
@@ -119,7 +119,7 @@ const createBrowserWindow = () => {
 };
 ```
 
-```js
+```ts
 // preload.js
 const fs = require('fs');
 

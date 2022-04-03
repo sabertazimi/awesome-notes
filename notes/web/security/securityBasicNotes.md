@@ -20,7 +20,7 @@ tags: [Web, Security]
 
 injection:
 
-```js
+```ts
 const token = req.cookies.token;
 
 // vulnerability:
@@ -87,7 +87,7 @@ Hover a transparent malicious link upon the true button
 
 - X-Frame-Options
 
-```js
+```ts
 // nodejs
 response.setHeader('X-Frame-Options', 'DENY');
 response.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
@@ -102,7 +102,7 @@ response.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
 - where: not passing session IDs in queryStrings/requestBody,
   instead of passing them in **HTTP cookies**
 
-```js
+```ts
 req.session.regenerate(function (err) {
   process(err);
 });
@@ -110,7 +110,7 @@ req.session.regenerate(function (err) {
 
 - what: generate complex session IDs
 
-```js
+```ts
 const generateSessionId = session => uid(24);
 ```
 
@@ -163,7 +163,7 @@ CSRF 利用的是网站对用户网页浏览器的信任.
 </a>
 ```
 
-```js
+```ts
 // old browser
 'use strict';
 
@@ -214,7 +214,7 @@ DDoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时
 
 Check the Referrer when doing redirects
 
-```js
+```ts
 function isRelative(url) {
   return url && url.match(/^\/[^\/\\]/);
 }

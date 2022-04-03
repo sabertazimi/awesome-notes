@@ -30,7 +30,7 @@ tags: [Web, JavaScript, ECMAScript]
   every closure for each loop
   binds the block-scoped variable.
 
-```js
+```ts
 const a = 1;
 
 b = 3; // temporal dead zone: throw reference error
@@ -60,15 +60,15 @@ let b = 2;
 - ES6 内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
 - 如果一个数组成员不严格等于 undefined，默认值不会生效
 
-```js
+```ts
 const [x = 1] = [undefined];
-x; // 1
+console.log(x); // 1
 
 const [x = 1] = [null];
-x; // null
+console.log(x); // null
 ```
 
-```js
+```ts
 let [x = 1, y = x] = []; // x=1; y=1
 let [x = 1, y = x] = [2]; // x=2; y=2
 let [x = 1, y = x] = [1, 2]; // x=1; y=2
@@ -77,7 +77,7 @@ let [x = y, y = 1] = []; // ReferenceError
 
 #### Swap Value with Destructuring
 
-```js
+```ts
 [x, y] = [y, x];
 ```
 
@@ -88,7 +88,7 @@ let [x = y, y = 1] = []; // ReferenceError
 - 一次性定义多个参数.
 - 一次性定义多个参数的默认值.
 
-```js
+```ts
 // 参数是一组有次序的值
 function f1([x, y, z]) {}
 f1([1, 2, 3]);
@@ -114,7 +114,7 @@ jQuery.ajax = function (
 };
 ```
 
-```js
+```ts
 // 返回一个数组
 function example1() {
   return [1, 2, 3];
@@ -132,7 +132,7 @@ function example2() {
 const { foo, bar } = example2();
 ```
 
-```js
+```ts
 function add([x, y]) {
   return x + y;
 }
@@ -155,7 +155,7 @@ move(); // [0, 0]
 
 #### Parse JSON Object with Destructuring
 
-```js
+```ts
 const jsonData = {
   id: 42,
   status: 'OK',
@@ -173,7 +173,7 @@ console.log(id, status, number);
 - `for index in Iterable<T>`: key.
 - `for [key, value] of Iterable<T>`: entry.
 
-```js
+```ts
 const map = new Map();
 map.set('first', 'hello');
 map.set('second', 'world');
@@ -197,7 +197,7 @@ for (const [, value] of map) {
 
 #### Import with Destructuring
 
-```js
+```ts
 const { SourceMapConsumer, SourceNode } = require('source-map');
 ```
 
@@ -209,27 +209,27 @@ const { SourceMapConsumer, SourceNode } = require('source-map');
 - Set.
 - Generator function.
 
-```js
+```ts
 const [foo, [[bar], baz]] = [1, [[2], 3]];
-foo; // 1
-bar; // 2
-baz; // 3
+console.log(foo); // 1
+console.log(bar); // 2
+console.log(baz); // 3
 
 const [, , third] = ['foo', 'bar', 'baz'];
-third; // "baz"
+console.log(third); // "baz"
 
 const [x, , y] = [1, 2, 3];
-x; // 1
-y; // 3
+console.log(x); // 1
+console.log(y); // 3
 
 const [head, ...tail] = [1, 2, 3, 4];
-head; // 1
-tail; // [2, 3, 4]
+console.log(head); // 1
+console.log(tail); // [2, 3, 4]
 
 const [x, y, ...z] = ['a'];
-x; // "a"
-y; // undefined
-z; // []
+console.log(x); // "a"
+console.log(y); // undefined
+console.log(z); // []
 
 // Generator 函数
 function* fibs() {
@@ -243,74 +243,74 @@ function* fibs() {
 }
 
 const [first, second, third, fourth, fifth, sixth] = fibs();
-sixth; // 5
+console.log(sixth); // 5
 ```
 
 #### Object Destructuring
 
 - 真正被赋值的是后者，而不是前者.
 
-```js
+```ts
 const { pattern: variable } = { key: value };
 ```
 
 - 解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象.
 - undefined/null 无法转化为对象.
 
-```js
+```ts
 const { prop: x } = undefined; // TypeError
 const { prop: y } = null; // TypeError
 ```
 
-```js
+```ts
 const { bar, foo } = { foo: 'aaa', bar: 'bbb' };
-foo; // "aaa"
-bar; // "bbb"
+console.log(foo); // "aaa"
+console.log(bar); // "bbb"
 
 const { foo, bar } = { foo: 'aaa', bar: 'bbb' };
 
 const { baz } = { foo: 'aaa', bar: 'bbb' };
-baz; // undefined
+console.log(baz); // undefined
 ```
 
-```js
+```ts
 const { foo: baz } = { foo: 'aaa', bar: 'bbb' };
-baz; // "aaa"
+console.log(baz); // "aaa"
 
 const obj = { first: 'hello', last: 'world' };
 const { first: f, last: l } = obj;
-f; // 'hello'
-l; // 'world'
+console.log(f); // 'hello'
+console.log(l); // 'world'
 ```
 
-```js
+```ts
 const { log, sin, cos } = Math;
 ```
 
 #### String Destructuring
 
-```js
+```ts
 const [a, b, c, d, e] = 'hello';
-a; // "h"
-b; // "e"
-c; // "l"
-d; // "l"
-e; // "o"
+console.log(a); // "h"
+console.log(b); // "e"
+console.log(c); // "l"
+console.log(d); // "l"
+console.log(e); // "o"
 
 const { length: len } = 'hello';
-len; // 5
+console.log(len); // 5
 ```
 
 #### Number and Boolean Destructuring
 
 `number`/`boolean` 会转化成对象:
 
-```js
+```ts
 let { toString: s } = 123;
-s === Number.prototype.toString; // true
+const truthy = s === Number.prototype.toString; // true
 
 let { toString: s } = true;
-s === Boolean.prototype.toString; // true
+const truthy = s === Boolean.prototype.toString; // true
 ```
 
 ### Logical Operators
@@ -334,14 +334,14 @@ s === Boolean.prototype.toString; // true
 
 ### ES6 String
 
-```js
+```ts
 // eslint-disable-next-line no-self-compare
-'z' === 'z'; // true
+const truthy = 'z' === 'z'; // true
 // eslint-disable-next-line no-octal-escape
-'\172' === 'z'; // true
-'\x7A' === 'z'; // true
-'\u007A' === 'z'; // true
-'\u{7A}' === 'z'; // true
+const truthy = '\172' === 'z'; // true
+const truthy = '\x7A' === 'z'; // true
+const truthy = '\u007A' === 'z'; // true
+const truthy = '\u{7A}' === 'z'; // true
 ```
 
 #### String Methods
@@ -349,19 +349,19 @@ s === Boolean.prototype.toString; // true
 - string.codePointAt(index): 正确处理 4 字节存储字符
 - string.fromCodePoint(codePoint)
 
-```js
+```ts
 function is32Bit(c) {
   return c.codePointAt(0) > 0xffff;
 }
 
-String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y';
-// true
+// True:
+const truthy = String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y';
 ```
 
 - string.includes(substr)/startsWith(substr)/endsWith(substr)
 - 使用第二个参数 n 时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束
 
-```js
+```ts
 const s = 'Hello world!';
 
 s.startsWith('world', 6); // true
@@ -371,7 +371,7 @@ s.includes('Hello', 6); // false
 
 - repeat(times)
 
-```js
+```ts
 'hello'.repeat(2); // "hellohello"
 'na'.repeat(2.9); // "nana"
 
@@ -387,7 +387,7 @@ s.includes('Hello', 6); // false
 
 - padStart/padEnd(len, paddingStr)
 
-```js
+```ts
 '1'.padStart(10, '0'); // "0000000001"
 '12'.padStart(10, '0'); // "0000000012"
 '123456'.padStart(10, '0'); // "0000123456"
@@ -405,7 +405,7 @@ s.includes('Hello', 6); // false
   - `replaceAll(substr, newSubstr)`.
   - `replaceAll(substr, replacerFunction)`.
 
-```js
+```ts
 // eslint-disable-next-line prefer-regex-literals
 const regexp = new RegExp('foo[a-z]*', 'g');
 const str = 'table football, foosball';
@@ -427,7 +427,7 @@ Array.from(str.matchAll(regexp), m => m[0]);
 // Array [ "football", "foosball" ]
 ```
 
-```js
+```ts
 'aabbcc'.replaceAll('b', '.');
 // => 'aa..cc'
 
@@ -439,7 +439,7 @@ Array.from(str.matchAll(regexp), m => m[0]);
 
 `str` 表示模板字符串
 
-```js
+```ts
 // 普通字符串
 `In JavaScript '\n' is a line-feed.``\`Yo\` World!``In JavaScript this is // 多行字符串
  not legal.``${
@@ -451,7 +451,7 @@ Array.from(str.matchAll(regexp), m => m[0]);
 
 #### Tagged Templates
 
-```js
+```ts
 const boldify = (parts, ...insertedParts) => {
   return parts
     .map((s, i) => {
@@ -466,7 +466,7 @@ console.log(boldify`Hi, my name is ${name}!`);
 // => "Hi, my name is <strong>Sabertaz</strong>!"
 ```
 
-```js
+```ts
 function template(strings, ...keys) {
   return function (...values) {
     const dict = values[values.length - 1] || {};
@@ -487,7 +487,7 @@ t2Closure('Hello', { foo: 'World' }); // "Hello World!"
 
 - 编译模板(小型模板引擎)
 
-```js
+```ts
 function compile(template) {
   const evalExpr = /<%=(.+?)%>/g;
   const expr = /<%([\s\S]+?)%>/g;
@@ -541,14 +541,14 @@ const libraryHtml = hashTemplate`
 
 - 国际化处理
 
-```js
+```ts
 i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`;
 // "欢迎访问xxx，您是第xxxx位访问者！"
 ```
 
 - XSS 攻击
 
-```js
+```ts
 const message = SaferHTML`<p>${sender} has sent you a message.</p>`;
 
 function SaferHTML(templateString, ...expressions) {
@@ -573,7 +573,7 @@ function SaferHTML(templateString, ...expressions) {
 
 - 运行代码
 
-```js
+```ts
 jsx`
   <div>
     <input
@@ -603,12 +603,12 @@ HelloWorldApp.main();
 - \*\* 指数运算符
 - BigInt
 
-```js
+```ts
 const a = 2172141653;
 const b = 15346349309;
-a * b;
+const c1 = a * b;
 // => 33334444555566670000
-BigInt(a) * BigInt(b);
+const c2 = BigInt(a) * BigInt(b);
 // => 33334444555566667777n
 ```
 
@@ -616,7 +616,7 @@ BigInt(a) * BigInt(b);
 
 #### Number i18n
 
-```js
+```ts
 const nfFrench = new Intl.NumberFormat('fr');
 nf.format(12345678901234567890n);
 // => 12 345 678 901 234 567 890
@@ -624,7 +624,7 @@ nf.format(12345678901234567890n);
 
 #### String i18n
 
-```js
+```ts
 const lfEnglish = new Intl.ListFormat('en');
 // const lfEnglish = new Intl.ListFormat('en', { type: 'disjunction' }); => 'or'
 
@@ -652,7 +652,7 @@ console.log(formatter3.format(vehicles));
 
 #### Time i18n
 
-```js
+```ts
 const rtfEnglish = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 
 rtf.format(-1, 'day'); // 'yesterday'
@@ -663,7 +663,7 @@ rtf.format(0, 'week'); // 'this week'
 rtf.format(1, 'week'); // 'next week'
 ```
 
-```js
+```ts
 const dtfEnglish = new Intl.DateTimeFormat('en', {
   year: 'numeric',
   month: 'long',
@@ -676,8 +676,8 @@ dtfEnglish.formatRange(start, end); // => 'May 7 - 9, 2019'
 
 ### Array
 
-```js
-[...Array(5).keys()]; // => [0, 1, 2, 3, 4]
+```ts
+const array = [...Array(5).keys()]; // => [0, 1, 2, 3, 4]
 ```
 
 #### Array Includes
@@ -693,7 +693,7 @@ no more `indexOf() > -1`
 - 克隆数组
 - map 函数
 
-```js
+```ts
 // Set
 // Map
 
@@ -736,11 +736,11 @@ Array.from(Array(5).keys());
 
 替换数组元素，修改原数组
 
-```js
+```ts
 Array.prototype.copyWithin(target, (start = 0), (end = this.length));
 ```
 
-```js
+```ts
 [1, 2, 3, 4, 5].copyWithin(0, 3)[
   // => [4, 5, 3, 4, 5]
 
@@ -757,7 +757,7 @@ i32a.copyWithin(0, 2);
 
 #### Array Find
 
-```js
+```ts
 arr.find(fn);
 arr.findIndex(fn);
 ```
@@ -786,11 +786,11 @@ map + flat
 
 #### Spread Array
 
-```js
+```ts
 arr2.push(...arr1);
 ```
 
-```js
+```ts
 const obj = { x: 1, y: 2, z: 3 };
 
 obj[Symbol.iterator] = function* () {
@@ -799,14 +799,14 @@ obj[Symbol.iterator] = function* () {
   yield 3;
 };
 
-[...obj]; // print [1, 2, 3]
+const array = [...obj]; // print [1, 2, 3]
 ```
 
 ### New Object API
 
 - `Object.is`:
 
-```js
+```ts
 // Case 1: Evaluation result is the same as using ===
 Object.is(25, 25); // true
 Object.is('foo', 'foo'); // true
@@ -831,7 +831,7 @@ Object.is(NaN, 0 / 0); // true
 Object.is(NaN, Number.NaN); // true
 ```
 
-```js
+```ts
 if (!Object.is) {
   Object.defineProperty(Object, 'is', {
     value: (x, y) => {
@@ -859,7 +859,7 @@ if (!Object.is) {
 - `Object.entries`.
 - `Object.fromEntries`.
 
-```js
+```ts
 const score = {
   saber: 42,
   todd: 19,
@@ -885,7 +885,7 @@ Object.entries(score);
  */
 ```
 
-```js
+```ts
 const object = { x: 42, y: 50, abc: 9001 };
 const result = Object.fromEntries(
   Object.entries(object)
@@ -894,7 +894,7 @@ const result = Object.fromEntries(
 );
 ```
 
-```js
+```ts
 const map = new Map(Object.entries(object));
 const objectCopy = Object.fromEntries(map);
 ```
@@ -910,17 +910,17 @@ const objectCopy = Object.fromEntries(map);
 
 ### Modules
 
-```js
+```ts
 import { lastName as surname } from './profile.js';
 ```
 
-```js
+```ts
 export const firstName = 'Michael';
 export const lastName = 'Jackson';
 export const year = 1958;
 ```
 
-```js
+```ts
 // profile.js
 const firstName = 'Michael';
 const lastName = 'Jackson';
@@ -929,7 +929,7 @@ const year = 1958;
 export { firstName, lastName, year };
 ```
 
-```js
+```ts
 // 接口改名
 export { foo as myFoo } from 'my_module';
 
@@ -961,7 +961,7 @@ Export default value:
 <!-- eslint-disable import/no-duplicates -->
 <!-- eslint-disable no-import-assign -->
 
-```js
+```ts
 // module.js
 // main.js
 // eslint-disable-next-line import/no-named-default
@@ -990,7 +990,7 @@ setTimeout(() => {
 
 Export normal reference:
 
-```js
+```ts
 // module.js
 // main.js
 import { thing as importedThing } from './module.js';
@@ -1016,7 +1016,7 @@ To sum up:
 <!-- eslint-disable import/export -->
 <!-- eslint-disable import/no-duplicates -->
 
-```js
+```ts
 // These give you a live reference to the exported thing(s):
 import { thing } from './module.js';
 import { thing as otherName } from './module.js';
@@ -1029,9 +1029,9 @@ const module = await import('./module.js');
 const { thing } = await import('./module.js');
 
 // These export a live reference:
-export { thing }
-export { thing as otherName }
-export { thing as default }
+export { thing };
+export { thing as otherName };
+export { thing as default };
 // eslint-disable-next-line prettier/prettier
 export default function thing() {}
 // These export the current value:
@@ -1045,7 +1045,7 @@ export default 'hello!';
 
 ### Class
 
-```js
+```ts
 class A {
   constructor(value) {
     this.val = value;
@@ -1055,6 +1055,7 @@ class A {
 class B extends A {
   constructor(value) {
     super(value);
+    console.log('New');
   }
 }
 
@@ -1088,7 +1089,7 @@ console.log(bb[[proto]] === BB.prototype);
 
 #### Class Private Member
 
-```js
+```ts
 class Dong {
   constructor() {
     this.#name = 'dog';
@@ -1102,7 +1103,7 @@ class Dong {
 }
 ```
 
-```js
+```ts
 const classPrivateFieldGet = (receiver, state) => {
   return state.get(receiver);
 };
@@ -1134,7 +1135,7 @@ class Dong {
 Static blocks have access to class private member.
 Its mainly useful whenever set up multiple static fields.
 
-```js
+```ts
 class Foo {
   static #count = 0;
 
@@ -1151,7 +1152,7 @@ class Foo {
 }
 ```
 
-```js
+```ts
 class Translator {
   static translations = {
     yes: 'ja',
@@ -1168,7 +1169,7 @@ class Translator {
 }
 ```
 
-```js
+```ts
 class SuperClass {
   static superField1 = console.log('superField1');
   static {
@@ -1208,7 +1209,7 @@ class SubClass extends SuperClass {
 
 ### Map
 
-```js
+```ts
 const map = new Map([
   // You define a map via an array of 2-element arrays. The first
   // element of each nested array is the key, and the 2nd is the value
@@ -1222,7 +1223,7 @@ const map = new Map([
 map.get('name'); // 'Jean-Luc Picard'
 ```
 
-```js
+```ts
 const map = new Map([]);
 
 // eslint-disable-next-line no-new-wrappers
@@ -1244,11 +1245,11 @@ const obj = {};
 obj[n1] = 'One';
 obj[n2] = 'Two';
 
-obj[n1]; // 'Two'
-obj[5]; // 'Two'
+const two1 = obj[n1]; // 'Two'
+const two2 = obj[5]; // 'Two'
 ```
 
-```js
+```ts
 const objectClone = new Map(Object.entries(object));
 const arrayClone = new Map(Array.from(map.entries));
 const map = new Map([
@@ -1259,16 +1260,16 @@ const map = new Map([
 
 // The `for/of` loop can loop through iterators
 for (const key of map.keys()) {
-  key; // 'name', 'age', 'rank'
+  console.log(key); // 'name', 'age', 'rank'
 }
 
-for (const v of map.values()) {
-  v; // 'Jean-Luc Picard', 59, 'Captain'
+for (const value of map.values()) {
+  console.log(value); // 'Jean-Luc Picard', 59, 'Captain'
 }
 
 for (const [key, value] of map.entries()) {
-  key; // 'name', 'age', 'rank'
-  value; // 'Jean-Luc Picard', 59, 'Captain'
+  console.log(key); // 'name', 'age', 'rank'
+  console.log(value); // 'Jean-Luc Picard', 59, 'Captain'
 }
 ```
 
@@ -1294,7 +1295,7 @@ WeakMap 结构与 Map 结构基本类似,
   and may be used as the key of an Object property.
 - Symbols don't auto-convert to "strings" and can't convert to numbers
 
-```js
+```ts
 const arr = ['a', 'b', 'c'];
 const iter = arr[Symbol.iterator]();
 
@@ -1314,7 +1315,7 @@ iter.next(); // { value: undefined, done: true }
 
 #### Synchronous Iterator
 
-```js
+```ts
 const Iterable = {
   [Symbol.iterator]() {
     return Iterator;
@@ -1348,7 +1349,7 @@ const Iterator = {
 };
 ```
 
-```js
+```ts
 function methodsIterator() {
   let index = 0;
   const methods = Object.keys(this)
@@ -1385,7 +1386,7 @@ for (const method of myMethods) {
 
 #### Asynchronous Iterator
 
-```js
+```ts
 const AsyncIterable = {
   [Symbol.asyncIterator]() {
     return AsyncIterator;
@@ -1410,7 +1411,7 @@ const IteratorResult = {
 };
 ```
 
-```js
+```ts
 function remotePostsAsyncIteratorsFactory() {
   let i = 1;
   let done = false;
@@ -1464,7 +1465,7 @@ function remotePostsAsyncIteratorsFactory() {
 })();
 ```
 
-```js
+```ts
 // tasks will run in parallel
 ait.next().then();
 ait.next().then();
@@ -1477,7 +1478,7 @@ ait.next().then();
 
 #### Basic Usage
 
-```js
+```ts
 function* gen() {
   yield 1;
   yield 2;
@@ -1496,7 +1497,7 @@ g.return(1); // { value: 1, done: true }
 
 Iterable object:
 
-```js
+```ts
 const users = {
   james: false,
   andrew: true,
@@ -1516,7 +1517,7 @@ const users = {
 
 Early return:
 
-```js
+```ts
 function* gen() {
   yield 1;
   yield 2;
@@ -1534,7 +1535,7 @@ g.next(); // { value: undefined, done: true }
 
 The generator function itself is not iterable, call it to get the iterable-iterator:
 
-```js
+```ts
 for (const v of someOddNumbers) {
   console.log(v);
 } // => TypeError: someOddNumbers is not iterable
@@ -1546,7 +1547,7 @@ for (const v of number()) {
 
 Messaging system:
 
-```js
+```ts
 function* lazyCalculator(operator) {
   const firstOperand = yield;
   const secondOperand = yield;
@@ -1578,7 +1579,7 @@ g.next(); // { value: undefined, done: true }
 
 Error handling:
 
-```js
+```ts
 function* generator() {
   try {
     yield 1;
@@ -1616,7 +1617,7 @@ Generator based control flow goodness for nodejs and the browser,
 using promises, letting you write non-blocking code in a nice-ish way
 (just like [tj/co](https://github.com/tj/co)).
 
-```js
+```ts
 function coroutine(generatorFunc) {
   const generator = generatorFunc();
   nextResponse();
@@ -1644,7 +1645,7 @@ coroutine(function* bounce() {
 
 #### Asynchronous Generator
 
-```js
+```ts
 const asyncSource = {
   async *[Symbol.asyncIterator]() {
     yield await new Promise(resolve => setTimeout(resolve, 1000, 1));
@@ -1671,7 +1672,7 @@ async function* remotePostsAsyncGenerator() {
 }
 ```
 
-```js
+```ts
 function* chunkify(array, n) {
   yield array.slice(0, n);
   array.length > n && (yield* chunkify(array.slice(n), n));
@@ -1701,7 +1702,7 @@ async function* getRemoteData() {
 因为首次调用 `next` 函数时,
 生成器函数并没有在 `yield` 关键字处暂停.
 
-```js
+```ts
 function promise1() {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -1755,7 +1756,7 @@ co(readFile).then(res => console.log(res));
 
 Modify default object behavior with `Proxy` and `Reflect`:
 
-```js
+```ts
 // new Proxy(target, handler)
 Proxy(target, {
   set(target, name, value, receiver) {
@@ -1810,7 +1811,7 @@ change proxy object will change original object via `set` related API.
 
 #### Default Zero Value with Proxy
 
-```js
+```ts
 const withZeroValue = (target, zeroValue = 0) =>
   new Proxy(target, {
     get: (obj, prop) => (prop in obj ? obj[prop] : zeroValue),
@@ -1824,7 +1825,7 @@ console.log(pos.z); // => 0
 
 #### Negative Array Indices with Proxy
 
-```js
+```ts
 const negativeArray = els =>
   new Proxy(target, {
     get: (target, propKey, receiver) =>
@@ -1838,7 +1839,7 @@ const negativeArray = els =>
 
 #### Hiding Properties with Proxy
 
-```js
+```ts
 const hide = (target, prefix = '_') =>
   new Proxy(target, {
     has: (obj, prop) => !prop.startsWith(prefix) && prop in obj,
@@ -1855,14 +1856,14 @@ const userData = hide({
   _favoriteRapper: 'Drake',
 });
 
-'_favoriteRapper' in userData; // has: false
-Object.keys(userData); // ownKeys: ['firstName', 'mediumHandle']
-userData._favoriteRapper; // get: undefined
+const falsy = '_favoriteRapper' in userData; // has: false
+const keys = Object.keys(userData); // ownKeys: ['firstName', 'mediumHandle']
+console.log(userData._favoriteRapper); // get: undefined
 ```
 
 #### Read Only Object with Proxy
 
-```js
+```ts
 const NOPE = () => {
   throw new Error("Can't modify read-only object");
 };
@@ -1887,7 +1888,7 @@ const readOnly = target => new Proxy(target, NODE_HANDLER);
 
 #### Range Judgement with Proxy
 
-```js
+```ts
 const range = (min, max) =>
   new Proxy(Object.create(null), {
     has: (_, prop) => +prop >= min && +prop <= max,
@@ -1906,7 +1907,7 @@ nums.filter(n => n in range(1, 10));
 
 #### Handle Exception with Proxy
 
-```js
+```ts
 function createExceptionProxy(target) {
   return new Proxy(target, {
     get: (target, prop) => {
@@ -1952,7 +1953,7 @@ class ExceptionHandler {
 }
 ```
 
-```js
+```ts
 const obj = {
   name: 'obj',
   say() {
@@ -1985,14 +1986,14 @@ Avoid callback hell with:
 
 resolve only accept **one** value
 
-```js
+```ts
 return new Promise(resolve => resolve([a, b]));
 ```
 
 - promises on the same chain execute orderly
 - promises on two separate chains execute in random order
 
-```js
+```ts
 const users = ['User1', 'User2', 'User3', 'User4'];
 
 const response = [];
@@ -2013,7 +2014,7 @@ const getUsers = users => {
 };
 ```
 
-```js
+```ts
 const users = ['User1', 'User2', 'User3', 'User4'];
 
 let response = [];
@@ -2047,7 +2048,7 @@ function getUsers(users) {
   returns when all given promises are settled
   (rejected or fulfilled, doesn't matter).
 
-```js
+```ts
 Promise.all(urls.map(fetch))
   .then(responses => Promise.all(responses.map(res => res.text())))
   .then(texts => {
@@ -2055,7 +2056,7 @@ Promise.all(urls.map(fetch))
   });
 ```
 
-```js
+```ts
 Promise.all(urls.map(url => fetch(url).then(resp => resp.text()))).then(
   texts => {
     //
@@ -2065,7 +2066,7 @@ Promise.all(urls.map(url => fetch(url).then(resp => resp.text()))).then(
 
 - `Promise.all` with `async`/`await`
 
-```js
+```ts
 const loadData = async () => {
   try {
     const urls = ['...', '...'];
@@ -2085,7 +2086,7 @@ const data = loadData().then(data => console.log(data));
 
 #### Promise Polyfill
 
-```js
+```ts
 class Promise {
   // `executor` takes 2 parameters, `resolve()` and `reject()`. The executor
   // function is responsible for calling `resolve()` or `reject()` to say that
@@ -2221,7 +2222,7 @@ then only the second form is going to catch that rejection.
 
 #### Memorize Async Function
 
-```js
+```ts
 const memo = {};
 const progressQueues = {};
 
@@ -2262,7 +2263,7 @@ function memoProcessData(key) {
 
 avoid wrong parallel logic (too sequential)
 
-```js
+```ts
 // wrong
 const books = await bookModel.fetchAll();
 const author = await authorModel.fetch(authorId);
@@ -2297,13 +2298,13 @@ async function getAuthors(authorIds) {
 
 #### Sleep Function
 
-```js
+```ts
 function sleep(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
 ```
 
-```js
+```ts
 sleep(2000).then(() => {
   // do something after 2000 milliseconds
   console.log('resolved');
@@ -2324,7 +2325,7 @@ add(1, 2);
 - online and offline sync ([PouchDB](https://github.com/pouchdb/pouchdb))
 - tools: [redux-saga](https://github.com/redux-saga/redux-saga)
 
-```js
+```ts
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   data() {
@@ -2388,7 +2389,7 @@ For example, in vanilla.js, `map2 === map1` become `false`,
 but in immutable.js `map2 === map1` become `true`
 (copy free due to immutable data).
 
-```js
+```ts
 const map1 = { b: 2 };
 const map2 = map1.set('b', 2);
 ```
@@ -2406,7 +2407,7 @@ regardless of where it is executed later:
 - Closure Performance: avoid unnecessary closure creation.
 - The stale closure captures variables that have outdated values.
 
-```js
+```ts
 // global scope
 const e = 10;
 
@@ -2425,7 +2426,7 @@ function sum(a) {
 console.log(sum(1)(2)(3)(4)); // log 20
 ```
 
-```js
+```ts
 // BAD
 function MyObject(name, message) {
   this.name = name.toString();
@@ -2458,7 +2459,7 @@ MyObject.prototype.getMessage = function () {
 - `innerFunc()` has access to `outerVar` from its lexical scope,
   even being **executed outside of its lexical scope**.
 
-```js
+```ts
 function outerFunc() {
   const outerVar = 'I am outside!';
 
@@ -2475,7 +2476,7 @@ myInnerFunc();
 
 ### Partial Application
 
-```js
+```ts
 const partialFromBind = (fn, ...args) => {
   return fn.bind(null, ...args);
 };
@@ -2491,11 +2492,11 @@ const partial = (fn, ...args) => {
 
 chain of multiple single argument functions
 
-```js
+```ts
 const add = x => y => x + y;
 ```
 
-```js
+```ts
 function curry(fn, ...stored_args) {
   return function (...new_args) {
     const args = stored_args.concat(new_args);
@@ -2605,7 +2606,7 @@ if there’s any pending call back waiting to be executed:
 
 `Event Loop` simple model:
 
-```js
+```ts
 for (let ii = 0; ii < macroTask.length; ii++) {
   // eslint-disable-next-line no-eval
   eval(macroTask[ii])();
@@ -2628,7 +2629,7 @@ for (let ii = 0; ii < macroTask.length; ii++) {
 Using `setTimeout` with `0` seconds timer
 helps to defer execution of `Promise` and `bar` until the **stack** is **empty**.
 
-```js
+```ts
 const bar = () => {
   console.log('bar');
 };
@@ -2658,7 +2659,7 @@ foo();
 
 `process.nextTick()` run before `Promise.then()`:
 
-```js
+```ts
 console.log('1');
 
 setTimeout(() => {
@@ -2694,7 +2695,7 @@ console.log('10');
 
 Promise 构造函数本身是同步函数:
 
-```js
+```ts
 console.log('script start');
 
 const promise1 = new Promise(function (resolve) {
@@ -2722,7 +2723,7 @@ console.log('script end');
 
 `await a(); b()` 等价于 `Promise(a()).then(b())`: a 是同步执行, b 是 MicroTask:
 
-```js
+```ts
 async function async1() {
   console.log('async1 start');
   await async2();
@@ -2762,7 +2763,7 @@ console.log('script end');
 当调用栈没有同步函数时, 清空 MicroTask 任务队列里的函数,
 再从 MacroTask 任务队列里取出一个函数执行 (第二次 Event Loop):
 
-```js
+```ts
 function test() {
   console.log('start');
 
@@ -2815,7 +2816,7 @@ that is waiting for the result of that I/O operation.
 The Node.js execution model was designed to cater to the needs of most web servers,
 which tend to be **I/O-intensive** (due to non-blocking I/O).
 
-```js
+```ts
 console.log('glob1');
 
 setTimeout(function () {
@@ -2930,7 +2931,7 @@ console.log('glob2');
 
 - [Shapes ICS](https://mathiasbynens.be/notes/shapes-ics)
 
-```js
+```ts
 // o1 and o2 have the same shape
 // JSObject(1, 2) => Shape('x', 'y')
 // JSObject(3, 4) => Shape('x', 'y')
@@ -2942,7 +2943,7 @@ const o2 = { x: 3, y: 4 };
 
 Shape Transform
 
-```js
+```ts
 // Shape chain: Shape(empty) => Shape(x) => Shape(x, y)
 const o = {};
 o.x = 1;
@@ -3215,7 +3216,7 @@ Paint Order:
 - 局部变量引用嵌套成员: 加快原型链查找
 - 局部变量引用方法时，应注意会动态改变 this 指针
 
-```js
+```ts
 const DOM = tazimi.util.Dom;
 
 DOM.method.call(/* 关注 this 指针 */);
@@ -3232,7 +3233,7 @@ DOM.method.call(/* 关注 this 指针 */);
 
 #### 倒序循环可提升性能
 
-```js
+```ts
 for (let i = item.length; i--; ) {
   process(items[i]);
 }
@@ -3250,7 +3251,7 @@ do {
 
 #### Duff's Device
 
-```js
+```ts
 let i = items.length % 8;
 
 while (i) {
@@ -3277,7 +3278,7 @@ while (i) {
 
 调用栈尺寸限制异常，应立即定位在代码中的递归实例上
 
-```js
+```ts
 try {
   recursion();
 } catch (ex) {
@@ -3310,7 +3311,7 @@ try {
   Event Target ->
   Event Bubbling (default true).
 
-```js
+```ts
 window.onload = function () {
   const oUl = document.getElementById('ul');
   const aLi = oUl.getElementsByTagName('li');
@@ -3382,7 +3383,7 @@ window.onload = function () {
 
 #### 动态加载
 
-```js
+```ts
 function requireScript(file, callback) {
   const script = document.getElementsByTagName('script')[0];
   const newJS = document.createElement('script');
@@ -3414,13 +3415,13 @@ requireScript('the_rest.js', function () {
 - 局部变量缓存 DOM 元素
 - 局部变量缓存布局信息
 
-```js
+```ts
 const btn = document.getElementById('btn');
 ```
 
 - HTML Collection 转化成数组再操作
 
-```js
+```ts
 function toArray(coll) {
   for (let i = 0, a = [], len = coll.length; i < len; i++) {
     a[i] = coll[i];
@@ -3442,14 +3443,9 @@ function toArray(coll) {
 - 重排: 重新构造渲染树
 - 重绘: 重新绘制受影响部分
 
-**获取**或改变布局的操作会导致渲染树**变化队列**刷新,执行渲染队列中的"待处理变化",重排 DOM 元素
-
-```js
-offsetTop / Left / Width / Height;
-scrollTop / Left / Width / Height;
-clientTop / Left / Width / Height;
-getComputedStyle();
-```
+**获取**或改变布局的操作会导致渲染树**变化队列**刷新,
+执行渲染队列中的"待处理变化",
+重排 DOM 元素
 
 #### 批量修改 DOM
 
@@ -3457,7 +3453,7 @@ getComputedStyle();
 - 使待修改 DOM 元素脱离标准文档流(改变布局／定位方式)，可减少其他元素的重绘次数.
 - `document.createDocumentFragment()`.
 
-```js
+```ts
 const fragment = document.createDocumentFragment();
 appendDataToElement(fragment, data);
 document.getElementById('myList').appendChild(fragment);
@@ -3465,7 +3461,7 @@ document.getElementById('myList').appendChild(fragment);
 
 - oldNode.cloneNode(true);
 
-```js
+```ts
 const old = document.getElementById('myList');
 const clone = old.cloneNode(true);
 
@@ -3483,7 +3479,7 @@ and just before the frame is rendered (layout, paint, composite etc.).
 
 在 js 中(除定位属性) 外，不直接操作 element.style.attr/element.cssText:
 
-```js
+```ts
 element.classList.add('className');
 element.className += ' className';
 ```
@@ -3516,7 +3512,7 @@ setTimeout()/setInterval()
 - 若其他位于执行队列中的函数执行时间超过延时，则用户感觉不到延时的存在
 - 模拟有间隙的循环，使得 UI 更新得以进入浏览器线程的执行队列中
 
-```js
+```ts
 const button = document.getElementById('myButton');
 
 button.onclick = function () {
@@ -3530,7 +3526,7 @@ button.onclick = function () {
 
 - 分解任务
 
-```js
+```ts
 function saveDocument(id) {
   // 利用闭包封装待执行任务
   const tasks = [openDocument, writeText, closeDocument, updateUI];
@@ -3550,7 +3546,7 @@ function saveDocument(id) {
 }
 ```
 
-```js
+```ts
 function processArray(items, process, callback) {
   // 克隆原数组
   const todo = items.concat();
@@ -3570,7 +3566,7 @@ function processArray(items, process, callback) {
 
 - 批处理任务
 
-```js
+```ts
 function timedProcessArray(items, process, callback) {
   // 克隆原始数组
   const todo = items.concat();
@@ -3595,7 +3591,7 @@ function timedProcessArray(items, process, callback) {
 
 ### 计时器
 
-```js
+```ts
 /*
  * usage: start -> stop -> getTime
  */
@@ -3636,7 +3632,7 @@ const Timer = {
 
 #### AJAX Cache
 
-```js
+```ts
 const localCache = {};
 
 function xhrRequest(url, callback) {
@@ -3729,7 +3725,7 @@ client.interceptors.response.use(
 - debounce: 防抖动是将多次执行变为最后一次执行 (可用于检测某个连续的 DOM 操作结束, 如 scroll 停止)
 - throttle: 节流是将多次执行变成每隔一段时间执行 (保证一定时间内只执行一次)
 
-```js
+```ts
 // 这个是用来获取当前时间戳的
 function now() {
   return +new Date();
@@ -3782,7 +3778,7 @@ function debounce(func, wait = 50, immediate = true) {
 }
 ```
 
-```js
+```ts
 // simple throttle
 function throttle(action) {
   let isRunning = false;
@@ -3797,7 +3793,7 @@ function throttle(action) {
 }
 ```
 
-```js
+```ts
 /**
  * underscore 节流函数，返回函数连续调用时，func 执行频率限定为 次 / wait
  *
@@ -3874,7 +3870,7 @@ _.throttle = function (func, wait, options) {
 
 #### Animation Frame Throttling
 
-```js
+```ts
 function useAnimation() {
   let frameId = 0;
   let ticking = false;
@@ -3909,7 +3905,7 @@ function useAnimation() {
 - i%2 => `i&0x1`
 - 位掩码
 
-```js
+```ts
 const OPTION_A = 1;
 const OPTION_B = 2;
 const OPTION_C = 4;
@@ -3921,15 +3917,15 @@ const options = OPTION_A | OPTION_C | OPTION_D;
 
 #### Math 对象
 
-```js
-Math.E;
-Math.LN10;
-Math.LN2;
-Math.LOG2E;
-Math.LOG10E;
-Math.PI;
-Math.SQRT1_2;
-Math.SQRT2;
+```ts
+const epsilon = Math.E;
+const log10 = Math.LN10;
+const log2 = Math.LN2;
+const log2e = Math.LOG2E;
+const log10e = Math.LOG10E;
+const pi = Math.PI;
+const squareRoot = Math.SQRT1_2;
+const squareRoot2 = Math.SQRT2;
 
 Math.abs(num);
 Math.exp(num);
@@ -3959,7 +3955,7 @@ Math.tan(x);
 - (On-) Disk Cache: big files
 - Push Cache: HTTP/2
 
-```js
+```ts
 // eslint-disable-next-line no-restricted-globals
 self.addEventListener('install', event => {
   async function buildCache() {
@@ -4242,7 +4238,7 @@ Lazy Loading Polyfill:
 <img data-src="flower.jpg" class="lazyload" />
 ```
 
-```js
+```ts
 window.addEventListener('scroll', function (event) {
   Array.from(document.querySelectorAll('.lazyload')).forEach(image => {
     if (image.slideIntoView(event.getBoundingClientRect())) {
@@ -4254,7 +4250,7 @@ window.addEventListener('scroll', function (event) {
 
 Observer Lazy Loading:
 
-```js
+```ts
 const observer = new IntersectionObserver(nodes => {
   nodes.forEach(v => {
     if (v.isIntersecting) {
@@ -4301,7 +4297,7 @@ Best practice: lazy loading scripts not execute immediately.
 <script src="myScript.js" defer></script>
 ```
 
-```jsx
+```tsx
 const DetailsComponent = lazy(() => import('./details'));
 const PageComponent = () => {
   <Suspense fallback={<div>Loading...</div>}>
@@ -4388,7 +4384,7 @@ performance.measure('mainThread', 'mainThread-start', 'mainThread-stop');
 
 #### First Paint Time
 
-```js
+```ts
 const entryHandler = list => {
   for (const entry of list.getEntries()) {
     if (entry.name === 'first-paint') {
@@ -4410,7 +4406,7 @@ observer.observe({ type: 'paint', buffered: true });
 // }
 ```
 
-```js
+```ts
 document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM 挂载时间: ', Date.now() - timerStart);
 
@@ -4424,7 +4420,7 @@ window.addEventListener('load', function () {
 });
 ```
 
-```js
+```ts
 // 计算加载时间.
 function getPerformanceTiming() {
   const performance = window.performance;
@@ -4481,7 +4477,7 @@ function getPerformanceTiming() {
 }
 ```
 
-```js
+```ts
 const [pageNav] = performance.getEntriesByType('navigation');
 
 // Measuring DNS lookup time.
@@ -4529,7 +4525,7 @@ First Contentful Paint:
 - Reduce server response time (e.g CDN).
 - TBT (Total Blocking Time) = TTI (Time to Interactive) - FCP (First Contentful Paint).
 
-```js
+```ts
 const entryHandler = list => {
   for (const entry of list.getEntries()) {
     if (entry.name === 'first-contentful-paint') {
@@ -4563,7 +4559,7 @@ Largest Contentful Paint:
   size image based on device size with `srcset` on `<img>` or `<picture>`.
 - LCP optimization [guide](https://csswizardry.com/2022/03/optimising-largest-contentful-paint).
 
-```js
+```ts
 const entryHandler = list => {
   if (observer) {
     observer.disconnect();
@@ -4601,7 +4597,7 @@ Cumulative Layout Shift:
   unless they appear when the user interacts with the page.
 - When it’s necessary to move elements, use `transform` animations.
 
-```js
+```ts
 let sessionValue = 0;
 let sessionEntries = [];
 const cls = {
@@ -4682,7 +4678,7 @@ observer.observe({ type: 'layout-shift', buffered: true });
 - `performance.now()` is more precise (100 us)
 - `performance.now()` is strictly monotonic (unaffected by changes of machine time)
 
-```js
+```ts
 let lastVisibilityChange = 0;
 
 window.addEventListener('visibilitychange', () => {
@@ -4701,7 +4697,7 @@ function metrics() {
 }
 ```
 
-```js
+```ts
 requestAnimationFrame(() => {
   requestAnimationFrame(timestamp => {
     metric.finish(timestamp);
@@ -4714,7 +4710,7 @@ requestAnimationFrame(() => {
 - [Puppeteer](https://pptr.dev/#?product=Puppeteer&version=v1.16.0&show=api-class-page)
 - [Puppeteer Recipes](https://addyosmani.com/blog/puppeteer-recipes)
 
-```js
+```ts
 const puppeteer = require('puppeteer');
 
 (async () => {
@@ -4728,7 +4724,7 @@ const puppeteer = require('puppeteer');
 
 #### Browser Context
 
-```js
+```ts
 // Create a new incognito browser context
 const context = await browser.createIncognitoBrowserContext();
 // Create a new page inside context.
@@ -4745,7 +4741,7 @@ await context.close();
 
 #### Event Testing
 
-```js
+```ts
 // wait for selector
 await page.waitFor('.foo');
 // wait for 1 second
@@ -4754,7 +4750,7 @@ await page.waitFor(1000);
 await page.waitFor(() => !!document.querySelector('.foo'));
 ```
 
-```js
+```ts
 const puppeteer = require('puppeteer');
 
 puppeteer.launch().then(async browser => {
@@ -4766,14 +4762,14 @@ puppeteer.launch().then(async browser => {
 });
 ```
 
-```js
+```ts
 const [response] = await Promise.all([
   page.waitForNavigation(), // The promise resolves after navigation has finished
   page.click('a.my-link'), // Clicking the link will indirectly cause a navigation
 ]);
 ```
 
-```js
+```ts
 const firstRequest = await page.waitForRequest('http://example.com/resource');
 const finalRequest = await page.waitForRequest(
   request =>
@@ -4782,7 +4778,7 @@ const finalRequest = await page.waitForRequest(
 return firstRequest.url();
 ```
 
-```js
+```ts
 const firstResponse = await page.waitForResponse(
   'https://example.com/resource'
 );
@@ -4793,7 +4789,7 @@ const finalResponse = await page.waitForResponse(
 return finalResponse.ok();
 ```
 
-```js
+```ts
 await page.evaluate(() => window.open('https://www.example.com/'));
 const newWindowTarget = await browserContext.waitForTarget(
   target => target.url() === 'https://www.example.com/'
@@ -4802,14 +4798,14 @@ const newWindowTarget = await browserContext.waitForTarget(
 
 #### Operation Simulation Testing
 
-```js
+```ts
 const [response] = await Promise.all([
   page.waitForNavigation(waitOptions),
   page.click(selector, clickOptions),
 ]);
 ```
 
-```js
+```ts
 // Using ‘page.mouse’ to trace a 100x100 square.
 await page.mouse.move(0, 0);
 await page.mouse.down();
@@ -4820,7 +4816,7 @@ await page.mouse.move(0, 0);
 await page.mouse.up();
 ```
 
-```js
+```ts
 await page.keyboard.type('Hello World!');
 await page.keyboard.press('ArrowLeft');
 
@@ -4835,7 +4831,7 @@ await page.keyboard.press('Backspace');
 
 #### Tracing Testing
 
-```js
+```ts
 await page.tracing.start({ path: 'trace.json' });
 await page.goto('https://www.google.com');
 await page.tracing.stop();
@@ -4894,7 +4890,7 @@ V(G) = e - n + 2 **<10**
 
 #### 内容耦合(5)
 
-```js
+```ts
 O.property = 'tazimi';
 O.method = function () {};
 O.prototype.method = function () {};
@@ -4904,7 +4900,7 @@ O.prototype.method = function () {};
 
 共享全局变量
 
-```js
+```ts
 let Global = 'global';
 
 function A() {
@@ -4917,13 +4913,13 @@ function B() {
 
 #### 控制耦合(3)
 
-```js
+```ts
 const absFactory = new AbstractFactory({ env: 'TEST' });
 ```
 
 #### 印记耦合(2)
 
-```js
+```ts
 O.prototype.makeBread = function (args) {
   return new Bread(args.type, args.size);
 };
@@ -4955,7 +4951,7 @@ O.makeBread({ type: wheat, size: 99, name: 'foo' });
 - stub: 模拟对象中的返回值
 - spy: 在原有对象的基础上，增加监视用变量/方法 e.g assert/调用次数/参数限制
 
-```js
+```ts
 const mockery = require('mockery');
 mockery.enable();
 
@@ -4993,7 +4989,7 @@ describe('Sum suite File', function () {
 Inject trace function (log, monitor, report service)
 to window `pushState` and `replaceState`.
 
-```js
+```ts
 const _wr = function (type) {
   const orig = window.history[type];
 
@@ -5020,7 +5016,7 @@ window.addEventListener('replacestate', function (event) {
 
 #### Event Propagation Injection
 
-```js
+```ts
 const originalStopPropagation = MouseEvent.prototype.stopPropagation;
 
 MouseEvent.prototype.stopPropagation = function (...args) {
@@ -5031,7 +5027,7 @@ MouseEvent.prototype.stopPropagation = function (...args) {
 
 #### Window Scroll Injection
 
-```js
+```ts
 let originalScrollTop = element.scrollTop;
 
 Object.defineProperty(element, 'scrollTop', {
@@ -5053,7 +5049,7 @@ Object.defineProperty(element, 'scrollTop', {
 - `copy`: copy complex object to clipboard.
 - `monitor`: monitor object.
 
-```js
+```ts
 const devtools = /./;
 devtools.toString = function () {
   this.opened = true;
@@ -5063,41 +5059,41 @@ console.log('%c', devtools);
 // devtools.opened will become true if/when the console is opened
 ```
 
-```js
+```ts
 // Basic console functions
-console.assert;
-console.clear;
-console.log;
-console.debug;
-console.info;
-console.warn;
-console.error;
+console.assert();
+console.clear();
+console.log();
+console.debug();
+console.info();
+console.warn();
+console.error();
 
 // Different output styles
-console.dir;
-console.dirxml;
-console.table;
-console.group;
-console.groupCollapsed;
-console.groupEnd;
+console.dir();
+console.dirxml();
+console.table();
+console.group();
+console.groupCollapsed();
+console.groupEnd();
 
 // Trace console functions
-console.trace;
-console.count;
-console.countReset;
-console.time;
-console.timeEnd;
-console.timeLog;
+console.trace();
+console.count();
+console.countReset();
+console.time();
+console.timeEnd();
+console.timeLog();
 
 // Non-standard console functions
-console.profile;
-console.profileEnd;
-console.timeStamp;
+console.profile();
+console.profileEnd();
+console.timeStamp();
 ```
 
 `console.log`
 
-```js
+```ts
 // `sprinf` style log
 console.log('%d %o %s', integer, object, string);
 console.log('%c ...', 'css style');
@@ -5105,7 +5101,7 @@ console.log('%c ...', 'css style');
 
 `console.table`
 
-```js
+```ts
 // display array of object (tabular data)
 const transactions = [
   {
@@ -5136,15 +5132,15 @@ console.table(data, ['id', 'price']);
 
 #### JS API
 
-```js
+```ts
 // debugger;
 ```
 
-```js
+```ts
 copy(obj); // to clipboard
 ```
 
-```js
+```ts
 window.onerror = function (errorMessage, scriptURI, lineNo, columnNo, error) {
   console.log(`errorMessage: ${errorMessage}`); // 异常信息
   console.log(`scriptURI: ${scriptURI}`); // 异常文件路径
@@ -5164,7 +5160,7 @@ window.addEventListener('error', function () {
 
 ##### Trace Property (Vue Internal)
 
-```js
+```ts
 const traceProperty = (object, property) => {
   let value = object[property];
   Object.defineProperty(object, property, {
@@ -5196,7 +5192,7 @@ ndb index.js
 
 **不使用特性/浏览器推断**，往往容易推断错误(且会随着浏览器更新产生新的错误)
 
-```js
+```ts
 // 特性检测
 if (document.getElementById) {
   element = document.getElementById(id);
@@ -5211,7 +5207,7 @@ if (document.getElementById) {
 
 #### Console DevTools Detection
 
-```js
+```ts
 const x = document.createElement('div');
 
 Object.defineProperty(x, 'id', {
@@ -5224,7 +5220,7 @@ Object.defineProperty(x, 'id', {
 console.log(x);
 ```
 
-```js
+```ts
 // eslint-disable-next-line prefer-regex-literals
 const c = new RegExp('1');
 
@@ -5239,11 +5235,11 @@ console.log(c);
 
 #### Debugger Detection
 
-```js
+```ts
 (function () {}.constructor('debugger')());
 ```
 
-```js
+```ts
 (() => {
   function block() {
     if (
@@ -5268,7 +5264,7 @@ console.log(c);
 })();
 ```
 
-```js
+```ts
 const startTime = new Date();
 // debugger;
 const endTime = new Date();
@@ -5325,7 +5321,7 @@ long click reload: multiple reload options e.g clean cache
 
 > \$0: the reference to the currently selected element in the Elements panel
 
-```js
+```ts
 const listener = getEventListeners($0).click[0].listener;
 $0.removeEventListener('click', listener);
 $0.addEventListener('click', e => {
@@ -5483,7 +5479,7 @@ Tool for composite stage analysis
 - no single `let/const`
 - sort `let/const`
 
-```js
+```ts
 // bad
 let i;
 let len;
@@ -5508,7 +5504,7 @@ let length;
 
 - no chains assignment (create implicit global variable)
 
-```js
+```ts
 // bad
 (function example() {
   // JavaScript 把它解释为
@@ -5535,7 +5531,7 @@ console.log(c); // throws ReferenceError
 
 - use `()` wrap multiple line
 
-```js
+```ts
 // bad
 const foo = superLongLongLongLongLongLongLongLongFunctionName();
 
@@ -5553,7 +5549,7 @@ const foo = 'superLongLongLongLongLongLongLongLongString';
 
 - use literal
 
-```js
+```ts
 // bad
 // eslint-disable-next-line no-new-object
 const item = new Object();
@@ -5564,7 +5560,7 @@ const item = {};
 
 - use object-shorthand
 
-```js
+```ts
 // bad
 const atom = {
   lukeSkyWalker,
@@ -5584,7 +5580,7 @@ const atom = {
 
 - use `Object.prototype.XX` not `object.xx`
 
-```js
+```ts
 // bad
 // 在模块范围内的缓存中查找一次
 // eslint-disable-next-line no-prototype-builtins
@@ -5600,7 +5596,7 @@ console.log(has.call(object, key));
 
 - use object spread not object.assign
 
-```js
+```ts
 // very bad
 const original = { a: 1, b: 2 };
 const copy = Object.assign(original, { c: 3 }); // 变异的 `original` ಠ_ಠ
@@ -5619,7 +5615,7 @@ const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
 
 - use `.` for static name, use `[]` for variable name
 
-```js
+```ts
 // good
 const isJedi = luke.jedi;
 
@@ -5634,7 +5630,7 @@ function getProp(prop) {
 - use `push` not `[]`
 - use array spread (best) or `Array.from` (good)
 
-```js
+```ts
 const foo = document.querySelectorAll('.foo');
 
 // good
@@ -5648,7 +5644,7 @@ const nodes = [...foo];
 
 对于多个返回值使用对象解构，而不是数组解构
 
-```js
+```ts
 // bad
 function processInputBad(input) {
   // 处理代码...
@@ -5679,7 +5675,7 @@ const { left, top } = processInput(input);
 
 - use naming function expression not function declaration
 
-```js
+```ts
 // bad
 function foo() {
   // ...
@@ -5699,7 +5695,7 @@ const short = function longUniqueMoreDescriptiveLexicalFoo() {
 
 - use `...args` not `arguments`
 
-```js
+```ts
 // bad
 function concatenateAll() {
   // eslint-disable-next-line prefer-rest-params
@@ -5715,7 +5711,7 @@ function concatenateAll(...args) {
 
 - use default parameters not default expression pattern
 
-```js
+```ts
 // bad
 function handleThings(opts) {
   this.opts = opts || {};
@@ -5733,7 +5729,7 @@ function handleThings(opts = {}) {
 
 - `()` and `{}` should pair
 
-```js
+```ts
 // bad
 arr.map(x => x + 1);
 arr.map((x, index) => x + index);
@@ -5755,7 +5751,7 @@ arr.map((x, index) => {
 
 - use `()` wrap multiple line return value
 
-```js
+```ts
 // bad
 ['get', 'post', 'put'].map(httpMethod =>
   Object.prototype.hasOwnProperty.call(
@@ -5778,13 +5774,13 @@ arr.map((x, index) => {
 - Import first.
 - No shorthand `export from`.
 
-```js
+```ts
 // bad
 // filename es6.js
 export { es6 as default } from './AirbnbStyleGuide';
 ```
 
-```js
+```ts
 // good
 // filename es6.js
 import { es6 } from './AirbnbStyleGuide';
@@ -5793,7 +5789,7 @@ export default es6;
 
 - Path occurs once.
 
-```js
+```ts
 // bad
 // eslint-disable-next-line import/no-duplicates
 import foo from 'foo';
@@ -5802,14 +5798,14 @@ import foo from 'foo';
 import { named1, named2 } from 'foo';
 ```
 
-```js
+```ts
 // good
 import foo, { named1, named2 } from 'foo';
 ```
 
 - Not export `let`.
 
-```js
+```ts
 // bad
 // let foo = 3;
 // export { foo };
@@ -5825,7 +5821,7 @@ export { foo };
   - 使用 `map/reduce/filter/any/every/some/find/findIndex/ ...` 遍历数组
   - 使用 `Object.keys() / Object.values() / Object.entries()` 迭代对象生成数组
 
-```js
+```ts
 const numbers = [1, 2, 3, 4, 5];
 
 // bad
@@ -5866,7 +5862,7 @@ const increasedByOne = numbers.map(num => num + 1);
 
 - use `function*` for generator
 
-```js
+```ts
 // bad
 function* fooBad() {
   // ...
@@ -5901,7 +5897,7 @@ if 语句使用 ToBoolean 的抽象方法来计算表达式的结果:
 
 对于布尔值使用简写，但是对于字符串和数字进行显式比较
 
-```js
+```ts
 // bad
 if (isValid === true) {
   // ...
@@ -5935,7 +5931,7 @@ if (collection.length > 0) {
 
 Use `{}` warp `case` when exists `const`/`let`/`function`/`class` declaration:
 
-```js
+```ts
 // good
 switch (foo) {
   case 1: {
@@ -5966,7 +5962,7 @@ switch (foo) {
 - 键入最后一个运算符后再换行, 运算符置于行尾可使 automatic semicolon insertion 机制失效
 - 换行后保持 2 个缩进层次
 
-```js
+```ts
 // bad
 const arr = [
   [0, 1],
@@ -6006,7 +6002,7 @@ const numberInArray = [1, 2];
 
 - use `()` wrap multiple line assignment or arguments
 
-```js
+```ts
 // good
 const foo = superLongLongLongLongLongLongLongLongFunctionName();
 
@@ -6031,7 +6027,7 @@ Good places to use a white space include:
 - no space inner `()` `[]`
 - use space inner `{}`
 
-```js
+```ts
 let d = 0;
 let a = b + 1;
 
@@ -6057,7 +6053,7 @@ if (a && b && c) {
 - 上方插入空行
 - 与下方语句统一缩进
 
-```js
+```ts
 /*
  * comments
  * comments
@@ -6066,7 +6062,7 @@ if (a && b && c) {
 
 #### 模块
 
-```js
+```ts
 /*
  * @module app
  * @namespace APP
@@ -6075,7 +6071,7 @@ if (a && b && c) {
 
 #### 对象
 
-```js
+```ts
 /*
  * @class mathStuff
  */
@@ -6083,7 +6079,7 @@ if (a && b && c) {
 
 #### 属性
 
-```js
+```ts
 /*
  * @property propertyName
  * @type Number/String
@@ -6092,7 +6088,7 @@ if (a && b && c) {
 
 #### 方法/函数
 
-```js
+```ts
 /*
  * @constructor
  * @method sum
@@ -6127,7 +6123,7 @@ Progressive Web Apps:
 
 - Need startup time.
 
-```js
+```ts
 // 20~100 ms for desktop
 // 100 ms for mobile
 const entry = performance.getEntriesByName(url)[0];
@@ -6141,7 +6137,7 @@ const swStartupTime = entry.requestStart - entry.workerStart;
   - SW asleep = SW boot latency + read time ( + network latency),
   - NO SW = network latency.
 
-```js
+```ts
 const entry = performance.getEntriesByName(url)[0];
 
 // no remote request means this was handled by the cache
@@ -6150,7 +6146,7 @@ if (entry.transferSize === 0) {
 }
 ```
 
-```js
+```ts
 async function handleRequest(event) {
   const cacheStart = performance.now();
   const response = await caches.match(event.request);
@@ -6163,7 +6159,7 @@ async function handleRequest(event) {
 - SW Serving Strategy.
 - SW Caching Strategy.
 
-```js
+```ts
 // Check that service workers are registered
 if ('serviceWorker' in navigator) {
   // Use the window load event to keep the page load performance
@@ -6175,7 +6171,7 @@ if ('serviceWorker' in navigator) {
 
 #### SW for Broken Images
 
-```js
+```ts
 function isImage(fetchRequest) {
   return fetchRequest.method === 'GET' && fetchRequest.destination === 'image';
 }
@@ -6236,7 +6232,7 @@ self.addEventListener('install', e => {
 
 ### Intersection Observer
 
-```js
+```ts
 // <img class="lzy_img" src="lazy_img.jpg" data-src="real_img.jpg" />
 document.addEventListener('DOMContentLoaded', () => {
   const imageObserver = new IntersectionObserver((entries, imgObserver) => {
@@ -6263,7 +6259,7 @@ document.addEventListener('DOMContentLoaded', () => {
 - `KeyframeEffect`.
 - `Animation`.
 
-```js
+```ts
 const rabbitDownKeyframes = new KeyframeEffect(
   whiteRabbit, // element to animate
   [
@@ -6288,7 +6284,7 @@ function downHandler() {
 
 - `element.animate`.
 
-```js
+```ts
 const animationKeyframes = [
   {
     transform: 'rotate(0)',
@@ -6319,7 +6315,7 @@ const animation = document
 - `animation.effect`.
 - `animation.pause()/play()/reverse()/finish()/cancel()`.
 
-```js
+```ts
 animation.pause();
 animation.currentTime = animation.effect.getComputedTiming().duration / 2;
 
@@ -6357,11 +6353,11 @@ function createPlayer(animations) {
 - 绘制样式: 颜色、渐变、变换、阴影
 - 绘制图形: fill/stroke/clip
 
-```js
+```ts
 const context = canvas.getContext('2d');
 ```
 
-```js
+```ts
 // 根据参数画线
 function drawLine(fromX, fromY, toX, toY) {
   context.moveTo(fromX, fromY);
@@ -6394,7 +6390,7 @@ for all objects:
 - update(deltaTime): change position or speed
 - draw(ctx): use canvas api and object properties (position/size) to render objects
 
-```js
+```ts
 const canvas = document.getElementById('gameScreen');
 const ctx = canvas.getContext('2d');
 
@@ -6423,14 +6419,14 @@ requestAnimationFrame(gameLoop);
 
 Canvas buffer:
 
-```js
+```ts
 frontCanvasContext.drawImage(bufferCanvas, 0, 0);
 ```
 
 - multiple canvas: top layer, background layer, interactive layer
 - disable alpha path
 
-```js
+```ts
 const ctx = canvas.getContext('2d', { alpha: false });
 ```
 
@@ -6479,7 +6475,7 @@ onmessage = function (event) {
 (-1 Octave)                 (middle A)                 (+1 Octave)
 ```
 
-```js
+```ts
 const audioContext = new AudioContext();
 
 const baseFrequency = 440;
@@ -6505,7 +6501,7 @@ const play = (type, delay, pitch, duration) => {
 
 ### From Music Data
 
-```js
+```ts
 const sampleSize = 1024; // number of samples to collect before analyzing data
 const audioUrl = 'viper.mp3';
 
@@ -6573,7 +6569,7 @@ function stopSound() {
 - [AnalyserNode.getByteFrequencyData API](https://developer.mozilla.org/zh-CN/docs/Web/API/AnalyserNode/getByteFrequencyData)
 - [Github Demo](https://github.com/bogdan-cornianu/swave/blob/master/src/visualizer.ts)
 
-```js
+```ts
 const WIDTH = this.canvas.clientWidth;
 const HEIGHT = this.canvas.clientHeight;
 this.analyserNode.fftSize = 256;
@@ -6627,7 +6623,7 @@ draw();
 - 对于复杂对象的读取与存储,
   需要借助 `JSON.parse` 与 `JSON.stringify`
 
-```js
+```ts
 if (!localStorage.getItem('bgColor')) {
   populateStorage();
 } else {
@@ -6659,7 +6655,7 @@ function setStyles() {
 
 ### IndexDB API
 
-```js
+```ts
 export class IndexedDB {
   constructor(dbName, dbVersion, dbUpgrade) {
     return new Promise((resolve, reject) => {
@@ -6723,7 +6719,7 @@ export class IndexedDB {
 }
 ```
 
-```js
+```ts
 // IndexedDB usage
 import { IndexedDB } from './indexedDB.js';
 
@@ -6790,8 +6786,8 @@ export class State {
 
 ## Web Navigator API
 
-```js
-navigator.connection.effectiveType; // 2G - 5G
+```ts
+const networkType = navigator.connection.effectiveType; // 2G - 5G
 ```
 
 ## Web Sockets API
@@ -6826,7 +6822,7 @@ Sec-Websocket-Extension: extension [,extension]*
 
 通信功能
 
-```js
+```ts
 function WebSocketTest() {
   if ('WebSocket' in window) {
     alert('WebSocket is supported by your Browser!');
@@ -6902,7 +6898,7 @@ function WebSocketTest() {
 </script>
 ```
 
-```js
+```ts
 // worker.js
 // eslint-disable-next-line no-restricted-globals
 self.addEventListener(
@@ -6938,7 +6934,7 @@ self.addEventListener(
 
 ### Web Worker Loader
 
-```js
+```ts
 // 文件名为index.js
 function work() {
   onmessage = ({ data: { jobId, message } }) => {
@@ -6980,7 +6976,7 @@ testWorker('message from main thread').then(message => {
 - 先 on ,后 post
 - main.js/worker.js 的 onmessage 与 postMessage 相互触发
 
-```js
+```ts
 /*
  * JSONParser.js
  */
@@ -6994,7 +6990,7 @@ self.onmessage = function (event) {
 };
 ```
 
-```js
+```ts
 /*
  * main.js
  */
@@ -7016,7 +7012,7 @@ worker.postMessage(jsonText);
 
 [Gamepad API Tutorials](https://developer.mozilla.org/zh-CN/docs/Games/Techniques/Controls_Gamepad_API)
 
-```js
+```ts
 const gamepads = {};
 
 function gamepadHandler(event, connecting) {
@@ -7041,7 +7037,7 @@ window.addEventListener('gamepaddisconnected', e => {
 
 ## Web Geolocation API
 
-```js
+```ts
 if (window.navigator.geolocation) {
   // getCurrentPosition第三个参数为可选参数
   navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {
@@ -7059,7 +7055,7 @@ if (window.navigator.geolocation) {
 
 locationError 为获取位置信息失败的回调函数，可以根据错误类型提示信息：
 
-```js
+```ts
 function locationError(error) {
   switch (error.code) {
     case error.TIMEOUT:
@@ -7082,7 +7078,7 @@ function locationError(error) {
 
 locationSuccess 为获取位置信息成功的回调函数，返回的数据中包含经纬度等信息，结合 Google Map API 即可在地图中显示当前用户的位置信息，如下：
 
-```js
+```ts
 function locationSuccess(position) {
   const coords = position.coords;
   const latlng = new google.maps.LatLng(
@@ -7121,7 +7117,7 @@ function locationSuccess(position) {
 }
 ```
 
-```js
+```ts
 navigator.geolocation.watchPosition(
   locationSuccess,
   locationError,
@@ -7141,7 +7137,7 @@ navigator.geolocation.watchPosition(
 
 Get and Post:
 
-```js
+```ts
 const response = await fetch('/api/names', {
   headers: {
     Accept: 'application/json',
@@ -7159,7 +7155,7 @@ const response = await fetch('/api/names', {
 
 Request object:
 
-```js
+```ts
 const request = new Request('/api/names', {
   method: 'POST',
   body: JSON.stringify(object),
@@ -7234,7 +7230,7 @@ export default function CSRPage() {
 - [Server Side Rendering with Puppeteer](https://developers.google.com/web/tools/puppeteer/articles/ssr)
 - [Rendering on the Web](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)
 
-```js
+```ts
 if (isBotAgent) {
   // return pre-rendering static html to search engine crawler
   // like Gatsby
@@ -7344,7 +7340,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 #### SEO Metadata
 
-```jsx
+```tsx
 import Helmet from 'react-helmet';
 
 function App() {
@@ -7779,7 +7775,7 @@ Content-Security-Policy: script-src https://example.com/
 - TrustedScript
 - TrustedScriptURL
 
-```js
+```ts
 // fallback policy
 TrustedTypes.createPolicy(
   'default',
@@ -7848,7 +7844,7 @@ def allow_request(req):
 
 ProxySandbox:
 
-```js
+```ts
 function sandbox(code) {
   code = `with (sandbox) {${code}}`;
   // eslint-disable-next-line no-new-func
@@ -7869,7 +7865,7 @@ function sandbox(code) {
 }
 ```
 
-```js
+```ts
 // 简化伪代码示例
 const frame = document.body.appendChild(
   document.createElement('iframe', {
@@ -7941,7 +7937,7 @@ sandbox().call(window, { window, location, history, document }, code);
   - Battery level.
   - Batter status.
 
-```js
+```ts
 function getCanvasFingerprint() {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
@@ -8193,7 +8189,7 @@ A read-eval-print loop(REPL) can replace node REPL.
 npm install babel-core --save
 ```
 
-```js
+```ts
 const babel = require('babel-core');
 
 // 字符串转码
@@ -8233,7 +8229,7 @@ Use Babel to refactor code:
 }
 ```
 
-```js
+```ts
 // index.js
 module.exports = babel => {
   const t = babel.types;
@@ -8292,7 +8288,7 @@ module.exports = babel => {
 }
 ```
 
-```js
+```ts
 // index.js
 const defaultTargets = {
   android: 30,
@@ -8350,7 +8346,7 @@ Enable `devServer` type intellisense:
 npm i -D @types/webpack-dev-server
 ```
 
-```js
+```ts
 /** @type {import('webpack').Configuration} */
 module.exports = {
   entry: {
@@ -8418,7 +8414,7 @@ sudo sysctl -p
 
 ### Webpack Resolve Path Options
 
-```js
+```ts
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
@@ -8440,7 +8436,7 @@ module.exports = {
 
 get `baseUrl`and `paths` from `tsconfig.json`:
 
-```js
+```ts
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
@@ -8509,7 +8505,7 @@ and disabled in production mode.
 
 Accelerate second build time:
 
-```js
+```ts
 module.exports = {
   cache: {
     type: 'filesystem',
@@ -8524,7 +8520,7 @@ module.exports = {
 
 ### Webpack Library Configuration
 
-```js
+```ts
 const path = require('path');
 
 module.exports = {
@@ -8547,7 +8543,7 @@ module.exports = {
 
 #### Webpack Babel Loader
 
-```js
+```ts
 const config = {
   test: /\.(js|mjs|jsx|ts|tsx)$/,
   include: path.resolve('src'),
@@ -8581,7 +8577,7 @@ const config = {
 
 #### Webpack CSS Loader
 
-```js
+```ts
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
@@ -8638,7 +8634,7 @@ module.exports = {
 - `asset` automatically chooses between exporting data URI and separate file
   (`url-loader` with asset size limit, default `8kb`).
 
-```js
+```ts
 const config = {
   rules: [
     {
@@ -8656,7 +8652,7 @@ const config = {
 
 ##### Webpack Resource Assets
 
-```js
+```ts
 const path = require('path');
 
 module.exports = {
@@ -8684,7 +8680,7 @@ module.exports = {
 };
 ```
 
-```js
+```ts
 import mainImage from './images/main.png';
 
 img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
@@ -8692,7 +8688,7 @@ img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 
 ##### Webpack Inline Assets
 
-```js
+```ts
 const path = require('path');
 const svgToMiniDataURI = require('mini-svg-data-uri');
 
@@ -8719,7 +8715,7 @@ module.exports = {
 };
 ```
 
-```js
+```ts
 import metroMap from './images/metro.svg';
 
 block.style.background = `url(${metroMap})`;
@@ -8728,7 +8724,7 @@ block.style.background = `url(${metroMap})`;
 
 ##### Webpack Source Assets
 
-```js
+```ts
 const path = require('path');
 
 module.exports = {
@@ -8748,7 +8744,7 @@ module.exports = {
 };
 ```
 
-```js
+```ts
 import exampleText from './example.txt';
 
 block.textContent = exampleText; // 'Hello world'
@@ -8756,48 +8752,50 @@ block.textContent = exampleText; // 'Hello world'
 
 #### Webpack Thread Loader
 
-```js
-[
-  {
-    loader: 'thread-loader',
-    // loaders with equal options will share worker pools
-    options: {
-      // the number of spawned workers, defaults to (number of cpus - 1) or
-      // fallback to 1 when require('os').cpus() is undefined
-      workers: 2,
+```ts
+const config = {
+  rules: [
+    {
+      loader: 'thread-loader',
+      // loaders with equal options will share worker pools
+      options: {
+        // the number of spawned workers, defaults to (number of cpus - 1) or
+        // fallback to 1 when require('os').cpus() is undefined
+        workers: 2,
 
-      // number of jobs a worker processes in parallel
-      // defaults to 20
-      workerParallelJobs: 50,
+        // number of jobs a worker processes in parallel
+        // defaults to 20
+        workerParallelJobs: 50,
 
-      // additional node.js arguments
-      workerNodeArgs: ['--max-old-space-size=1024'],
+        // additional node.js arguments
+        workerNodeArgs: ['--max-old-space-size=1024'],
 
-      // Allow to respawn a dead worker pool
-      // respawning slows down the entire compilation
-      // and should be set to false for development
-      poolRespawn: false,
+        // Allow to respawn a dead worker pool
+        // respawning slows down the entire compilation
+        // and should be set to false for development
+        poolRespawn: false,
 
-      // timeout for killing the worker processes when idle
-      // defaults to 500 (ms)
-      // can be set to Infinity for watching builds to keep workers alive
-      poolTimeout: 2000,
+        // timeout for killing the worker processes when idle
+        // defaults to 500 (ms)
+        // can be set to Infinity for watching builds to keep workers alive
+        poolTimeout: 2000,
 
-      // number of jobs the poll distributes to the workers
-      // defaults to 200
-      // decrease of less efficient but more fair distribution
-      poolParallelJobs: 50,
+        // number of jobs the poll distributes to the workers
+        // defaults to 200
+        // decrease of less efficient but more fair distribution
+        poolParallelJobs: 50,
 
-      // name of the pool
-      // can be used to create different pools with elseWise identical options
-      name: 'my-pool',
+        // name of the pool
+        // can be used to create different pools with elseWise identical options
+        name: 'my-pool',
+      },
     },
-  },
-  // your expensive loader (e.g babel-loader)
-];
+    // your expensive loader (e.g babel-loader)
+  ],
+};
 ```
 
-```js
+```ts
 const threadLoader = require('thread-loader');
 
 threadLoader.warmup(
@@ -8823,7 +8821,7 @@ threadLoader.warmup(
 npm i -D worker-loader
 ```
 
-```js
+```ts
 module.exports = {
   module: {
     rules: [
@@ -8865,7 +8863,7 @@ module.exports = {
 
 #### Common Chunks
 
-```js
+```ts
 const config = new webpack.optimize.CommonsChunkPlugin({
   name: string, // or
   names: [string],
@@ -8924,7 +8922,7 @@ const config = new webpack.optimize.CommonsChunkPlugin({
 
 #### Code Minimization
 
-```js
+```ts
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -9019,7 +9017,7 @@ Split chunks configuration:
   - reuseExistingChunk: `true` / `false`.
   - enforce：`true` / `false`.
 
-```js
+```ts
 module.exports = {
   optimization: {
     runtimeChunk: true,
@@ -9096,7 +9094,7 @@ Live code inclusion (AST analysis) + dead code elimination:
 
 #### Building Caches
 
-```js
+```ts
 const config = new HardSourceWebpackPlugin({
   // Either an absolute path or relative to webpack options.context.
   cacheDirectory: 'node_modules/.cache/hard-source/[confighash]',
@@ -9133,7 +9131,7 @@ const config = new HardSourceWebpackPlugin({
 
 Webpack 5
 
-```js
+```ts
 const config = {
   cache: {
     type: 'memory',
@@ -9141,7 +9139,7 @@ const config = {
 };
 ```
 
-```js
+```ts
 const config = {
   cache: {
     type: 'filesystem',
@@ -9154,7 +9152,7 @@ const config = {
 
 #### Webpack Perf Profiling
 
-```js
+```ts
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 
 const smp = new SpeedMeasurePlugin();
@@ -9241,7 +9239,7 @@ Webpack 5 support out of box cache.
 
 #### Webpack Custom Plugin
 
-```js
+```ts
 module.exports = {
   plugins: [
     function () {
@@ -9260,7 +9258,7 @@ module.exports = {
 };
 ```
 
-```js
+```ts
 const childProcess = require('child_process');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const branch = childProcess
@@ -9302,7 +9300,7 @@ module.exports = HotLoad;
 
 Typed webpack plugin from `laravel-mix/`:
 
-```js
+```ts
 const readline = require('readline');
 const _ = require('lodash');
 const chalk = require('chalk');
@@ -9566,7 +9564,7 @@ npm i -D jest ts-jest @types/jest react-test-renderer
 
 `jest.config.js`:
 
-```js
+```ts
 const { pathsToModuleNameMapper } = require('ts-jest/utils');
 const { compilerOptions } = require('./tsconfig.json');
 const paths = pathsToModuleNameMapper(compilerOptions.paths, {
@@ -9612,7 +9610,7 @@ module.exports = {
 
 `jest.env.setup.js`:
 
-```js
+```ts
 import path from 'path';
 import dotenv from 'dotenv';
 
@@ -9628,7 +9626,7 @@ dotenv.config({
 - Inject more expect DOM assertion.
 - [Jest DOM Expect API](https://github.com/testing-library/jest-dom)
 
-```js
+```ts
 import '@testing-library/jest-dom/extend-expect';
 
 // Global/Window object Stubs for Jest
@@ -9746,7 +9744,7 @@ describe('Link should', () => {
 
 Jest async [guide](https://jestjs.io/docs/tutorial-async):
 
-```js
+```ts
 await expect(asyncCall()).resolves.toEqual('Expected');
 await expect(asyncCall()).rejects.toThrowError();
 ```
@@ -9758,7 +9756,7 @@ await expect(asyncCall()).rejects.toThrowError();
 - `jest.createMockFromModule('moduleName')`.
 - `jest.requireActual('moduleName')`.
 
-```js
+```tsx
 // react-dom.js
 import React from 'react';
 const reactDom = jest.requireActual('react-dom');
@@ -9777,7 +9775,7 @@ reactDom.createPortal = mockCreatePortal;
 module.exports = reactDom;
 ```
 
-```js
+```ts
 // gatsby.js
 import React from 'react';
 const gatsby = jest.requireActual('gatsby');
@@ -9883,7 +9881,7 @@ npx cypress open
 
 `e2e/plugins/index.js`: setup TypeScript to transpile tests:
 
-```js
+```ts
 const wp = require('@cypress/webpack-preprocessor');
 
 module.exports = on => {

@@ -142,7 +142,7 @@ npm config set //registry.example.com/:_authToken XXXXXTokenXXXXX
 
 Release script from VitePress:
 
-```js
+```ts
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
@@ -545,7 +545,7 @@ API_KEY=**************************
 API_URL=**************************
 ```
 
-```js
+```ts
 // config.js
 const dotenv = require('dotenv');
 dotenv.config();
@@ -557,7 +557,7 @@ module.exports = {
 };
 ```
 
-```js
+```ts
 // server.js
 const { port } = require('./config');
 console.log(`Your port is ${port}`); // 8626
@@ -678,7 +678,7 @@ Modify package in `node_modules` conveniently:
 
 - 定义模块
 
-```js
+```ts
 function foo(x, y, callback) {
   try {
     if (paramNotValid()) {
@@ -694,7 +694,7 @@ function foo(x, y, callback) {
 
 - 使用模块
 
-```js
+```ts
 foo(a, b, function (err, param) {
   if (err) {
     processError();
@@ -706,7 +706,7 @@ foo(a, b, function (err, param) {
 
 ### Export Module
 
-```js
+```ts
 module.exports = function (args) {
   /* ... */
 };
@@ -716,7 +716,7 @@ module.exports = function (args) {
 
 - 向定义最内层回调,可避免回套嵌套
 
-```js
+```ts
 server.on('request', function (req, res) {
   const render = function (wsData) {
     page = pageRender(req, session, userData, wsData);
@@ -770,7 +770,7 @@ server.on('request', function (req, res) {
 - 由于 `require` 语句直接分割了执行的代码块,
   `CommonJS` 模块的导入导出语句的位置会影响模块代码语句的执行结果.
 
-```js
+```ts
 const path = require('path');
 const fs = require('fs');
 const vm = require('vm');
@@ -846,7 +846,7 @@ function tryModuleLoad(module) {
 - `process.stdin`: 指向标准输入.
 - `process.stderr`: 指向标准错误.
 
-```js
+```ts
 process.stdin.resume();
 process.stdin.pipe(process.stdout);
 ```
@@ -926,7 +926,7 @@ process.on('exit', code => {
   and has its own memory, event-loop, and V8 instance.
 - Use `process.on` to communicate between parent and child process.
 
-```js
+```ts
 const cp = require('child_process');
 
 cp.exec(
@@ -961,7 +961,7 @@ within the same process of the main application:
   with its own isolated context,
   therefore **no thread synchronization** is usually needed.
 
-```js
+```ts
 // fibonacci-worker.js
 const {
   Worker,
@@ -996,7 +996,7 @@ if (isMainThread) {
 }
 ```
 
-```js
+```ts
 const http = require('http');
 const fibonacciWorker = require('./fibonacci-worker');
 
@@ -1040,7 +1040,7 @@ Worker pool is needed:
 - fs.readFileSync
 - fs.exists
 
-```js
+```ts
 const fs = require('fs');
 const buf = fs.readFileSync('/path/to/file', 'utf-8');
 fs.readFile('/path/to/file', 'utf-8', callback);
@@ -1051,7 +1051,7 @@ fs.createReadStream();
 src.pipe(dst1).pipe(dst2).pipe(dst3); //  连接多个 stream
 ```
 
-```js
+```ts
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -1072,7 +1072,7 @@ const traverse = async directory => {
 };
 ```
 
-```js
+```ts
 module.exports = function ls(dirName, fileType, callback) {
   const fs = require('fs');
   const path = require('path');
@@ -1093,7 +1093,7 @@ module.exports = function ls(dirName, fileType, callback) {
 
 ### Buffer Object
 
-```js
+```ts
 const str = buf.toString();
 ```
 
@@ -1102,7 +1102,7 @@ const str = buf.toString();
 - path.resolve: 自动按系统处理路径
 - path.extname: 返回文件类型
 
-```js
+```ts
 const path = require('path');
 
 console.log(path.extname('index.html')); // .html
@@ -1114,8 +1114,8 @@ path.relative(from, to);
 path.dirname(p);
 path.basename(p, [ext]);
 path.extname(p);
-path.sep;
-path.delimiter;
+const separator = path.sep;
+const delimiter = path.delimiter;
 ```
 
 ## Http Module
@@ -1124,8 +1124,10 @@ path.delimiter;
 
 #### 属性
 
-```js
-request.method; // POST GET
+```ts
+const request = {
+  method: 'POST',
+};
 ```
 
 ### Response Object
@@ -1140,7 +1142,7 @@ typedef Stream response
 
 - 监听事件
 
-```js
+```ts
 response.on('data', function (data) {
   process(data);
 });
@@ -1154,13 +1156,13 @@ response.on('end', function () {
 
 - 发出事件
 
-```js
+```ts
 response.end(); //  传输结束
 ```
 
 #### 方法
 
-```js
+```ts
 response.setEncoding('utf8'); // 自动将 data 事件中 Buffer 对象转换成 String
 
 //  content-type: text/plain
@@ -1170,11 +1172,11 @@ response.writeHead(200, { 'Content-Type': '' });
 
 ### Http Get
 
-```js
+```ts
 http.get(url, function callback(response) {});
 ```
 
-```js
+```ts
 http.get(url, function (response) {
   let pipeData = '';
 
@@ -1191,7 +1193,7 @@ http.get(url, function (response) {
 
 ### Http Server
 
-```js
+```ts
 const server = http.createServer(function (request, response) {
   // 处理请求的逻辑...
 });
@@ -1200,7 +1202,7 @@ server.listen(8000);
 
 ### Sample
 
-```js
+```ts
 const net = require('net');
 const chatServer = net.createServer();
 // 用于检测僵尸客户端,用于及时清楚僵尸客户端
@@ -1250,7 +1252,7 @@ chatServer.listen(9000);
 
 ### Socket Object
 
-```js
+```ts
 socket.write(data);
 socket.end(data);
 socket.end();
@@ -1258,7 +1260,7 @@ socket.end();
 
 ### Socket IO
 
-```js
+```ts
 const http = require('http');
 const fs = require('fs');
 const io = require('socket.io');
@@ -1286,7 +1288,7 @@ socket.of('/weather').on('connection', function (client) {
 
 ### Basic Methods
 
-```js
+```ts
 const serverInstance = net.createServer(function callback(socket) {});
 
 serverInstance.listen(portNumber); // 开始监听特定端口
@@ -1311,7 +1313,7 @@ serverInstance.listen(portNumber); // 开始监听特定端口
 - query
 - hash
 
-```js
+```ts
 // true 表示调用 queryString 模块查询字符串
 url.parse(request.url, true);
 ```
@@ -1322,7 +1324,7 @@ url.parse(request.url, true);
 - dns.reverse
 - dns.lookup
 
-```js
+```ts
 const dns = require('dns');
 
 dns.lookup('google.com', 4, function (e, a) {
@@ -1337,7 +1339,7 @@ dns.resolve('tazimi.tk', 'A', function (e, r) {
 });
 ```
 
-```js
+```ts
 const dns = require('dns');
 
 dns.resolve('tazimi.dev', 'A', function (err, res) {
@@ -1368,7 +1370,7 @@ dns.resolve('github.com', 'MX', function (err, res) {
 
 #### Hash API
 
-```js
+```ts
 const crypto = require('crypto');
 const md5 = crypto.createHash('md5');
 
@@ -1382,7 +1384,7 @@ md5.digest('hex'); // 'acbd18db4cc2f85cedef654fccc4a4d8'
 openssl genrsa -out key.pem 1024
 ```
 
-```js
+```ts
 const crypto = require('crypto');
 const fs = require('fs');
 const pem = fs.readFileSync('key.pem');
@@ -1401,7 +1403,7 @@ hmac.digest('hex'); // '7x123'
 
 ### Cluster Module
 
-```js
+```ts
 const cluster = require('cluster');
 const http = require('http');
 const numCPUs = require('os').cpus().length;
@@ -1483,7 +1485,7 @@ function createWorker() {
 - assert.throws(fn): 测试方法是否抛出异常
 - assert.doesNotThrow(fn): 测试方法是否抛出异常
 
-```js
+```ts
 const assert = require('assert');
 
 assert.equal(1, true, 'Truthy');
@@ -1496,7 +1498,7 @@ assert.ok(0, 'Zero is not truthy');
 
 [Simple example](https://www.zenrows.com/blog/web-scraping-with-javascript-and-nodejs):
 
-```js
+```ts
 const axios = require('axios');
 const playwright = require('playwright');
 const cheerio = require('cheerio');

@@ -14,7 +14,7 @@ callback queue use `Observer` pattern to
 add callbacks to callback queue,
 fire callbacks when events happen.
 
-```js
+```ts
 function Callbacks(options) {
   let list = [];
   const self = {
@@ -46,7 +46,7 @@ function Callbacks(options) {
 
 Same to `Promise`
 
-```js
+```ts
 class Promise {
   // `executor` takes 2 parameters, `resolve()` and `reject()`. The executor
   // function is responsible for calling `resolve()` or `reject()` to say that
@@ -182,7 +182,7 @@ createDocumentFragment:
 使用 document_createDocumentFragment()创建一个文档碎片，把所有的新结点附加在其上，
 然后把文档碎片的内容一次性添加到 document 中，提升性能
 
-```js
+```ts
 function domManipulation(parentElements, target, callback) {
   const fragment = buildFragment([target], parentElements);
   callback.call(parentElements);
@@ -197,7 +197,7 @@ function after(...args) {
 
 ### structure
 
-```js
+```ts
 $('selector').html('tag+text');
 $('selector').text('text');
 
@@ -209,24 +209,21 @@ $('selector').parent();
 $('selector').children();
 ```
 
-```js
+```ts
 $('selector').index();
 ```
 
 ### class
 
-```js
+```ts
 $('selector').addClass('');
 $('selector').removeClass('');
-```
-
-```js
-hidden;
+$('selector').hidden();
 ```
 
 ### style
 
-```js
+```ts
 $('selector').css('color', 'red');
 $('selector').prop('disable', 'true');
 ```
@@ -269,7 +266,7 @@ $('selector').prop('disable', 'true');
 - scroll
 - unload
 
-```js
+```ts
 $(window).scroll(function (event) {});
 $(document).height(); // 返回整个网页的高度
 $(window).height(); // 返回窗口高度
@@ -278,7 +275,7 @@ $(window).scrollTop(); // 返回滚动条距网页顶部距离
 
 ### 常用多态函数
 
-```js
+```ts
 $(selector).data();
 $(selector).html();
 $(selector).css();
@@ -291,7 +288,7 @@ $(document).ready(function () {});
 
 `$.getJSON`:
 
-```js
+```ts
 $.getJSON(url, data, success(data, statusCode, xhr));
 
 $.getJSON('test.js', function (json) {
@@ -303,7 +300,7 @@ $.getJSON('test.js', function (json) {
 
 `$.ajax`:
 
-```js
+```ts
 $.ajax({
   url: 'http://localhost:3000',
   type: 'GET' / 'POST' / 'PUT' / 'DELETE',

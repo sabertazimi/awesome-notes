@@ -4032,7 +4032,7 @@ fn main(mut cx: ModuleContext) -> NeonResult<()> {
 }
 ```
 
-```js
+```ts
 const { fibonacci_rs } = require('./index.node');
 
 const value = process.argv[2] || null;

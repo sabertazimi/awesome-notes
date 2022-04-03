@@ -355,7 +355,7 @@ but also can every `<article>` and `<section>` element.
 
 javascript tips：通过 control 属性改变标签对应表单元素的值
 
-```js
+```ts
 const textbox = $('#label_id').control;
 textbox.value = '666666'; //  等同于 input.value = '666666';
 ```
@@ -388,7 +388,7 @@ name 相同时, 多个 radio 组成一个 radio group
 
 date/month/week/time/datetime-local:
 
-```js
+```ts
 stepUp();
 stepDown();
 ```
@@ -416,7 +416,7 @@ input.valueAsNumber input.valueAsDate
 
 javascript tips：检查 type=checkbox 的状态
 
-```js
+```ts
 if (checkbox.indeterminate) {
   doSomething();
 } else {
@@ -496,7 +496,7 @@ input 元素的镜像元素
 </dialog>
 ```
 
-```js
+```ts
 const togglers = document.querySelectorAll('[data-toggle]');
 const closers = document.querySelectorAll('[data-close]');
 
@@ -950,7 +950,7 @@ figure 可拥有唯一的 0/1 个 figcaption
 
 ### SVG
 
-```js
+```ts
 const svgElement = document.createElementNS(
   'http://www.w3.org/2000/svg',
   'svg'
@@ -991,7 +991,7 @@ boolean 代表当前`<time>`表示整个网页的时间
 <td data-row="1" data-column="1"></td>
 ```
 
-```js
+```ts
 const onChange = event => {
   const {
     currentTarget: {
@@ -1339,7 +1339,7 @@ With `fieldset` and `legend`:
 <a id="second" href="" accesskey="c"></a>
 ```
 
-```js
+```ts
 document.addEventListener('keyup', event => {
   switch (event.keyCode) {
     // escape
@@ -1372,7 +1372,7 @@ document.addEventListener('keyup', event => {
 });
 ```
 
-```js
+```ts
 /**
  * Traps the tab key inside of the context, so the user can't accidentally get
  * stuck behind it.
@@ -1484,7 +1484,7 @@ export function trapTabKey(e, context) {
 </ul>
 ```
 
-```js
+```ts
 const listExpander = document.querySelector('.list-expander');
 const list = document.querySelector('#expandable-list-1');
 

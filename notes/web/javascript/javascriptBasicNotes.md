@@ -39,7 +39,7 @@ Primitive data types:
 
 计算浮点数时，应先计算整数，再利用移位/乘法/除法转化为浮点数
 
-```js
+```ts
 const a = (1 + 2) / 10; // a = 0.1 + 0.2;
 ```
 
@@ -47,13 +47,13 @@ const a = (1 + 2) / 10; // a = 0.1 + 0.2;
 
 - `NaN === NaN`: `false`.
 
-```js
-typeof NaN; // 'number'
+```ts
+const numberType = typeof NaN; // 'number'
 Number.isNaN();
 Number.isFinite();
 ```
 
-```js
+```ts
 function isNumber(value) {
   return typeof value === 'number' && Number.isFinite(value);
 }
@@ -66,7 +66,7 @@ function isNumber(value) {
 Infinity represents all values greater than 1.7976931348623157e+308.
 Infinity will be converted to `null` with `JSON.stringify()`.
 
-```js
+```ts
 const largeNumber = 1.7976931348623157e308;
 // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
 const largerNumber = 1.7976931348623157e309;
@@ -94,7 +94,7 @@ console.log(Math.min()); // Infinity
 - 所有 string 量 都是不可变量,当对 string 进行操作后，将先会在堆区创建副本，再通过副本进行修改，并返回副本的索引
 - 没有被任何变量引用的 string: 垃圾回收
 
-```js
+```ts
 const goodString = "I've been a good string";
 console.log(typeof goodString); // string
 console.log(goodString instanceof String); // false
@@ -138,24 +138,24 @@ console.log(isStringAlternative(badString)); // true
 Using the wrapper function without the new keyword
 is a useful way of coercing a value into a primitive type.
 
-```js
+```ts
 // Not recommended (primitive object wrapper):
 // eslint-disable-next-line no-new-wrappers
-typeof new String(37); // object
+const objectType = typeof new String(37); // object
 
 // Safe (type coercion with wrapper function):
-typeof String(37); // string
+const stringType = typeof String(37); // string
 
 // Primitive strings:
 // eslint-disable-next-line no-self-compare
-'37' === '37'; // true
+const truthy = '37' === '37'; // true
 
 // Object-wrapped string:
 // eslint-disable-next-line no-new-wrappers
-new String(37) === '37'; // false
+const falsy = new String(37) === '37'; // false
 
 // Type-coerced string:
-String(37) === '37'; // true
+const truthy = String(37) === '37'; // true
 ```
 
 ### Variable Hoisting
@@ -166,7 +166,7 @@ String(37) === '37'; // true
 <!-- eslint-disable vars-on-top -->
 <!-- eslint-disable no-var -->
 
-```js
+```ts
 // 我们知道这个行不通 (假设没有未定义的全局变量)
 function example() {
   console.log(notDefined); // => throws a ReferenceError
@@ -200,7 +200,7 @@ function example() {
 <!-- eslint-disable vars-on-top -->
 <!-- eslint-disable no-var -->
 
-```js
+```ts
 function example() {
   console.log(named); // => undefined
 
@@ -227,7 +227,7 @@ function example() {
 
 - [Definitive Guide](https://css-tricks.com/everything-you-need-to-know-about-date-in-javascript)
 
-```js
+```ts
 const now = new Date();
 now.getFullYear(); // 1-n
 now.getMonth(); // Warn: 0-11
@@ -262,7 +262,7 @@ const nextMonth = (year, month) => {
 };
 ```
 
-```js
+```ts
 const getDateItemList = (year, month) => {
   const days = daysOfMonth(year, month);
   const currentDateItemList = [...Array(days).keys()].map(index => {
@@ -318,12 +318,12 @@ const getDateItemList = (year, month) => {
 
 不使用构造函数,使用数组字面量创建数组
 
-```js
+```ts
 const arr1 = new Array(3); // 数组长度
 const arr2 = new Array(3.14); // RangeError
 ```
 
-```js
+```ts
 if (typeof Array.isArray === 'undefined') {
   Array.isArray = function (arg) {
     // 其余对象返回值 [object Object/Number/String/Boolean]
@@ -341,7 +341,7 @@ if (typeof Array.isArray === 'undefined') {
 - `return 1`: a, b 交换位置.
 - `return -1`: a, b 不交换位置.
 
-```js
+```ts
 arr.sort(toExchange);
 strings.sort((a, b) => a.localeCompare(b));
 strings.sort((a, b) => new Intl.Collator('en').compare(a, b));
@@ -349,7 +349,7 @@ strings.sort((a, b) => new Intl.Collator('en').compare(a, b));
 
 ##### Array Stack
 
-```js
+```ts
 arr.unshift(value); // 添加数组首元素
 arr.push(value); // 添加数组尾元素
 arr.shift(); // 删除数组首元素
@@ -360,7 +360,7 @@ arr.pop(); // 删除数组尾元素
 
 - slice 不改变原数组, splice 改变原数组
 
-```js
+```ts
 [].concat(otherArray);
 [string].join('连接符'); // 将字符串数组连接成字符串o
 string(charArray).split('割断点'); // 选择割断符,返回字符串数组
@@ -370,26 +370,26 @@ string(charArray).split('割断点'); // 选择割断符,返回字符串数组
 
 ##### Array Replace
 
-```js
+```ts
 [].replace(oldSubStr, newStr);
 ```
 
 ##### Array Query
 
-```js
+```ts
 ''.substr(start, end);
 [].indexOf(char); // -1 or other
 ```
 
 ##### Array Traverse
 
-```js
-[] / obj.forEach(function (val) {}); // 遍历数组/对象所有元素(val为单个元素)
+```ts
+array.forEach(val => {}); // 遍历数组所有元素.
 ```
 
 ##### Deep Clone of Array
 
-```js
+```ts
 const nestedArray = [1, [2], 3];
 const arrayCopy = JSON.parse(JSON.stringify(nestedArray));
 
@@ -404,11 +404,11 @@ console.log(nestedArray); //  1, [ 2 ], 3 ]
 
 ##### Array Other Methods
 
-```js
+```ts
 [].reverse();
 ```
 
-```js
+```ts
 // Tips
 // 反转字符串
 const reverseStr = normalizedStr.split('').reverse().join('');
@@ -418,7 +418,7 @@ const reverseStr = normalizedStr.split('').reverse().join('');
 
 - 对字符串每个元素进行单独操作 e.g map/filter
 
-```js
+```ts
 str
   .split('')
   .map(function (subStr) {
@@ -431,27 +431,27 @@ str.split('').someOperator().join('');
 
 - 实现 contains 方法
 
-```js
-!arr.includes(item);
+```ts
+const contains = arr.includes(item);
 ```
 
 - 改变某一处字母
 
-```js
+```ts
 after = after.charAt(0).toUpperCase() + after.slice(1);
 ```
 
 - 删除只能指定元素
 
-```js
+```ts
 arr.splice(index, 1);
 ```
 
-- Remove Duplicate Elements
+- Remove Duplicate Elements:
 
-```js
+```ts
 // 1: "Set"
-[...new Set(array)];
+const array = [...new Set(array)];
 
 // 2: "Filter"
 array.filter((item, index) => array.indexOf(item) === index);
@@ -465,7 +465,7 @@ array.reduce(
 
 ##### 高阶函数
 
-```js
+```ts
 [].map(item => item + 1); // map over
 [].filter(item => item === 0); // list comprehension
 [].reduce(
@@ -478,7 +478,7 @@ array.reduce(
 
 #### Best Practice
 
-```js
+```ts
 function typeOf(o) {
   const _toString = Object.prototype.toString;
   const _type = {
@@ -502,11 +502,11 @@ function typeOf(o) {
 
 不应使用 typeof 检测 null, 应使用 ===/!==
 
-```js
+```ts
 /*
  * ECMAScript 标准的重大 bug
  */
-typeof null; // => object
+const objectType = typeof null; // => object
 ```
 
 #### 自定义对象检测
@@ -526,7 +526,7 @@ value instanceof constructor(查找原型链)
 
 > parseInt(): 遇到非数字字符立即停止运行，返回当前转化值; 将 0 开头字符串解析为八进制数，0x 开头字符串解析为十六进制数
 
-```js
+```ts
 parseInt(str, base);
 ```
 
@@ -536,7 +536,7 @@ parseInt(str, base);
 - 对象在 数值运算环境 中 先利用 valueOf(object), 再利用 toString() 转化为数字, 若转化失败, 则返回 NaN
 - 对象与 数值加号运算: 先数值加, (**失败后**)再字符串加
 
-```js
+```ts
 // good
 const totalScore = String(this.reviewScore);
 
@@ -573,7 +573,7 @@ const hasAge = !!age;
 - 如果对象具有 valueOf 方法且返回原始值(string、number、boolean、undefined、null)，则将该原始值转换为字符串，并返回该字符串
   转换失败，抛出 TypeError
 
-```js
+```ts
 // 保存原始的valueOf
 const valueOf = Object.prototype.valueOf;
 const toString = Object.prototype.toString;
@@ -608,7 +608,7 @@ if (b) {
 // 未调用valueOf和toString，符合 [对象到布尔值] 的转换规则
 ```
 
-```js
+```ts
 // 保存原始的valueOf
 const valueOf = Object.prototype.valueOf;
 const toString = Object.prototype.toString;
@@ -637,7 +637,7 @@ console.log(++a);
 // 2. toString方法返回的是”[object Object]”，是原始值(字符串)，将字符串转换为数字NaN
 ```
 
-```js
+```ts
 // 保存原始的valueOf
 const valueOf = Object.prototype.valueOf;
 const toString = Object.prototype.toString;
@@ -664,7 +664,7 @@ console.log(++a);
 // valueOf 返回原始值(字符串)，直接将该字符串转换为数字，得到 1
 ```
 
-```js
+```ts
 // 保存原始的valueOf
 const valueOf = Object.prototype.valueOf;
 const toString = Object.prototype.toString;
@@ -691,7 +691,7 @@ alert(a);
 // 调用toString方法，返回了字符串”[object Object]”，对象最终转换为该字符串
 ```
 
-```js
+```ts
 // 保存原始的valueOf
 const valueOf = Object.prototype.valueOf;
 const toString = Object.prototype.toString;
@@ -745,7 +745,7 @@ alert(a);
 
 <!-- eslint-disable eqeqeq -->
 
-```js
+```ts
 const true1 = 0 == false; // true
 const false1 = 0 === false; // false
 const true2 = 1 == '1'; // true
@@ -770,7 +770,7 @@ const false8 = {} === {}; // false, refer different objects in memory
 
 养成使用分号结束句子的习惯, 需分行显示的语句必须确保单行不会形成完整语义
 
-```js
+```ts
 const i = a ? 1 : b ? 2 : c ? 3 : 4;
 ```
 
@@ -793,7 +793,7 @@ const i = a ? 1 : b ? 2 : c ? 3 : 4;
 `el.data` 优先求值, 引用 `old`, 指向 `old.data`.
 `5` => `el`, `5` => `el.data` (`old.data`).
 
-```js
+```ts
 let el = { data: 1 };
 const old = el;
 
@@ -810,7 +810,7 @@ console.log(old.data); // 5
 
 用方法查询代替 switch/case 语句
 
-```js
+```ts
 function doAction(action) {
   const actions = {
     hack() {
@@ -873,7 +873,7 @@ function doAction(action) {
 下面五种操作（方法/属性/运算符）可以触发 JS 引擎读取一个对象的原型，
 可以触发 `getPrototypeOf()` 代理方法的运行：
 
-```js
+```ts
 const obj = {};
 const p = new Proxy(obj, {
   getPrototypeOf(target) {
@@ -892,7 +892,7 @@ console.log(
 );
 ```
 
-```js
+```ts
 function Foo(value) {
   this.val = value;
 }
@@ -905,23 +905,26 @@ function Foo(value) {
 const foo = new Foo(2);
 ```
 
-```js
-// true because of `Object` is `function Object()` and inherited from `Function.prototype`
+```ts
+// True because of `Object` is `function Object()` and inherited from `Function.prototype`
 // Object has its own `prototype` property refer to `Object.prototype`
-Object[[proto]] === Function.prototype;
-// true because of `Array` is `function Array()` and inherited from `Function.prototype`
-// Array has its own `prototype` property refer to `Array.prototype`
-Array[[proto]] === Function.prototype;
-// true because of Function is `function Function()` and inherited from `Function.prototype`
-// Function has its own `prototype` property refer to `Function.prototype`
-Function[[proto]] === Function.prototype;
-// true because of Object.prototype is the top of inheritance chains (null is Object.prototype.__proto__)
-// all `object/function/array instance`.__proto__......__proto__ refer to Object.prototype
-Function[[proto]][[proto]] === Object.prototype;
+const truthy = Object[[proto]] === Function.prototype;
 
-// =>
-Object instanceof Function; // true
-Function instanceof Object; // true
+// True because of `Array` is `function Array()` and inherited from `Function.prototype`
+// Array has its own `prototype` property refer to `Array.prototype`
+const truthy = Array[[proto]] === Function.prototype;
+
+// True because of Function is `function Function()` and inherited from `Function.prototype`
+// Function has its own `prototype` property refer to `Function.prototype`
+const truthy = Function[[proto]] === Function.prototype;
+
+// True because of Object.prototype is the top of inheritance chains (null is Object.prototype.__proto__)
+// all `object/function/array instance`.__proto__......__proto__ refer to Object.prototype
+const truthy = Function[[proto]][[proto]] === Object.prototype;
+
+// True:
+const truthy = Object instanceof Function;
+const truthy = Function instanceof Object;
 ```
 
 ### 构造函数
@@ -935,7 +938,7 @@ Function instanceof Object; // true
 
 对象字面量由 Object 构造函数 隐式构造
 
-```js
+```ts
 const obj = {
   name: 'sabertazimi',
 };
@@ -952,7 +955,7 @@ new 构造函数作用原理如下:
   - Constructor.prototype = Prototype
   - Prototype.constructor = Constructor
 
-```js
+```ts
 function newInstance(constructor, ...args) {
   // var this = Object.create(Person.prototype);
   // this.__proto__ = F.prototype
@@ -968,7 +971,7 @@ function newInstance(constructor, ...args) {
 const instance = new Constructor(arguments);
 ```
 
-```js
+```ts
 function Employee(name) {
   this.name = name;
   this.getName = function () {
@@ -983,7 +986,7 @@ const employee = new Employee('Jack');
 
 ##### Object Create API
 
-```js
+```ts
 Object.create = function (o) {
   if (arguments.length > 1) {
     throw new Error(
@@ -1005,7 +1008,7 @@ Object.create = function (o) {
 - 返回 this 或 user-defined literal object
 - 当返回值为**基本类型**时,仍然可得到 this 指针指向的原有对象
 
-```js
+```ts
 const ObjectMaker = function () {
   this.name = 'This is it';
   // user-defined literal object
@@ -1020,7 +1023,7 @@ const ObjectMaker = function () {
 
 若 在实例对象的原型链(`__proto__`)中 能找到 构造函数的`prototype`属性(Prototype 对象), 则返回`true`, 否则返回`false`
 
-```js
+```ts
 // true only if
 // 1. Foo.__proto__ === Bar.prototype
 // 2. Foo.__proto__......__proto__ === Bar.prototype
@@ -1029,7 +1032,7 @@ console.log(Foo instanceof Bar);
 
 #### Constructor Best Practice
 
-```js
+```ts
 function Foo() {
   if (!new.target) {
     throw new Error('Foo() must be called with new');
@@ -1037,7 +1040,7 @@ function Foo() {
 }
 ```
 
-```js
+```ts
 function Waffle() {
   // 当未使用 `new` 关键字时, `this` 指向全局对象
   if (!(this instanceof Waffle)) {
@@ -1049,7 +1052,7 @@ function Waffle() {
 }
 ```
 
-```js
+```ts
 class A {
   constructor() {
     console.log(new.target.name);
@@ -1059,6 +1062,7 @@ class A {
 class B extends A {
   constructor() {
     super();
+    console.log('New');
   }
 }
 
@@ -1073,6 +1077,7 @@ class C {
 class D extends C {
   constructor() {
     super();
+    console.log('New');
   }
 }
 
@@ -1082,7 +1087,7 @@ const d = new D(); // logs class D extends C{constructor(){super();}}
 
 ### 全局对象
 
-```js
+```ts
 // 立即函数模式:
 // 此时返回值不是函数本身,而是函数执行后的return语句返回值
 const global = (function () {
@@ -1097,7 +1102,7 @@ const global = (function () {
 
 实现方式: 闭包
 
-```js
+```ts
 function Gadget() {
   // private member
   const name = 'iPod';
@@ -1112,7 +1117,7 @@ function Gadget() {
 
 getter:返回基本类型值/**引用**类型**深拷贝**(POLA 最低授权原则)
 
-```js
+```ts
 function Gadget() {
   // private member
   const pref = {};
@@ -1128,7 +1133,7 @@ Best Practice: **即使函数模式 + 揭示模式**
 - 实现私有属性与私有方法
 - 提供私有方法的公共(读/执行 not 写)接口,公共接口发生意外,私有方法仍安全
 
-```js
+```ts
 // 匿名即时函数模式.
 const obj = (function () {
   // private member
@@ -1155,7 +1160,7 @@ const obj = (function () {
 
 直接向构造函数添加方法
 
-```js
+```ts
 Object.isArray = function () {};
 ```
 
@@ -1167,7 +1172,7 @@ package+import+private field/methods+constructor+public methods
 
 Best Practice:
 
-```js
+```ts
 // 命名空间模式
 APP.namespace('APP.utilities.array');
 
@@ -1214,7 +1219,7 @@ APP.utilities.array = (function (app, global) {
 
 为 prototype 添加方法,可以通过实现语法糖 method()简化代码(链模式)
 
-```js
+```ts
 if (typeof Function.prototype.method !== 'function') {
   // eslint-disable-next-line no-extend-native
   Function.prototype.method = function (name, implementation) {
@@ -1224,7 +1229,7 @@ if (typeof Function.prototype.method !== 'function') {
 }
 ```
 
-```js
+```ts
 const Person = function (name) {
   this.name = name;
 }
@@ -1243,7 +1248,7 @@ const Person = function (name) {
 
 可用于所有继承模式中,减少内存消耗 **Best Practice**:
 
-```js
+```ts
 const inherit = (function () {
   // 减少继承过程中父类的实例化,减少资源消耗
   // 实例化一个空类所需资源更少
@@ -1261,7 +1266,7 @@ const inherit = (function () {
 })();
 ```
 
-```js
+```ts
 Child.prototype.add = function () {
   return Child.super.add.call(this);
 };
@@ -1274,7 +1279,7 @@ Child.prototype.add = function () {
 
 此模式会使得子类属性继承 2 次 **Best Practice**:
 
-```js
+```ts
 function Parent(name) {
   this.name = name || 'Adam';
 }
@@ -1296,7 +1301,7 @@ Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor �
 
 复制式地继承，将会消耗大量内存单元 **Best Practice**:
 
-```js
+```ts
 const classSim = function (Parent, props) {
   // 新的构造函数
   const Child = function (...args) {
@@ -1333,7 +1338,7 @@ const classSim = function (Parent, props) {
 };
 ```
 
-```js
+```ts
 const SuperMan = classSim(Man, {
   _construct(what) {
     console.log("SuperMan's constructor");
@@ -1351,11 +1356,11 @@ const SuperMan = classSim(Man, {
 
 构造函数的原型对象被设置为新实例的原型引用
 
-```js
+```ts
 f.prototype = o;
 ```
 
-```js
+```ts
 if (!Object.create) {
   Object.create = function (o) {
     if (arguments.length > 1) {
@@ -1370,7 +1375,7 @@ if (!Object.create) {
 }
 ```
 
-```js
+```ts
 const switchProto = {
   isOn: function isOn() {
     return this.state;
@@ -1393,7 +1398,7 @@ const switchInstance = Object.create(switchProto);
 
 ##### 浅克隆
 
-```js
+```ts
 _.extend = function (obj, ...args) {
   each(...args, function (source) {
     for (const prop in source) {
@@ -1406,7 +1411,7 @@ _.extend = function (obj, ...args) {
 
 ##### 深克隆
 
-```js
+```ts
 function extendDeep(parent, child) {
   let i;
   const toStr = Object.prototype.toString;
@@ -1431,7 +1436,7 @@ function extendDeep(parent, child) {
 
 ##### 属性混入 - 多重继承
 
-```js
+```ts
 function mix(...args) {
   const child = {};
 
@@ -1447,7 +1452,7 @@ function mix(...args) {
 }
 ```
 
-```js
+```ts
 const cake = mix(
   { eggs: 2, large: true },
   { butter: 1, salted: true },
@@ -1458,7 +1463,7 @@ const cake = mix(
 
 #### 封装 - 工厂方法(闭包)
 
-```js
+```ts
 function factory() {
   const highlander = {
     name: 'MacLeod',
@@ -1480,32 +1485,32 @@ function factory() {
 - new Number/String/Boolean();
 - 改变内置原型
 
-```js
+```ts
 // primitive string
 const greet = 'Hello there';
 // primitive is converted to an object
 // in order to use the split() method
-greet.split(' ')[0]; // "Hello"
+const hello = greet.split(' ')[0]; // "Hello"
 // attempting to augment a primitive is not an error
 greet.smile = true;
 // but it doesn't actually work
-typeof greet.smile; // "undefined"
+const undef = typeof greet.smile; // "undefined"
 ```
 
 不使用 new 关键字,包装类构造函数返回值为基本类型
 
-```js
-typeof Number(1); // "number"
-typeof Number('1'); // "number"
+```ts
+const numberType = typeof Number(1); // "number"
+const numberType = typeof Number('1'); // "number"
 // eslint-disable-next-line no-new-wrappers
-typeof Number(new Number()); // "number"
-typeof String(1); // "string"
-typeof Boolean(1); // "boolean"
+const numberType = typeof Number(new Number()); // "number"
+const stringType = typeof String(1); // "string"
+const booleanType = typeof Boolean(1); // "boolean"
 ```
 
 ### 错误对象
 
-```js
+```ts
 const err = {
   name: 'XXError',
   message: 'something wrong',
@@ -1523,7 +1528,7 @@ try {
 
 Avoid using try-catch inside a loop:
 
-```js
+```ts
 const object = ['foo', 'bar'];
 
 try {
@@ -1541,10 +1546,10 @@ try {
 - 函数提供局部作用域
 - Object 是 Function 的实例对象, **Function.prototype**是 Object 的实例对象
 
-```js
-Object[[proto]] === Function.prototype; // true
-Function[[proto]] === Function.prototype; // true
-Function[[proto]][[proto]] === Object.prototype; // true
+```ts
+const truthy = Object[[proto]] === Function.prototype; // true
+const truthy = Function[[proto]] === Function.prototype; // true
+const truthy = Function[[proto]][[proto]] === Object.prototype; // true
 ```
 
 ### Invocation Patterns and This Bindings
@@ -1560,7 +1565,7 @@ Function[[proto]][[proto]] === Object.prototype; // true
     需要显式地 `this.handleClick = this.handleClick.bind(this);`
 - Method Invocation 方法调用模式: this 绑定至此方法所属的对象
 
-```js
+```ts
 add(1, 2); // this -> global
 
 const obj = {
@@ -1582,7 +1587,7 @@ const obj = {
 obj.foo(); // 1
 ```
 
-```js
+```ts
 class Hero {
   constructor(heroName) {
     this.heroName = heroName;
@@ -1603,7 +1608,7 @@ setTimeout(batman.logName, 1000);
 Apply/Bind/Call Invocation:
 函数引用不可以改变函数定义作用域 (scope)，但可以改变函数执行作用域 (context).
 
-```js
+```ts
 this.construct = Foo;
 this.construct(options);
 // =>
@@ -1619,7 +1624,7 @@ Constructor Invocation: this 绑定至传入的空对象
 - `this` defined where arrow function defined (not called) (**lexical scope**)
 - `apply`/`call`/`bind` can't change `this` in arrow function
 
-```js
+```ts
 const obj = {
   foo() {
     const inner = () => {
@@ -1653,7 +1658,7 @@ func(); // `this` in `inner` function refer to `window`
 - 引用 arguments 所属 function, 可以利用 callee 实现匿名递归函数
 - arguments.callee.length: 形参个数
 
-```js
+```ts
 try {
   // eslint-disable-next-line no-caller
   if (arguments.length !== arguments.callee.length) {
@@ -1681,7 +1686,7 @@ try {
 
 ### 函数表达式
 
-```js
+```ts
 // 变量提升
 // eslint-disable-next-line no-var
 var foo;
@@ -1703,7 +1708,7 @@ const obj = {
 
 函数声明对于函数内部而言无法修改 (const)
 
-```js
+```ts
 const b = 10;
 (function b() {
   // eslint-disable-next-line no-func-assign
@@ -1718,7 +1723,7 @@ const b = 10;
 
 **无副作用**的函数: 注意是否需要拷贝传入对象,使原有对象不受函数影响,并返回新对象
 
-```js
+```ts
 // 除非必要,否则不改变原有对象
 const obj = {
   value: 2,
@@ -1730,7 +1735,7 @@ function setValue(obj, val) {
 }
 ```
 
-```js
+```ts
 // 好习惯: 改变新对象,返回新对象
 const obj = {
   value: 2,
@@ -1744,7 +1749,7 @@ function setValue(obj, val) {
 
 ### 回调函数
 
-```js
+```ts
 // check if callback is callable
 if (typeof callback !== 'function') {
   callback = false;
@@ -1756,7 +1761,7 @@ if (callback) {
 }
 ```
 
-```js
+```ts
 const findNodes = function (callback) {
   let i = 100000;
   const nodes = [];
@@ -1786,7 +1791,7 @@ const findNodes = function (callback) {
 需同时传入对象参数,
 并利用 `apply/call` 改变执行环境.
 
-```js
+```ts
 const findNodes = function (callbackObj, callback) {
   if (typeof callback === 'function') {
     callback.call(callbackObj, found);
@@ -1812,7 +1817,7 @@ const findNodes = function (callbackObj, callback) {
 - 第二次执行时,不再进行初始化(函数被重定义至真正函数)
 - 第一次执行为 promise, 将重复使用的部分进行初始化，之后的调用不再浪费新空间，提高代码效率
 
-```js
+```ts
 // definition
 // eslint-disable-next-line no-var
 var foo = function () {
@@ -1833,7 +1838,7 @@ console.log(foo()); // t
 console.log(foo()); // t
 ```
 
-```js
+```ts
 // eslint-disable-next-line no-var
 var addEvent = function (el, type, handle) {
   addEvent = el.addEventListener
@@ -1859,7 +1864,7 @@ var addEvent = function (el, type, handle) {
 - 末尾添加括号(传参),使函数立即执行
 - 将整个函数置于括号内
 
-```js
+```ts
 (function () {
   console.log('watch out');
 })();
@@ -1878,7 +1883,7 @@ var foo = (function () {}());
 foo 不被赋予 function 值,而被赋予函数执行后的返回值;
 此返回值可设为函数可产生闭包。
 
-```js
+```ts
 const getResult = (function () {
   const res = 2 + 2;
   return function () {
@@ -1893,7 +1898,7 @@ const getResult = (function () {
 - `Function.apply(contextArray, [arg1, arg2, ...]/arguments)`
 - call 效率高于 apply.
 
-```js
+```ts
 window.function.call();
 window.function.apply();
 // js解释器临时将数组/字符串包装成对象原型.
@@ -1909,7 +1914,7 @@ String.prototype.stringStaticFunction.apply();
 
 相当于:
 
-```js
+```ts
 context.function(arguments);
 ```
 
@@ -1919,13 +1924,13 @@ context.function(arguments);
 - curry function
 - can't change `this` in arrow function
 
-```js
+```ts
 const boundFunc = func.bind(context, arg1, arg2, argN);
 ```
 
 #### Function Call and Apply
 
-```js
+```ts
 function bind(o, m) {
   return function (...args) {
     return m.apply(o, args);
@@ -1933,7 +1938,7 @@ function bind(o, m) {
 }
 ```
 
-```js
+```ts
 const one = {
   name: 'object',
   say(greet) {
@@ -1948,7 +1953,7 @@ twoSay('yo'); // "yo, another object"
 
 ### 多态方法
 
-```js
+```ts
 const greet = function greet(options, ...rest) {
   // 运用 if/switch 方法分情况调用函数, 实现多态方法.
   if (typeof options === 'string' && typeof methods[options] === 'function') {
@@ -1972,7 +1977,7 @@ hasOwnProperty:
 - 不要使用字符串作参数 new Function();(会调用`eval`函数)
 - 不要使用字符串作`setTimeOut`/`setInterval`的第一个参数(会调用`eval`函数)
 
-```js
+```ts
 // Anti-pattern:
 const property = 'name';
 // eslint-disable-next-line no-eval
@@ -2014,7 +2019,7 @@ setTimeout(function () {
 - get: 返回 property 值的方法, 默认是 undefined
 - set：为 property 设置值的方法, 默认是 undefined
 
-```js
+```ts
 Object.defineProperty(o, 'age', {
   value: 24,
   writable: true,
@@ -2029,7 +2034,7 @@ Object.defineProperty(o, 'sex', {
 });
 ```
 
-```js
+```ts
 Object.defineProperties(o, {
   age: {
     value: 24,
@@ -2050,7 +2055,7 @@ Object.defineProperties(o, {
 
 - `Object.create(prototype[,descriptors])`
 
-```js
+```ts
 const o = Object.create({
   say() {
     alert(this.name);
@@ -2063,7 +2068,7 @@ const o = Object.create({
 - Object.getOwnPropertyNames
 - Object.keys() - 仅获取可枚举的属性
 
-```js
+```ts
 const props = Object.getOwnPropertyDescriptor(o, 'age');
 console.log(props);
 // Object {value: 24, writable: true, enumerable: true, configurable: true}
@@ -2078,22 +2083,23 @@ console.log(Object.keys(o)); // ["age"]
 
 #### 类型判断
 
-```js
+```ts
 Boolean(val); // true
 Array(val); // Array[<3个空存储位置>]
 ```
 
 #### 解析函数
 
-```js
+```ts
 parseInt(val, 2 / 8 / 10);
 ```
 
 #### 数学函数
 
-```js
+```ts
 Math.floor(Math.random * arr.length);
-Math.min / Math.max; // 最小值/最大值
+const min = Math.min;
+const max = Math.max;
 ```
 
 #### 时间函数
@@ -2102,7 +2108,7 @@ Math.min / Math.max; // 最小值/最大值
 
 Combine setInterval/setTimeout function with Closure:
 
-```js
+```ts
 // 选择排序: 具有两重循环
 const animation = setInterval(() => {
   // interval - (外)循环结束条件
@@ -2157,7 +2163,7 @@ const animation = setInterval(() => {
 
 ##### 配置对象
 
-```js
+```ts
 const conf = {
   name: 'name',
   eMail: 'test@gmail.com',
@@ -2174,7 +2180,7 @@ addPerson(conf);
 
 ##### 链模式
 
-```js
+```ts
 return this;
 ```
 
@@ -2192,7 +2198,7 @@ obj.init();
 
 检测浏览器对 H5/CSS3/ES5/ES2016 的支持情况,不足则自行编写函数补充功能.
 
-```js
+```ts
 if (typeof target === 'undefined') {
   initialization();
 }
@@ -2204,7 +2210,7 @@ if (typeof target === 'undefined') {
 
 #### Namespace Module Constructor
 
-```js
+```ts
 APP.namespace = function (namespaceString) {
   let parts = namespaceString.split('.');
   let parent = APP;
@@ -2227,10 +2233,10 @@ APP.namespace = function (namespaceString) {
 };
 ```
 
-```js
+```ts
 // assign returned value to a local var
 const module2 = APP.namespace('APP.modules.module2');
-module2 === APP.modules.module2; // true
+const truthy = module2 === APP.modules.module2; // true
 // skip initial `APP`
 APP.namespace('modules.module51');
 // long namespace
@@ -2241,7 +2247,7 @@ APP.namespace('once.upon.a.time.there.was.this.long.nested.property');
 
 通过传参匿名函数, 创建命名空间, 进行模块包裹:
 
-```js
+```ts
 const app = {};
 
 (function (exports) {
@@ -2258,7 +2264,7 @@ const app = {};
 })(app);
 ```
 
-```js
+```ts
 // global object
 const APP = {};
 // constructors
@@ -2281,7 +2287,7 @@ APP.modules.module2 = {};
 - 私有属性绑定至 this/prototype.
 - 特权方法绑定至 modules/prototype.
 
-```js
+```ts
 function Sandbox(...args) {
   // the last argument is the callback
   const callback = args.pop();
@@ -2319,7 +2325,7 @@ function Sandbox(...args) {
 }
 ```
 
-```js
+```ts
 // any prototype properties as needed
 Sandbox.prototype = {
   name: 'My Application',
@@ -2332,7 +2338,7 @@ Sandbox.prototype = {
 
 静态属性: 使用添加的方法/模块:
 
-```js
+```ts
 Sandbox.modules = {};
 Sandbox.modules.dom = function (box) {
   box.getElement = function () {};
@@ -2353,7 +2359,7 @@ Sandbox.modules.ajax = function (box) {
 
 #### Sandbox Module Usage
 
-```js
+```ts
 Sandbox(['ajax', 'event'], function (box) {
   // console.log(box);
 });
@@ -2380,7 +2386,7 @@ Sandbox('dom', 'event', function (box) {
 
 ### UMD Pattern
 
-```js
+```ts
 /**
  * UMD Boilerplate.
  */
@@ -2427,7 +2433,7 @@ Sandbox('dom', 'event', function (box) {
   - DOM3 Load and Save
   - DOM3 Validation
 
-```js
+```ts
 if (document.implementation) {
   document.implementation.hasFeature('HTML', '1.0');
   // => DOM HTML
@@ -2454,7 +2460,7 @@ if (document.implementation) {
 
 ### DOM Core
 
-```js
+```ts
 document.createElement('nodeName');
 document.createTextNode('String');
 
@@ -2477,7 +2483,7 @@ document.querySelector();
 document.querySelectorAll();
 ```
 
-```js
+```ts
 const showAlert = (type, message, duration = 3) => {
   const div = document.createElement('div');
   div.className = type;
@@ -2496,7 +2502,7 @@ const showAlert = (type, message, duration = 3) => {
 | innerHTML          | No   | Yes  | Yes  | Yes | Loses           | Careful |
 | insertAdjacentHTML | No   | Yes  | Yes  | Yes | Preserves       | Careful |
 
-```js
+```ts
 const testDiv = document.getElementById('testDiv');
 
 const para = document.createElement('p');
@@ -2508,7 +2514,7 @@ para.appendChild(txt);
 
 #### Insert DOM Node
 
-```js
+```ts
 // 4 positions
 //
 // <!-- beforebegin -->
@@ -2527,7 +2533,7 @@ p.insertAdjacentText('afterbegin', 'foo');
 p.insertAdjacentElement('beforebegin', link);
 ```
 
-```js
+```ts
 function insertAfter(newElement, targetElement) {
   const parent = targetElement.parentNode;
   if (parent.lastChild === targetElement) {
@@ -2540,7 +2546,7 @@ function insertAfter(newElement, targetElement) {
 
 #### Replace DOM Node
 
-```js
+```ts
 node.replaceChild(document.createTextNode(text), node.firstChild);
 node.replaceChildren(...nodeList);
 ```
@@ -2551,54 +2557,52 @@ Node 除包括元素结点 (tag) 外,
 包括许多其它结点 (甚至空格符视作一个结点),
 需借助 nodeType 找出目标结点.
 
-```js
-node.nodeType;
-```
-
 | nodeType | representation |
 | :------- | :------------- |
 | 1        | 元素结点       |
 | 2        | 属性结点       |
 | 3        | 文本结点       |
 
-```js
-node.nodeName;
-node.nodeValue;
+```ts
+const type = node.nodeType;
+const name = node.nodeName;
+const value = node.nodeValue;
 ```
 
 ##### Traverse DOM Tree
 
-```js
-node.parentNode;
-node.childNodes;
-node.firstChild;
-node.lastChild;
-node.nextSibling;
-node.previousSibling;
-node.textContent;
-// returns closest ancestor of current element matching selectors
+```ts
+const parent = node.parentNode;
+const children = node.childNodes;
+const first = node.firstChild;
+const last = node.lastChild;
+const previous = node.previousSibling;
+const next = node.nextSibling;
+const textContent = node.textContent;
+
+// Returns closest ancestor of current element matching selectors
 node.closest(selectors);
 ```
 
 Element-only navigation:
-Navigation properties listed above refer to all nodes. For instance,
-in childNodes we can see both text nodes, element nodes,
-and even comment nodes if there exist.
+Navigation properties listed above refer to all nodes.
+For instance, in `childNodes` we can see both
+text nodes, element nodes, and even comment nodes if there exist.
 
-```js
-node.parentElement;
-node.children;
-node.firstElementChild;
-node.lastElementChild;
-node.previousElementSibling;
-node.nextElementSibling;
+```ts
+const parent = node.parentElement;
+const children = node.children;
+const first = node.firstElementChild;
+const last = node.lastElementChild;
+const previous = node.previousElementSibling;
+const next = node.nextElementSibling;
 ```
 
 #### Frag
 
 减少 DOM 操作次数,减少页面渲染次数
 
-```js
+```ts
 const frag = document.createDocumentFragment();
 
 let p;
@@ -2618,7 +2622,7 @@ frag.appendChild(p);
 document.body.appendChild(frag);
 ```
 
-```js
+```ts
 const oldNode = document.getElementById('result');
 const clone = oldNode.cloneNode(true);
 // work with the clone
@@ -2629,12 +2633,12 @@ oldNode.parentNode.replaceChild(clone, oldNode);
 
 ### HTML DOM
 
-```js
-element.innerHTML;
-element.textContent;
+```ts
+const innerHTML = element.innerHTML;
+const textContent = element.textContent;
 ```
 
-innerHTML: non-concrete, including all types of childNodes
+`innerHTML`: non-concrete, including all types of childNodes.
 
 `div.innerHTML = <p>Test<em>test</em>Test.</p>`
 
@@ -2644,17 +2648,17 @@ innerHTML: non-concrete, including all types of childNodes
 </div>
 ```
 
-```js
-document.body;
-documents.images;
-documents.links;
-documents.forms;
-documents.forms[0].elements; // 第一个表单内的所有字段
+```ts
+const body = document.body;
+const images = documents.images;
+const links = documents.links;
+const forms = documents.forms;
+const formElements = documents.forms[0].elements; // 第一个表单内的所有字段
 element.alt = string;
 element.classname = value;
 ```
 
-```js
+```ts
 document.querySelector('cssSelector');
 document.querySelectorAll('cssSelector');
 ```
@@ -2667,7 +2671,7 @@ It allows users to read and modify CSS style dynamically.
 
 #### Inline Styles
 
-```js
+```ts
 const style = element.style.XX;
 const font = element.style.fontFamily;
 const mt = element.style.marginTopWidth;
@@ -2681,7 +2685,7 @@ const mt = element.style.marginTopWidth;
 - item
 - `getPropertyPriority`: return `''` or `important`
 
-```js
+```ts
 const box = document.querySelector('.box');
 
 box.style.setProperty('color', 'orange');
@@ -2702,14 +2706,14 @@ document.body.style.item(0); // ""
 - longhand style for specific property
 - `getPropertyValue` can get css variables too
 
-```js
-window.getComputedStyle(document.body).background;
+```ts
+const background = window.getComputedStyle(document.body).background;
 
 // dot notation, same as above
-window.getComputedStyle(el).backgroundColor;
+const backgroundColor = window.getComputedStyle(el).backgroundColor;
 
 // square bracket notation
-window.getComputedStyle(el)['background-color'];
+const backgroundColor = window.getComputedStyle(el)['background-color'];
 
 // using getPropertyValue()
 // can get css variables property too
@@ -2718,15 +2722,15 @@ window.getComputedStyle(el).getPropertyValue('background-color');
 
 #### CSS Class
 
-```js
-element.classList.add;
-element.classList.remove;
-element.classList.toggle;
+```ts
+element.classList.add('class');
+element.classList.remove('class');
+element.classList.toggle('class');
 ```
 
 **Tip**: bind class
 
-```js
+```ts
 function addClass(element, value) {
   if (!element.className) {
     element.className = value;
@@ -2748,7 +2752,7 @@ function addClass(element, value) {
 - `selectorText` property of rules
 - `style` property of rules
 
-```js
+```ts
 const myRules = document.styleSheets[0].cssRules;
 const p = document.querySelector('p');
 
@@ -2773,13 +2777,13 @@ for (i of myRules) {
   myStyle.item(5);
 
   // Log the current length of the body style rule (8)
-  myStyle.length;
+  console.log(myStyle.length);
 
   // Remove the line height
   myStyle.removeProperty('line-height');
 
   // log the length again (7)
-  myStyle.length;
+  console.log(myStyle.length);
 
   // Check priority of font-family (empty string)
   myStyle.getPropertyPriority('font-family');
@@ -2791,7 +2795,7 @@ for (i of myRules) {
 - `conditionText` property of media rule
 - nested `cssRules`
 
-```js
+```ts
 const myRules = document.styleSheets[0].cssRules;
 const p = document.querySelector('.output');
 
@@ -2812,7 +2816,7 @@ for (i of myRules) {
 - nested `cssRules`:
 - `keyText` property of rules
 
-```js
+```ts
 const myRules = document.styleSheets[0].cssRules;
 const p = document.querySelector('.output');
 
@@ -2829,7 +2833,7 @@ for (i of myRules) {
 
 ##### Add and Remove CSS Rules
 
-```js
+```ts
 const myStylesheet = document.styleSheets[0];
 console.log(myStylesheet.cssRules.length); // 8
 
@@ -2840,7 +2844,7 @@ document.styleSheets[0].insertRule(
 console.log(document.styleSheets[0].cssRules.length); // 9
 ```
 
-```js
+```ts
 const myStylesheet = document.styleSheets[0];
 console.log(myStylesheet.cssRules.length); // 8
 
@@ -2857,7 +2861,7 @@ console.log(myStylesheet.cssRules.length); // 7
 
 #### Events Checking
 
-```js
+```ts
 function handleEvent(event) {
   node.matches(event.target); // return false or true
   node.contains(event.target); // return false or true
@@ -2879,7 +2883,7 @@ DOMContentLoaded:
 - 当 HTML 文档解析完成就会触发 DOMContentLoaded,
   而所有资源加载完成之后, **load** 事件才会被触发
 
-```js
+```ts
 document.addEventListener('DOMContentLoaded', event => {
   console.log('DOM fully loaded and parsed.');
 });
@@ -2889,7 +2893,7 @@ document.addEventListener('DOMContentLoaded', event => {
 
 - 切换标签页时改变网页标题/声音/视频
 
-```js
+```ts
 window.addEventListener('visibilitychange', () => {
   switch (document.visibilityState) {
     case 'hidden':
@@ -2904,7 +2908,7 @@ window.addEventListener('visibilitychange', () => {
 });
 ```
 
-```js
+```ts
 const videoElement = document.getElementById('videoElement');
 
 // AutoPlay the video if application is visible
@@ -2930,7 +2934,7 @@ document.addEventListener('visibilitychange', handleVisibilityChange, false);
 - [FromData API](https://developer.mozilla.org/docs/Web/API/FormData)
 - [Forms Constraint Validation](https://www.sitepoint.com/html-forms-constraint-validation-complete-guide)
 
-```js
+```ts
 // <form className='validated-form' noValidate onSubmit={onSubmit}>
 
 const onSubmit = event => {
@@ -2963,7 +2967,7 @@ const onSubmit = event => {
 };
 ```
 
-```js
+```ts
 function validateForm(e) {
   const form = e.target;
 
@@ -2992,7 +2996,7 @@ function validateForm(e) {
 - input/change event
 - select event
 
-```js
+```ts
 const input = document.querySelector('input');
 
 input.addEventListener('select', event => {
@@ -3007,16 +3011,14 @@ input.addEventListener('select', event => {
 
 #### Mouse Events
 
-```js
-onclick;
-ondbclick;
-onmouse - down / move / enter / out / leave / over;
-```
+- `onclick`.
+- `ondbclick`.
+- `onmousedown/move/enter/out/leave/over`.
 
 For click event, no need for X/Y to judge internal/outside state.
 Use DOM API `element.contains` to check is a better way.
 
-```js
+```ts
 window.addEventListener('click', event => {
   if (document.getElementById('main').contains(event.target)) {
     process();
@@ -3043,7 +3045,7 @@ Key point for implementing DnD widget is
 
 [Context Menu Event](https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event):
 
-```js
+```ts
 const noContext = document.getElementById('noContextMenu');
 
 noContext.addEventListener('contextmenu', e => {
@@ -3055,7 +3057,7 @@ noContext.addEventListener('contextmenu', e => {
 
 `onkeypress/up/down`
 
-```js
+```ts
 document.onkeydown = function (event) {
   // eslint-disable-next-line no-caller
   const e = event || window.event || arguments.callee.caller.arguments[0];
@@ -3068,7 +3070,7 @@ document.onkeydown = function (event) {
 
 - event.key => [keyName](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)
 
-```js
+```ts
 'Alt';
 'CapsLock';
 'Control';
@@ -3100,7 +3102,7 @@ document.onkeydown = function (event) {
 - cut
 - paste
 
-```js
+```ts
 const source = document.querySelector('div.source');
 
 source.addEventListener('copy', event => {
@@ -3122,7 +3124,7 @@ source.addEventListener('copy', event => {
 
 #### User-Defined Handler
 
-```js
+```ts
 function myHandler(e) {
   // get event and source element
   const e = e || window.event;
@@ -3156,15 +3158,15 @@ function myHandler(e) {
 
 ### Document
 
-```js
+```ts
 document.write();
-document.URI;
-document.title;
+const URI = document.URI;
+const title = document.title;
 ```
 
 ### Window
 
-```js
+```ts
 window.location(string);
 window.innerWidth(number);
 window.closed(boolean);
@@ -3172,14 +3174,14 @@ window.closed(boolean);
 
 **Tip**: 实现 jQuery 中`\$(document).ready(function(){});
 
-```js
+```ts
 // initialize.
 window.onload = readyFunction;
 
 function readyFunction() {}
 ```
 
-```js
+```ts
 // add more ready function
 function addLoadEvent(func) {
   const oldOnLoad = window.onload;
@@ -3207,7 +3209,7 @@ function addLoadEvent(func) {
 | protocol | 设置或返回当前 URL 的协议                   |
 | search   | 设置或返回从问号 (?) 开始的 URL（查询部分） |
 
-```js
+```ts
 window.addEventListener(
   'hashchange',
   event => {
@@ -3232,7 +3234,7 @@ window.addEventListener(
 - offsetWidth/offsetHeight = content + padding + border
 - clientWidth/clientHeight = content + padding
 
-```js
+```ts
 const height =
   window.innerHeight ||
   document.documentElement.clientHeight ||
@@ -3256,7 +3258,7 @@ const height =
 - scrollTop/scrollY/pageYOffset: 元素内容向上滚动了多少像素，如果没有滚动则为 0
 - scrollLeft/scrollX/PageXOffset: 元素内容向右滚动了多少像素，如果没有滚动则为 0
 
-```js
+```ts
 const supportPageOffset = window.pageXOffset !== undefined;
 const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
 
@@ -3272,7 +3274,7 @@ const y = supportPageOffset
   : document.body.scrollTop;
 ```
 
-```js
+```ts
 if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
   console.log('Scrolled to Bottom!');
 }
@@ -3283,7 +3285,7 @@ if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
 - offsetLeft/offsetTop: 表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent 对象）左上角的距离
 - scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素大小
 
-```js
+```ts
 const isElementInViewport = el => {
   const { top, height, left, width } = el.getBoundingClientRect();
   const w = window.innerWidth || document.documentElement.clientWidth;
@@ -3305,7 +3307,7 @@ Mutation Observer 有以下特点:
 - 它把 DOM 变动记录封装成一个数组进行处理，而不是一条条地个别处理 DOM 变动
 - 它即可以观察发生在 DOM 节点的所有变动，也可以观察某一类变动
 
-```js
+```ts
 const mutationObserver = new MutationObserver(mutations => {
   mutations.forEach(mutation => {
     console.log(mutation);
@@ -3323,7 +3325,7 @@ mutationObserver.observe(document.documentElement, {
 });
 ```
 
-```js
+```ts
 const target = document.querySelector('#container');
 const callback = (mutations, observer) => {
   mutations.forEach(mutation => {
@@ -3358,7 +3360,7 @@ observer.observe(target, {
 
 ### 基本用法
 
-```js
+```ts
 const XHR = (function () {
   const standard = {
     createXHR() {
@@ -3392,11 +3394,11 @@ const XHR = (function () {
 })();
 ```
 
-```js
+```ts
 const request = XHR.createXHR();
 ```
 
-```js
+```ts
 // 3rd argument : async mode
 request.open('GET', 'example.txt', true);
 
@@ -3424,7 +3426,7 @@ request.send(null);
 
 ### 简单封装
 
-```js
+```ts
 ajax({
   url: './TestXHR.aspx', // 请求地址
   type: 'POST', // 请求方式
@@ -3495,11 +3497,11 @@ function formatParams(data) {
 <meta http-equiv="Access-Control-Allow-Origin" content="*" />
 ```
 
-```js
+```ts
 Response.Headers.Add('Access-Control-Allow-Origin', '*');
 ```
 
-```js
+```ts
 $.ajax({
   url: 'http://map.oicqzone.com/gpsApi.php?lat=22.502412986242&lng=113.93832783228',
   type: 'GET',
@@ -3512,7 +3514,7 @@ $.ajax({
 
 ## JSON
 
-```js
+```ts
 const obj = JSON.parse(json);
 const json = JSON.stringify(obj);
 ```
@@ -3524,7 +3526,7 @@ const json = JSON.stringify(obj);
 - Circular reference object: throw `TypeError`.
 - `toJSON` method:
 
-```js
+```ts
 const obj = {
   name: 'zc',
   toJSON() {
@@ -3541,7 +3543,7 @@ JSON.stringify(new Date());
 
 ## Regular Expression
 
-```js
+```ts
 const re = /pattern/gim;
 ```
 
@@ -3553,15 +3555,14 @@ const re = /pattern/gim;
 - u: 修饰符.
 - y: (粘连全局符) 修饰符号隐含了头部匹配的标志.
 
-```js
+```ts
 function codePointLength(text) {
   const result = text.match(/[\s\S]/gu);
   return result ? result.length : 0;
 }
 
 const s = '𠮷𠮷';
-
-s.length; // 4
+const length = s.length; // 4
 codePointLength(s); // 2
 ```
 
@@ -3604,7 +3605,7 @@ codePointLength(s); // 2
 
 位置编号 - 左括号的顺序
 
-```js
+```ts
 // eslint-disable-next-line no-useless-backreference
 const regExp = /((<\/?\w+>.*\2))/g;
 ```
@@ -3652,7 +3653,7 @@ const regExp = /((<\/?\w+>.*\2))/g;
 - `six(?=\d)` -> `six6`.
 - `hi(?!\d)` -> `high`.
 
-```js
+```ts
 const string = 'Favorite GitHub Repos: tc39/ecma262 v8/v8.dev';
 const regex = /\b(?<owner>[a-z0-9]+)\/(?<repo>[a-z0-9\.]+)\b/g;
 
@@ -3687,11 +3688,11 @@ for (const match of string.matchAll(regex)) {
 
 #### test
 
-```js
+```ts
 /[a-z|A-Z|0-9]/gim.test(str);
 ```
 
-```js
+```ts
 const ignoreList = [
   // # All
   '^npm-debug\\.log$', // Error log for npm
@@ -3726,7 +3727,7 @@ export function isJunk(filename) {
 
 #### replace
 
-```js
+```ts
 replace(regExp, str / func);
 ```
 
@@ -3744,7 +3745,7 @@ replace(regExp, str / func);
 - 使用２个子表达式修剪字符串,字符串总长度影响性能
 - 使用循环修剪字符串(分别用 正/负循环 修剪 首/尾空白符),空白字符长度影响性能
 
-```js
+```ts
 if (!String.prototype.trim) {
   // eslint-disable-next-line no-extend-native
   String.prototype.trim = function () {
@@ -3753,7 +3754,7 @@ if (!String.prototype.trim) {
 }
 ```
 
-```js
+```ts
 if (!String.prototype.trim) {
   // eslint-disable-next-line no-extend-native
   String.prototype.trim = function () {
@@ -3799,7 +3800,7 @@ Error and Exception
 - URIError
 - 自定义错误
 
-```js
+```ts
 function MyError(...args) {
   Error.call(this, args);
   this.message = args[0];

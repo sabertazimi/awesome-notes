@@ -14,12 +14,12 @@ parent routes are active when child routes are active
 
 ### Basic Usage
 
-```jsx
+```tsx
 import {
+  Redirect,
+  Route,
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect,
 } from 'react-router-dom';
 
 class App extends Component {
@@ -50,12 +50,12 @@ class App extends Component {
 
 Key Notes: In component of parent route, should render {this.props.children}
 
-```jsx
+```tsx
 import {
+  Redirect,
+  Route,
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect,
 } from 'react-router-dom';
 
 render(
@@ -75,95 +75,114 @@ render(
 
 ### Private Route
 
-```jsx
-const PrivateRoute = ({
-  component: Component,
-  toAuth,
-  ...rest
-}) => {
+```tsx
+import { Redirect, Route } from 'react-router-dom';
+
+const PrivateRoute = ({ component: Component, toAuth, ...rest }) => {
   return (
-    <Route {...rest} render={(props) => (
-      auth.isAuthenticated() === true
-      ? <Component {...props}/>
-      : <Redirect to={
-          pathname: toAuth,
-          state: {
-            from: props.location
-          }
-        }/>
-    )}/>
+    <Route
+      {...rest}
+      render={props =>
+        auth.isAuthenticated() === true ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: toAuth,
+              state: {
+                from: props.location,
+              },
+            }}
+          />
+        )
+      }
+    />
   );
-}
+};
 ```
 
 ### URL Params
 
-```jsx
-<Route path="/repos/:userName/:repoName" component={Repo} />
-```
+```tsx
+import { Route } from 'react-router-dom';
 
-```jsx
+function App() {
+  return <Route path="/repos/:userName/:repoName" component={Repo} />;
+}
+
 // In Repo.js
-<div>{this.props.params.userName}</ div>
-<div>{this.props.params.repoName}</ div>
+function Repo() {
+  return (
+    <div>
+      <div>{this.props.params.userName}</div>
+      <div>{this.props.params.repoName}</div>
+    </div>
+  );
+}
 ```
 
 ### Component Props
 
-- subRoutes
-- id/size
-- etc...
+- subRoutes.
+- id/size.
+- etc....
 
-```jsx
-<Route render={props => <Component {...props} />} />
+```tsx
+import { Route } from 'react-router-dom';
+
+function RenderRoute({ component: Component }) {
+  return <Route render={props => <Component {...props} />} />;
+}
 ```
 
 ### Link and URL Props
 
-```jsx
-to={
-  pathname: url,
-  state: {
-    ...
-  }
+```tsx
+import Component from './Component';
+
+function App() {
+  const { ...state } = this.props.location.state;
+
+  return (
+    <Component
+      to={{
+        pathname: url,
+        state: { ...state },
+      }}
+    />
+  );
 }
-
-...
-
-const {
-  ...
-} = this.props.location.state;
 ```
 
 ### Clean URLs
 
-replace hashHistory for browserHistory
+Switch from `hashHistory` to `browserHistory`.
 
 ### Change Route
 
-- onEnter = { () => store.dispatch(createRouteAction(params))}
-- return `<Redirect />` conditionally and `withRouter` wrapper (`this.props.history.push('nextURL')`)
+- `onEnter = { () => store.dispatch(createRouteAction(params))}`.
+- Return `<Redirect />` conditionally and `withRouter` wrapper (`this.props.history.push('nextURL')`).
 
-```jsx
-class Login = () => {
+```tsx
+import { Redirect } from 'react-router-dom';
+
+class Login {
   login = () => {
     // 1. login
     // 2. setState and pushHistory (500ms delay)
     auth.login(() => {
-      const { from } = this.props.location.state || { from: { pathname: '/' }};
+      const { from } = this.props.location.state || { from: { pathname: '/' } };
       this.setState({ redirect: true });
       this.props.history.push(from);
     }, 500);
-  }
+  };
 
   render() {
     const { redirect } = this.state;
-    const { from } = this.props.location.state || { from: { pathname: '/' }};
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
 
     if (redirect) {
-      return (
-        <Redirect to={from}/>
-      )
+      return <Redirect to={from} />;
     }
 
     return (
@@ -182,19 +201,24 @@ export default withRouter(Login);
 
 ### Relative Path
 
-```jsx
-<ConnectedRouter history={history} basename="/react-boilerplate">
-  <Fragment>
-    <Switch>
-      <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
-      <Route path={`${process.env.PUBLIC_URL}/about`} component={About} />
-      <Route
-        path={`${process.env.PUBLIC_URL}/404`}
-        render={() => <Redirect to={`${process.env.PUBLIC_URL}/`} />}
-      />
-    </Switch>
-  </Fragment>
-</ConnectedRouter>;
+```tsx
+const App = () => {
+  const history = useHistory();
+  return (
+    <ConnectedRouter history={history} basename="/react-boilerplate">
+      <Fragment>
+        <Switch>
+          <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
+          <Route path={`${process.env.PUBLIC_URL}/about`} component={About} />
+          <Route
+            path={`${process.env.PUBLIC_URL}/404`}
+            render={() => <Redirect to={`${process.env.PUBLIC_URL}/`} />}
+          />
+        </Switch>
+      </Fragment>
+    </ConnectedRouter>
+  );
+};
 
 const Header = () => (
   <div>
@@ -209,7 +233,7 @@ const Header = () => (
 - `publicPath: '/'`
 - `historyApiFallback: true`
 
-```js
+```ts
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -239,7 +263,7 @@ module.exports = {
 
 ### Express Config
 
-```js
+```ts
 app.use(express.static(path.resolve(__dirname, 'build')));
 
 // always serve index.html for any request
@@ -267,26 +291,26 @@ location / {
 - When click `<Link>`/`<Redirect>`, `historyPush` or `historyReplace` get called,
   `<Route>` instances re-match and re-render.
 
-```jsx
+```tsx
 const instances = [];
 
 const register = comp => instances.push(comp);
 const unregister = comp => instances.splice(instances.indexOf(comp), 1);
 
 const historyPush = path => {
-  history.pushState({}, null, path);
+  window.history.pushState({}, null, path);
   instances.forEach(instance => instance.forceUpdate());
 };
 
 const historyReplace = path => {
-  history.replaceState({}, null, path);
+  window.history.replaceState({}, null, path);
   instances.forEach(instance => instance.forceUpdate());
 };
 ```
 
 ### Route Component
 
-```jsx
+```tsx
 const matchPath = (pathname, options) => {
   const { exact = false, path } = options;
 
@@ -294,7 +318,7 @@ const matchPath = (pathname, options) => {
     return {
       path: null,
       url: pathname,
-      isExact: true
+      isExact: true,
     };
   }
 
@@ -319,25 +343,25 @@ const matchPath = (pathname, options) => {
   return {
     path,
     url,
-    isExact
+    isExact,
   };
 };
 
 class Route extends Component {
   static propTypes: {
-    path: PropTypes.string,
-    exact: PropTypes.bool,
-    component: PropTypes.func,
-    render: PropTypes.func
+    path: PropTypes.string;
+    exact: PropTypes.bool;
+    component: PropTypes.func;
+    render: PropTypes.func;
   };
 
   componentWillMount() {
-    addEventListener('popstate', this.handlePop);
+    window.addEventListener('popstate', this.handlePop);
     register(this);
   }
 
   componentWillUnmount() {
-    removeEventListener('popstate', this.handlePop);
+    window.removeEventListener('popstate', this.handlePop);
     unregister(this);
   }
 
@@ -348,7 +372,7 @@ class Route extends Component {
   render() {
     const { path, exact, component, render } = this.props;
 
-    const match = matchPath(location.pathname, { path, exact });
+    const match = matchPath(window.location.pathname, { path, exact });
 
     if (!match) {
       return null;
@@ -372,7 +396,7 @@ class Route extends Component {
 Whenever a `<Link>` is clicked and the location changes,
 each `<Route>` will be aware of that and re-match and re-render with `instances`.
 
-```jsx
+```tsx
 class Link extends Component {
   static propTypes = {
     to: PropTypes.string.isRequired,
@@ -400,7 +424,7 @@ class Link extends Component {
 
 ### Redirect Component
 
-```jsx
+```tsx
 class Redirect extends Component {
   static defaultProps = {
     push: false,

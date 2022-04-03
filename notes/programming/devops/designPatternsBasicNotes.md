@@ -76,7 +76,7 @@ class AnimalDB {
 Allow users to add new functionalities without changing existing code,
 open for extension, close for modification.
 
-```js
+```ts
 class Coder {
   constructor(fullName, language, hobby, education, workplace, position) {
     this.fullName = fullName;
@@ -438,7 +438,7 @@ class MockHttpService implements Connection {
 - 事件处理函数与应用逻辑函数分开成单独函数,提高代码重用率
 - 应用逻辑函数不依赖于 event 对象，其属性值作为参数传入，易于解耦与测试
 
-```js
+```ts
 const MyApp = {
   // 事件处理函数
   handleClick(event) {
@@ -473,7 +473,7 @@ const MyApp = {
 
 通过对象字面量创建命名空间:
 
-```js
+```ts
 APP.namespace = function (namespaceString) {
   let parts = namespaceString.split('.');
   let parent = APP;
@@ -498,10 +498,10 @@ APP.namespace = function (namespaceString) {
 };
 ```
 
-```js
+```ts
 // assign returned value to a local var
 const module2 = APP.namespace('APP.modules.module2');
-module2 === APP.modules.module2; // true
+const truthy = module2 === APP.modules.module2; // true
 // skip initial `APP`
 APP.namespace('modules.module51');
 // long namespace
@@ -515,7 +515,7 @@ APP.namespace('once.upon.a.time.there.was.this.long.nested.property');
 - 闭包: 定义私有变量与特权方法
 - 返回对象: 即使通过外部代码改变返回对象的接口，也不会影响原接口
 
-```js
+```ts
 const obj = (function () {
   // private member
   let name = 'tazimi';
@@ -553,7 +553,7 @@ const obj = (function () {
 })();
 ```
 
-```js
+```ts
 const App = App || {};
 App.utils = {};
 
@@ -591,7 +591,7 @@ Universal Module Definition:
 - 先判断是否支持 Node.js 的模块(exports)，存在则使用 Node.js 模块模式
 - 再判断是否支持 AMD(define)，存在则使用 AMD 方式加载模块
 
-```js
+```ts
 (function (window, factory) {
   if (typeof exports === 'object') {
     module.exports = factory();
@@ -649,7 +649,7 @@ Universal Module Definition:
 Creating objects without specify exact object class
 (not calling a constructor directly).
 
-```js
+```ts
 CoordinateSystem = {
   CARTESIAN: 0,
   POLAR: 1,
@@ -680,7 +680,7 @@ const point = PointFactory.newPolarPoint(5, Math.PI / 2);
 const point2 = PointFactory.newCartesianPoint(5, 6);
 ```
 
-```js
+```ts
 module.exports = (function () {
   function VehicleFactory() {
     const publicVehicle = {};
@@ -782,7 +782,7 @@ Encapsulate **a group of individual factories**
 that have a common theme without
 specifying their concrete classes.
 
-```js
+```ts
 class Drink {
   consume() {}
 }
@@ -822,7 +822,7 @@ const tea = teaDrinkFactory.makeTea();
 tea.consume();
 ```
 
-```js
+```ts
 const AbstractVehicleFactory = (function () {
   // Storage for our vehicle types
   const types = {};
@@ -853,7 +853,7 @@ const AbstractVehicleFactory = (function () {
 
 Flexible object creation with chain style calls.
 
-```js
+```ts
 class Person {
   constructor() {
     this.streetAddress = '';
@@ -893,6 +893,7 @@ class PersonBuilder {
 class PersonJobBuilder extends PersonBuilder {
   constructor(person) {
     super(person);
+    console.log('New');
   }
 
   at(companyName) {
@@ -914,6 +915,7 @@ class PersonJobBuilder extends PersonBuilder {
 class PersonAddressBuilder extends PersonBuilder {
   constructor(person) {
     super(person);
+    console.log('New');
   }
 
   at(streetAddress) {
@@ -948,7 +950,7 @@ const person = personBuilder.lives
 可以使用原型模式来减少创建新对象的成本.
 关键方法 `Object.create()`/`clone()`.
 
-```js
+```ts
 class Car {
   constructor(name, model) {
     this.name = name;
@@ -975,7 +977,7 @@ car2.SetName('BMW');
 
 > Use Case: Redux, VueX 等状态管理工具, window 对象, 全局缓存等.
 
-```js
+```ts
 class Singleton {
   constructor() {
     const instance = this.constructor.instance;
@@ -989,7 +991,7 @@ class Singleton {
 }
 ```
 
-```js
+```ts
 function Universe() {
   // 缓存实例
   let instance;
@@ -1025,7 +1027,7 @@ function Universe() {
 - `adapter.method()`:
   实现此 method 时, 使用了新接口规定的属性/方法.
 
-```js
+```ts
 class Calculator1 {
   constructor() {
     this.operations = function (value1, value2, operation) {
@@ -1071,7 +1073,7 @@ class CalcAdapter {
 }
 ```
 
-```js
+```ts
 // old interface
 function Shipping() {
   this.request = function (zipStart, zipEnd, weight) {
@@ -1112,7 +1114,7 @@ function AdapterShipping(credentials) {
 }
 ```
 
-```js
+```ts
 const shipping = new Shipping();
 const adapterShipping = new AdapterShipping(credentials);
 
@@ -1130,7 +1132,7 @@ cost = adapter.request('78701', '10010', '2 lbs');
   - 分离抽象和实现 (Separate abstracts and implements).
   - 分离对象的两种不同属性. `e.g` 从 2 个不同维度上扩展对象.
 
-```js
+```ts
 class VectorRenderer {
   renderCircle(radius) {
     console.log(`Drawing a circle of radius ${radius}`);
@@ -1194,7 +1196,7 @@ circle.draw();
 - 保持接口的一致性，动态改变对象的外观/职责
 - ConcreteDecorator 类: private ClassName component;(拥有一个对象引用)
 
-```js
+```ts
 const __decorate = function (decorators, target, key, desc) {
   const argumentsLength = arguments.length;
   let descriptorOrTarget;
@@ -1243,7 +1245,7 @@ const __decorate = function (decorators, target, key, desc) {
 
 符合开放封闭原则和单一职责模式.
 
-```js
+```ts
 // 构造函数
 function Sale(price) {
   this.price = price || 100;
@@ -1304,7 +1306,7 @@ Sale.prototype.decorate = function (decorator) {
 
 #### Decorators List
 
-```js
+```ts
 // 构造函数
 function Sale(price) {
   this.price = price > 0 || 100;
@@ -1352,7 +1354,7 @@ Sale.prototype.getPrice = function () {
 
 #### Decorator Pattern Example
 
-```js
+```ts
 // The constructor to decorate
 function MacBook() {
   this.cost = function () {
@@ -1388,7 +1390,7 @@ function Insurance(macBook) {
 }
 ```
 
-```js
+```ts
 const mb = new MacBook();
 Memory(mb);
 Engraving(mb);
@@ -1408,7 +1410,7 @@ console.log(mb.screenSize());
 但只暴露一个简单的接口:
 封装复杂逻辑.
 
-```js
+```ts
 class CPU {
   freeze() {
     console.log('Freezed....');
@@ -1457,7 +1459,7 @@ const computer = new ComputerFacade();
 computer.start();
 ```
 
-```js
+```ts
 sabertazimi.addMyEvent = function (el, ev, fn) {
   if (el.addEventListener) {
     el.addEventListener(ev, fn, false);
@@ -1478,7 +1480,7 @@ sabertazimi.addMyEvent = function (el, ev, fn) {
 - 某个类型的对象有大量的实例，对这些实例进行分类，合并相同分类的对象，只创建少量实例(享元)
 - 通过享元工厂来管理一组享元，当所需享元已存在时，返回已存在享元;当所需享元不存在时，创建新享元
 
-```js
+```ts
 function Flyweight(make, model, processor) {
   this.make = make;
   this.model = model;
@@ -1559,7 +1561,7 @@ function ComputerCollection() {
 
 > Use Case: 图片预加载, 缓存服务器, 处理跨域, 拦截器等.
 
-```js
+```ts
 class Percentage {
   constructor(percent) {
     this.percent = percent;
@@ -1579,7 +1581,7 @@ console.log(fivePercent.toString());
 console.log(`5% of 50 is ${50 * fivePercent}`);
 ```
 
-```js
+```ts
 function GeoCoder() {
   this.getLatLng = function (address) {
     if (address === 'Amsterdam') {
@@ -1645,7 +1647,7 @@ reactive.name = 'bob'; // 'updating UI...'
 
 > Use Case: Middlewares (Redux, Express, Koa).
 
-```js
+```ts
 class Creature {
   constructor(name, attack, defense) {
     this.name = name;
@@ -1679,6 +1681,7 @@ class CreatureModifier {
 class NoBonusesModifier extends CreatureModifier {
   constructor(creature) {
     super(creature);
+    console.log('New');
   }
 
   handle() {
@@ -1689,6 +1692,7 @@ class NoBonusesModifier extends CreatureModifier {
 class DoubleAttackModifier extends CreatureModifier {
   constructor(creature) {
     super(creature);
+    console.log('New');
   }
 
   handle() {
@@ -1701,6 +1705,7 @@ class DoubleAttackModifier extends CreatureModifier {
 class IncreaseDefenseModifier extends CreatureModifier {
   constructor(creature) {
     super(creature);
+    console.log('New');
   }
 
   handle() {
@@ -1738,7 +1743,7 @@ console.log(peekachu.toString());
 
 client and receiver
 
-```js
+```ts
 const SimpleCommand = function (receiving) {
   this.receiving = receiving;
 };
@@ -1748,7 +1753,7 @@ SimpleCommand.prototype.execute = function () {
 };
 ```
 
-```js
+```ts
 module.exports = (function () {
   const manager = {};
 
@@ -1786,7 +1791,7 @@ Command pattern in UI development, bind command to UI components:
 
 e.g click `button` -> refresh `menu`
 
-```js
+```ts
 // receiver
 const MenuBar = {
   action() {
@@ -1817,7 +1822,7 @@ button.addEventLister('click', event => {
 });
 ```
 
-```js
+```ts
 const MenuCommand = function (action) {
   this.action = action;
 };
@@ -1876,7 +1881,7 @@ appMenuBar.show();
 
 Command sequences to implement Macro/Batch/Undo command:
 
-```js
+```ts
 const Cursor = function (width, height, parent) {
   this.width = width;
   this.height = height;
@@ -1928,7 +1933,7 @@ Cursor.prototype = {
 
 > Use Case: 遍历对象.
 
-```js
+```ts
 class Stuff {
   constructor() {
     this.a = 11;
@@ -1982,7 +1987,7 @@ for (const item of stuff.backwards) console.log(`${item}`);
 
 Defines an object that encapsulates how a set of objects interact:
 
-```js
+```ts
 class Person {
   constructor(name) {
     this.name = name;
@@ -2051,7 +2056,7 @@ doe.say('Hello everyone!');
 
 > Use Case: 解耦, 跨层级通信, 事件绑定.
 
-```js
+```ts
 class Event {
   constructor() {
     this.handlers = new Map();
@@ -2100,7 +2105,7 @@ person.fallsIll.unsubscribe(sub);
 person.catchCold();
 ```
 
-```js
+```ts
 function ObserverList() {
   this.observerList = [];
 }
@@ -2205,7 +2210,7 @@ e.g Event Bus in Vue, Event Emitter in Node.
 
 - pubSub.js
 
-```js
+```ts
 module.exports = (function (window, doc, undef) {
   const pubSub = {};
 
@@ -2265,7 +2270,7 @@ module.exports = (function (window, doc, undef) {
 
 - test.js
 
-```js
+```ts
 const pubsub = require('./pubSub.js');
 
 // add observer to observerList
@@ -2314,7 +2319,7 @@ pubsub.publish('sum', ['a', 'b', 'c', 'd', 'e']);
 
 - in jQuery
 
-```js
+```ts
 // Equivalent to subscribe(topicName, callback)
 $(document).on('topicName', function () {
   // ..perform some behavior
@@ -2329,7 +2334,7 @@ $(document).off('topicName');
 
 - MicroEvent.js
 
-```js
+```ts
 /**
  * MicroEvent - to make any js object an event emitter (server or browser)
  *
@@ -2396,7 +2401,7 @@ if (typeof module !== 'undefined' && 'exports' in module) {
 - 可以有多个不同的订阅者，以不同的方式使用返回的数据
 - Ajax 层: 唯一的责任 - 请求和返回数据，接着将数据发送给所有想要使用数据的地方
 
-```js
+```ts
 (function ($) {
   // Pre-compile template and "cache" it using closure
   const resultTemplate = _.template($('#resultTemplate').html());
@@ -2458,7 +2463,7 @@ if (typeof module !== 'undefined' && 'exports' in module) {
 `object` set `state` as its **member**,
 `state` set `object` as its **method parameter**.
 
-```js
+```ts
 class Switch {
   constructor() {
     this.state = new OffState();
@@ -2522,7 +2527,7 @@ button.off();
 
 > Use Case: 表单验证, 存在大量 if-else 场景, 各种重构等.
 
-```js
+```ts
 const OutputFormat = Object.freeze({
   markdown: 0,
   html: 1,
@@ -2599,7 +2604,7 @@ tp.appendList(['one', 'two', 'three']);
 console.log(tp.toString());
 ```
 
-```js
+```ts
 // 违反开放封闭原则
 const activity = (type, price) => {
   if (type === 'pre') {
@@ -2632,7 +2637,7 @@ activity.set('newcomer', price => price * 0.7);
 Abstract superclass defines the skeleton of an operation
 in terms of a number of high-level steps.
 
-```js
+```ts
 class Game {
   constructor(numberOfPlayers) {
     this.numberOfPlayers = numberOfPlayers;
@@ -2696,7 +2701,7 @@ Separating an algorithm from an object structure on which it operates.
 
 > Use Case: Tree, Compiler (Abstract Syntax Tree).
 
-```js
+```ts
 class NumberExpression {
   constructor(value) {
     this.value = value;
@@ -2747,7 +2752,7 @@ IoC Container 将 B 实例化后,
 通过构造函数/接口方法/设置属性/工厂模式等方法注入 A 中,
 实现依赖注入 (DI).
 
-```js
+```ts
 class Component {
   // 构造函数注入.
   constructor(dep) {
@@ -2908,7 +2913,7 @@ export class Hello extends React.Component {
 
 ### Class Pattern
 
-```js
+```ts
 const Person = function (firstName, lastName) {
   this.firstName = firstName;
   this.lastName = lastName;
@@ -2928,7 +2933,7 @@ const Superhero = function (firstName, lastName, powers) {
 SuperHero.prototype = Object.create(Person.prototype);
 ```
 
-```js
+```ts
 const superman = new Superhero('Clark', 'Kent', ['flight', 'heat-vision']);
 console.log(superman);
 ```
@@ -2939,7 +2944,7 @@ console.log(superman);
 
 - 不改变原型链
 
-```js
+```ts
 function mix(...args) {
   let arg;
   let prop;
@@ -2957,7 +2962,7 @@ function mix(...args) {
 }
 ```
 
-```js
+```ts
 const cake = mix(
   { eggs: 2, large: true },
   { butter: 1, salted: true },
@@ -2968,7 +2973,7 @@ const cake = mix(
 
 - 改变原型链
 
-```js
+```ts
 // Extend an existing object with a method from another
 function mix(...args) {
   const receivingClass = args[0];
@@ -3083,7 +3088,7 @@ Nest.js 通过 AOP 的架构方式, 实现了松耦合, 易于维护与扩展的
 
 ### Plugin Pattern
 
-```js
+```ts
 (function ($) {
   $.extend($.fn, {
     myPlugin() {
@@ -3093,7 +3098,7 @@ Nest.js 通过 AOP 的架构方式, 实现了松耦合, 易于维护与扩展的
 })(jQuery);
 ```
 
-```js
+```ts
 // the semi-colon before the function invocation is a safety
 // net against concatenated scripts and/or other plugins
 // that are not closed properly.
