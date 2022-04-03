@@ -1919,7 +1919,10 @@ vm._provided = provided;
     bundle `compiler` and `runtime` into `vue.js`.
 - `mountComponent(vm, el)`.
 - `Vue.prototype._render`.
-- `VDOM.createElement(vm)`.
+- `VDOM.createElement(vm)`:
+  - Normalize children.
+  - Create VNode and install hooks.
+  - Create children recursively.
 - `Vue.prototype._update`.
 - `Vue.prototype.__patch__` (`platforms/web/runtime/patch.js`):
   - `backend.nodeOps` (`platforms/web/runtime/node-ops`).
@@ -2083,16 +2086,23 @@ Vue.prototype._render = function (): VNode {
 };
 ```
 
-`core/vdom/createElement.js`:
+`core/vdom/create-element.js`:
 
 - Normalize children: transform children to `Array<VNode>`.
 - Create VNode:
   - `new VNode(tag, data, children, vm)` for native host elements (e.g `<div>`).
   - `createComponent(tag, data, children, vm)` for custom components:
     - `resolveConstructorOptions`: merge and resolve options API.
-    - `installComponentHooks`: install internal and user-defined VNode hooks.
+    - `installComponentHooks`:
+      - Install internal (`core/vdom/create-component.js/componentVNodeHooks`) hooks.
+      - Merge user-defined VNode hooks.
     - `new VNode(`vue-component-${Ctor.options.name}`, data, undefined, vm)`.
     - Component VNode children is `undefined`.
+- `vm._vnode.parent === vm.$vnode`.
+- 组件 patch 过程中 DOM 的插入顺序为**先子后父**:
+  `createComponent(vnode)` 中会调用内部钩子函数 `init(vnode)`,
+  `init(vnode)` 函数会创建子组件 `VNode`, 并调用 `child.$mount(vnode.elm)`,
+  递归式地创建子组件.
 
 ```ts
 export function createElement(
