@@ -2087,8 +2087,12 @@ Vue.prototype._render = function (): VNode {
 
 - Normalize children: transform children to `Array<VNode>`.
 - Create VNode:
-  - `new VNode(tag, data, children, vm)`: native host elements (e.g `<div>`).
-  - `createComponent(tag, data, children, vm)`: custom components.
+  - `new VNode(tag, data, children, vm)` for native host elements (e.g `<div>`).
+  - `createComponent(tag, data, children, vm)` for custom components:
+    - `resolveConstructorOptions`: merge and resolve options API.
+    - `installComponentHooks`: install internal and user-defined VNode hooks.
+    - `new VNode(`vue-component-${Ctor.options.name}`, data, undefined, vm)`.
+    - Component VNode children is `undefined`.
 
 ```ts
 export function createElement(
