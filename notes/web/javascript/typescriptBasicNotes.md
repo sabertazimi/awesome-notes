@@ -63,6 +63,7 @@ Basic [tsconfig](https://www.typescriptlang.org/tsconfig):
     "noEmit": true, // 不生成输出文件
     "importHelpers": true, // 从 tslib 导入辅助工具函数
     "isolatedModules": true, // 将每个文件做为单独的模块 （与 'ts.transpileModule' 类似）
+    "resolveJsonModule": true,
 
     /* 严格的类型检查选项 */
     "strict": true, // 启用所有严格类型检查选项
