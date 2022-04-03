@@ -586,9 +586,9 @@ tags: [Web, Framework, Library]
 
 ## Animation
 
+- [Framer Motion](https://github.com/framer/motion)
 - [React Spring](https://github.com/pmndrs/react-spring)
 - [GSAP: GreenSock Animation Platform](https://github.com/greensock/GSAP)
-- [Framer Motion](https://github.com/framer/motion)
 - [Popmotion](https://github.com/popmotion/popmotion)
 - [TweenJS: TypeScript Animation Engine](https://github.com/tweenjs/tween.js)
 - [React Transition Group](https://github.com/reactjs/react-transition-group)
@@ -657,8 +657,8 @@ tags: [Web, Framework, Library]
 
 ## Internationalization Utils
 
-- [React i18n](https://github.com/i18next/react-i18next)
 - [FormatJS](https://github.com/formatjs/formatjs)
+- [React i18n](https://github.com/i18next/react-i18next)
 - [Globalize: Leverages Official Unicode CLDR JSON Data](https://github.com/globalizejs/globalize)
 - [Dinero: Create, Calculate and Format Money in TypeScript](https://github.com/dinerojs/dinero.js)
 - [AutoNumeric: Numbers and Currencies](https://github.com/autoNumeric/autoNumeric)
@@ -1022,8 +1022,6 @@ tags: [Web, Framework, Library]
 
 ## Compiler
 
-- [UnifiedJS: Interface for Parsing, Inspecting, Transforming and Serializing Content through Syntax Trees](https://github.com/unifiedjs/unified)
-
 ### JavaScript Parser
 
 - [Acorn](https://github.com/acornjs/acorn)
@@ -1034,6 +1032,7 @@ tags: [Web, Framework, Library]
 
 ### Parser
 
+- [UnifiedJS: Interface for Parsing, Inspecting, Transforming and Serializing Content through Syntax Trees](https://github.com/unifiedjs/unified)
 - [HTML Parser](https://github.com/taoqf/node-html-parser)
 - [YAML Parser](https://github.com/jonschlinkert/gray-matter)
 - [XML Parser](https://github.com/TobiasNickel/tXml)
