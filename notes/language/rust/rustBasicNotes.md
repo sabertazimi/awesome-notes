@@ -4081,4 +4081,10 @@ console.log(result);
 
 ## Reference
 
-- [Rust Course](https://github.com/sunface/rust-course).
+- [Rust Book](https://github.com/rust-lang/book)
+- [Rust Nomicon](https://github.com/rust-lang/nomicon)
+- [Rust Asynchronism](https://github.com/rust-lang/async-book)
+- [Rust Data Structures](https://github.com/rust-unofficial/too-many-lists)
+- [Rust Example](https://github.com/rust-lang/rust-by-example)
+- [Rust Lings](https://github.com/rust-lang/rustlings)
+- [Rust Course](https://github.com/sunface/rust-course)
