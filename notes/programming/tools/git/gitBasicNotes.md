@@ -819,7 +819,7 @@ git checkout <commit-hash-id>
 - write .git/index
 - set HEAD to that commit (detached HEAD state)
 
-```js
+```ts
 // Get file commit history
 const Git = require('nodegit');
 let repo;

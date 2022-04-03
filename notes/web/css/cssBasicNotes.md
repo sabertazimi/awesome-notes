@@ -870,7 +870,7 @@ XXvh(viewport height)
 }
 ```
 
-```js
+```ts
 window.addEventListener('resize', () => {
   // Get viewport height and multiple it by 1% to get a value for a vh unit
   const vh = window.innerHeight * 0.01;
@@ -2667,7 +2667,7 @@ svg {
 }
 ```
 
-```js
+```ts
 const svgElement = document.createElementNS(
   'http://www.w3.org/2000/svg',
   'svg'
@@ -2790,7 +2790,7 @@ size animation will start from bottom-right corner).
 `transition` take effect only when
 browser detecting different styles between `style` stage.
 
-```js
+```ts
 // transition not working
 panel.style.transform = 'scale(0)';
 panel.style.transition = 'transform .5s';
@@ -2808,7 +2808,7 @@ requestAnimationFrame(() => {
 // transition working
 panel.style.transform = 'scale(0)';
 // `getComputedStyle(element).property` trigger a new `style` stage
-getComputedStyle(panel).transform;
+const computedTransform = getComputedStyle(panel).transform;
 panel.style.transition = 'transform .5s';
 // previous `transform` is `scale(0)`
 panel.style.transform = 'scale(1)';
@@ -2903,7 +2903,7 @@ as css style of element changed (class changed).
 }
 ```
 
-```js
+```ts
 div.classList.add('before-enter');
 
 setTimeout(() => {
@@ -3142,7 +3142,7 @@ animation pattern: 利用 `animation-paly-state`
 }
 ```
 
-```js
+```ts
 element.classList.add('animate');
 setTimeout(() => element.classList.remove('animate'), duration);
 ```
@@ -3191,13 +3191,13 @@ setTimeout(() => element.classList.remove('animate'), duration);
 
 #### TweenMax
 
-```js
+```ts
 TweenMax.fromTo(element, 1, { x: 0 }, { x: 100 });
 ```
 
 #### TimelineMax
 
-```js
+```ts
 const tl = new TimelineMax();
 tl.staggerFrom(
   [
@@ -3559,7 +3559,7 @@ Detecting media query support in CSS:
 
 Detecting media query support in JavaScript:
 
-```js
+```ts
 const query = '(prefers-reduced-data)';
 
 // window.matchMedia(query).media return 'not all' or original query string
@@ -3572,12 +3572,12 @@ const isSupported = query === resolvedMediaQuery;
 
 - [MDN Media Query Tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)
 
-```js
+```ts
 // https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList
 const mql = window.matchMedia(mediaQueryString);
 ```
 
-```js
+```ts
 if (window.matchMedia('(min-width: 400px)').matches) {
   /* the view port is at least 400 pixels wide */
 } else {
@@ -4398,7 +4398,7 @@ a:focus {
 }
 ```
 
-```js
+```ts
 function enter(el, done) {
   el.classList.add('before-enter');
 
@@ -4534,7 +4534,7 @@ function leave(el, done) {
 
 [CodePen Demo](https://codepen.io/ZeroX-DG/pen/vjdoYe)
 
-```js
+```ts
 // bottom-right:
 new_width = element_original_width + (mouseX - original_mouseX);
 new_height = element_original_height + (mouseY - original_mouseY);
@@ -4638,7 +4638,7 @@ body {
 [解决办法](https://github.com/sabertazimi/hust-web/blob/master/css/target-slide/index.js)
 如下:
 
-```js
+```ts
 const resetScrollX = () => {
   window.scrollTo(0, 0);
 };
@@ -4864,7 +4864,7 @@ Use pseudo elements to construct circle and line:
 
 #### Polygon
 
-```js
+```ts
 const polygon = (n = 3) => {
   const deg = (2 * Math.PI) / n;
   const points = [];
@@ -4891,14 +4891,14 @@ const polygon = (n = 3) => {
 }
 ```
 
-```js
+```ts
 window.addEventListener('resize', () => {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
 ```
 
-```js
+```ts
 const root = document.documentElement;
 const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
 ```
@@ -5186,7 +5186,7 @@ Avatar with circle status indicator:
 
 stylelint-config-mass plugin `index.js`:
 
-```js
+```ts
 module.exports = {
   extends: ['stylelint-config-sass-guidelines'],
   rules: {
@@ -5530,7 +5530,7 @@ contain: paint;
 
 > 若想要在下次重绘时产生另一个动画画面，callback 必须调用 requestAnimationFrame.
 
-```js
+```ts
 let start = null;
 const element = document.getElementById('SomeElementYouWantToAnimate');
 element.style.position = 'absolute';

@@ -146,7 +146,7 @@ e -> "\0" # basic definition
 - "a*" : a* 自身(非 Kleene Closure)
 - . : 除 ‘\n’ 外的任意字符
 
-```js
+```ts
 // 标识符
 const identifier = /[a-zA-Z\_][a-zA-Z\_0-9]*/g;
 
