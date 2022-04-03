@@ -42,6 +42,7 @@ tags: [Web, Framework, Library]
 - [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
 - [React Chrome Extension](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
 - [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)
+- [Vite Web Extension](https://github.com/antfu/vitesse-webext)
 
 ## UI Framework
 
