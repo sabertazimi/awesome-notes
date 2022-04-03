@@ -934,8 +934,14 @@ tags: [Web, Framework, Library]
 
 ## Search
 
-- [React Search Bar](https://github.com/searchkit/searchkit)
+### Search UI Components
+
+- [React InstanceSearch DOM](https://github.com/algolia/react-instantsearch)
 - [SearchKit](https://github.com/searchkit/searchkit)
+
+### Search Engine
+
+- [TypeSense: Open Source Alternative to Algolia and Easier-to-Use Alternative to ElasticSearch](https://github.com/typesense/typesense)
 - [Lunr.js: Full Text Search Engine](https://github.com/olivernn/lunr.js)
 - [Solr: Solr Client for Node.js](https://github.com/lbdremy/solr-node-client)
 - [JieBa: Chinese Text Segmentation](https://github.com/yanyiwu/nodejieba)
