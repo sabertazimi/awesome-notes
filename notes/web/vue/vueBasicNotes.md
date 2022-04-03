@@ -2492,7 +2492,7 @@ for (const key in dirs) {
 
 ## Modern Vue Internals
 
-### Vue DOM
+### Vue Virtual DOM
 
 VNode Type:
 
@@ -2559,6 +2559,16 @@ export interface VNode {
 }
 ```
 
+### Vue Template and Compiler
+
+Performant improvements:
+
+- Shorten template helper function with prefix `_v`/`_s` etc.
+- Hoist static template blocks,
+  eliminate unnecessary virtual DOM diff effort,
+  only track dynamic VNode.
+- Cache event handlers (like `useCallback` in React).
+
 ### Vue Two-Way Data Binding
 
 View-Model 主要做了两件微小的事情：
@@ -2596,16 +2606,6 @@ Array.from(el.getElementsByTagName('input'))
     };
   });
 ```
-
-### Vue Template and Compiler
-
-Performant improvements:
-
-- Shorten template helper function with prefix `_v`/`_s` etc.
-- Hoist static template blocks,
-  eliminate unnecessary virtual DOM diff effort,
-  only track dynamic VNode.
-- Cache event handlers (like `useCallback` in React).
 
 ### Vue Reactivity
 
