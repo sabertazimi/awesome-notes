@@ -2048,6 +2048,7 @@ export function mountComponent(
   // mounted is called for render-created child components in its inserted hook
   // vm.$vnode 表示 Vue 实例的父虚拟 Node.
   if (vm.$vnode == null) {
+    // Only `new Vue()` trigger this:
     vm._isMounted = true;
     callHook(vm, 'mounted');
   }
@@ -2471,6 +2472,221 @@ for (const key in dirs) {
 ### Vue Lifecycle
 
 [![Lifecycle](./figures/lifecycle.png)](https://v2.vuejs.org/v2/api/#Options-Lifecycle-Hooks)
+
+`callHook` in `core/instance/lifecycle.js`:
+
+```ts
+export function callHook(vm: Component, hook: string) {
+  pushTarget();
+  const handlers = vm.$options[hook];
+
+  if (handlers) {
+    for (let i = 0, j = handlers.length; i < j; i++) {
+      try {
+        handlers[i].call(vm);
+      } catch (e) {
+        handleError(e, vm, `${hook} hook`);
+      }
+    }
+  }
+
+  if (vm._hasHookEvent) {
+    vm.$emit(`hook:${hook}`);
+  }
+
+  popTarget();
+}
+```
+
+`beforeCreate`/`created` in `core/instance/init.js`:
+
+- `beforeCreate` 不能访问 `props`/`data`/`methods`.
+- `created` 可以访问 `props`/`data`/`methods`.
+- `beforeCreate`/`created` 不能访问 DOM.
+
+```ts
+Vue.prototype._init = function (options?: Object) {
+  // ...
+  initLifecycle(vm);
+  initEvents(vm);
+  initRender(vm);
+  callHook(vm, 'beforeCreate');
+  initInjections(vm);
+  initState(vm); // props/data/methods/watch/computed.
+  initProvide(vm);
+  callHook(vm, 'created');
+  // ...
+};
+```
+
+`beforeMount`/`beforeUpdate` in `core/instance/lifecycle.js`:
+
+```ts
+export function mountComponent(
+  vm: Component,
+  el: ?Element,
+  hydrating?: boolean
+): Component {
+  vm.$el = el;
+  // ...
+  callHook(vm, 'beforeMount');
+
+  const updateComponent = () => {
+    vm._update(vm._render(), hydrating);
+  };
+
+  // eslint-disable-next-line no-new
+  new Watcher(
+    vm,
+    updateComponent,
+    noop,
+    {
+      before() {
+        if (vm._isMounted) {
+          callHook(vm, 'beforeUpdate');
+        }
+      },
+    },
+    true /* isRenderWatcher */
+  );
+
+  hydrating = false;
+
+  if (vm.$vnode == null) {
+    // Only `new Vue()` trigger this:
+    vm._isMounted = true;
+    callHook(vm, 'mounted');
+  }
+
+  return vm;
+}
+```
+
+`mounted` in `core/vdom/patch.js`/`core/vdom/create-component.js`:
+
+- 对于同步渲染的子组件，`mounted` 执行顺序为**先子后父**.
+
+```ts
+// core/vdom/patch.js:
+function invokeInsertHook(vnode, queue, initial) {
+  // delay insert hooks for component root nodes, invoke them after the
+  // element is really inserted
+  if (isTrue(initial) && isDef(vnode.parent)) {
+    vnode.parent.data.pendingInsert = queue;
+  } else {
+    for (let i = 0; i < queue.length; ++i) {
+      queue[i].data.hook.insert(queue[i]);
+    }
+  }
+}
+
+// core/vdom/create-component.js:
+const componentVNodeHooks = {
+  // ...
+  insert(vnode: MountedComponentVNode) {
+    const { context, componentInstance } = vnode;
+    if (!componentInstance._isMounted) {
+      componentInstance._isMounted = true;
+      callHook(componentInstance, 'mounted');
+    }
+    // ...
+  },
+};
+```
+
+`update` in `core/observer/scheduler.js`:
+
+- `RenderWatcher`.
+
+```ts
+function flushSchedulerQueue() {
+  // ...
+  // 获取到 updatedQueue
+  callUpdatedHooks(updatedQueue);
+}
+
+function callUpdatedHooks(queue) {
+  let i = queue.length;
+
+  while (i--) {
+    const watcher = queue[i];
+    const vm = watcher.vm;
+
+    // Peek up `RenderWatcher`
+    if (vm._watcher === watcher && vm._isMounted) {
+      callHook(vm, 'updated');
+    }
+  }
+}
+```
+
+`beforeDestroy`/`destroyed` in `core/instance/lifecycle.js`:
+
+- 调用 `beforeDestroy` 钩子函数.
+- 从 `parent` 的 `$children` 中删掉自身.
+- 删除 `watcher`.
+- 当前渲染的 VNode 执行销毁钩子函数.
+- 调用 `destroyed` 钩子函数.
+- 在 `$destroy` 的执行过程中,
+  会执行 `vm.__patch__(vm._vnode, null)` 触发子组件的销毁钩子函数 (递归),
+  `destroyed` 钩子函数执行顺序为**先子后父**.
+
+```ts
+Vue.prototype.$destroy = function () {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const vm: Component = this;
+
+  if (vm._isBeingDestroyed) {
+    return;
+  }
+
+  callHook(vm, 'beforeDestroy');
+  vm._isBeingDestroyed = true;
+
+  // remove self from parent
+  const parent = vm.$parent;
+
+  if (parent && !parent._isBeingDestroyed && !vm.$options.abstract) {
+    remove(parent.$children, vm);
+  }
+
+  // teardown watchers
+  if (vm._watcher) {
+    vm._watcher.teardown();
+  }
+
+  let i = vm._watchers.length;
+
+  while (i--) {
+    vm._watchers[i].teardown();
+  }
+
+  // remove reference from data ob
+  // frozen object may not have observer.
+  if (vm._data.__ob__) {
+    vm._data.__ob__.vmCount--;
+  }
+
+  // call the last hook...
+  vm._isDestroyed = true;
+  // invoke destroy hooks on current rendered tree
+  vm.__patch__(vm._vnode, null);
+  // fire destroyed hook
+  callHook(vm, 'destroyed');
+  // turn off all instance listeners.
+  vm.$off();
+
+  // GC: remove __vue__ reference
+  if (vm.$el) {
+    vm.$el.__vue__ = null;
+  }
+
+  // GC: release circular reference (#6759)
+  if (vm.$vnode) {
+    vm.$vnode.parent = null;
+  }
+};
+```
 
 ## Modern Vue Internals
 
