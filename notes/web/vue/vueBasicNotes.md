@@ -128,7 +128,7 @@ and prefer `v-if` if the condition is unlikely to change at runtime.
 </div>
 ```
 
-```js
+```ts
 Vue.createApp({
   methods: {
     warn(message, event) {
@@ -151,7 +151,7 @@ Vue.createApp({
 
 Form events:
 
-```js
+```ts
 app.component('CustomForm', {
   emits: {
     // 没有验证
@@ -303,7 +303,7 @@ Component `v-model` directive:
 ></custom-input>
 ```
 
-```js
+```ts
 app.component('CustomInput', {
   props: ['modelValue'],
   emits: ['update:modelValue'],
@@ -316,7 +316,7 @@ app.component('CustomInput', {
 });
 ```
 
-```js
+```ts
 app.component('CustomInput', {
   props: ['modelValue'],
   emits: ['update:modelValue'],
@@ -347,7 +347,7 @@ app.component('CustomInput', {
 </div>
 ```
 
-```js
+```ts
 Vue.createApp({
   data() {
     return {
@@ -474,7 +474,7 @@ Named slot directive shorthand:
 Pass data from child to parent
 (like `Render Props` in React):
 
-```js
+```ts
 app.component('TodoList', {
   data() {
     return {
@@ -559,7 +559,7 @@ we cannot directly access `this.$emit` or `this.$route` anymore.
   - `context.parent`.
   - `context.root`.
 
-```js
+```ts
 import { ref, toRefs } from 'vue';
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -599,7 +599,7 @@ just put code in `setup` methods.
 
 #### Reactive Value
 
-```js
+```ts
 import { reactive, toRefs } from 'vue';
 
 const book = reactive({
@@ -618,7 +618,7 @@ console.log(book.title); // 'Vue 3 Detailed Guide'
 
 #### Computed Value
 
-```js
+```ts
 const count = ref(1);
 const plusOne = computed(() => count.value + 1);
 
@@ -627,7 +627,7 @@ console.log(plusOne.value); // 2
 plusOne.value++; // error
 ```
 
-```js
+```ts
 const count = ref(1);
 const plusOne = computed({
   get: () => count.value + 1,
@@ -644,7 +644,7 @@ console.log(count.value); // 0
 
 Watch single value:
 
-```js
+```ts
 // watching a getter
 const state = reactive({ count: 0 });
 watch(
@@ -663,7 +663,7 @@ watch(count, (count, prevCount) => {
 
 Watch multiple value:
 
-```js
+```ts
 const firstName = ref('');
 const lastName = ref('');
 
@@ -677,7 +677,7 @@ lastName.value = 'Smith'; // logs: ["John", "Smith"] ["John", ""]
 
 Watch reactive value:
 
-```js
+```ts
 const numbers = reactive([1, 2, 3, 4]);
 
 watch(
@@ -692,7 +692,7 @@ numbers.push(5); // logs: [1,2,3,4,5] [1,2,3,4]
 
 Watch deep object:
 
-```js
+```ts
 const state = reactive({
   id: 1,
   attributes: {
@@ -1449,7 +1449,7 @@ body {
 /* etc... */
 ```
 
-```js
+```ts
 // main.js
 import Vue from 'vue';
 import App from './App.vue';
@@ -1459,7 +1459,7 @@ import router from './router';
 import '@/styles/site.scss';
 ```
 
-```js
+```ts
 // webpack.config.js
 module.exports = {
   css: {
@@ -1497,7 +1497,7 @@ to either replace mixins or leverage a Composition API-based library.
 
 `src/core/instance/index.js`
 
-```js
+```ts
 // 从五个文件导入五个方法（不包括 warn）
 import { warn } from '../util/index';
 import { initMixin } from './init';
@@ -1527,13 +1527,13 @@ export default Vue;
 
 ### Vue Prototype
 
-```js
+```ts
 // initMixin(Vue)    src/core/instance/init.js **************************************************
 Vue.prototype._init = function (options?: Object) {};
 
 // stateMixin(Vue)    src/core/instance/state.js **************************************************
-Vue.prototype.$data;
-Vue.prototype.$props;
+Vue.prototype.$data = data;
+Vue.prototype.$props = props;
 Vue.prototype.$set = set;
 Vue.prototype.$delete = del;
 Vue.prototype.$watch = function (
@@ -1600,21 +1600,122 @@ Vue.prototype.$mount = function (
   el = el && inBrowser ? query(el) : undefined;
   return mountComponent(this, el, hydrating);
 };
+```
 
-// 在入口文件 entry-runtime-with-compiler.js 中重写了 Vue.prototype.$mount 方法
+在入口文件 `src/platforms/web/entry-runtime-with-compiler.js` 中
+重写了 `Vue.prototype.$mount` 方法:
+
+```ts
+import config from 'core/config';
+import { cached } from 'core/util/index';
+import { mark, measure } from 'core/util/perf';
+
+import Vue from './runtime/index';
+import { compileToFunctions } from './compiler/index';
+import {
+  shouldDecodeNewlines,
+  shouldDecodeNewlinesForHref,
+} from './util/compat';
+import { query } from './util/index';
+
+const mount = Vue.prototype.$mount;
+
+const idToTemplate = cached(id => {
+  const el = query(id);
+  return el && el.innerHTML;
+});
+
+/**
+ * Get outerHTML of elements, taking care
+ * of SVG elements in IE as well.
+ */
+const getOuterHTML = (el: Element): string => {
+  if (el.outerHTML) {
+    return el.outerHTML;
+  } else {
+    const container = document.createElement('div');
+    container.appendChild(el.cloneNode(true));
+    return container.innerHTML;
+  }
+};
+
 Vue.prototype.$mount = function (
   el?: string | Element,
   hydrating?: boolean
 ): Component {
-  // ... 函数体
+  el = el && query(el);
+
+  if (el === document.body || el === document.documentElement) {
+    process.env.NODE_ENV !== 'production' &&
+      warn(
+        `Do not mount Vue to <html> or <body> - mount to normal elements instead.`
+      );
+    return this;
+  }
+
+  const options = this.$options;
+  // resolve template/el and convert to render function
+  if (!options.render) {
+    let template = options.template;
+    if (template) {
+      if (typeof template === 'string') {
+        if (template.charAt(0) === '#') {
+          template = idToTemplate(template);
+          if (process.env.NODE_ENV !== 'production' && !template) {
+            warn(
+              `Template element not found or is empty: ${options.template}`,
+              this
+            );
+          }
+        }
+      } else if (template.nodeType) {
+        template = template.innerHTML;
+      } else {
+        if (process.env.NODE_ENV !== 'production') {
+          warn(`invalid template option: ${template}`, this);
+        }
+        return this;
+      }
+    } else if (el) {
+      template = getOuterHTML(el);
+    }
+    if (template) {
+      if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+        mark('compile');
+      }
+
+      const { render, staticRenderFns } = compileToFunctions(
+        template,
+        {
+          shouldDecodeNewlines,
+          shouldDecodeNewlinesForHref,
+          delimiters: options.delimiters,
+          comments: options.comments,
+        },
+        this
+      );
+      options.render = render;
+      options.staticRenderFns = staticRenderFns;
+
+      if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+        mark('compile end');
+        measure(`vue ${this._name} compile`, 'compile', 'compile end');
+      }
+    }
+  }
+  return mount.call(this, el, hydrating);
 };
+
+Vue.compile = compileToFunctions;
+
+export default Vue;
 ```
 
 ### Vue Global API
 
-```js
+```ts
 // initGlobalAPI
-Vue.config;
+Vue.config = config;
 Vue.util = {
   warn,
   extend,
@@ -1673,11 +1774,11 @@ Vue.compile = compileToFunctions;
 
 ### Vue Instance
 
-```js
+```ts
 // Vue.prototype._init
 vm._uid = uid++; // 每个Vue实例都拥有一个唯一的 id
 vm._isVue = true; // 这个表示用于避免Vue实例对象被观测(observed)
-vm.$options; // 当前 Vue 实例的初始化选项，注意：这是经过 mergeOptions() 后的
+vm.$options = options; // 当前 Vue 实例的初始化选项，注意：这是经过 mergeOptions() 后的
 vm._renderProxy = vm; // 渲染函数作用域代理
 vm._self = vm; // 实例本身
 
@@ -1703,22 +1804,22 @@ vm._hasHookEvent = false;
 vm._vnode = null; // the root of the child tree
 vm._staticTrees = null; // v-once cached trees
 
-vm.$vnode;
-vm.$slots;
-vm.$scopedSlots;
+vm.$vnode = vnode;
+vm.$slots = slots;
+vm.$scopedSlots = scopedSlots;
 
-vm._c;
-vm.$createElement;
+vm._c = c;
+vm.$createElement = createElement;
 
-vm.$attrs;
-vm.$listeners;
+vm.$attrs = attrs;
+vm.$listeners = listeners;
 
 // initState(vm)   src/core/instance/state.js **************************************************
 vm._watchers = [];
-vm._data;
+vm._data = data;
 
 // mountComponent()   src/core/instance/lifecycle.js
-vm.$el;
+vm.$el = el;
 
 // initComputed()   src/core/instance/state.js
 vm._computedWatchers = Object.create(null);
@@ -1727,12 +1828,12 @@ vm._computedWatchers = Object.create(null);
 vm._props = {};
 
 // initProvide()    src/core/instance/inject.js
-vm._provided;
+vm._provided = provided;
 ```
 
 ### Vue ReadOnly Property
 
-```js
+```ts
 const dataDef = {};
 dataDef.get = function () {
   return this._data;
@@ -2107,7 +2208,7 @@ export function once(fn: Function): Function {
 
 ### Vue Options API
 
-```js
+```ts
 vm.$options = mergeOptions(
   // resolveConstructorOptions(vm.constructor)
   {
@@ -2138,7 +2239,7 @@ vm.$options = mergeOptions(
 
 Props:
 
-```js
+```ts
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   props: {
@@ -2155,7 +2256,7 @@ export default {
 
 Injects:
 
-```js
+```ts
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   inject: {
@@ -2168,7 +2269,7 @@ export default {
 
 Directives:
 
-```js
+```ts
 for (const key in dirs) {
   const def = dirs[key];
   if (typeof def === 'function') {
@@ -2267,7 +2368,7 @@ View-Model 主要做了两件微小的事情：
   通过 Proxy 代理 Model, 每当调用 `Model[property].set` 时同时调用 `render`
 - 从 V 到 M 的事件监听 (DOM Listeners), 这样 Model 会随着 View 触发事件而改变
 
-```js
+```ts
 const _data = {
   name: 'mark',
 };
@@ -2281,7 +2382,7 @@ const changeName = new Proxy(_data, {
 });
 ```
 
-```js
+```ts
 Array.from(el.getElementsByTagName('input'))
   .filter(ele => {
     return ele.getAttribute('v-model');
@@ -2311,8 +2412,8 @@ Performant improvements:
 
 Data `getter`/`setter` -> Notify -> Watcher -> Trigger --> Renderer:
 
-```js
-data.a; // getHook() get called.
+```ts
+console.log(data.a); // getHook() get called.
 data.a = 2; // setHook() get called.
 ```
 
@@ -2451,14 +2552,14 @@ console.assert(total.value === 36);
 
 Vue 2:
 
-```js
+```ts
 Vue.set(app.items, indexOfItem, newValue);
 Vue.set(app.product, newField, newValue);
 ```
 
 Vue 3:
 
-```js
+```ts
 app.items[indexOfItem] = newValue;
 app.product[newField] = newValue;
 ```
