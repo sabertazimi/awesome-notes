@@ -16,14 +16,14 @@ tags: [Web, Node, Express]
 
 ### Template
 
-```js
+```ts
 function middleware(req, res, next) {
   next();
   // OR res.send();
 }
 ```
 
-```js
+```ts
 function middleware(err, req, res, next) {
   next(err);
   // OR res.send();
@@ -32,7 +32,7 @@ function middleware(err, req, res, next) {
 
 ### Use
 
-```js
+```ts
 app.use(middlewareFunction);
 ```
 
@@ -68,7 +68,7 @@ res.locals 中的所有属性都会传递到模板的上下文中
 
 在 app.js 中, use 页面控制器之前, 加入:
 
-```js
+```ts
 app.use(function (req, res, next) {
   res.locals.user = req.user;
   next();

@@ -291,7 +291,7 @@ React 16, unstable concurrent mode with
 React 17, stable concurrent mode with
 [`Lanes`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js):
 
-```js
+```ts
 export type Lanes = number;
 export type Lane = number;
 
@@ -370,7 +370,7 @@ Scheduler main [workflow](https://github.com/facebook/react/blob/main/packages/s
 
 ### Scheduler Time Slicing
 
-```js
+```ts
 // 时间切片周期, 默认是 5ms.
 // 如果一个 task 运行超过该周期, 下一个 task 执行前, 会把控制权归还浏览器.
 const yieldInterval = 5;
@@ -476,7 +476,7 @@ const performWorkUntilDeadline = () => {
 Task queue is [MinHeap](https://github.com/facebook/react/blob/main/packages/scheduler/src/SchedulerMinHeap.js),
 storing Tasks.
 
-```js
+```ts
 const newTask = {
   id: taskIdCounter++,
   callback, // Work from reconciler.
@@ -487,7 +487,7 @@ const newTask = {
 };
 ```
 
-```js
+```ts
 const scheduleCallback = (priorityLevel, callback, options) => {
   const currentTime = getCurrentTime();
   const startTime = currentTime;
@@ -556,7 +556,7 @@ const handleTimeout = currentTime => {
 当 `callback()` 返回函数时, 表明产生连续回调 (e.g 出现更高优先任务/时间分片用完, 渲染中断),
 需将返回的函数再次放入任务队列, 继续进行调度直至清空任务队列 (渲染恢复).
 
-```js
+```ts
 function flushWork(hasTimeRemaining, initialTime) {
   // We'll need a host callback the next time work is scheduled.
   isHostCallbackScheduled = false;
@@ -960,7 +960,7 @@ export function getNextLanes(root: FiberRoot, wipLanes: Lanes): Lanes {
 
 Lanes model [use case](https://github.com/facebook/react/pull/18796):
 
-```js
+```ts
 // task 与 batchTask 的优先级是否重叠:
 // 1. expirationTime:
 const isTaskIncludedInBatch = priorityOfTask >= priorityOfBatch;
@@ -1623,7 +1623,7 @@ interface UpdateQueue<State> {
 
 [ReactFiberClassComponent.setState](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassComponent.new.js):
 
-```js
+```ts
 const classComponentUpdater = {
   isMounted,
   enqueueSetState(inst, payload, callback) {
@@ -2743,7 +2743,7 @@ function commitLayoutEffectOnFiber(
 
 ### Minimal Reconciler Implementation
 
-```js
+```ts
 const performWork = deadline => {
   if (!nextUnitOfWork) {
     resetNextUnitOfWork();
@@ -2809,7 +2809,7 @@ const render = (elements, container) => {
   未来会在更多的可以 Batched Updates 的场景下将 `setState` 设为异步执行,
   所以编写代码时最好将 setState 总是当做异步执行函数.
 
-```jsx
+```tsx
 class Example extends React.Component {
   constructor() {
     super();
@@ -2848,7 +2848,7 @@ class Example extends React.Component {
 - can use `setInterval`/`setTimeout`/AJAX request/`fetch` in this method,
   and call `setState` as `callback` inside these functions
 
-```jsx
+```tsx
 class MyComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -2961,7 +2961,7 @@ export interface ReactElement<Props> {
 }
 ```
 
-```js
+```ts
 ReactDOM.render(
   {
     type: Form,
@@ -3019,7 +3019,7 @@ const HTMLButtonElement = {
 
 - [New JSX transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
 
-```js
+```ts
 import React from 'react';
 
 function App() {
@@ -3027,7 +3027,7 @@ function App() {
 }
 ```
 
-```js
+```ts
 // Inserted by a compiler
 import { jsx as _jsx } from 'react/jsx-runtime';
 
@@ -3140,7 +3140,7 @@ class PureComponent<P = {}, S = {}, SS = any> extends Component<P, S, SS> {}
 - 采用类型声明, 使用 setState(), 一般作为容器型组件(containers)
 - 结合 Redux 中的 connect 方法, 将 store 中的 state 作为此类组件的 props
 
-```jsx
+```tsx
 class Component {
   render() {
     this.setState((prevState, props) => ({
@@ -3226,7 +3226,7 @@ componentWillUnmount()
 
 Modify children properties:
 
-```jsx
+```tsx
 const CreateTextWithProps = ({ text, ASCIIChar, ...props }) => {
   return (
     <span {...props}>
@@ -3253,7 +3253,7 @@ function App() {
 }
 ```
 
-```jsx
+```tsx
 const RadioGroup = props => {
   const RenderChildren = () =>
     React.Children.map(props.children, child => {
@@ -3293,7 +3293,7 @@ function App() {
 - `React.Children.count(children)`.
 - `React.Children.only(children)`.
 
-```jsx
+```tsx
 import { Children, cloneElement } from 'react';
 
 function Breadcrumbs({ children }) {
@@ -3339,7 +3339,7 @@ function Breadcrumbs({ children }) {
                 })}
               </div>
             )}
-            {!isLast && <div style={{ marginRight: '5px' }}>></div>}
+            {!isLast && <div style={{ marginRight: '5px' }}></div>}
           </>
         );
       })}
@@ -3498,22 +3498,23 @@ class CssThemeProvider extends React.PureComponent<Props> {
 - React 无法获取 `this` 引用, 需要持续追踪当前`render`出的组件, 性能变慢.
 - `String Refs` 不可组合化, `Callback Refs` 可组合化.
 
-```jsx
+```tsx
 class Foo extends Component {
   render() {
     return <input onClick={() => this.action()} ref="input" />;
   }
+
   action() {
     console.log(this.refs.input.value);
   }
 }
 ```
 
-```jsx
+```tsx
 class App extends React.Component {
   renderRow = index => {
     // ref 会绑定到 DataTable 组件实例, 而不是 App 组件实例上
-    return <input ref={'input-' + index} />;
+    return <input ref={`input-${index}`} />;
 
     // 如果使用 function 类型 ref, 则不会有这个问题
     // return <input ref={input => this['input-' + index] = input} />;
@@ -3532,7 +3533,7 @@ class App extends React.Component {
 Ref forwarding 是一个特性,
 它允许一些组件获取接收到 ref 对象并将它进一步传递给子组件.
 
-```jsx
+```tsx
 // functional component
 const ButtonElement = React.forwardRef((props, ref) => (
   <button ref={ref} className="CustomButton">
@@ -3562,18 +3563,18 @@ const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
 
 #### Callback Refs
 
-```jsx
+```tsx
 class UserInput extends Component {
-  setSearchInput = (input) => {
+  setSearchInput = input => {
     this.input = input;
-  }
+  };
 
-  render () {
+  render() {
     return (
-      <input
-        type='text'
-        ref={this.setSearchInput} /> // Access DOM input in handle submit
-      <button type='submit'>Submit</button>
+      <>
+        <input type="text" ref={this.setSearchInput} />
+        <button type="submit">Submit</button>
+      </>
     );
   }
 }
@@ -3995,7 +3996,7 @@ Cons:
 - Name collision/overlap props: overwrite the same name prop silently.
 - HOC is not flexible with output data (to WrappedComponent).
 
-```jsx
+```tsx
 // ToggleableMenu.jsx
 function withToggleable(Clickable) {
   return class extends React.Component {
@@ -4033,7 +4034,7 @@ class NormalMenu extends React.Component {
 export default withToggleable(NormalMenu);
 ```
 
-```jsx
+```tsx
 class Menu extends React.Component {
   render() {
     return (
@@ -4082,7 +4083,7 @@ Cons:
 - Render Props is not flexible with input data
   (restricts children components from using the data at outside field).
 
-```jsx
+```tsx
 class Toggleable extends React.Component {
   constructor() {
     super();
@@ -4113,7 +4114,7 @@ const ToggleableMenu = props => (
 );
 ```
 
-```jsx
+```tsx
 class Menu extends React.Component {
   render() {
     return (
@@ -4615,7 +4616,7 @@ function commitHookEffectListUnmount(tag: number, finishedWork: Fiber) {
 
 ### Minimal Hooks Implementation
 
-```js
+```ts
 const MyReact = (function () {
   const hooks = [];
   let currentHook = 0; // array of hooks, and an iterator!
@@ -4648,7 +4649,7 @@ const MyReact = (function () {
 })();
 ```
 
-```js
+```ts
 function Counter() {
   const [count, setCount] = MyReact.useState(0);
   const [text, setText] = MyReact.useState('foo'); // 2nd state hook!
@@ -4690,7 +4691,7 @@ App = MyReact.render(Counter);
 // render {count: 2, text: 'bar'}
 ```
 
-```js
+```ts
 function Component() {
   const [text, setText] = useSplitURL('www.netlify.com');
   return {
@@ -4831,14 +4832,14 @@ function dispatchAction<S, A>(
 
 #### UseState Hooks Usage
 
-```js
+```ts
 setState(prevState => {
   // Object.assign would also work
   return { ...prevState, ...updatedValues };
 });
 ```
 
-```js
+```ts
 let newState = baseState;
 const firstUpdate = hook.baseQueue.next;
 let update = firstUpdate;
@@ -4856,7 +4857,7 @@ do {
 } while (update !== firstUpdate);
 ```
 
-```jsx
+```tsx
 import { useState } from 'react';
 
 function Example() {
@@ -4872,7 +4873,7 @@ function Example() {
 }
 ```
 
-```js
+```ts
 import { useEffect, useState } from 'react';
 
 function FriendStatus(props) {
@@ -5111,7 +5112,7 @@ Use useReducer if:
 - for easier testing
 - for more predictable and maintainable state architecture
 
-```js
+```ts
 function App() {
   const [state, dispatch] = useState({ count: 0 });
 
@@ -5131,7 +5132,7 @@ function App() {
 }
 ```
 
-```jsx
+```tsx
 const insertToHistory = state => {
   if (state && Array.isArray(state.history)) {
     // Do not mutate
@@ -5225,7 +5226,7 @@ function updateMemo<T>(
 
 #### UseMemo Hooks Usage
 
-```jsx
+```tsx
 const Button = ({ color, children }) => {
   const textColor = useMemo(
     () => slowlyCalculateTextColor(color),
@@ -5233,7 +5234,7 @@ const Button = ({ color, children }) => {
   );
 
   return (
-    <button className={'Button-' + color + ' Button-text-' + textColor}>
+    <button className={`Button-${color} Button-text-${textColor}`}>
       {children}
     </button>
   );
@@ -5281,13 +5282,13 @@ function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
 
 #### UseCallback Hooks Usage
 
-```jsx
+```tsx
 function Parent() {
   const [query, setQuery] = useState('react');
 
   // ✅ Preserves identity until query changes
   const fetchData = useCallback(() => {
-    const url = 'https://hn.algolia.com/api/v1/search?query=' + query;
+    const url = `https://hn.algolia.com/api/v1/search?query=${query}`;
     // ... Fetch data and return it ...
   }, [query]); // ✅ Callback deps are OK
 
@@ -5295,7 +5296,7 @@ function Parent() {
 }
 
 function Child({ fetchData }) {
-  let [data, setData] = useState(null);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     fetchData().then(setData);
@@ -5349,7 +5350,7 @@ function updateRef<T>(initialValue: T) {
   It's good to get **latest** value of a particular prop or state
   (the updated reference value is available right away).
 
-```jsx
+```tsx
 function Example() {
   const [count, setCount] = useState(0);
   const latestCount = useRef(count);
@@ -5375,9 +5376,9 @@ function Example() {
   which is more **efficient** than `useState` (which can be expensive)
   when the values are to be updated multiple times within a second.
 
-```jsx
+```tsx
 function UserAvatar(props) {
-  return <img src={props.src} />;
+  return <img src={props.src} alt="User Avatar" />;
 }
 
 function Username(props) {
@@ -5598,7 +5599,7 @@ function readContext<T>(
 
 #### UseContext Hooks Usage
 
-```jsx
+```tsx
 import React, {
   createContext,
   useCallback,
@@ -5650,7 +5651,7 @@ export { CountProvider, useCount };
 
 #### UseEffect Hooks Dispatcher
 
-```js
+```ts
 function mountEffect(
   create: () => (() => void) | void,
   deps: Array<mixed> | void | null
@@ -5783,7 +5784,7 @@ Functions in useEffect:
   and pull the ones that are used only by an effect inside of that effect.
 - For useCallback function, it should be in deps list `useEffect(() => {}, [callback])`
 
-```js
+```ts
 // https://www.robinwieruch.de/react-hooks-fetch-data
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -5834,23 +5835,24 @@ const useDataApi = (initialUrl, initialData) => {
   导致其与 useEffect 所预期行为不一致.
 - 可以通过 useRef 解决这一现象.
 
-```jsx
+```tsx
 // BUG
 function Counter() {
-  let [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    let id = setInterval(() => {
+    const id = setInterval(() => {
       setCount(count + 1); // always 1 regardless `count` value change
     }, 1000);
     return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <h1>{count}</h1>;
 }
 ```
 
-```jsx
+```tsx
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -5875,7 +5877,7 @@ function useInterval(callback, delay) {
       savedCallback.current();
     }
 
-    let id = setInterval(tick, delay);
+    const id = setInterval(tick, delay);
     return () => clearInterval(id);
   }, [delay]);
 }
@@ -5887,7 +5889,7 @@ function useInterval(callback, delay) {
   会捕获那一次 render 时的 props 和 state.
 - Class Component 中的 this.state.xxx 却总是指向最新的 state.
 
-```jsx
+```tsx
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -5914,7 +5916,7 @@ function Counter() {
 // You clicked 5 times
 ```
 
-```jsx
+```tsx
 class Counter {
   componentDidUpdate() {
     setTimeout(() => {
@@ -6001,7 +6003,7 @@ issues of injecting styles in render.
 This hook will run after the DOM is mutated,
 but before layout effects read the new layout.
 
-```js
+```tsx
 function useCSS(rule) {
   if (!canUseDOM) {
     collectedRulesSet.add(rule);
@@ -6063,7 +6065,7 @@ export default React.forwardRef(MyInput);
 
 Debounce:
 
-```jsx
+```tsx
 import { useDeferredValue } from 'react';
 
 function App() {
@@ -6089,7 +6091,7 @@ function App() {
 
 Opt-in concurrent features (implementing debounce-like function):
 
-```js
+```tsx
 import { useRef, useState, useTransition } from 'react';
 import Spinner from './Spinner';
 
@@ -6115,7 +6117,7 @@ function App() {
 
 Generating unique IDs on client and server.
 
-```js
+```tsx
 function Checkbox() {
   const id = useId();
 
@@ -6153,7 +6155,7 @@ type UseSyncExternalStore = (
 
 Simple demo from [React Conf 2021](https://www.youtube.com/watch?v=oPfSC5bQPR8):
 
-```jsx
+```tsx
 import { useSyncExternalStore } from 'react';
 
 // We will also publish a backwards compatible shim
@@ -6199,7 +6201,7 @@ function App() {
 Migrate from `useState` + `useEffect` + `useRef` to `useSyncExternalStore`
 for 3rd external stores libraries (e.g `Redux`):
 
-```jsx
+```tsx
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSyncExternalStore } from 'use-sync-external-store/shim';
 
@@ -6312,7 +6314,7 @@ React.createRoot(document.querySelector('#root')).render(<App />);
 
 `componentDidMount`:
 
-```js
+```ts
 const useMount = fn => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => fn(), []);
@@ -6321,7 +6323,7 @@ const useMount = fn => {
 
 componentWillUnmount:
 
-```js
+```ts
 const useUnmount = fn => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => fn, []);
@@ -6330,7 +6332,7 @@ const useUnmount = fn => {
 
 componentDidUpdate:
 
-```js
+```ts
 const useUpdate = fn => {
   const mounting = useRef(true);
 
@@ -6348,7 +6350,7 @@ const useUpdate = fn => {
 
 Force Update:
 
-```js
+```ts
 const useUpdate = () => useState(0)[1];
 ```
 
@@ -6378,7 +6380,7 @@ export default useForceUpdate;
 
 `isMounted`:
 
-```js
+```ts
 const useIsMounted = () => {
   const [isMount, setIsMount] = useState(false);
 
@@ -6399,7 +6401,7 @@ const useIsMounted = () => {
 - `useState` to store url and data
 - `useEffect` to trigger async `fetch` actions
 
-```js
+```ts
 import { useEffect, useState } from 'react';
 
 function useFriendStatus(friendID) {
@@ -6420,7 +6422,7 @@ function useFriendStatus(friendID) {
 }
 ```
 
-```jsx
+```tsx
 function FriendStatus(props) {
   const isOnline = useFriendStatus(props.friend.id);
 
@@ -6439,7 +6441,7 @@ function FriendListItem(props) {
 }
 ```
 
-```js
+```ts
 import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -6477,7 +6479,7 @@ const useDataApi = (initialUrl, initialData) => {
 };
 ```
 
-```jsx
+```tsx
 function App() {
   const [query, setQuery] = useState('redux');
   const { data, isLoading, isError, doGet } = useDataApi(
@@ -6614,7 +6616,7 @@ export default useFetch;
 
 ### Custom Previous Hook
 
-```jsx
+```tsx
 function Counter() {
   const [count, setCount] = useState(0);
   const prevCount = usePrevious(count);
@@ -6665,7 +6667,7 @@ export default useInterval;
 
 ### Custom Debounce Hook
 
-```js
+```ts
 // Hook
 function useDebounce(value, delay) {
   // State and setters for debounced value
@@ -6693,7 +6695,7 @@ function useDebounce(value, delay) {
 }
 ```
 
-```jsx
+```tsx
 function App() {
   // Usage
   const [searchTerm, setSearchTerm] = useState('');
@@ -6707,7 +6709,7 @@ function App() {
 
 ### Custom EventListener Hook
 
-```js
+```ts
 import { useCallback, useEffect } from 'react';
 
 export default function useKeydown() {
@@ -6724,7 +6726,7 @@ export default function useKeydown() {
 }
 ```
 
-```js
+```ts
 import { useEffect } from 'react';
 
 export default function useEventListener({ event, handler }) {
@@ -6863,7 +6865,7 @@ function useScript(src: string): Status {
 export default useScript;
 ```
 
-```js
+```ts
 const cachedScripts = [];
 
 const useScript = src => {
@@ -7025,7 +7027,7 @@ export default function useMedia<T>(
 - `useState` for form entire state and form control data.
 - Custom logic via hooks `params` function.
 
-```js
+```ts
 import { useState } from 'react';
 
 const useForm = callback => {
@@ -7060,7 +7062,7 @@ export default useForm;
 - `useRef` for form control data.
 - Custom logic via hooks `params` function.
 
-```jsx
+```tsx
 export const useField = (
   name,
   form,
@@ -7091,6 +7093,7 @@ export const useField = (
   useEffect(() => {
     if (pristine) return; // Avoid validate on mount
     form.validateFields(fieldsToValidateOnChange);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   const field = {
@@ -7124,7 +7127,7 @@ export const useForm = ({ onSubmit }) => {
         fieldNames.includes(field.name)
       );
     } else {
-      //if fieldNames not provided, validate all fields
+      // If fieldNames not provided, validate all fields.
       fieldsToValidate = fields.current;
     }
     const fieldsValid = await Promise.all(
@@ -7203,10 +7206,10 @@ const App = props => {
       if (!valid) return;
       await timeout(2000); // Simulate network time
       if (formData.username.length < 10) {
-        //Simulate 400 response from server
+        // Simulate 400 response from server.
         usernameField.setErrors(['Make a longer username']);
       } else {
-        //Simulate 201 response from server
+        // Simulate 201 response from server.
         window.alert(
           `form valid: ${valid}, form data: ${JSON.stringify(formData)}`
         );
@@ -7446,7 +7449,7 @@ export default function useStateParams<T>(
 
 ### Custom Router Hook
 
-```js
+```ts
 import { useContext, useEffect } from 'react';
 import { __RouterContext } from 'react-router';
 import useForceUpdate from 'use-force-update';
@@ -7466,7 +7469,7 @@ const useReactRouter = () => {
 
 ### Custom History Hook
 
-```js
+```ts
 import { useCallback, useReducer } from 'react';
 
 // Initial state that we pass into useReducer
@@ -7574,7 +7577,7 @@ const useHistory = initialPresent => {
 
 Simple implementation:
 
-```js
+```ts
 import { useState } from 'react';
 
 export const store = {
@@ -7986,7 +7989,7 @@ export const setAtomValue =
   可使用 useCallback 包裹函数, 并设置正确的 Deps List,
   尽可能地减少 render 时重新定义此函数.
 
-```js
+```ts
 // ✅ Not affected by the data flow
 function getFetchUrl(query) {
   return `https://hn.algolia.com/api/v1/search?query=${query}`;
@@ -8026,13 +8029,17 @@ function SearchResults() {
 - use camelCase for component instance reference
 - use camelCase for props name
 
-```jsx
+```ts
 // bad
 import reservationCard from './ReservationCard';
+```
 
+```ts
 // good
 import ReservationCard from './ReservationCard';
+```
 
+```tsx
 // bad
 const ReservationItem = <ReservationCard />;
 
@@ -8040,25 +8047,24 @@ const ReservationItem = <ReservationCard />;
 const reservationItem = <ReservationCard />;
 ```
 
-- setting displayName for HOC
+- Setting displayName for HOC:
 
-```jsx
+```tsx
 // bad
-export default function withFoo(WrappedComponent) {
+function withFoo(WrappedComponent) {
   return function WithFoo(props) {
     return <WrappedComponent {...props} foo />;
-  }
+  };
 }
 
 // good
-export default function withFoo(WrappedComponent) {
+function withFoo(WrappedComponent) {
   function WithFoo(props) {
     return <WrappedComponent {...props} foo />;
   }
 
-  const wrappedComponentName = WrappedComponent.displayName
-    || WrappedComponent.name
-    || 'Component';
+  const wrappedComponentName =
+    WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
   WithFoo.displayName = `withFoo(${wrappedComponentName})`;
   return WithFoo;
@@ -8070,17 +8076,21 @@ export default function withFoo(WrappedComponent) {
 - use `prop` not `prop={true}`
 - filter out unnecessary props
 
-```jsx
+```tsx
 // bad
-render() {
-  const { irrelevantProp, ...relevantProps  } = this.props;
-  return <WrappedComponent {...this.props} />
+class Component {
+  render() {
+    const { irrelevantProp, ...relevantProps } = this.props;
+    return <WrappedComponent {...this.props} />;
+  }
 }
 
 // good
-render() {
-  const { irrelevantProp, ...relevantProps  } = this.props;
-  return <WrappedComponent {...relevantProps} />
+class Component {
+  render() {
+    const { irrelevantProp, ...relevantProps } = this.props;
+    return <WrappedComponent {...relevantProps} />;
+  }
 }
 ```
 
@@ -8088,107 +8098,81 @@ render() {
 
 - use callback refs
 
-```jsx
+```tsx
 // bad
 // deprecated
-<Foo
-  ref="myRef"
-/>
+const Component = <Foo ref="myRef" />;
 
 // good
-<Foo
-  ref={(ref) => { this.myRef = ref; }}
-/>
+const Component = (
+  <Foo
+    ref={ref => {
+      this.myRef = ref;
+    }}
+  />
+);
 ```
 
 ### Alignment Style
 
-```jsx
-// bad
-<Foo superLongParam="bar"
-     anotherSuperLongParam="baz" />
-
+```tsx
 // good
-<Foo
-  superLongParam="bar"
-  anotherSuperLongParam="baz"
-/>
+const Component = <Foo superLongParam="bar" anotherSuperLongParam="baz" />;
 
 // if props fit in one line then keep it on the same line
-<Foo bar="bar" />
+const Component = <Foo bar="bar" />;
 
 // children get indented normally
-<Foo
-  superLongParam="bar"
-  anotherSuperLongParam="baz"
->
-  <Bar />
-</Foo>
-
-// bad
-{showButton &&
-  <Button />
-}
-
-// bad
-{
-  showButton &&
-    <Button />
-}
+const Component = (
+  <Foo superLongParam="bar" anotherSuperLongParam="baz">
+    <Bar />
+  </Foo>
+);
 
 // good
-{showButton && (
-  <Button />
-)}
-
-// good
-{showButton && <Button />}
+const Component = <div>{showButton && <Button />}</div>;
 ```
 
 ### Quotes Style
 
-- use `"` for JSX attributes, use `'` for all other JS
+- Use `"` for JSX attributes, use `'` for all other JS:
 
-```jsx
+```tsx
 // bad
-<Foo bar='bar' />
+// <Foo bar='bar' />
 
 // good
-<Foo bar="bar" />
+const App = <Foo bar="bar" />;
 
 // bad
-<Foo style={{ left: "20px" }} />
+// <Foo style={{ left: "20px" }} />
 
 // good
-<Foo style={{ left: '20px' }} />
+const App = <Foo style={{ left: '20px' }} />;
 ```
 
 ### Spacing Style
 
-- a single space in self-closing tag
-- no pad JSX curly spaces
+- A single space in self-closing tag.
+- No pad JSX curly spaces>.
 
-```jsx
+```tsx
 // bad
-<Foo/>
+// <Foo/>
 
 // very bad
-<Foo                 />
-
-// bad
-<Foo
- />
+// <Foo                 />
 
 // good
-<Foo />
+const App = <Foo />;
 ```
 
-```jsx
+```tsx
 // bad
-<Foo bar={ baz } />
+// <Foo bar={ baz } />
 
 // good
-<Foo bar={baz} />
+const App = <Foo bar={baz} />;
 ```
 
 ### Ordering of Class Component
@@ -8238,7 +8222,7 @@ render() {
 
 ### ES6 Binding for This
 
-```jsx
+```tsx
 class Component extends React.Component {
   state = {};
   handleES6 = event => {};
@@ -8278,7 +8262,7 @@ Context 中只定义被大多数组件所共用的属性
 穿透 `shouldComponentUpdate`/`React.memo` 进行 `forceUpdate`,
 增加 `render` 次数, 从而导致性能问题.
 
-```jsx
+```tsx
 import React, { createContext, useContext, useMemo, useState } from 'react';
 import { fakeAuth } from './app/services/auth';
 
@@ -8287,19 +8271,19 @@ const authContext = createContext();
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const signIn = cb => {
+  const signIn = useCallback(cb => {
     return fakeAuth.signIn(() => {
       setUser('user');
       cb();
     });
-  };
+  }, []);
 
-  const signOut = cb => {
+  const signOut = useCallback(cb => {
     return fakeAuth.signOut(() => {
       setUser(null);
       cb();
     });
-  };
+  }, []);
 
   const auth = useMemo(() => {
     return {
@@ -8321,7 +8305,7 @@ export { AuthProvider, useAuth };
 
 #### Ref with Context
 
-```jsx
+```tsx
 // Context.js
 import React, { Component, createContext } from 'react';
 
@@ -8358,7 +8342,7 @@ class Provider extends Component {
 }
 ```
 
-```jsx
+```tsx
 // TextArea.jsx
 import React from 'react';
 import { Consumer } from './Context';
@@ -8394,7 +8378,7 @@ const TextArea = () => (
 
 [React Error Boundary](https://github.com/bvaughn/react-error-boundary) library:
 
-```jsx
+```tsx
 class ErrorBoundary extends React.Component {
   state = {
     hasError: false,
@@ -8406,8 +8390,8 @@ class ErrorBoundary extends React.Component {
   componentDidCatch(error, info) {
     this.setState({
       hasError: true,
-      error: error,
-      info: info,
+      error,
+      info,
     });
   }
 
@@ -8429,7 +8413,7 @@ class ErrorBoundary extends React.Component {
 
 ### React Fragment
 
-```jsx
+```tsx
 class Items extends React.Component {
   render() {
     return (
@@ -8438,7 +8422,7 @@ class Items extends React.Component {
         <Beverages />
         <Drinks />
       </React.Fragment>
-    )
+    );
   }
 }
 
@@ -8451,20 +8435,18 @@ class Fruit extends React.Component {
         <li>Blueberry</li>
         <li>Cherry</li>
       </>
-    )
+    );
   }
 }
 
 class Frameworks extends React.Component {
-  render () {
+  render() {
     return (
-      [
+      <>
         <p>JavaScript:</p>
-        <li>React</li>,
-        <li>Vuejs</li>,
-        <li>Angular</li>
-      ]
-    )
+        <li>React</li>,<li>Vuejs</li>,<li>Angular</li>
+      </>
+    );
   }
 }
 ```
@@ -8480,7 +8462,7 @@ that exists **outside** the DOM hierarchy of the parent component
 <div id="portal"></div>
 ```
 
-```jsx
+```tsx
 const portalRoot = document.getElementById('portal');
 
 class Portal extends React.Component {
@@ -8559,7 +8541,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ### Concurrent Features
 
-```js
+```tsx
 import * as ReactDOM from 'react-dom';
 import App from 'App';
 
@@ -8576,7 +8558,7 @@ root.render(<App />);
   including updates inside of **promises, async code and native event handlers**.
 - `ReactDOM.flushSync` can opt-out of automatic batching.
 
-```js
+```ts
 function handleClick() {
   // React 17: Re-rendering happens after both of the states are updated.
   // This is called batching.
@@ -8696,7 +8678,7 @@ function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
 
 Extract loading/skeleton/placeholder components into single place:
 
-```jsx
+```tsx
 const App = () => (
   <Suspense fallback={<Skeleton />}>
     <Header />
@@ -8713,8 +8695,8 @@ const App = () => (
 
 Lazy loading and code splitting:
 
-```jsx
-import React, { lazy, Suspense } from 'react';
+```tsx
+import React, { Suspense, lazy } from 'react';
 
 const Product = lazy(() => import('./ProductHandler'));
 
@@ -8733,7 +8715,7 @@ const App = () => (
 );
 ```
 
-```jsx
+```tsx
 const { lazy, Suspense } = React;
 
 const Lazy = lazy(
@@ -8771,7 +8753,7 @@ React v18+: enable `Suspense` on the server:
 - Streaming HTML: show initial HTML early and stream the rest HTML.
 - Enable code splitting for SSR.
 
-```jsx
+```tsx
 const LandingPage = () => (
   <div>
     <FastComponent />
@@ -8821,7 +8803,7 @@ If component `render()` function renders
 the same result given the same props and state,
 use `React.PureComponent`/`React.memo` for a performance boost in some cases.
 
-```jsx
+```tsx
 import React, { PureComponent } from 'react';
 
 const Unstable = props => {
@@ -8859,7 +8841,7 @@ class App extends PureComponent {
 export default App;
 ```
 
-```jsx
+```tsx
 import React, { Component } from 'react';
 
 const Unstable = React.memo(props => {
@@ -8912,7 +8894,7 @@ Prevent useless re-rendering:
   通过将变化部分的 `state` 向下移动从而抽象出变化的子组件,
   或者将**变化内容提升** (**Lift Up**) 到父组件从而将不变部分独立出来:
 
-```jsx
+```tsx
 // BAD
 // When <App> re-rendering, <ExpensiveTree> will re-rendering:
 // <ExpensiveTree /> is actually <ExpensiveTree props={}>.
@@ -8920,7 +8902,8 @@ Prevent useless re-rendering:
 import { useState } from 'react';
 
 export default function App() {
-  let [color, setColor] = useState('red');
+  const [color, setColor] = useState('red');
+
   return (
     <div>
       <input value={color} onChange={e => setColor(e.target.value)} />
@@ -8931,15 +8914,17 @@ export default function App() {
 }
 
 function ExpensiveTree() {
-  let now = performance.now();
+  const now = performance.now();
+
   while (performance.now() - now < 100) {
     // Artificial delay -- do nothing for 100ms
   }
+
   return <p>I am a very slow component tree.</p>;
 }
 ```
 
-```jsx
+```tsx
 // GOOD
 // <ExpensiveTree> will not re-rendering.
 export default function App() {
@@ -8952,7 +8937,7 @@ export default function App() {
 }
 
 function Form() {
-  let [color, setColor] = useState('red');
+  const [color, setColor] = useState('red');
   return (
     <>
       <input value={color} onChange={e => setColor(e.target.value)} />
@@ -8962,7 +8947,7 @@ function Form() {
 }
 ```
 
-```jsx
+```tsx
 // GOOD
 // <ExpensiveTree> will not re-rendering.
 export default function App() {
@@ -8975,7 +8960,7 @@ export default function App() {
 }
 
 function ColorPicker({ children }) {
-  let [color, setColor] = useState('red');
+  const [color, setColor] = useState('red');
   return (
     <div style={{ color }}>
       <input value={color} onChange={e => setColor(e.target.value)} />
@@ -8985,35 +8970,35 @@ function ColorPicker({ children }) {
 }
 ```
 
-```jsx
+```tsx
 // BAD
-function App(items) {
+function App1(items) {
   return <BigListComponent style={{ width: '100%' }} items={items} />;
 }
 
 // GOOD
 const bigListStyle = { width: '100%' };
 
-function App(items) {
+function App2(items) {
   return <BigListComponent style={bigListStyle} items={items} />;
 }
 ```
 
-```jsx
+```tsx
 // BAD: Inline function
-function App(items) {
+function App1(items) {
   return <BigListComponent onClick={() => dispatchEvent()} />;
 }
 
 // GOOD: Reference to a function
 const clickHandler = () => dispatchEvent();
 
-function App(items) {
+function App2(items) {
   return <BigListComponent onClick={clickHandler} />;
 }
 ```
 
-```jsx
+```tsx
 function Parent({ children, lastChild }) {
   return (
     <div className="parent">
@@ -9027,7 +9012,7 @@ function Parent({ children, lastChild }) {
 
 ### Code Splitting
 
-```jsx
+```tsx
 import React, { Component } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -9043,7 +9028,7 @@ export default class Form extends Component {
 }
 ```
 
-```jsx
+```tsx
 import React, { Component } from 'react';
 
 export default class App extends Component {
@@ -9111,7 +9096,7 @@ the client takes over and the website becomes a SPA.
 
 Webpack configuration:
 
-```js
+```ts
 const baseConfig = require('./baseConfig');
 
 const webConfig = {
@@ -9134,17 +9119,19 @@ module.exports = { webConfig, nodeConfig };
 
 `start.server.js`:
 
-```jsx
+```tsx
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import App from './App.js';
 
-export default () => ReactDOMServer.renderToString(<App />);
+const render = () => ReactDOMServer.renderToString(<App />);
+
+export default render;
 ```
 
 `index.html.js`:
 
-```js
+```ts
 const startApp = require('../dist/server.js').default;
 
 module.exports = () => `<!DOCTYPE html>
@@ -9159,7 +9146,7 @@ module.exports = () => `<!DOCTYPE html>
 
 `start.client.js`:
 
-```jsx
+```tsx
 import React from 'react';
 import ReactDOMServer from 'react-dom';
 import App from './App.js';
@@ -9169,13 +9156,13 @@ ReactDOM.hydrate(<App />, document.getElementById('app'));
 
 Async fetch out of `<App />`:
 
-```jsx
+```tsx
 const data = await fetchData();
-const App = <App {...data} />
+const App = <App {...data} />;
 
 return {
-  html: ReactDOMServer.renderToString(App);
-  state: { data }
+  html: ReactDOMServer.renderToString(App),
+  state: { data },
 };
 ```
 
@@ -9510,7 +9497,7 @@ type Input =
 
 ### React Portals Types
 
-```jsx
+```tsx
 const modalRoot = document.getElementById('modal-root') as HTMLElement;
 
 export class Modal extends React.Component {
@@ -9936,7 +9923,7 @@ export default useFetch;
 浅层渲染 (Shallow Renderer) 对于在 React 中编写单元测试用例很有用.
 它允许渲染一个一级深的组件并断言其渲染方法返回的内容, 而不必担心子组件未实例化或渲染.
 
-```jsx
+```tsx
 function MyComponent() {
   return (
     <div>
@@ -9947,7 +9934,7 @@ function MyComponent() {
 }
 ```
 
-```jsx
+```tsx
 import ShallowRenderer from 'react-test-renderer/shallow';
 
 const renderer = new ShallowRenderer();
@@ -9969,7 +9956,7 @@ expect(result.props.children).toEqual([
 该包可以轻松获取由 ReactDOM 或 React Native 平台所渲染的视图层次结构 (类似于 DOM 树) 的快照,
 而无需使用浏览器或 jsdom.
 
-```jsx
+```tsx
 import TestRenderer from 'react-test-renderer';
 
 const Link = ({ page, children }) => <a href={page}>{children}</a>;
@@ -10002,7 +9989,7 @@ console.log(testRenderer.toJSON());
 npm i -D enzyme enzyme-adapter-react-16 @types/enzyme
 ```
 
-```jsx
+```tsx
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -10184,7 +10171,7 @@ than the built-in `fireEvent method`.
 npm i -D @testing-library/user-event @testing-library/dom
 ```
 
-```js
+```tsx
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -10206,7 +10193,7 @@ test('click', () => {
 
 #### Basic Hook Testing
 
-```js
+```ts
 import { useCallback, useState } from 'react';
 
 export default function useCounter(initialValue = 0) {
@@ -10217,7 +10204,7 @@ export default function useCounter(initialValue = 0) {
 }
 ```
 
-```js
+```ts
 import { act, renderHook } from '@testing-library/react-hooks';
 import useCounter from './useCounter';
 
@@ -10241,7 +10228,7 @@ test('should reset counter to updated initial value', () => {
 
 #### Async Hook Testing
 
-```js
+```ts
 import React, { useCallback, useContext, useState } from 'react';
 
 export default function useCounter(initialValue = 0) {
@@ -10257,7 +10244,7 @@ export default function useCounter(initialValue = 0) {
 }
 ```
 
-```js
+```ts
 import { renderHook } from '@testing-library/react-hooks';
 import useCounter from './useCounter';
 
@@ -10271,7 +10258,7 @@ test('should increment counter after delay', async () => {
 
 #### Error Hook Testing
 
-```js
+```ts
 import React, { useCallback, useContext, useState } from 'react';
 
 export default function useCounter(initialValue = 0) {
@@ -10292,7 +10279,7 @@ export default function useCounter(initialValue = 0) {
 }
 ```
 
-```js
+```ts
 import { act, renderHook } from '@testing-library/react-hooks';
 import { useCounter } from './useCounter';
 
@@ -10322,7 +10309,7 @@ it('should throw when over 9000', () => {
 | queryAllBy | []       | array   | array    | No    |
 | findAllBy  | throw    | array   | array    | Yes   |
 
-```jsx
+```tsx
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TransactionCreateStepTwo from './TransactionCreateStepTwo';
@@ -10348,7 +10335,7 @@ test('if amount and note is entered, pay button becomes enabled', async () => {
 
 - [Custom React Scripts](https://auth0.com/blog/how-to-configure-create-react-app/)
 
-```jsx
+```bash
 npx create-react-app app-name --scripts-version @sabertazimi/react-scripts --use-npm
 npm init react-app app-name --scripts-version @sabertazimi/react-scripts --use-npm
 ```
@@ -10374,7 +10361,7 @@ Initialization in `react-scripts/scripts/init.js`:
 
 - 可以用于改变默认 registry:
 
-```js
+```ts
 'use strict';
 
 const registries = {
@@ -10430,7 +10417,7 @@ Config in `react-scripts/config/` directory:
 - `webpack.config.js`: Webpack configuration
   (paths, deps/devDeps, plugins, loader rules etc.).
 
-```js
+```ts
 // Add support for Ant Design UI.
 const webpackConfig = {
   test: /\.(js|mjs|jsx|ts|tsx)$/,
@@ -10455,7 +10442,7 @@ const webpackConfig = {
 };
 ```
 
-```js
+```ts
 // Add Webpack bundle analyzer plugin.
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
@@ -10491,7 +10478,7 @@ const webpackConfig = {
 <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
 ```
 
-```jsx
+```tsx
 class Component {
   render() {
     // Note: this is an escape hatch and should be used sparingly!
@@ -10525,7 +10512,7 @@ REACT_APP_NOT_SECRET_CODE=abcdef
 <title>%REACT_APP_WEBSITE_NAME%</title>
 ```
 
-```jsx
+```tsx
 const App = () => (
   <div>
     <small>
@@ -10592,7 +10579,7 @@ export default reportWebVitals;
   in `Routes.js` when using `react-router-dom`.
 - Or use `basename` for `react-router@^4`.
 
-```jsx
+```tsx
 // renders <a href="/calendar/today">
 function App() {
   return (
@@ -10658,7 +10645,7 @@ ln -s index.html 404.html
 In `Create React App`
 [code](https://github.com/facebook/create-react-app/blob/main/packages/create-react-app/createReactApp.js):
 
-```js
+```ts
 const templatesVersionMinimum = '3.3.0';
 
 // Assume compatibility if we can't test the version.
@@ -10694,7 +10681,7 @@ In `react-scripts/scripts/utils/verifyTypeScriptSetup.js`,
 if template `src` don't exist `react-app-env.d.ts` file,
 it will create automatically with `reference` to `react-scripts` types:
 
-```js
+```ts
 // Reference `react-scripts` types
 if (!fs.existsSync(paths.appTypeDeclarations)) {
   fs.writeFileSync(
@@ -10715,7 +10702,7 @@ if (!fs.existsSync(paths.appTypeDeclarations)) {
 
 ### Simple i18n Implementation
 
-```js
+```ts
 // locale/zh-CN.js
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -10723,7 +10710,7 @@ export default {
 };
 ```
 
-```js
+```ts
 // locale/en-US.js
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -10731,7 +10718,7 @@ export default {
 };
 ```
 
-```js
+```ts
 import IntlMessageFormat from 'intl-messageformat';
 import zh from '../locale/zh';
 import en from '../locale/en';
@@ -10776,7 +10763,7 @@ export default Intl;
 
 #### Shared CSS Styles
 
-```jsx
+```tsx
 // Import React.js, styled-components and css
 import React from 'react';
 import styled, { css } from 'styled-components';
@@ -10844,7 +10831,7 @@ ReactDOM.render(<WrapperContainer />, container);
 
 #### Extend Styled Component
 
-```jsx
+```tsx
 // Import React.js and styled-components
 import React from 'react';
 import styled from 'styled-components';
@@ -10885,7 +10872,7 @@ ReactDOM.render(<WrapperContainer />, container);
 
 #### Props for Styled Component
 
-```jsx
+```tsx
 // Import React.js, styled-components and css
 import React from 'react';
 import styled, { css } from 'styled-components';
@@ -10955,7 +10942,7 @@ ReactDOM.render(<WrapperContainer />, container);
 - Limit the Number of Third-party Libraries Use.
 - Wrap Third-party Dependencies:
 
-```jsx
+```tsx
 import { DatePicker as LibraryXDatePicker } from 'LibraryX';
 
 const DatePicker = props => {

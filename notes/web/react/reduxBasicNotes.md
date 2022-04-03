@@ -18,7 +18,7 @@ tags: [Web, React, Redux, State Management]
 
 Redux 中只有一个全局唯一 store 状态树, 且由 reducers 创建 store.
 
-```js
+```ts
 export default appStore = createStore(rootReducers, initState);
 ```
 
@@ -96,7 +96,7 @@ export default function configureAppStore(preloadedState) {
 
 ### Persisted State
 
-```js
+```ts
 // localStorage.getItem('state')/localStorage.setItem('state', serializedState)
 const persistedState = loadLocalStorageState();
 const appStore = createStore(rootReducers, persistedState);
@@ -454,7 +454,7 @@ const counterReducer = createReducer(0, {
 
 ### Reducer Boilerplate
 
-```js
+```ts
 function createReducer(initialState, handlers) {
   return function reducer(state = initialState, action) {
     if (Object.prototype.hasOwnProperty.call(handlers, action.type)) {
@@ -478,7 +478,7 @@ const reducer = createReducer(initialState, {
 Implement reducer enhancer with `higher order reducer`,
 like [Redux Undo](https://github.com/omnidan/redux-undo):
 
-```js
+```ts
 function undoable(reducer) {
   // Call the reducer with empty action to populate the initial state
   const initialState = {
@@ -527,7 +527,7 @@ function undoable(reducer) {
 }
 ```
 
-```js
+```ts
 // This is a reducer
 import { createStore } from 'redux';
 
@@ -900,7 +900,7 @@ recommend using thunks as the standard approach for writing async logic with Red
 
 ### Thunk Middleware Implementation
 
-```js
+```ts
 function createThunkMiddleware(extraArgument) {
   return ({ dispatch, getState }) =>
     next =>
@@ -1120,7 +1120,7 @@ Redux middleware were designed to enable writing side effects logic:
 - After `middlewares.forEach`, set `next` to `store.dispatch`,
   make new `dispatch` get all functions from `middlewares`.
 
-```js
+```ts
 function applyMiddleware(store, middlewares) {
   middlewares = middlewares.slice();
   middlewares.reverse();
@@ -1135,7 +1135,7 @@ function applyMiddleware(store, middlewares) {
 }
 ```
 
-```js
+```ts
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 
 // applyMiddleware takes createStore() and returns
@@ -1151,7 +1151,7 @@ const store = createStoreWithMiddleware(todoApp);
 
 ### Scheduler Middleware
 
-```js
+```ts
 /**
  * Schedules actions with { meta: { delay: N } } to be delayed by N milliseconds.
  * Makes `dispatch` return a function to cancel the interval in this case.
@@ -1171,7 +1171,7 @@ const timeoutScheduler = store => next => action => {
 
 ### Thunk Middleware
 
-```js
+```ts
 // thunk middleware
 const thunk = store => next => action =>
   typeof action === 'function'
@@ -1600,7 +1600,7 @@ function myThunk() {
 
 `client.jsx`:
 
-```jsx
+```tsx
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { createStore } from 'redux';
@@ -1624,7 +1624,7 @@ hydrate(
 
 `server.js`:
 
-```js
+```tsx
 import path from 'path';
 import Express from 'express';
 import qs from 'qs';
@@ -1695,7 +1695,7 @@ app.listen(port);
 - Use closure to store state and subscribe.
 - Use middleware to change normal dispatch function.
 
-```js
+```ts
 const applyMiddleware =
   (...middlewares) =>
   store => {
@@ -1765,7 +1765,7 @@ const createStore = (reducer, middleware) => {
 
 ### Action Validation
 
-```js
+```ts
 const isValidKey = key => {
   return ['type', 'payload', 'error', 'meta'].includes(key);
 };
@@ -1794,7 +1794,7 @@ const validateAction = action => {
   - use Consumer in Connect higher order component
     `<Consumer>{store => (<WrapperComponent store={store}>)}</Consumer>`
 
-```jsx
+```tsx
 export const Provider = ({ store, children }) => {
   const StoreContext = React.createContext(store);
 
@@ -1803,7 +1803,7 @@ export const Provider = ({ store, children }) => {
       <StoreContext.Consumer>
         {store => {
           const childrenWithStore = React.Children.map(children, child =>
-            React.cloneElement(child, { store: store })
+            React.cloneElement(child, { store })
           );
 
           return <div>{childrenWithStore}</div>;
@@ -1913,12 +1913,12 @@ Redux style [guide](https://redux.js.org/style-guide/style-guide):
 - [Redux React Style Guide](https://github.com/iraycd/React-Redux-Styleguide)
 - [Simple Redux API](https://github.com/rematch/rematch)
 
-```js
+```ts
 // add new item to state array
 // bad and does not work case "ADD":
 state.push(newItem);
 // Good case "ADD":
-[...state, newItem];
+return [...state, newItem];
 
 // delete new item to state array
 // bad and does not work case "DELETE":
@@ -1947,7 +1947,7 @@ state.map(item => {
 
 - Action creator: 用 promise/async/await 以及 redux-thunk 实现异步操作.
 
-```js
+```ts
 // bad
 const loadTodo = id => async (dispatch, getState) => {
   // only fetch the todo if it isn't already loaded
@@ -1967,7 +1967,7 @@ const loadTodo = (id, todos) => async dispatch => {
 };
 ```
 
-```js
+```ts
 const fluxStandardAction = {
   type: 'ADD_TODO',
   payload: {

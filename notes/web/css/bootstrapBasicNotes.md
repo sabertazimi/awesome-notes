@@ -283,7 +283,7 @@ body {
 
 ### Tab Pane JS API
 
-```js
+```ts
 $('#myTabs a').click(function (e) {
   e.preventDefault();
   $(this).tab('show');
@@ -304,10 +304,10 @@ $('#myTabs li:eq(2) a').tab('show'); // Select third tab (0-indexed)
 - shown.bs.tab (on the newly-active just-shown tab,
   the same one as for the show.bs.tab event)
 
-```js
+```ts
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-  e.target; // newly activated tab
-  e.relatedTarget; // previous active tab
+  const target = e.target; // newly activated tab
+  const relatedTarget = e.relatedTarget; // previous active tab
 });
 ```
 
@@ -993,7 +993,7 @@ min=”(number)” max=”(number)” step=”(步长:指定输入数字必须�
 - data-placement="left"
 - title="Tooltip on left"
 
-```js
+```ts
 // manually initialization
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
@@ -1051,7 +1051,7 @@ $(function () {
 - title="left"
 - data-content="Button content."
 
-```js
+```ts
 // manually initialization
 $(function () {
   $('[data-toggle="popover"]').popover();
@@ -1337,7 +1337,7 @@ Slide Show:
 </div>
 ```
 
-```js
+```ts
 // Initializes the carousel with an optional options object
 // and starts cycling through items.
 $('.carousel').carousel({
