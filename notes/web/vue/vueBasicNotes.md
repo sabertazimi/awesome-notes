@@ -1495,7 +1495,7 @@ to either replace mixins or leverage a Composition API-based library.
 
 ### Vue Constructor
 
-`src/core/instance/index.js`
+`core/instance/index.js`:
 
 ```ts
 // 从五个文件导入五个方法（不包括 warn）
@@ -1525,13 +1525,17 @@ renderMixin(Vue);
 export default Vue;
 ```
 
-### Vue Prototype
+`core/instance/init.js`:
 
 ```ts
-// initMixin(Vue)    src/core/instance/init.js **************************************************
+// initMixin(Vue)
 Vue.prototype._init = function (options?: Object) {};
+```
 
-// stateMixin(Vue)    src/core/instance/state.js **************************************************
+`core/instance/state.js`:
+
+```ts
+// stateMixin(Vue)
 Vue.prototype.$data = data;
 Vue.prototype.$props = props;
 Vue.prototype.$set = set;
@@ -1541,8 +1545,12 @@ Vue.prototype.$watch = function (
   cb: any,
   options?: Object
 ): Function {};
+```
 
-// eventsMixin(Vue)    src/core/instance/events.js **************************************************
+`core/instance/events.js`:
+
+```ts
+// eventsMixin(Vue)
 Vue.prototype.$on = function (
   event: string | Array<string>,
   fn: Function
@@ -1553,14 +1561,22 @@ Vue.prototype.$off = function (
   fn?: Function
 ): Component {};
 Vue.prototype.$emit = function (event: string): Component {};
+```
 
-// lifecycleMixin(Vue)    src/core/instance/lifecycle.js **************************************************
+`core/instance/lifecycle.js`:
+
+```ts
+// lifecycleMixin(Vue)
 Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {};
 Vue.prototype.$forceUpdate = function () {};
 Vue.prototype.$destroy = function () {};
+```
 
-// renderMixin(Vue)    src/core/instance/render.js **************************************************
-// installRenderHelpers 函数中
+`core/instance/render.js`:
+
+```ts
+// renderMixin(Vue)
+// installRenderHelpers 函数:
 Vue.prototype._o = markOnce;
 Vue.prototype._n = toNumber;
 Vue.prototype._s = toString;
@@ -1578,8 +1594,20 @@ Vue.prototype._u = resolveScopedSlots;
 Vue.prototype._g = bindObjectListeners;
 Vue.prototype.$nextTick = function (fn: Function) {};
 Vue.prototype._render = function (): VNode {};
+```
 
-// core/index.js 文件中
+### Vue Prototype
+
+`core/index.js`:
+
+```ts
+import { FunctionalRenderContext } from 'core/vdom/create-functional-component';
+import { isServerRendering } from 'core/util/env';
+import Vue from './instance/index';
+import { initGlobalAPI } from './global-api/index';
+
+initGlobalAPI(Vue);
+
 Object.defineProperty(Vue.prototype, '$isServer', {
   get: isServerRendering,
 });
@@ -1591,8 +1619,53 @@ Object.defineProperty(Vue.prototype, '$ssrContext', {
   },
 });
 
-// 在 runtime/index.js 文件中
+// expose FunctionalRenderContext for ssr runtime helper installation
+Object.defineProperty(Vue, 'FunctionalRenderContext', {
+  value: FunctionalRenderContext,
+});
+
+Vue.version = '__VERSION__';
+
+export default Vue;
+```
+
+`runtime/index.js`:
+
+```ts
+import Vue from 'core/index';
+import config from 'core/config';
+import { extend, noop } from 'shared/util';
+import { mountComponent } from 'core/instance/lifecycle';
+import { devtools, inBrowser, isChrome } from 'core/util/index';
+
+import {
+  getTagNamespace,
+  isReservedAttr,
+  isReservedTag,
+  isUnknownElement,
+  mustUseProp,
+  query,
+} from 'web/util/index';
+
+import { patch } from './patch';
+import platformDirectives from './directives/index';
+import platformComponents from './components/index';
+
+// Install platform specific utils.
+Vue.config.mustUseProp = mustUseProp;
+Vue.config.isReservedTag = isReservedTag;
+Vue.config.isReservedAttr = isReservedAttr;
+Vue.config.getTagNamespace = getTagNamespace;
+Vue.config.isUnknownElement = isUnknownElement;
+
+// Install platform runtime directives & components.
+extend(Vue.options.directives, platformDirectives);
+extend(Vue.options.components, platformComponents);
+
+// Install platform patch function.
 Vue.prototype.__patch__ = inBrowser ? patch : noop;
+
+// Public mount method.
 Vue.prototype.$mount = function (
   el?: string | Element,
   hydrating?: boolean
@@ -1600,10 +1673,11 @@ Vue.prototype.$mount = function (
   el = el && inBrowser ? query(el) : undefined;
   return mountComponent(this, el, hydrating);
 };
+
+export default Vue;
 ```
 
-在入口文件 `src/platforms/web/entry-runtime-with-compiler.js` 中
-重写了 `Vue.prototype.$mount` 方法:
+`platforms/web/entry-runtime-with-compiler.js` 重写 `Vue.prototype.$mount` 方法:
 
 ```ts
 import config from 'core/config';
@@ -1774,7 +1848,7 @@ vm.$options = options; // 当前 Vue 实例的初始化选项，注意：这是�
 vm._renderProxy = vm; // 渲染函数作用域代理
 vm._self = vm; // 实例本身
 
-// initLifecycle(vm)    src/core/instance/lifecycle.js **************************************************
+// initLifecycle(vm)    core/instance/lifecycle.js **************************************************
 vm.$parent = vmParent;
 vm.$root = vmParent ? vmParent.$root : vm;
 
@@ -1788,11 +1862,11 @@ vm._isMounted = false;
 vm._isDestroyed = false;
 vm._isBeingDestroyed = false;
 
-// initEvents(vm)   src/core/instance/events.js **************************************************
+// initEvents(vm)   core/instance/events.js **************************************************
 vm._events = Object.create(null);
 vm._hasHookEvent = false;
 
-// initRender(vm)   src/core/instance/render.js **************************************************
+// initRender(vm)   core/instance/render.js **************************************************
 vm._vnode = null; // the root of the child tree
 vm._staticTrees = null; // v-once cached trees
 
@@ -1806,20 +1880,20 @@ vm.$createElement = createElement;
 vm.$attrs = attrs;
 vm.$listeners = listeners;
 
-// initState(vm)   src/core/instance/state.js **************************************************
+// initState(vm)   core/instance/state.js **************************************************
 vm._watchers = [];
 vm._data = data;
 
-// mountComponent()   src/core/instance/lifecycle.js
+// mountComponent()   core/instance/lifecycle.js
 vm.$el = el;
 
-// initComputed()   src/core/instance/state.js
+// initComputed()   core/instance/state.js
 vm._computedWatchers = Object.create(null);
 
-// initProps()    src/core/instance/state.js
+// initProps()    core/instance/state.js
 vm._props = {};
 
-// initProvide()    src/core/instance/inject.js
+// initProvide()    core/instance/inject.js
 vm._provided = provided;
 ```
 
