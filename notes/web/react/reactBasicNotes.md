@@ -6787,132 +6787,6 @@ function useIntersectionObserver(
 export default useIntersectionObserver;
 ```
 
-### Custom Router Hook
-
-```js
-import { useContext, useEffect } from 'react';
-import { __RouterContext } from 'react-router';
-import useForceUpdate from 'use-force-update';
-
-const useReactRouter = () => {
-  const forceUpdate = useForceUpdate();
-  const routerContext = useContext(__RouterContext);
-
-  useEffect(
-    () => routerContext.history.listen(forceUpdate),
-    [forceUpdate, routerContext]
-  );
-
-  return routerContext;
-};
-```
-
-### Custom History Hook
-
-```js
-import { useCallback, useReducer } from 'react';
-
-// Initial state that we pass into useReducer
-const initialState = {
-  // Array of previous state values updated each time we push a new state
-  past: [],
-  // Current state value
-  present: null,
-  // Will contain "future" state values if we undo (so we can redo)
-  future: [],
-};
-
-// Our reducer function to handle state changes based on action
-const reducer = (state, action) => {
-  const { past, present, future } = state;
-
-  switch (action.type) {
-    case 'UNDO': {
-      const previous = past[past.length - 1];
-      const newPast = past.slice(0, past.length - 1);
-
-      return {
-        past: newPast,
-        present: previous,
-        future: [present, ...future],
-      };
-    }
-    case 'REDO': {
-      const next = future[0];
-      const newFuture = future.slice(1);
-
-      return {
-        past: [...past, present],
-        present: next,
-        future: newFuture,
-      };
-    }
-    case 'SET': {
-      const { newPresent } = action;
-
-      if (newPresent === present) {
-        return state;
-      }
-
-      return {
-        past: [...past, present],
-        present: newPresent,
-        future: [],
-      };
-    }
-    case 'CLEAR': {
-      const { initialPresent } = action;
-
-      return {
-        ...initialState,
-        present: initialPresent,
-      };
-    }
-    default:
-      throw new Error('Unsupported action type!');
-  }
-};
-
-// Hook
-const useHistory = initialPresent => {
-  const [state, dispatch] = useReducer(reducer, {
-    ...initialState,
-    present: initialPresent,
-  });
-
-  const canUndo = state.past.length !== 0;
-  const canRedo = state.future.length !== 0;
-
-  // Setup our callback functions
-  // We memoize with useCallback to prevent unnecessary re-renders
-
-  const undo = useCallback(() => {
-    if (canUndo) {
-      dispatch({ type: 'UNDO' });
-    }
-  }, [dispatch, canUndo]);
-
-  const redo = useCallback(() => {
-    if (canRedo) {
-      dispatch({ type: 'REDO' });
-    }
-  }, [dispatch, canRedo]);
-
-  const set = useCallback(
-    newPresent => dispatch({ type: 'SET', newPresent }),
-    [dispatch]
-  );
-
-  const clear = useCallback(
-    () => dispatch({ type: 'CLEAR', initialPresent }),
-    [dispatch, initialPresent]
-  );
-
-  // If needed we could also return past and future state
-  return { state: state.present, set, undo, redo, clear, canUndo, canRedo };
-};
-```
-
 ### Custom Script Loading Hook
 
 ```ts
@@ -7146,6 +7020,11 @@ export default function useMedia<T>(
 
 ### Custom Form Hook
 
+#### UseState Only Form Hook
+
+- `useState` for form entire state and form control data.
+- Custom logic via hooks `params` function.
+
 ```js
 import { useState } from 'react';
 
@@ -7174,6 +7053,12 @@ const useForm = callback => {
 
 export default useForm;
 ```
+
+#### UseState and UseRef Form Hook
+
+- `useState` for form entire state.
+- `useRef` for form control data.
+- Custom logic via hooks `params` function.
 
 ```jsx
 export const useField = (
@@ -7230,17 +7115,17 @@ export const useField = (
 export const useForm = ({ onSubmit }) => {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const fields = [];
+  const fields = useRef([]);
 
   const validateFields = async fieldNames => {
     let fieldsToValidate;
     if (fieldNames instanceof Array) {
-      fieldsToValidate = fields.filter(field =>
+      fieldsToValidate = fields.current.filter(field =>
         fieldNames.includes(field.name)
       );
     } else {
       //if fieldNames not provided, validate all fields
-      fieldsToValidate = fields;
+      fieldsToValidate = fields.current;
     }
     const fieldsValid = await Promise.all(
       fieldsToValidate.map(field => field.validate())
@@ -7249,7 +7134,7 @@ export const useForm = ({ onSubmit }) => {
   };
 
   const getFormData = () => {
-    return fields.reduce((formData, f) => {
+    return fields.current.reduce((formData, f) => {
       formData[f.name] = f.value;
       return formData;
     }, {});
@@ -7265,8 +7150,8 @@ export const useForm = ({ onSubmit }) => {
       setSubmitting(false);
       return returnVal;
     },
-    isValid: () => fields.every(f => f.errors.length === 0),
-    addField: field => fields.push(field),
+    isValid: () => fields.current.every(f => f.errors.length === 0),
+    addField: field => fields.current.push(field),
     getFormData,
     validateFields,
     submitted,
@@ -7396,6 +7281,130 @@ const App = props => {
 };
 ```
 
+#### UseState and UseRef with DOM Refs Form Hook
+
+- `useState` for form entire state.
+- `useRef` for form control data.
+- `Function Refs` bind to native `<input />` elements.
+- Custom logic via hooks `return` function.
+
+```tsx
+// https://github.com/react-hook-form/react-hook-form/blob/v7.29.0/src/logic/createFormControl.ts
+const createFormControl = () => ({
+  register: (name, options = {}) => {
+    // Register input filed.
+    let field = get(_fields, name);
+    const disabledIsDefined = isBoolean(options.disabled);
+
+    set(_fields, name, {
+      _f: {
+        ...(field && field._f ? field._f : { ref: { name } }),
+        name,
+        mount: true,
+        ...options,
+      },
+    });
+    _names.mount.add(name);
+
+    field
+      ? disabledIsDefined &&
+        set(
+          _formValues,
+          name,
+          options.disabled
+            ? undefined
+            : get(_formValues, name, getFieldValue(field._f))
+        )
+      : updateValidAndValue(name, true, options.value);
+
+    return {
+      // Bind to Form Input Element.
+      ref: (ref: HTMLInputElement | null): void => {
+        if (ref) {
+          register(name, options);
+          field = get(_fields, name);
+
+          const fieldRef = isUndefined(ref.value)
+            ? ref.querySelectorAll
+              ? (ref.querySelectorAll('input,select,textarea')[0] as Ref) || ref
+              : ref
+            : ref;
+          const radioOrCheckbox = isRadioOrCheckbox(fieldRef);
+          const refs = field._f.refs || [];
+
+          if (
+            radioOrCheckbox
+              ? refs.find((option: Ref) => option === fieldRef)
+              : fieldRef === field._f.ref
+          ) {
+            return;
+          }
+
+          set(_fields, name, {
+            _f: {
+              ...field._f,
+              ...(radioOrCheckbox
+                ? {
+                    refs: [...refs.filter(live), fieldRef],
+                    ref: { type: fieldRef.type, name },
+                  }
+                : { ref: fieldRef }),
+            },
+          });
+
+          updateValidAndValue(name, false, undefined, fieldRef);
+        } else {
+          field = get(_fields, name, {});
+
+          if (field._f) {
+            field._f.mount = false;
+          }
+
+          (_options.shouldUnregister || options.shouldUnregister) &&
+            !(isNameInFieldArray(_names.array, name) && _stateFlags.action) &&
+            _names.unMount.add(name);
+        }
+      },
+      value,
+      min,
+      max,
+      required,
+      disabled,
+      ...fieldPropValues,
+    };
+  },
+  // Higher order function: onSubmit (Use Code) => onSubmit (Bind to Form Element).
+  handleSubmit: onSubmit => {
+    return (event: SubmitEvent) => {
+      onSubmit(this._getFormData());
+    };
+  },
+});
+
+const useForm = () => {
+  // Detailed logic handlers: DOM refs, field getter/setter, submit handler.
+  const formControl = useRef<FormControl>(createFormControl());
+  // Entire form state: valid, errors etc.
+  const formState = useState<FormState>();
+
+  return {
+    ...formControl.current,
+  };
+};
+
+const App = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = data => console.log(data);
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register('name')} type="text" />
+      <input {...register('password')} type="password" />
+    </form>
+  );
+};
+```
+
 ### Custom URL Params Hook
 
 Storing state in the URL:
@@ -7433,6 +7442,132 @@ export default function useStateParams<T>(
 
   return [state, onChange];
 }
+```
+
+### Custom Router Hook
+
+```js
+import { useContext, useEffect } from 'react';
+import { __RouterContext } from 'react-router';
+import useForceUpdate from 'use-force-update';
+
+const useReactRouter = () => {
+  const forceUpdate = useForceUpdate();
+  const routerContext = useContext(__RouterContext);
+
+  useEffect(
+    () => routerContext.history.listen(forceUpdate),
+    [forceUpdate, routerContext]
+  );
+
+  return routerContext;
+};
+```
+
+### Custom History Hook
+
+```js
+import { useCallback, useReducer } from 'react';
+
+// Initial state that we pass into useReducer
+const initialState = {
+  // Array of previous state values updated each time we push a new state
+  past: [],
+  // Current state value
+  present: null,
+  // Will contain "future" state values if we undo (so we can redo)
+  future: [],
+};
+
+// Our reducer function to handle state changes based on action
+const reducer = (state, action) => {
+  const { past, present, future } = state;
+
+  switch (action.type) {
+    case 'UNDO': {
+      const previous = past[past.length - 1];
+      const newPast = past.slice(0, past.length - 1);
+
+      return {
+        past: newPast,
+        present: previous,
+        future: [present, ...future],
+      };
+    }
+    case 'REDO': {
+      const next = future[0];
+      const newFuture = future.slice(1);
+
+      return {
+        past: [...past, present],
+        present: next,
+        future: newFuture,
+      };
+    }
+    case 'SET': {
+      const { newPresent } = action;
+
+      if (newPresent === present) {
+        return state;
+      }
+
+      return {
+        past: [...past, present],
+        present: newPresent,
+        future: [],
+      };
+    }
+    case 'CLEAR': {
+      const { initialPresent } = action;
+
+      return {
+        ...initialState,
+        present: initialPresent,
+      };
+    }
+    default:
+      throw new Error('Unsupported action type!');
+  }
+};
+
+// Hook
+const useHistory = initialPresent => {
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
+    present: initialPresent,
+  });
+
+  const canUndo = state.past.length !== 0;
+  const canRedo = state.future.length !== 0;
+
+  // Setup our callback functions
+  // We memoize with useCallback to prevent unnecessary re-renders
+
+  const undo = useCallback(() => {
+    if (canUndo) {
+      dispatch({ type: 'UNDO' });
+    }
+  }, [dispatch, canUndo]);
+
+  const redo = useCallback(() => {
+    if (canRedo) {
+      dispatch({ type: 'REDO' });
+    }
+  }, [dispatch, canRedo]);
+
+  const set = useCallback(
+    newPresent => dispatch({ type: 'SET', newPresent }),
+    [dispatch]
+  );
+
+  const clear = useCallback(
+    () => dispatch({ type: 'CLEAR', initialPresent }),
+    [dispatch, initialPresent]
+  );
+
+  // If needed we could also return past and future state
+  return { state: state.present, set, undo, redo, clear, canUndo, canRedo };
+};
 ```
 
 ### Custom Store Hook
