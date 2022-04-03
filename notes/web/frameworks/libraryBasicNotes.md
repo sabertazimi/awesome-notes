@@ -897,7 +897,6 @@ tags: [Web, Framework, Library]
 
 ### File Utils
 
-- [FileAPI](https://github.com/mailru/FileAPI)
 - [FS Extra](https://github.com/jprichardson/node-fs-extra)
 - [Graceful FS](https://github.com/isaacs/node-graceful-fs)
 - [MemFS: In-memory Node File System](https://github.com/streamich/memfs)
@@ -910,7 +909,7 @@ tags: [Web, Framework, Library]
 - [File Type](https://github.com/sindresorhus/file-type)
 - [File Size](https://github.com/avoidwork/filesize.js)
 
-#### PDF Utils
+### PDF Utils
 
 - [React PDF](https://github.com/wojtekmaj/react-pdf)
 - [PDF.js](https://github.com/mozilla/pdf.js)
@@ -1112,13 +1111,14 @@ tags: [Web, Framework, Library]
 ### Middlewares
 
 - [Body Parser](https://github.com/expressjs/body-parser)
-- [Cookie Parser](https://github.com/expressjs/cookie-parser)
-- [Cookie Session](https://github.com/expressjs/cookie-session)
-- [Compression](https://github.com/expressjs/compression)
 - [Cross Origin Resource Sharing](https://github.com/expressjs/cors)
 - [Cross Site Request Forgery Protection](https://github.com/expressjs/csurf)
+- [Cookie Parser](https://github.com/expressjs/cookie-parser)
+- [Cookie Session](https://github.com/expressjs/cookie-session)
 - [JWT](https://github.com/auth0/node-jsonwebtoken)
 - [PassportJS: Simple, Unobtrusive Authentication for Node.js](https://github.com/jaredhanson/passport)
+- [Compression](https://github.com/expressjs/compression)
+- [File Upload](https://github.com/richardgirges/express-fileupload)
 - [Morgan: Express Official Logger](https://github.com/expressjs/morgan)
 - [Pino: Super Fast, All Natural JSON Logger](https://github.com/pinojs/pino)
 - [HTTP Proxy](https://github.com/chimurai/http-proxy-middleware)
