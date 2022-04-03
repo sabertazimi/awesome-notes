@@ -2063,6 +2063,11 @@ Vue.prototype._render = function (): VNode {
 
 `core/vdom/createElement.js`:
 
+- Normalize children: transform children to `Array<VNode>`.
+- Create VNode:
+  - `new VNode(tag, data, children, vm)`: native host elements (e.g `<div>`).
+  - `createComponent(tag, data, children, vm)`: custom components.
+
 ```ts
 export function createElement(
   context: Component,
