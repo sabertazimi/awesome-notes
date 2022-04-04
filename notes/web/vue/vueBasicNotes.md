@@ -3717,7 +3717,23 @@ export interface VNode {
 
 ### Vue Template and Compiler
 
-Performant improvements:
+#### Vue Compilation Workflow
+
+```ts
+function compile(template: string, options: CompilerOptions): CompiledResult {
+  const ast = parse(template.trim(), options);
+  optimize(ast, options);
+  const code = generate(ast, options);
+
+  return {
+    ast,
+    render: code.render,
+    staticRenderFns: code.staticRenderFns,
+  };
+}
+```
+
+#### Vue Compilation Performant Improvements
 
 - Shorten template helper function with prefix `_v`/`_s` etc.
 - Hoist static template blocks,
