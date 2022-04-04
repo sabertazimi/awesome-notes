@@ -3074,7 +3074,7 @@ Collect deps (get):
 - `pushTarget(watcher)`.
 - `watcherGetter()`: Access reactive object `reactiveObject.key`.
 - `reactiveObject.get(key)` (`defineReactive`).
-- `dep.depend()`.
+- `dep.depend()` + `childObserver.dep.depend()`.
 - `Dep.target.addDep(dep)` -> `watcher.addDep(dep)`.
 - `dep.addSub(watcher)`
 - `dep.subs.push(watcher)`.
