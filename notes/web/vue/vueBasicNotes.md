@@ -2095,10 +2095,6 @@ export function mountComponent(
     vm._update(vm._render(), hydrating);
   };
 
-  // we set this to vm._watcher inside the watcher's constructor
-  // since the watcher's initial patch may call $forceUpdate
-  // (e.g. inside child component's mounted hook),
-  // which relies on vm._watcher being already defined.
   // eslint-disable-next-line no-new
   new Watcher(
     vm,
@@ -2958,6 +2954,357 @@ function createAsyncPlaceholder(
   node.asyncFactory = factory;
   node.asyncMeta = { data, context, children, tag };
   return node;
+}
+```
+
+### Vue Proxy
+
+Collect deps (get):
+
+- `watcher.get()`.
+- `pushTarget(watcher)`.
+- `watcherGetter()`: Access reactive object `reactiveObject.key`.
+- `reactiveObject.get(key)` (`defineReactive`).
+- `dep.depend()`.
+- `Dep.target.addDep(dep)` -> `watcher.addDep(dep)`.
+- `dep.addSub(watcher)`
+- `dep.subs.push(watcher)`.
+- `popTarget()`.
+- `watcher.cleanupDeps()`.
+
+Dispatch updates (set):
+
+- Change reactive object `reactiveObject.key = value`.
+- `reactiveObject.set(key, value)` (`defineReactive`).
+- `dep.notify()`.
+- `dep.subs.forEach(watcher => watcher.update())`.
+- `watcher.update()`.
+- `queueWatcher(watcher)`.
+- `nextTick(flushSchedulerQueue)`.
+- `watcher.run()`.
+- `watcher.get()`: Get new value and recollect deps.
+
+`core/observer/watcher.js`:
+
+- Watcher 的创建顺序为先父后子, 执行顺序 (WatcherQueue) 保持先父后子.
+- 用户自定义 Watcher 要优先于 RenderWatcher 执行 (先创建先执行).
+- 若一个组件在父组件的 Watcher 执行期间被销毁，则它对应的 Watcher 执行都可以被跳过.
+- `RenderWatcher` (built-in Watcher)
+  `updateComponent = () => vm._update(vm._render(), hydrating)`:
+  When reactive props and data changed,
+  `updateComponent` get invoked automatically.
+
+```ts
+let uid = 0;
+
+/**
+ * A watcher parses an expression, collects dependencies,
+ * and fires callback when the expression value changes.
+ * This is used for both the $watch() api and directives.
+ */
+export default class Watcher {
+  vm: Component;
+  expression: string;
+  cb: Function;
+  id: number;
+  deep: boolean;
+  user: boolean;
+  computed: boolean;
+  sync: boolean;
+  dirty: boolean;
+  active: boolean;
+  dep: Dep;
+  deps: Array<Dep>;
+  newDeps: Array<Dep>;
+  depIds: SimpleSet;
+  newDepIds: SimpleSet;
+  before: Function | null;
+  getter: Function;
+  value: any;
+
+  constructor(
+    vm: Component,
+    expOrFn: string | Function,
+    cb: Function,
+    options?: ?Object,
+    isRenderWatcher?: boolean
+  ) {
+    this.vm = vm;
+
+    if (isRenderWatcher) {
+      vm._watcher = this;
+    }
+
+    vm._watchers.push(this);
+
+    // options
+    if (options) {
+      this.deep = !!options.deep;
+      this.user = !!options.user;
+      this.computed = !!options.computed;
+      this.sync = !!options.sync;
+      this.before = options.before;
+    } else {
+      this.deep = this.user = this.computed = this.sync = false;
+    }
+
+    this.cb = cb;
+    this.id = ++uid; // uid for batching
+    this.active = true;
+    this.dirty = this.computed; // for computed watchers
+    this.deps = [];
+    this.newDeps = [];
+    this.depIds = new Set();
+    this.newDepIds = new Set();
+    this.expression =
+      process.env.NODE_ENV !== 'production' ? expOrFn.toString() : '';
+
+    // parse expression for getter
+    if (typeof expOrFn === 'function') {
+      this.getter = expOrFn;
+    } else {
+      this.getter = parsePath(expOrFn);
+
+      if (!this.getter) {
+        this.getter = function () {};
+      }
+    }
+
+    if (this.computed) {
+      this.value = undefined;
+      this.dep = new Dep();
+    } else {
+      this.value = this.get();
+    }
+  }
+
+  /**
+   * Evaluate the getter, and re-collect dependencies.
+   */
+  get() {
+    pushTarget(this);
+    const vm = this.vm;
+    const value = this.getter.call(vm, vm);
+
+    if (this.deep) {
+      traverse(value);
+    }
+
+    popTarget();
+    this.cleanupDeps();
+    return value;
+  }
+
+  /**
+   * Add a dependency to this directive.
+   */
+  addDep(dep: Dep) {
+    const id = dep.id;
+
+    if (!this.newDepIds.has(id)) {
+      this.newDepIds.add(id);
+      this.newDeps.push(dep);
+
+      if (!this.depIds.has(id)) {
+        dep.addSub(this);
+      }
+    }
+  }
+
+  /**
+   * Subscriber interface.
+   * Will be called when a dependency changes.
+   */
+  update() {
+    /* istanbul ignore else */
+    if (this.lazy) {
+      this.dirty = true;
+    } else if (this.sync) {
+      this.run();
+    } else {
+      queueWatcher(this);
+    }
+  }
+
+  /**
+   * Scheduler job interface.
+   * Will be called by the scheduler.
+   */
+  run() {
+    if (this.active) {
+      const value = this.get();
+
+      if (value !== this.value || isObject(value) || this.deep) {
+        // set new value
+        const oldValue = this.value;
+        this.value = value;
+
+        if (this.user) {
+          const info = `callback for watcher "${this.expression}"`;
+          invokeWithErrorHandling(
+            this.cb,
+            this.vm,
+            [value, oldValue],
+            this.vm,
+            info
+          );
+        } else {
+          this.cb.call(this.vm, value, oldValue);
+        }
+      }
+    }
+  }
+
+  /**
+   * Evaluate and return the value of the watcher.
+   * This only gets called for computed property watchers.
+   */
+  evaluate() {
+    if (this.dirty) {
+      this.value = this.get();
+      this.dirty = false;
+    }
+
+    return this.value;
+  }
+}
+```
+
+`core/observer/dep.js`:
+
+```ts
+import { remove } from '../util/index';
+import type Watcher from './watcher';
+
+let uid = 0;
+
+/**
+ * A dep is an observable that can have multiple
+ * directives subscribing to it.
+ */
+export default class Dep {
+  static target: ?Watcher;
+  id: number;
+  subs: Array<Watcher>;
+
+  constructor() {
+    this.id = uid++;
+    this.subs = [];
+  }
+
+  addSub(sub: Watcher) {
+    this.subs.push(sub);
+  }
+
+  removeSub(sub: Watcher) {
+    remove(this.subs, sub);
+  }
+
+  depend() {
+    if (Dep.target) {
+      Dep.target.addDep(this);
+    }
+  }
+
+  notify() {
+    // stabilize the subscriber list first
+    const subs = this.subs.slice();
+    for (let i = 0, l = subs.length; i < l; i++) {
+      subs[i].update();
+    }
+  }
+}
+
+// the current target watcher being evaluated.
+// this is globally unique because there could be only one
+// watcher being evaluated at any time.
+Dep.target = null;
+const targetStack = [];
+
+export function pushTarget(_target: ?Watcher) {
+  if (Dep.target) targetStack.push(Dep.target);
+  Dep.target = _target;
+}
+
+export function popTarget() {
+  Dep.target = targetStack.pop();
+}
+```
+
+`core/observer/index.js`:
+
+```ts
+/**
+ * Define a reactive property on an Object.
+ */
+export function defineReactive(
+  obj: Object,
+  key: string,
+  val: any,
+  customSetter?: ?Function,
+  shallow?: boolean
+) {
+  const dep = new Dep();
+
+  const property = Object.getOwnPropertyDescriptor(obj, key);
+
+  if (property && property.configurable === false) {
+    return;
+  }
+
+  // cater for pre-defined getter/setters
+  const getter = property && property.get;
+  const setter = property && property.set;
+
+  if ((!getter || setter) && arguments.length === 2) {
+    val = obj[key];
+  }
+
+  let childOb = !shallow && observe(val);
+
+  Object.defineProperty(obj, key, {
+    enumerable: true,
+    configurable: true,
+    get: function reactiveGetter() {
+      const value = getter ? getter.call(obj) : val;
+
+      if (Dep.target) {
+        dep.depend();
+
+        if (childOb) {
+          childOb.dep.depend();
+
+          if (Array.isArray(value)) {
+            dependArray(value);
+          }
+        }
+      }
+
+      return value;
+    },
+    set: function reactiveSetter(newVal) {
+      const value = getter ? getter.call(obj) : val;
+
+      /* eslint-disable no-self-compare */
+      if (newVal === value || (newVal !== newVal && value !== value)) {
+        return;
+      }
+
+      /* eslint-enable no-self-compare */
+      if (process.env.NODE_ENV !== 'production' && customSetter) {
+        customSetter();
+      }
+
+      if (setter) {
+        setter.call(obj, newVal);
+      } else {
+        val = newVal;
+      }
+
+      childOb = !shallow && observe(newVal);
+      dep.notify();
+    },
+  });
 }
 ```
 
