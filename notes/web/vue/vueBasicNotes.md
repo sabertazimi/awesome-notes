@@ -1614,7 +1614,6 @@ Object.defineProperty(Vue.prototype, '$isServer', {
 
 Object.defineProperty(Vue.prototype, '$ssrContext', {
   get() {
-    /* istanbul ignore next */
     return this.$vnode && this.$vnode.ssrContext;
   },
 });
@@ -3227,7 +3226,6 @@ export default class Watcher {
    * Will be called when a dependency changes.
    */
   update() {
-    /* istanbul ignore else */
     if (this.lazy) {
       this.dirty = true;
     } else if (this.sync) {
@@ -3263,6 +3261,15 @@ export default class Watcher {
           this.cb.call(this.vm, value, oldValue);
         }
       }
+    }
+  }
+
+  /**
+   * Depend on this watcher. Only for computed property watchers.
+   */
+  depend() {
+    if (this.dep && Dep.target) {
+      this.dep.depend();
     }
   }
 
@@ -3500,6 +3507,66 @@ export function defineReactive(
       dep.notify();
     },
   });
+}
+```
+
+#### Vue Computed Props and Watchers
+
+`core/instance/state.js`:
+
+- `Computed Props` 只关注最终计算结果是否发生变化, 是一种性能优化手段.
+- `Computed Props` 最终计算结果不变, 不触发后续更新.
+- `Computed Props` 创建的 `Watcher` 称为 `Computed Watcher`.
+
+```ts
+const computedWatcherOptions = { computed: true };
+
+function initComputed(vm: Component, computed: Object) {
+  const watchers = (vm._computedWatchers = Object.create(null));
+
+  for (const key in computed) {
+    const userDef = computed[key];
+    const getter = typeof userDef === 'function' ? userDef : userDef.get;
+
+    // create internal watcher for the computed property.
+    watchers[key] = new Watcher(
+      vm,
+      getter || noop,
+      noop,
+      computedWatcherOptions
+    );
+
+    if (!(key in vm)) {
+      defineComputed(vm, key, userDef);
+    }
+  }
+}
+
+export function defineComputed(
+  target: any,
+  key: string,
+  userDef: Object | Function
+) {
+  if (typeof userDef === 'function') {
+    sharedPropertyDefinition.get = createComputedGetter(key);
+    sharedPropertyDefinition.set = noop;
+  } else {
+    sharedPropertyDefinition.get = userDef.get ?? noop;
+    sharedPropertyDefinition.set = userDef.set ?? noop;
+  }
+
+  Object.defineProperty(target, key, sharedPropertyDefinition);
+}
+
+function createComputedGetter(key) {
+  return function computedGetter() {
+    const watcher = this._computedWatchers && this._computedWatchers[key];
+
+    if (watcher) {
+      watcher.depend();
+      return watcher.evaluate();
+    }
+  };
 }
 ```
 
