@@ -3070,6 +3070,8 @@ function createAsyncPlaceholder(
 
 ### Vue Proxy
 
+[![Reactive](./figures/proxy.png)](https://ustbhuangyi.github.io/vue-analysis/v2/reactive/summary.html)
+
 Collect deps (get):
 
 - `watcher.get()`.
