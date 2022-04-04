@@ -1315,14 +1315,14 @@ tags: [Web, Framework, Library]
 
 ### DevOps Version Tools
 
-- [BeachBall: Sunniest Semantic Version Bumper](https://github.com/microsoft/beachball)
 - [ChangeSets: Manage Monorepo Versioning and Changelogs](https://github.com/atlassian/changesets)
-- [Commit Lint](https://github.com/conventional-changelog/commitlint)
 - [Commitizen: Conventional Commits CLI Tool](https://github.com/commitizen/cz-cli)
 - [Semantic Release: Fully Automated Version Management and Package Publishing](https://github.com/semantic-release/semantic-release)
 - [Google Release Bot](https://github.com/googleapis/release-please)
+- [BeachBall: Sunniest Semantic Version Bumper](https://github.com/microsoft/beachball)
 - [Release It: Automate Versioning and Package Publishing](https://github.com/release-it/release-it)
 - [Standard Version: Automate Versioning and Changelog Generation](https://github.com/conventional-changelog/standard-version)
+- [Commit Lint](https://github.com/conventional-changelog/commitlint)
 
 ### DevOps Automation CI and CD Tools
 
