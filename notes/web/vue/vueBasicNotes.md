@@ -3725,6 +3725,31 @@ Performant improvements:
   only track dynamic VNode.
 - Cache event handlers (like `useCallback` in React).
 
+```ts
+function isStatic(node: ASTNode): boolean {
+  if (node.type === 2) {
+    // expression
+    return false;
+  }
+
+  if (node.type === 3) {
+    // text
+    return true;
+  }
+
+  return !!(
+    node.pre ||
+    (!node.hasBindings && // no dynamic bindings
+      !node.if &&
+      !node.for && // not v-if or v-for or v-else
+      !isBuiltInTag(node.tag) && // not a built-in
+      isPlatformReservedTag(node.tag) && // not a component
+      !isDirectChildOfTemplateFor(node) &&
+      Object.keys(node).every(isStaticKey))
+  );
+}
+```
+
 ### Vue Two-Way Data Binding
 
 View-Model 主要做了两件微小的事情：
