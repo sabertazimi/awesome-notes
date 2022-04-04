@@ -2607,22 +2607,14 @@ if there’s any pending call back waiting to be executed:
 `Event Loop` simple model:
 
 ```ts
-for (let ii = 0; ii < macroTask.length; ii++) {
-  // eslint-disable-next-line no-eval
-  eval(macroTask[ii])();
+for (macroTask of macroTaskQueue) {
+  // 1. Handle current MacroTask.
+  handleMacroTask(macroTask);
 
-  if (microTask.length !== 0) {
-    // Process all MicroTasks.
-    for (let __i = 0; __i < microTask.length; __i++) {
-      // eslint-disable-next-line no-eval
-      eval(microTask[__i])();
-    }
-
-    // Empty MicroTask.
-    microTask = [];
+  // 2. Handle all MicroTasks.
+  for (microTask of microTaskQueue) {
+    handleMicroTask(microTask);
   }
-
-  // Next MacroTask in next loop iteration.
 }
 ```
 
