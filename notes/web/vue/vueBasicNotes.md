@@ -3103,6 +3103,11 @@ Dispatch updates (set):
   `updateComponent = () => vm._update(vm._render(), hydrating)`:
   When reactive props and data changed,
   `updateComponent` get invoked automatically.
+- 四种 `Watcher` 类型:
+  - `Computed Watcher`: `Computed Props` Watcher.
+  - `Sync Watcher`. `sync: true`.
+  - `Deep Watcher`: `deep: true`, 检测 `Object` 内部变化.
+  - `User Watcher`.
 
 ```ts
 let uid = 0;
