@@ -2531,6 +2531,9 @@ vm.$options = {
 };
 ```
 
+- `core/instance/state.js/initProps()`: `this.XXX` -> `this._props.XXX`.
+- `core/instance/state.js/initData()`: `this.XXX` -> `this._data.XXX`.
+
 #### Vue Merge Options
 
 `mergeOptions` (`core/util/options.js`):
