@@ -1912,6 +1912,115 @@ Vue.extend = function (extendOptions: Object): Function {
 };
 ```
 
+#### Vue Global NextTick API
+
+`core/util/next-tick.js`:
+
+```ts
+import { noop } from 'shared/util';
+import { handleError } from './error';
+import { isIOS, isNative } from './env';
+
+const callbacks = [];
+let pending = false;
+
+function flushCallbacks() {
+  pending = false;
+  const copies = callbacks.slice(0);
+  callbacks.length = 0;
+
+  for (let i = 0; i < copies.length; i++) {
+    copies[i]();
+  }
+}
+
+let microTimerFunc;
+let macroTimerFunc;
+let useMacroTask = false;
+
+// setImmediate -> MessageChannel -> setTimeout.
+if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
+  macroTimerFunc = () => {
+    setImmediate(flushCallbacks);
+  };
+} else if (
+  typeof MessageChannel !== 'undefined' &&
+  (isNative(MessageChannel) ||
+    // PhantomJS
+    MessageChannel.toString() === '[object MessageChannelConstructor]')
+) {
+  const channel = new MessageChannel();
+  const port = channel.port2;
+  channel.port1.onmessage = flushCallbacks;
+  macroTimerFunc = () => {
+    port.postMessage(1);
+  };
+} else {
+  macroTimerFunc = () => {
+    setTimeout(flushCallbacks, 0);
+  };
+}
+
+// Promise.then -> Macro Timer.
+if (typeof Promise !== 'undefined' && isNative(Promise)) {
+  const p = Promise.resolve();
+  microTimerFunc = () => {
+    p.then(flushCallbacks);
+    if (isIOS) setTimeout(noop);
+  };
+} else {
+  microTimerFunc = macroTimerFunc;
+}
+
+/**
+ * Wrap a function so that if any code inside triggers state change,
+ * the changes are queued using a (macro) task instead of a microtask.
+ */
+export function withMacroTask(fn: Function): Function {
+  return (
+    fn._withTask ||
+    (fn._withTask = function (...args) {
+      useMacroTask = true;
+      const res = fn(...args);
+      useMacroTask = false;
+      return res;
+    })
+  );
+}
+
+export function nextTick(cb?: Function, ctx?: Object) {
+  let _resolve;
+
+  callbacks.push(() => {
+    if (cb) {
+      try {
+        cb.call(ctx);
+      } catch (e) {
+        handleError(e, ctx, 'nextTick');
+      }
+    } else if (_resolve) {
+      _resolve(ctx);
+    }
+  });
+
+  if (!pending) {
+    pending = true;
+
+    if (useMacroTask) {
+      macroTimerFunc();
+    } else {
+      microTimerFunc();
+    }
+  }
+
+  if (!cb && typeof Promise !== 'undefined') {
+    return new Promise(resolve => {
+      _resolve = resolve;
+    });
+  }
+}
+```
+
 ### Vue Instance
 
 ```ts
