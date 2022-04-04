@@ -6146,10 +6146,91 @@ async function handleRequest(event) {
 }
 ```
 
-#### SW Demo
+#### Service Worker Caching Strategy
 
-- SW Serving Strategy.
-- SW Caching Strategy.
+5 caching strategy in [workbox](https://developer.chrome.com/docs/workbox/caching-strategies-overview).
+
+Stale-While-Revalidate:
+
+```ts
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    caches.open(cacheName).then(function (cache) {
+      cache.match(event.request).then(function (cacheResponse) {
+        fetch(event.request).then(function (networkResponse) {
+          cache.put(event.request, networkResponse);
+        });
+
+        return cacheResponse || networkResponse;
+      });
+    })
+  );
+});
+```
+
+Cache first, then Network:
+
+```ts
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    caches.open(cacheName).then(function (cache) {
+      cache.match(event.request).then(function (cacheResponse) {
+        if (cacheResponse) return cacheResponse;
+
+        return fetch(event.request).then(function (networkResponse) {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        });
+      });
+    })
+  );
+});
+```
+
+Network first, then Cache:
+
+```ts
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    fetch(event.request).catch(function () {
+      return caches.match(event.request);
+    })
+  );
+});
+```
+
+Cache only:
+
+```ts
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    caches.open(cacheName).then(function (cache) {
+      cache.match(event.request).then(function (cacheResponse) {
+        return cacheResponse;
+      });
+    })
+  );
+});
+```
+
+Network only:
+
+```ts
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    fetch(event.request).then(function (networkResponse) {
+      return networkResponse;
+    })
+  );
+});
+```
+
+#### SW Usage
 
 ```ts
 // Check that service workers are registered
@@ -6161,7 +6242,7 @@ if ('serviceWorker' in navigator) {
 }
 ```
 
-#### SW for Broken Images
+Broken images use case:
 
 ```ts
 function isImage(fetchRequest) {
