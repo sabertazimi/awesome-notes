@@ -1575,25 +1575,48 @@ Vue.prototype.$destroy = function () {};
 `core/instance/render.js`:
 
 ```ts
-// renderMixin(Vue)
-// installRenderHelpers 函数:
-Vue.prototype._o = markOnce;
-Vue.prototype._n = toNumber;
-Vue.prototype._s = toString;
-Vue.prototype._l = renderList;
-Vue.prototype._t = renderSlot;
-Vue.prototype._q = looseEqual;
-Vue.prototype._i = looseIndexOf;
-Vue.prototype._m = renderStatic;
-Vue.prototype._f = resolveFilter;
-Vue.prototype._k = checkKeyCodes;
-Vue.prototype._b = bindObjectProps;
-Vue.prototype._v = createTextVNode;
-Vue.prototype._e = createEmptyVNode;
-Vue.prototype._u = resolveScopedSlots;
-Vue.prototype._g = bindObjectListeners;
-Vue.prototype.$nextTick = function (fn: Function) {};
-Vue.prototype._render = function (): VNode {};
+export function initRender(vm: Component) {
+  vm._vnode = null; // the root of the child tree
+  vm._staticTrees = null; // v-once cached trees
+  const options = vm.$options;
+  const parentVnode = (vm.$vnode = options._parentVnode);
+  const renderContext = parentVnode && parentVnode.context;
+  vm.$slots = resolveSlots(options._renderChildren, renderContext);
+  vm.$scopedSlots = emptyObject;
+  vm._c = (a, b, c, d) => createElement(vm, a, b, c, d, false);
+  vm.$createElement = (a, b, c, d) => createElement(vm, a, b, c, d, true);
+  const parentData = parentVnode && parentVnode.data;
+}
+
+export function renderMixin(Vue: Class<Component>) {
+  installRenderHelpers(Vue.prototype);
+  Vue.prototype.$nextTick = function (fn: Function) {
+    return nextTick(fn, this);
+  };
+  Vue.prototype._render = function (): VNode {};
+}
+```
+
+`core/instance/render-helpers/index.js`:
+
+```ts
+export function installRenderHelpers(target: any) {
+  target._o = markOnce;
+  target._n = toNumber;
+  target._s = toString;
+  target._l = renderList;
+  target._t = renderSlot;
+  target._q = looseEqual;
+  target._i = looseIndexOf;
+  target._m = renderStatic;
+  target._f = resolveFilter;
+  target._k = checkKeyCodes;
+  target._b = bindObjectProps;
+  target._v = createTextVNode;
+  target._e = createEmptyVNode;
+  target._u = resolveScopedSlots;
+  target._g = bindObjectListeners;
+}
 ```
 
 ### Vue Prototype
