@@ -3093,6 +3093,8 @@ Dispatch updates (set):
 - `watcher.run()`.
 - `watcher.get()`: Get new value and recollect deps.
 
+#### Vue Watcher and Observer
+
 `core/observer/watcher.js`:
 
 - Watcher 的创建顺序为先父后子, 执行顺序 (WatcherQueue) 保持先父后子.
@@ -3343,6 +3345,90 @@ export function popTarget() {
 `core/observer/index.js`:
 
 ```ts
+/**
+ * Observer class that is attached to each observed
+ * object. Once attached, the observer converts the target
+ * object's property keys into getter/setters that
+ * collect dependencies and dispatch updates.
+ */
+export class Observer {
+  value: any;
+  dep: Dep;
+  vmCount: number; // number of vms that have this object as root $data
+
+  constructor(value: any) {
+    this.value = value;
+    this.dep = new Dep();
+    this.vmCount = 0;
+    def(value, '__ob__', this);
+
+    if (Array.isArray(value)) {
+      if (hasProto) {
+        protoAugment(value, arrayMethods);
+      } else {
+        copyAugment(value, arrayMethods, arrayKeys);
+      }
+
+      this.observeArray(value);
+    } else {
+      this.walk(value);
+    }
+  }
+
+  /**
+   * Walk through all properties and convert them into
+   * getter/setters. This method should only be called when
+   * value type is Object.
+   */
+  walk(obj: Object) {
+    const keys = Object.keys(obj);
+
+    for (let i = 0; i < keys.length; i++) {
+      defineReactive(obj, keys[i]);
+    }
+  }
+
+  /**
+   * Observe a list of Array items.
+   */
+  observeArray(items: Array<any>) {
+    for (let i = 0, l = items.length; i < l; i++) {
+      observe(items[i]);
+    }
+  }
+}
+
+/**
+ * Attempt to create an observer instance for a value,
+ * returns the new observer if successfully observed,
+ * or the existing observer if the value already has one.
+ */
+export function observe(value: any, asRootData: ?boolean): Observer | void {
+  if (!isObject(value) || value instanceof VNode) {
+    return;
+  }
+
+  let ob: Observer | void;
+
+  if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
+    ob = value.__ob__;
+  } else if (
+    shouldObserve &&
+    !isServerRendering() &&
+    (Array.isArray(value) || isPlainObject(value)) &&
+    Object.isExtensible(value) &&
+    !value._isVue
+  ) {
+    ob = new Observer(value);
+  }
+
+  if (asRootData && ob) {
+    ob.vmCount++;
+  }
+
+  return ob;
+}
+
 /**
  * Define a reactive property on an Object.
  */
