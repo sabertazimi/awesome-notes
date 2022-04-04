@@ -68,6 +68,7 @@ tags: [Web, Framework, Library]
 
 ### Admin and Dashboard UI Framework
 
+- [AntdPro: Out-of-box UI Solution for Enterprise Applications](https://github.com/ant-design/ant-design-pro)
 - [Refine: React-based Framework for Building Internal Tools](https://github.com/pankod/refine)
 - [Vue Admin UI](https://github.com/epicmaxco/vuestic-admin)
 
