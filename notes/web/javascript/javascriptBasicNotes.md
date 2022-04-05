@@ -1641,22 +1641,21 @@ obj.foo(); // `this` in `inner` function refer to `obj`
 func(); // `this` in `inner` function refer to `window`
 ```
 
-### prototype
+### Function Prototype
 
-- **实例化对象没有 prototype 属性**
-- 每个函数都有 prototype 属性
-- prototype 属性 指向 函数的原型对象 (由 js 引擎自动创建)
-- 每个函数的 `__proto__` 都指向 `Function.prototype`
+- **实例化对象没有 prototype 属性**.
+- 每个函数都有 `prototype` 属性.
+- `prototype` 属性指向函数的原型对象 (由 JS 引擎自动创建).
+- 每个函数的 `__proto__` 都指向 `Function.prototype`.
 
-### arguments
+### Function Arguments
 
-- 不是数组,但有 length 属性(实参个数)
-- Array.prototype/[].func.apply(arguments, ...);
+- 不是数组, 但有 length 属性 (实参个数).
 
 #### Arguments Callee
 
-- 引用 arguments 所属 function, 可以利用 callee 实现匿名递归函数
-- arguments.callee.length: 形参个数
+- 引用 arguments 所属 function, 可以利用 callee 实现匿名递归函数.
+- arguments.callee.length: 形参个数.
 
 ```ts
 try {
@@ -1809,13 +1808,13 @@ const findNodes = function (callbackObj, callback) {
 };
 ```
 
-### 自定义函数/惰性函数定义
+### Lazy Function Definition
 
-(Self-Defining Function)/(Lazy Function Definition)
+Lazy Function Definition (Self-Defining Function):
 
-- 第一次执行时,进行初始化并重新定义函数变量
-- 第二次执行时,不再进行初始化(函数被重定义至真正函数)
-- 第一次执行为 promise, 将重复使用的部分进行初始化，之后的调用不再浪费新空间，提高代码效率
+- 第一次执行时,进行初始化并重新定义函数变量.
+- 第二次执行时,不再进行初始化(函数被重定义至真正函数).
+- 第一次执行为 promise, 将重复使用的部分进行初始化，之后的调用不再浪费新空间，**提升性能**.
 
 ```ts
 // definition
