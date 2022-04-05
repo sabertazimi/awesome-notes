@@ -4093,6 +4093,54 @@ function createComputedGetter(key) {
 }
 ```
 
+Legacy `Vuex` rely on `Computed Props`,
+see [`Store` constructor](https://github.com/vuejs/vuex/blob/3.x/src/store.js#L281):
+
+```ts
+function resetStoreVM(store, state, hot) {
+  const oldVm = store._vm;
+  store.getters = {};
+  store._makeLocalGettersCache = Object.create(null);
+  const wrappedGetters = store._wrappedGetters;
+  const computed = {};
+
+  forEachValue(wrappedGetters, (fn, key) => {
+    computed[key] = partial(fn, store);
+    Object.defineProperty(store.getters, key, {
+      get: () => store._vm[key],
+      enumerable: true,
+    });
+  });
+
+  // Use a `Vue` instance to store the state tree.
+  const silent = Vue.config.silent;
+  Vue.config.silent = true;
+  store._vm = new Vue({
+    data() {
+      return {
+        $$state: state,
+      };
+    },
+    computed,
+  });
+  Vue.config.silent = silent;
+
+  if (store.strict) {
+    enableStrictMode(store);
+  }
+
+  if (oldVm) {
+    if (hot) {
+      store._withCommit(() => {
+        oldVm._data.$$state = null;
+      });
+    }
+
+    Vue.nextTick(() => oldVm.$destroy());
+  }
+}
+```
+
 #### Vue Router Watcher
 
 - `<route-link>` clicked.
