@@ -1779,7 +1779,7 @@ console.log(peekachu.toString());
 ### Command Pattern
 
 需要向某些对象发送请求:
-  
+
 - 不清楚请求的接收者 (多个对象中的某个随机对象).
 - 不清楚请求具体操作.
 
@@ -1987,7 +1987,10 @@ Cursor.prototype = {
 :::tip Iterator Use Case
 
 - Collection data structure.
-- 遍历对象.
+- 遍历对象:
+  - 顺序迭代器.
+  - 逆序迭代器.
+  - 可中止迭代器.
 - Generator.
 
 :::
@@ -2037,6 +2040,44 @@ class Stuff {
 const stuff = new Stuff();
 for (const item of stuff) console.log(`${item}`);
 for (const item of stuff.backwards) console.log(`${item}`);
+```
+
+Implement polyfill with iterator:
+
+```ts
+const activeXUploader = () => {
+  try {
+    return new ActiveXObject('ActiveX.Upload'); // IE 上传控件.
+  } catch (e) {
+    return false;
+  }
+};
+
+const flashUploader = () => {
+  if (supportFlash()) {
+    const str = '<object type="application/x-shockwave-flash"></object>';
+    return $(str).appendTo($('body'));
+  }
+
+  return false;
+};
+
+const formUploader = () => {
+  const str = '<input name="file" type="file" class="ui-file"/>'; // 表单上传控件.
+  return $(str).appendTo($('body'));
+};
+
+const upload = (...uploaderList) => {
+  for (const uploader of uploaderList) {
+    const uploadResult = uploader();
+    if (uploadResult !== false) return uploadResult;
+  }
+};
+
+const result = upload([activeXUploader, flashUploader, formUploader]);
+const result = upload([activeXUploader, flashUploader]);
+const result = upload([activeXUploader, formUploader]);
+const result = upload([flashUploader, formUploader]);
 ```
 
 ### Mediator Pattern
