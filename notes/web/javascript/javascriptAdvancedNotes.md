@@ -3494,15 +3494,17 @@ read css -> write css (re-layout/paint/composite)
 read css -> write css (only re-layout/paint/composite once).
 :::
 
-### 定时器(防止脚本阻塞)
+### 定时器
 
-JavaScript 　代码与 UI 共享线程
+JavaScript 代码与 UI 共享线程.
 
-setTimeout()/setInterval()
+`setTimeout`/`setInterval`:
 
-- 第二个参数: 不是执行时间, 是加入执行队列时间
-- 若其他位于执行队列中的函数执行时间超过延时，则用户感觉不到延时的存在
-- 模拟有间隙的循环，使得 UI 更新得以进入浏览器线程的执行队列中
+- 第二个参数: 不是执行时间, 是加入执行队列时间.
+- 若其他位于执行队列中的函数执行时间超过延时，则用户感觉不到延时的存在.
+- 模拟有间隙的循环，使得 UI 更新得以进入浏览器线程的执行队列中.
+- 通过 MicroTask/MicroTask 实现时间分片调度器 (React Schduler and Reconciler),
+  使得长任务不阻塞页面操作 (60 FPS).
 
 ```ts
 const button = document.getElementById('myButton');
@@ -3516,7 +3518,7 @@ button.onclick = function () {
 };
 ```
 
-- 分解任务
+分解任务 (Time Slicing):
 
 ```ts
 function saveDocument(id) {
@@ -3556,7 +3558,7 @@ function processArray(items, process, callback) {
 }
 ```
 
-- 批处理任务
+批处理任务:
 
 ```ts
 function timedProcessArray(items, process, callback) {

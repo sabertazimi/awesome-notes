@@ -2105,7 +2105,8 @@ const max = Math.max;
 
 ##### Interval Function
 
-Combine setInterval/setTimeout function with Closure:
+Combine setInterval/setTimeout function with Closure,
+implement **time slicing scheduler**.
 
 ```ts
 // 选择排序: 具有两重循环
