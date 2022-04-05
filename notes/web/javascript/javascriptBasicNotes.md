@@ -839,11 +839,11 @@ function doAction(action) {
 
 ### 对象三大特征
 
-- 原型代理(享元模式): 利用享元模式共享公有属性与通用方法
-- 实例状态(原型克隆): 利用原型克隆拥有各自属性值
-- 封装性(闭包式继承): 利用闭包方法实现属性私有化
+共用方法, 单独属性, 封装细节:
 
-即共用方法,单独属性,封装细节
+- 原型代理 (享元模式): 利用享元模式共享公有属性与通用方法.
+- 实例状态 (原型克隆): 利用原型克隆拥有各自属性值.
+- 封装性 (闭包式继承): 利用闭包方法实现属性私有化.
 
 ### Prototype Chain
 
@@ -1362,7 +1362,7 @@ const SuperMan = classSim(Man, {
 
 ### 原型链继承
 
-#### 共享 - 原型代理(prototype)
+#### 原型代理
 
 构造函数的原型对象被设置为新实例的原型引用
 
@@ -1402,7 +1402,7 @@ const switchProto = {
 const switchInstance = Object.create(switchProto);
 ```
 
-#### 独立 - 原型克隆
+#### 原型克隆
 
 此时属性与方法不共享，实例对象各自拥有一份拷贝
 
@@ -1444,7 +1444,9 @@ function extendDeep(parent, child) {
 }
 ```
 
-##### 属性混入 - 多重继承
+##### 属性混入
+
+Mixin 实现多重继承:
 
 ```ts
 function mix(...args) {
@@ -1471,7 +1473,9 @@ const cake = mix(
 );
 ```
 
-#### 封装 - 工厂方法(闭包)
+#### 封装
+
+闭包实现工厂方法:
 
 ```ts
 function factory() {
@@ -1479,9 +1483,9 @@ function factory() {
     name: 'MacLeod',
   };
 
-  // 利用闭包，返回私有对象，实现工厂方法
+  // 利用闭包，返回私有对象，实现工厂方法.
   return {
-    get: function get() {
+    get() {
       return highlander;
     },
   };
@@ -1887,10 +1891,12 @@ var addEvent = function (el, type, handle) {
 
 #### 即时函数返回值
 
-var foo = (function () {}());
+```ts
+const foo = (function () {})();
+```
 
 foo 不被赋予 function 值,而被赋予函数执行后的返回值;
-此返回值可设为函数可产生闭包。
+此返回值可设为函数可产生闭包.
 
 ```ts
 const getResult = (function () {
@@ -2184,7 +2190,7 @@ const conf = {
 addPerson(conf);
 ```
 
-##### 返回函数(闭包)
+##### 返回函数 (闭包)
 
 一个函数的返回值设为另一个函数
 

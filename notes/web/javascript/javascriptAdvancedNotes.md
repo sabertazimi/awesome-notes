@@ -2400,12 +2400,12 @@ Closure is a function that remembers
 the variables from the place where it is defined (lexical scope),
 regardless of where it is executed later:
 
-- 函数外部不可对函数内部进行赋值或引用
-- 函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部, 即内部引用外部)
-- 特权性质: 从外部通过闭包方法访问内部(函数作用域)局部变量 (private getter)
+- 函数外部不可对函数内部进行赋值或引用.
+- 函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部, 即内部引用外部).
+- 特权性质: 从外部通过闭包方法访问内部(函数作用域)局部变量 (private getter).
 - Local Scope -> Outer Functions Scope -> Global Scope.
-- Closure Performance: avoid unnecessary closure creation.
-- The stale closure captures variables that have outdated values.
+- Closure performance: avoid unnecessary closure creation (GC).
+- Stale closure captures variables that have outdated values (memory leak).
 
 ```ts
 // global scope
@@ -2455,7 +2455,7 @@ MyObject.prototype.getMessage = function () {
 
 #### 闭包函数的结构
 
-- 优先级: this > 局部变量 > 形参 > arguments > 函数名
+- 优先级: this > 局部变量 > 形参 > arguments > 函数名.
 - `innerFunc()` has access to `outerVar` from its lexical scope,
   even being **executed outside of its lexical scope**.
 
