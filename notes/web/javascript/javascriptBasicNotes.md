@@ -3603,15 +3603,22 @@ codePointLength(s); // 2
 
 ### 反向引用
 
-位置编号 - 左括号的顺序
+位置编号 - 左括号的顺序:
+
+- `\1 \2 \3`: 第 n 个子表达式匹配的结果字符.
+- `$1 $2 $3`: 第 n 个子表达式匹配的结果字符.
+- 反向引用可以解决正则表达式回溯失控的问题 (ReDoS).
 
 ```ts
-// eslint-disable-next-line no-useless-backreference
-const regExp = /((<\/?\w+>.*\2))/g;
+const regExp = /((<\/?\w+>.*)\2)/g;
 ```
 
-- `\1 \2 \3`: 第 n 个子表达式匹配的结果字符
-- `$1 $2 $3`: 第 n 个子表达式匹配的结果字符
+```ts
+const text = 'ooo111ooo222ooo333ooo123';
+const regExp = /(\d)\1\1/g;
+const result = text.match(regExp);
+console.log(result); // [111, 222, 333]
+```
 
 ### RegExp 静态属性
 
