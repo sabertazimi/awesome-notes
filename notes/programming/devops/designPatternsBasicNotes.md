@@ -2693,6 +2693,10 @@ const getActivityPrice = (type, price) => activity.get(type)(price);
 activity.set('newcomer', price => price * 0.7);
 ```
 
+```ts
+const errorMsg = rules[rule](element, limits);
+```
+
 ### Template Method Pattern
 
 Abstract superclass defines the skeleton of an operation
