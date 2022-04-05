@@ -1049,10 +1049,12 @@ const KeepAlive = defineComponent({
     const vnode: VNode = getFirstComponentChild(slot);
     const componentOptions: ?VNodeComponentOptions =
       vnode && vnode.componentOptions;
+
     if (componentOptions) {
       // check pattern
       const name: ?string = getComponentName(componentOptions);
       const { include, exclude } = this;
+
       if (
         // not included
         (include && (!name || !matches(include, name))) ||
@@ -1070,6 +1072,7 @@ const KeepAlive = defineComponent({
             componentOptions.Ctor.cid +
             (componentOptions.tag ? `::${componentOptions.tag}` : '')
           : vnode.key;
+
       if (cache[key]) {
         vnode.componentInstance = cache[key].componentInstance;
         // make current key freshest
@@ -1078,6 +1081,7 @@ const KeepAlive = defineComponent({
       } else {
         cache[key] = vnode;
         keys.push(key);
+
         // prune oldest entry
         if (this.max && keys.length > parseInt(this.max)) {
           pruneCacheEntry(cache, keys[0], keys, this._vnode);
@@ -1086,6 +1090,7 @@ const KeepAlive = defineComponent({
 
       vnode.data.keepAlive = true;
     }
+
     return vnode || (slot && slot[0]);
   },
 });
