@@ -4131,10 +4131,10 @@ Google Core Web Vitals:
 不同的页面操作/页面打开方式/浏览器环境都会对我们页面加载的性能会有影响,
 需要上报这些维度的数据, 以便深入性能分析:
 
-- 当前页面是否可见
-- 页面加载方式: 直接打开/刷新打开/前进后退打开
-- 是否启用 HTTP2
-- 是否启用 Service Worker
+- 当前页面是否可见.
+- 页面加载方式: 直接打开/刷新打开/前进后退打开.
+- 是否启用 HTTP2.
+- 是否启用 Service Worker.
 
 #### Monitoring Report Performance
 
@@ -6294,6 +6294,7 @@ self.addEventListener('install', e => {
 
 ### PWA Tutorials
 
+- [Offline Cookbook](https://web.dev/offline-cookbook)
 - [Extensive Guide](https://www.smashingmagazine.com/2018/11/guide-pwa-progressive-web-applications)
 - [Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers).
 
