@@ -84,7 +84,7 @@ and prefer `v-if` if the condition is unlikely to change at runtime.
   <form @submit.prevent></form>
 
   <!-- 添加事件监听器时使用事件捕获模式 -->
-  <!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 -->
+  <!-- 即内部元素触发的事件先在此处理, 然后才交由内部元素进行处理 -->
   <div @click.capture="doThis">...</div>
 
   <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
@@ -1874,7 +1874,7 @@ Vue.options = {
     // TransitionGroup
   },
   directives: Object.create(null),
-  // 在 runtime/index.js 文件中，为 directives 添加了两个平台化的指令 model 和 show
+  // 在 runtime/index.js 文件中, 为 directives 添加了两个平台化的指令 model 和 show
   // directives:{
   // model,
   // show
@@ -2106,7 +2106,7 @@ const vm: Component = this;
 // Vue.prototype._init: core/instance/init.js
 vm._uid = uid++; // 每个Vue实例都拥有一个唯一的 id
 vm._isVue = true; // 这个表示用于避免Vue实例对象被观测(observed)
-vm.$options = options; // 当前 Vue 实例的初始化选项，注意：这是经过 mergeOptions() 后的
+vm.$options = options; // 当前 Vue 实例的初始化选项, 注意: 这是经过 mergeOptions() 后的
 vm._renderProxy = vm; // 渲染函数作用域代理
 vm._self = vm; // 实例本身
 
@@ -2612,16 +2612,16 @@ vm.$options = {
 
 `mergeOptions` (`core/util/options.js`):
 
-- 对于 el、propsData 选项使用默认的合并策略 defaultStart.
-- 对于 data 选项，使用 mergeDataOrFn 函数进行处理，最终结果是 data 选项将变成一个函数，且该函数的执行结果为真正的数据对象.
-- 对于 生命周期钩子 选项，将合并成数组，使得父子选项中的钩子函数都能够被执行.
-- 对于 directives、filters 以及 components 等资源选项，
-  父子选项将以原型链的形式被处理，正是因为这样我们才能够在任何地方都使用内置组件、指令等.
-- 对于 watch 选项的合并处理，类似于生命周期钩子，如果父子选项都有相同的观测字段，将被合并为数组，这样观察者都将被执行.
-- 对于 props、methods、inject、computed 选项，父选项始终可用，但是子选项会覆盖同名的父选项字段.
-- 对于 provide 选项，其合并策略使用与 data 选项相同的 mergeDataOrFn 函数.
-- 最后，以上没有提及到的选项都将使默认选项 defaultStart.
-- 最最后，默认合并策略函数 defaultStart 的策略是：只要子选项不是 undefined 就使用子选项，否则使用父选项.
+- 对于 `el`/`propsData` 选项使用默认的合并策略 `defaultStrategy`.
+- 对于 `data` 选项, 使用 `mergeDataOrFn` 函数进行处理, 最终结果是 `data` 选项将变成一个函数, 且该函数的执行结果为真正的数据对象.
+- 对于 生命周期钩子 选项, 将合并成数组, 使得父子选项中的钩子函数都能够被执行.
+- 对于 `directives`/`filters` 以及 `components` 等资源选项,
+  父子选项将以原型链的形式被处理, 正是因为这样我们才能够在任何地方都使用内置组件或指令等.
+- 对于 `watch` 选项的合并处理, 类似于生命周期钩子, 如果父子选项都有相同的观测字段, 将被合并为数组, 这样观察者都将被执行.
+- 对于 `props`/`methods`/`inject`/`computed` 选项, 父选项始终可用, 但是子选项会覆盖同名的父选项字段.
+- 对于 `provide` 选项, 其合并策略使用与 `data` 选项相同的 `mergeDataOrFn` 函数.
+- 最后, 以上没有提及到的选项都将使默认选项 `defaultStrategy`.
+- 最最后, 默认合并策略函数 `defaultStrategy` 的策略是: 只要子选项不是 `undefined` 就使用子选项, 否则使用父选项.
 
 ```ts
 /**
@@ -2817,7 +2817,7 @@ export function mountComponent(
 
 `mounted` in `core/vdom/patch.js`/`core/vdom/create-component.js`:
 
-- 对于同步渲染的子组件，`mounted` 执行顺序为**先子后父**.
+- 对于同步渲染的子组件, `mounted` 执行顺序为**先子后父**.
 
 ```ts
 // core/vdom/patch.js:
@@ -2947,29 +2947,29 @@ Vue.prototype.$destroy = function () {
 // 1. Basic async component:
 Vue.component('AsyncExample', function (resolve, reject) {
   // 这个特殊的 require 语法告诉 webpack
-  // 自动将编译后的代码分割成不同的块，
-  // 这些块将通过 Ajax 请求自动下载。
+  // 自动将编译后的代码分割成不同的块,
+  // 这些块将通过 Ajax 请求自动下载.
   require(['./my-async-component'], resolve);
 });
 
 // 2. Promise async component:
 Vue.component(
   'AsyncWebpackExample',
-  // 该 `import` 函数返回一个 `Promise` 对象。
+  // 该 `import` 函数返回一个 `Promise` 对象.
   () => import('./my-async-component')
 );
 
 // 3. Advanced async component:
 const AsyncComp = () => ({
-  // 需要加载的组件。应当是一个 Promise
+  // 需要加载的组件, 应当是一个 Promise.
   component: import('./MyComp.vue'),
-  // 加载中应当渲染的组件
+  // 加载中应当渲染的组件.
   loading: LoadingComp,
-  // 出错时渲染的组件
+  // 出错时渲染的组件.
   error: ErrorComp,
-  // 渲染加载中组件前的等待时间。默认：200ms。
+  // 渲染加载中组件前的等待时间, 默认: 200ms.
   delay: 200,
-  // 最长等待时间。超出此时间则渲染错误组件。默认：Infinity
+  // 最长等待时间, 超出此时间则渲染错误组件, 默认: Infinity.
   timeout: 3000,
 });
 Vue.component('AsyncExample', AsyncComp);
@@ -2981,7 +2981,7 @@ Vue.component('AsyncExample', AsyncComp);
   - 高级异步组件实现了 loading/resolve/reject/timeout 4 种状态.
 - 异步组件实现的本质是 2 次渲染:
   - 第一次渲染生成一个注释节点/`<LoadingComponent>`.
-  - 当异步获取组件成功后，通过 `forceRender` 强制重新渲染.
+  - 当异步获取组件成功后, 通过 `forceRender` 强制重新渲染.
 
 ```ts
 import {
@@ -3177,7 +3177,7 @@ Dispatch updates (set):
 
 - Watcher 的创建顺序为先父后子, 执行顺序 (WatcherQueue) 保持先父后子.
 - 用户自定义 Watcher 要优先于 RenderWatcher 执行 (先创建先执行).
-- 若一个组件在父组件的 Watcher 执行期间被销毁，则它对应的 Watcher 执行都可以被跳过.
+- 若一个组件在父组件的 Watcher 执行期间被销毁, 则它对应的 Watcher 执行都可以被跳过.
 - `RenderWatcher` (built-in Watcher)
   `updateComponent = () => vm._update(vm._render(), hydrating)`:
   When reactive props and data changed,
@@ -3842,7 +3842,7 @@ function isStatic(node: ASTNode): boolean {
 
 ### Vue Two-Way Data Binding
 
-View-Model 主要做了两件微小的事情：
+`View-Model`: 主要做了两件微小的事情:
 
 - 从 M 到 V 的映射 (Data Binding), 这样可以大量节省人肉来 update View 的代码:
   通过 Proxy 代理 Model, 每当调用 `Model[property].set` 时同时调用 `render`
