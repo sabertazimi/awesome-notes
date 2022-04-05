@@ -2577,7 +2577,11 @@ button.off();
 
 ### Strategy Pattern
 
-改变对象的内核/算法, 一个 Strategy 对象封装一个算法.
+- 改变对象的内核/算法, 一个 Strategy 对象封装一个算法.
+- 利用组合 + 委托 + 多态, 避免复杂的分支语句.
+- 将单个策略进行抽象封装:
+  - 解耦.
+  - 复用.
 
 :::tip Strategy Use Case
 
