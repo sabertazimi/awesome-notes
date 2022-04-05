@@ -949,12 +949,12 @@ console.log(obj[[proto]] === Object.prototype); // true
 
 ##### New Constructor
 
-new 构造函数作用原理如下:
+`new` 构造函数作用原理如下:
 
 - 形成原型链: 隐式原型指向构造函数的原型对象 `obj.__proto__ = constructor.prototype`
-- 构造函数对象(Constructor)与原型对象(Prototype)之间形成闭环:
-  - Constructor.prototype = Prototype
-  - Prototype.constructor = Constructor
+- 构造函数对象 (Constructor) 与原型对象 (Prototype) 之间形成闭环:
+  - `Constructor.prototype = Prototype`.
+  - `Prototype.constructor = Constructor`.
 
 ```ts
 function newInstance(constructor, ...args) {
@@ -1006,18 +1006,27 @@ Object.create = function (o) {
 
 #### Constructor Return Value
 
-- 返回 this 或 user-defined literal object
-- 当返回值为**基本类型**时,仍然可得到 this 指针指向的原有对象
+- 返回 `this` 或 user-defined literal object.
+- 当返回值为**基本类型**时, 仍然可得到 `this` 指针指向的原有对象.
 
 ```ts
 const ObjectMaker = function () {
   this.name = 'This is it';
   // user-defined literal object
-  // 直接忽略this.name
+  // 直接忽略 this.name.
   const that = {};
   that.name = "And that's that";
   return that;
 };
+```
+
+```ts
+const MyClass = function () {
+  this.name = 'sven';
+  return 'anne'; // 返回 string.
+};
+const obj = new MyClass();
+console.log(obj.name); // 输出: sven .
 ```
 
 #### Instance Of Constructor
