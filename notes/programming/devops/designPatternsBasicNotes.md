@@ -1587,8 +1587,12 @@ function ComputerCollection() {
 
 - 缓存函数.
 - 缓存服务器: React Query (cache data).
+- 写时拷贝代理: 内存页, DLL.
+- 智能引用代理: C++ smart pointer, Rust `RefCell`, Linux file descriptor.
 - 图片预加载.
-- 处理跨域.
+- 跨域处理.
+- 防火墙代理.
+- 路由保护代理.
 - Interceptor/Transformer/Guard (AOP).
 
 :::
