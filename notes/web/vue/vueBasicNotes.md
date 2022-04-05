@@ -1009,8 +1009,10 @@ export default {
 - `max`: 缓存大小.
 - 组件一旦被 `<keep-alive>` 缓存,
   再次渲染的时候不会执行 `created`/`mounted` 等钩子函数 (`core/vdom/create-component.js`).
+  但会执行 `activated`/`deactivated` 钩子函数 (`core/vdom/create-component.js`/`core/instance/lifecycle.js`).
 
 ```ts
+// core/components/keep-alive.js
 const KeepAlive = defineComponent({
   name: 'KeepAlive',
   abstract: true,
