@@ -980,10 +980,10 @@ export default {
 
 #### Transition Component
 
+`platforms/web/runtime/component/transition.js`,
 `render` 函数获取一些数据, 并且返回渲染的 VNode:
 
 ```ts
-// platforms/web/runtime/component/transition.js
 const Transition = defineComponent({
   name: 'Transition',
   props: transitionProps,
