@@ -1731,17 +1731,21 @@ console.log(peekachu.toString());
 
 ### Command Pattern
 
-有时候需要向某些对象发送请求，但是并不知道请求的接收者是谁 (多个对象中的某个随机对象)，也不知道被请求的操作是什么.
+需要向某些对象发送请求:
+  
+- 不清楚请求的接收者 (多个对象中的某个随机对象).
+- 不清楚请求具体操作.
+
 此时希望用一种松耦合的方式来设计程序，使得请求发送者和请求接收者能够消除彼此的耦合关系
 
-- 将方法/动作封装成对象, 使得外部通过唯一方法 execute/run 调用内部方法/动作
-- 客户创建命令；调用者执行该命令；接收者在命令执行时执行相应操作
-- 客户通常被包装为一个对象，但是这不是必然的
-- 调用者接过命令并将其保存下来, 它会在某个时候调用该命令对象的 execute 方法
-- 调用者进行 `commandObject.execute` 这种调用时，
-  它所调用的方法将转而以 `receiver.action()` 这种形式调用恰当的方法
+- 将方法/动作封装成对象, 使得外部通过唯一方法 execute/run 调用内部方法/动作.
+- 客户创建命令；调用者执行该命令；接收者在命令执行时执行相应操作.
+- 客户通常被包装为一个对象.
+- 调用者接过命令并将其保存下来, 它会在某个时候调用该命令对象的 execute 方法.
+- 调用者进行 `commandObject.execute` 调用时，
+  它所调用的方法将转而以 `receiver.action()` 这种形式调用恰当的方法.
 
-client and receiver
+`client` and `receiver`:
 
 ```ts
 const SimpleCommand = function (receiving) {
@@ -1787,7 +1791,7 @@ Command pattern in UI development, bind command to UI components:
 
 - Executor: UI components.
 - Client and receiver: background tasks or other UI components.
-- Executor -> client: command.execute() -> receiver: receiver.action().
+- Executor -> Client `command.execute()` -> Receiver `receiver.action()`.
 
 e.g click `button` -> refresh `menu`
 
