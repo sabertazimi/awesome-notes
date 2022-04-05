@@ -3503,8 +3503,9 @@ JavaScript 代码与 UI 共享线程.
 - 第二个参数: 不是执行时间, 是加入执行队列时间.
 - 若其他位于执行队列中的函数执行时间超过延时，则用户感觉不到延时的存在.
 - 模拟有间隙的循环，使得 UI 更新得以进入浏览器线程的执行队列中.
-- 通过 MicroTask/MicroTask 实现时间分片调度器 (React Schduler and Reconciler),
-  使得长任务不阻塞页面操作 (60 FPS).
+- 通过 MicroTask/MicroTask 实现时间分片调度器,
+  使得长任务不阻塞页面操作 (60 FPS):
+  e.g React Scheduler and Reconciler, Vue `nextTick` API.
 
 ```ts
 const button = document.getElementById('myButton');
