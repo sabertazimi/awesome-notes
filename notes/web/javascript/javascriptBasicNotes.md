@@ -859,10 +859,11 @@ function doAction(action) {
 - 先有`Object.prototype`(原型链顶端), `Function.prototype` 继承`Object.prototype`而产生, 最后`Object/Function/Array/其它构造函数`继承`Function.prototype`而产生
 
 :::tip Prototype Chain
-`Object`---`__proto__`
---> `Function.prototype`---`__proto__`
---> `Object.prototype`---`__proto__`
---> `null`
+
+- `Object.__proto__` -> `Function.prototype`.
+- `Function.prototype.__proto__` -> `Object.prototype`.
+- `Object.prototype.__proto__` -> `null`.
+
 :::
 
 `__proto__`:
