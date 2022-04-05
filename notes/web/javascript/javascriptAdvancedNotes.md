@@ -2482,14 +2482,14 @@ myInnerFunc();
 - 闭包实现对象缓存.
 
 ```ts
-const createLoginLayer = (function () {
-  let div;
+const createLoginLayer = (function (creator) {
+  let singleton;
 
   return function () {
-    if (!div) div = createDiv();
-    return div;
+    if (!singleton) singleton = creator();
+    return singleton;
   };
-})();
+})(loginCreator);
 ```
 
 ### Partial Application
