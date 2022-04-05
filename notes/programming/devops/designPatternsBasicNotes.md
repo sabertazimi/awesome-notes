@@ -1585,7 +1585,7 @@ function ComputerCollection() {
 - 图片预加载.
 - 缓存服务器.
 - 处理跨域.
-- 拦截器/转换器 (AOP).
+- Interceptor/Transformer/Guard (AOP).
 
 :::
 
