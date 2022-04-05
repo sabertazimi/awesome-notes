@@ -2501,6 +2501,48 @@ export function nextTick(cb?: Function, ctx?: Object) {
 }
 ```
 
+#### Vue Global Mixin API
+
+`core/global-api/mixin.js`:
+
+```ts
+export function initMixin(Vue: GlobalAPI) {
+  Vue.mixin = function (mixin: Object) {
+    this.options = mergeOptions(this.options, mixin);
+    return this;
+  };
+}
+```
+
+#### Vue Global Use API
+
+`core/global-api/use.js`:
+
+```ts
+export function initUse(Vue: GlobalAPI) {
+  Vue.use = function (plugin: Function | Object, ...args: any) {
+    const installedPlugins =
+      this._installedPlugins || (this._installedPlugins = []);
+
+    if (installedPlugins.includes(plugin)) {
+      return this;
+    }
+
+    // Pass `Vue` to plugin install hook.
+    args.unshift(this);
+
+    if (typeof plugin.install === 'function') {
+      plugin.install(...args);
+    } else if (typeof plugin === 'function') {
+      plugin(...args);
+    }
+
+    installedPlugins.push(plugin);
+    return this;
+  };
+}
+```
+
 ### Vue Instance
 
 ```ts
