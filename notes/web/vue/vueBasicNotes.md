@@ -1648,9 +1648,6 @@ import { lifecycleMixin } from './lifecycle';
 
 // 定义 Vue 构造函数
 function Vue(options) {
-  if (process.env.NODE_ENV !== 'production' && !(this instanceof Vue)) {
-    warn('Vue is a constructor and should be called with the `new` keyword');
-  }
   this._init(options);
 }
 
@@ -1881,10 +1878,7 @@ Vue.prototype.$mount = function (
   el = el && query(el);
 
   if (el === document.body || el === document.documentElement) {
-    process.env.NODE_ENV !== 'production' &&
-      warn(
-        `Do not mount Vue to <html> or <body> - mount to normal elements instead.`
-      );
+    // Do not mount Vue to <html> or <body>
     return this;
   }
 
@@ -1896,20 +1890,11 @@ Vue.prototype.$mount = function (
       if (typeof template === 'string') {
         if (template.charAt(0) === '#') {
           template = idToTemplate(template);
-          if (process.env.NODE_ENV !== 'production' && !template) {
-            warn(
-              `Template element not found or is empty: ${options.template}`,
-              this
-            );
-          }
         }
       } else if (template.nodeType) {
         template = template.innerHTML;
       } else {
-        if (process.env.NODE_ENV !== 'production') {
-          warn(`invalid template option: ${template}`, this);
-        }
-
+        // Invalid template option
         return this;
       }
     } else if (el) {
@@ -2722,10 +2707,6 @@ export function mergeOptions(
   child: Object,
   vm?: Component
 ): Object {
-  if (process.env.NODE_ENV !== 'production') {
-    checkComponents(child);
-  }
-
   if (typeof child === 'function') {
     child = child.options;
   }
@@ -3339,8 +3320,7 @@ export default class Watcher {
     this.newDeps = [];
     this.depIds = new Set();
     this.newDepIds = new Set();
-    this.expression =
-      process.env.NODE_ENV !== 'production' ? expOrFn.toString() : '';
+    this.expression = expOrFn.toString();
 
     // parse expression for getter
     if (typeof expOrFn === 'function') {
@@ -3663,11 +3643,6 @@ export function defineReactive(
       /* eslint-disable no-self-compare */
       if (newVal === value || (newVal !== newVal && value !== value)) {
         return;
-      }
-
-      /* eslint-enable no-self-compare */
-      if (process.env.NODE_ENV !== 'production' && customSetter) {
-        customSetter();
       }
 
       if (setter) {
