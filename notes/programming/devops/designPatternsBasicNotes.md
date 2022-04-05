@@ -1585,7 +1585,7 @@ function ComputerCollection() {
 - 图片预加载.
 - 缓存服务器.
 - 处理跨域.
-- 拦截器 (AOP).
+- 拦截器/转换器 (AOP).
 
 :::
 
@@ -1679,7 +1679,7 @@ reactive.name = 'bob'; // 'updating UI...'
   - Redux.
   - Express/Koa.
   - NestJS.
-- AOP programming.
+- AOP: Aspect Oriented Programming.
 
 :::
 
