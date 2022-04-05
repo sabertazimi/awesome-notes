@@ -975,7 +975,13 @@ car2.SetName('BMW');
 
 ### Singleton Pattern
 
-> Use Case: Redux, VueX 等状态管理工具, window 对象, 全局缓存等.
+:::tip Singleton Use Case
+
+- Redux/VueX global store.
+- Window 对象.
+- 全局缓存.
+
+:::
 
 #### Class Singleton Pattern
 
@@ -1574,7 +1580,14 @@ function ComputerCollection() {
 临时存储原对象方法调用产生的一系列结果 (新建对象),
 减少重复对象的产生.
 
-> Use Case: 图片预加载, 缓存服务器, 处理跨域, 拦截器等.
+:::tip Proxy Use Case
+
+- 图片预加载.
+- 缓存服务器.
+- 处理跨域.
+- 拦截器 (AOP).
+
+:::
 
 ```ts
 class Percentage {
@@ -1660,7 +1673,15 @@ reactive.name = 'bob'; // 'updating UI...'
 
 一种将请求在一串对象中传递的方式，寻找可以处理这个请求的对象.
 
-> Use Case: Middlewares (Redux, Express, Koa).
+:::tip CoR Use Case
+
+- Middlewares:
+  - Redux.
+  - Express/Koa.
+  - NestJS.
+- AOP programming.
+
+:::
 
 ```ts
 class Creature {
@@ -1950,7 +1971,13 @@ Cursor.prototype = {
 一个 Iterator 对象封装访问和遍历一个聚集对象中的各个构件的方法.
 实现统一遍历接口, 符合单一功能和开放封闭原则.
 
-> Use Case: 遍历对象.
+:::tip Iterator Use Case
+
+- Collection data structure.
+- 遍历对象.
+- Generator.
+
+:::
 
 ```ts
 class Stuff {
@@ -2073,7 +2100,15 @@ doe.say('Hello everyone!');
 - decouple subject and observer:
   each depends on `Abstraction` not `Implementation`.
 
-> Use Case: 解耦, 跨层级通信, 事件绑定.
+:::tip Observer Use Case
+
+- Decouple.
+- 事件绑定.
+- 跨层级通信.
+- Event bus.
+- Message channel.
+
+:::
 
 ```ts
 class Event {
@@ -2544,7 +2579,14 @@ button.off();
 
 改变对象的内核/算法, 一个 Strategy 对象封装一个算法.
 
-> Use Case: 表单验证, 存在大量 if-else 场景, 各种重构等.
+:::tip Strategy Use Case
+
+- 表单验证 (Validator).
+- 动画策略.
+- 存在大量 if-else 场景.
+- 重构代码.
+
+:::
 
 ```ts
 const OutputFormat = Object.freeze({
@@ -2718,7 +2760,12 @@ chess.run();
 
 Separating an algorithm from an object structure on which it operates.
 
-> Use Case: Tree, Compiler (Abstract Syntax Tree).
+:::tip Visitor Use Case
+
+- Tree.
+- Compiler (Abstract Syntax Tree).
+
+:::
 
 ```ts
 class NumberExpression {
