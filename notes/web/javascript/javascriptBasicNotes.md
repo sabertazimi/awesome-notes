@@ -1950,7 +1950,7 @@ const twoSay = bind(two, one.say);
 twoSay('yo'); // "yo, another object"
 ```
 
-### 多态方法
+### Polymorphism Method
 
 ```ts
 const greet = function greet(options, ...rest) {
@@ -1962,15 +1962,17 @@ const greet = function greet(options, ...rest) {
 };
 ```
 
-hasOwnProperty:
+:::tip 多态与面向对象
+多态最根本的作用:
+通过把过程化的条件分支语句转化为对象的多态性,
+从而消除条件分支语句.
 
-- 使用其它对象的`hasOwnProperty`，并将其上下文设置为`foo`
+每个对象的职责，成为该对象的属性与方法,
+被安装在对象内部, 每个对象负责它们自己的行为.
+这些对象可以根据同一个消息, 有条不紊地分别进行各自的工作.
+:::
 
-`({}).hasOwnProperty.call(foo, 'bar'); // true`
-
-- 推荐总是使用`hasOwnProperty`进行`for in`循环
-
-### eval
+### Eval
 
 - 不要使用`eval()`函数
 - 不要使用字符串作参数 new Function();(会调用`eval`函数)
