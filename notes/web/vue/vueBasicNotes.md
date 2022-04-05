@@ -3587,7 +3587,7 @@ function createAsyncPlaceholder(
 }
 ```
 
-### Vue Proxy
+### Vue Legacy Reactivity
 
 [![Reactive](./figures/proxy.png)](https://ustbhuangyi.github.io/vue-analysis/v2/reactive/summary.html)
 
@@ -4033,7 +4033,7 @@ export function defineReactive(
 }
 ```
 
-#### Vue Computed Props and Watchers
+#### Vue Computed Watcher
 
 `core/instance/state.js`:
 
@@ -4092,6 +4092,16 @@ function createComputedGetter(key) {
   };
 }
 ```
+
+#### Vue Router Watcher
+
+- `<route-link>` clicked.
+- `vm.$router.push(location)`/`vm.$router.replace(location)`.
+- `transitionTo(location, onComplete)`.
+  - Call routes guard hooks.
+  - Change `vm._routerRoot._route`.
+  - Call `window.history.pushState`/`window.history.replaceState` in `onComplete`.
+- `vm.$route` trigger `<route-view>` re-rendering.
 
 ## Modern Vue Internals
 
