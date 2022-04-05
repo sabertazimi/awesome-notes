@@ -979,7 +979,10 @@ car2.SetName('BMW');
 
 - Redux/VueX global store.
 - Window 对象.
+- 全局配置.
 - 全局缓存.
+- 线程池.
+- 内存池.
 
 :::
 
