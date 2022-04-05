@@ -2474,6 +2474,24 @@ const myInnerFunc = outerFunc();
 myInnerFunc();
 ```
 
+#### Closure Usage
+
+- 闭包实现封装.
+- 闭包实现私有属性与方法.
+- 闭包实现工厂方法.
+- 闭包实现对象缓存.
+
+```ts
+const createLoginLayer = (function () {
+  let div;
+
+  return function () {
+    if (!div) div = createDiv();
+    return div;
+  };
+})();
+```
+
 ### Partial Application
 
 ```ts

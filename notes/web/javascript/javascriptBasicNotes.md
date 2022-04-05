@@ -1832,8 +1832,7 @@ Lazy Function Definition (Self-Defining Function):
 
 ```ts
 // definition
-// eslint-disable-next-line no-var
-var foo = function () {
+let foo = function () {
   // initialize code;
   const t = new Date();
 
@@ -1852,8 +1851,7 @@ console.log(foo()); // t
 ```
 
 ```ts
-// eslint-disable-next-line no-var
-var addEvent = function (el, type, handle) {
+let addEvent = function (el, type, handle) {
   addEvent = el.addEventListener
     ? function (el, type, handle) {
         el.addEventListener(type, handle, false);

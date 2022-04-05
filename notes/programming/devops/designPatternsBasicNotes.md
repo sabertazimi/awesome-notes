@@ -977,6 +977,8 @@ car2.SetName('BMW');
 
 > Use Case: Redux, VueX 等状态管理工具, window 对象, 全局缓存等.
 
+#### Class Singleton Pattern
+
 ```ts
 class Singleton {
   constructor() {
@@ -990,6 +992,8 @@ class Singleton {
   }
 }
 ```
+
+#### Closure Singleton Pattern
 
 ```ts
 function Universe() {
@@ -1016,6 +1020,17 @@ function Universe() {
 
   return instance;
 }
+```
+
+```ts
+const createLoginLayer = (function () {
+  let div;
+
+  return function () {
+    if (!div) div = createDiv();
+    return div;
+  };
+})();
 ```
 
 ### Adapter Pattern
