@@ -242,7 +242,7 @@ Drag and Drop events:
 
 ### Model Directives
 
-本质为语法糖:
+本质为语法糖 (`v-model = v-bind + v-on`):
 
 ```html
 <input v-model="searchText" />
@@ -257,6 +257,9 @@ Drag and Drop events:
   `value` property and `@change` event.
 - `text`/`textarea`:
   `value` property and `@input` event.
+- Child component:
+  - Default: `value` property and `@input` event.
+  - Use `options.model` on Child component to change default `v-bind` and `v-on`.
 
 ```html
 <input v-model="message" placeholder="edit me" />
@@ -332,6 +335,46 @@ app.component('CustomInput', {
   },
   template: `
     <input v-model="value">
+  `,
+});
+```
+
+`options.model` on Child component:
+
+```ts
+const Child = {
+  template: `
+    <div>
+      <input :value="msg" @input="updateValue" placeholder="edit me">
+    </div>
+  `,
+  props: ['msg'],
+  model: {
+    prop: 'msg',
+    event: 'change',
+  },
+  methods: {
+    updateValue(e) {
+      this.$emit('change', e.target.value);
+    },
+  },
+};
+
+const vm = new Vue({
+  el: '#app',
+  components: {
+    Child,
+  },
+  data() {
+    return {
+      message: '',
+    };
+  },
+  template: `
+    <div>
+      <child v-model="message"></child>
+      <p>Message is: {{ message }}</p>
+    </div>
   `,
 });
 ```
