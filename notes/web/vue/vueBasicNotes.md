@@ -1002,6 +1002,93 @@ export default {
 </template>
 ```
 
+### Keep Alive
+
+- `include`: `string | RegExp | Array<string>`, 匹配的组件会被缓存.
+- `exclude`: `string | RegExp | Array<string>`, 匹配的组件不会被缓存.
+- `max`: 缓存大小.
+- 组件一旦被 `<keep-alive>` 缓存,
+  再次渲染的时候不会执行 `created`/`mounted` 等钩子函数 (`core/vdom/create-component.js`).
+
+```ts
+const KeepAlive = defineComponent({
+  name: 'KeepAlive',
+  abstract: true,
+
+  props: {
+    include: patternTypes,
+    exclude: patternTypes,
+    max: [String, Number],
+  },
+
+  created() {
+    this.cache = Object.create(null);
+    this.keys = [];
+  },
+
+  mounted() {
+    this.$watch('include', val => {
+      pruneCache(this, name => matches(val, name));
+    });
+    this.$watch('exclude', val => {
+      pruneCache(this, name => !matches(val, name));
+    });
+  },
+
+  unmounted() {
+    for (const key in this.cache) {
+      pruneCacheEntry(this.cache, key, this.keys);
+    }
+  },
+
+  render() {
+    // eslint-disable-next-line vue/require-slots-as-functions
+    const slot = this.$slots.default;
+    const vnode: VNode = getFirstComponentChild(slot);
+    const componentOptions: ?VNodeComponentOptions =
+      vnode && vnode.componentOptions;
+    if (componentOptions) {
+      // check pattern
+      const name: ?string = getComponentName(componentOptions);
+      const { include, exclude } = this;
+      if (
+        // not included
+        (include && (!name || !matches(include, name))) ||
+        // excluded
+        (exclude && name && matches(exclude, name))
+      ) {
+        return vnode;
+      }
+
+      const { cache, keys } = this;
+      const key: ?string =
+        vnode.key == null
+          ? // same constructor may get registered as different local components
+            // so cid alone is not enough (#3269)
+            componentOptions.Ctor.cid +
+            (componentOptions.tag ? `::${componentOptions.tag}` : '')
+          : vnode.key;
+      if (cache[key]) {
+        vnode.componentInstance = cache[key].componentInstance;
+        // make current key freshest
+        remove(keys, key);
+        keys.push(key);
+      } else {
+        cache[key] = vnode;
+        keys.push(key);
+        // prune oldest entry
+        if (this.max && keys.length > parseInt(this.max)) {
+          pruneCacheEntry(cache, keys[0], keys, this._vnode);
+        }
+      }
+
+      vnode.data.keepAlive = true;
+    }
+    return vnode || (slot && slot[0]);
+  },
+});
+```
+
 ## Vue Router
 
 - [Composition API Reference](https://next.router.vuejs.org/guide/advanced/composition-api.html)
