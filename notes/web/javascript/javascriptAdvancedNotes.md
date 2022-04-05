@@ -3897,7 +3897,7 @@ function useAnimation() {
 
 #### 位操作
 
-- i%2 => `i&0x1`
+- `i%2` => `i&0x1`.
 - 位掩码
 
 ```ts
