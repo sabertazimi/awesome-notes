@@ -2861,8 +2861,11 @@ const errorMsg = rules[rule](element, limits);
 
 ### Template Method Pattern
 
-Abstract superclass defines the skeleton of an operation
-in terms of a number of high-level steps.
+- Abstract superclass defines the skeleton of an operation
+  in terms of a number of high-level steps.
+- 通过封装变化提高系统扩展性.
+- 符合开放封闭原则.
+- 在 JS 中, 高阶函数可以隐式地实现模板方法模式.
 
 :::tip Template Method Use Case
 
