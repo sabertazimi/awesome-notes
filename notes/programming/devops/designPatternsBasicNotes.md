@@ -641,7 +641,7 @@ Universal Module Definition:
 - Observer (观察者模式): 用于将变化通知给多个类的方式，可以保证类之间的一致性.
 - Strategy (策略): 将算法封装到类中，将选择和实现分离开来.
 - State (状态): 当对象状态改变时，改变对象的行为.
-- Template Method (模板方法): 在一个方法中为某个算法建立一层外壳，将算法的具体步骤交付给子类去做.
+- Template Method (模板方法): 在一个方法中为某个算法建立一层外壳, 将算法的具体步骤交付给子类去做.
 - Visitor (访问者): 为类增加新的操作而不改变类本身.
 
 ### Factory Method Pattern
@@ -2879,8 +2879,13 @@ class Game {
     console.log(`Player ${this.winningPlayer} wins.`);
   }
 
-  start() {}
-  takeTurn() {}
+  start() {
+    throw new Error('Unimplemented `start` method!');
+  }
+
+  takeTurn() {
+    throw new Error('Unimplemented `takeTurn` method!');
+  }
 
   get haveWinner() {
     return this.haveWinner;
