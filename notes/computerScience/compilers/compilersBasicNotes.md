@@ -41,15 +41,15 @@ details:
 - 字母表/符号集: 元素的非空有穷集合
 - 符号串: 字母表中的符号组成的任何有穷序列
 - 固有头/尾: 非空首/尾子串
-- 闭包: Σ\* = Σ0 U Σ1 U ... U Σn ...
-- 正闭包: Σ\* = Σ1 U ... U Σn ...
+- 闭包: `Σ* = Σ0 U Σ1 U ... U Σn ...`.
+- 正闭包: `Σ* = Σ1 U ... U Σn ...`.
 
 ### 文法与语言的形式化表示
 
-- 文法(Grammar) G = (Vn, Vt, P, S) - 非终结符集, 终结符集, 规则/产生式集, 开始符号
-- 语言(Language) L(G) = {x | S -_> x, x <- Vt_} 文法 G 一切句子的集合
+- 文法 (Grammar): `G = (Vn, Vt, P, S)`, 非终结符集, 终结符集, 规则/产生式集, 开始符号.
+- 语言 (Language): `L(G) = {x | S -> x, x <- Vt}` 文法 G 一切句子的集合.
 - 句型: rhs of P, 句子: 不含非终结符的右部
-- 直接推导: v -> w, 闭包推导: v -\*> w, 正闭包推导: v -+> w
+- 直接推导: `v -> w`, 闭包推导: `v -*> w`, 正闭包推导: `v -+> w`.
 
 ### 乔姆斯基文法体系
 
@@ -74,7 +74,7 @@ G = (S, N, T, P):
 
 ##### 简易表示
 
-```c
+```cpp
 Sentence -> Noun Verb Noun
 Noun -> sheep
   | tiger
@@ -86,26 +86,26 @@ Verb -> eat
 
 > S: Sentence, N: Sentence/Verb/Noun, T: sheep/tiger/grass/water/eat/drink
 
-```c
+```cpp
 E -> num
   |id
   |E + E
   |E `*` E
 ```
 
-> S: E, N: E, T: num/id/+/\*
+`S: E`, `N: E`, `T: num/id/+/*`.
 
 ##### 巴科斯范式
 
 Backus-Naur Form:
 
-- ::= : "被定义为"
-- "word" : 字符本身
-- 双引号外的字 : 语法部分
-- 尖括号( < > ) : 必选项(非终结符)
-- 方括号( `[ ]` ) : 0/1
-- 大括号( { } ) : 0/n
-- 竖线( | ) : "OR"
+- `::=`: `被定义为`.
+- `word`: 字符本身.
+- 双引号外的字: 语法部分.
+- 尖括号(`< >`): 必选项(非终结符).
+- 方括号(`[ ]`) : 0/1.
+- 大括号(`{ }`) : 0/n.
+- 竖线(`|`) : `OR`.
 
 ### 正规文法
 
@@ -120,11 +120,11 @@ Backus-Naur Form:
 
 对于给定的字符集 C:
 
-- 空串 "\0" 是正则表达式
-- 任意 char <- C 是正则表达式
-- 若 M, N 是正则表达式, 则 M|N = {M, N},
-  MN = {mn|m <- M, n <- N},
-  M\* = {"\0", M, MM, MMM, ...} (选择/连接/闭包)也是正则表达式
+- 空串 `"\0"` 是正则表达式.
+- 任意 `char <- C` 是正则表达式.
+- 若 `M`, `N` 是正则表达式, 则 `M|N = {M, N}`,
+  `MN = {mn|m <- M, n <- N}`,
+  `M* = {"\0", M, MM, MMM, ...}` (选择/连接/闭包) 也是正则表达式.
 
 #### 形式表示
 
@@ -175,8 +175,8 @@ const float = /(+|-)?(0|[1-9][0-9]*|)?\.[0-9]+/g;
 
 #### 句型分析
 
-- 短语: 若 S -\*> Aβ, A -+> α, 则称 α 是句型 αβ 相对于非终结符 A 的短语
-- 直接短语: S -\*> Aβ, A -> α
+- 短语: 若 `S -*> Aβ, A -+> α`, 则称 α 是句型 αβ 相对于非终结符 A 的短语
+- 直接短语: `S -*> Aβ, A -> α`.
 - 一个右句型的直接短语称为该句型的句柄(用于**自下而上**的归约分析)
 - 最左归约: 归约最左的句柄, 最右归约: 归约最右的句柄
 
@@ -192,7 +192,7 @@ L(syntax) = semantic: 多个语法对应一个语义(不同形式的表达式对
 
 ##### 文法重写
 
-```c
+```cpp
 E -> E + T
   |T
 T -> T * F
@@ -212,7 +212,7 @@ F -> num
 - 有害规则: 使文法产生二义性的规则
 - 多余规则: 不可达/不可终止的规则
 - 2 型文法的 ε 规则: 当语言中不含有 ε 符号串, 则一定存在终结符集不含有 ε 的等价文法(代入法消除 ε)
-- 保证非终结符 A 的有效性: S -\*> αAβ, A -+> t
+- 保证非终结符 A 的有效性: `S -*> αAβ, A -+> t`.
 
 ## Lexical Analysis
 
@@ -223,7 +223,7 @@ F -> num
 
 #### 转移图算法
 
-```c
+```cpp
 token nextToken(void) {
   char c = getChar();
   switch(c) {
@@ -261,7 +261,7 @@ token nextToken(void) {
 - 根据 完美哈希算法(无冲突哈希函数) , 建立所有关键字对应的关键字完美哈希表
 - 读入有效标识符(字符串型)后, 查询关键字哈希表, 检查当前标识符是否为关键字
 
-```c
+```cpp
 #define KEYWORD_MAX_LEN 10
 
 hash_one(char *str, int len) {
@@ -276,7 +276,7 @@ hash_one(char *str, int len) {
 }
 ```
 
-```c
+```cpp
 #define KEYWORD_HASH_SEED 131
 
 hash_two(char *str, int len) {
@@ -301,7 +301,7 @@ hash_two(char *str, int len) {
 
 M = (AlphaSet/InputSet, StateSet, currentState, FiniteStateSet, transferFunction)
 
-```c
+```cpp
 A = {a, b}, SS = {0, 1, 2}, cS = 0, FS = {2},
 transferFunction = {
   (cS0, a) -> cS1, (cS0, b) -> cS0,
@@ -469,7 +469,7 @@ bool top_down_parsing(tokens[]) {
 
 利用前看符号避免回溯
 
-```c
+```cpp
 Sentence -> Noun Verb Noun
 Noun -> sheep
   | tiger
@@ -483,7 +483,7 @@ Verb -> eat
 > 不向前看,则先推导 N, 再推导 n, 但 n 不一定匹配 tiger, 则需进行回溯;
 > 向前看一个字符, 直接推导 N --> n, 同时直接找寻匹配 tiger 的终结符
 
-```c
+```cpp
 S -> N V N
 N -> (sheep)tiger
 V -> eat
@@ -524,7 +524,7 @@ parse_V(token) {
 - tip one: use save pointer to implement roll back
 - tip two: use logical OR expression to replace nested if-else structure
 
-```c
+```cpp
 bool term(TOKEN tok) {
     return *next++ == tok;
 }
@@ -624,9 +624,9 @@ bool ll1_parsing(tokens[]) {
 
 ##### nullable sets
 
-- 存在规则: X -> epsilon
-- 或者 : X -> Y1Y2...Yn, 且存在规则 Y1 -> epsilon, ..., Yn -> epsilon
-- 即 : X -\*> epsilon (epsilon <- first(X))
+- 存在规则: `X -> epsilon`.
+- 或者: `X -> Y1Y2...Yn`, 且存在规则 `Y1 -> epsilon, ..., Yn -> epsilon`.
+- 即 : `X -*> epsilon` (epsilon <- first(X)).
 
 ```cpp
 nullable = {};
@@ -682,13 +682,13 @@ while (some sets is changing) {
 
 ##### follow sets
 
-follow(X) = {t | S -\*> beta X t epsilon} :
+`follow(X) = {t | S -*> beta X t epsilon}`:
 
-- for X -> AB:
-  - first(B) <- follow(A), follow(X) <- follow(B)
-  - if B -\*> epsilon: follow(X) <- follow(A)
-- A -> alpha X beta: first(beta) - {epsilon} <- follow(X)
-- \$ <- follow(S)
+- for `X -> AB`:
+  - `first(B) <- follow(A)`, `follow(X) <- follow(B)`.
+  - if `B -*> epsilon`: `follow(X) <- follow(A)`.
+- for `A -> alpha X beta`: `first(beta) - {epsilon} <- follow(X)`.
+- `$ <- follow(S)`.
 
 follow sets 不动点算法:
 
@@ -753,7 +753,7 @@ calculate_select_set(production p: N->beta1...beta_n) {
 - 再利用 first sets 准确求出 follow sets
 - 再利用 first sets, 并结合 follow sets(全空集修正) 准确求出 分析表:
 
-```c
+```cpp
 0: z -> d
 1: | X Y Z
 2: Y -> c
@@ -788,7 +788,7 @@ nullable = {X, Y}
 - 规定优先级与结合性
 - 提取左公因式(Common Prefix)
 
-```c
+```cpp
 E -> T+E
     |T
 
@@ -799,7 +799,7 @@ X -> +E
 
 ###### 消除直接左递归
 
-```c
+```cpp
 S -> Salpha1
     |Salpha2
     ...
@@ -1050,7 +1050,7 @@ int main() {
 
 ### 自底向上分析
 
-```c
+```cpp
 0: S -> E
 1: E -> E + T
 2: | T
@@ -1059,7 +1059,7 @@ int main() {
 5: F -> n
 ```
 
-```c
+```cpp
 2 + 3 * 4
 => F + 3 * 4
 => T + 3 * 4
@@ -1073,20 +1073,24 @@ int main() {
 
 > 最右推导(优先推导最右侧非终结符)逆过程
 
-#### LR(0) 分析算法(移进-归约(reduce)算法)
+#### LR(0) 分析算法
 
-- 从左向右读入程序(left to right scan), 逆向最右推导(rightmost derivation), 不用前看符号
-- 添加伪开始符号: S' -> . S\$ `$表示 tokens/file 结束符`
-- 移进 : 读入记号 `push(token[i])`
-- 归约(reduce): `pop(right expansion)` `push(left expansion)`
+移进-归约 (Reduce) 算法:
 
-##### 短语(Handles)
+- 从左向右读入程序 (left to right scan), 逆向最右推导 (rightmost derivation), 不用前看符号.
+- 添加伪开始符号: `S' -> . S$`, `$` 表示 tokens/file 结束符.
+- 移进 : 读入记号 `push(token[i])`.
+- 归约 (Reduce): `pop(right expansion)` `push(left expansion)`.
 
-```c
+##### 短语
+
+Handles:
+
+```cpp
 S -*> αXω -> αβω
 ```
 
-β 是 αβω 的一个短语(Handle)
+β 是 αβω 的一个短语 (Handle).
 
 ##### 分析表构造
 
@@ -1235,7 +1239,7 @@ push(next state);
 - 表达语法结构的内部表示, 作为前端(词法语法分析)和后端(代码生成)的中间件, tokens --语法分析器--> 抽象语法(树) --代码生成器--> 目标代码
 - 抽象语法无需考虑左/右递归, 左公因子提取, 分隔符等
 
-```c
+```cpp
 // 具体语法
 E: E + T
  | T
@@ -1257,13 +1261,13 @@ E: n
 
 ##### 数据结构
 
-```c
+```cpp
 E: n
  | E + E
  | E * E
 ```
 
-```c
+```cpp
 enum kind {
   E_INT,
   E_ADD,
@@ -1369,7 +1373,7 @@ int pretty_print(exp *e) {
 
 利用语法制导翻译, 在语法动作(action)/语法归约(reduce)中加入生成语法树的代码(自底(叶子)向上(根)构造函数)
 
-```c
+```cpp
 E: E + E { $$ = new_exp_add($1, $3); }
  | E * E { $$ = new_exp_times($1, $3); }
  | n     { $$ = new_exp_int($1); }
@@ -1391,7 +1395,7 @@ AST + semantic of programming language --semantic analysis--> intermediate
 
 e.g 变量/函数必须先声明再使用; 每个表达式必须有合适类型(左值/右值); 函数调用与函数定义保持一致(函数签名)
 
-```c
+```cpp
 P: D S
  ;
 
@@ -1429,7 +1433,7 @@ E: n
 - `O` Type environments 是一个函数, 将 object identifiers 映射成 types
 - `O ├ e: T` 表示在 O 函数作用下, 可证明 e 的类型为 T
 
-```c
+```cpp
 // input x
 // output T
 O[T/x](x) = T
@@ -1437,7 +1441,7 @@ O[T/x](x) = T
 O[T/x](y) = O(y)
 ```
 
-```c
+```cpp
 [Var]
 O(x) = T
 ----------
@@ -1454,7 +1458,7 @@ O ├ let x: T0 in e1: T1
 - Method(ClassName, functionName) = (Type1, ..., Type_n, Type_n+1)
 - Type_n+1 为返回值的类型, 即方法自身的类型
 
-```c
+```cpp
 [Dispatch]
 O,M ├ e0: T0
 O,M ├ e1: T1
@@ -1766,7 +1770,7 @@ Register Allocation and Graph Coloring:
 - 代码: 表达式/语句/函数代码
 - 指令: 算术/比较/跳转/调用/返回指令
 
-```c
+```cpp
 P: D S
  ;
 
@@ -1800,7 +1804,7 @@ Mem + Stack + ALU
 
 > JVM(Java Virtual Machine)
 
-```c
+```cpp
 s: push NUM
  | load x
  | store x
@@ -1882,7 +1886,7 @@ Mem + Reg + ALU
 
 > MIPS ISA
 
-```c
+```cpp
 // src -> dist
 s: mov_n n, r
  | mov r1, r2
@@ -2009,7 +2013,7 @@ Copy all reachable objects in old space to new space(reserved for GC):
 
 ### C Declaration Interpreter
 
-```c
+```cpp
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>

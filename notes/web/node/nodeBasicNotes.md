@@ -1134,7 +1134,7 @@ const request = {
 
 #### 类型
 
-```c
+```cpp
 typedef Stream response
 ```
 

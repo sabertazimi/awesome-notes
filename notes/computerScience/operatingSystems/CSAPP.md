@@ -21,7 +21,7 @@ tags: [CS, System, OS, Architecture]
 
 ![stack frame](./figures/stack_frame.png)
 
-```c
+```cpp
 # 准备阶段
 # Caller-Save: %eax %ecx %edx
 # Callee-Save: %ebx %esi %edi
@@ -176,7 +176,7 @@ CPI = 1.0 + lp + mp + rp:
 
 #### 进程控制
 
-```c
+```cpp
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/wait.h>
@@ -188,7 +188,7 @@ CPI = 1.0 + lp + mp + rp:
 - 父进程与子进程获得 2 份独立的私有空间与 2 份独立的上下文, 不同的 PID(process id)
 - 由于指针(如打开的文件描述符),有可能互相影响,但大体上互不影响
 
-```c
+```cpp
 /*
  * output: parent: x=0
  * output: child: x=2
@@ -213,7 +213,7 @@ int main(void) {
 
 ##### 回收子进程
 
-```c
+```cpp
 #define N 2
 
 int main(void) {
@@ -248,7 +248,7 @@ int main(void) {
 
 ### 信号
 
-```c
+```cpp
 #include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
@@ -260,7 +260,7 @@ int main(void) {
 
 #### 处理信号
 
-```c
+```cpp
 void handler(int sig) {
    pid_t pid;
 
@@ -315,7 +315,7 @@ int main(void) {
 
 #### 阻塞信号
 
-```c
+```cpp
 // how: SIG_BLOCK, SIG_UNBLOCK, SIG_SETMASK, 是否阻塞set中的信号合集
 int sigprocmask(int how, const sigset_t *set, sigset_t *old_set);
 
@@ -326,7 +326,7 @@ int sigdelset(sigset_t *set, int sig_num);
 int sigismember(const sigset_t *set， int sig_num);
 ```
 
-```c
+```cpp
 void handler(int sig) {
     pid_t pid;
 
@@ -368,7 +368,7 @@ int main(int argc, char **argv) {
 
 ### 非本地跳转
 
-```c
+```cpp
 #include <setjmp.h>
 ```
 
@@ -377,7 +377,7 @@ int main(int argc, char **argv) {
 
 ## 系统级 I/O
 
-```c
+```cpp
 // robust I/O
 ssize_t rio_read_n(int fd, void *usr_buf, size_t n) {
     size_t n_left = n;
@@ -439,7 +439,7 @@ ssize_t rio_write_n(int fd, void *usr_buf, size_t n) {
 
 ## 网络
 
-```c
+```cpp
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
@@ -485,7 +485,7 @@ int main(int argc, char *argv) {
 
 ### 日志
 
-```c
+```cpp
 void unix_error(char *msg) {
     fprintf(stderr, "%s: %s\n", msg, strerror(errno));
     exit(0);

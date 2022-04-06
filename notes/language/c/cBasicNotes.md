@@ -41,7 +41,7 @@ tags: [Language, C]
 
 #### 防止重复包括头文件
 
-```c
+```cpp
 #ifndef _FILENAME_H_
 #define _FILENAME_H_
 
@@ -80,7 +80,7 @@ tags: [Language, C]
 
 ### Error Prone Pointers
 
-```c
+```cpp
 int i = 37;
 float f = *(float *)&i;
 
@@ -105,7 +105,7 @@ short s = *(short *)&f;
 
 Tips: 中途运用强制类型转换,使得 void 指针可以执行指针加减运算
 
-```c
+```cpp
 void *target = (char *)void_pointer + ...;
 ```
 
@@ -113,7 +113,7 @@ void *target = (char *)void_pointer + ...;
 
 #### 通用型 Swap 函数
 
-```c
+```cpp
 void swap(void *vp1, void *vp2, int size) {
     char buffer[size];
     memcpy(buffer, vp1, size);
@@ -126,7 +126,7 @@ void swap(void *vp1, void *vp2, int size) {
 
 ##### 实现
 
-```c
+```cpp
 void *lsearch(void *key, void *base, int n, int elemSize,
   int (*cmp_fn)(void *, void *)) {
     for (int i = 0;i < n;i++) {
@@ -142,7 +142,7 @@ void *lsearch(void *key, void *base, int n, int elemSize,
 
 ##### int 实例
 
-```c
+```cpp
 int IntCmp(void *elem1, void *elem2) {
     int *ip1 = (int *)elem1;
     int *ip2 = (int *)elem2;
@@ -150,7 +150,7 @@ int IntCmp(void *elem1, void *elem2) {
 }
 ```
 
-```c
+```cpp
 int array[] = {4, 2, 3, 7, 11, 6},
     size = 6,
     target = 7;
@@ -167,7 +167,7 @@ if (found == NULL) {
 
 ##### string 实例
 
-```c
+```cpp
 int StrCmp(void *vp1, void *vp2) {
     // 必须进行强制类型转换
     char *s1 = *(char **)vp1;
@@ -176,7 +176,7 @@ int StrCmp(void *vp1, void *vp2) {
 }
 ```
 
-```c
+```cpp
 char *notes[] = {"Ab", "F#", "B", "Gb", "D"},
     *target = "Eb";
 char ** found = lsearch(&target, notes, 5, sizeof(char *), StrCmp);
@@ -186,7 +186,7 @@ char ** found = lsearch(&target, notes, 5, sizeof(char *), StrCmp);
 
 ##### 通用型栈
 
-```c
+```cpp
 typedef struct {
     void *elements;
     int elemSize;
@@ -200,7 +200,7 @@ void StackPush(stack *s, void *elemAddr);
 void StackPop(stack *s, void *elemAddr);
 ```
 
-```c
+```cpp
 void StackNew(stack *s, int elemSize) {
     // 参数合法性检查
     if (s->elemSize <= 0) {
@@ -281,7 +281,7 @@ string duplicate - `char *strdup(string)` 封装 allocator 细节
 
 可以用作简易匹配读取函数
 
-```c
+```cpp
 // 提取除 http:// 外的字符串
 sscanf(buf, "http://%s", url_part);
 ```
@@ -298,7 +298,7 @@ perror(string) - 用来将上一个函数发生错误的原因输出到标准设
 - execve(): 用另一程序的代码代替当前进程的代码
   - `int execve(char *filename, char *argv[], char *env_p[])`
 
-```c
+```cpp
 void fork_exec(char *path, char *argv[]) {
     pid_t pid = fork();
 
@@ -315,15 +315,15 @@ void fork_exec(char *path, char *argv[]) {
 
 #### Other
 
-- getpid()
-- wait(int \*child_status)/waitpid(pid)
-- exit()
+- `getpid()`.
+- `wait(int *child_status)`/`waitpid(pid)`.
+- `exit()`.
 
 ### Threads
 
 #### PThread
 
-```c
+```cpp
 typedef unsigned long int pthread_t;
 
 /**
@@ -380,7 +380,7 @@ pthread_mutex_unlock
 pthread_delay_np
 ```
 
-```c
+```cpp
 InitThreadPackage;
 ThreadNew;
 ThreadSleep;
@@ -397,7 +397,7 @@ SemaphoreSignal(lock);
 - EmptyBuf 8, FullBuf 0
 - 双向通信，互相唤醒 - `Writer:sw(empty),ss(full);` `Reader:sw(full),ss(empty);`
 
-```c
+```cpp
 void SellTickets(int agent, int *ticketsNum, Semaphore lock) {
   while (true) {
     // 当 lock == 0 时,当前进程阻塞, 等待 lock > 0
@@ -492,7 +492,7 @@ void SellTickets(int agent, int *ticketsNum, Semaphore lock) {
 
 防止其他文件重复#include 本文件
 
-```c
+```cpp
 #ifndef MONGOOSE_HEADER_INCLUDED
 #define    MONGOOSE_HEADER_INCLUDED
 
@@ -510,14 +510,14 @@ void SellTickets(int agent, int *ticketsNum, Semaphore lock) {
 
 - 关闭断言
 
-```c
+```cpp
 #define NDEBUG
 #include <assert.h>
 ```
 
 - 开启断言
 
-```c
+```cpp
 #undef NDEBUG
 #include <assert.h>
 ```
@@ -538,7 +538,7 @@ getc、fgetc、getchar 函数可返回值(EOF 值/unsigned char 类型)
 
 - errno 的值在程序启动时为零，但是不会被任何库函数设为零
 
-```c
+```cpp
 errno = 0;
 y = sqrt(x);
 if (errno != 0) {
@@ -546,7 +546,7 @@ if (errno != 0) {
 }
 ```
 
-```c
+```cpp
 #ifndef _I386_ERRNO_H
 #define _I386_ERRNO_H
 #define EPERM 1 /* Operation not permitted */
@@ -685,14 +685,14 @@ if (errno != 0) {
 - 实现时间/单位/货币等一系列的国际化
 - 常用函数
 
-```c
+```cpp
 _CRTIMP char * __cdecl setlocale(int, const char *);
 _CRTIMP struct lconv * __cdecl localeconv(void);
 ```
 
 - int 值
 
-```c
+```cpp
 #define LC_ALL          0
 #define LC_COLLATE      1
 #define LC_CTYPE        2
@@ -709,7 +709,7 @@ _CRTIMP struct lconv * __cdecl localeconv(void);
 
 - 常用函数
 
-```c
+```cpp
 int setjmp(jmp_buf env);
 void longjmp(jmp_buf env, int val);
 ```
@@ -725,7 +725,7 @@ void longjmp(jmp_buf env, int val);
 
 信号处理程序中所有数据应为 volatile 类型
 
-```c
+```cpp
 _CRTIMP int __cdecl raise(int);
 _CRTIMP void (__cdecl * __cdecl signal(int, void (__cdecl *)(int)))(int);
 ```
@@ -734,7 +734,7 @@ _CRTIMP void (__cdecl * __cdecl signal(int, void (__cdecl *)(int)))(int);
 
 用于编写可变参数函数
 
-```c
+```cpp
 void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束 */
 {
     va_list ap;
@@ -779,21 +779,19 @@ void printargs(int arg1, ...) /* 输出所有int类型的参数，直到-1结束
   - b filename:line_num
 - display/format address
 
-e.g display/i \$pc
+e.g `display $pc`/`i $pc`.
 
-- t 按二进制格式显示变量
-- d 按十进制格式显示变量
-- o 按八进制格式显示变量
-- u 按十六进制格式显示无符号整型
-- x 按十六进制格式显示变量
-- a 按十六进制格式显示变量
-- f 按浮点数格式显示变量
-- c 按字符格式显示变量
-- s 按字符串格式显示变量
-
-- disas 显示汇编代码
-
-- x /num-size-format \$pc/rsp/rbp
+- t 按二进制格式显示变量.
+- d 按十进制格式显示变量.
+- o 按八进制格式显示变量.
+- u 按十六进制格式显示无符号整型.
+- x 按十六进制格式显示变量.
+- a 按十六进制格式显示变量.
+- f 按浮点数格式显示变量.
+- c 按字符格式显示变量.
+- s 按字符串格式显示变量.
+- disas 显示汇编代码.
+- x /num-size-format `$pc`/rsp/rbp.
 
 e.g size:w(2 字节) format:x/d/s(十六进制/十进制/字符串)
 2wx

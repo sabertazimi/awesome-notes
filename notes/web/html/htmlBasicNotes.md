@@ -49,7 +49,7 @@ ul>li>a^^div
 <div></div>
 ```
 
-重复：\*
+重复: `*`.
 
 ```html
 ul>li*3
@@ -87,7 +87,7 @@ div#header+div.main+div#footer
 a[title=test target=_self] <a title="test" target="_self" href=""></a>
 ```
 
-数列值：\$
+数列值：`$`.
 
 ```html
 p.item$*3

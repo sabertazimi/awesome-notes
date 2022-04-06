@@ -56,8 +56,8 @@ go clean -i path/to/pack
 
 #### Modules
 
-- remote packages
-- \$GOPATH/bin/hello
+- Remote packages.
+- `$GOPATH/bin/hello`.
 
 ```bash
 go get github.com/golang/example/hello

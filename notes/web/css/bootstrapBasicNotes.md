@@ -1114,9 +1114,7 @@ $(function () {
 data-dismiss ="modal"
 ```
 
-修饰.modal-dialog、.modal-content
-
-\$().modal('');
+修饰 `.modal-dialog`/`.modal-content`: `$().modal('')`.
 
 ```html
 <!-- Button trigger modal -->
@@ -1505,11 +1503,11 @@ key variable - `$spacer`:
 - y - for classes that set both `xxx`-top and `xxx`-bottom
 - blank - for classes that set a margin or padding on all 4 sides of the element
 - 0 - for classes that eliminate the margin or padding by setting it to 0
-- 1 - (by default) for classes that set the margin or padding to \$spacer \* .25
-- 2 - (by default) for classes that set the margin or padding to \$spacer \* .5
-- 3 - (by default) for classes that set the margin or padding to \$spacer
-- 4 - (by default) for classes that set the margin or padding to \$spacer \* 1.5
-- 5 - (by default) for classes that set the margin or padding to \$spacer \* 3
+- 1 - (by default) for classes that set the margin or padding to `$spacer * .25`.
+- 2 - (by default) for classes that set the margin or padding to `$spacer * .5`.
+- 3 - (by default) for classes that set the margin or padding to `$spacer`
+- 4 - (by default) for classes that set the margin or padding to `$spacer * 1.5`.
+- 5 - (by default) for classes that set the margin or padding to `$spacer * 3`.
 - auto - for classes that set the margin to auto
 
 ```css

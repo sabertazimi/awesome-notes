@@ -181,7 +181,7 @@ there simply are not enough threads active to make this viable,
 and the performance of just a single thread is much more important,
 so a design with **fewer but bigger, wider**, more brainiac cores is more appropriate.
 
-Intel's Xeon Haswell, the server version of Core i\*4 Haswell,
+Intel's Xeon Haswell, the server version of Core `i*4` Haswell,
 uses 5.7 billion transistors to provide 18 cores (up from 8 in Xeon Sandy Bridge),
 each a very aggressively brainiac 8-issue design (up from 6-issue in Sandy Bridge),
 each still with 2-thread SMT.
@@ -239,7 +239,7 @@ There are the cycles within the processor itself,
 checking the various on-chip caches before the address
 even gets sent to the memory controller, accounting for **20 CPU cycles**.
 For 2.4GHz processor and 800MHz SDRAM memory,
-summing up to (1+11+11+1) \* 2400/800 + 20 = 92 CPU cycles,
+summing up to `(1+11+11+1) * 2400/800 + 20 = 92` CPU cycles,
 a 4.0 GHz processor would wait a staggering 140 cycles to access main memory.
 This problem of the large, and slowly growing,
 gap between the processor and main memory is called the memory wall.

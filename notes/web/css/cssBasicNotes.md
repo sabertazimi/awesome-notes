@@ -30,9 +30,13 @@ has 4 bits - thousands, hundreds, tens, ones `0000`:
 - tens: class selector, attribute selector, pseudo-class(:)
 - ones: element selector, pseudo-element(::)
 
-> Universal selector (\*), combinators (+, >, ~, ' ')
-> negation pseudo-class (:not) have no effect on specificity,
-> but selectors in it have effect on specificity
+:::tip Specificity
+
+- Universal selector (`*`), combinators (`+`, `>`, `~`, `a b`).
+- Negation pseudo-class `(:not)` have no effect on specificity,
+  but selectors in it have effect on specificity.
+
+:::
 
 ```scss
 /* stylelint-disable at-rule-no-unknown */
@@ -188,7 +192,15 @@ The user agent performs four steps to calculate a property's actual (final) valu
    the limitations of the local environment,
    resulting in the actual value
 
-> initial -> specified -> computed -> used -> actual value
+:::tip CSS Value Transform
+
+1. initial.
+2. specified.
+3. computed.
+4. used.
+5. actual value.
+
+:::
 
 ```css
 span {
@@ -546,12 +558,9 @@ a[title*='link'] {
 
 ### Pseudo Class Selectors
 
-- :link：未访问的链接；
-- :visited：已访问的链接，不建议使用；
-- :hover：鼠标移动到容器，不仅限于链接，可用于页面中的任何元素；
-
-> link - visited - hover order matters
-
+- `:link`: 未访问的链接；
+- `:visited`：已访问的链接，不建议使用；
+- `:hover`：鼠标移动到容器，不仅限于链接，可用于页面中的任何元素；
 - `:active`: 被激活时的状态，不仅限于链接，可用于任何具有 tabindex 属性的元素；
 - `:focus`: 获得焦点时状态，不仅限于链接，可用于任何具有 tabindex 属性的元素：
 - `:enabled`: 已启用的界面元素：`input`
@@ -577,17 +586,17 @@ a[title*='link'] {
   a target element has child elements, `:has` normal priority
 - `<target_element>:where(<selector>)`:
   a target element has child elements, `:where` 0 priority
-- E F:first-of-type **相同类型** 的第一个元素
-- E F:last-of-type **相同类型** 的最后一个元素
-- E F:only-of-type 孩子中只有一种该元素
-- E :nth-child(n) 选择 E 的第 n 个孩子
-- E F:nth-child(n)：该选择器定位元素 E 的第 n 个子元素的元素 F,可省略 E
-- E F:nth-last-child(n)：该选择器定位元素 E 的倒数第 n 个子元素的元素 F,可省略 E
-- E F:nth-of-type(n)：该选择器定位元素 E 的第 n 个 **相同类型** 子元素,可省略 E
-- E F:nth-lash-of-type(n)：该选择器定位元素 E 的导数第 n 个 **相同类型** 子元素,可省略 E
-- E F:first-child 第一个孩子
-- E F:last-child 最后一个孩子
-- E F:only-child 单一后代
+- `E F:first-of-type`: **相同类型** 的第一个元素.
+- `E F:last-of-type`: **相同类型** 的最后一个元素.
+- `E F:only-of-type`: 孩子中只有一种该元素.
+- `E :nth-child(n)`: 选择 E 的第 n 个孩子.
+- `E F:nth-child(n)`:该选择器定位元素 E 的第 n 个子元素的元素 F,可省略 E.
+- `E F:nth-last-child(n)`: 该选择器定位元素 E 的倒数第 n 个子元素的元素 F,可省略 E.
+- `E F:nth-of-type(n)`: 该选择器定位元素 E 的第 n 个 **相同类型** 子元素,可省略 E.
+- `E F:nth-lash-of-type(n)`: 该选择器定位元素 E 的导数第 n 个 **相同类型** 子元素,可省略 E.
+- `E F:first-child`: 第一个孩子.
+- `E F:last-child`: 最后一个孩子.
+- `E F:only-child`: 单一后代.
 
 ```html
 <a href="#p1">p1</a>
@@ -952,7 +961,7 @@ can use the `z-index` property to adjust its stack level.
 - float: left/right.
 - position: absolute/fixed.
 - display: inline-block.
-- display: table-cell/table-caption/table-\*h.
+- display: `table-cell`/`table-caption`/`table-*h`.
 - display: flow-root.
 - direct children of `display: flex/inline-flex`.
 - direct children of `display: grid/inline-grid`.
@@ -1972,9 +1981,9 @@ p {
 
 - `mix-blend-mode` is used for text styles
 - with `multiply`: black is cutout (keep black)
-  (0 \* WHAT = 0)
+  (`0 * WHAT = 0`)
 - with `screen`: white is cutout (keep white)
-  (100 - (100 - WHAT) \* (100 - 100) = 100)
+  (`100 - (100 - WHAT) * (100 - 100) = 100`)
 
 ```html
 <div class="background">
@@ -2418,7 +2427,7 @@ letter-spacing: 1.3px;
 }
 ```
 
-```c
+```cpp
 宋体 SimSun
 黑体 SimHei
 微软雅黑 Microsoft YaHei

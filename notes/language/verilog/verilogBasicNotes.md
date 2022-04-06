@@ -484,7 +484,7 @@ A = { 3'b101, 2{1'b0} };        // A = 5'b101_00
 
 ## Behavior Level
 
-- reg = net/reg: \*_左式只能是 reg_
+- `reg = net/reg`: 左式只能是 `reg`.
 
 ### 时延控制
 
@@ -688,7 +688,7 @@ sum = (a ^ b) ^ cin;
 
 ### define 宏
 
-将多个 define 宏,放至 \_defines.v, 作为全局宏
+将多个 define 宏,放至 `_defines.v`, 作为全局宏.
 
 ## Data Path
 

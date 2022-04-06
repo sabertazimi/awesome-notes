@@ -125,8 +125,8 @@ movX src dest #X:b/w/l/q （1/2/4/8 字节）
 
 ### address
 
-- D(Rb, Ri, S) —— MEM[ Reg[Rb] + S \* Reg[Ri] + D]
-- leal 命令
+- `D(Rb, Ri, S)`: `MEM[ Reg[Rb] + S * Reg[Ri] + D]`.
+- `leal` 命令:
   - `leal D(Rb, Ri, S) dest` - 将地址模式表达式的址存入 dest.
     作用为快速给指针赋值`p = &x[i]` 即`Mem[Reg[x] + i * size]->(x, size, I)`,
     快速计算二次多项式 `x + i * k`.
@@ -139,7 +139,7 @@ movX src dest #X:b/w/l/q （1/2/4/8 字节）
 
 内存数据重复读入寄存器 - 使得汇编代码与上下文无关,减少 BUG 产生可能性
 
-```c
+```cpp
 R1 = MEM[SP + 8]
 ……
 R1 = MEM[SP + 8]
@@ -200,7 +200,7 @@ R1 = MEM[SP + 8]
 
 ## Stack Frame
 
-```c
+```cpp
 # 准备阶段
 # Caller-Save: %eax %ecx %edx
 # Callee-Save: %ebx %esi %edi
@@ -222,13 +222,13 @@ ret
 
 ### Arrays
 
-```c
+```cpp
 int get_sea_digit(int index, int dig) {
     return sea[index][dig];
 }
 ```
 
-```c
+```cpp
 # 访问二维数组元素
 # %ecx = dig
 # %eax = index

@@ -3188,7 +3188,7 @@ window.innerWidth(number);
 window.closed(boolean);
 ```
 
-**Tip**: 实现 jQuery 中`\$(document).ready(function(){});
+**Tip**: 实现 jQuery 中 `$(document).ready(function(){})`.
 
 ```ts
 // initialize.
@@ -3596,7 +3596,7 @@ codePointLength(s); // 2
 | `\b`       | start/end of word     |
 | `\B`       | not start/end of word |
 | `^`        | start of string       |
-| `\$`       | end of string         |
+| `$`        | end of string         |
 
 ### RegExp Quantifiers
 

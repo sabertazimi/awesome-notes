@@ -18,7 +18,7 @@ tags: [CS, System, OS]
 
 ## GCC 内联汇编
 
-```c
+```cpp
 asm ( assembler template // assembly language
   :=output operands // 约定输出
   :input operands // 约定输入
@@ -207,7 +207,7 @@ lab1/tools/sign.c:
 - 切换到保护模式, 启动段机制
 - 通过 8042 键盘控制器的端口, 开启 A20, 关闭 memory wrap around, 获取足够内存空间
 
-```c
+```cpp
 ; 键盘控制器的命令
 ; 0xD0 Read Output Port
 ; 0xD1 Write Output Port
@@ -364,7 +364,7 @@ Buddy System:
 
 ##### GDT
 
-```c
+```cpp
 typedef struct gdt_ptr {
     uint16_t gdt_limit;     // gdt_length - 1
     uint32_t gdt_base;
@@ -385,25 +385,24 @@ typedef struct gdt_ptr {
 
 ##### 虚拟地址
 
-> TLB (Translation Lookaside Buffer in CPU/PM)
+TLB (Translation Lookaside Buffer in CPU/PM):
 
 - Virtual Address =
-  2^(bits of virtual page offset) \* virtual page number + virtual page offset
-- VPN(virtual page number point to PPN) - VPO(virtual page offset = PPO)
-- 根据 VPN 在页表中找到对应表项(VPN 表示项号), 每项保存着 PPN
-- TLBT(tag) - TLBI(index) - VPO
-- 因为内存局部性原理, TLB 一般只需要很小(比如 **64 项**)即可达到不错的效果
+  `2^(bits of virtual page offset) * virtual page number + virtual page offset`.
+- VA = VPN (virtual page number point to PPN) + VPO(virtual page offset = PPO).
+- 根据 VPN 在页表中找到对应表项(VPN 表示项号), 每项保存着 PPN.
+- TLB = TLBT (tag) + TLBI(index) + VPO.
+- 因为内存局部性原理, TLB 一般只需要很小 (比如 **64 项**) 即可达到不错的效果.
 
 ##### 物理地址
 
-> C(cache) PPO = VPO
+C(cache) PPO = VPO:
 
-- Page Frame(帧): 高位为帧号, 低位为偏移
+- Page Frame (帧): 高位为帧号, 低位为偏移.
 - Physical Address =
-  2^(bits of physical page offset)
-  `*` physical page number/page frame number + physical page offset
-- PPN(physical page number) - PPO(physical page offset = VPO)
-- CT(tag) - CI(index) - CO(offset)
+  `2^(bits of phy page offset) * phy page/frame frame number + phy page offset`
+- PA = PPN (physical page number) + PPO (physical page offset = VPO).
+- CA = CT(tag) + CI(index) + CO(offset).
 
 ##### 页表
 
@@ -601,7 +600,7 @@ Least Frequently Used (LFU) Algorithm:
 - 为每个进程分配一个 vma 块, 模拟一个完整的物理内存
 - vmas 按起始**地址从小至大**形成一个双向链表, 且地址空间**没有任何交集**
 
-```c
+```cpp
 #define VM_READ  0x00000001
 #define VM_WRITE 0x00000002
 #define VM_EXEC  0x00000004
@@ -990,7 +989,7 @@ struct lock/semaphore {
   进程 B 执行会导致进程 A 睡眠，直到进程 B 离开管程，进程 A 才能继续执行，这个同步过程是通过信号量 next 完成
 - 整形变量 next_count: 表示由于发出 signal_cv 而睡眠的进程个数
 
-```c
+```cpp
 typedef struct monitor{
     // the mutex lock for going into the routines in monitor,
     // should be initialized to 1
@@ -1011,13 +1010,15 @@ typedef struct monitor{
 - count: 表示等在这个条件变量上的睡眠进程的个数
 - owner: 表示此条件变量的宿主是哪个管程
 
+```cpp
 typedef struct condvar{
 // the sem semaphore is used to down the waiting proc,
 // and the signaling proc should up the waiting
 semaphore_t sem;
 proc int count; // the number of waiters on
-condvar monitor_t \* owner; // the owner(monitor) of this conditional variable
+condvar monitor_t * owner; // the owner(monitor) of this conditional variable
 } condvar_t;
+```
 
 ## 文件系统
 
@@ -1117,7 +1118,7 @@ Redundant Array of Inexpensive Disks (RAID):
 一个内存 inode 是在打开一个文件后才创建的, 如果关机则相关信息都会消失.
 而硬盘 inode 的内容是保存在硬盘中的, 只是在进程需要时才被读入到内存中, 用于访问文件或目录的具体内容数据.
 
-```c
+```cpp
 struct inode {
     union {
         //包含不同文件系统特定inode信息的union成员变量
@@ -1138,7 +1139,7 @@ struct inode {
 };
 ```
 
-```c
+```cpp
 struct inode_ops {
     unsigned long vop_magic;
     int (*vop_open)(struct inode *node, uint32_t open_flags);
@@ -1168,7 +1169,7 @@ struct inode_ops {
 
 ### ELF File Format
 
-```c
+```cpp
 #include "common.h"
 #include <stdlib.h>
 #include <elf.h>
@@ -1345,7 +1346,7 @@ bochs -q -f .bochsrc
 
 #### GNU ld
 
-```c
+```cpp
 ENTRY(kmain)
 SECTIONS {
     __bios__ = 0xa0000; # 绑定BIOS保留内存的地址到__bios__

@@ -118,7 +118,7 @@ JavaScript Object Notation:
 - select operator σ(sigma): `σ(sID < 100 ^ sAge > 20)Table_Name` set constraints
 - project operator π(pi) : `π(sID, GPA)Table_Name` select certain columns
 - cross-product operator x: Table1 x Table2,
-  m tuples(rows) x n tuples(rows) => m\*n tuples(rows)
+  m tuples(rows) x n tuples(rows) => `m*n` tuples(rows)
 - natural join operator ∞: σ(E1.A1 = E2.A1 ^ E1.A2 = E2.A2 ...) (E1 x E2)
 - theta join operator ∞(condition): σ(condition) (E1 x E2), call condition as ϴ
 - difference operator -: matching schemas => change rows/tuples
@@ -147,7 +147,7 @@ for data modeling:
 - add PK(primary key)
 - drop methods
 
-```c
+```cpp
 -----------
 | student |
 |---------|
@@ -163,12 +163,12 @@ for data modeling:
 
 relationships between objects of 2 classes):
 
-- one to one: 1..1 --- 1..1
-- many to one: \* --- 1..1
-- one to many:1..1 --- \*
-- many to many: `*` --- `*`
+- one to one: `1..1 --- 1..1`.
+- many to one: `* --- 1..1`
+- one to many: `1..1 --- *`.
+- many to many: `* --- *`.
 
-```c
+```cpp
 -----------                   ---------
 | student |                   |college|
 |---------|                   |       |
@@ -185,7 +185,7 @@ relationships between objects of 2 classes):
 - classes store information of relationship edge between 2 data classes
 - unnecessary if 0..1 or 1..1
 
-```c
+```cpp
 c1 * --- 1..1 c2
 information of relationship edge can stored in c1
 owing to every object of c1 only associated with 1 object of c2
@@ -296,11 +296,11 @@ while (there is relation R' aren't in BCNF) {
 
 ### Multi Valued Dependencies
 
-- A -> B && rest attributes => A ->> B
-- A ->> B(1-n mapping), A ->> C(1-n mapping),
-  no `B -> C`/`C ->> B`, B \* C redundant tuples/rows
-- A ->>B && A ->>C => A ->> B∩C
-- A ->>B && B ->>C => A ->> C-B
+- `A -> B && rest attributes` => `A ->> B`.
+- `A ->> B` (1-n mapping), `A ->> C` (1-n mapping),
+  no `B -> C`/`C ->> B`, `B * C` redundant tuples/rows.
+- `A ->>B && A ->>C` => `A ->> B∩C`.
+- `A ->>B && B ->>C` => `A ->> C-B`.
 
 ### 4NF
 

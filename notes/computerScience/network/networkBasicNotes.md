@@ -207,7 +207,7 @@ Internet Control Message Protocol:
 - in x86 processor, use `htons()/ntohs()/htonl()/ntohl()` host:
   network -short/long helper function to transform format
 
-```c
+```cpp
 #include <arpa/inet.h>
 
 uint16_t http_port = 80;

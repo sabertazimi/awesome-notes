@@ -138,10 +138,10 @@ sshpass -p "$DEPLOY_PASSWORD" \
 
 ## 命令优先级
 
-包含路径命令 ./vmtools.pl
-\>别名命令
-\>bash 内部命令
-\>\$PATH 包含目录内的命令 /bin /sbin
+1. 包含路径命令 `./vmtools.pl`.
+2. 别名命令.
+3. Bash 内部命令.
+4. `$PATH` 包含目录内的命令 (`/bin`/`/sbin`).
 
 ## Linux 文件架构
 
@@ -149,7 +149,7 @@ sshpass -p "$DEPLOY_PASSWORD" \
 man hier
 ```
 
-通过源码包安装的软件，可以通过 ./configure --prefix=/opt/
+通过源码包安装的软件，可以通过 `./configure --prefix=/opt/`.
 
 - `/usr/src`: Kernel source code.
 - `/usr/share/applications`: Desktop shortcuts.
@@ -281,16 +281,16 @@ wget https://aur.archlinux.org/packages.gz
 
 ### ls
 
-- -lh(long human)
-- -ld(long directory)
-- -i inode(ID 号) --color==auto
+- `-lh`: long human.
+- `-ld`: long directory.
+- `-i inode --color==auto`
 
-权限(user/group/other) 引用计数 user group 文件大小 文件修改时间 文件名
+权限 (user/group/other) 引用计数 user group 文件大小 文件修改时间 文件名.
 
 ### cd
 
-- -上次目录
-- ..上级目录
+- `-`: 上次目录.
+- `..`: 上级目录.
 
 ### pwd
 
@@ -341,25 +341,25 @@ ln -s [源文件] [New Soft Link File]
 !number
 ```
 
-### ctrl-r
+### Ctrl R History
 
-press ctrl-r 提示符改变，显示我们正在执行反向增量搜索。
-搜索过程是”反向的”，因为我们按照从”现在”到过去 某个时间段的顺序来搜寻。
-下一步，我们开始输入要查找的文本搜索返回我们需要的结果。
-(enter to execute, ctrl-j to copy)
+Press `ctrl-r` 提示符改变, 显示我们正在执行反向增量搜索.
+搜索过程是`反向的`，因为我们按照从`现在`到`过去`某个时间段的顺序来搜寻.
+下一步, 我们开始输入要查找的文本搜索返回我们需要的结果.
+(`enter` to execute, `ctrl-j` to copy)
 
 ### History Shortcuts
 
-| command | function                             |
-| :------ | :----------------------------------- |
-| Ctrl-p  | 移动到上一个历史条目                 |
-| Ctrl-n  | 移动到下一个历史条目                 |
-| Alt-<   | 移动到历史列表开头                   |
-| Alt->   | 移动到历史列表结尾                   |
-| Ctrl-r  | 反向增量搜索                         |
-| Alt-p   | 反向搜索，非增量搜索                 |
-| Alt-n   | 向前搜索，非增量                     |
-| Ctrl-o  | 执行历史列表中的当前项，并移到下一个 |
+| command  | function                             |
+| :------- | :----------------------------------- |
+| `Ctrl-p` | 移动到上一个历史条目                 |
+| `Ctrl-n` | 移动到下一个历史条目                 |
+| `Alt-<`  | 移动到历史列表开头                   |
+| `Alt->`  | 移动到历史列表结尾                   |
+| `Ctrl-r` | 反向增量搜索                         |
+| `Alt-p`  | 反向搜索，非增量搜索                 |
+| `Alt-n`  | 向前搜索，非增量                     |
+| `Ctrl-o` | 执行历史列表中的当前项，并移到下一个 |
 
 ## Find and Search Commands
 
@@ -406,7 +406,7 @@ display a list of appropriate commands
 Find `FunctionalComponent` in files and open them all:
 
 ```bash
-grep -lr FunctionalComponent src --exclude=\*.md | xargs code
+grep -lr FunctionalComponent src --exclude=*.md | xargs code
 ```
 
 ## CPU and Process Commands
@@ -1290,14 +1290,14 @@ crontab -l(list)
 crontab -e(establish)
 ```
 
-- m,n —— 分隔多个时间
-- m-n —— 表示时间范围
-- /n —— 表示每隔 n 时间
-- 天数 与 星期 设置 之间 是 “或”关系
-- /var/spool/cron/user_name/
-- /var/log/con
-- /etc/cron.\*ly 时间表
-- /etc/anacrontab: 异步时间表
+- `m,n`: 分隔多个时间.
+- `m-n`: 表示时间范围.
+- `/n`: 表示每隔 n 时间.
+- `天数`与`星期`之间为`逻辑或`关系.
+- `/var/spool/cron/user_name/`.
+- `/var/log/con`.
+- `/etc/cron.*ly`: 时间表.
+- `/etc/anacrontab`: 异步时间表.
 
 ### Background Job Commands
 
@@ -1406,18 +1406,18 @@ sudo timedatectl set-local-rtc 1
 
 ### Shell Warnings
 
-- = 左右无空格
-- () [] 内部最好有空格
-- 数值运算用 (()) 或 \$(())
+- `=` 左右无空格.
+- `()` `[]` 内部最好有空格.
+- 数值运算用 `(())` 或 `$(())`.
 
 ### 文件重定向
 
-- `>` 文件名/输出设备名 覆盖标准输出重定向
-- `>>` 文件名/输出设备名 追加标准输出重定向
-- 2>(右端无空格)文件名/输出设备名 覆盖错误输出重定向
-- 2>>(右端无空格)文件名/输出设备名 追加错误输出重定向
-- `>/>> 文件 2>&1 &>/&>>文件` 覆盖/追加正确输出与错误输出同时重定向
-- `</<<` 文件名/输入设备名 覆盖/追加标准输入重定向
+- `> 文件设备名`: 覆盖标准输出重定向.
+- `>> 文件设备名`: 追加标准输出重定向.
+- `2>文件设备名`: 覆盖错误输出重定向.
+- `2>>文件设备名`: 追加错误输出重定向.
+- `>/>> 文件 2>&1 &>/&>>文件`: 覆盖/追加正确输出与错误输出同时重定向.
+- `< 文件设备名`/`<< 文件设备名`: 覆盖/追加标准输入重定向.
 
 #### Here Document
 
@@ -1440,7 +1440,7 @@ set title "$1"
 set xlabel "time (seconds)"
 set ylabel "Segments (cwnd, ssthresh)"
 plot "$1" using 1:7 title "snd_cwnd", \\
-     "$1" using 1:(\$8>=2147483647 ? 0 : \$8) title "snd_ssthresh"
+     "$1" using 1:($8>=2147483647 ? 0 : $8) title "snd_ssthresh"
 EOF
 ```
 
@@ -1448,11 +1448,11 @@ EOF
 
 #### 基本变量
 
-- `=` : 左右两端不可有空格
-- `' '`: 完全标准字符串
-- `" "`: 格式化字符串
-- 调用变量值：\$变量名
-- set/unset——设置/取消变量
+- `=` : 左右两端不可有空格.
+- `' '`: 完全标准字符串.
+- `" "`: 格式化字符串.
+- 调用变量值：`$变量名`.
+- `set`/`unset`: 设置/取消变量.
 
 #### built-in 变量
 
@@ -1467,8 +1467,10 @@ if [ "$?" -ne "0" ];then
 fi
 ```
 
-每次 shift 命令执行的时候，变量 $2 的值会移动到变量 $1 中，变量 $3 的值会移动到变量 $2 中.
-变量 \$# 的值也会相应的减 1
+每次 `shift` 命令执行的时候,
+变量 `$2` 的值会移动到变量 `$1` 中,
+变量 `$3` 的值会移动到变量 `$2` 中.
+变量 `$#` 的值也会相应的减 1.
 
 ```bash
 #!/bin/bash
@@ -1509,20 +1511,20 @@ done
 
 #### 环境变量
 
-- /etc/profile.d/\*.sh
-- ~/.bash_profile
-- ~/.bashrc
-- /etc/profile
-- /etc/bash.bashrc
-- /etc/issue——shell 登录信息
-- PS1 环境变量——shell 头行打印信息
-- PATH 环境变量
+- `/etc/profile.d/*.sh`.
+- `~/.bash_profile`.
+- `~/.bashrc`.
+- `/etc/profile`.
+- `/etc/bash.bashrc`.
+- `/etc/issue`: shell 登录信息.
+- `PS1` 环境变量: shell 头行打印信息.
+- `PATH` 环境变量.
 
 ##### Environment Command
 
-- env——查看环境变量
-- export 变量名=变量值——设置环境变量
-- printenv
+- `env`: 查看环境变量.
+- `export 变量名=变量值`: 设置环境变量.
+- `printenv`.
 
 ### 数值运算
 
@@ -1638,9 +1640,9 @@ echo ${foo/%JPG/jpg}
 JPG.jpg
 ```
 
-- \$(): command result
-- "": allow expansions string
-- '': disallow expansions string
+- `$()`: command result.
+- `""`: allow expansions string.
+- `''`: disallow expansions string.
 
 ### 流程控制语句
 
@@ -1690,7 +1692,7 @@ esac
 | `a)`           | word equals "a"                       |
 | `[[:alpha:]])` | word is a single alphabetic character |
 | `???)`         | word is exactly three characters long |
-| `\*.txt)`      | word ends with the characters “.txt”  |
+| `*.txt)`       | word ends with the characters “.txt”  |
 | `*)`           | any value of word                     |
 
 ```bash
@@ -1891,9 +1893,9 @@ done
 
 ### Bash Function
 
-- 函数局部变量 local + 变量名
-- 函数参数 : \$ + #/？/@/n
-- 引用函数库文件 —— source sh 文件名 / . sh 文件名 可修改~/.bashrc 文件
+- 函数局部变量 `local 变量名`.
+- 函数参数 : `$`/`+`/`#`/`?`/`@`/`n`.
+- 引用函数库文件: `source sh 文件名`/`. sh 文件名`, 可修改 `~/.bashrc` 文件.
 
 ### Bash IO
 
@@ -2005,16 +2007,16 @@ fi
 
 ### 信号
 
-- man 7 signal —— 传递信号给进程
-- CTRL + C —— SIGINT
-- CTRL + Z —— SIGSTP
-- kill/killall —— SIGINT
-- trap SIG\*/EXIT —— 捕捉信号(后 + 忽略信号/默认处理信号/自定义处理信号)
-- trap – SIG\*/EXIT —— 移除信号
+- `man 7 signal`: 传递信号给进程.
+- `CTRL + C`: SIGINT.
+- `CTRL + Z`: SIGSTP.
+- `kill/killall`: SIGINT.
+- `trap SIG*`/`trap EXIT`: 捕捉信号(后 + 忽略信号/默认处理信号/自定义处理信号).
+- `trap – SIG*`/`trap - EXIT`: 移除信号.
 
 ### Bash Debugging
 
-`-x` option
+`-x` option:
 
 ```bash
 #!/bin/bash -x

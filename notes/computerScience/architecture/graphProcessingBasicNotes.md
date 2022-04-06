@@ -104,7 +104,7 @@ for strict-aliasing warnings:
 gcc *.c -o *.o ... -lrt # link with librt
 ```
 
-```c
+```cpp
 #include <time.h>
 
 struct timespec ts;

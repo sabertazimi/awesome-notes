@@ -20,7 +20,7 @@ JavaScript = ECMAScript + DOM + BOM:
 - ECMAScript: ECMA-262.
 - DOM: DOM Core + DOM HTML (`document`).
 - BOM: Browser Object Model API (HTML5)
-      (`window`/`navigator`/`location`/`screen`/`performance` etc).
+  (`window`/`navigator`/`location`/`screen`/`performance` etc).
 
 ### Variable
 
@@ -608,7 +608,7 @@ HelloWorldApp.main();
 - 0oxxx/0Oxxx
 - Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()
 - Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`
-- \*\* 指数运算符
+- `**` 指数运算符
 - BigInt
 
 ```ts
@@ -4883,7 +4883,7 @@ await page.tracing.stop();
 ### 可测试代码
 
 - 完整注释
-- 最小复杂度 = (扇入 \* 扇出) ^ 2
+- 最小复杂度 = (扇入 `*` 扇出) ^ 2
 - 可隔离性: 最小依赖性 + 松耦合性
 
 #### 范例
@@ -4896,7 +4896,7 @@ V(G) = e - n + 2 **<10**
 
 ### 函数复杂度
 
-函数复杂度 = (扇入 \* 扇出) ^ 2
+函数复杂度 = (扇入 `*` 扇出) ^ 2
 
 #### 扇出(引用)
 
@@ -5342,7 +5342,7 @@ long click reload: multiple reload options e.g clean cache
 
 #### Capture Default Event Listener
 
-> \$0: the reference to the currently selected element in the Elements panel
+`$0`: the reference to the currently selected element in the Elements panel.
 
 ```ts
 const listener = getEventListeners($0).click[0].listener;
@@ -5691,8 +5691,8 @@ const { left, top } = processInput(input);
 
 ### String Style
 
-- use `'` not `"`
-- use \`\${}\` not `'str1' + 'str2'`
+- Use `'` not `"`.
+- Use \``${}`\` not `'str1' + 'str2'`.
 
 ### Function Style
 
@@ -6041,14 +6041,14 @@ const foo = superLongLongLongLongLongLongLongLongFunctionName();
 
 Good places to use a white space include:
 
-- ,/; 后
-- +,-,\*,/,<,>,= 前后
-- function () {}
-- function foo() {}
-- } if/for/while () {}
-- } else {}
-- no space inner `()` `[]`
-- use space inner `{}`
+- `,`/`;` 后.
+- `+`,`-`,`*`,`/`,`<`,`>`,`=` 前后.
+- `function () {}`.
+- `function foo() {}`.
+- `} if/for/while () {}`.
+- `} else {}`.
+- No space inner `()` `[]`.
+- Use space inner `{}`.
 
 ```ts
 let d = 0;
@@ -8127,32 +8127,32 @@ Feature List 等)
 
 ```bash
 # Canary Deployment
-map $COOKIE\_canary $group {
+map $COOKIE_canary $group {
   # canary account
-  ~\*devui$ server\_canary;
-  default server\_default;
+  ~*devui$ server_canary;
+  default server_default;
 }
 
 # 流量均分, 注释掉其中某一边, 另一边为灰度流量访问边
-upstream server\_canary {
-  server 11.11.11.11:8000 weight=1 max\_fails=1 fail\_timeout=30s;
-  server 22.22.22.22 weight=1 max\_fails=1 fail\_timeout=30s;
+upstream server_canary {
+  server 11.11.11.11:8000 weight=1 max_fails=1 fail_timeout=30s;
+  server 22.22.22.22 weight=1 max_fails=1 fail_timeout=30s;
 }
 
 # 流量均分, 注释掉其中某一边, 另一边为正常流量访问边
-upstream server\_default {
-  server 11.11.11.11:8000 weight=2 max\_fails=1 fail\_timeout=30s;
-  server 22.22.22.22 weight=2 max\_fails=1 fail\_timeout=30s;
+upstream server_default {
+  server 11.11.11.11:8000 weight=2 max_fails=1 fail_timeout=30s;
+  server 22.22.22.22 weight=2 max_fails=1 fail_timeout=30s;
 }
 
 # 配置 8000 端口的转发规则, 并且 expose port
 server {
   listen 8000;
-  server\_name \_;
+  server_name _;
   root /var/canaryDemo;
 
   # Load configuration files for the default server block.
-  include /etc/nginx/default.d/\*.conf;
+  include /etc/nginx/default.d/*.conf;
 
   location / {
     root /var/canaryDemo;
@@ -8162,26 +8162,26 @@ server {
 }
 
 server {
-  listen 80 default\_server;
-  listen \[::\]:80 default\_server;
-  server\_name \_;
+  listen 80 default_server;
+  listen [::]:80 default_server;
+  server_name _;
   # root /usr/share/nginx/html;
   root /var/canaryDemo;
 
   # Load configuration files for the default server block.
-  include /etc/nginx/default.d/\*.conf;
+  include /etc/nginx/default.d/*.conf;
 
   location / {
-    proxy\_pass http://$group;
+    proxy_pass http://$group;
     # root /var/canaryDemo;
     # index index.html;
   }
 
-  error\_page 404 /404.html;
+  error_page 404 /404.html;
     location = /40x.html {
   }
 
-  error\_page 500 502 503 504 /50x.html;
+  error_page 500 502 503 504 /50x.html;
   location = /50x.h
 }
 ```

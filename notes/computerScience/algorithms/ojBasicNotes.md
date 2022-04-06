@@ -586,7 +586,7 @@ Bit presentation: 多用于状态枚举(1 bit 表示 1 个状态/开关), 表示
 
 > 可用于动态规划中压缩状态
 
-```c
+```cpp
 0 // empty set
 1 << i // just 1 bit on
 (1 << n) - 1 // n bit on

@@ -61,21 +61,21 @@ refer to parent-selector, only use it on:
 
 #### List
 
-- length(\$list)
-- nth($list, $n)
-- set-nth($list, $n, \$value)
-- index($list, $value)
-- list-separator(\$list)
-- append($list, $value, [$separator])
+- `length($list)`.
+- `nth($list, $n)`.
+- `set-nth($list, $n, $value)`.
+- `index($list, $value)`.
+- `list-separator($list)`
+- `append($list, $value, [$separator])`.
 
 #### Map
 
-- map-get($map, $key)
-- map-merge($map, $map)
-- map-remove($map, $keys)
-- map-keys(\$map)
-- map-values(\$map)
-- map-has-key($map, $key)
+- `map-get($map, $key)`.
+- `map-merge($map, $map)`.
+- `map-remove($map, $keys)`.
+- `map-keys($map)`.
+- `map-values($map)`.
+- `map-has-key($map, $key)`.
 
 ```scss
 $colors: (
@@ -343,12 +343,12 @@ $x: 1;
 
 #### Math
 
-- round(\$number)
-- ceil(\$number)
-- floor(\$number)
-- abs(\$number)
-- max
-- min
+- `round($number)`.
+- `ceil($number)`.
+- `floor($number)`.
+- `abs($number)`.
+- `max`.
+- `min`.
 
 ```scss
 $value: 13.37;
@@ -361,10 +361,10 @@ $length: $value * 1em;
 
 #### type and unit
 
-- unit(\$length)
-- unitless(\$length)
-- type-of(\$var)
-- is-type-of($var, $type)
+- `unit($length)`.
+- `unitless($length)`.
+- `type-of($var)`.
+- `is-type-of($var, $type)`.
 
 ## Error Handle
 
@@ -420,7 +420,7 @@ $length: $value * 1em;
 - [Complete Guide for Sass Directory Structure](https://vanseodesign.com/css/sass-directory-structures)
 - [Difference between Sass Directory Architectures](https://www.sitepoint.com/look-different-sass-architectures)
 
-```c
+```cpp
 sass/
 |– abstracts/
 |   |– _variables.scss   # Sass Variables
@@ -480,7 +480,7 @@ in `main.scss` file:
 
 When working on a very large project with a lot of abstract utilities,
 it might be interesting to group them by topic rather than type,
-for instance typography (\_typography.scss), theming (\_theming.scss), etc.
+for instance typography (`_typography.scss`), theming (`_theming.scss`), etc.
 Each file contains all the related helpers: variables, functions, mixins and placeholders.
 
 ## Best Practice

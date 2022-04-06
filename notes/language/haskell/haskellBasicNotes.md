@@ -18,16 +18,16 @@ atom plugins : language-haskell autocomplete-haskell ide-haskell haskell-ghc-mod
 
 ### ghci
 
-- :l - load file
-- :r - reload file
-- :cd
-- :edit - \$EDITOR
-- :m - module
-- :q - quit
-- :?
-- :k - kind
-- :t - type function
-- :info - data/TypeClass
+- `:l`: load file.
+- `:r`: reload file.
+- `:cd`.
+- `:edit`: `$EDITOR`.
+- `:m`: module.
+- `:q`: quit.
+- `:?`.
+- `:k`: kind.
+- `:t`: type function.
+- `:info`: data/TypeClass.
 
 ### ghc
 
@@ -532,10 +532,10 @@ Sunday
 
 #### Num
 
-- 功能: 成员类型具有数字特征
-- 成员: 实数 整数 - Int Integer Float Double
-- 方法: + - \* abs 函数
-- 实例: 所有数字都是多态常量/定义(可视为函数)
+- 功能: 成员类型具有数字特征.
+- 成员: 实数 整数 (`Int`/`Integer`/`Float`/`Double`).
+- 方法: `+`/`-`/`*`/`abs` 函数.
+- 实例: 所有数字都是多态常量/定义(可视为函数).
 
 ```haskell
 ghci> :t 20
@@ -594,8 +594,8 @@ instance Functor IO where
 
 #### Control Applicative
 
-- 成员: f :: `* -> *` _一元类型构造符(type constructor)_
-- <\*>: 参数为 2 个 functor 实例,其中一个包含一个函数
+- 成员: `f :: * -> *` _一元类型构造符 (Type Constructor)_.
+- `<*>`: 参数为 2 个 functor 实例, 其中一个包含一个函数.
 
 ```haskell
 (<$>) :: (Functor f) => (a -> b) -> f a -> f b
@@ -697,7 +697,7 @@ class Monad m where
 {- bind -}(>>=) :: m a -> (a -> m b) -> m b
 
     (>>) :: m a -> m b -> m b
-    x >> y = x >>= \_ -> y
+    x >> y = x >>= _ -> y
 
     fail :: String -> m a
     fail msg = error msg
@@ -897,10 +897,10 @@ instance F.Foldable Tree where
 
 #### Data Monoid
 
-- 成员: 必须为具体类型(\*不可是类型构造符(type constructor))
-- 准则(Monoid Law):
-  - _结合律_ a·(b·c) = (a·b)·c
-  - 无需满足 a `mappend` b == b `mappend` a
+- 成员: 必须为具体类型 (**不可是类型构造符 (Type Constructor)**).
+- 准则 (Monoid Law):
+  - _结合律_ `a·(b·c) = (a·b)·c`.
+  - 无需满足 `a mappend b == b mappend a`.
 
 ```haskell
 class Monoid m where
@@ -1502,7 +1502,7 @@ head' :: [a] -> a
 head' = foldr1 (\x _ -> x)
 
 last' :: [a] -> a
-last' = foldl1 (\_ x -> x)
+last' = foldl1 (_ x -> x)
 ```
 
 - scanl/scanr/scanl1/scanr1 函数会将每次折叠的结果都记录在一个 List 中
@@ -1550,7 +1550,7 @@ flip' :: (a -> b -> c) -> b -> a -> c
 flip' f = \x y -> f y x
 ```
 
-#### \$函数
+#### `$` 函数
 
 `($) :: (a -> b) -> a -> b`
 
@@ -2920,7 +2920,7 @@ multiWithLog = do
 
 ```haskell
 instance Monad ((->) r) where
-    return x = \_ -> x
+    return x = _ -> x
     h >>= f = \w -> f (h w) w
 ```
 
