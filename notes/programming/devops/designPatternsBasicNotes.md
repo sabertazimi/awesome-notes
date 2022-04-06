@@ -2147,20 +2147,21 @@ doe.say('Hello everyone!');
 
 ### Observer Pattern
 
-- 被观察者(Subject)维护一组观察者列表,
+- 被观察者 (Subject) 维护一组观察者列表,
   每当被观察者状态改变时,
-  调用 notify 函数,
-  此函数中调用观察者(Observer)的 update 函数(可自定义).
-- decouple subject and observer:
+  调用 Notify 函数,
+  此函数遍历调用观察者 (Observer) 的 Update 函数 (可自定义).
+- Decouple subject and observer:
   each depends on `Abstraction` not `Implementation`.
+- 摆脱持续轮询模式, 在合适时机发布消息.
 
 :::tip Observer Use Case
 
 - Decouple.
-- 事件绑定.
+- Event listener and handler.
 - 跨层级通信.
-- Event bus.
 - Message channel.
+- 异步编程.
 
 :::
 
@@ -2312,7 +2313,13 @@ function extend(extension, obj) {
 - 观察者模式中主体和观察者是互相感知.
 - 发布-订阅模式是借助第三方来实现调度, 发布者和订阅者之间互不感知.
 
-e.g Event Bus in Vue, Event Emitter in Node.
+:::tip Pub-Sub Use Case
+
+- Event Bus in Vue.
+- Event Emitter in Node.
+- 异步编程.
+
+:::
 
 #### Pub-Sub Pattern Implementation
 
