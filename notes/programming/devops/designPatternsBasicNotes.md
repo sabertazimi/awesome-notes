@@ -2864,6 +2864,15 @@ const errorMsg = rules[rule](element, limits);
 Abstract superclass defines the skeleton of an operation
 in terms of a number of high-level steps.
 
+:::tip Template Method Use Case
+
+- APIs and SDKs.
+- Plugins and Extensions: VSCode extension, Vue plugin.
+- Hooks and Callbacks: React/Vue lifecycles, Webpack hooks.
+- Software Architecture.
+
+:::
+
 ```ts
 class Game {
   constructor(numberOfPlayers) {
