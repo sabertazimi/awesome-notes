@@ -1790,25 +1790,42 @@ console.log(peekachu.toString());
 - 调用者接过命令并将其保存下来, 它会在某个时候调用该命令对象的 execute 方法.
 - 调用者进行 `commandObject.execute` 调用时，
   它所调用的方法将转而以 `receiver.action()` 这种形式调用恰当的方法.
-- 在 JS 中, Callback 函数可以实现隐式的命令模式.
+
+:::tip Command Use Case
+
+- Decouple executor and receiver.
+- Bind command to UI components.
+- History traverse:
+  implement `macro`/`batch`/`undo`/`redo` feature via commands sequences.
+
+:::
+
+在 JS 中, Closure + Callback 可以实现隐式的命令模式:
+
+- Closure 捕获 Receiver (面向对象语言中, Command 对象需要持有 Receiver 对象).
+- Callback 函数实现具体逻辑 (面向对象语言中, 需要将其封装进 `Command.execute` 对象方法).
 
 ```ts
-const SimpleCommand = function (receiver) {
-  this.receiver = receiver;
-};
+class OOP_SimpleCommand extends Command {
+  constructor(receiver) {
+    super(receiver);
+    this.receiver = receiver;
+  }
 
-SimpleCommand.prototype.execute = function () {
-  this.receiver.action();
-};
+  execute() {
+    this.receiver.action();
+  }
+}
+
+const FP_SimpleCommand = receiver => () => receiver.action();
 ```
 
 Command pattern in UI development, bind command to UI components:
 
 - Executor: UI components.
 - Client and receiver: background tasks or other UI components.
-- Executor -> Client `command.execute()` -> Receiver `receiver.action()`.
-
-e.g click `button` -> refresh `menu`
+- Executor -> Client `command.execute()` -> Receiver `receiver.action()`:
+  e.g click `button` -> refresh `menu`.
 
 ```ts
 // receiver
@@ -1898,7 +1915,7 @@ document.getElementsByTagName('body')[0].appendChild(appMenuBar.getElement());
 appMenuBar.show();
 ```
 
-Command sequences to implement Macro/Batch/Undo command:
+Command sequences to implement `macro`/`batch`/`undo`/`redo` command:
 
 ```ts
 const Cursor = function (width, height, parent) {
