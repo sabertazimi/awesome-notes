@@ -1151,10 +1151,10 @@ cost = adapter.request('78701', '10010', '2 lbs');
 
 ### Bridge Pattern
 
-- Split large class or set of closely related classes
-  into two separate hierarchies:
-  - 分离抽象和实现 (Separate abstracts and implements).
-  - 分离对象的两种不同属性. `e.g` 从 2 个不同维度上扩展对象.
+Split large class or set of closely related classes into two separate hierarchies:
+
+- 分离抽象和实现 (Separate abstracts and implements).
+- 分离对象的两种不同属性. `e.g` 从 2 个不同维度上扩展对象.
 
 ```ts
 class VectorRenderer {
@@ -1214,11 +1214,12 @@ circle.draw();
 
 ### Decorator Pattern
 
-- 重写/重载/扩展对象原有的行为 (method), 但不改变对象原有属性
-- 可以添加新属性，并围绕新属性扩展对象的原行为 e.g 原对象只会说中文，装饰后同时说中文与英文
-- 避免了通过继承来为类型添加新的职责的形式可取，通过继承的方式容易造成子类的膨胀
-- 保持接口的一致性，动态改变对象的外观/职责
-- ConcreteDecorator 类: private ClassName component;(拥有一个对象引用)
+- 重写/重载/扩展对象原有的行为 (Methods), 但不改变对象原有属性.
+- 可以添加新属性，并围绕新属性扩展对象的原行为 e.g 原对象只会说中文，装饰后同时说中文与英文.
+- 避免了通过继承来为类型添加新的职责的形式可取，通过继承的方式容易造成子类的膨胀.
+- 保持接口的一致性，动态改变对象的外观/职责.
+- 符合开放封闭原则和单一职责模式.
+- ConcreteDecorator 类: private ClassName component;(拥有一个对象引用).
 
 ```ts
 const __decorate = function (decorators, target, key, desc) {
@@ -1264,10 +1265,8 @@ const __decorate = function (decorators, target, key, desc) {
 
 关键在于实现传递方式, 两种方式:
 
-- uber 属性获得每次装饰后结果
-- 循环叠加每次装饰后结果
-
-符合开放封闭原则和单一职责模式.
+- Uber 属性获得每次装饰后结果.
+- 循环叠加每次装饰后结果.
 
 ```ts
 // 构造函数
@@ -1783,7 +1782,7 @@ console.log(peekachu.toString());
 - 不清楚请求的接收者 (多个对象中的某个随机对象).
 - 不清楚请求具体操作.
 
-此时希望用一种松耦合的方式来设计程序，使得请求发送者和请求接收者能够消除彼此的耦合关系
+此时希望用一种松耦合的方式来设计程序，使得请求发送者和请求接收者能够消除彼此的耦合关系:
 
 - 将方法/动作封装成对象, 使得外部通过唯一方法 execute/run 调用内部方法/动作.
 - 客户创建命令；调用者执行该命令；接收者在命令执行时执行相应操作.
