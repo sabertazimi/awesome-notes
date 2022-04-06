@@ -15,6 +15,13 @@ tags: [Web, JavaScript, ECMAScript]
 - [Technical Committees 39](https://www.ecma-international.org/technical-committees/tc39 'TC39')
 - [New Feature Process](http://tc39.github.io/process-document)
 
+JavaScript = ECMAScript + DOM + BOM:
+
+- ECMAScript: ECMA-262.
+- DOM: DOM Core + DOM HTML (`document`).
+- BOM: Browser Object Model API (HTML5)
+      (`window`/`navigator`/`location`/`screen`/`performance` etc).
+
 ### Variable
 
 - 一方面规定, var/function 声明的全局变量,
