@@ -6398,8 +6398,8 @@ const useIsMounted = () => {
 
 ### Custom Async Data Hook
 
-- `useState` to store url and data
-- `useEffect` to trigger async `fetch` actions
+- `useState` to store url and data.
+- `useEffect` to trigger async `fetch` actions.
 
 ```ts
 import { useEffect, useState } from 'react';
@@ -6789,6 +6789,105 @@ function useIntersectionObserver(
 export default useIntersectionObserver;
 ```
 
+```ts
+function useComponentSize() {
+  const [size, setSize] = React.useState({
+    height: 0,
+    width: 0,
+  });
+  const ref = React.useRef<any>();
+
+  const onResize = React.useCallback(() => {
+    if (!ref.current) {
+      return;
+    }
+
+    const newHeight = ref.current.offsetHeight;
+    const newWidth = ref.current.offsetWidth;
+
+    if (newHeight !== size.height || newWidth !== size.width) {
+      setSize({
+        height: newHeight,
+        width: newWidth,
+      });
+    }
+  }, [size.height, size.width]);
+
+  React.useLayoutEffect(() => {
+    if (!ref || !ref.current) {
+      return;
+    }
+
+    const resizeObserver = new ResizeObserver(onResize);
+    resizeObserver.observe(ref.current);
+
+    return () => resizeObserver.disconnect();
+  }, [ref, onResize]);
+
+  return {
+    ref,
+    ...size,
+  };
+}
+```
+
+### Custom Locked Body Hook
+
+```ts
+import { useEffect, useLayoutEffect, useState } from 'react';
+
+type ReturnType = [boolean, (locked: boolean) => void];
+
+function useLockedBody(initialLocked = false): ReturnType {
+  const [locked, setLocked] = useState(initialLocked);
+
+  // Do the side effect before render
+  useLayoutEffect(() => {
+    // Key point 1
+    if (!locked) {
+      return;
+    }
+
+    // Save initial body style
+    const originalOverflow = document.body.style.overflow;
+    const originalPaddingRight = document.body.style.paddingRight;
+
+    // Lock body scroll
+    document.body.style.overflow = 'hidden';
+
+    // Get the scrollBar width
+    const root = document.getElementById('___gatsby'); // or root
+    const scrollBarWidth = root ? root.offsetWidth - root.scrollWidth : 0;
+
+    // Avoid width reflow
+    if (scrollBarWidth) {
+      document.body.style.paddingRight = `${scrollBarWidth}px`;
+    }
+
+    // Key point 2
+    return () => {
+      document.body.style.overflow = originalOverflow;
+
+      if (scrollBarWidth) {
+        document.body.style.paddingRight = originalPaddingRight;
+      }
+    };
+  }, [locked]);
+
+  // Update state if initialValue changes
+  useEffect(() => {
+    if (locked !== initialLocked) {
+      setLocked(initialLocked);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialLocked]);
+
+  return [locked, setLocked];
+}
+
+export default useLockedBody;
+```
+
 ### Custom Script Loading Hook
 
 ```ts
@@ -6933,63 +7032,6 @@ const useScript = src => {
 };
 ```
 
-### Custom Locked Body Hook
-
-```ts
-import { useEffect, useLayoutEffect, useState } from 'react';
-
-type ReturnType = [boolean, (locked: boolean) => void];
-
-function useLockedBody(initialLocked = false): ReturnType {
-  const [locked, setLocked] = useState(initialLocked);
-
-  // Do the side effect before render
-  useLayoutEffect(() => {
-    // Key point 1
-    if (!locked) {
-      return;
-    }
-
-    // Save initial body style
-    const originalOverflow = document.body.style.overflow;
-    const originalPaddingRight = document.body.style.paddingRight;
-
-    // Lock body scroll
-    document.body.style.overflow = 'hidden';
-
-    // Get the scrollBar width
-    const root = document.getElementById('___gatsby'); // or root
-    const scrollBarWidth = root ? root.offsetWidth - root.scrollWidth : 0;
-
-    // Avoid width reflow
-    if (scrollBarWidth) {
-      document.body.style.paddingRight = `${scrollBarWidth}px`;
-    }
-
-    // Key point 2
-    return () => {
-      document.body.style.overflow = originalOverflow;
-
-      if (scrollBarWidth) {
-        document.body.style.paddingRight = originalPaddingRight;
-      }
-    };
-  }, [locked]);
-
-  // Update state if initialValue changes
-  useEffect(() => {
-    if (locked !== initialLocked) {
-      setLocked(initialLocked);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialLocked]);
-
-  return [locked, setLocked];
-}
-
-export default useLockedBody;
-```
-
 ### Custom Media Query Hook
 
 ```ts
@@ -7018,6 +7060,107 @@ export default function useMedia<T>(
 
   return value;
 }
+```
+
+### Custom Cookie Hook
+
+```ts
+// https://github.com/tylerwolff/useCookie.
+import { useState } from 'react';
+
+const isBrowser = typeof window !== 'undefined';
+
+function stringifyOptions(options) {
+  return Object.keys(options).reduce((acc, key) => {
+    if (key === 'days') {
+      // Skip `days`.
+      return acc;
+    } else {
+      if (options[key] === false) {
+        return acc;
+      } else if (options[key] === true) {
+        return `${acc}; ${key}`;
+      } else {
+        return `${acc}; ${key}=${options[key]}`;
+      }
+    }
+  }, '');
+}
+
+function getCookie(name, initialValue = '') {
+  return (
+    (isBrowser &&
+      document.cookie.split('; ').reduce((r, v) => {
+        const parts = v.split('=');
+        return parts[0] === name ? decodeURIComponent(parts[1]) : r;
+      }, '')) ||
+    initialValue
+  );
+}
+
+function setCookie(name, value, options) {
+  if (!isBrowser) return;
+
+  const optionsWithDefaults = {
+    days: 7,
+    path: '/',
+    ...options,
+  };
+
+  const expires = new Date(
+    Date.now() + optionsWithDefaults.days * 864e5
+  ).toUTCString();
+
+  document.cookie = `${name}=${encodeURIComponent(
+    value
+  )}; expires=${expires}${stringifyOptions(optionsWithDefaults)}`;
+}
+
+function useCookie(key, initialValue) {
+  const [item, setItem] = useState(() => {
+    return getCookie(key, initialValue);
+  });
+
+  const updateItem = (value, options) => {
+    setItem(value);
+    setCookie(key, value, options);
+  };
+
+  return [item, updateItem];
+}
+```
+
+### Custom LocalStorage Hook
+
+```tsx
+// https://www.robinwieruch.de/react-uselocalstorage-hook.
+const useLocalStorage = (storageKey, fallbackState) => {
+  const [value, setValue] = React.useState(
+    JSON.parse(localStorage.getItem(storageKey)) || fallbackState
+  );
+
+  // Update logic.
+  React.useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(value));
+  }, [value, storageKey]);
+
+  return [value, setValue];
+};
+
+const App = () => {
+  const [isOpen, setOpen] = useLocalStorage('is-open', false);
+
+  const handleToggle = () => {
+    setOpen(!isOpen);
+  };
+
+  return (
+    <div>
+      <button onClick={handleToggle}>Toggle</button>
+      {isOpen && <div>Content</div>}
+    </div>
+  );
+};
 ```
 
 ### Custom Form Hook
