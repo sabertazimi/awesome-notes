@@ -952,6 +952,7 @@ tags: [Web, Framework, Library]
 ## SEO
 
 - [React Helmet: Document Head Manager](https://github.com/nfl/react-helmet)
+- [NextSEO: Next.js SEO Management](https://github.com/garmeeh/next-seo)
 - [Vue Meta: Components HTML Metadata Manager with SSR Support](https://github.com/nuxt/vue-meta)
 
 ## CLI
