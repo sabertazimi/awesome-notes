@@ -24,15 +24,16 @@ JavaScript = ECMAScript + DOM + BOM:
 
 ### Variable
 
-- 一方面规定, var/function 声明的全局变量,
+- 一方面规定, `var`/`function` 声明的全局变量,
   依旧是全局对象的属性, 意味着会`Hoisting`.
-- 另一方面规定, let/const/class 声明的全局变量,
+- 另一方面规定, `let`/`const`/`class` 声明的全局变量,
   不属于全局对象的属性, 意味着不会`Hoisting`.
+- `var` 只有函数作用域, `let`/`const` 拥有块级作用域.
 
 #### Let Variable
 
-- 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError
-- 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone)
+- 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError.
+- 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone).
 - `let` variable in `for-loop` closure,
   every closure for each loop
   binds the block-scoped variable.
@@ -47,11 +48,11 @@ let b = 2;
 
 #### Const Variable
 
-- const 一旦声明变量，就必须立即初始化，不能留到以后赋值
+- const 一旦声明变量，就必须立即初始化，不能留到以后赋值.
 - 引用一个`Reference`变量时，只表示此变量地址不可变，但所引用变量的值/属性可变
-  (xxx \* const, 即`const`指针, 指向一个变量)
-- 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone)
-- 块级作用域
+  (`xxx *const`, 即`const`指针, 指向一个变量).
+- 块级作用域.
+- 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone).
 
 ### Destructuring Pattern Matching
 
