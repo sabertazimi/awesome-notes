@@ -1795,8 +1795,10 @@ console.log(peekachu.toString());
 
 - Decouple executor and receiver.
 - Bind command to UI components.
-- History traverse:
-  implement `macro`/`batch`/`undo`/`redo` feature via commands sequences.
+- Command sequences (store commands + `Composite` pattern):
+  `Macro`/`Batch`/`Undo`/`Redo` feature.
+- Command queue (cache commands + `Observer` pattern):
+  `Redis`/`RabbitMQ`/`Kafka`.
 
 :::
 
@@ -1915,7 +1917,7 @@ document.getElementsByTagName('body')[0].appendChild(appMenuBar.getElement());
 appMenuBar.show();
 ```
 
-Command sequences to implement `macro`/`batch`/`undo`/`redo` command:
+Command sequences to implement `Macro`/`Batch`/`Undo`/`Redo` feature:
 
 ```ts
 const Cursor = function (width, height, parent) {
