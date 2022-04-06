@@ -552,7 +552,7 @@ tags: [Web, Framework, Library]
 - [Scroll Bar Detection](https://github.com/idiotWu/smooth-scrollbar)
 - [Atropos: 3D Parallax Effects](https://github.com/nolimits4web/atropos)
 
-### Mouse Utils
+### Mouse and Touch Utils
 
 - [React DnD: Drag and Drop](https://github.com/react-dnd/react-dnd)
 - [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd)
@@ -560,10 +560,11 @@ tags: [Web, Framework, Library]
 - [Moveable](https://github.com/daybrush/moveable)
 - [P5.js](https://github.com/processing/p5.js)
 - [Nipple.js](https://github.com/yoannmoinet/nipplejs)
-- [Interact.js: Drag, Drop and Resizing Multi Touch](https://github.com/taye/interact.js)
 - [Moveable](https://github.com/daybrush/moveable)
 - [TransMat: Share Data beyond Boundaries of Browser](https://github.com/google/transmat)
 - [Spacers: Drag for More Space](https://github.com/actuallyakash/spacers)
+- [Interact.js: Drag, Drop and Resizing Multi Touch](https://github.com/taye/interact.js)
+- [ReactZoom: Multi-touch Gestures for Zooming and Dragging](https://github.com/retyui/react-quick-pinch-zoom)
 
 ### Cursor Utils
 
