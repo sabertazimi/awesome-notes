@@ -1791,47 +1791,16 @@ console.log(peekachu.toString());
 - 调用者接过命令并将其保存下来, 它会在某个时候调用该命令对象的 execute 方法.
 - 调用者进行 `commandObject.execute` 调用时，
   它所调用的方法将转而以 `receiver.action()` 这种形式调用恰当的方法.
-
-`client` and `receiver`:
+- 在 JS 中, Callback 函数可以实现隐式的命令模式.
 
 ```ts
-const SimpleCommand = function (receiving) {
-  this.receiving = receiving;
+const SimpleCommand = function (receiver) {
+  this.receiver = receiver;
 };
 
 SimpleCommand.prototype.execute = function () {
-  this.receiving.action();
+  this.receiver.action();
 };
-```
-
-```ts
-module.exports = (function () {
-  const manager = {};
-
-  // command to be encapsulated
-  manager.isNull = function (nu) {
-    return toString.apply(nu) === '[object Null]';
-  };
-  manager.isArray = function (arr) {
-    return toString.apply(arr) === '[object Array]';
-  };
-  manager.isString = function (str) {
-    return toString.apply(str) === '[object String]';
-  };
-
-  // public api
-  function execute(command, ...args) {
-    return manager[command] && manager[command](...args);
-  }
-  function run(command) {
-    return manager[command] && manager[command](...arg);
-  }
-
-  return {
-    execute,
-    run,
-  };
-})();
 ```
 
 Command pattern in UI development, bind command to UI components:
@@ -2643,7 +2612,7 @@ button.off();
 - 将单个策略进行抽象封装:
   - 解耦.
   - 复用.
-- JS 中, 函数作为参数与返回值时, 均为隐形的策略模式.
+- JS 中, 函数作为参数与返回值时, 可以实现隐式的策略模式.
 
 :::tip Strategy Use Case
 
@@ -2653,6 +2622,8 @@ button.off();
 - 重构代码.
 
 :::
+
+Change strategy:
 
 ```ts
 const OutputFormat = Object.freeze({
@@ -2731,6 +2702,8 @@ tp.appendList(['one', 'two', 'three']);
 console.log(tp.toString());
 ```
 
+Remove `if-else` statements:
+
 ```ts
 // 违反开放封闭原则
 const activity = (type, price) => {
@@ -2758,6 +2731,39 @@ const getActivityPrice = (type, price) => activity.get(type)(price);
 // 新增新手活动
 activity.set('newcomer', price => price * 0.7);
 ```
+
+```ts
+module.exports = (function () {
+  const manager = {};
+
+  // command to be encapsulated
+  manager.isNull = function (nu) {
+    return toString.apply(nu) === '[object Null]';
+  };
+  manager.isArray = function (arr) {
+    return toString.apply(arr) === '[object Array]';
+  };
+  manager.isString = function (str) {
+    return toString.apply(str) === '[object String]';
+  };
+
+  // public api
+  function execute(command, ...args) {
+    return manager[command] && manager[command](...args);
+  }
+
+  function run(command) {
+    return manager[command] && manager[command]();
+  }
+
+  return {
+    execute,
+    run,
+  };
+})();
+```
+
+Form validator:
 
 ```ts
 const errorMsg = rules[rule](element, limits);
