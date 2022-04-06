@@ -3039,10 +3039,10 @@ Orinoco 优化 (优化全停顿现象):
 
 ## Browser Internal
 
-- Chrome: Blink (based on Webkit) + V8
-- Firefox: Gecko + SpiderMonkey
-- Safari: Webkit + JavaScriptCore (Nitro)
-- Edge: Trident/EdgeHTML + Chakra -> Chromium
+- Chrome: Blink (based on Webkit) + V8.
+- Firefox: Gecko + SpiderMonkey.
+- Safari: Webkit + JavaScriptCore (Nitro).
+- Edge: Trident/EdgeHTML + Chakra -> Chromium.
 
 ### Browser Process
 
