@@ -224,6 +224,7 @@
     "cond",
     "condvar",
     "confighash",
+    "configurator",
     "conflictstyle",
     "connectionless",
     "Consola",
