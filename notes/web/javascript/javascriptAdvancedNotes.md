@@ -7775,9 +7775,9 @@ Client ID 和 Client Secret. 这是为了防止令牌被滥用, 没有备案过�
 
 OAuth Token 特征:
 
-1. 授权短 (Short Expire Time)
-2. 可撤销 (Revoke)
-3. 权限小 (Scope)
+1. 授权短 (Short Expire Time).
+2. 可撤销 (Revoke).
+3. 权限小 (Scope).
 
 #### OAuth Authentication Basis
 
@@ -7813,6 +7813,10 @@ https://github.com/login/oauth/access_token
 &grant_type=refresh_token
 &refresh_token=REFRESH_TOKEN
 ```
+
+#### OAuth Usage
+
+- Modern guide to [OAuth](https://fusionauth.io/learn/expert-advice/oauth/modern-guide-to-oauth).
 
 ### Single Sign On
 
