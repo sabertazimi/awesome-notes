@@ -456,7 +456,7 @@ tags: [Web, Framework, Library]
 - [Async Validator](https://github.com/yiminghe/async-validator)
 - [Cleave.js: Input Format Checker](https://github.com/nosir/cleave.js)
 - [Joi](https://github.com/hapijs/joi)
-- [Yup](https://github.com/jquense/yup)
+- [Yup: Schema Validator](https://github.com/jquense/yup)
 - [jQuery Form Validator](https://github.com/victorjonsson/jQuery-Form-Validator)
 
 ### List
@@ -908,9 +908,10 @@ tags: [Web, Framework, Library]
 - [Mkdirp](https://github.com/isaacs/node-mkdirp)
 - [RimRaf](https://github.com/isaacs/rimraf)
 - [Steno: Specialized Fast Async File Writer](https://github.com/typicode/steno)
-- [JS Zip](https://github.com/Stuk/jszip)
 - [File Type](https://github.com/sindresorhus/file-type)
 - [File Size](https://github.com/avoidwork/filesize.js)
+- [Zip File](https://github.com/Stuk/jszip)
+- [Binary File](https://github.com/gjtorikian/isBinaryFile)
 
 ### PDF Utils
 
@@ -1040,6 +1041,8 @@ tags: [Web, Framework, Library]
 - [YAML Parser](https://github.com/jonschlinkert/gray-matter)
 - [XML Parser](https://github.com/TobiasNickel/tXml)
 - [SVG Parser](https://github.com/sebmarkbage/art)
+- [Crontab Parser](https://github.com/harrisiirak/cron-parser)
+- [INI Parser](https://github.com/npm/ini)
 
 #### Markdown Parser and Render
 
@@ -1160,6 +1163,8 @@ tags: [Web, Framework, Library]
 - [Assert](https://github.com/power-assert-js/power-assert)
 - [Testem](https://github.com/testem/testem)
 - [Malabi: Tracing Based JavaScript Assertions](https://github.com/aspecto-io/malabi)
+- [FastCheck: Property Based Testing](https://github.com/dubzzz/fast-check)
+- [Stryker: Mutation Testing](https://github.com/stryker-mutator/stryker-js)
 
 ### Feature Testing
 
@@ -1370,6 +1375,7 @@ tags: [Web, Framework, Library]
 - [Compressed Bundle Size](https://github.com/preactjs/compressed-size-action)
 - [Limit Bundle Size](https://github.com/andresz1/size-limit-action)
 - [License Compliance](https://github.com/fossas/fossa-action)
+- [Review Dependency](https://github.com/actions/dependency-review-action)
 
 #### Building Actions
 
