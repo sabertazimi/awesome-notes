@@ -44,6 +44,7 @@ it can be difficult to understand how that will affect other dependent modules:
 - Decorator pattern.
 - Proxy pattern.
 - Iterator pattern.
+- Visitor pattern.
 
 ```ts
 // BAD
@@ -79,7 +80,18 @@ class AnimalDB {
 #### Open-Closed Principle
 
 Allow users to add new functionalities without changing existing code,
-open for extension, close for modification.
+open for extension, close for modification:
+
+- Polymorphism (多态性).
+- Adapter pattern.
+- Decorator pattern.
+- Proxy pattern.
+- Chain of responsibility pattern.
+- Iterator pattern.
+- Pub-Sub pattern.
+- State pattern.
+- Strategy pattern.
+- Template Method Pattern.
 
 ```ts
 class Coder {
@@ -653,8 +665,8 @@ Universal Module Definition:
 - Iterator (迭代器): 在不需要直到集合内部工作原理的情况下, 顺序访问一个集合里面的元素.
 - Mediator (中介者模式): 在类之间定义简化的通信方式, 用于避免类之间显式的持有彼此的引用.
 - Observer (观察者模式): 用于将变化通知给多个类的方式, 可以保证类之间的一致性.
-- Strategy (策略): 将算法封装到类中, 将选择和实现分离开来.
 - State (状态): 当对象状态改变时, 改变对象的行为.
+- Strategy (策略): 将算法封装到类中, 将选择和实现分离开来.
 - Template Method (模板方法): 在一个方法中为某个算法建立一层外壳, 将算法的具体步骤交付给子类去做.
 - Visitor (访问者): 为类增加新的操作而不改变类本身.
 
@@ -1064,6 +1076,7 @@ const createLoginLayer = (function (creator) {
 - `old.method()`.
 - `adapter.method()`:
   实现此 method 时, 使用了新接口规定的属性/方法.
+- 符合开放封闭原则.
 
 :::tip Adapter Use Case
 
@@ -1733,6 +1746,7 @@ setTimeout(function () {
   减少重复对象的产生.
 - 代理对象可以为中间过程透明地增加额外逻辑: 预加载/缓存/合并/验证/转换等.
 - 昂贵的对象创建或任务执行可以延迟到代理对象中执行.
+- 符合开放封闭原则.
 
 :::tip Proxy Use Case
 
@@ -1839,6 +1853,7 @@ reactive.name = 'bob'; // 'updating UI...'
 - 请求发送者只需知道链中的第一个节点, 从而降低发送者和一组接收者之间的强耦合.
 - 请求发送者可以任意选择第一个节点, 从而减少请求在链中的传递次数.
 - 职责链中的节点数量和顺序可以自由变化.
+- 符合开放封闭原则.
 
 :::tip CoR Use Case
 
@@ -2222,7 +2237,7 @@ Cursor.prototype = {
 一个 Iterator 对象封装访问和遍历一个聚集对象中的各个构件的方法:
 
 - 无需暴露聚集对象的内部表示, 符合开放封闭原则.
-- 实现统一遍历接口, 抽离遍历逻辑与业务逻辑, 符合单一功能原则.
+- 实现统一遍历接口, 抽离遍历逻辑与业务逻辑, 符合单一职责原则.
 
 :::tip Iterator Use Case
 
@@ -2563,6 +2578,7 @@ function extend(extension, obj) {
 
 - 观察者模式中主体和观察者是互相感知.
 - 发布-订阅模式是借助第三方来实现调度, 发布者和订阅者之间互不感知.
+- 符合开放封闭原则.
 
 :::tip Pub-Sub Use Case
 
@@ -2758,7 +2774,7 @@ if (typeof module !== 'undefined' && 'exports' in module) {
 }
 ```
 
-#### Pub-Sub Pattern Sample
+#### Pub-Sub Pattern Usage
 
 ##### Ajax Callback
 
