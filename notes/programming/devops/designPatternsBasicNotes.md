@@ -621,7 +621,7 @@ Universal Module Definition:
 
 #### Structural Patterns
 
-- Adapter (适配器): 将不同类的接口进行匹配, 调整, 这样尽管内部接口不兼容但是不同的类还是可以协同工作的.
+- Adapter (适配器模式): 将不同类的接口进行匹配与调整, 使得内部接口不兼容的类可以协同工作.
 - Bridge (桥接模式): 将对象的接口从其实现中分离出来, 这样对象的实现和接口可以独立的变化.
 - Composite (组合模式):
   通过将简单可组合的对象组合起来, 构成一个完整的对象,
@@ -1050,6 +1050,12 @@ const createLoginLayer = (function (creator) {
 - `old.method()`.
 - `adapter.method()`:
   实现此 method 时, 使用了新接口规定的属性/方法.
+
+:::tip Adapter Use Case
+
+- API adapter.
+
+:::
 
 ```ts
 class Calculator1 {
