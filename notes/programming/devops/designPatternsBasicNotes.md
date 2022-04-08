@@ -1569,10 +1569,18 @@ sabertazimi.addMyEvent = function (el, ev, fn) {
 
 减小内存开销 (Performance 性能优化):
 
-- 内在信息 - 对象中的内部方法所需信息/属性, 一个单独的享元可替代大量具有相同内在信息的对象
-- 外部状态作为方法参数:使之适应不同的外部状态(context)——对象实例差异处
-- 某个类型的对象有大量的实例，对这些实例进行分类，合并相同分类的对象，只创建少量实例(享元)
-- 通过享元工厂来管理一组享元，当所需享元已存在时，返回已存在享元;当所需享元不存在时，创建新享元
+- **内部**信息: 对象中的内部方法所需信息/属性, 一个单独的享元可替代大量具有相同内在信息的对象.
+- **外部**状态: 作为方法参数, 使之适应不同的外部状态 (Context), 实例对象差异.
+- 某个类型的对象有大量的实例, 对这些实例进行分类, 合并相同分类的对象, 只创建少量实例 (享元).
+- 通过享元工厂来管理一组享元:
+  - 当所需享元已存在时, 返回已存在享元.
+  - 当所需享元不存在时, 创建新享元.
+
+:::tip Flyweight Use Case
+
+- 大量相似对象.
+
+:::
 
 ```ts
 function Flyweight(make, model, processor) {
@@ -1586,7 +1594,7 @@ const FlyWeightFactory = (function () {
 
   return {
     get(make, model, processor) {
-      // 不存在所需享元，新建新享元
+      // 不存在所需享元, 新建新享元.
       if (!flyweights[make + model]) {
         flyweights[make + model] = new Flyweight(make, model, processor);
       }
@@ -1642,8 +1650,8 @@ function ComputerCollection() {
   computers.add('HP', 'Envy', 'Intel', '4G', 'CNU883701');
   computers.add('HP', 'Envy', 'Intel', '2G', 'TXU003283');
 
-  console.log(`Computers: ${computers.getCount()}`);
-  console.log(`Flyweights: ${FlyWeightFactory.getCount()}`);
+  console.log(`Computers: ${computers.getCount()}`); // 6.
+  console.log(`Flyweights: ${FlyWeightFactory.getCount()}`); // 2.
 })();
 ```
 
