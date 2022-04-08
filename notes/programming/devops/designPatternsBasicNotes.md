@@ -1578,7 +1578,10 @@ sabertazimi.addMyEvent = function (el, ev, fn) {
 
 :::tip Flyweight Use Case
 
-- 大量相似对象.
+- Objects pool.
+- DOM nodes pool.
+- Event delegation.
+- Reduce similar object instances.
 
 :::
 
@@ -1653,6 +1656,47 @@ function ComputerCollection() {
   console.log(`Computers: ${computers.getCount()}`); // 6.
   console.log(`Flyweights: ${FlyWeightFactory.getCount()}`); // 2.
 })();
+```
+
+DOM pool:
+
+```ts
+class ObjectPool<T, P> {
+  objectFactory: () => T;
+  objectPool: [T];
+
+  constructor(objectFactory: () => T) {
+    this.objectFactory = objectFactory;
+    this.objectPool = [];
+  }
+
+  create(...args: P) {
+    return objectPool.length === 0 ? objectFactory(args) : objectPool.shift();
+  }
+
+  recover(obj: T) {
+    objectPool.push(obj);
+  }
+}
+
+const iframeFactory = new ObjectPool(() => {
+  const iframe = document.createElement('iframe');
+  document.body.appendChild(iframe);
+  iframe.onload = function () {
+    iframe.onload = null;
+    iframeFactory.recover(iframe);
+  };
+  return iframe;
+});
+
+const iframe1 = iframeFactory.create();
+iframe1.src = 'http:// baidu.com';
+const iframe2 = iframeFactory.create();
+iframe2.src = 'http:// QQ.com';
+setTimeout(function () {
+  const iframe3 = iframeFactory.create();
+  iframe3.src = 'http:// 163.com';
+}, 3000);
 ```
 
 ### Proxy Pattern
