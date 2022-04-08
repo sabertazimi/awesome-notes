@@ -3075,68 +3075,7 @@ const c = new Controller(db);
 c.action();
 ```
 
-IoC container:
-
-```java
-class DbMysql {
-  public function __construct($host, $name, $pwd) {
-    // do something
-  }
-  public function query() {
-    echo __METHOD__ . PHP_EOL;
-  }
-}
-
-class DbRedis {
-  public function __construct($host, $name, $pwd) {
-    // do something
-  }
-  public function set() {
-    echo __METHOD__ . PHP_EOL;
-  }
-}
-
-class controller {
-  public $mysql;
-  public $redis;
-  public function __construct($mysql, $redis) {
-    $this->mysql = $mysql;
-    $this->redis = $redis;
-  }
-  public function action() {
-    $this->mysql->query();
-    $this->redis->set();}
-  }
-}
-
-
-class Container {
-  public $bindings = [];
-  public function bind($key, Closure $value) {
-    $this->bindings[$key] = $value;
-  }
-  public function make($key) {
-    $new = $this->bindings[$key];
-    return $new();
-  }
-}
-
-$app = new Container();
-$app->bind('mysql', function () { return new DbMysql('host', 'name', 'pwd'); });
-$app->bind('redis', function () { return new DbRedis('host', 'name', 'pwd'); });
-$app->bind('controller', function () use ($app) {
-  return new Controller($app->make('mysql'), $app->make('redis'));
-});
-$controller = $app->make('controller');
-$controller->action();
-/** * 输出： * DbMysql::query * DbRedis::set */
-```
-
-With dependency injection:
-
 ```tsx
-// dependency provider
-// top module
 import * as React from 'react';
 import type { IProvider } from './providers';
 
@@ -3156,6 +3095,27 @@ export class Hello extends React.Component {
 
   render() {
     return <h1>Hello {this.nameProvider.provide()}!</h1>;
+  }
+}
+```
+
+```ts
+class Injector {
+  private static container = new Map<string, any>();
+
+  static resolve<T>(target: Type<T>): T {
+    if (Injector.container.has(target.name)) {
+      return Injector.container.get(target.name);
+    }
+
+    const tokens = Reflect.getMetadata('design:types', target) || [];
+    const injections = tokens.map((token: Type<any>): any =>
+      Injector.resolve(token)
+    );
+    // eslint-disable-next-line new-cap
+    const instance = new target(...injections);
+    Injector.container.set(target.name, instance);
+    return instance;
   }
 }
 ```
