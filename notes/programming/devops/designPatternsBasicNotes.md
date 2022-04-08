@@ -2292,10 +2292,21 @@ const result = upload([flashUploader, formUploader]);
 
 ### Mediator Pattern
 
-一个 Mediator 对象封装对象间的协议:
-中央集权的控制中心 - 所有观察者共享一个共有的被观察者(所有订阅者订阅同一个节点).
+一个 Mediator 对象封装对象间的协议 (中央集权的控制中心):
 
-Defines an object that encapsulates how a set of objects interact:
+- Defines an object that encapsulates how a set of objects interact.
+- 所有观察者共享一个共有的被观察者 (所有订阅者订阅同一个节点).
+- 解除对象间的强耦合关系 (最少知识原则), 独立地改变对象间的交互方式.
+- 网状的多对多关系 => 相对简单的一对多关系.
+
+:::tip Mediator Use Case
+
+- 聊天室.
+- 指挥中心.
+- 游戏服务器.
+- Global state store: A action => store => B change.
+
+:::
 
 ```ts
 class Person {
