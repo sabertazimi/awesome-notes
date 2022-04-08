@@ -38,7 +38,12 @@ Software design is the art of managing dependencies and abstractions.
 #### Single Responsibility Principle
 
 Too much functionality is in one class and you modify a piece of it,
-it can be difficult to understand how that will affect other dependent modules.
+it can be difficult to understand how that will affect other dependent modules:
+
+- Singleton pattern.
+- Decorator pattern.
+- Proxy pattern.
+- Iterator pattern.
 
 ```ts
 // BAD
@@ -409,6 +414,15 @@ class MockHttpService implements Connection {
     }
 }
 ```
+
+### Least Knowledge Principle
+
+最少知识原则 (Law of Demeter):
+
+- 一个软件实体 (变量/对象/类/函数/模块/系统) 应当尽可能少地与其他实体发生相互作用.
+- 若两个对象无需直接通信, 则两个对象不应直接相互联系, 引入一个第三者对象承担通信作用.
+- Facade pattern.
+- Mediator pattern.
 
 ### Literal Pattern
 
