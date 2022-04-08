@@ -8834,6 +8834,13 @@ const App = () => (
 );
 ```
 
+:::tip React Bottlenecks
+
+1. CPU bottleneck: Concurrency Feature (Priority Interrupt Mechanism).
+2. I/O bottleneck: Suspense.
+
+:::
+
 #### Suspense and Lazy
 
 Lazy loading and code splitting:
