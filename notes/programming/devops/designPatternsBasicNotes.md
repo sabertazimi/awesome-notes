@@ -2805,9 +2805,21 @@ if (typeof module !== 'undefined' && 'exports' in module) {
 
 一个 State 对象封装一个与状态相关的行为,
 运用有限状态机 (Finite State Machines)
-根据 Object State 改变 Object Behavior:
+根据 Object State 改变 Object Behavior,
 `object` set `state` as its **member**,
-`state` set `object` as its **method parameter**.
+`state` set `object` as its **method parameter**:
+
+- 每一种状态和它对应的行为之间的关系局部化:
+  - 状态具体行为封装在状态类中, 便于阅读和管理代码.
+  - 状态切换规则分布在状态类中, 有效地消除了大量条件分支语句.
+- 符合开放封闭原则.
+
+:::tip
+
+- Internet protocol stack.
+- Game player logic.
+
+:::
 
 ```ts
 class Switch {
