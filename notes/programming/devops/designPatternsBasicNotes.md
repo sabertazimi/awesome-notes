@@ -626,7 +626,7 @@ Universal Module Definition:
 - Composite (组合模式):
   通过将简单可组合的对象组合起来, 构成一个完整的对象,
   这个对象的能力将会超过这些组成部分的能力的总和, 产生新的能力.
-- Decorator (装饰器): 动态给对象增加一些可替换的处理流程。
+- Decorator (装饰器): 动态给对象增加一些可替换的处理流程.
 - Facade (外观模式): 一个类隐藏了内部子系统的复杂度，只暴露出一些简单的接口。
 - Flyweight (享元模式) 一个细粒度对象，用于将包含在其它地方的信息 在不同对象之间高效地共享.
 - Proxy (代理模式): 一个充当占位符的对象用来代表一个真实的对象。
@@ -1287,10 +1287,16 @@ root.do();
 
 - 重写/重载/扩展对象原有的行为 (Methods), 但不改变对象原有属性.
 - 可以添加新属性，并围绕新属性扩展对象的原行为 e.g 原对象只会说中文，装饰后同时说中文与英文.
-- 避免了通过继承来为类型添加新的职责的形式可取，通过继承的方式容易造成子类的膨胀.
-- 保持接口的一致性，动态改变对象的外观/职责.
+- 避免了通过继承来为类型添加新职责, 通过继承的方式容易造成子类的膨胀.
+- 保持接口的一致性，**动态**改变对象的外观/职责.
 - 符合开放封闭原则和单一职责模式.
-- ConcreteDecorator 类: private ClassName component;(拥有一个对象引用).
+- ConcreteDecorator 类: `private ClassName component` 拥有一个对象引用.
+
+:::tip Decorator Use Case
+
+- AOP: Aspect Oriented Programming.
+
+:::
 
 ```ts
 const __decorate = function (decorators, target, key, desc) {
@@ -1332,11 +1338,58 @@ const __decorate = function (decorators, target, key, desc) {
 };
 ```
 
+```ts
+// The constructor to decorate
+function MacBook() {
+  this.cost = function () {
+    return 997;
+  };
+  this.screenSize = function () {
+    return 11.6;
+  };
+}
+
+// Decorator 1
+function Memory(macBook) {
+  const v = macBook.cost();
+  macBook.cost = function () {
+    return v + 75;
+  };
+}
+
+// Decorator 2
+function Engraving(macBook) {
+  const v = macBook.cost();
+  macBook.cost = function () {
+    return v + 200;
+  };
+}
+
+// Decorator 3
+function Insurance(macBook) {
+  const v = macBook.cost();
+  macBook.cost = function () {
+    return v + 250;
+  };
+}
+
+const mb = new MacBook();
+Memory(mb);
+Engraving(mb);
+Insurance(mb);
+
+// Outputs: 1522
+console.log(mb.cost());
+
+// Outputs: 11.6
+console.log(mb.screenSize());
+```
+
 #### Decorator Implementation
 
 关键在于实现传递方式, 两种方式:
 
-- Uber 属性获得每次装饰后结果.
+- 通过属性拥有原生对象引用 (`Uber`), 获得上次装饰后结果.
 - 循环叠加每次装饰后结果.
 
 ```ts
@@ -1398,8 +1451,6 @@ Sale.prototype.decorate = function (decorator) {
 };
 ```
 
-#### Decorators List
-
 ```ts
 // 构造函数
 function Sale(price) {
@@ -1446,63 +1497,13 @@ Sale.prototype.getPrice = function () {
 };
 ```
 
-#### Decorator Pattern Example
-
-```ts
-// The constructor to decorate
-function MacBook() {
-  this.cost = function () {
-    return 997;
-  };
-  this.screenSize = function () {
-    return 11.6;
-  };
-}
-
-// Decorator 1
-function Memory(macBook) {
-  const v = macBook.cost();
-  macBook.cost = function () {
-    return v + 75;
-  };
-}
-
-// Decorator 2
-function Engraving(macBook) {
-  const v = macBook.cost();
-  macBook.cost = function () {
-    return v + 200;
-  };
-}
-
-// Decorator 3
-function Insurance(macBook) {
-  const v = macBook.cost();
-  macBook.cost = function () {
-    return v + 250;
-  };
-}
-```
-
-```ts
-const mb = new MacBook();
-Memory(mb);
-Engraving(mb);
-Insurance(mb);
-
-// Outputs: 1522
-console.log(mb.cost());
-
-// Outputs: 11.6
-console.log(mb.screenSize());
-```
-
 ### Facade Pattern
 
-将多个复杂的子系统封装+合并,
+封装复杂逻辑:
+
+将多个复杂的子系统`封装 + 合并`,
 实现一个复杂功能,
-但只暴露一个简单的接口:
-封装复杂逻辑.
+但只暴露一个简单的接口.
 
 ```ts
 class CPU {
@@ -3442,7 +3443,11 @@ MVVM 进一步允许我们创建一个模型的特定视图子集，包含了状
 AOP (Aspect Oriented Programming)
 把通用逻辑抽离出来,
 通过切面的方式添加到某个地方,
-可以复用和动态增删切面逻辑.
+可以复用和动态增删切面逻辑:
+
+- Chain of responsibility pattern.
+- Decorator pattern.
+- Proxy pattern.
 
 Nest.js:
 Middleware, Guard, Interceptor, Pipe, ExceptionFilter 通过 AOP 思想,
