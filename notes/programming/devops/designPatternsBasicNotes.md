@@ -1294,6 +1294,11 @@ root.do();
 
 :::tip Decorator Use Case
 
+- Guard: form validator.
+- Interceptor:
+  - HTTP request and response decorator.
+  - Web statistic tool.
+- Transformer.
 - AOP: Aspect Oriented Programming.
 
 :::
@@ -1719,9 +1724,13 @@ setTimeout(function () {
 - 跨域处理.
 - 防火墙代理.
 - 路由保护代理.
-- Interceptor/Transformer/Guard (AOP).
 
 :::
+
+代理模式强调一种关系 (Proxy 与它的实体之间的关系), 这种关系可以静态地表达.
+装饰者模式用于一开始不能确定对象的全部功能.
+代理模式通常只有一层`代理-本体`的引用,
+装饰者模式经常会形成一条长长的装饰链.
 
 ```ts
 class Percentage {
