@@ -46,6 +46,23 @@ b = 3; // temporal dead zone: throw reference error
 let b = 2;
 ```
 
+`let` 变量拥有块级作用域:
+
+```ts
+// for (var i = 0; i < 5; ++i) {
+//   setTimeout(() => console.log(i), 0);
+// }
+// Output 5, 5, 5, 5, 5.
+// 所有的 i 都是同一个变量, 输出同一个最终值.
+
+for (let i = 0; i < 5; ++i) {
+  setTimeout(() => console.log(i), 0);
+}
+// Output: 0, 1, 2, 3, 4.
+// JavaScript 引擎会为每个迭代循环声明一个新的迭代变量.
+// 每个 setTimeout 引用的都是不同的变量实例.
+```
+
 #### Const Variable
 
 - const 一旦声明变量，就必须立即初始化，不能留到以后赋值.
