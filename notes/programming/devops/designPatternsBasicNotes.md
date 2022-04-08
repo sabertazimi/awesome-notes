@@ -1804,7 +1804,11 @@ reactive.name = 'bob'; // 'updating UI...'
 
 ### Chain of Responsibility Pattern
 
-一种将请求在一串对象中传递的方式，寻找可以处理这个请求的对象.
+一种将请求在一串对象中传递的方式, 寻找可以处理这个请求的对象:
+
+- 请求发送者只需知道链中的第一个节点, 从而降低发送者和一组接收者之间的强耦合.
+- 请求发送者可以任意选择第一个节点, 从而减少请求在链中的传递次数.
+- 职责链中的节点数量和顺序可以自由变化.
 
 :::tip CoR Use Case
 
@@ -1812,6 +1816,8 @@ reactive.name = 'bob'; // 'updating UI...'
   - Redux.
   - Express/Koa.
   - NestJS.
+- Prototype chain.
+- Event capture and bubble chian.
 - AOP: Aspect Oriented Programming.
 
 :::
@@ -1829,6 +1835,7 @@ class Creature {
   }
 }
 
+// Link Node.
 class CreatureModifier {
   constructor(creature) {
     this.creature = creature;
