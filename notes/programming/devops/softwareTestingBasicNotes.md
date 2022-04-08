@@ -128,3 +128,7 @@ Fuzzing - 是一种通过向目标系统提供非预期的输入并监视异常�
 
 - 多进程完全异步编程的复杂性
 - 逐渐地内存泄漏
+
+## Reference
+
+- [JavaScript Testing Best Practice](https://github.com/goldbergyoni/javascript-testing-best-practices)
