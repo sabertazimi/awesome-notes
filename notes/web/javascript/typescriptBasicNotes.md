@@ -174,6 +174,14 @@ npx eslint --init
 - [DTSGen: Creates starter TypeScript definition files for any module or library](https://github.com/Microsoft/dts-gen)
 - [DTSLint: A utility built on TSLint for linting TypeScript declaration files](https://github.com/microsoft/dtslint)
 
+### TypeScript Compiler Performance
+
+- Project references.
+- Load `@types/` by need (`include`/`exclude`/`compilerOptions.types`).
+- Skip type checking (sometimes).
+- Multithread: `ts-loader` + `fork-ts-checker-plugin`.
+- Faster tools: `swc`/`rome`.
+
 ## Modules
 
 - [Types Search](https://microsoft.github.io/TypeSearch)
