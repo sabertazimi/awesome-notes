@@ -3597,7 +3597,7 @@ Collect deps (get):
 - `pushTarget(watcher)`.
 - `watcherGetter()`: Access reactive object `reactiveObject.key`.
 - `reactiveObject.get(key)` (`defineReactive`).
-- `dep.depend()` + `childObserver.dep.depend()`.
+- `dep.depend()` + `childObserver.dep.depend()` + `dependArray()`.
 - `Dep.target.addDep(dep)` -> `watcher.addDep(dep)`.
 - `dep.addSub(watcher)`
 - `dep.subs.push(watcher)`.
@@ -4001,9 +4001,12 @@ export function defineReactive(
       if (Dep.target) {
         dep.depend();
 
+        // 对于数组的特殊处理:
         if (childOb) {
+          // 1. 收集数组本身依赖.
           childOb.dep.depend();
 
+          // 2. 收集嵌套数组依赖.
           if (Array.isArray(value)) {
             dependArray(value);
           }
