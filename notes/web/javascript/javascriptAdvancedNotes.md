@@ -10155,5 +10155,6 @@ describe('payment', () => {
 
 ### Cypress Reference
 
-- Blank page [testing](https://glebbahmutov.com/blog/visit-blank-page-between-tests).
+- Cypress official [guide](https://learn.cypress.io).
+- Blank page testing [example](https://glebbahmutov.com/blog/visit-blank-page-between-tests).
 - Cypress CI [action](https://github.com/cypress-io/github-action).
