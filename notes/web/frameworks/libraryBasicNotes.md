@@ -100,7 +100,7 @@ tags: [Web, Framework, Library]
 - [Connect: Express-like Middleware Layer Server](https://github.com/senchalabs/connect)
 - [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify)
 - [Sails: Realtime MVC Framework](https://github.com/balderdashy/sails)
-- [RedWood](https://github.com/redwoodjs/redwood)
+- [RedWood: App Framework for Startups](https://github.com/redwoodjs/redwood)
 - [Amplication: Low Code but High Quality Node.js Applications](https://github.com/amplication/amplication)
 
 ### Headless CMS
