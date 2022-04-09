@@ -4075,6 +4075,71 @@ methodsToPatch.forEach(function (method) {
 });
 ```
 
+#### Vue Global Set and Delete API
+
+```ts
+/**
+ * Set a property on an object. Adds the new property and
+ * triggers change notification if the property doesn't
+ * already exist.
+ */
+Vue.set = function set(target: Array<any> | Object, key: any, val: any): any {
+  if (Array.isArray(target) && isValidArrayIndex(key)) {
+    target.length = Math.max(target.length, key);
+    target.splice(key, 1, val);
+    return val;
+  }
+
+  if (key in target && !(key in Object.prototype)) {
+    target[key] = val;
+    return val;
+  }
+
+  const ob = target.__ob__;
+
+  if (target._isVue || (ob && ob.vmCount)) {
+    return val;
+  }
+
+  if (!ob) {
+    target[key] = val;
+    return val;
+  }
+
+  defineReactive(ob.value, key, val);
+  ob.dep.notify();
+  return val;
+};
+
+/**
+ * Delete a property and trigger change if necessary.
+ */
+Vue.del = function del(target: Array<any> | Object, key: any) {
+  if (Array.isArray(target) && isValidArrayIndex(key)) {
+    target.splice(key, 1);
+    return;
+  }
+
+  const ob = target.__ob__;
+
+  if (target._isVue || (ob && ob.vmCount)) {
+    return;
+  }
+
+  if (!hasOwn(target, key)) {
+    return;
+  }
+
+  delete target[key];
+
+  if (!ob) {
+    return;
+  }
+
+  ob.dep.notify();
+};
+```
+
 #### Vue Computed Watcher
 
 `core/instance/state.js`:
