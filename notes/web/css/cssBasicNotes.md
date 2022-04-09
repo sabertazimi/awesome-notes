@@ -5453,13 +5453,13 @@ module.exports = {
 
 ## CSS Performance
 
-### Basic Perf Tips
+### Basic Performance Tips
 
-- use `audits` panel to diagnose
-- use CSS shorthand and color shortcuts
-- eliminate unneeded zeros and units
-- remove unused CSS by `coverage` panel of Devtools
-- `link` is parallel, `@import` isn't parallel
+- Use `audits` panel to diagnose.
+- Use CSS shorthand and color shortcuts.
+- Eliminate unneeded zeros and units.
+- Remove unused CSS by `coverage` panel of Devtools.
+- `link` is parallel, `@import` isn't parallel.
 
 ### CSS Selectors
 
@@ -5471,10 +5471,10 @@ module.exports = {
 - [CSS Triggers](https://github.com/GoogleChromeLabs/css-triggers)
 - [JS DOM API Triggers](https://gist.github.com/paulirish/5d52fb081b3570c81e3a)
 
-avoid to frequently change css property
-or call JS DOM API triggering layout stage (reflow)
+Avoid to frequently change css property
+or call JS DOM API triggering layout stage (reflow).
 
-### will-change
+### Will Change
 
 告知浏览器该元素会有哪些变化的方法，这样浏览器可以在元素属性真正发生变化之前提前做好对应的优化准备工作
 
@@ -5492,7 +5492,7 @@ or call JS DOM API triggering layout stage (reflow)
 }
 ```
 
-### contain
+### Contain
 
 [CSS Containment](https://developers.google.com/web/updates/2016/06/css-containment)
 
@@ -5590,7 +5590,7 @@ window.requestAnimationFrame(step);
 
 ### Animation Performance
 
-#### Best Practice
+#### Animation Performance Best Practice
 
 - [High Performance Tips](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations).
 - All animation: `keyframe` animation or `transitions` is best.

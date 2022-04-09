@@ -4406,12 +4406,20 @@ Audits of Chrome: PWA, best practices, SEO, performance, device simulator
 
 ### Performance Best Practice
 
-- use monomorphic objects due to shape and inline caches
-- use monomorphic function in hot code paths
-- resource optimization
-- code splitting
-- lazy loading
-- offline caching (PWA)
+- Use monomorphic objects due to shape and inline caches.
+- Use monomorphic function in hot code paths.
+- Code optimization:
+  - Fast CSS styles (`CSS Performance`):
+  - Fast JavaScript code (`Effective JavaScript`) (DOM/React/Concurrency).
+- Resource optimization: HTML/CSS/JS/Images/Audio/Video/Fonts:
+  - Remove useless files.
+  - Tree shaking.
+  - Zip.
+  - CDN.
+- Lazy loading: HTML/CSS/JS/Images/Audio/Video/Fonts.
+- Code splitting: Webpack `splitChunks`.
+- Offline caching (PWA).
+- PreFetch/PreLoad/PreRendering (SSR).
 
 #### Performance API
 
