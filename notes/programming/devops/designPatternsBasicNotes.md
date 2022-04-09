@@ -1746,18 +1746,24 @@ setTimeout(function () {
   减少重复对象的产生.
 - 代理对象可以为中间过程透明地增加额外逻辑: 预加载/缓存/合并/验证/转换等.
 - 昂贵的对象创建或任务执行可以延迟到代理对象中执行.
+- 代理类型: 远程/保护/虚拟/缓存代理.
 - 符合开放封闭原则.
 
 :::tip Proxy Use Case
 
-- 缓存函数.
-- 缓存服务器: React Query (cache data).
-- 写时拷贝代理: 内存页, DLL.
-- 智能引用代理: C++ smart pointer, Rust `RefCell`, Linux file descriptor.
-- 图片预加载.
-- 跨域处理.
-- 防火墙代理.
-- 路由保护代理.
+- 远程代理:
+  - 代理软件.
+  - 防火墙代理.
+- 保护代理:
+  - 跨域处理.
+  - 路由保护代理.
+- 虚拟代理:
+  - 图片预加载.
+  - 智能引用代理: C++ smart pointer, Rust `RefCell`, Linux file descriptor.
+  - 写时拷贝代理: 内存页, DLL.
+- 缓存代理:
+  - 缓存函数.
+  - 缓存服务器: React Query (cache data).
 
 :::
 
