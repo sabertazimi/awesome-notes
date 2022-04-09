@@ -1327,6 +1327,7 @@ root.do();
 
 :::tip Decorator Use Case
 
+- React HOC Components.
 - Guard: form validator.
 - Interceptor:
   - HTTP request and response decorator.
