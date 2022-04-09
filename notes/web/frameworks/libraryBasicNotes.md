@@ -249,21 +249,25 @@ tags: [Web, Framework, Library]
 - [TS Configuration](https://github.com/tsconfig/bases)
 - [TS Node](https://github.com/TypeStrong/ts-node)
 - [TS Jest](https://github.com/kulshekhar/ts-jest)
+- [Type Coverage](https://github.com/plantain-00/type-coverage)
+- [Type Testing](https://github.com/SamVerschueren/tsd)
 
 ### TS Utility Types
 
 - [TypeFest](https://github.com/sindresorhus/type-fest)
-- [TS ToolBelt](https://github.com/millsp/ts-toolbelt)
 - [UtilityTypes](https://github.com/piotrwitek/utility-types)
+- [TS ToolBelt](https://github.com/millsp/ts-toolbelt)
 
 ### TS Schema Utils
 
+- [Zod: TypeScript-first Schema Validation with Static Type Inference](https://github.com/colinhacks/zod)
 - [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
 - [AutoMapper: Object to Object Auto Mapper](https://github.com/nartc/mapper)
 
 ### TS AST Utils
 
 - [TS Morph](https://github.com/nadeesha/ts-morph)
+- [TS Morpher](https://github.com/LinbuduLab/morpher)
 - [TS Prune](https://github.com/nadeesha/ts-prune)
 
 ## CSS Utils
@@ -457,7 +461,7 @@ tags: [Web, Framework, Library]
 - [Promise Validator](https://github.com/poppinss/indicative)
 - [Async Validator](https://github.com/yiminghe/async-validator)
 - [Cleave.js: Input Format Checker](https://github.com/nosir/cleave.js)
-- [Joi](https://github.com/hapijs/joi)
+- [Joi: Powerful Data Validation Library](https://github.com/sideway/joi)
 - [Yup: Schema Validator](https://github.com/jquense/yup)
 - [jQuery Form Validator](https://github.com/victorjonsson/jQuery-Form-Validator)
 
