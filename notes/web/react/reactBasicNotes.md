@@ -11132,6 +11132,17 @@ export default DatePicker;
 子应用就像不同的电器,
 只要遵循某种协议就可以轻松实现可插拔操作.
 
+:::tip Single SPA Lifecycle
+
+- Register.
+- Load.
+- Bootstrap.
+- Mount.
+- Unmount.
+- Unload.
+
+:::
+
 `single-spa` 子项目的的挂载、更新、卸载等操作,
 并不是 `single-spa` 原生提供的,
 用户可以根据自己的需要来自行实现子应用的挂载, 卸载及更新等逻辑.
@@ -11141,21 +11152,56 @@ export default DatePicker;
 
 #### Application EntryPoint
 
-- HTML Entry.
+- HTML Entry (`import-html-entry` from `qiankun`).
 - JavaScript Entry.
 
 #### Styles Isolation
 
 - Shadow DOM container.
 - CSS module.
-- CSS scoped namespace
+- CSS scoped namespace.
 - CSS selector renaming.
 - CSS in JS.
 
 #### Scripts Isolation
 
+- Snapshot sandbox: 类似中断恢复机制, 备份快照 -> 子应用挂载/运行/卸载 -> 恢复快照.
+- Proxy sandbox: `window` proxy (`fakeWindow` for every sub-app).
 - Runtime sandbox.
-- `window` proxy.
+
+```ts
+class SnapshotSandbox {
+  constructor() {
+    this.proxy = window; // window属性.
+    this.modifyPropsMap = {}; // 记录在 window 上的修改.
+  }
+
+  active() {
+    this.windowSnapshot = {}; // 快照.
+
+    for (const prop in window) {
+      if (window.hasOwn(prop)) {
+        this.windowSnapshot[prop] = window[prop];
+      }
+
+      Object.keys(this.modifyPropsMap).forEach(p => {
+        window[p] = this.modifyPropsMap[p];
+      });
+    }
+  }
+
+  inactive() {
+    for (const prop in window) {
+      if (window.hasOwn(prop)) {
+        if (window[prop] !== this.windowSnapshot[prop]) {
+          this.modifyPropsMap[prop] = window[prop];
+          window[prop] = this.windowSnapshot[prop];
+        }
+      }
+    }
+  }
+}
+```
 
 #### Application Communication
 
