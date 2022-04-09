@@ -3805,6 +3805,7 @@ function debounce(func, wait = 50, immediate = true) {
       if (immediate) {
         func.apply(this, params);
       } else {
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         context = this;
         args = params;
       }
@@ -3875,6 +3876,7 @@ _.throttle = function (func, wait, options) {
 
     // 计算剩余时间
     const remaining = wait - (now - previous);
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     context = this;
     args = original_args;
 
@@ -7471,7 +7473,7 @@ export const getStaticProps: GetStaticProps = async () => {
 #### SEO Metadata
 
 ```tsx
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 
 function App() {
   const seo = {
