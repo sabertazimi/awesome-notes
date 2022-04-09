@@ -2860,7 +2860,7 @@ if (typeof module !== 'undefined' && 'exports' in module) {
 
 :::tip
 
-- Internet protocol stack.
+- Networking protocol stack.
 - Game player logic.
 
 :::
