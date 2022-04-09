@@ -1868,9 +1868,10 @@ reactive.name = 'bob'; // 'updating UI...'
   - Redux.
   - Express/Koa.
   - NestJS.
-- Prototype chain.
-- Event capture and bubble chian.
 - AOP: Aspect Oriented Programming.
+- DOM event capture and bubble chian.
+- JavaScript Prototype chain.
+- JavaScript Scope chain.
 
 :::
 
