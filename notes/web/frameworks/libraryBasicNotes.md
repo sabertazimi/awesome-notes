@@ -278,7 +278,9 @@ tags: [Web, Framework, Library]
 
 ### Ordinary CSS Utils
 
-- [CSS Normalize](https://github.com/necolas/normalize.css)
+- [Normalize: Modern Alternative to CSS Resets](https://github.com/necolas/normalize.css)
+- [Sanitize: Best-practices CSS Foundation](https://github.com/csstools/sanitize.css)
+- [Modern: Bare-bones CSS Reset for Modern Web Development](https://github.com/hankchizljaw/modern-css-reset)
 - [Tailwind](https://github.com/tailwindlabs/tailwindcss)
 - [Tailwind Viewer: Local UI Tool for Visualizing Tailwind Configuration](https://github.com/rogden/tailwind-config-viewer)
 - [PostCSS Preset: Use Modern CSS](https://github.com/csstools/postcss-preset-env)
