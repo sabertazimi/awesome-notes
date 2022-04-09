@@ -437,6 +437,19 @@ ssize_t rio_write_n(int fd, void *usr_buf, size_t n) {
 - sprintf+rio_written: 格式化输出至套接口
 - rio_readlineb + sscanf: 格式化输入
 
+### Zero Copy
+
+`read()`: 2 次状态切换, 1 次 CPU Copy, 1 次 DMA Copy.
+`write()`: 2 次状态切换, 1 次 CPU Copy, 1 次 DMA Copy.
+
+总计 4 次状态切换, 2 次 CPU Copy, 2 次 DMA Copy.
+涉及多次空间切换和数据冗余拷贝, 效率低下，可使用零拷贝技术进行优化:
+
+- `mmap` + `write`: 4 次状态切换, 1 次 CPU Copy, 2 次 DMA Copy.
+- `sendfile`: 2 次状态切换, 1 次 CPU Copy, 2 次 DMA Copy.
+- `sendfile` + `DMA 收集`: 2 次状态切换, 0 次 CPU Copy, 2 次 DMA Copy (只可读).
+- `splice`: 2 次状态切换, 0 次 CPU Copy, 2 次 DMA Copy (只可管道).
+
 ## 网络
 
 ```cpp
