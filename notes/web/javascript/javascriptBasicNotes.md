@@ -3624,24 +3624,19 @@ const result = text.match(regExp);
 console.log(result); // [111, 222, 333]
 ```
 
-### RegExp 静态属性
+:::danger RegExp Static Property
 
-反向引用的值可以从 `RegExp()` 构造函数中取得:
+Most `RegExp.XXX`/`RegExp.$X` static property aren't standard.
+Avoid use them in production:
 
-- `RegExp.$1`.
-- `RegExp.$_`.
-- `RegExp.$&`.
-- `RegExp.$+`.
-- `RegExp.$*`.
+- `RegExp.input ($_)`.
+- `RegExp.lastMatch ($&)`.
+- `RegExp.lastParen ($+)`.
+- `RegExp.leftContext`.
+- `RegExp.rightContext ($')`.
+- `RegExp.$1-$9`.
 
-| 长名         | 短名 | 说明                     |
-| :----------- | :--- | :----------------------- |
-| input        | `$_` | 最后用于匹配的格式字符串 |
-| lastMatch    | `$&` | 最后匹配的结果字符       |
-| lastParen    | `$+` | 最后匹配的分组/子表达式  |
-| leftContext  | $`   | 匹配结果字符串前的字符   |
-| rightContext | `$'` | 匹配结果字符串后的字符   |
-| multiline    | `$*` | 指定是否开启多行模式     |
+:::
 
 ### RegExp Group and Ranges
 
