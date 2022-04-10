@@ -4171,7 +4171,7 @@ Hooks
   - Effect Hooks (`useLayoutEffect`/`useEffect`):
     在 `Reconciler.Render` 阶段设置 `fiber.flags` (effects flags),
     主要作用于 `Reconciler.Commit` 阶段, 功能接近 `ClassComponent.LifeCycle`.
-  - Hybrid Hooks (`useDeferredValue/useTransition/useId/useMutableSource`):
+  - Hybrid Hooks (`useDeferredValue/useTransition/useId/useSyncExternalStore`):
     State + Effect Hooks, 既保存状态, 又产生副作用.
 
 ```ts
