@@ -1268,11 +1268,11 @@ const Person = function (name) {
   });
 ```
 
-### Class 式继承
+### 类式继承
 
-#### 代理构造函数(运用中继者)
+#### 代理构造函数
 
-可用于所有继承模式中,减少内存消耗 **Best Practice**:
+可用于所有继承模式中,减少内存消耗:
 
 ```ts
 const inherit = (function () {
@@ -1298,12 +1298,14 @@ Child.prototype.add = function () {
 };
 ```
 
-#### 类继承(**借用构造函数**)与原型继承(**设置原型**) 混合继承模式
+#### 混合继承模式
+
+类继承(**借用构造函数**)与原型继承(**设置原型**)混合继承模式:
 
 - `child.prototype = new Parent();`
 - `Parent.apply(this, arguments);`
 
-此模式会使得子类属性继承 2 次 **Best Practice**:
+此模式会使得子类属性继承 2 次:
 
 ```ts
 function Parent(name) {
@@ -1699,19 +1701,18 @@ try {
 }
 ```
 
-### 作用域链
+### 上下文与作用域链
 
-- 函数每次运行时，都会新建执行环境内部对象，执行完后销毁此对象
-- 每个执行环境拥有独立的作用域链,例如 独立全局对象、独立**活动对象**,
-- 可动态改变作用域链的语句: with/try catch(异常对象入列，位于作用域链链首)
-- `scope` -> `(list) [0]活动对象` -> `[1]全局对象`.
-- Global Scope -> Function Scope -> ES6 Block Scope.
-
-#### 全局对象 window
-
-含有 全局对象如 window/document，全局方法，全局 this 指针等
-
-#### 活动对象(Activation Object)
+- 每个上下文都有一个关联的变量对象 (**Variable Object**),
+  这个上下文中定义的所有变量和函数都存在于这个对象上.
+- 上下文栈: `scope` -> `(list) [0]活动对象` -> `[1]全局对象`.
+- 作用域链: ES6 Block Scope -> Function Scope -> Global Scope.
+- 每个执行环境拥有独立的作用域链, 例如独立全局对象, 独立**活动对象**,
+- 上下文是函数时, 其活动对象 (**Activation Object**) 用作变量对象:
+  函数每次运行时, 都会新建执行环境内部对象, 执行完后销毁此对象.
+- 可动态改变作用域链的语句:
+  - `with`.
+  - `try catch`: 异常对象入列, 位于作用域链链首.
 
 ### 函数表达式
 
