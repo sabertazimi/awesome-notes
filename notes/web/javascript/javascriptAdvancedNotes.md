@@ -1388,6 +1388,29 @@ const otherFooGlobalSymbol = Symbol.for('foobar'); // 重用已有符号
 console.log(fooGlobalSymbol === otherFooGlobalSymbol); // true
 ```
 
+#### Built-in Symbol Methods
+
+- `[Symbol.iterator]()`: `for of`.
+- `[Symbol.asyncIterator]()`: `for await of`.
+- `[Symbol.match/replace/search/split](target)`: `string.match/replace/search/split(classWithSymbolFunction)`.
+- `[Symbol.toPrimitive](hint)`: 强制类型转换.
+- `[Symbol.hasInstance](target)`: `instance of`.
+
+```ts
+class Bar {}
+class Baz extends Bar {
+  static [Symbol.hasInstance]() {
+    return false;
+  }
+}
+
+const b = new Baz();
+console.log(Bar[Symbol.hasInstance](b)); // true
+console.log(b instanceof Bar); // true
+console.log(Baz[Symbol.hasInstance](b)); // false
+console.log(b instanceof Baz); // false
+```
+
 ### Iterator
 
 - 一个数据结构只要具有 Symbol.iterator 属性 (其为 function), 就可以认为是 "可遍历的" (iterable).
