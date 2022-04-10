@@ -328,7 +328,7 @@ console.log(len); // 5
 
 #### Number and Boolean Destructuring
 
-`number`/`boolean` 会转化成对象:
+`number`/`boolean` 会自动构造原始值包装对象:
 
 ```ts
 let { toString: s } = 123;
@@ -665,7 +665,8 @@ printRaw`\u00A9${'and'}\n`;
 
 - 0bxxx/0Bxxx.
 - 0oxxx/0Oxxx.
-- Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger().
+- `Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()`.
+- `Number.toFixed()/toExponential()/toPrecision()`.
 - Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`.
 - `**` 指数运算符.
 - BigInt.

@@ -174,6 +174,29 @@ const falsy = new String(37) === '37'; // false
 
 // Type-coerced string:
 const truthy = String(37) === '37'; // true
+
+// BAD!
+// eslint-disable-next-line no-new-wrappers
+const falseObject = new Boolean(false);
+const result = falseObject && true;
+console.log(result); // true
+console.log(typeof falseObject); // object
+console.log(falseObject instanceof Boolean); // true
+```
+
+自动创建的原始值包装对象可以让原始值拥有对象的行为,
+且自动创建的原始值包装对象只存在于访问它的那行代码执行期间:
+
+```ts
+const s1 = 'some text';
+const s2 = s1.substring(2); // Call method on primitive string.
+// let _s1 = new String(s1);
+// const s2 = _s1.substring(2);
+// _s1 = null;
+
+const s3 = 'some text';
+s3.color = 'red';
+console.log(s3.color); // undefined
 ```
 
 ### Variable Hoisting
