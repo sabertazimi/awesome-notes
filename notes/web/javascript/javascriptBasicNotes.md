@@ -745,18 +745,16 @@ alert(a);
 
 `==` 与 `!=`, [JS Loose Comparison](https://felix-kling.de/js-loose-comparison):
 
-- Type(x) === Type(y): return `x === y` (Strict Equality Comparison)
-- Type(x) !== Type(y):
-  - x and y are `undefined` or `null`: return true
-  - return comparison between `ToNumber(x)` and `ToPrimitive(y)`
+- Type conversion first, then comparison.
+- Return comparison between `ToNumber(x)` and `ToPrimitive(y)`.
 
 ### Strict Equal
 
 `===` 与 `!==`:
 
-- strings: same length, same characters in corresponding positions.
-- numbers: numerically equal.
-- objects: refer to same Object.
+- Strings: same length, same characters in corresponding positions.
+- Numbers: numerically equal.
+- Objects: refer to same Object.
 - Positive and negative `0` are equal to one another.
 - `NaN` is not equal to anything, including `NaN`.
 - `null` and `undefined` types are not equal with `===`, but equal with `==`.
