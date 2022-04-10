@@ -371,8 +371,8 @@ const truthy = '\u{7A}' === 'z'; // true
 
 #### String Methods
 
-- string.codePointAt(index): 正确处理 4 字节存储字符
-- string.fromCodePoint(codePoint)
+- `string.codePointAt(index)`: 正确处理 4 字节存储字符.
+- `string.fromCodePoint(codePoint)`.
 
 ```ts
 function is32Bit(c) {
@@ -383,8 +383,10 @@ function is32Bit(c) {
 const truthy = String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y';
 ```
 
-- string.includes(substr)/startsWith(substr)/endsWith(substr)
-- 使用第二个参数 n 时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束
+- `string.includes(substr)`.
+- `string.startsWith(substr)`.
+- `string.endsWith(substr)`.
+- 使用第二个参数 n 时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束.
 
 ```ts
 const s = 'Hello world!';
@@ -394,7 +396,7 @@ s.endsWith('Hello', 5); // true
 s.includes('Hello', 6); // false
 ```
 
-- repeat(times)
+- `repeat(times)`.
 
 ```ts
 'hello'.repeat(2); // "hellohello"
@@ -410,7 +412,8 @@ s.includes('Hello', 6); // false
 'na'.repeat('3'); // "nanana"
 ```
 
-- padStart/padEnd(len, paddingStr)
+- `padStart(len, paddingStr)`.
+- `padEnd(len, paddingStr)`.
 
 ```ts
 '1'.padStart(10, '0'); // "0000000001"
@@ -462,7 +465,7 @@ Array.from(str.matchAll(regexp), m => m[0]);
 
 #### Template String
 
-`str` 表示模板字符串
+`str` 表示模板字符串:
 
 ```ts
 // 普通字符串
@@ -510,7 +513,7 @@ const t2Closure = template`${0} ${'foo'}!`;
 t2Closure('Hello', { foo: 'World' }); // "Hello World!"
 ```
 
-- 编译模板(小型模板引擎)
+编译模板 (小型模板引擎):
 
 ```ts
 function compile(template) {
@@ -564,14 +567,14 @@ const libraryHtml = hashTemplate`
 `;
 ```
 
-- 国际化处理
+国际化处理:
 
 ```ts
 i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`;
 // "欢迎访问xxx，您是第xxxx位访问者！"
 ```
 
-- XSS 攻击
+XSS protection:
 
 ```ts
 const message = SaferHTML`<p>${sender} has sent you a message.</p>`;
@@ -596,7 +599,7 @@ function SaferHTML(templateString, ...expressions) {
 }
 ```
 
-- 运行代码
+运行代码:
 
 ```ts
 jsx`
@@ -619,14 +622,53 @@ class HelloWorldApp {
 HelloWorldApp.main();
 ```
 
-### Number
+#### Raw String
 
-- 0bxxx/0Bxxx
-- 0oxxx/0Oxxx
-- Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()
-- Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`
-- `**` 指数运算符
-- BigInt
+```ts
+console.log(`\u00A9`); // ©
+console.log(String.raw`\u00A9`); // \u00A9
+```
+
+```ts
+console.log(`first line\nsecond line`);
+// first line
+// second line
+console.log(String.raw`first line\nsecond line`);
+// "first line\nsecond line"
+```
+
+```ts
+function printRaw(strings) {
+  console.log('Actual characters:');
+
+  for (const string of strings) {
+    console.log(string);
+  }
+
+  console.log('Escaped characters;');
+
+  for (const rawString of strings.raw) {
+    console.log(rawString);
+  }
+}
+
+printRaw`\u00A9${'and'}\n`;
+// Actual characters:
+// ©
+// (换行符)
+// Escaped characters:
+// \u00A9
+// \n
+```
+
+### ES6 Number
+
+- 0bxxx/0Bxxx.
+- 0oxxx/0Oxxx.
+- Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger().
+- Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`.
+- `**` 指数运算符.
+- BigInt.
 
 ```ts
 const a = 2172141653;

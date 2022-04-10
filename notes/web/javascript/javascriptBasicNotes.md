@@ -26,26 +26,37 @@ Primitive data types:
 - Symbol.
 - BigInt.
 
-#### undefined
+#### Undefined
 
-- 对象属性未定义时，该属性值为 undefined
-- 未初始化变量的初值为 undefined(表示 等待被赋值)
+- 对象属性未定义时, 该属性值为 `undefined`.
+- 未初始化变量的初值为 `undefined` (表示等待被赋值).
 
-#### null
+#### Null
 
-当引用为空或引用对象不存在时，值为 null
+当引用为空或引用对象不存在时, 值为 `null`.
+`null` 值表示一个空对象指针.
 
-#### float
+:::danger Null
 
-计算浮点数时，应先计算整数，再利用移位/乘法/除法转化为浮点数
+`typeof null` -> `object`.
 
-```ts
-const a = (1 + 2) / 10; // a = 0.1 + 0.2;
-```
+:::
 
-#### 非数 NaN
+#### Boolean
 
-- `NaN === NaN`: `false`.
+- 零值表达式:
+  - `0`/`NaN`.
+  - `''`.
+  - `null`.
+  - `undefined`.
+
+#### NaN
+
+:::danger NaN
+
+`NaN === NaN` -> `false`.
+
+:::
 
 ```ts
 const numberType = typeof NaN; // 'number'
@@ -59,7 +70,16 @@ function isNumber(value) {
 }
 ```
 
-#### number
+#### Float
+
+- 计算浮点数时, 应先计算整数, 再利用移位/乘法/除法转化为浮点数.
+- 浮点值的精确度最高可达 17 位小数.
+
+```ts
+const a = (1 + 2) / 10; // a = 0.1 + 0.2;
+```
+
+#### Number
 
 ##### Infinity
 
@@ -86,13 +106,13 @@ console.log(Math.max()); // -Infinity
 console.log(Math.min()); // Infinity
 ```
 
-#### string
+#### String
 
 ##### 引用特性
 
-- 赋值与传参 传递 string 字符串常量 的引用
-- 所有 string 量 都是不可变量,当对 string 进行操作后，将先会在堆区创建副本，再通过副本进行修改，并返回副本的索引
-- 没有被任何变量引用的 string: 垃圾回收
+- 赋值与传参 传递 string 字符串常量 的引用.
+- 所有 string 量 都是不可变量,当对 string 进行操作后，将先会在堆区创建副本，再通过副本进行修改，并返回副本的索引.
+- 没有被任何变量引用的 string: 垃圾回收.
 
 ```ts
 const goodString = "I've been a good string";
@@ -124,14 +144,12 @@ console.log(isStringAlternative(goodString)); // true
 console.log(isStringAlternative(badString)); // true
 ```
 
-##### 非对象特性(基本变量)
+##### 非对象特性
 
-- 字符串中的字符不可枚举(for in 循环)
-- delete 无法删除某位字符
+作为基本变量:
 
-##### 基本操作
-
-+=: 字符串连接操作
+- 字符串中的字符不可枚举 (for in 循环).
+- `delete` 无法删除某位字符.
 
 #### Object Wrappers for Primitive Type
 
@@ -474,9 +492,9 @@ array.reduce(
 ); // fold function
 ```
 
-### 类型检测
+### Type Detection
 
-#### Best Practice
+#### Type Detection Best Practice
 
 ```ts
 function typeOf(o) {
@@ -498,9 +516,9 @@ function typeOf(o) {
 }
 ```
 
-#### Null 检测
+#### Null Detection
 
-不应使用 typeof 检测 null, 应使用 ===/!==
+不应使用 typeof 检测 null, 应使用 `===`/`!==`.
 
 ```ts
 /*
@@ -509,20 +527,20 @@ function typeOf(o) {
 const objectType = typeof null; // => object
 ```
 
-#### 自定义对象检测
+#### Custom Object Detection
 
-value instanceof constructor(查找原型链)
+`value instanceof constructor`: 查找原型链.
 
-#### 属性检测
+#### Property Detection
 
-- 由于属性值可能为 0 值表达式, 不应使用 0 值表达式(0/''/null/undefined) 检测属性值
-- 应使用 for in 进行属性检测
+- 由于属性值可能为零值值表达式, 不应使用零值表达式(`0`/`NaN`/`''`/`null`/`undefined`) 检测属性值.
+- 应使用 `for in` 进行属性检测.
 
-### 强制类型转化(Type Coercion)
+### Type Coercion
 
-- 字符串 -> 整数：`+string`/`Number(string)`/`parseInt(string, arg1)`
-- any -> `bool`：`!!any`
-- const -> `object`: `(const)`
+- 字符串 -> 整数：`+string`/`Number(string)`/`parseInt(string, arg1)`.
+- any -> `bool`：`!!any`.
+- const -> `object`: `(const)`.
 
 > parseInt(): 遇到非数字字符立即停止运行，返回当前转化值; 将 0 开头字符串解析为八进制数，0x 开头字符串解析为十六进制数
 
@@ -530,11 +548,11 @@ value instanceof constructor(查找原型链)
 parseInt(str, base);
 ```
 
-- boolean 在 数值运算环境 中 true => 1, false => 0
-- 数组在 数值运算环境 中 转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN 数组)
-- 对象在 逻辑运算环境 中 转化为 true , 包括 false 的封装对象
-- 对象在 数值运算环境 中 先利用 valueOf(object), 再利用 toString() 转化为数字, 若转化失败, 则返回 NaN
-- 对象与 数值加号运算: 先数值加, (**失败后**)再字符串加
+- `boolean`在`数值运算`环境中 true => 1, false => 0.
+- `数组`在`数值运算`环境中转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN 数组).
+- `对象`在`逻辑运算`环境中转化为 true , 包括 false 的封装对象.
+- `对象`在`数值运算`环境中先利用 valueOf(object), 再利用 toString() 转化为数字, 若转化失败, 则返回 NaN.
+- `对象`与`数值`加号运算: 先数值加, (**失败后**)再字符串加.
 
 ```ts
 // good
