@@ -254,6 +254,7 @@ now.getDay(); // Warn: 0-6
 now.toString();
 now.toDateString();
 now.toTimeString();
+now.toUTCString();
 now.toLocaleString();
 now.toLocaleDateString();
 now.toLocaleTimeString();
@@ -3552,11 +3553,11 @@ const re = /pattern/gim;
 
 ### RegExp Flags
 
-- g: 全局匹配.
-- m: 多行匹配.
-- i: 大小写敏感匹配.
-- u: 修饰符.
-- y: (粘连全局符) 修饰符号隐含了头部匹配的标志.
+- g (global): 全局匹配.
+- m (multiline): 多行匹配.
+- i (ignoreCase): 大小写不敏感匹配.
+- u (unicode): Unicode 模式.
+- y (sticky): 粘附模式, 修饰符号隐含了头部匹配的标志.
 
 ```ts
 function codePointLength(text) {
@@ -3696,7 +3697,7 @@ for (const match of string.matchAll(regex)) {
   - `test`.
   - `exec`.
 
-#### test
+#### RegExp Test
 
 ```ts
 /[a-z|A-Z|0-9]/gim.test(str);
@@ -3735,13 +3736,13 @@ export function isJunk(filename) {
 }
 ```
 
-#### replace
+#### RegExp Replace
 
 ```ts
 replace(regExp, str / func);
 ```
 
-##### replace arguments
+##### RegExp Replace Arguments
 
 第二个参数若为函数式参数,replace 方法会向它传递一系列参数:
 
@@ -3750,7 +3751,7 @@ replace(regExp, str / func);
 - 倒数第二个参数: 匹配文本在源字符串中的下标位置
 - 最后一个参数: 源字符串自身
 
-###### Replace best practice
+###### RegExp Replace Best Practice
 
 - 使用２个子表达式修剪字符串,字符串总长度影响性能
 - 使用循环修剪字符串(分别用 正/负循环 修剪 首/尾空白符),空白字符长度影响性能
@@ -3795,11 +3796,9 @@ if (!String.prototype.trim) {
 
 `/[(^\s+)(\s+$)]/g`
 
-## 错误处理
+## Error and Exception
 
-Error and Exception
-
-### 错误类型
+### Error Type
 
 - Error
 - EvalError
@@ -3820,7 +3819,7 @@ MyError.prototype = new Error('Error');
 MyError.prototype.constructor = MyError;
 ```
 
-### 异常作用
+### Error and Exception Usage
 
 - 在可能失败的地方抛出异常，对失败处做标签，易于**调试与测试**
 - 修复 bug 后，可考虑是否在此处抛出异常
