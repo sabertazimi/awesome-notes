@@ -1372,6 +1372,22 @@ iter.next(); // { value: 'c', done: false }
 iter.next(); // { value: undefined, done: true }
 ```
 
+```ts
+// eslint-disable-next-line symbol-description
+const genericSymbol = Symbol();
+// eslint-disable-next-line symbol-description
+const otherGenericSymbol = Symbol();
+console.log(genericSymbol === otherGenericSymbol); // false
+
+const fooSymbol = Symbol('foo');
+const otherFooSymbol = Symbol('foo');
+console.log(fooSymbol === otherFooSymbol); // false
+
+const fooGlobalSymbol = Symbol.for('foobar'); // 创建新符号
+const otherFooGlobalSymbol = Symbol.for('foobar'); // 重用已有符号
+console.log(fooGlobalSymbol === otherFooGlobalSymbol); // true
+```
+
 ### Iterator
 
 - 一个数据结构只要具有 Symbol.iterator 属性 (其为 function), 就可以认为是 "可遍历的" (iterable).
