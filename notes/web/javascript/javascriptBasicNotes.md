@@ -8,11 +8,7 @@ tags: [Web, JavaScript]
 
 # JavaScript Basic Notes
 
-## 常量
-
-常数值 **加括号** 可转化为对象.
-
-## 变量
+## Variables
 
 ### Primitive Values
 
@@ -184,8 +180,12 @@ console.log(typeof falseObject); // object
 console.log(falseObject instanceof Boolean); // true
 ```
 
-自动创建的原始值包装对象可以让原始值拥有对象的行为,
-且自动创建的原始值包装对象只存在于访问它的那行代码执行期间:
+**Box and Unbox** for primitive values:
+
+- 自动创建的原始值包装对象可以让原始值拥有对象的行为.
+- 自动创建的原始值包装对象只存在于访问它的那行代码执行期间.
+- 常数值**加括号**可转化为对象.
+- 可以对 primitive values 进行 ES6 析构语法.
 
 ```ts
 const s1 = 'some text';
