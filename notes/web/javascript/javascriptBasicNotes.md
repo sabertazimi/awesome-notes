@@ -437,11 +437,11 @@ string(charArray).split('割断点'); // 选择割断符,返回字符串数组
 ##### Array Query
 
 ```ts
-[].indexOf(); // -1 or other
-[].lastIndexOf(); // -1 or other
-[].find();
-[].findIndex();
-[].includes();
+[].indexOf(element); // -1 or other.
+[].lastIndexOf(element); // -1 or other.
+[].includes(element); // boolean.
+[].find(callback); // element.
+[].findIndex(callback); // element index.
 ```
 
 ##### Array Traverse
