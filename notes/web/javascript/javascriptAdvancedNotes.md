@@ -1598,6 +1598,16 @@ console.log(b instanceof Baz); // false
   - Set: `SetIterator`.
   - `arguments` 对象.
   - DOM collection (`NodeList`): `ArrayIterator`.
+- 接收可迭代对象的原生语言特性:
+  - `for...in`/`for...of`.
+  - Destructing: 数组解构.
+  - `...`: 扩展操作符.
+  - `Array.from()`.
+  - `new Map()`.
+  - `new Set()`.
+  - `Promise.all()`.
+  - `Promise.race()`.
+  - `yield *` 操作符.
 - 只有 `for...in` 可以遍历到原型上的属性.
 - `for...in`/`for...of` 隐形调用迭代器的方式, 称为内部迭代器, 使用方便, 不可自定义迭代过程.
 - `{ next, done, value }` 显式调用迭代器的方式, 称为外部迭代器, 使用复杂, 可以自定义迭代过程.
