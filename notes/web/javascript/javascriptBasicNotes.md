@@ -425,7 +425,7 @@ arr.pop(); // 删除数组尾元素
 [string].join('连接符'); // 将字符串数组连接成字符串o
 string(charArray).split('割断点'); // 选择割断符,返回字符串数组
 [].slice(start, end); // [start] - [end - 1]
-[].splice(); // 功能强大的多态方法
+[].splice(startIndex, lengthToDelete, insertElements); // 功能强大的多态方法
 ```
 
 ##### Array Replace
