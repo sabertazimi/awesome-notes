@@ -261,6 +261,25 @@ jobs:
           path-to-lcov: ./lcov.info
 ```
 
+## Memory Model
+
+### Stack Value
+
+- Primitives
+- Fixed size struts.
+- Fixed size arrays.
+- Pointers and references.
+
+### Heap Value
+
+- Collections:
+  - Arrays.
+  - Lists.
+  - Strings.
+- Dynamic sized objects:
+  - Box.
+  - Trait objects.
+
 ## Ownership
 
 ### Copy Trait
@@ -3463,34 +3482,6 @@ fn main() {
 }
 ```
 
-## Tests
-
-```rust
-fn greeting(name: &str) -> String {
-    format!("Hello {}!", name)
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    #[ignore]
-    #[should_panic]
-    #[should_panic(expected = "Panic message.")]
-    fn greeting_contains_name() {
-        let target = "name";
-        let result = greeting("Name");
-        assert!(
-            result.contains(target),
-            "Expect: `{}`, Result: `{}`",
-            target,
-            result
-        );
-    }
-}
-```
-
 ## IO
 
 ### Path
@@ -3834,6 +3825,34 @@ fn main() {
         eprintln!("Application error: {}", e);
 
         process::exit(1);
+    }
+}
+```
+
+## Tests
+
+```rust
+fn greeting(name: &str) -> String {
+    format!("Hello {}!", name)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    #[ignore]
+    #[should_panic]
+    #[should_panic(expected = "Panic message.")]
+    fn greeting_contains_name() {
+        let target = "name";
+        let result = greeting("Name");
+        assert!(
+            result.contains(target),
+            "Expect: `{}`, Result: `{}`",
+            target,
+            result
+        );
     }
 }
 ```
