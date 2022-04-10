@@ -831,23 +831,46 @@ arr.findIndex(fn);
 
 `[2, [2, 2]] => [2, 2, 2]`
 
-#### Array FlatMap
+#### Array Element Filter
 
-map + flat
+相当于 Haskell 中的 List Filter:
+
+```ts
+const numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+const filterResult = numbers.filter((item, index, array) => item > 2);
+console.log(filterResult); // 3,4,5,4,3
+```
+
+#### Array Boolean Filter
+
+- `Array.every(filer)`.
+- `Array.some(filer)`.
+
+```ts
+const numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+const everyResult = numbers.every((item, index, array) => item > 2);
+const someResult = numbers.some((item, index, array) => item > 2);
+console.log(everyResult); // false
+console.log(someResult); // true
+```
 
 #### Array Map
 
-相当于 Haskell 中的 List Map
+相当于 Haskell 中的 List Map.
 
-#### Array Filter
+#### Array FlatMap
 
-相当于 Haskell 中的 List Filter
+map + flat.
+
+#### Array ForEach
 
 #### Array Reduce
 
-相当于 Haskell 中的 fold
+相当于 Haskell 中的 fold.
 
 #### Array Sort
+
+#### Array Reverse
 
 #### Spread Array
 
@@ -867,7 +890,39 @@ obj[Symbol.iterator] = function* () {
 const array = [...obj]; // print [1, 2, 3]
 ```
 
-### New Object API
+#### Typed Array
+
+ArrayBuffer 其中一种视图 (用于 Web GL 高效率内存操作):
+
+```ts
+// 第一个参数是应该返回的数组类型
+// 其余参数是应该拼接在一起的定型数组
+function typedArrayConcat(TypedArrayConstructor, ...typedArrays) {
+  // 计算所有数组中包含的元素总数
+  const numElements = typedArrays.reduce((x, y) => (x.length || x) + y.length);
+  // 按照提供的类型创建一个数组，为所有元素留出空间
+  const resultArray = new TypedArrayConstructor(numElements);
+  // 依次转移数组
+  let currentOffset = 0;
+  typedArrays.forEach(x => {
+    resultArray.set(x, currentOffset);
+    currentOffset += x.length;
+  });
+  return resultArray;
+}
+
+const concatArray = typedArrayConcat(
+  Int32Array,
+  Int8Array.of(1, 2, 3),
+  Int16Array.of(4, 5, 6),
+  Float32Array.of(7, 8, 9)
+);
+
+console.log(concatArray); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+console.log(concatArray instanceof Int32Array); // true
+```
+
+### ES6 Object
 
 - `Object.is`:
 
