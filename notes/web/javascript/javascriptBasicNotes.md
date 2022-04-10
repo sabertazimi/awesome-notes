@@ -1570,11 +1570,11 @@ try {
 }
 ```
 
-## 函数
+## Function
 
-- 函数是对象
-- 函数提供局部作用域
-- Object 是 Function 的实例对象, **Function.prototype**是 Object 的实例对象
+- 函数是对象.
+- 函数提供局部作用域.
+- Object 是 Function 的实例对象, **Function.prototype**是 Object 的实例对象.
 
 ```ts
 const truthy = Object[[proto]] === Function.prototype; // true
@@ -1748,9 +1748,10 @@ const b = 10;
 // print out function b { ... }
 ```
 
-### 函数入参
+### Function Parameter
 
-**无副作用**的函数: 注意是否需要拷贝传入对象,使原有对象不受函数影响,并返回新对象
+- 所有函数参数都是按值传递 (复制原子值/引用值).
+- **无副作用**的函数: 注意是否需要拷贝传入对象, 使原有对象不受函数影响, 并返回新对象.
 
 ```ts
 // 除非必要,否则不改变原有对象
@@ -1776,7 +1777,7 @@ function setValue(obj, val) {
 }
 ```
 
-### 回调函数
+### Callback Function
 
 ```ts
 // check if callback is callable
