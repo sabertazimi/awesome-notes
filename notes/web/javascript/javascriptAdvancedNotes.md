@@ -371,8 +371,11 @@ const truthy = '\u{7A}' === 'z'; // true
 
 #### String Methods
 
+- `string.charAt(index)`.
+- `string.charCodeAt(index)`.
+- `string.fromCharCode(charCode)`.
 - `string.codePointAt(index)`: 正确处理 4 字节存储字符.
-- `string.fromCodePoint(codePoint)`.
+- `string.fromCodePoint(codePoint)`: 正确处理 4 字节存储字符.
 
 ```ts
 function is32Bit(c) {
@@ -742,7 +745,7 @@ dtfEnglish.format(new Date()); // => 'May 7, 2019'
 dtfEnglish.formatRange(start, end); // => 'May 7 - 9, 2019'
 ```
 
-### Array
+### ES6 Array
 
 ```ts
 const array = [...Array(5).keys()]; // => [0, 1, 2, 3, 4]
@@ -750,7 +753,7 @@ const array = [...Array(5).keys()]; // => [0, 1, 2, 3, 4]
 
 #### Array Includes
 
-no more `indexOf() > -1`
+No more `indexOf() > -1`.
 
 #### Array From
 

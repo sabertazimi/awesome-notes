@@ -104,6 +104,13 @@ console.log(Math.min()); // Infinity
 
 #### String
 
+##### 非对象特性
+
+作为基本变量:
+
+- 字符串中的字符不可枚举 (for in 循环).
+- `delete` 无法删除某位字符.
+
 ##### 引用特性
 
 - 赋值与传参 传递 string 字符串常量 的引用.
@@ -140,12 +147,23 @@ console.log(isStringAlternative(goodString)); // true
 console.log(isStringAlternative(badString)); // true
 ```
 
-##### 非对象特性
+String methods:
 
-作为基本变量:
-
-- 字符串中的字符不可枚举 (for in 循环).
-- `delete` 无法删除某位字符.
+```ts
+const stringValue = 'hello world';
+console.log(stringValue.slice(3)); // "lo world"
+console.log(stringValue.substring(3)); // "lo world"
+console.log(stringValue.substr(3)); // "lo world"
+console.log(stringValue.slice(3, 8)); // "lo wo"
+console.log(stringValue.substring(3, 8)); // "lo wo"
+console.log(stringValue.substr(3, 8)); // "lo world"
+console.log(stringValue.slice(-3)); // "rld"
+console.log(stringValue.substring(-3)); // "hello world"
+console.log(stringValue.substr(-3)); // "rld"
+console.log(stringValue.slice(3, -4)); // "lo w"
+console.log(stringValue.substring(3, -4)); // "hel"
+console.log(stringValue.substr(3, -4)); // "" (empty string)
+```
 
 #### Object Wrappers for Primitive Type
 
@@ -400,7 +418,7 @@ arr.pop(); // 删除数组尾元素
 
 ##### Array Slice and Merge
 
-- slice 不改变原数组, splice 改变原数组
+- slice 不改变原数组, splice 改变原数组.
 
 ```ts
 [].concat(otherArray);
@@ -419,8 +437,11 @@ string(charArray).split('割断点'); // 选择割断符,返回字符串数组
 ##### Array Query
 
 ```ts
-''.substr(start, end);
-[].indexOf(char); // -1 or other
+[].indexOf(); // -1 or other
+[].lastIndexOf(); // -1 or other
+[].find();
+[].findIndex();
+[].includes();
 ```
 
 ##### Array Traverse
