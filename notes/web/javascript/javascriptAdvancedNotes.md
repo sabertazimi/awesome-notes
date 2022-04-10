@@ -3237,21 +3237,19 @@ Paint Order:
 失效,
 让对象变成 `slow object`.
 
-### 禁用特性
+### 危险特性
 
-- with () {}
-- eval()
-- 少用 new
-- 少用 continue
-- 少用 forEach()
+- `eval()`.
+- `with () {}`.
+- `new Function()`.
 
 ### 局部变量/函数参数
 
-- 局部变量引用全局变量/全局变量作为参数传入函数: 加快符号解析
-- 局部变量缓存 DOM 元素
-- 局部变量缓存布局信息
-- 局部变量引用嵌套成员: 加快原型链查找
-- 局部变量引用方法时，应注意会动态改变 this 指针
+- 局部变量引用全局变量/全局变量作为参数传入函数: 加快符号解析.
+- 局部变量缓存 DOM 元素.
+- 局部变量缓存布局信息.
+- 局部变量引用嵌套成员: 加快原型链查找.
+- 局部变量引用方法时，应注意会动态改变 this 指针.
 
 ```ts
 const DOM = tazimi.util.Dom;
@@ -3263,8 +3261,9 @@ DOM.method.call(/* 关注 this 指针 */);
 
 #### 作用域链
 
-由于作用域链的关系，标识符解析时，寻找局部变量速度远快于寻找全局变量速度.故应将全局变量作为参数传入函数进行调用，不但效率高，而且易于维护与测试.
-即 利用局部变量引用全局变量，加快标识符解析
+由于作用域链的关系，标识符解析时，寻找局部变量速度远快于寻找全局变量速度.
+故应将全局变量作为参数传入函数进行调用，不但效率高，而且易于维护与测试.
+即利用局部变量引用全局变量，加快标识符解析.
 
 ### 循环
 
@@ -3571,7 +3570,7 @@ function saveDocument(id) {
   // 利用闭包封装待执行任务
   const tasks = [openDocument, writeText, closeDocument, updateUI];
 
-  setTimeout(function () {
+  setTimeout(function sliceTask() {
     // 执行下一个任务
     const task = tasks.shift();
     task(id);
@@ -3579,8 +3578,7 @@ function saveDocument(id) {
     // 检查是否还有其他任务
     if (tasks.length > 0) {
       // 递归调用(每次参数不同)
-      // eslint-disable-next-line no-caller
-      setTimeout(arguments.callee, 25);
+      setTimeout(sliceTask, 25);
     }
   }, 25);
 }
@@ -3591,12 +3589,11 @@ function processArray(items, process, callback) {
   // 克隆原数组
   const todo = items.concat();
 
-  setTimeout(function () {
+  setTimeout(function sliceTask() {
     process(todo.shift());
 
     if (todo.length > 0) {
-      // eslint-disable-next-line no-caller
-      setTimeout(arguments.callee, 25);
+      setTimeout(sliceTask, 25);
     } else {
       callback(items);
     }
@@ -3611,7 +3608,7 @@ function timedProcessArray(items, process, callback) {
   // 克隆原始数组
   const todo = items.concat();
 
-  setTimeout(function () {
+  setTimeout(function sliceTask() {
     const start = +new Date();
 
     // 一次批处理任务持续 0.05s
@@ -3620,8 +3617,7 @@ function timedProcessArray(items, process, callback) {
     } while (todo.length < 0 && +new Date() - start < 50);
 
     if (todo.length > 0) {
-      // eslint-disable-next-line no-caller
-      setTimeout(arguments.callee, 25);
+      setTimeout(sliceTask, 25);
     } else {
       callback(items);
     }

@@ -2125,50 +2125,19 @@ Combine setInterval/setTimeout function with Closure,
 implement **time slicing scheduler**.
 
 ```ts
-// 选择排序: 具有两重循环
-const animation = setInterval(() => {
-  // interval - (外)循环结束条件
-  if (i >= dataLength) {
-    clearInterval(animation);
-    // 结束动画
-    setTimeout(() => {
-      for (let n = 0; n < dataLength; n++) {
-        ele_arr[n].className = 'data-list__item finish';
+function processArray(items, process, done) {
+  const todo = items.slice();
 
-        // eslint-disable-next-line no-loop-func
-        (function (index) {
-          setTimeout(() => {
-            ele_arr[index].className = 'data-list__item';
-          }, 500);
-        })(n);
-      }
-    }, 200);
-    return;
-  }
+  setTimeout(function task() {
+    process(todo.shift());
 
-  // 内循环
-  j = i;
-  temp = data_queue[i];
-  while (j > 0 && data_queue[j - 1] >= temp) {
-    list_element.replaceChild(
-      _createItemElement(data_queue[j - 1]),
-      ele_arr[j]
-    );
-    data_queue[j] = data_queue[j - 1];
-    ele_arr[j].className = 'data-list__item change';
-
-    // eslint-disable-next-line no-loop-func
-    (function (index) {
-      setTimeout(() => {
-        ele_arr[index].className = 'data-list__item';
-      }, 200);
-    })(j);
-    j--;
-  }
-  list_element.replaceChild(_createItemElement(temp), ele_arr[j]);
-  data_queue[j] = temp;
-  i++;
-}, 200);
+    if (todo.length > 0) {
+      setTimeout(task, 25);
+    } else {
+      done(items);
+    }
+  }, 25);
+}
 ```
 
 ### 常用模式
