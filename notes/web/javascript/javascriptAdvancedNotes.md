@@ -1591,8 +1591,13 @@ console.log(b instanceof Baz); // false
 
 ### Iterator
 
-- 一个数据结构只要具有 Symbol.iterator 属性 (其为 function), 就可以认为是 "可遍历的" (iterable).
-- Implement iterator with `Symbol.iterator`.
+- 一个数据结构只要实现了 `[Symbol.iterator]()` 接口, 便可成为可迭代数据结构 (`Iterable`):
+  - String.
+  - Array.
+  - Map.
+  - Set.
+  - `arguments` 对象.
+  - DOM collection: `NodeList`.
 - 只有 `for...in` 可以遍历到原型上的属性.
 - `for...in`/`for...of` 隐形调用迭代器的方式, 称为内部迭代器, 使用方便, 不可自定义迭代过程.
 - `{ next, done, value }` 显式调用迭代器的方式, 称为外部迭代器, 使用复杂, 可以自定义迭代过程.
