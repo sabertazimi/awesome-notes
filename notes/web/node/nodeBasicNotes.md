@@ -637,6 +637,7 @@ One line to update all deps in monorepo:
 ```bash
 yarn up @types/node
 yarn up @types/react
+yarn dedupe --strategy highest
 ```
 
 ### Yarn Workspace
