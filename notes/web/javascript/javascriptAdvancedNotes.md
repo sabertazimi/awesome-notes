@@ -805,19 +805,13 @@ Array.from(Array(5).keys());
 
 #### Array CopyWithin
 
-替换数组元素，修改原数组
+`copyWithin(dest, start, end)`, 替换数组元素，**修改原数组**:
 
 ```ts
-Array.prototype.copyWithin(target, (start = 0), (end = this.length));
-```
-
-```ts
-[1, 2, 3, 4, 5].copyWithin(0, 3)[
-  // => [4, 5, 3, 4, 5]
-
-  // -2相当于3号位，-1相当于4号位
-  (1, 2, 3, 4, 5)
-].copyWithin(0, -2, -1);
+[1, 2, 3, 4, 5].copyWithin(0, 3);
+// => [4, 5, 3, 4, 5]
+[1, 2, 3, 4, 5].copyWithin(0, -2, -1);
+// -2相当于3号位，-1相当于4号位
 // => [4, 2, 3, 4, 5]
 
 // 将2号位到数组结束，复制到0号位
