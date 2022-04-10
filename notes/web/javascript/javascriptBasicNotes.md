@@ -114,7 +114,7 @@ console.log(Math.min()); // Infinity
 ##### 引用特性
 
 - 赋值与传参 传递 string 字符串常量 的引用.
-- 所有 string 量 都是不可变量,当对 string 进行操作后，将先会在堆区创建副本，再通过副本进行修改，并返回副本的索引.
+- 所有 string 量 都是不可变量, 当对 string 进行操作后, 将先会在堆区创建副本, 再通过副本进行修改, 并返回副本的索引.
 - 没有被任何变量引用的 string: 垃圾回收.
 
 ```ts
@@ -364,14 +364,14 @@ const getDateItemList = (year, month) => {
 - 与 Object 同源
 - 关联数组：`arrayName[“string”] = value;` 实际为 Array 对象添加属性`{string:value}`
 - 缓存数组长度:`int l = list.length`(访问`length`造成运算)
-- `[]`数组，`{}`对象
+- `[]`数组, `{}`对象
 
 数组在 数值运算环境 中转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN 数组)
 
 #### Array Length
 
 - 数组下标满足 [0, 2^32-1) 即可
-- 运用大于 length 的下标, length 自动增大，不会发生数组边界错误
+- 运用大于 length 的下标, length 自动增大, 不会发生数组边界错误
 - length 等于 数组最后一个整数属性名+1, length 不一定等于 数组中有效元素个数
 
 #### Array Literals
@@ -586,13 +586,9 @@ const objectType = typeof null; // => object
 - 字符串 -> 整数：`+string`/`Number(string)`/`parseInt(string, arg1)`.
 - any -> `bool`：`!!any`.
 - const -> `object`: `(const)`.
-
-> parseInt(): 遇到非数字字符立即停止运行，返回当前转化值; 将 0 开头字符串解析为八进制数，0x 开头字符串解析为十六进制数
-
-```ts
-parseInt(str, base);
-```
-
+- `parseInt(str, base)`:
+  - 遇到非数字字符立即停止运行, 返回当前转化值.
+  - 将 0 开头字符串解析为八进制数, 0x 开头字符串解析为十六进制数.
 - `boolean`在`数值运算`环境中 true => 1, false => 0.
 - `数组`在`数值运算`环境中转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN 数组).
 - `对象`在`逻辑运算`环境中转化为 true , 包括 false 的封装对象.
@@ -620,21 +616,23 @@ const hasAge = !!age;
 
 对象转换为布尔值:
 
-- 直接转换为 true（包装类型也一样），不调用 valueOf 和 toString
+- 直接转换为 true (包装类型也一样), 不调用 valueOf 和 toString.
 
 对象转换为数字:
 
-- 如果对象具有 valueOf 方法且返回原始值(string、number、boolean、undefined、null)，
-  则将该原始值转换为数字(转换失败会返回 NaN)，并返回这个数字
-- 如果对象具有 toString 方法且返回原始值(string、number、boolean、undefined、null)，
-  则将该原始值转换为数字(转换失败会返回 NaN)，并返回这个数字
-- 转换失败，抛出 TypeError
+- 如果对象具有 valueOf 方法且返回原始值(string、number、boolean、undefined、null),
+  则将该原始值转换为数字(转换失败会返回 NaN), 并返回这个数字.
+- 如果对象具有 toString 方法且返回原始值(string、number、boolean、undefined、null),
+  则将该原始值转换为数字(转换失败会返回 NaN), 并返回这个数字.
+- 转换失败, 抛出 `TypeError`.
 
 对象转换为字符串:
 
-- 如果对象具有 toString 方法且返回原始值(string、number、boolean、undefined、null)，则将该原始值转换为字符串，并返回该字符串
-- 如果对象具有 valueOf 方法且返回原始值(string、number、boolean、undefined、null)，则将该原始值转换为字符串，并返回该字符串
-  转换失败，抛出 TypeError
+- 如果对象具有 toString 方法且返回原始值(string、number、boolean、undefined、null),
+  则将该原始值转换为字符串, 并返回该字符串.
+- 如果对象具有 valueOf 方法且返回原始值(string、number、boolean、undefined、null),
+  则将该原始值转换为字符串, 并返回该字符串.
+- 转换失败, 抛出 `TypeError`.
 
 ```ts
 // 保存原始的valueOf
@@ -668,7 +666,7 @@ if (b) {
 // output:
 // 1
 // 2
-// 未调用valueOf和toString，符合 [对象到布尔值] 的转换规则
+// 未调用valueOf和toString, 符合 [对象到布尔值] 的转换规则
 ```
 
 ```ts
@@ -696,8 +694,8 @@ console.log(++a);
 // valueOf
 // toString
 // NaN
-// 1. valueOf方法返回的是对象本身，不是原始值，继续执行
-// 2. toString方法返回的是”[object Object]”，是原始值(字符串)，将字符串转换为数字NaN
+// 1. valueOf方法返回的是对象本身, 不是原始值, 继续执行
+// 2. toString方法返回的是”[object Object]”, 是原始值(字符串), 将字符串转换为数字NaN
 ```
 
 ```ts
@@ -724,7 +722,7 @@ console.log(++a);
 // output:
 // valueOf
 // 2
-// valueOf 返回原始值(字符串)，直接将该字符串转换为数字，得到 1
+// valueOf 返回原始值(字符串), 直接将该字符串转换为数字, 得到 1
 ```
 
 ```ts
@@ -751,7 +749,7 @@ alert(a);
 // output:
 // toString
 // 弹出 "[object Object]"
-// 调用toString方法，返回了字符串”[object Object]”，对象最终转换为该字符串
+// 调用toString方法, 返回了字符串”[object Object]”, 对象最终转换为该字符串
 ```
 
 ```ts
@@ -779,8 +777,8 @@ alert(a);
 // toString
 // valueOf
 // Uncaught TypeError: Cannot convert object to primitive value
-// 调用toString方法，返回的不是 primitive value，继续执行
-// 调用valueOf方法，返回的不是 primitive value，继续执行
+// 调用toString方法, 返回的不是 primitive value, 继续执行
+// 调用valueOf方法, 返回的不是 primitive value, 继续执行
 // 抛出 TypeError
 ```
 
@@ -839,14 +837,14 @@ const i = a ? 1 : b ? 2 : c ? 3 : 4;
 
 `a + b`:
 
-- 如果有一个是对象，则遵循对象对原始值的转换过程
-  (Date 对象直接调用 toString 完成转换，
-  其他对象通过 valueOf 转化，
-  如果转换不成功则调用 toString)
-- 如果两个都是对象，两个对象都遵循步骤 1 转换到字符串
-- 两个数字，进行算数运算
-- 两个字符串，直接拼接
-- 一个字符串一个数字，直接拼接为字符串
+- 如果有一个是对象, 则遵循对象对原始值的转换过程:
+  - Date 对象直接调用 toString 完成转换.
+  - 其他对象通过 valueOf 转化,
+    如果转换不成功则调用 toString.
+- 如果两个都是对象, 两个对象都遵循步骤 1 转换到字符串.
+- 两个数字, 进行算数运算.
+- 两个字符串, 直接拼接.
+- 一个字符串一个数字, 直接拼接为字符串.
 
 ### Dot Operator
 
@@ -912,12 +910,14 @@ function doAction(action) {
 
 - 实例化对象仅有属性`__proto__`, 没有属性`prototype`, 函数才具有属性 `prototype` (指向引擎为其自动创建的原型对象):
   `Instance.__proto__ === Constructor.prototype`.
-- 所有引用类型 (包括对象/数组/函数/构造函数) 都有属性`__proto__`(隐式原型)
-- 所有函数/构造函数的 `__proto__` 都指向 `Function.prototype`
-- 除`Object.prototype.__proto__`指向 null 外, 其余函数/构造函数的原型对象的`__proto__` 都指向 `Object.prototype`
-- 除`Object.create()`外, 所新建对象的 `__proto__` 指向构造该对象的构造函数的`原型对象(prototype)`
-- 除`typeof Function.prototype` 为 'function' 外, 其余函数/构造函数的原型对象都为 '对象'(`typeof` 为 'object')
-- 先有`Object.prototype`(原型链顶端), `Function.prototype` 继承`Object.prototype`而产生, 最后`Object/Function/Array/其它构造函数`继承`Function.prototype`而产生
+- 所有引用类型 (包括对象/数组/函数/构造函数) 都有属性`__proto__`(隐式原型).
+- 所有函数/构造函数的 `__proto__` 都指向 `Function.prototype`.
+- 除`Object.prototype.__proto__`指向 null 外, 其余函数/构造函数的原型对象的`__proto__` 都指向 `Object.prototype`.
+- 除`Object.create()`外, 所新建对象的 `__proto__` 指向构造该对象的构造函数的`原型对象(prototype)`.
+- 除`typeof Function.prototype` 为 'function' 外, 其余函数/构造函数的原型对象都为 '对象'(`typeof` 为 'object').
+- 先有`Object.prototype`(原型链顶端),
+  `Function.prototype` 继承`Object.prototype`而产生,
+  最后`Object/Function/Array/其它构造函数`继承`Function.prototype`而产生.
 
 :::tip Prototype Chain
 
@@ -932,7 +932,7 @@ function doAction(action) {
 - `[[proto]]` getter is `Object.getPrototypeOf(object)`.
 - `[[proto]]` setter is `Object.setPrototypeOf(object, prototype)`.
 
-下面五种操作（方法/属性/运算符）可以触发 JS 引擎读取一个对象的原型，
+下面五种操作（方法/属性/运算符）可以触发 JS 引擎读取一个对象的原型,
 可以触发 `getPrototypeOf()` 代理方法的运行：
 
 ```ts
@@ -1372,7 +1372,7 @@ Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor �
 
 #### Class Simulation
 
-复制式地继承，将会消耗大量内存单元 **Best Practice**:
+复制式地继承, 将会消耗大量内存单元 **Best Practice**:
 
 ```ts
 const classSim = function (Parent, props) {
@@ -1467,7 +1467,7 @@ const switchInstance = Object.create(switchProto);
 
 #### 原型克隆
 
-此时属性与方法不共享，实例对象各自拥有一份拷贝
+此时属性与方法不共享, 实例对象各自拥有一份拷贝
 
 ##### 浅克隆
 
@@ -1546,7 +1546,7 @@ function factory() {
     name: 'MacLeod',
   };
 
-  // 利用闭包，返回私有对象，实现工厂方法.
+  // 利用闭包, 返回私有对象, 实现工厂方法.
   return {
     get() {
       return highlander;
@@ -1683,7 +1683,7 @@ setTimeout(batman.logName, 1000);
 #### Explicit Binding
 
 Apply/Bind/Call Invocation:
-函数引用不可以改变函数定义作用域 (scope)，但可以改变函数执行作用域 (context).
+函数引用不可以改变函数定义作用域 (scope), 但可以改变函数执行作用域 (context).
 
 ```ts
 this.construct = Foo;
@@ -1891,7 +1891,7 @@ Lazy Function Definition (Self-Defining Function):
 
 - 第一次执行时,进行初始化并重新定义函数变量.
 - 第二次执行时,不再进行初始化(函数被重定义至真正函数).
-- 第一次执行为 promise, 将重复使用的部分进行初始化，之后的调用不再浪费新空间，**提升性能**.
+- 第一次执行为 promise, 将重复使用的部分进行初始化, 之后的调用不再浪费新空间, **提升性能**.
 
 ```ts
 // definition
@@ -1948,7 +1948,7 @@ let addEvent = function (el, type, handle) {
 
 - 使得匿名函数内部的代码能够立即执行
 - 不泄漏只使用一次的局部变量与方法
-- 创建命名空间，防止变量命名冲突
+- 创建命名空间, 防止变量命名冲突
 
 #### 即时函数返回值
 
@@ -2044,7 +2044,7 @@ const greet = function greet(options, ...rest) {
 通过把过程化的条件分支语句转化为对象的多态性,
 从而消除条件分支语句.
 
-每个对象的职责，成为该对象的属性与方法,
+每个对象的职责, 成为该对象的属性与方法,
 被安装在对象内部, 每个对象负责它们自己的行为.
 这些对象可以根据同一个消息, 有条不紊地分别进行各自的工作.
 :::
@@ -2076,7 +2076,7 @@ setTimeout(function () {
 }, 1000);
 ```
 
-### 常用函数
+### Common Function Utils
 
 #### Object Descriptor
 
@@ -2087,10 +2087,10 @@ setTimeout(function () {
 
 数据描述符:
 
-- configurable：是否可以被删除，默认 false
-- enumerable：是否可以被枚举(for in)，默认 false
-- writable：是否是只读 property，默认是 false,有点像 C#中的 const
-- value：值，默认是 undefined
+- configurable：是否可以被删除, 默认 false
+- enumerable：是否可以被枚举(for in), 默认 false
+- writable：是否是只读 property, 默认是 false,有点像 C#中的 const
+- value：值, 默认是 undefined
 
 存取描述符:
 
@@ -2129,7 +2129,7 @@ Object.defineProperties(o, {
 });
 ```
 
-#### Object Functions
+#### Object Function
 
 - `Object.create(prototype[,descriptors])`
 
@@ -2155,32 +2155,80 @@ console.log(Object.getOwnPropertyNames(o)); // ["age", "sex"]
 console.log(Object.keys(o)); // ["age"]
 ```
 
-- Object.preventExtensions(O)/Object.isExtensible(O) - 不可新增属性，可删除/修改属性
-- Object.seal(O)/Object.isSealed(O) - 不可新增/删除属性，可修改属性
+- Object.preventExtensions(O)/Object.isExtensible(O) - 不可新增属性, 可删除/修改属性
+- Object.seal(O)/Object.isSealed(O) - 不可新增/删除属性, 可修改属性
 - Object.freeze(O)/Object.isFrozen(O) - 不可新增/删除/修改属性
 
-#### 类型判断
+#### Math Function
+
+- `Math.max`.
+- `Math.min()`.
+- `Math.ceil()`: 向上舍入为最接近的整数.
+- `Math.floor()`: 向下舍入为最接近的整数.
+- `Math.round()`: 四舍五入.
+- `Math.fround()`: 返回数值最接近的单精度（32 位）浮点值表示.
+- `Math.abs(x)`: 返回 x 的绝对值.
+- `Math.exp(x)`: 返回 `Math.E` 的 x 次幂.
+- `Math.expm1(x)`: 等于 `Math.exp(x) - 1`.
+- `Math.log(x)`: 返回 x 的自然对数.
+- `Math.log1p(x)`: 等于 `1 + Math.log(x)`.
+- `Math.pow(x, power)`: 返回 x 的 power 次幂.
+- `Math.hypot(...nums)`: 返回 nums 中每个数平方和的平方根.
+- `Math.clz32(x)`: 返回 32 位整数 x 的前置零的数量.
+- `Math.sign(x)`: 返回表示 x 符号的 `1`/`0`/`-0`/`-1`.
+- `Math.trunc(x)`: 返回 x 的整数部分, 删除所有小数.
+- `Math.sqrt(x)`: 返回 x 的平方根.
+- `Math.cbrt(x)`: 返回 x 的立方根.
+- `Math.acos(x)`: 返回 x 的反余弦.
+- `Math.acosh(x)`: 返回 x 的反双曲余弦.
+- `Math.asin(x)`: 返回 x 的反正弦.
+- `Math.asinh(x)`: 返回 x 的反双曲正弦.
+- `Math.atan(x)`: 返回 x 的反正切.
+- `Math.atanh(x)`: 返回 x 的反双曲正切.
+- `Math.atan2(y, x)`: 返回 `y/x` 的反正切.
+- `Math.cos(x)`: 返回 x 的余弦.
+- `Math.sin(x)`: 返回 x 的正弦.
+- `Math.tan(x)`: 返回 x 的正切.
 
 ```ts
-Boolean(val); // true
-Array(val); // Array[<3个空存储位置>]
+console.log(Math.max(3, 54, 32, 16)); // 54
+console.log(Math.min(3, 54, 32, 16)); // 3
+console.log(Math.ceil(25.9)); // 26
+console.log(Math.ceil(25.5)); // 26
+console.log(Math.ceil(25.1)); // 26
+console.log(Math.round(25.9)); // 26
+console.log(Math.round(25.5)); // 26
+console.log(Math.round(25.1)); // 25
+console.log(Math.fround(0.4)); // 0.4000000059604645
+console.log(Math.fround(0.5)); // 0.5
+console.log(Math.fround(25.9)); // 25.899999618530273
+console.log(Math.floor(25.9)); // 25
+console.log(Math.floor(25.5)); // 25
+console.log(Math.floor(25.1)); // 25
 ```
 
-#### 解析函数
+#### URI Function
+
+- `encodeURI()`: 不会编码属于 URL 组件的特殊字符, 比如冒号/斜杠/问号.
+- `encodeURIComponent()`: 编码它发现的所有非标准字符.
 
 ```ts
-parseInt(val, 2 / 8 / 10);
+const uri = 'http://www.wrox.com/illegal value.js#start';
+// "http://www.wrox.com/illegal%20value.js#start"
+console.log(encodeURI(uri));
+// "http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.js%23start"
+console.log(encodeURIComponent(uri));
 ```
-
-#### 数学函数
 
 ```ts
-Math.floor(Math.random * arr.length);
-const min = Math.min;
-const max = Math.max;
+const uri = 'http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.js%23start';
+// http%3A%2F%2Fwww.wrox.com%2Fillegal value.js%23start
+console.log(decodeURI(uri));
+// http:// www.wrox.com/illegal value.js#start
+console.log(decodeURIComponent(uri));
 ```
 
-#### 时间函数
+#### Timer Function
 
 ##### Interval Function
 
@@ -3291,20 +3339,22 @@ const height =
 
 #### Window Height
 
-- outerHeight: 是整个浏览器窗口的大小，包括窗口标题、工具栏、状态栏等
-- innerHeight: 是 DOM 视口的大小，包括滚动条
-- offsetHeight: 整个可视区域大小，包括 border 和 scrollbar 在内
-- clientHeight: 内部可视区域大小
-- scrollHeight: 元素内容的高度，包括溢出部分
+- outerHeight: 是整个浏览器窗口的大小, 包括窗口标题、工具栏、状态栏等.
+- innerHeight: 是 DOM 视口的大小, 包括滚动条.
+- offsetHeight: 整个可视区域大小, 包括 border 和 scrollbar 在内.
+- clientHeight: 内部可视区域大小.
+- scrollHeight: 元素内容的高度, 包括溢出部分.
 
-> In case of transforms,
-> the offsetWidth and offsetHeight returns the layout width and height (all the same),
-> while getBoundingClientRect() returns the rendering width and height.
+:::tip Rect API
+In case of transforms,
+the offsetWidth and offsetHeight returns the layout width and height (all the same),
+while getBoundingClientRect() returns the rendering width and height.
+:::
 
 #### Scroll Size
 
-- scrollTop/scrollY/pageYOffset: 元素内容向上滚动了多少像素，如果没有滚动则为 0
-- scrollLeft/scrollX/PageXOffset: 元素内容向右滚动了多少像素，如果没有滚动则为 0
+- scrollTop/scrollY/pageYOffset: 元素内容向上滚动了多少像素, 如果没有滚动则为 0.
+- scrollLeft/scrollX/PageXOffset: 元素内容向右滚动了多少像素, 如果没有滚动则为 0.
 
 ```ts
 const supportPageOffset = window.pageXOffset !== undefined;
@@ -3345,15 +3395,15 @@ const isElementInViewport = el => {
 
 ### Mutation Observer API
 
-如果文档中连续插入 1000 个 `<li>` 元素，就会连续触发 1000 个插入事件，
-执行每个事件的回调函数，这很可能造成浏览器的卡顿；
-而 Mutation Observer 完全不同，只在 1000 个段落都插入结束后才会触发，而且只触发一次.
+如果文档中连续插入 1000 个 `<li>` 元素, 就会连续触发 1000 个插入事件,
+执行每个事件的回调函数, 这很可能造成浏览器的卡顿；
+而 Mutation Observer 完全不同, 只在 1000 个段落都插入结束后才会触发, 而且只触发一次.
 
 Mutation Observer 有以下特点:
 
-- 它等待所有脚本任务完成后，才会运行，即采用异步方式
-- 它把 DOM 变动记录封装成一个数组进行处理，而不是一条条地个别处理 DOM 变动
-- 它即可以观察发生在 DOM 节点的所有变动，也可以观察某一类变动
+- 它等待所有脚本任务完成后, 才会运行, 即采用异步方式
+- 它把 DOM 变动记录封装成一个数组进行处理, 而不是一条条地个别处理 DOM 变动
+- 它即可以观察发生在 DOM 节点的所有变动, 也可以观察某一类变动
 
 ```ts
 const mutationObserver = new MutationObserver(mutations => {
@@ -3427,7 +3477,7 @@ const XHR = (function () {
   };
 
   // 根据兼容性返回对应的工厂对象
-  // 此立即函数运行一次即可完成兼容性检查，防止重复检查
+  // 此立即函数运行一次即可完成兼容性检查, 防止重复检查
   if (standard.createXHR()) {
     return standard;
   } else {
@@ -3691,7 +3741,7 @@ Avoid use them in production:
 | :------- | :------------- | :---------------------------------------------- |
 | 捕获     | `(exp)`        | 匹配 exp,并捕获文本到自动命名的组里             |
 |          | `(?<name>exp)` | 匹配 exp,并捕获文本到名称为 name 的组里         |
-|          | `(?:exp)`      | 匹配 exp,不捕获匹配的文本，也不给此分组分配组号 |
+|          | `(?:exp)`      | 匹配 exp,不捕获匹配的文本, 也不给此分组分配组号 |
 | 零宽断言 | `(?<=exp)`     | 匹配左侧是 exp 的位置                           |
 |          | `(?<!exp)`     | 匹配左侧不是 exp 的位置                         |
 |          | `(?=exp)`      | 匹配右侧是 exp 的位置                           |
@@ -3717,12 +3767,12 @@ for (const match of string.matchAll(regex)) {
 ### RegExp Best Practice
 
 - 不使用 new RegExp(),使用正则表达式字面量
-- 将正则表达式赋值给变量，防止正则表达式重复创建
-- 以简单(唯一性)字元开始，如 `^/$ x \u363A [a-z] \b`, 避免以分组表达式开始:
+- 将正则表达式赋值给变量, 防止正则表达式重复创建
+- 以简单(唯一性)字元开始, 如 `^/$ x \u363A [a-z] \b`, 避免以分组表达式开始:
   e.g `\s\s*` 优于 `\s{1,}`.
 - 减少表达式的重叠匹配.
 - 减少分支表达式,并将最常用的分支放在最前面.
-- 无需反向引用时，使用非捕获组:
+- 无需反向引用时, 使用非捕获组:
   e.g `(?:...)` 优于 `(...)`.
 
 ### RegExp 常用函数
@@ -3860,5 +3910,5 @@ MyError.prototype.constructor = MyError;
 
 ### Error and Exception Usage
 
-- 在可能失败的地方抛出异常，对失败处做标签，易于**调试与测试**
-- 修复 bug 后，可考虑是否在此处抛出异常
+- 在可能失败的地方抛出异常, 对失败处做标签, 易于**调试与测试**
+- 修复 bug 后, 可考虑是否在此处抛出异常
