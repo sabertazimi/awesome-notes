@@ -8,6 +8,73 @@ tags: [Web, JavaScript, ECMAScript]
 
 # JavaScript Advanced Notes
 
+## BOM
+
+### Window
+
+```ts
+window.location(string);
+window.innerWidth(number);
+window.closed(boolean);
+```
+
+**Tip**: 实现 jQuery 中 `$(document).ready(function(){})`.
+
+```ts
+// initialize.
+window.onload = readyFunction;
+
+function readyFunction() {}
+```
+
+```ts
+// add more ready function
+function addLoadEvent(func) {
+  const oldOnLoad = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function () {
+      oldOnLoad();
+      func();
+    };
+  }
+}
+```
+
+### Location
+
+| 属性     | 描述                                        |
+| :------- | :------------------------------------------ |
+| hash     | 设置或返回从井号 (#) 开始的 URL（锚）       |
+| host     | 设置或返回主机名和当前 URL 的端口号         |
+| hostname | 设置或返回当前 URL 的主机名                 |
+| href     | 设置或返回完整的 URL                        |
+| pathname | 设置或返回当前 URL 的路径部分               |
+| port     | 设置或返回当前 URL 的端口号                 |
+| protocol | 设置或返回当前 URL 的协议                   |
+| search   | 设置或返回从问号 (?) 开始的 URL（查询部分） |
+
+```ts
+window.addEventListener(
+  'hashchange',
+  event => {
+    // event.oldURL
+    // event.nweURL
+    if (window.location.hash === '#someCoolFeature') {
+      someCoolFeature();
+    }
+  },
+  false
+);
+```
+
+### Navigator
+
+```ts
+const networkType = navigator.connection.effectiveType; // 2G - 5G
+```
+
 ## DOM
 
 - DOM Level 0
@@ -750,7 +817,7 @@ function myHandler(e) {
 }
 ```
 
-### Document API
+### Document
 
 ```ts
 document.write();
@@ -758,75 +825,21 @@ const URI = document.URI;
 const title = document.title;
 ```
 
-### Window API
-
-```ts
-window.location(string);
-window.innerWidth(number);
-window.closed(boolean);
-```
-
-**Tip**: 实现 jQuery 中 `$(document).ready(function(){})`.
-
-```ts
-// initialize.
-window.onload = readyFunction;
-
-function readyFunction() {}
-```
-
-```ts
-// add more ready function
-function addLoadEvent(func) {
-  const oldOnLoad = window.onload;
-  if (typeof window.onload != 'function') {
-    window.onload = func;
-  } else {
-    window.onload = function () {
-      oldOnLoad();
-      func();
-    };
-  }
-}
-```
-
-### Location API
-
-| 属性     | 描述                                        |
-| :------- | :------------------------------------------ |
-| hash     | 设置或返回从井号 (#) 开始的 URL（锚）       |
-| host     | 设置或返回主机名和当前 URL 的端口号         |
-| hostname | 设置或返回当前 URL 的主机名                 |
-| href     | 设置或返回完整的 URL                        |
-| pathname | 设置或返回当前 URL 的路径部分               |
-| port     | 设置或返回当前 URL 的端口号                 |
-| protocol | 设置或返回当前 URL 的协议                   |
-| search   | 设置或返回从问号 (?) 开始的 URL（查询部分） |
-
-```ts
-window.addEventListener(
-  'hashchange',
-  event => {
-    // event.oldURL
-    // event.nweURL
-    if (window.location.hash === '#someCoolFeature') {
-      someCoolFeature();
-    }
-  },
-  false
-);
-```
-
-### Rect API
+### DOM Rect
 
 `getBoundingClientRect`:
 
 [![Client Rect](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect/element-box-diagram.png)](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
 
-#### Width and Height API
+#### DOM Width and Height
 
 - offsetWidth/offsetHeight = content + padding + border
 - clientWidth/clientHeight = content + padding
+- outerHeight: 是整个浏览器窗口的大小, 包括窗口标题、工具栏、状态栏等.
+- innerHeight: 是 DOM 视口的大小, 包括滚动条.
+- offsetHeight: 整个可视区域大小, 包括 border 和 scrollbar 在内.
+- clientHeight: 内部可视区域大小.
+- scrollHeight: 元素内容的高度, 包括溢出部分.
 
 ```ts
 const height =
@@ -835,21 +848,13 @@ const height =
   document.body.clientHeight;
 ```
 
-#### Window Height
-
-- outerHeight: 是整个浏览器窗口的大小, 包括窗口标题、工具栏、状态栏等.
-- innerHeight: 是 DOM 视口的大小, 包括滚动条.
-- offsetHeight: 整个可视区域大小, 包括 border 和 scrollbar 在内.
-- clientHeight: 内部可视区域大小.
-- scrollHeight: 元素内容的高度, 包括溢出部分.
-
-:::tip Rect API
+:::tip DOM Rect API
 In case of transforms,
 the offsetWidth and offsetHeight returns the layout width and height (all the same),
 while getBoundingClientRect() returns the rendering width and height.
 :::
 
-#### Scroll Size
+#### DOM Scroll Size
 
 - scrollTop/scrollY/pageYOffset: 元素内容向上滚动了多少像素, 如果没有滚动则为 0.
 - scrollLeft/scrollX/PageXOffset: 元素内容向右滚动了多少像素, 如果没有滚动则为 0.
@@ -876,7 +881,7 @@ if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
 }
 ```
 
-#### DOM Left and Top Property
+#### DOM Left and Top
 
 - offsetLeft/offsetTop: 表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent 对象）左上角的距离
 - scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素大小
@@ -1610,7 +1615,7 @@ Orinoco 优化 (优化全停顿现象):
 - [Turbolizer](https://github.com/thlorenz/turbolizer)
 - [v8 map processor](https://github.com/thlorenz/v8-map-processor)
 
-### V8 Performance Tutorial
+### V8 Performance Reference
 
 - [v8 perf](https://github.com/thlorenz/v8-perf)
 
@@ -1714,7 +1719,7 @@ pseudo
   ;
 ```
 
-#### Render Blocking Resources
+#### Render Blocking Resources Type
 
 Render blocking resources are files that 'press pause'
 on the critical rendering path.
@@ -1732,7 +1737,7 @@ They interrupt one or more of the steps:
   CSSOM -> CSS block JS -> JS block HTML parser.
 - Images and fonts are not render blocking.
 
-##### Render Blocking Best Practice
+#### Render Blocking Resources Performance
 
 - Reduce CSS and JavaScript bytes.
 - Lazy loading non-critical CSS and JavaScript.
@@ -2548,7 +2553,7 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 这个标识字符串可以是基于文件内容编码的,
 因此 Etag 能够精准地感知文件的变化.
 
-#### Code Caching
+#### Code Cache
 
 - cold run: `download -> compile -> store into on-disk cache`
 - warm run: `fetch from browser cache -> compile -> store metadata`
@@ -2556,7 +2561,7 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 - positive case: IIFE function heuristics
 - passive case: too small (`< 1KB`) and inline scripts
 
-### Browser Performance Monitoring
+### Performance Monitoring
 
 前端性能监控分为两种方式,
 一种叫做合成监控 (Synthetic Monitoring, SYN),
@@ -2594,7 +2599,7 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 | 数据样本足够庞大，可以减少统计误差     | 无法采集完整的资源加载瀑布图     |
 | 新年数据可与其它数据关联，产生更大价值 | 无法可视化展示加载过程           |
 
-#### Difference between SYN and RUM
+#### SYN and RUM
 
 | 对比项         | 合成监控               | 真实用户监控               |
 | :------------- | :--------------------- | :------------------------- |
@@ -2603,7 +2608,7 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 | 数据样本量     | 较小                   | 大(视业务体量)             |
 | 适合场景       | 定性分析, 小数据量分析 | 定量分析, 业务数据深度挖掘 |
 
-#### Performance Monitoring Methods
+#### Monitoring Methods
 
 在真实用户性能数据采集时, 要关注四个方面的东西:
 
@@ -2677,14 +2682,6 @@ Google Core Web Vitals:
   `unload`/`beforeunload` event not precise for mobile users:
   e.g switch to another app not trigger `unload` event.
 
-#### Speed Tools
-
-- [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools)
-- [FID Tracking](https://github.com/GoogleChromeLabs/first-input-delay)
-- [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
-- [Lighthouse Audit Tab)](https://github.com/GoogleChrome/lighthouse)
-- [LightHouse CI Action](https://github.com/treosh/lighthouse-ci-action)
-
 ### Data Format and Size
 
 - [optimize images for web](https://www.keycdn.com/blog/optimize-images-for-web)
@@ -2736,11 +2733,11 @@ reduce image transfer sizes by average of ~20%
 - [Fetch Priority](https://web.dev/priority-hints)
 - [Resources Priority](https://web.dev/prioritize-resources)
 
-#### Data Loading Tips
+#### Data Loading Best Practice
 
-- 非必要静态资源上传 CDN
-- 冷启动开启数据预拉取
-- 页面路由切换时进行数据预拉取 (并缓存数据)
+- 非必要静态资源上传 CDN.
+- 冷启动开启数据预拉取.
+- 页面路由切换时进行数据预拉取 (并缓存数据).
 
 #### Data Preloading
 
@@ -2873,36 +2870,7 @@ const PageComponent = () => {
 <script nomodule src="legacy.js"></script>
 ```
 
-### Performance and Analysis Tools
-
-- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
-- [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report)
-- Audits Chrome: PWA, SEO, performance, device simulator.
-
-#### Inspect Android Device
-
-- enable development mode and USB debugging in Android Device
-- link Android and PC with USB cable
-- open `chrome://inspect/#devices` to start inspecting
-
-### Performance Best Practice
-
-- Use monomorphic objects due to shape and inline caches.
-- Use monomorphic function in hot code paths.
-- Code optimization:
-  - Fast CSS styles (`CSS Performance`):
-  - Fast JavaScript code (`Effective JavaScript`) (DOM/React/Concurrency).
-- Resource optimization: HTML/CSS/JS/Images/Audio/Video/Fonts:
-  - Remove useless files.
-  - Tree shaking.
-  - Zip.
-  - CDN.
-- Lazy loading: HTML/CSS/JS/Images/Audio/Video/Fonts.
-- Code splitting: Webpack `splitChunks`.
-- Offline caching (PWA).
-- PreFetch/PreLoad/PreRendering (SSR).
-
-#### Performance API
+### Performance API
 
 ```ts
 performance.mark('mainThread-start');
@@ -3042,7 +3010,7 @@ const responseTime = pageNav.responseEnd - pageNav.responseStart;
 const requestResponseTime = pageNav.responseEnd - pageNav.requestStart;
 ```
 
-#### Performant Tips for FCP
+#### FCP
 
 First Contentful Paint:
 
@@ -3076,7 +3044,7 @@ observer.observe({ type: 'paint', buffered: true });
 // }
 ```
 
-#### Performant Tips for LCP
+#### LCP
 
 Largest Contentful Paint:
 
@@ -3116,7 +3084,7 @@ observer.observe({ type: 'largest-contentful-paint', buffered: true });
 // }
 ```
 
-#### Performant Tips for CLS
+#### CLS
 
 Cumulative Layout Shift:
 
@@ -3186,13 +3154,45 @@ observer.observe({ type: 'layout-shift', buffered: true });
 // }
 ```
 
+### Performance Best Practice
+
+- Use monomorphic objects due to shape and inline caches.
+- Use monomorphic function in hot code paths.
+- Code optimization:
+  - Fast CSS styles (`CSS Performance`):
+  - Fast JavaScript code (`Effective JavaScript`) (DOM/React/Concurrency).
+- Resource optimization: HTML/CSS/JS/Images/Audio/Video/Fonts:
+  - Remove useless files.
+  - Tree shaking.
+  - Zip.
+  - CDN.
+- Lazy loading: HTML/CSS/JS/Images/Audio/Video/Fonts.
+- Code splitting: Webpack `splitChunks`.
+- Offline caching (PWA).
+- PreFetch/PreLoad/PreRendering (SSR).
+
+### Performance and Analysis Tools
+
+- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
+- [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report)
+- [Speedup Tools](https://developers.google.com/web/fundamentals/performance/speed-tools)
+- [FID Tracking](https://github.com/GoogleChromeLabs/first-input-delay)
+- [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
+- [Lighthouse Audit Tab)](https://github.com/GoogleChrome/lighthouse)
+- [LightHouse CI Action](https://github.com/treosh/lighthouse-ci-action)
+- Audits Chrome: PWA, SEO, performance, device simulator.
+
+#### Inspect Android Device
+
+- Enable development mode and USB debugging in Android Device.
+- Link Android and PC with USB cable.
+- Open `chrome://inspect/#devices` to start inspecting.
+
 ### Performance Reference
 
 - `web.dev` performance complete [guide](https://web.dev/fast).
 - Fetch priority [guide](https://web.dev/priority-hints).
 - Resources priority [guide](https://web.dev/prioritize-resources).
-- Chrome devtools [guide](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference).
-- Chrome UX [report](https://developers.google.com/web/tools/chrome-user-experience-report).
 - Web vitals real world [case](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw).
 - Web monitor real world [case](https://zhuanlan.zhihu.com/p/420330110).
 
@@ -3999,7 +3999,7 @@ module.exports = {
 };
 ```
 
-### Jest Internal
+### Jest Internals
 
 A simple
 [test runner](https://github.com/typicode/xv)
@@ -5322,13 +5322,13 @@ self.addEventListener('install', e => {
 
 - [Workbox](https://github.com/GoogleChrome/workbox)
 
-### PWA Tutorials
+### PWA Reference
 
 - [Offline Cookbook](https://web.dev/offline-cookbook)
 - [Extensive Guide](https://www.smashingmagazine.com/2018/11/guide-pwa-progressive-web-applications)
 - [Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers).
 
-## Web Workers API
+## Web Workers
 
 - 多线程处理
 - 有两种方法可以停止 Worker:
@@ -5471,7 +5471,7 @@ worker.postMessage(jsonText);
 
 - Web Worker performance [guide](https://mp.weixin.qq.com/s/IJHI9JB3nMQPi46b6yGVWw).
 
-## Web Observer API
+## Web Observer
 
 - [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)
 - [Mutation Observer](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)
@@ -5564,7 +5564,7 @@ observer.observe(target, {
 });
 ```
 
-## Web Animations API
+## Web Animations
 
 - `KeyframeEffect`.
 - `Animation`.
@@ -5654,7 +5654,7 @@ function createPlayer(animations) {
 }
 ```
 
-## Web Canvas API
+## Web Canvas
 
 ### Canvas Basic Usage
 
@@ -5765,9 +5765,9 @@ onmessage = function (event) {
 - [Canvas Deep Live](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
 - [Canvas Real World Case](https://zhuanlan.zhihu.com/p/438142235)
 
-## Web Audio API
+## Web Audio
 
-### From Oscillator
+### Oscillator
 
 ```bash
                          -3  -1   1       4   6       9   11
@@ -5809,7 +5809,7 @@ const play = (type, delay, pitch, duration) => {
 };
 ```
 
-### From Music Data
+### Music Data
 
 ```ts
 const sampleSize = 1024; // number of samples to collect before analyzing data
@@ -5874,7 +5874,7 @@ function stopSound() {
 }
 ```
 
-### Audio Bar Chart with Canvas
+### Audio Bar Chart
 
 - [AnalyserNode.getByteFrequencyData API](https://developer.mozilla.org/zh-CN/docs/Web/API/AnalyserNode/getByteFrequencyData)
 - [Github Demo](https://github.com/bogdan-cornianu/swave/blob/master/src/visualizer.ts)
@@ -5912,13 +5912,13 @@ const draw = () => {
 draw();
 ```
 
-## Media Session API
+## Media Session
 
 - [W3C Media Session Specification](https://w3c.github.io/mediasession/)
 - [MDN Media Session Documentation](https://developer.mozilla.org/en-US/docs/Web/API/MediaSession/)
 - [Google Media Session Blog](https://web.dev/media-session/)
 
-## Web Storage API
+## Web Storage
 
 - Cookie for session state.
 - DOM storage for Web Component state.
@@ -5927,7 +5927,7 @@ draw();
 - Cache API for offline and quick file access.
 - JavaScript variables for everything else.
 
-### Local Storage API
+### Local Storage
 
 - 协同 cookies
 - 对于复杂对象的读取与存储,
@@ -5963,7 +5963,7 @@ function setStyles() {
 }
 ```
 
-### IndexDB API
+### IndexDB
 
 ```ts
 export class IndexedDB {
@@ -6092,15 +6092,9 @@ export class State {
 }
 ```
 
-### Web Files API
+### Web Files
 
-## Web Navigator API
-
-```ts
-const networkType = navigator.connection.effectiveType; // 2G - 5G
-```
-
-## Web Sockets API
+## Web Sockets
 
 ### Web Sockets Message Header
 
@@ -6171,13 +6165,13 @@ function WebSocketTest() {
 主要在一些**长时间连接**的应用场景需要考虑心跳机制及重连机制,
 以保证长时间的连接及数据交互.
 
-## Web RTC API
+## Web RTC
 
 - [WebRTC Security List](https://dzone.com/articles/webrtc-security-vulnerabilities-you-should-know-ab)
 
-## Web Gamepad API
+## Web Gamepad
 
-[Gamepad API Tutorials](https://developer.mozilla.org/zh-CN/docs/Games/Techniques/Controls_Gamepad_API)
+[Gamepad API](https://developer.mozilla.org/zh-CN/docs/Games/Techniques/Controls_Gamepad_API):
 
 ```ts
 const gamepads = {};
@@ -6202,7 +6196,7 @@ window.addEventListener('gamepaddisconnected', e => {
 });
 ```
 
-## Web Geolocation API
+## Web Geolocation
 
 ```ts
 if (window.navigator.geolocation) {
@@ -6294,9 +6288,212 @@ navigator.geolocation.watchPosition(
 
 自动更新地理位置
 
-## Web HTTP API
+## RESTful API
 
-### AJAX API
+- Client - Server architecture
+- Stateless
+- Cacheable
+- Layer system
+- Code via need
+- Isomorphic interface
+
+## JamStack
+
+JamStack 指的是一套用于构建现代网站的技术栈:
+
+- JavaScript: enhancing with JavaScript.
+- APIs: supercharging with services.
+- Markup: pre-rendering.
+
+CSR (Client Side Rendering): SPA
+-> SSR (Server Side Rendering): SPA with SEO
+-> SSG (Static Site Generation): SPA with pre-rendering
+-> ISR (Incremental Static Regeneration) = SSG + SSR.
+
+- SSR + CSR: HomePage with SSR, dynamic with CSR.
+- SSG + CSR: HomePage with SSG, dynamic with CSR.
+- SSG + SSR: static with SSG, dynamic with SSR.
+
+### CSR
+
+- CSR hit API after the page loads (LOADING indicator).
+- Data is fetched on every page request.
+
+```tsx
+import { TimeSection } from '@components';
+
+export default function CSRPage() {
+  const [dateTime, setDateTime] = React.useState<string>();
+
+  React.useEffect(() => {
+    axios
+      .get('https://worldtimeapi.org/api/ip')
+      .then(res => {
+        setDateTime(res.data.datetime);
+      })
+      .catch(error => console.error(error));
+  }, []);
+
+  return (
+    <main>
+      <TimeSection dateTime={dateTime} />
+    </main>
+  );
+}
+```
+
+### SSR
+
+- [Server Side Rendering with Puppeteer](https://developers.google.com/web/tools/puppeteer/articles/ssr)
+- [Rendering on the Web](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)
+
+```ts
+if (isBotAgent) {
+  // return pre-rendering static html to search engine crawler
+  // like Gatsby
+} else {
+  // server side rendering at runtime for real interactive users
+  // ReactDOMServer.renderToString()
+}
+```
+
+- SSR hit API before the page loads (DELAY before render, and no LOADING indicator).
+- Data is fetched on every page request.
+
+```tsx
+import { TimeSection } from '@components';
+
+export default function SSRPage({ dateTime }: SSRPageProps) {
+  return (
+    <main>
+      <TimeSection dateTime={dateTime} />
+    </main>
+  );
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await axios.get('https://worldtimeapi.org/api/ip');
+
+  return {
+    props: { dateTime: res.data.datetime },
+  };
+};
+```
+
+### SSG
+
+- Reloading did not change anything.
+- Hit API when running `npm run build`.
+- Data will not change because no further fetch.
+
+```tsx
+import { TimeSection } from '@components';
+
+export default function SSGPage({ dateTime }: SSGPageProps) {
+  return (
+    <main>
+      <TimeSection dateTime={dateTime} />
+    </main>
+  );
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await axios.get('https://worldtimeapi.org/api/ip');
+
+  return {
+    props: { dateTime: res.data.datetime },
+  };
+};
+```
+
+### ISR
+
+- Based on SSG, with **revalidate limit**.
+- Cooldown state: reloading doesn't trigger changes and pages rebuilds.
+- First person that visits when cooldown state is off,
+  is going to trigger a rebuild.
+  That person won't be seeing changes.
+  But, the changes will be served for the next full reload.
+
+```tsx
+import { TimeSection } from '@components';
+
+export default function ISR20Page({ dateTime }: ISR20PageProps) {
+  return (
+    <main>
+      <TimeSection dateTime={dateTime} />
+    </main>
+  );
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await axios.get('https://worldtimeapi.org/api/ip');
+
+  return {
+    props: { dateTime: res.data.datetime },
+    revalidate: 20,
+  };
+};
+```
+
+## SEO
+
+### SEO Metadata
+
+```tsx
+import { Helmet } from 'react-helmet';
+
+function App() {
+  const seo = {
+    title: 'About',
+    description:
+      'This is an awesome site that you definitely should check out.',
+    url: 'https://www.mydomain.com/about',
+    image: 'https://mydomain.com/images/home/logo.png',
+  };
+
+  return (
+    <Helmet
+      title={`${seo.title} | Code Mochi`}
+      meta={[
+        {
+          name: 'description',
+          property: 'og:description',
+          content: seo.description,
+        },
+        { property: 'og:title', content: `${seo.title} | Code Mochi` },
+        { property: 'og:url', content: seo.url },
+        { property: 'og:image', content: seo.image },
+        { property: 'og:image:type', content: 'image/jpeg' },
+        { property: 'twitter:image:src', content: seo.image },
+        { property: 'twitter:title', content: `${seo.title} | Code Mochi` },
+        { property: 'twitter:description', content: seo.description },
+      ]}
+    />
+  );
+}
+```
+
+### SEO Best Practice
+
+- [Server side rendering](https://css-tricks.com/server-side-react-rendering)
+  (e.g Next.js).
+- [Pre-Rendering](https://github.com/chrisvfritz/prerender-spa-plugin)
+- Mobile performance optimization
+  (e.g minify resources, code splitting, CDN, lazy loading, minimize reflows).
+- SEO-friendly [routing](https://reacttraining.com/react-router) and URL management.
+- [Google webmaster tools](https://www.google.com/webmasters)
+- `<title>` and `<meta>` in `<head>` (with tool like `react-helmet`).
+- Includes a `robots.txt` file.
+
+### SEO Reference
+
+- [SEO Basics](https://developers.google.com/search/docs/guides/javascript-seo-basics)
+- [SPA SEO Basics](https://snipcart.com/spa-seo)
+
+## Network
+
+### AJAX
 
 #### AJAX Data Format
 
@@ -6550,7 +6747,7 @@ $.ajax({
 });
 ```
 
-### Fetch API
+### Fetch
 
 - GET: read resources
 - POST: create resources
@@ -6589,215 +6786,6 @@ const request = new Request('/api/names', {
 
 const response = await fetch(request);
 ```
-
-## Web URL API
-
-- [URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams)
-
-## RESTful API
-
-- Client - Server architecture
-- Stateless
-- Cacheable
-- Layer system
-- Code via need
-- Isomorphic interface
-
-## JamStack
-
-JamStack 指的是一套用于构建现代网站的技术栈:
-
-- JavaScript: enhancing with JavaScript.
-- APIs: supercharging with services.
-- Markup: pre-rendering.
-
-CSR (Client Side Rendering): SPA
--> SSR (Server Side Rendering): SPA with SEO
--> SSG (Static Site Generation): SPA with pre-rendering
--> ISR (Incremental Static Regeneration) = SSG + SSR.
-
-- SSR + CSR: HomePage with SSR, dynamic with CSR.
-- SSG + CSR: HomePage with SSG, dynamic with CSR.
-- SSG + SSR: static with SSG, dynamic with SSR.
-
-### CSR
-
-- CSR hit API after the page loads (LOADING indicator).
-- Data is fetched on every page request.
-
-```tsx
-import { TimeSection } from '@components';
-
-export default function CSRPage() {
-  const [dateTime, setDateTime] = React.useState<string>();
-
-  React.useEffect(() => {
-    axios
-      .get('https://worldtimeapi.org/api/ip')
-      .then(res => {
-        setDateTime(res.data.datetime);
-      })
-      .catch(error => console.error(error));
-  }, []);
-
-  return (
-    <main>
-      <TimeSection dateTime={dateTime} />
-    </main>
-  );
-}
-```
-
-### SSR
-
-- [Server Side Rendering with Puppeteer](https://developers.google.com/web/tools/puppeteer/articles/ssr)
-- [Rendering on the Web](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)
-
-```ts
-if (isBotAgent) {
-  // return pre-rendering static html to search engine crawler
-  // like Gatsby
-} else {
-  // server side rendering at runtime for real interactive users
-  // ReactDOMServer.renderToString()
-}
-```
-
-- SSR hit API before the page loads (DELAY before render, and no LOADING indicator).
-- Data is fetched on every page request.
-
-```tsx
-import { TimeSection } from '@components';
-
-export default function SSRPage({ dateTime }: SSRPageProps) {
-  return (
-    <main>
-      <TimeSection dateTime={dateTime} />
-    </main>
-  );
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await axios.get('https://worldtimeapi.org/api/ip');
-
-  return {
-    props: { dateTime: res.data.datetime },
-  };
-};
-```
-
-### SSG
-
-- Reloading did not change anything.
-- Hit API when running `npm run build`.
-- Data will not change because no further fetch.
-
-```tsx
-import { TimeSection } from '@components';
-
-export default function SSGPage({ dateTime }: SSGPageProps) {
-  return (
-    <main>
-      <TimeSection dateTime={dateTime} />
-    </main>
-  );
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  const res = await axios.get('https://worldtimeapi.org/api/ip');
-
-  return {
-    props: { dateTime: res.data.datetime },
-  };
-};
-```
-
-### ISR
-
-- Based on SSG, with **revalidate limit**.
-- Cooldown state: reloading doesn't trigger changes and pages rebuilds.
-- First person that visits when cooldown state is off,
-  is going to trigger a rebuild.
-  That person won't be seeing changes.
-  But, the changes will be served for the next full reload.
-
-```tsx
-import { TimeSection } from '@components';
-
-export default function ISR20Page({ dateTime }: ISR20PageProps) {
-  return (
-    <main>
-      <TimeSection dateTime={dateTime} />
-    </main>
-  );
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  const res = await axios.get('https://worldtimeapi.org/api/ip');
-
-  return {
-    props: { dateTime: res.data.datetime },
-    revalidate: 20,
-  };
-};
-```
-
-## SEO
-
-### SEO Tutorials
-
-- [SEO Basics](https://developers.google.com/search/docs/guides/javascript-seo-basics)
-- [SPA SEO Basics](https://snipcart.com/spa-seo)
-
-### SEO Tips
-
-- [Server side rendering](https://css-tricks.com/server-side-react-rendering)
-  (e.g Next.js).
-- [Pre-Rendering](https://github.com/chrisvfritz/prerender-spa-plugin)
-- Mobile performance optimization
-  (e.g minify resources, code splitting, CDN, lazy loading, minimize reflows).
-- SEO-friendly [routing](https://reacttraining.com/react-router) and URL management.
-- [Google webmaster tools](https://www.google.com/webmasters)
-- `<title>` and `<meta>` in `<head>` (with tool like `react-helmet`).
-- Includes a `robots.txt` file.
-
-#### SEO Metadata
-
-```tsx
-import { Helmet } from 'react-helmet';
-
-function App() {
-  const seo = {
-    title: 'About',
-    description:
-      'This is an awesome site that you definitely should check out.',
-    url: 'https://www.mydomain.com/about',
-    image: 'https://mydomain.com/images/home/logo.png',
-  };
-
-  return (
-    <Helmet
-      title={`${seo.title} | Code Mochi`}
-      meta={[
-        {
-          name: 'description',
-          property: 'og:description',
-          content: seo.description,
-        },
-        { property: 'og:title', content: `${seo.title} | Code Mochi` },
-        { property: 'og:url', content: seo.url },
-        { property: 'og:image', content: seo.image },
-        { property: 'og:image:type', content: 'image/jpeg' },
-        { property: 'twitter:image:src', content: seo.image },
-        { property: 'twitter:title', content: `${seo.title} | Code Mochi` },
-        { property: 'twitter:description', content: seo.description },
-      ]}
-    />
-  );
-}
-```
-
-## Network
 
 ### JSON
 
