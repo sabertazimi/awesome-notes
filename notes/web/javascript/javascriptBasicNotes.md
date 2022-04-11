@@ -4367,20 +4367,54 @@ console.log(target === proxy); // false
 
 - `Reflect.get(target, propKey)`.
 - `Reflect.set(target, propKey, value)`.
-- `Reflect.has(target, propKey)`.
-- `Reflect.apply(target, thisArgument, argumentsList)`.
-- `Reflect.construct(target, argumentsList)`:
-  `new target(...argumentsList)`.
+- `Reflect.has(target, propKey)`:
+  `in` operator.
+- `Reflect.defineProperty(target, propKey, attributes)`.
+- `Reflect.getOwnPropertyDescriptor(target, propKey)`.
+- `Reflect.deleteProperty(target, propKey)`:
+  `delete` operator.
 - `Reflect.ownKeys(target)`:
-  `Object.getOwnPropertyNames` + `Object.getOwnPropertySymbols`,
-  all keys include Symbols.
+  `Object.getOwnPropertyNames` + `Object.getOwnPropertySymbols`, all keys.
 - `Reflect.getPrototypeOf(target)`.
 - `Reflect.setPrototypeOf(target, prototype)`.
-- `Reflect.getOwnPropertyDescriptor(target, propKey)`.
-- `Reflect.defineProperty(target, propKey, attributes)`.
-- `Reflect.deleteProperty(target, propKey)`.
 - `Reflect.isExtensible(target)`.
 - `Reflect.preventExtensions(target)`.
+- `Reflect.apply(target, thisArgument, argumentsList)`:
+  function call.
+- `Reflect.construct(target, argumentsList)`:
+  `new target(...argumentsList)` operator.
+
+```ts
+const target = {
+  foo: 'bar',
+};
+const proxy = new Proxy(target, Reflect);
+console.log(proxy.foo); // bar
+console.log(target.foo); // bar
+```
+
+```ts
+Reflect.ownKeys({ z: 3, y: 2, x: 1 }); // [ "z", "y", "x" ]
+Reflect.ownKeys([]); // ["length"]
+
+const sym = Symbol.for('comet');
+const sym2 = Symbol.for('meteor');
+const obj = {
+  [sym]: 0,
+  str: 0,
+  '773': 0,
+  '0': 0,
+  [sym2]: 0,
+  '-1': 0,
+  '8': 0,
+  'second str': 0,
+};
+Reflect.ownKeys(obj);
+// [ "0", "8", "773", "str", "-1", "second str", Symbol(comet), Symbol(meteor) ]
+// Indexes in numeric order,
+// strings in insertion order,
+// symbols in insertion order.
+```
 
 ### Proxy Usage
 
@@ -4461,7 +4495,9 @@ const NOPE_HANDLER = {
 const readOnly = target => new Proxy(target, NODE_HANDLER);
 ```
 
-#### Range Judgement Protection
+#### Property and Parameter Validation
+
+`in` operator capture for range validation:
 
 ```ts
 const range = (min, max) =>
@@ -4478,6 +4514,77 @@ if (X in range(1, 100)) {
 
 nums.filter(n => n in range(1, 10));
 // => [1, 5]
+```
+
+`set` operator capture for property validation:
+
+```ts
+const target = {
+  onlyNumbersGoHere: 0,
+};
+
+const proxy = new Proxy(target, {
+  set(target, property, value) {
+    if (typeof value !== 'number') {
+      return false;
+    } else {
+      return Reflect.set(target, property, value);
+    }
+  },
+});
+
+proxy.onlyNumbersGoHere = 1;
+console.log(proxy.onlyNumbersGoHere); // 1
+proxy.onlyNumbersGoHere = '2';
+console.log(proxy.onlyNumbersGoHere); // 1
+```
+
+`apply` operator capture for parameter validation:
+
+```ts
+function median(...nums) {
+  return nums.sort()[Math.floor(nums.length / 2)];
+}
+
+const proxy = new Proxy(median, {
+  apply(target, thisArg, argumentsList) {
+    for (const arg of argumentsList) {
+      if (typeof arg !== 'number') {
+        throw new TypeError('Non-number argument provided');
+      }
+    }
+
+    return Reflect.apply(target, thisArg, argumentsList);
+  },
+});
+
+console.log(proxy(4, 7, 1)); // 4
+console.log(proxy(4, '7', 1));
+// Error: Non-number argument provided
+```
+
+`new` operator capture for parameter validation:
+
+```ts
+class User {
+  constructor(id) {
+    this.id_ = id;
+  }
+}
+
+const ProxyUser = new Proxy(User, {
+  construct(target, argumentsList, newTarget) {
+    if (argumentsList[0] === undefined) {
+      throw new Error('User cannot be instantiated without id');
+    } else {
+      return Reflect.construct(target, argumentsList, newTarget);
+    }
+  },
+});
+
+const obj = new ProxyUser(1);
+const throwError = new ProxyUser();
+// Error: User cannot be instantiated without id
 ```
 
 #### Exception Protection
