@@ -1878,7 +1878,9 @@ g.return(); // { value: undefined, done: true }
 g.return(1); // { value: 1, done: true }
 ```
 
-Iterable object:
+因为生成器对象实现了 Iterable 接口,
+生成器函数和默认迭代器被调用之后都产生迭代器,
+所以生成器适合作为默认迭代器:
 
 ```ts
 const users = {
@@ -1896,6 +1898,30 @@ const users = {
     }
   },
 };
+
+for (const key of users) {
+  console.log(key);
+}
+// andrew
+// clare
+
+class Foo {
+  constructor() {
+    this.values = [1, 2, 3];
+  }
+
+  *[Symbol.iterator]() {
+    yield* this.values;
+  }
+}
+
+const f = new Foo();
+for (const x of f) {
+  console.log(x);
+}
+// 1
+// 2
+// 3
 ```
 
 Early return:
@@ -1911,52 +1937,6 @@ const g = gen();
 
 g.next(); // { value: 1, done: false }
 g.return('foo'); // { value: "foo", done: true }
-g.next(); // { value: undefined, done: true }
-```
-
-#### Generator Complex Usage
-
-The generator function itself is not iterable, call it to get the iterable-iterator:
-
-```ts
-for (const v of someOddNumbers) {
-  console.log(v);
-} // => TypeError: someOddNumbers is not iterable
-
-for (const v of number()) {
-  console.log(v); // 1 3 5 7
-}
-```
-
-Messaging system:
-
-```ts
-function* lazyCalculator(operator) {
-  const firstOperand = yield;
-  const secondOperand = yield;
-
-  switch (operator) {
-    case '+':
-      yield firstOperand + secondOperand;
-      return;
-    case '-':
-      yield firstOperand - secondOperand;
-      return;
-    case '*':
-      yield firstOperand * secondOperand;
-      return;
-    case '/':
-      yield firstOperand / secondOperand;
-      return;
-    default:
-      throw new Error('Unsupported operation!');
-  }
-}
-
-const g = gen('*');
-g.next(); // { value: undefined, done: false }
-g.next(10); // { value: undefined, done: false }
-g.next(2); // { value: 20, done: false }
 g.next(); // { value: undefined, done: true }
 ```
 
@@ -1994,6 +1974,40 @@ it.throw(Error('Not handled!')); // !!! Uncaught Error: Not handled! !!!
 
 // now the iterator is exhausted
 it.next(); // {value: undefined, done: true}
+```
+
+#### Generator Complex Usage
+
+Messaging system:
+
+```ts
+function* lazyCalculator(operator) {
+  const firstOperand = yield;
+  const secondOperand = yield;
+
+  switch (operator) {
+    case '+':
+      yield firstOperand + secondOperand;
+      return;
+    case '-':
+      yield firstOperand - secondOperand;
+      return;
+    case '*':
+      yield firstOperand * secondOperand;
+      return;
+    case '/':
+      yield firstOperand / secondOperand;
+      return;
+    default:
+      throw new Error('Unsupported operation!');
+  }
+}
+
+const g = gen('*');
+g.next(); // { value: undefined, done: false }
+g.next(10); // { value: undefined, done: false }
+g.next(2); // { value: 20, done: false }
+g.next(); // { value: undefined, done: true }
 ```
 
 Generator based control flow goodness for nodejs and the browser,
