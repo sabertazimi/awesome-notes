@@ -1625,6 +1625,7 @@ const Iterator = {
     return IteratorResult;
   },
   return() {
+    // 迭代器提前提出: break/continue/throw/destructing.
     return IteratorResult;
   },
   throw(e) {
@@ -1652,6 +1653,62 @@ const IterableIterator = {
 ```
 
 #### Synchronous Iterator
+
+```ts
+class Counter {
+  constructor(limit) {
+    this.limit = limit;
+  }
+
+  [Symbol.iterator]() {
+    let count = 1;
+    const limit = this.limit;
+
+    return {
+      next() {
+        if (count <= limit) {
+          return { done: false, value: count++ };
+        } else {
+          return { done: true };
+        }
+      },
+      return() {
+        console.log('Exiting early');
+        return { done: true };
+      },
+    };
+  }
+}
+
+const counter1 = new Counter(5);
+for (const i of counter1) {
+  if (i > 2) {
+    break;
+  }
+  console.log(i);
+}
+// 1
+// 2
+// Exiting early
+
+const counter2 = new Counter(5);
+try {
+  for (const i of counter2) {
+    if (i > 2) {
+      throw new Error('err');
+    }
+
+    console.log(i);
+  }
+} catch (e) {}
+// 1
+// 2
+// Exiting early
+
+const counter3 = new Counter(5);
+const [a, b] = counter3;
+// Exiting early
+```
 
 ```ts
 function methodsIterator() {
