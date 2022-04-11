@@ -4741,7 +4741,193 @@ export default {
 - async 实质是 Generator 的语法糖, 相当于会自动执行 Generator 函数.
 - async 使用上更为简洁, 将异步代码以同步的形式进行编写, 是处理异步编程的最终方案.
 
-## Modules Pattern
+## Functional JavaScript
+
+- predictable (pure and immutable)
+- safe (pure and immutable)
+- transparent (pure and immutable)
+- modular (composite)
+
+### Functional JavaScript Pros
+
+- type safe and state safe
+- explicit flow of data
+- concurrency safety
+
+### Functional JavaScript Cons
+
+- verbose
+- more object creation
+- more garbage collection
+- more memory usage
+
+With help of `immutable.js`,
+object creation/garbage collection/memory usage can be alleviated.
+
+For example, in vanilla.js, `map2 === map1` become `false`,
+but in immutable.js `map2 === map1` become `true`
+(copy free due to immutable data).
+
+```ts
+const map1 = { b: 2 };
+const map2 = map1.set('b', 2);
+```
+
+### Closure
+
+Closure is a function that remembers
+the variables from the place where it is defined (lexical scope),
+regardless of where it is executed later:
+
+- 函数外部不可对函数内部进行赋值或引用.
+- 函数中的闭包函数可对函数进行赋值或引用(函数对于闭包来说是外部, 即内部引用外部).
+- 特权性质: 从外部通过闭包方法访问内部(函数作用域)局部变量 (private getter).
+- Local Scope -> Outer Functions Scope -> Global Scope.
+- Closure performance: avoid unnecessary closure creation (GC).
+- Stale closure captures variables that have outdated values (memory leak).
+
+```ts
+// global scope
+const e = 10;
+
+function sum(a) {
+  return function (b) {
+    return function (c) {
+      // outer functions scope
+      return function (d) {
+        // local scope
+        return a + b + c + d + e;
+      };
+    };
+  };
+}
+
+console.log(sum(1)(2)(3)(4)); // log 20
+```
+
+```ts
+// BAD
+function MyObject(name, message) {
+  this.name = name.toString();
+  this.message = message.toString();
+  this.getName = function () {
+    return this.name;
+  };
+
+  this.getMessage = function () {
+    return this.message;
+  };
+}
+
+// GOOD: avoid unnecessary
+function MyObject(name, message) {
+  this.name = name.toString();
+  this.message = message.toString();
+}
+MyObject.prototype.getName = function () {
+  return this.name;
+};
+MyObject.prototype.getMessage = function () {
+  return this.message;
+};
+```
+
+#### Closure Structure
+
+- 优先级: this > 局部变量 > 形参 > arguments > 函数名.
+- `innerFunc()` has access to `outerVar` from its lexical scope,
+  even being **executed outside of its lexical scope**.
+
+```ts
+function outerFunc() {
+  const outerVar = 'I am outside!';
+
+  function innerFunc() {
+    console.log(outerVar); // => logs "I am outside!"
+  }
+
+  return innerFunc;
+}
+
+const myInnerFunc = outerFunc();
+myInnerFunc();
+```
+
+#### Closure Usage
+
+- 闭包实现封装.
+- 闭包实现私有属性与方法.
+- 闭包实现工厂方法.
+- 闭包实现对象缓存.
+
+```ts
+const createLoginLayer = (function (creator) {
+  let singleton;
+
+  return function () {
+    if (!singleton) singleton = creator();
+    return singleton;
+  };
+})(loginCreator);
+```
+
+### Partial Application
+
+```ts
+const partialFromBind = (fn, ...args) => {
+  return fn.bind(null, ...args);
+};
+
+const partial = (fn, ...args) => {
+  return (...rest) => {
+    return fn(...args, ...rest);
+  };
+};
+```
+
+### Currying
+
+chain of multiple single argument functions
+
+```ts
+const add = x => y => x + y;
+```
+
+```ts
+function curry(fn, ...stored_args) {
+  return function (...new_args) {
+    const args = stored_args.concat(new_args);
+    return fn(...args);
+  };
+}
+
+const addOne = curry(add, 1);
+// addOne(3) === 4;
+const addFive = curry(addOne, 1, 3);
+// addFive(4) === 9;
+```
+
+### Functional JavaScript Library
+
+#### Lodash
+
+- chunk.
+- shuffle.
+- take.
+- difference.
+- intersection.
+- isEmpty.
+- orderBy.
+- merge.
+- cloneDeep.
+- debounce.
+- throttle.
+- startCase.
+- kebabCase.
+- snakeCase.
+- camelCase.
+
+## Modules
 
 ### Namespace Module Pattern
 
