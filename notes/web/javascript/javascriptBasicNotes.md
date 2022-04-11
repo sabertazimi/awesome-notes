@@ -3082,29 +3082,22 @@ function setValuePure(obj, val) {
 }
 ```
 
-### Function Expression
+### Function Declaration
+
+- 函数声明提升: 函数声明会在代码执行之前获得定义.
 
 ```ts
-// 变量提升
-// eslint-disable-next-line no-var
-var foo;
-// eslint-disable-next-line no-const-assign
-foo = function foo() {};
-
 console.log(foo.name);
 
-// 函数声明
+// Function declaration: 函数声明
 function foo() {}
-
-// 函数表达式
-const foo = function foo() {};
 
 const obj = {
   say: function say() {},
 };
 ```
 
-函数声明对于函数内部而言无法修改 (const)
+- 函数声明对于函数内部而言无法修改:
 
 ```ts
 const b = 10;
@@ -3115,6 +3108,17 @@ const b = 10;
 })();
 
 // print out function b { ... }
+```
+
+### Function Expression
+
+任何时候,
+只要函数被当作值来使用,
+它就是一个函数表达式:
+
+```ts
+// Function expression: 函数表达式
+const foo = function foo() {};
 ```
 
 ### Callback Function
