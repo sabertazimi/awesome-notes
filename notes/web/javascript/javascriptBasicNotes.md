@@ -3242,7 +3242,7 @@ console.log(Math.floor(25.5)); // 25
 console.log(Math.floor(25.1)); // 25
 ```
 
-#### URI Function
+#### URI and URL Function
 
 - `encodeURI()`: 不会编码属于 URL 组件的特殊字符, 比如冒号/斜杠/问号.
 - `encodeURIComponent()`: 编码它发现的所有非标准字符.
@@ -3262,6 +3262,8 @@ console.log(decodeURI(uri));
 // http:// www.wrox.com/illegal value.js#start
 console.log(decodeURIComponent(uri));
 ```
+
+- [URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams)
 
 #### Timer Function
 
