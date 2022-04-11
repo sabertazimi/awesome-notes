@@ -660,10 +660,10 @@ console.log(a2 instanceof SuperArray); // false
 
 ### Array
 
-- 与 Object 同源
-- 关联数组：`arrayName[“string”] = value;` 实际为 Array 对象添加属性`{string:value}`
-- 缓存数组长度:`int l = list.length`(访问`length`造成运算)
-- `[]`数组, `{}`对象
+- 与 Object 同源.
+- 关联数组：`arrayName[“string”] = value;` 实际为 Array 对象添加属性`{string:value}`.
+- 缓存数组长度:`int l = list.length`(访问`length`造成运算).
+- `[]`数组, `{}`对象.
 - 数组在数值运算环境中转化为 0 (空数组)/ num (单一元素数组)/NaN (多元素数组/NaN 数组).
 
 ```ts
@@ -2987,6 +2987,41 @@ func(); // `this` in `inner` function refer to `window`
 - 可动态改变作用域链的语句:
   - `with`.
   - `try catch`: 异常对象入列, 位于作用域链链首.
+
+### Function Name
+
+所有函数对象都会暴露一个只读的 `name` 属性,
+其中包含关于函数的信息:
+
+```ts
+function foo() {}
+const bar = function () {};
+const baz = () => {};
+
+console.log(foo.name); // foo
+console.log(bar.name); // bar
+console.log(baz.name); // baz
+console.log((() => {}).name); // (空字符串)
+// eslint-disable-next-line no-new-func
+console.log(new Function().name); // anonymous
+console.log(foo.bind(null).name); // bound foo
+
+const dog = {
+  years: 1,
+
+  get age() {
+    return this.years;
+  },
+
+  set age(newAge) {
+    this.years = newAge;
+  },
+};
+
+const propertyDescriptor = Object.getOwnPropertyDescriptor(dog, 'age');
+console.log(propertyDescriptor.get.name); // get age
+console.log(propertyDescriptor.set.name); // set age
+```
 
 ### Function Prototype
 
