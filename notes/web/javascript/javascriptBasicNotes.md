@@ -2398,9 +2398,9 @@ function extendDeep(parent, child) {
 }
 ```
 
-### Object Extend
+### Object Inheritance
 
-#### Prototype Proxy Extend
+#### Prototype Proxy Inheritance
 
 可用于所有继承模式中, 减少内存消耗:
 
@@ -2426,7 +2426,7 @@ Child.prototype.add = function () {
 };
 ```
 
-#### Class Simulation Extend
+#### Class Simulation Inheritance
 
 复制式地继承, 将会消耗大量内存单元:
 
@@ -2476,16 +2476,15 @@ const SuperMan = classSim(Man, {
 });
 ```
 
-#### Prototype and Class Extend
+#### Composite Inheritance
 
 原型继承 (**设置原型**)
 与类式继承 (**借用构造函数**)
-混合继承模式:
+组合继承模式:
 
 - `child.prototype = new Parent(); Child.prototype.constructor = Child`.
 - `Parent.apply(this, arguments)`: 借用构造函数可以防止引用类型被迫共享.
-
-此模式会使得子类属性继承 2 次:
+- 此模式会调用两次父类构造函数, 使得子类属性继承两次, 存在一定的效率问题.
 
 ```ts
 function Parent(name) {
