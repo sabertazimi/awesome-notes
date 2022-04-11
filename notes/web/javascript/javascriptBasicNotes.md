@@ -2507,6 +2507,9 @@ Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor �
 
 ### Class
 
+- `Class` 定义不能提升.
+- `Class` 具有块作用域.
+
 ```ts
 class A {
   constructor(value) {
@@ -2523,10 +2526,10 @@ class B extends A {
 
 const b = new B(6);
 
-console.log(B[[proto]] === A);
-console.log(B.prototype.constructor === B);
-console.log(B.prototype[[proto]] === A.prototype);
-console.log(b[[proto]] === B.prototype);
+console.log(B[[proto]] === A); // true
+console.log(B.prototype.constructor === B); // true
+console.log(B.prototype[[proto]] === A.prototype); // true
+console.log(b[[proto]] === B.prototype); // true
 
 function AA(value) {
   this.val = value;
@@ -2541,13 +2544,26 @@ BB.prototype.constructor = BB;
 
 const bb = new BB(6);
 
-console.log(BB[[proto]] === Function.prototype); // not consistence with class syntax
-console.log(BB.prototype.constructor === BB);
-console.log(BB.prototype[[proto]] === AA.prototype);
-console.log(bb[[proto]] === BB.prototype);
+console.log(BB[[proto]] === Function.prototype); // true (not consistence to Class)
+console.log(BB.prototype.constructor === BB); // true
+console.log(BB.prototype[[proto]] === AA.prototype); // true
+console.log(bb[[proto]] === BB.prototype); // true
 ```
 
-禁止对复合对象字面量进行导出操作 (array literal, object literal).
+#### Class Expression
+
+```ts
+const Person = class PersonName {
+  identify() {
+    console.log(Person.name, PersonName.name);
+  }
+};
+
+const p = new Person();
+p.identify(); // PersonName PersonName
+console.log(Person.name); // PersonName
+console.log(PersonName); // ReferenceError: PersonName is not defined
+```
 
 #### Class Private Member
 
