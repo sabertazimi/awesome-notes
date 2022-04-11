@@ -2884,7 +2884,7 @@ this.construct(options);
 Foo.call(this, options);
 ```
 
-- `Function.call(contextObj, arg1, arg2,...)`
+- `Function.call(contextObj, arg1, arg2, ...)`
 - `Function.apply(contextArray, [arg1, arg2, ...]/arguments)`
 - call 效率高于 apply.
 
@@ -3056,27 +3056,23 @@ try {
 ### Function Parameters
 
 - 所有函数参数都是按值传递 (复制原子值/引用值).
+- 默认参数:
+  - 默认参数可以使用原子值/对象值/函数返回值.
+  - 函数调用且未传参时, 默认参数才会进行求值.
+  - 默认参数按照从左往右的顺序进行求值.
 - **无副作用**的函数: 注意是否需要拷贝传入对象, 使原有对象不受函数影响, 并返回新对象.
 
 ```ts
-// 除非必要,否则不改变原有对象
 const obj = {
   value: 2,
 };
 
-function setValue(obj, val) {
+function setValueEffect(obj, val) {
   obj.value = val;
   return obj;
 }
-```
 
-```ts
-// 好习惯: 改变新对象,返回新对象
-const obj = {
-  value: 2,
-};
-
-function setValue(obj, val) {
+function setValuePure(obj, val) {
   const instance = extend({}, obj, { value: val });
   return instance;
 }
