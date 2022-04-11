@@ -3133,7 +3133,9 @@ const factorial = function f(num) {
 ### Tail Call Optimization
 
 - Tail call optimization only work in strict mode
-  due to `func.arguments` and `func.caller` (forbidden in strict mode).
+  due to `func.arguments` and `func.caller` (forbidden in strict mode):
+  `func.arguments` and `func.caller` will reference outer function stack frame,
+  so can't reduce outer function stack frame.
 - Tail call optimization reduce function stack frame.
 
 ```ts
