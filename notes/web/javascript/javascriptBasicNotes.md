@@ -1773,32 +1773,6 @@ function doAction(action) {
   `Function.prototype` 继承`Object.prototype`而产生,
   最后`Object/Function/Array/其它构造函数`继承`Function.prototype`而产生.
 
-:::tip Prototype Chain
-
-- `Object.__proto__` -> `Function.prototype`.
-- `Function.prototype.__proto__` -> `Object.prototype`.
-- `Object.prototype.__proto__` -> `null`.
-
-:::
-
-`__proto__`:
-
-- `[[proto]]` getter is `Object.getPrototypeOf(object)`.
-- `[[proto]]` setter is `Object.setPrototypeOf(object, prototype)`.
-
-```ts
-function Foo(value) {
-  this.val = value;
-}
-
-// auto create FooPrototype
-// Foo.prototype -> FooPrototype
-// FooPrototype.constructor -> [function Foo]
-//
-// foo.__proto__ -> FooPrototype
-const foo = new Foo(2);
-```
-
 ```ts
 // True because of `Object` is `function Object()` and inherited from `Function.prototype`
 // Object has its own `prototype` property refer to `Object.prototype`
@@ -1819,6 +1793,58 @@ const truthy = Function[[proto]][[proto]] === Object.prototype;
 // True:
 const truthy = Object instanceof Function;
 const truthy = Function instanceof Object;
+```
+
+:::tip Prototype Chain
+
+- `Object.__proto__` -> `Function.prototype`.
+- `Function.prototype.__proto__` -> `Object.prototype`.
+- `Object.prototype.__proto__` -> `null`.
+
+:::
+
+`__proto__`:
+
+- `[[proto]]` getter is `Object.getPrototypeOf(object)`.
+- `[[proto]]` setter is `Object.setPrototypeOf(object, prototype)`.
+
+```ts
+function Foo(value) {
+  this.val = value;
+}
+
+// Auto create FooPrototype
+// Foo.prototype -> FooPrototype
+// FooPrototype.constructor -> [function Foo]
+// foo.__proto__ -> FooPrototype
+const foo = new Foo(2);
+```
+
+```ts
+function Person() {}
+const person1 = new Person();
+const person2 = new Person();
+
+console.log(person1 !== Person); // true
+console.log(person1 !== Person.prototype); // true
+console.log(Person.prototype !== Person); // true
+
+// eslint-disable-next-line no-proto
+console.log(person1.__proto__ === Person.prototype); // true
+// eslint-disable-next-line no-proto
+console.log(person1.__proto__.constructor === Person); // true
+// eslint-disable-next-line no-proto
+console.log(person1.__proto__ === person2.__proto__); // true
+
+// eslint-disable-next-line no-prototype-builtins
+console.log(Person.prototype.isPrototypeOf(person1)); // true
+// eslint-disable-next-line no-prototype-builtins
+console.log(Person.prototype.isPrototypeOf(person2)); // true
+console.log(Object.getPrototypeOf(person1) === Person.prototype); // true
+
+console.log(person1 instanceof Person); // true
+console.log(person1 instanceof Object); // true
+console.log(Person.prototype instanceof Object); // true
 ```
 
 下面五种操作（方法/属性/运算符）可以触发 JS 引擎读取一个对象的原型,
