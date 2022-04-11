@@ -1660,13 +1660,6 @@ RenderNG pipeline
 - Aggregate.
 - Draw.
 
-### Browser Internal Reference
-
-- Chromium rendering engine: [RenderingNG](https://developer.chrome.com/blog/renderingng).
-- Chromium RenderingNG [architecture](https://developer.chrome.com/blog/renderingng-architecture).
-- Chromium RenderingNG [key data structures](https://developer.chrome.com/blog/renderingng-data-structures).
-- Chromium [video rendering architecture](https://developer.chrome.com/blog/videong).
-
 #### HTML Parser
 
 DTD is context-sensitive grammar.
@@ -1768,6 +1761,13 @@ Paint Order:
 - 子代
 - 轮廓
 
+### Browser Engine Reference
+
+- Chromium rendering engine: [RenderingNG](https://developer.chrome.com/blog/renderingng).
+- Chromium RenderingNG [architecture](https://developer.chrome.com/blog/renderingng-architecture).
+- Chromium RenderingNG [key data structures](https://developer.chrome.com/blog/renderingng-data-structures).
+- Chromium [video rendering architecture](https://developer.chrome.com/blog/videong).
+
 ## Effective JavaScript
 
 ### Memory Leak
@@ -1788,14 +1788,11 @@ Paint Order:
 - Forgotten `Set`/`Map`:
   `WeakSet`/`WeakMap` don't bother GC.
 - Circular reference.
-
-#### Bad Delete Operator
-
-`delete` 操作符并不会释放内存,
-而且会使得附加到对象上的 `hidden class`
-(`V8` 为了优化属性访问时间而创建的隐藏类)
-失效,
-让对象变成 `slow object`.
+- Bad Delete Operator:
+  `delete` 操作符并不会释放内存,
+  而且会使得附加到对象上的 `hidden class`
+  (`V8` 为了优化属性访问时间而创建的隐藏类)失效,
+  让对象变成 `slow object`.
 
 ### Danger Features
 
@@ -1817,9 +1814,7 @@ const DOM = tazimi.util.Dom;
 DOM.method.call(/* 关注 this 指针 */);
 ```
 
-### Function Performance
-
-#### Scope Chain Performance
+### Scope Chain Performance
 
 由于作用域链的关系，标识符解析时，寻找局部变量速度远快于寻找全局变量速度.
 故应将全局变量作为参数传入函数进行调用，不但效率高，而且易于维护与测试.
@@ -1954,10 +1949,10 @@ try {
 
 ### Event Delegation
 
-- 事件委托利用的是事件冒泡机制，只制定一事件处理程序，就可以管理某一类型的所有事件
-- 使用事件委托，只需在 DOM 树中尽量最高的层次上添加一个事件处理程序
-- increases performance and reduces memory consumption
-- no need to register new event listeners for newer children
+- 事件委托利用的是事件冒泡机制，只制定一事件处理程序，就可以管理某一类型的所有事件.
+- 使用事件委托，只需在 DOM 树中尽量最高的层次上添加一个事件处理程序.
+- Increases performance and reduces memory consumption.
+- No need to register new event listeners for newer children.
 - DOM Event:
   Event Capturing (default false) ->
   Event Target ->
@@ -3384,27 +3379,24 @@ await page.tracing.stop();
 - `page.accessibility`
 - `page.coverage`
 
-### Frameworks
+### Testing Frameworks
 
-#### Unit 测试
+#### Unit Testing Frameworks
 
 - Jasmine
 - Mocha
 
-#### UI 测试
+#### UI Testing Frameworks
 
-- 用户行为: Karma/Selenium
-- 功能测试: Phantom.js/Slimer.js/Karma
+- 用户行为: Karma/Selenium.
+- 功能测试: Phantom.js/Slimer.js/Karma.
 
 ### 可测试代码
 
-- 完整注释
-- 最小复杂度 = (扇入 `*` 扇出) ^ 2
-- 可隔离性: 最小依赖性 + 松耦合性
-
-#### 范例
-
-- 使用依赖注入，将外部对象移至函数参数处(不在函数内部调用构造器): 易于构造 mock/stub, 降低扇出(函数复杂度)
+- 完整注释.
+- 最小复杂度 = (扇入 `*` 扇出) ^ 2.
+- 可隔离性: 最小依赖性 + 松耦合性.
+- 使用依赖注入，将外部对象移至函数参数处(不在函数内部调用构造器): 易于构造 mock/stub, 降低扇出(函数复杂度).
 
 ### 圈复杂度
 
@@ -3412,22 +3404,28 @@ V(G) = e - n + 2 **<10**
 
 ### 函数复杂度
 
-函数复杂度 = (扇入 `*` 扇出) ^ 2
+函数复杂度 = (扇入 `*` 扇出) ^ 2.
 
-#### 扇出(引用)
+#### 扇出
 
-- 所引用外部对象/方法之和
-- 扇出 **<7**
-- 高扇出: 高复杂度/高依赖性/高耦合度
+引用:
 
-#### 扇入(被引用)
+- 所引用外部对象/方法之和.
+- 扇出 **<7**.
+- 高扇出: 高复杂度/高依赖性/高耦合度.
 
-- 其他对象/方法引用此函数的次数之和
-- 顶层抽象代码 与 不常用功能 应保持低扇入
+#### 扇入
+
+被引用:
+
+- 其他对象/方法引用此函数的次数之和.
+- 顶层抽象代码 与 不常用功能 应保持低扇入.
 
 ### 耦合度
 
-#### 内容耦合(5)
+#### 内容耦合
+
+5 级耦合度:
 
 ```ts
 O.property = 'tazimi';
@@ -3435,9 +3433,9 @@ O.method = function () {};
 O.prototype.method = function () {};
 ```
 
-#### 公共耦合(4)
+#### 公共耦合
 
-共享全局变量
+4 级耦合度, 共享全局变量:
 
 ```ts
 let Global = 'global';
@@ -3450,13 +3448,17 @@ function B() {
 }
 ```
 
-#### 控制耦合(3)
+#### 控制耦合
+
+3 级耦合度:
 
 ```ts
 const absFactory = new AbstractFactory({ env: 'TEST' });
 ```
 
-#### 印记耦合(2)
+#### 印记耦合
+
+2 级耦合度:
 
 ```ts
 O.prototype.makeBread = function (args) {
@@ -3466,23 +3468,27 @@ O.prototype.makeBread = function (args) {
 O.makeBread({ type: wheat, size: 99, name: 'foo' });
 ```
 
-#### 数据耦合(1)
+#### 数据耦合
 
-#### 无耦合(0)
+1 级耦合度.
 
-### 单元测试
+#### 无耦合
 
-#### 测试原则
+0 级耦合度.
 
-- 代码覆盖率
-- 非法值测试
-- 边界测试
-- 非边界测试
+### Unit Testing
 
-#### 隔离被测代码
+#### Unit Testing Principles
 
-- 编写代码时，保持最小复杂度(最小依赖，最低耦合)
-- 利用 mock/stub 模拟外部依赖/测试数据
+- 代码覆盖率.
+- 非法值测试.
+- 边界测试.
+- 非边界测试.
+
+#### Testing Code Isolation
+
+- 编写代码时，保持最小复杂度(最小依赖，最低耦合).
+- 利用 mock/stub 模拟外部依赖/测试数据.
 
 #### Mock Testing
 
@@ -3580,9 +3586,7 @@ Object.defineProperty(element, 'scrollTop', {
 });
 ```
 
-### Tools API
-
-#### Console Functions
+### Console API
 
 - `console.XXX`.
 - `copy`: copy complex object to clipboard.
@@ -3669,7 +3673,9 @@ const transactions = [
 console.table(data, ['id', 'price']);
 ```
 
-#### JS API
+### JavaScript Testing and Tracing API
+
+`debugger`:
 
 ```ts
 // debugger;
@@ -3697,7 +3703,7 @@ window.addEventListener('error', function () {
 });
 ```
 
-##### Trace Property (Vue Internal)
+#### Trace Property
 
 ```ts
 const traceProperty = (object, property) => {
@@ -3715,7 +3721,7 @@ const traceProperty = (object, property) => {
 };
 ```
 
-#### Node API
+### Node Testing API
 
 - node --inspect
 - [ndb](https://github.com/GoogleChromeLabs/ndb)
@@ -3727,7 +3733,7 @@ ndb index.js
 
 ### Browser Compatibility
 
-#### 特性检测
+#### Browser Feature Detection
 
 **不使用特性/浏览器推断**，往往容易推断错误(且会随着浏览器更新产生新的错误)
 
