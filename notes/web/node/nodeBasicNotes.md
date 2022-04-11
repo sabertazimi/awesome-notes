@@ -1035,11 +1035,12 @@ Worker pool is needed:
 
 ### FS API
 
-- fs.createReadStream
-- fs.readdir
-- fs.readFile
-- fs.readFileSync
-- fs.exists
+- fs.createReadStream.
+- fs.opendir.
+- fs.readdir.
+- fs.readFile.
+- fs.readFileSync.
+- fs.exists.
 
 ```ts
 const fs = require('fs');
@@ -1050,6 +1051,39 @@ fs.readdir('/path/to/file', callback);
 fs.createReadStream();
 
 src.pipe(dst1).pipe(dst2).pipe(dst3); //  连接多个 stream
+```
+
+```ts
+import { promises as fs } from 'fs';
+import { basename, dirname, join } from 'path';
+
+async function* walk(dir: string): AsyncGenerator<string> {
+  for await (const d of await fs.opendir(dir)) {
+    const entry = join(dir, d.name);
+
+    if (d.isDirectory()) {
+      yield* walk(entry);
+    } else if (d.isFile()) {
+      yield entry;
+    }
+  }
+}
+
+async function run(arg = '.') {
+  if ((await fs.lstat(arg)).isFile()) {
+    return runTestFile(arg);
+  }
+
+  for await (const file of walk(arg)) {
+    if (
+      !dirname(file).includes('node_modules') &&
+      (basename(file) === 'test.js' || file.endsWith('.test.js'))
+    ) {
+      console.log(file);
+      await runTestFile(file);
+    }
+  }
+}
 ```
 
 ```ts

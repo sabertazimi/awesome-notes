@@ -1859,7 +1859,7 @@ console.log(g === g[Symbol.iterator]());
 // true
 ```
 
-#### Basic Usage
+#### Generator Basic Usage
 
 ```ts
 function* gen() {
@@ -1914,7 +1914,7 @@ g.return('foo'); // { value: "foo", done: true }
 g.next(); // { value: undefined, done: true }
 ```
 
-#### Complex Usage
+#### Generator Complex Usage
 
 The generator function itself is not iterable, call it to get the iterable-iterator:
 
@@ -10309,8 +10309,12 @@ import { pathToFileURL } from 'url';
 async function* walk(dir: string): AsyncGenerator<string> {
   for await (const d of await fs.opendir(dir)) {
     const entry = join(dir, d.name);
-    if (d.isDirectory()) yield* walk(entry);
-    else if (d.isFile()) yield entry;
+
+    if (d.isDirectory()) {
+      yield* walk(entry);
+    } else if (d.isFile()) {
+      yield entry;
+    }
   }
 }
 
@@ -10333,6 +10337,7 @@ async function run(arg = '.') {
   if ((await fs.lstat(arg)).isFile()) {
     return runTestFile(arg);
   }
+
   for await (const file of walk(arg)) {
     if (
       !dirname(file).includes('node_modules') &&
