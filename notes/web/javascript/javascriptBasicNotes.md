@@ -3260,7 +3260,7 @@ const getResult = (function () {
 })();
 ```
 
-### Polymorphism Method
+### Polymorphism Function
 
 ```ts
 const greet = function greet(options, ...rest) {
