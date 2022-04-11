@@ -4560,7 +4560,7 @@ const proxy = new Proxy(median, {
 
 console.log(proxy(4, 7, 1)); // 4
 console.log(proxy(4, '7', 1));
-// Error: Non-number argument provided
+// TypeError: Non-number argument provided
 ```
 
 `new` operator capture for parameter validation:
@@ -5620,6 +5620,92 @@ export default 'hello!';
 
 <!-- eslint-enable import/export -->
 <!-- eslint-enable import/no-duplicates -->
+
+## Error and Exception
+
+### Error
+
+#### Error Type
+
+- Error.
+- EvalError.
+- RangeError.
+- ReferenceError.
+- SyntaxError.
+- TypeError.
+- URIError.
+- 自定义错误.
+
+```ts
+function MyError(...args) {
+  Error.call(this, args);
+  this.message = args[0];
+}
+
+MyError.prototype = new Error('Error');
+MyError.prototype.constructor = MyError;
+```
+
+#### Error Object
+
+```ts
+const err = {
+  name: 'XXError',
+  message: 'something wrong',
+  extra: 'This was rather embarrassing',
+  remedy: genericErrorHandler, // 处理错误的函数名.
+};
+
+try {
+  throwError();
+} catch (e) {
+  console.log(e.message);
+  e.remedy(); // genericErrorHandler.
+}
+```
+
+### Exception
+
+#### Call Stack Overflow
+
+调用栈尺寸限制异常, 应立即定位在代码中的递归实例上:
+
+```ts
+try {
+  recursion();
+} catch (ex) {
+  console.error('error info');
+}
+```
+
+#### Exception Handling
+
+- `try catch`.
+- `Promise.catch`.
+- `window.addEventListener('error', handler, true)`.
+- `window.addEventListener('unhandledrejection', handler, true)`.
+- Web Worker heartbeat monitoring.
+- `process.on('uncaughtException', handleError)`.
+- `process.on('SIGHUP', handleExit)`.
+- `process.on('SIGINT', handleExit)`.
+- `process.on('SIGQUIT', handleExit)`.
+- `process.on('SIGTERM', handleExit)`.
+- AOP (Aspect Oriented Programming): Middleware/Interceptor/Monkey Patch.
+- 在可能失败的地方抛出异常, 对失败处做标签, 易于**调试与测试**.
+- 修复 bug 后, 可考虑是否在此处抛出异常.
+- Avoid using try-catch inside a loop:
+
+```ts
+const object = ['foo', 'bar'];
+
+try {
+  for (let i = 0; i < object.length; i++) {
+    // do something that throws an exception
+  }
+} catch (e) {
+  // handle exception
+}
+```
 
 ## Internationalization
 
