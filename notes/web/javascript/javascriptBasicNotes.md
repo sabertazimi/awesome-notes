@@ -2551,6 +2551,53 @@ console.log(BB.prototype[[proto]] === AA.prototype); // true
 console.log(bb[[proto]] === BB.prototype); // true
 ```
 
+#### Class Inheritance
+
+- 隔离: 添加到 `this` 的所有内容都会存在于不同的实例上.
+- 共享: 在类块中定义的所有内容都会定义在类的原型上.
+
+```ts
+class Person {
+  constructor() {
+    this.name = String('Jack');
+    this.sayName = () => console.log(this.name);
+    this.nicknames = ['Jake', 'J-Dog'];
+  }
+}
+
+const p1 = new Person();
+const p2 = new Person();
+
+p1.sayName(); // Jack
+p2.sayName(); // Jack
+console.log(p1.name === p2.name); // false
+console.log(p1.sayName === p2.sayName); // false
+console.log(p1.nicknames === p2.nicknames); // false
+
+p1.name = p1.nicknames[0];
+p2.name = p2.nicknames[1];
+p1.sayName(); // Jake
+p2.sayName(); // J-Dog
+```
+
+```ts
+class Person {
+  constructor() {
+    // 添加到 this 的所有内容都会存在于不同的实例上
+    this.locate = () => console.log('instance');
+  }
+
+  // 在类块中定义的所有内容都会定义在类的原型上
+  locate() {
+    console.log('prototype');
+  }
+}
+
+const p = new Person();
+p.locate(); // instance
+Person.prototype.locate(); // prototype
+```
+
 #### Class Expression
 
 ```ts
