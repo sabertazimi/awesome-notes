@@ -1293,7 +1293,7 @@ WeakMap/WeakSet 则更加**内存安全**.
 - 另一方面规定, `let`/`const`/`class` 声明的全局变量,
   不属于全局对象的属性, 意味着不会`Hoisting`.
 - `var` 只有函数作用域, `let`/`const` 拥有块级作用域.
-- `var` 表达式和 `function` 声明都将会被提升到当前作用域 (全局作用域/函数作用域) 顶部,
+- `var` 表达式和 `function` 声明都将会被提升到当前作用域 (**全局作用域/函数作用域**) 顶部,
   其余表达式顺序不变.
 
 <!-- eslint-disable vars-on-top -->
@@ -3089,7 +3089,7 @@ function setValuePure(obj, val) {
 ```ts
 console.log(foo.name);
 
-// Function declaration: 函数声明
+// Function Declaration 函数声明:
 function foo() {}
 
 const obj = {
