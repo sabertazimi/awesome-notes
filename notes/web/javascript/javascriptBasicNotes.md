@@ -5099,14 +5099,14 @@ self.addEventListener(
 
 #### Web Worker Runtime
 
-- navigation 对象: appName, appVersion, userAgent, platform
-- location 对象: 所有属性只读
-- ECMAScript 对象: Object/Array/Date
-- XMLHttpRequest 方法
-- setTimeout/setInterval 方法
-- self 对象: 指向全局 worker 对象
-- importScripts 方法: 加载外部依赖
-- close 方法: 停止 worker
+- `navigation` 对象: `appName`, `appVersion`, `userAgent`, `platform`.
+- `location` 对象: 所有属性只读.
+- ECMAScript 对象: `Object`/`Array`/`Date`.
+- `XMLHttpRequest` 方法.
+- `setTimeout`/`setInterval` 方法.
+- `self` 对象: 指向全局 worker 对象.
+- `importScripts` 方法: 加载外部依赖.
+- `close` 方法: 停止 worker.
 
 #### Web Worker Loader
 

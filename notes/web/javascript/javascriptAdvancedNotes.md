@@ -5611,13 +5611,13 @@ navigator.geolocation.watchPosition(
 
 Progressive Web Apps:
 
-- served over `HTTPS`
-- provide a manifest
-- register a `ServiceWorker`
-  (web cache for offline and performance)
-- consists of website, web app manifest,
+- Served over `HTTPS`.
+- Provide a manifest.
+- Register a `ServiceWorker`
+  (web cache for offline and performance).
+- Consists of website, web app manifest,
   service worker, expanded capabilities
-  and OS integration
+  and OS integration.
 
 ### Service Worker
 
@@ -5748,7 +5748,7 @@ self.addEventListener('fetch', function (event) {
 });
 ```
 
-#### SW Usage
+#### Service Worker Usage
 
 ```ts
 // Check that service workers are registered
