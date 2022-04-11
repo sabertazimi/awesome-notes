@@ -2982,14 +2982,49 @@ func(); // `this` in `inner` function refer to `window`
 
 - 每个上下文都有一个关联的变量对象 (**Variable Object**),
   这个上下文中定义的所有变量和函数都存在于这个对象上.
-- 上下文栈: `scope` -> `(list) [0]活动对象` -> `[1]全局对象`.
-- 作用域链: ES6 Block Scope -> Function Scope -> Global Scope.
-- 每个执行环境拥有独立的作用域链, 例如独立全局对象, 独立**活动对象**,
-- 上下文是函数时, 其活动对象 (**Activation Object**) 用作变量对象:
-  函数每次运行时, 都会新建执行环境内部对象, 执行完后销毁此对象.
+- 每个执行环境拥有独立的作用域链, 例如独立**活动对象** -> 独立全局对象:
+  - `scope chain` -> `(list) [0]活动对象` -> `[1]全局对象`.
+  - ES6 Block Scope -> Function Scope -> Global Scope.
+- 全局上下文中关联的变量对象 (**Variable Object**), 会在代码执行期间始终存在.
+- 函数上下文将其活动对象 (**Activation Object**) 用作变量对象 (**Variable Object**):
+  - 函数每次运行时,
+    都会新建执行环境上下文与作用域链,
+    执行完后销毁上下文与作用域链.
+  - 存在闭包时, 函数上下文关联的作用域链中被引用的活动对象不会被销毁.
 - 可动态改变作用域链的语句:
   - `with`.
   - `try catch`: 异常对象入列, 位于作用域链链首.
+
+```ts
+function createComparisonFunction(propertyName) {
+  return function (object1, object2) {
+    const value1 = object1[propertyName];
+    const value2 = object2[propertyName];
+
+    if (value1 < value2) {
+      return -1;
+    } else if (value1 > value2) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+}
+
+const compare = createComparisonFunction('name');
+const result = compare({ name: 'Nicholas' }, { name: 'Matt' });
+```
+
+执行上述代码后的上下文栈与作用域链如下图所示:
+
+![Context Stack and Scope Chain](./figures/ContextStackAndScopeChain.png)
+
+`createComparisonFunction()` 的活动对象并不能在它执行完毕后销毁,
+因为匿名函数的作用域链中仍然存在对它的引用.
+在 `createComparisonFunction()` 执行完毕后,
+其执行上下文的作用域链会销毁,
+但它的活动对象仍然会保留在内存中,
+直到匿名函数被销毁后才会被销毁.
 
 ### Function Name
 
