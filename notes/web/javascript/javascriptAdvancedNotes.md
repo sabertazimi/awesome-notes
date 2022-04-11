@@ -1640,7 +1640,8 @@ Paint Order:
 - Useless global vars (bind to window or document).
 - Useless DOM reference.
 - Incorrect closure.
-  - Unnecessary closure creation.
+  - Unnecessary closure creation:
+    闭包会保留它们包含函数的作用域, 所以比其他函数更占用内存.
   - Useless callback functions.
   - Forgotten timer from `setTimeout`/`setInterval`:
     clear with `clearTimeout`/`clearInterval`.
