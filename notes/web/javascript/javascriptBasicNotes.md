@@ -2553,8 +2553,10 @@ console.log(bb[[proto]] === BB.prototype); // true
 
 #### Class Inheritance
 
-- 隔离: 添加到 `this` 的所有内容都会存在于不同的实例上.
-- 共享: 在类块中定义的所有内容都会定义在类的原型上.
+- 隔离: 添加到 `this` 的所有属性都会存在于不同的实例上.
+- 共享:
+  - 在类块中定义的所有方法都会定义在类的原型上.
+  - 静态属性定义在类本身上.
 
 ```ts
 class Person {
@@ -2584,18 +2586,24 @@ p2.sayName(); // J-Dog
 class Person {
   constructor() {
     // 添加到 this 的所有内容都会存在于不同的实例上
-    this.locate = () => console.log('instance');
+    this.locate = () => console.log('instance', this);
   }
 
   // 在类块中定义的所有内容都会定义在类的原型上
   locate() {
-    console.log('prototype');
+    console.log('prototype', this);
+  }
+
+  // 定义在类本身上
+  static locate() {
+    console.log('class', this);
   }
 }
 
 const p = new Person();
-p.locate(); // instance
-Person.prototype.locate(); // prototype
+p.locate(); // instance, Person {}
+Person.prototype.locate(); // prototype, {constructor: ... }
+Person.locate(); // class, class Person {}
 ```
 
 #### Class Expression
