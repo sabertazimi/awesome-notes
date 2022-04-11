@@ -2947,12 +2947,14 @@ Constructor Invocation: this 绑定至传入的空对象
 
 #### Arrow Function Binding
 
-- `this` defined where arrow function defined (not called) (**lexical scope**).
+- **Lexical Scope**: `this` defined where arrow function defined (not called).
 - `apply`/`call`/`bind` can't change `this` in arrow function.
-- No thisArgs binding.
-- No arguments binding.
-- No prototype binding.
-- No suited for `New` constructor.
+- No `thisArgs` binding.
+- No `arguments` binding.
+- No `prototype` binding.
+- No suited for `new` constructor:
+  - No `super` binding.
+  - No `new.target` binding.
 - Not suited as methods of plain object
   (`this` in arrow function would be refer to `window`).
 
