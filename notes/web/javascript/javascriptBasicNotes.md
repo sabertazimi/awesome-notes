@@ -2112,10 +2112,31 @@ const o = Object.create({
 
 - `Object.getOwnPropertyDescriptor(O, property)`.
 - `Object.getOwnPropertyDescriptors(O)`.
-- `Object.getOwnPropertySymbols(O)`: 仅获取实例上所有 Symbol 属性名.
-- `Object.getOwnPropertyNames(O)`: 仅获取实例上所有非 Symbol 属性名 (包括不可枚举属性名).
-- `Object.keys(O)`: 仅获取实例上可枚举属性名.
+- `Object.getOwnPropertySymbols(O)`: 获取实例上 Symbol 属性名.
+- `Object.getOwnPropertyNames(O)`: 获取实例上非 Symbol 属性名 (包括不可枚举属性名).
+- `Object.keys(O)`: 获取实例上可枚举属性名.
 - `for...in`: 获取实例及其原型链上所有可枚举属性名.
+
+```ts
+const k1 = Symbol('k1');
+const k2 = Symbol('k2');
+const o = {
+  1: 1,
+  first: 'first',
+  [k1]: 'sym2',
+  second: 'second',
+  0: 0,
+};
+o[k2] = 'sym2';
+o[3] = 3;
+o.third = 'third';
+o[2] = 2;
+
+console.log(Object.getOwnPropertyNames(o));
+// ['0', '1', '2', '3', 'first', 'second', 'third']
+console.log(Object.getOwnPropertySymbols(o));
+// [Symbol(k1), Symbol(k2)]
+```
 
 ```ts
 function Person() {}
@@ -2136,8 +2157,10 @@ const p1keys = Object.keys(p1);
 console.log(p1keys); // '[name,age]'
 ```
 
-- `Object.values()`.
-- `Object.entries()`.
+- `Object.values(O)`:
+  object own enumerable property values.
+- `Object.entries(O)`:
+  object own enumerable **string-keyed** property `[key, value]` pairs.
 
 ```ts
 const score = {
