@@ -1640,6 +1640,7 @@ Paint Order:
 - Useless global vars (bind to window or document).
 - Useless DOM reference.
 - Incorrect closure.
+  - Unnecessary closure creation.
   - Useless callback functions.
   - Forgotten timer from `setTimeout`/`setInterval`:
     clear with `clearTimeout`/`clearInterval`.
