@@ -2149,6 +2149,88 @@ co(readFile).then(res => console.log(res));
 // resolve(result);
 ```
 
+#### Recursive Generator
+
+`yield *` 能够迭代一个可迭代对象:
+
+```ts
+function* generatorFn() {
+  console.log('iter value:', yield* [1, 2, 3]);
+}
+
+for (const x of generatorFn()) {
+  console.log('value:', x);
+}
+// value: 1
+// value: 2
+// value: 3
+// iter value: undefined
+
+function* innerGeneratorFn() {
+  yield 'foo';
+  return 'bar';
+}
+
+function* outerGeneratorFn(genObj) {
+  console.log('iter value:', yield* innerGeneratorFn());
+}
+
+for (const x of outerGeneratorFn()) {
+  console.log('value:', x);
+}
+// value: foo
+// iter value: bar
+```
+
+在生成器函数内部,
+用 `yield *` 去迭代自身产生的生成器对象 (Generator Object -> IterableIterator),
+实现递归算法:
+
+```ts
+// Graph traverse.
+function* traverse(nodes) {
+  for (const node of nodes) {
+    if (!visitedNodes.has(node)) {
+      yield node;
+      yield* traverse(node.neighbors);
+    }
+  }
+}
+```
+
+```ts
+import { promises as fs } from 'fs';
+import { basename, dirname, join } from 'path';
+
+async function* walk(dir: string): AsyncGenerator<string> {
+  for await (const d of await fs.opendir(dir)) {
+    const entry = join(dir, d.name);
+
+    if (d.isDirectory()) {
+      yield* walk(entry);
+    } else if (d.isFile()) {
+      yield entry;
+    }
+  }
+}
+
+async function run(arg = '.') {
+  if ((await fs.lstat(arg)).isFile()) {
+    return runTestFile(arg);
+  }
+
+  for await (const file of walk(arg)) {
+    if (
+      !dirname(file).includes('node_modules') &&
+      (basename(file) === 'test.js' || file.endsWith('.test.js'))
+    ) {
+      console.log(file);
+      await runTestFile(file);
+    }
+  }
+}
+```
+
 ### Proxy and Reflect
 
 Modify default object behavior with `Proxy` and `Reflect`:
