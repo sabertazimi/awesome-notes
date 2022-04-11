@@ -4322,27 +4322,27 @@ Proxy(target, {
 });
 ```
 
-`Reflect` handlers:
+### Proxy
 
-- `Reflect.get(target, propKey)`.
-- `Reflect.set(target, propKey, value)`.
-- `Reflect.has(target, propKey)`.
-- `Reflect.apply(target, thisArgument, argumentsList)`.
-- `Reflect.construct(target, argumentsList)`:
-  `new target(...argumentsList)`.
-- `Reflect.ownKeys(target)`:
-  `Object.getOwnPropertyNames` + `Object.getOwnPropertySymbols`,
-  all keys include Symbols.
-- `Reflect.getPrototypeOf(target)`.
-- `Reflect.setPrototypeOf(target, prototype)`.
-- `Reflect.getOwnPropertyDescriptor(target, propKey)`.
-- `Reflect.defineProperty(target, propKey, attributes)`.
-- `Reflect.deleteProperty(target, propKey)`.
-- `Reflect.isExtensible(target)`.
-- `Reflect.preventExtensions(target)`.
+- Change original object will change proxy object.
+- change proxy object will change original object via `set` related API.
+- `Proxy.prototype` 为 `undefined`.
+- `target !== proxy`.
 
-Change original object will change proxy object,
-change proxy object will change original object via `set` related API.
+```ts
+const target = {
+  id: 'target',
+};
+const handler = {};
+const proxy = new Proxy(target, handler);
+
+// Proxy.prototype 是 undefined
+// 因此不能使用 instanceof 操作符
+console.log(target instanceof Proxy); // TypeError
+console.log(proxy instanceof Proxy); // TypeError
+// 严格相等可以用来区分代理和目标
+console.log(target === proxy); // false
+```
 
 ### Proxy and DefineProperty
 
@@ -4361,6 +4361,25 @@ change proxy object will change original object via `set` related API.
   - `Object.defineProperty` 无法监听数组, `Proxy` 则可以直接监听数组变化.
   - Vue2: 重写数组方法监听数组变化, Vue3: `Proxy` 监听数组变化.
 - `Proxy` 不兼容 IE, `Object.defineProperty` 不兼容 IE8 及以下.
+
+### Reflect
+
+- `Reflect.get(target, propKey)`.
+- `Reflect.set(target, propKey, value)`.
+- `Reflect.has(target, propKey)`.
+- `Reflect.apply(target, thisArgument, argumentsList)`.
+- `Reflect.construct(target, argumentsList)`:
+  `new target(...argumentsList)`.
+- `Reflect.ownKeys(target)`:
+  `Object.getOwnPropertyNames` + `Object.getOwnPropertySymbols`,
+  all keys include Symbols.
+- `Reflect.getPrototypeOf(target)`.
+- `Reflect.setPrototypeOf(target, prototype)`.
+- `Reflect.getOwnPropertyDescriptor(target, propKey)`.
+- `Reflect.defineProperty(target, propKey, attributes)`.
+- `Reflect.deleteProperty(target, propKey)`.
+- `Reflect.isExtensible(target)`.
+- `Reflect.preventExtensions(target)`.
 
 ### Proxy Usage
 
