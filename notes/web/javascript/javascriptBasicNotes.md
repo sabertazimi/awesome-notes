@@ -3117,8 +3117,47 @@ const b = 10;
 它就是一个函数表达式:
 
 ```ts
-// Function expression: 函数表达式
+// Function Expression 函数表达式:
 const foo = function foo() {};
+
+// `function f() {}` 是命名函数表达式:
+const factorial = function f(num) {
+  if (num <= 1) {
+    return 1;
+  } else {
+    return num * f(num - 1);
+  }
+};
+```
+
+### Tail Call Optimization
+
+- Tail call optimization only work in strict mode
+  due to `func.arguments` and `func.caller` (forbidden in strict mode).
+- Tail call optimization reduce function stack frame.
+
+```ts
+// Following function is not tail recursive:
+function factorial(x) {
+  if (x <= 0) {
+    return 1;
+  } else {
+    return x * factorial(x - 1); // (A): Not tail position.
+  }
+}
+
+function factorial(n) {
+  return facRec(n, 1);
+}
+
+// Following function is tail recursive:
+function facRec(x, acc) {
+  if (x <= 1) {
+    return acc;
+  } else {
+    return facRec(x - 1, x * acc); // (A): Tail position.
+  }
+}
 ```
 
 ### Callback Function
