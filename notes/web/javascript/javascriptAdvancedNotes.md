@@ -2924,7 +2924,8 @@ reduce image transfer sizes by average of ~20%
 
 ### Data Loading
 
-- [Resources Priority](https://developers.google.com/web/fundamentals/performance/resource-prioritization)
+- [Fetch Priority](https://web.dev/priority-hints)
+- [Resources Priority](https://web.dev/prioritize-resources)
 
 #### Data Loading Tips
 
@@ -3067,8 +3068,7 @@ const PageComponent = () => {
 
 - [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
 - [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report)
-
-Audits of Chrome: PWA, best practices, SEO, performance, device simulator
+- Audits Chrome: PWA, SEO, performance, device simulator.
 
 #### Inspect Android Device
 
@@ -3379,8 +3379,13 @@ observer.observe({ type: 'layout-shift', buffered: true });
 
 ### Performance Reference
 
-- Web Vitals Real World [Case](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw).
-- Web Monitor Real World [Case](https://zhuanlan.zhihu.com/p/420330110).
+- `web.dev` performance complete [guide](https://web.dev/fast).
+- Fetch priority [guide](https://web.dev/priority-hints).
+- Resources priority [guide](https://web.dev/prioritize-resources).
+- Chrome devtools [guide](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference).
+- Chrome UX [report](https://developers.google.com/web/tools/chrome-user-experience-report).
+- Web vitals real world [case](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw).
+- Web monitor real world [case](https://zhuanlan.zhihu.com/p/420330110).
 
 ## Testing and Debugging
 
