@@ -4339,7 +4339,6 @@ const handler = {};
 const proxy = new Proxy(target, handler);
 
 // Proxy.prototype 是 undefined
-// 因此不能使用 instanceof 操作符
 console.log(target instanceof Proxy); // TypeError
 console.log(proxy instanceof Proxy); // TypeError
 // 严格相等可以用来区分代理和目标
