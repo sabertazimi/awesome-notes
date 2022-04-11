@@ -2606,6 +2606,17 @@ Person.prototype.locate(); // prototype, {constructor: ... }
 Person.locate(); // class, class Person {}
 ```
 
+`super`:
+
+- `super` 只能在派生类构造函数和静态方法中使用.
+- 不能单独引用 `super` 关键字, 要么用它调用构造函数, 要么用它引用静态方法.
+- 调用 `super()` 会调用父类构造函数, 并将返回的实例赋值给 `this`.
+- 在类构造函数中, 不能在调用 `super()` 之前引用 `this`.
+- `super()` 等价于调用构造函数, 若需给父类构造函数传参, 则需手动传入.
+- 若没有显式定义派生类构造函数, 在实例化派生类时会自动调用 `super()`, 且会自动传入所有传给派生类的参数.
+- 若显式定义了派生类构造函数, 则必须在其中调用 `super()` , 或返回一个对象.
+- 实例化时检测 `new.target` 是不是抽象基类, 可以阻止对抽象基类的实例化.
+
 #### Class Expression
 
 ```ts
