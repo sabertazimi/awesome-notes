@@ -104,14 +104,14 @@ console.log(Math.min()); // Infinity
 
 #### String
 
-##### 非对象特性
+##### String Primitive Feature
 
 作为基本变量:
 
 - 字符串中的字符不可枚举 (for in 循环).
 - `delete` 无法删除某位字符.
 
-##### 引用特性
+##### String Reference Feature
 
 - 赋值与传参 传递 string 字符串常量 的引用.
 - 所有 string 量 都是不可变量, 当对 string 进行操作后, 将先会在堆区创建副本, 再通过副本进行修改, 并返回副本的索引.
@@ -215,6 +215,29 @@ const s2 = s1.substring(2); // Call method on primitive string.
 const s3 = 'some text';
 s3.color = 'red';
 console.log(s3.color); // undefined
+```
+
+```ts
+// primitive string
+const greet = 'Hello there';
+// primitive is converted to an object
+// in order to use the split() method
+const hello = greet.split(' ')[0]; // "Hello"
+// attempting to augment a primitive is not an error
+greet.smile = true;
+// but it doesn't actually work
+const undef = typeof greet.smile; // "undefined"
+```
+
+不使用 new 关键字,包装类构造函数返回值为基本类型
+
+```ts
+const numberType = typeof Number(1); // "number"
+const numberType = typeof Number('1'); // "number"
+// eslint-disable-next-line no-new-wrappers
+const numberType = typeof Number(new Number()); // "number"
+const stringType = typeof String(1); // "string"
+const booleanType = typeof Boolean(1); // "boolean"
 ```
 
 ### Variable Hoisting
@@ -407,6 +430,29 @@ strings.sort((a, b) => a.localeCompare(b));
 strings.sort((a, b) => new Intl.Collator('en').compare(a, b));
 ```
 
+##### Array Reverse
+
+```ts
+[].reverse();
+```
+
+```ts
+// Tips
+// 反转字符串
+const reverseStr = normalizedStr.split('').reverse().join('');
+```
+
+##### Array Iterator
+
+```ts
+[].map(item => item + 1); // map over
+[].filter(item => item === 0); // list comprehension
+[].reduce(
+  (previous, current, currentIndex, arr) => current + previous,
+  initial
+); // fold function
+```
+
 ##### Array Stack
 
 ```ts
@@ -450,7 +496,7 @@ string(charArray).split('割断点'); // 选择割断符,返回字符串数组
 array.forEach(val => {}); // 遍历数组所有元素.
 ```
 
-##### Deep Clone of Array
+##### Array Deep Clone
 
 ```ts
 const nestedArray = [1, [2], 3];
@@ -465,19 +511,7 @@ console.log(arrayCopy); // [ '1', [ '3' ], 3 ]
 console.log(nestedArray); //  1, [ 2 ], 3 ]
 ```
 
-##### Array Other Methods
-
-```ts
-[].reverse();
-```
-
-```ts
-// Tips
-// 反转字符串
-const reverseStr = normalizedStr.split('').reverse().join('');
-```
-
-##### Array Tips
+#### Array Tips and Best Practice
 
 - 对字符串每个元素进行单独操作 e.g map/filter
 
@@ -526,17 +560,6 @@ array.reduce(
 );
 ```
 
-##### 高阶函数
-
-```ts
-[].map(item => item + 1); // map over
-[].filter(item => item === 0); // list comprehension
-[].reduce(
-  (previous, current, currentIndex, arr) => current + previous,
-  initial
-); // fold function
-```
-
 ### Type Detection
 
 #### Type Detection Best Practice
@@ -581,7 +604,7 @@ const objectType = typeof null; // => object
 - 由于属性值可能为零值值表达式, 不应使用零值表达式(`0`/`NaN`/`''`/`null`/`undefined`) 检测属性值.
 - 应使用 `for in` 进行属性检测.
 
-### Type Coercion
+### Type Conversion
 
 - 字符串 -> 整数：`+string`/`Number(string)`/`parseInt(string, arg1)`.
 - any -> `bool`：`!!any`.
@@ -612,7 +635,7 @@ const hasAge = Boolean(age);
 const hasAge = !!age;
 ```
 
-#### 对象转换
+#### Object Conversion
 
 对象转换为布尔值:
 
@@ -782,7 +805,7 @@ alert(a);
 // 抛出 TypeError
 ```
 
-## 运算符
+## Operators
 
 ### Loose Comparison
 
@@ -791,7 +814,7 @@ alert(a);
 - Type conversion first, then comparison.
 - Return comparison between `ToNumber(x)` and `ToPrimitive(y)`.
 
-### Strict Equal
+### Strict Comparison
 
 `===` 与 `!==`:
 
@@ -825,9 +848,9 @@ const false8 = {} === {}; // false, refer different objects in memory
 
 <!-- eslint-enable eqeqeq -->
 
-### 条件表达式
+### Conditional Expression
 
-养成使用分号结束句子的习惯, 需分行显示的语句必须确保单行不会形成完整语义
+养成使用分号结束句子的习惯, 需分行显示的语句必须确保单行不会形成完整语义:
 
 ```ts
 const i = a ? 1 : b ? 2 : c ? 3 : 4;
@@ -863,7 +886,7 @@ console.log(old); // { data: 5 }
 console.log(old.data); // 5
 ```
 
-## 控制流程
+## Flow Control
 
 ### Switch Case Statement
 
@@ -896,7 +919,7 @@ function doAction(action) {
 
 ## Object
 
-### 对象三大特征
+### OOP Features
 
 共用方法, 单独属性, 封装细节:
 
@@ -991,14 +1014,12 @@ const truthy = Function instanceof Object;
 
 ### Object Constructor
 
-- 首字母大写
-- 所有函数(包括构造函数)有 prototype 属性
+- 首字母大写.
+- 所有函数 (包括构造函数)有 prototype 属性.
 
-#### Object Constructor Types
+#### Object Literal
 
-##### Object Literal
-
-对象字面量由 Object 构造函数 隐式构造
+对象字面量由 Object 构造函数 隐式构造;
 
 ```ts
 const obj = {
@@ -1008,7 +1029,7 @@ const obj = {
 console.log(obj[[proto]] === Object.prototype); // true
 ```
 
-##### New Constructor
+#### New Constructor
 
 `new` 构造函数作用原理如下:
 
@@ -1046,7 +1067,7 @@ const employee = newInstance(Employee, 'Jack');
 const employee = new Employee('Jack');
 ```
 
-##### Object Create API
+#### Object Create API
 
 ```ts
 Object.create = function (o) {
@@ -1055,6 +1076,7 @@ Object.create = function (o) {
       'Object.create implementation only accepts the first parameter.'
     );
   }
+
   function F() {}
   F.prototype = o;
   return new F();
@@ -1090,7 +1112,7 @@ const obj = new MyClass();
 console.log(obj.name); // 输出: sven .
 ```
 
-#### Instance Of Constructor
+#### Constructor Instance
 
 若 在实例对象的原型链(`__proto__`)中 能找到 构造函数的`prototype`属性(Prototype 对象), 则返回`true`, 否则返回`false`
 
@@ -1196,7 +1218,7 @@ Global Object 属性:
 
 ### Object Descriptor
 
-#### Object Property Descriptor
+#### Property Descriptor
 
 对象的属性描述符:
 
@@ -1248,7 +1270,7 @@ Object.defineProperties(o, {
 });
 ```
 
-#### Object Descriptor Functions
+#### Descriptor Functions
 
 - `Object.create(prototype[,descriptors])`.
 
@@ -1378,11 +1400,50 @@ const Person = function (name) {
   });
 ```
 
-### 类式继承
+### Object Clone
 
-#### 代理构造函数
+#### Object Shallow Clone
 
-可用于所有继承模式中,减少内存消耗:
+```ts
+const dest = {};
+const src = { a: {} };
+Object.assign(dest, src);
+
+// 浅复制意味着只会复制对象的引用
+console.log(dest); // { a :{} }
+console.log(dest.a === src.a); // true
+```
+
+#### Object Deep Clone
+
+```ts
+function extendDeep(parent, child) {
+  let i;
+  const toStr = Object.prototype.toString;
+  const astr = '[object Array]';
+  child = child || {};
+
+  for (i in parent) {
+    if (Object.prototype.hasOwnProperty.call(parent, i)) {
+      // 若属性为对象,则进行深克隆
+      if (typeof parent[i] === 'object') {
+        child[i] = toStr.call(parent[i]) === astr ? [] : {};
+        extendDeep(parent[i], child[i]);
+      } else {
+        child[i] = parent[i];
+      }
+    }
+  }
+
+  return child;
+}
+```
+
+### Object Extend
+
+#### Prototype Proxy Extend
+
+可用于所有继承模式中, 减少内存消耗:
 
 ```ts
 const inherit = (function () {
@@ -1408,36 +1469,9 @@ Child.prototype.add = function () {
 };
 ```
 
-#### 混合继承模式
+#### Class Simulation Extend
 
-类继承(**借用构造函数**)与原型继承(**设置原型**)混合继承模式:
-
-- `child.prototype = new Parent();`
-- `Parent.apply(this, arguments);`
-
-此模式会使得子类属性继承 2 次:
-
-```ts
-function Parent(name) {
-  this.name = name || 'Adam';
-}
-// adding functionality to the prototype
-Parent.prototype.say = function () {
-  return this.name;
-};
-
-// child constructor
-function Child(...args) {
-  Parent.apply(this, args);
-}
-
-Child.prototype = new Parent(); // 设置原型链,建立继承关系
-Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor 对象形成闭环
-```
-
-#### Class Simulation
-
-复制式地继承, 将会消耗大量内存单元 **Best Practice**:
+复制式地继承, 将会消耗大量内存单元:
 
 ```ts
 const classSim = function (Parent, props) {
@@ -1461,7 +1495,6 @@ const classSim = function (Parent, props) {
   const F = function () {};
   F.prototype = Parent.prototype;
   Child.prototype = new F();
-  Child.uber = Parent.prototype;
   Child.prototype.constructor = Child;
 
   // 添加属性与方法
@@ -1488,198 +1521,33 @@ const SuperMan = classSim(Man, {
 });
 ```
 
-### 原型链继承
+#### Prototype and Class Extend
 
-#### 原型代理
+原型继承 (**设置原型**)
+与类式继承 (**借用构造函数**)
+混合继承模式:
 
-构造函数的原型对象被设置为新实例的原型引用
+- `child.prototype = new Parent();`
+- `Parent.apply(this, arguments);`
+
+此模式会使得子类属性继承 2 次:
 
 ```ts
-f.prototype = o;
-```
-
-```ts
-if (!Object.create) {
-  Object.create = function (o) {
-    if (arguments.length > 1) {
-      throw new Error(
-        'Object.create implementation only accepts the first parameter.'
-      );
-    }
-    function F() {}
-    F.prototype = o;
-    return new F();
-  };
+function Parent(name) {
+  this.name = name || 'Adam';
 }
-```
-
-```ts
-const switchProto = {
-  isOn: function isOn() {
-    return this.state;
-  },
-
-  toggle: function toggle() {
-    this.state = !this.state;
-    return this;
-  },
-
-  state: false,
+// adding functionality to the prototype
+Parent.prototype.say = function () {
+  return this.name;
 };
 
-const switchInstance = Object.create(switchProto);
-```
-
-#### 原型克隆
-
-此时属性与方法不共享, 实例对象各自拥有一份拷贝
-
-##### 浅克隆
-
-```ts
-_.extend = function (obj, ...args) {
-  each(...args, function (source) {
-    for (const prop in source) {
-      obj[prop] = source[prop];
-    }
-  });
-  return obj;
-};
-```
-
-##### 深克隆
-
-```ts
-function extendDeep(parent, child) {
-  let i;
-  const toStr = Object.prototype.toString;
-  const astr = '[object Array]';
-  child = child || {};
-
-  for (i in parent) {
-    if (Object.prototype.hasOwnProperty.call(parent, i)) {
-      // 若属性为对象,则进行深克隆
-      if (typeof parent[i] === 'object') {
-        child[i] = toStr.call(parent[i]) === astr ? [] : {};
-        extendDeep(parent[i], child[i]);
-      } else {
-        child[i] = parent[i];
-      }
-    }
-  }
-
-  return child;
+// child constructor
+function Child(...args) {
+  Parent.apply(this, args);
 }
-```
 
-##### 属性混入
-
-Mixin 实现多重继承:
-
-```ts
-function mix(...args) {
-  const child = {};
-
-  for (let arg = 0; arg < args.length; arg += 1) {
-    for (const prop in args[arg]) {
-      if (Object.prototype.hasOwnProperty.call(args[arg], prop)) {
-        child[prop] = args[arg][prop];
-      }
-    }
-  }
-
-  return child;
-}
-```
-
-```ts
-const cake = mix(
-  { eggs: 2, large: true },
-  { butter: 1, salted: true },
-  { flour: '3 cups' },
-  { sugar: 'sure!' }
-);
-```
-
-#### 封装
-
-闭包实现工厂方法:
-
-```ts
-function factory() {
-  const highlander = {
-    name: 'MacLeod',
-  };
-
-  // 利用闭包, 返回私有对象, 实现工厂方法.
-  return {
-    get() {
-      return highlander;
-    },
-  };
-}
-```
-
-### 包装类对象
-
-基本变量只会临时转变为包装类对象,若需添加额外属性/方法:
-
-- new Number/String/Boolean();
-- 改变内置原型
-
-```ts
-// primitive string
-const greet = 'Hello there';
-// primitive is converted to an object
-// in order to use the split() method
-const hello = greet.split(' ')[0]; // "Hello"
-// attempting to augment a primitive is not an error
-greet.smile = true;
-// but it doesn't actually work
-const undef = typeof greet.smile; // "undefined"
-```
-
-不使用 new 关键字,包装类构造函数返回值为基本类型
-
-```ts
-const numberType = typeof Number(1); // "number"
-const numberType = typeof Number('1'); // "number"
-// eslint-disable-next-line no-new-wrappers
-const numberType = typeof Number(new Number()); // "number"
-const stringType = typeof String(1); // "string"
-const booleanType = typeof Boolean(1); // "boolean"
-```
-
-### 错误对象
-
-```ts
-const err = {
-  name: 'XXError',
-  message: 'something wrong',
-  extra: 'This was rather embarrassing',
-  remedy: genericErrorHandler, // 处理错误的函数名.
-};
-
-try {
-  throwError();
-} catch (e) {
-  console.log(e.message);
-  e.remedy(); // genericErrorHandler.
-}
-```
-
-Avoid using try-catch inside a loop:
-
-```ts
-const object = ['foo', 'bar'];
-
-try {
-  for (let i = 0; i < object.length; i++) {
-    // do something that throws an exception
-  }
-} catch (e) {
-  // handle exception
-}
+Child.prototype = new Parent(); // 设置原型链,建立继承关系
+Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor 对象形成闭环
 ```
 
 ## Function
@@ -1757,6 +1625,63 @@ this.construct(options);
 Foo.call(this, options);
 ```
 
+- `Function.call(contextObj, arg1, arg2,...)`
+- `Function.apply(contextArray, [arg1, arg2, ...]/arguments)`
+- call 效率高于 apply.
+
+```ts
+window.function.call();
+window.function.apply();
+// js解释器临时将数组/字符串包装成对象原型.
+[].arrayStaticFunction.call();
+[].arrayStaticFunction.apply();
+Array.prototype.arrayStaticFunction.call();
+Array.prototype.arrayStaticFunction.apply();
+''.stringStaticFunction.call();
+''.stringStaticFunction.apply();
+String.prototype.stringStaticFunction.call();
+String.prototype.stringStaticFunction.apply();
+```
+
+相当于:
+
+```ts
+context.function(arguments);
+```
+
+##### Function Bind
+
+- change function runtime context (ignore innovation pattern `function/method/new/call/apply`)
+- curry function
+- can't change `this` in arrow function
+
+```ts
+const boundFunc = func.bind(context, arg1, arg2, argN);
+```
+
+##### Function Call and Apply
+
+```ts
+function bind(o, m) {
+  return function (...args) {
+    return m.apply(o, args);
+  };
+}
+```
+
+```ts
+const one = {
+  name: 'object',
+  say(greet) {
+    return `${greet}, ${this.name}`;
+  },
+};
+const two = { name: 'another object' };
+const twoSay = bind(two, one.say);
+
+twoSay('yo'); // "yo, another object"
+```
+
 #### Constructor Binding
 
 Constructor Invocation: this 绑定至传入的空对象
@@ -1782,6 +1707,19 @@ const func = obj.foo;
 obj.foo(); // `this` in `inner` function refer to `obj`
 func(); // `this` in `inner` function refer to `window`
 ```
+
+### Context and Scope
+
+- 每个上下文都有一个关联的变量对象 (**Variable Object**),
+  这个上下文中定义的所有变量和函数都存在于这个对象上.
+- 上下文栈: `scope` -> `(list) [0]活动对象` -> `[1]全局对象`.
+- 作用域链: ES6 Block Scope -> Function Scope -> Global Scope.
+- 每个执行环境拥有独立的作用域链, 例如独立全局对象, 独立**活动对象**,
+- 上下文是函数时, 其活动对象 (**Activation Object**) 用作变量对象:
+  函数每次运行时, 都会新建执行环境内部对象, 执行完后销毁此对象.
+- 可动态改变作用域链的语句:
+  - `with`.
+  - `try catch`: 异常对象入列, 位于作用域链链首.
 
 ### Function Prototype
 
@@ -1811,20 +1749,36 @@ try {
 }
 ```
 
-### 上下文与作用域链
+### Function Parameter
 
-- 每个上下文都有一个关联的变量对象 (**Variable Object**),
-  这个上下文中定义的所有变量和函数都存在于这个对象上.
-- 上下文栈: `scope` -> `(list) [0]活动对象` -> `[1]全局对象`.
-- 作用域链: ES6 Block Scope -> Function Scope -> Global Scope.
-- 每个执行环境拥有独立的作用域链, 例如独立全局对象, 独立**活动对象**,
-- 上下文是函数时, 其活动对象 (**Activation Object**) 用作变量对象:
-  函数每次运行时, 都会新建执行环境内部对象, 执行完后销毁此对象.
-- 可动态改变作用域链的语句:
-  - `with`.
-  - `try catch`: 异常对象入列, 位于作用域链链首.
+- 所有函数参数都是按值传递 (复制原子值/引用值).
+- **无副作用**的函数: 注意是否需要拷贝传入对象, 使原有对象不受函数影响, 并返回新对象.
 
-### 函数表达式
+```ts
+// 除非必要,否则不改变原有对象
+const obj = {
+  value: 2,
+};
+
+function setValue(obj, val) {
+  obj.value = val;
+  return obj;
+}
+```
+
+```ts
+// 好习惯: 改变新对象,返回新对象
+const obj = {
+  value: 2,
+};
+
+function setValue(obj, val) {
+  const instance = extend({}, obj, { value: val });
+  return instance;
+}
+```
+
+### Function Expression
 
 ```ts
 // 变量提升
@@ -1857,35 +1811,6 @@ const b = 10;
 })();
 
 // print out function b { ... }
-```
-
-### Function Parameter
-
-- 所有函数参数都是按值传递 (复制原子值/引用值).
-- **无副作用**的函数: 注意是否需要拷贝传入对象, 使原有对象不受函数影响, 并返回新对象.
-
-```ts
-// 除非必要,否则不改变原有对象
-const obj = {
-  value: 2,
-};
-
-function setValue(obj, val) {
-  obj.value = val;
-  return obj;
-}
-```
-
-```ts
-// 好习惯: 改变新对象,返回新对象
-const obj = {
-  value: 2,
-};
-
-function setValue(obj, val) {
-  const instance = extend({}, obj, { value: val });
-  return instance;
-}
 ```
 
 ### Callback Function
@@ -1993,11 +1918,11 @@ let addEvent = function (el, type, handle) {
 };
 ```
 
-### 即时函数
+### Immediately Invoked Function Expression
 
-即时函数自动执行(定义即执行)：匿名包装器
+即时函数自动执行 (定义即执行): 匿名包装器
 
-#### 即时函数模式
+#### IIFE Pattern
 
 - 函数表达式
 - 末尾添加括号(传参),使函数立即执行
@@ -2009,13 +1934,11 @@ let addEvent = function (el, type, handle) {
 })();
 ```
 
-#### 模式作用
+- 使得匿名函数内部的代码能够立即执行.
+- 不泄漏只使用一次的局部变量与方法.
+- 创建命名空间, 防止变量命名冲突.
 
-- 使得匿名函数内部的代码能够立即执行
-- 不泄漏只使用一次的局部变量与方法
-- 创建命名空间, 防止变量命名冲突
-
-#### 即时函数返回值
+#### IIFE Return Value
 
 ```ts
 const foo = (function () {})();
@@ -2031,65 +1954,6 @@ const getResult = (function () {
     return res;
   };
 })();
-```
-
-### Bind Invocation
-
-- `Function.call(contextObj, arg1, arg2,...)`
-- `Function.apply(contextArray, [arg1, arg2, ...]/arguments)`
-- call 效率高于 apply.
-
-```ts
-window.function.call();
-window.function.apply();
-// js解释器临时将数组/字符串包装成对象原型.
-[].arrayStaticFunction.call();
-[].arrayStaticFunction.apply();
-Array.prototype.arrayStaticFunction.call();
-Array.prototype.arrayStaticFunction.apply();
-''.stringStaticFunction.call();
-''.stringStaticFunction.apply();
-String.prototype.stringStaticFunction.call();
-String.prototype.stringStaticFunction.apply();
-```
-
-相当于:
-
-```ts
-context.function(arguments);
-```
-
-#### Function Bind
-
-- change function runtime context (ignore innovation pattern `function/method/new/call/apply`)
-- curry function
-- can't change `this` in arrow function
-
-```ts
-const boundFunc = func.bind(context, arg1, arg2, argN);
-```
-
-#### Function Call and Apply
-
-```ts
-function bind(o, m) {
-  return function (...args) {
-    return m.apply(o, args);
-  };
-}
-```
-
-```ts
-const one = {
-  name: 'object',
-  say(greet) {
-    return `${greet}, ${this.name}`;
-  },
-};
-const two = { name: 'another object' };
-const twoSay = bind(two, one.say);
-
-twoSay('yo'); // "yo, another object"
 ```
 
 ### Polymorphism Method
@@ -2114,7 +1978,7 @@ const greet = function greet(options, ...rest) {
 这些对象可以根据同一个消息, 有条不紊地分别进行各自的工作.
 :::
 
-### Eval
+### Eval Function
 
 - 不要使用`eval()`函数
 - 不要使用字符串作参数 new Function();(会调用`eval`函数)
@@ -2232,55 +2096,6 @@ function processArray(items, process, done) {
       done(items);
     }
   }, 25);
-}
-```
-
-### 常用模式
-
-#### API 模式
-
-##### 回调模式
-
-##### 配置对象
-
-```ts
-const conf = {
-  name: 'name',
-  eMail: 'test@gmail.com',
-};
-
-addPerson(conf);
-```
-
-##### 返回函数 (闭包)
-
-一个函数的返回值设为另一个函数
-
-##### Curry 化
-
-##### 链模式
-
-```ts
-return this;
-```
-
-#### 初始化模式
-
-##### 即使函数
-
-##### 即使对象初始化
-
-obj.init();
-
-##### 初始化分支
-
-浏览器探嗅: 执行此功能的 if/else 语句只执行一次.
-
-检测浏览器对 H5/CSS3/ES5/ES2016 的支持情况,不足则自行编写函数补充功能.
-
-```ts
-if (typeof target === 'undefined') {
-  initialization();
 }
 ```
 
@@ -2695,7 +2510,7 @@ const name = node.nodeName;
 const value = node.nodeValue;
 ```
 
-##### Traverse DOM Tree
+#### Traverse DOM Tree
 
 ```ts
 const parent = node.parentNode;
@@ -2724,9 +2539,9 @@ const previous = node.previousElementSibling;
 const next = node.nextElementSibling;
 ```
 
-#### Frag
+#### DOM Fragment
 
-减少 DOM 操作次数,减少页面渲染次数
+减少 DOM 操作次数, 减少页面渲染次数:
 
 ```ts
 const frag = document.createDocumentFragment();
@@ -2869,7 +2684,7 @@ function addClass(element, value) {
 }
 ```
 
-#### CSS StyleSheet Interface
+#### CSS StyleSheet API
 
 ##### CSS Rules Definition
 
@@ -3282,7 +3097,7 @@ function myHandler(e) {
 }
 ```
 
-### Document
+### Document API
 
 ```ts
 document.write();
@@ -3290,7 +3105,7 @@ const URI = document.URI;
 const title = document.title;
 ```
 
-### Window
+### Window API
 
 ```ts
 window.location(string);
@@ -3322,7 +3137,7 @@ function addLoadEvent(func) {
 }
 ```
 
-#### location API
+### Location API
 
 | 属性     | 描述                                        |
 | :------- | :------------------------------------------ |
@@ -3486,7 +3301,7 @@ observer.observe(target, {
 
 ## Ajax
 
-### 基本用法
+### Ajax Basic Usage
 
 ```ts
 const XHR = (function () {
@@ -3552,7 +3367,7 @@ request.onreadystatechange = function () {
 request.send(null);
 ```
 
-### 简单封装
+### Ajax Complex Usage
 
 ```ts
 ajax({
@@ -3618,7 +3433,7 @@ function formatParams(data) {
 }
 ```
 
-### 跨域请求
+### Cross Origin Request
 
 ```html
 <!-- HTML -->
@@ -3729,7 +3544,7 @@ codePointLength(s); // 2
 | `{n,}?`          | n+                                     |
 | `{n,m}?`         | n ~ m                                  |
 
-### 反向引用
+### RegExp Back Reference
 
 位置编号 - 左括号的顺序:
 
@@ -3805,7 +3620,7 @@ for (const match of string.matchAll(regex)) {
 - 无需反向引用时, 使用非捕获组:
   e.g `(?:...)` 优于 `(...)`.
 
-### RegExp 常用函数
+### RegExp Functions
 
 - String:
   - `split`.
@@ -3901,7 +3716,7 @@ if (!String.prototype.trim) {
 }
 ```
 
-### 常用正则表达式
+### RegExp Use Case
 
 #### 中英文
 
@@ -3919,14 +3734,14 @@ if (!String.prototype.trim) {
 
 ### Error Type
 
-- Error
-- EvalError
-- RangeError
-- ReferenceError
-- SyntaxError
-- TypeError
-- URIError
-- 自定义错误
+- Error.
+- EvalError.
+- RangeError.
+- ReferenceError.
+- SyntaxError.
+- TypeError.
+- URIError.
+- 自定义错误.
 
 ```ts
 function MyError(...args) {
@@ -3938,7 +3753,38 @@ MyError.prototype = new Error('Error');
 MyError.prototype.constructor = MyError;
 ```
 
+### Error Object
+
+```ts
+const err = {
+  name: 'XXError',
+  message: 'something wrong',
+  extra: 'This was rather embarrassing',
+  remedy: genericErrorHandler, // 处理错误的函数名.
+};
+
+try {
+  throwError();
+} catch (e) {
+  console.log(e.message);
+  e.remedy(); // genericErrorHandler.
+}
+```
+
 ### Error and Exception Usage
 
-- 在可能失败的地方抛出异常, 对失败处做标签, 易于**调试与测试**
-- 修复 bug 后, 可考虑是否在此处抛出异常
+- 在可能失败的地方抛出异常, 对失败处做标签, 易于**调试与测试**.
+- 修复 bug 后, 可考虑是否在此处抛出异常.
+- Avoid using try-catch inside a loop:
+
+```ts
+const object = ['foo', 'bar'];
+
+try {
+  for (let i = 0; i < object.length; i++) {
+    // do something that throws an exception
+  }
+} catch (e) {
+  // handle exception
+}
+```
