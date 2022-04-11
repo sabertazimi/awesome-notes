@@ -2092,9 +2092,6 @@ Object.defineProperties(o, {
 
 #### Descriptor Functions
 
-- `Object.getOwnPropertyDescriptor(O, property)`.
-- `Object.getOwnPropertyDescriptors(O)`.
-- `Object.getOwnPropertyNames(O)`.
 - `Object.create(prototype[,descriptors])`.
 
 ```ts
@@ -2113,10 +2110,34 @@ const o = Object.create({
 });
 ```
 
-- `Object.keys()`: 仅获取可枚举的属性.
+- `Object.getOwnPropertyDescriptor(O, property)`.
+- `Object.getOwnPropertyDescriptors(O)`.
+- `Object.getOwnPropertySymbols(O)`: 仅获取实例上所有 Symbol 属性名.
+- `Object.getOwnPropertyNames(O)`: 仅获取实例上所有非 Symbol 属性名 (包括不可枚举属性名).
+- `Object.keys(O)`: 仅获取实例上可枚举属性名.
+- `for...in`: 获取实例及其原型链上所有可枚举属性名.
+
+```ts
+function Person() {}
+Person.prototype.name = 'Nicholas';
+Person.prototype.age = 29;
+Person.prototype.job = 'Software Engineer';
+Person.prototype.sayName = function () {
+  console.log(this.name);
+};
+
+const keys = Object.keys(Person.prototype);
+console.log(keys); // 'name,age,job,sayName'
+
+const p1 = new Person();
+p1.name = 'Rob';
+p1.age = 31;
+const p1keys = Object.keys(p1);
+console.log(p1keys); // '[name,age]'
+```
+
 - `Object.values()`.
 - `Object.entries()`.
-- `Object.fromEntries()`.
 
 ```ts
 const score = {
@@ -2143,6 +2164,8 @@ Object.entries(score);
  * ]
  */
 ```
+
+- `Object.fromEntries()`.
 
 ```ts
 const object = { x: 42, y: 50, abc: 9001 };
