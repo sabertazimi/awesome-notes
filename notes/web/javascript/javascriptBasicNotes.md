@@ -3032,7 +3032,9 @@ console.log(propertyDescriptor.set.name); // set age
 
 ### Function Arguments
 
-- 不是数组, 但有 length 属性 (实参个数).
+- 函数的参数在内部表现为一个数组:
+  函数不关心参数个数与参数类型, 不存在验证命名参数的机制.
+- `arguments` 不是真正的数组, 但有 `length` 属性 (实参个数).
 
 #### Arguments Callee
 
@@ -3051,7 +3053,7 @@ try {
 }
 ```
 
-### Function Parameter
+### Function Parameters
 
 - 所有函数参数都是按值传递 (复制原子值/引用值).
 - **无副作用**的函数: 注意是否需要拷贝传入对象, 使原有对象不受函数影响, 并返回新对象.
