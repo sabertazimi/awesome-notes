@@ -2509,6 +2509,7 @@ Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor �
 
 - `Class` 定义不能提升.
 - `Class` 具有块作用域.
+- `typeof Class`: `function`.
 
 ```ts
 class A {
