@@ -1786,28 +1786,6 @@ function doAction(action) {
 - `[[proto]]` getter is `Object.getPrototypeOf(object)`.
 - `[[proto]]` setter is `Object.setPrototypeOf(object, prototype)`.
 
-下面五种操作（方法/属性/运算符）可以触发 JS 引擎读取一个对象的原型,
-可以触发 `getPrototypeOf()` 代理方法的运行：
-
-```ts
-const obj = {};
-const p = new Proxy(obj, {
-  getPrototypeOf(target) {
-    return Array.prototype;
-  },
-});
-
-console.log(
-  Object.getPrototypeOf(p) === Array.prototype, // true
-  Reflect.getPrototypeOf(p) === Array.prototype, // true
-  // eslint-disable-next-line no-prototype-builtins
-  Array.prototype.isPrototypeOf(p), // true
-  // eslint-disable-next-line no-proto
-  p.__proto__ === Array.prototype, // true
-  p instanceof Array // true
-);
-```
-
 ```ts
 function Foo(value) {
   this.val = value;
@@ -1841,6 +1819,28 @@ const truthy = Function[[proto]][[proto]] === Object.prototype;
 // True:
 const truthy = Object instanceof Function;
 const truthy = Function instanceof Object;
+```
+
+下面五种操作（方法/属性/运算符）可以触发 JS 引擎读取一个对象的原型,
+可以触发 `getPrototypeOf()` 代理方法的运行：
+
+```ts
+const obj = {};
+const p = new Proxy(obj, {
+  getPrototypeOf(target) {
+    return Array.prototype;
+  },
+});
+
+console.log(
+  Object.getPrototypeOf(p) === Array.prototype, // true
+  Reflect.getPrototypeOf(p) === Array.prototype, // true
+  // eslint-disable-next-line no-prototype-builtins
+  Array.prototype.isPrototypeOf(p), // true
+  // eslint-disable-next-line no-proto
+  p.__proto__ === Array.prototype, // true
+  p instanceof Array // true
+);
 ```
 
 ### Object Constructor
