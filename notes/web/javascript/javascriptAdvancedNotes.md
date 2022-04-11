@@ -1667,7 +1667,9 @@ Paint Order:
 - `with () {}`.
 - `new Function()`.
 
-### Local Variables and Function Parameters Performance
+### Function Performance
+
+#### Local Variables Performance
 
 - 局部变量引用全局变量/全局变量作为参数传入函数: 加快符号解析.
 - 局部变量缓存 DOM 元素.
@@ -1681,11 +1683,12 @@ const DOM = tazimi.util.Dom;
 DOM.method.call(/* 关注 this 指针 */);
 ```
 
-### Scope Chain Performance
+#### Scope Chain Performance
 
-由于作用域链的关系，标识符解析时，寻找局部变量速度远快于寻找全局变量速度.
-故应将全局变量作为参数传入函数进行调用，不但效率高，而且易于维护与测试.
-即利用局部变量引用全局变量，加快标识符解析.
+由于作用域链的关系, 标识符解析时,
+寻找局部变量速度远快于寻找全局变量速度 (作用域链越长, 查找变量所需时间越长).
+故应将全局变量作为参数传入函数进行调用, 不但效率高, 而且易于维护与测试.
+即**利用局部变量引用全局变量, 加快标识符解析**.
 
 ### Loop Performance
 
@@ -1790,11 +1793,11 @@ window.onload = function () {
 
 ### Cache Pattern
 
-缓存对象属性与 DOM 对象
+缓存对象属性与 DOM 对象.
 
 ### Script Loading Performance
 
-合并脚本后再进行高级加载技术
+合并脚本后再进行高级加载技术.
 
 #### Script Lazy Loading
 
@@ -1842,14 +1845,14 @@ requireScript('the_rest.js', function () {
 
 ### DOM Performance
 
-- 局部变量缓存 DOM 元素
-- 局部变量缓存布局信息
+- 局部变量缓存 DOM 元素.
+- 局部变量缓存布局信息.
 
 ```ts
 const btn = document.getElementById('btn');
 ```
 
-- HTML Collection 转化成数组再操作
+- HTML Collection 转化成数组再操作.
 
 ```ts
 function toArray(coll) {
@@ -1861,12 +1864,12 @@ function toArray(coll) {
 }
 ```
 
-- children 优于 childNodes
-- childElementCount 优于 childNodes.length
-- firstElementChild 优于 firstChild
-- lastElementChild 优于 lastChild
-- nextElementSibling 优于 nextSibling 优于 `childNodes[next]`
-- previousElementSibling 优于 previousSibling
+- `children` 优于 `childNodes`.
+- `childElementCount` 优于 `childNodes.length`.
+- `firstElementChild` 优于 `firstChild`.
+- `lastElementChild` 优于 `lastChild`.
+- `nextElementSibling` 优于 `nextSibling` 优于 `childNodes[next]`.
+- `previousElementSibling` 优于 `previousSibling`.
 
 #### Layout and Paint Performance
 
@@ -1874,8 +1877,8 @@ function toArray(coll) {
 - 重绘: 重新绘制受影响部分.
 
 **获取**或改变布局的操作会导致渲染树**变化队列**刷新,
-执行渲染队列中的"待处理变化",
-重排 DOM 元素
+执行渲染队列中的**待处理变化**,
+重排 DOM 元素.
 
 #### DOM Manipulation Performance
 
@@ -2043,15 +2046,17 @@ function timedProcessArray(items, process, callback) {
 
 ### Reduce Repeat Manipulation
 
-- 特性/浏览器检测代码只运行一次
-- 惰性定义模式/自定义模式
+- 特性/浏览器检测代码只运行一次.
+- 惰性定义模式/自定义模式.
 
 #### Debounce and Throttle
 
 防抖动和节流本质是不一样的:
 
-- debounce: 防抖动是将多次执行变为最后一次执行 (可用于检测某个连续的 DOM 操作结束, 如 scroll 停止)
-- throttle: 节流是将多次执行变成每隔一段时间执行 (保证一定时间内只执行一次)
+- `debounce`:
+  防抖动是将多次执行变为最后一次执行 (可用于检测某个连续的 DOM 操作结束, 如 `resize`/`scroll` 停止).
+- `throttle`:
+  节流是将多次执行变成每隔一段时间执行 (保证一定时间内只执行一次).
 
 ```ts
 // 这个是用来获取当前时间戳的
