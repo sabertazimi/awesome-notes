@@ -894,7 +894,7 @@ function doAction(action) {
 }
 ```
 
-## 对象
+## Object
 
 ### 对象三大特征
 
@@ -989,14 +989,14 @@ const truthy = Object instanceof Function;
 const truthy = Function instanceof Object;
 ```
 
-### 构造函数
+### Object Constructor
 
 - 首字母大写
 - 所有函数(包括构造函数)有 prototype 属性
 
-#### 构造对象的三种形式
+#### Object Constructor Types
 
-##### 对象字面量
+##### Object Literal
 
 对象字面量由 Object 构造函数 隐式构造
 
@@ -1156,7 +1156,7 @@ const c = new C(); // logs class C{constructor(){console.log(new.target);}}
 const d = new D(); // logs class D extends C{constructor(){super();}}
 ```
 
-### 全局对象
+### Global Object
 
 ```ts
 // 立即函数模式:
@@ -1167,9 +1167,121 @@ const global = (function () {
 })();
 ```
 
-### 私有属性与特权方法
+Global Object 属性:
 
-#### 私有属性
+- undefined.
+- NaN.
+- Infinity.
+- Object.
+- Array.
+- Function.
+- Boolean.
+- String.
+- Number.
+- Date.
+- RegExp.
+- Symbol.
+- Error.
+- EvalError.
+- RangeError.
+- ReferenceError.
+- SyntaxError.
+- TypeError.
+- URIError.
+- encodeURI.
+- encodeURIComponent.
+- decodeURI.
+- decodeURIComponent.
+- eval.
+
+### Object Descriptor
+
+#### Object Property Descriptor
+
+对象的属性描述符:
+
+- `Object.defineProperty(O, Prop, descriptor)`.
+- `Object.defineProperties(O, descriptors)`.
+
+数据描述符:
+
+- `configurable`: 是否可以被删除, 默认 false.
+- `enumerable`: 是否可以被枚举(`for in`), 默认 false.
+- `writable`: 是否是只读 property, 默认是 false.
+- `value`: 属性值, 默认是 undefined.
+
+存取描述符:
+
+- `get`: 返回 property 值的方法, 默认是 undefined.
+- `set`: 为 property 设置值的方法, 默认是 undefined.
+
+```ts
+Object.defineProperty(o, 'age', {
+  value: 24,
+  writable: true,
+  enumerable: true,
+  configurable: true,
+});
+
+Object.defineProperty(o, 'sex', {
+  value: 'male',
+  writable: false, //  不可赋值
+  enumerable: false, //  不可遍历/枚举
+  configurable: false,
+});
+```
+
+```ts
+Object.defineProperties(o, {
+  age: {
+    value: 24,
+    writable: true,
+    enumerable: true,
+    configurable: true,
+  },
+  sex: {
+    value: 'male',
+    writable: false,
+    enumerable: false,
+    configurable: false,
+  },
+});
+```
+
+#### Object Descriptor Functions
+
+- `Object.create(prototype[,descriptors])`.
+
+```ts
+const o = Object.create({
+  say() {
+    alert(this.name);
+  },
+  name: 'Byron',
+});
+```
+
+- `Object.getOwnPropertyDescriptor(O, property)`.
+- `Object.getOwnPropertyDescriptors(O)`.
+- `Object.getOwnPropertyNames(O)`.
+- `Object.keys()`: 仅获取可枚举的属性.
+
+```ts
+const props = Object.getOwnPropertyDescriptor(o, 'age');
+console.log(props);
+// Object {value: 24, writable: true, enumerable: true, configurable: true}
+
+console.log(Object.getOwnPropertyNames(o)); // ["age", "sex"]
+console.log(Object.keys(o)); // ["age"]
+```
+
+- `Object.preventExtensions(O)`/`Object.isExtensible(O)`: 不可新增属性, 可删除/修改属性.
+- `Object.seal(O)`/`Object.isSealed(O)`: 不可新增/删除属性, 可修改属性.
+- `Object.freeze(O)`/`Object.isFrozen(O)`: 不可新增/删除/修改属性.
+
+### Private Property and Method
+
+#### Private Property
 
 实现方式: 闭包
 
@@ -1184,9 +1296,9 @@ function Gadget() {
 }
 ```
 
-#### 特权方法
+#### Private Method
 
-getter:返回基本类型值/**引用**类型**深拷贝**(POLA 最低授权原则)
+getter: 返回基本类型值/**引用**类型**深拷贝**(POLA 最低授权原则).
 
 ```ts
 function Gadget() {
@@ -1199,10 +1311,10 @@ function Gadget() {
 }
 ```
 
-Best Practice: **即使函数模式 + 揭示模式**
+**即使函数模式 + 揭示模式**:
 
-- 实现私有属性与私有方法
-- 提供私有方法的公共(读/执行 not 写)接口,公共接口发生意外,私有方法仍安全
+- 实现私有属性与私有方法.
+- 提供私有方法的公共(读/执行 not 写)接口,公共接口发生意外,私有方法仍安全.
 
 ```ts
 // 匿名即时函数模式.
@@ -1221,13 +1333,13 @@ const obj = (function () {
 })();
 ```
 
-### 静态属性与方法
+### Static Property and Method
 
-#### 静态属性
+#### Static Property
 
 实现方式: 闭包/原型代理
 
-#### 静态方法
+#### Static Method
 
 直接向构造函数添加方法
 
@@ -1235,58 +1347,11 @@ const obj = (function () {
 Object.isArray = function () {};
 ```
 
-### 模块化对象
-
-命名空间+依赖模式+私有属性/特权方法+初始化模式+揭示模式(公共接口)+即时函数模式
-
-package+import+private field/methods+constructor+public methods
-
-Best Practice:
-
-```ts
-// 命名空间模式
-APP.namespace('APP.utilities.array');
-
-// 形参: 导入全局变量
-APP.utilities.array = (function (app, global) {
-  // 依赖模式
-  const uObj = APP.utilities.object;
-  const uLang = APP.utilities.lang;
-
-  // 私有属性
-  const arrStr = '[object Array]';
-  const toStr = Object.prototype.toString;
-
-  // 私有方法
-  const inArray = function (haystack, needle) {
-    for (let i = 0, max = haystack.length; i < max; i += 1) {
-      if (haystack[i] === needle) {
-        return i;
-      }
-    }
-
-    return -1;
-  };
-  const isArray = function (a) {
-    return toStr.call(a) === arrayString;
-  };
-
-  // 初始化模式:
-  // 初始化代码, 只执行一次.
-
-  // 揭示公共接口.
-  return {
-    isArray,
-    indexOf: inArray,
-  };
-})(APP, this);
-```
-
-### 普通属性
+### Object Property
 
 编写函数时,一般用[]访问对象属性
 
-### 普通方法
+### Object Method
 
 为 prototype 添加方法,可以通过实现语法糖 method()简化代码(链模式)
 
@@ -2078,87 +2143,6 @@ setTimeout(function () {
 
 ### Common Function Utils
 
-#### Object Descriptor
-
-对象的属性描述符:
-
-- Object.defineProperty(O,Prop,descriptor)
-- Object.defineProperties(O,descriptors)
-
-数据描述符:
-
-- configurable：是否可以被删除, 默认 false
-- enumerable：是否可以被枚举(for in), 默认 false
-- writable：是否是只读 property, 默认是 false,有点像 C#中的 const
-- value：值, 默认是 undefined
-
-存取描述符:
-
-- get: 返回 property 值的方法, 默认是 undefined
-- set：为 property 设置值的方法, 默认是 undefined
-
-```ts
-Object.defineProperty(o, 'age', {
-  value: 24,
-  writable: true,
-  enumerable: true,
-  configurable: true,
-});
-Object.defineProperty(o, 'sex', {
-  value: 'male',
-  writable: false, //  不可赋值
-  enumerable: false, //  不可遍历/枚举
-  configurable: false,
-});
-```
-
-```ts
-Object.defineProperties(o, {
-  age: {
-    value: 24,
-    writable: true,
-    enumerable: true,
-    configurable: true,
-  },
-  sex: {
-    value: 'male',
-    writable: false,
-    enumerable: false,
-    configurable: false,
-  },
-});
-```
-
-#### Object Function
-
-- `Object.create(prototype[,descriptors])`
-
-```ts
-const o = Object.create({
-  say() {
-    alert(this.name);
-  },
-  name: 'Byron',
-});
-```
-
-- Object.getOwnPropertyDescriptor(O,property)
-- Object.getOwnPropertyNames
-- Object.keys() - 仅获取可枚举的属性
-
-```ts
-const props = Object.getOwnPropertyDescriptor(o, 'age');
-console.log(props);
-// Object {value: 24, writable: true, enumerable: true, configurable: true}
-
-console.log(Object.getOwnPropertyNames(o)); // ["age", "sex"]
-console.log(Object.keys(o)); // ["age"]
-```
-
-- Object.preventExtensions(O)/Object.isExtensible(O) - 不可新增属性, 可删除/修改属性
-- Object.seal(O)/Object.isSealed(O) - 不可新增/删除属性, 可修改属性
-- Object.freeze(O)/Object.isFrozen(O) - 不可新增/删除/修改属性
-
 #### Math Function
 
 - `Math.max`.
@@ -2306,6 +2290,13 @@ if (typeof target === 'undefined') {
 
 #### Namespace Module Constructor
 
+- 命名空间.
+- 依赖模式.
+- 私有属性/特权方法.
+- 初始化模式.
+- 揭示模式: 公共接口.
+- 即时函数模式.
+
 ```ts
 APP.namespace = function (namespaceString) {
   let parts = namespaceString.split('.');
@@ -2374,6 +2365,45 @@ APP.modules = {};
 APP.modules.module1 = {};
 APP.modules.module1.data = { a: 1, b: 2 };
 APP.modules.module2 = {};
+```
+
+```ts
+// 命名空间模式
+APP.namespace('APP.utilities.array');
+
+// 形参: 导入全局变量
+APP.utilities.array = (function (app, global) {
+  // 依赖模式
+  const uObj = APP.utilities.object;
+  const uLang = APP.utilities.lang;
+
+  // 私有属性
+  const arrStr = '[object Array]';
+  const toStr = Object.prototype.toString;
+
+  // 私有方法
+  const inArray = function (haystack, needle) {
+    for (let i = 0, max = haystack.length; i < max; i += 1) {
+      if (haystack[i] === needle) {
+        return i;
+      }
+    }
+
+    return -1;
+  };
+  const isArray = function (a) {
+    return toStr.call(a) === arrayString;
+  };
+
+  // 初始化模式:
+  // 初始化代码, 只执行一次.
+
+  // 揭示公共接口.
+  return {
+    isArray,
+    indexOf: inArray,
+  };
+})(APP, this);
 ```
 
 ### Sandbox Module Pattern
