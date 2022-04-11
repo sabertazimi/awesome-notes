@@ -2829,10 +2829,10 @@ const truthy = Function[[proto]][[proto]] === Object.prototype; // true
   - setTimeout 和 setInterval 中传入的 Callbacks
     会自动转变为 Function Invocation,
     `this` bind to global/undefined object.
-  - 同理, React Class Component 中传入的 Event Handlers
+  - React Class Component 中传入的 Event Handlers
     会自动转变为 Function Invocation,
     需要显式地 `this.handleClick = this.handleClick.bind(this);`
-- Method Invocation 方法调用模式: this 绑定至此方法所属的对象
+- Method Invocation 方法调用模式: this 绑定至此方法所属的对象.
 
 ```ts
 add(1, 2); // this -> global
@@ -2870,6 +2870,24 @@ class Hero {
 const batman = new Hero('Batman');
 setTimeout(batman.logName, 1000);
 // after 1 second logs "undefined"
+```
+
+```ts
+// Non-strict mode:
+window.identity = 'The Window';
+
+const object = {
+  identity: 'My Object',
+  getIdentityFunc() {
+    return function () {
+      return this.identity;
+    };
+  },
+};
+
+// Function invocation:
+// Anonymous closure function `this` bind to `window`.
+console.log(object.getIdentityFunc()()); // 'The Window'
 ```
 
 #### Explicit Binding
