@@ -578,17 +578,8 @@ const booleanType = typeof Boolean(1); // "boolean"
 
 - A Symbol is a **unique** and **immutable** primitive value
   and may be used as the key of an Object property.
-- Symbols don't auto-convert to "strings" and can't convert to numbers
-
-```ts
-const arr = ['a', 'b', 'c'];
-const iter = arr[Symbol.iterator]();
-
-iter.next(); // { value: 'a', done: false }
-iter.next(); // { value: 'b', done: false }
-iter.next(); // { value: 'c', done: false }
-iter.next(); // { value: undefined, done: true }
-```
+- Symbols don't auto-convert to strings and can't convert to numbers.
+- `Symbol.for(key)` create global Symbol registry.
 
 ```ts
 // eslint-disable-next-line symbol-description
@@ -608,11 +599,24 @@ console.log(fooGlobalSymbol === otherFooGlobalSymbol); // true
 
 #### Built-in Symbol Methods
 
+[Symbol methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol#static_properties):
+
 - `[Symbol.iterator]()`: `for of`.
 - `[Symbol.asyncIterator]()`: `for await of`.
 - `[Symbol.match/replace/search/split](target)`: `string.match/replace/search/split(classWithSymbolFunction)`.
 - `[Symbol.toPrimitive](hint)`: 强制类型转换.
 - `[Symbol.hasInstance](target)`: `instance of`.
+- `[Symbol.species]()`.
+
+```ts
+const arr = ['a', 'b', 'c'];
+const iter = arr[Symbol.iterator]();
+
+iter.next(); // { value: 'a', done: false }
+iter.next(); // { value: 'b', done: false }
+iter.next(); // { value: 'c', done: false }
+iter.next(); // { value: undefined, done: true }
+```
 
 ```ts
 class Bar {}
@@ -627,6 +631,21 @@ console.log(Bar[Symbol.hasInstance](b)); // true
 console.log(b instanceof Bar); // true
 console.log(Baz[Symbol.hasInstance](b)); // false
 console.log(b instanceof Baz); // false
+```
+
+```ts
+class SuperArray extends Array {
+  static get [Symbol.species]() {
+    return Array;
+  }
+}
+
+const a1 = new SuperArray(1, 2, 3, 4, 5);
+const a2 = a1.filter(x => !!(x % 2));
+console.log(a1); // [1, 2, 3, 4, 5]
+console.log(a2); // [1, 3, 5]
+console.log(a1 instanceof SuperArray); // true
+console.log(a2 instanceof SuperArray); // false
 ```
 
 ## Reference Values
