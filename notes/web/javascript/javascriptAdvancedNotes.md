@@ -1879,7 +1879,7 @@ g.return(1); // { value: 1, done: true }
 ```
 
 因为生成器对象实现了 Iterable 接口,
-生成器函数和默认迭代器被调用之后都产生迭代器,
+生成器函数和默认迭代器**被调用**之后都产生迭代器,
 所以生成器适合作为默认迭代器:
 
 ```ts
@@ -1926,6 +1926,9 @@ for (const x of f) {
 
 Early return:
 
+- `return()` 方法会强制生成器进入关闭状态.
+- 提供给 `return()` 的值, 就是终止迭代器对象的值.
+
 ```ts
 function* gen() {
   yield 1;
@@ -1941,6 +1944,11 @@ g.next(); // { value: undefined, done: true }
 ```
 
 Error handling:
+
+- `throw()` 方法会在暂停的时候将一个提供的错误注入到生成器对象中.
+  如果错误未被处理, 生成器就会关闭.
+- 假如生成器函数内部处理了这个错误, 那么生成器就不会关闭, 可以恢复执行.
+  错误处理会跳过对应的 yield (跳过一个值).
 
 ```ts
 function* generator() {
