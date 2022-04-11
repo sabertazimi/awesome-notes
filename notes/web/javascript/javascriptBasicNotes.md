@@ -1846,11 +1846,11 @@ const truthy = Function instanceof Object;
 ### Object Constructor
 
 - 首字母大写.
-- 所有函数 (包括构造函数)有 prototype 属性.
+- 所有函数 (包括构造函数) 有 `prototype` 属性.
 
 #### Object Literal
 
-对象字面量由 Object 构造函数 隐式构造;
+对象字面量由 `Object` 构造函数隐式构造;
 
 ```ts
 const obj = {
@@ -1943,9 +1943,10 @@ const obj = new MyClass();
 console.log(obj.name); // 输出: sven .
 ```
 
-#### Constructor Instance
+#### Constructor Instance Detection
 
-若 在实例对象的原型链(`__proto__`)中 能找到 构造函数的`prototype`属性(Prototype 对象), 则返回`true`, 否则返回`false`
+若在实例对象的原型链 (`__proto__`) 中能找到构造函数的 `prototype` 属性 (Prototype 对象),
+则返回`true`, 否则返回`false`:
 
 ```ts
 // true only if
@@ -2008,44 +2009,6 @@ class D extends C {
 const c = new C(); // logs class C{constructor(){console.log(new.target);}}
 const d = new D(); // logs class D extends C{constructor(){super();}}
 ```
-
-### Global Object
-
-```ts
-// 立即函数模式:
-// 此时返回值不是函数本身,而是函数执行后的return语句返回值
-const global = (function () {
-  // 返回全局对象
-  return this;
-})();
-```
-
-Global Object 属性:
-
-- undefined.
-- NaN.
-- Infinity.
-- Object.
-- Array.
-- Function.
-- Boolean.
-- String.
-- Number.
-- Date.
-- RegExp.
-- Symbol.
-- Error.
-- EvalError.
-- RangeError.
-- ReferenceError.
-- SyntaxError.
-- TypeError.
-- URIError.
-- encodeURI.
-- encodeURIComponent.
-- decodeURI.
-- decodeURIComponent.
-- eval.
 
 ### Object Descriptor
 
@@ -2634,6 +2597,44 @@ class SubClass extends SuperClass {
 // 'subField2'
 // 'static block 2 SubClass'
 ```
+
+### Global Object
+
+```ts
+// 立即函数模式:
+// 此时返回值不是函数本身,而是函数执行后的return语句返回值
+const global = (function () {
+  // 返回全局对象
+  return this;
+})();
+```
+
+Global Object 属性:
+
+- undefined.
+- NaN.
+- Infinity.
+- Object.
+- Array.
+- Function.
+- Boolean.
+- String.
+- Number.
+- Date.
+- RegExp.
+- Symbol.
+- Error.
+- EvalError.
+- RangeError.
+- ReferenceError.
+- SyntaxError.
+- TypeError.
+- URIError.
+- encodeURI.
+- encodeURIComponent.
+- decodeURI.
+- decodeURIComponent.
+- eval.
 
 ## Function
 
