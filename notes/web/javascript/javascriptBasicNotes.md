@@ -1926,6 +1926,9 @@ const employee = new Employee('Jack');
 
 #### Object Create Constructor
 
+- 原型式继承非常适合不需要单独创建构造函数, 但仍然需要在对象间共享信息的场合.
+- 属性中包含的引用值始终会在相关对象间共享.
+
 ```ts
 Object.create = function (o) {
   if (arguments.length > 1) {
