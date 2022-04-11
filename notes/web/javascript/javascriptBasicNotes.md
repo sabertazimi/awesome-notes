@@ -2417,9 +2417,7 @@ const inherit = (function () {
     C.super = P.prototype; // 此句可提高代码的重用性
   };
 })();
-```
 
-```ts
 Child.prototype.add = function () {
   return Child.super.add.call(this);
 };
@@ -2463,9 +2461,7 @@ const classSim = function (Parent, props) {
   // return the "class"
   return Child;
 };
-```
 
-```ts
 const SuperMan = classSim(Man, {
   _construct(what) {
     console.log("SuperMan's constructor");
@@ -2483,8 +2479,8 @@ const SuperMan = classSim(Man, {
 与类式继承 (**借用构造函数**)
 混合继承模式:
 
-- `child.prototype = new Parent();`
-- `Parent.apply(this, arguments);`
+- `child.prototype = new Parent(); Child.prototype.constructor = Child`.
+- `Parent.apply(this, arguments)`: 借用构造函数可以防止引用类型被迫共享.
 
 此模式会使得子类属性继承 2 次:
 
@@ -2497,8 +2493,9 @@ Parent.prototype.say = function () {
   return this.name;
 };
 
-// child constructor
+// Child constructor
 function Child(...args) {
+  // 解决引用类型共享问题
   Parent.apply(this, args);
 }
 
