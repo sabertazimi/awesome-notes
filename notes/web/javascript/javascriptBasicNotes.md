@@ -8,9 +8,19 @@ tags: [Web, JavaScript]
 
 # JavaScript Basic Notes
 
-## Variables
+## TC39
 
-### Primitive Values
+- [Technical Committees 39](https://www.ecma-international.org/technical-committees/tc39 'TC39')
+- [New Feature Process](http://tc39.github.io/process-document)
+
+JavaScript = ECMAScript + DOM + BOM:
+
+- ECMAScript: ECMA-262.
+- DOM: DOM Core + DOM HTML (`document`).
+- BOM: Browser Object Model API (HTML5)
+  (`window`/`navigator`/`location`/`screen`/`performance` etc).
+
+## Primitive Values
 
 Primitive data types:
 
@@ -22,12 +32,12 @@ Primitive data types:
 - Symbol.
 - BigInt.
 
-#### Undefined
+### Undefined
 
 - 对象属性未定义时, 该属性值为 `undefined`.
 - 未初始化变量的初值为 `undefined` (表示等待被赋值).
 
-#### Null
+### Null
 
 当引用为空或引用对象不存在时, 值为 `null`.
 `null` 值表示一个空对象指针.
@@ -38,7 +48,7 @@ Primitive data types:
 
 :::
 
-#### Boolean
+### Boolean
 
 - 零值表达式:
   - `0`/`NaN`.
@@ -46,7 +56,7 @@ Primitive data types:
   - `null`.
   - `undefined`.
 
-#### NaN
+### NaN
 
 :::danger NaN
 
@@ -66,7 +76,7 @@ function isNumber(value) {
 }
 ```
 
-#### Float
+### Float
 
 - 计算浮点数时, 应先计算整数, 再利用移位/乘法/除法转化为浮点数.
 - 浮点值的精确度最高可达 17 位小数.
@@ -75,9 +85,26 @@ function isNumber(value) {
 const a = (1 + 2) / 10; // a = 0.1 + 0.2;
 ```
 
-#### Number
+### Number
 
-##### Infinity
+- 0bxxx/0Bxxx.
+- 0oxxx/0Oxxx.
+- `Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()`.
+- `Number.toFixed()/toExponential()/toPrecision()`.
+- Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`.
+- `**` 指数运算符.
+- BigInt.
+
+```ts
+const a = 2172141653;
+const b = 15346349309;
+const c1 = a * b;
+// => 33334444555566670000
+const c2 = BigInt(a) * BigInt(b);
+// => 33334444555566667777n
+```
+
+#### Infinity
 
 Infinity represents all values greater than 1.7976931348623157e+308.
 Infinity will be converted to `null` with `JSON.stringify()`.
@@ -102,16 +129,16 @@ console.log(Math.max()); // -Infinity
 console.log(Math.min()); // Infinity
 ```
 
-#### String
+### String
 
-##### String Primitive Feature
+#### String Primitive Feature
 
 作为基本变量:
 
 - 字符串中的字符不可枚举 (for in 循环).
 - `delete` 无法删除某位字符.
 
-##### String Reference Feature
+#### String Reference Feature
 
 - 赋值与传参 传递 string 字符串常量 的引用.
 - 所有 string 量 都是不可变量, 当对 string 进行操作后, 将先会在堆区创建副本, 再通过副本进行修改, 并返回副本的索引.
@@ -165,7 +192,314 @@ console.log(stringValue.substring(3, -4)); // "hel"
 console.log(stringValue.substr(3, -4)); // "" (empty string)
 ```
 
-#### Object Wrappers for Primitive Type
+#### String Unicode
+
+```ts
+// eslint-disable-next-line no-self-compare
+const truthy = 'z' === 'z'; // true
+// eslint-disable-next-line no-octal-escape
+const truthy = '\172' === 'z'; // true
+const truthy = '\x7A' === 'z'; // true
+const truthy = '\u007A' === 'z'; // true
+const truthy = '\u{7A}' === 'z'; // true
+```
+
+#### String Methods
+
+- `string.charAt(index)`.
+- `string.charCodeAt(index)`.
+- `string.fromCharCode(charCode)`.
+- `string.codePointAt(index)`: 正确处理 4 字节存储字符.
+- `string.fromCodePoint(codePoint)`: 正确处理 4 字节存储字符.
+
+```ts
+function is32Bit(c) {
+  return c.codePointAt(0) > 0xffff;
+}
+
+// True:
+const truthy = String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y';
+```
+
+- `string.includes(substr)`.
+- `string.startsWith(substr)`.
+- `string.endsWith(substr)`.
+- 使用第二个参数 n 时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束.
+
+```ts
+const s = 'Hello world!';
+
+s.startsWith('world', 6); // true
+s.endsWith('Hello', 5); // true
+s.includes('Hello', 6); // false
+```
+
+- `repeat(times)`.
+
+```ts
+'hello'.repeat(2); // "hellohello"
+'na'.repeat(2.9); // "nana"
+
+'na'.repeat(-0.9); // ""
+'na'.repeat(-1); // RangeError
+
+'na'.repeat(NaN); // ""
+'na'.repeat(Infinity); // RangeError
+
+'na'.repeat('na'); // ""
+'na'.repeat('3'); // "nanana"
+```
+
+- `padStart(len, paddingStr)`.
+- `padEnd(len, paddingStr)`.
+
+```ts
+'1'.padStart(10, '0'); // "0000000001"
+'12'.padStart(10, '0'); // "0000000012"
+'123456'.padStart(10, '0'); // "0000123456"
+
+'12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-MM-12"
+'09-12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-09-12"
+```
+
+- `trimLeft()`/`trimStart()`: remove start whitespace.
+- `trimRight()`/`trimEnd()`: remove end whitespace.
+- `matchAll(regexp)`.
+- `replaceAll`:
+  - `replaceAll(regexp, newSubstr)`.
+  - `replaceAll(regexp, replacerFunction)`.
+  - `replaceAll(substr, newSubstr)`.
+  - `replaceAll(substr, replacerFunction)`.
+
+```ts
+// eslint-disable-next-line prefer-regex-literals
+const regexp = new RegExp('foo[a-z]*', 'g');
+const str = 'table football, foosball';
+const matches = str.matchAll(regexp);
+
+for (const match of matches) {
+  console.log(
+    `Found ${match[0]} start=${match.index} end=${
+      match.index + match[0].length
+    }.`
+  );
+}
+// expected output: "Found football start=6 end=14."
+// expected output: "Found foosball start=16 end=24."
+
+// matches iterator is exhausted after the for..of iteration
+// Call matchAll again to create a new iterator
+Array.from(str.matchAll(regexp), m => m[0]);
+// Array [ "football", "foosball" ]
+```
+
+```ts
+'aabbcc'.replaceAll('b', '.');
+// => 'aa..cc'
+
+'aabbcc'.replaceAll(/b/g, '.');
+// => 'aa..cc'
+```
+
+#### Template String
+
+`str` 表示模板字符串:
+
+```ts
+// 普通字符串
+`In JavaScript '\n' is a line-feed.``\`Yo\` World!``In JavaScript this is // 多行字符串
+ not legal.``${
+  x // 引用变量
+} + ${y * 2} = ${x + y * 2}``${obj.x + obj.y}``foo ${
+  fn() // 调用函数
+} bar`;
+```
+
+#### Tagged Templates
+
+```ts
+const boldify = (parts, ...insertedParts) => {
+  return parts
+    .map((s, i) => {
+      if (i === insertedParts.length) return s;
+      return `${s}<strong>${insertedParts[i]}</strong>`;
+    })
+    .join('');
+};
+
+const name = 'Sabertaz';
+console.log(boldify`Hi, my name is ${name}!`);
+// => "Hi, my name is <strong>Sabertaz</strong>!"
+```
+
+```ts
+function template(strings, ...keys) {
+  return function (...values) {
+    const dict = values[values.length - 1] || {};
+    const result = [strings[0]];
+    keys.forEach(function (key, i) {
+      const value = Number.isInteger(key) ? values[key] : dict[key];
+      result.push(value, strings[i + 1]);
+    });
+    return result.join('');
+  };
+}
+
+const t1Closure = template`${0}${1}${0}!`;
+t1Closure('Y', 'A'); // "YAY!"
+const t2Closure = template`${0} ${'foo'}!`;
+t2Closure('Hello', { foo: 'World' }); // "Hello World!"
+```
+
+编译模板 (小型模板引擎):
+
+```ts
+function compile(template) {
+  const evalExpr = /<%=(.+?)%>/g;
+  const expr = /<%([\s\S]+?)%>/g;
+
+  template = template
+    .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
+    .replace(expr, '`); \n $1 \n  echo(`');
+
+  template = `echo(\`${template}\`);`;
+
+  const script = `(function parse(data){
+      let output = "";
+
+      function echo(html){
+        output += html;
+      }
+
+      ${template}
+
+      return output;
+    })`;
+
+  return script;
+}
+
+const template = `
+<ul>
+  <% for(let i=0; i < data.supplies.length; i++) { %>
+    <li><%= data.supplies[i] %></li>
+  <% } %>
+</ul>
+`;
+const parse = compile(template);
+div.innerHTML = parse({ supplies: ['broom', 'mop', 'cleaner'] });
+// => <ul>
+// =>   <li>broom</li>
+// =>   <li>mop</li>
+// =>   <li>cleaner</li>
+// => </ul>
+
+// 下面的hashTemplate函数
+// 是一个自定义的模板处理函数
+const libraryHtml = hashTemplate`
+  <ul>
+    #for book in ${myBooks}
+      <li><i>#{book.title}</i> by #{book.author}</li>
+    #end
+  </ul>
+`;
+```
+
+国际化处理:
+
+```ts
+i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`;
+// "欢迎访问xxx，您是第xxxx位访问者！"
+```
+
+XSS protection:
+
+```ts
+const message = SaferHTML`<p>${sender} has sent you a message.</p>`;
+
+function SaferHTML(templateString, ...expressions) {
+  let s = templateString[0];
+
+  for (let i = 0; i < expressions.length; i++) {
+    const expression = String(expressions[i]);
+
+    // Escape special characters in the substitution.
+    s += expression
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+
+    // Don't escape special characters in the template.
+    s += templateString[i + 1];
+  }
+
+  return s;
+}
+```
+
+运行代码:
+
+```ts
+jsx`
+  <div>
+    <input
+      ref='input'
+      onChange='${this.handleChange}'
+      defaultValue='${this.state.value}' />
+      ${this.state.value}
+   </div>
+`;
+
+java`
+class HelloWorldApp {
+  public static void main(String[] args) {
+    System.out.println(“Hello World!”); // Display the string.
+  }
+}
+`;
+HelloWorldApp.main();
+```
+
+#### Raw String
+
+```ts
+console.log(`\u00A9`); // ©
+console.log(String.raw`\u00A9`); // \u00A9
+```
+
+```ts
+console.log(`first line\nsecond line`);
+// first line
+// second line
+console.log(String.raw`first line\nsecond line`);
+// "first line\nsecond line"
+```
+
+```ts
+function printRaw(strings) {
+  console.log('Actual characters:');
+
+  for (const string of strings) {
+    console.log(string);
+  }
+
+  console.log('Escaped characters;');
+
+  for (const rawString of strings.raw) {
+    console.log(rawString);
+  }
+}
+
+printRaw`\u00A9${'and'}\n`;
+// Actual characters:
+// ©
+// (换行符)
+// Escaped characters:
+// \u00A9
+// \n
+```
+
+### Object Wrappers for Primitive Type
 
 Using the wrapper function without the new keyword
 is a useful way of coercing a value into a primitive type.
@@ -240,70 +574,414 @@ const stringType = typeof String(1); // "string"
 const booleanType = typeof Boolean(1); // "boolean"
 ```
 
-### Variable Hoisting
+### Symbol
 
-`var` 表达式和 `function` 声明都将会被提升到当前作用域 (全局作用域/函数作用域) 顶部,
-其余表达式顺序不变.
-
-<!-- eslint-disable vars-on-top -->
-<!-- eslint-disable no-var -->
+- A Symbol is a **unique** and **immutable** primitive value
+  and may be used as the key of an Object property.
+- Symbols don't auto-convert to "strings" and can't convert to numbers
 
 ```ts
-// 我们知道这个行不通 (假设没有未定义的全局变量)
-function example() {
-  console.log(notDefined); // => throws a ReferenceError
-}
+const arr = ['a', 'b', 'c'];
+const iter = arr[Symbol.iterator]();
 
-// 在引用变量后创建变量声明将会因变量提升而起作用。
-// 注意: 真正的值 `true` 不会被提升。
-function example() {
-  console.log(declaredButNotAssigned); // => undefined
-  var declaredButNotAssigned = true;
-}
-
-// 解释器将变量提升到函数的顶部
-// 这意味着我们可以将上边的例子重写为：
-function example() {
-  let declaredButNotAssigned;
-  console.log(declaredButNotAssigned); // => undefined
-  declaredButNotAssigned = true;
-}
-
-// 使用 const 和 let
-function example() {
-  console.log(declaredButNotAssigned); // => throws a ReferenceError
-  console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
-  const declaredButNotAssigned = true;
-}
+iter.next(); // { value: 'a', done: false }
+iter.next(); // { value: 'b', done: false }
+iter.next(); // { value: 'c', done: false }
+iter.next(); // { value: undefined, done: true }
 ```
 
-<!-- eslint-enable vars-on-top -->
-<!-- eslint-enable no-var -->
-<!-- eslint-disable vars-on-top -->
-<!-- eslint-disable no-var -->
+```ts
+// eslint-disable-next-line symbol-description
+const genericSymbol = Symbol();
+// eslint-disable-next-line symbol-description
+const otherGenericSymbol = Symbol();
+console.log(genericSymbol === otherGenericSymbol); // false
+
+const fooSymbol = Symbol('foo');
+const otherFooSymbol = Symbol('foo');
+console.log(fooSymbol === otherFooSymbol); // false
+
+const fooGlobalSymbol = Symbol.for('foobar'); // 创建新符号
+const otherFooGlobalSymbol = Symbol.for('foobar'); // 重用已有符号
+console.log(fooGlobalSymbol === otherFooGlobalSymbol); // true
+```
+
+#### Built-in Symbol Methods
+
+- `[Symbol.iterator]()`: `for of`.
+- `[Symbol.asyncIterator]()`: `for await of`.
+- `[Symbol.match/replace/search/split](target)`: `string.match/replace/search/split(classWithSymbolFunction)`.
+- `[Symbol.toPrimitive](hint)`: 强制类型转换.
+- `[Symbol.hasInstance](target)`: `instance of`.
 
 ```ts
-function example() {
-  console.log(named); // => undefined
+class Bar {}
+class Baz extends Bar {
+  static [Symbol.hasInstance]() {
+    return false;
+  }
+}
 
-  named(); // => TypeError named is not a function
+const b = new Baz();
+console.log(Bar[Symbol.hasInstance](b)); // true
+console.log(b instanceof Bar); // true
+console.log(Baz[Symbol.hasInstance](b)); // false
+console.log(b instanceof Baz); // false
+```
 
-  superPower(); // => ReferenceError superPower is not defined
+## Reference Values
 
-  var named = function superPower() {
-    console.log('Flying');
+- Object e.g Date, RegExp.
+- Array.
+- Function.
+- Map.
+- Set.
+- WeakMap.
+- WeakSet.
+
+### Array
+
+- 与 Object 同源
+- 关联数组：`arrayName[“string”] = value;` 实际为 Array 对象添加属性`{string:value}`
+- 缓存数组长度:`int l = list.length`(访问`length`造成运算)
+- `[]`数组, `{}`对象
+- 数组在数值运算环境中转化为 0 (空数组)/ num (单一元素数组)/NaN (多元素数组/NaN 数组).
+
+```ts
+const array = [...Array(5).keys()]; // => [0, 1, 2, 3, 4]
+```
+
+#### Array Length
+
+- 数组下标满足 [0, 2^32-1) 即可
+- 运用大于 length 的下标, length 自动增大, 不会发生数组边界错误
+- length 等于 数组最后一个整数属性名+1, length 不一定等于 数组中有效元素个数
+
+#### Array Literals
+
+不使用构造函数,使用数组字面量创建数组
+
+```ts
+const arr1 = new Array(3); // 数组长度
+const arr2 = new Array(3.14); // RangeError
+```
+
+```ts
+if (typeof Array.isArray === 'undefined') {
+  Array.isArray = function (arg) {
+    // 其余对象返回值 [object Object/Number/String/Boolean]
+    return Object.prototype.toString.call(arg) === '[object Array]';
   };
 }
 ```
 
-<!-- eslint-enable vars-on-top -->
-<!-- eslint-enable no-var -->
+#### Array Includes
 
-### Reference Values
+No more `indexOf() > -1`.
 
-- Object e.g Date.
-- Array.
-- Function.
+#### Array From
+
+强大的**函数式**方法
+
+- 伪数组对象(array-like object)
+- 可枚举对象(iterable object)
+- 克隆数组
+- map 函数
+
+```ts
+// Set
+// Map
+
+// NodeList 对象
+const ps = document.querySelectorAll('p');
+Array.from(ps).forEach(function (p) {
+  console.log(p);
+});
+
+// arguments 对象
+function foo() {
+  // eslint-disable-next-line prefer-rest-params
+  const args = Array.from(arguments);
+  // ...
+}
+
+Array.from('hello');
+// => ['h', 'e', 'l', 'l', 'o']
+
+const namesSet = new Set(['a', 'b']);
+Array.from(namesSet); // ['a', 'b']
+
+// 克隆数组
+Array.from([1, 2, 3]);
+// => [1, 2, 3]
+
+Array.from(arrayLike, x => x * x);
+// =>
+Array.from(arrayLike).map(x => x * x);
+
+Array.from([1, 2, 3], x => x * x);
+// [1, 4, 9]
+
+// random array generation
+Array.from(Array(5).keys());
+// [0, 1, 2, 3, 4]
+```
+
+#### Array CopyWithin
+
+`copyWithin(dest, start, end)`, 替换数组元素，**修改原数组**:
+
+```ts
+[1, 2, 3, 4, 5].copyWithin(0, 3);
+// => [4, 5, 3, 4, 5]
+[1, 2, 3, 4, 5].copyWithin(0, -2, -1);
+// -2相当于3号位，-1相当于4号位
+// => [4, 2, 3, 4, 5]
+
+// 将2号位到数组结束，复制到0号位
+const i32a = new Int32Array([1, 2, 3, 4, 5]);
+i32a.copyWithin(0, 2);
+// => Int32Array [3, 4, 5, 4, 5]
+```
+
+#### Array Stack
+
+```ts
+arr.unshift(value); // 添加数组首元素
+arr.push(value); // 添加数组尾元素
+arr.shift(); // 删除数组首元素
+arr.pop(); // 删除数组尾元素
+```
+
+#### Array Slice and Merge
+
+- slice 不改变原数组, splice 改变原数组.
+
+```ts
+[].concat(otherArray);
+[string].join('连接符'); // 将字符串数组连接成字符串o
+string(charArray).split('割断点'); // 选择割断符,返回字符串数组
+[].slice(start, end); // [start] - [end - 1]
+[].splice(startIndex, lengthToDelete, insertElements); // 功能强大的多态方法
+```
+
+#### Array Replace
+
+```ts
+[].replace(oldSubStr, newStr);
+```
+
+#### Array Query
+
+```ts
+[].indexOf(element); // -1 or other.
+[].lastIndexOf(element); // -1 or other.
+[].includes(element); // boolean.
+[].find(callback); // element.
+[].findIndex(callback); // element index.
+```
+
+#### Array Find
+
+```ts
+arr.find(fn);
+arr.findIndex(fn);
+```
+
+#### Array Flat
+
+`[2, [2, 2]] => [2, 2, 2]`
+
+#### Array Element Filter
+
+相当于 Haskell 中的 List Filter:
+
+```ts
+const numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+const filterResult = numbers.filter((item, index, array) => item > 2);
+console.log(filterResult); // 3,4,5,4,3
+```
+
+#### Array Boolean Filter
+
+- `Array.every(filer)`.
+- `Array.some(filer)`.
+
+```ts
+const numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+const everyResult = numbers.every((item, index, array) => item > 2);
+const someResult = numbers.some((item, index, array) => item > 2);
+console.log(everyResult); // false
+console.log(someResult); // true
+```
+
+#### Array Map
+
+相当于 Haskell 中的 List Map:
+
+```ts
+[].map(item => item + 1); // map over
+```
+
+#### Array FlatMap
+
+map + flat.
+
+#### Array Traverse
+
+```ts
+array.forEach(val => {}); // 遍历数组所有元素.
+```
+
+#### Array Reduce
+
+相当于 Haskell 中的 fold:
+
+```ts
+[].reduce(
+  (previous, current, currentIndex, arr) => current + previous,
+  initial
+); // fold function
+```
+
+#### Array Sort
+
+`toExchange`:
+
+- `return 1`: a, b 交换位置.
+- `return -1`: a, b 不交换位置.
+
+```ts
+arr.sort(toExchange);
+strings.sort((a, b) => a.localeCompare(b));
+strings.sort((a, b) => new Intl.Collator('en').compare(a, b));
+```
+
+#### Array Reverse
+
+```ts
+[].reverse();
+```
+
+```ts
+// Tips
+// 反转字符串
+const reverseStr = normalizedStr.split('').reverse().join('');
+```
+
+#### Array Deep Clone
+
+```ts
+const nestedArray = [1, [2], 3];
+const arrayCopy = JSON.parse(JSON.stringify(nestedArray));
+
+// Make some changes
+arrayCopy[0] = '1'; // change shallow element
+arrayCopy[1][0] = '3'; // change nested element
+console.log(arrayCopy); // [ '1', [ '3' ], 3 ]
+
+// Good: Nested array NOT affected
+console.log(nestedArray); //  1, [ 2 ], 3 ]
+```
+
+#### Spread Array
+
+```ts
+arr2.push(...arr1);
+```
+
+```ts
+const obj = { x: 1, y: 2, z: 3 };
+
+obj[Symbol.iterator] = function* () {
+  yield 1;
+  yield 2;
+  yield 3;
+};
+
+const array = [...obj]; // print [1, 2, 3]
+```
+
+#### Typed Array
+
+ArrayBuffer 其中一种视图 (用于 Web GL 高效率内存操作):
+
+```ts
+// 第一个参数是应该返回的数组类型
+// 其余参数是应该拼接在一起的定型数组
+function typedArrayConcat(TypedArrayConstructor, ...typedArrays) {
+  // 计算所有数组中包含的元素总数
+  const numElements = typedArrays.reduce((x, y) => (x.length || x) + y.length);
+  // 按照提供的类型创建一个数组，为所有元素留出空间
+  const resultArray = new TypedArrayConstructor(numElements);
+  // 依次转移数组
+  let currentOffset = 0;
+  typedArrays.forEach(x => {
+    resultArray.set(x, currentOffset);
+    currentOffset += x.length;
+  });
+  return resultArray;
+}
+
+const concatArray = typedArrayConcat(
+  Int32Array,
+  Int8Array.of(1, 2, 3),
+  Int16Array.of(4, 5, 6),
+  Float32Array.of(7, 8, 9)
+);
+
+console.log(concatArray); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+console.log(concatArray instanceof Int32Array); // true
+```
+
+#### Array Tips and Best Practice
+
+- 对字符串每个元素进行单独操作 e.g map/filter
+
+```ts
+str
+  .split('')
+  .map(function (subStr) {
+    return decode(subStr.charCodeAt(0));
+  })
+  .join('');
+
+str.split('').someOperator().join('');
+```
+
+- 实现 contains 方法
+
+```ts
+const contains = arr.includes(item);
+```
+
+- 改变某一处字母
+
+```ts
+after = after.charAt(0).toUpperCase() + after.slice(1);
+```
+
+- 删除只能指定元素
+
+```ts
+arr.splice(index, 1);
+```
+
+- Remove Duplicate Elements:
+
+```ts
+// 1: "Set"
+const array = [...new Set(array)];
+
+// 2: "Filter"
+array.filter((item, index) => array.indexOf(item) === index);
+
+// 3: "Reduce"
+array.reduce(
+  (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
+  []
+);
+```
 
 ### Date
 
@@ -382,187 +1060,321 @@ const getDateItemList = (year, month) => {
 };
 ```
 
-### Array
+### Map
 
-- 与 Object 同源
-- 关联数组：`arrayName[“string”] = value;` 实际为 Array 对象添加属性`{string:value}`
-- 缓存数组长度:`int l = list.length`(访问`length`造成运算)
-- `[]`数组, `{}`对象
-
-数组在 数值运算环境 中转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN 数组)
-
-#### Array Length
-
-- 数组下标满足 [0, 2^32-1) 即可
-- 运用大于 length 的下标, length 自动增大, 不会发生数组边界错误
-- length 等于 数组最后一个整数属性名+1, length 不一定等于 数组中有效元素个数
-
-#### Array Literals
-
-不使用构造函数,使用数组字面量创建数组
+- `size`.
+- `has()`.
+- `get()`.
+- `set()`.
+- `delete()`.
+- `clear()`.
+- `keys()`.
+- `values()`.
+- `entries()`.
 
 ```ts
-const arr1 = new Array(3); // 数组长度
-const arr2 = new Array(3.14); // RangeError
+const map = new Map([
+  // You define a map via an array of 2-element arrays. The first
+  // element of each nested array is the key, and the 2nd is the value
+  ['name', 'Jean-Luc Picard'],
+  ['age', 59],
+  ['rank', 'Captain'],
+]);
+
+// To get the value associated with a given `key` in a map, you
+// need to call `map.get(key)`. Using `map.key` will **not** work.
+map.get('name'); // 'Jean-Luc Picard'
 ```
 
 ```ts
-if (typeof Array.isArray === 'undefined') {
-  Array.isArray = function (arg) {
-    // 其余对象返回值 [object Object/Number/String/Boolean]
-    return Object.prototype.toString.call(arg) === '[object Array]';
+const map = new Map([]);
+
+// eslint-disable-next-line no-new-wrappers
+const n1 = new Number(5);
+// eslint-disable-next-line no-new-wrappers
+const n2 = new Number(5);
+
+map.set(n1, 'One');
+map.set(n2, 'Two');
+
+// `n1` and `n2` are objects, so `n1 !== n2`. That means the map has
+// separate keys for `n1` and `n2`.
+map.get(n1); // 'One'
+map.get(n2); // 'Two'
+map.get(5); // undefined
+
+// If you were to do this with an object, `n2` would overwrite `n1`
+const obj = {};
+obj[n1] = 'One';
+obj[n2] = 'Two';
+
+const two1 = obj[n1]; // 'Two'
+const two2 = obj[5]; // 'Two'
+```
+
+```ts
+const objectClone = new Map(Object.entries(object));
+const arrayClone = new Map(Array.from(map.entries));
+const map = new Map([
+  ['name', 'Jean-Luc Picard'],
+  ['age', 59],
+  ['rank', 'Captain'],
+]);
+
+// The `for/of` loop can loop through iterators
+for (const key of map.keys()) {
+  console.log(key); // 'name', 'age', 'rank'
+}
+
+for (const value of map.values()) {
+  console.log(value); // 'Jean-Luc Picard', 59, 'Captain'
+}
+
+for (const [key, value] of map.entries()) {
+  console.log(key); // 'name', 'age', 'rank'
+  console.log(value); // 'Jean-Luc Picard', 59, 'Captain'
+}
+```
+
+### Set
+
+- `size`.
+- `has()`.
+- `add()`.
+- `delete()`.
+- `clear()`.
+- `keys()`.
+- `values()`.
+- `entries()`.
+
+```ts
+class XSet extends Set {
+  union(...sets) {
+    return XSet.union(this, ...sets);
+  }
+
+  intersection(...sets) {
+    return XSet.intersection(this, ...sets);
+  }
+
+  difference(set) {
+    return XSet.difference(this, set);
+  }
+
+  symmetricDifference(set) {
+    return XSet.symmetricDifference(this, set);
+  }
+
+  cartesianProduct(set) {
+    return XSet.cartesianProduct(this, set);
+  }
+
+  powerSet() {
+    return XSet.powerSet(this);
+  }
+
+  // 返回两个或更多集合的并集
+  static union(a, ...bSets) {
+    const unionSet = new XSet(a);
+
+    for (const b of bSets) {
+      for (const bValue of b) {
+        unionSet.add(bValue);
+      }
+    }
+
+    return unionSet;
+  }
+
+  // 返回两个或更多集合的交集
+  static intersection(a, ...bSets) {
+    const intersectionSet = new XSet(a);
+
+    for (const aValue of intersectionSet) {
+      for (const b of bSets) {
+        if (!b.has(aValue)) {
+          intersectionSet.delete(aValue);
+        }
+      }
+    }
+
+    return intersectionSet;
+  }
+
+  // 返回两个集合的差集
+  static difference(a, b) {
+    const differenceSet = new XSet(a);
+
+    for (const bValue of b) {
+      if (a.has(bValue)) {
+        differenceSet.delete(bValue);
+      }
+    }
+
+    return differenceSet;
+  }
+
+  // 返回两个集合的对称差集
+  static symmetricDifference(a, b) {
+    // 按照定义，对称差集可以表达为:
+    return a.union(b).difference(a.intersection(b));
+  }
+
+  // 返回两个集合（数组对形式）的笛卡儿积
+  // 必须返回数组集合，因为笛卡儿积可能包含相同值的对
+  static cartesianProduct(a, b) {
+    const cartesianProductSet = new XSet();
+
+    for (const aValue of a) {
+      for (const bValue of b) {
+        cartesianProductSet.add([aValue, bValue]);
+      }
+    }
+
+    return cartesianProductSet;
+  }
+
+  // 返回一个集合的幂集
+  static powerSet(a) {
+    const powerSet = new XSet().add(new XSet());
+
+    for (const aValue of a) {
+      for (const set of new XSet(powerSet)) {
+        powerSet.add(new XSet(set).add(aValue));
+      }
+    }
+
+    return powerSet;
+  }
+}
+```
+
+### WeakMap and WeakSet
+
+WeakMap 结构与 Map 结构基本类似,
+唯一的区别就是 WeakMap 只接受**非 null 对象**作为键名:
+
+- 弱键: 键名构建的引用**无法阻止对象执行垃圾回收**.
+- 不可迭代键: 键/值随时可能被垃圾回收, 无需提供迭代能力, 无 `clear()` 方法.
+
+它的键所对应的对象可能会在将来消失.
+一个对应 DOM 元素的 WeakMap 结构,
+当某个 DOM 元素被清除,
+其所对应的 WeakMap 记录就会自动被移除.
+
+有时候我们会把对象作为一个对象的键用来存放属性值,
+普通集合类型比如简单对象 (Object/Map/Set) 会阻止垃圾回收器对这些作为属性键存在的对象的回收,
+有造成内存泄漏的危险,
+WeakMap/WeakSet 则更加**内存安全**.
+
+## Variable Hoisting
+
+- 一方面规定, `var`/`function` 声明的全局变量,
+  依旧是全局对象的属性, 意味着会`Hoisting`.
+- 另一方面规定, `let`/`const`/`class` 声明的全局变量,
+  不属于全局对象的属性, 意味着不会`Hoisting`.
+- `var` 只有函数作用域, `let`/`const` 拥有块级作用域.
+- `var` 表达式和 `function` 声明都将会被提升到当前作用域 (全局作用域/函数作用域) 顶部,
+  其余表达式顺序不变.
+
+<!-- eslint-disable vars-on-top -->
+<!-- eslint-disable no-var -->
+
+```ts
+// 我们知道这个行不通 (假设没有未定义的全局变量)
+function example() {
+  console.log(notDefined); // => throws a ReferenceError
+}
+
+// 在引用变量后创建变量声明将会因变量提升而起作用。
+// 注意: 真正的值 `true` 不会被提升。
+function example() {
+  console.log(declaredButNotAssigned); // => undefined
+  var declaredButNotAssigned = true;
+}
+
+// 解释器将变量提升到函数的顶部
+// 这意味着我们可以将上边的例子重写为：
+function example() {
+  let declaredButNotAssigned;
+  console.log(declaredButNotAssigned); // => undefined
+  declaredButNotAssigned = true;
+}
+
+// 使用 const 和 let
+function example() {
+  console.log(declaredButNotAssigned); // => throws a ReferenceError
+  console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
+  const declaredButNotAssigned = true;
+}
+```
+
+<!-- eslint-enable vars-on-top -->
+<!-- eslint-enable no-var -->
+<!-- eslint-disable vars-on-top -->
+<!-- eslint-disable no-var -->
+
+```ts
+function example() {
+  console.log(named); // => undefined
+
+  named(); // => TypeError named is not a function
+
+  superPower(); // => ReferenceError superPower is not defined
+
+  var named = function superPower() {
+    console.log('Flying');
   };
 }
 ```
 
-#### Array Methods
+<!-- eslint-enable vars-on-top -->
+<!-- eslint-enable no-var -->
 
-##### Array Sort
+### Let Variable
 
-`toExchange`:
-
-- `return 1`: a, b 交换位置.
-- `return -1`: a, b 不交换位置.
-
-```ts
-arr.sort(toExchange);
-strings.sort((a, b) => a.localeCompare(b));
-strings.sort((a, b) => new Intl.Collator('en').compare(a, b));
-```
-
-##### Array Reverse
+- 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError.
+- 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone).
+- `let` variable in `for-loop` closure,
+  every closure for each loop
+  binds the block-scoped variable.
 
 ```ts
-[].reverse();
+const a = 1;
+
+b = 3; // temporal dead zone: throw reference error
+
+let b = 2;
 ```
+
+`let` 变量拥有块级作用域:
 
 ```ts
-// Tips
-// 反转字符串
-const reverseStr = normalizedStr.split('').reverse().join('');
+// for (var i = 0; i < 5; ++i) {
+//   setTimeout(() => console.log(i), 0);
+// }
+// Output 5, 5, 5, 5, 5.
+// 所有的 i 都是同一个变量, 输出同一个最终值.
+
+for (let i = 0; i < 5; ++i) {
+  setTimeout(() => console.log(i), 0);
+}
+// Output: 0, 1, 2, 3, 4.
+// JavaScript 引擎会为每个迭代循环声明一个新的迭代变量.
+// 每个 setTimeout 引用的都是不同的变量实例.
 ```
 
-##### Array Iterator
+### Const Variable
 
-```ts
-[].map(item => item + 1); // map over
-[].filter(item => item === 0); // list comprehension
-[].reduce(
-  (previous, current, currentIndex, arr) => current + previous,
-  initial
-); // fold function
-```
+- const 一旦声明变量，就必须立即初始化，不能留到以后赋值.
+- 引用一个`Reference`变量时，只表示此变量地址不可变，但所引用变量的值/属性可变
+  (`xxx *const`, 即`const`指针, 指向一个变量).
+- 块级作用域.
+- 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone).
 
-##### Array Stack
-
-```ts
-arr.unshift(value); // 添加数组首元素
-arr.push(value); // 添加数组尾元素
-arr.shift(); // 删除数组首元素
-arr.pop(); // 删除数组尾元素
-```
-
-##### Array Slice and Merge
-
-- slice 不改变原数组, splice 改变原数组.
-
-```ts
-[].concat(otherArray);
-[string].join('连接符'); // 将字符串数组连接成字符串o
-string(charArray).split('割断点'); // 选择割断符,返回字符串数组
-[].slice(start, end); // [start] - [end - 1]
-[].splice(startIndex, lengthToDelete, insertElements); // 功能强大的多态方法
-```
-
-##### Array Replace
-
-```ts
-[].replace(oldSubStr, newStr);
-```
-
-##### Array Query
-
-```ts
-[].indexOf(element); // -1 or other.
-[].lastIndexOf(element); // -1 or other.
-[].includes(element); // boolean.
-[].find(callback); // element.
-[].findIndex(callback); // element index.
-```
-
-##### Array Traverse
-
-```ts
-array.forEach(val => {}); // 遍历数组所有元素.
-```
-
-##### Array Deep Clone
-
-```ts
-const nestedArray = [1, [2], 3];
-const arrayCopy = JSON.parse(JSON.stringify(nestedArray));
-
-// Make some changes
-arrayCopy[0] = '1'; // change shallow element
-arrayCopy[1][0] = '3'; // change nested element
-console.log(arrayCopy); // [ '1', [ '3' ], 3 ]
-
-// Good: Nested array NOT affected
-console.log(nestedArray); //  1, [ 2 ], 3 ]
-```
-
-#### Array Tips and Best Practice
-
-- 对字符串每个元素进行单独操作 e.g map/filter
-
-```ts
-str
-  .split('')
-  .map(function (subStr) {
-    return decode(subStr.charCodeAt(0));
-  })
-  .join('');
-
-str.split('').someOperator().join('');
-```
-
-- 实现 contains 方法
-
-```ts
-const contains = arr.includes(item);
-```
-
-- 改变某一处字母
-
-```ts
-after = after.charAt(0).toUpperCase() + after.slice(1);
-```
-
-- 删除只能指定元素
-
-```ts
-arr.splice(index, 1);
-```
-
-- Remove Duplicate Elements:
-
-```ts
-// 1: "Set"
-const array = [...new Set(array)];
-
-// 2: "Filter"
-array.filter((item, index) => array.indexOf(item) === index);
-
-// 3: "Reduce"
-array.reduce(
-  (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
-  []
-);
-```
+## Type Detection and Conversion
 
 ### Type Detection
-
-#### Type Detection Best Practice
 
 ```ts
 function typeOf(o) {
@@ -886,6 +1698,25 @@ console.log(old); // { data: 5 }
 console.log(old.data); // 5
 ```
 
+### Logical Operators
+
+- Optional Chaining Operator `?.`:
+  Legible property chains that don't throw an error
+  if a requested reference is missing.
+- Nullish coalescing operator `??`:
+  Binary operator.
+  If the value of left side expression is `null` or `undefined`,
+  right side of the operator is evaluated.
+- Logical assignment operators
+  `&&=`, `||=`, `??=`):
+  All of them are binary operators.
+  For `&&=`, if left side is truthy,
+  right-side expression is assigned to left side.
+  For `||=` if left side is falsy,
+  right-side expression is assigned to left side.
+  With the `??=`, if left-side value is `null` or `undefined`,
+  right-side expression is assigned to left side.
+
 ## Flow Control
 
 ### Switch Case Statement
@@ -1067,7 +1898,7 @@ const employee = newInstance(Employee, 'Jack');
 const employee = new Employee('Jack');
 ```
 
-#### Object Create API
+#### Object Create Constructor
 
 ```ts
 Object.create = function (o) {
@@ -1272,21 +2103,10 @@ Object.defineProperties(o, {
 
 #### Descriptor Functions
 
-- `Object.create(prototype[,descriptors])`.
-
-```ts
-const o = Object.create({
-  say() {
-    alert(this.name);
-  },
-  name: 'Byron',
-});
-```
-
 - `Object.getOwnPropertyDescriptor(O, property)`.
 - `Object.getOwnPropertyDescriptors(O)`.
 - `Object.getOwnPropertyNames(O)`.
-- `Object.keys()`: 仅获取可枚举的属性.
+- `Object.create(prototype[,descriptors])`.
 
 ```ts
 const props = Object.getOwnPropertyDescriptor(o, 'age');
@@ -1295,11 +2115,112 @@ console.log(props);
 
 console.log(Object.getOwnPropertyNames(o)); // ["age", "sex"]
 console.log(Object.keys(o)); // ["age"]
+
+const o = Object.create({
+  say() {
+    alert(this.name);
+  },
+  name: 'Byron',
+});
+```
+
+- `Object.keys()`: 仅获取可枚举的属性.
+- `Object.values()`.
+- `Object.entries()`.
+- `Object.fromEntries()`.
+
+```ts
+const score = {
+  saber: 42,
+  todd: 19,
+  ken: 4,
+  gan: 41,
+};
+
+Object.keys(score).map(k => score[k]);
+// => [ 42, 19, 4, 41 ]
+
+Object.values(score);
+// => [ 42, 19, 4, 41 ]
+
+Object.entries(score);
+/**
+ * =>
+ * [
+ * [ 'saber', 42 ],
+ * [ 'todd', 19 ],
+ * [ 'ken', 4 ],
+ * [ 'gan', 41 ],
+ * ]
+ */
+```
+
+```ts
+const object = { x: 42, y: 50, abc: 9001 };
+const result = Object.fromEntries(
+  Object.entries(object)
+    .filter(([key, value]) => key.length === 1)
+    .map(([key, value]) => [key, value * 2])
+);
+```
+
+```ts
+const map = new Map(Object.entries(object));
+const objectCopy = Object.fromEntries(map);
 ```
 
 - `Object.preventExtensions(O)`/`Object.isExtensible(O)`: 不可新增属性, 可删除/修改属性.
 - `Object.seal(O)`/`Object.isSealed(O)`: 不可新增/删除属性, 可修改属性.
 - `Object.freeze(O)`/`Object.isFrozen(O)`: 不可新增/删除/修改属性.
+- `Object.is`:
+
+```ts
+// Case 1: Evaluation result is the same as using ===
+Object.is(25, 25); // true
+Object.is('foo', 'foo'); // true
+Object.is('foo', 'bar'); // false
+Object.is(null, null); // true
+Object.is(undefined, undefined); // true
+Object.is(window, window); // true
+Object.is([], []); // false
+const foo = { a: 1 };
+const bar = { a: 1 };
+Object.is(foo, foo); // true
+Object.is(foo, bar); // false: different reference pointers.
+
+// Case 2: Signed zero
+Object.is(0, -0); // false
+Object.is(+0, -0); // false
+Object.is(-0, -0); // true
+Object.is(0n, -0n); // true
+
+// Case 3: NaN
+Object.is(NaN, 0 / 0); // true
+Object.is(NaN, Number.NaN); // true
+```
+
+```ts
+if (!Object.is) {
+  Object.defineProperty(Object, 'is', {
+    value: (x, y) => {
+      // SameValue algorithm
+      if (x === y) {
+        // return true if x and y are not 0, OR
+        // if x and y are both 0 of the same sign.
+        // This checks for cases 1 and 2 above.
+        return x !== 0 || 1 / x === 1 / y;
+      } else {
+        // return true if both x AND y evaluate to NaN.
+        // The only possibility for a variable to not be strictly equal to itself
+        // is when that variable evaluates to NaN (example: Number.NaN, 0/0, NaN).
+        // This checks for case 3.
+        // eslint-disable-next-line no-self-compare
+        return x !== x && y !== y;
+      }
+    },
+  });
+}
+```
 
 ### Private Property and Method
 
@@ -1550,6 +2471,170 @@ Child.prototype = new Parent(); // 设置原型链,建立继承关系
 Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor 对象形成闭环
 ```
 
+### Class
+
+```ts
+class A {
+  constructor(value) {
+    this.val = value;
+  }
+}
+
+class B extends A {
+  constructor(value) {
+    super(value);
+    console.log('New');
+  }
+}
+
+const b = new B(6);
+
+console.log(B[[proto]] === A);
+console.log(B.prototype.constructor === B);
+console.log(B.prototype[[proto]] === A.prototype);
+console.log(b[[proto]] === B.prototype);
+
+function AA(value) {
+  this.val = value;
+}
+
+function BB(value) {
+  AA.call(this, value);
+}
+
+BB.prototype = Object.create(AA.prototype);
+BB.prototype.constructor = BB;
+
+const bb = new BB(6);
+
+console.log(BB[[proto]] === Function.prototype); // not consistence with class syntax
+console.log(BB.prototype.constructor === BB);
+console.log(BB.prototype[[proto]] === AA.prototype);
+console.log(bb[[proto]] === BB.prototype);
+```
+
+禁止对复合对象字面量进行导出操作 (array literal, object literal).
+
+#### Class Private Member
+
+```ts
+class Dong {
+  constructor() {
+    this.#name = 'dog';
+    this.#age = 20;
+    this.friend = 'cat';
+  }
+
+  hello() {
+    return `I'm ${this.#name} ${this.#age} years old`;
+  }
+}
+```
+
+```ts
+const classPrivateFieldGet = (receiver, state) => {
+  return state.get(receiver);
+};
+
+const classPrivateFieldSet = (receiver, state, value) => {
+  state.set(receiver, value);
+};
+
+const dongName = new WeakMap();
+const dongAge = new WeakMap();
+
+class Dong {
+  constructor() {
+    classPrivateFieldSet(this, dongName, 'dong');
+    classPrivateFieldSet(this, dongAge, 20);
+  }
+
+  hello() {
+    return `I'm ${classPrivateFieldGet(this, dongName)}, ${classPrivateFieldGet(
+      this,
+      dongAge
+    )} years old`;
+  }
+}
+```
+
+#### Class Static Blocks
+
+Static blocks have access to class private member.
+Its mainly useful whenever set up multiple static fields.
+
+```ts
+class Foo {
+  static #count = 0;
+
+  get count() {
+    return Foo.#count;
+  }
+
+  static {
+    try {
+      const lastInstances = loadLastInstances();
+      Foo.#count += lastInstances.length;
+    } catch {}
+  }
+}
+```
+
+```ts
+class Translator {
+  static translations = {
+    yes: 'ja',
+  };
+
+  static englishWords = [];
+  static germanWords = [];
+  static {
+    for (const [english, german] of Object.entries(translations)) {
+      this.englishWords.push(english);
+      this.germanWords.push(german);
+    }
+  }
+}
+```
+
+```ts
+class SuperClass {
+  static superField1 = console.log('superField1');
+  static {
+    assert.equal(this, SuperClass);
+    console.log('static block 1 SuperClass');
+  }
+
+  static superField2 = console.log('superField2');
+  static {
+    console.log('static block 2 SuperClass');
+  }
+}
+
+class SubClass extends SuperClass {
+  static subField1 = console.log('subField1');
+  static {
+    assert.equal(this, SubClass);
+    console.log('static block 1 SubClass');
+  }
+
+  static subField2 = console.log('subField2');
+  static {
+    console.log('static block 2 SubClass');
+  }
+}
+
+// Output:
+// 'superField1'
+// 'static block 1 SuperClass'
+// 'superField2'
+// 'static block 2 SuperClass'
+// 'subField1'
+// 'static block 1 SubClass'
+// 'subField2'
+// 'static block 2 SubClass'
+```
+
 ## Function
 
 - 函数是对象.
@@ -1688,8 +2773,14 @@ Constructor Invocation: this 绑定至传入的空对象
 
 #### Arrow Function Binding
 
-- `this` defined where arrow function defined (not called) (**lexical scope**)
-- `apply`/`call`/`bind` can't change `this` in arrow function
+- `this` defined where arrow function defined (not called) (**lexical scope**).
+- `apply`/`call`/`bind` can't change `this` in arrow function.
+- No thisArgs binding.
+- No arguments binding.
+- No prototype binding.
+- No suited for `New` constructor.
+- Not suited as methods of plain object
+  (`this` in arrow function would be refer to `window`).
 
 ```ts
 const obj = {
@@ -2102,8 +3193,6 @@ console.log(decodeURIComponent(uri));
 
 #### Timer Function
 
-##### Interval Function
-
 Combine setInterval/setTimeout function with Closure,
 implement **time slicing scheduler**.
 
@@ -2122,6 +3211,1535 @@ function processArray(items, process, done) {
   }, 25);
 }
 ```
+
+## Destructuring Pattern Matching
+
+- **建议只要有可能，就不要在模式中放置圆括号**.
+- 赋值语句的非模式部分，可以使用圆括号.
+- Every time access value via `.`:
+  stop and think whether use destructuring instead.
+- Destructure as early as possible.
+- Remember to include default values, especially in nested destructuring.
+
+### Destructuring Default Value
+
+- ES6 内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
+- 如果一个数组成员不严格等于 undefined，默认值不会生效
+
+```ts
+const [x = 1] = [undefined];
+console.log(x); // 1
+
+const [x = 1] = [null];
+console.log(x); // null
+```
+
+```ts
+let [x = 1, y = x] = []; // x=1; y=1
+let [x = 1, y = x] = [2]; // x=2; y=2
+let [x = 1, y = x] = [1, 2]; // x=1; y=2
+let [x = y, y = 1] = []; // ReferenceError
+```
+
+### Destructuring Swap Value
+
+```ts
+[x, y] = [y, x];
+```
+
+### Function Parameters and Return Value Destructuring
+
+- 可用于工厂 (`factory`) / 设置 (`options`) 模式传参一般为 `options` 对象,
+- 具有固定的属性名.
+- 一次性定义多个参数.
+- 一次性定义多个参数的默认值.
+
+```ts
+// 参数是一组有次序的值
+function f1([x, y, z]) {}
+f1([1, 2, 3]);
+
+// 参数是一组无次序的值
+function f2({ x, y, z }) {}
+f2({ z: 3, y: 2, x: 1 });
+
+// 可省略 const foo = config.foo || 'default foo';
+jQuery.ajax = function (
+  url,
+  {
+    async = true,
+    beforeSend = function () {},
+    cache = true,
+    complete = function () {},
+    crossDomain = false,
+    global = true,
+    // ... more config
+  }
+) {
+  // ... do stuff
+};
+```
+
+```ts
+// 返回一个数组
+function example1() {
+  return [1, 2, 3];
+}
+const [a, b, c] = example1();
+
+// 返回一个对象
+function example2() {
+  return {
+    foo: 1,
+    bar: 2,
+  };
+}
+
+const { foo, bar } = example2();
+```
+
+```ts
+function add([x, y]) {
+  return x + y;
+}
+add([1, 2]) // 3
+  [([1, 2], [3, 4])].map(([a, b]) => a + b);
+// [ 3, 7 ]
+
+function move({ x = 0, y = 0 } = {}) {
+  return [x, y];
+}
+move({ x: 3, y: 8 }); // [3, 8]
+move({ x: 3 }); // [3, 0]
+move({}); // [0, 0]
+move(); // [0, 0]
+
+// 严格为 undefined 时，触发默认值设置
+[1, undefined, 3].map((x = 'yes') => x);
+// [ 1, 'yes', 3 ]
+```
+
+### JSON Object Destructuring
+
+```ts
+const jsonData = {
+  id: 42,
+  status: 'OK',
+  data: [867, 5309],
+};
+
+const { id, status, data: number } = jsonData;
+
+console.log(id, status, number);
+// 42, "OK", [867, 5309]
+```
+
+### Map and List Destructuring
+
+- `for index in Iterable<T>`: key.
+- `for [key, value] of Iterable<T>`: entry.
+
+```ts
+const map = new Map();
+map.set('first', 'hello');
+map.set('second', 'world');
+
+for (const [key, value] of map) {
+  console.log(`${key} is ${value}`);
+}
+// first is hello
+// second is world
+
+// 获取键名
+for (const [key] of map) {
+  // ...
+}
+
+// 获取键值
+for (const [, value] of map) {
+  // ...
+}
+```
+
+### Import Destructuring
+
+```ts
+const { SourceMapConsumer, SourceNode } = require('source-map');
+```
+
+### Iterator Destructuring
+
+等号右边必须为数组等实现了 Iterator 接口的对象, 否则报错:
+
+- Array.
+- Set.
+- Generator function.
+
+```ts
+const [foo, [[bar], baz]] = [1, [[2], 3]];
+console.log(foo); // 1
+console.log(bar); // 2
+console.log(baz); // 3
+
+const [, , third] = ['foo', 'bar', 'baz'];
+console.log(third); // "baz"
+
+const [x, , y] = [1, 2, 3];
+console.log(x); // 1
+console.log(y); // 3
+
+const [head, ...tail] = [1, 2, 3, 4];
+console.log(head); // 1
+console.log(tail); // [2, 3, 4]
+
+const [x, y, ...z] = ['a'];
+console.log(x); // "a"
+console.log(y); // undefined
+console.log(z); // []
+
+// Generator 函数
+function* fibs() {
+  let a = 0;
+  let b = 1;
+
+  while (true) {
+    yield a;
+    [a, b] = [b, a + b];
+  }
+}
+
+const [first, second, third, fourth, fifth, sixth] = fibs();
+console.log(sixth); // 5
+```
+
+### Object Destructuring
+
+- 真正被赋值的是后者，而不是前者.
+
+```ts
+const { pattern: variable } = { key: value };
+```
+
+- 解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象.
+- undefined/null 无法转化为对象.
+
+```ts
+const { prop: x } = undefined; // TypeError
+const { prop: y } = null; // TypeError
+```
+
+```ts
+const { bar, foo } = { foo: 'aaa', bar: 'bbb' };
+console.log(foo); // "aaa"
+console.log(bar); // "bbb"
+
+const { foo, bar } = { foo: 'aaa', bar: 'bbb' };
+
+const { baz } = { foo: 'aaa', bar: 'bbb' };
+console.log(baz); // undefined
+```
+
+```ts
+const { foo: baz } = { foo: 'aaa', bar: 'bbb' };
+console.log(baz); // "aaa"
+
+const obj = { first: 'hello', last: 'world' };
+const { first: f, last: l } = obj;
+console.log(f); // 'hello'
+console.log(l); // 'world'
+```
+
+```ts
+const { log, sin, cos } = Math;
+```
+
+### String Destructuring
+
+```ts
+const [a, b, c, d, e] = 'hello';
+console.log(a); // "h"
+console.log(b); // "e"
+console.log(c); // "l"
+console.log(d); // "l"
+console.log(e); // "o"
+
+const { length: len } = 'hello';
+console.log(len); // 5
+```
+
+### Number and Boolean Destructuring
+
+`number`/`boolean` 会自动构造原始值包装对象:
+
+```ts
+let { toString: s } = 123;
+const truthy = s === Number.prototype.toString; // true
+
+let { toString: s } = true;
+const truthy = s === Boolean.prototype.toString; // true
+```
+
+## Iterator
+
+- 一个数据结构只要实现了 `[Symbol.iterator]()` 接口, 便可成为可迭代数据结构 (`Iterable`):
+  - String: `StringIterator`.
+  - Array: `ArrayIterator`.
+  - Map: `MapIterator`.
+  - Set: `SetIterator`.
+  - `arguments` 对象.
+  - DOM collection (`NodeList`): `ArrayIterator`.
+- 接收可迭代对象的原生语言特性:
+  - `for...in`/`for...of`.
+  - Destructing: 数组解构.
+  - `...`: 扩展操作符.
+  - `Array.from()`.
+  - `new Map()`.
+  - `new Set()`.
+  - `Promise.all()`.
+  - `Promise.race()`.
+  - `yield *` 操作符.
+- 只有 `for...in` 可以遍历到原型上的属性.
+- `for...in`/`for...of` 隐形调用迭代器的方式, 称为内部迭代器, 使用方便, 不可自定义迭代过程.
+- `{ next, done, value }` 显式调用迭代器的方式, 称为外部迭代器, 使用复杂, 可以自定义迭代过程.
+- Object.getOwnPropertyNames, Object.getOwnPropertySymbols 和 Reflect.ownKeys 可获取到不可枚举的属性.
+- Object.getOwnPropertySymbols 和 Reflect.ownKeys 可获取到 Symbol 属性.
+
+```ts
+const IteratorResult = {
+  value: any,
+  done: boolean,
+};
+
+const Iterator = {
+  next() {
+    return IteratorResult;
+  },
+  return() {
+    // 迭代器提前提出: break/continue/throw/destructing.
+    return IteratorResult;
+  },
+  throw(e) {
+    throw e;
+  },
+};
+
+const Iterable = {
+  [Symbol.iterator]() {
+    return new Iterator();
+  },
+};
+
+const IterableIterator = {
+  next() {
+    return IteratorResult;
+  },
+  return() {
+    return IteratorResult;
+  },
+  [Symbol.iterator]() {
+    return this;
+  },
+};
+```
+
+### Synchronous Iterator
+
+```ts
+class Counter {
+  constructor(limit) {
+    this.limit = limit;
+  }
+
+  [Symbol.iterator]() {
+    let count = 1;
+    const limit = this.limit;
+
+    return {
+      next() {
+        if (count <= limit) {
+          return { done: false, value: count++ };
+        } else {
+          return { done: true };
+        }
+      },
+      return() {
+        console.log('Exiting early');
+        return { done: true };
+      },
+    };
+  }
+}
+
+const counter1 = new Counter(5);
+for (const i of counter1) {
+  if (i > 2) {
+    break;
+  }
+  console.log(i);
+}
+// 1
+// 2
+// Exiting early
+
+const counter2 = new Counter(5);
+try {
+  for (const i of counter2) {
+    if (i > 2) {
+      throw new Error('err');
+    }
+
+    console.log(i);
+  }
+} catch (e) {}
+// 1
+// 2
+// Exiting early
+
+const counter3 = new Counter(5);
+const [a, b] = counter3;
+// Exiting early
+```
+
+```ts
+function methodsIterator() {
+  let index = 0;
+  const methods = Object.keys(this)
+    .filter(key => {
+      return typeof this[key] === 'function';
+    })
+    .map(key => this[key]);
+
+  // iterator object
+  return {
+    next: () => ({
+      // Conform to Iterator protocol
+      done: index >= methods.length,
+      value: methods[index++],
+    }),
+  };
+}
+
+const myMethods = {
+  toString() {
+    return '[object myMethods]';
+  },
+  sumNumbers(a, b) {
+    return a + b;
+  },
+  numbers: [1, 5, 6],
+  [Symbol.iterator]: methodsIterator, // Conform to Iterable Protocol
+};
+
+for (const method of myMethods) {
+  console.log(method); // logs methods `toString` and `sumNumbers`
+}
+```
+
+### Asynchronous Iterator
+
+```ts
+const AsyncIterable = {
+  [Symbol.asyncIterator]() {
+    return AsyncIterator;
+  },
+};
+
+const AsyncIterator = {
+  next() {
+    return Promise.resolve(IteratorResult);
+  },
+  return() {
+    return Promise.resolve(IteratorResult);
+  },
+  throw(e) {
+    return Promise.reject(e);
+  },
+};
+
+const IteratorResult = {
+  value: any,
+  done: boolean,
+};
+```
+
+```ts
+function remotePostsAsyncIteratorsFactory() {
+  let i = 1;
+  let done = false;
+
+  const asyncIterableIterator = {
+    // the next method will always return a Promise
+    async next() {
+      // do nothing if we went out-of-bounds
+      if (done) {
+        return Promise.resolve({
+          done: true,
+          value: undefined,
+        });
+      }
+
+      const res = await fetch(
+        `https://jsonplaceholder.typicode.com/posts/${i++}`
+      ).then(r => r.json());
+
+      // the posts source is ended
+      if (Object.keys(res).length === 0) {
+        done = true;
+        return Promise.resolve({
+          done: true,
+          value: undefined,
+        });
+      } else {
+        return Promise.resolve({
+          done: false,
+          value: res,
+        });
+      }
+    },
+    [Symbol.asyncIterator]() {
+      return this;
+    },
+  };
+
+  return asyncIterableIterator;
+}
+
+(async () => {
+  const ait = remotePostsAsyncIteratorsFactory();
+
+  await ait.next(); // { done:false, value:{id: 1, ...} }
+  await ait.next(); // { done:false, value:{id: 2, ...} }
+  await ait.next(); // { done:false, value:{id: 3, ...} }
+  // ...
+  await ait.next(); // { done:false, value:{id: 100, ...} }
+  await ait.next(); // { done:true, value:undefined }
+})();
+```
+
+```ts
+// tasks will run in parallel
+ait.next().then();
+ait.next().then();
+ait.next().then();
+```
+
+## Generator
+
+- 函数名称前面加一个星号 (`*`) 表示它是一个生成器.
+- 箭头函数不能用来定义生成器函数.
+- 调用生成器函数会产生一个生成器对象, 其是一个 IterableIterator 对象 (自引用可迭代对象).
+- [Synchronous Generators](https://dev.to/jfet97/javascript-iterators-and-generators-synchronous-generators-3ai4)
+
+```ts
+function* generatorFn() {}
+console.log(generatorFn);
+// f* generatorFn() {}
+
+console.log(generatorFn()[Symbol.iterator]);
+// f [Symbol.iterator]() {native code}
+
+console.log(generatorFn());
+// generatorFn {<suspended>}
+
+console.log(generatorFn()[Symbol.iterator]());
+// generatorFn {<suspended>}
+
+const g = generatorFn(); // IterableIterator
+console.log(g === g[Symbol.iterator]());
+// true
+```
+
+### Generator Basic Usage
+
+```ts
+function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const g = gen();
+
+g.next(); // { value: 1, done: false }
+g.next(); // { value: 2, done: false }
+g.next(); // { value: 3, done: false }
+g.next(); // { value: undefined, done: true }
+g.return(); // { value: undefined, done: true }
+g.return(1); // { value: 1, done: true }
+```
+
+因为生成器对象实现了 Iterable 接口,
+生成器函数和默认迭代器**被调用**之后都产生迭代器,
+所以生成器适合作为默认迭代器:
+
+```ts
+const users = {
+  james: false,
+  andrew: true,
+  alexander: false,
+  daisy: false,
+  luke: false,
+  clare: true,
+
+  *[Symbol.iterator]() {
+    // this === 'users'
+    for (const key in this) {
+      if (this[key]) yield key;
+    }
+  },
+};
+
+for (const key of users) {
+  console.log(key);
+}
+// andrew
+// clare
+
+class Foo {
+  constructor() {
+    this.values = [1, 2, 3];
+  }
+
+  *[Symbol.iterator]() {
+    yield* this.values;
+  }
+}
+
+const f = new Foo();
+for (const x of f) {
+  console.log(x);
+}
+// 1
+// 2
+// 3
+```
+
+Early return:
+
+- `return()` 方法会强制生成器进入关闭状态.
+- 提供给 `return()` 的值, 就是终止迭代器对象的值.
+
+```ts
+function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const g = gen();
+
+g.next(); // { value: 1, done: false }
+g.return('foo'); // { value: "foo", done: true }
+g.next(); // { value: undefined, done: true }
+```
+
+Error handling:
+
+- `throw()` 方法会在暂停的时候将一个提供的错误注入到生成器对象中.
+  如果错误未被处理, 生成器就会关闭.
+- 假如生成器函数内部处理了这个错误, 那么生成器就不会关闭, 可以恢复执行.
+  错误处理会跳过对应的 yield (跳过一个值).
+
+```ts
+function* generator() {
+  try {
+    yield 1;
+  } catch (e) {
+    console.log(e);
+  }
+
+  yield 2;
+  yield 3;
+  yield 4;
+  yield 5;
+}
+
+const it = generator();
+
+it.next(); // {value: 1, done: false}
+
+// the error will be handled and printed ("Error: Handled!"),
+// then the flow will continue, so we will get the
+// next yielded value as result.
+it.throw(Error('Handled!')); // {value: 2, done: false}
+
+it.next(); // {value: 3, done: false}
+
+// now the generator instance is paused on the
+// third yield that is not inside a try-catch.
+// the error will be re-thrown out
+it.throw(Error('Not handled!')); // !!! Uncaught Error: Not handled! !!!
+
+// now the iterator is exhausted
+it.next(); // {value: undefined, done: true}
+```
+
+### Generator Complex Usage
+
+Messaging system:
+
+```ts
+function* lazyCalculator(operator) {
+  const firstOperand = yield;
+  const secondOperand = yield;
+
+  switch (operator) {
+    case '+':
+      yield firstOperand + secondOperand;
+      return;
+    case '-':
+      yield firstOperand - secondOperand;
+      return;
+    case '*':
+      yield firstOperand * secondOperand;
+      return;
+    case '/':
+      yield firstOperand / secondOperand;
+      return;
+    default:
+      throw new Error('Unsupported operation!');
+  }
+}
+
+const g = gen('*');
+g.next(); // { value: undefined, done: false }
+g.next(10); // { value: undefined, done: false }
+g.next(2); // { value: 20, done: false }
+g.next(); // { value: undefined, done: true }
+```
+
+Generator based control flow goodness for nodejs and the browser,
+using promises, letting you write non-blocking code in a nice-ish way
+(just like [tj/co](https://github.com/tj/co)).
+
+```ts
+function coroutine(generatorFunc) {
+  const generator = generatorFunc();
+  nextResponse();
+
+  function nextResponse(value) {
+    const response = generator.next(value);
+
+    if (response.done) {
+      return;
+    }
+
+    if (value.then) {
+      value.then(nextResponse);
+    } else {
+      nextResponse(response.value);
+    }
+  }
+}
+
+coroutine(function* bounce() {
+  yield bounceUp;
+  yield bounceDown;
+});
+```
+
+### Asynchronous Generator
+
+```ts
+const asyncSource = {
+  async *[Symbol.asyncIterator]() {
+    yield await new Promise(resolve => setTimeout(resolve, 1000, 1));
+  },
+};
+
+async function* remotePostsAsyncGenerator() {
+  let i = 1;
+
+  while (true) {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${i++}`
+    ).then(r => r.json());
+
+    // when no more remote posts will be available,
+    // it will break the infinite loop.
+    // the async iteration will end
+    if (Object.keys(res).length === 0) {
+      break;
+    }
+
+    yield res;
+  }
+}
+```
+
+```ts
+function* chunkify(array, n) {
+  yield array.slice(0, n);
+  array.length > n && (yield* chunkify(array.slice(n), n));
+}
+
+async function* getRemoteData() {
+  let hasMore = true;
+  let page;
+
+  while (hasMore) {
+    const { next_page, results } = await fetch(URL, { params: { page } }).then(
+      r => r.json()
+    );
+
+    // Return 5 elements with each iteration.
+    yield* chunkify(results, 5);
+
+    hasMore = next_page != null;
+    page = next_page;
+  }
+}
+```
+
+当为 `next` 传递值进行调用时,
+传入的值会被当作上一次生成器函数暂停时 `yield` 关键字的返回值处理.
+第一次调用 `g.next()` 传入参数是毫无意义,
+因为首次调用 `next` 函数时,
+生成器函数并没有在 `yield` 关键字处暂停.
+
+```ts
+function promise1() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('1');
+    }, 1000);
+  });
+}
+
+function promise2(value) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(`value:${value}`);
+    }, 1000);
+  });
+}
+
+function* readFile() {
+  const value = yield promise1();
+  const result = yield promise2(value);
+  return result;
+}
+
+function co(gen) {
+  return new Promise((resolve, reject) => {
+    const g = gen();
+
+    function next(param) {
+      const { done, value } = g.next(param);
+
+      if (!done) {
+        // Resolve chain.
+        Promise.resolve(value).then(res => next(res));
+      } else {
+        resolve(value);
+      }
+    }
+
+    // First invoke g.next() without params.
+    next();
+  });
+}
+
+co(readFile).then(res => console.log(res));
+// const g = readFile();
+// const value = g.next();
+// const result = g.next(value);
+// resolve(result);
+```
+
+### Recursive Generator
+
+`yield *` 能够迭代一个可迭代对象:
+
+```ts
+function* generatorFn() {
+  console.log('iter value:', yield* [1, 2, 3]);
+}
+
+for (const x of generatorFn()) {
+  console.log('value:', x);
+}
+// value: 1
+// value: 2
+// value: 3
+// iter value: undefined
+
+function* innerGeneratorFn() {
+  yield 'foo';
+  return 'bar';
+}
+
+function* outerGeneratorFn(genObj) {
+  console.log('iter value:', yield* innerGeneratorFn());
+}
+
+for (const x of outerGeneratorFn()) {
+  console.log('value:', x);
+}
+// value: foo
+// iter value: bar
+```
+
+在生成器函数内部,
+用 `yield *` 去迭代自身产生的生成器对象 (Generator Object -> IterableIterator),
+实现递归算法:
+
+```ts
+// Graph traverse.
+function* traverse(nodes) {
+  for (const node of nodes) {
+    if (!visitedNodes.has(node)) {
+      yield node;
+      yield* traverse(node.neighbors);
+    }
+  }
+}
+```
+
+```ts
+import { promises as fs } from 'fs';
+import { basename, dirname, join } from 'path';
+
+async function* walk(dir: string): AsyncGenerator<string> {
+  for await (const d of await fs.opendir(dir)) {
+    const entry = join(dir, d.name);
+
+    if (d.isDirectory()) {
+      yield* walk(entry);
+    } else if (d.isFile()) {
+      yield entry;
+    }
+  }
+}
+
+async function run(arg = '.') {
+  if ((await fs.lstat(arg)).isFile()) {
+    return runTestFile(arg);
+  }
+
+  for await (const file of walk(arg)) {
+    if (
+      !dirname(file).includes('node_modules') &&
+      (basename(file) === 'test.js' || file.endsWith('.test.js'))
+    ) {
+      console.log(file);
+      await runTestFile(file);
+    }
+  }
+}
+```
+
+## Proxy and Reflect
+
+Modify default object behavior with `Proxy` and `Reflect`:
+
+```ts
+// new Proxy(target, handler)
+Proxy(target, {
+  set(target, name, value, receiver) {
+    const success = Reflect.set(target, name, value, receiver);
+    if (success) {
+      log(`property ${name} on ${target} set to ${value}`);
+    }
+    return success;
+  },
+});
+```
+
+`Reflect` handlers:
+
+- `Reflect.get(target, propKey)`.
+- `Reflect.set(target, propKey, value)`.
+- `Reflect.has(target, propKey)`.
+- `Reflect.apply(target, thisArgument, argumentsList)`.
+- `Reflect.construct(target, argumentsList)`:
+  `new target(...argumentsList)`.
+- `Reflect.ownKeys(target)`:
+  `Object.getOwnPropertyNames` + `Object.getOwnPropertySymbols`,
+  all keys include Symbols.
+- `Reflect.getPrototypeOf(target)`.
+- `Reflect.setPrototypeOf(target, prototype)`.
+- `Reflect.getOwnPropertyDescriptor(target, propKey)`.
+- `Reflect.defineProperty(target, propKey, attributes)`.
+- `Reflect.deleteProperty(target, propKey)`.
+- `Reflect.isExtensible(target)`.
+- `Reflect.preventExtensions(target)`.
+
+Change original object will change proxy object,
+change proxy object will change original object via `set` related API.
+
+### Proxy and DefineProperty
+
+- Simple: `Proxy` 使用上比 `Object.defineProperty` 方便.
+  - `Object.defineProperty` 只能监听对象, 导致 `Vue 2` `data` 属性必须通过一个返回对象的函数方式初始化,
+  - `Vue 3` 更加多元化, 可以监听任意数据.
+- Performant: `Proxy` 代理整个对象, `Object.defineProperty` 只代理对象上的某个属性.
+  - `Object.defineProperty` 由于每次只能监听对象一个键的 `get`/`set`, 导致需要循环监听浪费性能.
+  - `Proxy` 可以一次性监听到所有属性.
+- Lazy: `Proxy` 性能优于 `Object.defineProperty`.
+  - 如果对象内部要全部递归代理, 则 `Proxy` 可以只在调用时递归.
+  - `Object.defineProperty` 需要在一开始就全部递归.
+- Feature:
+  - 对象上定义新属性时, 只有 `Proxy` 可以监听到.
+  - 数组新增删除修改时, 只有 `Proxy` 可以监听到.
+  - `Object.defineProperty` 无法监听数组, `Proxy` 则可以直接监听数组变化.
+  - Vue2: 重写数组方法监听数组变化, Vue3: `Proxy` 监听数组变化.
+- `Proxy` 不兼容 IE, `Object.defineProperty` 不兼容 IE8 及以下.
+
+### Proxy Usage
+
+#### Default Zero Value Protection
+
+```ts
+const withZeroValue = (target, zeroValue = 0) =>
+  new Proxy(target, {
+    get: (obj, prop) => (prop in obj ? obj[prop] : zeroValue),
+  });
+
+let pos = { x: 4, y: 19 };
+console.log(pos.z); // => undefined
+pos = withZeroValue(pos);
+console.log(pos.z); // => 0
+```
+
+#### Negative Array Indices Protection
+
+```ts
+const negativeArray = els =>
+  new Proxy(target, {
+    get: (target, propKey, receiver) =>
+      Reflect.get(
+        target,
+        +propKey < 0 ? String(target.length + +propKey) : propKey,
+        receiver
+      ),
+  });
+```
+
+#### Hiding Properties Protection
+
+```ts
+const hide = (target, prefix = '_') =>
+  new Proxy(target, {
+    has: (obj, prop) => !prop.startsWith(prefix) && prop in obj,
+    ownKeys: obj =>
+      Reflect.ownKeys(obj).filter(
+        prop => typeof prop !== 'string' || !prop.startsWith(prefix)
+      ),
+    get: (obj, prop, rec) => (prop in rec ? obj[prop] : undefined),
+  });
+
+const userData = hide({
+  firstName: 'Tom',
+  mediumHandle: '@bar',
+  _favoriteRapper: 'Drake',
+});
+
+const falsy = '_favoriteRapper' in userData; // has: false
+const keys = Object.keys(userData); // ownKeys: ['firstName', 'mediumHandle']
+console.log(userData._favoriteRapper); // get: undefined
+```
+
+#### Read Only Object Protection
+
+```ts
+const NOPE = () => {
+  throw new Error("Can't modify read-only object");
+};
+
+const NOPE_HANDLER = {
+  set: NOPE,
+  defineProperty: NOPE,
+  deleteProperty: NOPE,
+  preventExtensions: NOPE,
+  setPrototypeOf: NOPE,
+  get: (obj, prop) => {
+    if (prop in obj) {
+      return Reflect.get(obj, prop);
+    }
+
+    throw new ReferenceError(`Unknown prop "${prop}"`);
+  },
+};
+
+const readOnly = target => new Proxy(target, NODE_HANDLER);
+```
+
+#### Range Judgement Protection
+
+```ts
+const range = (min, max) =>
+  new Proxy(Object.create(null), {
+    has: (_, prop) => +prop >= min && +prop <= max,
+  });
+
+const X = 10.5;
+const nums = [1, 5, X, 50, 100];
+
+if (X in range(1, 100)) {
+  // => true
+}
+
+nums.filter(n => n in range(1, 10));
+// => [1, 5]
+```
+
+#### Exception Protection
+
+```ts
+function createExceptionProxy(target) {
+  return new Proxy(target, {
+    get: (target, prop) => {
+      if (!(prop in target)) {
+        return;
+      }
+
+      if (typeof target[prop] === 'function') {
+        return createExceptionZone(target, prop);
+      }
+
+      return target[prop];
+    },
+  });
+}
+
+function createExceptionZone(target, prop) {
+  return (...args) => {
+    let result;
+    ExceptionsZone.run(() => {
+      result = target[prop](...args);
+    });
+    return result;
+  };
+}
+
+class ExceptionsZone {
+  static exceptionHandler = new ExceptionHandler();
+
+  static run(callback) {
+    try {
+      callback();
+    } catch (e) {
+      this.exceptionHandler.handle(e);
+    }
+  }
+}
+
+class ExceptionHandler {
+  handle(exception) {
+    console.log('记录错误：', exception.message, exception.stack);
+  }
+}
+```
+
+```ts
+const obj = {
+  name: 'obj',
+  say() {
+    console.log(`Hi, I'm ${this.name}`);
+  },
+  coding() {
+    // xxx.
+    throw new Error('bug');
+  },
+  coding2() {
+    // xxx.
+    throw new Error('bug2');
+  },
+};
+
+const proxy = createProxy(obj);
+
+proxy.say();
+proxy.coding();
+```
+
+## Promise
+
+Avoid callback hell with:
+
+- return `new Promise`.
+- return `promise.then((value) => {})`.
+- error handle with `promise.catch((err) => {})`.
+- cleanup with `promise.finally(() => {})`.
+
+resolve only accept **one** value
+
+```ts
+return new Promise(resolve => resolve([a, b]));
+```
+
+- promises on the same chain execute orderly
+- promises on two separate chains execute in random order
+
+```ts
+const users = ['User1', 'User2', 'User3', 'User4'];
+
+const response = [];
+
+const getUser = user => () => {
+  return axios.get(`/users/userId=${user}`).then(res => response.push(res));
+};
+
+const getUsers = users => {
+  const [getFirstUser, getSecondUser, getThirdUser, getFourthUser] =
+    users.map(getUser);
+
+  getFirstUser()
+    .then(getSecondUser)
+    .then(getThirdUser)
+    .then(getFourthUser)
+    .catch(console.log);
+};
+```
+
+```ts
+const users = ['User1', 'User2', 'User3', 'User4'];
+
+let response = [];
+
+function getUsers(users) {
+  const promises = [];
+  promises[0] = axios.get(`/users/userId=${users[0]}`);
+  promises[1] = axios.get(`/users/userId=${users[1]}`);
+  promises[2] = axios.get(`/users/userId=${users[2]}`);
+  promises[3] = axios.get(`/users/userId=${users[3]}`);
+
+  Promise.all(promises)
+    .then(userDataArr => (response = userDataArr))
+    .catch(err => console.log(err));
+}
+```
+
+### Promise Array Functions
+
+- `Promise.all(iterable)` fail-fast:
+  if at least one promise in the promises array rejects,
+  then the promise returned rejects too.
+  Short-circuits when an input value is rejected.
+- `Promise.any(iterable)`:
+  resolves if any of the given promises are resolved.
+  Short-circuits when an input value is fulfilled.
+- `Promise.race(iterable)`:
+  Short-circuits when an input value is settled
+  (fulfilled or rejected).
+- `Promise.allSettled(iterable)`:
+  returns when all given promises are settled
+  (rejected or fulfilled, doesn't matter).
+
+```ts
+Promise.all(urls.map(fetch))
+  .then(responses => Promise.all(responses.map(res => res.text())))
+  .then(texts => {
+    //
+  });
+```
+
+```ts
+Promise.all(urls.map(url => fetch(url).then(resp => resp.text()))).then(
+  texts => {
+    //
+  }
+);
+```
+
+- `Promise.all` with `async`/`await`
+
+```ts
+const loadData = async () => {
+  try {
+    const urls = ['...', '...'];
+
+    const results = await Promise.all(urls.map(fetch));
+    const dataPromises = await results.map(result => result.json());
+    const finalData = Promise.all(dataPromises);
+
+    return finalData;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const data = loadData().then(data => console.log(data));
+```
+
+### Promise Polyfill
+
+```ts
+class Promise {
+  // `executor` takes 2 parameters, `resolve()` and `reject()`. The executor
+  // function is responsible for calling `resolve()` or `reject()` to say that
+  // the async operation succeeded (resolved) or failed (rejected).
+  constructor(executor) {
+    if (typeof executor !== 'function') {
+      throw new TypeError('Executor must be a function');
+    }
+
+    // Internal state. `$state` is the state of the promise, and `$chained` is
+    // an array of the functions we need to call once this promise is settled.
+    this.$state = 'PENDING';
+    this.$chained = [];
+
+    // Implement `resolve()` and `reject()` for the executor function to use
+    const resolve = res => {
+      // A promise is considered "settled" when it is no longer
+      // pending, that is, when either `resolve()` or `reject()`
+      // was called once. Calling `resolve()` or `reject()` twice
+      // or calling `reject()` after `resolve()` was already called
+      // are no-ops.
+      if (this.$state !== 'PENDING') {
+        return;
+      }
+
+      // If `res` is a "thenable", lock in this promise to match the
+      // resolved or rejected state of the thenable.
+      const then = res != null ? res.then : null;
+      if (typeof then === 'function') {
+        // In this case, the promise is "resolved", but still in the 'PENDING'
+        // state. This is what the ES6 spec means when it says "A resolved promise
+        // may be pending, fulfilled or rejected" in
+        // http://www.ecma-international.org/ecma-262/6.0/#sec-promise-objects
+        return then(resolve, reject);
+      }
+
+      this.$state = 'FULFILLED';
+      this.$internalValue = res;
+
+      // If somebody called `.then()` while this promise was pending, need
+      // to call their `onFulfilled()` function
+      for (const { onFulfilled } of this.$chained) {
+        onFulfilled(res);
+      }
+
+      return res;
+    };
+
+    const reject = err => {
+      if (this.$state !== 'PENDING') {
+        return;
+      }
+
+      this.$state = 'REJECTED';
+      this.$internalValue = err;
+
+      for (const { onRejected } of this.$chained) {
+        onRejected(err);
+      }
+    };
+
+    // Call the executor function with `resolve()` and `reject()` as in the spec.
+    try {
+      // If the executor function throws a sync exception, we consider that
+      // a rejection. Keep in mind that, since `resolve()` or `reject()` can
+      // only be called once, a function that synchronously calls `resolve()`
+      // and then throws will lead to a fulfilled promise and a swallowed error
+      executor(resolve, reject);
+    } catch (err) {
+      reject(err);
+    }
+  }
+
+  // `onFulfilled` is called if the promise is fulfilled, and `onRejected`
+  // if the promise is rejected. For now, you can think of 'fulfilled' and
+  // 'resolved' as the same thing.
+  then(onFulfilled, onRejected) {
+    return new Promise((resolve, reject) => {
+      // Ensure that errors in `onFulfilled()` and `onRejected()` reject the
+      // returned promise, otherwise they'll crash the process. Also, ensure
+      // that the promise
+      const _onFulfilled = res => {
+        try {
+          // If `onFulfilled()` returns a promise, trust `resolve()` to handle
+          // it correctly.
+          // store new value to new Promise
+          resolve(onFulfilled(res));
+        } catch (err) {
+          reject(err);
+        }
+      };
+
+      const _onRejected = err => {
+        try {
+          // store new value to new Promise
+          reject(onRejected(err));
+        } catch (_err) {
+          reject(_err);
+        }
+      };
+
+      if (this.$state === 'FULFILLED') {
+        _onFulfilled(this.$internalValue);
+      } else if (this.$state === 'REJECTED') {
+        _onRejected(this.$internalValue);
+      } else {
+        this.$chained.push({
+          onFulfilled: _onFulfilled,
+          onRejected: _onRejected,
+        });
+      }
+    });
+  }
+
+  catch(onRejected) {
+    return this.then(null, onRejected);
+  }
+
+  finally() {
+    return this.then(null, null);
+  }
+}
+```
+
+### Promise Thenable and Catch
+
+The main difference between the forms
+`promise.then(success, error)` and
+`promise.then(success).catch(error)`:
+
+in case if success callback returns a rejected promise,
+then only the second form is going to catch that rejection.
+
+### Memorize Async Function
+
+```ts
+const memo = {};
+const progressQueues = {};
+
+function memoProcessData(key) {
+  return new Promise((resolve, reject) => {
+    if (Object.prototype.hasOwnProperty.call(memo, key)) {
+      resolve(memo[key]);
+      return;
+    }
+
+    if (!Object.prototype.hasOwnProperty.call(progressQueues, key)) {
+      // Called for a new key
+      // Create an entry for it in progressQueues
+      progressQueues[key] = [[resolve, reject]];
+    } else {
+      // Called for a key that's still being processed
+      // Enqueue it's handlers and exit.
+      progressQueues[key].push([resolve, reject]);
+      return;
+    }
+
+    processData(key)
+      .then(data => {
+        memo[key] = data;
+        for (const [resolver] of progressQueues[key]) resolver(data);
+      })
+      .catch(error => {
+        for (const [, rejector] of progressQueues[key]) rejector(error);
+      })
+      .finally(() => {
+        delete progressQueues[key];
+      });
+  });
+}
+```
+
+## Await and Async
+
+avoid wrong parallel logic (too sequential)
+
+```ts
+// wrong
+const books = await bookModel.fetchAll();
+const author = await authorModel.fetch(authorId);
+
+// right
+const bookPromise = bookModel.fetchAll();
+const authorPromise = authorModel.fetch(authorId);
+const book = await bookPromise;
+const author = await authorPromise;
+
+async function getAuthors(authorIds) {
+  // WRONG, this will cause sequential calls
+  // const authors = _.map(
+  //   authorIds,
+  //   id => await authorModel.fetch(id));
+  // CORRECT
+  const promises = _.map(authorIds, id => authorModel.fetch(id));
+  const authors = await Promise.all(promises);
+}
+```
+
+### Await Arrays
+
+- If you want to execute await calls in series,
+  use a for-loop (or any loop without a callback).
+- Don't ever use await with `forEach` (`forEach` is not promise-aware),
+  use a for-loop (or any loop without a callback) instead.
+- Don't await inside filter and reduce,
+  always await an array of promises with map, then filter or reduce accordingly.
+
+## Asynchronous Programming
+
+### Sleep Function
+
+```ts
+function sleep(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+```
+
+```ts
+sleep(2000).then(() => {
+  // do something after 2000 milliseconds
+  console.log('resolved');
+});
+
+async function add(n1, n2) {
+  await sleep(2222);
+  console.log(n1 + n2);
+}
+
+add(1, 2);
+```
+
+### Race Condition
+
+- keep latest updates
+- recover from failures
+- online and offline sync ([PouchDB](https://github.com/pouchdb/pouchdb))
+- tools: [redux-saga](https://github.com/redux-saga/redux-saga)
+
+```ts
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  data() {
+    return {
+      text: '',
+      results: [],
+      nextRequestId: 1,
+      displayedRequestId: 0,
+    };
+  },
+  watch: {
+    async text(value) {
+      const requestId = this.nextRequestId++;
+      const results = await search(value);
+
+      // guarantee display latest search results (when input keep changing)
+      if (requestId < this.displayedRequestId) {
+        return;
+      }
+
+      this.displayedRequestId = requestId;
+      this.results = results;
+    },
+  },
+};
+```
+
+### Async Comparison
+
+- promise 和 async/await 是专门用于处理异步操作的.
+- Generator 并不是为异步而设计出来的, 它还有其他功能（对象迭代, 控制输出, Iterator Interface...）.
+- promise 编写代码相比 Generator、async 更为复杂化，且可读性也稍差.
+- Generator、async 需要与 promise 对象搭配处理异步情况.
+- async 实质是 Generator 的语法糖, 相当于会自动执行 Generator 函数.
+- async 使用上更为简洁, 将异步代码以同步的形式进行编写, 是处理异步编程的最终方案.
 
 ## Modules Pattern
 
@@ -2379,1027 +4997,7 @@ Sandbox('dom', 'event', function (box) {
 );
 ```
 
-## Modern JavaScript
-
-### TC39
-
-- [Technical Committees 39](https://www.ecma-international.org/technical-committees/tc39 'TC39')
-- [New Feature Process](http://tc39.github.io/process-document)
-
-JavaScript = ECMAScript + DOM + BOM:
-
-- ECMAScript: ECMA-262.
-- DOM: DOM Core + DOM HTML (`document`).
-- BOM: Browser Object Model API (HTML5)
-  (`window`/`navigator`/`location`/`screen`/`performance` etc).
-
-### Variable
-
-- 一方面规定, `var`/`function` 声明的全局变量,
-  依旧是全局对象的属性, 意味着会`Hoisting`.
-- 另一方面规定, `let`/`const`/`class` 声明的全局变量,
-  不属于全局对象的属性, 意味着不会`Hoisting`.
-- `var` 只有函数作用域, `let`/`const` 拥有块级作用域.
-
-#### Let Variable
-
-- 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError.
-- 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone).
-- `let` variable in `for-loop` closure,
-  every closure for each loop
-  binds the block-scoped variable.
-
-```ts
-const a = 1;
-
-b = 3; // temporal dead zone: throw reference error
-
-let b = 2;
-```
-
-`let` 变量拥有块级作用域:
-
-```ts
-// for (var i = 0; i < 5; ++i) {
-//   setTimeout(() => console.log(i), 0);
-// }
-// Output 5, 5, 5, 5, 5.
-// 所有的 i 都是同一个变量, 输出同一个最终值.
-
-for (let i = 0; i < 5; ++i) {
-  setTimeout(() => console.log(i), 0);
-}
-// Output: 0, 1, 2, 3, 4.
-// JavaScript 引擎会为每个迭代循环声明一个新的迭代变量.
-// 每个 setTimeout 引用的都是不同的变量实例.
-```
-
-#### Const Variable
-
-- const 一旦声明变量，就必须立即初始化，不能留到以后赋值.
-- 引用一个`Reference`变量时，只表示此变量地址不可变，但所引用变量的值/属性可变
-  (`xxx *const`, 即`const`指针, 指向一个变量).
-- 块级作用域.
-- 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone).
-
-### Destructuring Pattern Matching
-
-- **建议只要有可能，就不要在模式中放置圆括号**.
-- 赋值语句的非模式部分，可以使用圆括号.
-- Every time access value via `.`:
-  stop and think whether use destructuring instead.
-- Destructure as early as possible.
-- Remember to include default values, especially in nested destructuring.
-
-#### Default Value in Destructuring
-
-- ES6 内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
-- 如果一个数组成员不严格等于 undefined，默认值不会生效
-
-```ts
-const [x = 1] = [undefined];
-console.log(x); // 1
-
-const [x = 1] = [null];
-console.log(x); // null
-```
-
-```ts
-let [x = 1, y = x] = []; // x=1; y=1
-let [x = 1, y = x] = [2]; // x=2; y=2
-let [x = 1, y = x] = [1, 2]; // x=1; y=2
-let [x = y, y = 1] = []; // ReferenceError
-```
-
-#### Swap Value with Destructuring
-
-```ts
-[x, y] = [y, x];
-```
-
-#### Function Parameters and Return Value Destructuring
-
-- 可用于工厂 (`factory`) / 设置 (`options`) 模式传参一般为 `options` 对象,
-- 具有固定的属性名.
-- 一次性定义多个参数.
-- 一次性定义多个参数的默认值.
-
-```ts
-// 参数是一组有次序的值
-function f1([x, y, z]) {}
-f1([1, 2, 3]);
-
-// 参数是一组无次序的值
-function f2({ x, y, z }) {}
-f2({ z: 3, y: 2, x: 1 });
-
-// 可省略 const foo = config.foo || 'default foo';
-jQuery.ajax = function (
-  url,
-  {
-    async = true,
-    beforeSend = function () {},
-    cache = true,
-    complete = function () {},
-    crossDomain = false,
-    global = true,
-    // ... more config
-  }
-) {
-  // ... do stuff
-};
-```
-
-```ts
-// 返回一个数组
-function example1() {
-  return [1, 2, 3];
-}
-const [a, b, c] = example1();
-
-// 返回一个对象
-function example2() {
-  return {
-    foo: 1,
-    bar: 2,
-  };
-}
-
-const { foo, bar } = example2();
-```
-
-```ts
-function add([x, y]) {
-  return x + y;
-}
-add([1, 2]) // 3
-  [([1, 2], [3, 4])].map(([a, b]) => a + b);
-// [ 3, 7 ]
-
-function move({ x = 0, y = 0 } = {}) {
-  return [x, y];
-}
-move({ x: 3, y: 8 }); // [3, 8]
-move({ x: 3 }); // [3, 0]
-move({}); // [0, 0]
-move(); // [0, 0]
-
-// 严格为 undefined 时，触发默认值设置
-[1, undefined, 3].map((x = 'yes') => x);
-// [ 1, 'yes', 3 ]
-```
-
-#### Parse JSON Object with Destructuring
-
-```ts
-const jsonData = {
-  id: 42,
-  status: 'OK',
-  data: [867, 5309],
-};
-
-const { id, status, data: number } = jsonData;
-
-console.log(id, status, number);
-// 42, "OK", [867, 5309]
-```
-
-#### Traverse Map and List with Destructuring
-
-- `for index in Iterable<T>`: key.
-- `for [key, value] of Iterable<T>`: entry.
-
-```ts
-const map = new Map();
-map.set('first', 'hello');
-map.set('second', 'world');
-
-for (const [key, value] of map) {
-  console.log(`${key} is ${value}`);
-}
-// first is hello
-// second is world
-
-// 获取键名
-for (const [key] of map) {
-  // ...
-}
-
-// 获取键值
-for (const [, value] of map) {
-  // ...
-}
-```
-
-#### Import with Destructuring
-
-```ts
-const { SourceMapConsumer, SourceNode } = require('source-map');
-```
-
-#### Array Iterator Destructuring
-
-等号右边必须为数组等实现了 Iterator 接口的对象, 否则报错:
-
-- Array.
-- Set.
-- Generator function.
-
-```ts
-const [foo, [[bar], baz]] = [1, [[2], 3]];
-console.log(foo); // 1
-console.log(bar); // 2
-console.log(baz); // 3
-
-const [, , third] = ['foo', 'bar', 'baz'];
-console.log(third); // "baz"
-
-const [x, , y] = [1, 2, 3];
-console.log(x); // 1
-console.log(y); // 3
-
-const [head, ...tail] = [1, 2, 3, 4];
-console.log(head); // 1
-console.log(tail); // [2, 3, 4]
-
-const [x, y, ...z] = ['a'];
-console.log(x); // "a"
-console.log(y); // undefined
-console.log(z); // []
-
-// Generator 函数
-function* fibs() {
-  let a = 0;
-  let b = 1;
-
-  while (true) {
-    yield a;
-    [a, b] = [b, a + b];
-  }
-}
-
-const [first, second, third, fourth, fifth, sixth] = fibs();
-console.log(sixth); // 5
-```
-
-#### Object Destructuring
-
-- 真正被赋值的是后者，而不是前者.
-
-```ts
-const { pattern: variable } = { key: value };
-```
-
-- 解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象.
-- undefined/null 无法转化为对象.
-
-```ts
-const { prop: x } = undefined; // TypeError
-const { prop: y } = null; // TypeError
-```
-
-```ts
-const { bar, foo } = { foo: 'aaa', bar: 'bbb' };
-console.log(foo); // "aaa"
-console.log(bar); // "bbb"
-
-const { foo, bar } = { foo: 'aaa', bar: 'bbb' };
-
-const { baz } = { foo: 'aaa', bar: 'bbb' };
-console.log(baz); // undefined
-```
-
-```ts
-const { foo: baz } = { foo: 'aaa', bar: 'bbb' };
-console.log(baz); // "aaa"
-
-const obj = { first: 'hello', last: 'world' };
-const { first: f, last: l } = obj;
-console.log(f); // 'hello'
-console.log(l); // 'world'
-```
-
-```ts
-const { log, sin, cos } = Math;
-```
-
-#### String Destructuring
-
-```ts
-const [a, b, c, d, e] = 'hello';
-console.log(a); // "h"
-console.log(b); // "e"
-console.log(c); // "l"
-console.log(d); // "l"
-console.log(e); // "o"
-
-const { length: len } = 'hello';
-console.log(len); // 5
-```
-
-#### Number and Boolean Destructuring
-
-`number`/`boolean` 会自动构造原始值包装对象:
-
-```ts
-let { toString: s } = 123;
-const truthy = s === Number.prototype.toString; // true
-
-let { toString: s } = true;
-const truthy = s === Boolean.prototype.toString; // true
-```
-
-### Logical Operators
-
-- Optional Chaining Operator `?.`:
-  Legible property chains that don't throw an error
-  if a requested reference is missing.
-- Nullish coalescing operator `??`:
-  Binary operator.
-  If the value of left side expression is `null` or `undefined`,
-  right side of the operator is evaluated.
-- Logical assignment operators
-  `&&=`, `||=`, `??=`):
-  All of them are binary operators.
-  For `&&=`, if left side is truthy,
-  right-side expression is assigned to left side.
-  For `||=` if left side is falsy,
-  right-side expression is assigned to left side.
-  With the `??=`, if left-side value is `null` or `undefined`,
-  right-side expression is assigned to left side.
-
-### ES6 String
-
-```ts
-// eslint-disable-next-line no-self-compare
-const truthy = 'z' === 'z'; // true
-// eslint-disable-next-line no-octal-escape
-const truthy = '\172' === 'z'; // true
-const truthy = '\x7A' === 'z'; // true
-const truthy = '\u007A' === 'z'; // true
-const truthy = '\u{7A}' === 'z'; // true
-```
-
-#### String Methods
-
-- `string.charAt(index)`.
-- `string.charCodeAt(index)`.
-- `string.fromCharCode(charCode)`.
-- `string.codePointAt(index)`: 正确处理 4 字节存储字符.
-- `string.fromCodePoint(codePoint)`: 正确处理 4 字节存储字符.
-
-```ts
-function is32Bit(c) {
-  return c.codePointAt(0) > 0xffff;
-}
-
-// True:
-const truthy = String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y';
-```
-
-- `string.includes(substr)`.
-- `string.startsWith(substr)`.
-- `string.endsWith(substr)`.
-- 使用第二个参数 n 时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束.
-
-```ts
-const s = 'Hello world!';
-
-s.startsWith('world', 6); // true
-s.endsWith('Hello', 5); // true
-s.includes('Hello', 6); // false
-```
-
-- `repeat(times)`.
-
-```ts
-'hello'.repeat(2); // "hellohello"
-'na'.repeat(2.9); // "nana"
-
-'na'.repeat(-0.9); // ""
-'na'.repeat(-1); // RangeError
-
-'na'.repeat(NaN); // ""
-'na'.repeat(Infinity); // RangeError
-
-'na'.repeat('na'); // ""
-'na'.repeat('3'); // "nanana"
-```
-
-- `padStart(len, paddingStr)`.
-- `padEnd(len, paddingStr)`.
-
-```ts
-'1'.padStart(10, '0'); // "0000000001"
-'12'.padStart(10, '0'); // "0000000012"
-'123456'.padStart(10, '0'); // "0000123456"
-
-'12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-MM-12"
-'09-12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-09-12"
-```
-
-- `trimLeft()`/`trimStart()`: remove start whitespace.
-- `trimRight()`/`trimEnd()`: remove end whitespace.
-- `matchAll(regexp)`.
-- `replaceAll`:
-  - `replaceAll(regexp, newSubstr)`.
-  - `replaceAll(regexp, replacerFunction)`.
-  - `replaceAll(substr, newSubstr)`.
-  - `replaceAll(substr, replacerFunction)`.
-
-```ts
-// eslint-disable-next-line prefer-regex-literals
-const regexp = new RegExp('foo[a-z]*', 'g');
-const str = 'table football, foosball';
-const matches = str.matchAll(regexp);
-
-for (const match of matches) {
-  console.log(
-    `Found ${match[0]} start=${match.index} end=${
-      match.index + match[0].length
-    }.`
-  );
-}
-// expected output: "Found football start=6 end=14."
-// expected output: "Found foosball start=16 end=24."
-
-// matches iterator is exhausted after the for..of iteration
-// Call matchAll again to create a new iterator
-Array.from(str.matchAll(regexp), m => m[0]);
-// Array [ "football", "foosball" ]
-```
-
-```ts
-'aabbcc'.replaceAll('b', '.');
-// => 'aa..cc'
-
-'aabbcc'.replaceAll(/b/g, '.');
-// => 'aa..cc'
-```
-
-#### Template String
-
-`str` 表示模板字符串:
-
-```ts
-// 普通字符串
-`In JavaScript '\n' is a line-feed.``\`Yo\` World!``In JavaScript this is // 多行字符串
- not legal.``${
-  x // 引用变量
-} + ${y * 2} = ${x + y * 2}``${obj.x + obj.y}``foo ${
-  fn() // 调用函数
-} bar`;
-```
-
-#### Tagged Templates
-
-```ts
-const boldify = (parts, ...insertedParts) => {
-  return parts
-    .map((s, i) => {
-      if (i === insertedParts.length) return s;
-      return `${s}<strong>${insertedParts[i]}</strong>`;
-    })
-    .join('');
-};
-
-const name = 'Sabertaz';
-console.log(boldify`Hi, my name is ${name}!`);
-// => "Hi, my name is <strong>Sabertaz</strong>!"
-```
-
-```ts
-function template(strings, ...keys) {
-  return function (...values) {
-    const dict = values[values.length - 1] || {};
-    const result = [strings[0]];
-    keys.forEach(function (key, i) {
-      const value = Number.isInteger(key) ? values[key] : dict[key];
-      result.push(value, strings[i + 1]);
-    });
-    return result.join('');
-  };
-}
-
-const t1Closure = template`${0}${1}${0}!`;
-t1Closure('Y', 'A'); // "YAY!"
-const t2Closure = template`${0} ${'foo'}!`;
-t2Closure('Hello', { foo: 'World' }); // "Hello World!"
-```
-
-编译模板 (小型模板引擎):
-
-```ts
-function compile(template) {
-  const evalExpr = /<%=(.+?)%>/g;
-  const expr = /<%([\s\S]+?)%>/g;
-
-  template = template
-    .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
-    .replace(expr, '`); \n $1 \n  echo(`');
-
-  template = `echo(\`${template}\`);`;
-
-  const script = `(function parse(data){
-      let output = "";
-
-      function echo(html){
-        output += html;
-      }
-
-      ${template}
-
-      return output;
-    })`;
-
-  return script;
-}
-
-const template = `
-<ul>
-  <% for(let i=0; i < data.supplies.length; i++) { %>
-    <li><%= data.supplies[i] %></li>
-  <% } %>
-</ul>
-`;
-const parse = compile(template);
-div.innerHTML = parse({ supplies: ['broom', 'mop', 'cleaner'] });
-// => <ul>
-// =>   <li>broom</li>
-// =>   <li>mop</li>
-// =>   <li>cleaner</li>
-// => </ul>
-
-// 下面的hashTemplate函数
-// 是一个自定义的模板处理函数
-const libraryHtml = hashTemplate`
-  <ul>
-    #for book in ${myBooks}
-      <li><i>#{book.title}</i> by #{book.author}</li>
-    #end
-  </ul>
-`;
-```
-
-国际化处理:
-
-```ts
-i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`;
-// "欢迎访问xxx，您是第xxxx位访问者！"
-```
-
-XSS protection:
-
-```ts
-const message = SaferHTML`<p>${sender} has sent you a message.</p>`;
-
-function SaferHTML(templateString, ...expressions) {
-  let s = templateString[0];
-
-  for (let i = 0; i < expressions.length; i++) {
-    const expression = String(expressions[i]);
-
-    // Escape special characters in the substitution.
-    s += expression
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-
-    // Don't escape special characters in the template.
-    s += templateString[i + 1];
-  }
-
-  return s;
-}
-```
-
-运行代码:
-
-```ts
-jsx`
-  <div>
-    <input
-      ref='input'
-      onChange='${this.handleChange}'
-      defaultValue='${this.state.value}' />
-      ${this.state.value}
-   </div>
-`;
-
-java`
-class HelloWorldApp {
-  public static void main(String[] args) {
-    System.out.println(“Hello World!”); // Display the string.
-  }
-}
-`;
-HelloWorldApp.main();
-```
-
-#### Raw String
-
-```ts
-console.log(`\u00A9`); // ©
-console.log(String.raw`\u00A9`); // \u00A9
-```
-
-```ts
-console.log(`first line\nsecond line`);
-// first line
-// second line
-console.log(String.raw`first line\nsecond line`);
-// "first line\nsecond line"
-```
-
-```ts
-function printRaw(strings) {
-  console.log('Actual characters:');
-
-  for (const string of strings) {
-    console.log(string);
-  }
-
-  console.log('Escaped characters;');
-
-  for (const rawString of strings.raw) {
-    console.log(rawString);
-  }
-}
-
-printRaw`\u00A9${'and'}\n`;
-// Actual characters:
-// ©
-// (换行符)
-// Escaped characters:
-// \u00A9
-// \n
-```
-
-### ES6 Number
-
-- 0bxxx/0Bxxx.
-- 0oxxx/0Oxxx.
-- `Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()`.
-- `Number.toFixed()/toExponential()/toPrecision()`.
-- Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`.
-- `**` 指数运算符.
-- BigInt.
-
-```ts
-const a = 2172141653;
-const b = 15346349309;
-const c1 = a * b;
-// => 33334444555566670000
-const c2 = BigInt(a) * BigInt(b);
-// => 33334444555566667777n
-```
-
-### Internationalization
-
-#### Number i18n
-
-```ts
-const nfFrench = new Intl.NumberFormat('fr');
-nf.format(12345678901234567890n);
-// => 12 345 678 901 234 567 890
-```
-
-#### String i18n
-
-```ts
-const lfEnglish = new Intl.ListFormat('en');
-// const lfEnglish = new Intl.ListFormat('en', { type: 'disjunction' }); => 'or'
-
-lfEnglish.format(['Ada', 'Grace', 'Ida']);
-// => 'Ada, Grace and Ida'
-
-const formatter = new Intl.ListFormat('en', {
-  style: 'long',
-  type: 'conjunction',
-});
-console.log(formatter.format(vehicles));
-// expected output: "Motorcycle, Bus, and Car"
-
-const formatter2 = new Intl.ListFormat('de', {
-  style: 'short',
-  type: 'disjunction',
-});
-console.log(formatter2.format(vehicles));
-// expected output: "Motorcycle, Bus oder Car"
-
-const formatter3 = new Intl.ListFormat('en', { style: 'narrow', type: 'unit' });
-console.log(formatter3.format(vehicles));
-// expected output: "Motorcycle Bus Car"
-```
-
-#### Time i18n
-
-```ts
-const rtfEnglish = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
-
-rtf.format(-1, 'day'); // 'yesterday'
-rtf.format(0, 'day'); // 'today'
-rtf.format(1, 'day'); // 'tomorrow'
-rtf.format(-1, 'week'); // 'last week'
-rtf.format(0, 'week'); // 'this week'
-rtf.format(1, 'week'); // 'next week'
-```
-
-```ts
-const dtfEnglish = new Intl.DateTimeFormat('en', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
-
-dtfEnglish.format(new Date()); // => 'May 7, 2019'
-dtfEnglish.formatRange(start, end); // => 'May 7 - 9, 2019'
-```
-
-### ES6 Array
-
-```ts
-const array = [...Array(5).keys()]; // => [0, 1, 2, 3, 4]
-```
-
-#### Array Includes
-
-No more `indexOf() > -1`.
-
-#### Array From
-
-强大的**函数式**方法
-
-- 伪数组对象(array-like object)
-- 可枚举对象(iterable object)
-- 克隆数组
-- map 函数
-
-```ts
-// Set
-// Map
-
-// NodeList 对象
-const ps = document.querySelectorAll('p');
-Array.from(ps).forEach(function (p) {
-  console.log(p);
-});
-
-// arguments 对象
-function foo() {
-  // eslint-disable-next-line prefer-rest-params
-  const args = Array.from(arguments);
-  // ...
-}
-
-Array.from('hello');
-// => ['h', 'e', 'l', 'l', 'o']
-
-const namesSet = new Set(['a', 'b']);
-Array.from(namesSet); // ['a', 'b']
-
-// 克隆数组
-Array.from([1, 2, 3]);
-// => [1, 2, 3]
-
-Array.from(arrayLike, x => x * x);
-// =>
-Array.from(arrayLike).map(x => x * x);
-
-Array.from([1, 2, 3], x => x * x);
-// [1, 4, 9]
-
-// random array generation
-Array.from(Array(5).keys());
-// [0, 1, 2, 3, 4]
-```
-
-#### Array CopyWithin
-
-`copyWithin(dest, start, end)`, 替换数组元素，**修改原数组**:
-
-```ts
-[1, 2, 3, 4, 5].copyWithin(0, 3);
-// => [4, 5, 3, 4, 5]
-[1, 2, 3, 4, 5].copyWithin(0, -2, -1);
-// -2相当于3号位，-1相当于4号位
-// => [4, 2, 3, 4, 5]
-
-// 将2号位到数组结束，复制到0号位
-const i32a = new Int32Array([1, 2, 3, 4, 5]);
-i32a.copyWithin(0, 2);
-// => Int32Array [3, 4, 5, 4, 5]
-```
-
-#### Array Find
-
-```ts
-arr.find(fn);
-arr.findIndex(fn);
-```
-
-#### Array Flat
-
-`[2, [2, 2]] => [2, 2, 2]`
-
-#### Array Element Filter
-
-相当于 Haskell 中的 List Filter:
-
-```ts
-const numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
-const filterResult = numbers.filter((item, index, array) => item > 2);
-console.log(filterResult); // 3,4,5,4,3
-```
-
-#### Array Boolean Filter
-
-- `Array.every(filer)`.
-- `Array.some(filer)`.
-
-```ts
-const numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
-const everyResult = numbers.every((item, index, array) => item > 2);
-const someResult = numbers.some((item, index, array) => item > 2);
-console.log(everyResult); // false
-console.log(someResult); // true
-```
-
-#### Array Map
-
-相当于 Haskell 中的 List Map.
-
-#### Array FlatMap
-
-map + flat.
-
-#### Array ForEach
-
-#### Array Reduce
-
-相当于 Haskell 中的 fold.
-
-#### Array Sort
-
-#### Array Reverse
-
-#### Spread Array
-
-```ts
-arr2.push(...arr1);
-```
-
-```ts
-const obj = { x: 1, y: 2, z: 3 };
-
-obj[Symbol.iterator] = function* () {
-  yield 1;
-  yield 2;
-  yield 3;
-};
-
-const array = [...obj]; // print [1, 2, 3]
-```
-
-#### Typed Array
-
-ArrayBuffer 其中一种视图 (用于 Web GL 高效率内存操作):
-
-```ts
-// 第一个参数是应该返回的数组类型
-// 其余参数是应该拼接在一起的定型数组
-function typedArrayConcat(TypedArrayConstructor, ...typedArrays) {
-  // 计算所有数组中包含的元素总数
-  const numElements = typedArrays.reduce((x, y) => (x.length || x) + y.length);
-  // 按照提供的类型创建一个数组，为所有元素留出空间
-  const resultArray = new TypedArrayConstructor(numElements);
-  // 依次转移数组
-  let currentOffset = 0;
-  typedArrays.forEach(x => {
-    resultArray.set(x, currentOffset);
-    currentOffset += x.length;
-  });
-  return resultArray;
-}
-
-const concatArray = typedArrayConcat(
-  Int32Array,
-  Int8Array.of(1, 2, 3),
-  Int16Array.of(4, 5, 6),
-  Float32Array.of(7, 8, 9)
-);
-
-console.log(concatArray); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
-console.log(concatArray instanceof Int32Array); // true
-```
-
-### ES6 Object
-
-- `Object.is`:
-
-```ts
-// Case 1: Evaluation result is the same as using ===
-Object.is(25, 25); // true
-Object.is('foo', 'foo'); // true
-Object.is('foo', 'bar'); // false
-Object.is(null, null); // true
-Object.is(undefined, undefined); // true
-Object.is(window, window); // true
-Object.is([], []); // false
-const foo = { a: 1 };
-const bar = { a: 1 };
-Object.is(foo, foo); // true
-Object.is(foo, bar); // false: different reference pointers.
-
-// Case 2: Signed zero
-Object.is(0, -0); // false
-Object.is(+0, -0); // false
-Object.is(-0, -0); // true
-Object.is(0n, -0n); // true
-
-// Case 3: NaN
-Object.is(NaN, 0 / 0); // true
-Object.is(NaN, Number.NaN); // true
-```
-
-```ts
-if (!Object.is) {
-  Object.defineProperty(Object, 'is', {
-    value: (x, y) => {
-      // SameValue algorithm
-      if (x === y) {
-        // return true if x and y are not 0, OR
-        // if x and y are both 0 of the same sign.
-        // This checks for cases 1 and 2 above.
-        return x !== 0 || 1 / x === 1 / y;
-      } else {
-        // return true if both x AND y evaluate to NaN.
-        // The only possibility for a variable to not be strictly equal to itself
-        // is when that variable evaluates to NaN (example: Number.NaN, 0/0, NaN).
-        // This checks for case 3.
-        // eslint-disable-next-line no-self-compare
-        return x !== x && y !== y;
-      }
-    },
-  });
-}
-```
-
-- `Object.keys`.
-- `Object.values`.
-- `Object.entries`.
-- `Object.fromEntries`.
-
-```ts
-const score = {
-  saber: 42,
-  todd: 19,
-  ken: 4,
-  gan: 41,
-};
-
-Object.keys(score).map(k => score[k]);
-// => [ 42, 19, 4, 41 ]
-
-Object.values(score);
-// => [ 42, 19, 4, 41 ]
-
-Object.entries(score);
-/**
- * =>
- * [
- * [ 'saber', 42 ],
- * [ 'todd', 19 ],
- * [ 'ken', 4 ],
- * [ 'gan', 41 ],
- * ]
- */
-```
-
-```ts
-const object = { x: 42, y: 50, abc: 9001 };
-const result = Object.fromEntries(
-  Object.entries(object)
-    .filter(([key, value]) => key.length === 1)
-    .map(([key, value]) => [key, value * 2])
-);
-```
-
-```ts
-const map = new Map(Object.entries(object));
-const objectCopy = Object.fromEntries(map);
-```
-
-### Arrow Function
-
-- no thisArgs binding
-- no arguments binding
-- no prototype binding
-- no suited for `New` constructor
-- not suited as methods of plain object
-  (`this` in arrow function would be refer to `window`)
-
-### Modules
+### ES6 Modules
 
 ```ts
 import { lastName as surname } from './profile.js';
@@ -3534,1688 +5132,64 @@ export default 'hello!';
 <!-- eslint-enable import/export -->
 <!-- eslint-enable import/no-duplicates -->
 
-### Class
+## Internationalization
+
+### Number i18n
 
 ```ts
-class A {
-  constructor(value) {
-    this.val = value;
-  }
-}
-
-class B extends A {
-  constructor(value) {
-    super(value);
-    console.log('New');
-  }
-}
-
-const b = new B(6);
-
-console.log(B[[proto]] === A);
-console.log(B.prototype.constructor === B);
-console.log(B.prototype[[proto]] === A.prototype);
-console.log(b[[proto]] === B.prototype);
-
-function AA(value) {
-  this.val = value;
-}
-
-function BB(value) {
-  AA.call(this, value);
-}
-
-BB.prototype = Object.create(AA.prototype);
-BB.prototype.constructor = BB;
-
-const bb = new BB(6);
-
-console.log(BB[[proto]] === Function.prototype); // not consistence with class syntax
-console.log(BB.prototype.constructor === BB);
-console.log(BB.prototype[[proto]] === AA.prototype);
-console.log(bb[[proto]] === BB.prototype);
+const nfFrench = new Intl.NumberFormat('fr');
+nf.format(12345678901234567890n);
+// => 12 345 678 901 234 567 890
 ```
 
-禁止对复合对象字面量进行导出操作 (array literal, object literal).
-
-#### Class Private Member
+### String i18n
 
 ```ts
-class Dong {
-  constructor() {
-    this.#name = 'dog';
-    this.#age = 20;
-    this.friend = 'cat';
-  }
-
-  hello() {
-    return `I'm ${this.#name} ${this.#age} years old`;
-  }
-}
-```
-
-```ts
-const classPrivateFieldGet = (receiver, state) => {
-  return state.get(receiver);
-};
-
-const classPrivateFieldSet = (receiver, state, value) => {
-  state.set(receiver, value);
-};
-
-const dongName = new WeakMap();
-const dongAge = new WeakMap();
-
-class Dong {
-  constructor() {
-    classPrivateFieldSet(this, dongName, 'dong');
-    classPrivateFieldSet(this, dongAge, 20);
-  }
-
-  hello() {
-    return `I'm ${classPrivateFieldGet(this, dongName)}, ${classPrivateFieldGet(
-      this,
-      dongAge
-    )} years old`;
-  }
-}
-```
-
-#### Class Static Blocks
-
-Static blocks have access to class private member.
-Its mainly useful whenever set up multiple static fields.
-
-```ts
-class Foo {
-  static #count = 0;
-
-  get count() {
-    return Foo.#count;
-  }
-
-  static {
-    try {
-      const lastInstances = loadLastInstances();
-      Foo.#count += lastInstances.length;
-    } catch {}
-  }
-}
-```
-
-```ts
-class Translator {
-  static translations = {
-    yes: 'ja',
-  };
-
-  static englishWords = [];
-  static germanWords = [];
-  static {
-    for (const [english, german] of Object.entries(translations)) {
-      this.englishWords.push(english);
-      this.germanWords.push(german);
-    }
-  }
-}
-```
-
-```ts
-class SuperClass {
-  static superField1 = console.log('superField1');
-  static {
-    assert.equal(this, SuperClass);
-    console.log('static block 1 SuperClass');
-  }
-
-  static superField2 = console.log('superField2');
-  static {
-    console.log('static block 2 SuperClass');
-  }
-}
-
-class SubClass extends SuperClass {
-  static subField1 = console.log('subField1');
-  static {
-    assert.equal(this, SubClass);
-    console.log('static block 1 SubClass');
-  }
-
-  static subField2 = console.log('subField2');
-  static {
-    console.log('static block 2 SubClass');
-  }
-}
-
-// Output:
-// 'superField1'
-// 'static block 1 SuperClass'
-// 'superField2'
-// 'static block 2 SuperClass'
-// 'subField1'
-// 'static block 1 SubClass'
-// 'subField2'
-// 'static block 2 SubClass'
-```
-
-### ES6 Map
-
-- `size`.
-- `has()`.
-- `get()`.
-- `set()`.
-- `delete()`.
-- `clear()`.
-- `keys()`.
-- `values()`.
-- `entries()`.
-
-```ts
-const map = new Map([
-  // You define a map via an array of 2-element arrays. The first
-  // element of each nested array is the key, and the 2nd is the value
-  ['name', 'Jean-Luc Picard'],
-  ['age', 59],
-  ['rank', 'Captain'],
-]);
-
-// To get the value associated with a given `key` in a map, you
-// need to call `map.get(key)`. Using `map.key` will **not** work.
-map.get('name'); // 'Jean-Luc Picard'
-```
-
-```ts
-const map = new Map([]);
-
-// eslint-disable-next-line no-new-wrappers
-const n1 = new Number(5);
-// eslint-disable-next-line no-new-wrappers
-const n2 = new Number(5);
-
-map.set(n1, 'One');
-map.set(n2, 'Two');
-
-// `n1` and `n2` are objects, so `n1 !== n2`. That means the map has
-// separate keys for `n1` and `n2`.
-map.get(n1); // 'One'
-map.get(n2); // 'Two'
-map.get(5); // undefined
-
-// If you were to do this with an object, `n2` would overwrite `n1`
-const obj = {};
-obj[n1] = 'One';
-obj[n2] = 'Two';
-
-const two1 = obj[n1]; // 'Two'
-const two2 = obj[5]; // 'Two'
-```
-
-```ts
-const objectClone = new Map(Object.entries(object));
-const arrayClone = new Map(Array.from(map.entries));
-const map = new Map([
-  ['name', 'Jean-Luc Picard'],
-  ['age', 59],
-  ['rank', 'Captain'],
-]);
-
-// The `for/of` loop can loop through iterators
-for (const key of map.keys()) {
-  console.log(key); // 'name', 'age', 'rank'
-}
-
-for (const value of map.values()) {
-  console.log(value); // 'Jean-Luc Picard', 59, 'Captain'
-}
-
-for (const [key, value] of map.entries()) {
-  console.log(key); // 'name', 'age', 'rank'
-  console.log(value); // 'Jean-Luc Picard', 59, 'Captain'
-}
-```
-
-### ES6 Set
-
-- `size`.
-- `has()`.
-- `add()`.
-- `delete()`.
-- `clear()`.
-- `keys()`.
-- `values()`.
-- `entries()`.
-
-```ts
-class XSet extends Set {
-  union(...sets) {
-    return XSet.union(this, ...sets);
-  }
-
-  intersection(...sets) {
-    return XSet.intersection(this, ...sets);
-  }
-
-  difference(set) {
-    return XSet.difference(this, set);
-  }
-
-  symmetricDifference(set) {
-    return XSet.symmetricDifference(this, set);
-  }
-
-  cartesianProduct(set) {
-    return XSet.cartesianProduct(this, set);
-  }
-
-  powerSet() {
-    return XSet.powerSet(this);
-  }
-
-  // 返回两个或更多集合的并集
-  static union(a, ...bSets) {
-    const unionSet = new XSet(a);
-
-    for (const b of bSets) {
-      for (const bValue of b) {
-        unionSet.add(bValue);
-      }
-    }
-
-    return unionSet;
-  }
-
-  // 返回两个或更多集合的交集
-  static intersection(a, ...bSets) {
-    const intersectionSet = new XSet(a);
-
-    for (const aValue of intersectionSet) {
-      for (const b of bSets) {
-        if (!b.has(aValue)) {
-          intersectionSet.delete(aValue);
-        }
-      }
-    }
-
-    return intersectionSet;
-  }
-
-  // 返回两个集合的差集
-  static difference(a, b) {
-    const differenceSet = new XSet(a);
-
-    for (const bValue of b) {
-      if (a.has(bValue)) {
-        differenceSet.delete(bValue);
-      }
-    }
-
-    return differenceSet;
-  }
-
-  // 返回两个集合的对称差集
-  static symmetricDifference(a, b) {
-    // 按照定义，对称差集可以表达为:
-    return a.union(b).difference(a.intersection(b));
-  }
-
-  // 返回两个集合（数组对形式）的笛卡儿积
-  // 必须返回数组集合，因为笛卡儿积可能包含相同值的对
-  static cartesianProduct(a, b) {
-    const cartesianProductSet = new XSet();
-
-    for (const aValue of a) {
-      for (const bValue of b) {
-        cartesianProductSet.add([aValue, bValue]);
-      }
-    }
-
-    return cartesianProductSet;
-  }
-
-  // 返回一个集合的幂集
-  static powerSet(a) {
-    const powerSet = new XSet().add(new XSet());
-
-    for (const aValue of a) {
-      for (const set of new XSet(powerSet)) {
-        powerSet.add(new XSet(set).add(aValue));
-      }
-    }
-
-    return powerSet;
-  }
-}
-```
-
-### WeakMap and WeakSet
-
-WeakMap 结构与 Map 结构基本类似,
-唯一的区别就是 WeakMap 只接受**非 null 对象**作为键名:
-
-- 弱键: 键名构建的引用**无法阻止对象执行垃圾回收**.
-- 不可迭代键: 键/值随时可能被垃圾回收, 无需提供迭代能力, 无 `clear()` 方法.
-
-它的键所对应的对象可能会在将来消失.
-一个对应 DOM 元素的 WeakMap 结构,
-当某个 DOM 元素被清除,
-其所对应的 WeakMap 记录就会自动被移除.
-
-有时候我们会把对象作为一个对象的键用来存放属性值,
-普通集合类型比如简单对象 (Object/Map/Set) 会阻止垃圾回收器对这些作为属性键存在的对象的回收,
-有造成内存泄漏的危险,
-WeakMap/WeakSet 则更加**内存安全**.
-
-### Symbol
-
-- A Symbol is a **unique** and **immutable** primitive value
-  and may be used as the key of an Object property.
-- Symbols don't auto-convert to "strings" and can't convert to numbers
-
-```ts
-const arr = ['a', 'b', 'c'];
-const iter = arr[Symbol.iterator]();
-
-iter.next(); // { value: 'a', done: false }
-iter.next(); // { value: 'b', done: false }
-iter.next(); // { value: 'c', done: false }
-iter.next(); // { value: undefined, done: true }
-```
-
-```ts
-// eslint-disable-next-line symbol-description
-const genericSymbol = Symbol();
-// eslint-disable-next-line symbol-description
-const otherGenericSymbol = Symbol();
-console.log(genericSymbol === otherGenericSymbol); // false
-
-const fooSymbol = Symbol('foo');
-const otherFooSymbol = Symbol('foo');
-console.log(fooSymbol === otherFooSymbol); // false
-
-const fooGlobalSymbol = Symbol.for('foobar'); // 创建新符号
-const otherFooGlobalSymbol = Symbol.for('foobar'); // 重用已有符号
-console.log(fooGlobalSymbol === otherFooGlobalSymbol); // true
-```
-
-#### Built-in Symbol Methods
-
-- `[Symbol.iterator]()`: `for of`.
-- `[Symbol.asyncIterator]()`: `for await of`.
-- `[Symbol.match/replace/search/split](target)`: `string.match/replace/search/split(classWithSymbolFunction)`.
-- `[Symbol.toPrimitive](hint)`: 强制类型转换.
-- `[Symbol.hasInstance](target)`: `instance of`.
-
-```ts
-class Bar {}
-class Baz extends Bar {
-  static [Symbol.hasInstance]() {
-    return false;
-  }
-}
-
-const b = new Baz();
-console.log(Bar[Symbol.hasInstance](b)); // true
-console.log(b instanceof Bar); // true
-console.log(Baz[Symbol.hasInstance](b)); // false
-console.log(b instanceof Baz); // false
-```
-
-### Iterator
-
-- 一个数据结构只要实现了 `[Symbol.iterator]()` 接口, 便可成为可迭代数据结构 (`Iterable`):
-  - String: `StringIterator`.
-  - Array: `ArrayIterator`.
-  - Map: `MapIterator`.
-  - Set: `SetIterator`.
-  - `arguments` 对象.
-  - DOM collection (`NodeList`): `ArrayIterator`.
-- 接收可迭代对象的原生语言特性:
-  - `for...in`/`for...of`.
-  - Destructing: 数组解构.
-  - `...`: 扩展操作符.
-  - `Array.from()`.
-  - `new Map()`.
-  - `new Set()`.
-  - `Promise.all()`.
-  - `Promise.race()`.
-  - `yield *` 操作符.
-- 只有 `for...in` 可以遍历到原型上的属性.
-- `for...in`/`for...of` 隐形调用迭代器的方式, 称为内部迭代器, 使用方便, 不可自定义迭代过程.
-- `{ next, done, value }` 显式调用迭代器的方式, 称为外部迭代器, 使用复杂, 可以自定义迭代过程.
-- Object.getOwnPropertyNames, Object.getOwnPropertySymbols 和 Reflect.ownKeys 可获取到不可枚举的属性.
-- Object.getOwnPropertySymbols 和 Reflect.ownKeys 可获取到 Symbol 属性.
-
-```ts
-const IteratorResult = {
-  value: any,
-  done: boolean,
-};
-
-const Iterator = {
-  next() {
-    return IteratorResult;
-  },
-  return() {
-    // 迭代器提前提出: break/continue/throw/destructing.
-    return IteratorResult;
-  },
-  throw(e) {
-    throw e;
-  },
-};
-
-const Iterable = {
-  [Symbol.iterator]() {
-    return new Iterator();
-  },
-};
-
-const IterableIterator = {
-  next() {
-    return IteratorResult;
-  },
-  return() {
-    return IteratorResult;
-  },
-  [Symbol.iterator]() {
-    return this;
-  },
-};
-```
-
-#### Synchronous Iterator
-
-```ts
-class Counter {
-  constructor(limit) {
-    this.limit = limit;
-  }
-
-  [Symbol.iterator]() {
-    let count = 1;
-    const limit = this.limit;
-
-    return {
-      next() {
-        if (count <= limit) {
-          return { done: false, value: count++ };
-        } else {
-          return { done: true };
-        }
-      },
-      return() {
-        console.log('Exiting early');
-        return { done: true };
-      },
-    };
-  }
-}
-
-const counter1 = new Counter(5);
-for (const i of counter1) {
-  if (i > 2) {
-    break;
-  }
-  console.log(i);
-}
-// 1
-// 2
-// Exiting early
-
-const counter2 = new Counter(5);
-try {
-  for (const i of counter2) {
-    if (i > 2) {
-      throw new Error('err');
-    }
-
-    console.log(i);
-  }
-} catch (e) {}
-// 1
-// 2
-// Exiting early
-
-const counter3 = new Counter(5);
-const [a, b] = counter3;
-// Exiting early
-```
-
-```ts
-function methodsIterator() {
-  let index = 0;
-  const methods = Object.keys(this)
-    .filter(key => {
-      return typeof this[key] === 'function';
-    })
-    .map(key => this[key]);
-
-  // iterator object
-  return {
-    next: () => ({
-      // Conform to Iterator protocol
-      done: index >= methods.length,
-      value: methods[index++],
-    }),
-  };
-}
-
-const myMethods = {
-  toString() {
-    return '[object myMethods]';
-  },
-  sumNumbers(a, b) {
-    return a + b;
-  },
-  numbers: [1, 5, 6],
-  [Symbol.iterator]: methodsIterator, // Conform to Iterable Protocol
-};
-
-for (const method of myMethods) {
-  console.log(method); // logs methods `toString` and `sumNumbers`
-}
-```
-
-#### Asynchronous Iterator
-
-```ts
-const AsyncIterable = {
-  [Symbol.asyncIterator]() {
-    return AsyncIterator;
-  },
-};
-
-const AsyncIterator = {
-  next() {
-    return Promise.resolve(IteratorResult);
-  },
-  return() {
-    return Promise.resolve(IteratorResult);
-  },
-  throw(e) {
-    return Promise.reject(e);
-  },
-};
-
-const IteratorResult = {
-  value: any,
-  done: boolean,
-};
-```
-
-```ts
-function remotePostsAsyncIteratorsFactory() {
-  let i = 1;
-  let done = false;
-
-  const asyncIterableIterator = {
-    // the next method will always return a Promise
-    async next() {
-      // do nothing if we went out-of-bounds
-      if (done) {
-        return Promise.resolve({
-          done: true,
-          value: undefined,
-        });
-      }
-
-      const res = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${i++}`
-      ).then(r => r.json());
-
-      // the posts source is ended
-      if (Object.keys(res).length === 0) {
-        done = true;
-        return Promise.resolve({
-          done: true,
-          value: undefined,
-        });
-      } else {
-        return Promise.resolve({
-          done: false,
-          value: res,
-        });
-      }
-    },
-    [Symbol.asyncIterator]() {
-      return this;
-    },
-  };
-
-  return asyncIterableIterator;
-}
-
-(async () => {
-  const ait = remotePostsAsyncIteratorsFactory();
-
-  await ait.next(); // { done:false, value:{id: 1, ...} }
-  await ait.next(); // { done:false, value:{id: 2, ...} }
-  await ait.next(); // { done:false, value:{id: 3, ...} }
-  // ...
-  await ait.next(); // { done:false, value:{id: 100, ...} }
-  await ait.next(); // { done:true, value:undefined }
-})();
-```
-
-```ts
-// tasks will run in parallel
-ait.next().then();
-ait.next().then();
-ait.next().then();
-```
-
-### Generator
-
-- 函数名称前面加一个星号 (`*`) 表示它是一个生成器.
-- 箭头函数不能用来定义生成器函数.
-- 调用生成器函数会产生一个生成器对象, 其是一个 IterableIterator 对象 (自引用可迭代对象).
-- [Synchronous Generators](https://dev.to/jfet97/javascript-iterators-and-generators-synchronous-generators-3ai4)
-
-```ts
-function* generatorFn() {}
-console.log(generatorFn);
-// f* generatorFn() {}
-
-console.log(generatorFn()[Symbol.iterator]);
-// f [Symbol.iterator]() {native code}
-
-console.log(generatorFn());
-// generatorFn {<suspended>}
-
-console.log(generatorFn()[Symbol.iterator]());
-// generatorFn {<suspended>}
-
-const g = generatorFn(); // IterableIterator
-console.log(g === g[Symbol.iterator]());
-// true
-```
-
-#### Generator Basic Usage
-
-```ts
-function* gen() {
-  yield 1;
-  yield 2;
-  yield 3;
-}
-
-const g = gen();
-
-g.next(); // { value: 1, done: false }
-g.next(); // { value: 2, done: false }
-g.next(); // { value: 3, done: false }
-g.next(); // { value: undefined, done: true }
-g.return(); // { value: undefined, done: true }
-g.return(1); // { value: 1, done: true }
-```
-
-因为生成器对象实现了 Iterable 接口,
-生成器函数和默认迭代器**被调用**之后都产生迭代器,
-所以生成器适合作为默认迭代器:
-
-```ts
-const users = {
-  james: false,
-  andrew: true,
-  alexander: false,
-  daisy: false,
-  luke: false,
-  clare: true,
-
-  *[Symbol.iterator]() {
-    // this === 'users'
-    for (const key in this) {
-      if (this[key]) yield key;
-    }
-  },
-};
-
-for (const key of users) {
-  console.log(key);
-}
-// andrew
-// clare
-
-class Foo {
-  constructor() {
-    this.values = [1, 2, 3];
-  }
-
-  *[Symbol.iterator]() {
-    yield* this.values;
-  }
-}
-
-const f = new Foo();
-for (const x of f) {
-  console.log(x);
-}
-// 1
-// 2
-// 3
-```
-
-Early return:
-
-- `return()` 方法会强制生成器进入关闭状态.
-- 提供给 `return()` 的值, 就是终止迭代器对象的值.
-
-```ts
-function* gen() {
-  yield 1;
-  yield 2;
-  yield 3;
-}
-
-const g = gen();
-
-g.next(); // { value: 1, done: false }
-g.return('foo'); // { value: "foo", done: true }
-g.next(); // { value: undefined, done: true }
-```
-
-Error handling:
-
-- `throw()` 方法会在暂停的时候将一个提供的错误注入到生成器对象中.
-  如果错误未被处理, 生成器就会关闭.
-- 假如生成器函数内部处理了这个错误, 那么生成器就不会关闭, 可以恢复执行.
-  错误处理会跳过对应的 yield (跳过一个值).
-
-```ts
-function* generator() {
-  try {
-    yield 1;
-  } catch (e) {
-    console.log(e);
-  }
-
-  yield 2;
-  yield 3;
-  yield 4;
-  yield 5;
-}
-
-const it = generator();
-
-it.next(); // {value: 1, done: false}
-
-// the error will be handled and printed ("Error: Handled!"),
-// then the flow will continue, so we will get the
-// next yielded value as result.
-it.throw(Error('Handled!')); // {value: 2, done: false}
-
-it.next(); // {value: 3, done: false}
-
-// now the generator instance is paused on the
-// third yield that is not inside a try-catch.
-// the error will be re-thrown out
-it.throw(Error('Not handled!')); // !!! Uncaught Error: Not handled! !!!
-
-// now the iterator is exhausted
-it.next(); // {value: undefined, done: true}
-```
-
-#### Generator Complex Usage
-
-Messaging system:
-
-```ts
-function* lazyCalculator(operator) {
-  const firstOperand = yield;
-  const secondOperand = yield;
-
-  switch (operator) {
-    case '+':
-      yield firstOperand + secondOperand;
-      return;
-    case '-':
-      yield firstOperand - secondOperand;
-      return;
-    case '*':
-      yield firstOperand * secondOperand;
-      return;
-    case '/':
-      yield firstOperand / secondOperand;
-      return;
-    default:
-      throw new Error('Unsupported operation!');
-  }
-}
-
-const g = gen('*');
-g.next(); // { value: undefined, done: false }
-g.next(10); // { value: undefined, done: false }
-g.next(2); // { value: 20, done: false }
-g.next(); // { value: undefined, done: true }
-```
-
-Generator based control flow goodness for nodejs and the browser,
-using promises, letting you write non-blocking code in a nice-ish way
-(just like [tj/co](https://github.com/tj/co)).
-
-```ts
-function coroutine(generatorFunc) {
-  const generator = generatorFunc();
-  nextResponse();
-
-  function nextResponse(value) {
-    const response = generator.next(value);
-
-    if (response.done) {
-      return;
-    }
-
-    if (value.then) {
-      value.then(nextResponse);
-    } else {
-      nextResponse(response.value);
-    }
-  }
-}
-
-coroutine(function* bounce() {
-  yield bounceUp;
-  yield bounceDown;
+const lfEnglish = new Intl.ListFormat('en');
+// const lfEnglish = new Intl.ListFormat('en', { type: 'disjunction' }); => 'or'
+
+lfEnglish.format(['Ada', 'Grace', 'Ida']);
+// => 'Ada, Grace and Ida'
+
+const formatter = new Intl.ListFormat('en', {
+  style: 'long',
+  type: 'conjunction',
 });
-```
+console.log(formatter.format(vehicles));
+// expected output: "Motorcycle, Bus, and Car"
 
-#### Asynchronous Generator
-
-```ts
-const asyncSource = {
-  async *[Symbol.asyncIterator]() {
-    yield await new Promise(resolve => setTimeout(resolve, 1000, 1));
-  },
-};
-
-async function* remotePostsAsyncGenerator() {
-  let i = 1;
-
-  while (true) {
-    const res = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${i++}`
-    ).then(r => r.json());
-
-    // when no more remote posts will be available,
-    // it will break the infinite loop.
-    // the async iteration will end
-    if (Object.keys(res).length === 0) {
-      break;
-    }
-
-    yield res;
-  }
-}
-```
-
-```ts
-function* chunkify(array, n) {
-  yield array.slice(0, n);
-  array.length > n && (yield* chunkify(array.slice(n), n));
-}
-
-async function* getRemoteData() {
-  let hasMore = true;
-  let page;
-
-  while (hasMore) {
-    const { next_page, results } = await fetch(URL, { params: { page } }).then(
-      r => r.json()
-    );
-
-    // Return 5 elements with each iteration.
-    yield* chunkify(results, 5);
-
-    hasMore = next_page != null;
-    page = next_page;
-  }
-}
-```
-
-当为 `next` 传递值进行调用时,
-传入的值会被当作上一次生成器函数暂停时 `yield` 关键字的返回值处理.
-第一次调用 `g.next()` 传入参数是毫无意义,
-因为首次调用 `next` 函数时,
-生成器函数并没有在 `yield` 关键字处暂停.
-
-```ts
-function promise1() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve('1');
-    }, 1000);
-  });
-}
-
-function promise2(value) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(`value:${value}`);
-    }, 1000);
-  });
-}
-
-function* readFile() {
-  const value = yield promise1();
-  const result = yield promise2(value);
-  return result;
-}
-
-function co(gen) {
-  return new Promise((resolve, reject) => {
-    const g = gen();
-
-    function next(param) {
-      const { done, value } = g.next(param);
-
-      if (!done) {
-        // Resolve chain.
-        Promise.resolve(value).then(res => next(res));
-      } else {
-        resolve(value);
-      }
-    }
-
-    // First invoke g.next() without params.
-    next();
-  });
-}
-
-co(readFile).then(res => console.log(res));
-// const g = readFile();
-// const value = g.next();
-// const result = g.next(value);
-// resolve(result);
-```
-
-#### Recursive Generator
-
-`yield *` 能够迭代一个可迭代对象:
-
-```ts
-function* generatorFn() {
-  console.log('iter value:', yield* [1, 2, 3]);
-}
-
-for (const x of generatorFn()) {
-  console.log('value:', x);
-}
-// value: 1
-// value: 2
-// value: 3
-// iter value: undefined
-
-function* innerGeneratorFn() {
-  yield 'foo';
-  return 'bar';
-}
-
-function* outerGeneratorFn(genObj) {
-  console.log('iter value:', yield* innerGeneratorFn());
-}
-
-for (const x of outerGeneratorFn()) {
-  console.log('value:', x);
-}
-// value: foo
-// iter value: bar
-```
-
-在生成器函数内部,
-用 `yield *` 去迭代自身产生的生成器对象 (Generator Object -> IterableIterator),
-实现递归算法:
-
-```ts
-// Graph traverse.
-function* traverse(nodes) {
-  for (const node of nodes) {
-    if (!visitedNodes.has(node)) {
-      yield node;
-      yield* traverse(node.neighbors);
-    }
-  }
-}
-```
-
-```ts
-import { promises as fs } from 'fs';
-import { basename, dirname, join } from 'path';
-
-async function* walk(dir: string): AsyncGenerator<string> {
-  for await (const d of await fs.opendir(dir)) {
-    const entry = join(dir, d.name);
-
-    if (d.isDirectory()) {
-      yield* walk(entry);
-    } else if (d.isFile()) {
-      yield entry;
-    }
-  }
-}
-
-async function run(arg = '.') {
-  if ((await fs.lstat(arg)).isFile()) {
-    return runTestFile(arg);
-  }
-
-  for await (const file of walk(arg)) {
-    if (
-      !dirname(file).includes('node_modules') &&
-      (basename(file) === 'test.js' || file.endsWith('.test.js'))
-    ) {
-      console.log(file);
-      await runTestFile(file);
-    }
-  }
-}
-```
-
-### Proxy and Reflect
-
-Modify default object behavior with `Proxy` and `Reflect`:
-
-```ts
-// new Proxy(target, handler)
-Proxy(target, {
-  set(target, name, value, receiver) {
-    const success = Reflect.set(target, name, value, receiver);
-    if (success) {
-      log(`property ${name} on ${target} set to ${value}`);
-    }
-    return success;
-  },
+const formatter2 = new Intl.ListFormat('de', {
+  style: 'short',
+  type: 'disjunction',
 });
+console.log(formatter2.format(vehicles));
+// expected output: "Motorcycle, Bus oder Car"
+
+const formatter3 = new Intl.ListFormat('en', { style: 'narrow', type: 'unit' });
+console.log(formatter3.format(vehicles));
+// expected output: "Motorcycle Bus Car"
 ```
 
-`Reflect` handlers:
-
-- `Reflect.get(target, propKey)`.
-- `Reflect.set(target, propKey, value)`.
-- `Reflect.has(target, propKey)`.
-- `Reflect.apply(target, thisArgument, argumentsList)`.
-- `Reflect.construct(target, argumentsList)`:
-  `new target(...argumentsList)`.
-- `Reflect.ownKeys(target)`:
-  `Object.getOwnPropertyNames` + `Object.getOwnPropertySymbols`,
-  all keys include Symbols.
-- `Reflect.getPrototypeOf(target)`.
-- `Reflect.setPrototypeOf(target, prototype)`.
-- `Reflect.getOwnPropertyDescriptor(target, propKey)`.
-- `Reflect.defineProperty(target, propKey, attributes)`.
-- `Reflect.deleteProperty(target, propKey)`.
-- `Reflect.isExtensible(target)`.
-- `Reflect.preventExtensions(target)`.
-
-Change original object will change proxy object,
-change proxy object will change original object via `set` related API.
-
-#### Proxy vs DefineProperty
-
-- Simple: `Proxy` 使用上比 `Object.defineProperty` 方便.
-  - `Object.defineProperty` 只能监听对象, 导致 `Vue 2` `data` 属性必须通过一个返回对象的函数方式初始化,
-  - `Vue 3` 更加多元化, 可以监听任意数据.
-- Performant: `Proxy` 代理整个对象, `Object.defineProperty` 只代理对象上的某个属性.
-  - `Object.defineProperty` 由于每次只能监听对象一个键的 `get`/`set`, 导致需要循环监听浪费性能.
-  - `Proxy` 可以一次性监听到所有属性.
-- Lazy: `Proxy` 性能优于 `Object.defineProperty`.
-  - 如果对象内部要全部递归代理, 则 `Proxy` 可以只在调用时递归.
-  - `Object.defineProperty` 需要在一开始就全部递归.
-- Feature:
-  - 对象上定义新属性时, 只有 `Proxy` 可以监听到.
-  - 数组新增删除修改时, 只有 `Proxy` 可以监听到.
-  - `Object.defineProperty` 无法监听数组, `Proxy` 则可以直接监听数组变化.
-  - Vue2: 重写数组方法监听数组变化, Vue3: `Proxy` 监听数组变化.
-- `Proxy` 不兼容 IE, `Object.defineProperty` 不兼容 IE8 及以下.
-
-#### Default Zero Value with Proxy
+### Time i18n
 
 ```ts
-const withZeroValue = (target, zeroValue = 0) =>
-  new Proxy(target, {
-    get: (obj, prop) => (prop in obj ? obj[prop] : zeroValue),
-  });
+const rtfEnglish = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 
-let pos = { x: 4, y: 19 };
-console.log(pos.z); // => undefined
-pos = withZeroValue(pos);
-console.log(pos.z); // => 0
+rtf.format(-1, 'day'); // 'yesterday'
+rtf.format(0, 'day'); // 'today'
+rtf.format(1, 'day'); // 'tomorrow'
+rtf.format(-1, 'week'); // 'last week'
+rtf.format(0, 'week'); // 'this week'
+rtf.format(1, 'week'); // 'next week'
 ```
 
-#### Negative Array Indices with Proxy
-
 ```ts
-const negativeArray = els =>
-  new Proxy(target, {
-    get: (target, propKey, receiver) =>
-      Reflect.get(
-        target,
-        +propKey < 0 ? String(target.length + +propKey) : propKey,
-        receiver
-      ),
-  });
-```
-
-#### Hiding Properties with Proxy
-
-```ts
-const hide = (target, prefix = '_') =>
-  new Proxy(target, {
-    has: (obj, prop) => !prop.startsWith(prefix) && prop in obj,
-    ownKeys: obj =>
-      Reflect.ownKeys(obj).filter(
-        prop => typeof prop !== 'string' || !prop.startsWith(prefix)
-      ),
-    get: (obj, prop, rec) => (prop in rec ? obj[prop] : undefined),
-  });
-
-const userData = hide({
-  firstName: 'Tom',
-  mediumHandle: '@bar',
-  _favoriteRapper: 'Drake',
+const dtfEnglish = new Intl.DateTimeFormat('en', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
 });
 
-const falsy = '_favoriteRapper' in userData; // has: false
-const keys = Object.keys(userData); // ownKeys: ['firstName', 'mediumHandle']
-console.log(userData._favoriteRapper); // get: undefined
+dtfEnglish.format(new Date()); // => 'May 7, 2019'
+dtfEnglish.formatRange(start, end); // => 'May 7 - 9, 2019'
 ```
-
-#### Read Only Object with Proxy
-
-```ts
-const NOPE = () => {
-  throw new Error("Can't modify read-only object");
-};
-
-const NOPE_HANDLER = {
-  set: NOPE,
-  defineProperty: NOPE,
-  deleteProperty: NOPE,
-  preventExtensions: NOPE,
-  setPrototypeOf: NOPE,
-  get: (obj, prop) => {
-    if (prop in obj) {
-      return Reflect.get(obj, prop);
-    }
-
-    throw new ReferenceError(`Unknown prop "${prop}"`);
-  },
-};
-
-const readOnly = target => new Proxy(target, NODE_HANDLER);
-```
-
-#### Range Judgement with Proxy
-
-```ts
-const range = (min, max) =>
-  new Proxy(Object.create(null), {
-    has: (_, prop) => +prop >= min && +prop <= max,
-  });
-
-const X = 10.5;
-const nums = [1, 5, X, 50, 100];
-
-if (X in range(1, 100)) {
-  // => true
-}
-
-nums.filter(n => n in range(1, 10));
-// => [1, 5]
-```
-
-#### Handle Exception with Proxy
-
-```ts
-function createExceptionProxy(target) {
-  return new Proxy(target, {
-    get: (target, prop) => {
-      if (!(prop in target)) {
-        return;
-      }
-
-      if (typeof target[prop] === 'function') {
-        return createExceptionZone(target, prop);
-      }
-
-      return target[prop];
-    },
-  });
-}
-
-function createExceptionZone(target, prop) {
-  return (...args) => {
-    let result;
-    ExceptionsZone.run(() => {
-      result = target[prop](...args);
-    });
-    return result;
-  };
-}
-
-class ExceptionsZone {
-  static exceptionHandler = new ExceptionHandler();
-
-  static run(callback) {
-    try {
-      callback();
-    } catch (e) {
-      this.exceptionHandler.handle(e);
-    }
-  }
-}
-
-class ExceptionHandler {
-  handle(exception) {
-    console.log('记录错误：', exception.message, exception.stack);
-  }
-}
-```
-
-```ts
-const obj = {
-  name: 'obj',
-  say() {
-    console.log(`Hi, I'm ${this.name}`);
-  },
-  coding() {
-    // xxx.
-    throw new Error('bug');
-  },
-  coding2() {
-    // xxx.
-    throw new Error('bug2');
-  },
-};
-
-const proxy = createProxy(obj);
-
-proxy.say();
-proxy.coding();
-```
-
-### Promise
-
-Avoid callback hell with:
-
-- return `new Promise`.
-- return `promise.then((value) => {})`.
-- error handle with `promise.catch((err) => {})`.
-- cleanup with `promise.finally(() => {})`.
-
-resolve only accept **one** value
-
-```ts
-return new Promise(resolve => resolve([a, b]));
-```
-
-- promises on the same chain execute orderly
-- promises on two separate chains execute in random order
-
-```ts
-const users = ['User1', 'User2', 'User3', 'User4'];
-
-const response = [];
-
-const getUser = user => () => {
-  return axios.get(`/users/userId=${user}`).then(res => response.push(res));
-};
-
-const getUsers = users => {
-  const [getFirstUser, getSecondUser, getThirdUser, getFourthUser] =
-    users.map(getUser);
-
-  getFirstUser()
-    .then(getSecondUser)
-    .then(getThirdUser)
-    .then(getFourthUser)
-    .catch(console.log);
-};
-```
-
-```ts
-const users = ['User1', 'User2', 'User3', 'User4'];
-
-let response = [];
-
-function getUsers(users) {
-  const promises = [];
-  promises[0] = axios.get(`/users/userId=${users[0]}`);
-  promises[1] = axios.get(`/users/userId=${users[1]}`);
-  promises[2] = axios.get(`/users/userId=${users[2]}`);
-  promises[3] = axios.get(`/users/userId=${users[3]}`);
-
-  Promise.all(promises)
-    .then(userDataArr => (response = userDataArr))
-    .catch(err => console.log(err));
-}
-```
-
-#### Promise Array Functions
-
-- `Promise.all(iterable)` fail-fast:
-  if at least one promise in the promises array rejects,
-  then the promise returned rejects too.
-  Short-circuits when an input value is rejected.
-- `Promise.any(iterable)`:
-  resolves if any of the given promises are resolved.
-  Short-circuits when an input value is fulfilled.
-- `Promise.race(iterable)`:
-  Short-circuits when an input value is settled
-  (fulfilled or rejected).
-- `Promise.allSettled(iterable)`:
-  returns when all given promises are settled
-  (rejected or fulfilled, doesn't matter).
-
-```ts
-Promise.all(urls.map(fetch))
-  .then(responses => Promise.all(responses.map(res => res.text())))
-  .then(texts => {
-    //
-  });
-```
-
-```ts
-Promise.all(urls.map(url => fetch(url).then(resp => resp.text()))).then(
-  texts => {
-    //
-  }
-);
-```
-
-- `Promise.all` with `async`/`await`
-
-```ts
-const loadData = async () => {
-  try {
-    const urls = ['...', '...'];
-
-    const results = await Promise.all(urls.map(fetch));
-    const dataPromises = await results.map(result => result.json());
-    const finalData = Promise.all(dataPromises);
-
-    return finalData;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-const data = loadData().then(data => console.log(data));
-```
-
-#### Promise Polyfill
-
-```ts
-class Promise {
-  // `executor` takes 2 parameters, `resolve()` and `reject()`. The executor
-  // function is responsible for calling `resolve()` or `reject()` to say that
-  // the async operation succeeded (resolved) or failed (rejected).
-  constructor(executor) {
-    if (typeof executor !== 'function') {
-      throw new TypeError('Executor must be a function');
-    }
-
-    // Internal state. `$state` is the state of the promise, and `$chained` is
-    // an array of the functions we need to call once this promise is settled.
-    this.$state = 'PENDING';
-    this.$chained = [];
-
-    // Implement `resolve()` and `reject()` for the executor function to use
-    const resolve = res => {
-      // A promise is considered "settled" when it is no longer
-      // pending, that is, when either `resolve()` or `reject()`
-      // was called once. Calling `resolve()` or `reject()` twice
-      // or calling `reject()` after `resolve()` was already called
-      // are no-ops.
-      if (this.$state !== 'PENDING') {
-        return;
-      }
-
-      // If `res` is a "thenable", lock in this promise to match the
-      // resolved or rejected state of the thenable.
-      const then = res != null ? res.then : null;
-      if (typeof then === 'function') {
-        // In this case, the promise is "resolved", but still in the 'PENDING'
-        // state. This is what the ES6 spec means when it says "A resolved promise
-        // may be pending, fulfilled or rejected" in
-        // http://www.ecma-international.org/ecma-262/6.0/#sec-promise-objects
-        return then(resolve, reject);
-      }
-
-      this.$state = 'FULFILLED';
-      this.$internalValue = res;
-
-      // If somebody called `.then()` while this promise was pending, need
-      // to call their `onFulfilled()` function
-      for (const { onFulfilled } of this.$chained) {
-        onFulfilled(res);
-      }
-
-      return res;
-    };
-
-    const reject = err => {
-      if (this.$state !== 'PENDING') {
-        return;
-      }
-
-      this.$state = 'REJECTED';
-      this.$internalValue = err;
-
-      for (const { onRejected } of this.$chained) {
-        onRejected(err);
-      }
-    };
-
-    // Call the executor function with `resolve()` and `reject()` as in the spec.
-    try {
-      // If the executor function throws a sync exception, we consider that
-      // a rejection. Keep in mind that, since `resolve()` or `reject()` can
-      // only be called once, a function that synchronously calls `resolve()`
-      // and then throws will lead to a fulfilled promise and a swallowed error
-      executor(resolve, reject);
-    } catch (err) {
-      reject(err);
-    }
-  }
-
-  // `onFulfilled` is called if the promise is fulfilled, and `onRejected`
-  // if the promise is rejected. For now, you can think of 'fulfilled' and
-  // 'resolved' as the same thing.
-  then(onFulfilled, onRejected) {
-    return new Promise((resolve, reject) => {
-      // Ensure that errors in `onFulfilled()` and `onRejected()` reject the
-      // returned promise, otherwise they'll crash the process. Also, ensure
-      // that the promise
-      const _onFulfilled = res => {
-        try {
-          // If `onFulfilled()` returns a promise, trust `resolve()` to handle
-          // it correctly.
-          // store new value to new Promise
-          resolve(onFulfilled(res));
-        } catch (err) {
-          reject(err);
-        }
-      };
-
-      const _onRejected = err => {
-        try {
-          // store new value to new Promise
-          reject(onRejected(err));
-        } catch (_err) {
-          reject(_err);
-        }
-      };
-
-      if (this.$state === 'FULFILLED') {
-        _onFulfilled(this.$internalValue);
-      } else if (this.$state === 'REJECTED') {
-        _onRejected(this.$internalValue);
-      } else {
-        this.$chained.push({
-          onFulfilled: _onFulfilled,
-          onRejected: _onRejected,
-        });
-      }
-    });
-  }
-
-  catch(onRejected) {
-    return this.then(null, onRejected);
-  }
-
-  finally() {
-    return this.then(null, null);
-  }
-}
-```
-
-#### Promise Thenable and Catch
-
-The main difference between the forms
-`promise.then(success, error)` and
-`promise.then(success).catch(error)`:
-
-in case if success callback returns a rejected promise,
-then only the second form is going to catch that rejection.
-
-#### Memorize Async Function
-
-```ts
-const memo = {};
-const progressQueues = {};
-
-function memoProcessData(key) {
-  return new Promise((resolve, reject) => {
-    if (Object.prototype.hasOwnProperty.call(memo, key)) {
-      resolve(memo[key]);
-      return;
-    }
-
-    if (!Object.prototype.hasOwnProperty.call(progressQueues, key)) {
-      // Called for a new key
-      // Create an entry for it in progressQueues
-      progressQueues[key] = [[resolve, reject]];
-    } else {
-      // Called for a key that's still being processed
-      // Enqueue it's handlers and exit.
-      progressQueues[key].push([resolve, reject]);
-      return;
-    }
-
-    processData(key)
-      .then(data => {
-        memo[key] = data;
-        for (const [resolver] of progressQueues[key]) resolver(data);
-      })
-      .catch(error => {
-        for (const [, rejector] of progressQueues[key]) rejector(error);
-      })
-      .finally(() => {
-        delete progressQueues[key];
-      });
-  });
-}
-```
-
-### Await and Async
-
-avoid wrong parallel logic (too sequential)
-
-```ts
-// wrong
-const books = await bookModel.fetchAll();
-const author = await authorModel.fetch(authorId);
-
-// right
-const bookPromise = bookModel.fetchAll();
-const authorPromise = authorModel.fetch(authorId);
-const book = await bookPromise;
-const author = await authorPromise;
-
-async function getAuthors(authorIds) {
-  // WRONG, this will cause sequential calls
-  // const authors = _.map(
-  //   authorIds,
-  //   id => await authorModel.fetch(id));
-  // CORRECT
-  const promises = _.map(authorIds, id => authorModel.fetch(id));
-  const authors = await Promise.all(promises);
-}
-```
-
-#### Await Arrays
-
-- If you want to execute await calls in series,
-  use a for-loop (or any loop without a callback).
-- Don't ever use await with `forEach` (`forEach` is not promise-aware),
-  use a for-loop (or any loop without a callback) instead.
-- Don't await inside filter and reduce,
-  always await an array of promises with map, then filter or reduce accordingly.
-
-### Asynchronous Programming
-
-#### Sleep Function
-
-```ts
-function sleep(time) {
-  return new Promise(resolve => setTimeout(resolve, time));
-}
-```
-
-```ts
-sleep(2000).then(() => {
-  // do something after 2000 milliseconds
-  console.log('resolved');
-});
-
-async function add(n1, n2) {
-  await sleep(2222);
-  console.log(n1 + n2);
-}
-
-add(1, 2);
-```
-
-#### Race Condition
-
-- keep latest updates
-- recover from failures
-- online and offline sync ([PouchDB](https://github.com/pouchdb/pouchdb))
-- tools: [redux-saga](https://github.com/redux-saga/redux-saga)
-
-```ts
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
-  data() {
-    return {
-      text: '',
-      results: [],
-      nextRequestId: 1,
-      displayedRequestId: 0,
-    };
-  },
-  watch: {
-    async text(value) {
-      const requestId = this.nextRequestId++;
-      const results = await search(value);
-
-      // guarantee display latest search results (when input keep changing)
-      if (requestId < this.displayedRequestId) {
-        return;
-      }
-
-      this.displayedRequestId = requestId;
-      this.results = results;
-    },
-  },
-};
-```
-
-#### Async Comparison
-
-- promise 和 async/await 是专门用于处理异步操作的.
-- Generator 并不是为异步而设计出来的, 它还有其他功能（对象迭代, 控制输出, Iterator Interface...）
-- promise 编写代码相比 Generator、async 更为复杂化，且可读性也稍差.
-- Generator、async 需要与 promise 对象搭配处理异步情况.
-- async 实质是 Generator 的语法糖, 相当于会自动执行 Generator 函数.
-- async 使用上更为简洁, 将异步代码以同步的形式进行编写, 是处理异步编程的最终方案.

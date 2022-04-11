@@ -1137,7 +1137,6 @@ if (!String.prototype.trim) {
 
 `/[(^\s+)(\s+$)]/g`
 
-
 ## Functional JavaScript
 
 - predictable (pure and immutable)
@@ -4397,7 +4396,6 @@ describe('payment', () => {
 - Cypress official [guide](https://learn.cypress.io).
 - Blank page testing [example](https://glebbahmutov.com/blog/visit-blank-page-between-tests).
 - Cypress CI [action](https://github.com/cypress-io/github-action).
-
 
 ## Chrome DevTools
 
