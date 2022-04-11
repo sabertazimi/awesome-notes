@@ -1614,13 +1614,10 @@ console.log(b instanceof Baz); // false
 - Object.getOwnPropertyNames, Object.getOwnPropertySymbols 和 Reflect.ownKeys 可获取到不可枚举的属性.
 - Object.getOwnPropertySymbols 和 Reflect.ownKeys 可获取到 Symbol 属性.
 
-#### Synchronous Iterator
-
 ```ts
-const Iterable = {
-  [Symbol.iterator]() {
-    return Iterator;
-  },
+const IteratorResult = {
+  value: any,
+  done: boolean,
 };
 
 const Iterator = {
@@ -1635,13 +1632,17 @@ const Iterator = {
   },
 };
 
-const IteratorResult = {
-  value: any,
-  done: boolean,
+const Iterable = {
+  [Symbol.iterator]() {
+    return new Iterator();
+  },
 };
 
-const Iterator = {
+const IterableIterator = {
   next() {
+    return IteratorResult;
+  },
+  return() {
     return IteratorResult;
   },
   [Symbol.iterator]() {
@@ -1649,6 +1650,8 @@ const Iterator = {
   },
 };
 ```
+
+#### Synchronous Iterator
 
 ```ts
 function methodsIterator() {
