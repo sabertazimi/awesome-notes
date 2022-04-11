@@ -1366,7 +1366,7 @@ b = 3; // temporal dead zone: throw reference error
 let b = 2;
 ```
 
-`let` 变量拥有块级作用域:
+`let` 变量拥有块级作用域 (每个 `setTimeout` 引用的都是不同的变量实例):
 
 ```ts
 // for (var i = 0; i < 5; ++i) {
@@ -3183,6 +3183,44 @@ const factorial = function f(num) {
 };
 ```
 
+### Immediately Invoked Function Expression
+
+即时函数自动执行 (定义即执行): 匿名包装器.
+
+#### IIFE Pattern
+
+- 函数表达式.
+- 末尾添加括号(传参), 使函数立即执行.
+- 将整个函数置于括号内.
+
+```ts
+(function () {
+  console.log('watch out');
+})();
+```
+
+- 使得匿名函数内部的代码能够立即执行.
+- 不泄漏只使用一次的局部变量与方法.
+- 创建命名空间, 防止变量命名冲突.
+
+#### IIFE Return Value
+
+```ts
+const foo = (function () {})();
+```
+
+foo 不被赋予 function 值, 而被赋予函数执行后的返回值:
+此返回值可设为函数, 可产生闭包.
+
+```ts
+const getResult = (function () {
+  const res = 2 + 2;
+  return function () {
+    return res;
+  };
+})();
+```
+
 ### Tail Call Optimization
 
 - Tail call optimization only work in strict mode
@@ -3414,44 +3452,6 @@ let addEvent = function (el, type, handle) {
   // 保持每次调用对外表现行为一致
   addEvent(el, type, handle);
 };
-```
-
-### Immediately Invoked Function Expression
-
-即时函数自动执行 (定义即执行): 匿名包装器
-
-#### IIFE Pattern
-
-- 函数表达式
-- 末尾添加括号(传参),使函数立即执行
-- 将整个函数置于括号内
-
-```ts
-(function () {
-  console.log('watch out');
-})();
-```
-
-- 使得匿名函数内部的代码能够立即执行.
-- 不泄漏只使用一次的局部变量与方法.
-- 创建命名空间, 防止变量命名冲突.
-
-#### IIFE Return Value
-
-```ts
-const foo = (function () {})();
-```
-
-foo 不被赋予 function 值,而被赋予函数执行后的返回值;
-此返回值可设为函数可产生闭包.
-
-```ts
-const getResult = (function () {
-  const res = 2 + 2;
-  return function () {
-    return res;
-  };
-})();
 ```
 
 ### Polymorphism Function
