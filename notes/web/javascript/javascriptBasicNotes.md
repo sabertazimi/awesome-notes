@@ -2835,13 +2835,31 @@ const truthy = Function[[proto]][[proto]] === Object.prototype; // true
 - Method Invocation 方法调用模式: this 绑定至此方法所属的对象.
 
 ```ts
+// Non-strict mode:
+window.identity = 'The Window';
+
+const object = {
+  identity: 'My Object',
+  getIdentityFunc() {
+    return function () {
+      return this.identity;
+    };
+  },
+};
+
+// Function invocation:
+// Anonymous closure function `this` bind to `window`.
+console.log(object.getIdentityFunc()()); // 'The Window'
+```
+
+```ts
 add(1, 2); // this -> global
 
 const obj = {
   value: 1,
   foo() {
     // 若不将 this 赋值给 that, 而在内部函数中直接使用 this.value
-    // 则会发生错误: 内部函数的 this 指向全局对象而不是obj
+    // 则会发生错误: 内部函数的 this 指向全局对象而不是 obj
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const that = this;
 
@@ -2870,24 +2888,6 @@ class Hero {
 const batman = new Hero('Batman');
 setTimeout(batman.logName, 1000);
 // after 1 second logs "undefined"
-```
-
-```ts
-// Non-strict mode:
-window.identity = 'The Window';
-
-const object = {
-  identity: 'My Object',
-  getIdentityFunc() {
-    return function () {
-      return this.identity;
-    };
-  },
-};
-
-// Function invocation:
-// Anonymous closure function `this` bind to `window`.
-console.log(object.getIdentityFunc()()); // 'The Window'
 ```
 
 #### Explicit Binding
