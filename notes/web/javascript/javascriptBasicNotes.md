@@ -3388,273 +3388,6 @@ function processArray(items, process, done) {
 }
 ```
 
-## Destructuring Pattern Matching
-
-- **建议只要有可能，就不要在模式中放置圆括号**.
-- 赋值语句的非模式部分，可以使用圆括号.
-- Every time access value via `.`:
-  stop and think whether use destructuring instead.
-- Destructure as early as possible.
-- Remember to include default values, especially in nested destructuring.
-
-### Destructuring Default Value
-
-- ES6 内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
-- 如果一个数组成员不严格等于 undefined，默认值不会生效
-
-```ts
-const [x = 1] = [undefined];
-console.log(x); // 1
-
-const [x = 1] = [null];
-console.log(x); // null
-```
-
-```ts
-let [x = 1, y = x] = []; // x=1; y=1
-let [x = 1, y = x] = [2]; // x=2; y=2
-let [x = 1, y = x] = [1, 2]; // x=1; y=2
-let [x = y, y = 1] = []; // ReferenceError
-```
-
-### Destructuring Swap Value
-
-```ts
-[x, y] = [y, x];
-```
-
-### Function Parameters and Return Value Destructuring
-
-- 可用于工厂 (`factory`) / 设置 (`options`) 模式传参一般为 `options` 对象,
-- 具有固定的属性名.
-- 一次性定义多个参数.
-- 一次性定义多个参数的默认值.
-
-```ts
-// 参数是一组有次序的值
-function f1([x, y, z]) {}
-f1([1, 2, 3]);
-
-// 参数是一组无次序的值
-function f2({ x, y, z }) {}
-f2({ z: 3, y: 2, x: 1 });
-
-// 可省略 const foo = config.foo || 'default foo';
-jQuery.ajax = function (
-  url,
-  {
-    async = true,
-    beforeSend = function () {},
-    cache = true,
-    complete = function () {},
-    crossDomain = false,
-    global = true,
-    // ... more config
-  }
-) {
-  // ... do stuff
-};
-```
-
-```ts
-// 返回一个数组
-function example1() {
-  return [1, 2, 3];
-}
-const [a, b, c] = example1();
-
-// 返回一个对象
-function example2() {
-  return {
-    foo: 1,
-    bar: 2,
-  };
-}
-
-const { foo, bar } = example2();
-```
-
-```ts
-function add([x, y]) {
-  return x + y;
-}
-add([1, 2]) // 3
-  [([1, 2], [3, 4])].map(([a, b]) => a + b);
-// [ 3, 7 ]
-
-function move({ x = 0, y = 0 } = {}) {
-  return [x, y];
-}
-move({ x: 3, y: 8 }); // [3, 8]
-move({ x: 3 }); // [3, 0]
-move({}); // [0, 0]
-move(); // [0, 0]
-
-// 严格为 undefined 时，触发默认值设置
-[1, undefined, 3].map((x = 'yes') => x);
-// [ 1, 'yes', 3 ]
-```
-
-### JSON Object Destructuring
-
-```ts
-const jsonData = {
-  id: 42,
-  status: 'OK',
-  data: [867, 5309],
-};
-
-const { id, status, data: number } = jsonData;
-
-console.log(id, status, number);
-// 42, "OK", [867, 5309]
-```
-
-### Map and List Destructuring
-
-- `for index in Iterable<T>`: key.
-- `for [key, value] of Iterable<T>`: entry.
-
-```ts
-const map = new Map();
-map.set('first', 'hello');
-map.set('second', 'world');
-
-for (const [key, value] of map) {
-  console.log(`${key} is ${value}`);
-}
-// first is hello
-// second is world
-
-// 获取键名
-for (const [key] of map) {
-  // ...
-}
-
-// 获取键值
-for (const [, value] of map) {
-  // ...
-}
-```
-
-### Import Destructuring
-
-```ts
-const { SourceMapConsumer, SourceNode } = require('source-map');
-```
-
-### Iterator Destructuring
-
-等号右边必须为数组等实现了 Iterator 接口的对象, 否则报错:
-
-- Array.
-- Set.
-- Generator function.
-
-```ts
-const [foo, [[bar], baz]] = [1, [[2], 3]];
-console.log(foo); // 1
-console.log(bar); // 2
-console.log(baz); // 3
-
-const [, , third] = ['foo', 'bar', 'baz'];
-console.log(third); // "baz"
-
-const [x, , y] = [1, 2, 3];
-console.log(x); // 1
-console.log(y); // 3
-
-const [head, ...tail] = [1, 2, 3, 4];
-console.log(head); // 1
-console.log(tail); // [2, 3, 4]
-
-const [x, y, ...z] = ['a'];
-console.log(x); // "a"
-console.log(y); // undefined
-console.log(z); // []
-
-// Generator 函数
-function* fibs() {
-  let a = 0;
-  let b = 1;
-
-  while (true) {
-    yield a;
-    [a, b] = [b, a + b];
-  }
-}
-
-const [first, second, third, fourth, fifth, sixth] = fibs();
-console.log(sixth); // 5
-```
-
-### Object Destructuring
-
-- 真正被赋值的是后者，而不是前者.
-
-```ts
-const { pattern: variable } = { key: value };
-```
-
-- 解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象.
-- undefined/null 无法转化为对象.
-
-```ts
-const { prop: x } = undefined; // TypeError
-const { prop: y } = null; // TypeError
-```
-
-```ts
-const { bar, foo } = { foo: 'aaa', bar: 'bbb' };
-console.log(foo); // "aaa"
-console.log(bar); // "bbb"
-
-const { foo, bar } = { foo: 'aaa', bar: 'bbb' };
-
-const { baz } = { foo: 'aaa', bar: 'bbb' };
-console.log(baz); // undefined
-```
-
-```ts
-const { foo: baz } = { foo: 'aaa', bar: 'bbb' };
-console.log(baz); // "aaa"
-
-const obj = { first: 'hello', last: 'world' };
-const { first: f, last: l } = obj;
-console.log(f); // 'hello'
-console.log(l); // 'world'
-```
-
-```ts
-const { log, sin, cos } = Math;
-```
-
-### String Destructuring
-
-```ts
-const [a, b, c, d, e] = 'hello';
-console.log(a); // "h"
-console.log(b); // "e"
-console.log(c); // "l"
-console.log(d); // "l"
-console.log(e); // "o"
-
-const { length: len } = 'hello';
-console.log(len); // 5
-```
-
-### Number and Boolean Destructuring
-
-`number`/`boolean` 会自动构造原始值包装对象:
-
-```ts
-let { toString: s } = 123;
-const truthy = s === Number.prototype.toString; // true
-
-let { toString: s } = true;
-const truthy = s === Boolean.prototype.toString; // true
-```
-
 ## Iterator
 
 - 一个数据结构只要实现了 `[Symbol.iterator]()` 接口, 便可成为可迭代数据结构 (`Iterable`):
@@ -3944,6 +3677,8 @@ g.return(); // { value: undefined, done: true }
 g.return(1); // { value: 1, done: true }
 ```
 
+#### Default Iterator Generator
+
 因为生成器对象实现了 Iterable 接口,
 生成器函数和默认迭代器**被调用**之后都产生迭代器,
 所以生成器适合作为默认迭代器:
@@ -3990,7 +3725,7 @@ for (const x of f) {
 // 3
 ```
 
-Early return:
+#### Early Return Generator
 
 - `return()` 方法会强制生成器进入关闭状态.
 - 提供给 `return()` 的值, 就是终止迭代器对象的值.
@@ -4009,7 +3744,7 @@ g.return('foo'); // { value: "foo", done: true }
 g.next(); // { value: undefined, done: true }
 ```
 
-Error handling:
+#### Error Handling Generator
 
 - `throw()` 方法会在暂停的时候将一个提供的错误注入到生成器对象中.
   如果错误未被处理, 生成器就会关闭.
@@ -4052,7 +3787,13 @@ it.next(); // {value: undefined, done: true}
 
 ### Generator Complex Usage
 
-Messaging system:
+#### Next Value Generator
+
+当为 `next` 传递值进行调用时,
+传入的值会被当作上一次生成器函数暂停时 `yield` 关键字的返回值处理.
+第一次调用 `g.next()` 传入参数是毫无意义,
+因为首次调用 `next` 函数时,
+生成器函数并没有在 `yield` 关键字处暂停:
 
 ```ts
 function* lazyCalculator(operator) {
@@ -4084,37 +3825,7 @@ g.next(2); // { value: 20, done: false }
 g.next(); // { value: undefined, done: true }
 ```
 
-Generator based control flow goodness for nodejs and the browser,
-using promises, letting you write non-blocking code in a nice-ish way
-(just like [tj/co](https://github.com/tj/co)).
-
-```ts
-function coroutine(generatorFunc) {
-  const generator = generatorFunc();
-  nextResponse();
-
-  function nextResponse(value) {
-    const response = generator.next(value);
-
-    if (response.done) {
-      return;
-    }
-
-    if (value.then) {
-      value.then(nextResponse);
-    } else {
-      nextResponse(response.value);
-    }
-  }
-}
-
-coroutine(function* bounce() {
-  yield bounceUp;
-  yield bounceDown;
-});
-```
-
-### Asynchronous Generator
+#### Asynchronous Generator
 
 ```ts
 const asyncSource = {
@@ -4167,11 +3878,35 @@ async function* getRemoteData() {
 }
 ```
 
-当为 `next` 传递值进行调用时,
-传入的值会被当作上一次生成器函数暂停时 `yield` 关键字的返回值处理.
-第一次调用 `g.next()` 传入参数是毫无意义,
-因为首次调用 `next` 函数时,
-生成器函数并没有在 `yield` 关键字处暂停.
+Generator based control flow goodness for nodejs and the browser,
+using promises, letting you write non-blocking code in a nice-ish way
+(just like [tj/co](https://github.com/tj/co)).
+
+```ts
+function coroutine(generatorFunc) {
+  const generator = generatorFunc();
+  nextResponse();
+
+  function nextResponse(value) {
+    const response = generator.next(value);
+
+    if (response.done) {
+      return;
+    }
+
+    if (value.then) {
+      value.then(nextResponse);
+    } else {
+      nextResponse(response.value);
+    }
+  }
+}
+
+coroutine(function* bounce() {
+  yield bounceUp;
+  yield bounceDown;
+});
+```
 
 ```ts
 function promise1() {
@@ -4223,7 +3958,7 @@ co(readFile).then(res => console.log(res));
 // resolve(result);
 ```
 
-### Recursive Generator
+#### Recursive Generator
 
 `yield *` 能够迭代一个可迭代对象:
 
@@ -4303,6 +4038,273 @@ async function run(arg = '.') {
     }
   }
 }
+```
+
+## Destructuring Pattern Matching
+
+- **建议只要有可能，就不要在模式中放置圆括号**.
+- 赋值语句的非模式部分，可以使用圆括号.
+- Every time access value via `.`:
+  stop and think whether use destructuring instead.
+- Destructure as early as possible.
+- Remember to include default values, especially in nested destructuring.
+
+### Destructuring Default Value
+
+- ES6 内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
+- 如果一个数组成员不严格等于 undefined，默认值不会生效
+
+```ts
+const [x = 1] = [undefined];
+console.log(x); // 1
+
+const [x = 1] = [null];
+console.log(x); // null
+```
+
+```ts
+let [x = 1, y = x] = []; // x=1; y=1
+let [x = 1, y = x] = [2]; // x=2; y=2
+let [x = 1, y = x] = [1, 2]; // x=1; y=2
+let [x = y, y = 1] = []; // ReferenceError
+```
+
+### Destructuring Swap Value
+
+```ts
+[x, y] = [y, x];
+```
+
+### Function Parameters and Return Value Destructuring
+
+- 可用于工厂 (`factory`) / 设置 (`options`) 模式传参一般为 `options` 对象,
+- 具有固定的属性名.
+- 一次性定义多个参数.
+- 一次性定义多个参数的默认值.
+
+```ts
+// 参数是一组有次序的值
+function f1([x, y, z]) {}
+f1([1, 2, 3]);
+
+// 参数是一组无次序的值
+function f2({ x, y, z }) {}
+f2({ z: 3, y: 2, x: 1 });
+
+// 可省略 const foo = config.foo || 'default foo';
+jQuery.ajax = function (
+  url,
+  {
+    async = true,
+    beforeSend = function () {},
+    cache = true,
+    complete = function () {},
+    crossDomain = false,
+    global = true,
+    // ... more config
+  }
+) {
+  // ... do stuff
+};
+```
+
+```ts
+// 返回一个数组
+function example1() {
+  return [1, 2, 3];
+}
+const [a, b, c] = example1();
+
+// 返回一个对象
+function example2() {
+  return {
+    foo: 1,
+    bar: 2,
+  };
+}
+
+const { foo, bar } = example2();
+```
+
+```ts
+function add([x, y]) {
+  return x + y;
+}
+add([1, 2]) // 3
+  [([1, 2], [3, 4])].map(([a, b]) => a + b);
+// [ 3, 7 ]
+
+function move({ x = 0, y = 0 } = {}) {
+  return [x, y];
+}
+move({ x: 3, y: 8 }); // [3, 8]
+move({ x: 3 }); // [3, 0]
+move({}); // [0, 0]
+move(); // [0, 0]
+
+// 严格为 undefined 时，触发默认值设置
+[1, undefined, 3].map((x = 'yes') => x);
+// [ 1, 'yes', 3 ]
+```
+
+### JSON Object Destructuring
+
+```ts
+const jsonData = {
+  id: 42,
+  status: 'OK',
+  data: [867, 5309],
+};
+
+const { id, status, data: number } = jsonData;
+
+console.log(id, status, number);
+// 42, "OK", [867, 5309]
+```
+
+### Map and List Destructuring
+
+- `for index in Iterable<T>`: key.
+- `for [key, value] of Iterable<T>`: entry.
+
+```ts
+const map = new Map();
+map.set('first', 'hello');
+map.set('second', 'world');
+
+for (const [key, value] of map) {
+  console.log(`${key} is ${value}`);
+}
+// first is hello
+// second is world
+
+// 获取键名
+for (const [key] of map) {
+  // ...
+}
+
+// 获取键值
+for (const [, value] of map) {
+  // ...
+}
+```
+
+### Import Destructuring
+
+```ts
+const { SourceMapConsumer, SourceNode } = require('source-map');
+```
+
+### Iterator Destructuring
+
+等号右边必须为数组等实现了 Iterator 接口的对象, 否则报错:
+
+- Array.
+- Set.
+- Generator function.
+
+```ts
+const [foo, [[bar], baz]] = [1, [[2], 3]];
+console.log(foo); // 1
+console.log(bar); // 2
+console.log(baz); // 3
+
+const [, , third] = ['foo', 'bar', 'baz'];
+console.log(third); // "baz"
+
+const [x, , y] = [1, 2, 3];
+console.log(x); // 1
+console.log(y); // 3
+
+const [head, ...tail] = [1, 2, 3, 4];
+console.log(head); // 1
+console.log(tail); // [2, 3, 4]
+
+const [x, y, ...z] = ['a'];
+console.log(x); // "a"
+console.log(y); // undefined
+console.log(z); // []
+
+// Generator 函数
+function* fibs() {
+  let a = 0;
+  let b = 1;
+
+  while (true) {
+    yield a;
+    [a, b] = [b, a + b];
+  }
+}
+
+const [first, second, third, fourth, fifth, sixth] = fibs();
+console.log(sixth); // 5
+```
+
+### Object Destructuring
+
+- 真正被赋值的是后者，而不是前者.
+
+```ts
+const { pattern: variable } = { key: value };
+```
+
+- 解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象.
+- undefined/null 无法转化为对象.
+
+```ts
+const { prop: x } = undefined; // TypeError
+const { prop: y } = null; // TypeError
+```
+
+```ts
+const { bar, foo } = { foo: 'aaa', bar: 'bbb' };
+console.log(foo); // "aaa"
+console.log(bar); // "bbb"
+
+const { foo, bar } = { foo: 'aaa', bar: 'bbb' };
+
+const { baz } = { foo: 'aaa', bar: 'bbb' };
+console.log(baz); // undefined
+```
+
+```ts
+const { foo: baz } = { foo: 'aaa', bar: 'bbb' };
+console.log(baz); // "aaa"
+
+const obj = { first: 'hello', last: 'world' };
+const { first: f, last: l } = obj;
+console.log(f); // 'hello'
+console.log(l); // 'world'
+```
+
+```ts
+const { log, sin, cos } = Math;
+```
+
+### String Destructuring
+
+```ts
+const [a, b, c, d, e] = 'hello';
+console.log(a); // "h"
+console.log(b); // "e"
+console.log(c); // "l"
+console.log(d); // "l"
+console.log(e); // "o"
+
+const { length: len } = 'hello';
+console.log(len); // 5
+```
+
+### Number and Boolean Destructuring
+
+`number`/`boolean` 会自动构造原始值包装对象:
+
+```ts
+let { toString: s } = 123;
+const truthy = s === Number.prototype.toString; // true
+
+let { toString: s } = true;
+const truthy = s === Boolean.prototype.toString; // true
 ```
 
 ## Proxy and Reflect
@@ -4661,19 +4663,23 @@ proxy.coding();
 
 Avoid callback hell with:
 
-- return `new Promise`.
-- return `promise.then((value) => {})`.
-- error handle with `promise.catch((err) => {})`.
-- cleanup with `promise.finally(() => {})`.
+- Return `new Promise`.
+- Return `promise.then((value) => {})`.
+- Error handle with `promise.catch((err) => {})`.
+- Cleanup with `promise.finally(() => {})`.
 
-resolve only accept **one** value
+### Promise Resolve
+
+Resolve only accept **one** value:
 
 ```ts
 return new Promise(resolve => resolve([a, b]));
 ```
 
-- promises on the same chain execute orderly
-- promises on two separate chains execute in random order
+### Promise Chain
+
+- Promises on the same chain execute orderly.
+- Promises on two separate chains execute in random order.
 
 ```ts
 const users = ['User1', 'User2', 'User3', 'User4'];
@@ -4943,7 +4949,7 @@ function memoProcessData(key) {
 
 ## Await and Async
 
-avoid wrong parallel logic (too sequential)
+Avoid wrong parallel logic (too sequential):
 
 ```ts
 // wrong
@@ -4976,7 +4982,7 @@ async function getAuthors(authorIds) {
 - Don't await inside filter and reduce,
   always await an array of promises with map, then filter or reduce accordingly.
 
-## Asynchronous Programming
+## Asynchronous JavaScript
 
 ### Sleep Function
 
@@ -5035,14 +5041,156 @@ export default {
 };
 ```
 
-### Async Comparison
+### Web Worker
 
-- promise 和 async/await 是专门用于处理异步操作的.
-- Generator 并不是为异步而设计出来的, 它还有其他功能（对象迭代, 控制输出, Iterator Interface...）.
-- promise 编写代码相比 Generator、async 更为复杂化，且可读性也稍差.
-- Generator、async 需要与 promise 对象搭配处理异步情况.
-- async 实质是 Generator 的语法糖, 相当于会自动执行 Generator 函数.
-- async 使用上更为简洁, 将异步代码以同步的形式进行编写, 是处理异步编程的最终方案.
+- 多线程处理.
+- 有两种方法可以停止 Worker:
+  从主页调用 `worker.terminate()` 或在 worker 内部调用 `self.close()`
+- 利用 [BroadcastChannel API](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel)
+  可以创建 Shared Worker, 即共享 Workers 在同一源 (origin) 下面的各种进程都可以访问它，
+  包括：iframes、浏览器中的不同 tab 页 (browsing context)
+- Web Workers 无法访问一些非常关键的 JavaScript 特性:
+  DOM(它会造成线程不安全), window 对象, document 对象, parent 对象.
+- Use Case: Graphic App (Ray Tracing), Encryption, Prefetching Data,
+  PWA (Service Worker), Spell Checking
+
+```html
+<button onclick="startComputation()">Start computation</button>
+
+<script>
+  const worker = new Worker('worker.js');
+
+  worker.addEventListener(
+    'message',
+    function (e) {
+      console.log(e.data);
+    },
+    false
+  );
+
+  function startComputation() {
+    worker.postMessage({ cmd: 'average', data: [1, 2, 3, 4] });
+  }
+</script>
+```
+
+```ts
+// worker.js
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener(
+  'message',
+  function (e) {
+    const data = e.data;
+    switch (data.cmd) {
+      case 'average': {
+        const result = calculateAverage(data);
+        // eslint-disable-next-line no-restricted-globals
+        self.postMessage(result);
+        break;
+      }
+      default:
+        // eslint-disable-next-line no-restricted-globals
+        self.postMessage('Unknown command');
+    }
+  },
+  false
+);
+```
+
+#### Web Worker Runtime
+
+- navigation 对象: appName, appVersion, userAgent, platform
+- location 对象: 所有属性只读
+- ECMAScript 对象: Object/Array/Date
+- XMLHttpRequest 方法
+- setTimeout/setInterval 方法
+- self 对象: 指向全局 worker 对象
+- importScripts 方法: 加载外部依赖
+- close 方法: 停止 worker
+
+#### Web Worker Loader
+
+```ts
+// 文件名为index.js
+function work() {
+  onmessage = ({ data: { jobId, message } }) => {
+    console.log(`i am worker, receive:-----${message}`);
+    postMessage({ jobId, result: 'message from worker' });
+  };
+}
+
+const makeWorker = f => {
+  const pendingJobs = {};
+
+  const worker = new Worker(
+    URL.createObjectURL(new Blob([`(${f.toString()})()`]))
+  );
+
+  worker.onmessage = ({ data: { result, jobId } }) => {
+    // 调用 resolve, 改变 Promise 状态
+    pendingJobs[jobId](result);
+    delete pendingJobs[jobId];
+  };
+
+  return (...message) =>
+    new Promise(resolve => {
+      const jobId = String(Math.random());
+      pendingJobs[jobId] = resolve;
+      worker.postMessage({ jobId, message });
+    });
+};
+
+const testWorker = makeWorker(work);
+
+testWorker('message from main thread').then(message => {
+  console.log(`i am main thread, i receive:-----${message}`);
+});
+```
+
+#### Web Worker Use Case
+
+- 先 `on`, 后 `post`.
+- `main.js`/`worker.js` 的 `onmessage` 与 `postMessage` 相互触发.
+
+```ts
+/*
+ * JSONParser.js
+ */
+// eslint-disable-next-line no-restricted-globals
+self.onmessage = function (event) {
+  const jsonText = event.data;
+  const jsonData = JSON.parse(jsonText);
+
+  // eslint-disable-next-line no-restricted-globals
+  self.postMessage(jsonData);
+};
+```
+
+```ts
+/*
+ * main.js
+ */
+const worker = new Worker('JSONParser.js');
+
+worker.onmessage = function (event) {
+  const jsonData = event.data;
+  evaluateData(jsonData);
+};
+
+worker.postMessage(jsonText);
+```
+
+#### Web Worker Performance
+
+- Web Worker performance [guide](https://mp.weixin.qq.com/s/IJHI9JB3nMQPi46b6yGVWw).
+
+### Asynchronous API Comparison
+
+- `promise` 和 `async/await` 专门用于处理异步操作.
+- `generator` 并不是专门为异步设计, 它还有其他功能 (对象迭代/控制输出/Iterator Interface/etc).
+- `promise` 编写代码相比 `generator/async/await` 更为复杂化, 且可读性也稍差.
+- `generator/async/await` 需要与 `promise` 对象搭配处理异步情况.
+- `async/await` 使用上更为简洁, 将异步代码以同步的形式进行编写, 是处理异步编程的最终方案.
 
 ## Functional JavaScript
 
@@ -5706,6 +5854,252 @@ try {
   // handle exception
 }
 ```
+
+## Regular Expression
+
+```ts
+const re = /pattern/gim;
+```
+
+### RegExp Flags
+
+- g (global): 全局匹配.
+- m (multiline): 多行匹配.
+- i (ignoreCase): 大小写不敏感匹配.
+- u (unicode): Unicode 模式.
+- y (sticky): 粘附模式, 修饰符号隐含了头部匹配的标志.
+
+```ts
+function codePointLength(text) {
+  const result = text.match(/[\s\S]/gu);
+  return result ? result.length : 0;
+}
+
+const s = '𠮷𠮷';
+const length = s.length; // 4
+codePointLength(s); // 2
+```
+
+### RegExp Character Classes
+
+| Characters | Meaning               |
+| :--------- | :-------------------- |
+| `.`        | `[^\n\r\u2020\u2029]` |
+| `\d`       | `[0-9]`               |
+| `\D`       | `[^0-9]`              |
+| `\w`       | `[0-9a-zA-Z_]`        |
+| `\W`       | `[^0-9a-zA-Z_]`       |
+| `\s`       | `[\r\n\f\t\v]`        |
+| `\S`       | `[^\r\n\f\t\v]`       |
+| `\b`       | start/end of word     |
+| `\B`       | not start/end of word |
+| `^`        | start of string       |
+| `$`        | end of string         |
+
+### RegExp Quantifiers
+
+| Quantifiers | Repeat Times |
+| :---------- | :----------- |
+| `*`         | 0+           |
+| `+`         | 1+           |
+| `?`         | 0 ~ 1        |
+| `{n}`       | n            |
+| `{n,}`      | n+           |
+| `{n,m}`     | n ~ m        |
+
+| Lazy Quantifiers | Repeat Times (As **Less** As Possible) |
+| :--------------- | :------------------------------------- |
+| `*?`             | 0+                                     |
+| `+?`             | 1+                                     |
+| `??`             | 0 ~ 1                                  |
+| `{n,}?`          | n+                                     |
+| `{n,m}?`         | n ~ m                                  |
+
+### RegExp Back Reference
+
+位置编号 - 左括号的顺序:
+
+- `\1 \2 \3`: 第 n 个子表达式匹配的结果字符.
+- `$1 $2 $3`: 第 n 个子表达式匹配的结果字符.
+- 反向引用可以解决正则表达式回溯失控的问题 (ReDoS).
+
+```ts
+const regExp = /((<\/?\w+>.*)\2)/g;
+```
+
+```ts
+const text = 'ooo111ooo222ooo333ooo123';
+const regExp = /(\d)\1\1/g;
+const result = text.match(regExp);
+console.log(result); // [111, 222, 333]
+```
+
+:::danger RegExp Static Property
+
+Most `RegExp.XXX`/`RegExp.$X` static property aren't standard.
+Avoid use them in production:
+
+- `RegExp.input ($_)`.
+- `RegExp.lastMatch ($&)`.
+- `RegExp.lastParen ($+)`.
+- `RegExp.leftContext`.
+- `RegExp.rightContext ($')`.
+- `RegExp.$1-$9`.
+
+:::
+
+### RegExp Group and Ranges
+
+- group
+- lookahead (零宽断言)
+
+| 分类     | 代码/语法      | 说明                                            |
+| :------- | :------------- | :---------------------------------------------- |
+| 捕获     | `(exp)`        | 匹配 exp,并捕获文本到自动命名的组里             |
+|          | `(?<name>exp)` | 匹配 exp,并捕获文本到名称为 name 的组里         |
+|          | `(?:exp)`      | 匹配 exp,不捕获匹配的文本, 也不给此分组分配组号 |
+| 零宽断言 | `(?<=exp)`     | 匹配左侧是 exp 的位置                           |
+|          | `(?<!exp)`     | 匹配左侧不是 exp 的位置                         |
+|          | `(?=exp)`      | 匹配右侧是 exp 的位置                           |
+|          | `(?!exp)`      | 匹配右侧不是 exp 的位置                         |
+| 注释     | `(?#comment)`  | 用于提供注释让人阅读                            |
+
+- `(?<=\d)th` -> `9th`.
+- `(?<!\d)th` -> `health`.
+- `six(?=\d)` -> `six6`.
+- `hi(?!\d)` -> `high`.
+
+```ts
+const string = 'Favorite GitHub Repos: tc39/ecma262 v8/v8.dev';
+const regex = /\b(?<owner>[a-z0-9]+)\/(?<repo>[a-z0-9\.]+)\b/g;
+
+for (const match of string.matchAll(regex)) {
+  console.log(`${match[0]} at ${match.index} with '${match.input}'`);
+  console.log(`owner: ${match.groups.owner}`);
+  console.log(`repo: ${match.groups.repo}`);
+}
+```
+
+### RegExp Best Practice
+
+- 不使用 new RegExp(),使用正则表达式字面量
+- 将正则表达式赋值给变量, 防止正则表达式重复创建
+- 以简单(唯一性)字元开始, 如 `^/$ x \u363A [a-z] \b`, 避免以分组表达式开始:
+  e.g `\s\s*` 优于 `\s{1,}`.
+- 减少表达式的重叠匹配.
+- 减少分支表达式,并将最常用的分支放在最前面.
+- 无需反向引用时, 使用非捕获组:
+  e.g `(?:...)` 优于 `(...)`.
+
+### RegExp Functions
+
+- String:
+  - `split`.
+  - `match`.
+  - `search`.
+  - `replace`.
+- RegExp:
+  - `test`.
+  - `exec`.
+
+#### RegExp Test
+
+```ts
+/[a-z|A-Z|0-9]/gim.test(str);
+```
+
+```ts
+const ignoreList = [
+  // # All
+  '^npm-debug\\.log$', // Error log for npm
+  '^\\..*\\.swp$', // Swap file for vim state
+
+  // # macOS
+  '^\\.DS_Store$', // Stores custom folder attributes
+  '^\\.AppleDouble$', // Stores additional file resources
+  '^\\.LSOverride$', // Contains the absolute path to the app to be used
+  '^Icon\\r$', // Custom Finder icon: http://superuser.com/questions/298785/icon-file-on-os-x-desktop
+  '^\\._.*', // Thumbnail
+  '^\\.Spotlight-V100(?:$|\\/)', // Directory that might appear on external disk
+  '\\.Trashes', // File that might appear on external disk
+  '^__MACOSX$', // Resource fork
+
+  // # Linux
+  '~$', // Backup file
+
+  // # Windows
+  '^Thumbs\\.db$', // Image file cache
+  '^ehthumbs\\.db$', // Folder config file
+  '^Desktop\\.ini$', // Stores custom folder attributes
+  '@eaDir$', // "hidden" folder where the server stores thumbnails
+];
+
+export const junkRegex = new RegExp(ignoreList.join('|'));
+
+export function isJunk(filename) {
+  return junkRegex.test(filename);
+}
+```
+
+#### RegExp Replace
+
+```ts
+replace(regExp, str / func);
+```
+
+##### RegExp Replace Arguments
+
+第二个参数若为函数式参数,replace 方法会向它传递一系列参数:
+
+- 第一个参数: 匹配结果字符串
+- 第 n 个参数: 子表达式匹配结果字符串
+- 倒数第二个参数: 匹配文本在源字符串中的下标位置
+- 最后一个参数: 源字符串自身
+
+###### RegExp Replace Best Practice
+
+- 使用２个子表达式修剪字符串,字符串总长度影响性能
+- 使用循环修剪字符串(分别用 正/负循环 修剪 首/尾空白符),空白字符长度影响性能
+
+```ts
+if (!String.prototype.trim) {
+  // eslint-disable-next-line no-extend-native
+  String.prototype.trim = function () {
+    return this.replace(/^\s+/, '').replace(/\s+$/, '');
+  };
+}
+```
+
+```ts
+if (!String.prototype.trim) {
+  // eslint-disable-next-line no-extend-native
+  String.prototype.trim = function () {
+    const str = this.replace(/^\s+/, '');
+    let end = str.length - 1;
+    const ws = /\s/;
+
+    while (ws.test(str.charAt(end))) {
+      end--;
+    }
+
+    return str.slice(0, end + 1);
+  };
+}
+```
+
+### RegExp Use Case
+
+#### 中英文
+
+`/^[\u4e00-\u9fa5a-zA-Z]+$/i`
+
+#### 数字
+
+`/^[1-9]*$/i`
+
+#### 空字符与空格字符
+
+`/[(^\s+)(\s+$)]/g`
 
 ## Internationalization
 

@@ -75,6 +75,19 @@ window.addEventListener(
 const networkType = navigator.connection.effectiveType; // 2G - 5G
 ```
 
+### Browser Compatibility
+
+#### Browser Feature Detection
+
+**不使用特性/浏览器推断**，往往容易推断错误(且会随着浏览器更新产生新的错误)
+
+```ts
+// 特性检测
+if (document.getElementById) {
+  element = document.getElementById(id);
+}
+```
+
 ## DOM
 
 - DOM Level 0
@@ -896,251 +909,98 @@ const isElementInViewport = el => {
 };
 ```
 
-## Regular Expression
+### DOM Observer
+
+- [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)
+- [Mutation Observer](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)
+- [Performance Observer](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver)
+- [Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)
+- [Reporting Observer](https://developer.mozilla.org/en-US/docs/Web/API/ReportingObserver)
+
+#### Intersection Observer
 
 ```ts
-const re = /pattern/gim;
+// <img class="lzy_img" src="lazy_img.jpg" data-src="real_img.jpg" />
+document.addEventListener('DOMContentLoaded', () => {
+  const imageObserver = new IntersectionObserver((entries, imgObserver) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const lazyImage = entry.target;
+        console.log('Lazy loading ', lazyImage);
+        lazyImage.src = lazyImage.dataset.src;
+
+        // only load image once
+        lazyImage.classList.remove('lzy');
+        imgObserver.unobserve(lazyImage);
+      }
+    });
+  });
+
+  const lazyImages = document.querySelectorAll('img.lzy_img');
+  lazyImages.forEach(lazyImage => imageObserver.observe(lazyImage));
+});
 ```
 
-### RegExp Flags
+#### Mutation Observer
 
-- g (global): 全局匹配.
-- m (multiline): 多行匹配.
-- i (ignoreCase): 大小写不敏感匹配.
-- u (unicode): Unicode 模式.
-- y (sticky): 粘附模式, 修饰符号隐含了头部匹配的标志.
+如果文档中连续插入 1000 个 `<li>` 元素, 就会连续触发 1000 个插入事件,
+执行每个事件的回调函数, 这很可能造成浏览器的卡顿；
+而 Mutation Observer 完全不同, 只在 1000 个段落都插入结束后才会触发, 而且只触发一次.
 
-```ts
-function codePointLength(text) {
-  const result = text.match(/[\s\S]/gu);
-  return result ? result.length : 0;
-}
+Mutation Observer 有以下特点:
 
-const s = '𠮷𠮷';
-const length = s.length; // 4
-codePointLength(s); // 2
-```
-
-### RegExp Character Classes
-
-| Characters | Meaning               |
-| :--------- | :-------------------- |
-| `.`        | `[^\n\r\u2020\u2029]` |
-| `\d`       | `[0-9]`               |
-| `\D`       | `[^0-9]`              |
-| `\w`       | `[0-9a-zA-Z_]`        |
-| `\W`       | `[^0-9a-zA-Z_]`       |
-| `\s`       | `[\r\n\f\t\v]`        |
-| `\S`       | `[^\r\n\f\t\v]`       |
-| `\b`       | start/end of word     |
-| `\B`       | not start/end of word |
-| `^`        | start of string       |
-| `$`        | end of string         |
-
-### RegExp Quantifiers
-
-| Quantifiers | Repeat Times |
-| :---------- | :----------- |
-| `*`         | 0+           |
-| `+`         | 1+           |
-| `?`         | 0 ~ 1        |
-| `{n}`       | n            |
-| `{n,}`      | n+           |
-| `{n,m}`     | n ~ m        |
-
-| Lazy Quantifiers | Repeat Times (As **Less** As Possible) |
-| :--------------- | :------------------------------------- |
-| `*?`             | 0+                                     |
-| `+?`             | 1+                                     |
-| `??`             | 0 ~ 1                                  |
-| `{n,}?`          | n+                                     |
-| `{n,m}?`         | n ~ m                                  |
-
-### RegExp Back Reference
-
-位置编号 - 左括号的顺序:
-
-- `\1 \2 \3`: 第 n 个子表达式匹配的结果字符.
-- `$1 $2 $3`: 第 n 个子表达式匹配的结果字符.
-- 反向引用可以解决正则表达式回溯失控的问题 (ReDoS).
+- 它等待所有脚本任务完成后, 才会运行, 即采用异步方式
+- 它把 DOM 变动记录封装成一个数组进行处理, 而不是一条条地个别处理 DOM 变动
+- 它即可以观察发生在 DOM 节点的所有变动, 也可以观察某一类变动
 
 ```ts
-const regExp = /((<\/?\w+>.*)\2)/g;
+const mutationObserver = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
+    console.log(mutation);
+  });
+});
+
+// 开始侦听页面的根 HTML 元素中的更改。
+mutationObserver.observe(document.documentElement, {
+  attributes: true,
+  characterData: true,
+  childList: true,
+  subtree: true,
+  attributeOldValue: true,
+  characterDataOldValue: true,
+});
 ```
 
 ```ts
-const text = 'ooo111ooo222ooo333ooo123';
-const regExp = /(\d)\1\1/g;
-const result = text.match(regExp);
-console.log(result); // [111, 222, 333]
-```
-
-:::danger RegExp Static Property
-
-Most `RegExp.XXX`/`RegExp.$X` static property aren't standard.
-Avoid use them in production:
-
-- `RegExp.input ($_)`.
-- `RegExp.lastMatch ($&)`.
-- `RegExp.lastParen ($+)`.
-- `RegExp.leftContext`.
-- `RegExp.rightContext ($')`.
-- `RegExp.$1-$9`.
-
-:::
-
-### RegExp Group and Ranges
-
-- group
-- lookahead (零宽断言)
-
-| 分类     | 代码/语法      | 说明                                            |
-| :------- | :------------- | :---------------------------------------------- |
-| 捕获     | `(exp)`        | 匹配 exp,并捕获文本到自动命名的组里             |
-|          | `(?<name>exp)` | 匹配 exp,并捕获文本到名称为 name 的组里         |
-|          | `(?:exp)`      | 匹配 exp,不捕获匹配的文本, 也不给此分组分配组号 |
-| 零宽断言 | `(?<=exp)`     | 匹配左侧是 exp 的位置                           |
-|          | `(?<!exp)`     | 匹配左侧不是 exp 的位置                         |
-|          | `(?=exp)`      | 匹配右侧是 exp 的位置                           |
-|          | `(?!exp)`      | 匹配右侧不是 exp 的位置                         |
-| 注释     | `(?#comment)`  | 用于提供注释让人阅读                            |
-
-- `(?<=\d)th` -> `9th`.
-- `(?<!\d)th` -> `health`.
-- `six(?=\d)` -> `six6`.
-- `hi(?!\d)` -> `high`.
-
-```ts
-const string = 'Favorite GitHub Repos: tc39/ecma262 v8/v8.dev';
-const regex = /\b(?<owner>[a-z0-9]+)\/(?<repo>[a-z0-9\.]+)\b/g;
-
-for (const match of string.matchAll(regex)) {
-  console.log(`${match[0]} at ${match.index} with '${match.input}'`);
-  console.log(`owner: ${match.groups.owner}`);
-  console.log(`repo: ${match.groups.repo}`);
-}
-```
-
-### RegExp Best Practice
-
-- 不使用 new RegExp(),使用正则表达式字面量
-- 将正则表达式赋值给变量, 防止正则表达式重复创建
-- 以简单(唯一性)字元开始, 如 `^/$ x \u363A [a-z] \b`, 避免以分组表达式开始:
-  e.g `\s\s*` 优于 `\s{1,}`.
-- 减少表达式的重叠匹配.
-- 减少分支表达式,并将最常用的分支放在最前面.
-- 无需反向引用时, 使用非捕获组:
-  e.g `(?:...)` 优于 `(...)`.
-
-### RegExp Functions
-
-- String:
-  - `split`.
-  - `match`.
-  - `search`.
-  - `replace`.
-- RegExp:
-  - `test`.
-  - `exec`.
-
-#### RegExp Test
-
-```ts
-/[a-z|A-Z|0-9]/gim.test(str);
-```
-
-```ts
-const ignoreList = [
-  // # All
-  '^npm-debug\\.log$', // Error log for npm
-  '^\\..*\\.swp$', // Swap file for vim state
-
-  // # macOS
-  '^\\.DS_Store$', // Stores custom folder attributes
-  '^\\.AppleDouble$', // Stores additional file resources
-  '^\\.LSOverride$', // Contains the absolute path to the app to be used
-  '^Icon\\r$', // Custom Finder icon: http://superuser.com/questions/298785/icon-file-on-os-x-desktop
-  '^\\._.*', // Thumbnail
-  '^\\.Spotlight-V100(?:$|\\/)', // Directory that might appear on external disk
-  '\\.Trashes', // File that might appear on external disk
-  '^__MACOSX$', // Resource fork
-
-  // # Linux
-  '~$', // Backup file
-
-  // # Windows
-  '^Thumbs\\.db$', // Image file cache
-  '^ehthumbs\\.db$', // Folder config file
-  '^Desktop\\.ini$', // Stores custom folder attributes
-  '@eaDir$', // "hidden" folder where the server stores thumbnails
-];
-
-export const junkRegex = new RegExp(ignoreList.join('|'));
-
-export function isJunk(filename) {
-  return junkRegex.test(filename);
-}
-```
-
-#### RegExp Replace
-
-```ts
-replace(regExp, str / func);
-```
-
-##### RegExp Replace Arguments
-
-第二个参数若为函数式参数,replace 方法会向它传递一系列参数:
-
-- 第一个参数: 匹配结果字符串
-- 第 n 个参数: 子表达式匹配结果字符串
-- 倒数第二个参数: 匹配文本在源字符串中的下标位置
-- 最后一个参数: 源字符串自身
-
-###### RegExp Replace Best Practice
-
-- 使用２个子表达式修剪字符串,字符串总长度影响性能
-- 使用循环修剪字符串(分别用 正/负循环 修剪 首/尾空白符),空白字符长度影响性能
-
-```ts
-if (!String.prototype.trim) {
-  // eslint-disable-next-line no-extend-native
-  String.prototype.trim = function () {
-    return this.replace(/^\s+/, '').replace(/\s+$/, '');
-  };
-}
-```
-
-```ts
-if (!String.prototype.trim) {
-  // eslint-disable-next-line no-extend-native
-  String.prototype.trim = function () {
-    const str = this.replace(/^\s+/, '');
-    let end = str.length - 1;
-    const ws = /\s/;
-
-    while (ws.test(str.charAt(end))) {
-      end--;
+const target = document.querySelector('#container');
+const callback = (mutations, observer) => {
+  mutations.forEach(mutation => {
+    switch (mutation.type) {
+      case 'attributes':
+        // the name of the changed attribute is in
+        // mutation.attributeName
+        // and its old value is in mutation.oldValue
+        // the current value can be retrieved with
+        // target.getAttribute(mutation.attributeName)
+        break;
+      case 'childList':
+        // any added nodes are in mutation.addedNodes
+        // any removed nodes are in mutation.removedNodes
+        break;
+      default:
+        throw new Error('Unsupported mutation!');
     }
+  });
+};
 
-    return str.slice(0, end + 1);
-  };
-}
+const observer = new MutationObserver(callback);
+observer.observe(target, {
+  attributes: true,
+  attributeFilter: ['foo'], // only observe attribute 'foo'
+  attributeOldValue: true,
+  childList: true,
+});
 ```
-
-### RegExp Use Case
-
-#### 中英文
-
-`/^[\u4e00-\u9fa5a-zA-Z]+$/i`
-
-#### 数字
-
-`/^[1-9]*$/i`
-
-#### 空字符与空格字符
-
-`/[(^\s+)(\s+$)]/g`
 
 ## JavaScript Engine
 
@@ -2387,8 +2247,7 @@ const options = OPTION_A | OPTION_C | OPTION_D;
 
 ### Browser Caches
 
-- [Dive into Browser Caches](https://github.com/ljianshu/Blog/issues/23)
-
+[Dive into Browser Caches](https://github.com/ljianshu/Blog/issues/23):
 从缓存位置上来说分为四种, 并且各自有优先级,
 当依次查找缓存且都没有命中的时候, 才会去请求网络:
 
@@ -3645,19 +3504,6 @@ const traceProperty = (object, property) => {
 ```bash
 node --inspect
 ndb index.js
-```
-
-### Browser Compatibility
-
-#### Browser Feature Detection
-
-**不使用特性/浏览器推断**，往往容易推断错误(且会随着浏览器更新产生新的错误)
-
-```ts
-// 特性检测
-if (document.getElementById) {
-  element = document.getElementById(id);
-}
 ```
 
 ## Jest Testing
@@ -5037,449 +4883,6 @@ if (a && b && c) {
  */
 ```
 
-## PWA
-
-Progressive Web Apps:
-
-- served over `HTTPS`
-- provide a manifest
-- register a `ServiceWorker`
-  (web cache for offline and performance)
-- consists of website, web app manifest,
-  service worker, expanded capabilities
-  and OS integration
-
-### Service Worker
-
-#### SW Pros
-
-- Cache.
-- Offline.
-- Background.
-- Custom request to minimize network.
-- [Notification API](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification).
-
-#### SW Costs
-
-- Need startup time.
-
-```ts
-// 20~100 ms for desktop
-// 100 ms for mobile
-const entry = performance.getEntriesByName(url)[0];
-const swStartupTime = entry.requestStart - entry.workerStart;
-```
-
-- cache reads aren't always instant:
-  - cache hit time = read time (only this case better than `NO SW`),
-  - cache miss time = read time + network latency,
-  - cache slow time = slow read time + network latency,
-  - SW asleep = SW boot latency + read time ( + network latency),
-  - NO SW = network latency.
-
-```ts
-const entry = performance.getEntriesByName(url)[0];
-
-// no remote request means this was handled by the cache
-if (entry.transferSize === 0) {
-  const cacheTime = entry.responseStart - entry.requestStart;
-}
-```
-
-```ts
-async function handleRequest(event) {
-  const cacheStart = performance.now();
-  const response = await caches.match(event.request);
-  const cacheEnd = performance.now();
-}
-```
-
-#### Service Worker Caching Strategy
-
-5 caching strategy in [workbox](https://developer.chrome.com/docs/workbox/caching-strategies-overview).
-
-Stale-While-Revalidate:
-
-```ts
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', function (event) {
-  event.respondWith(
-    caches.open(cacheName).then(function (cache) {
-      cache.match(event.request).then(function (cacheResponse) {
-        fetch(event.request).then(function (networkResponse) {
-          cache.put(event.request, networkResponse);
-        });
-
-        return cacheResponse || networkResponse;
-      });
-    })
-  );
-});
-```
-
-Cache first, then Network:
-
-```ts
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', function (event) {
-  event.respondWith(
-    caches.open(cacheName).then(function (cache) {
-      cache.match(event.request).then(function (cacheResponse) {
-        if (cacheResponse) return cacheResponse;
-
-        return fetch(event.request).then(function (networkResponse) {
-          cache.put(event.request, networkResponse.clone());
-          return networkResponse;
-        });
-      });
-    })
-  );
-});
-```
-
-Network first, then Cache:
-
-```ts
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', function (event) {
-  event.respondWith(
-    fetch(event.request).catch(function () {
-      return caches.match(event.request);
-    })
-  );
-});
-```
-
-Cache only:
-
-```ts
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', function (event) {
-  event.respondWith(
-    caches.open(cacheName).then(function (cache) {
-      cache.match(event.request).then(function (cacheResponse) {
-        return cacheResponse;
-      });
-    })
-  );
-});
-```
-
-Network only:
-
-```ts
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', function (event) {
-  event.respondWith(
-    fetch(event.request).then(function (networkResponse) {
-      return networkResponse;
-    })
-  );
-});
-```
-
-#### SW Usage
-
-```ts
-// Check that service workers are registered
-if ('serviceWorker' in navigator) {
-  // Use the window load event to keep the page load performance
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js');
-  });
-}
-```
-
-Broken images use case:
-
-```ts
-function isImage(fetchRequest) {
-  return fetchRequest.method === 'GET' && fetchRequest.destination === 'image';
-}
-
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', e => {
-  e.respondWith(
-    fetch(e.request)
-      .then(response => {
-        if (response.ok) return response;
-
-        // User is online, but response was not ok
-        if (isImage(e.request)) {
-          // Get broken image placeholder from cache
-          return caches.match('/broken.png');
-        }
-      })
-      .catch(err => {
-        // User is probably offline
-        if (isImage(e.request)) {
-          // Get broken image placeholder from cache
-          return caches.match('/broken.png');
-        }
-        process(err);
-      })
-  );
-});
-
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('install', e => {
-  // eslint-disable-next-line no-restricted-globals
-  self.skipWaiting();
-  e.waitUntil(
-    caches.open('precache').then(cache => {
-      // Add /broken.png to "precache"
-      cache.add('/broken.png');
-    })
-  );
-});
-```
-
-### PWA Library
-
-- [Workbox](https://github.com/GoogleChrome/workbox)
-
-### PWA Reference
-
-- [Offline Cookbook](https://web.dev/offline-cookbook)
-- [Extensive Guide](https://www.smashingmagazine.com/2018/11/guide-pwa-progressive-web-applications)
-- [Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers).
-
-## Web Workers
-
-- 多线程处理
-- 有两种方法可以停止 Worker:
-  从主页调用 `worker.terminate()` 或在 worker 内部调用 `self.close()`
-- 利用 [BroadcastChannel API](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel)
-  可以创建 Shared Worker, 即共享 Workers 在同一源 (origin) 下面的各种进程都可以访问它，
-  包括：iframes、浏览器中的不同 tab 页 (browsing context)
-- Web Workers 无法访问一些非常关键的 JavaScript 特性:
-  DOM(它会造成线程不安全), window 对象, document 对象, parent 对象.
-- Use Case: Graphic App (Ray Tracing), Encryption, Prefetching Data,
-  PWA (Service Worker), Spell Checking
-
-```html
-<button onclick="startComputation()">Start computation</button>
-
-<script>
-  const worker = new Worker('worker.js');
-
-  worker.addEventListener(
-    'message',
-    function (e) {
-      console.log(e.data);
-    },
-    false
-  );
-
-  function startComputation() {
-    worker.postMessage({ cmd: 'average', data: [1, 2, 3, 4] });
-  }
-</script>
-```
-
-```ts
-// worker.js
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener(
-  'message',
-  function (e) {
-    const data = e.data;
-    switch (data.cmd) {
-      case 'average': {
-        const result = calculateAverage(data);
-        // eslint-disable-next-line no-restricted-globals
-        self.postMessage(result);
-        break;
-      }
-      default:
-        // eslint-disable-next-line no-restricted-globals
-        self.postMessage('Unknown command');
-    }
-  },
-  false
-);
-```
-
-### Web Worker Runtime
-
-- navigation 对象: appName, appVersion, userAgent, platform
-- location 对象: 所有属性只读
-- ECMAScript 对象: Object/Array/Date
-- XMLHttpRequest 方法
-- setTimeout/setInterval 方法
-- self 对象: 指向全局 worker 对象
-- importScripts 方法: 加载外部依赖
-- close 方法: 停止 worker
-
-### Web Worker Loader
-
-```ts
-// 文件名为index.js
-function work() {
-  onmessage = ({ data: { jobId, message } }) => {
-    console.log(`i am worker, receive:-----${message}`);
-    postMessage({ jobId, result: 'message from worker' });
-  };
-}
-
-const makeWorker = f => {
-  const pendingJobs = {};
-
-  const worker = new Worker(
-    URL.createObjectURL(new Blob([`(${f.toString()})()`]))
-  );
-
-  worker.onmessage = ({ data: { result, jobId } }) => {
-    // 调用 resolve, 改变 Promise 状态
-    pendingJobs[jobId](result);
-    delete pendingJobs[jobId];
-  };
-
-  return (...message) =>
-    new Promise(resolve => {
-      const jobId = String(Math.random());
-      pendingJobs[jobId] = resolve;
-      worker.postMessage({ jobId, message });
-    });
-};
-
-const testWorker = makeWorker(work);
-
-testWorker('message from main thread').then(message => {
-  console.log(`i am main thread, i receive:-----${message}`);
-});
-```
-
-### Web Worker Use Case
-
-- 先 on ,后 post
-- main.js/worker.js 的 onmessage 与 postMessage 相互触发
-
-```ts
-/*
- * JSONParser.js
- */
-// eslint-disable-next-line no-restricted-globals
-self.onmessage = function (event) {
-  const jsonText = event.data;
-  const jsonData = JSON.parse(jsonText);
-
-  // eslint-disable-next-line no-restricted-globals
-  self.postMessage(jsonData);
-};
-```
-
-```ts
-/*
- * main.js
- */
-const worker = new Worker('JSONParser.js');
-
-worker.onmessage = function (event) {
-  const jsonData = event.data;
-  evaluateData(jsonData);
-};
-
-worker.postMessage(jsonText);
-```
-
-### Web Worker Performance
-
-- Web Worker performance [guide](https://mp.weixin.qq.com/s/IJHI9JB3nMQPi46b6yGVWw).
-
-## Web Observer
-
-- [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)
-- [Mutation Observer](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)
-- [Performance Observer](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver)
-- [Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)
-- [Reporting Observer](https://developer.mozilla.org/en-US/docs/Web/API/ReportingObserver)
-
-### Intersection Observer
-
-```ts
-// <img class="lzy_img" src="lazy_img.jpg" data-src="real_img.jpg" />
-document.addEventListener('DOMContentLoaded', () => {
-  const imageObserver = new IntersectionObserver((entries, imgObserver) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const lazyImage = entry.target;
-        console.log('Lazy loading ', lazyImage);
-        lazyImage.src = lazyImage.dataset.src;
-
-        // only load image once
-        lazyImage.classList.remove('lzy');
-        imgObserver.unobserve(lazyImage);
-      }
-    });
-  });
-
-  const lazyImages = document.querySelectorAll('img.lzy_img');
-  lazyImages.forEach(lazyImage => imageObserver.observe(lazyImage));
-});
-```
-
-### Mutation Observer
-
-如果文档中连续插入 1000 个 `<li>` 元素, 就会连续触发 1000 个插入事件,
-执行每个事件的回调函数, 这很可能造成浏览器的卡顿；
-而 Mutation Observer 完全不同, 只在 1000 个段落都插入结束后才会触发, 而且只触发一次.
-
-Mutation Observer 有以下特点:
-
-- 它等待所有脚本任务完成后, 才会运行, 即采用异步方式
-- 它把 DOM 变动记录封装成一个数组进行处理, 而不是一条条地个别处理 DOM 变动
-- 它即可以观察发生在 DOM 节点的所有变动, 也可以观察某一类变动
-
-```ts
-const mutationObserver = new MutationObserver(mutations => {
-  mutations.forEach(mutation => {
-    console.log(mutation);
-  });
-});
-
-// 开始侦听页面的根 HTML 元素中的更改。
-mutationObserver.observe(document.documentElement, {
-  attributes: true,
-  characterData: true,
-  childList: true,
-  subtree: true,
-  attributeOldValue: true,
-  characterDataOldValue: true,
-});
-```
-
-```ts
-const target = document.querySelector('#container');
-const callback = (mutations, observer) => {
-  mutations.forEach(mutation => {
-    switch (mutation.type) {
-      case 'attributes':
-        // the name of the changed attribute is in
-        // mutation.attributeName
-        // and its old value is in mutation.oldValue
-        // the current value can be retrieved with
-        // target.getAttribute(mutation.attributeName)
-        break;
-      case 'childList':
-        // any added nodes are in mutation.addedNodes
-        // any removed nodes are in mutation.removedNodes
-        break;
-      default:
-        throw new Error('Unsupported mutation!');
-    }
-  });
-};
-
-const observer = new MutationObserver(callback);
-observer.observe(target, {
-  attributes: true,
-  attributeFilter: ['foo'], // only observe attribute 'foo'
-  attributeOldValue: true,
-  childList: true,
-});
-```
-
 ## Web Animations
 
 - `KeyframeEffect`.
@@ -6204,14 +5607,212 @@ navigator.geolocation.watchPosition(
 
 自动更新地理位置
 
-## RESTful API
+## PWA
 
-- Client - Server architecture
-- Stateless
-- Cacheable
-- Layer system
-- Code via need
-- Isomorphic interface
+Progressive Web Apps:
+
+- served over `HTTPS`
+- provide a manifest
+- register a `ServiceWorker`
+  (web cache for offline and performance)
+- consists of website, web app manifest,
+  service worker, expanded capabilities
+  and OS integration
+
+### Service Worker
+
+#### Service Worker Pros
+
+- Cache.
+- Offline.
+- Background.
+- Custom request to minimize network.
+- [Notification API](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification).
+
+#### Service Worker Costs
+
+- Need startup time.
+
+```ts
+// 20~100 ms for desktop
+// 100 ms for mobile
+const entry = performance.getEntriesByName(url)[0];
+const swStartupTime = entry.requestStart - entry.workerStart;
+```
+
+- cache reads aren't always instant:
+  - cache hit time = read time (only this case better than `NO SW`),
+  - cache miss time = read time + network latency,
+  - cache slow time = slow read time + network latency,
+  - SW asleep = SW boot latency + read time ( + network latency),
+  - NO SW = network latency.
+
+```ts
+const entry = performance.getEntriesByName(url)[0];
+
+// no remote request means this was handled by the cache
+if (entry.transferSize === 0) {
+  const cacheTime = entry.responseStart - entry.requestStart;
+}
+```
+
+```ts
+async function handleRequest(event) {
+  const cacheStart = performance.now();
+  const response = await caches.match(event.request);
+  const cacheEnd = performance.now();
+}
+```
+
+#### Service Worker Caching Strategy
+
+5 caching strategy in [workbox](https://developer.chrome.com/docs/workbox/caching-strategies-overview).
+
+Stale-While-Revalidate:
+
+```ts
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    caches.open(cacheName).then(function (cache) {
+      cache.match(event.request).then(function (cacheResponse) {
+        fetch(event.request).then(function (networkResponse) {
+          cache.put(event.request, networkResponse);
+        });
+
+        return cacheResponse || networkResponse;
+      });
+    })
+  );
+});
+```
+
+Cache first, then Network:
+
+```ts
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    caches.open(cacheName).then(function (cache) {
+      cache.match(event.request).then(function (cacheResponse) {
+        if (cacheResponse) return cacheResponse;
+
+        return fetch(event.request).then(function (networkResponse) {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        });
+      });
+    })
+  );
+});
+```
+
+Network first, then Cache:
+
+```ts
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    fetch(event.request).catch(function () {
+      return caches.match(event.request);
+    })
+  );
+});
+```
+
+Cache only:
+
+```ts
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    caches.open(cacheName).then(function (cache) {
+      cache.match(event.request).then(function (cacheResponse) {
+        return cacheResponse;
+      });
+    })
+  );
+});
+```
+
+Network only:
+
+```ts
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    fetch(event.request).then(function (networkResponse) {
+      return networkResponse;
+    })
+  );
+});
+```
+
+#### SW Usage
+
+```ts
+// Check that service workers are registered
+if ('serviceWorker' in navigator) {
+  // Use the window load event to keep the page load performance
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js');
+  });
+}
+```
+
+Broken images use case:
+
+```ts
+function isImage(fetchRequest) {
+  return fetchRequest.method === 'GET' && fetchRequest.destination === 'image';
+}
+
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    fetch(e.request)
+      .then(response => {
+        if (response.ok) return response;
+
+        // User is online, but response was not ok
+        if (isImage(e.request)) {
+          // Get broken image placeholder from cache
+          return caches.match('/broken.png');
+        }
+      })
+      .catch(err => {
+        // User is probably offline
+        if (isImage(e.request)) {
+          // Get broken image placeholder from cache
+          return caches.match('/broken.png');
+        }
+        process(err);
+      })
+  );
+});
+
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('install', e => {
+  // eslint-disable-next-line no-restricted-globals
+  self.skipWaiting();
+  e.waitUntil(
+    caches.open('precache').then(cache => {
+      // Add /broken.png to "precache"
+      cache.add('/broken.png');
+    })
+  );
+});
+```
+
+### PWA Library
+
+- [Workbox](https://github.com/GoogleChrome/workbox)
+
+### PWA Reference
+
+- [Offline Cookbook](https://web.dev/offline-cookbook)
+- [Extensive Guide](https://www.smashingmagazine.com/2018/11/guide-pwa-progressive-web-applications)
+- [Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers).
 
 ## JamStack
 
@@ -6731,6 +6332,15 @@ console.log(JSON.stringify(obj));
 // "2022-03-06T08:24:56.138Z"
 JSON.stringify(new Date());
 ```
+
+### RESTful
+
+- Client - Server architecture
+- Stateless
+- Cacheable
+- Layer system
+- Code via need
+- Isomorphic interface
 
 ### HTTPS
 
@@ -7857,7 +7467,7 @@ module.exports = {
 
 ### Webpack Cache Configuration
 
-#### Build Cache
+#### Webpack Build Cache
 
 `cache` is set to `type: 'memory'` in development mode
 and disabled in production mode.
@@ -7873,7 +7483,7 @@ module.exports = {
 };
 ```
 
-#### Browser Caching
+#### Webpack Browser Cache
 
 - [Webpack caching guide](https://webpack.js.org/guides/caching).
 - Use `[contenthash]` and long-term browser cache to improve second access time.
