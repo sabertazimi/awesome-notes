@@ -1835,7 +1835,29 @@ ait.next().then();
 
 ### Generator
 
+- 函数名称前面加一个星号 (`*`) 表示它是一个生成器.
+- 箭头函数不能用来定义生成器函数.
+- 调用生成器函数会产生一个生成器对象, 其是一个 IterableIterator 对象 (自引用可迭代对象).
 - [Synchronous Generators](https://dev.to/jfet97/javascript-iterators-and-generators-synchronous-generators-3ai4)
+
+```ts
+function* generatorFn() {}
+console.log(generatorFn);
+// f* generatorFn() {}
+
+console.log(generatorFn()[Symbol.iterator]);
+// f [Symbol.iterator]() {native code}
+
+console.log(generatorFn());
+// generatorFn {<suspended>}
+
+console.log(generatorFn()[Symbol.iterator]());
+// generatorFn {<suspended>}
+
+const g = generatorFn(); // IterableIterator
+console.log(g === g[Symbol.iterator]());
+// true
+```
 
 #### Basic Usage
 
