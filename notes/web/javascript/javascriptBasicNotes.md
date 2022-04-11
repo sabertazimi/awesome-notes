@@ -4309,8 +4309,10 @@ async function run(arg = '.') {
 
 Modify default object behavior with `Proxy` and `Reflect`:
 
+- `new Proxy(target, handler)`.
+- `Proxy.revocable(target, handler)`.
+
 ```ts
-// new Proxy(target, handler)
 Proxy(target, {
   set(target, name, value, receiver) {
     const success = Reflect.set(target, name, value, receiver);
