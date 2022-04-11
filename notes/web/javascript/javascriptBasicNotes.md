@@ -2943,7 +2943,10 @@ twoSay('yo'); // "yo, another object"
 
 #### Constructor Binding
 
-Constructor Invocation: this 绑定至传入的空对象
+Constructor Invocation (`new` call):
+
+- `this` 绑定至传入的空对象.
+- `new.target` 引用构造函数.
 
 #### Arrow Function Binding
 
@@ -3039,7 +3042,8 @@ console.log(propertyDescriptor.set.name); // set age
 #### Arguments Callee
 
 - 引用 arguments 所属 function, 可以利用 callee 实现匿名递归函数.
-- arguments.callee.length: 形参个数.
+- `arguments.callee.length`: 即 `function.length`, 形参个数.
+- 严格模式下禁止使用 `arguments.callee`.
 
 ```ts
 try {
