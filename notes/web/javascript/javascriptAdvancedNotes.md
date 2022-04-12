@@ -639,6 +639,18 @@ const txt = document.createTextNode('Hello World');
 para.appendChild(txt);
 ```
 
+`innerHTML`: non-concrete, including all types of childNodes:
+
+```ts
+const textContent = element.textContent;
+const innerHTML = element.innerHTML;
+
+div.innerHTML = <p>Test<em>test</em>Test.</p>
+// <div>
+//   <p>Test<em>test</em>Test.</p>
+// </div>
+```
+
 #### Insert DOM Node
 
 ```ts
