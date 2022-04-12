@@ -852,19 +852,33 @@ const title = document.title;
 
 #### DOM Width and Height
 
-- offsetWidth/offsetHeight = content + padding + border
-- clientWidth/clientHeight = content + padding
-- outerHeight: 是整个浏览器窗口的大小, 包括窗口标题、工具栏、状态栏等.
-- innerHeight: 是 DOM 视口的大小, 包括滚动条.
-- offsetHeight: 整个可视区域大小, 包括 border 和 scrollbar 在内.
-- clientHeight: 内部可视区域大小.
+- outerHeight: 整个浏览器窗口的大小, 包括窗口标题/工具栏/状态栏等.
+- innerHeight: DOM 视口的大小, 包括滚动条.
+- offsetHeight: 整个可视区域大小, 包括 border 和 scrollbar 在内 (content + padding + border).
+- clientHeight: 内部可视区域大小 (content + padding).
 - scrollHeight: 元素内容的高度, 包括溢出部分.
 
 ```ts
+// const supportInnerWidth = window.innerWidth !== undefined;
+// const supportInnerHeight = window.innerHeight !== undefined;
+// const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
+const width =
+  window.innerWidth ||
+  document.documentElement.clientWidth ||
+  document.body.clientWidth;
 const height =
   window.innerHeight ||
   document.documentElement.clientHeight ||
   document.body.clientHeight;
+```
+
+```ts
+// 缩放到 100×100
+window.resizeTo(100, 100);
+// 缩放到 200×150
+window.resizeBy(100, 50);
+// 缩放到 300×300
+window.resizeTo(300, 300);
 ```
 
 :::tip DOM Rect API
@@ -873,25 +887,54 @@ the offsetWidth and offsetHeight returns the layout width and height (all the sa
 while getBoundingClientRect() returns the rendering width and height.
 :::
 
-#### DOM Scroll Size
+#### DOM Left and Top
 
-- scrollTop/scrollY/pageYOffset: 元素内容向上滚动了多少像素, 如果没有滚动则为 0.
-- scrollLeft/scrollX/PageXOffset: 元素内容向右滚动了多少像素, 如果没有滚动则为 0.
+- offsetLeft/offsetTop: 表示该元素的左上角 (边框外边缘) 与已定位的父容器 (offsetParent 对象) 左上角的距离.
+- scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素位置.
 
 ```ts
-const supportPageOffset = window.pageXOffset !== undefined;
-const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
+const isElementInViewport = el => {
+  const { top, height, left, width } = el.getBoundingClientRect();
+  const w =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+  const h =
+    window.innerHeight ||
+    document.documentElement.clientHeight ||
+    document.body.clientHeight;
 
-const x = supportPageOffset
-  ? window.pageXOffset
-  : isCSS1Compat
-  ? document.documentElement.scrollLeft
-  : document.body.scrollLeft;
-const y = supportPageOffset
-  ? window.pageYOffset
-  : isCSS1Compat
-  ? document.documentElement.scrollTop
-  : document.body.scrollTop;
+  return top <= h && top + height >= 0 && left <= w && left + width >= 0;
+};
+```
+
+```ts
+// 把窗口移动到左上角
+window.moveTo(0, 0);
+// 把窗口向下移动 100 像素
+window.moveBy(0, 100);
+// 把窗口移动到坐标位置 (200, 300)
+window.moveTo(200, 300);
+// 把窗口向左移动 50 像素
+window.moveBy(-50, 0);
+```
+
+#### DOM Scroll Size
+
+- scrollLeft/scrollX/PageXOffset: 元素内容向右滚动了多少像素, 如果没有滚动则为 0.
+- scrollTop/scrollY/pageYOffset: 元素内容向上滚动了多少像素, 如果没有滚动则为 0.
+
+```ts
+// const supportPageOffset = window.pageXOffset !== undefined;
+// const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
+const x =
+  window.pageXOffset ||
+  document.documentElement.scrollLeft ||
+  document.body.scrollLeft;
+const y =
+  window.pageYOffset ||
+  document.documentElement.scrollTop ||
+  document.body.scrollTop;
 ```
 
 ```ts
@@ -900,19 +943,27 @@ if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
 }
 ```
 
-#### DOM Left and Top
-
-- offsetLeft/offsetTop: 表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent 对象）左上角的距离
-- scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素大小
-
 ```ts
-const isElementInViewport = el => {
-  const { top, height, left, width } = el.getBoundingClientRect();
-  const w = window.innerWidth || document.documentElement.clientWidth;
-  const h = window.innerHeight || document.documentElement.clientHeight;
-
-  return top <= h && top + height >= 0 && left <= w && left + width >= 0;
-};
+// 相对于当前视口向下滚动 100 像素
+window.scrollBy(0, 100);
+// 相对于当前视口向右滚动 40 像素
+window.scrollBy(40, 0);
+// 滚动到页面左上角
+window.scrollTo(0, 0);
+// 滚动到距离屏幕左边及顶边各 100 像素的位置
+window.scrollTo(100, 100);
+// 正常滚动
+window.scrollTo({
+  left: 100,
+  top: 100,
+  behavior: 'auto',
+});
+// 平滑滚动
+window.scrollTo({
+  left: 100,
+  top: 100,
+  behavior: 'smooth',
+});
 ```
 
 ### DOM Observer
