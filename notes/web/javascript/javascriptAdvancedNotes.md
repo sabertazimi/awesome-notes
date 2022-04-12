@@ -916,6 +916,130 @@ div.removeAttribute('id');
 div.removeAttribute('class');
 ```
 
+#### Dynamic Scripts Loading
+
+```ts
+function loadScript(url) {
+  const script = document.createElement('script');
+  script.src = url;
+  document.body.appendChild(script);
+}
+```
+
+```ts
+function loadScriptString(code) {
+  const script = document.createElement('script');
+  script.type = 'text/javascript';
+
+  try {
+    script.appendChild(document.createTextNode(code));
+  } catch (ex) {
+    script.text = code;
+  }
+
+  document.body.appendChild(script);
+}
+```
+
+:::caution InnerHTML Script
+通过 `innerHTML` 属性创建的 `<script>` 元素永远不会执行.
+:::
+
+#### Dynamic Styles Loading
+
+```ts
+function loadStyles(url) {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = url;
+
+  const head = document.getElementsByTagName('head')[0];
+  head.appendChild(link);
+}
+```
+
+```ts
+function loadStyleString(css) {
+  const style = document.createElement('style');
+  style.type = 'text/css';
+
+  try {
+    style.appendChild(document.createTextNode(css));
+  } catch (ex) {
+    style.styleSheet.cssText = css;
+  }
+
+  const head = document.getElementsByTagName('head')[0];
+  head.appendChild(style);
+}
+```
+
+:::danger StyleSheet CSSText
+
+- 若重用同一个 `<style>` 元素并设置该属性超过一次, 则可能导致浏览器崩溃.
+- 将 `cssText` 设置为空字符串也可能导致浏览器崩溃.
+
+:::
+
+#### Table Manipulation
+
+`<table>` 元素添加了以下属性和方法：
+
+- `caption`: 指向 `<caption>` 元素的指针 (如果存在).
+- `tBodies`: 包含 `<tbody>` 元素的 HTMLCollection.
+- `tFoot`: 指向 `<tfoot>` 元素 (如果存在).
+- `tHead`: 指向 `<thead>` 元素 (如果存在).
+- `rows`: 包含表示所有行的 HTMLCollection.
+- `createTHead()`: 创建 `<thead>` 元素, 放到表格中, 返回引用.
+- `createTFoot()`: 创建 `<tfoot>` 元素, 放到表格中, 返回引用.
+- `createCaption()`: 创建 `<caption>` 元素, 放到表格中, 返回引用.
+- `deleteTHead()`: 删除 `<thead>` 元素.
+- `deleteTFoot()`: 删除 `<tfoot>` 元素.
+- `deleteCaption()`: 删除 `<caption>` 元素.
+- `deleteRow(pos)`: 删除给定位置的行.
+- `insertRow(pos)`: 在行集合中给定位置插入一行.
+
+`<tbody>` 元素添加了以下属性和方法：
+
+- `rows`: 包含 `<tbody>` 元素中所有行的 HTMLCollection.
+- `deleteRow(pos)`: 删除给定位置的行.
+- `insertRow(pos)`: 在行集合中给定位置插入一行, 返回该行的引用.
+
+`<tr>` 元素添加了以下属性和方法：
+
+- `cells`: 包含 `<tr>` 元素所有表元的 HTMLCollection.
+- `deleteCell(pos)`: 删除给定位置的表元.
+- `insertCell(pos)`: 在表元集合给定位置插入一个表元, 返回该表元的引用.
+
+```ts
+// 创建表格
+const table = document.createElement('table');
+table.border = 1;
+table.width = '100%';
+
+// 创建表体
+const tbody = document.createElement('tbody');
+table.appendChild(tbody);
+
+// 创建第一行
+tbody.insertRow(0);
+tbody.rows[0].insertCell(0);
+tbody.rows[0].cells[0].appendChild(document.createTextNode('Cell 1, 1'));
+tbody.rows[0].insertCell(1);
+tbody.rows[0].cells[1].appendChild(document.createTextNode('Cell 2, 1'));
+
+// 创建第二行
+tbody.insertRow(1);
+tbody.rows[1].insertCell(0);
+tbody.rows[1].cells[0].appendChild(document.createTextNode('Cell 1, 2'));
+tbody.rows[1].insertCell(1);
+tbody.rows[1].cells[1].appendChild(document.createTextNode('Cell 2, 2'));
+
+// 把表格添加到文档主体
+document.body.appendChild(table);
+```
+
 ### CSSOM
 
 The CSS Object Model is a set of APIs allowing the manipulation of CSS from JavaScript.
@@ -1566,7 +1690,7 @@ document.addEventListener('DOMContentLoaded', () => {
 #### Mutation Observer
 
 如果文档中连续插入 1000 个 `<li>` 元素, 就会连续触发 1000 个插入事件,
-执行每个事件的回调函数, 这很可能造成浏览器的卡顿；
+执行每个事件的回调函数, 这很可能造成浏览器的卡顿;
 而 Mutation Observer 完全不同, 只在 1000 个段落都插入结束后才会触发, 而且只触发一次.
 
 Mutation Observer 有以下特点:
@@ -4924,7 +5048,7 @@ let length;
 (function example() {
   // JavaScript 把它解释为
   // let a = ( b = ( c = 1 ) );
-  // let 关键词只适用于变量 a ；变量 b 和变量 c 则变成了全局变量.
+  // let 关键词只适用于变量 a; 变量 b 和变量 c 则变成了全局变量.
   const a = (b = c = 1);
 })();
 
