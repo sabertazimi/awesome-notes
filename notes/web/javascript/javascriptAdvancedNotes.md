@@ -645,7 +645,7 @@ para.appendChild(txt);
 const textContent = element.textContent;
 const innerHTML = element.innerHTML;
 
-div.innerHTML = <p>Test<em>test</em>Test.</p>
+div.innerHTML = '<p>Test<em>test</em>Test.</p>';
 // <div>
 //   <p>Test<em>test</em>Test.</p>
 // </div>
@@ -790,25 +790,14 @@ oldNode.parentNode.replaceChild(clone, oldNode);
 
 ### HTML DOM
 
-```ts
-const innerHTML = element.innerHTML;
-const textContent = element.textContent;
-```
-
-`innerHTML`: non-concrete, including all types of childNodes.
-
-`div.innerHTML = <p>Test<em>test</em>Test.</p>`
-
-```html
-<div>
-  <p>Test<em>test</em>Test.</p>
-</div>
-```
+`document` object:
 
 ```ts
 const html = document.documentElement;
 const body = document.body;
 const doctype = document.doctype;
+const URI = document.URI;
+const title = document.title;
 const images = documents.images;
 const links = documents.links;
 const forms = documents.forms;
@@ -818,6 +807,7 @@ element.classname = value;
 ```
 
 ```ts
+document.write();
 document.querySelector('cssSelector');
 document.querySelectorAll('cssSelector');
 ```
@@ -1313,14 +1303,6 @@ function myHandler(e) {
     e.returnValue = false;
   }
 }
-```
-
-### Document
-
-```ts
-document.write();
-const URI = document.URI;
-const title = document.title;
 ```
 
 ### DOM Rect
