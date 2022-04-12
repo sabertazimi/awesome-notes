@@ -196,8 +196,9 @@ window.addEventListener(
 | share()                   | 当前平台的原生共享机制                            |
 | vibrate()                 | 触发设备振动                                      |
 
+#### Web Online API
+
 ```ts
-const networkType = navigator.connection.effectiveType; // 2G - 5G
 const connectionStateChange = () => console.log(navigator.onLine);
 window.addEventListener('online', connectionStateChange);
 window.addEventListener('offline', connectionStateChange);
@@ -207,6 +208,21 @@ window.addEventListener('offline', connectionStateChange);
 // false
 ```
 
+#### Web Connection API
+
+```ts
+const downlink = navigator.connection.downlink;
+const downlinkMax = navigator.connection.downlinkMax;
+const rtt = navigator.connection.rtt;
+const type = navigator.connection.type; // wifi/bluetooth/cellular/ethernet/mixed/unknown/none.
+const networkType = navigator.connection.effectiveType; // 2G - 5G.
+const saveData = navigator.connection.saveData; // Boolean: Reduced data mode.
+
+navigator.connection.addEventListener('change', changeHandler);
+```
+
+#### Web Protocol Handler API
+
 ```ts
 navigator.registerProtocolHandler(
   'mailto',
@@ -214,6 +230,31 @@ navigator.registerProtocolHandler(
   'Some Mail Client'
 );
 ```
+
+#### Web Battery Status API
+
+```ts
+navigator.getBattery().then(battery => {
+  // 添加充电状态变化时的处理程序
+  const chargingChangeHandler = () => console.log(battery.charging);
+  battery.addEventListener('chargingchange', chargingChangeHandler);
+  // 添加充电时间变化时的处理程序
+  const chargingTimeChangeHandler = () => console.log(battery.chargingTime);
+  battery.addEventListener('chargingtimechange', chargingTimeChangeHandler);
+  // 添加放电时间变化时的处理程序
+  const dischargingTimeChangeHandler = () =>
+    console.log(battery.dischargingTime);
+  battery.addEventListener(
+    'dischargingtimechange',
+    dischargingTimeChangeHandler
+  );
+  // 添加电量百分比变化时的处理程序
+  const levelChangeHandler = () => console.log(battery.level * 100);
+  battery.addEventListener('levelchange', levelChangeHandler);
+});
+```
+
+#### Navigator User Agent
 
 `navigator.userAgent` 特别复杂:
 
