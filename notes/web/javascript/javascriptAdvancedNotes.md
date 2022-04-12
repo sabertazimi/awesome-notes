@@ -552,7 +552,7 @@ if (document.getElementById) {
   - DOM2 Events.
   - DOM2 UIEvents.
   - DOM2 MouseEvents.
-  - DOM2 MutationEvents.
+  - DOM2 MutationEvents (Deprecated).
   - DOM2 HTMLEvents.
   - DOM2 Range.
   - DOM2 Traversal.
@@ -562,7 +562,7 @@ if (document.getElementById) {
   - DOM3 Events.
   - DOM3 UIEvents.
   - DOM3 MouseEvents.
-  - DOM3 MutationEvents.
+  - DOM3 MutationEvents (Deprecated).
   - DOM3 MutationNameEvents.
   - DOM3 TextEvents.
   - DOM3 Load and Save.
@@ -1659,8 +1659,8 @@ window.scrollTo({
 
 - [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)
 - [Mutation Observer](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)
-- [Performance Observer](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver)
 - [Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)
+- [Performance Observer](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver)
 - [Reporting Observer](https://developer.mozilla.org/en-US/docs/Web/API/ReportingObserver)
 
 #### Intersection Observer
@@ -1691,13 +1691,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 如果文档中连续插入 1000 个 `<li>` 元素, 就会连续触发 1000 个插入事件,
 执行每个事件的回调函数, 这很可能造成浏览器的卡顿;
-而 Mutation Observer 完全不同, 只在 1000 个段落都插入结束后才会触发, 而且只触发一次.
+Mutation Observer 只会在 1000 个段落都插入结束后才会触发, 且只触发一次.
 
 Mutation Observer 有以下特点:
 
-- 它等待所有脚本任务完成后, 才会运行, 即采用异步方式
-- 它把 DOM 变动记录封装成一个数组进行处理, 而不是一条条地个别处理 DOM 变动
-- 它即可以观察发生在 DOM 节点的所有变动, 也可以观察某一类变动
+- 它等待所有脚本任务完成后, 才会运行, 即采用异步方式.
+- 它把 DOM 变动记录封装成一个数组进行处理, 而不是一条条地个别处理 DOM 变动.
+- 它即可以观察发生在 DOM 节点的所有变动, 也可以观察某一类变动.
 
 ```ts
 const mutationObserver = new MutationObserver(mutations => {
