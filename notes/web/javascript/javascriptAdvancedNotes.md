@@ -5912,7 +5912,16 @@ function locationError(error) {
 ```
 
 locationSuccess 为获取位置信息成功的回调函数,
-返回的数据中包含经纬度等信息,
+返回的数据中包含经纬度等信息:
+
+- `position.timestamp`.
+- `position.coords`:
+  - `latitude`: 维度.
+  - `longitude`: 经度.
+  - `accuracy`.
+  - `altitude`: 海拔高度.
+  - `altitudeAccuracy`.
+
 结合 Google Map API 即可在地图中显示当前用户的位置信息:
 
 ```ts
