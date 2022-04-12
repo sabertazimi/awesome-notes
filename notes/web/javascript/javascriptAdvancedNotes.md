@@ -585,14 +585,15 @@ document.getElementById(id);
 // eslint-disable-next-line no-restricted-globals
 document.getElementsByName(name);
 document.getElementsByTagName(tagName);
-document.getElementsByClassName(className);
-document.querySelector(cssSelector);
-document.querySelectorAll(cssSelector);
+document.getElementsByClassName(className); // HTML5
+document.querySelector(cssSelector); // Selectors API
+document.querySelectorAll(cssSelector); // Selectors API
 
 element.getAttribute(attrName);
 element.setAttribute(attrName, attrValue);
 element.removeAttribute(attrName);
 
+element.compareDocumentPosition(element);
 element.contains(element);
 element.matches(cssSelector);
 element.closest(cssSelector); // Returns closest ancestor matching selector
@@ -718,6 +719,22 @@ alert(newNode.nodeValue); // " world!"
 alert(element.childNodes.length); // 2
 ```
 
+- `textContent`:
+  - **Security**: Doesn’t parse HTML.
+  - **Performance**: Including `<script>` and `<style>` text content.
+- `innerText`:
+  - Doesn't parse HTML.
+  - Only show **human-readable** text content
+  - `innerText` care CSS styles, read `innerText` value will trigger `reflow`.
+- `innerHTML`:
+  - Do parse HTML.
+
+```ts
+const textContent = element.textContent;
+const innerText = element.innerText;
+const innerHTML = element.innerHTML;
+```
+
 #### DOM Document Node
 
 `document` node (`#document`):
@@ -730,19 +747,40 @@ alert(document.nodeValue); // null
 
 ```ts
 const html = document.documentElement;
-const body = document.body;
 const doctype = document.doctype;
+const head = document.head; // HTML5 head.
+const body = document.body;
 
 const title = document.title; // 可修改.
 const domain = document.domain; // 可设置同源域名.
 const url = document.URL;
 const referer = document.referer;
+const charSet = document.characterSet; // HTML5 characterSet.
 
 const anchors = documents.anchors;
 const images = documents.images;
 const links = documents.links;
 const forms = documents.forms;
 const formElements = documents.forms[0].elements; // 第一个表单内的所有字段
+
+// HTML5 focus:
+document.getElementById('myButton').focus();
+console.log(document.activeElement === button); // true
+console.log(document.hasFocus()); // true
+
+// HTML5 readyState:
+if (document.readyState === 'complete') {
+  console.log('Loaded');
+} else if (document.readyState === 'loading') {
+  console.log('Loading');
+}
+
+// HTML5 compatMode:
+if (document.compatMode === 'CSS1Compat') {
+  console.log('Standards mode');
+} else if (document.compatMode === 'BackCompat') {
+  console.log('Quirks mode');
+}
 ```
 
 ```ts
@@ -750,9 +788,9 @@ document.getElementById(id);
 // eslint-disable-next-line no-restricted-globals
 document.getElementsByName(name);
 document.getElementsByTagName(tagName);
-document.getElementsByClassName(className);
-document.querySelector('cssSelector');
-document.querySelectorAll('cssSelector');
+document.getElementsByClassName(className); // HTML5
+document.querySelector(cssSelector); // Selectors API
+document.querySelectorAll(cssSelector); // Selectors API
 document.write();
 document.writeln();
 ```
@@ -825,13 +863,29 @@ para.appendChild(txt);
 `innerHTML`: non-concrete, including all types of childNodes:
 
 ```ts
-const textContent = element.textContent;
-const innerHTML = element.innerHTML;
-
 div.innerHTML = '<p>Test<em>test</em>Test.</p>';
 // <div>
 //   <p>Test<em>test</em>Test.</p>
 // </div>
+```
+
+`innerHTML` performance:
+
+```ts
+// BAD
+for (const value of values) {
+  ul.innerHTML += `<li>${value}</li>`; // 别这样做！
+}
+
+// GOOD
+let itemsHtml = '';
+for (const value of values) {
+  itemsHtml += `<li>${value}</li>`;
+}
+ul.innerHTML = itemsHtml;
+
+// BEST
+ul.innerHTML = values.map(value => `<li>${value}</li>`).join('');
 ```
 
 #### Insert DOM Node
@@ -847,8 +901,15 @@ function insertAfter(newElement, targetElement) {
 }
 ```
 
+`insertAdjacentHTML`/`insertAdjacentText`:
+
+- beforebegin: 插入前一个兄弟节点.
+- afterbegin: 插入第一个子节点.
+- beforeend: 插入最后一个子节点.
+- afterend: 插入下一个兄弟节点.
+
 ```ts
-// 4 positions
+// 4 positions:
 //
 // <!-- beforebegin -->
 // <p>
@@ -945,7 +1006,7 @@ function loadScriptString(code) {
 ```
 
 :::caution InnerHTML Script
-通过 `innerHTML` 属性创建的 `<script>` 元素永远不会执行.
+所有现代浏览器中, 通过 `innerHTML` 属性创建的 `<script>` 元素永远不会执行.
 :::
 
 #### Dynamic Styles Loading
@@ -1100,18 +1161,17 @@ const backgroundColor = window.getComputedStyle(el)['background-color'];
 window.getComputedStyle(el).getPropertyValue('background-color');
 ```
 
-#### CSS Class
+#### CSS Class List
 
 ```ts
 element.classList.add('class');
 element.classList.remove('class');
 element.classList.toggle('class');
+element.classList.contains('class');
 ```
 
-Bind class:
-
 ```ts
-function addClass(element, value) {
+function addClassPolyfill(element, value) {
   if (!element.className) {
     element.className = value;
   } else {
@@ -1372,9 +1432,9 @@ function validateForm(e) {
 
 #### Input Events
 
-- focus/focusin/focusout event
-- input/change event
-- select event
+- `focus`/`focusin`/`focusout` event.
+- `input`/`change` event.
+- `select` event.
 
 ```ts
 const input = document.querySelector('input');
@@ -1387,6 +1447,17 @@ input.addEventListener('select', event => {
   );
   log.textContent = `You selected: ${selection}`;
 });
+```
+
+HTML5 focus management:
+
+- 在页面完全加载之前, `document.activeElement` 为 null.
+- 默认情况下, `document.activeElement` 在页面刚加载完之后会设置为 `document.body`.
+
+```ts
+document.getElementById('myButton').focus();
+console.log(document.activeElement === button); // true
+console.log(document.hasFocus()); // true
 ```
 
 #### Mouse Events
@@ -1640,6 +1711,7 @@ if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
 window.scrollBy(0, 100);
 // 相对于当前视口向右滚动 40 像素
 window.scrollBy(40, 0);
+
 // 滚动到页面左上角
 window.scrollTo(0, 0);
 // 滚动到距离屏幕左边及顶边各 100 像素的位置
@@ -1656,6 +1728,11 @@ window.scrollTo({
   top: 100,
   behavior: 'smooth',
 });
+
+document.forms[0].scrollIntoView(); // 窗口滚动后, 元素底部与视口底部对齐.
+document.forms[0].scrollIntoView(true); // 窗口滚动后, 元素顶部与视口顶部对齐.
+document.forms[0].scrollIntoView({ block: 'start' });
+document.forms[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
 ```
 
 ### DOM Observer
