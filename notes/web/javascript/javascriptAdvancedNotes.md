@@ -836,6 +836,7 @@ document.getElementsByClassName(className);
 document.querySelector('cssSelector');
 document.querySelectorAll('cssSelector');
 document.write();
+document.writeln();
 ```
 
 ### CSSOM
