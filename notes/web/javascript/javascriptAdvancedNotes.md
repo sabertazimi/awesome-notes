@@ -129,6 +129,15 @@ function getQueryStringArgs(location) {
 ```
 
 ```ts
+window.location.assign('https://www.new.com');
+window.location = 'https://www.new.com';
+window.location.href = 'https://www.new.com';
+window.location.replace('https://www.new.com'); // No new history
+window.location.reload(); // 重新加载, 可能是从缓存加载
+window.location.reload(true); // 重新加载, 从服务器加载
+```
+
+```ts
 window.addEventListener(
   'hashchange',
   event => {
