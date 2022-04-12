@@ -802,8 +802,6 @@ const images = documents.images;
 const links = documents.links;
 const forms = documents.forms;
 const formElements = documents.forms[0].elements; // 第一个表单内的所有字段
-element.alt = string;
-element.classname = value;
 ```
 
 ```ts
@@ -877,7 +875,7 @@ element.classList.remove('class');
 element.classList.toggle('class');
 ```
 
-**Tip**: bind class
+Bind class:
 
 ```ts
 function addClass(element, value) {
