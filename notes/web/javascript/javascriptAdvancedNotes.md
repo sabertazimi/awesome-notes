@@ -793,6 +793,7 @@ const textContent = element.textContent;
 ```
 
 ```ts
+const html = document.documentElement;
 const body = document.body;
 const images = documents.images;
 const links = documents.links;
