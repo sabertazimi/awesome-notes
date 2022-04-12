@@ -593,7 +593,9 @@ element.getAttribute(attrName);
 element.setAttribute(attrName, attrValue);
 element.removeAttribute(attrName);
 
-element.closest(selectors); // Returns closest ancestor matching selectors
+element.contains(element);
+element.matches(cssSelector);
+element.closest(cssSelector); // Returns closest ancestor matching selector
 element.cloneNode();
 element.normalize();
 element.before(...elements);
@@ -891,12 +893,13 @@ const previous = node.previousSibling;
 const next = node.nextSibling;
 ```
 
-Element-only Navigation:
+[Element Traversal API](https://www.w3.org/TR/ElementTraversal):
 navigation properties listed above refer to all nodes.
 For instance,
 in `childNodes` can see both text nodes, element nodes, and even comment nodes.
 
 ```ts
+const count = node.childElementCount;
 const parent = node.parentElement;
 const children = node.children;
 const first = node.firstElementChild;
