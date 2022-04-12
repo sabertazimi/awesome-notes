@@ -13,25 +13,29 @@ tags: [Web, JavaScript, ECMAScript]
 ### Window
 
 ```ts
-window.location(string);
-window.innerWidth(number);
-window.closed(boolean);
+const selfWindow = window.self;
+const topWindow = window.top;
+const parentWindow = window.parent;
+const grandParentWindow = window.parent.parent;
+
+const newWin = window.open(
+  'https://www.new.com/',
+  'newWindow',
+  'height=400,width=400,top=10,left=10,resizable=yes'
+);
+newWin.resizeTo(500, 500);
+newWin.moveTo(100, 100);
+alert(wroxWin.opener === window); // true
+newWin.close();
+alert(newWin.closed); // true
 ```
 
-**Tip**: 实现 jQuery 中 `$(document).ready(function(){})`.
-
 ```ts
-// initialize.
-window.onload = readyFunction;
+window.onload = function readyFunction() {};
 
-function readyFunction() {}
-```
-
-```ts
-// add more ready function
 function addLoadEvent(func) {
   const oldOnLoad = window.onload;
-  if (typeof window.onload != 'function') {
+  if (typeof window.onload !== 'function') {
     window.onload = func;
   } else {
     window.onload = function () {
@@ -74,6 +78,8 @@ window.addEventListener(
 ```ts
 const networkType = navigator.connection.effectiveType; // 2G - 5G
 ```
+
+### History
 
 ### Browser Compatibility
 
