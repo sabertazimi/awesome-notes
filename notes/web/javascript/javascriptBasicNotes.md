@@ -3602,7 +3602,7 @@ console.log(decodeURIComponent(uri));
 
 #### Timer Function
 
-Combine setInterval/setTimeout function with Closure,
+Combine `setInterval`/`setTimeout` function with closure function,
 implement **time slicing scheduler**.
 
 ```ts
@@ -3620,6 +3620,10 @@ function processArray(items, process, done) {
   }, 25);
 }
 ```
+
+所有超时执行的代码 (函数) 都会在全局作用域中的一个匿名函数中运行,
+因此函数中的 `this` 值在非严格模式下始终指向 `window`, 在严格模式下是 `undefined`.
+若给 `setTimeout()` 提供了一个箭头函数, 则 `this` 会保留为定义它时所在的词汇作用域.
 
 ## Iterator
 
