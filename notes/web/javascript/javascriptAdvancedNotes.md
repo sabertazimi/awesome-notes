@@ -235,6 +235,23 @@ console.log(navigator.userAgent);
 | pixelDepth  | 屏幕的位深 (只读)                        |
 | orientation | Screen Orientation API 中屏幕的朝向      |
 
+```ts
+const screen = window.screen;
+
+console.log(screen.colorDepth); // 24
+console.log(screen.pixelDepth); // 24
+
+// 垂直看
+console.log(screen.orientation.type); // portrait-primary
+console.log(screen.orientation.angle); // 0
+// 向左转
+console.log(screen.orientation.type); // landscape-primary
+console.log(screen.orientation.angle); // 90
+// 向右转
+console.log(screen.orientation.type); // landscape-secondary
+console.log(screen.orientation.angle); // 270
+```
+
 ### History
 
 #### History Navigation
