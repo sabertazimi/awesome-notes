@@ -20,22 +20,6 @@ const grandParentWindow = window.parent.parent;
 ```
 
 ```ts
-window.onload = function readyFunction() {};
-
-function addLoadEvent(func) {
-  const oldOnLoad = window.onload;
-  if (typeof window.onload !== 'function') {
-    window.onload = func;
-  } else {
-    window.onload = function () {
-      oldOnLoad();
-      func();
-    };
-  }
-}
-```
-
-```ts
 // eslint-disable-next-line no-restricted-globals
 if (confirm('Are you sure?')) {
   alert("I'm so glad you're sure!");
@@ -88,6 +72,22 @@ try {
 }
 if (blocked) {
   alert('The popup was blocked!');
+}
+```
+
+```ts
+window.onload = function readyFunction() {};
+
+function addLoadEvent(func) {
+  const oldOnLoad = window.onload;
+  if (typeof window.onload !== 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function () {
+      oldOnLoad();
+      func();
+    };
+  }
 }
 ```
 
@@ -206,7 +206,7 @@ const networkType = navigator.connection.effectiveType; // 2G - 5G
 
 #### Browser Feature Detection
 
-**不使用特性/浏览器推断**，往往容易推断错误(且会随着浏览器更新产生新的错误)
+**不使用特性/浏览器推断**, 往往容易推断错误 (且会随着浏览器更新产生新的错误).
 
 ```ts
 // 特性检测
@@ -676,7 +676,7 @@ DOMContentLoaded:
 - 当文档中没有脚本时, 浏览器解析完文档便能触发 DOMContentLoaded 事件
 - 如果文档中包含脚本, 则脚本会阻塞文档的解析,
   而脚本需要等 CSSOM 构建完成才能执行
-  - 在 DOM、CSSOM 构建完毕, `defer` 脚本执行完成之后, DOMContentLoaded 事件触发
+  - 在 DOM/CSSOM 构建完毕, `defer` 脚本执行完成之后, DOMContentLoaded 事件触发
   - HTML 文档构建不受 `async` 脚本影响,
     不需要等待 async 脚本执行与样式表加载,
     HTML 解析完毕后, DOMContentLoaded 立即触发
@@ -1138,7 +1138,7 @@ const mutationObserver = new MutationObserver(mutations => {
   });
 });
 
-// 开始侦听页面的根 HTML 元素中的更改。
+// 开始侦听页面的根 HTML 元素中的更改.
 mutationObserver.observe(document.documentElement, {
   attributes: true,
   characterData: true,
@@ -1207,7 +1207,7 @@ observer.observe(target, {
 它会在最近的父级执行上下文中查找该变量.
 这个查找链将会一直持续, 直到引擎查找到全局执行上下文.
 这种情况下, 如果全局执行上下文也没有该变量, 那么将会抛出引用错误 (Reference Error).
-子函数“包含”它父级函数的变量环境，把这个概念称为**闭包(Closure)**,
+子函数**包含**它父级函数的变量环境, 把这个概念称为**闭包(Closure)**,
 即使父级函数执行环境已经从执行栈弹出了, 子函数还是可以访问父级函数变量 x (通过作用域链).
 
 ### Event Loop
@@ -1224,12 +1224,12 @@ if there’s any pending call back waiting to be executed:
 
 - ES6 job queue: used by `Promises` (higher priority)
 - Message queue: used by `setTimeout`, `DOM events`
-- 微任务 MicroTask (Jobs)，有特权, 可以插队:
+- 微任务 MicroTask (Jobs), 有特权, 可以插队:
   - `process.nextTick`.
   - `Promises.then` (**Promise 构造函数是同步函数**).
   - `Object.observer`, `MutationObserver`.
   - `catch finally`.
-- 宏任务 MacroTask (Tasks)，没有特权:
+- 宏任务 MacroTask (Tasks), 没有特权:
   - `scripts`: 整体脚本视作一个宏任务.
   - `MessageChannel`, `postMessage`.
   - `setImmediate`, `I/O`.
@@ -1666,14 +1666,14 @@ Orinoco 优化 (优化全停顿现象):
 
 ### Browser Process
 
-- 浏览器进程: 主要负责界面显示、用户交互、子进程管理，同时提供存储等功能.
+- 浏览器进程: 主要负责界面显示/用户交互/子进程管理, 同时提供存储等功能.
 - GPU 进程: 实现 3D CSS, 绘制 UI 界面.
-- 网络进程：主要负责页面的网络资源加载.
-- 渲染进程：核心任务是将 HTML、CSS 和 JavaScript 转换为用户可以与之交互的网页,
+- 网络进程: 主要负责页面的网络资源加载.
+- 渲染进程: 核心任务是将 HTML/CSS 和 JavaScript 转换为用户可以与之交互的网页,
   排版引擎 Blink 和 JavaScript 引擎 V8 都是运行在该进程中.
   默认情况下, Chrome 会为每个 Tab 标签创建一个渲染进程.
   出于安全考虑, 渲染进程都是运行在沙箱模式下.
-- 插件进程：主要是负责插件的运行, 因插件易崩溃，所以需要通过隔离以保证插件进程崩溃不会对浏览器和页面造成影响.
+- 插件进程: 主要是负责插件的运行, 因插件易崩溃, 所以需要通过隔离以保证插件进程崩溃不会对浏览器和页面造成影响.
 
 ### Render Engine
 
@@ -1783,16 +1783,16 @@ They interrupt one or more of the steps:
 
 #### Layout
 
-为避免对所有细小更改都进行整体布局，浏览器采用了一种“dirty 位”系统。
-如果某个呈现器发生了更改，或者将自身及其子代标注为“dirty”，则需要进行布局:
+为避免对所有细小更改都进行整体布局, 浏览器采用了一种 `dirty bit` 系统.
+如果某个呈现器发生了更改, 或者将自身及其子代标注为 `dirty`, 则需要进行布局:
 
-- 父呈现器确定自己的宽度
-- 父呈现器依次处理子呈现器，并且：
-  - 放置子呈现器（设置 x,y 坐标）
-  - 如果有必要，调用子呈现器的布局（如果子呈现器是 dirty 的，或者这是全局布局，或出于其他某些原因），
-    这会计算子呈现器的高度
-- 父呈现器根据子呈现器的累加高度以及边距和补白的高度来设置自身高度，此值也可供父呈现器的父呈现器使用
-- 将其 dirty 位设置为 false
+- 父呈现器确定自己的宽度.
+- 父呈现器依次处理子呈现器, 并且:
+  - 放置子呈现器 (设置 `(x, y)` 坐标).
+  - 如果有必要, 调用子呈现器的布局 (如果子呈现器是 dirty 的, 或者这是全局布局, 或出于其他某些原因),
+    这会计算子呈现器的高度.
+- 父呈现器根据子呈现器的累加高度以及边距和补白的高度来设置自身高度, 此值也可供父呈现器的父呈现器使用.
+- 将其 `dirty 位` 设置为 `false`.
 
 #### Paint
 
@@ -1853,7 +1853,7 @@ Paint Order:
 - 局部变量缓存 DOM 元素.
 - 局部变量缓存布局信息.
 - 局部变量引用嵌套成员: 加快原型链查找.
-- 局部变量引用方法时，应注意会动态改变 this 指针.
+- 局部变量引用方法时, 应注意会动态改变 this 指针.
 
 ```ts
 const DOM = tazimi.util.Dom;
@@ -1913,8 +1913,8 @@ while (i) {
 
 ### Event Delegation
 
-- 事件委托利用的是事件冒泡机制，只制定一事件处理程序，就可以管理某一类型的所有事件.
-- 使用事件委托，只需在 DOM 树中尽量最高的层次上添加一个事件处理程序.
+- 事件委托利用的是事件冒泡机制, 只制定一事件处理程序, 就可以管理某一类型的所有事件.
+- 使用事件委托, 只需在 DOM 树中尽量最高的层次上添加一个事件处理程序.
 - Increases performance and reduces memory consumption.
 - No need to register new event listeners for newer children.
 - DOM Event:
@@ -2061,7 +2061,7 @@ function toArray(coll) {
 #### DOM Manipulation Performance
 
 - 先 `display="none"`, 修改完成后, `display=""`.
-- 使待修改 DOM 元素脱离标准文档流(改变布局／定位方式)，可减少其他元素的重绘次数.
+- 使待修改 DOM 元素脱离标准文档流(改变布局／定位方式), 可减少其他元素的重绘次数.
 - `document.createDocumentFragment()`.
 
 ```ts
@@ -2088,7 +2088,7 @@ and just before the frame is rendered (layout, paint, composite etc.).
 
 ### CSS Performance
 
-在 js 中(除定位属性) 外，不直接操作 element.style.attr/element.cssText:
+在 js 中(除定位属性) 外, 不直接操作 element.style.attr/element.cssText:
 
 ```ts
 element.classList.add('className');
@@ -2120,8 +2120,8 @@ JavaScript 代码与 UI 共享线程.
 `setTimeout`/`setInterval`:
 
 - 第二个参数: 不是执行时间, 是加入执行队列时间.
-- 若其他位于执行队列中的函数执行时间超过延时，则用户感觉不到延时的存在.
-- 模拟有间隙的循环，使得 UI 更新得以进入浏览器线程的执行队列中.
+- 若其他位于执行队列中的函数执行时间超过延时, 则用户感觉不到延时的存在.
+- 模拟有间隙的循环, 使得 UI 更新得以进入浏览器线程的执行队列中.
 - 通过 MicroTask/MicroTask 实现时间分片调度器,
   使得长任务不阻塞页面操作 (60 FPS):
   e.g React Scheduler and Reconciler, Vue `nextTick` API.
@@ -2243,11 +2243,11 @@ function now() {
 }
 
 /**
- * 防抖函数，返回函数连续调用时，空闲时间必须大于或等于 wait，func 才会执行
+ * 防抖函数, 返回函数连续调用时, 空闲时间必须大于或等于 wait, func 才会执行
  *
  * @param  {function} func        回调函数
  * @param  {number}   wait        表示时间窗口的间隔
- * @param  {boolean}  immediate   设置为 true 时，是否立即调用函数
+ * @param  {boolean}  immediate   设置为 true 时, 是否立即调用函数
  * @return {function}             返回客户调用函数
  */
 function debounce(func, wait = 50, immediate = true) {
@@ -2256,9 +2256,9 @@ function debounce(func, wait = 50, immediate = true) {
   // 延迟执行函数
   const later = () =>
     setTimeout(() => {
-      // 延迟函数执行完毕，清空缓存的定时器序号
+      // 延迟函数执行完毕, 清空缓存的定时器序号
       timer = null;
-      // 延迟执行的情况下，函数会在延迟函数中执行
+      // 延迟执行的情况下, 函数会在延迟函数中执行
       // 使用到之前缓存的参数和上下文
       if (!immediate) {
         func.apply(context, args);
@@ -2268,10 +2268,10 @@ function debounce(func, wait = 50, immediate = true) {
 
   // 这里返回的函数是每次实际调用的函数
   return function (...params) {
-    // 如果没有创建延迟执行函数（later），就创建一个
+    // 如果没有创建延迟执行函数 (later), 就创建一个
     if (!timer) {
       timer = later();
-      // 如果是立即执行，调用函数
+      // 如果是立即执行, 调用函数
       // 否则缓存参数和调用上下文
       if (immediate) {
         func.apply(this, params);
@@ -2281,7 +2281,7 @@ function debounce(func, wait = 50, immediate = true) {
         args = params;
       }
     } else {
-      // 如果已有延迟执行函数（later），调用的时候清除原来的并重新设定一个
+      // 如果已有延迟执行函数 (later), 调用的时候清除原来的并重新设定一个
       // 这样做延迟函数会重新计时
       clearTimeout(timer);
       timer = later();
@@ -2307,13 +2307,13 @@ function throttle(action) {
 
 ```ts
 /**
- * underscore 节流函数，返回函数连续调用时，func 执行频率限定为 次 / wait
+ * underscore 节流函数, 返回函数连续调用时, func 执行频率限定为 次 / wait
  *
  * @param  {function}   func      回调函数
  * @param  {number}     wait      表示时间窗口的间隔
- * @param  {object}     options   如果想忽略开始函数的的调用，传入{leading: false}。
- *                                如果想忽略结尾函数的调用，传入{trailing: false}
- *                                两者不能共存，否则函数不能执行
+ * @param  {object}     options   如果想忽略开始函数的的调用, 传入{leading: false}.
+ *                                如果想忽略结尾函数的调用, 传入{trailing: false}
+ *                                两者不能共存, 否则函数不能执行
  * @return {function}             返回客户调用函数
  */
 _.throttle = function (func, wait, options) {
@@ -2326,10 +2326,10 @@ _.throttle = function (func, wait, options) {
 
   // 定时器回调函数
   const later = function () {
-    // 如果设置了 leading，就将 previous 设为 0
+    // 如果设置了 leading, 就将 previous 设为 0
     // 用于下面函数的第一个 if 判断
     previous = options.leading === false ? 0 : _.now();
-    // 置空一是为了防止内存泄漏，二是为了下面的定时器判断
+    // 置空一是为了防止内存泄漏, 二是为了下面的定时器判断
     timeout = null;
     result = func.apply(context, args);
     if (!timeout) context = args = null;
@@ -2353,12 +2353,12 @@ _.throttle = function (func, wait, options) {
 
     // 如果当前调用已经大于上次调用时间 + wait
     // 或者用户手动调了时间
-    // 如果设置了 trailing，只会进入这个条件
-    // 如果没有设置 leading，那么第一次会进入这个条件
-    // 还有一点，你可能会觉得开启了定时器那么应该不会进入这个 if 条件了
-    // 其实还是会进入的，因为定时器的延时
-    // 并不是准确的时间，很可能你设置了2秒
-    // 但是他需要2.2秒才触发，这时候就会进入这个条件
+    // 如果设置了 trailing, 只会进入这个条件
+    // 如果没有设置 leading, 那么第一次会进入这个条件
+    // 还有一点, 你可能会觉得开启了定时器那么应该不会进入这个 if 条件了
+    // 其实还是会进入的, 因为定时器的延时
+    // 并不是准确的时间, 很可能你设置了2秒
+    // 但是他需要2.2秒才触发, 这时候就会进入这个条件
     if (remaining <= 0 || remaining > wait) {
       // 如果存在定时器就清理掉否则会调用二次回调
       if (timeout) {
@@ -2467,7 +2467,7 @@ self.addEventListener('fetch', event => {
 
 #### HTTP Cache
 
-浏览器缓存，也称 HTTP 缓存,
+浏览器缓存, 也称 HTTP 缓存,
 分为强缓存和协商缓存.
 优先级较高的是强缓存,
 在命中强缓存失败的情况下或者`Cache-Control: no-cache`时,
@@ -2476,8 +2476,8 @@ self.addEventListener('fetch', event => {
 强缓存是利用 HTTP 头中的 Expires 和 Cache-Control 两个字段来控制的.
 强缓存中, 当请求再次发出时, 浏览器会根据其中的 expires 和 cache-control 判断目标资源是否 `命中` 强缓存,
 若命中则直接从缓存中获取资源, 不会再与服务端发生通信.
-Cache-Control 相对于 expires 更加准确，它的优先级也更高.
-当 Cache-Control 与 expires 同时出现时，以 Cache-Control 为准.
+Cache-Control 相对于 expires 更加准确, 它的优先级也更高.
+当 Cache-Control 与 expires 同时出现时, 以 Cache-Control 为准.
 
 ```bash
 expires: Wed, 12 Sep 2019 06:12:18 GMT
@@ -2486,7 +2486,7 @@ cache-control: max-age=31536000
 
 协商缓存机制下,
 浏览器需要向服务器去询问缓存的相关信息,
-进而判断是重新发起请求、下载完整的响应,
+进而判断是重新发起请求/下载完整的响应,
 还是从本地获取缓存的资源.
 如果服务端提示缓存资源未改动 (Not Modified),
 资源会被重定向到浏览器缓存,
@@ -2532,16 +2532,16 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 #### Synthetic Monitoring
 
 在一个模拟场景里, 去提交一个需要做性能审计的页面,
-通过一系列的工具、规则去运行你的页面, 提取一些性能指标, 得出一个审计报告.
+通过一系列的工具/规则去运行你的页面, 提取一些性能指标, 得出一个审计报告.
 
-常见的工具有 Google 的 Lighthouse，WebPageTest，PageSpeed 等
+常见的工具有 Google 的 Lighthouse, WebPageTest, PageSpeed 等
 
 | 优点                                   |             缺点             |
 | :------------------------------------- | :--------------------------: |
 | 实现简单                               |     无法还原全部真实场景     |
-| 能采集到丰富的数据，如硬件指标或瀑布图 |    登录等场景需要额外解决    |
+| 能采集到丰富的数据, 如硬件指标或瀑布图 |    登录等场景需要额外解决    |
 | 不影响真实用户的访问性能               |       单次数据不够稳定       |
-| 可以提供页面加载幻灯片等可视化分析途径 | 数据量较小，无法发挥更大价值 |
+| 可以提供页面加载幻灯片等可视化分析途径 | 数据量较小, 无法发挥更大价值 |
 
 #### Real User Monitoring
 
@@ -2554,10 +2554,10 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 
 | 优点                                   | 缺点                             |
 | :------------------------------------- | :------------------------------- |
-| 无需配置模拟条件，完全还原真实场景     | 影响真实用户的访问性能及流量消耗 |
+| 无需配置模拟条件, 完全还原真实场景     | 影响真实用户的访问性能及流量消耗 |
 | 不存在登录等需要额外解决的场景         | 无法采集硬件相关指标             |
-| 数据样本足够庞大，可以减少统计误差     | 无法采集完整的资源加载瀑布图     |
-| 新年数据可与其它数据关联，产生更大价值 | 无法可视化展示加载过程           |
+| 数据样本足够庞大, 可以减少统计误差     | 无法采集完整的资源加载瀑布图     |
+| 新年数据可与其它数据关联, 产生更大价值 | 无法可视化展示加载过程           |
 
 #### SYN and RUM
 
@@ -2581,7 +2581,7 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 
 采集性能数据时先抹平 Navigation Timing spec 差异
 优先使用 PerformanceTimeline API
-(在复杂场景，亦可考虑优先使用 PerformanceObserver):
+(在复杂场景, 亦可考虑优先使用 PerformanceObserver):
 
 - 重定向耗时 = redirectEnd - redirectStart.
 - DNS 查询耗时 = domainLookupEnd - domainLookupStart.
@@ -2630,7 +2630,7 @@ Google Core Web Vitals:
 
 #### Monitoring Report Performance
 
-解决上报对性能的影响问题有以下方案：
+解决上报对性能的影响问题有以下方案:
 
 - 延迟合并上报: 延迟到 `onload` 事件后, 并合并多个上报请求.
 - 使用 [Beacon API](https://developer.mozilla.org/en-US/docs/Web/API/Beacon_API):
@@ -3160,12 +3160,12 @@ observer.observe({ type: 'layout-shift', buffered: true });
 
 ### Log
 
-- 时间，包含时区信息和毫秒
-- 日志级别
-- 会话标识
-- 功能标识
-- 精炼的内容: 场景信息（谁，什么功能等），状态信息(开始，中断，结束)以及重要参数
-- 其他信息：版本号，线程号
+- 时间, 包含时区信息和毫秒.
+- 日志级别.
+- 会话标识.
+- 功能标识.
+- 精炼的内容: 场景信息, 状态信息 (开始/中断/结束), 重要参数.
+- 其他信息: 版本号, 线程号.
 
 #### Log Clock
 
@@ -3356,7 +3356,7 @@ await page.tracing.stop();
 - 完整注释.
 - 最小复杂度 = (扇入 `*` 扇出) ^ 2.
 - 可隔离性: 最小依赖性 + 松耦合性.
-- 使用依赖注入，将外部对象移至函数参数处(不在函数内部调用构造器): 易于构造 mock/stub, 降低扇出(函数复杂度).
+- 使用依赖注入, 将外部对象移至函数参数处(不在函数内部调用构造器): 易于构造 mock/stub, 降低扇出(函数复杂度).
 
 ### 圈复杂度
 
@@ -3447,14 +3447,14 @@ O.makeBread({ type: wheat, size: 99, name: 'foo' });
 
 #### Testing Code Isolation
 
-- 编写代码时，保持最小复杂度(最小依赖，最低耦合).
+- 编写代码时, 保持最小复杂度(最小依赖, 最低耦合).
 - 利用 mock/stub 模拟外部依赖/测试数据.
 
 #### Mock Testing
 
 - mock: 模拟对象中的方法/接口
 - stub: 模拟对象中的返回值
-- spy: 在原有对象的基础上，增加监视用变量/方法 e.g assert/调用次数/参数限制
+- spy: 在原有对象的基础上, 增加监视用变量/方法 e.g assert/调用次数/参数限制
 
 ```ts
 const mockery = require('mockery');
@@ -4315,8 +4315,8 @@ Same thing in `VSCode` debug panel (log points, break points etc).
 
 ### Network Panel
 
-- throttling: simulate different network environment
-- initiator：go to files
+- throttling: simulate different network environment.
+- initiator: go to files.
 
 ### Performance Panel
 
@@ -4480,7 +4480,7 @@ let length;
 (function example() {
   // JavaScript 把它解释为
   // let a = ( b = ( c = 1 ) );
-  // let 关键词只适用于变量 a ；变量 b 和变量 c 则变成了全局变量。
+  // let 关键词只适用于变量 a ；变量 b 和变量 c 则变成了全局变量.
   const a = (b = c = 1);
 })();
 
@@ -4613,7 +4613,7 @@ const nodes = [...foo];
 
 ### Destruct Style
 
-对于多个返回值使用对象解构，而不是数组解构
+对于多个返回值使用对象解构, 而不是数组解构.
 
 ```ts
 // bad
@@ -4622,7 +4622,7 @@ function processInputBad(input) {
   return [left, right, top, bottom];
 }
 
-// 调用者需要考虑返回数据的顺序。
+// 调用者需要考虑返回数据的顺序.
 const [left, __, top] = processInputBad(input);
 
 // good
@@ -4633,7 +4633,7 @@ function processInput(input) {
   return { left, right, top, bottom };
 }
 
-// 调用者只选择他们需要的数据。
+// 调用者只选择他们需要的数据.
 const { left, top } = processInput(input);
 ```
 
@@ -4859,14 +4859,14 @@ const foo = function* () {
 
 if 语句使用 ToBoolean 的抽象方法来计算表达式的结果:
 
-- Objects 的取值为： true
-- Undefined 的取值为： false
-- Null 的取值为： false
-- Booleans 的取值为： 布尔值的取值
-- Numbers 的取值为：如果为 +0, -0, or NaN 值为 false 否则为 true
-- Strings 的取值为: 如果是一个空字符串 '' 值为 false 否则为 true
+- Objects 的取值为: true.
+- Undefined 的取值为: false.
+- Null 的取值为: false.
+- Booleans 的取值为: 布尔值的取值.
+- Numbers 的取值为: 如果为 +0, -0, or NaN 值为 false 否则为 true.
+- Strings 的取值为: 如果是一个空字符串 `''` 值为 false 否则为 true.
 
-对于布尔值使用简写，但是对于字符串和数字进行显式比较
+对于布尔值使用简写, 但是对于字符串和数字进行显式比较:
 
 ```ts
 // bad
@@ -5162,10 +5162,10 @@ function createPlayer(animations) {
 
 ### Canvas Basic Usage
 
-- 绘制路径 beginPath() -> draw() -> closePath()
-- Path2D 对象
-- 绘制样式: 颜色、渐变、变换、阴影
-- 绘制图形: fill/stroke/clip
+- 绘制路径 beginPath() -> draw() -> closePath().
+- Path2D 对象.
+- 绘制样式: 颜色/渐变/变换/阴影.
+- 绘制图形: fill/stroke/clip.
 
 ```ts
 const context = canvas.getContext('2d');
@@ -5661,8 +5661,8 @@ function WebSocketTest() {
 
 ### Web Socket HeartBeat Mechanism
 
-连接终止时，Web Socket 不会自动恢复,
-需要自己实现, 通常为了保持连接状态，需要增加心跳机制.
+连接终止时, Web Socket 不会自动恢复,
+需要自己实现, 通常为了保持连接状态, 需要增加心跳机制.
 
 每隔一段时间会向服务器发送一个数据包, 告诉服务器自己 Alive,
 服务器端如果 Alive, 就会回传一个数据包给客户端.
@@ -5706,11 +5706,11 @@ window.addEventListener('gamepaddisconnected', e => {
 if (window.navigator.geolocation) {
   // getCurrentPosition第三个参数为可选参数
   navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {
-    // 指示浏览器获取高精度的位置，默认为false
+    // 指示浏览器获取高精度的位置, 默认为false
     enableHighAccuracy: true,
-    // 指定获取地理位置的超时时间，默认不限时，单位为毫秒
+    // 指定获取地理位置的超时时间, 默认不限时, 单位为毫秒
     timeout: 5000,
-    // 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。
+    // 最长有效期, 在重复获取地理位置时, 此参数指定多久再次获取位置.
     maximumAge: 3000,
   });
 } else {
@@ -5718,7 +5718,7 @@ if (window.navigator.geolocation) {
 }
 ```
 
-locationError 为获取位置信息失败的回调函数，可以根据错误类型提示信息：
+locationError 为获取位置信息失败的回调函数, 可以根据错误类型提示信息:
 
 ```ts
 function locationError(error) {
@@ -5741,7 +5741,9 @@ function locationError(error) {
 }
 ```
 
-locationSuccess 为获取位置信息成功的回调函数，返回的数据中包含经纬度等信息，结合 Google Map API 即可在地图中显示当前用户的位置信息，如下：
+locationSuccess 为获取位置信息成功的回调函数,
+返回的数据中包含经纬度等信息,
+结合 Google Map API 即可在地图中显示当前用户的位置信息:
 
 ```ts
 function locationSuccess(position) {
@@ -5774,7 +5776,7 @@ function locationSuccess(position) {
 
   // 创建标注窗口
   const infoWindow = new google.maps.InfoWindow({
-    content: `您在这里<br/>纬度: ${coords.latitude}<br/>经度：${coords.longitude}`,
+    content: `您在这里<br/>纬度: ${coords.latitude}<br/>经度: ${coords.longitude}`,
   });
 
   // 打开标注窗口
@@ -5789,8 +5791,6 @@ navigator.geolocation.watchPosition(
   positionOption
 );
 ```
-
-自动更新地理位置
 
 ## PWA
 
@@ -6540,7 +6540,7 @@ HyperText Transfer Protocol (HTTP) + Transport Layer Security (TLS):
 
 #### HTTPS 通信过程
 
-证书获取及验证过程 (CA 认证体系)：
+证书获取及验证过程 (CA 认证体系):
 
 - 浏览器发起一个 HTTPS 的请求.
 - 服务器接收到请求, 返回一个 HTTPS 证书, 该证书内包含服务器私钥对应的公钥信息.
@@ -6563,13 +6563,13 @@ HyperText Transfer Protocol (HTTP) + Transport Layer Security (TLS):
 
 ### HTTP 2
 
-在 HTTP/1.x 中，每次请求都会建立一次 HTTP 连接:
+在 HTTP/1.x 中, 每次请求都会建立一次 HTTP 连接:
 
 - 串行的文件传输. 当请求 a 文件时, b 文件只能等待.
 - 连接数过多.
 
 HTTP/2 的多路复用就是为了解决上述的两个性能问题.
-在 HTTP/2 中, 有两个非常重要的概念, 分别是帧（frame）和流（stream）.
+在 HTTP/2 中, 有两个非常重要的概念, 分别是帧 (frame) 和流 (stream).
 帧代表着最小的数据单位, 每个帧会标识出该帧属于哪个流, 流也就是多个帧组成的数据流.
 多路复用, 就是在一个 TCP 连接中可以存在多条流, 避免队头阻塞问题和连接数过多问题.
 
@@ -6589,7 +6589,7 @@ HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`:
 
 - 解决多次握手高延迟问题.
 - 解决队头 (数据重传) 阻塞 (后续数据) 问题.
-- QUIC 协议保证传输可靠、实现快速握手、集成 TLS 加密、实现多路复用.
+- QUIC 协议保证传输可靠/实现快速握手/集成 TLS 加密/实现多路复用.
 - QUIC 给每个请求流 (Stream ID) 都分配一个独立的滑动窗口, 实现无队头阻塞的多路复用, 解决 TCP 层的队头阻塞.
 
 ### HTTP Response Status Codes
@@ -6676,12 +6676,12 @@ Get /index.html HTTP/1.0
 Host:www.google.com
 ```
 
-- 服务器向客户端发送验证请求代码 `401` `WWW-Authenticate: Basic realm=”google.com”`
+- 服务器向客户端发送验证请求代码 `401` `WWW-Authenticate: Basic realm="google.com"`
 
 ```http
 HTTP/1.0 401 Unauthorized
 Server: SokEvo/1.0
-WWW-Authenticate: Basic realm=”google.com”
+WWW-Authenticate: Basic realm="google.com"
 Content-Type: text/html
 Content-Length: xxx
 ```
@@ -6689,7 +6689,7 @@ Content-Length: xxx
 - 当符合 HTTP/1.0 或 HTTP/1.1 的客户端收到 401 返回值时,
   将自动弹出一个登录窗口, 要求用户输入用户名和密码.
 - 用户输入用户名和密码后, 将用户名及密码以 BASE64 加密方式加密, 并将密文放入前一条请求信息中
-- 服务器收到上述请求信息后, 将 Authorization 字段后的用户信息取出、解密,
+- 服务器收到上述请求信息后, 将 Authorization 字段后的用户信息取出/解密,
   将解密后的用户名及密码与用户数据库进行比较验证
 
 ```http
@@ -6714,7 +6714,7 @@ Session 缓存在服务端, Cookie 缓存在客户端,
 
 - 客户端发送登录信息 (ID, Password).
 - 服务器收到客户端首次请求并验证成功后,
-  会在服务器端创建 Session 并保存唯一的标识字符串 Session ID (Key-Value Store)，
+  会在服务器端创建 Session 并保存唯一的标识字符串 Session ID (Key-Value Store),
   在 Response Header 中设置 `Set-Cookie: <Session ID>`.
 - 客户端后续发送请求都需在 Request Header 中设置: `Cookie: <Session ID>`.
 - 服务器根据 `<Session ID>` 进行用户验证,
@@ -6764,7 +6764,7 @@ Set-Cookie: weight=100; domain=me.github.com
 - 不保存 Session 状态, 无法中止或更改 Token 权限, Token 到期前会始终有效, 存在盗用风险:
   - Token 有效期应短.
   - Token 应使用 HTTPS 协议.
-  - 对于重要权限， 需使用二次验证 (Two Factor Authentication).
+  - 对于重要权限, 需使用二次验证 (Two Factor Authentication).
 
 ### JSON Web Token
 
@@ -6775,7 +6775,7 @@ Set-Cookie: weight=100; domain=me.github.com
 - JSON 对象包含用户信息, 用户身份, 令牌过期时间等:
   - Header: 明文 Base64 编码 JSON 对象, 描述 JWT 的元数据.
     一般为 Token 的加密算法和 Token 的类型, 如 `{"alg": "HS256","typ": "JWT"}`.
-  - Payload: 明文 Base64 编码 JSOn 对象，存放实际数据.
+  - Payload: 明文 Base64 编码 JSOn 对象, 存放实际数据.
     有 7 个官方字段和部分定义私有字段, 一般存放用户名, 用户身份, JWT 描述字段.
   - Signature: 对 Header 和 Payload 的签名, 利用签名验证信息的正确性, 防止数据篡改. 签名需要服务端保存的密钥.
 - 把三个部分拼成一个字符串, 每个部分之间用 `.` 分隔: `HeaderBase64.PayloadBase64.Signature`.
@@ -6798,7 +6798,7 @@ Set-Cookie: weight=100; domain=me.github.com
 - 不保存 Session 状态, 无法中止或更改 Token 权限, Token 到期前会始终有效, 存在盗用风险:
   - JWT 有效期应短.
   - JWT 应使用 HTTPS 协议.
-  - 对于重要权限， 需使用二次验证 (Two Factor Authentication).
+  - 对于重要权限, 需使用二次验证 (Two Factor Authentication).
 
 #### JWT Client
 
@@ -6849,7 +6849,7 @@ OAuth Token 特征:
 OAuth 2.0 允许自动更新令牌.
 资源所有者颁发令牌时一次性颁发两个令牌,
 一个用于获取数据 (Access Token),
-另一个用于获取新的令牌 (Refresh Token）.
+另一个用于获取新的令牌 (Refresh Token).
 令牌到期前, 第三方网站使用 Refresh Token 发请求更新令牌:
 
 ```http
@@ -6867,7 +6867,7 @@ https://github.com/login/oauth/access_token
 ### Single Sign On
 
 `SSO`:
-单点登录要求不同域下的系统**一次登录，全线通用**,
+单点登录要求不同域下的系统**一次登录, 全线通用**,
 通常由独立的 `SSO` 系统记录登录状态, 下发 `ticket`,
 各业务系统配合存储和认证 `ticket`.
 
@@ -7243,7 +7243,7 @@ server {
 #### Gray Release Performance
 
 - 前端优化:
-  每一个页面都需要去获取灰度规则，这个灰度请求将阻塞页面.
+  每一个页面都需要去获取灰度规则, 这个灰度请求将阻塞页面.
   可以使用 localStorage 存储这个用户是否为灰度用户,
   然后定期的更新 localStorage,
   取代大量的请求造成的体验问题.
@@ -7351,13 +7351,13 @@ const babel = require('babel-core');
 babel.transform('code();', options);
 // => { code, map, ast }
 
-// 文件转码（异步）
+// 文件转码 (异步)
 babel.transformFile('filename.js', options, function (err, result) {
   process(err);
   return result; // => { code, map, ast }
 });
 
-// 文件转码（同步）
+// 文件转码 (同步)
 babel.transformFileSync('filename.js', options);
 // => { code, map, ast }
 
@@ -7525,7 +7525,7 @@ module.exports = {
 HMR:
 
 - 使用 WDS 托管静态资源, 同时以 Runtime 方式注入 HMR 客户端代码.
-- 浏览器加载页面后，与 WDS 建立 WebSocket 连接.
+- 浏览器加载页面后, 与 WDS 建立 WebSocket 连接.
 - Webpack 监听到文件变化后, 增量构建发生变更的模块, 并通过 WebSocket 发送 hash 事件.
 - 浏览器接收到 hash 事件后, 请求 manifest (`[hash].hot-update.json`) 资源文件, 确认增量变更范围.
 - 浏览器加载发生变更的增量模块.
@@ -8168,9 +8168,9 @@ Split chunks configuration:
 - name: chunk 文件名.
 - cacheGroups: 配置提取模块的方案, 里面每一项代表一个提取模块的方案.
   - priority: 值越大优先级越大.
-  - test：匹配模块路径或名称.
+  - test: 匹配模块路径或名称.
   - reuseExistingChunk: `true` / `false`.
-  - enforce：`true` / `false`.
+  - enforce: `true` / `false`.
 
 ```ts
 module.exports = {
@@ -8242,7 +8242,7 @@ Live code inclusion (AST analysis) + dead code elimination:
   并且提供 ES6 module 的版本, 入口文件地址设置到 `package.json` 的 module 字段.
 - 如果 JavaScript 库开发中, 难以避免的产生各种副作用代码,
   可以将功能函数或者组件, 打包成单独的文件或目录, 以便于用户可以通过目录去加载.
-  如有条件，也可为自己的库开发单独的 webpack-loader, 便于用户按需加载.
+  如有条件, 也可为自己的库开发单独的 webpack-loader, 便于用户按需加载.
 - 优化导出粒度, 保持导出值颗粒度和原子性:
   `export { foo, bar }` better than `export default alls`.
 - 使用支持 `Tree Shaking` 的包: `lodash-es` or `babel-plugin-lodash`.

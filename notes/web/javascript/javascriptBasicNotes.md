@@ -224,7 +224,7 @@ const truthy = String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y';
 - `string.includes(substr)`.
 - `string.startsWith(substr)`.
 - `string.endsWith(substr)`.
-- 使用第二个参数 n 时，endsWith 针对前 n 个字符，其他两个方法针对从第 n 个位置直到字符串结束.
+- 使用第二个参数 n 时, endsWith 针对前 n 个字符, 其他两个方法针对从第 n 个位置直到字符串结束.
 
 ```ts
 const s = 'Hello world!';
@@ -409,7 +409,7 @@ const libraryHtml = hashTemplate`
 
 ```ts
 i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`;
-// "欢迎访问xxx，您是第xxxx位访问者！"
+// "欢迎访问xxx, 您是第xxxx位访问者！"
 ```
 
 XSS protection:
@@ -453,7 +453,7 @@ jsx`
 java`
 class HelloWorldApp {
   public static void main(String[] args) {
-    System.out.println(“Hello World!”); // Display the string.
+    System.out.println("Hello World!"); // Display the string.
   }
 }
 `;
@@ -661,7 +661,7 @@ console.log(a2 instanceof SuperArray); // false
 ### Array
 
 - 与 Object 同源.
-- 关联数组：`arrayName[“string”] = value;` 实际为 Array 对象添加属性`{string:value}`.
+- 关联数组: `arrayName["string"] = value;` 实际为 Array 对象添加属性`{string:value}`.
 - 缓存数组长度:`int l = list.length`(访问`length`造成运算).
 - `[]`数组, `{}`对象.
 - 数组在数值运算环境中转化为 0 (空数组)/ num (单一元素数组)/NaN (多元素数组/NaN 数组).
@@ -748,16 +748,16 @@ Array.from(Array(5).keys());
 
 #### Array CopyWithin
 
-`copyWithin(dest, start, end)`, 替换数组元素，**修改原数组**:
+`copyWithin(dest, start, end)`, 替换数组元素, **修改原数组**:
 
 ```ts
 [1, 2, 3, 4, 5].copyWithin(0, 3);
 // => [4, 5, 3, 4, 5]
 [1, 2, 3, 4, 5].copyWithin(0, -2, -1);
-// -2相当于3号位，-1相当于4号位
+// -2相当于3号位, -1相当于4号位
 // => [4, 2, 3, 4, 5]
 
-// 将2号位到数组结束，复制到0号位
+// 将2号位到数组结束, 复制到0号位
 const i32a = new Int32Array([1, 2, 3, 4, 5]);
 i32a.copyWithin(0, 2);
 // => Int32Array [3, 4, 5, 4, 5]
@@ -931,7 +931,7 @@ ArrayBuffer 其中一种视图 (用于 Web GL 高效率内存操作):
 function typedArrayConcat(TypedArrayConstructor, ...typedArrays) {
   // 计算所有数组中包含的元素总数
   const numElements = typedArrays.reduce((x, y) => (x.length || x) + y.length);
-  // 按照提供的类型创建一个数组，为所有元素留出空间
+  // 按照提供的类型创建一个数组, 为所有元素留出空间
   const resultArray = new TypedArrayConstructor(numElements);
   // 依次转移数组
   let currentOffset = 0;
@@ -1235,12 +1235,12 @@ class XSet extends Set {
 
   // 返回两个集合的对称差集
   static symmetricDifference(a, b) {
-    // 按照定义，对称差集可以表达为:
+    // 按照定义, 对称差集可以表达为:
     return a.union(b).difference(a.intersection(b));
   }
 
-  // 返回两个集合（数组对形式）的笛卡儿积
-  // 必须返回数组集合，因为笛卡儿积可能包含相同值的对
+  // 返回两个集合 (数组对形式) 的笛卡儿积
+  // 必须返回数组集合, 因为笛卡儿积可能包含相同值的对
   static cartesianProduct(a, b) {
     const cartesianProductSet = new XSet();
 
@@ -1305,15 +1305,15 @@ function example() {
   console.log(notDefined); // => throws a ReferenceError
 }
 
-// 在引用变量后创建变量声明将会因变量提升而起作用。
-// 注意: 真正的值 `true` 不会被提升。
+// 在引用变量后创建变量声明将会因变量提升而起作用.
+// 注意: 真正的值 `true` 不会被提升.
 function example() {
   console.log(declaredButNotAssigned); // => undefined
   var declaredButNotAssigned = true;
 }
 
 // 解释器将变量提升到函数的顶部
-// 这意味着我们可以将上边的例子重写为：
+// 这意味着我们可以将上边的例子重写为:
 function example() {
   let declaredButNotAssigned;
   console.log(declaredButNotAssigned); // => undefined
@@ -1352,7 +1352,7 @@ function example() {
 
 ### Let Variable
 
-- 块级作用域内定义的变量/函数，在块级作用域外 ReferenceError.
+- 块级作用域内定义的变量/函数, 在块级作用域外 ReferenceError.
 - 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone).
 - `let` variable in `for-loop` closure,
   every closure for each loop
@@ -1385,8 +1385,8 @@ for (let i = 0; i < 5; ++i) {
 
 ### Const Variable
 
-- const 一旦声明变量，就必须立即初始化，不能留到以后赋值.
-- 引用一个`Reference`变量时，只表示此变量地址不可变，但所引用变量的值/属性可变
+- const 一旦声明变量, 就必须立即初始化, 不能留到以后赋值.
+- 引用一个`Reference`变量时, 只表示此变量地址不可变, 但所引用变量的值/属性可变
   (`xxx *const`, 即`const`指针, 指向一个变量).
 - 块级作用域.
 - 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone).
@@ -1437,8 +1437,8 @@ const objectType = typeof null; // => object
 
 ### Type Conversion
 
-- 字符串 -> 整数：`+string`/`Number(string)`/`parseInt(string, arg1)`.
-- any -> `bool`：`!!any`.
+- 字符串 -> 整数: `+string`/`Number(string)`/`parseInt(string, arg1)`.
+- any -> `bool`: `!!any`.
 - const -> `object`: `(const)`.
 - `parseInt(str, base)`:
   - 遇到非数字字符立即停止运行, 返回当前转化值.
@@ -1474,17 +1474,17 @@ const hasAge = !!age;
 
 对象转换为数字:
 
-- 如果对象具有 valueOf 方法且返回原始值(string、number、boolean、undefined、null),
+- 如果对象具有 valueOf 方法且返回原始值(string/number/boolean/undefined/null),
   则将该原始值转换为数字(转换失败会返回 NaN), 并返回这个数字.
-- 如果对象具有 toString 方法且返回原始值(string、number、boolean、undefined、null),
+- 如果对象具有 toString 方法且返回原始值(string/number/boolean/undefined/null),
   则将该原始值转换为数字(转换失败会返回 NaN), 并返回这个数字.
 - 转换失败, 抛出 `TypeError`.
 
 对象转换为字符串:
 
-- 如果对象具有 toString 方法且返回原始值(string、number、boolean、undefined、null),
+- 如果对象具有 toString 方法且返回原始值(string/number/boolean/undefined/null),
   则将该原始值转换为字符串, 并返回该字符串.
-- 如果对象具有 valueOf 方法且返回原始值(string、number、boolean、undefined、null),
+- 如果对象具有 valueOf 方法且返回原始值(string/number/boolean/undefined/null),
   则将该原始值转换为字符串, 并返回该字符串.
 - 转换失败, 抛出 `TypeError`.
 
@@ -1866,8 +1866,8 @@ console.log(person1 instanceof Object); // true
 console.log(Person.prototype instanceof Object); // true
 ```
 
-下面五种操作（方法/属性/运算符）可以触发 JS 引擎读取一个对象的原型,
-可以触发 `getPrototypeOf()` 代理方法的运行：
+下面五种操作 (方法/属性/运算符) 可以触发 JS 引擎读取一个对象的原型,
+可以触发 `getPrototypeOf()` 代理方法的运行:
 
 ```ts
 const obj = {};
@@ -3512,7 +3512,7 @@ setTimeout(function () {
 - `Math.ceil()`: 向上舍入为最接近的整数.
 - `Math.floor()`: 向下舍入为最接近的整数.
 - `Math.round()`: 四舍五入.
-- `Math.fround()`: 返回数值最接近的单精度（32 位）浮点值表示.
+- `Math.fround()`: 返回数值最接近的单精度 (32 位) 浮点值表示.
 - `Math.abs(x)`: 返回 x 的绝对值.
 - `Math.exp(x)`: 返回 `Math.E` 的 x 次幂.
 - `Math.expm1(x)`: 等于 `Math.exp(x) - 1`.
@@ -4299,8 +4299,8 @@ async function run(arg = '.') {
 
 ## Destructuring Pattern Matching
 
-- **建议只要有可能，就不要在模式中放置圆括号**.
-- 赋值语句的非模式部分，可以使用圆括号.
+- **建议只要有可能, 就不要在模式中放置圆括号**.
+- 赋值语句的非模式部分, 可以使用圆括号.
 - Every time access value via `.`:
   stop and think whether use destructuring instead.
 - Destructure as early as possible.
@@ -4308,8 +4308,8 @@ async function run(arg = '.') {
 
 ### Destructuring Default Value
 
-- ES6 内部使用严格相等运算符（===），判断一个位置是否有值。若此位置无值，则使用默认值
-- 如果一个数组成员不严格等于 undefined，默认值不会生效
+- ES6 内部使用严格相等运算符 (===), 判断一个位置是否有值. 若此位置无值, 则使用默认值.
+- 如果一个数组成员不严格等于 undefined, 默认值不会生效.
 
 ```ts
 const [x = 1] = [undefined];
@@ -4399,7 +4399,7 @@ move({ x: 3 }); // [3, 0]
 move({}); // [0, 0]
 move(); // [0, 0]
 
-// 严格为 undefined 时，触发默认值设置
+// 严格为 undefined 时, 触发默认值设置
 [1, undefined, 3].map((x = 'yes') => x);
 // [ 1, 'yes', 3 ]
 ```
@@ -4499,13 +4499,13 @@ console.log(sixth); // 5
 
 ### Object Destructuring
 
-- 真正被赋值的是后者，而不是前者.
+- 真正被赋值的是后者, 而不是前者.
 
 ```ts
 const { pattern: variable } = { key: value };
 ```
 
-- 解构赋值的规则: 只要等号右边的值不是对象，就先将其转为对象.
+- 解构赋值的规则: 只要等号右边的值不是对象, 就先将其转为对象.
 - undefined/null 无法转化为对象.
 
 ```ts
@@ -4889,7 +4889,7 @@ class ExceptionsZone {
 
 class ExceptionHandler {
   handle(exception) {
-    console.log('记录错误：', exception.message, exception.stack);
+    console.log('记录错误: ', exception.message, exception.stack);
   }
 }
 ```
@@ -5002,7 +5002,7 @@ const p = Promise.reject();
 const onRejected = function (e) {
   setTimeout(console.log, 0, 'rejected');
 };
-// 语法糖：
+// 语法糖:
 p.then(null, onRejected); // rejected
 p.catch(onRejected); // rejected
 ```
@@ -5575,8 +5575,8 @@ export default {
 - 有两种方法可以停止 Worker:
   从主页调用 `worker.terminate()` 或在 worker 内部调用 `self.close()`
 - 利用 [BroadcastChannel API](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel)
-  可以创建 Shared Worker, 即共享 Workers 在同一源 (origin) 下面的各种进程都可以访问它，
-  包括：iframes、浏览器中的不同 tab 页 (browsing context)
+  可以创建 Shared Worker, 即共享 Workers 在同一源 (origin) 下面的各种进程都可以访问它,
+  包括: iframes/浏览器中的不同 tab 页 (browsing context)
 - Web Workers 无法访问一些非常关键的 JavaScript 特性:
   DOM(它会造成线程不安全), window 对象, document 对象, parent 对象.
 - Use Case: Graphic App (Ray Tracing), Encryption, Prefetching Data,
@@ -6109,7 +6109,7 @@ export * from 'my_module';
 
 #### CommonJS vs ES6 Module
 
-- CommonJS 模块是运行时加载，ES6 模块是编译时输出接口.
+- CommonJS 模块是运行时加载, ES6 模块是编译时输出接口.
 - CommonJS 是单个值导出, ES6 Module 可以导出多个.
 - CommonJS 是动态语法可以写在判断里, ES6 Module 静态语法只能写在顶层.
 - CommonJS 的 `this` 是当前模块, ES6 Module 的 `this` 是 `undefined`.
@@ -6544,6 +6544,10 @@ if (!String.prototype.trim) {
 #### 空字符与空格字符
 
 `/[(^\s+)(\s+$)]/g`
+
+#### Markdown Table
+
+`/(?<=\|\w+) /g`: second place to insert `|`.
 
 ## Internationalization
 
