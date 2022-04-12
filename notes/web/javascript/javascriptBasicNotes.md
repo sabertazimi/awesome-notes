@@ -5040,9 +5040,47 @@ setTimeout(console.log, 0, p11); // Promise <rejected>: bar
 The main difference between the forms
 `promise.then(success, error)` and
 `promise.then(success).catch(error)`:
-
 in case if success callback returns a rejected promise,
 then only the second form is going to catch that rejection.
+
+正常情况下, 在通过 `throw()` 关键字抛出错误时,
+JavaScript 运行时的错误处理机制会停止执行抛出错误之后的任何指令.
+但在 `Promise` 中抛出错误时, 因为错误实际上是从消息队列中异步抛出的,
+所以并不会阻止运行时继续执行同步指令 (`Node.js` 中仍然会停止执行任何指令).
+
+```ts
+throw new Error('foo');
+console.log('bar'); // 这一行不会执行
+// Uncaught Error: foo
+```
+
+```ts
+Promise.reject(Error('foo'));
+console.log('bar');
+// bar
+// Uncaught (in promise) Error: foo
+
+const p1 = new Promise((resolve, reject) => reject(Error('foo'))); // 1.
+const p2 = new Promise((resolve, reject) => {
+  throw new Error('foo'); // 2.
+});
+const p3 = Promise.resolve().then(() => {
+  throw new Error('foo'); // 4.
+});
+const p4 = Promise.reject(Error('foo')); // 3.
+// Uncaught (in promise) Error: foo
+//   at Promise (test.html:1)
+//   at new Promise (<anonymous>)
+//   at test.html:1
+// Uncaught (in promise) Error: foo
+//   at Promise (test.html:2)
+//   at new Promise (<anonymous>)
+//   at test.html:2
+// Uncaught (in promise) Error: foo
+//   at test.html:4
+// Uncaught (in promise) Error: foo
+//   at Promise.resolve.then (test.html:3)
+```
 
 ### Promise Chain
 
