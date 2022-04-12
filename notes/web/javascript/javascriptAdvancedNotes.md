@@ -584,23 +584,29 @@ if (document.implementation) {
 document.createElement('nodeName');
 document.createTextNode('String');
 
-cloneNode();
-node.remove();
-
-parentElement.appendChild(childElement);
-parentElement.insertBefore(newElement, targetElement);
-parentElement.removeChild();
-parentElement.replaceChild();
-parentElement.replaceChildren();
-parentElement.hasChildNode();
-
-setAttribute();
-getAttribute();
-
 document.getElementById();
 document.getElementsByTagName();
 document.querySelector();
 document.querySelectorAll();
+
+element.getAttribute(attrName);
+element.setAttribute(attrName, attrValue);
+const textContent = node.textContent;
+
+element.closest(selectors); // Returns closest ancestor matching selectors
+element.cloneNode();
+element.normalize();
+element.before(...elements);
+element.after(...elements);
+element.replaceWith(...elements);
+element.remove();
+parentElement.hasChildNodes();
+parentElement.appendChild(childElement);
+parentElement.append(childElements);
+parentElement.insertBefore(newChild, targetChild);
+parentElement.replaceChild(newChild, targetChild);
+parentElement.replaceChildren(children);
+parentElement.removeChild(child);
 ```
 
 ```ts
@@ -635,6 +641,17 @@ para.appendChild(txt);
 #### Insert DOM Node
 
 ```ts
+function insertAfter(newElement, targetElement) {
+  const parent = targetElement.parentNode;
+  if (parent.lastChild === targetElement) {
+    parent.appendChild(newElement);
+  } else {
+    parent.insertBefore(newElement, targetElement.nextSibling);
+  }
+}
+```
+
+```ts
 // 4 positions
 //
 // <!-- beforebegin -->
@@ -653,17 +670,6 @@ p.insertAdjacentText('afterbegin', 'foo');
 p.insertAdjacentElement('beforebegin', link);
 ```
 
-```ts
-function insertAfter(newElement, targetElement) {
-  const parent = targetElement.parentNode;
-  if (parent.lastChild === targetElement) {
-    parent.appendChild(newElement);
-  } else {
-    parent.insertBefore(newElement, targetElement.nextSibling);
-  }
-}
-```
-
 #### Replace DOM Node
 
 ```ts
@@ -671,22 +677,44 @@ node.replaceChild(document.createTextNode(text), node.firstChild);
 node.replaceChildren(...nodeList);
 ```
 
+#### Remove DOM Node
+
+```ts
+// 删除第一个子节点
+const formerFirstChild = someNode.removeChild(someNode.firstChild);
+// 删除最后一个子节点
+const formerLastChild = someNode.removeChild(someNode.lastChild);
+```
+
 #### DOM Node Type
 
 Node 除包括元素结点 (tag) 外,
 包括许多其它结点 (甚至空格符视作一个结点),
-需借助 nodeType 找出目标结点.
+需借助 `nodeType` 找出目标结点.
 
-| nodeType | representation |
-| :------- | :------------- |
-| 1        | 元素结点       |
-| 2        | 属性结点       |
-| 3        | 文本结点       |
+| Node Type | Representation                     |
+| :-------- | :--------------------------------- |
+| 1         | `Node.ELEMENT_NODE`                |
+| 2         | `Node.ATTRIBUTE_NODE`              |
+| 3         | `Node.TEXT_NODE`                   |
+| 4         | `Node.CDATA_SECTION_NODE`          |
+| 5         | `Node.ENTITY_REFERENCE_NODE`       |
+| 6         | `Node.ENTITY_NODE`                 |
+| 7         | `Node.PROCESSING_INSTRUCTION_NODE` |
+| 8         | `Node.COMMENT_NODE`                |
+| 9         | `Node.DOCUMENT_NODE`               |
+| 10        | `Node.DOCUMENT_TYPE_NODE`          |
+| 11        | `Node.DOCUMENT_FRAGMENT_NODE`      |
+| 12        | `Node.NOTATION_NODE`               |
 
 ```ts
 const type = node.nodeType;
 const name = node.nodeName;
 const value = node.nodeValue;
+
+if (someNode.nodeType === Node.ELEMENT_NODE) {
+  alert('Node is an element.');
+}
 ```
 
 #### Traverse DOM Tree
@@ -698,16 +726,12 @@ const first = node.firstChild;
 const last = node.lastChild;
 const previous = node.previousSibling;
 const next = node.nextSibling;
-const textContent = node.textContent;
-
-// Returns closest ancestor of current element matching selectors
-node.closest(selectors);
 ```
 
-Element-only navigation:
-Navigation properties listed above refer to all nodes.
-For instance, in `childNodes` we can see both
-text nodes, element nodes, and even comment nodes if there exist.
+Element-only Navigation:
+navigation properties listed above refer to all nodes.
+For instance,
+in `childNodes` can see both text nodes, element nodes, and even comment nodes.
 
 ```ts
 const parent = node.parentElement;
