@@ -1698,6 +1698,7 @@ Mutation Observer 有以下特点:
 - 它等待所有脚本任务完成后, 才会运行, 即采用异步方式.
 - 它把 DOM 变动记录封装成一个数组进行处理, 而不是一条条地个别处理 DOM 变动.
 - 它即可以观察发生在 DOM 节点的所有变动, 也可以观察某一类变动.
+- 被观察子树中的节点 (`{ subtree: true }`) 被移出子树之后仍然能够触发变化事件.
 
 ```ts
 const mutationObserver = new MutationObserver(mutations => {
