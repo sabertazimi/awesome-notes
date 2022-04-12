@@ -5417,11 +5417,11 @@ baz();
 - Avoid wrong parallel logic (too sequential):
 
 ```ts
-// wrong
+// Wrong:
 const books = await bookModel.fetchAll();
 const author = await authorModel.fetch(authorId);
 
-// right
+// Correct:
 const bookPromise = bookModel.fetchAll();
 const authorPromise = authorModel.fetch(authorId);
 const book = await bookPromise;
@@ -5429,13 +5429,61 @@ const author = await authorPromise;
 
 async function getAuthors(authorIds) {
   // WRONG, this will cause sequential calls
-  // const authors = _.map(
-  //   authorIds,
-  //   id => await authorModel.fetch(id));
-  // CORRECT
-  const promises = _.map(authorIds, id => authorModel.fetch(id));
+  // const authors = authorIds.map(id => await authorModel.fetch(id));
+  // CORRECT:
+  const promises = authorIds.map(id => authorModel.fetch(id));
   const authors = await Promise.all(promises);
 }
+```
+
+```ts
+async function randomDelay(id) {
+  const delay = Math.random() * 1000;
+  return new Promise(resolve =>
+    setTimeout(() => {
+      console.log(`${id} finished`);
+      resolve(id);
+    }, delay)
+  );
+}
+
+async function sequential() {
+  const t0 = Date.now();
+  for (let i = 0; i < 5; ++i) {
+    await randomDelay(i);
+  }
+  console.log(`${Date.now() - t0}ms elapsed`);
+}
+sequential();
+// 0 finished
+// 1 finished
+// 2 finished
+// 3 finished
+// 4 finished
+// 2877ms elapsed
+
+async function parallel() {
+  const t0 = Date.now();
+  const promises = Array(5)
+    .fill(null)
+    .map((_, i) => randomDelay(i));
+  for (const p of promises) {
+    console.log(`awaited ${await p}`);
+  }
+  console.log(`${Date.now() - t0}ms elapsed`);
+}
+parallel();
+// 4 finished
+// 2 finished
+// 1 finished
+// 0 finished
+// 3 finished
+// awaited 0
+// awaited 1
+// awaited 2
+// awaited 3
+// awaited 4
+// 645ms elapsed
 ```
 
 ## Asynchronous JavaScript
@@ -5464,10 +5512,10 @@ add(1, 2);
 
 ### Race Condition
 
-- keep latest updates
-- recover from failures
-- online and offline sync ([PouchDB](https://github.com/pouchdb/pouchdb))
-- tools: [redux-saga](https://github.com/redux-saga/redux-saga)
+- Keep latest updates.
+- Recover from failures.
+- Online and offline sync ([PouchDB](https://github.com/pouchdb/pouchdb)).
+- Tools: [redux-saga](https://github.com/redux-saga/redux-saga).
 
 ```ts
 // eslint-disable-next-line import/no-anonymous-default-export
