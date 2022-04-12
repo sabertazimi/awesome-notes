@@ -5965,77 +5965,6 @@ export class State {
 
 ### Web Files
 
-## Web Sockets
-
-### Web Sockets Message Header
-
-Request Header:
-
-```bash
-GET /chat HTTP/1.1
-Host: example.com
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Key: 16-byte, base64 encoded
-Sec-WebSocket-Version: 13
-Sec-Websocket-Protocol: protocol [,protocol]*
-Sec-Websocket-Extension: extension [,extension]*
-```
-
-Response Header:
-
-```bash
-HTTP/1.1 101 "Switching Protocols" or other description
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Accept: 20-byte, MD5 hash in base64
-Sec-Websocket-Protocol: protocol [,protocol]*
-Sec-Websocket-Extension: extension [,extension]*
-```
-
-### Web Sockets Basic Usage
-
-通信功能
-
-```ts
-function WebSocketTest() {
-  if ('WebSocket' in window) {
-    alert('WebSocket is supported by your Browser!');
-    // Let us open a web socket
-    const ws = new WebSocket('ws://localhost:9998/echo');
-
-    ws.onopen = function () {
-      // Web Socket is connected, send data using send()
-      ws.send('Message to send');
-      alert('Message is sent...');
-    };
-
-    ws.onmessage = function (evt) {
-      const received_msg = evt.data;
-      alert('Message is received...');
-    };
-
-    ws.onclose = function () {
-      // websocket is closed.
-      alert('Connection is closed...');
-    };
-  } else {
-    // The browser doesn't support WebSocket
-    alert('WebSocket NOT supported by your Browser!');
-  }
-}
-```
-
-### Web Socket HeartBeat Mechanism
-
-连接终止时, Web Socket 不会自动恢复,
-需要自己实现, 通常为了保持连接状态, 需要增加心跳机制.
-
-每隔一段时间会向服务器发送一个数据包, 告诉服务器自己 Alive,
-服务器端如果 Alive, 就会回传一个数据包给客户端.
-主要在一些**长时间连接**的应用场景需要考虑心跳机制及重连机制,
-以保证长时间的连接及数据交互.
-
 ## Web RTC
 
 - [WebRTC Security List](https://dzone.com/articles/webrtc-security-vulnerabilities-you-should-know-ab)
@@ -6470,6 +6399,35 @@ function App() {
 
 ## Network
 
+### JSON
+
+```ts
+const obj = JSON.parse(json);
+const json = JSON.stringify(obj);
+```
+
+`JSON.stringify`:
+
+- `Symbol`/`function`/`NaN`/`Infinity`/`undefined`: `null`/ignored.
+- `BitInt`: throw `TypeError`.
+- Circular reference object: throw `TypeError`.
+- `toJSON` method:
+
+```ts
+const obj = {
+  name: 'zc',
+  toJSON() {
+    return 'return toJSON';
+  },
+};
+
+// return toJSON
+console.log(JSON.stringify(obj));
+
+// "2022-03-06T08:24:56.138Z"
+JSON.stringify(new Date());
+```
+
 ### AJAX
 
 #### AJAX Data Format
@@ -6764,34 +6722,76 @@ const request = new Request('/api/names', {
 const response = await fetch(request);
 ```
 
-### JSON
+### Web Sockets
 
-```ts
-const obj = JSON.parse(json);
-const json = JSON.stringify(obj);
+#### Web Sockets Message Header
+
+Request Header:
+
+```bash
+GET /chat HTTP/1.1
+Host: example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: 16-byte, base64 encoded
+Sec-WebSocket-Version: 13
+Sec-Websocket-Protocol: protocol [,protocol]*
+Sec-Websocket-Extension: extension [,extension]*
 ```
 
-`JSON.stringify`:
+Response Header:
 
-- `Symbol`/`function`/`NaN`/`Infinity`/`undefined`: `null`/ignored.
-- `BitInt`: throw `TypeError`.
-- Circular reference object: throw `TypeError`.
-- `toJSON` method:
+```bash
+HTTP/1.1 101 "Switching Protocols" or other description
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: 20-byte, MD5 hash in base64
+Sec-Websocket-Protocol: protocol [,protocol]*
+Sec-Websocket-Extension: extension [,extension]*
+```
+
+#### Web Sockets Basic Usage
+
+通信功能
 
 ```ts
-const obj = {
-  name: 'zc',
-  toJSON() {
-    return 'return toJSON';
-  },
-};
+function WebSocketTest() {
+  if ('WebSocket' in window) {
+    alert('WebSocket is supported by your Browser!');
+    // Let us open a web socket
+    const ws = new WebSocket('ws://localhost:9998/echo');
 
-// return toJSON
-console.log(JSON.stringify(obj));
+    ws.onopen = function () {
+      // Web Socket is connected, send data using send()
+      ws.send('Message to send');
+      alert('Message is sent...');
+    };
 
-// "2022-03-06T08:24:56.138Z"
-JSON.stringify(new Date());
+    ws.onmessage = function (evt) {
+      const received_msg = evt.data;
+      alert('Message is received...');
+    };
+
+    ws.onclose = function () {
+      // websocket is closed.
+      alert('Connection is closed...');
+    };
+  } else {
+    // The browser doesn't support WebSocket
+    alert('WebSocket NOT supported by your Browser!');
+  }
+}
 ```
+
+#### Web Socket HeartBeat Mechanism
+
+连接终止时, Web Socket 不会自动恢复,
+需要自己实现, 通常为了保持连接状态, 需要增加心跳机制.
+
+每隔一段时间会向服务器发送一个数据包, 告诉服务器自己 Alive,
+服务器端如果 Alive, 就会回传一个数据包给客户端.
+主要在一些**长时间连接**的应用场景需要考虑心跳机制及重连机制,
+以保证长时间的连接及数据交互.
 
 ### RESTful
 
