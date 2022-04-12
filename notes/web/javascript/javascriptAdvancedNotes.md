@@ -35,6 +35,29 @@ function addLoadEvent(func) {
 }
 ```
 
+```ts
+// eslint-disable-next-line no-restricted-globals
+if (confirm('Are you sure?')) {
+  alert("I'm so glad you're sure!");
+} else {
+  alert("I'm sorry to hear you're not sure.");
+}
+
+const result = prompt('What is your name? ', 'James');
+if (result !== null) {
+  alert(`Welcome, ${result}`);
+}
+
+// 显示打印对话框
+window.print();
+
+// 显示查找对话框
+window.find();
+
+// 显式打印机
+window.print();
+```
+
 弹窗有非常多的安全限制:
 
 - 禁止隐藏状态栏与地址栏.
