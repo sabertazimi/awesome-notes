@@ -5657,6 +5657,20 @@ const addFive = curry(addOne, 1, 3);
 // addFive(4) === 9;
 ```
 
+### Compose
+
+```ts
+function compose(...fns) {
+  return x => fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x));
+}
+
+const addTwo = x => x + 2;
+const addThree = x => x + 3;
+const addFive = x => x + 5;
+const addTen = compose(addTwo, addThree, addFive);
+addTen(8).then(console.log); // 18
+```
+
 ### Functional JavaScript Library
 
 #### Lodash
