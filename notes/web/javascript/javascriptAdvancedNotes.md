@@ -17,17 +17,6 @@ const selfWindow = window.self;
 const topWindow = window.top;
 const parentWindow = window.parent;
 const grandParentWindow = window.parent.parent;
-
-const newWin = window.open(
-  'https://www.new.com/',
-  'newWindow',
-  'height=400,width=400,top=10,left=10,resizable=yes'
-);
-newWin.resizeTo(500, 500);
-newWin.moveTo(100, 100);
-alert(wroxWin.opener === window); // true
-newWin.close();
-alert(newWin.closed); // true
 ```
 
 ```ts
@@ -43,6 +32,39 @@ function addLoadEvent(func) {
       func();
     };
   }
+}
+```
+
+弹窗有非常多的安全限制:
+
+- 禁止隐藏状态栏与地址栏.
+- 弹窗默认不能移动或缩放.
+- 只允许用户操作下 (鼠标/键盘) 创建弹窗.
+- 屏蔽弹窗.
+
+```ts
+const newWin = window.open(
+  'https://www.new.com/',
+  'newWindow',
+  'height=400,width=400,top=10,left=10,resizable=yes'
+);
+newWin.resizeTo(500, 500);
+newWin.moveTo(100, 100);
+alert(newWin.opener === window); // true
+newWin.close();
+alert(newWin.closed); // true
+
+let blocked = false;
+try {
+  const newWin = window.open('https://www.new.com/', '_blank');
+  if (newWin === null) {
+    blocked = true;
+  }
+} catch (ex) {
+  blocked = true;
+}
+if (blocked) {
+  alert('The popup was blocked!');
 }
 ```
 
