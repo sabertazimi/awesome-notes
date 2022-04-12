@@ -5344,9 +5344,77 @@ function memoProcessData(key) {
 }
 ```
 
-## Await and Async
+## Async and Await
 
-Avoid wrong parallel logic (too sequential):
+### Await Features
+
+- `async` 异步函数如果不包含 `await` 关键字, 其执行 (除返回值外) 基本上跟普通函数没有什么区别.
+- JavaScript 运行时在碰到 `await` 关键字时, 会记录在哪里暂停执行.
+- 等到 `await` 右边的值可用了, JavaScript 运行时会向消息队列中推送一个任务, 这个任务会恢复异步函数的执行.
+- 即使 `await` 后面跟着一个立即可用的值, 函数的其余部分也会被异步求值.
+
+```ts
+async function foo() {
+  console.log(2);
+}
+console.log(1);
+foo();
+console.log(3);
+// 1
+// 2
+// 3
+
+async function bar() {
+  console.log(2);
+  await null;
+  console.log(4);
+}
+console.log(1);
+bar();
+console.log(3);
+// 1
+// 2
+// 3
+// 4
+```
+
+- Await `thenable` object (implements `then` interface):
+
+```ts
+async function bar() {
+  const thenable = {
+    then(callback) {
+      callback('bar');
+    },
+  };
+  return thenable;
+}
+
+bar().then(console.log);
+// bar
+
+async function baz() {
+  const thenable = {
+    then(callback) {
+      callback('baz');
+    },
+  };
+  console.log(await thenable);
+}
+
+baz();
+// baz
+```
+
+### Await Arrays
+
+- If you want to execute await calls in series,
+  use a for-loop (or any loop without a callback).
+- Don't ever use await with `forEach` (`forEach` is not promise-aware),
+  use a for-loop (or any loop without a callback) instead.
+- Don't await inside filter and reduce,
+  always await an array of promises with map, then filter or reduce accordingly.
+- Avoid wrong parallel logic (too sequential):
 
 ```ts
 // wrong
@@ -5369,15 +5437,6 @@ async function getAuthors(authorIds) {
   const authors = await Promise.all(promises);
 }
 ```
-
-### Await Arrays
-
-- If you want to execute await calls in series,
-  use a for-loop (or any loop without a callback).
-- Don't ever use await with `forEach` (`forEach` is not promise-aware),
-  use a for-loop (or any loop without a callback) instead.
-- Don't await inside filter and reduce,
-  always await an array of promises with map, then filter or reduce accordingly.
 
 ## Asynchronous JavaScript
 
