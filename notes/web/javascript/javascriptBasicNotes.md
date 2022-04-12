@@ -5140,7 +5140,7 @@ function getUsers(users) {
   (fulfilled or rejected).
 - `Promise.allSettled(iterable)`:
   returns when all given promises are settled
-  (rejected or fulfilled, doesn't matter).
+  (fulfilled or rejected).
 
 ```ts
 Promise.all(urls.map(fetch))
