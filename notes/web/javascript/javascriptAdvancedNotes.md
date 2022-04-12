@@ -600,6 +600,7 @@ element.before(...elements);
 element.after(...elements);
 element.replaceWith(...elements);
 element.remove();
+
 parentElement.hasChildNodes();
 parentElement.appendChild(childElement);
 parentElement.append(childElements);
@@ -795,6 +796,7 @@ const textContent = element.textContent;
 ```ts
 const html = document.documentElement;
 const body = document.body;
+const doctype = document.doctype;
 const images = documents.images;
 const links = documents.links;
 const forms = documents.forms;
