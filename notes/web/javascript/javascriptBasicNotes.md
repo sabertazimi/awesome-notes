@@ -4909,6 +4909,76 @@ Resolve only accept **one** value:
 return new Promise(resolve => resolve([a, b]));
 ```
 
+`Promise.resolve` 是一个幂等方法:
+
+```ts
+const p = Promise.resolve(7);
+setTimeout(console.log, 0, p === Promise.resolve(p));
+// true
+setTimeout(console.log, 0, p === Promise.resolve(Promise.resolve(p)));
+// true
+
+const p = new Promise(() => {});
+setTimeout(console.log, 0, p);
+// Promise <pending>
+setTimeout(console.log, 0, Promise.resolve(p));
+// Promise <pending>
+setTimeout(console.log, 0, p === Promise.resolve(p));
+// true
+```
+
+### Promise Reject
+
+```ts
+let p1 = Promise.resolve('foo');
+let p2 = p1.then();
+stetTimeout(console.log, 0, p2); // Promise <resolved>: foo
+
+// eslint-disable-next-line prefer-promise-reject-errors
+p1 = Promise.reject('foo');
+p2 = p1.then();
+// Uncaught (in promise) foo
+setTimeout(console.log, 0, p2); // Promise <rejected>: foo
+
+const p3 = p1.then(null, () => undefined);
+const p4 = p1.then(null, () => {});
+const p5 = p1.then(null, () => Promise.resolve());
+setTimeout(console.log, 0, p3); // Promise <resolved>: undefined
+setTimeout(console.log, 0, p4); // Promise <resolved>: undefined
+setTimeout(console.log, 0, p5); // Promise <resolved>: undefined
+
+const p6 = p1.then(null, () => 'bar');
+const p7 = p1.then(null, () => Promise.resolve('bar'));
+setTimeout(console.log, 0, p6); // Promise <resolved>: bar
+setTimeout(console.log, 0, p7); // Promise <resolved>: bar
+
+const p8 = p1.then(null, () => new Promise(() => {}));
+// eslint-disable-next-line prefer-promise-reject-errors
+const p9 = p1.then(null, () => Promise.reject());
+// Uncaught (in promise): undefined
+setTimeout(console.log, 0, p8); // Promise <pending>
+setTimeout(console.log, 0, p9); // Promise <rejected>: undefined
+
+const p10 = p1.then(null, () => {
+  // eslint-disable-next-line no-throw-literal
+  throw 'bar';
+});
+// Uncaught (in promise) bar
+setTimeout(console.log, 0, p10); // Promise <rejected>: bar
+
+const p11 = p1.then(null, () => Error('bar'));
+setTimeout(console.log, 0, p11); // Promise <resolved>: Error: bar
+```
+
+### Promise Thenable and Catch
+
+The main difference between the forms
+`promise.then(success, error)` and
+`promise.then(success).catch(error)`:
+
+in case if success callback returns a rejected promise,
+then only the second form is going to catch that rejection.
+
 ### Promise Chain
 
 - Promises on the same chain execute orderly.
@@ -5131,15 +5201,6 @@ class Promise {
   }
 }
 ```
-
-### Promise Thenable and Catch
-
-The main difference between the forms
-`promise.then(success, error)` and
-`promise.then(success).catch(error)`:
-
-in case if success callback returns a rejected promise,
-then only the second form is going to catch that rejection.
 
 ### Memorize Async Function
 
