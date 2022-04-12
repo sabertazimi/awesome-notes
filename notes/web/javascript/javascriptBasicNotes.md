@@ -3600,6 +3600,26 @@ console.log(decodeURIComponent(uri));
 
 - [URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams)
 
+```ts
+// window.location.search
+const qs = '?q=javascript&num=10';
+const searchParams = new URLSearchParams(qs);
+
+for (const param of searchParams) {
+  console.log(param);
+}
+// ["q", "javascript"]
+// ["num", "10"]
+
+alert(searchParams.toString()); // " q=javascript&num=10"
+searchParams.has('num'); // true
+searchParams.get('num'); // 10
+searchParams.set('page', '3');
+alert(searchParams.toString()); // " q=javascript&num=10&page=3"
+searchParams.delete('q');
+alert(searchParams.toString()); // " num=10&page=3"
+```
+
 #### Timer Function
 
 Combine `setInterval`/`setTimeout` function with closure function,

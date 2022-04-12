@@ -93,16 +93,40 @@ if (blocked) {
 
 ### Location
 
-| 属性     | 描述                                        |
-| :------- | :------------------------------------------ |
-| hash     | 设置或返回从井号 (#) 开始的 URL（锚）       |
-| host     | 设置或返回主机名和当前 URL 的端口号         |
-| hostname | 设置或返回当前 URL 的主机名                 |
-| href     | 设置或返回完整的 URL                        |
-| pathname | 设置或返回当前 URL 的路径部分               |
-| port     | 设置或返回当前 URL 的端口号                 |
-| protocol | 设置或返回当前 URL 的协议                   |
-| search   | 设置或返回从问号 (?) 开始的 URL（查询部分） |
+| 属性     | 描述                                       |
+| :------- | :----------------------------------------- |
+| hash     | 设置或返回从井号 (#) 开始的 URL (锚)       |
+| host     | 设置或返回主机名和当前 URL 的端口号        |
+| hostname | 设置或返回当前 URL 的主机名                |
+| href     | 设置或返回完整的 URL                       |
+| pathname | 设置或返回当前 URL 的路径部分              |
+| port     | 设置或返回当前 URL 的端口号                |
+| protocol | 设置或返回当前 URL 的协议                  |
+| search   | 设置或返回从问号 (?) 开始的 URL (查询部分) |
+| username | 设置或返回域名前指定的用户名               |
+| password | 设置或返回域名前指定的密码                 |
+| origin   | 返回 URL 的源地址                          |
+
+```ts
+function getQueryStringArgs(location) {
+  // 取得没有开头问号的查询字符串
+  const qs = location.search.length > 0 ? location.search.substring(1) : '';
+  // 保存数据的对象
+  const args = {};
+
+  // 把每个参数添加到 args 对象
+  for (const item of qs.split('&').map(kv => kv.split('='))) {
+    const name = decodeURIComponent(item[0]);
+    const value = decodeURIComponent(item[1]);
+
+    if (name.length) {
+      args[name] = value;
+    }
+  }
+
+  return args;
+}
+```
 
 ```ts
 window.addEventListener(
