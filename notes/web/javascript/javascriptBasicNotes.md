@@ -4970,6 +4970,71 @@ const p11 = p1.then(null, () => Error('bar'));
 setTimeout(console.log, 0, p11); // Promise <resolved>: Error: bar
 ```
 
+### Promise Catch
+
+```ts
+// eslint-disable-next-line prefer-promise-reject-errors
+const p = Promise.reject();
+const onRejected = function (e) {
+  setTimeout(console.log, 0, 'rejected');
+};
+// 语法糖：
+p.then(null, onRejected); // rejected
+p.catch(onRejected); // rejected
+```
+
+```ts
+const p1 = new Promise(() => {});
+const p2 = p1.catch();
+setTimeout(console.log, 0, p1); // Promise <pending>
+setTimeout(console.log, 0, p2); // Promise <pending>
+setTimeout(console.log, 0, p1 === p2); // false
+```
+
+### Promise Finally
+
+```ts
+const p1 = new Promise(() => {});
+const p2 = p1.finally();
+setTimeout(console.log, 0, p1); // Promise <pending>
+setTimeout(console.log, 0, p2); // Promise <pending>
+setTimeout(console.log, 0, p1 === p2); // false
+```
+
+```ts
+const p1 = Promise.resolve('foo');
+
+// 原样后传:
+const p2 = p1.finally();
+const p3 = p1.finally(() => undefined);
+const p4 = p1.finally(() => {});
+const p5 = p1.finally(() => Promise.resolve());
+const p6 = p1.finally(() => 'bar');
+const p7 = p1.finally(() => Promise.resolve('bar'));
+const p8 = p1.finally(() => Error('bar'));
+setTimeout(console.log, 0, p2); // Promise <resolved>: foo
+setTimeout(console.log, 0, p3); // Promise <resolved>: foo
+setTimeout(console.log, 0, p4); // Promise <resolved>: foo
+setTimeout(console.log, 0, p5); // Promise <resolved>: foo
+setTimeout(console.log, 0, p6); // Promise <resolved>: foo
+setTimeout(console.log, 0, p7); // Promise <resolved>: foo
+setTimeout(console.log, 0, p8); // Promise <resolved>: foo
+
+// 特殊处理:
+const p9 = p1.finally(() => new Promise(() => {}));
+setTimeout(console.log, 0, p9); // Promise <pending>
+// eslint-disable-next-line prefer-promise-reject-errors
+const p10 = p1.finally(() => Promise.reject());
+// Uncaught (in promise): undefined
+setTimeout(console.log, 0, p10); // Promise <rejected>: undefined
+const p11 = p1.finally(() => {
+  // eslint-disable-next-line no-throw-literal
+  throw 'bar';
+});
+// Uncaught (in promise) baz
+setTimeout(console.log, 0, p11); // Promise <rejected>: bar
+```
+
 ### Promise Thenable and Catch
 
 The main difference between the forms
