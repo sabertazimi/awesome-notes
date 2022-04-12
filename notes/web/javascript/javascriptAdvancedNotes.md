@@ -575,24 +575,6 @@ const hasXmlDom = document.implementation.hasFeature('XML', '1.0');
 const hasHtmlDom = document.implementation.hasFeature('HTML', '1.0');
 ```
 
-### DOM Tree
-
-- Native object: JavaScript Native e.g. Array.
-- Host object: provided by Browser e.g. HTML5 API.
-- User-defined object.
-
-```html
-<table>
-  <tr>
-    <td align="center" colspan="2">element node</td>
-  </tr>
-  <tr>
-    <td>text node</td>
-    <td>attribute node</td>
-  </tr>
-</table>
-```
-
 ### DOM Core
 
 ```ts
@@ -609,7 +591,7 @@ document.querySelectorAll(cssSelector);
 
 element.getAttribute(attrName);
 element.setAttribute(attrName, attrValue);
-const textContent = node.textContent;
+element.removeAttribute(attrName);
 
 element.closest(selectors); // Returns closest ancestor matching selectors
 element.cloneNode();
@@ -637,6 +619,187 @@ const showAlert = (type, message, duration = 3) => {
   setTimeout(() => div.remove(), duration * 1000);
 };
 ```
+
+#### DOM Node Type
+
+Node 除包括元素结点 (tag) 外,
+包括许多其它结点 (甚至空格符视作一个结点),
+需借助 `nodeType` 找出目标结点.
+
+| Node Type | Node Representation      | Node Name            | Node Value    |
+| :-------- | :----------------------- | :------------------- | :------------ |
+| 1         | `ELEMENT_NODE`           | Tag Name             | null          |
+| 2         | `ATTRIBUTE_NODE`         | Attr Name            | Attr Value    |
+| 3         | `TEXT_NODE`              | `#text`              | Text          |
+| 4         | `CDATA_SECTION_NODE`     | `#cdata-section`     | CDATA Section |
+| 5         | `ENTITY_REFERENCE_NODE`  |                      |               |
+| 6         | `ENTITY_NODE`            |                      |               |
+| 8         | `COMMENT_NODE`           | `#comment`           | Comment       |
+| 9         | `DOCUMENT_NODE`          | `#document`          | null          |
+| 10        | `DOCUMENT_TYPE_NODE`     | `html`/`xml`         | null          |
+| 11        | `DOCUMENT_FRAGMENT_NODE` | `#document-fragment` | null          |
+| 12        | `NOTATION_NODE`          |                      |               |
+
+```ts
+const type = node.nodeType;
+const name = node.nodeName;
+const value = node.nodeValue;
+
+if (someNode.nodeType === Node.ELEMENT_NODE) {
+  alert('Node is an element.');
+}
+```
+
+#### DOM Attribute Node
+
+```ts
+const id = element.attributes.getNamedItem('id').nodeValue;
+const id = element.attributes.id.nodeValue;
+element.attributes.id.nodeValue = 'someOtherId';
+const oldAttr = element.attributes.removeNamedItem('id');
+element.attributes.setNamedItem(newAttr);
+```
+
+```ts
+const attr = document.createAttribute('align');
+attr.value = 'left';
+element.setAttributeNode(attr);
+
+alert(element.attributes.align.value); // "left"
+alert(element.getAttributeNode('align').value); // "left"
+alert(element.getAttribute('align')); // "left"
+```
+
+#### DOM Text Node
+
+Text node methods:
+
+- appendData(text): 向节点末尾添加文本 text.
+- deleteData(offset, count): 从位置 offset 开始删除 count 个字符.
+- insertData(offset, text): 在位置 offset 插入 text.
+- replaceData(offset, count, text): 用 text 替换从位置 offset 到 offset + count 的文本.
+- splitText(offset): 在位置 offset 将当前文本节点拆分为两个文本节点.
+- substringData(offset, count): 提取从位置 offset 到 offset + count 的文本.
+
+Normalize text nodes:
+
+```ts
+const element = document.createElement('div');
+element.className = 'message';
+
+const textNode = document.createTextNode('Hello world!');
+const anotherTextNode = document.createTextNode('Yippee!');
+
+element.appendChild(textNode);
+element.appendChild(anotherTextNode);
+document.body.appendChild(element);
+alert(element.childNodes.length); // 2
+
+element.normalize();
+alert(element.childNodes.length); // 1
+alert(element.firstChild.nodeValue); // "Hello world!Yippee!"
+```
+
+Split text nodes:
+
+```ts
+const element = document.createElement('div');
+element.className = 'message';
+
+const textNode = document.createTextNode('Hello world!');
+element.appendChild(textNode);
+document.body.appendChild(element);
+
+const newNode = element.firstChild.splitText(5);
+alert(element.firstChild.nodeValue); // "Hello"
+alert(newNode.nodeValue); // " world!"
+alert(element.childNodes.length); // 2
+```
+
+#### DOM Document Node
+
+`document` node (`#document`):
+
+```ts
+alert(document.nodeType); // 9
+alert(document.nodeName); // "#document"
+alert(document.nodeValue); // null
+```
+
+```ts
+const html = document.documentElement;
+const body = document.body;
+const doctype = document.doctype;
+
+const title = document.title; // 可修改.
+const domain = document.domain; // 可设置同源域名.
+const url = document.URL;
+const referer = document.referer;
+
+const anchors = documents.anchors;
+const images = documents.images;
+const links = documents.links;
+const forms = documents.forms;
+const formElements = documents.forms[0].elements; // 第一个表单内的所有字段
+```
+
+```ts
+document.getElementById(id);
+// eslint-disable-next-line no-restricted-globals
+document.getElementsByName(name);
+document.getElementsByTagName(tagName);
+document.getElementsByClassName(className);
+document.querySelector('cssSelector');
+document.querySelectorAll('cssSelector');
+document.write();
+document.writeln();
+```
+
+#### DOM Document Type Node
+
+```ts
+// <!DOCTYPE HTML PUBLIC "-// W3C// DTD HTML 4.01// EN"
+//   "http:// www.w3.org/TR/html4/strict.dtd">
+alert(document.doctype.name); // "html"
+alert(document.nodeType); // 10
+alert(document.doctype.nodeName); // "html"
+alert(document.doctype.nodeValue); // null
+```
+
+#### DOM Document Fragment Node
+
+减少 DOM 操作次数, 减少页面渲染次数:
+
+```ts
+const frag = document.createDocumentFragment();
+
+let p;
+let t;
+
+p = document.createElement('p');
+t = document.createTextNode('first paragraph');
+p.appendChild(t);
+frag.appendChild(p);
+
+p = document.createElement('p');
+t = document.createTextNode('second paragraph');
+p.appendChild(t);
+frag.appendChild(p);
+
+// 只渲染一次HTML页面
+document.body.appendChild(frag);
+```
+
+```ts
+const oldNode = document.getElementById('result');
+const clone = oldNode.cloneNode(true);
+// work with the clone
+
+// when you're done:
+oldNode.parentNode.replaceChild(clone, oldNode);
+```
+
+### DOM Programming
 
 #### Append DOM Node
 
@@ -717,38 +880,7 @@ const formerFirstChild = someNode.removeChild(someNode.firstChild);
 const formerLastChild = someNode.removeChild(someNode.lastChild);
 ```
 
-#### DOM Node Type
-
-Node 除包括元素结点 (tag) 外,
-包括许多其它结点 (甚至空格符视作一个结点),
-需借助 `nodeType` 找出目标结点.
-
-| Node Type | Representation                     |
-| :-------- | :--------------------------------- |
-| 1         | `Node.ELEMENT_NODE`                |
-| 2         | `Node.ATTRIBUTE_NODE`              |
-| 3         | `Node.TEXT_NODE`                   |
-| 4         | `Node.CDATA_SECTION_NODE`          |
-| 5         | `Node.ENTITY_REFERENCE_NODE`       |
-| 6         | `Node.ENTITY_NODE`                 |
-| 7         | `Node.PROCESSING_INSTRUCTION_NODE` |
-| 8         | `Node.COMMENT_NODE`                |
-| 9         | `Node.DOCUMENT_NODE`               |
-| 10        | `Node.DOCUMENT_TYPE_NODE`          |
-| 11        | `Node.DOCUMENT_FRAGMENT_NODE`      |
-| 12        | `Node.NOTATION_NODE`               |
-
-```ts
-const type = node.nodeType;
-const name = node.nodeName;
-const value = node.nodeValue;
-
-if (someNode.nodeType === Node.ELEMENT_NODE) {
-  alert('Node is an element.');
-}
-```
-
-#### Traverse DOM Tree
+#### Traverse DOM Node
 
 ```ts
 const parent = node.parentNode;
@@ -773,70 +905,15 @@ const previous = node.previousElementSibling;
 const next = node.nextElementSibling;
 ```
 
-#### DOM Fragment
-
-减少 DOM 操作次数, 减少页面渲染次数:
+#### Attributes DOM Node
 
 ```ts
-const frag = document.createDocumentFragment();
-
-let p;
-let t;
-
-p = document.createElement('p');
-t = document.createTextNode('first paragraph');
-p.appendChild(t);
-frag.appendChild(p);
-
-p = document.createElement('p');
-t = document.createTextNode('second paragraph');
-p.appendChild(t);
-frag.appendChild(p);
-
-// 只渲染一次HTML页面
-document.body.appendChild(frag);
-```
-
-```ts
-const oldNode = document.getElementById('result');
-const clone = oldNode.cloneNode(true);
-// work with the clone
-
-// when you're done:
-oldNode.parentNode.replaceChild(clone, oldNode);
-```
-
-### HTML DOM
-
-`document` object:
-
-```ts
-const html = document.documentElement;
-const body = document.body;
-const doctype = document.doctype;
-
-const title = document.title; // 可修改.
-const domain = document.domain; // 可设置同源域名.
-const url = document.URL;
-const referer = document.referer;
-
-const anchors = documents.anchors;
-const images = documents.images;
-const links = documents.links;
-const forms = documents.forms;
-const formElements = documents.forms[0].elements; // 第一个表单内的所有字段
-```
-
-```ts
-document.getElementById(id);
-// eslint-disable-next-line no-restricted-globals
-document.getElementsByName(name);
-document.getElementsByTagName(tagName);
-document.getElementsByClassName(className);
-document.querySelector('cssSelector');
-document.querySelectorAll('cssSelector');
-document.write();
-document.writeln();
+alert(div.getAttribute('id')); // "myDiv"
+alert(div.getAttribute('class')); // "bd"
+div.setAttribute('id', 'someOtherId');
+div.setAttribute('class', 'ft');
+div.removeAttribute('id');
+div.removeAttribute('class');
 ```
 
 ### CSSOM
@@ -853,7 +930,7 @@ const font = element.style.fontFamily;
 const mt = element.style.marginTopWidth;
 ```
 
-#### Getter and Setter Styles
+#### Styles Getter and Setter
 
 - getPropertyValue
 - setProperty
@@ -919,7 +996,7 @@ function addClass(element, value) {
 }
 ```
 
-#### CSS StyleSheet API
+#### DOM StyleSheets API
 
 ##### CSS Rules Definition
 
@@ -966,7 +1043,7 @@ for (i of myRules) {
 }
 ```
 
-##### Media Rule
+##### Media Rules
 
 - `conditionText` property of media rule
 - nested `cssRules`
@@ -986,7 +1063,7 @@ for (i of myRules) {
 }
 ```
 
-##### Keyframe Rule
+##### Keyframe Rules
 
 - `name` property of keyframe rule
 - nested `cssRules`:
@@ -1007,7 +1084,7 @@ for (i of myRules) {
 }
 ```
 
-##### Add and Remove CSS Rules
+##### Manipulate CSS Rules
 
 ```ts
 const myStylesheet = document.styleSheets[0];
