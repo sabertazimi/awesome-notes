@@ -102,6 +102,7 @@ tags: [Web, Framework, Library]
 - [Sails: Realtime MVC Framework](https://github.com/balderdashy/sails)
 - [RedWood: App Framework for Startups](https://github.com/redwoodjs/redwood)
 - [Amplication: Low Code but High Quality Node.js Applications](https://github.com/amplication/amplication)
+- [LoopBack: Build Modern API Applications](https://github.com/loopbackio/loopback-next)
 
 ### Headless CMS
 
