@@ -536,28 +536,43 @@ if (document.getElementById) {
 
 ## DOM
 
-- DOM Level 0
-- DOM Level 1
-  - DOM Core
-  - DOM HTML
-- DOM Level 2
-  - DOM2 Core
-  - DOM2 HTML
-  - DOM2 Events
-  - DOM2 Style
-  - DOM2 Traversal
-  - DOM2 Range
-  - DOM2 Views
-- DOM Level 3
-  - DOM3 Core
-  - DOM3 Load and Save
-  - DOM3 Validation
+- DOM Level 0.
+- DOM Level 1:
+  - DOM Core.
+  - DOM XML.
+  - DOM HTML.
+- DOM Level 2:
+  - DOM2 Core.
+  - DOM2 XML.
+  - DOM2 HTML.
+  - DOM2 Views.
+  - DOM2 StyleSheets.
+  - DOM2 CSS.
+  - DOM2 CSS 2.
+  - DOM2 Events.
+  - DOM2 UIEvents.
+  - DOM2 MouseEvents.
+  - DOM2 MutationEvents.
+  - DOM2 HTMLEvents.
+  - DOM2 Range.
+  - DOM2 Traversal.
+- DOM Level 3:
+  - DOM3 Core.
+  - DOM3 XML.
+  - DOM3 Events.
+  - DOM3 UIEvents.
+  - DOM3 MouseEvents.
+  - DOM3 MutationEvents.
+  - DOM3 MutationNameEvents.
+  - DOM3 TextEvents.
+  - DOM3 Load and Save.
+  - DOM3 Load and Save Async.
+  - DOM3 Validation.
+  - DOM3 XPath.
 
 ```ts
-if (document.implementation) {
-  document.implementation.hasFeature('HTML', '1.0');
-  // => DOM HTML
-}
+const hasXmlDom = document.implementation.hasFeature('XML', '1.0');
+const hasHtmlDom = document.implementation.hasFeature('HTML', '1.0');
 ```
 
 ### DOM Tree
