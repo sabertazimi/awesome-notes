@@ -584,10 +584,13 @@ if (document.implementation) {
 document.createElement('nodeName');
 document.createTextNode('String');
 
-document.getElementById();
-document.getElementsByTagName();
-document.querySelector();
-document.querySelectorAll();
+document.getElementById(id);
+// eslint-disable-next-line no-restricted-globals
+document.getElementsByName(name);
+document.getElementsByTagName(tagName);
+document.getElementsByClassName(className);
+document.querySelector(cssSelector);
+document.querySelectorAll(cssSelector);
 
 element.getAttribute(attrName);
 element.setAttribute(attrName, attrValue);
@@ -796,8 +799,13 @@ oldNode.parentNode.replaceChild(clone, oldNode);
 const html = document.documentElement;
 const body = document.body;
 const doctype = document.doctype;
-const URI = document.URI;
-const title = document.title;
+
+const title = document.title; // 可修改.
+const domain = document.domain; // 可设置同源域名.
+const url = document.URL;
+const referer = document.referer;
+
+const anchors = documents.anchors;
 const images = documents.images;
 const links = documents.links;
 const forms = documents.forms;
@@ -805,9 +813,14 @@ const formElements = documents.forms[0].elements; // 第一个表单内的所有
 ```
 
 ```ts
-document.write();
+document.getElementById(id);
+// eslint-disable-next-line no-restricted-globals
+document.getElementsByName(name);
+document.getElementsByTagName(tagName);
+document.getElementsByClassName(className);
 document.querySelector('cssSelector');
 document.querySelectorAll('cssSelector');
+document.write();
 ```
 
 ### CSSOM
