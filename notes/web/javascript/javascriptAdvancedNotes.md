@@ -200,6 +200,14 @@ window.addEventListener(
 const networkType = navigator.connection.effectiveType; // 2G - 5G
 ```
 
+```ts
+navigator.registerProtocolHandler(
+  'mailto',
+  'http://www.somemailclient.com?cmd=%s',
+  'Some Mail Client'
+);
+```
+
 ### History
 
 ### Browser Compatibility
