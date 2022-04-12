@@ -3598,7 +3598,38 @@ console.log(decodeURI(uri));
 console.log(decodeURIComponent(uri));
 ```
 
-- [URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams)
+[URL](https://developer.mozilla.org/en-US/docs/Web/API/URL):
+
+- `hash`.
+- `host`.
+- `hostname`.
+- `href`.
+- `pathname`.
+- `port`.
+- `protocol`.
+- `search`: [USVString](https://developer.mozilla.org/en-US/docs/Web/API/USVString).
+- `searchParams`: URL search map.
+- `username`.
+- `password`.
+- `origin`: read only.
+  
+```ts
+// index.mjs
+import './index2.mjs?someURLInfo=5';
+
+// index2.mjs
+new URL(import.meta.url).searchParams.get('someURLInfo'); // 5
+```
+
+```ts
+const blob = new Blob(['export const itsAModule = true'], {
+  type: 'text/javascript',
+});
+
+const blobUrl = URL.createObjectURL(blob);
+```
+
+[URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams):
 
 ```ts
 // window.location.search
