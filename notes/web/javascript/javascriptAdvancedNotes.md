@@ -1748,6 +1748,46 @@ observer.observe(target, {
 });
 ```
 
+```ts
+const observer = new MutationObserver(mutationRecords =>
+  console.log(mutationRecords)
+);
+
+// 创建两个初始子节点
+document.body.appendChild(document.createElement('div'));
+document.body.appendChild(document.createElement('span'));
+
+observer.observe(document.body, { childList: true });
+
+// 交换子节点顺序
+document.body.insertBefore(document.body.lastChild, document.body.firstChild);
+// 发生了两次变化：第一次是节点被移除，第二次是节点被添加
+// [
+//   {
+//     addedNodes: NodeList[],
+//     attributeName: null,
+//     attributeNamespace: null,
+//     oldValue: null,
+//     nextSibling: null,
+//     previousSibling: div,
+//     removedNodes: NodeList[span],
+//     target: body,
+//     type: childList,
+//   },
+//   {
+//     addedNodes: NodeList[span],
+//     attributeName: null,
+//     attributeNamespace: null,
+//     oldValue: null,
+//     nextSibling: div,
+//     previousSibling: null,
+//     removedNodes: NodeList[],
+//     target: body,
+//     type: "childList",
+//   }
+// ]
+```
+
 ## JavaScript Engine
 
 ### Variables Lifecycle
