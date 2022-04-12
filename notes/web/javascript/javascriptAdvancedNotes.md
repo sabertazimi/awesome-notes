@@ -153,6 +153,49 @@ window.addEventListener(
 
 ### Navigator
 
+`navigator` 对象包含以下接口定义的属性和方法:
+
+- NavigatorID.
+- NavigatorLanguage.
+- NavigatorOnLine.
+- NavigatorContentUtils.
+- NavigatorStorage.
+- NavigatorStorageUtils.
+- NavigatorConcurrentHardware.
+- NavigatorPlugins.
+- NavigatorUserMedia.
+
+| Property/Method           |                                                   |
+| ------------------------- | ------------------------------------------------- |
+| battery                   | BatteryManager (Battery Status API)               |
+| clipboard                 | Clipboard API                                     |
+| connection                | NetworkInformation (Network Information API)      |
+| cookieEnabled             | 布尔值, 是否启用了 cookie                         |
+| credentials               | CredentialsContainer (Credentials Management API) |
+| deviceMemory              | 单位为 GB 的设备内存容量                          |
+| doNotTrack                | 用户的`不跟踪` (`do-not-track`) 设置              |
+| geolocation               | Geolocation (Geolocation API)                     |
+| hardwareConcurrency       | 设备的处理器核心数量                              |
+| language                  | 浏览器的主语言                                    |
+| languages                 | 浏览器偏好的语言数组                              |
+| locks                     | LockManager (Web Locks API)                       |
+| mediaCapabilities         | MediaCapabilities (Media Capabilities API)        |
+| mediaDevices              | 可用的媒体设备                                    |
+| maxTouchPoints            | 设备触摸屏支持的最大触点数                        |
+| onLine                    | 布尔值, 表示浏览器是否联网                        |
+| pdfViewerEnabled          | 布尔值, 是否启用了 PDF 功能                       |
+| permissions               | Permissions (Permissions API)                     |
+| serviceWorker             | ServiceWorkerContainer                            |
+| storage                   | StorageManager (Storage API)                      |
+| userAgent                 | 浏览器的用户代理字符串                            |
+| vendor                    | 浏览器的厂商名称                                  |
+| webdriver                 | 浏览器当前是否被自动化程序控制                    |
+| xr                        | XRSystem (WebXR Device API)                       |
+| registerProtocolHandler() | 将一个网站注册为特定协议的处理程序                |
+| sendBeacon()              | 异步传输一些小数据                                |
+| share()                   | 当前平台的原生共享机制                            |
+| vibrate()                 | 触发设备振动                                      |
+
 ```ts
 const networkType = navigator.connection.effectiveType; // 2G - 5G
 ```
