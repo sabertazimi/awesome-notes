@@ -187,7 +187,7 @@ window.addEventListener(
 | permissions               | Permissions (Permissions API)                     |
 | serviceWorker             | ServiceWorkerContainer                            |
 | storage                   | StorageManager (Storage API)                      |
-| userAgent                 | 浏览器的用户代理字符串                            |
+| userAgent                 | 浏览器的用户代理字符串 (**默认只读**)             |
 | vendor                    | 浏览器的厂商名称                                  |
 | webdriver                 | 浏览器当前是否被自动化程序控制                    |
 | xr                        | XRSystem (WebXR Device API)                       |
@@ -208,15 +208,160 @@ navigator.registerProtocolHandler(
 );
 ```
 
+`navigator.userAgent` 特别复杂:
+
+- 历史兼容问题: Netscape -> IE -> Firefox -> Safari -> Chrome -> Edge.
+- 每一个新的浏览器厂商必须保证旧网站的检测脚本能正常识别自家浏览器,
+  从而正常打开网页, 导致 `navigator.userAgent` 不断变长.
+- [UserAgent Data Parser](https://github.com/faisalman/ua-parser-js)
+
+```ts
+console.log(navigator.userAgent);
+// 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
+// Chrome/101.0.4922.0 Safari/537.36 Edg/101.0.1198.0'
+```
+
+### Screen
+
+浏览器窗口外面的客户端显示器的信息:
+
+| Property    |                                          |
+| ----------- | ---------------------------------------- |
+| availHeight | 屏幕像素高度减去系统组件高度 (只读)      |
+| availWidth  | 屏幕像素宽度减去系统组件宽度 (只读)      |
+| colorDepth  | 表示屏幕颜色的位数: 多数系统是 32 (只读) |
+| height      | 屏幕像素高度                             |
+| width       | 屏幕像素宽度                             |
+| pixelDepth  | 屏幕的位深 (只读)                        |
+| orientation | Screen Orientation API 中屏幕的朝向      |
+
 ### History
 
+#### History Navigation
+
+```ts
+const history = window.history;
+
+// 后退一页
+history.go(-1);
+// 前进一页
+history.go(1);
+// 前进两页
+history.go(2);
+// 导航到最近的 new.com 页面
+history.go('new.com');
+// 导航到最近的 example.net 页面
+history.go('example.net');
+// 后退一页
+history.back();
+// 前进一页
+history.forward();
+
+if (history.length === 1) {
+  console.log('这是用户窗口中的第一个页面');
+}
+```
+
+#### History State Management
+
+```ts
+const history = window.history;
+
+const stateObject = { foo: 'bar' };
+history.pushState(stateObject, 'My title', 'baz.html');
+
+history.replaceState({ newFoo: 'newBar' }, 'New title'); // No new history state.
+
+window.addEventListener('popstate', event => {
+  const state = event.state;
+
+  if (state) {
+    // 第一个页面加载时状态是 null
+    processState(state);
+  }
+});
+```
+
 ### Browser Compatibility
+
+#### User Agent Detection
+
+```ts
+class BrowserDetector {
+  constructor() {
+    // 测试条件编译
+    // IE6~10 支持
+    // eslint-disable-next-line spaced-comment
+    this.isIE_Gte6Lte10 = /*@cc_on!@*/ false;
+    // 测试 documentMode
+    // IE7~11 支持
+    this.isIE_Gte7Lte11 = !!document.documentMode;
+    // 测试 StyleMedia 构造函数
+    // Edge 20 及以上版本支持
+    this.isEdge_Gte20 = !!window.StyleMedia;
+    // 测试 Firefox 专有扩展安装 API
+    // 所有版本的 Firefox 都支持
+    this.isFirefox_Gte1 = typeof InstallTrigger !== 'undefined';
+    // 测试 chrome 对象及其 webstore 属性
+    // Opera 的某些版本有 window.chrome, 但没有 window.chrome.webstore
+    // 所有版本的 Chrome 都支持
+    this.isChrome_Gte1 = !!window.chrome && !!window.chrome.webstore;
+    // Safari 早期版本会给构造函数的标签符追加 "Constructor"字样, 如:
+    // window.Element.toString(); // [object ElementConstructor]
+    // Safari 3~9.1 支持
+    this.isSafari_Gte3Lte9_1 = /constructor/i.test(window.Element);
+    // 推送通知 API 暴露在 window 对象上
+    // 使用 IIFE 默认参数值以避免对 undefined 调用 toString()
+    // Safari 7.1 及以上版本支持
+    this.isSafari_Gte7_1 = (({ pushNotification = {} } = {}) =>
+      pushNotification.toString() === '[object SafariRemoteNotification]')(
+      window.safari
+    );
+    // 测试 addons 属性
+    // Opera 20 及以上版本支持
+    this.isOpera_Gte20 = !!window.opr && !!window.opr.addons;
+  }
+
+  isIE() {
+    return this.isIE_Gte6Lte10 || this.isIE_Gte7Lte11;
+  }
+
+  isEdge() {
+    return this.isEdge_Gte20 && !this.isIE();
+  }
+
+  isFirefox() {
+    return this.isFirefox_Gte1;
+  }
+
+  isChrome() {
+    return this.isChrome_Gte1;
+  }
+
+  isSafari() {
+    return this.isSafari_Gte3Lte9_1 || this.isSafari_Gte7_1;
+  }
+
+  isOpera() {
+    return this.isOpera_Gte20;
+  }
+}
+```
 
 #### Browser Feature Detection
 
 **不使用特性/浏览器推断**, 往往容易推断错误 (且会随着浏览器更新产生新的错误).
 
 ```ts
+// 检测浏览器是否支持 Netscape 式的插件
+const hasNSPlugins = !!(navigator.plugins && navigator.plugins.length);
+// 检测浏览器是否具有 DOM Level 1 能力
+const hasDOM1 = !!(
+  document.getElementById &&
+  document.createElement &&
+  document.getElementsByTagName
+);
+
 // 特性检测
 if (document.getElementById) {
   element = document.getElementById(id);
