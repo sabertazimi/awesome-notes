@@ -198,6 +198,13 @@ window.addEventListener(
 
 ```ts
 const networkType = navigator.connection.effectiveType; // 2G - 5G
+const connectionStateChange = () => console.log(navigator.onLine);
+window.addEventListener('online', connectionStateChange);
+window.addEventListener('offline', connectionStateChange);
+// 设备联网时：
+// true
+// 设备断网时：
+// false
 ```
 
 ```ts
