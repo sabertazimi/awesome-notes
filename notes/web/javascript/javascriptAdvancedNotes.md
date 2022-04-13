@@ -75,22 +75,6 @@ if (blocked) {
 }
 ```
 
-```ts
-window.onload = function readyFunction() {};
-
-function addLoadEvent(func) {
-  const oldOnLoad = window.onload;
-  if (typeof window.onload !== 'function') {
-    window.onload = func;
-  } else {
-    window.onload = function () {
-      oldOnLoad();
-      func();
-    };
-  }
-}
-```
-
 ### Location
 
 | 属性     | 描述                                       |
@@ -768,18 +752,6 @@ const images = documents.images;
 const links = documents.links;
 const forms = documents.forms;
 const formElements = documents.forms[0].elements; // 第一个表单内的所有字段
-
-// HTML5 focus:
-document.getElementById('myButton').focus();
-console.log(document.activeElement === button); // true
-console.log(document.hasFocus()); // true
-
-// HTML5 readyState:
-if (document.readyState === 'complete') {
-  console.log('Loaded');
-} else if (document.readyState === 'loading') {
-  console.log('Loading');
-}
 
 // HTML5 compatMode:
 if (document.compatMode === 'CSS1Compat') {
@@ -1498,8 +1470,8 @@ console.log(myStylesheet.cssRules.length); // 7
 
 - `event.preventDefault()`.
 - `event.stopPropagation()`.
-- `element.dispatchEvent(event)` to trigger events.
 - Default `bubble` mode, can change to `capture` mode.
+- `element.dispatchEvent(event)` to trigger events.
 
 #### Events Object
 
@@ -1511,8 +1483,8 @@ console.log(myStylesheet.cssRules.length); // 7
 | currentTarget              | Element      | Event handler binding          |
 | target                     | Element      | Event truly target             |
 | bubbles                    | Boolean      | 事件是否冒泡                   |
-| eventPhase                 | Number       | 捕获阶段/到达目标/冒泡阶段     |
 | cancelable                 | Boolean      | 是否可以取消事件的默认行为     |
+| eventPhase                 | Number       | 捕获阶段/到达目标/冒泡阶段     |
 | defaultPrevented           | Boolean      | `preventDefault()` called      |
 | preventDefault()           | Function     | 用于取消事件的默认行为         |
 | stopPropagation()          | Function     | 用于取消所有后续事件捕获或冒泡 |
@@ -1527,7 +1499,7 @@ function handleEvent(event) {
 }
 ```
 
-#### Global DOM Events
+#### Global UI Events
 
 `DOMContentLoaded` event:
 
@@ -1584,6 +1556,59 @@ function handleVisibilityChange() {
 
 document.addEventListener('visibilitychange', handleVisibilityChange, false);
 ```
+
+`readystatechange` event:
+
+```ts
+document.addEventListener('readystatechange', event => {
+  // HTML5 readyState
+  if (
+    document.readyState === 'interactive' ||
+    document.readyState === 'complete'
+  ) {
+    console.log('Content loaded');
+  } else if (document.readyState === 'loading') {
+    console.log('Loading');
+  }
+});
+```
+
+`load` event, 加载完成:
+
+```ts
+window.addEventListener('load', () => {
+  const image = document.createElement('img');
+  image.addEventListener('load', event => {
+    console.log(event.target.src);
+  });
+  document.body.appendChild(image);
+  image.src = 'smile.gif';
+
+  const script = document.createElement('script');
+  script.addEventListener('load', event => {
+    console.log('Loaded');
+  });
+  script.src = 'example.js';
+  document.body.appendChild(script);
+
+  const link = document.createElement('link');
+  link.type = 'text/css';
+  link.rel = 'stylesheet';
+  link.addEventListener('load', event => {
+    console.log('css loaded');
+  });
+  link.href = 'example.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
+});
+```
+
+- `beforeunload` event.
+- `unload` event: 卸载完成.
+- `abort` event: 提前终止.
+- `error` event.
+- `select` event：在文本框 (`<input>` 或 `textarea`) 上选择字符.
+- `resize` event: 缩放.
+- `scroll` event: 滚动.
 
 #### Form Events
 
@@ -1649,9 +1674,9 @@ function validateForm(e) {
 
 #### Input Events
 
-- `focus`/`focusin`/`focusout` event.
+- `blur`/`focus`/`focusin`/`focusout` event.
 - `input`/`change` event.
-- `select` event.
+- `select` event：在文本框 (`<input>` 或 `textarea`) 上选择字符.
 
 ```ts
 const input = document.querySelector('input');
@@ -1677,11 +1702,30 @@ console.log(document.activeElement === button); // true
 console.log(document.hasFocus()); // true
 ```
 
+:::tip Focus Events
+
+当焦点从页面中的一个元素移到另一个元素上时, 会依次发生如下事件:
+
+1. `focusout`: 在失去焦点的元素上触发.
+2. `focusin`: 在获得焦点的元素上触发
+3. `blur`: 在失去焦点的元素上触发
+4. `DOMFocusOut`: 在失去焦点的元素上触发
+5. `focus`: 在获得焦点的元素上触发
+6. `DOMFocusIn`: 在获得焦点的元素上触发.
+
+:::
+
 #### Mouse Events
 
-- `click` event.
-- `dbclick` event.
 - `mousedown` event.
+- `mouseup` event.
+- `click` event:
+  - `mousedown` 与 `mouseup` 都触发后, 触发此事件.
+  - `event.clientX`/`event.clientY`.
+  - `event.pageX`/`event.pageY`.
+  - `event.screenX`/`event.screenY`.
+  - `event.shiftKey`/`event.ctrlKey`/`event.altKey`/`event.metaKey`.
+- `dbclick` event: `click` 两次触发后, 触发此事件.
 - `mousemove` event.
 - `mouseenter` event.
 - `mouseleave` event:
@@ -1689,9 +1733,10 @@ console.log(document.hasFocus()); // true
 - `mouseout` event:
   pointer leaves the element or leaves one of the element's descendants.
 - `mouseover` event.
+- `wheel` event (replace deprecated `mousewheel` event).
 
-For click event, no need for X/Y to judge internal/outside state.
-Use DOM API `element.contains` to check is a better way.
+For `click` event, no need for X/Y to judge internal/outside state.
+Use `element.contains` to check is a better way.
 
 ```ts
 window.addEventListener('click', event => {
@@ -1728,22 +1773,20 @@ noContext.addEventListener('contextmenu', e => {
 });
 ```
 
-#### Key Events
+#### Keyboard Events
 
-`keypress`/`keyup`/`keydown` event:
+`keydown`/`keypress`/`keyup` event:
 
 ```ts
-document.onkeydown = function (event) {
-  // eslint-disable-next-line no-caller
-  const e = event || window.event || arguments.callee.caller.arguments[0];
-  if (e && e.keyCode === 13) {
-    // enter 键
-    // coding
-  }
-};
+const textbox = document.getElementById('myText');
+
+textbox.addEventListener('keyup', event => {
+  console.log(event.charCode || event.keyCode);
+});
 ```
 
-`event.key` [keyName](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values):
+[`event.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)
+(replace deprecated `event.keyCode`):
 
 ```ts
 'Alt';
@@ -1790,12 +1833,99 @@ source.addEventListener('copy', event => {
 });
 ```
 
-#### Frame Events
+#### Device Events
 
-- `resize` event.
-- `load` event.
-- `scroll` event.
-- `error` event.
+- `deviceorientation` event.
+- `devicemotion` event.
+- `touchstart` event.
+- `touchmove` event.
+- `touchend` event.
+- `touchcancel` event.
+
+#### Dispatch Events
+
+Dispatch `MouseEvents`:
+
+```ts
+const btn = document.getElementById('myBtn');
+
+// 创建 event 对象
+const event = document.createEvent('MouseEvents');
+
+// 初始化 event 对象
+event.initMouseEvent(
+  'click',
+  true,
+  true,
+  document.defaultView,
+  0,
+  0,
+  0,
+  0,
+  0,
+  false,
+  false,
+  false,
+  false,
+  0,
+  null
+);
+
+// 触发事件
+btn.dispatchEvent(event);
+```
+
+Dispatch `KeyboardEvent`:
+
+```ts
+const textbox = document.getElementById('myTextbox');
+
+// 按照 DOM3 的方式创建 event 对象
+if (document.implementation.hasFeature('KeyboardEvents', '3.0')) {
+  const event = document.createEvent('KeyboardEvent');
+
+  // 初始化 event 对象
+  event.initKeyboardEvent(
+    'keydown',
+    true,
+    true,
+    document.defaultView,
+    'a',
+    0,
+    'Shift',
+    0
+  );
+
+  // 触发事件
+  textbox.dispatchEvent(event);
+}
+```
+
+Dispatch `HTMLEvents`:
+
+```ts
+const event = document.createEvent('HTMLEvents');
+event.initEvent('focus', true, false);
+target.dispatchEvent(event);
+```
+
+Dispatch `CustomEvent`:
+
+```ts
+const div = document.getElementById('myDiv');
+div.addEventListener('myEvent', event => {
+  console.log(`DIV: ${event.detail}`);
+});
+document.addEventListener('myEvent', event => {
+  console.log(`DOCUMENT: ${event.detail}`);
+});
+
+if (document.implementation.hasFeature('CustomEvents', '3.0')) {
+  const event = document.createEvent('CustomEvent');
+  event.initCustomEvent('myEvent', true, false, 'Hello world!');
+  div.dispatchEvent(event);
+}
+```
 
 #### Events Util
 
@@ -1806,6 +1936,18 @@ const EventUtil = {
   },
   getTarget(event) {
     return event.target || event.srcElement;
+  },
+  getRelatedTarget(event) {
+    // For `mouseover` and `mouseout` event:
+    if (event.relatedTarget) {
+      return event.relatedTarget;
+    } else if (event.toElement) {
+      return event.toElement;
+    } else if (event.fromElement) {
+      return event.fromElement;
+    } else {
+      return null;
+    }
   },
   preventDefault(event) {
     if (event.preventDefault) {
@@ -2911,9 +3053,9 @@ while (i) {
 ### Event Delegation
 
 - 事件委托利用的是事件冒泡机制, 只制定一事件处理程序, 就可以管理某一类型的所有事件.
-- 使用事件委托, 只需在 DOM 树中尽量最高的层次上添加一个事件处理程序.
-- Increases performance and reduces memory consumption.
-- No need to register new event listeners for newer children.
+- Increases performance and reduces memory consumption:
+  - 使用事件委托, 只需在 DOM 树中尽量最高的层次上添加一个事件处理程序.
+  - No need to register new event listeners for newer children.
 - DOM Event:
   Event Capturing (default false) ->
   Event Target ->
