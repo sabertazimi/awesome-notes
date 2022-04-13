@@ -7690,9 +7690,9 @@ fetch('https://fetch.spec.whatwg.org/')
 // <!doctype html><html lang="en"><head><meta charset="utf-8"> ...
 ```
 
-### Web Sockets
+### Web Socket
 
-#### Web Sockets Message Header
+#### Web Socket Message Header
 
 Request Header:
 
@@ -7718,9 +7718,19 @@ Sec-Websocket-Protocol: protocol [,protocol]*
 Sec-Websocket-Extension: extension [,extension]*
 ```
 
-#### Web Sockets Basic Usage
+#### Web Socket Basic Usage
 
-通信功能
+通信功能:
+
+- `data`:
+  - `string`.
+  - `ArrayBuffer`.
+  - `Blob`.
+- `readyState`:
+  - `WebSocket.OPENING`: `0`, 连接正在建立.
+  - `WebSocket.OPEN`: `1`, 连接已经建立.
+  - `WebSocket.CLOSING`: `2`, 连接正在关闭.
+  - `WebSocket.CLOSE`: `3`, 连接已经关闭.
 
 ```ts
 function WebSocketTest() {
@@ -7735,14 +7745,20 @@ function WebSocketTest() {
       alert('Message is sent...');
     };
 
-    ws.onmessage = function (evt) {
-      const received_msg = evt.data;
+    ws.onmessage = function (event) {
+      const receivedMessage = event.data;
       alert('Message is received...');
     };
 
-    ws.onclose = function () {
+    ws.onclose = function (event) {
       // websocket is closed.
-      alert('Connection is closed...');
+      console.log(
+        `As clean? ${event.wasClean} Code=${event.code} Reason=${event.reason}`
+      );
+    };
+
+    ws.onerror = function () {
+      alert('Connection error.');
     };
   } else {
     // The browser doesn't support WebSocket
