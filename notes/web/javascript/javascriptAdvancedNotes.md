@@ -721,6 +721,8 @@ alert(newNode.nodeValue); // " world!"
 alert(element.childNodes.length); // 2
 ```
 
+:::tip TextContent vs InnerText vs InnerHTML
+
 - `textContent`:
   - **Security**: Doesn’t parse HTML.
   - **Performance**: Including `<script>` and `<style>` text content.
@@ -736,6 +738,8 @@ const textContent = element.textContent;
 const innerText = element.innerText;
 const innerHTML = element.innerHTML;
 ```
+
+:::
 
 #### DOM Document Node
 
