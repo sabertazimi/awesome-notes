@@ -358,9 +358,8 @@ tags: [Web, Framework, Library]
 
 ### Navigation
 
-- [Okay Navigation](https://github.com/VPenkov/okayNav)
-- [Animated Navigation Burgers](https://github.com/march08/animated-burgers)
-- [Menu Icon Click Animation](https://github.com/jonsuh/hamburgers)
+- [Hamburger: Animated Hamburger Menu Icons for React](https://github.com/luukdv/hamburger-react)
+- [Hamburgers: Tasty CSS-animated Hamburgers](https://github.com/jonsuh/hamburgers)
 - [PageMap](https://github.com/lrsjng/pagemap)
 
 ### Landing Page
