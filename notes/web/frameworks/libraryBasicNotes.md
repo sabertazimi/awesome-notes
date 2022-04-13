@@ -742,17 +742,13 @@ tags: [Web, Framework, Library]
 - [Variant Size Pictures](https://github.com/imulus/retinajs)
 - [Carver: Content-aware Image Resizer and Object Remover Based on Seam Carving Algorithm](https://github.com/trekhleb/js-image-carver)
 
-### Slide Images
-
-- [Placeholder.js](https://github.com/hustcc/placeholder.js)
-- [Pictures Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
-
 ### Image Gallery
 
+- [PhotoSwipe: JavaScript Image Gallery and LightBox](https://github.com/dimsemenov/PhotoSwipe)
+- [LightGallery: Customizable, Modular, Responsive, LightBox Gallery Plugin](https://github.com/sachinchoolur/lightGallery)
+- [Viewer.js: Images Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
+- [PhotoView: Exquisite React Photo Preview Component](https://github.com/MinJieLiu/react-photo-view)
 - [Zoom: Zooming Images Like Medium](https://github.com/francoischalifour/medium-zoom)
-- [LightGallery](https://github.com/sachinchoolur/lightgallery.js)
-- [PhotoSwipe](https://github.com/dimsemenov/PhotoSwipe)
-- [PhotoView](https://github.com/MinJieLiu/react-photo-view)
 
 ### Image Filter
 
