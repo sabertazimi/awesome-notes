@@ -7214,90 +7214,7 @@ JSON.stringify(new Date());
 | Custom Format (script insertion) |      222,912 |          66.3 |       11.7 |
 | Custom Format (XHR)              |      222,892 |          63.1 |       14.5 |
 
-#### AJAX Cache
-
-```ts
-const localCache = {};
-
-function xhrRequest(url, callback) {
-  // Check the local cache for this URL.
-  if (localCache[url]) {
-    callback.success(localCache[url]);
-    return;
-  }
-
-  // If this URL wasn't found in the cache, make the request.
-  const req = createXhrObject();
-
-  req.onerror = function () {
-    callback.error();
-  };
-
-  req.onreadystatechange = function () {
-    if (req.readyState === 4) {
-      if (req.responseText === '' || req.status === '404') {
-        callback.error();
-        return;
-      }
-
-      // Store the response on the local cache.
-      localCache[url] = req.responseText;
-      callback.success(req.responseText);
-    }
-  };
-}
-
-req.open('GET', url, true);
-// req.set();
-req.send(null);
-```
-
-#### AJAX Alternatives
-
-- `client.request(config)`.
-- `client.get(url[, config])`.
-- `client.delete(url[, config])`.
-- `client.head(url[, config])`.
-- `client.options(url[, config])`.
-- `client.post(url[, data[, config]])`.
-- `client.put(url[, data[, config]])`.
-- `client.patch(url[, data[, config]])`.
-- `client.getUri([config])`.
-
-```ts
-const client = axios.create({
-  baseURL: 'https://some-domain.com/api/',
-  timeout: 1000,
-  headers: { 'X-Custom-Header': 'foobar' },
-});
-
-// Add a request interceptor
-client.interceptors.request.use(
-  config => {
-    // Do something before request is sent.
-    return config;
-  },
-  error => {
-    // Do something with request error.
-    return Promise.reject(error);
-  }
-);
-
-client.interceptors.response.use(
-  response => {
-    // Any status code that lie within the range of 2xx trigger this function.
-    // Do something with response data.
-    return response;
-  },
-  error => {
-    // Any status codes that falls outside the range of 2xx trigger this function.
-    // Do something with response error.
-    return Promise.reject(error);
-  }
-);
-```
-
-#### Ajax Basic Usage
+#### Ajax Usage
 
 ```ts
 const XHR = (function () {
@@ -7331,13 +7248,9 @@ const XHR = (function () {
     }
   }
 })();
-```
 
-```ts
 const request = XHR.createXHR();
-```
 
-```ts
 // 3rd argument : async mode
 request.open('GET', 'example.txt', true);
 
@@ -7362,8 +7275,6 @@ request.onreadystatechange = function () {
 
 request.send(null);
 ```
-
-#### Ajax Complex Usage
 
 ```ts
 ajax({
@@ -7421,9 +7332,11 @@ function ajax(options) {
 // 格式化参数
 function formatParams(data) {
   const arr = [];
+
   for (const name in data) {
     arr.push(`${encodeURIComponent(name)}=${encodeURIComponent(data[name])}`);
   }
+
   arr.push(`v=${Math.random()}`.replace('.', ''));
   return arr.join('&');
 }
@@ -7451,15 +7364,60 @@ $.ajax({
 });
 ```
 
+#### AJAX Alternatives
+
+- `client.request(config)`.
+- `client.get(url[, config])`.
+- `client.delete(url[, config])`.
+- `client.head(url[, config])`.
+- `client.options(url[, config])`.
+- `client.post(url[, data[, config]])`.
+- `client.put(url[, data[, config]])`.
+- `client.patch(url[, data[, config]])`.
+- `client.getUri([config])`.
+
+```ts
+const client = axios.create({
+  baseURL: 'https://some-domain.com/api/',
+  timeout: 1000,
+  headers: { 'X-Custom-Header': 'foobar' },
+});
+
+// Add a request interceptor
+client.interceptors.request.use(
+  config => {
+    // Do something before request is sent.
+    return config;
+  },
+  error => {
+    // Do something with request error.
+    return Promise.reject(error);
+  }
+);
+
+client.interceptors.response.use(
+  response => {
+    // Any status code that lie within the range of 2xx trigger this function.
+    // Do something with response data.
+    return response;
+  },
+  error => {
+    // Any status codes that falls outside the range of 2xx trigger this function.
+    // Do something with response error.
+    return Promise.reject(error);
+  }
+);
+```
+
 ### Fetch
 
-- GET: read resources
-- POST: create resources
-- PUT: fully update resources
-- PATCH: partially update resources
-- DELETE: delete resources
+- GET: read resources.
+- POST: create resources.
+- PUT: fully update resources.
+- PATCH: partially update resources.
+- DELETE: delete resources.
 
-Get and Post:
+#### Fetch Basis Usage
 
 ```ts
 const response = await fetch('/api/names', {
@@ -7477,7 +7435,47 @@ const response = await fetch('/api/names', {
 });
 ```
 
-Request object:
+#### Fetch Form Data
+
+```ts
+const imageFormData = new FormData();
+const imageInput = document.querySelector('input[type="file"][multiple]');
+const imageFiles = imageInput.files;
+
+for (const file of imageFiles) {
+  imageFormData.append('image', file);
+}
+
+fetch('/img-upload', {
+  method: 'POST',
+  body: imageFormData,
+});
+```
+
+#### Fetch Aborting
+
+```ts
+const abortController = new AbortController();
+
+fetch('wikipedia.zip', { signal: abortController.signal }).catch(() =>
+  console.log('Aborted!')
+);
+
+// 10 毫秒后中断请求
+setTimeout(() => abortController.abort(), 10);
+```
+
+#### Fetch Objects API
+
+[`Headers` object](https://developer.mozilla.org/en-US/docs/Web/API/Headers):
+
+```ts
+const myHeaders = new Headers();
+myHeaders.append('Content-Type', 'text/xml');
+myHeaders.get('Content-Type'); // should return 'text/xml'
+```
+
+[`Request` object](https://developer.mozilla.org/en-US/docs/Web/API/Request):
 
 ```ts
 const request = new Request('/api/names', {
@@ -7489,6 +7487,175 @@ const request = new Request('/api/names', {
 });
 
 const response = await fetch(request);
+```
+
+[`Response` object](https://developer.mozilla.org/en-US/docs/Web/API/Response):
+
+```ts
+fetch('//foo.com').then(console.log);
+// Response {
+//   body: (...)
+//   bodyUsed: false
+//   headers: Headers {}
+//   ok: true
+//   redirected: false
+//   status: 200
+//   statusText: "OK"
+//   type: "basic"
+//   url: "https://foo.com/"
+// }
+
+fetch('//foo.com/redirect-me').then(console.log);
+// Response {
+//   body: (...)
+//   bodyUsed: false
+//   headers: Headers {}
+//   ok: true
+//   redirected: true
+//   status: 200
+//   statusText: "OK"
+//   type: "basic"
+//   url: "https://foo.com/redirected-url/"
+// }
+
+fetch('//foo.com/does-not-exist').then(console.log);
+// Response {
+//   body: (...)
+//   bodyUsed: false
+//   headers: Headers {}
+//   ok: false
+//   redirected: true
+//   status: 404
+//   statusText: "Not Found"
+//   type: "basic"
+//   url: "https://foo.com/does-not-exist/"
+// }
+
+fetch('//foo.com/throws-error').then(console.log);
+// Response {
+//   body: (...)
+//   bodyUsed: false
+//   headers: Headers {}
+//   ok: false
+//   redirected: true
+//   status: 500
+//   statusText: "Internal Server Error"
+//   type: "basic"
+//   url: "https://foo.com/throws-error/"
+// }
+```
+
+#### Fetch Streaming
+
+`Request`/`Response` `body` (`ReadableStream`) methods:
+
+- `text()`.
+- `json()`.
+- `formData()`.
+- `arrayBuffer()`.
+- `blob()`.
+- `bodyUsed`: 布尔值, 表示 `ReadableStream` 是否已摄受 (`disturbed`).
+
+```ts
+fetch('https://fetch.spec.whatwg.org/')
+  .then(response => response.body)
+  .then(body => {
+    const reader = body.getReader();
+
+    function processNextChunk({ value, done }) {
+      if (done) {
+        return;
+      }
+
+      console.log(value);
+      return reader.read().then(processNextChunk);
+    }
+
+    return reader.read().then(processNextChunk);
+  });
+// { value: Uint8Array{}, done: false }
+// { value: Uint8Array{}, done: false }
+// { value: Uint8Array{}, done: false }
+// ...
+
+fetch('https://fetch.spec.whatwg.org/')
+  .then(response => response.body)
+  .then(async body => {
+    const reader = body.getReader();
+
+    while (true) {
+      const { value, done } = await reader.read();
+
+      if (done) {
+        break;
+      }
+
+      console.log(value);
+    }
+  });
+// { value: Uint8Array{}, done: false }
+// { value: Uint8Array{}, done: false }
+// { value: Uint8Array{}, done: false }
+// ...
+```
+
+```ts
+fetch('https://fetch.spec.whatwg.org/')
+  .then(response => response.body)
+  .then(async body => {
+    const reader = body.getReader();
+    const asyncIterable = {
+      [Symbol.asyncIterator]() {
+        return {
+          next() {
+            return reader.read();
+          },
+        };
+      },
+    };
+
+    for await (const chunk of asyncIterable) {
+      console.log(chunk);
+    }
+  });
+// { value: Uint8Array{}, done: false }
+// { value: Uint8Array{}, done: false }
+// { value: Uint8Array{}, done: false }
+// ...
+```
+
+```ts
+async function* streamGenerator(stream) {
+  const reader = stream.getReader();
+
+  try {
+    while (true) {
+      const { value, done } = await reader.read();
+
+      if (done) {
+        break;
+      }
+
+      yield value;
+    }
+  } finally {
+    reader.releaseLock();
+  }
+}
+
+const decoder = new TextDecoder();
+
+fetch('https://fetch.spec.whatwg.org/')
+  .then(response => response.body)
+  .then(async body => {
+    for await (const chunk of streamGenerator(body)) {
+      console.log(decoder.decode(chunk, { stream: true }));
+    }
+  });
+// <!doctype html><html lang="en"> ...
+// whether a <a data-link-type="dfn" href="#concept-header" ...
+// result to <var>rangeValue</var>. ...
+// ...
 ```
 
 ### Web Sockets
