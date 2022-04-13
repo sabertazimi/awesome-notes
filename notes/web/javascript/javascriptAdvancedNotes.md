@@ -986,6 +986,67 @@ const previous = node.previousElementSibling;
 const next = node.nextElementSibling;
 ```
 
+[Node Iterator](https://developer.mozilla.org/en-US/docs/Web/API/NodeIterator):
+
+```ts
+const div = document.getElementById('div1');
+const filter = function (node) {
+  return node.tagName.toLowerCase() === 'li'
+    ? NodeFilter.FILTER_ACCEPT
+    : NodeFilter.FILTER_SKIP;
+};
+const iterator = document.createNodeIterator(
+  div,
+  NodeFilter.SHOW_ELEMENT,
+  filter,
+  false
+);
+
+for (
+  let node = iterator.nextNode();
+  node !== null;
+  node = iterator.nextNode()
+) {
+  console.log(node.tagName); // 输出标签名
+}
+```
+
+[Tree Walker](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker):
+
+```ts
+const div = document.getElementById('div1');
+const walker = document.createTreeWalker(
+  div,
+  NodeFilter.SHOW_ELEMENT,
+  null,
+  false
+);
+
+walker.firstChild(); // 前往<p>
+walker.nextSibling(); // 前往<ul>
+
+for (
+  let node = walker.firstChild();
+  node !== null;
+  node = walker.nextSibling()
+) {
+  console.log(node.tagName); // 遍历 <li>
+}
+```
+
+:::tip NodeIterator vs TreeWalker
+
+- `NodeFilter.acceptNode()` `FILTER_REJECT`:
+  - For `NodeIterator`, this flag is synonymous with `FILTER_SKIP`.
+  - For `TreeWalker`, child nodes are also rejected.
+- `TreeWalker` has more methods:
+  - `firstChild`.
+  - `lastChild`.
+  - `previousSibling`.
+  - `nextSibling`.
+
+:::
+
 #### Attributes DOM Node
 
 ```ts
