@@ -6415,6 +6415,37 @@ if (!String.prototype.trim) {
 
 ## JavaScript API
 
+### Timer
+
+- setTimeout.
+- setImmediate.
+- setInterval.
+- requestAnimationFrame.
+- requestIdleCallback.
+
+Combine `setInterval`/`setTimeout` function with closure function,
+implement **time slicing scheduler**.
+
+```ts
+function processArray(items, process, done) {
+  const todo = items.slice();
+
+  setTimeout(function task() {
+    process(todo.shift());
+
+    if (todo.length > 0) {
+      setTimeout(task, 25);
+    } else {
+      done(items);
+    }
+  }, 25);
+}
+```
+
+所有超时执行的代码 (函数) 都会在全局作用域中的一个匿名函数中运行,
+因此函数中的 `this` 值在非严格模式下始终指向 `window`, 在严格模式下是 `undefined`.
+若给 `setTimeout()` 提供了一个箭头函数, 则 `this` 会保留为定义它时所在的词汇作用域.
+
 ### Math
 
 - `Math.max`.
@@ -6583,36 +6614,85 @@ searchParams.delete('q');
 alert(searchParams.toString()); // " num=10&page=3"
 ```
 
-### Timer
+### Encoding
 
-- setTimeout.
-- setImmediate.
-- setInterval.
-- requestAnimationFrame.
-- requestIdleCallback.
-
-Combine `setInterval`/`setTimeout` function with closure function,
-implement **time slicing scheduler**.
+[TextEncoder API](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder):
 
 ```ts
-function processArray(items, process, done) {
-  const todo = items.slice();
-
-  setTimeout(function task() {
-    process(todo.shift());
-
-    if (todo.length > 0) {
-      setTimeout(task, 25);
-    } else {
-      done(items);
-    }
-  }, 25);
-}
+const textEncoder = new TextEncoder();
+const decodedText = 'foo';
+const encodedText = textEncoder.encode(decodedText);
+// f 的 UTF-8 编码是 0x66（即十进制 102）
+// o 的 UTF-8 编码是 0x6F（即二进制 111）
+console.log(encodedText); // Uint8Array(3) [102, 111, 111]
 ```
 
-所有超时执行的代码 (函数) 都会在全局作用域中的一个匿名函数中运行,
-因此函数中的 `this` 值在非严格模式下始终指向 `window`, 在严格模式下是 `undefined`.
-若给 `setTimeout()` 提供了一个箭头函数, 则 `this` 会保留为定义它时所在的词汇作用域.
+```ts
+const textEncoder = new TextEncoder();
+const fooArr = new Uint8Array(3);
+const fooResult = textEncoder.encodeInto('foo', fooArr);
+console.log(fooArr); // Uint8Array(3) [102, 111, 111]
+console.log(fooResult); // { read: 3, written: 3 }
+```
+
+```ts
+async function* chars() {
+  const decodedText = 'foo';
+  for (const char of decodedText) {
+    yield await new Promise(resolve => setTimeout(resolve, 1000, char));
+  }
+}
+
+const decodedTextStream = new ReadableStream({
+  async start(controller) {
+    for await (const chunk of chars()) {
+      controller.enqueue(chunk);
+    }
+
+    controller.close();
+  },
+});
+
+const encodedTextStream = decodedTextStream.pipeThrough(
+  new TextEncoderStream()
+);
+
+const readableStreamDefaultReader = encodedTextStream.getReader();
+
+while (true) {
+  const { done, value } = await readableStreamDefaultReader.read();
+
+  if (done) {
+    break;
+  } else {
+    console.log(value);
+  }
+}
+// Uint8Array[102]
+// Uint8Array[111]
+// Uint8Array[111]
+```
+
+[TextDecoder API](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder):
+
+```ts
+const textDecoder = new TextDecoder();
+// f 的 UTF-8 编码是 0x66（即十进制 102）
+// o 的 UTF-8 编码是 0x6F（即二进制 111）
+const encodedText = Uint8Array.of(102, 111, 111);
+const decodedText = textDecoder.decode(encodedText);
+console.log(decodedText); // foo
+```
+
+```ts
+const response = await fetch(url);
+const stream = response.body.pipeThrough(new TextDecoderStream());
+const decodedStream = stream.getReader();
+
+for await (const decodedChunk of decodedStream) {
+  console.log(decodedChunk);
+}
+```
 
 ### Internationalization
 
