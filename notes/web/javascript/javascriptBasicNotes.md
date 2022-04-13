@@ -3949,6 +3949,10 @@ const asyncSource = {
   },
 };
 
+for await (const chunk of asyncSource) {
+  console.log(chunk);
+}
+
 async function* remotePostsAsyncGenerator() {
   let i = 1;
 
@@ -3966,6 +3970,10 @@ async function* remotePostsAsyncGenerator() {
 
     yield res;
   }
+}
+
+for await (const chunk of remotePostsAsyncGenerator()) {
+  console.log(chunk);
 }
 ```
 
@@ -3987,9 +3995,13 @@ async function* getRemoteData() {
     // Return 5 elements with each iteration.
     yield* chunkify(results, 5);
 
-    hasMore = next_page != null;
+    hasMore = next_page !== null;
     page = next_page;
   }
+}
+
+for await (const chunk of getRemoteData()) {
+  console.log(chunk);
 }
 ```
 
