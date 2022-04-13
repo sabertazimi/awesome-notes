@@ -1658,10 +1658,6 @@ function myHandler(e) {
 
 ### DOM Rect
 
-`getBoundingClientRect`:
-
-[![Client Rect](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect/element-box-diagram.png)](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
-
 #### DOM Width and Height
 
 - outerHeight: 整个浏览器窗口的大小, 包括窗口标题/工具栏/状态栏等.
@@ -1669,6 +1665,8 @@ function myHandler(e) {
 - offsetHeight: 整个可视区域大小, 包括 border 和 scrollbar 在内 (content + padding + border).
 - clientHeight: 内部可视区域大小 (content + padding).
 - scrollHeight: 元素内容的高度, 包括溢出部分.
+
+![Client Size](./figures/ClientSize.png)
 
 ```ts
 // const supportInnerWidth = window.innerWidth !== undefined;
@@ -1699,10 +1697,9 @@ the offsetWidth and offsetHeight returns the layout width and height (all the sa
 while getBoundingClientRect() returns the rendering width and height.
 :::
 
-#### DOM Left and Top
+`getBoundingClientRect`:
 
-- offsetLeft/offsetTop: 表示该元素的左上角 (边框外边缘) 与已定位的父容器 (offsetParent 对象) 左上角的距离.
-- scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素位置.
+[![Client Rect](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect/element-box-diagram.png)](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
 
 ```ts
 const isElementInViewport = el => {
@@ -1720,6 +1717,39 @@ const isElementInViewport = el => {
 };
 ```
 
+#### DOM Left and Top
+
+- offsetLeft/offsetTop: 表示该元素的左上角 (边框外边缘) 与已定位的父容器 (offsetParent 对象) 左上角的距离.
+- scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素位置.
+
+![Offset Size](./figures/OffsetSize.png)
+
+```ts
+function getElementLeft(element) {
+  let actualLeft = element.offsetLeft;
+  let current = element.offsetParent;
+
+  while (current !== null) {
+    actualLeft += current.offsetLeft;
+    current = current.offsetParent;
+  }
+
+  return actualLeft;
+}
+
+function getElementTop(element) {
+  let actualTop = element.offsetTop;
+  let current = element.offsetParent;
+
+  while (current !== null) {
+    actualTop += current.offsetTop;
+    current = current.offsetParent;
+  }
+
+  return actualTop;
+}
+```
+
 ```ts
 // 把窗口移动到左上角
 window.moveTo(0, 0);
@@ -1735,6 +1765,8 @@ window.moveBy(-50, 0);
 
 - scrollLeft/scrollX/PageXOffset: 元素内容向右滚动了多少像素, 如果没有滚动则为 0.
 - scrollTop/scrollY/pageYOffset: 元素内容向上滚动了多少像素, 如果没有滚动则为 0.
+
+![Scroll Size](./figures/ScrollSize.png)
 
 ```ts
 // const supportPageOffset = window.pageXOffset !== undefined;
