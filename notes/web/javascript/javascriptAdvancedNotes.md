@@ -170,7 +170,7 @@ window.addEventListener(
 | battery                   | BatteryManager (Battery Status API)               |
 | clipboard                 | Clipboard API                                     |
 | connection                | NetworkInformation (Network Information API)      |
-| cookieEnabled             | 布尔值, 是否启用了 cookie                         |
+| cookieEnabled             | Boolean, 是否启用了 cookie                        |
 | credentials               | CredentialsContainer (Credentials Management API) |
 | deviceMemory              | 单位为 GB 的设备内存容量                          |
 | doNotTrack                | 用户的`不跟踪` (`do-not-track`) 设置              |
@@ -182,8 +182,8 @@ window.addEventListener(
 | mediaCapabilities         | MediaCapabilities (Media Capabilities API)        |
 | mediaDevices              | 可用的媒体设备                                    |
 | maxTouchPoints            | 设备触摸屏支持的最大触点数                        |
-| onLine                    | 布尔值, 表示浏览器是否联网                        |
-| pdfViewerEnabled          | 布尔值, 是否启用了 PDF 功能                       |
+| onLine                    | Boolean, 表示浏览器是否联网                       |
+| pdfViewerEnabled          | Boolean, 是否启用了 PDF 功能                      |
 | permissions               | Permissions (Permissions API)                     |
 | serviceWorker             | ServiceWorkerContainer                            |
 | storage                   | StorageManager (Storage API)                      |
@@ -1370,7 +1370,7 @@ function addClassPolyfill(element, value) {
 
 以下是 CSSStyleSheet 从 StyleSheet 继承的属性:
 
-- disabled: 布尔值，表示样式表是否被禁用了 (设置为 true 会禁用样式表).
+- disabled: Boolean, 表示样式表是否被禁用了 (设置为 true 会禁用样式表).
 - href: `<link>` URL/null.
 - media: 样式表支持的媒体类型集合.
 - ownerNode: 指向拥有当前样式表的节点 `<link>`/`<style>`/null (`@import`).
@@ -1501,6 +1501,23 @@ console.log(myStylesheet.cssRules.length); // 7
 - `element.dispatchEvent(event)` to trigger events.
 - Default `bubble` mode, can change to `capture` mode.
 
+#### Events Object
+
+| Property/Method            | Type         |                                |
+| -------------------------- | ------------ | ------------------------------ |
+| type                       | String       | 被触发的事件类型               |
+| trusted                    | Boolean      | 浏览器生成/JavaScript 创建     |
+| View                       | AbstractView | 事件所发生的 window 对象       |
+| currentTarget              | Element      | Event handler binding          |
+| target                     | Element      | Event truly target             |
+| bubbles                    | Boolean      | 事件是否冒泡                   |
+| eventPhase                 | Number       | 捕获阶段/到达目标/冒泡阶段     |
+| cancelable                 | Boolean      | 是否可以取消事件的默认行为     |
+| defaultPrevented           | Boolean      | `preventDefault()` called      |
+| preventDefault()           | Function     | 用于取消事件的默认行为         |
+| stopPropagation()          | Function     | 用于取消所有后续事件捕获或冒泡 |
+| stopImmediatePropagation() | Function     | 用于取消所有后续事件捕获或冒泡 |
+
 #### Events Checking
 
 ```ts
@@ -1510,20 +1527,20 @@ function handleEvent(event) {
 }
 ```
 
-#### Global DOM Event
+#### Global DOM Events
 
-DOMContentLoaded:
+`DOMContentLoaded` event:
 
-- 当文档中没有脚本时, 浏览器解析完文档便能触发 DOMContentLoaded 事件
+- 当文档中没有脚本时, 浏览器解析完文档便能触发 DOMContentLoaded 事件.
 - 如果文档中包含脚本, 则脚本会阻塞文档的解析,
-  而脚本需要等 CSSOM 构建完成才能执行
-  - 在 DOM/CSSOM 构建完毕, `defer` 脚本执行完成之后, DOMContentLoaded 事件触发
+  而脚本需要等 CSSOM 构建完成才能执行:
+  - 在 DOM/CSSOM 构建完毕, `defer` 脚本执行完成之后, DOMContentLoaded 事件触发.
   - HTML 文档构建不受 `async` 脚本影响,
     不需要等待 async 脚本执行与样式表加载,
-    HTML 解析完毕后, DOMContentLoaded 立即触发
-- 在任何情况下, DOMContentLoaded 的触发不需要等待图片等其他资源加载完成
+    HTML 解析完毕后, DOMContentLoaded 立即触发.
+- 在任何情况下, DOMContentLoaded 的触发不需要等待图片等其他资源加载完成.
 - 当 HTML 文档解析完成就会触发 DOMContentLoaded,
-  而所有资源加载完成之后, **load** 事件才会被触发
+  而所有资源加载完成之后, **load** 事件才会被触发.
 
 ```ts
 document.addEventListener('DOMContentLoaded', event => {
@@ -1531,9 +1548,7 @@ document.addEventListener('DOMContentLoaded', event => {
 });
 ```
 
-#### Tab Visibility Event
-
-- 切换标签页时改变网页标题/声音/视频
+`visibilitychange` event, 切换标签页时改变网页标题/声音/视频:
 
 ```ts
 window.addEventListener('visibilitychange', () => {
@@ -1664,9 +1679,16 @@ console.log(document.hasFocus()); // true
 
 #### Mouse Events
 
-- `onclick`.
-- `ondbclick`.
-- `onmousedown/move/enter/out/leave/over`.
+- `click` event.
+- `dbclick` event.
+- `mousedown` event.
+- `mousemove` event.
+- `mouseenter` event.
+- `mouseleave` event:
+  pointer has exited the element and all of its descendants.
+- `mouseout` event:
+  pointer leaves the element or leaves one of the element's descendants.
+- `mouseover` event.
 
 For click event, no need for X/Y to judge internal/outside state.
 Use DOM API `element.contains` to check is a better way.
@@ -1708,7 +1730,7 @@ noContext.addEventListener('contextmenu', e => {
 
 #### Key Events
 
-`onkeypress/up/down`
+`keypress`/`keyup`/`keydown` event:
 
 ```ts
 document.onkeydown = function (event) {
@@ -1721,7 +1743,7 @@ document.onkeydown = function (event) {
 };
 ```
 
-- event.key => [keyName](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)
+`event.key` [keyName](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values):
 
 ```ts
 'Alt';
@@ -1749,11 +1771,11 @@ document.onkeydown = function (event) {
 'Undo';
 ```
 
-#### Clipboard Event
+#### Clipboard Events
 
-- copy
-- cut
-- paste
+- `copy` event.
+- `cut` event.
+- `paste` event.
 
 ```ts
 const source = document.querySelector('div.source');
@@ -1770,43 +1792,54 @@ source.addEventListener('copy', event => {
 
 #### Frame Events
 
-- onresize.
-- onload.
-- onscroll.
-- onerror.
+- `resize` event.
+- `load` event.
+- `scroll` event.
+- `error` event.
 
-#### User-Defined Handler
+#### Events Util
 
 ```ts
-function myHandler(e) {
-  // get event and source element
-  const e = e || window.event;
-  const src = e.target || e.srcElement;
-
-  // 事件授权
-  if (src.nodeName.toLowerCase() !== 'button') {
-    return;
-  }
-
-  // actual work: update label
-  parts = src.innerHTML.split(': ');
-  parts[1] = parseInt(parts[1], 10) + 1;
-  src.innerHTML = `${parts[0]}: ${parts[1]}`;
-  // no bubble
-  if (typeof e.stopPropagation === 'function') {
-    e.stopPropagation();
-  }
-  if (typeof e.cancelBubble !== 'undefined') {
-    e.cancelBubble = true;
-  }
-  // prevent default action
-  if (typeof e.preventDefault === 'function') {
-    e.preventDefault();
-  }
-  if (typeof e.returnValue !== 'undefined') {
-    e.returnValue = false;
-  }
-}
+const EventUtil = {
+  getEvent(event) {
+    return event || window.event;
+  },
+  getTarget(event) {
+    return event.target || event.srcElement;
+  },
+  preventDefault(event) {
+    if (event.preventDefault) {
+      event.preventDefault();
+    } else {
+      event.returnValue = false;
+    }
+  },
+  stopPropagation(event) {
+    if (event.stopPropagation) {
+      event.stopPropagation();
+    } else {
+      event.cancelBubble = true;
+    }
+  },
+  addHandler(element, type, handler) {
+    if (element.addEventListener) {
+      element.addEventListener(type, handler, false);
+    } else if (element.attachEvent) {
+      element.attachEvent(`on${type}`, handler);
+    } else {
+      element[`on${type}`] = handler;
+    }
+  },
+  removeHandler(element, type, handler) {
+    if (element.removeEventListener) {
+      element.removeEventListener(type, handler, false);
+    } else if (element.detachEvent) {
+      element.detachEvent(`on${type}`, handler);
+    } else {
+      element[`on${type}`] = null;
+    }
+  },
+};
 ```
 
 ### DOM Rect
@@ -2078,7 +2111,7 @@ observer.observe(document.body, { childList: true });
 
 // 交换子节点顺序
 document.body.insertBefore(document.body.lastChild, document.body.firstChild);
-// 发生了两次变化：第一次是节点被移除，第二次是节点被添加
+// 发生了两次变化：第一次是节点被移除, 第二次是节点被添加
 // [
 //   {
 //     addedNodes: NodeList[],
