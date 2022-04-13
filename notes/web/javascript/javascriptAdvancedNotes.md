@@ -7168,12 +7168,14 @@ function App() {
 
 ### JSON
 
+JSON (JavaScript Object Notation) methods:
+
 ```ts
 const obj = JSON.parse(json);
 const json = JSON.stringify(obj);
 ```
 
-`JSON.stringify`:
+`JSON.stringify(value, filter, space)`:
 
 - `Symbol`/`function`/`NaN`/`Infinity`/`undefined`: `null`/ignored.
 - `BitInt`: throw `TypeError`.
