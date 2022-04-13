@@ -3503,179 +3503,6 @@ setTimeout(function () {
 }, 1000);
 ```
 
-### Common Function Utils
-
-#### Math Function
-
-- `Math.max`.
-- `Math.min()`.
-- `Math.ceil()`: 向上舍入为最接近的整数.
-- `Math.floor()`: 向下舍入为最接近的整数.
-- `Math.round()`: 四舍五入.
-- `Math.fround()`: 返回数值最接近的单精度 (32 位) 浮点值表示.
-- `Math.abs(x)`: 返回 x 的绝对值.
-- `Math.exp(x)`: 返回 `Math.E` 的 x 次幂.
-- `Math.expm1(x)`: 等于 `Math.exp(x) - 1`.
-- `Math.log(x)`: 返回 x 的自然对数.
-- `Math.log1p(x)`: 等于 `1 + Math.log(x)`.
-- `Math.pow(x, power)`: 返回 x 的 power 次幂.
-- `Math.hypot(...nums)`: 返回 nums 中每个数平方和的平方根.
-- `Math.clz32(x)`: 返回 32 位整数 x 的前置零的数量.
-- `Math.sign(x)`: 返回表示 x 符号的 `1`/`0`/`-0`/`-1`.
-- `Math.trunc(x)`: 返回 x 的整数部分, 删除所有小数.
-- `Math.sqrt(x)`: 返回 x 的平方根.
-- `Math.cbrt(x)`: 返回 x 的立方根.
-- `Math.acos(x)`: 返回 x 的反余弦.
-- `Math.acosh(x)`: 返回 x 的反双曲余弦.
-- `Math.asin(x)`: 返回 x 的反正弦.
-- `Math.asinh(x)`: 返回 x 的反双曲正弦.
-- `Math.atan(x)`: 返回 x 的反正切.
-- `Math.atanh(x)`: 返回 x 的反双曲正切.
-- `Math.atan2(y, x)`: 返回 `y/x` 的反正切.
-- `Math.cos(x)`: 返回 x 的余弦.
-- `Math.sin(x)`: 返回 x 的正弦.
-- `Math.tan(x)`: 返回 x 的正切.
-
-```ts
-const epsilon = Math.E;
-const log10 = Math.LN10;
-const log2 = Math.LN2;
-const log2e = Math.LOG2E;
-const log10e = Math.LOG10E;
-const pi = Math.PI;
-const squareRoot = Math.SQRT1_2;
-const squareRoot2 = Math.SQRT2;
-
-Math.abs(num);
-Math.exp(num);
-Math.log(num);
-Math.pow(num, power);
-Math.sqrt(num);
-Math.acos(x);
-Math.asin(x);
-Math.atan(x);
-Math.atan2(y, x);
-Math.cos(x);
-Math.sin(x);
-Math.tan(x);
-```
-
-```ts
-console.log(Math.max(3, 54, 32, 16)); // 54
-console.log(Math.min(3, 54, 32, 16)); // 3
-console.log(Math.ceil(25.9)); // 26
-console.log(Math.ceil(25.5)); // 26
-console.log(Math.ceil(25.1)); // 26
-console.log(Math.round(25.9)); // 26
-console.log(Math.round(25.5)); // 26
-console.log(Math.round(25.1)); // 25
-console.log(Math.fround(0.4)); // 0.4000000059604645
-console.log(Math.fround(0.5)); // 0.5
-console.log(Math.fround(25.9)); // 25.899999618530273
-console.log(Math.floor(25.9)); // 25
-console.log(Math.floor(25.5)); // 25
-console.log(Math.floor(25.1)); // 25
-```
-
-#### URI and URL Function
-
-- `encodeURI()`: 不会编码属于 URL 组件的特殊字符, 比如冒号/斜杠/问号.
-- `encodeURIComponent()`: 编码它发现的所有非标准字符.
-
-```ts
-const uri = 'http://www.wrox.com/illegal value.js#start';
-// "http://www.wrox.com/illegal%20value.js#start"
-console.log(encodeURI(uri));
-// "http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.js%23start"
-console.log(encodeURIComponent(uri));
-```
-
-```ts
-const uri = 'http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.js%23start';
-// http%3A%2F%2Fwww.wrox.com%2Fillegal value.js%23start
-console.log(decodeURI(uri));
-// http:// www.wrox.com/illegal value.js#start
-console.log(decodeURIComponent(uri));
-```
-
-[URL](https://developer.mozilla.org/en-US/docs/Web/API/URL):
-
-- `hash`.
-- `host`.
-- `hostname`.
-- `href`.
-- `pathname`.
-- `port`.
-- `protocol`.
-- `search`: [USVString](https://developer.mozilla.org/en-US/docs/Web/API/USVString).
-- `searchParams`: URL search map.
-- `username`.
-- `password`.
-- `origin`: read only.
-
-```ts
-// index.mjs
-import './index2.mjs?someURLInfo=5';
-
-// index2.mjs
-new URL(import.meta.url).searchParams.get('someURLInfo'); // 5
-```
-
-```ts
-const blob = new Blob(['export const itsAModule = true'], {
-  type: 'text/javascript',
-});
-
-const blobUrl = URL.createObjectURL(blob);
-```
-
-[URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams):
-
-```ts
-// window.location.search
-const qs = '?q=javascript&num=10';
-const searchParams = new URLSearchParams(qs);
-
-for (const param of searchParams) {
-  console.log(param);
-}
-// ["q", "javascript"]
-// ["num", "10"]
-
-alert(searchParams.toString()); // " q=javascript&num=10"
-searchParams.has('num'); // true
-searchParams.get('num'); // 10
-searchParams.set('page', '3');
-alert(searchParams.toString()); // " q=javascript&num=10&page=3"
-searchParams.delete('q');
-alert(searchParams.toString()); // " num=10&page=3"
-```
-
-#### Timer Function
-
-Combine `setInterval`/`setTimeout` function with closure function,
-implement **time slicing scheduler**.
-
-```ts
-function processArray(items, process, done) {
-  const todo = items.slice();
-
-  setTimeout(function task() {
-    process(todo.shift());
-
-    if (todo.length > 0) {
-      setTimeout(task, 25);
-    } else {
-      done(items);
-    }
-  }, 25);
-}
-```
-
-所有超时执行的代码 (函数) 都会在全局作用域中的一个匿名函数中运行,
-因此函数中的 `this` 值在非严格模式下始终指向 `window`, 在严格模式下是 `undefined`.
-若给 `setTimeout()` 提供了一个箭头函数, 则 `this` 会保留为定义它时所在的词汇作用域.
-
 ## Iterator
 
 - 一个数据结构只要实现了 `[Symbol.iterator]()` 接口, 便可成为可迭代数据结构 (`Iterable`):
@@ -6586,9 +6413,188 @@ if (!String.prototype.trim) {
 
 `/(?<=\|\w+) /g`: second place to insert `|`.
 
-## Internationalization
+## JavaScript API
 
-### Number i18n
+### Math
+
+- `Math.max`.
+- `Math.min()`.
+- `Math.ceil()`: 向上舍入为最接近的整数.
+- `Math.floor()`: 向下舍入为最接近的整数.
+- `Math.round()`: 四舍五入.
+- `Math.fround()`: 返回数值最接近的单精度 (32 位) 浮点值表示.
+- `Math.abs(x)`: 返回 x 的绝对值.
+- `Math.exp(x)`: 返回 `Math.E` 的 x 次幂.
+- `Math.expm1(x)`: 等于 `Math.exp(x) - 1`.
+- `Math.log(x)`: 返回 x 的自然对数.
+- `Math.log1p(x)`: 等于 `1 + Math.log(x)`.
+- `Math.pow(x, power)`: 返回 x 的 power 次幂.
+- `Math.hypot(...nums)`: 返回 nums 中每个数平方和的平方根.
+- `Math.clz32(x)`: 返回 32 位整数 x 的前置零的数量.
+- `Math.sign(x)`: 返回表示 x 符号的 `1`/`0`/`-0`/`-1`.
+- `Math.trunc(x)`: 返回 x 的整数部分, 删除所有小数.
+- `Math.sqrt(x)`: 返回 x 的平方根.
+- `Math.cbrt(x)`: 返回 x 的立方根.
+- `Math.acos(x)`: 返回 x 的反余弦.
+- `Math.acosh(x)`: 返回 x 的反双曲余弦.
+- `Math.asin(x)`: 返回 x 的反正弦.
+- `Math.asinh(x)`: 返回 x 的反双曲正弦.
+- `Math.atan(x)`: 返回 x 的反正切.
+- `Math.atanh(x)`: 返回 x 的反双曲正切.
+- `Math.atan2(y, x)`: 返回 `y/x` 的反正切.
+- `Math.cos(x)`: 返回 x 的余弦.
+- `Math.sin(x)`: 返回 x 的正弦.
+- `Math.tan(x)`: 返回 x 的正切.
+
+```ts
+const epsilon = Math.E;
+const log10 = Math.LN10;
+const log2 = Math.LN2;
+const log2e = Math.LOG2E;
+const log10e = Math.LOG10E;
+const pi = Math.PI;
+const squareRoot = Math.SQRT1_2;
+const squareRoot2 = Math.SQRT2;
+
+Math.abs(num);
+Math.exp(num);
+Math.log(num);
+Math.pow(num, power);
+Math.sqrt(num);
+Math.acos(x);
+Math.asin(x);
+Math.atan(x);
+Math.atan2(y, x);
+Math.cos(x);
+Math.sin(x);
+Math.tan(x);
+```
+
+```ts
+console.log(Math.max(3, 54, 32, 16)); // 54
+console.log(Math.min(3, 54, 32, 16)); // 3
+console.log(Math.ceil(25.9)); // 26
+console.log(Math.ceil(25.5)); // 26
+console.log(Math.ceil(25.1)); // 26
+console.log(Math.round(25.9)); // 26
+console.log(Math.round(25.5)); // 26
+console.log(Math.round(25.1)); // 25
+console.log(Math.fround(0.4)); // 0.4000000059604645
+console.log(Math.fround(0.5)); // 0.5
+console.log(Math.fround(25.9)); // 25.899999618530273
+console.log(Math.floor(25.9)); // 25
+console.log(Math.floor(25.5)); // 25
+console.log(Math.floor(25.1)); // 25
+```
+
+### URI and URL
+
+- `encodeURI()`: 不会编码属于 URL 组件的特殊字符, 比如冒号/斜杠/问号.
+- `encodeURIComponent()`: 编码它发现的所有非标准字符.
+
+```ts
+const uri = 'http://www.wrox.com/illegal value.js#start';
+// "http://www.wrox.com/illegal%20value.js#start"
+console.log(encodeURI(uri));
+// "http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.js%23start"
+console.log(encodeURIComponent(uri));
+```
+
+```ts
+const uri = 'http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.js%23start';
+// http%3A%2F%2Fwww.wrox.com%2Fillegal value.js%23start
+console.log(decodeURI(uri));
+// http:// www.wrox.com/illegal value.js#start
+console.log(decodeURIComponent(uri));
+```
+
+[URL](https://developer.mozilla.org/en-US/docs/Web/API/URL):
+
+- `hash`.
+- `host`.
+- `hostname`.
+- `href`.
+- `pathname`.
+- `port`.
+- `protocol`.
+- `search`: [USVString](https://developer.mozilla.org/en-US/docs/Web/API/USVString).
+- `searchParams`: URL search map.
+- `username`.
+- `password`.
+- `origin`: read only.
+
+```ts
+// index.mjs
+import './index2.mjs?someURLInfo=5';
+
+// index2.mjs
+new URL(import.meta.url).searchParams.get('someURLInfo'); // 5
+```
+
+```ts
+const blob = new Blob(['export const itsAModule = true'], {
+  type: 'text/javascript',
+});
+
+const blobUrl = URL.createObjectURL(blob);
+```
+
+[URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams):
+
+```ts
+// window.location.search
+const qs = '?q=javascript&num=10';
+const searchParams = new URLSearchParams(qs);
+
+for (const param of searchParams) {
+  console.log(param);
+}
+// ["q", "javascript"]
+// ["num", "10"]
+
+alert(searchParams.toString()); // " q=javascript&num=10"
+searchParams.has('num'); // true
+searchParams.get('num'); // 10
+searchParams.set('page', '3');
+alert(searchParams.toString()); // " q=javascript&num=10&page=3"
+searchParams.delete('q');
+alert(searchParams.toString()); // " num=10&page=3"
+```
+
+### Timer
+
+- setTimeout.
+- setImmediate.
+- setInterval.
+- requestAnimationFrame.
+- requestIdleCallback.
+
+Combine `setInterval`/`setTimeout` function with closure function,
+implement **time slicing scheduler**.
+
+```ts
+function processArray(items, process, done) {
+  const todo = items.slice();
+
+  setTimeout(function task() {
+    process(todo.shift());
+
+    if (todo.length > 0) {
+      setTimeout(task, 25);
+    } else {
+      done(items);
+    }
+  }, 25);
+}
+```
+
+所有超时执行的代码 (函数) 都会在全局作用域中的一个匿名函数中运行,
+因此函数中的 `this` 值在非严格模式下始终指向 `window`, 在严格模式下是 `undefined`.
+若给 `setTimeout()` 提供了一个箭头函数, 则 `this` 会保留为定义它时所在的词汇作用域.
+
+### Internationalization
+
+#### Number i18n
 
 ```ts
 const nfFrench = new Intl.NumberFormat('fr');
@@ -6596,7 +6602,7 @@ nf.format(12345678901234567890n);
 // => 12 345 678 901 234 567 890
 ```
 
-### String i18n
+#### String i18n
 
 ```ts
 const lfEnglish = new Intl.ListFormat('en');
@@ -6624,7 +6630,7 @@ console.log(formatter3.format(vehicles));
 // expected output: "Motorcycle Bus Car"
 ```
 
-### Time i18n
+#### Time i18n
 
 ```ts
 const rtfEnglish = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
