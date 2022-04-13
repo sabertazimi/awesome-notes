@@ -1062,6 +1062,94 @@ div.removeAttribute('id');
 div.removeAttribute('class');
 ```
 
+#### Select DOM Node
+
+[Range API](https://developer.mozilla.org/en-US/docs/Web/API/Range):
+
+- `startContainer`: 范围起点所在的节点 (选区中第一个子节点的父节点).
+- `startOffset`: 范围起点在 startContainer 中的偏移量.
+- `endContainer`: 范围终点所在的节点 (选区中最后一个子节点的父节点).
+- `endOffset`: 范围起点在 startContainer 中的偏移量.
+- `commonAncestorContainer`:
+  文档中以 `startContainer` 和 `endContainer` 为后代的最深的节点.
+- `setStartBefore(refNode)`:
+  把范围的起点设置到 refNode 之前,
+  从而让 refNode 成为选区的第一个子节点.
+- `setStartAfter(refNode)`:
+  把范围的起点设置到 refNode 之后,
+  从而将 refNode 排除在选区之外,
+  让其下一个同胞节点成为选区的第一个子节点.
+- `setEndBefore(refNode)`:
+  把范围的终点设置到 refNode 之前,
+  从而将 refNode 排除在选区之外,
+  让其上一个同胞节点成为选区的最后一个子节点.
+- `setEndAfter(refNode)`:
+  把范围的终点设置到 refNode 之后,
+  从而让 refNode 成为选区的最后一个子节点.
+- `setStart(refNode, offset)`.
+- `setEnd(refNode, offset)`.
+- `deleteContents()`: remove.
+- `extractContents()`: remove and return.
+- `cloneContents()`: clone.
+- `insertNode(node)`: 在范围选区的开始位置插入一个节点.
+- `surroundContents(node)`: 插入包含范围的内容.
+- `collapse(boolean)`: 范围折叠.
+- `compareBoundaryPoints(Range.HOW, sourceRange)`: 确定范围之间是否存在公共的边界 (起点或终点).
+
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <p id="p1"><b>Hello</b> world!</p>
+  </body>
+</html>
+```
+
+```ts
+const p1 = document.getElementById('p1');
+const helloNode = p1.firstChild.firstChild;
+const worldNode = p1.lastChild;
+const range = document.createRange();
+
+range.setStart(helloNode, 2);
+range.setEnd(worldNode, 3);
+const fragment1 = range.cloneContents(); // clone
+const fragment2 = range.extractContents(); // remove and return
+
+p1.parentNode.appendChild(fragment1);
+p1.parentNode.appendChild(fragment2);
+```
+
+```ts
+const p1 = document.getElementById('p1');
+const helloNode = p1.firstChild.firstChild;
+const worldNode = p1.lastChild;
+const range = document.createRange();
+
+const span = document.createElement('span');
+span.style.color = 'red';
+span.appendChild(document.createTextNode('Inserted text'));
+
+range.setStart(helloNode, 2);
+range.setEnd(worldNode, 3);
+range.insertNode(span);
+// <p id="p1"><b>He<span style="color: red">Inserted text</span>llo</b> world</p>
+```
+
+```ts
+const p1 = document.getElementById('p1');
+const helloNode = p1.firstChild.firstChild;
+const worldNode = p1.lastChild;
+const range = document.createRange();
+
+const span = document.createElement('span');
+span.style.backgroundColor = 'yellow';
+
+range.selectNode(helloNode);
+range.surroundContents(span);
+// <p><b><span style="background-color:yellow">Hello</span></b> world!</p>
+```
+
 #### Dynamic Scripts Loading
 
 ```ts
