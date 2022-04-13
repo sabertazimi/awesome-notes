@@ -6404,11 +6404,11 @@ onmessage = function (event) {
 
 ### Canvas Reference
 
-- [Canvas on MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API)
-- [Canvas Cheat Sheet](https://simon.html5.org/dump/html5-canvas-cheat-sheet.html)
-- [Canvas Perf Tips 1](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
-- [Canvas Perf Tips 2](https://www.html5rocks.com/en/tutorials/canvas/performance)
-- [Canvas Deep Live](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
+- [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
+- [Canvas Tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)
+- [Canvas Deep Dive](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
+- [Canvas Cheat Sheet](https://devhints.io/canvas)
+- [Canvas Performance](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
 - [Canvas Real World Case](https://zhuanlan.zhihu.com/p/438142235)
 
 ## Web Audio
