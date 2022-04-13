@@ -6558,18 +6558,18 @@ Atomics.compareExchange(dataView, index, expect, 6);
 - `encodeURIComponent()`: 编码它发现的所有非标准字符.
 
 ```ts
-const uri = 'http://www.wrox.com/illegal value.js#start';
-// "http://www.wrox.com/illegal%20value.js#start"
+const uri = 'http://www.foo.com/illegal value.js#start';
+// "http://www.foo.com/illegal%20value.js#start"
 console.log(encodeURI(uri));
-// "http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.js%23start"
+// "http%3A%2F%2Fwww.foo.com%2Fillegal%20value.js%23start"
 console.log(encodeURIComponent(uri));
 ```
 
 ```ts
-const uri = 'http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.js%23start';
-// http%3A%2F%2Fwww.wrox.com%2Fillegal value.js%23start
+const uri = 'http%3A%2F%2Fwww.foo.com%2Fillegal%20value.js%23start';
+// http%3A%2F%2Fwww.foo.com%2Fillegal value.js%23start
 console.log(decodeURI(uri));
-// http:// www.wrox.com/illegal value.js#start
+// http:// www.foo.com/illegal value.js#start
 console.log(decodeURIComponent(uri));
 ```
 

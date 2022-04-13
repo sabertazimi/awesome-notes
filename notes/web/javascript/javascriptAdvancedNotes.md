@@ -1923,14 +1923,16 @@ if (document.implementation.hasFeature('CustomEvents', '3.0')) {
 #### Events Util
 
 ```ts
-const EventUtil = {
-  getEvent(event) {
+class EventUtil {
+  static getEvent(event) {
     return event || window.event;
-  },
-  getTarget(event) {
+  }
+
+  static getTarget(event) {
     return event.target || event.srcElement;
-  },
-  getRelatedTarget(event) {
+  }
+
+  static getRelatedTarget(event) {
     // For `mouseover` and `mouseout` event:
     if (event.relatedTarget) {
       return event.relatedTarget;
@@ -1941,22 +1943,25 @@ const EventUtil = {
     } else {
       return null;
     }
-  },
-  preventDefault(event) {
+  }
+
+  static preventDefault(event) {
     if (event.preventDefault) {
       event.preventDefault();
     } else {
       event.returnValue = false;
     }
-  },
-  stopPropagation(event) {
+  }
+
+  static stopPropagation(event) {
     if (event.stopPropagation) {
       event.stopPropagation();
     } else {
       event.cancelBubble = true;
     }
-  },
-  addHandler(element, type, handler) {
+  }
+
+  static addHandler(element, type, handler) {
     if (element.addEventListener) {
       element.addEventListener(type, handler, false);
     } else if (element.attachEvent) {
@@ -1964,8 +1969,9 @@ const EventUtil = {
     } else {
       element[`on${type}`] = handler;
     }
-  },
-  removeHandler(element, type, handler) {
+  }
+
+  static removeHandler(element, type, handler) {
     if (element.removeEventListener) {
       element.removeEventListener(type, handler, false);
     } else if (element.detachEvent) {
@@ -1973,8 +1979,8 @@ const EventUtil = {
     } else {
       element[`on${type}`] = null;
     }
-  },
-};
+  }
+}
 ```
 
 ### DOM Rect
@@ -6565,11 +6571,95 @@ draw();
 - Cache API for offline and quick file access.
 - JavaScript variables for everything else.
 
+### Cookie
+
+- `name=value`..
+- `expires=expiration_time`.
+- `path=domain_path`.
+- `domain=domain_name`.
+- `secure`.
+
+```bash
+HTTP/1.1 200 OK
+Content-type: text/html
+Set-Cookie: name=value; expires=Mon, 22-Jan-07 07:10:24 GMT; domain=.foo.com
+Other-header: other-header-value
+```
+
+```bash
+HTTP/1.1 200 OK
+Content-type: text/html
+Set-Cookie: name=value; domain=.foo.com; path=/; secure
+Other-header: other-header-value
+```
+
+```ts
+class CookieUtil {
+  static get(name) {
+    const cookieName = `${encodeURIComponent(name)}=`;
+    const cookieStart = document.cookie.indexOf(cookieName);
+    let cookieValue = null;
+
+    if (cookieStart > -1) {
+      let cookieEnd = document.cookie.indexOf(';', cookieStart);
+
+      if (cookieEnd === -1) {
+        cookieEnd = document.cookie.length;
+      }
+
+      cookieValue = decodeURIComponent(
+        document.cookie.substring(cookieStart + cookieName.length, cookieEnd)
+      );
+    }
+
+    return cookieValue;
+  }
+
+  static set(name, value, { expires, path, domain, secure }) {
+    let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
+
+    if (expires instanceof Date) {
+      cookieText += `; expires=${expires.toGMTString()}`;
+    }
+
+    if (path) {
+      cookieText += `; path=${path}`;
+    }
+
+    if (domain) {
+      cookieText += `; domain=${domain}`;
+    }
+
+    if (secure) {
+      cookieText += '; secure';
+    }
+
+    document.cookie = cookieText;
+  }
+
+  static unset(name, { path, domain, secure }) {
+    CookieUtil.set(name, '', new Date(0), path, domain, secure);
+  }
+}
+```
+
 ### Local Storage
 
-- 协同 cookies
+- 协同 Cookie.
 - 对于复杂对象的读取与存储,
-  需要借助 `JSON.parse` 与 `JSON.stringify`
+  需要借助 `JSON.parse` 与 `JSON.stringify`.
+- [`Storage` object](https://developer.mozilla.org/en-US/docs/Web/API/Storage):
+  - `Storage.length`.
+  - `Storage.key()`.
+  - `Storage.getItem()`.
+  - `Storage.setItem()`.
+  - `Storage.removeItem()`.
+  - `Storage.clear()`.
+- `storage` event: 每当 `Storage` 对象发生变化时, 都会在文档上触发 `storage` 事件.
+  - `event.domain`: 存储变化对应的域.
+  - `event.key`: 被设置或删除的键.
+  - `event.newValue`: 键被设置的新值, 若键被删除则为 null.
+  - `event.oldValue`: 键变化之前的值.
 
 ```ts
 if (!localStorage.getItem('bgColor')) {
@@ -6604,7 +6694,7 @@ function setStyles() {
 ### IndexDB
 
 ```ts
-export class IndexedDB {
+class IndexedDB {
   constructor(dbName, dbVersion, dbUpgrade) {
     return new Promise((resolve, reject) => {
       this.db = null;
@@ -6665,11 +6755,6 @@ export class IndexedDB {
     });
   }
 }
-```
-
-```ts
-// IndexedDB usage
-import { IndexedDB } from './indexedDB.js';
 
 export class State {
   static dbName = 'stateDB';
@@ -6728,6 +6813,27 @@ export class State {
     State.target.dispatchEvent(event);
   }
 }
+```
+
+```ts
+const store = db.transaction('users').objectStore('users');
+const index = store.createIndex('username', 'username', { unique: true });
+const range = IDBKeyRange.bound('007', 'ace');
+
+const request = store.openCursor(range, 'next');
+const request = index.openCursor(range, 'next');
+
+request.onsuccess = function (event) {
+  const cursor = event.target.result;
+
+  if (cursor) {
+    // 永远要检查
+    console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`);
+    cursor.continue(); // 移动到下一条记录
+  } else {
+    console.log('Done!');
+  }
+};
 ```
 
 ### Web Files
