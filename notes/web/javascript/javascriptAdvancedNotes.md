@@ -8147,6 +8147,12 @@ function getCanvasFingerprint() {
 getCanvasFingerprint();
 ```
 
+### Crypto
+
+- [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto)
+- 公钥加密私钥解密: 只有私钥拥有者可以获取信息.
+- 公钥验证私钥签名: 只有私钥拥有者可以发布签名.
+
 ## DevOps
 
 ### Static Assets
