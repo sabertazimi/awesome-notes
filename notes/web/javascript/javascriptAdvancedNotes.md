@@ -1612,9 +1612,9 @@ window.addEventListener('load', () => {
 
 #### Form Events
 
-- [CheckValidity API](https://developer.mozilla.org/docs/Web/API/HTMLSelectElement/checkValidity)
+- `submit`/`reset` event.
 - [FromData API](https://developer.mozilla.org/docs/Web/API/FormData)
-- [Forms Constraint Validation](https://www.sitepoint.com/html-forms-constraint-validation-complete-guide)
+- [CheckValidity API](https://developer.mozilla.org/docs/Web/API/HTMLSelectElement/checkValidity)
 
 ```ts
 // <form className='validated-form' noValidate onSubmit={onSubmit}>
@@ -1645,31 +1645,20 @@ const onSubmit = event => {
       acc[key] = formData.get(key);
       return acc;
     }, {});
-  }
-};
-```
-
-```ts
-function validateForm(e) {
-  const form = e.target;
-
-  if (form.checkValidity()) {
-    // form is valid - make further checks
   } else {
-    // form is invalid - cancel submit
-    e.preventDefault();
     // apply invalid class
     Array.from(form.elements).forEach(i => {
       if (i.checkValidity()) {
-        // field is valid - remove class
+        // field is valid
         i.parentElement.classList.remove('invalid');
       } else {
-        // field is invalid - add class
+        // field is invalid
         i.parentElement.classList.add('invalid');
+        console.log(i.validity);
       }
     });
   }
-}
+};
 ```
 
 ```ts
