@@ -809,6 +809,7 @@ tags: [Web, Framework, Library]
 - [Video.js](https://github.com/videojs/video.js)
 - [Plyr](https://github.com/selz/plyr)
 - [FLV.js](https://github.com/bilibili/flv.js)
+- [React Youtube Player](https://github.com/tjallingt/react-youtube)
 - [VDX: FFmpeg CLI](https://github.com/yuanqing/vdx)
 - [Remotion: Create Videos Programmatically in React](https://github.com/remotion-dev/remotion)
 - [Liqvid: React Interactive Video Library](https://github.com/liqvidjs/liqvid)
