@@ -5610,8 +5610,12 @@ export default {
   包括: iframes/浏览器中的不同 tab 页 (browsing context)
 - Web Workers 无法访问一些非常关键的 JavaScript 特性:
   DOM(它会造成线程不安全), window 对象, document 对象, parent 对象.
-- Use Case: Graphic App (Ray Tracing), Encryption, Prefetching Data,
-  PWA (Service Worker), Spell Checking
+- Use Case:
+  - Graphic App (Ray Tracing).
+  - Encryption.
+  - Prefetching Data.
+  - PWA (Service Worker).
+  - Spell Checking.
 
 ```html
 <button onclick="startComputation()">Start computation</button>
@@ -5667,46 +5671,7 @@ self.addEventListener(
 - `importScripts` 方法: 加载外部依赖.
 - `close` 方法: 停止 worker.
 
-#### Web Worker Loader
-
-```ts
-// 文件名为index.js
-function work() {
-  onmessage = ({ data: { jobId, message } }) => {
-    console.log(`i am worker, receive:-----${message}`);
-    postMessage({ jobId, result: 'message from worker' });
-  };
-}
-
-const makeWorker = f => {
-  const pendingJobs = {};
-
-  const worker = new Worker(
-    URL.createObjectURL(new Blob([`(${f.toString()})()`]))
-  );
-
-  worker.onmessage = ({ data: { result, jobId } }) => {
-    // 调用 resolve, 改变 Promise 状态
-    pendingJobs[jobId](result);
-    delete pendingJobs[jobId];
-  };
-
-  return (...message) =>
-    new Promise(resolve => {
-      const jobId = String(Math.random());
-      pendingJobs[jobId] = resolve;
-      worker.postMessage({ jobId, message });
-    });
-};
-
-const testWorker = makeWorker(work);
-
-testWorker('message from main thread').then(message => {
-  console.log(`i am main thread, i receive:-----${message}`);
-});
-```
-
-#### Web Worker Use Case
+#### Web Worker Usage
 
 - 先 `on`, 后 `post`.
 - `main.js`/`worker.js` 的 `onmessage` 与 `postMessage` 相互触发.
@@ -5737,6 +5702,43 @@ worker.onmessage = function (event) {
 };
 
 worker.postMessage(jsonText);
+```
+
+```ts
+// main.js
+function work() {
+  onmessage = ({ data: { jobId, message } }) => {
+    console.log(`I am worker, I receive:-----${message}`);
+    postMessage({ jobId, result: 'message from worker' });
+  };
+}
+
+const makeWorker = f => {
+  const pendingJobs = {};
+  const workerScriptBlobUrl = URL.createObjectURL(
+    new Blob([`(${f.toString()})()`])
+  );
+  const worker = new Worker(workerScriptBlobUrl);
+
+  worker.onmessage = ({ data: { result, jobId } }) => {
+    // 调用 resolve, 改变 Promise 状态
+    pendingJobs[jobId](result);
+    delete pendingJobs[jobId];
+  };
+
+  return (...message) =>
+    new Promise(resolve => {
+      const jobId = String(Math.random());
+      pendingJobs[jobId] = resolve;
+      worker.postMessage({ jobId, message });
+    });
+};
+
+const testWorker = makeWorker(work);
+
+testWorker('message from main thread').then(message => {
+  console.log(`I am main thread, I receive:-----${message}`);
+});
 ```
 
 #### Web Worker Performance
