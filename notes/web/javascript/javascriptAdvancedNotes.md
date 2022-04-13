@@ -1130,6 +1130,10 @@ It allows users to read and modify CSS style dynamically.
 #### Inline Styles
 
 ```ts
+interface Element {
+  style: CSSStyleDeclaration;
+}
+
 const style = element.style.XX;
 const font = element.style.fontFamily;
 const mt = element.style.marginTopWidth;
@@ -1137,11 +1141,13 @@ const mt = element.style.marginTopWidth;
 
 #### Styles Getter and Setter
 
-- getPropertyValue
-- setProperty
-- removeProperty
-- item
+- `cssText`: 一次生效.
+- `length`.
+- `getPropertyValue(name)`.
 - `getPropertyPriority`: return `''` or `important`
+- `item(index)`.
+- `setProperty(name, value, priority)`.
+- `removeProperty(name)`.
 
 ```ts
 const box = document.querySelector('.box');
@@ -1156,13 +1162,20 @@ box.style.item(0); // "font-size"
 
 document.body.style.removeProperty('font-size');
 document.body.style.item(0); // ""
+
+myDiv.style.cssText = 'width: 25px; height: 100px; background-color: green';
+
+for (let i = 0, len = myDiv.style.length; i < len; i++) {
+  console.log(myDiv.style[i]); // 或者用 myDiv.style.item(i)
+}
 ```
 
 #### Computed Styles
 
-- shorthand style for full property
-- longhand style for specific property
-- `getPropertyValue` can get css variables too
+- Shorthand style for full property.
+- Longhand style for specific property.
+- `getPropertyValue` can get css variables.
+- 在所有浏览器中计算样式都是**只读**的, 不能修改 `getComputedStyle()` 方法返回的对象.
 
 ```ts
 const background = window.getComputedStyle(document.body).background;
@@ -1202,12 +1215,31 @@ function addClassPolyfill(element, value) {
 
 #### DOM StyleSheets API
 
+以下是 CSSStyleSheet 从 StyleSheet 继承的属性:
+
+- disabled: 布尔值，表示样式表是否被禁用了 (设置为 true 会禁用样式表).
+- href: `<link>` URL/null.
+- media: 样式表支持的媒体类型集合.
+- ownerNode: 指向拥有当前样式表的节点 `<link>`/`<style>`/null (`@import`).
+- title: ownerNode 的 title 属性.
+- parentStyleSheet: `@import` parent.
+- type: 样式表的类型 (`'text/css'`).
+- cssRules: 当前样式表包含的样式规则的集合.
+- ownerRule: 如果样式表是使用 `@import` 导入的, 则指向导入规则.
+- `deleteRule(index)`: 在指定位置删除 cssRules 中的规则.
+- `insertRule(rule, index)`: 在指定位置向 cssRules 中插入规则.
+
 ##### CSS Rules Definition
 
-- type of `cssRules`:
-  STYLE_RULE (1), IMPORT_RULE (3), MEDIA_RULE (4), KEYFRAMES_RULE (7)
-- `selectorText` property of rules
-- `style` property of rules
+`CSSRule`:
+
+- type of `CSSRule`:
+  STYLE_RULE (1), IMPORT_RULE (3), MEDIA_RULE (4), KEYFRAMES_RULE (7).
+- cssText: 返回整条规则的文本.
+- selectorText: 返回规则的选择符文本.
+- style: 返回 CSSStyleDeclaration 对象, 可以设置和获取当前规则中的样式.
+- parentRule: 如果这条规则被其他规则 (如 `@media`) 包含, 则指向包含规则.
+- parentStyleSheet: 包含当前规则的样式表.
 
 ```ts
 const myRules = document.styleSheets[0].cssRules;
@@ -1249,8 +1281,8 @@ for (i of myRules) {
 
 ##### Media Rules
 
-- `conditionText` property of media rule
-- nested `cssRules`
+- `conditionText` property of media rule.
+- Nested `cssRules`.
 
 ```ts
 const myRules = document.styleSheets[0].cssRules;
@@ -1270,8 +1302,8 @@ for (i of myRules) {
 ##### Keyframe Rules
 
 - `name` property of keyframe rule
-- nested `cssRules`:
-- `keyText` property of rules
+- `keyText` property of keyframe rule.
+- Nested `cssRules`.
 
 ```ts
 const myRules = document.styleSheets[0].cssRules;
@@ -4098,7 +4130,7 @@ await page.tracing.stop();
 - 用户行为: Karma/Selenium.
 - 功能测试: Phantom.js/Slimer.js/Karma.
 
-### 可测试代码
+### Testable Code
 
 - 完整注释.
 - 最小复杂度 = (扇入 `*` 扇出) ^ 2.
