@@ -1729,6 +1729,28 @@ console.log(document.hasFocus()); // true
 
 :::
 
+#### Clipboard Events
+
+[Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API)
+(modern alternative for `document.execCommand(command)`):
+
+- `copy` event.
+- `cut` event.
+- `paste` event.
+
+```ts
+const source = document.querySelector('div.source');
+
+source.addEventListener('copy', event => {
+  const selection = document.getSelection();
+  event.clipboardData.setData(
+    'text/plain',
+    selection.toString().concat('copyright information')
+  );
+  event.preventDefault();
+});
+```
+
 #### Mouse Events
 
 - `mousedown` event.
@@ -1826,25 +1848,6 @@ textbox.addEventListener('keyup', event => {
 'Delete';
 'Redo';
 'Undo';
-```
-
-#### Clipboard Events
-
-- `copy` event.
-- `cut` event.
-- `paste` event.
-
-```ts
-const source = document.querySelector('div.source');
-
-source.addEventListener('copy', event => {
-  const selection = document.getSelection();
-  event.clipboardData.setData(
-    'text/plain',
-    selection.toString().concat('copyright information')
-  );
-  event.preventDefault();
-});
 ```
 
 #### Device Events
