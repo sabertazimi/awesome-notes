@@ -1672,6 +1672,31 @@ function validateForm(e) {
 }
 ```
 
+```ts
+document.querySelector('form').addEventListener('submit', event => {
+  const form = event.target;
+  const url = new URL(form.action || window.location.href);
+  const formData = new FormData(form);
+  const searchParameters = new URLSearchParams(formData);
+
+  const options = {
+    method: form.method,
+  };
+
+  if (options.method === 'post') {
+    // Modify request body to include form data
+    options.body =
+      form.enctype === 'multipart/form-data' ? formData : searchParameters;
+  } else {
+    // Modify URL to include form data
+    url.search = searchParameters;
+  }
+
+  fetch(url, options);
+  event.preventDefault();
+});
+```
+
 #### Input Events
 
 - `blur`/`focus`/`focusin`/`focusout` event.
