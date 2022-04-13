@@ -652,8 +652,8 @@ button:focus:not(:focus-visible) {
 - `::first-line`: 匹配文本首行.
 - `::first-letter`: 匹配文本首字母.
 - `::selection`: 匹配突出显示的文本.
-- `::before`
-- `::after`
+- `::before`.
+- `::after`.
 
 ```css
 /* 定义选中的文本颜色与背景色 */

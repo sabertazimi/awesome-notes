@@ -3612,7 +3612,7 @@ console.log(decodeURIComponent(uri));
 - `username`.
 - `password`.
 - `origin`: read only.
-  
+
 ```ts
 // index.mjs
 import './index2.mjs?someURLInfo=5';
