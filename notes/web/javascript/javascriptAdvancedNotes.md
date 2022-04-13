@@ -3524,27 +3524,27 @@ _.throttle = function (func, wait, options) {
 
 ```ts
 function useAnimation() {
-  let frameId = 0;
-  let ticking = false;
+  const frameId = useRef(0);
+  const ticking = useRef(false);
 
   const handleResize = event => {
-    if (ticking) return;
-    ticking = true;
-    frameId = requestAnimationFrame(() => handleUpdate(event));
+    if (ticking.current) return;
+    ticking.current = true;
+    frameId.current = requestAnimationFrame(() => handleUpdate(event));
   };
 
   const handleUpdate = event => {
     console.log('resize update');
-    ticking = false;
+    ticking.current = false;
   };
 
-  useEffect(() => {
+  useMount(() => {
     window.addEventListener('resize', handleResize);
     handleUpdate();
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(frameId);
+      cancelAnimationFrame(frameId.current);
     };
   });
 }
