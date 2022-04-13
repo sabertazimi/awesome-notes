@@ -1244,6 +1244,7 @@ tags: [Web, Framework, Library]
 - [Uptime Status](https://github.com/yb/uptime-status)
 - [Sentry: Application Monitoring Focus on Error Reporting](https://github.com/getsentry/sentry)
 - [OpenTelemetry: Traces and Metrics Framework](https://github.com/open-telemetry/opentelemetry-js)
+- [Grafana: Open and Composable Observability and Data Visualization Platform](https://github.com/grafana/grafana)
 
 ### Performance Tools
 
