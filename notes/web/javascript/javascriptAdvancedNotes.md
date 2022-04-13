@@ -2333,15 +2333,15 @@ const elems = document.getElementsByTagNameNS(
 
 #### Global Execution Context
 
-- create global object (`window`)
-- create `this` object(refer to `window`)
-- declare and initialize variable(`undefined`)/function, store them into memory
+- Create global object (`window`).
+- Create `this` object(refer to `window`).
+- Declare and initialize variable(`undefined`)/function, store them into memory.
 
 #### Function Execution Context
 
-- create arguments object
-- create `this` object
-- declare and initialize variable(`undefined`)/function, store them into memory
+- Create arguments object.
+- Create `this` object.
+- Declare and initialize variable(`undefined`)/function, store them into memory.
 
 如果 JavaScript 引擎在函数执行上下文中找不到变量,
 它会在最近的父级执行上下文中查找该变量.
@@ -2349,6 +2349,8 @@ const elems = document.getElementsByTagNameNS(
 这种情况下, 如果全局执行上下文也没有该变量, 那么将会抛出引用错误 (Reference Error).
 子函数**包含**它父级函数的变量环境, 把这个概念称为**闭包(Closure)**,
 即使父级函数执行环境已经从执行栈弹出了, 子函数还是可以访问父级函数变量 x (通过作用域链).
+
+![Scope Chain](./figures/ContextStackAndScopeChain.png)
 
 ### Event Loop
 
