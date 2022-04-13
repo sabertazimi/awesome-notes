@@ -595,6 +595,8 @@ element.removeAttribute(attrName);
 
 element.compareDocumentPosition(element);
 element.contains(element);
+element.isSameNode(element); // Same node reference
+element.isEqualNode(element); // Same nodeName/nodeValue/attributes/childNodes
 element.matches(cssSelector);
 element.closest(cssSelector); // Returns closest ancestor matching selector
 element.cloneNode();
@@ -797,13 +799,28 @@ document.writeln();
 
 #### DOM Document Type Node
 
+```html
+<!DOCTYPE html PUBLIC "-// W3C// DTD HTML 4.01// EN" "http:// www.w3.org/TR/html4/strict.dtd">
+```
+
 ```ts
-// <!DOCTYPE HTML PUBLIC "-// W3C// DTD HTML 4.01// EN"
-//   "http:// www.w3.org/TR/html4/strict.dtd">
-alert(document.doctype.name); // "html"
-alert(document.nodeType); // 10
-alert(document.doctype.nodeName); // "html"
-alert(document.doctype.nodeValue); // null
+console.log(document.doctype.name); // "html"
+console.log(document.nodeType); // 10
+console.log(document.doctype.nodeName); // "html"
+console.log(document.doctype.nodeValue); // null
+console.log(document.doctype.publicId); // "-// W3C// DTD HTML 4.01// EN"
+console.log(document.doctype.systemId); // "http://www.w3.org/TR/html4/strict.dtd"
+
+const doctype = document.implementation.createDocumentType(
+  'html',
+  '-// W3C// DTD HTML 4.01// EN',
+  'http://www.w3.org/TR/html4/strict.dtd'
+);
+const doc = document.implementation.createDocument(
+  'http://www.w3.org/1999/xhtml',
+  'html',
+  doctype
+);
 ```
 
 #### DOM Document Fragment Node
@@ -1869,6 +1886,45 @@ document.body.insertBefore(document.body.lastChild, document.body.firstChild);
 //     type: "childList",
 //   }
 // ]
+```
+
+### XML Namespace
+
+XML 命名空间可以实现在一个格式规范的文档中混用不同的 XML 语言,
+避免元素命名冲突 (`tagName`/`localName`/`namespaceURI`):
+
+```html
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Example XHTML page</title>
+  </head>
+  <body>
+    <s:svg
+      xmlns:s="http://www.w3.org/2000/svg"
+      version="1.1"
+      viewBox="0 0 100 100"
+      style="width:100%; height:100%"
+    >
+      <s:rect x="0" y="0" width="100" height="100" style="fill:red" />
+    </s:svg>
+  </body>
+</html>
+```
+
+```ts
+console.log(document.body.isDefaultNamespace('http://www.w3.org/1999/xhtml'));
+console.log(svg.lookupPrefix('http://www.w3.org/2000/svg')); // "s"
+console.log(svg.lookupNamespaceURI('s')); // "http://www.w3.org/2000/svg"
+
+const newSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+const newAttr = document.createAttributeNS(
+  'http://www.somewhere.com',
+  'random'
+);
+const elems = document.getElementsByTagNameNS(
+  'http://www.w3.org/1999/xhtml',
+  '*'
+);
 ```
 
 ## JavaScript Engine
