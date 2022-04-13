@@ -5833,6 +5833,8 @@ const addTen = compose(addTwo, addThree, addFive);
 addTen(8).then(console.log); // 18
 ```
 
+### Pipe
+
 ### Functional JavaScript Library
 
 #### Lodash
@@ -5852,6 +5854,8 @@ addTen(8).then(console.log); // 18
 - kebabCase.
 - snakeCase.
 - camelCase.
+
+#### RxJS
 
 ## Modules
 
