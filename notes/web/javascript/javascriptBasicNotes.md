@@ -6093,13 +6093,13 @@ export default 'hello!';
 - 自定义错误.
 
 ```ts
-function MyError(...args) {
-  Error.call(this, args);
-  this.message = args[0];
+class CustomError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'CustomError';
+    this.message = message;
+  }
 }
-
-MyError.prototype = new Error('Error');
-MyError.prototype.constructor = MyError;
 ```
 
 #### Error Object
