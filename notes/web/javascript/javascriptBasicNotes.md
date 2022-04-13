@@ -6487,6 +6487,28 @@ console.log(Math.floor(25.5)); // 25
 console.log(Math.floor(25.1)); // 25
 ```
 
+### Atomics
+
+[Atomics API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics):
+
+```ts
+const sharedArrayBuffer = new SharedArrayBuffer(4);
+const dataView = new Uint32Array(sharedArrayBuffer);
+
+const index = 0;
+const increment = 5;
+
+Atomics.add(dataView, index, increment);
+Atomics.sub(dataView, index, increment);
+Atomics.or(dataView, index, 0b1111);
+Atomics.and(dataView, index, 0b1100);
+Atomics.xor(dataView, index, 0b1111);
+Atomics.load(dataView, index);
+Atomics.store(dataView, index, 3);
+Atomics.exchange(dataView, index, 4);
+Atomics.compareExchange(dataView, index, expect, 6);
+```
+
 ### URI and URL
 
 - `encodeURI()`: 不会编码属于 URL 组件的特殊字符, 比如冒号/斜杠/问号.
