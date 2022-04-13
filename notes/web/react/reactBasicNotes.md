@@ -6739,6 +6739,66 @@ export default function useEventListener({ event, handler }) {
 }
 ```
 
+### Custom Mouse Hook
+
+```ts
+import { useRef, useState } from 'react';
+
+export default function useLongPress(time = 500) {
+  const [action, setAction] = useState();
+
+  const timerRef = useRef();
+  const isLongPress = useRef();
+
+  function startPressTimer() {
+    isLongPress.current = false;
+    timerRef.current = setTimeout(() => {
+      isLongPress.current = true;
+      setAction('LongPress');
+    }, time);
+  }
+
+  function handleClick() {
+    if (isLongPress.current) {
+      return;
+    }
+
+    setAction('Click');
+  }
+
+  function handleMouseDown() {
+    startPressTimer();
+  }
+
+  function handleMouseUp() {
+    clearTimeout(timerRef.current);
+  }
+
+  function handleTouchStart() {
+    startPressTimer();
+  }
+
+  function handleTouchEnd() {
+    if (action === 'LongPress') {
+      return;
+    }
+
+    clearTimeout(timerRef.current);
+  }
+
+  return {
+    action,
+    handlers: {
+      onClick: handleClick,
+      onMouseDown: handleMouseDown,
+      onMouseUp: handleMouseUp,
+      onTouchStart: handleTouchStart,
+      onTouchEnd: handleTouchEnd,
+    },
+  };
+}
+```
+
 ### Custom Observer Hook
 
 ```ts
