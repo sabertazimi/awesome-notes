@@ -958,6 +958,7 @@ tags: [Web, Framework, Library]
 - [Solr: Solr Client for Node.js](https://github.com/lbdremy/solr-node-client)
 - [JieBa: Chinese Text Segmentation](https://github.com/yanyiwu/nodejieba)
 - [Docusaurus Plugin: Local Search Plugin Based on Lunr.js](https://github.com/easyops-cn/docusaurus-search-local)
+- [Fuse: Lightweight Fuzzy Search JavaScript Library](https://github.com/krisk/fuse)
 
 ## SEO
 
