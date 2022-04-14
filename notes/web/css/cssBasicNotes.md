@@ -558,34 +558,34 @@ a[title*='link'] {
 
 ### Pseudo Class Selectors
 
-- `:link`: 未访问的链接；
-- `:visited`：已访问的链接，不建议使用；
-- `:hover`：鼠标移动到容器，不仅限于链接，可用于页面中的任何元素；
-- `:active`: 被激活时的状态，不仅限于链接，可用于任何具有 tabindex 属性的元素；
-- `:focus`: 获得焦点时状态，不仅限于链接，可用于任何具有 tabindex 属性的元素：
-- `:enabled`: 已启用的界面元素：`input`
-- `:disabled`: 已禁用的界面元素：`input`
-- `:target`: 该选择器定位当前活动页面内定位点的目标元素, #anchor-name `#info:target {font-size:24px;}`
-- `:default`: 应用于一个或多个作为一组类似元素中的默认元素的 UI 元素；
-- `:valid`: 应用于输入验证有效元素，基于 input 的 type/pattern 属性
-- `:invalid`: 应用于输入验证无效元素，
-- `:in-range`: 应用于具有范围限制的元素，其中该值位于限制内；比如具有 min 和 max 属性的 number 和 range 输入框；
-- `:out-of-range`: 与:in-range 选择相反，其中该值在限制范围外；
-- `:required`: 应用于具有必填属性 required 的表单控件；
-- `:optional`: 应用于没有必填属性 required 的所有表单控件
-- `:read-only`: 应用于其内容无法供用户修改的元素；
-- `:read-write`: 应用于其内容可供用户修改的元素，比如输入框；
-- `:root`: 根元素，始终指 html 元素；
-- `:placeholder-shown`: select `input` with placeholder
-- `:focus-visible`: selected when Tab (shortcut) focused
-- `:focus-within`: selected when any children focused
-- `:empty`：没有子元素的元素，没有子元素包括文本节点；
-- `:not(exception)`：该选择器将选择与括号内的选择器不匹配的元素：
-- `:lang(en)`：具有使用双字母缩写(en)表示的语言的元素；
-- `<target_element>:has(<selector>)`:
-  a target element has child elements, `:has` normal priority
+- `:link`: 未访问的链接.
+- `:visited`: 已访问的链接, 不建议使用.
+- `:hover`: 鼠标移动到容器, 不仅限于链接, 可用于页面中的任何元素.
+- `:active`: 被激活时的状态, 不仅限于链接, 可用于任何具有 tabindex 属性的元素.
+- `:focus`: 获得焦点时状态, 不仅限于链接, 可用于任何具有 tabindex 属性的元素.
+- `:enabled`: 已启用的界面元素, e.g `input`.
+- `:disabled`: 已禁用的界面元素, e.g `input`.
+- `:target`: 该选择器定位当前活动页面内定位点的目标元素, #anchor-name `#info:target {font-size:24px;}`.
+- `:default`: 应用于一个或多个作为一组类似元素中的默认元素的 UI 元素.
+- `:valid`: 应用于输入验证有效元素, 基于 input 的 type/pattern 属性.
+- `:invalid`: 应用于输入验证无效元素.
+- `:in-range`: 应用于具有范围限制的元素, 其中该值位于限制内, 比如具有 min 和 max 属性的 number 和 range 输入框.
+- `:out-of-range`: 与:in-range 选择相反, 其中该值在限制范围外.
+- `:required`: 应用于具有必填属性 required 的表单控件.
+- `:optional`: 应用于没有必填属性 required 的所有表单控件.
+- `:read-only`: 应用于其内容无法供用户修改的元素.
+- `:read-write`: 应用于其内容可供用户修改的元素, 比如输入框.
+- `:root`: 根元素, 始终指 html 元素.
+- `:placeholder-shown`: select `input` with placeholder.
+- `:focus-visible`: selected when Tab (shortcut) focused.
+- `:focus-within`: selected when any children focused.
+- `:empty`: 没有子元素的元素, 没有子元素包括文本节点.
+- `:not(exception)`: 该选择器将选择与括号内的选择器不匹配的元素.
+- `:lang(en)`: 具有使用双字母缩写(en)表示的语言的元素.
+- [`<target_element>:has(<selector>)`](https://ishadeed.com/article/css-has-parent-selector):
+  a target element has child elements, `:has` normal priority.
 - `<target_element>:where(<selector>)`:
-  a target element has child elements, `:where` 0 priority
+  a target element has child elements, `:where` 0 priority.
 - `E F:first-of-type`: **相同类型** 的第一个元素.
 - `E F:last-of-type`: **相同类型** 的最后一个元素.
 - `E F:only-of-type`: 孩子中只有一种该元素.
