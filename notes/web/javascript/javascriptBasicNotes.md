@@ -3832,6 +3832,7 @@ class Foo {
 }
 
 const f = new Foo();
+
 for (const x of f) {
   console.log(x);
 }
