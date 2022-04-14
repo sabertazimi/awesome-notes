@@ -915,6 +915,7 @@ tags: [Web, Framework, Library]
 - [File Size](https://github.com/avoidwork/filesize.js)
 - [Zip File](https://github.com/Stuk/jszip)
 - [Binary File](https://github.com/gjtorikian/isBinaryFile)
+- [SimpleGit: Light Weight Interface for Running Git Commands](https://github.com/steveukx/git-js)
 
 ### PDF Utils
 
