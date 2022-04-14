@@ -3793,10 +3793,85 @@ Google Core Web Vitals:
   `unload`/`beforeunload` event not precise for mobile users:
   e.g switch to another app not trigger `unload` event.
 
-### Data Format and Size
+### Images Performance
 
-- [optimize images for web](https://www.keycdn.com/blog/optimize-images-for-web)
-- [Images Optimization Techniques](https://evilmartians.com/chronicles/images-done-right-web-graphics-good-to-the-last-byte-optimization-techniques)
+- Responsive images with `srcset` (LCP):
+  - Correspond format.
+  - Correspond size.
+- Hero images pre-fetch loading (LCP).
+- Offscreen images lazy loading (FID).
+- Critical render path blocking images compression and minification (FID).
+- Images placeholder with `aspect-ratio` (CLS).
+
+#### Responsive Images
+
+Responsive images provide 3 ~ 5 different sizes
+reduce image transfer sizes by average of **~20%**:
+
+```html
+<picture>
+  <source srcset="keyboard.avif" type="image/avif" />
+  <source srcset="keyboard.webp" type="image/webp" />
+  <source srcset="keyboard.jpg" type="image/jpeg" />
+  <img src="keyboard.jpg" alt="Omg a keyboard" />
+</picture>
+```
+
+```html
+<img
+  src="keyboard-800w.jpg"
+  alt="A beautiful pink keyboard."
+  width="400"
+  height="400"
+  srcset="keyboard-400w.jpg 400w, keyboard-800w.jpg 800w"
+  sizes="(max-width: 640px) 400px, 800px"
+/>
+```
+
+#### Pre-fetch Loading Images
+
+```html
+<link
+  rel="preload"
+  as="image"
+  href="keyboard.jpg"
+  imagesrcset="poster_400px.jpg 400w, poster_800px.jpg 800w, poster_1600px.jpg 1600w"
+  imagesizes="50vw"
+/>
+```
+
+#### Lazy Loading Images
+
+```html
+<img
+  src="donut-800w.jpg"
+  alt="A delicious pink donut"
+  width="400"
+  height="400"
+  srcset="donut-400w.jpg 400w, donut-800w.jpg 800w"
+  sizes="(max-width: 640px) 400px, 800px"
+  loading="lazy"
+/>
+```
+
+#### Placeholder Images
+
+```html
+<img
+  src="donut-800w.jpg"
+  alt="A delicious donut"
+  width="400"
+  height="400"
+  srcset="donut-400w.jpg 400w, donut-800w.jpg 800w"
+  sizes="(max-width: 640px) 400px, 800px"
+  loading="lazy"
+  decoding="async"
+  style="
+    background-size: cover;
+    background-image: url(data:image/svg+xml;base64,[svg text]);
+  "
+/>
+```
 
 #### Images Format
 
@@ -3819,25 +3894,18 @@ WebP 25-35% smaller than jpg/png
 </picture>
 ```
 
-#### Images Compression
-
-- [Imagemin](https://github.com/Klathmon/imagemin-webpack-plugin)
-
-#### Images Scaling
-
-responsive images: provide 3~5 different sizes
-reduce image transfer sizes by average of ~20%
+#### Images Compression and Minification
 
 - [Sharp](https://github.com/lovell/sharp)
 - [Jimp](https://github.com/oliver-moran/jimp)
+- [Imagemin](https://github.com/Klathmon/imagemin-webpack-plugin)
 
-```html
-<img
-  srcset="flower-small.jpg 480w, flower-large.jpg 1080w"
-  sizes="50vw"
-  src="flower-large.jpg"
-/>
-```
+#### Images Performance Reference
+
+- Images format [guide](https://evilmartians.com/chronicles/images-done-right-web-graphics-good-to-the-last-byte-optimization-techniques).
+- Images optimization [guide](https://www.keycdn.com/blog/optimize-images-for-web).
+- Images optimization [blog](https://stackoverflow.blog/2022/03/28/picture-perfect-images-with-the-modern-element).
+- Images optimization [book](https://www.smashingmagazine.com/printed-books/image-optimization).
 
 ### Data Loading
 
