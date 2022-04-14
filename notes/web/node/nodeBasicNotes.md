@@ -1044,13 +1044,27 @@ Worker pool is needed:
 
 ```ts
 const fs = require('fs');
-const buf = fs.readFileSync('/path/to/file', 'utf-8');
-fs.readFile('/path/to/file', 'utf-8', callback);
-fs.readdir('/path/to/file', callback);
 
-fs.createReadStream();
+function readFile(filename) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, { encoding: 'utf8' }, (err, contents) => {
+      if (err) {
+        reject(err);
+        return;
+      }
 
-src.pipe(dst1).pipe(dst2).pipe(dst3); //  连接多个 stream
+      resolve(contents);
+    });
+  });
+}
+
+readFile('example.txt')
+  .then(contents => {
+    console.log(contents);
+  })
+  .catch(err => {
+    console.error(err.message);
+  });
 ```
 
 ```ts
