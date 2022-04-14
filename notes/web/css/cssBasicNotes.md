@@ -134,14 +134,14 @@ h1 {
 
 #### Inherited CSS Property
 
-- all elements： visibility, cursor.
-- inline elements：
+- all elements: visibility, cursor.
+- inline elements:
   letter-spacing, word-spacing, white-space, line-height,
   color, font, font-family, font-size, font-style, font-variant, font-weight,
   text-decoration, text-transform, direction
-- block elements： text-indent, text-align
-- list elements： list-style, list-style-type, list-style-position, list-style-image
-- table elements： border-collapse
+- block elements: text-indent, text-align
+- list elements: list-style, list-style-type, list-style-position, list-style-image
+- table elements: border-collapse
 
 ## Property Value
 
@@ -332,60 +332,60 @@ span {
 ### Layout Structure Naming Convention
 
 - 容器: container
-- 页头：header
-- 内容：content/container
-- 页面主体：main
-- 页尾：footer
-- 导航：nav
-- 侧栏：sidebar
-- 栏目：column
-- 页面外围控制整体佈局宽度：wrapper
-- 左右中：left right center
+- 页头: header
+- 内容: content/container
+- 页面主体: main
+- 页尾: footer
+- 导航: nav
+- 侧栏: sidebar
+- 栏目: column
+- 页面外围控制整体佈局宽度: wrapper
+- 左右中: left right center
 
 ### Navigation Naming Convention
 
-- 导航：nav
-- 主导航：main-nav
-- 子导航：sub-nav
-- 顶导航：top-nav
-- 边导航：sidebar
-- 左导航：left-sidebar
-- 右导航：right-sidebar
-- 菜单：menu
-- 子菜单：sub-menu
+- 导航: nav
+- 主导航: main-nav
+- 子导航: sub-nav
+- 顶导航: top-nav
+- 边导航: sidebar
+- 左导航: left-sidebar
+- 右导航: right-sidebar
+- 菜单: menu
+- 子菜单: sub-menu
 - 标题: title
 - 摘要: summary
 
 ### Functional Component Naming Convention
 
-- 标志：logo
-- 广告：banner
-- 登陆：login
-- 登录条：login-bar
-- 注册：register
-- 搜索：search
-- 功能区：shop
-- 标题：title
-- 加入：join us
-- 状态：status
-- 按钮：btn
-- 滚动：scroll
-- 标籤页：tab
-- 文章列表：list
-- 提示信息：msg
+- 标志: logo
+- 广告: banner
+- 登陆: login
+- 登录条: login-bar
+- 注册: register
+- 搜索: search
+- 功能区: shop
+- 标题: title
+- 加入: join us
+- 状态: status
+- 按钮: btn
+- 滚动: scroll
+- 标籤页: tab
+- 文章列表: list
+- 提示信息: msg
 - 当前的: current
-- 小技巧：tips
+- 小技巧: tips
 - 图标: icon
-- 注释：note
-- 指南：guild
-- 服务：service
-- 热点：hot
-- 新闻：news
-- 下载：download
-- 投票：vote
-- 合作伙伴：partner
-- 友情链接：link
-- 版权：copyright
+- 注释: note
+- 指南: guild
+- 服务: service
+- 热点: hot
+- 新闻: news
+- 下载: download
+- 投票: vote
+- 合作伙伴: partner
+- 友情链接: link
+- 版权: copyright
 
 ### CSS Files Naming Convention
 
@@ -416,8 +416,8 @@ p {
 
 #### Descendant Selectors
 
-- `E F`：所有后代选择器
-- `E > F`：直接子选择器
+- `E F`: 所有后代选择器
+- `E > F`: 直接子选择器
 
 ```css
 ul li {
@@ -428,12 +428,12 @@ ul li {
 ```css
 ul > li {
   list-style: none;
-} /* 仅限ul的直接子元素li，忽略嵌套子元素 */
+} /* 仅限ul的直接子元素li, 忽略嵌套子元素 */
 ```
 
 Using the descendant selector without more specificity can be really expensive.
 The browser is going to check every descendant element for a match
-because the relationship isn’t restricted to parent and child.
+because the relationship isn't restricted to parent and child.
 
 For `.container ul li a` selector:
 
@@ -446,8 +446,8 @@ For `.container ul li a` selector:
 
 #### Sibling Selectors
 
-- `E + F`：直接相邻兄弟选择器
-- `E ~ F`：一般兄弟选择器
+- `E + F`: 直接相邻兄弟选择器
+- `E ~ F`: 一般兄弟选择器
 
 ```css
 * + * {
@@ -467,7 +467,7 @@ p {
   color: #fff;
 }
 
-/* 定位具有相同父元素的，h1标签之后的所有p标签 */
+/* 定位具有相同父元素的, h1标签之后的所有p标签 */
 h1 ~ p {
   color: #f00;
 }
@@ -517,7 +517,7 @@ input[type='password'] {
 ```scss
 p[class|='a'] {
   color: #333;
-} //定位页面里所有的P段落里具有class属性且属性值为a或是a-开始的，比如class="a"以及class="a-b"
+} //定位页面里所有的P段落里具有class属性且属性值为a或是a-开始的, 比如class="a"以及class="a-b"
 ```
 
 `E[attr~=val]`
@@ -535,7 +535,7 @@ div[title~='english'] {
 ```scss
 div[class^='a'] {
   color: #666;
-} //定位页面里具有属性class且属性值以a开头的div容器，比如class="a"以及class="ab"
+} //定位页面里具有属性class且属性值以a开头的div容器, 比如class="a"以及class="ab"
 ```
 
 `E[attr$=val]`
@@ -544,7 +544,7 @@ div[class^='a'] {
 div[class$='a'] {
   color: #f00;
 }
-//定位页面里具有属性class且属性值以a结尾的div窗口，比如class="nba"以及class="cba"
+//定位页面里具有属性class且属性值以a结尾的div窗口, 比如class="nba"以及class="cba"
 ```
 
 `E[attr*=val]`
@@ -691,7 +691,7 @@ h1::before {
 }
 ```
 
-counter() – 调用计数器，可以不使用列表元素实现序号功能,配合 CSS3 中`counter-increment`和`counter-reset`属性
+counter() – 调用计数器, 可以不使用列表元素实现序号功能,配合 CSS3 中`counter-increment`和`counter-reset`属性
 
 ```css
 h2::before {
@@ -734,7 +734,7 @@ ol {
 }
 
 li::before {
-  content: counters(section, '.') ' '; /* 为所有计数器实例增加以“.”分隔的值 */
+  content: counters(section, '.') ' '; /* 为所有计数器实例增加以`.`分隔的值 */
   counter-increment: section; /* 只增加计数器的当前实例 */
 }
 ```
@@ -838,7 +838,7 @@ with `height`/`width`/`min-width`/`max-width`/`min-height`/`max-height`/
 
 ### Z Index
 
-数值越大，处于可视的优先级越大
+数值越大, 处于可视的优先级越大.
 
 ### Overflow
 
@@ -913,9 +913,9 @@ Multiple-column layout:
 ## Box Model
 
 - block-level box: display 属性为 block, list-item, table 的元素,
-  会生成 block-level box，并且参与 block formatting context.
-- inline-level box: display 属性为 inline, inline-block, inline-table 的元素，
-  会生成 inline-level box，并且参与 inline formatting context.
+  会生成 block-level box, 并且参与 block formatting context.
+- inline-level box: display 属性为 inline, inline-block, inline-table 的元素,
+  会生成 inline-level box, 并且参与 inline formatting context.
 - Flex Formatting Context(FFC).
 - Grid Formatting Context(GFC).
 
@@ -934,10 +934,10 @@ if `height` of parent is `auto`, it's not working.
 
 ## Block Formatting Context
 
-- 一个 BFC 包含创建该上下文元素的所有子元素，但不包括创建了新 BFC 的子元素的内部元素
+- 一个 BFC 包含创建该上下文元素的所有子元素, 但不包括创建了新 BFC 的子元素的内部元素
 - BFC 就是页面上的一个隔离的独立容器, 容器里面的子元素不会影响到外面的元素, 反之也如此
 - 一个元素不能同时存在于两个 BFC 中: 可让处于 BFC 内部的元素与外部的元素相互隔离
-- 内部的 Box 会在垂直方向，一个接一个地放置
+- 内部的 Box 会在垂直方向, 一个接一个地放置
 - vertical margin collapsing
 - 每个元素的 margin box 的左边, 与包含块 border box 的左边相接触
 - BFC 的区域不会与 float box 重叠: 自适应分栏布局, 清除外/内部浮动
@@ -1110,7 +1110,7 @@ top/left/width/right/z-index are invalid
 
 `position: sticky` + `top: 0`:
 
-- 粘性定位的元素在它距离视窗顶部大于 0 时， 会按照默认布局， 表现为 Relative Position.
+- 粘性定位的元素在它距离视窗顶部大于 0 时, 会按照默认布局, 表现为 Relative Position.
 - 一旦其距离顶部的距离等于 0, 元素会固定在窗口顶部, 表现为 Fixed Position.
 
 ```css
@@ -1128,7 +1128,7 @@ top/left/width/right/z-index are invalid
 ### Flex Under the Hood
 
 当 `flex-basis` 设置为 `auto`
-且 `width` 或者 (`height`）不为`auto`时,
+且 `width` 或者 (`height`) 不为`auto`时,
 计算 used size 时会用 `width` 或者 (`height`) 代替 `flex-basis`:
 
 - When there is some free space left:
@@ -1900,14 +1900,14 @@ background-repeat: no-repeat round;
 - `fixed`: stays fixed no matter what
 - 对于可以滚动的元素 (设置为 `overflow: scroll` 的元素),
   当 `background-attachment` 设置为 `scroll` 时, 背景图不会随元素内容的滚动而滚动
-- 对于可以滚动的元素 (设置为 `overflow: scroll` 的元素）,
+- 对于可以滚动的元素 (设置为 `overflow: scroll` 的元素),
   设置 `background-attachment: local`, 则背景会随内容的滚动而滚动
 - parallax effect: `background-attachment: fixed`
 
 ```css
-background-attachment: scroll; /* 背景图相对于元素固定，背景随页面滚动而移动，即背景和内容绑定 */
+background-attachment: scroll; /* 背景图相对于元素固定, 背景随页面滚动而移动, 即背景和内容绑定 */
 background-attachment: fixed; /* 背景图相对于元素内容固定 */
-background-attachment: local; /* 背景图相对于视口固定，所以随页面滚动背景不动，相当于背景被设置在了 body 上 */
+background-attachment: local; /* 背景图相对于视口固定, 所以随页面滚动背景不动, 相当于背景被设置在了 body 上 */
 ```
 
 ```css
@@ -2179,7 +2179,7 @@ Horizontal Scrolling Methods:
 
 ### Text Alignment
 
-justify: 自适应，左右都无空格
+justify: 自适应, 左右都无空格
 
 ```css
 .wrap {
@@ -2303,7 +2303,7 @@ p {
 
 ```css
 html {
-  /* 浏览器默认size为16px，此时将html-size自动计算为10px */
+  /* 浏览器默认size为16px, 此时将html-size自动计算为10px */
   font-size: 62.5%;
 }
 
@@ -2331,7 +2331,7 @@ strong {
 
 ### Font Size Adjust
 
-- 使字体保持大小，不随字体类型改变而改变
+- 使字体保持大小, 不随字体类型改变而改变
 - 不同字体有不同的值(x-height/字体尺寸)
 
 ### Font Display
@@ -2441,46 +2441,46 @@ letter-spacing: 1.3px;
 仿宋_GB2312 FangSong_GB2312
 楷体_GB2312 KaiTi_GB2312
 
-宋体：SimSun
+宋体: SimSun
 
-华文细黑：STHeiti Light [STXihei]
-华文黑体：STHeiti
-华文楷体：STKaiti
-华文宋体：STSong
-华文仿宋：STFangsong
-儷黑 Pro：LiHei Pro Medium
-儷宋 Pro：LiSong Pro Light
-標楷體：BiauKai
-蘋果儷中黑：Apple LiGothic Medium
-蘋果儷細宋：Apple LiSung Light
+华文细黑: STHeiti Light [STXihei]
+华文黑体: STHeiti
+华文楷体: STKaiti
+华文宋体: STSong
+华文仿宋: STFangsong
+儷黑 Pro: LiHei Pro Medium
+儷宋 Pro: LiSong Pro Light
+標楷體: BiauKai
+蘋果儷中黑: Apple LiGothic Medium
+蘋果儷細宋: Apple LiSung Light
 
 
-新細明體：PMingLiU
-細明體：MingLiU
-標楷體：DFKai-SB
-黑体：SimHei
-新宋体：NSimSun
-仿宋：FangSong
-楷体：KaiTi
-仿宋_GB2312：FangSong_GB2312
-楷体_GB2312：KaiTi_GB2312
-微軟正黑體：Microsoft JhengHei
-微软雅黑体：Microsoft YaHei
+新細明體: PMingLiU
+細明體: MingLiU
+標楷體: DFKai-SB
+黑体: SimHei
+新宋体: NSimSun
+仿宋: FangSong
+楷体: KaiTi
+仿宋_GB2312: FangSong_GB2312
+楷体_GB2312: KaiTi_GB2312
+微軟正黑體: Microsoft JhengHei
+微软雅黑体: Microsoft YaHei
 
-隶书：LiSu
-幼圆：YouYuan
-华文细黑：STXihei
-华文楷体：STKaiti
-华文宋体：STSong
-华文中宋：STZhongsong
-华文仿宋：STFangsong
-方正舒体：FZShuTi
-方正姚体：FZYaoti
-华文彩云：STCaiyun
-华文琥珀：STHupo
-华文隶书：STLiti
-华文行楷：STXingkai
-华文新魏：STXinwei
+隶书: LiSu
+幼圆: YouYuan
+华文细黑: STXihei
+华文楷体: STKaiti
+华文宋体: STSong
+华文中宋: STZhongsong
+华文仿宋: STFangsong
+方正舒体: FZShuTi
+方正姚体: FZYaoti
+华文彩云: STCaiyun
+华文琥珀: STHupo
+华文隶书: STLiti
+华文行楷: STXingkai
+华文新魏: STXinwei
 ```
 
 ## CSS Counter
@@ -2982,18 +2982,18 @@ translateZ 的功能就是让元素在自己的眼前或近或远
 
 其子元素:
 
-- 设置的 translateZ 值越小，则子元素大小越小（因为元素远去，我们眼睛看到的就会变小）；
-- translateZ 值越大，该元素也会越来越大
-- 当 translateZ 值非常接近 201 像素，但是不超过 201 像素的时候（如 200 像素）
-  该元素的大小就会撑满整个屏幕（父辈元素没有 overflow:hidden 的限制）
-- 当 translateZ 值再变大，超过 201 像素的时候，该元素看不见了
+- 设置的 translateZ 值越小, 则子元素大小越小 (因为元素远去, 我们眼睛看到的就会变小).
+- translateZ 值越大, 该元素也会越来越大.
+- 当 translateZ 值非常接近 201 像素, 但是不超过 201 像素的时候 (如 200 像素).
+  该元素的大小就会撑满整个屏幕 (父辈元素没有 overflow:hidden 的限制).
+- 当 translateZ 值再变大, 超过 201 像素的时候, 该元素看不见了.
 
 #### Transform Style
 
-transform-style 属性也是 3D 效果中经常使用的，
-其两个参数，`flat|preserve-3d`.
-前者 flat 为默认值，表示平面的；
-后者 preserve-3d 表示 3D 透视
+transform-style 属性也是 3D 效果中经常使用的,
+其两个参数, `flat|preserve-3d`.
+前者 flat 为默认值, 表示平面的,
+后者 preserve-3d 表示 3D 透视.
 
 #### backface-visibility
 
@@ -3001,7 +3001,7 @@ transform-style 属性也是 3D 效果中经常使用的，
 backface-visibility: hidden;
 ```
 
-当元素 `rotateY(180deg)` 时，元素将被隐藏
+当元素 `rotateY(180deg)` 时, 元素将被隐藏
 
 ### Animation Details
 
@@ -3241,7 +3241,7 @@ tl.staggerFrom(
 
 ### Responsive Size
 
-- Size in `em` if the property scales according to it’s font-size.
+- Size in `em` if the property scales according to it's font-size.
 - **Modular Font Size**:
   Size in `em` if the font-size should be modular
   (relative to it's context/parent).
@@ -3351,10 +3351,10 @@ use `inline-box` with `width`
 | embossed   | 盲文打印                                 |
 | handheld   | 手持设备                                 |
 | print      | 文档打印或打印预览模式                   |
-| projection | 项目演示，比如幻灯                       |
+| projection | 项目演示, 比如幻灯                       |
 | screen     | 彩色电脑屏幕                             |
 | speech     | 演讲                                     |
-| tty        | 固定字母间距的网格的媒体，比如电传打字机 |
+| tty        | 固定字母间距的网格的媒体, 比如电传打字机 |
 | tv         | 电视                                     |
 
 ### Device Feature Query
@@ -3371,7 +3371,7 @@ use `inline-box` with `width`
 | device-width        | length                 | yes     | 设备屏幕的输出宽度   |
 | grid                | 整数                   | no      | 是否是基于格栅的设备 |
 | monochrome          | 整数                   | yes     | 缓冲器中每像素字节   |
-| resolution          | 分辨率(“dpi/dpcm”)     | yes     | 分辨率               |
+| resolution          | 分辨率(`dpi/dpcm`)     | yes     | 分辨率               |
 | scan                | Progressive interlaced | no      | tv 媒体扫描方式      |
 | orientation         | Portrait/landscape     | no      | 横屏或竖屏           |
 
@@ -5463,8 +5463,8 @@ module.exports = {
 
 ### CSS Selectors
 
-减少选择器的复杂性，与构造样式本身的其他工作相比，
-选择器复杂性可以占用计算元素样式所需时间的 50%以上
+减少选择器的复杂性, 与构造样式本身的其他工作相比,
+选择器复杂性可以占用计算元素样式所需时间的 50%以上.
 
 ### CSS Triggers
 
@@ -5476,7 +5476,7 @@ or call JS DOM API triggering layout stage (reflow).
 
 ### Will Change
 
-告知浏览器该元素会有哪些变化的方法，这样浏览器可以在元素属性真正发生变化之前提前做好对应的优化准备工作
+告知浏览器该元素会有哪些变化的方法, 这样浏览器可以在元素属性真正发生变化之前提前做好对应的优化准备工作:
 
 ```css
  {
@@ -5496,17 +5496,17 @@ or call JS DOM API triggering layout stage (reflow).
 
 [CSS Containment](https://developers.google.com/web/updates/2016/06/css-containment)
 
-contain 属性允许开发者声明当前元素和它的内容尽可能的独立于 DOM 树的其他部分。
-这使得浏览器在重新计算布局、样式、绘图或它们的组合的时候，只会影响到有限的 DOM 区域，而不是整个页面
+contain 属性允许开发者声明当前元素和它的内容尽可能的独立于 DOM 树的其他部分.
+这使得浏览器在重新计算布局/样式/绘图或它们的组合的时候, 只会影响到有限的 DOM 区域, 而不是整个页面.
 
 ```css
 /* 无布局包含 */
 contain: none;
 
-/* 布局包含 layout、style、paint 和 size */
+/* 布局包含 layout/style/paint 和 size */
 contain: strict;
 
-/* 布局包含layout、style 和 paint */
+/* 布局包含layout/style 和 paint */
 contain: content;
 
 /* 布局包含 size */
@@ -5522,10 +5522,12 @@ contain: style;
 contain: paint;
 ```
 
-- size: 声明这个元素的尺寸会变化，不需要去检查它依赖关系中的尺寸变化
-- style: 声明那些同时会影响这个元素和其子孙元素的属性，都在这个元素的包含范围内
-- layout: 声明没有外部元素可以影响它内部的布局，反之亦然
-- paint: 声明这个元素的子孙节点不会在它边缘外显示。如果一个元素在视窗外或因其他原因导致不可见，则同样保证它的子孙节点不会被显示
+- size: 声明这个元素的尺寸会变化, 不需要去检查它依赖关系中的尺寸变化.
+- style: 声明那些同时会影响这个元素和其子孙元素的属性, 都在这个元素的包含范围内.
+- layout: 声明没有外部元素可以影响它内部的布局, 反之亦然.
+- paint:
+  声明这个元素的子孙节点不会在它边缘外显示.
+  如果一个元素在视窗外或因其他原因导致不可见, 则同样保证它的子孙节点不会被显示.
 
 ### Animation Frame
 
@@ -5535,9 +5537,9 @@ contain: paint;
 - Repaint: `Paint -> Composite`.
 
 告诉浏览器希望执行动画并请求浏览器在下一次重绘之前调用指定的函数来更新动画.
-该方法使用一个回调函数作为参数，这个回调函数会在浏览器重绘之前调用.
+该方法使用一个回调函数作为参数, 这个回调函数会在浏览器重绘之前调用.
 
-> 若想要在下次重绘时产生另一个动画画面，callback 必须调用 requestAnimationFrame.
+> 若想要在下次重绘时产生另一个动画画面, callback 必须调用 requestAnimationFrame.
 
 ```ts
 let start = null;
@@ -5570,8 +5572,8 @@ window.requestAnimationFrame(step);
   - but in CSS especially;
   - and beware of oddities with the PreLoad Scanner.
 - Be wary of synchronous CSS and JavaScript order:
-  - JavaScript defined after CSS won’t run until CSSOM is completed;
-  - so if your JavaScript doesn’t depend on your CSS;
+  - JavaScript defined after CSS won't run until CSSOM is completed;
+  - so if your JavaScript doesn't depend on your CSS;
     - load it before your CSS;
   - but if it does depend on your CSS:
     - load it after your CSS.
