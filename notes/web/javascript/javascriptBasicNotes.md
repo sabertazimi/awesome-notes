@@ -6476,6 +6476,8 @@ const re = /pattern/gim;
 
 ### RegExp Flags
 
+[Flags](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#advanced_searching_with_flags):
+
 - `g` (global): 全局匹配.
 - `i` (ignoreCase): 大小写不敏感匹配.
 - `m` (multiline): 多行匹配.
@@ -6496,21 +6498,27 @@ codePointLength(s); // 2
 
 ### RegExp Character Classes
 
-| Characters | Meaning               |
-| :--------- | :-------------------- |
-| `.`        | `[^\n\r\u2020\u2029]` |
-| `\d`       | `[0-9]`               |
-| `\D`       | `[^0-9]`              |
-| `\w`       | `[0-9a-zA-Z_]`        |
-| `\W`       | `[^0-9a-zA-Z_]`       |
-| `\s`       | `[\r\n\f\t\v]`        |
-| `\S`       | `[^\r\n\f\t\v]`       |
-| `\b`       | start/end of word     |
-| `\B`       | not start/end of word |
-| `^`        | start of string       |
-| `$`        | end of string         |
+[Character classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Character_Classes):
+
+| Characters            | Meaning               |
+| :-------------------- | :-------------------- |
+| `.`                   | `[^\n\r\u2020\u2029]` |
+| `\d`                  | `[0-9]`               |
+| `\D`                  | `[^0-9]`              |
+| `\w`                  | `[0-9a-zA-Z_]`        |
+| `\W`                  | `[^0-9a-zA-Z_]`       |
+| `\s`                  | `[\r\n\f\t\v]`        |
+| `\S`                  | `[^\r\n\f\t\v]`       |
+| `\b`                  | start/end of word     |
+| `\B`                  | not start/end of word |
+| `\p{UnicodeProperty}` | match unicode         |
+| `\P{UnicodeProperty}` | not match unicode     |
+| `^`                   | start of string       |
+| `$`                   | end of string         |
 
 ### RegExp Quantifiers
+
+[Quantifiers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Quantifiers):
 
 | Quantifiers | Repeat Times |
 | :---------- | :----------- |
@@ -6564,8 +6572,8 @@ Avoid use them in production:
 
 ### RegExp Group and Ranges
 
-- group
-- lookahead (零宽断言)
+- [Groups](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges).
+- 零宽断言: lookahead [assertion](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions).
 
 | 分类     | 代码/语法      | 说明                                            |
 | :------- | :------------- | :---------------------------------------------- |
