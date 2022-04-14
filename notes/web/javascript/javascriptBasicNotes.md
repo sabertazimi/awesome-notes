@@ -2724,6 +2724,29 @@ Person.locate(); // class, class Person {}
 - 若显式定义了派生类构造函数, 则必须在其中调用 `super()` , 或返回一个对象.
 - 实例化时检测 `new.target` 是不是抽象基类, 可以阻止对抽象基类的实例化.
 
+```ts
+// Abstract base class
+class Shape {
+  constructor() {
+    if (new.target === Shape) {
+      throw new Error('This class cannot be instantiated directly.');
+    }
+  }
+}
+
+class Rectangle extends Shape {
+  constructor(length, width) {
+    super();
+    this.length = length;
+    this.width = width;
+  }
+}
+
+const x = new Shape(); // throws error
+const y = new Rectangle(3, 4); // no error
+console.log(y instanceof Shape); // true
+```
+
 #### Class Expression
 
 ```ts
