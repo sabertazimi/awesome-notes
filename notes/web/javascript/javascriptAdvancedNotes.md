@@ -3796,11 +3796,13 @@ Google Core Web Vitals:
 ### Images Performance
 
 - Responsive images with `srcset` (LCP):
-  - Correspond format.
+  - Modern format: WebP/SVG.
   - Correspond size.
 - Hero images pre-fetch loading (LCP).
 - Offscreen images lazy loading (FID).
-- Critical render path blocking images compression and minification (FID).
+- Critical render path blocking images (FID):
+  - Images compression and minification.
+  - Images CDN.
 - Images placeholder with `aspect-ratio` (CLS).
 
 #### Responsive Images
@@ -3875,7 +3877,7 @@ reduce image transfer sizes by average of **~20%**:
 
 #### Images Format
 
-mp4 smaller than gif (`ffmpeg`)
+`mp4` smaller than `gif` (`ffmpeg`):
 
 ```html
 <!-- ffmpeg -i dog.gif dog.mp4 -->
@@ -3884,7 +3886,7 @@ mp4 smaller than gif (`ffmpeg`)
 </video>
 ```
 
-WebP 25-35% smaller than jpg/png
+`WebP` 25~35% smaller than `jpg`/`png`:
 
 ```html
 <picture>
