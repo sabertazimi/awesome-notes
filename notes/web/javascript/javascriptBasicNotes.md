@@ -604,9 +604,12 @@ console.log(fooGlobalSymbol === otherFooGlobalSymbol); // true
 - `[Symbol.iterator]()`: `for of`.
 - `[Symbol.asyncIterator]()`: `for await of`.
 - `[Symbol.match/replace/search/split](target)`: `string.match/replace/search/split(classWithSymbolFunction)`.
+- `[Symbol.hasInstance](instance)`: `instance of`.
+- `[Symbol.species]()`: constructor for making derived objects.
 - `[Symbol.toPrimitive](hint)`: 强制类型转换.
-- `[Symbol.hasInstance](target)`: `instance of`.
-- `[Symbol.species]()`.
+- `[Symbol.toStringTag]()`: string used by `Object.prototype.toString()`.
+
+`iterator`:
 
 ```ts
 const arr = ['a', 'b', 'c'];
@@ -618,20 +621,25 @@ iter.next(); // { value: 'c', done: false }
 iter.next(); // { value: undefined, done: true }
 ```
 
+`hasInstance`:
+
 ```ts
 class Bar {}
 class Baz extends Bar {
-  static [Symbol.hasInstance]() {
+  static [Symbol.hasInstance](instance) {
     return false;
   }
 }
 
 const b = new Baz();
+
 console.log(Bar[Symbol.hasInstance](b)); // true
 console.log(b instanceof Bar); // true
 console.log(Baz[Symbol.hasInstance](b)); // false
 console.log(b instanceof Baz); // false
 ```
+
+`species`:
 
 ```ts
 class SuperArray extends Array {
@@ -642,10 +650,57 @@ class SuperArray extends Array {
 
 const a1 = new SuperArray(1, 2, 3, 4, 5);
 const a2 = a1.filter(x => !!(x % 2));
+
 console.log(a1); // [1, 2, 3, 4, 5]
 console.log(a2); // [1, 3, 5]
 console.log(a1 instanceof SuperArray); // true
 console.log(a2 instanceof SuperArray); // false
+```
+
+`toPrimitive`:
+
+```ts
+class Temperature {
+  constructor(degrees) {
+    this.degrees = degrees;
+  }
+
+  [Symbol.toPrimitive](hint) {
+    switch (hint) {
+      case 'string':
+        return `${this.degrees}\u00B0`; // degrees symbol
+      case 'number':
+        return this.degrees;
+      case 'default':
+        return `${this.degrees} degrees`;
+    }
+  }
+}
+
+const freezing = new Temperature(32);
+
+console.log(`${freezing}!`); // "32 degrees!"
+console.log(freezing / 2); // 16
+console.log(String(freezing)); // "32째"
+```
+
+`toStringTag`:
+
+```ts
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  get [Symbol.toStringTag]() {
+    return 'Person';
+  }
+}
+
+const me = new Person('Me');
+
+console.log(me.toString()); // "[object Person]"
+console.log(Object.prototype.toString.call(me)); // "[object Person]"
 ```
 
 ## Reference Values
