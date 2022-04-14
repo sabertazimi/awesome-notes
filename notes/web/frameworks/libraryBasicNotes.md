@@ -319,6 +319,7 @@ tags: [Web, Framework, Library]
 
 #### Gradients Editor
 
+- [Gradient Generator](https://www.joshwcomeau.com/gradient-generator)
 - [CSS Gradient](https://cssgradient.io)
 - [Easing Gradients](https://larsenwork.com/easing-gradients/#editor)
 - [Gradient Art](https://github.com/GradientArt/issues)
