@@ -186,9 +186,9 @@ window.addEventListener(
 const connectionStateChange = () => console.log(navigator.onLine);
 window.addEventListener('online', connectionStateChange);
 window.addEventListener('offline', connectionStateChange);
-// 设备联网时：
+// 设备联网时:
 // true
-// 设备断网时：
+// 设备断网时:
 // false
 ```
 
@@ -1190,7 +1190,7 @@ function loadStyleString(css) {
 
 #### Table Manipulation
 
-`<table>` 元素添加了以下属性和方法：
+`<table>` 元素添加了以下属性和方法:
 
 - `caption`: 指向 `<caption>` 元素的指针 (如果存在).
 - `tBodies`: 包含 `<tbody>` 元素的 HTMLCollection.
@@ -1206,13 +1206,13 @@ function loadStyleString(css) {
 - `deleteRow(pos)`: 删除给定位置的行.
 - `insertRow(pos)`: 在行集合中给定位置插入一行.
 
-`<tbody>` 元素添加了以下属性和方法：
+`<tbody>` 元素添加了以下属性和方法:
 
 - `rows`: 包含 `<tbody>` 元素中所有行的 HTMLCollection.
 - `deleteRow(pos)`: 删除给定位置的行.
 - `insertRow(pos)`: 在行集合中给定位置插入一行, 返回该行的引用.
 
-`<tr>` 元素添加了以下属性和方法：
+`<tr>` 元素添加了以下属性和方法:
 
 - `cells`: 包含 `<tr>` 元素所有表元的 HTMLCollection.
 - `deleteCell(pos)`: 删除给定位置的表元.
@@ -1606,7 +1606,7 @@ window.addEventListener('load', () => {
 - `unload` event: 卸载完成.
 - `abort` event: 提前终止.
 - `error` event.
-- `select` event：在文本框 (`<input>` 或 `textarea`) 上选择字符.
+- `select` event: 在文本框 (`<input>` 或 `textarea`) 上选择字符.
 - `resize` event: 缩放.
 - `scroll` event: 滚动.
 
@@ -1690,7 +1690,7 @@ document.querySelector('form').addEventListener('submit', event => {
 
 - `blur`/`focus`/`focusin`/`focusout` event.
 - `input`/`change` event.
-- `select` event：在文本框 (`<input>` 或 `textarea`) 上选择字符.
+- `select` event: 在文本框 (`<input>` 或 `textarea`) 上选择字符.
 
 ```ts
 const input = document.querySelector('input');
@@ -2252,7 +2252,7 @@ observer.observe(document.body, { childList: true });
 
 // 交换子节点顺序
 document.body.insertBefore(document.body.lastChild, document.body.firstChild);
-// 发生了两次变化：第一次是节点被移除, 第二次是节点被添加
+// 发生了两次变化: 第一次是节点被移除, 第二次是节点被添加
 // [
 //   {
 //     addedNodes: NodeList[],

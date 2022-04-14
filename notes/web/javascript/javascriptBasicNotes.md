@@ -6155,7 +6155,7 @@ Universal module definition:
 - 模块代码只在加载后执行.
 - 模块只能加载一次.
 - 模块是单例.
-- 模块可以定义公共接口，其他模块可以基于这个公共接口观察和交互.
+- 模块可以定义公共接口, 其他模块可以基于这个公共接口观察和交互.
 - 模块可以请求加载其他模块.
 - 支持循环依赖.
 - ES6 模块默认在严格模式下执行.
@@ -6167,7 +6167,7 @@ Universal module definition:
 ```html
 <!-- 支持模块的浏览器会执行这段脚本 -->
 <!-- 不支持模块的浏览器不会执行这段脚本 -->
-<script type="module" src="module.js"></script> 
+<script type="module" src="module.js"></script>
 
 <!-- 支持模块的浏览器不会执行这段脚本 -->
 <!-- 不支持模块的浏览器会执行这段脚本 -->
@@ -6859,8 +6859,8 @@ alert(searchParams.toString()); // " num=10&page=3"
 const textEncoder = new TextEncoder();
 const decodedText = 'foo';
 const encodedText = textEncoder.encode(decodedText);
-// f 的 UTF-8 编码是 0x66（即十进制 102）
-// o 的 UTF-8 编码是 0x6F（即二进制 111）
+// f 的 UTF-8 编码是 0x66 (即十进制 102)
+// o 的 UTF-8 编码是 0x6F (即二进制 111)
 console.log(encodedText); // Uint8Array(3) [102, 111, 111]
 ```
 
@@ -6914,8 +6914,8 @@ while (true) {
 
 ```ts
 const textDecoder = new TextDecoder();
-// f 的 UTF-8 编码是 0x66（即十进制 102）
-// o 的 UTF-8 编码是 0x6F（即二进制 111）
+// f 的 UTF-8 编码是 0x66 (即十进制 102)
+// o 的 UTF-8 编码是 0x6F (即二进制 111)
 const encodedText = Uint8Array.of(102, 111, 111);
 const decodedText = textDecoder.decode(encodedText);
 console.log(decodedText); // foo
