@@ -5924,7 +5924,42 @@ Sandbox('dom', 'event', function (box) {
 });
 ```
 
+### CommonJS Pattern
+
+- 无论一个模块在 `require()` 中被引用多少次, 模块永远是单例, 只会被加载一次.
+- 模块第一次加载后会被缓存, 后续加载会取得缓存的模块.
+- 模块加载是模块系统执行的同步操作, `require()` 可以位于条件语句中.
+
+### AMD Pattern
+
+Asynchronous module definition:
+
+```ts
+// ID 为 'moduleA' 的模块定义:
+// moduleA 依赖 moduleB.
+// moduleB 会异步加载.
+define('moduleA', ['moduleB'], function (moduleB) {
+  return {
+    stuff: moduleB.doStuff(),
+  };
+});
+```
+
+```ts
+define('moduleA', ['require', 'exports'], function (require, exports) {
+  const moduleB = require('moduleB');
+
+  if (condition) {
+    const moduleC = require('moduleC');
+  }
+
+  exports.stuff = moduleB.doStuff();
+});
+```
+
 ### UMD Pattern
+
+Universal module definition:
 
 ```ts
 /**
@@ -5950,20 +5985,53 @@ Sandbox('dom', 'event', function (box) {
     'use strict';
 
     // Module code goes here...
+    return {};
   }
 );
 ```
 
 ### ES6 Modules
 
+- 解析到 `<script type="module">` 标签后会立即下载模块文件,
+  但执行会延迟到文档解析完成 (类似 `<script defer>`).
+- 同一个模块无论在一个页面中被加载多少次,
+  也不管它是如何加载的, 实际上都只会加载一次.
+- 模块代码只在加载后执行.
+- 模块只能加载一次.
+- 模块是单例.
+- 模块可以定义公共接口，其他模块可以基于这个公共接口观察和交互.
+- 模块可以请求加载其他模块.
+- 支持循环依赖.
+- ES6 模块默认在严格模式下执行.
+- ES6 模块不共享全局命名空间.
+  - 模块顶级 `this` 的值是 `undefined` (传统脚本中是 `window`).
+  - 模块中的 `var` 声明不会添加到 `window` 对象.
+- ES6 模块是异步加载和执行的.
+
+```html
+<!-- 支持模块的浏览器会执行这段脚本 -->
+<!-- 不支持模块的浏览器不会执行这段脚本 -->
+<script type="module" src="module.js"></script> 
+
+<!-- 支持模块的浏览器不会执行这段脚本 -->
+<!-- 不支持模块的浏览器会执行这段脚本 -->
+<script nomodule src="script.js"></script>
+```
+
 ```ts
 import { lastName as surname } from './profile.js';
+import module from './module.js';
+import * as Bar from './bar.js'; // Object.freeze(Bar)
+import './foo.js'; // Load effects
 ```
 
 ```ts
 export const firstName = 'Michael';
 export const lastName = 'Jackson';
 export const year = 1958;
+export function foo() {}
+export function* bar() {}
+export class Foo {}
 ```
 
 ```ts
@@ -5977,17 +6045,18 @@ export { firstName, lastName, year };
 
 ```ts
 // 接口改名
-export { foo as myFoo } from 'my_module';
+export { foo as myFoo } from 'module';
+export { default as Article } from './Article';
 
 // 整体输出
-export * from 'my_module';
+export * from 'utils';
 ```
 
 #### CommonJS vs ES6 Module
 
 - CommonJS 模块是运行时加载, ES6 模块是编译时输出接口.
 - CommonJS 是单个值导出, ES6 Module 可以导出多个.
-- CommonJS 是动态语法可以写在判断里, ES6 Module 静态语法只能写在顶层.
+- CommonJS 是动态语法可以写在判断里, ES6 Module 是静态语法只能写在顶层.
 - CommonJS 的 `this` 是当前模块, ES6 Module 的 `this` 是 `undefined`.
 - CommonJS 模块输出的是一个值的拷贝,
   ES6 模块 Export 分 3 种情况:
