@@ -6476,11 +6476,12 @@ const re = /pattern/gim;
 
 ### RegExp Flags
 
-- g (global): 全局匹配.
-- m (multiline): 多行匹配.
-- i (ignoreCase): 大小写不敏感匹配.
-- u (unicode): Unicode 模式.
-- y (sticky): 粘附模式, 修饰符号隐含了头部匹配的标志.
+- `g` (global): 全局匹配.
+- `i` (ignoreCase): 大小写不敏感匹配.
+- `m` (multiline): 多行匹配.
+- `y` (sticky): 粘附模式, 修饰符号隐含了头部匹配的标志.
+- `u` (unicode): Unicode 模式.
+- `s` (dotAll): Allows `.` to match `newline` characters.
 
 ```ts
 function codePointLength(text) {
