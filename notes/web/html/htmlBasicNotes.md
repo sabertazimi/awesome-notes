@@ -1552,4 +1552,5 @@ listExpander.addEventListener('click', e => {
 
 ### Accessibility Reference
 
-- [Semantic search element](https://www.sarasoueidan.com/blog/in-quest-of-search)
+- [Semantic Search Element](https://www.sarasoueidan.com/blog/in-quest-of-search)
+- [WebAIM Million Project](https://webaim.org/projects/million)
