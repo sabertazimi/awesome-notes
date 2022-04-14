@@ -4045,7 +4045,7 @@ class Observable {
     });
 
     // 每次 resolve 队列头部的 promise 后, 都会向异步迭代器返回相应的事件对象
-    while (1) {
+    while (true) {
       yield await this.dequeue();
     }
   }
