@@ -11267,6 +11267,7 @@ class SnapshotSandbox {
 
 - Pub-Sub Pattern.
 - Callback registration.
+- Global store.
 
 ## Interviews
 
