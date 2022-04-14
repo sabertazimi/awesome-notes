@@ -4697,7 +4697,8 @@ console.log(target === proxy); // false
 - `Reflect.deleteProperty(target, propKey)`:
   `delete` operator.
 - `Reflect.ownKeys(target)`:
-  `Object.getOwnPropertyNames` + `Object.getOwnPropertySymbols`, all keys.
+  `Object.keys()` + `Object.getOwnPropertyNames()` + `Object.getOwnPropertySymbols()`,
+  all keys.
 - `Reflect.getPrototypeOf(target)`.
 - `Reflect.setPrototypeOf(target, prototype)`.
 - `Reflect.isExtensible(target)`.
@@ -4706,6 +4707,22 @@ console.log(target === proxy); // false
   function call.
 - `Reflect.construct(target, argumentsList)`:
   `new target(...argumentsList)` operator.
+
+| Proxy Behavior                       | Overrides Behavior                  |
+| ------------------------------------ | ----------------------------------- |
+| `Reflect.get()`                      | Reading a property value            |
+| `Reflect.set()`                      | Writing to a property               |
+| `Reflect.has()`                      | `in` operator                       |
+| `Reflect.deleteProperty()`           | `delete` operator                   |
+| `Reflect.getPrototypeOf()`           | `Object.getPrototypeOf()`           |
+| `Reflect.setPrototypeOf()`           | `Object.setPrototypeOf()`           |
+| `Reflect.isExtensible()`             | `Object.isExtensible()`             |
+| `Reflect.preventExtensions()`        | `Object.preventExtensions()`        |
+| `Reflect.getOwnPropertyDescriptor()` | `Object.getOwnPropertyDescriptor()` |
+| `Reflect.defineProperty()`           | `Object.defineProperty()`           |
+| `Reflect.ownKeys()`                  | All `Object` keys methods           |
+| `Reflect.apply()`                    | Calling a function                  |
+| `Reflect.construct()`                | Calling a function with `new`       |
 
 ```ts
 const target = {
