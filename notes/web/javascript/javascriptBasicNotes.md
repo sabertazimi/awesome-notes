@@ -642,19 +642,39 @@ console.log(b instanceof Baz); // false
 `species`:
 
 ```ts
-class SuperArray extends Array {
+class MyClass {
   static get [Symbol.species]() {
-    return Array;
+    return this;
+  }
+
+  constructor(value) {
+    this.value = value;
+  }
+
+  clone() {
+    return new this.constructor[Symbol.species](this.value);
   }
 }
 
-const a1 = new SuperArray(1, 2, 3, 4, 5);
-const a2 = a1.filter(x => !!(x % 2));
+class MyDerivedClass1 extends MyClass {
+  // empty
+}
 
-console.log(a1); // [1, 2, 3, 4, 5]
-console.log(a2); // [1, 3, 5]
-console.log(a1 instanceof SuperArray); // true
-console.log(a2 instanceof SuperArray); // false
+class MyDerivedClass2 extends MyClass {
+  static get [Symbol.species]() {
+    return MyClass;
+  }
+}
+
+const instance1 = new MyDerivedClass1('foo');
+const instance2 = new MyDerivedClass2('bar');
+const clone1 = instance1.clone();
+const clone2 = instance2.clone();
+
+console.log(clone1 instanceof MyClass); // true
+console.log(clone1 instanceof MyDerivedClass1); // true
+console.log(clone2 instanceof MyClass); // true
+console.log(clone2 instanceof MyDerivedClass2); // false
 ```
 
 `toPrimitive`:
