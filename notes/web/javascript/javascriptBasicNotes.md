@@ -499,7 +499,7 @@ printRaw`\u00A9${'and'}\n`;
 // \n
 ```
 
-### Object Wrappers for Primitive Type
+### Wrapper Objects for Primitives
 
 Using the wrapper function without the new keyword
 is a useful way of coercing a value into a primitive type.
@@ -7011,14 +7011,20 @@ if (!String.prototype.trim) {
 
 ### Strict Mode
 
-- Variables must be declared.
-- Functions must be declared at the top level of a scope.
-- `arguments` objects has no `callee` and `caller`.
-- `this` is `undefined` in non-method functions.
-- Setting and deleting immutable properties fails with exception.
-- Forbidden unqualified identifiers deletion (`Syntax Error`).
+[Strict Mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode):
+
+- `this` is `null` in non-method functions.
+- Variables must be declared (`Reference Error`).
+- Functions must be declared at the top level of a scope (`Syntax Error`).
+- Forbidden unqualified identifiers deletion (`Type Error`).
+- Forbidden setting and deleting immutable properties (`Type Error`).
+- Forbidden access `arguments.callee`/`arguments.caller` (`Type Error`).
+- Forbidden variables escaped from `eval()` (`Reference Error`).
+- Forbidden set `eval`/`arguments` to variable identifiers (`Syntax Error`).
 - Forbidden `with` statement (`Syntax Error`).
 - Forbidden octal numbers (`Syntax Error`).
+- ES6 classes are automatically in strict mode.
+- ES6 modules are automatically in strict mode.
 
 ### Timer
 
