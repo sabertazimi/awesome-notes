@@ -2392,6 +2392,19 @@ console.log(dest); // { a :{} }
 console.log(dest.a === src.a); // true
 ```
 
+`...` object spread syntax:
+
+- **自有**属性扩展
+- **可枚举**属性扩展.
+- **浅拷贝**扩展.
+
+```ts
+const foo = { a: 1 };
+const bar = { b: 2, c: { d: 3 } };
+const foobar = { ...foo, ...bar };
+console.log(foobar.c === bar.c); // true
+```
+
 #### Object Deep Clone
 
 ```ts
