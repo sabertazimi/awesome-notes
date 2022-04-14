@@ -6916,15 +6916,21 @@ const entry = performance.getEntriesByName(url)[0];
 if (entry.transferSize === 0) {
   const cacheTime = entry.responseStart - entry.requestStart;
 }
-```
 
-```ts
 async function handleRequest(event) {
   const cacheStart = performance.now();
   const response = await caches.match(event.request);
   const cacheEnd = performance.now();
 }
 ```
+
+- 服务工作者线程缓存不自动缓存任何请求, 所有缓存都必须明确指定.
+- 服务工作者线程缓存没有到期失效的概念.
+- 服务工作者线程缓存必须手动更新和删除.
+- 缓存版本必须手动管理:
+  每次服务工作者线程更新, 新服务工作者线程负责提供新的缓存键以保存新缓存.
+- 唯一的浏览器强制逐出策略基于服务工作者线程缓存占用的空间.
+  缓存超过浏览器限制时, 浏览器会基于 LRU 原则为新缓存腾出空间.
 
 #### Service Worker Caching Strategy
 
