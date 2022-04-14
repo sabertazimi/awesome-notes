@@ -1042,6 +1042,7 @@ tags: [Web, Framework, Library]
 - [Git URL Parser](https://github.com/IonicaBizau/git-url-parse)
 - [SemVer Parser](https://github.com/npm/node-semver)
 - [INI Parser](https://github.com/npm/ini)
+- [RSS Parser](https://github.com/rbren/rss-parser)
 
 ### JavaScript Parser
 
