@@ -238,6 +238,14 @@ navigator.getBattery().then(battery => {
 });
 ```
 
+#### Web Storage Estimate API
+
+```ts
+navigator.storage.estimate().then(estimate => {
+  console.log(((estimate.usage / estimate.quota) * 100).toFixed(2));
+});
+```
+
 #### Web Geolocation API
 
 ```ts
