@@ -6729,6 +6729,17 @@ if (!String.prototype.trim) {
 
 ## JavaScript API
 
+### Strict Mode
+
+- Variables must be declared.
+- Functions must be declared at the top level of a scope.
+- `arguments` objects has no `callee` and `caller`.
+- `this` is `undefined` in non-method functions.
+- Setting and deleting immutable properties fails with exception.
+- Forbidden unqualified identifiers deletion (`Syntax Error`).
+- Forbidden `with` statement (`Syntax Error`).
+- Forbidden octal numbers (`Syntax Error`).
+
 ### Timer
 
 - setTimeout.
