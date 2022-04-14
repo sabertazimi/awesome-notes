@@ -3869,8 +3869,8 @@ reduce image transfer sizes by average of **~20%**:
   loading="lazy"
   decoding="async"
   style="
+    background-image: url('data:image/svg+xml;base64,[svg text]');
     background-size: cover;
-    background-image: url(data:image/svg+xml;base64,[svg text]);
   "
 />
 ```
