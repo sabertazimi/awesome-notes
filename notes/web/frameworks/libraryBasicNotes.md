@@ -203,13 +203,10 @@ tags: [Web, Framework, Library]
 
 #### Regular Expression Utils
 
-- [Validator: Common String Patterns](https://github.com/validatorjs/validator.js)
+- [Validator: Common RegExp Patterns](https://github.com/validatorjs/validator.js)
 - [Regex101](https://github.com/firasdib/Regex101)
 - [Regex Visualization](https://github.com/Bowen7/regex-vis)
-- [Crontab Parser](https://github.com/harrisiirak/cron-parser)
-- [Domain Parser](https://github.com/peerigon/parse-domain)
-- [Git URL Parser](https://github.com/IonicaBizau/git-url-parse)
-- [SemVer Parser](https://github.com/npm/node-semver)
+- [XRegExp: Extended JavaScript Regular Expressions](https://github.com/slevithan/xregexp)
 - [RE2: Fast, Safe Alternative to Backtracking Regular Expression Engines](https://github.com/uhop/node-re2)
 
 ### Concurrent and Parallel Programming Utils
@@ -1032,14 +1029,6 @@ tags: [Web, Framework, Library]
 
 ## Compiler
 
-### JavaScript Parser
-
-- [Acorn](https://github.com/acornjs/acorn)
-- [Babel](https://github.com/babel/babel)
-- [Espree](https://github.com/eslint/espree)
-- [Esprima](https://github.com/jquery/esprima)
-- [AST Explorer](https://github.com/fkling/astexplorer)
-
 ### Parser
 
 - [UnifiedJS: Interface for Parsing, Inspecting, Transforming and Serializing Content through Syntax Trees](https://github.com/unifiedjs/unified)
@@ -1048,7 +1037,18 @@ tags: [Web, Framework, Library]
 - [XML Parser](https://github.com/TobiasNickel/tXml)
 - [SVG Parser](https://github.com/sebmarkbage/art)
 - [Crontab Parser](https://github.com/harrisiirak/cron-parser)
+- [Domain Parser](https://github.com/peerigon/parse-domain)
+- [Git URL Parser](https://github.com/IonicaBizau/git-url-parse)
+- [SemVer Parser](https://github.com/npm/node-semver)
 - [INI Parser](https://github.com/npm/ini)
+
+### JavaScript Parser
+
+- [Acorn](https://github.com/acornjs/acorn)
+- [Babel](https://github.com/babel/babel)
+- [Espree](https://github.com/eslint/espree)
+- [Esprima](https://github.com/jquery/esprima)
+- [AST Explorer](https://github.com/fkling/astexplorer)
 
 #### Markdown Parser and Render
 
