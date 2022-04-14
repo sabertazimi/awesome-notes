@@ -4210,7 +4210,7 @@ co(readFile).then(res => console.log(res));
 
 #### Recursive Generator
 
-`yield *` 能够迭代一个可迭代对象:
+`yield *` 能够迭代一个可迭代对象 (Delegating Generators):
 
 ```ts
 function* generatorFn() {
@@ -4242,7 +4242,8 @@ for (const x of outerGeneratorFn()) {
 ```
 
 在生成器函数内部,
-用 `yield *` 去迭代自身产生的生成器对象 (Generator Object -> IterableIterator),
+用 `yield *` 去迭代自身产生的生成器对象
+(Generator Object -> IterableIterator),
 实现递归算法:
 
 ```ts
