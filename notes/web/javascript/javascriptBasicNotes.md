@@ -5956,23 +5956,23 @@ Promise.all(partialSumPromises)
 
 ## Functional JavaScript
 
-- predictable (pure and immutable)
-- safe (pure and immutable)
-- transparent (pure and immutable)
-- modular (composite)
+- Predictable (pure and immutable).
+- Safe (pure and immutable).
+- Transparent (pure and immutable).
+- Modular (composite).
 
 ### Functional JavaScript Pros
 
-- type safe and state safe
-- explicit flow of data
-- concurrency safety
+- Type safe and state safe.
+- Explicit flow of data.
+- Concurrency safety.
 
 ### Functional JavaScript Cons
 
-- verbose
-- more object creation
-- more garbage collection
-- more memory usage
+- Verbose.
+- More object creation.
+- More garbage collection.
+- More memory usage.
 
 With help of `immutable.js`,
 object creation/garbage collection/memory usage can be alleviated.
@@ -6025,18 +6025,48 @@ const addFive = curry(addOne, 1, 3);
 ### Compose
 
 ```ts
-function compose(...fns) {
-  return x => fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x));
-}
+const compose =
+  (...fns) =>
+  x =>
+    fns.reduceRight((promise, fn) => promise.then(fn), Promise.resolve(x));
 
 const addTwo = x => x + 2;
 const addThree = x => x + 3;
 const addFive = x => x + 5;
 const addTen = compose(addTwo, addThree, addFive);
+
+addTen(8).then(console.log); // 18
+```
+
+### Flow
+
+```ts
+const flow =
+  (...fns) =>
+  x =>
+    fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x));
+
+const addTwo = x => x + 2;
+const addThree = x => x + 3;
+const addFive = x => x + 5;
+const addTen = flow(addTwo, addThree, addFive);
+
 addTen(8).then(console.log); // 18
 ```
 
 ### Pipe
+
+```ts
+const pipe = (x, ...fns) =>
+  fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x));
+
+const addTwo = x => x + 2;
+const addThree = x => x + 3;
+const addFive = x => x + 5;
+const addTen = pipe(8, addTwo, addThree, addFive);
+
+addTen.then(console.log); // 18
+```
 
 ### Functional JavaScript Library
 
