@@ -3129,15 +3129,17 @@ window.onload = function () {
 #### Script Lazy Loading
 
 ```html
-... The full body of the page ...
-<script>
-window.onload = function () {
-  const script = document.createElement("script");
-  script.src = "all_lazy_20100426.js";
-  document.documentElement.firstChild.appendChild(script);
-};
-</script>
-</body>
+<html>
+  <body>
+    ... The full body of the page ...
+    <script>
+      window.onload = function () {
+        const script = document.createElement('script');
+        script.src = 'all_lazy_20100426.js';
+        document.documentElement.firstChild.appendChild(script);
+      };
+    </script>
+  </body>
 </html>
 ```
 
@@ -5714,7 +5716,7 @@ const has = Object.prototype.hasOwnProperty; // https://www.npmjs.com/package/ha
 console.log(has.call(object, key));
 ```
 
-- use object spread not object.assign
+- Use object spread (`...`) not `object.assign`:
 
 ```ts
 // very bad
@@ -5746,9 +5748,9 @@ function getProp(prop) {
 
 ### Array Style
 
-- use literal
-- use `push` not `[]`
-- use array spread (best) or `Array.from` (good)
+- Use literal.
+- Use `push` not `[]`.
+- Use array spread (`...`) (best) or `Array.from` (good).
 
 ```ts
 const foo = document.querySelectorAll('.foo');

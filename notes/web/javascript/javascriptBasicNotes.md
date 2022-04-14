@@ -3515,7 +3515,7 @@ setTimeout(function () {
 - 接收可迭代对象的原生语言特性:
   - `for...in`/`for...of`.
   - Destructing: 数组解构.
-  - `...`: 扩展操作符.
+  - `...`: 扩展操作符 (`Spread Syntax`).
   - `Array.from()`.
   - `new Map()`.
   - `new Set()`.
