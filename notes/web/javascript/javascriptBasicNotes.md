@@ -769,18 +769,22 @@ if (typeof Array.isArray === 'undefined') {
 }
 ```
 
-#### Array Includes
+#### Array Of
 
-No more `indexOf() > -1`.
+```ts
+Array.of(1); // [1]
+Array.of(1, 2, 3); // [1, 2, 3]
+Array.of(undefined); // [undefined]
+```
 
 #### Array From
 
-强大的**函数式**方法
+强大的**函数式**方法:
 
-- 伪数组对象(array-like object)
-- 可枚举对象(iterable object)
-- 克隆数组
-- map 函数
+- 伪数组对象 (Array-like object).
+- 可枚举对象 (Iterable object).
+- 克隆数组.
+- `map` 函数.
 
 ```ts
 // Set
@@ -819,6 +823,18 @@ Array.from([1, 2, 3], x => x * x);
 // random array generation
 Array.from(Array(5).keys());
 // [0, 1, 2, 3, 4]
+```
+
+#### Array Fill
+
+```ts
+const numbers = [1, 2, 3, 4];
+numbers.fill(1, 2);
+console.log(numbers.toString()); // 1, 2, 1, 1
+numbers.fill(0, 1, 3);
+console.log(numbers.toString()); // 1, 0, 0, 1
+numbers.fill(1);
+console.log(numbers.toString()); // 1, 1, 1, 1
 ```
 
 #### Array CopyWithin
@@ -881,6 +897,10 @@ string(charArray).split('割断点'); // 选择割断符,返回字符串数组
 arr.find(fn);
 arr.findIndex(fn);
 ```
+
+#### Array Includes
+
+No more `indexOf() > -1`.
 
 #### Array Flat
 
@@ -978,7 +998,7 @@ console.log(arrayCopy); // [ '1', [ '3' ], 3 ]
 console.log(nestedArray); //  1, [ 2 ], 3 ]
 ```
 
-#### Spread Array
+#### Array Spread
 
 ```ts
 arr2.push(...arr1);
@@ -1026,6 +1046,13 @@ const concatArray = typedArrayConcat(
 
 console.log(concatArray); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 console.log(concatArray instanceof Int32Array); // true
+```
+
+```ts
+const view = new Int16Array([25, 50]);
+console.log(view instanceof Int16Array); // true
+console.log(view instanceof Array); // false
+console.log(Array.isArray(view)); // false
 ```
 
 #### Array Tips and Best Practice
