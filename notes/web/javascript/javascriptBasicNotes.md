@@ -4997,7 +4997,19 @@ Resolve only accept **one** value:
 return new Promise(resolve => resolve([a, b]));
 ```
 
-`Promise.resolve` 是一个幂等方法:
+```ts
+const thenable = {
+  then(resolve, reject) {
+    resolve(42);
+  },
+};
+const promise = Promise.resolve(thenable);
+promise.then(value => {
+  console.log(value); // 42
+});
+```
+
+`Promise.resolve` 是一个幂等方法 (状态机幂等):
 
 ```ts
 const p = Promise.resolve(7);
