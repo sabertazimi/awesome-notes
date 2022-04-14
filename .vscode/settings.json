@@ -1123,6 +1123,7 @@
     "onclose",
     "onedark",
     "oneline",
+    "onmessageerror",
     "onupgradeneeded",
     "OPAM",
     "opendir",

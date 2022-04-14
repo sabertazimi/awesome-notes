@@ -5441,14 +5441,10 @@ export default {
 
 ### Web Worker
 
-- 多线程处理.
-- 有两种方法可以停止 Worker:
-  从主页调用 `worker.terminate()` 或在 worker 内部调用 `self.close()`
+- 多线程并行执行.
 - 利用 [BroadcastChannel API](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel)
   可以创建 Shared Worker, 即共享 Workers 在同一源 (origin) 下面的各种进程都可以访问它,
-  包括: iframes/浏览器中的不同 tab 页 (browsing context)
-- Web Workers 无法访问一些非常关键的 JavaScript 特性:
-  DOM(它会造成线程不安全), window 对象, document 对象, parent 对象.
+  包括: `iframe`/浏览器中的不同 Tab 页 (`Browsing Context`).
 - Use Case:
   - Graphic App (Ray Tracing).
   - Encryption.
@@ -5501,19 +5497,33 @@ self.addEventListener(
 
 #### Web Worker Runtime
 
-- `navigation` 对象: `appName`, `appVersion`, `userAgent`, `platform`.
-- `location` 对象: 所有属性只读.
-- ECMAScript 对象: `Object`/`Array`/`Date`.
-- `XMLHttpRequest` 方法.
-- `setTimeout`/`setInterval` 方法.
-- `self` 对象: 指向全局 worker 对象.
-- `importScripts` 方法: 加载外部依赖.
-- `close` 方法: 停止 worker.
+- Web Worker 无法访问一些非常关键的 JavaScript 特性:
+  DOM (线程不安全), `window` 对象, `document` 对象, `parent` 对象.
+- `self` 上可用的属性是 `window` 对象上属性的严格子集,
+  [`WorkerGlobalScope`](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope):
+  - `navigation` 对象: `appName`, `appVersion`, `userAgent`, `platform`.
+  - `location` 对象: 所有属性只读.
+  - ECMAScript 对象: `Object`/`Array`/`Date`.
+  - `console` 对象.
+  - `setTimeout`/`setInterval` 方法.
+  - `XMLHttpRequest` 方法.
+  - `fetch` 方法.
+  - `caches` 对象: `ServicerWorker` `CacheStorage` 对象.
+  - `self` 对象: 指向全局 worker 对象.
+  - `close` 方法: 停止 worker.
+  - `importScripts` 方法: 加载外部依赖.
+  - [`MessagePort`](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort)
+    方法: `postMessage`/`onmessage`/`onmessageerror`.
+- 工作者线程的脚本文件只能从与父页面相同的源加载,
+  从其他源加载工作者线程的脚本文件会导致错误.
+  在工作者线程内部可以使用 `importScripts()` 可以加载其他源的脚本.
 
-#### Web Worker Usage
+#### Web Worker Basic Usage
 
 - 先 `on`, 后 `post`.
 - `main.js`/`worker.js` 的 `onmessage` 与 `postMessage` 相互触发.
+- 有两种方法可以停止 Worker:
+  从主页调用 `worker.terminate()` 或在 worker 内部调用 `self.close()`.
 
 ```ts
 /*
@@ -5579,6 +5589,152 @@ testWorker('message from main thread').then(message => {
   console.log(`I am main thread, I receive:-----${message}`);
 });
 ```
+
+#### Web Worker Pool
+
+```ts
+class TaskWorker extends Worker {
+  constructor(notifyAvailable, ...workerArgs) {
+    super(...workerArgs);
+
+    // 初始化为不可用状态
+    this.available = false;
+    this.resolve = null;
+    this.reject = null;
+
+    // 线程池会传递回调
+    // 以便工作者线程发出它需要新任务的信号
+    this.notifyAvailable = notifyAvailable;
+
+    // 线程脚本在完全初始化之后
+    // 会发送一条"ready"消息
+    this.onmessage = () => this.setAvailable();
+  }
+
+  // 由线程池调用, 以分派新任务
+  dispatch({ resolve, reject, postMessageArgs }) {
+    this.available = false;
+    this.onmessage = ({ data }) => {
+      resolve(data);
+      this.setAvailable();
+    };
+    this.onerror = e => {
+      reject(e);
+      this.setAvailable();
+    };
+    this.postMessage(...postMessageArgs);
+  }
+
+  setAvailable() {
+    this.available = true;
+    this.resolve = null;
+    this.reject = null;
+    this.notifyAvailable();
+  }
+}
+
+class WorkerPool {
+  constructor(poolSize, ...workerArgs) {
+    this.taskQueue = [];
+    this.workers = [];
+
+    // 初始化线程池
+    for (let i = 0; i < poolSize; ++i) {
+      this.workers.push(
+        new TaskWorker(() => this.dispatchIfAvailable(), ...workerArgs)
+      );
+    }
+  }
+
+  // 把任务推入队列
+  enqueue(...postMessageArgs) {
+    return new Promise((resolve, reject) => {
+      this.taskQueue.push({ resolve, reject, postMessageArgs });
+      this.dispatchIfAvailable();
+    });
+  }
+
+  // 把任务发送给下一个空闲的线程
+  dispatchIfAvailable() {
+    if (!this.taskQueue.length) {
+      return;
+    }
+
+    for (const worker of this.workers) {
+      if (worker.available) {
+        const a = this.taskQueue.shift();
+        worker.dispatch(a);
+        break;
+      }
+    }
+  }
+
+  // 终止所有工作者线程
+  close() {
+    for (const worker of this.workers) {
+      worker.terminate();
+    }
+  }
+}
+```
+
+<!-- eslint-disable no-restricted-globals -->
+
+```ts
+// worker.js
+self.onmessage = ({ data }) => {
+  const view = new Float32Array(data.arrayBuffer);
+  let sum = 0;
+  // 求和
+  for (let i = data.startIdx; i < data.endIdx; ++i) {
+    // 不需要原子操作, 因为只需要读
+    sum += view[i];
+  }
+  // 把结果发送给工作者线程
+  self.postMessage(sum);
+};
+// 发送消息给 TaskWorker
+// 通知工作者线程准备好接收任务了
+self.postMessage('ready');
+
+// main.js
+const totalFloats = 1e8;
+const numTasks = 20;
+const floatsPerTask = totalFloats / numTasks;
+const numWorkers = 4;
+
+// 创建线程池
+const pool = new WorkerPool(numWorkers, './worker.js');
+
+// 填充浮点值数组
+const arrayBuffer = new SharedArrayBuffer(4 * totalFloats);
+const view = new Float32Array(arrayBuffer);
+
+for (let i = 0; i < totalFloats; ++i) {
+  view[i] = Math.random();
+}
+
+const partialSumPromises = [];
+
+for (let i = 0; i < totalFloats; i += floatsPerTask) {
+  partialSumPromises.push(
+    pool.enqueue({
+      startIdx: i,
+      endIdx: i + floatsPerTask,
+      arrayBuffer,
+    })
+  );
+}
+
+// 求和
+Promise.all(partialSumPromises)
+  .then(partialSums => partialSums.reduce((x, y) => x + y))
+  .then(console.log);
+// (在这个例子中, 和应该约等于 1E8/2)
+// 49997075.47203197
+```
+
+<!-- eslint-enable no-restricted-globals -->
 
 #### Web Worker Performance
 
