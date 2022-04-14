@@ -3943,6 +3943,8 @@ g.next(); // { value: undefined, done: true }
 
 #### Asynchronous Generator
 
+Asynchronous iterable iterator:
+
 ```ts
 const asyncSource = {
   async *[Symbol.asyncIterator]() {
@@ -3953,7 +3955,11 @@ const asyncSource = {
 for await (const chunk of asyncSource) {
   console.log(chunk);
 }
+```
 
+Asynchronous generator (`yield`):
+
+```ts
 async function* remotePostsAsyncGenerator() {
   let i = 1;
 
@@ -3977,6 +3983,8 @@ for await (const chunk of remotePostsAsyncGenerator()) {
   console.log(chunk);
 }
 ```
+
+Asynchronous generator (`yield *`):
 
 ```ts
 function* chunkify(array, n) {
@@ -4003,6 +4011,52 @@ async function* getRemoteData() {
 
 for await (const chunk of getRemoteData()) {
   console.log(chunk);
+}
+```
+
+Asynchronous UI events stream (RxJS):
+
+```ts
+class Observable {
+  constructor() {
+    this.promiseQueue = [];
+    // 保存用于队列下一个 promise 的 resolve 方法
+    this.resolve = null;
+    // 把最初的 promise 推到队列, 该 promise 会 resolve 为第一个观察到的事件
+    this.enqueue();
+  }
+
+  // 创建新 promise, 保存其 resolve 方法, 并把它保存到队列中
+  enqueue() {
+    this.promiseQueue.push(new Promise(resolve => (this.resolve = resolve)));
+  }
+
+  // 从队列前端移除 promise, 并返回它
+  dequeue() {
+    return this.promiseQueue.shift();
+  }
+
+  async *fromEvent(element, eventType) {
+    // 在有事件生成时, 用事件对象来 resolve 队列头部的 promise
+    // 同时把另一个 promise 加入队列
+    element.addEventListener(eventType, event => {
+      this.resolve(event);
+      this.enqueue();
+    });
+
+    // 每次 resolve 队列头部的 promise 后, 都会向异步迭代器返回相应的事件对象
+    while (1) {
+      yield await this.dequeue();
+    }
+  }
+}
+
+const observable = new Observable();
+const button = document.querySelector('button');
+const mouseClickIterator = observable.fromEvent(button, 'click');
+
+for await (const clickEvent of mouseClickIterator) {
+  console.log(clickEvent);
 }
 ```
 
