@@ -1554,13 +1554,13 @@ margin in the direction of the float will pull the floated element in that direc
 
 #### Vertical Inline element
 
-- padding
-- line-height
-- vertical-align: middle
+- `padding`.
+- `line-height`.
+- `vertical-align: middle`:
   - 作用环境: parent element `line-height` === `height`.
-  - 作用对象: children element `display: inline-block/inline`.
-- flexbox
-- grid
+  - 作用对象: children `inline`/`inline-block`/`table-cell` element.
+- `flexbox`.
+- `grid`.
 
 Button label (`<a>`) vertical alignment:
 
