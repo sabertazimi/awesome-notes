@@ -2909,6 +2909,21 @@ class SubClass extends SuperClass {
 // 'static block 2 SubClass'
 ```
 
+#### Class Best Practice
+
+Avoid using `class` when:
+
+- Singleton:
+  - Only instantiate your class **once in a given runtime**.
+- Stateless:
+  - Data structure **no need for local state**.
+  - Data structure **no need for extending**.
+- Redundant:
+  - Minimal public methods.
+  - Constructors are only used for dependency injection.
+  - Constructors are always called with same arguments.
+- Want to avoid using `this`.
+
 ### Global Object
 
 ```ts
