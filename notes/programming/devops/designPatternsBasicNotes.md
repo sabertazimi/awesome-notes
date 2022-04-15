@@ -3607,8 +3607,6 @@ Nest.js 通过 AOP 的架构方式, 实现了松耦合, 易于维护与扩展的
 
 ## Domain Driven Design
 
-- [Front-end domain driven design guide](https://dev.to/bespoyasov/clean-architecture-on-frontend-4311).
-
 ### Interface Layer
 
 主要负责与外部系统进行交互与通信:
@@ -3631,6 +3629,13 @@ Domain 层是领域模型系统的核心,
 几乎全部的业务逻辑都会在这一层实现.
 内部主要包含 Entity, ValueObject, Domain Event, Repository.
 
+- `Controller` will receive the user’s requests and reply with a structured response.
+- `Service` will process the user’s request,
+  including validations and third-party reporting,
+  and will receive data using the repository layer as a source of truth.
+- `Repository` will function as the application’s source of truth,
+  will include the DB and external services queries.
+
 ### Infrastructure Layer
 
 主要为 Interface, Application 和 Domain 三层提供支撑:
@@ -3639,9 +3644,10 @@ Domain 层是领域模型系统的核心,
 - Third-party tools, Message Queue, File, Cache, Database, Search etc.
 - 实现仓储接口 DB, 通常真正读写 DB.
 
-### DDD Layout
+### Domain Driven Design Reference
 
-- [DDD Layout in Golang](https://github.com/lupguo/ddd-layout)
+- Front-end domain driven design [guide](https://dev.to/bespoyasov/clean-architecture-on-frontend-4311).
+- Domain driven design Layout in [Golang](https://github.com/lupguo/ddd-layout).
 
 ## Scalability Design
 
