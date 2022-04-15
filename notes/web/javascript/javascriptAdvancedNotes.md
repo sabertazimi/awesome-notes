@@ -6436,10 +6436,11 @@ function createPlayer(animations) {
 
 ### Canvas Basic Usage
 
-- 绘制路径 beginPath() -> draw() -> closePath().
 - Path2D 对象.
+- 绘制路径: `beginPath()` -> `draw()` -> `closePath()`.
 - 绘制样式: 颜色/渐变/变换/阴影.
-- 绘制图形: fill/stroke/clip.
+- 绘制图形: `fill`/`stroke`/`clip`.
+- 绘制文字: `font`/`fillText()`/`measureText()`.
 
 ```ts
 const context = canvas.getContext('2d');
