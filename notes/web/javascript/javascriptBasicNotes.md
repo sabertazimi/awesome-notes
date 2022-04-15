@@ -4241,7 +4241,6 @@ using promises, letting you write non-blocking code in a nice-ish way
 ```ts
 function coroutine(generatorFunc) {
   const generator = generatorFunc();
-  nextResponse();
 
   function nextResponse(value) {
     const response = generator.next(value);
@@ -4250,12 +4249,14 @@ function coroutine(generatorFunc) {
       return;
     }
 
-    if (value.then) {
+    if (value instanceof Promise) {
       value.then(nextResponse);
     } else {
       nextResponse(response.value);
     }
   }
+
+  nextResponse();
 }
 
 coroutine(function* bounce() {
@@ -4377,6 +4378,8 @@ for (const element of DomTraversal(document.getElementById('subTree'))) {
   console.log(element.nodeName);
 }
 ```
+
+结合 `Promise`/`async`/`await` 可以实现异步递归算法:
 
 ```ts
 import { promises as fs } from 'fs';

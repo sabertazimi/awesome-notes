@@ -7596,6 +7596,40 @@ function formatParams(data) {
 }
 ```
 
+```ts
+function getJSON(url) {
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+
+    request.open('GET', url);
+
+    request.onload = function () {
+      try {
+        if (this.status === 200) {
+          resolve(JSON.parse(this.response));
+        } else {
+          reject(Error(`${this.status} ${this.statusText}`));
+        }
+      } catch (e) {
+        reject(e.message);
+      }
+    };
+
+    request.onerror = function () {
+      reject(Error(`${this.status} ${this.statusText}`));
+    };
+
+    request.send();
+  });
+}
+
+getJSON('data/sample.json')
+  .then(ninjas => {
+    assert(ninjas !== null, 'Get data');
+  })
+  .catch(e => handleError(`Error: ${e}`));
+```
+
 #### Ajax Cross Origin Request
 
 ```html
