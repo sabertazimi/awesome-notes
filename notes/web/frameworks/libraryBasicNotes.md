@@ -1356,6 +1356,8 @@ tags: [Web, Framework, Library]
 
 ### GitHub Actions
 
+- [Action Toolkit](https://github.com/actions-cool)
+
 #### Basic Actions
 
 - [Cancel Workflow](https://github.com/styfle/cancel-workflow-action)
