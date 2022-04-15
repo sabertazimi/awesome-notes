@@ -1168,6 +1168,7 @@ tags: [Web, Framework, Library]
 
 ### Unit Testing
 
+- [Vitest: Fast Vite-native Test Framework](https://github.com/vitest-dev/vitest)
 - [Jest](https://github.com/facebook/jest)
 - [Jest UI](https://github.com/Raathigesh/majestic)
 - [React Testing Library](https://github.com/testing-library/react-testing-library)
