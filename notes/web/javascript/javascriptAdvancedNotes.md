@@ -4337,20 +4337,24 @@ observer.observe({ type: 'layout-shift', buffered: true });
 
 ### Performance Best Practice
 
-- Use monomorphic objects due to shape and inline caches.
-- Use monomorphic function in hot code paths.
 - Code optimization:
   - Fast CSS styles (`CSS Performance`):
-  - Fast JavaScript code (`Effective JavaScript`) (DOM/React/Concurrency).
-- Resource optimization: HTML/CSS/JS/Images/Audio/Video/Fonts:
+  - Fast JavaScript code (`Effective JavaScript`):
+    - DOM performance.
+    - React performance.
+    - Concurrency: asynchronous/web worker.
+- Resource optimization (HTML/CSS/JS/Images/Audio/Video/Fonts):
   - Remove useless files.
   - Tree shaking.
   - Zip.
   - CDN.
-- Lazy loading: HTML/CSS/JS/Images/Audio/Video/Fonts.
 - Code splitting: Webpack `splitChunks`.
+- Use monomorphic objects due to shape and inline caches.
+- Use monomorphic function in hot code paths.
 - Offline caching (PWA).
+- CDN.
 - PreFetch/PreLoad/PreRendering (SSR).
+- Lazy loading: HTML/CSS/JS/Images/Audio/Video/Fonts.
 
 ### Performance and Analysis Tools
 
