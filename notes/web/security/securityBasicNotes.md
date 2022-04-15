@@ -308,7 +308,9 @@ Disable DTD parse in XML parser
 
 ### 目录遍历攻击
 
+```bash
 GET /../../../passwd.key HTTP/1.1
+```
 
 #### Directory Protection
 
@@ -338,12 +340,15 @@ GET /../../../passwd.key HTTP/1.1
 
 Case:
 
-- left-pad.
-- eslint-scope.
-- antd.
-- faker.js.
-- colors.js.
-- node-ipc.
+- [left-pad](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm).
+- [eslint](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes).
+- [antd](https://github.com/ant-design/ant-design/issues/13098).
+- [faker.js](https://github.com/marak/Faker.js).
+- [colors.js](https://github.com/Marak/colors.js/issues/285).
+- [node-ipc](https://github.com/RIAEvangelist/node-ipc).
+- [es5-ext](https://github.com/medikoo/es5-ext/commit/28de285ed433b45113f01e4ce7c74e9a356b2af2).
+- [event-source-polyfill](https://github.com/Yaffle/EventSource/commit/de137927e13d8afac153d2485152ccec48948a7a).
+- [styled-components](https://github.com/styled-components/styled-components/commit/ba9d732ca7da53f2a095e35450ecffd592c6f5ba).
 
 Solution:
 
