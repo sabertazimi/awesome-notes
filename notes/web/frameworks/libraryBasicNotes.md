@@ -844,7 +844,6 @@ tags: [Web, Framework, Library]
 - [React ACE](https://github.com/securingsincity/react-ace)
 - [ACE Editor](https://github.com/ajaxorg/ace)
 - [Code Mirror](https://github.com/codemirror/CodeMirror)
-- [Utopia: React IDE](https://github.com/concrete-utopia/utopia)
 - [Xi: Code Editor Philosophy](https://github.com/xi-editor/xi-editor)
 
 ### Live Editor and Playground
@@ -856,6 +855,8 @@ tags: [Web, Framework, Library]
 ### Web IDE
 
 - [CodeServer: VS Code in Browser](https://github.com/cdr/code-server)
+- [Theia: Cloud IDE framework](https://github.com/eclipse-theia/theia)
+- [Utopia: React IDE](https://github.com/concrete-utopia/utopia)
 
 ### Low Code Editor
 
