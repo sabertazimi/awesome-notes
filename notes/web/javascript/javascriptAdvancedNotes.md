@@ -4376,6 +4376,9 @@ observer.observe({ type: 'layout-shift', buffered: true });
 ### Performance Reference
 
 - `web.dev` performance complete [guide](https://web.dev/fast).
+- LCP optimization [guide](https://web.dev/optimize-lcp).
+- FID optimization [guide](https://web.dev/optimize-fid).
+- CLS optimization [guide](https://web.dev/optimize-cls).
 - Fetch priority [guide](https://web.dev/priority-hints).
 - Resources priority [guide](https://web.dev/prioritize-resources).
 - Web vitals real world [case](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw).
