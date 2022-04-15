@@ -5169,6 +5169,59 @@ module.exports = {
 
 ### Jest Internals
 
+Running tests in
+[`ShadowRealms`](https://2ality.com/2022/04/shadow-realms.html#use-cases-for-shadowrealms):
+
+```ts
+// demo.test.js
+import { test } from './TestLib.js';
+
+test('succeeds', () => {
+  assert.equal(3, 3);
+});
+
+test('fails', () => {
+  assert.equal(1, 3);
+});
+
+// This statement can add by `babel`.
+// eslint-disable-next-line import/no-anonymous-default-export
+export default true;
+
+// TestLib.js
+const testSuites = [];
+
+export function test(description, callback) {
+  testSuites.push({ description, callback });
+}
+
+export function runTests() {
+  const testResults = [];
+
+  for (const testSuite of testSuites) {
+    try {
+      testSuite.callback();
+      testResults.push(`${testSuite.description}: OK\n`);
+    } catch (err) {
+      testResults.push(`${testSuite.description}: ${err}\n`);
+    }
+  }
+
+  return testResults.join('');
+}
+
+// TestRunner.js
+async function runTestModule(moduleSpecifier) {
+  const sr = new ShadowRealm();
+  await sr.importValue(moduleSpecifier, 'default');
+  const runTests = await sr.importValue('./TestLib.js', 'runTests');
+  const result = runTests();
+  console.log(result);
+}
+
+await runTestModule('./demo.test.js');
+```
+
 A simple
 [test runner](https://github.com/typicode/xv)
 implementation:
