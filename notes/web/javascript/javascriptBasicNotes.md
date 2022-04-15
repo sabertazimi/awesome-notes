@@ -4265,29 +4265,9 @@ coroutine(function* bounce() {
 });
 ```
 
+利用 `async`/`await` 可以实现相同效果:
+
 ```ts
-function promise1() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve('1');
-    }, 1000);
-  });
-}
-
-function promise2(value) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(`value:${value}`);
-    }, 1000);
-  });
-}
-
-function* readFile() {
-  const value = yield promise1();
-  const result = yield promise2(value);
-  return result;
-}
-
 function co(gen) {
   return new Promise((resolve, reject) => {
     const g = gen();
@@ -4308,11 +4288,41 @@ function co(gen) {
   });
 }
 
-co(readFile).then(res => console.log(res));
-// const g = readFile();
+function promise1() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('1');
+    }, 1000);
+  });
+}
+
+function promise2(value) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(`value:${value}`);
+    }, 1000);
+  });
+}
+
+function* readFileGenerator() {
+  const value = yield promise1();
+  const result = yield promise2(value);
+  return result;
+}
+
+async function readFile() {
+  const value = await promise1();
+  const result = await promise2(value);
+  return result;
+}
+
+co(readFileGenerator).then(res => console.log(res));
+// const g = readFileGenerator();
 // const value = g.next();
 // const result = g.next(value);
 // resolve(result);
+
+readFile().then(res => console.log(res));
 ```
 
 #### Recursive Generator
