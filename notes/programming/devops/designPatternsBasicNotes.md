@@ -1322,12 +1322,14 @@ root.do();
 - 可以添加新属性, 并围绕新属性扩展对象的原行为 e.g 原对象只会说中文, 装饰后同时说中文与英文.
 - 避免了通过继承来为类型添加新职责, 通过继承的方式容易造成子类的膨胀.
 - 保持接口的一致性, **动态**改变对象的外观/职责.
-- 符合开放封闭原则和单一职责模式.
 - ConcreteDecorator 类: `private ClassName component` 拥有一个对象引用.
+- 在 JS 中, 可以利用 `Closure` (闭包) + `Higher Order Function` (高阶函数) 快速实现装饰器模式.
+- 符合开放封闭原则和单一职责模式.
 
 :::tip Decorator Use Case
 
 - React HOC Components.
+- ES2016 and TypeScript `@decorator`.
 - Guard: form validator.
 - Interceptor:
   - HTTP request and response decorator.
@@ -1338,43 +1340,15 @@ root.do();
 :::
 
 ```ts
-const __decorate = function (decorators, target, key, desc) {
-  const argumentsLength = arguments.length;
-  let descriptorOrTarget;
-  let decorator;
+function __decorate(decorators, target) {
+  const decorateTarget = target;
 
-  if (argumentsLength < 3) {
-    // class decorator
-    descriptorOrTarget = target;
-  } else if (desc === null) {
-    // method decorator
-    descriptorOrTarget = Object.getOwnPropertyDescriptor(target, key);
+  for (const decorator of decorators) {
+    decorateTarget = decorator(decorateTarget) || decorateTarget;
   }
 
-  for (let i = decorators.length - 1; i >= 0; i--) {
-    if (decorators[i]) {
-      decorator = decorators[i];
-
-      if (argumentsLength < 3) {
-        // if the decorator function returns a value use it;
-        // otherwise use the original.
-        descriptorOrTarget =
-          decorator(descriptorOrTarget) || descriptorOrTarget;
-      } else {
-        // if the decorator function returns a descriptor use it;
-        // otherwise use the original.
-        descriptorOrTarget =
-          decorator(target, key, descriptorOrTarget) || descriptorOrTarget;
-      }
-    }
-  }
-
-  if (argumentsLength > 3 && descriptorOrTarget) {
-    Object.defineProperty(target, key, descriptorOrTarget);
-  }
-
-  return descriptorOrTarget;
-};
+  return decorateTarget;
+}
 ```
 
 ```ts
@@ -1422,118 +1396,6 @@ console.log(mb.cost());
 
 // Outputs: 11.6
 console.log(mb.screenSize());
-```
-
-#### Decorator Implementation
-
-关键在于实现传递方式, 两种方式:
-
-- 通过属性拥有原生对象引用 (`Uber`), 获得上次装饰后结果.
-- 循环叠加每次装饰后结果.
-
-```ts
-// 构造函数
-function Sale(price) {
-  this.price = price || 100;
-}
-Sale.prototype.getPrice = function () {
-  return this.price;
-};
-
-// 定义具体装饰器
-// 通过uber属性获得上一次装饰后的结果
-Sale.decorators = {};
-Sale.decorators.fedTax = {
-  getPrice() {
-    let price = this.uber.getPrice();
-    price += (price * 5) / 100;
-    return price;
-  },
-};
-Sale.decorators.quebec = {
-  getPrice() {
-    let price = this.uber.getPrice();
-    price += (price * 7.5) / 100;
-    return price;
-  },
-};
-Sale.decorators.money = {
-  getPrice() {
-    return `$${this.uber.getPrice().toFixed(2)}`;
-  },
-};
-Sale.decorators.cdn = {
-  getPrice() {
-    return `CDN$ ${this.uber.getPrice().toFixed(2)}`;
-  },
-};
-
-Sale.prototype.decorate = function (decorator) {
-  const F = function () {};
-  const overrides = this.constructor.decorators[decorator];
-
-  // 临时代理构造函数
-  F.prototype = this;
-  const newObj = new F();
-
-  // 传递实现的关键
-  // 通过uber属性获得上一次装饰后的结果
-  newObj.uber = F.prototype;
-
-  for (const i in overrides) {
-    if (Object.prototype.hasOwnProperty.call(overrides, i)) {
-      newObj[i] = overrides[i];
-    }
-  }
-
-  return newObj;
-};
-```
-
-```ts
-// 构造函数
-function Sale(price) {
-  this.price = price > 0 || 100;
-  this.decorators_list = [];
-}
-Sale.prototype.getPrice = function () {
-  return this.price;
-};
-
-// 定义具体装饰器
-Sale.decorators = {};
-Sale.decorators.fedTax = {
-  getPrice(price) {
-    return price + (price * 5) / 100;
-  },
-};
-Sale.decorators.quebec = {
-  getPrice(price) {
-    return price + (price * 7.5) / 100;
-  },
-};
-Sale.decorators.money = {
-  getPrice(price) {
-    return `$${price.toFixed(2)}`;
-  },
-};
-
-Sale.prototype.decorate = function (decorator) {
-  this.decorators_list.push(decorator);
-};
-Sale.prototype.getPrice = function () {
-  let price = this.price;
-  const max = this.decorators_list.length;
-
-  for (let i = 0; i < max; i += 1) {
-    const name = this.decorators_list[i];
-    // 传递实现的关键
-    // 通过循环叠加上一次装饰后的结果
-    price = Sale.decorators[name].getPrice(price);
-  }
-
-  return price;
-};
 ```
 
 ### Facade Pattern
