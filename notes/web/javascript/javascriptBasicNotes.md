@@ -4362,6 +4362,20 @@ function* traverse(nodes) {
     }
   }
 }
+
+function* DomTraversal(element) {
+  yield element;
+  element = element.firstElementChild;
+
+  while (element) {
+    yield* DomTraversal(element);
+    element = element.nextElementSibling;
+  }
+}
+
+for (const element of DomTraversal(document.getElementById('subTree'))) {
+  console.log(element.nodeName);
+}
 ```
 
 ```ts
