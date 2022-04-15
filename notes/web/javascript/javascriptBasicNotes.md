@@ -2234,11 +2234,12 @@ const o = Object.create({
 });
 ```
 
-- `Object.getOwnPropertyDescriptor(O, property)`.
-- `Object.getOwnPropertyDescriptors(O)`.
-- `Object.getOwnPropertySymbols(O)`: 获取实例上 Symbol 属性名.
-- `Object.getOwnPropertyNames(O)`: 获取实例上非 Symbol 属性名 (包括不可枚举属性名).
-- `Object.keys(O)`: 获取实例上可枚举属性名.
+- `Object.hasOwn(object, property)`: Boolean.
+- `Object.getOwnPropertyDescriptor(object, property)`.
+- `Object.getOwnPropertyDescriptors(object)`.
+- `Object.getOwnPropertySymbols(object)`: 获取实例上 Symbol 属性名.
+- `Object.getOwnPropertyNames(object)`: 获取实例上非 Symbol 属性名 (包括不可枚举属性名).
+- `Object.keys(object)`: 获取实例上可枚举属性名.
 - `for...in`: 获取实例及其原型链上所有可枚举属性名.
 
 ```ts
@@ -2279,6 +2280,26 @@ p1.name = 'Rob';
 p1.age = 31;
 const p1keys = Object.keys(p1);
 console.log(p1keys); // '[name,age]'
+```
+
+```ts
+(function () {
+  // Grab browser's default global variables.
+  const iframe = window.document.createElement('iframe');
+  iframe.src = 'about:blank';
+  window.document.body.appendChild(iframe);
+  const browserGlobals = Object.keys(iframe.contentWindow);
+  window.document.body.removeChild(iframe);
+
+  // Get the global variables added at runtime by filtering out the browser's
+  // default global variables from the current window object.
+  const runtimeGlobals = Object.keys(window).filter(key => {
+    const isFromBrowser = browserGlobals.includes(key);
+    return !isFromBrowser;
+  });
+
+  console.log('Runtime globals', runtimeGlobals);
+})();
 ```
 
 - `Object.values(O)`:
