@@ -6150,11 +6150,7 @@ const partial = (fn, ...args) => {
 
 ### Currying
 
-chain of multiple single argument functions
-
-```ts
-const add = x => y => x + y;
-```
+Chain of multiple single argument functions:
 
 ```ts
 function curry(fn, ...stored_args) {
@@ -6163,6 +6159,8 @@ function curry(fn, ...stored_args) {
     return fn(...args);
   };
 }
+
+const add = x => y => x + y;
 
 const addOne = curry(add, 1);
 // addOne(3) === 4;
