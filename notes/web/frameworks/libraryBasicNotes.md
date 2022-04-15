@@ -563,15 +563,14 @@ tags: [Web, Framework, Library]
 
 - [React DnD: Drag and Drop](https://github.com/react-dnd/react-dnd)
 - [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd)
-- [React Draft.js](https://github.com/draft-js-plugins/draft-js-plugins)
 - [Moveable](https://github.com/daybrush/moveable)
 - [P5.js](https://github.com/processing/p5.js)
 - [Nipple.js](https://github.com/yoannmoinet/nipplejs)
 - [Moveable](https://github.com/daybrush/moveable)
-- [TransMat: Share Data beyond Boundaries of Browser](https://github.com/google/transmat)
 - [Spacers: Drag for More Space](https://github.com/actuallyakash/spacers)
 - [Interact.js: Drag, Drop and Resizing Multi Touch](https://github.com/taye/interact.js)
 - [ReactZoom: Multi-touch Gestures for Zooming and Dragging](https://github.com/retyui/react-quick-pinch-zoom)
+- [TransMat: Share Data beyond Boundaries of Browser](https://github.com/google/transmat)
 
 ### Cursor Utils
 
@@ -829,7 +828,9 @@ tags: [Web, Framework, Library]
 - [WangEditor: Lightweight Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
 - [TinyMCE: World #1 JavaScript Library for Rich Text Editing](https://github.com/tinymce/tinymce)
 - [StyloJS: TypeScript Rich Text Editor](https://github.com/papyrs/stylo)
+- [Lexical: Draft.js alternatives](https://github.com/facebook/lexical)
 - [Draft: React Text Editor Framework](https://github.com/facebook/draft-js)
+- [Draft Plugins](https://github.com/draft-js-plugins/draft-js-plugins)
 
 ### Markdown Editor
 
