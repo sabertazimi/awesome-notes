@@ -1493,7 +1493,7 @@ console.log(myStylesheet.cssRules.length); // 7
 | trusted                    | Boolean      | 浏览器生成/JavaScript 创建     |
 | View                       | AbstractView | 事件所发生的 window 对象       |
 | currentTarget              | Element      | Event handler binding          |
-| target                     | Element      | Event truly target             |
+| target                     | Element      | Event trigger                  |
 | bubbles                    | Boolean      | 事件是否冒泡                   |
 | cancelable                 | Boolean      | 是否可以取消事件的默认行为     |
 | eventPhase                 | Number       | 捕获阶段/到达目标/冒泡阶段     |
