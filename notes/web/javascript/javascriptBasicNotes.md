@@ -6903,39 +6903,6 @@ codePointLength(s); // 2
 | `{n,}?`          | n+                                     |
 | `{n,m}?`         | n ~ m                                  |
 
-### RegExp Back Reference
-
-位置编号 - 左括号的顺序:
-
-- `\1 \2 \3`: 第 n 个子表达式匹配的结果字符.
-- `$1 $2 $3`: 第 n 个子表达式匹配的结果字符.
-- 反向引用可以解决正则表达式回溯失控的问题 (ReDoS).
-
-```ts
-const regExp = /((<\/?\w+>.*)\2)/g;
-```
-
-```ts
-const text = 'ooo111ooo222ooo333ooo123';
-const regExp = /(\d)\1\1/g;
-const result = text.match(regExp);
-console.log(result); // [111, 222, 333]
-```
-
-:::danger RegExp Static Property
-
-Most `RegExp.XXX`/`RegExp.$X` static property aren't standard.
-Avoid use them in production:
-
-- `RegExp.input ($_)`.
-- `RegExp.lastMatch ($&)`.
-- `RegExp.lastParen ($+)`.
-- `RegExp.leftContext`.
-- `RegExp.rightContext ($')`.
-- `RegExp.$1-$9`.
-
-:::
-
 ### RegExp Group and Ranges
 
 - [Groups](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges).
@@ -6967,6 +6934,38 @@ for (const match of string.matchAll(regex)) {
   console.log(`repo: ${match.groups.repo}`);
 }
 ```
+
+### RegExp Back Reference
+
+- `$1 $2 $3`: 第 n 个子表达式匹配的结果字符.
+- 位置编号 (左括号的顺序): `\1 \2 \3`: 第 n 个子表达式匹配的结果字符.
+- Named capture group back reference: `\k<Name>`.
+- 反向引用可以解决正则表达式回溯失控的问题 (ReDoS).
+
+```ts
+const regExp = /((<\/?\w+>.*)\2)/g;
+```
+
+```ts
+const text = 'ooo111ooo222ooo333ooo123';
+const regExp = /(\d)\1\1/g;
+const result = text.match(regExp);
+console.log(result); // [111, 222, 333]
+```
+
+:::danger RegExp Static Property
+
+Most `RegExp.XXX`/`RegExp.$X` static property aren't standard.
+Avoid use them in production:
+
+- `RegExp.input ($_)`.
+- `RegExp.lastMatch ($&)`.
+- `RegExp.lastParen ($+)`.
+- `RegExp.leftContext`.
+- `RegExp.rightContext ($')`.
+- `RegExp.$1-$9`.
+
+:::
 
 ### RegExp Best Practice
 
