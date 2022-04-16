@@ -1298,6 +1298,7 @@ class XSet extends Set {
   }
 
   // 返回两个或更多集合的并集
+  // new Set([...setA, ...setB]);
   static union(a, ...bSets) {
     const unionSet = new XSet(a);
 
@@ -1311,6 +1312,7 @@ class XSet extends Set {
   }
 
   // 返回两个或更多集合的交集
+  // new Set([...setA].filter(x => setB.has(x)))
   static intersection(a, ...bSets) {
     const intersectionSet = new XSet(a);
 
@@ -1326,6 +1328,7 @@ class XSet extends Set {
   }
 
   // 返回两个集合的差集
+  // new Set([...setA].filter(x => !setB.has(x)))
   static difference(a, b) {
     const differenceSet = new XSet(a);
 
