@@ -614,6 +614,13 @@ const otherFooGlobalSymbol = Symbol.for('foobar'); // 重用已有符号
 console.log(fooGlobalSymbol === otherFooGlobalSymbol); // true
 ```
 
+| To      | Explicit Conversion     | Coercion (Implicit Conversion) |
+| ------- | ----------------------- | ------------------------------ |
+| boolean | Boolean(sym) → OK       | `!sym` → OK                    |
+| number  | Number(sym) → TypeError | `sym * 2` → TypeError          |
+| string  | String(sym) → OK        | `'' + sym` → TypeError         |
+|         | sym.toString() → OK     | `${sym}` → TypeError           |
+
 #### Built-in Symbol Methods
 
 [Symbol methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol#static_properties):
