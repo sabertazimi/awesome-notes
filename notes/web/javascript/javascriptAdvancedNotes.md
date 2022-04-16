@@ -942,6 +942,10 @@ node.replaceChildren(...nodeList);
 const formerFirstChild = someNode.removeChild(someNode.firstChild);
 // 删除最后一个子节点
 const formerLastChild = someNode.removeChild(someNode.lastChild);
+
+while (div.firstChild) {
+  div.removeChild(div.firstChild);
+}
 ```
 
 #### Traverse DOM Node
