@@ -6378,8 +6378,8 @@ APP.namespace('APP.utilities.array');
 // 形参: 导入全局变量
 APP.utilities.array = (function (app, global) {
   // 依赖模式
-  const uObj = APP.utilities.object;
-  const uLang = APP.utilities.lang;
+  const uObj = app.utilities.object;
+  const uLang = app.utilities.lang;
 
   // 私有属性
   const arrStr = '[object Array]';
