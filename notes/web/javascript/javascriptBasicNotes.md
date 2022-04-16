@@ -6599,6 +6599,26 @@ Sandbox('dom', 'event', function (box) {
 - 模块第一次加载后会被缓存, 后续加载会取得缓存的模块.
 - 模块加载是模块系统执行的同步操作, `require()` 可以位于条件语句中.
 
+[Minimal CJS bundler](https://github.com/sabertazimi/hust-web/blob/v2.7.0/js/bundler/index.js):
+
+```ts
+require.cache = Object.create(null);
+
+// Construct 'require', 'module' and 'exports':
+function require(moduleId) {
+  if (!(moduleId in require.cache)) {
+    const code = readFile(moduleId);
+    const module = { exports: {} };
+    require.cache[moduleId] = module;
+    // eslint-disable-next-line no-new-func
+    const wrapper = Function('require, exports, module', code);
+    // Bind code to module.exports:
+    wrapper(require, module.exports, module);
+  }
+  return require.cache[moduleId].exports;
+}
+```
+
 ### AMD Pattern
 
 Asynchronous module definition:
