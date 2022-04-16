@@ -7107,6 +7107,28 @@ export function isJunk(filename) {
 }
 ```
 
+#### RexExp Exec
+
+[`exec()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec):
+
+- Search starts at substring specified by `lastIndex` property.
+
+```ts
+const input = 'A string with 3 numbers in it... 42 and 88.';
+const number = /\b\d+\b/g;
+
+for (
+  let match = number.exec(input);
+  match !== null;
+  match = number.exec(input)
+) {
+  console.log('Found', match[0], 'at', match.index);
+}
+// Found 3 at 14
+// Found 42 at 33
+// Found 88 at 40
+```
+
 #### RegExp Replace
 
 ```ts
@@ -7168,6 +7190,24 @@ if (!String.prototype.trim) {
 
 #### Common Pattern
 
+- `/abc/`: Characters sequence.
+- `/[abc]/`: Characters set.
+- `/[^abc]/`: Non characters set.
+- `/[0-9]/`: Characters range.
+- `/x+/`: 1+ (Greedy).
+- `/x+?/`: 1+ (Lazy).
+- `/x*/`: 0+.
+- `/x?/`: 0/1.
+- `/x{2,4}/`: 2 ~ 4.
+- `/(abc)/`: Captured group.
+- `/a|b|c/`: Or patterns.
+- `/\d/`: Digit character.
+- `/\w/`: Alphanumeric character ("word character").
+- `/\s/`: Whitespace character.
+- `/./`: Character except `newlines`.
+- `/\b/`: Word boundary.
+- `/^/`: Start of input.
+- `/$/`: End of input.
 - `非X捕获组` + `特征字符` + `非Y捕获组`:
 
 ```ts
