@@ -241,7 +241,7 @@ s.endsWith('Hello', 5); // true
 s.includes('Hello', 6); // false
 ```
 
-- `repeat(times)`.
+- `string.repeat(times)`.
 
 ```ts
 'hello'.repeat(2); // "hellohello"
