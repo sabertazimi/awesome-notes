@@ -135,13 +135,16 @@ console.log(Math.min()); // Infinity
 
 作为基本变量:
 
-- 字符串中的字符不可枚举 (for in 循环).
 - `delete` 无法删除某位字符.
 
 #### String Reference Feature
 
-- 赋值与传参 传递 string 字符串常量 的引用.
-- 所有 string 量 都是不可变量, 当对 string 进行操作后, 将先会在堆区创建副本, 再通过副本进行修改, 并返回副本的索引.
+- 赋值与传参: 传递 string 字符串常量的引用.
+- 所有 string 字面量都是不可变量,
+  当对 string 进行操作后, 将先会在堆区创建副本,
+  再通过副本进行修改, 并返回副本的索引.
+- `for...in`: 返回下标数字.
+- `for...of`: 对字符串字符进行遍历.
 - 没有被任何变量引用的 string: 垃圾回收.
 
 ```ts
@@ -2235,6 +2238,27 @@ const o = Object.create({
 ```
 
 - `Object.hasOwn(object, property)`: Boolean.
+- `in` operator: 检测实例及其原型链上所有属性名.
+
+```ts
+// Arrays
+const trees = ['redwood', 'bay', 'cedar', 'oak', 'maple'];
+const truthy = 0 in trees;
+const truthy = 3 in trees;
+const falsy = 6 in trees;
+const falsy = 'bay' in trees;
+const truthy = 'length' in trees;
+const truthy = Symbol.iterator in trees;
+
+// Predefined objects
+const truthy = 'PI' in Math;
+
+// Custom objects
+const car = { make: 'Honda', model: 'Accord', year: 1998 };
+const truthy = 'make' in car;
+const truthy = 'model' in car;
+```
+
 - `Object.getOwnPropertyDescriptor(object, property)`.
 - `Object.getOwnPropertyDescriptors(object)`.
 - `Object.getOwnPropertySymbols(object)`: 获取实例上 Symbol 属性名.
