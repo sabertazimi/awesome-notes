@@ -87,11 +87,21 @@ const a = (1 + 2) / 10; // a = 0.1 + 0.2;
 
 ### Number
 
-- 0bxxx/0Bxxx.
-- 0oxxx/0Oxxx.
-- `Number.isFinite()/isNaN()/parseInt()/parseFloat()/isInteger()/isSafeInteger()`.
-- `Number.toFixed()/toExponential()/toPrecision()`.
-- Number.EPSILON/`MAX_SAFE_INTEGER`/`MIN_SAFE_INTEGER`.
+- Binary: `0b10`/`0B10`.
+- Octal: `0o23`/`0O23`.
+- Hex: `0xFF`.
+- `Number.isFinite()`.
+- `Number.isNaN()`.
+- `Number.isInteger()`.
+- `Number.isSafeInteger()`.
+- `Number.toFixed()`.
+- `Number.toExponential()`.
+- `Number.toPrecision()`.
+- `Number.parseInt(string, radix)`.
+- `Number.parseFloat(string)`.
+- `Number.EPSILON`.
+- `Number.MAX_SAFE_INTEGER`.
+- `Number.MIN_SAFE_INTEGER`.
 - `**` 指数运算符.
 - BigInt.
 
