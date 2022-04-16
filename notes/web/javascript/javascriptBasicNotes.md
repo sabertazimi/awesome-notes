@@ -7135,7 +7135,7 @@ const pattern = /([^&=]+)=([^&]*)/g;
 
 - setTimeout.
 - setImmediate.
-- setInterval.
+- setInterval: 完全无法保证两个 timer 执行时间间隔 (可能连续执行, 也可能间隔过长).
 - requestAnimationFrame.
 - requestIdleCallback.
 
