@@ -516,81 +516,6 @@ printRaw`\u00A9${'and'}\n`;
 // \n
 ```
 
-### Wrapper Objects for Primitives
-
-Using the wrapper function without the new keyword
-is a useful way of coercing a value into a primitive type.
-
-```ts
-// Not recommended (primitive object wrapper):
-// eslint-disable-next-line no-new-wrappers
-const objectType = typeof new String(37); // object
-
-// Safe (type coercion with wrapper function):
-const stringType = typeof String(37); // string
-
-// Primitive strings:
-// eslint-disable-next-line no-self-compare
-const truthy = '37' === '37'; // true
-
-// Object-wrapped string:
-// eslint-disable-next-line no-new-wrappers
-const falsy = new String(37) === '37'; // false
-
-// Type-coerced string:
-const truthy = String(37) === '37'; // true
-
-// BAD!
-// eslint-disable-next-line no-new-wrappers
-const falseObject = new Boolean(false);
-const result = falseObject && true;
-console.log(result); // true
-console.log(typeof falseObject); // object
-console.log(falseObject instanceof Boolean); // true
-```
-
-**Box and Unbox** for primitive values:
-
-- 自动创建的原始值包装对象可以让原始值拥有对象的行为.
-- 自动创建的原始值包装对象只存在于访问它的那行代码执行期间.
-- 常数值**加括号**可转化为对象.
-- 可以对 primitive values 进行 ES6 解构语法.
-
-```ts
-const s1 = 'some text';
-const s2 = s1.substring(2); // Call method on primitive string.
-// let _s1 = new String(s1);
-// const s2 = _s1.substring(2);
-// _s1 = null;
-
-const s3 = 'some text';
-s3.color = 'red';
-console.log(s3.color); // undefined
-```
-
-```ts
-// primitive string
-const greet = 'Hello there';
-// primitive is converted to an object
-// in order to use the split() method
-const hello = greet.split(' ')[0]; // "Hello"
-// attempting to augment a primitive is not an error
-greet.smile = true;
-// but it doesn't actually work
-const undef = typeof greet.smile; // "undefined"
-```
-
-不使用 new 关键字,包装类构造函数返回值为基本类型
-
-```ts
-const numberType = typeof Number(1); // "number"
-const numberType = typeof Number('1'); // "number"
-// eslint-disable-next-line no-new-wrappers
-const numberType = typeof Number(new Number()); // "number"
-const stringType = typeof String(1); // "string"
-const booleanType = typeof Boolean(1); // "boolean"
-```
-
 ### Symbol
 
 - A Symbol is a **unique** and **immutable** primitive value
@@ -620,6 +545,7 @@ console.log(fooGlobalSymbol === otherFooGlobalSymbol); // true
 | number  | Number(sym) → TypeError | `sym * 2` → TypeError          |
 | string  | String(sym) → OK        | `'' + sym` → TypeError         |
 |         | sym.toString() → OK     | `${sym}` → TypeError           |
+| object  | Object(sym) → OK        | Object.keys(sym) → OK          |
 
 #### Built-in Symbol Methods
 
@@ -745,6 +671,81 @@ const me = new Person('Me');
 
 console.log(me.toString()); // "[object Person]"
 console.log(Object.prototype.toString.call(me)); // "[object Person]"
+```
+
+### Wrapper Objects for Primitives
+
+Using the wrapper function without the new keyword
+is a useful way of coercing a value into a primitive type.
+
+```ts
+// Not recommended (primitive object wrapper):
+// eslint-disable-next-line no-new-wrappers
+const objectType = typeof new String(37); // object
+
+// Safe (type coercion with wrapper function):
+const stringType = typeof String(37); // string
+
+// Primitive strings:
+// eslint-disable-next-line no-self-compare
+const truthy = '37' === '37'; // true
+
+// Object-wrapped string:
+// eslint-disable-next-line no-new-wrappers
+const falsy = new String(37) === '37'; // false
+
+// Type-coerced string:
+const truthy = String(37) === '37'; // true
+
+// BAD!
+// eslint-disable-next-line no-new-wrappers
+const falseObject = new Boolean(false);
+const result = falseObject && true;
+console.log(result); // true
+console.log(typeof falseObject); // object
+console.log(falseObject instanceof Boolean); // true
+```
+
+**Box and Unbox** for primitive values:
+
+- 自动创建的原始值包装对象可以让原始值拥有对象的行为.
+- 自动创建的原始值包装对象只存在于访问它的那行代码执行期间.
+- 常数值**加括号**可转化为对象.
+- 可以对 primitive values 进行 ES6 解构语法.
+
+```ts
+const s1 = 'some text';
+const s2 = s1.substring(2); // Call method on primitive string.
+// let _s1 = new String(s1);
+// const s2 = _s1.substring(2);
+// _s1 = null;
+
+const s3 = 'some text';
+s3.color = 'red';
+console.log(s3.color); // undefined
+```
+
+```ts
+// primitive string
+const greet = 'Hello there';
+// primitive is converted to an object
+// in order to use the split() method
+const hello = greet.split(' ')[0]; // "Hello"
+// attempting to augment a primitive is not an error
+greet.smile = true;
+// but it doesn't actually work
+const undef = typeof greet.smile; // "undefined"
+```
+
+不使用 new 关键字,包装类构造函数返回值为基本类型
+
+```ts
+const numberType = typeof Number(1); // "number"
+const numberType = typeof Number('1'); // "number"
+// eslint-disable-next-line no-new-wrappers
+const numberType = typeof Number(new Number()); // "number"
+const stringType = typeof String(1); // "string"
+const booleanType = typeof Boolean(1); // "boolean"
 ```
 
 ## Reference Values
