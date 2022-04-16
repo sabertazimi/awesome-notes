@@ -436,9 +436,9 @@ tags: [Web, Framework, Library]
 
 ### Form
 
-- [React Formik](https://github.com/formium/formik)
 - [React Hook Form](https://github.com/react-hook-form/react-hook-form)
 - [React Final Form](https://github.com/final-form/react-final-form)
+- [React Formik](https://github.com/formium/formik)
 - [React JSON Schema Form](https://github.com/rjsf-team/react-jsonschema-form)
 - [Vue FormKit](https://github.com/formkit/formkit)
 - [Formily: Alibaba Unified Form Solution for React and Vue](https://github.com/alibaba/formily)
