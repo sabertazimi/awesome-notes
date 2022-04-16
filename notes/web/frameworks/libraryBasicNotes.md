@@ -328,6 +328,7 @@ tags: [Web, Framework, Library]
 
 - [Neumorphism: Generate CSS for Neumorphism Soft UI Design](https://github.com/adamgiebl/neumorphism)
 - [Box Shadows: Cross-browser Collection of CSS Box-shadows](https://github.com/madeas/box-shadows.css)
+- [ShadowPalette: Shadow Generator](https://www.joshwcomeau.com/shadow-palette)
 
 ### Background Utils
 
