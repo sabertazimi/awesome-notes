@@ -1704,18 +1704,7 @@ document.querySelector('form').addEventListener('submit', event => {
 - `input`/`change` event.
 - `select` event: 在文本框 (`<input>` 或 `textarea`) 上选择字符.
 
-```ts
-const input = document.querySelector('input');
-
-input.addEventListener('select', event => {
-  const log = document.getElementById('log');
-  const selection = event.target.value.substring(
-    event.target.selectionStart,
-    event.target.selectionEnd
-  );
-  log.textContent = `You selected: ${selection}`;
-});
-```
+##### Input Focus Event
 
 HTML5 focus management:
 
@@ -1740,6 +1729,34 @@ console.log(document.hasFocus()); // true
 6. `DOMFocusIn`: 在获得焦点的元素上触发.
 
 :::
+
+##### Input Change Event
+
+- `input` event:
+  - `<input type="text" />`.
+  - `<input type="password"/>`.
+  - `<textarea />`.
+- `change` event:
+  - `<input type="checkbox" />`.
+  - `<input type="radio" />`.
+  - `<input type="file" />`.
+  - `<input type="file" multiple />`.
+  - `<select />`.
+
+##### Input Select Event
+
+```ts
+const input = document.querySelector('input');
+
+input.addEventListener('select', event => {
+  const log = document.getElementById('log');
+  const selection = event.target.value.substring(
+    event.target.selectionStart,
+    event.target.selectionEnd
+  );
+  log.textContent = `You selected: ${selection}`;
+});
+```
 
 #### Clipboard Events
 
