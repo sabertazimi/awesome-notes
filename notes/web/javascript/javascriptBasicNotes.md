@@ -177,7 +177,25 @@ console.log(isStringAlternative(goodString)); // true
 console.log(isStringAlternative(badString)); // true
 ```
 
-String methods:
+#### String Unicode
+
+```ts
+// eslint-disable-next-line no-self-compare
+const truthy = 'z' === 'z'; // true
+// eslint-disable-next-line no-octal-escape
+const truthy = '\172' === 'z'; // true
+const truthy = '\x7A' === 'z'; // true
+const truthy = '\u007A' === 'z'; // true
+const truthy = '\u{7A}' === 'z'; // true
+```
+
+#### String Methods
+
+- `string.split(separator)`: 选择割断符, 返回字符串数组.
+- `Array<string>.join(separator)`: 将字符串数组连接成字符串.
+- `string.slice()`.
+- `string.substring()`.
+- `string.substr()`.
 
 ```ts
 const stringValue = 'hello world';
@@ -194,20 +212,6 @@ console.log(stringValue.slice(3, -4)); // "lo w"
 console.log(stringValue.substring(3, -4)); // "hel"
 console.log(stringValue.substr(3, -4)); // "" (empty string)
 ```
-
-#### String Unicode
-
-```ts
-// eslint-disable-next-line no-self-compare
-const truthy = 'z' === 'z'; // true
-// eslint-disable-next-line no-octal-escape
-const truthy = '\172' === 'z'; // true
-const truthy = '\x7A' === 'z'; // true
-const truthy = '\u007A' === 'z'; // true
-const truthy = '\u{7A}' === 'z'; // true
-```
-
-#### String Methods
 
 - `string.charAt(index)`.
 - `string.charCodeAt(index)`.
@@ -871,11 +875,10 @@ arr.pop(); // 删除数组尾元素
 - slice 不改变原数组, splice 改变原数组.
 
 ```ts
-[].concat(otherArray);
-[string].join('连接符'); // 将字符串数组连接成字符串o
-string(charArray).split('割断点'); // 选择割断符,返回字符串数组
 [].slice(start, end); // [start] - [end - 1]
 [].splice(startIndex, lengthToDelete, insertElements); // 功能强大的多态方法
+[].concat(otherArray);
+[].join(separator);
 ```
 
 #### Array Replace
