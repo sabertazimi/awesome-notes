@@ -7303,6 +7303,26 @@ function processArray(items, process, done) {
 若给 `setTimeout()` 提供了一个箭头函数, 则 `this` 会保留为定义它时所在的词汇作用域.
 :::
 
+`requestAnimationFrame` game loop:
+
+```ts
+function runAnimation(frameFunc) {
+  let lastTime = null;
+
+  function frame(time) {
+    if (lastTime !== null) {
+      const timeStep = Math.min(time - lastTime, 100) / 1000;
+      if (frameFunc(timeStep) === false) return;
+    }
+
+    lastTime = time;
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+}
+```
+
 ### Math
 
 - `Math.max`.
