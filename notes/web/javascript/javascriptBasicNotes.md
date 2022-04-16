@@ -7031,22 +7031,33 @@ export function isJunk(filename) {
 #### RegExp Replace
 
 ```ts
-replace(regExp, str / func);
+str.replace(regExp, str / func);
 ```
 
 ##### RegExp Replace Arguments
 
-第二个参数若为函数式参数,replace 方法会向它传递一系列参数:
+第二个参数若为函数式参数, `replace` 方法会向它传递一系列参数:
 
-- 第一个参数: 匹配结果字符串
-- 第 n 个参数: 子表达式匹配结果字符串
-- 倒数第二个参数: 匹配文本在源字符串中的下标位置
-- 最后一个参数: 源字符串自身
+- 第一个参数: 匹配结果字符串.
+- 第 n 个参数: 子表达式匹配结果字符串.
+- 倒数第二个参数: 匹配文本在源字符串中的下标位置.
+- 最后一个参数: 源字符串自身.
 
-###### RegExp Replace Best Practice
+```ts
+function upper(all, letter) {
+  return letter.toUpperCase();
+}
 
-- 使用２个子表达式修剪字符串,字符串总长度影响性能
-- 使用循环修剪字符串(分别用 正/负循环 修剪 首/尾空白符),空白字符长度影响性能
+assert(
+  'border-bottom-width'.replace(/-(\w)/g, upper) === 'borderBottomWidth',
+  'Camel cased a hyphenated string.'
+);
+```
+
+##### RegExp Replace Best Practice
+
+- 使用 2 个子表达式修剪字符串, 字符串总长度影响性能.
+- 使用循环修剪字符串 (分别用 正/负循环 修剪 首/尾空白符), 空白字符长度影响性能.
 
 ```ts
 if (!String.prototype.trim) {
