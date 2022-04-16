@@ -1533,7 +1533,9 @@ const objectType = typeof null; // => object
 
 #### Custom Object Detection
 
-`value instanceof constructor`: 查找原型链.
+- `object instanceof Constructor`:
+  查找原型链 `构造器`**原型对象** (`Constructor.prototype`).
+- `prop in object`: 查找原型链属性名.
 
 #### Property Detection
 
@@ -2065,10 +2067,9 @@ Object.create = function (o) {
   F.prototype = o;
   return new F();
 };
-
-// new F() lead to `f.__proto__ === F.prototype` true
-// `F.prototype === o` true
-// `f.__proto__ === o` true
+// 1. `F.prototype === o`.
+// 2. `new F()` lead to `f.__proto__ === F.prototype`.
+// Finally: `f.__proto__ === o`.
 ```
 
 #### Constructor Return Value
