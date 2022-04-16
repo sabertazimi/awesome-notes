@@ -7087,6 +7087,15 @@ if (!String.prototype.trim) {
 
 ### RegExp Use Case
 
+#### Common Pattern
+
+- `非X捕获组` + `特征字符` + `非Y捕获组`:
+
+```ts
+// URLSearchParams [key, value]
+const pattern = /([^&=]+)=([^&]*)/g;
+```
+
 #### 中英文
 
 `/^[\u4e00-\u9fa5a-zA-Z]+$/i`
