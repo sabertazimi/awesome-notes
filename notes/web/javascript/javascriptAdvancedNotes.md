@@ -3392,6 +3392,36 @@ function timedProcessArray(items, process, callback) {
   节流是将多次执行变成每隔一段时间执行 (保证一定时间内只执行一次).
 
 ```ts
+// Simple debounce:
+function debounce(action, delay) {
+  let timer = null;
+
+  return function () {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      action();
+    }, delay);
+  };
+}
+```
+
+```ts
+// Simple throttle:
+function throttle(action) {
+  let isRunning = false;
+
+  return function () {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(() => {
+      action();
+      isRunning = false;
+    });
+  };
+}
+```
+
+```ts
 // 这个是用来获取当前时间戳的
 function now() {
   return +new Date();
@@ -3441,21 +3471,6 @@ function debounce(func, wait = 50, immediate = true) {
       clearTimeout(timer);
       timer = later();
     }
-  };
-}
-```
-
-```ts
-// simple throttle
-function throttle(action) {
-  let isRunning = false;
-  return function () {
-    if (isRunning) return;
-    isRunning = true;
-    window.requestAnimationFrame(() => {
-      action();
-      isRunning = false;
-    });
   };
 }
 ```
