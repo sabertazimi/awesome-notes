@@ -6497,9 +6497,33 @@ function changeColor(color) {
 }
 ```
 
+[Recursive tree](https://eloquentjavascript.net/17_canvas.html):
+
+```html
+<canvas width="600" height="300"></canvas>
+<script>
+  const cx = document.querySelector('canvas').getContext('2d');
+
+  function branch(length, angle, scale) {
+    cx.fillRect(0, 0, 1, length);
+    if (length < 8) return;
+    cx.save();
+    cx.translate(0, length);
+    cx.rotate(-angle);
+    branch(length * scale, angle, scale);
+    cx.rotate(2 * angle);
+    branch(length * scale, angle, scale);
+    cx.restore();
+  }
+
+  cx.translate(300, 0);
+  branch(60, 0.5, 0.8);
+</script>
+```
+
 ### Canvas Game Loop
 
-for all objects:
+For all objects:
 
 - constructor: `position{x, y}`, `speed{x, y}`, `size{x, y}`
 - update(deltaTime): change position or speed
@@ -6515,6 +6539,7 @@ const GAME_HEIGHT = 600;
 const game = new Game(GAME_WIDTH, GAME_HEIGHT);
 
 let lastTime = 0;
+
 function gameLoop(timestamp) {
   const deltaTime = timestamp - lastTime;
   lastTime = timestamp;
