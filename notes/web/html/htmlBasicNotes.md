@@ -1301,6 +1301,29 @@ With `fieldset` and `legend`:
 </form>
 ```
 
+```tsx
+const Field = () => (
+  <>
+    <div className="user-code-field">
+      <input
+        id="userCode"
+        aria-describedby={
+          errors.userCode ? 'user-code-error' : 'user-code-help'
+        }
+      />
+      <span id="user-code-help" className="user-code-help">
+        Enter your 4 digit user code
+      </span>
+    </div>
+    {errors.userCode && (
+      <div id="user-code-error" role="alert" className="error">
+        You must enter your 4 character user code
+      </div>
+    )}
+  </>
+);
+```
+
 ### Time Accessibility
 
 ```html
