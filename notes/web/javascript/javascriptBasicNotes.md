@@ -6806,6 +6806,7 @@ Universal module definition:
   - 模块中的 `var` 声明不会添加到 `window` 对象.
 - ES6 模块是异步加载和执行的.
 - ES6 模块是静态结构 (`Static` and `Read-only` imports):
+  - Static analysis.
   - Tree shaking.
   - Compact bundling.
   - Faster imports lookup.
