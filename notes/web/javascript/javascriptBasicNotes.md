@@ -329,7 +329,7 @@ Array.from(str.matchAll(regexp), m => m[0]);
 - `string.trimLeft()`/`string.trimStart()`: remove start whitespace.
 - `string.trimRight()`/`string.trimEnd()`: remove end whitespace.
 
-#### Template String
+#### String Template Literals
 
 `str` 表示模板字符串:
 
@@ -343,7 +343,7 @@ Array.from(str.matchAll(regexp), m => m[0]);
 } bar`;
 ```
 
-#### Tagged Templates
+#### Tagged Templates Literals
 
 ```ts
 const boldify = (parts, ...insertedParts) => {
