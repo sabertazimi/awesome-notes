@@ -6877,6 +6877,10 @@ let thing = 'initial';
 
 export { thing };
 export default thing;
+
+setTimeout(() => {
+  thing = 'changed';
+}, 500);
 ```
 
 <!-- eslint-disable -->
@@ -6885,10 +6889,6 @@ export default thing;
 // main.js
 import { default as defaultThing, thing } from './module.js';
 import anotherDefaultThing from './module.js';
-
-setTimeout(() => {
-  thing = 'changed';
-}, 500);
 
 setTimeout(() => {
   console.log(thing); // "changed"
@@ -6904,6 +6904,10 @@ Export live reference:
 ```ts
 // module.js
 export let thing = 'initial';
+
+setTimeout(() => {
+  thing = 'changed';
+}, 500);
 ```
 
 <!-- eslint-disable -->
@@ -6911,13 +6915,7 @@ export let thing = 'initial';
 ```ts
 // main.js
 import { thing as importedThing } from './module.js';
-
-setTimeout(() => {
-  thing = 'changed';
-}, 500);
-
 const module = await import('./module.js');
-
 let { thing } = await import('./module.js'); // Destructuring behavior
 
 setTimeout(() => {
@@ -6935,10 +6933,8 @@ To sum up:
 // Live reference:
 import { thing } from './module.js';
 import { thing as otherName } from './module.js';
-import * as module from './module.js';
 
 // Current value:
-const module = await import('./module.js');
 const { thing } = await import('./module.js');
 
 // Live reference:
