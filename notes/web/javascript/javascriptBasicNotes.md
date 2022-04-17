@@ -598,6 +598,23 @@ console.log(Bar[Symbol.hasInstance](b)); // true
 console.log(b instanceof Bar); // true
 console.log(Baz[Symbol.hasInstance](b)); // false
 console.log(b instanceof Baz); // false
+
+const ReferenceType = {
+  [Symbol.hasInstance](value) {
+    return (
+      value !== null &&
+      (typeof value === 'object' || typeof value === 'function')
+    );
+  },
+};
+
+const obj1 = {};
+console.log(obj1 instanceof Object); // true
+console.log(obj1 instanceof ReferenceType); // true
+
+const obj2 = Object.create(null);
+console.log(obj2 instanceof Object); // false
+console.log(obj2 instanceof ReferenceType); // true
 ```
 
 `species`:
