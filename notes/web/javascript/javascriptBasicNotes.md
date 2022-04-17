@@ -6805,6 +6805,10 @@ Universal module definition:
   - 模块顶级 `this` 的值是 `undefined` (传统脚本中是 `window`).
   - 模块中的 `var` 声明不会添加到 `window` 对象.
 - ES6 模块是异步加载和执行的.
+- ES6 模块是静态结构 (`Static` and `Read-only` imports):
+  - Tree shaking.
+  - Compact bundling.
+  - Faster imports lookup.
 
 ```html
 <!-- 支持模块的浏览器会执行这段脚本 -->
