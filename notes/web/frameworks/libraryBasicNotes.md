@@ -1085,7 +1085,7 @@ tags: [Web, Framework, Library]
 
 - [MKCert: Make Locally Trusted Development Certificates](https://github.com/FiloSottile/mkcert)
 
-### Web Socket
+### WebSocket
 
 - [Socket.IO](https://github.com/socketio/socket.io)
 - [WebSockets](https://github.com/websockets/ws)
@@ -1097,7 +1097,7 @@ tags: [Web, Framework, Library]
 - [PeerJS: Simple Peer-to-peer with WebRTC](https://github.com/peers/peerjs)
 - [LiveKit](https://github.com/livekit/livekit-react)
 
-### Web P2P
+### P2P
 
 - [FireFox Send](https://github.com/mozilla/send)
 

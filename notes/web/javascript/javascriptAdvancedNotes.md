@@ -6728,7 +6728,7 @@ request.onsuccess = function (event) {
 };
 ```
 
-### Web File API
+### File API
 
 ```ts
 function readFileText(file) {
@@ -7755,9 +7755,9 @@ fetch('https://fetch.spec.whatwg.org/')
 // <!doctype html><html lang="en"><head><meta charset="utf-8"> ...
 ```
 
-### Web Socket
+### WebSocket
 
-#### Web Socket Message Header
+#### WebSocket Message Header
 
 Request Header:
 
@@ -7783,7 +7783,7 @@ Sec-Websocket-Protocol: protocol [,protocol]*
 Sec-Websocket-Extension: extension [,extension]*
 ```
 
-#### Web Socket Basic Usage
+#### WebSocket Basic Usage
 
 通信功能:
 
@@ -7805,7 +7805,7 @@ function WebSocketTest() {
     const ws = new WebSocket('ws://localhost:9998/echo');
 
     ws.onopen = function () {
-      // Web Socket is connected, send data using send()
+      // WebSocket is connected, send data using send()
       ws.send('Message to send');
       alert('Message is sent...');
     };
@@ -7832,9 +7832,9 @@ function WebSocketTest() {
 }
 ```
 
-#### Web Socket HeartBeat Mechanism
+#### WebSocket HeartBeat Mechanism
 
-连接终止时, Web Socket 不会自动恢复,
+连接终止时, WebSocket 不会自动恢复,
 需要自己实现, 通常为了保持连接状态, 需要增加心跳机制.
 
 每隔一段时间会向服务器发送一个数据包, 告诉服务器自己 Alive,

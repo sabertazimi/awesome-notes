@@ -1089,11 +1089,14 @@ const array = [...obj]; // print [1, 2, 3]
 [`Typed Array`](https://exploringjs.com/es6/ch_typed-arrays.html)
 是 `ArrayBuffer` (用于 Web GL 高效率内存操作) 其中一种视图:
 
-- File API.
+- File.
 - XMLHttpRequest.
-- Fetch API.
+- Fetch.
+- Web Worker.
+- WebSocket.
 - Canvas.
-- WebSockets.
+- WebGL.
+- Web Audio.
 
 ```ts
 // 第一个参数是应该返回的数组类型
