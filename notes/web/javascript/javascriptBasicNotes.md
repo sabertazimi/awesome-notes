@@ -1425,6 +1425,15 @@ WeakMap/WeakSet 则更加**内存安全**.
 - `var` 表达式和 `function` 声明都将会被提升到当前作用域 (**全局作用域/函数作用域**) 顶部,
   其余表达式顺序不变.
 
+|            | Hoisting           | Scope         | Creates global properties |
+| ---------- | ------------------ | ------------- | ------------------------- |
+| `var`      | Declaration        | Function      | Yes                       |
+| `let`      | Temporal dead zone | Block         | No                        |
+| `const`    | Temporal dead zone | Block         | No                        |
+| `function` | Complete           | Block         | Yes                       |
+| `class`    | No                 | Block         | No                        |
+| `import`   | Complete           | Module-global | No                        |
+
 <!-- eslint-disable vars-on-top -->
 <!-- eslint-disable no-var -->
 
