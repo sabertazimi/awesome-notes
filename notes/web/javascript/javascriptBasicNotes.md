@@ -2842,6 +2842,8 @@ console.log(bb[[proto]] === BB.prototype); // true
   - 在类块中定义的所有方法都会定义在类的原型上.
   - 静态属性定义在类本身上.
 
+[![Class Inheritance](./figures/ClassInheritance.png)](https://exploringjs.com/es6/ch_classes.html#_prototype-chains)
+
 ```ts
 class Person {
   constructor() {
