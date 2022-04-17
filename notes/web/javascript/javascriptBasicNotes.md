@@ -1086,7 +1086,8 @@ const array = [...obj]; // print [1, 2, 3]
 
 #### Typed Array
 
-`Typed Array` 是 `ArrayBuffer` (用于 Web GL 高效率内存操作) 其中一种视图:
+[`Typed Array`](https://exploringjs.com/es6/ch_typed-arrays.html)
+是 `ArrayBuffer` (用于 Web GL 高效率内存操作) 其中一种视图:
 
 - File API.
 - XMLHttpRequest.
