@@ -2589,6 +2589,12 @@ const Person = function (name) {
 
 #### Object Shallow Clone
 
+`Object.assign`:
+
+- Enumerable: **可枚举**属性扩展.
+- Own: **自有**属性扩展.
+- Shallow: **浅拷贝**扩展.
+
 ```ts
 const dest = {};
 const src = { a: {} };
@@ -2601,9 +2607,9 @@ console.log(dest.a === src.a); // true
 
 `...` object spread syntax:
 
-- **自有**属性扩展
-- **可枚举**属性扩展.
-- **浅拷贝**扩展.
+- Enumerable: **可枚举**属性扩展.
+- Own: **自有**属性扩展.
+- Shallow: **浅拷贝**扩展.
 
 ```ts
 const foo = { a: 1 };
