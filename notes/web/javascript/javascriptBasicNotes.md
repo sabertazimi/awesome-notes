@@ -701,6 +701,21 @@ console.log(me.toString()); // "[object Person]"
 console.log(Object.prototype.toString.call(me)); // "[object Person]"
 ```
 
+| Value                     | toString tag |
+| ------------------------- | ------------ |
+| undefined                 | `Undefined`  |
+| null                      | `Null`       |
+| Array object              | `Array`      |
+| string object             | `String`     |
+| arguments                 | `Arguments`  |
+| callable                  | `Function`   |
+| error object              | `Error`      |
+| boolean object            | `Boolean`    |
+| number object             | `Number`     |
+| date object               | `Date`       |
+| regular expression object | `RegExp`     |
+| (Otherwise)               | `Object`     |
+
 ### Wrapper Objects for Primitives
 
 Using the wrapper function without the new keyword
