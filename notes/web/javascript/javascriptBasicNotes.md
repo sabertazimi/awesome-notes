@@ -2420,7 +2420,22 @@ const objectCopy = Object.fromEntries(map);
 
 - `Object.preventExtensions(O)`/`Object.isExtensible(O)`: 不可新增属性, 可删除/修改属性.
 - `Object.seal(O)`/`Object.isSealed(O)`: 不可新增/删除属性, 可修改属性.
-- `Object.freeze(O)`/`Object.isFrozen(O)`: 不可新增/删除/修改属性.
+- `Object.freeze(O)`/`Object.isFrozen(O)`: 不可新增/删除/修改属性 (Shallow).
+
+```ts
+const obj = Object.freeze({ foo: {} });
+
+obj.bar = 123;
+// TypeError: Can't add property bar, object is not extensible
+
+obj.foo = {};
+// TypeError: Cannot assign to read only property 'foo' of #<Object>
+
+obj.foo.qux = 'abc';
+console.log(obj.foo.qux);
+// 'abc'
+```
+
 - `Object.is`:
 
 ```ts
