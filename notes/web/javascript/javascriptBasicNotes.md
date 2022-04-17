@@ -3252,6 +3252,21 @@ obj.foo(); // `this` in `inner` function refer to `obj`
 func(); // `this` in `inner` function refer to `window`
 ```
 
+### This Binding Invocation
+
+|                                 | `function` call | Method call | `new`       |
+| ------------------------------- | --------------- | ----------- | ----------- |
+| Traditional `function` (sloppy) | `window`        | receiver    | instance    |
+| Traditional `function` (strict) | `undefined`     | receiver    | instance    |
+| Method (sloppy)                 | `window`        | receiver    | `TypeError` |
+| Method (strict)                 | `undefined`     | receiver    | `TypeError` |
+| Generator `function` (sloppy)   | `window`        | receiver    | `TypeError` |
+| Generator `function` (strict)   | `undefined`     | receiver    | `TypeError` |
+| Generator method (sloppy)       | `window`        | receiver    | `TypeError` |
+| Generator method (strict)       | `undefined`     | receiver    | `TypeError` |
+| Arrow `function`                | lexical         | lexical     | `TypeError` |
+| Class                           | `TypeError`     | `TypeError` | SC protocol |
+
 ### Context and Scope
 
 - 每个上下文都有一个关联的变量对象 (**Variable Object**),
