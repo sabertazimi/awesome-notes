@@ -6474,7 +6474,7 @@ addTen.then(console.log); // 18
 
 #### RxJS
 
-## Modules
+## Module
 
 ### Namespace Module Pattern
 
@@ -6786,7 +6786,7 @@ Universal module definition:
 );
 ```
 
-### ES6 Modules
+### ES6 Module
 
 - 解析到 `<script type="module">` 标签后会立即下载模块文件,
   但执行会延迟到文档解析完成 (类似 `<script defer>`).
@@ -6855,13 +6855,13 @@ export * from 'utils';
 - CommonJS 是动态语法可以写在判断里, ES6 Module 是静态语法只能写在顶层.
 - CommonJS 的 `this` 是当前模块, ES6 Module 的 `this` 是 `undefined`.
 - CommonJS 模块输出的是一个值的拷贝,
-  ES6 模块 Export 分 3 种情况:
-  1. `export default xxx`输出`value`,
-  2. `export xxx`输出`reference`.
+  ES6 模块 `export` 分多种情况:
+  1. `export default xxx` 输出 `value`:
      `defaultThing` and `anotherDefaultThing` shows ES6 export default value,
-     `importedThing` and `module.thing` shows ES6 export normal reference,
-     and `Destructuring Behavior` create a brand new value.
-  3. function/class special case:
+  2. `export xxx` 输出 `reference`:
+     `importedThing` and `module.thing` shows ES6 export live reference,
+  3. **`Destructuring`** behavior create a brand new value.
+  4. function/class special case:
      `export default function/class thing() {}; // function/class expressions`
      export default reference,
      `function/class thing() {}; export default thing; // function/class statements`
@@ -6869,21 +6869,22 @@ export * from 'utils';
 
 Export default value:
 
-<!-- eslint-disable import/no-duplicates -->
-<!-- eslint-disable no-import-assign -->
+<!-- eslint-disable -->
 
 ```ts
 // module.js
-// main.js
-// eslint-disable-next-line import/no-named-default
-import { default as defaultThing, thing } from './module.js';
-import anotherDefaultThing from './module.js';
-
-// eslint-disable-next-line import/no-mutable-exports
 let thing = 'initial';
 
 export { thing };
 export default thing;
+```
+
+<!-- eslint-disable -->
+
+```ts
+// main.js
+import { default as defaultThing, thing } from './module.js';
+import anotherDefaultThing from './module.js';
 
 setTimeout(() => {
   thing = 'changed';
@@ -6896,24 +6897,28 @@ setTimeout(() => {
 }, 1000);
 ```
 
-<!-- eslint-enable import/no-duplicates -->
-<!-- eslint-enable no-import-assign -->
+Export live reference:
 
-Export normal reference:
+<!-- eslint-disable -->
 
 ```ts
 // module.js
+export let thing = 'initial';
+```
+
+<!-- eslint-disable -->
+
+```ts
 // main.js
 import { thing as importedThing } from './module.js';
-
-// eslint-disable-next-line import/no-mutable-exports
-export let thing = 'initial';
 
 setTimeout(() => {
   thing = 'changed';
 }, 500);
+
 const module = await import('./module.js');
-let { thing } = await import('./module.js'); // Destructuring Behavior
+
+let { thing } = await import('./module.js'); // Destructuring behavior
 
 setTimeout(() => {
   console.log(importedThing); // "changed"
@@ -6924,35 +6929,30 @@ setTimeout(() => {
 
 To sum up:
 
-<!-- eslint-disable import/export -->
-<!-- eslint-disable import/no-duplicates -->
+<!-- eslint-disable -->
 
 ```ts
-// These give you a live reference to the exported thing(s):
+// Live reference:
 import { thing } from './module.js';
 import { thing as otherName } from './module.js';
 import * as module from './module.js';
 
-// eslint-disable-next-line no-import-assign
+// Current value:
 const module = await import('./module.js');
-// This assigns the current value of the export to a new identifier:
-// eslint-disable-next-line no-import-assign
 const { thing } = await import('./module.js');
 
-// These export a live reference:
+// Live reference:
 export { thing };
 export { thing as otherName };
 export { thing as default };
-// eslint-disable-next-line prettier/prettier
 export default function thing() {}
-// These export the current value:
+
+// Current value:
 export default thing;
-// eslint-disable-next-line import/no-anonymous-default-export
 export default 'hello!';
 ```
 
-<!-- eslint-enable import/export -->
-<!-- eslint-enable import/no-duplicates -->
+<!-- eslint-enable -->
 
 ## Error and Exception
 
