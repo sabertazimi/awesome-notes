@@ -4776,14 +4776,8 @@ console.log(len); // 5
 
 ### Object Destructuring
 
-- 真正被赋值的是后者, 而不是前者.
-
-```ts
-const { pattern: variable } = { key: value };
-```
-
 - 解构赋值的规则: 只要等号右边的值不是对象, 就先将其**转为对象**.
-- `undefined`/`null` 无法转化为对象.
+- `undefined`/`null` 无法转化为对象:
 
 ```ts
 const { prop: x } = undefined; // TypeError
@@ -4795,24 +4789,31 @@ const { bar, foo } = { foo: 'aaa', bar: 'bbb' };
 console.log(foo); // "aaa"
 console.log(bar); // "bbb"
 
-const { foo, bar } = { foo: 'aaa', bar: 'bbb' };
-
 const { baz } = { foo: 'aaa', bar: 'bbb' };
 console.log(baz); // undefined
 ```
+
+- 真正被赋值的是后者, 而不是前者:
 
 ```ts
 const { foo: baz } = { foo: 'aaa', bar: 'bbb' };
 console.log(baz); // "aaa"
 
-const obj = { first: 'hello', last: 'world' };
-const { first: f, last: l } = obj;
+const { first: f, last: l } = { first: 'hello', last: 'world' };
 console.log(f); // 'hello'
 console.log(l); // 'world'
 ```
 
+- Left-hand side of a normal assignment:
+
 ```ts
-const { log, sin, cos } = Math;
+const obj = {};
+[first, ...obj.prop] = ['a', 'b', 'c'];
+// first = 'a'; obj.prop = ['b', 'c']
+
+const arr = [];
+({ bar: arr[0] } = { bar: true });
+console.log(arr); // [true]
 ```
 
 #### JSON Object Destructuring
