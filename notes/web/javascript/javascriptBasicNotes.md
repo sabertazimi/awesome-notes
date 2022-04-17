@@ -199,13 +199,30 @@ const truthy = '\u007A' === 'z'; // true
 const truthy = '\u{7A}' === 'z'; // true
 ```
 
-#### String Methods
+#### String Char Code
 
-- `string.split(separator)`: 选择割断符, 返回字符串数组.
-- `Array<string>.join(separator)`: 将字符串数组连接成字符串.
+- `string.charAt(index)`.
+- `string.charCodeAt(index)`.
+- `string.fromCharCode(charCode)`.
+- `string.codePointAt(index)`: 正确处理 4 字节存储字符.
+- `string.fromCodePoint(codePoint)`: 正确处理 4 字节存储字符.
+
+```ts
+function is32Bit(c) {
+  return c.codePointAt(0) > 0xffff;
+}
+
+// True:
+const truthy = String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y';
+```
+
+#### String Slice and Merge
+
 - `string.slice()`.
 - `string.substring()`.
 - `string.substr()`.
+- `string.split(separator)`: 选择割断符, 返回字符串数组.
+- `Array<string>.join(separator)`: 将字符串数组连接成字符串.
 
 ```ts
 const stringValue = 'hello world';
@@ -223,20 +240,7 @@ console.log(stringValue.substring(3, -4)); // "hel"
 console.log(stringValue.substr(3, -4)); // "" (empty string)
 ```
 
-- `string.charAt(index)`.
-- `string.charCodeAt(index)`.
-- `string.fromCharCode(charCode)`.
-- `string.codePointAt(index)`: 正确处理 4 字节存储字符.
-- `string.fromCodePoint(codePoint)`: 正确处理 4 字节存储字符.
-
-```ts
-function is32Bit(c) {
-  return c.codePointAt(0) > 0xffff;
-}
-
-// True:
-const truthy = String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y';
-```
+#### String Query
 
 - `string.includes(substr)`.
 - `string.startsWith(substr)`.
@@ -251,36 +255,8 @@ s.endsWith('Hello', 5); // true
 s.includes('Hello', 6); // false
 ```
 
-- `string.repeat(times)`.
+#### String Replace
 
-```ts
-'hello'.repeat(2); // "hellohello"
-'na'.repeat(2.9); // "nana"
-
-'na'.repeat(-0.9); // ""
-'na'.repeat(-1); // RangeError
-
-'na'.repeat(NaN); // ""
-'na'.repeat(Infinity); // RangeError
-
-'na'.repeat('na'); // ""
-'na'.repeat('3'); // "nanana"
-```
-
-- `padStart(len, paddingStr)`.
-- `padEnd(len, paddingStr)`.
-
-```ts
-'1'.padStart(10, '0'); // "0000000001"
-'12'.padStart(10, '0'); // "0000000012"
-'123456'.padStart(10, '0'); // "0000123456"
-
-'12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-MM-12"
-'09-12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-09-12"
-```
-
-- `trimLeft()`/`trimStart()`: remove start whitespace.
-- `trimRight()`/`trimEnd()`: remove end whitespace.
 - `matchAll(regexp)`.
 - `replaceAll`:
   - `replaceAll(regexp, newSubstr)`.
@@ -317,6 +293,41 @@ Array.from(str.matchAll(regexp), m => m[0]);
 'aabbcc'.replaceAll(/b/g, '.');
 // => 'aa..cc'
 ```
+
+#### String Pad
+
+- `string.repeat(times)`.
+
+```ts
+'hello'.repeat(2); // "hellohello"
+'na'.repeat(2.9); // "nana"
+
+'na'.repeat(-0.9); // ""
+'na'.repeat(-1); // RangeError
+
+'na'.repeat(NaN); // ""
+'na'.repeat(Infinity); // RangeError
+
+'na'.repeat('na'); // ""
+'na'.repeat('3'); // "nanana"
+```
+
+- `string.padStart(len, paddingStr)`.
+- `string.padEnd(len, paddingStr)`.
+
+```ts
+'1'.padStart(10, '0'); // "0000000001"
+'12'.padStart(10, '0'); // "0000000012"
+'123456'.padStart(10, '0'); // "0000123456"
+
+'12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-MM-12"
+'09-12'.padStart(10, 'YYYY-MM-DD'); // "YYYY-09-12"
+```
+
+#### String Trim
+
+- `string.trimLeft()`/`string.trimStart()`: remove start whitespace.
+- `string.trimRight()`/`string.trimEnd()`: remove end whitespace.
 
 #### Template String
 
