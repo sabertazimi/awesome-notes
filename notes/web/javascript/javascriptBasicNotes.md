@@ -1456,7 +1456,11 @@ WeakMap 结构与 Map 结构基本类似,
 有时候我们会把对象作为一个对象的键用来存放属性值,
 普通集合类型比如简单对象 (Object/Map/Set) 会阻止垃圾回收器对这些作为属性键存在的对象的回收,
 有造成内存泄漏的危险,
-WeakMap/WeakSet 则更加**内存安全**.
+WeakMap/WeakSet 则更加**内存安全**:
+
+- Caching computed results.
+- Managing listeners.
+- Keeping private data.
 
 ## Variable Hoisting
 
