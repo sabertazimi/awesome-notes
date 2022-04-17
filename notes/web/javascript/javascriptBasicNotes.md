@@ -4688,33 +4688,6 @@ move(); // [0, 0]
 // [ 1, 'yes', 3 ]
 ```
 
-### Map and List Destructuring
-
-- `for index in Iterable<T>`: key.
-- `for [key, value] of Iterable<T>`: entry.
-
-```ts
-const map = new Map();
-map.set('first', 'hello');
-map.set('second', 'world');
-
-for (const [key, value] of map) {
-  console.log(`${key} is ${value}`);
-}
-// first is hello
-// second is world
-
-// 获取键名
-for (const [key] of map) {
-  // ...
-}
-
-// 获取键值
-for (const [, value] of map) {
-  // ...
-}
-```
-
 ### Iterator Destructuring
 
 等号右边必须为数组等实现了 Iterator 接口的对象, 否则报错:
@@ -4760,7 +4733,34 @@ const [first, second, third, fourth, fifth, sixth] = fibs();
 console.log(sixth); // 5
 ```
 
-### String Destructuring
+#### Map and List Destructuring
+
+- `for index in Iterable<T>`: key.
+- `for [key, value] of Iterable<T>`: entry.
+
+```ts
+const map = new Map();
+map.set('first', 'hello');
+map.set('second', 'world');
+
+for (const [key, value] of map) {
+  console.log(`${key} is ${value}`);
+}
+// first is hello
+// second is world
+
+// 获取键名
+for (const [key] of map) {
+  // ...
+}
+
+// 获取键值
+for (const [, value] of map) {
+  // ...
+}
+```
+
+#### String Destructuring
 
 ```ts
 const [a, b, c, d, e] = 'hello';
@@ -4815,7 +4815,7 @@ console.log(l); // 'world'
 const { log, sin, cos } = Math;
 ```
 
-### JSON Object Destructuring
+#### JSON Object Destructuring
 
 ```ts
 const jsonData = {
@@ -4830,13 +4830,13 @@ console.log(id, status, number);
 // 42, "OK", [867, 5309]
 ```
 
-### Import Destructuring
+#### Import Destructuring
 
 ```ts
 const { SourceMapConsumer, SourceNode } = require('source-map');
 ```
 
-### Number and Boolean Destructuring
+#### Number and Boolean Destructuring
 
 `number`/`boolean` 会自动构造原始值包装对象:
 
