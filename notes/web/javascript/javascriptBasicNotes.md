@@ -3317,8 +3317,16 @@ const result = compare({ name: 'Nicholas' }, { name: 'Matt' });
 
 ### Function Name
 
-所有函数对象都会暴露一个只读的 `name` 属性,
-其中包含关于函数的信息:
+- 所有函数对象都会暴露一个只读的 `name` 属性, 其中包含关于函数的信息.
+- The spec operation
+  [`SetFunctionName(F, name, [, prefix])`](https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-setfunctionname)
+  sets up function `name`:
+  - Getters and setters get prefixes `get` and `set`.
+  - `Function.prototype.bind()` get prefix `bound`.
+  - Function declaration name are set up when entering a scope (hoisted).
+  - Named function expression name are set up via `SetFunctionName()`.
+  - Arrow function and anonymous function expression name aren't set up
+    (`SetFunctionName()` is not invoked).
 
 ```ts
 function foo() {}
