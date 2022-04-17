@@ -141,13 +141,13 @@ console.log(Math.min()); // Infinity
 
 ### String
 
-#### String Primitive Feature
+#### String Primitive Features
 
 作为基本变量:
 
 - `delete` 无法删除某位字符.
 
-#### String Reference Feature
+#### String Reference Features
 
 - 赋值与传参: 传递 string 字符串常量的引用.
 - 所有 string 字面量都是不可变量,
@@ -6788,6 +6788,8 @@ Universal module definition:
 
 ### ES6 Module
 
+#### ES6 Module Features
+
 - 解析到 `<script type="module">` 标签后会立即下载模块文件,
   但执行会延迟到文档解析完成 (类似 `<script defer>`).
 - 同一个模块无论在一个页面中被加载多少次,
@@ -6813,6 +6815,8 @@ Universal module definition:
 <!-- 不支持模块的浏览器会执行这段脚本 -->
 <script nomodule src="script.js"></script>
 ```
+
+#### ES6 Module Syntax
 
 ```ts
 import { lastName as surname } from './profile.js';
@@ -6848,7 +6852,7 @@ export { default as Article } from './Article';
 export * from 'utils';
 ```
 
-#### CommonJS vs ES6 Module
+#### ES6 Module Exports
 
 - CommonJS 模块是运行时加载, ES6 模块是编译时输出接口.
 - CommonJS 是单个值导出, ES6 Module 可以导出多个.
