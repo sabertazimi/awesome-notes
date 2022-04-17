@@ -5686,8 +5686,6 @@ Tool for composite stage analysis:
 
 ## JavaScript Style Guide
 
-- [Airbnb Guide](https://github.com/airbnb/javascript)
-
 ### ESLint
 
 - [ESLint Promise](https://github.com/xjamundx/eslint-plugin-promise)
@@ -5764,125 +5762,17 @@ Tool for composite stage analysis:
 
 ### Variable Style
 
-- no single `let/const`
-- sort `let/const`
-
-```ts
-// bad
-let i;
-let len;
-let dragonBall;
-let items = getItems();
-let goSportsTeam = true;
-
-// bad
-let i;
-const items = getItems();
-let dragonBall;
-const goSportsTeam = true;
-let len;
-
-// good
-const goSportsTeam = true;
-const items = getItems();
-let dragonBall;
-let i;
-let length;
-```
-
-- no chains assignment (create implicit global variable)
-
-```ts
-// bad
-(function example() {
-  // JavaScript 把它解释为
-  // let a = ( b = ( c = 1 ) );
-  // let 关键词只适用于变量 a; 变量 b 和变量 c 则变成了全局变量.
-  const a = (b = c = 1);
-})();
-
-console.log(a); // throws ReferenceError
-console.log(b); // 1
-console.log(c); // 1
-
-// good
-(function example() {
-  const a = 1;
-  const b = a;
-  const c = a;
-})();
-
-console.log(a); // throws ReferenceError
-console.log(b); // throws ReferenceError
-console.log(c); // throws ReferenceError
-```
-
-- use `()` wrap multiple line
-
-```ts
-// bad
-const foo = superLongLongLongLongLongLongLongLongFunctionName();
-
-// bad
-const foo = 'superLongLongLongLongLongLongLongLongString';
-
-// good
-const foo = superLongLongLongLongLongLongLongLongFunctionName();
-
-// good
-const foo = 'superLongLongLongLongLongLongLongLongString';
-```
+- No single `let/const` for multiple variables.
+- Sort `let/const`.
+- No chains assignment (create implicit global variable).
+- Prefer `()` wrap multiple line.
 
 ### Object Style
 
-- use literal
-
-```ts
-// bad
-// eslint-disable-next-line no-new-object
-const item = new Object();
-
-// good
-const item = {};
-```
-
-- use object-shorthand
-
-```ts
-// bad
-const atom = {
-  lukeSkyWalker,
-  addValue(value) {
-    return atom.value + value;
-  },
-};
-
-// good
-const atom = {
-  lukeSkyWalker,
-  addValue(value) {
-    return atom.value + value;
-  },
-};
-```
-
-- use `Object.prototype.XX` not `object.xx`
-
-```ts
-// bad
-// 在模块范围内的缓存中查找一次
-// eslint-disable-next-line no-prototype-builtins
-console.log(object.hasOwnProperty(key));
-
-// good
-console.log(Object.prototype.hasOwnProperty.call(object, key));
-
-// best
-const has = Object.prototype.hasOwnProperty; // https://www.npmjs.com/package/has
-console.log(has.call(object, key));
-```
-
-- Use object spread (`...`) not `object.assign`:
+- Prefer literal not `Object()` constructor.
+- Prefer object-shorthand.
+- Prefer `Object.prototype.XX` not `object.xx`.
+- Prefer object spread (`...`) not `object.assign`:
 
 ```ts
 // very bad
@@ -5901,7 +5791,7 @@ const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
 const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
 ```
 
-- use `.` for static name, use `[]` for variable name
+- Prefer `.` for static name, prefer `[]` for variable name:
 
 ```ts
 // good
@@ -5914,9 +5804,9 @@ function getProp(prop) {
 
 ### Array Style
 
-- Use literal.
-- Use `push` not `[]`.
-- Use array spread (`...`) (best) or `Array.from` (good).
+- Prefer literal.
+- Prefer `push` not `[]`.
+- Prefer array spread (`...`) (best) or `Array.from` (good):
 
 ```ts
 const foo = document.querySelectorAll('.foo');
@@ -5930,7 +5820,7 @@ const nodes = [...foo];
 
 ### Destruct Style
 
-对于多个返回值使用对象解构, 而不是数组解构.
+对于多个返回值使用对象解构, 而不是数组解构:
 
 ```ts
 // bad
@@ -5956,142 +5846,33 @@ const { left, top } = processInput(input);
 
 ### String Style
 
-- Use `'` not `"`.
-- Use \``${}`\` not `'str1' + 'str2'`.
+- Prefer `'` not `"`.
+- Prefer template literals not `'str1' + 'str2'`.
 
 ### Function Style
 
-- use naming function expression not function declaration
-
-```ts
-// bad
-function foo() {
-  // ...
-}
-
-// bad
-const foo = function () {
-  // ...
-};
-
-// good
-// 从变量引用调用中区分的词汇名称
-const short = function longUniqueMoreDescriptiveLexicalFoo() {
-  // ...
-};
-```
-
-- use `...args` not `arguments`
-
-```ts
-// bad
-function concatenateAll() {
-  // eslint-disable-next-line prefer-rest-params
-  const args = Array.prototype.slice.call(arguments);
-  return args.join('');
-}
-
-// good
-function concatenateAll(...args) {
-  return args.join('');
-}
-```
-
-- use default parameters not default expression pattern
-
-```ts
-// bad
-function handleThings(opts) {
-  this.opts = opts || {};
-}
-
-// good
-function handleThings(opts = {}) {
-  this.opts = opts;
-}
-```
-
-- no reassign parameters: side effect and bad performance
+- No reassign parameters (implicit side effect and bad performance).
+- Prefer `...args` not `arguments`.
+- Prefer ES6 default parameters not default expression pattern.
 
 ### Arrow Function Style
 
-- `()` and `{}` should pair
-
-```ts
-// bad
-arr.map(x => x + 1);
-arr.map((x, index) => x + index);
-[1, 2, 3].map(x => {
-  const y = x + 1;
-  return x * y;
-});
-
-// good
-arr.map(x => x + 1);
-arr.map((x, index) => {
-  return x + index;
-});
-[1, 2, 3].map(x => {
-  const y = x + 1;
-  return x * y;
-});
-```
-
-- use `()` wrap multiple line return value
-
-```ts
-// bad
-['get', 'post', 'put'].map(httpMethod =>
-  Object.prototype.hasOwnProperty.call(
-    httpMagicObjectWithAVeryLongName,
-    httpMethod
-  )
-);
-
-// good
-['get', 'post', 'put'].map(httpMethod =>
-  Object.prototype.hasOwnProperty.call(
-    httpMagicObjectWithAVeryLongName,
-    httpMethod
-  )
-);
-```
+- Prefer `()` wrap multiple line return value.
 
 ### Module Style
 
-- Import first.
-- No shorthand `export from`.
+- No duplicated export path:
 
 ```ts
 // bad
-// filename es6.js
-export { es6 as default } from './AirbnbStyleGuide';
-```
+// import foo from 'foo';
+// import { named1, named2 } from 'foo';
 
-```ts
-// good
-// filename es6.js
-import { es6 } from './AirbnbStyleGuide';
-export default es6;
-```
-
-- Path occurs once.
-
-```ts
-// bad
-// eslint-disable-next-line import/no-duplicates
-import foo from 'foo';
-// … 其他导入 … //
-// eslint-disable-next-line import/no-duplicates
-import { named1, named2 } from 'foo';
-```
-
-```ts
 // good
 import foo, { named1, named2 } from 'foo';
 ```
 
-- Not export `let`.
+- No export `let`:
 
 ```ts
 // bad
@@ -6105,9 +5886,9 @@ export { foo };
 
 ### Iterator and Generator Style
 
-- no iterator, 应该使用 JavaScript 的高阶函数代替 for-in 或者 for-of:
-  - 使用 `map/reduce/filter/any/every/some/find/findIndex/ ...` 遍历数组
-  - 使用 `Object.keys() / Object.values() / Object.entries()` 迭代对象生成数组
+- 使用 `Object.keys() / Object.values() / Object.entries()` 迭代对象生成数组.
+- 使用 `map/reduce/filter/any/every/some/find/findIndex/ ...` 遍历数组.
+- Prefer functional style iterator:
 
 ```ts
 const numbers = [1, 2, 3, 4, 5];
@@ -6148,40 +5929,16 @@ numbers.forEach(num => {
 const increasedByOne = numbers.map(num => num + 1);
 ```
 
-- use `function*` for generator
-
-```ts
-// bad
-function* fooBad() {
-  // ...
-}
-
-// bad
-const bar = function* () {
-  // ...
-};
-
-// good
-function* foo() {
-  // ...
-}
-
-// good
-const foo = function* () {
-  // ...
-};
-```
-
 ### Expression Style
 
-if 语句使用 ToBoolean 的抽象方法来计算表达式的结果:
+`if` 语句使用 ToBoolean 的抽象方法来计算表达式的结果:
 
-- Objects 的取值为: true.
-- Undefined 的取值为: false.
-- Null 的取值为: false.
-- Booleans 的取值为: 布尔值的取值.
-- Numbers 的取值为: 如果为 +0, -0, or NaN 值为 false 否则为 true.
-- Strings 的取值为: 如果是一个空字符串 `''` 值为 false 否则为 true.
+- `Object`: `true`.
+- `undefined`: `false`.
+- `null`: `false`.
+- `boolean`: 布尔值的取值.
+- `number`: 如果为 `+0`/`-0`/`NaN` 值为 `false`, 否则为 `true`.
+- `string`: 如果是一个空字符串 `''` 值为 `false`, 否则为 `true`.
 
 对于布尔值使用简写, 但是对于字符串和数字进行显式比较:
 
@@ -6217,7 +5974,7 @@ if (collection.length > 0) {
 }
 ```
 
-Use `{}` warp `case` when exists `const`/`let`/`function`/`class` declaration:
+- Prefer `{}` warp `case` when exists `const`/`let`/`function`/`class` declaration:
 
 ```ts
 // good
@@ -6245,88 +6002,21 @@ switch (foo) {
 }
 ```
 
-### Lines Style
-
-- 键入最后一个运算符后再换行, 运算符置于行尾可使 automatic semicolon insertion 机制失效
-- 换行后保持 2 个缩进层次
-
-```ts
-// bad
-const arr = [
-  [0, 1],
-  [2, 3],
-  [4, 5],
-];
-
-const objectInArray = [
-  {
-    id: 1,
-  },
-  {
-    id: 2,
-  },
-];
-
-const numberInArray = [1, 2];
-
-// good
-const arr = [
-  [0, 1],
-  [2, 3],
-  [4, 5],
-];
-
-const objectInArray = [
-  {
-    id: 1,
-  },
-  {
-    id: 2,
-  },
-];
-
-const numberInArray = [1, 2];
-```
-
-- use `()` wrap multiple line assignment or arguments
-
-```ts
-// good
-const foo = superLongLongLongLongLongLongLongLongFunctionName();
-
-['get', 'post', 'put'].map(httpMethod =>
-  Object.prototype.hasOwnProperty.call(
-    httpMagicObjectWithAVeryLongName,
-    httpMethod
-  )
-);
-```
-
 ### Space Style
 
-Good places to use a white space include:
-
-- `,`/`;` 后.
-- `+`,`-`,`*`,`/`,`<`,`>`,`=` 前后.
-- `function () {}`.
-- `function foo() {}`.
-- `} if/for/while () {}`.
-- `} else {}`.
-- No space inner `()` `[]`.
-- Use space inner `{}`.
+- 键入最后一个运算符后再换行, 运算符置于行尾可使 `Automatic Semicolon Insertion` 机制失效.
+- 换行后保持 2 个缩进层次.
+- Good places to use a white space include:
+  - `,`/`;` 后.
+  - `+`,`-`,`*`,`/`,`<`,`>`,`=` 前后.
+  - `function () {}`.
+  - `function foo() {}`.
+  - `} if/for/while () {}`.
+  - `} else {}`.
+  - inner `{}`.
+  - No space inner `()` `[]`.
 
 ```ts
-let d = 0;
-let a = b + 1;
-
-if (a && b && c) {
-  d = a % c;
-  a += d;
-}
-
-// anti pattern
-// missing or inconsistent spaces
-// make the code confusing
 let d = 0;
 let a = b + 1;
 
@@ -6338,50 +6028,35 @@ if (a && b && c) {
 
 ### Comments Style
 
-- 上方插入空行
-- 与下方语句统一缩进
+- 上方插入空行.
+- 与下方语句统一缩进.
 
 ```ts
-/*
+/**
  * comments
  * comments
  */
-```
 
-#### Module Comments Style
-
-```ts
-/*
+/**
  * @module app
  * @namespace APP
  */
-```
 
-#### Object Comments Style
-
-```ts
-/*
+/**
  * @class mathStuff
  */
-```
 
-#### Property Comments Style
-
-```ts
-/*
+/**
  * @property propertyName
- * @type Number/String
+ * @type {import('@jest/types').Config}
  */
-```
 
-#### Method Comments Style
-
-```ts
-/*
+/**
  * @constructor
  * @method sum
- * @param {Number}/{String} instructions
- * @return {Number}/{String} instructions
+ * @param {number} id
+ * @param {string} instructions
+ * @returns {number} result
  */
 ```
 
