@@ -9408,7 +9408,10 @@ class CssThemeProvider extends React.PureComponent<Props> {
 
 Don't use `React.FC`/`React.FunctionComponent`:
 
-- Unnecessary addition of children (hide some run-time error).
+- React 17:
+  Unnecessary addition of `children` (hide some run-time error).
+- React 18:
+  `@types/react` v18 [remove implicit `children` in `React.FunctionComponent`](https://github.com/ant-design/ant-design/pull/34937).
 - `React.FC` doesn't support generic components.
 - Barrier for `<Comp>` with `<Comp.Sub>` types (**component as namespace pattern**).
 - `React.FC` doesn't work correctly with `defaultProps`.
