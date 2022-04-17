@@ -2828,6 +2828,13 @@ console.log(BB.prototype[[proto]] === AA.prototype); // true
 console.log(bb[[proto]] === BB.prototype); // true
 ```
 
+|                                        | writable | enumerable | configurable |
+| -------------------------------------- | -------- | ---------- | ------------ |
+| `Foo.prototype`                        | false    | false      | false        |
+| `Foo.prototype.constructor`            | false    | false      | true         |
+| Static properties `Foo.*`              | true     | false      | true         |
+| Prototype properties `Foo.prototype.*` | true     | false      | true         |
+
 #### Class Inheritance
 
 - 隔离: 添加到 `this` 的所有属性都会存在于不同的实例上.
