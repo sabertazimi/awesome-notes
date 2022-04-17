@@ -4688,21 +4688,6 @@ move(); // [0, 0]
 // [ 1, 'yes', 3 ]
 ```
 
-### JSON Object Destructuring
-
-```ts
-const jsonData = {
-  id: 42,
-  status: 'OK',
-  data: [867, 5309],
-};
-
-const { id, status, data: number } = jsonData;
-
-console.log(id, status, number);
-// 42, "OK", [867, 5309]
-```
-
 ### Map and List Destructuring
 
 - `for index in Iterable<T>`: key.
@@ -4728,12 +4713,6 @@ for (const [key] of map) {
 for (const [, value] of map) {
   // ...
 }
-```
-
-### Import Destructuring
-
-```ts
-const { SourceMapConsumer, SourceNode } = require('source-map');
 ```
 
 ### Iterator Destructuring
@@ -4781,6 +4760,20 @@ const [first, second, third, fourth, fifth, sixth] = fibs();
 console.log(sixth); // 5
 ```
 
+### String Destructuring
+
+```ts
+const [a, b, c, d, e] = 'hello';
+console.log(a); // "h"
+console.log(b); // "e"
+console.log(c); // "l"
+console.log(d); // "l"
+console.log(e); // "o"
+
+const { length: len } = 'hello';
+console.log(len); // 5
+```
+
 ### Object Destructuring
 
 - 真正被赋值的是后者, 而不是前者.
@@ -4789,8 +4782,8 @@ console.log(sixth); // 5
 const { pattern: variable } = { key: value };
 ```
 
-- 解构赋值的规则: 只要等号右边的值不是对象, 就先将其转为对象.
-- undefined/null 无法转化为对象.
+- 解构赋值的规则: 只要等号右边的值不是对象, 就先将其**转为对象**.
+- `undefined`/`null` 无法转化为对象.
 
 ```ts
 const { prop: x } = undefined; // TypeError
@@ -4822,18 +4815,25 @@ console.log(l); // 'world'
 const { log, sin, cos } = Math;
 ```
 
-### String Destructuring
+### JSON Object Destructuring
 
 ```ts
-const [a, b, c, d, e] = 'hello';
-console.log(a); // "h"
-console.log(b); // "e"
-console.log(c); // "l"
-console.log(d); // "l"
-console.log(e); // "o"
+const jsonData = {
+  id: 42,
+  status: 'OK',
+  data: [867, 5309],
+};
 
-const { length: len } = 'hello';
-console.log(len); // 5
+const { id, status, data: number } = jsonData;
+
+console.log(id, status, number);
+// 42, "OK", [867, 5309]
+```
+
+### Import Destructuring
+
+```ts
+const { SourceMapConsumer, SourceNode } = require('source-map');
 ```
 
 ### Number and Boolean Destructuring
