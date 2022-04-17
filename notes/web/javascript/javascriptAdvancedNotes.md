@@ -1743,6 +1743,20 @@ console.log(document.hasFocus()); // true
   - `<input type="file" multiple />`.
   - `<select />`.
 
+```ts
+const input = document.querySelector('input');
+
+input.addEventListener('change', () => {
+  for (const file of Array.from(input.files)) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      console.log('File', file.name, 'starts with', reader.result.slice(0, 20));
+    });
+    reader.readAsText(file);
+  }
+});
+```
+
 ##### Input Select Event
 
 ```ts
@@ -6714,7 +6728,34 @@ request.onsuccess = function (event) {
 };
 ```
 
-### Web Files
+### Web File API
+
+```ts
+function readFileText(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => resolve(reader.result));
+    reader.addEventListener('error', () => reject(reader.error));
+    reader.readAsText(file);
+  });
+}
+
+function readFileBuffer(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => resolve(reader.result));
+    reader.addEventListener('error', () => reject(reader.error));
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+const fileInput = document.querySelector('fileInput');
+
+for (const file of fileInput.files) {
+  const text = await readFileText(file);
+  const buffer = await readFileBuffer(file);
+}
+```
 
 ## Web RTC
 
