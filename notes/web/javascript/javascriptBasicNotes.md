@@ -212,8 +212,9 @@ function is32Bit(c) {
   return c.codePointAt(0) > 0xffff;
 }
 
-// True:
 const truthy = String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y';
+
+const after = before.charAt(0).toUpperCase() + before.slice(1);
 ```
 
 #### String Slice and Merge
@@ -1008,12 +1009,6 @@ console.log(someResult); // true
 
 map + flat.
 
-#### Array Traverse
-
-```ts
-array.forEach(val => {}); // 遍历数组所有元素.
-```
-
 #### Array Reduce
 
 相当于 Haskell 中的 fold:
@@ -1023,6 +1018,12 @@ array.forEach(val => {}); // 遍历数组所有元素.
   (previous, current, currentIndex, arr) => current + previous,
   initial
 ); // fold function
+```
+
+#### Array Traverse
+
+```ts
+array.forEach(val => {}); // 遍历数组所有元素.
 ```
 
 #### Array Sort
@@ -1120,55 +1121,6 @@ const view = new Int16Array([25, 50]);
 console.log(view instanceof Int16Array); // true
 console.log(view instanceof Array); // false
 console.log(Array.isArray(view)); // false
-```
-
-#### Array Tips and Best Practice
-
-- 对字符串每个元素进行单独操作 e.g map/filter
-
-```ts
-str
-  .split('')
-  .map(function (subStr) {
-    return decode(subStr.charCodeAt(0));
-  })
-  .join('');
-
-str.split('').someOperator().join('');
-```
-
-- 实现 contains 方法
-
-```ts
-const contains = arr.includes(item);
-```
-
-- 改变某一处字母
-
-```ts
-after = after.charAt(0).toUpperCase() + after.slice(1);
-```
-
-- 删除只能指定元素
-
-```ts
-arr.splice(index, 1);
-```
-
-- Remove Duplicate Elements:
-
-```ts
-// 1: "Set"
-const array = [...new Set(array)];
-
-// 2: "Filter"
-array.filter((item, index) => array.indexOf(item) === index);
-
-// 3: "Reduce"
-array.reduce(
-  (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
-  []
-);
 ```
 
 ### Date
