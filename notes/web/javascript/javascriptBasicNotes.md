@@ -3224,16 +3224,16 @@ Constructor invocation (`new` call):
 
 ### Arrow Function Invocation
 
-- `thisArgs` binding:
-  - **Lexical Scope**: `this` defined where arrow function defined (not called).
+- No `this` binding (**lexical scope**):
+  - `this` defined where arrow function defined (not called).
+  - Not suited as method:
+    `this` in arrow function bound to lexical scope, not bound to method receiver.
   - `apply`/`call`/`bind` can't change `this` in arrow function.
-- No `arguments` binding.
-- No `prototype` binding.
-- No suited for `new` constructor:
-  - No `super` binding.
-  - No `new.target` binding.
-- Not suited as methods of plain object
-  (`this` in arrow function would be refer to `window`).
+- No `arguments` binding (**lexical scope**).
+- Not suited as `new` constructor:
+  - No `super` binding (**lexical scope**).
+  - No `new.target` binding (**lexical scope**).
+- No `function.prototype`.
 
 ```ts
 const obj = {
