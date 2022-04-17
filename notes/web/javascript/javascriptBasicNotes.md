@@ -4610,170 +4610,6 @@ let [x = 1, y = x] = [1, 2]; // x=1; y=2
 let [x = y, y = 1] = []; // ReferenceError
 ```
 
-### Destructuring Swap Value
-
-```ts
-[x, y] = [y, x];
-```
-
-### Function Parameters and Return Value Destructuring
-
-- 可用于工厂 (`factory`) / 设置 (`options`) 模式传参一般为 `options` 对象,
-- 具有固定的属性名.
-- 一次性定义多个参数.
-- 一次性定义多个参数的默认值.
-
-```ts
-// 参数是一组有次序的值
-function f1([x, y, z]) {}
-f1([1, 2, 3]);
-
-// 参数是一组无次序的值
-function f2({ x, y, z }) {}
-f2({ z: 3, y: 2, x: 1 });
-
-// 可省略 const foo = config.foo || 'default foo';
-jQuery.ajax = function (
-  url,
-  {
-    async = true,
-    beforeSend = function () {},
-    cache = true,
-    complete = function () {},
-    crossDomain = false,
-    global = true,
-    // ... more config
-  }
-) {
-  // ... do stuff
-};
-```
-
-```ts
-// 返回一个数组
-function example1() {
-  return [1, 2, 3];
-}
-const [a, b, c] = example1();
-
-// 返回一个对象
-function example2() {
-  return {
-    foo: 1,
-    bar: 2,
-  };
-}
-
-const { foo, bar } = example2();
-```
-
-```ts
-function add([x, y]) {
-  return x + y;
-}
-add([1, 2]) // 3
-  [([1, 2], [3, 4])].map(([a, b]) => a + b);
-// [ 3, 7 ]
-
-function move({ x = 0, y = 0 } = {}) {
-  return [x, y];
-}
-move({ x: 3, y: 8 }); // [3, 8]
-move({ x: 3 }); // [3, 0]
-move({}); // [0, 0]
-move(); // [0, 0]
-
-// 严格为 undefined 时, 触发默认值设置
-[1, undefined, 3].map((x = 'yes') => x);
-// [ 1, 'yes', 3 ]
-```
-
-### Iterator Destructuring
-
-等号右边必须为数组等实现了 Iterator 接口的对象, 否则报错:
-
-- Array.
-- Set.
-- Generator function.
-
-```ts
-const [foo, [[bar], baz]] = [1, [[2], 3]];
-console.log(foo); // 1
-console.log(bar); // 2
-console.log(baz); // 3
-
-const [, , third] = ['foo', 'bar', 'baz'];
-console.log(third); // "baz"
-
-const [x, , y] = [1, 2, 3];
-console.log(x); // 1
-console.log(y); // 3
-
-const [head, ...tail] = [1, 2, 3, 4];
-console.log(head); // 1
-console.log(tail); // [2, 3, 4]
-
-const [x, y, ...z] = ['a'];
-console.log(x); // "a"
-console.log(y); // undefined
-console.log(z); // []
-
-// Generator 函数
-function* fibs() {
-  let a = 0;
-  let b = 1;
-
-  while (true) {
-    yield a;
-    [a, b] = [b, a + b];
-  }
-}
-
-const [first, second, third, fourth, fifth, sixth] = fibs();
-console.log(sixth); // 5
-```
-
-#### Map and List Destructuring
-
-- `for index in Iterable<T>`: key.
-- `for [key, value] of Iterable<T>`: entry.
-
-```ts
-const map = new Map();
-map.set('first', 'hello');
-map.set('second', 'world');
-
-for (const [key, value] of map) {
-  console.log(`${key} is ${value}`);
-}
-// first is hello
-// second is world
-
-// 获取键名
-for (const [key] of map) {
-  // ...
-}
-
-// 获取键值
-for (const [, value] of map) {
-  // ...
-}
-```
-
-#### String Destructuring
-
-```ts
-const [a, b, c, d, e] = 'hello';
-console.log(a); // "h"
-console.log(b); // "e"
-console.log(c); // "l"
-console.log(d); // "l"
-console.log(e); // "o"
-
-const { length: len } = 'hello';
-console.log(len); // 5
-```
-
 ### Object Destructuring
 
 - 解构赋值的规则: 只要等号右边的值不是对象, 就先将其**转为对象**.
@@ -4847,6 +4683,172 @@ const truthy = s === Number.prototype.toString; // true
 
 let { toString: s } = true;
 const truthy = s === Boolean.prototype.toString; // true
+```
+
+### Iterator Destructuring
+
+等号右边必须为数组等实现了 Iterator 接口的对象, 否则报错:
+
+- Array.
+- Set.
+- Generator function.
+
+```ts
+const [foo, [[bar], baz]] = [1, [[2], 3]];
+console.log(foo); // 1
+console.log(bar); // 2
+console.log(baz); // 3
+
+const [, , third] = ['foo', 'bar', 'baz'];
+console.log(third); // "baz"
+
+const [x, , y] = [1, 2, 3];
+console.log(x); // 1
+console.log(y); // 3
+
+const [head, ...tail] = [1, 2, 3, 4];
+console.log(head); // 1
+console.log(tail); // [2, 3, 4]
+
+const [x, y, ...z] = ['a'];
+console.log(x); // "a"
+console.log(y); // undefined
+console.log(z); // []
+
+// Generator 函数
+function* fibs() {
+  let a = 0;
+  let b = 1;
+
+  while (true) {
+    yield a;
+    [a, b] = [b, a + b];
+  }
+}
+
+const [first, second, third, fourth, fifth, sixth] = fibs();
+console.log(sixth); // 5
+```
+
+- Left-hand side of a normal assignment:
+
+```ts
+let x = 1;
+let y = 2;
+[x, y] = [y, x];
+```
+
+#### Map and List Destructuring
+
+- `for index in Iterable<T>`: key.
+- `for [key, value] of Iterable<T>`: entry.
+
+```ts
+const map = new Map();
+map.set('first', 'hello');
+map.set('second', 'world');
+
+for (const [key, value] of map) {
+  console.log(`${key} is ${value}`);
+}
+// first is hello
+// second is world
+
+// 获取键名
+for (const [key] of map) {
+  // ...
+}
+
+// 获取键值
+for (const [, value] of map) {
+  // ...
+}
+```
+
+#### String Destructuring
+
+```ts
+const [a, b, c, d, e] = 'hello';
+console.log(a); // "h"
+console.log(b); // "e"
+console.log(c); // "l"
+console.log(d); // "l"
+console.log(e); // "o"
+
+const { length: len } = 'hello';
+console.log(len); // 5
+```
+
+### Function Parameters and Return Value Destructuring
+
+- 可用于工厂 (`factory`) / 设置 (`options`) 模式传参一般为 `options` 对象,
+- 具有固定的属性名.
+- 一次性定义多个参数.
+- 一次性定义多个参数的默认值.
+
+```ts
+// 参数是一组有次序的值
+function f1([x, y, z]) {}
+f1([1, 2, 3]);
+
+// 参数是一组无次序的值
+function f2({ x, y, z }) {}
+f2({ z: 3, y: 2, x: 1 });
+
+// 可省略 const foo = config.foo || 'default foo';
+jQuery.ajax = function (
+  url,
+  {
+    async = true,
+    beforeSend = function () {},
+    cache = true,
+    complete = function () {},
+    crossDomain = false,
+    global = true,
+    // ... more config
+  }
+) {
+  // ... do stuff
+};
+```
+
+```ts
+// 返回一个数组
+function example1() {
+  return [1, 2, 3];
+}
+const [a, b, c] = example1();
+
+// 返回一个对象
+function example2() {
+  return {
+    foo: 1,
+    bar: 2,
+  };
+}
+
+const { foo, bar } = example2();
+```
+
+```ts
+function add([x, y]) {
+  return x + y;
+}
+add([1, 2]) // 3
+  [([1, 2], [3, 4])].map(([a, b]) => a + b);
+// [ 3, 7 ]
+
+function move({ x = 0, y = 0 } = {}) {
+  return [x, y];
+}
+move({ x: 3, y: 8 }); // [3, 8]
+move({ x: 3 }); // [3, 0]
+move({}); // [0, 0]
+move(); // [0, 0]
+
+// 严格为 undefined 时, 触发默认值设置
+[1, undefined, 3].map((x = 'yes') => x);
+// [ 1, 'yes', 3 ]
 ```
 
 ## Proxy and Reflect
