@@ -5647,8 +5647,6 @@ export { CountProvider, useCount };
 
 ### UseEffect Hook
 
-- `useEffect` complete [guide](https://overreacted.io/a-complete-guide-to-useeffect).
-
 #### UseEffect Hooks Dispatcher
 
 ```ts
@@ -5944,6 +5942,80 @@ class Counter {
 // You clicked 5 times
 // You clicked 5 times
 ```
+
+#### UseEffect Cleanup
+
+- Avoid memory leaks.
+- Prevent unexpected errors.
+- Good user experience.
+
+Cleanup API requests:
+
+```ts
+const App = () => {
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    const fetchData = async () => {
+      const response = await fetch('some api here', { signal });
+      // do something with response
+    };
+
+    fetchData();
+
+    return () => controller.abort();
+  }, []);
+};
+```
+
+Cleanup connections:
+
+```ts
+const App = () => {
+  useEffect(() => {
+    const socket = new WebSocket('url', protocols);
+    // do what you want with the socket
+
+    return () => socket.close();
+  }, []);
+};
+```
+
+Cleanup timeouts:
+
+```ts
+const App = () => {
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      // do something in the timeout
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+};
+```
+
+:::caution React 18
+
+With `Strict Mode` in React 18,
+React will simulate unmounting and remounting component in development mode:
+
+- React mounts component:
+  - Layout effects are created.
+  - Effect effects are created.
+- React simulates unmounting component:
+  - Layout effects are destroyed.
+  - Effects are destroyed.
+- React simulates mounting component with previous state:
+  - Layout effect setup code runs.
+  - Effect setup code runs.
+
+:::
+
+#### UseEffect Reference
+
+- `useEffect` complete [guide](https://overreacted.io/a-complete-guide-to-useeffect).
 
 ### UseLayoutEffect Hook
 
