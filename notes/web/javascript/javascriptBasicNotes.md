@@ -3079,18 +3079,16 @@ const truthy = Function[[proto]] === Function.prototype; // true
 const truthy = Function[[proto]][[proto]] === Object.prototype; // true
 ```
 
-### Invocation Patterns and This Bindings
+### Implicit Invocation
 
-#### Implicit Binding
-
-- Function Invocation 普通调用模式: `this` 绑定至全局对象/`undefined` (`strict mode`)
+- `Function Invocation` 普通调用模式: `this` 绑定至全局对象/`undefined` (`strict mode`)
   - setTimeout 和 setInterval 中传入的 Callbacks
-    会自动转变为 Function Invocation,
+    会自动转变为 `Function Invocation`,
     `this` bind to global/undefined object.
   - React Class Component 中传入的 Event Handlers
-    会自动转变为 Function Invocation,
+    会自动转变为 `Function Invocation`,
     需要显式地 `this.handleClick = this.handleClick.bind(this);`
-- Method Invocation 方法调用模式: this 绑定至此方法所属的对象.
+- `Method Invocation` 方法调用模式: `this` 绑定至此方法所属的对象.
 
 ```ts
 // Non-strict mode:
@@ -3111,13 +3109,13 @@ console.log(object.getIdentityFunc()()); // 'The Window'
 ```
 
 ```ts
-add(1, 2); // this -> global
+add(1, 2); // `this` -> `global`
 
 const obj = {
   value: 1,
   foo() {
-    // 若不将 this 赋值给 that, 而在内部函数中直接使用 this.value
-    // 则会发生错误: 内部函数的 this 指向全局对象而不是 obj
+    // 若不将 `this` 赋值给 `that`, 而在内部函数中直接使用 `this.value`,
+    // 则会发生错误: 内部函数的 `this` 指向全局对象而不是 `obj`.
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const that = this;
 
@@ -3148,9 +3146,9 @@ setTimeout(batman.logName, 1000);
 // after 1 second logs "undefined"
 ```
 
-#### Explicit Binding
+### Explicit Invocation
 
-Apply/Bind/Call Invocation:
+`Apply`/`Bind`/`Call` Invocation:
 函数引用不可以改变函数定义作用域 (scope), 但可以改变函数执行作用域 (context).
 
 ```ts
@@ -3184,17 +3182,17 @@ String.prototype.stringStaticFunction.apply();
 context.function(arguments);
 ```
 
-##### Function Bind
+#### Explicit Bind Invocation
 
-- change function runtime context (ignore innovation pattern `function/method/new/call/apply`)
-- curry function
-- can't change `this` in arrow function
+- Change function runtime context (ignore innovation pattern `function/method/new/call/apply`).
+- Curry function.
+- Can't change `this` in arrow function.
 
 ```ts
 const boundFunc = func.bind(context, arg1, arg2, argN);
 ```
 
-##### Function Call and Apply
+#### Explicit Call and Apply Invocation
 
 ```ts
 function bind(o, m) {
@@ -3217,18 +3215,18 @@ const twoSay = bind(two, one.say);
 twoSay('yo'); // "yo, another object"
 ```
 
-#### Constructor Binding
+### Constructor Invocation
 
-Constructor Invocation (`new` call):
+Constructor invocation (`new` call):
 
 - `this` 绑定至传入的空对象.
 - `new.target` 引用构造函数.
 
-#### Arrow Function Binding
+### Arrow Function Invocation
 
-- **Lexical Scope**: `this` defined where arrow function defined (not called).
-- `apply`/`call`/`bind` can't change `this` in arrow function.
-- No `thisArgs` binding.
+- `thisArgs` binding:
+  - **Lexical Scope**: `this` defined where arrow function defined (not called).
+  - `apply`/`call`/`bind` can't change `this` in arrow function.
 - No `arguments` binding.
 - No `prototype` binding.
 - No suited for `new` constructor:
