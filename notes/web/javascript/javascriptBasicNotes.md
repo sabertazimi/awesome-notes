@@ -2842,32 +2842,6 @@ console.log(bb[[proto]] === BB.prototype); // true
   - 在类块中定义的所有方法都会定义在类的原型上.
   - 静态属性定义在类本身上.
 
-[![Class Inheritance](./figures/ClassInheritance.png)](https://exploringjs.com/es6/ch_classes.html#_prototype-chains)
-
-```ts
-class Person {
-  constructor() {
-    this.name = String('Jack');
-    this.sayName = () => console.log(this.name);
-    this.nicknames = ['Jake', 'J-Dog'];
-  }
-}
-
-const p1 = new Person();
-const p2 = new Person();
-
-p1.sayName(); // Jack
-p2.sayName(); // Jack
-console.log(p1.name === p2.name); // false
-console.log(p1.sayName === p2.sayName); // false
-console.log(p1.nicknames === p2.nicknames); // false
-
-p1.name = p1.nicknames[0];
-p2.name = p2.nicknames[1];
-p1.sayName(); // Jake
-p2.sayName(); // J-Dog
-```
-
 ```ts
 class Person {
   constructor() {
@@ -2891,6 +2865,15 @@ p.locate(); // instance, Person {}
 Person.prototype.locate(); // prototype, {constructor: ... }
 Person.locate(); // class, class Person {}
 ```
+
+[![Class Inheritance](./figures/ClassInheritance.png)](https://exploringjs.com/es6/ch_classes.html#_prototype-chains)
+
+| `Class` definition | `Class` prototype    | `Class.prototype` prototype |
+| ------------------ | -------------------- | --------------------------- |
+| `C`                | `Function.prototype` | `Object.prototype`          |
+| `C extends null`   | `Function.prototype` | `null`                      |
+| `C extends Object` | `Object`             | `Object.prototype`          |
+| `C extends B`      | `B`                  | `B.prototype`               |
 
 `super`:
 
