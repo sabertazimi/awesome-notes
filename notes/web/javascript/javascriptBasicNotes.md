@@ -4467,7 +4467,7 @@ for await (const chunk of asyncSource) {
 }
 ```
 
-#### Asynchronous generator
+#### Asynchronous Generator
 
 ```ts
 async function* remotePostsAsyncGenerator() {
