@@ -3780,6 +3780,10 @@ setTimeout(function () {
 
 ## Iterator
 
+### Iteration Protocol
+
+Iteration [protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols):
+
 - 一个数据结构只要实现了 `[Symbol.iterator]()` 接口, 便可成为可迭代数据结构 (`Iterable`):
   - String: `StringIterator`.
   - Array: `ArrayIterator`.
