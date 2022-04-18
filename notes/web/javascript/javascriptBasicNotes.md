@@ -4267,6 +4267,18 @@ console.log(g === g[Symbol.iterator]());
 // true
 ```
 
+Generators can play 3 roles:
+
+- Iterators (data producers):
+  generators can produce sequences of values via loops and recursion.
+- Observers (data consumers):
+  generators become data consumers that pause
+  until a new value is pushed into them via `next(value)`
+  (`yield` can receive a value from `next(value)`).
+- Coroutines (data producers and consumers):
+  generators are pauseable and can be both data producers and data consumers,
+  generators can be coroutines (cooperatively multi-tasked tasks).
+
 ### Generator Basic Usage
 
 ```ts
