@@ -8014,3 +8014,6 @@ addTen.then(console.log); // 18
 - camelCase.
 
 #### RxJS
+
+- Reactive programming: push streams and potentially multiple consumers.
+- Async iteration: pull streams and single consumers.
