@@ -1885,7 +1885,7 @@ console.log(old.data); // 5
   With the `??=`, if left-side value is `null` or `undefined`,
   right-side expression is assigned to left side.
 
-## Flow Control
+## Control Flow
 
 ### Switch Case Statement
 
@@ -4526,7 +4526,7 @@ for await (const clickEvent of mouseClickIterator) {
 }
 ```
 
-Generator based control flow goodness for nodejs and the browser,
+Generator based asynchronous control flow goodness for nodejs and the browser,
 using promises, letting you write non-blocking code in a nice-ish way
 (just like [tj/co](https://github.com/tj/co)).
 
@@ -6009,6 +6009,30 @@ async function baz() {
 
 baz();
 // baz
+```
+
+- `async`/`await` implement generator based asynchronous control flow:
+
+```ts
+const fetchJson = co.wrap(function* (url) {
+  try {
+    const response = yield fetch(url);
+    const text = yield response.text();
+    return JSON.parse(text);
+  } catch (error) {
+    console.log(`ERROR: ${error.stack}`);
+  }
+});
+
+async function fetchJson(url) {
+  try {
+    const response = await fetch(url);
+    const text = await response.text();
+    return JSON.parse(text);
+  } catch (error) {
+    console.log(`ERROR: ${error.stack}`);
+  }
+}
 ```
 
 ### Await Arrays
