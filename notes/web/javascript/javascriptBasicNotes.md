@@ -5088,6 +5088,12 @@ move(); // [0, 0]
 
 ## Promise
 
+Callback style asynchronous programming:
+
+- Callback hell.
+- Complicated error handling.
+- Complicated composition.
+
 Avoid callback hell with:
 
 - Return `new Promise`.
