@@ -6778,9 +6778,9 @@ const NOPE_HANDLER = {
 const readOnly = target => new Proxy(target, NODE_HANDLER);
 ```
 
-#### Property and Parameter Validation
+#### Range Validation
 
-`in` operator capture for range validation:
+`in` operator capture:
 
 ```ts
 const range = (min, max) =>
@@ -6799,7 +6799,9 @@ nums.filter(n => n in range(1, 10));
 // => [1, 5]
 ```
 
-`set` operator capture for property validation:
+#### Property Validation
+
+`set` operator capture:
 
 ```ts
 const target = {
@@ -6822,7 +6824,9 @@ proxy.onlyNumbersGoHere = '2';
 console.log(proxy.onlyNumbersGoHere); // 1
 ```
 
-`apply` operator capture for parameter validation:
+#### Function Parameter Validation
+
+`apply` operator capture:
 
 ```ts
 function median(...nums) {
@@ -6863,7 +6867,9 @@ console.log(me instanceof Person); // true
 console.log(me instanceof PersonProxy); // true
 ```
 
-`new` operator capture for parameter validation:
+#### Constructor Parameter Validation
+
+`new` operator capture:
 
 ```ts
 class User {
@@ -7048,6 +7054,17 @@ const proxy = createProxy(obj);
 proxy.say();
 proxy.coding();
 ```
+
+#### Proxy Pattern Implementation
+
+- Remote mock and placeholder:
+  - Data mock.
+  - Image placeholder.
+- Cache:
+  - Database objects access caching.
+  - Memoized functions.
+- Profiling.
+- Observer and watcher.
 
 ### Proxy and DefineProperty
 
