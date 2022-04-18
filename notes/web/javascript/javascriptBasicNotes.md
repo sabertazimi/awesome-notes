@@ -5094,12 +5094,17 @@ Callback style asynchronous programming:
 - Complicated error handling.
 - Complicated composition.
 
-Avoid callback hell with:
+Promise style asynchronous programming:
 
-- Return `new Promise`.
-- Return `promise.then((value) => {})`.
-- Error handle with `promise.catch((err) => {})`.
-- Cleanup with `promise.finally(() => {})`.
+- Avoid callback hell:
+  - Return `new Promise()`/`Promise.resolve()`.
+  - Return `promise.then((value) => {})`.
+- Simple error handling:
+  - Catch error: `promise.catch((err) => {})`.
+  - Cleanup: `promise.finally(() => {})`.
+- Simple composition:
+  - `Promise.all`.
+  - `Promise.race`.
 
 ### Promise Resolve
 
