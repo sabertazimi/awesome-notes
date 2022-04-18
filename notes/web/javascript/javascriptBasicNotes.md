@@ -1020,7 +1020,7 @@ map + flat.
 ); // fold function
 ```
 
-#### Array Traverse
+#### Array Traversal
 
 ```ts
 array.forEach(val => {}); // 遍历数组所有元素.
@@ -4700,30 +4700,79 @@ for await (const chunk of getRemoteData()) {
 
 在生成器函数内部,
 用 `yield *` 去迭代自身产生的生成器对象,
-实现递归算法:
+实现递归算法.
+
+Tree traversal:
 
 ```ts
-// Graph traverse.
-function* traverse(nodes) {
-  for (const node of nodes) {
-    if (!visitedNodes.has(node)) {
-      yield node;
-      yield* traverse(node.neighbors);
+// Tree traversal
+class BinaryTree {
+  constructor(value, left = null, right = null) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
+  }
+
+  *[Symbol.iterator]() {
+    yield this.value;
+
+    if (this.left) {
+      // Short for: yield* this.left[Symbol.iterator]()
+      yield* this.left;
+    }
+
+    if (this.right) {
+      // Short for: yield* this.right[Symbol.iterator]()
+      yield* this.right;
     }
   }
 }
 
-function* DomTraversal(element) {
+const tree = new BinaryTree(
+  'a',
+  new BinaryTree('b', new BinaryTree('c'), new BinaryTree('d')),
+  new BinaryTree('e')
+);
+
+for (const x of tree) {
+  console.log(x);
+}
+// Output:
+// a
+// b
+// c
+// d
+// e
+```
+
+Graph traversal:
+
+```ts
+// Graph traversal
+function* graphTraversal(nodes) {
+  for (const node of nodes) {
+    if (!visitedNodes.has(node)) {
+      yield node;
+      yield* graphTraversal(node.neighbors);
+    }
+  }
+}
+```
+
+DOM traversal:
+
+```ts
+function* domTraversal(element) {
   yield element;
   element = element.firstElementChild;
 
   while (element) {
-    yield* DomTraversal(element);
+    yield* domTraversal(element);
     element = element.nextElementSibling;
   }
 }
 
-for (const element of DomTraversal(document.getElementById('subTree'))) {
+for (const element of domTraversal(document.getElementById('subTree'))) {
   console.log(element.nodeName);
 }
 ```
