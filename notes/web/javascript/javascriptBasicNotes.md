@@ -2622,6 +2622,7 @@ console.log(dest.a === src.a); // true
 - Enumerable: **可枚举**属性扩展.
 - Own: **自有**属性扩展.
 - Shallow: **浅拷贝**扩展.
+- Not trigger `sourceObj.set` and not change `sourceObj` (create new properties).
 
 ```ts
 const foo = { a: 1 };
