@@ -953,6 +953,7 @@ arr.pop(); // 删除数组尾元素
 #### Array Query
 
 ```ts
+[].at(index); // ES2022
 [].indexOf(element); // -1 or other.
 [].lastIndexOf(element); // -1 or other.
 [].includes(element); // boolean.
