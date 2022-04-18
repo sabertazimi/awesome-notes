@@ -6622,6 +6622,26 @@ console.log(proxy instanceof Proxy); // TypeError
 console.log(target === proxy); // false
 ```
 
+`this` binding should process carefully:
+
+```ts
+const proxy = new Proxy(new Date(), {});
+proxy.getDate(); // `getDate` rely on internal slots
+// TypeError: `this` is not a Date object.
+
+const handler = {
+  get(target, propKey, receiver) {
+    if (propKey === 'getDate') {
+      return target.getDate.bind(target);
+    }
+
+    return Reflect.get(target, propKey, receiver);
+  },
+};
+const proxy = new Proxy(new Date('2020-12-24'), handler);
+proxy.getDate(); // 24
+```
+
 ### Reflect
 
 - `Reflect.get(target, propKey)`.
@@ -6685,6 +6705,7 @@ const obj = {
   '8': 0,
   'second str': 0,
 };
+
 Reflect.ownKeys(obj);
 // [ "0", "8", "773", "str", "-1", "second str", Symbol(comet), Symbol(meteor) ]
 // Indexes in numeric order,
