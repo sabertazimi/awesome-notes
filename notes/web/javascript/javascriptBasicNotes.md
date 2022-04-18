@@ -2412,6 +2412,16 @@ Object.entries(score);
  * [ 'gan', 41 ],
  * ]
  */
+
+function findKey(object, callback, thisValue) {
+  for (const [key, value] of Object.entries(object)) {
+    if (callback.call(thisValue, value, key, object)) {
+      return key;
+    }
+  }
+
+  return undefined;
+}
 ```
 
 - `Object.fromEntries()`.
@@ -2423,11 +2433,35 @@ const result = Object.fromEntries(
     .filter(([key, value]) => key.length === 1)
     .map(([key, value]) => [key, value * 2])
 );
-```
 
-```ts
 const map = new Map(Object.entries(object));
 const objectCopy = Object.fromEntries(map);
+
+function pick(object, ...keys) {
+  const filteredEntries = Object.entries(object).filter(([key, _value]) =>
+    keys.includes(key)
+  );
+
+  return Object.fromEntries(filteredEntries);
+}
+
+function invert(object) {
+  const mappedEntries = Object.entries(object).map(([key, value]) => [
+    value,
+    key,
+  ]);
+
+  return Object.fromEntries(mappedEntries);
+}
+
+function mapObject(object, callback, thisValue) {
+  const mappedEntries = Object.entries(object).map(([key, value]) => {
+    const mappedValue = callback.call(thisValue, value, key, object);
+    return [key, mappedValue];
+  });
+
+  return Object.fromEntries(mappedEntries);
+}
 ```
 
 - `Object.preventExtensions(O)`/`Object.isExtensible(O)`: 不可新增属性, 可删除/修改属性.
