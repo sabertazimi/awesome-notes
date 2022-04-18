@@ -5420,7 +5420,7 @@ class Promise {
 
       // If `res` is a "thenable", lock in this promise to match the
       // resolved or rejected state of the thenable.
-      const then = res != null ? res.then : null;
+      const then = res !== null ? res.then : null;
       if (typeof then === 'function') {
         // In this case, the promise is "resolved", but still in the 'PENDING'
         // state. This is what the ES6 spec means when it says "A resolved promise
@@ -5494,15 +5494,18 @@ class Promise {
         }
       };
 
-      if (this.$state === 'FULFILLED') {
-        _onFulfilled(this.$internalValue);
-      } else if (this.$state === 'REJECTED') {
-        _onRejected(this.$internalValue);
-      } else {
-        this.$chained.push({
-          onFulfilled: _onFulfilled,
-          onRejected: _onRejected,
-        });
+      switch (this.$state) {
+        case 'FULFILLED':
+          _onFulfilled(this.$internalValue);
+          break;
+        case 'REJECTED':
+          _onRejected(this.$internalValue);
+          break;
+        default:
+          this.$chained.push({
+            onFulfilled: _onFulfilled,
+            onRejected: _onRejected,
+          });
       }
     });
   }
