@@ -3808,21 +3808,21 @@ interface Iterable {
 
 interface Iterator {
   next(): IteratorResult;
-  return?(value?: any): IteratorResult;
+  return?(value?: any): IteratorResult; // Closable iterator
   throw?(): void;
 }
 
 interface IterableIterator {
   [Symbol.iterator](): Iterator;
   next(): IteratorResult;
-  return?(value?: any): IteratorResult;
+  return?(value?: any): IteratorResult; // Closable iterator
   throw?(): void;
 }
 
 interface SelfIterableIterator {
   [Symbol.iterator](): Self;
   next(): IteratorResult;
-  return?(value?: any): IteratorResult;
+  return?(value?: any): IteratorResult; // Closable iterator
   throw?(): void;
 }
 
@@ -3835,36 +3835,6 @@ const Iterable = {
   [Symbol.iterator]() {
     return new Iterator();
   },
-};
-
-const Iterator = {
-  next() {
-    return IteratorResult;
-  },
-  return() {
-    // 迭代器提前提出: break/continue/throw/destructing.
-    return IteratorResult;
-  },
-  throw(e) {
-    throw e;
-  },
-};
-
-const IterableIterator = {
-  [Symbol.iterator]() {
-    return this;
-  },
-  next() {
-    return IteratorResult;
-  },
-  return() {
-    return IteratorResult;
-  },
-};
-
-const IteratorResult = {
-  value: any,
-  done: boolean,
 };
 ```
 
@@ -4163,6 +4133,112 @@ function remotePostsAsyncIteratorsFactory() {
 ait.next().then();
 ait.next().then();
 ait.next().then();
+```
+
+### Closable Iterator
+
+- An iterator is closable if it has a method `return()`.
+
+```ts
+interface ClosableIterator {
+  next(): IteratorResult;
+  return(value?: any): IteratorResult;
+}
+```
+
+- Not all iterators are closable: e.g `Array Iterator`.
+
+```ts
+const iterable = ['a', 'b', 'c'];
+const iterator = iterable[Symbol.iterator]();
+console.log('return' in iterator);
+// => false
+```
+
+- If an iterator is not closable,
+  you can continue iterating over it after an abrupt exit.
+- If an iterator is closable,
+  you can't continue iterating over it after an abrupt exit.
+
+```ts
+function* elements() {
+  yield 'a';
+  yield 'b';
+  yield 'c';
+}
+
+function twoLoops(iterator) {
+  // eslint-disable-next-line no-unreachable-loop
+  for (const x of iterator) {
+    console.log(x);
+    break;
+  }
+
+  for (const x of iterator) {
+    console.log(x);
+  }
+}
+
+class PreventReturn {
+  constructor(iterator) {
+    this.iterator = iterator;
+  }
+
+  [Symbol.iterator]() {
+    return this;
+  }
+
+  next() {
+    return this.iterator.next();
+  }
+
+  return(value = undefined) {
+    return { done: false, value };
+  }
+}
+
+twoLoops(elements());
+// Output:
+// a
+
+twoLoops(new PreventReturn(elements()));
+// Output:
+// a
+// b
+// c
+
+twoLoops(['a', 'b', 'c'][Symbol.iterator]());
+// Output:
+// a
+// b
+// c
+```
+
+- Manually call `iterator.return()`:
+
+```ts
+function take(n, iterable) {
+  const iter = iterable[Symbol.iterator]();
+
+  return {
+    [Symbol.iterator]() {
+      return this;
+    },
+    next() {
+      if (n > 0) {
+        n--;
+        return iter.next();
+      } else {
+        iter?.return();
+        return { done: true };
+      }
+    },
+    return() {
+      n = 0;
+      iter?.return();
+    },
+  };
+}
 ```
 
 ## Generator
