@@ -188,6 +188,7 @@ point out that:
 - [Infinite Scroll](https://www.smashingmagazine.com/2022/03/designing-better-infinite-scroll)
 - [Breadcrumbs](https://www.smashingmagazine.com/2022/04/designing-better-breadcrumbs)
 - [Form](https://www.smashingmagazine.com/printed-books/form-design-patterns)
+- [Push Notification](https://www.smashingmagazine.com/2022/04/guide-push-notifications-developers)
 
 ### Form Design Principles
 
