@@ -7413,7 +7413,23 @@ assert(
 );
 ```
 
-##### RegExp Replace Best Practice
+```ts
+const RE_DATE = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
+console.log('1999-12-31'.replace(RE_DATE, '$<month>/$<day>/$<year>'));
+// 12/31/1999
+
+const RE_DATE = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
+console.log(
+  '1999-12-31'.replace(
+    RE_DATE,
+    (g0, y, m, d, offset, input, { year, month, day }) =>
+      `${month}/${day}/${year}`
+  )
+);
+// 12/31/1999
+```
+
+##### RegExp Replace Performance
 
 - 使用 2 个子表达式修剪字符串, 字符串总长度影响性能.
 - 使用循环修剪字符串 (分别用 正/负循环 修剪 首/尾空白符), 空白字符长度影响性能.
