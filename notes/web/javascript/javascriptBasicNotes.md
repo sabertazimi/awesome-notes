@@ -3388,10 +3388,6 @@ try {
 ### Function Parameters
 
 - 所有函数参数都是按值传递 (复制原子值/引用值).
-- 默认参数:
-  - 默认参数可以使用原子值/对象值/函数返回值.
-  - 函数调用且未传参时, 默认参数才会进行求值.
-  - 默认参数按照从左往右的顺序进行求值.
 - **无副作用**的函数: 注意是否需要拷贝传入对象, 使原有对象不受函数影响, 并返回新对象.
 
 ```ts
@@ -3407,6 +3403,24 @@ function setValueEffect(obj, val) {
 function setValuePure(obj, val) {
   const instance = extend({}, obj, { value: val });
   return instance;
+}
+```
+
+默认参数:
+
+- 默认参数可以使用原子值/对象值/函数返回值.
+- 函数调用且未传参时, 默认参数才会进行求值.
+- 默认参数按照从左往右的顺序进行求值.
+
+```ts
+// Mark required parameters via a function that throws an exception
+function foo(required = throwException()) {}
+
+// Enforcing a maximum parameters
+function f(x, y, ...empty) {
+  if (empty.length > 0) {
+    throw new Error('Redundant parameters!');
+  }
 }
 ```
 
@@ -5014,7 +5028,7 @@ const { length: len } = 'hello';
 console.log(len); // 5
 ```
 
-### Function Parameters and Return Value Destructuring
+### Function Parameters Destructuring
 
 - 可用于工厂 (`factory`) / 设置 (`options`) 模式传参一般为 `options` 对象,
 - 具有固定的属性名.
@@ -5047,11 +5061,16 @@ jQuery.ajax = function (
 };
 ```
 
+### Function Return Value Destructuring
+
+返回多个值:
+
 ```ts
 // 返回一个数组
 function example1() {
   return [1, 2, 3];
 }
+
 const [a, b, c] = example1();
 
 // 返回一个对象
@@ -5063,27 +5082,6 @@ function example2() {
 }
 
 const { foo, bar } = example2();
-```
-
-```ts
-function add([x, y]) {
-  return x + y;
-}
-add([1, 2]) // 3
-  [([1, 2], [3, 4])].map(([a, b]) => a + b);
-// [ 3, 7 ]
-
-function move({ x = 0, y = 0 } = {}) {
-  return [x, y];
-}
-move({ x: 3, y: 8 }); // [3, 8]
-move({ x: 3 }); // [3, 0]
-move({}); // [0, 0]
-move(); // [0, 0]
-
-// 严格为 undefined 时, 触发默认值设置
-[1, undefined, 3].map((x = 'yes') => x);
-// [ 1, 'yes', 3 ]
 ```
 
 ## Promise
