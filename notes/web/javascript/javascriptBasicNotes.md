@@ -3804,9 +3804,30 @@ setTimeout(function () {
 - Object.getOwnPropertySymbols 和 Reflect.ownKeys 可获取到 Symbol 属性.
 
 ```ts
-const IteratorResult = {
-  value: any,
-  done: boolean,
+interface Iterable {
+  [Symbol.iterator](): Iterator;
+}
+
+interface Iterator {
+  next(): IteratorResult;
+  return(): IteratorResult;
+}
+
+interface IterableIterator {
+  [Symbol.iterator](): Iterator;
+  next(): IteratorResult;
+  return(): IteratorResult;
+}
+
+interface IteratorResult {
+  value: any;
+  done: boolean;
+}
+
+const Iterable = {
+  [Symbol.iterator]() {
+    return new Iterator();
+  },
 };
 
 const Iterator = {
@@ -3822,22 +3843,21 @@ const Iterator = {
   },
 };
 
-const Iterable = {
-  [Symbol.iterator]() {
-    return new Iterator();
-  },
-};
-
 const IterableIterator = {
+  [Symbol.iterator]() {
+    return this;
+  },
   next() {
     return IteratorResult;
   },
   return() {
     return IteratorResult;
   },
-  [Symbol.iterator]() {
-    return this;
-  },
+};
+
+const IteratorResult = {
+  value: any,
+  done: boolean,
 };
 ```
 
