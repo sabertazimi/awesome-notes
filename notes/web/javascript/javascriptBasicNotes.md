@@ -3808,19 +3808,22 @@ interface Iterable {
 
 interface Iterator {
   next(): IteratorResult;
-  return(): IteratorResult;
+  return?(): IteratorResult;
+  throw?(): void;
 }
 
 interface IterableIterator {
   [Symbol.iterator](): Iterator;
   next(): IteratorResult;
-  return(): IteratorResult;
+  return?(): IteratorResult;
+  throw?(): void;
 }
 
 interface SelfIterableIterator {
   [Symbol.iterator](): Self;
   next(): IteratorResult;
-  return(): IteratorResult;
+  return?(): IteratorResult;
+  throw?(): void;
 }
 
 interface IteratorResult {
