@@ -2858,7 +2858,7 @@ Person.locate(); // class, class Person {}
 class Shape {
   constructor() {
     if (new.target === Shape) {
-      throw new Error('This class cannot be instantiated directly.');
+      throw new TypeError('This class cannot be instantiated directly.');
     }
   }
 }
@@ -6891,24 +6891,6 @@ const ProxyUser = new Proxy(User, {
 const obj = new ProxyUser(1);
 const throwError = new ProxyUser();
 // Error: User cannot be instantiated without id
-
-class AbstractNumbers {
-  constructor(...values) {
-    if (new.target === AbstractNumbers) {
-      throw new TypeError('This function must be inherited from.');
-    }
-
-    this.values = values;
-  }
-}
-
-class Numbers extends AbstractNumbers {}
-
-const instance = new Numbers(1, 2, 3, 4);
-console.log(instance.values); // [1,2,3,4]
-
-// throws error
-const error = new AbstractNumbers(1, 2, 3, 4);
 ```
 
 #### Negative Array Indices Protection
