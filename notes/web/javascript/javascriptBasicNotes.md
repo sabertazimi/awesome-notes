@@ -7080,14 +7080,16 @@ proxy.coding();
 - SyntaxError.
 - TypeError.
 - URIError.
+- AggregateError.
 - 自定义错误.
 
 ```ts
 class CustomError extends Error {
-  constructor(message) {
+  constructor(message, { cause }) {
     super(message);
     this.name = 'CustomError';
     this.message = message;
+    this.cause = cause; // ES2022: error chain.
   }
 }
 ```
