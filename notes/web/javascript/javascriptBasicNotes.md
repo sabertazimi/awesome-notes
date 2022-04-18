@@ -4115,10 +4115,10 @@ ait.next().then();
 
 ## Generator
 
-- 函数名称前面加一个星号 (`*`) 表示它是一个生成器.
+- 函数名称前面加一个星号 (`*`) 表示它是一个生成器函数.
 - 箭头函数不能用来定义生成器函数.
-- 调用生成器函数会产生一个生成器对象, 其是一个 IterableIterator 对象 (自引用可迭代对象).
-- [Synchronous Generators](https://dev.to/jfet97/javascript-iterators-and-generators-synchronous-generators-3ai4)
+- 调用生成器函数会产生一个生成器对象, 其是一个**自引用可迭代对象**:
+  其本身是一个迭代器, 同时实现了 `Iterable` 接口 (返回 `this`).
 
 ```ts
 function* generatorFn() {}
@@ -4160,8 +4160,8 @@ g.return(1); // { value: 1, done: true }
 
 #### Default Iterator Generator
 
-因为生成器对象实现了 Iterable 接口,
-生成器函数和默认迭代器**被调用**之后都产生迭代器,
+生成器函数和默认迭代器**被调用**之后都产生迭代器
+(生成器对象是**自引用可迭代对象**, 自身是一个迭代器),
 所以生成器适合作为默认迭代器:
 
 ```ts
@@ -4267,7 +4267,7 @@ it.throw(Error('Not handled!')); // !!! Uncaught Error: Not handled! !!!
 it.next(); // {value: undefined, done: true}
 ```
 
-### Generator Complex Usage
+### Generator Advanced Usage
 
 #### Next Value Generator
 
@@ -4307,9 +4307,9 @@ g.next(2); // { value: 20, done: false }
 g.next(); // { value: undefined, done: true }
 ```
 
-#### Asynchronous Generator
+#### Default Asynchronous Iterator Generator
 
-Asynchronous iterable iterator:
+Default asynchronous iterator:
 
 ```ts
 const asyncSource = {
@@ -4323,7 +4323,7 @@ for await (const chunk of asyncSource) {
 }
 ```
 
-Asynchronous generator (`yield`):
+#### Asynchronous generator
 
 ```ts
 async function* remotePostsAsyncGenerator() {
@@ -4350,35 +4350,7 @@ for await (const chunk of remotePostsAsyncGenerator()) {
 }
 ```
 
-Asynchronous generator (`yield *`):
-
-```ts
-function* chunkify(array, n) {
-  yield array.slice(0, n);
-  array.length > n && (yield* chunkify(array.slice(n), n));
-}
-
-async function* getRemoteData() {
-  let hasMore = true;
-  let page;
-
-  while (hasMore) {
-    const { next_page, results } = await fetch(URL, { params: { page } }).then(
-      r => r.json()
-    );
-
-    // Return 5 elements with each iteration.
-    yield* chunkify(results, 5);
-
-    hasMore = next_page !== null;
-    page = next_page;
-  }
-}
-
-for await (const chunk of getRemoteData()) {
-  console.log(chunk);
-}
-```
+#### Asynchronous Events Stream
 
 Asynchronous UI events stream (RxJS):
 
@@ -4517,9 +4489,13 @@ co(readFileGenerator).then(res => console.log(res));
 readFile().then(res => console.log(res));
 ```
 
-#### Recursive Generator
+#### Delegating Generator
 
-`yield *` 能够迭代一个可迭代对象 (Delegating Generators):
+`yield *` 能够迭代一个可迭代对象 (`yield* iterable`):
+
+- 可以迭代标准库提供的 `Iterable` 集合.
+- 生成器函数产生的生成器对象是一个**自引用可迭代对象**,
+  可以使用 `yield *` 聚合生成器 (`Delegating Generator`).
 
 ```ts
 function* generatorFn() {
@@ -4533,7 +4509,9 @@ for (const x of generatorFn()) {
 // value: 2
 // value: 3
 // iter value: undefined
+```
 
+```ts
 function* innerGeneratorFn() {
   yield 'foo';
   return 'bar';
@@ -4550,9 +4528,38 @@ for (const x of outerGeneratorFn()) {
 // iter value: bar
 ```
 
+```ts
+function* chunkify(array, n) {
+  yield array.slice(0, n);
+  array.length > n && (yield* chunkify(array.slice(n), n));
+}
+
+async function* getRemoteData() {
+  let hasMore = true;
+  let page;
+
+  while (hasMore) {
+    const { next_page, results } = await fetch(URL, { params: { page } }).then(
+      r => r.json()
+    );
+
+    // Return 5 elements with each iteration.
+    yield* chunkify(results, 5);
+
+    hasMore = next_page !== null;
+    page = next_page;
+  }
+}
+
+for await (const chunk of getRemoteData()) {
+  console.log(chunk);
+}
+```
+
+#### Recursive Generator
+
 在生成器函数内部,
-用 `yield *` 去迭代自身产生的生成器对象
-(Generator Object -> IterableIterator),
+用 `yield *` 去迭代自身产生的生成器对象,
 实现递归算法:
 
 ```ts
