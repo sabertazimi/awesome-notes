@@ -2308,6 +2308,16 @@ const truthy = 'model' in car;
 
 - `Object.getOwnPropertyDescriptor(object, property)`.
 - `Object.getOwnPropertyDescriptors(object)`.
+
+```ts
+Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+
+const clone = Object.create(
+  Object.getPrototypeOf(obj),
+  Object.getOwnPropertyDescriptors(obj)
+);
+```
+
 - `Object.getOwnPropertySymbols(object)`: 获取实例上 Symbol 属性名.
 - `Object.getOwnPropertyNames(object)`: 获取实例上非 Symbol 属性名 (包括不可枚举属性名).
 - `Object.keys(object)`: 获取实例上可枚举属性名.
