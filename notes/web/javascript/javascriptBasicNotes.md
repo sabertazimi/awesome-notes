@@ -3838,10 +3838,18 @@ interface Iterable {
   [Symbol.iterator](): Iterator;
 }
 
+interface AsyncIterable {
+  [Symbol.asyncIterator](): AsyncIterator;
+}
+
 interface Iterator {
   next(): IteratorResult;
   return?(value?: any): IteratorResult; // Closable iterator
   throw?(): void;
+}
+
+interface AsyncIterator {
+  next(): Promise<IteratorResult>;
 }
 
 interface IterableIterator {
@@ -3862,12 +3870,6 @@ interface IteratorResult {
   value: any;
   done: boolean;
 }
-
-const Iterable = {
-  [Symbol.iterator]() {
-    return new Iterator();
-  },
-};
 ```
 
 ### Synchronous Iterator
