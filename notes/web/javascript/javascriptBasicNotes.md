@@ -3794,6 +3794,7 @@ setTimeout(function () {
   - `Array.from()`.
   - `new Map()`.
   - `new Set()`.
+  - `NodeList`.
   - `Promise.all()`.
   - `Promise.race()`.
   - `yield *` 操作符.

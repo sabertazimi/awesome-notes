@@ -974,6 +974,16 @@ const previous = node.previousElementSibling;
 const next = node.nextElementSibling;
 ```
 
+NodeList is iterable:
+
+```ts
+const elements = document.querySelectorAll('div');
+
+for (const element of elements) {
+  console.log(element);
+}
+```
+
 [Node Iterator](https://developer.mozilla.org/en-US/docs/Web/API/NodeIterator):
 
 ```ts
