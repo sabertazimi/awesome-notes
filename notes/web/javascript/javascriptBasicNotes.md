@@ -5695,11 +5695,14 @@ async function randomDelay(id) {
 
 async function sequential() {
   const t0 = Date.now();
+
   for (let i = 0; i < 5; ++i) {
     await randomDelay(i);
   }
+
   console.log(`${Date.now() - t0}ms elapsed`);
 }
+
 sequential();
 // 0 finished
 // 1 finished
@@ -5713,11 +5716,14 @@ async function parallel() {
   const promises = Array(5)
     .fill(null)
     .map((_, i) => randomDelay(i));
+
   for (const p of promises) {
     console.log(`awaited ${await p}`);
   }
+
   console.log(`${Date.now() - t0}ms elapsed`);
 }
+
 parallel();
 // 4 finished
 // 2 finished
