@@ -3794,12 +3794,12 @@ setTimeout(function () {
   - `Array.from()`.
   - `new Map()`.
   - `new Set()`.
-  - `NodeList`.
   - `Promise.all()`.
   - `Promise.race()`.
   - `yield *` 操作符.
 - `for...in`/`for...of` 隐形调用迭代器的方式, 称为内部迭代器, 使用方便, 不可自定义迭代过程.
 - `{ next, done, value }` 显式调用迭代器的方式, 称为外部迭代器, 使用复杂, 可以自定义迭代过程.
+- All built-in ES6 iterators are `Self Iterable Iterator`.
 
 ```ts
 interface Iterable {
@@ -3813,6 +3813,12 @@ interface Iterator {
 
 interface IterableIterator {
   [Symbol.iterator](): Iterator;
+  next(): IteratorResult;
+  return(): IteratorResult;
+}
+
+interface SelfIterableIterator {
+  [Symbol.iterator](): Self;
   next(): IteratorResult;
   return(): IteratorResult;
 }
