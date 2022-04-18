@@ -5105,7 +5105,7 @@ Promise style asynchronous programming:
   - Catch error: `promise.catch((err) => {})`.
   - Cleanup: `promise.finally(() => {})`.
 - Simple composition:
-  - `Promise.all`.
+  - `Promise.all`: Converts an `Array` of `Promises` to a `Promise` for an `Array`.
   - `Promise.race`.
 
 ### Promise Resolve
@@ -5367,19 +5367,7 @@ Promise.all(urls.map(fetch))
   .then(texts => {
     //
   });
-```
 
-```ts
-Promise.all(urls.map(url => fetch(url).then(resp => resp.text()))).then(
-  texts => {
-    //
-  }
-);
-```
-
-- `Promise.all` with `async`/`await`
-
-```ts
 const loadData = async () => {
   try {
     const urls = ['...', '...'];
@@ -5579,6 +5567,7 @@ function memoProcessData(key) {
 async function foo() {
   console.log(2);
 }
+
 console.log(1);
 foo();
 console.log(3);
@@ -5591,6 +5580,7 @@ async function bar() {
   await null;
   console.log(4);
 }
+
 console.log(1);
 bar();
 console.log(3);
@@ -5649,6 +5639,22 @@ async function fetchJson(url) {
   } catch (error) {
     console.log(`ERROR: ${error.stack}`);
   }
+}
+```
+
+- `async` 函数自动将返回值包装为 `Promise`:
+
+```ts
+// BAD.
+async function downloadContent(urls) {
+  const promiseArray = urls.map(fetch);
+  return await Promise.all(promiseArray);
+}
+
+// GOOD.
+async function downloadContent(urls) {
+  const promiseArray = urls.map(fetch);
+  return Promise.all(promiseArray);
 }
 ```
 
