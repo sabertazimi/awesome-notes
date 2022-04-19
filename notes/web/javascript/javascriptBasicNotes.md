@@ -2047,6 +2047,56 @@ const false8 = {} === {}; // false, refer different objects in memory
 
 <!-- eslint-enable eqeqeq -->
 
+`Object.is`:
+
+```ts
+// Case 1: Evaluation result is the same as using ===
+Object.is(25, 25); // true
+Object.is('foo', 'foo'); // true
+Object.is('foo', 'bar'); // false
+Object.is(null, null); // true
+Object.is(undefined, undefined); // true
+Object.is(window, window); // true
+Object.is([], []); // false
+const foo = { a: 1 };
+const bar = { a: 1 };
+Object.is(foo, foo); // true
+Object.is(foo, bar); // false: different reference pointers.
+
+// Case 2: Signed zero
+Object.is(0, -0); // false
+Object.is(+0, -0); // false
+Object.is(-0, -0); // true
+Object.is(0n, -0n); // true
+
+// Case 3: NaN
+Object.is(NaN, 0 / 0); // true
+Object.is(NaN, Number.NaN); // true
+```
+
+```ts
+if (!Object.is) {
+  Object.defineProperty(Object, 'is', {
+    value: (x, y) => {
+      // SameValue algorithm
+      if (x === y) {
+        // return true if x and y are not 0, OR
+        // if x and y are both 0 of the same sign.
+        // This checks for cases 1 and 2 above.
+        return x !== 0 || 1 / x === 1 / y;
+      } else {
+        // return true if both x AND y evaluate to NaN.
+        // The only possibility for a variable to not be strictly equal to itself
+        // is when that variable evaluates to NaN (example: Number.NaN, 0/0, NaN).
+        // This checks for case 3.
+        // eslint-disable-next-line no-self-compare
+        return x !== x && y !== y;
+      }
+    },
+  });
+}
+```
+
 ### Conditional Expression
 
 养成使用分号结束句子的习惯, 需分行显示的语句必须确保单行不会形成完整语义:
@@ -2425,9 +2475,9 @@ const c = new C(); // logs class C{constructor(){console.log(new.target);}}
 const d = new D(); // logs class D extends C{constructor(){super();}}
 ```
 
-### Object Descriptor
+### Object Property Descriptor
 
-#### Property Descriptor
+#### Property Descriptor Definition
 
 对象的属性描述符:
 
@@ -2519,7 +2569,7 @@ Object.defineProperties(o, {
 });
 ```
 
-#### Descriptor Functions
+#### Property Descriptor Functions
 
 - `Object.create(prototype[, descriptors])`.
 
@@ -2734,55 +2784,22 @@ console.log(obj.foo.qux);
 // 'abc'
 ```
 
-- `Object.is`:
+| Operation (**Only Enumerable**) | String key | Symbol key | Inherited |
+| ------------------------------- | ---------- | ---------- | --------- |
+| `Object.keys()`                 | ✔          | ✘          | ✘         |
+| `Object.values()`               | ✔          | ✘          | ✘         |
+| `Object.entries()`              | ✔          | ✘          | ✘         |
+| `Object.assign()`               | ✔          | ✔          | ✘         |
+| Spreading `{...x}`              | ✔          | ✔          | ✘         |
+| `JSON.stringify()`              | ✔          | ✘          | ✘         |
+| `for...in`                      | ✔          | ✘          | ✔         |
 
-```ts
-// Case 1: Evaluation result is the same as using ===
-Object.is(25, 25); // true
-Object.is('foo', 'foo'); // true
-Object.is('foo', 'bar'); // false
-Object.is(null, null); // true
-Object.is(undefined, undefined); // true
-Object.is(window, window); // true
-Object.is([], []); // false
-const foo = { a: 1 };
-const bar = { a: 1 };
-Object.is(foo, foo); // true
-Object.is(foo, bar); // false: different reference pointers.
-
-// Case 2: Signed zero
-Object.is(0, -0); // false
-Object.is(+0, -0); // false
-Object.is(-0, -0); // true
-Object.is(0n, -0n); // true
-
-// Case 3: NaN
-Object.is(NaN, 0 / 0); // true
-Object.is(NaN, Number.NaN); // true
-```
-
-```ts
-if (!Object.is) {
-  Object.defineProperty(Object, 'is', {
-    value: (x, y) => {
-      // SameValue algorithm
-      if (x === y) {
-        // return true if x and y are not 0, OR
-        // if x and y are both 0 of the same sign.
-        // This checks for cases 1 and 2 above.
-        return x !== 0 || 1 / x === 1 / y;
-      } else {
-        // return true if both x AND y evaluate to NaN.
-        // The only possibility for a variable to not be strictly equal to itself
-        // is when that variable evaluates to NaN (example: Number.NaN, 0/0, NaN).
-        // This checks for case 3.
-        // eslint-disable-next-line no-self-compare
-        return x !== x && y !== y;
-      }
-    },
-  });
-}
-```
+| Operation (**Include Non-enumerable**) | String key | Symbol key | Inherited |
+| -------------------------------------- | ---------- | ---------- | --------- |
+| `Object.getOwnPropertyNames()`         | ✔          | ✘          | ✘         |
+| `Object.getOwnPropertySymbols()`       | ✘          | ✔          | ✘         |
+| `Object.getOwnPropertyDescriptors()`   | ✔          | ✔          | ✘         |
+| `Reflect.ownKeys()`                    | ✔          | ✔          | ✘         |
 
 ### Private Property and Method
 
