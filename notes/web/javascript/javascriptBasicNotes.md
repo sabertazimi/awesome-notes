@@ -2439,14 +2439,14 @@ const d = new D(); // logs class D extends C{constructor(){super();}}
 - `value`: 属性值, 默认 `undefined`.
 - `writable`: 是否是只读 property, 默认 `false`.
 - `enumerable`: 是否可以被枚举 (`for in`), 默认 `false`.
-- `configurable`: 是否可以被删除, 默认 `false`.
+- `configurable`: 是否可以被删除与修改 descriptor, 默认 `false`.
 
 存取描述符:
 
 - `get`: 返回 property 值的方法, 默认 `undefined`.
 - `set`: 为 property 设置值的方法, 默认 `undefined`.
 - `enumerable`: 是否可以被枚举 (`for in`), 默认 `false`.
-- `configurable`: 是否可以被删除, 默认 `false`.
+- `configurable`: 是否可以被删除与修改 descriptor, 默认 `false`.
 
 ```ts
 interface DataPropertyDescriptor {
@@ -2713,9 +2713,12 @@ function mapObject(object, callback, thisValue) {
 }
 ```
 
-- `Object.preventExtensions(O)`/`Object.isExtensible(O)`: 不可新增属性, 可删除/修改属性.
-- `Object.seal(O)`/`Object.isSealed(O)`: 不可新增/删除属性, 可修改属性.
-- `Object.freeze(O)`/`Object.isFrozen(O)`: 不可新增/删除/修改属性 (Shallow).
+- `Object.preventExtensions(O)`/`Object.isExtensible(O)`:
+  不可新增属性, 可删除/修改属性.
+- `Object.seal(O)`/`Object.isSealed(O)`:
+  设置 `configurable` 为 false (不可删除, 不可修改 descriptor), 可修改属性.
+- `Object.freeze(O)`/`Object.isFrozen(O)`:
+  不可新增/删除/修改属性 (Shallow).
 
 ```ts
 const obj = Object.freeze({ foo: {} });
