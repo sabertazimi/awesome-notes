@@ -649,6 +649,7 @@ tags: [Web, Framework, Library]
 ### MicroInteraction Animation
 
 - [ReactRewards](https://github.com/thedevelobear/react-rewards)
+- [RoughNotation: Create and Animate Hand-drawn Annotations](https://github.com/rough-stuff/rough-notation)
 
 ## Time Utils
 
