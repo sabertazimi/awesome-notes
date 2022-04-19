@@ -53,11 +53,26 @@ Primitive data types:
 
 ### Boolean
 
-- 零值表达式:
-  - `0`/`NaN`.
-  - `''`.
-  - `null`.
-  - `undefined`.
+零值表达式:
+
+- `undefined`.
+- `null`.
+- `0`/`NaN`.
+- `''`.
+
+| `x`         | `Boolean(x)`                   |
+| ----------- | ------------------------------ |
+| `undefined` | `false`                        |
+| `null`      | `false`                        |
+| `boolean`   | `x`                            |
+| `number`    | `0` → `false`, `NaN` → `false` |
+|             | Other numbers → `true`         |
+| `bigint`    | `0` → `false`                  |
+|             | Other numbers → `true`         |
+| `string`    | '' → `false`                   |
+|             | Other strings → `true`         |
+| `symbol`    | `true`                         |
+| `object`    | `true`                         |
 
 ### NaN
 
