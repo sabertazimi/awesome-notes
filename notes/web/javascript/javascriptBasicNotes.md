@@ -2554,6 +2554,18 @@ const obj = Object.create(Object.prototype, {
 });
 ```
 
+- `Object.getOwnPropertyDescriptor(object, property)`.
+- `Object.getOwnPropertyDescriptors(object)`.
+
+```ts
+Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+
+const clone = Object.create(
+  Object.getPrototypeOf(obj),
+  Object.getOwnPropertyDescriptors(obj)
+);
+```
+
 - `Object.hasOwn(object, property)`: Boolean.
 - `in` operator: 检测实例及其原型链上所有属性名.
 
@@ -2574,18 +2586,6 @@ const truthy = 'PI' in Math;
 const car = { make: 'Honda', model: 'Accord', year: 1998 };
 const truthy = 'make' in car;
 const truthy = 'model' in car;
-```
-
-- `Object.getOwnPropertyDescriptor(object, property)`.
-- `Object.getOwnPropertyDescriptors(object)`.
-
-```ts
-Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-
-const clone = Object.create(
-  Object.getPrototypeOf(obj),
-  Object.getOwnPropertyDescriptors(obj)
-);
 ```
 
 - `for...in`: 获取实例及其原型链上所有可枚举属性名.
