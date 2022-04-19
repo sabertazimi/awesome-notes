@@ -57,7 +57,8 @@ Primitive data types:
 
 - `undefined`.
 - `null`.
-- `0`/`NaN`.
+- `NaN`.
+- `0`
 - `''`.
 
 | `x`         | `Boolean(x)`                   |
