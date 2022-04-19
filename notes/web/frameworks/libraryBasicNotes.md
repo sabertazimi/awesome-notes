@@ -108,8 +108,8 @@ tags: [Web, Framework, Library]
 
 ### Headless CMS
 
-- [Ghost](https://github.com/TryGhost/Ghost)
 - [StrAPI](https://github.com/strapi/strapi)
+- [Ghost](https://github.com/TryGhost/Ghost)
 - [NetlifyCMS](https://github.com/netlify/netlify-cms)
 - [TinaCMS](https://github.com/tinacms/tinacms)
 - [KeyStone](https://github.com/keystonejs/keystone)
