@@ -2907,6 +2907,31 @@ function deepClone(original) {
 }
 ```
 
+```ts
+function deepUpdate(original, keys, value) {
+  if (keys.length === 0) {
+    return value;
+  }
+
+  const currentKey = keys[0];
+
+  if (Array.isArray(original)) {
+    return original.map((v, index) =>
+      index === currentKey ? deepUpdate(v, keys.slice(1), value) : v
+    );
+  } else if (typeof original === 'object' && original !== null) {
+    return Object.fromEntries(
+      Object.entries(original).map(([k, v]) =>
+        k === currentKey ? [k, deepUpdate(v, keys.slice(1), value)] : [k, v]
+      )
+    );
+  } else {
+    // Primitive value
+    return original;
+  }
+}
+```
+
 ### Object Inheritance
 
 #### Prototype Proxy Inheritance
