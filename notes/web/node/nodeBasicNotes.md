@@ -1522,17 +1522,17 @@ function createWorker() {
 
 ## Test Module
 
-### assert
+### Assert Module
 
-- assert.equal(expect, real, assertPrompt);
-- assert.notEqual(expect, real, assertPrompt);
-- assert.strictEqual(expect, real, assertPrompt);
-- assert.notStrictEqual(expect, real, assertPrompt);
-- assert.deepEqual(expect, real, assertPrompt);
-- assert.notDeepEqual(expect, real, assertPrompt);
-- assert.ok(var, assertPrompt): 测试对象真值(truthy/falsy)
-- assert.throws(fn): 测试方法是否抛出异常
-- assert.doesNotThrow(fn): 测试方法是否抛出异常
+- `assert.equal(expect, real, assertPrompt)`.
+- `assert.notEqual(expect, real, assertPrompt)`.
+- `assert.strictEqual(expect, real, assertPrompt)`.
+- `assert.notStrictEqual(expect, real, assertPrompt)`.
+- `assert.deepEqual(expect, real, assertPrompt)`.
+- `assert.notDeepEqual(expect, real, assertPrompt)`.
+- `assert.ok(var, assertPrompt): 测试对象真值(truthy/falsy)`.
+- `assert.throws(fn)`: 测试方法是否抛出异常.
+- `assert.doesNotThrow(fn)`: 测试方法是否抛出异常.
 
 ```ts
 const assert = require('assert');
