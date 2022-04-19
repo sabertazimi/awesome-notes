@@ -2436,15 +2436,35 @@ const d = new D(); // logs class D extends C{constructor(){super();}}
 
 数据描述符:
 
-- `configurable`: 是否可以被删除, 默认 false.
-- `enumerable`: 是否可以被枚举(`for in`), 默认 false.
-- `writable`: 是否是只读 property, 默认是 false.
-- `value`: 属性值, 默认是 undefined.
+- `value`: 属性值, 默认 `undefined`.
+- `writable`: 是否是只读 property, 默认 `false`.
+- `enumerable`: 是否可以被枚举 (`for in`), 默认 `false`.
+- `configurable`: 是否可以被删除, 默认 `false`.
 
 存取描述符:
 
-- `get`: 返回 property 值的方法, 默认是 undefined.
-- `set`: 为 property 设置值的方法, 默认是 undefined.
+- `get`: 返回 property 值的方法, 默认 `undefined`.
+- `set`: 为 property 设置值的方法, 默认 `undefined`.
+- `enumerable`: 是否可以被枚举 (`for in`), 默认 `false`.
+- `configurable`: 是否可以被删除, 默认 `false`.
+
+```ts
+interface DataPropertyDescriptor {
+  value?: any;
+  writable?: boolean;
+  enumerable?: boolean;
+  configurable?: boolean;
+}
+
+interface AccessorPropertyDescriptor {
+  get?: (this: any) => any;
+  set?: (this: any, v: any) => void;
+  enumerable?: boolean;
+  configurable?: boolean;
+}
+
+type PropertyDescriptor = DataPropertyDescriptor | AccessorPropertyDescriptor;
+```
 
 ```ts
 Object.defineProperty(o, 'age', {
@@ -2460,9 +2480,7 @@ Object.defineProperty(o, 'sex', {
   enumerable: false, //  不可遍历/枚举
   configurable: false,
 });
-```
 
-```ts
 Object.defineProperties(o, {
   age: {
     value: 24,
@@ -2477,25 +2495,62 @@ Object.defineProperties(o, {
     configurable: false,
   },
 });
+
+Object.defineProperties(o, {
+  kind: {
+    value: 'Plate 1x3',
+    writable: true,
+    enumerable: true,
+    configurable: true,
+  },
+  color: {
+    value: 'yellow',
+    writable: true,
+    enumerable: true,
+    configurable: true,
+  },
+  description: {
+    get() {
+      return `${this.kind} (${this.color})`;
+    },
+    enumerable: true,
+    configurable: true,
+  },
+});
 ```
 
 #### Descriptor Functions
 
-- `Object.create(prototype[,descriptors])`.
+- `Object.create(prototype[, descriptors])`.
 
 ```ts
-const props = Object.getOwnPropertyDescriptor(o, 'age');
-console.log(props);
-// Object {value: 24, writable: true, enumerable: true, configurable: true}
-
-console.log(Object.getOwnPropertyNames(o)); // ["age", "sex"]
-console.log(Object.keys(o)); // ["age"]
-
 const o = Object.create({
   say() {
     alert(this.name);
   },
   name: 'Byron',
+});
+
+const obj = Object.create(Object.prototype, {
+  kind: {
+    value: 'Plate 1x3',
+    writable: true,
+    enumerable: true,
+    configurable: true,
+  },
+  color: {
+    value: 'yellow',
+    writable: true,
+    enumerable: true,
+    configurable: true,
+  },
+  description: {
+    get() {
+      return `${this.kind} (${this.color})`;
+    },
+    enumerable: true,
+    configurable: true,
+  },
 });
 ```
 
@@ -2533,10 +2588,10 @@ const clone = Object.create(
 );
 ```
 
+- `for...in`: 获取实例及其原型链上所有可枚举属性名.
 - `Object.getOwnPropertySymbols(object)`: 获取实例上 Symbol 属性名.
 - `Object.getOwnPropertyNames(object)`: 获取实例上非 Symbol 属性名 (包括不可枚举属性名).
 - `Object.keys(object)`: 获取实例上可枚举属性名.
-- `for...in`: 获取实例及其原型链上所有可枚举属性名.
 
 ```ts
 const k1 = Symbol('k1');
@@ -2602,6 +2657,7 @@ console.log(p1keys); // '[name,age]'
   object own enumerable property values.
 - `Object.entries(O)`:
   object own enumerable **string-keyed** property `[key, value]` pairs.
+- `Object.fromEntries()`.
 
 ```ts
 const score = {
@@ -2638,8 +2694,6 @@ function findKey(object, callback, thisValue) {
   return undefined;
 }
 ```
-
-- `Object.fromEntries()`.
 
 ```ts
 const object = { x: 42, y: 50, abc: 9001 };
