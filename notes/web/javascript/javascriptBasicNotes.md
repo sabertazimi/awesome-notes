@@ -2176,15 +2176,13 @@ console.log(old.data); // 5
   Binary operator.
   If the value of left side expression is `null` or `undefined`,
   right side of the operator is evaluated.
-- Logical assignment operators
-  `&&=`, `||=`, `??=`):
-  All of them are binary operators.
-  For `&&=`, if left side is truthy,
-  right-side expression is assigned to left side.
-  For `||=` if left side is falsy,
-  right-side expression is assigned to left side.
-  With the `??=`, if left-side value is `null` or `undefined`,
-  right-side expression is assigned to left side.
+- Logical assignment operators: `&&=`, `||=`, `??=`.
+
+| Assignment operator | Equivalent to    | Only assigns if a is |
+| ------------------- | ---------------- | -------------------- |
+| `a \|\|= b`         | `a \|\| (a = b)` | Falsy                |
+| `a &&= b`           | `a && (a = b)`   | Truthy               |
+| `a ??= b`           | `a ?? (a = b)`   | Nullish              |
 
 ## Control Flow
 
