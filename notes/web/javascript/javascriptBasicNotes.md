@@ -2895,21 +2895,11 @@ assert.equal(copy instanceof MyClass, false);
 ```ts
 function deepClone(original) {
   if (Array.isArray(original)) {
-    const copy = [];
-
-    for (const [index, value] of original.entries()) {
-      copy[index] = deepCopy(value);
-    }
-
-    return copy;
+    return original.map(elem => deepClone(elem));
   } else if (typeof original === 'object' && original !== null) {
-    const copy = {};
-
-    for (const [key, value] of Object.entries(original)) {
-      copy[key] = deepCopy(value);
-    }
-
-    return copy;
+    return Object.fromEntries(
+      Object.entries(original).map(([key, value]) => [key, deepClone(value)])
+    );
   } else {
     // Primitive value: atomic, no need to copy
     return original;
