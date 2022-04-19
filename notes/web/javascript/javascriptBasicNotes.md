@@ -725,6 +725,17 @@ console.log(Object.prototype.toString.call(me)); // "[object Person]"
 Using the wrapper function without the new keyword
 is a useful way of coercing a value into a primitive type.
 
+| `x`         | `Object(x)`                                      |
+| ----------- | ------------------------------------------------ |
+| `undefined` | `{}`                                             |
+| `null`      | `{}`                                             |
+| `boolean`   | `new Boolean(x)`                                 |
+| `number`    | `new Number(x)`                                  |
+| `bigint`    | An instance of BigInt (`new` throws `TypeError`) |
+| `string`    | `new String(x)`                                  |
+| `symbol`    | An instance of Symbol (`new` throws `TypeError`) |
+| `object`    | `x`                                              |
+
 ```ts
 // Not recommended (primitive object wrapper):
 // eslint-disable-next-line no-new-wrappers
