@@ -2624,33 +2624,13 @@ Person.prototype.sayName = function () {
 };
 
 const keys = Object.keys(Person.prototype);
-console.log(keys); // 'name,age,job,sayName'
+console.log(keys); // 'name, age, job, sayName'
 
 const p1 = new Person();
 p1.name = 'Rob';
 p1.age = 31;
 const p1keys = Object.keys(p1);
-console.log(p1keys); // '[name,age]'
-```
-
-```ts
-(function () {
-  // Grab browser's default global variables.
-  const iframe = window.document.createElement('iframe');
-  iframe.src = 'about:blank';
-  window.document.body.appendChild(iframe);
-  const browserGlobals = Object.keys(iframe.contentWindow);
-  window.document.body.removeChild(iframe);
-
-  // Get the global variables added at runtime by filtering out the browser's
-  // default global variables from the current window object.
-  const runtimeGlobals = Object.keys(window).filter(key => {
-    const isFromBrowser = browserGlobals.includes(key);
-    return !isFromBrowser;
-  });
-
-  console.log('Runtime globals', runtimeGlobals);
-})();
+console.log(p1keys); // '[name, age]'
 ```
 
 - `Object.values(O)`:
@@ -3376,7 +3356,7 @@ Avoid using `class` when:
 
 ```ts
 // 立即函数模式:
-// 此时返回值不是函数本身,而是函数执行后的return语句返回值
+// 此时返回值不是函数本身, 而是函数执行后的 return 语句返回值.
 const global = (function () {
   // 返回全局对象
   return this;
@@ -3409,6 +3389,26 @@ Global Object 属性:
 - decodeURI.
 - decodeURIComponent.
 - eval.
+
+```ts
+(function () {
+  // Grab browser's default global variables.
+  const iframe = window.document.createElement('iframe');
+  iframe.src = 'about:blank';
+  window.document.body.appendChild(iframe);
+  const browserGlobals = Object.keys(iframe.contentWindow);
+  window.document.body.removeChild(iframe);
+
+  // Get the global variables added at runtime by filtering out the browser's
+  // default global variables from the current window object.
+  const runtimeGlobals = Object.keys(window).filter(key => {
+    const isFromBrowser = browserGlobals.includes(key);
+    return !isFromBrowser;
+  });
+
+  console.log('Runtime globals', runtimeGlobals);
+})();
+```
 
 ## Function
 
