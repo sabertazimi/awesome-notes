@@ -8362,6 +8362,145 @@ const addTen = pipe(8, addTwo, addThree, addFive);
 addTen.then(console.log); // 18
 ```
 
+### Immutable
+
+#### Immutable Array
+
+```ts
+const RE_INDEX_PROP_KEY = /^[0-9]+$/;
+const ALLOWED_PROPERTIES = new Set([
+  'length',
+  'constructor',
+  'slice',
+  'concat',
+]);
+
+function createImmutableArray(arrayLike, mapFn) {
+  const arr = Array.from(arrayLike, mapFn);
+
+  const handler = {
+    get(target, propKey, receiver) {
+      if (RE_INDEX_PROP_KEY.test(propKey) || ALLOWED_PROPERTIES.has(propKey)) {
+        return Reflect.get(target, propKey, receiver);
+      }
+
+      throw new TypeError(`Property "${propKey}" can’t be accessed`);
+    },
+    set(target, propKey, value, receiver) {
+      throw new TypeError('Setting is not allowed');
+    },
+    deleteProperty(target, propKey) {
+      throw new TypeError('Deleting is not allowed');
+    },
+  };
+
+  return new Proxy(arr, handler);
+}
+
+const array = createImmutableArray(['a', 'b', 'c']);
+
+// Non-destructive operations are allowed:
+assert.deepEqual(array.slice(1), ['b', 'c']);
+assert.equal(array[1], 'b');
+
+// Destructive operations are not allowed:
+assert.throws(() => (array[1] = 'x'), /^TypeError: Setting is not allowed$/);
+assert.throws(
+  () => array.shift(),
+  /^TypeError: Property "shift" can’t be accessed$/
+);
+```
+
+#### Immutable Map
+
+```ts
+class ImmutableMap {
+  #map;
+
+  constructor(iterable) {
+    this.#map = new Map(iterable);
+  }
+
+  static _setUpPrototype() {
+    // Only forward non-destructive methods to the map:
+    for (const methodName of ['get', 'has', 'keys', 'size']) {
+      ImmutableMap.prototype[methodName] = function (...args) {
+        return this.#map[methodName](...args);
+      };
+    }
+  }
+}
+
+ImmutableMap._setUpPrototype();
+
+const map = new ImmutableMap([
+  [false, 'no'],
+  [true, 'yes'],
+]);
+
+// Non-destructive operations work as usual:
+assert.equal(map.get(true), 'yes');
+assert.equal(map.has(false), true);
+assert.deepEqual([...map.keys()], [false, true]);
+
+// Destructive operations are not available:
+assert.throws(
+  () => map.set(false, 'never!'),
+  /^TypeError: map.set is not a function$/
+);
+assert.throws(() => map.clear(), /^TypeError: map.clear is not a function$/);
+```
+
+#### Immutable Class
+
+Copying class instances without side effects:
+
+```ts
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  clone() {
+    return new Point(this.x, this.y);
+  }
+
+  static from(other) {
+    return new Point(other.x, other.y);
+  }
+}
+
+class Color {
+  constructor(name) {
+    this.name = name;
+  }
+
+  clone() {
+    return new Color(this.name);
+  }
+
+  static from(other) {
+    return new Color(other.name);
+  }
+}
+
+class ColorPoint extends Point {
+  constructor(x, y, color) {
+    super(x, y);
+    this.color = color;
+  }
+
+  clone() {
+    return new ColorPoint(this.x, this.y, this.color.clone());
+  }
+
+  static from(other) {
+    return new ColorPoint(other.x, other.y, Color.from(other.color));
+  }
+}
+```
+
 ### Functional JavaScript Library
 
 #### Lodash
