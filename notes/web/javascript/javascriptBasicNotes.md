@@ -3291,6 +3291,8 @@ Avoid using `class` when:
 
 ### Global Object
 
+[![Global Scope](./figures/GlobalScope.png)](https://exploringjs.com/deep-js/ch_global-scope.html)
+
 ```ts
 // 立即函数模式:
 // 此时返回值不是函数本身,而是函数执行后的return语句返回值
