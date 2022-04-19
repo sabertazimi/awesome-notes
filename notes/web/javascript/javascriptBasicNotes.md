@@ -1428,7 +1428,9 @@ WeakMap/WeakSet 则更加**内存安全**:
 - Managing listeners.
 - Keeping private data.
 
-## Variable Hoisting
+## Variable
+
+### Variable Hoisting
 
 - 一方面规定, `var`/`function` 声明的全局变量,
   依旧是全局对象的属性, 意味着会`Hoisting`.
@@ -1542,8 +1544,6 @@ for (let i = 0; i < 5; ++i) {
 - 块级作用域.
 - 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone).
 
-## Type Detection and Conversion
-
 ### Type Detection
 
 ```ts
@@ -1577,16 +1577,16 @@ function typeOf(o) {
 const objectType = typeof null; // => object
 ```
 
+#### Property Detection
+
+- 由于属性值可能为零值值表达式, 不应使用零值表达式(`0`/`NaN`/`''`/`null`/`undefined`) 检测属性值.
+- 应使用 `for in` 进行属性检测.
+
 #### Custom Object Detection
 
 - `object instanceof Constructor`:
   查找原型链 `构造器`**原型对象** (`Constructor.prototype`).
 - `prop in object`: 查找原型链属性名.
-
-#### Property Detection
-
-- 由于属性值可能为零值值表达式, 不应使用零值表达式(`0`/`NaN`/`''`/`null`/`undefined`) 检测属性值.
-- 应使用 `for in` 进行属性检测.
 
 ### Type Conversion
 
@@ -2108,7 +2108,7 @@ console.log(old.data); // 5
 
 ### Switch Case Statement
 
-用方法查询代替 switch/case 语句
+用 `Strategy Pattern` 代替 `switch`/`case` 语句:
 
 ```ts
 function doAction(action) {
