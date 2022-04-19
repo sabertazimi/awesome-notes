@@ -40,6 +40,7 @@ tags: [Web, Framework, Library]
 - [React CRA Boilerplate](https://github.com/react-boilerplate/react-boilerplate-cra-template)
 - [React Electron Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
 - [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
+- [React Vite Starter](https://github.com/wtchnm/Vitamin)
 - [React Chrome Extension](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
 - [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)
 - [Vite Web Extension](https://github.com/antfu/vitesse-webext)
