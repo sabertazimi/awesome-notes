@@ -1445,8 +1445,8 @@ WeakMap/WeakSet 则更加**内存安全**:
 | `var`      | Declaration        | Function      | Yes                       |
 | `let`      | Temporal dead zone | Block         | No                        |
 | `const`    | Temporal dead zone | Block         | No                        |
+| `class`    | Temporal dead zone | Block         | No                        |
 | `function` | Complete           | Block         | Yes                       |
-| `class`    | No                 | Block         | No                        |
 | `import`   | Complete           | Module-global | No                        |
 
 <!-- eslint-disable vars-on-top -->
