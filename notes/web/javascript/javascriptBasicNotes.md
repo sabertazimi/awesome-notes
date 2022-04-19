@@ -57,8 +57,10 @@ Primitive data types:
 
 - `undefined`.
 - `null`.
+- `false`.
 - `NaN`.
 - `0`
+- `0n`.
 - `''`.
 
 | `x`         | `Boolean(x)`                   |
@@ -68,7 +70,7 @@ Primitive data types:
 | `boolean`   | `x`                            |
 | `number`    | `0` → `false`, `NaN` → `false` |
 |             | Other numbers → `true`         |
-| `bigint`    | `0` → `false`                  |
+| `bigint`    | `0n` → `false`                 |
 |             | Other numbers → `true`         |
 | `string`    | '' → `false`                   |
 |             | Other strings → `true`         |
