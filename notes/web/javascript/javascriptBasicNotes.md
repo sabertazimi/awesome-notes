@@ -1930,6 +1930,89 @@ alert(a);
 - Type conversion first, then comparison.
 - Return comparison between `ToNumber(x)` and `ToPrimitive(y)`.
 
+```ts
+/** Loose equality (==) */
+function abstractEqualityComparison(x, y) {
+  if (TypeOf(x) === TypeOf(y)) {
+    // Use strict equality (===)
+    return strictEqualityComparison(x, y);
+  }
+
+  // Comparing null with undefined
+  if (x === null && y === undefined) {
+    return true;
+  }
+  if (x === undefined && y === null) {
+    return true;
+  }
+
+  // Comparing a number and a string
+  if (TypeOf(x) === 'number' && TypeOf(y) === 'string') {
+    return abstractEqualityComparison(x, Number(y));
+  }
+  if (TypeOf(x) === 'string' && TypeOf(y) === 'number') {
+    return abstractEqualityComparison(Number(x), y);
+  }
+
+  // Comparing a bigint and a string
+  if (TypeOf(x) === 'bigint' && TypeOf(y) === 'string') {
+    const n = StringToBigInt(y);
+
+    if (Number.isNaN(n)) {
+      return false;
+    }
+
+    return abstractEqualityComparison(x, n);
+  }
+  if (TypeOf(x) === 'string' && TypeOf(y) === 'bigint') {
+    return abstractEqualityComparison(y, x);
+  }
+
+  // Comparing a boolean with a non-boolean
+  if (TypeOf(x) === 'boolean') {
+    return abstractEqualityComparison(Number(x), y);
+  }
+  if (TypeOf(y) === 'boolean') {
+    return abstractEqualityComparison(x, Number(y));
+  }
+
+  // Comparing an object with a primitive
+  // (other than undefined, null, a boolean)
+  if (
+    ['string', 'number', 'bigint', 'symbol'].includes(TypeOf(x)) &&
+    TypeOf(y) === 'object'
+  ) {
+    return abstractEqualityComparison(x, ToPrimitive(y));
+  }
+  if (
+    TypeOf(x) === 'object' &&
+    ['string', 'number', 'bigint', 'symbol'].includes(TypeOf(y))
+  ) {
+    return abstractEqualityComparison(ToPrimitive(x), y);
+  }
+
+  // Comparing a bigint with a number
+  if (
+    (TypeOf(x) === 'bigint' && TypeOf(y) === 'number') ||
+    (TypeOf(x) === 'number' && TypeOf(y) === 'bigint')
+  ) {
+    if (
+      [NaN, +Infinity, -Infinity].includes(x) ||
+      [NaN, +Infinity, -Infinity].includes(y)
+    ) {
+      return false;
+    }
+    if (isSameMathematicalValue(x, y)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  return false;
+}
+```
+
 ### Strict Comparison
 
 `===` 与 `!==`:
