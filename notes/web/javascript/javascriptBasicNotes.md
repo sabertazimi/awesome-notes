@@ -7426,7 +7426,7 @@ proxy.coding();
   - Database objects access caching.
   - Memoized functions.
 - Profiling.
-- Observer and watcher.
+- Observer and watcher: Vue 3 reactivity, ImmerJS draft state.
 
 ### Proxy and DefineProperty
 
