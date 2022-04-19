@@ -1449,8 +1449,7 @@ WeakMap/WeakSet 则更加**内存安全**:
 | `function` | Complete           | Block         | Yes                       |
 | `import`   | Complete           | Module-global | No                        |
 
-<!-- eslint-disable vars-on-top -->
-<!-- eslint-disable no-var -->
+<!-- eslint-disable -->
 
 ```ts
 // 我们知道这个行不通 (假设没有未定义的全局变量)
@@ -1481,10 +1480,7 @@ function example() {
 }
 ```
 
-<!-- eslint-enable vars-on-top -->
-<!-- eslint-enable no-var -->
-<!-- eslint-disable vars-on-top -->
-<!-- eslint-disable no-var -->
+<!-- eslint-disable -->
 
 ```ts
 function example() {
@@ -1500,8 +1496,7 @@ function example() {
 }
 ```
 
-<!-- eslint-enable vars-on-top -->
-<!-- eslint-enable no-var -->
+<!-- eslint-enable -->
 
 ### Let Variable
 
@@ -1543,6 +1538,23 @@ for (let i = 0; i < 5; ++i) {
   (`xxx *const`, 即`const`指针, 指向一个变量).
 - 块级作用域.
 - 不存在变量提升, 导致暂时性死区 (Temporal Dead Zone).
+
+```ts
+const f = () => g();
+const g = () => 123;
+
+// We call f() after g() was declared:
+assert.equal(f(), 123);
+```
+
+```ts
+funcDecl();
+
+const MY_STR = 'abc';
+function funcDecl() {
+  assert.throws(() => MY_STR, ReferenceError);
+}
+```
 
 ### Type Detection
 
