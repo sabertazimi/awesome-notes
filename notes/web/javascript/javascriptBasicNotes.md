@@ -1590,6 +1590,8 @@ const objectType = typeof null; // => object
 
 ### Type Conversion
 
+#### Type Conversion Context
+
 - 字符串 -> 整数: `+string`/`Number(string)`/`parseInt(string, arg1)`.
 - any -> `bool`: `!!any`.
 - const -> `object`: `(const)`.
@@ -1619,6 +1621,136 @@ const hasAge = Boolean(age);
 const hasAge = !!age;
 ```
 
+#### Type Conversion Algorithms
+
+```ts
+function ToString(argument) {
+  if (argument === undefined) {
+    return 'undefined';
+  } else if (argument === null) {
+    return 'null';
+  } else if (argument === true) {
+    return 'true';
+  } else if (argument === false) {
+    return 'false';
+  } else if (TypeOf(argument) === 'number') {
+    return Number.toString(argument);
+  } else if (TypeOf(argument) === 'string') {
+    return argument;
+  } else if (TypeOf(argument) === 'symbol') {
+    return Symbol.toString(argument);
+  } else if (TypeOf(argument) === 'bigint') {
+    return BigInt.toString(argument);
+  } else {
+    // argument is an object
+    const primValue = ToPrimitive(argument, 'string');
+    return ToString(primValue);
+  }
+}
+```
+
+```ts
+function ToPropertyKey(argument) {
+  const key = ToPrimitive(argument, 'string'); // (A)
+
+  if (TypeOf(key) === 'symbol') {
+    return key;
+  }
+
+  return ToString(key);
+}
+```
+
+```ts
+function ToNumeric(value) {
+  const primValue = ToPrimitive(value, 'number');
+
+  if (TypeOf(primValue) === 'bigint') {
+    return primValue;
+  }
+
+  return ToNumber(primValue);
+}
+```
+
+```ts
+function ToNumber(argument) {
+  if (argument === undefined) {
+    return NaN;
+  } else if (argument === null) {
+    return +0;
+  } else if (argument === true) {
+    return 1;
+  } else if (argument === false) {
+    return +0;
+  } else if (TypeOf(argument) === 'number') {
+    return argument;
+  } else if (TypeOf(argument) === 'string') {
+    return parseTheString(argument); // not shown here
+  } else if (TypeOf(argument) === 'symbol') {
+    throw new TypeError('Failed!');
+  } else if (TypeOf(argument) === 'bigint') {
+    throw new TypeError('Failed!');
+  } else {
+    // argument is an object
+    const primValue = ToPrimitive(argument, 'number');
+    return ToNumber(primValue);
+  }
+}
+```
+
+```ts
+/**
+ * @param hint Which type is preferred for the result string, number etc.
+ */
+function ToPrimitive(
+  input: any,
+  hint: 'string' | 'number' | 'default' = 'default'
+) {
+  if (TypeOf(input) === 'object') {
+    const exoticToPrim = input[Symbol.toPrimitive]; // (A)
+
+    if (exoticToPrim !== undefined) {
+      const result = exoticToPrim.call(input, hint);
+
+      if (TypeOf(result) !== 'object') {
+        return result;
+      }
+
+      throw new TypeError('[Symbol.toPrimitive]() failed!');
+    }
+
+    if (hint === 'default') {
+      hint = 'number';
+    }
+
+    return OrdinaryToPrimitive(input, hint);
+  } else {
+    // input is already primitive
+    return input;
+  }
+}
+
+function OrdinaryToPrimitive(O: object, hint: 'string' | 'number') {
+  const methodNames =
+    hint === 'string' ? ['toString', 'valueOf'] : ['valueOf', 'toString'];
+
+  for (const name of methodNames) {
+    const method = O[name];
+
+    if (IsCallable(method)) {
+      const result = method.call(O);
+
+      if (TypeOf(result) !== 'object') {
+        return result;
+      }
+    }
+  }
+
+  throw new TypeError('Conversion failed!');
+}
+```
+
 #### Object Conversion
 
 对象转换为布尔值:
@@ -1627,17 +1759,17 @@ const hasAge = !!age;
 
 对象转换为数字:
 
-- 如果对象具有 valueOf 方法且返回原始值(string/number/boolean/undefined/null),
-  则将该原始值转换为数字(转换失败会返回 NaN), 并返回这个数字.
-- 如果对象具有 toString 方法且返回原始值(string/number/boolean/undefined/null),
-  则将该原始值转换为数字(转换失败会返回 NaN), 并返回这个数字.
+- 如果对象具有 valueOf 方法 (返回原始值),
+  则将该原始值转换为数字 (转换失败会返回 NaN), 并返回这个数字.
+- 如果对象具有 toString 方法 (返回原始值),
+  则将该原始值转换为数字 (转换失败会返回 NaN), 并返回这个数字.
 - 转换失败, 抛出 `TypeError`.
 
 对象转换为字符串:
 
-- 如果对象具有 toString 方法且返回原始值(string/number/boolean/undefined/null),
+- 如果对象具有 toString 方法 (返回原始值),
   则将该原始值转换为字符串, 并返回该字符串.
-- 如果对象具有 valueOf 方法且返回原始值(string/number/boolean/undefined/null),
+- 如果对象具有 valueOf 方法 (返回原始值),
   则将该原始值转换为字符串, 并返回该字符串.
 - 转换失败, 抛出 `TypeError`.
 
