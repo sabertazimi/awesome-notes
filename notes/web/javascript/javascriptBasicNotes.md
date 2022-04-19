@@ -2871,13 +2871,23 @@ console.log(dest.a === src.a); // true
 - Enumerable: **可枚举**属性扩展.
 - Own: **自有**属性扩展.
 - Shallow: **浅拷贝**扩展.
+- Not copy prototype (`__proto__`).
+- Not copy getter and setter.
 - Not trigger `sourceObj.set` and not change `sourceObj` (create new properties).
 
 ```ts
+// Shallow copy
 const foo = { a: 1 };
 const bar = { b: 2, c: { d: 3 } };
 const foobar = { ...foo, ...bar };
 console.log(foobar.c === bar.c); // true
+
+// Not copy prototype (`__proto__`)
+class MyClass {}
+const original = new MyClass();
+assert.equal(original instanceof MyClass, true);
+const copy = { ...original };
+assert.equal(copy instanceof MyClass, false);
 ```
 
 #### Object Deep Clone
