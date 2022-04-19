@@ -3974,12 +3974,6 @@ reduce image transfer sizes by average of **~20%**:
 - [Fetch Priority](https://web.dev/priority-hints)
 - [Resources Priority](https://web.dev/prioritize-resources)
 
-#### Data Loading Best Practice
-
-- 非必要静态资源上传 CDN.
-- 冷启动开启数据预拉取.
-- 页面路由切换时进行数据预拉取 (并缓存数据).
-
 #### Data Preloading
 
 ```html
@@ -4110,6 +4104,12 @@ const PageComponent = () => {
 <script type="module" src="main.mjs"></script>
 <script nomodule src="legacy.js"></script>
 ```
+
+#### Data Loading Best Practice
+
+- 非必要静态资源上传 CDN.
+- 冷启动开启数据预拉取.
+- 页面路由切换时进行数据预拉取 (并缓存数据).
 
 ### Performance API
 
