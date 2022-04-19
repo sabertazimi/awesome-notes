@@ -2893,25 +2893,27 @@ assert.equal(copy instanceof MyClass, false);
 #### Object Deep Clone
 
 ```ts
-function extendDeep(parent, child) {
-  let i;
-  const toStr = Object.prototype.toString;
-  const astr = '[object Array]';
-  child = child || {};
+function deepClone(original) {
+  if (Array.isArray(original)) {
+    const copy = [];
 
-  for (i in parent) {
-    if (Object.prototype.hasOwnProperty.call(parent, i)) {
-      // 若属性为对象,则进行深克隆
-      if (typeof parent[i] === 'object') {
-        child[i] = toStr.call(parent[i]) === astr ? [] : {};
-        extendDeep(parent[i], child[i]);
-      } else {
-        child[i] = parent[i];
-      }
+    for (const [index, value] of original.entries()) {
+      copy[index] = deepCopy(value);
     }
-  }
 
-  return child;
+    return copy;
+  } else if (typeof original === 'object' && original !== null) {
+    const copy = {};
+
+    for (const [key, value] of Object.entries(original)) {
+      copy[key] = deepCopy(value);
+    }
+
+    return copy;
+  } else {
+    // Primitive value: atomic, no need to copy
+    return original;
+  }
 }
 ```
 
