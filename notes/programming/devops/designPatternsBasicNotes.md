@@ -706,8 +706,10 @@ const point = PointFactory.newPolarPoint(5, Math.PI / 2);
 const point2 = PointFactory.newCartesianPoint(5, 6);
 ```
 
+Private constructor factory method:
+
 ```ts
-module.exports = (function () {
+const VehicleFactory = (function () {
   function VehicleFactory() {
     const publicVehicle = {};
 
@@ -719,6 +721,7 @@ module.exports = (function () {
       this.color = options.color || 'silver';
       this.speed = options.speed || 10;
     }
+
     function Truck(options) {
       this.type = 'truck';
       this.state = options.state || 'used';
@@ -735,6 +738,7 @@ module.exports = (function () {
         this.speed = args[0];
       }
     }
+
     function _withColor(...args) {
       if (args.length === 0) {
         console.log(
@@ -744,6 +748,7 @@ module.exports = (function () {
         this.color = args[0];
       }
     }
+
     // provide a function to change other public features
     function _reform(funcName, newFunc) {
       if (
@@ -754,6 +759,7 @@ module.exports = (function () {
         this.prototype[funcName] = newFunc;
       }
     }
+
     // provide a function to add new public features
     function _addFeature(funcName, newFunc) {
       if (typeof this[funcName] === 'undefined') {
@@ -796,10 +802,43 @@ module.exports = (function () {
 
   // define more factory
 
-  return {
-    vehicleFactory: VehicleFactory,
-  };
+  return VehicleFactory;
 })();
+```
+
+Asynchronous factory method:
+
+```ts
+class DataContainer {
+  #data;
+  #active = false;
+
+  #init(data) {
+    this.#active = true;
+    this.#data = data;
+    return this;
+  }
+
+  #check() {
+    if (!this.#active) {
+      throw new TypeError('Not created by factory');
+    }
+  }
+
+  getData() {
+    this.#check();
+    return `DATA: ${this.#data}`;
+  }
+
+  static async create() {
+    const data = await Promise.resolve('downloaded');
+    return new this().#init(data);
+  }
+}
+
+DataContainer.create().then(dc =>
+  assert.equal(dc.getData(), 'DATA: downloaded')
+);
 ```
 
 ### Abstract Factory Pattern
