@@ -1019,14 +1019,6 @@ tags: [Web, Framework, Library]
 
 - [TLDR: Help Pages for Command-line Tools](https://github.com/tldr-pages/tldr)
 
-### Terminal
-
-- [React Terminal](https://github.com/rohanchandra/react-terminal-component)
-- [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
-- [Hyper: Terminal Built on Web](https://github.com/vercel/hyper)
-- [Xterm.js: Terminal for Web](https://github.com/xtermjs/xterm.js)
-- [Jay: Supercharged JavaScript REPL](https://github.com/nikersify/jay)
-
 ### CLI Tools
 
 #### CLI Compiler
@@ -1036,6 +1028,15 @@ tags: [Web, Framework, Library]
 #### CLI Packager
 
 - [PKG](https://github.com/vercel/pkg)
+
+### Terminal
+
+- [React Terminal](https://github.com/rohanchandra/react-terminal-component)
+- [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
+- [Hyper: Terminal Built on Web](https://github.com/vercel/hyper)
+- [Xterm.js: Terminal for Web](https://github.com/xtermjs/xterm.js)
+- [Jay: Supercharged JavaScript REPL](https://github.com/nikersify/jay)
+- [Fig: Terminal Autocomplete](https://github.com/withfig/autocomplete)
 
 ## Compiler
 
@@ -1261,16 +1262,17 @@ tags: [Web, Framework, Library]
 
 - [LightHouse](https://github.com/GoogleChrome/lighthouse)
 - [WebPageTest](https://github.com/WPO-Foundation/webpagetest-github-action)
-- [SpeedVitals: Optimize Website for Core Web Vitals](https://speedvitals.com)
-- [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render)
-- [React Benchmark Component](https://github.com/paularmstrong/react-component-benchmark)
+- [WebVitals: Google Essential Metrics for Healthy Site](https://github.com/GoogleChrome/web-vitals)
+- [PerfumeJS: Measuring Performance Vitals Metrics](https://github.com/zizzamia/perfume.js)
 - [Node Clinic](https://github.com/nearform/node-clinic)
 - [Perf Tools](https://github.com/brendangregg/perf-tools)
 - [FlameGraph](https://github.com/brendangregg/FlameGraph)
-- [Brotli Compression Format](https://github.com/google/brotli)
-- [V8 Compile Cache](https://github.com/zertosh/v8-compile-cache)
 - [HyperFine: CLI Benchmark Tool](https://github.com/sharkdp/hyperfine)
 - [ByteHound: Memory Profiler](https://github.com/koute/bytehound)
+- [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render)
+- [React Benchmark Component](https://github.com/paularmstrong/react-component-benchmark)
+- [V8 Compile Cache](https://github.com/zertosh/v8-compile-cache)
+- [Brotli Compression Format](https://github.com/google/brotli)
 
 ### Log Tools
 
@@ -1292,9 +1294,9 @@ tags: [Web, Framework, Library]
 #### Mock Utils
 
 - [Nock: HTTP Server Mocking and Expectations Library](https://github.com/nock/nock)
+- [MSW: Seamless REST/GraphQL API Mocking Service Worker](https://github.com/mswjs/msw)
 - [Faker.js: Generate Massive Amounts of Realistic Fake Data](https://github.com/faker-js/faker)
 - [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter)
-- [Mock Service Worker](https://github.com/mswjs/msw)
 - [Mockery Function](https://github.com/mfncooper/mockery)
 - [MemFS: In-memory Node File System](https://github.com/streamich/memfs)
 
