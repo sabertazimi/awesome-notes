@@ -7787,12 +7787,27 @@ proxy.coding();
 - 自定义错误.
 
 ```ts
-class CustomError extends Error {
-  constructor(message, { cause }) {
-    super(message);
-    this.name = 'CustomError';
+class Error {
+  // Instance properties
+  message: string;
+  cause?: any; // ES2022
+  stack: string; // non-standard but widely supported
+
+  constructor(message = '', options?: ErrorOptions) {
+    this.name = 'Error';
     this.message = message;
-    this.cause = cause; // ES2022: error chain.
+    this.cause = options?.cause; // ES2022: error chain.
+  }
+}
+
+interface ErrorOptions {
+  cause?: string | Error; // ES2022
+}
+
+class CustomError extends Error {
+  constructor(message, options) {
+    super(message, options);
+    this.name = 'CustomError';
   }
 }
 ```
