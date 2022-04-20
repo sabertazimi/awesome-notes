@@ -150,6 +150,20 @@ const massOfElectronInKg = 9.109_383_56e-31;
 const trillionInShortScale = 1e1_2;
 ```
 
+#### Number Conversion
+
+| `x`         | `Number(x)`                                                 |
+| ----------- | ----------------------------------------------------------- |
+| `undefined` | `NaN`                                                       |
+| `null`      | `0`                                                         |
+| `boolean`   | `false` → `0`, `true` → `1`                                 |
+| `number`    | `x`                                                         |
+| `bigint`    | `-1n` → `-1`, `1n` → `1`                                    |
+| `string`    | `''` → `0`                                                  |
+|             | Other → parsed number, ignoring leading/trailing whitespace |
+| `symbol`    | Throws TypeError                                            |
+| `object`    | Configurable (`[Symbol.toPrimitive]()`/`valueOf()`)         |
+
 #### Infinity
 
 Infinity represents all values greater than 1.7976931348623157e+308.
