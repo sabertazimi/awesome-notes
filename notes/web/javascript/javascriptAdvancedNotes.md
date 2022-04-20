@@ -7220,7 +7220,7 @@ const obj = JSON.parse(json);
 const json = JSON.stringify(obj);
 ```
 
-`JSON.stringify(value, filter, space)`:
+[`JSON.stringify(value, filter, space)`](https://exploringjs.com/impatient-js/ch_json.html#json-replacers-revivers):
 
 - `Symbol`/`function`/`NaN`/`Infinity`/`undefined`: `null`/ignored.
 - `BitInt`: throw `TypeError`.
