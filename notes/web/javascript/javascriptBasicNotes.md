@@ -4150,7 +4150,7 @@ const b = 10;
 它就是一个函数表达式:
 
 ```ts
-// Function Expression 函数表达式:
+// 函数表达式:
 const foo = function foo() {};
 
 // `function f() {}` 是命名函数表达式:
@@ -7128,22 +7128,31 @@ Universal module definition:
 
 #### ES6 Module Features
 
-- 解析到 `<script type="module">` 标签后会立即下载模块文件,
-  但执行会延迟到文档解析完成 (类似 `<script defer>`).
-- 同一个模块无论在一个页面中被加载多少次,
-  也不管它是如何加载的, 实际上都只会加载一次.
-- 模块只能加载一次.
-- 模块是单例.
-- 模块可以请求加载其他模块.
-- 模块支持循环依赖.
-- 模块在浏览器中是异步加载和执行的.
-- 模块代码只在加载后执行.
-- 模块默认在严格模式下执行.
-- 模块可以定义公共接口, 其他模块可以基于这个公共接口观察和交互.
-- 模块不共享全局命名空间.
+- Singleton:
+  - 模块是单例.
+  - 模块只能加载一次:
+    同一个模块无论在一个页面中被加载多少次,
+    也不管它是如何加载的, 实际上都只会加载一次.
+- Imports:
+  - 模块可以请求加载其他模块.
+  - 模块支持循环依赖.
+  - `Static` and `Read-only` imports.
+- Exports:
+  - 模块可以定义公共接口.
+  - 其他模块可以基于这个公共接口观察和交互.
+- Local Scope:
+  - 模块不共享全局命名空间.
   - 模块顶级 `this` 的值是 `undefined` (传统脚本中是 `window`).
   - 模块中的 `var` 声明不会添加到 `window` 对象.
-- 模块是静态结构 (`Static` and `Read-only` imports):
+- Async:
+  - 模块在浏览器中是异步加载和执行的.
+  - 模块代码只在加载后执行.
+  - 解析到 `<script type="module">` 标签后会立即下载模块文件,
+    但**执行会延迟**到文档解析完成 (类似 `<script defer>`).
+- Strict:
+  - 模块代码默认在严格模式下执行.
+- Static:
+  - `Static` and `Read-only` imports: 模块是静态结构.
   - Static analysis.
   - Tree shaking.
   - Compact bundling.
