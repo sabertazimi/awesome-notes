@@ -897,8 +897,8 @@ const booleanType = typeof Boolean(1); // "boolean"
 ## Reference Values
 
 - Object e.g Date, RegExp.
-- Array.
 - Function.
+- Array.
 - Map.
 - Set.
 - WeakMap.
@@ -1244,83 +1244,6 @@ console.log(view instanceof Array); // false
 console.log(Array.isArray(view)); // false
 ```
 
-### Date
-
-- [Definitive Guide](https://css-tricks.com/everything-you-need-to-know-about-date-in-javascript)
-
-```ts
-const now = new Date();
-now.getFullYear(); // 1-n
-now.getMonth(); // Warn: 0-11
-now.getDate(); // 1-n
-now.getDay(); // Warn: 0-6
-now.toString();
-now.toDateString();
-now.toTimeString();
-now.toUTCString();
-now.toLocaleString();
-now.toLocaleDateString();
-now.toLocaleTimeString();
-
-const daysOfMonth = (year, month) => {
-  // `0` for last month of next month
-  return new Date(year, month + 1, 0).getDate();
-};
-
-const prevYear = year => {
-  return new Date(year - 1, 0).getFullYear();
-};
-
-const nextYear = year => {
-  return new Date(year + 1, 0).getFullYear();
-};
-
-const prevMonth = (year, month) => {
-  return new Date(year, month - 1).getMonth();
-};
-
-const nextMonth = (year, month) => {
-  return new Date(year, month + 1).getMonth();
-};
-```
-
-```ts
-const getDateItemList = (year, month) => {
-  const days = daysOfMonth(year, month);
-  const currentDateItemList = [...Array(days).keys()].map(index => {
-    return DateItem(year, month, 1 + index);
-  });
-
-  const firstDayItem = DateItem(year, month, 1);
-  const firstDayWeekday = firstDayItem.day;
-  const lastMonthDays = daysOfMonth(year, month - 1);
-  const prefixDays = firstDayWeekday === 0 ? 7 : firstDayWeekday;
-  const prefixFirstDay = lastMonthDays - prefixDays + 1;
-  const prefixYear = prevYear(year);
-  const prefixMonth = prevMonth(year, month);
-  const prefixDateItemList = [...Array(prefixDays).keys()].map(index => {
-    return DateItem(prefixYear, prefixMonth, prefixFirstDay + index);
-  });
-
-  const lastDayItem = DateItem(year, month, days);
-  const lastDayWeekday = lastDayItem.day;
-  const suffixDays = lastDayWeekday === 6 ? 7 : 6 - lastDayWeekday;
-  const suffixYear = nextYear(year);
-  const suffixMonth = nextMonth(year, month);
-  const suffixDateItemList = [...Array(suffixDays).keys()].map(index => {
-    return DateItem(suffixYear, suffixMonth, 1 + index);
-  });
-
-  const dateItemList = [
-    ...prefixDateItemList,
-    ...currentDateItemList,
-    ...suffixDateItemList,
-  ];
-
-  return dateItemList;
-};
-```
-
 ### Map
 
 - `size`.
@@ -1534,6 +1457,83 @@ WeakMap/WeakSet 则更加**内存安全**:
 - Caching computed results.
 - Managing listeners.
 - Keeping private data.
+
+### Date
+
+- [Definitive Guide](https://css-tricks.com/everything-you-need-to-know-about-date-in-javascript)
+
+```ts
+const now = new Date();
+now.getFullYear(); // 1-n
+now.getMonth(); // Warn: 0-11
+now.getDate(); // 1-n
+now.getDay(); // Warn: 0-6
+now.toString();
+now.toDateString();
+now.toTimeString();
+now.toUTCString();
+now.toLocaleString();
+now.toLocaleDateString();
+now.toLocaleTimeString();
+
+const daysOfMonth = (year, month) => {
+  // `0` for last month of next month
+  return new Date(year, month + 1, 0).getDate();
+};
+
+const prevYear = year => {
+  return new Date(year - 1, 0).getFullYear();
+};
+
+const nextYear = year => {
+  return new Date(year + 1, 0).getFullYear();
+};
+
+const prevMonth = (year, month) => {
+  return new Date(year, month - 1).getMonth();
+};
+
+const nextMonth = (year, month) => {
+  return new Date(year, month + 1).getMonth();
+};
+```
+
+```ts
+const getDateItemList = (year, month) => {
+  const days = daysOfMonth(year, month);
+  const currentDateItemList = [...Array(days).keys()].map(index => {
+    return DateItem(year, month, 1 + index);
+  });
+
+  const firstDayItem = DateItem(year, month, 1);
+  const firstDayWeekday = firstDayItem.day;
+  const lastMonthDays = daysOfMonth(year, month - 1);
+  const prefixDays = firstDayWeekday === 0 ? 7 : firstDayWeekday;
+  const prefixFirstDay = lastMonthDays - prefixDays + 1;
+  const prefixYear = prevYear(year);
+  const prefixMonth = prevMonth(year, month);
+  const prefixDateItemList = [...Array(prefixDays).keys()].map(index => {
+    return DateItem(prefixYear, prefixMonth, prefixFirstDay + index);
+  });
+
+  const lastDayItem = DateItem(year, month, days);
+  const lastDayWeekday = lastDayItem.day;
+  const suffixDays = lastDayWeekday === 6 ? 7 : 6 - lastDayWeekday;
+  const suffixYear = nextYear(year);
+  const suffixMonth = nextMonth(year, month);
+  const suffixDateItemList = [...Array(suffixDays).keys()].map(index => {
+    return DateItem(suffixYear, suffixMonth, 1 + index);
+  });
+
+  const dateItemList = [
+    ...prefixDateItemList,
+    ...currentDateItemList,
+    ...suffixDateItemList,
+  ];
+
+  return dateItemList;
+};
+```
 
 ## Variable
 
