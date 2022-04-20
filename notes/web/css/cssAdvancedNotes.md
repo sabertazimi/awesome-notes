@@ -189,6 +189,7 @@ point out that:
 - [Breadcrumbs](https://www.smashingmagazine.com/2022/04/designing-better-breadcrumbs)
 - [Form](https://www.smashingmagazine.com/printed-books/form-design-patterns)
 - [Push Notification](https://www.smashingmagazine.com/2022/04/guide-push-notifications-developers)
+- [Carousel](https://www.smashingmagazine.com/2022/04/designing-better-carousel-ux)
 
 ### Form Design Principles
 
