@@ -1549,15 +1549,21 @@ listExpander.addEventListener('click', e => {
 
 ### Best Practice Tips for Accessibility
 
-- [Web Accessibility Initiative-Accessible Rich Internet Applications](https://www.sitepoint.com/wai-aria 'WAI-ARIA')
 - Don't use `aria-hidden` on the `<body>` element.
+- Complete meta header:
+  - Add missing languages.
+  - Make sure `document` has a `title` element.
+  - Tool: `react-helmet`.
+- Fix low text contrast:
+  确保文本与其背景保持足够的对比.
+- 不要将颜色作为传达信息的唯一手段 (色盲/弱).
+- Add missing alternative text.
+- Remove empty links and buttons.
+- 注意表单:
+  - Add missing labels.
+  - 提供输入焦点的视觉提示.
+- 避免组件识别障碍.
 - Make sure `IDs` and `Keys` of elements are unique.
-- Make sure `document` has a `title` element (with tool like `react-helmet`).
-- 不要将颜色作为传达信息的唯一手段 (色盲/弱)
-- 确保文本与其背景保持足够的对比
-- 提供输入焦点的视觉提示
-- 注意表单
-- 避免组件识别障碍
 
 ### Accessibility Checklist
 
@@ -1575,5 +1581,6 @@ listExpander.addEventListener('click', e => {
 
 ### Accessibility Reference
 
+- [Web Accessibility Initiative-Accessible Rich Internet Applications](https://www.sitepoint.com/wai-aria 'WAI-ARIA')
 - [Semantic Search Element](https://www.sarasoueidan.com/blog/in-quest-of-search)
 - [WebAIM Million Project](https://webaim.org/projects/million)
