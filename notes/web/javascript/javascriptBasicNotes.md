@@ -3607,6 +3607,55 @@ class Dong {
 }
 ```
 
+Private member can only be accessed inside body of its class,
+can’t even access it from a subclass:
+
+```ts
+class SuperClass {
+  #superProp = 'superProp';
+}
+
+class SubClass extends SuperClass {
+  getSuperProp() {
+    return this.#superProp;
+  }
+}
+// SyntaxError: Private field '#superProp'
+// must be declared in an enclosing class
+
+class Color {
+  #name;
+
+  constructor(name) {
+    this.#name = name;
+  }
+
+  static getName(obj) {
+    return obj.#name;
+  }
+}
+
+class Person {
+  #name;
+
+  constructor(name) {
+    this.#name = name;
+  }
+}
+
+assert.equal(Color.getName(new Color('green')), 'green');
+
+// Can’t access the private slot #name of a Person:
+assert.throws(() => Color.getName(new Person('Jane')), {
+  name: 'TypeError',
+  message:
+    'Cannot read private member #name from' +
+    ' an object whose class did not declare it',
+});
+```
+
+Private member `WeakMap` polyfill:
+
 ```ts
 const classPrivateFieldGet = (receiver, state) => {
   return state.get(receiver);
