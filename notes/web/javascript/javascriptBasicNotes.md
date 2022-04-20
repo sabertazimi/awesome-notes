@@ -135,11 +135,38 @@ const trillionInShortScale = 1e1_2;
 - `Number.isFinite()`.
 - `Number.isInteger()`.
 - `Number.isSafeInteger()`.
-- `Number.toFixed()`.
 - `Number.toExponential()`.
+- `Number.toFixed()`.
 - `Number.toPrecision()`.
 - `Number.parseInt(string, radix)`.
 - `Number.parseFloat(string)`.
+
+```ts
+(1234).toExponential();
+// '1.234e+3'
+(1234).toExponential(5);
+// '1.23400e+3'
+(1234).toExponential(1);
+// '1.2e+3'
+(0.003).toExponential();
+// '3e-3'
+
+(0.00000012).toFixed(10);
+// '0.0000001200'
+(0.00000012).toFixed();
+// '0'
+(10 ** 21).toFixed();
+// '1e+21'
+
+(1234).toPrecision(3);
+// '1.23e+3'
+(1234).toPrecision(4);
+// '1234'
+(1234).toPrecision(5);
+// '1234.0'
+(1.234).toPrecision(3);
+// '1.23'
+```
 
 #### Not A Number
 
