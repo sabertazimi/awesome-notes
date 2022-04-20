@@ -76,7 +76,7 @@ Primitive data types:
 |             | Other numbers → `true`         |
 | `bigint`    | `0n` → `false`                 |
 |             | Other numbers → `true`         |
-| `string`    | '' → `false`                   |
+| `string`    | `''` → `false`                 |
 |             | Other strings → `true`         |
 | `symbol`    | `true`                         |
 | `object`    | `true`                         |
@@ -337,6 +337,19 @@ const isStringAlternative = value =>
 console.log(isStringAlternative(goodString)); // true
 console.log(isStringAlternative(badString)); // true
 ```
+
+#### String Conversion
+
+| `x`         | `String(x)`                                             |
+| ----------- | ------------------------------------------------------- |
+| `undefined` | `'undefined'`                                           |
+| `null`      | `'null'`                                                |
+| `boolean`   | `false` → `'false'`, `true` → `'true'`                  |
+| `number`    | `123` → `'123'`                                         |
+| `bigint`    | `123n` → `'123'`                                        |
+| `string`    | `x`                                                     |
+| `symbol`    | `Symbol('abc')` → `'Symbol(abc)'`                       |
+| `object`    | Configurable (`toPrimitive`/`toStringTag`/`toString()`) |
 
 #### String Unicode
 
@@ -909,14 +922,14 @@ assert.deepEqual(
 
 #### Bigint Conversion
 
-| x           | BigInt(x)                                           |
+| `x`         | `BigInt(x)`                                         |
 | ----------- | --------------------------------------------------- |
 | `undefined` | Throws TypeError                                    |
 | `null`      | Throws TypeError                                    |
 | `boolean`   | `false` → `0n`, `true` → `1n`                       |
 | `number`    | `123` → `123n`                                      |
 |             | Non-integer → throws RangeError                     |
-| `bigint`    | x                                                   |
+| `bigint`    | `x`                                                 |
 | `string`    | `'123'` → `123n`                                    |
 |             | Unparsable → throws SyntaxError                     |
 | `symbol`    | Throws TypeError                                    |
