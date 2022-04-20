@@ -146,6 +146,15 @@ const trillionInShortScale = 1e1_2;
 ```ts
 const numberType = typeof NaN; // 'number'
 
+Number.isFinite(NaN);
+// false
+Number.isNaN(NaN);
+// true
+Number.isNaN(123);
+// false
+Number.isNaN('abc');
+// false
+
 function isNumber(value) {
   return typeof value === 'number' && Number.isFinite(value);
 }
@@ -180,6 +189,15 @@ console.log(Number.MIN_VALUE); // -Infinity
 
 console.log(Math.max()); // -Infinity
 console.log(Math.min()); // Infinity
+
+Number.isFinite(Infinity);
+// false
+Number.isFinite(-Infinity);
+// false
+Number.isFinite(NaN);
+// false
+Number.isFinite(123);
+// true
 ```
 
 #### Safe Number
@@ -205,6 +223,19 @@ assert.equal(Number.isSafeInteger('5'), false);
 assert.equal(Number.isSafeInteger(5.1), false);
 assert.equal(Number.isSafeInteger(Number.MAX_SAFE_INTEGER), true);
 assert.equal(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1), false);
+
+Number.isInteger(-17);
+// true
+Number.isInteger(33);
+// true
+Number.isInteger(33.1);
+// false
+Number.isInteger('33');
+// false
+Number.isInteger(NaN);
+// false
+Number.isInteger(Infinity);
+// false
 ```
 
 #### Float Number
