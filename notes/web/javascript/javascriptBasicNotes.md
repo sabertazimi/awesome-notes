@@ -420,14 +420,30 @@ s.endsWith('Hello', 5); // true
 s.includes('Hello', 6); // false
 ```
 
+- `string.match(RegExp): string[] | null`.
+- `string.matchAll(RegExp): string[] | null`.
+
+```ts
+interface RegExpMatchArray extends Array<string> {
+  index: number;
+  input: string;
+  groups: Record<string, string> | undefined;
+}
+```
+
+- `string.search(string | RegExp): number`.
+
+```ts
+'a2b'.search(/[0-9]/);
+// 1
+'a2b'.search('[0-9]');
+// 1
+```
+
 #### String Replace
 
-- `matchAll(regexp)`.
-- `replaceAll`:
-  - `replaceAll(regexp, newSubstr)`.
-  - `replaceAll(regexp, replacerFunction)`.
-  - `replaceAll(substr, newSubstr)`.
-  - `replaceAll(substr, replacerFunction)`.
+- `string.replace(string | RegExp, replaceValue | replacerFunction)`.
+- `string.replaceAll(string | RegExp, replaceValue | replacerFunction)`.
 
 ```ts
 // eslint-disable-next-line prefer-regex-literals
