@@ -6202,20 +6202,20 @@ function getUsers(users) {
 }
 ```
 
-### Promise Array Functions
+### Promise Combinator Array Functions
 
 - `Promise.all(iterable)` fail-fast:
-  if at least one promise in the promises array rejects,
+  If at least one promise in the promises array rejects,
   then the promise returned rejects too.
   Short-circuits when an input value is rejected.
 - `Promise.any(iterable)`:
-  resolves if any of the given promises are resolved.
+  Resolves if any of the given promises are resolved.
   Short-circuits when an input value is fulfilled.
 - `Promise.race(iterable)`:
   Short-circuits when an input value is settled
   (fulfilled or rejected).
 - `Promise.allSettled(iterable)`:
-  returns when all given promises are settled
+  Returns when all given promises are settled
   (fulfilled or rejected).
 
 ```ts
@@ -6368,6 +6368,96 @@ class Promise {
 
   finally() {
     return this.then(null, null);
+  }
+
+  static all(iterable) {
+    return new Promise((resolve, reject) => {
+      let index = 0;
+      let elementCount = 0;
+      let result;
+
+      for (const promise of iterable) {
+        const currentIndex = index;
+        promise.then(
+          // eslint-disable-next-line no-loop-func
+          value => {
+            result[currentIndex] = value;
+            elementCount++;
+
+            if (elementCount === result.length) {
+              resolve(result);
+            }
+          },
+          err => {
+            reject(err);
+          }
+        );
+        index++;
+      }
+
+      if (index === 0) {
+        resolve([]);
+        return;
+      }
+
+      result = new Array(index);
+    });
+  }
+
+  static race(iterable) {
+    return new Promise((resolve, reject) => {
+      for (const promise of iterable) {
+        promise.then(
+          value => {
+            resolve(value);
+          },
+          err => {
+            reject(err);
+          }
+        );
+      }
+    });
+  }
+
+  static allSettled(iterable) {
+    return new Promise((resolve, reject) => {
+      let index = 0;
+      let elementCount = 0;
+      let result;
+
+      function addElementToResult(i, elem) {
+        result[i] = elem;
+        elementCount++;
+
+        if (elementCount === result.length) {
+          resolve(result);
+        }
+      }
+
+      for (const promise of iterable) {
+        const currentIndex = index;
+        promise.then(
+          value =>
+            addElementToResult(currentIndex, {
+              status: 'fulfilled',
+              value,
+            }),
+          reason =>
+            addElementToResult(currentIndex, {
+              status: 'rejected',
+              reason,
+            })
+        );
+        index++;
+      }
+
+      if (index === 0) {
+        resolve([]);
+        return;
+      }
+
+      result = new Array(index);
+    });
   }
 }
 ```
