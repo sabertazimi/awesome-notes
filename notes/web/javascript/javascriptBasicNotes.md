@@ -3643,15 +3643,38 @@ class Person {
   }
 }
 
-assert.equal(Color.getName(new Color('green')), 'green');
-
 // Can’t access the private slot #name of a Person:
+assert.equal(Color.getName(new Color('green')), 'green');
 assert.throws(() => Color.getName(new Person('Jane')), {
   name: 'TypeError',
   message:
     'Cannot read private member #name from' +
     ' an object whose class did not declare it',
 });
+```
+
+Private member never clash:
+
+```ts
+class SuperClass {
+  #privateField = 'super';
+
+  getSuperPrivateField() {
+    return this.#privateField;
+  }
+}
+
+class SubClass extends SuperClass {
+  #privateField = 'sub';
+
+  getSubPrivateField() {
+    return this.#privateField;
+  }
+}
+
+const inst = new SubClass();
+assert.equal(inst.getSuperPrivateField(), 'super');
+assert.equal(inst.getSubPrivateField(), 'sub');
 ```
 
 Private member `WeakMap` polyfill:
