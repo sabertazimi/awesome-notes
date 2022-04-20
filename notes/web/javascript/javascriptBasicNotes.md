@@ -3575,6 +3575,10 @@ console.log(y instanceof Shape); // true
 #### Class Expression
 
 ```ts
+// Anonymous class expression
+const Person = class {};
+
+// Named class expression
 const Person = class PersonName {
   identify() {
     console.log(Person.name, PersonName.name);
