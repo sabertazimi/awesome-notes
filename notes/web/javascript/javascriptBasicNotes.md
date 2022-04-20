@@ -1155,6 +1155,11 @@ interface ArrayLike<T> {
 
 interface Array {
   from<T>(iterable: Iterable<T> | ArrayLike<T>): T[];
+  from<T, U>(
+    iterable: Iterable<T> | ArrayLike<T>,
+    mapFunc: (v: T, i: number) => U,
+    thisArg?: any
+  ): U[];
 }
 ```
 
