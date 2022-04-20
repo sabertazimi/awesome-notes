@@ -1144,7 +1144,7 @@ Array.of(undefined); // [undefined]
 
 - 伪数组对象 (Array-like object).
 - 可枚举对象 (Iterable object).
-- 克隆数组.
+- 浅克隆数组 (Shallow Clone).
 - `map` 函数.
 
 ```ts
@@ -1235,12 +1235,6 @@ arr.pop(); // 删除数组尾元素
 [].join(separator);
 ```
 
-#### Array Replace
-
-```ts
-[].replace(oldSubStr, newStr);
-```
-
 #### Array Query
 
 ```ts
@@ -1259,21 +1253,6 @@ arr.pop(); // 删除数组尾元素
 console.log([NaN].includes(NaN));
 // true
 ```
-
-#### Array Find
-
-```ts
-arr.find(fn);
-arr.findIndex(fn);
-```
-
-#### Array Includes
-
-No more `indexOf() > -1`.
-
-#### Array Flat
-
-`[2, [2, 2]] => [2, 2, 2]`
 
 #### Array Element Filter
 
@@ -1305,6 +1284,10 @@ console.log(someResult); // true
 ```ts
 [].map(item => item + 1); // map over
 ```
+
+#### Array Flat
+
+`[2, [2, 2]] => [2, 2, 2]`
 
 #### Array FlatMap
 
@@ -1352,22 +1335,10 @@ strings.sort((a, b) => new Intl.Collator('en').compare(a, b));
 const reverseStr = normalizedStr.split('').reverse().join('');
 ```
 
-#### Array Deep Clone
-
-```ts
-const nestedArray = [1, [2], 3];
-const arrayCopy = JSON.parse(JSON.stringify(nestedArray));
-
-// Make some changes
-arrayCopy[0] = '1'; // change shallow element
-arrayCopy[1][0] = '3'; // change nested element
-console.log(arrayCopy); // [ '1', [ '3' ], 3 ]
-
-// Good: Nested array NOT affected
-console.log(nestedArray); //  1, [ 2 ], 3 ]
-```
-
 #### Array Spread
+
+- Shallow Clone.
+- Iterable.
 
 ```ts
 arr2.push(...arr1);
@@ -1383,6 +1354,21 @@ obj[Symbol.iterator] = function* () {
 };
 
 const array = [...obj]; // print [1, 2, 3]
+```
+
+#### Array Deep Clone
+
+```ts
+const nestedArray = [1, [2], 3];
+const arrayCopy = JSON.parse(JSON.stringify(nestedArray));
+
+// Make some changes
+arrayCopy[0] = '1'; // change shallow element
+arrayCopy[1][0] = '3'; // change nested element
+console.log(arrayCopy); // [ '1', [ '3' ], 3 ]
+
+// Good: Nested array NOT affected
+console.log(nestedArray); //  1, [ 2 ], 3 ]
 ```
 
 #### Typed Array
