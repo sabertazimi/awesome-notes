@@ -8982,7 +8982,7 @@ module.exports = {
 
 ### Webpack Devtool Source Map Configuration
 
-| devtool                      | build   | rebuild | production | quality      |
+| Devtool                      | Build   | Rebuild | Production | Quality      |
 | ---------------------------- | ------- | ------- | ---------- | ------------ |
 | (none) / false               | fastest | fastest | yes        | bundle       |
 | eval                         | fast    | fastest | no         | generated    |

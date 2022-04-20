@@ -53,6 +53,8 @@ Primitive data types:
 
 ### Boolean
 
+#### Zero Value Expression
+
 零值表达式:
 
 - `undefined`.
@@ -62,6 +64,8 @@ Primitive data types:
 - `0`
 - `0n`.
 - `''`.
+
+#### Boolean Conversion
 
 | `x`         | `Boolean(x)`                   |
 | ----------- | ------------------------------ |
@@ -583,6 +587,8 @@ const otherFooGlobalSymbol = Symbol.for('foobar'); // 重用已有符号
 console.log(fooGlobalSymbol === otherFooGlobalSymbol); // true
 ```
 
+#### Symbol Conversion
+
 | To      | Explicit Conversion     | Coercion (Implicit Conversion) |
 | ------- | ----------------------- | ------------------------------ |
 | boolean | Boolean(sym) → OK       | `!sym` → OK                    |
@@ -734,25 +740,27 @@ console.log(me.toString()); // "[object Person]"
 console.log(Object.prototype.toString.call(me)); // "[object Person]"
 ```
 
-| Value                     | toString tag |
-| ------------------------- | ------------ |
-| undefined                 | `Undefined`  |
-| null                      | `Null`       |
-| Array object              | `Array`      |
-| string object             | `String`     |
-| arguments                 | `Arguments`  |
-| callable                  | `Function`   |
-| error object              | `Error`      |
-| boolean object            | `Boolean`    |
-| number object             | `Number`     |
-| date object               | `Date`       |
-| regular expression object | `RegExp`     |
-| (Otherwise)               | `Object`     |
+| Value                     | `toString` Tag |
+| ------------------------- | -------------- |
+| undefined                 | `Undefined`    |
+| null                      | `Null`         |
+| Array object              | `Array`        |
+| string object             | `String`       |
+| arguments                 | `Arguments`    |
+| callable                  | `Function`     |
+| error object              | `Error`        |
+| boolean object            | `Boolean`      |
+| number object             | `Number`       |
+| date object               | `Date`         |
+| regular expression object | `RegExp`       |
+| (Otherwise)               | `Object`       |
 
 ### Wrapper Objects for Primitives
 
 Using the wrapper function without the new keyword
 is a useful way of coercing a value into a primitive type.
+
+Object conversion:
 
 | `x`         | `Object(x)`                                      |
 | ----------- | ------------------------------------------------ |
@@ -1489,7 +1497,7 @@ WeakMap/WeakSet 则更加**内存安全**:
 - `var` 表达式和 `function` 声明都将会被提升到当前作用域 (**全局作用域/函数作用域**) 顶部,
   其余表达式顺序不变.
 
-|            | Hoisting           | Scope         | Creates global properties |
+|            | Hoisting           | Scope         | Creates Global Properties |
 | ---------- | ------------------ | ------------- | ------------------------- |
 | `var`      | Declaration        | Function      | Yes                       |
 | `let`      | Temporal dead zone | Block         | No                        |
@@ -1812,176 +1820,6 @@ function OrdinaryToPrimitive(O: object, hint: 'string' | 'number') {
 }
 ```
 
-#### Object Conversion
-
-对象转换为布尔值:
-
-- 直接转换为 true (包装类型也一样), 不调用 valueOf 和 toString.
-
-对象转换为数字:
-
-- 如果对象具有 valueOf 方法 (返回原始值),
-  则将该原始值转换为数字 (转换失败会返回 NaN), 并返回这个数字.
-- 如果对象具有 toString 方法 (返回原始值),
-  则将该原始值转换为数字 (转换失败会返回 NaN), 并返回这个数字.
-- 转换失败, 抛出 `TypeError`.
-
-对象转换为字符串:
-
-- 如果对象具有 toString 方法 (返回原始值),
-  则将该原始值转换为字符串, 并返回该字符串.
-- 如果对象具有 valueOf 方法 (返回原始值),
-  则将该原始值转换为字符串, 并返回该字符串.
-- 转换失败, 抛出 `TypeError`.
-
-```ts
-// 保存原始的valueOf
-const valueOf = Object.prototype.valueOf;
-const toString = Object.prototype.toString;
-
-// 添加valueOf日志
-// eslint-disable-next-line no-extend-native
-Object.prototype.valueOf = function () {
-  console.log('valueOf');
-  return valueOf.call(this);
-};
-// 添加toString日志
-// eslint-disable-next-line no-extend-native
-Object.prototype.toString = function () {
-  console.log('toString');
-  return toString.call(this);
-};
-const a = {};
-// eslint-disable-next-line no-new-wrappers
-const b = new Boolean(false);
-
-if (a) {
-  console.log(1);
-}
-
-if (b) {
-  console.log(2);
-}
-
-// output:
-// 1
-// 2
-// 未调用valueOf和toString, 符合 [对象到布尔值] 的转换规则
-```
-
-```ts
-// 保存原始的valueOf
-const valueOf = Object.prototype.valueOf;
-const toString = Object.prototype.toString;
-
-// 添加valueOf日志
-// eslint-disable-next-line no-extend-native
-Object.prototype.valueOf = function () {
-  console.log('valueOf');
-  return valueOf.call(this);
-};
-// 添加toString日志
-// eslint-disable-next-line no-extend-native
-Object.prototype.toString = function () {
-  console.log('toString');
-  return toString.call(this);
-};
-
-let a = {};
-console.log(++a);
-
-// output:
-// valueOf
-// toString
-// NaN
-// 1. valueOf方法返回的是对象本身, 不是原始值, 继续执行
-// 2. toString方法返回的是”[object Object]”, 是原始值(字符串), 将字符串转换为数字NaN
-```
-
-```ts
-// 保存原始的valueOf
-const valueOf = Object.prototype.valueOf;
-const toString = Object.prototype.toString;
-
-// 添加valueOf日志
-// eslint-disable-next-line no-extend-native
-Object.prototype.valueOf = function () {
-  console.log('valueOf');
-  return '1'; // 强制返回原始值
-};
-// 添加toString日志
-// eslint-disable-next-line no-extend-native
-Object.prototype.toString = function () {
-  console.log('toString');
-  return toString.call(this);
-};
-
-let a = {};
-console.log(++a);
-
-// output:
-// valueOf
-// 2
-// valueOf 返回原始值(字符串), 直接将该字符串转换为数字, 得到 1
-```
-
-```ts
-// 保存原始的valueOf
-const valueOf = Object.prototype.valueOf;
-const toString = Object.prototype.toString;
-
-// 添加valueOf日志
-// eslint-disable-next-line no-extend-native
-Object.prototype.valueOf = function () {
-  console.log('valueOf');
-  return valueOf.call(this);
-};
-// 添加toString日志
-// eslint-disable-next-line no-extend-native
-Object.prototype.toString = function () {
-  console.log('toString');
-  return toString.call(this);
-};
-
-const a = {};
-alert(a);
-
-// output:
-// toString
-// 弹出 "[object Object]"
-// 调用toString方法, 返回了字符串”[object Object]”, 对象最终转换为该字符串
-```
-
-```ts
-// 保存原始的valueOf
-const valueOf = Object.prototype.valueOf;
-const toString = Object.prototype.toString;
-
-// 添加valueOf日志
-// eslint-disable-next-line no-extend-native
-Object.prototype.valueOf = function () {
-  console.log('valueOf');
-  return valueOf.call(this);
-};
-// 添加toString日志
-// eslint-disable-next-line no-extend-native
-Object.prototype.toString = function () {
-  console.log('toString');
-  return this;
-};
-
-const a = {};
-alert(a);
-
-// output:
-// toString
-// valueOf
-// Uncaught TypeError: Cannot convert object to primitive value
-// 调用toString方法, 返回的不是 primitive value, 继续执行
-// 调用valueOf方法, 返回的不是 primitive value, 继续执行
-// 抛出 TypeError
-```
-
 ## Operators
 
 ### Loose Comparison
@@ -2207,11 +2045,11 @@ console.log(old.data); // 5
   right side of the operator is evaluated.
 - Logical assignment operators: `&&=`, `||=`, `??=`.
 
-| Assignment operator | Equivalent to    | Only assigns if a is |
-| ------------------- | ---------------- | -------------------- |
-| `a \|\|= b`         | `a \|\| (a = b)` | Falsy                |
-| `a &&= b`           | `a && (a = b)`   | Truthy               |
-| `a ??= b`           | `a ?? (a = b)`   | Nullish              |
+| Assignment Operator | Equivalent To    | Only Assigns When `a` |
+| ------------------- | ---------------- | --------------------- |
+| `a \|\|= b`         | `a \|\| (a = b)` | Falsy                 |
+| `a &&= b`           | `a && (a = b)`   | Truthy                |
+| `a ??= b`           | `a ?? (a = b)`   | Nullish               |
 
 ## Control Flow
 
@@ -2363,6 +2201,176 @@ console.log(
   p.__proto__ === Array.prototype, // true
   p instanceof Array // true
 );
+```
+
+### Object Conversion
+
+对象转换为布尔值:
+
+- 直接转换为 true (包装类型也一样), 不调用 valueOf 和 toString.
+
+对象转换为数字:
+
+- 如果对象具有 valueOf 方法 (返回原始值),
+  则将该原始值转换为数字 (转换失败会返回 NaN), 并返回这个数字.
+- 如果对象具有 toString 方法 (返回原始值),
+  则将该原始值转换为数字 (转换失败会返回 NaN), 并返回这个数字.
+- 转换失败, 抛出 `TypeError`.
+
+对象转换为字符串:
+
+- 如果对象具有 toString 方法 (返回原始值),
+  则将该原始值转换为字符串, 并返回该字符串.
+- 如果对象具有 valueOf 方法 (返回原始值),
+  则将该原始值转换为字符串, 并返回该字符串.
+- 转换失败, 抛出 `TypeError`.
+
+```ts
+// 保存原始的valueOf
+const valueOf = Object.prototype.valueOf;
+const toString = Object.prototype.toString;
+
+// 添加valueOf日志
+// eslint-disable-next-line no-extend-native
+Object.prototype.valueOf = function () {
+  console.log('valueOf');
+  return valueOf.call(this);
+};
+// 添加toString日志
+// eslint-disable-next-line no-extend-native
+Object.prototype.toString = function () {
+  console.log('toString');
+  return toString.call(this);
+};
+const a = {};
+// eslint-disable-next-line no-new-wrappers
+const b = new Boolean(false);
+
+if (a) {
+  console.log(1);
+}
+
+if (b) {
+  console.log(2);
+}
+
+// output:
+// 1
+// 2
+// 未调用valueOf和toString, 符合 [对象到布尔值] 的转换规则
+```
+
+```ts
+// 保存原始的valueOf
+const valueOf = Object.prototype.valueOf;
+const toString = Object.prototype.toString;
+
+// 添加valueOf日志
+// eslint-disable-next-line no-extend-native
+Object.prototype.valueOf = function () {
+  console.log('valueOf');
+  return valueOf.call(this);
+};
+// 添加toString日志
+// eslint-disable-next-line no-extend-native
+Object.prototype.toString = function () {
+  console.log('toString');
+  return toString.call(this);
+};
+
+let a = {};
+console.log(++a);
+
+// output:
+// valueOf
+// toString
+// NaN
+// 1. valueOf方法返回的是对象本身, 不是原始值, 继续执行
+// 2. toString方法返回的是”[object Object]”, 是原始值(字符串), 将字符串转换为数字NaN
+```
+
+```ts
+// 保存原始的valueOf
+const valueOf = Object.prototype.valueOf;
+const toString = Object.prototype.toString;
+
+// 添加valueOf日志
+// eslint-disable-next-line no-extend-native
+Object.prototype.valueOf = function () {
+  console.log('valueOf');
+  return '1'; // 强制返回原始值
+};
+// 添加toString日志
+// eslint-disable-next-line no-extend-native
+Object.prototype.toString = function () {
+  console.log('toString');
+  return toString.call(this);
+};
+
+let a = {};
+console.log(++a);
+
+// output:
+// valueOf
+// 2
+// valueOf 返回原始值(字符串), 直接将该字符串转换为数字, 得到 1
+```
+
+```ts
+// 保存原始的valueOf
+const valueOf = Object.prototype.valueOf;
+const toString = Object.prototype.toString;
+
+// 添加valueOf日志
+// eslint-disable-next-line no-extend-native
+Object.prototype.valueOf = function () {
+  console.log('valueOf');
+  return valueOf.call(this);
+};
+// 添加toString日志
+// eslint-disable-next-line no-extend-native
+Object.prototype.toString = function () {
+  console.log('toString');
+  return toString.call(this);
+};
+
+const a = {};
+alert(a);
+
+// output:
+// toString
+// 弹出 "[object Object]"
+// 调用toString方法, 返回了字符串”[object Object]”, 对象最终转换为该字符串
+```
+
+```ts
+// 保存原始的valueOf
+const valueOf = Object.prototype.valueOf;
+const toString = Object.prototype.toString;
+
+// 添加valueOf日志
+// eslint-disable-next-line no-extend-native
+Object.prototype.valueOf = function () {
+  console.log('valueOf');
+  return valueOf.call(this);
+};
+// 添加toString日志
+// eslint-disable-next-line no-extend-native
+Object.prototype.toString = function () {
+  console.log('toString');
+  return this;
+};
+
+const a = {};
+alert(a);
+
+// output:
+// toString
+// valueOf
+// Uncaught TypeError: Cannot convert object to primitive value
+// 调用toString方法, 返回的不是 primitive value, 继续执行
+// 调用valueOf方法, 返回的不是 primitive value, 继续执行
+// 抛出 TypeError
 ```
 
 ### Object Constructor
@@ -2843,7 +2851,7 @@ console.log(obj.foo.qux);
 // 'abc'
 ```
 
-| Operation (**Only Enumerable**) | String key | Symbol key | Inherited |
+| Operation (**Only Enumerable**) | String Key | Symbol Key | Inherited |
 | ------------------------------- | ---------- | ---------- | --------- |
 | `Object.keys()`                 | ✔          | ✘          | ✘         |
 | `Object.values()`               | ✔          | ✘          | ✘         |
@@ -2853,7 +2861,7 @@ console.log(obj.foo.qux);
 | `JSON.stringify()`              | ✔          | ✘          | ✘         |
 | `for...in`                      | ✔          | ✘          | ✔         |
 
-| Operation (**Include Non-enumerable**) | String key | Symbol key | Inherited |
+| Operation (**Include Non-enumerable**) | String Key | Symbol Key | Inherited |
 | -------------------------------------- | ---------- | ---------- | --------- |
 | `Object.getOwnPropertyNames()`         | ✔          | ✘          | ✘         |
 | `Object.getOwnPropertySymbols()`       | ✘          | ✔          | ✘         |
@@ -3154,6 +3162,8 @@ Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor �
 
 ### Class
 
+#### Class Prototype
+
 - `Class` 定义不能提升.
 - `Class` 具有块作用域.
 - `typeof Class`: `function`.
@@ -3198,7 +3208,7 @@ console.log(BB.prototype[[proto]] === AA.prototype); // true
 console.log(bb[[proto]] === BB.prototype); // true
 ```
 
-|                                        | writable | enumerable | configurable |
+|                                        | Writable | Enumerable | Configurable |
 | -------------------------------------- | -------- | ---------- | ------------ |
 | `Foo.prototype`                        | false    | false      | false        |
 | `Foo.prototype.constructor`            | false    | false      | true         |
@@ -3238,7 +3248,7 @@ Person.locate(); // class, class Person {}
 
 [![Class Inheritance](./figures/ClassInheritance.png)](https://exploringjs.com/es6/ch_classes.html#_prototype-chains)
 
-| `Class` definition | `Class` prototype    | `Class.prototype` prototype |
+| `Class` Definition | `Class` Prototype    | `Class.prototype` Prototype |
 | ------------------ | -------------------- | --------------------------- |
 | `C`                | `Function.prototype` | `Object.prototype`          |
 | `C extends null`   | `Function.prototype` | `null`                      |
@@ -3676,7 +3686,7 @@ func(); // `this` in `inner` function refer to `window`
 
 ### This Binding Invocation
 
-|                                 | `function` call | Method call | `new`       |
+|                                 | `function` Call | Method Call | `new` Call  |
 | ------------------------------- | --------------- | ----------- | ----------- |
 | Traditional `function` (sloppy) | `window`        | receiver    | instance    |
 | Traditional `function` (strict) | `undefined`     | receiver    | instance    |
