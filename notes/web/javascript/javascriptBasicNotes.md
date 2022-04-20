@@ -1148,6 +1148,13 @@ Array.of(undefined); // [undefined]
 - `map` 函数.
 
 ```ts
+interface ArrayLike<T> {
+  length: number;
+  [n: number]: T;
+}
+```
+
+```ts
 // Set
 // Map
 
@@ -1338,7 +1345,7 @@ const reverseStr = normalizedStr.split('').reverse().join('');
 #### Array Spread
 
 - Shallow Clone.
-- Iterable.
+- Iterable Consumer.
 
 ```ts
 arr2.push(...arr1);
