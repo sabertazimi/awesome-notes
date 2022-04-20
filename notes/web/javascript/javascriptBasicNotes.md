@@ -8192,6 +8192,13 @@ console.log(Math.floor(25.5)); // 25
 console.log(Math.floor(25.1)); // 25
 ```
 
+|              | -2.9 | -2.5 | -2.1 | 2.1 | 2.5 | 2.9 |
+| ------------ | ---- | ---- | ---- | --- | --- | --- |
+| `Math.floor` | -3   | -3   | -3   | 2   | 2   | 2   |
+| `Math.ceil`  | -2   | -2   | -2   | 3   | 3   | 3   |
+| `Math.round` | -3   | -2   | -2   | 2   | 3   | 3   |
+| `Math.trunc` | -2   | -2   | -2   | 2   | 2   | 2   |
+
 ### Atomics
 
 [Atomics API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics):
