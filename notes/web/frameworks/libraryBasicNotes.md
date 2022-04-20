@@ -543,11 +543,13 @@ tags: [Web, Framework, Library]
 
 ### iFrame
 
+- [ReactEmbed: Embed 3rd Party Widgets](https://github.com/streamich/react-embed)
 - [Postmate](https://github.com/dollarshaveclub/postmate)
 
 ## Viewport Utils
 
 - [Viewport Events](https://github.com/robb0wen/tornis)
+- [React Device Detect: Render View According to Detected Device Type](https://github.com/duskload/react-device-detect)
 - [Robot.js: Node.js Desktop Automation](https://github.com/octalmage/robotjs)
 
 ### Scroll Utils
@@ -573,14 +575,11 @@ tags: [Web, Framework, Library]
 - [Interact.js: Drag, Drop and Resizing Multi Touch](https://github.com/taye/interact.js)
 - [ReactZoom: Multi-touch Gestures for Zooming and Dragging](https://github.com/retyui/react-quick-pinch-zoom)
 - [TransMat: Share Data beyond Boundaries of Browser](https://github.com/google/transmat)
+- [Allotment: Resizable Split Views](https://github.com/johnwalley/allotment)
 
 ### Cursor Utils
 
 - [Blobity: Next Level Cursor Style Library](https://github.com/gmrchk/blobity)
-
-### Detection Utils
-
-- [React Device Detect](https://github.com/duskload/react-device-detect)
 
 ## Social Utils
 
@@ -821,6 +820,7 @@ tags: [Web, Framework, Library]
 
 - [React MapBox](https://github.com/visgl/react-map-gl)
 - [Turf: Modular Geospatial Engine](https://github.com/Turfjs/turf)
+- [React Leaflet Map](https://github.com/PaulLeCam/react-leaflet)
 
 ## Editor
 
