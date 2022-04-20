@@ -3593,6 +3593,10 @@ console.log(PersonName); // ReferenceError: PersonName is not defined
 
 #### Class Private Member
 
+- Private access.
+- Aren't stored in `.prototype`.
+- Aren't create instance own properties.
+
 ```ts
 class Dong {
   constructor() {
@@ -3678,6 +3682,22 @@ assert.equal(inst.getSuperPrivateField(), 'super');
 assert.equal(inst.getSubPrivateField(), 'sub');
 ```
 
+Private member can't be accessed by `Reflect.ownKeys()`:
+
+```ts
+class InstPrivateClass {
+  #privateField1 = 'private field 1';
+  #privateField2;
+  constructor(value) {
+    this.#privateField2 = value;
+  }
+}
+
+// No instance properties were created
+const inst = new InstPrivateClass('constructor argument');
+assert.deepEqual(Reflect.ownKeys(inst), []);
+```
+
 Private member `WeakMap` polyfill:
 
 ```ts
@@ -3705,6 +3725,36 @@ class Dong {
     )} years old`;
   }
 }
+```
+
+#### Class Public Fields
+
+```ts
+class SuperClass {
+  superProp = console.log('superProp');
+
+  constructor() {
+    console.log('super-constructor');
+  }
+}
+
+class SubClass extends SuperClass {
+  subProp = console.log('subProp');
+
+  constructor() {
+    console.log('BEFORE super()');
+    super();
+    console.log('AFTER super()');
+  }
+}
+
+const sub = new SubClass();
+// Output:
+// 'BEFORE super()'
+// 'superProp'
+// 'super-constructor'
+// 'subProp'
+// 'AFTER super()'
 ```
 
 #### Class Static Blocks
