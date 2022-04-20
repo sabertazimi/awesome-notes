@@ -2131,6 +2131,10 @@ console.log(old.data); // 5
 | `a &&= b`           | `a && (a = b)`   | Truthy                |
 | `a ??= b`           | `a ?? (a = b)`   | Nullish               |
 
+### Operators Reference
+
+- [Operator Lookup](https://www.joshwcomeau.com/operator-lookup)
+
 ## Control Flow
 
 ### Switch Case Statement
