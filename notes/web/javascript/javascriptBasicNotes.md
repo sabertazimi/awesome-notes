@@ -4951,6 +4951,18 @@ const IteratorResult = {
   value: any,
   done: boolean,
 };
+
+// Tasks will chained:
+ait
+  .next()
+  .then(({ value, done }) => ait.next())
+  .then(({ value, done }) => ait.next())
+  .then(({ done }) => done);
+
+// Tasks will run in parallel:
+ait.next().then();
+ait.next().then();
+ait.next().then();
 ```
 
 ```ts
@@ -5005,13 +5017,6 @@ function remotePostsAsyncIteratorsFactory() {
   await ait.next(); // { done:false, value:{id: 100, ...} }
   await ait.next(); // { done:true, value:undefined }
 })();
-```
-
-```ts
-// tasks will run in parallel
-ait.next().then();
-ait.next().then();
-ait.next().then();
 ```
 
 ### Closable Iterator
