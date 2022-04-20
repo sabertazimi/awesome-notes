@@ -1152,6 +1152,10 @@ interface ArrayLike<T> {
   length: number;
   [n: number]: T;
 }
+
+interface Array {
+  from<T>(iterable: Iterable<T> | ArrayLike<T>): T[];
+}
 ```
 
 ```ts
