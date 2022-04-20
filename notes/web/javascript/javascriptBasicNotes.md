@@ -131,8 +131,19 @@ const a = 2172141653;
 const b = 15346349309;
 const c1 = a * b;
 // => 33334444555566670000
+
 const c2 = BigInt(a) * BigInt(b);
 // => 33334444555566667777n
+
+const inhabitantsOfLondon = 1_335_000;
+const distanceEarthSunInKm = 149_600_000;
+
+const fileSystemPermission = 0b111_111_000;
+const bytes = 0b1111_10101011_11110000_00001101;
+const words = 0xf3b_f00d;
+
+const massOfElectronInKg = 9.109_383_56e-31;
+const trillionInShortScale = 1e1_2;
 ```
 
 #### Infinity
