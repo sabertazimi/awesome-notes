@@ -115,18 +115,6 @@ const a = (1 + 2) / 10; // a = 0.1 + 0.2;
 - Binary: `0b10`/`0B10`.
 - Octal: `0o23`/`0O23`.
 - Hex: `0xFF`.
-- `Number.isFinite()`.
-- `Number.isNaN()`.
-- `Number.isInteger()`.
-- `Number.isSafeInteger()`.
-- `Number.toFixed()`.
-- `Number.toExponential()`.
-- `Number.toPrecision()`.
-- `Number.parseInt(string, radix)`.
-- `Number.parseFloat(string)`.
-- `Number.EPSILON`.
-- `Number.MAX_SAFE_INTEGER`.
-- `Number.MIN_SAFE_INTEGER`.
 - `**` 指数运算符.
 - BigInt.
 
@@ -164,7 +152,22 @@ const trillionInShortScale = 1e1_2;
 | `symbol`    | Throws TypeError                                            |
 | `object`    | Configurable (`[Symbol.toPrimitive]()`/`valueOf()`)         |
 
-#### Infinity
+#### Number Static Properties
+
+- `Number.EPSILON`.
+- `Number.MAX_SAFE_INTEGER`.
+- `Number.MIN_SAFE_INTEGER`.
+- `Number.isFinite()`.
+- `Number.isNaN()`.
+- `Number.isInteger()`.
+- `Number.isSafeInteger()`.
+- `Number.toFixed()`.
+- `Number.toExponential()`.
+- `Number.toPrecision()`.
+- `Number.parseInt(string, radix)`.
+- `Number.parseFloat(string)`.
+
+#### Infinity Number
 
 Infinity represents all values greater than 1.7976931348623157e+308.
 Infinity will be converted to `null` with `JSON.stringify()`.
@@ -187,6 +190,31 @@ console.log(Number.MIN_VALUE); // -Infinity
 
 console.log(Math.max()); // -Infinity
 console.log(Math.min()); // Infinity
+```
+
+#### Safe Number
+
+- Safe integers:
+  - Precision: 53 bits plus sign.
+  - Range: (`−2^53`, `2^53`).
+- Array indices:
+  - Precision: 32 bits, unsigned
+  - Range: [`0`, `2^32−1`).
+  - Typed Arrays have a larger range of 53 bits (safe and unsigned).
+- Bitwise operators:
+  - Precision: 32 bits.
+  - Range of unsigned right shift (`>>>`): unsigned, [`0`, `2^32`).
+  - Range of all other bitwise operators: signed, [`−2^31`, `2^31`).
+
+```ts
+assert.equal(Number.MAX_SAFE_INTEGER, 2 ** 53 - 1);
+assert.equal(Number.MIN_SAFE_INTEGER, -Number.MAX_SAFE_INTEGER);
+
+assert.equal(Number.isSafeInteger(5), true);
+assert.equal(Number.isSafeInteger('5'), false);
+assert.equal(Number.isSafeInteger(5.1), false);
+assert.equal(Number.isSafeInteger(Number.MAX_SAFE_INTEGER), true);
+assert.equal(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1), false);
 ```
 
 ### String
