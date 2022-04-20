@@ -3653,7 +3653,8 @@ assert.throws(() => Color.getName(new Person('Jane')), {
 });
 ```
 
-Private member never clash:
+Private member never clash,
+they aren't stored in `.prototype` objects and aren't inherited:
 
 ```ts
 class SuperClass {
