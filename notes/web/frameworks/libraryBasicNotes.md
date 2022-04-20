@@ -644,6 +644,7 @@ tags: [Web, Framework, Library]
 - [React Spinners](https://github.com/davidhu2000/react-spinners)
 - [Epic Spinners](https://github.com/epicmaxco/epic-spinners)
 - [Loading IO](https://loading.io)
+- [UIBall: Modern, Tree-shakeable Loaders and Spinners for React](https://github.com/GriffinJohnston/uiball-loaders)
 
 ### MicroInteraction Animation
 
