@@ -7204,6 +7204,20 @@ export { default as Article } from './Article';
 export * from 'utils';
 ```
 
+#### ES6 Module Imports
+
+```ts
+// index.mjs
+import './index2.mjs?someURLInfo=5';
+
+// index2.mjs
+new URL(import.meta.url).searchParams.get('someURLInfo'); // 5
+```
+
+```ts
+const urlOfData = new URL('data.txt', import.meta.url);
+```
+
 #### ES6 Module Exports
 
 - CommonJS 模块是运行时加载, ES6 模块是编译时输出接口.
@@ -8437,14 +8451,11 @@ console.log(decodeURIComponent(uri));
 - `origin`: read only.
 
 ```ts
-// index.mjs
-import './index2.mjs?someURLInfo=5';
+const href = new URL('other.mjs', 'https://example.com/code/main.mjs').href;
+// 'https://example.com/code/other.mjs'
+const href = new URL('../other.mjs', 'https://example.com/code/main.mjs').href;
+// 'https://example.com/other.mjs'
 
-// index2.mjs
-new URL(import.meta.url).searchParams.get('someURLInfo'); // 5
-```
-
-```ts
 const blob = new Blob(['export const itsAModule = true'], {
   type: 'text/javascript',
 });
