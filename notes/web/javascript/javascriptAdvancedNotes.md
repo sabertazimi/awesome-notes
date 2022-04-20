@@ -4062,17 +4062,21 @@ const PageComponent = () => {
 
 #### PreFetch
 
+[Quick Link](https://github.com/GoogleChromeLabs/quicklink)
+prefetch library.
+
 ```html
-<link rel="preload" /> <link rel="prefetch" />
+<link rel="prefetch"></link>
+<link rel="preload"></link>
 ```
 
-[Why not to PreFetch and PreRender](https://addyosmani.com/blog/what-not-to-prefetch-prerender):
+[PreFetch and PreRender Pitfalls](https://addyosmani.com/blog/what-not-to-prefetch-prerender):
 
-- avoid prefetching pages for authentication
-- avoid over-prefetching to limit accidental DOS
-- avoid prefetching pages key to checkout
-- avoid prefetching large resources
-- avoid prefetching cross-origin resources
+- Avoid prefetching pages for authentication.
+- Avoid over-prefetching to limit accidental DOS.
+- Avoid prefetching pages key to checkout.
+- Avoid prefetching large resources.
+- Avoid prefetching cross-origin resources.
 
 #### Babel Configuration for JavaScript
 
