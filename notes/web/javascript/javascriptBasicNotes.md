@@ -4163,6 +4163,17 @@ const factorial = function f(num) {
 };
 ```
 
+The name `funcExpr` only exists inside the function body:
+
+```ts
+const func = function funcExpr() {
+  return funcExpr;
+};
+
+assert.equal(func(), func);
+assert.throws(() => funcExpr(), ReferenceError);
+```
+
 ### Immediately Invoked Function Expression
 
 即时函数自动执行 (定义即执行): 匿名包装器.
