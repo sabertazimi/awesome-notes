@@ -1739,6 +1739,17 @@ In positioning/sizing/margin/padding/border/text alignment:
 }
 ```
 
+### CSS Color Reference
+
+- CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
+  - hwb.
+  - lab.
+  - lch.
+  - color-mix.
+  - color-contrast.
+  - color.
+  - accent-color.
+
 ## CSS Border
 
 ### Border Radius
