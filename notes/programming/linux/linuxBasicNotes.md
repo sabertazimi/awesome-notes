@@ -578,7 +578,7 @@ format and print data
 
 ## Helper and Documentation Commands
 
-### man
+### Man
 
 - -f 显示操作等级
 - -k 包含匹配
@@ -601,11 +601,11 @@ format and print data
 8. System management commands
    Commands like mount(8), many of which only root can execute.
 
-### help shell 内部命令
+### Help Shell
 
 显示 shell 内部命令帮助，如 cd 命令(shell 内部命令)
 
-### info
+### Info
 
 显示大型帮助文档 - enter 进入 u 返回 p 上一节 n 下一节 q 退出
 
@@ -620,6 +620,11 @@ sudo apt-get install neofetch
 ```bash
 sudo apt-get install screenfetch
 ```
+
+### Linux Documentation Reference
+
+- [DashDash: Beautiful Linax Manual Pages](https://dashdash.io)
+- [ArchWiki](https://wiki.archlinux.org)
 
 ## Compress and Extract Commands
 
