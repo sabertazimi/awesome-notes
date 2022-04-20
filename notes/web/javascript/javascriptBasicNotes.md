@@ -8294,6 +8294,8 @@ Avoid use them in production:
 
 ### RegExp Functions
 
+RegExp [functions](https://exploringjs.com/impatient-js/ch_regexps.html#methods-for-working-with-regular-expressions):
+
 - String:
   - `split`.
   - `match`.
