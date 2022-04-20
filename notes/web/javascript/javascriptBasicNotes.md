@@ -27,8 +27,8 @@ JavaScript = ECMAScript + DOM + BOM:
 
 Primitive data types:
 
-- Null.
 - Undefined.
+- Null.
 - Boolean.
 - Number.
 - String.
@@ -81,35 +81,6 @@ Primitive data types:
 | `symbol`    | `true`                         |
 | `object`    | `true`                         |
 
-### NaN
-
-:::danger NaN
-
-`NaN === NaN` -> `false`.
-
-:::
-
-```ts
-const numberType = typeof NaN; // 'number'
-Number.isNaN();
-Number.isFinite();
-```
-
-```ts
-function isNumber(value) {
-  return typeof value === 'number' && Number.isFinite(value);
-}
-```
-
-### Float
-
-- 计算浮点数时, 应先计算整数, 再利用移位/乘法/除法转化为浮点数.
-- 浮点值的精确度最高可达 17 位小数.
-
-```ts
-const a = (1 + 2) / 10; // a = 0.1 + 0.2;
-```
-
 ### Number
 
 - Binary: `0b10`/`0B10`.
@@ -154,11 +125,14 @@ const trillionInShortScale = 1e1_2;
 
 #### Number Static Properties
 
-- `Number.EPSILON`.
+- `Number.NaN`.
+- `Number.NEGATIVE_INFINITY`.
+- `Number.POSITIVE_INFINITY`.
 - `Number.MAX_SAFE_INTEGER`.
 - `Number.MIN_SAFE_INTEGER`.
-- `Number.isFinite()`.
+- `Number.EPSILON`.
 - `Number.isNaN()`.
+- `Number.isFinite()`.
 - `Number.isInteger()`.
 - `Number.isSafeInteger()`.
 - `Number.toFixed()`.
@@ -166,6 +140,22 @@ const trillionInShortScale = 1e1_2;
 - `Number.toPrecision()`.
 - `Number.parseInt(string, radix)`.
 - `Number.parseFloat(string)`.
+
+#### Not A Number
+
+```ts
+const numberType = typeof NaN; // 'number'
+
+function isNumber(value) {
+  return typeof value === 'number' && Number.isFinite(value);
+}
+```
+
+:::danger NaN
+
+`NaN === NaN` -> `false`.
+
+:::
 
 #### Infinity Number
 
@@ -215,6 +205,15 @@ assert.equal(Number.isSafeInteger('5'), false);
 assert.equal(Number.isSafeInteger(5.1), false);
 assert.equal(Number.isSafeInteger(Number.MAX_SAFE_INTEGER), true);
 assert.equal(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1), false);
+```
+
+#### Float Number
+
+- 计算浮点数时, 应先计算整数, 再利用移位/乘法/除法转化为浮点数.
+- 浮点值的精确度最高可达 17 位小数.
+
+```ts
+const a = (1 + 2) / 10; // a = 0.1 + 0.2;
 ```
 
 ### String
@@ -1718,7 +1717,7 @@ const objectType = typeof null; // => object
   - 遇到非数字字符立即停止运行, 返回当前转化值.
   - 将 0 开头字符串解析为八进制数, 0x 开头字符串解析为十六进制数.
 - `boolean`在`数值运算`环境中 true => 1, false => 0.
-- `数组`在`数值运算`环境中转化为 0(空数组)/num(单一元素数组)/NaN(多元素数组/NaN 数组).
+- `数组`在`数值运算`环境中转化为 0 (空数组)/num (单一元素数组)/NaN (多元素数组/NaN 数组).
 - `对象`在`逻辑运算`环境中转化为 true , 包括 false 的封装对象.
 - `对象`在`数值运算`环境中先利用 valueOf(object), 再利用 toString() 转化为数字, 若转化失败, 则返回 NaN.
 - `对象`与`数值`加号运算: 先数值加, (**失败后**)再字符串加.
