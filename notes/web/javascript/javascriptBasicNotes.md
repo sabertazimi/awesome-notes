@@ -2447,6 +2447,34 @@ console.log(
 );
 ```
 
+Set the inherited property will **create own property**
+(**overrides** value of inherited property):
+
+```ts
+const proto = {
+  protoProp: 'a',
+};
+
+const obj = {
+  __proto__: proto,
+  objProp: 'b',
+};
+
+// In the beginning, obj has one own property:
+assert.deepEqual(Object.keys(obj), ['objProp']);
+
+obj.protoProp = 'x';
+
+// Created a new own property:
+assert.deepEqual(Object.keys(obj), ['objProp', 'protoProp']);
+
+// The inherited property itself is unchanged:
+assert.equal(proto.protoProp, 'a');
+
+// The own property overrides the inherited property:
+assert.equal(obj.protoProp, 'x');
+```
+
 ### Object Conversion
 
 对象转换为布尔值:
