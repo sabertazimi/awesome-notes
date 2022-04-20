@@ -722,6 +722,7 @@ tags: [Web, Framework, Library]
 ### Emoji
 
 - [EmojiButton: Emoji Picker](https://github.com/joeattardi/emoji-button)
+- [Picmo: JavaScript Emoji Picker](https://github.com/joeattardi/picmo)
 - [OwO Keyboard Emoji](https://github.com/DIYgod/OwO)
 - [Twitter Emoji](https://github.com/twitter/twemoji)
 - [Emoji Panel](https://github.com/TimeToKnow/emoji-panel)
