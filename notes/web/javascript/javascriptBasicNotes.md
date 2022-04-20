@@ -8474,7 +8474,7 @@ searchParams.delete('q');
 alert(searchParams.toString()); // " num=10&page=3"
 ```
 
-### Encoding
+### Encoding and Decoding
 
 [TextEncoder API](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder):
 
