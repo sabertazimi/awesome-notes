@@ -4680,41 +4680,37 @@ Iteration [protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Ref
 - All built-in ES6 iterators are `Self Iterable Iterator`.
 
 ```ts
-interface Iterable {
-  [Symbol.iterator](): Iterator;
+interface Iterable<T> {
+  [Symbol.iterator](): Iterator<T>;
 }
 
-interface AsyncIterable {
-  [Symbol.asyncIterator](): AsyncIterator;
+interface Iterator<T> {
+  next(...args: []): IteratorResult<T>;
+  return?(value?: T): IteratorResult<T>; // Closable iterator
+  throw?(e?: any): IteratorResult<T>;
 }
 
-interface Iterator {
-  next(): IteratorResult;
-  return?(value?: any): IteratorResult; // Closable iterator
-  throw?(): void;
+interface IterableIterator<T> extends Iterator<T> {
+  [Symbol.iterator](): IterableIterator<T>;
 }
 
-interface AsyncIterator {
-  next(): Promise<IteratorResult>;
+interface AsyncIterable<T> {
+  [Symbol.asyncIterator](): AsyncIterator<T>;
 }
 
-interface IterableIterator {
-  next(): IteratorResult;
-  return?(value?: any): IteratorResult; // Closable iterator
-  throw?(): void;
-  [Symbol.iterator](): Iterator;
+interface AsyncIterator<T> {
+  next(...args: []): Promise<IteratorResult<T>>;
+  return?(value?: T | PromiseLike<T>): Promise<IteratorResult<T>>; // Closable iterator
+  throw?(e?: any): Promise<IteratorResult<T>>;
 }
 
-interface SelfIterableIterator {
-  next(): IteratorResult;
-  return?(value?: any): IteratorResult; // Closable iterator
-  throw?(): void;
-  [Symbol.iterator](): Self;
+interface AsyncIterableIterator<T> extends AsyncIterator<T> {
+  [Symbol.asyncIterator](): AsyncIterableIterator<T>;
 }
 
-interface IteratorResult {
-  value: any;
+interface IteratorResult<T> {
   done: boolean;
+  value: T;
 }
 ```
 
@@ -5143,12 +5139,25 @@ interface GeneratorFunction {
   readonly prototype: Generator;
 }
 
-interface Generator<T = unknown, TReturn = any, TNext = unknown>
-  extends Iterator<T, TReturn, TNext> {
-  next(...args: [] | [TNext]): IteratorResult<T, TReturn>;
-  return(value: TReturn): IteratorResult<T, TReturn>;
-  throw(e: any): IteratorResult<T, TReturn>;
-  [Symbol.iterator](): Generator<T, TReturn, TNext>;
+interface Generator<T> extends Iterator<T> {
+  next(...args: []): IteratorResult<T>;
+  return(value: T): IteratorResult<T>; // Required
+  throw(e: any): IteratorResult<T>; // Required
+  [Symbol.iterator](): Generator<T>;
+}
+
+interface AsyncGeneratorFunction {
+  (...args: any[]): AsyncGenerator;
+  readonly length: number;
+  readonly name: string;
+  readonly prototype: AsyncGenerator;
+}
+
+interface AsyncGenerator<T> extends AsyncIterator<T> {
+  next(...args: []): Promise<IteratorResult<T>>;
+  return(value: T | PromiseLike<T>): Promise<IteratorResult<T>>; // Required
+  throw(e: any): Promise<IteratorResult<T>>; // Required
+  [Symbol.asyncIterator](): AsyncGenerator<T>;
 }
 ```
 
