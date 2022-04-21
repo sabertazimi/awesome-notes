@@ -9242,11 +9242,13 @@ interface Observer<T> {
   complete?(): void;
 }
 
+interface Subscription {
+  unsubscribe(): void;
+}
+
 interface Observable<T> {
   // eslint-disable-next-line @typescript-eslint/no-misused-new
-  constructor(
-    subscriber: (observer: Observer<T>) => Unsubscription
-  ): Observable<T>;
+  new (subscriber: (observer: Observer<T>) => Subscription): Observable<T>;
   observable(): this;
   readonly species: this;
 
