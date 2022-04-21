@@ -9188,8 +9188,10 @@ class ColorPoint extends Point {
 
 ### RxJS
 
-- Reactive programming: push streams and potentially multiple consumers.
 - Async iteration: pull streams and single consumers.
+- Reactive programming: push streams and potentially multiple consumers.
+
+![Data Stream](./figures/DataStream.png)
 
 #### Stream
 
