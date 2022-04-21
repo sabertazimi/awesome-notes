@@ -8889,6 +8889,11 @@ dtfEnglish.formatRange(start, end); // => 'May 7 - 9, 2019'
 - Transparent (pure and immutable).
 - Modular (composite).
 
+:::tip Functional JavaScript
+Functional programming is the art of composing higher-order functions
+to advance the state of a program in a pure manner.
+:::
+
 ### Functional JavaScript Pros
 
 - Type safe and state safe.
