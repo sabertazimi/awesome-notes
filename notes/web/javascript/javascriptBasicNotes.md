@@ -3261,6 +3261,7 @@ const Person = function (name) {
 - Enumerable: **可枚举**属性扩展.
 - Own: **自有**属性扩展.
 - Shallow: **浅拷贝**扩展.
+- Trigger `sourceObj.set` and change `sourceObj`.
 
 ```ts
 const dest = {};
