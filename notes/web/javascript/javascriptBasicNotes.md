@@ -7097,6 +7097,14 @@ Promise.all(partialSumPromises)
 
 ## Module
 
+### CRUST Principles
+
+- Consistent: ES6 API design `Array.XXX(fn)`.
+- Resilient: jQuery sizzle API design `$(element)`/`$(selector)`/`$(selector, context)`.
+- Unambiguous.
+- Simple: Simple `fetch` API design.
+- Tiny: Tiny surface areas.
+
 ### Namespace Module Pattern
 
 #### Namespace Module Constructor
