@@ -9236,20 +9236,32 @@ pushArray.push(6);
 #### Observable
 
 ```ts
-interface Observer {
-  next?: Function;
-  error?: Function;
-  complete?: Function;
+interface Observer<T> {
+  next(value: T): void;
+  error?(error: Error): void;
+  complete?(): void;
 }
 
-interface Observable {
+interface Observable<T> {
   // eslint-disable-next-line @typescript-eslint/no-misused-new
-  constructor(subscriber: (Observer) => Unsubscription): Observable;
-  subscribe(observer: Function | Observer): Subscription;
+  constructor(
+    subscriber: (observer: Observer<T>) => Unsubscription
+  ): Observable<T>;
   observable(): this;
   readonly species: this;
-  static of(...items: Array<mixed>): Observable;
-  static from(x: Observable | Iterable): Observable;
+
+  static of(...items: Array<mixed>): Observable<T>;
+  static from(x: Observable<T> | Iterable<T>): Observable<T>;
+
+  map<Z>(fn: (value: T) => Z): Observable<Z>;
+  reduce<Z>(
+    acc: (accumulator: Z, value: T, index?: number, array?: Array<T>) => Z,
+    startsWith?: T
+  ): Observable<T>;
+  filter(predicate: (value: T) => boolean): Observable<T>;
+  skip(count: number): Observable<T>;
+
+  subscribe(observer: Function | Observer<T>): Subscription;
 }
 ```
 
