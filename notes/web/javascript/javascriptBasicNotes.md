@@ -9132,9 +9132,7 @@ class ColorPoint extends Point {
 }
 ```
 
-### Functional JavaScript Library
-
-#### Lodash
+### Lodash
 
 - chunk.
 - shuffle.
@@ -9152,7 +9150,60 @@ class ColorPoint extends Point {
 - snakeCase.
 - camelCase.
 
-#### RxJS
+### RxJS
 
 - Reactive programming: push streams and potentially multiple consumers.
 - Async iteration: pull streams and single consumers.
+
+#### Stream
+
+```ts
+class PushArray extends Array {
+  static EVENT_NAME = 'new_value';
+  #eventEmitter = new EventEmitter();
+
+  push(value) {
+    this.#eventEmitter.emit(PushArray.EVENT_NAME, value);
+    return super.push(value);
+  }
+
+  subscribe({ next }) {
+    this.#eventEmitter.on(PushArray.EVENT_NAME, value => {
+      next(value);
+    });
+  }
+
+  unsubscribe() {
+    this.#eventEmitter.removeAllListeners(PushArray.EVENT_NAME);
+  }
+}
+
+const pushArray = new PushArray(1, 2, 3);
+pushArray.subscribe({
+  next(value) {
+    console.log('New value:', value);
+  },
+});
+pushArray.push(4);
+pushArray.push(5);
+pushArray.unsubscribe();
+pushArray.push(6);
+```
+
+#### Observable
+
+```ts
+interface Observable {
+  // eslint-disable-next-line @typescript-eslint/no-misused-new
+  constructor(subscriber: Function): Observable;
+  subscribe(
+    observer:
+      | Function
+      | { next?: Function; error?: Function; complete?: Function }
+  ): Subscription;
+  observable(): this;
+  readonly species: this;
+  static of(...items: Array<mixed>): Observable;
+  static from(x: Observable | Iterable): Observable;
+}
+```
