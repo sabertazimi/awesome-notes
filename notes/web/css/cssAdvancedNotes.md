@@ -176,6 +176,7 @@ point out that:
 ## Components Design Principles
 
 - [Components Checklist](https://www.smashingmagazine.com/ebooks/checklist-cards-digital)
+- [Form](https://www.smashingmagazine.com/printed-books/form-design-patterns)
 - [Accordion](https://www.smashingmagazine.com/2017/06/designing-perfect-accordion-checklist)
 - [Responsive Configurator](https://www.smashingmagazine.com/2018/02/designing-a-perfect-responsive-configurator)
 - [DateTime Picker](https://www.smashingmagazine.com/2017/07/designing-perfect-date-time-picker)
@@ -187,9 +188,9 @@ point out that:
 - [Disabled Button](https://www.smashingmagazine.com/2021/08/frustrating-design-patterns-disabled-buttons)
 - [Infinite Scroll](https://www.smashingmagazine.com/2022/03/designing-better-infinite-scroll)
 - [Breadcrumbs](https://www.smashingmagazine.com/2022/04/designing-better-breadcrumbs)
-- [Form](https://www.smashingmagazine.com/printed-books/form-design-patterns)
 - [Push Notification](https://www.smashingmagazine.com/2022/04/guide-push-notifications-developers)
 - [Carousel](https://www.smashingmagazine.com/2022/04/designing-better-carousel-ux)
+- [Navigation](https://www.smashingmagazine.com/2022/04/designing-better-navigation-ux-queries)
 
 ### Form Design Principles
 
