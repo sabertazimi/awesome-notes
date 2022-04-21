@@ -4699,17 +4699,17 @@ interface AsyncIterator {
 }
 
 interface IterableIterator {
-  [Symbol.iterator](): Iterator;
   next(): IteratorResult;
   return?(value?: any): IteratorResult; // Closable iterator
   throw?(): void;
+  [Symbol.iterator](): Iterator;
 }
 
 interface SelfIterableIterator {
-  [Symbol.iterator](): Self;
   next(): IteratorResult;
   return?(value?: any): IteratorResult; // Closable iterator
   throw?(): void;
+  [Symbol.iterator](): Self;
 }
 
 interface IteratorResult {
@@ -5128,10 +5128,29 @@ function take(n, iterable) {
 
 ## Generator
 
+### Generator Definition
+
 - 函数名称前面加一个星号 (`*`) 表示它是一个生成器函数.
 - 箭头函数不能用来定义生成器函数.
 - 调用生成器函数会产生一个生成器对象, 其是一个**自引用可迭代对象**:
   其本身是一个迭代器, 同时实现了 `Iterable` 接口 (返回 `this`).
+
+```ts
+interface GeneratorFunction {
+  (...args: any[]): Generator;
+  readonly length: number;
+  readonly name: string;
+  readonly prototype: Generator;
+}
+
+interface Generator<T = unknown, TReturn = any, TNext = unknown>
+  extends Iterator<T, TReturn, TNext> {
+  next(...args: [] | [TNext]): IteratorResult<T, TReturn>;
+  return(value: TReturn): IteratorResult<T, TReturn>;
+  throw(e: any): IteratorResult<T, TReturn>;
+  [Symbol.iterator](): Generator<T, TReturn, TNext>;
+}
+```
 
 ```ts
 function* generatorFn() {}
@@ -5151,6 +5170,8 @@ const g = generatorFn(); // IterableIterator
 console.log(g === g[Symbol.iterator]());
 // true
 ```
+
+### Generator Roles
 
 Generators can play 3 roles:
 
