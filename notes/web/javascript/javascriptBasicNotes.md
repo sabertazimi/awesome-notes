@@ -9216,12 +9216,17 @@ class PushArray extends Array {
   }
 }
 
+// Source
 const pushArray = new PushArray(1, 2, 3);
+
+// Consumer
 pushArray.subscribe({
   next(value) {
     console.log('New value:', value);
   },
 });
+
+// Producer
 pushArray.push(4);
 pushArray.push(5);
 pushArray.unsubscribe();
