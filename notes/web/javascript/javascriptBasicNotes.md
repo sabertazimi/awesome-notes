@@ -9354,3 +9354,14 @@ class Observable {
   }
 }
 ```
+
+```ts
+Observable.of(1, 2, 3, 4)
+  .skip(1)
+  .filter(isEven)
+  .map(square)
+  .reduce(add, 0)
+  .subscribe({
+    next: console.log,
+  });
+```
