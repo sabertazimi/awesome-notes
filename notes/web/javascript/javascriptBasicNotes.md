@@ -2713,6 +2713,28 @@ const employee = newInstance(Employee, 'Jack');
 const employee = new Employee('Jack');
 ```
 
+`new.target`:
+
+```ts
+function Foo() {
+  if (!new.target) {
+    throw new Error('Foo() must be called with new');
+  }
+}
+```
+
+```ts
+function Waffle() {
+  // 当未使用 `new` 关键字时, `this` 指向全局对象
+  if (!(this instanceof Waffle)) {
+    return new Waffle();
+  }
+
+  // 正常构造函数
+  this.tastes = 'yummy';
+}
+```
+
 #### Object Create Constructor
 
 - 原型式继承非常适合不需要单独创建构造函数, 但仍然需要在对象间共享信息的场合.
@@ -2770,62 +2792,6 @@ console.log(obj.name); // 输出: sven .
 // 1. Foo.__proto__ === Bar.prototype
 // 2. Foo.__proto__......__proto__ === Bar.prototype
 console.log(Foo instanceof Bar);
-```
-
-#### Constructor Best Practice
-
-```ts
-function Foo() {
-  if (!new.target) {
-    throw new Error('Foo() must be called with new');
-  }
-}
-```
-
-```ts
-function Waffle() {
-  // 当未使用 `new` 关键字时, `this` 指向全局对象
-  if (!(this instanceof Waffle)) {
-    return new Waffle();
-  }
-
-  // 正常构造函数
-  this.tastes = 'yummy';
-}
-```
-
-```ts
-class A {
-  constructor() {
-    console.log(new.target.name);
-  }
-}
-
-class B extends A {
-  constructor() {
-    super();
-    console.log('New');
-  }
-}
-
-const a = new A(); // logs "A"
-const b = new B(); // logs "B"
-
-class C {
-  constructor() {
-    console.log(new.target);
-  }
-}
-
-class D extends C {
-  constructor() {
-    super();
-    console.log('New');
-  }
-}
-
-const c = new C(); // logs class C{constructor(){console.log(new.target);}}
-const d = new D(); // logs class D extends C{constructor(){super();}}
 ```
 
 ### Object Property Descriptor
@@ -3544,6 +3510,8 @@ Person.locate(); // class, class Person {}
 | `C extends Object` | `Object`             | `Object.prototype`          |
 | `C extends B`      | `B`                  | `B.prototype`               |
 
+##### Super Class
+
 `super`:
 
 - `super` 只能在派生类构造函数和静态方法中使用.
@@ -3555,8 +3523,9 @@ Person.locate(); // class, class Person {}
 - 若显式定义了派生类构造函数, 则必须在其中调用 `super()` , 或返回一个对象.
 - 实例化时检测 `new.target` 是不是抽象基类, 可以阻止对抽象基类的实例化.
 
+##### Abstract Base Class
+
 ```ts
-// Abstract base class
 class Shape {
   constructor() {
     if (new.target === Shape) {
@@ -3595,6 +3564,42 @@ const p = new Person();
 p.identify(); // PersonName PersonName
 console.log(Person.name); // PersonName
 console.log(PersonName); // ReferenceError: PersonName is not defined
+```
+
+#### Class Constructor
+
+```ts
+class A {
+  constructor() {
+    console.log(new.target.name);
+  }
+}
+
+class B extends A {
+  constructor() {
+    super();
+    console.log('New');
+  }
+}
+
+const a = new A(); // logs "A"
+const b = new B(); // logs "B"
+
+class C {
+  constructor() {
+    console.log(new.target);
+  }
+}
+
+class D extends C {
+  constructor() {
+    super();
+    console.log('New');
+  }
+}
+
+const c = new C(); // logs class C{constructor(){console.log(new.target);}}
+const d = new D(); // logs class D extends C{constructor(){super();}}
 ```
 
 #### Class Private Member
