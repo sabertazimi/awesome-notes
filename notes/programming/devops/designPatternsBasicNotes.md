@@ -1221,50 +1221,66 @@ function __decorate(decorators, target) {
 ```
 
 ```ts
-// The constructor to decorate
-function MacBook() {
-  this.cost = function () {
-    return 997;
-  };
-  this.screenSize = function () {
-    return 11.6;
-  };
+class MacBook {
+  constructor() {
+    this.cost = 997;
+    this.screenSize = 11.6;
+  }
+
+  getCost() {
+    return this.cost;
+  }
+
+  getScreenSize() {
+    return this.screenSize;
+  }
 }
 
 // Decorator 1
-function Memory(macBook) {
-  const v = macBook.cost();
-  macBook.cost = function () {
-    return v + 75;
-  };
+class Memory extends MacBook {
+  constructor(macBook) {
+    super();
+    this.macBook = macBook;
+  }
+
+  getCost() {
+    return this.macBook.getCost() + 75;
+  }
 }
 
 // Decorator 2
-function Engraving(macBook) {
-  const v = macBook.cost();
-  macBook.cost = function () {
-    return v + 200;
-  };
+class Engraving extends MacBook {
+  constructor(macBook) {
+    super();
+    this.macBook = macBook;
+  }
+
+  getCost() {
+    return this.macBook.getCost() + 200;
+  }
 }
 
 // Decorator 3
-function Insurance(macBook) {
-  const v = macBook.cost();
-  macBook.cost = function () {
-    return v + 250;
-  };
+class Insurance extends MacBook {
+  constructor(macBook) {
+    super();
+    this.macBook = macBook;
+  }
+
+  getCost() {
+    return this.macBook.getCost() + 250;
+  }
 }
 
-const mb = new MacBook();
-Memory(mb);
-Engraving(mb);
-Insurance(mb);
+let mb = new MacBook();
+mb = new Memory(mb);
+mb = new Engraving(mb);
+mb = new Insurance(mb);
 
+console.log(mb.getCost());
 // Outputs: 1522
-console.log(mb.cost());
-
+console.log(mb.getScreenSize());
 // Outputs: 11.6
-console.log(mb.screenSize());
 ```
 
 ### Facade Pattern
