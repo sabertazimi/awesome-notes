@@ -3347,3 +3347,4 @@ more than two out of the following three guarantees:
 
 - [JavaScript Design Patterns](http://www.dofactory.com/javascript/design-patterns)
 - [Refactoring Design Patterns](https://refactoring.guru/design-patterns)
+- [JavaScript Patterns](https://www.patterns.dev)
