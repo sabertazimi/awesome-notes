@@ -3066,12 +3066,12 @@ that start at the **same internal configuration**.
 State is the ability to remember information (a sequence of values in time).
 Distinguish three axes of expressiveness, depending on whether the state is:
 
-- unnamed or named
-- deterministic or nondeterministic
-- sequential or concurrent
-- named, nondeterministic and concurrent paradigm
-  as the most expressiveness of state
-- named state for updatable memory (mutable state) and modularity
+- Unnamed or named.
+- Deterministic or nondeterministic.
+- Sequential or concurrent.
+- Named, nondeterministic and concurrent paradigm
+  as the most expressiveness of state.
+- Named state for updatable memory (mutable state) and modularity.
 
 The least expressive combination is functional programming
 (threaded state: unnamed, deterministic, sequential).
@@ -3087,7 +3087,45 @@ Adding ports or cells, gives message passing or shared state
 Based on the concept of first-class function or closure,
 which makes it equivalent to the λ-calculus which is `Turing complete`.
 
-## MVC Pattern
+## Framework Paradigms
+
+- full-featured frameworks vs composing micro-libs
+- JSX vs templates
+
+Evan You on Vue.js: **Seeking the Balance in Framework Design**
+on [JSConf.Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s):
+
+- Functional vs Imperative.
+- Immutable vs Mutable.
+- Referential Equality Testing vs Change Tracking.
+
+> 打破框架的范式之争, 其实是改变思路. 从思考不同范式之间的竞争关系, 转变成思考多个范式之间的协同关系.
+> UseRef in React, Composition in Vue
+
+### Third-party Libraries Usage
+
+- Look for Libraries that Have Accessibility Built in.
+- Limit the Number of Third-party Libraries Use.
+- Wrap Third-party Dependencies:
+
+```tsx
+import { DatePicker as LibraryXDatePicker } from 'LibraryX';
+
+const DatePicker = props => {
+  return <LibraryXDatePicker {...props} />;
+};
+
+export default DatePicker;
+```
+
+### Framework Paradigms Comparison
+
+- 初始渲染: Virtual DOM > 脏检查 >= 依赖收集.
+- 小量数据更新: 依赖收集 >> Virtual DOM + 优化 > 脏检查（无法优化） > Virtual DOM 无优化.
+- 大量数据更新: 脏检查 + 优化 >= 依赖收集 + 优化 > Virtual DOM（无法/无需优化）>> MVVM 无优化.
+- Angular: 脏检查, React: Virtual DOM, Vue: Watch.
+
+### MVC Pattern
 
 在 MVC 中, 视图位于我们架构的顶部, 其背后是控制器.
 模型在控制器后面, 而因此我们的视图了解得到我们的控制器, 而控制器了解得到模型.
@@ -3106,7 +3144,21 @@ MVVM 进一步允许我们创建一个模型的特定视图子集, 包含了状�
 视图可以绑定到视图模型的属性上面, 视图模型则去将包含在模型中的数据暴露给视图.
 像我们所提到过的, 对视图的抽象意味着其背后的代码需要较少的逻辑.
 
-## AOP Pattern
+#### Controller
+
+- 处理请求的参数.
+- 渲染和重定向.
+- 选择 Model 和 Service.
+- 处理 Session 和 Cookies.
+
+### MVVM Pattern
+
+- `View` and `ViewModel` communicate using data-bindings and events.
+- `ViewModel` can expose `Model` attributes for data-binding.
+- `ViewModel` can contain interfaces
+  for fetching and manipulating properties exposed in `View`.
+
+### AOP Pattern
 
 AOP (Aspect Oriented Programming)
 把通用逻辑抽离出来,
@@ -3129,9 +3181,9 @@ Middleware 在最外层, 到达某个路由之后,
 
 Nest.js 通过 AOP 的架构方式, 实现了松耦合, 易于维护与扩展的架构.
 
-## jQuery Pattern
+### jQuery Pattern
 
-### Plugin Pattern
+#### Plugin Pattern
 
 ```ts
 (function ($) {
@@ -3203,6 +3255,11 @@ Nest.js 通过 AOP 的架构方式, 实现了松耦合, 易于维护与扩展的
   };
 })(jQuery, window, document);
 ```
+
+### Framework Paradigms Reference
+
+- Even You presentation on [JSConf Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s).
+- Framework paradigms [guide](https://mp.weixin.qq.com/s/mZ7KuFjyCWNCAq7HnXg96A).
 
 ## Domain Driven Design
 

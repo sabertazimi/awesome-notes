@@ -10911,19 +10911,19 @@ ln -s index.html 404.html
 
 ### Custom CRA
 
-- custom `packages/cra-template-*`: change HTML/CSS/JS boilerplate.
-- custom `packages/react-scripts/config/`:
+- Custom `packages/cra-template-*`: change HTML/CSS/JS boilerplate.
+- Custom `packages/react-scripts/config/`:
   change paths, deps/devDeps, plugins, loader rules etc.
-- custom `packages/react-scripts/scripts/`: change react-scripts CLI behaviors.
+- Custom `packages/react-scripts/scripts/`: change react-scripts CLI behaviors.
 
-#### Other Packages in CRA Repo
+#### CRA MonoRepo
 
-- `babel-preset-react-app`: babel preset configuration
-- `cra-template`/`cra-template-typescript`: CRA default templates
-- `eslint-config-react-app`: eslint configuration
-- `react-app-polyfill`: polyfills for various browsers
-- `react-dev-utils`: most utility functions
-  for paths, helpers, middleware, and webpack plugins.
+- `babel-preset-react-app`: babel preset configuration.
+- `cra-template`/`cra-template-typescript`: CRA default templates.
+- `eslint-config-react-app`: eslint configuration.
+- `react-app-polyfill`: polyfills for various browsers.
+- `react-dev-utils`:
+  most utility functions for paths, helpers, middleware, and webpack plugins.
 
 #### Custom React Scripts
 
@@ -11044,9 +11044,7 @@ export default Intl;
 
 ## Styled Component
 
-### Styled Basic Usage
-
-#### Shared CSS Styles
+### Shared CSS Styles
 
 ```tsx
 // Import React.js, styled-components and css
@@ -11114,7 +11112,7 @@ const WrapperContainer = () => (
 ReactDOM.render(<WrapperContainer />, container);
 ```
 
-#### Extend Styled Component
+### Styled Component Extension
 
 ```tsx
 // Import React.js and styled-components
@@ -11155,7 +11153,7 @@ const WrapperContainer = () => (
 ReactDOM.render(<WrapperContainer />, container);
 ```
 
-#### Props for Styled Component
+### Styled Component Props
 
 ```tsx
 // Import React.js, styled-components and css
@@ -11207,53 +11205,7 @@ const WrapperContainer = () => (
 ReactDOM.render(<WrapperContainer />, container);
 ```
 
-## Framework Paradigm
-
-- full-featured frameworks vs composing micro-libs
-- JSX vs templates
-
-> Evan You on Vue.js: Seeking the Balance in Framework Design | JSConf.Asia 2019
-
-- functional vs imperative
-- immutable vs mutable
-- referential equality testing vs change tracking
-
-> 打破框架的范式之争, 其实是改变思路. 从思考不同范式之间的竞争关系, 转变成思考多个范式之间的协同关系.
-> useRef in React, Composition in Vue
-
-### Third-party Libraries Usage
-
-- Look for Libraries that Have Accessibility Built in.
-- Limit the Number of Third-party Libraries Use.
-- Wrap Third-party Dependencies:
-
-```tsx
-import { DatePicker as LibraryXDatePicker } from 'LibraryX';
-
-const DatePicker = props => {
-  return <LibraryXDatePicker {...props} />;
-};
-
-export default DatePicker;
-```
-
-### MVC and MVVM
-
-#### Controller
-
-- 处理请求的参数.
-- 渲染和重定向.
-- 选择 Model 和 Service.
-- 处理 Session 和 Cookies.
-
-### Framework Paradigm Comparison
-
-- 初始渲染: Virtual DOM > 脏检查 >= 依赖收集.
-- 小量数据更新: 依赖收集 >> Virtual DOM + 优化 > 脏检查（无法优化） > Virtual DOM 无优化.
-- 大量数据更新: 脏检查 + 优化 >= 依赖收集 + 优化 > Virtual DOM（无法/无需优化）>> MVVM 无优化.
-- Angular: 脏检查, React: Virtual DOM, Vue: Watch.
-
-### Micro Frontend
+## Micro Frontends
 
 通过 `single-spa` 包装的主应用是一个基座,
 它提供相应的协议,
@@ -11280,12 +11232,12 @@ export default DatePicker;
 在 `single-spa` 的开发过程中,
 需要自己手动去写调用子应用的方法.
 
-#### Application EntryPoint
+### Application EntryPoint
 
 - HTML Entry (`import-html-entry` from `qiankun`).
 - JavaScript Entry.
 
-#### Styles Isolation
+### Styles Isolation
 
 - Shadow DOM container.
 - CSS module.
@@ -11293,7 +11245,7 @@ export default DatePicker;
 - CSS selector renaming.
 - CSS in JS.
 
-#### Scripts Isolation
+### Scripts Isolation
 
 - Snapshot sandbox: 类似中断恢复机制, 备份快照 -> 子应用挂载/运行/卸载 -> 恢复快照.
 - Proxy sandbox: `window` proxy (`fakeWindow` for every sub-app).
@@ -11333,16 +11285,11 @@ class SnapshotSandbox {
 }
 ```
 
-#### Application Communication
+### Application Communication
 
 - Pub-Sub Pattern.
 - Callback registration.
 - Global store.
-
-### Framework Paradigm Reference
-
-- Even You presentation on [JSConf Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s).
-- Framework paradigm [guide](https://mp.weixin.qq.com/s/mZ7KuFjyCWNCAq7HnXg96A).
 
 ## Interviews
 
