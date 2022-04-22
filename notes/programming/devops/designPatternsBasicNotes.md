@@ -1354,7 +1354,7 @@ sabertazimi.addMyEvent = function (el, ev, fn) {
 
 ### Flyweight Pattern
 
-减小内存开销 (Performance 性能优化):
+减小内存开销 (**Performance Optimization**):
 
 - **内部**信息: 对象中的内部方法所需信息/属性, 一个单独的享元可替代大量具有相同内在信息的对象.
 - **外部**状态: 作为方法参数, 使之适应不同的外部状态 (Context), 实例对象差异.
@@ -1372,78 +1372,83 @@ sabertazimi.addMyEvent = function (el, ev, fn) {
 
 :::
 
+#### Flyweight Factory Pattern
+
 ```ts
-function Flyweight(make, model, processor) {
-  this.make = make;
-  this.model = model;
-  this.processor = processor;
+class Flyweight {
+  constructor(make, model, processor) {
+    this.make = make;
+    this.model = model;
+    this.processor = processor;
+  }
 }
 
-const FlyWeightFactory = (function () {
-  const flyweights = {};
+class FlyweightFactory {
+  static flyweights = {};
+  static count = 0;
 
-  return {
-    get(make, model, processor) {
-      // 不存在所需享元, 新建新享元.
-      if (!flyweights[make + model]) {
-        flyweights[make + model] = new Flyweight(make, model, processor);
-      }
+  static get(make, model, processor) {
+    // 不存在所需享元, 新建新享元.
+    if (!FlyweightFactory.flyweights[make + model]) {
+      FlyweightFactory.flyweights[make + model] = new Flyweight(
+        make,
+        model,
+        processor
+      );
+      FlyweightFactory.count++;
+    }
 
-      return flyweights[make + model];
-    },
+    return FlyweightFactory.flyweights[make + model];
+  }
 
-    getCount() {
-      let count = 0;
-      for (const f in flyweights) count++;
-      return count;
-    },
-  };
-})();
-
-const Computer = function (make, model, processor, memory, tag) {
-  this.flyweight = FlyWeightFactory.get(make, model, processor);
-  this.memory = memory;
-  this.tag = tag;
-  this.getMake = function () {
-    return this.flyweight.make;
-  };
-  // ...
-};
-
-function ComputerCollection() {
-  const computers = {};
-  let count = 0;
-
-  return {
-    add(make, model, processor, memory, tag) {
-      computers[tag] = new Computer(make, model, processor, memory, tag);
-      count++;
-    },
-
-    get(tag) {
-      return computers[tag];
-    },
-
-    getCount() {
-      return count;
-    },
-  };
+  static getCount() {
+    return FlyweightFactory.count;
+  }
 }
 
-(function () {
-  const computers = new ComputerCollection();
+class Computer {
+  constructor(make, model, processor, memory, tag) {
+    this.flyweight = FlyweightFactory.get(make, model, processor);
+    this.memory = memory;
+    this.tag = tag;
+    this.getMake = function () {
+      return this.flyweight.make;
+    };
+  }
+}
 
-  computers.add('Dell', 'Studio XPS', 'Intel', '5G', 'Y755P');
-  computers.add('Dell', 'Studio XPS', 'Intel', '6G', 'X997T');
-  computers.add('Dell', 'Studio XPS', 'Intel', '2G', 'NT777');
-  computers.add('Dell', 'Studio XPS', 'Intel', '2G', '0J88A');
-  computers.add('HP', 'Envy', 'Intel', '4G', 'CNU883701');
-  computers.add('HP', 'Envy', 'Intel', '2G', 'TXU003283');
+class ComputerCollection {
+  computers = {};
+  count = 0;
 
-  console.log(`Computers: ${computers.getCount()}`); // 6.
-  console.log(`Flyweights: ${FlyWeightFactory.getCount()}`); // 2.
-})();
+  add(make, model, processor, memory, tag) {
+    this.computers[tag] = new Computer(make, model, processor, memory, tag);
+    this.count++;
+  }
+
+  get(tag) {
+    return this.computers[tag];
+  }
+
+  getCount() {
+    return this.count;
+  }
+}
+
+const computers = new ComputerCollection();
+
+computers.add('Dell', 'Studio XPS', 'Intel', '5G', 'Y755P');
+computers.add('Dell', 'Studio XPS', 'Intel', '6G', 'X997T');
+computers.add('Dell', 'Studio XPS', 'Intel', '2G', 'NT777');
+computers.add('Dell', 'Studio XPS', 'Intel', '2G', '0J88A');
+computers.add('HP', 'Envy', 'Intel', '4G', 'CNU883701');
+computers.add('HP', 'Envy', 'Intel', '2G', 'TXU003283');
+
+console.log(`Computers: ${computers.getCount()}`); // 6.
+console.log(`Flyweights: ${FlyweightFactory.getCount()}`); // 2.
 ```
+
+#### Flyweight Pool Pattern
 
 DOM pool:
 
