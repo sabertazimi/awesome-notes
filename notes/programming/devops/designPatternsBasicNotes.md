@@ -1802,17 +1802,16 @@ app.listen(2323, () => {
 
 需要向某些对象发送请求:
 
-- 不清楚请求的接收者 (多个对象中的某个随机对象).
-- 不清楚请求具体操作.
+- 解耦命令: 不清楚请求具体操作.
+- 解耦接收者: 不清楚请求的接收者 (多个对象中的某个随机对象).
 
 此时希望用一种松耦合的方式来设计程序, 使得请求发送者和请求接收者能够消除彼此的耦合关系:
 
-- 将方法/动作封装成对象, 使得外部通过唯一方法 execute/run 调用内部方法/动作.
-- 客户创建命令；调用者执行该命令；接收者在命令执行时执行相应操作.
-- 客户通常被包装为一个对象.
-- 调用者接过命令并将其保存下来, 它会在某个时候调用该命令对象的 execute 方法.
-- 调用者进行 `Command.execute()` 调用时,
-  它所调用的方法将转而以 `Receiver.action()` 这种形式调用恰当的方法.
+- 将方法/动作封装成对象, 使得外部通过唯一方法 `execute()`/`run()` 调用内部方法/动作.
+- 解耦三者: 客户创建命令, 调用者执行该命令, 接收者在命令执行时执行相应操作.
+  - 客户通常被包装为一个命令对象.
+  - 调用者接过命令并将其保存下来, 它会在某个时候调用该命令对象的 `Command.execute()` 方法.
+  - 调用者调用 `Command.execute()` 后, 最终将调用接收者方法 `Receiver.action()`.
 
 :::tip Command Use Case
 
@@ -1825,24 +1824,14 @@ app.listen(2323, () => {
 
 :::
 
-在 JS 中, `Closure` + `Callback` 可以实现隐式的命令模式:
+在 JS 中, `Closure` + `Callback` (`Higher Order Function`) 可以实现隐式的命令模式:
 
 - `Closure` 捕获 `Receiver` (面向对象语言中, `Command` 对象需要持有 `Receiver` 对象).
 - `Callback` 函数实现具体逻辑 (面向对象语言中, 需要将其封装进 `Command.execute()` 对象方法).
 
 ```ts
-class OOP_SimpleCommand extends Command {
-  constructor(receiver) {
-    super(receiver);
-    this.receiver = receiver;
-  }
-
-  execute() {
-    this.receiver.action();
-  }
-}
-
-const FP_SimpleCommand = receiver => () => receiver.action();
+// Higher order function
+const Command = receiver => () => receiver.action();
 ```
 
 Bind `Command` to UI components:
@@ -1853,32 +1842,49 @@ Bind `Command` to UI components:
   e.g click `button` -> refresh `menu`.
 
 ```ts
-// Receiver
-const MenuBar = {
-  action() {
-    this.refresh();
-  },
-  refresh() {
-    console.log('refresh menu pages');
-  },
-};
+// Executor
+class Button {
+  commands = new Set();
+
+  add(command) {
+    this.commands.set(command);
+  }
+
+  click() {
+    for (const command of this.commands) {
+      command.execute();
+    }
+  }
+}
 
 // Client: command object, `action` implemented
-const Command = receiver => {
-  return function () {
-    receiver.action();
-  };
-};
-const RefreshMenuBarCommand = Command(MenuBar);
+class Command {
+  constructor(receiver) {
+    this.receiver = receiver;
+  }
 
-// Executor
-button.setCommand = command => {
-  button.command = command;
-};
-button.setCommand(RefreshMenuBarCommand);
-button.addEventLister('click', event => {
-  button.command();
-});
+  execute() {
+    this.receiver.action();
+  }
+}
+
+// Receiver
+class MenuBar {
+  action() {
+    this.refresh();
+  }
+
+  refresh() {
+    console.log('refresh menu pages');
+  }
+}
+
+const button = new Button();
+const menuBar = new MenuBar();
+const refreshMenuBarCommand = new Command(menuBar);
+
+button.add(refreshMenuBarCommand);
+button.click();
 ```
 
 ```ts
