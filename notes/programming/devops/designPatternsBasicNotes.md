@@ -477,8 +477,10 @@ class MockHttpService implements Connection {
 
 ### Factory Method Pattern
 
-Creating objects without specify exact object class
-(not calling a constructor directly).
+Creating objects without specify exact object class:
+not calling a constructor directly.
+
+#### Static Factory Method Pattern
 
 ```ts
 CoordinateSystem = {
@@ -511,107 +513,139 @@ const point = PointFactory.newPolarPoint(5, Math.PI / 2);
 const point2 = PointFactory.newCartesianPoint(5, 6);
 ```
 
-Private constructor factory method:
+#### Dynamic Factory Method Pattern
 
 ```ts
-const VehicleFactory = (function () {
-  function VehicleFactory() {
-    const publicVehicle = {};
-
-    // specific factory
-    function Car(options) {
-      this.type = 'car';
-      this.doors = options.doors || 4;
-      this.state = options.state || 'brand new';
-      this.color = options.color || 'silver';
-      this.speed = options.speed || 10;
-    }
-
-    function Truck(options) {
-      this.type = 'truck';
-      this.state = options.state || 'used';
-      this.wheelSize = options.wheelSize || 'large';
-      this.color = options.color || 'blue';
-      this.speed = options.speed || 8;
-    }
-
-    // public features of vehicle , added to __proto__
-    function _run(...args) {
-      if (args.length === 0) {
-        console.log(`${this.type} - run with: ${this.speed}km/s`);
-      } else if (toString.apply(args[0]) === '[object Number]') {
-        this.speed = args[0];
-      }
-    }
-
-    function _withColor(...args) {
-      if (args.length === 0) {
-        console.log(
-          `The color of this ${this.type} product is : ${this.color}`
-        );
-      } else if (toString.apply(args[0]) === '[object String]') {
-        this.color = args[0];
-      }
-    }
-
-    // provide a function to change other public features
-    function _reform(funcName, newFunc) {
-      if (
-        typeof this[funcName] === 'function' ||
-        typeof this.prototype[funcName] === 'function'
-      ) {
-        delete this[funcName];
-        this.prototype[funcName] = newFunc;
-      }
-    }
-
-    // provide a function to add new public features
-    function _addFeature(funcName, newFunc) {
-      if (typeof this[funcName] === 'undefined') {
-        this[funcName] = newFunc;
-        this.prototype[funcName] = newFunc;
-      }
-    }
-
-    // private features, added to obj
-
-    // core: create method
-    this.create = function (options) {
-      let vehicleClass = '';
-      let newVehicle = {};
-
-      if (options.type === 'car') {
-        vehicleClass = Car;
-      } else {
-        vehicleClass = Truck;
-      }
-
-      // create new vehicle with options, by pre-defined specific constructor
-      newVehicle = new VehicleClass(options);
-      // set up prototype
-      newVehicle[[proto]] = publicVehicle;
-      newVehicle.prototype = publicVehicle;
-
-      // add public feature
-      newVehicle.prototype.run = _run;
-      newVehicle.prototype.withColor = _withColor;
-      newVehicle.prototype.reform = _reform;
-      newVehicle.prototype.addFeature = _addFeature;
-
-      // add private(separately) feature
-
-      // return new obj
-      return newVehicle;
-    };
+class Vehicle {
+  constructor({
+    type = 'vehicle',
+    state = 'brand new',
+    color = 'white',
+    speed = 0,
+  } = {}) {
+    this.type = type;
+    this.state = state;
+    this.color = color;
+    this.speed = speed;
   }
 
-  // define more factory
+  run(...args) {
+    if (args.length === 0) {
+      console.log(`${this.type} - run with: ${this.speed}km/s`);
+    } else if (toString.apply(args[0]) === '[object Number]') {
+      this.speed = args[0];
+    }
+  }
 
-  return VehicleFactory;
-})();
+  withColor(...args) {
+    if (args.length === 0) {
+      console.log(`The color of this ${this.type} product is : ${this.color}`);
+    } else if (toString.apply(args[0]) === '[object String]') {
+      this.color = args[0];
+    }
+  }
+
+  reform(funcName, newFunc) {
+    if (
+      typeof this[funcName] === 'function' ||
+      typeof this.prototype[funcName] === 'function'
+    ) {
+      delete this[funcName];
+      this.prototype[funcName] = newFunc;
+    }
+  }
+
+  addFeature(funcName, newFunc) {
+    if (typeof this[funcName] === 'undefined') {
+      this[funcName] = newFunc;
+      this.prototype[funcName] = newFunc;
+    }
+  }
+}
+
+class Car extends Vehicle {
+  constructor({
+    type = 'car',
+    state = 'brand new',
+    color = 'silver',
+    speed = 10,
+    doors = 4,
+  } = {}) {
+    super({ type, state, color, speed });
+    this.doors = doors;
+  }
+}
+
+class Truck extends Vehicle {
+  constructor({
+    type = 'truck',
+    state = 'used',
+    color = 'blue',
+    speed = 8,
+    wheelSize = 'large',
+  } = {}) {
+    super({ type, state, color, speed });
+    this.wheelSize = 'large';
+  }
+}
+
+class VehicleFactory {
+  constructor() {
+    this.VehicleClass = Car;
+  }
+
+  createVehicle(options) {
+    switch (options.vehicleType) {
+      case 'car':
+        this.VehicleClass = Car;
+        break;
+      case 'truck':
+        this.VehicleClass = Truck;
+        break;
+      default:
+        break;
+    }
+
+    return new this.VehicleClass(options);
+  }
+}
+
+class CarFactory extends VehicleFactory {
+  constructor() {
+    super();
+    this.VehicleClass = Car;
+  }
+}
+
+class TruckFactory extends VehicleFactory {
+  constructor() {
+    super();
+    this.VehicleClass = Truck;
+  }
+}
+
+const vehicleFactory = new VehicleFactory();
+const car = vehicleFactory.createVehicle({
+  vehicleType: 'car',
+  color: 'yellow',
+  doors: 6,
+});
+const movingTruck = vehicleFactory.createVehicle({
+  vehicleType: 'truck',
+  state: 'like new',
+  color: 'red',
+  wheelSize: 'small',
+});
+
+const truckFactory = new TruckFactory();
+const bigTruck = truckFactory.createVehicle({
+  state: 'bad.',
+  color: 'pink',
+  wheelSize: 'so big',
+});
 ```
 
-Asynchronous factory method:
+#### Asynchronous Factory Method Pattern
 
 ```ts
 class DataContainer {
@@ -833,8 +867,10 @@ const person = personBuilder.lives
 
 ### Prototype Pattern
 
-可以使用原型模式来减少创建新对象的成本.
-关键方法 `Object.create()`/`clone()`.
+可以使用原型模式来减少创建新对象的成本:
+
+- `Object.create()`.
+- Object shallow clone.
 
 ```ts
 class Car {
@@ -889,33 +925,6 @@ class Singleton {
 ```
 
 #### Closure Singleton Pattern
-
-```ts
-function Universe() {
-  // 缓存实例
-  let instance;
-
-  // anti-Self-Defined Function Pattern
-  // 反-自定义函数模式: 先重写,再初始化
-  // eslint-disable-next-line no-func-assign
-  Universe = function Universe() {
-    return instance;
-  };
-
-  // 保存原型,使其一直保持于同一位置
-  // (this指针指向不重要)
-  Universe.prototype = this;
-
-  instance = new Universe();
-  // 重定向constructor指针
-  instance.constructor = Universe;
-  // 功能代码
-  instance.start_time = 0;
-  instance.bang = 'Big';
-
-  return instance;
-}
-```
 
 ```ts
 const createLoginLayer = (function (creator) {
@@ -1786,13 +1795,13 @@ app.listen(2323, () => {
 - 客户创建命令；调用者执行该命令；接收者在命令执行时执行相应操作.
 - 客户通常被包装为一个对象.
 - 调用者接过命令并将其保存下来, 它会在某个时候调用该命令对象的 execute 方法.
-- 调用者进行 `commandObject.execute` 调用时,
-  它所调用的方法将转而以 `receiver.action()` 这种形式调用恰当的方法.
+- 调用者进行 `Command.execute()` 调用时,
+  它所调用的方法将转而以 `Receiver.action()` 这种形式调用恰当的方法.
 
 :::tip Command Use Case
 
-- Decouple executor and receiver.
-- Bind command to UI components.
+- Decouple `Executor` and `Receiver`.
+- Bind `Command` to UI components.
 - Command sequences (store commands + `Composite` pattern):
   `Macro`/`Batch`/`Undo`/`Redo` feature.
 - Command queue (cache commands + `Observer` pattern):
@@ -1800,10 +1809,10 @@ app.listen(2323, () => {
 
 :::
 
-在 JS 中, Closure + Callback 可以实现隐式的命令模式:
+在 JS 中, `Closure` + `Callback` 可以实现隐式的命令模式:
 
-- Closure 捕获 Receiver (面向对象语言中, Command 对象需要持有 Receiver 对象).
-- Callback 函数实现具体逻辑 (面向对象语言中, 需要将其封装进 `Command.execute` 对象方法).
+- `Closure` 捕获 `Receiver` (面向对象语言中, `Command` 对象需要持有 `Receiver` 对象).
+- `Callback` 函数实现具体逻辑 (面向对象语言中, 需要将其封装进 `Command.execute()` 对象方法).
 
 ```ts
 class OOP_SimpleCommand extends Command {
@@ -1820,15 +1829,15 @@ class OOP_SimpleCommand extends Command {
 const FP_SimpleCommand = receiver => () => receiver.action();
 ```
 
-Command pattern in UI development, bind command to UI components:
+Bind `Command` to UI components:
 
-- Executor: UI components.
-- Client and receiver: background tasks or other UI components.
-- Executor -> Client `command.execute()` -> Receiver `receiver.action()`:
+- `Executor`: UI components.
+- `Client` and `Receiver`: background tasks or other UI components.
+- `Executor` -> `Client` `Command.execute()` -> `Receiver.action()`:
   e.g click `button` -> refresh `menu`.
 
 ```ts
-// receiver
+// Receiver
 const MenuBar = {
   action() {
     this.refresh();
@@ -1838,8 +1847,7 @@ const MenuBar = {
   },
 };
 
-// client: command object
-// command: object with `action` implemented
+// Client: command object, `action` implemented
 const Command = receiver => {
   return function () {
     receiver.action();
@@ -1847,70 +1855,73 @@ const Command = receiver => {
 };
 const RefreshMenuBarCommand = Command(MenuBar);
 
-// executor
+// Executor
 button.setCommand = command => {
   button.command = command;
 };
 button.setCommand(RefreshMenuBarCommand);
-
 button.addEventLister('click', event => {
   button.command();
 });
 ```
 
 ```ts
-const MenuCommand = function (action) {
-  this.action = action;
-};
-MenuCommand.prototype.execute = function () {
-  this.action();
-};
+class MenuCommand {
+  constructor(action) {
+    this.action = action;
+  }
 
+  execute() {
+    this.action();
+  }
+}
+
+// --------------
+const appMenuBar = new MenuBar();
+
+// --------------
 const fileActions = new FileActions();
 const EditActions = new EditActions();
 const InsertActions = new InsertActions();
 const HelpActions = new HelpActions();
 
-const appMenuBar = new MenuBar();
-// -----------
-const fileMenu = new Menu('File');
+// --------------
 const openCommand = new MenuCommand(fileActions.open);
 const closeCommand = new MenuCommand(fileActions.close);
 const saveCommand = new MenuCommand(fileActions.save);
 const saveAsCommand = new MenuCommand(fileActions.saveAs);
-
+const fileMenu = new Menu('File');
 fileMenu.add(new MenuItem('open', openCommand));
 fileMenu.add(new MenuItem('Close', closeCommand));
 fileMenu.add(new MenuItem('Save', saveCommand));
 fileMenu.add(new MenuItem('Close', saveAsCommand));
-
 appMenuBar.add(fileMenu);
+
 // --------------
-const editMenu = new Menu('Edit');
 const cutCommand = new MenuCommand(EditActions.cut);
 const copyCommand = new MenuCommand(EditActions.copy);
 const pasteCommand = new MenuCommand(EditActions.paste);
 const deleteCommand = new MenuCommand(EditActions.delete);
-
+const editMenu = new Menu('Edit');
 editMenu.add(new MenuItem('Cut', cutCommand));
 editMenu.add(new MenuItem('Copy', copyCommand));
 editMenu.add(new MenuItem('Paste', pasteCommand));
 editMenu.add(new MenuItem('Delete', deleteCommand));
-
 appMenuBar.add(editMenu);
 
-// ------------
-const insertMenu = new Menu('Insert');
+// --------------
 const textBlockCommand = new MenuCommand(InsertActions.textBlock);
+const insertMenu = new Menu('Insert');
 insertMenu.add(new MenuItem('Text  Block', textBlockCommand));
 appMenuBar.add(insertMenu);
 
-// ------------
-const helpMenu = new Menu('Help');
+// --------------
 const showHelpCommand = new MenuCommand(HelpActions.showHelp());
+const helpMenu = new Menu('Help');
 helpMenu.add(new MenuItem('Show Help', showHelpCommand));
 appMenuBar.add(helpMenu);
 
+// --------------
 document.getElementsByTagName('body')[0].appendChild(appMenuBar.getElement());
 appMenuBar.show();
 ```
@@ -1918,33 +1929,35 @@ appMenuBar.show();
 Command sequences to implement `Macro`/`Batch`/`Undo`/`Redo` feature:
 
 ```ts
-const Cursor = function (width, height, parent) {
-  this.width = width;
-  this.height = height;
-  this.commandStack = [];
+class Cursor {
+  constructor(width, height, parent) {
+    this.commandStack = [];
+    this.width = width;
+    this.height = height;
 
-  this.canvas = document.createElement('canvas');
-  this.canvas.width = this.width;
-  this.canvas.height = this.height;
-  parent.appendChild(this.canvas);
+    this.canvas = document.createElement('canvas');
+    this.canvas.width = this.width;
+    this.canvas.height = this.height;
+    parent.appendChild(this.canvas);
 
-  this.ctx = this.canvas.getContext('2d');
-  this.ctx.fillStyle = '#CCC000';
-  this.move(0, 0);
-};
+    this.ctx = this.canvas.getContext('2d');
+    this.ctx.fillStyle = '#CCC000';
+    this.move(0, 0);
+  }
 
-Cursor.prototype = {
   move(x, y) {
     this.commandStack.push(() => {
       // `this` point to `Cursor`.
       this.lineTo(x, y);
     });
-  },
+  }
+
   lineTo(x, y) {
     this.position.x += x;
     this.position.y += y;
     this.ctx.lineTo(this.position.x, this.position.y);
-  },
+  }
+
   executeCommands() {
     this.position = { x: this.width / 2, y: this.height / 2 };
     this.ctx.clearRect(0, 0, this.width, this.height);
@@ -1954,12 +1967,13 @@ Cursor.prototype = {
       this.commandStack[i]();
     }
     this.ctx.stroke();
-  },
+  }
+
   undo() {
     this.commandStack.pop();
     this.executeCommands();
-  },
-};
+  }
+}
 ```
 
 ### Iterator Pattern
@@ -2077,7 +2091,7 @@ const result = upload([flashUploader, formUploader]);
 - 所有观察者共享一个共有的被观察者 (所有订阅者订阅同一个节点).
 - 解除对象间的强耦合关系 (最少知识原则), 独立地改变对象间的交互方式.
 - 网状的多对多关系 => 相对简单的一对多关系.
-- 存在单点故障 (Single Point of Failure) 可能, 需要容灾备份.
+- 存在单点故障 (`Single Point of Failure`) 可能, 需要容灾备份.
 
 :::tip Mediator Use Case
 
@@ -2150,11 +2164,11 @@ doe.say('Hello everyone!');
 
 ### Observer Pattern
 
-- 被观察者 (Subject) 维护一组观察者列表,
+- 被观察者 (`Subject`) 维护一组观察者列表,
   每当被观察者状态改变时,
-  调用 Notify 函数,
-  此函数遍历调用观察者 (Observer) 的 Update 函数 (可自定义).
-- Decouple subject and observer:
+  调用 `notify` 函数,
+  此函数遍历调用观察者 (`Observer`) 的 `update` 函数 (自定义逻辑).
+- Decouple `Subject` and `Observer`:
   each depends on `Abstraction` not `Implementation`.
 - 摆脱持续轮询模式, 在合适时机发布消息.
 
