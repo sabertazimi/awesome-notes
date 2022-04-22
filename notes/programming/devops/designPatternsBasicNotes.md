@@ -2945,50 +2945,21 @@ class Injector {
 
 将多个对象的属性混入同一个对象,达到继承/扩展/组合的效果.
 
-- 不改变原型链:
-
-```ts
-function mix(...args) {
-  let arg;
-  let prop;
-  const child = {};
-
-  for (arg = 0; arg < args.length; arg += 1) {
-    for (prop in args[arg]) {
-      if (Object.prototype.hasOwnProperty.call(args[arg], prop)) {
-        child[prop] = args[arg][prop];
-      }
-    }
-  }
-
-  return child;
-}
-```
-
-```ts
-const cake = mix(
-  { eggs: 2, large: true },
-  { butter: 1, salted: true },
-  { flour: '3 cups' },
-  { sugar: 'sure!' }
-);
-```
-
-- 改变原型链:
+#### Prototype Mixin Pattern
 
 ```ts
 // Extend an existing object with a method from another
-function mix(...args) {
+function mixin(...args) {
   const receivingClass = args[0];
   const givingClass = args[1];
 
-  // mix-in provide certain methods
+  // Mixin provide certain methods
   if (args[2]) {
     for (let i = 2, len = args.length; i < len; i++) {
       receivingClass.prototype[args[i]] = givingClass.prototype[args[i]];
     }
   } else {
-    // mix-in provide obj
+    // Mixin provide obj
     for (const methodName in givingClass.prototype) {
       if (!receivingClass.prototype[methodName]) {
         receivingClass.prototype[methodName] =
@@ -2997,6 +2968,48 @@ function mix(...args) {
     }
   }
 }
+```
+
+#### Class Mixin Pattern
+
+```ts
+const MoveMixin = superclass =>
+  class extends superclass {
+    moveUp() {
+      console.log('move up');
+    }
+
+    moveDown() {
+      console.log('move down');
+    }
+
+    stop() {
+      console.log('stop! in the name of love!');
+    }
+  };
+
+class CarAnimator {
+  moveLeft() {
+    console.log('move left');
+  }
+}
+
+class PersonAnimator {
+  moveRandomly() {
+    console.log('move randomly');
+  }
+}
+
+class Animator extends MoveMixin(CarAnimator) {}
+
+const animator = new Animator();
+animator.moveLeft();
+animator.moveDown();
+animator.stop();
+// Outputs:
+// move left
+// move down
+// stop! in the name of love!
 ```
 
 ## Programming Paradigms
