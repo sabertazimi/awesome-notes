@@ -536,6 +536,9 @@ even if the lockfile is still holding things together.
 
 ### CLI Environment
 
+配置文件以 `.env`/`JS(Object)`/`JSON`/`JSONP`/`XML`/`YML` 格式单独存放,
+方便读取.
+
 ```bash
 # .env file (added to .gitignore)
 NODE_ENV=development
