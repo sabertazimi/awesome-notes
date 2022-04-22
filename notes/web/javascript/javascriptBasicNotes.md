@@ -2663,7 +2663,7 @@ alert(a);
 - 首字母大写.
 - 所有函数 (包括构造函数) 有 `prototype` 属性.
 
-#### Object Literal
+#### Object Literal Creation
 
 对象字面量由 `Object` 构造函数隐式构造;
 
@@ -2675,7 +2675,7 @@ const obj = {
 console.log(obj[[proto]] === Object.prototype); // true
 ```
 
-#### New Constructor
+#### Object New Constructor
 
 `new` 构造函数作用原理如下:
 
@@ -2816,6 +2816,7 @@ class C {
     console.log(new.target);
   }
 }
+
 class D extends C {
   constructor() {
     super();
@@ -3431,7 +3432,7 @@ const SuperMan = classSim(Man, {
 function Parent(name) {
   this.name = name || 'Adam';
 }
-// adding functionality to the prototype
+// Adding functionality to the prototype
 Parent.prototype.say = function () {
   return this.name;
 };
@@ -3440,8 +3441,10 @@ Parent.prototype.say = function () {
 function Child(...args) {
   // 解决引用类型共享问题
   Parent.apply(this, args);
+  this.childName = 'Child Name';
 }
 
+// Child.prototype = Object.create(Parent.prototype);
 Child.prototype = new Parent(); // 设置原型链,建立继承关系
 Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor 对象形成闭环
 ```

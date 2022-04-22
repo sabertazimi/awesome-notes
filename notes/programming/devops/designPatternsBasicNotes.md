@@ -2941,34 +2941,7 @@ class Injector {
 }
 ```
 
-### Class Pattern
-
-```ts
-const Person = function (firstName, lastName) {
-  this.firstName = firstName;
-  this.lastName = lastName;
-  this.gender = 'male';
-};
-
-// Define a subclass constructor for for "Superhero":
-const Superhero = function (firstName, lastName, powers) {
-  // Invoke the superclass constructor on the new object
-  // then use .call() to invoke the constructor as a method of
-  // the object to be initialized.
-  Person.call(this, firstName, lastName);
-
-  // Finally, store their powers, a new array of traits not found in a normal "Person"
-  this.powers = powers;
-};
-SuperHero.prototype = Object.create(Person.prototype);
-```
-
-```ts
-const superman = new Superhero('Clark', 'Kent', ['flight', 'heat-vision']);
-console.log(superman);
-```
-
-### Mix-In Pattern
+### Mixin Pattern
 
 将多个对象的属性混入同一个对象,达到继承/扩展/组合的效果.
 
