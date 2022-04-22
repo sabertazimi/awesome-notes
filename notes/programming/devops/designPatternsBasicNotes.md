@@ -3187,7 +3187,7 @@ Nest.js 通过 AOP 的架构方式, 实现了松耦合, 易于维护与扩展的
 
 ### jQuery Pattern
 
-- Adapter pattern:a
+- Adapter pattern:
   adapted `$.css()` API.
 - Facade pattern:
   simple `$.get()`/`$.post()` API over complicated `$.ajax()` API.
