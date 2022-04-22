@@ -2142,7 +2142,6 @@ doe.say('Hello everyone!');
 :::tip Observer Use Case
 
 - Decouple.
-- Event listener and handler.
 - 跨层级通信.
 - Message channel.
 - 异步编程.
@@ -2150,156 +2149,80 @@ doe.say('Hello everyone!');
 :::
 
 ```ts
-class Event {
+class ObserverList {
   constructor() {
-    this.handlers = new Map();
-    this.count = 0;
+    this.observerList = [];
   }
 
-  subscribe(handler) {
-    this.handlers.set(++this.count, handler);
-    return this.count;
+  add(obj) {
+    return this.observerList.push(obj);
   }
 
-  unsubscribe(idx) {
-    this.handlers.delete(idx);
+  count() {
+    return this.observerList.length;
   }
 
-  fire(sender, args) {
-    this.handlers.forEach((v, k) => v(sender, args));
-  }
-}
-
-class FallsIllArgs {
-  constructor(address) {
-    this.address = address;
-  }
-}
-
-class Person {
-  constructor(address) {
-    this.address = address;
-    this.fallsIll = new Event();
-  }
-
-  catchCold() {
-    this.fallsIll.fire(this, new FallsIllArgs(this.address));
-  }
-}
-
-const person = new Person('ABC road');
-const sub = person.fallsIll.subscribe((s, a) => {
-  console.log(`A doctor has been called to ${a.address}`);
-});
-person.catchCold();
-person.catchCold();
-
-person.fallsIll.unsubscribe(sub);
-person.catchCold();
-```
-
-```ts
-function ObserverList() {
-  this.observerList = [];
-}
-
-ObserverList.prototype.Add = function (obj) {
-  return this.observerList.push(obj);
-};
-
-ObserverList.prototype.Empty = function () {
-  this.observerList = [];
-};
-
-ObserverList.prototype.Count = function () {
-  return this.observerList.length;
-};
-
-ObserverList.prototype.Get = function (index) {
-  if (index > -1 && index < this.observerList.length) {
-    return this.observerList[index];
-  }
-};
-
-ObserverList.prototype.Insert = function (obj, index) {
-  let pointer = -1;
-
-  if (index === 0) {
-    this.observerList.unshift(obj);
-    pointer = index;
-  } else if (index === this.observerList.length) {
-    this.observerList.push(obj);
-    pointer = index;
-  }
-
-  return pointer;
-};
-
-ObserverList.prototype.IndexOf = function (obj, startIndex) {
-  let i = startIndex;
-  let pointer = -1;
-
-  while (i < this.observerList.length) {
-    if (this.observerList[i] === obj) {
-      pointer = i;
+  get(index) {
+    if (index > -1 && index < this.observerList.length) {
+      return this.observerList[index];
     }
-    i++;
   }
 
-  return pointer;
-};
+  indexOf(obj, startIndex) {
+    let i = startIndex;
 
-ObserverList.prototype.RemoveAt = function (index) {
-  if (index === 0) {
-    this.observerList.shift();
-  } else if (index === this.observerList.length - 1) {
-    this.observerList.pop();
+    while (i < this.observerList.length) {
+      if (this.observerList[i] === obj) {
+        return i;
+      }
+
+      i++;
+    }
+
+    return -1;
   }
-};
 
-//  被观察者维护一个观察者列表
-function Subject() {
-  this.observers = new ObserverList();
+  removeAt(index) {
+    this.observerList.splice(index, 1);
+  }
 }
 
-Subject.prototype.AddObserver = function (observer) {
-  this.observers.Add(observer);
-};
-
-Subject.prototype.RemoveObserver = function (observer) {
-  this.observers.RemoveAt(this.observers.IndexOf(observer, 0));
-};
-
-Subject.prototype.Notify = function (context) {
-  const observerCount = this.observers.Count();
-  for (let i = 0; i < observerCount; i++) {
-    this.observers.Get(i).Update(context);
+class Subject {
+  constructor() {
+    this.observers = new ObserverList();
   }
-};
 
-// The Observer
-function Observer() {
-  this.Update = function () {
-    // ...
-  };
+  addObserver(observer) {
+    this.observers.add(observer);
+  }
+
+  removeObserver(observer) {
+    this.observers.removeAt(this.observers.indexOf(observer, 0));
+  }
+
+  notify(context) {
+    const observerCount = this.observers.count();
+
+    for (let i = 0; i < observerCount; i++) {
+      this.observers.get(i).update(context);
+    }
+  }
 }
 
-// Extend an object with an extension
-function extend(extension, obj) {
-  for (const key in extension) {
-    obj[key] = extension[key];
-  }
+class Observer {
+  update(context) {}
 }
 ```
 
 ### Pub-Sub Pattern
 
-- 观察者模式中主体和观察者是互相感知.
 - 发布-订阅模式是借助第三方来实现调度, 发布者和订阅者之间互不感知.
+- 观察者模式中主体和观察者是互相感知.
 - 符合开放封闭原则.
 
 :::tip Pub-Sub Use Case
 
+- Event listener and handler.
 - Event Bus in Vue.
 - Event Emitter in Node.
 - 异步编程.
@@ -2308,116 +2231,70 @@ function extend(extension, obj) {
 
 #### Pub-Sub Pattern Implementation
 
-- pubSub.js
-
 ```ts
-module.exports = (function (window, doc, undef) {
-  const pubSub = {};
+class PubSub {
+  constructor() {
+    // Broadcast channel
+    this.topics = {};
+    // Topic identifier
+    this.subUid = -1;
+  }
 
-  const topics = {};
-  let subUid = -1;
-
-  pubSub.publish = function (topic, args) {
-    // undefined check
-    if (!topics[topic]) {
+  publish(topic, args) {
+    if (!this.topics[topic]) {
       return false;
     }
 
-    setTimeout(function () {
-      const subscribers = topics[topic];
-      let len = subscribers ? subscribers.length : 0;
+    const subscribers = this.topics[topic];
+    let len = subscribers ? subscribers.length : 0;
 
-      while (len--) {
-        subscribers[len].func(topic, args);
-      }
-    }, 0);
-
-    return true;
-  };
-
-  pubSub.subscribe = function (topic, func) {
-    // undefined check
-    if (!topics[topic]) {
-      topics[topic] = [];
+    while (len--) {
+      subscribers[len].func(topic, args);
     }
 
-    // add observer to observerList (topics)
-    const token = (++subUid).toString();
-    topics[topic].push({
+    return this;
+  }
+
+  subscribe(topic, func) {
+    if (!this.topics[topic]) {
+      this.topics[topic] = [];
+    }
+
+    const token = (++this.subUid).toString();
+    this.topics[topic].push({
       token,
       func,
     });
     return token;
-  };
+  }
 
-  pubSub.unsubscribe = function (token) {
-    for (const m in topics) {
-      if (topics[m]) {
-        for (let i = 0, j = topics[m].length; i < j; i++) {
-          if (topics[m][i].token === token) {
-            topics[m].splice(i, 1);
+  unsubscribe(token) {
+    for (const m in this.topics) {
+      if (this.topics[m]) {
+        for (let i = 0, j = this.topics[m].length; i < j; i++) {
+          if (this.topics[m][i].token === token) {
+            this.topics[m].splice(i, 1);
             return token;
           }
         }
       }
     }
-    return false;
-  };
 
-  return pubSub;
-})(this, this.document, undefined);
-```
-
-- test.js
-
-```ts
-const pubsub = require('./pubSub.js');
-
-// add observer to observerList
-const testFirstSub = pubsub.subscribe('login', function (topic, data) {
-  console.log(`${topic}: ${data}`);
-});
-
-// subject broadcast/notify, observer update
-pubsub.publish('login', 'hello world!');
-pubsub.publish('login', ['test', 'a', 'b', 'c']);
-pubsub.publish('login', [{ color: 'blue' }, { text: 'hello' }]);
-
-setTimeout(function () {
-  pubsub.unsubscribe(testFirstSub);
-}, 0);
-
-// permanent subscribe
-pubsub.subscribe('sum', function (topic, data) {
-  if (toString.apply(data) !== '[object Array]') {
-    console.log(`Please input array: * ${data} * is not array!`);
-  } else {
-    const tmp = data.filter(function (item) {
-      return toString.apply(item) === '[object Number]';
-    });
-
-    if (tmp.length) {
-      const sum = tmp.reduce(function (previous, current) {
-        return previous + current;
-      }, 0);
-      console.log(`Sum of ${data} : ${sum}`);
-    } else {
-      console.log(
-        `Please input number array: * ${data} * is not number array!`
-      );
-    }
+    return this;
   }
+}
 
-  return this;
+const pubsub = new PubSub();
+const token = pubsub.subscribe('/addFavorite', (topic, args) => {
+  console.log('test', topic, args);
 });
-
-pubsub.publish('login', 'hello again!');
-pubsub.publish('sum', 'hello again!');
-pubsub.publish('sum', [1, 2, 3, 4, 5]);
-pubsub.publish('sum', ['a', 'b', 'c', 'd', 'e']);
+pubsub.publish('/addFavorite', ['test']);
+pubsub.unsubscribe(token);
 ```
 
-- in jQuery
+#### Pub-Sub Pattern Usage
+
+`jQuery` event system:
 
 ```ts
 // Equivalent to subscribe(topicName, callback)
@@ -2432,74 +2309,45 @@ $(document).trigger('topicName');
 $(document).off('topicName');
 ```
 
-- MicroEvent.js
+Event emitter:
 
 ```ts
-/**
- * MicroEvent - to make any js object an event emitter (server or browser)
- *
- * - pure javascript - server compatible, browser compatible
- * - don't rely on the browser doms
- * - super simple - you get it immediately, no mystery, no magic involved
- *
- * - create a MicroEventDebug with goodies to debug
- *   - make it safer to use
- */
-
-const MicroEvent = function () {};
-MicroEvent.prototype = {
-  bind(event, fct) {
+class MicroEvent {
+  bind(event, callback) {
     this._events = this._events || {};
     this._events[event] = this._events[event] || [];
-    this._events[event].push(fct);
-  },
-  unbind(event, fct) {
+    this._events[event].push(callback);
+  }
+
+  unbind(event, callback) {
     this._events = this._events || {};
-    if (event in this._events === false) return;
-    this._events[event].splice(this._events[event].indexOf(fct), 1);
-  },
+
+    if (event in this._events === false) {
+      return;
+    }
+
+    this._events[event].splice(this._events[event].indexOf(callback), 1);
+  }
+
   trigger(event, ...args) {
     this._events = this._events || {};
-    if (event in this._events === false) return;
+    if (event in this._events === false) {
+      return;
+    }
+
     for (let i = 0; i < this._events[event].length; i++) {
       this._events[event][i].apply(this, args);
     }
-  },
-};
-
-/**
- * mixin will delegate all MicroEvent.js function in the destination object
- *
- * - require('MicroEvent').mixin(Foobar) will make Foobar able to use MicroEvent
- *
- * @param {Object} the object which will support MicroEvent
- */
-MicroEvent.mixin = function (destObject) {
-  const props = ['bind', 'unbind', 'trigger'];
-  for (let i = 0; i < props.length; i++) {
-    if (typeof destObject === 'function') {
-      destObject.prototype[props[i]] = MicroEvent.prototype[props[i]];
-    } else {
-      destObject[props[i]] = MicroEvent.prototype[props[i]];
-    }
   }
-  return destObject;
-};
-
-// export in common js
-if (typeof module !== 'undefined' && 'exports' in module) {
-  module.exports = MicroEvent;
 }
 ```
 
-#### Pub-Sub Pattern Usage
+`AJAX` callback:
 
-##### Ajax Callback
-
-- 当请求返回, 并且实际的数据可用的时候, 会生成一个通知
-- 如何使用这些事件（或者返回的数据）, 都是由订阅者自己决定的
-- 可以有多个不同的订阅者, 以不同的方式使用返回的数据
-- Ajax 层: 唯一的责任 - 请求和返回数据, 接着将数据发送给所有想要使用数据的地方
+- 当请求返回, 并且实际的数据可用的时候, 会生成一个通知.
+- 如何使用这些事件（或者返回的数据）, 都是由订阅者自己决定的.
+- 可以有多个不同的订阅者, 以不同的方式使用返回的数据.
+- `AJAX` 层: 唯一的责任 - 请求和返回数据, 接着将数据发送给所有想要使用数据的地方.
 
 ```ts
 (function ($) {
