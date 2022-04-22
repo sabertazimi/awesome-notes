@@ -3370,75 +3370,6 @@ export default function App() {
 }
 ```
 
-React `SubComponents` pattern:
-
-```tsx
-import type { CSSProperties, ReactNode } from 'react';
-import React from 'react';
-
-interface Props {
-  children: ReactNode;
-  style?: CSSProperties;
-  rest?: any;
-}
-
-const Header = ({ children, style, ...rest }: Props): JSX.Element => (
-  <div style={{ ...style }} {...rest}>
-    {children}
-  </div>
-);
-
-const Body = ({ children, style, ...rest }: Props): JSX.Element => (
-  <div style={{ ...style }} {...rest}>
-    {children}
-  </div>
-);
-
-const Footer = ({ children, style, ...rest }: Props): JSX.Element => (
-  <div style={{ ...style }} {...rest}>
-    {children}
-  </div>
-);
-
-const getChildrenOnDisplayName = (children: ReactNode[], displayName: string) =>
-  React.Children.map(children, child =>
-    child.displayName === displayName ? child : null
-  );
-
-const Card = ({ children }: { children: ReactNode[] }): JSX.Element => {
-  const header = getChildrenOnDisplayName(children, 'Header');
-  const body = getChildrenOnDisplayName(children, 'Body');
-  const footer = getChildrenOnDisplayName(children, 'Footer');
-
-  return (
-    <div className="card">
-      {header && <div className="card-header">{header}</div>}
-      <div className="card-body">{body}</div>
-      {footer && <div className="card-footer">{footer}</div>}
-    </div>
-  );
-};
-
-Header.displayName = 'Header';
-Body.displayName = 'Body';
-Footer.displayName = 'Footer';
-Card.Header = Header;
-Card.Body = Body;
-Card.Footer = Footer;
-
-const App = () => (
-  <div>
-    <Card>
-      <Card.Header>Header</Card.Header>
-      <Card.Body>Body</Card.Body>
-      <Card.Footer>Footer</Card.Footer>
-    </Card>
-  </div>
-);
-
-export default App;
-```
-
 ### Refs
 
 Refs 用于返回对元素的引用.
@@ -3582,7 +3513,7 @@ class UserInput extends Component {
 
 ### Compound Components
 
-[Compound components example](https://dev.to/alexi_be3/react-component-patterns-49ho):
+Compound components [example](https://dev.to/alexi_be3/react-component-patterns-49ho):
 
 ```tsx
 import * as React from 'react';
@@ -3671,6 +3602,78 @@ const RadioInput = ({
 RadioImageForm.RadioInput = RadioInput;
 
 export default RadioImageForm;
+```
+
+- Compound components manage their own internal state,
+  which they share among several child components.
+- When importing a compound component,
+  automatically import child components available on compound component.
+
+```tsx
+import type { CSSProperties, ReactNode } from 'react';
+import React from 'react';
+
+interface Props {
+  children: ReactNode;
+  style?: CSSProperties;
+  rest?: any;
+}
+
+const Header = ({ children, style, ...rest }: Props): JSX.Element => (
+  <div style={{ ...style }} {...rest}>
+    {children}
+  </div>
+);
+
+const Body = ({ children, style, ...rest }: Props): JSX.Element => (
+  <div style={{ ...style }} {...rest}>
+    {children}
+  </div>
+);
+
+const Footer = ({ children, style, ...rest }: Props): JSX.Element => (
+  <div style={{ ...style }} {...rest}>
+    {children}
+  </div>
+);
+
+const getChildrenOnDisplayName = (children: ReactNode[], displayName: string) =>
+  React.Children.map(children, child =>
+    child.displayName === displayName ? child : null
+  );
+
+const Card = ({ children }: { children: ReactNode[] }): JSX.Element => {
+  const header = getChildrenOnDisplayName(children, 'Header');
+  const body = getChildrenOnDisplayName(children, 'Body');
+  const footer = getChildrenOnDisplayName(children, 'Footer');
+
+  return (
+    <div className="card">
+      {header && <div className="card-header">{header}</div>}
+      <div className="card-body">{body}</div>
+      {footer && <div className="card-footer">{footer}</div>}
+    </div>
+  );
+};
+
+Header.displayName = 'Header';
+Body.displayName = 'Body';
+Footer.displayName = 'Footer';
+Card.Header = Header;
+Card.Body = Body;
+Card.Footer = Footer;
+
+const App = () => (
+  <div>
+    <Card>
+      <Card.Header>Header</Card.Header>
+      <Card.Body>Body</Card.Body>
+      <Card.Footer>Footer</Card.Footer>
+    </Card>
+  </div>
+);
+
+export default App;
 ```
 
 ## React Synthetic Events
