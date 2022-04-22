@@ -693,30 +693,46 @@ tea.consume();
 ```
 
 ```ts
-const AbstractVehicleFactory = (function () {
-  // Storage for our vehicle types
-  const types = {};
+class AbstractVehicleFactory {
+  constructor() {
+    // Vehicle types
+    this.types = {};
+  }
 
-  function _getVehicle(type, customizations) {
-    const Vehicle = types[type];
+  getVehicle(type, customizations) {
+    const Vehicle = this.types[type];
+
     return Vehicle ? new Vehicle(customizations) : null;
   }
-  function _registerVehicle(type, Vehicle) {
-    const prototype = Vehicle.prototype;
 
-    // only register classes that fulfill the vehicle contract
-    if (prototype.drive && prototype.breakDown) {
-      types[type] = Vehicle;
+  registerVehicle(type, Vehicle) {
+    const proto = Vehicle.prototype;
+
+    // Only register classes that fulfill the vehicle contract
+    if (proto.drive && proto.breakDown) {
+      this.types[type] = Vehicle;
     }
 
-    return AbstractVehicleFactory;
+    return this;
   }
+}
 
-  return {
-    getVehicle: _getVehicle,
-    registerVehicle: _registerVehicle,
-  };
-})();
+// Usage:
+const abstractVehicleFactory = new AbstractVehicleFactory()
+  .registerVehicle('car', Car)
+  .registerVehicle('truck', Truck);
+
+// Instantiate a new car based on the abstract vehicle type
+const car = abstractVehicleFactory.getVehicle('car', {
+  color: 'lime green',
+  state: 'like new',
+});
+
+// Instantiate a new truck in a similar manner
+const truck = abstractVehicleFactory.getVehicle('truck', {
+  wheelSize: 'medium',
+  color: 'neon yellow',
+});
 ```
 
 ### Builder Pattern
