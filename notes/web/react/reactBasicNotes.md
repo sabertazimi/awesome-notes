@@ -4146,6 +4146,8 @@ class Menu extends React.Component {
   - `useMemo` hook for memorized values.
   - `useCallback` hook for memorized functions.
   - `useRef` hook for lifecycle persistent values.
+- Recap related-logic into separate well-structured hooks.
+- Reuse same stateful logic with custom hooks.
 
 ## React Hooks
 
