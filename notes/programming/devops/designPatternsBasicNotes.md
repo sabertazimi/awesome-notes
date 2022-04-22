@@ -2943,7 +2943,11 @@ class Injector {
 
 ### Mixin Pattern
 
-将多个对象的属性混入同一个对象,达到继承/扩展/组合的效果.
+将多个对象的属性混入同一个对象, 达到继承/扩展/组合的效果.
+React and Vue drop `Mixin`:
+
+- Prototype pollution
+- Dependency uncertainty.
 
 #### Prototype Mixin Pattern
 
