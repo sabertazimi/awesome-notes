@@ -1384,25 +1384,22 @@ class Flyweight {
 }
 
 class FlyweightFactory {
-  static flyweights = {};
-  static count = 0;
+  static flyweights = new Map();
 
   static get(make, model, processor) {
-    // 不存在所需享元, 新建新享元.
-    if (!FlyweightFactory.flyweights[make + model]) {
-      FlyweightFactory.flyweights[make + model] = new Flyweight(
-        make,
-        model,
-        processor
-      );
-      FlyweightFactory.count++;
+    const id = make + model;
+
+    if (FlyweightFactory.flyweights.has(id)) {
+      return FlyweightFactory.flyweights.get(id);
     }
 
-    return FlyweightFactory.flyweights[make + model];
+    const flyweight = new Flyweight(make, model, processor);
+    FlyweightFactory.flyweights.set(id, flyweight);
+    return flyweight;
   }
 
   static getCount() {
-    return FlyweightFactory.count;
+    return FlyweightFactory.flyweights.size;
   }
 }
 
@@ -1418,20 +1415,18 @@ class Computer {
 }
 
 class ComputerCollection {
-  computers = {};
-  count = 0;
+  computers = new Map();
 
   add(make, model, processor, memory, tag) {
-    this.computers[tag] = new Computer(make, model, processor, memory, tag);
-    this.count++;
+    this.computers.set(tag, new Computer(make, model, processor, memory, tag));
   }
 
   get(tag) {
-    return this.computers[tag];
+    return this.computers.get(tag);
   }
 
   getCount() {
-    return this.count;
+    return this.computers.size;
   }
 }
 
