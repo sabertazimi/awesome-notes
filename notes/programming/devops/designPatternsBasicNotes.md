@@ -2061,12 +2061,15 @@ const result = upload([flashUploader, formUploader]);
 - 所有观察者共享一个共有的被观察者 (所有订阅者订阅同一个节点).
 - 解除对象间的强耦合关系 (最少知识原则), 独立地改变对象间的交互方式.
 - 网状的多对多关系 => 相对简单的一对多关系.
+- 存在单点故障 (Single Point of Failure) 可能, 需要容灾备份.
 
 :::tip Mediator Use Case
 
 - 聊天室.
+- 交通系统.
 - 指挥中心.
 - 游戏服务器.
+- DOM event bubbling and delegation: `document` serves as a `Mediator`.
 - Global state store: A action => store => B change.
 
 :::
