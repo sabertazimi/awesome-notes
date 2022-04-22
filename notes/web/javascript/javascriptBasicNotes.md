@@ -4335,13 +4335,17 @@ assert.throws(() => funcExpr(), ReferenceError);
 
 ### Immediately Invoked Function Expression
 
-即时函数自动执行 (定义即执行): 匿名包装器.
-
 #### IIFE Pattern
 
-- 函数表达式.
-- 末尾添加括号(传参), 使函数立即执行.
-- 将整个函数置于括号内.
+立即函数模式, 通过调用立即匿名函数,
+返回一个对象, 暴露公共接口 (Exposed to Public):
+
+- IIFE Syntax:
+  - 函数表达式.
+  - 末尾添加括号(传参), 使函数立即执行.
+  - 将整个函数置于括号内.
+- 闭包: 定义私有变量与特权方法.
+- 返回对象: 即使通过外部代码改变返回对象的接口, 也不会影响原接口.
 
 ```ts
 (function () {
@@ -4349,17 +4353,9 @@ assert.throws(() => funcExpr(), ReferenceError);
 })();
 ```
 
-- 使得匿名函数内部的代码能够立即执行.
-- 不泄漏只使用一次的局部变量与方法.
-- 创建命名空间, 防止变量命名冲突.
-
 #### IIFE Return Value
 
-```ts
-const foo = (function () {})();
-```
-
-foo 不被赋予 function 值, 而被赋予函数执行后的返回值:
+Left hand side 不被赋予 function 值, 而被赋予函数执行后的返回值:
 此返回值可设为函数, 可产生闭包.
 
 ```ts
@@ -4369,6 +4365,79 @@ const getResult = (function () {
     return res;
   };
 })();
+```
+
+#### IIFE Usage
+
+- 使得匿名函数内部的代码能够立即执行.
+- 不泄漏只使用一次的局部变量与方法.
+- 创建命名空间, 防止变量命名冲突.
+
+```ts
+const obj = (function () {
+  // private member
+  let name = 'tazimi';
+
+  // private method
+  // excluded in return object
+
+  // privileged method
+  function getName() {
+    return name;
+  }
+
+  function setName(n) {
+    if (typeof n === 'string') {
+      name = n;
+    }
+    return this;
+  }
+
+  // public method
+  function logName() {
+    console.log(name);
+  }
+
+  // 闭包
+  // 公共接口: 特权/公共方法
+  return {
+    // 特权方法
+    getName,
+    setName,
+
+    // 公共方法
+    log: logName,
+  };
+})();
+```
+
+```ts
+const App = App || {};
+App.utils = {};
+
+(function () {
+  let val = 5;
+
+  this.getValue = function () {
+    return val;
+  };
+
+  this.setValue = function (newVal) {
+    val = newVal;
+  };
+
+  // also introduce a new sub-namespace
+  this.tools = {};
+}.apply(App.utils));
+
+// inject new behavior into the tools namespace
+// which we defined via the utilities module
+
+(function () {
+  this.diagnose = function () {
+    return 'diagnosis';
+  };
+}.apply(App.utils.tools));
 ```
 
 ### Tail Call Optimization
@@ -7386,6 +7455,9 @@ define('moduleA', ['require', 'exports'], function (require, exports) {
 ### UMD Pattern
 
 Universal module definition:
+
+- 判断是否支持 AMD (define), 存在则使用 AMD 方式加载模块.
+- 判断是否支持 Node.js 的模块 (exports), 存在则使用 Node.js 模块模式.
 
 ```ts
 /**

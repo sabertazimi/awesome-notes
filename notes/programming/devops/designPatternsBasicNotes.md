@@ -436,201 +436,6 @@ class MockHttpService implements Connection {
 - Facade pattern.
 - Mediator pattern.
 
-### Literal Pattern
-
-- 不要使用 `new Boolean()`/`new Number()`/`new String()`.
-- 避免使用 `new Object()`/`new Array()`.
-
-### Closure and IIFE Pattern
-
-### Check Pattern
-
-- `O || {}` `O || (O = {})`.
-- `if (O && O.property)`.
-- `if (typeof v === " ")`.
-- `toString. apply(var)`.
-
-### Function Patterns
-
-#### Parameters Patterns
-
-- 函数不应依赖于全局变量, 实现与执行全局环境的的解耦.
-- 全局变量应以函数参数/依赖的形式, 注入函数内部.
-
-### Decouple
-
-#### Event Handlers and UI Logic
-
-- 事件处理函数与应用逻辑函数分开成单独函数,提高代码重用率
-- 应用逻辑函数不依赖于 event 对象, 其属性值作为参数传入, 易于解耦与测试
-
-```ts
-const MyApp = {
-  // 事件处理函数
-  handleClick(event) {
-    /* 将事件的属性作为参数, 传递给应用逻辑函数
-     * 使得应用逻辑函数不依赖于 event 对象, 易于解耦与测试
-     */
-    this.showPopup(event.clientX, event.clientY);
-  },
-
-  // 应用逻辑函数
-  showPopup(x, y) {
-    const popup = document.getElementById('popup');
-    popup.style.left = `${x}px`;
-    popup.style.top = `${y}px`;
-    popup.className = 'reveal';
-  },
-};
-```
-
-### Environment and Configuration
-
-配置文件以 `.env`/`JS(Object)`/`JSON`/`JSONP`/`XML`/`YML` 格式单独存放, 方便读取.
-
-### Stand Library Idioms
-
-- use `Number.isNaN` not `isNaN`.
-- use `Number.isFinite` not `isFinite`.
-
-## Modular Patterns
-
-### Object Literal
-
-通过对象字面量创建命名空间:
-
-```ts
-APP.namespace = function (namespaceString) {
-  let parts = namespaceString.split('.');
-  let parent = APP;
-
-  // strip redundant leading global
-  if (parts[0] === 'APP') {
-    // remove leading global
-    parts = parts.slice(1);
-  }
-
-  for (let i = 0; i < parts.length; i += 1) {
-    // create a property if it doesn't exist
-    if (typeof parent[parts[i]] === 'undefined') {
-      parent[parts[i]] = {};
-    }
-    // 关键: 向内嵌套
-    parent = parent[parts[i]];
-  }
-
-  // 返回最内层模块
-  return parent;
-};
-```
-
-```ts
-// assign returned value to a local var
-const module2 = APP.namespace('APP.modules.module2');
-const truthy = module2 === APP.modules.module2; // true
-// skip initial `APP`
-APP.namespace('modules.module51');
-// long namespace
-APP.namespace('once.upon.a.time.there.was.this.long.nested.property');
-```
-
-### IIFE Pattern
-
-立即函数模式, 通过调用立即函数, 返回一个对象, 暴露(exposed to public)公共接口(特权/公共方法):
-
-- 闭包: 定义私有变量与特权方法
-- 返回对象: 即使通过外部代码改变返回对象的接口, 也不会影响原接口
-
-```ts
-const obj = (function () {
-  // private member
-  let name = 'tazimi';
-
-  // private method
-  // excluded in return object
-
-  // privileged method
-  function getName() {
-    return name;
-  }
-
-  function setName(n) {
-    if (typeof n === 'string') {
-      name = n;
-    }
-    return this;
-  }
-
-  // public method
-  function logName() {
-    console.log(name);
-  }
-
-  // 闭包
-  // 公共接口: 特权/公共方法
-  return {
-    // 特权方法
-    getName,
-    setName,
-
-    // 公共方法
-    log: logName,
-  };
-})();
-```
-
-```ts
-const App = App || {};
-App.utils = {};
-
-(function () {
-  let val = 5;
-
-  this.getValue = function () {
-    return val;
-  };
-
-  this.setValue = function (newVal) {
-    val = newVal;
-  };
-
-  // also introduce a new sub-namespace
-  this.tools = {};
-}.apply(App.utils));
-
-// inject new behavior into the tools namespace
-// which we defined via the utilities module
-
-(function () {
-  this.diagnose = function () {
-    return 'diagnosis';
-  };
-}.apply(App.utils.tools));
-```
-
-- jQuery Plugin Pattern: 通过给立即函数传参, 注入全局变量/其他依赖
-
-### UMD Pattern
-
-Universal Module Definition:
-
-- 先判断是否支持 Node.js 的模块(exports), 存在则使用 Node.js 模块模式
-- 再判断是否支持 AMD(define), 存在则使用 AMD 方式加载模块
-
-```ts
-(function (window, factory) {
-  if (typeof exports === 'object') {
-    module.exports = factory();
-  } else if (typeof define === 'function' && define.amd) {
-    define(factory);
-  } else {
-    window.eventUtil = factory();
-  }
-})(this, function () {
-  // module ...
-});
-```
-
 ## Common Design Patterns
 
 ![Common Design Patterns](./figures/DesignPatterns.png)
@@ -3283,9 +3088,9 @@ console.log(superman);
 
 ### Mix-In Pattern
 
-将多个对象的属性混入同一个对象,达到继承/扩展/组合的效果
+将多个对象的属性混入同一个对象,达到继承/扩展/组合的效果.
 
-- 不改变原型链
+- 不改变原型链:
 
 ```ts
 function mix(...args) {
@@ -3314,7 +3119,7 @@ const cake = mix(
 );
 ```
 
-- 改变原型链
+- 改变原型链:
 
 ```ts
 // Extend an existing object with a method from another
