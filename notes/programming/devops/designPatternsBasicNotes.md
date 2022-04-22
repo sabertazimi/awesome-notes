@@ -2828,8 +2828,8 @@ e.print(buffer);
 
 ### IoC and DI Pattern
 
-- IoC (inversion of control) 控制反转模式: 将组件间的依赖关系从程序内部提到外部来管理.
-- DI (dependency injection) 依赖注入模式: 将组件的依赖通过外部以参数或其他形式注入.
+- IoC (Inversion of Control) 控制反转模式: 将组件间的依赖关系从程序内部提到外部来管理.
+- DI (Dependency Injection) 依赖注入模式: 将组件的依赖通过外部以参数或其他形式注入.
 
 A 依赖 B, 若在 A 中实例化 B,
 则会形成 A 与 B 间的高度耦合,
@@ -2842,6 +2842,8 @@ A 依赖 B, 若在 A 中实例化 B,
 IoC Container 将 B 实例化后,
 通过构造函数/接口方法/设置属性/工厂模式等方法注入 A 中,
 实现依赖注入 (DI).
+
+#### Inversion of Control
 
 ```ts
 class Component {
@@ -2889,6 +2891,8 @@ c2.action(); // s3 run.
 c2.run(s4); // s4 run.
 ```
 
+#### Depends on Abstraction
+
 ```ts
 interface Database {
   query: () => void;
@@ -2917,9 +2921,30 @@ const c = new Controller(db);
 c.action();
 ```
 
+#### Injection Container
+
 ```tsx
 import * as React from 'react';
 import type { IProvider } from './providers';
+
+class Injector {
+  private static container = new Map<string, any>();
+
+  static resolve<T>(target: Type<T>): T {
+    if (Injector.container.has(target.name)) {
+      return Injector.container.get(target.name);
+    }
+
+    const tokens = Reflect.getMetadata('design:types', target) || [];
+    const injections = tokens.map((token: Type<any>): any =>
+      Injector.resolve(token)
+    );
+    // eslint-disable-next-line new-cap
+    const instance = new target(...injections);
+    Injector.container.set(target.name, instance);
+    return instance;
+  }
+}
 
 export interface IProvider<T> {
   provide(): T;
@@ -2937,27 +2962,6 @@ export class Hello extends React.Component {
 
   render() {
     return <h1>Hello {this.nameProvider.provide()}!</h1>;
-  }
-}
-```
-
-```ts
-class Injector {
-  private static container = new Map<string, any>();
-
-  static resolve<T>(target: Type<T>): T {
-    if (Injector.container.has(target.name)) {
-      return Injector.container.get(target.name);
-    }
-
-    const tokens = Reflect.getMetadata('design:types', target) || [];
-    const injections = tokens.map((token: Type<any>): any =>
-      Injector.resolve(token)
-    );
-    // eslint-disable-next-line new-cap
-    const instance = new target(...injections);
-    Injector.container.set(target.name, instance);
-    return instance;
   }
 }
 ```
