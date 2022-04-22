@@ -11241,22 +11241,17 @@ export default DatePicker;
 
 #### Controller
 
-- 处理请求的参数
-- 渲染和重定向
-- 选择 Model 和 Service
-- 处理 Session 和 Cookies
+- 处理请求的参数.
+- 渲染和重定向.
+- 选择 Model 和 Service.
+- 处理 Session 和 Cookies.
 
 ### Framework Paradigm Comparison
 
-- 初始渲染: Virtual DOM > 脏检查 >= 依赖收集
-- 小量数据更新: 依赖收集 >> Virtual DOM + 优化 > 脏检查（无法优化） > Virtual DOM 无优化
-- 大量数据更新: 脏检查 + 优化 >= 依赖收集 + 优化 > Virtual DOM（无法/无需优化）>> MVVM 无优化
+- 初始渲染: Virtual DOM > 脏检查 >= 依赖收集.
+- 小量数据更新: 依赖收集 >> Virtual DOM + 优化 > 脏检查（无法优化） > Virtual DOM 无优化.
+- 大量数据更新: 脏检查 + 优化 >= 依赖收集 + 优化 > Virtual DOM（无法/无需优化）>> MVVM 无优化.
 - Angular: 脏检查, React: Virtual DOM, Vue: Watch.
-
-### Framework Paradigm Reference
-
-- Even You presentation on [JSConf Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s).
-- Framework paradigm [guide](https://mp.weixin.qq.com/s/mZ7KuFjyCWNCAq7HnXg96A).
 
 ### Micro Frontend
 
@@ -11343,6 +11338,11 @@ class SnapshotSandbox {
 - Pub-Sub Pattern.
 - Callback registration.
 - Global store.
+
+### Framework Paradigm Reference
+
+- Even You presentation on [JSConf Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s).
+- Framework paradigm [guide](https://mp.weixin.qq.com/s/mZ7KuFjyCWNCAq7HnXg96A).
 
 ## Interviews
 
