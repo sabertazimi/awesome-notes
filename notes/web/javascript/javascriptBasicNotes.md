@@ -4237,6 +4237,7 @@ try {
 ### Function Parameters
 
 - 所有函数参数都是按值传递 (复制原子值/引用值).
+- `functin.length`: **number of parameters** before the first one with a default value.
 - **无副作用**的函数: 注意是否需要拷贝传入对象, 使原有对象不受函数影响, 并返回新对象.
 
 ```ts
