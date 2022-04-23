@@ -2477,6 +2477,11 @@ ffmpeg -i video.mp4 \
 # - b:a: 音频比特率, 大多数网站限制音频比特率 128k, 129k
 ```
 
+```bash
+# Scale pictures
+ffmpeg -i input.jpg -vf scale=320:240 output_320x240.png
+```
+
 #### FFmpeg Cutting
 
 ```bash
@@ -2514,6 +2519,11 @@ ffmpeg -i "concat:01.mp4|02.mp4|03.mp4" -c copy out.mp4
 ffmpeg -i input.mkv -i output.aac \
   -filter_complex "[0:a][1:a]amerge=inputs=2[a]" -map 0:v -map "[a]" \
   -c:v copy -c:a aac -ac 2 -shortest output.mp4
+```
+
+```bash
+# Merge pictures
+ffmpeg -i 1.png -i 2.png -filter_complex "vstack" output.png 
 ```
 
 #### FFmpeg Screenshot
