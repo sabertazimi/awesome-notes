@@ -4472,6 +4472,7 @@ observer.observe({ type: 'layout-shift', buffered: true });
 - CLS optimization [guide](https://web.dev/optimize-cls).
 - Fetch priority [guide](https://web.dev/priority-hints).
 - Resources priority [guide](https://web.dev/prioritize-resources).
+- 3rd-party scripts loading [guide](https://www.patterns.dev/posts/third-party)
 - Web vitals real world [case](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw).
 - Web monitor real world [case](https://zhuanlan.zhihu.com/p/420330110).
 
