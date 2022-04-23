@@ -7078,6 +7078,8 @@ export default function CSRPage() {
 - [Server Side Rendering with Puppeteer](https://developers.google.com/web/tools/puppeteer/articles/ssr)
 - [Rendering on the Web](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)
 
+[![Server Side Rendering](./figures/ServerSideRendering.png)](https://www.patterns.dev/posts/ssr)
+
 ```ts
 if (isBotAgent) {
   // return pre-rendering static html to search engine crawler
