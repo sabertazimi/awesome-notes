@@ -4070,7 +4070,7 @@ const PageComponent = () => {
 };
 ```
 
-#### PreFetch
+#### PreFetch and PreLoad
 
 [Quick Link](https://github.com/GoogleChromeLabs/quicklink)
 prefetch library.
@@ -4079,6 +4079,11 @@ prefetch library.
 <link rel="prefetch"></link>
 <link rel="preload"></link>
 ```
+
+- Generally, preloads will load in order parser gets to them for anything >= `Medium`.
+- Font preloads are probably best towards end of `<head>` or beginning of `<body>`.
+- Import preloads should be done after `<script>` tag that needs the import.
+- Image preloads will have a low priority (async scripts).
 
 [PreFetch and PreRender Pitfalls](https://addyosmani.com/blog/what-not-to-prefetch-prerender):
 
