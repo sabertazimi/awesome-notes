@@ -2990,13 +2990,22 @@ They interrupt one or more of the steps:
 
 #### Paint
 
-Paint Order:
+Paint order:
 
 - 背景颜色
 - 背景图片
 - 边框
 - 子代
 - 轮廓
+
+渲染进程 (`Render Process`) 中主线程 (`Main Thread`) `Layout` 阶段与 `Paint` 阶段不负责实际的绘制操作,
+`Layout` 阶段执行 `Update Layer Tree`, 更新每层信息,
+`Paint` 阶段整理每层页面的绘制信息, 构建绘制列表,
+以上阶段的数据最终会交给渲染进程 (`Render Process`) 中合成线程 (`Compositor Thread`) 执行实际的绘制操作.
+
+JavaScript 阻塞渲染:
+JavaScript 阻塞了同在主线程的 `Layout` 阶段与 `Paint` 阶段,
+间接阻塞了合成线程的绘制操作.
 
 ### Browser Engine Reference
 
