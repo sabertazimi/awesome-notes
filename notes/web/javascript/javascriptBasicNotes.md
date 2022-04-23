@@ -7521,7 +7521,7 @@ Universal module definition:
   - 模块在浏览器中是异步加载和执行的.
   - 模块代码只在加载后执行.
   - 解析到 `<script type="module">` 标签后会立即下载模块文件,
-    但**执行会延迟**到文档解析完成 (类似 `<script defer>`).
+    但**执行会延迟**到 HTML 文档解析完成 (`<script defer>`).
 - Strict:
   - 模块代码默认在严格模式下执行.
 - Static:
