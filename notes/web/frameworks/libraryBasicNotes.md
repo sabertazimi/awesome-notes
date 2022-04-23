@@ -789,6 +789,7 @@ tags: [Web, Framework, Library]
 - [Three.js](https://github.com/mrdoob/three.js)
 - [Krpano](https://krpano.com/docu/js)
 - [React Three Fiber](https://github.com/pmndrs/react-three-fiber)
+- [Oasis: Web-first and Mobile-first High-performance Real-time Development Platform](https://github.com/oasis-engine/engine)
 
 ## Media
 
