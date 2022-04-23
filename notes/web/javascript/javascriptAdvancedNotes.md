@@ -4409,6 +4409,18 @@ observer.observe({ type: 'layout-shift', buffered: true });
 // }
 ```
 
+### PRPL Pattern
+
+`PRPL` pattern focuses on 4 main performance considerations:
+
+- Pushing critical resources efficiently:
+  minimize amount of round trips to server and reducing loading time.
+- Rendering initial route soon as possible:
+  improve user experience.
+- Pre-caching assets in the background for frequently visited routes:
+  minimize amount of requests to server and enable better offline experience.
+- Lazily loading routes and assets that aren’t requested as frequently.
+
 ### Performance Best Practice
 
 - Code optimization:
