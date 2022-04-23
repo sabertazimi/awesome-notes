@@ -7033,14 +7033,17 @@ JamStack 指的是一套用于构建现代网站的技术栈:
 - APIs: supercharging with services.
 - Markup: pre-rendering.
 
-CSR (Client Side Rendering): SPA
--> SSR (Server Side Rendering): SPA with SEO
--> SSG (Static Site Generation): SPA with pre-rendering
--> ISR (Incremental Static Regeneration) = SSG + SSR.
+### Rendering Patterns
 
+- CSR (Client Side Rendering): SPA.
+- SSR (Server Side Rendering): SPA with SEO.
+- SSG (Static Site Generation): SPA with pre-rendering.
+- ISR (Incremental Static Regeneration): SSG + SSR.
 - SSR + CSR: HomePage with SSR, dynamic with CSR.
 - SSG + CSR: HomePage with SSG, dynamic with CSR.
 - SSG + SSR: static with SSG, dynamic with SSR.
+
+[![Rendering Patterns](./figures/RenderingPatterns.png)](https://www.patterns.dev/posts/rendering-patterns)
 
 ### CSR
 
