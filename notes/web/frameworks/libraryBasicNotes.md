@@ -98,6 +98,7 @@ tags: [Web, Framework, Library]
 - [Nest: Enterprise-grade Server-side Applications on Top of TypeScript](https://github.com/nestjs/nest)
 - [Feathers.js: REST APIs with TypeScript](https://github.com/feathersjs/feathers)
 - [Egg.js](https://github.com/eggjs/egg)
+- [Midway: Serverless Framework for Front-end Developers](https://github.com/midwayjs/midway)
 - [Koa: Expressive Middleware using ES2017 Async Functions](https://github.com/koajs/koa)
 - [Connect: Express-like Middleware Layer Server](https://github.com/senchalabs/connect)
 - [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify)
