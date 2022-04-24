@@ -621,7 +621,7 @@ tags: [Web, Framework, Library]
 
 - [Typed.js](https://github.com/mattboldt/typed.js)
 - [TypeIt](https://github.com/alexmacarthur/typeit)
-- [Motto Animated Words](https://github.com/jrainlau/motto)
+- [Typewriter: React Typewriter Effect Component](https://github.com/awran5/react-simple-typewriter)
 
 ### Hover Effect Animation
 
