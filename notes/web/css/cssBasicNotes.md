@@ -5417,6 +5417,15 @@ module.exports = {
 
 ## Tailwind
 
+### Tailwind Configuration
+
+:::danger JIT Mode
+
+Missing `.html`/`.tsx`/`.vue` directory
+will lead to class purged.
+
+:::
+
 ### Tailwind Directives
 
 ```css
