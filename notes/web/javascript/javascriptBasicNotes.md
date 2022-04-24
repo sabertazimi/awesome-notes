@@ -7166,6 +7166,97 @@ Promise.all(partialSumPromises)
 
 - Web Worker performance [guide](https://mp.weixin.qq.com/s/IJHI9JB3nMQPi46b6yGVWw).
 
+### Abort Controller
+
+#### Abort Fetching
+
+```ts
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+interface Post {
+  id: number;
+  title: string;
+  body: string;
+}
+
+function usePostLoading() {
+  const { postId } = useParams<{ postId: string }>();
+  const [isLoading, setIsLoading] = useState(false);
+  const [post, setPost] = useState<Post | null>(null);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    setIsLoading(true);
+    fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+      signal: abortController.signal,
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+
+        return Promise.reject(Error('The request failed.'));
+      })
+      .then((fetchedPost: Post) => {
+        setPost(fetchedPost);
+      })
+      .catch(err => {
+        if (abortController.signal.aborted) {
+          console.log('The user aborted the request');
+        } else {
+          console.error(err.message);
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+
+    return () => {
+      abortController.abort();
+    };
+  }, [postId]);
+
+  return {
+    post,
+    isLoading,
+  };
+}
+
+export default usePostLoading;
+```
+
+#### Abort Promise
+
+```ts
+function wait(time: number, signal?: AbortSignal) {
+  return new Promise<void>((resolve, reject) => {
+    const timeoutId = setTimeout(() => {
+      resolve();
+    }, time);
+    signal?.addEventListener('abort', () => {
+      clearTimeout(timeoutId);
+      reject(Error('Aborted.'));
+    });
+  });
+}
+
+const abortController = new AbortController();
+
+setTimeout(() => {
+  abortController.abort();
+}, 1000);
+
+wait(5000, abortController.signal)
+  .then(() => {
+    console.log('5 seconds passed');
+  })
+  .catch(() => {
+    console.log('Waiting was interrupted');
+  });
+```
+
 ### Asynchronous API Comparison
 
 - `promise` 和 `async/await` 专门用于处理异步操作.
