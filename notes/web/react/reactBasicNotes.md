@@ -126,7 +126,7 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
 - [react-reconciler/src/ReactFiberBeginWork](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.new.js):
   - **beginWork**.
   - **updateHostRoot**/**updateXXXComponent**.
-  - ReactDOMComponent.createElement.
+  - `ReactDOMComponent.createElement`.
   - reconcileChildren.
 - [react-reconciler/src/ReactChildFiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.new.js):
   - reconcileChildFibers.
@@ -1086,7 +1086,7 @@ Reconciler construct Fiber tree:
     - 设置 `fiber.flags`, 标记副作用.
   - 根据实际情况, 设置 `fiber.flags`, 标记副作用.
   - 根据获取的下级 `ReactElement` 对象, 调用 `reconcileChildren` 生成 `Fiber` 子节点 (只生成次级子节点).
-- ReactDOMComponent.createElement() / ReactClassComponent.render() / ReactFunctionComponent().
+- `ReactDOMComponent.createElement()` / `ReactClassComponent.render()` / `ReactFunctionComponent()`.
 - **reconcileChildren**.
 - mountChildFibers/reconcileChildFibers:
   - `mountChildFibers`: similar logic, not tracking side effects.
@@ -1709,7 +1709,7 @@ function dispatchAction<S, A>(
   - 若 `includesSomeLane(renderLanes, workInProgress.childLanes) === true`,
     表明子节点需要更新, clone 并返回子节点.
 - **updateHostRoot/updateXXXComponent**.
-- ReactClassComponent.render() / ReactFunctionComponent() / ReactDOMComponent.createElement():
+- `ReactClassComponent.render()` / `ReactFunctionComponent()` / `ReactDOMComponent.createElement()`:
   遍历处理 Update Queue (`processUpdateQueue`/`HooksDispatcherOnUpdate`), 计算出 memoizedState,
   利用 pendingProps 与 memoizedState 产生新的 ReactElement.
 - **reconcileChildren**:
@@ -10865,7 +10865,7 @@ export default reportWebVitals;
 - Change `homepage` in `package.json`:
   - `"homepage": "."`.
   - `"homepage": "https://example.com/relative/path/"`.
-- Use `path={`${process.env.PUBLIC_URL}/about`}`
+- Use `path={'${process.env.PUBLIC_URL}/about'}`
   in `Routes.js` when using `react-router-dom`.
 - Or use `basename` for `react-router@^4`.
 
