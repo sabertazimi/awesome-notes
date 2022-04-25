@@ -176,7 +176,6 @@ point out that:
 ## Components Design Principles
 
 - [Components Checklist](https://www.smashingmagazine.com/ebooks/checklist-cards-digital)
-- [Form](https://www.smashingmagazine.com/printed-books/form-design-patterns)
 - [Accordion](https://www.smashingmagazine.com/2017/06/designing-perfect-accordion-checklist)
 - [Responsive Configurator](https://www.smashingmagazine.com/2018/02/designing-a-perfect-responsive-configurator)
 - [DateTime Picker](https://www.smashingmagazine.com/2017/07/designing-perfect-date-time-picker)
@@ -193,6 +192,9 @@ point out that:
 - [Navigation](https://www.smashingmagazine.com/2022/04/designing-better-navigation-ux-queries)
 
 ### Form Design Principles
+
+- Form design [blog](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post).
+- Form design [book](https://www.smashingmagazine.com/printed-books/form-design-patterns).
 
 #### Buttons Placement Principles
 

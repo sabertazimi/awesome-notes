@@ -4702,8 +4702,8 @@ Use pseudo elements to construct circle and line:
 
 #### 相同单元
 
-- ul + li + float
-- .container{text-align:center;} + .content{width: xx%;}
+- `ul` + `li` + `float`.
+- `.container{text-align:center;} + .content{width: xx%;}`.
 
 #### 元素定位
 
