@@ -2523,7 +2523,7 @@ ffmpeg -i input.mkv -i output.aac \
 
 ```bash
 # Merge pictures
-ffmpeg -i 1.png -i 2.png -filter_complex "vstack" output.png 
+ffmpeg -i 1.png -i 2.png -filter_complex "vstack" output.png
 ```
 
 #### FFmpeg Screenshot

@@ -10884,7 +10884,7 @@ function App() {
 
 - Deployment services [guide](https://hiddedevries.nl/en/blog/2020-06-27-how-deployment-services-make-client-side-routing-work).
 
-`vercel.json`:
+[`vercel.json`](https://vercel.com/support/articles/how-do-i-use-the-ignored-build-step-field-on-vercel):
 
 ```json
 {
