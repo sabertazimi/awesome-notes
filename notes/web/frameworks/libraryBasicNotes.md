@@ -490,6 +490,7 @@ tags: [Web, Framework, Library]
 - [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
 - [Tabulator: Interactive Tables and Data Grids for JavaScript](https://github.com/olifolkerd/tabulator)
 - [SheetJS: Spreadsheet Data Toolkit](https://github.com/SheetJS/sheetjs)
+- [FortuneSheet: Rich Excel and Google Sheets Features Spreadsheet library](https://github.com/ruilisi/fortune-sheet)
 - [HyperFormula: Complete Excel-like Calculation Engine Written in TypeScript](https://github.com/handsontable/hyperformula)
 
 ### Grid
