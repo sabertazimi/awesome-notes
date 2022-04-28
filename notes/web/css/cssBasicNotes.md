@@ -915,12 +915,12 @@ Multiple-column layout:
 
 ## Box Model
 
-- block-level box: display 属性为 block, list-item, table 的元素,
-  会生成 block-level box, 并且参与 block formatting context.
-- inline-level box: display 属性为 inline, inline-block, inline-table 的元素,
-  会生成 inline-level box, 并且参与 inline formatting context.
-- Flex Formatting Context(FFC).
-- Grid Formatting Context(GFC).
+- Block-level box: `display` 属性为 `block`, `list-item`, `table` 的元素,
+  会生成 block-level box, 并且参与 `Block Formatting Context` (BFC).
+- Inline-level box: `display` 属性为 `inline`, `inline-block`, `inline-table` 的元素,
+  会生成 inline-level box, 并且参与 `Inline Formatting Context` (IFC).
+- `Flex Formatting Context` (FFC).
+- `Grid Formatting Context` (GFC).
 
 ### Box Margin
 
@@ -957,7 +957,7 @@ having a computed value of `z-index` other than `auto`.
 Once apply a `position` property to a box,
 can use the `z-index` property to adjust its stack level.
 
-### Create BFC
+### Block Formatting Context Creation
 
 - 根元素或其它包含它的元素.
 - overflow: not visible (i.e hidden).
@@ -976,6 +976,23 @@ can use the `z-index` property to adjust its stack level.
 - empty block: margin-top with margin-bottom.
 
 Best Practice: only use `margin-bottom: 1em/1rem` for spacing.
+
+## Inline Patterns
+
+Inline Element 与父元素下边缘存在空隙,
+原因在于文字排版的基线对齐机制 (`vertical-align`).
+
+在标准模式中,
+Inline Formatting Context 总是会包含类似字母 'g'/'f' 尾巴伸出部分空间 (针对下行字母),
+即使 Inline BFC 中没有任何内容.
+`<img>`/`<a>` Inline Element 与父元素底部若干像素间隙,
+实际上是此种情况下的**字母尾巴**预留机制.
+
+清除间隙的方法 (`img` image 5px problem):
+
+- 父元素 `font-size: 0` / `line-height: 0`: 设置 Inline Formatting Context 高度为 0.
+- `vertical-align: bottom`: 改变基线对齐方式.
+- `display: block`: 转换为 Block Formatting Context.
 
 ## Float Patterns
 
