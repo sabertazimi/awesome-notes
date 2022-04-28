@@ -10083,3 +10083,40 @@ node --trace-deprecation node_modules/webpack/bin/webpack.js
 
 - [Webpack 4 Tutorial](https://nystudio107.com/blog/an-annotated-webpack-4-config-for-frontend-web-development)
 - [Custom Plugin](https://juejin.cn/post/6870055445034172424)
+
+## Vite
+
+```ts
+import path from 'node:path';
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+
+export default defineConfig({
+  plugins: [
+    react(),
+    dts({
+      insertTypesEntry: true,
+    }),
+  ],
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, 'src/lib/index.ts'),
+      name: 'SafeView',
+      formats: ['es', 'umd'],
+      fileName: format => `safeview.${format}.js`,
+    },
+    rollupOptions: {
+      external: ['react', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+      },
+    },
+    minify: true,
+    sourcemap: true,
+  },
+});
+```
