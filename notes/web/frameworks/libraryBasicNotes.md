@@ -805,6 +805,7 @@ tags: [Web, Framework, Library]
 - [Meyda: Audio Feature Extraction](https://github.com/meyda/meyda)
 - [WaveSurfer: Navigable Waveform Built on Web Audio and Canvas](https://github.com/katspaugh/wavesurfer.js)
 - [Wave.js: Audio Visualizer](https://github.com/foobar404/Wave.js)
+- [Peaks: JavaScript UI Component for Interacting with Audio Waveforms](https://github.com/bbc/peaks.js)
 
 ### Video
 
@@ -1048,7 +1049,7 @@ tags: [Web, Framework, Library]
 ### Parser
 
 - [UnifiedJS: Interface for Parsing, Inspecting, Transforming and Serializing Content through Syntax Trees](https://github.com/unifiedjs/unified)
-- [HTML Parser](https://github.com/taoqf/node-html-parser)
+- [HTML Parser](https://github.com/fb55/htmlparser2)
 - [YAML Parser](https://github.com/jonschlinkert/gray-matter)
 - [XML Parser](https://github.com/TobiasNickel/tXml)
 - [SVG Parser](https://github.com/sebmarkbage/art)
