@@ -70,6 +70,8 @@ consistent (and relative) to each other:
 
 - Set the vertical white space between elements to a multiple of base-size.
 - Set the line-height of all text elements to a multiple of base-size.
+- Set `margin-top` and `margin-bottom` to `<h1>` ~ `<h6>`/`<hr>` elements
+  set `margin-bottom` to normal elements.
 
 ### Table
 
