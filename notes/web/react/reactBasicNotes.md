@@ -9180,6 +9180,12 @@ Prevent useless re-rendering:
   可以从不变的部分里分割出变化的部分.
   通过将变化部分的 `state` 向下移动从而抽象出变化的子组件,
   或者将**变化内容提升** (**Lift Up**) 到父组件从而将不变部分独立出来:
+  - Composition pattern, composite immutable/expensive component:
+    - Sibling component.
+    - Props component: `props.children`/`props.renderProps`.
+  - Make reference values become immutable:
+    - Styles (`object`).
+    - Event callbacks (`function`).
 
 ```tsx
 // BAD
@@ -9211,6 +9217,8 @@ function ExpensiveTree() {
 }
 ```
 
+Composite sibling component:
+
 ```tsx
 // GOOD
 // <ExpensiveTree> will not re-rendering.
@@ -9233,6 +9241,8 @@ function Form() {
   );
 }
 ```
+
+Composite props component:
 
 ```tsx
 // GOOD
@@ -9258,6 +9268,20 @@ function ColorPicker({ children }) {
 ```
 
 ```tsx
+function Parent({ children, lastChild }) {
+  return (
+    <div className="parent">
+      <ChildA /> {/* Only ChildA gets re-rendered */}
+      {children} {/* Bailed out */}
+      {lastChild} {/* Bailed out */}
+    </div>
+  );
+}
+```
+
+Immutable objects:
+
+```tsx
 // BAD
 function App1(items) {
   return <BigListComponent style={{ width: '100%' }} items={items} />;
@@ -9271,6 +9295,8 @@ function App2(items) {
 }
 ```
 
+Immutable functions:
+
 ```tsx
 // BAD: Inline function
 function App1(items) {
@@ -9282,18 +9308,6 @@ const clickHandler = () => dispatchEvent();
 
 function App2(items) {
   return <BigListComponent onClick={clickHandler} />;
-}
-```
-
-```tsx
-function Parent({ children, lastChild }) {
-  return (
-    <div className="parent">
-      <ChildA /> {/* Only ChildA gets re-rendered */}
-      {children} {/* Bailed out */}
-      {lastChild} {/* Bailed out */}
-    </div>
-  );
 }
 ```
 
