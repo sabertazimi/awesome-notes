@@ -2233,8 +2233,10 @@ class Example {
 
 ## Type System
 
-TypeScript Type System is
-[Turing Complete](https://github.com/microsoft/TypeScript/issues/14833).
+TypeScript type system:
+
+- [Turing complete](https://github.com/microsoft/TypeScript/issues/14833) type system.
+- Structural type system: type checking focuses on shape (`Duck Typing`).
 
 ### Covariance
 
