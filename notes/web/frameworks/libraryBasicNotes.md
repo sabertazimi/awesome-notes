@@ -861,6 +861,7 @@ tags: [Web, Framework, Library]
 
 - [SandPack: Toolkit for creating live-running code editing experiences](https://github.com/codesandbox/sandpack)
 - [React Live: Flexible Playground for Live Editing React Components](https://github.com/FormidableLabs/react-live)
+- [React Runner](https://github.com/nihgwu/react-runner)
 - [SyncedStore: CRDT for Building Live and Collaborative Applications](https://github.com/yousefed/SyncedStore)
 
 ### Web IDE
