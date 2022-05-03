@@ -1065,6 +1065,7 @@ tags: [Web, Framework, Library]
 
 - [Acorn](https://github.com/acornjs/acorn)
 - [Babel](https://github.com/babel/babel)
+- [Sucrase: Super-fast Alternative to Babel Targeting Modern JS Runtime](https://github.com/alangpierce/sucrase)
 - [Espree](https://github.com/eslint/espree)
 - [Esprima](https://github.com/jquery/esprima)
 - [AST Explorer](https://github.com/fkling/astexplorer)
