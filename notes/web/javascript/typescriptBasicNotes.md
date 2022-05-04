@@ -437,7 +437,7 @@ enum EvidenceTypeEnum {
 }
 ```
 
-### Enum with Functions
+### Enum Parameters
 
 ```ts
 enum Weekday {
@@ -469,7 +469,7 @@ console.log(Weekday.isBusinessDay(mon)); // true
 console.log(Weekday.isBusinessDay(sun));
 ```
 
-### Enum as Flags
+### Enum Flags
 
 ```ts
 enum AnimalFlags {
@@ -541,16 +541,49 @@ const getColorByName = (name = ''): string => {
 };
 ```
 
-### Internal of Enum
+### Enum Internals
+
+`const` enums don’t have representation at runtime,
+its member values are used directly.
 
 ```ts
+// Source code:
+const enum NoYes {
+  No,
+  Yes,
+}
+
+function toGerman(value: NoYes) {
+  switch (value) {
+    case NoYes.No:
+      return 'Neither';
+    case NoYes.Yes:
+      return 'Ja';
+  }
+}
+
+// Compiles to:
+function toGerman(value) {
+  switch (value) {
+    case 'No' /* No */:
+      return 'Neither';
+    case 'Yes' /* Yes */:
+      return 'Ja';
+  }
+}
+```
+
+Non-const enums are objects:
+
+```ts
+// Source code:
 enum Tristate {
   False,
   True,
   Unknown,
 }
 
-// compiles to
+// Compiles to:
 let Tristate;
 (function (Tristate) {
   Tristate[(Tristate.False = 0)] = 'False';
@@ -561,6 +594,19 @@ let Tristate;
 console.log(Tristate[0]); // 'False'
 console.log(Tristate.False); // 0
 console.log(Tristate[Tristate.False]); // 'False' because `Tristate.False == 0`
+```
+
+```ts
+enum NoYes {
+  No = 'NO!',
+  Yes = 'YES!',
+}
+
+let NoYes;
+(function (NoYes) {
+  NoYes.No = 'NO!';
+  NoYes.Yes = 'YES!';
+})(NoYes || (NoYes = {}));
 ```
 
 ## Function
