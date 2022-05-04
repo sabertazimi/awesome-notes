@@ -192,6 +192,7 @@ point out that:
 - [Push Notification](https://www.smashingmagazine.com/2022/04/guide-push-notifications-developers)
 - [Carousel](https://www.smashingmagazine.com/2022/04/designing-better-carousel-ux)
 - [Navigation](https://www.smashingmagazine.com/2022/04/designing-better-navigation-ux-queries)
+- [Language Selector](https://www.smashingmagazine.com/2022/05/designing-better-language-selector)
 
 ### Form Design Principles
 
