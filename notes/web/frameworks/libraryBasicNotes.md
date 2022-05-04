@@ -161,13 +161,11 @@ tags: [Web, Framework, Library]
 
 - [ReactUse Hooks](https://github.com/streamich/react-use)
 - [Alibaba Hooks](https://github.com/alibaba/hooks)
-- [Platform Hooks: Browser APIs Turned into Hooks](https://github.com/jaredpalmer/the-platform)
 - [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
 - [ReactHook: Strongly Typed and Concurrent Mode-safe Hooks](https://github.com/jaredLunde/react-hook)
 - [Optimistic State Hooks](https://github.com/perceived-dev/optimistic-state)
-- [Use Hooks Gallery](https://github.com/uidotdev/usehooks)
-- [React Hooks Gallery](https://github.com/nikgraf/react-hooks)
 - [React Media Query Hook](https://github.com/yocontra/react-responsive)
+- [React Hooks Gallery](https://github.com/nikgraf/react-hooks)
 
 ### Vue Composition API
 
