@@ -1760,6 +1760,25 @@ type B = Awaited<Promise<Promise<number>>>;
 type C = Awaited<boolean | Promise<number>>;
 ```
 
+```ts
+type Sync<T> = {
+  [K in keyof T]: T[K] extends (...args: any[]) => Promise<infer Result>
+    ? (...args: Parameters<T[K]>) => Result
+    : T[K];
+};
+
+interface AsyncInterface {
+  compute(arg: number): Promise<boolean>;
+  createString(): Promise<String>;
+}
+
+type SyncInterface = Sync<AsyncInterface>;
+// type SyncInterface = {
+//     compute: (arg: number) => boolean;
+//     createString: () => String;
+// }
+```
+
 ### Proxy Types
 
 ```ts
