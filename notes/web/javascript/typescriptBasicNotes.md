@@ -2280,8 +2280,8 @@ class Example {
 
 TypeScript type system:
 
-- [Turing complete](https://github.com/microsoft/TypeScript/issues/14833) type system.
 - Structural type system: type checking focuses on shape (`Duck Typing`).
+- [Turing complete](https://github.com/microsoft/TypeScript/issues/14833) type system.
 
 ### Covariant
 
@@ -2361,9 +2361,18 @@ logger = logAdmin;
 logger(user); // Oops! `user.isSuperAdmin` is undefined.
 ```
 
+### Type Gymnastics
+
+[Type programming](https://exploringjs.com/tackling-ts/ch_computing-with-types-overview.html):
+
+| Level         | Environment  | Operands       | Operations    |
+| ------------- | ------------ | -------------- | ------------- |
+| Program level | Runtime      | Values         | Functions     |
+| Type level    | Compile time | Specific types | Generic types |
+
 ## TypeScript Reference
 
+- [Tackling TypeScript](https://exploringjs.com/tackling-ts/index.html)
 - [TypeScript Deep Dive](https://github.com/basarat/typescript-book)
 - [Clean TypeScript Code](https://github.com/labs42io/clean-code-typescript)
 - [Effective TypeScript](https://github.com/danvk/effective-typescript)
-- [TypeScript Compiler Internal](https://mp.weixin.qq.com/s/XF8tWJlwZC04WTdmltmXNQ)
