@@ -1347,9 +1347,9 @@ const arrayList = createList<any[]>(); // ok
 const boolList = createList<boolean>(); // error
 ```
 
-### Generic Types for Types Programming
+### Generic Types Programming
 
-- 在类型编程里, 泛型就是变量.
+在类型编程里, 泛型就是变量:
 
 ```ts
 function pick<T extends object, U extends keyof T>(obj: T, keys: U[]): T[U][] {
