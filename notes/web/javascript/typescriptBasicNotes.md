@@ -1359,11 +1359,10 @@ function pick<T extends object, U extends keyof T>(obj: T, keys: U[]): T[U][] {
 
 ## Union Types
 
-多种类型之一
-
 ```ts
 function formatCommandLine(command: string[] | string) {
   let line = '';
+
   if (typeof command === 'string') {
     line = command.trim();
   } else {
@@ -1386,8 +1385,6 @@ interface Rectangle {
   height: number;
 }
 
-// 有人仅仅是添加了 `Circle` 类型
-// 我们可能希望 TypeScript 能在任何被需要的地方抛出错误
 interface Circle {
   kind: 'circle';
   radius: number;
@@ -1938,6 +1935,27 @@ function getArea(shape: Shape) {
       const _exhaustiveCheck: never = shape;
       return _exhaustiveCheck;
     }
+  }
+}
+```
+
+Exhaustiveness checks:
+
+```ts
+class UnsupportedValueError extends Error {
+  constructor(value: never) {
+    super(`Unsupported value: ${value}`);
+  }
+}
+
+function toGerman4(value: NoYesStrings): string {
+  switch (value) {
+    case 'Yes':
+      return 'Ja';
+    default:
+      // @ts-expect-error: Argument of type '"No"'
+      // is not assignable to parameter of type 'never'. (2345)
+      throw new UnsupportedValueError(value);
   }
 }
 ```
