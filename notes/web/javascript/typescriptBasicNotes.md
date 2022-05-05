@@ -1267,7 +1267,7 @@ interface Disposable {
 
 class TypedEvent<T> {
   private listeners: Listener<T>[] = [];
-  private listenersOncer: Listener<T>[] = [];
+  private listenersOnce: Listener<T>[] = [];
 
   public on = (listener: Listener<T>): Disposable => {
     this.listeners.push(listener);
@@ -1278,7 +1278,7 @@ class TypedEvent<T> {
   };
 
   public once = (listener: Listener<T>): void => {
-    this.listenersOncer.push(listener);
+    this.listenersOnce.push(listener);
   };
 
   public off = (listener: Listener<T>) => {
@@ -1289,9 +1289,8 @@ class TypedEvent<T> {
   public emit = (event: T) => {
     this.listeners.forEach(listener => listener(event));
 
-    this.listenersOncer.forEach(listener => listener(event));
-
-    this.listenersOncer = [];
+    this.listenersOnce.forEach(listener => listener(event));
+    this.listenersOnce = [];
   };
 
   public pipe = (te: TypedEvent<T>): Disposable => {
@@ -2222,11 +2221,12 @@ TypeScript type system:
 - [Turing complete](https://github.com/microsoft/TypeScript/issues/14833) type system.
 - Structural type system: type checking focuses on shape (`Duck Typing`).
 
-### Covariance
+### Covariant
 
-Covariance (协变性):
+Covariant (协变性):
 
-Type `T` is **covariant** if having `S <: P`, then `T<S> <: T<P>`.
+Type `T` is **covariant** if having `S <: P`,
+then `T<S> <: T<P>`.
 
 ```ts
 type IsSubtype<S, P> = S extends P ? true : false;
@@ -2244,11 +2244,12 @@ type T4 = IsSubtype<Capitalize<'Hello'>, Capitalize<string>>;
 // type T4 = true
 ```
 
-### Contravariance
+### Contravariant
 
-Contravariance (逆变性):
+Contravariant (逆变性):
 
-Type `T` is **contravariant** if having `S <: P`, then `T<P> <: T<S>`.
+Type `T` is **contravariant** if having `S <: P`,
+then `T<P> <: T<S>`.
 
 ```ts
 type IsSubtype<S, P> = S extends P ? true : false;
