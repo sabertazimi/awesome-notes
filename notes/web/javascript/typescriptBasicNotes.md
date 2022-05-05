@@ -28,19 +28,19 @@ npx tsc --init
 npm i -D @tsconfig/create-react-app
 ```
 
-Basic [tsconfig](https://www.typescriptlang.org/tsconfig):
+Basic [`tsconfig`](https://www.typescriptlang.org/tsconfig):
 
-- [extends](https://github.com/tsconfig/bases):
-  - `@tsconfig/recommended/tsconfig.json`
-  - `@tsconfig/create-react-app/tsconfig.json`
-  - `@tsconfig/node16/tsconfig.json`
-  - `@tsconfig/deno/tsconfig.json`
-- include
-- exclude
-- buildOptions
-- compilerOptions
-- watchOptions
-- tsNode
+- [`extends`](https://github.com/tsconfig/bases):
+  - `@tsconfig/recommended/tsconfig.json`.
+  - `@tsconfig/create-react-app/tsconfig.json`.
+  - `@tsconfig/node16/tsconfig.json`.
+  - `@tsconfig/deno/tsconfig.json`.
+- `include`.
+- `exclude`.
+- `buildOptions`.
+- `compilerOptions`.
+- `watchOptions`.
+- `tsNode`.
 
 ```json
 {
@@ -369,19 +369,19 @@ declare namespace React {
 
 ## Basic Types
 
-- boolean
-- number
-- string
-- array
-- tuple:
-  array with **fixed number** of elements whose types are known (no need to be same).
-- enum
-- void
-- null
-- undefined
-- any
-- unknown: 任何类型都能分配给 unknown, 但 unknown 不能分配给其他基本类型.
-- never: switch default case guard.
+- `boolean`.
+- `number`.
+- `string`.
+- `array`.
+- `tuple`:
+  `array` with **fixed number** of elements whose types are known.
+- `enum`.
+- `void`.
+- `null`.
+- `undefined`.
+- `any`.
+- `unknown`: 任何类型都能分配给 `unknown`, 但 `unknown` 不能分配给其他基本类型.
+- `never`: `switch` default case guard (exhaustiveness checks).
 
 ```ts
 let num: number;
@@ -671,7 +671,7 @@ const str = overloaded(''); // str 被推断为 'string'
 const num = overloaded(123); // num 被推断为 'number'
 ```
 
-WangCai extends Dog extends Animal.
+WangCai `extends` Dog `extends` Animal.
 Animal => WangCai 是 Dog => Dog 的子类型:
 
 - 函数参数的类型兼容是反向的, 称之为逆变.
@@ -967,7 +967,7 @@ because expression of type 'string' can't be used to index type XXX.
 Can fixed with:
 
 - `Record<string, T>`.
-- explicit `const` `propertyName` type.
+- Explicit `const` `propertyName` type.
 
 ```ts
 // propertyName should be extends keyof T
@@ -1634,10 +1634,9 @@ Combine with:
 - `as`.
 - Template literal types.
 - Conditional types.
-- Built-in types.
+- Builtin types.
 - Other mapped types.
 - Other custom types.
-- etc.
 
 ```ts
 // Removes 'readonly' attributes from a type's properties
@@ -1716,7 +1715,7 @@ type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>;
 
 ## Utility Types
 
-### Null Type
+### Null Types
 
 ```ts
 type Nullish = null | undefined;
@@ -1725,14 +1724,14 @@ type NonUndefinedable<A> = A extends undefined ? never : A;
 type NonNullable<T> = T extends null | undefined ? never : T;
 ```
 
-### Boolean Type
+### Boolean Types
 
 ```ts
 type Falsy = false | '' | 0 | null | undefined;
 const isFalsy = (val: unknown): val is Falsy => !val;
 ```
 
-### Primitive Type
+### Primitive Types
 
 ```ts
 type Primitive = string | number | boolean | bigint | symbol | null | undefined;
@@ -1756,7 +1755,7 @@ const isPrimitive = (val: unknown): val is Primitive => {
 };
 ```
 
-### Promise Type
+### Promise Types
 
 ```ts
 // TypeScript 4.5.
@@ -1773,7 +1772,7 @@ type B = Awaited<Promise<Promise<number>>>;
 type C = Awaited<boolean | Promise<number>>;
 ```
 
-### Proxy Type
+### Proxy Types
 
 ```ts
 interface Proxy<T> {
@@ -1784,7 +1783,7 @@ interface Proxy<T> {
 type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
 ```
 
-### Recursive Type
+### Recursive Types
 
 ```ts
 type DeepReadonly<T> = {
