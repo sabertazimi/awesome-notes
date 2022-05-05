@@ -8,7 +8,7 @@ tags: [Web, JavaScript, TypeScript]
 
 # TypeScript Basic Notes
 
-## TypeScript Configuration
+## TypeScript Toolchain
 
 ### TypeScript Installation
 
@@ -17,7 +17,7 @@ npm i -D typescript
 npm i -D react react-dom @types/node @types/react @types/react-dom
 ```
 
-### TypeScript Config File
+### TypeScript Configuration
 
 ```bash
 npx tsconfig.json
@@ -119,7 +119,7 @@ Basic [tsconfig](https://www.typescriptlang.org/tsconfig):
 }
 ```
 
-### Webpack for TypeScript
+### Webpack Configuration
 
 ```bash
 npm i -D typescript ts-loader source-map-loader
@@ -154,9 +154,7 @@ module.exports = {
 };
 ```
 
-### Lint Tools
-
-#### ESLint
+### ESLint Configuration
 
 - [ESLint for TypeScript](https://github.com/typescript-eslint/typescript-eslint)
 
@@ -164,15 +162,23 @@ module.exports = {
 npx eslint --init
 ```
 
-#### TSLint
-
-- [TSLint Config Airbnb](https://github.com/progre/tslint-config-airbnb)
-
-### Defined Types Tools
+### Defined Types
 
 - [Types Definition](https://github.com/DefinitelyTyped/DefinitelyTyped)
 - [DTSGen: Creates starter TypeScript definition files for any module or library](https://github.com/Microsoft/dts-gen)
 - [DTSLint: A utility built on TSLint for linting TypeScript declaration files](https://github.com/microsoft/dtslint)
+
+### TypeScript Tools
+
+- [TS Config](https://github.com/tsconfig/bases)
+- [TS Node](https://github.com/TypeStrong/ts-node)
+- [TS Jest](https://github.com/kulshekhar/ts-jest)
+
+```bash
+npm i -D jest typescript ts-jest @types/jest
+npx ts-jest config:init
+npx jest
+```
 
 ### TypeScript Compiler Performance
 
@@ -181,6 +187,18 @@ npx eslint --init
 - Skip type checking (sometimes).
 - Multithread: `ts-loader` + `fork-ts-checker-plugin`.
 - Faster tools: `swc`/`rome`.
+
+### TypeScript Project Reference
+
+[Project Reference](https://www.typescriptlang.org/docs/handbook/project-references.html)
+for TypeScript compile and build [Speed](https://github.com/typescript-cheatsheets/speed).
+
+### TypeScript Monorepo
+
+[TypeScript Monorepo](https://2ality.com/2021/07/simple-monorepos.html):
+
+- NPM workspaces.
+- TypeScript references.
 
 ## Modules
 
@@ -2000,80 +2018,6 @@ function handler(event: Event) {
 }
 ```
 
-## Mixins
-
-```ts
-// 所有 mixins 都需要
-type Constructor<T = {}> = new (...args: any[]) => T;
-
-/////////////
-// mixins 例子
-////////////
-
-// 添加属性的混合例子
-function TimesTamped<TBase extends Constructor>(Base: TBase) {
-  return class extends Base {
-    timestamp = Date.now();
-  };
-}
-
-// 添加属性和方法的混合例子
-function ActiveTable<TBase extends Constructor>(Base: TBase) {
-  return class extends Base {
-    isActivated = false;
-
-    activate() {
-      this.isActivated = true;
-    }
-
-    deactivate() {
-      this.isActivated = false;
-    }
-  };
-}
-
-///////////
-// 组合类
-///////////
-
-// 简答的类
-class User {
-  name = '';
-}
-
-// 添加 TimesTamped 的 User
-const TimestampedUser = TimesTamped(User);
-
-// Tina TimesTamped 和 ActiveTable 的类
-const TimestampedActiveTableUser = TimesTamped(ActiveTable(User));
-
-//////////
-// 使用组合类
-//////////
-
-const timestampedUserExample = new TimestampedUser();
-console.log(timestampedUserExample.timestamp);
-
-const timestampedActiveTableUserExample = new TimestampedActiveTableUser();
-console.log(timestampedActiveTableUserExample.timestamp);
-console.log(timestampedActiveTableUserExample.isActivated);
-```
-
-## Closure
-
-```ts
-const { called } = new (class {
-  count = 0;
-  called = () => {
-    this.count++;
-    console.log(`Called : ${this.count}`);
-  };
-})();
-
-called(); // Called : 1
-called(); // Called : 2
-```
-
 ## Decorators
 
 - Attaching to a class:
@@ -2400,31 +2344,7 @@ logger = logAdmin;
 logger(user); // Oops! `user.isSuperAdmin` is undefined.
 ```
 
-## Project Reference
-
-[Project Reference](https://www.typescriptlang.org/docs/handbook/project-references.html)
-for TypeScript compile and build [Speed](https://github.com/typescript-cheatsheets/speed).
-
-## Monorepo
-
-[TypeScript Monorepo](https://2ality.com/2021/07/simple-monorepos.html):
-
-- NPM workspaces.
-- TypeScript references.
-
-## TypeScript Tools
-
-- [TS Config](https://github.com/tsconfig/bases)
-- [TS Node](https://github.com/TypeStrong/ts-node)
-- [TS Jest](https://github.com/kulshekhar/ts-jest)
-
-```bash
-npm i -D jest typescript ts-jest @types/jest
-npx ts-jest config:init
-npx jest
-```
-
-## Reference
+## TypeScript Reference
 
 - [TypeScript Deep Dive](https://github.com/basarat/typescript-book)
 - [Clean TypeScript Code](https://github.com/labs42io/clean-code-typescript)

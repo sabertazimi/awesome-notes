@@ -3042,6 +3042,63 @@ animator.stop();
 // stop! in the name of love!
 ```
 
+```ts
+// 所有 mixins 都需要:
+type Constructor<T = {}> = new (...args: any[]) => T;
+
+/////////////
+// mixins 例子
+////////////
+
+// 添加属性的混合例子
+function TimesTamped<TBase extends Constructor>(Base: TBase) {
+  return class extends Base {
+    timestamp = Date.now();
+  };
+}
+
+// 添加属性和方法的混合例子
+function ActiveTable<TBase extends Constructor>(Base: TBase) {
+  return class extends Base {
+    isActivated = false;
+
+    activate() {
+      this.isActivated = true;
+    }
+
+    deactivate() {
+      this.isActivated = false;
+    }
+  };
+}
+
+///////////
+// 组合类
+///////////
+
+// 简答的类
+class User {
+  name = '';
+}
+
+// 添加 TimesTamped 的 User
+const TimestampedUser = TimesTamped(User);
+
+// Tina TimesTamped 和 ActiveTable 的类
+const TimestampedActiveTableUser = TimesTamped(ActiveTable(User));
+
+//////////
+// 使用组合类
+//////////
+
+const timestampedUserExample = new TimestampedUser();
+console.log(timestampedUserExample.timestamp);
+
+const timestampedActiveTableUserExample = new TimestampedActiveTableUser();
+console.log(timestampedActiveTableUserExample.timestamp);
+console.log(timestampedActiveTableUserExample.isActivated);
+```
+
 ## Programming Paradigms
 
 Each programming language realizes one or more paradigms.
