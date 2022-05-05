@@ -1412,6 +1412,24 @@ function area(s: Shape) {
 }
 ```
 
+`IteratorResult` discriminated union:
+
+```ts
+interface IteratorYieldResult<TYield> {
+  done?: false; // boolean literal type
+  value: TYield;
+}
+
+interface IteratorReturnResult<TReturn> {
+  done: true; // boolean literal type
+  value: TReturn;
+}
+
+type IteratorResult<T, TReturn = any> =
+  | IteratorYieldResult<T>
+  | IteratorReturnResult<TReturn>;
+```
+
 ## Intersection Types
 
 extend 是一种非常常见的模式,
