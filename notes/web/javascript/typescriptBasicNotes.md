@@ -840,7 +840,7 @@ window.ts.transpileModule(src, {});
 
 ### Member Access Modifiers
 
-Public, Protected and Private:
+`public`, `protected` and `private`:
 
 ```ts
 class Singleton {
@@ -867,7 +867,7 @@ const instance = Singleton.getInstance(); // do some thing with the instance
 
 ### Readonly Types
 
-Readonly type:
+`readonly`:
 
 ```ts
 interface Foo {
@@ -882,7 +882,7 @@ const foo: Foo = { bar: 123, bas: 456 };
 foo.bar = 456; // Error: foo.bar 为仅读属性
 ```
 
-Readonly indexable signature:
+`readonly` indexable signature:
 
 ```ts
 type Foo = Readonly<Record<number, number>>;
@@ -894,7 +894,7 @@ console.log(foo[0]); // ok（读取）
 foo[0] = 456; // Error: 属性只读
 ```
 
-Readonly properties of class:
+`readonly` class properties:
 
 ```ts
 class Foo {
@@ -906,7 +906,7 @@ class Foo {
 }
 ```
 
-Readonly generic type:
+`readonly` generic type:
 
 ```ts
 interface Foo {
@@ -923,7 +923,7 @@ foo.bar = 456; // ok
 fooReadonly.bar = 456; // Error: bar 属性只读
 ```
 
-React readonly props:
+`readonly` `React` props:
 
 ```ts
 class Something extends React.Component<{ foo: number }, { baz: number }> {
@@ -957,17 +957,17 @@ console.log(foo.Hello); // World
 TypeScript will give an error to prevent beginners
 from doing such things.
 
-**Index Signature Error**:
+**Index signature error**:
 
 ```bash
 Element implicitly has an 'any' type
 because expression of type 'string' can't be used to index type XXX.
 ```
 
-can fixed with:
+Can fixed with:
 
 - `Record<string, T>`.
-- explicit **const** propertyName type:
+- explicit `const` `propertyName` type.
 
 ```ts
 // propertyName should be extends keyof T
@@ -1031,7 +1031,7 @@ type FromSomeIndex<K extends string> = { [key in K]: number };
 
 ### Symbol Index Types
 
-From [typescript v4.4.0](https://github.com/microsoft/TypeScript/pull/44512):
+Since [typescript v4.4.0](https://github.com/microsoft/TypeScript/pull/44512):
 
 ```ts
 type SymbolMap<T> = Record<symbol, T>;
@@ -1062,7 +1062,7 @@ colors[blue] = 'da ba dee'; // Error: Type 'string' is not assignable to type 'n
 
 ### Template Literal Index Types
 
-From [typescript v4.4.0](https://github.com/microsoft/TypeScript/pull/44512):
+Since [typescript v4.4.0](https://github.com/microsoft/TypeScript/pull/44512):
 
 ```ts
 type DataProps = Record<`data-${string}`, string>;
@@ -1112,7 +1112,7 @@ type Age2 = Person['age'];
 // type Age2 = number
 ```
 
-`{ [K in keyof T]: indexedType }[keyof T]`: 返回键名 (键名组成的联合类型)
+`{ [K in keyof T]: indexedType }[keyof T]` 返回键名 (键名组成的联合类型):
 
 ```ts
 type PickByValueType<T, ValueType> = Pick<
@@ -1179,10 +1179,10 @@ configure('automatic');
 
 - Based on literal types.
 - 4 intrinsic String Manipulation Types:
-  - `Uppercase<StringType>`
-  - `Lowercase<StringType>`
-  - `Capitalize<StringType>`
-  - `Uncapitalize<StringType>`
+  - `Uppercase<StringType>`.
+  - `Lowercase<StringType>`.
+  - `Capitalize<StringType>`.
+  - `Uncapitalize<StringType>`.
 
 ```ts
 interface PropEventSource<Type> {
@@ -1418,8 +1418,7 @@ type IteratorResult<T, TReturn = any> =
 
 ## Intersection Types
 
-extend 是一种非常常见的模式,
-intersection type 具有所有类型的功能
+`intersection` type 具有所有类型的功能:
 
 ```ts
 function extend<T, U>(first: T, second: U): T & U {
@@ -1441,53 +1440,6 @@ const x = extend({ a: 'hello' }, { b: 42 });
 // 现在 x 拥有了 a 属性与 b 属性
 const a = x.a;
 const b = x.b;
-```
-
-`connect` in React
-
-```ts
-import * as React from 'react';
-import type * as Redux from 'redux';
-
-import type { MyReduxState } from './my-root-reducer.ts';
-
-export interface OwnProps {
-  propFromParent: number;
-}
-
-interface StateProps {
-  propFromReduxStore: string;
-}
-
-interface DispatchProps {
-  onSomeEvent: () => void;
-}
-
-type Props = StateProps & DispatchProps & OwnProps;
-
-interface State {
-  internalComponentStateField: string;
-}
-
-class MyComponent extends React.Component<Props, State> {
-  // ...
-}
-
-function mapStateToProps(state: MyReduxState, ownProps: OwnProps): StateProps {
-  // ...
-}
-
-function mapDispatchToProps(
-  dispatch: Redux.Dispatch<any>,
-  ownProps: OwnProps
-): DispatchProps {
-  // ...
-}
-
-export default connect<StateProps, DispatchProps, OwnProps>(
-  mapStateToProps,
-  mapDispatchToProps
-)(MyComponent);
 ```
 
 ## Conditional Types
@@ -1544,7 +1496,7 @@ type TypeName<T> = T extends string
 - When conditional types act on a generic type,
   they become distributive when given a union type.
 - `( A | B | C ) extends T ? X : Y` 相当于
-  `(A extends T ? X : Y) | (B extends T ? X : Y) | (B extends T ? X : Y)`
+  `(A extends T ? X : Y) | (B extends T ? X : Y) | (B extends T ? X : Y)`.
 - 没有被额外包装的联合类型参数, 在条件类型进行判定时会将联合类型分发, 分别进行判断.
 
 ```ts
@@ -1609,7 +1561,9 @@ color = 'anythingElse'; // Error
 
 ## Mapped Types
 
-[Built-in Mapped Types](https://github.com/microsoft/TypeScript/blob/main/src/lib/es5.d.ts#L1448-L1546).
+### Builtin Mapped Types
+
+- [Builtin mapped types](https://github.com/microsoft/TypeScript/blob/7d60dc1f5db04cc01cba2e1def292432fa41a7ee/src/lib/es5.d.ts#L1468-L1612).
 
 ### Basic Mapped Types
 
@@ -1851,7 +1805,7 @@ type DeepRequired<T> = {
 };
 ```
 
-- [`PathOf<Form>` complex recursive types](https://mp.weixin.qq.com/s/KJdUdwbLN4g4M7xy34m-fA)
+- [`PathOf<Form>` complex recursive types](https://mp.weixin.qq.com/s/KJdUdwbLN4g4M7xy34m-fA).
 
 ### Lodash Types
 
@@ -2002,8 +1956,8 @@ function toGerman4(value: NoYesStrings): string {
 
 ## Type Assertion
 
-- `<type>`
-- `as type`
+- `<type>`.
+- `as type`.
 
 > `as` is better in `.jsx`
 
