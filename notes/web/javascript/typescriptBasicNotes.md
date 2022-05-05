@@ -867,7 +867,7 @@ const instance = Singleton.getInstance(); // do some thing with the instance
 
 ### Readonly Types
 
-Readonly type
+Readonly type:
 
 ```ts
 interface Foo {
@@ -882,7 +882,7 @@ const foo: Foo = { bar: 123, bas: 456 };
 foo.bar = 456; // Error: foo.bar 为仅读属性
 ```
 
-Readonly indexable signature
+Readonly indexable signature:
 
 ```ts
 type Foo = Readonly<Record<number, number>>;
@@ -894,7 +894,7 @@ console.log(foo[0]); // ok（读取）
 foo[0] = 456; // Error: 属性只读
 ```
 
-Readonly properties of class
+Readonly properties of class:
 
 ```ts
 class Foo {
@@ -906,7 +906,7 @@ class Foo {
 }
 ```
 
-Readonly generic type
+Readonly generic type:
 
 ```ts
 interface Foo {
@@ -923,7 +923,7 @@ foo.bar = 456; // ok
 fooReadonly.bar = 456; // Error: bar 属性只读
 ```
 
-In React
+React readonly props:
 
 ```ts
 class Something extends React.Component<{ foo: number }, { baz: number }> {
@@ -1224,38 +1224,6 @@ person.on('firstName', () => {});
 person.on('fstNameChanged', () => {});
 // Argument of type '"fstNameChanged"' is not assignable to
 // parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
-```
-
-## Moving Types
-
-```ts
-// 捕获字符串的类型与值
-const foo = 'Hello World';
-
-// 使用一个捕获的类型
-let bar: typeof foo;
-
-// bar 仅能被赋值 'Hello World'
-bar = 'Hello World'; // ok
-bar = 'anything else'; // Error
-```
-
-### Keyof Types
-
-`keyof foo` get literal types of `foo` keys (`Object.keys`):
-
-```ts
-const colors = {
-  red: 'red',
-  blue: 'blue',
-};
-
-type Colors = keyof typeof colors;
-
-let color: Colors; // color 的类型是 'red' | 'blue' (literal types)
-color = 'red'; // ok
-color = 'blue'; // ok
-color = 'anythingElse'; // Error
 ```
 
 ## Generic Types
@@ -1607,6 +1575,38 @@ type Distributed = Naked<number | boolean>;
 type NotDistributed = Wrapped<number | boolean>;
 ```
 
+## Moving Types
+
+```ts
+// 捕获字符串的类型与值
+const foo = 'Hello World';
+
+// 使用一个捕获的类型
+let bar: typeof foo;
+
+// bar 仅能被赋值 'Hello World'
+bar = 'Hello World'; // ok
+bar = 'anything else'; // Error
+```
+
+### Keyof Types
+
+`keyof foo` get literal types of `foo` keys (`Object.keys`):
+
+```ts
+const colors = {
+  red: 'red',
+  blue: 'blue',
+};
+
+type Colors = keyof typeof colors;
+
+let color: Colors; // color 的类型是 'red' | 'blue' (literal types)
+color = 'red'; // ok
+color = 'blue'; // ok
+color = 'anythingElse'; // Error
+```
+
 ## Mapped Types
 
 [Built-in Mapped Types](https://github.com/microsoft/TypeScript/blob/main/src/lib/es5.d.ts#L1448-L1546).
@@ -1674,11 +1674,11 @@ type ThisParameterType<T> = T extends (this: infer U, ...args: any[]) => any
 
 Combine with:
 
-- `in keyof`
-- `readonly`
-- `?`
-- `-`
-- `as`
+- `in keyof`.
+- `readonly`.
+- `?`.
+- `-`.
+- `as`.
 - Template literal types.
 - Conditional types.
 - Built-in types.
@@ -1861,9 +1861,9 @@ type Flatten<Type> = Type extends Array<infer Item> ? Item : Type;
 
 ## Type Inference
 
-- 类型系统在获得足够的信息后,
-  能将 infer 后跟随的类型参数推导出来,
-  最后返回这个推导结果
+类型系统在获得足够的信息后,
+能将 infer 后跟随的类型参数推导出来,
+最后返回这个推导结果:
 
 ```ts
 type Parameters<T extends (...args: any) => any> = T extends (
