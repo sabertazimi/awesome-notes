@@ -1359,6 +1359,8 @@ function pick<T extends object, U extends keyof T>(obj: T, keys: U[]): T[U][] {
 
 ## Union Types
 
+### Basic Union
+
 ```ts
 function formatCommandLine(command: string[] | string) {
   let line = '';
@@ -1372,6 +1374,8 @@ function formatCommandLine(command: string[] | string) {
   // Do stuff with line: string
 }
 ```
+
+### Discriminated Union
 
 ```ts
 interface Square {
