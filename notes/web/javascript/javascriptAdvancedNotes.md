@@ -10084,6 +10084,53 @@ node --trace-deprecation node_modules/webpack/bin/webpack.js
 - [Webpack 4 Tutorial](https://nystudio107.com/blog/an-annotated-webpack-4-config-for-frontend-web-development)
 - [Custom Plugin](https://juejin.cn/post/6870055445034172424)
 
+## Rollup
+
+```ts
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
+import { defineConfig } from 'rollup';
+import dts from 'rollup-plugin-dts';
+import external from 'rollup-plugin-peer-deps-external';
+import postcss from 'rollup-plugin-postcss';
+import { terser } from 'rollup-plugin-terser';
+import pkg from './package.json';
+
+export default defineConfig([
+  {
+    input: 'src/index.ts',
+    output: [
+      {
+        file: pkg.main,
+        format: 'cjs',
+        sourcemap: true,
+        name: 'react-lib',
+      },
+      {
+        file: pkg.module,
+        format: 'esm',
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      external(),
+      resolve(),
+      commonjs(),
+      typescript({ tsconfig: './tsconfig.json' }),
+      postcss(),
+      terser(),
+    ],
+  },
+  {
+    input: 'dist/esm/types/index.d.ts',
+    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
+    external: [/\.css$/],
+    plugins: [dts()],
+  },
+]);
+```
+
 ## Vite
 
 ```ts
@@ -10104,7 +10151,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, 'src/lib/index.ts'),
       name: 'SafeView',
       formats: ['es', 'umd'],
-      fileName: format => `safeview.${format}.js`,
+      fileName: format => `SafeView.${format}.js`,
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
