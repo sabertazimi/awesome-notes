@@ -10915,6 +10915,12 @@ function App() {
 }
 ```
 
+```bash
+# https://vercel.com/sabertaz/awesome-notes/settings/git
+# Ignored Build Step
+[ "$VERCEL_GIT_COMMIT_REF" == "gh-pages" ]
+```
+
 [Netlify](https://docs.netlify.com/routing/redirects/rewrites-proxies/#history-pushstate-and-single-page-apps):
 
 ```bash
