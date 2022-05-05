@@ -804,24 +804,12 @@ class CrazyClass implements Crazy {
 const crazy = new CrazyClass(); // crazy would be { hello:123 }
 ```
 
-### Interface vs Type Alias
+### Interface and Type Alias
 
 - Type aliases may not participate in declaration merging, but interfaces can.
 - Interfaces may only be used to declare the shapes of object, not re-name primitives.
 - The key distinction is that a type cannot be re-opened to add new properties,
   an interface which is always extendable.
-
-```ts
-interface Window {
-  title: string;
-}
-
-interface Window {
-  ts: TypeScriptAPI;
-}
-
-// Error: Duplicate identifier 'Window'.
-```
 
 ```ts
 interface Window {
