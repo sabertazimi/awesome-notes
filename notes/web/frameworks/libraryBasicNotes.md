@@ -438,6 +438,11 @@ tags: [Web, Framework, Library]
 
 - [ReactRating](https://github.com/awran5/react-simple-star-rating)
 
+#### Timeline
+
+- [PlanBy: Electronic Program Guide (EPG) based Timeline](https://github.com/karolkozer/planby)
+- [Frappe: Interactive and Modern Gantt Chart](https://github.com/frappe/gantt)
+
 ### Form
 
 - [React Hook Form](https://github.com/react-hook-form/react-hook-form)
@@ -566,6 +571,7 @@ tags: [Web, Framework, Library]
 - [Scroll Bar Detection](https://github.com/idiotWu/smooth-scrollbar)
 - [Atropos: 3D Parallax Effects](https://github.com/nolimits4web/atropos)
 - [Snap: Scroll Snap Utils](https://github.com/lucafalasco/scroll-snap)
+- [ScrollEX: Build Beautiful Scroll Experiences](https://github.com/malerba118/scrollex)
 
 ### Mouse and Touch Utils
 
