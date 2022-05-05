@@ -1839,15 +1839,6 @@ type FooReturnType = ReturnType<typeof foo>;
 
 ## Type Guards
 
-### Type Predicates
-
-- `is` keyword for type predicate.
-
-```ts
-type Falsy = false | '' | 0 | null | undefined;
-const isFalsy = (val: unknown): val is Falsy => !val;
-```
-
 ### In Type Guard
 
 ```ts
@@ -1867,18 +1858,6 @@ function move(animal: Fish | Bird) {
 }
 ```
 
-### TypeOf Type Guard
-
-```ts
-function fn(x: string | number) {
-  if (typeof x === 'string') {
-    return x.length;
-  } else {
-    return x + 1;
-  }
-}
-```
-
 ### Instance Type Guard
 
 ```ts
@@ -1891,7 +1870,63 @@ function logValue(x: Date | string) {
 }
 ```
 
-### Never Type
+### TypeOf Type Guard
+
+```ts
+function fn(x: string | number) {
+  if (typeof x === 'string') {
+    return x.length;
+  } else {
+    return x + 1;
+  }
+}
+```
+
+```ts
+function getScore(value: number | string): number {
+  switch (typeof value) {
+    case 'number':
+      // %inferred-type: number
+      return value + 1;
+    case 'string':
+      // %inferred-type: string
+      return value.length;
+    default:
+      throw new Error(`Unsupported value: ${value}`);
+  }
+}
+```
+
+### Discriminated Union Type Guard
+
+```ts
+interface Teacher {
+  kind: 'Teacher';
+  teacherId: string;
+}
+
+interface Student {
+  kind: 'Student';
+  studentId: string;
+}
+
+type Attendee = Teacher | Student;
+
+function getId(attendee: Attendee) {
+  switch (attendee.kind) {
+    case 'Teacher':
+      // %inferred-type: { kind: "Teacher"; teacherId: string; }
+      return attendee.teacherId;
+    case 'Student':
+      // %inferred-type: { kind: "Student"; studentId: string; }
+      return attendee.studentId;
+    default:
+      throw new Error('Unsupported type');
+  }
+}
+```
+
+### Never Type Guard
 
 - The `never` type is assignable to every type.
 - No type is assignable to `never` (except `never` itself).
@@ -1937,6 +1972,46 @@ function toGerman4(value: NoYesStrings): string {
       // is not assignable to parameter of type 'never'. (2345)
       throw new UnsupportedValueError(value);
   }
+}
+```
+
+### Type Predicates
+
+`is` keyword for `value` type predicate:
+
+```ts
+type Falsy = false | '' | 0 | null | undefined;
+const isFalsy = (val: unknown): val is Falsy => !val;
+```
+
+```ts
+function isNotNullish<T>(value: T): value is NonNullable<T> {
+  return value !== undefined && value !== null;
+}
+
+// %inferred-type: (number | null | undefined)[]
+const mixedValues = [1, undefined, 2, null];
+
+// %inferred-type: number[]
+const numbers = mixedValues.filter(isNotNullish);
+```
+
+```ts
+/**
+ * A partial implementation of the `typeof` operator.
+ */
+function isTypeof(value: any, typeString: 'boolean'): value is boolean;
+function isTypeof(value: any, typeString: 'number'): value is number;
+function isTypeof(value: any, typeString: 'string'): value is string;
+function isTypeof(value: any, typeString: string): boolean {
+  return typeof value === typeString;
+}
+
+const value: unknown = {};
+
+if (isTypeof(value, 'boolean')) {
+  // %inferred-type: boolean
+  console.log(value);
 }
 ```
 

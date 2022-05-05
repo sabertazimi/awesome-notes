@@ -260,6 +260,7 @@ tags: [Web, Framework, Library]
 - [TypeFest](https://github.com/sindresorhus/type-fest)
 - [UtilityTypes](https://github.com/piotrwitek/utility-types)
 - [TS ToolBelt](https://github.com/millsp/ts-toolbelt)
+- [Guards: Comprehensive Collection of Type Guards](https://github.com/sniptt-official/guards)
 
 ### TS Schema Utils
 
