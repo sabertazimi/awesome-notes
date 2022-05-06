@@ -920,6 +920,7 @@ tags: [Web, Framework, Library]
 - [Vue Filepond](https://github.com/pqina/vue-filepond)
 - [Uppy Uploader](https://github.com/transloadit/uppy)
 - [TypeScript Slice Uploader](https://github.com/shadowings-zy/easy-file-uploader)
+- [SpaceDrive: Open Source Cross-platform File Explorer Powered by Virtual Distributed Filesystem](https://github.com/spacedriveapp/spacedrive)
 
 ### File Downloader
 
