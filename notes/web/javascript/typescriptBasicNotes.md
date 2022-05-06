@@ -704,7 +704,7 @@ Animal => WangCai 是 Dog => Dog 的子类型:
 const simple: (foo: number) => string = foo => foo.toString();
 ```
 
-### Weak Overload
+### Function Overload
 
 函数签名的类型重载:
 
@@ -737,6 +737,14 @@ padding(1, 1); // Okay: topAndBottom, leftAndRight
 padding(1, 1, 1, 1); // Okay: top, right, bottom, left
 padding(1, 1, 1); // Error: Not a part of the available overloads
 ```
+
+:::tip Function Overload
+
+TypeScript 中的函数重载没有任何运行时开销.
+它只允许你记录希望调用函数的方式,
+并且编译器会检查其余代码.
+
+:::
 
 ### Rest Parameters
 
