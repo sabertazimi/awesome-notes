@@ -805,6 +805,7 @@ tags: [Web, Framework, Library]
 - [Krpano](https://krpano.com/docu/js)
 - [React Three Fiber](https://github.com/pmndrs/react-three-fiber)
 - [Oasis: Web-first and Mobile-first High-performance Real-time Development Platform](https://github.com/oasis-engine/engine)
+- [Babylon.js: Powerful, Beautiful, Simple, and Open Game and Rendering Engine](https://github.com/BabylonJS/Babylon.js)
 
 ## Media
 
