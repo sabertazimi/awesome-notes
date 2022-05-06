@@ -8935,7 +8935,8 @@ if (module.hot) {
 ```
 
 `react-refresh-webpack-plugin`/`vue-loader`/`style-loader`
-利用 `module.hot.accept` 实现了 HMR (forceUpdate), 无需开发者编写热模块更新逻辑.
+利用 `module.hot.accept` 实现了 HMR (forceUpdate),
+无需开发者编写热模块更新逻辑.
 
 ### Webpack Watch Options
 
@@ -9108,6 +9109,9 @@ const config = {
 ```
 
 #### Webpack CSS Loader
+
+- `style-loader` 将 CSS 注入到 DOM 中 (`document.createElement('style')`).
+- `production` 下需利用 `Webpack` 将 CSS 提前打包 (`mini-css-extract-plugin`), 独立加载 CSS 资源.
 
 ```ts
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -9523,7 +9527,7 @@ module.exports = {
 - async/await `import`.
 - `React.Suspense` and `React.lazy`.
 - Route-based [code splitting](https://reactjs.org/docs/code-splitting.html#route-based-code-splitting).
-- `vendor.[hash].chunk.js`:
+- `vendor.[hash].chunk.js` (`document.createElement('script')` promise):
   splitting vendor and application code
   is to enable long term caching techniques
   Since vendor code tends to change less often than the actual application code,
