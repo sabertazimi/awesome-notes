@@ -1737,6 +1737,7 @@
     "winsize",
     "wireshark",
     "wlast",
+    "workdir",
     "Worklet",
     "workloop",
     "wready",

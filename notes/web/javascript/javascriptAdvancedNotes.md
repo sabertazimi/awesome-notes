@@ -8509,7 +8509,25 @@ This is generally known as cache busting.
 - Full builds upon continuous deployment.
 - Incremental builds are a product of time.
 
-### Release System
+### Docker Deployment
+
+```dockerfile
+FROM node:16-alpine as builder
+
+WORKDIR /code
+
+ADD package.json package-lock.json /code/
+RUN npm install
+
+ADD . /code
+RUN npm run build
+
+# 选择更小体积的基础镜像
+FROM nginx:alpine
+
+# 将构建产物移至 Nginx
+COPY --from=builder code/build/ /usr/share/nginx/html/
+```
 
 ### Blue Green Deployment
 
