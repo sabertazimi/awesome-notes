@@ -7683,6 +7683,8 @@ export * from 'utils';
 
 #### ES6 Module Imports
 
+Import meta `import.meta`:
+
 ```ts
 // index.mjs
 import './index2.mjs?someURLInfo=5';
@@ -7693,6 +7695,33 @@ new URL(import.meta.url).searchParams.get('someURLInfo'); // 5
 
 ```ts
 const urlOfData = new URL('data.txt', import.meta.url);
+```
+
+Import assertion:
+
+```ts
+import data from './data.json' assert { type: 'json' };
+
+console.log(data);
+```
+
+Import map `importmap`:
+
+```html
+<script type="importmap">
+  {
+    "imports": {
+      "ms": "https://cdn.skypack.dev/ms"
+      "lodash": "https://cdn.skypack.dev/lodash",
+      "lodash": "https://cdn.skypack.dev/lodash/",
+    }
+  }
+</script>
+<script type="module">
+  import get from 'lodash/get.js';
+  import lodash from 'lodash';
+  import('lodash').then(_ => {});
+</script>
 ```
 
 #### ES6 Module Exports
