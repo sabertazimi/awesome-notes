@@ -9523,6 +9523,13 @@ module.exports = {
 
 #### Code Splitting
 
+Huge bundle downside:
+
+- Cache invalid: one line code make whole cache invalid.
+- Useless code: only use `1/N` of `bundle.js`.
+
+Code splitting methods:
+
 - `require.ensure([], () => {});`.
 - async/await `import`.
 - `React.Suspense` and `React.lazy`.
