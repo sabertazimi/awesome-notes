@@ -15,6 +15,7 @@ tags: [Web, Framework, Library]
 - [Best of JS](https://github.com/bestofjs/bestofjs-webui)
 - [Micro.js](https://github.com/microjs/microjs.com)
 - [NPM Package Advisor](https://snyk.io/advisor)
+- [NPM Package Analytics](https://npm.devtool.tech)
 - [NPM Package Compare](https://npmcompare.com)
 - [NPM Package Cost](https://github.com/pastelsky/bundlephobia)
 - [NPM Package Trends](https://github.com/johnmpotter/npm-trends)
