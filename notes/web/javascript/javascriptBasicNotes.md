@@ -7957,6 +7957,22 @@ Reflect.ownKeys(obj);
 // symbols in insertion order.
 ```
 
+CommonJS (`CJS`) to ES Module (`ESM`) exports:
+
+```ts
+const esm$1 = { exports: {} };
+
+(function (module, exports) {
+  module.exports = () => {};
+  exports.a = 3;
+  exports.b = 4;
+})(esm$1, esm$1.exports);
+
+const esm = esm$1.exports;
+
+export { esm as default };
+```
+
 ### Proxy Usage
 
 #### Default Zero Value Protection
