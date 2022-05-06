@@ -745,6 +745,7 @@ tags: [Web, Framework, Library]
 
 - [React SVG Components](https://github.com/miukimiu/react-kawaii)
 - [SVG.js](https://github.com/svgdotjs/svg.js)
+- [ReSVG.js: High-performance Rust SVG Renderer and Toolkit](https://github.com/yisibl/resvg-js)
 - [SVG Optimizer](https://github.com/svg/svgo)
 - [SVG Gallery](https://gallery.manypixels.co)
 - [SVG Logos](https://github.com/gilbarbara/logos)
@@ -901,6 +902,7 @@ tags: [Web, Framework, Library]
 ### Phone
 
 - [Twilio](https://github.com/twilio/twilio-node)
+- [Fonoster: Open Source Alternative to Twilio](https://github.com/fonoster/fonoster)
 - [Wechaty: Conversational RPA SDK for Chatbot Makers](https://github.com/wechaty/wechaty)
 
 ### Email
