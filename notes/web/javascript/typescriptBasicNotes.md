@@ -286,6 +286,7 @@ namespace Shapes {
     export class Square {}
   }
 }
+
 const sq = new polygons.Square(); // Same as 'new Shapes.Polygons.Square()'
 ```
 
@@ -305,6 +306,24 @@ declare namespace React {
       }[keyof JSX.IntrinsicElements]
     | ComponentType<P>;
 }
+```
+
+`namespace` compiles to `IIFE` pattern:
+
+```ts
+namespace Utility {
+  export function log(msg) {
+    console.log(msg);
+  }
+  export function error(msg) {
+    console.log(msg);
+  }
+}
+
+(function (Utility) {
+  Utility.log = log;
+  Utility.log = error;
+})(Utility || (Utility = {}));
 ```
 
 ### Module Resolution
