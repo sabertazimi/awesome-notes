@@ -2564,6 +2564,24 @@ logger = logAdmin;
 logger(user); // Oops! `user.isSuperAdmin` is undefined.
 ```
 
+:::tip Function Types
+
+函数类型中:
+
+- 参数类型为逆变.
+- 返回值类型为协变.
+
+:::
+
+:::tip Array Types
+
+- 允许不变的列表 (`Immutable`) 在它的参数类型上是协变的:
+  `ConstList<Dog>` 为 `ConstList<Animal>` 的子类型.
+- 对于可变的列表 (`Mutable`), 其参数类型则必须是不变的 (`Invariant`):
+  既不是协变也不是逆变, 才能保证类型安全.
+
+:::
+
 ### Type Gymnastics
 
 [Type programming](https://exploringjs.com/tackling-ts/ch_computing-with-types-overview.html):
