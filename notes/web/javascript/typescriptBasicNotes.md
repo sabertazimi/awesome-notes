@@ -1155,6 +1155,10 @@ type FunctionTypeKeys<T extends object> = {
 type Filter<T extends object, ValueType> = {
   [K in keyof T as ValueType extends T[K] ? K : never]: T[K];
 }; // Filter<{name: string; id: number;}, string> => {name: string;}
+
+type FuncName<T> = {
+  [K in keyof T]: T[K] extends Function ? K : never;
+}[keyof T];
 ```
 
 ## Literal Types
