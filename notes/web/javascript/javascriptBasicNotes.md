@@ -7724,6 +7724,17 @@ Import map `importmap`:
 </script>
 ```
 
+:::tip Imports Order
+
+- Polyfills: `import 'reflect-metadata';`.
+- Node builtin modules: `import fs from 'node:fs';`.
+- External modules: `import { motion } from 'framer-motion';`.
+- Internal modules: `import { UserService } from 'src/services/userService';`.
+- Parent directory modules: `import foo from '../foo'; import qux from '../../foo/qux';`.
+- Same/Sibling directory modules: `import bar from './bar'; import baz from './bar/baz';`.
+
+:::
+
 #### ES6 Module Exports
 
 - CommonJS 模块是运行时加载, ES6 模块是编译时输出接口.
