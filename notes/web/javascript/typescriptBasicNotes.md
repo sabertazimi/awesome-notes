@@ -2595,6 +2595,17 @@ logger(user); // Oops! `user.isSuperAdmin` is undefined.
 | Program level | Runtime      | Values         | Functions     |
 | Type level    | Compile time | Specific types | Generic types |
 
+| TypeScript Term           | Set Term                 |
+| ------------------------- | ------------------------ |
+| `never`                   | `∅` (Empty set)          |
+| Literal type              | Single element set       |
+| `Value` assignable to `T` | `Value ∈ T` (Member)     |
+| `T1` assignable to `T2`   | `T1 ⊆ T2` (Subset)       |
+| `T1 extends T2`           | `T1 ⊆ T2` (Subset)       |
+| `T1 \| T2`                | `T1 ∪ T2` (Union)        |
+| `T1 & T2`                 | `T1 ∩ T2` (Intersection) |
+| `unknown`                 | Universal set            |
+
 ## TypeScript Reference
 
 - [Tackling TypeScript](https://exploringjs.com/tackling-ts/index.html)
