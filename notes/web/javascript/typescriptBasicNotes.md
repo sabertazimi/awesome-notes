@@ -952,6 +952,14 @@ class Something extends React.Component<{ foo: number }, { baz: number }> {
 }
 ```
 
+`readonly` is shallow:
+
+```ts
+const dates: readonly Date[] = [new Date()];
+dates.push(new Date()); // Error
+dates[0].setFullYear(2037); // OK
+```
+
 ## Index Signature
 
 For `JavaScript`,
