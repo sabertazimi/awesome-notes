@@ -10282,6 +10282,8 @@ export default defineConfig({
 
 ## ESBuild
 
+ESBuild build configuration:
+
 ```ts
 // build.js
 const esbuild = require('esbuild');
@@ -10300,6 +10302,8 @@ esbuild
   })
   .catch(() => process.exit(1));
 ```
+
+ESBuild serve configuration:
 
 ```ts
 // serve.js
@@ -10323,4 +10327,30 @@ esbuild
     }
   )
   .catch(() => process.exit());
+```
+
+ESBuild webpack configuration:
+
+```ts
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
+
+module.exports = {
+  rules: [
+    {
+      test: /.js$/,
+      loader: 'esbuild-loader',
+      options: {
+        loader: 'jsx',
+        target: 'es2015',
+      },
+    },
+  ],
+  optimization: {
+    minimizer: [
+      new ESBuildMinifyPlugin({
+        target: 'es2015',
+      }),
+    ],
+  },
+};
 ```
