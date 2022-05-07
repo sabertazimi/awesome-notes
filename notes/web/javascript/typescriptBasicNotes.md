@@ -2077,6 +2077,46 @@ function toGerman4(value: NoYesStrings): string {
 
 :::
 
+### Excess Property Check
+
+Excess property check:
+types check on assigning object literal to variable/function parameter.
+
+```ts
+interface Room {
+  numDoors: number;
+  ceilingHeightFt: number;
+}
+
+const r: Room = {
+  numDoors: 1,
+  ceilingHeightFt: 10,
+  elephant: 'present',
+  // Excess property check:
+  // Object literal may only specify known properties,
+  // and 'elephant' does not exist in type 'Room'.
+};
+
+enterRoom({
+  numDoors: 1,
+  ceilingHeightFt: 10,
+  elephant: 'present',
+});
+// Excess property check:
+// Object literal may only specify known properties,
+// and 'elephant' does not exist in type 'Room'.
+
+// Normal structural types check
+const obj = {
+  numDoors: 1,
+  ceilingHeightFt: 10,
+  elephant: 'present',
+};
+
+// OK
+const r: Room = obj;
+```
+
 ### Type Predicates
 
 `is` keyword for `value` type predicate:
