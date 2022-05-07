@@ -1893,7 +1893,7 @@ type Flatten<Type> = Type extends Array<infer Item> ? Item : Type;
 ## Type Inference
 
 类型系统在获得足够的信息后,
-能将 infer 后跟随的类型参数推导出来,
+能将 [`infer`](https://github.com/Microsoft/TypeScript/pull/21496) 后跟随的类型参数推导出来,
 最后返回这个推导结果:
 
 ```ts
