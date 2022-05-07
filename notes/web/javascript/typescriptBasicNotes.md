@@ -182,11 +182,13 @@ npx jest
 
 ### TypeScript Compiler Performance
 
-- Project references.
-- Load `@types/` by need (`include`/`exclude`/`compilerOptions.types`).
-- Skip type checking (sometimes).
-- Multithread: `ts-loader` + `fork-ts-checker-plugin`.
 - Faster tools: `swc`/`rome`.
+- Multithread: `ts-loader` + `fork-ts-checker-plugin`.
+- Project references.
+- Skip type checking (sometimes).
+- Load `@types/` by need (`include`/`exclude`/`compilerOptions.types`).
+- `tsc --listFiles` 列出编译时包含文件列表,
+  `tsc --traceResolution` 列出编译时包含文件原因.
 
 ### TypeScript Project Reference
 
