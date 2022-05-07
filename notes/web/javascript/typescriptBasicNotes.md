@@ -1839,6 +1839,47 @@ type DeepRequired<T> = {
 
 - [`PathOf<Form>` complex recursive types](https://mp.weixin.qq.com/s/KJdUdwbLN4g4M7xy34m-fA).
 
+### Nominal Brand Types
+
+[Nominal type system](https://github.com/microsoft/TypeScript/issues/202):
+
+```ts
+interface FooId extends String {
+  _fooIdBrand: string;
+}
+
+interface BarId extends String {
+  _barIdBrand: string;
+}
+
+let fooId: FooId;
+let barId: BarId;
+
+// 类型安全
+fooId = barId; // error
+barId = fooId; // error
+fooId = barId as FooId; // error
+barId = fooId as BarId; // error
+```
+
+```ts
+const typeSym = Symbol('type');
+const valueSym = Symbol('value');
+
+type Brand<B extends string, T> = T extends
+  | undefined
+  | null
+  | number
+  | boolean
+  | bigint
+  ? { [typeSym]: B; [valueSym]: T }
+  : T & { [typeSym]: B };
+
+type Flavor<F extends string, T> = T & {
+  [typeSym]?: F;
+};
+```
+
 ### Lodash Types
 
 ```ts
