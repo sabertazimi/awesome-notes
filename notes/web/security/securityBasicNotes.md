@@ -338,6 +338,10 @@ GET /../../../passwd.key HTTP/1.1
 
 ### Supply Chain Attack
 
+Attack:
+
+- [Running file encryption attack in Node.js module](https://dev.to/devdevcharlie/running-a-ransomware-attack-in-a-nodejs-module-4hgb).
+
 Case:
 
 - [left-pad](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm).
