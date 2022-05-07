@@ -2483,10 +2483,12 @@ mapRoute(new SomeClass());
 
 ## Type System
 
-TypeScript type system:
+`TypeScript` type system:
 
 - Structural type system: type checking focuses on shape (`Duck Typing`).
 - [Turing complete](https://github.com/microsoft/TypeScript/issues/14833) type system.
+- `TypeScript` type system models `JavaScript` runtime behavior
+  and spot out runtime exception.
 
 ### Covariant
 
