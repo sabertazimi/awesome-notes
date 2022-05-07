@@ -10279,3 +10279,48 @@ export default defineConfig({
   },
 });
 ```
+
+## ESBuild
+
+```ts
+// build.js
+const esbuild = require('esbuild');
+const inlineImage = require('esbuild-plugin-inline-image');
+
+esbuild
+  .build({
+    entryPoints: ['./src/index.js'],
+    outfile: './public/js/app.js',
+    minify: true,
+    bundle: true,
+    loader: {
+      '.js': 'jsx',
+    },
+    plugins: [inlineImage()],
+  })
+  .catch(() => process.exit(1));
+```
+
+```ts
+// serve.js
+const esbuild = require('esbuild');
+const inlineImage = require('esbuild-plugin-inline-image');
+
+esbuild
+  .serve(
+    {
+      servedir: 'public',
+      port: 8000,
+    },
+    {
+      entryPoints: ['./src/index.js'],
+      outfile: './public/js/app.js',
+      bundle: true,
+      loader: {
+        '.js': 'jsx',
+      },
+      plugins: [inlineImage()],
+    }
+  )
+  .catch(() => process.exit());
+```
