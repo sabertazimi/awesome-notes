@@ -51,7 +51,8 @@ npm config set swc_binary_site https://npmmirror.com/mirrors/node-swc/
 
 ### Node Version Manager
 
-- [NVM](https://github.com/nvm-sh/nvm).
+- [Rust Node Manager](https://github.com/Schniz/fnm)
+- [Node Version Manager](https://github.com/nvm-sh/nvm)
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
