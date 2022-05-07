@@ -922,6 +922,23 @@ class Singleton {
     console.log('Saying...');
   }
 }
+
+class Singleton {
+  private static instance: Singleton;
+  private constructor() {}
+
+  public static getInstance() {
+    if (!Singleton.instance) {
+      Singleton.instance = new Singleton();
+    }
+
+    return Singleton.instance;
+  }
+
+  someMethod() {}
+}
+
+const instance = Singleton.getInstance();
 ```
 
 #### Closure Singleton Pattern
