@@ -2366,11 +2366,114 @@ class Example {
 // 装饰器执行 1
 ```
 
-### TypeScript Decorator Utils
+### Reflect Metadata
 
-#### IOC and DI Utils
+IoC and DI implementation:
 
-- [InversifyJS: Powerful and lightweight inversion of control container](https://github.com/inversify/InversifyJS)
+```ts
+type Constructor<T = any> = new (...args: any[]) => T;
+
+const Injectable = (): ClassDecorator => target => {};
+
+class OtherService {
+  a = 1;
+}
+
+@Injectable()
+class TestService {
+  constructor(public readonly otherService: OtherService) {}
+
+  testMethod() {
+    console.log(this.otherService.a);
+  }
+}
+
+const Factory = <T>(Target: Constructor<T>): T => {
+  // 获取所有注入的服务
+  const providers = Reflect.getMetadata('design:paramtypes', target); // [OtherService]
+  const args = providers.map((Provider: Constructor) => new Provider());
+  return new Target(...args);
+};
+
+Factory(TestService).testMethod(); // 1
+```
+
+AOP programming:
+
+```ts
+const PATH_METADATA = 'path';
+const METHOD_METADATA = 'method';
+
+const Controller = (path: string): ClassDecorator => {
+  return target => {
+    Reflect.defineMetadata(PATH_METADATA, path, target);
+  };
+};
+
+const createMappingDecorator =
+  (method: string) =>
+  (path: string): MethodDecorator => {
+    return (target, key, descriptor) => {
+      Reflect.defineMetadata(PATH_METADATA, path, descriptor.value);
+      Reflect.defineMetadata(METHOD_METADATA, method, descriptor.value);
+    };
+  };
+
+const Get = createMappingDecorator('GET');
+const Post = createMappingDecorator('POST');
+
+function mapRoute(instance: Object) {
+  const prototype = Object.getPrototypeOf(instance);
+
+  // 筛选出类的 methodName
+  const methodsNames = Object.getOwnPropertyNames(prototype).filter(
+    item => !isConstructor(item) && isFunction(prototype[item])
+  );
+  return methodsNames.map(methodName => {
+    const fn = prototype[methodName];
+
+    // 取出定义的 metadata
+    const route = Reflect.getMetadata(PATH_METADATA, fn);
+    const method = Reflect.getMetadata(METHOD_METADATA, fn);
+
+    return {
+      route,
+      method,
+      fn,
+      methodName,
+    };
+  });
+}
+
+@Controller('/test')
+class SomeClass {
+  @Get('/a')
+  someGetMethod() {
+    return 'hello world';
+  }
+
+  @Post('/b')
+  somePostMethod() {}
+}
+
+Reflect.getMetadata(PATH_METADATA, SomeClass); // '/test'
+
+mapRoute(new SomeClass());
+/**
+ * [{
+ *    route: '/a',
+ *    method: 'GET',
+ *    fn: someGetMethod() { ... },
+ *    methodName: 'someGetMethod'
+ *  },{
+ *    route: '/b',
+ *    method: 'POST',
+ *    fn: somePostMethod() { ... },
+ *    methodName: 'somePostMethod'
+ * }]
+ *
+ */
+```
 
 ## Type System
 
