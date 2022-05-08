@@ -2183,6 +2183,29 @@ function handler(event: Event) {
 }
 ```
 
+### Const Assertion
+
+```ts
+const v1 = {
+  x: 1,
+  y: 2,
+}; // { x: number; y: number; }
+
+const v2 = {
+  x: 1 as const,
+  y: 2,
+}; // { x: 1; y: number; }
+
+const v3 = {
+  x: 1,
+  y: 2,
+} as const; // { readonly x: 1; readonly y: 2; }
+
+const a1 = [1, 2, 3]; // number[]
+
+const a2 = [1, 2, 3] as const; // readonly [1, 2, 3]
+```
+
 ## Decorators
 
 - Attaching to a class:
