@@ -1475,6 +1475,37 @@ type IteratorResult<T, TReturn = any> =
   | IteratorReturnResult<TReturn>;
 ```
 
+Prefer `Unions of Interfaces` to `Interfaces of Unions`:
+
+```ts
+// BAD design.
+interface BadLayer {
+  layout: FillLayout | LineLayout | PointLayout;
+  paint: FillPaint | LinePaint | PointPaint;
+}
+
+// GOOD design.
+interface FillLayer {
+  type: 'fill';
+  layout: FillLayout;
+  paint: FillPaint;
+}
+
+interface LineLayer {
+  type: 'line';
+  layout: LineLayout;
+  paint: LinePaint;
+}
+
+interface PointLayer {
+  type: 'point';
+  layout: PointLayout;
+  paint: PointPaint;
+}
+
+type GoodLayer = FillLayer | LineLayer | PointLayer;
+```
+
 ## Intersection Types
 
 `intersection` type 具有所有类型的功能:
