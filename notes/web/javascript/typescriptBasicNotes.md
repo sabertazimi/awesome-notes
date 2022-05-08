@@ -1998,6 +1998,13 @@ function getScore(value: number | string): number {
 }
 ```
 
+```ts
+function contains(text: string, terms: string | string[]) {
+  const termList = Array.isArray(terms) ? terms : [terms];
+  console.log(termList); // string[]
+}
+```
+
 ### Discriminated Union Type Guard
 
 ```ts
