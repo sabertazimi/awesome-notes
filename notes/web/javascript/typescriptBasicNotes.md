@@ -2138,7 +2138,10 @@ const r: Room = obj;
 
 ```ts
 type Falsy = false | '' | 0 | null | undefined;
+
 const isFalsy = (val: unknown): val is Falsy => !val;
+
+const isDefined = <T>(x: T | undefined): x is T => x !== undefined;
 ```
 
 ```ts
