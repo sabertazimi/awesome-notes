@@ -363,35 +363,42 @@ Press `ctrl-r` 提示符改变, 显示我们正在执行反向增量搜索.
 
 ## Find and Search Commands
 
-### locate
+### Locate
 
-结合 updatedb 命令(该命令一般自动 1 天/次)
+结合 `updatedb` 命令 (该命令一般自动 1 天/次).
 
-### type
+### Type
 
-indicate how a command name is interpreted
+Indicate how a command name is interpreted.
 
-### apropos
+### Apropos
 
-display a list of appropriate commands
+Display a list of appropriate commands.
 
-### whereis and whatis
+### Whereis and Whatis
 
-### which
+### Which
 
-### find
+### Find
 
 `find [搜索路径] [可选参数] [文件名](可加"")`:
 
-- -name
-- -iname 不区分大小写
-- -user `user_name` 按照所有者搜索
-- -nouser 搜索没有所有者的文件
-- -atime(文件访问时间)/-ctime(改变文件属性)/-mtime(改变文件内容) -10(十天内)/10(十天当天)/+10(十天前)
-- -size(文件大小) -25k(小于 25k)/25M(25M)/+25G(大于 25G)
-- -inum `inode_number`
-- -a / -o 逻辑与/逻辑或(左右两端搜索条件)
-- -exec/-ok `system_command_list {} \;对搜索结果执行操作
+- `-name`.
+- `-iname`: 不区分大小写.
+- `-user`: `user_name` 按照所有者搜索.
+- `-nouser`: 搜索没有所有者的文件.
+- `-atime`(文件访问时间)/`-ctime`(改变文件属性)/`-mtime`(改变文件内容):
+  `-10`(十天内)/`10`(十天当天)/`+10`(十天前).
+- `-size`: 文件大小, `-25k`(小于 25k)/`25M`(25M)/`+25G`(大于 25G).
+- `-inum`: `inode_number`.
+- `-a`/`-o`: 逻辑与/逻辑或 (左右两端搜索条件).
+- `-exec system_command_list {} ;`: 对搜索结果执行操作.
+- `-ok system_command_list {} ;`: 对搜索结果执行操作.
+
+```bash
+find . -name "*.bak" -type f
+find . -name "*.bak" -type f -delete
+```
 
 ### Grep
 
