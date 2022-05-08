@@ -173,6 +173,7 @@ npx eslint --init
 - [TS Config](https://github.com/tsconfig/bases)
 - [TS Node](https://github.com/TypeStrong/ts-node)
 - [TS Jest](https://github.com/kulshekhar/ts-jest)
+- [TS Coverage](https://github.com/plantain-00/type-coverage)
 
 ```bash
 npm i -D jest typescript ts-jest @types/jest
