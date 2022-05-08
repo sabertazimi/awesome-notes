@@ -9862,10 +9862,10 @@ npx webpack --mode production --profile --json > stats.json
 #### Webpack Bundles UI Plugins
 
 - [Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
-- [Monitor](https://github.com/webpackmonitor/webpackmonitor)
 - [WebpackBar: elegant progressbar and profiler](https://github.com/unjs/webpackbar)
+- [Monitor](https://github.com/webpackmonitor/webpackmonitor)
 - [Browser UI](https://github.com/zouhir/jarvis)
-- [CLI UI](https://github.com/unjs/webpackbar)
+- [CLI UI](https://github.com/FormidableLabs/webpack-dashboard)
 
 #### Webpack DLL Plugins
 

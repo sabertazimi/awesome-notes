@@ -14,12 +14,13 @@ tags: [Web, Framework, Library]
 - [Moiva](https://github.com/aantipov/moiva)
 - [Best of JS](https://github.com/bestofjs/bestofjs-webui)
 - [Micro.js](https://github.com/microjs/microjs.com)
+- [CodeHouse: Whole New World Developer Cheatsheets](https://github.com/saviomartin/codehouse)
 - [NPM Package Advisor](https://snyk.io/advisor)
 - [NPM Package Analytics](https://npm.devtool.tech)
 - [NPM Package Compare](https://npmcompare.com)
 - [NPM Package Cost](https://github.com/pastelsky/bundlephobia)
 - [NPM Package Trends](https://github.com/johnmpotter/npm-trends)
-- [CodeHouse: Whole New World Developer Cheatsheets](https://github.com/saviomartin/codehouse)
+- [NPM Package Online Explorer](https://github.com/FormidableLabs/runpkg)
 
 ## Web Boilerplate
 
@@ -538,6 +539,7 @@ tags: [Web, Framework, Library]
 
 ### Carousel
 
+- [Nuka: Pure React Carousel Component](https://github.com/FormidableLabs/nuka-carousel)
 - [Swiper: Modern Mobile Touch Slider with Hardware Accelerated Transitions](https://github.com/nolimits4web/swiper)
 - [React Responsive Carousel](https://github.com/leandrowd/react-responsive-carousel)
 - [Flicking: Reliable, Flexible and Extendable Carousel](https://github.com/naver/egjs-flicking)
