@@ -769,6 +769,37 @@ f3();
 f3(123, 'hello');
 ```
 
+### Function Types Design
+
+- Input types tend to be **broader** than output types.
+- **Optional** properties and **union** types are more common in parameter types.
+- To reuse types between parameters and return types,
+  introduce a canonical form (for return types) and a looser form (for parameters).
+
+```ts
+interface LngLat {
+  lng: number;
+  lat: number;
+}
+
+type LngLatLike = LngLat | { lon: number; lat: number } | [number, number];
+
+interface Camera {
+  center: LngLat;
+  zoom: number;
+  bearing: number;
+  pitch: number;
+}
+
+interface CameraOptions extends Omit<Partial<Camera>, 'center'> {
+  center?: LngLatLike;
+}
+
+function createCamera(options: CameraOptions): Camera {
+  return CameraFactory.create(options);
+}
+```
+
 ## Interface
 
 ```ts
