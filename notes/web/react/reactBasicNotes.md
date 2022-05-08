@@ -9186,6 +9186,8 @@ Prevent useless re-rendering:
   - Make reference values become immutable:
     - Styles (`object`).
     - Event callbacks (`function`).
+    - [Babel plugin](https://www.npmjs.com/package/@babel/plugin-transform-react-constant-elements)
+      to hoist reference values.
 
 ```tsx
 // BAD
