@@ -302,6 +302,7 @@ tags: [Web, Framework, Library]
 - [Classnames](https://github.com/JedWatson/classnames)
 - [Tailwind Merge: Merge Tailwind CSS Classes without Style Conflicts](https://github.com/dcastil/tailwind-merge)
 - [Styled Components](https://github.com/styled-components/styled-components)
+- [StyledJSX](https://github.com/vercel/styled-jsx)
 - [Stitches: Near Zero-runtime, SSR, Multi-variant Support](https://github.com/modulz/stitches)
 - [Linaria: Zero-runtime CSS-in-TypeScript Library](https://github.com/callstack/linaria)
 - [Vanilla Extract: Zero-runtime CSS-in-TypeScript](https://github.com/seek-oss/vanilla-extract)
