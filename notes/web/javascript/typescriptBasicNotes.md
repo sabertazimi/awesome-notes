@@ -162,18 +162,7 @@ module.exports = {
 npx eslint --init
 ```
 
-### Defined Types
-
-- [Types Definition](https://github.com/DefinitelyTyped/DefinitelyTyped)
-- [DTSGen: Creates starter TypeScript definition files for any module or library](https://github.com/Microsoft/dts-gen)
-- [DTSLint: A utility built on TSLint for linting TypeScript declaration files](https://github.com/microsoft/dtslint)
-
-### TypeScript Tools
-
-- [TS Config](https://github.com/tsconfig/bases)
-- [TS Node](https://github.com/TypeStrong/ts-node)
-- [TS Jest](https://github.com/kulshekhar/ts-jest)
-- [TS Coverage](https://github.com/plantain-00/type-coverage)
+### Jest Configuration
 
 ```bash
 npm i -D jest typescript ts-jest @types/jest
@@ -196,7 +185,7 @@ npx jest
 [Project Reference](https://www.typescriptlang.org/docs/handbook/project-references.html)
 for TypeScript compile and build [Speed](https://github.com/typescript-cheatsheets/speed).
 
-### TypeScript Monorepo
+### TypeScript Monorepo Configuration
 
 [TypeScript Monorepo](https://2ality.com/2021/07/simple-monorepos.html):
 
@@ -1966,7 +1955,7 @@ type Flatten<Type> = Type extends Array<infer Item> ? Item : Type;
 ## Type Inference
 
 类型系统在获得足够的信息后,
-能将 [`infer`](https://github.com/Microsoft/TypeScript/pull/21496) 后跟随的类型参数推导出来,
+能将 [`infer`](https://github.com/microsoft/TypeScript/pull/21496) 后跟随的类型参数推导出来,
 最后返回这个推导结果:
 
 ```ts

@@ -248,32 +248,35 @@ tags: [Web, Framework, Library]
 
 ## TypeScript Utils
 
-### TS Basic Utils
+### TypeScript Basic Utils
 
-- [TS Configuration](https://github.com/tsconfig/bases)
-- [TS Node](https://github.com/TypeStrong/ts-node)
-- [TS Jest](https://github.com/kulshekhar/ts-jest)
-- [Type Coverage](https://github.com/plantain-00/type-coverage)
+- [TypeScript Configuration](https://github.com/tsconfig/bases)
+- [TypeScript Node](https://github.com/TypeStrong/ts-node)
+- [TypeScript Jest](https://github.com/kulshekhar/ts-jest)
 - [Type Testing](https://github.com/SamVerschueren/tsd)
+- [Type Coverage](https://github.com/plantain-00/type-coverage)
+- [DefinitelyTyped: High Quality TypeScript Type Definitions](https://github.com/DefinitelyTyped/DefinitelyTyped)
+- [DefinitelyTyped Tools: Infrastructure for DefinitelyTyped](https://github.com/microsoft/DefinitelyTyped-tools)
+- [DTSGen: Creates Starter TypeScript Definition Files for Any Module or Library](https://github.com/microsoft/dts-gen)
 
-### TS Utility Types
+### TypeScript Utility Types
 
 - [TypeFest](https://github.com/sindresorhus/type-fest)
 - [UtilityTypes](https://github.com/piotrwitek/utility-types)
-- [TS ToolBelt](https://github.com/millsp/ts-toolbelt)
+- [ToolBelt](https://github.com/millsp/ts-toolbelt)
 - [Guards: Comprehensive Collection of Type Guards](https://github.com/sniptt-official/guards)
 
-### TS Schema Utils
+### TypeScript Schema Utils
 
 - [Zod: TypeScript-first Schema Validation with Static Type Inference](https://github.com/colinhacks/zod)
 - [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
 - [AutoMapper: Object to Object Auto Mapper](https://github.com/nartc/mapper)
 
-### TS AST Utils
+### TypeScript AST Utils
 
-- [TS Morph](https://github.com/nadeesha/ts-morph)
-- [TS Morpher](https://github.com/LinbuduLab/morpher)
-- [TS Prune](https://github.com/nadeesha/ts-prune)
+- [Morph](https://github.com/nadeesha/ts-morph)
+- [Morpher](https://github.com/LinbuduLab/morpher)
+- [Prune](https://github.com/nadeesha/ts-prune)
 
 ## CSS Utils
 
@@ -865,7 +868,7 @@ tags: [Web, Framework, Library]
 
 ### Code Editor
 
-- [Monaco: Powers VS Code](https://github.com/Microsoft/monaco-editor)
+- [Monaco: Powers VS Code](https://github.com/microsoft/monaco-editor)
 - [React ACE](https://github.com/securingsincity/react-ace)
 - [ACE Editor](https://github.com/ajaxorg/ace)
 - [Code Mirror](https://github.com/codemirror/CodeMirror)
@@ -1225,7 +1228,7 @@ tags: [Web, Framework, Library]
 
 ### Headless Automation Tools
 
-- [PlayWright: Automate Chromium, Firefox and WebKit with Single API](https://github.com/Microsoft/playwright)
+- [PlayWright: Automate Chromium, Firefox and WebKit with Single API](https://github.com/microsoft/playwright)
 - [Puppeteer: Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
 - [RRWeb: Record and Replay Web](https://github.com/rrweb-io/rrweb)
 - [Webkit API](https://github.com/ariya/phantomjs)
