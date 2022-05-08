@@ -623,58 +623,93 @@ sudo apt-get install screenfetch
 
 ### Linux Documentation Reference
 
-- [DashDash: Beautiful Linax Manual Pages](https://dashdash.io)
+- [DashDash: Beautiful Linux Manual Pages](https://dashdash.io)
+- [TLDR](https://github.com/tldr-pages/tldr)
 - [ArchWiki](https://wiki.archlinux.org)
 
 ## Compress and Extract Commands
 
 ### Zip
 
-- zip -r(目录) 压缩文件 源文件/源目录
-- unzip 源文件 -d 指定路径
+- `zip -r(目录) 压缩文件 源文件/源目录`.
+- `unzip 源文件 -d 指定路径`.
+
+```bash
+zip -r archive_name.zip folder_to_compress
+unzip archive_name.zip
+
+zipinfo archive_name.zip
+unzip -l archive_name.zip
+```
 
 ### Gz
 
-- gzip 源文件
-- gzip –c 源文件 > 压缩文件
-- gzip -r 源目录 将源目录下所有子文件分别单独压缩
-- gzip –d(解压缩) 文件
-- gunzip 压缩文件
+- `gzip 源文件`.
+- `gzip –c 源文件 > 压缩文件`.
+- `gzip -r 源目录 将源目录下所有子文件分别单独压缩`.
+- `gzip –d(解压缩) 文件`.
+- `gunzip 压缩文件`.
 
 ### Bz2
 
-不可压缩目录
+不可压缩目录:
 
-- bzip2 –k(保留源文件) 源文件
-- bzip2 –d(解压缩) –k(保留压缩文件) 压缩文件
-- bunzip2 –k(保留压缩文件) 压缩文件
+- `bzip2 –k(保留源文件) 源文件`.
+- `bzip2 –d(解压缩) –k(保留压缩文件) 压缩文件`.
+- `bunzip2 –k(保留压缩文件) 压缩文件`.
 
 ### Tar
 
-tar.gz/.tar.bz2:
+`.tar.gz`/`.tar.bz2`:
 
-tar [可选参数] 压缩文件(可指定压缩路径) [-c 解压缩路径]源文件/源目录
+`tar [可选参数] 压缩文件(可指定压缩路径) [-c 解压缩路径]源文件/源目录`:
 
-- -z 将.tar 压缩为.tar.gz -j 将.tar 压缩为.tar.bz2
-- -c 打包 -x 解打包
-- -t 查看压缩文件
-- -v 显示过程
-- -f 指定压缩文件名
-- -C 指定解压缩路径
-- -zcvf/-zxvf/-ztcf -jcvf/-jxvf/-jtvf
+- `-z`: 将 `.tar` 压缩为 `.tar.gz`.
+- `-j`: 将 `.tar` 压缩为 `.tar.bz2`.
+- `-c`: 打包 `-x` 解打包.
+- `-t`: 查看压缩文件.
+- `-v`: 显示过程.
+- `-f`: 指定压缩文件名.
+- `-C`: 指定解压缩路径.
+- `-zcvf`/`-zxvf`/`-ztcf`.
+- `-jcvf`/`-jxvf`/`-jtvf`.
 
 ### 7z
+
+- `a`: add.
+- `x`: extract.
+- `-r`: recursive.
+- `-o`: specific path.
+- `-t`: type.
 
 ```bash
 7z x manager.7z -r -o /home/xx
 7z a -t7z -r manager.7z /home/manager/*
 ```
 
-- a: add
-- x: extract
-- -r: recursive
-- -o: specific path
-- -t: type
+### UnAr
+
+Decompress files of any format:
+
+```bash
+unar archive_name.zip
+unar archive_name.7z
+unar archive_name.rar
+unar archive_name.ISO
+unar archive_name.tar.gz
+```
+
+### LsAr
+
+Peek files in a compress file of any format:
+
+```bash
+lsar -l archive_name.zip
+lsar -l archive_name.7z
+lsar -l archive_name.ISO
+lsar -l archive_name.rar
+lsar -l archive_name.tar.gz
+```
 
 ## User and Group Commands
 
