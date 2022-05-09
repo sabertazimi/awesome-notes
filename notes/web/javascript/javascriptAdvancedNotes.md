@@ -1591,43 +1591,6 @@ document.addEventListener('DOMContentLoaded', event => {
 });
 ```
 
-`visibilitychange` event, 切换标签页时改变网页标题/声音/视频:
-
-```ts
-window.addEventListener('visibilitychange', () => {
-  switch (document.visibilityState) {
-    case 'hidden':
-      console.log('Tab隐藏');
-      break;
-    case 'visible':
-      console.log('Tab被聚焦');
-      break;
-    default:
-      throw new Error('Unsupported visibility!');
-  }
-});
-```
-
-```ts
-const videoElement = document.getElementById('videoElement');
-
-// AutoPlay the video if application is visible
-if (document.visibilityState === 'visible') {
-  videoElement.play();
-}
-
-// Handle page visibility change events
-function handleVisibilityChange() {
-  if (document.visibilityState === 'hidden') {
-    videoElement.pause();
-  } else {
-    videoElement.play();
-  }
-}
-
-document.addEventListener('visibilitychange', handleVisibilityChange, false);
-```
-
 `readystatechange` event:
 
 ```ts
@@ -1671,6 +1634,43 @@ window.addEventListener('load', () => {
   link.href = 'example.css';
   document.getElementsByTagName('head')[0].appendChild(link);
 });
+```
+
+`visibilitychange` event, 切换标签页时改变网页标题/声音/视频:
+
+```ts
+window.addEventListener('visibilitychange', () => {
+  switch (document.visibilityState) {
+    case 'hidden':
+      console.log('Tab隐藏');
+      break;
+    case 'visible':
+      console.log('Tab被聚焦');
+      break;
+    default:
+      throw new Error('Unsupported visibility!');
+  }
+});
+```
+
+```ts
+const videoElement = document.getElementById('videoElement');
+
+// AutoPlay the video if application is visible
+if (document.visibilityState === 'visible') {
+  videoElement.play();
+}
+
+// Handle page visibility change events
+function handleVisibilityChange() {
+  if (document.visibilityState === 'hidden') {
+    videoElement.pause();
+  } else {
+    videoElement.play();
+  }
+}
+
+document.addEventListener('visibilitychange', handleVisibilityChange, false);
 ```
 
 - `beforeunload` event.
