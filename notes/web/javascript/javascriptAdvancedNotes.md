@@ -4594,7 +4594,178 @@ observer.observe({ type: 'layout-shift', buffered: true });
 
 ## Testing and Debugging
 
-### Log
+### Testing Design
+
+#### FAIR Principle
+
+- Fast tests.
+- Automated tests.
+- Isolated tests.
+- Repeatable tests.
+
+#### AAA Pattern
+
+Structure every test to 3 part code:
+
+- Arrange.
+- Act.
+- Assert.
+
+#### Testing Types
+
+- Positive tests:
+  valid inputs,
+  verify functions.
+- Negative tests:
+  invalid inputs (e.g `null`/`undefined`/`''`/mismatch type/mismatch structure)
+  verify robustness.
+- Exceptions tests.
+
+### Testable Code
+
+- 完整注释.
+- 最小复杂度 = (扇入 `*` 扇出) ^ 2.
+- 可隔离性: 最小依赖性 + 松耦合性.
+- 使用依赖注入, 将外部对象移至函数参数处(不在函数内部调用构造器): 易于构造 mock/stub, 降低扇出(函数复杂度).
+
+### 圈复杂度
+
+`V(G) = e - n + 2`: `**<10**`.
+
+### 函数复杂度
+
+函数复杂度 = (扇入 `*` 扇出) ^ 2.
+
+#### 扇出
+
+引用:
+
+- 所引用外部对象/方法之和.
+- 扇出: `**<7**`.
+- 高扇出: 高复杂度/高依赖性/高耦合度.
+
+#### 扇入
+
+被引用:
+
+- 其他对象/方法引用此函数的次数之和.
+- 顶层抽象代码 与 不常用功能 应保持低扇入.
+
+### 耦合度
+
+#### 内容耦合
+
+5 级耦合度:
+
+```ts
+O.property = 'tazimi';
+O.method = function () {};
+O.prototype.method = function () {};
+```
+
+#### 公共耦合
+
+4 级耦合度, 共享全局变量:
+
+```ts
+let Global = 'global';
+
+function A() {
+  Global = 'A';
+}
+function B() {
+  Global = 'B';
+}
+```
+
+#### 控制耦合
+
+3 级耦合度:
+
+```ts
+const absFactory = new AbstractFactory({ env: 'TEST' });
+```
+
+#### 印记耦合
+
+2 级耦合度:
+
+```ts
+O.prototype.makeBread = function (args) {
+  return new Bread(args.type, args.size);
+};
+
+O.makeBread({ type: wheat, size: 99, name: 'foo' });
+```
+
+#### 数据耦合
+
+1 级耦合度.
+
+#### 无耦合
+
+0 级耦合度.
+
+### Monkey Patch
+
+#### Window State Injection
+
+Inject trace function (log, monitor, report service)
+to window `pushState` and `replaceState`.
+
+```ts
+const _wr = function (type) {
+  const orig = window.history[type];
+
+  return function (...args) {
+    const rv = orig.apply(this, args);
+    const e = new Event(type.toLowerCase());
+    e.arguments = args;
+    window.dispatchEvent(e);
+    return rv;
+  };
+};
+
+window.history.pushState = _wr('pushState');
+window.history.replaceState = _wr('replaceState');
+
+window.addEventListener('pushstate', function (event) {
+  console.trace('pushState');
+});
+
+window.addEventListener('replacestate', function (event) {
+  console.trace('replaceState');
+});
+```
+
+#### Event Propagation Injection
+
+```ts
+const originalStopPropagation = MouseEvent.prototype.stopPropagation;
+
+MouseEvent.prototype.stopPropagation = function (...args) {
+  console.trace('stopPropagation');
+  originalStopPropagation.call(this, ...args);
+};
+```
+
+#### Window Scroll Injection
+
+```ts
+let originalScrollTop = element.scrollTop;
+
+Object.defineProperty(element, 'scrollTop', {
+  get() {
+    return originalScrollTop;
+  },
+  set(newVal) {
+    console.trace('scrollTop');
+    originalScrollTop = newVal;
+  },
+});
+```
+
+### Logging
 
 - 时间, 包含时区信息和毫秒.
 - 日志级别.
@@ -4603,7 +4774,7 @@ observer.observe({ type: 'layout-shift', buffered: true });
 - 精炼的内容: 场景信息, 状态信息 (开始/中断/结束), 重要参数.
 - 其他信息: 版本号, 线程号.
 
-#### Log Clock
+#### Logging Clock
 
 - `performance.now()` is more precise (100 us)
 - `performance.now()` is strictly monotonic (unaffected by changes of machine time)
@@ -4631,6 +4802,202 @@ function metrics() {
 requestAnimationFrame(() => {
   requestAnimationFrame(timestamp => {
     metric.finish(timestamp);
+  });
+});
+```
+
+### Console API
+
+- `console.XXX`.
+- `copy`: copy complex object to clipboard.
+- `monitor`: monitor object.
+
+```ts
+const devtools = /./;
+devtools.toString = function () {
+  this.opened = true;
+};
+
+console.log('%c', devtools);
+// devtools.opened will become true if/when the console is opened
+```
+
+```ts
+// Basic console functions
+console.assert();
+console.clear();
+console.log();
+console.debug();
+console.info();
+console.warn();
+console.error();
+
+// Different output styles
+console.dir();
+console.dirxml();
+console.table();
+console.group();
+console.groupCollapsed();
+console.groupEnd();
+
+// Trace console functions
+console.trace();
+console.count();
+console.countReset();
+console.time();
+console.timeEnd();
+console.timeLog();
+
+// Non-standard console functions
+console.profile();
+console.profileEnd();
+console.timeStamp();
+```
+
+`console.log`
+
+```ts
+// `sprinf` style log
+console.log('%d %o %s', integer, object, string);
+console.log('%c ...', 'css style');
+```
+
+`console.table`
+
+```ts
+// display array of object (tabular data)
+const transactions = [
+  {
+    id: '7cb1-e041b126-f3b8',
+    seller: 'WAL0412',
+    buyer: 'WAL3023',
+    price: 203450,
+    time: 1539688433,
+  },
+  {
+    id: '1d4c-31f8f14b-1571',
+    seller: 'WAL0452',
+    buyer: 'WAL3023',
+    price: 348299,
+    time: 1539688433,
+  },
+  {
+    id: 'b12c-b3adf58f-809f',
+    seller: 'WAL0012',
+    buyer: 'WAL2025',
+    price: 59240,
+    time: 1539688433,
+  },
+];
+
+console.table(data, ['id', 'price']);
+```
+
+### JavaScript Testing and Tracing API
+
+`debugger`:
+
+```ts
+// debugger;
+```
+
+```ts
+copy(obj); // to clipboard
+```
+
+```ts
+window.onerror = function (errorMessage, scriptURI, lineNo, columnNo, error) {
+  console.log(`errorMessage: ${errorMessage}`); // 异常信息
+  console.log(`scriptURI: ${scriptURI}`); // 异常文件路径
+  console.log(`lineNo: ${lineNo}`); // 异常行号
+  console.log(`columnNo: ${columnNo}`); // 异常列号
+  console.log(`error: ${error}`); // 异常堆栈信息
+  // ...
+  // 异常上报
+};
+
+window.addEventListener('error', function () {
+  console.log(error);
+  // ...
+  // 异常上报
+});
+```
+
+#### Trace Property
+
+```ts
+const traceProperty = (object, property) => {
+  let value = object[property];
+  Object.defineProperty(object, property, {
+    get() {
+      console.trace(`${property} requested`);
+      return value;
+    },
+    set(newValue) {
+      console.trace(`setting ${property} to `, newValue);
+      value = newValue;
+    },
+  });
+};
+```
+
+### Node Testing API
+
+- node --inspect
+- [ndb](https://github.com/GoogleChromeLabs/ndb)
+
+```bash
+node --inspect
+ndb index.js
+```
+
+### Unit Testing
+
+#### Unit Testing Principles
+
+- 代码覆盖率.
+- 非法值测试.
+- 边界测试.
+- 非边界测试.
+
+#### Testing Code Isolation
+
+- 编写代码时, 保持最小复杂度(最小依赖, 最低耦合).
+- 利用 mock/stub 模拟外部依赖/测试数据.
+
+#### Mock Testing
+
+- mock: 模拟对象中的方法/接口
+- stub: 模拟对象中的返回值
+- spy: 在原有对象的基础上, 增加监视用变量/方法 e.g assert/调用次数/参数限制
+
+```ts
+const mockery = require('mockery');
+mockery.enable();
+
+describe('Sum suite File', function () {
+  beforeEach(function () {
+    mockery.registerAllowable('./mySumFS', true);
+  });
+
+  afterEach(function () {
+    mockery.deregisterAllowable('./mySumFS');
+  });
+
+  it('Adds Integers!', function () {
+    const filename = 'numbers';
+    const fsMock = {
+      readFileSync(path, encoding) {
+        expect(path).toEqual(filename);
+        expect(encoding).toEqual('utf8');
+        return JSON.stringify({ a: 9, b: 3 });
+      },
+    };
+
+    mockery.registerMock('fs', fsMock);
+    const mySum = require('./mySumFS');
+    expect(mySum.sum(filename)).toEqual(12);
+    mockery.deregisterMock('fs');
   });
 });
 ```
@@ -4779,353 +5146,15 @@ await page.tracing.stop();
 
 #### Unit Testing Frameworks
 
-- Jasmine
-- Mocha
+- Jest.
+- Jasmine.
+- Mocha.
 
 #### UI Testing Frameworks
 
+- Cypress/PlayWright/Puppeteer.
 - 用户行为: Karma/Selenium.
 - 功能测试: Phantom.js/Slimer.js/Karma.
-
-### Testable Code
-
-- 完整注释.
-- 最小复杂度 = (扇入 `*` 扇出) ^ 2.
-- 可隔离性: 最小依赖性 + 松耦合性.
-- 使用依赖注入, 将外部对象移至函数参数处(不在函数内部调用构造器): 易于构造 mock/stub, 降低扇出(函数复杂度).
-
-### 圈复杂度
-
-`V(G) = e - n + 2`: `**<10**`.
-
-### 函数复杂度
-
-函数复杂度 = (扇入 `*` 扇出) ^ 2.
-
-#### 扇出
-
-引用:
-
-- 所引用外部对象/方法之和.
-- 扇出: `**<7**`.
-- 高扇出: 高复杂度/高依赖性/高耦合度.
-
-#### 扇入
-
-被引用:
-
-- 其他对象/方法引用此函数的次数之和.
-- 顶层抽象代码 与 不常用功能 应保持低扇入.
-
-### 耦合度
-
-#### 内容耦合
-
-5 级耦合度:
-
-```ts
-O.property = 'tazimi';
-O.method = function () {};
-O.prototype.method = function () {};
-```
-
-#### 公共耦合
-
-4 级耦合度, 共享全局变量:
-
-```ts
-let Global = 'global';
-
-function A() {
-  Global = 'A';
-}
-function B() {
-  Global = 'B';
-}
-```
-
-#### 控制耦合
-
-3 级耦合度:
-
-```ts
-const absFactory = new AbstractFactory({ env: 'TEST' });
-```
-
-#### 印记耦合
-
-2 级耦合度:
-
-```ts
-O.prototype.makeBread = function (args) {
-  return new Bread(args.type, args.size);
-};
-
-O.makeBread({ type: wheat, size: 99, name: 'foo' });
-```
-
-#### 数据耦合
-
-1 级耦合度.
-
-#### 无耦合
-
-0 级耦合度.
-
-### Unit Testing
-
-#### Unit Testing Principles
-
-- 代码覆盖率.
-- 非法值测试.
-- 边界测试.
-- 非边界测试.
-
-#### Testing Code Isolation
-
-- 编写代码时, 保持最小复杂度(最小依赖, 最低耦合).
-- 利用 mock/stub 模拟外部依赖/测试数据.
-
-#### Mock Testing
-
-- mock: 模拟对象中的方法/接口
-- stub: 模拟对象中的返回值
-- spy: 在原有对象的基础上, 增加监视用变量/方法 e.g assert/调用次数/参数限制
-
-```ts
-const mockery = require('mockery');
-mockery.enable();
-
-describe('Sum suite File', function () {
-  beforeEach(function () {
-    mockery.registerAllowable('./mySumFS', true);
-  });
-
-  afterEach(function () {
-    mockery.deregisterAllowable('./mySumFS');
-  });
-
-  it('Adds Integers!', function () {
-    const filename = 'numbers';
-    const fsMock = {
-      readFileSync(path, encoding) {
-        expect(path).toEqual(filename);
-        expect(encoding).toEqual('utf8');
-        return JSON.stringify({ a: 9, b: 3 });
-      },
-    };
-
-    mockery.registerMock('fs', fsMock);
-    const mySum = require('./mySumFS');
-    expect(mySum.sum(filename)).toEqual(12);
-    mockery.deregisterMock('fs');
-  });
-});
-```
-
-### Monkey Patch
-
-#### Window State Injection
-
-Inject trace function (log, monitor, report service)
-to window `pushState` and `replaceState`.
-
-```ts
-const _wr = function (type) {
-  const orig = window.history[type];
-
-  return function (...args) {
-    const rv = orig.apply(this, args);
-    const e = new Event(type.toLowerCase());
-    e.arguments = args;
-    window.dispatchEvent(e);
-    return rv;
-  };
-};
-
-window.history.pushState = _wr('pushState');
-window.history.replaceState = _wr('replaceState');
-
-window.addEventListener('pushstate', function (event) {
-  console.trace('pushState');
-});
-
-window.addEventListener('replacestate', function (event) {
-  console.trace('replaceState');
-});
-```
-
-#### Event Propagation Injection
-
-```ts
-const originalStopPropagation = MouseEvent.prototype.stopPropagation;
-
-MouseEvent.prototype.stopPropagation = function (...args) {
-  console.trace('stopPropagation');
-  originalStopPropagation.call(this, ...args);
-};
-```
-
-#### Window Scroll Injection
-
-```ts
-let originalScrollTop = element.scrollTop;
-
-Object.defineProperty(element, 'scrollTop', {
-  get() {
-    return originalScrollTop;
-  },
-  set(newVal) {
-    console.trace('scrollTop');
-    originalScrollTop = newVal;
-  },
-});
-```
-
-### Console API
-
-- `console.XXX`.
-- `copy`: copy complex object to clipboard.
-- `monitor`: monitor object.
-
-```ts
-const devtools = /./;
-devtools.toString = function () {
-  this.opened = true;
-};
-
-console.log('%c', devtools);
-// devtools.opened will become true if/when the console is opened
-```
-
-```ts
-// Basic console functions
-console.assert();
-console.clear();
-console.log();
-console.debug();
-console.info();
-console.warn();
-console.error();
-
-// Different output styles
-console.dir();
-console.dirxml();
-console.table();
-console.group();
-console.groupCollapsed();
-console.groupEnd();
-
-// Trace console functions
-console.trace();
-console.count();
-console.countReset();
-console.time();
-console.timeEnd();
-console.timeLog();
-
-// Non-standard console functions
-console.profile();
-console.profileEnd();
-console.timeStamp();
-```
-
-`console.log`
-
-```ts
-// `sprinf` style log
-console.log('%d %o %s', integer, object, string);
-console.log('%c ...', 'css style');
-```
-
-`console.table`
-
-```ts
-// display array of object (tabular data)
-const transactions = [
-  {
-    id: '7cb1-e041b126-f3b8',
-    seller: 'WAL0412',
-    buyer: 'WAL3023',
-    price: 203450,
-    time: 1539688433,
-  },
-  {
-    id: '1d4c-31f8f14b-1571',
-    seller: 'WAL0452',
-    buyer: 'WAL3023',
-    price: 348299,
-    time: 1539688433,
-  },
-  {
-    id: 'b12c-b3adf58f-809f',
-    seller: 'WAL0012',
-    buyer: 'WAL2025',
-    price: 59240,
-    time: 1539688433,
-  },
-];
-
-console.table(data, ['id', 'price']);
-```
-
-### JavaScript Testing and Tracing API
-
-`debugger`:
-
-```ts
-// debugger;
-```
-
-```ts
-copy(obj); // to clipboard
-```
-
-```ts
-window.onerror = function (errorMessage, scriptURI, lineNo, columnNo, error) {
-  console.log(`errorMessage: ${errorMessage}`); // 异常信息
-  console.log(`scriptURI: ${scriptURI}`); // 异常文件路径
-  console.log(`lineNo: ${lineNo}`); // 异常行号
-  console.log(`columnNo: ${columnNo}`); // 异常列号
-  console.log(`error: ${error}`); // 异常堆栈信息
-  // ...
-  // 异常上报
-};
-
-window.addEventListener('error', function () {
-  console.log(error);
-  // ...
-  // 异常上报
-});
-```
-
-#### Trace Property
-
-```ts
-const traceProperty = (object, property) => {
-  let value = object[property];
-  Object.defineProperty(object, property, {
-    get() {
-      console.trace(`${property} requested`);
-      return value;
-    },
-    set(newValue) {
-      console.trace(`setting ${property} to `, newValue);
-      value = newValue;
-    },
-  });
-};
-```
-
-### Node Testing API
-
-- node --inspect
-- [ndb](https://github.com/GoogleChromeLabs/ndb)
-
-```bash
-node --inspect
-ndb index.js
-```
 
 ## Jest Testing
 
