@@ -2128,8 +2128,13 @@ const isElementInViewport = el => {
 
 #### DOM Left and Top
 
-- offsetLeft/offsetTop: 表示该元素的左上角 (边框外边缘) 与已定位的父容器 (offsetParent 对象) 左上角的距离.
-- scrollLeft/scrollTop: 元素滚动条位置, 被隐藏的内容区域左侧/上方的像素位置.
+- offsetLeft/offsetTop:
+  表示该元素的左上角 (边框外边缘) 与已定位的父容器 (offsetParent 对象) 左上角的距离.
+- clientLeft/clientTop:
+  表示该元素 padding 至 margin 的距离,
+  始终等于 `.getComputedStyle()` 返回的 `border-left-width`/`border-top-width`.
+- scrollLeft/scrollTop:
+  元素滚动条位置, 被隐藏的内容区域左侧/上方的像素位置.
 
 ![Offset Size](./figures/OffsetSize.png)
 
