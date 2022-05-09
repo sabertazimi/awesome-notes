@@ -8993,6 +8993,20 @@ console.log(Math.floor(25.5)); // 25
 console.log(Math.floor(25.1)); // 25
 ```
 
+```ts
+const random = (a = 1, b = 0) => {
+  const lower = Math.min(a, b);
+  const upper = Math.max(a, b);
+  return lower + Math.random() * (upper - lower);
+};
+
+const randomInt = (a = 1, b = 0) => {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  return Math.floor(lower + Math.random() * (upper - lower + 1));
+};
+```
+
 |              | -2.9 | -2.5 | -2.1 | 2.1 | 2.5 | 2.9 |
 | ------------ | ---- | ---- | ---- | --- | --- | --- |
 | `Math.floor` | -3   | -3   | -3   | 2   | 2   | 2   |
