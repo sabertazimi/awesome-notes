@@ -418,6 +418,21 @@ const s = 'Hello world!';
 s.startsWith('world', 6); // true
 s.endsWith('Hello', 5); // true
 s.includes('Hello', 6); // false
+
+// Arrays difference
+[
+  [1, 2, 3, 4, 5],
+  [5, 2, 10],
+].reduce((a, b) => a.filter(c => !b.includes(c)));
+// [1, 3, 4]
+
+// Arrays intersection
+[
+  [1, 2, 3],
+  [101, 2, 1, 10],
+  [2, 1],
+].reduce((a, b) => a.filter(c => b.includes(c)));
+// [1, 2]
 ```
 
 - `string.match(RegExp): string[] | null`.
