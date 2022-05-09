@@ -4619,7 +4619,7 @@ Structure every test to 3 part code:
 - Negative tests:
   invalid inputs (e.g `null`/`undefined`/`''`/mismatch type/mismatch structure)
   verify robustness.
-- Exceptions tests.
+- Exception tests: `expect(api()).toThrow(error)`.
 
 ### Testable Code
 
