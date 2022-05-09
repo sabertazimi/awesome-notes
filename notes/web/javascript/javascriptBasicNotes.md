@@ -1878,6 +1878,17 @@ function typeOf(o) {
 }
 ```
 
+```ts
+function type(item) {
+  const reTypeOf = /(?:^\[object\s(.*?)\]$)/;
+
+  return Object.prototype.toString
+    .call(item)
+    .replace(reTypeOf, '$1')
+    .toLowerCase();
+}
+```
+
 #### Null Detection
 
 不应使用 typeof 检测 null, 应使用 `===`/`!==`.
