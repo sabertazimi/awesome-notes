@@ -1713,7 +1713,7 @@ WeakMap/WeakSet 则更加**内存安全**:
 
 ### Date
 
-- [Date and Temporal API Cheet Sheet](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
+- [Date and Temporal API CheatSheet](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
 - [Definitive Guide](https://css-tricks.com/everything-you-need-to-know-about-date-in-javascript)
 
 ```ts
@@ -1792,6 +1792,104 @@ const getDateItemList = (year, month) => {
 ```
 
 ### Temporal
+
+#### Temporal Basis
+
+```ts
+Temporal.ZonedDateTime.from({
+  year,
+  month,
+  day,
+  timeZone: Temporal.Now.timeZone(),
+});
+
+Temporal.ZonedDateTime.from({
+  year,
+  month,
+  day,
+  hour,
+  minute,
+  timeZone: Temporal.Now.timeZone(),
+});
+
+const second = Temporal.Now.zonedDateTimeISO().second;
+const hour = Temporal.Now.zonedDateTimeISO().hour;
+const day = Temporal.Now.zonedDateTimeISO().day;
+
+Temporal.Now.zonedDateTimeISO().with({ second: 30 });
+Temporal.Now.zonedDateTimeISO().with({ hour: 13 });
+Temporal.Now.zonedDateTimeISO().with({ day: 1 });
+Temporal.Now.zonedDateTimeISO().withPlainTime(
+  new Temporal.PlainTime(23, 59, 59, 999, 999, 999)
+);
+```
+
+#### Temporal Range
+
+```ts
+const dayOfWeek = Temporal.Now.zonedDateTimeISO().dayOfWeek;
+const dayOfYear = Temporal.Now.zonedDateTimeISO().dayOfYear;
+const daysInMonth = new Temporal.PlainYearMonth(2012, 2).daysInMonth;
+const daysInMonth = Temporal.PlainYearMonth.from('2012-02').daysInMonth;
+const weekOfYear = Temporal.Now.zonedDateTimeISO().weekOfYear;
+const weekOfYear = Temporal.PlainDate.from({
+  day: 31,
+  month: 12,
+  year: Temporal.Now.plainDateISO(),
+}).weekOfYear;
+const inLeapYear = Temporal.PlainDate.from('2000-01-01').inLeapYear;
+
+Temporal.Now.zonedDateTimeISO().add(Temporal.Duration.from({ days: 7 }));
+Temporal.Now.zonedDateTimeISO().subtract(Temporal.Duration.from({ days: 14 }));
+Temporal.Now.zonedDateTimeISO()
+  .with({ month: 1, day: 1 })
+  .add(Temporal.Duration.from({ days: 256 }));
+Temporal.Now.zonedDateTimeISO()
+  .with({ month: 1, day: 1 })
+  .add(Temporal.Duration.from({ weeks: 23 }));
+
+Temporal.Instant.fromEpochMilliseconds(Math.max.apply(null, dateArrays));
+Temporal.Instant.fromEpochMilliseconds(Math.min.apply(null, dateArrays));
+```
+
+#### Temporal Display
+
+```ts
+new Intl.DateTimeFormat('en-US', {
+  dateStyle: 'full',
+  timeStyle: 'medium',
+}).format(Temporal.Now.zonedDateTimeISO());
+new Intl.DateTimeFormat('en-US', { weekday: 'short', hour: 'numeric' }).format(
+  Temporal.Now.zonedDateTimeISO()
+);
+
+Temporal.PlainDate.from('2007-01-27').until('2007-01-29');
+Temporal.PlainDate.from('2007-01-27')
+  .since('2007-01-29')
+  .total({ unit: 'millisecond' });
+Temporal.PlainDate.from('2007-01-27')
+  .since('2007-01-29')
+  .total({ unit: 'day' });
+```
+
+#### Temporal Query
+
+```ts
+const isBefore = Temporal.PlainDate.compare('2010-10-20', '2010-10-21') === -1;
+const isAfter = Temporal.PlainDate.compare('2010-10-20', '2010-10-19') === 1;
+const isEqual = Temporal.PlainDate.from('2010-10-20').equals('2010-10-21');
+const isEqual = Temporal.PlainDate.from('2010-10-20').equals('2010-10-20');
+const isEqual =
+  Temporal.PlainDate.from('2010-10-20').month ===
+  Temporal.PlainDate.from('2010-10-21').month;
+
+const isPlainTime = Temporal.Now.plainTimeISO() instanceof Temporal.PlainTime;
+const isPlainDate = Temporal.Now.plainDateISO() instanceof Temporal.PlainDate;
+const isPlainDateTime =
+  Temporal.Now.plainDateTimeISO() instanceof Temporal.PlainDateTime;
+const isZonedDateTime =
+  Temporal.Now.zonedDateTimeISO() instanceof Temporal.ZonedDateTime;
+```
 
 ## Variable
 
