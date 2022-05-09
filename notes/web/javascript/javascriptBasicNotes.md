@@ -1357,6 +1357,30 @@ flattenDeep([1, [[2], [3, [4]], 5]]);
 ); // fold function
 ```
 
+Implement `groupBy`:
+
+```ts
+const groupByLength = ['one', 'two', 'three'].reduce(
+  (acc, current, _index, _array) => {
+    const key = current.length;
+    (acc[key] || (acc[key] = [])).push(current);
+    return acc;
+  },
+  {}
+);
+// {3: ["one", "two"], 5: ["three"]}
+
+const groupByFunction = [1.3, 2.1, 2.4].reduce(
+  (acc, current, _index, _array) => {
+    const key = Math.floor(current);
+    (acc[key] || (acc[key] = [])).push(current);
+    return acc;
+  },
+  {}
+);
+// {1: [1.3], 2: [2.1, 2.4]}
+```
+
 #### Array Traversal
 
 ```ts
