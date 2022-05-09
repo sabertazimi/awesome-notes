@@ -971,7 +971,7 @@ npm install -g @volar/vue-language-server
 | `<SPACE>x`  | close current buffer     | (hides a terminal)                 |
 | `<TAB>`     | cycle active buffer      | `<SHIFT><TAB>` for previous buffer |
 | `<CTRL>n`   | open NvimTree explorer   | `<ENTER>` to select                |
-| `<SPACE>uk` | view key mappings        |                                    |
+| `<SPACE>ch` | view key mappings        |                                    |
 | `<SPACE>uu` | update NvChad            |                                    |
 | `<SPACE>/`  | toggle commenting a line |                                    |
 | `<SPACE>ff` | find a file              | Telescope picker                   |
@@ -989,6 +989,8 @@ npm install -g @volar/vue-language-server
 
 ```lua
 -- ~/.config/nvim/lua/custom/chadrc.lua
+
+vim.g.neoformat_try_node_exe = 1
 
 local M = {}
 
@@ -1025,6 +1027,7 @@ M.plugins = {
    },
    install = {
      { "williamboman/nvim-lsp-installer" },
+     { "sbdchd/neoformat" },
    }
 }
 
