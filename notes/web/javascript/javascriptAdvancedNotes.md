@@ -831,6 +831,8 @@ frag.appendChild(p);
 document.body.appendChild(frag);
 ```
 
+克隆节点进行处理, 处理完毕后再替换原节点:
+
 ```ts
 const oldNode = document.getElementById('result');
 const clone = oldNode.cloneNode(true);
