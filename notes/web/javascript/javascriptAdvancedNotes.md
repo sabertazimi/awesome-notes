@@ -1054,6 +1054,9 @@ div.setAttribute('id', 'someOtherId');
 div.setAttribute('class', 'ft');
 div.removeAttribute('id');
 div.removeAttribute('class');
+
+// `data-src`
+console.log(el.dataset.src);
 ```
 
 #### Select DOM Node
