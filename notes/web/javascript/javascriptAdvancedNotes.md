@@ -892,8 +892,19 @@ ul.innerHTML = values.map(value => `<li>${value}</li>`).join('');
 #### Insert DOM Node
 
 ```ts
+// Append
+el.appendChild(newEl);
+
+// Prepend
+el.insertBefore(newEl, el.firstChild);
+
+// InsertBefore
+el.parentNode.insertBefore(newEl, el);
+
+// InsertAfter
 function insertAfter(newElement, targetElement) {
   const parent = targetElement.parentNode;
+
   if (parent.lastChild === targetElement) {
     parent.appendChild(newElement);
   } else {
@@ -940,12 +951,17 @@ node.replaceChildren(...nodeList);
 ```ts
 // 删除第一个子节点
 const formerFirstChild = someNode.removeChild(someNode.firstChild);
+
 // 删除最后一个子节点
 const formerLastChild = someNode.removeChild(someNode.lastChild);
 
 while (div.firstChild) {
   div.removeChild(div.firstChild);
 }
+
+// Remove self
+el.parentNode.removeChild(el);
+el.remove();
 ```
 
 #### Traverse DOM Node
@@ -957,6 +973,8 @@ const first = node.firstChild;
 const last = node.lastChild;
 const previous = node.previousSibling;
 const next = node.nextSibling;
+
+node.matches(selector);
 ```
 
 [Element Traversal API](https://www.w3.org/TR/ElementTraversal):
@@ -965,13 +983,15 @@ For instance,
 in `childNodes` can see both text nodes, element nodes, and even comment nodes.
 
 ```ts
-const count = node.childElementCount;
-const parent = node.parentElement;
-const children = node.children;
-const first = node.firstElementChild;
-const last = node.lastElementChild;
-const previous = node.previousElementSibling;
-const next = node.nextElementSibling;
+const count = el.childElementCount;
+const parent = el.parentElement;
+const children = el.children;
+const first = el.firstElementChild;
+const last = el.lastElementChild;
+const previous = el.previousElementSibling;
+const next = el.nextElementSibling;
+
+el.matches(selector);
 ```
 
 NodeList is iterable:
