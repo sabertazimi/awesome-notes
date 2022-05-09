@@ -3534,8 +3534,9 @@ function timedProcessArray(items, process, callback) {
 - `throttle`:
   节流是将多次执行变成每隔一段时间执行 (保证一定时间内只执行一次).
 
+Simple debounce:
+
 ```ts
-// Simple debounce:
 function debounce(action, delay) {
   let timer = null;
 
@@ -3548,21 +3549,41 @@ function debounce(action, delay) {
 }
 ```
 
+Simple throttle:
+
 ```ts
-// Simple throttle:
 function throttle(action) {
   let isRunning = false;
 
   return function () {
-    if (isRunning) return;
+    if (isRunning) {
+      return;
+    }
+
     isRunning = true;
+
     window.requestAnimationFrame(() => {
       action();
       isRunning = false;
     });
   };
 }
+
+function throttle(func, timeFrame) {
+  let lastTime = 0;
+
+  return function (...args) {
+    const now = new Date();
+
+    if (now - lastTime >= timeFrame) {
+      func(...args);
+      lastTime = now;
+    }
+  };
+}
 ```
+
+Lodash debounce:
 
 ```ts
 // 这个是用来获取当前时间戳的
@@ -3618,9 +3639,11 @@ function debounce(func, wait = 50, immediate = true) {
 }
 ```
 
+Lodash throttle:
+
 ```ts
 /**
- * underscore 节流函数, 返回函数连续调用时, func 执行频率限定为 次 / wait
+ * Lodash 节流函数, 返回函数连续调用时, func 执行频率限定为 次 / wait
  *
  * @param  {function}   func      回调函数
  * @param  {number}     wait      表示时间窗口的间隔
