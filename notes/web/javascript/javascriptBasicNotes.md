@@ -1721,6 +1721,8 @@ now.getFullYear(); // 1-n
 now.getMonth(); // Warn: 0-11
 now.getDate(); // 1-n
 now.getDay(); // Warn: 0-6
+now.getHours();
+now.getSeconds();
 now.toString();
 now.toDateString();
 now.toTimeString();
