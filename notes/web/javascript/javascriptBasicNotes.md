@@ -1866,6 +1866,7 @@ function typeOf(o) {
     boolean: 'boolean',
     string: 'string',
     '[object Function]': 'function',
+    '[object GeneratorFunction]': 'function',
     '[object Array]': 'array',
     '[object Date]': 'date',
     '[object RegExp]': 'regexp',
