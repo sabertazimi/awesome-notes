@@ -1617,6 +1617,14 @@ function handleEvent(event) {
   **所有资源**加载完成之后, **load** 事件才会被触发.
 
 ```ts
+function ready(fn) {
+  if (document.readyState !== 'loading') {
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', event => {
   console.log('DOM fully loaded and parsed.');
 });
