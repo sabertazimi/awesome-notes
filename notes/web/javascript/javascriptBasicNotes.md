@@ -1348,7 +1348,7 @@ flattenDeep([1, [[2], [3, [4]], 5]]);
 
 #### Array Reduce
 
-相当于 Haskell 中的 fold:
+`reduce`/`reduceRight`:
 
 ```ts
 [].reduce(
