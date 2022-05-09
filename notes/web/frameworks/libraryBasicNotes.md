@@ -673,8 +673,8 @@ tags: [Web, Framework, Library]
 
 ### Date Utils
 
-- [Day.js: 2kB Immutable Date-time Library Alternative to Moment.js with Same Modern API](https://github.com/iamkun/dayjs)
 - [Date Lodash](https://github.com/date-fns/date-fns)
+- [Day.js: 2kB Immutable Date-time Library Alternative to Moment.js with Same Modern API](https://github.com/iamkun/dayjs)
 - [Time Table](https://github.com/flightplan-tool/timetable-fns)
 - [Moment.js](https://github.com/moment/moment)
 
