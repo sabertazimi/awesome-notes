@@ -5355,6 +5355,8 @@ await expect(asyncCall()).rejects.toThrowError();
 
 ### Jest Mocks
 
+![Mocks](./figures/Mocks.png)
+
 `__mocks__`:
 
 - `jest.createMockFromModule('moduleName')`.
