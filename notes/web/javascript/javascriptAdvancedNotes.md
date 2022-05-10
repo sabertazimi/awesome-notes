@@ -4623,7 +4623,16 @@ Structure every test to 3 part code:
 - Negative tests:
   invalid inputs (e.g `null`/`undefined`/`''`/mismatch type/mismatch structure)
   verify robustness.
-- Exception tests: `expect(api()).toThrow(error)`.
+- Exception tests:
+  `expect(api()).toThrow(error)`.
+
+#### Test-Driven Development
+
+- Reduce costs: find bugs early.
+- Reduce fear and anxiety.
+- Lead to better-designed and more testable code.
+- Make tests more thorough (彻底的).
+  Easy to refactor legacy code.
 
 ### Testable Code
 
@@ -4632,11 +4641,11 @@ Structure every test to 3 part code:
 - 可隔离性: 最小依赖性 + 松耦合性.
 - 使用依赖注入, 将外部对象移至函数参数处(不在函数内部调用构造器): 易于构造 mock/stub, 降低扇出(函数复杂度).
 
-### 圈复杂度
+#### 圈复杂度
 
 `V(G) = e - n + 2`: `**<10**`.
 
-### 函数复杂度
+#### 函数复杂度
 
 函数复杂度 = (扇入 `*` 扇出) ^ 2.
 
@@ -4655,9 +4664,9 @@ Structure every test to 3 part code:
 - 其他对象/方法引用此函数的次数之和.
 - 顶层抽象代码 与 不常用功能 应保持低扇入.
 
-### 耦合度
+#### 耦合度
 
-#### 内容耦合
+##### 内容耦合
 
 5 级耦合度:
 
@@ -4667,7 +4676,7 @@ O.method = function () {};
 O.prototype.method = function () {};
 ```
 
-#### 公共耦合
+##### 公共耦合
 
 4 级耦合度, 共享全局变量:
 
@@ -4682,7 +4691,7 @@ function B() {
 }
 ```
 
-#### 控制耦合
+##### 控制耦合
 
 3 级耦合度:
 
@@ -4690,7 +4699,7 @@ function B() {
 const absFactory = new AbstractFactory({ env: 'TEST' });
 ```
 
-#### 印记耦合
+##### 印记耦合
 
 2 级耦合度:
 
@@ -4702,11 +4711,11 @@ O.prototype.makeBread = function (args) {
 O.makeBread({ type: wheat, size: 99, name: 'foo' });
 ```
 
-#### 数据耦合
+##### 数据耦合
 
 1 级耦合度.
 
-#### 无耦合
+##### 无耦合
 
 0 级耦合度.
 
