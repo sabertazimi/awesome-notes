@@ -4625,6 +4625,10 @@ Structure every test to 3 part code:
   verify robustness.
 - Exception tests:
   `expect(api()).toThrow(error)`.
+- Bottom-up testing:
+  gives more granular feedback but slows down iteration speed.
+- Top-down testing:
+  allows to iterate more quickly but will generate more coarse feedback.
 
 #### Test-Driven Development
 
