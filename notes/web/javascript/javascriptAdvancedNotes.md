@@ -5359,8 +5359,12 @@ await expect(asyncCall()).rejects.toThrowError();
 
 - `jest.createMockFromModule('moduleName')`.
 - `jest.requireActual('moduleName')`.
+
+`spyOn`:
+
 - `jest.spyOn().mockImplementation`.
 - `jest.spyOn().mockReturnValue`.
+- `jest.spyOn().mockReturnValueOnce`.
 - `mockModule.mockClear`.
 - `mockModule.mockReset`.
 - `mockModule.mockRestore`.
