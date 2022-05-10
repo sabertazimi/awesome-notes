@@ -4598,9 +4598,9 @@ observer.observe({ type: 'layout-shift', buffered: true });
 
 #### FAIR Principle
 
-- Fast tests.
+- Fast tests: break down into small separate and well structured tests.
 - Automated tests.
-- Isolated tests.
+- Isolated tests: any particular test should not depend on any others.
 - Repeatable tests.
 
 #### AAA Pattern
