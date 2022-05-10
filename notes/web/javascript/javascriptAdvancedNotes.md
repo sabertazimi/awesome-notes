@@ -5291,16 +5291,31 @@ configure({ adapter: new EnzymeAdapter() });
   - Skip temporary broken tests.
 
 ```tsx
-import * as React from 'react';
-import { shallow } from 'enzyme';
-import { Checkbox } from './Checkbox';
+import { fireEvent, render, screen } from '@testing-library/react';
+import LandingNav from './LandingNav';
 
-describe('Checkbox should', () => {
-  test('changes the text after click', () => {
-    const checkbox = shallow(<Checkbox labelOn="On" labelOff="Off" />);
-    expect(checkbox.text()).toEqual('Off');
-    checkbox.find('input').simulate('change');
-    expect(checkbox.text()).toEqual('On');
+describe('LandingNav', () => {
+  test('should expanded when clicked', () => {
+    render(<LandingNav />);
+
+    expect(screen.getByRole('navigation')).toHaveStyle(
+      'transform: translateX(-100%) translateZ(0);'
+    );
+    expect(screen.getByRole('banner')).toHaveStyle('opacity: 0');
+
+    fireEvent.click(screen.getByTestId('hamburger-icon'));
+
+    expect(screen.getByRole('navigation')).toHaveStyle(
+      'transform: translateX(0%) translateZ(0);'
+    );
+    expect(screen.getByRole('banner')).toHaveStyle('opacity: 0.8');
+
+    fireEvent.click(screen.getByTestId('hamburger-button'));
+
+    expect(screen.getByRole('navigation')).toHaveStyle(
+      'transform: translateX(-100%) translateZ(0);'
+    );
+    expect(screen.getByRole('banner')).toHaveStyle('opacity: 0');
   });
 });
 ```
@@ -5315,31 +5330,16 @@ describe('Checkbox should', () => {
   use `jest -u` to overwrite existing snapshot.
 
 ```tsx
-// Link.react.test.js
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Link from '@components/Link';
+import { fireEvent, render, screen } from '@testing-library/react';
+import ThemeSwitch from './ThemeSwitch';
 
-describe('Link should', () => {
-  test('changes the class when hovered', () => {
-    const component = renderer.create(
-      <Link page="http://www.facebook.com">Facebook</Link>
-    );
+describe('ThemeSwitch', () => {
+  test('should switch dark mode when clicked', () => {
+    const { container } = render(<ThemeSwitch />);
 
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    fireEvent.click(screen.getByTestId('toggle-wrapper'));
 
-    // manually trigger the callback
-    tree.props.onMouseEnter();
-    // re-rendering
-    tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-
-    // manually trigger the callback
-    tree.props.onMouseLeave();
-    // re-rendering
-    tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });
 ```
@@ -5359,6 +5359,11 @@ await expect(asyncCall()).rejects.toThrowError();
 
 - `jest.createMockFromModule('moduleName')`.
 - `jest.requireActual('moduleName')`.
+- `jest.spyOn().mockImplementation`.
+- `jest.spyOn().mockReturnValue`.
+- `mockModule.mockClear`.
+- `mockModule.mockReset`.
+- `mockModule.mockRestore`.
 
 ```tsx
 // react-dom.js
