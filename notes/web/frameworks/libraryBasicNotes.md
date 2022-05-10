@@ -1226,13 +1226,13 @@ tags: [Web, Framework, Library]
 ### End to End Testing
 
 - [Cypress](https://github.com/cypress-io/cypress)
+- [PlayWright: Automate Chromium, Firefox and WebKit with Single API](https://github.com/microsoft/playwright)
 - [NightWatch: End to End Testing Framework](https://github.com/nightwatchjs/nightwatch)
 - [WebDriver: Next Generation Browser and Mobile Automation Test Framework](https://github.com/webdriverio/webdriverio)
 - [WebHint](https://github.com/webhintio/hint)
 
 ### Headless Automation Tools
 
-- [PlayWright: Automate Chromium, Firefox and WebKit with Single API](https://github.com/microsoft/playwright)
 - [Puppeteer: Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
 - [RRWeb: Record and Replay Web](https://github.com/rrweb-io/rrweb)
 - [Webkit API](https://github.com/ariya/phantomjs)
@@ -1319,6 +1319,7 @@ tags: [Web, Framework, Library]
 
 #### Mock Servers
 
+- [SuperTest: Super-agent Driven Node.js HTTP Servers Integration Testing](https://github.com/visionmedia/supertest)
 - [JSON Server](https://github.com/typicode/json-server)
 - [JSON GraphQL Server](https://github.com/marmelab/json-graphql-server)
 - [Prism: Mocking and Contract Testing with OpenAPI](https://github.com/stoplightio/prism)
