@@ -4604,7 +4604,8 @@ observer.observe({ type: 'layout-shift', buffered: true });
 - Isolated tests:
   any particular test should not depend on any others.
 - Repeatable tests:
-  mock everything you can't control (e.g 3rd-party libraries/APIs).
+  mock everything you can't control,
+  e.g 3rd-party libraries, 3rd-party APIs, `Date` API.
 
 #### AAA Pattern
 
@@ -5425,6 +5426,14 @@ module.exports = {
   StaticQuery: jest.fn(),
   useStaticQuery: jest.fn(),
 };
+```
+
+Mock date:
+
+```ts
+jest
+  .spyOn(Date.prototype, 'toISOString')
+  .mockReturnValue('2020-06-20T13:37:00.000Z');
 ```
 
 ### Jest Internals
