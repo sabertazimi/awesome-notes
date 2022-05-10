@@ -895,6 +895,7 @@ tags: [Web, Framework, Library]
 - [LowCodeEngine: Enterprise-class Low-code Technology Stack](https://github.com/alibaba/lowcode-engine)
 - [ToolJet: Extensible Low-code Framework for Building Business Applications](https://github.com/ToolJet/ToolJet)
 - [AppSmith: Low Code Project to Build Admin Panels, Internal Tools, and Dashboards](https://github.com/appsmithorg/appsmith)
+- [TMagic: Tencent Low Code Editor](https://github.com/Tencent/tmagic-editor)
 
 ### Clipboard
 
