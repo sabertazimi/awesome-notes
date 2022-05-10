@@ -5530,70 +5530,82 @@ E2E testing helps a lot.
 ### Cypress Installation
 
 ```bash
-mkdir e2e
-cd e2e
-npm init -y
-npm install cypress webpack @cypress/webpack-preprocessor typescript ts-loader
-npx cypress open
+yarn add -D cypress typescript
+yarn cypress open
 ```
 
-`cypress open` will initialize the cypress folder structure for us.
+`cypress open` will initialize the cypress folder structure.
 
 ### Cypress Configuration
 
-`e2e/plugins/index.js`: setup TypeScript to transpile tests:
-
-```ts
-const wp = require('@cypress/webpack-preprocessor');
-
-module.exports = on => {
-  const options = {
-    webpackOptions: {
-      resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
-      },
-      module: {
-        rules: [
-          {
-            test: /\.tsx?$/,
-            loader: 'ts-loader',
-            options: { transpileOnly: true },
-          },
-        ],
-      },
-    },
-  };
-
-  on('file:preprocessor', wp(options));
-};
-```
-
-`e2e/tsconfig.json`:
+`cypress/tsconfig.json`:
 
 ```json
 {
+  "extends": "../tsconfig.json",
+  "include": ["global.d.ts", "**/*.ts"],
+  "exclude": [],
   "compilerOptions": {
     "strict": true,
-    "sourceMap": true,
-    "module": "commonjs",
-    "target": "es5",
-    "lib": ["DOM", "ES6"],
-    "jsx": "react",
-    "experimentalDecorators": true
-  },
-  "compileOnSave": false
+    "target": "ES6",
+    "lib": ["ES6", "DOM"],
+    "types": ["cypress"],
+    "isolatedModules": false,
+    "noEmit": true
+  }
 }
 ```
 
-`e2e/package.json`:
+`cypress/global.d.ts`:
+
+```ts
+/// <reference types="cypress" />
+```
+
+`cypress.json`:
+
+```json
+{
+  "baseUrl": "http://localhost:3000"
+}
+```
+
+`tsconfig.json`:
+
+```json
+{
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "cypress"]
+}
+```
+
+`package.json`:
 
 ```json
 {
   "scripts": {
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "e2e": "start-server-and-test e2e:prepare http://localhost:3000 e2e:headless",
+    "e2e:prepare": "yarn build && yarn serve",
+    "e2e:headless": "cypress run",
+    "e2e:ui": "cypress open"
   }
 }
+```
+
+`.gitignore`:
+
+```bash
+# cypress files
+cypress/screenshots
+cypress/videos
+```
+
+`jest.config.js`:
+
+```ts
+const config = {
+  testPathIgnorePatterns: ['/node_modules/', '/.next/', '/cypress/'],
+};
 ```
 
 ### Basic Cypress Testing
@@ -5681,11 +5693,41 @@ describe('payment', () => {
 });
 ```
 
+### Cypress Plugin
+
+`e2e/plugins/index.js`: setup TypeScript to transpile tests:
+
+```ts
+const wp = require('@cypress/webpack-preprocessor');
+
+module.exports = on => {
+  const options = {
+    webpackOptions: {
+      resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      },
+      module: {
+        rules: [
+          {
+            test: /\.tsx?$/,
+            loader: 'ts-loader',
+            options: { transpileOnly: true },
+          },
+        ],
+      },
+    },
+  };
+
+  on('file:preprocessor', wp(options));
+};
+```
+
 ### Cypress Reference
 
 - Cypress official [guide](https://learn.cypress.io).
-- Blank page testing [example](https://glebbahmutov.com/blog/visit-blank-page-between-tests).
 - Cypress CI [action](https://github.com/cypress-io/github-action).
+- Cypress real world [app](https://github.com/cypress-io/cypress-realworld-app).
+- Blank page testing [example](https://glebbahmutov.com/blog/visit-blank-page-between-tests).
 
 ## Chrome DevTools
 
