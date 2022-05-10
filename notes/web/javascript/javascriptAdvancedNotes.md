@@ -5368,6 +5368,7 @@ await expect(asyncCall()).rejects.toThrowError();
 - `jest.spyOn().mockReturnValue`.
 - `jest.spyOn().mockReturnValueOnce`.
 - `jest.spyOn().mockResolvedValue`.
+- `jest.spyOn().mockRejectedValue`.
 - `mockModule.mockClear`.
 - `mockModule.mockReset`.
 - `mockModule.mockRestore`.
