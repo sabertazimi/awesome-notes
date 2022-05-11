@@ -739,6 +739,7 @@ tags: [Web, Framework, Library]
 ### Avatar
 
 - [DiceBear: Random Avatar Generation Library](https://github.com/dicebear/dicebear)
+- [ReactAvatarEditor: Avatar Resize and Crop Component](https://github.com/mosch/react-avatar-editor)
 
 ### Emoji
 
