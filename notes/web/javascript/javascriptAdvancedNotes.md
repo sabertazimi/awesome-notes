@@ -5737,10 +5737,12 @@ describe('payment', () => {
 
 ### Cypress Principles
 
-- Don't wait for fixed time, wait for specific elements (`cy.as()`):
-  `get`/`find`/`its`/`should` commands will
+- Don't wait for fixed time, wait for specific elements (`cy.as`):
+  `cy.get`/`cy.find`/`cy.its`/`cy.should` commands will
   give the page an opportunity to fully load,
   and then the test can proceed.
+- Use `cy.then`/`cy.wrap` for
+  [async nature of Cypress](https://learn.cypress.io/cypress-fundamentals/understanding-the-asynchronous-nature-of-cypress).
 
 ### Cypress Command
 
