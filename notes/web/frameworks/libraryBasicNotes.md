@@ -55,6 +55,7 @@ tags: [Web, Framework, Library]
 - [Material UI](https://github.com/mui-org/material-ui)
 - [Headless UI](https://github.com/tailwindlabs/headlessui)
 - [Chakra UI](https://github.com/chakra-ui/chakra-ui)
+- [Next UI: Beautiful, Fast and Modern React UI Library](https://github.com/nextui-org/nextui)
 - [AriaKit: Accessible React Components](https://github.com/ariakit/ariakit)
 - [Spectrum: Build Adaptive, Accessible and Robust User Experiences](https://github.com/adobe/react-spectrum)
 - [Reach: Accessible Foundation for React Apps and Design Systems](https://github.com/reach/reach-ui)
