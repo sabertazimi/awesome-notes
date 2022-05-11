@@ -5735,6 +5735,13 @@ describe('payment', () => {
 });
 ```
 
+### Cypress Principles
+
+- Don't wait for fixed time, wait for specific elements (`cy.as()`):
+  `get`/`find`/`its`/`should` commands will
+  give the page an opportunity to fully load,
+  and then the test can proceed.
+
 ### Cypress Plugin
 
 `e2e/plugins/index.js`: setup TypeScript to transpile tests:
