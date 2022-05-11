@@ -5768,7 +5768,7 @@ module.exports = on => {
 
 - Cypress official [guide](https://learn.cypress.io).
 - Cypress events [plugin](https://github.com/dmtrKovalenko/cypress-real-events).
-- Cypress visual testing [plugin](https://github.com/percy/percy-cypress).
+- Cypress visual regression testing [plugin](https://github.com/percy/percy-cypress).
 - Cypress CI [action](https://github.com/cypress-io/github-action).
 - Cypress real world [example](https://github.com/cypress-io/cypress-realworld-app).
 
