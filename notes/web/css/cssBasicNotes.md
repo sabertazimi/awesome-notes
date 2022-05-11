@@ -2247,6 +2247,8 @@ justify: 自适应, 左右都无空格
 
 ### Text Wrap
 
+[Text wrapping and word breaking](https://codersblock.com/blog/deep-dive-into-text-wrapping-and-word-breaking):
+
 ```css
 /* 不换行 */
 .nowrap {
