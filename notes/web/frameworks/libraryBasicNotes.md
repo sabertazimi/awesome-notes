@@ -1332,6 +1332,7 @@ tags: [Web, Framework, Library]
 - [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter)
 - [Mockery Function](https://github.com/mfncooper/mockery)
 - [MemFS: In-memory Node File System](https://github.com/streamich/memfs)
+- [MockRTC: Powerful Friendly WebRTC Mock Proxy](https://github.com/httptoolkit/mockrtc)
 
 #### Mock APIs
 
