@@ -372,6 +372,7 @@ tags: [Web, Framework, Library]
 - [Hamburger: Animated Hamburger Menu Icons for React](https://github.com/luukdv/hamburger-react)
 - [Hamburgers: Tasty CSS-animated Hamburgers](https://github.com/jonsuh/hamburgers)
 - [PageMap](https://github.com/lrsjng/pagemap)
+- [ReactProSidebar: Customizable and Responsive Sidebar with Dropdown Menus and Nested Submenus](https://github.com/azouaoui-med/react-pro-sidebar)
 
 ### Landing Page
 
@@ -542,9 +543,11 @@ tags: [Web, Framework, Library]
 
 - [Nuka: Pure React Carousel Component](https://github.com/FormidableLabs/nuka-carousel)
 - [Swiper: Modern Mobile Touch Slider with Hardware Accelerated Transitions](https://github.com/nolimits4web/swiper)
+- [ReactSlick: React Carousel Component](https://github.com/akiran/react-slick)
 - [React Responsive Carousel](https://github.com/leandrowd/react-responsive-carousel)
 - [Flicking: Reliable, Flexible and Extendable Carousel](https://github.com/naver/egjs-flicking)
 - [Glider.js: Native Scrolling Carousel](https://github.com/NickPiscitelli/Glider.js)
+- [ReactSimplyCarousel: Lightweight, Responsive, Touch Enabled and Fully Controlled Isomorphic (SSR Support)](https://github.com/vadymshymko/react-simply-carousel)
 
 ### Slides and Presentation
 
