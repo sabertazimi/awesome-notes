@@ -5765,6 +5765,7 @@ module.exports = on => {
 - Cypress official [guide](https://learn.cypress.io).
 - Cypress CI [action](https://github.com/cypress-io/github-action).
 - Cypress real world [app](https://github.com/cypress-io/cypress-realworld-app).
+- Cypress events [plugin](https://github.com/dmtrKovalenko/cypress-real-events).
 - Blank page testing [example](https://glebbahmutov.com/blog/visit-blank-page-between-tests).
 
 ## Chrome DevTools
