@@ -5665,7 +5665,7 @@ import '@testing-library/cypress/add-commands';
 
 describe('component', () => {
   it('should work', () => {
-    cy.visit('http://localhost:8000');
+    cy.visit('/');
     cy.get('#onOff')
       .should('have.text', 'off')
       .click()
@@ -5741,6 +5741,82 @@ describe('payment', () => {
   `get`/`find`/`its`/`should` commands will
   give the page an opportunity to fully load,
   and then the test can proceed.
+
+### Cypress Command
+
+```ts
+/// <reference types="cypress" />
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      findByRole(role: string): Chainable<JQuery<HTMLElement>>;
+      findByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
+      getByRole(role: string): Chainable<JQuery<HTMLElement>>;
+      getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
+    }
+  }
+}
+
+Cypress.Commands.add(
+  'findByRole',
+  { prevSubject: 'element' },
+  (subject, role) => {
+    return cy.wrap(subject, { log: false }).find(`[role="${role}"]`);
+  }
+);
+
+Cypress.Commands.add(
+  'findByTestId',
+  { prevSubject: 'element' },
+  (subject, testId) => {
+    return cy.wrap(subject, { log: false }).find(`[data-testid="${testId}"]`);
+  }
+);
+
+Cypress.Commands.add('getByRole', role => {
+  return cy.get(`[role="${role}"]`);
+});
+
+Cypress.Commands.add('getByTestId', testId => {
+  return cy.get(`[data-testid="${testId}"]`);
+});
+```
+
+[Custom command log](https://filiphric.com/improve-your-custom-command-logs-in-cypress):
+
+```ts
+Cypress.Commands.add('take', (input: string) => {
+  let element: JQuery<HTMLElement> | HTMLElement[];
+  let count: number;
+
+  const log = Cypress.log({
+    autoEnd: false,
+    consoleProps() {
+      return {
+        selector: input,
+        Yielded: element,
+        Elements: count,
+      };
+    },
+    displayName: 'take',
+    name: 'Get by [data-cy] attribute',
+  });
+
+  cy.get(`[data-cy=${input}]`, { log: false }).then($el => {
+    element = Cypress.dom.getElements($el);
+    count = $el.length;
+    log.set({ $el });
+    log.snapshot().end();
+  });
+
+  cy.on('fail', err => {
+    log.error(err);
+    log.end();
+    throw err;
+  });
+});
+```
 
 ### Cypress Plugin
 
