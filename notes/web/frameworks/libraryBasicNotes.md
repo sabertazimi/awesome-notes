@@ -669,6 +669,7 @@ tags: [Web, Framework, Library]
 
 - [ReactRewards](https://github.com/thedevelobear/react-rewards)
 - [RoughNotation: Create and Animate Hand-drawn Annotations](https://github.com/rough-stuff/rough-notation)
+- [CanvasConfetti: On-demand Confetti Gun](https://github.com/catdad/canvas-confetti)
 
 ## Time Utils
 
