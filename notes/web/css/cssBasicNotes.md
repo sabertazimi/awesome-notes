@@ -805,6 +805,24 @@ li::before {
 }
 ```
 
+### Selectors Best Practice
+
+```ts
+const FOCUSABLE_SELECTORS = [
+  '[contenteditable]',
+  '[tabindex="0"]:not([disabled])',
+  'a[href]',
+  'audio[controls]',
+  'button:not([disabled])',
+  'iframe',
+  'input:not([disabled]):not([type="hidden"])',
+  'select:not([disabled])',
+  'summary',
+  'textarea:not([disabled])',
+  'video[controls]',
+].join(',');
+```
+
 ## CSS Normalize
 
 - `*` selector has poor performance
