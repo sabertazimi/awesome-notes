@@ -4607,8 +4607,9 @@ observer.observe({ type: 'layout-shift', buffered: true });
   mock everything you can't control:
   - 3rd-party libraries.
   - 3rd-party APIs.
-  - Timer API.
-  - `Date` API.
+  - Timer API: `jest.useFakerTimers()`/`jest.advanceTimersByTime()`/`cy.clock()`.
+  - `Date` API: `jest.spyOn(Date.prototype)`/`cy.tick()`.
+  - `Math.random()` API: `jest.spyOn()`/`jest.mock()`/`cy.stub()`.
 
 #### AAA Pattern
 
