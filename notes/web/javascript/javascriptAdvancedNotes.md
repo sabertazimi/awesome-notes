@@ -4604,8 +4604,11 @@ observer.observe({ type: 'layout-shift', buffered: true });
 - Isolated tests:
   any particular test should not depend on any others.
 - Repeatable tests:
-  mock everything you can't control,
-  e.g 3rd-party libraries, 3rd-party APIs, `Date` API.
+  mock everything you can't control:
+  - 3rd-party libraries.
+  - 3rd-party APIs.
+  - Timer API.
+  - `Date` API.
 
 #### AAA Pattern
 
