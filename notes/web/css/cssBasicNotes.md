@@ -5635,8 +5635,12 @@ window.requestAnimationFrame(step);
   - JavaScript defined after CSS won't run until CSSOM is completed.
   - If JavaScript doesn't depend on CSS: load it before CSS.
   - If JavaScript does depend on CSS: load it after CSS.
-- Load CSS as the DOM needs it (Avoid **flash of un-styled content**):
-  This unblocks `Start Render` and allows progressive rendering.
+- Load CSS as the DOM needs it:
+  - Unblocks `Start Render` and allows progressive rendering.
+  - Avoid **flash of un-styled content**.
+  - Avoid **re-rendering and repaint** for initial page:
+    put `Critical CSS` in HTML footer will lead to
+    entire DOM re-rendering and repaint.
 
 ```html
 <link rel="preload" href="/path/to/split.css" as="style" />
