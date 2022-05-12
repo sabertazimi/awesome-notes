@@ -5513,20 +5513,12 @@ will lead to class purged.
 
 ## CSS Performance
 
-### Basic Performance Tips
-
-- Use `audits` panel to diagnose.
-- Use CSS shorthand and color shortcuts.
-- Eliminate unneeded zeros and units.
-- Remove unused CSS by `coverage` panel of Devtools.
-- `link` is parallel, `@import` isn't parallel.
-
-### CSS Selectors
+### CSS Selectors Performance
 
 减少选择器的复杂性, 与构造样式本身的其他工作相比,
 选择器复杂性可以占用计算元素样式所需时间的 50%以上.
 
-### CSS Triggers
+### CSS Triggers Performance
 
 - [CSS Triggers](https://github.com/GoogleChromeLabs/css-triggers)
 - [JS DOM API Triggers](https://gist.github.com/paulirish/5d52fb081b3570c81e3a)
@@ -5589,7 +5581,42 @@ contain: paint;
   声明这个元素的子孙节点不会在它边缘外显示.
   如果一个元素在视窗外或因其他原因导致不可见, 则同样保证它的子孙节点不会被显示.
 
-### Animation Frame
+### CSS Loading Performance
+
+- Avoid `@import`:
+  - In HTML.
+  - In CSS especially;
+  - Beware of oddities with the `PreLoad Scanner`.
+- Be wary of synchronous CSS and JavaScript order:
+  - JavaScript defined after CSS won't run until CSSOM is completed.
+  - If JavaScript doesn't depend on CSS: load it before CSS.
+  - If JavaScript does depend on CSS: load it after CSS.
+- Load CSS as the DOM needs it:
+  - Unblocks `Start Render` and allows progressive rendering.
+  - Avoid **flash of un-styled content**.
+  - Avoid **re-rendering and repaint** for initial page:
+    put `Critical CSS` in HTML footer will lead to
+    entire DOM re-rendering and repaint.
+- Lazyload any CSS not needed for `Start Render`:
+  - Only load `Critical CSS` in `<head>`.
+  - Splitting CSS into `Media Queries`.
+
+```html
+<!-- Dosen't block rendering -->
+<link rel="preload" href="/path/to/split.css" as="style" />
+
+<!-- Loading media query -->
+<link
+  rel="stylesheet"
+  href="/path/to/split.css"
+  media="print"
+  onload="this.media='all'"
+/>
+```
+
+### Animation Performance
+
+#### Animation Frame
 
 `window.requestAnimationFrame`:
 
@@ -5622,49 +5649,7 @@ function step(timestamp) {
 window.requestAnimationFrame(step);
 ```
 
-### CSS Loading Tips
-
-- Lazyload any CSS not needed for `Start Render`:
-  - Only load `Critical CSS` in `<head>`.
-  - Splitting CSS into `Media Queries`.
-- Avoid `@import`:
-  - In HTML.
-  - In CSS especially;
-  - Beware of oddities with the `PreLoad Scanner`.
-- Be wary of synchronous CSS and JavaScript order:
-  - JavaScript defined after CSS won't run until CSSOM is completed.
-  - If JavaScript doesn't depend on CSS: load it before CSS.
-  - If JavaScript does depend on CSS: load it after CSS.
-- Load CSS as the DOM needs it:
-  - Unblocks `Start Render` and allows progressive rendering.
-  - Avoid **flash of un-styled content**.
-  - Avoid **re-rendering and repaint** for initial page:
-    put `Critical CSS` in HTML footer will lead to
-    entire DOM re-rendering and repaint.
-
-```html
-<link rel="preload" href="/path/to/split.css" as="style" />
-<link
-  rel="stylesheet"
-  href="/path/to/split.css"
-  media="print"
-  onload="this.media='all'"
-/>
-```
-
-### Animation Performance
-
-#### Animation Performance Best Practice
-
-- [High Performance Tips](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations).
-- All animation: `keyframe` animation or `transitions` is best.
-- JS-based animation: `requestAnimationFrame` is better than `setTimeout`/`setInterval`.
-- Position animation:`transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`.
-- Scale animation: `transform: scale(n)` better than `width`/`height`.
-- Rotation animation: `transform: rotate(deg)` is better.
-- Opacity/visibility animation: `opacity: 0...1` is better.
-
-#### DevTools for Animation
+#### Animation DevTools
 
 - [DevTools for Animation Performance](https://calibreapp.com/blog/investigate-animation-performance-with-devtools).
 - Slower CPU simulation in `performance` panel.
@@ -5673,7 +5658,7 @@ window.requestAnimationFrame(step);
 - Paint flashing in `rendering` panel.
 - `layers` panel.
 
-#### Animation Internal
+#### Animation Internals
 
 [CSS Triggers List](https://github.com/GoogleChromeLabs/css-triggers):
 
@@ -5681,6 +5666,24 @@ window.requestAnimationFrame(step);
 - `box-shadow`/`border-radius`/`background`/`outline`/`color` in `Paint` stage.
 - `cursor`/`z-index`/`transform`/`opacity` in `Composite Layers` stage.
 - `top`/`left` has very large time to `paint` each frame.
+
+#### Animation Performance Best Practice
+
+- [High Performance Animations](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations).
+- All animation: `keyframe` animation or `transitions` is best.
+- JS-based animation: `requestAnimationFrame` is better than `setTimeout`/`setInterval`.
+- Position animation:`transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`.
+- Scale animation: `transform: scale(n)` better than `width`/`height`.
+- Rotation animation: `transform: rotate(deg)` is better.
+- Opacity/visibility animation: `opacity: 0...1` is better.
+
+### CSS Performance Best Practice
+
+- Use `audits` panel to diagnose.
+- Use CSS shorthand and color shortcuts.
+- Eliminate unneeded zeros and units.
+- Remove unused CSS by `coverage` panel of Devtools.
+- `link` is parallel, `@import` isn't parallel.
 
 ### CSS Performance Reference
 
