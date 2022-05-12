@@ -3107,6 +3107,720 @@ JavaScript 阻塞了同在主线程的 `Layout` 阶段与 `Paint` 阶段,
 - Chromium RenderingNG [key data structures](https://developer.chrome.com/blog/renderingng-data-structures).
 - Chromium [video rendering architecture](https://developer.chrome.com/blog/videong).
 
+## Web Animations
+
+- `KeyframeEffect`.
+- `Animation`.
+
+```ts
+const rabbitDownKeyframes = new KeyframeEffect(
+  whiteRabbit, // element to animate
+  [
+    { transform: 'translateY(0%)' }, // keyframe
+    { transform: 'translateY(100%)' }, // keyframe
+  ],
+  { duration: 3000, fill: 'forwards' } // keyframe options
+);
+
+const rabbitDownAnimation = new Animation(
+  rabbitDownKeyFrames,
+  document.timeline
+);
+
+whiteRabbit.addEventListener('click', downHandler);
+
+function downHandler() {
+  rabbitDownAnimation.play();
+  whiteRabbit.removeEventListener('click', downHandler);
+}
+```
+
+- `element.animate`.
+
+```ts
+const animationKeyframes = [
+  {
+    transform: 'rotate(0)',
+    color: '#000',
+  },
+  {
+    color: '#431236',
+    offset: 0.3,
+  },
+  {
+    transform: 'rotate(360deg)',
+    color: '#000',
+  },
+];
+
+const animationTiming = {
+  duration: 3000,
+  iterations: Infinity,
+};
+
+const animation = document
+  .querySelector('alice')
+  .animate(animationKeyframes, animationTiming);
+```
+
+- `animation.currentTime`.
+- `animation.playState`.
+- `animation.effect`.
+- `animation.pause()/play()/reverse()/finish()/cancel()`.
+
+```ts
+animation.pause();
+animation.currentTime = animation.effect.getComputedTiming().duration / 2;
+
+function currentTime(time = 0) {
+  animations.forEach(function (animation) {
+    if (typeof animation.currentTime === 'function') {
+      animation.currentTime(time);
+    } else {
+      animation.currentTime = time;
+    }
+  });
+}
+
+function createPlayer(animations) {
+  return Object.freeze({
+    play() {
+      animations.forEach(animation => animation.play());
+    },
+    pause() {
+      animations.forEach(animation => animation.pause());
+    },
+    currentTime(time = 0) {
+      animations.forEach(animation => (animation.currentTime = time));
+    },
+  });
+}
+```
+
+## Web Canvas
+
+### Canvas Basic Usage
+
+- Path2D 对象.
+- 绘制路径: `beginPath()` -> `draw()` -> `closePath()`.
+- 绘制样式: 颜色/渐变/变换/阴影.
+- 绘制图形: `fill`/`stroke`/`clip`.
+- 绘制文字: `font`/`fillText()`/`measureText()`.
+
+```ts
+const context = canvas.getContext('2d');
+```
+
+```ts
+// 根据参数画线
+function drawLine(fromX, fromY, toX, toY) {
+  context.moveTo(fromX, fromY);
+  context.lineTo(toX, toY);
+  context.stroke();
+}
+
+// 根据参数画圆
+function drawCircle(x, y, radius, color) {
+  context.fillStyle = color;
+  context.beginPath();
+  context.arc(x, y, radius, 0, Math.PI * 2, true);
+  context.closePath();
+  context.fill();
+  context.stroke();
+}
+
+// 改变 canvas 中图形颜色
+function changeColor(color) {
+  context.fillStyle = color;
+  context.fill();
+}
+```
+
+[Recursive tree](https://eloquentjavascript.net/17_canvas.html):
+
+```html
+<canvas width="600" height="300"></canvas>
+<script>
+  const cx = document.querySelector('canvas').getContext('2d');
+
+  function branch(length, angle, scale) {
+    cx.fillRect(0, 0, 1, length);
+    if (length < 8) return;
+    cx.save();
+    cx.translate(0, length);
+    cx.rotate(-angle);
+    branch(length * scale, angle, scale);
+    cx.rotate(2 * angle);
+    branch(length * scale, angle, scale);
+    cx.restore();
+  }
+
+  cx.translate(300, 0);
+  branch(60, 0.5, 0.8);
+</script>
+```
+
+### Canvas Game Loop
+
+For all objects:
+
+- constructor: `position{x, y}`, `speed{x, y}`, `size{x, y}`
+- update(deltaTime): change position or speed
+- draw(ctx): use canvas api and object properties (position/size) to render objects
+
+```ts
+const canvas = document.getElementById('gameScreen');
+const ctx = canvas.getContext('2d');
+
+const GAME_WIDTH = 800;
+const GAME_HEIGHT = 600;
+
+const game = new Game(GAME_WIDTH, GAME_HEIGHT);
+
+let lastTime = 0;
+
+function gameLoop(timestamp) {
+  const deltaTime = timestamp - lastTime;
+  lastTime = timestamp;
+
+  ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+
+  game.update(deltaTime);
+  game.draw(ctx);
+
+  requestAnimationFrame(gameLoop);
+}
+
+requestAnimationFrame(gameLoop);
+```
+
+### Canvas Performance
+
+Canvas buffer:
+
+```ts
+frontCanvasContext.drawImage(bufferCanvas, 0, 0);
+```
+
+- multiple canvas: top layer, background layer, interactive layer
+- disable alpha path
+
+```ts
+const ctx = canvas.getContext('2d', { alpha: false });
+```
+
+Offscreen canvas:
+
+```ts
+// index.js
+const offscreenCanvas = document.querySelector('#frame2');
+const offscreen = offscreenCanvas.transferControlToOffscreen();
+const worker = new Worker('./worker.js');
+worker.postMessage({ canvas: offscreen }, [offscreen]);
+
+// worker.js
+onmessage = function (event) {
+  canvas = event.data.canvas;
+  context = canvas.getContext('2d');
+};
+```
+
+### Canvas Reference
+
+- [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
+- [Canvas Tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)
+- [Canvas Deep Dive](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
+- [Canvas Cheat Sheet](https://devhints.io/canvas)
+- [Canvas Performance](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
+- [Canvas Real World Case](https://zhuanlan.zhihu.com/p/438142235)
+
+## Web Audio
+
+### Oscillator
+
+```bash
+                         -3  -1   1       4   6       9   11
+                       -4  -2   0   2   3   5   7   8   10  12
+  .___________________________________________________________________________.
+  :  | |  |  | | | |  |  | | | | | |  |  | | | |  |  | | | | | |  |  | | | |  :
+  :  | |  |  | | | |  |  | | | | | |  |  | | | |  |  | | | | | |  |  | | | |  :
+  :  | |  |  | | | |  |  | | | | | |  |  | | | |  |  | | | | | |  |  | | | |  :
+<-:  |_|  |  |_| |_|  |  |_| |_| |_|  |  |_| |_|  |  |_| |_| |_|  |  |_| |_|  :->
+  :   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   :
+  : A | B | C | D | E | F | G | A | B | C | D | E | F | G | A | B | C | D | E :
+  :___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___:
+    ^                           ^           ^               ^           ^
+  220 Hz                      440 Hz      523.25 Hz       880 Hz     1174.65 Hz
+(-1 Octave)                 (middle A)                 (+1 Octave)
+```
+
+```ts
+const audioContext = new AudioContext();
+
+const baseFrequency = 440;
+const getNoteFreq = (base, pitch) => base * Math.pow(2, pitch / 12);
+// oscillator.frequency.value = getNoteFreq(440, 7);
+
+const getNoteDetune = pitch => pitch * 100;
+// oscillator.detune.value = getNoteDetune(7);
+
+const play = (type, delay, pitch, duration) => {
+  const oscillator = audioContext.createOscillator();
+  oscillator.connect(audioContext.destination);
+
+  oscillator.type = type;
+  oscillator.detune.value = getNoteDetune(pitch);
+
+  const startTime = audioContext.currentTime + delay;
+  const stopTime = startTime + duration;
+  oscillator.start(startTime);
+  oscillator.stop(stopTime);
+};
+```
+
+### Music Data
+
+```ts
+const sampleSize = 1024; // number of samples to collect before analyzing data
+const audioUrl = 'viper.mp3';
+
+let audioData = null;
+let audioPlaying = false;
+
+const audioContext = new AudioContext();
+const sourceNode = audioContext.createBufferSource();
+const analyserNode = audioContext.createAnalyser();
+const javascriptNode = audioContext.createScriptProcessor(sampleSize, 1, 1);
+
+// Create the array for the data values
+const amplitudeArray = new Uint8Array(analyserNode.frequencyBinCount);
+
+// Now connect the nodes together
+sourceNode.connect(audioContext.destination);
+sourceNode.connect(analyserNode);
+analyserNode.connect(javascriptNode);
+javascriptNode.connect(audioContext.destination);
+
+// setup the event handler that is triggered
+// every time enough samples have been collected
+// trigger the audio analysis and draw the results
+javascriptNode.onaudioprocess = function () {
+  // get the Time Domain data for this sample
+  analyserNode.getByteTimeDomainData(amplitudeArray);
+
+  // draw the display if the audio is playing
+  // if (audioPlaying == true) {
+  // requestAnimFrame(drawTimeDomain);
+  // }
+};
+
+// Load the audio from the URL via Ajax and store it in global variable audioData
+// Note that the audio load is asynchronous
+function loadSound(url) {
+  fetch(url)
+    .then(response => {
+      audioContext.decodeAudioData(response, buffer => {
+        audioData = buffer;
+        playSound(audioData);
+      });
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+
+// Play the audio and loop until stopped
+function playSound(buffer) {
+  sourceNode.buffer = buffer;
+  sourceNode.start(0); // Play the sound now
+  sourceNode.loop = true;
+  audioPlaying = true;
+}
+
+function stopSound() {
+  sourceNode.stop(0);
+  audioPlaying = false;
+}
+```
+
+### Audio Bar Chart
+
+- [AnalyserNode.getByteFrequencyData API](https://developer.mozilla.org/zh-CN/docs/Web/API/AnalyserNode/getByteFrequencyData)
+- [Github Demo](https://github.com/bogdan-cornianu/swave/blob/master/src/visualizer.ts)
+
+```ts
+const WIDTH = this.canvas.clientWidth;
+const HEIGHT = this.canvas.clientHeight;
+this.analyserNode.fftSize = 256;
+const bufferLengthAlt = this.analyserNode.frequencyBinCount;
+const dataArrayAlt = new Uint8Array(bufferLengthAlt);
+
+this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+const draw = () => {
+  const drawVisual = requestAnimationFrame(draw);
+  this.analyserNode.getByteFrequencyData(dataArrayAlt);
+
+  this.ctx.fillStyle = 'rgb(255, 255, 255)';
+  this.ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+  const barWidth = (WIDTH / bufferLengthAlt) * 2.5;
+  let barHeight;
+  let x = 0;
+
+  for (let i = 0; i < bufferLengthAlt; i++) {
+    barHeight = dataArrayAlt[i];
+
+    this.ctx.fillStyle = `rgb(${barHeight + 100},15,156)`;
+    this.ctx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight / 2);
+
+    x += barWidth + 1;
+  }
+};
+
+draw();
+```
+
+## Media Session
+
+- [W3C Media Session Specification](https://w3c.github.io/mediasession/)
+- [MDN Media Session Documentation](https://developer.mozilla.org/en-US/docs/Web/API/MediaSession/)
+- [Google Media Session Blog](https://web.dev/media-session/)
+
+## Web Storage
+
+- Cookie for session state.
+- DOM storage for Web Component state.
+- Web Storage for simple UI options (dark mode, sidebar size, etc.).
+- IndexedDB for large binary objects and data dumps.
+- Cache API for offline and quick file access.
+- JavaScript variables for everything else.
+
+### Cookie
+
+- `name=value`..
+- `expires=expiration_time`.
+- `path=domain_path`.
+- `domain=domain_name`.
+- `secure`.
+
+```bash
+HTTP/1.1 200 OK
+Content-type: text/html
+Set-Cookie: name=value; expires=Mon, 22-Jan-07 07:10:24 GMT; domain=.foo.com
+Other-header: other-header-value
+```
+
+```bash
+HTTP/1.1 200 OK
+Content-type: text/html
+Set-Cookie: name=value; domain=.foo.com; path=/; secure
+Other-header: other-header-value
+```
+
+```ts
+class CookieUtil {
+  static get(name) {
+    const cookieName = `${encodeURIComponent(name)}=`;
+    const cookieStart = document.cookie.indexOf(cookieName);
+    let cookieValue = null;
+
+    if (cookieStart > -1) {
+      let cookieEnd = document.cookie.indexOf(';', cookieStart);
+
+      if (cookieEnd === -1) {
+        cookieEnd = document.cookie.length;
+      }
+
+      cookieValue = decodeURIComponent(
+        document.cookie.substring(cookieStart + cookieName.length, cookieEnd)
+      );
+    }
+
+    return cookieValue;
+  }
+
+  static set(name, value, { expires, path, domain, secure }) {
+    let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
+
+    if (expires instanceof Date) {
+      cookieText += `; expires=${expires.toGMTString()}`;
+    }
+
+    if (path) {
+      cookieText += `; path=${path}`;
+    }
+
+    if (domain) {
+      cookieText += `; domain=${domain}`;
+    }
+
+    if (secure) {
+      cookieText += '; secure';
+    }
+
+    document.cookie = cookieText;
+  }
+
+  static unset(name, { path, domain, secure }) {
+    CookieUtil.set(name, '', new Date(0), path, domain, secure);
+  }
+}
+```
+
+### Local Storage
+
+- 协同 Cookie.
+- 对于复杂对象的读取与存储,
+  需要借助 `JSON.parse` 与 `JSON.stringify`.
+- [`Storage` object](https://developer.mozilla.org/en-US/docs/Web/API/Storage):
+  - `Storage.length`.
+  - `Storage.key()`.
+  - `Storage.getItem()`.
+  - `Storage.setItem()`.
+  - `Storage.removeItem()`.
+  - `Storage.clear()`.
+- `storage` event: 每当 `Storage` 对象发生变化时, 都会在文档上触发 `storage` 事件.
+  - `event.domain`: 存储变化对应的域.
+  - `event.key`: 被设置或删除的键.
+  - `event.newValue`: 键被设置的新值, 若键被删除则为 null.
+  - `event.oldValue`: 键变化之前的值.
+
+```ts
+if (!localStorage.getItem('bgColor')) {
+  populateStorage();
+} else {
+  setStyles();
+}
+
+function populateStorage() {
+  localStorage.setItem('bgColor', document.getElementById('bgColor').value);
+  localStorage.setItem('font', document.getElementById('font').value);
+  localStorage.setItem('image', document.getElementById('image').value);
+
+  setStyles();
+}
+
+function setStyles() {
+  const currentColor = localStorage.getItem('bgColor');
+  const currentFont = localStorage.getItem('font');
+  const currentImage = localStorage.getItem('image');
+
+  document.getElementById('bgColor').value = currentColor;
+  document.getElementById('font').value = currentFont;
+  document.getElementById('image').value = currentImage;
+
+  htmlElem.style.backgroundColor = `#${currentColor}`;
+  pElem.style.fontFamily = currentFont;
+  imgElem.setAttribute('src', currentImage);
+}
+```
+
+### IndexDB
+
+```ts
+class IndexedDB {
+  constructor(dbName, dbVersion, dbUpgrade) {
+    return new Promise((resolve, reject) => {
+      this.db = null;
+
+      if (!('indexedDB' in window)) {
+        reject(new Error('not supported'));
+      }
+
+      const dbOpen = indexedDB.open(dbName, dbVersion);
+
+      if (dbUpgrade) {
+        dbOpen.onupgradeneeded = e => {
+          dbUpgrade(dbOpen.result, e.oldVersion, e.newVersion);
+        };
+      }
+
+      dbOpen.onsuccess = () => {
+        this.db = dbOpen.result;
+        resolve(this);
+      };
+
+      dbOpen.onerror = e => {
+        reject(new Error(`IndexedDB error: ${e.target.errorCode}`));
+      };
+    });
+  }
+
+  get(storeName, name) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction(storeName, 'readonly');
+      const store = transaction.objectStore(storeName);
+      const request = store.get(name);
+
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
+
+      request.onerror = () => {
+        reject(request.error);
+      };
+    });
+  }
+
+  set(storeName, name, value) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction(storeName, 'readwrite');
+      const store = transaction.objectStore(storeName);
+
+      store.put(value, name);
+
+      transaction.oncomplete = () => {
+        resolve(true);
+      };
+
+      transaction.onerror = () => {
+        reject(transaction.error);
+      };
+    });
+  }
+}
+
+export class State {
+  static dbName = 'stateDB';
+  static dbVersion = 1;
+  static storeName = 'state';
+  static DB = null;
+  static target = new EventTarget();
+
+  constructor(observed, updateCallback) {
+    this.updateCallback = updateCallback;
+    this.observed = new Set(observed);
+
+    // subscribe `set` event with `updateCallback`
+    State.target.addEventListener('set', e => {
+      if (this.updateCallback && this.observed.has(e.detail.name)) {
+        this.updateCallback(e.detail.name, e.detail.value);
+      }
+    });
+  }
+
+  async dbConnect() {
+    State.DB =
+      State.DB ||
+      (await new IndexedDB(
+        State.dbName,
+        State.dbVersion,
+        (db, oldVersion, newVersion) => {
+          // upgrade database
+          switch (oldVersion) {
+            case 0: {
+              db.createObjectStore(State.storeName);
+              break;
+            }
+            default:
+              throw new Error('Unsupported version!');
+          }
+        }
+      ));
+
+    return State.DB;
+  }
+
+  async get(name) {
+    this.observedSet.add(name);
+    const db = await this.dbConnect();
+    return await db.get(State.storeName, name);
+  }
+
+  async set(name, value) {
+    this.observed.add(name);
+    const db = await this.dbConnect();
+    await db.set(State.storeName, name, value);
+
+    // publish event to subscriber
+    const event = new CustomEvent('set', { detail: { name, value } });
+    State.target.dispatchEvent(event);
+  }
+}
+```
+
+```ts
+const store = db.transaction('users').objectStore('users');
+const index = store.createIndex('username', 'username', { unique: true });
+const range = IDBKeyRange.bound('007', 'ace');
+
+const request = store.openCursor(range, 'next');
+const request = index.openCursor(range, 'next');
+
+request.onsuccess = function (event) {
+  const cursor = event.target.result;
+
+  if (cursor) {
+    // 永远要检查
+    console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`);
+    cursor.continue(); // 移动到下一条记录
+  } else {
+    console.log('Done!');
+  }
+};
+```
+
+### File API
+
+```ts
+function readFileText(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => resolve(reader.result));
+    reader.addEventListener('error', () => reject(reader.error));
+    reader.readAsText(file);
+  });
+}
+
+function readFileBuffer(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => resolve(reader.result));
+    reader.addEventListener('error', () => reject(reader.error));
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+const fileInput = document.querySelector('fileInput');
+
+for (const file of fileInput.files) {
+  const text = await readFileText(file);
+  const buffer = await readFileBuffer(file);
+}
+```
+
+## Web RTC
+
+- [WebRTC Security List](https://dzone.com/articles/webrtc-security-vulnerabilities-you-should-know-ab)
+
+## Web Gamepad
+
+[Gamepad API](https://developer.mozilla.org/zh-CN/docs/Games/Techniques/Controls_Gamepad_API):
+
+```ts
+const gamepads = {};
+
+function gamepadHandler(event, connecting) {
+  // gamepad === navigator.getGamepads()[gamepad.index]
+  const { gamepad } = event;
+
+  if (connecting) {
+    gamepads[gamepad.index] = gamepad;
+  } else {
+    delete gamepads[gamepad.index];
+  }
+}
+
+window.addEventListener('gamepadconnected', e => {
+  gamepadHandler(e, true);
+});
+
+window.addEventListener('gamepaddisconnected', e => {
+  gamepadHandler(e, false);
+});
+```
+
 ## Effective JavaScript
 
 ### Memory Leak
@@ -3764,7 +4478,7 @@ const OPTION_E = 16;
 const options = OPTION_A | OPTION_C | OPTION_D;
 ```
 
-## Browser Performance
+## Web Performance
 
 ### Browser Caches
 
@@ -4592,7 +5306,7 @@ observer.observe({ type: 'layout-shift', buffered: true });
 - Web vitals real world [case](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw).
 - Web monitor real world [case](https://zhuanlan.zhihu.com/p/420330110).
 
-## Testing and Debugging
+## Testing
 
 ### Testing Design
 
@@ -4726,251 +5440,6 @@ O.makeBread({ type: wheat, size: 99, name: 'foo' });
 ##### 无耦合
 
 0 级耦合度.
-
-### Monkey Patch
-
-#### Window State Injection
-
-Inject trace function (log, monitor, report service)
-to window `pushState` and `replaceState`.
-
-```ts
-const _wr = function (type) {
-  const orig = window.history[type];
-
-  return function (...args) {
-    const rv = orig.apply(this, args);
-    const e = new Event(type.toLowerCase());
-    e.arguments = args;
-    window.dispatchEvent(e);
-    return rv;
-  };
-};
-
-window.history.pushState = _wr('pushState');
-window.history.replaceState = _wr('replaceState');
-
-window.addEventListener('pushstate', function (event) {
-  console.trace('pushState');
-});
-
-window.addEventListener('replacestate', function (event) {
-  console.trace('replaceState');
-});
-```
-
-#### Event Propagation Injection
-
-```ts
-const originalStopPropagation = MouseEvent.prototype.stopPropagation;
-
-MouseEvent.prototype.stopPropagation = function (...args) {
-  console.trace('stopPropagation');
-  originalStopPropagation.call(this, ...args);
-};
-```
-
-#### Window Scroll Injection
-
-```ts
-let originalScrollTop = element.scrollTop;
-
-Object.defineProperty(element, 'scrollTop', {
-  get() {
-    return originalScrollTop;
-  },
-  set(newVal) {
-    console.trace('scrollTop');
-    originalScrollTop = newVal;
-  },
-});
-```
-
-### Logging
-
-- 时间, 包含时区信息和毫秒.
-- 日志级别.
-- 会话标识.
-- 功能标识.
-- 精炼的内容: 场景信息, 状态信息 (开始/中断/结束), 重要参数.
-- 其他信息: 版本号, 线程号.
-
-#### Logging Clock
-
-- `performance.now()` is more precise (100 us)
-- `performance.now()` is strictly monotonic (unaffected by changes of machine time)
-
-```ts
-let lastVisibilityChange = 0;
-
-window.addEventListener('visibilitychange', () => {
-  lastVisibilityChange = performance.now();
-});
-
-// don’t log any metrics started before the last visibility change
-// don't log any metrics if the page is hidden
-// discard perf data from when the machine was not running app at full speed
-function metrics() {
-  if (metric.start < lastVisibilityChange || document.hidden) {
-    return;
-  }
-
-  process();
-}
-```
-
-```ts
-requestAnimationFrame(() => {
-  requestAnimationFrame(timestamp => {
-    metric.finish(timestamp);
-  });
-});
-```
-
-### Console API
-
-- `console.XXX`.
-- `copy`: copy complex object to clipboard.
-- `monitor`: monitor object.
-
-```ts
-const devtools = /./;
-devtools.toString = function () {
-  this.opened = true;
-};
-
-console.log('%c', devtools);
-// devtools.opened will become true if/when the console is opened
-```
-
-```ts
-// Basic console functions
-console.assert();
-console.clear();
-console.log();
-console.debug();
-console.info();
-console.warn();
-console.error();
-
-// Different output styles
-console.dir();
-console.dirxml();
-console.table();
-console.group();
-console.groupCollapsed();
-console.groupEnd();
-
-// Trace console functions
-console.trace();
-console.count();
-console.countReset();
-console.time();
-console.timeEnd();
-console.timeLog();
-
-// Non-standard console functions
-console.profile();
-console.profileEnd();
-console.timeStamp();
-```
-
-`console.log`
-
-```ts
-// `sprinf` style log
-console.log('%d %o %s', integer, object, string);
-console.log('%c ...', 'css style');
-```
-
-`console.table`
-
-```ts
-// display array of object (tabular data)
-const transactions = [
-  {
-    id: '7cb1-e041b126-f3b8',
-    seller: 'WAL0412',
-    buyer: 'WAL3023',
-    price: 203450,
-    time: 1539688433,
-  },
-  {
-    id: '1d4c-31f8f14b-1571',
-    seller: 'WAL0452',
-    buyer: 'WAL3023',
-    price: 348299,
-    time: 1539688433,
-  },
-  {
-    id: 'b12c-b3adf58f-809f',
-    seller: 'WAL0012',
-    buyer: 'WAL2025',
-    price: 59240,
-    time: 1539688433,
-  },
-];
-
-console.table(data, ['id', 'price']);
-```
-
-### JavaScript Testing and Tracing API
-
-`debugger`:
-
-```ts
-// debugger;
-```
-
-```ts
-copy(obj); // to clipboard
-```
-
-```ts
-window.onerror = function (errorMessage, scriptURI, lineNo, columnNo, error) {
-  console.log(`errorMessage: ${errorMessage}`); // 异常信息
-  console.log(`scriptURI: ${scriptURI}`); // 异常文件路径
-  console.log(`lineNo: ${lineNo}`); // 异常行号
-  console.log(`columnNo: ${columnNo}`); // 异常列号
-  console.log(`error: ${error}`); // 异常堆栈信息
-  // ...
-  // 异常上报
-};
-
-window.addEventListener('error', function () {
-  console.log(error);
-  // ...
-  // 异常上报
-});
-```
-
-#### Trace Property
-
-```ts
-const traceProperty = (object, property) => {
-  let value = object[property];
-  Object.defineProperty(object, property, {
-    get() {
-      console.trace(`${property} requested`);
-      return value;
-    },
-    set(newValue) {
-      console.trace(`setting ${property} to `, newValue);
-      value = newValue;
-    },
-  });
-};
-```
-
-### Node Testing API
-
-- node --inspect
-- [ndb](https://github.com/GoogleChromeLabs/ndb)
-
-```bash
-node --inspect
-ndb index.js
-```
 
 ### Unit Testing
 
@@ -5563,7 +6032,7 @@ async function run(arg = '.') {
 run(process.argv[2]);
 ```
 
-## E2E Testing
+## Cypress Testing
 
 When it comes to test heavy visual features,
 (e.g fixed navigation based on window scroll event),
@@ -5965,6 +6434,253 @@ module.exports = on => {
 - Cypress CI [action](https://github.com/cypress-io/github-action).
 - Cypress real world [example](https://github.com/cypress-io/cypress-realworld-app).
 
+## Debugging
+
+### Monkey Patch
+
+#### Window State Injection
+
+Inject trace function (log, monitor, report service)
+to window `pushState` and `replaceState`.
+
+```ts
+const _wr = function (type) {
+  const orig = window.history[type];
+
+  return function (...args) {
+    const rv = orig.apply(this, args);
+    const e = new Event(type.toLowerCase());
+    e.arguments = args;
+    window.dispatchEvent(e);
+    return rv;
+  };
+};
+
+window.history.pushState = _wr('pushState');
+window.history.replaceState = _wr('replaceState');
+
+window.addEventListener('pushstate', function (event) {
+  console.trace('pushState');
+});
+
+window.addEventListener('replacestate', function (event) {
+  console.trace('replaceState');
+});
+```
+
+#### Event Propagation Injection
+
+```ts
+const originalStopPropagation = MouseEvent.prototype.stopPropagation;
+
+MouseEvent.prototype.stopPropagation = function (...args) {
+  console.trace('stopPropagation');
+  originalStopPropagation.call(this, ...args);
+};
+```
+
+#### Window Scroll Injection
+
+```ts
+let originalScrollTop = element.scrollTop;
+
+Object.defineProperty(element, 'scrollTop', {
+  get() {
+    return originalScrollTop;
+  },
+  set(newVal) {
+    console.trace('scrollTop');
+    originalScrollTop = newVal;
+  },
+});
+```
+
+### Logging
+
+- 时间, 包含时区信息和毫秒.
+- 日志级别.
+- 会话标识.
+- 功能标识.
+- 精炼的内容: 场景信息, 状态信息 (开始/中断/结束), 重要参数.
+- 其他信息: 版本号, 线程号.
+
+#### Logging Clock
+
+- `performance.now()` is more precise (100 us)
+- `performance.now()` is strictly monotonic (unaffected by changes of machine time)
+
+```ts
+let lastVisibilityChange = 0;
+
+window.addEventListener('visibilitychange', () => {
+  lastVisibilityChange = performance.now();
+});
+
+// don’t log any metrics started before the last visibility change
+// don't log any metrics if the page is hidden
+// discard perf data from when the machine was not running app at full speed
+function metrics() {
+  if (metric.start < lastVisibilityChange || document.hidden) {
+    return;
+  }
+
+  process();
+}
+```
+
+```ts
+requestAnimationFrame(() => {
+  requestAnimationFrame(timestamp => {
+    metric.finish(timestamp);
+  });
+});
+```
+
+### Console API
+
+- `console.XXX`.
+- `copy`: copy complex object to clipboard.
+- `monitor`: monitor object.
+
+```ts
+const devtools = /./;
+devtools.toString = function () {
+  this.opened = true;
+};
+
+console.log('%c', devtools);
+// devtools.opened will become true if/when the console is opened
+```
+
+```ts
+// Basic console functions
+console.assert();
+console.clear();
+console.log();
+console.debug();
+console.info();
+console.warn();
+console.error();
+
+// Different output styles
+console.dir();
+console.dirxml();
+console.table();
+console.group();
+console.groupCollapsed();
+console.groupEnd();
+
+// Trace console functions
+console.trace();
+console.count();
+console.countReset();
+console.time();
+console.timeEnd();
+console.timeLog();
+
+// Non-standard console functions
+console.profile();
+console.profileEnd();
+console.timeStamp();
+```
+
+`console.log`
+
+```ts
+// `sprinf` style log
+console.log('%d %o %s', integer, object, string);
+console.log('%c ...', 'css style');
+```
+
+`console.table`
+
+```ts
+// display array of object (tabular data)
+const transactions = [
+  {
+    id: '7cb1-e041b126-f3b8',
+    seller: 'WAL0412',
+    buyer: 'WAL3023',
+    price: 203450,
+    time: 1539688433,
+  },
+  {
+    id: '1d4c-31f8f14b-1571',
+    seller: 'WAL0452',
+    buyer: 'WAL3023',
+    price: 348299,
+    time: 1539688433,
+  },
+  {
+    id: 'b12c-b3adf58f-809f',
+    seller: 'WAL0012',
+    buyer: 'WAL2025',
+    price: 59240,
+    time: 1539688433,
+  },
+];
+
+console.table(data, ['id', 'price']);
+```
+
+### JavaScript Tracing API
+
+`debugger`:
+
+```ts
+// debugger;
+```
+
+```ts
+copy(obj); // to clipboard
+```
+
+```ts
+window.onerror = function (errorMessage, scriptURI, lineNo, columnNo, error) {
+  console.log(`errorMessage: ${errorMessage}`); // 异常信息
+  console.log(`scriptURI: ${scriptURI}`); // 异常文件路径
+  console.log(`lineNo: ${lineNo}`); // 异常行号
+  console.log(`columnNo: ${columnNo}`); // 异常列号
+  console.log(`error: ${error}`); // 异常堆栈信息
+  // ...
+  // 异常上报
+};
+
+window.addEventListener('error', function () {
+  console.log(error);
+  // ...
+  // 异常上报
+});
+```
+
+#### Trace Property
+
+```ts
+const traceProperty = (object, property) => {
+  let value = object[property];
+  Object.defineProperty(object, property, {
+    get() {
+      console.trace(`${property} requested`);
+      return value;
+    },
+    set(newValue) {
+      console.trace(`setting ${property} to `, newValue);
+      value = newValue;
+    },
+  });
+};
+```
+
+### Node Debugging API
+
+- node --inspect
+- [ndb](https://github.com/GoogleChromeLabs/ndb)
+
+```bash
+node --inspect
+ndb index.js
+```
+
 ## Chrome DevTools
 
 ### DevTools Detection
@@ -6162,1096 +6878,6 @@ Tool for composite stage analysis:
 ### Animation Panel
 
 - animations
-
-## JavaScript Style Guide
-
-### ESLint
-
-- [ESLint Promise](https://github.com/xjamundx/eslint-plugin-promise)
-- [ESLint Import](https://github.com/import-js/eslint-plugin-import)
-- [ESLint Unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
-- [ESLint JSX A11Y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
-- [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
-- [ESLint TypeScript Import Resolver](https://github.com/alexgorbatchev/eslint-import-resolver-typescript)
-
-```json
-{
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "node": true,
-    "jest": true
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:import/recommended",
-    "plugin:jsx-a11y/recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:unicorn/recommended",
-    "plugin:promise/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 12,
-    "sourceType": "module"
-  },
-  "plugins": [
-    "import",
-    "jsx-a11y",
-    "react",
-    "react-hooks",
-    "@typescript-eslint"
-  ],
-  "settings": {
-    "react": {
-      "version": "detect"
-    },
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
-    },
-    "import/resolver": {
-      "typescript": {
-        "alwaysTryTypes": true,
-        "project": "./"
-      }
-    }
-  },
-  "rules": {
-    "react/prop-types": 0,
-    "react/jsx-props-no-spreading": 0
-  }
-}
-```
-
-### Naming Style
-
-- 变量: 名词前缀.
-- 方法 / 函数: 动词前缀.
-- `_method`: 表示私有化方法.
-- 普通函数: 驼峰命名法 (camelCase).
-- 构造函数: 帕斯卡命名法 (PascalCase).
-- 缩略词和缩写都必须是全部大写 / 小写.
-- 对于 `jQuery` 对象的变量使用 `$` 作为前缀.
-
-### Variable Style
-
-- No single `let/const` for multiple variables.
-- Sort `let/const`.
-- No chains assignment (create implicit global variable).
-- Prefer `()` wrap multiple line.
-
-### Object Style
-
-- Prefer literal not `Object()` constructor.
-- Prefer object-shorthand.
-- Prefer `Object.prototype.XX` not `object.xx`.
-- Prefer object spread (`...`) not `object.assign`:
-
-```ts
-// very bad
-const original = { a: 1, b: 2 };
-const copy = Object.assign(original, { c: 3 }); // 变异的 `original` ಠ_ಠ
-delete copy.a; // 这....
-
-// bad
-const original = { a: 1, b: 2 };
-const copy = Object.assign({}, original, { c: 3 });
-
-// good
-const original = { a: 1, b: 2 };
-const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
-
-const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
-```
-
-- Prefer `.` for static name, prefer `[]` for variable name:
-
-```ts
-// good
-const isJedi = luke.jedi;
-
-function getProp(prop) {
-  return luke[prop];
-}
-```
-
-### Array Style
-
-- Prefer literal.
-- Prefer `push` not `[]`.
-- Prefer array spread (`...`) (best) or `Array.from` (good):
-
-```ts
-const foo = document.querySelectorAll('.foo');
-
-// good
-const nodes = Array.from(foo);
-
-// best
-const nodes = [...foo];
-```
-
-### Destruct Style
-
-对于多个返回值使用对象解构, 而不是数组解构:
-
-```ts
-// bad
-function processInputBad(input) {
-  // 处理代码...
-  return [left, right, top, bottom];
-}
-
-// 调用者需要考虑返回数据的顺序.
-const [left, __, top] = processInputBad(input);
-
-// good
-function processInput(input) {
-  // 处理代码 ...
-  process();
-
-  return { left, right, top, bottom };
-}
-
-// 调用者只选择他们需要的数据.
-const { left, top } = processInput(input);
-```
-
-### String Style
-
-- Prefer `'` not `"`.
-- Prefer template literals not `'str1' + 'str2'`.
-
-### Function Style
-
-- No reassign parameters (implicit side effect and bad performance).
-- Prefer `...args` not `arguments`.
-- Prefer ES6 default parameters not default expression pattern.
-
-### Arrow Function Style
-
-- Prefer `()` wrap multiple line return value.
-
-### Module Style
-
-- No duplicated export path:
-
-```ts
-// bad
-// import foo from 'foo';
-// import { named1, named2 } from 'foo';
-
-// good
-import foo, { named1, named2 } from 'foo';
-```
-
-- No export `let`:
-
-```ts
-// bad
-// let foo = 3;
-// export { foo };
-
-// good
-const foo = 3;
-export { foo };
-```
-
-### Iterator and Generator Style
-
-- 使用 `Object.keys() / Object.values() / Object.entries()` 迭代对象生成数组.
-- 使用 `map/reduce/filter/any/every/some/find/findIndex/ ...` 遍历数组.
-- Prefer functional style iterator:
-
-```ts
-const numbers = [1, 2, 3, 4, 5];
-
-// bad
-let sum = 0;
-for (const num of numbers) {
-  // eslint-disable-next-line no-const-assign
-  sum += num;
-}
-console.log(sum === 15);
-
-// good
-let sum = 0;
-numbers.forEach(num => {
-  // eslint-disable-next-line no-const-assign
-  sum += num;
-});
-console.log(sum === 15);
-
-// best (use the functional force)
-const sum = numbers.reduce((total, num) => total + num, 0);
-console.log(sum === 15);
-
-// bad
-const increasedByOne = [];
-for (let i = 0; i < numbers.length; i++) {
-  increasedByOne.push(numbers[i] + 1);
-}
-
-// good
-const increasedByOne = [];
-numbers.forEach(num => {
-  increasedByOne.push(num + 1);
-});
-
-// best (keeping it functional)
-const increasedByOne = numbers.map(num => num + 1);
-```
-
-### Expression Style
-
-`if` 语句使用 ToBoolean 的抽象方法来计算表达式的结果:
-
-- `Object`: `true`.
-- `undefined`: `false`.
-- `null`: `false`.
-- `boolean`: 布尔值的取值.
-- `number`: 如果为 `+0`/`-0`/`NaN` 值为 `false`, 否则为 `true`.
-- `string`: 如果是一个空字符串 `''` 值为 `false`, 否则为 `true`.
-
-对于布尔值使用简写, 但是对于字符串和数字进行显式比较:
-
-```ts
-// bad
-if (isValid === true) {
-  // ...
-}
-
-// good
-if (isValid) {
-  // ...
-}
-
-// bad
-if (someName) {
-  // ...
-}
-
-// good
-if (someName !== '') {
-  // ...
-}
-
-// bad
-if (collection.length) {
-  // ...
-}
-
-// good
-if (collection.length > 0) {
-  // ...
-}
-```
-
-- Prefer `{}` warp `case` when exists `const`/`let`/`function`/`class` declaration:
-
-```ts
-// good
-switch (foo) {
-  case 1: {
-    const x = 1;
-    break;
-  }
-  case 2: {
-    const y = 2;
-    break;
-  }
-  case 3: {
-    function f() {
-      // ...
-    }
-    break;
-  }
-  case 4:
-    bar();
-    break;
-  default: {
-    class C {}
-  }
-}
-```
-
-### Space Style
-
-- 键入最后一个运算符后再换行, 运算符置于行尾可使 `Automatic Semicolon Insertion` 机制失效.
-- 换行后保持 2 个缩进层次.
-- Good places to use a white space include:
-  - `,`/`;` 后.
-  - `+`,`-`,`*`,`/`,`<`,`>`,`=` 前后.
-  - `function () {}`.
-  - `function foo() {}`.
-  - `} if/for/while () {}`.
-  - `} else {}`.
-  - inner `{}`.
-  - No space inner `()` `[]`.
-
-```ts
-let d = 0;
-let a = b + 1;
-
-if (a && b && c) {
-  d = a % c;
-  a += d;
-}
-```
-
-### Comments Style
-
-- 上方插入空行.
-- 与下方语句统一缩进.
-
-```ts
-/**
- * comments
- * comments
- */
-
-/**
- * @module app
- * @namespace APP
- */
-
-/**
- * @class mathStuff
- */
-
-/**
- * @property propertyName
- * @type {import('@jest/types').Config}
- */
-
-/**
- * @constructor
- * @method sum
- * @param {number} id
- * @param {string} instructions
- * @returns {number} result
- */
-```
-
-## Web Animations
-
-- `KeyframeEffect`.
-- `Animation`.
-
-```ts
-const rabbitDownKeyframes = new KeyframeEffect(
-  whiteRabbit, // element to animate
-  [
-    { transform: 'translateY(0%)' }, // keyframe
-    { transform: 'translateY(100%)' }, // keyframe
-  ],
-  { duration: 3000, fill: 'forwards' } // keyframe options
-);
-
-const rabbitDownAnimation = new Animation(
-  rabbitDownKeyFrames,
-  document.timeline
-);
-
-whiteRabbit.addEventListener('click', downHandler);
-
-function downHandler() {
-  rabbitDownAnimation.play();
-  whiteRabbit.removeEventListener('click', downHandler);
-}
-```
-
-- `element.animate`.
-
-```ts
-const animationKeyframes = [
-  {
-    transform: 'rotate(0)',
-    color: '#000',
-  },
-  {
-    color: '#431236',
-    offset: 0.3,
-  },
-  {
-    transform: 'rotate(360deg)',
-    color: '#000',
-  },
-];
-
-const animationTiming = {
-  duration: 3000,
-  iterations: Infinity,
-};
-
-const animation = document
-  .querySelector('alice')
-  .animate(animationKeyframes, animationTiming);
-```
-
-- `animation.currentTime`.
-- `animation.playState`.
-- `animation.effect`.
-- `animation.pause()/play()/reverse()/finish()/cancel()`.
-
-```ts
-animation.pause();
-animation.currentTime = animation.effect.getComputedTiming().duration / 2;
-
-function currentTime(time = 0) {
-  animations.forEach(function (animation) {
-    if (typeof animation.currentTime === 'function') {
-      animation.currentTime(time);
-    } else {
-      animation.currentTime = time;
-    }
-  });
-}
-
-function createPlayer(animations) {
-  return Object.freeze({
-    play() {
-      animations.forEach(animation => animation.play());
-    },
-    pause() {
-      animations.forEach(animation => animation.pause());
-    },
-    currentTime(time = 0) {
-      animations.forEach(animation => (animation.currentTime = time));
-    },
-  });
-}
-```
-
-## Web Canvas
-
-### Canvas Basic Usage
-
-- Path2D 对象.
-- 绘制路径: `beginPath()` -> `draw()` -> `closePath()`.
-- 绘制样式: 颜色/渐变/变换/阴影.
-- 绘制图形: `fill`/`stroke`/`clip`.
-- 绘制文字: `font`/`fillText()`/`measureText()`.
-
-```ts
-const context = canvas.getContext('2d');
-```
-
-```ts
-// 根据参数画线
-function drawLine(fromX, fromY, toX, toY) {
-  context.moveTo(fromX, fromY);
-  context.lineTo(toX, toY);
-  context.stroke();
-}
-
-// 根据参数画圆
-function drawCircle(x, y, radius, color) {
-  context.fillStyle = color;
-  context.beginPath();
-  context.arc(x, y, radius, 0, Math.PI * 2, true);
-  context.closePath();
-  context.fill();
-  context.stroke();
-}
-
-// 改变 canvas 中图形颜色
-function changeColor(color) {
-  context.fillStyle = color;
-  context.fill();
-}
-```
-
-[Recursive tree](https://eloquentjavascript.net/17_canvas.html):
-
-```html
-<canvas width="600" height="300"></canvas>
-<script>
-  const cx = document.querySelector('canvas').getContext('2d');
-
-  function branch(length, angle, scale) {
-    cx.fillRect(0, 0, 1, length);
-    if (length < 8) return;
-    cx.save();
-    cx.translate(0, length);
-    cx.rotate(-angle);
-    branch(length * scale, angle, scale);
-    cx.rotate(2 * angle);
-    branch(length * scale, angle, scale);
-    cx.restore();
-  }
-
-  cx.translate(300, 0);
-  branch(60, 0.5, 0.8);
-</script>
-```
-
-### Canvas Game Loop
-
-For all objects:
-
-- constructor: `position{x, y}`, `speed{x, y}`, `size{x, y}`
-- update(deltaTime): change position or speed
-- draw(ctx): use canvas api and object properties (position/size) to render objects
-
-```ts
-const canvas = document.getElementById('gameScreen');
-const ctx = canvas.getContext('2d');
-
-const GAME_WIDTH = 800;
-const GAME_HEIGHT = 600;
-
-const game = new Game(GAME_WIDTH, GAME_HEIGHT);
-
-let lastTime = 0;
-
-function gameLoop(timestamp) {
-  const deltaTime = timestamp - lastTime;
-  lastTime = timestamp;
-
-  ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-
-  game.update(deltaTime);
-  game.draw(ctx);
-
-  requestAnimationFrame(gameLoop);
-}
-
-requestAnimationFrame(gameLoop);
-```
-
-### Canvas Performance
-
-Canvas buffer:
-
-```ts
-frontCanvasContext.drawImage(bufferCanvas, 0, 0);
-```
-
-- multiple canvas: top layer, background layer, interactive layer
-- disable alpha path
-
-```ts
-const ctx = canvas.getContext('2d', { alpha: false });
-```
-
-Offscreen canvas:
-
-```ts
-// index.js
-const offscreenCanvas = document.querySelector('#frame2');
-const offscreen = offscreenCanvas.transferControlToOffscreen();
-const worker = new Worker('./worker.js');
-worker.postMessage({ canvas: offscreen }, [offscreen]);
-
-// worker.js
-onmessage = function (event) {
-  canvas = event.data.canvas;
-  context = canvas.getContext('2d');
-};
-```
-
-### Canvas Reference
-
-- [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
-- [Canvas Tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)
-- [Canvas Deep Dive](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
-- [Canvas Cheat Sheet](https://devhints.io/canvas)
-- [Canvas Performance](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
-- [Canvas Real World Case](https://zhuanlan.zhihu.com/p/438142235)
-
-## Web Audio
-
-### Oscillator
-
-```bash
-                         -3  -1   1       4   6       9   11
-                       -4  -2   0   2   3   5   7   8   10  12
-  .___________________________________________________________________________.
-  :  | |  |  | | | |  |  | | | | | |  |  | | | |  |  | | | | | |  |  | | | |  :
-  :  | |  |  | | | |  |  | | | | | |  |  | | | |  |  | | | | | |  |  | | | |  :
-  :  | |  |  | | | |  |  | | | | | |  |  | | | |  |  | | | | | |  |  | | | |  :
-<-:  |_|  |  |_| |_|  |  |_| |_| |_|  |  |_| |_|  |  |_| |_| |_|  |  |_| |_|  :->
-  :   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   :
-  : A | B | C | D | E | F | G | A | B | C | D | E | F | G | A | B | C | D | E :
-  :___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___:
-    ^                           ^           ^               ^           ^
-  220 Hz                      440 Hz      523.25 Hz       880 Hz     1174.65 Hz
-(-1 Octave)                 (middle A)                 (+1 Octave)
-```
-
-```ts
-const audioContext = new AudioContext();
-
-const baseFrequency = 440;
-const getNoteFreq = (base, pitch) => base * Math.pow(2, pitch / 12);
-// oscillator.frequency.value = getNoteFreq(440, 7);
-
-const getNoteDetune = pitch => pitch * 100;
-// oscillator.detune.value = getNoteDetune(7);
-
-const play = (type, delay, pitch, duration) => {
-  const oscillator = audioContext.createOscillator();
-  oscillator.connect(audioContext.destination);
-
-  oscillator.type = type;
-  oscillator.detune.value = getNoteDetune(pitch);
-
-  const startTime = audioContext.currentTime + delay;
-  const stopTime = startTime + duration;
-  oscillator.start(startTime);
-  oscillator.stop(stopTime);
-};
-```
-
-### Music Data
-
-```ts
-const sampleSize = 1024; // number of samples to collect before analyzing data
-const audioUrl = 'viper.mp3';
-
-let audioData = null;
-let audioPlaying = false;
-
-const audioContext = new AudioContext();
-const sourceNode = audioContext.createBufferSource();
-const analyserNode = audioContext.createAnalyser();
-const javascriptNode = audioContext.createScriptProcessor(sampleSize, 1, 1);
-
-// Create the array for the data values
-const amplitudeArray = new Uint8Array(analyserNode.frequencyBinCount);
-
-// Now connect the nodes together
-sourceNode.connect(audioContext.destination);
-sourceNode.connect(analyserNode);
-analyserNode.connect(javascriptNode);
-javascriptNode.connect(audioContext.destination);
-
-// setup the event handler that is triggered
-// every time enough samples have been collected
-// trigger the audio analysis and draw the results
-javascriptNode.onaudioprocess = function () {
-  // get the Time Domain data for this sample
-  analyserNode.getByteTimeDomainData(amplitudeArray);
-
-  // draw the display if the audio is playing
-  // if (audioPlaying == true) {
-  // requestAnimFrame(drawTimeDomain);
-  // }
-};
-
-// Load the audio from the URL via Ajax and store it in global variable audioData
-// Note that the audio load is asynchronous
-function loadSound(url) {
-  fetch(url)
-    .then(response => {
-      audioContext.decodeAudioData(response, buffer => {
-        audioData = buffer;
-        playSound(audioData);
-      });
-    })
-    .catch(error => {
-      console.error(error);
-    });
-}
-
-// Play the audio and loop until stopped
-function playSound(buffer) {
-  sourceNode.buffer = buffer;
-  sourceNode.start(0); // Play the sound now
-  sourceNode.loop = true;
-  audioPlaying = true;
-}
-
-function stopSound() {
-  sourceNode.stop(0);
-  audioPlaying = false;
-}
-```
-
-### Audio Bar Chart
-
-- [AnalyserNode.getByteFrequencyData API](https://developer.mozilla.org/zh-CN/docs/Web/API/AnalyserNode/getByteFrequencyData)
-- [Github Demo](https://github.com/bogdan-cornianu/swave/blob/master/src/visualizer.ts)
-
-```ts
-const WIDTH = this.canvas.clientWidth;
-const HEIGHT = this.canvas.clientHeight;
-this.analyserNode.fftSize = 256;
-const bufferLengthAlt = this.analyserNode.frequencyBinCount;
-const dataArrayAlt = new Uint8Array(bufferLengthAlt);
-
-this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
-
-const draw = () => {
-  const drawVisual = requestAnimationFrame(draw);
-  this.analyserNode.getByteFrequencyData(dataArrayAlt);
-
-  this.ctx.fillStyle = 'rgb(255, 255, 255)';
-  this.ctx.fillRect(0, 0, WIDTH, HEIGHT);
-
-  const barWidth = (WIDTH / bufferLengthAlt) * 2.5;
-  let barHeight;
-  let x = 0;
-
-  for (let i = 0; i < bufferLengthAlt; i++) {
-    barHeight = dataArrayAlt[i];
-
-    this.ctx.fillStyle = `rgb(${barHeight + 100},15,156)`;
-    this.ctx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight / 2);
-
-    x += barWidth + 1;
-  }
-};
-
-draw();
-```
-
-## Media Session
-
-- [W3C Media Session Specification](https://w3c.github.io/mediasession/)
-- [MDN Media Session Documentation](https://developer.mozilla.org/en-US/docs/Web/API/MediaSession/)
-- [Google Media Session Blog](https://web.dev/media-session/)
-
-## Web Storage
-
-- Cookie for session state.
-- DOM storage for Web Component state.
-- Web Storage for simple UI options (dark mode, sidebar size, etc.).
-- IndexedDB for large binary objects and data dumps.
-- Cache API for offline and quick file access.
-- JavaScript variables for everything else.
-
-### Cookie
-
-- `name=value`..
-- `expires=expiration_time`.
-- `path=domain_path`.
-- `domain=domain_name`.
-- `secure`.
-
-```bash
-HTTP/1.1 200 OK
-Content-type: text/html
-Set-Cookie: name=value; expires=Mon, 22-Jan-07 07:10:24 GMT; domain=.foo.com
-Other-header: other-header-value
-```
-
-```bash
-HTTP/1.1 200 OK
-Content-type: text/html
-Set-Cookie: name=value; domain=.foo.com; path=/; secure
-Other-header: other-header-value
-```
-
-```ts
-class CookieUtil {
-  static get(name) {
-    const cookieName = `${encodeURIComponent(name)}=`;
-    const cookieStart = document.cookie.indexOf(cookieName);
-    let cookieValue = null;
-
-    if (cookieStart > -1) {
-      let cookieEnd = document.cookie.indexOf(';', cookieStart);
-
-      if (cookieEnd === -1) {
-        cookieEnd = document.cookie.length;
-      }
-
-      cookieValue = decodeURIComponent(
-        document.cookie.substring(cookieStart + cookieName.length, cookieEnd)
-      );
-    }
-
-    return cookieValue;
-  }
-
-  static set(name, value, { expires, path, domain, secure }) {
-    let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
-
-    if (expires instanceof Date) {
-      cookieText += `; expires=${expires.toGMTString()}`;
-    }
-
-    if (path) {
-      cookieText += `; path=${path}`;
-    }
-
-    if (domain) {
-      cookieText += `; domain=${domain}`;
-    }
-
-    if (secure) {
-      cookieText += '; secure';
-    }
-
-    document.cookie = cookieText;
-  }
-
-  static unset(name, { path, domain, secure }) {
-    CookieUtil.set(name, '', new Date(0), path, domain, secure);
-  }
-}
-```
-
-### Local Storage
-
-- 协同 Cookie.
-- 对于复杂对象的读取与存储,
-  需要借助 `JSON.parse` 与 `JSON.stringify`.
-- [`Storage` object](https://developer.mozilla.org/en-US/docs/Web/API/Storage):
-  - `Storage.length`.
-  - `Storage.key()`.
-  - `Storage.getItem()`.
-  - `Storage.setItem()`.
-  - `Storage.removeItem()`.
-  - `Storage.clear()`.
-- `storage` event: 每当 `Storage` 对象发生变化时, 都会在文档上触发 `storage` 事件.
-  - `event.domain`: 存储变化对应的域.
-  - `event.key`: 被设置或删除的键.
-  - `event.newValue`: 键被设置的新值, 若键被删除则为 null.
-  - `event.oldValue`: 键变化之前的值.
-
-```ts
-if (!localStorage.getItem('bgColor')) {
-  populateStorage();
-} else {
-  setStyles();
-}
-
-function populateStorage() {
-  localStorage.setItem('bgColor', document.getElementById('bgColor').value);
-  localStorage.setItem('font', document.getElementById('font').value);
-  localStorage.setItem('image', document.getElementById('image').value);
-
-  setStyles();
-}
-
-function setStyles() {
-  const currentColor = localStorage.getItem('bgColor');
-  const currentFont = localStorage.getItem('font');
-  const currentImage = localStorage.getItem('image');
-
-  document.getElementById('bgColor').value = currentColor;
-  document.getElementById('font').value = currentFont;
-  document.getElementById('image').value = currentImage;
-
-  htmlElem.style.backgroundColor = `#${currentColor}`;
-  pElem.style.fontFamily = currentFont;
-  imgElem.setAttribute('src', currentImage);
-}
-```
-
-### IndexDB
-
-```ts
-class IndexedDB {
-  constructor(dbName, dbVersion, dbUpgrade) {
-    return new Promise((resolve, reject) => {
-      this.db = null;
-
-      if (!('indexedDB' in window)) {
-        reject(new Error('not supported'));
-      }
-
-      const dbOpen = indexedDB.open(dbName, dbVersion);
-
-      if (dbUpgrade) {
-        dbOpen.onupgradeneeded = e => {
-          dbUpgrade(dbOpen.result, e.oldVersion, e.newVersion);
-        };
-      }
-
-      dbOpen.onsuccess = () => {
-        this.db = dbOpen.result;
-        resolve(this);
-      };
-
-      dbOpen.onerror = e => {
-        reject(new Error(`IndexedDB error: ${e.target.errorCode}`));
-      };
-    });
-  }
-
-  get(storeName, name) {
-    return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction(storeName, 'readonly');
-      const store = transaction.objectStore(storeName);
-      const request = store.get(name);
-
-      request.onsuccess = () => {
-        resolve(request.result);
-      };
-
-      request.onerror = () => {
-        reject(request.error);
-      };
-    });
-  }
-
-  set(storeName, name, value) {
-    return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction(storeName, 'readwrite');
-      const store = transaction.objectStore(storeName);
-
-      store.put(value, name);
-
-      transaction.oncomplete = () => {
-        resolve(true);
-      };
-
-      transaction.onerror = () => {
-        reject(transaction.error);
-      };
-    });
-  }
-}
-
-export class State {
-  static dbName = 'stateDB';
-  static dbVersion = 1;
-  static storeName = 'state';
-  static DB = null;
-  static target = new EventTarget();
-
-  constructor(observed, updateCallback) {
-    this.updateCallback = updateCallback;
-    this.observed = new Set(observed);
-
-    // subscribe `set` event with `updateCallback`
-    State.target.addEventListener('set', e => {
-      if (this.updateCallback && this.observed.has(e.detail.name)) {
-        this.updateCallback(e.detail.name, e.detail.value);
-      }
-    });
-  }
-
-  async dbConnect() {
-    State.DB =
-      State.DB ||
-      (await new IndexedDB(
-        State.dbName,
-        State.dbVersion,
-        (db, oldVersion, newVersion) => {
-          // upgrade database
-          switch (oldVersion) {
-            case 0: {
-              db.createObjectStore(State.storeName);
-              break;
-            }
-            default:
-              throw new Error('Unsupported version!');
-          }
-        }
-      ));
-
-    return State.DB;
-  }
-
-  async get(name) {
-    this.observedSet.add(name);
-    const db = await this.dbConnect();
-    return await db.get(State.storeName, name);
-  }
-
-  async set(name, value) {
-    this.observed.add(name);
-    const db = await this.dbConnect();
-    await db.set(State.storeName, name, value);
-
-    // publish event to subscriber
-    const event = new CustomEvent('set', { detail: { name, value } });
-    State.target.dispatchEvent(event);
-  }
-}
-```
-
-```ts
-const store = db.transaction('users').objectStore('users');
-const index = store.createIndex('username', 'username', { unique: true });
-const range = IDBKeyRange.bound('007', 'ace');
-
-const request = store.openCursor(range, 'next');
-const request = index.openCursor(range, 'next');
-
-request.onsuccess = function (event) {
-  const cursor = event.target.result;
-
-  if (cursor) {
-    // 永远要检查
-    console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`);
-    cursor.continue(); // 移动到下一条记录
-  } else {
-    console.log('Done!');
-  }
-};
-```
-
-### File API
-
-```ts
-function readFileText(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => resolve(reader.result));
-    reader.addEventListener('error', () => reject(reader.error));
-    reader.readAsText(file);
-  });
-}
-
-function readFileBuffer(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => resolve(reader.result));
-    reader.addEventListener('error', () => reject(reader.error));
-    reader.readAsArrayBuffer(file);
-  });
-}
-
-const fileInput = document.querySelector('fileInput');
-
-for (const file of fileInput.files) {
-  const text = await readFileText(file);
-  const buffer = await readFileBuffer(file);
-}
-```
-
-## Web RTC
-
-- [WebRTC Security List](https://dzone.com/articles/webrtc-security-vulnerabilities-you-should-know-ab)
-
-## Web Gamepad
-
-[Gamepad API](https://developer.mozilla.org/zh-CN/docs/Games/Techniques/Controls_Gamepad_API):
-
-```ts
-const gamepads = {};
-
-function gamepadHandler(event, connecting) {
-  // gamepad === navigator.getGamepads()[gamepad.index]
-  const { gamepad } = event;
-
-  if (connecting) {
-    gamepads[gamepad.index] = gamepad;
-  } else {
-    delete gamepads[gamepad.index];
-  }
-}
-
-window.addEventListener('gamepadconnected', e => {
-  gamepadHandler(e, true);
-});
-
-window.addEventListener('gamepaddisconnected', e => {
-  gamepadHandler(e, false);
-});
-```
 
 ## PWA
 
@@ -8665,7 +8291,7 @@ https://github.com/login/oauth/access_token
 通常由独立的 `SSO` 系统记录登录状态, 下发 `ticket`,
 各业务系统配合存储和认证 `ticket`.
 
-## Security
+## Web Security
 
 - [Web Security Checklist](https://eggjs.org/zh-cn/core/security.html)
 - [ESLint Node Security Tool](https://github.com/nodesecurity/eslint-plugin-security)
