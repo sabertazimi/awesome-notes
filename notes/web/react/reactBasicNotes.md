@@ -11274,6 +11274,72 @@ const WrapperContainer = () => (
 ReactDOM.render(<WrapperContainer />, container);
 ```
 
+### Variants Driven Components
+
+```ts
+import { styled } from '@stitches/react';
+
+const Box = styled('div', {
+  variants: {
+    color: {
+      pink: {
+        backgroundColor: 'pink',
+      },
+      turquoise: {
+        backgroundColor: 'turquoise',
+      },
+    },
+    shape: {
+      square: {
+        borderRadius: 0,
+      },
+      round: {
+        borderRadius: '100%',
+      },
+    },
+    size: {
+      small: {
+        width: '70px',
+        height: '70px',
+      },
+      large: {
+        width: '140px',
+        height: '140px',
+      },
+    },
+    isGlowing: {
+      true: {
+        $$shadowColor: 'transparent',
+        boxShadow: '0 0 30px $$shadowColor',
+      },
+    },
+  },
+
+  defaultVariants: {
+    color: 'pink',
+    shape: 'square',
+    size: 'small',
+  },
+
+  compoundVariants: [
+    {
+      color: 'pink',
+      isGlowing: true,
+      css: {
+        $$shadowColor: 'pink',
+      },
+    },
+    {
+      color: 'turquoise',
+      isGlowing: true,
+      css: {
+        $$shadowColor: 'turquoise',
+      },
+    },
+  ],
+});
+```
+
 ## Micro Frontends
 
 通过 `single-spa` 包装的主应用是一个基座,
