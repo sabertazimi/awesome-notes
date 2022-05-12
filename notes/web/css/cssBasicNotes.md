@@ -5624,21 +5624,19 @@ window.requestAnimationFrame(step);
 
 ### CSS Loading Tips
 
-- Lazyload any CSS not needed for Start Render:
-  - This could be Critical CSS;
-  - or splitting your CSS into Media Queries.
-- Avoid @import:
-  - In your HTML;
-  - but in CSS especially;
-  - and beware of oddities with the PreLoad Scanner.
+- Lazyload any CSS not needed for `Start Render`:
+  - Only load `Critical CSS` in `<head>`.
+  - Splitting CSS into `Media Queries`.
+- Avoid `@import`:
+  - In HTML.
+  - In CSS especially;
+  - Beware of oddities with the `PreLoad Scanner`.
 - Be wary of synchronous CSS and JavaScript order:
-  - JavaScript defined after CSS won't run until CSSOM is completed;
-  - so if your JavaScript doesn't depend on your CSS;
-    - load it before your CSS;
-  - but if it does depend on your CSS:
-    - load it after your CSS.
-- Load CSS as the DOM needs it:
-  - This unblocks Start Render and allows progressive rendering.
+  - JavaScript defined after CSS won't run until CSSOM is completed.
+  - If JavaScript doesn't depend on CSS: load it before CSS.
+  - If JavaScript does depend on CSS: load it after CSS.
+- Load CSS as the DOM needs it (Avoid **flash of un-styled content**):
+  This unblocks `Start Render` and allows progressive rendering.
 
 ```html
 <link rel="preload" href="/path/to/split.css" as="style" />
