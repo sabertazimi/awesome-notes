@@ -5748,6 +5748,19 @@ describe('payment', () => {
 
 ### Cypress Commands
 
+#### Cypress Basic Commands
+
+- `cy.its`: get property value on previously yielded subject.
+- `cy.invoke`: invoke function on previously yielded subject.
+
+```ts
+cy.wrap(['Wai Yan', 'Yu']).its(1).should('eq', 'Yu');
+cy.wrap({ age: 52 }).its('age').should('eq', 52);
+cy.wait('@publicTransactions')
+  .its('response.body.results')
+  .invoke('slice', 0, 5);
+```
+
 #### Cypress Network Commands
 
 - `cy.intercept`: mock API response.
