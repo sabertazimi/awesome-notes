@@ -5746,7 +5746,69 @@ describe('payment', () => {
   use `cy.then`/`cy.wrap` for
   [async nature of Cypress](https://learn.cypress.io/cypress-fundamentals/understanding-the-asynchronous-nature-of-cypress).
 
-### Cypress Command
+### Cypress Commands
+
+#### Cypress Network Commands
+
+- `cy.intercept`: mock API response.
+
+```ts
+cy.intercept('GET', '/transactions/public*', {
+  fixture: 'public-transactions.json',
+}).as('mockedPublicTransactions');
+
+cy.wait('@mockedPublicTransactions');
+
+cy.intercept('GET', '/transactions/public*', {
+  headers: {
+    'X-Powered-By': 'Express',
+    Date: new Date().toString(),
+  },
+});
+
+cy.intercept('POST', '/bankAccounts', req => {
+  const { body } = req;
+  req.continue(res => {
+    res.body.data.listBankAccount = [];
+  });
+});
+
+cy.intercept('POST', apiGraphQL, req => {
+  const { body } = req;
+
+  if (
+    Object.hasOwn(body, 'operationName') &&
+    body.operationName === 'CreateBankAccount'
+  ) {
+    req.alias = 'gqlCreateBankAccountMutation';
+  }
+});
+```
+
+- `cy.request`: API integration/E2E tests.
+
+```ts
+describe('GET', () => {
+  it('gets a list of users', () => {
+    cy.request('GET', '/users').then(response => {
+      expect(response.status).to.eq(200);
+      expect(response.body.results).length.to.be.greaterThan(1);
+    });
+  });
+
+  it('gets a list of comments', () => {
+    cy.request('/comments').as('comments');
+
+    cy.get('@comments').should(response => {
+      expect(response.body).to.have.length(500);
+      expect(response).to.have.property('headers');
+      expect(response).to.have.property('duration');
+    });
+  });
+});
+```
+
+#### Cypress Custom Command
 
 ```ts
 /// <reference types="cypress" />
