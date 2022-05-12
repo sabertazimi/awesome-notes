@@ -5761,6 +5761,23 @@ cy.wait('@publicTransactions')
   .invoke('slice', 0, 5);
 ```
 
+#### Cypress Action Commands
+
+- `cy.click`.
+- `cy.dbclick`.
+- `cy.type`.
+- `cy.clear`.
+- `cy.focus`.
+- `cy.blur`.
+- `cy.check`.
+- `cy.uncheck`.
+- `cy.select`.
+- `cy.selectFile`.
+- `cy.submit`.
+- `cy.trigger`.
+- `cy.scrollTo`.
+- `cy.scrollIntoView`.
+
 #### Cypress Network Commands
 
 - `cy.intercept`: mock API response.
