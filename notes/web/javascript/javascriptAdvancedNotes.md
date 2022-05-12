@@ -9177,8 +9177,11 @@ const config = {
 
 #### Webpack CSS Loader
 
-- `style-loader` 将 CSS 注入到 DOM 中 (`document.createElement('style')`).
-- `production` 下需利用 `Webpack` 将 CSS 提前打包 (`mini-css-extract-plugin`), 独立加载 CSS 资源.
+- `style-loader` 将 CSS 动态注入到 DOM 中 (`document.createElement('style')`), 导致 DOM 重新渲染.
+- `production` 下需利用 `Webpack` 将 CSS 提前打包 (`mini-css-extract-plugin`):
+  - 优先加载 critical CSS in `<head>`.
+  - Lazy loading non-critical CSS.
+  - Split up non-initial page CSS.
 
 ```ts
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
