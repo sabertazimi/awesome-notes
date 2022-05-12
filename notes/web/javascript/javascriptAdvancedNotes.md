@@ -5788,6 +5788,18 @@ cy.intercept('POST', apiGraphQL, req => {
 - `cy.request`: API integration/E2E tests.
 
 ```ts
+Cypress.Commands.add('getAllPosts', () => {
+  return cy.request('GET', '/api/posts').then(response => {
+    return cy.wrap(response.body);
+  });
+});
+
+Cypress.Commands.add('getFirstPost', () => {
+  return cy.request('GET', '/api/posts').then(response => {
+    return cy.wrap(response.body).its(0);
+  });
+});
+
 describe('GET', () => {
   it('gets a list of users', () => {
     cy.request('GET', '/users').then(response => {
