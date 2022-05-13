@@ -364,6 +364,7 @@ tags: [Web, Framework, Library]
 - [React Panel Group](https://github.com/DanFessler/react-panelgroup)
 - [Bricks Layout](https://github.com/callmecavs/bricks.js)
 - [Brick Layer](https://github.com/ademilter/bricklayer)
+- [InfiniteGrid](https://github.com/naver/egjs-infinitegrid)
 - [Tether: Element Location](https://github.com/shipshapecode/tether)
 - [SplitJS](https://github.com/nathancahill/Split.js)
 
