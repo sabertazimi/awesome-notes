@@ -4819,6 +4819,15 @@ reduce image transfer sizes by average of **~20%**:
 
 #### Data Preloading
 
+Role of [preload scanner](https://web.dev/preload-scanner) is speculative,
+meaning that it examines **raw markup** (not scan CSS)
+in order to find resources to opportunistically fetch
+before the primary HTML parser would otherwise discover them.
+
+The preload scanner discovers the `<img>` element
+even while rendering and document parsing is blocked,
+the preload scanner will discover and fetch the image resource more quickly.
+
 ```html
 <link rel="preload" as="script" href="critical.js" />
 <link rel="modulepreload" href="critical-module.mjs" />
@@ -4826,6 +4835,12 @@ reduce image transfer sizes by average of **~20%**:
 <link rel="preload" as="font" href="..." crossorigin />
 <link rel="preload" as="fetch" href="..." crossorigin />
 ```
+
+Preload scanner can be defeated (can't discover resources quickly):
+
+- Injecting resources (scripts/images/styles) into DOM with JavaScript.
+- Lazy-loading above-the-fold images or iframes using JavaScript solution.
+- Rendering markup on client that contain document sub-resources using JavaScript.
 
 #### PreFetch and PreLoad
 
