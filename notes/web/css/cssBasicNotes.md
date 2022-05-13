@@ -2468,14 +2468,30 @@ whether and when it is downloaded and ready to use:
 ### Font Best Practice
 
 ```css
-font-family: sans-serif;
-font-size: 12px;
-font-weight: 400;
-line-height: 100px;
-color: black;
-text-decoration: none;
-text-transform: uppercase;
-letter-spacing: 1.3px;
+@font-face {
+  font-family: 'Open Sans Regular';
+  font-weight: 400;
+  font-style: normal;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'),
+    url('open-sans/OpenSans-Regular-Cyrillic.woff2') format('woff2'), url('open-sans/OpenSans-Regular-Cyrillic.woff')
+      format('woff'),
+    url('open-sans/OpenSans-Regular-Cyrillic.eot') format('embedded-opentype'), url('open-sans/OpenSans-Regular-Cyrillic.ttf')
+      format('truetype');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1;
+}
+```
+
+```css
+.text-primary {
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 100px;
+  letter-spacing: 1.3px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: black;
+}
 ```
 
 ```css
