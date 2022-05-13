@@ -634,6 +634,8 @@ input:not(:placeholder-shown) + .msg {
 }
 ```
 
+:::tip Separate Focus Styles
+
 ```css
 /* Tab Focus Style */
 button:focus-visible {
@@ -644,11 +646,11 @@ button:focus-visible {
 
 /* Mouse Focus Style */
 button:focus:not(:focus-visible) {
-  outline: 2px dotted #416dea;
-  outline-offset: 2px;
-  box-shadow: 0 1px 1px #416dea;
+  outline: none;
 }
 ```
+
+:::
 
 ### Pseudo Element Selectors
 
