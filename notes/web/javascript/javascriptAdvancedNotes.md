@@ -8089,11 +8089,11 @@ HTTP/2 的多路复用就是为了解决上述的两个性能问题.
 
 HTTP/2 = `HTTP` + `HPack / Stream` + `TLS 1.2+` + `TCP`:
 
+- Multiplexing (多路复用): more parallelized requests.
 - 二进制传输 (乱序二进制帧 Stream).
-- Compress header (HPack).
-- 多路复用.
-- Server Push.
-- 事实加密 (Chrome/Firefox 只支持 HTTP/2 over TLS 1.2+).
+- Header compression (HPack).
+- Server push.
+- HTTPS guaranteed: 事实加密 (Chrome/Firefox 只支持 HTTP/2 over TLS 1.2+).
 
 HTTP/2 虽然通过多路复用解决了 HTTP 层的队头阻塞, 但仍然存在 TCP 层的队头阻塞.
 
