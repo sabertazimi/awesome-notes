@@ -6952,9 +6952,7 @@ Progressive Web Apps:
   service worker, expanded capabilities
   and OS integration.
 
-### Service Worker
-
-#### Service Worker Pros
+### Service Worker Pros
 
 - Cache.
 - Offline.
@@ -6962,7 +6960,7 @@ Progressive Web Apps:
 - Custom request to minimize network.
 - [Notification API](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification).
 
-#### Service Worker Costs
+### Service Worker Costs
 
 - Need startup time.
 
@@ -7003,7 +7001,7 @@ async function handleRequest(event) {
 - 唯一的浏览器强制逐出策略基于服务工作者线程缓存占用的空间.
   缓存超过浏览器限制时, 浏览器会基于 LRU 原则为新缓存腾出空间.
 
-#### Service Worker Caching Strategy
+### Service Worker Caching Strategy
 
 5 caching strategy in [workbox](https://developer.chrome.com/docs/workbox/caching-strategies-overview).
 
@@ -7087,7 +7085,9 @@ self.addEventListener('fetch', function (event) {
 });
 ```
 
-#### Service Worker Usage
+### Service Worker Usage
+
+#### Register Service Worker
 
 ```ts
 // Check that service workers are registered
@@ -7099,7 +7099,7 @@ if ('serviceWorker' in navigator) {
 }
 ```
 
-Broken images use case:
+#### Broken Images Service Worker
 
 ```ts
 function isImage(fetchRequest) {
@@ -7143,15 +7143,33 @@ self.addEventListener('install', e => {
 });
 ```
 
-### PWA Library
+#### Caches Version Service Worker
 
-- [Workbox](https://github.com/GoogleChrome/workbox)
+```ts
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('activate', function (event) {
+  const cacheWhitelist = ['v2'];
+
+  event.waitUntil(
+    caches.keys().then(function (keyList) {
+      return Promise.all([
+        keyList.map(function (key) {
+          return cacheWhitelist.includes(key) ? caches.delete(key) : null;
+        }),
+        // eslint-disable-next-line no-restricted-globals
+        self.clients.claim(),
+      ]);
+    })
+  );
+});
+```
 
 ### PWA Reference
 
+- [Workbox](https://github.com/GoogleChrome/workbox)
 - [Offline Cookbook](https://web.dev/offline-cookbook)
 - [Extensive Guide](https://www.smashingmagazine.com/2018/11/guide-pwa-progressive-web-applications)
-- [Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers).
+- [Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers)
 
 ## JamStack
 
