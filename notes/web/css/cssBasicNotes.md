@@ -2430,7 +2430,7 @@ whether and when it is downloaded and ready to use:
   font-weight: inherit;
   font-variant: inherit;
   src: url('./Colleen.ttf');
-  font-display: swap; 
+  font-display: swap;
 }
 
 .selector {
@@ -2478,7 +2478,7 @@ whether and when it is downloaded and ready to use:
       format('woff'),
     url('open-sans/OpenSans-Regular-Cyrillic.eot') format('embedded-opentype'), url('open-sans/OpenSans-Regular-Cyrillic.ttf')
       format('truetype');
-  font-display: swap; 
+  font-display: swap;
   unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1;
 }
 ```
@@ -2493,7 +2493,7 @@ whether and when it is downloaded and ready to use:
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1.3px;
-  font-display: swap; 
+  font-display: swap;
 }
 ```
 
