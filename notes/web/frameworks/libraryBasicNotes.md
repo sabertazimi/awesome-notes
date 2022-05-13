@@ -590,6 +590,7 @@ tags: [Web, Framework, Library]
 
 - [React DnD: Drag and Drop](https://github.com/react-dnd/react-dnd)
 - [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd)
+- [DFlex: Sophisticated Drag and Drop Library](https://github.com/dflex-js/dflex)
 - [Moveable](https://github.com/daybrush/moveable)
 - [P5.js](https://github.com/processing/p5.js)
 - [Nipple.js](https://github.com/yoannmoinet/nipplejs)
