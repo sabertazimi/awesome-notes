@@ -8090,7 +8090,7 @@ HTTP/2 的多路复用就是为了解决上述的两个性能问题.
 HTTP/2 = `HTTP` + `HPack / Stream` + `TLS 1.2+` + `TCP`:
 
 - 二进制传输 (乱序二进制帧 Stream).
-- Header 压缩 (HPack).
+- Compress header (HPack).
 - 多路复用.
 - Server Push.
 - 事实加密 (Chrome/Firefox 只支持 HTTP/2 over TLS 1.2+).
