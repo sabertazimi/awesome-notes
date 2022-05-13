@@ -2438,6 +2438,33 @@ whether and when it is downloaded and ready to use:
 }
 ```
 
+### Font Performance
+
+- Compress fonts.
+- Subset fonts.
+
+```css
+@font-face {
+  /* Single value */
+  unicode-range: U+0026;
+}
+
+@font-face {
+  /* Range */
+  unicode-range: U+0000-007F;
+}
+
+@font-face {
+  /* Wildcard Range */
+  unicode-range: U+002?;
+}
+
+@font-face {
+  /* Multiple Values */
+  unicode-range: U+0000-007F, U+0100, U+02??;
+}
+```
+
 ### Font Best Practice
 
 ```css
@@ -5602,7 +5629,7 @@ contain: paint;
   - Splitting CSS into `Media Queries`.
 
 ```html
-<!-- Dosen't block rendering -->
+<!-- Doesn't block rendering -->
 <link rel="preload" href="/path/to/split.css" as="style" />
 
 <!-- Loading media query -->
