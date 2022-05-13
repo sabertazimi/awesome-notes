@@ -1371,7 +1371,7 @@ const mt = element.style.marginTopWidth;
 - `cssText`: 一次生效.
 - `length`.
 - `getPropertyValue(name)`.
-- `getPropertyPriority`: return `''` or `important`
+- `getPropertyPriority`: return `''` or `important`.
 - `item(index)`.
 - `setProperty(name, value, priority)`.
 - `removeProperty(name)`.
@@ -2508,8 +2508,8 @@ If the **call stack** is empty,
 it looks into the **ES6 job queue** and **message queue** to see
 if there’s any pending call back waiting to be executed:
 
-- ES6 job queue: used by `Promises` (higher priority)
-- Message queue: used by `setTimeout`, `DOM events`
+- ES6 job queue: used by `Promises` (higher priority).
+- Message queue: used by `setTimeout`, `DOM events`.
 - 微任务 MicroTask (Jobs), 有特权, 可以插队:
   - `process.nextTick`.
   - `Promises.then` (**Promise 构造函数是同步函数**).
@@ -4815,10 +4815,7 @@ reduce image transfer sizes by average of **~20%**:
 
 :::
 
-### Data Loading
-
-- [Fetch Priority](https://web.dev/priority-hints)
-- [Resources Priority](https://web.dev/prioritize-resources)
+### Web Loading Performance
 
 #### Data Preloading
 
@@ -4828,6 +4825,61 @@ reduce image transfer sizes by average of **~20%**:
 <link rel="preload" as="image" href="..." />
 <link rel="preload" as="font" href="..." crossorigin />
 <link rel="preload" as="fetch" href="..." crossorigin />
+```
+
+#### PreFetch and PreLoad
+
+[Quick Link](https://github.com/GoogleChromeLabs/quicklink)
+prefetch library.
+
+```html
+<link rel="prefetch"></link>
+<link rel="preload"></link>
+```
+
+- Generally, preloads will load in order parser gets to them for anything >= `Medium`.
+- Font preloads are probably best towards end of `<head>` or beginning of `<body>`.
+- Import preloads should be done after `<script>` tag that needs the import.
+- Image preloads will have a low priority (async scripts).
+
+[PreFetch and PreRender Pitfalls](https://addyosmani.com/blog/what-not-to-prefetch-prerender):
+
+- Avoid prefetching pages for authentication.
+- Avoid over-prefetching to limit accidental DOS.
+- Avoid prefetching pages key to checkout.
+- Avoid prefetching large resources.
+- Avoid prefetching cross-origin resources.
+
+#### Loading Priority
+
+- [Fetch Priority](https://web.dev/priority-hints)
+- [Resources Priority](https://web.dev/prioritize-resources)
+
+```html
+<!-- link: initiate an early fetch but de-prioritize the script -->
+<link href="/js/script.js" rel="preload" as="script" fetchpriority="low" />
+
+<!-- img: de-prioritize an image in viewport that could be otherwise prioritized by the browser -->
+<img src="/images/in-viewport-but-unimportant.svg" fetchpriority="low" alt="" />
+
+<!-- script: prioritize critical script -->
+<script src="/js/live-chat.js" fetchpriority="high"></script>
+
+<!-- iframe: de-prioritize a third-party embed that’s not essential -->
+<iframe
+  src="https://example.com"
+  width="400"
+  height="400"
+  fetchpriority="low"
+></iframe>
+
+<script>
+  // Critical Fetch request for article content
+  fetch('/api/articles.json', { priority: 'high' }).then(/*...*/);
+
+  // Request for related content now reduced in priority
+  fetch('/api/related.json', { priority: 'low' }).then(/*...*/);
+</script>
 ```
 
 #### Images Lazy Loading
@@ -4906,29 +4958,6 @@ const PageComponent = () => {
   </Suspense>;
 };
 ```
-
-#### PreFetch and PreLoad
-
-[Quick Link](https://github.com/GoogleChromeLabs/quicklink)
-prefetch library.
-
-```html
-<link rel="prefetch"></link>
-<link rel="preload"></link>
-```
-
-- Generally, preloads will load in order parser gets to them for anything >= `Medium`.
-- Font preloads are probably best towards end of `<head>` or beginning of `<body>`.
-- Import preloads should be done after `<script>` tag that needs the import.
-- Image preloads will have a low priority (async scripts).
-
-[PreFetch and PreRender Pitfalls](https://addyosmani.com/blog/what-not-to-prefetch-prerender):
-
-- Avoid prefetching pages for authentication.
-- Avoid over-prefetching to limit accidental DOS.
-- Avoid prefetching pages key to checkout.
-- Avoid prefetching large resources.
-- Avoid prefetching cross-origin resources.
 
 #### Babel Configuration for JavaScript
 

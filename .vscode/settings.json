@@ -539,6 +539,7 @@
     "fclose",
     "fdisk",
     "fencs",
+    "fetchpriority",
     "FFLAGS",
     "fflush",
     "ffprobe",
