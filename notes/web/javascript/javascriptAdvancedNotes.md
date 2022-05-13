@@ -4808,6 +4808,13 @@ reduce image transfer sizes by average of **~20%**:
 - Images optimization [blog](https://stackoverflow.blog/2022/03/28/picture-perfect-images-with-the-modern-element).
 - Images optimization [book](https://www.smashingmagazine.com/printed-books/image-optimization).
 
+:::danger Image Sprites
+
+- Use image sprites **only on HTTP/1** to improve page-load times.
+- Avoid using image sprites on HTTP/2.
+
+:::
+
 ### Data Loading
 
 - [Fetch Priority](https://web.dev/priority-hints)
