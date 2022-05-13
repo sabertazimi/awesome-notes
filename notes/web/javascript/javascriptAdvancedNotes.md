@@ -6511,6 +6511,30 @@ Object.defineProperty(element, 'scrollTop', {
 - 精炼的内容: 场景信息, 状态信息 (开始/中断/结束), 重要参数.
 - 其他信息: 版本号, 线程号.
 
+#### Logging Setup
+
+```ts
+const { createLogger, format, transports } = require('winston');
+
+const logLevels = {
+  fatal: 0,
+  error: 1,
+  warn: 2,
+  info: 3,
+  debug: 4,
+  trace: 5,
+};
+
+const logger = createLogger({
+  levels: logLevels,
+  format: format.combine(format.timestamp(), format.json()),
+  transports: [new transports.Console()],
+});
+
+logger.info('System Started');
+logger.fatal('Fatal error occurred');
+```
+
 #### Logging Clock
 
 - `performance.now()` is more precise (100 us)
