@@ -1547,7 +1547,9 @@ listExpander.addEventListener('click', e => {
 <div role="search"></div>
 ```
 
-### Best Practice Tips for Accessibility
+### Accessibility Best Practice
+
+A11y audit [list](https://web.dev/lighthouse-accessibility):
 
 - Don't use `aria-hidden` on the `<body>` element.
 - Complete meta header:
@@ -1564,6 +1566,9 @@ listExpander.addEventListener('click', e => {
   - 提供输入焦点的视觉提示.
 - 避免组件识别障碍.
 - Make sure `IDs` and `Keys` of elements are unique.
+- Required [context role](https://web.dev/aria-required-parent).
+- Required [aria attribute](https://web.dev/aria-required-attr).
+- Valid [aria attribute](https://web.dev/aria-valid-attr-value).
 
 ### Accessibility Checklist
 
