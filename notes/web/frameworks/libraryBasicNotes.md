@@ -427,6 +427,7 @@ tags: [Web, Framework, Library]
 - [NotiStack: Highly Customizable Notification Snack Bars](https://github.com/iamhosseindhv/notistack)
 - [Push.js: Browser Notification Framework](https://github.com/Nickersoft/push.js)
 - [Notifier: Native Desktop Notification](https://github.com/mikaelbr/node-notifier)
+- [Novu: Notification Infrastructure for Developers](https://github.com/novuhq/novu)
 
 #### Tooltip
 
