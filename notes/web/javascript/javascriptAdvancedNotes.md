@@ -5319,7 +5319,7 @@ observer.observe({ type: 'layout-shift', buffered: true });
 - Resource optimization (HTML/CSS/JS/Images/Audio/Video/Fonts):
   - Remove useless files.
   - Tree shaking.
-  - Zip.
+  - GZip/Brotli (`Accept-Encoding`/`Content-Encoding`).
   - CDN.
 - Code splitting: Webpack `splitChunks`.
 - Use monomorphic objects due to shape and inline caches.
