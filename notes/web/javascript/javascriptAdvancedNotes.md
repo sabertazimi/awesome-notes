@@ -3000,6 +3000,35 @@ RenderNG pipeline
 - Aggregate.
 - Draw.
 
+#### Render Process
+
+- GUI 渲染线程:
+  - Parse `HTML`/`CSS`.
+  - Construct `DOM` tree, `CSSOM` tree and `RenderObject` tree.
+  - Layout render tree.
+  - Paint render tree.
+  - Send information to GPU (Composite render tree).
+- JS 引擎线程:
+  - JS 内核运行线程, 负责解析 `Javascript` 脚本, 运行代码.
+  - 一个 Tab 页 (渲染进程) 中只有一个 JS 引擎线程在运行 JS 程序.
+  - JS 引擎一直等待着任务队列中任务的到来, 然后加以处理.
+- 事件触发线程:
+  - 负责控制事件循环.
+  - JS 引擎线程触发 MacroTask/MicroTask, 事件线程将任务添加到任务队列, 等待 JS 引擎线程执行.
+- 定时触发器线程:
+  - `setInterval` 与 `setTimeout` 执行线程.
+  - 此线程计时并触发定时器任务, 计时完毕后, 事件线程将定时器任务添加到任务队列, 等待 JS 引擎线程执行.
+- 异步 HTTP 请求线程:
+  - `XMLHttpRequest` 连接后, 通过浏览器产生一个新的异步 HTTP 请求线程.
+  - 当检测到 HTTP 请求状态变更时, 此线程产生状态变更事件,
+    并将 HTTP 响应处理函数 (用户回调函数) 添加到任务队列, 等待 JS 引擎线程执行.
+
+:::danger GUI and JS Thread
+
+GUI 渲染线程与 JS 引擎线程互斥.
+
+:::
+
 #### HTML Parser
 
 DTD is context-sensitive grammar.
@@ -3078,7 +3107,7 @@ They interrupt one or more of the steps:
 - Lazy loading non-critical CSS and JavaScript.
 - Use the `defer`, `async`, or `module` attribute on scripts.
 
-#### Layout
+#### Layout Phase
 
 为避免对所有细小更改都进行整体布局, 浏览器采用了一种 `dirty bit` 系统.
 如果某个呈现器发生了更改, 或者将自身及其子代标注为 `dirty`, 则需要进行布局:
@@ -3091,7 +3120,7 @@ They interrupt one or more of the steps:
 - 父呈现器根据子呈现器的累加高度以及边距和补白的高度来设置自身高度, 此值也可供父呈现器的父呈现器使用.
 - 将其 `dirty 位` 设置为 `false`.
 
-#### Paint
+#### Paint Phase
 
 Paint order:
 
