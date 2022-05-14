@@ -8157,6 +8157,11 @@ HyperText Transfer Protocol (HTTP) + Transport Layer Security (TLS):
 - 当浏览器获验证假公钥不合法时, 会对用户进行风险提示, 但用户仍可以授权信任证书继续操作.
 - HTTPS 重点关注传输安全, 无法保证本地随机数的存储安全 (木马, 浏览器漏洞).
 
+### HTTP 1
+
+- HTTP/1.0 默认不开启长连接: 客户端与服务端必须同时发送 `Connection: Keep-Alive`.
+- HTTP/1.1 默认开启长连接.
+
 ### HTTP 2
 
 #### HTTP 2 Upside
