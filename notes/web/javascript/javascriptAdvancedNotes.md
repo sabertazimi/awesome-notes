@@ -5339,24 +5339,27 @@ observer.observe({ type: 'layout-shift', buffered: true });
     - DOM performance.
     - React performance.
     - Concurrency: asynchronous/web worker.
+    - Use monomorphic objects due to shape and inline caches.
+    - Use monomorphic function in hot code paths.
 - Resource optimization (HTML/CSS/JS/Images/Audio/Video/Fonts):
   - Remove useless files.
+  - Code splitting: Webpack `splitChunks`.
   - Tree shaking.
   - GZip/Brotli (`Accept-Encoding`/`Content-Encoding`).
   - CDN.
-- Code splitting: Webpack `splitChunks`.
-- Use monomorphic objects due to shape and inline caches.
-- Use monomorphic function in hot code paths.
-- Offline caching (PWA).
-- CDN.
+- Loading performance:
+  - PreFetch/PreLoad/PreRendering (SSR).
+  - Lazy loading: HTML/CSS/JS/Images/Audio/Video/Fonts.
+- Web caching:
+  - Offline caching (PWA).
+  - HTTP caching (强缓存与协商缓存).
+  - CDN.
 - Reduce network protocols cost:
   - Reducing HTTP requests.
   - Caching and reducing DNS lookups:
     - Reduce too much domains.
     - HTML5 DNS prefetch.
   - Avoid redirects.
-- PreFetch/PreLoad/PreRendering (SSR).
-- Lazy loading: HTML/CSS/JS/Images/Audio/Video/Fonts.
 
 ### Performance and Analysis Tools
 
