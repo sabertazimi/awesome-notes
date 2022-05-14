@@ -5563,7 +5563,14 @@ will lead to class purged.
 ### CSS Selectors Performance
 
 减少选择器的复杂性, 与构造样式本身的其他工作相比,
-选择器复杂性可以占用计算元素样式所需时间的 50%以上.
+选择器复杂性可以占用计算元素样式所需时间的 50%以上:
+
+- 避免使用统配选择器:
+  `*`.
+- 避免使用标签子代选择器:
+  `.list > li` -> `.list > .item` (better) -> `.list-item` (best).
+- 避免使用后代选择器 (开销较高):
+  `.anchor .link` -> `.anchor-link`.
 
 ### CSS Triggers Performance
 
