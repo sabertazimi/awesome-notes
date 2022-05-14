@@ -2951,26 +2951,36 @@ Orinoco 优化 (优化全停顿现象):
 - Safari: Webkit + JavaScriptCore (Nitro).
 - Edge: Trident/EdgeHTML + Chakra -> Chromium.
 
-### Browser Process
+### Browser Process Architecture
 
-- 浏览器进程: 主要负责界面显示/用户交互/子进程管理, 同时提供存储等功能.
-- GPU 进程: 实现 3D CSS, 绘制 UI 界面.
-- 网络进程: 主要负责页面的网络资源加载.
-- 渲染进程: 核心任务是将 HTML/CSS 和 JavaScript 转换为用户可以与之交互的网页,
-  排版引擎 Blink 和 JavaScript 引擎 V8 都是运行在该进程中.
-  默认情况下, Chrome 会为每个 Tab 标签创建一个渲染进程.
-  出于安全考虑, 渲染进程都是运行在沙箱模式下.
-- 插件进程: 主要是负责插件的运行, 因插件易崩溃, 所以需要通过隔离以保证插件进程崩溃不会对浏览器和页面造成影响.
+- 浏览器进程 (Singleton):
+  - 浏览器界面显示, 提供用户交互, e.g 前进/后退.
+  - 子进程管理.
+  - 网络资源管理.
+  - 存储管理.
+- GPU 进程 (Singleton):
+  实现 3D CSS, 绘制 UI 界面.
+- 网络进程 (Singleton):
+  主要负责页面的网络资源加载.
+- 渲染进程:
+  - 核心任务是将 HTML/CSS 和 JavaScript 转换为用户可以与之交互的网页 (页面渲染, 脚本执行, 事件处理).
+  - 排版引擎 Blink 和 JavaScript 引擎 V8 都是运行在该进程中.
+  - 默认情况下, Chrome 会为每个 Tab 标签创建一个渲染进程.
+  - 出于安全考虑, 渲染进程都是运行在沙箱模式下.
+- 插件进程:
+  主要是负责插件的运行, 因插件易崩溃, 所以需要通过隔离以保证插件进程崩溃不会对浏览器和页面造成影响.
 
 ### Render Engine
 
-- Download HTML
-- Parser/Script
-- DOM and CSSOM Construction
-- Render Tree = DOM Tree + Styled Tree
-- Layout
-- Paint
-- Composite
+Render process:
+
+- Download HTML.
+- Parser/Script.
+- DOM and CSSOM Construction.
+- Render Tree = DOM Tree + Styled Tree.
+- Layout.
+- Paint.
+- Composite.
 
 [![Critical Render Path](./figures/CriticalRenderPath.svg)](https://sia.codes/posts/render-blocking-resources/#critical-render-path-js)
 
