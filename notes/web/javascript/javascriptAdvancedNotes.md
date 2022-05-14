@@ -3832,10 +3832,6 @@ for (const file of fileInput.files) {
 }
 ```
 
-## Web RTC
-
-- [WebRTC Security List](https://dzone.com/articles/webrtc-security-vulnerabilities-you-should-know-ab)
-
 ## Web Gamepad
 
 [Gamepad API](https://developer.mozilla.org/zh-CN/docs/Games/Techniques/Controls_Gamepad_API):
@@ -8113,6 +8109,10 @@ function WebSocketTest() {
 服务器端如果 Alive, 就会回传一个数据包给客户端.
 主要在一些**长时间连接**的应用场景需要考虑心跳机制及重连机制,
 以保证长时间的连接及数据交互.
+
+### Web RTC
+
+- [WebRTC Security List](https://dzone.com/articles/webrtc-security-vulnerabilities-you-should-know-ab)
 
 ### RESTful
 
