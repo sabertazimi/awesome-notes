@@ -748,6 +748,10 @@ cat /etc/passwd | awk -F [:] ‘{print $4}’
 \ |sort|uniq | getent group |awk -F [:] ‘{print $1}’
 ```
 
+`/etc/passwd` is a configuration file which stores user account information.
+It is a plain text-based file containing information like
+username, user ID and group ID.
+
 ### 用户操作
 
 #### 增加用户
