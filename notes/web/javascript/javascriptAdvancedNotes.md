@@ -4018,10 +4018,6 @@ window.onload = function () {
 };
 ```
 
-### Cache Pattern
-
-缓存对象属性与 DOM 对象.
-
 ### Script Loading Performance
 
 合并脚本后再进行高级加载技术.
