@@ -1204,6 +1204,7 @@ range.surroundContents(span);
 function loadScript(url) {
   const script = document.createElement('script');
   script.src = url;
+  script.async = true;
   document.body.appendChild(script);
 }
 ```
@@ -1211,6 +1212,7 @@ function loadScript(url) {
 ```ts
 function loadScriptString(code) {
   const script = document.createElement('script');
+  script.async = true;
   script.type = 'text/javascript';
 
   try {
@@ -1662,6 +1664,7 @@ window.addEventListener('load', () => {
     console.log('Loaded');
   });
   script.src = 'example.js';
+  script.async = true;
   document.body.appendChild(script);
 
   const link = document.createElement('link');
@@ -4032,6 +4035,7 @@ window.onload = function () {
       window.onload = function () {
         const script = document.createElement('script');
         script.src = 'all_lazy_20100426.js';
+        script.async = true;
         document.documentElement.firstChild.appendChild(script);
       };
     </script>
@@ -4058,8 +4062,9 @@ function requireScript(file, callback) {
     callback();
   };
 
-  // 添加至html页面
+  // 添加至 HTML 页面
   newJS.src = file;
+  newJS.async = true;
   script.parentNode.insertBefore(newJS, script);
 }
 
@@ -8516,6 +8521,7 @@ nonce only CSP block 3rd scripts and dynamic scripts generate by trusted users,
 <script nonce="random123">
   const s = document.createElement('script)
   s.src = '/path/to/script.js';
+  s.async = true;
   document.head.appendChild(s); // can execute correctly
 </script>
 ```
