@@ -4563,6 +4563,29 @@ Etag 是由服务器为每个资源生成的唯一的标识字符串,
 这个标识字符串可以是基于文件内容编码的,
 因此 Etag 能够精准地感知文件的变化.
 
+```bash
+GET /i/example.gif HTTP 1.1
+Host: image.example.com
+
+------
+
+HTTP 1.1 200 OK
+Last-Modified: Tue, 12 Dec 2022 03:03:03 GMT
+ETag: "10c24bc-4ab-457e1c1f"
+Content-Length: 1195
+```
+
+```bash
+GET /i/example.gif HTTP 1.1
+Host: image.example.com
+If-Modified-Since: Tue, 12 Dec 2022 03:03:03 GMT
+If-None-Match: "10c24bc-4ab-457e1c1f"
+
+------
+
+HTTP 1.1 304 Not Modified
+```
+
 #### Code Cache
 
 - cold run: `download -> compile -> store into on-disk cache`
