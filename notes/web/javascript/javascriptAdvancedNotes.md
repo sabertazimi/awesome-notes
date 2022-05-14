@@ -5349,9 +5349,12 @@ observer.observe({ type: 'layout-shift', buffered: true });
 - Use monomorphic function in hot code paths.
 - Offline caching (PWA).
 - CDN.
-- Caching and reducing DNS lookups:
-  - Reduce too much domains.
-  - HTML5 DNS prefetch.
+- Reduce network protocols cost:
+  - Reducing HTTP requests.
+  - Caching and reducing DNS lookups:
+    - Reduce too much domains.
+    - HTML5 DNS prefetch.
+  - Avoid redirects.
 - PreFetch/PreLoad/PreRendering (SSR).
 - Lazy loading: HTML/CSS/JS/Images/Audio/Video/Fonts.
 
