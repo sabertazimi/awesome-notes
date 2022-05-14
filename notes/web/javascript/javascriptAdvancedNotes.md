@@ -4871,10 +4871,18 @@ reduce image transfer sizes by average of **~20%**:
 - Images optimization [blog](https://stackoverflow.blog/2022/03/28/picture-perfect-images-with-the-modern-element).
 - Images optimization [book](https://www.smashingmagazine.com/printed-books/image-optimization).
 
-:::danger Image Sprites
+:::danger CSS/Image Sprites
 
 - Use image sprites **only on HTTP/1** to improve page-load times.
 - Avoid using image sprites on HTTP/2.
+
+Legacy sprites optimization:
+
+- 按颜色合并.
+- 水平排列合并.
+- 避免不必要空白.
+- 限制颜色种类.
+- 先优化单独图像, 再优化合并图像
 
 :::
 
