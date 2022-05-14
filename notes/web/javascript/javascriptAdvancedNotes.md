@@ -5334,30 +5334,32 @@ observer.observe({ type: 'layout-shift', buffered: true });
 ### Performance Best Practice
 
 - Code optimization:
-  - Fast CSS styles (`CSS Performance`):
+  - Fast CSS styles: `CSS Performance`.
   - Fast JavaScript code (`Effective JavaScript`):
     - DOM performance.
     - React performance.
     - Concurrency: asynchronous/web worker.
     - Use monomorphic objects due to shape and inline caches.
     - Use monomorphic function in hot code paths.
-- Resource optimization (HTML/CSS/JS/Images/Audio/Video/Fonts):
-  - Remove useless files.
+- Resources optimization (HTML/CSS/JS/Images/Audio/Video/Fonts):
+  - Remove useless files: Chrome devtool code coverage panel.
   - Code splitting: Webpack `splitChunks`.
   - Tree shaking.
   - GZip/Brotli (`Accept-Encoding`/`Content-Encoding`).
-  - CDN.
+  - CDN: faster resources.
 - Loading performance:
   - PreFetch/PreLoad/PreRendering (SSR).
   - Lazy loading: HTML/CSS/JS/Images/Audio/Video/Fonts.
+  - Resources priority hints.
+  - Resources loading hints.
 - Web caching:
-  - Offline caching (PWA).
-  - HTTP caching (强缓存与协商缓存).
-  - CDN.
-- Reduce network protocols cost:
+  - Offline caching: PWA.
+  - HTTP caching: 强缓存与协商缓存.
+  - CDN: shared public caches.
+- Network protocols cost:
   - Reducing HTTP requests.
   - Caching and reducing DNS lookups:
-    - Reduce too much domains.
+    - Remove too much domains.
     - HTML5 DNS prefetch.
   - Avoid redirects.
 
