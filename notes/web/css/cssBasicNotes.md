@@ -580,15 +580,14 @@ a[title*='link'] {
 - `:focus-visible`: selected when Tab (shortcut) focused.
 - `:focus-within`: selected when any children focused.
 - `:empty`: 没有子元素的元素, 没有子元素包括文本节点.
-- `:not(exception)`: 该选择器将选择与括号内的选择器不匹配的元素.
 - `:lang(en)`: 具有使用双字母缩写(en)表示的语言的元素.
+- `:not(exception)`: 该选择器将选择与括号内的选择器不匹配的元素.
 - [`<target_element>:has(<selector>)`](https://ishadeed.com/article/css-has-parent-selector):
   - `:has` normal priority.
   - A target element has child elements.
   - A target element has sibling elements: `:has(+ selector)`.
-- `<target_element>:where(<selector>)`:
-  - `:where` 0 priority.
-  - A target element has child elements.
+- `:is(<selector>)`: selector priority.
+- `:where(<selector>)`: 0 priority.
 - `E F:first-of-type`: **相同类型** 的第一个元素.
 - `E F:last-of-type`: **相同类型** 的最后一个元素.
 - `E F:only-of-type`: 孩子中只有一种该元素.
