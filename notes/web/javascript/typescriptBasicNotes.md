@@ -1981,13 +1981,43 @@ type InstanceType<T extends new (...args: any) => any> = T extends new (
   : any;
 ```
 
-```ts
-const foo = (): string => {
-  return 'sabertaz';
-};
+在协变位置上, 若同一个类型变量存在多个候选者, 则最终的类型将被推断为联合类型:
 
-// string
-type FooReturnType = ReturnType<typeof foo>;
+```ts
+type PropertyType<T> = T extends { id: infer U; name: infer U } ? U : never;
+
+type InferType = PropertyType<{
+  id: number;
+  name: string;
+}>;
+// string | number
+```
+
+在逆变位置上, 若同一个类型变量存在多个候选者, 则最终的类型将被推断为交叉类型:
+
+```ts
+type PropertyType<T> = T extends {
+  a(x: infer U): void;
+  b(x: infer U): void;
+}
+  ? U
+  : never;
+
+type InferType = PropertyType<{
+  a(x: string): void;
+  b(x: number): void;
+}>;
+// string & number
+
+type UnionToIntersection<U> = (
+  U extends any ? (arg: U) => void : never
+) extends (arg: infer R) => void
+  ? R
+  : never;
+
+type UnionType = { a: 'a' } | { b: 'b' };
+type IntersectionType = UnionToIntersection<UnionType>;
+// { a: 'a' } & { b: 'b' }
 ```
 
 ## Type Guards
