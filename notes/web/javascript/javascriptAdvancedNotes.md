@@ -7468,7 +7468,9 @@ function App() {
 
 ### TCP
 
-Transmission Control Protocol:
+#### Transmission Control Protocol
+
+Transmission Control Protocol (RFC 793):
 
 三次握手带来的延迟 (RTT: Round-trip Delay) 使得每创建一个新 TCP 连接都要付出很大代价.
 这决定了提高 TCP 应用性能的关键, 在于**重用连接**.
@@ -7515,7 +7517,9 @@ WindowSize = BandWidth `*` RTT (带宽延迟积)
 
 ### UDP
 
-User Datagram Protocol:
+#### User Datagram Protocol
+
+User Datagram Protocol (RFC 768):
 
 - 数据报是一个完整, 独立的数据实体,
   携带着从源节点到目的地节点的足够信息,
@@ -7528,6 +7532,31 @@ User Datagram Protocol:
   - 不保证交付顺序: 不设置包序号, 不重排, 不会发生队头阻塞.
   - 不跟踪连接状态: 不必建立连接或重启状态机.
   - 不需要拥塞控制: 不内置客户端或网络反馈机制.
+
+#### UDP Performance
+
+基于 UDP 的应用程序:
+
+- 必须容忍各种因特网路径条件.
+- 应该控制传输速度.
+- 应该对所有流量进行拥塞控制.
+- 应该使用与 TCP 相近的带宽.
+- 应该准备基于丢包的重发计数器.
+- 应该不发送大于路径 MTU 的数据报.
+- 应该处理数据报丢失, 重复与重排.
+- 应该足够稳定以支持 2 分钟以上的交付延迟.
+- 应该支持 IPv4 UDP 校验和, 必须支持 IPv6 校验和.
+- 可以在需要时使用 `Keep-Alive` (最小间隔 15 秒).
+- 基于 UDP 的 P2P 程序必须考虑 NAT (Network Address Translator) 穿透:
+  - ICE: Interactive Connectivity Establishment.
+  - STUN: Session Traversal Utilities for NAT.
+  - TURN: Traversal Using Relays around NAT.
+
+:::tip WebRTC
+
+WebRTC 是符合上述要求的框架.
+
+:::
 
 ### HTTP 1
 
