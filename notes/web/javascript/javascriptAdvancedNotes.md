@@ -7495,9 +7495,21 @@ function App() {
 
 :::tip 理想窗口大小
 
-WindowSize = BandWidth * RTT (带宽延迟积)
+WindowSize = BandWidth `*` RTT (带宽延迟积)
 
 :::
+
+#### TCP Performance
+
+- Upgrade kernel version.
+- 增大 TCP 的初始拥塞窗口 (`cwnd` >= 10).
+- 禁用空闲后的慢启动.
+- 启用窗口缩放, 增大最大接收窗口大小.
+- TCP 快速打开 (TCP Fast Open): 允许在第一个 SYN 分组中发送应用程序数据.
+- 减少传输冗余资源.
+- 压缩要传输的资源.
+- CDN: 降低 RTT.
+- 重用 TCP 连接.
 
 ### HTTP 1
 
