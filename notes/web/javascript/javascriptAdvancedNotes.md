@@ -7470,6 +7470,34 @@ function App() {
 三次握手带来的延迟 (RTT: Round-trip Delay) 使得每创建一个新 TCP 连接都要付出很大代价.
 这决定了提高 TCP 应用性能的关键, 在于**重用连接**.
 
+#### TCP Congestion Control
+
+- 流量控制:
+  TCP 连接的每一方都要通告自己的接收窗口 (`rwnd` 字段),
+  两端动态调整数据流速,
+  使之适应发送端和接收端的容量及处理能力.
+  客户端与服务器最大可传输数据量为 min(`rwnd`, `cwnd`),
+  即接口窗口与拥塞窗口的最小值.
+- 慢启动:
+  `cwnd` 初始值为 1/4/10 个 TCP 段 (1460 字节).
+  慢启动导致客户端与服务器之间经过几百 ms 才能达到接近最大速度.
+- 指数增长:
+  每收到一个 ACK 报文, `cwnd` 翻倍.
+- 拥塞预防:
+  拥塞预防算法把丢包作为网络拥塞的标志, 重置拥塞窗口,
+  之后拥塞预防机制按照自己的算法来增大窗口以尽量避免丢包.
+  e.g TCP Tahoe, TCP Reno, TCP Vegas, TCP New Reno, TCP BIC, TCP CUBIC.
+  AIMD (Multiplicative Decrease and Additive Increase, 倍减加增),
+  PRR (Proportional Rate Reduction, 比例降速).
+- 快速重传.
+- 快速恢复.
+
+:::tip 理想窗口大小
+
+WindowSize = BandWidth * RTT (带宽延迟积)
+
+:::
+
 ### HTTP 1
 
 - HTTP/1.0 默认不开启长连接: 客户端与服务端必须同时发送 `Connection: Keep-Alive`.
