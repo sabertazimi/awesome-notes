@@ -7465,6 +7465,260 @@ function App() {
 
 ## Network
 
+### HTTP 1
+
+- HTTP/1.0 默认不开启长连接: 客户端与服务端必须同时发送 `Connection: Keep-Alive`.
+- HTTP/1.1 默认开启长连接.
+
+### HTTP 2
+
+#### HTTP 2 Upside
+
+在 HTTP/1.x 中, 每次请求都会建立一次 HTTP 连接:
+
+- 串行的文件传输. 当请求 a 文件时, b 文件只能等待.
+- 连接数过多.
+
+HTTP/2 的多路复用就是为了解决上述的两个性能问题.
+在 HTTP/2 中, 有两个非常重要的概念, 分别是帧 (frame) 和流 (stream).
+帧代表着最小的数据单位, 每个帧会标识出该帧属于哪个流, 流也就是多个帧组成的数据流.
+多路复用, 就是在一个 TCP 连接中可以存在多条流, 避免队头阻塞问题和连接数过多问题.
+
+HTTP/2 = `HTTP` + `HPack / Stream` + `TLS 1.2+` + `TCP`:
+
+- Multiplexing (多路复用): more parallelized requests.
+- 二进制传输 (乱序二进制帧 Stream).
+- Header compression (HPack).
+- Server push.
+- HTTPS guaranteed: 事实加密 (Chrome/Firefox 只支持 HTTP/2 over TLS 1.2+).
+
+#### HTTP 2 Downside
+
+HTTP/2 虽然通过多路复用解决了 HTTP 层的队头阻塞,
+但仍然存在 TCP 层的队头阻塞 (`Head-of-line Blocking`):
+
+- 由于 TCP 不支持乱序确认, 当没有收到队头 (滑动窗口最左端) 的 ACK 确认报文时,
+  发送窗口无法往前移动, 此时发送方将无法继续发送后面的数据, 产生发送窗口的队头阻塞问题.
+- 同样地, 当接收窗口接收有序数据时, 当没有收到队头 (滑动窗口最左端) 的数据时,
+  接收窗口无法往前移动, 此时接收方将直接丢弃所有滑动窗口右侧的数据, 产生接收窗口的队头阻塞问题.
+
+QUIC (基于 UDP 的可靠协议)
+给每一个 Stream 都分配了一个独立的滑动窗口,
+使得一个连接上的多个 Stream 之间没有依赖关系,
+拥有相互独立各自控制的滑动窗口.
+
+#### HTTP 2 Optimization
+
+Due to asset granularity and **caching effectiveness**:
+
+- No need for CSS/Image sprites.
+- Less need for resources bundling and inlining.
+
+### HTTP 3
+
+HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`:
+
+- 解决多次握手高延迟问题.
+- 解决队头 (数据重传) 阻塞 (后续数据) 问题.
+- QUIC 协议保证传输可靠/实现快速握手/集成 TLS 加密/实现多路复用.
+- QUIC 给每个请求流 (Stream ID) 都分配一个独立的滑动窗口, 实现无队头阻塞的多路复用, 解决 TCP 层的队头阻塞.
+
+### HTTP Response Status Codes
+
+[RFC 2616](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status):
+
+- Informational responses: 100–199.
+- Successful responses: 200–299.
+  - 200 OK.
+  - 201 Created.
+  - 202 Accepted.
+- Redirects: 300–399.
+  - 301 Moved Permanently.
+  - 302 Found.
+  - 304 Not Modified.
+  - 307 Temporary Redirect.
+  - 308 Permanent Redirect.
+- Client errors: 400–499.
+  - 400 Bad Request.
+  - 401 Unauthorized.
+  - 403 Forbidden.
+  - 404 Not Found.
+  - 405 Method Not Allowed.
+  - 406 Not Acceptable.
+- Server errors: 500–599.
+  - 500 Internal Server Error.
+  - 501 Not Implemented.
+  - 502 Bad Gateway.
+  - 503 Service Unavailable.
+  - 504 Gateway Timeout.
+
+Use reasonable HTTP status codes:
+
+- 200: general success.
+- 201: successful creation.
+- 400: bad requests from client.
+- 401: unauthorized requests.
+- 403: missing permissions.
+- 404: missing resources.
+- 429: too many requests.
+- 5xx: internal errors (these should be avoided at all costs).
+
+### HTTPS
+
+HyperText Transfer Protocol (HTTP) + Transport Layer Security (TLS):
+
+- 验证身份: 通过证书认证客户端访问的是自己的服务器.
+- 内容加密: 采用混合加密技术 (结合对称加密和非对称加密技术), 中间者无法直接查看明文内容.
+- 保护数据完整性: 防止传输的内容被中间人冒充或者篡改.
+- CA (Certificate Authority) 认证体系是 HTTPS 防止中间人攻击 (HTTP 明文传输) 的核心,
+  客户端需要对服务器发来的证书进行安全性校验 (使得中间人无法替换证书和公私钥).
+- 通过 CA 认证体系避免了中间人窃取 AES 密钥并发起拦截和修改 HTTP 通讯的报文.
+
+#### HTTPS 通信过程
+
+证书获取及验证过程 (CA 认证体系):
+
+- 浏览器发起一个 HTTPS 的请求.
+- 服务器接收到请求, 返回一个 HTTPS 证书, 该证书内包含服务器私钥对应的公钥信息.
+- 浏览器通过 CA 认证体系 (CA 服务器) 验证证书是否合法 (浏览器地址栏进行相应提示).
+
+加密密钥传输 (B 端加密 - 传输 - S 端解密):
+
+- 浏览器端生成一个随机数并通过公钥加密, 传输给服务器.
+- 服务器使用私钥对随机数进行解密, 并存储随机数作为对称加密的密钥.
+
+加密报文传输 (S 端加密 - 传输 - B 端解密):
+
+- 服务器使用随机数对数据进行对称加密, 并将加密信息返回给客户端.
+- 客户端获得加密数据, 使用随机数作为密钥基于对称加密算法对报文进行解密.
+
+#### HTTPS 安全性
+
+- 当浏览器获验证假公钥不合法时, 会对用户进行风险提示, 但用户仍可以授权信任证书继续操作.
+- HTTPS 重点关注传输安全, 无法保证本地随机数的存储安全 (木马, 浏览器漏洞).
+
+### CORS
+
+Cross Origin Resource Sharing:
+
+- Same origin:
+  URLs (Uniform Resource Locator) with same `protocol + host + port`.
+- CORS-safeListed response header:
+  `Cache-Control`, `Content-Language`, `Content-Length`, `Content-Type`,
+  `Expires`, `Last-Modified`, `Pragma`.
+
+```bash
+Access-Control-Allow-Origin: *
+```
+
+```bash
+Access-Control-Expose-Headers: X-Custom-Header, Content-Encoding
+Access-Control-Expose-Headers: *
+```
+
+```bash
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: https://example.com
+Vary: Cookie, Origin
+```
+
+```bash
+Access-Control-Max-Age: 600
+Access-Control-Allow-Methods: Custom-Method, CUSTOM-METHOD
+Access-Control-Allow-Headers: X-Custom-Header
+```
+
+### WebSocket
+
+#### WebSocket Message Header
+
+Request Header:
+
+```bash
+GET /chat HTTP/1.1
+Host: example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: 16-byte, base64 encoded
+Sec-WebSocket-Version: 13
+Sec-Websocket-Protocol: protocol [,protocol]*
+Sec-Websocket-Extension: extension [,extension]*
+```
+
+Response Header:
+
+```bash
+HTTP/1.1 101 "Switching Protocols" or other description
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: 20-byte, MD5 hash in base64
+Sec-Websocket-Protocol: protocol [,protocol]*
+Sec-Websocket-Extension: extension [,extension]*
+```
+
+#### WebSocket Basic Usage
+
+通信功能:
+
+- `data`:
+  - `string`.
+  - `ArrayBuffer`.
+  - `Blob`.
+- `readyState`:
+  - `WebSocket.OPENING`: `0`, 连接正在建立.
+  - `WebSocket.OPEN`: `1`, 连接已经建立.
+  - `WebSocket.CLOSING`: `2`, 连接正在关闭.
+  - `WebSocket.CLOSE`: `3`, 连接已经关闭.
+
+```ts
+function WebSocketTest() {
+  if ('WebSocket' in window) {
+    alert('WebSocket is supported by your Browser!');
+    // Let us open a web socket
+    const ws = new WebSocket('ws://localhost:9998/echo');
+
+    ws.onopen = function () {
+      // WebSocket is connected, send data using send()
+      ws.send('Message to send');
+      alert('Message is sent...');
+    };
+
+    ws.onmessage = function (event) {
+      const receivedMessage = event.data;
+      alert('Message is received...');
+    };
+
+    ws.onclose = function (event) {
+      // websocket is closed.
+      console.log(
+        `As clean? ${event.wasClean} Code=${event.code} Reason=${event.reason}`
+      );
+    };
+
+    ws.onerror = function () {
+      alert('Connection error.');
+    };
+  } else {
+    // The browser doesn't support WebSocket
+    alert('WebSocket NOT supported by your Browser!');
+  }
+}
+```
+
+#### WebSocket HeartBeat Mechanism
+
+连接终止时, WebSocket 不会自动恢复,
+需要自己实现, 通常为了保持连接状态, 需要增加心跳机制.
+
+每隔一段时间会向服务器发送一个数据包, 告诉服务器自己 Alive,
+服务器端如果 Alive, 就会回传一个数据包给客户端.
+主要在一些**长时间连接**的应用场景需要考虑心跳机制及重连机制,
+以保证长时间的连接及数据交互.
+
+### Web RTC
+
+- [WebRTC Security List](https://dzone.com/articles/webrtc-security-vulnerabilities-you-should-know-ab)
+
 ### JSON
 
 JSON (JavaScript Object Notation) methods:
@@ -8023,97 +8277,6 @@ fetch('https://fetch.spec.whatwg.org/')
 // <!doctype html><html lang="en"><head><meta charset="utf-8"> ...
 ```
 
-### WebSocket
-
-#### WebSocket Message Header
-
-Request Header:
-
-```bash
-GET /chat HTTP/1.1
-Host: example.com
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Key: 16-byte, base64 encoded
-Sec-WebSocket-Version: 13
-Sec-Websocket-Protocol: protocol [,protocol]*
-Sec-Websocket-Extension: extension [,extension]*
-```
-
-Response Header:
-
-```bash
-HTTP/1.1 101 "Switching Protocols" or other description
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Accept: 20-byte, MD5 hash in base64
-Sec-Websocket-Protocol: protocol [,protocol]*
-Sec-Websocket-Extension: extension [,extension]*
-```
-
-#### WebSocket Basic Usage
-
-通信功能:
-
-- `data`:
-  - `string`.
-  - `ArrayBuffer`.
-  - `Blob`.
-- `readyState`:
-  - `WebSocket.OPENING`: `0`, 连接正在建立.
-  - `WebSocket.OPEN`: `1`, 连接已经建立.
-  - `WebSocket.CLOSING`: `2`, 连接正在关闭.
-  - `WebSocket.CLOSE`: `3`, 连接已经关闭.
-
-```ts
-function WebSocketTest() {
-  if ('WebSocket' in window) {
-    alert('WebSocket is supported by your Browser!');
-    // Let us open a web socket
-    const ws = new WebSocket('ws://localhost:9998/echo');
-
-    ws.onopen = function () {
-      // WebSocket is connected, send data using send()
-      ws.send('Message to send');
-      alert('Message is sent...');
-    };
-
-    ws.onmessage = function (event) {
-      const receivedMessage = event.data;
-      alert('Message is received...');
-    };
-
-    ws.onclose = function (event) {
-      // websocket is closed.
-      console.log(
-        `As clean? ${event.wasClean} Code=${event.code} Reason=${event.reason}`
-      );
-    };
-
-    ws.onerror = function () {
-      alert('Connection error.');
-    };
-  } else {
-    // The browser doesn't support WebSocket
-    alert('WebSocket NOT supported by your Browser!');
-  }
-}
-```
-
-#### WebSocket HeartBeat Mechanism
-
-连接终止时, WebSocket 不会自动恢复,
-需要自己实现, 通常为了保持连接状态, 需要增加心跳机制.
-
-每隔一段时间会向服务器发送一个数据包, 告诉服务器自己 Alive,
-服务器端如果 Alive, 就会回传一个数据包给客户端.
-主要在一些**长时间连接**的应用场景需要考虑心跳机制及重连机制,
-以保证长时间的连接及数据交互.
-
-### Web RTC
-
-- [WebRTC Security List](https://dzone.com/articles/webrtc-security-vulnerabilities-you-should-know-ab)
-
 ### RESTful
 
 - Client - Server architecture
@@ -8122,169 +8285,6 @@ function WebSocketTest() {
 - Layer system
 - Code via need
 - Isomorphic interface
-
-### HTTPS
-
-HyperText Transfer Protocol (HTTP) + Transport Layer Security (TLS):
-
-- 验证身份: 通过证书认证客户端访问的是自己的服务器.
-- 内容加密: 采用混合加密技术 (结合对称加密和非对称加密技术), 中间者无法直接查看明文内容.
-- 保护数据完整性: 防止传输的内容被中间人冒充或者篡改.
-- CA (Certificate Authority) 认证体系是 HTTPS 防止中间人攻击 (HTTP 明文传输) 的核心,
-  客户端需要对服务器发来的证书进行安全性校验 (使得中间人无法替换证书和公私钥).
-- 通过 CA 认证体系避免了中间人窃取 AES 密钥并发起拦截和修改 HTTP 通讯的报文.
-
-#### HTTPS 通信过程
-
-证书获取及验证过程 (CA 认证体系):
-
-- 浏览器发起一个 HTTPS 的请求.
-- 服务器接收到请求, 返回一个 HTTPS 证书, 该证书内包含服务器私钥对应的公钥信息.
-- 浏览器通过 CA 认证体系 (CA 服务器) 验证证书是否合法 (浏览器地址栏进行相应提示).
-
-加密密钥传输 (B 端加密 - 传输 - S 端解密):
-
-- 浏览器端生成一个随机数并通过公钥加密, 传输给服务器.
-- 服务器使用私钥对随机数进行解密, 并存储随机数作为对称加密的密钥.
-
-加密报文传输 (S 端加密 - 传输 - B 端解密):
-
-- 服务器使用随机数对数据进行对称加密, 并将加密信息返回给客户端.
-- 客户端获得加密数据, 使用随机数作为密钥基于对称加密算法对报文进行解密.
-
-#### HTTPS 安全性
-
-- 当浏览器获验证假公钥不合法时, 会对用户进行风险提示, 但用户仍可以授权信任证书继续操作.
-- HTTPS 重点关注传输安全, 无法保证本地随机数的存储安全 (木马, 浏览器漏洞).
-
-### HTTP 1
-
-- HTTP/1.0 默认不开启长连接: 客户端与服务端必须同时发送 `Connection: Keep-Alive`.
-- HTTP/1.1 默认开启长连接.
-
-### HTTP 2
-
-#### HTTP 2 Upside
-
-在 HTTP/1.x 中, 每次请求都会建立一次 HTTP 连接:
-
-- 串行的文件传输. 当请求 a 文件时, b 文件只能等待.
-- 连接数过多.
-
-HTTP/2 的多路复用就是为了解决上述的两个性能问题.
-在 HTTP/2 中, 有两个非常重要的概念, 分别是帧 (frame) 和流 (stream).
-帧代表着最小的数据单位, 每个帧会标识出该帧属于哪个流, 流也就是多个帧组成的数据流.
-多路复用, 就是在一个 TCP 连接中可以存在多条流, 避免队头阻塞问题和连接数过多问题.
-
-HTTP/2 = `HTTP` + `HPack / Stream` + `TLS 1.2+` + `TCP`:
-
-- Multiplexing (多路复用): more parallelized requests.
-- 二进制传输 (乱序二进制帧 Stream).
-- Header compression (HPack).
-- Server push.
-- HTTPS guaranteed: 事实加密 (Chrome/Firefox 只支持 HTTP/2 over TLS 1.2+).
-
-#### HTTP 2 Downside
-
-HTTP/2 虽然通过多路复用解决了 HTTP 层的队头阻塞,
-但仍然存在 TCP 层的队头阻塞 (`Head-of-line Blocking`):
-
-- 由于 TCP 不支持乱序确认, 当没有收到队头 (滑动窗口最左端) 的 ACK 确认报文时,
-  发送窗口无法往前移动, 此时发送方将无法继续发送后面的数据, 产生发送窗口的队头阻塞问题.
-- 同样地, 当接收窗口接收有序数据时, 当没有收到队头 (滑动窗口最左端) 的数据时,
-  接收窗口无法往前移动, 此时接收方将直接丢弃所有滑动窗口右侧的数据, 产生接收窗口的队头阻塞问题.
-
-QUIC (基于 UDP 的可靠协议)
-给每一个 Stream 都分配了一个独立的滑动窗口,
-使得一个连接上的多个 Stream 之间没有依赖关系,
-拥有相互独立各自控制的滑动窗口.
-
-#### HTTP 2 Optimization
-
-Due to asset granularity and **caching effectiveness**:
-
-- No need for CSS/Image sprites.
-- Less need for resources bundling and inlining.
-
-### HTTP 3
-
-HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`:
-
-- 解决多次握手高延迟问题.
-- 解决队头 (数据重传) 阻塞 (后续数据) 问题.
-- QUIC 协议保证传输可靠/实现快速握手/集成 TLS 加密/实现多路复用.
-- QUIC 给每个请求流 (Stream ID) 都分配一个独立的滑动窗口, 实现无队头阻塞的多路复用, 解决 TCP 层的队头阻塞.
-
-### HTTP Response Status Codes
-
-[RFC 2616](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status):
-
-- Informational responses: 100–199.
-- Successful responses: 200–299.
-  - 200 OK.
-  - 201 Created.
-  - 202 Accepted.
-- Redirects: 300–399.
-  - 301 Moved Permanently.
-  - 302 Found.
-  - 304 Not Modified.
-  - 307 Temporary Redirect.
-  - 308 Permanent Redirect.
-- Client errors: 400–499.
-  - 400 Bad Request.
-  - 401 Unauthorized.
-  - 403 Forbidden.
-  - 404 Not Found.
-  - 405 Method Not Allowed.
-  - 406 Not Acceptable.
-- Server errors: 500–599.
-  - 500 Internal Server Error.
-  - 501 Not Implemented.
-  - 502 Bad Gateway.
-  - 503 Service Unavailable.
-  - 504 Gateway Timeout.
-
-Use reasonable HTTP status codes:
-
-- 200: general success.
-- 201: successful creation.
-- 400: bad requests from client.
-- 401: unauthorized requests.
-- 403: missing permissions.
-- 404: missing resources.
-- 429: too many requests.
-- 5xx: internal errors (these should be avoided at all costs).
-
-### CORS
-
-Cross Origin Resource Sharing:
-
-- Same origin:
-  URLs (Uniform Resource Locator) with same `protocol + host + port`.
-- CORS-safeListed response header:
-  `Cache-Control`, `Content-Language`, `Content-Length`, `Content-Type`,
-  `Expires`, `Last-Modified`, `Pragma`.
-
-```bash
-Access-Control-Allow-Origin: *
-```
-
-```bash
-Access-Control-Expose-Headers: X-Custom-Header, Content-Encoding
-Access-Control-Expose-Headers: *
-```
-
-```bash
-Access-Control-Allow-Credentials: true
-Access-Control-Allow-Origin: https://example.com
-Vary: Cookie, Origin
-```
-
-```bash
-Access-Control-Max-Age: 600
-Access-Control-Allow-Methods: Custom-Method, CUSTOM-METHOD
-Access-Control-Allow-Headers: X-Custom-Header
-```
 
 ## Web Authentication
 
