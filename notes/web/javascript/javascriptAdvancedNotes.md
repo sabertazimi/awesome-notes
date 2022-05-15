@@ -7465,6 +7465,11 @@ function App() {
 
 ## Network
 
+### TCP
+
+三次握手带来的延迟 (RTT: Round-trip Delay) 使得每创建一个新 TCP 连接都要付出很大代价.
+这决定了提高 TCP 应用性能的关键, 在于**重用连接**.
+
 ### HTTP 1
 
 - HTTP/1.0 默认不开启长连接: 客户端与服务端必须同时发送 `Connection: Keep-Alive`.
