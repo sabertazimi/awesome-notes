@@ -5400,12 +5400,13 @@ observer.observe({ type: 'layout-shift', buffered: true });
   - Offline caching: PWA.
   - HTTP caching: 强缓存与协商缓存.
   - CDN: shared public caches.
-- Network protocols cost:
+- Network protocols performance:
   - Reducing HTTP requests.
   - Caching and reducing DNS lookups:
     - Remove too much domains.
     - HTML5 DNS prefetch.
   - Avoid redirects.
+  - See [network notes](#network).
 
 ### Performance and Analysis Tools
 
