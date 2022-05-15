@@ -7558,6 +7558,25 @@ WebRTC 是符合上述要求的框架.
 
 :::
 
+### TLS
+
+![Transport Layer Security](./figures/TLS.png)
+
+#### Transport Layer Security
+
+- SSL 1.0 (Security Sockets Layer) (Netscape).
+- SSL 2.0.
+- SSL 3.0.
+- TLS 1.0 (RFC 2246).
+- TLS 1.1.
+- TLS 1.2.
+- 加密:
+  通过密钥协商, 混淆数据的机制.
+- 身份验证:
+  通过建立认证机构信任链 (Chain of Trust and Certificate Authorities), 验证身份标识有效性的机制.
+- 完整性:
+  通过 MAC (Message Authentication Code) 签署消息, 检测消息是否被篡改或伪造的机制.
+
 ### HTTP 1
 
 Hypertext Transfer Protocol:
