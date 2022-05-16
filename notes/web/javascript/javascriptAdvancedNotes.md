@@ -7582,6 +7582,8 @@ WebRTC 是符合上述要求的框架.
 - 完整性:
   通过 MAC (Message Authentication Code) 签署消息, 检测消息是否被篡改或伪造的机制.
 
+![TLS Setup](./figures/TLSSetup.png)
+
 ### HTTP 1
 
 Hypertext Transfer Protocol:
