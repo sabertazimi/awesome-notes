@@ -3719,14 +3719,14 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 
 ### Landing Page
 
+#### Jumbotron Image
+
 ```css
 h1 {
   background-image: url('bg.jpg');
   background-clip: text;
 }
-```
 
-```css
 .jumbotron {
   min-height: 100%;
   background-image: url('');
@@ -3736,6 +3736,8 @@ h1 {
   opacity: 0.8;
 }
 ```
+
+#### Muted Video
 
 ```css
 .fullscreen-video {
@@ -3755,6 +3757,8 @@ h1 {
 }
 ```
 
+#### Parallax Effect
+
 ```css
 .parallax {
   min-height: 60%; /* key */
@@ -3763,6 +3767,26 @@ h1 {
   background-attachment: fixed; /* key */
   background-position: center;
   background-size: cover;
+}
+```
+
+#### Search Light Effect
+
+```css
+:root::before {
+  position: fixed;
+  z-index: 1000;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  content: '';
+  background: radial-gradient(
+    circle 16vmax at var(--cursor-x) var(--cursor-y),
+    rgb(0 0 0 / 0%) 0%,
+    rgb(0 0 0 / 50%) 80%,
+    rgb(0 0 0 / 80%) 100%
+  );
 }
 ```
 
