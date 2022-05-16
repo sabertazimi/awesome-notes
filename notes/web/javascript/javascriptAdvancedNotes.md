@@ -5077,7 +5077,7 @@ const PageComponent = () => {
 
 #### Data Loading Best Practice
 
-- 非必要静态资源上传 CDN.
+- 非必要静态资源上传 CDN: Client -> CDN Server -> CDN 骨干网络 (极度优化) -> CDN Server -> Server.
 - 冷启动开启数据预拉取.
 - 页面路由切换时进行数据预拉取 (并缓存数据).
 
