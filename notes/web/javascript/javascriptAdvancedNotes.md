@@ -10005,33 +10005,26 @@ module.exports = {
 };
 ```
 
-[Next.js webpack configuration](https://github.com/vercel/next.js/blob/v12.1.6/packages/next/build/webpack-config.ts):
+[Next.js granular chunking configuration](https://web.dev/granular-chunking-nextjs):
 
 ```ts
 module.exports = {
   optimization: {
     splitChunks: {
-      chunks: chunk =>
-        !/^(polyfills|main|pages\/_app)$/.test(chunk.name) &&
-        !MIDDLEWARE_ROUTE.test(chunk.name),
+      chunks: chunk => !/^(polyfills|main|pages\/_app)$/.test(chunk.name),
       cacheGroups: {
         framework: {
-          chunks: (chunk: webpack.compilation.Chunk) =>
-            !chunk.name?.match(MIDDLEWARE_ROUTE),
+          chunks: 'all',
           name: 'framework',
           test(module) {
-            const resource =
-              module.nameForCondition && module.nameForCondition();
-            if (!resource) {
-              return false;
-            }
-            return topLevelFrameworkPaths.some(packagePath =>
-              resource.startsWith(packagePath)
-            );
+            const resource = module.nameForCondition?.();
+            return resource
+              ? topLevelFrameworkPaths.some(pkgPath =>
+                  resource.startsWith(pkgPath)
+                )
+              : false;
           },
           priority: 40,
-          // Don't let webpack eliminate this chunk
-          // (prevents this chunk from becoming a part of the commons chunk)
           enforce: true,
         },
         lib: {
@@ -10058,7 +10051,6 @@ module.exports = {
                   `Encountered unknown module type: ${module.type}.`
                 );
               }
-
               hash.update(module.libIdent({ context: dir }));
             }
 
@@ -10067,18 +10059,6 @@ module.exports = {
           priority: 30,
           minChunks: 1,
           reuseExistingChunk: true,
-        },
-        commons: {
-          name: 'commons',
-          minChunks: totalPages,
-          priority: 20,
-        },
-        middleware: {
-          chunks: (chunk: webpack.compilation.Chunk) =>
-            chunk.name?.match(MIDDLEWARE_ROUTE),
-          filename: 'server/middleware-chunks/[name].js',
-          minChunks: 2,
-          enforce: true,
         },
       },
       maxInitialRequests: 25,
