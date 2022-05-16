@@ -1229,6 +1229,9 @@ function loadScriptString(code) {
 所有现代浏览器中, 通过 `innerHTML` 属性创建的 `<script>` 元素永远不会执行.
 :::
 
+- Next.js route [loader](https://github.com/vercel/next.js/blob/canary/packages/next/client/route-loader.ts).
+- Next.js `<Script>` [component](https://github.com/vercel/next.js/blob/canary/packages/next/client/script.tsx).
+
 #### Dynamic Styles Loading
 
 ```ts
