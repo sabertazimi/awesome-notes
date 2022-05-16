@@ -7473,6 +7473,8 @@ function App() {
 
 #### Transmission Control Protocol
 
+![TCP Setup](./figures/TCPSetup.png)
+
 Transmission Control Protocol (RFC 793):
 
 三次握手带来的延迟 (RTT: Round-trip Delay) 使得每创建一个新 TCP 连接都要付出很大代价.
