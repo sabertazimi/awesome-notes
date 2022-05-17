@@ -8475,12 +8475,13 @@ fetch('https://fetch.spec.whatwg.org/')
 
 ### RESTful
 
-- Client - Server architecture
-- Stateless
-- Cacheable
-- Layer system
-- Code via need
-- Isomorphic interface
+- Client/Server architecture.
+- Stateless.
+- Cacheable.
+- Layer system.
+- Code via need.
+- Isomorphic interface.
+- Design [reference](https://github.com/aisuhua/restful-api-design-references).
 
 ## Web Authentication
 
