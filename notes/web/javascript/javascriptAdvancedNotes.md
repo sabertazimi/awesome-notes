@@ -7890,97 +7890,6 @@ Access-Control-Allow-Methods: Custom-Method, CUSTOM-METHOD
 Access-Control-Allow-Headers: X-Custom-Header
 ```
 
-### WebSocket
-
-#### WebSocket Message Header
-
-Request Header:
-
-```bash
-GET /chat HTTP/1.1
-Host: example.com
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Key: 16-byte, base64 encoded
-Sec-WebSocket-Version: 13
-Sec-Websocket-Protocol: protocol [,protocol]*
-Sec-Websocket-Extension: extension [,extension]*
-```
-
-Response Header:
-
-```bash
-HTTP/1.1 101 "Switching Protocols" or other description
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Accept: 20-byte, MD5 hash in base64
-Sec-Websocket-Protocol: protocol [,protocol]*
-Sec-Websocket-Extension: extension [,extension]*
-```
-
-#### WebSocket Basic Usage
-
-通信功能:
-
-- `data`:
-  - `string`.
-  - `ArrayBuffer`.
-  - `Blob`.
-- `readyState`:
-  - `WebSocket.OPENING`: `0`, 连接正在建立.
-  - `WebSocket.OPEN`: `1`, 连接已经建立.
-  - `WebSocket.CLOSING`: `2`, 连接正在关闭.
-  - `WebSocket.CLOSE`: `3`, 连接已经关闭.
-
-```ts
-function WebSocketTest() {
-  if ('WebSocket' in window) {
-    alert('WebSocket is supported by your Browser!');
-    // Let us open a web socket
-    const ws = new WebSocket('ws://localhost:9998/echo');
-
-    ws.onopen = function () {
-      // WebSocket is connected, send data using send()
-      ws.send('Message to send');
-      alert('Message is sent...');
-    };
-
-    ws.onmessage = function (event) {
-      const receivedMessage = event.data;
-      alert('Message is received...');
-    };
-
-    ws.onclose = function (event) {
-      // websocket is closed.
-      console.log(
-        `As clean? ${event.wasClean} Code=${event.code} Reason=${event.reason}`
-      );
-    };
-
-    ws.onerror = function () {
-      alert('Connection error.');
-    };
-  } else {
-    // The browser doesn't support WebSocket
-    alert('WebSocket NOT supported by your Browser!');
-  }
-}
-```
-
-#### WebSocket HeartBeat Mechanism
-
-连接终止时, WebSocket 不会自动恢复,
-需要自己实现, 通常为了保持连接状态, 需要增加心跳机制.
-
-每隔一段时间会向服务器发送一个数据包, 告诉服务器自己 Alive,
-服务器端如果 Alive, 就会回传一个数据包给客户端.
-主要在一些**长时间连接**的应用场景需要考虑心跳机制及重连机制,
-以保证长时间的连接及数据交互.
-
-### Web RTC
-
-- [WebRTC Security List](https://dzone.com/articles/webrtc-security-vulnerabilities-you-should-know-ab)
-
 ### JSON
 
 JSON (JavaScript Object Notation) methods:
@@ -8548,6 +8457,125 @@ fetch('https://fetch.spec.whatwg.org/')
 - Code via need.
 - Isomorphic interface.
 - Design [reference](https://github.com/aisuhua/restful-api-design-references).
+
+### Server-Sent Events
+
+- Event source [API](https://developer.mozilla.org/en-US/docs/Web/API/EventSource).
+- Server-sent events [API](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events).
+
+```ts
+const source = new EventSource('/path/to/stream-url');
+
+source.onopen = function () {};
+
+source.onerror = function () {};
+
+source.addEventListener('foo', function (event) {
+  processFoo(event.data);
+});
+
+source.addEventListener('ping', function (event) {
+  processPing(JSON.parse(event.data).time);
+});
+
+source.onmessage = function (event) {
+  log(event.id, event.data);
+  if (event.id === 'CLOSE') {
+    source.close();
+  }
+};
+```
+
+### WebSocket
+
+#### WebSocket Message Header
+
+Request Header:
+
+```bash
+GET /chat HTTP/1.1
+Host: example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: 16-byte, base64 encoded
+Sec-WebSocket-Version: 13
+Sec-Websocket-Protocol: protocol [,protocol]*
+Sec-Websocket-Extension: extension [,extension]*
+```
+
+Response Header:
+
+```bash
+HTTP/1.1 101 "Switching Protocols" or other description
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: 20-byte, MD5 hash in base64
+Sec-Websocket-Protocol: protocol [,protocol]*
+Sec-Websocket-Extension: extension [,extension]*
+```
+
+#### WebSocket Basic Usage
+
+通信功能:
+
+- `data`:
+  - `string`.
+  - `ArrayBuffer`.
+  - `Blob`.
+- `readyState`:
+  - `WebSocket.OPENING`: `0`, 连接正在建立.
+  - `WebSocket.OPEN`: `1`, 连接已经建立.
+  - `WebSocket.CLOSING`: `2`, 连接正在关闭.
+  - `WebSocket.CLOSE`: `3`, 连接已经关闭.
+
+```ts
+function WebSocketTest() {
+  if ('WebSocket' in window) {
+    alert('WebSocket is supported by your Browser!');
+    // Let us open a web socket
+    const ws = new WebSocket('ws://localhost:9998/echo');
+
+    ws.onopen = function () {
+      // WebSocket is connected, send data using send()
+      ws.send('Message to send');
+      alert('Message is sent...');
+    };
+
+    ws.onmessage = function (event) {
+      const receivedMessage = event.data;
+      alert('Message is received...');
+    };
+
+    ws.onclose = function (event) {
+      // websocket is closed.
+      console.log(
+        `As clean? ${event.wasClean} Code=${event.code} Reason=${event.reason}`
+      );
+    };
+
+    ws.onerror = function () {
+      alert('Connection error.');
+    };
+  } else {
+    // The browser doesn't support WebSocket
+    alert('WebSocket NOT supported by your Browser!');
+  }
+}
+```
+
+#### WebSocket HeartBeat Mechanism
+
+连接终止时, WebSocket 不会自动恢复,
+需要自己实现, 通常为了保持连接状态, 需要增加心跳机制.
+
+每隔一段时间会向服务器发送一个数据包, 告诉服务器自己 Alive,
+服务器端如果 Alive, 就会回传一个数据包给客户端.
+主要在一些**长时间连接**的应用场景需要考虑心跳机制及重连机制,
+以保证长时间的连接及数据交互.
+
+### Web RTC
+
+- [WebRTC Security List](https://dzone.com/articles/webrtc-security-vulnerabilities-you-should-know-ab)
 
 ## Web Authentication
 
