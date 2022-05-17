@@ -3919,6 +3919,23 @@ DOM.method.call(/* 关注 this 指针 */);
 故应将全局变量作为参数传入函数进行调用, 不但效率高, 而且易于维护与测试.
 即**利用局部变量引用全局变量, 加快标识符解析**.
 
+#### Memoization Function
+
+```ts
+const memoize = fn =>
+  (
+    (cache = Object.create(null)) =>
+    (...args) => {
+      return cache[args] || (cache[args] = fn(...args));
+    }
+  )();
+
+const memoizedGetDistance = memoize(getDistance);
+
+memoizedGetDistance('Murcia', 'Madrid'); // => computed, slow
+memoizedGetDistance('Murcia', 'Madrid'); // => cached, fast!
+```
+
 ### Loop Performance
 
 倒序循环可提升性能:

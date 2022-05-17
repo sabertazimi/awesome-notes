@@ -15,7 +15,7 @@ tags: [Web, JavaScript]
 - [Technical Committees 39](https://www.ecma-international.org/technical-committees/tc39 'TC39')
 - [TC39 Process](http://tc39.github.io/process-document)
 - [ES2015](https://exploringjs.com/es6/ch_overviews.html)
-- [WinterCG: Web-interoperable Runtimes Community Group](https://github.com/wintercg)
+- [WinterCG: Web-interoperable Runtime Community Group](https://github.com/wintercg)
 
 JavaScript = ECMAScript + DOM + BOM:
 
@@ -9378,7 +9378,7 @@ to advance the state of a program in a pure manner.
 - More garbage collection.
 - More memory usage.
 
-With help of `immutable.js`,
+With help of `immutable.js`/`immer.js`,
 object creation/garbage collection/memory usage can be alleviated.
 
 For example, in vanilla.js, `map2 === map1` become `false`,
