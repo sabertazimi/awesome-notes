@@ -5406,10 +5406,14 @@ observer.observe({ type: 'layout-shift', buffered: true });
   - CDN: shared public caches.
 - Network protocols performance:
   - Reducing HTTP requests.
+    - 重用 TCP 连接.
+    - 多路复用.
+    - 减少传输冗余资源.
   - Caching and reducing DNS lookups:
     - Remove too much domains.
     - HTML5 DNS prefetch.
-  - Avoid redirects.
+  - Avoid HTTP redirects.
+  - CDN: minimize RTT.
   - See [network notes](#network).
 
 ### Performance and Analysis Tools
@@ -7680,9 +7684,9 @@ Hypertext Transfer Protocol (RFC 2068):
   - 应用必须处理中断的连接并恢复.
   - 应用必须处理中断请求的幂等问题.
   - 应用必须保护自身不受出问题的代理的影响.
-- 模拟多路复用: 使用多个 TCP 连接 (大多数现代浏览器支持每个主机打开 6 个连接).
+- 模拟多路复用: 并行使用多个 TCP 连接 (大多数现代浏览器支持每个主机打开 6 个连接).
 - Resources bundling and inlining (但一定程度上放弃缓存粒度).
-- 字节服务以支持基于范围的资源请求.
+- 域名分区.
 - 改进的更好的缓存机制.
 
 ### HTTP 2
@@ -7734,8 +7738,23 @@ QUIC (基于 UDP 的可靠协议)
 
 #### HTTP 2 Optimization
 
+HTTP 2 performance:
+
+- Reducing HTTP requests:
+  - 重用 TCP 连接.
+  - 多路复用.
+  - 减少传输冗余资源.
+- Caching and reducing DNS lookups:
+  - Remove too much domains.
+  - HTML5 DNS prefetch.
+- Avoid HTTP redirects.
+- CDN: minimize RTT.
+- Web caches.
+- Resources minification.
+
 Due to asset granularity and **caching effectiveness**:
 
+- No need for 域名分区.
 - No need for CSS/Image sprites.
 - Less need for resources bundling and inlining.
 
