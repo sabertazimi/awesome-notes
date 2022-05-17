@@ -1305,7 +1305,7 @@ tags: [Web, Framework, Library]
 - [WebPageTest](https://github.com/WPO-Foundation/webpagetest-github-action)
 - [WebVitals: Google Essential Metrics for Healthy Site](https://github.com/GoogleChrome/web-vitals)
 - [PerfumeJS: Measuring Performance Vitals Metrics](https://github.com/zizzamia/perfume.js)
-- [Node Clinic](https://github.com/nearform/node-clinic)
+- [Node Clinic](https://github.com/clinicjs/node-clinic)
 - [Perf Tools](https://github.com/brendangregg/perf-tools)
 - [FlameGraph](https://github.com/brendangregg/FlameGraph)
 - [HyperFine: CLI Benchmark Tool](https://github.com/sharkdp/hyperfine)
