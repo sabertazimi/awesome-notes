@@ -8614,7 +8614,7 @@ function WebSocketTest() {
 
 - [MediaStream](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream).
 - [RTCPeerConnection](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection):
-  - 管理穿越 NAT 的完整 ICE 工作流.
+  - 管理穿透 NAT 的完整 ICE 工作流.
   - 发送自动 (STUN) 持久化信号.
   - 跟踪本地流.
   - 跟踪远程流.
@@ -8692,7 +8692,7 @@ signalingChannel.onmessage = function (msg) {
   - 使用低延迟传输机制.
   - 提供足够的容量.
   - 建立连接后, 考虑使用 DataChannel 发信.
-- 防火墙和NAT穿越:
+- 防火墙和 NAT 穿透:
   - 初始化 RTCPeerConnection 时提供 STUN 服务器.
   - 尽可能使用增量 ICE, 虽然发信次数多, 但建立连接速度快.
   - 提供 STUN 服务器, 以备端到端连接失败后转发数据.
