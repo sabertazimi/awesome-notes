@@ -3884,10 +3884,10 @@ window.addEventListener('gamepaddisconnected', e => {
 - Forgotten `Set`/`Map`:
   `WeakSet`/`WeakMap` don't bother GC.
 - Circular reference.
-- Bad Delete Operator:
+- Bad `delete` Operator:
   `delete` 操作符并不会释放内存,
-  而且会使得附加到对象上的 `hidden class`
-  (`V8` 为了优化属性访问时间而创建的隐藏类)失效,
+  而且会使得附加到对象上的
+  `hidden class` (`V8` 为了优化属性访问时间而创建的隐藏类) 失效,
   让对象变成 `slow object`.
 
 ### Danger Features
