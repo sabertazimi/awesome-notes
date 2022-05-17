@@ -7611,6 +7611,9 @@ WebRTC 是符合上述要求的框架.
 - 启用服务器对 SNI (Server Name Indication) 的支持.
 - 启用服务器的 OCSP (Online Certificate Status Protocol) 封套功能.
 - 追加 HTTP 严格传输 (HSTS, HTTP Strict Transport Security) 安全首部.
+- 降低 TLS 延迟:
+  - 服务器应该通过 ALPN (Application Layer Protocol Negotiation) 协商支持 TLS.
+  - 服务器应该支持 TLS 恢复以最小化握手延迟.
 - TLS testing [tool](https://www.ssllabs.com/ssltest/index.html).
 
 ```bash
