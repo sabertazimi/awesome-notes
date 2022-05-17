@@ -7664,6 +7664,8 @@ Offline optimization:
 
 #### Hypertext Transfer Protocol
 
+Hypertext Transfer Protocol (RFC 2068):
+
 - HTTP/1.0 默认不开启长连接: 客户端与服务端必须同时发送 `Connection: Keep-Alive`.
 - HTTP/1.1 默认开启长连接.
 
@@ -7697,12 +7699,22 @@ HTTP/2 的多路复用就是为了解决上述的两个性能问题.
 帧代表着最小的数据单位, 每个帧会标识出该帧属于哪个流, 流也就是多个帧组成的数据流.
 多路复用, 就是在一个 TCP 连接中可以存在多条流, 避免队头阻塞问题和连接数过多问题.
 
+![HTTP 2.0 Binary Frame](./figures/HTTP2BinaryFrame.png)
+
+![HTTP 2.0 Stream](./figures/HTTP2Stream.png)
+
 HTTP/2 = `HTTP` + `HPack / Stream` + `TLS 1.2+` + `TCP`:
 
-- Multiplexing (多路复用): more parallelized requests.
+- HTTP 2.0 的主要目标是改进传输性能, 实现低延迟和高吞吐量.
 - 二进制传输 (乱序二进制帧 Stream).
-- Header compression (HPack).
-- Server push.
+- Multiplexing (多路复用): more parallelized requests.
+- Header compression (HPack): 降低协议字节开销占比 (尤其是 `Cookie` 带来的性能瓶颈).
+- 双向流量控制 (`WINDOW_UPDATE` 帧更新).
+- Server push:
+  - 客户端可以缓存推送过来的资源.
+  - 客户端可以拒绝推送过来的资源.
+  - 推送资源可以由不同的页面共享.
+  - 服务器可以按照优先级推送资源.
 - HTTPS guaranteed: 事实加密 (Chrome/Firefox 只支持 HTTP/2 over TLS 1.2+).
 
 #### HTTP 2 Downside
