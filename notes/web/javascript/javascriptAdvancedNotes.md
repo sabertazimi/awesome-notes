@@ -2978,6 +2978,8 @@ Orinoco 优化 (优化全停顿现象):
 
 ### Render Engine
 
+#### Render Process
+
 Render process:
 
 - Download HTML.
@@ -2989,24 +2991,6 @@ Render process:
 - Composite.
 
 [![Critical Render Path](./figures/CriticalRenderPath.svg)](https://sia.codes/posts/render-blocking-resources/#critical-render-path-js)
-
-RenderNG pipeline
-(Main Thread + Compositor Thread + Viz Process):
-
-- Animate.
-- Style.
-- Layout.
-- Pre-paint.
-- Scroll.
-- Paint.
-- Commit.
-- Layerize.
-- Raster, decode and paint worklet.
-- Activate.
-- Aggregate.
-- Draw.
-
-#### Render Process
 
 - GUI 渲染线程:
   - Parse `HTML`/`CSS`.
@@ -3145,12 +3129,32 @@ JavaScript 阻塞渲染:
 JavaScript 阻塞了同在主线程的 `Layout` 阶段与 `Paint` 阶段,
 间接阻塞了合成线程的绘制操作.
 
+### Chromium Rendering Engine
+
+RenderingNG pipeline
+(`Main` thread + `Compositor` thread + `Viz` process):
+
+- Animate.
+- Style.
+- Layout.
+- Pre-paint.
+- Scroll.
+- Paint.
+- Commit.
+- Layerize.
+- Raster, decode and paint worklet.
+- Activate.
+- Aggregate.
+- Draw.
+
 ### Browser Engine Reference
 
 - Chromium rendering engine: [RenderingNG](https://developer.chrome.com/blog/renderingng).
 - Chromium RenderingNG [architecture](https://developer.chrome.com/blog/renderingng-architecture).
 - Chromium RenderingNG [key data structures](https://developer.chrome.com/blog/renderingng-data-structures).
 - Chromium [video rendering architecture](https://developer.chrome.com/blog/videong).
+- Chromium [layout engine architecture](https://developer.chrome.com/articles/layoutng).
+- Chromium [Blink architecture](https://developer.chrome.com/articles/blinkng).
 
 ## Web Animations
 
