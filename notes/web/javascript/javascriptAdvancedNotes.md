@@ -3454,7 +3454,7 @@ javascriptNode.onaudioprocess = function () {
   analyserNode.getByteTimeDomainData(amplitudeArray);
 
   // draw the display if the audio is playing
-  // if (audioPlaying == true) {
+  // if (audioPlaying === true) {
   // requestAnimFrame(drawTimeDomain);
   // }
 };
@@ -7855,6 +7855,21 @@ Cross Origin Resource Sharing:
   `Expires`, `Last-Modified`, `Pragma`.
 
 ```bash
+OPTIONS /resource.js HTTP/1.1
+Host: thirdparty.com
+Origin: http://example.com
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: My-Custom-Header
+
+------
+
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://example.com
+Access-Control-Allow-Methods: GET, POST, PUT
+Access-Control-Allow-Headers: My-Custom-Header
+```
+
+```bash
 Access-Control-Allow-Origin: *
 ```
 
@@ -8850,7 +8865,7 @@ def allow_request(req):
     return True
 
   # Allow simple top-level navigation from anywhere
-  if req['sec-fetch-mode'] == 'navigate' and req.method == 'GET':
+  if req['sec-fetch-mode'] === 'navigate' and req.method === 'GET':
     return True
 
   return False
