@@ -7662,10 +7662,26 @@ Offline optimization:
 
 ### HTTP 1
 
-Hypertext Transfer Protocol:
+#### Hypertext Transfer Protocol
 
 - HTTP/1.0 默认不开启长连接: 客户端与服务端必须同时发送 `Connection: Keep-Alive`.
 - HTTP/1.1 默认开启长连接.
+
+#### HTTP 1.x Performance
+
+限制 Web 性能的主要因素是客户端与服务器之间的网络往返延迟 (RTT):
+
+- 持久化连接以支持连接重用: `N` 次 HTTP 请求节省的总延迟时间为 `(N-1) * RTT`.
+- 分块传输编码以支持流式响应.
+- 请求管道以支持并行请求处理 (局限性较大):
+  - FIFO 管道, 队头请求会阻塞后续请求.
+  - 应用必须处理中断的连接并恢复.
+  - 应用必须处理中断请求的幂等问题.
+  - 应用必须保护自身不受出问题的代理的影响.
+- 模拟多路复用: 使用多个 TCP 连接 (大多数现代浏览器支持每个主机打开 6 个连接).
+- Resources bundling and inlining (但一定程度上放弃缓存粒度).
+- 字节服务以支持基于范围的资源请求.
+- 改进的更好的缓存机制.
 
 ### HTTP 2
 
