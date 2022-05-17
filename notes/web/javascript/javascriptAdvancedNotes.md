@@ -8573,6 +8573,11 @@ function WebSocketTest() {
 主要在一些**长时间连接**的应用场景需要考虑心跳机制及重连机制,
 以保证长时间的连接及数据交互.
 
+#### WebSocket Reference
+
+- [WebSocket Guide](https://hpbn.co/websocket)
+- [WebSocket vs Long Polling](https://ably.com/blog/websockets-vs-long-polling)
+
 ### Web RTC
 
 - [WebRTC Security List](https://dzone.com/articles/webrtc-security-vulnerabilities-you-should-know-ab)
