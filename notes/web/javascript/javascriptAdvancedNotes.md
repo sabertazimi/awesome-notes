@@ -8522,7 +8522,7 @@ WebSocket 规范允许对协议进行扩展,
 数据格式和 WebSocket 协议的语义可以通过新的操作码和数据字段扩展:
 
 - 多路复用扩展 (WebSocket Multiplexing Extension):
-  将 WebSocket 的逻辑连接独立出来, 实现共享底层的 TCP 连接.
+  使用`信道 ID`扩展每个 WebSocket 帧, 实现多个虚拟的 WebSocket 信道共享一个 TCP 连接.
 - 压缩扩展 (WebSocket Compression Extension):
   给 WebSocket 协议增加了压缩功能.
 
