@@ -3189,21 +3189,32 @@ It helps mitigate layout bugs including:
 
 Paint order:
 
-- 背景颜色
-- 背景图片
-- 边框
-- 子代
-- 轮廓
+- 背景颜色.
+- 背景图片.
+- 边框.
+- 子代.
+- 轮廓.
 
-渲染进程 (`Render` process) 中主线程 (`main` thread) `Layout` 阶段与 `Paint` 阶段不负责实际的绘制操作,
-`Layout` 阶段执行 `Update Layer Tree`, 更新每层信息,
-`Paint` 阶段整理每层页面的绘制信息, 构建绘制列表,
-以上阶段的数据最终会交给
-渲染进程 (`Render` process) 中合成线程 (`compositor` thread) 与 `Viz` process 执行实际的绘制操作.
+[Property trees](https://developer.chrome.com/articles/renderingng-data-structures/#property-trees)
+are data structures that explain how visual and scrolling effects apply to DOM elements.
+Every web document has four separate property trees:
+
+- Transform tree represents CSS transforms and scrolling.
+- Clip tree represents overflow clips.
+- Effect tree represents all other visual effects:
+  opacity, filters, masks, blend modes, and other kinds of clips such as clip-path.
+- Scroll tree represents information about scrolling,.
+  such as how scrolls chain together
 
 JavaScript 阻塞渲染:
-JavaScript 阻塞了同在主线程的 `Layout` 阶段与 `Paint` 阶段,
-间接阻塞了 `compositor` thread 与 `Viz` process 的绘制操作.
+
+- 渲染进程 (`Render` process) 中主线程 (`main` thread) `Layout` 阶段与 `Paint` 阶段不负责实际的绘制操作:
+  `Layout` 阶段执行 `Update Layer Tree`, 更新每层信息,
+  `Paint` 阶段整理每层页面的绘制信息, 构建绘制列表.
+- 以上阶段的数据最终会交给
+  渲染进程 (`Render` process) 中合成线程 (`compositor` thread) 与 `Viz` process 执行实际的绘制操作.
+- JavaScript 阻塞了同在主线程的 `Layout` 阶段与 `Paint` 阶段,
+  间接阻塞了 `compositor` thread 与 `Viz` process 的绘制操作.
 
 #### RenderingNG Video Engine
 
