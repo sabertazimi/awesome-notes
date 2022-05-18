@@ -285,7 +285,7 @@ location / {
 }
 ```
 
-## A Simple React Router
+## React Router Internals
 
 - `<Route>` instances listen to `popstate` event to `forceUpdate`.
 - When click `<Link>`/`<Redirect>`, `historyPush` or `historyReplace` get called,
@@ -444,6 +444,75 @@ class Redirect extends Component {
   render() {
     return null;
   }
+}
+```
+
+### Router Hooks
+
+```tsx
+/**
+ * @see https://github.com/ashok-khanna/react-snippets
+ */
+
+import { useEffect, useState } from 'react';
+
+export default function Router({ routes, defaultComponent }) {
+  // state to track URL and force component to re-render on change
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const onLocationChange = () => {
+      // update path state to current window URL
+      setCurrentPath(window.location.pathname);
+    };
+
+    // listen for popstate event
+    window.addEventListener('popstate', onLocationChange);
+
+    // clean up event listener
+    return () => {
+      window.removeEventListener('popstate', onLocationChange);
+    };
+  }, []);
+  return (
+    routes.find(({ path, component }) => path === currentPath)?.component ||
+    defaultComponent
+  );
+}
+
+export function Link({ className, href, children }) {
+  const onClick = event => {
+    // if ctrl or meta key are held on click,
+    // allow default behavior of opening link in new tab
+    if (event.metaKey || event.ctrlKey) {
+      return;
+    }
+
+    // prevent full page reload
+    event.preventDefault();
+
+    // update url
+    window.history.pushState({}, '', href);
+
+    // communicate to Routes that URL has changed
+    const navEvent = new PopStateEvent('popstate');
+    window.dispatchEvent(navEvent);
+  };
+
+  return (
+    <a className={className} href={href} onClick={onClick}>
+      {children}
+    </a>
+  );
+}
+
+export function navigate(href) {
+  // update url
+  window.history.pushState({}, '', href);
+
+  // communicate to Routes that URL has changed
+  const navEvent = new PopStateEvent('popstate');
+  window.dispatchEvent(navEvent);
 }
 ```
 
