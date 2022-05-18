@@ -3155,6 +3155,7 @@ RenderingNG pipeline
 - Chromium [video rendering architecture](https://developer.chrome.com/blog/videong).
 - Chromium [layout engine architecture](https://developer.chrome.com/articles/layoutng).
 - Chromium [Blink architecture](https://developer.chrome.com/articles/blinkng).
+- Web platform [tests](https://wpt.fyi).
 
 ## Web Animations
 
