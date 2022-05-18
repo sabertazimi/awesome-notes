@@ -32,18 +32,21 @@ tags: [Web, Framework, Library]
 - [Modern: Meta-framework Suite Designed for Frontend-focused Modern Web Development](https://github.com/modern-js-dev/modern.js)
 - [Projen: New Generation of Project Generators](https://github.com/projen/projen)
 - [Hygen: Component Generator](https://github.com/jondot/hygen)
+- [Plop Generator](https://github.com/plopjs/plop)
 - [Vue CLI](https://github.com/vuejs/vue-cli)
 - [Vite](https://github.com/vitejs/vite)
 
 ### Boilerplate and Templates
 
 - [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
+- [React Next.js Boilerplate](https://github.com/BearStudio/start-ui-web)
 - [React BulletProof Boilerplate](https://github.com/alan2207/bulletproof-react)
 - [React CRA Boilerplate](https://github.com/react-boilerplate/react-boilerplate-cra-template)
 - [React Electron Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
 - [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
 - [React Vite Starter](https://github.com/wtchnm/Vitamin)
-- [React Chrome Extension](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
+- [React Chrome Extension JavaScript Boilerplate](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
+- [React Chrome Extension TypeScript Boilerplate](https://blog.logrocket.com/creating-chrome-extension-react-typescript)
 - [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)
 - [Vite Web Extension](https://github.com/antfu/vitesse-webext)
 
