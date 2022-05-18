@@ -1785,6 +1785,7 @@ In positioning/sizing/margin/padding/border/text alignment:
   - color-contrast.
   - color.
   - accent-color.
+- CSS `color` [value](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
 
 ## CSS Border
 
