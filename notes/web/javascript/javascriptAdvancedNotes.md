@@ -3033,8 +3033,15 @@ GUI 渲染线程与 JS 引擎线程互斥.
 Threads help achieve:
 
 - Performance isolation and responsiveness in spite of slow tasks.
-- Pipeline parallelization.
-- Multiple buffering.
+- Helper threads:
+  sending long-running subtasks off to additional threads,
+  to keep parent thread responsive to other requests happening simultaneously.
+- Multiple buffering:
+  showing previously rendered content while rendering new content,
+  to hide latency of rendering.
+- Pipeline parallelization:
+  running rendering pipeline in multiple places simultaneously
+  (fast scrolling and animation).
 
 :::
 
