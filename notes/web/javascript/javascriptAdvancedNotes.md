@@ -2997,7 +2997,7 @@ Render process:
 - Paint.
 - Composite.
 
-[![Critical Render Path](./figures/CriticalRenderPath.svg)](https://sia.codes/posts/render-blocking-resources/#critical-render-path-js)
+[![Render Process](./figures/RenderProcess.webp)](https://developer.chrome.com/articles/renderingng-architecture/#threads)
 
 - GUI 渲染线程:
   - Parse `HTML`/`CSS`.
@@ -3023,6 +3023,16 @@ Render process:
 :::danger GUI and JS Thread
 
 GUI 渲染线程与 JS 引擎线程互斥.
+
+:::
+
+:::tip Multi-threads Architecture
+
+Threads help achieve:
+
+- Performance isolation and responsiveness in spite of slow tasks.
+- Pipeline parallelization.
+- Multiple buffering.
 
 :::
 
