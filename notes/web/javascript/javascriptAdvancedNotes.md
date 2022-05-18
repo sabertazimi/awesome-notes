@@ -3025,7 +3025,7 @@ Orinoco 优化 (优化全停顿现象):
 - Animate.
 - Style.
 - Layout.
-- Pre-paint.
+- [Pre-paint](https://developer.chrome.com/articles/blinkng/#the-pre-paint-phase).
 - Scroll.
 - Paint.
 - Commit.
