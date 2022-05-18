@@ -2852,7 +2852,7 @@ console.log('glob2');
 // immediate2_then
 ```
 
-## V8 Good Parts
+### V8
 
 - source code (parser) AST (interpreter) bytecode
 - send profiling data from bytecode to optimizing compiler, generate optimized code
@@ -2860,7 +2860,7 @@ console.log('glob2');
 - **TurboFan** optimizing compiler (2 for SpiderMonkey/Edge, 3 for Safari)
 - JavaScript implementation [list](https://notes.eatonphil.com/javascript-implementations.html).
 
-### V8 Object Shape
+#### V8 Object Shape
 
 - [Shapes ICS](https://mathiasbynens.be/notes/shapes-ics)
 
@@ -2893,7 +2893,7 @@ const o = { x: 1 };
 
 array shape: Shape('length'), 'length' => 0 Offset, Writable
 
-### V8 Inline Cache
+#### V8 Inline Cache
 
 V8 use ICs to memorize information (same shape) where to find properties on objects:
 
@@ -2901,7 +2901,7 @@ V8 use ICs to memorize information (same shape) where to find properties on obje
 - don't add property to objects dynamically (invalid inline cache)
 - don't mess with property attributes of array elements
 
-### V8 Garbage Collection
+#### V8 Garbage Collection
 
 - [Introduction](https://mp.weixin.qq.com/s/VbAUPGt3sUVzEQHxWYmlBw)
   to V8 garbage collection.
@@ -2940,14 +2940,11 @@ Orinoco 优化 (优化全停顿现象):
 - Concurrent GC.
 - Parallel GC.
 
-### V8 Performance Tools
+#### V8 Performance Tools
 
 - [Deoptigate](https://github.com/thlorenz/deoptigate)
 - [Turbolizer](https://github.com/thlorenz/turbolizer)
 - [v8 map processor](https://github.com/thlorenz/v8-map-processor)
-
-### V8 Performance Reference
-
 - [v8 perf](https://github.com/thlorenz/v8-perf)
 
 ## Browser Engine
