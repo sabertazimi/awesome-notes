@@ -2989,7 +2989,41 @@ Orinoco 优化 (优化全停顿现象):
 - 插件进程:
   主要是负责插件的运行, 因插件易崩溃, 所以需要通过隔离以保证插件进程崩溃不会对浏览器和页面造成影响.
 
-### Render Engine
+### Chromium Rendering Engine
+
+[![RenderingNG Architecture](./figures/RenderingNG.webp)](https://developer.chrome.com/articles/renderingng)
+
+#### RenderingNG Goals
+
+- [Reliability](https://developer.chrome.com/articles/renderingng/#reliability)
+- [Scalable Performance](https://developer.chrome.com/articles/renderingng/#scalable-performance)
+- [Extensibility](https://developer.chrome.com/articles/renderingng/#extensibility-the-right-tools-for-the-job)
+
+#### RenderingNG Pipeline
+
+[RenderingNG](https://developer.chrome.com/articles/renderingng-architecture)
+[pipeline](https://developer.chrome.com/articles/renderingng-architecture/#the-pipeline-stages)
+(green `main` thread -> yellow `compositor` thread -> orange `Viz` process):
+
+- Animate.
+- Style.
+- Layout.
+- Pre-paint.
+- Scroll.
+- Paint.
+- Commit.
+- Layerize.
+- Raster, decode and paint worklet (GPU hardware acceleration).
+- Activate.
+- Aggregate (GPU hardware acceleration).
+- Draw (GPU hardware acceleration).
+
+[![RenderingNG Pipeline](./figures/RenderingNGPipeline.webp)](https://developer.chrome.com/articles/renderingng-architecture/#rendering-pipeline-structure)
+
+Stages of the rendering pipeline can be skipped if they aren't needed:
+Scrolling and visual effects animation can skip `layout`, `pre-paint` and `paint`.
+If `layout`, `pre-paint`, and `paint` can be skipped for visual effects,
+they can be run entirely on `compositor` thread and **skip `main` thread**.
 
 #### Render Process
 
@@ -3005,14 +3039,18 @@ Render process:
 
 [![Render Process](./figures/RenderProcess.webp)](https://developer.chrome.com/articles/renderingng-architecture/#threads)
 
-- GUI 渲染线程 (`main` thread):
+- GUI 渲染线程 ([`main` thread](https://developer.chrome.com/articles/renderingng-architecture/#render-process-main-thread-components)):
   - Parse `HTML`/`CSS`.
   - Construct `DOM` tree, `CSSOM` tree and `RenderObject` tree.
   - Layout render tree.
   - Paint render tree.
   - Send information to GPU (Composite render tree):
-    Separating `main` and `compositor` threads is critically important
-    for `performance isolation` of animation and scrolling from main thread work.
+    separating
+    [`main`](https://developer.chrome.com/articles/renderingng-architecture/#render-process-main-thread-components)
+    and
+    [`compositor`](https://developer.chrome.com/articles/renderingng-architecture/#render-process-compositor-thread-structure)
+    threads is critically important for
+    `performance isolation` of animation and scrolling from main thread work.
 - JS 引擎线程:
   - JS 内核运行线程, 负责解析 `Javascript` 脚本, 运行代码.
   - 一个 Tab 页 (渲染进程) 中只有一个 JS 引擎线程在运行 JS 程序.
@@ -3128,50 +3166,15 @@ Paint order:
 - 子代
 - 轮廓
 
-渲染进程 (`Render Process`) 中主线程 (`Main Thread`) `Layout` 阶段与 `Paint` 阶段不负责实际的绘制操作,
+渲染进程 (`Render` process) 中主线程 (`main` thread) `Layout` 阶段与 `Paint` 阶段不负责实际的绘制操作,
 `Layout` 阶段执行 `Update Layer Tree`, 更新每层信息,
 `Paint` 阶段整理每层页面的绘制信息, 构建绘制列表,
-以上阶段的数据最终会交给渲染进程 (`Render Process`) 中合成线程 (`Compositor Thread`) 执行实际的绘制操作.
+以上阶段的数据最终会交给
+渲染进程 (`Render` process) 中合成线程 (`compositor` thread) 与 `Viz` process 执行实际的绘制操作.
 
 JavaScript 阻塞渲染:
 JavaScript 阻塞了同在主线程的 `Layout` 阶段与 `Paint` 阶段,
-间接阻塞了合成线程的绘制操作.
-
-### Chromium Rendering Engine
-
-[![RenderingNG Architecture](./figures/RenderingNG.webp)](https://developer.chrome.com/articles/renderingng)
-
-#### RenderingNG Goals
-
-- [Reliability](https://developer.chrome.com/articles/renderingng/#reliability)
-- [Scalable Performance](https://developer.chrome.com/articles/renderingng/#scalable-performance)
-- [Extensibility](https://developer.chrome.com/articles/renderingng/#extensibility-the-right-tools-for-the-job)
-
-#### RenderingNG Pipeline
-
-[RenderingNG](https://developer.chrome.com/articles/renderingng-architecture)
-[pipeline](https://developer.chrome.com/articles/renderingng-architecture/#the-pipeline-stages)
-(green `main` thread -> yellow `compositor` thread -> orange `Viz` process):
-
-- Animate.
-- Style.
-- Layout.
-- Pre-paint.
-- Scroll.
-- Paint.
-- Commit.
-- Layerize.
-- Raster, decode and paint worklet (GPU hardware acceleration).
-- Activate.
-- Aggregate (GPU hardware acceleration).
-- Draw (GPU hardware acceleration).
-
-[![RenderingNG Pipeline](./figures/RenderingNGPipeline.webp)](https://developer.chrome.com/articles/renderingng-architecture/#rendering-pipeline-structure)
-
-Stages of the rendering pipeline can be skipped if they aren't needed:
-Scrolling and visual effects animation can skip `layout`, `pre-paint` and `paint`.
-If `layout`, `pre-paint`, and `paint` can be skipped for visual effects,
-they can be run entirely on `compositor` thread and **skip `main` thread**.
+间接阻塞了 `compositor` thread 与 `Viz` process 的绘制操作.
 
 #### RenderingNG Scrolling Performance
 
