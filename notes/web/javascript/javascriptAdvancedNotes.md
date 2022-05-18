@@ -3124,8 +3124,19 @@ JavaScript 阻塞了同在主线程的 `Layout` 阶段与 `Paint` 阶段,
 
 ### Chromium Rendering Engine
 
-RenderingNG pipeline
-(`Main` thread + `Compositor` thread + `Viz` process):
+[![RenderingNG Architecture](./figures/RenderingNG.webp)](https://developer.chrome.com/articles/renderingng)
+
+#### RenderingNG Goals
+
+- [Reliability](https://developer.chrome.com/articles/renderingng/#reliability)
+- [Scalable Performance](https://developer.chrome.com/articles/renderingng/#scalable-performance)
+- [Extensibility](https://developer.chrome.com/articles/renderingng/#extensibility-the-right-tools-for-the-job)
+
+#### RenderingNG Pipeline
+
+[RenderingNG](https://developer.chrome.com/articles/renderingng-architecture)
+[pipeline](https://developer.chrome.com/articles/renderingng-architecture/#the-pipeline-stages)
+(green `main` thread -> yellow `compositor` thread -> orange `Viz` process):
 
 - Animate.
 - Style.
@@ -3135,10 +3146,24 @@ RenderingNG pipeline
 - Paint.
 - Commit.
 - Layerize.
-- Raster, decode and paint worklet.
+- Raster, decode and paint worklet (GPU hardware acceleration).
 - Activate.
-- Aggregate.
-- Draw.
+- Aggregate (GPU hardware acceleration).
+- Draw (GPU hardware acceleration).
+
+[![RenderingNG Pipeline](./figures/RenderingNGPipeline.webp)](https://developer.chrome.com/articles/renderingng-architecture/#rendering-pipeline-structure)
+
+Stages of the rendering pipeline can be skipped if they aren't needed:
+Scrolling and visual effects animation can skip `layout`, `pre-paint` and `paint`.
+If `layout`, `pre-paint`, and `paint` can be skipped for visual effects,
+they can be run entirely on `compositor` thread and **skip `main` thread**.
+
+#### RenderingNG Scrolling Performance
+
+- Cached GPU textures and display lists:
+  help battery life and animation frame rate for scrolling.
+- Every possible scroll is threaded:
+  don't have to depend on the JavaScript and layout thread.
 
 ### Browser Engine Reference
 
