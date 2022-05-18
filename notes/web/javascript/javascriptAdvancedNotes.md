@@ -2999,12 +2999,14 @@ Render process:
 
 [![Render Process](./figures/RenderProcess.webp)](https://developer.chrome.com/articles/renderingng-architecture/#threads)
 
-- GUI 渲染线程:
+- GUI 渲染线程 (`main` thread):
   - Parse `HTML`/`CSS`.
   - Construct `DOM` tree, `CSSOM` tree and `RenderObject` tree.
   - Layout render tree.
   - Paint render tree.
-  - Send information to GPU (Composite render tree).
+  - Send information to GPU (Composite render tree):
+    Separating `main` and `compositor` threads is critically important
+    for `performance isolation` of animation and scrolling from main thread work.
 - JS 引擎线程:
   - JS 内核运行线程, 负责解析 `Javascript` 脚本, 运行代码.
   - 一个 Tab 页 (渲染进程) 中只有一个 JS 引擎线程在运行 JS 程序.
