@@ -418,7 +418,7 @@ tags: [Web, Framework, Library]
 
 ### Information and Message
 
-#### Page Indicator
+#### Page Progress Indicator
 
 - [React Snakke](https://github.com/diogomoretti/react-snakke)
 
@@ -480,6 +480,10 @@ tags: [Web, Framework, Library]
 - [Select.css](https://github.com/filamentgroup/select-css)
 - [Chosen: Awesome Select Widget](https://github.com/harvesthq/chosen)
 
+#### Textarea
+
+- [Textarea: Grows with Content](https://github.com/Andarist/react-textarea-autosize)
+
 #### Validator
 
 - [Promise Validator](https://github.com/poppinss/indicative)
@@ -522,6 +526,7 @@ tags: [Web, Framework, Library]
 ### Tree
 
 - [Arborist: React Sortable, Virtual and Customizable Tree Component](https://github.com/brimdata/react-arborist)
+- [TreeView: Draggable and Droppable React TreeView Component](https://github.com/minop1205/react-dnd-treeview)
 
 ### Charts Visualization
 
@@ -643,6 +648,7 @@ tags: [Web, Framework, Library]
 ### Transform Animation
 
 - [AnimateGrid](https://github.com/aholachek/animate-css-grid)
+- [React Page Transition](https://github.com/Steveeeie/react-page-transition)
 
 ### Typing Effect Animation
 
@@ -783,7 +789,7 @@ tags: [Web, Framework, Library]
 - [LightGallery: Customizable, Modular, Responsive, LightBox Gallery Plugin](https://github.com/sachinchoolur/lightGallery)
 - [Viewer.js: Images Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
 - [PhotoView: Exquisite React Photo Preview Component](https://github.com/MinJieLiu/react-photo-view)
-- [Zoom: Zooming Images Like Medium](https://github.com/francoischalifour/medium-zoom)
+- [Zoom: Medium Style Image Zoom for React](https://github.com/rpearce/image-zoom)
 
 ### Image Filter
 
