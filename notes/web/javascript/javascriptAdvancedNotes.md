@@ -9844,6 +9844,8 @@ const config = {
   - 优先加载 critical CSS in `<head>`.
   - Lazy loading non-critical CSS.
   - Split up non-initial page CSS.
+- `Next.js` 不允许 `:global(.global-class)`:
+  `modules.mode` 设置为 [`pure`](https://github.com/vercel/next.js/blob/v12.1.6/packages/next/build/webpack/config/blocks/css/loaders/modules.ts#L42-L44).
 
 ```ts
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
