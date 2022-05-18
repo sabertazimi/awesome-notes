@@ -2964,14 +2964,21 @@ Orinoco 优化 (优化全停顿现象):
   - 子进程管理.
   - 网络资源管理.
   - 存储管理.
-- GPU 进程 (Singleton):
-  实现 3D CSS, 绘制 UI 界面.
 - 网络进程 (Singleton):
   主要负责页面的网络资源加载.
+- `Viz` GPU 进程 (Singleton):
+  - 实现 3D CSS, 绘制 UI 界面.
+  - It aggregate compositing from multiple render processes plus the browser process.
+  - It rasters and draws using GPU:
+    Out-of-Process display compositor, raster and iframes (OOP-D, OOP-R, OOPIFs).
 - 渲染进程:
   - 核心任务是将 HTML/CSS 和 JavaScript 转换为用户可以与之交互的网页 (页面渲染, 脚本执行, 事件处理).
   - 排版引擎 Blink 和 JavaScript 引擎 V8 都是运行在该进程中.
   - 默认情况下, Chrome 会为每个 Tab 标签创建一个渲染进程.
+  - Within a single browser tab,
+    frames (`<iframe>`) from different sites are always in different render processes
+    (OOPIFs, [Out-of-Process iframes](https://www.chromium.org/developers/design-documents/oop-iframes)),
+    but frames (`<iframe>`) from same site are always in same render process.
   - 出于安全考虑, 渲染进程都是运行在沙箱模式下.
 - 插件进程:
   主要是负责插件的运行, 因插件易崩溃, 所以需要通过隔离以保证插件进程崩溃不会对浏览器和页面造成影响.

@@ -1146,6 +1146,7 @@
     "oniceconnectionstatechange",
     "onmessageerror",
     "onupgradeneeded",
+    "OOPIFs",
     "OPAM",
     "opendir",
     "opentype",
