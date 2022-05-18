@@ -3026,7 +3026,7 @@ Scrolling and visual effects animation can skip `layout`, `pre-paint` and `paint
 If `layout`, `pre-paint`, and `paint` can be skipped for visual effects,
 they can be run entirely on `compositor` thread and **skip `main` thread**.
 
-#### Render Process
+#### RenderingNG Render Process
 
 Render process:
 
@@ -3090,7 +3090,7 @@ Threads help achieve:
 
 :::
 
-#### HTML Parser
+#### RenderingNG HTML Parser
 
 DTD is context-sensitive grammar.
 Use State Machine pattern to implement a tokenizer:
@@ -3112,7 +3112,7 @@ HTML parser performance:
 - `<= 60` children nodes.
 - `<= 32` levels.
 
-#### CSS Parser
+#### RenderingNG CSS Parser
 
 CSS is context-free grammar.
 Webkit use flex/bison (bottom-to-up), Gecko use up-to-bottom.
@@ -3144,7 +3144,7 @@ pseudo
   ;
 ```
 
-#### Layout Phase
+#### RenderingNG Layout Engine
 
 为避免对所有细小更改都进行整体布局, 浏览器采用了一种 `dirty bit` 系统.
 如果某个呈现器发生了更改, 或者将自身及其子代标注为 `dirty`, 则需要进行布局:
@@ -3157,7 +3157,7 @@ pseudo
 - 父呈现器根据子呈现器的累加高度以及边距和补白的高度来设置自身高度, 此值也可供父呈现器的父呈现器使用.
 - 将其 `dirty 位` 设置为 `false`.
 
-#### Paint Phase
+#### RenderingNG Paint Engine
 
 Paint order:
 
