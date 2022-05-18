@@ -3007,11 +3007,7 @@ Orinoco 优化 (优化全停顿现象):
 
 - Animate.
 - Style.
-- Layout:
-  generate
-  [immutable fragment tree](https://developer.chrome.com/articles/renderingng-data-structures/#the-immutable-fragment-tree)
-  and
-  [immutable flat list](https://developer.chrome.com/articles/renderingng-data-structures/#inline-fragment-items).
+- Layout.
 - Pre-paint.
 - Scroll.
 - Paint.
@@ -3159,6 +3155,18 @@ pseudo
     这会计算子呈现器的高度.
 - 父呈现器根据子呈现器的累加高度以及边距和补白的高度来设置自身高度, 此值也可供父呈现器的父呈现器使用.
 - 将其 `dirty 位` 设置为 `false`.
+
+RenderingNG [layout engine](https://developer.chrome.com/articles/layoutng)
+generate
+[immutable fragment tree](https://developer.chrome.com/articles/renderingng-data-structures/#the-immutable-fragment-tree)
+and
+[immutable flat list](https://developer.chrome.com/articles/renderingng-data-structures/#inline-fragment-items).
+It helps mitigate layout bugs including:
+
+- [Correctness](https://developer.chrome.com/articles/layoutng/#correctness).
+- [Under-invalidation](https://developer.chrome.com/articles/layoutng/#under-invalidation).
+- [Over-invalidation](https://developer.chrome.com/articles/layoutng/#over-invalidation-and-performance).
+- [Hysteresis](https://developer.chrome.com/articles/layoutng/#hysteresis).
 
 #### RenderingNG Paint Engine
 
@@ -3586,9 +3594,9 @@ draw();
 
 ## Media Session
 
-- [W3C Media Session Specification](https://w3c.github.io/mediasession/)
-- [MDN Media Session Documentation](https://developer.mozilla.org/en-US/docs/Web/API/MediaSession/)
-- [Google Media Session Blog](https://web.dev/media-session/)
+- [W3C Media Session Specification](https://w3c.github.io/mediasession)
+- [MDN Media Session Documentation](https://developer.mozilla.org/en-US/docs/Web/API/MediaSession)
+- [Google Media Session Blog](https://web.dev/media-session)
 
 ## Web Storage
 
