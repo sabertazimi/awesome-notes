@@ -2952,10 +2952,10 @@ Orinoco 优化 (优化全停顿现象):
 
 ## Browser Engine
 
-- Chrome: Blink (based on Webkit) + V8.
-- Firefox: Gecko + SpiderMonkey.
-- Safari: Webkit + JavaScriptCore (Nitro).
+- Chrome: Blink (fork of `WebCore` component from `WebKit`) + V8.
 - Edge: Trident/EdgeHTML + Chakra -> Chromium.
+- Firefox: Gecko + SpiderMonkey.
+- Safari: Webkit (fork of `KHTML` and `KJS` from `KDE`) + JavaScriptCore (Nitro).
 
 ### Browser Process Architecture
 
