@@ -2959,18 +2959,24 @@ Orinoco 优化 (优化全停顿现象):
 
 ### Browser Process Architecture
 
-- 浏览器进程 (Singleton):
+- 浏览器进程:
+  - Singleton.
   - 浏览器界面显示, 提供用户交互, e.g 前进/后退.
   - 子进程管理.
   - 网络资源管理.
   - 存储管理.
-- 网络进程 (Singleton):
-  主要负责页面的网络资源加载.
-- `Viz` GPU 进程 (Singleton):
+- 网络进程:
+  - Singleton.
+  - 主要负责页面的网络资源加载.
+- [`Viz` process](https://developer.chrome.com/articles/renderingng-architecture/#viz-process):
+  - Singleton.
   - 实现 3D CSS, 绘制 UI 界面.
-  - It aggregate compositing from multiple render processes plus the browser process.
-  - It rasters and draws using GPU:
+  - GPU main thread:
+    rasters display lists and video frames into GPU texture tiles,
+    draws compositor frames to screen using GPU,
     Out-of-Process display compositor, raster and iframes (OOP-D, OOP-R, OOPIFs).
+  - Display compositor thread:
+    **aggregates and optimizes** compositing from render processes and browser process.
 - 渲染进程:
   - 核心任务是将 HTML/CSS 和 JavaScript 转换为用户可以与之交互的网页 (页面渲染, 脚本执行, 事件处理).
   - 排版引擎 Blink 和 JavaScript 引擎 V8 都是运行在该进程中.
