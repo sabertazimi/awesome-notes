@@ -3183,6 +3183,12 @@ JavaScript 阻塞了同在主线程的 `Layout` 阶段与 `Paint` 阶段,
 - Every possible scroll is threaded:
   don't have to depend on the JavaScript and layout thread.
 
+#### RenderingNG Animation Performance
+
+[![RenderingNG Transform Animation](./figures/RenderingNGAnimation.webp)](https://developer.chrome.com/articles/renderingng-architecture/#an-example-in-practice)
+
+CSS transform animation only runs on `compositor` thread and `Viz` process.
+
 ### Browser Engine Reference
 
 - Chromium rendering engine: [RenderingNG](https://developer.chrome.com/blog/renderingng).
