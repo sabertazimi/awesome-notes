@@ -3007,7 +3007,8 @@ Orinoco 优化 (优化全停顿现象):
 
 - Animate.
 - Style.
-- Layout.
+- Layout:
+  generate [immutable fragment tree](https://developer.chrome.com/articles/renderingng-data-structures/#the-immutable-fragment-tree).
 - Pre-paint.
 - Scroll.
 - Paint.
