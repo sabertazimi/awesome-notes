@@ -3177,6 +3177,13 @@ JavaScript 阻塞渲染:
 JavaScript 阻塞了同在主线程的 `Layout` 阶段与 `Paint` 阶段,
 间接阻塞了 `compositor` thread 与 `Viz` process 的绘制操作.
 
+#### RenderingNG Video Engine
+
+[![RenderingNG Video Engine](figures/RenderingNGVideoEngine.webp)](https://developer.chrome.com/articles/videong)
+
+- Each video talks directly to `Viz` process:
+  video rendering is largely decoupled from `RenderingNG` main rendering pipeline.
+
 #### RenderingNG Scrolling Performance
 
 - Cached GPU textures and display lists:
