@@ -2991,13 +2991,33 @@ Orinoco 优化 (优化全停顿现象):
 
 ### Chromium Rendering Engine
 
+#### RenderingNG Architecture
+
 [![RenderingNG Architecture](./figures/RenderingNG.webp)](https://developer.chrome.com/articles/renderingng)
 
-#### RenderingNG Goals
+`RenderingNG` key goals:
 
 - [Reliability](https://developer.chrome.com/articles/renderingng/#reliability)
 - [Scalable Performance](https://developer.chrome.com/articles/renderingng/#scalable-performance)
 - [Extensibility](https://developer.chrome.com/articles/renderingng/#extensibility-the-right-tools-for-the-job)
+
+`RenderingNG` key changes:
+
+- Uniform point of entry:
+  always enter the pipeline at the beginning
+  (no longer possible to enter the pipeline starting at an intermediate phase).
+- **Functional** stages:
+  each stage should have well-defined inputs and outputs,
+  and its behavior should be functional.
+- Constant inputs:
+  inputs should be effectively constant while the stage is running.
+- Immutable outputs:
+  outputs should be immutable for the remainder of the rendering update.
+- Checkpoint consistency:
+  rendering data produced thus far should be in a self-consistent state
+  at the end of each stage.
+- De-duplication of work:
+  only compute each thing once.
 
 #### RenderingNG Pipeline
 
@@ -3156,7 +3176,7 @@ pseudo
 - 父呈现器根据子呈现器的累加高度以及边距和补白的高度来设置自身高度, 此值也可供父呈现器的父呈现器使用.
 - 将其 `dirty 位` 设置为 `false`.
 
-RenderingNG [layout engine](https://developer.chrome.com/articles/layoutng)
+`RenderingNG` [layout engine](https://developer.chrome.com/articles/layoutng)
 generate
 [immutable fragment tree](https://developer.chrome.com/articles/renderingng-data-structures/#the-immutable-fragment-tree)
 and
@@ -3211,11 +3231,11 @@ CSS transform animation only runs on `compositor` thread and `Viz` process.
 ### Browser Engine Reference
 
 - Chromium rendering engine: [RenderingNG](https://developer.chrome.com/blog/renderingng).
-- Chromium RenderingNG [architecture](https://developer.chrome.com/blog/renderingng-architecture).
-- Chromium RenderingNG [key data structures](https://developer.chrome.com/blog/renderingng-data-structures).
-- Chromium [video rendering architecture](https://developer.chrome.com/blog/videong).
+- Chromium `RenderingNG` [architecture](https://developer.chrome.com/blog/renderingng-architecture).
+- Chromium `RenderingNG` [key data structures](https://developer.chrome.com/blog/renderingng-data-structures).
+- Chromium [video engine architecture](https://developer.chrome.com/blog/videong).
 - Chromium [layout engine architecture](https://developer.chrome.com/articles/layoutng).
-- Chromium [Blink architecture](https://developer.chrome.com/articles/blinkng).
+- Chromium `Blink` [architecture](https://developer.chrome.com/articles/blinkng).
 - Web platform [tests](https://wpt.fyi).
 
 ## Web Animations
