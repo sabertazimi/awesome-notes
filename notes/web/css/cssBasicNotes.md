@@ -5335,6 +5335,16 @@ Avatar with circle status indicator:
 - [PostCSS Preset Env](https://github.com/csstools/postcss-preset-env)
 - [PostCSS Flexbox Checker](https://github.com/luisrudge/postcss-flexbugs-fixes)
 
+### CSS Vendor Prefix
+
+CSS vendor prefix order:
+
+- `-o-` rule.
+- `-ms-` rule.
+- `-moz-` rule.
+- `-webkit-` rule.
+- Standard rule.
+
 ## StyleLint Tool
 
 - [StyleLint Plugin](https://github.com/kristerkari/stylelint-declaration-block-no-ignored-properties)
