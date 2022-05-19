@@ -5105,7 +5105,7 @@ const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
 }
 ```
 
-### Invalid and Empty Value in CSS Variables
+### Invalid and Empty CSS Variables
 
 - `--invalid-value: initial;` is invalid value
   leading to `var(--invalid-value)` called failed,
@@ -5201,6 +5201,29 @@ html {
   --md-and-up-bg: var(--media-gte-md) green;
 
   background: var(--sm-and-down-bg, var(--md-and-up-bg));
+}
+```
+
+### Dark Mode CSS Variables
+
+```css
+:root {
+  /* Themes */
+  --bg-light: #fff;
+  --text-light: #000;
+  --bg-dark: #000;
+  --text-dark: #fff;
+
+  /* Defaults */
+  --bg: var(--bg-light);
+  --text: var(--text-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--bg-dark);
+    --text: var(--text-dark);
+  }
 }
 ```
 
