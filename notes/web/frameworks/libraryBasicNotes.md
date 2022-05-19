@@ -204,6 +204,7 @@ tags: [Web, Framework, Library]
 
 - [String Manipulation](https://github.com/dleitee/strman)
 - [Fuzzy String Matching](https://github.com/nol13/fuzzball.js)
+- [UrlUnShort: Short Links Expander](https://github.com/nodeca/url-unshort)
 
 #### Glob Utils
 
