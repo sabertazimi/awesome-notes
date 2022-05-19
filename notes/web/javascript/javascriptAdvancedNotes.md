@@ -1916,7 +1916,8 @@ source.addEventListener('copy', event => {
 - `mouseout` event:
   pointer leaves the element or leaves one of the element's descendants.
 - `mouseover` event.
-- `wheel` event (replace deprecated `mousewheel` event).
+- [`wheel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event)
+  event (replace deprecated `mousewheel` event).
 
 For `click` event, no need for X/Y to judge internal/outside state.
 Use `element.contains` to check is a better way.
