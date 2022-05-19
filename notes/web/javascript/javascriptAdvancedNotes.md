@@ -7173,11 +7173,17 @@ Tool for composite stage analysis:
 
 ### Rendering Panel
 
-- re-paint area
-- FPS monitor
-- scroll event
-- paint flashing
-- layout/layer border
+- Re-paint area.
+- FPS monitor.
+- Scroll event.
+- Paint flashing.
+- Layout/layer border.
+- Compositor layer.
+- CSS media query emulation:
+  - `prefers-color-scheme`.
+  - `prefers-reduced-motion`.
+  - `prefers-contrast`.
+  - A11y emulation.
 
 ### Animation Panel
 
