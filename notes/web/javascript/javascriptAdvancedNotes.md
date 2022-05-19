@@ -2007,6 +2007,162 @@ textbox.addEventListener('keyup', event => {
 - `touchend` event.
 - `touchcancel` event.
 
+Use
+[`touch`](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events)
+events:
+
+- Dispatch custom
+  `tap`/`press`/`swipe`/`pinch`/`drag`/`drop`/`rotate` event.
+- Dispatch standard
+  `click`/`dbclick`/mousedown`/`mouseup`/`mousemove` event.
+
+```ts
+interface Pointer {
+  startTouch: Touch;
+  startTime: number;
+  status: string;
+  element: TouchEventTarget;
+  lastTouch?: Touch;
+  lastTime?: number;
+  deltaX?: number;
+  deltaY?: number;
+  duration?: number;
+  distance?: number;
+  isVertical?: boolean;
+}
+
+type TouchEventTarget = HTMLDivElement | EventTarget;
+type TouchEventHandler = (pointer: Pointer, touch: Touch) => void;
+
+class Recognizer {
+  pointers: Map<Touch['identifier'], Pointer>;
+
+  constructor() {
+    this.pointers = new Map();
+  }
+
+  start(event: TouchEvent, callback?: TouchEventHandler) {
+    // touches: 当前屏幕上所有触摸点的列表.
+    // targetTouches: 当前对象上所有触摸点的列表.
+    // changedTouches: 涉及当前事件的触摸点的列表.
+    for (let i = 0; i < event.changedTouches.length; i++) {
+      const touch = event.changedTouches[i];
+      const pointer: Pointer = {
+        startTouch: touch,
+        startTime: Date.now(),
+        status: 'tapping',
+        element: event.target,
+      };
+      this.pointers.set(touch.identifier, pointer);
+      if (callback) callback(pointer, touch);
+    }
+  }
+
+  move(event: TouchEvent, callback?: TouchEventHandler) {
+    for (let i = 0; i < event.changedTouches.length; i++) {
+      const touch = event.changedTouches[i];
+      const pointer = this.pointers.get(touch.identifier);
+
+      if (!pointer) {
+        return;
+      }
+
+      if (!pointer.lastTouch) {
+        pointer.lastTouch = pointer.startTouch;
+        pointer.lastTime = pointer.startTime;
+        pointer.deltaX = 0;
+        pointer.deltaY = 0;
+        pointer.duration = 0;
+        pointer.distance = 0;
+      }
+
+      let time = Date.now() - pointer.lastTime;
+
+      if (time > 0) {
+        const RECORD_DURATION = 70;
+
+        if (time > RECORD_DURATION) {
+          time = RECORD_DURATION;
+        }
+
+        if (pointer.duration + time > RECORD_DURATION) {
+          pointer.duration = RECORD_DURATION - time;
+        }
+
+        pointer.duration += time;
+        pointer.lastTouch = touch;
+        pointer.lastTime = Date.now();
+        pointer.deltaX = touch.clientX - pointer.startTouch.clientX;
+        pointer.deltaY = touch.clientY - pointer.startTouch.clientY;
+        const x = pointer.deltaX * pointer.deltaX;
+        const y = pointer.deltaY * pointer.deltaY;
+        pointer.distance = Math.sqrt(x + y);
+        pointer.isVertical = x < y;
+
+        if (callback) callback(pointer, touch);
+      }
+    }
+  }
+
+  end(event: TouchEvent, callback?: TouchEventHandler) {
+    for (let i = 0; i < event.changedTouches.length; i++) {
+      const touch = event.changedTouches[i];
+      const id = touch.identifier;
+      const pointer = this.pointers.get(id);
+
+      if (!pointer) continue;
+      if (callback) callback(pointer, touch);
+
+      this.pointers.delete(id);
+    }
+  }
+
+  cancel(event: TouchEvent, callback?: TouchEventHandler) {
+    this.end(event, callback);
+  }
+
+  fire(elem: TouchEventTarget, type: string, props: EventInit) {
+    if (elem) {
+      const event = new Event(type, {
+        bubbles: true,
+        cancelable: true,
+        ...props,
+      });
+      elem.dispatchEvent(event);
+    }
+  }
+
+  static bind(el: TouchEventTarget, recognizer: Recognizer) {
+    function move(event: TouchEvent) {
+      recognizer.move(event);
+    }
+
+    function end(event: TouchEvent) {
+      recognizer.end(event);
+      document.removeEventListener('touchmove', move);
+      document.removeEventListener('touchend', end);
+      document.removeEventListener('touchcancel', cancel);
+    }
+
+    function cancel(event: TouchEvent) {
+      recognizer.cancel(event);
+      document.removeEventListener('touchmove', move);
+      document.removeEventListener('touchend', end);
+      document.removeEventListener('touchcancel', cancel);
+    }
+
+    el.addEventListener('touchstart', function (event: TouchEvent) {
+      recognizer.start(event);
+      document.addEventListener('touchmove', move);
+      document.addEventListener('touchend', end);
+      document.addEventListener('touchcancel', cancel);
+    });
+  }
+}
+
+export default Recognizer;
+```
+
 #### Dispatch Events
 
 Dispatch `MouseEvent`:
