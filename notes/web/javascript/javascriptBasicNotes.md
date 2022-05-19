@@ -1351,6 +1351,9 @@ flattenDeep([1, [[2], [3, [4]], 5]]);
 
 `reduce`/`reduceRight`:
 
+- Implement array sets manipulation (`reduce`/`filter`/`includes`).
+- Implement `XXXBy` functional methods.
+
 ```ts
 [].reduce(
   (previous, current, currentIndex, arr) => current + previous,
