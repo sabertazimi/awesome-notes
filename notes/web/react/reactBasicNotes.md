@@ -8244,7 +8244,9 @@ export const useAtomValue = <T>(atom: Atom<T>) => {
     ref.current = true;
     atom.subscribe(ref, setState);
   }
+
   useMount(() => () => atom.unsubscribe(ref));
+
   return state;
 };
 
