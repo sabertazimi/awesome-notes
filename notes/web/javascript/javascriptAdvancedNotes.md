@@ -9119,6 +9119,12 @@ Content-Security-Policy: script-src https://example.com/
 <script src="https://not-example.com/js/library.js"></script>
 ```
 
+### Security HTTP Headers
+
+- [X-Content-Type-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)
+- [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)
+- [X-XSS-Protection](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection)
+
 ### Trusted Types
 
 - TrustedURL.
