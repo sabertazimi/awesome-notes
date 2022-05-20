@@ -52,35 +52,49 @@ tags: [Web, Framework, Library]
 
 ## UI Framework
 
-### Components UI Framework
-
-- [Ant Design](https://github.com/ant-design/ant-design)
-- [Material UI](https://github.com/mui-org/material-ui)
-- [Headless UI](https://github.com/tailwindlabs/headlessui)
-- [Chakra UI](https://github.com/chakra-ui/chakra-ui)
-- [Next UI: Beautiful, Fast and Modern React UI Library](https://github.com/nextui-org/nextui)
-- [Mantine](https://github.com/mantinedev/mantine)
-- [BluePrint](https://github.com/palantir/blueprint)
-- [Desktop: macOS and Windows Style Components](https://github.com/gabrielbull/react-desktop)
-- [AriaKit: Accessible React Components](https://github.com/ariakit/ariakit)
-- [Spectrum: Build Adaptive, Accessible and Robust User Experiences](https://github.com/adobe/react-spectrum)
-- [Reach: Accessible Foundation for React Apps and Design Systems](https://github.com/reach/reach-ui)
-- [Radix: Build High-quality and Accessible Design Systems](https://github.com/radix-ui/primitives)
-
 ### CSS UI Framework
 
-- [Bootstrap](https://github.com/twbs/bootstrap)
+- [Bootstrap.css](https://github.com/twbs/bootstrap)
 - [Pico.css](https://github.com/picocss/pico)
 - [MVP.css](https://github.com/andybrewer/mvp)
 - [NES.css](https://github.com/nostalgic-css/NES.css)
 - [Paper.css](https://github.com/papercss/papercss)
 
+### Utility UI Framework
+
+- [Daisy: Tailwind Components Plugin](https://github.com/saadeghi/daisyui)
+- [Vechai: Tailwind React Library](https://github.com/vechai/vechaiui)
+- [Tailwind](https://github.com/tailwindlabs/tailwindcss)
+- [Form](https://github.com/tailwindlabs/tailwindcss-forms)
+- [Typography](https://github.com/tailwindlabs/tailwindcss-typography)
+- [Aspect Ratio](https://github.com/tailwindlabs/tailwindcss-aspect-ratio)
+- [Line Clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp)
+
+### Headless UI Framework
+
+- [Headless: Completely Unstyled and Fully Accessible Tailwind React Components](https://github.com/tailwindlabs/headlessui)
+- [AriaKit: Accessible React Components](https://github.com/ariakit/ariakit)
+- [Spectrum: Build Adaptive, Accessible and Robust User Experiences](https://github.com/adobe/react-spectrum)
+- [Reach: Accessible Foundation for React Apps and Design Systems](https://github.com/reach/reach-ui)
+- [Radix: Build High-quality and Accessible Design Systems](https://github.com/radix-ui/primitives)
+
+### Components UI Framework
+
+- [Ant Design](https://github.com/ant-design/ant-design)
+- [Material](https://github.com/mui-org/material-ui)
+- [Chakra](https://github.com/chakra-ui/chakra-ui)
+- [Next: Beautiful, Fast and Modern React UI Library](https://github.com/nextui-org/nextui)
+- [Mantine](https://github.com/mantinedev/mantine)
+- [BluePrint](https://github.com/palantir/blueprint)
+- [Geist: Modern Design System](https://github.com/geist-org/geist-ui)
+- [Desktop: macOS and Windows Style Components](https://github.com/gabrielbull/react-desktop)
+
 ### Admin and Dashboard UI Framework
 
-- [AntdPro: Out-of-box UI Solution for Enterprise Applications](https://github.com/ant-design/ant-design-pro)
+- [Ant Design Pro: Out-of-box UI Solution for Enterprise Applications](https://github.com/ant-design/ant-design-pro)
 - [Refine: React-based Framework for Building Internal Tools](https://github.com/pankod/refine)
 - [ReactAdmin: Frontend Framework for Building B2B Applications](https://github.com/marmelab/react-admin)
-- [Vue Admin UI](https://github.com/epicmaxco/vuestic-admin)
+- [Vuestic: Vue Admin Components](https://github.com/epicmaxco/vuestic-admin)
 
 ## Framework and Solution
 
@@ -233,7 +247,6 @@ tags: [Web, Framework, Library]
 ### Hash Utils
 
 - [NanoID](https://github.com/ai/nanoid)
-- [UUID](https://github.com/uuidjs/uuid)
 
 ### Functional Programming Utils
 
@@ -300,8 +313,7 @@ tags: [Web, Framework, Library]
 - [Normalize: Modern Alternative to CSS Resets](https://github.com/necolas/normalize.css)
 - [Sanitize: Best-practices CSS Foundation](https://github.com/csstools/sanitize.css)
 - [Modern: Bare-bones CSS Reset for Modern Web Development](https://github.com/hankchizljaw/modern-css-reset)
-- [Tailwind](https://github.com/tailwindlabs/tailwindcss)
-- [Tailwind Viewer: Local UI Tool for Visualizing Tailwind Configuration](https://github.com/rogden/tailwind-config-viewer)
+- [Tailwind Viewer: Local Tool for Visualizing Tailwind Configuration](https://github.com/rogden/tailwind-config-viewer)
 - [PostCSS Preset: Use Modern CSS](https://github.com/csstools/postcss-preset-env)
 
 ### CSS in JS Utils
