@@ -909,36 +909,26 @@ set termencoding=utf-8
 sudo snap install nvim --classic
 ```
 
-- [LunarVim](https://github.com/LunarVim/LunarVim)
-- [NvChad/MegaChad](https://github.com/NvChad/NvChad)
+[NvChad](https://github.com/NvChad/NvChad):
 
 ```bash
+mv ~/.config/nvim ~/.config/NVIM.BAK
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
+```
+
+[LunarVim](https://github.com/LunarVim/LunarVim):
+
+```bash
+
 git clone https://github.com/LunarVim/LunarVim
 bash LunarVim/utils/installer/install.sh
 ```
 
-```bash
-mv ~/.config/nvim ~/.config/NVIM.BAK
-git clone https://github.com/NvChad/NvChad ~/.config/nvim
-nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
-```
-
 ### NeoVim Language server
 
-[LSPConfig](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md):
-
-```bash
-# html cssls jsonls
-npm i -g vscode-langservers-extracted
-
-# tsserver
-npm i -g typescript typescript-language-server
-
-# volar: Vue SFC
-npm install -g @volar/vue-language-server
-```
-
-[LSPInstall](https://github.com/williamboman/nvim-lsp-installer):
+- [LSP Config](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
+- [LSP Installler](https://github.com/williamboman/nvim-lsp-installer)
 
 ```bash
 :LspInstall typescript
@@ -952,30 +942,29 @@ npm install -g @volar/vue-language-server
 
 ### NvChad Key Mapping
 
-- `<leader>` is set to `<SPACE>`.
-- `<SPACE>ch`: view key mappings.
-- `<SPACE>uu`: update NvChad.
-- `<SPACE>ff`: find files.
-- `<SPACE>/`: comments.
-- `<CTRL>n`: file tree.
-- `<CTRL>h`: switch window.
-- `<CTRL>j`: switch window.
-- `<CTRL>k`: switch window.
-- `<CTRL>l`: switch window.
-- `<TAB>`: switch buffer.
+`<leader>` is set to [`<SPACE>`](https://nvchad.github.io/config/Mappings):
 
 | Key mapping | Action                   | Notes                              |
 | ----------- | ------------------------ | ---------------------------------- |
 | `jk`        | ESC to normal mode       |                                    |
-| `<SHIFT>t`  | open a new buffer        |                                    |
+| `<SHIFT>b`  | open a new buffer        |                                    |
 | `<SPACE>x`  | close current buffer     | (hides a terminal)                 |
 | `<TAB>`     | cycle active buffer      | `<SHIFT><TAB>` for previous buffer |
 | `<CTRL>n`   | open NvimTree explorer   | `<ENTER>` to select                |
-| `<SPACE>ch` | view key mappings        |                                    |
+| `<SPACE>wK` | view key mappings        | `which-key` plugin                 |
 | `<SPACE>uu` | update NvChad            |                                    |
 | `<SPACE>/`  | toggle commenting a line |                                    |
-| `<SPACE>ff` | find a file              | Telescope picker                   |
-| `<SPACE>gs` | git status               | Telescope picker                   |
+| `<SPACE>ff` | find files               | Telescope picker                   |
+| `<SPACE>fo` | find recent files        | Telescope picker                   |
+| `<SPACE>fw` | grep files               | Telescope picker                   |
+| `<SPACE>gt` | git status               | Telescope picker                   |
+| `<CTRL>h`   | switch window            |                                    |
+| `<CTRL>j`   | switch window            |                                    |
+| `<CTRL>k`   | switch window            |                                    |
+| `<CTRL>l`   | switch window            |                                    |
+| `<ALT>i`    | toggle terminal          |                                    |
+| `<ALT>h`    | toggle terminal          |                                    |
+| `<ALT>v`    | toggle terminal          |                                    |
 
 ### NvChad Configuration
 
@@ -989,7 +978,6 @@ npm install -g @volar/vue-language-server
 
 ```lua
 -- ~/.config/nvim/lua/custom/chadrc.lua
-
 vim.g.neoformat_try_node_exe = 1
 
 local M = {}
@@ -1002,8 +990,8 @@ M.ui = {
 }
 
 M.plugins = {
-   default_plugin_config_replace = {
-      nvim_treesitter = {
+   override = {
+      ["nvim-treesitter/nvim-treesitter"] = {
         ensure_installed = {
           "html",
           "css",
@@ -1015,8 +1003,8 @@ M.plugins = {
           "rust",
           "vim",
           "latex",
-          "markdown",
           "jsonc",
+          -- "markdown": disable for markdown due to performance
        },
      }
    },
@@ -1025,9 +1013,20 @@ M.plugins = {
          setup_lspconf = "custom.lspconfig",
       },
    },
-   install = {
-     { "williamboman/nvim-lsp-installer" },
-     { "sbdchd/neoformat" },
+   user = {
+      ["goolord/alpha-nvim"] = {
+         disable = false,
+      },
+      [ "sbdchd/neoformat" ] = {},
+      [ "github/copilot.vim" ] = {},
+   },
+}
+
+M.mappings = {
+   neoformat = {
+      n = {
+         ["<leader>m"] = { "<cmd> Neoformat <CR>", "Format" },
+      },
    }
 }
 
@@ -1042,7 +1041,8 @@ M.setup_lsp = function(attach, capabilities)
    local lspconfig = require "lspconfig"
 
    -- lspservers with default config
-   local servers = { "html", "cssls", "tsserver", "eslint", "stylelint_lsp", "tailwindcss", "volar", "sumneko_lua" }
+   local servers = { "html", "cssls", "tsserver", volar" }
+   -- local servers = { "eslint", "stylelint_lsp", "tailwindcss", "sumneko_lua" }
 
    for _, lsp in ipairs(servers) do
       lspconfig[lsp].setup {
