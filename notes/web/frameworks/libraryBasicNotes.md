@@ -213,7 +213,6 @@ tags: [Web, Framework, Library]
 
 - [HyperFormula: Excel-like Calculation Engine](https://github.com/handsontable/hyperformula)
 - [DanFoJS: High Performance Structured Data Manipulating and Processing](https://github.com/javascriptdata/danfojs)
-- [MathLive: Web Component for LaTeX Math Input](https://github.com/arnog/mathlive)
 
 ### String Utils
 
@@ -562,6 +561,11 @@ tags: [Web, Framework, Library]
 ### Charts Draw Utils
 
 - [iDraw: Simple JavaScript Framework for Drawing on Web](https://github.com/idrawjs/idraw)
+
+### Math
+
+- [MathLive: Web Component for LaTeX Math Input](https://github.com/arnog/mathlive)
+- [MathJax: Beautiful and Accessible Math in All Browsers](https://github.com/mathjax/MathJax)
 
 ### Carousel
 
