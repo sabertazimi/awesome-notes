@@ -1127,6 +1127,7 @@ tags: [Web, Framework, Library]
 - [Espree](https://github.com/eslint/espree)
 - [Esprima](https://github.com/jquery/esprima)
 - [AST Explorer](https://github.com/fkling/astexplorer)
+- [ReactDocGen TypeScript: React TypeScript Components Properties Parser](https://github.com/styleguidist/react-docgen-typescript)
 
 #### Markdown Parser and Render
 
@@ -1517,3 +1518,4 @@ tags: [Web, Framework, Library]
 - [DUmi: Documentation Generator of React Component](https://github.com/umijs/dumi)
 - [Ladle: Faster Storybook](https://github.com/tajo/ladle)
 - [ReactDocGen: Extract React Component Information for Documentation Generation Purposes](https://github.com/reactjs/react-docgen)
+
