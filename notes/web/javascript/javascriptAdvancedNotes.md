@@ -7325,16 +7325,15 @@ Same thing in `VSCode` debug panel (log points, break points etc).
 
 Tool for composite stage analysis:
 
-- layers
+- Compositor layers.
 
 ### Rendering Panel
 
-- Re-paint area.
 - FPS monitor.
 - Scroll event.
-- Paint flashing.
-- Layout/layer border.
-- Compositor layer.
+- Paint flashing area: re-paint area.
+- Compositor layers border.
+- Layout shift region.
 - CSS media query emulation:
   - `prefers-color-scheme`.
   - `prefers-reduced-motion`.
