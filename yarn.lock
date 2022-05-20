@@ -2129,7 +2129,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/theme-common@npm:2.0.0-beta.20":
+"@docusaurus/theme-common@npm:2.0.0-beta.20, @docusaurus/theme-common@npm:^2.0.0-beta.20":
   version: 2.0.0-beta.20
   resolution: "@docusaurus/theme-common@npm:2.0.0-beta.20"
   dependencies:
@@ -2176,7 +2176,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/theme-translations@npm:2.0.0-beta.20":
+"@docusaurus/theme-translations@npm:2.0.0-beta.20, @docusaurus/theme-translations@npm:^2.0.0-beta.20":
   version: 2.0.0-beta.20
   resolution: "@docusaurus/theme-translations@npm:2.0.0-beta.20"
   dependencies:
@@ -2201,20 +2201,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/types@npm:2.0.0-beta.ff31de0ff":
-  version: 2.0.0-beta.ff31de0ff
-  resolution: "@docusaurus/types@npm:2.0.0-beta.ff31de0ff"
-  dependencies:
-    commander: ^5.1.0
-    joi: ^17.4.0
-    querystring: 0.2.0
-    webpack: ^5.37.0
-    webpack-merge: ^5.7.3
-  checksum: 48458c02c953a07acc011f3d99734ff8fdd4b0a9936f43a325309b8f8af21a0d67727d84ae37ed99cfec5c69de2508b02efa0a16dce93c0fc727cde8848d229e
-  languageName: node
-  linkType: hard
-
-"@docusaurus/utils-common@npm:2.0.0-beta.20":
+"@docusaurus/utils-common@npm:2.0.0-beta.20, @docusaurus/utils-common@npm:^2.0.0-beta.20":
   version: 2.0.0-beta.20
   resolution: "@docusaurus/utils-common@npm:2.0.0-beta.20"
   dependencies:
@@ -2223,7 +2210,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils-validation@npm:2.0.0-beta.20":
+"@docusaurus/utils-validation@npm:2.0.0-beta.20, @docusaurus/utils-validation@npm:^2.0.0-beta.20":
   version: 2.0.0-beta.20
   resolution: "@docusaurus/utils-validation@npm:2.0.0-beta.20"
   dependencies:
@@ -2236,19 +2223,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils-validation@npm:^2.0.0-beta.4":
-  version: 2.0.0-beta.ff31de0ff
-  resolution: "@docusaurus/utils-validation@npm:2.0.0-beta.ff31de0ff"
-  dependencies:
-    "@docusaurus/utils": 2.0.0-beta.ff31de0ff
-    chalk: ^4.1.1
-    joi: ^17.4.0
-    tslib: ^2.1.0
-  checksum: b9edad2b0ca8986bc8ce911c4bc2df5e60ecb32b533443e16441f97e52aa278f6291104bf86668752887184e53e1b348ea61d6d73f16c2289766b433f1459bab
-  languageName: node
-  linkType: hard
-
-"@docusaurus/utils@npm:2.0.0-beta.20":
+"@docusaurus/utils@npm:2.0.0-beta.20, @docusaurus/utils@npm:^2.0.0-beta.20":
   version: 2.0.0-beta.20
   resolution: "@docusaurus/utils@npm:2.0.0-beta.20"
   dependencies:
@@ -2271,23 +2246,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils@npm:2.0.0-beta.ff31de0ff, @docusaurus/utils@npm:^2.0.0-beta.4":
-  version: 2.0.0-beta.ff31de0ff
-  resolution: "@docusaurus/utils@npm:2.0.0-beta.ff31de0ff"
-  dependencies:
-    "@docusaurus/types": 2.0.0-beta.ff31de0ff
-    "@types/github-slugger": ^1.3.0
-    chalk: ^4.1.1
-    escape-string-regexp: ^4.0.0
-    fs-extra: ^10.0.0
-    gray-matter: ^4.0.3
-    lodash: ^4.17.20
-    resolve-pathname: ^3.0.0
-    tslib: ^2.2.0
-  checksum: 0aad6e43ba9d72da72d7b494e5792845b9c9fe7c9cefcae13e51717f4f576fd87815dd05df880e7f9d235af883ade0162c1b1083c41290aae7022f1eef4ee2c4
-  languageName: node
-  linkType: hard
-
 "@easyops-cn/autocomplete.js@npm:^0.38.1":
   version: 0.38.1
   resolution: "@easyops-cn/autocomplete.js@npm:0.38.1"
@@ -2298,24 +2256,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@easyops-cn/docusaurus-search-local@npm:^0.23.2":
-  version: 0.23.2
-  resolution: "@easyops-cn/docusaurus-search-local@npm:0.23.2"
+"@easyops-cn/docusaurus-search-local@npm:^0.25.0":
+  version: 0.25.0
+  resolution: "@easyops-cn/docusaurus-search-local@npm:0.25.0"
   dependencies:
-    "@docusaurus/utils": ^2.0.0-beta.4
-    "@docusaurus/utils-validation": ^2.0.0-beta.4
+    "@docusaurus/theme-common": ^2.0.0-beta.20
+    "@docusaurus/theme-translations": ^2.0.0-beta.20
+    "@docusaurus/utils": ^2.0.0-beta.20
+    "@docusaurus/utils-common": ^2.0.0-beta.20
+    "@docusaurus/utils-validation": ^2.0.0-beta.20
     "@easyops-cn/autocomplete.js": ^0.38.1
     "@node-rs/jieba": ^1.6.0
     cheerio: ^1.0.0-rc.3
     clsx: ^1.1.1
     debug: ^4.2.0
-    fs-extra: ^9.0.1
+    fs-extra: ^10.0.0
     klaw-sync: ^6.0.0
     lunr: ^2.3.9
     lunr-languages: ^1.4.0
     mark.js: ^8.11.1
-    tslib: ^2.2.0
-  checksum: 9f4ed6372e32e812ec86e6af6ebca8d28af71bcd9f5b638e46b6c8bb5e23b74be194851f5c2a0ca331b79ba6d738a48f1976ac5d0f132aab66177bd8800c0145
+    tslib: ^2.4.0
+  checksum: 151117bce41c7b087e5391a24d6cc9b25324cc3f97b6bb59af837c1ef0c3cbfd39750521df7fd307ba056bb46a2d87426baeb071b8335c8a315d30f6064c6465
   languageName: node
   linkType: hard
 
@@ -2986,13 +2947,6 @@ __metadata:
     "@types/qs": "*"
     "@types/serve-static": "*"
   checksum: 12a2a0e6c4b993fc0854bec665906788aea0d8ee4392389d7a98a5de1eefdd33c9e1e40a91f3afd274011119c506f7b4126acb97fae62ae20b654974d44cba12
-  languageName: node
-  linkType: hard
-
-"@types/github-slugger@npm:^1.3.0":
-  version: 1.3.0
-  resolution: "@types/github-slugger@npm:1.3.0"
-  checksum: 6561f26814d7c6bf619b1abfba07930ddc2f71e1e1d58a03c20852fd4086ec17f8ee98a44a8ac77ba917c0ff7052cd3fe74071fba59bd526dff8a3a980e2e528
   languageName: node
   linkType: hard
 
@@ -3978,7 +3932,7 @@ __metadata:
     "@docusaurus/core": 2.0.0-beta.20
     "@docusaurus/module-type-aliases": 2.0.0-beta.20
     "@docusaurus/preset-classic": 2.0.0-beta.20
-    "@easyops-cn/docusaurus-search-local": ^0.23.2
+    "@easyops-cn/docusaurus-search-local": ^0.25.0
     "@tsconfig/docusaurus": ^1.0.5
     ci-info: ^3.3.1
     eslint: ^8.15.0
@@ -4482,7 +4436,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.1, chalk@npm:^4.1.2":
+"chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.2":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
   dependencies:
@@ -7095,7 +7049,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^9.0.0, fs-extra@npm:^9.0.1":
+"fs-extra@npm:^9.0.0":
   version: 9.1.0
   resolution: "fs-extra@npm:9.1.0"
   dependencies:
@@ -8592,7 +8546,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"joi@npm:^17.4.0, joi@npm:^17.6.0":
+"joi@npm:^17.6.0":
   version: 17.6.0
   resolution: "joi@npm:17.6.0"
   dependencies:
@@ -11150,13 +11104,6 @@ fsevents@~2.3.2:
   dependencies:
     side-channel: ^1.0.4
   checksum: 0fac5e6c7191d0295a96d0e83c851aeb015df7e990e4d3b093897d3ac6c94e555dbd0a599739c84d7fa46d7fee282d94ba76943983935cf33bba6769539b8019
-  languageName: node
-  linkType: hard
-
-"querystring@npm:0.2.0":
-  version: 0.2.0
-  resolution: "querystring@npm:0.2.0"
-  checksum: 8258d6734f19be27e93f601758858c299bdebe71147909e367101ba459b95446fbe5b975bf9beb76390156a592b6f4ac3a68b6087cea165c259705b8b4e56a69
   languageName: node
   linkType: hard
 
@@ -13977,7 +13924,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"webpack-merge@npm:^5.7.3, webpack-merge@npm:^5.8.0":
+"webpack-merge@npm:^5.8.0":
   version: 5.8.0
   resolution: "webpack-merge@npm:5.8.0"
   dependencies:
@@ -14004,7 +13951,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.37.0, webpack@npm:^5.72.0":
+"webpack@npm:^5.72.0":
   version: 5.72.0
   resolution: "webpack@npm:5.72.0"
   dependencies:
