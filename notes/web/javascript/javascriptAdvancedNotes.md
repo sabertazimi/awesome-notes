@@ -9291,6 +9291,7 @@ Content-Security-Policy: script-src https://example.com/
 - [X-Content-Type-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)
 - [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)
 - [X-XSS-Protection](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection)
+- [Helmet: Secure Express Apps with Various HTTP Headers](https://github.com/helmetjs/helmet)
 
 ### Trusted Types
 

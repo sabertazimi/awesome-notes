@@ -1219,6 +1219,7 @@ tags: [Web, Framework, Library]
 - [Morgan: Express Official Logger](https://github.com/expressjs/morgan)
 - [Pino: Super Fast, All Natural JSON Logger](https://github.com/pinojs/pino)
 - [HTTP Proxy](https://github.com/chimurai/http-proxy-middleware)
+- [Helmet: Secure Express Apps with Various HTTP Headers](https://github.com/helmetjs/helmet)
 - [Express Rate Limiter](https://github.com/nfriedly/express-rate-limit)
 - [Node Rate Limier](https://github.com/animir/node-rate-limiter-flexible)
 - [Graceful Shutdown](https://github.com/godaddy/terminus)
