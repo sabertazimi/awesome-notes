@@ -1042,15 +1042,12 @@ M.setup_lsp = function(attach, capabilities)
    local lspconfig = require "lspconfig"
 
    -- lspservers with default config
-   local servers = { "html", "cssls", "tsserver", "volar", "rust_analyzer" }
+   local servers = { "html", "cssls", "tsserver", "eslint", "stylelint_lsp", "tailwindcss", "volar", "sumneko_lua" }
 
    for _, lsp in ipairs(servers) do
       lspconfig[lsp].setup {
          on_attach = attach,
          capabilities = capabilities,
-         flags = {
-            debounce_text_changes = 150,
-         },
       }
    end
 end
