@@ -11428,6 +11428,75 @@ class SnapshotSandbox {
 - Callback registration.
 - Global store.
 
+## Low-Code Development
+
+### Low-Code Components
+
+利用静态解析 (`react-docgen-typescript`) 与动态解析 (`parse-prop-types`)
+从原始组件生成属性文件, 匹配低代码物料协议
+[`assets.json`](https://github.com/alibaba/lowcode-engine/blob/main/packages/types/src/assets.ts),
+从而将原始组件转化为低代码组件.
+
+![Low-Code Components](./figures/LowCodeComponents.png)
+
+### Low-Code Editor
+
+低代码编辑器目标:
+
+- Layout :低代码组件布局设置.
+- Configure: 低代码组件属性设置.
+- Interactive: 低代码组件逻辑设置.
+
+低代码编辑器功能:
+
+- 容器节点功能.
+- 节点设置功能.
+- 节点增删功能.
+- 节点移动功能:
+  通过 `__reactInternalInstance$` 找到组件对应的 `fiberNode`,
+  通过 `fiberNode` 上的 `stateNode` 获取 DOM 实例,
+  调用 `getBoundingClientRect` 得到具体位置信息,
+  实现拖拽定位功能.
+- 节点在画布上的辅助功能: e.g `hover`/`select`/`resize`/`drag`/`drop`.
+- 设计态和渲染态的坐标系转换: e.g 滚动监听.
+- 快捷键功能.
+- 历史功能: 撤销和重做.
+- 结构化的插件扩展功能.
+- 原地编辑功能.
+
+![Low-Code Editor](./figures/LowCodeEditor.png)
+
+经过 `Editor` 设置后, 生成符合业务需求的
+[`schema.json`](https://github.com/alibaba/lowcode-engine/blob/main/packages/types/src/schema.ts):
+
+- 项目模型 (`Project`).
+- 文档模型 (`DocumentModel`).
+- 节点模型 (`Node`):
+  - `ReactElement` 变种.
+  - 管理 `Props`/`Node` tree.
+  - 操作 `schema.json` 的最低粒度.
+- 属性模型 (`Prop`):
+  - `ReactProp` 变种.
+  - 每一个 `Prop` 对应 `schema.json` `props` 的一个字段.
+
+一个 `Project` 包含若干个 `DocumentModel` 实例,
+每个 `DocumentModel` 包含一组 `Node` 构成一颗树,
+每个 `Node` 通过 `Props` 实例管理所有 `Prop`:
+
+![Low-Code Schema](./figures/LowCodeSchema.png)
+
+### Low-Code Renderer
+
+`低代码渲染`: 将 `schema.json` 通过 `Renderer` 渲染生成业务页面.
+
+### Low-Code Generator
+
+`低代码出码`: 将 `schema.json` 通过 `Generator` 转化生成业务代码.
+
+### Low-Code Reference
+
+- [Low-Code Engine Technical White Paper](https://developer.aliyun.com/ebook/7507)
+
 ## Interviews
 
 - [React Interview Questions](https://github.com/semlinker/reactjs-interview-questions)

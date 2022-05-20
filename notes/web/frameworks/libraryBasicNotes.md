@@ -127,7 +127,7 @@ tags: [Web, Framework, Library]
 - [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify)
 - [Sails: Realtime MVC Framework](https://github.com/balderdashy/sails)
 - [RedWood: App Framework for Startups](https://github.com/redwoodjs/redwood)
-- [Amplication: Low Code but High Quality Node.js Applications](https://github.com/amplication/amplication)
+- [Amplication: Low-Code but High Quality Node.js Applications](https://github.com/amplication/amplication)
 - [LoopBack: Build Modern API Applications](https://github.com/loopbackio/loopback-next)
 
 ### Headless CMS
@@ -479,7 +479,7 @@ tags: [Web, Framework, Library]
 - [React JSON Schema Form](https://github.com/rjsf-team/react-jsonschema-form)
 - [Vue FormKit](https://github.com/formkit/formkit)
 - [Formily: Alibaba Unified Form Solution for React and Vue](https://github.com/alibaba/formily)
-- [XRender: Alibaba Low Code Form/Table/Chart Render](https://github.com/alibaba/x-render)
+- [XRender: Alibaba Low-Code Form/Table/Chart Render](https://github.com/alibaba/x-render)
 - [Form Boilerplate](https://github.com/andybelldesign/boilerform)
 
 #### Input
@@ -924,12 +924,13 @@ tags: [Web, Framework, Library]
 - [Theia: Cloud IDE framework](https://github.com/eclipse-theia/theia)
 - [Utopia: React IDE](https://github.com/concrete-utopia/utopia)
 
-### Low Code Editor
+### Low-Code Editor
 
 - [LowCodeEngine: Enterprise-class Low-code Technology Stack](https://github.com/alibaba/lowcode-engine)
+- [TMagic: Tencent Low-Code Editor](https://github.com/Tencent/tmagic-editor)
 - [ToolJet: Extensible Low-code Framework for Building Business Applications](https://github.com/ToolJet/ToolJet)
-- [AppSmith: Low Code Project to Build Admin Panels, Internal Tools, and Dashboards](https://github.com/appsmithorg/appsmith)
-- [TMagic: Tencent Low Code Editor](https://github.com/Tencent/tmagic-editor)
+- [AppSmith: Low-Code Project to Build Admin Panels, Internal Tools, and Dashboards](https://github.com/appsmithorg/appsmith)
+- [BuildBase: Low-code Platform for Creating Internal Apps, Workflows, and Admin Panels](https://github.com/Budibase/budibase)
 
 ### Clipboard
 
