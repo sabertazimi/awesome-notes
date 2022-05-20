@@ -10829,6 +10829,7 @@ npx webpack --mode production --profile --json > stats.json
 - [UglifyJS Terser Plugin](https://github.com/webpack-contrib/terser-webpack-plugin)
 - [JavaScript Obfuscator](https://github.com/javascript-obfuscator/webpack-obfuscator)
 - [Circular Dependency Plugin](https://github.com/aackerman/circular-dependency-plugin)
+- [TypeScript React Components Properties Parser](https://github.com/hipstersmoothie/react-docgen-typescript-plugin)
 
 #### Webpack CSS Plugins
 
@@ -10859,14 +10860,12 @@ npx webpack --mode production --profile --json > stats.json
 
 Webpack 5 support out of box cache.
 
-#### Webpack Other Plugins
+#### Webpack Misc Plugins
 
-- Commons Chunk Plugin
 - PreLoad plugin
 - PreFetch plugin
 - Define Plugin
 - Provide Plugin
-- CleanUp Plugin
 - [Webpack Merge](https://github.com/survivejs/webpack-merge)
 
 #### Webpack Custom Plugin
