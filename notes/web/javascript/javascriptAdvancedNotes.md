@@ -2642,7 +2642,8 @@ const elems = document.getElementsByTagNameNS(
 
 - Create global object (`window`).
 - Create `this` object (refer to `window`).
-- Declare and initialize variable/function (`undefined`), setup memory space for them.
+- Declare and initialize variable/function (`undefined`),
+  setup memory space for them.
 
 #### Function Execution Context
 

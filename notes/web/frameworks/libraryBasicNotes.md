@@ -881,6 +881,8 @@ tags: [Web, Framework, Library]
 - [Lexical: Draft.js alternatives](https://github.com/facebook/lexical)
 - [Draft: React Text Editor Framework](https://github.com/facebook/draft-js)
 - [Draft Plugins](https://github.com/draft-js-plugins/draft-js-plugins)
+- [TipTap: Collaborative and Headless WYSIWYG Text Editor Framework](https://github.com/ueberdosis/tiptap)
+- [ProseMirror: Collaborative and Semantic Rich Text Editing](https://github.com/ProseMirror/prosemirror-view)
 
 ### Markdown Editor
 
