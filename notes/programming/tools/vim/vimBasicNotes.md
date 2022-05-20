@@ -928,7 +928,7 @@ bash LunarVim/utils/installer/install.sh
 ### NeoVim Language server
 
 - [LSP Config](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
-- [LSP Installler](https://github.com/williamboman/nvim-lsp-installer)
+- [LSP Installer](https://github.com/williamboman/nvim-lsp-installer)
 
 ```bash
 :LspInstall typescript

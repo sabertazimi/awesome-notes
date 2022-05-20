@@ -72,7 +72,7 @@ tags: [Web, Framework, Library]
 
 ### Headless UI Framework
 
-- [Headless: Completely Unstyled and Fully Accessible Tailwind React Components](https://github.com/tailwindlabs/headlessui)
+- [Headless: Completely Un-styled and Fully Accessible Tailwind React Components](https://github.com/tailwindlabs/headlessui)
 - [AriaKit: Accessible React Components](https://github.com/ariakit/ariakit)
 - [Spectrum: Build Adaptive, Accessible and Robust User Experiences](https://github.com/adobe/react-spectrum)
 - [Reach: Accessible Foundation for React Apps and Design Systems](https://github.com/reach/reach-ui)
