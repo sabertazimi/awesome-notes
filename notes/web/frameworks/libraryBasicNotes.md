@@ -612,6 +612,7 @@ tags: [Web, Framework, Library]
 - [Atropos: 3D Parallax Effects](https://github.com/nolimits4web/atropos)
 - [Snap: Scroll Snap Utils](https://github.com/lucafalasco/scroll-snap)
 - [ScrollEX: Build Beautiful Scroll Experiences](https://github.com/malerba118/scrollex)
+- [PushIn: Dolly or PushIn Effect when User scrolls](https://github.com/nateplusplus/pushin)
 
 ### Mouse and Touch Utils
 
