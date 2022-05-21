@@ -5035,6 +5035,48 @@ const root = document.documentElement;
 const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
 ```
 
+Change `--cursor-x` and `--cursor-y` via `JavaScript` API:
+
+```css
+:root::before {
+  position: fixed;
+  z-index: 1000;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  content: '';
+  background: radial-gradient(
+    circle 16vmax at var(--cursor-x) var(--cursor-y),
+    rgb(0 0 0 / 0%) 0%,
+    rgb(0 0 0 / 50%) 80%,
+    rgb(0 0 0 / 80%) 100%
+  );
+}
+```
+
+Change `--percent` via `JavaScript` API:
+
+```css
+.bar {
+  display: flex;
+  height: 20px;
+  background-color: #f5f5f5;
+}
+
+.bar::before {
+  display: flex;
+  justify-content: end;
+  width: calc(var(--percent) * 1%);
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
+  content: counter(progress) '%\2002';
+  counter-reset: progress var(--percent);
+  background: #2486ff;
+}
+```
+
 ### Scope Variables
 
 ```html
