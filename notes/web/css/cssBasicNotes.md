@@ -2500,23 +2500,23 @@ whether and when it is downloaded and ready to use:
 ```
 
 ```css
-.mi: {
+.mi {
   font-family: Arial, 'Microsoft YaHei', '黑体', '宋体', sans-serif;
 }
 
-.tao: {
+.tao {
   font: 12px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif;
 }
 
-.one-plus: {
+.one-plus {
   font: 14px/1.5 'Microsoft YaHei', Arial, Tahoma, '\5b8b\4f53', sans-serif;
 }
 
-.tao-ued: {
+.tao-ued {
   font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
 }
 
-.tao-ux: {
+.tao-ux {
   font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑',
     Arial, sans-serif;
 }
