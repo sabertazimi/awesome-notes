@@ -665,7 +665,9 @@ button:focus:not(:focus-visible) {
 }
 ```
 
-- `::before` 与 `::after`: 使用 content 属性生成额外的内容并插入在标记中.
+#### Before and After Pseudo Element Selectors
+
+使用 content 属性生成额外的内容并插入在标记中:
 
 ```css
 a::after {
@@ -673,7 +675,7 @@ a::after {
 }
 ```
 
-attr() – 调用当前元素的属性
+attr() – 调用当前元素的属性:
 
 ```css
 a::after {
@@ -685,7 +687,7 @@ b::after {
 }
 ```
 
-url() / uri() – 用于引用媒体文件
+url() / uri() – 用于引用媒体文件:
 
 ```css
 h1::before {
@@ -693,7 +695,9 @@ h1::before {
 }
 ```
 
-counter() – 调用计数器, 可以不使用列表元素实现序号功能,配合 CSS3 中`counter-increment`和`counter-reset`属性
+`counter()` -
+调用计数器, 可以不使用列表元素实现序号功能,
+配合 CSS3 中`counter-increment`和`counter-reset`属性:
 
 ```css
 h2::before {
@@ -725,83 +729,6 @@ h2::before {
 60: CSS
 61: JS
 output -->
-```
-
-Nested counters:
-
-```css
-ol {
-  list-style-type: none;
-  counter-reset: section; /* 为每个ol元素创建新的计数器实例 */
-}
-
-li::before {
-  content: counters(section, '.') ' '; /* 为所有计数器实例增加以`.`分隔的值 */
-  counter-increment: section; /* 只增加计数器的当前实例 */
-}
-```
-
-```html
-<ol>
-  <li>item</li>
-  <!-- 1     -->
-  <li>
-    item
-    <!-- 2     -->
-    <ol>
-      <li>item</li>
-      <!-- 2.1   -->
-      <li>item</li>
-      <!-- 2.2   -->
-      <li>
-        item
-        <!-- 2.3   -->
-        <ol>
-          <li>item</li>
-          <!-- 2.3.1 -->
-          <li>item</li>
-          <!-- 2.3.2 -->
-        </ol>
-        <ol>
-          <li>item</li>
-          <!-- 2.3.1 -->
-          <li>item</li>
-          <!-- 2.3.2 -->
-          <li>item</li>
-          <!-- 2.3.3 -->
-        </ol>
-      </li>
-      <li>item</li>
-      <!-- 2.4   -->
-    </ol>
-  </li>
-  <li>item</li>
-  <!-- 3     -->
-  <li>item</li>
-  <!-- 4     -->
-</ol>
-<ol>
-  <li>item</li>
-  <!-- 1     -->
-  <li>item</li>
-  <!-- 2     -->
-</ol>
-```
-
-[利用伪类画额外图形](https://css-tricks.com/examples/ShapesOfCSS):
-
-```css
-.first-details-intro::after {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  width: 0;
-  height: 0;
-  content: '';
-  border-top: 15px solid transparent;
-  border-right: 25px solid #fff;
-  border-bottom: 15px solid transparent;
-}
 ```
 
 ### Focusable Selectors
@@ -1988,6 +1915,14 @@ whether and when it is downloaded and ready to use:
 华文新魏: STXinwei
 ```
 
+## CSS Content
+
+`content` replaces an element with a generated value:
+
+- Objects inserted are `Anonymous Replaced Elements`.
+- CSS-generated content is not included in the DOM,
+  will not be represented in `accessiblility tree`.
+
 ## CSS Counter
 
 Adjust the appearance of content based on its location in a document.
@@ -2005,6 +1940,67 @@ h3::before {
   content: counter(section);
   counter-increment: section;
 }
+```
+
+Nested counters:
+
+```css
+ol {
+  list-style-type: none;
+  counter-reset: section; /* 为每个ol元素创建新的计数器实例 */
+}
+
+li::before {
+  content: counters(section, '.') ' '; /* 为所有计数器实例增加以`.`分隔的值 */
+  counter-increment: section; /* 只增加计数器的当前实例 */
+}
+```
+
+```html
+<ol>
+  <li>item</li>
+  <!-- 1     -->
+  <li>
+    item
+    <!-- 2     -->
+    <ol>
+      <li>item</li>
+      <!-- 2.1   -->
+      <li>item</li>
+      <!-- 2.2   -->
+      <li>
+        item
+        <!-- 2.3   -->
+        <ol>
+          <li>item</li>
+          <!-- 2.3.1 -->
+          <li>item</li>
+          <!-- 2.3.2 -->
+        </ol>
+        <ol>
+          <li>item</li>
+          <!-- 2.3.1 -->
+          <li>item</li>
+          <!-- 2.3.2 -->
+          <li>item</li>
+          <!-- 2.3.3 -->
+        </ol>
+      </li>
+      <li>item</li>
+      <!-- 2.4   -->
+    </ol>
+  </li>
+  <li>item</li>
+  <!-- 3     -->
+  <li>item</li>
+  <!-- 4     -->
+</ol>
+<ol>
+  <li>item</li>
+  <!-- 1     -->
+  <li>item</li>
+  <!-- 2     -->
+</ol>
 ```
 
 ## CSS Border
@@ -5663,6 +5659,24 @@ Use pseudo elements to construct circle and line:
 - pseudo elements.
 
 > [CSSIcon](https://github.com/wentin/cssicon): Pure CSS Icons
+
+#### Pseudo Element Shape
+
+[利用伪类画额外图形](https://css-tricks.com/examples/ShapesOfCSS):
+
+```css
+.first-details-intro::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 0;
+  height: 0;
+  content: '';
+  border-top: 15px solid transparent;
+  border-right: 25px solid #fff;
+  border-bottom: 15px solid transparent;
+}
+```
 
 #### Stretch Line
 
