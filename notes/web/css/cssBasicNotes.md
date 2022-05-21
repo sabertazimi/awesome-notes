@@ -979,8 +979,6 @@ if `height` of parent is `auto`, it's not working.
 - parent and it's first/last child: up with up (bottom with bottom).
 - empty block: margin-top with margin-bottom.
 
-Best Practice: only use `margin-bottom: 1em/1rem` for spacing.
-
 ## Position Patterns
 
 ### Static Position
@@ -1091,9 +1089,8 @@ Floating wont work inside fixed or absolute `div` unless specify width:
 
 ### Float ClearFix
 
-**Best Practice**:
 为父容器 (`.row`) 添加 `.clearfix`,
-`display: table` 防止外边距塌陷, `clear: both` 清除浮动.
+`display: table` 防止外边距塌陷, `clear: both` 清除浮动:
 
 ```css
 .row {
@@ -1117,39 +1114,20 @@ Floating wont work inside fixed or absolute `div` unless specify width:
 }
 ```
 
-### Float Patterns Best Practice
+### Shape Outside
 
-- 段中部分元素浮动(结合 margin/padding), 可实现内嵌效果
-- 分栏布局
-- `shape-outside` provides a way to customize wrapping,
-  making it possible to wrap text around complex objects rather than simple boxes.
+`shape-outside` provides a way to customize wrapping,
+making it possible to wrap text around complex objects rather than simple boxes:
 
 ```css
 shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 ```
 
-## Inline Patterns
-
-Inline Element 与父元素下边缘存在空隙,
-原因在于文字排版的基线对齐机制 (`vertical-align`).
-
-在标准模式中,
-Inline Formatting Context 总是会包含类似字母 'g'/'f' 尾巴伸出部分空间 (针对下行字母),
-即使 Inline BFC 中没有任何内容.
-`<img>`/`<a>` Inline Element 与父元素底部若干像素间隙,
-实际上是此种情况下的**字母尾巴**预留机制.
-
-清除间隙的方法 (`img` image 5px problem):
-
-- 父元素 `font-size: 0` / `line-height: 0`: 设置 Inline Formatting Context 高度为 0.
-- `vertical-align: bottom`: 改变基线对齐方式.
-- `display: block`: 转换为 Block Formatting Context.
-
 ## Flex Patterns
 
 [Flexbox Complete Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox)
 
-### Flex Under the Hood
+### Flex Box Width
 
 当 `flex-basis` 设置为 `auto`
 且 `width` 或者 (`height`) 不为`auto`时,
@@ -1160,6 +1138,35 @@ Inline Formatting Context 总是会包含类似字母 'g'/'f' 尾巴伸出部分
 - When there is not enough space:
   true width = `flex-basis` - `flex-shrink`/sum of `flex-shrink`.
 - Text nodes and pseudo-elements can be flex children.
+
+```css
+.container {
+  display: flex;
+}
+
+.initial {
+  /* width: 100px~200px */
+  flex: initial;
+  width: 200px;
+  min-width: 100px;
+}
+
+.none {
+  /* width: 200px */
+  flex: none;
+  width: 200px;
+}
+
+.flex1 {
+  /* width: left width * 1/3 */
+  flex: 1;
+}
+
+.flex2 {
+  /* width: left width * 2/3 */
+  flex: 2;
+}
+```
 
 ### Flex Useful Shorthand
 
@@ -1218,7 +1225,9 @@ Common flex attributes:
 - `align-self: auto/flex-start/flex-end/center/baseline/stretch;`.
 - `order: number;` 显示顺序.
 
-### Flexibility of Float and Alignment
+### Flex Float and Alignment
+
+Alignment with `margin`:
 
 ```html
 <div class="parent">
@@ -1234,6 +1243,31 @@ Common flex attributes:
 .child {
   /* this will push child to the right of parent border */
   margin-left: auto;
+}
+```
+
+### Flex Centering
+
+```css
+/* 子元素全部居中对齐 */
+.vertical-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+```
+
+```css
+.layer {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 5px;
+  background-color: #fff;
+  border: 1px solid #000;
 }
 ```
 
@@ -1253,7 +1287,7 @@ will change width of pseudo elements.
 }
 ```
 
-### Fixed Sidebar with Flexbox
+### Fixed Sidebar Flexbox
 
 ```html
 <body>
@@ -1279,63 +1313,9 @@ main {
 }
 ```
 
-### Flexbox Best Practice
-
-```css
-.container {
-  display: flex;
-}
-
-.initial {
-  /* width: 100px~200px */
-  flex: initial;
-  width: 200px;
-  min-width: 100px;
-}
-
-.none {
-  /* width: 200px */
-  flex: none;
-  width: 200px;
-}
-
-.flex1 {
-  /* width: left width * 1/3 */
-  flex: 1;
-}
-
-.flex2 {
-  /* width: left width * 2/3 */
-  flex: 2;
-}
-```
-
-```css
-/* 子元素全部居中对齐 */
-.vertical-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-}
-```
-
-```css
-.layer {
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: flex-start;
-  margin: 5px;
-  background-color: #fff;
-  border: 1px solid #000;
-}
-```
-
 ## Grid Patterns
 
-[Grid Complete Guide](https://css-tricks.com/snippets/css/complete-guide-grid)
+[Grid Complete Guide](https://css-tricks.com/snippets/css/complete-guide-grid):
 
 ```css
 .container {
@@ -1369,7 +1349,7 @@ main {
 }
 ```
 
-Responsive `grid` layout
+### Responsive Grid Layout
 
 ```css
 .items {
@@ -1404,10 +1384,10 @@ _named_ rows and columns
 }
 ```
 
-### Grid Attention Tips
+### Grid Column and Row
 
-- `grid-column` will refactor template of `grid` (`grid-template-columns`)
-- `grid-row` will refactor template of `grid` (`grid-template-rows`)
+- `grid-column` will refactor template of `grid` (`grid-template-columns`).
+- `grid-row` will refactor template of `grid` (`grid-template-rows`).
 
 ### Grid Alignment
 
@@ -1635,6 +1615,398 @@ In positioning/sizing/margin/padding/border/text alignment:
 - [W3C CSS Logical Draft](https://drafts.csswg.org/css-logical)
 - [CSS Tricks CSS Logical Guide](https://css-tricks.com/css-logical-properties-and-values)
 
+## Inline Patterns
+
+Inline Element 与父元素下边缘存在空隙,
+原因在于文字排版的基线对齐机制 (`vertical-align`).
+
+在标准模式中,
+Inline Formatting Context 总是会包含类似字母 'g'/'f' 尾巴伸出部分空间 (针对下行字母),
+即使 Inline BFC 中没有任何内容.
+`<img>`/`<a>` Inline Element 与父元素底部若干像素间隙,
+实际上是此种情况下的**字母尾巴**预留机制.
+
+清除间隙的方法 (`img` image 5px problem):
+
+- 父元素 `font-size: 0` / `line-height: 0`: 设置 Inline Formatting Context 高度为 0.
+- `vertical-align: bottom`: 改变基线对齐方式.
+- `display: block`: 转换为 Block Formatting Context.
+
+## CSS Text
+
+```css
+.text {
+  text-align: center;
+  text-decoration: underline/line-through; /* 下划线与删除线 */
+}
+
+.paragraph {
+  line-height: 1.5em; /* 行间距  */
+  text-indent: 2em; /* 段落缩进 */
+  letter-spacing: 50px; /* 字间距  */
+  word-spacing: 50px; /* 词间距  */
+}
+```
+
+### Text Alignment
+
+justify: 自适应, 左右都无空格
+
+```css
+.wrap {
+  text-align: justify;
+  text-align-last: justify; /* 一个块或行的最后一行对齐方式 */
+  text-justify: distribute-all-lines; /* ie6-8 */
+}
+```
+
+### Text Overflow
+
+- clip 切除溢出部分
+- ellipsis 省略号标志 (要设定 width)
+
+```css
+.truncation-article-container {
+  width: 500px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+```
+
+```css
+.article-container {
+  display: box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* 需要显示的行数 */
+}
+```
+
+### Text Wrap
+
+[Text wrapping and word breaking](https://codersblock.com/blog/deep-dive-into-text-wrapping-and-word-breaking):
+
+```css
+/* 不换行 */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* 自动换行 */
+.auto-wrap {
+  word-break: normal;
+  word-wrap: break-word;
+}
+
+/* 自动换行 */
+pre {
+  word-wrap: break-word; /* IE 5.5-7 */
+  white-space: pre-wrap; /* Modern Browsers */
+}
+
+/* 强制换行 */
+.force-wrap {
+  word-break: break-all;
+}
+```
+
+### Text Transform
+
+```css
+p {
+  font-variant: small-caps; /* 小型的大写字母 */
+  text-transform: uppercase; /* 大写字母 */
+  text-transform: lowercase; /* 小写字母 */
+  text-transform: capitalize; /* 首字母大写 */
+}
+```
+
+### Text Writing Mode
+
+#### Vertical Writing Mode
+
+```css
+/* 单列展示 */
+.wrap-single {
+  width: 25px;
+  height: auto;
+  padding: 8px 5px;
+  font-size: 12px;
+  line-height: 18px;
+  word-wrap: break-word; /* 英文自动换行 */
+}
+
+/* 多列展示 */
+.wrap-multiple {
+  height: 200px;
+  line-height: 30px;
+  text-align: justify;
+  writing-mode: vertical-lr; /* 从左向右 */
+  writing-mode: vertical-rl; /* 从右向左 */
+  writing-mode: tb-lr; /* IE 从左向右 */
+  writing-mode: tb-rl; /* IE 从右向左 */
+}
+```
+
+### White Space
+
+- Web Default: 空格被解析为换行
+- Web Default: 换行被解析为空格
+- Web Default: 自动合并空格
+
+普通标签内自动忽略空格符,
+并将其与空白符转换成一个空格进行输出,
+可用 `white-space` 改变这一行为:
+
+|------------|-----|----------|------|-------|
+| White Space|换行符|空格和制表符|文字换行|行尾空格|
+| normal | 合并 | 合并 | 换行 | 删除 |
+| nowrap | 合并 | 合并 | 不换行 | 删除 |
+| pre | 保留 | 保留 | 不换行 | 保留 |
+| pre-wrap | 保留 | 保留 | 换行 | 挂起 |
+| pre-line | 保留 | 合并 | 换行 | 删除 |
+| break-spaces | 保留 | 保留 | 换行 | 换行 |
+
+## CSS Font
+
+### Font Size
+
+```css
+html {
+  /* 浏览器默认size为16px, 此时将html-size自动计算为10px */
+  font-size: 62.5%;
+}
+
+small {
+  /* 11px */
+  font-size: 1.1rem;
+}
+
+strong {
+  /* 18px */
+  font-size: 1.8rem;
+}
+```
+
+### Font Style
+
+- normal
+- italic
+- oblique
+
+### Font Variant
+
+- normal
+- small-caps: 小型大写字母
+
+### Font Size Adjust
+
+- 使字体保持大小, 不随字体类型改变而改变
+- 不同字体有不同的值(x-height/字体尺寸)
+
+### Font Display
+
+The font display timeline:
+
+- block period: font face is not loaded,
+  render an **invisible** fallback font face
+  (use normally when loaded in this period)
+- swap period: font face is not loaded,
+  render a fallback font face
+  (use normally when loaded in this period)
+- failure period: the user agent treats it as a failed load
+  causing normal font fallback
+
+`font-display` - how a font face is displayed based on
+whether and when it is downloaded and ready to use:
+
+- auto: font display strategy defined by the user agent
+- block: a short block period and an infinite swap period
+- swap: an extremely small block period and an infinite swap period
+- fallback: an extremely small block period and a short swap period
+- optional: an extremely small block period and no swap period
+
+```css
+@font-face {
+  font-family: ExampleFont;
+  font-style: normal;
+  font-weight: 400;
+  src: url('/path/to/fonts/exampleFont.woff') format('woff'), url('/path/to/fonts/exampleFont.eot')
+      format('eot');
+  font-display: fallback;
+}
+```
+
+### Custom Fonts Function
+
+`@font-face` 使用户使用服务端提供的字体:
+
+```css
+@font-face {
+  /* :call <SNR>105_SparkUpNext() */
+  font-family: mySpecialFont;
+  font-style: inherit;
+  font-weight: inherit;
+  font-variant: inherit;
+  src: url('./Colleen.ttf');
+  font-display: swap;
+}
+
+.selector {
+  /* :call <SNR>105_SparkUpNext() */
+  font-family: mySpecialFont, sans-serif;
+}
+```
+
+```css
+@font-face {
+  font-family: 'Open Sans Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'),
+    url('open-sans/OpenSans-Regular-Cyrillic.woff2') format('woff2'), url('open-sans/OpenSans-Regular-Cyrillic.woff')
+      format('woff'),
+    url('open-sans/OpenSans-Regular-Cyrillic.eot') format('embedded-opentype'), url('open-sans/OpenSans-Regular-Cyrillic.ttf')
+      format('truetype');
+  font-display: swap;
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1;
+}
+```
+
+### Font Performance
+
+- Compress fonts.
+- Subset fonts.
+
+```css
+@font-face {
+  /* Single value */
+  unicode-range: U+0026;
+}
+
+@font-face {
+  /* Range */
+  unicode-range: U+0000-007F;
+}
+
+@font-face {
+  /* Wildcard Range */
+  unicode-range: U+002?;
+}
+
+@font-face {
+  /* Multiple Values */
+  unicode-range: U+0000-007F, U+0100, U+02??;
+}
+```
+
+### Font Family
+
+```css
+.mi {
+  font-family: Arial, 'Microsoft YaHei', '黑体', '宋体', sans-serif;
+}
+
+.tao {
+  font: 12px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif;
+}
+
+.one-plus {
+  font: 14px/1.5 'Microsoft YaHei', Arial, Tahoma, '\5b8b\4f53', sans-serif;
+}
+
+.tao-ued {
+  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
+}
+
+.tao-ux {
+  font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑',
+    Arial, sans-serif;
+}
+
+.font {
+  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
+}
+```
+
+```cpp
+宋体 SimSun
+黑体 SimHei
+微软雅黑 Microsoft YaHei
+微软正黑体 Microsoft JhengHei
+新宋体 NSimSun
+新细明体 PMingLiU
+细明体 MingLiU
+标楷体 DFKai-SB
+仿宋 FangSong
+楷体 KaiTi
+仿宋_GB2312 FangSong_GB2312
+楷体_GB2312 KaiTi_GB2312
+
+宋体: SimSun
+
+华文细黑: STHeiti Light [STXihei]
+华文黑体: STHeiti
+华文楷体: STKaiti
+华文宋体: STSong
+华文仿宋: STFangsong
+儷黑 Pro: LiHei Pro Medium
+儷宋 Pro: LiSong Pro Light
+標楷體: BiauKai
+蘋果儷中黑: Apple LiGothic Medium
+蘋果儷細宋: Apple LiSung Light
+
+
+新細明體: PMingLiU
+細明體: MingLiU
+標楷體: DFKai-SB
+黑体: SimHei
+新宋体: NSimSun
+仿宋: FangSong
+楷体: KaiTi
+仿宋_GB2312: FangSong_GB2312
+楷体_GB2312: KaiTi_GB2312
+微軟正黑體: Microsoft JhengHei
+微软雅黑体: Microsoft YaHei
+
+隶书: LiSu
+幼圆: YouYuan
+华文细黑: STXihei
+华文楷体: STKaiti
+华文宋体: STSong
+华文中宋: STZhongsong
+华文仿宋: STFangsong
+方正舒体: FZShuTi
+方正姚体: FZYaoti
+华文彩云: STCaiyun
+华文琥珀: STHupo
+华文隶书: STLiti
+华文行楷: STXingkai
+华文新魏: STXinwei
+```
+
+## CSS Counter
+
+Adjust the appearance of content based on its location in a document.
+
+```css
+/* Set a counter named 'section', and its initial value is 0. */
+body {
+  counter-reset: section;
+}
+
+/* Increment the value of section counter by 1 */
+
+/* Display the value of section counter */
+h3::before {
+  content: counter(section);
+  counter-increment: section;
+}
+```
+
 ## CSS Border
 
 ### Border Radius
@@ -1659,9 +2031,9 @@ table {
 }
 ```
 
-### Border Best Practice
+### Border Shape
 
-Mix transparent with non-transparent border to make shapes (e.g. triangle).
+Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 
 ```css
 .arrow-up {
@@ -2065,469 +2437,6 @@ movie style
 }
 ```
 
-### Background Best Practice
-
-#### Scroll Indicator
-
-```css
-body {
-  position: relative;
-}
-
-.indicator {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(to right top, teal 50%, transparent 50%) no-repeat;
-  background-size: 100% calc(100% - 100vh);
-  mix-blend-mode: darken;
-}
-
-/* use after element to hidden triangle background gradient */
-
-/* only show 5px background */
-.indicator::after {
-  position: fixed;
-  top: 5px;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  content: '';
-  background: #fff;
-}
-```
-
-#### Jumbotron and Landing Page
-
-```css
-.jumbotron {
-  width: 1px;
-  height: 1px;
-  background-image: url('bg.jpg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-}
-```
-
-#### Horizontal Scrolling Best Practices
-
-[Horizontal Scrolling](https://designshack.net/articles/navigation/horizontal-scrolling-pros-cons/):
-
-- Avoid a full-screen horizontal scroll;
-  ensure that users know there is also content
-  that can be reached using a traditional method.
-- Make scroll interactions obvious and provide instruction.
-- To avoid accessibility issues,
-  ensure that horizontal scrolling elements also work with keyboard navigation.
-- Design horizontal scrolling elements in containers using HTML and CSS.
-- Use visual cues, such as partial images,
-  to show that there is a horizontal scroll action in effect.
-- Use partial horizontal scrolling with a static design element for stability.
-- Design horizontal scroll bars in the same manner as vertical scroll bars
-  to create an element of familiarity for users.
-
-Horizontal Scrolling Methods:
-
-- Rotate 90 deg element.
-- `display: flex; overflow-x: auto;`
-- `grid-auto-flow: column;`
-- `scroll-snap-type: x mandatory; scroll-snap-align: center;`
-
-## CSS Text
-
-```css
-.text {
-  text-align: center;
-  text-decoration: underline/line-through; /* 下划线与删除线 */
-}
-
-.paragraph {
-  line-height: 1.5em; /* 行间距  */
-  text-indent: 2em; /* 段落缩进 */
-  letter-spacing: 50px; /* 字间距  */
-  word-spacing: 50px; /* 词间距  */
-}
-```
-
-### Text Alignment
-
-justify: 自适应, 左右都无空格
-
-```css
-.wrap {
-  text-align: justify;
-  text-align-last: justify; /* 一个块或行的最后一行对齐方式 */
-  text-justify: distribute-all-lines; /* ie6-8 */
-}
-```
-
-### Text Overflow
-
-- clip 切除溢出部分
-- ellipsis 省略号标志 (要设定 width)
-
-```css
-.truncation-article-container {
-  width: 500px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-```
-
-```css
-.article-container {
-  display: box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-all;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4; /* 需要显示的行数 */
-}
-```
-
-### Text Wrap
-
-[Text wrapping and word breaking](https://codersblock.com/blog/deep-dive-into-text-wrapping-and-word-breaking):
-
-```css
-/* 不换行 */
-.nowrap {
-  white-space: nowrap;
-}
-
-/* 自动换行 */
-.auto-wrap {
-  word-break: normal;
-  word-wrap: break-word;
-}
-
-/* 自动换行 */
-pre {
-  word-wrap: break-word; /* IE 5.5-7 */
-  white-space: pre-wrap; /* Modern Browsers */
-}
-
-/* 强制换行 */
-.force-wrap {
-  word-break: break-all;
-}
-```
-
-### Text Transform
-
-```css
-p {
-  font-variant: small-caps; /* 小型的大写字母 */
-  text-transform: uppercase; /* 大写字母 */
-  text-transform: lowercase; /* 小写字母 */
-  text-transform: capitalize; /* 首字母大写 */
-}
-```
-
-### Text Writing Mode
-
-#### Vertical Writing Mode
-
-```css
-/* 单列展示 */
-.wrap-single {
-  width: 25px;
-  height: auto;
-  padding: 8px 5px;
-  font-size: 12px;
-  line-height: 18px;
-  word-wrap: break-word; /* 英文自动换行 */
-}
-
-/* 多列展示 */
-.wrap-multiple {
-  height: 200px;
-  line-height: 30px;
-  text-align: justify;
-  writing-mode: vertical-lr; /* 从左向右 */
-  writing-mode: vertical-rl; /* 从右向左 */
-  writing-mode: tb-lr; /* IE 从左向右 */
-  writing-mode: tb-rl; /* IE 从右向左 */
-}
-```
-
-### White Space
-
-- Web Default: 空格被解析为换行
-- Web Default: 换行被解析为空格
-- Web Default: 自动合并空格
-
-普通标签内自动忽略空格符,
-并将其与空白符转换成一个空格进行输出,
-可用 `white-space` 改变这一行为:
-
-|------------|-----|----------|------|-------|
-| White Space|换行符|空格和制表符|文字换行|行尾空格|
-| normal | 合并 | 合并 | 换行 | 删除 |
-| nowrap | 合并 | 合并 | 不换行 | 删除 |
-| pre | 保留 | 保留 | 不换行 | 保留 |
-| pre-wrap | 保留 | 保留 | 换行 | 挂起 |
-| pre-line | 保留 | 合并 | 换行 | 删除 |
-| break-spaces | 保留 | 保留 | 换行 | 换行 |
-
-## CSS Font
-
-### Font Size
-
-```css
-html {
-  /* 浏览器默认size为16px, 此时将html-size自动计算为10px */
-  font-size: 62.5%;
-}
-
-small {
-  /* 11px */
-  font-size: 1.1rem;
-}
-
-strong {
-  /* 18px */
-  font-size: 1.8rem;
-}
-```
-
-### Font Style
-
-- normal
-- italic
-- oblique
-
-### Font Variant
-
-- normal
-- small-caps: 小型大写字母
-
-### Font Size Adjust
-
-- 使字体保持大小, 不随字体类型改变而改变
-- 不同字体有不同的值(x-height/字体尺寸)
-
-### Font Display
-
-The font display timeline:
-
-- block period: font face is not loaded,
-  render an **invisible** fallback font face
-  (use normally when loaded in this period)
-- swap period: font face is not loaded,
-  render a fallback font face
-  (use normally when loaded in this period)
-- failure period: the user agent treats it as a failed load
-  causing normal font fallback
-
-`font-display` - how a font face is displayed based on
-whether and when it is downloaded and ready to use:
-
-- auto: font display strategy defined by the user agent
-- block: a short block period and an infinite swap period
-- swap: an extremely small block period and an infinite swap period
-- fallback: an extremely small block period and a short swap period
-- optional: an extremely small block period and no swap period
-
-```css
-@font-face {
-  font-family: ExampleFont;
-  font-style: normal;
-  font-weight: 400;
-  src: url('/path/to/fonts/exampleFont.woff') format('woff'), url('/path/to/fonts/exampleFont.eot')
-      format('eot');
-  font-display: fallback;
-}
-```
-
-### Custom Fonts Function
-
-`@font-face` 使用户使用服务端提供的字体:
-
-```css
-@font-face {
-  /* :call <SNR>105_SparkUpNext() */
-  font-family: mySpecialFont;
-  font-style: inherit;
-  font-weight: inherit;
-  font-variant: inherit;
-  src: url('./Colleen.ttf');
-  font-display: swap;
-}
-
-.selector {
-  /* :call <SNR>105_SparkUpNext() */
-  font-family: mySpecialFont, sans-serif;
-}
-```
-
-### Font Performance
-
-- Compress fonts.
-- Subset fonts.
-
-```css
-@font-face {
-  /* Single value */
-  unicode-range: U+0026;
-}
-
-@font-face {
-  /* Range */
-  unicode-range: U+0000-007F;
-}
-
-@font-face {
-  /* Wildcard Range */
-  unicode-range: U+002?;
-}
-
-@font-face {
-  /* Multiple Values */
-  unicode-range: U+0000-007F, U+0100, U+02??;
-}
-```
-
-### Font Best Practice
-
-```css
-@font-face {
-  font-family: 'Open Sans Regular';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans Regular'), local('OpenSans-Regular'),
-    url('open-sans/OpenSans-Regular-Cyrillic.woff2') format('woff2'), url('open-sans/OpenSans-Regular-Cyrillic.woff')
-      format('woff'),
-    url('open-sans/OpenSans-Regular-Cyrillic.eot') format('embedded-opentype'), url('open-sans/OpenSans-Regular-Cyrillic.ttf')
-      format('truetype');
-  font-display: swap;
-  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1;
-}
-```
-
-```css
-.text-primary {
-  font-family: sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 100px;
-  color: black;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 1.3px;
-  font-display: swap;
-}
-```
-
-```css
-.mi {
-  font-family: Arial, 'Microsoft YaHei', '黑体', '宋体', sans-serif;
-}
-
-.tao {
-  font: 12px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif;
-}
-
-.one-plus {
-  font: 14px/1.5 'Microsoft YaHei', Arial, Tahoma, '\5b8b\4f53', sans-serif;
-}
-
-.tao-ued {
-  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
-}
-
-.tao-ux {
-  font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑',
-    Arial, sans-serif;
-}
-
-.font {
-  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
-}
-```
-
-```cpp
-宋体 SimSun
-黑体 SimHei
-微软雅黑 Microsoft YaHei
-微软正黑体 Microsoft JhengHei
-新宋体 NSimSun
-新细明体 PMingLiU
-细明体 MingLiU
-标楷体 DFKai-SB
-仿宋 FangSong
-楷体 KaiTi
-仿宋_GB2312 FangSong_GB2312
-楷体_GB2312 KaiTi_GB2312
-
-宋体: SimSun
-
-华文细黑: STHeiti Light [STXihei]
-华文黑体: STHeiti
-华文楷体: STKaiti
-华文宋体: STSong
-华文仿宋: STFangsong
-儷黑 Pro: LiHei Pro Medium
-儷宋 Pro: LiSong Pro Light
-標楷體: BiauKai
-蘋果儷中黑: Apple LiGothic Medium
-蘋果儷細宋: Apple LiSung Light
-
-
-新細明體: PMingLiU
-細明體: MingLiU
-標楷體: DFKai-SB
-黑体: SimHei
-新宋体: NSimSun
-仿宋: FangSong
-楷体: KaiTi
-仿宋_GB2312: FangSong_GB2312
-楷体_GB2312: KaiTi_GB2312
-微軟正黑體: Microsoft JhengHei
-微软雅黑体: Microsoft YaHei
-
-隶书: LiSu
-幼圆: YouYuan
-华文细黑: STXihei
-华文楷体: STKaiti
-华文宋体: STSong
-华文中宋: STZhongsong
-华文仿宋: STFangsong
-方正舒体: FZShuTi
-方正姚体: FZYaoti
-华文彩云: STCaiyun
-华文琥珀: STHupo
-华文隶书: STLiti
-华文行楷: STXingkai
-华文新魏: STXinwei
-```
-
-## CSS Counter
-
-Adjust the appearance of content based on its location in a document.
-
-```css
-/* Set a counter named 'section', and its initial value is 0. */
-body {
-  counter-reset: section;
-}
-
-/* Increment the value of section counter by 1 */
-
-/* Display the value of section counter */
-h3::before {
-  content: counter(section);
-  counter-increment: section;
-}
-```
-
 ## CSS Filter
 
 - 来源自 SVG 的滤镜特效
@@ -2897,6 +2806,65 @@ input {
 }
 ```
 
+### Scroll Indicator
+
+```css
+body {
+  position: relative;
+}
+
+.indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to right top, teal 50%, transparent 50%) no-repeat;
+  background-size: 100% calc(100% - 100vh);
+  mix-blend-mode: darken;
+}
+
+/* use after element to hidden triangle background gradient */
+
+/* only show 5px background */
+.indicator::after {
+  position: fixed;
+  top: 5px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  content: '';
+  background: #fff;
+}
+```
+
+### Horizontal Scrolling
+
+[Horizontal Scrolling](https://designshack.net/articles/navigation/horizontal-scrolling-pros-cons/):
+
+- Avoid a full-screen horizontal scroll;
+  ensure that users know there is also content
+  that can be reached using a traditional method.
+- Make scroll interactions obvious and provide instruction.
+- To avoid accessibility issues,
+  ensure that horizontal scrolling elements also work with keyboard navigation.
+- Design horizontal scrolling elements in containers using HTML and CSS.
+- Use visual cues, such as partial images,
+  to show that there is a horizontal scroll action in effect.
+- Use partial horizontal scrolling with a static design element for stability.
+- Design horizontal scroll bars in the same manner as vertical scroll bars
+  to create an element of familiarity for users.
+
+Horizontal Scrolling Methods:
+
+- Rotate 90 deg element.
+- `display: flex; overflow-x: auto;`
+- `grid-auto-flow: column;`
+- `scroll-snap-type: x mandatory; scroll-snap-align: center;`
+
 ## CSS Animation
 
 - [Animation 101 Tutorial](https://github.com/cssanimation/css-animation-101)
@@ -3064,14 +3032,13 @@ Change `transition` when `:hover` etc state bring magic effect:
 }
 ```
 
-#### Class Controls on Transition
+#### Transition Class Controls
 
-Transition Best Practice:
-with `transition: opacity 0.5s` set,
+With `transition: opacity 0.5s` set,
 first add `.opacity-0` class,
 then replace it with `.opacity-1` class.
 Transition animation get trigger
-as css style of element changed (class changed).
+as css style of element changed (class changed):
 
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
@@ -3364,19 +3331,6 @@ setTimeout(() => element.classList.remove('animate'), duration);
 .scale-up:hover,
 .scale-up:focus {
   transform: none;
-}
-```
-
-### Animation Best Practice
-
-#### Clear Splash Animation
-
-```css
-.cube {
-  backface-visibility: hidden;
-  perspective: 1000;
-  transform-style: preserve-3d;
-  transform: translate3d(0, 0, 0);
 }
 ```
 
@@ -4170,6 +4124,14 @@ contain: paint;
 
 ### Animation Performance
 
+- [High Performance Animations](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations).
+- All animation: `keyframe` animation or `transitions` is best.
+- JS-based animation: `requestAnimationFrame` is better than `setTimeout`/`setInterval`.
+- Position animation:`transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`.
+- Scale animation: `transform: scale(n)` better than `width`/`height`.
+- Rotation animation: `transform: rotate(deg)` is better.
+- Opacity/visibility animation: `opacity: 0...1` is better.
+
 #### Animation Frame
 
 `window.requestAnimationFrame`:
@@ -4221,23 +4183,9 @@ window.requestAnimationFrame(step);
 - `cursor`/`z-index`/`transform`/`opacity` in `Composite Layers` stage.
 - `top`/`left` has very large time to `paint` each frame.
 
-#### Animation Performance Best Practice
+### CSS Imports Performance
 
-- [High Performance Animations](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations).
-- All animation: `keyframe` animation or `transitions` is best.
-- JS-based animation: `requestAnimationFrame` is better than `setTimeout`/`setInterval`.
-- Position animation:`transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`.
-- Scale animation: `transform: scale(n)` better than `width`/`height`.
-- Rotation animation: `transform: rotate(deg)` is better.
-- Opacity/visibility animation: `opacity: 0...1` is better.
-
-### CSS Performance Best Practice
-
-- Use `audits` panel to diagnose.
-- Use CSS shorthand and color shortcuts.
-- Eliminate unneeded zeros and units.
-- Remove unused CSS by `coverage` panel of Devtools.
-- `link` is parallel, `@import` isn't parallel.
+`link` is parallel, `@import` isn't parallel.
 
 ### CSS Performance Reference
 
@@ -4638,6 +4586,22 @@ h1 {
     rgb(0 0 0 / 50%) 80%,
     rgb(0 0 0 / 80%) 100%
   );
+}
+```
+
+### Typography
+
+```css
+.text-primary {
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 100px;
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  font-display: swap;
 }
 ```
 
@@ -5498,6 +5462,17 @@ function leave(el, done) {
   96% {
     margin-left: 0;
   }
+}
+```
+
+#### Clear Splash Animation
+
+```css
+.cube {
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform-style: preserve-3d;
+  transform: translate3d(0, 0, 0);
 }
 ```
 
