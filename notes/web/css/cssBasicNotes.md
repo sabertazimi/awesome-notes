@@ -2725,13 +2725,18 @@ input {
 
 ## Object Position and Fit
 
-`object-position`/`object-fit` 只针对替换元素有作用:
+`object-position`/`object-fit`
+只对替换元素
+([`Replaced Element`](https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element))
+有作用:
 
-- `form` component:
-  - `input`.
-  - `textarea`.
+- `input`.
+- `select`.
+- `textarea`.
 - `img`.
 - `video`.
+- `iframe`.
+- `embed`.
 - `object`.
 
 `object-position`/`object-fit` 之间的关系有点类似于
