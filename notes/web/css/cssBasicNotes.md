@@ -1942,7 +1942,7 @@ h3::before {
 }
 ```
 
-Nested counters:
+Nested counters `counters(counterName, hyphenString)`:
 
 ```css
 ol {
