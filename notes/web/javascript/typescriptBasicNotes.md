@@ -835,6 +835,16 @@ interface Point {
 const z = myPoint.z; // Allowed!
 ```
 
+Extend 3rd-party module interface:
+
+```ts
+declare module '3rd-party-module' {
+  export interface Interface {
+    foo: { title: string };
+  }
+}
+```
+
 ### Implements Interface
 
 ```ts
