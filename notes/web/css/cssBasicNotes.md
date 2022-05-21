@@ -4262,6 +4262,32 @@ CSS vendor prefix order:
 - `-webkit-` rule.
 - Standard rule.
 
+#### CSS Normalize
+
+```css
+html,
+body {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+input,
+textarea,
+img,
+video,
+object {
+  box-sizing: border-box;
+}
+```
+
 ### StyleLint Tool
 
 - [StyleLint Plugin](https://github.com/kristerkari/stylelint-declaration-block-no-ignored-properties)
