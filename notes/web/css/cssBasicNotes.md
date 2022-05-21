@@ -826,6 +826,26 @@ const FOCUSABLE_SELECTORS = [
 
 ### Box Width
 
+#### Min and Max Width
+
+`min-width` > `max-width` > `width !important`:
+
+```css
+/* 480px */
+.box-1 {
+  min-width: 480px;
+  max-width: 256px;
+}
+
+/* 256px */
+.box-2 {
+  width: 480px !important;
+  max-width: 256px;
+}
+```
+
+#### Auto Flow Width
+
 Auto flow with `css-sizing`:
 present for `fill-available/max-content/min-content/fit-content`
 with `height`/`width`/`min-width`/`max-width`/`min-height`/`max-height`/
