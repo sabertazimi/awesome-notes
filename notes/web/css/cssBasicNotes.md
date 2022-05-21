@@ -826,25 +826,12 @@ const FOCUSABLE_SELECTORS = [
 
 ### Box Width
 
-Auto with `css-sizing`:
+Auto flow with `css-sizing`:
 present for `fill-available/max-content/min-content/fit-content`
 with `height`/`width`/`min-width`/`max-width`/`min-height`/`max-height`/
 `grid-template-rows`/`grid-template-columns`/`flex-basis`.
 
-### Box Height
-
-XXvh(viewport height)
-
-直接计算宽度/高度
-
-```css
-.my-element {
-  width: calc(10em + 3px);
-  height: calc(50% - 100px);
-}
-```
-
-### Mobile Box Viewport
+### Box Viewport Height
 
 ```css
 .my-element {
