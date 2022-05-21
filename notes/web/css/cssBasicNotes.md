@@ -2811,9 +2811,12 @@ input {
 
 `object-position`/`object-fit` 只针对替换元素有作用:
 
-- `form` component.
+- `form` component:
+  - `input`.
+  - `textarea`.
 - `img`.
 - `video`.
+- `object`.
 
 `object-position`/`object-fit` 之间的关系有点类似于
 `background-position`/`background-size`,
