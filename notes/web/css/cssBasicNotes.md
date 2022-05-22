@@ -878,7 +878,7 @@ Auto flow percentage margin calculate by `width`.
 
 #### Collapse Margin
 
-[Margin collapsing](https://developer.mozilla.org/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing):
+[`margin` collapsing](https://developer.mozilla.org/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing):
 
 - Adjacent siblings: 1's margin-bottom with 2's margin-top.
 - No content separating parent and descendants:
@@ -902,6 +902,15 @@ Auto flow percentage margin calculate by `width`.
 Floating and absolutely positioned elements margin **never collapse**.
 
 :::
+
+#### Invalid Margin
+
+- `display: inline` 非替换元素 `vertical margin` 无效: e.g `<img>`.
+- `display: table-cell`/`display: table-row` 元素 `margin` 无效: e.g `<tr>`, `<td>`.
+- `position: absolute` 绝对定位元素未定位方向 (`auto`) `margin`:
+  `.absolute { top: 10%; left: 30%; }` `margin-right` 与 `margin-bottom` 改变了外部尺寸,
+  但无法影响兄弟元素布局.
+- 定高容器**子元素**的 `margin-bottom` 或者定宽容器**子元素**的 `margin-right` 的定位作用失效.
 
 ### Box Column
 
