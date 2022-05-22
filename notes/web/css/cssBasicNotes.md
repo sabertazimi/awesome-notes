@@ -2111,6 +2111,18 @@ li::before {
 
 ### Border Radius
 
+### Border Color
+
+利用 transparent border 扩大元素点击区域:
+
+```css
+.icon-clear {
+  width: 16px;
+  height: 16px;
+  border: 11px solid transparent;
+}
+```
+
 ### Border Image
 
 ```css
