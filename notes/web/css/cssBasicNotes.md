@@ -933,13 +933,13 @@ if `height` of parent is `auto`, it's not working.
 
 ### Relative Position
 
-- 使元素相对于 `static` 布局, 可使用`top/bottom/left/right`属性进行定位.
+- 使元素相对于 `static` 布局, 可使用 `top/bottom/left/right` 属性进行定位.
 - 初始位置被保留, 不脱离文档流.
 
 ### Absolute Position
 
-- 使元素相对于 浏览器窗口/父元素(`position: non-static`) 布局 (包括 `%` 形式的 `width/height`)
-  - 若 body 为 static, 则元素不会随着滚动条滚动, 其相对于初始窗口布局.
+- 使元素相对于父元素 (`position: non-static`) 布局 (包括 `%` 形式的 `width/height`).
+- 若 body 为 static, 则元素不会随着滚动条滚动, 其相对于浏览器窗口布局.
 - 可使用 `top/bottom/left/right` 属性进行定位.
 - 初始位置不被保留, 脱离文档流.
 - `float` property computed to `float: none`.
@@ -978,11 +978,11 @@ if `height` of parent is `auto`, it's not working.
 
 ### Fixed Position
 
-- 使元素想对于 浏览器窗口 布局, 但不受滑动条影响
-- 可使用`top/bottom/left/right`属性进行定位
-- `float: none`
-- display: `inline-table` computed to `table`
-- display: `inline`/`inline-block`/`table-*` computed to `block`
+- 使元素相对于浏览器窗口布局, 但不受滑动条影响.
+- 可使用 `top/bottom/left/right` 属性进行定位.
+- `float: none`.
+- display: `inline-table` computed to `table`.
+- display: `inline`/`inline-block`/`table-*` computed to `block`.
 
 ```css
 /* 使子元素可以相对于父元素布局 */
