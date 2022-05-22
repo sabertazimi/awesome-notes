@@ -12,13 +12,26 @@ tags: [Web, CSS]
 
 ### Cascading Order
 
-1. user agent normal
-2. user normal
-3. author normal
-4. CSS Animations
-5. author !important
-6. user !important
-7. user agent !important
+1. Inherit styles.
+2. User agent normal styles.
+3. User normal styles.
+4. Author `@layer` normal styles.
+5. Author normal styles.
+6. Animation styles.
+7. Author `!important` styles.
+8. Author `@layer` `!important` styles.
+9. User `!important` styles.
+10. User agent `!important` styles.
+11. Transition styles.
+
+> Transition > Animation > Normal > `@layer` > User > User Agent > Inherit
+
+:::tip Important Styles Reversion
+
+- 级联水平高的 styles 应用 !important 后, 其优先级变低.
+- 级联水平低的 styles 应用 !important 后, 其优先级变高.
+
+:::
 
 ### Specificity
 
