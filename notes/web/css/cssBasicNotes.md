@@ -1562,9 +1562,65 @@ margin in the direction of the float will pull the floated element in that direc
 }
 ```
 
-## Centering Patterns
+## Alignment Patterns
 
-[Centering CSS Complete Guide](https://css-tricks.com/centering-css-complete-guide/)
+### Height Alignment Patterns
+
+- `border` simulation.
+- Negative `margin`.
+- `<table>` element:
+  `display: table-cell` 默认等高.
+- `absolute` element:
+  `.absolute { top: 0; bottom: 0; }` 使所有子元素 (`absolute`) 与父元素 (`relative`) 等高.
+- `flex` layout:
+  `flex` 盒子中的子元素默认拉伸至盒子高度.
+- `grid` layout:
+  `grid` 布局元素默认等高.
+
+Border simulation:
+
+```css
+/* 导航背景区 border 创建 */
+.box {
+  background-color: #f0f3f9;
+  border-left: 150px solid #333;
+}
+
+/* 清除浮动影响, 不能使用 overflow:hidden */
+.box::after {
+  display: block;
+  clear: both;
+  content: '';
+}
+
+/* 布局主结构 */
+.box > nav {
+  float: left;
+  width: 150px;
+  margin-left: -150px;
+}
+
+.box > section {
+  overflow: hidden;
+}
+```
+
+Negative margin:
+
+```css
+.column-box {
+  overflow: hidden; /* hidden overflow background */
+}
+
+/* 视觉等高布局 */
+.column-left,
+.column-right {
+  padding-bottom: 9999px;
+  margin-bottom: -9999px;
+}
+```
+
+## Centering Patterns
 
 ### Horizontal Centering Pattern
 
@@ -1627,6 +1683,10 @@ a.button::before {
 ### Mixing Centering Pattern
 
 在子容器中在设置新元素即可.
+
+### Centering Patterns Reference
+
+- Centering CSS complete [guide](https://css-tricks.com/centering-css-complete-guide).
 
 ## Inline Patterns
 
