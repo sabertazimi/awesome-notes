@@ -1613,24 +1613,6 @@ a.button::before {
 
 在子容器中在设置新元素即可.
 
-## CSS Logical Properties and Values
-
-### CSS Logical Basis
-
-In positioning/sizing/margin/padding/border/text alignment:
-
-- `block-start` for `top`
-- `block-end` for `bottom`
-- `block` for vertical
-- `inline-start` for `left`
-- `inline-end` for `right`
-- `inline` for horizontal
-
-### CSS Logical Reference
-
-- [W3C CSS Logical Draft](https://drafts.csswg.org/css-logical)
-- [CSS Tricks CSS Logical Guide](https://css-tricks.com/css-logical-properties-and-values)
-
 ## Inline Patterns
 
 ### Inline Element Height
@@ -2173,85 +2155,6 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
   border-bottom: 16px solid transparent;
 }
 ```
-
-## CSS Colors
-
-### HSL Color
-
-- H: hue
-- S: saturation (stay `50%` etc.)
-- L: lightness (easy to theme colors)
-
-```css
-/* Hover Button */
-:root {
-  --primary-h: 221;
-  --primary-s: 72%;
-  --primary-l: 62%;
-}
-
-.button {
-  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
-
-.button:hover,
-.button:focus {
-  --primary-l: 54%;
-}
-```
-
-```css
-/* Custom Buttons */
-:root {
-  --primary-h: 221;
-  --primary-s: 72%;
-  --primary-l: 62%;
-}
-
-.button {
-  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
-
-.button-secondary {
-  --primary-l: 90%;
-
-  color: #222;
-}
-
-.button-ghost {
-  --primary-l: 90%;
-
-  background-color: transparent;
-  border: 3px solid hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
-```
-
-```css
-/* Change lightness to get gradient */
-.section {
-  background: linear-gradient(
-    to left,
-    hsl(var(--primary-h) var(--primary-s) var(--primary-l)),
-    hsl(var(--primary-h) var(--primary-s) 95%)
-  );
-}
-
-.section-2 {
-  --primary-h: 167;
-}
-```
-
-### CSS Color Reference
-
-- CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
-  - hwb.
-  - lab.
-  - lch.
-  - color-mix.
-  - color-contrast.
-  - color.
-  - accent-color.
-- CSS `color` [value](https://developer.mozilla.org/docs/Web/CSS/color_value).
 
 ## CSS Background
 
@@ -3730,6 +3633,103 @@ html {
   }
 }
 ```
+
+## CSS Colors
+
+### HSL Color
+
+- H: hue
+- S: saturation (stay `50%` etc.)
+- L: lightness (easy to theme colors)
+
+```css
+/* Hover Button */
+:root {
+  --primary-h: 221;
+  --primary-s: 72%;
+  --primary-l: 62%;
+}
+
+.button {
+  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+}
+
+.button:hover,
+.button:focus {
+  --primary-l: 54%;
+}
+```
+
+```css
+/* Custom Buttons */
+:root {
+  --primary-h: 221;
+  --primary-s: 72%;
+  --primary-l: 62%;
+}
+
+.button {
+  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+}
+
+.button-secondary {
+  --primary-l: 90%;
+
+  color: #222;
+}
+
+.button-ghost {
+  --primary-l: 90%;
+
+  background-color: transparent;
+  border: 3px solid hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+}
+```
+
+```css
+/* Change lightness to get gradient */
+.section {
+  background: linear-gradient(
+    to left,
+    hsl(var(--primary-h) var(--primary-s) var(--primary-l)),
+    hsl(var(--primary-h) var(--primary-s) 95%)
+  );
+}
+
+.section-2 {
+  --primary-h: 167;
+}
+```
+
+### CSS Color Reference
+
+- CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
+  - hwb.
+  - lab.
+  - lch.
+  - color-mix.
+  - color-contrast.
+  - color.
+  - accent-color.
+- CSS `color` [value](https://developer.mozilla.org/docs/Web/CSS/color_value).
+
+## CSS Logical Properties and Values
+
+### CSS Logical Basis
+
+In positioning/sizing/margin/padding/border/text alignment:
+
+- `block-start` for `top`
+- `block-end` for `bottom`
+- `block` for vertical
+- `inline-start` for `left`
+- `inline-end` for `right`
+- `inline` for horizontal
+
+### CSS Logical Reference
+
+- [W3C CSS Logical Draft](https://drafts.csswg.org/css-logical)
+- [CSS Tricks CSS Logical Guide](https://css-tricks.com/css-logical-properties-and-values)
 
 ## Responsive Design
 
