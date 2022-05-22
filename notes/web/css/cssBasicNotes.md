@@ -795,6 +795,25 @@ window.addEventListener('resize', () => {
 });
 ```
 
+### Box Padding
+
+Auto flow with `percentage` padding (calculate by `width`):
+
+```css
+.box {
+  position: relative;
+  padding: 10% 50%;
+}
+
+.box > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+```
+
 ### Box Overflow
 
 - `visible`.
@@ -1544,6 +1563,26 @@ In positioning/sizing/margin/padding/border/text alignment:
 
 ## Inline Patterns
 
+### Inline Element Height
+
+- 内联元素默认的高度完全受 `font-size` 大小控制.
+- 内联元素没有可视宽度和可视高度 (`clientHeight`/`clientWidth` always `0`),
+  垂直方向的行为表现完全受 `line-height` 和 `vertical-align` 的影响.
+
+### Inline Element Padding
+
+可以在不影响当前布局的情况下,
+通过增加垂直方向的 `padding`,
+增加链接 (`inline`) 或按钮 (`inline-block`) 的点击区域大小:
+
+```css
+article a {
+  padding: 0.25rem 0;
+}
+```
+
+### Inline Element Baseline
+
 Inline Element 与父元素下边缘存在空隙,
 原因在于文字排版的基线对齐机制 (`vertical-align`).
 
@@ -1921,7 +1960,7 @@ whether and when it is downloaded and ready to use:
 
 - Objects inserted are `Anonymous Replaced Elements`.
 - CSS-generated content is not included in the DOM,
-  will not be represented in `accessiblility tree`.
+  will not be represented in `accessibility tree`.
 
 ## CSS Counter
 
