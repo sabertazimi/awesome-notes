@@ -4631,6 +4631,27 @@ h1 {
 
 ### Typography
 
+#### Flexible Heading
+
+```css
+h1 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+h1::before,
+h1::after {
+  flex: 1;
+  height: 0.1em;
+  margin: 0.2em;
+  content: '';
+  background-color: gray;
+}
+```
+
+#### Text Preset
+
 ```css
 .text-primary {
   font-family: sans-serif;
@@ -4656,33 +4677,12 @@ h1 {
 }
 ```
 
-### Flexible Heading
-
-```css
-h1 {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-h1::before,
-h1::after {
-  flex: 1;
-  height: 0.1em;
-  margin: 0.2em;
-  content: '';
-  background-color: gray;
-}
-```
-
-- **reset.css**
-
 ### Table
 
-- `margin-left: auto` to align-left
-- `border: 0` and `border-collapse: collapse` to remove border line
-- `table-layout: fixed` to contain cells with same width
-- implement filter or pagination with `display: none` applied to `<tr>`
+- `margin-left: auto` to align-left.
+- `border: 0` and `border-collapse: collapse` to remove border line.
+- `table-layout: fixed` to contain cells with same width.
+- Implement filter or pagination with `display: none` applied to `<tr>`.
 
 ```css
 th,
