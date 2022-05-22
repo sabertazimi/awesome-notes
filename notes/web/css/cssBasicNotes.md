@@ -4705,7 +4705,11 @@ td:last-child {
 
 ### Form
 
-- [Form Design Patterns](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post)
+[Form Design Patterns](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post):
+
+- 由于表单组件多为 `Replaced Element`, 通过 CSS 控制样式存在困难,
+  一般利用 `label` 包裹 `input + span` 的方式,
+  对 `label` 与 `span` 进行核心样式控制, 对 `input` 进行辅助样式控制.
 
 #### Custom Form
 
