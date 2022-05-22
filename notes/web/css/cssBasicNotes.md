@@ -950,8 +950,10 @@ Multiple-column layout:
 
 ### Box Overflow
 
+`overflow`:
+
 - `visible`.
-- `hidden`.
+- `hidden`: 溢出隐藏基于 `padding box`.
 - `scroll`.
 - `auto`.
 
