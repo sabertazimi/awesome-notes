@@ -2169,6 +2169,14 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 }
 ```
 
+## CSS Outline
+
+## CSS Shadow
+
+### Text Shadow
+
+### Box Shadow
+
 ## CSS Background
 
 ### Background Image
