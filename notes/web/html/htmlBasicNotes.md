@@ -292,8 +292,8 @@ but also can every `<article>` and `<section>` element.
 
 ### validate
 
-- [Complete Guide for Form Validation](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation)
-- [Complete Guide for Constraint Validation](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation)
+- [Complete Guide for Form Validation](https://developer.mozilla.org/docs/Learn/HTML/Forms/Form_validation)
+- [Complete Guide for Constraint Validation](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5/Constraint_validation)
 
 ### novalidate
 
@@ -1456,7 +1456,7 @@ export function trapTabKey(e, context) {
 - `aria-haspopup="true"`: dropdown/popup.
 - `aria-current="pages`: breadcrumb.
 - `aria-valuenow`/`aria-valuemin`/`aria-valuemax`: progress.
-- [role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles).
+- [role](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles).
   - `<header>`: `role="banner"`.
   - `<nav>`: `role="navigation"`.
   - `<main>`: `role="main"`.

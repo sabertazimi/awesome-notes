@@ -759,7 +759,7 @@ console.log(fooGlobalSymbol === otherFooGlobalSymbol); // true
 
 #### Built-in Symbol Methods
 
-[Symbol methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol#static_properties):
+[Symbol methods](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Symbol#static_properties):
 
 - `[Symbol.iterator]()`: `for of`.
 - `[Symbol.asyncIterator]()`: `for await of`.
@@ -4928,7 +4928,7 @@ setTimeout(function () {
 
 ### Iteration Protocol
 
-Iteration [protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols):
+Iteration [protocol](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Iteration_protocols):
 
 - 一个数据结构只要实现了 `[Symbol.iterator]()` 接口, 便可成为可迭代数据结构 (`Iterable`):
   - String: `StringIterator`.
@@ -7061,7 +7061,7 @@ export default {
 ### Web Worker
 
 - 多线程并行执行.
-- 利用 [BroadcastChannel API](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel)
+- 利用 [BroadcastChannel API](https://developer.mozilla.org/docs/Web/API/BroadcastChannel)
   可以创建 Shared Worker, 即共享 Workers 在同一源 (origin) 下面的各种进程都可以访问它,
   包括: `iframe`/浏览器中的不同 Tab 页 (`Browsing Context`).
 - Use Case:
@@ -7119,7 +7119,7 @@ self.addEventListener(
 - Web Worker 无法访问一些非常关键的 JavaScript 特性:
   DOM (线程不安全), `window` 对象, `document` 对象, `parent` 对象.
 - `self` 上可用的属性是 `window` 对象上属性的严格子集,
-  [`WorkerGlobalScope`](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope):
+  [`WorkerGlobalScope`](https://developer.mozilla.org/docs/Web/API/WorkerGlobalScope):
   - `navigation` 对象: `appName`, `appVersion`, `userAgent`, `platform`.
   - `location` 对象: 所有属性只读.
   - ECMAScript 对象: `Object`/`Array`/`Date`.
@@ -7131,7 +7131,7 @@ self.addEventListener(
   - `self` 对象: 指向全局 worker 对象.
   - `close` 方法: 停止 worker.
   - `importScripts` 方法: 加载外部依赖.
-  - [`MessagePort`](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort)
+  - [`MessagePort`](https://developer.mozilla.org/docs/Web/API/MessagePort)
     方法: `postMessage`/`onmessage`/`onmessageerror`.
 - 工作者线程的脚本文件只能从与父页面相同的源加载,
   从其他源加载工作者线程的脚本文件会导致错误.
@@ -8628,7 +8628,7 @@ const re = /pattern/gim;
 
 ### RegExp Flags
 
-[Flags](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#advanced_searching_with_flags):
+[Flags](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions#advanced_searching_with_flags):
 
 - `g` (global): 全局匹配.
 - `i` (ignoreCase): 大小写不敏感匹配.
@@ -8650,7 +8650,7 @@ codePointLength(s); // 2
 
 ### RegExp Character Classes
 
-[Character classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Character_Classes):
+[Character classes](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions/Character_Classes):
 
 | Characters            | Meaning               |
 | :-------------------- | :-------------------- |
@@ -8670,7 +8670,7 @@ codePointLength(s); // 2
 
 ### RegExp Quantifiers
 
-[Quantifiers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Quantifiers):
+[Quantifiers](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions/Quantifiers):
 
 | Quantifiers | Repeat Times |
 | :---------- | :----------- |
@@ -8691,8 +8691,8 @@ codePointLength(s); // 2
 
 ### RegExp Group and Ranges
 
-- [Groups](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges).
-- 零宽断言: lookahead [assertion](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions).
+- [Groups](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges).
+- 零宽断言: lookahead [assertion](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions).
 
 | 分类     | 代码/语法      | 说明                                            |
 | :------- | :------------- | :---------------------------------------------- |
@@ -8807,7 +8807,7 @@ export function isJunk(filename) {
 
 #### RexExp Exec
 
-[`exec()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec):
+[`exec()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec):
 
 - Search starts at substring specified by `lastIndex` property.
 
@@ -8960,7 +8960,7 @@ const pattern = /([^&=]+)=([^&]*)/g;
 
 ### Strict Mode
 
-[Strict Mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode):
+[Strict Mode](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Strict_mode):
 
 - `this` is `null` in non-method functions.
 - Variables must be declared (`Reference Error`).
@@ -9123,7 +9123,7 @@ const randomInt = (a = 1, b = 0) => {
 
 ### Atomics
 
-[Atomics API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics):
+[Atomics API](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Atomics):
 
 ```ts
 const sharedArrayBuffer = new SharedArrayBuffer(4);
@@ -9164,7 +9164,7 @@ console.log(decodeURI(uri));
 console.log(decodeURIComponent(uri));
 ```
 
-[URL](https://developer.mozilla.org/en-US/docs/Web/API/URL):
+[URL](https://developer.mozilla.org/docs/Web/API/URL):
 
 - `hash`.
 - `host`.
@@ -9173,7 +9173,7 @@ console.log(decodeURIComponent(uri));
 - `pathname`.
 - `port`.
 - `protocol`.
-- `search`: [USVString](https://developer.mozilla.org/en-US/docs/Web/API/USVString).
+- `search`: [USVString](https://developer.mozilla.org/docs/Web/API/USVString).
 - `searchParams`: URL search map.
 - `username`.
 - `password`.
@@ -9192,7 +9192,7 @@ const blob = new Blob(['export const itsAModule = true'], {
 const blobUrl = URL.createObjectURL(blob);
 ```
 
-[URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams):
+[URLSearchParams](https://developer.mozilla.org/docs/Web/API/URLSearchParams):
 
 ```ts
 // window.location.search
@@ -9216,7 +9216,7 @@ alert(searchParams.toString()); // " num=10&page=3"
 
 ### Encoding and Decoding
 
-[TextEncoder API](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder):
+[TextEncoder API](https://developer.mozilla.org/docs/Web/API/TextEncoder):
 
 ```ts
 const textEncoder = new TextEncoder();
@@ -9273,7 +9273,7 @@ while (true) {
 // Uint8Array[111]
 ```
 
-[TextDecoder API](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder):
+[TextDecoder API](https://developer.mozilla.org/docs/Web/API/TextDecoder):
 
 ```ts
 const textDecoder = new TextDecoder();

@@ -38,8 +38,8 @@ electron-forge start
 
 ### Shared Data
 
-- [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Storage)
-- [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
+- [Web Storage API](https://developer.mozilla.org/docs/Web/API/Storage)
+- [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API)
 - Electron IPC
 
 ```ts

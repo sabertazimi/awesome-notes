@@ -1035,7 +1035,7 @@ for (const element of elements) {
 }
 ```
 
-[Node Iterator](https://developer.mozilla.org/en-US/docs/Web/API/NodeIterator):
+[Node Iterator](https://developer.mozilla.org/docs/Web/API/NodeIterator):
 
 ```ts
 const div = document.getElementById('div1');
@@ -1060,7 +1060,7 @@ for (
 }
 ```
 
-[Tree Walker](https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker):
+[Tree Walker](https://developer.mozilla.org/docs/Web/API/TreeWalker):
 
 ```ts
 const div = document.getElementById('div1');
@@ -1112,7 +1112,7 @@ console.log(el.dataset.src);
 
 #### Select DOM Node
 
-[Range API](https://developer.mozilla.org/en-US/docs/Web/API/Range):
+[Range API](https://developer.mozilla.org/docs/Web/API/Range):
 
 - `startContainer`: 范围起点所在的节点 (选区中第一个子节点的父节点).
 - `startOffset`: 范围起点在 startContainer 中的偏移量.
@@ -1878,7 +1878,7 @@ input.addEventListener('select', event => {
 
 #### Clipboard Events
 
-[Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API)
+[Clipboard API](https://developer.mozilla.org/docs/Web/API/Clipboard_API)
 (modern alternative for `document.execCommand(command)`):
 
 - `copy` event.
@@ -1916,7 +1916,7 @@ source.addEventListener('copy', event => {
 - `mouseout` event:
   pointer leaves the element or leaves one of the element's descendants.
 - `mouseover` event.
-- [`wheel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event)
+- [`wheel`](https://developer.mozilla.org/docs/Web/API/Element/wheel_event)
   event (replace deprecated `mousewheel` event).
 
 For `click` event, no need for X/Y to judge internal/outside state.
@@ -1930,7 +1930,7 @@ window.addEventListener('click', event => {
 });
 ```
 
-[Drag Event](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent):
+[Drag Event](https://developer.mozilla.org/docs/Web/API/DragEvent):
 
 - dragstart: start point.
 - dragend
@@ -1940,14 +1940,14 @@ window.addEventListener('click', event => {
 - drop: end point.
 
 Key point for implementing DnD widget is
-[DataTransfer](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer):
+[DataTransfer](https://developer.mozilla.org/docs/Web/API/DataTransfer):
 
 - Bindings between Drag Zone and Drop Zone.
 - `DataTransfer.dropEffect` and `DataTransfer.effectAllowed` to define DnD UI type.
 - `DataTransfer.getData` and `DataTransfer.setData` to transfer data.
 - `DataTransfer.files` and `DataTransfer.items` to transfer data.
 
-[Context Menu Event](https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event):
+[Context Menu Event](https://developer.mozilla.org/docs/Web/API/Element/contextmenu_event):
 
 ```ts
 const noContext = document.getElementById('noContextMenu');
@@ -1969,7 +1969,7 @@ textbox.addEventListener('keyup', event => {
 });
 ```
 
-[`event.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)
+[`event.key`](https://developer.mozilla.org/docs/Web/API/KeyboardEvent/key/Key_Values)
 (replace deprecated `event.keyCode`):
 
 ```ts
@@ -2008,7 +2008,7 @@ textbox.addEventListener('keyup', event => {
 - `touchcancel` event.
 
 Use
-[`touch`](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events)
+[`touch`](https://developer.mozilla.org/docs/Web/API/Touch_events)
 events:
 
 - Dispatch custom
@@ -2330,7 +2330,7 @@ while getBoundingClientRect() returns the rendering width and height.
 
 `getBoundingClientRect`:
 
-[![Client Rect](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect/element-box-diagram.png)](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
+[![Client Rect](https://developer.mozilla.org/docs/Web/API/Element/getBoundingClientRect/element-box-diagram.png)](https://developer.mozilla.org/docs/Web/API/Element/getBoundingClientRect)
 
 ```ts
 const isElementInViewport = el => {
@@ -2454,11 +2454,11 @@ document.forms[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 ### DOM Observer
 
-- [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)
-- [Mutation Observer](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)
-- [Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)
-- [Performance Observer](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver)
-- [Reporting Observer](https://developer.mozilla.org/en-US/docs/Web/API/ReportingObserver)
+- [Intersection Observer](https://developer.mozilla.org/docs/Web/API/IntersectionObserver)
+- [Mutation Observer](https://developer.mozilla.org/docs/Web/API/MutationObserver)
+- [Resize Observer](https://developer.mozilla.org/docs/Web/API/ResizeObserver)
+- [Performance Observer](https://developer.mozilla.org/docs/Web/API/PerformanceObserver)
+- [Reporting Observer](https://developer.mozilla.org/docs/Web/API/ReportingObserver)
 
 #### Intersection Observer
 
@@ -3624,11 +3624,11 @@ onmessage = function (event) {
 
 ### Canvas Reference
 
-- [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
-- [Canvas Tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)
+- [Canvas API](https://developer.mozilla.org/docs/Web/API/Canvas_API)
+- [Canvas Tutorial](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial)
 - [Canvas Deep Dive](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
 - [Canvas Cheat Sheet](https://devhints.io/canvas)
-- [Canvas Performance](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
+- [Canvas Performance](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
 - [Canvas Real World Case](https://zhuanlan.zhihu.com/p/438142235)
 
 ## Web Audio
@@ -3742,7 +3742,7 @@ function stopSound() {
 
 ### Audio Bar Chart
 
-- [AnalyserNode.getByteFrequencyData API](https://developer.mozilla.org/zh-CN/docs/Web/API/AnalyserNode/getByteFrequencyData)
+- [AnalyserNode.getByteFrequencyData API](https://developer.mozilla.org/docs/Web/API/AnalyserNode/getByteFrequencyData)
 - [Github Demo](https://github.com/bogdan-cornianu/swave/blob/master/src/visualizer.ts)
 
 ```ts
@@ -3781,7 +3781,7 @@ draw();
 ## Media Session
 
 - [W3C Media Session Specification](https://w3c.github.io/mediasession)
-- [MDN Media Session Documentation](https://developer.mozilla.org/en-US/docs/Web/API/MediaSession)
+- [MDN Media Session Documentation](https://developer.mozilla.org/docs/Web/API/MediaSession)
 - [Google Media Session Blog](https://web.dev/media-session)
 
 ## Web Storage
@@ -3870,7 +3870,7 @@ class CookieUtil {
 - 协同 Cookie.
 - 对于复杂对象的读取与存储,
   需要借助 `JSON.parse` 与 `JSON.stringify`.
-- [`Storage` object](https://developer.mozilla.org/en-US/docs/Web/API/Storage):
+- [`Storage` object](https://developer.mozilla.org/docs/Web/API/Storage):
   - `Storage.length`.
   - `Storage.key()`.
   - `Storage.getItem()`.
@@ -4089,7 +4089,7 @@ for (const file of fileInput.files) {
 
 ## Web Gamepad
 
-[Gamepad API](https://developer.mozilla.org/zh-CN/docs/Games/Techniques/Controls_Gamepad_API):
+[Gamepad API](https://developer.mozilla.org/docs/Games/Techniques/Controls_Gamepad_API):
 
 ```ts
 const gamepads = {};
@@ -5370,7 +5370,7 @@ Google Core Web Vitals:
 解决上报对性能的影响问题有以下方案:
 
 - 延迟合并上报: 延迟到 `onload` 事件后, 并合并多个上报请求.
-- 使用 [Beacon API](https://developer.mozilla.org/en-US/docs/Web/API/Beacon_API):
+- 使用 [Beacon API](https://developer.mozilla.org/docs/Web/API/Beacon_API):
   - Sent reliably (even if page unload).
   - Sent asynchronously.
   - Not impact loading of next page.
@@ -7363,7 +7363,7 @@ Progressive Web Apps:
 - Offline.
 - Background.
 - Custom request to minimize network.
-- [Notification API](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification).
+- [Notification API](https://developer.mozilla.org/docs/Web/API/ServiceWorkerRegistration/showNotification).
 
 ### Service Worker Costs
 
@@ -8079,7 +8079,7 @@ HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`:
 
 ### HTTP Response Status Codes
 
-[RFC 2616](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status):
+[RFC 2616](https://developer.mozilla.org/docs/Web/HTTP/Status):
 
 - Informational responses: 100–199.
 - Successful responses: 200–299.
@@ -8532,7 +8532,7 @@ setTimeout(() => abortController.abort(), 10);
 
 #### Fetch Objects API
 
-[`Headers` object](https://developer.mozilla.org/en-US/docs/Web/API/Headers):
+[`Headers` object](https://developer.mozilla.org/docs/Web/API/Headers):
 
 ```ts
 const myHeaders = new Headers();
@@ -8540,7 +8540,7 @@ myHeaders.append('Content-Type', 'text/xml');
 myHeaders.get('Content-Type'); // should return 'text/xml'
 ```
 
-[`Request` object](https://developer.mozilla.org/en-US/docs/Web/API/Request):
+[`Request` object](https://developer.mozilla.org/docs/Web/API/Request):
 
 ```ts
 const request = new Request('/api/names', {
@@ -8554,7 +8554,7 @@ const request = new Request('/api/names', {
 const response = await fetch(request);
 ```
 
-[`Response` object](https://developer.mozilla.org/en-US/docs/Web/API/Response):
+[`Response` object](https://developer.mozilla.org/docs/Web/API/Response):
 
 ```ts
 fetch('//foo.com').then(console.log);
@@ -8767,8 +8767,8 @@ fetch('https://fetch.spec.whatwg.org/')
 
 ### Server-Sent Events
 
-- Event source [API](https://developer.mozilla.org/en-US/docs/Web/API/EventSource).
-- Server-sent events [API](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events).
+- Event source [API](https://developer.mozilla.org/docs/Web/API/EventSource).
+- Server-sent events [API](https://developer.mozilla.org/docs/Web/API/Server-sent_events/Using_server-sent_events).
 
 ```ts
 const source = new EventSource('/path/to/stream-url');
@@ -8915,19 +8915,19 @@ function WebSocketTest() {
 
 #### Web Real-Time Communication
 
-[Web Real-Time Communication](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API)
+[Web Real-Time Communication](https://developer.mozilla.org/docs/Web/API/WebRTC_API)
 (Web 实时通信, WebRTC) 由一组标准, 协议和 JavaScript API 组成,
 用于实现浏览器之间 (端到端, P2P) 的音频/视频/数据共享:
 
-- [MediaStream](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream).
-- [RTCPeerConnection](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection):
+- [MediaStream](https://developer.mozilla.org/docs/Web/API/MediaStream).
+- [RTCPeerConnection](https://developer.mozilla.org/docs/Web/API/RTCPeerConnection):
   - 管理穿透 NAT 的完整 ICE 工作流.
   - 发送自动 (STUN) 持久化信号.
   - 跟踪本地流.
   - 跟踪远程流.
   - 按需触发自动流协商.
   - 生成连接提议, 接收应答, 允许查询连接的当前状态等.
-- [RTCDataChannel](https://developer.mozilla.org/en-US/docs/Web/API/RTCDataChannel):
+- [RTCDataChannel](https://developer.mozilla.org/docs/Web/API/RTCDataChannel):
   DataChannel API 用于实现端到端之间的任意应用数据交换 (端到端交换版本的 WebSocket).
 
 ![WebRTC Engine](./figures/WebRTCEngine.png)
@@ -9288,9 +9288,9 @@ Content-Security-Policy: script-src https://example.com/
 
 ### Security HTTP Headers
 
-- [X-Content-Type-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)
-- [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)
-- [X-XSS-Protection](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection)
+- [X-Content-Type-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Content-Type-Options)
+- [X-Frame-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options)
+- [X-XSS-Protection](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-XSS-Protection)
 - [Helmet: Secure Express Apps with Various HTTP Headers](https://github.com/helmetjs/helmet)
 
 ### Trusted Types
@@ -9477,7 +9477,7 @@ getCanvasFingerprint();
 
 ### Crypto
 
-- [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto)
+- [Web Crypto API](https://developer.mozilla.org/docs/Web/API/SubtleCrypto)
 - 公钥加密私钥解密: 只有私钥拥有者可以获取信息.
 - 公钥验证私钥签名: 只有私钥拥有者可以发布签名.
 

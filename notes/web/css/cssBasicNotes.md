@@ -876,11 +876,32 @@ Negative vertical margin change vertical flow:
 
 Auto flow percentage margin calculate by `width`.
 
-#### Margin Collapsing
+#### Collapse Margin
 
-- closet sibling: 1's margin-bottom with 2's margin-top.
-- parent and it's first/last child: up with up (bottom with bottom).
-- empty block: margin-top with margin-bottom.
+[Margin collapsing](https://developer.mozilla.org/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing):
+
+- Adjacent siblings: 1's margin-bottom with 2's margin-top.
+- No content separating parent and descendants:
+  - No border/padding/inline part/block formatting context created/clearance:
+    can't separate parents margin-top from its descendant blocks margin-top.
+  - No border/padding/inline content/height/min-height:
+    can't separate parents margin-bottom from its descendant blocks margin-bottom.
+  - Collapsed margin ends up **outside the parent**.
+- Empty blocks:
+  no border/padding/inline content/height/min-height
+  to separate block's margin-top from its margin-bottom.
+
+`margin` collapsing calculation:
+
+- 正正取大值.
+- 正负值相加.
+- 负负最负值.
+
+:::tip Never Collapse
+
+Floating and absolutely positioned elements margin **never collapse**.
+
+:::
 
 ### Box Column
 
@@ -2221,7 +2242,7 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
   - color-contrast.
   - color.
   - accent-color.
-- CSS `color` [value](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
+- CSS `color` [value](https://developer.mozilla.org/docs/Web/CSS/color_value).
 
 ## CSS Background
 
@@ -2802,7 +2823,7 @@ input {
 
 `object-position`/`object-fit`
 只对替换元素
-([`Replaced Element`](https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element))
+([`Replaced Element`](https://developer.mozilla.org/docs/Web/CSS/Replaced_element))
 有作用:
 
 - `input`.
@@ -3852,7 +3873,7 @@ use `inline-box` with `width`
 
 ### Print Device Query
 
-- Page style standard [specification](https://developer.mozilla.org/en-US/docs/Web/CSS/@page).
+- Page style standard [specification](https://developer.mozilla.org/docs/Web/CSS/@page).
 - PDF style [tutorial](https://www.smashingmagazine.com/2015/01/designing-for-print-with-css).
 
 ### Pointer Device Query
@@ -4054,10 +4075,10 @@ const isSupported = query === resolvedMediaQuery;
 
 ### Media Query JavaScript API
 
-- [MDN Media Query Tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)
+[Media query](https://developer.mozilla.org/docs/Web/API/Window/matchMedia):
 
 ```ts
-// https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList
+// https://developer.mozilla.org/docs/Web/API/MediaQueryList
 const mql = window.matchMedia(mediaQueryString);
 ```
 
