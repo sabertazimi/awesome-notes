@@ -5682,7 +5682,7 @@ Use pseudo elements to construct circle and line:
 
 ### Geometry and Shape
 
-> CSS Shape on [CSS Tricks](https://css-tricks.com/the-shapes-of-css).
+[CSS shapes](https://css-tricks.com/the-shapes-of-css):
 
 - Background: `color`/`size`/`image`/`gradient`/`clip-path`.
   In modern browsers `background`/`gradient`/`clip-path`
@@ -5760,9 +5760,9 @@ Use pseudo elements to construct circle and line:
 
 #### Dash Line
 
-- background dash line
-- border dash line
-- pseudo element with `dashed` `text-decoration`
+- Background dash line.
+- Border dash line.
+- Pseudo element with `dashed` `text-decoration`.
 
 ```css
 .dash-background {
@@ -5777,6 +5777,50 @@ Use pseudo elements to construct circle and line:
 
 .dash::after {
   text-decoration-style: dashed;
+}
+```
+
+#### Menu Line
+
+```css
+.icon-menu {
+  display: inline-block;
+  width: 140px;
+  height: 10px;
+
+  /* Line gap */
+  padding: 35px 0;
+
+  /* Line 2 */
+  background-color: currentcolor;
+  background-clip: content-box;
+
+  /* Line 1 */
+  border-top: 10px solid;
+
+  /* Line 3 */
+  border-bottom: 10px solid;
+}
+```
+
+#### Dot
+
+```css
+.icon-dot {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+
+  /* Cycle gap */
+  padding: 10px;
+
+  /* Cycle shape */
+  background-color: currentcolor;
+  background-clip: content-box;
+
+  /* Cycle ring */
+  border: 10px solid;
+  border-radius: 50%;
 }
 ```
 
