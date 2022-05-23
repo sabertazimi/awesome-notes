@@ -1004,7 +1004,7 @@ can use the `z-index` property to adjust its stack level.
 
 数值越大, 处于可视的优先级越大.
 
-## Position Patterns
+## Position Pattern
 
 ### Static Position
 
@@ -1098,7 +1098,7 @@ Positioned elements with `top: percentage`
 depend on `height` of parent,
 if `height` of parent is `auto`, it's not working.
 
-## Float Patterns
+## Float Pattern
 
 `float` make element specified value of `display`:
 
@@ -1154,7 +1154,7 @@ making it possible to wrap text around complex objects rather than simple boxes:
 shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 ```
 
-## Flex Patterns
+## Flex Pattern
 
 [Flexbox Complete Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox)
 
@@ -1344,7 +1344,7 @@ main {
 }
 ```
 
-## Grid Patterns
+## Grid Pattern
 
 [Grid Complete Guide](https://css-tricks.com/snippets/css/complete-guide-grid):
 
@@ -1449,7 +1449,7 @@ h1.lines::after {
 }
 ```
 
-## Column Patterns
+## Column Pattern
 
 - float 左右元素 + margin 中间元素
 - float 元素 + width: %
@@ -1562,9 +1562,9 @@ margin in the direction of the float will pull the floated element in that direc
 }
 ```
 
-## Alignment Patterns
+## Alignment Pattern
 
-### Height Alignment Patterns
+### Height Alignment Pattern
 
 - `border` simulation.
 - Negative `margin`.
@@ -1620,7 +1620,7 @@ Negative margin:
 }
 ```
 
-## Centering Patterns
+## Centering Pattern
 
 ### Horizontal Centering Pattern
 
@@ -1685,11 +1685,11 @@ a.button::before {
 
 在子容器中在设置新元素即可.
 
-### Centering Patterns Reference
+### Centering Pattern Reference
 
 - Centering CSS complete [guide](https://css-tricks.com/centering-css-complete-guide).
 
-## Inline Patterns
+## Inline Pattern
 
 ### Inline Element Height
 
@@ -4871,7 +4871,7 @@ td:last-child {
 
 ### Form
 
-[Form Design Patterns](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post):
+[Form Design Pattern](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post):
 
 - 由于表单组件多为 `Replaced Element`, 通过 CSS 控制样式存在困难,
   一般利用 `label` 包裹 `input + span` 的方式,
