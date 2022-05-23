@@ -1648,6 +1648,7 @@ Negative margin:
 - `padding`.
 - `line-height`.
 - `vertical-align: middle`:
+  - 作用机制: 对齐基线 (`baseline`) 往上 1/2 `x-height` 高度 (即小写字母 `x` 交叉点处).
   - 作用环境: parent element `line-height` === `height`.
   - 作用对象: children `inline`/`inline-block`/`table-cell` element.
 - `flexbox`.

@@ -30,8 +30,13 @@ tags: [Web, CSS]
 
 > Refer to: font-family, font-size, spacing, color.
 
-- [Typography Reference](https://noti.st/rar/mz1rIY/golden-rules-of-typography-on-the-web)
+- [Understanding Typography](https://material.io/design/typography/understanding-typography)
 - [Practical Typography](https://practicaltypography.com)
+- [Typography Reference](https://noti.st/rar/mz1rIY/golden-rules-of-typography-on-the-web)
+
+### Typography Properties
+
+[![Typography Properties](./figures/TypographyProperties.png)](https://material.io/design/typography/understanding-typography.html#type-properties)
 
 ### Font Size and Spacing
 
