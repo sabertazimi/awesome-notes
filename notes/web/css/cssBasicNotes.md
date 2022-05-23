@@ -1643,7 +1643,7 @@ Negative margin:
 
 ### Vertical Centering Pattern
 
-#### Vertical Inline element
+#### Vertical Centering Inline element
 
 - `padding`.
 - `line-height`.
@@ -1651,7 +1651,7 @@ Negative margin:
   - 作用机制: 对齐基线 (`baseline`) 往上 1/2 `x-height` 高度 (即小写字母 `x` 交叉点处).
   - 作用环境: parent element `line-height` === `height`.
   - 作用对象: children `inline`/`inline-block`/`table-cell` element.
-- `flexbox`.
+- `flex`.
 - `grid`.
 
 Button label (`<a>`) vertical alignment:
@@ -1665,13 +1665,13 @@ a.button::before {
 }
 ```
 
-#### Vertical Block element
+#### Vertical Centering Block element
 
-- top + margin
-- top + translateY
-- vertical-align
-- flexbox
-- grid
+- `top` + `margin`.
+- `top` + `translateY`.
+- `vertical-align`.
+- `flex`.
+- `grid`.
 
 ```css
 .form-item-label {
@@ -1696,6 +1696,19 @@ a.button::before {
 - 内联元素默认的高度完全受 `font-size` 大小控制.
 - 内联元素没有可视宽度和可视高度 (`clientHeight`/`clientWidth` always `0`),
   垂直方向的行为表现完全受 `line-height` 和 `vertical-align` 的影响.
+
+#### Line Height
+
+行间距:
+
+- 半行间距 = `(line-height * font-size - font-size) / 2`.
+- 行间距 = 第一行下半行间距 + 第二行上半行间距.
+
+`line-height` 继承:
+
+- `%` 与 `em` 继承计算值, `number` 继承数值.
+- `line-height` 最好使用 `number`, 使得子代继承 `line-height` 时文字正常排版,
+  不会出现 `line-height` < `font-size` 导致文字重叠的现象.
 
 ### Inline Element Padding
 
