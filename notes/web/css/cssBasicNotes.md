@@ -1816,17 +1816,19 @@ Inline element 与父元素下边缘存在空隙,
   实际上是此种情况下的**字母尾巴**预留机制:
   行框盒子存在幽灵空白节点, 默认基于 `baseline` 对齐 (小写字母 `x` 底部).
 
-清除间隙的方法 (`img` image 5px problem):
+清除间隙的方法:
 
 - 清除 `Strut` 高度:
   父元素 `font-size: 0` / `line-height: 0`,
   设置 `Inline Formatting Context` 高度为 `0`.
 - 改变对齐方式:
-  `<img>` `vertical-align` 设置为 `top`/`middle`/`bottom`.
+  子元素 `vertical-align` 设置为 `top`/`middle`/`bottom`.
 - 清除 `Strut` 节点:
-  `<img>` `display` 设置为 `inline-block`/`block`,
+  子元素 `display` 设置为 `inline-block`/`block`,
   创建 `Block Formatting Context`,
   直接清除幽灵空白节点.
+
+可以用以上方法解决 `<img>` image 5px problem.
 
 ### Inline Element Padding
 
