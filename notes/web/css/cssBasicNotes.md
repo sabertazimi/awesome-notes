@@ -955,8 +955,8 @@ Floating and absolutely positioned elements margin **never collapse**.
   会自动作用至容器内所有内联元素.
 - Block level element:
   由于行框盒子幽灵空白节点的存在,
-  `line-height` 会决定 block level element 内部元素的最小高度,
-  e.g `<div><span></span></div>` 使得高度不为 `0`.
+  `line-height * font-size` 会决定 block level element 内部元素的最小高度,
+  e.g `<div><span></span></div>` 高度不为 `0`.
 
 ### Box Vertical Align
 
@@ -1022,6 +1022,28 @@ Character box/em-box/selection box):
 #### Containing Box
 
 `<p>` tag 会形成一个包含盒子, 此盒子由一行一行的行框盒子组成.
+
+:::tip Box Height
+
+在很多情况下, 容器高度**莫名奇妙**变大,
+都是行框盒子幽灵空白节点 (`Strut`), `line-height`, `vertical-align` 共同作用的结果:
+
+- 容器内部除了显式的内联元素外, 每行还存在幽灵空白节点 (`Strut`).
+- `line-height` 可继承, 且基于 `font-size` 进行计算.
+- `vertical-align` 默认对齐方式为基线对齐 (`baseline`).
+
+常见例子有:
+
+- `<div><span></span></div>` 高度不为 `0`:
+  `Strut` 撑高容器.
+- `<div class="leading-8"><span class="text-2xl">文字</span></div>`
+  高度不为 `32px` (`leading-8`):
+  当 `Struct` `font-size` 与内联元素 `font-size` 差距过大时,
+  进行文字对齐时会撑高容器.
+- `<div><img src="1.jpg"></div>` 下边缘存在空隙:
+  `Strut` 默认基于[基线对齐](#inline-element-baseline).
+
+:::
 
 ### Block Formatting Context
 
