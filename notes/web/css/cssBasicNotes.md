@@ -4967,12 +4967,59 @@ h1::after {
 
 ### Modal
 
+#### Overlay
+
 ```css
 .overlay {
   position: absolute;
   width: 100%;
   height: 100%;
   background: rgb(0 0 0 / 50%);
+}
+```
+
+#### Dialog
+
+```html
+<div class="container">
+  <div class="dialog">
+    <div class="content">内容占位</div>
+  </div>
+</div>
+```
+
+```css
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  text-align: center;
+  white-space: nowrap;
+
+  /* for IE8 */
+  background: url('data:image/png;base64,iVB...g==');
+
+  /* for IE9+ */
+  background: rgb(0 0 0 / 50%), none;
+}
+
+.container::after {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  content: '';
+}
+
+.dialog {
+  display: inline-block;
+  text-align: left;
+  white-space: normal;
+  vertical-align: middle;
+  background-color: #fff;
+  border-radius: 6px;
 }
 ```
 
