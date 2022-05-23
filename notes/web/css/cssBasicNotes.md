@@ -925,29 +925,6 @@ Floating and absolutely positioned elements margin **never collapse**.
   但无法影响兄弟元素布局.
 - 定高容器**子元素**的 `margin-bottom` 或者定宽容器**子元素**的 `margin-right` 的定位作用失效.
 
-### Box Column
-
-Multiple-column layout:
-
-- `column-count`
-- `column-width`
-- `column-gap`
-- `column-rule`
-
-```css
-/* 子元素分列 */
-.three-column {
-  column-gap: 1em;
-  padding: 1em;
-  column-count: 3;
-}
-```
-
-- column-count
-- column-width
-- column-gap 分隔距离
-- column-rule(style) 分隔线
-
 ### Box Overflow
 
 `overflow`:
@@ -1489,12 +1466,15 @@ h1.lines::after {
 
 #### Absolute and Margin Column
 
-position .left and .right with absolute, add margin-left and margin-right to .middle
+Position `.left` and `.right` with `absolute`,
+add `margin-left` and `margin-right` to `.middle`.
 
 #### Float and Margin Column
 
 ```html
-.left .right .middle
+<div class="left"></div>
+<div class="right"></div>
+<div class="middle"></div>
 ```
 
 ```css
@@ -1513,17 +1493,20 @@ position .left and .right with absolute, add margin-left and margin-right to .mi
 
 #### Float and Negative Margin Column
 
-On a floated element, a negative margin opposite the float direction will decrease
-the float area, causing adjacent elements to overlap the floated element. A negative
-margin in the direction of the float will pull the floated element in that direction.
+On a floated element,
+a negative `margin` opposite the float direction
+will decrease the float area,
+causing adjacent elements to overlap the floated element.
+A negative `margin` in the direction of the float
+will pull the floated element in that direction.
 
-1. HTML: .middle first
-2. padding-left and padding-right to .container,
-   `min-width: 2 * (leftWidth + rightWidth)` to container
-3. Float: `float: left` to .left/.middle/.right
-4. Negative Margin: `margin-left: -100%` to .left,
-   `margin-right: -rightWidth px` to .right
-5. Move: `right: leftWidth px` to .left
+1. HTML: `.middle` first.
+2. `padding-left` and `padding-right` to `.container`,
+   `min-width: 2 * (leftWidth + rightWidth)` to `.container`.
+3. Float: `float: left` to `.left`, `.middle` and `.right`.
+4. Negative Margin: `margin-left: -100%` to `.left`,
+   `margin-right: -rightWidth px` to `.right`.
+5. Move: `right: leftWidth px` to `.left`.
 
 ```html
 <div class="container">
@@ -1561,6 +1544,29 @@ margin in the direction of the float will pull the floated element in that direc
   background-color: red;
 }
 ```
+
+### Multiple Column Pattern
+
+Multiple-column layout:
+
+- `column-count`
+- `column-width`
+- `column-gap`
+- `column-rule`
+
+```css
+/* 子元素分列 */
+.three-column {
+  column-gap: 1em;
+  padding: 1em;
+  column-count: 3;
+}
+```
+
+- column-count
+- column-width
+- column-gap 分隔距离
+- column-rule(style) 分隔线
 
 ## Alignment Pattern
 
