@@ -1691,6 +1691,25 @@ a.button::before {
 
 ## Inline Pattern
 
+### Inline Box Model
+
+- Content area (character box/em-box/selection box):
+  一种围绕文字看不见的盒子,
+  其大小仅受字符本身特性控制,
+  一般将选中区域等价于此盒子.
+- Inline box:
+  - 内联元素形成外部内联盒子, 让元素不成块显示, 而是排成一行.
+  - `<span>`/`<a>`/`<em>` 等 tag 会产生一般内联盒子.
+  - Bare text 会产生匿名内联盒子.
+- Line box:
+  - 每一行会形成一个行框盒子.
+  - 每个行框盒子的前面有一个[**幽灵空白节点**](https://www.w3.org/TR/CSS22/visudet.html#strut)
+    (zero-width inline box with the element's `font` and `line height` properties).
+    父元素的 `line-height` 会幽灵空白节点产生作用.
+  - 将内联元素设置为 `display: inline-block` 可以消除幽灵空白节点.
+- Containing box:
+  `<p>` tag 会形成一个包含盒子, 此盒子由一行一行的行框盒子组成.
+
 ### Inline Element Height
 
 - 内联元素默认的高度完全受 `font-size` 大小控制.
