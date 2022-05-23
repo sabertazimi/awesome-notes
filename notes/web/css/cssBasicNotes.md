@@ -1807,6 +1807,17 @@ a.button::before {
 
 ### Inline Element Baseline
 
+#### Inline Block Element Baseline
+
+`inline-block` element:
+
+- 内部没有内联元素, 或者 `overflow` not visible:
+  其基线为 `margin` 底边缘.
+- 内部存在内联元素:
+  其基线为最后一行内联元素的基线.
+
+#### Vertical Align Baseline
+
 Inline element 与父元素下边缘存在空隙,
 原因在于文字排版的基线 (`baseline`) 对齐机制:
 
@@ -1828,7 +1839,7 @@ Inline element 与父元素下边缘存在空隙,
   创建 `Block Formatting Context`,
   直接清除幽灵空白节点.
 
-可以用以上方法解决 `<img>` image 5px problem.
+可以用以上方法解决 `<img>` image 5px problem 或相似问题.
 
 ### Inline Element Padding
 
