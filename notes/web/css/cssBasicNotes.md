@@ -1858,6 +1858,12 @@ article a {
 }
 ```
 
+### Inline Element Margin
+
+非主动触发位移的内联元素是不会位移至计算容器外面,
+内联元素 `margin-top` 设置过大时 `margin-top` 会直接失效,
+内联元素依然会处于基线对齐位置.
+
 ### Text Alignment
 
 justify: 自适应, 左右都无空格
