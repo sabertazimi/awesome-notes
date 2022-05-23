@@ -1818,9 +1818,15 @@ Inline element 与父元素下边缘存在空隙,
 
 清除间隙的方法 (`img` image 5px problem):
 
-- 父元素 `font-size: 0` / `line-height: 0`: 设置 `Inline Formatting Context` 高度为 `0`.
-- `vertical-align: bottom`: 改变对齐方式.
-- `display: inline-block`/`display: block`: 消除幽灵空白节点.
+- 清除 `Strut` 高度:
+  父元素 `font-size: 0` / `line-height: 0`,
+  设置 `Inline Formatting Context` 高度为 `0`.
+- 改变对齐方式:
+  `<img>` `vertical-align` 设置为 `top`/`middle`/`bottom`.
+- 清除 `Strut` 节点:
+  `<img>` `display` 设置为 `inline-block`/`block`,
+  创建 `Block Formatting Context`,
+  直接清除幽灵空白节点.
 
 ### Inline Element Padding
 
