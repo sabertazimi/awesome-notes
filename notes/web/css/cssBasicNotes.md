@@ -832,7 +832,9 @@ resize: none/both/horizontal/vertical/inherit;
 
 ### Box Padding
 
-Auto flow `percentage` padding calculate by `width`:
+#### Percentage Padding
+
+Auto flow percentage `padding` calculate by `width`:
 
 ```css
 .box {
@@ -862,7 +864,7 @@ CSS2 visual formatting model:
 
 #### Negative Margin
 
-Negative horizontal margin make `width` **stretch**:
+Negative horizontal `margin` make `width` **stretch**:
 
 ```css
 /* ul width = 100% + 20px */
@@ -877,7 +879,7 @@ ul > li {
 }
 ```
 
-Negative vertical margin change vertical flow:
+Negative vertical `margin` change vertical flow:
 
 ```css
 .column-box {
@@ -894,7 +896,7 @@ Negative vertical margin change vertical flow:
 
 #### Percentage Margin
 
-Auto flow percentage margin calculate by `width`.
+Auto flow percentage `margin` calculate by `width`.
 
 #### Collapse Margin
 
@@ -1120,6 +1122,7 @@ can use the `z-index` property to adjust its stack level:
 ### Relative Position
 
 - 使元素相对于 `static` 布局, 可使用 `top/bottom/left/right` 属性进行定位.
+- 相对方向 (opposite) 的定位同时设置: `top` 覆盖 `bottom`, `left` 覆盖 `right`.
 - 初始位置被保留, 不脱离文档流.
 
 ### Absolute Position
@@ -1127,6 +1130,9 @@ can use the `z-index` property to adjust its stack level:
 - 使元素相对于父元素 (`position: non-static`) 布局 (包括 `%` 形式的 `width/height`).
 - 若 body 为 `static`, 则元素不会随着滚动条滚动, 其相对于浏览器窗口布局.
 - 可使用 `top/bottom/left/right` 属性进行定位.
+- 相对方向 (opposite) 的定位同时设置:
+  若未显示设置该方向的元素大小, 则元素具有流动性, 受 `containing block` 影响其大小,
+  `.fluid { position: absolute; left: 0; right: 0; }`.
 - 初始位置不被保留, 脱离文档流.
 - `float` property computed to `float: none`.
 - `display` `inline-table` computed to `table`.
@@ -1193,9 +1199,10 @@ can use the `z-index` property to adjust its stack level:
 
 ### Percentage Position
 
-Positioned elements with `top: percentage`
-depend on `height` of parent,
-if `height` of parent is `auto`, it's not working.
+Positioned elements percentage `top`/`right`/`bottom`/`left`
+calculate  by containing block `height`:
+
+If `containing block` `height` is `auto`, it calculated to `0`.
 
 ## Float Pattern
 
