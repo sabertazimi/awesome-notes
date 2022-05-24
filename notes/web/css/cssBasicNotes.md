@@ -1125,7 +1125,7 @@ can use the `z-index` property to adjust its stack level:
 ### Absolute Position
 
 - 使元素相对于父元素 (`position: non-static`) 布局 (包括 `%` 形式的 `width/height`).
-- 若 body 为 static, 则元素不会随着滚动条滚动, 其相对于浏览器窗口布局.
+- 若 body 为 `static`, 则元素不会随着滚动条滚动, 其相对于浏览器窗口布局.
 - 可使用 `top/bottom/left/right` 属性进行定位.
 - 初始位置不被保留, 脱离文档流.
 - `float` property computed to `float: none`.
@@ -1133,6 +1133,16 @@ can use the `z-index` property to adjust its stack level:
 - `display` `inline`/`inline-block`/`table-*` computed to `block`.
 
 ```css
+.tooltip {
+  position: absolute;
+}
+
+.form-alert,
+.form-warning,
+.form-info {
+  position: absolute;
+}
+
 .overlay {
   position: absolute;
   top: 0;
@@ -1209,7 +1219,9 @@ if `height` of parent is `auto`, it's not working.
 
 ### Float Element
 
-- 包裹性.
+- 包裹性:
+  - 宽度受子元素影响.
+  - 宽度受 containing block 影响.
 - 块状化并格式化上下文.
 - 没有任何 `margin` 合并.
 - 破坏文档流: 父级高度塌陷.
