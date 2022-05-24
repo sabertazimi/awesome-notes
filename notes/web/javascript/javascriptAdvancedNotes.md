@@ -5741,7 +5741,8 @@ observer.observe({ type: 'layout-shift', buffered: true });
 - Resources priority [guide](https://web.dev/prioritize-resources).
 - 3rd-party scripts loading [guide](https://www.patterns.dev/posts/third-party)
 - Web vitals real world [case](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw).
-- Web monitor real world [case](https://zhuanlan.zhihu.com/p/420330110).
+- Web performance monitoring data collection and report [case](https://zhuanlan.zhihu.com/p/420330110).
+- Web performance monitoring real world [case](https://juejin.cn/post/7078512301665419295).
 
 ## Testing
 
