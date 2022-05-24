@@ -1012,6 +1012,13 @@ Character box/em-box/selection box):
 - `<span>`/`<a>`/`<em>` tag 会产生一般内联盒子.
 - Bare text 会产生匿名内联盒子.
 
+```css
+::first-line {
+  color: white;
+  background: red;
+}
+```
+
 #### Line Box
 
 - 每一行会形成一个行框盒子.
