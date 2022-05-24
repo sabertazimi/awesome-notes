@@ -1535,14 +1535,15 @@ h1.lines::after {
 
 ### Two Column Pattern
 
-利用父元素 `relative` 与 子元素 `absolute` 进行布局
+#### Block Two Column
 
-- `inline-block` + `inline-block`
-- `float` + `float`
-- `float` + `margin-left`
-  (block element ignore float element, inline element surround float element)
-- `absolute` + `margin-left` (absolute element not in normal flow)
-- `float` + BFC
+- `inline-block` + `inline-block`.
+
+#### Absolute Two Column
+
+- `absolute` + `margin-left`:
+  absolute element not in normal flow.
+- 利用父元素 `relative` 与子元素 `absolute` 进行布局.
 
 ```css
 .div-1 {
@@ -1564,14 +1565,38 @@ h1.lines::after {
 }
 ```
 
+#### Float Two Column
+
+- `float` + `float`.
+- `float` + `margin-left`:
+  block element ignore float element,
+  inline element surround float element.
+- `float` + BFC.
+
+```css
+.container {
+  overflow: hidden;
+}
+
+.left {
+  float: left;
+  width: 60px;
+  height: 60px;
+}
+
+.right {
+  margin-left: 70px;
+}
+```
+
 ### Three Column Pattern
 
-#### Absolute and Margin Column
+#### Absolute Three Column
 
 Position `.left` and `.right` with `absolute`,
 add `margin-left` and `margin-right` to `.middle`.
 
-#### Float and Margin Column
+#### Float Three Column
 
 ```html
 <div class="left"></div>
@@ -1592,8 +1617,6 @@ add `margin-left` and `margin-right` to `.middle`.
   margin: 0 right-width 0 left-width;
 }
 ```
-
-#### Float and Negative Margin Column
 
 On a floated element,
 a negative `margin` opposite the float direction
@@ -1653,8 +1676,8 @@ Multiple-column layout:
 
 - `column-count`
 - `column-width`
-- `column-gap`
-- `column-rule`
+- `column-gap`: 分隔距离.
+- `column-rule` (style): 分隔线.
 
 ```css
 /* 子元素分列 */
@@ -1664,11 +1687,6 @@ Multiple-column layout:
   column-count: 3;
 }
 ```
-
-- column-count
-- column-width
-- column-gap 分隔距离
-- column-rule(style) 分隔线
 
 ## Alignment Pattern
 
