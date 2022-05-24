@@ -1557,9 +1557,6 @@ h1.lines::after {
 
 ## Column Pattern
 
-- float 左右元素 + margin 中间元素
-- float 元素 + width: %
-
 ### Two Column Pattern
 
 #### Block Two Column
@@ -1602,7 +1599,7 @@ h1.lines::after {
 
 ```css
 .container {
-  overflow: hidden;
+  overflow: hidden; /* BFC creation */
 }
 
 .left {
@@ -1730,7 +1727,7 @@ Multiple-column layout:
 - `grid` layout:
   `grid` 布局元素默认等高.
 
-Border simulation:
+#### Border Simulation Height Alignment
 
 ```css
 /* 导航背景区 border 创建 */
@@ -1739,7 +1736,7 @@ Border simulation:
   border-left: 150px solid #333;
 }
 
-/* 清除浮动影响, 不能使用 overflow:hidden */
+/* 清除浮动影响 */
 .box::after {
   display: block;
   clear: both;
@@ -1758,7 +1755,7 @@ Border simulation:
 }
 ```
 
-Negative margin:
+#### Negative Margin Height Alignment
 
 ```css
 .column-box {
