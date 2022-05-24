@@ -3050,7 +3050,16 @@ input {
 }
 ```
 
-## CSS ScrollBar
+## CSS Scrolling
+
+### Overflow Scrolling
+
+`overflow: scroll` 剪裁界线为 `padding box`.
+但部分浏览器不符合这一标准.
+实际项目开发时, 要尽量避免滚动容器设置 `padding-bottom` 值:
+
+- 跨浏览器样式表现不一致.
+- 跨浏览器 `scrollHeight` 值不一致.
 
 ### Custom ScrollBar
 
