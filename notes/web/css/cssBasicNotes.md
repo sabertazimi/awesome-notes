@@ -3157,7 +3157,7 @@ body {
 
 ### Horizontal Scrolling
 
-[Horizontal Scrolling](https://designshack.net/articles/navigation/horizontal-scrolling-pros-cons/):
+[Horizontal Scrolling](https://designshack.net/articles/navigation/horizontal-scrolling-pros-cons):
 
 - Avoid a full-screen horizontal scroll;
   ensure that users know there is also content
@@ -5975,11 +5975,15 @@ new_y = element_original_y + (mouseY - original_mouseY);
 
 ### Slides
 
-- `position: absolute` to stack slides up
-- `id` + `:target` for style current slide (change z-index)
-- add animation to slide change: (prev, current, next)
-  `.slide`, `.slide:target`, `.slide:target ~ slide`
-- add `overflow: hidden` to `body` when animation
+**锚点定位**本质上改变了 `scrollTop` 或 `scrollLeft` 值,
+即使容器设置 `overflow: hidden` 也会发生滚动,
+可以利用**锚点定位**实现 CSS-only slides:
+
+- `position: absolute` to stack slides up.
+- `id` + `:target` for style current slide (change z-index).
+- Add animation to slide change: (prev, current, next)
+  `.slide`, `.slide:target`, `.slide:target ~ slide`.
+- Add `overflow: hidden` to container when animation.
 
 ```html
 <main>
