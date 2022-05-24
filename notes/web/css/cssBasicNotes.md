@@ -1187,14 +1187,28 @@ if `height` of parent is `auto`, it's not working.
 
 ## Float Pattern
 
+### Float Element
+
+- 包裹性.
+- 块状化并格式化上下文.
+- 没有任何 `margin` 合并.
+- 破坏文档流: 父级高度塌陷.
+- 浮动元素与行框盒子不可重叠.
+- 浮动元素的浮动参考 (`float reference`) 是行框盒子:
+  浮动元素在当前行框盒子内定位.
+
+### Float Block Formatting Context
+
 `float` make element specified value of `display`:
 
 - `inline-table` computed to `table`.
+- `inline-flex` computed to `flex`.
+- `inline-grid` computed to `grid`.
 - `inline`/`inline-block`/`table-*` computed to `block`.
 
 ### Fixed Parent
 
-Floating wont work inside fixed or absolute `div` unless specify width:
+Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 
 ```css
 .parent {
@@ -1207,8 +1221,13 @@ Floating wont work inside fixed or absolute `div` unless specify width:
 
 ### Float ClearFix
 
-为父容器 (`.row`) 添加 `.clearfix`,
-`display: table` 防止外边距塌陷, `clear: both` 清除浮动:
+为父容器 (`.row`) 添加 `.clearfix`:
+
+- `clear: both` 只能作用于 block level element:
+  `::before`/`::after` 默认为 inline level element,
+  `display: table` 将 `::before`/`::after` 设置为 block level element.
+- `clear: both` 本质是让自身不和浮动元素在一行显示,
+  并不是真正意义上的清除浮动.
 
 ```css
 .row {
