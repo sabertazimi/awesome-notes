@@ -659,6 +659,7 @@ tags: [Web, Framework, Library]
 - [Tilt: Smooth 3D Tilt JavaScript Library](https://github.com/micku7zu/vanilla-tilt.js)
 - [CountUp: Count Up Animation](https://github.com/glennreyes/react-countup)
 - [TheatreJS: Motion Design Editor for Web](https://github.com/ariaminaei/theatre)
+- [AutoAnimate: Zero-config and Drop-in Animation Utility](https://github.com/formkit/auto-animate)
 
 ### CLI Animation
 
