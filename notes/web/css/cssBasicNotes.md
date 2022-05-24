@@ -1079,6 +1079,19 @@ Character box/em-box/selection box):
 - direct children of `display: flex/inline-flex`.
 - direct children of `display: grid/inline-grid`.
 
+```css
+.bfc-1 {
+  overflow: hidden;
+}
+
+.bfc-2 {
+  display: table-cell;
+  *display: inline-block; /* For IE7 */
+  width: 9999px;
+  *width: auto; /* For IE7 */
+}
+```
+
 ### Stack Context
 
 The root element forms the root stacking context.
