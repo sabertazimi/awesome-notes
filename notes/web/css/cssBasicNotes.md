@@ -3202,31 +3202,6 @@ Horizontal Scrolling Methods:
 
 - [Animation 101 Tutorial](https://github.com/cssanimation/css-animation-101)
 
-### Animation Property
-
-#### Transition and Transform
-
-```css
-@media screen and (prefers-reduced-motion: reduce) {
-  .div {
-    transition: none;
-    transform: scaleX(0);
-  }
-}
-
-.div {
-  transition: * * transform * * 0.5s ease;
-  transform: scaleX(0);
-}
-
-.div:hover,
-.div:focus {
-  transform: scaleX(1);
-}
-```
-
-#### Animation and Transform
-
 ### Animation Helper
 
 - opacity
@@ -3408,23 +3383,23 @@ setTimeout(() => {
 ### Transform
 
 Transformations do affect the visual rendering,
-but have no affect on the CSS layout other than affecting overflow.
+but have no affect on the CSS layout other than affecting `overflow`.
 Transforms are also taken into account
 when computing client rectangles exposed
-via the Element Interface Extensions,
-namely getClientRects() and getBoundingClientRect(),
-which are specified in [CSSOM-VIEW].
+via the `Element Interface Extensions`,
+namely `getClientRects()` and `getBoundingClientRect()`
+which are specified in [CSSOM-VIEW]:
 
 - scale/X/Y/Z/3d(): 0 - n
 - translate/X/Y/Z/3d(): n px
 - rotate/X/Y/Z/3d(): deg
 - skew/X/Y(): deg
 - matrix()/matrix3d()
-- transform-origin: change transform start point
-  `top bottom center left right`
-- perspective(): 为 **3D** 转换元素定义透视视图
-- keep translate(-50%, -50%) in keyframe transform property list
-  when using it for alignment
+- `transform-origin`:
+  change transform start point, `top bottom center left right`.
+- `perspective()`: 为 **3D** 转换元素定义透视视图.
+- Keep `translate(-50%, -50%)` in keyframe transform property list
+  when using it for alignment.
 
 一般需要在容器元素上加上以下样式:
 
@@ -3479,7 +3454,7 @@ transform-style 属性也是 3D 效果中经常使用的,
 前者 flat 为默认值, 表示平面的,
 后者 preserve-3d 表示 3D 透视.
 
-#### backface-visibility
+#### Backface Visibility
 
 ```css
 backface-visibility: hidden;
@@ -3487,10 +3462,10 @@ backface-visibility: hidden;
 
 当元素 `rotateY(180deg)` 时, 元素将被隐藏
 
-### Animation Details
+### Animation Property
 
-- transform: scale, translate, rotate, skew
-- animation bounce/cache: first -100, then, +5/+20, finally 0
+- `transform`: scale, translate, rotate, skew.
+- `animation` bounce/cache: first -100, then, +5/+20, finally 0.
 
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
@@ -3501,36 +3476,6 @@ backface-visibility: hidden;
 
 .element {
   animation: name duration timing-function delay iteration-count direction;
-}
-```
-
-> Tip : fade in body style
-
-```css
-@keyframes body-fade-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@media screen and (prefers-reduced-motion: reduce) {
-  body {
-    animation: none;
-    animation-duration: 2.5s;
-    animation-timing-function: ease;
-    animation-iteration-count: 1;
-  }
-}
-
-body {
-  animation-name: body-fade-in;
-  animation-duration: 2.5s;
-  animation-timing-function: ease;
-  animation-iteration-count: 1;
 }
 ```
 
@@ -3640,12 +3585,12 @@ element.classList.add('animate');
 setTimeout(() => element.classList.remove('animate'), duration);
 ```
 
-#### FLIP
+### FLIP Pattern
 
-- first: 初始状态
-- last: 动画结束状态
-- invert: last 至 first 的 `transform` 属性
-- play: `transition: transform .2s linear`
+- first: 初始状态.
+- last: 动画结束状态.
+- invert: last 至 first 的 `transform` 属性.
+- play: `transition: transform .2s linear`.
 
 ```css
 /* first: scale(1), last: scale(1.2) */
@@ -5856,6 +5801,34 @@ function leave(el, done) {
 }
 ```
 
+```css
+@keyframes body-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+    animation-duration: 2.5s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+  }
+}
+
+body {
+  animation-name: body-fade-in;
+  animation-duration: 2.5s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+```
+
 #### Accordion Menu Animation
 
 ```css
@@ -5955,6 +5928,27 @@ function leave(el, done) {
   96% {
     margin-left: 0;
   }
+}
+```
+
+#### Scale Up Animation
+
+```css
+@media screen and (prefers-reduced-motion: reduce) {
+  .div {
+    transition: none;
+    transform: scaleX(0);
+  }
+}
+
+.div {
+  transition: transform 0.5s ease;
+  transform: scaleX(0);
+}
+
+.div:hover,
+.div:focus {
+  transform: scaleX(1);
 }
 ```
 
