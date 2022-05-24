@@ -977,6 +977,7 @@ Floating and absolutely positioned elements margin **never collapse**.
 - [Inline level element](https://developer.mozilla.org/docs/Web/HTML/Inline_elements):
   - `<span>`/`<strong>`/`<em>`.
   - `<img>`/`<button>`/`<input>`.
+  - `::before`/`::after`.
 - `display: table-cell` 元素.
 - 用 `display: inline-*` 或 `display: table-cell` **以外**的方式
   创建 `Box Formatting Context` 后,
