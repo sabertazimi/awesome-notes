@@ -62,7 +62,7 @@ Basic [`tsconfig`](https://www.typescriptlang.org/tsconfig):
     "removeComments": true, // 删除编译后的所有的注释
     "noEmit": true, // 不生成输出文件
     "importHelpers": true, // 从 tslib 导入辅助工具函数
-    "isolatedModules": true, // 将每个文件做为单独的模块 （与 'ts.transpileModule' 类似）
+    "isolatedModules": true, // 将每个文件做为单独的模块 (与 'ts.transpileModule' 类似)
     "resolveJsonModule": true,
 
     /* 严格的类型检查选项 */
@@ -938,7 +938,7 @@ type Foo = Readonly<Record<number, number>>;
 // 使用
 
 const foo: Foo = { 0: 123, 2: 345 };
-console.log(foo[0]); // ok（读取）
+console.log(foo[0]); // ok (读取)
 foo[0] = 456; // Error: 属性只读
 ```
 
@@ -2778,6 +2778,182 @@ logger(user); // Oops! `user.isSuperAdmin` is undefined.
 | `T1 \| T2`                | `T1 ∪ T2` (Union)        |
 | `T1 & T2`                 | `T1 ∩ T2` (Intersection) |
 | `unknown`                 | Universal set            |
+
+## TypeScript Internals
+
+### TypeScript Compiler
+
+[Compiler](https://github.com/Microsoft/TypeScript/tree/main/src/compiler):
+
+- Scanner 扫描器 (`scanner.ts`)
+- Parser 解析器 (`parser.ts`).
+- Binder 绑定器 (`binder.ts`).
+- Checker 检查器 (`checker.ts`).
+- Emitter 发射器 (`emitter.ts`).
+
+```bash
+Source Code ~~Scanner~~> Tokens
+Tokens ~~Parser~~> AST
+AST ~~Binder~~> Symbols
+AST + Symbols ~~Checker~~> Type Validation
+AST + Checker ~~Emitter~~> JavaScript
+```
+
+#### TypeScript Scanner
+
+```ts
+import ts from 'typescript';
+
+// 单例扫描器
+const scanner = ts.createScanner(ts.ScriptTarget.Latest, /* 忽略杂项 */ true);
+
+// 此函数与初始化使用的 `initializeState` 函数相似
+function initializeState(text: string) {
+  scanner.setText(text);
+  scanner.setOnError((message: ts.DiagnosticMessage, length: number) => {
+    console.error(message);
+  });
+  scanner.setScriptTarget(ts.ScriptTarget.ES5);
+  scanner.setLanguageVariant(ts.LanguageVariant.Standard);
+}
+
+// 使用示例
+initializeState(`const foo = 123;`.trim());
+
+// 开始扫描
+let token = scanner.scan();
+
+while (token !== ts.SyntaxKind.EndOfFileToken) {
+  console.log(ts.formatSyntaxKind(token));
+  token = scanner.scan();
+}
+```
+
+#### TypeScript Parser
+
+```bash
+程序 ->
+    CompilerHost.getSourceFile ->
+        (全局函数 parser.ts).createSourceFile ->
+            Parser.parseSourceFile
+```
+
+```ts
+import ts from 'typescript';
+
+function printAllChildren(node: ts.Node, depth = 0) {
+  console.log(
+    new Array(depth + 1).join('----'),
+    ts.formatSyntaxKind(node.kind),
+    node.pos,
+    node.end
+  );
+  depth++;
+  node.getChildren().forEach(c => printAllChildren(c, depth));
+}
+
+const sourceCode = `const foo = 123;`.trim();
+const sourceFile = ts.createSourceFile(
+  'foo.ts',
+  sourceCode,
+  ts.ScriptTarget.ES5,
+  true
+);
+printAllChildren(sourceFile);
+```
+
+#### TypeScript Binder
+
+```bash
+program.getTypeChecker ->
+    ts.createTypeChecker（检查器中）->
+        initializeTypeChecker（检查器中） ->
+            for each SourceFile `ts.bindSourceFile`（绑定器中）
+            for each SourceFile `ts.mergeSymbolTable`（检查器中）
+```
+
+#### TypeScript Checker
+
+初始化检查器:
+
+```bash
+program.getTypeChecker ->
+    ts.createTypeChecker（检查器中）->
+        initializeTypeChecker（检查器中） ->
+            for each SourceFile `ts.bindSourceFile`（绑定器中）
+            for each SourceFile `ts.mergeSymbolTable`（检查器中）
+```
+
+真正的类型检查会在调用 `getDiagnostics` 时才发生:
+
+```bash
+program.emit ->
+    emitWorker (program local) ->
+        createTypeChecker.getEmitResolver ->
+            // 第一次调用下面的几个 createTypeChecker 的本地函数
+            call getDiagnostics ->
+                getDiagnosticsWorker ->
+                    checkSourceFile
+
+            // 接着
+            return resolver
+            // 通过对本地函数 createResolver() 的调用，resolver 已在 createTypeChecker 中初始化。
+```
+
+#### TypeScript Emitter
+
+```bash
+Program.emit ->
+    `emitWorker` （在 program.ts 中的 createProgram） ->
+        `emitFiles` （emitter.ts 中的函数）
+```
+
+### TypeScript Internals API
+
+```ts
+import ts from 'typescript';
+
+// Path of the file we want to analyze.
+// It's important that @types/react is installed in the same package.
+const filePath = 'example.jsx';
+
+// Make sure to analyze .js/.jsx files.
+const options = {
+  allowJs: true,
+  jsx: 'preserve',
+};
+
+// Create a TypeScript compilation environment.
+const host = ts.createCompilerHost(options);
+
+// Parse and analyze our file, along with dependencies.
+const program = ts.createProgram([filePath], options, host);
+const sourceFile = program.getSourceFile(filePath);
+const checker = program.getTypeChecker();
+
+const detectedComponents = [];
+
+for (const statement of sourceFile.statements) {
+  if (ts.isVariableStatement(statement)) {
+    for (const declaration of statement.declarationList.declarations) {
+      // 🚀 This is where the magic happens.
+      const type = checker.getTypeAtLocation(declaration.name);
+
+      // A type that has call signatures is a function type.
+      for (const callSignature of type.getCallSignatures()) {
+        const returnType = callSignature.getReturnType();
+
+        if (returnType.symbol?.getEscapedName().toString() === 'Element') {
+          detectedComponents.push(declaration.name.text);
+        }
+      }
+    }
+  }
+}
+
+console.log(detectedComponents);
+// ["Foo", "Bar"]
+```
 
 ## TypeScript Reference
 
