@@ -1247,7 +1247,7 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 }
 
 .clearfix {
-  *zoom: 1;
+  *zoom: 1; /* display: inline-block BFC creation for IE7 */
 }
 ```
 
