@@ -1945,8 +1945,8 @@ article a {
 
 ### Text Overflow
 
-- clip 切除溢出部分
-- ellipsis 省略号标志 (要设定 width)
+- `clip`: 切除溢出部分.
+- `ellipsis`: 省略号标志 (要设置 `width`).
 
 ```css
 .truncation-article-container {
@@ -3062,6 +3062,13 @@ input {
 - 跨浏览器 `scrollHeight` 值不一致.
 
 ### Custom ScrollBar
+
+- 整体部分: `::-webkit-scrollbar`.
+- 两端按钮: `::-webkit-scrollbar-button`.
+- 外层轨道: `::-webkit-scrollbar-track`.
+- 内层轨道: `::-webkit-scrollbar-track-piece`.
+- 滚动滑块: `::-webkit-scrollbar-thumb`.
+- 边角: `::-webkit-scrollbar-corner`.
 
 ```css
 .demo::-webkit-scrollbar {
