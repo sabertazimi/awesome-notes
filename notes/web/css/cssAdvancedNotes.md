@@ -10,15 +10,16 @@ tags: [Web, CSS]
 
 ## CSS Framework Key Points
 
-- Content
-- Centering
-- Font Family
-- Spacing
-- Color and Contrast
-- Balance (Position)
-- Primary and Secondary Color
-- Custom Text (Font)
-- Images and Links
+- Design [tokens](https://blog.maximeheckel.com/posts/building-a-design-system-from-scratch).
+- Content.
+- Centering.
+- Spacing.
+- Color and contrast.
+- Balance (position).
+- Primary and secondary color.
+- Custom text (font).
+- Font family.
+- Images and links.
 
 ## Typography Principles
 
