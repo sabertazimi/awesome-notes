@@ -1154,24 +1154,6 @@ can use the `z-index` property to adjust its stack level:
 }
 ```
 
-```css
-.fullscreen-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -100;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  background-size: cover;
-}
-
-.fullscreen-video video {
-  min-width: 100%;
-  min-height: 100%;
-}
-```
-
 ### Fixed Position
 
 - 使元素相对于浏览器窗口布局, 但不受滑动条影响.
@@ -1806,9 +1788,30 @@ Multiple-column layout:
 
 ### Horizontal Centering Pattern
 
-- inline: text-align, flex/grid box
-- block: auto margin, flex/grid box
-- 父元素 float, 父子元素 relative
+- inline: `text-align`, `flex`/`grid` box.
+
+```css
+.quote {
+  text-align: center;
+}
+```
+
+- block: auto `margin`, `flex`/`grid` box.
+
+```css
+.element {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  height: 200px;
+  margin: auto;
+}
+```
+
+- 父元素 float, 父子元素 relative.
 
 ```css
 .container {
