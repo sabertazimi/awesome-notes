@@ -4343,7 +4343,19 @@ if (window.matchMedia('(min-width: 400px)').matches) {
   clip: rect(0 0 0 0);
   clip-path: polygon(0 0, 0 0, 0 0);
   white-space: nowrap;
-  border: 0;
+  border-width: 0;
+}
+
+.not-sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
 }
 ```
 
@@ -4378,7 +4390,7 @@ or call JS DOM API triggering layout stage (reflow).
 告知浏览器该元素会有哪些变化的方法, 这样浏览器可以在元素属性真正发生变化之前提前做好对应的优化准备工作:
 
 ```css
- {
+.will-change {
   will-change: auto;
   will-change: scroll-position;
   will-change: contents;
