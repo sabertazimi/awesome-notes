@@ -1070,12 +1070,12 @@ Character box/em-box/selection box):
 #### Block Formatting Context Creation
 
 - 根元素或其它包含它的元素.
-- overflow: not visible (i.e hidden).
-- float: left/right.
-- position: absolute/fixed.
-- display: inline-block.
-- display: `table-cell`/`table-caption`/`table-*h`.
-- display: flow-root.
+- `overflow`: not visible (e.g `hidden`).
+- `float`: not `none` (e.g `left`/`right`).
+- `position`: not `relative`/`static` (e.g `absolute`/`fixed`).
+- `display`: `inline-block`.
+- `display`: `table-cell`/`table-caption`/`table-*h`.
+- `display`: flow-root.
 - direct children of `display: flex/inline-flex`.
 - direct children of `display: grid/inline-grid`.
 
