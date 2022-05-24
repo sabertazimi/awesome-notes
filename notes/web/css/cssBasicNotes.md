@@ -788,8 +788,8 @@ const FOCUSABLE_SELECTORS = [
 
 `%` width calculate by `containing box` width:
 
-- 普通元素的百分比宽度是相对于父元素的 `content box` 宽度计算.
-- 绝对定位元素的百分比宽度是相对于第一个 `position` 不为 `static` 的祖先元素计算.
+- 普通元素的百分比宽度是相对于父元素 `content box` 宽度计算.
+- 绝对定位元素的百分比宽度是相对于第一个 `position` 不为 `static` 的祖先元素 `padding box` 宽度计算.
 
 #### Auto Flow Width
 
