@@ -784,6 +784,13 @@ const FOCUSABLE_SELECTORS = [
 }
 ```
 
+#### Percentage Width
+
+`%` width calculate by `containing box` width:
+
+- 普通元素的百分比宽度是相对于父元素的 `content box` 宽度计算.
+- 绝对定位元素的百分比宽度是相对于第一个 `position` 不为 `static` 的祖先元素计算.
+
 #### Auto Flow Width
 
 Auto flow with `css-sizing`:
@@ -1027,7 +1034,7 @@ Character box/em-box/selection box):
   父元素的 `line-height` 会幽灵空白节点产生作用.
 - 将内联元素设置为 `display: inline-block` 可以消除幽灵空白节点.
 
-#### Containing Box
+#### Lines containing Box
 
 `<p>` tag 会形成一个包含盒子, 此盒子由一行一行的行框盒子组成.
 
