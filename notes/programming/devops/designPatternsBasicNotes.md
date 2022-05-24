@@ -3325,7 +3325,8 @@ Domain 层是领域模型系统的核心,
 ### Domain Driven Design Reference
 
 - Front-end domain driven design [guide](https://dev.to/bespoyasov/clean-architecture-on-frontend-4311).
-- Domain driven design Layout in [Golang](https://github.com/lupguo/ddd-layout).
+- Nest.js clean architecture [template](https://medium.com/@jonathan.pretre91/clean-architecture-with-nestjs-e089cef65045).
+- Domain driven design layout in [Golang](https://github.com/lupguo/ddd-layout).
 
 ## Scalability Design
 
