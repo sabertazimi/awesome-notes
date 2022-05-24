@@ -3400,8 +3400,14 @@ which are specified in [CSSOM-VIEW]:
 - `perspective()`: 为 **3D** 转换元素定义透视视图.
 - Keep `translate(-50%, -50%)` in keyframe transform property list
   when using it for alignment.
+- absolute 元素被剪裁或者 fixed 固定定位失效时,
+  可能是 `transform` 作用下造成的.
 
-一般需要在容器元素上加上以下样式:
+#### Transform Container
+
+- `:hover` should not add to transformed elements,
+  `:hover` should add to parent element.
+- 一般需要在容器元素上加上以下样式:
 
 ```css
 .transform-container {
@@ -3414,8 +3420,7 @@ which are specified in [CSSOM-VIEW]:
 }
 ```
 
-> :hover should not add to transformed elements
-> :hover should add to parent element
+#### Transform Origin
 
 当旋转绝对定位居中的元素时, 需要改变 `transform-origin`:
 
@@ -3429,9 +3434,9 @@ which are specified in [CSSOM-VIEW]:
 }
 ```
 
-#### Perspective
+#### Transform Perspective
 
-translateZ 的功能就是让元素在自己的眼前或近或远
+`translateZ` 的功能就是让元素在自己的眼前或近或远:
 
 ```css
 .parent {
