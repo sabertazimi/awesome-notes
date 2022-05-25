@@ -152,9 +152,9 @@ tags: [Web, Framework, Library]
 - [Rax: Progressive React Framework for Building Universal Application](https://github.com/alibaba/rax)
 - [Universal API: Universal APIs for Web, WeChat Miniapp and AliPay Miniapp](https://github.com/raxjs/universal-api)
 
-## Data and State Management
+## State Management
 
-### React Redux
+### Redux State Management
 
 - [Redux ToolKit: Official Core Set for Efficient Redux Development](https://github.com/reduxjs/redux-toolkit)
 - [Rematch: Redux Framework](https://github.com/rematch/rematch)
@@ -162,35 +162,21 @@ tags: [Web, Framework, Library]
 - [ImmerJS: Create Next Immutable State by Mutating Current One](https://github.com/immerjs/immer)
 - [ReduxObservable: RxJS Middleware for Redux](https://github.com/redux-observable/redux-observable)
 
-### React Recoil
+### Atom State Management
 
 - [React Recoil](https://github.com/facebookexperimental/Recoil)
 - [Zustand: Small, Fast and Scalable Bear-bones State-management Solution](https://github.com/pmndrs/zustand)
 - [JoTai: Primitive and Flexible State Management for React](https://github.com/pmndrs/jotai)
 - [Valtio: Proxy-state Simple for React and VanillaJS](https://github.com/pmndrs/valtio)
+- [Pinia: Next Generation Vue Store](https://github.com/vuejs/pinia)
 
-### React Query
+### Server State Management
 
 - [RTK Query: Redux Toolkit Server State Solution](https://redux-toolkit.js.org/rtk-query/overview)
 - [React Query: Fetching, Caching, Synchronizing and Updating Server State](https://github.com/tannerlinsley/react-query)
 - [SWR: React Hooks for Remote Data Fetching](https://github.com/vercel/swr)
 - [Apollo GraphQL: Fully-featured, Production Ready Caching GraphQL Client](https://github.com/apollographql/apollo-client)
 - [URQL: Highly Customizable and Versatile GraphQL Client](https://github.com/FormidableLabs/urql)
-
-### React Hooks
-
-- [ReactUse Hooks](https://github.com/streamich/react-use)
-- [Alibaba Hooks](https://github.com/alibaba/hooks)
-- [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
-- [ReactHook: Strongly Typed and Concurrent Mode-safe Hooks](https://github.com/jaredLunde/react-hook)
-- [Optimistic State Hooks](https://github.com/perceived-dev/optimistic-state)
-- [React Media Query Hook](https://github.com/yocontra/react-responsive)
-- [React Hooks Gallery](https://github.com/nikgraf/react-hooks)
-
-### Vue Composition API
-
-- [Pinia: Next Generation Vue Store](https://github.com/vuejs/pinia)
-- [VueUse](https://github.com/vueuse/vueuse)
 
 ### Reactive State Management
 
@@ -202,6 +188,17 @@ tags: [Web, Framework, Library]
 ### Router State Management
 
 - [Navigo: Simple Vanilla Router](https://github.com/krasimir/navigo)
+
+## Hooks
+
+- [ReactUse Hooks](https://github.com/streamich/react-use)
+- [Alibaba Hooks](https://github.com/alibaba/hooks)
+- [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
+- [ReactHook: Strongly Typed and Concurrent Mode-safe Hooks](https://github.com/jaredLunde/react-hook)
+- [Optimistic State Hooks](https://github.com/perceived-dev/optimistic-state)
+- [React Media Query Hook](https://github.com/yocontra/react-responsive)
+- [React Hooks Gallery](https://github.com/nikgraf/react-hooks)
+- [VueUse](https://github.com/vueuse/vueuse)
 
 ## JavaScript Utils
 
