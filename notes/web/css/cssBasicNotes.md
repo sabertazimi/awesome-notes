@@ -2701,6 +2701,20 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 
 ## CSS Outline
 
+```css
+.outline {
+  outline: 1px solid #000;
+}
+
+.input {
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--highlight);
+}
+```
+
 ## CSS Shadow
 
 ### Text Shadow
