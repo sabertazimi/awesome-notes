@@ -1403,13 +1403,13 @@ shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 ### Flex Box Width
 
 当 `flex-basis` 设置为 `auto`
-且 `width` 或者 (`height`) 不为`auto`时,
+且 `width` 或者 (`height`) 不为 `auto` 时,
 计算 used size 时会用 `width` 或者 (`height`) 代替 `flex-basis`:
 
 - When there is some free space left:
-  true width = `flex-basis` + `flex-grow`/sum of `flex-grow`.
+  true width = `flex-basis` + (`flex-grow`/sum of `flex-grow`).
 - When there is not enough space:
-  true width = `flex-basis` - `flex-shrink`/sum of `flex-shrink`.
+  true width = `flex-basis` - (`flex-shrink`/sum of `flex-shrink`).
 - Text nodes and pseudo-elements can be flex children.
 
 ```css
