@@ -2060,12 +2060,46 @@ article a {
 
 ## CSS Text
 
-```css
-.text {
-  text-align: center;
-  text-decoration: underline/line-through; /* 下划线与删除线 */
-}
+### Text Alignment
 
+`text-align`:
+
+- 对 block level element 无效.
+- `justify`: 自适应, 左右都无空格.
+
+```css
+.wrap {
+  text-align: justify;
+  text-align-last: justify; /* 一个块或行的最后一行对齐方式 */
+  text-justify: distribute-all-lines; /* ie6-8 */
+}
+```
+
+### Text Indent
+
+`text-indent`:
+
+- 作用于 block container, 但实际作用于第一行内联盒子内容.
+- 对 `display: inline` 替换元素无效.
+- 对 `display: inline-*` 替换元素有效.
+- Percentage `text-indent` calculate by `containing block` width.
+
+### Text Spacing
+
+`letter-spacing`:
+
+- 继承性.
+- 默认值为 `normal`.
+- 支持负值, 小数值.
+
+`word-spacing`:
+
+- 继承性.
+- 默认值为 `normal`.
+- 支持负值, 小数值, 百分比.
+- 最终间隔距离会受 `text-align: justify` 影响.
+
+```css
 .paragraph {
   line-height: 1.5em; /* 行间距  */
   text-indent: 2em; /* 段落缩进 */
@@ -2074,16 +2108,24 @@ article a {
 }
 ```
 
-### Text Alignment
-
-- 对块级元素无效.
-- `justify`: 自适应, 左右都无空格.
+### Text Transform
 
 ```css
-.wrap {
-  text-align: justify;
-  text-align-last: justify; /* 一个块或行的最后一行对齐方式 */
-  text-justify: distribute-all-lines; /* ie6-8 */
+p {
+  font-variant: small-caps; /* 小型的大写字母 */
+  text-transform: uppercase; /* 大写字母 */
+  text-transform: lowercase; /* 小写字母 */
+  text-transform: capitalize; /* 首字母大写 */
+}
+```
+
+### Text Decoration
+
+```css
+.text {
+  text-decoration: overline; /* 上划线 */
+  text-decoration: line-through; /* 中划线 */
+  text-decoration: underline; /* 下划线 */
 }
 ```
 
@@ -2112,9 +2154,33 @@ article a {
 }
 ```
 
+### White Space
+
+Web default:
+
+- 空格被解析为换行.
+- 换行被解析为空格.
+- 自动合并空格.
+
+普通标签内自动忽略空格符,
+并将其与空白符转换成一个空格进行输出,
+可用 `white-space` 改变这一行为:
+
+| White Space  | 换行符 | 空格和制表符 | 文字换行 | 行尾空格 |
+| ------------ | ------ | ------------ | -------- | -------- |
+| normal       | 合并   | 合并         | 换行     | 删除     |
+| nowrap       | 合并   | 合并         | 不换行   | 删除     |
+| pre          | 保留   | 保留         | 不换行   | 保留     |
+| pre-wrap     | 保留   | 保留         | 换行     | 挂起     |
+| pre-line     | 保留   | 合并         | 换行     | 删除     |
+| break-spaces | 保留   | 保留         | 换行     | 换行     |
+
 ### Text Wrap
 
 [Text wrapping and word breaking](https://codersblock.com/blog/deep-dive-into-text-wrapping-and-word-breaking):
+
+- `word-break`: `normal`/`keep-all`/`break-all`/`break-word`.
+- `overflow-wrap` (`word-wrap`): `normal`/`anywhere`/`break-word`.
 
 ```css
 /* 不换行 */
@@ -2140,20 +2206,7 @@ pre {
 }
 ```
 
-### Text Transform
-
-```css
-p {
-  font-variant: small-caps; /* 小型的大写字母 */
-  text-transform: uppercase; /* 大写字母 */
-  text-transform: lowercase; /* 小写字母 */
-  text-transform: capitalize; /* 首字母大写 */
-}
-```
-
 ### Text Writing Mode
-
-#### Vertical Writing Mode
 
 ```css
 /* 单列展示 */
@@ -2177,25 +2230,6 @@ p {
   writing-mode: tb-rl; /* IE 从右向左 */
 }
 ```
-
-### White Space
-
-- Web Default: 空格被解析为换行
-- Web Default: 换行被解析为空格
-- Web Default: 自动合并空格
-
-普通标签内自动忽略空格符,
-并将其与空白符转换成一个空格进行输出,
-可用 `white-space` 改变这一行为:
-
-| White Space  | 换行符 | 空格和制表符 | 文字换行 | 行尾空格 |
-| ------------ | ------ | ------------ | -------- | -------- |
-| normal       | 合并   | 合并         | 换行     | 删除     |
-| nowrap       | 合并   | 合并         | 不换行   | 删除     |
-| pre          | 保留   | 保留         | 不换行   | 保留     |
-| pre-wrap     | 保留   | 保留         | 换行     | 挂起     |
-| pre-line     | 保留   | 合并         | 换行     | 删除     |
-| break-spaces | 保留   | 保留         | 换行     | 换行     |
 
 ## CSS Font
 
