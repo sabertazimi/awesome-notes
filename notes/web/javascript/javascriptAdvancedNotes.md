@@ -6355,6 +6355,8 @@ async function runTestModule(moduleSpecifier) {
 await runTestModule('./demo.test.js');
 ```
 
+#### Jest Test Runner
+
 A simple
 [test runner](https://github.com/typicode/xv)
 implementation:
@@ -6409,6 +6411,14 @@ async function run(arg = '.') {
 
 run(process.argv[2]);
 ```
+
+### Jest Performance
+
+`Jest` 的整体架构, 其中有 3 个地方比较耗性能:
+
+- 生成虚拟文件系统 (`jest-haste-map`): 在跑第一个测试会很慢.
+- 多线程: 生成新线程耗费的资源.
+- 文件转译: `Jest` 会在执行到该文件再对它进行转译. 使用 `esbuild-jest`/`@swc/jest` 加速转译.
 
 ## Cypress Testing
 
