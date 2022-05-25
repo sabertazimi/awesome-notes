@@ -290,16 +290,12 @@ but also can every `<article>` and `<section>` element.
 <input type="date picker(data,month,week,time,datetime,datetime-local)" />
 ```
 
-### validate
+### Form Validate
 
 - [Complete Guide for Form Validation](https://developer.mozilla.org/docs/Learn/HTML/Forms/Form_validation)
 - [Complete Guide for Constraint Validation](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5/Constraint_validation)
 
-### novalidate
-
-关闭表单的提交验证
-
-### 表单元素共有属性
+### Form Element Attribute
 
 #### Form Property
 
@@ -334,14 +330,20 @@ but also can every `<article>` and `<section>` element.
 
 #### Form Novalidate
 
-取消表单元素的提交验证
+取消表单元素的提交验证 (`novalidate`):
 
-将 submit 元素的 formnovalidate 属性值为 true，使整个表单提交验证失效，实现加提交；
-进而弹出再次确认按钮(真提交)。
+将 `submit` 元素的 `formnovalidate` 属性值为 `true`,
+使整个表单提交验证失效, 实现假提交,
+进而弹出再次确认按钮 (真提交).
 
 #### AutoFocus
 
 #### Required
+
+#### Disabled and Hidden
+
+- `disabled` 表单元素的数据不会被提交.
+- `hidden` 表单元素的数据仍会被提交.
 
 ### Form Labels
 
