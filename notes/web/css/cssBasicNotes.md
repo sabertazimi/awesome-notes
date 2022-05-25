@@ -4170,11 +4170,16 @@ html {
 
 ## CSS Colors
 
+### Current Color
+
+- `currentcolor` 变量使用当前 `color` 计算值.
+- `border`/`text-shadow`/`box-shadow` 默认表现为 `currentcolor`.
+
 ### HSL Color
 
-- H: hue
-- S: saturation (stay `50%` etc.)
-- L: lightness (easy to theme colors)
+- H: hue.
+- S: saturation (stay `50%` etc.).
+- L: lightness (easy to theme colors).
 
 ```css
 /* Hover Button */
