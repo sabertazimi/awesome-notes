@@ -83,11 +83,24 @@ Structure every test to 3 part code:
 
 ### Test-Driven Development
 
+#### Test-Driven Development Upside
+
 - Reduce costs: find bugs early.
 - Reduce fear and anxiety.
 - Lead to better-designed and more testable code.
 - Make tests more thorough (彻底的).
   Easy to refactor legacy code.
+
+#### Test-Driven Development Use Case
+
+- Pure function.
+  - 工具函数.
+  - 数据转换函数.
+  - 后端接口函数.
+- Bug fix:
+  - Add failed testing first.
+  - One bug fixed, one or more testing added.
+- UI interaction.
 
 ### 测试路径
 
