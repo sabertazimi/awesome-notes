@@ -2582,6 +2582,18 @@ li::before {
 }
 ```
 
+### Border Style
+
+利用 solid border 模拟链接下划线:
+
+```css
+.link {
+  padding-bottom: 5px;
+  text-decoration: none;
+  border-bottom: 1px solid;
+}
+```
+
 ### Border Image
 
 ```css
