@@ -5574,6 +5574,35 @@ label > .label-body {
 }
 ```
 
+#### Custom Form Button
+
+隐藏 `<input>`, 添加样式至 `<label>`/`<span>`:
+
+```html
+<input id="submit" type="submit" />
+<label class="btn" for="submit">Submit</label>
+
+<style>
+  [type='submit'] {
+    position: absolute;
+    clip: rect(0 0 0 0);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 2px 12px;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    background-color: #cd0000;
+  }
+
+  :focus + label.btn {
+    outline: 1px dotted var(--highlight);
+  }
+</style>
+```
+
 #### Custom Checkbox Widget
 
 Input itself as border shape,
