@@ -6152,6 +6152,8 @@ await expect(asyncCall()).rejects.toThrowError();
 
 ![Mocks](./figures/Mocks.png)
 
+#### Jest Mocks Utils
+
 `__mocks__`:
 
 - `jest.createMockFromModule('moduleName')`.
@@ -6167,6 +6169,8 @@ await expect(asyncCall()).rejects.toThrowError();
 - `mockModule.mockClear`.
 - `mockModule.mockReset`.
 - `mockModule.mockRestore`.
+
+#### Jest Module Mocks
 
 ```tsx
 // react-dom.js
@@ -6219,7 +6223,7 @@ module.exports = {
 };
 ```
 
-Mock date:
+#### Jest Date Mocks
 
 ```ts
 jest
@@ -6227,7 +6231,76 @@ jest
   .mockReturnValue('2020-06-20T13:37:00.000Z');
 ```
 
+#### Jest API Mocks
+
+```ts
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+
+const handlers = [
+  rest.get('https://mysite.com/api/role', async (req, res, ctx) => {
+    res(ctx.status(200), ctx.json({ userType: 'user' }));
+  }),
+];
+
+const server = setupServer(...handlers);
+
+export default server;
+```
+
+```ts
+import server from './mockServer/server';
+
+beforeAll(() => {
+  server.listen();
+});
+
+afterEach(() => {
+  server.resetHandlers();
+});
+
+afterAll(() => {
+  server.close();
+});
+```
+
+```tsx
+import { render, screen } from '@testing-library/react';
+import { rest } from 'msw';
+import type { UserRoleType } from './apis/user';
+import AuthButton from './components/AuthButton';
+import server from './mockServer/server';
+
+const setup = (userType: UserRoleType) => {
+  server.use(
+    rest.get('https://mysite.com/api/role', async (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json({ userType }));
+    })
+  );
+};
+
+describe('AuthButton', () => {
+  it('should render user text', async () => {
+    setup('user');
+
+    render(<AuthButton>Hello</AuthButton>);
+
+    expect(await screen.findByText('Hello User')).toBeInTheDocument();
+  });
+
+  it('should render admin text', async () => {
+    setup('admin');
+
+    render(<AuthButton>Hello</AuthButton>);
+
+    expect(await screen.findByText('Hello Admin')).toBeInTheDocument();
+  });
+});
+```
+
 ### Jest Internals
+
+#### Jest Runtime Sandbox
 
 Running tests in
 [`ShadowRealms`](https://2ality.com/2022/04/shadow-realms.html#use-cases-for-shadowrealms):
