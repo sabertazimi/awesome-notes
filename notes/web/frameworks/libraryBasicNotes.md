@@ -616,15 +616,13 @@ tags: [Web, Framework, Library]
 - [React DnD: Drag and Drop](https://github.com/react-dnd/react-dnd)
 - [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd)
 - [DFlex: Sophisticated Drag and Drop Library](https://github.com/dflex-js/dflex)
-- [Moveable](https://github.com/daybrush/moveable)
-- [P5.js](https://github.com/processing/p5.js)
-- [Nipple.js](https://github.com/yoannmoinet/nipplejs)
-- [Moveable](https://github.com/daybrush/moveable)
 - [Spacers: Drag for More Space](https://github.com/actuallyakash/spacers)
-- [Interact.js: Drag, Drop and Resizing Multi Touch](https://github.com/taye/interact.js)
+- [Moveable: Drag, Resize, Scala, Rotate, Warp, Pinch, Group, Snap](https://github.com/daybrush/moveable)
+- [Interact.js: Drag and Drop, Resizing and Multi-touch Gestures](https://github.com/taye/interact.js)
 - [ReactZoom: Multi-touch Gestures for Zooming and Dragging](https://github.com/retyui/react-quick-pinch-zoom)
-- [TransMat: Share Data beyond Boundaries of Browser](https://github.com/google/transmat)
+- [AnyTouch: Small Touch Gesture Library Compatible with PC and Mobile](https://github.com/any86/any-touch)
 - [Allotment: Resizable Split Views](https://github.com/johnwalley/allotment)
+- [TransMat: Share Data beyond Boundaries of Browser](https://github.com/google/transmat)
 
 ### Cursor Utils
 
