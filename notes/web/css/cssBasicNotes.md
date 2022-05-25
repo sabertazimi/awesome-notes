@@ -5404,7 +5404,7 @@ h1::after {
 
 ### Modal
 
-#### Overlay
+#### Overlay Modal
 
 ```css
 .overlay {
@@ -5415,7 +5415,24 @@ h1::after {
 }
 ```
 
-#### Dialog
+#### Clip Modal
+
+图片剪裁的矩形镂空效果:
+
+```css
+.crop {
+  overflow: hidden;
+}
+
+.crop > .crop-area {
+  width: 80px;
+  height: 80px;
+  cursor: move;
+  outline: 256px solid rgb(0 0 0 / 50%);
+}
+```
+
+#### Dialog Modal
 
 ```html
 <div class="container">
