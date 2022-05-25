@@ -3328,6 +3328,8 @@ Avatar with circle status indicator:
 
 ### Cursor and Pointer
 
+[Cursor](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor):
+
 ```css
 .wrap {
   pointer-events: none;
