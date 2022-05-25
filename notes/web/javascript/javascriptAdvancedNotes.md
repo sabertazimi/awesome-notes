@@ -6729,6 +6729,55 @@ module.exports = on => {
 };
 ```
 
+AXE a11y testing:
+
+```ts
+// cypress/plugins/index.ts
+const fetch = require('node-fetch');
+
+module.exports = (on, config) => {
+  on('task', {
+    sitemapLocations() {
+      return fetch(`${config.baseUrl}/sitemap.xml`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/xml',
+        },
+      })
+        .then(res => res.text())
+        .then(xml => {
+          const locs = [...xml.matchAll(`<loc>(.|\n)*?</loc>`)].map(([loc]) =>
+            loc.replace('<loc>', '').replace('</loc>', '')
+          );
+          return locs;
+        });
+    },
+  });
+  return config;
+};
+
+// cypress/integration/smoke.spec.ts
+it('should be accessible', () => {
+  cy.task('sitemapLocations').then(pages => {
+    pages.forEach(page => {
+      cy.visit(page);
+      cy.injectAxe();
+      cy.checkA11y(
+        {
+          exclude: ['.article-action'],
+        },
+        {
+          rules: {
+            'empty-heading': { enabled: false },
+            'scrollable-region-focusable': { enabled: false },
+          },
+        }
+      );
+    });
+  });
+});
+```
+
 - Cypress code coverage [plugin](https://github.com/bahmutov/cypress-and-jest).
 - Cypress commands [plugin](https://github.com/testing-library/cypress-testing-library).
 - Cypress events [plugin](https://github.com/dmtrKovalenko/cypress-real-events).
