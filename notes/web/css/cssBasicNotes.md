@@ -223,41 +223,9 @@ span {
 
 ## Property Order
 
-### Property Order Summary
-
 > 显示属性 -> 自身属性 -> 文本属性
 
-#### Display Property
-
-- position
-- display
-- float
-- clear
-
-#### Self Property
-
-- width
-- height
-- margin
-- padding
-- border
-- list-style
-- background
-
-#### Text Property
-
-- color
-- font
-- text-decoration
-- text-align
-- vertical-align
-- white-space
-- other text
-- content
-
-### Property Order Details
-
-#### Display Property Details
+### Display Property Order
 
 - position
 - z-index
@@ -271,7 +239,7 @@ span {
 - float
 - clear
 
-#### Self Property Details
+### Self Property Order
 
 - width
 - min-width
@@ -319,7 +287,7 @@ span {
 - background-repeat
 - background-position
 
-#### Text Property Details
+### Text Property Order
 
 - color
 - font
@@ -2205,18 +2173,23 @@ p {
 并将其与空白符转换成一个空格进行输出,
 可用 `white-space` 改变这一行为:
 
-|------------|-----|----------|------|-------|
-| White Space|换行符|空格和制表符|文字换行|行尾空格|
-| normal | 合并 | 合并 | 换行 | 删除 |
-| nowrap | 合并 | 合并 | 不换行 | 删除 |
-| pre | 保留 | 保留 | 不换行 | 保留 |
-| pre-wrap | 保留 | 保留 | 换行 | 挂起 |
-| pre-line | 保留 | 合并 | 换行 | 删除 |
-| break-spaces | 保留 | 保留 | 换行 | 换行 |
+| White Space  | 换行符 | 空格和制表符 | 文字换行 | 行尾空格 |
+| ------------ | ------ | ------------ | -------- | -------- |
+| normal       | 合并   | 合并         | 换行     | 删除     |
+| nowrap       | 合并   | 合并         | 不换行   | 删除     |
+| pre          | 保留   | 保留         | 不换行   | 保留     |
+| pre-wrap     | 保留   | 保留         | 换行     | 挂起     |
+| pre-line     | 保留   | 合并         | 换行     | 删除     |
+| break-spaces | 保留   | 保留         | 换行     | 换行     |
 
 ## CSS Font
 
 ### Font Size
+
+- `ch`: calculate by `0` width.
+- `ex`: calculate by `x` width.
+- `em`: calculate by original `font-size`.
+- `rem`: calculate by root `font-size`.
 
 ```css
 html {
@@ -2235,21 +2208,111 @@ strong {
 }
 ```
 
+### Font Family
+
+- `serif`: 衬线字体.
+- `sans-serif`: 无衬线字体.
+- `monospace`: 等宽字体.
+- `cursive`: 手写字体.
+- `fantasy`: 奇幻字体.
+- `system-ui`: 系统 UI 字体.
+
+```css
+.mi {
+  font-family: Arial, 'Microsoft YaHei', '黑体', '宋体', sans-serif;
+}
+
+.tao-ux {
+  font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑',
+    Arial, sans-serif;
+}
+
+.tao {
+  font: 12px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif;
+}
+
+.tao-ued {
+  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
+}
+
+.one-plus {
+  font: 14px/1.5 'Microsoft YaHei', Arial, Tahoma, '\5b8b\4f53', sans-serif;
+}
+
+.font {
+  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
+}
+```
+
+```bash
+宋体 SimSun
+黑体 SimHei
+微软雅黑 Microsoft YaHei
+微软正黑体 Microsoft JhengHei
+新宋体 NSimSun
+新细明体 PMingLiU
+细明体 MingLiU
+标楷体 DFKai-SB
+仿宋 FangSong
+楷体 KaiTi
+仿宋_GB2312 FangSong_GB2312
+楷体_GB2312 KaiTi_GB2312
+
+宋体: SimSun
+华文细黑: STHeiti Light [STXihei]
+华文黑体: STHeiti
+华文楷体: STKaiti
+华文宋体: STSong
+华文仿宋: STFangsong
+儷黑 Pro: LiHei Pro Medium
+儷宋 Pro: LiSong Pro Light
+標楷體: BiauKai
+蘋果儷中黑: Apple LiGothic Medium
+蘋果儷細宋: Apple LiSung Light
+
+新細明體: PMingLiU
+細明體: MingLiU
+標楷體: DFKai-SB
+黑体: SimHei
+新宋体: NSimSun
+仿宋: FangSong
+楷体: KaiTi
+仿宋_GB2312: FangSong_GB2312
+楷体_GB2312: KaiTi_GB2312
+微軟正黑體: Microsoft JhengHei
+微软雅黑体: Microsoft YaHei
+
+隶书: LiSu
+幼圆: YouYuan
+华文细黑: STXihei
+华文楷体: STKaiti
+华文宋体: STSong
+华文中宋: STZhongsong
+华文仿宋: STFangsong
+方正舒体: FZShuTi
+方正姚体: FZYaoti
+华文彩云: STCaiyun
+华文琥珀: STHupo
+华文隶书: STLiti
+华文行楷: STXingkai
+华文新魏: STXinwei
+```
+
 ### Font Style
 
-- normal
-- italic
-- oblique
+- `normal`.
+- `italic`.
+- `oblique`.
 
 ### Font Variant
 
-- normal
-- small-caps: 小型大写字母
+- `normal`.
+- `small-caps`: 小体型大写字母.
 
 ### Font Size Adjust
 
-- 使字体保持大小, 不随字体类型改变而改变
-- 不同字体有不同的值(x-height/字体尺寸)
+- 使字体保持大小, 不随字体类型改变而改变.
+- 不同字体有不同的值 (`x-height`/字体尺寸).
 
 ### Font Display
 
@@ -2284,9 +2347,9 @@ whether and when it is downloaded and ready to use:
 }
 ```
 
-### Custom Fonts Function
+### Custom Font Face
 
-`@font-face` 使用户使用服务端提供的字体:
+`@font-face` 使用户使用自定义字体:
 
 ```css
 @font-face {
@@ -2305,6 +2368,8 @@ whether and when it is downloaded and ready to use:
 }
 ```
 
+#### Custom Font Format
+
 ```css
 @font-face {
   font-family: 'Open Sans Regular';
@@ -2317,6 +2382,57 @@ whether and when it is downloaded and ready to use:
       format('truetype');
   font-display: swap;
   unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1;
+}
+```
+
+#### Custom Font Style and Weight
+
+```css
+@font-face {
+  font-family: myFont;
+  font-weight: 400;
+  src: local('Font 40S');
+}
+
+@font-face {
+  font-family: myFont;
+  font-weight: 500;
+  src: local('Font 50S');
+}
+
+@font-face {
+  font-family: myFont;
+  font-weight: 600;
+  src: local('Font 60S');
+}
+
+@font-face {
+  font-family: myFont;
+  font-style: italic;
+  src: local('Font Italic');
+}
+
+.text-normal,
+.text-medium,
+.text-semibold,
+.text-italic {
+  font-family: myFont, sans-serif;
+}
+
+.text-normal {
+  font-weight: 400;
+}
+
+.text-medium {
+  font-weight: 500;
+}
+
+.text-semibold {
+  font-weight: 600;
+}
+
+.text-italic {
+  font-style: italic;
 }
 ```
 
@@ -2345,91 +2461,6 @@ whether and when it is downloaded and ready to use:
   /* Multiple Values */
   unicode-range: U+0000-007F, U+0100, U+02??;
 }
-```
-
-### Font Family
-
-```css
-.mi {
-  font-family: Arial, 'Microsoft YaHei', '黑体', '宋体', sans-serif;
-}
-
-.tao {
-  font: 12px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif;
-}
-
-.one-plus {
-  font: 14px/1.5 'Microsoft YaHei', Arial, Tahoma, '\5b8b\4f53', sans-serif;
-}
-
-.tao-ued {
-  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
-}
-
-.tao-ux {
-  font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑',
-    Arial, sans-serif;
-}
-
-.font {
-  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
-}
-```
-
-```cpp
-宋体 SimSun
-黑体 SimHei
-微软雅黑 Microsoft YaHei
-微软正黑体 Microsoft JhengHei
-新宋体 NSimSun
-新细明体 PMingLiU
-细明体 MingLiU
-标楷体 DFKai-SB
-仿宋 FangSong
-楷体 KaiTi
-仿宋_GB2312 FangSong_GB2312
-楷体_GB2312 KaiTi_GB2312
-
-宋体: SimSun
-
-华文细黑: STHeiti Light [STXihei]
-华文黑体: STHeiti
-华文楷体: STKaiti
-华文宋体: STSong
-华文仿宋: STFangsong
-儷黑 Pro: LiHei Pro Medium
-儷宋 Pro: LiSong Pro Light
-標楷體: BiauKai
-蘋果儷中黑: Apple LiGothic Medium
-蘋果儷細宋: Apple LiSung Light
-
-
-新細明體: PMingLiU
-細明體: MingLiU
-標楷體: DFKai-SB
-黑体: SimHei
-新宋体: NSimSun
-仿宋: FangSong
-楷体: KaiTi
-仿宋_GB2312: FangSong_GB2312
-楷体_GB2312: KaiTi_GB2312
-微軟正黑體: Microsoft JhengHei
-微软雅黑体: Microsoft YaHei
-
-隶书: LiSu
-幼圆: YouYuan
-华文细黑: STXihei
-华文楷体: STKaiti
-华文宋体: STSong
-华文中宋: STZhongsong
-华文仿宋: STFangsong
-方正舒体: FZShuTi
-方正姚体: FZYaoti
-华文彩云: STCaiyun
-华文琥珀: STHupo
-华文隶书: STLiti
-华文行楷: STXingkai
-华文新魏: STXinwei
 ```
 
 ## CSS Content
