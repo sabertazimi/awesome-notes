@@ -647,11 +647,26 @@ button:focus:not(:focus-visible) {
 
 ### Pseudo Element Selectors
 
-- `::first-line`: 匹配文本首行.
 - `::first-letter`: 匹配文本首字母.
+- `::first-line`: 匹配文本首行.
 - `::selection`: 匹配突出显示的文本.
 - `::before`.
 - `::after`.
+
+#### First Letter and Line Pseudo Element Selector
+
+`::first-letter`/`::first-line`:
+
+- IE9 及以上版本浏览器支持双冒号, IE8 浏览器只支持单冒号写法.
+- 只作用于块级元素:
+  `display` `block`/`inline-block`/`list-item`/`table-cell`/`table-caption`.
+- 只支持部分 CSS 属性:
+  - `color` 属性.
+  - 背景相关属性.
+  - 文本相关属性.
+  - 字体相关属性.
+
+#### Selection Pseudo Element Selector
 
 ```css
 /* 定义选中的文本颜色与背景色 */
@@ -663,7 +678,7 @@ button:focus:not(:focus-visible) {
 
 #### Before and After Pseudo Element Selectors
 
-使用 content 属性生成额外的内容并插入在标记中:
+使用 `content` 属性生成额外的内容并插入在标记中:
 
 ```css
 a::after {
@@ -671,7 +686,7 @@ a::after {
 }
 ```
 
-attr() – 调用当前元素的属性:
+`attr()` – 调用当前元素的属性:
 
 ```css
 a::after {
@@ -683,7 +698,7 @@ b::after {
 }
 ```
 
-url() / uri() – 用于引用媒体文件:
+`url()`/`uri()` – 用于引用媒体文件:
 
 ```css
 h1::before {
@@ -2402,7 +2417,6 @@ whether and when it is downloaded and ready to use:
 
 ```css
 @font-face {
-  /* :call <SNR>105_SparkUpNext() */
   font-family: mySpecialFont;
   font-style: inherit;
   font-weight: inherit;
@@ -2412,7 +2426,6 @@ whether and when it is downloaded and ready to use:
 }
 
 .selector {
-  /* :call <SNR>105_SparkUpNext() */
   font-family: mySpecialFont, sans-serif;
 }
 ```
