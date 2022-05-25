@@ -2221,6 +2221,18 @@ pre {
 }
 ```
 
+### Text Direction
+
+```css
+.ltr {
+  direction: ltr;
+}
+
+.rtl {
+  direction: rtl;
+}
+```
+
 ### Text Writing Mode
 
 ```css
@@ -2239,10 +2251,12 @@ pre {
   height: 200px;
   line-height: 30px;
   text-align: justify;
-  writing-mode: vertical-lr; /* 从左向右 */
-  writing-mode: vertical-rl; /* 从右向左 */
-  writing-mode: tb-lr; /* IE 从左向右 */
-  writing-mode: tb-rl; /* IE 从右向左 */
+  writing-mode: horizontal-tb; /* 水平排列 */
+  writing-mode: vertical-lr; /* 竖直从左向右 */
+  writing-mode: vertical-rl; /* 竖直从右向左 */
+  writing-mode: lr-tb; /* IE: 水平排列 */
+  writing-mode: tb-lr; /* IE: 竖直从左向右 */
+  writing-mode: tb-rl; /* IE: 竖直从右向左 */
 }
 ```
 
