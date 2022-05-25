@@ -5270,7 +5270,7 @@ new_y = element_original_y + (mouseY - original_mouseY);
 
 .hidden-visibility {
   position: absolute;
-  visibility: hidden;
+  visibility: hidden; /* visibility 具有继承性 */
 }
 
 .hidden-display {
