@@ -5218,6 +5218,66 @@ will lead to class purged.
 
 ## Awesome Components
 
+### Resizable
+
+[CodePen Demo](https://codepen.io/ZeroX-DG/pen/vjdoYe)
+
+```ts
+// bottom-right:
+new_width = element_original_width + (mouseX - original_mouseX);
+new_height = element_original_height + (mouseY - original_mouseY);
+
+// bottom-left:
+new_width = element_original_width - (mouseX - original_mouseX);
+new_height = element_original_height + (mouseY - original_mouseY);
+new_x = element_original_x - (mouseX - original_mouseX);
+
+// top-right:
+new_width = element_original_width + (mouseX - original_mouseX);
+new_height = element_original_height - (mouseY - original_mouseY);
+new_y = element_original_y + (mouseY - original_mouseY);
+
+// top-left:
+new_width = element_original_width - (mouseX - original_mouseX);
+new_height = element_original_height - (mouseY - original_mouseY);
+new_x = element_original_x + (mouseX - original_mouseX);
+new_y = element_original_y + (mouseY - original_mouseY);
+```
+
+### Hidden
+
+```css
+.hidden-overflow {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.hidden-opacity {
+  position: absolute;
+  filter: opacity(0%);
+  opacity: 0;
+}
+
+.hidden-stacking {
+  position: relative;
+  z-index: -1;
+}
+
+.hidden-clip {
+  position: absolute;
+  clip: rect(0 0 0 0);
+}
+
+.hidden-visibility {
+  position: absolute;
+  visibility: hidden;
+}
+
+.hidden-display {
+  display: none;
+}
+```
+
 ### Landing Page
 
 #### Jumbotron Image
@@ -5632,8 +5692,6 @@ Pseudo element switch from circle to circle:
 
 ### Navigation
 
-#### Navigation Basis
-
 - `list-style-type`: 改变 `ul`/`ol` 前标记类型
 - `list-style-image`: 改变 `ul`/`ol` 前标记类型
 - 设置 `<a href="#">` 样式
@@ -5665,6 +5723,8 @@ li {
   display: inline-block;
 }
 ```
+
+### Link
 
 #### Hidden Link
 
@@ -6025,6 +6085,132 @@ a:focus {
 }
 ```
 
+### Slides
+
+**锚点定位**本质上改变了 `scrollTop` 或 `scrollLeft` 值,
+即使容器设置 `overflow: hidden` 也会发生滚动,
+可以利用**锚点定位**实现 CSS-only slides:
+
+- `position: absolute` to stack slides up.
+- `id` + `:target` for style current slide (change z-index).
+- Add animation to slide change: (prev, current, next)
+  `.slide`, `.slide:target`, `.slide:target ~ slide`.
+- Add `overflow: hidden` to container when animation.
+
+```html
+<main>
+  <section class="slide" id="slide1">
+    <a class="slide-link" href="#slide2">next</a>
+  </section>
+  <section class="slide" id="slide2">
+    <a class="slide-link" href="#slide1">prev</a>
+    <a class="slide-link" href="#slide3">next</a>
+  </section>
+  <section class="slide" id="slide3">
+    <a class="slide-link" href="#slide2">prev</a>
+    <a class="slide-link" href="#slide4">next</a>
+  </section>
+  <section class="slide" id="slide4">
+    <a class="slide-link" href="#slide3">prev</a>
+    <a class="slide-link" href="#slide5">next</a>
+  </section>
+  <section class="slide" id="slide5">
+    <a class="slide-link" href="#slide4">prev</a>
+  </section>
+</main>
+```
+
+```css
+body {
+  overflow: hidden; /* key 1 */
+}
+
+.slide {
+  position: absolute; /* key 2 */
+  z-index: 0; /* key 3 */
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+}
+
+.slide:target {
+  z-index: 1; /* key 4 */
+}
+```
+
+```css
+/* Rotate Fade-In Animation */
+@media screen and (prefers-reduced-motion: reduce) {
+  .slide {
+    z-index: 0;
+    transition: none;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+  }
+}
+
+.slide {
+  z-index: 0;
+  transition: transform 1s, opacity 0.8s;
+  transform: rotate(90deg);
+  transform-origin: 0 0;
+}
+
+.slide:target {
+  z-index: 1;
+  transform: rotate(0deg);
+}
+
+.slide:target ~ section {
+  opacity: 0;
+  transform: rotate(-90deg);
+}
+```
+
+当两个 `width: 100%` slide 同时处于同一水平位置,
+添加左进/右进动画, 当 slide 向右滑动时,
+水平的 scrollX 会直接滑到最右边,
+导致幻灯片浏览异常.
+[解决办法](https://github.com/sabertazimi/hust-web/blob/master/css/target-slide/index.js)
+如下:
+
+```ts
+const resetScrollX = () => {
+  window.scrollTo(0, 0);
+};
+```
+
+### Timeline and Steps
+
+Use pseudo elements to construct circle and line:
+
+```css
+/* The separator line */
+.c-timeline-item:not(:last-child) .c-timeline-content::before {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: 2px;
+  height: 100%;
+  content: '';
+  background-color: #d3d3d3;
+}
+
+/* The circle */
+.c-timeline-content::after {
+  position: absolute;
+  top: 0;
+  left: -12px;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  content: '';
+  background-color: #fff;
+  border: 2px solid #d3d3d3;
+  border-radius: 50%;
+}
+```
+
 ### Animation Effects
 
 切换动画时, 需要先把之前的动画清除
@@ -6277,170 +6463,6 @@ body {
   transform: translate3d(0, 0, 0);
 }
 ```
-
-### Resizable Component
-
-[CodePen Demo](https://codepen.io/ZeroX-DG/pen/vjdoYe)
-
-```ts
-// bottom-right:
-new_width = element_original_width + (mouseX - original_mouseX);
-new_height = element_original_height + (mouseY - original_mouseY);
-// bottom-left:
-new_width = element_original_width - (mouseX - original_mouseX);
-new_height = element_original_height + (mouseY - original_mouseY);
-new_x = element_original_x - (mouseX - original_mouseX);
-// top-right:
-new_width = element_original_width + (mouseX - original_mouseX);
-new_height = element_original_height - (mouseY - original_mouseY);
-new_y = element_original_y + (mouseY - original_mouseY);
-// top-left:
-new_width = element_original_width - (mouseX - original_mouseX);
-new_height = element_original_height - (mouseY - original_mouseY);
-new_x = element_original_x + (mouseX - original_mouseX);
-new_y = element_original_y + (mouseY - original_mouseY);
-```
-
-### Slides
-
-**锚点定位**本质上改变了 `scrollTop` 或 `scrollLeft` 值,
-即使容器设置 `overflow: hidden` 也会发生滚动,
-可以利用**锚点定位**实现 CSS-only slides:
-
-- `position: absolute` to stack slides up.
-- `id` + `:target` for style current slide (change z-index).
-- Add animation to slide change: (prev, current, next)
-  `.slide`, `.slide:target`, `.slide:target ~ slide`.
-- Add `overflow: hidden` to container when animation.
-
-```html
-<main>
-  <section class="slide" id="slide1">
-    <a class="slide-link" href="#slide2">next</a>
-  </section>
-  <section class="slide" id="slide2">
-    <a class="slide-link" href="#slide1">prev</a>
-    <a class="slide-link" href="#slide3">next</a>
-  </section>
-  <section class="slide" id="slide3">
-    <a class="slide-link" href="#slide2">prev</a>
-    <a class="slide-link" href="#slide4">next</a>
-  </section>
-  <section class="slide" id="slide4">
-    <a class="slide-link" href="#slide3">prev</a>
-    <a class="slide-link" href="#slide5">next</a>
-  </section>
-  <section class="slide" id="slide5">
-    <a class="slide-link" href="#slide4">prev</a>
-  </section>
-</main>
-```
-
-```css
-body {
-  overflow: hidden; /* key 1 */
-}
-
-.slide {
-  position: absolute; /* key 2 */
-  z-index: 0; /* key 3 */
-  box-sizing: border-box;
-  width: 100%;
-  height: 100vh;
-}
-
-.slide:target {
-  z-index: 1; /* key 4 */
-}
-```
-
-```css
-/* Rotate Fade-In Animation */
-@media screen and (prefers-reduced-motion: reduce) {
-  .slide {
-    z-index: 0;
-    transition: none;
-    transform: rotate(90deg);
-    transform-origin: 0 0;
-  }
-}
-
-.slide {
-  z-index: 0;
-  transition: transform 1s, opacity 0.8s;
-  transform: rotate(90deg);
-  transform-origin: 0 0;
-}
-
-.slide:target {
-  z-index: 1;
-  transform: rotate(0deg);
-}
-
-.slide:target ~ section {
-  opacity: 0;
-  transform: rotate(-90deg);
-}
-```
-
-当两个 `width: 100%` slide 同时处于同一水平位置,
-添加左进/右进动画, 当 slide 向右滑动时,
-水平的 scrollX 会直接滑到最右边,
-导致幻灯片浏览异常.
-[解决办法](https://github.com/sabertazimi/hust-web/blob/master/css/target-slide/index.js)
-如下:
-
-```ts
-const resetScrollX = () => {
-  window.scrollTo(0, 0);
-};
-```
-
-### Timeline and Steps
-
-Use pseudo elements to construct circle and line:
-
-```css
-/* The separator line */
-.c-timeline-item:not(:last-child) .c-timeline-content::before {
-  position: absolute;
-  top: 0;
-  right: 100%;
-  width: 2px;
-  height: 100%;
-  content: '';
-  background-color: #d3d3d3;
-}
-
-/* The circle */
-.c-timeline-content::after {
-  position: absolute;
-  top: 0;
-  left: -12px;
-  z-index: 1;
-  width: 20px;
-  height: 20px;
-  content: '';
-  background-color: #fff;
-  border: 2px solid #d3d3d3;
-  border-radius: 50%;
-}
-```
-
-### Layout
-
-#### 相同单元
-
-- `ul` + `li` + `float`.
-- `.container{text-align:center;} + .content{width: xx%;}`.
-
-#### 元素定位
-
-- align
-- margin + padding
-- position + top/bottom/left/right
-- float
-- flex
 
 ### Geometry and Shape
 
