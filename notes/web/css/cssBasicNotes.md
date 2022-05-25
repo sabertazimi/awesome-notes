@@ -3338,6 +3338,7 @@ Avatar with circle status indicator:
 - `ne-resize`/`nw-resize`/`se-resize`/`sw-resize`.
 - `col-resize`/`row-resize`.
 - `ew-resize`/`ns-resize`/`nesw-resize`/`nwse-resize`.
+- `url()`.
 
 ```css
 .wrap {
