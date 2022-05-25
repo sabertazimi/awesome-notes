@@ -51,7 +51,7 @@ has 4 bits - thousands, hundreds, tens, ones `0000`:
 
 :::
 
-```scss
+```css
 /* stylelint-disable at-rule-no-unknown */
 
 /* specificity: 0001 */
@@ -475,64 +475,79 @@ input.checkbox:checked ~ nav {
 
 ### Attribute Selectors
 
-`E[attr]`
+`E[attr]`:
 
-```scss
+```css
+/* 定位页面里所有具有必填属性 "required" 的 input */
 input[required] {
   border: 1px solid #f00;
-} //定位页面里所有具有必填属性"required"的input
+}
 ```
 
-`E[attr=val]`
+`E[attr=val]`:
 
-```scss
+```css
+/* 定位页面里的密码输入框 */
 input[type='password'] {
   border: 1px solid #aaa;
-} //定位页面里的密码输入框
+}
 ```
 
-`E[attr|=val]`
+`E[attr|=val]`:
 
-```scss
+```css
+/**
+ * 定位页面里所有的 p 段落里具有 class 属性且属性值为 a 或是 a- 开头的
+ * 比如 class="a", class="a-b"
+ */
 p[class|='a'] {
   color: #333;
-} //定位页面里所有的P段落里具有class属性且属性值为a或是a-开始的, 比如class="a"以及class="a-b"
+}
 ```
 
-`E[attr~=val]`
+`E[attr~=val]`:
 
-```scss
-// 定位页面里所有具有属性title且属性值里拥有完整单词english的div容器
-// 比如title="english"以及title="a english"
+```css
+/**
+ * 定位页面里所有具有属性 title 且属性值里拥有完整单词 english 的 div 容器
+ * 比如 title="english", title="a english"
+ */
 div[title~='english'] {
   color: #f88;
 }
 ```
 
-`E[attr^=val]`
+`E[attr^=val]`:
 
-```scss
+```css
+/**
+ * 定位页面里具有属性 class 且属性值以 a 开头的 div 容器
+ * 比如 class="a", class="ab"
+ */
 div[class^='a'] {
   color: #666;
-} //定位页面里具有属性class且属性值以a开头的div容器, 比如class="a"以及class="ab"
+}
 ```
 
-`E[attr$=val]`
+`E[attr$=val]`:
 
-```scss
+```css
+/**
+ * 定位页面里具有属性 class 且属性值以 a 结尾的 div 容器
+ * 比如 class="nba", class="cba"
+ */
 div[class$='a'] {
   color: #f00;
 }
-//定位页面里具有属性class且属性值以a结尾的div窗口, 比如class="nba"以及class="cba"
 ```
 
-`E[attr*=val]`
+`E[attr*=val]`:
 
-```scss
+```css
+/* 定位所有 title 里具有 link 字符串的 a 链接 */
 a[title*='link'] {
   text-decoration: underline;
 }
-//定位所有title里具有link字符串的a链接
 ```
 
 ### Pseudo Class Selectors
