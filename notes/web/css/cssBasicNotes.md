@@ -3330,6 +3330,15 @@ Avatar with circle status indicator:
 
 [Cursor](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor):
 
+- `auto`/`default`/`pointer`/`move`/`text`.
+- `wait`/`help`/`crosshair`/`progress`.
+- `not-allowed`/`no-drop`/`vertical-text`/`all-scroll`.
+- `none`/`alias`/`cell`/`copy`/`context-menu`.
+- `n-resize`/`e-resize`/`s-resize`/`w-resize`.
+- `ne-resize`/`nw-resize`/`se-resize`/`sw-resize`.
+- `col-resize`/`row-resize`.
+- `ew-resize`/`ns-resize`/`nesw-resize`/`nwse-resize`.
+
 ```css
 .wrap {
   pointer-events: none;
