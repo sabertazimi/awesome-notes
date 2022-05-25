@@ -12,10 +12,10 @@ tags: [Web, HTML]
 
 ### 嵌套操作
 
-孩子 : >
+孩子 : `>`.
 
 ```html
-div>ul>li
+<!-- div>ul>li -->
 <div>
   <ul>
     <li></li>
@@ -23,20 +23,20 @@ div>ul>li
 </div>
 ```
 
-兄弟 : +
+兄弟 : `+`.
 
 ```html
-div+ul>li
+<!-- div+ul>li -->
 <div></div>
 <ul>
   <li></li>
 </ul>
 ```
 
-上级：^
+上级：`^`.
 
 ```html
-ul>li^div
+<!-- ul>li^div -->
 <ul>
   <li></li>
 </ul>
@@ -52,7 +52,7 @@ ul>li>a^^div
 重复: `*`.
 
 ```html
-ul>li*3
+<!-- ul>li*3 -->
 <ul>
   <li></li>
   <li></li>
@@ -60,10 +60,10 @@ ul>li*3
 </ul>
 ```
 
-分组：()
+分组：`()`.
 
 ```html
-div>(p>span)*2
+<!-- div>(p>span)*2 -->
 <div>
   <p><span></span></p>
   <p><span></span></p>
@@ -72,49 +72,51 @@ div>(p>span)*2
 
 ### 属性操作
 
-id:# class:.
+- id: `#`.
+- class: `.`.
 
 ```html
-div#header+div.main+div#footer
+<!-- div#header+div.main+div#footer -->
 <div id="header"></div>
 <div class="main"></div>
 <div id="footer"></div>
 ```
 
-属性值:[]
+属性值: `[]`.
 
 ```html
-a[title=test target=_self] <a title="test" target="_self" href=""></a>
+<!-- a[title=test target=_self] -->
+<a title="test" target="_self" href=""></a>
 ```
 
 数列值：`$`.
 
 ```html
-p.item$*3
+<!-- p.item$*3 -->
 <p class="item1"></p>
 <p class="item2"></p>
 <p class="item3"></p>
 
-p.item$$*3
+<!-- p.item$$*3 -->
 <p class="item01"></p>
 <p class="item02"></p>
 <p class="item03"></p>
 ```
 
-数列操作符：@
+数列操作符：`@`
 
 ```html
-p.item$@-*3 @- = -1
+<!-- p.item$@-*3 @- = -1 -->
 <p class="item3"></p>
 <p class="item2"></p>
 <p class="item1"></p>
 
-p.item$@3*3 @3 = 从3开始3次
+<!-- p.item$@3*3 @3 = 从3开始3次 -->
 <p class="item3"></p>
 <p class="item4"></p>
 <p class="item5"></p>
 
-p.item$@-3*3 @-3 = 3次后到3结束
+<!-- p.item$@-3*3 @-3 = 3次后到3结束 -->
 <p class="item5"></p>
 <p class="item4"></p>
 <p class="item3"></p>
@@ -122,30 +124,29 @@ p.item$@-3*3 @-3 = 3次后到3结束
 
 ### 字符操作
 
-字符操作：{}
+字符操作：`{}`.
 
 ```html
-a{click}
+<!-- a{click} -->
 <a href="">click</a>
 
-a>{click}+span{me}
+<!-- a>{click}+span{me} -->
 <a href="">click<span>me</span></a>
 ```
 
 ### 缺省元素
 
-```html
-.header+.footer = div.header+div.footer ul>.item*3 = ul>li.item*3
-table>.row*4>.cell*3 = table>tr.row*4>td.cell*3
-```
+- `.header+.footer` -> `div.header+div.footer`.
+- `ul>.item*3` -> `ul>li.item*3`.
+- `table>.row*4>.cell*3` -> `table>tr.row*4>td.cell*3`.
 
 ## Structure
 
 - [Semantics Section Reference](http://www.html5jscss.com/html5-semantics-section.html)
 
-### section
+### Section
 
-必须含有**hx**标题子标签
+必须含有**hx**标题子标签.
 
 ### Header
 
