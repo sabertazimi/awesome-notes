@@ -382,9 +382,9 @@ span {
 
 ## CSS Selectors
 
-![CSS3 Selectors](./figures/CSS3SelectorList.png)
+[![CSS Selectors](./figures/CSSSelectors.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors)
 
-### Element Selectors
+### Type Selector
 
 ```css
 p {
@@ -393,87 +393,7 @@ p {
 }
 ```
 
-### Descendant Selectors
-
-- `E F`: 所有后代选择器.
-- `E > F`: 直接子选择器.
-
-```css
-ul li {
-  margin-bottom: 0.5em;
-}
-```
-
-```css
-ul > li {
-  list-style: none;
-} /* 仅限ul的直接子元素li, 忽略嵌套子元素 */
-```
-
-Using the descendant selector without more specificity can be really expensive.
-The browser is going to check every descendant element for a match
-because the relationship isn't restricted to parent and child.
-
-For `.container ul li a` selector:
-
-- match every `<a>` on the page
-- find every `<a>` contained in a `<li>`
-- use the previous matches and narrow down to
-  the ones contained in a `<ul>`
-- finally, filter down the above selection to
-  the ones contained in an element with the class `.container`
-
-### Sibling Selectors
-
-- `E + F`: 直接相邻兄弟选择器.
-- `E ~ F`: 一般兄弟选择器.
-
-```css
-* + * {
-  margin-top: 1.5em;
-}
-```
-
-```css
-li + li {
-  border-top: 1px solid #ddd;
-}
-```
-
-```css
-/* p before h1 */
-p {
-  color: #fff;
-}
-
-/* 定位具有相同父元素的, h1标签之后的所有p标签 */
-h1 ~ p {
-  color: #f00;
-}
-```
-
-checkbox `input` as hidden `click` event listener
-
-```css
-input.checkbox {
-  visibility: hidden;
-  opacity: 0;
-}
-
-nav {
-  transform: scale(0);
-}
-
-input.checkbox:checked + nav {
-  transform: scale(1);
-}
-
-input.checkbox:checked ~ nav {
-  transform: scale(1);
-}
-```
-
-### Attribute Selectors
+### Attribute Selector
 
 `E[attr]`:
 
@@ -550,49 +470,93 @@ a[title*='link'] {
 }
 ```
 
-### Pseudo Class Selectors
+### Descendant Combinator
+
+`E F` 后代选择器:
+
+```css
+ul li {
+  margin-bottom: 0.5em;
+}
+```
+
+Using the descendant selector without more specificity can be really expensive.
+The browser is going to check every descendant element for a match
+because the relationship isn't restricted to parent and child.
+
+For `.container ul li a` selector:
+
+- match every `<a>` on the page
+- find every `<a>` contained in a `<li>`
+- use the previous matches and narrow down to
+  the ones contained in a `<ul>`
+- finally, filter down the above selection to
+  the ones contained in an element with the class `.container`
+
+### Child Combinator
+
+`E > F` 子代选择器:
+
+```css
+ul > li {
+  list-style: none;
+} /* 仅限ul的直接子元素li, 忽略嵌套子元素 */
+```
+
+### General Sibling Combinator
+
+`E ~ F` 一般兄弟选择器:
+
+```css
+/* p before h1 */
+p {
+  color: #fff;
+}
+
+/* 定位具有相同父元素的, h1标签之后的所有p标签 */
+h1 ~ p {
+  color: #f00;
+}
+```
+
+checkbox `input` as hidden `click` event listener
+
+```css
+input.checkbox {
+  visibility: hidden;
+  opacity: 0;
+}
+
+nav {
+  transform: scale(0);
+}
+
+input.checkbox:checked ~ nav {
+  transform: scale(1);
+}
+```
+
+### Adjacent Sibling Combinator
+
+`E + F` 相邻兄弟选择器:
+
+```css
+* + * {
+  margin-top: 1.5em;
+}
+```
+
+```css
+li + li {
+  border-top: 1px solid #ddd;
+}
+```
+
+### Anchor Pseudo Class
 
 - `:link`: 未访问的链接.
 - `:visited`: 已访问的链接, 不建议使用.
-- `:hover`: 鼠标移动到容器, 不仅限于链接, 可用于页面中的任何元素.
-- `:active`: 被激活时的状态, 不仅限于链接, 可用于任何具有 tabindex 属性的元素.
-- `:focus`: 获得焦点时状态, 不仅限于链接, 可用于任何具有 tabindex 属性的元素.
-- `:enabled`: 已启用的界面元素, e.g `input`.
-- `:disabled`: 已禁用的界面元素, e.g `input`.
 - `:target`: 该选择器定位当前活动页面内定位点的目标元素, #anchor-name `#info:target {font-size:24px;}`.
-- `:default`: 应用于一个或多个作为一组类似元素中的默认元素的 UI 元素.
-- `:valid`: 应用于输入验证有效元素, 基于 input 的 type/pattern 属性.
-- `:invalid`: 应用于输入验证无效元素.
-- `:in-range`: 应用于具有范围限制的元素, 其中该值位于限制内, 比如具有 min 和 max 属性的 number 和 range 输入框.
-- `:out-of-range`: 与:in-range 选择相反, 其中该值在限制范围外.
-- `:required`: 应用于具有必填属性 required 的表单控件.
-- `:optional`: 应用于没有必填属性 required 的所有表单控件.
-- `:read-only`: 应用于其内容无法供用户修改的元素.
-- `:read-write`: 应用于其内容可供用户修改的元素, 比如输入框.
-- `:root`: 根元素, 始终指 html 元素.
-- `:placeholder-shown`: select `input` with placeholder.
-- `:focus-visible`: selected when Tab (shortcut) focused.
-- `:focus-within`: selected when any children focused.
-- `:empty`: 没有子元素的元素, 没有子元素包括文本节点.
-- `:lang(en)`: 具有使用双字母缩写(en)表示的语言的元素.
-- `:not(exception)`: 该选择器将选择与括号内的选择器不匹配的元素.
-- [`<target_element>:has(<selector>)`](https://ishadeed.com/article/css-has-parent-selector):
-  - `:has` normal priority.
-  - A target element has child elements.
-  - A target element has sibling elements: `:has(+ selector)`.
-- `:is(<selector>)`: selector priority.
-- `:where(<selector>)`: 0 priority.
-- `E F:first-of-type`: **相同类型** 的第一个元素.
-- `E F:last-of-type`: **相同类型** 的最后一个元素.
-- `E F:only-of-type`: 孩子中只有一种该元素.
-- `E :nth-child(n)`: 选择 E 的第 n 个孩子.
-- `E F:nth-child(n)`:该选择器定位元素 E 的第 n 个子元素的元素 F,可省略 E.
-- `E F:nth-last-child(n)`: 该选择器定位元素 E 的倒数第 n 个子元素的元素 F,可省略 E.
-- `E F:nth-of-type(n)`: 该选择器定位元素 E 的第 n 个 **相同类型** 子元素,可省略 E.
-- `E F:nth-lash-of-type(n)`: 该选择器定位元素 E 的导数第 n 个 **相同类型** 子元素,可省略 E.
-- `E F:first-child`: 第一个孩子.
-- `E F:last-child`: 最后一个孩子.
-- `E F:only-child`: 单一后代.
 
 ```html
 <a href="#p1">p1</a>
@@ -609,23 +573,14 @@ div:target {
 }
 ```
 
-```css
-@media screen and (prefers-reduced-motion: reduce) {
-  .msg {
-    opacity: 0;
-    transition: none;
-  }
-}
+### State Pseudo Class
 
-.msg {
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-}
-
-input:not(:placeholder-shown) + .msg {
-  opacity: 1;
-}
-```
+- `:default`: 应用于一个或多个作为一组类似元素中的默认元素的 UI 元素.
+- `:hover`: 鼠标移动到容器, 不仅限于链接, 可用于页面中的任何元素.
+- `:active`: 被激活时的状态, 不仅限于链接, 可用于任何具有 tabindex 属性的元素.
+- `:focus`: 获得焦点时状态, 不仅限于链接, 可用于任何具有 tabindex 属性的元素.
+- `:focus-visible`: selected when Tab (shortcut) focused.
+- `:focus-within`: selected when any children focused.
 
 :::tip Separate Focus Styles
 
@@ -645,18 +600,74 @@ button:focus:not(:focus-visible) {
 
 :::
 
-### Pseudo Element Selectors
+### Form Pseudo Class
 
-- `::first-letter`: 匹配文本首字母.
-- `::first-line`: 匹配文本首行.
-- `::selection`: 匹配突出显示的文本.
-- `::before`.
-- `::after`.
+- `:enabled`: 已启用的界面元素, e.g `input`.
+- `:disabled`: 已禁用的界面元素, e.g `input`.
+- `:valid`: 应用于输入验证有效元素, 基于 input 的 type/pattern 属性.
+- `:invalid`: 应用于输入验证无效元素.
+- `:in-range`: 应用于具有范围限制的元素, 其中该值位于限制内, 比如具有 min 和 max 属性的 number 和 range 输入框.
+- `:out-of-range`: 与:in-range 选择相反, 其中该值在限制范围外.
+- `:required`: 应用于具有必填属性 required 的表单控件.
+- `:optional`: 应用于没有必填属性 required 的所有表单控件.
+- `:read-only`: 应用于其内容无法供用户修改的元素.
+- `:read-write`: 应用于其内容可供用户修改的元素, 比如输入框.
+- `:placeholder-shown`: select `input` with placeholder.
 
-#### First Letter and Line Pseudo Element Selector
+```css
+@media screen and (prefers-reduced-motion: reduce) {
+  .msg {
+    opacity: 0;
+    transition: none;
+  }
+}
+
+.msg {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+input:not(:placeholder-shown) + .msg {
+  opacity: 1;
+}
+```
+
+### Relation Pseudo Class
+
+- `:empty`: 没有子元素的元素, 没有子元素包括文本节点.
+- `:not(exception)`: 该选择器将选择与括号内的选择器不匹配的元素.
+- [`<target_element>:has(<selector>)`](https://ishadeed.com/article/css-has-parent-selector):
+  - `:has` normal priority.
+  - A target element has child elements.
+  - A target element has sibling elements: `:has(+ selector)`.
+- `:is(<selector>)`: selector priority.
+- `:where(<selector>)`: 0 priority.
+
+### Children Pseudo Class
+
+- `E F:first-of-type`: **相同类型** 的第一个元素.
+- `E F:last-of-type`: **相同类型** 的最后一个元素.
+- `E F:only-of-type`: 孩子中只有一种该元素.
+- `E :nth-child(n)`: 选择 E 的第 n 个孩子.
+- `E F:nth-child(n)`:该选择器定位元素 E 的第 n 个子元素的元素 F,可省略 E.
+- `E F:nth-last-child(n)`: 该选择器定位元素 E 的倒数第 n 个子元素的元素 F,可省略 E.
+- `E F:nth-of-type(n)`: 该选择器定位元素 E 的第 n 个 **相同类型** 子元素,可省略 E.
+- `E F:nth-lash-of-type(n)`: 该选择器定位元素 E 的导数第 n 个 **相同类型** 子元素,可省略 E.
+- `E F:first-child`: 第一个孩子.
+- `E F:last-child`: 最后一个孩子.
+- `E F:only-child`: 单一后代.
+
+### Misc Pseudo Class
+
+- `:root`: 根元素, 始终指 html 元素.
+- `:lang(en)`: 具有使用双字母缩写(en)表示的语言的元素.
+
+### First Letter and Line Pseudo Element
 
 `::first-letter`/`::first-line`:
 
+- `::first-letter`: 匹配文本首字母.
+- `::first-line`: 匹配文本首行.
 - IE9 及以上版本浏览器支持双冒号, IE8 浏览器只支持单冒号写法.
 - 只作用于块级元素:
   `display` `block`/`inline-block`/`list-item`/`table-cell`/`table-caption`.
@@ -666,7 +677,9 @@ button:focus:not(:focus-visible) {
   - 文本相关属性.
   - 字体相关属性.
 
-#### Selection Pseudo Element Selector
+### Selection Pseudo Element
+
+`::selection` 匹配突出显示的文本:
 
 ```css
 /* 定义选中的文本颜色与背景色 */
@@ -676,7 +689,7 @@ button:focus:not(:focus-visible) {
 }
 ```
 
-#### Before and After Pseudo Element Selectors
+### Before and After Pseudo Element
 
 使用 `content` 属性生成额外的内容并插入在标记中:
 
@@ -4763,10 +4776,10 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 
 - 避免使用统配选择器:
   `*`.
-- 避免使用标签子代选择器:
-  `.list > li` -> `.list > .item` (better) -> `.list-item` (best).
 - 避免使用后代选择器 (开销较高):
   `.anchor .link` -> `.anchor-link`.
+- 避免使用标签子代选择器:
+  `.list > li` -> `.list > .item` (better) -> `.list-item` (best).
 
 ### CSS Triggers Performance
 
