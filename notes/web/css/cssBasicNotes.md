@@ -582,11 +582,69 @@ div:target {
 
 ### User Action Pseudo Class
 
-- `:hover`: 鼠标移动到容器, 不仅限于链接, 可用于页面中的任何元素.
-- `:active`: 被激活时的状态, 不仅限于链接, 可用于任何具有 tabindex 属性的元素.
-- `:focus`: 获得焦点时状态, 不仅限于链接, 可用于任何具有 tabindex 属性的元素.
-- `:focus-visible`: selected when `Tab` (shortcut) focused.
-- `:focus-within`: selected when any children focused.
+#### Hover Pseudo Class
+
+`:hover`:
+
+- 鼠标移动到容器时的状态.
+- 不仅限于链接, 可用于页面中的任何元素.
+
+#### Active Pseudo Class
+
+`:active`:
+
+- **点击** (mouse click/screen touch) 时的状态.
+- 键盘访问无法激活 `:active`.
+- 不仅限于链接, 可用于任何具有 `tabindex` 属性的元素.
+
+`:link` —> `:visited` —> `:hover` —> `:active` links:
+
+```css
+/* Unvisited links */
+a:link {
+  color: blue;
+}
+
+/* Visited links */
+a:visited {
+  color: purple;
+}
+
+/* Hovered links */
+a:hover {
+  background: yellow;
+}
+
+/* Active links */
+a:active {
+  color: red;
+}
+```
+
+```css
+[href]:active,
+button:active,
+[type='button']:active,
+[type='reset']:active,
+[type='submit']:active {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  background: linear-gradient(rgb(0 0 0 / 5%), rgb(0 0 0 / 5%));
+  outline: 999px solid rgb(0 0 0 / 5%);
+  outline-offset: -999px;
+  box-shadow: inset 0 0 0 999px rgb(0 0 0 / 5%);
+}
+```
+
+#### Focus Pseudo Class
+
+- `:focus`:
+  - 获得焦点时的状态 (包括键盘访问).
+  - 不仅限于 `<a href>`/`<button>`/`<input>`/`<select>`/`<area>`/`<summary>`,
+    可用于任何具有 `tabindex`/`contenteditable` 属性的元素.
+- `:focus-visible`:
+  selected when `Tab` (keyboard) focused.
+- `:focus-within`:
+  selected when any children focused.
 
 :::tip Separate Focus Styles
 
@@ -6131,7 +6189,7 @@ a:focus::after {
 
 ### Button
 
-- padding
+#### Link Button
 
 ```css
 a.btn-custom {
