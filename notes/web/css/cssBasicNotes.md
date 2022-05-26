@@ -6918,19 +6918,19 @@ body {
   width: 40px;
   height: 40px;
   overflow: hidden;
+}
 
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: calc(40px / 1.41);
-    height: calc(40px / 1.41);
-    content: '';
-    background: #f7df6c;
-    transform: rotate(-45deg);
-    transform-origin: 0 0;
-  }
+.arrow-down::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: calc(40px / 1.41);
+  height: calc(40px / 1.41);
+  content: '';
+  background: #f7df6c;
+  transform: rotate(-45deg);
+  transform-origin: 0 0;
 }
 
 /* HTML Entities */
