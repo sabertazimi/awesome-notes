@@ -561,23 +561,47 @@ li + li {
 
 ### Location Pseudo Class
 
-- `:link`: 未访问的链接.
-- `:visited`: 已访问的链接, 不建议使用.
-- `:target`: 该选择器定位当前活动页面内定位点的目标元素, #anchor-name `#info:target {font-size:24px;}`.
+#### Link Pseudo Class
+
+`:link`:
+
+- 只匹配未访问的 `<a href>`.
+- 可用 `a`/`[href]` 选择器代替.
+
+#### Visited Pseudo Class
+
+`:visited`:
+
+- 只匹配访问过的 `<a href>`.
+- 只支持设置颜色:
+  `color`/`background-color`/`outline-color`/`border-color`/`column-rule-color`/`text-decoration-color`.
+- 不支持颜色透明度 (`alpha`).
+- 只支持重置已有颜色, 不能新增设置样式.
+- `window.getComputedStyle` 无法获取到 `:visited` 设置颜色.
+
+#### Any Link Pseudo Class
+
+`:any-link`:
+
+- 同时匹配 `:link` 与 `:visited` 元素.
+- 匹配所有设置了 `[href]` 的链接元素: `<a href>`/`<link href>`/`<area href>`.
+
+#### Target Pseudo Class
+
+`:target`:
+
+- 该选择器定位当前活动页面内定位点的目标元素 (#anchor-name) `#info:target {font-size:24px;}`.
+- 可用于实现 `carousel`/`gallery`/`slide`.
 
 ```html
 <a href="#p1">p1</a>
 <div id="p1">p1</div>
-```
 
-```css
-div:target {
-  background-color: purple;
-}
-
-#p1:target {
-  background-color: purple;
-}
+<style>
+  div:target {
+    background-color: purple;
+  }
+</style>
 ```
 
 ### User Action Pseudo Class
@@ -643,7 +667,10 @@ button:active,
 - 不仅限于 `<a href>`/`<button>`/`<input>`/`<select>`/`<area>`/`<summary>`,
   可用于任何具有 `tabindex`/`contenteditable` 属性的元素.
 
-`:focus-visible`: selected when `Tab` (keyboard) focused.
+`:focus-visible`:
+
+- Selected when `Tab` (keyboard) focused.
+- 可用于区分鼠标与键盘激活样式.
 
 Separate focus styles:
 
@@ -661,7 +688,10 @@ button:focus:not(:focus-visible) {
 }
 ```
 
-`:focus-within`: selected when any children focused, 常用于实现 `dropdown`.
+`:focus-within`:
+
+- Selected when any children focused.
+- 可用于实现 `dropdown`.
 
 ```css
 .dropdown-list {
