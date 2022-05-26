@@ -622,6 +622,10 @@ li + li {
 }
 ```
 
+`:target-within`:
+
+- Selected when any children targeted.
+
 ### User Action Pseudo Class
 
 #### Hover Pseudo Class
@@ -6590,7 +6594,6 @@ body {
   transition: max-height, 0.3s;
 }
 
-.menu:focus,
 .menu:focus-within,
 .container:hover .menu {
   max-height: 1em;
