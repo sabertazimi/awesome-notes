@@ -591,7 +591,11 @@ li + li {
 `:target`:
 
 - 该选择器定位当前活动页面内定位点的目标元素 (#anchor-name) `#info:target {font-size:24px;}`.
-- 可用于实现 `carousel`/`gallery`/`slide`.
+- 可用于实现 `tab`/`carousel`/`gallery`/`slide`:
+  - 利用 `display:none` 隐藏 `#id` 元素,
+    不会触发页面滚动 (防止页面抖动),
+    可以触发 `:target` 伪类匹配.
+  - `:target ~ .content` 控制实际内容切换.
 
 ```html
 <a href="#p1">p1</a>
@@ -602,6 +606,20 @@ li + li {
     background-color: purple;
   }
 </style>
+```
+
+```css
+.anchor {
+  display: none;
+}
+
+.content {
+  max-height: 0;
+}
+
+.anchor:target ~ .content {
+  max-height: 100%;
+}
 ```
 
 ### User Action Pseudo Class
