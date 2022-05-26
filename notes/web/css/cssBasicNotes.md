@@ -644,7 +644,8 @@ button:active,
 - `:focus-visible`:
   selected when `Tab` (keyboard) focused.
 - `:focus-within`:
-  selected when any children focused.
+  selected when any children focused,
+  经常用于实现 `dropdown`.
 
 :::tip Separate Focus Styles
 
@@ -6534,6 +6535,7 @@ body {
 }
 
 .menu:focus,
+.menu:focus-within,
 .container:hover .menu {
   max-height: 1em;
 }
