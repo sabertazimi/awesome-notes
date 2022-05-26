@@ -5625,6 +5625,11 @@ td:last-child {
 - 由于表单组件多为 `Replaced Element`, 通过 CSS 控制样式存在困难,
   一般利用 `label` 包裹 `input + span` 的方式,
   对 `label` 与 `span` 进行核心样式控制, 对 `input` 进行辅助样式控制.
+- 隐藏 `input`, 用 `label` 模拟时, 需要注意表单元素的键盘可访问性:
+  - 不应使用 `display: none`/`visibility: hidden` 隐藏 `input` (无法键盘访问),
+    应使用 `[type="checkbox"] { position: absolute; clip: rect(0 0 0 0); }`.
+  - 应添加 `:focus` 伪类样式:
+    `input:focus ~ label { outline: 1px solid red; border: 1px solid red; }`.
 
 #### Custom Form
 
