@@ -551,7 +551,7 @@ li + li {
 }
 ```
 
-### Anchor Pseudo Class
+### Location Pseudo Class
 
 - `:link`: 未访问的链接.
 - `:visited`: 已访问的链接, 不建议使用.
@@ -572,13 +572,12 @@ div:target {
 }
 ```
 
-### State Pseudo Class
+### User Action Pseudo Class
 
-- `:default`: 应用于一个或多个作为一组类似元素中的默认元素的 UI 元素.
 - `:hover`: 鼠标移动到容器, 不仅限于链接, 可用于页面中的任何元素.
 - `:active`: 被激活时的状态, 不仅限于链接, 可用于任何具有 tabindex 属性的元素.
 - `:focus`: 获得焦点时状态, 不仅限于链接, 可用于任何具有 tabindex 属性的元素.
-- `:focus-visible`: selected when Tab (shortcut) focused.
+- `:focus-visible`: selected when `Tab` (shortcut) focused.
 - `:focus-within`: selected when any children focused.
 
 :::tip Separate Focus Styles
@@ -599,19 +598,25 @@ button:focus:not(:focus-visible) {
 
 :::
 
-### Form Pseudo Class
+### Input Pseudo Class
 
+- `:autofill`.
 - `:enabled`: 已启用的界面元素, e.g `input`.
 - `:disabled`: 已禁用的界面元素, e.g `input`.
+- `:read-only`: 应用于其内容无法供用户修改的元素.
+- `:read-write`: 应用于其内容可供用户修改的元素, 比如输入框.
+- `:placeholder-shown`: select `input` with placeholder.
+- `:default`: 应用于一个或多个作为一组类似元素中的默认元素的 UI 元素.
+- `:checked`.
+- `:indeterminate`.
+- `:blank`.
 - `:valid`: 应用于输入验证有效元素, 基于 input 的 type/pattern 属性.
 - `:invalid`: 应用于输入验证无效元素.
+- `:user-invalid`.
 - `:in-range`: 应用于具有范围限制的元素, 其中该值位于限制内, 比如具有 min 和 max 属性的 number 和 range 输入框.
 - `:out-of-range`: 与:in-range 选择相反, 其中该值在限制范围外.
 - `:required`: 应用于具有必填属性 required 的表单控件.
 - `:optional`: 应用于没有必填属性 required 的所有表单控件.
-- `:read-only`: 应用于其内容无法供用户修改的元素.
-- `:read-write`: 应用于其内容可供用户修改的元素, 比如输入框.
-- `:placeholder-shown`: select `input` with placeholder.
 
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
@@ -631,37 +636,43 @@ input:not(:placeholder-shown) + .msg {
 }
 ```
 
-### Relation Pseudo Class
+### Structure Pseudo Class
 
+- `:root`: 根元素, 始终指 html 元素.
 - `:empty`: 没有子元素的元素, 没有子元素包括文本节点.
+- `E F:nth-child(n)`:该选择器定位元素 E 的第 n 个子元素的元素 F,可省略 E.
+- `E F:nth-last-child(n)`: 该选择器定位元素 E 的倒数第 n 个子元素的元素 F,可省略 E.
+- `E F:first-child`: 第一个孩子.
+- `E F:last-child`: 最后一个孩子.
+- `E F:only-child`: 单一后代.
+- `E F:nth-of-type(n)`: 该选择器定位元素 E 的第 n 个 **相同类型** 子元素,可省略 E.
+- `E F:nth-lash-of-type(n)`: 该选择器定位元素 E 的导数第 n 个 **相同类型** 子元素,可省略 E.
+- `E F:first-of-type`: **相同类型** 的第一个元素.
+- `E F:last-of-type`: **相同类型** 的最后一个元素.
+- `E F:only-of-type`: 孩子中只有一种该元素.
+
+### Logical Pseudo Class
+
 - `:not(<selector>)`:
-  - 该选择器将选择与括号内的选择器不匹配的元素.
   - selector priority.
+  - 该选择器将选择与括号内的选择器不匹配的元素.
+- `:is(<selector>)`:
+  selector priority.
+- `:where(<selector>)`:
+  0 priority.
 - [`<target_element>:has(<selector>)`](https://ishadeed.com/article/css-has-parent-selector):
   - `:has` normal priority.
   - A target element has child elements.
   - A target element has sibling elements: `:has(+ selector)`.
-- `:is(<selector>)`: selector priority.
-- `:where(<selector>)`: 0 priority.
 
-### Children Pseudo Class
+### Linguistic Pseudo Class
 
-- `E F:first-of-type`: **相同类型** 的第一个元素.
-- `E F:last-of-type`: **相同类型** 的最后一个元素.
-- `E F:only-of-type`: 孩子中只有一种该元素.
-- `E :nth-child(n)`: 选择 E 的第 n 个孩子.
-- `E F:nth-child(n)`:该选择器定位元素 E 的第 n 个子元素的元素 F,可省略 E.
-- `E F:nth-last-child(n)`: 该选择器定位元素 E 的倒数第 n 个子元素的元素 F,可省略 E.
-- `E F:nth-of-type(n)`: 该选择器定位元素 E 的第 n 个 **相同类型** 子元素,可省略 E.
-- `E F:nth-lash-of-type(n)`: 该选择器定位元素 E 的导数第 n 个 **相同类型** 子元素,可省略 E.
-- `E F:first-child`: 第一个孩子.
-- `E F:last-child`: 最后一个孩子.
-- `E F:only-child`: 单一后代.
+- `:dir()`.
+- `:lang(en)`: 具有使用双字母缩写 (`en`) 表示的语言的元素.
 
 ### Misc Pseudo Class
 
-- `:root`: 根元素, 始终指 html 元素.
-- `:lang(en)`: 具有使用双字母缩写(en)表示的语言的元素.
+- `:fullscreen`.
 
 ### First Letter and Line Pseudo Element
 
@@ -756,10 +767,16 @@ h2::before {
 output -->
 ```
 
-### Focusable Selectors
+### Shadow DOM Pseudo Class and Element
+
+- `:host`: shadow DOM host.
+- `::part()`.
+- `::slotted()`.
+
+### Focusable Selector
 
 ```ts
-const FOCUSABLE_SELECTORS = [
+const FOCUSABLE_SELECTOR = [
   '[contenteditable]',
   '[tabindex="0"]:not([disabled])',
   'a[href]',
