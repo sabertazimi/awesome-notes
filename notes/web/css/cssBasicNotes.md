@@ -411,7 +411,7 @@ input[required] {
 }
 ```
 
-`E[attr=val]`:
+`E[attr=value]` match `value`:
 
 ```css
 /* 定位页面里的密码输入框 */
@@ -420,19 +420,19 @@ input[type='password'] {
 }
 ```
 
-`E[attr|=val]`:
+`E[attr|=value]` match `value`/`value-`:
 
 ```css
 /**
- * 定位页面里所有的 p 段落里具有 class 属性且属性值为 a 或是 a- 开头的
- * 比如 class="a", class="a-b"
+ * 定位页面里所有的 pre 里具有 class 属性且属性值为 language 或是 language- 开头的
+ * 比如 class="language", class="language-tsx"
  */
-p[class|='a'] {
+pre[class|='language'] {
   color: #333;
 }
 ```
 
-`E[attr~=val]`:
+`E[attr~=value]` match `value`/`* value *`:
 
 ```css
 /**
@@ -444,7 +444,7 @@ div[title~='english'] {
 }
 ```
 
-`E[attr^=val]`:
+`E[attr^=value]` match `^value`:
 
 ```css
 /**
@@ -456,7 +456,7 @@ div[class^='a'] {
 }
 ```
 
-`E[attr$=val]`:
+`E[attr$=value]` match `value$`:
 
 ```css
 /**
@@ -468,7 +468,7 @@ div[class$='a'] {
 }
 ```
 
-`E[attr*=val]`:
+`E[attr*=value]` match `*value*`:
 
 ```css
 /* 定位所有 title 里具有 link 字符串的 a 链接 */
