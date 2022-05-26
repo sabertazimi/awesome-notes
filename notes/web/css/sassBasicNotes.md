@@ -17,8 +17,6 @@ tags: [Web, CSS, Sass]
 - start with `$`
 
 ```scss
-/* stylelint-disable at-rule-no-unknown */
-
 $heading-color: green;
 
 h1 {

@@ -4463,15 +4463,6 @@ use `inline-box` with `width`
 - JavaScript API: `window.matchMedia()`.
 
 ```css
-/* stylelint-disable */
-@media (not / only) 设备类型 and ((not) 设备特性),
-  (not / only) 设备类型 and ((not) 设备特性-1) and ((not) 设备特性-2) {
-  /* 样式代码 */
-}
-/* stylelint-enable */
-```
-
-```css
 /* screen size : 500px ~ 1000px */
 @media screen and (min-width: 500px) and (max-width: 1000px) {
   .container {
@@ -4672,6 +4663,7 @@ input[type='checkbox']:checked {
   container-name: sidebar;
 }
 
+/* stylelint-disable-next-line at-rule-no-unknown */
 @container sidebar (min-width: 400px) {
   .card {
     display: grid;
@@ -4685,7 +4677,7 @@ input[type='checkbox']:checked {
 Detecting media query support in CSS:
 
 ```css
-/* stylelint-disable-next-line */
+/* stylelint-disable-next-line media-feature-name-no-unknown */
 @media not all and (prefers-reduced-data), (prefers-reduced-data) {
   color: blue;
 }

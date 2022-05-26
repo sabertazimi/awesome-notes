@@ -1411,7 +1411,6 @@ Some useful best practices:
 - `@import '~bootstrap/scss/mixins';`
 
 ```scss
-/* stylelint-disable at-rule-no-unknown */
 @function color($key: 'blue') {
   @return map-get($colors, $key);
 }
