@@ -35,25 +35,24 @@ tags: [Web, CSS]
 
 ### Specificity
 
-Specificity (Selector Priority)
-has 4 bits - thousands, hundreds, tens, ones `0000`:
+Specificity (`Selector Priority`) has 4 bits,
+thousands, hundreds, tens, ones `0000`:
 
-- thousands: inline-style
-- hundreds: ID selector
-- tens: class selector, attribute selector, pseudo-class(:)
-- ones: element selector, pseudo-element(::)
+- Thousands: inline-style.
+- Hundreds: ID selector.
+- Tens: class selector, attribute selector, pseudo class(`:`).
+- Ones: type selector, pseudo element(`::`).
 
-:::tip Specificity
+:::tip Zero Specificity
 
-- Universal selector (`*`), combinators (`+`, `>`, `~`, `a b`).
-- Negation pseudo-class `(:not)` have no effect on specificity,
+- Universal selector (`*`), combinators (`+`, `>`, `~`, `a b`) and `:where()`
+  have no effect on specificity.
+- `:not()` and `:is()` have no effect on specificity,
   but selectors in it have effect on specificity.
 
 :::
 
 ```css
-/* stylelint-disable at-rule-no-unknown */
-
 /* specificity: 0001 */
 h1 {
   color: red;
@@ -635,7 +634,9 @@ input:not(:placeholder-shown) + .msg {
 ### Relation Pseudo Class
 
 - `:empty`: 没有子元素的元素, 没有子元素包括文本节点.
-- `:not(exception)`: 该选择器将选择与括号内的选择器不匹配的元素.
+- `:not(<selector>)`:
+  - 该选择器将选择与括号内的选择器不匹配的元素.
+  - selector priority.
 - [`<target_element>:has(<selector>)`](https://ishadeed.com/article/css-has-parent-selector):
   - `:has` normal priority.
   - A target element has child elements.
