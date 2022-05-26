@@ -637,17 +637,15 @@ button:active,
 
 #### Focus Pseudo Class
 
-- `:focus`:
-  - 获得焦点时的状态 (包括键盘访问).
-  - 不仅限于 `<a href>`/`<button>`/`<input>`/`<select>`/`<area>`/`<summary>`,
-    可用于任何具有 `tabindex`/`contenteditable` 属性的元素.
-- `:focus-visible`:
-  selected when `Tab` (keyboard) focused.
-- `:focus-within`:
-  selected when any children focused,
-  经常用于实现 `dropdown`.
+`:focus`:
 
-:::tip Separate Focus Styles
+- 获得焦点时的状态 (包括键盘访问).
+- 不仅限于 `<a href>`/`<button>`/`<input>`/`<select>`/`<area>`/`<summary>`,
+  可用于任何具有 `tabindex`/`contenteditable` 属性的元素.
+
+`:focus-visible`: selected when `Tab` (keyboard) focused.
+
+Separate focus styles:
 
 ```css
 /* Tab Focus Style */
@@ -663,7 +661,17 @@ button:focus:not(:focus-visible) {
 }
 ```
 
-:::
+`:focus-within`: selected when any children focused, 常用于实现 `dropdown`.
+
+```css
+.dropdown-list {
+  display: none;
+}
+
+.dropdown:focus-within .dropdown-list {
+  display: block;
+}
+```
 
 ### Input Pseudo Class
 
