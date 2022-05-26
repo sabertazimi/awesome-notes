@@ -134,9 +134,10 @@ tags: [Web, Framework, Library]
 
 - [StrAPI](https://github.com/strapi/strapi)
 - [Ghost](https://github.com/TryGhost/Ghost)
-- [NetlifyCMS](https://github.com/netlify/netlify-cms)
+- [Netlify](https://github.com/netlify/netlify-cms)
 - [TinaCMS](https://github.com/tinacms/tinacms)
 - [KeyStone](https://github.com/keystonejs/keystone)
+- [Payload](https://github.com/payloadcms/payload)
 
 ### Desktop Solution
 
