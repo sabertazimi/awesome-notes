@@ -383,6 +383,14 @@ span {
 
 [![CSS Selectors](./figures/CSSSelectors.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors)
 
+### Universal Selector
+
+`*`:
+
+- 不影响选择器优先级.
+- 匹配自定义元素, `<script>`, `<style>`, `<title>`.
+- 不匹配伪元素.
+
 ### Type Selector
 
 ```css
@@ -636,7 +644,7 @@ input:not(:placeholder-shown) + .msg {
 }
 ```
 
-### Structure Pseudo Class
+### Structural Pseudo Class
 
 - `:root`: 根元素, 始终指 html 元素.
 - `:empty`: 没有子元素的元素, 没有子元素包括文本节点.
