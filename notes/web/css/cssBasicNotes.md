@@ -39,7 +39,7 @@ Specificity (`Selector Priority`) has 4 bits,
 thousands, hundreds, tens, ones `0000`:
 
 - Thousands: inline-style.
-- Hundreds: ID selector.
+- Hundreds: ID selector (实际开发中一般用 `[id="Id"]` 代替优先级过高的 ID selector).
 - Tens: class selector, attribute selector, pseudo class(`:`).
 - Ones: type selector, pseudo element(`::`).
 
