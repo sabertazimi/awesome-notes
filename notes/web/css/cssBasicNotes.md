@@ -783,8 +783,11 @@ button:focus:not(:focus-visible) {
 
 ### Structural Pseudo Class
 
-- `:root`: 根元素, 始终指 html 元素.
-- `:empty`: 没有子元素的元素, 没有子元素包括文本节点.
+- `:root`:
+  - 根元素, 始终指 html 元素.
+  - `:root` 选择器优先级高于 `html` 选择器.
+  - 为了代码可读性, `:root` 用于设置全局变量, `html` 用于设置全局样式.
+- `:empty`: 没有任何子元素的元素, 不能有注释节点与文本节点.
 - `E F:nth-child(n)`:该选择器定位元素 E 的第 n 个子元素的元素 F,可省略 E.
 - `E F:nth-last-child(n)`: 该选择器定位元素 E 的倒数第 n 个子元素的元素 F,可省略 E.
 - `E F:first-child`: 第一个孩子.
@@ -796,24 +799,57 @@ button:focus:not(:focus-visible) {
 - `E F:last-of-type`: **相同类型** 的最后一个元素.
 - `E F:only-of-type`: 孩子中只有一种该元素.
 
+:::tip N Calculation
+
+`n` start from `0`,
+calculation result limit to `> 0`:
+
+- `:nth-child(5n)`: `0, 5, 10, 15, ...` -> `5, 10, 15, ...`.
+- `:nth-child(3n+4)`: `4, 7, 10, 13, ...` -> `4, 7, 10, 13, ...`.
+- `:nth-child(-n+3)`: `3, 2, 1, 0, -1, ...` -> `3, 2, 1`.
+- `:nth-child(n+4):nth-child(-n+10)`:
+  `4, 5, 6, ...` + `10, 9, 8, ...` -> `4, 5, 6, 7, 8, 9, 10`.
+
+:::
+
 ### Logical Pseudo Class
 
 - `:not(<selector>)`:
-  - selector priority.
-  - 该选择器将选择与括号内的选择器不匹配的元素.
+  - Selector priority.
+  - 选择与括号内的选择器不匹配的元素.
 - `:is(<selector>)`:
-  selector priority.
+  - Selector priority.
 - `:where(<selector>)`:
-  0 priority.
+  - 0 priority.
 - [`<target_element>:has(<selector>)`](https://ishadeed.com/article/css-has-parent-selector):
   - `:has` normal priority.
-  - A target element has child elements.
+  - A target element has child elements: `:has(> selector)`.
   - A target element has sibling elements: `:has(+ selector)`.
+
+```css
+:is(ol, ul) :is(ol, ul) li {
+  margin-left: 2rem;
+}
+```
 
 ### Linguistic Pseudo Class
 
 - `:dir(ltr)`/`:dir(rtl)`.
 - `:lang(en)`: 具有使用双字母缩写 (`en`) 表示的语言的元素.
+
+```css
+:lang(en) > q {
+  quotes: '\201C''\201D''\2018''\2019';
+}
+
+:lang(fr) > q {
+  quotes: '<< ' ' >>';
+}
+
+:lang(de) > q {
+  quotes: '>>' '<<' '\2039''\203A';
+}
+```
 
 ### Misc Pseudo Class
 
@@ -914,7 +950,8 @@ output -->
 
 ### Shadow DOM Pseudo Class and Element
 
-- `:host`: shadow DOM host.
+- `:host`: shadow DOM root element.
+- `:host-context`: shadow DOM root parent element.
 - `::part()`.
 - `::slotted()`.
 
