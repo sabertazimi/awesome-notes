@@ -933,6 +933,7 @@ tags: [Web, Framework, Library]
 - [ToolJet: Extensible Low-code Framework for Building Business Applications](https://github.com/ToolJet/ToolJet)
 - [AppSmith: Low-Code Project to Build Admin Panels, Internal Tools, and Dashboards](https://github.com/appsmithorg/appsmith)
 - [BuildBase: Low-code Platform for Creating Internal Apps, Workflows, and Admin Panels](https://github.com/Budibase/budibase)
+- [NocoBase: Scalability-first Low-code Development Platform](https://github.com/nocobase/nocobase)
 
 ### Clipboard
 
@@ -1012,7 +1013,7 @@ tags: [Web, Framework, Library]
 - [JSCookie](https://github.com/js-cookie/js-cookie)
 - [React Cookie](https://github.com/reactivestack/cookies)
 - [Nookies: Cookie Helpers for Next.js](https://github.com/maticzav/nookies)
-- [NoCoDB: No Code Database](https://github.com/nocodb/nocodb)
+- [NocoDB: No Code Database](https://github.com/nocodb/nocodb)
 - [Directus: Open Source Data Platform](https://github.com/directus/directus)
 
 ## Search
@@ -1391,6 +1392,7 @@ tags: [Web, Framework, Library]
 - [Snyk: NPM Package Security](https://github.com/marketplace/snyk)
 - [Socket: NPM Package Security](https://github.com/apps/socket-security)
 - [NCU: NPM Dependencies Updater](https://github.com/raineorshine/npm-check-updates)
+- [AllStar: Set and Enforce Security Policies](https://github.com/ossf/allstar)
 
 ### UML Tools
 
