@@ -182,6 +182,8 @@ as listed in its definition table
 
 ### Unset Value
 
+### Revert Value
+
 ### Specified Value
 
 The specified value of a CSS property is the value
@@ -7082,6 +7084,7 @@ const polygon = (n = 3) => {
 
 ## CSS Reference
 
+- MDN CSS value [formal syntax](https://developer.mozilla.org/docs/Web/CSS/Value_definition_syntax).
 - CSS quick [reference](https://cssreference.io).
 - New CSS features in 2021: [Hover 2021](https://2021-hover-conf-new-in-css.netlify.app).
 - New CSS features in 2022: [State of CSS 2022](https://web.dev/state-of-css-2022).
