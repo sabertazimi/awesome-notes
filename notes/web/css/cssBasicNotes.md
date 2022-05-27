@@ -8,7 +8,7 @@ tags: [Web, CSS]
 
 # CSS Basic Notes
 
-## Cascading and Inheritance
+## CSS Cascading and Inheritance
 
 ### Cascading Order
 
@@ -155,7 +155,7 @@ h1 {
 - list elements: list-style, list-style-type, list-style-position, list-style-image
 - table elements: border-collapse
 
-## Property Value
+## CSS Property Value
 
 ### Initial Value
 
@@ -220,7 +220,7 @@ span {
 } /* display computed to `block` */
 ```
 
-## Property Order
+## CSS Property Order
 
 > 显示属性 -> 自身属性 -> 文本属性.
 
@@ -307,77 +307,364 @@ span {
 - content.
 - quotes.
 
-## Naming Convention
+## CSS Variables
 
-### Layout Structure Naming Convention
+### Variables DOM API
 
-- 容器: container.
-- 页头: header.
-- 内容: content.
-- 页面主体: main.
-- 页尾: footer.
-- 导航: nav.
-- 侧栏: sidebar.
-- 栏目: column.
-- 页面外围控制整体佈局宽度: wrapper.
-- 左右中: left right center.
+```css
+.element {
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+}
+```
 
-### Navigation Naming Convention
+```ts
+window.addEventListener('resize', () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+```
 
-- 导航: nav.
-- 主导航: main-nav.
-- 子导航: sub-nav.
-- 顶导航: top-nav.
-- 边导航: sidebar.
-- 左导航: left-sidebar.
-- 右导航: right-sidebar.
-- 菜单: menu.
-- 子菜单: sub-menu.
-- 标题: title.
-- 摘要: summary.
+```ts
+const root = document.documentElement;
+const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
+```
 
-### Functional Component Naming Convention
+Change `--cursor-x` and `--cursor-y` via `JavaScript` API:
 
-- 标志: logo.
-- 广告: banner.
-- 登陆: login.
-- 登录条: login-bar.
-- 注册: register.
-- 搜索: search.
-- 功能区: shop.
-- 标题: title.
-- 加入: join us.
-- 状态: status.
-- 按钮: btn.
-- 滚动: scroll.
-- 标籤页: tab.
-- 文章列表: list.
-- 提示信息: msg.
-- 当前的: current.
-- 小技巧: tips.
-- 图标: icon.
-- 注释: note.
-- 指南: guide.
-- 服务: service.
-- 热点: hot.
-- 新闻: news.
-- 下载: download.
-- 投票: vote.
-- 合作伙伴: partner.
-- 友情链接: link.
-- 版权: copyright.
+```css
+:root::before {
+  position: fixed;
+  z-index: 1000;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  content: '';
+  background: radial-gradient(
+    circle 16vmax at var(--cursor-x) var(--cursor-y),
+    rgb(0 0 0 / 0%) 0%,
+    rgb(0 0 0 / 50%) 80%,
+    rgb(0 0 0 / 80%) 100%
+  );
+}
+```
 
-### CSS Files Naming Convention
+Change `--percent` via `JavaScript` API:
 
-- `abstracts`: `$variables`, `@mixin` function.
-- `vendors`: external libraries (font-awesome, bootstrap).
-- `base`: normalize.css, reset.css, utils.css, font.css, base.css.
-  (margin-right, text-center, float-right).
-- `components`: form.css, button.css, navbar.css, dropdown.css.
-- `layout`: columns.css, grid.css, header.css, footer.css, section.css, navigation.css.
-- `pages`: home.css, about.css.
-- `themes`: color.css, font.css.
-- main.css.
+```css
+.bar {
+  display: flex;
+  height: 20px;
+  background-color: #f5f5f5;
+}
+
+.bar::before {
+  display: flex;
+  justify-content: end;
+  width: calc(var(--percent) * 1%);
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
+  content: counter(progress) '%\2002';
+  counter-reset: progress var(--percent);
+  background: #2486ff;
+}
+```
+
+### Scope Variables
+
+```html
+<div class="alert alert-info">
+  <div class="alert-content">
+    <h2 class="alert-title">Info</h2>
+    <div class="alert-body">
+      <p>Info Message.</p>
+    </div>
+  </div>
+</div>
+```
+
+```css
+.alert {
+  --primary: #777;
+  --secondary: #ccc;
+
+  background-color: var(--secondary);
+  border: 1px solid var(--primary);
+}
+
+.alert::before {
+  background-color: var(--primary);
+}
+
+.alert-title {
+  color: var(--primary);
+}
+
+.alert-success {
+  --primary: #40c057;
+  --secondary: #d3f9d8;
+}
+
+.alert-info {
+  --primary: #228be6;
+  --secondary: #d0ebff;
+}
+
+.alert-warning {
+  --primary: #fab005;
+  --secondary: #fff3bf;
+}
+
+.alert-error {
+  --primary: #fa5252;
+  --secondary: #ffe3e3;
+}
+```
+
+```css
+:root {
+  --primary: hsl(260deg 95% 70%);
+  --secondary: hsl(320deg 95% 60%);
+}
+
+.button {
+  background-color: var(--button-background, transparent);
+}
+
+.button-primary {
+  --button-background: var(--primary);
+}
+
+.button-secondary {
+  --button-background: var(--secondary);
+}
+```
+
+### Invalid and Empty CSS Variables
+
+- `--invalid-value: initial;` is invalid value
+  leading to `var(--invalid-value)` called failed,
+  `var(--invalid-value, backup-value)` get backup-value.
+- `--empty-value: ;` is valid empty value
+  leading to `var(--empty-value)` called succeeded,
+  `var(--empty-value, backup-value)` get **parent value**.
+- Use Invalid and Empty Value to
+  implement `if (true)` in CSS.
+
+```css
+:root {
+  --on: initial;
+  --off: ;
+}
+
+button {
+  --is-raised: var(--off);
+
+  border: 1px solid var(--is-raised, rgb(0 0 0 / 10%));
+}
+
+button:hover,
+button:focus {
+  --is-raised: var(--on);
+}
+```
+
+```css
+/**
+ * css-media-vars
+ * BSD 2-Clause License
+ * Copyright (c) James0x57, PropJockey, 2020
+ */
+
+html {
+  --media-print: initial;
+  --media-screen: initial;
+  --media-speech: initial;
+  --media-xs: initial;
+  --media-sm: initial;
+  --media-md: initial;
+  --media-lg: initial;
+  --media-xl: initial;
+
+  /* ... */
+  --media-pointer-fine: initial;
+  --media-pointer-none: initial;
+}
+
+/* 把当前变量变为空值 */
+@media print {
+  html {
+    --media-print: ;
+  }
+}
+
+@media screen {
+  html {
+    --media-screen: ;
+  }
+}
+
+@media speech {
+  html {
+    --media-speech: ;
+  }
+}
+
+/* 把当前变量变为空值 */
+@media (max-width: 37.499em) {
+  html {
+    --media-xs: ;
+    --media-lte-sm: ;
+    --media-lte-md: ;
+    --media-lte-lg: ;
+  }
+}
+
+/** 移动优先的样式规则 */
+.breakpoints-demo > * {
+  /** 小于 37.5em, 宽度 100%  */
+  --xs-width: var(--media-xs) 100%;
+
+  /** 小于 56.249em, 宽度 49%  */
+  --sm-width: var(--media-sm) 49%;
+  --md-width: var(--media-md) 32%;
+  --lg-width: var(--media-gte-lg) 24%;
+
+  width: var(--xs-width, var(--sm-width, var(--md-width, var(--lg-width))));
+
+  --sm-and-down-bg: var(--media-lte-sm) red;
+  --md-and-up-bg: var(--media-gte-md) green;
+
+  background: var(--sm-and-down-bg, var(--md-and-up-bg));
+}
+```
+
+### Dark Mode CSS Variables
+
+```css
+:root {
+  /* Themes */
+  --bg-light: #fff;
+  --text-light: #000;
+  --bg-dark: #000;
+  --text-dark: #fff;
+
+  /* Defaults */
+  --bg: var(--bg-light);
+  --text: var(--text-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--bg-dark);
+    --text: var(--text-dark);
+  }
+}
+```
+
+## CSS Colors
+
+### Current Color
+
+- `currentcolor` 变量使用当前 `color` 计算值.
+- `border`/`text-shadow`/`box-shadow` 默认表现为 `currentcolor`.
+
+### HSL Color
+
+- H: hue.
+- S: saturation (stay `50%` etc.).
+- L: lightness (easy to theme colors).
+
+```css
+/* Hover Button */
+:root {
+  --primary-h: 221;
+  --primary-s: 72%;
+  --primary-l: 62%;
+}
+
+.button {
+  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+}
+
+.button:hover,
+.button:focus {
+  --primary-l: 54%;
+}
+```
+
+```css
+/* Custom Buttons */
+:root {
+  --primary-h: 221;
+  --primary-s: 72%;
+  --primary-l: 62%;
+}
+
+.button {
+  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+}
+
+.button-secondary {
+  --primary-l: 90%;
+
+  color: #222;
+}
+
+.button-ghost {
+  --primary-l: 90%;
+
+  background-color: transparent;
+  border: 3px solid hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+}
+```
+
+```css
+/* Change lightness to get gradient */
+.section {
+  background: linear-gradient(
+    to left,
+    hsl(var(--primary-h) var(--primary-s) var(--primary-l)),
+    hsl(var(--primary-h) var(--primary-s) 95%)
+  );
+}
+
+.section-2 {
+  --primary-h: 167;
+}
+```
+
+### CSS Color Reference
+
+- CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
+  - hwb.
+  - lab.
+  - lch.
+  - color-mix.
+  - color-contrast.
+  - color.
+  - accent-color.
+- CSS `color` [value](https://developer.mozilla.org/docs/Web/CSS/color_value).
+
+## CSS Logical Properties and Values
+
+### CSS Logical Basis
+
+In positioning/sizing/margin/padding/border/text alignment:
+
+- `block-start` for `top`
+- `block-end` for `bottom`
+- `block` for vertical
+- `inline-start` for `left`
+- `inline-end` for `right`
+- `inline` for horizontal
+
+### CSS Logical Reference
+
+- [W3C CSS Logical Draft](https://drafts.csswg.org/css-logical)
+- [CSS Tricks CSS Logical Guide](https://css-tricks.com/css-logical-properties-and-values)
 
 ## CSS Selectors
 
@@ -3295,6 +3582,40 @@ movie style
 }
 ```
 
+## CSS Object
+
+`object-position`/`object-fit`
+只对替换元素
+([`Replaced Element`](https://developer.mozilla.org/docs/Web/CSS/Replaced_element))
+有作用:
+
+- `input`.
+- `select`.
+- `textarea`.
+- `img`.
+- `video`.
+- `iframe`.
+- `embed`.
+- `object`.
+
+`object-position`/`object-fit` 之间的关系有点类似于
+`background-position`/`background-size`,
+可以处理图片拉伸变形问题.
+
+```css
+.image-container {
+  position: relative;
+  padding-bottom: calc(2 / 3) * 100%; /* (height / width) ratio */
+}
+
+.image-container > img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+```
+
 ## CSS Filter
 
 - 来源自 SVG 的滤镜特效
@@ -3427,7 +3748,7 @@ body {
 }
 ```
 
-## SVG
+## CSS SVG
 
 ```css
 svg {
@@ -3551,9 +3872,7 @@ Avatar with circle status indicator:
 </svg>
 ```
 
-## CSS Interactive
-
-### Cursor and Pointer
+## CSS Cursor
 
 [Cursor](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor):
 
@@ -3574,7 +3893,7 @@ Avatar with circle status indicator:
 }
 ```
 
-### User Select
+## CSS Select
 
 ```css
 .wrap {
@@ -3583,47 +3902,13 @@ Avatar with circle status indicator:
 }
 ```
 
-### Caret
+## CSS Caret
 
 输入框光标颜色:
 
 ```css
 input {
   caret-color: red;
-}
-```
-
-## Object Position and Fit
-
-`object-position`/`object-fit`
-只对替换元素
-([`Replaced Element`](https://developer.mozilla.org/docs/Web/CSS/Replaced_element))
-有作用:
-
-- `input`.
-- `select`.
-- `textarea`.
-- `img`.
-- `video`.
-- `iframe`.
-- `embed`.
-- `object`.
-
-`object-position`/`object-fit` 之间的关系有点类似于
-`background-position`/`background-size`,
-可以处理图片拉伸变形问题.
-
-```css
-.image-container {
-  position: relative;
-  padding-bottom: calc(2 / 3) * 100%; /* (height / width) ratio */
-}
-
-.image-container > img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 ```
 
@@ -4205,365 +4490,6 @@ tl.staggerFrom(
 );
 ```
 
-## CSS Variables
-
-### Variables DOM API
-
-```css
-.element {
-  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-  height: calc(var(--vh, 1vh) * 100);
-}
-```
-
-```ts
-window.addEventListener('resize', () => {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
-```
-
-```ts
-const root = document.documentElement;
-const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
-```
-
-Change `--cursor-x` and `--cursor-y` via `JavaScript` API:
-
-```css
-:root::before {
-  position: fixed;
-  z-index: 1000;
-  display: block;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  content: '';
-  background: radial-gradient(
-    circle 16vmax at var(--cursor-x) var(--cursor-y),
-    rgb(0 0 0 / 0%) 0%,
-    rgb(0 0 0 / 50%) 80%,
-    rgb(0 0 0 / 80%) 100%
-  );
-}
-```
-
-Change `--percent` via `JavaScript` API:
-
-```css
-.bar {
-  display: flex;
-  height: 20px;
-  background-color: #f5f5f5;
-}
-
-.bar::before {
-  display: flex;
-  justify-content: end;
-  width: calc(var(--percent) * 1%);
-  font-size: 12px;
-  color: #fff;
-  white-space: nowrap;
-  content: counter(progress) '%\2002';
-  counter-reset: progress var(--percent);
-  background: #2486ff;
-}
-```
-
-### Scope Variables
-
-```html
-<div class="alert alert-info">
-  <div class="alert-content">
-    <h2 class="alert-title">Info</h2>
-    <div class="alert-body">
-      <p>Info Message.</p>
-    </div>
-  </div>
-</div>
-```
-
-```css
-.alert {
-  --primary: #777;
-  --secondary: #ccc;
-
-  background-color: var(--secondary);
-  border: 1px solid var(--primary);
-}
-
-.alert::before {
-  background-color: var(--primary);
-}
-
-.alert-title {
-  color: var(--primary);
-}
-
-.alert-success {
-  --primary: #40c057;
-  --secondary: #d3f9d8;
-}
-
-.alert-info {
-  --primary: #228be6;
-  --secondary: #d0ebff;
-}
-
-.alert-warning {
-  --primary: #fab005;
-  --secondary: #fff3bf;
-}
-
-.alert-error {
-  --primary: #fa5252;
-  --secondary: #ffe3e3;
-}
-```
-
-```css
-:root {
-  --primary: hsl(260deg 95% 70%);
-  --secondary: hsl(320deg 95% 60%);
-}
-
-.button {
-  background-color: var(--button-background, transparent);
-}
-
-.button-primary {
-  --button-background: var(--primary);
-}
-
-.button-secondary {
-  --button-background: var(--secondary);
-}
-```
-
-### Invalid and Empty CSS Variables
-
-- `--invalid-value: initial;` is invalid value
-  leading to `var(--invalid-value)` called failed,
-  `var(--invalid-value, backup-value)` get backup-value.
-- `--empty-value: ;` is valid empty value
-  leading to `var(--empty-value)` called succeeded,
-  `var(--empty-value, backup-value)` get **parent value**.
-- Use Invalid and Empty Value to
-  implement `if (true)` in CSS.
-
-```css
-:root {
-  --on: initial;
-  --off: ;
-}
-
-button {
-  --is-raised: var(--off);
-
-  border: 1px solid var(--is-raised, rgb(0 0 0 / 10%));
-}
-
-button:hover,
-button:focus {
-  --is-raised: var(--on);
-}
-```
-
-```css
-/**
- * css-media-vars
- * BSD 2-Clause License
- * Copyright (c) James0x57, PropJockey, 2020
- */
-
-html {
-  --media-print: initial;
-  --media-screen: initial;
-  --media-speech: initial;
-  --media-xs: initial;
-  --media-sm: initial;
-  --media-md: initial;
-  --media-lg: initial;
-  --media-xl: initial;
-
-  /* ... */
-  --media-pointer-fine: initial;
-  --media-pointer-none: initial;
-}
-
-/* 把当前变量变为空值 */
-@media print {
-  html {
-    --media-print: ;
-  }
-}
-
-@media screen {
-  html {
-    --media-screen: ;
-  }
-}
-
-@media speech {
-  html {
-    --media-speech: ;
-  }
-}
-
-/* 把当前变量变为空值 */
-@media (max-width: 37.499em) {
-  html {
-    --media-xs: ;
-    --media-lte-sm: ;
-    --media-lte-md: ;
-    --media-lte-lg: ;
-  }
-}
-
-/** 移动优先的样式规则 */
-.breakpoints-demo > * {
-  /** 小于 37.5em, 宽度 100%  */
-  --xs-width: var(--media-xs) 100%;
-
-  /** 小于 56.249em, 宽度 49%  */
-  --sm-width: var(--media-sm) 49%;
-  --md-width: var(--media-md) 32%;
-  --lg-width: var(--media-gte-lg) 24%;
-
-  width: var(--xs-width, var(--sm-width, var(--md-width, var(--lg-width))));
-
-  --sm-and-down-bg: var(--media-lte-sm) red;
-  --md-and-up-bg: var(--media-gte-md) green;
-
-  background: var(--sm-and-down-bg, var(--md-and-up-bg));
-}
-```
-
-### Dark Mode CSS Variables
-
-```css
-:root {
-  /* Themes */
-  --bg-light: #fff;
-  --text-light: #000;
-  --bg-dark: #000;
-  --text-dark: #fff;
-
-  /* Defaults */
-  --bg: var(--bg-light);
-  --text: var(--text-light);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: var(--bg-dark);
-    --text: var(--text-dark);
-  }
-}
-```
-
-## CSS Colors
-
-### Current Color
-
-- `currentcolor` 变量使用当前 `color` 计算值.
-- `border`/`text-shadow`/`box-shadow` 默认表现为 `currentcolor`.
-
-### HSL Color
-
-- H: hue.
-- S: saturation (stay `50%` etc.).
-- L: lightness (easy to theme colors).
-
-```css
-/* Hover Button */
-:root {
-  --primary-h: 221;
-  --primary-s: 72%;
-  --primary-l: 62%;
-}
-
-.button {
-  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
-
-.button:hover,
-.button:focus {
-  --primary-l: 54%;
-}
-```
-
-```css
-/* Custom Buttons */
-:root {
-  --primary-h: 221;
-  --primary-s: 72%;
-  --primary-l: 62%;
-}
-
-.button {
-  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
-
-.button-secondary {
-  --primary-l: 90%;
-
-  color: #222;
-}
-
-.button-ghost {
-  --primary-l: 90%;
-
-  background-color: transparent;
-  border: 3px solid hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
-```
-
-```css
-/* Change lightness to get gradient */
-.section {
-  background: linear-gradient(
-    to left,
-    hsl(var(--primary-h) var(--primary-s) var(--primary-l)),
-    hsl(var(--primary-h) var(--primary-s) 95%)
-  );
-}
-
-.section-2 {
-  --primary-h: 167;
-}
-```
-
-### CSS Color Reference
-
-- CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
-  - hwb.
-  - lab.
-  - lch.
-  - color-mix.
-  - color-contrast.
-  - color.
-  - accent-color.
-- CSS `color` [value](https://developer.mozilla.org/docs/Web/CSS/color_value).
-
-## CSS Logical Properties and Values
-
-### CSS Logical Basis
-
-In positioning/sizing/margin/padding/border/text alignment:
-
-- `block-start` for `top`
-- `block-end` for `bottom`
-- `block` for vertical
-- `inline-start` for `left`
-- `inline-end` for `right`
-- `inline` for horizontal
-
-### CSS Logical Reference
-
-- [W3C CSS Logical Draft](https://drafts.csswg.org/css-logical)
-- [CSS Tricks CSS Logical Guide](https://css-tricks.com/css-logical-properties-and-values)
-
 ## Responsive Design
 
 ### Responsive Font
@@ -4924,7 +4850,7 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 }
 ```
 
-## Accessibility
+## CSS Accessibility
 
 ### Screen Reader Only
 
@@ -5137,11 +5063,6 @@ window.requestAnimationFrame(step);
 ## CSS Hacks
 
 - [Browser Hacks](https://github.com/4ae9b8/browserhacks)
-
-## Modern CSS
-
-- New CSS features in 2021: [Hover 2021](https://2021-hover-conf-new-in-css.netlify.app).
-- New CSS features in 2022: [State of CSS 2022](https://web.dev/state-of-css-2022).
 
 ## CSS Tools
 
@@ -5457,7 +5378,79 @@ will lead to class purged.
 }
 ```
 
-## Awesome Components
+## CSS Style Guide
+
+### Layout Structure Naming Convention
+
+- 容器: container.
+- 页头: header.
+- 内容: content.
+- 页面主体: main.
+- 页尾: footer.
+- 导航: nav.
+- 侧栏: sidebar.
+- 栏目: column.
+- 页面外围控制整体佈局宽度: wrapper.
+- 左右中: left right center.
+
+### Navigation Naming Convention
+
+- 导航: nav.
+- 主导航: main-nav.
+- 子导航: sub-nav.
+- 顶导航: top-nav.
+- 边导航: sidebar.
+- 左导航: left-sidebar.
+- 右导航: right-sidebar.
+- 菜单: menu.
+- 子菜单: sub-menu.
+- 标题: title.
+- 摘要: summary.
+
+### Functional Component Naming Convention
+
+- 标志: logo.
+- 广告: banner.
+- 登陆: login.
+- 登录条: login-bar.
+- 注册: register.
+- 搜索: search.
+- 功能区: shop.
+- 标题: title.
+- 加入: join us.
+- 状态: status.
+- 按钮: btn.
+- 滚动: scroll.
+- 标籤页: tab.
+- 文章列表: list.
+- 提示信息: msg.
+- 当前的: current.
+- 小技巧: tips.
+- 图标: icon.
+- 注释: note.
+- 指南: guide.
+- 服务: service.
+- 热点: hot.
+- 新闻: news.
+- 下载: download.
+- 投票: vote.
+- 合作伙伴: partner.
+- 友情链接: link.
+- 版权: copyright.
+
+### CSS Files Naming Convention
+
+- `abstracts`: `$variables`, `@mixin` function.
+- `vendors`: external libraries (font-awesome, bootstrap).
+- `base`: normalize.css, reset.css, utils.css, font.css, base.css.
+  (margin-right, text-center, float-right).
+- `components`: form.css, button.css, navbar.css, dropdown.css.
+- `layout`: columns.css, grid.css, header.css, footer.css, section.css, navigation.css.
+- `pages`: home.css, about.css.
+- `themes`: color.css, font.css.
+- main.css.
+
+## CSS Components
 
 ### Resizable
 
@@ -7064,3 +7057,8 @@ const polygon = (n = 3) => {
   return `polygon(${points.join(',')})`;
 };
 ```
+
+## CSS Reference
+
+- New CSS features in 2021: [Hover 2021](https://2021-hover-conf-new-in-css.netlify.app).
+- New CSS features in 2022: [State of CSS 2022](https://web.dev/state-of-css-2022).
