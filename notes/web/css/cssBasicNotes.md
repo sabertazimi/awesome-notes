@@ -732,10 +732,10 @@ button:focus:not(:focus-visible) {
   匹配启用的界面元素, e.g `input`.
 - `:disabled`:
   匹配禁用的界面元素 (`[disabled]`), e.g `input`.
-- `:read-write`:
-  匹配其内容可供用户修改的元素.
 - `:read-only`:
-  匹配其内容无法供用户修改的元素 (`[readonly]`).
+  匹配其内容无法供用户修改的元素 (`<div>`/`[readonly]`).
+- `:read-write`:
+  匹配其内容可供用户修改的元素 (`<div contenteditable>`/`<input>`).
 - `:default`:
   匹配处于默认状态的表单元素, 可用于默认选项/推荐选项样式.
 - `:checked`:
