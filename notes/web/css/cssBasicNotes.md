@@ -5020,7 +5020,22 @@ window.requestAnimationFrame(step);
 
 ## CSS Hacks
 
-- [Browser Hacks](https://github.com/4ae9b8/browserhacks)
+[Browser hacks](https://github.com/4ae9b8/browserhacks):
+
+利用低版本浏览器无法识别新的属性值
+
+```css
+.loading {
+  background: url('/images/loading.gif');
+  background: url('/images/loading.png'), linear-gradient(transparent, transparent);
+}
+
+.shadow {
+  border: 1px solid #ddd;
+  border: 1px solid rgb(0 0 0 / 0%);
+  box-shadow: 2px 2px;
+}
+```
 
 ## CSS Tools
 
