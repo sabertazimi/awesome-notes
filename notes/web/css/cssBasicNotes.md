@@ -728,22 +728,24 @@ button:focus:not(:focus-visible) {
 ### Input Pseudo Class
 
 - `:autofill`.
-- `:enabled`: 已启用的界面元素, e.g `input`.
-- `:disabled`: 已禁用的界面元素, e.g `input`.
-- `:read-only`: 应用于其内容无法供用户修改的元素.
-- `:read-write`: 应用于其内容可供用户修改的元素, 比如输入框.
-- `:placeholder-shown`: select `input` with placeholder.
-- `:default`: 应用于一个或多个作为一组类似元素中的默认元素的 UI 元素.
-- `:checked`.
+- `:enabled`: 匹配启用的界面元素, e.g `input`.
+- `:disabled`: 匹配禁用的界面元素 (`[disabled]`), e.g `input`.
+- `:read-write`: 匹配其内容可供用户修改的元素.
+- `:read-only`: 匹配其内容无法供用户修改的元素 (`[readonly]`).
+- `:default`: 匹配处于默认状态的表单元素, 可用于默认选项/推荐选项样式.
+- `:checked`: 匹配处于选中状态的表单元素, 可用于开关选框/多选框样式.
 - `:indeterminate`.
 - `:blank`.
-- `:valid`: 应用于输入验证有效元素, 基于 input 的 type/pattern 属性.
-- `:invalid`: 应用于输入验证无效元素.
+- `:valid`: 匹配输入验证有效元素 (`<input type>`/`<input pattern>`).
+- `:invalid`: 匹配输入验证无效元素.
 - `:user-invalid`.
-- `:in-range`: 应用于具有范围限制的元素, 其中该值位于限制内, 比如具有 min 和 max 属性的 number 和 range 输入框.
-- `:out-of-range`: 与:in-range 选择相反, 其中该值在限制范围外.
-- `:required`: 应用于具有必填属性 required 的表单控件.
-- `:optional`: 应用于没有必填属性 required 的所有表单控件.
+- `:in-range`:
+  匹配具有范围限制的元素, 其中该值位于限制内,
+  e.g 具有 `min` 和 `max` 属性的 `number` 和 `range` 输入框.
+- `:out-of-range`: 与 `:in-range` 选择相反, 其中该值在限制范围外.
+- `:required`: 匹配具有必填属性 `[required]` 的表单控件.
+- `:optional`: 匹配没有必填属性 `[required]` 的所有表单控件.
+- `:placeholder-shown`: select `input` with placeholder, 可用于控制输入样式.
 
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
@@ -758,7 +760,8 @@ button:focus:not(:focus-visible) {
   transition: opacity 0.2s ease-in-out;
 }
 
-input:not(:placeholder-shown) + .msg {
+.input:not(:placeholder-shown) ~ .label,
+.input:focus ~ .label {
   opacity: 1;
 }
 ```
@@ -5684,13 +5687,59 @@ td:last-child {
 [Form Design Pattern](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post):
 
 - 由于表单组件多为 `Replaced Element`, 通过 CSS 控制样式存在困难,
-  一般利用 `label` 包裹 `input + span` 的方式,
-  对 `label` 与 `span` 进行核心样式控制, 对 `input` 进行辅助样式控制.
+  一般利用 `label`/`span` 代替 `input` 的方式,
+  对 `label` 与 `span` 进行[核心样式控制](#input-pseudo-class), 对 `input` 进行辅助样式控制:
+  - `:disabled`.
+  - `:checked`.
+  - `:focus-visible`.
+  - `:focus:not(:focus-visible)`.
+  - `:active:not(:disabled)`.
+  - `:indeterminate`.
 - 隐藏 `input`, 用 `label` 模拟时, 需要注意表单元素的键盘可访问性:
-  - 不应使用 `display: none`/`visibility: hidden` 隐藏 `input` (无法键盘访问),
+  - 保持键盘访问:
+    不应使用 `display: none`/`visibility: hidden` 隐藏 `input` (无法键盘访问),
     应使用 `[type="checkbox"] { position: absolute; clip: rect(0 0 0 0); }`.
-  - 应添加 `:focus` 伪类样式:
+  - 修饰键盘访问:
+    应添加 `:focus`/`:focus-visible` 伪类样式,
     `input:focus ~ label { outline: 1px solid red; border: 1px solid red; }`.
+
+```css
+[type='radio'] {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.radio-label {
+  background-color: var(--color-transparent);
+  border-color: var(--color-dark);
+  border-radius: 999px;
+}
+
+:disabled ~ .radio-label {
+  border-color: var(--color-ghost);
+}
+
+:checked ~ .radio-label {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+:focus-visible ~ .radio-label {
+  outline: 1px solid var(--color-primary);
+}
+
+:focus:not(:focus-visible) ~ .radio-label {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+:active:not(:disabled) ~ .radio-label {
+  transform: scale(1.1);
+}
+```
 
 #### Custom Form
 
