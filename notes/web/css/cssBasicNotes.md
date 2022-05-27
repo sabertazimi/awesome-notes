@@ -728,24 +728,39 @@ button:focus:not(:focus-visible) {
 ### Input Pseudo Class
 
 - `:autofill`.
-- `:enabled`: 匹配启用的界面元素, e.g `input`.
-- `:disabled`: 匹配禁用的界面元素 (`[disabled]`), e.g `input`.
-- `:read-write`: 匹配其内容可供用户修改的元素.
-- `:read-only`: 匹配其内容无法供用户修改的元素 (`[readonly]`).
-- `:default`: 匹配处于默认状态的表单元素, 可用于默认选项/推荐选项样式.
-- `:checked`: 匹配处于选中状态的表单元素, 可用于开关选框/多选框样式.
-- `:indeterminate`.
-- `:blank`.
-- `:valid`: 匹配输入验证有效元素 (`<input type>`/`<input pattern>`).
-- `:invalid`: 匹配输入验证无效元素.
-- `:user-invalid`.
+- `:enabled`:
+  匹配启用的界面元素, e.g `input`.
+- `:disabled`:
+  匹配禁用的界面元素 (`[disabled]`), e.g `input`.
+- `:read-write`:
+  匹配其内容可供用户修改的元素.
+- `:read-only`:
+  匹配其内容无法供用户修改的元素 (`[readonly]`).
+- `:default`:
+  匹配处于默认状态的表单元素, 可用于默认选项/推荐选项样式.
+- `:checked`:
+  匹配处于选中状态的表单元素, 可用于开关选框/多选框样式.
+- `:indeterminate`:
+  - 匹配处于未选状态的单选框元素 `<input type="radio">`.
+  - 匹配处于半选状态的复选框元素 `<input type="checkbox">`.
+  - 匹配处于未设置 `value` 的进度条元素 `<progress>`.
+- `:valid`:
+  匹配输入验证有效的表单元素 (`<input type>`/`<input pattern>`).
+- `:invalid`:
+  匹配输入验证无效的表单元素.
+- `:user-invalid`:
+  匹配用户交互后仍然验证无效的表单元素.
 - `:in-range`:
-  匹配具有范围限制的元素, 其中该值位于限制内,
+  匹配具有范围限制的元素, 其中该值位于限制范围内,
   e.g 具有 `min` 和 `max` 属性的 `number` 和 `range` 输入框.
-- `:out-of-range`: 与 `:in-range` 选择相反, 其中该值在限制范围外.
-- `:required`: 匹配具有必填属性 `[required]` 的表单控件.
-- `:optional`: 匹配没有必填属性 `[required]` 的所有表单控件.
-- `:placeholder-shown`: select `input` with placeholder, 可用于控制输入样式.
+- `:out-of-range`:
+  与 `:in-range` 选择相反, 其中该值位于限制范围外.
+- `:required`:
+  匹配具有必填属性 `[required]` 的表单元素.
+- `:optional`:
+  匹配没有必填属性 `[required]` 的表单元素.
+- `:placeholder-shown`:
+  select `input` with placeholder, 可用于控制输入样式.
 
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
