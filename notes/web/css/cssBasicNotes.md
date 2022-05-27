@@ -1220,6 +1220,21 @@ const FOCUSABLE_SELECTOR = [
 
 ## CSS Box
 
+### Box Sizing
+
+`box-sizing`:
+
+- `content-box` (default).
+- `padding-box`.
+- `border-box`.
+
+Box sizing:
+
+- `Intrinsic Sizing` (内在尺寸):
+  表示元素最终的尺寸表现是由内容决定的.
+- `Extrinsic Sizing` (外在尺寸):
+  表示元素最终的尺寸表现是由上下文决定的.
+
 ### Box Width
 
 #### Min and Max Width
@@ -1270,21 +1285,6 @@ window.addEventListener('resize', () => {
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
 ```
-
-### Resize Box
-
-前置属性: `overflow`.
-
-```css
-/* 允许用户修改元素尺寸 */
-resize: none/both/horizontal/vertical/inherit;
-```
-
-### Box Sizing
-
-- `content-box` (default).
-- `padding-box`.
-- `border-box`.
 
 ### Box Padding
 
