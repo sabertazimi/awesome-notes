@@ -3558,7 +3558,7 @@ movie style
 
 `object-position`/`object-fit` 之间的关系有点类似于
 `background-position`/`background-size`,
-可以处理图片拉伸变形问题.
+可以处理图片拉伸变形问题:
 
 ```css
 .image-container {
@@ -4806,6 +4806,47 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 } else {
   /* the view port is less than 400 pixels wide */
 }
+```
+
+## Feature Query
+
+[`@supports`](https://developer.mozilla.org/docs/Web/CSS/@supports):
+
+```css
+@supports (transform-origin: 5% 5%) {
+  font-size: 1rem;
+}
+
+@supports selector(A > B) {
+  font-size: 1rem;
+}
+
+@supports not (not (transform-origin: 2px)) {
+  font-size: 1rem;
+}
+
+@supports (display: grid) and (not (display: inline-grid)) {
+  font-size: 1rem;
+}
+
+@supports (display: table-cell) and (display: flex) and (display: contents) {
+  font-size: 1rem;
+}
+
+@supports (transform-style: preserve) or (-moz-transform-style: preserve) or
+  (-o-transform-style: preserve) or (-webkit-transform-style: preserve) {
+  font-size: 1rem;
+}
+```
+
+```ts
+const result = CSS.supports('text-decoration-style', 'blink');
+const result = CSS.supports('display: flex');
+const result = CSS.supports('(--foo: red)');
+const result = CSS.supports(`
+  (transform-style: preserve) or (-moz-transform-style: preserve) or
+  (-o-transform-style: preserve) or (-webkit-transform-style: preserve)
+`);
 ```
 
 ## CSS Accessibility
