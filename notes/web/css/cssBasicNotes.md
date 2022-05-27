@@ -7081,5 +7081,6 @@ const polygon = (n = 3) => {
 
 ## CSS Reference
 
+- CSS quick [reference](https://cssreference.io).
 - New CSS features in 2021: [Hover 2021](https://2021-hover-conf-new-in-css.netlify.app).
 - New CSS features in 2022: [State of CSS 2022](https://web.dev/state-of-css-2022).
