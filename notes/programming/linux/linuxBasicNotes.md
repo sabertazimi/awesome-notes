@@ -2439,6 +2439,9 @@ perf report
 
 ## Linux Tools
 
+- Cross-platform Rust rewrite of the [GNU core utils](https://github.com/uutils/coreutils).
+- Modern alternatives to [common unix commands](https://github.com/ibraheemdev/modern-unix).
+
 ### FFmpeg
 
 ```bash
