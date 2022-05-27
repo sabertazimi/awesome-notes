@@ -393,6 +393,48 @@ console.log(screen.orientation.type); // landscape-secondary
 console.log(screen.orientation.angle); // 270
 ```
 
+全屏 [API](https://developer.mozilla.org/docs/Web/API/Fullscreen_API):
+
+```ts
+function toggleFullscreen() {
+  const elem = document.querySelector('video');
+
+  if (document.fullscreenElement) {
+    document
+      .exitFullscreen()
+      .then(() => console.log('Document Exited from Full screen mode'))
+      .catch(err => console.error(err));
+  } else {
+    elem
+      .requestFullscreen()
+      .then(() => {})
+      .catch(err => {
+        alert(
+          `Error occurred while switch into fullscreen mode: ${err.message} (${err.name})`
+        );
+      });
+  }
+}
+
+document.onclick = function (event) {
+  if (document.fullscreenElement) {
+    document
+      .exitFullscreen()
+      .then(() => console.log('Document Exited from Full screen mode'))
+      .catch(err => console.error(err));
+  } else {
+    document.documentElement
+      .requestFullscreen({ navigationUI: 'show' })
+      .then(() => {})
+      .catch(err => {
+        alert(
+          `Error occurred while switch into fullscreen mode: ${err.message} (${err.name})`
+        );
+      });
+  }
+};
+```
+
 ### History
 
 #### History Navigation
