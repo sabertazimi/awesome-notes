@@ -4737,26 +4737,7 @@ input[type='checkbox']:checked {
 }
 ```
 
-### Container Query
-
-```css
-.sidebar {
-  /* stylelint-disable-next-line  property-no-unknown */
-  container-type: inline-size;
-  /* stylelint-disable-next-line  property-no-unknown */
-  container-name: sidebar;
-}
-
-/* stylelint-disable-next-line at-rule-no-unknown */
-@container sidebar (min-width: 400px) {
-  .card {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-  }
-}
-```
-
-### Support Detection Query
+### Media Query Support Detection
 
 Detecting media query support in CSS:
 
@@ -4805,6 +4786,25 @@ if (window.matchMedia('(min-width: 400px)').matches) {
   /* the view port is at least 400 pixels wide */
 } else {
   /* the view port is less than 400 pixels wide */
+}
+```
+
+## Container Query
+
+```css
+.sidebar {
+  /* stylelint-disable-next-line  property-no-unknown */
+  container-type: inline-size;
+  /* stylelint-disable-next-line  property-no-unknown */
+  container-name: sidebar;
+}
+
+/* stylelint-disable-next-line at-rule-no-unknown */
+@container sidebar (min-width: 400px) {
+  .card {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
 }
 ```
 
