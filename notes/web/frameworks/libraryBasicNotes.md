@@ -1455,7 +1455,8 @@ tags: [Web, Framework, Library]
 - [Lock Threads](https://github.com/dessant/lock-threads)
 - [Stale Bot](https://github.com/actions/stale)
 - [Issues Helper](https://github.com/actions-cool/issues-helper)
-- [PR Creator](https://github.com/peter-evans/create-pull-request)
+- [Pull Request Creator](https://github.com/peter-evans/create-pull-request)
+- [Semantic Pull Request](https://github.com/amannn/action-semantic-pull-request)
 - [Approve Review](https://github.com/hmarr/auto-approve-action)
 - [Approve Workflow](https://github.com/mheap/automatic-approve-action)
 
