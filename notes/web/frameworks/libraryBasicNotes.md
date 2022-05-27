@@ -943,6 +943,7 @@ tags: [Web, Framework, Library]
 
 - [HotKey: Trigger Action on Element with Keyboard Shortcut](https://github.com/github/hotkey)
 - [KBar: Fast, Portable and Extensible Command K Interface](https://github.com/timc1/kbar)
+- [NinjaKeys: Keyboard Shortcuts Interface](https://github.com/ssleptsov/ninja-keys)
 
 ## SMS
 
