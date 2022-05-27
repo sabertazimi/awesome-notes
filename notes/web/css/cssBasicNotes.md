@@ -175,14 +175,36 @@ accepted by CSS properties and functions:
 
 ## CSS Property Value
 
+### Inherit Value
+
+Inherit from parent.
+
 ### Initial Value
 
 The initial value of a CSS property is its default value,
-as listed in its definition table
+as listed in its **standard** definition table.
+
+### Revert Value
+
+Revert to **user agent** built in styles.
+
+```css
+@supports (-webkit-overflow-scrolling: touch) {
+  progress {
+    all: revert;
+  }
+}
+```
 
 ### Unset Value
 
-### Revert Value
+Reset to `inherit` or `initial` value.
+
+```css
+dialog {
+  all: unset; /* Exclude `unicode-bidi`, `direction`, custom variables */
+}
+```
 
 ### Specified Value
 
@@ -198,6 +220,13 @@ It is calculated from the specified value by:
 1. Handling the special values `inherit`, `initial`, `unset`, and `revert`
 2. Doing the computation needed to reach the value described in the
    "Computed value" line in the property's definition table
+
+```css
+span {
+  /* display computed to `block` */
+  position: absolute;
+}
+```
 
 ### Used Value
 
@@ -235,12 +264,6 @@ The user agent performs four steps to calculate a property's actual (final) valu
 5. actual value.
 
 :::
-
-```css
-span {
-  position: absolute;
-} /* display computed to `block` */
-```
 
 ## CSS Colors
 
