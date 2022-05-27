@@ -812,7 +812,7 @@ button:focus:not(:focus-visible) {
 
 ### Linguistic Pseudo Class
 
-- `:dir()`.
+- `:dir(ltr)`/`:dir(rtl)`.
 - `:lang(en)`: 具有使用双字母缩写 (`en`) 表示的语言的元素.
 
 ### Misc Pseudo Class
