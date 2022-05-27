@@ -46,7 +46,7 @@ tags: [Web, Framework, Library]
 - [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
 - [React Vite Starter](https://github.com/wtchnm/Vitamin)
 - [React Chrome Extension JavaScript Boilerplate](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
-- [React Chrome Extension TypeScript Boilerplate](https://blog.logrocket.com/creating-chrome-extension-react-typescript)
+- [React Chrome Extension TypeScript Boilerplate](https://github.com/Debdut/browser-extension)
 - [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)
 - [Vite Web Extension](https://github.com/antfu/vitesse-webext)
 
