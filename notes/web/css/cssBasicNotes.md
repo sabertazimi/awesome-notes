@@ -3576,8 +3576,8 @@ movie style
 
 ## CSS Filter
 
-- 来源自 SVG 的滤镜特效
-- [Instagram Filter](https://github.com/una/CSSgram)
+- 来源自 SVG 的滤镜特效.
+- Instagram [filter](https://github.com/una/CSSgram).
 
 ```css
 .filter {
@@ -3628,7 +3628,7 @@ movie style
 
 ### SVG Filter
 
-内投影滤镜
+内投影滤镜:
 
 ```html
 <svg
@@ -3658,7 +3658,7 @@ movie style
 </svg>
 ```
 
-毛玻璃滤镜
+毛玻璃滤镜:
 
 ```html
 <svg width="0" height="0" style="position:absolute;">
