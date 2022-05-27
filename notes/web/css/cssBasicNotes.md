@@ -171,6 +171,7 @@ accepted by CSS properties and functions:
 - 2D [`<position>`](https://developer.mozilla.org/docs/Web/CSS/position_value).
 - CSS [units](https://developer.mozilla.org/docs/Web/CSS/CSS_Values_and_Units).
 - CSS [functions](https://developer.mozilla.org/docs/Web/CSS/CSS_Functions).
+- CSS [values](https://www.zhangxinxu.com/wordpress/2019/11/css-value-type).
 
 ## CSS Property Value
 
