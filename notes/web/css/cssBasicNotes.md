@@ -5020,9 +5020,9 @@ window.requestAnimationFrame(step);
 
 ## CSS Hacks
 
-[Browser hacks](https://github.com/4ae9b8/browserhacks):
+### Property Hacks
 
-利用低版本浏览器无法识别新的属性值
+利用低版本浏览器无法识别新的属性值:
 
 ```css
 .loading {
@@ -5036,6 +5036,59 @@ window.requestAnimationFrame(step);
   box-shadow: 2px 2px;
 }
 ```
+
+### Selector Hacks
+
+利用低版本浏览器无法识别新的选择器 (`,`):
+
+```css
+/* IE9+ */
+:checked,
+:disabled,
+tag-not-found::before,
+tag-not-found::after,
+tag-not-found::selection,
+.class {
+  font-size: 1rem;
+}
+
+/* IE10+ */
+:valid,
+:invalid,
+:required,
+:optional,
+.class {
+  font-size: 1rem;
+}
+
+/* IE11+ */
+tag-not-found::backdrop,
+.class {
+  font-size: 1rem;
+}
+
+/* Firefox */
+tag-not-found::-moz-progress-bar,
+.class {
+  font-size: 1rem;
+}
+
+/* Webkit */
+:-webkit-any(tag-not-found),
+.class {
+  font-size: 1rem;
+}
+
+/* Chromium Edge */
+tag-not-found::-ms-any,
+.class {
+  font-size: 1rem;
+}
+```
+
+### CSS Hacks Reference
+
+- Browser [hacks](https://github.com/4ae9b8/browserhacks).
 
 ## CSS Tools
 
