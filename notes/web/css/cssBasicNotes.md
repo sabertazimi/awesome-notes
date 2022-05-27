@@ -155,12 +155,31 @@ h1 {
 - list elements: list-style, list-style-type, list-style-position, list-style-image
 - table elements: border-collapse
 
+## CSS Data Types
+
+CSS [data types](https://developer.mozilla.org/docs/Web/CSS/CSS_Types)
+define typical [values](https://github.com/frenic/csstype)
+(including keywords and units)
+accepted by CSS properties and functions:
+
+- Textual data [types](https://developer.mozilla.org/docs/Web/CSS/CSS_Types#textual_data_types).
+- Numeric data [types](https://developer.mozilla.org/docs/Web/CSS/CSS_Types#numeric_data_types).
+- [Quantities](https://developer.mozilla.org/docs/Web/CSS/CSS_Types#quantities).
+- Combinations of [types](https://developer.mozilla.org/docs/Web/CSS/CSS_Types#combinations_of_types).
+- Color data [types](https://developer.mozilla.org/docs/Web/CSS/color_value).
+- Image data [types](https://developer.mozilla.org/docs/Web/CSS/image).
+- 2D [`<position>`](https://developer.mozilla.org/docs/Web/CSS/position_value).
+- CSS [units](https://developer.mozilla.org/docs/Web/CSS/CSS_Values_and_Units).
+- CSS [functions](https://developer.mozilla.org/docs/Web/CSS/CSS_Functions).
+
 ## CSS Property Value
 
 ### Initial Value
 
 The initial value of a CSS property is its default value,
 as listed in its definition table
+
+### Unset Value
 
 ### Specified Value
 
@@ -220,92 +239,107 @@ span {
 } /* display computed to `block` */
 ```
 
-## CSS Property Order
+## CSS Colors
 
-> 显示属性 -> 自身属性 -> 文本属性.
+### Current Color
 
-### Display Property Order
+- `currentcolor` 变量使用当前 `color` 计算值.
+- `border`/`text-shadow`/`box-shadow` 默认表现为 `currentcolor`.
 
-- position.
-- z-index.
-- top.
-- right.
-- bottom.
-- left.
-- box-sizing.
-- display.
-- visibility.
-- float.
-- clear.
+### HSL Color
 
-### Self Property Order
+- H: hue.
+- S: saturation (stay `50%` etc.).
+- L: lightness (easy to theme colors).
 
-- width.
-- min-width.
-- max-width.
-- height.
-- min-height.
-- max-height.
-- overflow.
-- padding.
-- padding-top.
-- padding-right.
-- padding-bottom.
-- padding-left.
-- margin.
-- margin-top.
-- margin-right.
-- margin-bottom.
-- margin-left.
-- border.
-- border-width.
-- border-top-width.
-- border-right-width.
-- border-bottom-width.
-- border-left-width.
-- border-style.
-- border-top-style.
-- border-right-style.
-- border-bottom-style.
-- border-left-style.
-- border-color.
-- border-top-color.
-- border-right-color.
-- border-bottom-color.
-- border-left-color.
-- border-collapse.
-- border-spacing.
-- outline.
-- list-style.
-- table-layout.
-- caption-side.
-- empty-cells.
-- background.
-- background-color.
-- background-image.
-- background-repeat.
-- background-position.
+```css
+/* Hover Button */
+:root {
+  --primary-h: 221;
+  --primary-s: 72%;
+  --primary-l: 62%;
+}
 
-### Text Property Order
+.button {
+  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+}
 
-- color.
-- font.
-- font-family.
-- font-size.
-- font-weight.
-- line-height.
-- text-align.
-- text-indent.
-- text-transform.
-- text-decoration.
-- letter-spacing.
-- word-spacing.
-- white-space.
-- vertical-align.
-- opacity.
-- cursor.
-- content.
-- quotes.
+.button:hover,
+.button:focus {
+  --primary-l: 54%;
+}
+```
+
+```css
+/* Custom Buttons */
+:root {
+  --primary-h: 221;
+  --primary-s: 72%;
+  --primary-l: 62%;
+}
+
+.button {
+  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+}
+
+.button-secondary {
+  --primary-l: 90%;
+
+  color: #222;
+}
+
+.button-ghost {
+  --primary-l: 90%;
+
+  background-color: transparent;
+  border: 3px solid hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+}
+```
+
+```css
+/* Change lightness to get gradient */
+.section {
+  background: linear-gradient(
+    to left,
+    hsl(var(--primary-h) var(--primary-s) var(--primary-l)),
+    hsl(var(--primary-h) var(--primary-s) 95%)
+  );
+}
+
+.section-2 {
+  --primary-h: 167;
+}
+```
+
+### CSS Color Reference
+
+- CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
+  - hwb.
+  - lab.
+  - lch.
+  - color-mix.
+  - color-contrast.
+  - color.
+  - accent-color.
+- CSS `color` [value](https://developer.mozilla.org/docs/Web/CSS/color_value).
+
+## CSS Logical Properties and Values
+
+### CSS Logical Basis
+
+In positioning/sizing/margin/padding/border/text alignment:
+
+- `block-start` for `top`
+- `block-end` for `bottom`
+- `block` for vertical
+- `inline-start` for `left`
+- `inline-end` for `right`
+- `inline` for horizontal
+
+### CSS Logical Reference
+
+- [W3C CSS Logical Draft](https://drafts.csswg.org/css-logical)
+- [CSS Tricks CSS Logical Guide](https://css-tricks.com/css-logical-properties-and-values)
 
 ## CSS Variables
 
@@ -563,108 +597,6 @@ html {
   }
 }
 ```
-
-## CSS Colors
-
-### Current Color
-
-- `currentcolor` 变量使用当前 `color` 计算值.
-- `border`/`text-shadow`/`box-shadow` 默认表现为 `currentcolor`.
-
-### HSL Color
-
-- H: hue.
-- S: saturation (stay `50%` etc.).
-- L: lightness (easy to theme colors).
-
-```css
-/* Hover Button */
-:root {
-  --primary-h: 221;
-  --primary-s: 72%;
-  --primary-l: 62%;
-}
-
-.button {
-  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
-
-.button:hover,
-.button:focus {
-  --primary-l: 54%;
-}
-```
-
-```css
-/* Custom Buttons */
-:root {
-  --primary-h: 221;
-  --primary-s: 72%;
-  --primary-l: 62%;
-}
-
-.button {
-  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
-
-.button-secondary {
-  --primary-l: 90%;
-
-  color: #222;
-}
-
-.button-ghost {
-  --primary-l: 90%;
-
-  background-color: transparent;
-  border: 3px solid hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
-```
-
-```css
-/* Change lightness to get gradient */
-.section {
-  background: linear-gradient(
-    to left,
-    hsl(var(--primary-h) var(--primary-s) var(--primary-l)),
-    hsl(var(--primary-h) var(--primary-s) 95%)
-  );
-}
-
-.section-2 {
-  --primary-h: 167;
-}
-```
-
-### CSS Color Reference
-
-- CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
-  - hwb.
-  - lab.
-  - lch.
-  - color-mix.
-  - color-contrast.
-  - color.
-  - accent-color.
-- CSS `color` [value](https://developer.mozilla.org/docs/Web/CSS/color_value).
-
-## CSS Logical Properties and Values
-
-### CSS Logical Basis
-
-In positioning/sizing/margin/padding/border/text alignment:
-
-- `block-start` for `top`
-- `block-end` for `bottom`
-- `block` for vertical
-- `inline-start` for `left`
-- `inline-end` for `right`
-- `inline` for horizontal
-
-### CSS Logical Reference
-
-- [W3C CSS Logical Draft](https://drafts.csswg.org/css-logical)
-- [CSS Tricks CSS Logical Guide](https://css-tricks.com/css-logical-properties-and-values)
 
 ## CSS Selectors
 
@@ -3874,7 +3806,7 @@ Avatar with circle status indicator:
 
 ## CSS Cursor
 
-[Cursor](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor):
+[Cursor](https://developer.mozilla.org/docs/Web/CSS/cursor):
 
 - `auto`/`default`/`pointer`/`move`/`text`.
 - `wait`/`help`/`crosshair`/`progress`.
@@ -5380,7 +5312,96 @@ will lead to class purged.
 
 ## CSS Style Guide
 
-### Layout Structure Naming Convention
+### CSS Property Order
+
+> 显示属性 -> 自身属性 -> 文本属性.
+
+#### Display Property Order
+
+- position.
+- z-index.
+- top.
+- right.
+- bottom.
+- left.
+- box-sizing.
+- display.
+- visibility.
+- float.
+- clear.
+
+#### Self Property Order
+
+- width.
+- min-width.
+- max-width.
+- height.
+- min-height.
+- max-height.
+- overflow.
+- padding.
+- padding-top.
+- padding-right.
+- padding-bottom.
+- padding-left.
+- margin.
+- margin-top.
+- margin-right.
+- margin-bottom.
+- margin-left.
+- border.
+- border-width.
+- border-top-width.
+- border-right-width.
+- border-bottom-width.
+- border-left-width.
+- border-style.
+- border-top-style.
+- border-right-style.
+- border-bottom-style.
+- border-left-style.
+- border-color.
+- border-top-color.
+- border-right-color.
+- border-bottom-color.
+- border-left-color.
+- border-collapse.
+- border-spacing.
+- outline.
+- list-style.
+- table-layout.
+- caption-side.
+- empty-cells.
+- background.
+- background-color.
+- background-image.
+- background-repeat.
+- background-position.
+
+#### Text Property Order
+
+- color.
+- font.
+- font-family.
+- font-size.
+- font-weight.
+- line-height.
+- text-align.
+- text-indent.
+- text-transform.
+- text-decoration.
+- letter-spacing.
+- word-spacing.
+- white-space.
+- vertical-align.
+- opacity.
+- cursor.
+- content.
+- quotes.
+
+### CSS Naming Convention
+
+#### Layout Structure Naming Convention
 
 - 容器: container.
 - 页头: header.
@@ -5393,7 +5414,7 @@ will lead to class purged.
 - 页面外围控制整体佈局宽度: wrapper.
 - 左右中: left right center.
 
-### Navigation Naming Convention
+#### Navigation Naming Convention
 
 - 导航: nav.
 - 主导航: main-nav.
@@ -5407,7 +5428,7 @@ will lead to class purged.
 - 标题: title.
 - 摘要: summary.
 
-### Functional Component Naming Convention
+#### Functional Component Naming Convention
 
 - 标志: logo.
 - 广告: banner.
@@ -5438,7 +5459,7 @@ will lead to class purged.
 - 友情链接: link.
 - 版权: copyright.
 
-### CSS Files Naming Convention
+#### CSS Files Naming Convention
 
 - `abstracts`: `$variables`, `@mixin` function.
 - `vendors`: external libraries (font-awesome, bootstrap).
