@@ -384,6 +384,10 @@ In `position`/`size`/`margin`/`padding`/`border`/`text alignment`:
   border-block-end: 1px solid blue;
   border-inline-start: 1px solid blue;
   border-inline-end: 1px solid blue;
+  inset-block-start: 0;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
 }
 ```
 
@@ -1760,18 +1764,19 @@ are always **relative to parent** current order in its own `stacking context`.
 
 ### Static Position
 
-`top`/`left`/`width`/`right`/`z-index` are invalid.
+`top`/`bottom`/`left`/`right`/`inset`/`z-index` are invalid.
 
 ### Relative Position
 
-- 使元素相对于 `static` 布局, 可使用 `top/bottom/left/right` 属性进行定位.
+- 使元素相对于 `static` 布局.
+- 可使用 `top`/`bottom`/`left`/`right`/`inset` 属性进行定位.
 - 相对方向 (opposite) 的定位同时设置: `top` 覆盖 `bottom`, `left` 覆盖 `right`.
 - 初始位置被保留, 不脱离文档流.
 
 ### Absolute Position
 
 - 使元素相对于 `containing block` (`position: non-static`) 布局.
-- 可使用 `top/bottom/left/right` 属性进行定位.
+- 可使用 `top`/`bottom`/`left`/`right`/`inset` 属性进行定位.
 - 相对方向 (opposite) 的定位同时设置:
   若未显示设置该方向的元素大小, 则元素具有流动性, 受 `containing block` 影响其大小,
   `.fluid { position: absolute; left: 0; right: 0; }`.
@@ -1832,7 +1837,7 @@ are always **relative to parent** current order in its own `stacking context`.
 ### Fixed Position
 
 - 使元素相对于浏览器窗口布局, 但不受滑动条影响.
-- 可使用 `top/bottom/left/right` 属性进行定位.
+- 可使用 `top`/`bottom`/`left`/`right`/`inset` 属性进行定位.
 - `float` computed to `float: none`.
 - `display` `inline-table` computed to `table`.
 - `display` `inline`/`inline-block`/`table-*` computed to `block`.
@@ -1841,8 +1846,8 @@ are always **relative to parent** current order in its own `stacking context`.
 
 `position: sticky` + `top: 0`:
 
-- 粘性定位的元素在它距离视窗顶部大于 0 时, 会按照默认布局, 表现为 Relative Position.
-- 一旦其距离顶部的距离等于 0, 元素会固定在窗口顶部, 表现为 Fixed Position.
+- 粘性定位的元素在它距离视窗顶部大于 `0` 时, 会按照默认布局, 表现为 `relative` position.
+- 一旦其距离顶部的距离等于 `0`, 元素会固定在窗口顶部, 表现为 `fixed` position.
 
 ```css
 .sticky {
@@ -1854,7 +1859,7 @@ are always **relative to parent** current order in its own `stacking context`.
 
 ### Percentage Position
 
-Positioned elements percentage `top`/`right`/`bottom`/`left`
+Positioned elements percentage `top`/`bottom`/`left`/`right`/`inset`
 calculate by containing block `height`:
 
 If `containing block` `height` is `auto`, it calculated to `0`.
