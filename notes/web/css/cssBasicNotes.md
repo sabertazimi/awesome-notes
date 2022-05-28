@@ -355,14 +355,37 @@ The user agent performs four steps to calculate a property's actual (final) valu
 
 ### CSS Logical Basis
 
-In positioning/sizing/margin/padding/border/text alignment:
+In `position`/`size`/`margin`/`padding`/`border`/`text alignment`:
 
-- `block-start` for `top`
-- `block-end` for `bottom`
-- `block` for vertical
-- `inline-start` for `left`
-- `inline-end` for `right`
-- `inline` for horizontal
+- `block-start` for `top`.
+- `block-end` for `bottom`.
+- `block` for vertical.
+- `inline-start` for `left`.
+- `inline-end` for `right`.
+- `inline` for horizontal.
+
+```css
+.logical {
+  inline-size: fit-content;
+  block-size: fit-content;
+  min-inline-size: min-content;
+  min-block-size: min-content;
+  max-inline-size: max-content;
+  max-block-size: max-content;
+  padding-block-start: 1rem;
+  padding-block-end: 1rem;
+  padding-inline-start: 1rem;
+  padding-inline-end: 1rem;
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
+  margin-inline-start: 1rem;
+  margin-inline-end: 1rem;
+  border-block-start: 1px solid blue;
+  border-block-end: 1px solid blue;
+  border-inline-start: 1px solid blue;
+  border-inline-end: 1px solid blue;
+}
+```
 
 ### CSS Logical Reference
 
@@ -1286,8 +1309,8 @@ Box sizing:
 #### Auto Flow Width
 
 Auto flow with `css-sizing`:
-present for `max-content`/`min-content`/`fit-content`/`stretch`
-with `height`/`width`/`min-width`/`max-width`/`min-height`/`max-height`/
+present for `fit-content`/`min-content`/`max-content`/`stretch`
+with `width`/`min-width`/`max-width`/`height`/`min-height`/`max-height`/
 `grid-template-rows`/`grid-template-columns`/`flex-basis`.
 
 ```css
