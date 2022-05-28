@@ -1265,9 +1265,32 @@ Box sizing:
 #### Auto Flow Width
 
 Auto flow with `css-sizing`:
-present for `fill-available/max-content/min-content/fit-content`
+present for `max-content`/`min-content`/`fit-content`/`stretch`
 with `height`/`width`/`min-width`/`max-width`/`min-height`/`max-height`/
 `grid-template-rows`/`grid-template-columns`/`flex-basis`.
+
+```css
+.content {
+  width: fit-content;
+  margin: auto;
+}
+
+.button {
+  box-sizing: border-box;
+  width: calc(100% - 30px);
+  width: stretch;
+  height: 40px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.table {
+  box-sizing: border-box;
+  width: 100%;
+  width: stretch;
+  table-layout: fixed;
+}
+```
 
 ### Box Viewport Height
 
@@ -2463,7 +2486,18 @@ a.button::before {
 
 ### Mixing Centering Pattern
 
-在子容器中在设置新元素即可.
+```css
+.dialog {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+```
 
 ### Centering Pattern Reference
 
