@@ -33,6 +33,8 @@ tags: [Web, CSS]
 
 :::
 
+[![CSS Cascading](./figures/Cascading.png)](https://developer.mozilla.org/docs/Web/CSS/Cascade)
+
 ### Specificity
 
 Specificity (`Selector Priority`) has 4 bits,
@@ -643,7 +645,7 @@ html {
 
 ## CSS Selectors
 
-[![CSS Selectors](./figures/CSSSelectors.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors)
+[![CSS Selectors](./figures/Selectors.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors)
 
 ### Universal Selector
 
