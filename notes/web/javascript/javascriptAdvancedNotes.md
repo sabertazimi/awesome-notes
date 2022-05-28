@@ -4273,207 +4273,27 @@ while (i) {
 }
 ```
 
-### Event Delegation
+### Math Performance
 
-- 事件委托利用的是事件冒泡机制, 只制定一事件处理程序, 就可以管理某一类型的所有事件.
-- Increases performance and reduces memory consumption:
-  - 使用事件委托, 只需在 DOM 树中尽量最高的层次上添加一个事件处理程序.
-  - No need to register new event listeners for newer children.
-- DOM Event:
-  Event Capturing (default false) ->
-  Event Target ->
-  Event Bubbling (default true).
+#### Bit Operators
+
+- `i%2` => `i&0x1`.
+- 位掩码
 
 ```ts
-window.onload = function () {
-  const oUl = document.getElementById('ul');
-  const aLi = oUl.getElementsByTagName('li');
+const OPTION_A = 1;
+const OPTION_B = 2;
+const OPTION_C = 4;
+const OPTION_D = 8;
+const OPTION_E = 16;
 
-  oUl.onmouseover = function (e) {
-    const e = e || window.event;
-    const target = e.target || e.srcElement;
-
-    // alert(target.innerHTML);
-
-    if (target.nodeName.toLowerCase() === 'li') {
-      target.style.background = 'red';
-    }
-
-    // 阻止默认行为并取消冒泡
-    if (typeof e.preventDefault === 'function') {
-      e.preventDefault();
-      e.stopPropagation();
-    } else {
-      e.returnValue = false;
-      e.cancelBubble = true;
-    }
-  };
-
-  oUl.onmouseout = function (e) {
-    const e = e || window.event;
-    const target = e.target || e.srcElement;
-
-    // alert(target.innerHTML);
-
-    if (target.nodeName.toLowerCase() === 'li') {
-      target.style.background = '';
-    }
-
-    // 阻止默认行为并取消冒泡
-    if (typeof e.preventDefault === 'function') {
-      e.preventDefault();
-      e.stopPropagation();
-    } else {
-      e.returnValue = false;
-      e.cancelBubble = true;
-    }
-  };
-};
+const options = OPTION_A | OPTION_C | OPTION_D;
 ```
 
-### Script Loading Performance
+### Reduce Repeat Manipulation
 
-合并脚本后再进行高级加载技术.
-
-#### Script Lazy Loading
-
-```html
-<html>
-  <body>
-    ... The full body of the page ...
-    <script>
-      window.onload = function () {
-        const script = document.createElement('script');
-        script.src = 'all_lazy_20100426.js';
-        script.async = true;
-        document.documentElement.firstChild.appendChild(script);
-      };
-    </script>
-  </body>
-</html>
-```
-
-#### Script Dynamic Loading
-
-```ts
-function requireScript(file, callback) {
-  const script = document.getElementsByTagName('script')[0];
-  const newJS = document.createElement('script');
-
-  // IE
-  newJS.onreadystatechange = function () {
-    if (newJS.readyState === 'loaded' || newJS.readyState === 'complete') {
-      newJS.onreadystatechange = null;
-      callback();
-    }
-  };
-  // others
-  newJS.onload = function () {
-    callback();
-  };
-
-  // 添加至 HTML 页面
-  newJS.src = file;
-  newJS.async = true;
-  script.parentNode.insertBefore(newJS, script);
-}
-
-requireScript('the_rest.js', function () {
-  Application.init();
-});
-```
-
-### DOM Performance
-
-- 局部变量缓存 DOM 元素.
-- 局部变量缓存布局信息.
-
-```ts
-const btn = document.getElementById('btn');
-```
-
-- HTML Collection 转化成数组再操作.
-
-```ts
-function toArray(coll) {
-  for (let i = 0, a = [], len = coll.length; i < len; i++) {
-    a[i] = coll[i];
-  }
-
-  return a;
-}
-```
-
-- `children` 优于 `childNodes`.
-- `childElementCount` 优于 `childNodes.length`.
-- `firstElementChild` 优于 `firstChild`.
-- `lastElementChild` 优于 `lastChild`.
-- `nextElementSibling` 优于 `nextSibling` 优于 `childNodes[next]`.
-- `previousElementSibling` 优于 `previousSibling`.
-
-#### Layout and Paint Performance
-
-- 重排: 重新构造渲染树.
-- 重绘: 重新绘制受影响部分.
-
-**获取**或改变布局的操作会导致渲染树**变化队列**刷新,
-执行渲染队列中的**待处理变化**,
-重排 DOM 元素.
-
-#### DOM Manipulation Performance
-
-- 先 `display="none"`, 修改完成后, `display=""`.
-- 使待修改 DOM 元素脱离标准文档流(改变布局／定位方式), 可减少其他元素的重绘次数.
-- `document.createDocumentFragment()`.
-
-```ts
-const fragment = document.createDocumentFragment();
-appendDataToElement(fragment, data);
-document.getElementById('myList').appendChild(fragment);
-```
-
-- oldNode.cloneNode(true);
-
-```ts
-const old = document.getElementById('myList');
-const clone = old.cloneNode(true);
-
-appendDataToElement(clone, data);
-old.parentNode.replaceChild(clone, old);
-```
-
-#### Animation Frame Performance
-
-run scripts as early as possible:
-`requestAnimationFrame()` runs after the CPU work is done (UI events and JS scripts),
-and just before the frame is rendered (layout, paint, composite etc.).
-
-### CSS Performance
-
-在 js 中(除定位属性) 外, 不直接操作 element.style.attr/element.cssText:
-
-```ts
-element.classList.add('className');
-element.className += ' className';
-```
-
-:::tip Pipeline
-Script -> Style ->Layout -> Paint -> Composite.
-:::
-
-Make `script` stage become: read then write.
-Interleaved read and write will trigger multiple times
-of re-layout/repaint/re-composite.
-
-:::danger Forced Synchronous Layout
-read css -> write css (re-layout/paint/composite)
--> read css -> write css (re-layout/paint/composite)
--> read css -> write css (re-layout/paint/composite).
-:::
-
-:::tip High Performance
-read css -> write css (only re-layout/paint/composite once).
-:::
+- 特性/浏览器检测代码只运行一次.
+- 惰性定义模式/自定义模式.
 
 ### Timer Performance
 
@@ -4519,6 +4339,48 @@ const Timer = {
   getTime(key) {
     return Timer._data[key];
   },
+};
+```
+
+```ts
+const pollTimerTask = time => {
+  if (timerQueue.length === 0) {
+    return;
+  }
+
+  while (timerQueue[0] && time >= timerQueue[0].time) {
+    const timer = timerQueue.shift();
+
+    while (timer.tickerQueue.length) {
+      const { id, callback, delay, loop, defer } = timer.tickerQueue.shift();
+
+      callback(time);
+
+      if (loop && idPool[id].exist) {
+        let nextTime = timer.time + delay;
+
+        // 当回调函数执行时间超过多个执行周期时
+        if (time - nextTime > delay) {
+          nextTime = nextTime + Math.floor((time - nextTime) / delay) * delay;
+
+          // 延迟执行时, 将 nextTime 推迟至下一个执行周期
+          defer && (nextTime += delay);
+        }
+
+        registerTimerWithId({
+          id,
+          callback,
+          time: nextTime,
+          delay,
+          loop,
+          defer,
+        });
+      } else {
+        // 当回调函数不需要周期执行或在回调函数中执行 unregister 时
+        delete idPool[id];
+      }
+    }
+  }
 };
 ```
 
@@ -4583,11 +4445,6 @@ function timedProcessArray(items, process, callback) {
   }, 25);
 }
 ```
-
-### Reduce Repeat Manipulation
-
-- 特性/浏览器检测代码只运行一次.
-- 惰性定义模式/自定义模式.
 
 #### Debounce and Throttle
 
@@ -4811,22 +4668,207 @@ function useAnimation() {
 }
 ```
 
-### Math Performance
+### Event Delegation
 
-#### Bit Operators
-
-- `i%2` => `i&0x1`.
-- 位掩码
+- 事件委托利用的是事件冒泡机制, 只制定一事件处理程序, 就可以管理某一类型的所有事件.
+- Increases performance and reduces memory consumption:
+  - 使用事件委托, 只需在 DOM 树中尽量最高的层次上添加一个事件处理程序.
+  - No need to register new event listeners for newer children.
+- DOM Event:
+  Event Capturing (default false) ->
+  Event Target ->
+  Event Bubbling (default true).
 
 ```ts
-const OPTION_A = 1;
-const OPTION_B = 2;
-const OPTION_C = 4;
-const OPTION_D = 8;
-const OPTION_E = 16;
+window.onload = function () {
+  const oUl = document.getElementById('ul');
+  const aLi = oUl.getElementsByTagName('li');
 
-const options = OPTION_A | OPTION_C | OPTION_D;
+  oUl.onmouseover = function (e) {
+    const e = e || window.event;
+    const target = e.target || e.srcElement;
+
+    // alert(target.innerHTML);
+
+    if (target.nodeName.toLowerCase() === 'li') {
+      target.style.background = 'red';
+    }
+
+    // 阻止默认行为并取消冒泡
+    if (typeof e.preventDefault === 'function') {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      e.returnValue = false;
+      e.cancelBubble = true;
+    }
+  };
+
+  oUl.onmouseout = function (e) {
+    const e = e || window.event;
+    const target = e.target || e.srcElement;
+
+    // alert(target.innerHTML);
+
+    if (target.nodeName.toLowerCase() === 'li') {
+      target.style.background = '';
+    }
+
+    // 阻止默认行为并取消冒泡
+    if (typeof e.preventDefault === 'function') {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      e.returnValue = false;
+      e.cancelBubble = true;
+    }
+  };
+};
 ```
+
+### Script Loading Performance
+
+合并脚本后再进行高级加载技术.
+
+#### Script Lazy Loading
+
+```html
+<html>
+  <body>
+    ... The full body of the page ...
+    <script>
+      window.onload = function () {
+        const script = document.createElement('script');
+        script.src = 'all_lazy_20100426.js';
+        script.async = true;
+        document.documentElement.firstChild.appendChild(script);
+      };
+    </script>
+  </body>
+</html>
+```
+
+#### Script Dynamic Loading
+
+```ts
+function requireScript(file, callback) {
+  const script = document.getElementsByTagName('script')[0];
+  const newJS = document.createElement('script');
+
+  // IE
+  newJS.onreadystatechange = function () {
+    if (newJS.readyState === 'loaded' || newJS.readyState === 'complete') {
+      newJS.onreadystatechange = null;
+      callback();
+    }
+  };
+  // others
+  newJS.onload = function () {
+    callback();
+  };
+
+  // 添加至 HTML 页面
+  newJS.src = file;
+  newJS.async = true;
+  script.parentNode.insertBefore(newJS, script);
+}
+
+requireScript('the_rest.js', function () {
+  Application.init();
+});
+```
+
+### DOM Performance
+
+- 局部变量缓存 DOM 元素.
+- 局部变量缓存布局信息.
+
+```ts
+const btn = document.getElementById('btn');
+```
+
+- HTML Collection 转化成数组再操作.
+
+```ts
+function toArray(coll) {
+  for (let i = 0, a = [], len = coll.length; i < len; i++) {
+    a[i] = coll[i];
+  }
+
+  return a;
+}
+```
+
+- `children` 优于 `childNodes`.
+- `childElementCount` 优于 `childNodes.length`.
+- `firstElementChild` 优于 `firstChild`.
+- `lastElementChild` 优于 `lastChild`.
+- `nextElementSibling` 优于 `nextSibling` 优于 `childNodes[next]`.
+- `previousElementSibling` 优于 `previousSibling`.
+
+#### Layout and Paint Performance
+
+- 重排: 重新构造渲染树.
+- 重绘: 重新绘制受影响部分.
+
+**获取**或改变布局的操作会导致渲染树**变化队列**刷新,
+执行渲染队列中的**待处理变化**,
+重排 DOM 元素.
+
+#### DOM Manipulation Performance
+
+- 先 `display="none"`, 修改完成后, `display=""`.
+- 使待修改 DOM 元素脱离标准文档流(改变布局／定位方式), 可减少其他元素的重绘次数.
+- `document.createDocumentFragment()`.
+
+```ts
+const fragment = document.createDocumentFragment();
+appendDataToElement(fragment, data);
+document.getElementById('myList').appendChild(fragment);
+```
+
+- oldNode.cloneNode(true);
+
+```ts
+const old = document.getElementById('myList');
+const clone = old.cloneNode(true);
+
+appendDataToElement(clone, data);
+old.parentNode.replaceChild(clone, old);
+```
+
+#### Animation Frame Performance
+
+run scripts as early as possible:
+`requestAnimationFrame()` runs after the CPU work is done (UI events and JS scripts),
+and just before the frame is rendered (layout, paint, composite etc.).
+
+#### CSSOM Performance
+
+在 js 中(除定位属性) 外, 不直接操作 element.style.attr/element.cssText:
+
+```ts
+element.classList.add('className');
+element.className += ' className';
+```
+
+:::tip Pipeline
+Script -> Style ->Layout -> Paint -> Composite.
+:::
+
+Make `script` stage become: read then write.
+Interleaved read and write will trigger multiple times
+of re-layout/repaint/re-composite.
+
+:::danger Forced Synchronous Layout
+read css -> write css (re-layout/paint/composite)
+-> read css -> write css (re-layout/paint/composite)
+-> read css -> write css (re-layout/paint/composite).
+:::
+
+:::tip High Performance
+read css -> write css (only re-layout/paint/composite once).
+:::
 
 ## Web Performance
 
