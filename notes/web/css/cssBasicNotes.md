@@ -2613,9 +2613,10 @@ article a {
 
 ### Text Alignment
 
-`text-align`:
+[`text-align`](https://developer.mozilla.org/docs/Web/CSS/text-align):
 
 - 对 block level element 无效.
+- `start`/`end`/`left`/`right`/`center`/`match-parent`.
 - `justify`: 自适应, 左右都无空格.
 
 ```css
