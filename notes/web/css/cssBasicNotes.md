@@ -624,6 +624,23 @@ html {
 }
 ```
 
+## CSS Math
+
+### Clamp
+
+[Fluid size](https://github.com/codeAdrian/modern-fluid-typography-editor):
+
+```css
+.clamp {
+  width: max(75px, min(25vw, 125px));
+  width: clamp(75px, 25vw, 125px);
+  margin-bottom: clamp(4px, 6.5vh, 5.5rem);
+  font-size: clamp(2.25rem, 2vw + 1.5rem, 3.25rem);
+  text-indent: clamp(15px, 10%, 1.5rem);
+  letter-spacing: clamp(0.1rem, 1.5vw, 0.5rem);
+}
+```
+
 ## CSS Selectors
 
 [![CSS Selectors](./figures/CSSSelectors.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors)
