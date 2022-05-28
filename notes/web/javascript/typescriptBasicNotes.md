@@ -2030,7 +2030,7 @@ type IntersectionType = UnionToIntersection<UnionType>;
 // { a: 'a' } & { b: 'b' }
 ```
 
-## Type Guards
+## Type Guard
 
 ### In Type Guard
 
@@ -2224,7 +2224,7 @@ const obj = {
 const r: Room = obj;
 ```
 
-### Type Predicates
+### Type Predicate
 
 `is` keyword for `value` type predicate:
 
