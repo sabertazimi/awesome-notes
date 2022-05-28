@@ -3187,7 +3187,7 @@ li::before {
 
 ### Border Style
 
-利用 solid border 模拟链接下划线:
+利用 `solid` border 模拟链接下划线:
 
 ```css
 .link {
@@ -3199,8 +3199,18 @@ li::before {
 
 ### Border Image
 
+[`border-image`](https://developer.mozilla.org/docs/Web/CSS/border-image):
+
+- 以九宫格为基本模式, `content-box` 为九宫格中间格子.
+
 ```css
-border-image: source slice width outset repeat;
+.box {
+  border-image: < 'border-image-source' > || < 'border-image-slice' > [/ <
+    'border-image- width' > | / < 'border-image-width' >? / <
+    'border-image-outset' > ]? || < 'border-image-repeat' >;
+  border-image: url('./grid-nine.svg') 54 33.33% 33.33% 54 / 10px 20px 30px 1 /
+    1 30px 20px 10px round space;
+}
 ```
 
 ### Border Collapse
