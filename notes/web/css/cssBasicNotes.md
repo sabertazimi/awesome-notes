@@ -3202,6 +3202,7 @@ li::before {
 [`border-image`](https://developer.mozilla.org/docs/Web/CSS/border-image):
 
 - 以九宫格为基本模式, `content-box` 为九宫格中间格子.
+- 可用于实现自定义边框: 渐变边框, 条纹边框, 虚线边框.
 
 ```css
 .box {
@@ -3210,6 +3211,40 @@ li::before {
     'border-image-outset' > ]? || < 'border-image-repeat' >;
   border-image: url('./grid-nine.svg') 54 33.33% 33.33% 54 / 10px 20px 30px 1 /
     1 30px 20px 10px round space;
+}
+```
+
+```css
+.border-linear-gradient {
+  border-style: solid;
+  border-image: linear-gradient(deepskyblue, deeppink) 20 / 10px;
+}
+
+.border-radial-gradient {
+  border-style: solid;
+  border-image: radial-gradient(deepskyblue, deeppink) 20 / 10px;
+}
+
+.border-stripe {
+  border: 12px solid;
+  border-image: repeating-linear-gradient(
+      -45deg,
+      red,
+      red 5px,
+      transparent 5px,
+      transparent 10px
+    ) 12;
+}
+
+.border-dashed {
+  border: 1px dashed deepskyblue;
+  border-image: repeating-linear-gradient(
+      135deg,
+      deepskyblue,
+      deepskyblue 5px,
+      transparent 5px,
+      transparent 10px
+    ) 1;
 }
 ```
 
