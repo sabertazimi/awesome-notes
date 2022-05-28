@@ -1932,15 +1932,6 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 }
 ```
 
-### Shape Outside
-
-`shape-outside` provides a way to customize wrapping,
-making it possible to wrap text around complex objects rather than simple boxes:
-
-```css
-shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-```
-
 ## Flex Pattern
 
 [Flexbox Complete Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox)
@@ -3265,44 +3256,6 @@ table {
 }
 ```
 
-### Border Shape
-
-Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
-
-```css
-.arrow-up {
-  width: 0;
-  height: 0;
-  border-right: 16px solid transparent;
-  border-bottom: 20px solid #8888e8;
-  border-left: 16px solid transparent;
-}
-
-.arrow-right {
-  width: 0;
-  height: 0;
-  border-top: 16px solid transparent;
-  border-bottom: 16px solid transparent;
-  border-left: 20px solid #e888a3;
-}
-
-.arrow-down {
-  width: 0;
-  height: 0;
-  border-top: 20px solid #f7df6c;
-  border-right: 16px solid transparent;
-  border-left: 16px solid transparent;
-}
-
-.arrow-left {
-  width: 0;
-  height: 0;
-  border-top: 16px solid transparent;
-  border-right: 20px solid #8de698;
-  border-bottom: 16px solid transparent;
-}
-```
-
 ## CSS Outline
 
 ```css
@@ -3574,7 +3527,7 @@ p {
 }
 ```
 
-`background-blend-mode` is used for multiple background images
+`background-blend-mode` is used for multiple background images:
 
 ```html
 <div class="container"></div>
@@ -3597,78 +3550,12 @@ Night mode:
 }
 ```
 
-movie style
+Movie style:
 
 ```css
 .movie {
   filter: contrast(1.1);
   background-blend-mode: soft-light;
-}
-```
-
-### Mask Style
-
-- Black for masking
-- White for showing
-
-```css
-#masked {
-  width: 100px;
-  height: 100px;
-  background-color: #8cffa0;
-  mask-image: url('https://mdn.mozillademos.org/files/12668/MDN.svg'),
-    url('https://mdn.mozillademos.org/files/12676/star.svg');
-  mask-size: 100% 100%;
-  mask-composite: add; /* Can be changed in the live sample */
-}
-```
-
-### Clip
-
-`clip` 属性只对 `absolute` 与 `fixed` 元素起作用,
-是对 `overflow` 属性的有力补充:
-`overflow` 对于上述两种元素的裁剪作用有限.
-
-```css
-.fixed-clip {
-  position: fixed;
-  clip: rect(30px 200px 200px 20px);
-}
-```
-
-- `clip` 元素 `clientWidth`, `clientHeight`, `computedStyle` 保持不变:
-  视觉上裁剪, 元素尺寸依然是原本尺寸.
-- `clip` 元素非可见部分无法响应点击事件.
-
-### Clip Path
-
-#### Basic Clip Path
-
-```css
-.polygon {
-  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
-}
-```
-
-#### SVG Clip Path
-
-<!-- markdownlint-disable line-length -->
-
-```html
-<svg class="svg">
-  <clipPath id="circle" clipPathUnits="objectBoundingBox">
-    <path
-      d="M0.5,0 C0.776,0,1,0.224,1,0.5 C1,0.603,0.969,0.7,0.915,0.779 C0.897,0.767,0.876,0.76,0.853,0.76 C0.794,0.76,0.747,0.808,0.747,0.867 C0.747,0.888,0.753,0.908,0.764,0.925 C0.687,0.972,0.597,1,0.5,1 C0.224,1,0,0.776,0,0.5 C0,0.224,0.224,0,0.5,0"
-    ></path>
-  </clipPath>
-</svg>
-```
-
-<!-- markdownlint-enable line-length -->
-
-```css
-.item {
-  clip-path: url('#circle');
 }
 ```
 
@@ -3703,6 +3590,23 @@ movie style
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+```
+
+## CSS Mask
+
+- Black for masking.
+- White for showing.
+
+```css
+#masked {
+  width: 100px;
+  height: 100px;
+  background-color: #8cffa0;
+  mask-image: url('https://mdn.mozillademos.org/files/12668/MDN.svg'),
+    url('https://mdn.mozillademos.org/files/12676/star.svg');
+  mask-size: 100% 100%;
+  mask-composite: add; /* Can be changed in the live sample */
 }
 ```
 
@@ -3960,6 +3864,85 @@ Avatar with circle status indicator:
     ></circle>
   </g>
 </svg>
+```
+
+## CSS Shape
+
+[CSS shapes](https://css-tricks.com/the-shapes-of-css):
+
+- Background: `color`/`size`/`image`/`gradient`/`clip-path`.
+  In modern browsers `background`/`gradient`/`clip-path`
+  with `transition`/`transform`
+  better than `pseudo elements`.
+- `border`.
+- `box-shadow` (inset).
+- `clip-path`
+- `mask`
+- `filter`.
+- `aspect-ratio`.
+- SVG:
+  - SVG icon.
+  - SVG filter.
+  - SVG clip-path.
+  - SVG mask.
+- pseudo elements.
+
+### Shape Outside
+
+`shape-outside` provides a way to customize wrapping,
+making it possible to wrap text around complex objects rather than simple boxes:
+
+```css
+shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+```
+
+### Clip
+
+`clip` 属性只对 `absolute` 与 `fixed` 元素起作用,
+是对 `overflow` 属性的有力补充:
+`overflow` 对于上述两种元素的裁剪作用有限.
+
+```css
+.fixed-clip {
+  position: fixed;
+  clip: rect(30px 200px 200px 20px);
+}
+```
+
+- `clip` 元素 `clientWidth`, `clientHeight`, `computedStyle` 保持不变:
+  视觉上裁剪, 元素尺寸依然是原本尺寸.
+- `clip` 元素非可见部分无法响应点击事件.
+
+### Clip Path
+
+#### Basic Clip Path
+
+```css
+.polygon {
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+```
+
+#### SVG Clip Path
+
+<!-- markdownlint-disable line-length -->
+
+```html
+<svg class="svg">
+  <clipPath id="circle" clipPathUnits="objectBoundingBox">
+    <path
+      d="M0.5,0 C0.776,0,1,0.224,1,0.5 C1,0.603,0.969,0.7,0.915,0.779 C0.897,0.767,0.876,0.76,0.853,0.76 C0.794,0.76,0.747,0.808,0.747,0.867 C0.747,0.888,0.753,0.908,0.764,0.925 C0.687,0.972,0.597,1,0.5,1 C0.224,1,0,0.776,0,0.5 C0,0.224,0.224,0,0.5,0"
+    ></path>
+  </clipPath>
+</svg>
+```
+
+<!-- markdownlint-enable line-length -->
+
+```css
+.item {
+  clip-path: url('#circle');
+}
 ```
 
 ## CSS Cursor
@@ -6834,6 +6817,276 @@ Use pseudo elements to construct circle and line:
 }
 ```
 
+### Geometry and Shape
+
+#### Pseudo Element Shape
+
+[利用伪类画额外图形](https://css-tricks.com/examples/ShapesOfCSS):
+
+```css
+.first-details-intro::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 0;
+  height: 0;
+  content: '';
+  border-top: 15px solid transparent;
+  border-right: 25px solid #fff;
+  border-bottom: 15px solid transparent;
+}
+```
+
+#### Border Shape
+
+Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
+
+```css
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-right: 16px solid transparent;
+  border-bottom: 20px solid #8888e8;
+  border-left: 16px solid transparent;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-left: 20px solid #e888a3;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-top: 20px solid #f7df6c;
+  border-right: 16px solid transparent;
+  border-left: 16px solid transparent;
+}
+
+.arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 16px solid transparent;
+  border-right: 20px solid #8de698;
+  border-bottom: 16px solid transparent;
+}
+```
+
+#### Stretch Line
+
+- background line
+- border line
+- pseudo element with `line-through` `text-decoration`
+
+```css
+.line {
+  width: 70%;
+  height: 10px;
+  background-color: #000;
+}
+
+.line,
+.line-background {
+  background: linear-gradient(#000, #000) 50% / 70% 10px no-repeat;
+}
+
+.line,
+.line-border {
+  border-top: 10px solid #000;
+}
+
+.line,
+.line::after {
+  /* set thickness */
+  font-size: 5em;
+
+  /* hide content */
+  color: transparent;
+  text-decoration: line-through #000;
+
+  /* control line length */
+  content: '_______';
+}
+```
+
+#### Dash Line
+
+- Background dash line.
+- Border dash line.
+- Pseudo element with `dashed` `text-decoration`.
+
+```css
+.dash-background {
+  background: linear-gradient(to left, #000 70%, transparent 0);
+  background-repeat: repeat-x;
+  background-size: 30px 10px;
+}
+
+.dash-border {
+  border-top: 10px dashed #000;
+}
+
+.dash::after {
+  text-decoration-style: dashed;
+}
+```
+
+#### Menu Line
+
+```css
+.icon-menu {
+  display: inline-block;
+  width: 140px;
+  height: 10px;
+
+  /* Line gap */
+  padding: 35px 0;
+
+  /* Line 2 */
+  background-color: currentcolor;
+  background-clip: content-box;
+
+  /* Line 1 */
+  border-top: 10px solid;
+
+  /* Line 3 */
+  border-bottom: 10px solid;
+}
+```
+
+#### Dot
+
+```css
+.icon-dot {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+
+  /* Cycle gap */
+  padding: 10px;
+
+  /* Cycle shape */
+  background-color: currentcolor;
+  background-clip: content-box;
+
+  /* Cycle ring */
+  border: 10px solid;
+  border-radius: 50%;
+}
+```
+
+#### Circle
+
+- background circle
+- clip path circle
+- border circle
+- pseudo element circle
+
+```css
+.circle-background {
+  background-image: radial-gradient(#000 72%, transparent 0);
+}
+
+.circle-clip-path {
+  clip-path: circle(50%);
+}
+
+.circle-border {
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.circle::after {
+  font-size: 120vw;
+  line-height: 0;
+  content: '·';
+}
+```
+
+#### Triangle
+
+- background triangle
+- clip path triangle
+- border triangle
+- pseudo element triangle
+
+```css
+.triangle {
+  background: linear-gradient(<deg>, #000 50%, transparent 0);
+}
+
+/* clip path */
+.arrow-right {
+  width: 20px;
+  height: 32px;
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
+  background-color: #e888a3;
+}
+
+/* transparent border */
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-right: 16px solid transparent;
+  border-bottom: 20px solid #8888e8;
+  border-left: 16px solid transparent;
+}
+
+/* pseudo element + hidden overflow */
+.arrow-down {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.arrow-down::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: calc(40px / 1.41);
+  height: calc(40px / 1.41);
+  content: '';
+  background: #f7df6c;
+  transform: rotate(-45deg);
+  transform-origin: 0 0;
+}
+
+/* HTML Entities */
+
+/**
+ * ◄ : &#9668;
+ * ► : &#9658;
+ * ▼ : &#9660;
+ * ▲ : &#9650;
+ */
+.arrow::before {
+  content: '&#9660';
+}
+```
+
+#### Polygon
+
+```ts
+const polygon = (n = 3) => {
+  const deg = (2 * Math.PI) / n;
+  const points = [];
+
+  for (let i = 0; i < n; ++i) {
+    const theta = deg * i;
+    const x = `${50 * Math.cos(theta) + 50}%`;
+    const y = `${50 * Math.sin(theta) + 50}%`;
+    points.push(`${x} ${y}`);
+  }
+
+  return `polygon(${points.join(',')})`;
+};
+```
+
 ### Animation Effects
 
 切换动画时, 需要先把之前的动画清除
@@ -7093,258 +7346,10 @@ body {
 }
 ```
 
-### Geometry and Shape
+### CSS Components Reference
 
-[CSS shapes](https://css-tricks.com/the-shapes-of-css):
-
-- Background: `color`/`size`/`image`/`gradient`/`clip-path`.
-  In modern browsers `background`/`gradient`/`clip-path`
-  with `transition`/`transform`
-  better than `pseudo elements`.
-- `border`.
-- `box-shadow` (inset).
-- `clip-path`
-- `filter`.
-- `mask`
-- `aspect-ratio`.
-- SVG:
-  - SVG icon.
-  - SVG filter.
-  - SVG clip-path.
-  - SVG mask.
-- pseudo elements.
-
-> [CSSIcon](https://github.com/wentin/cssicon): Pure CSS Icons
-
-#### Pseudo Element Shape
-
-[利用伪类画额外图形](https://css-tricks.com/examples/ShapesOfCSS):
-
-```css
-.first-details-intro::after {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  width: 0;
-  height: 0;
-  content: '';
-  border-top: 15px solid transparent;
-  border-right: 25px solid #fff;
-  border-bottom: 15px solid transparent;
-}
-```
-
-#### Stretch Line
-
-- background line
-- border line
-- pseudo element with `line-through` `text-decoration`
-
-```css
-.line {
-  width: 70%;
-  height: 10px;
-  background-color: #000;
-}
-
-.line,
-.line-background {
-  background: linear-gradient(#000, #000) 50% / 70% 10px no-repeat;
-}
-
-.line,
-.line-border {
-  border-top: 10px solid #000;
-}
-
-.line,
-.line::after {
-  /* set thickness */
-  font-size: 5em;
-
-  /* hide content */
-  color: transparent;
-  text-decoration: line-through #000;
-
-  /* control line length */
-  content: '_______';
-}
-```
-
-#### Dash Line
-
-- Background dash line.
-- Border dash line.
-- Pseudo element with `dashed` `text-decoration`.
-
-```css
-.dash-background {
-  background: linear-gradient(to left, #000 70%, transparent 0);
-  background-repeat: repeat-x;
-  background-size: 30px 10px;
-}
-
-.dash-border {
-  border-top: 10px dashed #000;
-}
-
-.dash::after {
-  text-decoration-style: dashed;
-}
-```
-
-#### Menu Line
-
-```css
-.icon-menu {
-  display: inline-block;
-  width: 140px;
-  height: 10px;
-
-  /* Line gap */
-  padding: 35px 0;
-
-  /* Line 2 */
-  background-color: currentcolor;
-  background-clip: content-box;
-
-  /* Line 1 */
-  border-top: 10px solid;
-
-  /* Line 3 */
-  border-bottom: 10px solid;
-}
-```
-
-#### Dot
-
-```css
-.icon-dot {
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-
-  /* Cycle gap */
-  padding: 10px;
-
-  /* Cycle shape */
-  background-color: currentcolor;
-  background-clip: content-box;
-
-  /* Cycle ring */
-  border: 10px solid;
-  border-radius: 50%;
-}
-```
-
-#### Circle
-
-- background circle
-- clip path circle
-- border circle
-- pseudo element circle
-
-```css
-.circle-background {
-  background-image: radial-gradient(#000 72%, transparent 0);
-}
-
-.circle-clip-path {
-  clip-path: circle(50%);
-}
-
-.circle-border {
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-.circle::after {
-  font-size: 120vw;
-  line-height: 0;
-  content: '·';
-}
-```
-
-#### Triangle
-
-- background triangle
-- clip path triangle
-- border triangle
-- pseudo element triangle
-
-```css
-.triangle {
-  background: linear-gradient(<deg>, #000 50%, transparent 0);
-}
-
-/* clip path */
-.arrow-right {
-  width: 20px;
-  height: 32px;
-  clip-path: polygon(0 0, 0 100%, 100% 50%);
-  background-color: #e888a3;
-}
-
-/* transparent border */
-.arrow-up {
-  width: 0;
-  height: 0;
-  border-right: 16px solid transparent;
-  border-bottom: 20px solid #8888e8;
-  border-left: 16px solid transparent;
-}
-
-/* pseudo element + hidden overflow */
-.arrow-down {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-}
-
-.arrow-down::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: calc(40px / 1.41);
-  height: calc(40px / 1.41);
-  content: '';
-  background: #f7df6c;
-  transform: rotate(-45deg);
-  transform-origin: 0 0;
-}
-
-/* HTML Entities */
-
-/**
- * ◄ : &#9668;
- * ► : &#9658;
- * ▼ : &#9660;
- * ▲ : &#9650;
- */
-.arrow::before {
-  content: '&#9660';
-}
-```
-
-#### Polygon
-
-```ts
-const polygon = (n = 3) => {
-  const deg = (2 * Math.PI) / n;
-  const points = [];
-
-  for (let i = 0; i < n; ++i) {
-    const theta = deg * i;
-    const x = `${50 * Math.cos(theta) + 50}%`;
-    const y = `${50 * Math.sin(theta) + 50}%`;
-    points.push(`${x} ${y}`);
-  }
-
-  return `polygon(${points.join(',')})`;
-};
-```
+- CSS [inspiration](https://github.com/chokcoco/CSS-Inspiration).
+- Pure CSS [icons](https://github.com/wentin/cssicon).
 
 ## CSS Reference
 
