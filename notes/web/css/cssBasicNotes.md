@@ -3202,6 +3202,7 @@ li::before {
 [`border-image`](https://developer.mozilla.org/docs/Web/CSS/border-image):
 
 - 以九宫格为基本模式, `content-box` 为九宫格中间格子.
+- 可以结合 `clip-path` 裁剪边框.
 - 可用于实现自定义边框: 渐变边框, 条纹边框, 虚线边框.
 
 ```css
@@ -3216,11 +3217,13 @@ li::before {
 
 ```css
 .border-linear-gradient {
+  clip-path: inset(0 round 10px);
   border-style: solid;
   border-image: linear-gradient(deepskyblue, deeppink) 20 / 10px;
 }
 
 .border-radial-gradient {
+  clip-path: inset(0 round 10px);
   border-style: solid;
   border-image: radial-gradient(deepskyblue, deeppink) 20 / 10px;
 }
