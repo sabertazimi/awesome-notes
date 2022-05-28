@@ -1776,6 +1776,7 @@ are always **relative to parent** current order in its own `stacking context`.
 ### Absolute Position
 
 - 使元素相对于 `containing block` (`position: non-static`) 布局.
+- 若祖先全为 `position: static` 元素, 则使元素相对于浏览器窗口布局.
 - 可使用 `top`/`bottom`/`left`/`right`/`inset` 属性进行定位.
 - 相对方向 (opposite) 的定位同时设置:
   若未显示设置该方向的元素大小, 则元素具有流动性, 受 `containing block` 影响其大小,
@@ -1844,10 +1845,20 @@ are always **relative to parent** current order in its own `stacking context`.
 
 ### Sticky Position
 
-`position: sticky` + `top: 0`:
+`position: sticky` + `top: XXX`:
 
-- 粘性定位的元素在它距离视窗顶部大于 `0` 时, 会按照默认布局, 表现为 `relative` position.
-- 一旦其距离顶部的距离等于 `0`, 元素会固定在窗口顶部, 表现为 `fixed` position.
+- 使元素相对于 `containing block` (`overflow: non-visible`) 布局.
+- 若祖先全为 `overflow: visible` 元素, 则使元素相对于浏览器窗口与 `containing block` 布局:
+  - 粘性定位元素在它距离视窗顶部大于 `XXX` 时, 会按照默认布局, 表现为 `relative` position.
+  - 一旦其距离顶部的距离等于 `XXX`, 元素会固定在窗口顶部, 表现为 `fixed` position.
+- 粘性定位元素不能超出**粘性约束矩形**范围的限制:
+  - 当 `containing block` 移动到窗口外时,
+    粘性定位元素也会[跟着消失](https://demo.cssworld.cn/new/3/4-2.php).
+  - [黏性定位元素在同一个容器下会重叠, 在不同容器下则会依次推开](https://demo.cssworld.cn/new/3/4-3.php):
+    黏性定位元素分布在一个容器时, 共用一个巨大的黏性约束矩形,
+    黏性定位元素分布在不同容器时, 存在多个竖直排列的黏性约束矩形.
+  - 若粘性定位元素父元素的高度和粘性定位元素的高度相同,
+    则垂直滚动时, 粘性定位效果始终不会出现.
 
 ```css
 .sticky {
