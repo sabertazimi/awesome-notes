@@ -445,6 +445,7 @@ tags: [Web, Framework, Library]
 
 #### Tooltip
 
+- [FloatingUI: Low-level Toolkit to Create Floating Elements](https://github.com/floating-ui/floating-ui)
 - [React Tippy](https://github.com/tvkhoa/react-tippy)
 - [Tippy.js](https://github.com/atomiks/tippyjs)
 - [Popper.js](https://github.com/popperjs/popper-core)
