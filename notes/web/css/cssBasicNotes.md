@@ -1250,9 +1250,11 @@ const FOCUSABLE_SELECTOR = [
 Box sizing:
 
 - `Intrinsic Sizing` (内在尺寸):
-  表示元素最终的尺寸表现是由内容决定的.
+  表示元素最终的尺寸表现是由内容决定的,
+  e.g `fit-content`/`min-content`/`max-content`.
 - `Extrinsic Sizing` (外在尺寸):
-  表示元素最终的尺寸表现是由上下文决定的.
+  表示元素最终的尺寸表现是由上下文决定的,
+  e.g `stretch`/`-moz-available`/`-webkit-fill-available`.
 
 ### Box Width
 
