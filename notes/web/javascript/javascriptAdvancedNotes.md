@@ -4874,45 +4874,45 @@ self.addEventListener('fetch', event => {
 `Cache-Control: no-cache` (`no-cache` allows caches but requires revalidate) 时,
 才会走协商缓存.
 
-强缓存是利用 HTTP 头中的 Expires 和 Cache-Control 两个字段来控制的.
-强缓存中, 当请求再次发出时, 浏览器会根据其中的 expires 和 cache-control 判断目标资源是否 `命中` 强缓存,
+强缓存是利用 HTTP 头中的 `Expires` 和 `Cache-Control` 两个字段来控制的.
+强缓存中, 当请求再次发出时, 浏览器会根据其中的 `Expires` 和 `Cache-Control` 判断目标资源是否 `命中` 强缓存,
 若命中则直接从缓存中获取资源, 不会再与服务端发生通信.
-Cache-Control 相对于 expires 更加准确, 它的优先级也更高.
-当 Cache-Control 与 expires 同时出现时, 以 Cache-Control 为准.
+`Cache-Control` 相对于 `Expires` 更加准确, 它的优先级也更高,
+当 `Cache-Control` 与 `Expires` 同时出现时, 以 `Cache-Control` 为准.
 
 ```bash
-expires: Wed, 12 Sep 2019 06:12:18 GMT
-cache-control: max-age=31536000
+Expires: Wed, 12 Sep 2019 06:12:18 GMT
+Cache-Control: max-age=31536000
 ```
 
 协商缓存机制下,
 浏览器需要向服务器去询问缓存的相关信息,
 进而判断是重新发起请求/下载完整的响应,
 还是从本地获取缓存的资源.
-如果服务端提示缓存资源未改动 (Not Modified),
+如果服务端提示缓存资源未改动 (`Not Modified`),
 资源会被重定向到浏览器缓存,
 这种情况下网络请求对应的状态码是 `304`.
 
-Last-Modified 是一个时间戳,
+`Last-Modified` 是一个时间戳,
 如果启用了协商缓存,
-它会在首次请求时随着 Response Headers 返回:
+它会在首次请求时随着 response headers 返回:
 
 ```bash
 Last-Modified: Fri, 27 Oct 2017 06:35:57 GMT
 ```
 
-随后每次请求时, 会带上一个叫 If-Modified-Since 的时间戳字段,
-它的值正是上一次 response 返回给它的 last-modified 值:
+随后每次请求时, 会带上一个叫 `If-Modified-Since` 的时间戳字段,
+它的值正是上一次 response 返回给它的 `Last-Modified` 值:
 
 ```bash
 If-Modified-Since: Fri, 27 Oct 2017 06:35:57 GMT
 ```
 
 服务器可能无法正确感知文件的变化 (未实际改动或改动过快),
-为了解决这样的问题, Etag 作为 Last-Modified 的补充出现了.
-Etag 是由服务器为每个资源生成的唯一的标识字符串,
+为了解决这样的问题, `Etag` 作为 `Last-Modified` 的补充出现了.
+`Etag` 是由服务器为每个资源生成的唯一的标识字符串,
 这个标识字符串可以是基于文件内容编码的,
-因此 Etag 能够精准地感知文件的变化.
+因此 `Etag` 能够精准地感知文件的变化.
 
 ```bash
 GET /i/example.gif HTTP 1.1
@@ -4936,6 +4936,20 @@ If-None-Match: "10c24bc-4ab-457e1c1f"
 
 HTTP 1.1 304 Not Modified
 ```
+
+`Cache-Control` directives:
+
+- `public`: 允许代理服务器缓存资源.
+- `private`: 不允许代理服务器缓存资源, 只有浏览器可以缓存.
+- `immutable`: 就算过期了也不用协商, 资源就是不变的.
+- `max-age=<time>`: 资源过期时间 (浏览器计算), 比 `Expires` 精准 (服务器计算).
+- `s-maxage=<time>`: 代理服务器的资源过期时间.
+- `max-stale=<time>`: 允许使用过期资源, 指定允许时间.
+- `stale-while-revalidate=<time>`: 在验证 (协商) 期间, 返回过期的资源.
+- `stale-if-error=<time>`: 验证 (协商) 出错的话, 返回过期的资源.
+- `must-revalidate`: 强缓存过期后, 强制等待协商缓存, 不允许使用过期资源.
+- `no-store`: 禁止强缓存和协商缓存.
+- `no-cache`: 禁止强缓存, 允许协商缓存.
 
 #### Code Cache
 
