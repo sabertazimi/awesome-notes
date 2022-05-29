@@ -272,7 +272,8 @@ The user agent performs four steps to calculate a property's actual (final) valu
 ### Current Color
 
 - `currentcolor` 变量使用当前 `color` 计算值.
-- `border`/`text-shadow`/`box-shadow` 默认表现为 `currentcolor`.
+- `border-color`/`outline-color`/`caret-color`/`text-shadow`/`box-shadow`
+  默认表现为 `currentcolor`.
 
 ### HSL Color
 
@@ -3332,12 +3333,14 @@ li::before {
 
 ### Border Color
 
-利用 transparent border 扩大元素点击区域:
+利用 transparent border 扩大元素点击区域,
+再结合 `background-clip: padding-box` 隐藏边框:
 
 ```css
 .icon-clear {
   width: 16px;
   height: 16px;
+  background-clip: padding-box;
   border: 11px solid transparent;
 }
 ```
@@ -3543,11 +3546,33 @@ background-position: top right 10px;
 
 ### Background Size
 
-- `contain`.
-- `cover`.
-- Useful for `images` and `video`.
+- `contain`: 等比例缩放, 部分区域会留白.
+- `cover`: 等比例裁剪, 部分图像会裁剪.
+- `auto`:
+  - 具有 intrinsic size 的背景 (e.g 位图),
+    computed to `[intrinsic size, intrinsic size]`.
+  - 具有一个方向 intrinsic size, 具有 intrinsic ratio 的背景 (e.g 矢量图),
+    computed to `[intrinsic size, intrinsic size * intrinsic ratio]`.
+  - 具有一个方向 intrinsic size, 不具有 intrinsic ratio 的背景 (e.g 矢量图),
+    computed to `[intrinsic size, extrinsic size]`.
+  - 不具有 intrinsic size, 具有 intrinsic ratio 的背景 (e.g 矢量图),
+    computed to `contain` (等比例缩放).
+  - 不具有 intrinsic size, 不具有 intrinsic ratio 的背景 (e.g CSS gradient),
+    computed to `[extrinsic size, extrinsic size]`.
+- `<percentage>`: calculate by extrinsic size and `background-origin` box.
 
 ```css
+.background-size {
+  background-size: cover;
+  background-size: contain;
+  background-size: 100%;
+  background-size: 20px;
+  background-size: auto 100%;
+  background-size: auto 20px;
+  background-size: 100% 100%;
+  background-size: 20px 20px;
+}
+
 .video {
   min-width: 100%;
   min-height: 100%;
@@ -3556,22 +3581,32 @@ background-position: top right 10px;
 }
 ```
 
+### Background Origin
+
+指定背景绘制起点:
+
+- `border-box`.
+- `padding-box` (`initial` value).
+- `content-box`.
+
 ### Background Repeat
 
 ```css
-/* Keyword values */
-background-repeat: repeat-x;
-background-repeat: repeat-y;
-background-repeat: repeat;
-background-repeat: space;
-background-repeat: round;
-background-repeat: no-repeat;
+.background-repeat {
+  /* Keyword values */
+  background-repeat: repeat-x;
+  background-repeat: repeat-y;
+  background-repeat: repeat;
+  background-repeat: space;
+  background-repeat: round;
+  background-repeat: no-repeat;
 
-/* Two-value syntax: horizontal | vertical */
-background-repeat: repeat space;
-background-repeat: repeat repeat;
-background-repeat: round space;
-background-repeat: no-repeat round;
+  /* Two-value syntax: horizontal | vertical */
+  background-repeat: repeat space;
+  background-repeat: repeat repeat;
+  background-repeat: round space;
+  background-repeat: no-repeat round;
+}
 ```
 
 ### Background Attachment
@@ -3615,15 +3650,12 @@ body {
 
 ### Background Clip
 
-指定背景显示范围 `content-box`/`padding-box`/`border-box`:
+指定背景显示范围:
 
-```css
-h1 {
-  color: transparent;
-  background-image: url('bg.jpg');
-  background-clip: text;
-}
-```
+- `border-box` (initial value).
+- `padding-box`.
+- `content-box`.
+- `text`: 可用于实现`渐变文字`/`镂空文字`/`背景蒙版文字`.
 
 ```css
 @property --offset {
@@ -3640,29 +3672,22 @@ h1 {
 
 p {
   color: #000;
+}
 
-  &:hover {
-    color: transparent;
-    background: repeating-radial-gradient(
-      circle at 0 0,
-      #000 calc(var(--offset) - 5px),
-      #000 var(--offset),
-      #fff var(--offset),
-      #fff calc(var(--offset) + 5px)
-    );
-    background-clip: text;
-    animation: move 0.5s infinite linear;
-  }
+/* 同心圆外扩动画 */
+p:hover {
+  color: transparent;
+  background: repeating-radial-gradient(
+    circle at 0 0,
+    #000 calc(var(--offset) - 5px),
+    #000 var(--offset),
+    #fff var(--offset),
+    #fff calc(var(--offset) + 5px)
+  );
+  background-clip: text; /* -webkit-background-clip: text; */
+  animation: move 0.5s infinite linear;
 }
 ```
-
-### Background Origin
-
-指定背景绘制起点:
-
-- `content-box`.
-- `padding-box`.
-- `border-box`.
 
 ### Blend Mode
 
@@ -7042,6 +7067,44 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 }
 ```
 
+#### Background Shape
+
+```css
+.btn-add,
+.btn-sub {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: dimgray;
+  background: linear-gradient(currentcolor, currentcolor) no-repeat center / 0.875em
+      2px, linear-gradient(currentcolor, currentcolor) no-repeat center / 2px 0.875em;
+  border: 1px solid gray;
+}
+
+.btn-sub {
+  background-size: 0.875em 2px, 0;
+}
+```
+
+```css
+.square {
+  width: 304px;
+  height: 160px;
+  background-color: #fff;
+  background-image: linear-gradient(
+      45deg,
+      #eee 25%,
+      transparent 25%,
+      transparent 75%,
+      #eee 75%
+    ), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee
+        75%);
+  background-position: 0 0, 8px 8px;
+  background-size: 16px 16px;
+}
+```
+
+![Background Shape](./figures/BackgroundShape.png)
+
 #### Stretch Line
 
 - background line
@@ -7516,6 +7579,7 @@ body {
 ### CSS Components Reference
 
 - CSS [inspiration](https://github.com/chokcoco/CSS-Inspiration).
+- Background patterns [gallery](https://github.com/LeaVerou/css3patterns).
 - Pure CSS [icons](https://github.com/wentin/cssicon).
 
 ## CSS Reference
