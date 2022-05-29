@@ -2730,6 +2730,12 @@ p {
 }
 ```
 
+下划线样式:
+
+- [`text-underline-position`](https://developer.mozilla.org/docs/Web/CSS/text-underline-position).
+- [`text-underline-offset`](https://developer.mozilla.org/docs/Web/CSS/text-underline-offset).
+- [`text-decoration-skip-ink`](https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip-ink).
+
 ### Text Overflow
 
 - `clip`: 切除溢出部分.
