@@ -2833,39 +2833,26 @@ strong {
 
 ### Font Family
 
-- `serif`: 衬线字体.
-- `sans-serif`: 无衬线字体.
-- `monospace`: 等宽字体.
-- `cursive`: 手写字体.
-- `fantasy`: 奇幻字体.
-- `system-ui`: 系统 UI 字体.
+#### Generic Font Family
 
-```css
-.mi {
-  font-family: Arial, 'Microsoft YaHei', '黑体', '宋体', sans-serif;
-}
+- `serif`: 衬线字体族.
+- `sans-serif`: 无衬线字体族.
+- `monospace`: 等宽字体族.
+- `cursive`: 手写字体族.
+- `fantasy`: 奇幻字体族.
+- `system-ui`: 系统 UI 字体族.
+- `emoji`: `emoji` 字体族.
+- `math`: 数学表达式字体族.
+- `fangsong`: 仿宋字体族.
 
-.tao-ux {
-  font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑',
-    Arial, sans-serif;
-}
+#### English Font Family
 
-.tao {
-  font: 12px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif;
-}
+- `Segoe UI`: Windows 从 Vista 版本开始默认的西文字体族.
+- `Helvetica`: macOS 和 iOS 中很常用的一款无衬线字体.
+- `Roboto`: Android 中的一款无衬线字体.
+- `Arial`: 全平台都支持的一款无衬线字体.
 
-.tao-ued {
-  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
-}
-
-.one-plus {
-  font: 14px/1.5 'Microsoft YaHei', Arial, Tahoma, '\5b8b\4f53', sans-serif;
-}
-
-.font {
-  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
-}
-```
+#### Chinese Font Family
 
 ```bash
 宋体 SimSun
@@ -2919,6 +2906,40 @@ strong {
 华文隶书: STLiti
 华文行楷: STXingkai
 华文新魏: STXinwei
+```
+
+#### Font Family Preset
+
+```css
+.mi {
+  font-family: Arial, 'Microsoft YaHei', '黑体', '宋体', sans-serif;
+}
+
+.tao-ux {
+  font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑',
+    Arial, sans-serif;
+}
+
+.tao {
+  font: 12px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif;
+}
+
+.tao-ued {
+  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
+}
+
+.one-plus {
+  font: 14px/1.5 'Microsoft YaHei', Arial, Tahoma, '\5b8b\4f53', sans-serif;
+}
+
+.github {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Roboto,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+.font {
+  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
+}
 ```
 
 ### Font Style
