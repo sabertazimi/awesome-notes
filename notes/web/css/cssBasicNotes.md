@@ -2762,6 +2762,7 @@ Web default:
   - `auto`: automatically break words at appropriate hyphenation points.
   - `manual`: words are broken for line-wrapping only where `-` or `&shy;`.
   - `none`: words are not broken at line breaks.
+- `<wbr>`: word break opportunity.
 
 ```css
 /* 不换行 */
@@ -2787,6 +2788,11 @@ pre {
 .force-wrap {
   word-break: break-all;
   line-break: anywhere;
+}
+
+/* IE not support <wbr> */
+wbr::after {
+  content: '\00200B';
 }
 ```
 
