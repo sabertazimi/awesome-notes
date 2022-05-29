@@ -1959,7 +1959,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-content-docs@npm:2.0.0-beta.21":
+"@docusaurus/plugin-content-docs@npm:2.0.0-beta.21, @docusaurus/plugin-content-docs@npm:^2.0.0-beta.20":
   version: 2.0.0-beta.21
   resolution: "@docusaurus/plugin-content-docs@npm:2.0.0-beta.21"
   dependencies:
@@ -2262,10 +2262,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@easyops-cn/docusaurus-search-local@npm:^0.26.1":
-  version: 0.26.1
-  resolution: "@easyops-cn/docusaurus-search-local@npm:0.26.1"
+"@easyops-cn/docusaurus-search-local@npm:^0.27.0":
+  version: 0.27.0
+  resolution: "@easyops-cn/docusaurus-search-local@npm:0.27.0"
   dependencies:
+    "@docusaurus/plugin-content-docs": ^2.0.0-beta.20
     "@docusaurus/theme-common": ^2.0.0-beta.20
     "@docusaurus/theme-translations": ^2.0.0-beta.20
     "@docusaurus/utils": ^2.0.0-beta.20
@@ -2284,7 +2285,7 @@ __metadata:
     tslib: ^2.4.0
   peerDependencies:
     react: ^16.14.0 || 17 || 18
-  checksum: 599979a8817ad6b8684d7853c04903cd0ccc04a9e42e342161ff587a09c9477e628d23266d1842cbb6806556fdae5308ad726c30637b6cee2fbb2d450e013347
+  checksum: 1e449a1675c626295f69bed5f09c77b8779e68efb25879ac5d47ef9b5bb514fe78288a0fc5b82a795ff85c38965221724eb0867e9ebc5b6500edbcf649bc8bb4
   languageName: node
   linkType: hard
 
@@ -3934,7 +3935,7 @@ __metadata:
     "@docusaurus/core": 2.0.0-beta.21
     "@docusaurus/module-type-aliases": 2.0.0-beta.21
     "@docusaurus/preset-classic": 2.0.0-beta.21
-    "@easyops-cn/docusaurus-search-local": ^0.26.1
+    "@easyops-cn/docusaurus-search-local": ^0.27.0
     "@tsconfig/docusaurus": ^1.0.5
     ci-info: ^3.3.1
     eslint: ^8.16.0
