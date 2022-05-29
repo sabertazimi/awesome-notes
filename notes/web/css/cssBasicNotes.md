@@ -2840,17 +2840,67 @@ strong {
 - `monospace`: 等宽字体族.
 - `cursive`: 手写字体族.
 - `fantasy`: 奇幻字体族.
-- `system-ui`: 系统 UI 字体族.
-- `emoji`: `emoji` 字体族.
+- `emoji`: 表情字体族.
 - `math`: 数学表达式字体族.
 - `fangsong`: 仿宋字体族.
+- `system-ui`: 系统 UI 字体族.
+- `ui-serif`: 系统衬线字体.
+- `ui-sans-serif`: 系统无衬线字体.
+- `ui-monospace`: 系统等宽字体.
+- `ui-rounded`: 系统圆形字体.
 
 #### English Font Family
 
 - `Segoe UI`: Windows 从 Vista 版本开始默认的西文字体族.
-- `Helvetica`: macOS 和 iOS 中很常用的一款无衬线字体.
 - `Roboto`: Android 中的一款无衬线字体.
+- `Helvetica`: macOS 和 iOS 中很常用的一款无衬线字体.
 - `Arial`: 全平台都支持的一款无衬线字体.
+
+```css
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+```
+
+#### Emoji Font Family
+
+- `Apple Color Emoji`:
+  macOS and iOS.
+- `Segoe UI Emoji`:
+  Windows.
+- `Segoe UI Symbol`:
+  Windows 7 新增字体, 是一种 Unicode 编码字体,
+  显示的是单色图案, 非彩色图形.
+- `Noto Color Emoji`:
+  谷歌出品的 emoji 字体,
+  用于 Android 和 Linux.
+
+```css
+@font-face {
+  font-family: Emoji;
+  src: local('Apple Color Emoji'), local('Segoe UI Emoji'), local(
+      'Segoe UI Symbol'
+    ), local('Noto Color Emoji');
+  font-display: swap;
+  unicode-range: U+1F000-1F644, U+203C-3299;
+}
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Emoji, Helvetica, Arial,
+    sans-serif;
+}
+```
+
+#### Math Font Family
+
+- `Cambria Math`: Windows 中的数学字体.
+- `Latin Modern Math`: macOS 中的数学字体.
+
+```css
+math {
+  font-family: 'Cambria Math', 'Latin Modern Math', serif;
+}
+```
 
 #### Chinese Font Family
 
@@ -2933,12 +2983,17 @@ strong {
 }
 
 .github {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Roboto,
-    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
-.font {
-  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
+.font-serif {
+  font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+.font-mono {
+  font-family: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
 }
 ```
 
