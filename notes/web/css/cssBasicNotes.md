@@ -3135,7 +3135,7 @@ whether and when it is downloaded and ready to use:
 
 ### Font Performance
 
-- Compress fonts: better formats.
+- Compress fonts: better formats (e.g `woff2`/`woff`).
 - Subset fonts: `unicode-range`.
 - Local fonts: `local()`.
 
