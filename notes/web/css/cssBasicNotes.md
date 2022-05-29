@@ -148,14 +148,14 @@ h1 {
 
 #### Inherited CSS Property
 
-- all elements: visibility, cursor.
-- inline elements:
+- All elements: visibility, cursor.
+- Inline elements:
   letter-spacing, word-spacing, white-space, line-height,
   color, font, font-family, font-size, font-style, font-variant, font-weight,
-  text-decoration, text-transform, direction
-- block elements: text-indent, text-align
-- list elements: list-style, list-style-type, list-style-position, list-style-image
-- table elements: border-collapse
+  text-decoration, text-transform, direction.
+- Block elements: text-indent, text-align.
+- List elements: list-style, list-style-type, list-style-position, list-style-image.
+- Table elements: border-collapse.
 
 ## CSS Data Types
 
@@ -2694,10 +2694,39 @@ p {
 ### Text Decoration
 
 ```css
+.formal-syntax {
+  text-decoration: < 'text-decoration-line' > || < 'text-decoration-style' > ||
+    < 'text-decoration-color' > || < 'text-decoration-thickness' >;
+}
+```
+
+```css
+.line {
+  text-decoration-line: overline; /* 上划线 */
+  text-decoration-line: line-through; /* 中划线 */
+  text-decoration-line: underline; /* 下划线 */
+}
+
 .text {
-  text-decoration: overline; /* 上划线 */
-  text-decoration: line-through; /* 中划线 */
-  text-decoration: underline; /* 下划线 */
+  text-decoration: underline;
+  text-decoration: dotted underline;
+  text-decoration: red underline dashed;
+  text-decoration: wavy underline 3px red;
+}
+
+.wavy {
+  display: block;
+  height: 0.5rem;
+  padding-top: 0.5rem;
+  overflow: hidden;
+  letter-spacing: 100vw;
+  white-space: nowrap;
+}
+
+.wavy::before {
+  text-decoration: overline; /* IE */
+  text-decoration-style: wavy;
+  content: '\2000\2000';
 }
 ```
 
@@ -5600,6 +5629,7 @@ module.exports = {
       'text-decoration-color',
       'text-decoration-line',
       'text-decoration-style',
+      'text-decoration-thickness',
       'text-rendering',
       'text-shadow',
       'text-overflow',
