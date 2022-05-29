@@ -1859,6 +1859,7 @@ are always **relative to parent** current order in its own `stacking context`.
     黏性定位元素分布在不同容器时, 存在多个竖直排列的黏性约束矩形.
   - 若粘性定位元素父元素的高度和粘性定位元素的高度相同,
     则垂直滚动时, 粘性定位效果始终不会出现.
+  - 可以利用这一特性, 实现层次滚动/视差滚动效果 (`Parallax`).
 
 ```css
 .sticky {
