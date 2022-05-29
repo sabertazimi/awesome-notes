@@ -2739,8 +2739,19 @@ Web default:
 
 [Text wrapping and word breaking](https://codersblock.com/blog/deep-dive-into-text-wrapping-and-word-breaking):
 
-- `word-break`: `normal`/`keep-all`/`break-all`/`break-word`.
-- `overflow-wrap` (`word-wrap`): `normal`/`anywhere`/`break-word`.
+- `word-break`:
+  - `normal`:
+    default line break rule.
+  - `keep-all`:
+    Word breaks should not be used for CJK text.
+    Non-CJK text behavior is same as for `normal`.
+  - `break-all`:
+    word breaks should be inserted between any two characters (excluding CJK text).
+  - `break-word` (**Deprecated**).
+- `overflow-wrap` (`word-wrap`):
+  - `normal`.
+  - `anywhere`.
+  - `break-word`.
 
 ```css
 /* 不换行 */
