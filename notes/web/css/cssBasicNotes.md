@@ -3588,6 +3588,8 @@ background-position: top right 10px;
 - `border-box`.
 - `padding-box` (`initial` value).
 - `content-box`.
+- 影响 `background-size` `<percentage>` 计算.
+- 影响**起点两侧**背景样式细节.
 
 ### Background Repeat
 
