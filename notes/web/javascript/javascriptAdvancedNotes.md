@@ -5177,7 +5177,7 @@ the preload scanner will discover and fetch the image resource more quickly.
 <link rel="preload" as="script" href="critical.js" />
 <link rel="modulepreload" href="critical-module.mjs" />
 <link rel="preload" as="image" href="..." />
-<link rel="preload" as="font" href="..." crossorigin />
+<link rel="preload" as="font" href="myFont.woff2" type="font/woff2" crossorigin />
 <link rel="preload" as="fetch" href="..." crossorigin />
 ```
 
