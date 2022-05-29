@@ -2844,6 +2844,13 @@ wbr::after {
 }
 ```
 
+:::tip Punctuation Types
+
+- 避头标点: 不在行首显示的标点, e.g 逗号, 顿号, 句号, 问号, 叹号.
+- 避尾标点: 不在行尾显示的标点, e.g 前引号, 前括号.
+
+:::
+
 ### Text Direction
 
 ```css
