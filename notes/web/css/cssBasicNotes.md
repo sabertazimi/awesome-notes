@@ -2635,6 +2635,18 @@ article a {
 }
 ```
 
+[`text-align-last`](https://developer.mozilla.org/docs/Web/CSS/text-align-last):
+
+最后一行文字对齐方式.
+
+[`text-justify`](https://developer.mozilla.org/docs/Web/CSS/text-justify):
+
+- type of justification for `text-align: justify`.
+- `none`: turn off `text-align: justify`.
+- `auto`.
+- `inter-word`.
+- `inter-character`.
+
 ### Text Indent
 
 `text-indent`:
