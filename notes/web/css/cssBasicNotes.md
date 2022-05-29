@@ -2752,6 +2752,16 @@ Web default:
   - `normal`.
   - `anywhere`.
   - `break-word`.
+- `line-break`: break lines of CJK text when working with punctuation and symbols.
+  - `auto`.
+  - `loose`.
+  - `normal`.
+  - `strict`.
+  - `anywhere`.
+- `hyphens`: how words should be hyphenated when text wraps across multiple lines.
+  - `auto`: automatically break words at appropriate hyphenation points.
+  - `manual`: words are broken for line-wrapping only where `-` or `&shy;`.
+  - `none`: words are not broken at line breaks.
 
 ```css
 /* 不换行 */
@@ -2763,17 +2773,20 @@ Web default:
 .auto-wrap {
   word-break: normal;
   word-wrap: break-word;
+  line-break: anywhere;
 }
 
 /* 自动换行 */
 pre {
   word-wrap: break-word; /* IE 5.5-7 */
   white-space: pre-wrap; /* Modern Browsers */
+  line-break: anywhere;
 }
 
 /* 强制换行 */
 .force-wrap {
   word-break: break-all;
+  line-break: anywhere;
 }
 ```
 
