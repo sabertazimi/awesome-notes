@@ -3135,8 +3135,9 @@ whether and when it is downloaded and ready to use:
 
 ### Font Performance
 
-- Compress fonts.
-- Subset fonts.
+- Compress fonts: better formats.
+- Subset fonts: `unicode-range`.
+- Local fonts: `local()`.
 
 ```css
 @font-face {
