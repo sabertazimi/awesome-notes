@@ -990,14 +990,14 @@ Separate focus styles:
 
 ```css
 /* Tab Focus Style */
-button:focus-visible {
+.button:focus-visible {
   outline: 2px solid #416dea;
   outline-offset: 2px;
   box-shadow: 0 1px 1px #416dea;
 }
 
 /* Mouse Focus Style */
-button:focus:not(:focus-visible) {
+.button:focus:not(:focus-visible) {
   outline: none;
 }
 ```
@@ -3428,16 +3428,21 @@ table {
 ## CSS Outline
 
 ```css
-.outline {
-  outline: 1px solid #000;
-}
-
 .input {
   outline: none;
 }
 
 .input:focus {
   border-color: var(--highlight);
+}
+
+.button:focus-visible {
+  outline: 1px solid #000;
+  outline-offset: 3px;
+}
+
+.button:focus:not(:focus-visible) {
+  outline: none;
 }
 ```
 
