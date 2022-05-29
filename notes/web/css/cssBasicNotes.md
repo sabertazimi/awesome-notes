@@ -4151,10 +4151,12 @@ shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 - `wait`/`help`/`crosshair`/`progress`.
 - `not-allowed`/`no-drop`/`vertical-text`/`all-scroll`.
 - `none`/`alias`/`cell`/`copy`/`context-menu`.
+- `grab`/`grabbing`.
 - `n-resize`/`e-resize`/`s-resize`/`w-resize`.
 - `ne-resize`/`nw-resize`/`se-resize`/`sw-resize`.
 - `col-resize`/`row-resize`.
 - `ew-resize`/`ns-resize`/`nesw-resize`/`nwse-resize`.
+- `zoom-in`/`zoom-out`.
 - `url()`.
 
 ```css
