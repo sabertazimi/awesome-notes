@@ -460,6 +460,10 @@ history.forward();
 if (history.length === 1) {
   console.log('这是用户窗口中的第一个页面');
 }
+
+if (history.scrollRestoration) {
+  history.scrollRestoration = 'manual';
+}
 ```
 
 #### History State Management
