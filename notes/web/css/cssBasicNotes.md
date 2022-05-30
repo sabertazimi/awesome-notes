@@ -399,69 +399,6 @@ In `position`/`size`/`margin`/`padding`/`border`/`text alignment`:
 
 ## CSS Variables
 
-### Variables DOM API
-
-```css
-.element {
-  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-  height: calc(var(--vh, 1vh) * 100);
-}
-```
-
-```ts
-window.addEventListener('resize', () => {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
-```
-
-```ts
-const root = document.documentElement;
-const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
-```
-
-Change `--cursor-x` and `--cursor-y` via `JavaScript` API:
-
-```css
-:root::before {
-  position: fixed;
-  z-index: 1000;
-  display: block;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  content: '';
-  background: radial-gradient(
-    circle 16vmax at var(--cursor-x) var(--cursor-y),
-    rgb(0 0 0 / 0%) 0%,
-    rgb(0 0 0 / 50%) 80%,
-    rgb(0 0 0 / 80%) 100%
-  );
-}
-```
-
-Change `--percent` via `JavaScript` API:
-
-```css
-.bar {
-  display: flex;
-  height: 20px;
-  background-color: #f5f5f5;
-}
-
-.bar::before {
-  display: flex;
-  justify-content: end;
-  width: calc(var(--percent) * 1%);
-  font-size: 12px;
-  color: #fff;
-  white-space: nowrap;
-  content: counter(progress) '%\2002';
-  counter-reset: progress var(--percent);
-  background: #2486ff;
-}
-```
-
 ### Scope Variables
 
 ```html
@@ -696,6 +633,69 @@ use variables to implement `if else` statement.
     --bg: var(--bg-dark);
     --text: var(--text-dark);
   }
+}
+```
+
+### Variables API
+
+```css
+.element {
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+}
+```
+
+```ts
+window.addEventListener('resize', () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+```
+
+```ts
+const root = document.documentElement;
+const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
+```
+
+Change `--cursor-x` and `--cursor-y` via `JavaScript` API:
+
+```css
+:root::before {
+  position: fixed;
+  z-index: 1000;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  content: '';
+  background: radial-gradient(
+    circle 16vmax at var(--cursor-x) var(--cursor-y),
+    rgb(0 0 0 / 0%) 0%,
+    rgb(0 0 0 / 50%) 80%,
+    rgb(0 0 0 / 80%) 100%
+  );
+}
+```
+
+Change `--percent` via `JavaScript` API:
+
+```css
+.bar {
+  display: flex;
+  height: 20px;
+  background-color: #f5f5f5;
+}
+
+.bar::before {
+  display: flex;
+  justify-content: end;
+  width: calc(var(--percent) * 1%);
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
+  content: counter(progress) '%\2002';
+  counter-reset: progress var(--percent);
+  background: #2486ff;
 }
 ```
 
@@ -5550,10 +5550,10 @@ contain: paint;
 ### CSS Triggers Performance
 
 - CSS triggers [list](https://github.com/GoogleChromeLabs/css-triggers).
-- [JS DOM API Triggers](https://gist.github.com/paulirish/5d52fb081b3570c81e3a).
+- JavaScript triggers [list](https://gist.github.com/paulirish/5d52fb081b3570c81e3a).
 
 Avoid to frequently change css property
-or call JS DOM API triggering layout stage (reflow):
+or call JavaSript API triggering layout stage (reflow):
 
 - `width`/`height`/`margin`/`left`/`top` in `Layout` stage.
 - `box-shadow`/`border-radius`/`background`/`outline`/`color` in `Paint` stage.
