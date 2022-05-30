@@ -332,27 +332,27 @@ tags: [Web, Framework, Library]
 - [CloudFlareColor: Online Website Color Palette Grab Tool](https://github.com/cloudflare/color)
 - [ColorThief: Image Color Palette Grab Tool](https://github.com/lokesh/color-thief)
 
-### Gradients Utils
+### Gradient Utils
 
-#### Gradients Collection
+#### Gradient Collection
 
-- [Web Gradients](https://github.com/itmeo/webgradients)
+- [Web Gradient](https://github.com/itmeo/webgradients)
 - [Gradient Magic](https://www.gradientmagic.com)
 
-#### Gradients Tools
+#### Gradient Tools
 
-- [PostCSS Gradients Plugin](https://github.com/larsenwork/postcss-easing-gradients)
+- [PostCSS Gradient Plugin](https://github.com/larsenwork/postcss-easing-gradients)
 
-#### Gradients Editor
+#### Gradient Editor
 
 - [Gradient Generator](https://www.joshwcomeau.com/gradient-generator)
 - [CSS Gradient](https://cssgradient.io)
-- [Easing Gradients](https://larsenwork.com/easing-gradients/#editor)
+- [Easing Gradient](https://larsenwork.com/easing-gradients/#editor)
 - [Gradient Art](https://github.com/GradientArt/issues)
 
-### Box Shadows Utils
+### Box Shadow Utils
 
-- [Neumorphism: Generate CSS for Neumorphism Soft UI Design](https://github.com/adamgiebl/neumorphism)
+- [Neumorphism: Generate CSS for Neumorphic Soft UI Design](https://github.com/adamgiebl/neumorphism)
 - [Box Shadows: Cross-browser Collection of CSS Box-shadows](https://github.com/madeas/box-shadows.css)
 - [ShadowPalette: Shadow Generator](https://www.joshwcomeau.com/shadow-palette)
 
