@@ -4595,7 +4595,7 @@ $$
   y \\
   1
 \end{bmatrix}
-=
+\implies
 \begin{bmatrix}
   ax + cy + e \\
   bx+ dy + f \\
