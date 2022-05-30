@@ -644,7 +644,7 @@ use variables to implement `if else` statement.
   --blue: 255;
 
   /**
-   * 亮度算法：
+   * 亮度算法:
    * lightness = (red * 0.2126 + green * 0.7152 + blue * 0.0722) / 255
    */
   --lightness: calc(
@@ -653,10 +653,10 @@ use variables to implement `if else` statement.
 }
 
 .button {
-  /* 文字颜色，只可能是黑色或白色 */
+  /* 文字颜色, 只可能是黑色或白色 */
   color: hsl(0% 0% calc((var(--lightness) - 0.5) * -999999%));
 
-  /* 文字阴影，黑色文字才会出现 */
+  /* 文字阴影, 黑色文字才会出现 */
   text-shadow: 1px 1px rgb(calc(var(--red) + 50) calc(var(--green) + 50) calc(
           var(--blue) + 50
         ) / calc((var(--lightness) - 0.5) * 9999));
@@ -667,7 +667,7 @@ use variables to implement `if else` statement.
   /* 固定样式 */
   border: 0.2em solid;
 
-  /* 边框样式，亮度大于 0.8 才出现 */
+  /* 边框样式, 亮度大于 0.8 才出现 */
   border-color: rgb(
     calc(var(--red) - 50) calc(var(--green) - 50) calc(var(--blue) - 50) / calc((
             var(--lightness) - 0.8
@@ -863,7 +863,7 @@ h1 ~ p {
 }
 ```
 
-checkbox `input` as hidden `click` event listener
+Checkbox `input` as hidden `click` event listener:
 
 ```css
 input.checkbox {
@@ -1779,7 +1779,7 @@ are always **relative to parent** current order in its own `stacking context`.
   /* 边角卷边阴影 */
   .page::before,
   .page::after {
-    /* 层叠上下文（灰色背景）之上，定位元素（黄色纸张）之下 */
+    /* 层叠上下文（灰色背景）之上, 定位元素（黄色纸张）之下 */
     position: absolute;
     z-index: -1;
     width: 90%;
@@ -4472,19 +4472,99 @@ Horizontal Scrolling Methods:
 
 ## CSS Transform
 
-Transformations do affect the visual rendering,
-but have no affect on the CSS layout other than affecting `overflow`.
-Transforms are also taken into account
-when computing client rectangles exposed
-via the `Element Interface Extensions`,
-namely `getClientRects()` and `getBoundingClientRect()`
-which are specified in [CSSOM-VIEW](https://www.w3.org/TR/cssom-view-1):
+`transform`:
 
-- `translate()`/`translateX()`/`translateY()`/`translateZ()`/`translate3d()`.
-- `scale()`/`scaleX()`/`scaleY()`/`scaleZ()`/`scale3d()`.
-- `rotate()`/`rotateX()`/`rotateY()`/`rotateZ()`/`rotate3d()`.
-- `skew()`/`skewX()`/`skewY()`.
-- `matrix()`/`matrix3d()`.
+- No affect on the CSS box model layout (excepts `overflow` scrolling).
+- No affect on `display: inline` element.
+- Affect the visual rendering.
+- Affect client rectangles exposed by
+  `Element Interface Extensions` (`getClientRects()`/`getBoundingClientRect()`).
+- Affect after `clip`/`clip-path`: first `clip`/`clip-path`, then `transform`.
+
+### Translate Transform
+
+`translate()`/`translateX()`/`translateY()`/`translateZ()`/`translate3d()`:
+
+```css
+.translate {
+  /* 往右偏移10px, 往下偏移20px */
+  transform: translate(10px, 20px);
+
+  /* 往右偏移10px */
+  transform: translateX(10px);
+
+  /* 往下偏移20px */
+  transform: translateY(20px);
+
+  /* 往左偏移自身宽度的一半, 往上偏移自身高度的一半 */
+  transform: translate(-50%, -50%);
+}
+```
+
+### Rotate Transform
+
+`rotate()`/`rotateX()`/`rotateY()`/`rotateZ()`/`rotate3d()`:
+
+- `deg`: degrees 角度 ($0$ ~ $360^{\circ}$).
+- `grad`: grads 百分度 ($0$ ~ $400$).
+- `rad`: radians 弧度 ($1^{\circ} = \frac{180}{\pi}$).
+- `turn`: turns 圈数.
+
+```css
+.rotate {
+  /* 正值顺时针, 负值逆时针 */
+  transform: rotate(45deg);
+  transform: rotate(50grad);
+  transform: rotate(0.7854rad);
+  transform: rotate(0.25turn);
+}
+```
+
+### Scale Transform
+
+`scale()`/`scaleX()`/`scaleY()`/`scaleZ()`/`scale3d()`:
+
+```css
+.scale {
+  /* 水平放大 2 倍, 垂直缩小 1/2 */
+  transform: scale(2, 0.5);
+
+  /* 水平放大 2 倍 */
+  transform: scaleX(2);
+
+  /* 垂直缩小 1/2 */
+  transform: scaleY(0.5);
+
+  /* 水平翻转效果 */
+  transform: scaleX(-1);
+
+  /* 垂直翻转效果 */
+  transform: scaleY(-1);
+}
+```
+
+### Skew Transform
+
+`skew()`/`skewX()`/`skewY()`:
+
+```css
+.skew {
+  /* 水平切斜 10 度, 垂直切斜 20 度 */
+  transform: skew(10deg, 20deg);
+
+  /* 水平切斜10度 */
+  transform: skewX(10deg);
+
+  /* 垂直切斜20度 */
+  transform: skewY(20deg);
+}
+```
+
+[![Skew Transform](./figures/TransformSkew.png)](https://developer.mozilla.org/docs/Web/CSS/transform-function/skew)
+
+### Matrix Transform
+
+`matrix()`/`matrix3d()`.
 
 ### Transform Origin
 
