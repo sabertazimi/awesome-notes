@@ -4519,25 +4519,6 @@ Horizontal Scrolling Methods:
 }
 ```
 
-### Rotate Transform
-
-`rotate()`/`rotateX()`/`rotateY()`/`rotateZ()`/`rotate3d()`:
-
-- `deg`: degrees 角度 ($0$ ~ $360^{\circ}$).
-- `grad`: grads 百分度 ($0$ ~ $400$).
-- `rad`: radians 弧度 ($1^{\circ} = \frac{180}{\pi}$).
-- `turn`: turns 圈数.
-
-```css
-.rotate {
-  /* 正值顺时针, 负值逆时针 */
-  transform: rotate(45deg);
-  transform: rotate(50grad);
-  transform: rotate(0.7854rad);
-  transform: rotate(0.25turn);
-}
-```
-
 ### Scale Transform
 
 `scale()`/`scaleX()`/`scaleY()`/`scaleZ()`/`scale3d()`:
@@ -4558,6 +4539,25 @@ Horizontal Scrolling Methods:
 
   /* 垂直翻转效果 */
   transform: scaleY(-1);
+}
+```
+
+### Rotate Transform
+
+`rotate()`/`rotateX()`/`rotateY()`/`rotateZ()`/`rotate3d()`:
+
+- `deg`: degrees 角度 ($0$ ~ $360^{\circ}$).
+- `grad`: grads 百分度 ($0$ ~ $400$).
+- `rad`: radians 弧度 ($1^{\circ} = \frac{180}{\pi}$).
+- `turn`: turns 圈数.
+
+```css
+.rotate {
+  /* 正值顺时针, 负值逆时针 */
+  transform: rotate(45deg);
+  transform: rotate(50grad);
+  transform: rotate(0.7854rad);
+  transform: rotate(0.25turn);
 }
 ```
 
@@ -4582,7 +4582,78 @@ Horizontal Scrolling Methods:
 
 ### Matrix Transform
 
-`matrix()`/`matrix3d()`.
+`matrix(a, b, c, d, e, f)`:
+
+$$
+\begin{bmatrix}
+  a & c & e \\
+  b & d & f \\
+  0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+  x \\
+  y \\
+  1
+\end{bmatrix}
+=
+\begin{bmatrix}
+  ax + cy + e \\
+  bx+ dy + f \\
+  1
+\end{bmatrix}
+$$
+
+$$
+\begin{align}
+   x' &= ax + cy + e  \\
+   y' &= bx + dy + f
+\end{align}
+$$
+
+Translate:
+
+$$
+\begin{align}
+   x' &= 1 \cdot x + 0 \cdot y + e &= x + e \\
+   y' &= 0 \cdot x + 1 \cdot y + f &= y + f
+\end{align}
+$$
+
+Scale:
+
+$$
+\begin{align}
+   x' &= a \cdot x + 0 \cdot y + 0  &= ax \\
+   y' &= 0 \cdot x + d \cdot y + 0  &= dy
+\end{align}
+$$
+
+Rotate:
+
+$$
+\begin{align}
+   x' &= \cos\theta \cdot x - \sin\theta \cdot y \\
+   y' &= \sin\theta \cdot x + \cos\theta \cdot y
+\end{align}
+$$
+
+Skew:
+
+$$
+\begin{align}
+   x' &= x + \tan{\theta x} \cdot y  \\
+   y' &= \tan{\theta y} \cdot x + y
+\end{align}
+$$
+
+```css
+.matrix {
+  transform: matrix(1, 0, 0, 1, var(--translate-x), var(--translate-y));
+  transform: matrix(var(--scale-x), 0, 0, var(--scale-y), 0, 0);
+  transform: matrix(var(--cos), var(--sin), var(--sin-minus), var(--cos), 0, 0);
+  transform: matrix(1, var(--tan-y), var(--tan-x), 1, 0, 0);
+}
+```
 
 ### Transform Origin
 
