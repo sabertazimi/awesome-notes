@@ -5364,6 +5364,17 @@ const result = CSS.supports(`
 }
 ```
 
+### Focusable Areas
+
+Focusable areas:
+
+- Elements whose `tabindex` value is not null.
+- The shapes of area elements in an image map.
+- The sub-widgets of elements: e.g video controls.
+- The scrollable regions of elements.
+- The viewport of a `Document`.
+- User agent focusable area.
+
 ### Keyboard Styles
 
 添加键盘访问样式:
