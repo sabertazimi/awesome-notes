@@ -7145,8 +7145,53 @@ Use pseudo elements to construct circle and line:
 Separate set horizontal and vertical radius to make well-designed shapes:
 
 ```css
-.avatar {
+.avatar-shape {
   border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border: solid deepskyblue;
+  border-radius: 50%;
+  object-fit: cover;
+  animation: morph 6s paused linear;
+}
+
+@keyframes morph {
+  0% {
+    border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    border-radius: 40% 60%;
+    transform: rotate(5deg);
+  }
+}
+
+.avatar:nth-child(4n) {
+  animation-delay: -3.5s;
+}
+
+.avatar:nth-child(2n + 1) {
+  animation-delay: -1s;
+}
+
+.avatar:nth-child(3n + 2) {
+  animation-delay: -2s;
+}
+
+.avatar:nth-child(5n + 3) {
+  animation-delay: -3s;
+}
+
+.avatar:nth-child(7n + 5) {
+  animation-delay: -4s;
+}
+
+.avatar:nth-child(11n + 7) {
+  animation-delay: -5s;
 }
 ```
 
