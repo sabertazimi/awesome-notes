@@ -1835,8 +1835,11 @@ are always **relative to parent** current order in its own `stacking context`.
 
 ### Absolute Position
 
-- 使元素相对于 `containing block` (`position: non-static`) 布局.
-- 若祖先全为 `position: static` 元素, 则使元素相对于浏览器窗口布局.
+- 使元素相对于 `containing block` 布局:
+  - Non-`static` `position` element.
+  - `transform` element.
+- 若祖先全为 `position: static`/`transform: none` 元素,
+  则使元素相对于浏览器窗口布局.
 - 可使用 `top`/`bottom`/`left`/`right`/`inset` 属性进行定位.
 - 相对方向 (opposite) 的定位同时设置:
   若未显示设置该方向的元素大小, 则元素具有流动性, 受 `containing block` 影响其大小,
@@ -4489,7 +4492,7 @@ Horizontal Scrolling Methods:
 
 `transform`:
 
-- No affect on the CSS box model layout (excepts `overflow` scrolling).
+- No affect on the CSS box model layout (excepts [`overflow`](#transform-alignment)).
 - No affect on `display: inline` element.
 - Affect the visual rendering.
 - Affect client rectangles exposed by
@@ -4642,8 +4645,10 @@ Horizontal Scrolling Methods:
 
 - Keep `translate(-50%, -50%)` in keyframe transform property list
   when using it for alignment.
-- `absolute` 元素被剪裁或者 `fixed` 固定定位失效时,
-  可能是 `transform` 作用下造成的.
+- 父元素设置了 `transform` 变换,
+  `position: fixed` 子元素固定定位失效.
+- 父元素设置了 `transform` 变换 + `overflow: hidden`,
+  `position: absolute` 子元素会被剪裁.
 - 当变换绝对定位居中的元素时, 需要改变 `transform-origin`:
 
 ```css
@@ -5553,7 +5558,7 @@ contain: paint;
 - JavaScript triggers [list](https://gist.github.com/paulirish/5d52fb081b3570c81e3a).
 
 Avoid to frequently change css property
-or call JavaSript API triggering layout stage (reflow):
+or call JavaScript API triggering layout stage (reflow):
 
 - `width`/`height`/`margin`/`left`/`top` in `Layout` stage.
 - `box-shadow`/`border-radius`/`background`/`outline`/`color` in `Paint` stage.
