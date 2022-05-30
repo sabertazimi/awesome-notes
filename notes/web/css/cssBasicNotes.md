@@ -3403,6 +3403,28 @@ li::before {
 }
 ```
 
+圆角曲线重叠时, 所有圆角半径都缩小至 $f$ 倍:
+
+$$
+f =
+\min\left(
+  \frac{Length_{horizontal}}{\sum^{horizontal}_{radius}},
+  \frac{Length_{vertical}}{\sum^{vertical}_{radius}}
+\right)
+$$
+
+```css
+.w-150px-h-100px {
+  /* f = min(0.50, 0.50) = 0.50 */
+  border-radius: 100%;
+  border-radius: 75px / 50px;
+
+  /* f = min(0.50, 0.33) = 0.33 */
+  border-radius: 150px;
+  border-radius: 50px;
+}
+```
+
 ### Border Color
 
 利用 transparent border 扩大元素点击区域,
