@@ -3383,6 +3383,26 @@ li::before {
 
 ### Border Radius
 
+每角都支持单独设置 `水平半径` `/` `垂直半径`:
+
+`<length-percentage>{1, 4} [ / <length-percentage>{1,4} ]?`.
+
+```css
+.box {
+  /* 左上 右上+左下 右下 / 左上 右上+左下 右下 */
+  border-radius: 10px 5px 2em / 20px 25px 30%;
+
+  /* 左上+右下 右上+左下 / 左上 右上 右下 左下 */
+  border-radius: 10px 5% / 20px 25em 30px 35em;
+
+  /* 水平半径 垂直半径 */
+  border-top-left-radius: 30px 50%;
+
+  /* 水平半径 垂直半径 */
+  border-bottom-left-radius: 20% 15px;
+}
+```
+
 ### Border Color
 
 利用 transparent border 扩大元素点击区域,
