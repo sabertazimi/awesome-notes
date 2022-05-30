@@ -6473,224 +6473,6 @@ const useIsMounted = () => {
 };
 ```
 
-### Custom Async Data Hook
-
-- `useState` to store url and data.
-- `useEffect` to trigger async `fetch` actions.
-
-```ts
-import { useEffect, useState } from 'react';
-
-function useFriendStatus(friendID) {
-  const [isOnline, setIsOnline] = useState(null);
-
-  function handleStatusChange(status) {
-    setIsOnline(status.isOnline);
-  }
-
-  useEffect(() => {
-    ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);
-    return () => {
-      ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);
-    };
-  });
-
-  return isOnline;
-}
-```
-
-```tsx
-function FriendStatus(props) {
-  const isOnline = useFriendStatus(props.friend.id);
-
-  if (isOnline === null) {
-    return 'Loading...';
-  }
-  return isOnline ? 'Online' : 'Offline';
-}
-
-function FriendListItem(props) {
-  const isOnline = useFriendStatus(props.friend.id);
-
-  return (
-    <li style={{ color: isOnline ? 'green' : 'black' }}>{props.friend.name}</li>
-  );
-}
-```
-
-```ts
-import React, { Fragment, useEffect, useState } from 'react';
-import axios from 'axios';
-
-const useDataApi = (initialUrl, initialData) => {
-  const [data, setData] = useState(initialData);
-  const [url, setUrl] = useState(initialUrl);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-
-  const fetchData = useCallback(async () => {
-    setIsError(false);
-    setIsLoading(true);
-
-    try {
-      const result = await axios(url);
-
-      setData(result.data);
-    } catch (error) {
-      setIsError(true);
-    }
-
-    setIsLoading(false);
-  }, [url]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  const doGet = (event, url) => {
-    setUrl(url);
-    event.preventDefault();
-  };
-
-  return { data, isLoading, isError, doGet };
-};
-```
-
-```tsx
-function App() {
-  const [query, setQuery] = useState('redux');
-  const { data, isLoading, isError, doGet } = useDataApi(
-    'http://hn.algolia.com/api/v1/search?query=redux',
-    { hits: [] }
-  );
-
-  return (
-    <Fragment>
-      <form
-        onSubmit={event =>
-          doGet(event, `http://hn.algolia.com/api/v1/search?query=${query}`)
-        }
-      >
-        <input
-          type="text"
-          value={query}
-          onChange={event => setQuery(event.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
-
-      {isError && <div>Something went wrong ...</div>}
-
-      {isLoading ? (
-        <div>Loading ...</div>
-      ) : (
-        <ul>
-          {data.hits.map(item => (
-            <li key={item.objectID}>
-              <a href={item.url}>{item.title}</a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </Fragment>
-  );
-}
-
-export default App;
-```
-
-TypeScript fetch hook with caches:
-
-```ts
-import { useEffect, useReducer, useRef } from 'react';
-
-import type { AxiosRequestConfig } from 'axios';
-import axios from 'axios';
-
-// State & hook output
-interface State<T> {
-  status: 'init' | 'fetching' | 'error' | 'fetched';
-  data?: T;
-  error?: string;
-}
-
-type Cache<T> = Record<string, T>;
-
-// discriminated union type
-type Action<T> =
-  | { type: 'request' }
-  | { type: 'success'; payload: T }
-  | { type: 'failure'; payload: string };
-
-function useFetch<T = unknown>(
-  url?: string,
-  options?: AxiosRequestConfig
-): State<T> {
-  const cache = useRef<Cache<T>>({});
-  const cancelRequest = useRef<boolean>(false);
-
-  const initialState: State<T> = {
-    status: 'init',
-    error: undefined,
-    data: undefined,
-  };
-
-  // Keep state logic separated
-  const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
-    switch (action.type) {
-      case 'request':
-        return { ...initialState, status: 'fetching' };
-      case 'success':
-        return { ...initialState, status: 'fetched', data: action.payload };
-      case 'failure':
-        return { ...initialState, status: 'error', error: action.payload };
-      default:
-        return state;
-    }
-  };
-
-  const [state, dispatch] = useReducer(fetchReducer, initialState);
-
-  useEffect(() => {
-    if (!url) {
-      return;
-    }
-
-    const fetchData = async () => {
-      dispatch({ type: 'request' });
-
-      if (cache.current[url]) {
-        dispatch({ type: 'success', payload: cache.current[url] });
-      } else {
-        try {
-          const response = await axios(url, options);
-          cache.current[url] = response.data;
-
-          if (cancelRequest.current) return;
-
-          dispatch({ type: 'success', payload: response.data });
-        } catch (error) {
-          if (cancelRequest.current) return;
-
-          dispatch({ type: 'failure', payload: error.message });
-        }
-      }
-    };
-
-    fetchData();
-
-    return () => {
-      cancelRequest.current = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
-
-  return state;
-}
-
-export default useFetch;
-```
-
 ### Custom Previous Hook
 
 ```tsx
@@ -6816,63 +6598,33 @@ export default function useEventListener({ event, handler }) {
 }
 ```
 
-### Custom Mouse Hook
+### Custom Media Query Hook
 
 ```ts
-import { useRef, useState } from 'react';
+export default function useMedia<T>(
+  queries: string[],
+  values: T[],
+  defaultValue: T
+) {
+  // Array containing a media query list for each query
+  const mediaQueryLists = queries.map(q => window.matchMedia(q));
 
-export default function useLongPress(time = 500) {
-  const [action, setAction] = useState();
-
-  const timerRef = useRef();
-  const isLongPress = useRef();
-
-  function startPressTimer() {
-    isLongPress.current = false;
-    timerRef.current = setTimeout(() => {
-      isLongPress.current = true;
-      setAction('LongPress');
-    }, time);
-  }
-
-  function handleClick() {
-    if (isLongPress.current) {
-      return;
-    }
-
-    setAction('Click');
-  }
-
-  function handleMouseDown() {
-    startPressTimer();
-  }
-
-  function handleMouseUp() {
-    clearTimeout(timerRef.current);
-  }
-
-  function handleTouchStart() {
-    startPressTimer();
-  }
-
-  function handleTouchEnd() {
-    if (action === 'LongPress') {
-      return;
-    }
-
-    clearTimeout(timerRef.current);
-  }
-
-  return {
-    action,
-    handlers: {
-      onClick: handleClick,
-      onMouseDown: handleMouseDown,
-      onMouseUp: handleMouseUp,
-      onTouchStart: handleTouchStart,
-      onTouchEnd: handleTouchEnd,
-    },
+  const getValue = () => {
+    // Get index of first media query that matches
+    const index = mediaQueryLists.findIndex(mql => mql.matches);
+    return values?.[index] || defaultValue;
   };
+
+  // State and setter for matched value
+  const [value, setValue] = useState<T>(getValue);
+
+  useMount(() => {
+    const handler = () => setValue(getValue);
+    mediaQueryLists.forEach(mql => mql.addListener(handler));
+    return () => mediaQueryLists.forEach(mql => mql.removeListener(handler));
+  });
+
+  return value;
 }
 ```
 
@@ -7025,279 +6777,64 @@ function useLockedBody(initialLocked = false): ReturnType {
 export default useLockedBody;
 ```
 
-### Custom Script Loading Hook
+### Custom Mouse Hook
 
 ```ts
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 
-export type Status = 'idle' | 'loading' | 'ready' | 'error';
-export type ScriptElt = HTMLScriptElement | null;
+export default function useLongPress(time = 500) {
+  const [action, setAction] = useState();
 
-function useScript(src: string): Status {
-  const [status, setStatus] = useState<Status>(src ? 'loading' : 'idle');
+  const timerRef = useRef();
+  const isLongPress = useRef();
 
-  useEffect(
-    () => {
-      if (!src) {
-        setStatus('idle');
-        return;
-      }
+  function startPressTimer() {
+    isLongPress.current = false;
+    timerRef.current = setTimeout(() => {
+      isLongPress.current = true;
+      setAction('LongPress');
+    }, time);
+  }
 
-      // Fetch existing script element by src
-      // It may have been added by another instance of this hook
-      // **Cache mechanism**
-      let script: ScriptElt = document.querySelector(`script[src="${src}"]`);
-
-      if (!script) {
-        // Create script
-        script = document.createElement('script');
-        script.src = src;
-        script.async = true;
-        script.setAttribute('data-status', 'loading');
-        // Add script to document body
-        document.body.appendChild(script);
-
-        // Store status in attribute on script
-        // This can be read by other instances of this hook
-        const setAttributeFromEvent = (event: Event) => {
-          script?.setAttribute(
-            'data-status',
-            event.type === 'load' ? 'ready' : 'error'
-          );
-        };
-
-        script.addEventListener('load', setAttributeFromEvent);
-        script.addEventListener('error', setAttributeFromEvent);
-      } else {
-        // Grab existing script status from attribute and set to state.
-        setStatus(script.getAttribute('data-status') as Status);
-      }
-
-      // Script event handler to update status in state
-      // Note: Even if the script already exists we still need to add
-      // event handlers to update the state for *this* hook instance.
-      const setStateFromEvent = (event: Event) => {
-        setStatus(event.type === 'load' ? 'ready' : 'error');
-      };
-
-      // Add event listeners
-      script.addEventListener('load', setStateFromEvent);
-      script.addEventListener('error', setStateFromEvent);
-
-      // Remove event listeners on cleanup
-      return () => {
-        if (script) {
-          script.removeEventListener('load', setStateFromEvent);
-          script.removeEventListener('error', setStateFromEvent);
-        }
-      };
-    },
-    [src] // Only re-run effect if script src changes
-  );
-
-  return status;
-}
-
-export default useScript;
-```
-
-```ts
-const cachedScripts = [];
-
-const useScript = src => {
-  // Keeping track of script loaded and error state
-  const [state, setState] = useState({
-    loaded: false,
-    error: false,
-  });
-
-  useEffect(
-    () => {
-      // If cachedScripts array already includes src
-      // that means another instance ...
-      // ... of this hook already loaded this script, so no need to load again.
-      if (cachedScripts.includes(src)) {
-        setState({
-          loaded: true,
-          error: false,
-        });
-      } else {
-        cachedScripts.push(src);
-
-        // Create script
-        const script = document.createElement('script');
-        script.src = src;
-        script.async = true;
-
-        // Script event listener callbacks for load and error
-        const onScriptLoad = () => {
-          setState({
-            loaded: true,
-            error: false,
-          });
-        };
-
-        const onScriptError = () => {
-          // Remove from cachedScripts we can try loading again
-          const index = cachedScripts.indexOf(src);
-          if (index >= 0) cachedScripts.splice(index, 1);
-          script.remove();
-
-          setState({
-            loaded: true,
-            error: true,
-          });
-        };
-
-        script.addEventListener('load', onScriptLoad);
-        script.addEventListener('error', onScriptError);
-
-        // Add script to document body
-        document.body.appendChild(script);
-
-        // Remove event listeners on cleanup
-        return () => {
-          script.removeEventListener('load', onScriptLoad);
-          script.removeEventListener('error', onScriptError);
-        };
-      }
-    },
-    [src] // Only re-run effect if script src changes
-  );
-
-  return [state.loaded, state.error];
-};
-```
-
-### Custom Media Query Hook
-
-```ts
-export default function useMedia<T>(
-  queries: string[],
-  values: T[],
-  defaultValue: T
-) {
-  // Array containing a media query list for each query
-  const mediaQueryLists = queries.map(q => window.matchMedia(q));
-
-  const getValue = () => {
-    // Get index of first media query that matches
-    const index = mediaQueryLists.findIndex(mql => mql.matches);
-    return values?.[index] || defaultValue;
-  };
-
-  // State and setter for matched value
-  const [value, setValue] = useState<T>(getValue);
-
-  useMount(() => {
-    const handler = () => setValue(getValue);
-    mediaQueryLists.forEach(mql => mql.addListener(handler));
-    return () => mediaQueryLists.forEach(mql => mql.removeListener(handler));
-  });
-
-  return value;
-}
-```
-
-### Custom Cookie Hook
-
-```ts
-// https://github.com/tylerwolff/useCookie.
-import { useState } from 'react';
-
-const isBrowser = typeof window !== 'undefined';
-
-function stringifyOptions(options) {
-  return Object.keys(options).reduce((acc, key) => {
-    if (key === 'days') {
-      // Skip `days`.
-      return acc;
-    } else {
-      if (options[key] === false) {
-        return acc;
-      } else if (options[key] === true) {
-        return `${acc}; ${key}`;
-      } else {
-        return `${acc}; ${key}=${options[key]}`;
-      }
+  function handleClick() {
+    if (isLongPress.current) {
+      return;
     }
-  }, '');
-}
 
-function getCookie(name, initialValue = '') {
-  return (
-    (isBrowser &&
-      document.cookie.split('; ').reduce((r, v) => {
-        const parts = v.split('=');
-        return parts[0] === name ? decodeURIComponent(parts[1]) : r;
-      }, '')) ||
-    initialValue
-  );
-}
+    setAction('Click');
+  }
 
-function setCookie(name, value, options) {
-  if (!isBrowser) return;
+  function handleMouseDown() {
+    startPressTimer();
+  }
 
-  const optionsWithDefaults = {
-    days: 7,
-    path: '/',
-    ...options,
+  function handleMouseUp() {
+    clearTimeout(timerRef.current);
+  }
+
+  function handleTouchStart() {
+    startPressTimer();
+  }
+
+  function handleTouchEnd() {
+    if (action === 'LongPress') {
+      return;
+    }
+
+    clearTimeout(timerRef.current);
+  }
+
+  return {
+    action,
+    handlers: {
+      onClick: handleClick,
+      onMouseDown: handleMouseDown,
+      onMouseUp: handleMouseUp,
+      onTouchStart: handleTouchStart,
+      onTouchEnd: handleTouchEnd,
+    },
   };
-
-  const expires = new Date(
-    Date.now() + optionsWithDefaults.days * 864e5
-  ).toUTCString();
-
-  document.cookie = `${name}=${encodeURIComponent(
-    value
-  )}; expires=${expires}${stringifyOptions(optionsWithDefaults)}`;
 }
-
-function useCookie(key, initialValue) {
-  const [item, setItem] = useState(() => {
-    return getCookie(key, initialValue);
-  });
-
-  const updateItem = (value, options) => {
-    setItem(value);
-    setCookie(key, value, options);
-  };
-
-  return [item, updateItem];
-}
-```
-
-### Custom LocalStorage Hook
-
-```tsx
-// https://www.robinwieruch.de/react-uselocalstorage-hook.
-const useLocalStorage = (storageKey, fallbackState) => {
-  const [value, setValue] = React.useState(
-    JSON.parse(localStorage.getItem(storageKey)) || fallbackState
-  );
-
-  // Update logic.
-  React.useEffect(() => {
-    localStorage.setItem(storageKey, JSON.stringify(value));
-  }, [value, storageKey]);
-
-  return [value, setValue];
-};
-
-const App = () => {
-  const [isOpen, setOpen] = useLocalStorage('is-open', false);
-
-  const handleToggle = () => {
-    setOpen(!isOpen);
-  };
-
-  return (
-    <div>
-      <button onClick={handleToggle}>Toggle</button>
-      {isOpen && <div>Content</div>}
-    </div>
-  );
-};
 ```
 
 ### Custom Form Hook
@@ -7853,6 +7390,591 @@ const useHistory = initialPresent => {
 };
 ```
 
+### Custom Script Loading Hook
+
+```ts
+import { useEffect, useState } from 'react';
+
+export type Status = 'idle' | 'loading' | 'ready' | 'error';
+export type ScriptElt = HTMLScriptElement | null;
+
+function useScript(src: string): Status {
+  const [status, setStatus] = useState<Status>(src ? 'loading' : 'idle');
+
+  useEffect(
+    () => {
+      if (!src) {
+        setStatus('idle');
+        return;
+      }
+
+      // Fetch existing script element by src
+      // It may have been added by another instance of this hook
+      // **Cache mechanism**
+      let script: ScriptElt = document.querySelector(`script[src="${src}"]`);
+
+      if (!script) {
+        // Create script
+        script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+        script.setAttribute('data-status', 'loading');
+        // Add script to document body
+        document.body.appendChild(script);
+
+        // Store status in attribute on script
+        // This can be read by other instances of this hook
+        const setAttributeFromEvent = (event: Event) => {
+          script?.setAttribute(
+            'data-status',
+            event.type === 'load' ? 'ready' : 'error'
+          );
+        };
+
+        script.addEventListener('load', setAttributeFromEvent);
+        script.addEventListener('error', setAttributeFromEvent);
+      } else {
+        // Grab existing script status from attribute and set to state.
+        setStatus(script.getAttribute('data-status') as Status);
+      }
+
+      // Script event handler to update status in state
+      // Note: Even if the script already exists we still need to add
+      // event handlers to update the state for *this* hook instance.
+      const setStateFromEvent = (event: Event) => {
+        setStatus(event.type === 'load' ? 'ready' : 'error');
+      };
+
+      // Add event listeners
+      script.addEventListener('load', setStateFromEvent);
+      script.addEventListener('error', setStateFromEvent);
+
+      // Remove event listeners on cleanup
+      return () => {
+        if (script) {
+          script.removeEventListener('load', setStateFromEvent);
+          script.removeEventListener('error', setStateFromEvent);
+        }
+      };
+    },
+    [src] // Only re-run effect if script src changes
+  );
+
+  return status;
+}
+
+export default useScript;
+```
+
+```ts
+const cachedScripts = [];
+
+const useScript = src => {
+  // Keeping track of script loaded and error state
+  const [state, setState] = useState({
+    loaded: false,
+    error: false,
+  });
+
+  useEffect(
+    () => {
+      // If cachedScripts array already includes src
+      // that means another instance ...
+      // ... of this hook already loaded this script, so no need to load again.
+      if (cachedScripts.includes(src)) {
+        setState({
+          loaded: true,
+          error: false,
+        });
+      } else {
+        cachedScripts.push(src);
+
+        // Create script
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+
+        // Script event listener callbacks for load and error
+        const onScriptLoad = () => {
+          setState({
+            loaded: true,
+            error: false,
+          });
+        };
+
+        const onScriptError = () => {
+          // Remove from cachedScripts we can try loading again
+          const index = cachedScripts.indexOf(src);
+          if (index >= 0) cachedScripts.splice(index, 1);
+          script.remove();
+
+          setState({
+            loaded: true,
+            error: true,
+          });
+        };
+
+        script.addEventListener('load', onScriptLoad);
+        script.addEventListener('error', onScriptError);
+
+        // Add script to document body
+        document.body.appendChild(script);
+
+        // Remove event listeners on cleanup
+        return () => {
+          script.removeEventListener('load', onScriptLoad);
+          script.removeEventListener('error', onScriptError);
+        };
+      }
+    },
+    [src] // Only re-run effect if script src changes
+  );
+
+  return [state.loaded, state.error];
+};
+```
+
+### Custom Cookie Hook
+
+```ts
+// https://github.com/tylerwolff/useCookie.
+import { useState } from 'react';
+
+const isBrowser = typeof window !== 'undefined';
+
+function stringifyOptions(options) {
+  return Object.keys(options).reduce((acc, key) => {
+    if (key === 'days') {
+      // Skip `days`.
+      return acc;
+    } else {
+      if (options[key] === false) {
+        return acc;
+      } else if (options[key] === true) {
+        return `${acc}; ${key}`;
+      } else {
+        return `${acc}; ${key}=${options[key]}`;
+      }
+    }
+  }, '');
+}
+
+function getCookie(name, initialValue = '') {
+  return (
+    (isBrowser &&
+      document.cookie.split('; ').reduce((r, v) => {
+        const parts = v.split('=');
+        return parts[0] === name ? decodeURIComponent(parts[1]) : r;
+      }, '')) ||
+    initialValue
+  );
+}
+
+function setCookie(name, value, options) {
+  if (!isBrowser) return;
+
+  const optionsWithDefaults = {
+    days: 7,
+    path: '/',
+    ...options,
+  };
+
+  const expires = new Date(
+    Date.now() + optionsWithDefaults.days * 864e5
+  ).toUTCString();
+
+  document.cookie = `${name}=${encodeURIComponent(
+    value
+  )}; expires=${expires}${stringifyOptions(optionsWithDefaults)}`;
+}
+
+function useCookie(key, initialValue) {
+  const [item, setItem] = useState(() => {
+    return getCookie(key, initialValue);
+  });
+
+  const updateItem = (value, options) => {
+    setItem(value);
+    setCookie(key, value, options);
+  };
+
+  return [item, updateItem];
+}
+```
+
+### Custom LocalStorage Hook
+
+```tsx
+// https://www.robinwieruch.de/react-uselocalstorage-hook.
+const useLocalStorage = (storageKey, fallbackState) => {
+  const [value, setValue] = React.useState(
+    JSON.parse(localStorage.getItem(storageKey)) || fallbackState
+  );
+
+  // Update logic.
+  React.useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(value));
+  }, [value, storageKey]);
+
+  return [value, setValue];
+};
+
+const App = () => {
+  const [isOpen, setOpen] = useLocalStorage('is-open', false);
+
+  const handleToggle = () => {
+    setOpen(!isOpen);
+  };
+
+  return (
+    <div>
+      <button onClick={handleToggle}>Toggle</button>
+      {isOpen && <div>Content</div>}
+    </div>
+  );
+};
+```
+
+### Custom Async Data Hook
+
+- `useState` to store url and data.
+- `useEffect` to trigger async `fetch` actions.
+
+```ts
+import { useEffect, useState } from 'react';
+
+function useFriendStatus(friendID) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  function handleStatusChange(status) {
+    setIsOnline(status.isOnline);
+  }
+
+  useEffect(() => {
+    ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);
+    return () => {
+      ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);
+    };
+  });
+
+  return isOnline;
+}
+```
+
+```tsx
+function FriendStatus(props) {
+  const isOnline = useFriendStatus(props.friend.id);
+
+  if (isOnline === null) {
+    return 'Loading...';
+  }
+  return isOnline ? 'Online' : 'Offline';
+}
+
+function FriendListItem(props) {
+  const isOnline = useFriendStatus(props.friend.id);
+
+  return (
+    <li style={{ color: isOnline ? 'green' : 'black' }}>{props.friend.name}</li>
+  );
+}
+```
+
+```ts
+import React, { Fragment, useEffect, useState } from 'react';
+import axios from 'axios';
+
+const useDataApi = (initialUrl, initialData) => {
+  const [data, setData] = useState(initialData);
+  const [url, setUrl] = useState(initialUrl);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const fetchData = useCallback(async () => {
+    setIsError(false);
+    setIsLoading(true);
+
+    try {
+      const result = await axios(url);
+
+      setData(result.data);
+    } catch (error) {
+      setIsError(true);
+    }
+
+    setIsLoading(false);
+  }, [url]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const doGet = (event, url) => {
+    setUrl(url);
+    event.preventDefault();
+  };
+
+  return { data, isLoading, isError, doGet };
+};
+```
+
+```tsx
+function App() {
+  const [query, setQuery] = useState('redux');
+  const { data, isLoading, isError, doGet } = useDataApi(
+    'http://hn.algolia.com/api/v1/search?query=redux',
+    { hits: [] }
+  );
+
+  return (
+    <Fragment>
+      <form
+        onSubmit={event =>
+          doGet(event, `http://hn.algolia.com/api/v1/search?query=${query}`)
+        }
+      >
+        <input
+          type="text"
+          value={query}
+          onChange={event => setQuery(event.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      {isError && <div>Something went wrong ...</div>}
+
+      {isLoading ? (
+        <div>Loading ...</div>
+      ) : (
+        <ul>
+          {data.hits.map(item => (
+            <li key={item.objectID}>
+              <a href={item.url}>{item.title}</a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Fragment>
+  );
+}
+
+export default App;
+```
+
+TypeScript fetch hook with caches:
+
+```ts
+import { useEffect, useReducer, useRef } from 'react';
+
+import type { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
+
+// State & hook output
+interface State<T> {
+  status: 'init' | 'fetching' | 'error' | 'fetched';
+  data?: T;
+  error?: string;
+}
+
+type Cache<T> = Record<string, T>;
+
+// discriminated union type
+type Action<T> =
+  | { type: 'request' }
+  | { type: 'success'; payload: T }
+  | { type: 'failure'; payload: string };
+
+function useFetch<T = unknown>(
+  url?: string,
+  options?: AxiosRequestConfig
+): State<T> {
+  const cache = useRef<Cache<T>>({});
+  const cancelRequest = useRef<boolean>(false);
+
+  const initialState: State<T> = {
+    status: 'init',
+    error: undefined,
+    data: undefined,
+  };
+
+  // Keep state logic separated
+  const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
+    switch (action.type) {
+      case 'request':
+        return { ...initialState, status: 'fetching' };
+      case 'success':
+        return { ...initialState, status: 'fetched', data: action.payload };
+      case 'failure':
+        return { ...initialState, status: 'error', error: action.payload };
+      default:
+        return state;
+    }
+  };
+
+  const [state, dispatch] = useReducer(fetchReducer, initialState);
+
+  useEffect(() => {
+    if (!url) {
+      return;
+    }
+
+    const fetchData = async () => {
+      dispatch({ type: 'request' });
+
+      if (cache.current[url]) {
+        dispatch({ type: 'success', payload: cache.current[url] });
+      } else {
+        try {
+          const response = await axios(url, options);
+          cache.current[url] = response.data;
+
+          if (cancelRequest.current) return;
+
+          dispatch({ type: 'success', payload: response.data });
+        } catch (error) {
+          if (cancelRequest.current) return;
+
+          dispatch({ type: 'failure', payload: error.message });
+        }
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      cancelRequest.current = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url]);
+
+  return state;
+}
+
+export default useFetch;
+```
+
+### Custom Data Query Hook
+
+```ts
+import firebase from 'firebase/app';
+import { useQuery, useQueryClient } from 'react-query';
+import type { UseQueryOptions } from 'react-query';
+import 'firebase/auth';
+import 'firebase/database';
+import { useEffect } from 'react';
+
+// This value is the default 403 code from firebase
+const PERMISSION_DENIED_STATUS_CODE = 'PERMISSION_DENIED';
+
+export interface RealTimeFetchParams {
+  path: string;
+}
+
+export interface RealTimeSubscribeParams<T> {
+  path: string;
+  event?: firebase.database.EventType;
+  callback: (value: T) => void;
+}
+
+export interface RealTimeUnsubscribeParams {
+  path: string;
+  event?: firebase.database.EventType;
+}
+
+export class RealTimeApi {
+  private firebase: firebase.app.App;
+
+  constructor() {
+    this.handleAuthenticationErrors =
+      this.handleAuthenticationErrors.bind(this);
+
+    this.firebase = firebase.initializeApp({
+      apiKey: process.env.REACT_APP_FIREBASE_WEB_API_KEY,
+      databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+      projectId: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+      messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
+      appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    });
+  }
+
+  private handleAuthenticationErrors(error: firebase.FirebaseError) {
+    if (error.code === PERMISSION_DENIED_STATUS_CODE) {
+      // handle logout any way you want. For example, if you were using
+      // AWS Cognito, you'd call `Auth.logout()`
+    }
+  }
+
+  public connect(token: string) {
+    return this.firebase.auth().signInWithCustomToken(token);
+  }
+
+  public disconnect() {
+    return this.firebase.auth().signOut();
+  }
+
+  public fetch<T>({ path }: RealTimeFetchParams) {
+    return new Promise<T>(resolve => {
+      this.firebase
+        .database()
+        .ref(path)
+        .once(
+          'value',
+          snapshot => {
+            resolve(snapshot.val());
+          },
+          this.handleAuthenticationErrors
+        );
+    });
+  }
+
+  public subscribe<T>({
+    path,
+    callback,
+    event = 'value',
+  }: RealTimeSubscribeParams<T>) {
+    const ref = this.firebase.database().ref(path);
+    const cb = (snapshot: firebase.database.DataSnapshot) => {
+      callback(snapshot.val() as T);
+    };
+
+    ref.on(event, cb, this.handleAuthenticationErrors);
+    return () => ref.off(event, cb);
+  }
+
+  public unsubscribe({ path, event = 'value' }: RealTimeUnsubscribeParams) {
+    this.firebase.database().ref(path).off(event);
+  }
+}
+
+const realTimeApi = new RealTimeApi();
+
+function useRealTimeQuery<Data>(
+  firebasePathKey: string,
+  useQueryOptions: UseQueryOptions<Data> = {}
+) {
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    const unsubscribe = realTimeApi.subscribe<Data>({
+      path: firebasePathKey,
+      callback: val => {
+        queryClient.setQueryData(firebasePathKey, val);
+      },
+    });
+
+    return () => unsubscribe();
+  }, [queryClient, firebasePathKey]);
+
+  return useQuery<Data, Error>(
+    firebasePathKey,
+    () => new Promise<Data>(() => {}),
+    useQueryOptions
+  );
+}
+
+export default useRealTimeQuery;
+```
+
 ### Custom Store Hook
 
 Simple implementation:
@@ -7889,7 +8011,7 @@ Complex [implementation](https://github.com/timc1/kbar):
 
 ```ts
 import { deepEqual } from 'fast-equals';
-import * as React from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type {
   Action,
   ActionId,
@@ -7909,7 +8031,7 @@ export default function useStore(props: useStoreProps) {
     );
   }
 
-  const [state, setState] = React.useState<KBarState>({
+  const [state, setState] = useState<KBarState>({
     searchQuery: '',
     currentRootActionId: null,
     visualState: VisualState.hidden,
@@ -7919,20 +8041,20 @@ export default function useStore(props: useStoreProps) {
     }, {}),
   });
 
-  const currentState = React.useRef(state);
+  const currentState = useRef(state);
   currentState.current = state;
 
-  const getState = React.useCallback(() => currentState.current, []);
-  const publisher = React.useMemo(() => new Publisher(getState), [getState]);
+  const getState = useCallback(() => currentState.current, []);
+  const publisher = useMemo(() => new Publisher(getState), [getState]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     currentState.current = state;
     publisher.notify();
   }, [publisher, state]);
 
-  const optionsRef = React.useRef((props.options || {}) as KBarOptions);
+  const optionsRef = useRef((props.options || {}) as KBarOptions);
 
-  const registerActions = React.useCallback((actions: Action[]) => {
+  const registerActions = useCallback((actions: Action[]) => {
     const actionsByKey: ActionTree = actions.reduce((acc, current) => {
       acc[current.id] = current;
       return acc;
@@ -7962,7 +8084,7 @@ export default function useStore(props: useStoreProps) {
     };
   }, []);
 
-  return React.useMemo(() => {
+  return useMemo(() => {
     return {
       getState,
       query: {
