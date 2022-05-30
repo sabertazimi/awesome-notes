@@ -3383,9 +3383,17 @@ li::before {
 
 ### Border Radius
 
-每角都支持单独设置 `水平半径` `/` `垂直半径`:
+`border-radius`:
 
-`<length-percentage>{1, 4} [ / <length-percentage>{1,4} ]?`.
+- 不支持负值.
+- 圆角以外的区域不可点击, 无法响应 `click` 事件.
+- 没有继承性:
+  因此父元素设置 `border-radius`, 子元素依然是直角效果.
+  可以给父元素设置 `overflow:hidden` 让子元素视觉上表现为圆角.
+- 支持 `border-collapse` 设置为 `separate` 的
+  `table`/`inline-table`/`table-cell` 元素.
+- 每角都支持单独设置 `水平半径` `/` `垂直半径`:
+  `<length-percentage>{1, 4} [ / <length-percentage>{1,4} ]?`.
 
 ```css
 .box {
@@ -6464,7 +6472,7 @@ label > .label-body {
 #### Custom Checkbox Widget
 
 Input itself as border shape,
-Pseudo elements as center shape (checked transform animation):
+pseudo elements as center shape (checked transform animation):
 
 ```css
 input[type='checkbox'] + label::before {
@@ -7133,6 +7141,14 @@ Use pseudo elements to construct circle and line:
 ```
 
 #### Border Shape
+
+Separate set horizontal and vertical radius to make well-designed shapes:
+
+```css
+.avatar {
+  border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+}
+```
 
 Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 
