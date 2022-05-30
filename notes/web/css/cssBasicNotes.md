@@ -3559,6 +3559,56 @@ table {
 
 ### Box Shadow
 
+#### Basic Box Shadow
+
+```css
+.box {
+  /* offset-x | offset-y | blur-radius | color */
+  box-shadow: 10px 5px 5px black;
+
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+}
+```
+
+#### Inset Box Shadow
+
+模拟边框:
+
+```css
+.button-ghost {
+  background-color: #fff;
+
+  /* 模拟边框: 左 右 上 下 */
+  box-shadow: inset 1px 0 #a2a9b6, inset -1px 0 #a2a9b6, inset 0 1px #a2a9b6, inset
+      0 -1px #a2a9b6;
+}
+```
+
+模拟背景:
+
+```css
+.button:active {
+  box-shadow: inset 0 0 0 999px rgb(0 0 0 / 10%);
+}
+```
+
+#### Neumorphic Box Shadow
+
+[Neumorphic box shadow](https://codepen.io/myacode/pen/PoqQQNM):
+
+```css
+.neumorphic {
+  box-shadow: -10px -10px 15px rgb(255 255 255 / 50%), 10px 10px 15px rgb(70 70
+          70 / 12%);
+}
+
+.neumorphic:active {
+  box-shadow: inset -10px -10px 15px rgb(255 255 255 / 50%), inset 10px 10px
+      15px rgb(70 70 70 / 12%);
+}
+```
+
 ## CSS Background
 
 ### Background Image
