@@ -4025,6 +4025,26 @@ Movie style:
 }
 ```
 
+## CSS Gradient
+
+### Linear Gradient
+
+[Linear gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/linear-gradient):
+
+- `[ <angle> | to <side-or-corner> ]? , <color-stop-list>`.
+
+### Radial Gradient
+
+[Radial gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/radial-gradient):
+
+- `[ <ending-shape> || <size> ]? [ at <position> ]? , <color-stop-list>`.
+
+### Conic Gradient
+
+[Conic gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/conic-gradient):
+
+- `[ from <angle> ]? [ at <position> ]?, <angular-color-stop-list>`.
+
 ## CSS Mask
 
 - Black for masking.
