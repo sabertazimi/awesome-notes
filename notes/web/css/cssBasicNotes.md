@@ -701,7 +701,67 @@ Change `--percent` via `JavaScript` API:
 
 ## CSS Math
 
-### Clamp
+### Calculation Function
+
+[`calc()`](https://developer.mozilla.org/docs/Web/CSS/calc):
+
+- 支持多种数据类型:
+  `<length>`/`<frequency>`/`<angle>`/`<time>`/`<percentage>`/`<number>`/`<integer>`.
+- 支持加减乘除 4 种运算.
+- 运算符前后带单位或者带百分号的值只能进行加减运算, 不能进行乘除运算.
+- 加号和减号两侧一定要有空格, 乘号和除号两侧无须空格.
+- 结合 `CSS Variables`, 拥有强大功能与可维护性.
+
+```css
+html {
+  font-size: calc(16px + 2 * (100vw - 375px) / 39);
+}
+
+.button {
+  width: calc(100% - 20px);
+}
+
+.list {
+  --size: calc(100% - 2rem);
+
+  width: calc(var(--size) / 6);
+}
+```
+
+### Min and Max Function
+
+```css
+.box {
+  width: min(10vw, 5em, 80px);
+  width: max(10px * 10, 10em);
+  width: min(calc(10px * 10), 10em);
+  width: max(10px * 10, var(--width));
+}
+```
+
+```css
+.legacy-container {
+  width: 100%;
+  max-width: 1024px;
+}
+
+.modern-container {
+  width: min(100%, 1024px);
+}
+```
+
+```css
+.legacy-container {
+  width: 100%;
+  min-width: 768px;
+}
+
+.modern-container {
+  width: max(100%, 768px);
+}
+```
+
+### Clamp Function
 
 [Fluid size](https://github.com/codeAdrian/modern-fluid-typography-editor):
 
