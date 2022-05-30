@@ -4657,10 +4657,36 @@ $$
 
 ### Transform Origin
 
-`transform-origin`:
+[`transform-origin`](https://developer.mozilla.org/docs/Web/CSS/transform-origin)
+change `transform` start point:
 
-- Change `transform` start point:
-  `top`/`bottom`/`center`/`left`/`right`.
+- X offset: `<length>`/`<percentage>`/`left`/`center`/`right`.
+- Y offset: `<length>`/`<percentage>`/`top`/`center`/`bottom`.
+- Z offset: `<length>`.
+
+```css
+.transform-origin {
+  /* One-value syntax, the other is `50%`/`center` */
+  transform-origin: 2px;
+  transform-origin: bottom;
+
+  /* x-offset | y-offset */
+  transform-origin: 3cm 2px;
+  transform-origin: left 2px;
+
+  /* x-offset | y-offset | z-offset */
+  transform-origin: 2px 30% 10px;
+  transform-origin: left 5px -3px;
+}
+```
+
+### Individual Transform
+
+Individual transform [property](https://drafts.csswg.org/css-transforms-2/#individual-transforms):
+
+- [`translate`](https://developer.mozilla.org/docs/Web/CSS/translate).
+- [`scale`](https://developer.mozilla.org/docs/Web/CSS/scale).
+- [`rotate`](https://developer.mozilla.org/docs/Web/CSS/rotate).
 
 ### Transform Style
 
