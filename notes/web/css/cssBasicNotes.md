@@ -4471,48 +4471,105 @@ Horizontal Scrolling Methods:
 - `grid-auto-flow: column;`
 - `scroll-snap-type: x mandatory; scroll-snap-align: center;`
 
-## CSS Animation
+## CSS Transform
 
-- [Animation 101 Tutorial](https://github.com/cssanimation/css-animation-101)
+Transformations do affect the visual rendering,
+but have no affect on the CSS layout other than affecting `overflow`.
+Transforms are also taken into account
+when computing client rectangles exposed
+via the `Element Interface Extensions`,
+namely `getClientRects()` and `getBoundingClientRect()`
+which are specified in [CSSOM-VIEW](https://www.w3.org/TR/cssom-view-1):
 
-### Animation Helper
+- `translate()`/`translateX()`/`translateY()`/`translateZ()`/`translate3d()`.
+- `scale()`/`scaleX()`/`scaleY()`/`scaleZ()`/`scale3d()`.
+- `rotate()`/`rotateX()`/`rotateY()`/`rotateZ()`/`rotate3d()`.
+- `skew()`/`skewX()`/`skewY()`.
+- `matrix()`/`matrix3d()`.
 
-- opacity
-- `overflow: hidden`
-- pseudo elements (`::before` and `::after`)
-- pseudo elements with animation
-  (opacity, scale, translate, width/height, margin, background-position)
-- `:hover`/`:focus`/`:target` + animation/transform/transition
-- transform: scale/translate
-- animation-delay
-- width/height
-- max-width/max-height
-- margin
-- border
-- background
-- background-position
-- background with multiple gradient
-- single box-shadow
-- multiple box-shadow
+### Transform Origin
+
+`transform-origin`:
+
+- Change `transform` start point:
+  `top`/`bottom`/`center`/`left`/`right`.
+
+### Transform Style
+
+`transform-style`:
+
+- `flat`: initial value, 表示平面变换.
+- `preserve-3d`: 表示 3D 透视变换.
+
+### Transform Perspective
+
+`perspective` 为 **3D** 转换元素定义透视视图:
 
 ```css
-z-index: -1;
-overflow: hidden;
+.parent {
+  perspective: 201px;
+}
 ```
 
-Changing top/right/bottom/left of pseudo element
-can change animation start point
-(e.g bottom: 0, right: 0, change width/height from 0 to 100%,
-size animation will start from bottom-right corner).
+- 设置的 `translateZ` 值越小, 则子元素大小越小 (因为元素远去, 我们眼睛看到的就会变小).
+- `translateZ` 值越大, 该元素也会越来越大.
+- 当 `translateZ` 值非常接近 201 像素, 但是不超过 201 像素的时候 (如 200 像素).
+  该元素的大小就会撑满整个屏幕 (父辈元素没有 `overflow: hidden` 的限制).
+- 当 `translateZ` 值再变大, 超过 201 像素的时候, 该元素看不见了.
 
-### Transition
+### Backface Visibility
 
-#### Basic Usage
+```css
+.element {
+  backface-visibility: hidden;
+}
+```
 
-- transition-property: color;
-- transition-duration: 1s;
-- transition-timing-function: cubic-bezier(.42, 0, .58, 1);
-- transition-delay: .5s;
+当元素 `rotateY(180deg)` 时, 元素将被隐藏.
+
+### Transform Container
+
+- `:hover` should not add to transformed elements,
+  `:hover` should add to parent element.
+- 3D 变换一般需要在容器元素上加上以下样式:
+
+```css
+.transform-container {
+  perspective: 1024px;
+  transform-style: preserve-3d;
+}
+
+.front .back {
+  backface-visibility: hidden;
+}
+```
+
+### Transform Alignment
+
+- Keep `translate(-50%, -50%)` in keyframe transform property list
+  when using it for alignment.
+- `absolute` 元素被剪裁或者 `fixed` 固定定位失效时,
+  可能是 `transform` 作用下造成的.
+- 当变换绝对定位居中的元素时, 需要改变 `transform-origin`:
+
+```css
+.rotate {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: left;
+}
+```
+
+## CSS Transition
+
+### Basic Transition
+
+- `transition-property`: `color`.
+- `transition-duration`: `1s`.
+- `transition-timing-function`: `cubic-bezier(.42, 0, .58, 1)`.
+- `transition-delay`: `0.5s`.
 
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
@@ -4527,36 +4584,7 @@ size animation will start from bottom-right corner).
 }
 ```
 
-#### Transition Internal
-
-`transition` take effect only when
-browser detecting different styles between `style` stage.
-
-```ts
-// transition not working
-panel.style.transform = 'scale(0)';
-panel.style.transition = 'transform .5s';
-// previous `transform` is empty
-panel.style.transform = 'scale(1)';
-
-// transition working
-panel.style.transform = 'scale(0)';
-panel.style.transition = 'transform .5s';
-// previous `transform` is `scale(0)`
-requestAnimationFrame(() => {
-  panel.style.transform = 'scale(1)';
-});
-
-// transition working
-panel.style.transform = 'scale(0)';
-// `getComputedStyle(element).property` trigger a new `style` stage
-const computedTransform = getComputedStyle(panel).transform;
-panel.style.transition = 'transform .5s';
-// previous `transform` is `scale(0)`
-panel.style.transform = 'scale(1)';
-```
-
-#### Transition Direction
+### Transition Direction
 
 By specifying the transition on the element itself,
 define the transition to occur in both directions
@@ -4567,9 +4595,7 @@ Change `transition` when `:hover` etc state bring magic effect:
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
   .menu-nav {
-    visibility: hidden;
     transition: none;
-    transform: translateX(-100%);
   }
 }
 
@@ -4581,7 +4607,6 @@ Change `transition` when `:hover` etc state bring magic effect:
 
 @media screen and (prefers-reduced-motion: reduce) {
   .menu-link {
-    opacity: 0;
     transition: none;
   }
 }
@@ -4613,7 +4638,7 @@ Change `transition` when `:hover` etc state bring magic effect:
 }
 ```
 
-#### Transition Class Controls
+### Transition Class Controls
 
 With `transition: opacity 0.5s` set,
 first add `.opacity-0` class,
@@ -4653,97 +4678,46 @@ setTimeout(() => {
 }, 20);
 ```
 
-### Transform
+### Transition Internals
 
-Transformations do affect the visual rendering,
-but have no affect on the CSS layout other than affecting `overflow`.
-Transforms are also taken into account
-when computing client rectangles exposed
-via the `Element Interface Extensions`,
-namely `getClientRects()` and `getBoundingClientRect()`
-which are specified in [CSSOM-VIEW]:
+`transition` take effect only when
+browser detecting different styles between `style` stage.
 
-- scale/X/Y/Z/3d(): 0 - n
-- translate/X/Y/Z/3d(): n px
-- rotate/X/Y/Z/3d(): deg
-- skew/X/Y(): deg
-- matrix()/matrix3d()
-- `transform-origin`:
-  change transform start point, `top bottom center left right`.
-- `perspective()`: 为 **3D** 转换元素定义透视视图.
-- Keep `translate(-50%, -50%)` in keyframe transform property list
-  when using it for alignment.
-- absolute 元素被剪裁或者 fixed 固定定位失效时,
-  可能是 `transform` 作用下造成的.
+```ts
+// transition not working
+panel.style.transform = 'scale(0)';
+panel.style.transition = 'transform .5s';
+// previous `transform` is empty
+panel.style.transform = 'scale(1)';
 
-#### Transform Container
+// transition working
+panel.style.transform = 'scale(0)';
+panel.style.transition = 'transform .5s';
+// previous `transform` is `scale(0)`
+requestAnimationFrame(() => {
+  panel.style.transform = 'scale(1)';
+});
 
-- `:hover` should not add to transformed elements,
-  `:hover` should add to parent element.
-- 一般需要在容器元素上加上以下样式:
-
-```css
-.transform-container {
-  perspective: 1024px;
-  transform-style: preserve-3d;
-}
-
-.front .back {
-  backface-visibility: hidden;
-}
+// transition working
+panel.style.transform = 'scale(0)';
+// `getComputedStyle(element).property` trigger a new `style` stage
+const computedTransform = getComputedStyle(panel).transform;
+panel.style.transition = 'transform .5s';
+// previous `transform` is `scale(0)`
+panel.style.transform = 'scale(1)';
 ```
 
-#### Transform Origin
-
-当旋转绝对定位居中的元素时, 需要改变 `transform-origin`:
-
-```css
-.rotate {
-  position: absolute;
-  top: 200px;
-  left: 50%;
-  transform: translateX(-50%);
-  transform-origin: left;
-}
-```
-
-#### Transform Perspective
-
-`translateZ` 的功能就是让元素在自己的眼前或近或远:
-
-```css
-.parent {
-  perspective: 201px;
-}
-```
-
-其子元素:
-
-- 设置的 translateZ 值越小, 则子元素大小越小 (因为元素远去, 我们眼睛看到的就会变小).
-- translateZ 值越大, 该元素也会越来越大.
-- 当 translateZ 值非常接近 201 像素, 但是不超过 201 像素的时候 (如 200 像素).
-  该元素的大小就会撑满整个屏幕 (父辈元素没有 overflow:hidden 的限制).
-- 当 translateZ 值再变大, 超过 201 像素的时候, 该元素看不见了.
-
-#### Transform Style
-
-transform-style 属性也是 3D 效果中经常使用的,
-其两个参数, `flat|preserve-3d`.
-前者 flat 为默认值, 表示平面的,
-后者 preserve-3d 表示 3D 透视.
-
-#### Backface Visibility
-
-```css
-backface-visibility: hidden;
-```
-
-当元素 `rotateY(180deg)` 时, 元素将被隐藏
+## CSS Animation
 
 ### Animation Property
 
-- `transform`: scale, translate, rotate, skew.
-- `animation` bounce/cache: first -100, then, +5/+20, finally 0.
+- `animation-iteration-count`: 执行次数 e.g `infinite`.
+- `animation-direction`: 执行方向:
+  - `normal`: `0%->100%` 方向.
+  - `alternate`/`alternate-reverse`: 不断交替方向.
+  - `reverse`: `100%->0%` 方向.
+- `animation-fill-mode`: `forwards`.
+- `animation-play-state`: `paused`/`running`.
 
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
@@ -4811,19 +4785,7 @@ backface-visibility: hidden;
 }
 ```
 
-- animation-iteration-count: 执行次数 infinite
-- animation-direction: 执行方向
-  - normal 0%->100%方向
-  - alternate/alternate-reverse 不断交替方向
-  - reverse 100%->0%方向
-- animation-fill-mode: forwards
-- animation-play-state: `paused`/`running`
-- DOM events:
-  - animationiteration: triggered after each animation iteration
-  - animationend: triggered after an animation completes
-  - animationstart: triggered at the start of an animation
-
-#### Animation Play State
+### Animation Play State
 
 ```css
 div {
@@ -4863,12 +4825,12 @@ element.classList.add('animate');
 setTimeout(() => element.classList.remove('animate'), duration);
 ```
 
-### FLIP Pattern
+### Animation FLIP Pattern
 
-- first: 初始状态.
-- last: 动画结束状态.
-- invert: last 至 first 的 `transform` 属性.
-- play: `transition: transform .2s linear`.
+- First: 初始状态.
+- Last: 动画结束状态.
+- Invert: last 至 first 的 `transform` 属性.
+- Play: `transition: transform .2s linear`.
 
 ```css
 /* first: scale(1), last: scale(1.2) */
@@ -4889,6 +4851,54 @@ setTimeout(() => element.classList.remove('animate'), duration);
   transform: none;
 }
 ```
+
+### Animation Bounce Cache Pattern
+
+- First `-100`.
+- Then `+5`/`+20`.
+- Finally `0`.
+- 切换动画时, 需要先把之前的动画清除: 防止出现闪烁 Bug.
+
+### Animation Helper
+
+- `opacity`.
+- `overflow: hidden`.
+- `transform`: `scale`/`translate`.
+- `transition`.
+- `animation-delay`.
+- `width`/`height`
+- `max-width`/`max-height`.
+- `margin`.
+- `border-*`.
+- `background`.
+- `background-position`.
+- `background` with multiple `gradient`.
+- Single `box-shadow`
+- Multiple `box-shadow`.
+- `*-clip-*`.
+- Pseudo element (`::before`/`::after`).
+- Pseudo class (`:hover`/`:focus`/`:target`)
+
+```css
+.animation-container {
+  z-index: -1;
+  overflow: hidden;
+}
+```
+
+Changing `top`/`right`/`bottom`/`left` of pseudo element
+can change animation start point:
+
+e.g `bottom: 0, right: 0` change `width`/`height` from `0` to `100%`,
+size animation will start from `bottom-right` corner.
+
+### Animation API
+
+DOM events:
+
+- `animationiteration`: triggered after each animation iteration.
+- `animationend`: triggered after an animation completes.
+- `animationstart`: triggered at the start of an animation.
 
 ### GreenSock Library
 
@@ -4919,6 +4929,10 @@ tl.staggerFrom(
   }
 );
 ```
+
+### Animation Reference
+
+- Animation 101 [tutorial](https://github.com/cssanimation/css-animation-101)
 
 ## Responsive Design
 
@@ -5014,7 +5028,7 @@ use `inline-box` with `width`
 
 ## Media Query
 
-- `only` for improving compatibility with older browsers.
+- Only for improving compatibility with older browsers.
 - Definition order matters when media query with a different selector.
 - JavaScript API: `window.matchMedia()`.
 
@@ -5244,7 +5258,7 @@ const resolvedMediaQuery = window.matchMedia(query).media;
 const isSupported = query === resolvedMediaQuery;
 ```
 
-### Media Query JavaScript API
+### Media Query API
 
 [Media query](https://developer.mozilla.org/docs/Web/API/Window/matchMedia):
 
@@ -5352,27 +5366,15 @@ const result = CSS.supports(`
 }
 ```
 
+### Keyboard Styles
+
+添加键盘访问样式:
+
+- `outline`.
+- `:focus-visible`.
+- `:focus`.
+
 ## CSS Performance
-
-### CSS Selectors Performance
-
-减少选择器的复杂性, 与构造样式本身的其他工作相比,
-选择器复杂性可以占用计算元素样式所需时间的 50%以上:
-
-- 避免使用统配选择器:
-  `*`.
-- 避免使用后代选择器 (开销较高):
-  `.anchor .link` -> `.anchor-link`.
-- 避免使用标签子代选择器:
-  `.list > li` -> `.list > .item` (better) -> `.list-item` (best).
-
-### CSS Triggers Performance
-
-- [CSS Triggers](https://github.com/GoogleChromeLabs/css-triggers)
-- [JS DOM API Triggers](https://gist.github.com/paulirish/5d52fb081b3570c81e3a)
-
-Avoid to frequently change css property
-or call JS DOM API triggering layout stage (reflow).
 
 ### Will Change
 
@@ -5394,9 +5396,9 @@ or call JS DOM API triggering layout stage (reflow).
 
 ### Contain
 
-[CSS Containment](https://developers.google.com/web/updates/2016/06/css-containment)
+[CSS containment](https://developers.google.com/web/updates/2016/06/css-containment):
 
-contain 属性允许开发者声明当前元素和它的内容尽可能的独立于 DOM 树的其他部分.
+`contain` 属性允许开发者声明当前元素和它的内容尽可能的独立于 DOM 树的其他部分.
 这使得浏览器在重新计算布局/样式/绘图或它们的组合的时候, 只会影响到有限的 DOM 区域, 而不是整个页面.
 
 ```css
@@ -5428,6 +5430,31 @@ contain: paint;
 - paint:
   声明这个元素的子孙节点不会在它边缘外显示.
   如果一个元素在视窗外或因其他原因导致不可见, 则同样保证它的子孙节点不会被显示.
+
+### CSS Selectors Performance
+
+减少选择器的复杂性, 与构造样式本身的其他工作相比,
+选择器复杂性可以占用计算元素样式所需时间的 50%以上:
+
+- 避免使用统配选择器:
+  `*`.
+- 避免使用后代选择器 (开销较高):
+  `.anchor .link` -> `.anchor-link`.
+- 避免使用标签子代选择器:
+  `.list > li` -> `.list > .item` (better) -> `.list-item` (best).
+
+### CSS Triggers Performance
+
+- CSS triggers [list](https://github.com/GoogleChromeLabs/css-triggers).
+- [JS DOM API Triggers](https://gist.github.com/paulirish/5d52fb081b3570c81e3a).
+
+Avoid to frequently change css property
+or call JS DOM API triggering layout stage (reflow):
+
+- `width`/`height`/`margin`/`left`/`top` in `Layout` stage.
+- `box-shadow`/`border-radius`/`background`/`outline`/`color` in `Paint` stage.
+- `cursor`/`z-index`/`transform`/`opacity` in `Composite Layers` stage.
+- `top`/`left` has very large time to `paint` each frame.
 
 ### CSS Loading Performance
 
@@ -5513,15 +5540,6 @@ window.requestAnimationFrame(step);
 - FPS meter in `rendering` panel.
 - Paint flashing in `rendering` panel.
 - `layers` panel.
-
-#### Animation Internals
-
-[CSS Triggers List](https://github.com/GoogleChromeLabs/css-triggers):
-
-- `width`/`height`/`margin`/`left`/`top` in `Layout` stage.
-- `box-shadow`/`border-radius`/`background`/`outline`/`color` in `Paint` stage.
-- `cursor`/`z-index`/`transform`/`opacity` in `Composite Layers` stage.
-- `top`/`left` has very large time to `paint` each frame.
 
 ### CSS Imports Performance
 
@@ -7554,9 +7572,6 @@ const polygon = (n = 3) => {
 ```
 
 ### Animation Effects
-
-切换动画时, 需要先把之前的动画清除
-(防止出现闪烁 Bug )
 
 #### Animated Dots
 
