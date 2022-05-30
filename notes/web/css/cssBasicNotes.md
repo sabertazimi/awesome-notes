@@ -3546,6 +3546,11 @@ table {
 .button:focus:not(:focus-visible) {
   outline: none;
 }
+
+.image:active {
+  outline: 50px solid rgb(0 0 0 / 10%);
+  outline-offset: -50px;
+}
 ```
 
 ## CSS Shadow
