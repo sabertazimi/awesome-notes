@@ -1102,7 +1102,6 @@ Separate focus styles:
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
   .msg {
-    opacity: 0;
     transition: none;
   }
 }
@@ -4623,9 +4622,6 @@ Change `transition` when `:hover` etc state bring magic effect:
 
 @media screen and (prefers-reduced-motion: reduce) {
   .menu-toggle:checked ~ .menu-nav .menu-link {
-    opacity: 1;
-
-    /* magic effect for delaying transition */
     transition: none;
   }
 }
@@ -4756,16 +4752,15 @@ panel.style.transform = 'scale(1)';
   }
 }
 
-/* 直接动画 */
 @media screen and (prefers-reduced-motion: reduce) {
-  .div {
+  .div,
+  .div:hover,
+  .div:focus {
     animation: none;
-    animation-duration: 1s;
-    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
-    animation-delay: 0.5s;
   }
 }
 
+/* 直接动画 */
 .div {
   animation-name: name;
   animation-duration: 1s;
@@ -4774,14 +4769,12 @@ panel.style.transform = 'scale(1)';
 }
 
 /* hover 后再播放动画, 高级化 transform + transition */
-@media screen and (prefers-reduced-motion: no-preference) {
-  .div:hover,
-  .div:focus {
-    animation-name: name;
-    animation-duration: 1s;
-    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
-    animation-delay: 0.5s;
-  }
+.div:hover,
+.div:focus {
+  animation-name: name;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+  animation-delay: 0.5s;
 }
 ```
 
@@ -4804,8 +4797,6 @@ animation pattern: 利用 `animation-paly-state`
 @media screen and (prefers-reduced-motion: reduce) {
   .to-animate {
     animation: none;
-    animation-play-state: paused;
-    animation-iteration-count: infinite;
   }
 }
 
@@ -4833,14 +4824,13 @@ setTimeout(() => element.classList.remove('animate'), duration);
 - Play: `transition: transform .2s linear`.
 
 ```css
-/* first: scale(1), last: scale(1.2) */
 @media screen and (prefers-reduced-motion: reduce) {
   .scale-up {
     transition: none;
-    transform: scale(0.8);
   }
 }
 
+/* first: scale(1), last: scale(1.2) */
 .scale-up {
   transition: transform 0.2s linear;
   transform: scale(0.8);
@@ -5081,6 +5071,8 @@ use `inline-box` with `width`
 
 ### Pointer Device Query
 
+`pointer`/`any-pointer`:
+
 - `none`: no pointer device (e.g phones).
 - `coarse`: limited accuracy pointer device (e.g smart TV, video game consoles).
 - `fine`: accurate pointer device (e.g mouse, touch pads, stylus).
@@ -5166,14 +5158,17 @@ input[type='checkbox']:checked {
 
 ### Contrast Query
 
-- `prefers-contrast: less`.
-- `prefers-contrast: more`.
+`prefers-contrast`:
+
+- `less`.
+- `more`.
 
 ### Color Scheme Query
 
-- `color-scheme: light dark`.
-- `prefers-color-scheme: light`.
-- `prefers-color-scheme: dark`.
+`prefers-color-scheme`:
+
+- `light`.
+- `dark`.
 
 ```css
 .day {
@@ -5213,7 +5208,10 @@ input[type='checkbox']:checked {
 
 ### Reduced Motion Query
 
-- `prefers-reduced-motion`: `no-preference`, `reduce`.
+`prefers-reduced-motion`:
+
+- `no-preference`.
+- `reduce`.
 
 ```css
 @media (prefers-reduced-motion) {
@@ -5260,7 +5258,7 @@ const isSupported = query === resolvedMediaQuery;
 
 ### Media Query API
 
-[Media query](https://developer.mozilla.org/docs/Web/API/Window/matchMedia):
+Media query [`matchMedia`](https://developer.mozilla.org/docs/Web/API/Window/matchMedia):
 
 ```ts
 // https://developer.mozilla.org/docs/Web/API/MediaQueryList
@@ -7013,11 +7011,6 @@ a.btn-custom {
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
   a {
-    text-decoration: none;
-    background-image: linear-gradient(currentcolor, currentcolor);
-    background-repeat: no-repeat;
-    background-position: 0% 100%;
-    background-size: 0% 2px;
     transition: none;
   }
 }
@@ -7040,12 +7033,6 @@ a:focus {
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
   a {
-    display: inline-block;
-    padding: 5px;
-    color: #333;
-    text-decoration: none;
-    background-image: linear-gradient(to top, #333 50%, #fff 50%);
-    background-size: 100% 200%;
     transition: none;
   }
 }
@@ -7141,10 +7128,7 @@ body {
 /* Rotate Fade-In Animation */
 @media screen and (prefers-reduced-motion: reduce) {
   .slide {
-    z-index: 0;
     transition: none;
-    transform: rotate(90deg);
-    transform-origin: 0 0;
   }
 }
 
@@ -7679,9 +7663,6 @@ function leave(el, done) {
 @media screen and (prefers-reduced-motion: reduce) {
   body {
     animation: none;
-    animation-duration: 2.5s;
-    animation-timing-function: ease;
-    animation-iteration-count: 1;
   }
 }
 
@@ -7698,8 +7679,6 @@ body {
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
   .menu {
-    max-height: 0;
-    overflow: hidden;
     transition: none;
   }
 }
@@ -7801,7 +7780,6 @@ body {
 @media screen and (prefers-reduced-motion: reduce) {
   .div {
     transition: none;
-    transform: scaleX(0);
   }
 }
 
