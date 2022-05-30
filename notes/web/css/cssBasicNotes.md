@@ -5580,7 +5580,12 @@ or call JS DOM API triggering layout stage (reflow):
 
 ### Animation Performance
 
-- [High Performance Animations](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations).
+[High performance animations](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations):
+
+- CSS 高性能动画三要素:
+  - `absolute` position: 脱离文档流, 不会导致其他元素重排或重绘.
+  - `opacity`: high performance trigger.
+  - `transform`: high performance trigger.
 - All animation: `keyframe` animation or `transitions` is best.
 - JS-based animation: `requestAnimationFrame` is better than `setTimeout`/`setInterval`.
 - Position animation:`transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`.
