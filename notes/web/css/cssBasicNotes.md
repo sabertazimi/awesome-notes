@@ -534,14 +534,15 @@ Change `--percent` via `JavaScript` API:
 
 ### Invalid and Empty CSS Variables
 
-- `--invalid-value: initial;` is invalid value
+- `--invalid-value: initial;` is `invalid` value
   leading to `var(--invalid-value)` called failed,
   `var(--invalid-value, backup-value)` get backup-value.
-- `--empty-value: ;` is valid empty value
+- `--empty-value: ;` is valid `empty` value
   leading to `var(--empty-value)` called succeeded,
   `var(--empty-value, backup-value)` get **parent value**.
-- Use Invalid and Empty Value to
-  implement `if (true)` in CSS.
+- Use `invalid` and `empty` value to
+  implement `if (true)` statement,
+  you can see real world case on `tailwind.css`.
 
 ```css
 :root {
@@ -628,6 +629,50 @@ html {
   --md-and-up-bg: var(--media-gte-md) green;
 
   background: var(--sm-and-down-bg, var(--md-and-up-bg));
+}
+```
+
+### Limit Variables
+
+For some CSS values and units have limits (e.g `<color>`),
+use variables to implement `if else` statement.
+
+```css
+:root {
+  --red: 44;
+  --green: 135;
+  --blue: 255;
+
+  /**
+   * 亮度算法：
+   * lightness = (red * 0.2126 + green * 0.7152 + blue * 0.0722) / 255
+   */
+  --lightness: calc(
+    (var(--red) * 0.2126 + var(--green) * 0.7152 + var(--blue) * 0.0722) / 255
+  );
+}
+
+.button {
+  /* 文字颜色，只可能是黑色或白色 */
+  color: hsl(0% 0% calc((var(--lightness) - 0.5) * -999999%));
+
+  /* 文字阴影，黑色文字才会出现 */
+  text-shadow: 1px 1px rgb(calc(var(--red) + 50) calc(var(--green) + 50) calc(
+          var(--blue) + 50
+        ) / calc((var(--lightness) - 0.5) * 9999));
+
+  /* 背景颜色 */
+  background: rgb(var(--red) var(--green) var(--blue));
+
+  /* 固定样式 */
+  border: 0.2em solid;
+
+  /* 边框样式，亮度大于 0.8 才出现 */
+  border-color: rgb(
+    calc(var(--red) - 50) calc(var(--green) - 50) calc(var(--blue) - 50) / calc((
+            var(--lightness) - 0.8
+          ) * 100)
+  );
 }
 ```
 
