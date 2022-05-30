@@ -7049,6 +7049,23 @@ a:focus {
 }
 ```
 
+#### 3D Shadow Button
+
+```css
+.shadow-3d-button {
+  width: 100px;
+  height: 36px;
+  background-color: #f0f3f9;
+  border: 1px solid #a0b3d6;
+  box-shadow: 1px 1px #afc4ea, 2px 2px #afc4ea, 3px 3px #afc4ea;
+}
+
+.shadow-3d-button:active {
+  box-shadow: 1px 1px #afc4ea, 2px 2px #afc4ea;
+  transform: translate(1px, 1px);
+}
+```
+
 ### Slides
 
 **锚点定位**本质上改变了 `scrollTop` 或 `scrollLeft` 值,
