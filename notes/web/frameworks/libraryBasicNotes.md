@@ -1407,6 +1407,7 @@ tags: [Web, Framework, Library]
 
 ### DevOps Platform
 
+- [Lens: Kubernetes Platform](https://github.com/lensapp/lens)
 - [KubeSphere](https://github.com/kubesphere/kubesphere)
 - [Cat: MeiTuan Application Performance Monitoring System](https://github.com/dianping/cat)
 - [SkyWalking: Apache Application Performance Monitoring System](https://github.com/apache/skywalking)
