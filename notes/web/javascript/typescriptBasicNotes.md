@@ -2791,7 +2791,7 @@ logger(user); // Oops! `user.isSuperAdmin` is undefined.
 #### Type Gymnastics Reference
 
 - `PathOf<Form>` complex recursive [types](https://mp.weixin.qq.com/s/KJdUdwbLN4g4M7xy34m-fA).
-- TypeSafe React router advanced [types](https://speakerdeck.com/zoontek/advanced-typescript-how-we-made-our-router-typesafe).
+- Type-safe React router advanced [types](https://speakerdeck.com/zoontek/advanced-typescript-how-we-made-our-router-typesafe).
 - Type [challenges](https://github.com/type-challenges/type-challenges).
 - Type [gymnastics](https://github.com/g-plane/type-gymnastics).
 - Type [trident](https://github.com/anuraghazra/type-trident).
