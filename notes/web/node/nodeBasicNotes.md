@@ -1663,6 +1663,10 @@ const q = queue();
 q.enqueue(crawlTask, url);
 ```
 
+## Deno
+
+- Node.js library to Deno [guide](https://www.edgedb.com/blog/how-we-converted-our-node-js-library-to-deno-using-deno).
+
 ## Node Reference
 
 - [Node.js Dev](https://nodejs.dev/learn)
