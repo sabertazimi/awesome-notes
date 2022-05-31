@@ -1913,8 +1913,6 @@ type DeepRequired<T> = {
 };
 ```
 
-- [`PathOf<Form>` complex recursive types](https://mp.weixin.qq.com/s/KJdUdwbLN4g4M7xy34m-fA).
-
 ### Nominal Brand Types
 
 [Nominal type system](https://github.com/microsoft/TypeScript/issues/202):
@@ -2761,6 +2759,8 @@ logger(user); // Oops! `user.isSuperAdmin` is undefined.
 
 ### Type Gymnastics
 
+#### Type Gymnastics Programming
+
 [Type programming](https://exploringjs.com/tackling-ts/ch_computing-with-types-overview.html):
 
 | Level         | Environment  | Operands       | Operations    |
@@ -2778,6 +2778,20 @@ logger(user); // Oops! `user.isSuperAdmin` is undefined.
 | `T1 \| T2`                | `T1 ∪ T2` (Union)        |
 | `T1 & T2`                 | `T1 ∩ T2` (Intersection) |
 | `unknown`                 | Universal set            |
+
+#### Type Gymnastics Tools
+
+- Template literal types.
+- Nested conditional types
+- Distributive conditional types.
+- `infer` inference types.
+- `...` rest types: `Items extends [infer Head, ...infer Tail]`.
+- Recursive types.
+
+#### Type Gymnastics Reference
+
+- `PathOf<Form>` complex recursive [types](https://mp.weixin.qq.com/s/KJdUdwbLN4g4M7xy34m-fA).
+- TypeSafe React router advanced [types](https://speakerdeck.com/zoontek/advanced-typescript-how-we-made-our-router-typesafe).
 
 ## TypeScript Internals
 
