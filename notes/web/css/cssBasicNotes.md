@@ -4993,6 +4993,8 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 }
 ```
 
+![Step Timing Function](./figures/StepTimingFunction.png)
+
 ### Transition Direction
 
 By specifying the transition on the element itself,
