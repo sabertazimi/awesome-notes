@@ -4027,23 +4027,113 @@ Movie style:
 
 ## CSS Gradient
 
+### Color Stop List
+
+`<color-stop-list>`,
+`[ <linear-color-stop> [, <linear-color-hint>]? ]# , <linear-color-stop>`:
+
+- `<linear-color-stop> = <color> <length-percentage>{1,2}?`.
+- `<linear-color-hint> = <length-percentage>`: 改变颜色的转换点位置.
+- `<length-percentage> = <length> | <percentage>`.
+
+`<angular-color-stop-list>`,
+`[ <angular-color-stop> [, <angular-color-hint>]? ]# , <angular-color-stop>`:
+
+- `<angular-color-stop> = <color> && <angle-percentage>{1,2}?`.
+- `<angular-color-hint> = <angle-percentage>`: 改变颜色的转换点位置.
+- `<angle-percentage> = <angle> | <percentage>`.
+
 ### Linear Gradient
 
 [Linear gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/linear-gradient):
 
 - `[ <angle> | to <side-or-corner> ]? , <color-stop-list>`.
+- Default angle: `to bottom`.
+- `0deg` angle: `to top`.
+- `90deg` angle: `to right`.
+- `-90deg` angle: `to left`.
+
+```css
+.linear-gradient {
+  width: 300px;
+  height: 150px;
+  background-image: linear-gradient(
+    45deg,
+    white 100px,
+    skyblue 100px 200px,
+    white 200px
+  );
+  border: solid deepskyblue;
+}
+```
+
+[![Linear Gradient](./figures/LinearGradient.png)](https://developer.mozilla.org/docs/Web/CSS/gradient/linear-gradient#composition_of_a_linear_gradient)
 
 ### Radial Gradient
 
 [Radial gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/radial-gradient):
 
 - `[ <ending-shape> || <size> ]? [ at <position> ]? , <color-stop-list>`.
+- `<ending-shape>`:
+  - `ellipse` (initial value).
+  - `circle`.
+- `<size>`.
+  - `closest-side`.
+  - `farthest-side`.
+  - `closest-corner`.
+  - `farthest-corner`.
+  - `<length>`: 单独一个值不能为 `<percentage>`.
+  - `<length-percentage>{2}`.
+
+[![Radial Gradient Size](./figures/RadialGradientSize.png)](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/radial-gradient#size)
+
+```css
+.radial-gradient {
+  background-image: radial-gradient(50px, white, deepskyblue);
+  background-image: radial-gradient(50px 50%, white, deepskyblue);
+  background-image: radial-gradient(50% 50%, white, deepskyblue);
+  background-image: radial-gradient(100px at 0 0, white, deepskyblue);
+  background-image: radial-gradient(100px at left top, white, deepskyblue);
+  background-image: radial-gradient(
+    100px at right 100px bottom 100px,
+    white,
+    deepskyblue
+  );
+  background-image: radial-gradient(
+    farthest-corner circle at right 100px bottom 100px,
+    white,
+    deepskyblue
+  );
+}
+```
+
+[![Radial Gradient](./figures/RadialGradient.png)](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/radial-gradient#composition_of_a_radial_gradient)
 
 ### Conic Gradient
 
 [Conic gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/conic-gradient):
 
 - `[ from <angle> ]? [ at <position> ]?, <angular-color-stop-list>`.
+- Default angle: `0deg`.
+
+```css
+.pie {
+  width: 150px;
+  height: 150px;
+  background: conic-gradient(yellowgreen 40%, gold 0deg 75%, deepskyblue 0deg);
+  border-radius: 50%;
+}
+
+.color-picker-wheel {
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(closest-side circle, gray, transparent),
+    conic-gradient(red, magenta, blue, aqua, lime, yellow, red);
+  border-radius: 50%;
+}
+```
+
+[![Conic Gradient](./figures/ConicGradient.png)](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/conic-gradient#composition_of_a_conic_gradient)
 
 ## CSS Mask
 
@@ -4345,7 +4435,9 @@ Avatar with circle status indicator:
 making it possible to wrap text around complex objects rather than simple boxes:
 
 ```css
-shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+.box {
+  shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
 ```
 
 ### Clip
@@ -7301,6 +7393,8 @@ a.btn-custom {
 
 #### Gradient Button
 
+Liner gradient button:
+
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
   a {
@@ -7344,6 +7438,33 @@ a:hover,
 a:focus {
   color: #fff;
   background-position: 0 100%;
+}
+```
+
+Radial gradient button:
+
+```css
+.ripple-button {
+  color: #fff;
+  background-color: #2a80eb;
+}
+
+.ripple-button:active {
+  background-image: radial-gradient(
+    160% 100% at 50% 0%,
+    hsl(0deg 0% 100% / 30%) 50%,
+    hsl(0deg 0% 100% / 0%) 52%
+  );
+}
+
+.colorful-button {
+  color: #fff;
+  background-color: #2a80eb;
+  background-image: radial-gradient(
+      farthest-side at bottom left,
+      rgb(255 0 255/ 50%),
+      transparent
+    ), radial-gradient(farthest-corner at bottom right, rgb(255 255 50/ 50%), transparent);
 }
 ```
 
@@ -7635,6 +7756,29 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 ```
 
 ![Background Shape](./figures/BackgroundShape.png)
+
+```css
+.loading-ring {
+  --mask: radial-gradient(closest-side, transparent 75%, black 76%);
+
+  width: 100px;
+  height: 100px;
+  background: conic-gradient(deepskyblue, 30%, white);
+  mask-image: var(--mask);
+  border-radius: 50%;
+  animation: spin 1s linear infinite reverse;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+```
 
 #### Stretch Line
 
