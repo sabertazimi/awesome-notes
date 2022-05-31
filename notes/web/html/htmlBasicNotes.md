@@ -363,31 +363,33 @@ const textbox = $('#label_id').control;
 textbox.value = '666666'; //  等同于 input.value = '666666';
 ```
 
-### Form input
+### Form Input
 
-#### Form Input Type
+#### Text Input
 
-##### Form Input Text
+```html
+<input type="text" spellcheck="true" lang="en" />
+```
 
-##### Form Input Radio
+#### Radio Input
 
-name 相同时, 多个 radio 组成一个 radio group
+name 相同时, 多个 radio 组成一个 radio group.
 
-##### Checkbox
+#### Checkbox Input
 
-##### Search
+#### Search Input
 
-搜索条
+搜索条.
 
-##### Form Tel
+#### Tel Input
 
-电话号码 - 无输入检查
+电话号码 - 无输入检查.
 
-##### Form Url
+#### Url Input
 
-##### Form Email
+#### Email Input
 
-##### Form DateTime
+#### DateTime Input
 
 date/month/week/time/datetime-local:
 
@@ -400,22 +402,38 @@ stepDown();
 input.valueAsNumber input.valueAsDate
 ```
 
-##### Form Datalist
+#### List Input
+
+`autocomplete`, 为输入框指定智能提示数据:
 
 ```html
-<label for="myBrowser">Choose a browser from this list:</label>
-<input list="browsers" id="myBrowser" name="myBrowser" />
-<datalist id="browsers">
-  <option value="Chrome"></option>
-  <option value="Firefox"></option>
-  <option value="Internet Explorer"></option>
-  <option value="Opera"></option>
-  <option value="Safari"></option>
-  <option value="Microsoft Edge"></option>
-</datalist>
+<input list="datalist_id" autocomplete="on" />
 ```
 
-#### indeterminate
+#### File Input
+
+File type:
+
+```html
+<input type="file" accept=".jpeg,.png" />
+```
+
+Multiple files:
+
+```html
+<input type="file" multiple />
+```
+
+Capture device camera:
+
+```html
+<!-- Front camera -->
+<input type="file" capture="user" accept="image/*" />
+<!-- Back camera -->
+<input type="file" capture="environment" accept="image/*" />
+```
+
+#### Indeterminate
 
 javascript tips：检查 type=checkbox 的状态
 
@@ -431,15 +449,7 @@ if (checkbox.indeterminate) {
 }
 ```
 
-#### `list` && `autocomplete`
-
-为输入框指定智能提示数据
-
-```html
-<input list="datalist_id" autocomplete="on" />
-```
-
-#### pattern
+#### Pattern
 
 通过正则表达式指定输入格式
 
@@ -447,30 +457,30 @@ if (checkbox.indeterminate) {
 <input pattern="[0-9][A-Z]{3}" />
 ```
 
-#### validity
+#### Validity
 
 返回 ValidityState 对象，拥有 ValidityState.valid 属性
 
-### output
+### Output
 
-input 元素的镜像元素
+input 元素的镜像元素.
 
-### textarea
+### Textarea
 
-#### maxlength
+#### Maxlength
 
-#### cols
+#### Cols
 
 每行可显示字符最大数
 
-#### wrap
+#### Wrap
 
 - hard:换行时加入换行标志，**此时必须指定**`cols`属性
 - soft:不加入换行标志
 
-### menu
+### Menu
 
-### dialog
+### Dialog
 
 ```html
 <button class="btn" data-toggle="#dialog">Open modal</button>
@@ -522,15 +532,26 @@ closers?.forEach(closer => {
 });
 ```
 
-### datalist
+### Datalist
 
 ```html
-style="display: none";
-
 <datalist id="register-prompt" style="display:none;">
   <option value="Windows">Windows</option>
   <option value="Mac OS">Mac OS</option>
   <option value="Linux">Linux</option>
+</datalist>
+```
+
+```html
+<label for="myBrowser">Choose a browser from this list:</label>
+<input list="browsers" id="myBrowser" name="myBrowser" />
+<datalist id="browsers">
+  <option value="Chrome"></option>
+  <option value="Firefox"></option>
+  <option value="Internet Explorer"></option>
+  <option value="Opera"></option>
+  <option value="Safari"></option>
+  <option value="Microsoft Edge"></option>
 </datalist>
 ```
 
