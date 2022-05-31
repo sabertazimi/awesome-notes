@@ -8237,6 +8237,44 @@ body {
 }
 ```
 
+#### Breath Animation
+
+```css
+.breath {
+  animation: breath 7s infinite;
+}
+
+@keyframes breath {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 1;
+  }
+}
+```
+
+#### Clock Animation
+
+```css
+.clock-pendulum {
+  transform-origin: top;
+  animation: pendulum 1s infinite alternate ease-in-out;
+}
+
+@keyframes pendulum {
+  0% {
+    transform: rotate(-10deg);
+  }
+
+  100% {
+    transform: rotate(10deg);
+  }
+}
+```
+
 ### CSS Components Reference
 
 - CSS [inspiration](https://github.com/chokcoco/CSS-Inspiration).
