@@ -4956,7 +4956,7 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 
 ### Transition Timing Function
 
-`<easing-function> = linear | <cubic-bezier-timing-function> | <step-timing-function>`:
+[`<easing-function>`](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function):
 
 - `liner`.
 - `<cubic-bezier-timing-function>`:
@@ -5103,15 +5103,22 @@ panel.style.transform = 'scale(1)';
 
 - `animation-name`.
 - `animation-duration`.
-- `animation-delay`: 支持负值.
-- `animation-timing-function`.
-- `animation-iteration-count`: 执行次数 e.g `infinite`.
-- `animation-direction`: 执行方向:
+- `animation-delay`:
+  支持负值.
+- `animation-timing-function`:
+  [`<easing-function>`](#transition-timing-function).
+- `animation-iteration-count`:
+  - `infinite | <number>` 执行次数.
+  - 支持 `0` 与小数.
+  - 不支持负值.
+- `animation-direction`:
   - `normal`: `0%->100%` 方向.
   - `alternate`/`alternate-reverse`: 不断交替方向.
   - `reverse`: `100%->0%` 方向.
-- `animation-fill-mode`: `forwards`.
-- `animation-play-state`: `paused`/`running`.
+- `animation-fill-mode`:
+  `forwards`/`backwards`/`both`.
+- `animation-play-state`:
+  `paused`/`running`.
 
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
@@ -5125,7 +5132,34 @@ panel.style.transform = 'scale(1)';
 }
 ```
 
+### Animation Fill Mode
+
+[`animation-fill-mode`](https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode):
+
+- `forwards`: 动画结束后, 应用动画最后一帧属性值.
+- `backwards`: 动画开始前, 应用动画第一帧属性值.
+- `both`: 同时应用上述两种效果.
+
+| `animation-direction`         | `animation-iteration-count` | last keyframe |
+| ----------------------------- | --------------------------- | ------------- |
+| `normal`                      | even or odd                 | 100%          |
+| `reverse`                     | even or odd                 | 0%            |
+| `alternate`                   | even                        | 0%            |
+| `alternate`                   | odd                         | 100%          |
+| `alternate-reverse`           | even                        | 100%          |
+| `alternate-reverse`           | odd                         | 0%            |
+| `normal`/`alternate`          | 0                           | 0%            |
+| `reverse`/`alternate-reverse` | 0                           | 100%          |
+
+| animation-direction           | first keyframe |
+| ----------------------------- | -------------- |
+| `normal`/`alternate`          | 0%             |
+| `reverse`/`alternate-reverse` | 100%           |
+
 ### Animation Play State
+
+利用 `animation-paly-state`
+与 JavaScript 添加 `.animate` 类控制动画开始和停止.
 
 ```css
 div {
@@ -5136,9 +5170,6 @@ div {
   animation-play-state: running;
 }
 ```
-
-animation pattern: 利用 `animation-paly-state`
-与 JS 添加 `.animate` 类控制动画开始和停止.
 
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
