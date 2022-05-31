@@ -2503,12 +2503,18 @@ will pull the floated element in that direction.
 
 ### Multiple Column Pattern
 
-Multiple-column layout:
+Multiple `column` layout:
 
-- `column-count`
-- `column-width`
+- `columns`: `<'column-width'> || <'column-count'>`.
+- `column-width`: `<length> | auto`.
+- `column-count`: `<integer> | auto`.
+- `column-rule`: 分隔线.
+- `column-rule-color`.
+- `column-rule-style`.
+- `column-rule-width`.
+- `column-span`.
+- `column-fill`.
 - `column-gap`: 分隔距离.
-- `column-rule` (style): 分隔线.
 
 ```css
 /* 子元素分列 */
@@ -4956,7 +4962,7 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 
 ### Transition Timing Function
 
-[`<easing-function>`](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function):
+[`<easing-function>`](https://developer.mozilla.org/docs/Web/CSS/easing-function):
 
 - `liner`.
 - `<cubic-bezier-timing-function>`:
