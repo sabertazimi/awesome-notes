@@ -4937,9 +4937,9 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 ### Transition Property
 
 - `transition-property`: `all` (initial value).
-- `transition-duration`: `<time>`.
-- `transition-delay`: `<time>`.
-- `transition-timing-function`: `cubic-bezier(0.42, 0, 0.58, 1)`.
+- `transition-duration`.
+- `transition-delay`: 支持负值.
+- `transition-timing-function`: `<easing-function>`.
 
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
@@ -5099,6 +5099,12 @@ panel.style.transform = 'scale(1)';
 
 ### Animation Property
 
+[`animation` formal syntax](https://developer.mozilla.org/docs/Web/CSS/animation#formal_syntax):
+
+- `animation-name`.
+- `animation-duration`.
+- `animation-delay`: 支持负值.
+- `animation-timing-function`.
 - `animation-iteration-count`: 执行次数 e.g `infinite`.
 - `animation-direction`: 执行方向:
   - `normal`: `0%->100%` 方向.
@@ -5116,57 +5122,6 @@ panel.style.transform = 'scale(1)';
 
 .element {
   animation: name duration timing-function delay iteration-count direction;
-}
-```
-
-```css
-@keyframes name1 {
-  0% {
-    color: red;
-  }
-
-  50% {
-    color: blue;
-  }
-
-  100% {
-    color: green;
-  }
-}
-
-@keyframes name2 {
-  from {
-    color: red;
-  }
-
-  to {
-    color: green;
-  }
-}
-
-@media screen and (prefers-reduced-motion: reduce) {
-  .div,
-  .div:hover,
-  .div:focus {
-    animation: none;
-  }
-}
-
-/* 直接动画 */
-.div {
-  animation-name: name;
-  animation-duration: 1s;
-  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
-  animation-delay: 0.5s;
-}
-
-/* hover 后再播放动画, 高级化 transform + transition */
-.div:hover,
-.div:focus {
-  animation-name: name;
-  animation-duration: 1s;
-  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
-  animation-delay: 0.5s;
 }
 ```
 
@@ -5259,7 +5214,11 @@ setTimeout(() => element.classList.remove('animate'), duration);
 - Multiple `box-shadow`.
 - `*-clip-*`.
 - Pseudo element (`::before`/`::after`).
-- Pseudo class (`:hover`/`:focus`/`:target`)
+- Pseudo class (`:hover`/`:focus`/`:target`).
+- Changing `top`/`right`/`bottom`/`left` of pseudo element
+  can change animation start point:
+  e.g `bottom: 0, right: 0` change `width`/`height` from `0` to `100%`,
+  size animation will start from `bottom-right` corner.
 
 ```css
 .animation-container {
@@ -5268,11 +5227,24 @@ setTimeout(() => element.classList.remove('animate'), duration);
 }
 ```
 
-Changing `top`/`right`/`bottom`/`left` of pseudo element
-can change animation start point:
+```css
+/* 直接动画 */
+.div {
+  animation-name: name;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+  animation-delay: 0.5s;
+}
 
-e.g `bottom: 0, right: 0` change `width`/`height` from `0` to `100%`,
-size animation will start from `bottom-right` corner.
+/* hover 后再播放动画, 高级化 transform + transition */
+.div:hover,
+.div:focus {
+  animation-name: name;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+  animation-delay: 0.5s;
+}
+```
 
 ### Animation API
 
