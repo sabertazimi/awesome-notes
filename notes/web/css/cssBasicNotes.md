@@ -3627,6 +3627,15 @@ table {
 }
 ```
 
+### Box Decoration Break
+
+[`box-decoration-break`](https://developer.mozilla.org/docs/Web/CSS/box-decoration-break):
+
+- Control `background`/`border`/`border-image`/`box-shadow`/`clip-path`/`margin`/`padding`
+  styles when lines break.
+- `slice`: initial value, 断开部分样式直接切割.
+- `clone`: 断开部分样式独立渲染.
+
 ## CSS Outline
 
 ```css
