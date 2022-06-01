@@ -3305,13 +3305,20 @@ math {
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
+.font-sans-serif {
+  font-family: -apple-system, BlinkMacSystemFont, 'Avenir Next,' Avenir, 'Segoe UI',
+    'Helvetica Neue', Helvetica, Cantarell, Ubuntu, Roboto, Noto, Arial, sans-serif;
+}
+
 .font-serif {
-  font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-family: Georgia, Cambria, 'Iowan Old Style', 'Apple Garamond',
+    Baskerville, 'Times New Roman', 'Droid Serif', Times, 'Source Serif Pro',
+    serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
 .font-mono {
-  font-family: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace;
+  font-family: Menlo, Consolas, Monaco, 'Liberation Mono', 'Lucida Console',
+    'Courier New', monospace;
 }
 ```
 
