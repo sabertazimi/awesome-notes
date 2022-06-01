@@ -79,6 +79,21 @@ consistent (and relative) to each other:
 - Set `margin-top` and `margin-bottom` to `<h1>` ~ `<h6>`/`<hr>` elements
   set `margin-bottom` to normal elements.
 
+### Line Length
+
+The optimal line length for body text is `50`–`75` characters:
+
+- Shorter or longer line lengths can hurt readability.
+
+```css
+.line-length {
+  margin-top: 2em;
+  line-height: 1.5em;
+  letter-spacing: 0.12em;
+  word-spacing: 0.16em;
+}
+```
+
 ### Table
 
 - Remove fills, grid lines, border and bolding.
