@@ -2135,6 +2135,38 @@ Flexbox 会改变子元素 `display` 属性值:
 | `inline-flex`/`flex`            | `flex`                |
 | `inline-grid`/`grid`            | `grid`                |
 
+Flexbox 子元素:
+
+- 均为块级元素:
+  - `vertical-align` 无效化.
+  - 裸文本子元素会变为匿名块级元素.
+- `float` 无效化.
+- `margin` 不合并.
+- 支持 `z-index` (包括 `position: static` 子元素):
+  `z-index` 不为 `auto` 时创建层叠上下文.
+- `absolute` 定位子元素会脱离弹性布局.
+
+### Flex Flow
+
+`flex-flow`: `<'flex-direction'> || <'flex-wrap'>`.
+
+#### Flex Direction
+
+`flex-direction`:
+
+- `row`.
+- `row-reverse`.
+- `column`.
+- `column-reverse`.
+
+#### Flex Wrap
+
+`flex-wrap`:
+
+- `nowrap`: 不换行.
+- `wrap`: 换行.
+- `wrap-reverse`.
+
 ### Flex Shorthand Property
 
 [`flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]`](https://developer.mozilla.org/docs/Web/CSS/flex):
@@ -2160,35 +2192,29 @@ Flexbox 会改变子元素 `display` 属性值:
   元素会被赋予一个容器中自由空间的指定占比.
   Equal to `flex: <positive-number> 1 0`.
 
-### Flex Parent Property
+### Flex Alignment
 
-- `justify-content`: defines alignment along main axis.
-- `align-items`: defines alignment for cross axis.
+#### Flex Parent Alignment
+
+- `justify-content`:
+  defines alignment along main axis,
+  `flex-start`/`flex-end`/`center`/`space-between`/`space-around`.
+- `align-items`:
+  defines alignment for cross axis,
+  `flex-start`/`flex-end`/`center`/`baseline`/`stretch`.
 - `align-content`:
   aligns flex container's lines within
-  when there is extra space in the cross-axis.
+  when there is extra space in the cross-axis,
+  `flex-start`/`flex-end`/`center`/`space-between`/`space-around`.
 - `*-content` adjust parent padding,
   `*-items` and `*-self` adjust children margin.
 
-Common flex attributes:
+#### Flex Children Alignment
 
-- `display: flex;`.
-- `flex-direction: row/column;`.
-- `flex-wrap: nowrap/wrap/wrap-reverse;`.
-- `align-content: flex-start/flex-end/center/space-between/space-around;`.
-- `align-items: flex-start/flex-end/center/baseline/stretch;`.
-- `justify-content: flex-start/flex-end/center/space-between/space-around;`.
+- `align-self`: `auto`/`flex-start`/`flex-end`/`center`/`baseline`/`stretch`.
+- `order`: `<number>`, 显示顺序.
 
-### Flex Children Property
-
-- `flex: number;` 宽/高度权重.
-- `flex-basis: number;`.
-- `flex-grow: number;`.
-- `flex-shrink: number;`.
-- `align-self: auto/flex-start/flex-end/center/baseline/stretch;`.
-- `order: number;` 显示顺序.
-
-### Flex Floating and Alignment
+#### Flex Margin Alignment
 
 Alignment with `margin`:
 
