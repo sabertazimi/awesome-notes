@@ -2376,22 +2376,37 @@ Flexbox 子元素:
 
 #### Flex Parent Alignment
 
-- `justify-content`:
-  defines alignment along main axis,
-  `flex-start`/`flex-end`/`center`/`space-between`/`space-around`.
-- `align-items`:
-  defines alignment for cross axis,
-  `flex-start`/`flex-end`/`center`/`baseline`/`stretch`.
-- `align-content`:
+- [`justify-content`](https://developer.mozilla.org/docs/Web/CSS/justify-content),
+  defines alignment along main axis:
+  - `normal`: items packed in default position.
+  - `stretch`: behaves as `flex-start` (stretching in main axis controlled by `flex`).
+  - `space-between`/`space-around`/`space-evenly`.
+  - `center`/`start`/`end`/`flex-start`/`flex-end`.
+  - `left`/`right`.
+- [`align-items`](https://developer.mozilla.org/docs/Web/CSS/align-items),
+  defines alignment (`align-self`) for cross axis:
+  - `normal`: behaves as `stretch`/`start`.
+  - `baseline`.
+  - `stretch`.
+  - `center`/`start`/`end`/`self-start`/`self-end`/`flex-start`/`flex-end`.
+- [`align-content`](https://developer.mozilla.org/docs/Web/CSS/align-content),
   aligns flex container's lines within
-  when there is extra space in the cross-axis,
-  `flex-start`/`flex-end`/`center`/`space-between`/`space-around`.
+  when there is extra space in the cross-axis:
+  - `normal`: items packed in default position.
+  - `baseline`.
+  - `stretch`/`space-between`/`space-around`/`space-evenly`.
+  - `center`/`start`/`end`/`flex-start`/`flex-end`.
 - `*-content` adjust parent padding,
   `*-items` and `*-self` adjust children margin.
 
 #### Flex Children Alignment
 
-- `align-self`: `auto`/`flex-start`/`flex-end`/`center`/`baseline`/`stretch`.
+- [`align-self`](https://developer.mozilla.org/docs/Web/CSS/align-self):
+  - `auto`: computes to parent `align-items` value.
+  - `normal`: behaves as `stretch`/`start`.
+  - `baseline`.
+  - `stretch`.
+  - `center`/`start`/`end`/`self-start`/`self-end`/`flex-start`/`flex-end`.
 - `order`: `<number>`, 显示顺序.
 
 #### Flex Margin Alignment
@@ -2484,7 +2499,7 @@ main {
 
 ## Grid Pattern
 
-[Grid Complete Guide](https://css-tricks.com/snippets/css/complete-guide-grid):
+`grid` complete [guide](https://css-tricks.com/snippets/css/complete-guide-grid):
 
 ```css
 .container {
@@ -2563,12 +2578,31 @@ _named_ rows and columns
 - `justify-content`/`align-content` content within element,
   attach to **parent** css selector
   (effectively adjusts `padding` of parent)
-- `justify-items`/`align-items` `inline` items inside box,
+- `justify-items`/`align-items` align items inside box,
   attach to **parent** css selector
-  (controls `margin` of children )
-- `justify-self`/`align-self` `inline` element within parent,
+  (effectively adjusts `margin` of children )
+- `justify-self`/`align-self` align element within parent,
   attach to **children** css selector
   (effectively adjusts `margin` of children)
+
+:::tip Grid-Only Alignment Properties
+
+- [`justify-items`](https://developer.mozilla.org/docs/Web/CSS/justify-items),
+  defines the default `justify-self` for all items:
+  - `normal`: behaves as `stretch`/`start`.
+  - `baseline`.
+  - `stretch`.
+  - `center`/`start`/`end`/`self-start`/`self-end`/`flex-start`/`flex-end`.
+  - `left`/`right`.
+- [`justify-self`](https://developer.mozilla.org/docs/Web/CSS/justify-self):
+  - `auto`: computes to parent `justify-items` value.
+  - `normal`: behaves as `stretch`/`start`.
+  - `baseline`.
+  - `stretch`.
+  - `center`/`start`/`end`/`self-start`/`self-end`/`flex-start`/`flex-end`.
+  - `left`/`right`.
+
+:::
 
 ### Grid Pseudo Elements
 
@@ -5459,7 +5493,9 @@ img {
 ```
 
 :::caution Image Display
+
 Image `display` set to `inline` default.
+
 :::
 
 #### Responsive Inline Box
