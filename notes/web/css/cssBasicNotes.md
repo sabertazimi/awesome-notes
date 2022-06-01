@@ -2121,40 +2121,36 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 }
 ```
 
-### Flex Useful Shorthand
+### Flex Shorthand Property
 
-`flex: flex-grow flex-shrink flex-basis`.
+[`flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]`](https://developer.mozilla.org/docs/Web/CSS/flex):
 
-- `flex: auto`:
-
-元素会根据自身的宽度与高度来确定尺寸,
-但是会自行伸长以吸收 flex 容器中额外的自由空间,
-也会缩短至自身最小尺寸以适应容器.
-Equal to `flex: 1 1 auto`.
-
+- `flex-grow`: `<number>`.
+- `flex-shrink`: `<number>`.
+- `flex-basis`: `content | <'width'>`.
 - `flex: initial`:
-
-属性默认值, 元素会根据自身宽高设置尺寸.
-它会缩短自身以适应容器,
-但不会伸长并吸收 flex 容器中的额外自由空间来适应容器.
-Equal to `flex: 0 1 auto`.
-
+  属性默认值, 元素会根据自身宽高设置尺寸.
+  它会缩短自身以适应容器,
+  但不会伸长并吸收 flex 容器中的额外自由空间来适应容器.
+  Equal to `flex: 0 1 auto`.
 - `flex: none`:
-
-元素会根据自身宽高来设置尺寸.
-它是完全非弹性的: 既不会缩短, 也不会伸长来适应 flex 容器.
-Equal to `flex: 0 0 auto`.
-
-- `flex: <positive-number>`
-
-元素会被赋予一个容器中自由空间的指定占比.
-Equal to `flex: <positive-number> 1 0`.
+  元素会根据自身宽高来设置尺寸.
+  它是完全非弹性的: 既不会缩短, 也不会伸长来适应 flex 容器.
+  Equal to `flex: 0 0 auto`.
+- `flex: auto`:
+  元素会根据自身的宽度与高度来确定尺寸,
+  但是会自行伸长以吸收 flex 容器中额外的自由空间,
+  也会缩短至自身最小尺寸以适应容器.
+  Equal to `flex: 1 1 auto`.
+- `flex: <positive-number>`:
+  元素会被赋予一个容器中自由空间的指定占比.
+  Equal to `flex: <positive-number> 1 0`.
 
 ### Flex Parent Property
 
-- justify-content: defines alignment along main axis.
-- align-items: defines alignment for cross axis.
-- align-content:
+- `justify-content`: defines alignment along main axis.
+- `align-items`: defines alignment for cross axis.
+- `align-content`:
   aligns flex container's lines within
   when there is extra space in the cross-axis.
 - `*-content` adjust parent padding,
@@ -2178,7 +2174,7 @@ Common flex attributes:
 - `align-self: auto/flex-start/flex-end/center/baseline/stretch;`.
 - `order: number;` 显示顺序.
 
-### Flex Float and Alignment
+### Flex Floating and Alignment
 
 Alignment with `margin`:
 
