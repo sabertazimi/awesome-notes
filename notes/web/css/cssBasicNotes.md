@@ -2260,15 +2260,25 @@ Multiple `column` layout:
 
 ### Flex Box Width
 
-当 `flex-basis` 设置为 `auto`
-且 `width` 或者 (`height`) 不为 `auto` 时,
-计算 used size 时会用 `width` 或者 (`height`) 代替 `flex-basis`:
+最终尺寸计算:
 
-- When there is some free space left:
-  true width = `flex-basis` + (`flex-grow`/sum of `flex-grow`).
-- When there is not enough space:
-  true width = `flex-basis` - (`flex-shrink`/sum of `flex-shrink`).
-- Text nodes and pseudo-elements can be flex children.
+- 优先级: 最大最小尺寸 > 弹性增长或收缩 > 基础尺寸.
+- When there is **free space left**:
+  used size = $\text{flex-basis} + (\text{flex-grow}/\sum\text{flex-grow})$.
+- When there is **not enough space**:
+  used size = $\text{flex-basis} - (\text{flex-shrink}/\sum\text{flex-shrink})$.
+
+| `flex-basis` | `width` | 基础尺寸     |
+| ------------ | ------- | ------------ |
+| set          | x       | `flex-basis` |
+| auto         | set     | `width`      |
+| auto         | auto    | 最大内容宽度 |
+
+| `min-width` | `width` | 最小尺寸                   |
+| ----------- | ------- | -------------------------- |
+| set         | x       | `min-width`                |
+| auto        | set     | min(`width`, 最小内容宽度) |
+| auto        | auto    | 最小内容宽度               |
 
 ```css
 .container {
@@ -2316,16 +2326,23 @@ Multiple `column` layout:
   元素会根据自身宽高来设置尺寸.
   它是完全非弹性的: 既不会缩短, 也不会伸长来适应容器,
   equal to `flex: 0 0 auto`.
-- `flex: auto`:
+- `flex: auto | <'width'>`:
   元素会根据自身的宽度与高度来确定尺寸,
   但是会自行伸长以吸收 flex 容器中额外的自由空间,
   也会缩短至自身最小尺寸以适应容器,
-  equal to `flex: 1 1 auto`.
-- `flex: <'width'>`:
-  equal to `flex: 1 1 <'width'>`.
-- `flex: <positive-number>`:
+  equal to `flex: 1 1 auto | 1 1 <'width'>`.
+- `flex: <number>`:
   元素会被赋予一个容器中自由空间的指定占比,
-  equal to `flex: <positive-number> 1 0%`.
+  equal to `flex: <number> 1 0%`.
+
+:::tip Flex Shorthand Property Usage
+
+- `flex: none`: 适合设置在内容不能换行显示的小控件元素上, e.g `<button>`.
+- `flex: auto`: 适合基于内容动态适配的布局.
+- `flex: 0`: 适用场景较少, 适合设置在替换元素的父元素上.
+- `flex: 1`: 适合等分布局.
+
+:::
 
 ### Flex Children Display
 
@@ -2345,7 +2362,8 @@ Flexbox 子元素:
 
 - 均为块级元素:
   - `vertical-align` 无效化.
-  - 裸文本子元素会变为匿名块级元素.
+  - 裸文本子元素会变为匿名块级元素
+    (Text nodes and pseudo elements can be flex children).
 - `float` 无效化.
 - `margin` 不合并.
 - 支持 `z-index` (包括 `position: static` 子元素):
