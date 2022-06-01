@@ -2076,6 +2076,186 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 }
 ```
 
+## Column Pattern
+
+### Two Column Pattern
+
+#### Block Two Column
+
+- `inline-block` + `inline-block`.
+
+#### Absolute Two Column
+
+- `absolute` + `margin-left`:
+  absolute element not in normal flow.
+- 利用父元素 `relative` 与子元素 `absolute` 进行布局.
+
+```css
+.div-1 {
+  position: relative;
+}
+
+.div-1a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+}
+
+.div-1b {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+}
+```
+
+#### Float Two Column
+
+- `float` + `float`.
+- `float` + `margin-left`:
+  block element ignore float element,
+  inline element surround float element.
+- `float` + BFC.
+
+```css
+.container {
+  overflow: hidden; /* BFC creation */
+}
+
+.left {
+  float: left;
+  width: 60px;
+  height: 60px;
+}
+
+.right {
+  margin-left: 70px;
+}
+```
+
+### Three Column Pattern
+
+#### Absolute Three Column
+
+Position `.left` and `.right` with `absolute`,
+add `margin-left` and `margin-right` to `.middle`.
+
+#### Float Three Column
+
+```html
+<div class="left"></div>
+<div class="right"></div>
+<div class="middle"></div>
+```
+
+```css
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.middle {
+  margin: 0 right-width 0 left-width;
+}
+```
+
+On a floated element,
+a negative `margin` opposite the float direction
+will decrease the float area,
+causing adjacent elements to overlap the floated element.
+A negative `margin` in the direction of the float
+will pull the floated element in that direction.
+
+1. HTML: `.middle` first.
+2. `padding-left` and `padding-right` to `.container`,
+   `min-width: 2 * (leftWidth + rightWidth)` to `.container`.
+3. Float: `float: left` to `.left`, `.middle` and `.right`.
+4. Negative Margin: `margin-left: -100%` to `.left`,
+   `margin-right: -rightWidth px` to `.right`.
+5. Move: `right: leftWidth px` to `.left`.
+
+```html
+<div class="container">
+  <div class="middle"></div>
+  <div class="left"></div>
+  <div class="right"></div>
+</div>
+```
+
+```css
+.container {
+  padding: 0 200px 0 300px; /* padding-left = .left width, same to .right */
+}
+
+.container .middle {
+  float: left;
+  width: 100%;
+  background-color: violet;
+}
+
+.container .left {
+  position: relative;
+  right: 300px;
+  float: left;
+  width: 300px;
+  margin-left: -100%;
+  background-color: darkblue;
+}
+
+.container .right {
+  position: relative;
+  float: left;
+  width: 200px;
+  margin-right: -200px;
+  background-color: red;
+}
+```
+
+### Multiple Column Pattern
+
+Multiple `column` layout:
+
+- `columns`:
+  - `<'column-width'> || <'column-count'>`.
+  - 分栏实际数目 = $\min(\frac{\text{width}}{\text{column-width}}, \text{column-count})$.
+- `column-width`:
+  `auto | <length>`, 期望分栏宽度.
+- `column-count`:
+  `auto | <integer>`, 期望分栏数目.
+- `column-gap`:
+  `normal | <length-percentage>`, 分隔间隙.
+- `column-rule`:
+  `<'column-rule-width'> || <'column-rule-style'> || <'column-rule-color'>`, 分隔线.
+- `column-rule-width` (`<line-width>`):
+  `medium | thin | thick | <length>`.
+- `column-rule-style` (`<line-style>`):
+  `none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset`.
+- `column-rule-color`:
+  `currentcolor | <color>`.
+- `column-span`: `none | all`, 子元素宽度.
+- `column-fill`: `balance | balance-all | auto`, 子元素分布.
+- `break-inside`:
+  - `auto`: Allows break.
+  - `avoid`: Avoids break.
+
+```css
+.three-column {
+  column-gap: 1em;
+  padding: 1em;
+  column-count: 3;
+}
+
+.three-column > .last-child {
+  column-span: all;
+}
+```
+
+[![Column Fill](./figures/ColumnFill.png)](https://developer.mozilla.org/docs/Web/CSS/column-fill)
+
 ## Flex Pattern
 
 [Flexbox Complete Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox)
@@ -2406,186 +2586,6 @@ h1.lines::after {
   border-top: 1px solid black;
 }
 ```
-
-## Column Pattern
-
-### Two Column Pattern
-
-#### Block Two Column
-
-- `inline-block` + `inline-block`.
-
-#### Absolute Two Column
-
-- `absolute` + `margin-left`:
-  absolute element not in normal flow.
-- 利用父元素 `relative` 与子元素 `absolute` 进行布局.
-
-```css
-.div-1 {
-  position: relative;
-}
-
-.div-1a {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 200px;
-}
-
-.div-1b {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200px;
-}
-```
-
-#### Float Two Column
-
-- `float` + `float`.
-- `float` + `margin-left`:
-  block element ignore float element,
-  inline element surround float element.
-- `float` + BFC.
-
-```css
-.container {
-  overflow: hidden; /* BFC creation */
-}
-
-.left {
-  float: left;
-  width: 60px;
-  height: 60px;
-}
-
-.right {
-  margin-left: 70px;
-}
-```
-
-### Three Column Pattern
-
-#### Absolute Three Column
-
-Position `.left` and `.right` with `absolute`,
-add `margin-left` and `margin-right` to `.middle`.
-
-#### Float Three Column
-
-```html
-<div class="left"></div>
-<div class="right"></div>
-<div class="middle"></div>
-```
-
-```css
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
-
-.middle {
-  margin: 0 right-width 0 left-width;
-}
-```
-
-On a floated element,
-a negative `margin` opposite the float direction
-will decrease the float area,
-causing adjacent elements to overlap the floated element.
-A negative `margin` in the direction of the float
-will pull the floated element in that direction.
-
-1. HTML: `.middle` first.
-2. `padding-left` and `padding-right` to `.container`,
-   `min-width: 2 * (leftWidth + rightWidth)` to `.container`.
-3. Float: `float: left` to `.left`, `.middle` and `.right`.
-4. Negative Margin: `margin-left: -100%` to `.left`,
-   `margin-right: -rightWidth px` to `.right`.
-5. Move: `right: leftWidth px` to `.left`.
-
-```html
-<div class="container">
-  <div class="middle"></div>
-  <div class="left"></div>
-  <div class="right"></div>
-</div>
-```
-
-```css
-.container {
-  padding: 0 200px 0 300px; /* padding-left = .left width, same to .right */
-}
-
-.container .middle {
-  float: left;
-  width: 100%;
-  background-color: violet;
-}
-
-.container .left {
-  position: relative;
-  right: 300px;
-  float: left;
-  width: 300px;
-  margin-left: -100%;
-  background-color: darkblue;
-}
-
-.container .right {
-  position: relative;
-  float: left;
-  width: 200px;
-  margin-right: -200px;
-  background-color: red;
-}
-```
-
-### Multiple Column Pattern
-
-Multiple `column` layout:
-
-- `columns`:
-  - `<'column-width'> || <'column-count'>`.
-  - 分栏实际数目 = $\min(\frac{\text{width}}{\text{column-width}}, \text{column-count})$.
-- `column-width`:
-  `auto | <length>`, 期望分栏宽度.
-- `column-count`:
-  `auto | <integer>`, 期望分栏数目.
-- `column-gap`:
-  `normal | <length-percentage>`, 分隔间隙.
-- `column-rule`:
-  `<'column-rule-width'> || <'column-rule-style'> || <'column-rule-color'>`, 分隔线.
-- `column-rule-width` (`<line-width>`):
-  `medium | thin | thick | <length>`.
-- `column-rule-style` (`<line-style>`):
-  `none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset`.
-- `column-rule-color`:
-  `currentcolor | <color>`.
-- `column-span`: `none | all`, 子元素宽度.
-- `column-fill`: `balance | balance-all | auto`, 子元素分布.
-- `break-inside`:
-  - `auto`: Allows break.
-  - `avoid`: Avoids break.
-
-```css
-.three-column {
-  column-gap: 1em;
-  padding: 1em;
-  column-count: 3;
-}
-
-.three-column > .last-child {
-  column-span: all;
-}
-```
-
-[![Column Fill](./figures/ColumnFill.png)](https://developer.mozilla.org/docs/Web/CSS/column-fill)
 
 ## Alignment Pattern
 
