@@ -3276,6 +3276,8 @@ math {
 
 #### Font Family Preset
 
+[Font stack](https://github.com/tmcw/systemfontstack):
+
 ```css
 .mi {
   font-family: Arial, 'Microsoft YaHei', '黑体', '宋体', sans-serif;
