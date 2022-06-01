@@ -2434,18 +2434,36 @@ Alignment with `margin`:
 
 ```html
 <div class="parent">
-    <div class="child></div>
+  <div class="child"></div>
 </div>
+
+<style>
+  .parent {
+    display: flex;
+  }
+
+  .child {
+    /* This will push child to the right of parent border */
+    margin-left: auto;
+  }
+</style>
 ```
 
+最后一行左对齐:
+
 ```css
-.parent {
+.container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.child {
-  /* this will push child to the right of parent border */
-  margin-left: auto;
+.list {
+  margin: 10px;
+}
+
+.list:last-child {
+  margin-right: auto;
 }
 ```
 
