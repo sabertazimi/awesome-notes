@@ -7325,7 +7325,7 @@ a:focus::after {
     width="80"
     height="80"
     viewBox="0 0 250 250"
-    style="position: absolute;top: 0;right: 0;color: #2d3748;border: 0;fill: #718096"
+    style="position: absolute; top: 0; right: 0; color: #2d3748; border: 0; fill: #718096;"
     aria-hidden="true"
   >
     <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -7342,40 +7342,40 @@ a:focus::after {
     ></path>
   </svg>
 </a>
-
-<style>
-  .github-corner:focus .octo-arm,
-  .github-corner:hover .octo-arm {
-    animation: none;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .github-corner:focus .octo-arm,
-    .github-corner:hover .octo-arm {
-      animation: octocat-wave 560ms ease-in-out;
-    }
-  }
-
-  @keyframes octocat-wave {
-    0%,
-    100% {
-      transform: rotate(0);
-    }
-
-    20%,
-    60% {
-      transform: rotate(-25deg);
-    }
-
-    40%,
-    80% {
-      transform: rotate(10deg);
-    }
-  }
-</style>
 ```
 
 <!-- markdownlint-enable line-length -->
+
+```css
+.github-corner:focus .octo-arm,
+.github-corner:hover .octo-arm {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .github-corner:focus .octo-arm,
+  .github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
+
+@keyframes octocat-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+```
 
 ### Footer
 
