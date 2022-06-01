@@ -2540,6 +2540,41 @@ main {
 
 ## Grid Pattern
 
+### Grid Property
+
+Parent property:
+
+- `grid-template`.
+- `grid-template-rows`.
+- `grid-template-columns`.
+- `grid-template-areas`.
+- `grid-gap`.
+- `grid-row-gap`.
+- `grid-column-gap`.
+- `justify-content`.
+- `align-content`.
+- `place-content`.
+- `justify-items`.
+- `align-items`.
+- `place-items`.
+- `grid`.
+- `grid-auto-rows`.
+- `grid-auto-columns`.
+- `grid-auto-flow`.
+
+Children property:
+
+- `grid-row`.
+- `grid-row-start`.
+- `grid-row-end`.
+- `grid-column`.
+- `grid-column-start`.
+- `grid-column-end`.
+- `grid-area`.
+- `justify-self`.
+- `align-self`.
+- `place-self`.
+
 ```css
 .container {
   grid-template-areas:
