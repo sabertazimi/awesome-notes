@@ -1390,6 +1390,15 @@ Box sizing:
 
 ### Box Width
 
+#### Width Formal Syntax
+
+`width`:
+
+- `auto`: initial value.
+- `<length>`.
+- `<percentage>`.
+- `min-content | max-content | fit-content | fit-content(<length-percentage>)`.
+
 #### Min and Max Width
 
 `min-width` > `max-width` > `width !important`:
