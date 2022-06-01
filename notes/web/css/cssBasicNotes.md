@@ -2505,25 +2505,42 @@ will pull the floated element in that direction.
 
 Multiple `column` layout:
 
-- `columns`: `<'column-width'> || <'column-count'>`.
-- `column-width`: `<length> | auto`.
-- `column-count`: `<integer> | auto`.
-- `column-rule`: 分隔线.
-- `column-rule-color`.
-- `column-rule-style`.
-- `column-rule-width`.
-- `column-span`.
-- `column-fill`.
-- `column-gap`: 分隔距离.
+- `columns`:
+  - `<'column-width'> || <'column-count'>`.
+  - 分栏实际数目 = $\min(\frac{\text{width}}{\text{column-width}}, \text{column-count})$.
+- `column-width`:
+  `auto | <length>`, 期望分栏宽度.
+- `column-count`:
+  `auto | <integer>`, 期望分栏数目.
+- `column-gap`:
+  `normal | <length-percentage>`, 分隔间隙.
+- `column-rule`:
+  `<'column-rule-width'> || <'column-rule-style'> || <'column-rule-color'>`, 分隔线.
+- `column-rule-width` (`<line-width>`):
+  `medium | thin | thick | <length>`.
+- `column-rule-style` (`<line-style>`):
+  `none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset`.
+- `column-rule-color`:
+  `currentcolor | <color>`.
+- `column-span`: `none | all`, 子元素宽度.
+- `column-fill`: `balance | balance-all | auto`, 子元素分布.
+- `break-inside`:
+  - `auto`: Allows break.
+  - `avoid`: Avoids break.
 
 ```css
-/* 子元素分列 */
 .three-column {
   column-gap: 1em;
   padding: 1em;
   column-count: 3;
 }
+
+.three-column > .last-child {
+  column-span: all;
+}
 ```
+
+[![Column Fill](./figures/ColumnFill.png)](https://developer.mozilla.org/docs/Web/CSS/column-fill)
 
 ## Alignment Pattern
 
@@ -3499,8 +3516,8 @@ li::before {
 $$
 f =
 \min\left(
-  \frac{Length_{horizontal}}{\sum^{horizontal}_{radius}},
-  \frac{Length_{vertical}}{\sum^{vertical}_{radius}}
+  \frac{\text{Length}_{\text{horizontal}}}{\sum^{\text{horizontal}}_{\text{radius}}},
+  \frac{\text{Length}_{\text{vertical}}}{\sum^{\text{vertical}}_{\text{radius}}}
 \right)
 $$
 
