@@ -2258,8 +2258,6 @@ Multiple `column` layout:
 
 ## Flex Pattern
 
-[Flexbox Complete Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox)
-
 ### Flex Box Width
 
 当 `flex-basis` 设置为 `auto`
@@ -2300,6 +2298,34 @@ Multiple `column` layout:
   flex: 2;
 }
 ```
+
+### Flex Shorthand Property
+
+[`flex`](https://developer.mozilla.org/docs/Web/CSS/flex)
+`= none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]`:
+
+- `flex-grow`: `<number>`.
+- `flex-shrink`: `<number>`.
+- `flex-basis`: `content | <'width'>`.
+- `flex: initial`:
+  属性默认值, 元素会根据自身宽高设置尺寸.
+  它会缩短自身以适应容器,
+  但不会伸长并吸收 flex 容器中的额外自由空间来适应容器,
+  equal to `flex: 0 1 auto`.
+- `flex: none`:
+  元素会根据自身宽高来设置尺寸.
+  它是完全非弹性的: 既不会缩短, 也不会伸长来适应容器,
+  equal to `flex: 0 0 auto`.
+- `flex: auto`:
+  元素会根据自身的宽度与高度来确定尺寸,
+  但是会自行伸长以吸收 flex 容器中额外的自由空间,
+  也会缩短至自身最小尺寸以适应容器,
+  equal to `flex: 1 1 auto`.
+- `flex: <'width'>`:
+  equal to `flex: 1 1 <'width'>`.
+- `flex: <positive-number>`:
+  元素会被赋予一个容器中自由空间的指定占比,
+  equal to `flex: <positive-number> 1 0%`.
 
 ### Flex Children Display
 
@@ -2346,31 +2372,6 @@ Flexbox 子元素:
 - `nowrap`: 不换行.
 - `wrap`: 换行.
 - `wrap-reverse`.
-
-### Flex Shorthand Property
-
-[`flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]`](https://developer.mozilla.org/docs/Web/CSS/flex):
-
-- `flex-grow`: `<number>`.
-- `flex-shrink`: `<number>`.
-- `flex-basis`: `content | <'width'>`.
-- `flex: initial`:
-  属性默认值, 元素会根据自身宽高设置尺寸.
-  它会缩短自身以适应容器,
-  但不会伸长并吸收 flex 容器中的额外自由空间来适应容器.
-  Equal to `flex: 0 1 auto`.
-- `flex: none`:
-  元素会根据自身宽高来设置尺寸.
-  它是完全非弹性的: 既不会缩短, 也不会伸长来适应 flex 容器.
-  Equal to `flex: 0 0 auto`.
-- `flex: auto`:
-  元素会根据自身的宽度与高度来确定尺寸,
-  但是会自行伸长以吸收 flex 容器中额外的自由空间,
-  也会缩短至自身最小尺寸以适应容器.
-  Equal to `flex: 1 1 auto`.
-- `flex: <positive-number>`:
-  元素会被赋予一个容器中自由空间的指定占比.
-  Equal to `flex: <positive-number> 1 0`.
 
 ### Flex Alignment
 
@@ -2455,7 +2456,7 @@ Alignment with `margin`:
 }
 ```
 
-### Flexbox Pseudo Elements
+### Flexbox Pseudo Element
 
 Set `flex` to pseudo elements of flex box
 will change width of pseudo elements.
@@ -2497,9 +2498,11 @@ main {
 }
 ```
 
-## Grid Pattern
+### Flex Reference
 
-`grid` complete [guide](https://css-tricks.com/snippets/css/complete-guide-grid):
+- Flexbox complete [guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox).
+
+## Grid Pattern
 
 ```css
 .container {
@@ -2604,7 +2607,7 @@ _named_ rows and columns
 
 :::
 
-### Grid Pseudo Elements
+### Grid Pseudo Element
 
 ```css
 h1.lines {
@@ -2620,6 +2623,10 @@ h1.lines::after {
   border-top: 1px solid black;
 }
 ```
+
+### Grid Reference
+
+- Grid complete [guide](https://css-tricks.com/snippets/css/complete-guide-grid).
 
 ## Alignment Pattern
 
