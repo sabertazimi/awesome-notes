@@ -2121,6 +2121,20 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 }
 ```
 
+### Flex Children Display
+
+Flexbox 会改变子元素 `display` 属性值:
+
+| Initial Display                 | Flex Children Display |
+| ------------------------------- | --------------------- |
+| `inline`/`inline-block`/`block` | `block`               |
+| `flow-root`                     | `flow-root`           |
+| `list-item`                     | `list-item`           |
+| `inline-table`/`table`          | `table`               |
+| `table-*`                       | `block`               |
+| `inline-flex`/`flex`            | `flex`                |
+| `inline-grid`/`grid`            | `grid`                |
+
 ### Flex Shorthand Property
 
 [`flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]`](https://developer.mozilla.org/docs/Web/CSS/flex):
