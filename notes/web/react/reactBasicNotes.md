@@ -9560,8 +9560,6 @@ the client takes over and the website becomes a SPA.
 
 ### SSR Example
 
-[presentation](http://peerigon.github.io/talks/2018-07-20-js-camp-barcelona-bumpy-road-universal-javascript/#1)
-
 Webpack configuration:
 
 ```ts
@@ -9633,6 +9631,10 @@ return {
   state: { data },
 };
 ```
+
+### SSR Reference
+
+- Universal JavaScript [presentation](http://peerigon.github.io/talks/2018-07-20-js-camp-barcelona-bumpy-road-universal-javascript/#1).
 
 ## React with TypeScript
 
