@@ -171,9 +171,13 @@ accepted by CSS properties and functions:
 - Color data [types](https://developer.mozilla.org/docs/Web/CSS/color_value).
 - Image data [types](https://developer.mozilla.org/docs/Web/CSS/image).
 - 2D [`<position>`](https://developer.mozilla.org/docs/Web/CSS/position_value).
+
+CSS data types list:
+
+- CSS [formal syntax](https://github.com/mdn/data/blob/main/css/syntaxes.json).
+- CSS [values](https://www.zhangxinxu.com/wordpress/2019/11/css-value-type).
 - CSS [units](https://developer.mozilla.org/docs/Web/CSS/CSS_Values_and_Units).
 - CSS [functions](https://developer.mozilla.org/docs/Web/CSS/CSS_Functions).
-- CSS [values](https://www.zhangxinxu.com/wordpress/2019/11/css-value-type).
 
 ## CSS Property Value
 
@@ -2652,7 +2656,7 @@ Children property:
 
 `<name-repeat>`:
 
-- `repeat([<integer [1,∞]>] | auto-fill], <line-names>+)`.
+- `repeat([auto-fill | <integer [1,∞]>], <line-names>+)`.
 
 ### Responsive Grid Layout
 
