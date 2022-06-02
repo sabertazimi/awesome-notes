@@ -2549,41 +2549,35 @@ main {
 Parent property:
 
 - [`grid`](https://developer.mozilla.org/docs/Web/CSS/grid):
-  - `grid-template-rows`.
-  - `grid-template-columns`.
-  - `grid-template-areas`.
-  - `grid-auto-rows`.
-  - `grid-auto-columns`.
-  - `grid-auto-flow`.
-- `grid-template`.
-- `grid-template-rows`.
-- `grid-template-columns`.
-- `grid-template-areas`.
-- `grid-auto-rows`.
-- `grid-auto-columns`.
-- `grid-auto-flow`.
-- `gap`.
-- `row-gap`.
-- `column-gap`.
-- `justify-content`.
-- `align-content`.
-- `place-content`.
-- `justify-items`.
-- `align-items`.
-- `place-items`.
+  - [`grid-template`](https://developer.mozilla.org/docs/Web/CSS/grid-template):
+    - `grid-template-rows`.
+    - `grid-template-columns`.
+    - `grid-template-areas`.
+  - [`grid-auto-rows`](https://developer.mozilla.org/docs/Web/CSS/grid-auto-rows).
+  - [`grid-auto-columns`](https://developer.mozilla.org/docs/Web/CSS/grid-auto-columns).
+  - [`grid-auto-flow`](https://developer.mozilla.org/docs/Web/CSS/grid-auto-flow).
+- [`gap`](https://developer.mozilla.org/docs/Web/CSS/gap):
+  - `row-gap`.
+  - `column-gap`.
+- [`place-content`](https://developer.mozilla.org/docs/Web/CSS/place-content):
+  - `align-content`.
+  - `justify-content`.
+- [`place-items`](https://developer.mozilla.org/docs/Web/CSS/place-items).
+  - `align-items`.
+  - `justify-items`.
 
 Children property:
 
-- `grid-row`.
-- `grid-row-start`.
-- `grid-row-end`.
-- `grid-column`.
-- `grid-column-start`.
-- `grid-column-end`.
-- `grid-area`.
-- `justify-self`.
-- `align-self`.
-- `place-self`.
+- [`grid-area`](https://developer.mozilla.org/docs/Web/CSS/grid-area):
+  - `grid-row`:
+    - `grid-row-start`.
+    - `grid-row-end`.
+  - `grid-column`:
+    - `grid-column-start`.
+    - `grid-column-end`.
+- [`place-self`](https://developer.mozilla.org/docs/Web/CSS/place-self):
+  - `align-self`.
+  - `justify-self`.
 
 ```css
 .container {
@@ -2896,6 +2890,9 @@ will refactor grid item's size and location:
 - `justify-self`/`align-self` align element within parent,
   attach to **children** css selector
   (effectively adjusts `margin` of children)
+- `place-content`: `<'align-content'> <'justify-content'>?`.
+- `place-items`: `<'align-items'> <'justify-items'>?`.
+- `place-self`: `<'align-self'> <'justify-self'>?`.
 
 :::tip Grid-Only Alignment Properties
 
@@ -2915,10 +2912,6 @@ will refactor grid item's size and location:
   - `left`/`right`.
 
 :::
-
-- `place-content`: `<'align-content'> <'justify-content'>?`.
-- `place-items`: `<'align-items'> <'justify-items'>?`.
-- `place-self`: `<'align-self'> <'justify-self'>?`.
 
 ### Grid Pseudo Element
 
