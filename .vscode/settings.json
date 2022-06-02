@@ -501,6 +501,7 @@
     "errno",
     "ERRORCHECK",
     "errored",
+    "eruda",
     "esac",
     "esbuild",
     "eshutdown",

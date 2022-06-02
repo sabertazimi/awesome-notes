@@ -88,6 +88,7 @@ tags: [Web, Framework, Library]
 - [BluePrint](https://github.com/palantir/blueprint)
 - [Geist: Modern Design System](https://github.com/geist-org/geist-ui)
 - [Desktop: macOS and Windows Style Components](https://github.com/gabrielbull/react-desktop)
+- [Luna: Operating System Components](https://github.com/liriliri/luna)
 
 ### Admin and Dashboard UI Framework
 
@@ -1110,6 +1111,7 @@ tags: [Web, Framework, Library]
 - [Xterm.js: Terminal for Web](https://github.com/xtermjs/xterm.js)
 - [Jay: Supercharged JavaScript REPL](https://github.com/nikersify/jay)
 - [Fig: Terminal Autocomplete](https://github.com/withfig/autocomplete)
+- [Eruda: Console for Mobile Browsers](https://github.com/liriliri/eruda)
 
 ## Compiler
 
