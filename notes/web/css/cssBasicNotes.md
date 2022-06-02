@@ -4864,12 +4864,19 @@ Avatar with circle status indicator:
 
 ### Shape Outside
 
-`shape-outside` provides a way to customize wrapping,
+[`shape-outside`](https://developer.mozilla.org/docs/Web/CSS/shape-outside)
+provides a way to customize wrapping effect for `float` element,
+combined with
+[`shape-margin`](https://developer.mozilla.org/docs/Web/CSS/shape-margin)
+[`shape-image-threshold](https://developer.mozilla.org/docs/Web/CSS/shape-image-threshold)
 making it possible to wrap text around complex objects rather than simple boxes:
 
 ```css
-.box {
+.shape {
+  float: left;
   shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  shape-margin: 20px;
+  shape-image-threshold: 20%;
 }
 ```
 
