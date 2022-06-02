@@ -2660,14 +2660,24 @@ Children property:
 
 ### Responsive Grid Layout
 
+- `fit-content(limit)`: `clamp([min-content | min-width], limit, max-content)`.
+- `minmax([<fixed-breadth> | <inflexible-breadth>], [<track-breadth> | <fixed-breadth>])`.
+- `repeat([<integer [1,∞]> | auto-fill | auto-fit], [<track-size> | <fixed-size>]+)`.
+
 ```css
-.items {
+.container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 ```
 
-_named_ rows and columns
+### Named Grid Layout
+
+#### Grid Lines
+
+`grid-row` and `grid-column`
+will refactor template of `grid`
+(`grid-template-rows` and `grid-template-columns`):
 
 ```css
 .main {
@@ -2693,10 +2703,48 @@ _named_ rows and columns
 }
 ```
 
-### Grid Column and Row
+#### Grid Areas
 
-- `grid-column` will refactor template of `grid` (`grid-template-columns`).
-- `grid-row` will refactor template of `grid` (`grid-template-rows`).
+- 网格线自动命名: `areaName-start`/`areaName-end`.
+
+```css
+.container {
+  grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr;
+  grid-template:
+    'grape grape grape' 1fr
+    'apple orange orange' 1fr
+    'apple orange orange' 1fr
+    'banana banana banana' 1fr
+    / 1fr 1fr 1fr;
+  grid-template:
+    [row-name1-start] 'grape grape grape' 1fr [row-name1-end row-name2-start]
+    'apple orange orange' 1fr [row-name2-end]
+    'apple orange orange' 1fr [row-name3-end]
+    [row-name4-start] 'banana banana banana' 1fr [row-name4-end]
+    / [col-name-start] 1fr [col-name-end] 1fr 1fr;
+  grid-template-areas:
+    'grape grape grape'
+    'apple orange orange'
+    'apple orange orange'
+    'banana banana banana';
+}
+
+.grape {
+  grid-area: grape;
+}
+
+.apple {
+  grid-area: apple;
+}
+
+.orange {
+  grid-area: orange;
+}
+
+.banana {
+  grid-area: banana;
+}
+```
 
 ### Grid Alignment
 
