@@ -2778,10 +2778,30 @@ will refactor grid item's size and location:
 }
 ```
 
-匿名网格线:
+隐式网格线:
 
-- `<integer> && <custom-ident>`: 当 `<custom-ident>` 不存在时, 会在网格容器后方额外创建匿名网格.
-- `span && <custom-ident>`: 当 `<custom-ident>` 不存在时, 会在网格容器前方**或者**后方额外创建匿名网格.
+- `<custom-ident>`:
+  当 `<custom-ident>` 不存在时, 会尝试匹配 `<custom-ident-start>` 或者 `<custom-ident-end>`.
+- `<integer> && <custom-ident>`:
+  当第 `<integer>` 个 `<custom-ident>` 不存在时, 会在网格容器后方额外创建隐式网格.
+- `span && <custom-ident>`:
+  当 `<custom-ident>` 不存在时, 会在网格容器前方**或者**后方额外创建隐式网格.
+
+```css
+.container {
+  display: grid;
+  grid:
+    '. . .' 1fr
+    '. a .' 1fr
+    '. . .' 1fr / 1fr 1fr 1fr;
+}
+
+.item {
+  grid-area: a;
+  grid-area: a / a / a / a;
+  grid-area: a-start / a-start / a-end / a-end;
+}
+```
 
 ```css
 .container {
@@ -2795,12 +2815,21 @@ will refactor grid item's size and location:
    * .item: [c] 100px [d] auto [b] auto [b] auto [b]
    */
   grid-column: b 4 / c;
+}
+```
 
+```css
+.container {
+  display: grid;
+  grid-template-columns: [a] 80px [c] auto [c] 100px [d] auto auto;
+}
+
+.item {
   /**
-   * .container: [e] auto [a] 80px [b] auto [c] 100px [d]
-   * .item: [e] auto [a] 80px [b] auto [c] 100px [d]
+   * .container: [b] auto [a] 80px [c] auto [c] 100px [d] auto auto
+   * .item: [b] auto [a] 80px [c] auto [c] 100px [d]
    */
-  grid-column: span e / 4;
+  grid-column: span b / 4;
 }
 ```
 
@@ -6519,11 +6548,11 @@ module.exports = {
       'flex-shrink',
       'flex-wrap',
       'grid',
-      'grid-area',
       'grid-template',
       'grid-template-areas',
       'grid-template-rows',
       'grid-template-columns',
+      'grid-area',
       'grid-row',
       'grid-row-start',
       'grid-row-end',
