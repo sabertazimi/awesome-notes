@@ -2852,6 +2852,10 @@ will refactor template of `grid`
 
 :::
 
+- `place-content`: `<'align-content'> <'justify-content'>?`.
+- `place-items`: `<'align-items'> <'justify-items'>?`.
+- `place-self`: `<'align-self'> <'justify-self'>?`.
+
 ### Grid Pseudo Element
 
 ```css
@@ -4702,13 +4706,13 @@ const svgRectElement = document.createElementNS(
 
 ### SVG Basic Shape Tags
 
-- rectangles and squares: `<rect>`
-- circles: `<circle>`
-- ellipse: `<ellipse>`
-- line: `<line>`
-- polyline: `<polyline>`
-- polygon: `<polygon>`
-- path:`<path>`
+- Rectangles and squares: `<rect>`.
+- Circles: `<circle>`.
+- Ellipse: `<ellipse>`.
+- Line: `<line>`.
+- Polyline: `<polyline>`.
+- Polygon: `<polygon>`.
+- Path: `<path>`.
 
 ### SVG Text Tag
 
@@ -6279,7 +6283,7 @@ or call JavaScript API triggering layout stage (reflow):
   - `transform`: high performance trigger.
 - All animation: `keyframe` animation or `transitions` is best.
 - JS-based animation: `requestAnimationFrame` is better than `setTimeout`/`setInterval`.
-- Position animation:`transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`.
+- Position animation: `transform: translate(npx, npx)` is better than `top`/`right`/`bottom`/`left`.
 - Scale animation: `transform: scale(n)` better than `width`/`height`.
 - Rotation animation: `transform: rotate(deg)` is better.
 - Opacity/visibility animation: `opacity: 0...1` is better.
