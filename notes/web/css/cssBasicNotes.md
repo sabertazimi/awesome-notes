@@ -2548,10 +2548,20 @@ main {
 
 Parent property:
 
+- `grid`:
+  - `grid-template-rows`.
+  - `grid-template-columns`.
+  - `grid-template-areas`.
+  - `grid-auto-rows`.
+  - `grid-auto-columns`.
+  - `grid-auto-flow`.
 - `grid-template`.
 - `grid-template-rows`.
 - `grid-template-columns`.
 - `grid-template-areas`.
+- `grid-auto-rows`.
+- `grid-auto-columns`.
+- `grid-auto-flow`.
 - `grid-gap`.
 - `grid-row-gap`.
 - `grid-column-gap`.
@@ -2561,10 +2571,6 @@ Parent property:
 - `justify-items`.
 - `align-items`.
 - `place-items`.
-- `grid`.
-- `grid-auto-rows`.
-- `grid-auto-columns`.
-- `grid-auto-flow`.
 
 Children property:
 
