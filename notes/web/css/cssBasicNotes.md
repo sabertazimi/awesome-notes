@@ -2562,9 +2562,9 @@ Parent property:
 - `grid-auto-rows`.
 - `grid-auto-columns`.
 - `grid-auto-flow`.
-- `grid-gap`.
-- `grid-row-gap`.
-- `grid-column-gap`.
+- `gap`.
+- `row-gap`.
+- `column-gap`.
 - `justify-content`.
 - `align-content`.
 - `place-content`.
@@ -2595,7 +2595,7 @@ Children property:
   grid-template-rows: minmax(90px, 1fr);
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
+  gap: 10px;
   align-items: end;
   justify-items: center;
 }
@@ -2750,7 +2750,7 @@ will refactor template of `grid`
   display: grid;
   grid-template-rows: [header] 100px [body] auto;
   grid-template-columns: [l-gutter] 1fr [sidebar] 4fr [content] 8fr [r-gutter] 1fr;
-  grid-gap: 1rem 2rem;
+  gap: 1rem 2rem;
 }
 
 .header {
@@ -2811,6 +2811,15 @@ will refactor template of `grid`
   grid-area: banana;
 }
 ```
+
+### Grid Gap
+
+[CSS Box Alignment Module Level 3](https://www.w3.org/TR/css-align-3)
+统一了分栏布局, 弹性布局, 网格布局的 `gap` 属性:
+
+- `gap`: `<'row-gap'> <'column-gap'>?`.
+- `row-gap`: `normal | <length-percentage>`.
+- `column-gap`: `normal | <length-percentage>`.
 
 ### Grid Alignment
 
@@ -6487,9 +6496,6 @@ module.exports = {
       'grid-auto-rows',
       'grid-auto-columns',
       'grid-auto-flow',
-      'grid-gap',
-      'grid-row-gap',
-      'grid-column-gap',
       'align-content',
       'align-items',
       'align-self',
