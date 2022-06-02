@@ -6455,9 +6455,7 @@ object {
 
 ### StyleLint Tool
 
-- [StyleLint Plugin](https://github.com/kristerkari/stylelint-declaration-block-no-ignored-properties)
-
-stylelint-config-mass plugin `index.js`:
+`stylelint-config-mass` plugin `index.js`:
 
 ```ts
 module.exports = {
@@ -6500,6 +6498,12 @@ module.exports = {
       'grid-auto-rows',
       'grid-auto-columns',
       'grid-auto-flow',
+      'gap',
+      'row-gap',
+      'column-gap',
+      'place-content',
+      'place-items',
+      'place-self',
       'align-content',
       'align-items',
       'align-self',
@@ -6662,6 +6666,11 @@ module.exports = {
   },
 };
 ```
+
+`StyleLint` plugins:
+
+- Ignored invalid properties [checker](https://github.com/kristerkari/stylelint-declaration-block-no-ignored-properties).
+- CSS syntax [validator](https://github.com/csstree/stylelint-validator).
 
 ### Tailwind
 
