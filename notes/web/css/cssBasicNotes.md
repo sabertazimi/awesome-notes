@@ -2312,7 +2312,7 @@ Multiple `column` layout:
 ### Flex Shorthand Property
 
 [`flex`](https://developer.mozilla.org/docs/Web/CSS/flex)
-`= none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]`:
+= `none | [<'flex-grow'> <'flex-shrink'>? || <'flex-basis'>]`:
 
 - `flex-grow`: `<number>`.
 - `flex-shrink`: `<number>`.
@@ -2601,23 +2601,7 @@ Children property:
 
 ### Grid Data Types
 
-#### Grid Track Size
-
-`<track-size>`:
-
-- `<track-breadth>` .
-- `minmax(<inflexible-breadth>, <track-breadth>)`.
-- `fit-content(<length-percentage>)`.
-
-#### Grid Fixed Size
-
-`<fixed-size>`:
-
-- `<fixed-breadth>`.
-- `minmax(<fixed-breadth>, <track-breadth>)`.
-- `minmax(<inflexible-breadth>, <fixed-breadth>)`.
-
-#### Grid Track Breadth
+#### Grid Breadth Types
 
 `<track-breadth>`:
 
@@ -2627,8 +2611,6 @@ Children property:
 - `max-content`.
 - `auto`.
 
-#### Grid Inflexible Breadth
-
 `<inflexible-breadth>`:
 
 - `<length-percentage>`.
@@ -2636,11 +2618,41 @@ Children property:
 - `max-content`.
 - `auto`.
 
-#### Grid Fixed Breadth
-
 `<fixed-breadth>`:
 
 - `<length-percentage>`.
+
+#### Grid Size Types
+
+`<track-size>`:
+
+- `<track-breadth>` .
+- `minmax(<inflexible-breadth>, <track-breadth>)`.
+- `fit-content(<length-percentage>)`.
+
+`<fixed-size>`:
+
+- `<fixed-breadth>`.
+- `minmax(<fixed-breadth>, <track-breadth>)`.
+- `minmax(<inflexible-breadth>, <fixed-breadth>)`.
+
+#### Grid Repeat Types
+
+`<track-repeat>`:
+
+- `repeat([<integer [1,∞]>], [<line-names>? <track-size>]+ <line-names>?)`.
+
+`<fixed-repeat>`:
+
+- `repeat([<integer [1,∞]>], [<line-names>? <fixed-size>]+ <line-names>?)`.
+
+`<auto-repeat>`:
+
+- `repeat([auto-fill | auto-fit], [<line-names>? <fixed-size>]+ <line-names>?)`.
+
+`<name-repeat>`:
+
+- `repeat([<integer [1,∞]>] | auto-fill], <line-names>+)`.
 
 ### Responsive Grid Layout
 
@@ -2689,7 +2701,7 @@ _named_ rows and columns
   (effectively adjusts `padding` of parent)
 - `justify-items`/`align-items` align items inside box,
   attach to **parent** css selector
-  (effectively adjusts `margin` of children )
+  (effectively adjusts `margin` of children)
 - `justify-self`/`align-self` align element within parent,
   attach to **children** css selector
   (effectively adjusts `margin` of children)
@@ -3694,7 +3706,7 @@ li::before {
 - 支持 `border-collapse` 设置为 `separate` 的
   `table`/`inline-table`/`table-cell` 元素.
 - 每角都支持单独设置 `水平半径` `/` `垂直半径`:
-  `<length-percentage>{1, 4} [ / <length-percentage>{1,4} ]?`.
+  `<length-percentage>{1, 4} [/ <length-percentage>{1,4}]?`.
 
 ```css
 .box {
@@ -3767,12 +3779,12 @@ $$
 - 以九宫格为基本模式, `content-box` 为九宫格中间格子.
 - 可以结合 `clip-path` 裁剪边框.
 - 可用于实现自定义边框: 渐变边框, 条纹边框, 虚线边框.
+- `<'border-image-source'>`
+  || `<'border-image-slice'> / <'border-image- width'> / <'border-image-outset'>`
+  || `<'border-image-repeat'>`.
 
 ```css
 .box {
-  border-image: < 'border-image-source' > || < 'border-image-slice' > [/ <
-    'border-image- width' > | / < 'border-image-width' >? / <
-    'border-image-outset' > ]? || < 'border-image-repeat' >;
   border-image: url('./grid-nine.svg') 54 33.33% 33.33% 54 / 10px 20px 30px 1 /
     1 30px 20px 10px round space;
 }
@@ -4165,11 +4177,11 @@ p:hover {
 
 ### Blend Mode
 
-- `mix-blend-mode` is used for text styles
-- with `multiply`: black is cutout (keep black)
-  (`0 * WHAT = 0`)
-- with `screen`: white is cutout (keep white)
-  (`100 - (100 - WHAT) * (100 - 100) = 100`)
+- `mix-blend-mode` is used for text styles.
+- With `multiply`: black is cutout (keep black)
+  (`0 * WHAT = 0`).
+- With `screen`: white is cutout (keep white)
+  (`100 - (100 - WHAT) * (100 - 100) = 100`).
 
 ```html
 <div class="background">
@@ -4263,24 +4275,24 @@ Movie style:
 ### Color Stop List
 
 `<color-stop-list>`,
-`[ <linear-color-stop> [, <linear-color-hint>]? ]# , <linear-color-stop>`:
+`[<linear-color-stop> [, <linear-color-hint>]?]#, <linear-color-stop>`:
 
-- `<linear-color-stop> = <color> <length-percentage>{1,2}?`.
-- `<linear-color-hint> = <length-percentage>`: 改变颜色的转换点位置.
-- `<length-percentage> = <length> | <percentage>`.
+- `<linear-color-stop>`: `<color> <length-percentage>{1,2}?`.
+- `<linear-color-hint>`: `<length-percentage>`, 改变颜色的转换点位置.
+- `<length-percentage>`: `<length> | <percentage>`.
 
 `<angular-color-stop-list>`,
-`[ <angular-color-stop> [, <angular-color-hint>]? ]# , <angular-color-stop>`:
+`[<angular-color-stop> [, <angular-color-hint>]?]#, <angular-color-stop>`:
 
-- `<angular-color-stop> = <color> && <angle-percentage>{1,2}?`.
-- `<angular-color-hint> = <angle-percentage>`: 改变颜色的转换点位置.
-- `<angle-percentage> = <angle> | <percentage>`.
+- `<angular-color-stop>`: `<color> && <angle-percentage>{1,2}?`.
+- `<angular-color-hint>`: `<angle-percentage>`, 改变颜色的转换点位置.
+- `<angle-percentage>`: `<angle> | <percentage>`.
 
 ### Linear Gradient
 
 [Linear gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/linear-gradient):
 
-- `[ <angle> | to <side-or-corner> ]? , <color-stop-list>`.
+- `[<angle> | to <side-or-corner>]?, <color-stop-list>`.
 - Default angle: `to bottom`.
 - `0deg` angle: `to top`.
 - `90deg` angle: `to right`.
@@ -4306,7 +4318,7 @@ Movie style:
 
 [Radial gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/radial-gradient):
 
-- `[ <ending-shape> || <size> ]? [ at <position> ]? , <color-stop-list>`.
+- `[<ending-shape> || <size>]? [at <position>]?, <color-stop-list>`.
 - `<ending-shape>`:
   - `ellipse` (initial value).
   - `circle`.
@@ -4346,7 +4358,7 @@ Movie style:
 
 [Conic gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/conic-gradient):
 
-- `[ from <angle> ]? [ at <position> ]?, <angular-color-stop-list>`.
+- `[from <angle>]? [at <position>]?, <angular-color-stop-list>`.
 - Default angle: `0deg`.
 
 ```css
