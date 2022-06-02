@@ -2581,12 +2581,6 @@ Children property:
     'header header header'
     'advert content content'
     'footer footer footer';
-
-  /*
-   * grid-template-columns:
-   *   repeat([auto-fit / auto-fill / numbers], minmax(60px, 1fr));
-   */
-
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-rows: minmax(90px, 1fr);
   grid-template-columns: 1fr 1fr 1fr;
@@ -2601,11 +2595,52 @@ Children property:
   grid-row: start / end; /* 2 / -1 */
   grid-column: start / end;
   align-self: end;
-
-  /* grid-area: hstart / vstart / hend / vend */
   justify-self: center;
 }
 ```
+
+### Grid Data Types
+
+#### Grid Track Size
+
+`<track-size>`:
+
+- `<track-breadth>` .
+- `minmax(<inflexible-breadth>, <track-breadth>)`.
+- `fit-content(<length-percentage>)`.
+
+#### Grid Fixed Size
+
+`<fixed-size>`:
+
+- `<fixed-breadth>`.
+- `minmax(<fixed-breadth>, <track-breadth>)`.
+- `minmax(<inflexible-breadth>, <fixed-breadth>)`.
+
+#### Grid Track Breadth
+
+`<track-breadth>`:
+
+- `<flex>`: `<number>fr`.
+- `<length-percentage>`.
+- `min-content`.
+- `max-content`.
+- `auto`.
+
+#### Grid Inflexible Breadth
+
+`<inflexible-breadth>`:
+
+- `<length-percentage>`.
+- `min-content`.
+- `max-content`.
+- `auto`.
+
+#### Grid Fixed Breadth
+
+`<fixed-breadth>`:
+
+- `<length-percentage>`.
 
 ### Responsive Grid Layout
 
@@ -7434,8 +7469,8 @@ a:focus::after {
 
 #### Sticky Footer
 
-- 如果页面内容不足够长时, 页脚固定在浏览器窗口的底部
-- 如果内容足够长时, 页脚固定在页面的最底部
+- 如果页面内容不足够长时, 页脚固定在浏览器窗口的底部.
+- 如果内容足够长时, 页脚固定在页面的最底部.
 
 5 种方法:
 
