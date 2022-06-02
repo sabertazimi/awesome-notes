@@ -2664,6 +2664,15 @@ Children property:
 
 - `repeat([auto-fill | <integer [1,∞]>], <line-names>+)`.
 
+#### Grid Line Types
+
+`<grid-line>`:
+
+- `auto`.
+- `<custom-ident>`
+- `[<integer> && <custom-ident>?]`.
+- `[span && [<integer> || <custom-ident>]]`.
+
 ### Responsive Grid Layout
 
 #### Explicit Responsive Grid Layout
@@ -2742,8 +2751,8 @@ Children property:
 #### Grid Lines
 
 `grid-row` and `grid-column`
-will refactor template of `grid`
-(`grid-template-rows` and `grid-template-columns`):
+change start and end of [`<grid-line>`](#grid-line-types)
+will refactor grid item's size and location:
 
 ```css
 .main {
@@ -2766,6 +2775,32 @@ will refactor template of `grid`
 .content {
   grid-row: body;
   grid-column: content;
+}
+```
+
+匿名网格线:
+
+- `<integer> && <custom-ident>`: 当 `<custom-ident>` 不存在时, 会在网格容器后方额外创建匿名网格.
+- `span && <custom-ident>`: 当 `<custom-ident>` 不存在时, 会在网格容器前方**或者**后方额外创建匿名网格.
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: [a] 80px [b] auto [c] 100px [d];
+}
+
+.item {
+  /**
+   * .container: [a] 80px [b] auto [c] 100px [d] auto [b] auto [b] auto [b]
+   * .item: [c] 100px [d] auto [b] auto [b] auto [b]
+   */
+  grid-column: b 4 / c;
+
+  /**
+   * .container: [e] auto [a] 80px [b] auto [c] 100px [d]
+   * .item: [e] auto [a] 80px [b] auto [c] 100px [d]
+   */
+  grid-column: span e / 4;
 }
 ```
 
