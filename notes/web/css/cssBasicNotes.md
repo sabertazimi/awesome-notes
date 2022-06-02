@@ -4862,6 +4862,16 @@ Avatar with circle status indicator:
   - SVG mask.
 - pseudo elements.
 
+### Basic Shape Type
+
+[`<basic-shape>`](https://developer.mozilla.org/docs/Web/CSS/basic-shape):
+
+- [`inset(<length-percentage>{1,4} [round <'border-radius'>]?)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/inset).
+- [`circle([<shape-radius>]? [at <position>]?)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/circle).
+- [`ellipse([<shape-radius>{2}]? [at <position>]?)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/ellipse).
+- [`polygon([<fill-rule>,]? [<length-percentage> <length-percentage>]#)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/polygon).
+- [`path([<fill-rule>,]? <string>)`](https://developer.mozilla.org/docs/Web/CSS/path).
+
 ### Shape Outside
 
 [`shape-outside`](https://developer.mozilla.org/docs/Web/CSS/shape-outside)
