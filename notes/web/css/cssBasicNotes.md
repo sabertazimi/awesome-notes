@@ -2548,7 +2548,7 @@ main {
 
 Parent property:
 
-- `grid`:
+- [`grid`](https://developer.mozilla.org/docs/Web/CSS/grid):
   - `grid-template-rows`.
   - `grid-template-columns`.
   - `grid-template-areas`.
@@ -2666,6 +2666,8 @@ Children property:
 
 ### Responsive Grid Layout
 
+#### Explicit Responsive Grid Layout
+
 - `fit-content(limit)`: `clamp([min-content | min-width], limit, max-content)`.
 - `minmax([<fixed-breadth> | <inflexible-breadth>], [<track-breadth> | <fixed-breadth>])`.
 - `repeat([<integer [1,∞]> | auto-fill | auto-fit], [<track-size> | <fixed-size>]+)`.
@@ -2676,6 +2678,64 @@ Children property:
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 ```
+
+#### Implicit Responsive Grid Layout
+
+`grid-auto-rows`/`grid-auto-columns`:
+
+- `<track-size>+`.
+- Control implicitly-created grid row/column track size.
+
+```html
+<div class="container">
+  <item>1</item>
+  <item>2</item>
+  <item>3</item>
+  <item>4</item>
+  <item class="implicit">5</item>
+</div>
+
+<style>
+  .container {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr;
+
+    /* 隐式网格高度为 60px */
+    grid-auto-rows: 60px;
+  }
+</style>
+```
+
+```html
+<div class="container">
+  <item class="item-a">a</item>
+  <item class="item-b">b</item>
+</div>
+<style>
+  .container {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr;
+
+    /* 隐式网格宽度为 60px */
+    grid-auto-columns: 60px;
+  }
+
+  .item-b {
+    /* 超出网格列数, 隐式网格创建 */
+    grid-column: 3 / 4;
+    background-color: rgb(255 255 0 / 50%);
+  }
+</style>
+```
+
+![Implicit Grid Layout](./figures/ImplicitGridLayout.png)
+
+`grid-auto-flow`:
+
+- `[row | column] || dense`.
+- Change auto-placement algorithm:
+  control exactly how auto-placed items get flowed into grid container,
+  like `flex-direction` for flex container.
 
 ### Named Grid Layout
 
