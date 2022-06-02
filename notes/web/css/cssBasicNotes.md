@@ -8372,9 +8372,9 @@ const polygon = (n = 3) => {
 
 #### Hover Animation
 
-- Hover effects using [`background`](https://css-tricks.com/cool-hover-effects-using-background-properties).
-- Hover effects using [`text shadow`](https://css-tricks.com/cool-hover-effects-that-use-css-text-shadow).
-- Hover effects using [`clip` and `mask`](https://css-tricks.com/css-hover-effects-background-masks-3d).
+- Hover button effects using [`background`](https://css-tricks.com/cool-hover-effects-using-background-properties).
+- Hover button effects using [`text shadow`](https://css-tricks.com/cool-hover-effects-that-use-css-text-shadow).
+- Hover button effects using [`clip` and `mask`](https://css-tricks.com/css-hover-effects-background-masks-3d).
 
 #### Fade Animation
 
