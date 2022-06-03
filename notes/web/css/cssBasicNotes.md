@@ -4162,7 +4162,40 @@ table {
 
 ### Text Shadow
 
+[`text-shadow](https://developer.mozilla.org/docs/Web/CSS/text-shadow):
+
+- `none`.
+- `<shadow-text>#`: `<length>{2,3} && <color>?`.
+  - 不支持内阴影.
+  - `<length>{2,3}`: 不支持阴影扩展 `offset-x offset-y blur-radius`.
+  - `<color>?`: default `revert` (user agent color).
+
+```css
+:root {
+  --colo: #c0c0c0;
+  --br-shadow: -6px 6px 15px rgb(0 0 0 / 50%);
+  --tl-shadow: 6px -6px 15px rgb(255 255 255/ 80%);
+}
+
+body {
+  background: var(--color);
+}
+
+.neumorphic-text {
+  color: var(--color);
+  text-shadow: var(--br-shadow), var(--tl-shadow);
+}
+```
+
 ### Box Shadow
+
+[`box-shadow`](https://developer.mozilla.org/docs/Web/CSS/box-shadow):
+
+- `none`.
+- `<shadow>#`: `inset? && <length>{2,4} && <color>?`.
+  - `inset?`: 支持内阴影.
+  - `<length>{2,4}`: 支持阴影扩展 `offset-x offset-y blur-radius spread-radius`.
+  - `<color>?`: default `currentcolor` (text computed color).
 
 #### Basic Box Shadow
 
