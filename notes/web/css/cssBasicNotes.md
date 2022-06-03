@@ -4468,67 +4468,6 @@ p:hover {
 }
 ```
 
-### Blend Mode
-
-- `mix-blend-mode` is used for text styles.
-- With `multiply`: black is cutout (keep black)
-  (`0 * WHAT = 0`).
-- With `screen`: white is cutout (keep white)
-  (`100 - (100 - WHAT) * (100 - 100) = 100`).
-
-```html
-<div class="background">
-  <h1>Even More CSS Secrets</h1>
-</div>
-```
-
-```css
-.background {
-  background-image: url('bg.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-.background h1 {
-  color: white; /* keep white */
-  background-color: black; /* mix with background */
-  mix-blend-mode: screen; /* screen or multiply  */
-}
-```
-
-`background-blend-mode` is used for multiple background images:
-
-```html
-<div class="container"></div>
-```
-
-```css
-.container {
-  background: url($pic1), url($pic2);
-  background-size: cover;
-  background-blend-mode: lighten;
-}
-```
-
-Night mode:
-
-```css
-.night {
-  filter: brightness(80%) grayscale(20%) contrast(1.2);
-  background-blend-mode: darken;
-}
-```
-
-Movie style:
-
-```css
-.movie {
-  filter: contrast(1.1);
-  background-blend-mode: soft-light;
-}
-```
-
 ## CSS Object
 
 `object-position`/`object-fit`
@@ -4673,31 +4612,11 @@ Movie style:
 
 [![Conic Gradient](./figures/ConicGradient.png)](https://developer.mozilla.org/docs/Web/CSS/gradient/conic-gradient#composition_of_a_conic_gradient)
 
-## CSS Mask
-
-- Black for masking.
-- White for showing.
-
-```css
-#masked {
-  width: 100px;
-  height: 100px;
-  background-color: #8cffa0;
-  mask-image: url('https://mdn.mozillademos.org/files/12668/MDN.svg'),
-    url('https://mdn.mozillademos.org/files/12676/star.svg');
-  mask-size: 100% 100%;
-  mask-composite: add; /* Can be changed in the live sample */
-}
-```
-
 ## CSS Filter
-
-- 来源自 SVG 的滤镜特效.
-- Instagram [filter](https://github.com/una/CSSgram).
 
 ```css
 .filter {
-  filter: url('resources.svg'); /* 引用SVG filter元素 */
+  filter: url('resources.svg'); /* 引用 SVG filter 元素 */
   filter: blur(5px); /* 模糊 */
   filter: brightness(0.4); /* 高光 */
   filter: contrast(200%); /* 对比度 */
@@ -4742,51 +4661,6 @@ Movie style:
 }
 ```
 
-### SVG Filter
-
-内投影滤镜:
-
-```html
-<svg
-  width="300"
-  height="300"
-  viewBox="0 0 20 20"
-  style="position:absolute;left:-999px;"
->
-  <filter id="inset-shadow">
-    <!-- 投影偏移 -->
-    <feOffset dx="0" dy="0" />
-    <!-- 投影模糊 -->
-    <feGaussianBlur stdDeviation="6" result="offset-blur" />
-    <!-- 反转投影使其变成内投影 -->
-    <feComposite
-      operator="out"
-      in="SourceGraphic"
-      in2="offset-blur"
-      result="inverse"
-    />
-    <!-- 内投影附加黑色 -->
-    <feFlood flood-color="black" flood-opacity=".95" result="color" />
-    <feComposite operator="in" in="color" in2="inverse" result="shadow" />
-    <!-- 把内投影显示在图像上 -->
-    <feComposite operator="over" in="shadow" in2="SourceGraphic" />
-  </filter>
-</svg>
-```
-
-毛玻璃滤镜:
-
-```html
-<svg width="0" height="0" style="position:absolute;">
-  <filter id="blur" color-interpolation-filters="sRGB">
-    <feGaussianBlur stdDeviation="6" edgeMode="duplicate" />
-    <feComponentTransfer>
-      <feFuncA type="discrete" tableValues="0 1" />
-    </feComponentTransfer>
-  </filter>
-</svg>
-```
-
 ### Backdrop Filter
 
 毛玻璃效果 (`Frosted Glass`: `bg-white/30 shadow-lg backdrop-blur-sm`):
@@ -4822,144 +4696,89 @@ body {
 }
 ```
 
-## CSS SVG
+### Blend Mode
 
-```css
-svg {
-  fill: red;
-  stroke: blue;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2px;
-}
-```
+#### Mix Blend Mode
 
-```ts
-const svgElement = document.createElementNS(
-  'http://www.w3.org/2000/svg',
-  'svg'
-);
-const svgRectElement = document.createElementNS(
-  'http://www.w3.org/2000/svg',
-  'rect'
-);
-```
-
-### Inline SVG
+- `mix-blend-mode` is used for text styles.
+- With `multiply`: black is cutout (keep black)
+  (`0 * WHAT = 0`).
+- With `screen`: white is cutout (keep white)
+  (`100 - (100 - WHAT) * (100 - 100) = 100`).
 
 ```html
-<svg
-  width="100px"
-  height="100px"
-  viewBox="0 0 100 100"
-  version="1.1"
-  xmlns="..."
->
-  <title>My Awesome SVG</title>
-  <circle class="circle" cx="50" cy="50" r="50" fill="#FFFF00" />
-</svg>
+<div class="background">
+  <h1>Even More CSS Secrets</h1>
+</div>
 ```
 
 ```css
-.circle {
-  fill: #ff0;
+.background {
+  background-image: url('bg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.background h1 {
+  color: white; /* keep white */
+  background-color: black; /* mix with background */
+  mix-blend-mode: screen; /* screen or multiply  */
 }
 ```
 
-### SVG Basic Shape Tags
+#### Background Blend Mode
 
-- Rectangles and squares: `<rect>`.
-- Circles: `<circle>`.
-- Ellipse: `<ellipse>`.
-- Line: `<line>`.
-- Polyline: `<polyline>`.
-- Polygon: `<polygon>`.
-- Path: `<path>`.
-
-### SVG Text Tag
-
-The text tag `<text>` is used to create **selectable** and **accessible** text.
-
-### SVG Accessibility Tags
-
-The title `<title>` and description `<desc>` tags
-are specifically for providing accessibility content.
-
-### SVG Group Tag
-
-The group tag `<g>` is used to group elements together
-to add class names and apply animations, filters, patterns and effects
-to a group of elements.
-
-### SVG Defs Tag
-
-The defs tag `<defs>` is used to define elements for later reuse.
-This is where you create **patterns**, **filters** and **masks** to be reused later.
-This is also used to create **icon systems**.
+`background-blend-mode` is used for multiple background images:
 
 ```html
-<filter id="noise" y="0" x="0">
-  <feTurbulence stitchTiles="stitch" baseFrequency=".75" type="fractalNoise" />
-</filter>
+<div class="container"></div>
 ```
 
-```html
-<pattern ...>
-  ...
-  <rect
-    width="100%"
-    height="100%"
-    fill="white"
-    filter="url(#noise)"
-    opacity=".9"
-  />
-</pattern>
+```css
+.container {
+  background: url($pic1), url($pic2);
+  background-size: cover;
+  background-blend-mode: lighten;
+}
 ```
 
-### SVG Mask
+Night mode:
 
-Avatar with circle status indicator:
-
-```html
-<svg role="none">
-  <mask id="circle">
-    <circle fill="white" cx="100" cy="100" r="100"></circle>
-    <circle fill="black" cx="86%" cy="86%" r="18"></circle>
-  </mask>
-  <g mask="url(#circle)">
-    <image
-      x="0"
-      y="0"
-      width="100%"
-      height="100%"
-      xlink:href="avatar.jpg"
-    ></image>
-    <circle
-      fill="none"
-      cx="100"
-      cy="100"
-      r="100"
-      stroke="rgb(0 0 0 / 10%)"
-      stroke-width="2"
-    ></circle>
-  </g>
-</svg>
+```css
+.night {
+  filter: brightness(80%) grayscale(20%) contrast(1.2);
+  background-blend-mode: darken;
+}
 ```
+
+Movie style:
+
+```css
+.movie {
+  filter: contrast(1.1);
+  background-blend-mode: soft-light;
+}
+```
+
+### Filter Reference
+
+- Instagram [filter](https://github.com/una/CSSgram).
 
 ## CSS Shape
 
 [CSS shapes](https://css-tricks.com/the-shapes-of-css):
 
+- `aspect-ratio`.
+- `border`.
+- `box-shadow` (inset).
 - Background: `color`/`size`/`image`/`gradient`/`clip-path`.
   In modern browsers `background`/`gradient`/`clip-path`
   with `transition`/`transform`
   better than `pseudo elements`.
-- `border`.
-- `box-shadow` (inset).
+- `filter`.
 - `clip-path`
 - `mask`
-- `filter`.
-- `aspect-ratio`.
 - SVG:
   - SVG icon.
   - SVG filter.
@@ -5014,15 +4833,169 @@ making it possible to wrap text around complex objects rather than simple boxes:
 
 ### Clip Path
 
-#### Basic Clip Path
-
 ```css
 .polygon {
   clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
 }
 ```
 
-#### SVG Clip Path
+### Mask
+
+- Black for masking.
+- White for showing.
+
+```css
+#masked {
+  width: 100px;
+  height: 100px;
+  background-color: #8cffa0;
+  mask-image: url('https://mdn.mozillademos.org/files/12668/MDN.svg'),
+    url('https://mdn.mozillademos.org/files/12676/star.svg');
+  mask-size: 100% 100%;
+  mask-composite: add; /* Can be changed in the live sample */
+}
+```
+
+## SVG
+
+```css
+svg {
+  fill: red;
+  stroke: blue;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2px;
+}
+```
+
+```ts
+const svgElement = document.createElementNS(
+  'http://www.w3.org/2000/svg',
+  'svg'
+);
+const svgRectElement = document.createElementNS(
+  'http://www.w3.org/2000/svg',
+  'rect'
+);
+```
+
+### Inline SVG
+
+```html
+<svg
+  width="100px"
+  height="100px"
+  viewBox="0 0 100 100"
+  version="1.1"
+  xmlns="..."
+>
+  <title>My Awesome SVG</title>
+  <circle class="circle" cx="50" cy="50" r="50" fill="#FFFF00" />
+</svg>
+```
+
+```css
+.circle {
+  fill: #ff0;
+}
+```
+
+### SVG Shape Tag
+
+- Rectangles and squares: `<rect>`.
+- Circles: `<circle>`.
+- Ellipse: `<ellipse>`.
+- Line: `<line>`.
+- Polyline: `<polyline>`.
+- Polygon: `<polygon>`.
+- Path: `<path>`.
+
+### SVG Text Tag
+
+The text tag `<text>` is used to create **selectable** and **accessible** text.
+
+### SVG Accessibility Tag
+
+The title `<title>` and description `<desc>` tags
+are specifically for providing accessibility content.
+
+### SVG Group Tag
+
+The group tag `<g>` is used to group elements together
+to add class names and apply animations, filters, patterns and effects
+to a group of elements.
+
+### SVG Defs Tag
+
+The defs tag `<defs>` is used to define elements for later reuse.
+This is where you create **patterns**, **filters** and **masks** to be reused later.
+This is also used to create **icon systems**.
+
+```html
+<filter id="noise" y="0" x="0">
+  <feTurbulence stitchTiles="stitch" baseFrequency=".75" type="fractalNoise" />
+</filter>
+```
+
+```html
+<pattern ...>
+  ...
+  <rect
+    width="100%"
+    height="100%"
+    fill="white"
+    filter="url(#noise)"
+    opacity=".9"
+  />
+</pattern>
+```
+
+### SVG Filter
+
+内投影滤镜:
+
+```html
+<svg
+  width="300"
+  height="300"
+  viewBox="0 0 20 20"
+  style="position:absolute;left:-999px;"
+>
+  <filter id="inset-shadow">
+    <!-- 投影偏移 -->
+    <feOffset dx="0" dy="0" />
+    <!-- 投影模糊 -->
+    <feGaussianBlur stdDeviation="6" result="offset-blur" />
+    <!-- 反转投影使其变成内投影 -->
+    <feComposite
+      operator="out"
+      in="SourceGraphic"
+      in2="offset-blur"
+      result="inverse"
+    />
+    <!-- 内投影附加黑色 -->
+    <feFlood flood-color="black" flood-opacity=".95" result="color" />
+    <feComposite operator="in" in="color" in2="inverse" result="shadow" />
+    <!-- 把内投影显示在图像上 -->
+    <feComposite operator="over" in="shadow" in2="SourceGraphic" />
+  </filter>
+</svg>
+```
+
+毛玻璃滤镜:
+
+```html
+<svg width="0" height="0" style="position:absolute;">
+  <filter id="blur" color-interpolation-filters="sRGB">
+    <feGaussianBlur stdDeviation="6" edgeMode="duplicate" />
+    <feComponentTransfer>
+      <feFuncA type="discrete" tableValues="0 1" />
+    </feComponentTransfer>
+  </filter>
+</svg>
+```
+
+### SVG Clip Path
 
 <!-- markdownlint-disable line-length -->
 
@@ -5042,6 +5015,36 @@ making it possible to wrap text around complex objects rather than simple boxes:
 .item {
   clip-path: url('#circle');
 }
+```
+
+### SVG Mask
+
+Avatar with circle status indicator:
+
+```html
+<svg role="none">
+  <mask id="circle">
+    <circle fill="white" cx="100" cy="100" r="100"></circle>
+    <circle fill="black" cx="86%" cy="86%" r="18"></circle>
+  </mask>
+  <g mask="url(#circle)">
+    <image
+      x="0"
+      y="0"
+      width="100%"
+      height="100%"
+      xlink:href="avatar.jpg"
+    ></image>
+    <circle
+      fill="none"
+      cx="100"
+      cy="100"
+      r="100"
+      stroke="rgb(0 0 0 / 10%)"
+      stroke-width="2"
+    ></circle>
+  </g>
+</svg>
 ```
 
 ## CSS Cursor
@@ -5831,7 +5834,10 @@ setTimeout(() => element.classList.remove('animate'), duration);
 - `background` with multiple `gradient`.
 - Single `box-shadow`
 - Multiple `box-shadow`.
+- `filter`.
+- `backdrop-filter`.
 - `*-clip-*`.
+- `mask-*`.
 - Pseudo element (`::before`/`::after`).
 - Pseudo class (`:hover`/`:focus`/`:target`).
 - Changing `top`/`right`/`bottom`/`left` of pseudo element
@@ -8574,10 +8580,10 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 
 #### Circle
 
-- background circle
-- clip path circle
-- border circle
-- pseudo element circle
+- `border` circle.
+- `background` circle.
+- `clip`/`clip-path` circle.
+- Pseudo element circle.
 
 ```css
 .circle-background {
@@ -8602,10 +8608,10 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 
 #### Triangle
 
-- background triangle
-- clip path triangle
-- border triangle
-- pseudo element triangle
+- `border` triangle.
+- `background` triangle.
+- `clip`/`clip-path` triangle.
+- Pseudo element triangle.
 
 ```css
 .triangle {
