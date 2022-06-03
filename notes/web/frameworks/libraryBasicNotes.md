@@ -1478,6 +1478,7 @@ tags: [Web, Framework, Library]
 - [ReviewDog StyleLint](https://github.com/reviewdog/action-stylelint)
 - [ReviewDog MarkdownLint](https://github.com/reviewdog/action-markdownlint)
 - [CodeQL Analysis](https://github.com/github/codeql-action)
+- [SonarSource Cloud Analysis](https://github.com/SonarSource/sonarcloud-github-action)
 - [Compressed Bundle Size](https://github.com/preactjs/compressed-size-action)
 - [Limit Bundle Size](https://github.com/andresz1/size-limit-action)
 - [License Compliance](https://github.com/fossas/fossa-action)

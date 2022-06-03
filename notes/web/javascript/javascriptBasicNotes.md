@@ -9833,12 +9833,17 @@ Observable.of(1, 2, 3, 4)
 
 ### ESLint
 
-- [ESLint Promise](https://github.com/xjamundx/eslint-plugin-promise)
-- [ESLint Import](https://github.com/import-js/eslint-plugin-import)
-- [ESLint Unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
-- [ESLint JSX A11Y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
-- [ESLint Node Security](https://github.com/nodesecurity/eslint-plugin-security)
-- [ESLint TypeScript Import Resolver](https://github.com/alexgorbatchev/eslint-import-resolver-typescript)
+- [Promise](https://github.com/xjamundx/eslint-plugin-promise)
+- [Import](https://github.com/import-js/eslint-plugin-import)
+- [Unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
+- [SonarJS: Bug and Code Smell Detection](https://github.com/SonarSource/eslint-plugin-sonarjs)
+- [Functional](https://github.com/jonaskello/eslint-plugin-functional)
+- [JSX A11Y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
+- [JSDoc](https://github.com/gajus/eslint-plugin-jsdoc)
+- [TSDoc](https://github.com/microsoft/tsdoc)
+- [Node](https://github.com/weiran-zsd/eslint-plugin-node)
+- [Node Security](https://github.com/nodesecurity/eslint-plugin-security)
+- [TypeScript Import Resolver](https://github.com/alexgorbatchev/eslint-import-resolver-typescript)
 
 ```json
 {
