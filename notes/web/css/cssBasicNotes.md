@@ -5045,6 +5045,37 @@ making it possible to wrap text around complex objects rather than simple boxes:
 }
 ```
 
+## CSS Touch
+
+### Touch Action
+
+[`touch-action`](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action):
+
+- `auto`:
+  enable all panning and zooming gestures.
+- `none`:
+  disable all panning and zooming gestures.
+- `manipulation`:
+  only enable panning and pinch zoom gestures (滚动, 持续缩放),
+  remove click delay (300ms) for mobile device.
+- `[pan-x | pan-left | pan-right ] || [ pan-y | pan-up | pan-down ] || pinch-zoom`.
+
+```css
+.box {
+  touch-action: auto;
+  touch-action: none;
+  touch-action: manipulation;
+  touch-action: pan-x;
+  touch-action: pan-left;
+  touch-action: pan-right;
+  touch-action: pan-y;
+  touch-action: pan-up;
+  touch-action: pan-down;
+  touch-action: pinch-zoom;
+  touch-action: pan-left pan-up pan-zoom;
+}
+```
+
 ## CSS Select
 
 ```css
