@@ -5867,6 +5867,7 @@ use `inline-box` with `width`
 
 ## Media Query
 
+- Logical operators + media types + media features.
 - Only for improving compatibility with older browsers.
 - Definition order matters when media query with a different selector.
 - JavaScript API: `window.matchMedia()`.
@@ -5880,45 +5881,92 @@ use `inline-box` with `width`
 }
 ```
 
-### Device Type Query
+### Media Logical Query
 
-| 类型       | 解释                                     |
-| :--------- | :--------------------------------------- |
-| all        | 所有设备                                 |
-| braille    | 盲文                                     |
-| embossed   | 盲文打印                                 |
-| handheld   | 手持设备                                 |
-| print      | 文档打印或打印预览模式                   |
-| projection | 项目演示, 比如幻灯                       |
-| screen     | 彩色电脑屏幕                             |
-| speech     | 演讲                                     |
-| tty        | 固定字母间距的网格的媒体, 比如电传打字机 |
-| tv         | 电视                                     |
+[Logical operators](https://developer.mozilla.org/docs/Web/CSS/@media#logical_operators)
 
-### Device Feature Query
+- `only`: only specific media type.
+- `not`: negate entire media query.
+- `and`: all.
+- `,`: any.
 
-| 属性                | 值                     | Min/Max | 描述                 |
-| :------------------ | :--------------------- | :------ | :------------------- |
-| aspect-ratio        | 整数/整数              | yes     | 渲染界面宽高比例     |
-| device-aspect-ratio | 整数/整数              | yes     | 设备屏幕宽高比例     |
-| color               | 整数                   | yes     | 每种色彩的字节数     |
-| color-index         | 整数                   | yes     | 色彩表中的色彩数     |
-| height              | length                 | yes     | 渲染界面的高度       |
-| width               | length                 | yes     | 渲染界面的宽度       |
-| device-height       | length                 | yes     | 设备屏幕的输出高度   |
-| device-width        | length                 | yes     | 设备屏幕的输出宽度   |
-| grid                | 整数                   | no      | 是否是基于格栅的设备 |
-| monochrome          | 整数                   | yes     | 缓冲器中每像素字节   |
-| resolution          | 分辨率(`dpi/dpcm`)     | yes     | 分辨率               |
-| scan                | Progressive interlaced | no      | tv 媒体扫描方式      |
-| orientation         | Portrait/landscape     | no      | 横屏或竖屏           |
+### Media Type Query
+
+[Media types](https://developer.mozilla.org/docs/Web/CSS/@media#media_types):
+
+| Type                 | Query                                    |
+| :------------------- | :--------------------------------------- |
+| all                  | 所有设备                                 |
+| print                | 文档打印或打印预览模式                   |
+| screen               | 彩色电脑屏幕                             |
+| **Deprecated Query** |                                          |
+| braille              | 盲文                                     |
+| embossed             | 盲文打印                                 |
+| handheld             | 手持设备                                 |
+| projection           | 项目演示, 比如幻灯                       |
+| speech               | 演讲                                     |
+| tty                  | 固定字母间距的网格的媒体, 比如电传打字机 |
+| tv                   | 电视                                     |
+
+### Media Feature Query
+
+[Media features](https://developer.mozilla.org/docs/Web/CSS/@media#media_features):
+
+| Feature             | Value                   | Min/Max | Query              |
+| :------------------ | :---------------------- | :------ | :----------------- |
+| grid                | `<integer>`             | no      | 是否基于格栅的设备 |
+| orientation         | `portrait`/`landscape`  | no      | 横屏或竖屏         |
+| aspect-ratio        | `<integer>`/`<integer>` | yes     | 渲染界面宽高比例   |
+| device-aspect-ratio | `<integer>`/`<integer>` | yes     | 设备屏幕宽高比例   |
+| monochrome          | `<integer>`             | yes     | 缓冲器中每像素字节 |
+| resolution          | `<resolution>`          | yes     | 分辨率             |
+| width               | `<length>`              | yes     | 渲染界面的宽度     |
+| height              | `<length>`              | yes     | 渲染界面的高度     |
+| device-width        | `<length>`              | yes     | 设备屏幕的输出宽度 |
+| device-height       | `<length>`              | yes     | 设备屏幕的输出高度 |
+| color               | `<integer>`             | yes     | 每种色彩的字节数   |
+| color-index         | `<integer>`             | yes     | 色彩表中的色彩数   |
 
 ### Print Device Query
 
 - Page style standard [specification](https://developer.mozilla.org/docs/Web/CSS/@page).
 - PDF style [tutorial](https://www.smashingmagazine.com/2015/01/designing-for-print-with-css).
 
-### Pointer Device Query
+### Hover and Pointer Device Query
+
+| Hover Query | Pointer Query | Device                                 |
+| ----------- | ------------- | -------------------------------------- |
+| none        | coarse        | smartphones, touch screens             |
+| none        | fine          | stylus-based screens                   |
+| hover       | coarse        | smart TVs, video game consoles         |
+| hover       | fine          | desktop computers, laptops, touch pads |
+
+#### Hover Device Query
+
+`hover`/`any-hover`:
+
+- `none`.
+- `hover`.
+
+```html
+<a href="#">Try hovering over me!</a>
+
+<style>
+  @media (hover: hover) {
+    a:hover {
+      background: yellow;
+    }
+  }
+
+  @media (any-hover: hover) {
+    a:hover {
+      background: yellow;
+    }
+  }
+</style>
+```
+
+#### Pointer Device Query
 
 `pointer`/`any-pointer`:
 
@@ -5928,82 +5976,86 @@ use `inline-box` with `width`
 
 ```html
 <input id="test" type="checkbox" /> <label for="test">Look at me!</label>
-```
 
-```css
-input[type='checkbox'] {
-  appearance: none;
-  margin: 0;
-  border: solid;
-}
-
-input[type='checkbox']:checked {
-  background: gray;
-}
-
-@media (pointer: fine) {
-  input[type='checkbox'] {
-    width: 15px;
-    height: 15px;
-    border-color: blue;
-    border-width: 1px;
-  }
-}
-
-@media (pointer: coarse) {
-  input[type='checkbox'] {
-    width: 30px;
-    height: 30px;
-    border-color: red;
-    border-width: 2px;
-  }
-}
-
-@media (any-pointer: fine) {
+<style>
   input[type='checkbox'] {
     appearance: none;
-    width: 15px;
-    height: 15px;
-    border: 1px solid blue;
+    margin: 0;
+    border: solid;
   }
-}
 
-@media (any-pointer: coarse) {
-  input[type='checkbox'] {
-    appearance: none;
-    width: 30px;
-    height: 30px;
-    border: 2px solid red;
+  input[type='checkbox']:checked {
+    background: gray;
   }
-}
+
+  @media (pointer: fine) {
+    input[type='checkbox'] {
+      width: 15px;
+      height: 15px;
+      border-color: blue;
+      border-width: 1px;
+    }
+  }
+
+  @media (pointer: coarse) {
+    input[type='checkbox'] {
+      width: 30px;
+      height: 30px;
+      border-color: red;
+      border-width: 2px;
+    }
+  }
+
+  @media (any-pointer: fine) {
+    input[type='checkbox'] {
+      appearance: none;
+      width: 15px;
+      height: 15px;
+      border: 1px solid blue;
+    }
+  }
+
+  @media (any-pointer: coarse) {
+    input[type='checkbox'] {
+      appearance: none;
+      width: 30px;
+      height: 30px;
+      border: 2px solid red;
+    }
+  }
+</style>
 ```
 
-### Hover Device Query
+### Resolution Query
 
-```html
-<a href="#">Try hovering over me!</a>
-```
+[`<resolution>`](https://developer.mozilla.org/docs/Web/CSS/resolution):
+
+- `<number>dpi`.
+- `<number>dpcm`.
+- `<number>x`/`<number>dppx`.
 
 ```css
-@media (hover: hover) {
-  a:hover {
+/* Exact resolution */
+@media (resolution: 150dpi) {
+  p {
+    color: red;
+  }
+}
+
+/* Minimum resolution */
+@media (min-resolution: 72dpi) {
+  p {
+    text-decoration: underline;
+  }
+}
+
+/* Maximum resolution */
+@media (max-resolution: 300dpi) {
+  p {
     background: yellow;
   }
 }
-
-@media (any-hover: hover) {
-  a:hover {
-    background: yellow;
-  }
-}
 ```
-
-| Hover Query | Pointer Query | Device                                 |
-| ----------- | ------------- | -------------------------------------- |
-| none        | coarse        | smartphones, touch screens             |
-| none        | fine          | stylus-based screens                   |
-| hover       | coarse        | smart TVs, video game consoles         |
-| hover       | fine          | desktop computers, laptops, touch pads |
 
 ### Contrast Query
 
@@ -6016,6 +6068,7 @@ input[type='checkbox']:checked {
 
 `prefers-color-scheme`:
 
+- `no-preference`.
 - `light`.
 - `dark`.
 
