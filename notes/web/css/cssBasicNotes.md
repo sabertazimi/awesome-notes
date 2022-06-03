@@ -477,10 +477,11 @@ In `position`/`size`/`margin`/`padding`/`border`/`text alignment`:
 
 - `--invalid-value: initial;` is `invalid` value
   leading to `var(--invalid-value)` called failed,
-  `var(--invalid-value, backup-value)` get backup-value.
+  `var(--invalid-value, backup-value)` get `backup-value`.
 - `--empty-value: ;` is valid `empty` value
   leading to `var(--empty-value)` called succeeded,
-  `var(--empty-value, backup-value)` get **parent value**.
+  `var(--empty-value, backup-value)` get `unset` value
+  (`inherit` or `initial` value).
 - Use `invalid` and `empty` value to
   implement `if (true)` statement,
   you can see real world case on `tailwind.css`.
