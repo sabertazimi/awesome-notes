@@ -4207,8 +4207,10 @@ table {
 ### Background Image
 
 - `url()`.
+- `image-set([<image> <resolution>]#)`.
 - `linear-gradient()`.
 - `radial-gradient()`.
+- `conic-gradient()`.
 
 Gradient buttons:
 
@@ -6146,7 +6148,7 @@ use `inline-box` with `width`
 
 - `<number>dpi`.
 - `<number>dpcm`.
-- `<number>x`/`<number>dppx`.
+- `<number>x`/`<number>dppx`: `1dppx` = `96dpi`.
 
 ```css
 /* Exact resolution */
