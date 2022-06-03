@@ -275,9 +275,17 @@ The user agent performs four steps to calculate a property's actual (final) valu
 
 ### Current Color
 
+[`currentcolor`](https://css-tricks.com/currentcolor):
+
 - `currentcolor` 变量使用当前 `color` 计算值.
 - `border-color`/`outline-color`/`caret-color`/`text-shadow`/`box-shadow`
   默认表现为 `currentcolor`.
+
+### Accent Color
+
+[`accent-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color):
+
+Change user-interface controls accent color.
 
 ### HSL Color
 
