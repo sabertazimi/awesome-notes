@@ -352,6 +352,15 @@ Change user-interface controls accent color.
 }
 ```
 
+### HWB Color
+
+[`hwb(H W B [/ A])`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hwb):
+
+- `H`: hue (`<angle>`).
+- `W`: whiteness (`<percentage>`).
+- `B`: blackness (`<percentage>`).
+- `A`: alpha (`<percentage>`).
+
 ### CSS Color Reference
 
 - CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
