@@ -3378,6 +3378,59 @@ p {
 - [`text-underline-offset`](https://developer.mozilla.org/docs/Web/CSS/text-underline-offset).
 - [`text-decoration-skip-ink`](https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip-ink).
 
+### Text Emphasis
+
+[`text-emphasis`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis):
+
+- `<'text-emphasis-style'> || <'text-emphasis-color'>`.
+- [`text-emphasis-style`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style):
+  - `none`.
+  - `<character>`.
+  - `[ filled | open ] || [ dot | circle | double-circle | triangle | sesame ]`.
+- [`text-emphasis-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color):
+  `currentcolor | <color>`.
+- 重点符号字号默认为文字字号的一半.
+
+```css
+/* Initial value */
+text-emphasis: none;
+
+/* <string> value */
+text-emphasis: 'x';
+text-emphasis: '点';
+text-emphasis: '\25B2';
+text-emphasis: '*' #555;
+
+/* Keywords value */
+text-emphasis: filled; /* filled dot */
+text-emphasis: open; /* open dot */
+text-emphasis: sesame; /* filled sesame */
+text-emphasis: open sesame;
+
+/* Keywords value combined with a color */
+text-emphasis: filled sesame #555;
+```
+
+[`text-emphasis-position`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position):
+
+- `[ over | under ] && [ right | left ]`.
+- `over`: draws marks over text in horizontal writing mode.
+- `under`: draws marks under text in horizontal writing mode.
+- `right`: draws marks to right of text in vertical writing mode.
+- `left`: draws marks to left of text in vertical writing mode.
+- 默认在顶部或右侧画重点符号.
+
+```css
+/* Initial value */
+text-emphasis-position: over right;
+
+/* Keywords value */
+text-emphasis-position: over left;
+text-emphasis-position: under right;
+text-emphasis-position: left under;
+text-emphasis-position: right over;
+```
+
 ### Text Overflow
 
 - `clip`: 切除溢出部分.
