@@ -405,6 +405,9 @@ In `position`/`size`/`margin`/`padding`/`border`/`text alignment`:
 
 ### Scope Variables
 
+CSS Variables 本质上具有继承特性,
+HTML 文档树中, 后代元素可以继承祖先元素的 CSS Variables:
+
 ```html
 <div class="alert alert-info">
   <div class="alert-content">
