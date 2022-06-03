@@ -780,6 +780,89 @@ html {
 }
 ```
 
+Generate fluid size for [`Tailwind.css`](https://davidhellmann.com/blog/development/tailwindcss-fluid-typography-with-css-clamp):
+
+ <!-- markdownlint-disable line-length -->
+
+```ts
+const settings = {
+  typography: {
+    fontSizeMin: 1.125,
+    fontSizeMax: 1.25,
+    msFactorMin: 1.125,
+    msFactorMax: 1.2,
+    lineHeight: 1.6,
+  },
+  screensRem: {
+    min: 20,
+    sm: 40,
+    md: 48,
+    lg: 64,
+    xl: 80,
+    '2xl': 96,
+  },
+  grid: {
+    cols: 24,
+  },
+};
+
+const remToPx = rem => `${rem * 16}px`;
+
+const screens = {
+  sm: remToPx(settings.screensRem.sm),
+  md: remToPx(settings.screensRem.md),
+  lg: remToPx(settings.screensRem.lg),
+  xl: remToPx(settings.screensRem.xl),
+  '2xl': remToPx(settings.screensRem['2xl']),
+};
+
+const fsMin = settings.typography.fontSizeMin;
+const fsMax = settings.typography.fontSizeMax;
+const msFactorMin = settings.typography.msFactorMin;
+const msFactorMax = settings.typography.msFactorMax;
+const screenMin = settings.screensRem.min;
+const screenMax = settings.screensRem['2xl'];
+
+const calcMulti = (multiMin = 0, multiMax = null) => {
+  return {
+    fsMin: fsMin * Math.pow(msFactorMin, multiMin),
+    fsMax: fsMax * Math.pow(msFactorMax, multiMax || multiMin),
+  };
+};
+
+const clamp = (multiMin = 0, multiMax = null) => {
+  const _calcMulti = calcMulti(multiMin, multiMax || multiMin);
+  const _fsMin = _calcMulti.fsMin;
+  const _fsMax = _calcMulti.fsMax;
+  return `clamp(${_fsMin}rem, calc(${_fsMin}rem + (${_fsMax} - ${_fsMin}) * ((100vw - ${screenMin}rem) / (${screenMax} - ${screenMin}))), ${_fsMax}rem)`;
+};
+
+const fontSize = {
+  xs: clamp(-2),
+  sm: clamp(-1),
+  base: clamp(0),
+  lg: clamp(1),
+  xl: clamp(2),
+  '2xl': clamp(3),
+  '3xl': clamp(4),
+  '4xl': clamp(5),
+  '5xl': clamp(6),
+  '6xl': clamp(7),
+  '7xl': clamp(8),
+  '8xl': clamp(9),
+  '9xl': clamp(10),
+};
+
+module.exports = {
+  theme: {
+    screens,
+    fontSize,
+  },
+};
+```
+
+ <!-- markdownlint-enable line-length -->
+
 ## CSS Selectors
 
 [![CSS Selectors](./figures/Selectors.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors)
