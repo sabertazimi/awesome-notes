@@ -4212,6 +4212,22 @@ table {
 - `radial-gradient()`.
 - `conic-gradient()`.
 
+Image set background:
+
+```css
+.image-set {
+  width: 128px;
+  height: 96px;
+  background: url('fallback.jpg');
+  background: image-set(
+    url('w128px.jpg') 1x,
+    url('w256px.jpg') 2x,
+    url('w512px.jpg') 3x
+  );
+  background-size: cover;
+}
+```
+
 Gradient buttons:
 
 ```css
