@@ -782,7 +782,7 @@ html {
 
 Generate fluid size for [`Tailwind.css`](https://davidhellmann.com/blog/development/tailwindcss-fluid-typography-with-css-clamp):
 
- <!-- markdownlint-disable line-length -->
+<!-- markdownlint-disable line-length -->
 
 ```ts
 const settings = {
@@ -861,7 +861,7 @@ module.exports = {
 };
 ```
 
- <!-- markdownlint-enable line-length -->
+<!-- markdownlint-enable line-length -->
 
 ## CSS Selectors
 
