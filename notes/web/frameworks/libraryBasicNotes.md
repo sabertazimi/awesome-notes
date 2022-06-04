@@ -875,6 +875,7 @@ tags: [Web, Framework, Library]
 - [VDX: FFmpeg CLI](https://github.com/yuanqing/vdx)
 - [Remotion: Create Videos Programmatically in React](https://github.com/remotion-dev/remotion)
 - [Liqvid: React Interactive Video Library](https://github.com/liqvidjs/liqvid)
+- [Shaka: Adaptive Media Formats Player Library](https://github.com/shaka-project/shaka-player)
 
 ### Camera
 
