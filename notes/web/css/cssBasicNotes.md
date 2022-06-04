@@ -4994,6 +4994,25 @@ p:hover {
 
 ### Blend Mode
 
+| Mode          | Effect   |
+| ------------- | -------- |
+| `normal`      | 正常     |
+| `multiply`    | 正片叠底 |
+| `screen`      | 滤色     |
+| `overlay`     | 叠加     |
+| `darken`      | 变暗     |
+| `lighten`     | 变亮     |
+| `color-dodge` | 颜色变淡 |
+| `color-burn`  | 颜色加深 |
+| `hard-light`  | 强光     |
+| `soft-light`  | 柔光     |
+| `difference`  | 差值     |
+| `exclusion`   | 排除     |
+| `hue`         | 色调     |
+| `saturation`  | 饱和度   |
+| `color`       | 颜色     |
+| `luminosity`  | 亮度     |
+
 #### Mix Blend Mode
 
 - `mix-blend-mode` is used for text styles.
