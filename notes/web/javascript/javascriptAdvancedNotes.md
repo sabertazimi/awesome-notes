@@ -9233,6 +9233,8 @@ Set-Cookie: height=100; domain=me.github.com
 Set-Cookie: weight=100; domain=me.github.com
 ```
 
+[![Session Cookie](./figures/SessionCookie.jpg)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#define_the_lifetime_of_a_cookie)
+
 #### Session Cookie Cons
 
 - 认证方式局限于在浏览器 (Cookie).
@@ -9285,6 +9287,8 @@ Set-Cookie: weight=100; domain=me.github.com
 - 一个专门生成 `access token` 的 token, 称为 `refresh token`.
   `refresh token` 用来获取 `access token`, 有效期更长,
   通过独立服务和严格的请求方式增加安全性.
+
+[![JSON Web Token](./figures/JSONWebToken.jpg)](https://jwt.io/introduction)
 
 #### JSON Web TOken Pros
 
