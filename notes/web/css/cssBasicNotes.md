@@ -3603,7 +3603,11 @@ wbr::after {
 
 :::
 
-### Text Direction
+### Text Horizontal Direction
+
+#### Direction
+
+Set direction of text, table columns, and horizontal overflow:
 
 ```css
 .ltr {
@@ -3615,7 +3619,38 @@ wbr::after {
 }
 ```
 
-### Text Writing Mode
+#### Unicode Bidi
+
+[`unicode-bidi`](https://developer.mozilla.org/docs/Web/CSS/unicode-bidi):
+
+- `normal`.
+- `plaintext`: 元素内文字 LTR.
+- `embed`: 中英文字符 LTR, 标点符号 RLT.
+- `isolate`: 中英文字符 LTR, 标点符号 RLT.
+- `bidi-override`: 所有字符 RTL.
+- `isolate-override`: 所有字符 RTL.
+
+```html
+<p><button>button按钮?</button><span>span标签?</span>匿名内联元素?</p>
+
+<style>
+  p {
+    direction: rtl;
+  }
+
+  span {
+    background-color: skyblue;
+  }
+</style>
+```
+
+![Unicode Bidi](./figures/UnicodeBidi.png)
+
+### Text Vertical Direction
+
+#### Writing Mode
+
+Set whether lines of text are laid out horizontally or **vertically**:
 
 ```css
 /* 单列展示 */
@@ -3641,6 +3676,27 @@ wbr::after {
   writing-mode: tb-rl; /* IE: 竖直从右向左 */
 }
 ```
+
+#### Text Orientation
+
+[`text-orientation`](https://developer.mozilla.org/docs/Web/CSS/text-orientation):
+
+- `mixed`:
+  中文字符正立, 英文字符旋转 90 度.
+- `upright`:
+  中文字符正立, 英文字符正立.
+- `sideways`/`sideways-right`:
+  中文字符旋转 90 度, 英文字符旋转 90 度.
+
+#### Text Combine Upright
+
+[`text-combine-upright`](https://developer.mozilla.org/docs/Web/CSS/text-combine-upright):
+
+- `none`.
+- `all`:
+  横向合并所有类型字符.
+- `digits <integer>?`:
+  横向合并数字字符.
 
 ## CSS Font
 
