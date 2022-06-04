@@ -3951,19 +3951,62 @@ math {
 
 ### Font Style
 
+[`font-style`](https://developer.mozilla.org/docs/Web/CSS/font-style):
+
 - `normal`.
 - `italic`.
 - `oblique`.
 
+### Font Synthesis
+
+[`font-synthesis`](https://developer.mozilla.org/docs/Web/CSS/font-synthesis):
+
+- Controls which **missing** typefaces, bold, italic, or small-caps
+  may be synthesized by the browser.
+- Initial value: `weight style`.
+- Formal syntax: `none | [ weight || style || small-caps ]`.
+
+```html
+<em class="syn">Synthesize me! 站直。</em>
+<br />
+<em class="no-syn">Don't synthesize me! 站直。</em>
+
+<style>
+  em {
+    font-weight: bold;
+  }
+
+  .syn {
+    font-synthesis: style weight small-caps;
+  }
+
+  .no-syn {
+    font-synthesis: none;
+  }
+</style>
+```
+
+![Font Synthesis](./figures/FontSynthesis.png)
+
 ### Font Variant
 
+[`font-variant`](https://developer.mozilla.org/docs/Web/CSS/font-variant):
+
 - `normal`.
-- `small-caps`: 小体型大写字母.
-
-### Font Size Adjust
-
-- 使字体保持大小, 不随字体类型改变而改变.
-- 不同字体有不同的值 (`x-height`/字体尺寸).
+- `none`.
+- [`font-variant-caps`](https://developer.mozilla.org/docs/Web/CSS/font-variant-caps):
+  - `small-caps`: 小体型大写字母.
+  - `all-small-caps`.
+  - `petite-caps`.
+  - `all-petite-caps`.
+  - `unicase`.
+  - `titling-caps`.
+- [`font-variant-east-asian`](https://developer.mozilla.org/docs/Web/CSS/font-variant-east-asian):
+  control usage of alternate glyphs for East Asian scripts.
+- [`font-variant-ligatures`](https://developer.mozilla.org/docs/Web/CSS/font-variant-ligatures):
+  controls usage of ligatures and contextual forms.
+- [`font-variant-numeric`](https://developer.mozilla.org/docs/Web/CSS/font-variant-numeric):
+  control usage of alternate glyphs for numbers, fractions, and ordinal markers.
 
 ### Font Display
 
