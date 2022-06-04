@@ -341,7 +341,7 @@ The user agent performs four steps to calculate a property's actual (final) valu
 
 ### Accent Color
 
-[`accent-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color):
+[`accent-color`](https://developer.mozilla.org/docs/Web/CSS/accent-color):
 
 Change user-interface controls accent color.
 
@@ -412,7 +412,7 @@ Change user-interface controls accent color.
 
 ### HWB Color
 
-[`hwb(H W B [/ A])`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hwb):
+[`hwb(H W B [/ A])`](https://developer.mozilla.org/docs/Web/CSS/color_value/hwb):
 
 - `H`: hue (`<angle>`).
 - `W`: whiteness (`<percentage>`).
@@ -3438,14 +3438,14 @@ p {
 
 ### Text Emphasis
 
-[`text-emphasis`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis):
+[`text-emphasis`](https://developer.mozilla.org/docs/Web/CSS/text-emphasis):
 
 - `<'text-emphasis-style'> || <'text-emphasis-color'>`.
-- [`text-emphasis-style`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style):
+- [`text-emphasis-style`](https://developer.mozilla.org/docs/Web/CSS/text-emphasis-style):
   - `none`.
   - `<character>`.
   - `[ filled | open ] || [ dot | circle | double-circle | triangle | sesame ]`.
-- [`text-emphasis-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color):
+- [`text-emphasis-color`](https://developer.mozilla.org/docs/Web/CSS/text-emphasis-color):
   `currentcolor | <color>`.
 - 重点符号字号默认为文字字号的一半.
 
@@ -3469,7 +3469,7 @@ text-emphasis: open sesame;
 text-emphasis: filled sesame #555;
 ```
 
-[`text-emphasis-position`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position):
+[`text-emphasis-position`](https://developer.mozilla.org/docs/Web/CSS/text-emphasis-position):
 
 - `[ over | under ] && [ right | left ]`.
 - `over`: draws marks over text in horizontal writing mode.
@@ -5235,7 +5235,7 @@ Avatar with circle status indicator:
 
 ### Touch Action
 
-[`touch-action`](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action):
+[`touch-action`](https://developer.mozilla.org/docs/Web/CSS/touch-action):
 
 - `auto`:
   enable all panning and zooming gestures.
