@@ -3349,12 +3349,22 @@ article a {
 
 ### Text Indent
 
-`text-indent`:
+[`text-indent`](https://developer.mozilla.org/docs/Web/CSS/text-indent):
 
 - 作用于 block container, 但实际作用于第一行内联盒子内容.
 - 对 `display: inline` 替换元素无效.
 - 对 `display: inline-*` 替换元素有效.
 - Percentage `text-indent` calculate by `containing block` width.
+
+[`tab-size`](https://developer.mozilla.org/docs/Web/CSS/tab-size):
+
+```css
+pre {
+  font-size: 100%;
+  tab-size: 2;
+  white-space: pre-wrap;
+}
+```
 
 ### Text Spacing
 
