@@ -3968,7 +3968,7 @@ class IndexedDB {
       this.db = null;
 
       if (!('indexedDB' in window)) {
-        reject(new Error('not supported'));
+        reject(new Error('Not supported'));
       }
 
       const dbOpen = indexedDB.open(dbName, dbVersion);
@@ -6575,12 +6575,16 @@ yarn cypress open
 /// <reference types="cypress" />
 ```
 
-`cypress.json`:
+`cypress.config.ts`:
 
-```json
-{
-  "baseUrl": "http://localhost:3000"
-}
+```ts
+import { defineConfig } from 'cypress';
+
+export default defineConfig({
+  e2e: {
+    baseUrl: 'http://localhost:3000',
+  },
+});
 ```
 
 `tsconfig.json`:
@@ -6597,10 +6601,16 @@ yarn cypress open
 ```json
 {
   "scripts": {
-    "e2e": "start-server-and-test e2e:prepare http://localhost:3000 e2e:headless",
+    "e2e:chrome": "start-server-and-test e2e:prepare http://localhost:3000 cypress:chrome",
+    "e2e:firefox": "start-server-and-test e2e:prepare http://localhost:3000 cypress:firefox",
+    "e2e:ui": "start-server-and-test e2e:prepare http://localhost:3000 cypress:open",
     "e2e:prepare": "yarn build && yarn serve",
-    "e2e:headless": "cypress run",
-    "e2e:ui": "cypress open"
+    "cypress:chrome": "cypress run --browser chrome",
+    "cypress:chromium": "cypress run --browser chromium",
+    "cypress:edge": "cypress run --browser edge",
+    "cypress:electron": "cypress run",
+    "cypress:firefox": "cypress run --browser firefox",
+    "cypress:open": "cypress open --browser electron --e2e"
   }
 }
 ```
@@ -6623,13 +6633,13 @@ const config = {
 
 ### Basic Cypress Testing
 
-`support/commands.ts`:
+`cypress/support/commands.ts`:
 
 ```ts
 import '@testing-library/cypress/add-commands';
 ```
 
-`integration/component.spec.ts`:
+`cypress/e2e/component.cy.ts`:
 
 ```ts
 /// <reference types="cypress"/>
@@ -6645,7 +6655,7 @@ describe('component', () => {
 });
 ```
 
-`integration/payment.spec.ts`:
+`cypress/e2e/payment.cy.ts`:
 
 ```ts
 import { v4 as uuid } from 'uuid';
@@ -6899,61 +6909,74 @@ Cypress.Commands.add('take', (input: string) => {
 
 ### Cypress Plugin
 
-`e2e/plugins/index.js`: setup TypeScript to transpile tests:
+Setup `TypeScript` to transpile tests:
 
 ```ts
-const wp = require('@cypress/webpack-preprocessor');
+// cypress.config.ts
+import { defineConfig } from 'cypress';
+import wp from '@cypress/webpack-preprocessor';
 
-module.exports = on => {
-  const options = {
-    webpackOptions: {
-      resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
-      },
-      module: {
-        rules: [
-          {
-            test: /\.tsx?$/,
-            loader: 'ts-loader',
-            options: { transpileOnly: true },
+export default defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      on(
+        'file:preprocessor',
+        wp({
+          webpackOptions: {
+            resolve: {
+              extensions: ['.ts', '.tsx', '.js', '.jsx'],
+            },
+            module: {
+              rules: [
+                {
+                  test: /\.tsx?$/,
+                  loader: 'ts-loader',
+                  options: { transpileOnly: true },
+                },
+              ],
+            },
           },
-        ],
-      },
+        })
+      );
     },
-  };
-
-  on('file:preprocessor', wp(options));
-};
+  },
+});
 ```
 
-AXE a11y testing:
+`AXE` a11y testing:
 
 ```ts
-// cypress/plugins/index.ts
-const fetch = require('node-fetch');
+// cypress.config.ts
+import { defineConfig } from 'cypress';
+import fetch from 'undici';
 
-module.exports = (on, config) => {
-  on('task', {
-    sitemapLocations() {
-      return fetch(`${config.baseUrl}/sitemap.xml`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/xml',
+export default defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      on('task', {
+        sitemapLocations() {
+          return fetch(`${config.baseUrl}/sitemap.xml`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/xml',
+            },
+          })
+            .then(res => res.text())
+            .then(xml => {
+              const locs = [...xml.matchAll(`<loc>(.|\n)*?</loc>`)].map(
+                ([loc]) => loc.replace('<loc>', '').replace('</loc>', '')
+              );
+              return locs;
+            });
         },
-      })
-        .then(res => res.text())
-        .then(xml => {
-          const locs = [...xml.matchAll(`<loc>(.|\n)*?</loc>`)].map(([loc]) =>
-            loc.replace('<loc>', '').replace('</loc>', '')
-          );
-          return locs;
-        });
-    },
-  });
-  return config;
-};
+      });
 
-// cypress/integration/smoke.spec.ts
+      return config;
+    },
+  },
+});
+
+// cypress/e2e/smoke.cy.ts
 it('should be accessible', () => {
   cy.task('sitemapLocations').then(pages => {
     pages.forEach(page => {
