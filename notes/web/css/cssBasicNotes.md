@@ -3965,6 +3965,7 @@ selects a normal, condensed, or expanded face from a font:
 - `normal`.
 - `italic`.
 - `oblique`.
+- `oblique <angle>`.
 
 ### Font Synthesis
 
