@@ -3721,59 +3721,6 @@ Set whether lines of text are laid out horizontally or **vertically**:
 
 ## CSS Font
 
-### Font Size
-
-- `ch`: calculate by `0` width.
-- `ex`: calculate by `x` width.
-- `em`: calculate by original `font-size`.
-- `rem`: calculate by root `font-size`.
-
-```css
-html {
-  /* 浏览器默认size为16px, 此时将html-size自动计算为10px */
-  font-size: 62.5%;
-}
-
-small {
-  /* 11px */
-  font-size: 1.1rem;
-}
-
-strong {
-  /* 18px */
-  font-size: 1.8rem;
-}
-```
-
-### Font Size Adjust
-
-[`font-size-adjust`](https://developer.mozilla.org/docs/Web/CSS/font-size-adjust):
-
-- 使字体保持大小, 不随字体类型改变而改变.
-- 不同字体有不同的值 (`x-height`/字体尺寸).
-
-### Font Stretch
-
-[`font-stretch`](https://developer.mozilla.org/docs/Web/CSS/font-stretch#examples),
-selects a normal, condensed, or expanded face from a font:
-
-- `normal`.
-- `ultra-condensed | extra-condensed | condensed | semi-condensed`.
-- `semi-expanded | expanded | extra-expanded | ultra-expanded`.
-- `<percentage>`.
-
-| Keyword         | Percentage |
-| --------------- | ---------- |
-| ultra-condensed | 50%        |
-| extra-condensed | 62.5%      |
-| condensed       | 75%        |
-| semi-condensed  | 87.5%      |
-| normal          | 100%       |
-| semi-expanded   | 112.5%     |
-| expanded        | 125%       |
-| extra-expanded  | 150%       |
-| ultra-expanded  | 200%       |
-
 ### Font Family
 
 #### Generic Font Family
@@ -3948,6 +3895,68 @@ math {
     'Courier New', monospace;
 }
 ```
+
+### Font Size
+
+- `ch`: calculate by `0` width.
+- `ex`: calculate by `x` width.
+- `em`: calculate by original `font-size`.
+- `rem`: calculate by root `font-size`.
+
+```css
+html {
+  /* 浏览器默认size为16px, 此时将html-size自动计算为10px */
+  font-size: 62.5%;
+}
+
+small {
+  /* 11px */
+  font-size: 1.1rem;
+}
+
+strong {
+  /* 18px */
+  font-size: 1.8rem;
+}
+```
+
+### Font Size Adjust
+
+[`font-size-adjust`](https://developer.mozilla.org/docs/Web/CSS/font-size-adjust):
+
+- 使字体保持大小, 不随字体类型改变而改变.
+- 不同字体有不同的值 (`x-height`/字体尺寸).
+
+### Font Stretch
+
+[`font-stretch`](https://developer.mozilla.org/docs/Web/CSS/font-stretch#examples),
+selects a normal, condensed, or expanded face from a font:
+
+- `normal`.
+- `ultra-condensed | extra-condensed | condensed | semi-condensed`.
+- `semi-expanded | expanded | extra-expanded | ultra-expanded`.
+- `<percentage>`.
+
+| Keyword         | Percentage |
+| --------------- | ---------- |
+| ultra-condensed | 50%        |
+| extra-condensed | 62.5%      |
+| condensed       | 75%        |
+| semi-condensed  | 87.5%      |
+| normal          | 100%       |
+| semi-expanded   | 112.5%     |
+| expanded        | 125%       |
+| extra-expanded  | 150%       |
+| ultra-expanded  | 200%       |
+
+### Font Kerning
+
+[`font-kerning`](https://developer.mozilla.org/docs/Web/CSS/font-kerning),
+字距调整:
+
+- `auto`.
+- `normal`: enable kerning.
+- `none`: disable kerning.
 
 ### Font Style
 
