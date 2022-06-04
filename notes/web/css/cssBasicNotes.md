@@ -3997,16 +3997,31 @@ math {
 - [`font-variant-caps`](https://developer.mozilla.org/docs/Web/CSS/font-variant-caps):
   - `small-caps`: 小体型大写字母.
   - `all-small-caps`.
-  - `petite-caps`.
+  - `petite-caps`: 特小型大写字母.
   - `all-petite-caps`.
-  - `unicase`.
-  - `titling-caps`.
+  - `unicase`: 混合模式, 可以有小体型大写字母, 大写字母, 大体型小写字母.
+  - `titling-caps`: 标题大写字母.
 - [`font-variant-east-asian`](https://developer.mozilla.org/docs/Web/CSS/font-variant-east-asian):
-  control usage of alternate glyphs for East Asian scripts.
+  - `ruby`: 日文上标假名.
+  - `jis78`/`jis83`/`jis90`/`jis04`: 使用对应年份的日语字符集.
+  - `simplified`: 简体字形.
+  - `traditional`: 繁体字形.
+  - `proportional-width`: 不等宽字形.
+  - `full-width`: 等宽字形.
 - [`font-variant-ligatures`](https://developer.mozilla.org/docs/Web/CSS/font-variant-ligatures):
-  controls usage of ligatures and contextual forms.
+  - `common-ligatures`: 使用连字效果.
+  - `discretionary-ligatures`: 使用特殊连字效果, 设计师设计具体效果表现.
+  - `historical-ligatures`: 使用古代连字效果.
+  - `contextual-ligatures`: 使用上下文连字效果, 前后字母影响具体效果表现.
 - [`font-variant-numeric`](https://developer.mozilla.org/docs/Web/CSS/font-variant-numeric):
-  control usage of alternate glyphs for numbers, fractions, and ordinal markers.
+  - `ordinal`: 强制使用序数标记特殊的标志符号, e.g `1st`, `2nd`, `3rd`, `4th`.
+  - `slashed-zero`: 强制使用带斜线的 `0`.
+  - `lining-nums`: 沿基线对齐.
+  - `oldstyle-nums`: 传统对齐方式.
+  - `proportional-nums`: 不等宽数字.
+  - `tabular-nums`: 等宽数字.
+  - `diagonal-fractions`: 斜线分隔分子母
+  - `stacked-fractions`: 水平线分隔分子母.
 
 ### Font Display
 
