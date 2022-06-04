@@ -4805,7 +4805,9 @@ p:hover {
 
 ## CSS Object
 
-`object-position`/`object-fit`
+### Object Fit
+
+[`object-fit`](https://developer.mozilla.org/docs/Web/CSS/object-fit)
 只对替换元素
 ([`Replaced Element`](https://developer.mozilla.org/docs/Web/CSS/Replaced_element))
 有作用:
@@ -4819,9 +4821,9 @@ p:hover {
 - `embed`.
 - `object`.
 
-`object-position`/`object-fit` 之间的关系有点类似于
-`background-position`/`background-size`,
-可以处理图片拉伸变形问题:
+`object-fit` (`fill | contain | cover | none | scale-down`)
+类似于 `background-size`,
+可以处理图片拉伸变形与 `Cumulative Layout Shift` 问题:
 
 ```css
 .image-container {
