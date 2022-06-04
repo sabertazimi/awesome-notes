@@ -3745,6 +3745,35 @@ strong {
 }
 ```
 
+### Font Size Adjust
+
+[`font-size-adjust`](https://developer.mozilla.org/docs/Web/CSS/font-size-adjust):
+
+- 使字体保持大小, 不随字体类型改变而改变.
+- 不同字体有不同的值 (`x-height`/字体尺寸).
+
+### Font Stretch
+
+[`font-stretch`](https://developer.mozilla.org/docs/Web/CSS/font-stretch#examples),
+selects a normal, condensed, or expanded face from a font:
+
+- `normal`.
+- `ultra-condensed | extra-condensed | condensed | semi-condensed`.
+- `semi-expanded | expanded | extra-expanded | ultra-expanded`.
+- `<percentage>`.
+
+| Keyword         | Percentage |
+| --------------- | ---------- |
+| ultra-condensed | 50%        |
+| extra-condensed | 62.5%      |
+| condensed       | 75%        |
+| semi-condensed  | 87.5%      |
+| normal          | 100%       |
+| semi-expanded   | 112.5%     |
+| expanded        | 125%       |
+| extra-expanded  | 150%       |
+| ultra-expanded  | 200%       |
+
 ### Font Family
 
 #### Generic Font Family
