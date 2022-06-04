@@ -3489,6 +3489,17 @@ text-emphasis-position: left under;
 text-emphasis-position: right over;
 ```
 
+### Text Size Adjust
+
+禁止 iOS 横屏字号自动调整:
+
+```css
+body {
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-text-size-adjust: none;
+}
+```
+
 ### Text Overflow
 
 - `clip`: 切除溢出部分.
