@@ -35,6 +35,64 @@ tags: [Web, CSS]
 
 [![CSS Cascading](./figures/Cascading.png)](https://developer.mozilla.org/docs/Web/CSS/Cascade)
 
+### Layer
+
+#### Layer Formal Syntax
+
+[`@layer`](https://developer.mozilla.org/docs/Web/CSS/@layer) formal syntax:
+
+```css
+@layer [<layer-name># | <layer-name>?  {
+  <stylesheet>
+}]
+```
+
+```css
+@layer base;
+@layer theme, layout, components, utilities;
+
+@layer base {
+  html {
+    font-size: 1rem;
+  }
+}
+
+@layer {
+  html {
+    font-size: 1rem;
+  }
+}
+```
+
+#### Layer Specificity
+
+```css
+/* utilities > components > layout > theme */
+@layer theme, layout, components, utilities;
+
+/* c > c.d > a > a.b */
+@layer a {
+  p {
+    color: red;
+  }
+  @layer b {
+    p {
+      color: green;
+    }
+  }
+}
+@layer c {
+  p {
+    color: orange;
+  }
+  @layer d {
+    p {
+      color: blue;
+    }
+  }
+}
+```
+
 ### Specificity
 
 Specificity (`Selector Priority`) has 4 bits,
