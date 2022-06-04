@@ -4951,19 +4951,23 @@ p:hover {
 
 ## CSS Filter
 
+### Filter
+
+[`filter`](https://developer.mozilla.org/docs/Web/CSS/filter):
+
 ```css
 .filter {
-  filter: url('resources.svg'); /* 引用 SVG filter 元素 */
   filter: blur(5px); /* 模糊 */
-  filter: brightness(0.4); /* 高光 */
+  filter: brightness(240%); /* 亮度 */
   filter: contrast(200%); /* 对比度 */
-  filter: drop-shadow(16px 16px 20px blue); /* 阴影 */
+  filter: drop-shadow(16px 16px 20px blue); /* 投影 */
   filter: grayscale(50%); /* 灰度 */
   filter: hue-rotate(90deg); /* 色相旋转 */
-  filter: invert(75%); /* 颜色翻转/反相 */
+  filter: invert(75%); /* 反相 (颜色翻转) */
   filter: opacity(25%); /* 透明度 */
   filter: saturate(30%); /* 饱和度 */
-  filter: sepia(60%); /* 老照片 */
+  filter: sepia(60%); /* 褐色 (老照片) */
+  filter: url('resources.svg'); /* 引用 SVG filter 元素 */
 
   /* Apply multiple filters */
   filter: contrast(175%) brightness(3%);
@@ -4975,61 +4979,16 @@ p:hover {
 }
 ```
 
-### Fusion Effect
-
-- Parent element: `background-color` + `filter: contrast()`.
-- Child element: `filter: blur()`.
-
-```html
-<div class="container">
-  <div class="circle circle-1"></div>
-  <div class="circle circle-2"></div>
-</div>
-```
-
-```css
-.container {
-  background: #fff; /* Required */
-  filter: contrast(30);
-}
-
-.circle {
-  filter: blur(10px);
-}
-```
-
 ### Backdrop Filter
 
-毛玻璃效果 (`Frosted Glass`: `bg-white/30 shadow-lg backdrop-blur-sm`):
+[`backdrop-filter`](https://developer.mozilla.org/docs/Web/CSS/backdrop-filter):
+
+让当前元素所在区域后面的内容应用滤镜效果.
 
 ```css
-body {
-  background-image: url('https://images.unsplash.com/image');
-  background-position: center;
-}
-
-.card {
-  background-color: rgb(17 25 40 / 54%);
-  border: 1px solid rgb(255 255 255 / 12.5%);
-  border-radius: 12px;
-  backdrop-filter: blur(12px) saturate(200%);
-}
-
-.hero {
-  --inset-shadow: inset 0 0 1px 1px hsl(204deg 100% 90% / 100%);
-  --shadow: 10px 10px 60px 20px hsl(194deg 100% 9% / 50%);
-
-  background-color: hsl(27deg 10% 90% / 90%);
-  border: 1px solid hsl(176deg 87% 7% / 60%);
-  border-radius: 5px;
-  box-shadow: var(--inset-shadow), var(--shadow);
-}
-
-@supports (backdrop-filter: blur(25px) brightness(170%)) {
-  .hero {
-    background-color: hsl(27deg 10% 90% / 50%);
-    backdrop-filter: blur(25px) brightness(170%);
-  }
+.dropdown-list {
+  background: hsl(0deg 0% 100% / 75%);
+  backdrop-filter: blur(5px);
 }
 ```
 
@@ -8623,6 +8582,67 @@ Use pseudo elements to construct circle and line:
   background-color: #fff;
   border: 2px solid #d3d3d3;
   border-radius: 50%;
+}
+```
+
+### Filter Effects
+
+#### Fusion Effect
+
+- Parent element: `background-color` + `filter: contrast()`.
+- Child element: `filter: blur()`.
+- Light/flame/rain drop emulation .
+
+```html
+<div class="container">
+  <div class="circle circle-1"></div>
+  <div class="circle circle-2"></div>
+</div>
+
+<style>
+  .container {
+    background: #fff; /* Required */
+    filter: contrast(30);
+  }
+
+  .circle {
+    filter: blur(10px);
+  }
+</style>
+```
+
+#### Frosted Glass Effect
+
+毛玻璃效果 (`bg-white/30 shadow-lg backdrop-blur-sm`):
+
+```css
+body {
+  background-image: url('https://images.unsplash.com/image');
+  background-position: center;
+}
+
+.card {
+  background-color: rgb(17 25 40 / 54%);
+  border: 1px solid rgb(255 255 255 / 12.5%);
+  border-radius: 12px;
+  backdrop-filter: blur(12px) saturate(200%);
+}
+
+.hero {
+  --inset-shadow: inset 0 0 1px 1px hsl(204deg 100% 90% / 100%);
+  --shadow: 10px 10px 60px 20px hsl(194deg 100% 9% / 50%);
+
+  background-color: hsl(27deg 10% 90% / 90%);
+  border: 1px solid hsl(176deg 87% 7% / 60%);
+  border-radius: 5px;
+  box-shadow: var(--inset-shadow), var(--shadow);
+}
+
+@supports (backdrop-filter: blur(25px) brightness(170%)) {
+  .hero {
+    background-color: hsl(27deg 10% 90% / 50%);
+    backdrop-filter: blur(25px) brightness(170%);
+  }
 }
 ```
 
