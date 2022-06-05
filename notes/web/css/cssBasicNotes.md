@@ -4949,7 +4949,7 @@ p:hover {
 
 [![Conic Gradient](./figures/ConicGradient.png)](https://developer.mozilla.org/docs/Web/CSS/gradient/conic-gradient#composition_of_a_conic_gradient)
 
-## CSS Filter
+## CSS Filter and Blend
 
 ### Filter
 
@@ -4994,89 +4994,115 @@ p:hover {
 
 ### Blend Mode
 
-| Mode          | Effect   |
-| ------------- | -------- |
-| `normal`      | 正常     |
-| `multiply`    | 正片叠底 |
-| `screen`      | 滤色     |
-| `overlay`     | 叠加     |
-| `darken`      | 变暗     |
-| `lighten`     | 变亮     |
-| `color-dodge` | 颜色变淡 |
-| `color-burn`  | 颜色加深 |
-| `hard-light`  | 强光     |
-| `soft-light`  | 柔光     |
-| `difference`  | 差值     |
-| `exclusion`   | 排除     |
-| `hue`         | 色调     |
-| `saturation`  | 饱和度   |
-| `color`       | 颜色     |
-| `luminosity`  | 亮度     |
+[`<blend-mode>`](https://developer.mozilla.org/docs/Web/CSS/blend-mode):
 
-#### Mix Blend Mode
+- `multiply`:
+  - 正片叠底: $C=\frac{A \cdot B}{255}$.
+  - 混合黑色变黑色.
+  - 混合白色不变色.
+  - 混合后颜色变暗.
+- `screen`:
+  - 滤色: $C=255-\frac{(255-A)(255-B)}{255}$.
+  - 混合黑色不变色.
+  - 混合白色变白色.
+  - 混合后颜色变亮.
+- `overlay`:
+  - 叠加 ($A$ 为底图的色值):
+    - $A\leqslant128$: $C=\frac{A \cdot B}{128}$.
+    - $A\gt128$: $C=255-\frac{(255-A)(255-B)}{128}$.
+  - 底图的阴影 (黑色)和高光 (白色) 的颜色会被保留,
+    其他颜色的饱和度和对比度提高, 混合后的图像会更加鲜亮.
+- `darken`/`lighten`:
+  - 变暗: $C=\min(A, B)$.
+  - 变亮: $C=\max(A, B)$.
+  - 可用于实现渐变文字.
+- `color-dodge`:
+  - 颜色变淡: $C=A+\frac{A \cdot B}{255-B}$.
+  - 可用于保护底图的高光, 适合处理高光下的人物照片:
+    通过将照片和特定颜色混合, 可以改变整个照片的色调 (暖色调或是冷色调),
+    同时不会影响人物高光区域的细节.
+- `color-burn`:
+  - 颜色加深: $C=A-\frac{(255-A)(255-B)}{B}$.
+  - 可用于保护底图的阴影, 适合处理阴影丰富的照片:
+    通过将照片和特定颜色混合, 可以营造更加幽深的氛围.
+- `hard-light`:
+  - 强光 ($A$ 为底图的色值):
+    - $B\leqslant128$: $C=\frac{A \cdot B}{128}$.
+    - $B\gt128$: $C=255-\frac{(255-A)(255-B)}{128}$.
+  - 图像亮的地方更亮, 暗的地方更暗.
+- `soft-light`:
+  - 柔光 ($A$ 为底图的色值):
+    - $B\leqslant128$: $C=\frac{A \cdot B}{128}+(\frac{A}{255})^2(255-2\cdot B)$.
+    - $B\gt128$: $C=255-\frac{(255-A)(255-B)}{128}$.
+  - 图像亮的地方轻微变亮, 暗的地方轻微变暗.
+- `difference`:
+  - 差值: $C=|A-B|$.
+  - 若上层元素为 `white`, 则最终混合的颜色是底层元素颜色的反色.
+- `exclusion`:
+  - 排除: $C=A+B-\frac{A \cdot B}{128}$.
+- `hue`:
+  - 色调混合.
+  - 混合后的颜色保留底图的饱和度和亮度, 使用顶图的色调.
+  - 将照片和渐变色进行色调混合, 可让照片呈现出丰富多彩的色调效果.
+- `saturation`:
+  - 饱和度混合.
+  - 混合后的颜色保留底图的色调和亮度, 使用顶图的饱和度.
+- `luminosity`:
+  - 亮度混合.
+  - 混合后的颜色保留底图的色调和饱和度, 使用顶图的亮度.
+  - 当底图是渐变图像或纯色图像, 上层元素是复杂图像时, 适合使用亮度混合模式.
+- `color`:
+  - 颜色混合.
+  - 混合后的颜色保留底图的亮度, 使用顶图的色调和饱和度.
+  - 通过使用 CSS 渐变让照片的色调变得丰富.
 
-- `mix-blend-mode` is used for text styles.
-- With `multiply`: black is cutout (keep black)
-  (`0 * WHAT = 0`).
-- With `screen`: white is cutout (keep white)
-  (`100 - (100 - WHAT) * (100 - 100) = 100`).
+### Mix Blend Mode
+
+[`mix-blend-mode`](https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode):
+
+- Used for text styles.
+- `multiply`: `black` is cutout (keep `black`).
+- `screen`: `white` is cutout (keep `white`).
 
 ```html
 <div class="background">
   <h1>Even More CSS Secrets</h1>
 </div>
+
+<style>
+  .background {
+    background-image: url('bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .background h1 {
+    color: white; /* keep white */
+    background-color: black; /* mix with background */
+    mix-blend-mode: screen; /* screen or multiply  */
+  }
+</style>
 ```
 
-```css
-.background {
-  background-image: url('bg.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
+### Background Blend Mode
 
-.background h1 {
-  color: white; /* keep white */
-  background-color: black; /* mix with background */
-  mix-blend-mode: screen; /* screen or multiply  */
-}
-```
-
-#### Background Blend Mode
-
-`background-blend-mode` is used for multiple background images:
+[`background-blend-mode`](https://developer.mozilla.org/docs/Web/CSS/background-blend-mode)
+is used for multiple background images:
 
 ```html
 <div class="container"></div>
+
+<style>
+  .container {
+    background: url($pic1), url($pic2);
+    background-size: cover;
+    background-blend-mode: lighten;
+  }
+</style>
 ```
 
-```css
-.container {
-  background: url($pic1), url($pic2);
-  background-size: cover;
-  background-blend-mode: lighten;
-}
-```
-
-Night mode:
-
-```css
-.night {
-  filter: brightness(80%) grayscale(20%) contrast(1.2);
-  background-blend-mode: darken;
-}
-```
-
-Movie style:
-
-```css
-.movie {
-  filter: contrast(1.1);
-  background-blend-mode: soft-light;
-}
-```
-
-### Filter Reference
+### Filter and Blend Reference
 
 - Instagram [filter](https://github.com/una/CSSgram).
 
@@ -8604,7 +8630,7 @@ Use pseudo elements to construct circle and line:
 }
 ```
 
-### Filter Effects
+### Filter and Blend Effects
 
 #### Fusion Effect
 
@@ -8662,6 +8688,45 @@ body {
     background-color: hsl(27deg 10% 90% / 50%);
     backdrop-filter: blur(25px) brightness(170%);
   }
+}
+```
+
+#### Gradient Text Effect
+
+```css
+.gradient-text {
+  position: relative;
+  color: black;
+  background: #fff;
+}
+
+.gradient-text::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  background: linear-gradient(to right, deepskyblue, deeppink);
+  mix-blend-mode: lighten;
+}
+```
+
+#### Night Effect
+
+```css
+.night {
+  filter: brightness(80%) grayscale(20%) contrast(1.2);
+  background-blend-mode: darken;
+}
+```
+
+#### Movie Effect
+
+```css
+.movie {
+  filter: contrast(1.1);
+  background-blend-mode: soft-light;
 }
 ```
 
