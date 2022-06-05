@@ -4680,7 +4680,7 @@ background-position: top right 10px;
 
 指定背景显示范围:
 
-- `border-box` (initial value).
+- `border-box`.
 - `padding-box`.
 - `content-box`.
 - `text`: 可用于实现`渐变文字`/`镂空文字`/`背景蒙版文字`.
@@ -4721,17 +4721,17 @@ p:hover {
 
 指定背景绘制起点:
 
+- `padding-box`.
 - `border-box`.
-- `padding-box` (`initial` value).
 - `content-box`.
-- 影响 `background-size` `<percentage>` 计算.
+- 影响 `background-size: <percentage>` 计算.
 - 影响**起点两侧**背景样式细节.
 
 ### Background Size
 
-- `contain`: 等比例缩放, 部分区域会留白.
-- `cover`: 等比例裁剪, 部分图像会裁剪.
-- `auto`:
+[`background-size`](https://developer.mozilla.org/docs/Web/CSS/background-size):
+
+- `auto{1,2}`:
   - 具有 intrinsic size 的背景 (e.g 位图),
     computed to `[intrinsic size, intrinsic size]`.
   - 具有一个方向 intrinsic size, 具有 intrinsic ratio 的背景 (e.g 矢量图),
@@ -4742,7 +4742,10 @@ p:hover {
     computed to `contain` (等比例缩放).
   - 不具有 intrinsic size, 不具有 intrinsic ratio 的背景 (e.g CSS gradient),
     computed to `[extrinsic size, extrinsic size]`.
-- `<percentage>`: calculate by extrinsic size and `background-origin` box.
+- `cover`: 等比例裁剪, 部分图像会裁剪.
+- `contain`: 等比例缩放, 部分区域会留白.
+- `<length-percentage>{1，2}`:
+  - `<percentage>`: calculate by extrinsic size and `background-origin` box.
 
 ```css
 .background-size {
@@ -5190,8 +5193,60 @@ making it possible to wrap text around complex objects rather than simple boxes:
 
 ### Mask
 
-- Black for masking.
-- White for showing.
+#### Mask Image
+
+[`mask-image`](https://developer.mozilla.org/docs/Web/CSS/mask-image):
+
+- `none`.
+- `<url>#`.
+- `<gradient>#`.
+- `<image()>`.
+- `<image-set()>`.
+- `<paint()>`.
+- `<element()>`.
+- `<cross-fade()>`.
+
+#### Mask Mode
+
+[`mask-mode`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-mode):
+
+- `match-source`:
+  根据 `mask-image` 类型自动选择模式,
+  SVG `<mask>` 元素 (`url(#mask-id)`) 为 `luminance` 模式,
+  其余场景 (包括 `url('mask.svg')`) 为 `alpha` 模式.
+- `alpha`:
+  基于透明度进行遮罩,
+  `alpha(100%)` for show,
+  `transparent` for hidden.
+- `luminance`:
+  基于亮度进行遮罩,
+  `alpha(100%)` 且为亮色 for show,
+  `alpha(100%)` 且为暗色 for hidden,
+  `transparent` for hidden.
+
+[![Alpha SVG Mask](./figures/AlphaSVGMask.webp)](https://css-tricks.com/almanac/properties/m/mask-mode/#aa-alpha-masks)
+
+[![Luminance SVG Mask](./figures/LuminanceSVGMask.webp)](https://css-tricks.com/almanac/properties/m/mask-mode/#aa-luminance-masks)
+
+```css
+img.alpha-mask {
+  mask-image: linear-gradient(black, transparent);
+  mask-mode: alpha;
+}
+```
+
+[![Alpha Gradient Mask](./figures/AlphaGradientMask.webp)](https://css-tricks.com/almanac/properties/m/mask-mode/#aa-alpha-masks)
+
+[![Luminance Gradient Mask](./figures/LuminanceGradientMask.webp)](https://css-tricks.com/almanac/properties/m/mask-mode/#aa-luminance-masks)
+
+#### Mask Composite
+
+[`mask-composite`](https://developer.mozilla.org/docs/Web/CSS/mask-composite):
+
+- `add`:
+- `subtract`.
+- `intersect`.
+- `exclude`.
 
 ```css
 #masked {
@@ -5201,7 +5256,7 @@ making it possible to wrap text around complex objects rather than simple boxes:
   mask-image: url('https://mdn.mozillademos.org/files/12668/MDN.svg'),
     url('https://mdn.mozillademos.org/files/12676/star.svg');
   mask-size: 100% 100%;
-  mask-composite: add; /* Can be changed in the live sample */
+  mask-composite: add;
 }
 ```
 
