@@ -5169,8 +5169,12 @@ making it possible to wrap text around complex objects rather than simple boxes:
 ### Clip
 
 `clip` 属性只对 `absolute` 与 `fixed` 元素起作用,
-是对 `overflow` 属性的有力补充:
-`overflow` 对于上述两种元素的裁剪作用有限.
+是对 `overflow` 属性的有力补充
+(`overflow` 对于上述两种元素的裁剪作用有限):
+
+- `clip` 元素 `clientWidth`, `clientHeight`, `computedStyle` 保持不变:
+  视觉上裁剪, 元素尺寸依然是原本尺寸.
+- `clip` 元素非可见部分无法响应点击事件.
 
 ```css
 .fixed-clip {
@@ -5178,10 +5182,6 @@ making it possible to wrap text around complex objects rather than simple boxes:
   clip: rect(30px 200px 200px 20px);
 }
 ```
-
-- `clip` 元素 `clientWidth`, `clientHeight`, `computedStyle` 保持不变:
-  视觉上裁剪, 元素尺寸依然是原本尺寸.
-- `clip` 元素非可见部分无法响应点击事件.
 
 ### Clip Path
 
