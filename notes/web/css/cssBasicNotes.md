@@ -5138,16 +5138,6 @@ body {
   - SVG mask.
 - pseudo elements.
 
-### Basic Shape Type
-
-[`<basic-shape>`](https://developer.mozilla.org/docs/Web/CSS/basic-shape):
-
-- [`inset(<length-percentage>{1,4} [round <'border-radius'>]?)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/inset).
-- [`circle([<shape-radius>]? [at <position>]?)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/circle).
-- [`ellipse([<shape-radius>{2}]? [at <position>]?)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/ellipse).
-- [`polygon([<fill-rule>,]? [<length-percentage> <length-percentage>]#)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/polygon).
-- [`path([<fill-rule>,]? <string>)`](https://developer.mozilla.org/docs/Web/CSS/path).
-
 ### Shape Outside
 
 [`shape-outside`](https://developer.mozilla.org/docs/Web/CSS/shape-outside)
@@ -5168,10 +5158,13 @@ making it possible to wrap text around complex objects rather than simple boxes:
 
 ### Clip
 
-`clip` 属性只对 `absolute` 与 `fixed` 元素起作用,
+[`clip`](https://developer.mozilla.org/docs/Web/CSS/clip)
+属性只对 `absolute` 与 `fixed` 元素起作用,
 是对 `overflow` 属性的有力补充
 (`overflow` 对于上述两种元素的裁剪作用有限):
 
+- `auto`.
+- `rect(<top>, <right>, <bottom>, <left>)`.
 - `clip` 元素 `clientWidth`, `clientHeight`, `computedStyle` 保持不变:
   视觉上裁剪, 元素尺寸依然是原本尺寸.
 - `clip` 元素非可见部分无法响应点击事件.
@@ -5184,6 +5177,26 @@ making it possible to wrap text around complex objects rather than simple boxes:
 ```
 
 ### Clip Path
+
+[`clip-path`](https://developer.mozilla.org/docs/Web/CSS/clip-path):
+
+- `none`.
+- `<url>`.
+- `<geometry-box> || <basic-shape>`:
+  - `<geometry-box>`:
+    - `border-box`.
+    - `padding-box`.
+    - `content-box`.
+    - `margin-box`.
+    - `fill-box`.
+    - `stroke-box`.
+    - `view-box`.
+  - [`<basic-shape>`](https://developer.mozilla.org/docs/Web/CSS/basic-shape):
+    - [`inset(<length-percentage>{1,4} [round <'border-radius'>]?)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/inset).
+    - [`circle([<shape-radius>]? [at <position>]?)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/circle).
+    - [`ellipse([<shape-radius>{2}]? [at <position>]?)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/ellipse).
+    - [`polygon([<fill-rule>,]? [<length-percentage> <length-percentage>]#)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/polygon).
+    - [`path([<fill-rule>,]? <string>)`](https://developer.mozilla.org/docs/Web/CSS/path).
 
 ```css
 .polygon {
@@ -5208,7 +5221,7 @@ making it possible to wrap text around complex objects rather than simple boxes:
 
 #### Mask Mode
 
-[`mask-mode`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-mode):
+[`mask-mode`](https://developer.mozilla.org/docs/Web/CSS/mask-mode):
 
 - `match-source`:
   根据 `mask-image` 类型自动选择模式,
@@ -5241,7 +5254,7 @@ img.alpha-mask {
 
 #### Mask Type
 
-[`mask-type`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-type),
+[`mask-type`](https://developer.mozilla.org/docs/Web/CSS/mask-type),
 用于设置 SVG `<mask>` 元素的遮罩模式:
 
 - `luminance`.
@@ -5249,7 +5262,7 @@ img.alpha-mask {
 
 #### Mask Repeat
 
-[`mask-repeat`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat):
+[`mask-repeat`](https://developer.mozilla.org/docs/Web/CSS/mask-repeat):
 
 | Single Value | Two Value Equivalent  |
 | ------------ | --------------------- |
@@ -5262,7 +5275,7 @@ img.alpha-mask {
 
 #### Mask Position
 
-[`mask-position`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-position):
+[`mask-position`](https://developer.mozilla.org/docs/Web/CSS/mask-position):
 
 ```css
 .mask-position {
@@ -5280,7 +5293,7 @@ img.alpha-mask {
 
 #### Mask Clip
 
-[`mask-clip`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip):
+[`mask-clip`](https://developer.mozilla.org/docs/Web/CSS/mask-clip):
 
 - `border-box`.
 - `padding-box`.
@@ -5293,7 +5306,7 @@ img.alpha-mask {
 
 #### Mask Origin
 
-[`mask-origin`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-origin):
+[`mask-origin`](https://developer.mozilla.org/docs/Web/CSS/mask-origin):
 
 - `border-box`.
 - `padding-box`.
@@ -5305,7 +5318,7 @@ img.alpha-mask {
 
 #### Mask Size
 
-[`mask-size`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-size)
+[`mask-size`](https://developer.mozilla.org/docs/Web/CSS/mask-size)
 
 - `auto{1,2}`.
 - `cover`.
