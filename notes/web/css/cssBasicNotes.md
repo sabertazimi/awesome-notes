@@ -4621,6 +4621,26 @@ Gradient buttons:
 }
 ```
 
+### Background Repeat
+
+```css
+.background-repeat {
+  /* Keyword values */
+  background-repeat: repeat-x;
+  background-repeat: repeat-y;
+  background-repeat: repeat;
+  background-repeat: space;
+  background-repeat: round;
+  background-repeat: no-repeat;
+
+  /* Two-value syntax: horizontal | vertical */
+  background-repeat: repeat space;
+  background-repeat: repeat repeat;
+  background-repeat: round space;
+  background-repeat: no-repeat round;
+}
+```
+
 ### Background Position
 
 Percentage background position (`<position> type`):
@@ -4655,112 +4675,6 @@ background-position: top right 10px;
 ```
 
 [![Background Position](./figures/BackgroundPosition.png)](https://developer.mozilla.org/docs/Web/CSS/background-position)
-
-### Background Size
-
-- `contain`: 等比例缩放, 部分区域会留白.
-- `cover`: 等比例裁剪, 部分图像会裁剪.
-- `auto`:
-  - 具有 intrinsic size 的背景 (e.g 位图),
-    computed to `[intrinsic size, intrinsic size]`.
-  - 具有一个方向 intrinsic size, 具有 intrinsic ratio 的背景 (e.g 矢量图),
-    computed to `[intrinsic size, intrinsic size * intrinsic ratio]`.
-  - 具有一个方向 intrinsic size, 不具有 intrinsic ratio 的背景 (e.g 矢量图),
-    computed to `[intrinsic size, extrinsic size]`.
-  - 不具有 intrinsic size, 具有 intrinsic ratio 的背景 (e.g 矢量图),
-    computed to `contain` (等比例缩放).
-  - 不具有 intrinsic size, 不具有 intrinsic ratio 的背景 (e.g CSS gradient),
-    computed to `[extrinsic size, extrinsic size]`.
-- `<percentage>`: calculate by extrinsic size and `background-origin` box.
-
-```css
-.background-size {
-  background-size: cover;
-  background-size: contain;
-  background-size: 100%;
-  background-size: 20px;
-  background-size: auto 100%;
-  background-size: auto 20px;
-  background-size: 100% 100%;
-  background-size: 20px 20px;
-}
-
-.video {
-  min-width: 100%;
-  min-height: 100%;
-  overflow: hidden;
-  background-size: cover;
-}
-```
-
-### Background Origin
-
-指定背景绘制起点:
-
-- `border-box`.
-- `padding-box` (`initial` value).
-- `content-box`.
-- 影响 `background-size` `<percentage>` 计算.
-- 影响**起点两侧**背景样式细节.
-
-### Background Repeat
-
-```css
-.background-repeat {
-  /* Keyword values */
-  background-repeat: repeat-x;
-  background-repeat: repeat-y;
-  background-repeat: repeat;
-  background-repeat: space;
-  background-repeat: round;
-  background-repeat: no-repeat;
-
-  /* Two-value syntax: horizontal | vertical */
-  background-repeat: repeat space;
-  background-repeat: repeat repeat;
-  background-repeat: round space;
-  background-repeat: no-repeat round;
-}
-```
-
-### Background Attachment
-
-- `scroll`: scrolls with the main view, but stays fixed inside the local view.
-- `local`: scrolls both with the main view and the local view.
-- `fixed`: stays fixed no matter what.
-- 对于可以滚动的元素 (`overflow: scroll`),
-  当 `background-attachment: scroll` 时, 背景图不会随元素内容的滚动而滚动.
-- 对于可以滚动的元素 (`overflow: scroll`),
-  当 `background-attachment: local` 时, 背景图会随元素内容的滚动而滚动.
-- Parallax effect: `background-attachment: fixed`.
-
-```css
-.bg {
-  background-attachment: scroll; /* 背景图相对于元素固定, 背景随页面滚动而移动, 即背景和内容绑定 */
-  background-attachment: local; /* 背景图相对于视口固定, 所以随页面滚动背景不动, 相当于背景被设置在了 body 上 */
-  background-attachment: fixed; /* 背景图相对于元素内容固定 */
-}
-```
-
-```css
-/* parallax effect */
-body {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100vh;
-  padding: 0;
-  margin: 0;
-}
-
-.parallax {
-  min-height: 60%; /* key */
-  background-image: url('./images/bg.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* key */
-  background-position: center;
-  background-size: cover;
-}
-```
 
 ### Background Clip
 
@@ -4800,6 +4714,92 @@ p:hover {
   );
   background-clip: text; /* -webkit-background-clip: text; */
   animation: move 0.5s infinite linear;
+}
+```
+
+### Background Origin
+
+指定背景绘制起点:
+
+- `border-box`.
+- `padding-box` (`initial` value).
+- `content-box`.
+- 影响 `background-size` `<percentage>` 计算.
+- 影响**起点两侧**背景样式细节.
+
+### Background Size
+
+- `contain`: 等比例缩放, 部分区域会留白.
+- `cover`: 等比例裁剪, 部分图像会裁剪.
+- `auto`:
+  - 具有 intrinsic size 的背景 (e.g 位图),
+    computed to `[intrinsic size, intrinsic size]`.
+  - 具有一个方向 intrinsic size, 具有 intrinsic ratio 的背景 (e.g 矢量图),
+    computed to `[intrinsic size, intrinsic size * intrinsic ratio]`.
+  - 具有一个方向 intrinsic size, 不具有 intrinsic ratio 的背景 (e.g 矢量图),
+    computed to `[intrinsic size, extrinsic size]`.
+  - 不具有 intrinsic size, 具有 intrinsic ratio 的背景 (e.g 矢量图),
+    computed to `contain` (等比例缩放).
+  - 不具有 intrinsic size, 不具有 intrinsic ratio 的背景 (e.g CSS gradient),
+    computed to `[extrinsic size, extrinsic size]`.
+- `<percentage>`: calculate by extrinsic size and `background-origin` box.
+
+```css
+.background-size {
+  background-size: cover;
+  background-size: contain;
+  background-size: 100%;
+  background-size: 20px;
+  background-size: auto 100%;
+  background-size: auto 20px;
+  background-size: 100% 100%;
+  background-size: 20px 20px;
+}
+
+.video {
+  min-width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background-size: cover;
+}
+```
+
+### Background Attachment
+
+- `scroll`: scrolls with the main view, but stays fixed inside the local view.
+- `local`: scrolls both with the main view and the local view.
+- `fixed`: stays fixed no matter what.
+- 对于可以滚动的元素 (`overflow: scroll`),
+  当 `background-attachment: scroll` 时, 背景图不会随元素内容的滚动而滚动.
+- 对于可以滚动的元素 (`overflow: scroll`),
+  当 `background-attachment: local` 时, 背景图会随元素内容的滚动而滚动.
+- Parallax effect: `background-attachment: fixed`.
+
+```css
+.bg {
+  background-attachment: scroll; /* 背景图相对于元素固定, 背景随页面滚动而移动, 即背景和内容绑定 */
+  background-attachment: local; /* 背景图相对于视口固定, 所以随页面滚动背景不动, 相当于背景被设置在了 body 上 */
+  background-attachment: fixed; /* 背景图相对于元素内容固定 */
+}
+```
+
+```css
+/* parallax effect */
+body {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.parallax {
+  min-height: 60%; /* key */
+  background-image: url('./images/bg.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* key */
+  background-position: center;
+  background-size: cover;
 }
 ```
 
