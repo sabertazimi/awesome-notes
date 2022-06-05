@@ -8716,7 +8716,9 @@ body {
 
 ```css
 .night {
+  background: rgb(0 40 140 / 60%), url('./house-bed.jpg');
   filter: brightness(80%) grayscale(20%) contrast(1.2);
+  background-size: 100%;
   background-blend-mode: darken;
 }
 ```
@@ -8727,6 +8729,39 @@ body {
 .movie {
   filter: contrast(1.1);
   background-blend-mode: soft-light;
+}
+```
+
+#### Old Effect
+
+```css
+.old-1977 {
+  position: relative;
+  filter: contrast(1.1) brightness(1.1) saturate(1.3);
+}
+
+.old-1977::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: '';
+  background: rgb(243 106 188 / 30%);
+  mix-blend-mode: screen;
+}
+```
+
+#### Sketch Effect
+
+```css
+.sketch {
+  width: 256px;
+  height: 171px;
+  background: url('10.jpg') -2px -2px, url('10.jpg');
+  filter: brightness(3) invert(1) grayscale(1);
+  background-size: 258px 173px;
+  background-blend-mode: difference;
 }
 ```
 
