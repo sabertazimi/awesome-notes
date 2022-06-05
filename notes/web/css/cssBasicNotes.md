@@ -5239,17 +5239,96 @@ img.alpha-mask {
 
 [![Luminance Gradient Mask](./figures/LuminanceGradientMask.webp)](https://css-tricks.com/almanac/properties/m/mask-mode/#aa-luminance-masks)
 
+#### Mask Type
+
+[`mask-type`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-type),
+用于设置 SVG `<mask>` 元素的遮罩模式:
+
+- `luminance`.
+- `mask`.
+
+#### Mask Repeat
+
+[`mask-repeat`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat):
+
+| Single Value | Two Value Equivalent  |
+| ------------ | --------------------- |
+| `no-repeat`  | `no-repeat no-repeat` |
+| `repeat-x`   | `repeat no-repeat`    |
+| `repeat-y`   | `no-repeat repeat`    |
+| `repeat`     | `repeat repeat`       |
+| `space`      | `space space`         |
+| `round`      | `round round`         |
+
+#### Mask Position
+
+[`mask-position`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-position):
+
+```css
+.mask-position {
+  /* Keyword values */
+  mask-position: center;
+  mask-position: top right;
+  mask-position: bottom left;
+
+  /* <length-percentage> values */
+  mask-position: 25% 75%;
+  mask-position: 0 0;
+  mask-position: 10% 8em;
+}
+```
+
+#### Mask Clip
+
+[`mask-clip`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip):
+
+- `border-box`.
+- `padding-box`.
+- `content-box`.
+- `margin-box`.
+- `fill-box`.
+- `stroke-box`.
+- `view-box`.
+- `no-clip`.
+
+#### Mask Origin
+
+[`mask-origin`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-origin):
+
+- `border-box`.
+- `padding-box`.
+- `content-box`.
+- `margin-box`.
+- `fill-box`.
+- `stroke-box`.
+- `view-box`.
+
+#### Mask Size
+
+[`mask-size`](https://developer.mozilla.org/en-US/docs/Web/CSS/mask-size)
+
+- `auto{1,2}`.
+- `cover`.
+- `contain`.
+- `<length-percentage>{12}`.
+
 #### Mask Composite
 
 [`mask-composite`](https://developer.mozilla.org/docs/Web/CSS/mask-composite):
 
 - `add`:
-- `subtract`.
-- `intersect`.
-- `exclude`.
+  所有遮罩图片直接合成一个完整的遮罩.
+- `subtract`:
+  顶层遮罩图片中, 与底层遮罩图片重合的区域不显示遮罩.
+- `intersect`:
+  顶层遮罩图片中, 与底层遮罩图片重合的区域才显示遮罩.
+- `exclude`:
+  遮罩图片重合的区域被当作透明区域 (`transparent`),
+  其余区域直接合成一个完整的遮罩 (`add`).
+- `mask-image` 中语法越靠后的遮罩图片层级越低.
 
 ```css
-#masked {
+.masked {
   width: 100px;
   height: 100px;
   background-color: #8cffa0;
