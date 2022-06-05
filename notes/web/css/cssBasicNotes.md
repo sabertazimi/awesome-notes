@@ -5060,7 +5060,10 @@ p:hover {
 
 [`mix-blend-mode`](https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode):
 
-- Used for text styles.
+- Used for multiple elements, e.g text styles.
+- 通常把混合模式设置在顶层元素上:
+  当元素应用了混合模式时,
+  该元素会混合 `z` 轴上所有层叠顺序比其低的层叠元素.
 - `multiply`: `black` is cutout (keep `black`).
 - `screen`: `white` is cutout (keep `white`).
 
@@ -5088,23 +5091,28 @@ p:hover {
 ### Background Blend Mode
 
 [`background-blend-mode`](https://developer.mozilla.org/docs/Web/CSS/background-blend-mode)
-is used for multiple background images:
 
-```html
-<div class="container"></div>
+- Used for multiple `background-image`.
+- 语法越靠后的背景图像的层级越低:
+  `background` 一般设置为 `background-image# background-color`.
 
-<style>
-  .container {
-    background: url($pic1), url($pic2);
-    background-size: cover;
-    background-blend-mode: lighten;
-  }
-</style>
+```css
+.box {
+  background: url('pic1.png'), url('pic2.png');
+  background-size: cover;
+  background-blend-mode: lighten; /* lighten, lighten */
+}
+
+.gradient-icon {
+  background: linear-gradient(deepskyblue, deeppink), url('icon.png'), white;
+  background-blend-mode: lighten, normal;
+}
 ```
 
 ### Filter and Blend Reference
 
-- Instagram [filter](https://github.com/una/CSSgram).
+- Instagram [filters](https://github.com/una/CSSgram).
+- Image [effects](https://github.com/bennettfeely/image-effects).
 
 ## CSS Shape
 
