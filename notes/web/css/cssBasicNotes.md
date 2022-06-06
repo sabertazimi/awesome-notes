@@ -2440,7 +2440,7 @@ Multiple `column` layout:
   `currentcolor | <color>`.
 - `column-span`: `none | all`, 子元素宽度.
 - `column-fill`: `balance | balance-all | auto`, 子元素分布.
-- `break-inside`:
+- [`break-inside`](https://developer.mozilla.org/docs/Web/CSS/break-inside):
   - `auto`: Allows break.
   - `avoid`: Avoids break.
 
