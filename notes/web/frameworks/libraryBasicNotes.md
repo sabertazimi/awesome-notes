@@ -260,8 +260,8 @@ tags: [Web, Framework, Library]
 
 ### Browser Utils
 
-- [Browser Feature Detection](https://github.com/Modernizr/Modernizr)
-- [Browser Platform Detection](https://github.com/lancedikson/bowser)
+- [Modernizr: HTML5 and CSS3 Browser Feature Detection](https://github.com/Modernizr/Modernizr)
+- [Browser: Browser Platform Detection](https://github.com/lancedikson/bowser)
 - [UAParser: User-Agent Data Parser](https://github.com/faisalman/ua-parser-js)
 
 ## TypeScript Utils
