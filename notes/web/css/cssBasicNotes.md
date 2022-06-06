@@ -682,7 +682,7 @@ Change `--percent` via `JavaScript` API:
 
 ### Properties and Values API
 
-[`@property`](https://developer.mozilla.org/en-US/docs/Web/CSS/@property):
+[`@property`](https://developer.mozilla.org/docs/Web/CSS/@property):
 
 ```css
 @property --property-name {
@@ -692,7 +692,7 @@ Change `--percent` via `JavaScript` API:
 }
 ```
 
-[`CSS.registerProperty()`](https://developer.mozilla.org/en-US/docs/Web/API/CSS/RegisterProperty):
+[`CSS.registerProperty()`](https://developer.mozilla.org/docs/Web/API/CSS/RegisterProperty):
 
 ```ts
 window.CSS.registerProperty({
@@ -1778,7 +1778,7 @@ Floating and absolutely positioned elements margin **never collapse**.
 
 ### Box Overflow
 
-[`overflow`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow):
+[`overflow`](https://developer.mozilla.org/docs/Web/CSS/overflow):
 
 - `visible`.
 - `hidden`: 溢出隐藏基于 `padding box`.
