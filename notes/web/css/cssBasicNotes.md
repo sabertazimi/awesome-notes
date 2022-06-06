@@ -4744,7 +4744,7 @@ p:hover {
     computed to `[extrinsic size, extrinsic size]`.
 - `cover`: 等比例裁剪, 部分图像会裁剪.
 - `contain`: 等比例缩放, 部分区域会留白.
-- `<length-percentage>{1，2}`:
+- `<length-percentage>{1,2}`:
   - `<percentage>`: calculate by extrinsic size and `background-origin` box.
 
 ```css
@@ -5627,7 +5627,7 @@ input {
 
 ### Scroll Behavior
 
-[`scroll-behavior`](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior):
+[`scroll-behavior`](https://developer.mozilla.org/docs/Web/CSS/scroll-behavior):
 
 - `auto`.
 - `smooth`.
@@ -5641,15 +5641,95 @@ body {
 
 ### Overscroll Behavior
 
-[`overscroll-behavior`](https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior):
+[`overscroll-behavior`](https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior):
 
-- `auto`.
-- `contain`: 嵌套滚动不会传导至相邻区域, 即嵌套滚动条滚动到底部便停止, 不会继续滚动外部滚动条.
+- `auto{1,2}`.
+- `contain{1,2}`: 嵌套滚动不会传导至相邻区域, 即嵌套滚动条滚动到底部便停止, 不会继续滚动外部滚动条.
+- `none{1,2}`.
+
+### Scroll Snap
+
+[`scroll-snap`](https://developer.mozilla.org/docs/Web/CSS/CSS_Scroll_Snap):
+
+- 可让网页容器滚动停止时, 自动平滑定位到指定元素的指定位置.
+- Parent property:
+  - [`scroll-snap-type`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type).
+  - [`scroll-padding`](https://developer.mozilla.org/docs/Web/CSS/scroll-padding).
+- Children property:
+  - [`scroll-snap-align`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align).
+  - [`scroll-snap-stop`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop).
+  - [`scroll-margin`](https://developer.mozilla.org/docs/Web/CSS/scroll-margin).
+
+```html
+<div class="scroll-x">
+  <img src="1.jpg" />
+  <img src="2.jpg" />
+  <img src="3.jpg" />
+  <img src="4.jpg" />
+</div>
+
+<style>
+  .scroll-x {
+    max-width: 414px;
+    height: 420px;
+    scroll-snap-type: x mandatory;
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  .scroll-x img {
+    scroll-snap-align: center;
+  }
+</style>
+```
+
+#### Scroll Snap Type
+
+[`scroll-snap-type`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type):
+
 - `none`.
+- `[ x | y | inline | block | both ] [ mandatory | proximity ]?`:
+  - `x`: 捕捉水平定位点.
+  - `y`: 捕捉垂直平定位点.
+  - `inline`: 捕捉和内联元素排列一个滚动方向的定位点, 默认文档流下指的就是水平轴.
+  - `block`: 捕捉和块状元素排列一个滚动方向的定位点, 默认文档流下指的就是垂直轴.
+  - `both`: 横轴与纵轴都捕捉.
+  - `mandatory`: 强制定位, 若存在有效的定位点位置, 则滚动容器必须在滚动结束时进行定位.
+  - `proximity`: 大约定位, 让浏览器自己判断要不要定位.
+
+#### Scroll Snap Align
+
+[`scroll-snap-align`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align):
+
+- `none{1,2}`.
+- `start{1,2}`: 起始位置对齐, 子元素对齐容器左边缘/上边缘.
+- `end{1,2}`: 结束位置对齐, 子元素对齐容器右边缘/下边缘.
+- `center{1,2}`: 居中对齐, 子元素中心和滚动容器中心一致.
+
+#### Scroll Snap Stop
+
+[`scroll-snap-stop`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop):
+
+- `normal`: 可以忽略捕获位置.
+- `always`: 不能忽略捕获位置, 且必须定位到第一个捕获元素的位置, 保证每次只滚动一屏或一个指定元.
+
+#### Scroll Padding
+
+[`scroll-padding`](https://developer.mozilla.org/docs/Web/CSS/scroll-padding):
+
+- `auto{1,4}`.
+- `<length-percentage>{1,4}`.
+
+#### Scroll Margin
+
+[`scroll-margin`](https://developer.mozilla.org/docs/Web/CSS/scroll-margin):
+
+- `0`.
+- `<length>{1,4}`.
 
 ### Overflow Anchor
 
-[`overflow-anchor`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-anchor):
+[`overflow-anchor`](https://developer.mozilla.org/docs/Web/CSS/overflow-anchor):
 
 - `auto`: 开启滚动锚定.
 - `none`: 关闭滚动锚定.
