@@ -7547,9 +7547,9 @@ tag-not-found::-ms-any,
 
 CSS vendor prefix order:
 
-- `-o-` rule.
-- `-ms-` rule.
 - `-moz-` rule.
+- `-ms-` rule.
+- `-o-` rule.
 - `-webkit-` rule.
 - Standard rule.
 
