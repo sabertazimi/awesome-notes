@@ -3668,6 +3668,66 @@ onmessage = function (event) {
 };
 ```
 
+### CSS Houdini Painting API
+
+[`PaintWorklet`](https://developer.mozilla.org/en-US/docs/Web/API/PaintWorklet):
+
+```ts
+// checkerboard.js:
+// Create a `PaintWorklet`.
+class CheckerboardPainter {
+  static get contextOptions() {
+    return { alpha: true };
+  }
+
+  /**
+   * @returns {string[]} any custom properties or regular properties
+   */
+  static get inputProperties() {
+    return ['--red', '--green', '--blue', '--width', 'height'];
+  }
+
+  paint(context, geometry, props) {
+    const colors = [
+      props.get('--red').toString(),
+      props.get('--green').toString(),
+      props.get('--blue').toString(),
+    ];
+    const size = parseInt(props.get('--width'));
+
+    for (let y = 0; y < geometry.height / size; y++) {
+      for (let x = 0; x < geometry.width / size; x++) {
+        const color = colors[(x + y) % colors.length];
+        context.beginPath();
+        context.fillStyle = color;
+        context.rect(x * size, y * size, size, size);
+        context.fill();
+      }
+    }
+  }
+}
+
+// Register our class under a specific name
+registerPaint('checkerboard', CheckerboardPainter);
+```
+
+```html
+<!-- Load a `PaintWorklet`. -->
+<script>
+  if ('paintWorklet' in CSS) {
+    CSS.paintWorklet.addModule('checkerboard.js');
+  }
+</script>
+
+<!-- Use a `PaintWorklet`. -->
+<style>
+  textarea {
+    background-image: paint(checkerboard);
+  }
+</style>
+<textarea></textarea>
+```
+
 ### Canvas Reference
 
 - [Canvas API](https://developer.mozilla.org/docs/Web/API/Canvas_API)
