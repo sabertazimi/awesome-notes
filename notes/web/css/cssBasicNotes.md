@@ -6718,6 +6718,23 @@ use `inline-box` with `width`
 
 ### Print Device Query
 
+```css
+@media print {
+  header,
+  footer {
+    display: none;
+  }
+
+  table {
+    color-adjust: exact;
+  }
+
+  h2 {
+    break-before: page;
+  }
+}
+```
+
 - Page style standard [specification](https://developer.mozilla.org/docs/Web/CSS/@page).
 - PDF style [tutorial](https://www.smashingmagazine.com/2015/01/designing-for-print-with-css).
 
@@ -7810,7 +7827,7 @@ will lead to class purged.
 
 ## CSS Components
 
-### Resizable
+### Resizable Class
 
 [CodePen Demo](https://codepen.io/ZeroX-DG/pen/vjdoYe)
 
@@ -7836,7 +7853,7 @@ new_x = element_original_x + (mouseX - original_mouseX);
 new_y = element_original_y + (mouseY - original_mouseY);
 ```
 
-### Hidden
+### Hidden Class
 
 - `display: none`: 元素不在 DOM 流.
 - `visibility: hidden`: 元素在 DOM 流, 隐藏不可见, 不可触发事件.
