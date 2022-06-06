@@ -5767,22 +5767,24 @@ Horizontal Scrolling Methods:
 - `grid-auto-flow: column;`
 - `scroll-snap-type: x mandatory; scroll-snap-align: center;`
 
-### Hidden ScrollBar
+### Custom Scrollbar
 
-```css
-.demo {
-  scrollbar-width: none; /* FireFox */
-  -ms-overflow-style: none; /* IE 10+ */
-  overflow-x: hidden;
-  overflow-y: auto;
-}
+#### Standard Custom Scrollbar
 
-.demo::-webkit-scrollbar {
-  display: none; /* Chrome Safari */
-}
-```
+[`scrollbar-width`](https://developer.mozilla.org/docs/Web/CSS/scrollbar-width):
 
-### Custom ScrollBar
+- `auto`.
+- `thin`.
+- `none`.
+
+[`scrollbar-color`](https://developer.mozilla.org/docs/Web/CSS/scrollbar-color):
+
+- `auto`.
+- `<color>{2}`.
+
+#### Chrome Custom Scrollbar
+
+[WebKit scrollbar](https://developer.mozilla.org/docs/Web/CSS/::-webkit-scrollbar):
 
 - 整体部分: `::-webkit-scrollbar`.
 - 两端按钮: `::-webkit-scrollbar-button`.
@@ -5823,6 +5825,24 @@ Horizontal Scrolling Methods:
   /* 滚动条轨道 */
   border-radius: 10px;
   box-shadow: inset 0 0 5px rgb(0 0 0 / 20%);
+}
+```
+
+#### Hidden Custom Scrollbar
+
+```css
+.scroll-none {
+  scrollbar-width: none; /* FireFox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.scroll-none::-webkit-scrollbar {
+  /* Chrome Safari */
+  display: none;
+  width: 0;
+  height: 0;
 }
 ```
 
