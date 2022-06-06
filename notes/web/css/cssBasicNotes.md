@@ -9319,6 +9319,12 @@ const polygon = (n = 3) => {
 };
 ```
 
+```css
+.polygon {
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+```
+
 ### Animation Effects
 
 #### Animated Dots
