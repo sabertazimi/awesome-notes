@@ -6288,6 +6288,44 @@ element.classList.add('animate');
 setTimeout(() => element.classList.remove('animate'), duration);
 ```
 
+### Offset Animation
+
+[`offset`](https://developer.mozilla.org/docs/Web/CSS/offset),
+animating an element along a defined path:
+
+- [`offset-position`](https://developer.mozilla.org/docs/Web/CSS/offset-position).
+- [`offset-path`](https://developer.mozilla.org/docs/Web/CSS/offset-path).
+- [`offset-distance`](https://developer.mozilla.org/docs/Web/CSS/offset-distance).
+- [`offset-rotate`](https://developer.mozilla.org/docs/Web/CSS/offset-rotate).
+- [`offset-anchor`](https://developer.mozilla.org/docs/Web/CSS/offset-anchor).
+
+```css
+.path {
+  /* Offset position */
+  offset: auto;
+  offset: 10px 30px;
+  offset: none;
+
+  /* Offset path */
+  /* stylelint-disable-next-line function-no-unknown */
+  offset: ray(45deg closest-side);
+  offset: url('arc.svg');
+  offset: path('M 100 100 L 300 100 L 200 300 z');
+
+  /* Offset path with distance and/or rotation */
+  offset: url('circle.svg') 100px;
+  offset: url('circle.svg') 40%;
+  offset: url('circle.svg') 30deg;
+  offset: url('circle.svg') 50px 20deg;
+
+  /* Including offset anchor */
+  /* stylelint-disable-next-line function-no-unknown */
+  offset: ray(45deg closest-side) / 40px 20px;
+  offset: url('arc.svg') 2cm / 0.5cm 3cm;
+  offset: url('arc.svg') 30deg / 50px 100px;
+}
+```
+
 ### Animation FLIP Pattern
 
 - First: 初始状态.
