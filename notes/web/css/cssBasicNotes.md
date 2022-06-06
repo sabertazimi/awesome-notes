@@ -551,7 +551,7 @@ HTML 文档树中, 后代元素可以继承祖先元素的 CSS Variables:
 }
 ```
 
-### Invalid and Empty CSS Variables
+### Invalid and Empty Variables
 
 - `--invalid-value: initial;` is `invalid` value
   leading to `var(--invalid-value)` called failed,
@@ -696,7 +696,7 @@ use variables to implement `if else` statement.
 }
 ```
 
-### Dark Mode CSS Variables
+### Dark Mode Variables
 
 ```css
 :root {
@@ -7177,7 +7177,7 @@ tag-not-found::-ms-any,
 
 ## CSS Tools
 
-### PostCSS Tool
+### PostCSS
 
 - [PostCSS Preset Env](https://github.com/csstools/postcss-preset-env)
 - [PostCSS Flexbox Checker](https://github.com/luisrudge/postcss-flexbugs-fixes)
@@ -7218,7 +7218,7 @@ object {
 }
 ```
 
-### StyleLint Tool
+### StyleLint
 
 `stylelint-config-mass` plugin `index.js`:
 
