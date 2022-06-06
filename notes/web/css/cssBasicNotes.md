@@ -1436,6 +1436,18 @@ calculation result limit to `> 0`:
 
 `::selection` 匹配突出显示的文本:
 
+- `color`.
+- `background-color`.
+- `cursor`.
+- `caret-color`.
+- `outline`.
+- `text-decoration`.
+- `text-emphasis-color`.
+- `text-shadow`.
+- `stroke-color`.
+- `fill-color`.
+- `stroke-width`.
+
 ```css
 /* 定义选中的文本颜色与背景色 */
 ::selection {
