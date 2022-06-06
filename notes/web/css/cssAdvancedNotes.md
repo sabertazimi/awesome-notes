@@ -122,26 +122,9 @@ then write modern browser css code:
 }
 ```
 
-## CSS Houdini
-
-- [Draft](https://drafts.css-houdini.org)
-- [Implementation Status](https://ishoudinireadyyet.com/)
-
-CSS Houdini bring many API:
-
-- CSS properties and values API:
-  custom properties (--var, var(--var)), custom function (--darken(--var)).
-- CSS layout API (layoutWorklet):
-  layout below (display: flex/grid), layout above (css-sizing: min-content/max-content/fit-content).
-- CSS paint API (paintWorklet):
-  background, background-color, background-image.
-- CSS composite API (compositeWorklet).
-
-to let developers enhance css without any browser updates
-
 ## HomePage User Experience
 
-[UX Research](https://baymard.com/blog/2021-current-state-of-ecommerce-homepage-ux)
+[UX research](https://baymard.com/blog/2021-current-state-of-ecommerce-homepage-ux)
 point out that:
 
 - Feature a Broad Range of Product Types (6% Don’t).

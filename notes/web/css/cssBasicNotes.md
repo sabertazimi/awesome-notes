@@ -194,7 +194,7 @@ h1 {
 }
 ```
 
-### CSS Inheritance
+### Inheritance
 
 - Most CSS properties that affect the text node are inherited properties:
   color, font-size, font-family, etc.
@@ -328,108 +328,6 @@ The user agent performs four steps to calculate a property's actual (final) valu
 5. actual value.
 
 :::
-
-## CSS Colors
-
-### Current Color
-
-[`currentcolor`](https://css-tricks.com/currentcolor):
-
-- `currentcolor` 变量使用当前 `color` 计算值.
-- `border-color`/`outline-color`/`caret-color`/`text-shadow`/`box-shadow`
-  默认表现为 `currentcolor`.
-
-### Accent Color
-
-[`accent-color`](https://developer.mozilla.org/docs/Web/CSS/accent-color):
-
-Change user-interface controls accent color.
-
-### HSL Color
-
-- H: hue.
-- S: saturation (stay `50%` etc.).
-- L: lightness (easy to theme colors).
-
-```css
-/* Hover Button */
-:root {
-  --primary-h: 221;
-  --primary-s: 72%;
-  --primary-l: 62%;
-}
-
-.button {
-  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
-
-.button:hover,
-.button:focus {
-  --primary-l: 54%;
-}
-```
-
-```css
-/* Custom Buttons */
-:root {
-  --primary-h: 221;
-  --primary-s: 72%;
-  --primary-l: 62%;
-}
-
-.button {
-  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
-
-.button-secondary {
-  --primary-l: 90%;
-
-  color: #222;
-}
-
-.button-ghost {
-  --primary-l: 90%;
-
-  background-color: transparent;
-  border: 3px solid hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
-```
-
-```css
-/* Change lightness to get gradient */
-.section {
-  background: linear-gradient(
-    to left,
-    hsl(var(--primary-h) var(--primary-s) var(--primary-l)),
-    hsl(var(--primary-h) var(--primary-s) 95%)
-  );
-}
-
-.section-2 {
-  --primary-h: 167;
-}
-```
-
-### HWB Color
-
-[`hwb(H W B [/ A])`](https://developer.mozilla.org/docs/Web/CSS/color_value/hwb):
-
-- `H`: hue (`<angle>`).
-- `W`: whiteness (`<percentage>`).
-- `B`: blackness (`<percentage>`).
-- `A`: alpha (`<percentage>`).
-
-### CSS Color Reference
-
-- CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
-  - hwb.
-  - lab.
-  - lch.
-  - color-mix.
-  - color-contrast.
-  - color.
-  - accent-color.
-- CSS `color` [value](https://developer.mozilla.org/docs/Web/CSS/color_value).
 
 ## CSS Logical Properties and Values
 
@@ -781,6 +679,131 @@ Change `--percent` via `JavaScript` API:
   background: #2486ff;
 }
 ```
+
+### Properties and Values API
+
+[`@property`](https://developer.mozilla.org/en-US/docs/Web/CSS/@property):
+
+```css
+@property --property-name {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #c0ffee;
+}
+```
+
+[`CSS.registerProperty()`](https://developer.mozilla.org/en-US/docs/Web/API/CSS/RegisterProperty):
+
+```ts
+window.CSS.registerProperty({
+  name: '--my-color',
+  syntax: '<color>',
+  inherits: false,
+  initialValue: '#c0ffee',
+});
+```
+
+## CSS Colors
+
+### Current Color
+
+[`currentcolor`](https://css-tricks.com/currentcolor):
+
+- `currentcolor` 变量使用当前 `color` 计算值.
+- `border-color`/`outline-color`/`caret-color`/`text-shadow`/`box-shadow`
+  默认表现为 `currentcolor`.
+
+### Accent Color
+
+[`accent-color`](https://developer.mozilla.org/docs/Web/CSS/accent-color):
+
+Change user-interface controls accent color.
+
+### HSL Color
+
+- H: hue.
+- S: saturation (stay `50%` etc.).
+- L: lightness (easy to theme colors).
+
+```css
+/* Hover Button */
+:root {
+  --primary-h: 221;
+  --primary-s: 72%;
+  --primary-l: 62%;
+}
+
+.button {
+  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+}
+
+.button:hover,
+.button:focus {
+  --primary-l: 54%;
+}
+```
+
+```css
+/* Custom Buttons */
+:root {
+  --primary-h: 221;
+  --primary-s: 72%;
+  --primary-l: 62%;
+}
+
+.button {
+  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+}
+
+.button-secondary {
+  --primary-l: 90%;
+
+  color: #222;
+}
+
+.button-ghost {
+  --primary-l: 90%;
+
+  background-color: transparent;
+  border: 3px solid hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+}
+```
+
+```css
+/* Change lightness to get gradient */
+.section {
+  background: linear-gradient(
+    to left,
+    hsl(var(--primary-h) var(--primary-s) var(--primary-l)),
+    hsl(var(--primary-h) var(--primary-s) 95%)
+  );
+}
+
+.section-2 {
+  --primary-h: 167;
+}
+```
+
+### HWB Color
+
+[`hwb(H W B [/ A])`](https://developer.mozilla.org/docs/Web/CSS/color_value/hwb):
+
+- `H`: hue (`<angle>`).
+- `W`: whiteness (`<percentage>`).
+- `B`: blackness (`<percentage>`).
+- `A`: alpha (`<percentage>`).
+
+### CSS Color Reference
+
+- CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
+  - hwb.
+  - lab.
+  - lch.
+  - color-mix.
+  - color-contrast.
+  - color.
+  - accent-color.
+- CSS `color` [value](https://developer.mozilla.org/docs/Web/CSS/color_value).
 
 ## CSS Math
 
@@ -9998,5 +10021,6 @@ body {
 
 - MDN CSS value [formal syntax](https://developer.mozilla.org/docs/Web/CSS/Value_definition_syntax).
 - CSS quick [reference](https://cssreference.io).
+- CSS [houdini](https://developer.mozilla.org/docs/Web/CSS/CSS_Houdini).
 - New CSS features in 2021: [Hover 2021](https://2021-hover-conf-new-in-css.netlify.app).
 - New CSS features in 2022: [State of CSS 2022](https://web.dev/state-of-css-2022).
