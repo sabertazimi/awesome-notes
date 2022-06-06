@@ -5164,9 +5164,9 @@ making it possible to wrap text around complex objects rather than simple boxes:
 (`overflow` 对于上述两种元素的裁剪作用有限):
 
 - `auto`.
-- `rect(<top>, <right>, <bottom>, <left>)`.
+- `rect(<top-length>, <right-length>, <bottom-length>, <left-length>)`.
 - `clip` 元素 `clientWidth`, `clientHeight`, `computedStyle` 保持不变:
-  视觉上裁剪, 元素尺寸依然是原本尺寸.
+  仅视觉上裁剪, 元素尺寸仍为原本尺寸, 原始布局仍然保留.
 - `clip` 元素非可见部分无法响应点击事件.
 
 ```css
@@ -5197,14 +5197,21 @@ making it possible to wrap text around complex objects rather than simple boxes:
     - [`ellipse([<shape-radius>{2}]? [at <position>]?)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/ellipse).
     - [`polygon([<fill-rule>,]? [<length-percentage> <length-percentage>]#)`](https://developer.mozilla.org/docs/Web/CSS/basic-shape/polygon).
     - [`path([<fill-rule>,]? <string>)`](https://developer.mozilla.org/docs/Web/CSS/path).
+- `clip-path` 元素 `clientWidth`, `clientHeight`, `computedStyle` 保持不变:
+  仅视觉上裁剪, 元素尺寸仍为原本尺寸, 原始布局仍然保留.
+- `clip-path` 元素非可见部分无法响应点击事件.
+- [`<fill-rule>`](https://developer.mozilla.org/docs/Web/SVG/Attribute/fill-rule)
+  用于确定复杂路径构成的图形的内部与外部, 内部填充, 外部透明.
 
-```css
-.polygon {
-  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
-}
-```
+![NonZero Fill Rule](./figures/FillRuleNonZero.png)
+
+![EvenOdd Fill Rule](./figures/FillRuleEvenOdd.png)
 
 ### Mask
+
+[`mask`](https://developer.mozilla.org/docs/Web/CSS/mask):
+
+- 元素应用 `mask` 属性遮罩效果后, 透明部分仍然可以响应点击事件.
 
 #### Mask Image
 
