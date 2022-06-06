@@ -5373,28 +5373,7 @@ img.alpha-mask {
 
 ## SVG
 
-```css
-svg {
-  fill: red;
-  stroke: blue;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2px;
-}
-```
-
-```ts
-const svgElement = document.createElementNS(
-  'http://www.w3.org/2000/svg',
-  'svg'
-);
-const svgRectElement = document.createElementNS(
-  'http://www.w3.org/2000/svg',
-  'rect'
-);
-```
-
-### Inline SVG
+### SVG Fill
 
 ```html
 <svg
@@ -5407,11 +5386,47 @@ const svgRectElement = document.createElementNS(
   <title>My Awesome SVG</title>
   <circle class="circle" cx="50" cy="50" r="50" fill="#FFFF00" />
 </svg>
+
+<style>
+  .circle {
+    fill: currentcolor;
+    fill-opacity: 50%;
+    fill-rule: nonzero;
+  }
+</style>
 ```
 
+### SVG Stroke
+
 ```css
-.circle {
-  fill: #ff0;
+circle {
+  stroke: blue;
+  stroke-dasharray: 14px 4px 4px 4px; /* 实色长度 透明长度 实色长度 透明长度 ... */
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-opacity: 50%;
+  stroke-width: 2px;
+  paint-order: stroke;
+  vector-effect: non-scaling-stroke;
+}
+```
+
+[![Stroke Linecap](./figures/StrokeLinecap.png)](https://developer.mozilla.org/docs/Web/SVG/Attribute/stroke-linecap)
+
+[![Stroke Linejoin](./figures/StrokeLinejoin.png)](https://developer.mozilla.org/docs/Web/SVG/Attribute/stroke-linejoin)
+
+[![Stroke Dasharray](./figures/StrokeDasharray.png)](https://developer.mozilla.org/docs/Web/SVG/Attribute/stroke-dasharray)
+
+### SVG Marker
+
+[`<marker>`](https://developer.mozilla.org/docs/Web/SVG/Element/marker):
+
+```css
+polyline {
+  marker-start: url('#marker-circle');
+  marker-mid: url('#marker-circle');
+  marker-end: url('#marker-arrow');
 }
 ```
 
@@ -5427,7 +5442,27 @@ const svgRectElement = document.createElementNS(
 
 ### SVG Text Tag
 
-The text tag `<text>` is used to create **selectable** and **accessible** text.
+The text tag `<text>` is used to create **selectable** and **accessible** text:
+
+```css
+text {
+  /* SVG text vertical alignment */
+  dominant-baseline: auto;
+  dominant-baseline: middle;
+  dominant-baseline: central;
+  dominant-baseline: text-top;
+  dominant-baseline: text-bottom;
+  dominant-baseline: alphabetic;
+  dominant-baseline: hanging;
+  dominant-baseline: ideographic;
+  dominant-baseline: mathematical;
+
+  /* SVG text horizontal alignment */
+  text-anchor: start;
+  text-anchor: middle;
+  text-anchor: end;
+}
+```
 
 ### SVG Accessibility Tag
 
@@ -5443,8 +5478,36 @@ to a group of elements.
 ### SVG Defs Tag
 
 The defs tag `<defs>` is used to define elements for later reuse.
-This is where you create **patterns**, **filters** and **masks** to be reused later.
+This is where you create
+**marker**, **patterns**, **filters**, **masks**
+to be reused later.
 This is also used to create **icon systems**.
+
+```html
+<svg width="0" height="0" style="position: absolute;">
+  <defs>
+    <marker
+      id="marker-circle"
+      markerWidth="8"
+      markerHeight="8"
+      refX="4"
+      refY="4"
+    >
+      <circle cx="4" cy="4" r="2.5" />
+    </marker>
+    <marker
+      id="marker-arrow"
+      markerWidth="12"
+      markerHeight="12"
+      refX="2"
+      refY="6"
+      orient="auto"
+    >
+      <path d="M2,3 L2,10 L8,6 L2,3" />
+    </marker>
+  </defs>
+</svg>
+```
 
 ```html
 <filter id="noise" y="0" x="0">
@@ -5519,7 +5582,7 @@ This is also used to create **icon systems**.
   <clipPath id="circle" clipPathUnits="objectBoundingBox">
     <path
       d="M0.5,0 C0.776,0,1,0.224,1,0.5 C1,0.603,0.969,0.7,0.915,0.779 C0.897,0.767,0.876,0.76,0.853,0.76 C0.794,0.76,0.747,0.808,0.747,0.867 C0.747,0.888,0.753,0.908,0.764,0.925 C0.687,0.972,0.597,1,0.5,1 C0.224,1,0,0.776,0,0.5 C0,0.224,0.224,0,0.5,0"
-    ></path>
+    />
   </clipPath>
 </svg>
 ```
@@ -5560,6 +5623,37 @@ Avatar with circle status indicator:
     ></circle>
   </g>
 </svg>
+```
+
+### SVG Animation
+
+```css
+circle {
+  animation: zoom-in-out 1s infinite alternate;
+}
+
+@keyframes zoom-in-out {
+  from {
+    r: 60px;
+  }
+
+  to {
+    r: 75px;
+  }
+}
+```
+
+### SVG API
+
+```ts
+const svgElement = document.createElementNS(
+  'http://www.w3.org/2000/svg',
+  'svg'
+);
+const svgRectElement = document.createElementNS(
+  'http://www.w3.org/2000/svg',
+  'rect'
+);
 ```
 
 ## CSS Interaction
@@ -8352,18 +8446,18 @@ a:focus::after {
     style="position: absolute; top: 0; right: 0; color: #2d3748; border: 0; fill: #718096;"
     aria-hidden="true"
   >
-    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" />
     <path
       d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
       fill="currentColor"
       style="transform-origin: 130px 106px;"
       class="octo-arm"
-    ></path>
+    />
     <path
       d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
       fill="currentColor"
       class="octo-body"
-    ></path>
+    />
   </svg>
 </a>
 ```
