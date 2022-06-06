@@ -1778,10 +1778,11 @@ Floating and absolutely positioned elements margin **never collapse**.
 
 ### Box Overflow
 
-`overflow`:
+[`overflow`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow):
 
 - `visible`.
 - `hidden`: 溢出隐藏基于 `padding box`.
+- `clip`.
 - `scroll`.
 - `auto`.
 
