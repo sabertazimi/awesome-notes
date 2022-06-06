@@ -1401,7 +1401,8 @@ iframe.contentWindow.postMessage('message', '*');
 
 ### CSSOM
 
-The CSS Object Model is a set of APIs allowing the manipulation of CSS from JavaScript.
+[CSS Object Model](https://developer.mozilla.org/docs/Web/API/CSS_Object_Model)
+is a set of APIs allowing the manipulation of CSS from JavaScript.
 It is much like the DOM, but for the CSS rather than the HTML.
 It allows users to read and modify CSS style dynamically.
 
@@ -1493,7 +1494,7 @@ function addClassPolyfill(element, value) {
 
 #### DOM StyleSheets API
 
-以下是 CSSStyleSheet 从 StyleSheet 继承的属性:
+以下是 `CSSStyleSheet` 从 `StyleSheet` 继承的属性:
 
 - disabled: Boolean, 表示样式表是否被禁用了 (设置为 true 会禁用样式表).
 - href: `<link>` URL/null.
@@ -1617,6 +1618,36 @@ console.log(myStylesheet.cssRules.length); // 8
 
 myStylesheet.deleteRule(3);
 console.log(myStylesheet.cssRules.length); // 7
+```
+
+#### CSS Typed Object Model API
+
+[CSS Typed Object Model API](https://developer.mozilla.org/docs/Web/API/CSS_Typed_OM_API)
+simplifies CSS property manipulation by exposing CSS values
+as **typed JavaScript objects** rather than strings.
+
+[`StylePropertyMap`](https://developer.mozilla.org/docs/Web/API/StylePropertyMap):
+
+```ts
+const styleMap = document.body.computedStyleMap();
+const cssValue = styleMap.get('line-height');
+const { value, unit } = cssValue;
+```
+
+[`CSSStyleValue`](https://developer.mozilla.org/docs/Web/API/CSSStyleValue):
+
+- [`CSSKeywordValue`](https://developer.mozilla.org/docs/Web/API/CSSKeywordValue).
+- [`CSSImageValue`](https://developer.mozilla.org/docs/Web/API/CSSImageValue).
+- [`CSSMathValue`](https://developer.mozilla.org/docs/Web/API/CSSMathValue).
+- [`CSSNumericValue`](https://developer.mozilla.org/docs/Web/API/CSSNumericValue).
+- [`CSSUnitValue`](https://developer.mozilla.org/docs/Web/API/CSSUnitValue).
+- [`CSSTransformValue`](https://developer.mozilla.org/docs/Web/API/CSSTransformValue).
+- [`CSSUnparsedValue`](https://developer.mozilla.org/docs/Web/API/CSSUnparsedValue).
+
+```ts
+const styleMap = document.querySelector('#myElement').attributeStyleMap;
+styleMap.set('display', new CSSKeywordValue('initial'));
+console.log(myElement.get('display').value); // 'initial'
 ```
 
 ### DOM Events
@@ -3670,7 +3701,7 @@ onmessage = function (event) {
 
 ### CSS Houdini Painting API
 
-[`PaintWorklet`](https://developer.mozilla.org/en-US/docs/Web/API/PaintWorklet):
+[`PaintWorklet`](https://developer.mozilla.org/docs/Web/API/PaintWorklet):
 
 ```ts
 // checkerboard.js:
@@ -9293,7 +9324,7 @@ Set-Cookie: height=100; domain=me.github.com
 Set-Cookie: weight=100; domain=me.github.com
 ```
 
-[![Session Cookie](./figures/SessionCookie.jpg)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#define_the_lifetime_of_a_cookie)
+[![Session Cookie](./figures/SessionCookie.jpg)](https://developer.mozilla.org/docs/Web/HTTP/Cookies#define_the_lifetime_of_a_cookie)
 
 #### Session Cookie Cons
 
