@@ -5562,9 +5562,11 @@ Avatar with circle status indicator:
 </svg>
 ```
 
-## CSS Cursor
+## CSS Interaction
 
-[Cursor](https://developer.mozilla.org/docs/Web/CSS/cursor):
+### Cursor
+
+[`cursor`](https://developer.mozilla.org/docs/Web/CSS/cursor):
 
 - `auto`/`default`/`pointer`/`move`/`text`.
 - `wait`/`help`/`crosshair`/`progress`.
@@ -5585,7 +5587,18 @@ Avatar with circle status indicator:
 }
 ```
 
-## CSS Touch
+### Pointer Events
+
+[`pointer-events`](https://developer.mozilla.org/docs/Web/CSS/pointer-events):
+
+- `auto`.
+- `none`:
+  - 不能阻止键盘行为: 元素依然可以通过 `Tab` 键被 `focus`.
+  - 无法显示 `[title]` 等 `A11Y` 提示, 影响无障碍访问 (特别是移动端).
+  - 综上所述, `none`
+    不适合 `<a>`/`<button>` 等控件元素,
+    适合作用在装饰性的或仅用作视觉表现的非控件元素.
+- 具有继承性.
 
 ### Touch Action
 
@@ -5616,16 +5629,47 @@ Avatar with circle status indicator:
 }
 ```
 
-## CSS Select
+### Resize
+
+[`resize`](https://developer.mozilla.org/docs/Web/CSS/resize):
+
+- `none`.
+- `both`.
+- `horizontal`.
+- `vertical`.
+- `inline`.
+- `block`.
+- 不支持内联元素.
+- 支持 `overflow` non-`visible` 块级元素.
+- 可用 `min-width`/`min-height`/`max-width`/`max-height` 限制拉伸范围.
 
 ```css
-.wrap {
+.editable {
+  overflow: hidden;
+  resize: both;
+}
+```
+
+### User Select
+
+禁止图文被选中, 保持和原生 App 一样的文字选中体验:
+
+```css
+.body {
   -webkit-touch-callout: none;
   user-select: none;
 }
 ```
 
-## CSS Caret
+点击任意位置实现全选效果:
+
+```css
+.box {
+  user-select: all;
+}
+```
+
+### Caret Color
 
 输入框光标颜色:
 
