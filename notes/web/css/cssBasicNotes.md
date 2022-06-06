@@ -8901,6 +8901,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
   content: '';
   background: rgb(243 106 188 / 30%);
   mix-blend-mode: screen;
