@@ -7139,58 +7139,76 @@ Focusable areas:
 
 ### Will Change
 
-告知浏览器该元素会有哪些变化的方法, 这样浏览器可以在元素属性真正发生变化之前提前做好对应的优化准备工作:
+告知浏览器该元素会有哪些变化的方法,
+浏览器可在元素属性真正发生变化之前提前做好对应的优化准备工作:
 
 ```css
-.will-change {
+.will-change-parent:hover .will-change {
   will-change: auto;
   will-change: scroll-position;
   will-change: contents;
-  will-change: transform; /* Example of <custom-ident> */
-  will-change: opacity; /* Example of <custom-ident> */
-  will-change: left, top; /* Example of two <animate-feature> */
-  will-change: unset;
-  will-change: initial;
-  will-change: inherit;
+
+  /* <custom-ident> */
+  will-change: transform;
+  will-change: opacity;
+  will-change: left, top;
 }
 ```
 
 ### Contain
 
-[CSS containment](https://developers.google.com/web/updates/2016/06/css-containment):
+[CSS containment](https://developer.chrome.com/blog/css-containment):
 
-`contain` 属性允许开发者声明当前元素和它的内容尽可能的独立于 DOM 树的其他部分.
-这使得浏览器在重新计算布局/样式/绘图或它们的组合的时候, 只会影响到有限的 DOM 区域, 而不是整个页面.
-
-```css
-/* 无布局包含 */
-contain: none;
-
-/* 布局包含 layout/style/paint 和 size */
-contain: strict;
-
-/* 布局包含layout/style 和 paint */
-contain: content;
-
-/* 布局包含 size */
-contain: size;
-
-/* 布局包含 layout */
-contain: layout;
-
-/* 布局包含 style */
-contain: style;
-
-/* 布局包含 paint */
-contain: paint;
-```
-
-- size: 声明这个元素的尺寸会变化, 不需要去检查它依赖关系中的尺寸变化.
-- style: 声明那些同时会影响这个元素和其子孙元素的属性, 都在这个元素的包含范围内.
-- layout: 声明没有外部元素可以影响它内部的布局, 反之亦然.
-- paint:
+- `contain` 属性允许开发者声明当前元素和它的内容尽可能的独立于 DOM 树的其他部分.
+  这使得浏览器在重新计算布局/样式/绘图或它们的组合的时候, 只会影响到有限的 DOM 区域, 而不是整个页面.
+- `size` containment:
+  声明这个元素的尺寸会变化, 不需要去检查它依赖关系中的尺寸变化.
+- `layout` containment:
+  声明没有外部元素可以影响它内部的布局, 反之亦然.
+- `style` containment:
+  声明那些同时会影响这个元素和其子孙元素的属性, 都在这个元素的包含范围内.
+- `paint` containment:
   声明这个元素的子孙节点不会在它边缘外显示.
   如果一个元素在视窗外或因其他原因导致不可见, 则同样保证它的子孙节点不会被显示.
+
+```css
+.box {
+  /* 无布局包含 */
+  contain: none;
+
+  /* 布局包含 size/layout/style/paint */
+  contain: strict;
+
+  /* 布局包含 layout/style/paint */
+  contain: content;
+
+  /* 布局包含 size */
+  contain: size;
+
+  /* 布局包含 layout */
+  contain: layout;
+
+  /* 布局包含 style */
+  contain: style;
+
+  /* 布局包含 paint */
+  contain: paint;
+}
+
+.content {
+  /* Keyword values */
+  content-visibility: visible;
+  content-visibility: hidden;
+  content-visibility: auto;
+
+  /* <length> values */
+  contain-intrinsic-size: 1000px;
+  contain-intrinsic-size: 10rem;
+
+  /* <percentage> value */
+  contain-intrinsic-size: 10%;
+}
+```
 
 ### CSS Selectors Performance
 
