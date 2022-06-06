@@ -8,6 +8,19 @@ tags: [Web, CSS]
 
 # CSS Basic Notes
 
+## CSS Working Group
+
+- CSS working group: [CSS WG](https://www.w3.org/Style/CSS).
+- W3C standard [types](https://www.w3.org/standards/types):
+  - ED: `Editor's Draft`.
+  - FPWD: `First Public Working Draft`.
+  - WD: `Working Draft`.
+  - CR: `Candidate Recommendation`.
+  - PR: `Proposed Recommendation`.
+  - REC: a W3C `Recommendation` is a [W3C Technical Report](https://www.w3.org/TR).
+
+[![W3C Standard Process](./figures/W3CStandardProcess.svg)](https://www.w3.org/Consortium/Process)
+
 ## CSS Cascading and Inheritance
 
 ### Cascading Order

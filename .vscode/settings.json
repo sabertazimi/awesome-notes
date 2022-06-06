@@ -600,6 +600,7 @@
     "FOUT",
     "fping",
     "fprintf",
+    "FPWD",
     "framename",
     "fread",
     "freemap",
