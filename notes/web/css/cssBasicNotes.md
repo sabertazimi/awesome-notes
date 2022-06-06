@@ -5625,6 +5625,35 @@ input {
 
 ## CSS Scrolling
 
+### Scroll Behavior
+
+[`scroll-behavior`](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior):
+
+- `auto`.
+- `smooth`.
+
+```css
+html,
+body {
+  scroll-behavior: smooth;
+}
+```
+
+### Overscroll Behavior
+
+[`overscroll-behavior`](https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior):
+
+- `auto`.
+- `contain`: 嵌套滚动不会传导至相邻区域, 即嵌套滚动条滚动到底部便停止, 不会继续滚动外部滚动条.
+- `none`.
+
+### Overflow Anchor
+
+[`overflow-anchor`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-anchor):
+
+- `auto`: 开启滚动锚定.
+- `none`: 关闭滚动锚定.
+
 ### Overflow Scrolling
 
 `overflow: scroll` 剪裁界线为 `padding box`.
@@ -5633,6 +5662,45 @@ input {
 
 - 跨浏览器样式表现不一致.
 - 跨浏览器 `scrollHeight` 值不一致.
+
+### Horizontal Scrolling
+
+[Horizontal Scrolling](https://designshack.net/articles/navigation/horizontal-scrolling-pros-cons):
+
+- Avoid a full-screen horizontal scroll;
+  ensure that users know there is also content
+  that can be reached using a traditional method.
+- Make scroll interactions obvious and provide instruction.
+- To avoid accessibility issues,
+  ensure that horizontal scrolling elements also work with keyboard navigation.
+- Design horizontal scrolling elements in containers using HTML and CSS.
+- Use visual cues, such as partial images,
+  to show that there is a horizontal scroll action in effect.
+- Use partial horizontal scrolling with a static design element for stability.
+- Design horizontal scroll bars in the same manner as vertical scroll bars
+  to create an element of familiarity for users.
+
+Horizontal Scrolling Methods:
+
+- Rotate 90 deg element.
+- `display: flex; overflow-x: auto;`
+- `grid-auto-flow: column;`
+- `scroll-snap-type: x mandatory; scroll-snap-align: center;`
+
+### Hidden ScrollBar
+
+```css
+.demo {
+  scrollbar-width: none; /* FireFox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.demo::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+```
 
 ### Custom ScrollBar
 
@@ -5677,45 +5745,6 @@ input {
   box-shadow: inset 0 0 5px rgb(0 0 0 / 20%);
 }
 ```
-
-### Hidden ScrollBar
-
-```css
-.demo {
-  scrollbar-width: none; /* FireFox */
-  -ms-overflow-style: none; /* IE 10+ */
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.demo::-webkit-scrollbar {
-  display: none; /* Chrome Safari */
-}
-```
-
-### Horizontal Scrolling
-
-[Horizontal Scrolling](https://designshack.net/articles/navigation/horizontal-scrolling-pros-cons):
-
-- Avoid a full-screen horizontal scroll;
-  ensure that users know there is also content
-  that can be reached using a traditional method.
-- Make scroll interactions obvious and provide instruction.
-- To avoid accessibility issues,
-  ensure that horizontal scrolling elements also work with keyboard navigation.
-- Design horizontal scrolling elements in containers using HTML and CSS.
-- Use visual cues, such as partial images,
-  to show that there is a horizontal scroll action in effect.
-- Use partial horizontal scrolling with a static design element for stability.
-- Design horizontal scroll bars in the same manner as vertical scroll bars
-  to create an element of familiarity for users.
-
-Horizontal Scrolling Methods:
-
-- Rotate 90 deg element.
-- `display: flex; overflow-x: auto;`
-- `grid-auto-flow: column;`
-- `scroll-snap-type: x mandatory; scroll-snap-align: center;`
 
 ## CSS Transform
 
