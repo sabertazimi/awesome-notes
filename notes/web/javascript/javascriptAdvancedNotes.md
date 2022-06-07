@@ -7100,6 +7100,7 @@ it('should be accessible', () => {
 - Cypress official [guide](https://learn.cypress.io).
 - Cypress CI [action](https://github.com/cypress-io/github-action).
 - Cypress real world [example](https://github.com/cypress-io/cypress-realworld-app).
+- Cypress [cookbook](https://github.com/cypress-io/cypress-example-recipes).
 
 ## Debugging
 
