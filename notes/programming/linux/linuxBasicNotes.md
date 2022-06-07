@@ -59,7 +59,7 @@ boot-repair
 - 自定义脚本-新建目录(加入环境变量)
 - 自定义别名 ~/.bashrc
 
-## SSH 命令
+## SSH Commands
 
 ### Key
 
@@ -143,7 +143,7 @@ sshpass -p "$DEPLOY_PASSWORD" \
 3. Bash 内部命令.
 4. `$PATH` 包含目录内的命令 (`/bin`/`/sbin`).
 
-## Linux 文件架构
+## Linux Folder Structure
 
 ```bash
 man hier
@@ -360,6 +360,28 @@ Press `ctrl-r` 提示符改变, 显示我们正在执行反向增量搜索.
 | `Alt-p`  | 反向搜索，非增量搜索                 |
 | `Alt-n`  | 向前搜索，非增量                     |
 | `Ctrl-o` | 执行历史列表中的当前项，并移到下一个 |
+
+### Time
+
+```bash
+date
+```
+
+Change ntp (Network Time Protocol) time:
+
+```bash
+sudo apt-get install ntpdate
+sudo iptables -A OUTPUT -p udp --dport 123 -j ACCEPT
+sudo iptables -A INPUT -p udp --sport 123 -j ACCEPT
+sudo ntpdate time.windows.com
+sudo hwclock --localtime --systohc
+```
+
+Use local time (not UTC time):
+
+```bash
+sudo timedatectl set-local-rtc 1
+```
 
 ## Find and Search Commands
 
@@ -1383,7 +1405,7 @@ crontab -e(establish)
 
 > e.g ls && echo yes >> .log || echo no >> .log
 
-## C/C++ Binary Commands
+## C++ Binary Commands
 
 ### ldd
 
@@ -1427,30 +1449,6 @@ set xlabel "time (seconds)"
 set ylabel "Segments (cwnd, ssthresh)"
 plot ARG1 using 1:7 title "snd_cwnd", \
      ARG1 using 1:($8>=2147483647 ? 0 : $8) title "snd_ssthresh"
-```
-
-## Other Commands
-
-### Time
-
-```bash
-date
-```
-
-change ntp (Network Time Protocol) time
-
-```bash
-sudo apt-get install ntpdate
-sudo iptables -A OUTPUT -p udp --dport 123 -j ACCEPT
-sudo iptables -A INPUT -p udp --sport 123 -j ACCEPT
-sudo ntpdate time.windows.com
-sudo hwclock --localtime --systohc
-```
-
-use local time (not UTC time)
-
-```bash
-sudo timedatectl set-local-rtc 1
 ```
 
 ## Shell Scripts
@@ -1716,11 +1714,36 @@ if [[ 条件判断式1 ]]
 elif [[ 条件判断式2 ]]
     then
         程序2
-……
 else
         程序n
 fi
 ```
+
+<!-- markdownlint-disable line-length -->
+
+```bash
+#!/usr/bin/bash
+
+i=1;
+for flag in "$@"
+do
+  if [[ $flag == "-o" ]]
+  then
+    open=1;
+  fi
+done
+
+exclude="--exclude-dir=node_modules --exclude-dir=build  --exclude-dir=.yarn --exclude-dir=.cache --exclude-dir=.next --exclude-dir=coverage --exclude-dir=public --exclude-dir=.git --exclude-dir=dist --exclude=package-lock.json --exclude=yarn.lock --exclude=CHANGELOG.md"
+
+if [[ -n $open ]]
+then
+  grep -r $1 $exclude | awk -F : '{print $1}' | xargs code;
+else
+  grep -r $1 $exclude;
+fi
+```
+
+<!-- markdownlint-enable line-length -->
 
 #### case 语句
 
