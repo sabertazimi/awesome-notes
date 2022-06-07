@@ -1863,6 +1863,8 @@ Floating and absolutely positioned elements margin **never collapse**.
 
 ### Inline Box Model
 
+[![Inline Box Model](./figures/InlineBoxModel.png)](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flow_Layout/Intro_to_formatting_contexts#inline_formatting_contexts)
+
 #### Content Area
 
 Character box/em-box/selection box):
