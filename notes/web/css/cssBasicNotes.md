@@ -2242,7 +2242,7 @@ If `containing block` `height` is `auto`, it calculated to `0`.
 - 块状化并格式化上下文.
 - 没有任何 `margin` 合并.
 - 破坏文档流: 父级高度塌陷.
-- 浮动元素与行框盒子不可重叠.
+- 浮动元素与行框盒子不可重叠: 行框盒子会缩短以容纳浮动盒子.
 - 浮动元素的浮动参考 (`float reference`) 是行框盒子:
   浮动元素在当前行框盒子内定位.
 
@@ -2279,7 +2279,7 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 - [`clear: both`](https://css-tricks.com/snippets/css/clear-fix)
   本质是让自身不和浮动元素在同一行排列,
   并没有真正意义上地清除浮动元素的 `float` (仍然脱离文档流):
-  `::before`/`::after` 不与浮动元素在同一行,
+  `::after` 伪元素不与浮动元素在同一行,
   其形成的盒子自然而然地撑起了父容器的高度,
   使得**因浮动元素脱离文档流而塌陷**的父容器恢复正常高度.
 
