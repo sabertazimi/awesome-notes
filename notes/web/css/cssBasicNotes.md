@@ -2242,9 +2242,15 @@ If `containing block` `height` is `auto`, it calculated to `0`.
 - 块状化并格式化上下文.
 - 没有任何 `margin` 合并.
 - 破坏文档流: 父级高度塌陷.
-- 浮动元素与行框盒子不可重叠: 行框盒子会缩短以容纳浮动盒子.
 - 浮动元素的浮动参考 (`float reference`) 是行框盒子:
   浮动元素在当前行框盒子内定位.
+- 浮动元素与行框盒子不可重叠:
+  行框盒子会缩短以容纳浮动盒子, 会形成文字环绕效果.
+- 浮动元素与 BFC:
+  BFC 会收缩以容纳浮动盒子, 此时会忽略自己的边界必须接触包含块边界的规则.
+  可用此特性创建[自适应布局](#column-pattern).
+
+[![Float Layout](./figures/FloatLayout.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Flow_Layout/Intro_to_formatting_contexts)
 
 ### Float Block Formatting Context
 
