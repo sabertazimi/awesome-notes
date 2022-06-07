@@ -2124,7 +2124,7 @@ are always **relative to parent** current order in its own `stacking context`.
 - 使元素相对于 `static` 布局.
 - 可使用 `top`/`bottom`/`left`/`right`/`inset` 属性进行定位.
 - 相对方向 (opposite) 的定位同时设置: `top` 覆盖 `bottom`, `left` 覆盖 `right`.
-- 初始位置被保留, 不脱离文档流.
+- 初始位置被保留 (仍占用原始空间), 不脱离文档流.
 
 ### Absolute Position
 
