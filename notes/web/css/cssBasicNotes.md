@@ -7206,6 +7206,8 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 }
 ```
 
+[`CSS.supports()`](https://developer.mozilla.org/docs/Web/API/CSS/supports):
+
 ```ts
 const result = CSS.supports('text-decoration-style', 'blink');
 const result = CSS.supports('display: flex');
