@@ -1776,7 +1776,11 @@ Auto flow percentage `margin` calculate by `width`.
 
 :::tip Never Collapse
 
-Floating and absolutely positioned elements margin **never collapse**.
+Margin collapsing only happen to **normal** block box **vertical** direction:
+
+- Line box margin **never collapse**.
+- `float` box margin **never collapse**.
+- `absolute` positioned box margin **never collapse**.
 
 :::
 
