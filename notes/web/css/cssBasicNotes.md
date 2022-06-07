@@ -1874,6 +1874,9 @@ Character box/em-box/selection box):
 #### Inline Box
 
 - 内联元素形成外部内联盒子, 让元素不成块显示, 而是排成一行.
+- 水平间距可通过 `padding-inline`/`border-inline`/`margin-inline` 调整,
+  垂直间距可通过 `line-height`/`vertical-align` 调整,
+  垂直间距**不受** `padding-block`/`border-block`/`margin-block` 影响.
 - `<span>`/`<a>`/`<em>` tag 会产生一般内联盒子.
 - Bare text 会产生匿名内联盒子.
 
@@ -3249,7 +3252,6 @@ h1.lines::after {
 
 #### Vertical Centering Inline element
 
-- `padding`.
 - `line-height`.
 - `vertical-align: middle`:
   - 作用机制: 对齐基线 (`baseline`) 往上 1/2 `x-height` 高度 (即小写字母 `x` 交叉点处).
