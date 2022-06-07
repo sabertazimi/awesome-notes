@@ -1867,7 +1867,7 @@ Margin collapsing only happen to **normal** block box **vertical** direction:
 
 ### Inline Box Model
 
-[![Inline Box Model](./figures/InlineBoxModel.png)](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flow_Layout/Intro_to_formatting_contexts#inline_formatting_contexts)
+[![Inline Box Model](./figures/InlineBoxModel.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Flow_Layout/Intro_to_formatting_contexts#inline_formatting_contexts)
 
 #### Content Area
 
@@ -2268,15 +2268,20 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 }
 ```
 
-### Float ClearFix
+### Float Clear Fix
 
 为父容器 (`.row`) 添加 `.clearfix`:
 
-- `clear: both` 只能作用于 block level element:
+- [`clear`](https://developer.mozilla.org/docs/Web/CSS/clear)
+  只能作用于 block level element:
   `::before`/`::after` 默认为 inline level element,
-  `display: table` 将 `::before`/`::after` 设置为 block level element.
-- `clear: both` 本质是让自身不和浮动元素在一行显示,
-  并不是真正意义上的清除浮动.
+  `display: table` 将 `::before`/`::after` 转换为 block level element.
+- [`clear: both`](https://css-tricks.com/snippets/css/clear-fix)
+  本质是让自身不和浮动元素在同一行排列,
+  并没有真正意义上地清除浮动元素的 `float` (仍然脱离文档流):
+  `::before`/`::after` 不与浮动元素在同一行,
+  其形成的盒子自然而然地撑起了父容器的高度,
+  使得**因浮动元素脱离文档流而塌陷**的父容器恢复正常高度.
 
 ```css
 .row {
@@ -2299,6 +2304,8 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
   *zoom: 1; /* display: inline-block BFC creation for IE7 */
 }
 ```
+
+![Float Clear Fix](./figures/FloatClearFix.png)
 
 ## Column Pattern
 
