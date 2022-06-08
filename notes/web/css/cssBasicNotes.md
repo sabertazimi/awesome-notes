@@ -1818,7 +1818,7 @@ Margin collapsing only happen to **normal** block box **vertical** direction:
 
 - `%` 与 `em` 继承计算值, `number` 继承数值.
 - `line-height` 最好使用 `number`, 使得子代继承 `line-height` 时文字正常排版,
-  不会出现 `line-height` < `font-size` 导致文字重叠的现象.
+  不会出现 `line-height` `<` `font-size` 导致文字重叠的现象.
 - Inline level element:
   由于 `line-height` 可继承, 一般给父元素设置 `line-height` 即可,
   会自动作用至容器内所有内联元素.
@@ -1984,7 +1984,7 @@ can use the `z-index` property to adjust its stacking level:
 - `fixed`/`sticky` element.
 - `flex` children with non-`auto` `z-index`.
 - `grid` children with non-`auto` `z-index`.
-- `opacity` $<1$ element.
+- `opacity` `<` $100\%$ element.
 - non-`normal` `mix-blend-mode` element.
 - `transform` element.
 - `perspective` element.
