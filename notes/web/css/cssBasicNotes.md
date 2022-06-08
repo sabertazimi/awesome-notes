@@ -1839,6 +1839,8 @@ Margin collapsing only happen to **normal** block box **vertical** direction:
 - 数值: 基于 `baseline` 上移 (正数) / 下移 (负数).
 - 百分比: calculate by `line-height`.
 
+[![Vertical Align](./figures/VerticalAlign.png)](https://developer.mozilla.org/docs/Web/CSS/vertical-align)
+
 #### Box Vertical Align Applies
 
 `vertical-align` 作用元素:
