@@ -3970,7 +3970,7 @@ math {
 
 - `ch`: calculate by `0` width.
 - `ex`: calculate by `x` width.
-- `em`: calculate by original `font-size`.
+- `em`: calculate by original `font-size` (`inherit` size or current size).
 - `rem`: calculate by root `font-size`.
 
 ```css
