@@ -1721,27 +1721,26 @@ CSS2 visual formatting model:
 
 Negative `margin` change layout flow:
 
-- Negative left margin make self pull left.
-- Negative right margin make sibling pull left.
-- Negative top margin make self pull up.
-- Negative bottom margin make sibling pull up.
-- Negative margin along `float` direction make self pull.
-- Negative margin opposite `float` direction make sibling pull.
+- Negative `margin-top`/`margin-left`: pull self up/left.
+- Negative `margin-bottom`/`margin-right`: pull sibling up/left, overlapping self.
+- Negative `margin` along `float` direction: pull self.
+- Negative `margin` opposite `float` direction: pull sibling.
 
 ```css
-.column-box {
-  overflow: hidden; /* hidden overflow background */
+.content {
+  float: left;
+  width: 100%;
+  margin-right: -200px;
 }
 
-/* 视觉等高布局 */
-.column-left,
-.column-right {
-  padding-bottom: 9999px;
-  margin-bottom: -9999px;
+.sidebar {
+  float: left;
+  width: 200px;
 }
 ```
 
-Negative horizontal `margin` on `initial` width element make `width` **stretch**:
+Negative horizontal `margin` on `initial` width element make `width` **stretch**
+(just like positive `padding`):
 
 ```css
 /* ul width = 100% + 20px */
@@ -1753,6 +1752,10 @@ ul > li {
   float: left;
   width: 100px;
   margin-right: 20px;
+}
+
+.blockquote {
+  margin: 2rem -2rem;
 }
 ```
 
