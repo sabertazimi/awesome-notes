@@ -1719,22 +1719,14 @@ CSS2 visual formatting model:
 
 #### Negative Margin
 
-Negative horizontal `margin` make `width` **stretch**:
+Negative `margin` change layout flow:
 
-```css
-/* ul width = 100% + 20px */
-ul {
-  margin-right: -20px;
-}
-
-ul > li {
-  float: left;
-  width: 100px;
-  margin-right: 20px;
-}
-```
-
-Negative vertical `margin` change vertical flow:
+- Negative left margin make self pull left.
+- Negative right margin make sibling pull left.
+- Negative top margin make self pull up.
+- Negative bottom margin make sibling pull up.
+- Negative margin along `float` direction make self pull.
+- Negative margin opposite `float` direction make sibling pull.
 
 ```css
 .column-box {
@@ -1746,6 +1738,21 @@ Negative vertical `margin` change vertical flow:
 .column-right {
   padding-bottom: 9999px;
   margin-bottom: -9999px;
+}
+```
+
+Negative horizontal `margin` on `initial` width element make `width` **stretch**:
+
+```css
+/* ul width = 100% + 20px */
+ul {
+  margin-right: -20px;
+}
+
+ul > li {
+  float: left;
+  width: 100px;
+  margin-right: 20px;
 }
 ```
 
@@ -2413,7 +2420,7 @@ will pull the floated element in that direction.
 2. `padding-left` and `padding-right` to `.container`,
    `min-width: 2 * (leftWidth + rightWidth)` to `.container`.
 3. Float: `float: left` to `.left`, `.middle` and `.right`.
-4. Negative Margin: `margin-left: -100%` to `.left`,
+4. Negative margin: `margin-left: -100%` to `.left`,
    `margin-right: -rightWidth px` to `.right`.
 5. Move: `right: leftWidth px` to `.left`.
 
