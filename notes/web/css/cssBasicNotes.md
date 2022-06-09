@@ -6727,14 +6727,14 @@ tl.staggerFrom(
 
 ### Responsive Font
 
-- `em`/`rem` font-size
+- `em`/`rem` font size.
 
 ### Responsive Length
 
-- `vw`
-- `vh`
-- `vmin`
-- `vmax`
+- `vw`.
+- `vh`.
+- `vmin`.
+- `vmax`.
 
 ### Responsive Size
 
@@ -6797,6 +6797,54 @@ use `inline-box` with `width`
 .element {
   display: inline-box;
   width: 80%;
+}
+```
+
+#### Responsive Flex Box
+
+```css
+.box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box > .item {
+  flex: 1;
+}
+```
+
+#### Responsive Grid Box
+
+```css
+.box {
+  display: grid;
+  grid-template-areas:
+    'hd'
+    'st1'
+    '.'
+    'st2'
+    '.';
+  grid-template-columns: 1fr;
+}
+
+@media only screen and (min-width: 768px) {
+  .box {
+    grid-template-areas:
+      'hd hd'
+      'st1 .'
+      '. st2';
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .box {
+    grid-template-areas:
+      'hd hd hd'
+      'st1 .. st2'
+      'st1 .. st2';
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 ```
 
