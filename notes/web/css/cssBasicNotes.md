@@ -8806,7 +8806,7 @@ td:last-child {
 }
 ```
 
-#### Custom Form
+#### Reset Form Styles
 
 ```css
 input[type='email'],
@@ -8865,12 +8865,15 @@ select:focus {
 label,
 legend {
   display: block;
+  padding: 0;
   margin-bottom: 0.5rem;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 fieldset {
+  min-width: 0;
   padding: 0;
+  margin: 0;
   border-width: 0;
 }
 
@@ -8915,7 +8918,7 @@ label > .label-body {
 </style>
 ```
 
-#### Custom Checkbox Widget
+#### Custom Form Checkbox
 
 Input itself as border shape,
 pseudo elements as center shape (checked transform animation):
@@ -8961,7 +8964,41 @@ input[type='checkbox']:disabled + label::before {
 }
 ```
 
-#### Custom Select Widget
+#### Custom Form Switch
+
+Pseudo element switch from circle to circle:
+
+- thumb-size: 2rem.
+- track-width: `2 * thumb-size`.
+- track-height: thumb-size.
+- pseudo-element border-radius: 50%.
+- track border-radius: track-size.
+- checked transform:
+  track `background-color`,
+  pseudo element `translateX`.
+
+```css
+.gui-switch > input {
+  appearance: none;
+  display: grid;
+  flex-shrink: 0;
+  grid: [track] 1fr / [track] 1fr;
+  align-items: center;
+  inline-size: var(--track-size);
+  block-size: var(--thumb-size);
+  padding: var(--track-padding);
+  border-radius: var(--track-size);
+}
+
+.gui-switch > input::before {
+  grid-area: track;
+  content: '';
+  inline-size: var(--thumb-size);
+  block-size: var(--thumb-size);
+}
+```
+
+#### Custom Form Select
 
 ```css
 .custom-select {
@@ -9008,40 +9045,6 @@ input[type='checkbox']:disabled + label::before {
   color: #fff;
   background: url('./img/tick.png') no-repeat 8px center;
   background-color: #e74f4d;
-}
-```
-
-#### Custom Switch Widget
-
-Pseudo element switch from circle to circle:
-
-- thumb-size: 2rem.
-- track-width: `2 * thumb-size`.
-- track-height: thumb-size.
-- pseudo-element border-radius: 50%.
-- track border-radius: track-size.
-- checked transform:
-  track `background-color`,
-  pseudo element `translateX`.
-
-```css
-.gui-switch > input {
-  appearance: none;
-  display: grid;
-  flex-shrink: 0;
-  grid: [track] 1fr / [track] 1fr;
-  align-items: center;
-  inline-size: var(--track-size);
-  block-size: var(--thumb-size);
-  padding: var(--track-padding);
-  border-radius: var(--track-size);
-}
-
-.gui-switch > input::before {
-  grid-area: track;
-  content: '';
-  inline-size: var(--thumb-size);
-  block-size: var(--thumb-size);
 }
 ```
 
