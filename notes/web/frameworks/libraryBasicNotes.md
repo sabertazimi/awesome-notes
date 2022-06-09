@@ -487,6 +487,7 @@ tags: [Web, Framework, Library]
 - [IMask.js: Input Mask](https://github.com/uNmAnNeR/imaskjs)
 - [Super Placeholder](https://github.com/chinchang/superplaceholder.js)
 - [AutoComplete.js](https://github.com/TarekRaafat/autoComplete.js)
+- [PinField: PIN Codes Input](https://github.com/soywod/react-pin-field)
 
 #### Select
 
