@@ -7146,6 +7146,11 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 
 ## Container Query
 
+当组件出现在同一视口大小 (viewport) 页面下的不同地方时,
+e.g `.main > .button` vs `.sidebar > .button`,
+此时 `@media` 无法有效实现响应式组件,
+使用 `@container` 可以有效实现响应式组件:
+
 ```css
 .sidebar {
   /* stylelint-disable-next-line  property-no-unknown */
