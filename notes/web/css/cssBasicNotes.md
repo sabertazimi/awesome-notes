@@ -8806,6 +8806,8 @@ td:last-child {
 }
 ```
 
+[![Form Input Style](figures/FormInputStyle.png)](https://css-tricks.com/html-inputs-and-labels-a-love-story)
+
 #### Reset Form Styles
 
 ```css
