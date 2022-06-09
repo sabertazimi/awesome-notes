@@ -6723,6 +6723,7 @@ tl.staggerFrom(
 - Fluid grid.
 - Flexible image.
 - Media query.
+- Mobile first: `@media only screen and (min-width: 768px)`.
 
 ### Responsive Font
 
