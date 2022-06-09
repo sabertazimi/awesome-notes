@@ -6872,6 +6872,11 @@ use `inline-box` with `width`
   <source srcset="mdn-logo-wide.png" media="(min-width: 600px)" />
   <img src="mdn-logo-narrow.png" alt="MDN" />
 </picture>
+
+<img src="x-small.png" srcset="x-small.png 300w, small.png 400w, medium.png
+600w, large.png 800w, x-large.png 1200w" sizes="(min-width: 70em) 12.6875em,
+(min-width: 50em) calc(25vw * 0.95 - 2.75em), (min-width: 35em) calc(95vw / 2 -
+4.125em), calc(95vw - 1.375em)" " alt="Dummy Image" />
 ```
 
 ## Media Query
