@@ -2854,7 +2854,7 @@ Children property:
 
 `<track-breadth>`:
 
-- `<flex>`: `<number>fr`.
+- `<flex>`: `<number>fr`, fraction.
 - `<length-percentage>`.
 - `min-content`.
 - `max-content`.
