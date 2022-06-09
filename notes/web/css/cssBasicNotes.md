@@ -9588,9 +9588,14 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 
 ```css
 .grid-line {
+  /**
+   * `background-image` for line color,
+   * `background-size` for line gap.
+   */
   background-color: #fff;
   background-image: linear-gradient(var(--line-color) 1px, transparent 0),
     linear-gradient(90deg, var(--line-color) 1px, transparent 0);
+  background-size: 10px 10px;
   border-top: 1px solid #e5e8eb;
   border-bottom: 1px solid #e5e8eb;
   box-shadow: inset 0 15px 20px -15px #f6f7f9, inset -5px -15px 20px -15px
