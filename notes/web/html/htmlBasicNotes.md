@@ -1301,12 +1301,26 @@ With `fieldset` and `legend`:
 #### Input Accessibility
 
 - `label[for]` input.
-- `aria-describedby` and `aria-invalid` for input error.
+- `aria-label` and `aria-describedby` for input hint.
+- `aria-invalid` for error input.
+- `aria-hidden` for hidden input.
 
 ```html
 <form role="form">
   <label for="name">Name:</label>
-  <input type="text" id="name" name="name" />
+  <input id="name" name="name" type="text" />
+</form>
+```
+
+```html
+<form role="form">
+  <label for="name">Name:</label>
+  <span class="prefix-input">
+    <span class="prefix-icon" id="name-icon" aria-label="Input Prefix Icon">
+      <icon />
+    </span>
+    <input id="name" name="name" type="text" aria-describedby="name-icon" />
+  </span>
 </form>
 ```
 
@@ -1318,6 +1332,7 @@ With `fieldset` and `legend`:
   </span>
   <input
     id="email-address"
+    name="email-address"
     type="email"
     aria-describedby="email-error"
     aria-invalid="true"
