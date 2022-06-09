@@ -6718,6 +6718,12 @@ tl.staggerFrom(
 
 ## Responsive Design
 
+[Responsive web design](https://alistapart.com/article/responsive-web-design):
+
+- Fluid grid.
+- Flexible image.
+- Media query.
+
 ### Responsive Font
 
 - `em`/`rem` font-size
