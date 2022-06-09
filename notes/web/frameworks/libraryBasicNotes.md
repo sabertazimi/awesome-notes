@@ -48,6 +48,7 @@ tags: [Web, Framework, Library]
 - [React Chrome Extension JavaScript Boilerplate](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
 - [React Chrome Extension TypeScript Boilerplate](https://github.com/Debdut/browser-extension)
 - [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)
+- [Plasmo: Browser Extension Framework](https://github.com/PlasmoHQ/plasmo)
 - [Vite Web Extension](https://github.com/antfu/vitesse-webext)
 
 ## UI Framework
