@@ -4617,13 +4617,17 @@ body {
 
 ### Background Image
 
+[`background-image`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-image):
+
 - `url()`.
 - `image-set([<image> <resolution>]#)`.
 - `linear-gradient()`.
 - `radial-gradient()`.
 - `conic-gradient()`.
+- 语法越靠后的背景图像的层叠等级越低:
+  `background` 一般设置为 `background-image# background-color`.
 
-Image set background:
+![Multiple Background Image](./figures/BackgroundImage.png)
 
 ```css
 .image-set {
@@ -4636,60 +4640,6 @@ Image set background:
     url('w512px.jpg') 3x
   );
   background-size: cover;
-}
-```
-
-Gradient buttons:
-
-```css
-.btn:hover,
-.btn:focus {
-  background-position: right center; /* change the direction of the change here */
-}
-
-.btn-1 {
-  background-image: linear-gradient(
-    to right,
-    #f6d365 0%,
-    #fda085 51%,
-    #f6d365 100%
-  );
-}
-
-.btn-2 {
-  background-image: linear-gradient(
-    to right,
-    #fbc2eb 0%,
-    #a6c1ee 51%,
-    #fbc2eb 100%
-  );
-}
-
-.btn-3 {
-  background-image: linear-gradient(
-    to right,
-    #84fab0 0%,
-    #8fd3f4 51%,
-    #84fab0 100%
-  );
-}
-
-.btn-4 {
-  background-image: linear-gradient(
-    to right,
-    #a1c4fd 0%,
-    #c2e9fb 51%,
-    #a1c4fd 100%
-  );
-}
-
-.btn-5 {
-  background-image: linear-gradient(
-    to right,
-    #ffecd2 0%,
-    #fcb69f 51%,
-    #ffecd2 100%
-  );
 }
 ```
 
@@ -5168,8 +5118,6 @@ body {
 [`background-blend-mode`](https://developer.mozilla.org/docs/Web/CSS/background-blend-mode)
 
 - Used for multiple `background-image`.
-- 语法越靠后的背景图像的层级越低:
-  `background` 一般设置为 `background-image# background-color`.
 
 ```css
 .box {
@@ -5417,7 +5365,7 @@ img.alpha-mask {
 - `exclude`:
   遮罩图片重合的区域被当作透明区域 (`transparent`),
   其余区域直接合成一个完整的遮罩 (`add`).
-- `mask-image` 中语法越靠后的遮罩图片层级越低.
+- `mask-image` 中语法越靠后的遮罩图片层叠等级越低.
 
 ```css
 .masked {
@@ -8576,35 +8524,7 @@ a.btn-custom {
 Liner gradient button:
 
 ```css
-@media screen and (prefers-reduced-motion: reduce) {
-  a {
-    transition: none;
-  }
-}
-
-a {
-  text-decoration: none;
-  background-image: linear-gradient(currentcolor, currentcolor);
-  background-repeat: no-repeat;
-  background-position: 0% 100%;
-  background-size: 0% 2px;
-  transition: background-size 0.3s;
-}
-
-a:hover,
-a:focus {
-  background-size: 100% 2px;
-}
-```
-
-```css
-@media screen and (prefers-reduced-motion: reduce) {
-  a {
-    transition: none;
-  }
-}
-
-a {
+.btn {
   display: inline-block;
   padding: 5px;
   color: #333;
@@ -8614,10 +8534,62 @@ a {
   transition: all 0.3s;
 }
 
-a:hover,
-a:focus {
+.btn:hover,
+.btn:focus {
   color: #fff;
   background-position: 0 100%;
+}
+```
+
+```css
+.btn-1 {
+  background-image: linear-gradient(
+    to right,
+    #f6d365 0%,
+    #fda085 51%,
+    #f6d365 100%
+  );
+}
+
+.btn-2 {
+  background-image: linear-gradient(
+    to right,
+    #fbc2eb 0%,
+    #a6c1ee 51%,
+    #fbc2eb 100%
+  );
+}
+
+.btn-3 {
+  background-image: linear-gradient(
+    to right,
+    #84fab0 0%,
+    #8fd3f4 51%,
+    #84fab0 100%
+  );
+}
+
+.btn-4 {
+  background-image: linear-gradient(
+    to right,
+    #a1c4fd 0%,
+    #c2e9fb 51%,
+    #a1c4fd 100%
+  );
+}
+
+.btn-5 {
+  background-image: linear-gradient(
+    to right,
+    #ffecd2 0%,
+    #fcb69f 51%,
+    #ffecd2 100%
+  );
+}
+
+.btn:hover,
+.btn:focus {
+  background-position: right center; /* change the direction of the change here */
 }
 ```
 
