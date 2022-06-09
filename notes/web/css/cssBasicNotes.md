@@ -6837,13 +6837,22 @@ use `inline-box` with `width`
   }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1280px) {
   .box {
     grid-template-areas:
       'hd hd hd'
-      'st1 .. st2'
-      'st1 .. st2';
+      'st1 . st2'
+      'st1 . st2';
     grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 1536px) {
+  .box {
+    grid-template-areas:
+      'hd st1 . st2'
+      'hd st1 . st2';
+    grid-template-columns: 20% 1fr 1fr 1fr;
   }
 }
 ```
