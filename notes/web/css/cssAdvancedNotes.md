@@ -31,19 +31,18 @@ tags: [Web, CSS]
 
 > Refer to: font-family, font-size, spacing, color.
 
-- [Understanding Typography](https://material.io/design/typography/understanding-typography)
-- [Practical Typography](https://practicaltypography.com)
-- [Typography Reference](https://noti.st/rar/mz1rIY/golden-rules-of-typography-on-the-web)
-
 ### Typography Properties
 
 [![Typography Properties](./figures/TypographyProperties.png)](https://material.io/design/typography/understanding-typography.html#type-properties)
 
-### Font Size and Spacing
+### Font Size
 
 - Set a base-size.
 - Multiples of base-size.
-- Use rem for most font-size, use em for some spacing (needing responsive design).
+- Use `rem` for most font-size, use `em` for some spacing (needing responsive design).
+- `rem` is better.
+- `em` for responsive layout (etc. layer2 font based-on layer1 font in dropdown menu).
+- Make text legible: at least `16px`.
 
 ```scss
 $xs: $base / $ratio / $ratio;
@@ -53,13 +52,7 @@ $lg: $base * $ratio;
 $xl: $base * $ratio * ratio;
 ```
 
-#### Font Size
-
-- `rem` is better.
-- `em` for responsive layout (etc. layer2 font based-on layer1 font in dropdown menu).
-- Make text legible: at least `16px`.
-
-#### Spacing
+### Spacing
 
 Make text breathe:
 
@@ -69,7 +62,7 @@ Make text breathe:
 - `letter-spacing`.
 - 60-100 characters per line.
 
-#### Vertical Rhythms
+### Vertical Rhythms
 
 Keep vertical spaces between elements on a page
 consistent (and relative) to each other:
@@ -94,14 +87,21 @@ The optimal line length for body text is `50`–`75` characters:
 }
 ```
 
-### Table
+### Table Typography
 
 - Remove fills, grid lines, border and bolding.
 - Left-align text, right-align numbers
   and align headings with data.
 - Put white space to work to group and separate.
 
-## Grid System
+### Typography Reference
+
+- Understanding typography [guide](https://material.io/design/typography/understanding-typography).
+- Practical typography [guide](https://practicaltypography.com).
+- Golden rules of web typography [reference](https://noti.st/rar/mz1rIY/golden-rules-of-typography-on-the-web).
+- Typeface [font matrix](https://pimpmytype.com/font-matrix/).
+
+t## Grid System
 
 - Must have different traits at different sizes
 - Must be fluid between breakpoints
