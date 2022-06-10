@@ -427,10 +427,10 @@ can use the `z-index` property to adjust its stacking level:
 - non-`normal` `mix-blend-mode` element.
 - `transform` element.
 - `perspective` element.
-- `filter` element.
-- `backdrop-filter` element.
 - `clip-path` element.
 - `mask`/`mask-image`/`mask-border` element.
+- `filter` element.
+- `backdrop-filter` element.
 - `isolation: isolate` element.
 - `will-change` above properties element.
 - `contain` `strict`/`content`/`layout`/`paint` element.

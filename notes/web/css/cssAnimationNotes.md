@@ -634,10 +634,10 @@ animating an element along a defined path:
 - `background` with multiple `gradient`.
 - Single `box-shadow`
 - Multiple `box-shadow`.
-- `filter`.
-- `backdrop-filter`.
 - `*-clip-*`.
 - `mask-*`.
+- `filter`.
+- `backdrop-filter`.
 - Pseudo element (`::before`/`::after`).
 - Pseudo class (`:hover`/`:focus`/`:target`).
 - Changing `top`/`right`/`bottom`/`left` of pseudo element

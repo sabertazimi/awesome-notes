@@ -1223,150 +1223,6 @@ Use pseudo elements to construct circle and line:
 }
 ```
 
-## Filter and Blend Effects
-
-### Fusion Effect
-
-- Parent element: `background-color` + `filter: contrast()`.
-- Child element: `filter: blur()`.
-- Light/flame/rain drop emulation .
-
-```html
-<div class="container">
-  <div class="circle circle-1"></div>
-  <div class="circle circle-2"></div>
-</div>
-
-<style>
-  .container {
-    background: #fff; /* Required */
-    filter: contrast(30);
-  }
-
-  .circle {
-    filter: blur(10px);
-  }
-</style>
-```
-
-### Frosted Glass Effect
-
-毛玻璃效果 (`bg-white/30 shadow-lg backdrop-blur-sm`):
-
-```css
-body {
-  background-image: url('https://images.unsplash.com/image');
-  background-position: center;
-}
-
-.card {
-  background-color: rgb(17 25 40 / 54%);
-  border: 1px solid rgb(255 255 255 / 12.5%);
-  border-radius: 12px;
-  backdrop-filter: blur(12px) saturate(200%);
-}
-
-.hero {
-  --inset-shadow: inset 0 0 1px 1px hsl(204deg 100% 90% / 100%);
-  --shadow: 10px 10px 60px 20px hsl(194deg 100% 9% / 50%);
-
-  background-color: hsl(27deg 10% 90% / 90%);
-  border: 1px solid hsl(176deg 87% 7% / 60%);
-  border-radius: 5px;
-  box-shadow: var(--inset-shadow), var(--shadow);
-}
-
-@supports (backdrop-filter: blur(25px) brightness(170%)) {
-  .hero {
-    background-color: hsl(27deg 10% 90% / 50%);
-    backdrop-filter: blur(25px) brightness(170%);
-  }
-}
-```
-
-### Gradient Text Effect
-
-```css
-.gradient-text {
-  position: relative;
-  color: black;
-  background: #fff;
-}
-
-.gradient-text::before {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  content: '';
-  background: linear-gradient(to right, deepskyblue, deeppink);
-  mix-blend-mode: lighten;
-}
-```
-
-### Sun Effect
-
-```css
-.sun {
-  filter: contrast(0.34) brightness(1.6) sepia(1) hue-rotate(10deg);
-}
-```
-
-### Night Effect
-
-```css
-.night {
-  background: rgb(0 40 140 / 60%), url('./house-bed.jpg');
-  filter: brightness(80%) grayscale(20%) contrast(1.2);
-  background-size: 100%;
-  background-blend-mode: darken;
-}
-```
-
-### Movie Effect
-
-```css
-.movie {
-  filter: contrast(1.1);
-  background-blend-mode: soft-light;
-}
-```
-
-### Old Effect
-
-```css
-.old-1977 {
-  position: relative;
-  filter: contrast(1.1) brightness(1.1) saturate(1.3);
-}
-
-.old-1977::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  content: '';
-  background: rgb(243 106 188 / 30%);
-  mix-blend-mode: screen;
-}
-```
-
-### Sketch Effect
-
-```css
-.sketch {
-  width: 256px;
-  height: 171px;
-  background: url('10.jpg') -2px -2px, url('10.jpg');
-  filter: brightness(3) invert(1) grayscale(1);
-  background-size: 258px 173px;
-  background-blend-mode: difference;
-}
-```
-
 ## Geometry and Shape
 
 ### Pseudo Element Shape
@@ -1777,6 +1633,150 @@ const polygon = (n = 3) => {
 ```css
 .polygon {
   clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+```
+
+## Filter and Blend Effects
+
+### Fusion Effect
+
+- Parent element: `background-color` + `filter: contrast()`.
+- Child element: `filter: blur()`.
+- Light/flame/rain drop emulation .
+
+```html
+<div class="container">
+  <div class="circle circle-1"></div>
+  <div class="circle circle-2"></div>
+</div>
+
+<style>
+  .container {
+    background: #fff; /* Required */
+    filter: contrast(30);
+  }
+
+  .circle {
+    filter: blur(10px);
+  }
+</style>
+```
+
+### Frosted Glass Effect
+
+毛玻璃效果 (`bg-white/30 shadow-lg backdrop-blur-sm`):
+
+```css
+body {
+  background-image: url('https://images.unsplash.com/image');
+  background-position: center;
+}
+
+.card {
+  background-color: rgb(17 25 40 / 54%);
+  border: 1px solid rgb(255 255 255 / 12.5%);
+  border-radius: 12px;
+  backdrop-filter: blur(12px) saturate(200%);
+}
+
+.hero {
+  --inset-shadow: inset 0 0 1px 1px hsl(204deg 100% 90% / 100%);
+  --shadow: 10px 10px 60px 20px hsl(194deg 100% 9% / 50%);
+
+  background-color: hsl(27deg 10% 90% / 90%);
+  border: 1px solid hsl(176deg 87% 7% / 60%);
+  border-radius: 5px;
+  box-shadow: var(--inset-shadow), var(--shadow);
+}
+
+@supports (backdrop-filter: blur(25px) brightness(170%)) {
+  .hero {
+    background-color: hsl(27deg 10% 90% / 50%);
+    backdrop-filter: blur(25px) brightness(170%);
+  }
+}
+```
+
+### Gradient Text Effect
+
+```css
+.gradient-text {
+  position: relative;
+  color: black;
+  background: #fff;
+}
+
+.gradient-text::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  background: linear-gradient(to right, deepskyblue, deeppink);
+  mix-blend-mode: lighten;
+}
+```
+
+### Sun Effect
+
+```css
+.sun {
+  filter: contrast(0.34) brightness(1.6) sepia(1) hue-rotate(10deg);
+}
+```
+
+### Night Effect
+
+```css
+.night {
+  background: rgb(0 40 140 / 60%), url('./house-bed.jpg');
+  filter: brightness(80%) grayscale(20%) contrast(1.2);
+  background-size: 100%;
+  background-blend-mode: darken;
+}
+```
+
+### Movie Effect
+
+```css
+.movie {
+  filter: contrast(1.1);
+  background-blend-mode: soft-light;
+}
+```
+
+### Old Effect
+
+```css
+.old-1977 {
+  position: relative;
+  filter: contrast(1.1) brightness(1.1) saturate(1.3);
+}
+
+.old-1977::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  content: '';
+  background: rgb(243 106 188 / 30%);
+  mix-blend-mode: screen;
+}
+```
+
+### Sketch Effect
+
+```css
+.sketch {
+  width: 256px;
+  height: 171px;
+  background: url('10.jpg') -2px -2px, url('10.jpg');
+  filter: brightness(3) invert(1) grayscale(1);
+  background-size: 258px 173px;
+  background-blend-mode: difference;
 }
 ```
 
