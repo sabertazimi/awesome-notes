@@ -1508,29 +1508,6 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 
 ![Background Shape](./figures/BackgroundShape.png)
 
-```css
-.loading-ring {
-  --mask: radial-gradient(closest-side, transparent 75%, black 76%);
-
-  width: 100px;
-  height: 100px;
-  background: conic-gradient(deepskyblue, 30%, white);
-  mask-image: var(--mask);
-  border-radius: 50%;
-  animation: spin 1s linear infinite reverse;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-```
-
 ### Stretch Line
 
 - background line
@@ -1629,6 +1606,33 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
   border-bottom: 1px solid #e5e8eb;
   box-shadow: inset 0 15px 20px -15px #f6f7f9, inset -5px -15px 20px -15px
       #f6f7f9;
+}
+```
+
+### Spinner
+
+Background gradient [loading spinner](https://css-tricks.com/single-element-loaders-the-spinner):
+
+```css
+.loading-ring {
+  --mask: radial-gradient(closest-side, transparent 75%, black 76%);
+
+  width: 100px;
+  height: 100px;
+  background: conic-gradient(deepskyblue, 30%, white);
+  mask-image: var(--mask);
+  border-radius: 50%;
+  animation: spin 1s linear infinite reverse;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 ```
 

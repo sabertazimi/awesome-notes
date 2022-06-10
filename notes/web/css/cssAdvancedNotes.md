@@ -641,6 +641,10 @@ body {
 
 [![Conic Gradient](./figures/ConicGradient.png)](https://developer.mozilla.org/docs/Web/CSS/gradient/conic-gradient#composition_of_a_conic_gradient)
 
+### Gradient Reference
+
+- Background gradient [loading spinner](https://css-tricks.com/single-element-loaders-the-spinner).
+
 ## CSS Filter and Blend
 
 ### Filter
