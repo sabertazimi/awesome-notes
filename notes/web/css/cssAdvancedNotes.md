@@ -807,6 +807,7 @@ body {
 
 - Instagram [filters](https://github.com/una/CSSgram).
 - Image [effects](https://github.com/bennettfeely/image-effects).
+- PhotoShop blending modes [ultimate guide](https://www.slrlounge.com/photoshop-blending-modes).
 
 ## CSS Shape
 
