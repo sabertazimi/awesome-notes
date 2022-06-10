@@ -585,71 +585,6 @@ export function initUse(Vue: GlobalAPI) {
 }
 ```
 
-## Vue Instance
-
-```ts
-// Vue.prototype._init: core/instance/init.js
-// eslint-disable-next-line @typescript-eslint/no-this-alias
-const vm: Component = this;
-```
-
-```ts
-// Vue.prototype._init: core/instance/init.js
-vm._uid = uid++; // 每个Vue实例都拥有一个唯一的 id
-vm._isVue = true; // 这个表示用于避免Vue实例对象被观测(observed)
-vm.$options = options; // 当前 Vue 实例的初始化选项, 注意: 这是经过 mergeOptions() 后的
-vm._renderProxy = vm; // 渲染函数作用域代理
-vm._self = vm; // 实例本身
-
-// initLifecycle(vm): core/instance/lifecycle.js
-vm.$parent = vmParent;
-vm.$root = vmParent ? vmParent.$root : vm;
-
-vm.$children = [];
-vm.$refs = {};
-
-vm._watcher = null;
-vm._inactive = null;
-vm._directInactive = false;
-vm._isMounted = false;
-vm._isDestroyed = false;
-vm._isBeingDestroyed = false;
-
-// initEvents(vm): core/instance/events.js
-vm._events = Object.create(null);
-vm._hasHookEvent = false;
-
-// initRender(vm): core/instance/render.js
-vm._vnode = null; // the root of the child tree
-vm._staticTrees = null; // v-once cached trees
-
-vm.$vnode = vnode;
-vm.$slots = slots;
-vm.$scopedSlots = scopedSlots;
-
-vm._c = c;
-vm.$createElement = createElement;
-
-vm.$attrs = attrs;
-vm.$listeners = listeners;
-
-// initState(vm): core/instance/state.js
-vm._watchers = [];
-vm._data = data;
-
-// mountComponent(): core/instance/lifecycle.js
-vm.$el = el;
-
-// initComputed(): core/instance/state.js
-vm._computedWatchers = Object.create(null);
-
-// initProps(): core/instance/state.js
-vm._props = {};
-
-// initProvide(): core/instance/inject.js
-vm._provided = provided;
-```
-
 ## Vue Mounting Workflow
 
 `new Vue()` -> 初始化 -> 编译 -> 渲染 -> 挂载 -> 更新:
@@ -991,224 +926,6 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
 };
 ```
 
-## Vue Options API
-
-`core/instance/init.js`:
-
-```ts
-vm.$options = mergeOptions(
-  // resolveConstructorOptions(vm.constructor)
-  {
-    components: {
-      KeepAlive,
-      Transition,
-      TransitionGroup,
-    },
-    directives: {
-      model,
-      show,
-    },
-    filters: Object.create(null),
-    _base: Vue,
-  },
-  // options || {}
-  {
-    el: '#app',
-    data: {
-      test: 1,
-    },
-  },
-  vm
-);
-```
-
-Parent component options:
-
-```ts
-vm.$options = {
-  components: {
-    KeepAlive,
-    Transition,
-    TransitionGroup,
-    ...UserRegisterComponents,
-  },
-  created: [
-    function created() {
-      console.log('parent created');
-    },
-  ],
-  directives: {
-    model,
-    show,
-    ...userCustomDirectives,
-  },
-  filters: {},
-  _base: function Vue(options) {},
-  el: '#app',
-  render: function _render(h) {},
-};
-```
-
-Children component options:
-
-```ts
-vm.$options = {
-  parent: Vue /* 父Vue实例 */,
-  propsData: undefined,
-  _componentTag: undefined,
-  _parentVnode: VNode /* 父VNode实例 */,
-  _renderChildren: undefined,
-  __proto__: {
-    components: {
-      KeepAlive,
-      Transition,
-      TransitionGroup,
-      ...UserRegisterComponents,
-    },
-    directives: {
-      model,
-      show,
-      ...userCustomDirectives,
-    },
-    filters: {},
-    _base: function Vue(options) {},
-    _Ctor: {},
-    created: [
-      function created() {
-        console.log('parent created');
-      },
-      function created() {
-        console.log('child created');
-      },
-    ],
-    mounted: [
-      function mounted() {
-        console.log('child mounted');
-      },
-    ],
-    data() {
-      return {
-        msg: 'Hello Vue',
-      };
-    },
-    template: '<div>{{msg}}</div>',
-  },
-};
-```
-
-- `core/instance/state.js/initProps()`: `this.XXX` -> `this._props.XXX`.
-- `core/instance/state.js/initData()`: `this.XXX` -> `this._data.XXX`.
-
-### Vue Merge Options
-
-`mergeOptions` (`core/util/options.js`):
-
-- 对于 `el`/`propsData` 选项使用默认的合并策略 `defaultStrategy`.
-- 对于 `data` 选项, 使用 `mergeDataOrFn` 函数进行处理, 最终结果是 `data` 选项将变成一个函数, 且该函数的执行结果为真正的数据对象.
-- 对于 生命周期钩子 选项, 将合并成数组, 使得父子选项中的钩子函数都能够被执行.
-- 对于 `directives`/`filters` 以及 `components` 等资源选项,
-  父子选项将以原型链的形式被处理, 正是因为这样我们才能够在任何地方都使用内置组件或指令等.
-- 对于 `watch` 选项的合并处理, 类似于生命周期钩子, 如果父子选项都有相同的观测字段, 将被合并为数组, 这样观察者都将被执行.
-- 对于 `props`/`methods`/`inject`/`computed` 选项, 父选项始终可用, 但是子选项会覆盖同名的父选项字段.
-- 对于 `provide` 选项, 其合并策略使用与 `data` 选项相同的 `mergeDataOrFn` 函数.
-- 最后, 以上没有提及到的选项都将使默认选项 `defaultStrategy`.
-- 最最后, 默认合并策略函数 `defaultStrategy` 的策略是: 只要子选项不是 `undefined` 就使用子选项, 否则使用父选项.
-
-```ts
-/**
- * Merge two option objects into a new one.
- * Core utility used in both instantiation and inheritance.
- */
-export function mergeOptions(
-  parent: Object,
-  child: Object,
-  vm?: Component
-): Object {
-  if (typeof child === 'function') {
-    child = child.options;
-  }
-
-  normalizeProps(child, vm);
-  normalizeInject(child, vm);
-  normalizeDirectives(child);
-
-  const extendsFrom = child.extends;
-
-  if (extendsFrom) {
-    parent = mergeOptions(parent, extendsFrom, vm);
-  }
-
-  if (child.mixins) {
-    for (let i = 0, l = child.mixins.length; i < l; i++) {
-      parent = mergeOptions(parent, child.mixins[i], vm);
-    }
-  }
-
-  const options = {};
-  let key;
-
-  for (key in parent) {
-    mergeField(key);
-  }
-
-  for (key in child) {
-    if (!hasOwn(parent, key)) {
-      mergeField(key);
-    }
-  }
-
-  function mergeField(key) {
-    const strategy = strategies[key] || defaultStrategy;
-    options[key] = strategy(parent[key], child[key], vm, key);
-  }
-
-  return options;
-}
-```
-
-### Vue Normalize Options
-
-Props:
-
-```ts
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
-  props: {
-    someData1: {
-      type: Number,
-    },
-    someData2: {
-      type: String,
-      default: '',
-    },
-  },
-};
-```
-
-Injects:
-
-```ts
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
-  inject: {
-    data1: { from: 'data1' },
-    d2: { from: 'data2' },
-    data3: { from: 'data3', someProperty: 'someValue' },
-  },
-};
-```
-
-Directives:
-
-```ts
-for (const key in dirs) {
-  const def = dirs[key];
-  if (typeof def === 'function') {
-    dirs[key] = { bind: def, update: def };
-  }
-}
-```
-
 ## Vue Lifecycle
 
 [![Lifecycle](./figures/lifecycle.png)](https://v2.vuejs.org/v2/api/#Options-Lifecycle-Hooks)
@@ -1428,6 +1145,224 @@ Vue.prototype.$destroy = function () {
 };
 ```
 
+## Vue Options API
+
+`core/instance/init.js`:
+
+```ts
+vm.$options = mergeOptions(
+  // resolveConstructorOptions(vm.constructor)
+  {
+    components: {
+      KeepAlive,
+      Transition,
+      TransitionGroup,
+    },
+    directives: {
+      model,
+      show,
+    },
+    filters: Object.create(null),
+    _base: Vue,
+  },
+  // options || {}
+  {
+    el: '#app',
+    data: {
+      test: 1,
+    },
+  },
+  vm
+);
+```
+
+Parent component options:
+
+```ts
+vm.$options = {
+  components: {
+    KeepAlive,
+    Transition,
+    TransitionGroup,
+    ...UserRegisterComponents,
+  },
+  created: [
+    function created() {
+      console.log('parent created');
+    },
+  ],
+  directives: {
+    model,
+    show,
+    ...userCustomDirectives,
+  },
+  filters: {},
+  _base: function Vue(options) {},
+  el: '#app',
+  render: function _render(h) {},
+};
+```
+
+Children component options:
+
+```ts
+vm.$options = {
+  parent: Vue /* 父Vue实例 */,
+  propsData: undefined,
+  _componentTag: undefined,
+  _parentVnode: VNode /* 父VNode实例 */,
+  _renderChildren: undefined,
+  __proto__: {
+    components: {
+      KeepAlive,
+      Transition,
+      TransitionGroup,
+      ...UserRegisterComponents,
+    },
+    directives: {
+      model,
+      show,
+      ...userCustomDirectives,
+    },
+    filters: {},
+    _base: function Vue(options) {},
+    _Ctor: {},
+    created: [
+      function created() {
+        console.log('parent created');
+      },
+      function created() {
+        console.log('child created');
+      },
+    ],
+    mounted: [
+      function mounted() {
+        console.log('child mounted');
+      },
+    ],
+    data() {
+      return {
+        msg: 'Hello Vue',
+      };
+    },
+    template: '<div>{{msg}}</div>',
+  },
+};
+```
+
+- `core/instance/state.js/initProps()`: `this.XXX` -> `this._props.XXX`.
+- `core/instance/state.js/initData()`: `this.XXX` -> `this._data.XXX`.
+
+### Vue Merge Options
+
+`mergeOptions` (`core/util/options.js`):
+
+- 对于 `el`/`propsData` 选项使用默认的合并策略 `defaultStrategy`.
+- 对于 `data` 选项, 使用 `mergeDataOrFn` 函数进行处理, 最终结果是 `data` 选项将变成一个函数, 且该函数的执行结果为真正的数据对象.
+- 对于 生命周期钩子 选项, 将合并成数组, 使得父子选项中的钩子函数都能够被执行.
+- 对于 `directives`/`filters` 以及 `components` 等资源选项,
+  父子选项将以原型链的形式被处理, 正是因为这样我们才能够在任何地方都使用内置组件或指令等.
+- 对于 `watch` 选项的合并处理, 类似于生命周期钩子, 如果父子选项都有相同的观测字段, 将被合并为数组, 这样观察者都将被执行.
+- 对于 `props`/`methods`/`inject`/`computed` 选项, 父选项始终可用, 但是子选项会覆盖同名的父选项字段.
+- 对于 `provide` 选项, 其合并策略使用与 `data` 选项相同的 `mergeDataOrFn` 函数.
+- 最后, 以上没有提及到的选项都将使默认选项 `defaultStrategy`.
+- 最最后, 默认合并策略函数 `defaultStrategy` 的策略是: 只要子选项不是 `undefined` 就使用子选项, 否则使用父选项.
+
+```ts
+/**
+ * Merge two option objects into a new one.
+ * Core utility used in both instantiation and inheritance.
+ */
+export function mergeOptions(
+  parent: Object,
+  child: Object,
+  vm?: Component
+): Object {
+  if (typeof child === 'function') {
+    child = child.options;
+  }
+
+  normalizeProps(child, vm);
+  normalizeInject(child, vm);
+  normalizeDirectives(child);
+
+  const extendsFrom = child.extends;
+
+  if (extendsFrom) {
+    parent = mergeOptions(parent, extendsFrom, vm);
+  }
+
+  if (child.mixins) {
+    for (let i = 0, l = child.mixins.length; i < l; i++) {
+      parent = mergeOptions(parent, child.mixins[i], vm);
+    }
+  }
+
+  const options = {};
+  let key;
+
+  for (key in parent) {
+    mergeField(key);
+  }
+
+  for (key in child) {
+    if (!hasOwn(parent, key)) {
+      mergeField(key);
+    }
+  }
+
+  function mergeField(key) {
+    const strategy = strategies[key] || defaultStrategy;
+    options[key] = strategy(parent[key], child[key], vm, key);
+  }
+
+  return options;
+}
+```
+
+### Vue Normalize Options
+
+Props:
+
+```ts
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  props: {
+    someData1: {
+      type: Number,
+    },
+    someData2: {
+      type: String,
+      default: '',
+    },
+  },
+};
+```
+
+Injects:
+
+```ts
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  inject: {
+    data1: { from: 'data1' },
+    d2: { from: 'data2' },
+    data3: { from: 'data3', someProperty: 'someValue' },
+  },
+};
+```
+
+Directives:
+
+```ts
+for (const key in dirs) {
+  const def = dirs[key];
+  if (typeof def === 'function') {
+    dirs[key] = { bind: def, update: def };
+  }
+}
+```
+
 ## Vue Async Component
 
 ```ts
@@ -1627,6 +1562,71 @@ function createAsyncPlaceholder(
   node.asyncMeta = { data, context, children, tag };
   return node;
 }
+```
+
+## Vue Instance
+
+```ts
+// Vue.prototype._init: core/instance/init.js
+// eslint-disable-next-line @typescript-eslint/no-this-alias
+const vm: Component = this;
+```
+
+```ts
+// Vue.prototype._init: core/instance/init.js
+vm._uid = uid++; // 每个Vue实例都拥有一个唯一的 id
+vm._isVue = true; // 这个表示用于避免Vue实例对象被观测(observed)
+vm.$options = options; // 当前 Vue 实例的初始化选项, 注意: 这是经过 mergeOptions() 后的
+vm._renderProxy = vm; // 渲染函数作用域代理
+vm._self = vm; // 实例本身
+
+// initLifecycle(vm): core/instance/lifecycle.js
+vm.$parent = vmParent;
+vm.$root = vmParent ? vmParent.$root : vm;
+
+vm.$children = [];
+vm.$refs = {};
+
+vm._watcher = null;
+vm._inactive = null;
+vm._directInactive = false;
+vm._isMounted = false;
+vm._isDestroyed = false;
+vm._isBeingDestroyed = false;
+
+// initEvents(vm): core/instance/events.js
+vm._events = Object.create(null);
+vm._hasHookEvent = false;
+
+// initRender(vm): core/instance/render.js
+vm._vnode = null; // the root of the child tree
+vm._staticTrees = null; // v-once cached trees
+
+vm.$vnode = vnode;
+vm.$slots = slots;
+vm.$scopedSlots = scopedSlots;
+
+vm._c = c;
+vm.$createElement = createElement;
+
+vm.$attrs = attrs;
+vm.$listeners = listeners;
+
+// initState(vm): core/instance/state.js
+vm._watchers = [];
+vm._data = data;
+
+// mountComponent(): core/instance/lifecycle.js
+vm.$el = el;
+
+// initComputed(): core/instance/state.js
+vm._computedWatchers = Object.create(null);
+
+// initProps(): core/instance/state.js
+vm._props = {};
+
+// initProvide(): core/instance/inject.js
+vm._provided = provided;
 ```
 
 ## Vue Virtual DOM
