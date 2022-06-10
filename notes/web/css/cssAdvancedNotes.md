@@ -1800,7 +1800,8 @@ Focusable areas:
 [CSS containment](https://developer.chrome.com/blog/css-containment):
 
 - `contain` 属性允许开发者声明当前元素和它的内容尽可能的独立于 DOM 树的其他部分.
-  这使得浏览器在重新计算布局/样式/绘图或它们的组合的时候, 只会影响到有限的 DOM 区域, 而不是整个页面.
+  这使得浏览器在重新计算布局/样式/绘图或它们的组合的时候, 只会影响到有限的 DOM 区域, 而不是整个页面:
+  `none | strict | content | [ size || layout || style || paint ]`.
 - `size` containment:
   声明这个元素的尺寸会变化, 不需要去检查它依赖关系中的尺寸变化.
 - `layout` containment:
