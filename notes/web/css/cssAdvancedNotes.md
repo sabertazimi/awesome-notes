@@ -2027,6 +2027,24 @@ window.requestAnimationFrame(step);
 利用低版本浏览器无法识别新的选择器 (`,`):
 
 ```css
+/* Webkit */
+:-webkit-any(tag-not-found),
+.class {
+  font-size: 1rem;
+}
+
+/* Firefox */
+tag-not-found::-moz-progress-bar,
+.class {
+  font-size: 1rem;
+}
+
+/* Chromium Edge */
+tag-not-found::-ms-any,
+.class {
+  font-size: 1rem;
+}
+
 /* IE9+ */
 :checked,
 :disabled,
@@ -2048,24 +2066,6 @@ tag-not-found::selection,
 
 /* IE11+ */
 tag-not-found::backdrop,
-.class {
-  font-size: 1rem;
-}
-
-/* Firefox */
-tag-not-found::-moz-progress-bar,
-.class {
-  font-size: 1rem;
-}
-
-/* Webkit */
-:-webkit-any(tag-not-found),
-.class {
-  font-size: 1rem;
-}
-
-/* Chromium Edge */
-tag-not-found::-ms-any,
 .class {
   font-size: 1rem;
 }
