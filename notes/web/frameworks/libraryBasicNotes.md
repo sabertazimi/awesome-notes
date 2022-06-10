@@ -242,6 +242,7 @@ tags: [Web, Framework, Library]
 - [Comlink: Shared Class between Web Workers](https://github.com/GoogleChromeLabs/comlink)
 - [GRFN: Executes Dependency Graph of Async Functions Concurrently](https://github.com/TomerAberbach/grfn)
 - [Bull: Premium Queue Package for Handling Distributed Jobs and Messages](https://github.com/OptimalBits/bull)
+- [BreeJS: Job Scheduler](https://github.com/breejs/bree)
 
 ### Hash Utils
 
