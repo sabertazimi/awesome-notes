@@ -724,6 +724,51 @@ printRaw`\u00A9${'and'}\n`;
 // \n
 ```
 
+#### String Utils
+
+```ts
+const ucWords = string => {
+  return string.toLowerCase().replace(/\b[a-z]/g, l => l.toUpperCase());
+};
+
+const ucFirst = string => {
+  return string[0].toUpperCase() + string.substr(1);
+};
+
+const studlyCase = string => {
+  return string
+    .replace('-', ' ')
+    .replace('_', ' ')
+    .split(' ')
+    .map(str => str[0].toUpperCase() + str.substr(1).toLowerCase())
+    .join('');
+};
+
+const snakeCase = (string, glue = '_') => {
+  return string
+    .replace(/\W+/g, ' ')
+    .split(/ |\B(?=[A-Z])/)
+    .map(word => word.toLowerCase())
+    .join(glue);
+};
+
+const kebabCase = string => {
+  return snakeCase(string, '-');
+};
+
+const objectToQueryString = obj => {
+  return Object.keys(obj)
+    .reduce((carry, key) => {
+      if (obj[key] || obj[key] === 0) {
+        return `${carry}${key}=${obj[key]}&`;
+      }
+
+      return carry;
+    }, '')
+    .replace(/&+$/, '');
+};
+```
+
 ### Symbol
 
 - A Symbol is a **unique** and **immutable** primitive value
