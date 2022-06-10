@@ -184,6 +184,8 @@ h1 {
 
 ## Navigation
 
+### Float Navigation
+
 - `list-style-type`: 改变 `ul`/`ol` 前标记类型.
 - `list-style-image`: 改变 `ul`/`ol` 前标记类型.
 - 设置 `<a href="#">` 样式.
@@ -206,6 +208,8 @@ a {
 }
 ```
 
+### Inline Block Navigation
+
 ```css
 ul {
   text-align: right;
@@ -216,7 +220,7 @@ li {
 }
 ```
 
-Dropdown navigation:
+### Dropdown Navigation
 
 ```css
 .anchor {
@@ -225,10 +229,14 @@ Dropdown navigation:
 
 .content {
   max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s, opacity 0.3s;
 }
 
 .anchor:target ~ .content {
   max-height: 100%;
+  opacity: 1;
 }
 ```
 
@@ -1879,7 +1887,7 @@ body {
 }
 ```
 
-### Accordion Menu Animation
+### Accordion Animation
 
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
@@ -1891,12 +1899,14 @@ body {
 .menu {
   max-height: 0;
   overflow: hidden;
-  transition: max-height, 0.3s;
+  opacity: 0;
+  transition: max-height 0.3s, opacity 0.3s;
 }
 
 .menu:focus-within,
 .container:hover .menu {
   max-height: 1em;
+  opacity: 1;
 }
 ```
 
