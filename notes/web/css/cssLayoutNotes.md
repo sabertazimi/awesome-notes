@@ -618,7 +618,8 @@ article a {
 
 ### Static Position
 
-`top`/`bottom`/`left`/`right`/`inset`/`z-index` are invalid.
+- `top`/`bottom`/`left`/`right`/`inset`/`z-index` have **no effect**.
+- Normal flow.
 
 ### Relative Position
 
