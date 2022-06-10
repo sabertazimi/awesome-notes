@@ -1305,6 +1305,14 @@ body {
 }
 ```
 
+### Sun Effect
+
+```css
+.sun {
+  filter: contrast(0.34) brightness(1.6) sepia(1) hue-rotate(10deg);
+}
+```
+
 ### Night Effect
 
 ```css
