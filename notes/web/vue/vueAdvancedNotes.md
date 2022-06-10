@@ -8,9 +8,7 @@ tags: [Web, Vue]
 
 # Vue Advanced Notes
 
-## Legacy Vue Internals
-
-### Vue Constructor
+## Vue Constructor
 
 `core/instance/index.js`:
 
@@ -133,7 +131,7 @@ export function installRenderHelpers(target: any) {
 }
 ```
 
-### Vue Prototype
+## Vue Prototype
 
 `core/index.js`:
 
@@ -301,7 +299,7 @@ Vue.compile = compileToFunctions;
 export default Vue;
 ```
 
-### Vue Global API
+## Vue Global API
 
 `core/global-api/index.js` 添加 `Vue.XXX` 静态方法:
 
@@ -364,7 +362,7 @@ Vue.version = '__VERSION__';
 Vue.compile = compileToFunctions;
 ```
 
-#### Vue Global Extend API
+### Vue Global Extend API
 
 `core/global-api/extend.js`:
 
@@ -436,7 +434,7 @@ Vue.extend = function (extendOptions: Object): Function {
 };
 ```
 
-#### Vue Global NextTick API
+### Vue Global NextTick API
 
 `core/util/next-tick.js`:
 
@@ -545,7 +543,7 @@ export function nextTick(cb?: Function, ctx?: Object) {
 }
 ```
 
-#### Vue Global Mixin API
+### Vue Global Mixin API
 
 `core/global-api/mixin.js`:
 
@@ -558,7 +556,7 @@ export function initMixin(Vue: GlobalAPI) {
 }
 ```
 
-#### Vue Global Use API
+### Vue Global Use API
 
 `core/global-api/use.js`:
 
@@ -587,7 +585,7 @@ export function initUse(Vue: GlobalAPI) {
 }
 ```
 
-### Vue Instance
+## Vue Instance
 
 ```ts
 // Vue.prototype._init: core/instance/init.js
@@ -652,7 +650,7 @@ vm._props = {};
 vm._provided = provided;
 ```
 
-### Vue Mounting Workflow
+## Vue Mounting Workflow
 
 `new Vue()` -> 初始化 -> 编译 -> 渲染 -> 挂载 -> 更新:
 
@@ -993,7 +991,7 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
 };
 ```
 
-### Vue Options API
+## Vue Options API
 
 `core/instance/init.js`:
 
@@ -1101,7 +1099,7 @@ vm.$options = {
 - `core/instance/state.js/initProps()`: `this.XXX` -> `this._props.XXX`.
 - `core/instance/state.js/initData()`: `this.XXX` -> `this._data.XXX`.
 
-#### Vue Merge Options
+### Vue Merge Options
 
 `mergeOptions` (`core/util/options.js`):
 
@@ -1168,7 +1166,7 @@ export function mergeOptions(
 }
 ```
 
-#### Vue Normalize Options
+### Vue Normalize Options
 
 Props:
 
@@ -1211,7 +1209,7 @@ for (const key in dirs) {
 }
 ```
 
-### Vue Lifecycle
+## Vue Lifecycle
 
 [![Lifecycle](./figures/lifecycle.png)](https://v2.vuejs.org/v2/api/#Options-Lifecycle-Hooks)
 
@@ -1430,7 +1428,7 @@ Vue.prototype.$destroy = function () {
 };
 ```
 
-### Vue Async Component
+## Vue Async Component
 
 ```ts
 // 1. Basic async component:
@@ -1631,7 +1629,234 @@ function createAsyncPlaceholder(
 }
 ```
 
-### Vue Legacy Reactivity
+## Vue Virtual DOM
+
+VNode Type:
+
+- HTML native tag.
+- Plain text.
+- Component:
+  - Functional component.
+  - Stateful component:
+    - Normal stateful component.
+    - Need keep-alive stateful component.
+    - Already keep-alive stateful component.
+- Fragment.
+- Portal.
+- Suspense.
+
+```ts
+export default class VNode {
+  tag: string | void;
+  data: VNodeData | void;
+  children: Array<VNode> | null;
+  text: string | void;
+  elm: Node | void;
+  ns: string | void;
+  context: Component | void; // rendered in this component's scope
+  key: string | number | void;
+  componentOptions: VNodeComponentOptions | void;
+  componentInstance: Component | void; // component instance
+  parent: VNode | void; // component placeholder node
+
+  // strictly internal
+  raw: boolean; // contains raw HTML? (server only)
+  isStatic: boolean; // hoisted static node
+  isRootInsert: boolean; // necessary for enter transition check
+  isComment: boolean; // empty comment placeholder?
+  isCloned: boolean; // is a cloned node?
+  isOnce: boolean; // is a v-once node?
+  asyncFactory: Function | void; // async component factory function
+  asyncMeta: Object | void;
+  isAsyncPlaceholder: boolean;
+  ssrContext: Object | void;
+  fnContext: Component | void; // real context vm for functional nodes
+  fnOptions: ComponentOptions | null; // for SSR caching
+  fnScopeId: string | null; // functional scope id support
+
+  constructor(
+    tag?: string,
+    data?: VNodeData,
+    children?: Array<VNode> | null,
+    text?: string,
+    elm?: Node,
+    context?: Component,
+    componentOptions?: VNodeComponentOptions,
+    asyncFactory?: Function
+  ) {
+    this.tag = tag;
+    this.data = data;
+    this.children = children;
+    this.text = text;
+    this.elm = elm;
+    this.ns = undefined;
+    this.context = context;
+    this.fnContext = undefined;
+    this.fnOptions = undefined;
+    this.fnScopeId = undefined;
+    this.key = data && data.key;
+    this.componentOptions = componentOptions;
+    this.componentInstance = undefined;
+    this.parent = undefined;
+    this.raw = false;
+    this.isStatic = false;
+    this.isRootInsert = true;
+    this.isComment = false;
+    this.isCloned = false;
+    this.isOnce = false;
+    this.asyncFactory = asyncFactory;
+    this.asyncMeta = undefined;
+    this.isAsyncPlaceholder = false;
+  }
+}
+```
+
+```ts
+const VNodeFlags = {
+  ELEMENT_HTML: 1,
+  ELEMENT_SVG: 1 << 1,
+  COMPONENT_STATEFUL_NORMAL: 1 << 2,
+  COMPONENT_STATEFUL_SHOULD_KEEP_ALIVE: 1 << 3,
+  COMPONENT_STATEFUL_KEPT_ALIVE: 1 << 4,
+  COMPONENT_FUNCTIONAL: 1 << 5,
+  TEXT: 1 << 6,
+  FRAGMENT: 1 << 7,
+  PORTAL: 1 << 8,
+};
+
+VNodeFlags.ELEMENT = VNodeFlags.ELEMENT_HTML | VNodeFlags.ELEMENT_SVG;
+
+VNodeFlags.COMPONENT_STATEFUL =
+  VNodeFlags.COMPONENT_STATEFUL_NORMAL |
+  VNodeFlags.COMPONENT_STATEFUL_SHOULD_KEEP_ALIVE |
+  VNodeFlags.COMPONENT_STATEFUL_KEPT_ALIVE;
+
+VNodeFlags.COMPONENT =
+  VNodeFlags.COMPONENT_STATEFUL | VNodeFlags.COMPONENT_FUNCTIONAL;
+
+const ChildrenFlags = {
+  // 未知的 children 类型.
+  UNKNOWN_CHILDREN: 0,
+  // 没有 children.
+  NO_CHILDREN: 1,
+  // children 是单个 VNode.
+  SINGLE_VNODE: 1 << 1,
+  // children 是多个拥有 key 的 VNode.
+  KEYED_VNODES: 1 << 2,
+  // children 是多个没有 key 的 VNode.
+  NONE_KEYED_VNODES: 1 << 3,
+};
+
+ChildrenFlags.MULTIPLE_VNODES =
+  ChildrenFlags.KEYED_VNODES | ChildrenFlags.NONE_KEYED_VNODES;
+
+export interface VNode {
+  _isVNode: true;
+  // Refer to real DOM.
+  el: Element | null;
+  flags: VNodeFlags;
+  tag: string | FunctionalComponent | ComponentClass | null;
+  data: VNodeData | null;
+  children: VNodeChildren;
+  childFlags: ChildrenFlags;
+}
+```
+
+## Vue Template and Compiler
+
+### Vue Compilation Workflow
+
+```ts
+function compile(template: string, options: CompilerOptions): CompiledResult {
+  const ast = parse(template.trim(), options);
+  optimize(ast, options);
+  const code = generate(ast, options);
+
+  return {
+    ast,
+    render: code.render,
+    staticRenderFns: code.staticRenderFns,
+  };
+}
+```
+
+template 属性存在, render 方法不存在时:
+
+- runtime with compiler 版本会在 JavaScript 运行时进行模板编译, 生成 render 函数.
+- runtime only 版本会打印警告信息, 提示用户使用 runtime with compiler 版本或者使用使用 `vue-loader` 进行静态编译.
+
+### Vue Compilation Performant Improvements
+
+- Shorten template helper function with prefix `_v`/`_s` etc.
+- Hoist static template blocks,
+  eliminate unnecessary virtual DOM diff effort,
+  only track dynamic VNode.
+- Cache event handlers (like `useCallback` in React).
+
+```ts
+function isStatic(node: ASTNode): boolean {
+  if (node.type === 2) {
+    // expression
+    return false;
+  }
+
+  if (node.type === 3) {
+    // text
+    return true;
+  }
+
+  return !!(
+    node.pre ||
+    (!node.hasBindings && // no dynamic bindings
+      !node.if &&
+      !node.for && // not v-if or v-for or v-else
+      !isBuiltInTag(node.tag) && // not a built-in
+      isPlatformReservedTag(node.tag) && // not a component
+      !isDirectChildOfTemplateFor(node) &&
+      Object.keys(node).every(isStaticKey))
+  );
+}
+```
+
+## Vue Two-Way Data Binding
+
+`View-Model`: 主要做了两件微小的事情:
+
+- 从 M 到 V 的映射 (Data Binding), 这样可以大量节省人肉来 update View 的代码:
+  通过 Proxy 代理 Model, 每当调用 `Model[property].set` 时同时调用 `render`
+- 从 V 到 M 的事件监听 (DOM Listeners), 这样 Model 会随着 View 触发事件而改变
+
+```ts
+const _data = {
+  name: 'mark',
+};
+
+// new Proxy(target, handler);
+const changeName = new Proxy(_data, {
+  set(obj, name, value) {
+    obj[name] = value;
+    render();
+  },
+});
+```
+
+```ts
+Array.from(el.getElementsByTagName('input'))
+  .filter(ele => {
+    return ele.getAttribute('v-model');
+  })
+  .forEach(input => {
+    const name = input.getAttribute('v-model');
+    input.value = changeName[name];
+
+    // DOM Event Listener (listen to the changes of view)
+    input.oninput = function () {
+      changeName[name] = this.value;
+    };
+  });
+```
+
+## Vue Legacy Reactivity
 
 [![Reactive](./figures/proxy.png)](https://ustbhuangyi.github.io/vue-analysis/v2/reactive/summary.html)
 
@@ -1660,7 +1885,7 @@ Dispatch updates (set):
 - `watcher.run()`.
 - `watcher.get()`: Get new value and recollect deps.
 
-#### Vue Watcher and Observer
+### Vue Watcher and Observer
 
 `core/observer/watcher.js`:
 
@@ -2080,7 +2305,7 @@ export function defineReactive(
 }
 ```
 
-#### Vue Array Watcher
+### Vue Array Watcher
 
 ```ts
 const methodsToPatch = [
@@ -2119,7 +2344,7 @@ methodsToPatch.forEach(function (method) {
 });
 ```
 
-#### Vue Global Set and Delete API
+### Vue Global Set and Delete API
 
 ```ts
 /**
@@ -2184,7 +2409,7 @@ Vue.del = function del(target: Array<any> | Object, key: any) {
 };
 ```
 
-#### Vue Computed Watcher
+### Vue Computed Watcher
 
 `core/instance/state.js`:
 
@@ -2292,7 +2517,7 @@ function resetStoreVM(store, state, hot) {
 }
 ```
 
-#### Vue Router Watcher
+### Vue Router Watcher
 
 - `<route-link>` clicked.
 - `vm.$router.push(location)`/`vm.$router.replace(location)`.
@@ -2302,236 +2527,9 @@ function resetStoreVM(store, state, hot) {
   - Call `window.history.pushState`/`window.history.replaceState` in `onComplete`.
 - `vm.$route` trigger `<route-view>` re-rendering.
 
-## Modern Vue Internals
+## Vue Modern Reactivity
 
-### Vue Virtual DOM
-
-VNode Type:
-
-- HTML native tag.
-- Plain text.
-- Component:
-  - Functional component.
-  - Stateful component:
-    - Normal stateful component.
-    - Need keep-alive stateful component.
-    - Already keep-alive stateful component.
-- Fragment.
-- Portal.
-- Suspense.
-
-```ts
-export default class VNode {
-  tag: string | void;
-  data: VNodeData | void;
-  children: Array<VNode> | null;
-  text: string | void;
-  elm: Node | void;
-  ns: string | void;
-  context: Component | void; // rendered in this component's scope
-  key: string | number | void;
-  componentOptions: VNodeComponentOptions | void;
-  componentInstance: Component | void; // component instance
-  parent: VNode | void; // component placeholder node
-
-  // strictly internal
-  raw: boolean; // contains raw HTML? (server only)
-  isStatic: boolean; // hoisted static node
-  isRootInsert: boolean; // necessary for enter transition check
-  isComment: boolean; // empty comment placeholder?
-  isCloned: boolean; // is a cloned node?
-  isOnce: boolean; // is a v-once node?
-  asyncFactory: Function | void; // async component factory function
-  asyncMeta: Object | void;
-  isAsyncPlaceholder: boolean;
-  ssrContext: Object | void;
-  fnContext: Component | void; // real context vm for functional nodes
-  fnOptions: ComponentOptions | null; // for SSR caching
-  fnScopeId: string | null; // functional scope id support
-
-  constructor(
-    tag?: string,
-    data?: VNodeData,
-    children?: Array<VNode> | null,
-    text?: string,
-    elm?: Node,
-    context?: Component,
-    componentOptions?: VNodeComponentOptions,
-    asyncFactory?: Function
-  ) {
-    this.tag = tag;
-    this.data = data;
-    this.children = children;
-    this.text = text;
-    this.elm = elm;
-    this.ns = undefined;
-    this.context = context;
-    this.fnContext = undefined;
-    this.fnOptions = undefined;
-    this.fnScopeId = undefined;
-    this.key = data && data.key;
-    this.componentOptions = componentOptions;
-    this.componentInstance = undefined;
-    this.parent = undefined;
-    this.raw = false;
-    this.isStatic = false;
-    this.isRootInsert = true;
-    this.isComment = false;
-    this.isCloned = false;
-    this.isOnce = false;
-    this.asyncFactory = asyncFactory;
-    this.asyncMeta = undefined;
-    this.isAsyncPlaceholder = false;
-  }
-}
-```
-
-```ts
-const VNodeFlags = {
-  ELEMENT_HTML: 1,
-  ELEMENT_SVG: 1 << 1,
-  COMPONENT_STATEFUL_NORMAL: 1 << 2,
-  COMPONENT_STATEFUL_SHOULD_KEEP_ALIVE: 1 << 3,
-  COMPONENT_STATEFUL_KEPT_ALIVE: 1 << 4,
-  COMPONENT_FUNCTIONAL: 1 << 5,
-  TEXT: 1 << 6,
-  FRAGMENT: 1 << 7,
-  PORTAL: 1 << 8,
-};
-
-VNodeFlags.ELEMENT = VNodeFlags.ELEMENT_HTML | VNodeFlags.ELEMENT_SVG;
-
-VNodeFlags.COMPONENT_STATEFUL =
-  VNodeFlags.COMPONENT_STATEFUL_NORMAL |
-  VNodeFlags.COMPONENT_STATEFUL_SHOULD_KEEP_ALIVE |
-  VNodeFlags.COMPONENT_STATEFUL_KEPT_ALIVE;
-
-VNodeFlags.COMPONENT =
-  VNodeFlags.COMPONENT_STATEFUL | VNodeFlags.COMPONENT_FUNCTIONAL;
-
-const ChildrenFlags = {
-  // 未知的 children 类型.
-  UNKNOWN_CHILDREN: 0,
-  // 没有 children.
-  NO_CHILDREN: 1,
-  // children 是单个 VNode.
-  SINGLE_VNODE: 1 << 1,
-  // children 是多个拥有 key 的 VNode.
-  KEYED_VNODES: 1 << 2,
-  // children 是多个没有 key 的 VNode.
-  NONE_KEYED_VNODES: 1 << 3,
-};
-
-ChildrenFlags.MULTIPLE_VNODES =
-  ChildrenFlags.KEYED_VNODES | ChildrenFlags.NONE_KEYED_VNODES;
-
-export interface VNode {
-  _isVNode: true;
-  // Refer to real DOM.
-  el: Element | null;
-  flags: VNodeFlags;
-  tag: string | FunctionalComponent | ComponentClass | null;
-  data: VNodeData | null;
-  children: VNodeChildren;
-  childFlags: ChildrenFlags;
-}
-```
-
-### Vue Template and Compiler
-
-#### Vue Compilation Workflow
-
-```ts
-function compile(template: string, options: CompilerOptions): CompiledResult {
-  const ast = parse(template.trim(), options);
-  optimize(ast, options);
-  const code = generate(ast, options);
-
-  return {
-    ast,
-    render: code.render,
-    staticRenderFns: code.staticRenderFns,
-  };
-}
-```
-
-template 属性存在, render 方法不存在时:
-
-- runtime with compiler 版本会在 JavaScript 运行时进行模板编译, 生成 render 函数.
-- runtime only 版本会打印警告信息, 提示用户使用 runtime with compiler 版本或者使用使用 `vue-loader` 进行静态编译.
-
-#### Vue Compilation Performant Improvements
-
-- Shorten template helper function with prefix `_v`/`_s` etc.
-- Hoist static template blocks,
-  eliminate unnecessary virtual DOM diff effort,
-  only track dynamic VNode.
-- Cache event handlers (like `useCallback` in React).
-
-```ts
-function isStatic(node: ASTNode): boolean {
-  if (node.type === 2) {
-    // expression
-    return false;
-  }
-
-  if (node.type === 3) {
-    // text
-    return true;
-  }
-
-  return !!(
-    node.pre ||
-    (!node.hasBindings && // no dynamic bindings
-      !node.if &&
-      !node.for && // not v-if or v-for or v-else
-      !isBuiltInTag(node.tag) && // not a built-in
-      isPlatformReservedTag(node.tag) && // not a component
-      !isDirectChildOfTemplateFor(node) &&
-      Object.keys(node).every(isStaticKey))
-  );
-}
-```
-
-### Vue Two-Way Data Binding
-
-`View-Model`: 主要做了两件微小的事情:
-
-- 从 M 到 V 的映射 (Data Binding), 这样可以大量节省人肉来 update View 的代码:
-  通过 Proxy 代理 Model, 每当调用 `Model[property].set` 时同时调用 `render`
-- 从 V 到 M 的事件监听 (DOM Listeners), 这样 Model 会随着 View 触发事件而改变
-
-```ts
-const _data = {
-  name: 'mark',
-};
-
-// new Proxy(target, handler);
-const changeName = new Proxy(_data, {
-  set(obj, name, value) {
-    obj[name] = value;
-    render();
-  },
-});
-```
-
-```ts
-Array.from(el.getElementsByTagName('input'))
-  .filter(ele => {
-    return ele.getAttribute('v-model');
-  })
-  .forEach(input => {
-    const name = input.getAttribute('v-model');
-    input.value = changeName[name];
-
-    // DOM Event Listener (listen to the changes of view)
-    input.oninput = function () {
-      changeName[name] = this.value;
-    };
-  });
-```
-
-### Vue Reactivity
+### Reactive Effects
 
 Data `getter`/`setter` -> Notify -> Watcher -> Trigger --> Renderer:
 
@@ -2656,7 +2654,7 @@ console.assert(total.value === 36);
   - `ref` performant over `reactive`.
 - `computed.ts`: `computed` using `effect` and return a `ref`.
 
-#### ES6 Reactive Proxy
+### Reactive Proxy
 
 - Simple: `Proxy` 使用上比 `Object.defineProperty` 方便.
   - `Object.defineProperty` 只能监听对象, 导致 `Vue 2` `data` 属性必须通过一个返回对象的函数方式初始化,
@@ -2688,7 +2686,7 @@ app.items[indexOfItem] = newValue;
 app.product[newField] = newValue;
 ```
 
-### Vue Setup
+## Vue Setup
 
 [Setup workflow](https://github.com/vuejs/core/blob/main/packages/runtime-core/src/component.ts):
 
