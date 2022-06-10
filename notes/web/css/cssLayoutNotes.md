@@ -6,7 +6,7 @@ authorImageURL: https://github.com/sabertazimi.png
 tags: [Web, CSS, Layout]
 ---
 
-# CSS Layout Nodes
+# CSS Layout Notes
 
 ## Box Pattern
 
