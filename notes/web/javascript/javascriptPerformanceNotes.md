@@ -608,8 +608,8 @@ function toArray(coll) {
 
 ### Layout and Paint Performance
 
-- 重排: 重新构造渲染树.
-- 重绘: 重新绘制受影响部分.
+- 重排 (`reflow`): 重新构造渲染树, 从 `layout` 阶段开始.
+- 重绘 (`repaint`): 重新绘制受影响部分, 从 `paint` 或 `composite` 阶段开始.
 
 **获取**或改变布局的操作会导致渲染树**变化队列**刷新,
 执行渲染队列中的**待处理变化**,
@@ -653,7 +653,7 @@ element.className += ' className';
 ```
 
 :::tip Pipeline
-Script -> Style ->Layout -> Paint -> Composite.
+Script -> Style -> Layout -> Paint -> Composite.
 :::
 
 Make `script` stage become: read then write.
