@@ -1670,6 +1670,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@csstools/selector-specificity@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "@csstools/selector-specificity@npm:2.0.1"
+  peerDependencies:
+    postcss: ^8.3
+    postcss-selector-parser: ^6.0.10
+  checksum: 08ec92e6746c6c23a8baca12805619e8fec9e41c33376272d6fcc4705fe9e35307d1577c2624e71f6fb3ec2d3188de25806b0e3127efd53e41641c3bf297926d
+  languageName: node
+  linkType: hard
+
 "@dg-scripts/eslint-config-basic@npm:^5.10.0":
   version: 5.10.0
   resolution: "@dg-scripts/eslint-config-basic@npm:5.10.0"
@@ -3953,7 +3963,7 @@ __metadata:
     "@tsconfig/docusaurus": ^1.0.5
     ci-info: ^3.3.1
     eslint: ^8.17.0
-    katex: ^0.15.6
+    katex: ^0.16.0
     markdownlint-cli: ^0.31.1
     prettier: ^2.6.2
     react: ^18.1.0
@@ -3961,7 +3971,7 @@ __metadata:
     rehype-katex: ^6.0.2
     remark-math: ^3.0.1
     standard-version: ^9.5.0
-    stylelint: ^14.8.5
+    stylelint: ^14.9.0
     typescript: ^4.7.3
   languageName: unknown
   linkType: soft
@@ -5268,10 +5278,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-functions-list@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "css-functions-list@npm:3.0.1"
-  checksum: 8998406f9c6508180dad621bf91cfbf4649d922a57e2e5dd3fd909a2855e29d2f82cf176bd89a7598237b9e989126f8520e21479f2da51f37b1491a38fe72061
+"css-functions-list@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "css-functions-list@npm:3.1.0"
+  checksum: 8a7c9d4ae57cb2f01500263e65a21372048d359ca7aa6430a32a736fe2a421decfebe45e579124b9a158ec68aba2eadcd733e568495a7698240d9607d31f681b
   languageName: node
   linkType: hard
 
@@ -8878,7 +8888,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"katex@npm:^0.15.0, katex@npm:^0.15.6":
+"katex@npm:^0.15.0":
   version: 0.15.6
   resolution: "katex@npm:0.15.6"
   dependencies:
@@ -8886,6 +8896,17 @@ fsevents@~2.3.2:
   bin:
     katex: cli.js
   checksum: 2da808bbd1d3be27715006cd86767dd3fcce3e317fb3bbd64d407328d2d90de17b5d83062b2cfd0e0d0de32e340efbac214862bc96892a5d1492462e553728d4
+  languageName: node
+  linkType: hard
+
+"katex@npm:^0.16.0":
+  version: 0.16.0
+  resolution: "katex@npm:0.16.0"
+  dependencies:
+    commander: ^8.0.0
+  bin:
+    katex: cli.js
+  checksum: 0e094523544b3c921e55da8cf1a9ea2718213c621af508af9fc03859b97dc73280f478fbfede5a8b32948210c3596c5a637dd64e0e28e31d6c617b5d50c29762
   languageName: node
   linkType: hard
 
@@ -12665,15 +12686,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"specificity@npm:^0.4.1":
-  version: 0.4.1
-  resolution: "specificity@npm:0.4.1"
-  bin:
-    specificity: ./bin/specificity
-  checksum: e558f1098f85aa54a8e90277309ac0d1913c84812c0bd349aa449076aa700964f71ab69f04f5fda9b7898bef9b7da3faa1cad9caedfd3f1a1ebfebedc18604ab
-  languageName: node
-  linkType: hard
-
 "split2@npm:^3.0.0":
   version: 3.2.2
   resolution: "split2@npm:3.2.2"
@@ -13124,14 +13136,15 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"stylelint@npm:^14.8.5":
-  version: 14.8.5
-  resolution: "stylelint@npm:14.8.5"
+"stylelint@npm:^14.9.0":
+  version: 14.9.0
+  resolution: "stylelint@npm:14.9.0"
   dependencies:
+    "@csstools/selector-specificity": ^2.0.0
     balanced-match: ^2.0.0
     colord: ^2.9.2
     cosmiconfig: ^7.0.1
-    css-functions-list: ^3.0.1
+    css-functions-list: ^3.1.0
     debug: ^4.3.4
     execall: ^2.0.0
     fast-glob: ^3.2.11
@@ -13159,7 +13172,6 @@ resolve@^2.0.0-next.3:
     postcss-selector-parser: ^6.0.10
     postcss-value-parser: ^4.2.0
     resolve-from: ^5.0.0
-    specificity: ^0.4.1
     string-width: ^4.2.3
     strip-ansi: ^6.0.1
     style-search: ^0.1.0
@@ -13170,7 +13182,7 @@ resolve@^2.0.0-next.3:
     write-file-atomic: ^4.0.1
   bin:
     stylelint: bin/stylelint.js
-  checksum: ab4a8cbe49223f068f2219cddb8fac9061c21bc6544731cdbe18ec2c2aeff76566fadc185a7b49e8fb48242c732566a565f0e862af083c58ae97d5b2213617d1
+  checksum: 9996238740feb045c2f14def7152ed2a1a512c4cfd632c02bf136193f8be1c24f1357e53c27cd3c59876a73897f0f7bd5a1df0ee5af614050574ac8fc6ea179a
   languageName: node
   linkType: hard
 
