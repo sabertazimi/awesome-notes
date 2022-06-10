@@ -849,12 +849,15 @@ html {
 
 ### Min and Max Function
 
+[Flexible size](https://www.youtube.com/watch?v=8slZJrTK3nE):
+
 ```css
 .box {
-  width: min(10vw, 5em, 80px);
+  width: min(100vw - 3rem, 80ch);
   width: max(10px * 10, 10em);
   width: min(calc(10px * 10), 10em);
   width: max(10px * 10, var(--width));
+  margin-block-start: min(4rem, 8vh);
 }
 ```
 
@@ -887,7 +890,8 @@ html {
 ```css
 .clamp {
   width: max(75px, min(25vw, 125px));
-  width: clamp(75px, 25vw, 125px);
+  width: clamp(30ch, 80%, 80ch);
+  padding: clamp(1rem, 3%, 1.5rem);
   margin-bottom: clamp(4px, 6.5vh, 5.5rem);
   font-size: clamp(2.25rem, 2vw + 1.5rem, 3.25rem);
   text-indent: clamp(15px, 10%, 1.5rem);
@@ -1640,10 +1644,12 @@ Box sizing:
 
 #### Auto Flow Width
 
-Auto flow with `css-sizing`:
-present for `fit-content`/`min-content`/`max-content`/`stretch`
-with `width`/`min-width`/`max-width`/`height`/`min-height`/`max-height`/
-`grid-template-rows`/`grid-template-columns`/`flex-basis`.
+Auto flow with `css-sizing`,
+`fit-content`/`min-content`/`max-content`/`stretch`
+for `width`/`min-width`/`max-width`/`height`/`min-height`/`max-height`/
+`grid-template-rows`/`grid-template-columns`/`flex-basis`:
+
+- `fit-content`: grow but not overflow.
 
 ```css
 .content {
@@ -2923,7 +2929,12 @@ Children property:
 ```css
 .container {
   display: grid;
+  grid-template-columns: fit-content(var(--sidebar-max, 20ch)) minmax(50%, 1fr);
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--grid-min, 30ch)), 1fr)
+  );
 }
 ```
 
