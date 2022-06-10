@@ -585,6 +585,425 @@ export function initUse(Vue: GlobalAPI) {
 }
 ```
 
+## Vue Options API
+
+`core/instance/init.js`:
+
+```ts
+vm.$options = mergeOptions(
+  // resolveConstructorOptions(vm.constructor)
+  {
+    components: {
+      KeepAlive,
+      Transition,
+      TransitionGroup,
+    },
+    directives: {
+      model,
+      show,
+    },
+    filters: Object.create(null),
+    _base: Vue,
+  },
+  // options || {}
+  {
+    el: '#app',
+    data: {
+      test: 1,
+    },
+  },
+  vm
+);
+```
+
+Parent component options:
+
+```ts
+vm.$options = {
+  components: {
+    KeepAlive,
+    Transition,
+    TransitionGroup,
+    ...UserRegisterComponents,
+  },
+  created: [
+    function created() {
+      console.log('parent created');
+    },
+  ],
+  directives: {
+    model,
+    show,
+    ...userCustomDirectives,
+  },
+  filters: {},
+  _base: function Vue(options) {},
+  el: '#app',
+  render: function _render(h) {},
+};
+```
+
+Children component options:
+
+```ts
+vm.$options = {
+  parent: Vue /* 父Vue实例 */,
+  propsData: undefined,
+  _componentTag: undefined,
+  _parentVnode: VNode /* 父VNode实例 */,
+  _renderChildren: undefined,
+  __proto__: {
+    components: {
+      KeepAlive,
+      Transition,
+      TransitionGroup,
+      ...UserRegisterComponents,
+    },
+    directives: {
+      model,
+      show,
+      ...userCustomDirectives,
+    },
+    filters: {},
+    _base: function Vue(options) {},
+    _Ctor: {},
+    created: [
+      function created() {
+        console.log('parent created');
+      },
+      function created() {
+        console.log('child created');
+      },
+    ],
+    mounted: [
+      function mounted() {
+        console.log('child mounted');
+      },
+    ],
+    data() {
+      return {
+        msg: 'Hello Vue',
+      };
+    },
+    template: '<div>{{msg}}</div>',
+  },
+};
+```
+
+- `core/instance/state.js/initProps()`: `this.XXX` -> `this._props.XXX`.
+- `core/instance/state.js/initData()`: `this.XXX` -> `this._data.XXX`.
+
+### Vue Merge Options
+
+`mergeOptions` (`core/util/options.js`):
+
+- 对于 `el`/`propsData` 选项使用默认的合并策略 `defaultStrategy`.
+- 对于 `data` 选项, 使用 `mergeDataOrFn` 函数进行处理, 最终结果是 `data` 选项将变成一个函数, 且该函数的执行结果为真正的数据对象.
+- 对于 生命周期钩子 选项, 将合并成数组, 使得父子选项中的钩子函数都能够被执行.
+- 对于 `directives`/`filters` 以及 `components` 等资源选项,
+  父子选项将以原型链的形式被处理, 正是因为这样我们才能够在任何地方都使用内置组件或指令等.
+- 对于 `watch` 选项的合并处理, 类似于生命周期钩子, 如果父子选项都有相同的观测字段, 将被合并为数组, 这样观察者都将被执行.
+- 对于 `props`/`methods`/`inject`/`computed` 选项, 父选项始终可用, 但是子选项会覆盖同名的父选项字段.
+- 对于 `provide` 选项, 其合并策略使用与 `data` 选项相同的 `mergeDataOrFn` 函数.
+- 最后, 以上没有提及到的选项都将使默认选项 `defaultStrategy`.
+- 最最后, 默认合并策略函数 `defaultStrategy` 的策略是: 只要子选项不是 `undefined` 就使用子选项, 否则使用父选项.
+
+```ts
+/**
+ * Merge two option objects into a new one.
+ * Core utility used in both instantiation and inheritance.
+ */
+export function mergeOptions(
+  parent: Object,
+  child: Object,
+  vm?: Component
+): Object {
+  if (typeof child === 'function') {
+    child = child.options;
+  }
+
+  normalizeProps(child, vm);
+  normalizeInject(child, vm);
+  normalizeDirectives(child);
+
+  const extendsFrom = child.extends;
+
+  if (extendsFrom) {
+    parent = mergeOptions(parent, extendsFrom, vm);
+  }
+
+  if (child.mixins) {
+    for (let i = 0, l = child.mixins.length; i < l; i++) {
+      parent = mergeOptions(parent, child.mixins[i], vm);
+    }
+  }
+
+  const options = {};
+  let key;
+
+  for (key in parent) {
+    mergeField(key);
+  }
+
+  for (key in child) {
+    if (!hasOwn(parent, key)) {
+      mergeField(key);
+    }
+  }
+
+  function mergeField(key) {
+    const strategy = strategies[key] || defaultStrategy;
+    options[key] = strategy(parent[key], child[key], vm, key);
+  }
+
+  return options;
+}
+```
+
+### Vue Normalize Options
+
+Props:
+
+```ts
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  props: {
+    someData1: {
+      type: Number,
+    },
+    someData2: {
+      type: String,
+      default: '',
+    },
+  },
+};
+```
+
+Injects:
+
+```ts
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  inject: {
+    data1: { from: 'data1' },
+    d2: { from: 'data2' },
+    data3: { from: 'data3', someProperty: 'someValue' },
+  },
+};
+```
+
+Directives:
+
+```ts
+for (const key in dirs) {
+  const def = dirs[key];
+  if (typeof def === 'function') {
+    dirs[key] = { bind: def, update: def };
+  }
+}
+```
+
+## Vue Async Component
+
+```ts
+// 1. Basic async component:
+Vue.component('AsyncExample', function (resolve, reject) {
+  // 这个特殊的 require 语法告诉 webpack
+  // 自动将编译后的代码分割成不同的块,
+  // 这些块将通过 Ajax 请求自动下载.
+  require(['./my-async-component'], resolve);
+});
+
+// 2. Promise async component:
+Vue.component(
+  'AsyncWebpackExample',
+  // 该 `import` 函数返回一个 `Promise` 对象.
+  () => import('./my-async-component')
+);
+
+// 3. Advanced async component:
+const AsyncComp = () => ({
+  // 需要加载的组件, 应当是一个 Promise.
+  component: import('./MyComp.vue'),
+  // 加载中应当渲染的组件.
+  loading: LoadingComp,
+  // 出错时渲染的组件.
+  error: ErrorComp,
+  // 渲染加载中组件前的等待时间, 默认: 200ms.
+  delay: 200,
+  // 最长等待时间, 超出此时间则渲染错误组件, 默认: Infinity.
+  timeout: 3000,
+});
+Vue.component('AsyncExample', AsyncComp);
+```
+
+`core/vdom/helpers/resolve-async-component.js`:
+
+- 3 种异步组件的实现方式.
+  - 高级异步组件实现了 loading/resolve/reject/timeout 4 种状态.
+- 异步组件实现的本质是 2 次渲染:
+  - 第一次渲染生成一个注释节点/`<LoadingComponent>`.
+  - 当异步获取组件成功后, 通过 `forceRender` 强制重新渲染.
+
+```ts
+import {
+  hasSymbol,
+  isDef,
+  isObject,
+  isPromise,
+  isTrue,
+  isUndef,
+  once,
+  remove,
+} from 'core/util/index';
+import { createEmptyVNode } from 'core/vdom/vnode';
+import { currentRenderingInstance } from 'core/instance/render';
+
+export function resolveAsyncComponent(
+  factory: Function,
+  baseCtor: Class<Component>
+): Class<Component> | void {
+  // 3.
+  if (isTrue(factory.error) && isDef(factory.errorComp)) {
+    return factory.errorComp;
+  }
+
+  if (isDef(factory.resolved)) {
+    return factory.resolved;
+  }
+
+  const owner = currentRenderingInstance;
+
+  if (owner && isDef(factory.owners) && !factory.owners.includes(owner)) {
+    // already pending
+    factory.owners.push(owner);
+  }
+
+  // 3.
+  if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
+    return factory.loadingComp;
+  }
+
+  if (owner && !isDef(factory.owners)) {
+    const owners = (factory.owners = [owner]);
+    let sync = true;
+    let timerLoading = null;
+    let timerTimeout = null;
+
+    owner.$on('hook:destroyed', () => remove(owners, owner));
+
+    const forceRender = (renderCompleted: boolean) => {
+      for (let i = 0, l = owners.length; i < l; i++) {
+        owners[i].$forceUpdate();
+      }
+
+      if (renderCompleted) {
+        owners.length = 0;
+
+        if (timerLoading !== null) {
+          clearTimeout(timerLoading);
+          timerLoading = null;
+        }
+
+        if (timerTimeout !== null) {
+          clearTimeout(timerTimeout);
+          timerTimeout = null;
+        }
+      }
+    };
+
+    const resolve = once((res: Object | Class<Component>) => {
+      // cache resolved
+      factory.resolved = ensureCtor(res, baseCtor);
+      // invoke callbacks only if this is not a synchronous resolve
+      // (async resolves are shimmed as synchronous during SSR)
+      if (!sync) {
+        forceRender(true);
+      } else {
+        owners.length = 0;
+      }
+    });
+
+    const reject = once(reason => {
+      if (isDef(factory.errorComp)) {
+        factory.error = true;
+        forceRender(true);
+      }
+    });
+
+    const res = factory(resolve, reject);
+
+    if (isObject(res)) {
+      if (isPromise(res)) {
+        // 2. () => Promise.
+        if (isUndef(factory.resolved)) {
+          res.then(resolve, reject);
+        }
+      } else if (isPromise(res.component)) {
+        // 3.
+        res.component.then(resolve, reject);
+
+        if (isDef(res.error)) {
+          factory.errorComp = ensureCtor(res.error, baseCtor);
+        }
+
+        if (isDef(res.loading)) {
+          factory.loadingComp = ensureCtor(res.loading, baseCtor);
+
+          if (res.delay === 0) {
+            factory.loading = true;
+          } else {
+            timerLoading = setTimeout(() => {
+              timerLoading = null;
+
+              if (isUndef(factory.resolved) && isUndef(factory.error)) {
+                factory.loading = true;
+                forceRender(false);
+              }
+            }, res.delay || 200);
+          }
+        }
+
+        if (isDef(res.timeout)) {
+          timerTimeout = setTimeout(() => {
+            timerTimeout = null;
+
+            if (isUndef(factory.resolved)) {
+              reject(null);
+            }
+          }, res.timeout);
+        }
+      }
+    }
+
+    sync = false;
+    // return in case resolved synchronously
+    return factory.loading ? factory.loadingComp : factory.resolved;
+  }
+}
+
+function ensureCtor(comp: any, base) {
+  if (comp.__esModule || (hasSymbol && comp[Symbol.toStringTag] === 'Module')) {
+    comp = comp.default;
+  }
+
+  return isObject(comp) ? base.extend(comp) : comp;
+}
+
+function createAsyncPlaceholder(
+  factory: Function,
+  data: ?VNodeData,
+  context: Component,
+  children: ?Array<VNode>,
+  tag: ?string
+): VNode {
+  const node = createEmptyVNode();
+  node.asyncFactory = factory;
+  node.asyncMeta = { data, context, children, tag };
+  return node;
+}
+```
+
 ## Vue Mounting Workflow
 
 `new Vue()` -> 初始化 -> 编译 -> 渲染 -> 挂载 -> 更新:
@@ -1143,425 +1562,6 @@ Vue.prototype.$destroy = function () {
     vm.$vnode.parent = null;
   }
 };
-```
-
-## Vue Options API
-
-`core/instance/init.js`:
-
-```ts
-vm.$options = mergeOptions(
-  // resolveConstructorOptions(vm.constructor)
-  {
-    components: {
-      KeepAlive,
-      Transition,
-      TransitionGroup,
-    },
-    directives: {
-      model,
-      show,
-    },
-    filters: Object.create(null),
-    _base: Vue,
-  },
-  // options || {}
-  {
-    el: '#app',
-    data: {
-      test: 1,
-    },
-  },
-  vm
-);
-```
-
-Parent component options:
-
-```ts
-vm.$options = {
-  components: {
-    KeepAlive,
-    Transition,
-    TransitionGroup,
-    ...UserRegisterComponents,
-  },
-  created: [
-    function created() {
-      console.log('parent created');
-    },
-  ],
-  directives: {
-    model,
-    show,
-    ...userCustomDirectives,
-  },
-  filters: {},
-  _base: function Vue(options) {},
-  el: '#app',
-  render: function _render(h) {},
-};
-```
-
-Children component options:
-
-```ts
-vm.$options = {
-  parent: Vue /* 父Vue实例 */,
-  propsData: undefined,
-  _componentTag: undefined,
-  _parentVnode: VNode /* 父VNode实例 */,
-  _renderChildren: undefined,
-  __proto__: {
-    components: {
-      KeepAlive,
-      Transition,
-      TransitionGroup,
-      ...UserRegisterComponents,
-    },
-    directives: {
-      model,
-      show,
-      ...userCustomDirectives,
-    },
-    filters: {},
-    _base: function Vue(options) {},
-    _Ctor: {},
-    created: [
-      function created() {
-        console.log('parent created');
-      },
-      function created() {
-        console.log('child created');
-      },
-    ],
-    mounted: [
-      function mounted() {
-        console.log('child mounted');
-      },
-    ],
-    data() {
-      return {
-        msg: 'Hello Vue',
-      };
-    },
-    template: '<div>{{msg}}</div>',
-  },
-};
-```
-
-- `core/instance/state.js/initProps()`: `this.XXX` -> `this._props.XXX`.
-- `core/instance/state.js/initData()`: `this.XXX` -> `this._data.XXX`.
-
-### Vue Merge Options
-
-`mergeOptions` (`core/util/options.js`):
-
-- 对于 `el`/`propsData` 选项使用默认的合并策略 `defaultStrategy`.
-- 对于 `data` 选项, 使用 `mergeDataOrFn` 函数进行处理, 最终结果是 `data` 选项将变成一个函数, 且该函数的执行结果为真正的数据对象.
-- 对于 生命周期钩子 选项, 将合并成数组, 使得父子选项中的钩子函数都能够被执行.
-- 对于 `directives`/`filters` 以及 `components` 等资源选项,
-  父子选项将以原型链的形式被处理, 正是因为这样我们才能够在任何地方都使用内置组件或指令等.
-- 对于 `watch` 选项的合并处理, 类似于生命周期钩子, 如果父子选项都有相同的观测字段, 将被合并为数组, 这样观察者都将被执行.
-- 对于 `props`/`methods`/`inject`/`computed` 选项, 父选项始终可用, 但是子选项会覆盖同名的父选项字段.
-- 对于 `provide` 选项, 其合并策略使用与 `data` 选项相同的 `mergeDataOrFn` 函数.
-- 最后, 以上没有提及到的选项都将使默认选项 `defaultStrategy`.
-- 最最后, 默认合并策略函数 `defaultStrategy` 的策略是: 只要子选项不是 `undefined` 就使用子选项, 否则使用父选项.
-
-```ts
-/**
- * Merge two option objects into a new one.
- * Core utility used in both instantiation and inheritance.
- */
-export function mergeOptions(
-  parent: Object,
-  child: Object,
-  vm?: Component
-): Object {
-  if (typeof child === 'function') {
-    child = child.options;
-  }
-
-  normalizeProps(child, vm);
-  normalizeInject(child, vm);
-  normalizeDirectives(child);
-
-  const extendsFrom = child.extends;
-
-  if (extendsFrom) {
-    parent = mergeOptions(parent, extendsFrom, vm);
-  }
-
-  if (child.mixins) {
-    for (let i = 0, l = child.mixins.length; i < l; i++) {
-      parent = mergeOptions(parent, child.mixins[i], vm);
-    }
-  }
-
-  const options = {};
-  let key;
-
-  for (key in parent) {
-    mergeField(key);
-  }
-
-  for (key in child) {
-    if (!hasOwn(parent, key)) {
-      mergeField(key);
-    }
-  }
-
-  function mergeField(key) {
-    const strategy = strategies[key] || defaultStrategy;
-    options[key] = strategy(parent[key], child[key], vm, key);
-  }
-
-  return options;
-}
-```
-
-### Vue Normalize Options
-
-Props:
-
-```ts
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
-  props: {
-    someData1: {
-      type: Number,
-    },
-    someData2: {
-      type: String,
-      default: '',
-    },
-  },
-};
-```
-
-Injects:
-
-```ts
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
-  inject: {
-    data1: { from: 'data1' },
-    d2: { from: 'data2' },
-    data3: { from: 'data3', someProperty: 'someValue' },
-  },
-};
-```
-
-Directives:
-
-```ts
-for (const key in dirs) {
-  const def = dirs[key];
-  if (typeof def === 'function') {
-    dirs[key] = { bind: def, update: def };
-  }
-}
-```
-
-## Vue Async Component
-
-```ts
-// 1. Basic async component:
-Vue.component('AsyncExample', function (resolve, reject) {
-  // 这个特殊的 require 语法告诉 webpack
-  // 自动将编译后的代码分割成不同的块,
-  // 这些块将通过 Ajax 请求自动下载.
-  require(['./my-async-component'], resolve);
-});
-
-// 2. Promise async component:
-Vue.component(
-  'AsyncWebpackExample',
-  // 该 `import` 函数返回一个 `Promise` 对象.
-  () => import('./my-async-component')
-);
-
-// 3. Advanced async component:
-const AsyncComp = () => ({
-  // 需要加载的组件, 应当是一个 Promise.
-  component: import('./MyComp.vue'),
-  // 加载中应当渲染的组件.
-  loading: LoadingComp,
-  // 出错时渲染的组件.
-  error: ErrorComp,
-  // 渲染加载中组件前的等待时间, 默认: 200ms.
-  delay: 200,
-  // 最长等待时间, 超出此时间则渲染错误组件, 默认: Infinity.
-  timeout: 3000,
-});
-Vue.component('AsyncExample', AsyncComp);
-```
-
-`core/vdom/helpers/resolve-async-component.js`:
-
-- 3 种异步组件的实现方式.
-  - 高级异步组件实现了 loading/resolve/reject/timeout 4 种状态.
-- 异步组件实现的本质是 2 次渲染:
-  - 第一次渲染生成一个注释节点/`<LoadingComponent>`.
-  - 当异步获取组件成功后, 通过 `forceRender` 强制重新渲染.
-
-```ts
-import {
-  hasSymbol,
-  isDef,
-  isObject,
-  isPromise,
-  isTrue,
-  isUndef,
-  once,
-  remove,
-} from 'core/util/index';
-import { createEmptyVNode } from 'core/vdom/vnode';
-import { currentRenderingInstance } from 'core/instance/render';
-
-export function resolveAsyncComponent(
-  factory: Function,
-  baseCtor: Class<Component>
-): Class<Component> | void {
-  // 3.
-  if (isTrue(factory.error) && isDef(factory.errorComp)) {
-    return factory.errorComp;
-  }
-
-  if (isDef(factory.resolved)) {
-    return factory.resolved;
-  }
-
-  const owner = currentRenderingInstance;
-
-  if (owner && isDef(factory.owners) && !factory.owners.includes(owner)) {
-    // already pending
-    factory.owners.push(owner);
-  }
-
-  // 3.
-  if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
-    return factory.loadingComp;
-  }
-
-  if (owner && !isDef(factory.owners)) {
-    const owners = (factory.owners = [owner]);
-    let sync = true;
-    let timerLoading = null;
-    let timerTimeout = null;
-
-    owner.$on('hook:destroyed', () => remove(owners, owner));
-
-    const forceRender = (renderCompleted: boolean) => {
-      for (let i = 0, l = owners.length; i < l; i++) {
-        owners[i].$forceUpdate();
-      }
-
-      if (renderCompleted) {
-        owners.length = 0;
-
-        if (timerLoading !== null) {
-          clearTimeout(timerLoading);
-          timerLoading = null;
-        }
-
-        if (timerTimeout !== null) {
-          clearTimeout(timerTimeout);
-          timerTimeout = null;
-        }
-      }
-    };
-
-    const resolve = once((res: Object | Class<Component>) => {
-      // cache resolved
-      factory.resolved = ensureCtor(res, baseCtor);
-      // invoke callbacks only if this is not a synchronous resolve
-      // (async resolves are shimmed as synchronous during SSR)
-      if (!sync) {
-        forceRender(true);
-      } else {
-        owners.length = 0;
-      }
-    });
-
-    const reject = once(reason => {
-      if (isDef(factory.errorComp)) {
-        factory.error = true;
-        forceRender(true);
-      }
-    });
-
-    const res = factory(resolve, reject);
-
-    if (isObject(res)) {
-      if (isPromise(res)) {
-        // 2. () => Promise.
-        if (isUndef(factory.resolved)) {
-          res.then(resolve, reject);
-        }
-      } else if (isPromise(res.component)) {
-        // 3.
-        res.component.then(resolve, reject);
-
-        if (isDef(res.error)) {
-          factory.errorComp = ensureCtor(res.error, baseCtor);
-        }
-
-        if (isDef(res.loading)) {
-          factory.loadingComp = ensureCtor(res.loading, baseCtor);
-
-          if (res.delay === 0) {
-            factory.loading = true;
-          } else {
-            timerLoading = setTimeout(() => {
-              timerLoading = null;
-
-              if (isUndef(factory.resolved) && isUndef(factory.error)) {
-                factory.loading = true;
-                forceRender(false);
-              }
-            }, res.delay || 200);
-          }
-        }
-
-        if (isDef(res.timeout)) {
-          timerTimeout = setTimeout(() => {
-            timerTimeout = null;
-
-            if (isUndef(factory.resolved)) {
-              reject(null);
-            }
-          }, res.timeout);
-        }
-      }
-    }
-
-    sync = false;
-    // return in case resolved synchronously
-    return factory.loading ? factory.loadingComp : factory.resolved;
-  }
-}
-
-function ensureCtor(comp: any, base) {
-  if (comp.__esModule || (hasSymbol && comp[Symbol.toStringTag] === 'Module')) {
-    comp = comp.default;
-  }
-
-  return isObject(comp) ? base.extend(comp) : comp;
-}
-
-function createAsyncPlaceholder(
-  factory: Function,
-  data: ?VNodeData,
-  context: Component,
-  children: ?Array<VNode>,
-  tag: ?string
-): VNode {
-  const node = createEmptyVNode();
-  node.asyncFactory = factory;
-  node.asyncMeta = { data, context, children, tag };
-  return node;
-}
 ```
 
 ## Vue Instance
