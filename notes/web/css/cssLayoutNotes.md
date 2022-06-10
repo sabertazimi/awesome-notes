@@ -719,8 +719,15 @@ article a {
 
 `position: sticky` + `top: XXX`:
 
-- 使元素相对于 `containing block` (`overflow: non-visible`) 布局.
+- 使元素相对于 non-`visible` `overflow` 祖先 (nearest **scrolling** ancestor) 布局:
+  要利用 `position: sticky` 实现视窗定位效果, 最好保证祖先全为 `overflow: visible` 元素,
+  使得视窗成为其 nearest **scrolling** ancestor.
 - 若祖先全为 `overflow: visible` 元素, 则使元素相对于浏览器窗口与 `containing block` 布局:
+  - `containing block` 为 BFC creation element:
+    - Block container.
+    - Table container.
+    - Flex container.
+    - Grid container.
   - 粘性定位元素在它距离视窗顶部大于 `XXX` 时, 会按照默认布局, 表现为 `relative` position.
   - 一旦其距离顶部的距离等于 `XXX`, 元素会固定在窗口顶部, 表现为 `fixed` position.
 - 粘性定位元素不能超出**粘性约束矩形**范围的限制:
