@@ -8,15 +8,13 @@ tags: [Web, Security]
 
 # Security Basic Notes
 
-## Curated List of Vulnerability
-
-### Object Injection
+## Object Injection
 
 - `__proto__.XX`
 - `constructor`
 - `hasOwnProperty`
 
-#### Insecure Object Comparison
+### Insecure Object Comparison
 
 injection:
 
@@ -35,7 +33,7 @@ solutions:
 - `crypto.timingSafeEqual`
 - `object.hasOwnProperty(token)`
 
-### SQL Injection
+## SQL Injection
 
 user input: ' or 1=1--
 
@@ -46,7 +44,7 @@ SELECT *
    AND pass  = '' or 1=1--' LIMIT 1
 ```
 
-#### SQL Injection Protection
+### SQL Injection Protection
 
 - Don’t allow multiple statements.
 - Validate user input.
@@ -58,11 +56,11 @@ SELECT *
 String sql = "SELECT * FROM users WHERE email = ?";
 ```
 
-### Click Jacking
+## Click Jacking
 
 Hover a transparent malicious link upon the true button
 
-#### Click Jacking Protection
+### Click Jacking Protection
 
 - frame killing snippet
 
@@ -93,9 +91,9 @@ response.setHeader('X-Frame-Options', 'DENY');
 response.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
 ```
 
-### Session Fixation
+## Session Fixation
 
-#### Protection
+### Protection
 
 在 **HTTP Cookies** 中传输**复杂**的 Session IDs, 并在**成功连接**/**恶意篡改**后重置 Session IDs.
 
@@ -117,7 +115,7 @@ const generateSessionId = session => uid(24);
 - how: reset session IDs after set up session successfully
 - how: reset session IDs after it's been changed manually on client(Set-Cookies)
 
-### XSS Attack
+## XSS Attack
 
 Cross-Site Scripting:
 
@@ -126,7 +124,7 @@ Cross-Site Scripting:
 
 user input: `<script> malicious code </script>`
 
-#### XSS Protection
+### XSS Protection
 
 don't trust user:
 
@@ -134,7 +132,7 @@ don't trust user:
 - `trim()`
 - using template engine(handlebars, jade, etc...)
 
-### CSRF
+## CSRF
 
 Cross-Site Request Forgery - 跨站请求伪造:
 
@@ -145,7 +143,7 @@ Cross-Site Request Forgery - 跨站请求伪造:
 XSS 利用的是网站对用户(输入)的信任,
 CSRF 利用的是网站对用户网页浏览器的信任.
 
-#### CSRF Protection
+### CSRF Protection
 
 - 确保 `GET request` 没有副作用.
 - 确保 `request` 正常渠道发起 (Hidden token check in form).
@@ -174,7 +172,7 @@ function openUrl(url) {
 }
 ```
 
-### Distributed Denial of Service
+## Distributed Denial of Service
 
 DDoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
 
@@ -183,7 +181,7 @@ DDoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时
 - DNS 服务.
 - 即时通讯服务.
 
-### File Upload Vulnerabilities
+## File Upload Vulnerabilities
 
 当使用 JS 代码限制上传文件类型时, 攻击者 Disable JS in Browser, 并上传 malicious code file.
 
@@ -198,7 +196,7 @@ DDoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时
 ?>
 ```
 
-#### File Upload Protection
+### File Upload Protection
 
 对于上传文件:
 
@@ -208,9 +206,9 @@ DDoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时
 - 检查 Content-Type Header
 - 使用 Virus Scanner
 
-### Malicious Redirects
+## Malicious Redirects
 
-#### Malicious Redirects Protection
+### Malicious Redirects Protection
 
 Check the Referrer when doing redirects
 
@@ -220,16 +218,16 @@ function isRelative(url) {
 }
 ```
 
-### User Enumeration
+## User Enumeration
 
 通过暴力工具得到被攻击网站的用户名单, 并利用社工得到密码
 
 > 很显然, REST API 无法抵抗此种攻击
 > E.g [GitHub User Profile](https://github.com)
 
-#### User Enumeration Protection
+### User Enumeration Protection
 
-##### Login Protection
+#### Login Protection
 
 使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误
 
@@ -237,7 +235,7 @@ function isRelative(url) {
 - All login code-paths take the same time on average: time consuming operations
 - All login code-paths take the same context: session IDs, cookies
 
-##### Sign Up or Reset Protection
+#### Sign Up or Reset Protection
 
 Not with name, should with email:
 
@@ -246,18 +244,18 @@ Not with name, should with email:
 - Not Exist: Sending sign-up email
 - Exist: Sending pwd-reset email
 
-### Inline Document Type Definition in XML
+## Inline Document Type Definition in XML
 
 Dangerous Macros:
 
 - XML Bombs
 - XML External Entities
 
-#### XML Protection
+### XML Protection
 
 Disable DTD parse in XML parser
 
-### Information Leakage
+## Information Leakage
 
 - Server in Response Headers
 - Cookies: SESSION_ID -> java
@@ -287,7 +285,7 @@ Disable DTD parse in XML parser
 ]
 ```
 
-#### Information Leakage Protection
+### Information Leakage Protection
 
 - `NODE_ENV=production`
 - 处理/混淆/加密原始数据(raw data)
@@ -302,41 +300,41 @@ Disable DTD parse in XML parser
 - Sanitize Template Files
 - Ensure Correct Configuration of Web Root Directory
 
-### Secure Treatment of Passwords
+## Secure Treatment of Passwords
 
 > [Hacks Explain](https://www.hacksplaining.com/prevention/password-mismanagement)
 
-### 目录遍历攻击
+## 目录遍历攻击
 
 ```bash
 GET /../../../passwd.key HTTP/1.1
 ```
 
-#### Directory Protection
+### Directory Protection
 
 检查请求路径是否安全, 否则不返回响应
 
-### 病毒 NPM 包
+## 病毒 NPM 包
 
 名字与流行包相近, 通过 postinstall 脚本执行病毒脚本，获取系统环境变量信息 e.g `crossenv`
 
-#### Package Protection
+### Package Protection
 
 - No typo in package.json
 - 禁止执行 postinstall 脚本
 
-### 正则表达式 DoS 攻击 (ReDoS)
+## 正则表达式 DoS 攻击 (ReDoS)
 
 正则表达式引擎采用回溯的方式匹配所有可能性，导致性能问题
 
-#### ReDoS Protection
+### ReDoS Protection
 
 - 不使用 NFA 实现的正则表达式引擎, 使用 DFA 实现的正则表达式引擎
 - 不定义性能消耗过大的正则表达式
 - 不动态构造正则表达式 new RegExp()
 - 禁止用户输入影响正则表达式构建/匹配
 
-### Supply Chain Attack
+## Supply Chain Attack
 
 Attack:
 
@@ -372,13 +370,6 @@ Example:
 
 - [OpenBase](https://openbase.com)
 - [NPM Package Advisor](https://snyk.io/advisor)
-
-## JWT
-
-JSON Web Tokens is small, object-friendly
-(compared to SAML, Security Assertion Markup Language Tokens)
-and security for public/private key pair
-(compared to SWT, Simple Web Tokens)
 
 ## Security Checklist
 
