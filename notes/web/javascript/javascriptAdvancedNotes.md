@@ -5829,3 +5829,5 @@ CSS transform animation only runs on `compositor` thread and `Viz` process.
 - Chromium [layout engine architecture](https://developer.chrome.com/articles/layoutng).
 - Chromium `Blink` [architecture](https://developer.chrome.com/articles/blinkng).
 - Web platform [tests](https://wpt.fyi).
+- Google Chrome platform feature [status](https://github.com/GoogleChrome/chromium-dashboard).
+- Mozilla Firefox platform feature [status](https://github.com/mozilla/standards-positions).
