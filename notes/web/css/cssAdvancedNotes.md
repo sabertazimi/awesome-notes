@@ -101,7 +101,7 @@ The optimal line length for body text is `50`–`75` characters:
 - Golden rules of web typography [reference](https://noti.st/rar/mz1rIY/golden-rules-of-typography-on-the-web).
 - Typeface [font matrix](https://pimpmytype.com/font-matrix/).
 
-t## Grid System
+## Grid System
 
 - Must have different traits at different sizes
 - Must be fluid between breakpoints
