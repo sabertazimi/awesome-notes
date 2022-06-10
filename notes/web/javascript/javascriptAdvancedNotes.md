@@ -5118,13 +5118,26 @@ if there’s any pending call back waiting to be executed:
 `Event Loop` simple model:
 
 ```ts
-for (macroTask of macroTaskQueue) {
+for (const macroTask of macroTaskQueue) {
   // 1. Handle current MacroTask.
-  handleMacroTask(macroTask);
+  runTask(macroTask);
 
   // 2. Handle all MicroTasks.
-  for (microTask of microTaskQueue) {
-    handleMicroTask(microTask);
+  for (const microTask of microTaskQueue) {
+    runTask(microTask);
+  }
+
+  // 3. Handle Animation Frame.
+  if (shouldRepaint()) {
+    if (!animationFrameCallbackQueue.isEmpty()) {
+      const animationTasks = animationFrameCallbackQueue.copyTasks();
+
+      for (const animationTask of animationTasks) {
+        runTask(animationTask);
+      }
+    }
+
+    repaint();
   }
 }
 ```
