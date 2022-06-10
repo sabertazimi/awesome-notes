@@ -18,6 +18,9 @@ tags: [Web, CSS, Animation]
 - Affect client rectangles exposed by
   `Element Interface Extensions` (`getClientRects()`/`getBoundingClientRect()`).
 - Affect after `clip`/`clip-path`: first `clip`/`clip-path`, then `transform`.
+- Create new [stacking context](https://developer.mozilla.org/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context).
+- Create new [containing block](https://developer.mozilla.org/docs/Web/CSS/Containing_block#identifying_the_containing_block)
+  for `absolute`/`fixed` positioned children.
 
 ### Translate Transform
 

@@ -629,11 +629,16 @@ article a {
 
 ### Absolute Position
 
-- 使元素相对于 `containing block` 布局:
+- 使元素相对于 [`containing block`](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block)
+  布局:
   - Non-`static` `position` element.
   - `transform` element.
-- 若祖先全为 `position: static`/`transform: none` 元素,
-  则使元素相对于浏览器窗口布局.
+  - `perspective` element.
+  - `will-change: transform`/`will-change: perspective` element.
+  - `filter` element.
+  - `backdrop-filter` element.
+  - `contain` `strict`/`content`/`paint` element.
+- 若祖先全为无法构成 `containing block` 的元素, 则使元素相对于浏览器窗口布局.
 - 可使用 `top`/`bottom`/`left`/`right`/`inset` 属性进行定位.
 - 相对方向 (opposite) 的定位同时设置:
   若未显示设置该方向的元素大小, 则元素具有流动性, 受 `containing block` 影响其大小,
@@ -694,8 +699,17 @@ article a {
 
 ### Fixed Position
 
-- 使元素相对于浏览器窗口布局, 但不受滑动条影响.
+- 使元素相对于 [`containing block`](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block)
+  布局:
+  - Initial `containing block`: 浏览器窗口, 且不受滑动条影响.
+  - `transform` element.
+  - `perspective` element.
+  - `will-change: transform`/`will-change: perspective` element.
+  - `filter` element.
+  - `backdrop-filter` element.
+  - `contain` `strict`/`content`/`paint` element.
 - 可使用 `top`/`bottom`/`left`/`right`/`inset` 属性进行定位.
+- 初始位置不被保留, 脱离文档流.
 - `float` computed to `float: none`.
 - `display` `inline-table` computed to `table`.
 - `display` `inline`/`inline-block`/`table-*` computed to `block`.
