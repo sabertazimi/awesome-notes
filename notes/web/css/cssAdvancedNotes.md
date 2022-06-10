@@ -1850,6 +1850,30 @@ Focusable areas:
 }
 ```
 
+### Content Visibility
+
+[`content-visibility`](https://developer.mozilla.org/docs/Web/CSS/content-visibility):
+
+- `visible`:
+  element contents are laid out and rendered as normal.
+- `hidden`:
+  hide element while **preserving its rendering state**,
+  if there are any changes that need to happen,
+  they only happen when the element is shown again
+  (i.e. `content-visibility: hidden` property is removed).
+  `display: none` destroys element rendering state,
+  `visibility: hidden` doesn't truly remove element.
+- `auto`:
+  element turns on `layout`, `style` and `paint` containment,
+  可用于实现 **lazy loading**, **virtualized list**.
+
+```css
+.p {
+  content-visibility: auto;
+  contain-intrinsic-size: 320px; /* 预设高度, 防止滚动条频繁抖动 */
+}
+```
+
 ### CSS Selectors Performance
 
 减少选择器的复杂性, 与构造样式本身的其他工作相比,
