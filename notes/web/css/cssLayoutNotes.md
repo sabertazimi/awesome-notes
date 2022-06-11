@@ -1791,7 +1791,11 @@ h1.lines::after {
 
 ### Horizontal Centering Pattern
 
-- inline: `text-align`, `flex`/`grid` box.
+#### Horizontal Centering Inline Element
+
+- `text-align: center`.
+- `flex`.
+- `grid`.
 
 ```css
 .quote {
@@ -1799,7 +1803,11 @@ h1.lines::after {
 }
 ```
 
-- block: auto `margin`, `flex`/`grid` box.
+#### Horizontal Centering Block Element
+
+- Auto `margin`.
+- `flex`.
+- `grid`.
 
 ```css
 .element {
@@ -1814,7 +1822,7 @@ h1.lines::after {
 }
 ```
 
-- 父元素 float, 父子元素 relative.
+父元素 `float`, 父子元素 `relative`:
 
 ```css
 .container {
@@ -1838,6 +1846,7 @@ h1.lines::after {
   - 作用机制: 对齐基线 (`baseline`) 往上 1/2 `x-height` 高度 (即小写字母 `x` 交叉点处).
   - 作用环境: parent element `line-height` === `height`.
   - 作用对象: children `inline`/`inline-block`/`table-cell` element.
+- Vertical `padding`.
 - `flex`.
 - `grid`.
 
@@ -1856,7 +1865,8 @@ a.button::before {
 
 - `top` + `margin`.
 - `top` + `translateY`.
-- `vertical-align`.
+- `vertical-align: middle` + `display: table-cell`.
+- Vertical `padding`.
 - `flex`.
 - `grid`.
 
