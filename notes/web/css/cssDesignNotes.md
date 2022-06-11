@@ -183,7 +183,7 @@ point out that:
 
 ### Responsive Font
 
-- `em`/`rem` font size.
+- `rem`/`em` font size.
 
 ### Responsive Length
 
@@ -194,11 +194,12 @@ point out that:
 
 ### Responsive Size
 
-- Size in `em` if the property scales according to it's font-size.
-- **Modular Font Size**:
-  Size in `em` if the font-size should be modular
+- Size in `em` if the property scales according to it's `font-size`:
+  e.g button `padding`.
+- **Modular font size**:
+  Size in `em` if the `font-size` should be modular
   (relative to it's context/parent).
-- Size everything else in `rem` (include media queries).
+- Size **everything else** in `rem` (include `@media` queries).
 
 ```css
 /* scales to self font-size */
