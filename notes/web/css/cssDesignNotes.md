@@ -178,7 +178,7 @@ point out that:
 - [Mobile first](https://alistapart.com/article/mobile-first-css-is-it-time-for-a-rethink):
   `@media only screen and (min-width: 768px)`.
 - Media query.
-- Fluid grid.
+- Fluid layout.
 - Flexible image.
 
 ### Responsive Font
@@ -334,6 +334,36 @@ use `inline-box` with `width`
 600w, large.png 800w, x-large.png 1200w" sizes="(min-width: 70em) 12.6875em,
 (min-width: 50em) calc(25vw * 0.95 - 2.75em), (min-width: 35em) calc(95vw / 2 -
 4.125em), calc(95vw - 1.375em)" " alt="Dummy Image" />
+```
+
+### Responsive Table
+
+```css
+table {
+  width: 100%;
+}
+
+@media (max-width: 30em) {
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+  }
+
+  tr {
+    margin-bottom: 1em;
+  }
+
+  /* 隐藏表头 */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+}
 ```
 
 ## Design Principles
