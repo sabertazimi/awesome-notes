@@ -3450,6 +3450,58 @@ try {
 }
 ```
 
+```ts
+// 监听捕获阶段的异常事件
+window.addEventListener(
+  'error',
+  error => {
+    handleError(error);
+    error.preventDefault();
+  },
+  true
+);
+
+// Un-catch `Promise` handler
+window.addEventListener(
+  'unhandledrejection',
+  error => {
+    handleError(error);
+    error.preventDefault();
+  },
+  true
+);
+```
+
+```ts
+const instance = axios.create({
+  baseURL: 'https://api.test.com',
+  timeout: 15000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+instance.interceptors.response.use(
+  response => {
+    return response.data;
+  },
+  error => {
+    // 发生异常会走到这里
+    if (error.response) {
+      const response = error.response;
+
+      if (response.status >= 400) {
+        handleError(response);
+      }
+    } else {
+      handleError(null);
+    }
+
+    return Promise.reject(error);
+  }
+);
+```
+
 ## Regular Expression
 
 ```ts
