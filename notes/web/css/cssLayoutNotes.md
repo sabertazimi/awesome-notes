@@ -1229,6 +1229,8 @@ Flexbox 子元素:
 - `*-content` adjust parent padding,
   `*-items` and `*-self` adjust children margin.
 
+![Flex Parent Alignment](./figures/FlexParentAlignment.png)
+
 #### Flex Children Alignment
 
 - [`align-self`](https://developer.mozilla.org/docs/Web/CSS/align-self):
@@ -1238,6 +1240,8 @@ Flexbox 子元素:
   - `stretch`.
   - `center`/`start`/`end`/`self-start`/`self-end`/`flex-start`/`flex-end`.
 - `order`: `<number>`, 显示顺序, 初始为 `0`.
+
+![Flex Children Alignment](./figures/FlexChildrenAlignment.png)
 
 #### Flex Margin Alignment
 
@@ -1738,6 +1742,8 @@ will refactor grid item's size and location:
   - `left`/`right`.
 
 :::
+
+![Grid Alignment](./figures/GridAlignment.png)
 
 ### Grid Pseudo Element
 
