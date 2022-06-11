@@ -224,13 +224,21 @@ Auto flow percentage `margin` calculate by `width`.
 - 正负值相加.
 - 负负最负值.
 
+`margin` collapsing prevention:
+
+- BFC creation: add `overflow: auto` to container.
+- Add `padding`.
+- Add `border`.
+
 :::tip Never Collapse
 
 Margin collapsing only happen to **normal** block box **vertical** direction:
 
-- Line box margin **never collapse**.
+- [Line box](#line-box) margin **never collapse**.
 - `float` box margin **never collapse**.
-- `absolute` positioned box margin **never collapse**.
+- `absolute`/`fixed` positioned box margin **never collapse**.
+- `flex` children.
+- `grid` children.
 
 :::
 
