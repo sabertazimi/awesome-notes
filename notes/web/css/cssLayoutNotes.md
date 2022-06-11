@@ -432,14 +432,14 @@ BFC 是页面上的一个隔离的独立容器 (隔离性):
 #### Block Formatting Context Creation
 
 - 根元素或其它包含它的元素.
-- `overflow`: not visible (e.g `hidden`).
+- `overflow`: not `visible` (e.g `hidden`).
 - `float`: not `none` (e.g `left`/`right`).
 - `position`: not `relative`/`static` (e.g `absolute`/`fixed`).
 - `display`: `inline-block`.
 - `display`: `table-cell`/`table-caption`/`table-*h`.
-- `display`: flow-root.
-- direct children of `display: flex/inline-flex`.
-- direct children of `display: grid/inline-grid`.
+- `display`: `flow-root`.
+- Flex items: direct children of `flex`/`inline-flex` box.
+- Grid items: direct children of `grid`/`inline-grid` box.
 
 ```css
 .bfc-1 {
