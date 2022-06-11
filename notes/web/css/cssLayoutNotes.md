@@ -50,24 +50,6 @@ Box sizing:
 - `<percentage>`.
 - `min-content | max-content | fit-content | fit-content(<length-percentage>)`.
 
-#### Min and Max Width
-
-`min-width` > `max-width` > `width !important`:
-
-```css
-/* 480px */
-.box-1 {
-  min-width: 480px;
-  max-width: 256px;
-}
-
-/* 256px */
-.box-2 {
-  width: 480px !important;
-  max-width: 256px;
-}
-```
-
 #### Percentage Width
 
 `%` width calculate by `containing box` width:
@@ -104,6 +86,24 @@ for `width`/`min-width`/`max-width`/`height`/`min-height`/`max-height`/
   width: 100%;
   width: stretch;
   table-layout: fixed;
+}
+```
+
+#### Min and Max Width
+
+`min-width` > `max-width` > `width !important`:
+
+```css
+/* 480px */
+.box-1 {
+  min-width: 480px;
+  max-width: 256px;
+}
+
+/* 256px */
+.box-2 {
+  width: 480px !important;
+  max-width: 256px;
 }
 ```
 
