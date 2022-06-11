@@ -2083,8 +2083,8 @@ tag-not-found::backdrop,
 
 ### PostCSS
 
-- [PostCSS Preset Env](https://github.com/csstools/postcss-preset-env)
-- [PostCSS Flexbox Checker](https://github.com/luisrudge/postcss-flexbugs-fixes)
+- [PostCSS Preset Env](https://github.com/csstools/postcss-plugins)
+- [PostCSS Flexbox Bug Checker](https://github.com/luisrudge/postcss-flexbugs-fixes)
 
 #### CSS Vendor Prefix
 
