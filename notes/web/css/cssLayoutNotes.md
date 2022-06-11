@@ -855,12 +855,6 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
   使得**因浮动元素脱离文档流而塌陷**的父容器恢复正常高度.
 
 ```css
-.row {
-  width: 100%;
-  max-width: --var(row-max-width);
-  margin: 0 auto;
-}
-
 .clearfix::before,
 .clearfix::after {
   display: table;
@@ -1818,15 +1812,15 @@ h1.lines::after {
 - `grid`.
 
 ```css
-.element {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 300px;
-  height: 200px;
-  margin: auto;
+.row {
+  width: 100%;
+  max-width: --var(row-max-width);
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
 }
 ```
 
