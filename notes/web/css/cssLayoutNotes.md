@@ -1503,7 +1503,7 @@ Children property:
 `grid-auto-rows`/`grid-auto-columns`:
 
 - `<track-size>+`.
-- Control implicitly-created grid row/column track size.
+- Control implicitly-created grid track (row/column) size.
 
 ```html
 <div class="container">
@@ -1555,6 +1555,16 @@ Children property:
 - Change auto-placement algorithm:
   control exactly how auto-placed items get flowed into grid container,
   like `flex-direction` for flex container.
+
+```css
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: 1fr;
+  grid-auto-flow: dense;
+  grid-gap: 1em;
+}
+```
 
 ### Named Grid Layout
 

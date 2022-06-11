@@ -1192,6 +1192,37 @@ const resetScrollX = () => {
 };
 ```
 
+## Gallery
+
+```css
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: 1fr;
+  grid-auto-flow: dense;
+  grid-gap: 1em;
+}
+
+.gallery .featured {
+  grid-row: span 2;
+  grid-column: span 2;
+}
+
+.gallery figure {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.gallery img {
+  flex: 1;
+  object-fit: cover;
+  max-width: 100%;
+}
+```
+
+![Grid Gallery](./figures/GridGallery.png)
+
 ## Timeline and Steps
 
 Use pseudo elements to construct circle and line:
