@@ -189,8 +189,8 @@ point out that:
 
 - `vw`.
 - `vh`.
-- `vmin`.
-- `vmax`.
+- `vmin`: `min(vw, vh)`.
+- `vmax`: `max(vw, vh)`.
 
 ### Responsive Size
 
