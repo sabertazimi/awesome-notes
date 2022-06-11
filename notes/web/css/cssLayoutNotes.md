@@ -109,7 +109,7 @@ for `width`/`min-width`/`max-width`/`height`/`min-height`/`max-height`/
 
 ### Box Height
 
-#### Box Flow Height
+#### Flow Height
 
 普通文档流是为限定的宽度和无限的高度设计的 (网页元素的默认布局行为):
 
@@ -119,9 +119,17 @@ for `width`/`min-width`/`max-width`/`height`/`min-height`/`max-height`/
 这导致处理元素高度的方式跟处理宽度不一样:
 
 `box-sizing` 仍然会影响高度, 但最好避免给元素指定明确的高度.
-容器的高度由内容天然地决定, 而不是容器自己决定.
+容器的高度由内容 (子元素) 天然地决定, 而不是容器自己决定.
 
-#### Box Viewport Height
+#### Percentage Height
+
+`%` height calculate by `containing box` height:
+
+- 容器高度为 `auto` (`initial` value) 时, 其高度通常由子元素高度决定:
+  浏览器为避免高度计算死循环, 会忽略子元素百分比高度声明.
+- 容器高度为一个明确值时, 子元素百分比高度才会生效.
+
+#### Viewport Height
 
 ```css
 .my-element {
@@ -136,27 +144,6 @@ window.addEventListener('resize', () => {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
-```
-
-### Box Padding
-
-#### Percentage Padding
-
-Auto flow percentage `padding` calculate by `width`:
-
-```css
-.box {
-  position: relative;
-  padding: 10% 50%;
-}
-
-.box > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 ```
 
 ### Box Margin
@@ -255,6 +242,27 @@ Margin collapsing only happen to **normal** block box **vertical** direction:
   `.absolute { top: 10%; left: 30%; }` `margin-right` 与 `margin-bottom` 改变了外部尺寸,
   但无法影响兄弟元素布局.
 - 定高容器**子元素**的 `margin-bottom` 或者定宽容器**子元素**的 `margin-right` 的定位作用失效.
+
+### Box Padding
+
+#### Percentage Padding
+
+Auto flow percentage `padding` calculate by `width`:
+
+```css
+.box {
+  position: relative;
+  padding: 10% 50%;
+}
+
+.box > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+```
 
 ### Box Overflow
 
