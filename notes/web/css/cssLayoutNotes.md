@@ -14,9 +14,21 @@ tags: [Web, CSS, Layout]
 
 `box-sizing`:
 
-- `content-box` (default).
+- `content-box` (`initial` value).
 - `padding-box`.
 - `border-box`.
+
+```css
+:root {
+  box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+```
 
 Box sizing:
 
