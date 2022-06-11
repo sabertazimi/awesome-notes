@@ -386,6 +386,7 @@ export const getStaticProps: GetStaticProps = async () => {
 ### JamStack Reference
 
 - Build your own [Next.js](https://hire.jonasgalvez.com.br/2022/may/18/building-a-mini-next-js).
+- Modern websites building [patterns](https://dev.to/this-is-learning/patterns-for-building-javascript-websites-in-2022-5a93).
 
 ## SEO
 
