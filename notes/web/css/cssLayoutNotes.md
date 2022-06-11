@@ -412,15 +412,22 @@ Character box/em-box/selection box):
 
 #### Block Formatting Context Features
 
-- 一个 BFC 包含创建该上下文元素的所有子元素, 但不包括创建了新 BFC 的子元素的内部元素.
-- BFC 就是页面上的一个隔离的独立容器, 容器里面的子元素不会影响到外面的元素, 反之也如此.
-- 一个元素不能同时存在于两个 BFC 中: 可让处于 BFC 内部的元素与外部的元素相互隔离.
-- 每个元素的 margin box 的左边, 与包含块 border box 的左边相接触.
+BFC 包含创建该上下文元素的所有子元素 (包含性):
+
+- 包含内部所有元素的上下外边距, 它们不会跟 BFC 外部的元素产生外边距折叠.
+- 包含内部所有的浮动元素:
+  计算 BFC 的高度时, 浮动元素也参与计算,
+  可防止内边距塌陷 (`margin-top` collapse with `margin-bottom`).
+- 不包含创建了新 BFC 的子元素的内部元素.
+
+BFC 是页面上的一个隔离的独立容器 (隔离性):
+
+- BFC 不会跟外部的浮动元素 (`float box`) 重叠:
+  可用于实现[自适应布局](#column-pattern).
+- BFC 内部的元素与外部的元素相互隔离, 无法相互影响.
+- 一个元素不能同时存在于两个 BFC 中.
 - 内部的 Box 会在垂直方向, 一个接一个地放置.
-- Vertical margin collapsing.
-- BFC 的区域不会与 float box 重叠: 自适应分栏布局, 清除外/内部浮动.
-- 计算 BFC 的高度时, 浮动元素也参与计算:
-  防止内边距塌陷 (margin-top collapse with margin-bottom).
+- 每个元素的 `margin box` 的左边, 与包含块 `border box` 的左边相接触.
 
 #### Block Formatting Context Creation
 
@@ -652,7 +659,7 @@ article a {
 
 ### Inline Element Margin
 
-非主动触发位移的内联元素是不会位移至计算容器外面,
+非主动触发位移的内联元素是不会位移至计算容器外部,
 内联元素 `margin-top` 设置过大时 `margin-top` 会直接失效,
 内联元素依然会处于基线对齐位置.
 
