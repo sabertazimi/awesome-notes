@@ -682,7 +682,7 @@ article a {
 
 ### Absolute Position
 
-- 使元素相对于 [`containing block`](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block)
+- 使元素相对于 [`containing block`](https://developer.mozilla.org/docs/Web/CSS/Containing_block#identifying_the_containing_block)
   布局:
   - Non-`static` `position` element.
   - `transform` element.
@@ -752,7 +752,7 @@ article a {
 
 ### Fixed Position
 
-- 使元素相对于 [`containing block`](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block)
+- 使元素相对于 [`containing block`](https://developer.mozilla.org/docs/Web/CSS/Containing_block#identifying_the_containing_block)
   布局:
   - Initial `containing block`: 浏览器窗口, 且不受滑动条影响.
   - `transform` element.
@@ -1350,6 +1350,8 @@ main {
 - Flexbox complete [guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox).
 
 ## Grid Pattern
+
+[![Grid Layout](./figures/GridLayout.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout)
 
 ### Grid Property
 
