@@ -1689,6 +1689,8 @@ e.g `.main > .button` vs `.sidebar > .button`,
 
 ## Feature Query
 
+### Supports At Rule
+
 [`@supports`](https://developer.mozilla.org/docs/Web/CSS/@supports):
 
 ```css
@@ -1717,6 +1719,8 @@ e.g `.main > .button` vs `.sidebar > .button`,
   font-size: 1rem;
 }
 ```
+
+### Supports API
 
 [`CSS.supports()`](https://developer.mozilla.org/docs/Web/API/CSS/supports):
 
