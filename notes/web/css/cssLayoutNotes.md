@@ -107,7 +107,21 @@ for `width`/`min-width`/`max-width`/`height`/`min-height`/`max-height`/
 }
 ```
 
-### Box Viewport Height
+### Box Height
+
+#### Box Flow Height
+
+普通文档流是为限定的宽度和无限的高度设计的 (网页元素的默认布局行为):
+
+- 行内元素跟随文字的方向从左到右排列, 当到达容器边缘时会换行.
+- 块级元素会占据完整的一行, 前后都有换行.
+
+这导致处理元素高度的方式跟处理宽度不一样:
+
+`box-sizing` 仍然会影响高度, 但最好避免给元素指定明确的高度.
+容器的高度由内容天然地决定, 而不是容器自己决定.
+
+#### Box Viewport Height
 
 ```css
 .my-element {
