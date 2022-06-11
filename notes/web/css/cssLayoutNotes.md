@@ -1237,7 +1237,7 @@ Flexbox 子元素:
   - `baseline`.
   - `stretch`.
   - `center`/`start`/`end`/`self-start`/`self-end`/`flex-start`/`flex-end`.
-- `order`: `<number>`, 显示顺序.
+- `order`: `<number>`, 显示顺序, 初始为 `0`.
 
 #### Flex Margin Alignment
 
