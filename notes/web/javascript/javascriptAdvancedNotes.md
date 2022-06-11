@@ -5499,7 +5499,7 @@ console.log('glob2');
 
 #### V8 Object Shape
 
-- [Shapes ICS](https://mathiasbynens.be/notes/shapes-ics)
+[Shapes ICS](https://mathiasbynens.be/notes/shapes-ics):
 
 ```ts
 // o1 and o2 have the same shape
@@ -5511,7 +5511,7 @@ const o1 = { x: 1, y: 2 };
 const o2 = { x: 3, y: 4 };
 ```
 
-Shape Transform
+Shape transform:
 
 ```ts
 // Shape chain: Shape(empty) => Shape(x) => Shape(x, y)
@@ -5528,7 +5528,7 @@ o.x = 1;
 const o = { x: 1 };
 ```
 
-array shape: Shape('length'), 'length' => 0 Offset, Writable
+Array shape: `Shape('length'), 'length' => 0 Offset, Writable`.
 
 #### V8 Inline Cache
 
@@ -5537,6 +5537,12 @@ V8 use ICs to memorize information (same shape) where to find properties on obje
 - always initialize objects in the same way (generate the same shape)
 - don't add property to objects dynamically (invalid inline cache)
 - don't mess with property attributes of array elements
+
+V8 为了提高对象属性的访问效率, 将属性分为[多种类型](https://v8.dev/blog/fast-properties):
+
+- 排序属性 (elements): 符合数组索引类型的属性 (正整数), 存储为线性结构, 可快速访问.
+- 常规属性 (properties): 字符串类型的属性 (包括负数/浮点数/Symbol), 存储为线性结构, 可快速访问.
+- 慢属性: 属性需要反复增删时, 会将属性存储类型从线性结构 (快属性) 改为字典结构 (慢属性).
 
 #### V8 Garbage Collection
 
