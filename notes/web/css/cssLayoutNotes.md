@@ -1467,6 +1467,8 @@ Children property:
 
 - `repeat([auto-fill | <integer [1,∞]>], <line-names>+)`.
 
+[![Grid Repeat Function](./figures/GridRepeat.png)](https://developer.mozilla.org/docs/Web/CSS/repeat)
+
 #### Grid Line Types
 
 `<grid-line>`:
