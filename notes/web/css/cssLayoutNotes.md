@@ -205,18 +205,18 @@ Auto flow percentage `margin` calculate by `width`.
 
 #### Collapse Margin
 
-[`margin` collapsing](https://developer.mozilla.org/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing):
+[`margin` collapsing occasion](https://developer.mozilla.org/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing):
 
-- Adjacent siblings: 1's margin-bottom with 2's margin-top.
+- Adjacent siblings: 1's `margin-bottom` with 2's `margin-top`.
 - No content separating parent and descendants:
-  - No border/padding/inline part/block formatting context created/clearance:
-    can't separate parents margin-top from its descendant blocks margin-top.
-  - No border/padding/inline content/height/min-height:
-    can't separate parents margin-bottom from its descendant blocks margin-bottom.
-  - Collapsed margin ends up **outside the parent**.
+  - No `border`/`padding`/`inline part`/`BFC created`/`clear`:
+    can't separate parents `margin-top` from its descendant blocks `margin-top`.
+  - No `border`/`padding`/`inline content`/`height`/`min-height`:
+    can't separate parents `margin-bottom` from its descendant blocks `margin-bottom`.
+  - Collapsed `margin` ends up **outside the parent**.
 - Empty blocks:
-  no border/padding/inline content/height/min-height
-  to separate block's margin-top from its margin-bottom.
+  no `border`/`padding`/`inline content`/`height`/`min-height`
+  to separate block's `margin-top` from its `margin-bottom`.
 
 `margin` collapsing calculation:
 
