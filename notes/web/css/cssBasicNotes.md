@@ -2170,7 +2170,12 @@ math {
 
 - `ch`: calculate by `0` width.
 - `ex`: calculate by `x` width.
-- `em`: calculate by original `font-size` (`inherit` size or current size).
+- `em`:
+  - Calculate by original `font-size` (`inherit` size or current size).
+  - 当用 `em` 指定多重嵌套的元素的字号时, 会产生不断放大/缩小的结果,
+    故一般避免在 `font-size` 上使用 `em`.
+  - 在 `margin`/`padding`/`border` 上使用 `em` 时,
+    可使得布局随 `font-size` 大小改变而改变.
 - `rem`: calculate by root `font-size`.
 
 ```css
