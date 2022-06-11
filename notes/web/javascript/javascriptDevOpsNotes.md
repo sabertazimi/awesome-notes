@@ -2028,6 +2028,8 @@ def allow_request(req):
 
 ### Sandbox
 
+[`sandbox`](https://developer.51cto.com/article/710911.html):
+
 - `eval()`:
   它能访问执行上下文中的局部变量, 也能访问所有全局变量, 是一个非常危险的函数.
 - `new Function()`:
@@ -2039,7 +2041,7 @@ def allow_request(req):
   如果找不到就会往更上层的全局作用域去查找,
   导致全局环境污染.
 
-ProxySandbox:
+`ProxySandbox`:
 
 ```ts
 function sandbox(code) {
