@@ -969,12 +969,17 @@ add `margin-left` and `margin-right` to `.middle`.
 }
 ```
 
-On a floated element,
-a negative `margin` opposite the float direction
-will decrease the float area,
-causing adjacent elements to overlap the floated element.
-A negative `margin` in the direction of the float
-will pull the floated element in that direction.
+:::tip Negative Margin
+
+For `float` element:
+
+- Negative `margin` along the float direction:
+  pull the `float` element in that direction.
+- Negative `margin` opposite the float direction
+  decrease the float area,
+  causing adjacent elements to overlap the `float` element.
+
+:::
 
 1. HTML: `.middle` first.
 2. `padding-left` and `padding-right` to `.container`,
