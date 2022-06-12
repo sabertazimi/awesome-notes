@@ -64,8 +64,22 @@ $$
 
 ### Border Color
 
-利用 transparent border 扩大元素点击区域,
-再结合 `background-clip: padding-box` 隐藏边框:
+#### Alpha Border
+
+半透明边框:
+
+```css
+.box {
+  background: white;
+  background-clip: padding-box;
+  border: 10px solid hsl(0deg 0% 100% / 50%);
+}
+```
+
+#### Transparent Border
+
+利用透明边框扩大元素点击区域,
+并利用 `background-clip: padding-box` 隐藏边框:
 
 ```css
 .icon-clear {
