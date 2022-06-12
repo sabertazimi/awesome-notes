@@ -21,6 +21,7 @@ tags: [Web, CSS, Animation]
 - Create new [stacking context](https://developer.mozilla.org/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context).
 - Create new [containing block](https://developer.mozilla.org/docs/Web/CSS/Containing_block#identifying_the_containing_block)
   for `absolute`/`fixed` positioned children.
+- `<transform-function>+`: 多重变换**从右向左**按顺序执行.
 
 ### Translate Transform
 
