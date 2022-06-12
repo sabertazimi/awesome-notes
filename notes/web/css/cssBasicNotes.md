@@ -742,6 +742,17 @@ calculation result limit to `> 0`:
 }
 ```
 
+### Target Text Pseudo Element
+
+[`::target-text`](https://developer.mozilla.org/docs/Web/CSS/::target-text):
+
+```css
+::target-text {
+  color: white;
+  background-color: rebeccapurple;
+}
+```
+
 ### Before and After Pseudo Element
 
 使用 `content` 属性生成额外的内容并插入在标记中:
