@@ -284,7 +284,7 @@ body {
 
 ### Background Image
 
-[`background-image`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-image):
+[`background-image`](https://developer.mozilla.org/docs/Web/CSS/background-image):
 
 - `url()`.
 - `image-set([<image> <resolution>]#)`.

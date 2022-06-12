@@ -2339,14 +2339,15 @@ The font display timeline:
 - failure period: the user agent treats it as a failed load
   causing normal font fallback
 
-`font-display` - how a font face is displayed based on
-whether and when it is downloaded and ready to use:
+[`font-display`](https://developer.mozilla.org/docs/Web/CSS/@font-face/font-display)
+decides how a font face is displayed based on
+whether and when it is [downloaded and ready to use](https://github.com/bramstein/fontfaceobserver):
 
-- auto: font display strategy defined by the user agent
-- block: a short block period and an infinite swap period
-- swap: an extremely small block period and an infinite swap period
-- fallback: an extremely small block period and a short swap period
-- optional: an extremely small block period and no swap period
+- `auto`: font display strategy defined by the user agent.
+- `block`: a short block period and an infinite swap period.
+- `swap`: an extremely small block period and an infinite swap period.
+- `fallback`: an extremely small block period and a short swap period.
+- `optional`: an extremely small block period and no swap period.
 
 ```css
 @font-face {
