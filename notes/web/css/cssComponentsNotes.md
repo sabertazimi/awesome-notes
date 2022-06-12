@@ -1856,54 +1856,23 @@ body {
 
 ### Fade Animation
 
+#### Visual Fade Animation
+
 ```css
-@media screen and (prefers-reduced-motion: no-preference) {
-  .enter,
-  .leave {
-    transition: opacity 0.5s;
-  }
-}
-
-.before-enter,
-.leave {
+.dropdown-drawer {
+  visibility: hidden;
   opacity: 0;
+  transition: opacity 0.2s linear, visibility 0s linear 0.2s;
 }
 
-.enter,
-.before-leave {
+.is-open .dropdown-drawer {
+  visibility: visible;
   opacity: 1;
+  transition-delay: 0s;
 }
 ```
 
-```ts
-function enter(el, done) {
-  el.classList.add('before-enter');
-
-  setTimeout(() => {
-    el.classList.remove('before-enter');
-    el.classList.add('enter');
-  }, 20);
-
-  setTimeout(() => {
-    el.classList.remove('enter');
-    done();
-  }, 500);
-}
-
-function leave(el, done) {
-  el.classList.add('before-leave');
-
-  setTimeout(() => {
-    el.classList.remove('before-leave');
-    el.classList.add('leave');
-  }, 0);
-
-  setTimeout(() => {
-    el.classList.remove('leave');
-    done();
-  }, 500);
-}
-```
+#### Body Fade Animation
 
 ```css
 @keyframes body-fade-in {

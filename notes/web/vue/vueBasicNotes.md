@@ -813,23 +813,74 @@ state.attributes.name = 'Alex'; // Logs: "deep" "Alex" "Alex"
     </transition>
   </div>
 </template>
+
+<style>
+  .fade-enter-from {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity 0.5s ease-out;
+    }
+  }
+
+  .fade-leave-to {
+    opacity: 0;
+  }
+</style>
 ```
 
-```css
-.fade-enter-from {
-  opacity: 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.5s ease-out;
+```html
+<style>
+  @media only screen and (prefers-reduced-motion: no-preference) {
+    .enter,
+    .leave {
+      transition: opacity 0.5s ease-out;
+    }
   }
-}
 
-.fade-leave-to {
-  opacity: 0;
-}
+  .before-enter,
+  .leave {
+    opacity: 0;
+  }
+
+  .enter,
+  .before-leave {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  function enter(el, done) {
+    el.classList.add('before-enter');
+
+    setTimeout(() => {
+      el.classList.remove('before-enter');
+      el.classList.add('enter');
+    }, 20);
+
+    setTimeout(() => {
+      el.classList.remove('enter');
+      done();
+    }, 500);
+  }
+
+  function leave(el, done) {
+    el.classList.add('before-leave');
+
+    setTimeout(() => {
+      el.classList.remove('before-leave');
+      el.classList.add('leave');
+    }, 0);
+
+    setTimeout(() => {
+      el.classList.remove('leave');
+      done();
+    }, 500);
+  }
+</script>
 ```
 
 ### Slide Transition
