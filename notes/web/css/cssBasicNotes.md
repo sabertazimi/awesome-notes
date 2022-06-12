@@ -1339,9 +1339,21 @@ Change user-interface controls accent color.
 
 ### HSL Color
 
+[`hsl()`](https://developer.mozilla.org/docs/Web/CSS/color_value/hsl):
+
 - H: hue.
 - S: saturation (stay `50%` etc.).
 - L: lightness (easy to theme colors).
+
+Change `hue` to get color palette:
+
+- Complement `hue`: `180deg`, `brand` and `secondary` color.
+- Mix `hue` to get [natural color](https://tallys.github.io/color-theory).
+
+Change `lightness`to get color palette:
+
+- Decease `lightness` to get `:hover`/`:focus` color.
+- Increase `lightness` to get `secondary`/`ghost` color.
 
 ```css
 /* Hover Button */
@@ -1359,19 +1371,6 @@ Change user-interface controls accent color.
 .button:focus {
   --primary-l: 54%;
 }
-```
-
-```css
-/* Custom Buttons */
-:root {
-  --primary-h: 221;
-  --primary-s: 72%;
-  --primary-l: 62%;
-}
-
-.button {
-  background-color: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
-}
 
 .button-secondary {
   --primary-l: 90%;
@@ -1387,8 +1386,9 @@ Change user-interface controls accent color.
 }
 ```
 
+Change `lightness` to get gradient color:
+
 ```css
-/* Change lightness to get gradient */
 .section {
   background: linear-gradient(
     to left,
