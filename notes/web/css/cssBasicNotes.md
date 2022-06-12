@@ -1638,6 +1638,13 @@ pre {
 
 ### Text Spacing
 
+在设计领域, 文本行之间的距离称为行距 (`leading`),
+来源于印刷版每行文字之间添加的一条条的引导线 (`lead`).
+字符之间的距离称之为字距 (`tracking`).
+`tailwind.css`
+使用 [`leading-{size}`](https://tailwindcss.com/docs/line-height) 控制 `line-height`,
+使用 [`tracking-{size}`](https://tailwindcss.com/docs/letter-spacing) 控制 `letter-spacing`.
+
 `letter-spacing`:
 
 - 继承性.
