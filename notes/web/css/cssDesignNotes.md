@@ -65,7 +65,8 @@ Make text breathe:
 ### Vertical Rhythms
 
 Keep vertical spaces between elements on a page
-consistent (and relative) to each other:
+[consistent](https://zellwk.com/blog/why-vertical-rhythms)
+(and relative) to each other:
 
 - Set the vertical white space between elements to a multiple of base-size.
 - Set the line-height of all text elements to a multiple of base-size.
