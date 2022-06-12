@@ -1929,9 +1929,11 @@ function updateEffect(
 
 ## UseInsertionEffect Hook
 
-Allows CSS-in-JS libraries to address performance
-issues of injecting styles in render.
-This hook will run after the DOM is mutated,
+[`useInsertionEffect`](https://github.com/reactwg/react-18/discussions/110)
+allows `CSS-in-JS` libraries to address performance
+issues of injecting styles in render:
+
+`useInsertionEffect` will run after the DOM is mutated,
 but before layout effects read the new layout.
 
 ```tsx
