@@ -2553,10 +2553,11 @@ will lead to class purged.
 
 - `abstracts`: `$variables`, `@mixin` function.
 - `vendors`: external libraries (font-awesome, bootstrap).
-- `base`: normalize.css, reset.css, utils.css, font.css, base.css.
+- `base`: `normalize.css`, `reset.css`, `utils.css`, `font.css`, `base.css`.
   (margin-right, text-center, float-right).
-- `components`: form.css, button.css, navbar.css, dropdown.css.
-- `layout`: columns.css, grid.css, header.css, footer.css, section.css, navigation.css.
-- `pages`: home.css, about.css.
-- `themes`: color.css, font.css.
-- main.css.
+- `components`: `form.css`, `button.css`, `navbar.css`, `dropdown.css`.
+- `layout`:
+  `columns.css`, `grid.css`, `header.css`, `footer.css`, `section.css`, `navigation.css`.
+- `pages`: `home.css`, `about.css`.
+- `themes`: `color.css`, `font.css`.
+- `main.css`/`app.css`.
