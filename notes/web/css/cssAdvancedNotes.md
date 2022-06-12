@@ -2098,6 +2098,8 @@ CSS vendor prefix order:
 
 #### CSS Normalize
 
+[Modern normalize](https://github.com/sindresorhus/modern-normalize):
+
 ```css
 html,
 body {

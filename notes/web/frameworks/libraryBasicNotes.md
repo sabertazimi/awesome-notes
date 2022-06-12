@@ -310,11 +310,12 @@ tags: [Web, Framework, Library]
 
 ### Ordinary CSS Utils
 
-- [Normalize: Modern Alternative to CSS Resets](https://github.com/necolas/normalize.css)
+- [Normalize: Modern Normalize Browser Default Style](https://github.com/sindresorhus/modern-normalize)
+- [Reset: Modern Bare-bones CSS Reset for Modern Web Development](https://github.com/hankchizljaw/modern-css-reset)
 - [Sanitize: Best-practices CSS Foundation](https://github.com/csstools/sanitize.css)
-- [Modern: Bare-bones CSS Reset for Modern Web Development](https://github.com/hankchizljaw/modern-css-reset)
+- [Normalize: Modern Alternative to CSS Resets](https://github.com/necolas/normalize.css)
+- [PostCSS Preset: Use Modern CSS](https://github.com/csstools/postcss-plugins)
 - [Tailwind Viewer: Local Tool for Visualizing Tailwind Configuration](https://github.com/rogden/tailwind-config-viewer)
-- [PostCSS Preset: Use Modern CSS](https://github.com/csstools/postcss-preset-env)
 
 ### CSS in JS Utils
 
