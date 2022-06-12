@@ -344,7 +344,7 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 }
 ```
 
-![Step Timing Function](./figures/StepTimingFunction.png)
+[![Step Timing Function](./figures/StepTimingFunction.png)](https://css-tricks.com/clever-uses-step-easing)
 
 ### Transition Direction
 
