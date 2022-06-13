@@ -259,6 +259,16 @@ body {
 }
 ```
 
+#### Side Box Shadow
+
+Bottom side box shadow:
+
+```css
+.box {
+  box-shadow: 0 5px 4px -4px black;
+}
+```
+
 #### Inset Box Shadow
 
 模拟边框:
