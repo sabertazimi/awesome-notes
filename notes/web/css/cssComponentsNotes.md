@@ -1584,10 +1584,15 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
 
 - `border` circle.
 - `background` circle.
-- `clip`/`clip-path` circle.
+- `clip-path` circle.
 - Pseudo element circle.
 
 ```css
+.circle-border {
+  overflow: hidden;
+  border-radius: 50%;
+}
+
 .circle-background {
   background-image: radial-gradient(#000 72%, transparent 0);
 }
@@ -1604,11 +1609,6 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
 
 .circle-clip-path {
   clip-path: circle(50%);
-}
-
-.circle-border {
-  overflow: hidden;
-  border-radius: 50%;
 }
 
 .circle::after {
@@ -1644,7 +1644,7 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
 
 - `border` triangle.
 - `background` triangle.
-- `clip`/`clip-path` triangle.
+- `clip-path` triangle.
 - Pseudo element triangle.
 
 ```css
@@ -1961,9 +1961,9 @@ body {
 
 ### Hover Animation
 
-- Hover button effects using [`background`](https://css-tricks.com/cool-hover-effects-using-background-properties).
-- Hover button effects using [`text shadow`](https://css-tricks.com/cool-hover-effects-that-use-css-text-shadow).
-- Hover button effects using [`clip` and `mask`](https://css-tricks.com/css-hover-effects-background-masks-3d).
+- Hover button effects using [background](https://css-tricks.com/cool-hover-effects-using-background-properties).
+- Hover button effects using [text shadow](https://css-tricks.com/cool-hover-effects-that-use-css-text-shadow).
+- Hover button effects using [clip and mask](https://css-tricks.com/css-hover-effects-background-masks-3d).
 
 ### Fade Animation
 
