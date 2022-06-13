@@ -265,6 +265,14 @@ body {
       5px 10px black;
   background: #58a;
 }
+
+/* 复古文字 */
+.retro-text {
+  color: white;
+  text-shadow: 1px 1px black, 2px 2px black, 3px 3px black, 4px 4px black,
+    5px 5px black, 6px 6px black, 7px 7px black, 8px 8px black;
+  background: hsl(0deg 50% 45%);
+}
 ```
 
 ### Box Shadow
