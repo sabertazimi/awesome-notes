@@ -2681,10 +2681,11 @@ li::before {
 
 ```html
 <div class="image-slider">
-  <div>
+  <div class="image-before">
     <img src="cat-before.jpg" alt="Before" />
   </div>
-  <img src="cat-after.jpg" alt="After" />
+  <img class="image-after" src="cat-after.jpg" alt="After" />
+  <input type="range" class="image-a11y-control" />
 </div>
 
 <style>
@@ -2722,6 +2723,16 @@ li::before {
     background-clip: content-box;
   }
 </style>
+
+<script>
+  /* Additional range input feature */
+  const range = document.querySelector('.image-a11y-control');
+  range.addEventListener('input', event => {
+    document.querySelector(
+      '.image-before'
+    ).style.width = `${event.target.value}%`;
+  });
+</script>
 ```
 
 ### User Select
