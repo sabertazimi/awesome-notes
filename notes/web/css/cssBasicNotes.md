@@ -819,6 +819,21 @@ h2::before {
 output -->
 ```
 
+### Backdrop Pseudo Element
+
+[`::backdrop`](https://developer.mozilla.org/docs/Web/CSS/::backdrop):
+
+```css
+/* Backdrop is only displayed when dialog is opened with dialog.showModal() */
+dialog::backdrop {
+  background: rgb(255 0 0 / 25%);
+}
+
+video::backdrop {
+  background-color: #448;
+}
+```
+
 ### Shadow DOM Pseudo Class and Element
 
 - `:host`: shadow DOM root element.
