@@ -564,22 +564,38 @@ p:hover {
 
 ### Background Attachment
 
+[`background-attachment`](https://developer.mozilla.org/docs/Web/CSS/background-attachment):
+
 - `scroll`: scrolls with the main view, but stays fixed inside the local view.
 - `local`: scrolls both with the main view and the local view.
 - `fixed`: stays fixed no matter what.
+
+#### Background Scroll View
+
 - 对于可以滚动的元素 (`overflow: scroll`),
-  当 `background-attachment: scroll` 时, 背景图不会随元素内容的滚动而滚动.
+  当 `background-attachment: scroll` 时,
+  背景图不会随元素内容的滚动而滚动 (fixed inside local view).
 - 对于可以滚动的元素 (`overflow: scroll`),
-  当 `background-attachment: local` 时, 背景图会随元素内容的滚动而滚动.
-- Parallax effect: `background-attachment: fixed`.
+  当 `background-attachment: local` 时,
+  背景图会随元素内容的滚动而滚动 (scroll with local view).
 
 ```css
-.bg {
-  background-attachment: scroll; /* 背景图相对于元素固定, 背景随页面滚动而移动, 即背景和内容绑定 */
-  background-attachment: local; /* 背景图相对于视口固定, 所以随页面滚动背景不动, 相当于背景被设置在了 body 上 */
-  background-attachment: fixed; /* 背景图相对于元素内容固定 */
+/**
+ * 纯白渐变背景随列表滚动而滚动, 灰度渐变背景不随列表滚动而滚动.
+ * 列表滚动时, 纯白渐变背景移出视口, 露出灰度渐变背景.
+ */
+.scrollable-list {
+  background: linear-gradient(#fff 30%, transparent), radial-gradient(at 50% 0, rgb(0
+          0 0 / 20%), transparent 70%);
+  background-repeat: no-repeat;
+  background-attachment: local, scroll;
+  background-size: 100% 50px, 100% 15px;
 }
 ```
+
+#### Background Parallax Effect
+
+Implement scroll parallax effect `background-attachment: fixed`:
 
 ```css
 /* parallax effect */
