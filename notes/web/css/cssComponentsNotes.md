@@ -242,6 +242,36 @@ li {
 }
 ```
 
+### Tab Navigation
+
+```css
+.tab > a {
+  position: relative;
+  display: inline-block;
+  padding: 0.3em 1em 0;
+}
+
+.tab > a::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background: #ccc;
+  background-image: linear-gradient(
+    hsl(0deg 0% 100% / 60%),
+    hsl(0deg 0% 100% / 0%)
+  );
+  border: 1px solid rgb(0 0 0 / 40%);
+  border-bottom: none;
+  border-radius: 0.5em 0.5em 0 0;
+  box-shadow: 0 0.15em white inset;
+  transform: perspective(0.5em) rotateX(5deg);
+  transform-origin: bottom;
+}
+```
+
 ## Footer
 
 ### Sticky Footer
