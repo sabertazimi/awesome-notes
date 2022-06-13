@@ -231,9 +231,39 @@ body {
   background: var(--color);
 }
 
+/* 新拟物文字 */
 .neumorphic-text {
   color: var(--color);
   text-shadow: var(--br-shadow), var(--tl-shadow);
+}
+
+/* 印刷文字 */
+.press-text {
+  color: hsl(210deg 13% 75%);
+  text-shadow: 0 -1px 1px black;
+  background: hsl(210deg 13% 40%);
+}
+
+/* 描边文字 */
+.stroked-text {
+  color: white;
+  text-shadow: 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+}
+
+/* 发光文字 */
+.glow-text {
+  color: #ffc;
+  text-shadow: 0 0 0.1em, 0 0 0.3em;
+  background: #203;
+}
+
+/* 凸起文字 */
+.extruded-text {
+  color: white;
+  text-shadow: 0 1px hsl(0deg 0% 85%), 0 2px hsl(0deg 0% 80%),
+    0 3px hsl(0deg 0% 75%), 0 4px hsl(0deg 0% 70%), 0 5px hsl(0deg 0% 65%), 0
+      5px 10px black;
+  background: #58a;
 }
 ```
 
