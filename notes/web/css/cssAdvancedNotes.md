@@ -420,6 +420,30 @@ p:hover {
 }
 ```
 
+可以利用多重背景实现 `border-image`:
+
+`background: linear-gradient(white, white) padding-box, var(--repeating-stripe-gradient)`,
+语法靠前的 `padding-box` 白色背景处于高层, 遮住大部分条纹背景,
+导致条纹背景只显示在 `border` 区域, 从而模拟实现 `border-image` 效果.
+
+```css
+.stripe-border {
+  padding: 1em;
+  background: linear-gradient(white, white) padding-box, repeating-linear-gradient(
+        -45deg,
+        red 0,
+        red 12.5%,
+        transparent 0,
+        transparent 25%,
+        #58a 0,
+        #58a 37.5%,
+        transparent 0,
+        transparent 50%
+      ) 0 / 5em 5em;
+  border: 1em solid transparent;
+}
+```
+
 ### Background Origin
 
 指定背景绘制起点:
