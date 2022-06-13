@@ -2061,30 +2061,110 @@ body {
 }
 ```
 
-#### Body Fade Animation
+#### Fade In Animation
 
 ```css
-@keyframes body-fade-in {
+@keyframes fade-in {
   from {
     opacity: 0;
+    transform: rotateX(-90deg);
   }
 
   to {
     opacity: 1;
+    transform: rotateX(0deg);
+  }
+}
+```
+
+#### Fade In Out Animation
+
+```css
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+```
+
+### Bounce Animation
+
+```css
+/* transform-origin: top center */
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(-30px);
+  }
+
+  80% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateY(0) translateY(0);
+  }
+}
+```
+
+### Rotate Animation
+
+```css
+/* transform-origin: top center */
+@keyframes horizonal-rotate-in {
+  0% {
+    opacity: 0;
+    transform: rotateY(-90deg) translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateY(0) translateY(0);
   }
 }
 
-@media screen and (prefers-reduced-motion: reduce) {
-  body {
-    animation: none;
+/* transform-origin: top right */
+@keyframes rotate-right-in {
+  0% {
+    opacity: 0;
+    transform: rotate(-30deg) translateX(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotate(0) translateX(0);
   }
 }
+```
 
-body {
-  animation-name: body-fade-in;
-  animation-duration: 2.5s;
-  animation-timing-function: ease;
-  animation-iteration-count: 1;
+### Fold Flip Animation
+
+```css
+/* transform-origin: top center */
+@keyframes fold-flip {
+  0% {
+    opacity: 0;
+    transform: rotateX(-90deg);
+  }
+
+  60% {
+    transform: rotateX(50deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateX(0);
+  }
 }
 ```
 
@@ -2221,6 +2301,30 @@ body {
 }
 ```
 
+### Tooltip Animation
+
+```css
+@keyframes tooltip {
+  0% {
+    opacity: 0;
+    transform: scale(0.1) rotate(30deg) translateY(50px) rotateX(90deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: rotate(-10deg) rotateX(-2deg);
+  }
+
+  70% {
+    transform: rotate(3deg);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+```
+
 ### Breath Animation
 
 ```css
@@ -2236,6 +2340,33 @@ body {
 
   70% {
     opacity: 1;
+  }
+}
+```
+
+### Pulse Animation
+
+```css
+@keyframes radial-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(0 0 0 / 50%);
+  }
+
+  100% {
+    box-shadow: 0 0 0 30px rgb(0 0 0 / 0%);
+  }
+}
+
+/* origin opacity is 0 */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
   }
 }
 ```
