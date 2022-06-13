@@ -1329,7 +1329,7 @@ Separate set horizontal and vertical radius to make well-designed shapes:
 }
 ```
 
-Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
+Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle).
 
 ```css
 .arrow-up {
@@ -1405,9 +1405,9 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 
 ### Stretch Line
 
-- background line
-- border line
-- pseudo element with `line-through` `text-decoration`
+- `background` line.
+- `border` line.
+- Pseudo element with `line-through` `text-decoration`.
 
 ```css
 .line {
@@ -1442,8 +1442,8 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 
 ### Dash Line
 
-- Background dash line.
-- Border dash line.
+- `background` dash line.
+- `border` dash line.
 - Pseudo element with `dashed` `text-decoration`.
 
 ```css
@@ -1487,12 +1487,11 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
 
 ### Grid Line
 
+- `background-image` for line color,
+- `background-size` for line gap.
+
 ```css
 .grid-line {
-  /**
-   * `background-image` for line color,
-   * `background-size` for line gap.
-   */
   background-color: #fff;
   background-image: linear-gradient(var(--line-color) 1px, transparent 0),
     linear-gradient(90deg, var(--line-color) 1px, transparent 0);
@@ -1501,6 +1500,20 @@ Mix `transparent` with `non-transparent` border to make shapes (e.g. triangle).
   border-bottom: 1px solid #e5e8eb;
   box-shadow: inset 0 15px 20px -15px #f6f7f9, inset -5px -15px 20px -15px
       #f6f7f9;
+}
+
+/**
+ * @see {@link play.csssecrets.io/blueprint}
+ */
+.nest-grid-line {
+  background: #58a;
+  background-image: linear-gradient(
+      var(--primary-line-color) 2px,
+      transparent 0
+    ), linear-gradient(90deg, var(--primary-line-color) 2px, transparent 0),
+    linear-gradient(var(--secondary-line-color) 1px, transparent 0),
+    linear-gradient(90deg, var(--secondary-line-color) 1px, transparent 0);
+  background-size: 75px 75px, 75px 75px, 15px 15px, 15px 15px;
 }
 ```
 
@@ -1533,6 +1546,8 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
 
 ### Dot
 
+`background` and `border` dot:
+
 ```css
 .icon-dot {
   display: inline-block;
@@ -1549,6 +1564,19 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
   /* Cycle ring */
   border: 10px solid;
   border-radius: 50%;
+}
+```
+
+`radial-gradient` dot:
+
+```css
+/**
+ * @see {@link play.csssecrets.io/polka}
+ */
+.dot {
+  background: #655;
+  background-image: radial-gradient(tan 30%, transparent 0);
+  background-size: 30px 30px;
 }
 ```
 
