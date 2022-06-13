@@ -1592,6 +1592,16 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
   background-image: radial-gradient(#000 72%, transparent 0);
 }
 
+.circle-background-corner {
+  background: #58a;
+  background: radial-gradient(circle at top left, transparent 15px, #58a 0) top left,
+    radial-gradient(circle at top right, transparent 15px, #58a 0) top right,
+    radial-gradient(circle at bottom right, transparent 15px, #58a 0) bottom right,
+    radial-gradient(circle at bottom left, transparent 15px, #58a 0) bottom left;
+  background-repeat: no-repeat;
+  background-size: 50% 50%;
+}
+
 .circle-clip-path {
   clip-path: circle(50%);
 }
@@ -1719,6 +1729,31 @@ Background gradient square shape:
 ```
 
 ### Polygon
+
+Background gradient polygon:
+
+```css
+/**
+ * @see {@link play.csssecrets.io/bevel-corners-gradients}
+ */
+.polygon-background-corner {
+  background: #58a;
+  background: linear-gradient(135deg, transparent 15px, #58a 0) top left, linear-gradient(
+        -135deg,
+        transparent 15px,
+        #58a 0
+      ) top right,
+    linear-gradient(-45deg, transparent 15px, #58a 0) bottom right, linear-gradient(
+        45deg,
+        transparent 15px,
+        #58a 0
+      ) bottom left;
+  background-repeat: no-repeat;
+  background-size: 50% 50%;
+}
+```
+
+`clip-path` polygon:
 
 ```css
 .polygon {
