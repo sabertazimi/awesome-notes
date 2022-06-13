@@ -1941,8 +1941,9 @@ body {
 ### Sun Effect
 
 ```css
-.sun {
+.sun-rise {
   filter: contrast(0.34) brightness(1.6) sepia(1) hue-rotate(10deg);
+  filter: sepia(1) saturate(4) hue-rotate(295deg);
 }
 ```
 
@@ -2121,7 +2122,7 @@ body {
 
 ```css
 /* transform-origin: top center */
-@keyframes horizonal-rotate-in {
+@keyframes horizontal-rotate-in {
   0% {
     opacity: 0;
     transform: rotateY(-90deg) translateY(30px);
