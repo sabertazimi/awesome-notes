@@ -528,6 +528,22 @@ body {
 - `<angular-color-hint>`: `<angle-percentage>`, 改变颜色的转换点位置.
 - `<angle-percentage>`: `<angle> | <percentage>`.
 
+:::tip Color Stop Position
+
+若后一个色标的位置值为 `0`,
+则它的位置总是会被浏览器调整为前一个色标的位置值:
+
+```css
+/* 条纹形状 */
+.stripe {
+  background: linear-gradient(yellow 30%, blue 0);
+  background: linear-gradient(yellow 33.3%, blue 0 66.6%, yellowgreen 0);
+  background-size: 100% 45px;
+}
+```
+
+:::
+
 ### Linear Gradient
 
 [Linear gradient](https://developer.mozilla.org/docs/Web/CSS/gradient/linear-gradient):
