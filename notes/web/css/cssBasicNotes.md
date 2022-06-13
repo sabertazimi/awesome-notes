@@ -2703,7 +2703,7 @@ li::before {
     top: 0;
     bottom: 0;
     left: 0;
-    width: 50%;
+    width: 50%; /* resizable width */
     max-width: 100%;
     overflow: hidden;
     resize: horizontal;
