@@ -582,7 +582,7 @@ a.btn-custom {
 
 ### Gradient Button
 
-#### Liner Gradient Button
+#### Linear Gradient Button
 
 ```css
 .btn {
