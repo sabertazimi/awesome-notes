@@ -1015,6 +1015,35 @@ img.alpha-mask {
 }
 ```
 
+若当前浏览器不支持 `backdrop-filter`,
+可使用 pseudo element + `filter` 进行模拟:
+
+```css
+/* 设置两张重合图片 */
+body,
+main::before {
+  background: url('tiger.jpg') 0 / cover fixed;
+}
+
+main {
+  position: relative;
+  overflow: hidden;
+  background: hsl(0deg 0% 100% / 30%);
+}
+
+/* 模糊文字背景图片 */
+main::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: -30px;
+  content: '';
+  filter: blur(20px);
+}
+```
+
 ### Blend Mode
 
 [`<blend-mode>`](https://developer.mozilla.org/docs/Web/CSS/blend-mode):
