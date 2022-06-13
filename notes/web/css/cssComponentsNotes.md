@@ -279,9 +279,9 @@ li {
 - 如果页面内容不足够长时, 页脚固定在浏览器窗口的底部.
 - 如果内容足够长时, 页脚固定在页面的最底部.
 
-5 种方法:
+#### Negative Margin Sticky Footer
 
-- negative bottom margin content-wrapper with **fixed height** footer.
+Negative bottom `margin` content-wrapper with **fixed `height`** footer:
 
 ```html
 <body>
@@ -315,7 +315,7 @@ li {
 </style>
 ```
 
-- negative top margin on **fixed height** footer.
+Negative top `margin` on **fixed `height`** footer:
 
 ```html
 <body>
@@ -348,7 +348,9 @@ li {
 </style>
 ```
 
-- `calc` on **fixed height** footer.
+#### Calculation Sticky Footer
+
+`calc` on **fixed height** footer:
 
 ```html
 <body>
@@ -367,7 +369,9 @@ li {
 </style>
 ```
 
-- Use `flex` on `body`.
+#### Flex Sticky Footer
+
+Use `flex` on `body`:
 
 ```html
 <body>
@@ -396,7 +400,9 @@ li {
 </style>
 ```
 
-- Use `grid` on `body`.
+#### Grid Sticky Footer
+
+Use `grid` on `body`:
 
 ```html
 <body>
@@ -421,7 +427,7 @@ li {
 </style>
 ```
 
-- Use `gird` with `min-content`.
+Use `gird` with `min-content`:
 
 ```html
 <body>
@@ -576,7 +582,7 @@ a.btn-custom {
 
 ### Gradient Button
 
-Liner gradient button:
+#### Liner Gradient Button
 
 ```css
 .btn {
@@ -648,7 +654,7 @@ Liner gradient button:
 }
 ```
 
-Radial gradient button:
+#### Radial Gradient Button
 
 ```css
 .ripple-button {
@@ -1308,6 +1314,8 @@ Use pseudo elements to construct circle and line:
 
 ### Border Shape
 
+#### Horizontal and Vertical Border
+
 Separate set horizontal and vertical radius to make well-designed shapes:
 
 ```css
@@ -1361,7 +1369,9 @@ Separate set horizontal and vertical radius to make well-designed shapes:
 }
 ```
 
-Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle).
+#### Transparent Border
+
+Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
 
 ```css
 .arrow-up {
@@ -1578,6 +1588,8 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
 
 ### Dot
 
+#### Border Dot
+
 `background` and `border` dot:
 
 ```css
@@ -1599,6 +1611,8 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
 }
 ```
 
+#### Gradient Dot
+
 `radial-gradient` dot:
 
 ```css
@@ -1614,17 +1628,12 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
 
 ### Circle
 
-- `border` circle.
 - `background` circle.
+- `border` circle.
 - `clip-path` circle.
 - Pseudo element circle.
 
 ```css
-.circle-border {
-  overflow: hidden;
-  border-radius: 50%;
-}
-
 .circle-background {
   background-image: radial-gradient(#000 72%, transparent 0);
 }
@@ -1637,6 +1646,11 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
     radial-gradient(circle at bottom left, transparent 15px, #58a 0) bottom left;
   background-repeat: no-repeat;
   background-size: 50% 50%;
+}
+
+.circle-border {
+  overflow: hidden;
+  border-radius: 50%;
 }
 
 .circle-clip-path {
@@ -1674,22 +1688,14 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
 
 ### Triangle
 
-- `border` triangle.
 - `background` triangle.
+- `border` triangle.
 - `clip-path` triangle.
 - Pseudo element triangle.
 
 ```css
 .triangle {
-  background: linear-gradient(<deg>, #000 50%, transparent 0);
-}
-
-/* clip path */
-.arrow-right {
-  width: 20px;
-  height: 32px;
-  clip-path: polygon(0 0, 0 100%, 100% 50%);
-  background-color: #e888a3;
+  background: linear-gradient(45deg, #000 50%, transparent 0);
 }
 
 /* transparent border */
@@ -1699,6 +1705,14 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
   border-right: 16px solid transparent;
   border-bottom: 20px solid #8888e8;
   border-left: 16px solid transparent;
+}
+
+/* clip path */
+.arrow-right {
+  width: 20px;
+  height: 32px;
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
+  background-color: #e888a3;
 }
 
 /* pseudo element + hidden overflow */
@@ -1722,9 +1736,8 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
   transform-origin: 0 0;
 }
 
-/* HTML Entities */
-
 /**
+ * pseudo element + HTML5 entities:
  * ◄ : &#9668;
  * ► : &#9658;
  * ▼ : &#9660;
@@ -1732,6 +1745,34 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
  */
 .arrow::before {
   content: '&#9660';
+}
+```
+
+```css
+/**
+ * @see {@link play.csssecrets.io/folded-corner-realistic}
+ */
+.note {
+  position: relative;
+  background: #58a; /* 回退样式 */
+  background: linear-gradient(-150deg, transparent 1.5em, #58a 0);
+}
+
+.note::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.73em;
+  height: 3em;
+  content: '';
+  background: linear-gradient(
+      to left bottom,
+      transparent 50%,
+      rgb(0 0 0 / 20%) 0,
+      rgb(0 0 0 / 40%)
+    ) 100% 0 no-repeat;
+  transform: translateY(-1.3em) rotate(-30deg);
+  transform-origin: bottom right;
 }
 ```
 
@@ -1762,6 +1803,8 @@ Background gradient square shape:
 
 ### Polygon
 
+#### Gradient Polygon
+
 Background gradient polygon:
 
 ```css
@@ -1784,6 +1827,8 @@ Background gradient polygon:
   background-size: 50% 50%;
 }
 ```
+
+#### Clip Path Polygon
 
 `clip-path` polygon:
 
@@ -1824,6 +1869,8 @@ const polygon = (n = 3) => {
   return `polygon(${points.join(',')})`;
 };
 ```
+
+#### Transform Polygon
 
 `transform` polygon:
 
