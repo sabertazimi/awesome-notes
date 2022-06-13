@@ -1697,8 +1697,10 @@ const polygon = (n = 3) => {
 
 ### Square
 
+Background gradient square shape:
+
 ```css
-.checkerboard {
+.checkerboard-linear-gradient {
   background: #eee;
   background-image: linear-gradient(
       45deg,
@@ -1709,6 +1711,11 @@ const polygon = (n = 3) => {
           0 0 0 / 25%
         ) 0);
   background-position: 0 0, 15px 15px;
+  background-size: 30px 30px;
+}
+
+.checkerboard-conic-gradient {
+  background: repeating-conic-gradient(#bbb 0, #bbb 25%, #eee 0, #eee 50%);
   background-size: 30px 30px;
 }
 ```
