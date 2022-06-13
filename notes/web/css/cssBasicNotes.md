@@ -1844,6 +1844,19 @@ Web default:
 | pre-line     | 保留   | 合并         | 换行     | 删除     |
 | break-spaces | 保留   | 保留         | 换行     | 换行     |
 
+```css
+dd + dt::before {
+  white-space: pre;
+  content: '\A';
+}
+
+dd + dd::before {
+  margin-left: -0.25em;
+  font-weight: normal;
+  content: ', ';
+}
+```
+
 ### Text Wrap
 
 [Text wrapping and word breaking](https://codersblock.com/blog/deep-dive-into-text-wrapping-and-word-breaking):
