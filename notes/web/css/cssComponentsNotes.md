@@ -1795,6 +1795,37 @@ const polygon = (n = 3) => {
 };
 ```
 
+`transform` polygon:
+
+```css
+/* 平行四边形 */
+.button::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  content: ''; /* 用伪元素来生成一个矩形 */
+  background: #58a;
+  transform: skew(45deg);
+}
+
+/* 梯形 */
+.tab::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  content: ''; /* 用伪元素来生成一个矩形 */
+  background: #58a;
+  transform: scaleY(1.3) perspective(0.5em) rotateX(5deg);
+  transform-origin: bottom;
+}
+```
+
 ## Filter and Blend Effects
 
 ### Fusion Effect
