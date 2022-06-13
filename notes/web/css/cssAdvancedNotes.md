@@ -269,6 +269,22 @@ Bottom side box shadow:
 }
 ```
 
+Right and bottom sides box shadow:
+
+```css
+.box {
+  box-shadow: 3px 3px 6px -3px black;
+}
+```
+
+Two opposite sides box shadow:
+
+```css
+.box {
+  box-shadow: 5px 0 5px -5px black, -5px 0 5px -5px black;
+}
+```
+
 #### Inset Box Shadow
 
 模拟边框:
