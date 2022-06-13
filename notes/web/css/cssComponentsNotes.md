@@ -1695,6 +1695,24 @@ const polygon = (n = 3) => {
 }
 ```
 
+### Square
+
+```css
+.checkerboard {
+  background: #eee;
+  background-image: linear-gradient(
+      45deg,
+      rgb(0 0 0 / 25%) 25%,
+      transparent 0 75%,
+      rgb(0 0 0 / 25%) 0
+    ), linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0 75%, rgb(
+          0 0 0 / 25%
+        ) 0);
+  background-position: 0 0, 15px 15px;
+  background-size: 30px 30px;
+}
+```
+
 ## Filter and Blend Effects
 
 ### Fusion Effect
