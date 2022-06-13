@@ -8,9 +8,11 @@ tags: [Web, CSS]
 
 # CSS Components Notes
 
-## Resizable Class
+## Utilities
 
-[CodePen Demo](https://codepen.io/ZeroX-DG/pen/vjdoYe)
+### Resizable Class
+
+[Resizable `div`](https://codepen.io/ZeroX-DG/pen/vjdoYe):
 
 ```ts
 // bottom-right:
@@ -34,7 +36,7 @@ new_x = element_original_x + (mouseX - original_mouseX);
 new_y = element_original_y + (mouseY - original_mouseY);
 ```
 
-## Hidden Class
+### Hidden Class
 
 - `display: none`: 元素不在 DOM 流.
 - `visibility: hidden`: 元素在 DOM 流, 隐藏不可见, 不可触发事件.
@@ -111,7 +113,7 @@ h1::after {
 
 ## Landing Page
 
-### Jumbotron Image
+### Jumbotron Background Image
 
 ```css
 h1 {
@@ -1757,8 +1759,23 @@ Background gradient polygon:
 
 ```css
 .polygon {
+  /* 菱形 */
   clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+
+  /* 矩形箭头 */
   clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+
+  /* 八边形 */
+  clip-path: polygon(
+    20px 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0 calc(100% - 20px),
+    0 20px
+  );
 }
 ```
 
