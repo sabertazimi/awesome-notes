@@ -1034,27 +1034,18 @@ Pseudo element switch from circle to circle:
 
 ```css
 .overlay {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   background: rgb(0 0 0 / 50%);
 }
 ```
 
-### Clip Modal
-
-图片剪裁的矩形镂空效果:
+### Box Shadow Modal
 
 ```css
-.crop {
-  overflow: hidden;
-}
-
-.crop > .crop-area {
-  width: 80px;
-  height: 80px;
-  cursor: move;
-  outline: 256px solid rgb(0 0 0 / 50%);
+.modal {
+  box-shadow: 0 0 0 50vmax rgb(0 0 0 / 80%);
 }
 ```
 
@@ -1100,6 +1091,23 @@ Pseudo element switch from circle to circle:
   vertical-align: middle;
   background-color: #fff;
   border-radius: 6px;
+}
+```
+
+### Clip Modal
+
+图片剪裁的矩形镂空效果:
+
+```css
+.crop {
+  overflow: hidden;
+}
+
+.crop > .crop-area {
+  width: 80px;
+  height: 80px;
+  cursor: move;
+  outline: 256px solid rgb(0 0 0 / 50%);
 }
 ```
 
