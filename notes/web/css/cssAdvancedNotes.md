@@ -698,6 +698,7 @@ body {
 .image-container > img {
   position: absolute;
   width: 100%;
+  max-width: 100%;
   height: 100%;
   object-fit: cover;
 }
@@ -2179,6 +2180,7 @@ img,
 video,
 object {
   box-sizing: border-box;
+  max-width: 100%;
 }
 ```
 
