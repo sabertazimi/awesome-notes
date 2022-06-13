@@ -12,7 +12,7 @@ tags: [Web, CSS]
 
 ### Border Radius
 
-`border-radius`:
+[`border-radius`](https://developer.mozilla.org/docs/Web/CSS/border-radius):
 
 - 不支持负值.
 - 圆角以外的区域不可点击, 无法响应 `click` 事件.
@@ -40,7 +40,10 @@ tags: [Web, CSS]
 }
 ```
 
-圆角曲线重叠时, 所有圆角半径都缩小至 $f$ 倍:
+![Border Radius](./figures/BorderRadius.png)
+
+[圆角曲线重叠时](http://w3.org/TR/css3-background/#corner-overlap),
+所有圆角半径都缩小至 $f$ 倍:
 
 $$
 f =
