@@ -2679,6 +2679,51 @@ li::before {
 }
 ```
 
+```html
+<div class="image-slider">
+  <div>
+    <img src="cat-before.jpg" alt="Before" />
+  </div>
+  <img src="cat-after.jpg" alt="After" />
+</div>
+
+<style>
+  .image-slider {
+    position: relative;
+    display: inline-block;
+  }
+
+  .image-slider img {
+    display: block;
+    user-select: none;
+  }
+
+  .image-slider > div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    max-width: 100%;
+    overflow: hidden;
+    resize: horizontal;
+  }
+
+  .image-slider > div::before {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 12px;
+    height: 12px;
+    padding: 5px;
+    cursor: ew-resize;
+    content: '';
+    background: linear-gradient(-45deg, white 50%, transparent 0);
+    background-clip: content-box;
+  }
+</style>
+```
+
 ### User Select
 
 禁止图文被选中, 保持和原生 App 一样的文字选中体验:
