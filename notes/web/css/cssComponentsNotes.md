@@ -1693,30 +1693,6 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
 }
 ```
 
-### Polygon
-
-```ts
-const polygon = (n = 3) => {
-  const deg = (2 * Math.PI) / n;
-  const points = [];
-
-  for (let i = 0; i < n; ++i) {
-    const theta = deg * i;
-    const x = `${50 * Math.cos(theta) + 50}%`;
-    const y = `${50 * Math.sin(theta) + 50}%`;
-    points.push(`${x} ${y}`);
-  }
-
-  return `polygon(${points.join(',')})`;
-};
-```
-
-```css
-.polygon {
-  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
-}
-```
-
 ### Square
 
 Background gradient square shape:
@@ -1740,6 +1716,31 @@ Background gradient square shape:
   background: repeating-conic-gradient(#bbb 0, #bbb 25%, #eee 0, #eee 50%);
   background-size: 30px 30px;
 }
+```
+
+### Polygon
+
+```css
+.polygon {
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+```
+
+```ts
+const polygon = (n = 3) => {
+  const deg = (2 * Math.PI) / n;
+  const points = [];
+
+  for (let i = 0; i < n; ++i) {
+    const theta = deg * i;
+    const x = `${50 * Math.cos(theta) + 50}%`;
+    const y = `${50 * Math.sin(theta) + 50}%`;
+    points.push(`${x} ${y}`);
+  }
+
+  return `polygon(${points.join(',')})`;
+};
 ```
 
 ## Filter and Blend Effects
