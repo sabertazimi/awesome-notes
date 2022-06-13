@@ -369,6 +369,14 @@ table {
 
 ## Design Principles
 
+### Cicada Principle
+
+[禅原则](https://www.sitepoint.com/the-cicada-principle-and-why-it-matters-to-web-designers):
+
+当用户注意到一个有辨识度的特征 (比如木纹上的节疤) 在以固定的规律循环重复时,
+那它试图营造的自然随机性就会立刻崩塌.
+使用 CSS 实现形状时, 应尽可能地重现大自然的随机性.
+
 ### 费茨定律
 
 人机交互和人体工程学中人类活动的模型,
