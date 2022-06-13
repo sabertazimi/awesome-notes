@@ -1608,6 +1608,28 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
 }
 ```
 
+### Ellipse
+
+```css
+/**
+ * @see {@link play.csssecrets.io/half-ellipse}
+ * @see {@link play.csssecrets.io/quarter-ellipse}
+ */
+.ellipse {
+  border-radius: 50% / 50%;
+  border-radius: 50% / 100% 100% 0 0;
+  border-radius: 50% / 0 0 100% 100%;
+  border-radius: 100% 0 0 100% / 50%;
+  border-radius: 0 100% 100% 0 / 50%;
+  border-radius: 100% 0 0;
+  border-radius: 0 100% 0 0;
+  border-radius: 0 0 100%;
+  border-radius: 0 0 0 100%;
+}
+```
+
+![Ellipse Border](./figures/EllipseBorder.png)]
+
 ### Triangle
 
 - `border` triangle.
