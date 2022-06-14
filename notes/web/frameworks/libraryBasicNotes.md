@@ -331,6 +331,7 @@ tags: [Web, Framework, Library]
 
 ### Color Utils
 
+- [Prism: GitHub Color Palettes Creating and Maintaining Tool](https://github.com/primer/prism)
 - [Chroma: All Kinds of Color Manipulations](https://github.com/gka/chroma.js)
 - [Color: Color Conversion and Manipulation](https://github.com/Qix-/color)
 - [Culori: Color Conversion, Interpolation, Difference Formulas, Blending Functions](https://github.com/Evercoder/culori)
