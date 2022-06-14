@@ -339,10 +339,12 @@ include `padding-top` and `padding-bottom`:
 
 ### Box Model
 
-- Inline-level box:
+[Box model](https://learn.shayhowe.com/html-css/opening-the-box-model):
+
+- [Inline-level box](https://developer.mozilla.org/docs/Web/HTML/Inline_elements):
   `display` 属性为 `inline`, `inline-block`, `inline-table` 的元素,
   会生成 inline-level box, 并且参与 `Inline Formatting Context` (IFC).
-- Block-level box:
+- [Block-level box](https://developer.mozilla.org/docs/Web/HTML/Block-level_elements):
   `display` 属性为 `block`, `list-item`, `table` 的元素,
   会生成 block-level box, 并且参与 `Block Formatting Context` (BFC).
 - `Flex Formatting Context` (FFC).
@@ -350,11 +352,18 @@ include `padding-top` and `padding-bottom`:
 
 ### Inline Box Model
 
+[Inline box model](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model):
+
+- Not break onto a new line.
+- `width` and `height` properties will not apply.
+- Vertical `padding`, `border` and `margin` will not push away other inline boxes.
+- Horizontal `padding`, `border` and `margin` will push away other inline boxes.
+
 [![Inline Box Model](./figures/InlineBoxModel.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Flow_Layout/Intro_to_formatting_contexts#inline_formatting_contexts)
 
 #### Content Area
 
-Character box/em-box/selection box):
+Character box/em-box/selection box:
 
 一种围绕文字看不见的盒子,
 其大小仅受字符本身特性控制,
@@ -410,7 +419,14 @@ Character box/em-box/selection box):
 
 :::
 
-### Block Formatting Context
+### Block Box Model
+
+[Block box model](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model):
+
+- Break onto a new line.
+- Extend in inline direction to fill space available in its container.
+- `width` and `height` properties are respected.
+- `padding`, `border` and `margin` will push away other elements.
 
 #### Block Formatting Context Features
 
