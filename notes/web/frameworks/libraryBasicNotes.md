@@ -332,10 +332,10 @@ tags: [Web, Framework, Library]
 ### Color Utils
 
 - [Prism: GitHub Color Palettes Creating and Maintaining Tool](https://github.com/primer/prism)
+- [Color2K: Color Parsing and Manipulation](https://github.com/ricokahler/color2k)
 - [Chroma: All Kinds of Color Manipulations](https://github.com/gka/chroma.js)
 - [Color: Color Conversion and Manipulation](https://github.com/Qix-/color)
 - [Culori: Color Conversion, Interpolation, Difference Formulas, Blending Functions](https://github.com/Evercoder/culori)
-- [CloudFlareColor: Online Website Color Palette Grab Tool](https://github.com/cloudflare/color)
 - [ColorThief: Image Color Palette Grab Tool](https://github.com/lokesh/color-thief)
 
 ### Gradient Utils
