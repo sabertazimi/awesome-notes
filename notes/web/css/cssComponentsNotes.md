@@ -2465,6 +2465,31 @@ body {
 }
 ```
 
+### Typing Animation
+
+```css
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes caret {
+  50% {
+    border-right-color: transparent;
+  }
+}
+
+h1 {
+  width: 15ch;
+  overflow: hidden;
+  font: bold 200% Consolas, Monaco, monospace;
+  white-space: nowrap;
+  border-right: 0.05em solid;
+  animation: typing 8s steps(15), caret 1s steps(1) infinite;
+}
+```
+
 ## CSS Components Reference
 
 - CSS [inspiration](https://github.com/chokcoco/CSS-Inspiration).
