@@ -2280,6 +2280,10 @@ wait(5000, abortController.signal)
   });
 ```
 
+#### Abort Reference
+
+- Abort controller [snippets](https://whistlr.info/2022/abortcontroller-is-your-friend).
+
 ### Asynchronous API Comparison
 
 - `promise` 和 `async/await` 专门用于处理异步操作.
