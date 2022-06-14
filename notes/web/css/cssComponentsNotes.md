@@ -2194,6 +2194,8 @@ body {
 
 ### Rotate Animation
 
+#### Rotate In Animation
+
 ```css
 /* transform-origin: top center */
 @keyframes horizontal-rotate-in {
@@ -2219,6 +2221,30 @@ body {
     opacity: 1;
     transform: rotate(0) translateX(0);
   }
+}
+```
+
+#### Circular Spin Animation
+
+```css
+/**
+ * @see {@link play.csssecrets.io/circular}
+ */
+@keyframes spin {
+  from {
+    transform: rotate(0turn) translateY(-150px) translateY(50%) rotate(1turn);
+  }
+
+  to {
+    transform: rotate(1turn) translateY(-150px) translateY(50%) rotate(0turn);
+  }
+}
+
+.avatar {
+  width: 50px;
+  overflow: hidden;
+  border-radius: 50%;
+  animation: spin 3s infinite linear;
 }
 ```
 
