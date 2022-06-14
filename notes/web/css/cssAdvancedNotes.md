@@ -1952,6 +1952,15 @@ Focusable areas:
 - `:focus-visible`.
 - `:focus`.
 
+:::tip HTML Order vs CSS Order
+
+[HTML source order vs CSS display order](https://adrianroselli.com/2015/10/html-source-order-vs-css-display-order):
+
+`float`/`absolute`/`flex`/`grid` CSS display order
+can't change HTML source `tab` order.
+
+:::
+
 ## CSS Performance
 
 ### Will Change
