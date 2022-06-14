@@ -436,7 +436,6 @@ await expect(asyncCall()).rejects.toThrowError();
 
 ```tsx
 // react-dom.js
-import React from 'react';
 const reactDom = jest.requireActual('react-dom');
 
 function mockCreatePortal(element, target) {
@@ -672,6 +671,50 @@ async function run(arg = '.') {
 }
 
 run(process.argv[2]);
+```
+
+#### Jest Native Runner
+
+Implement component testing with
+[native `node:test` module](https://whistlr.info/2022/test-react-builtin):
+
+```tsx
+import assert from 'node:assert';
+import test from 'node:test';
+import jsdom from 'jsdom';
+import { cleanup, render } from '@testing-library/react';
+
+const j = new jsdom.JSDOM(undefined, {
+  url: 'http://localhost', // Many APIs are confused without being "on a real URL"
+  pretendToBeVisual: true, // This adds dummy requestAnimationFrame and friends
+});
+
+// We need to add everything on JSDOM's window object to global scope.
+// We don't add anything starting with _, or anything that's already there.
+Object.getOwnPropertyNames(j.window)
+  .filter(k => !k.startsWith('_') && !(k in global))
+  .forEach(k => (global[k] = j.window[k]));
+
+// Finally, tell React 18+ that we are not really a browser.
+global.IS_REACT_ACT_ENVIRONMENT = true;
+
+const reactTest = (name, fn) => {
+  return test(name, () => {
+    cleanup(); // always cleanup first
+    return fn();
+  });
+};
+
+const FooComponent = ({ text }: { text: string }) => (
+  <div>
+    Hello <span data-testid="hold">{text}</span>
+  </div>
+);
+
+reactTest('test component', () => {
+  const result = render(<FooComponent name={Sam} />);
+  assert.strictEqual(result.getByTestId('hold').textContent, 'Sam');
+});
 ```
 
 ### Jest Performance
