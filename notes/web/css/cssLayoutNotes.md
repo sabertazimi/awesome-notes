@@ -1219,10 +1219,8 @@ Flexbox 子元素:
 
 `flex-direction`:
 
-- `row`.
-- `row-reverse`.
-- `column`.
-- `column-reverse`.
+- `row | row-reverse | column | column-reverse`.
+- Change flex alignment direction and start line too.
 
 #### Flex Wrap
 
