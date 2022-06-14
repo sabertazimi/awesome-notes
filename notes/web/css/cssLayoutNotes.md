@@ -1392,6 +1392,69 @@ main {
 
 [![Grid Layout](./figures/GridLayout.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout)
 
+### Grid Box Width
+
+#### Grid Item Automatic Minimum Size
+
+Grid item default `min-width` is set to `auto`,
+grid item [can't be smaller than its children](https://css-tricks.com/another-collection-of-interesting-facts-about-css-grid/#aa-automatic-minimum-size-of-grid-items):
+
+```html
+<div class="grid">
+  <div class="item">
+    <p>Very very very very very long sentence.</p>
+  </div>
+  <div class="item">
+    <p>Very very very very very long sentence.</p>
+  </div>
+  <div class="item">
+    <p>Very very very very very long sentence.</p>
+  </div>
+  <div class="item">
+    <p>Very very very very very long sentence.</p>
+  </div>
+  <div class="item">
+    <p>Very very very very very long sentence.</p>
+  </div>
+  <div class="item">
+    <p>Very very very very very long sentence.</p>
+  </div>
+</div>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
+
+  /**
+   * Grid item default `min-width` is `auto`,
+   * 导致 grid item 内的段落完整显示整行长句.
+   */
+  .item {
+    border: 1px solid red;
+  }
+
+  /**
+   * Grid item 内的段落正常截断.
+   */
+  .item-fixed {
+    /* Method 1 */
+    min-width: 0;
+
+    /* Method 2 */
+    overflow: hidden;
+  }
+
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
+```
+
 ### Grid Property
 
 Parent property:
@@ -1982,7 +2045,7 @@ a.button::before {
 
 ### Centering Pattern Reference
 
-- Centering CSS complete [guide](https://css-tricks.com/centering-css-complete-guide).
+- Centering layout complete [guide](https://css-tricks.com/centering-css-complete-guide).
 
 ## Layout Reference
 
