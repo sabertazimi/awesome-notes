@@ -352,7 +352,7 @@ include `padding-top` and `padding-bottom`:
 
 ### Inline Box Model
 
-[Inline box model](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model):
+[Inline box model](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model#the_box_model_and_inline_boxes):
 
 - Not break onto a new line.
 - `width` and `height` properties will not apply.
@@ -360,6 +360,16 @@ include `padding-top` and `padding-bottom`:
 - Horizontal `padding`, `border` and `margin` will push away other inline boxes.
 
 [![Inline Box Model](./figures/InlineBoxModel.png)](https://developer.mozilla.org/docs/Web/CSS/CSS_Flow_Layout/Intro_to_formatting_contexts#inline_formatting_contexts)
+
+:::caution Inline Block Element
+
+[`display: inline-block`](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model#using_display_inline-block):
+
+- Not break onto a new line.
+- `width` and `height` properties are respected.
+- `padding`, `border` and `margin` will push away other elements.
+
+:::
 
 #### Content Area
 
