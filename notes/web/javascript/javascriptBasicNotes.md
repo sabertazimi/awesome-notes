@@ -1904,11 +1904,11 @@ Temporal.Instant.fromEpochMilliseconds(Math.min.apply(null, dateArrays));
 #### Temporal Display
 
 ```ts
-new Intl.DateTimeFormat('en-US', {
+new Intl.DateTimeFormat('en-GB', {
   dateStyle: 'full',
   timeStyle: 'medium',
 }).format(Temporal.Now.zonedDateTimeISO());
-new Intl.DateTimeFormat('en-US', { weekday: 'short', hour: 'numeric' }).format(
+new Intl.DateTimeFormat('de-DE', { weekday: 'short', hour: 'numeric' }).format(
   Temporal.Now.zonedDateTimeISO()
 );
 

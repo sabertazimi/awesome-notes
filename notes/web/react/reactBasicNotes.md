@@ -2139,7 +2139,7 @@ export default {
 ```
 
 ```ts
-// locale/en-US.js
+// locale/en-GB.js
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   hello: 'Hello，{name}',
