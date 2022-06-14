@@ -338,6 +338,9 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
   - `step-start`.
   - `step-end`.
   - `steps(<integer>[, jump-start | jump-end | jump-none | jump-both | start | end]?)`.
+  - 可用
+    animated `background-position` + `<step-timing-function>` + image sprites
+    [模拟 GIFs](https://demo.cssworld.cn/new/5/4-6.php).
 
 ```css
 :root {
