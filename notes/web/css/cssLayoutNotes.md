@@ -245,7 +245,7 @@ Margin collapsing only happen to **normal** block box **vertical** direction:
 
 #### Invalid Margin
 
-- `display: inline` 非替换元素 `vertical margin` 无效: e.g `<img>`.
+- `display: inline` 非替换元素 vertical `margin` 无效.
 - `display: table-cell`/`display: table-row` 元素 `margin` 无效: e.g `<tr>`, `<td>`.
 - `position: absolute` 绝对定位元素未定位方向 (`auto`) `margin`:
   `.absolute { top: 10%; left: 30%; }` `margin-right` 与 `margin-bottom` 改变了外部尺寸,
