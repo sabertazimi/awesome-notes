@@ -464,8 +464,8 @@ BFC 是页面上的一个隔离的独立容器 (隔离性):
 
 - 根元素或其它包含它的元素.
 - `overflow`: not `visible` (e.g `hidden`).
-- `float`: not `none` (e.g `left`/`right`).
-- `position`: not `relative`/`static` (e.g `absolute`/`fixed`).
+- `position`: not `static`/`relative` (e.g `absolute`/`fixed`).
+- `float` elements.
 - `display`: `inline-block`.
 - `display`: `table-cell`/`table-caption`/`table-*h`.
 - `display`: `flow-root`.
@@ -698,8 +698,8 @@ article a {
 
 ### Static Position
 
-- `top`/`bottom`/`left`/`right`/`inset`/`z-index` have **no effect**.
 - Normal flow.
+- `top`/`bottom`/`left`/`right`/`inset`/`z-index` have **no effect**.
 
 ### Relative Position
 
@@ -726,8 +726,9 @@ article a {
   `.fluid { position: absolute; left: 0; right: 0; }`.
 - 初始位置不被保留, 脱离文档流.
 - `float` computed to `float: none`.
-- `display` `inline-table` computed to `table`.
-- `display` `inline`/`inline-block`/`table-*` computed to `block`.
+- `display`:
+  - `inline-table` computed to `table`.
+  - `inline`/`inline-block`/`table-*` computed to `block`.
 
 ```css
 .tooltip {
@@ -792,8 +793,9 @@ article a {
 - 可使用 `top`/`bottom`/`left`/`right`/`inset` 属性进行定位.
 - 初始位置不被保留, 脱离文档流.
 - `float` computed to `float: none`.
-- `display` `inline-table` computed to `table`.
-- `display` `inline`/`inline-block`/`table-*` computed to `block`.
+- `display`:
+  - `inline-table` computed to `table`.
+  - `inline`/`inline-block`/`table-*` computed to `block`.
 
 ### Sticky Position
 
@@ -1976,3 +1978,8 @@ a.button::before {
 ### Centering Pattern Reference
 
 - Centering CSS complete [guide](https://css-tricks.com/centering-css-complete-guide).
+
+## Layout Reference
+
+- CSS box [model](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/The_box_model).
+- CSS layout [guide](https://www.smashingmagazine.com/2018/05/guide-css-layout).
