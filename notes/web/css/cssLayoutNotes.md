@@ -1316,7 +1316,7 @@ Alignment with `margin`:
 }
 ```
 
-### Flex Centering
+#### Flex Centering Alignment
 
 ```css
 /* 子元素全部居中对齐 */
@@ -1386,6 +1386,7 @@ main {
 ### Flex Reference
 
 - Flexbox complete [guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox).
+- Flexbox alignment [guide](https://developer.mozilla.org/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container).
 
 ## Grid Pattern
 
