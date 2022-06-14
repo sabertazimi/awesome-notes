@@ -612,7 +612,7 @@ Separate focus styles:
   select `input` with placeholder, 可用于控制输入样式.
 
 ```css
-@media screen and (prefers-reduced-motion: reduce) {
+@media only screen and (prefers-reduced-motion: reduce) {
   .msg {
     transition: none;
   }

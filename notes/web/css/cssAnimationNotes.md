@@ -315,6 +315,12 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
   transition: all 0s ease 0s;
   transition: transform 0.5s ease-in-out 0.2s;
 }
+
+@media only screen and (prefers-reduced-motion: reduce) {
+  .element {
+    transition: none;
+  }
+}
 ```
 
 ### Transition Timing Function
@@ -400,7 +406,7 @@ Transition animation get trigger
 as css style of element changed (class changed):
 
 ```css
-@media screen and (prefers-reduced-motion: reduce) {
+@media only screen and (prefers-reduced-motion: reduce) {
   .element {
     transition: none;
   }
@@ -486,7 +492,7 @@ panel.style.transform = 'scale(1)';
   `paused`/`running`.
 
 ```css
-@media screen and (prefers-reduced-motion: reduce) {
+@media only screen and (prefers-reduced-motion: reduce) {
   .element {
     animation: none;
   }
@@ -537,7 +543,7 @@ div {
 ```
 
 ```css
-@media screen and (prefers-reduced-motion: reduce) {
+@media only screen and (prefers-reduced-motion: reduce) {
   .to-animate {
     animation: none;
   }
@@ -605,7 +611,7 @@ animating an element along a defined path:
 - Play: `transition: transform .2s linear`.
 
 ```css
-@media screen and (prefers-reduced-motion: reduce) {
+@media only screen and (prefers-reduced-motion: reduce) {
   .scale-up {
     transition: none;
   }

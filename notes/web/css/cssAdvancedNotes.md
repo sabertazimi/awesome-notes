@@ -1513,7 +1513,7 @@ const svgRectElement = document.createElementNS(
 
 ```css
 /* screen size : 500px ~ 1000px */
-@media screen and (min-width: 500px) and (max-width: 1000px) {
+@media only screen and (min-width: 500px) and (max-width: 1000px) {
   .container {
     width: 750px;
   }

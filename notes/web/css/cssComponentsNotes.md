@@ -1202,7 +1202,7 @@ body {
 
 ```css
 /* Rotate Fade-In Animation */
-@media screen and (prefers-reduced-motion: reduce) {
+@media only screen and (prefers-reduced-motion: reduce) {
   .slide {
     transition: none;
   }
@@ -2089,7 +2089,7 @@ body {
   vertical-align: -0.25ex;
 }
 
-@media screen and (prefers-reduced-motion: no-preference) {
+@media only screen and (prefers-reduced-motion: no-preference) {
   .dot::before {
     animation: dot1 3s infinite step-start both;
   }
@@ -2246,7 +2246,7 @@ body {
 ### Accordion Animation
 
 ```css
-@media screen and (prefers-reduced-motion: reduce) {
+@media only screen and (prefers-reduced-motion: reduce) {
   .menu {
     transition: none;
   }
@@ -2348,7 +2348,7 @@ body {
 ### Scale Up Animation
 
 ```css
-@media screen and (prefers-reduced-motion: reduce) {
+@media only screen and (prefers-reduced-motion: reduce) {
   .div {
     transition: none;
   }
