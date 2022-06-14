@@ -647,15 +647,36 @@ Separate focus styles:
 - `E F:last-of-type`: **相同类型** 的最后一个元素.
 - `E F:only-of-type`: 孩子中只有一种该元素.
 
+```css
+li:first-child:nth-last-child(4),
+li:first-child:nth-last-child(4) ~ li {
+  /* 当列表正好包含 4 项时, 命中所有列表项 */
+  color: darkblue;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+li:first-child:nth-last-child(n + 4),
+li:first-child:nth-last-child(n + 4) ~ li {
+  /* 当列表至少包含 4 项时, 命中所有列表项 */
+  color: darkblue;
+}
+
+li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6),
+li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6) ~ li {
+  /* 当列表包含 2 ~ 6 项时, 命中所有列表项 */
+  color: darkblue;
+}
+```
+
 :::tip N Calculation
 
 `n` start from `0`,
 calculation result limit to `> 0`:
 
 - `:nth-child(5n)`: `0, 5, 10, 15, ...` -> `5, 10, 15, ...`.
-- `:nth-child(3n+4)`: `4, 7, 10, 13, ...` -> `4, 7, 10, 13, ...`.
-- `:nth-child(-n+3)`: `3, 2, 1, 0, -1, ...` -> `3, 2, 1`.
-- `:nth-child(n+4):nth-child(-n+10)`:
+- `:nth-child(3n + 4)`: `4, 7, 10, 13, ...` -> `4, 7, 10, 13, ...`.
+- `:nth-child(-n + 3)`: `3, 2, 1, 0, -1, ...` -> `3, 2, 1`.
+- `:nth-child(n + 4):nth-child(-n + 10)`:
   `4, 5, 6, ...` + `10, 9, 8, ...` -> `4, 5, 6, 7, 8, 9, 10`.
 
 :::
