@@ -725,6 +725,11 @@ reactTest('test component', () => {
 - 多线程: 生成新线程耗费的资源.
 - 文件转译: `Jest` 会在执行到该文件再对它进行转译. 使用 `esbuild-jest`/`@swc/jest` 加速转译.
 
+### Jest Plugins
+
+- Jest debug [tool](https://github.com/nvh95/jest-preview).
+- Jest visual regression testing [tool](https://github.com/americanexpress/jest-image-snapshot).
+
 ## Cypress Testing
 
 When it comes to test heavy visual features,
