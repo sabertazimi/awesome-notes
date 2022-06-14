@@ -51,8 +51,15 @@ npm config set swc_binary_site https://npmmirror.com/mirrors/node-swc/
 
 ### Node Version Manager
 
-- [Rust Node Manager](https://github.com/Schniz/fnm)
-- [Node Version Manager](https://github.com/nvm-sh/nvm)
+- [Volta: Install and Run JS Tool Quickly and Seamlessly](https://github.com/volta-cli/volta)
+- [FNM: Rust Node Manager](https://github.com/Schniz/fnm)
+- [NVM: Node Version Manager](https://github.com/nvm-sh/nvm)
+
+```bash
+curl https://get.volta.sh | bash
+volta install node
+node -v
+```
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
