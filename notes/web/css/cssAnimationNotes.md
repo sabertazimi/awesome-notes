@@ -310,14 +310,9 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 - `transition-timing-function`: `<easing-function>`.
 
 ```css
-@media screen and (prefers-reduced-motion: reduce) {
-  .element {
-    transition: none;
-  }
-}
-
 .element {
   transition: property duration timing-function delay;
+  transition: all 0s ease 0s;
   transition: transform 0.5s ease-in-out 0.2s;
 }
 ```
