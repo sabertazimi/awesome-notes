@@ -201,7 +201,8 @@ ul > li {
 
 #### Percentage Margin
 
-Auto flow percentage `margin` calculate by `width`.
+Percentage `margin` calculate by `containing block` inline size (`width`),
+include `margin-top` and `margin-bottom`.
 
 #### Collapse Margin
 
@@ -255,7 +256,8 @@ Margin collapsing only happen to **normal** block box **vertical** direction:
 
 #### Percentage Padding
 
-Auto flow percentage `padding` calculate by `width`:
+Percentage `padding` calculate by `containing block` inline size (`width`),
+include `padding-top` and `padding-bottom`:
 
 ```css
 .box {
