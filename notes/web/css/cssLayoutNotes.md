@@ -219,6 +219,8 @@ include `margin-top` and `margin-bottom`.
   no `border`/`padding`/`inline content`/`height`/`min-height`
   to separate block's `margin-top` from its `margin-bottom`.
 
+[![Margin Collapse](./figures/MarginCollapse.svg)](https://www.jonathan-harrell.com/blog/what%E2%80%99s-the-deal-with-margin-collapse)
+
 `margin` collapsing calculation:
 
 - 正正取大值.
