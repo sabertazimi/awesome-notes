@@ -1991,6 +1991,24 @@ body {
   background: linear-gradient(to right, deepskyblue, deeppink);
   mix-blend-mode: lighten;
 }
+
+.gradient-stroked-text {
+  position: relative;
+  color: #191325;
+  text-shadow: 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+  background: #191325;
+}
+
+.gradient-stroked-text::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  background: linear-gradient(315deg, #78e56c, #127ac9);
+  mix-blend-mode: darken;
+}
 ```
 
 ### Sun Effect
