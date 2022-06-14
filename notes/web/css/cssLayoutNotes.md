@@ -801,7 +801,7 @@ article a {
 
 ### Sticky Position
 
-`position: sticky` + `top: XXX`:
+[`position: sticky` + `top: XXX`](https://developer.mozilla.org/docs/Learn/CSS/CSS_layout/Positioning#sticky_positioning):
 
 - 使元素相对于 non-`visible` `overflow` 祖先 (nearest **scrolling** ancestor) 布局:
   要利用 `position: sticky` 实现视窗定位效果, 最好保证祖先全为 `overflow: visible` 元素,
