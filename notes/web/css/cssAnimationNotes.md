@@ -487,8 +487,8 @@ panel.style.transform = 'scale(1)';
   - 不支持负值.
 - `animation-direction`:
   - `normal`: `0%->100%` 方向.
-  - `alternate`/`alternate-reverse`: 不断交替方向.
   - `reverse`: `100%->0%` 方向.
+  - `alternate`/`alternate-reverse`: 不断交替方向.
 - `animation-fill-mode`:
   `forwards`/`backwards`/`both`.
 - `animation-play-state`:
