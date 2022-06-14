@@ -1889,7 +1889,8 @@ h1.lines::after {
 - `flex`.
 - `grid`.
 
-Button label (`<a>`) vertical alignment:
+Button label (`<a>`) vertical alignment
+([行内块居中法](https://css-tricks.com/centering-in-the-unknown):
 
 ```css
 a.button::before {
@@ -1904,12 +1905,19 @@ a.button::before {
 
 - `top` + `margin`.
 - `top` + `translateY`.
-- `vertical-align: middle` + `display: table-cell`.
+- `vertical-align: middle` + `display: table-cell`:
+  [表格单元居中法](https://css-tricks.com/centering-in-the-unknown).
 - Vertical `padding`.
 - `flex`.
 - `grid`.
 
 ```css
+.viewport-centered-block {
+  width: 18em;
+  margin: 50vh auto 0;
+  transform: translateY(-50%);
+}
+
 .form-item-label {
   display: flex;
   flex-direction: row;
@@ -1920,6 +1928,13 @@ a.button::before {
 ### Mixing Centering Pattern
 
 ```css
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .dialog {
   position: absolute;
   top: 0;
