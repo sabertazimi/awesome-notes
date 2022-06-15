@@ -1060,6 +1060,8 @@ In `position`/`size`/`margin`/`padding`/`border`/`text alignment`:
 
 ### Scope Variables
 
+#### Inherited Variables
+
 CSS Variables 本质上具有继承特性,
 HTML 文档树中, 后代元素可以继承祖先元素的 CSS Variables:
 
@@ -1073,6 +1075,51 @@ HTML 文档树中, 后代元素可以继承祖先元素的 CSS Variables:
   </div>
 </div>
 ```
+
+#### Contextual Styling Variables
+
+[Contextual styling themes](https://simurai.com/blog/2018/04/01/contextual-styling):
+
+```css
+[data-theme='dark'] {
+  --fg: hsl(0deg 10% 70%);
+  --border: hsl(0deg 10% 10%);
+  --bg: hsl(0deg 0% 20%);
+  --button-bg: hsl(0deg 0% 25%);
+  --input-bg: hsl(0deg 0% 15%);
+}
+
+[data-theme='hero'] {
+  --fg: hsl(240deg 50% 90%);
+  --border: hsl(240deg 50% 10%);
+  --bg: hsl(240deg 33% 30%);
+  --button-bg: hsl(240deg 33% 40%);
+  --input-bg: hsl(240deg 33% 20%);
+}
+```
+
+Contextual styling buttons:
+
+```css
+:root {
+  --primary: hsl(260deg 95% 70%);
+  --secondary: hsl(320deg 95% 60%);
+}
+
+.button {
+  background-color: var(--button-background, transparent);
+}
+
+.button-primary {
+  --button-background: var(--primary);
+}
+
+.button-secondary {
+  --button-background: var(--secondary);
+}
+```
+
+Contextual styling alerts:
 
 ```css
 .alert {
@@ -1109,25 +1156,6 @@ HTML 文档树中, 后代元素可以继承祖先元素的 CSS Variables:
 .alert-error {
   --primary: #fa5252;
   --secondary: #ffe3e3;
-}
-```
-
-```css
-:root {
-  --primary: hsl(260deg 95% 70%);
-  --secondary: hsl(320deg 95% 60%);
-}
-
-.button {
-  background-color: var(--button-background, transparent);
-}
-
-.button-primary {
-  --button-background: var(--primary);
-}
-
-.button-secondary {
-  --button-background: var(--secondary);
 }
 ```
 
