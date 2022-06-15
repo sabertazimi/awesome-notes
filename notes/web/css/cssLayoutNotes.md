@@ -1854,18 +1854,39 @@ will refactor grid item's size and location:
 
 ### Grid Pseudo Element
 
+Adding `background` and `border` is a missing feature of
+[CSS Grid specification](https://www.w3.org/TR/css-grid-1),
+you can styling empty grid cells and areas with
+[generated pseudo elements](https://www.smashingmagazine.com/2018/02/generated-content-grid-layout):
+
+```css
+.grid::after {
+  z-index: -1;
+  grid-row: 1 / 4;
+  grid-column: 2 / 5;
+  content: '';
+  background-color: rgb(214 232 182 / 30%);
+  border: 5px solid rgb(214 232 182);
+}
+```
+
+Implement fancy `<h1>` header:
+
 ```css
 h1.lines {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   gap: 1em;
+  text-align: center;
 }
 
-h1.lines::before,
-h1.lines::after {
-  align-self: center;
-  content: '';
-  border-top: 1px solid black;
+@supports (display: grid) {
+  h1.lines::before,
+  h1.lines::after {
+    align-self: center;
+    content: '';
+    border-top: 1px solid black;
+  }
 }
 ```
 
