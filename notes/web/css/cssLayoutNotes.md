@@ -2025,6 +2025,13 @@ selected elements in grid container:
 </style>
 ```
 
+### Grid System
+
+- Must have different traits at different sizes.
+- Must be fluid between breakpoints.
+- Must have enough control to decide which columns will transform and at which point.
+- Classes should ideally still make sense at all breakpoints.
+
 ### Grid Reference
 
 - Grid complete [guide](https://css-tricks.com/snippets/css/complete-guide-grid).
