@@ -775,6 +775,7 @@ body {
 ### Gradient Reference
 
 - Background gradient [loading spinner](https://css-tricks.com/single-element-loaders-the-spinner).
+- Background gradient [shapes](https://css-tricks.com/drawing-images-with-css-gradients).
 
 ## CSS Object
 
@@ -820,10 +821,10 @@ body {
 - `aspect-ratio`.
 - `border`.
 - `box-shadow` (inset).
-- Background: `color`/`size`/`image`/`gradient`/`clip-path`.
-  In modern browsers `background`/`gradient`/`clip-path`
-  with `transition`/`transform`
-  better than `pseudo elements`.
+- Background:
+  `position`/`size`/`color`/`image`/[`gradient`](https://css-tricks.com/drawing-images-with-css-gradients).
+  In modern browsers,
+  background shapes with `transition`/`transform` are better than pseudo elements.
 - [`clip-path`](https://css-tricks.com/using-css-clip-path-create-interactive-effects).
 - `mask`
 - `filter`.
