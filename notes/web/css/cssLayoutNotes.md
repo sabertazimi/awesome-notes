@@ -1890,6 +1890,141 @@ h1.lines {
 }
 ```
 
+[Conditionally styling](https://css-tricks.com/conditionally-styling-selected-elements-in-a-grid-container)
+selected elements in grid container:
+
+```html
+<main>
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" checked />
+  <input type="checkbox" checked />
+  <input type="checkbox" checked />
+  <input type="checkbox" checked />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+  <input type="checkbox" />
+</main>
+
+<style>
+  main {
+    display: grid;
+    grid: repeat(5, 60px) / repeat(7, 60px);
+    align-items: center;
+    justify-items: center;
+    margin: 0;
+  }
+
+  input {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    appearance: none;
+    cursor: pointer;
+    background: #ddd;
+    border-radius: 20px;
+  }
+
+  input:not(:nth-of-type(7n + 1))::before,
+  input:nth-of-type(n + 8)::after {
+    z-index: -1;
+    grid-area: 1/1;
+    pointer-events: none;
+    content: '';
+    border-radius: 20px;
+  }
+
+  input:not(:nth-of-type(7n + 1))::before {
+    transform: translateX(-60px);
+  }
+
+  input:nth-of-type(n + 8)::after {
+    transform: translateY(-60px);
+  }
+
+  input:checked {
+    background: limegreen;
+  }
+
+  /* a box's right borders */
+  input:not(:nth-of-type(7n)):checked + input:checked::before {
+    background: limegreen;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  /* a box's bottom borders */
+  input:nth-last-of-type(n + 8):checked
+    + *
+    + *
+    + *
+    + *
+    + *
+    + *
+    + input:checked::after {
+    background: limegreen;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  /* a box's adjacent (right side) box's left borders */
+  input:not(:nth-of-type(7n)):checked + input:checked + input::before {
+    background: limegreen;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  /* a box's adjacent (below) box's top borders */
+  input:not(:nth-of-type(7n)):checked
+    + *
+    + *
+    + *
+    + *
+    + *
+    + *
+    + input:checked
+    + input::before {
+    background: limegreen;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  /* a box's (in last column) left borders */
+  input:nth-of-type(7n-1):checked + input:checked {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  /* a box's (in last column) adjacent (below) box's top borders */
+  input:nth-of-type(7n):checked + * + * + * + * + * + * + input:checked {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+</style>
+```
+
 ### Grid Reference
 
 - Grid complete [guide](https://css-tricks.com/snippets/css/complete-guide-grid).
