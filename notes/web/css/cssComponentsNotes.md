@@ -701,12 +701,28 @@ a.btn-custom {
 
 ## Table
 
-- `margin-left: auto` to align-left.
+[Styling tables](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Styling_tables):
+
+- `table-layout: fixed` to contain cells with same width,
+  makes `<table>` behave a bit more predictably.
 - `border: 0` and `border-collapse: collapse` to remove border line.
-- `table-layout: fixed` to contain cells with same width.
+- `text-align` for `<th>`/`<td>` text alignment.
 - Implement filter or pagination with `display: none` applied to `<tr>`.
 
 ```css
+/**
+ * `fixed` layout and `collapse` border.
+ */
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border: 3px solid purple;
+}
+
+/**
+ * Spacing and alignment.
+ */
 th,
 td {
   padding: 12px 15px;
@@ -722,6 +738,25 @@ td:first-child {
 th:last-child,
 td:last-child {
   padding-right: 0;
+}
+
+/**
+ * Control column width.
+ */
+thead th:nth-child(1) {
+  width: 30%;
+}
+
+thead th:nth-child(2) {
+  width: 20%;
+}
+
+thead th:nth-child(3) {
+  width: 15%;
+}
+
+thead th:nth-child(4) {
+  width: 35%;
 }
 ```
 
