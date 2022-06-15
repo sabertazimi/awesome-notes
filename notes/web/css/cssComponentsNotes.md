@@ -1379,6 +1379,47 @@ Use pseudo elements to construct circle and line:
 }
 ```
 
+## Background and Shadow
+
+### Gradient Box Shadow
+
+```css
+/**
+ * @see {@link https://alvarotrigo.com/shadow-gradients}
+ */
+.box::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  content: '';
+  background: linear-gradient(-45deg, #ff3d00 0%, #0400ff 100%);
+  filter: blur(20px);
+  border-radius: inherit;
+  opacity: var(0.7);
+  transition: opacity 0.3s;
+  transform: translate3d(0, 20px, 0) scale(0.95);
+}
+
+/**
+ * Prevents issues when the parent creates a  stacking context:
+ * For example, using the `transform` property.
+ */
+.box::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  content: '';
+  background: inherit;
+  border-radius: inherit;
+}
+```
+
 ## Geometry and Shape
 
 ### Pseudo Element Shape
