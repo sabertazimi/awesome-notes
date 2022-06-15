@@ -300,6 +300,10 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 }
 ```
 
+### Transform Reference
+
+- Transform 101 [guide](https://learn.shayhowe.com/advanced-html-css/css-transforms).
+
 ## CSS Transition
 
 ### Transition Property
@@ -468,6 +472,10 @@ panel.style.transition = 'transform .5s';
 // previous `transform` is `scale(0)`
 panel.style.transform = 'scale(1)';
 ```
+
+### Transition Reference
+
+- Transition 101 [guide](https://zellwk.com/blog/css-transitions).
 
 ## CSS Animation
 
