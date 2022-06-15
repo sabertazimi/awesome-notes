@@ -458,6 +458,47 @@ Use `gird` with `min-content`:
 
 ## Link
 
+### Styled Link
+
+[Styling links](https://developer.mozilla.org/docs/Learn/CSS/Styling_text/Styling_links):
+
+```css
+a {
+  padding: 2px 1px 0;
+  text-decoration: none;
+  outline: none;
+}
+
+a:link {
+  color: #265301;
+}
+
+a:visited {
+  color: #437a16;
+}
+
+a:focus {
+  background: #bae498;
+  border-bottom: 1px solid;
+}
+
+a:hover {
+  background: #cdfeaa;
+  border-bottom: 1px solid;
+}
+
+a:active {
+  color: #cdfeaa;
+  background: #265301;
+}
+
+a[href^='http'] {
+  padding-right: 19px;
+  background: url('external-link-52.png') no-repeat 100% 0;
+  background-size: 16px 16px;
+}
+```
+
 ### Hidden Link
 
 ```css
