@@ -813,7 +813,7 @@ body {
   In modern browsers `background`/`gradient`/`clip-path`
   with `transition`/`transform`
   better than `pseudo elements`.
-- `clip-path`
+- [`clip-path`](https://css-tricks.com/using-css-clip-path-create-interactive-effects).
 - `mask`
 - `filter`.
 - SVG:
