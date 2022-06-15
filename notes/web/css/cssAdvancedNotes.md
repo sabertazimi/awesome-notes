@@ -371,6 +371,16 @@ Two opposite sides box shadow:
 
 ## CSS Background
 
+### Background Color
+
+[`background-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-color):
+
+- [`<color>`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value):
+  `initial` value `transparent`.
+- [`background`](https://developer.mozilla.org/en-US/docs/Web/CSS/background)
+  shorthand property:
+  `background-color` value only be included in **last layer** specified.
+
 ### Background Image
 
 [`background-image`](https://developer.mozilla.org/docs/Web/CSS/background-image):
