@@ -1979,6 +1979,20 @@ can't change HTML source `tab` order.
 
 :::
 
+### Graceful Degradation
+
+Write old browser css code,
+then write modern browser css code:
+
+```css
+.grid {
+  display: flex;
+
+  /* old browser will ignore this rule */
+  display: grid;
+}
+```
+
 ## CSS Performance
 
 ### Will Change
