@@ -2244,6 +2244,7 @@ math {
   - 在 `margin`/`padding`/`border` 上使用 `em` 时,
     可使得布局随 `font-size` 大小改变而改变.
 - `rem`: calculate by root `font-size`.
+- `<percentage>`: calculate by parent `font-size`.
 
 ```css
 html {
