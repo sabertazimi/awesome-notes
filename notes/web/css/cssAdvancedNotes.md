@@ -182,6 +182,17 @@ table {
 - `slice`: initial value, 断开部分样式直接切割.
 - `clone`: 断开部分样式独立渲染.
 
+### Multiple Border
+
+[Multiple border](https://css-tricks.com/animating-border):
+
+- `border`.
+- `outline`.
+- `background` gradient.
+- `box-shadow`.
+- `clip-path`.
+- Pseudo element.
+
 ## CSS Outline
 
 [`outline`](https://developer.mozilla.org/docs/Web/CSS/outline):
