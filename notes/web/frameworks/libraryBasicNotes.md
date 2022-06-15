@@ -675,6 +675,13 @@ tags: [Web, Framework, Library]
 
 - [AnimateGrid](https://github.com/aholachek/animate-css-grid)
 - [React Page Transition](https://github.com/Steveeeie/react-page-transition)
+- [Animista: Animation Editor](https://animista.net)
+
+### MicroInteraction Animation
+
+- [ReactRewards](https://github.com/thedevelobear/react-rewards)
+- [RoughNotation: Create and Animate Hand-drawn Annotations](https://github.com/rough-stuff/rough-notation)
+- [CanvasConfetti: On-demand Confetti Gun](https://github.com/catdad/canvas-confetti)
 
 ### Typing Effect Animation
 
@@ -705,12 +712,6 @@ tags: [Web, Framework, Library]
 - [Epic Spinners](https://github.com/epicmaxco/epic-spinners)
 - [Loading IO](https://loading.io)
 - [UIBall: Modern, Tree-shakeable Loaders and Spinners for React](https://github.com/GriffinJohnston/uiball-loaders)
-
-### MicroInteraction Animation
-
-- [ReactRewards](https://github.com/thedevelobear/react-rewards)
-- [RoughNotation: Create and Animate Hand-drawn Annotations](https://github.com/rough-stuff/rough-notation)
-- [CanvasConfetti: On-demand Confetti Gun](https://github.com/catdad/canvas-confetti)
 
 ## Time Utils
 
