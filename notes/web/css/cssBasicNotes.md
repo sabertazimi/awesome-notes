@@ -108,7 +108,8 @@ tags: [Web, CSS]
 
 ### Specificity
 
-Specificity (`Selector Priority`) has 4 bits,
+[Specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity)
+(`Selector Priority`) has 4 bits,
 thousands, hundreds, tens, ones `0000`:
 
 - Thousands: inline-style.
@@ -118,12 +119,20 @@ thousands, hundreds, tens, ones `0000`:
 
 :::tip Zero Specificity
 
-- Universal selector (`*`), combinators (`+`, `>`, `~`, `a b`) and `:where()`
+- Universal selector (`*`),
+  combinators (`+`, `>`, `~`, `a b`)
+  and `:where()`
   have no effect on specificity.
-- `:not()` and `:is()` have no effect on specificity,
+- [`:not()`/`:is()`/`:has()`](https://meyerweb.com/eric/thoughts/2018/06/05/specificity-in-not-has-and-matches)
+  have no effect on specificity,
   but selectors in it have effect on specificity.
 
 :::
+
+```html
+<!-- specificity: 1000 -->
+<h1 style="color: black">Hello</h1>
+```
 
 ```css
 /* specificity: 0001 */
@@ -145,14 +154,7 @@ h1 + p::first-letter {
 li > a[href*='link-url'] > .inline-warning {
   color: yellow;
 }
-```
 
-```html
-<!-- specificity: 1000; -->
-<h1 style="color: black">Hello</h1>
-```
-
-```css
 /* specificity: 0023 */
 div li:nth-child(2) a:hover,
 div li:nth-child(2) a:focus {
@@ -194,7 +196,7 @@ div div .nav:nth-child(2) a:focus {
 
 Styles for a directly targeted element will
 always take precedence over inherited styles,
-regardless of the specificity of the inherited rule
+regardless of the specificity of the inherited rule:
 
 ```css
 #parent {
@@ -688,10 +690,11 @@ calculation result limit to `> 0`:
   - 选择与括号内的选择器不匹配的元素.
 - `:is(<selector>)`:
   - Selector priority.
+  - Legacy name: `:any()`/`:matches()`.
 - `:where(<selector>)`:
-  - 0 priority.
+  - `0` priority.
 - [`<target_element>:has(<selector>)`](https://ishadeed.com/article/css-has-parent-selector):
-  - `:has` normal priority.
+  - Selector priority.
   - A target element has child elements: `:has(> selector)`.
   - A target element has sibling elements: `:has(+ selector)`.
 
