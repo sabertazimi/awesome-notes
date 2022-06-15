@@ -184,7 +184,7 @@ table {
 
 ## CSS Outline
 
-[`outline`](https://developer.mozilla.org/en-US/docs/Web/CSS/outline):
+[`outline`](https://developer.mozilla.org/docs/Web/CSS/outline):
 
 - `initial` value: `medium none currentcolor`.
 - `outline` do not take up space,
@@ -373,11 +373,11 @@ Two opposite sides box shadow:
 
 ### Background Color
 
-[`background-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-color):
+[`background-color`](https://developer.mozilla.org/docs/Web/CSS/background-color):
 
-- [`<color>`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value):
+- [`<color>`](https://developer.mozilla.org/docs/Web/CSS/color_value):
   `initial` value `transparent`.
-- [`background`](https://developer.mozilla.org/en-US/docs/Web/CSS/background)
+- [`background`](https://developer.mozilla.org/docs/Web/CSS/background)
   shorthand property:
   `background-color` value only be included in **last layer** specified.
 
