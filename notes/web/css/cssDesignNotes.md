@@ -102,41 +102,6 @@ The optimal line length for body text is `50`–`75` characters:
 - Golden rules of web typography [reference](https://noti.st/rar/mz1rIY/golden-rules-of-typography-on-the-web).
 - Typeface [font matrix](https://pimpmytype.com/font-matrix/).
 
-## Grid System
-
-- Must have different traits at different sizes
-- Must be fluid between breakpoints
-- Must have enough control to decide which columns will transform and at which point
-- Classes should ideally still make sense at all breakpoints
-
-## Graceful Degradation
-
-Write old browser css code,
-then write modern browser css code:
-
-```css
-.grid {
-  display: flex;
-
-  /* old browser will ignore this rule */
-  display: grid;
-}
-```
-
-## HomePage User Experience
-
-[UX research](https://baymard.com/blog/2021-current-state-of-ecommerce-homepage-ux)
-point out that:
-
-- Feature a Broad Range of Product Types (6% Don’t).
-- Avoid Overly Aggressive and Distracting Ads (59% Don’t).
-- Implement Carousels Carefully (75% Don’t).
-- Assist the Selection of a Well-Defined Scope (62% Don’t).
-- Invest in Bespoke Imagery and Design (19% Don’t).
-- Make the Search Field Immediately Obvious (22% Don’t).
-- Implement Country & Language Selection Carefully (35% Don’t).
-- Ensure Visual Hit Areas Match the Actual Hit Areas (43% Don’t).
-
 ## Components Design Principles
 
 - [Components Checklist](https://www.smashingmagazine.com/ebooks/checklist-cards-digital)
@@ -155,6 +120,20 @@ point out that:
 - [Carousel](https://www.smashingmagazine.com/2022/04/designing-better-carousel-ux)
 - [Navigation](https://www.smashingmagazine.com/2022/04/designing-better-navigation-ux-queries)
 - [Language Selector](https://www.smashingmagazine.com/2022/05/designing-better-language-selector)
+
+### HomePage User Experience
+
+[UX research](https://baymard.com/blog/2021-current-state-of-ecommerce-homepage-ux)
+point out that:
+
+- Feature a Broad Range of Product Types (6% Don’t).
+- Avoid Overly Aggressive and Distracting Ads (59% Don’t).
+- Implement Carousels Carefully (75% Don’t).
+- Assist the Selection of a Well-Defined Scope (62% Don’t).
+- Invest in Bespoke Imagery and Design (19% Don’t).
+- Make the Search Field Immediately Obvious (22% Don’t).
+- Implement Country & Language Selection Carefully (35% Don’t).
+- Ensure Visual Hit Areas Match the Actual Hit Areas (43% Don’t).
 
 ### Form Design Principles
 
