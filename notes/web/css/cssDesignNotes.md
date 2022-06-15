@@ -41,7 +41,7 @@ tags: [Web, CSS, Design]
 - Multiples of base-size.
 - Use `rem` for most font-size, use `em` for some spacing (needing responsive design).
 - `rem` is better.
-- `em` for responsive layout (etc. layer2 font based-on layer1 font in dropdown menu).
+- `em` for responsive layout: e.g layer2 font based-on layer1 font in dropdown menu.
 - Make text legible: at least `16px`.
 
 ```scss
@@ -194,6 +194,8 @@ point out that:
 - `vmax`: `max(vw, vh)`.
 
 ### Responsive Size
+
+[Responsive font size](https://zellwk.com/blog/rem-vs-em);
 
 - Size in `em` if the property scales according to it's `font-size`:
   e.g button `padding`.
