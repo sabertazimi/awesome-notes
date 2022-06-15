@@ -493,6 +493,10 @@ tags: [Web, Framework, Library]
 - [AutoComplete.js](https://github.com/TarekRaafat/autoComplete.js)
 - [PinField: PIN Codes Input](https://github.com/soywod/react-pin-field)
 
+#### Switch
+
+- [React Switch: Draggable Toggle-switch Component](https://github.com/markusenglund/react-switch)
+
 #### Select
 
 - [React Select](https://github.com/JedWatson/react-select)
