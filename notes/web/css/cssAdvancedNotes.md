@@ -821,7 +821,7 @@ body {
   - SVG filter.
   - SVG clip-path.
   - SVG mask.
-- pseudo elements.
+- [Pseudo elements](https://css-tricks.com/pseudo-element-roundup).
 
 ### Shape Outside
 
