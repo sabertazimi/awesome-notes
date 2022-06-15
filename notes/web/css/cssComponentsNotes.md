@@ -188,6 +188,8 @@ h1 {
 
 ### Float Navigation
 
+[Styling lists](https://developer.mozilla.org/docs/Learn/CSS/Styling_text/Styling_lists):
+
 - `list-style-type`: 改变 `ul`/`ol` 前标记类型.
 - `list-style-image`: 改变 `ul`/`ol` 前标记类型.
 - 设置 `<a href="#">` 样式.
