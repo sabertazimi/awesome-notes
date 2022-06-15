@@ -732,4 +732,5 @@ tl.staggerFrom(
 
 ### Animation Reference
 
-- Animation 101 [tutorial](https://github.com/cssanimation/css-animation-101)
+- Animatable CSS [properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties).
+- Animation 101 [guide](https://github.com/cssanimation/css-animation-101).
