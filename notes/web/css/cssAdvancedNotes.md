@@ -2096,13 +2096,42 @@ can't change HTML source `tab` order.
 - CSS triggers [list](https://github.com/GoogleChromeLabs/css-triggers).
 - JavaScript triggers [list](https://gist.github.com/paulirish/5d52fb081b3570c81e3a).
 
-Avoid to frequently change css property
-or call JavaScript API triggering layout stage (reflow):
+Avoid to frequently change CSS property
+and call JavaScript API triggering layout stage (`reflow`):
 
-- `width`/`height`/`margin`/`left`/`top` in `Layout` stage.
-- `box-shadow`/`border-radius`/`background`/`outline`/`color` in `Paint` stage.
-- `cursor`/`z-index`/`transform`/`opacity` in `Composite Layers` stage.
-- `top`/`left` has very large time to `paint` each frame.
+- `Layout` stage triggers:
+  - `display`.
+  - `position`.
+  - `float`.
+  - `top`/`bottom`/`left`/`right`.
+  - `width`.
+  - `height`.
+  - `min-height`.
+  - `margin`.
+  - `padding`.
+  - `border`/`border-width`.
+  - `overflow`/`overflow-y`.
+  - `font-family`
+  - `font-size`.
+  - `font-weight`.
+  - `white-space`.
+  - `line-height`.
+  - `vertical-align`.
+  - `text-align`.
+  - `clear`.
+- `Paint` stage triggers:
+  - `background`/`background-image`/`background-repeat`/`background-position`/`background-size`
+  - `border-radius`/`border-style`.
+  - `box-shadow`.
+  - `outline`/`outline-width`/`outline-style`/`outline-color`.
+  - `color`.
+  - `text-decoration`.
+  - `visibility`.
+- `Composite` stage triggers:
+  - `cursor`.
+  - `opacity`.
+  - `transform`.
+  - `z-index`.
 
 ### CSS Loading Performance
 
