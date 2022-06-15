@@ -2788,3 +2788,10 @@ will lead to class purged.
 - `pages`: `home.css`, `about.css`.
 - `themes`: `color.css`, `font.css`.
 - `main.css`/`app.css`.
+
+### CSS Naming System and Architecture
+
+- BEM: [blocks, elements and modifiers](https://www.smashingmagazine.com/2018/06/bem-for-beginners).
+- OOCSS: [object oriented CSS](https://www.smashingmagazine.com/2011/12/an-introduction-to-object-oriented-css-oocss).
+- SMACSS: [scalable and modular CSS architecture](https://www.toptal.com/css/smacss-scalable-modular-architecture-css).
+- ITCSS: [inverted triangle CSS layers](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture).
