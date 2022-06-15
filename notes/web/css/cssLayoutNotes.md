@@ -1990,7 +1990,7 @@ h1.lines::after {
   - 作用机制: 对齐基线 (`baseline`) 往上 1/2 `x-height` 高度 (即小写字母 `x` 交叉点处).
   - 作用环境: parent element `line-height` === `height`.
   - 作用对象: children `inline`/`inline-block`/`table-cell` element.
-- Vertical `padding`.
+- Vertical parent `padding`.
 - `flex`.
 - `grid`.
 
@@ -2008,10 +2008,10 @@ a.button::before {
 
 #### Vertical Centering Block element
 
-- `top` + `margin`.
 - `top` + `translateY`.
 - `vertical-align: middle` + `display: table-cell`:
   [表格单元居中法](https://css-tricks.com/centering-in-the-unknown).
+- Vertical `margin`.
 - Vertical `padding`.
 - `flex`.
 - `grid`.
@@ -2038,6 +2038,8 @@ a.button::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  backface-visibility: hidden; /* Remove blurry in WebKit browsers */
+  transform-style: preserve-3d; /* Remove blurry in WebKit browsers */
 }
 
 .dialog {
