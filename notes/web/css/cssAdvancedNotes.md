@@ -184,6 +184,14 @@ table {
 
 ## CSS Outline
 
+[`outline`](https://developer.mozilla.org/en-US/docs/Web/CSS/outline):
+
+- `initial` value: `medium none currentcolor`.
+- `outline` do not take up space,
+  it overlap margins and surrounding elements.
+- `outline` do not change element `size` and `position`.
+- `outline` is same on all sides.
+
 ```css
 .input {
   outline: none;
