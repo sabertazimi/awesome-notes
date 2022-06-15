@@ -91,6 +91,7 @@ tags: [Web, Framework, Library]
 - [Primer: GitHub Primer Design System](https://github.com/primer/react)
 - [Desktop: macOS and Windows Style Components](https://github.com/gabrielbull/react-desktop)
 - [Luna: Operating System Components](https://github.com/liriliri/luna)
+- [Molecule: Lightweight Web IDE UI Framework](https://github.com/DTStack/molecule)
 
 ### Admin and Dashboard UI Framework
 
@@ -939,7 +940,7 @@ tags: [Web, Framework, Library]
 
 ### Web IDE
 
-- [CodeServer: VS Code in Browser](https://github.com/cdr/code-server)
+- [CodeServer: VS Code in Browser](https://github.com/coder/code-server)
 - [Theia: Cloud IDE framework](https://github.com/eclipse-theia/theia)
 - [Utopia: React IDE](https://github.com/concrete-utopia/utopia)
 
