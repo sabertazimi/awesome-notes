@@ -209,6 +209,20 @@ h1 {
 }
 ```
 
+Increasing specificity by **duplicating selector**:
+
+```css
+.my-class.my-class.my-class span {
+  /* 0-3-1 */
+  color: white;
+}
+
+:is(.my-class.my-class.my-class, span) {
+  /* 0-3-0 */
+  color: white;
+}
+```
+
 ### Inheritance
 
 - Most CSS properties that affect the text node are inherited properties:
