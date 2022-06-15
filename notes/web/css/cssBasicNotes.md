@@ -1499,6 +1499,15 @@ html {
 }
 ```
 
+:::caution Broken Calculation
+
+If `calc()` result breaks,
+check cache plugin or build tool.
+Some tools like to remove whitespace always
+lead to broken `calc()` addition and subtraction operator.
+
+:::
+
 ### Min and Max Function
 
 [Flexible size](https://www.youtube.com/watch?v=8slZJrTK3nE):
