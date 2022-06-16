@@ -1305,6 +1305,7 @@ tags: [Web, Framework, Library]
 ### Headless Automation Tools
 
 - [Puppeteer: Headless Chrome Tools](https://github.com/puppeteer/puppeteer)
+- [PuppeteerExtra: Modular Plugin Framework for Puppeteer](https://github.com/berstend/puppeteer-extra)
 - [RRWeb: Record and Replay Web](https://github.com/rrweb-io/rrweb)
 - [Webkit API](https://github.com/ariya/phantomjs)
 - [Selenium](https://github.com/SeleniumHQ/selenium)
