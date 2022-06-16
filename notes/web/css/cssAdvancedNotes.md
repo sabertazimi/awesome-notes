@@ -480,9 +480,14 @@ background-position: top right 10px;
 指定背景显示范围:
 
 - `border-box`.
-- `padding-box`.
+- `padding-box`:
+  虽然 `border` 层叠等级高于 `background`,
+  但是透明边框在视觉上仍会被有色背景覆盖 (背景会延伸至边框下方).
+  设置 `background-clip: padding-box`
+  可用于保证 `border-color: transparent` 不被 `background-color: white` 视觉覆盖.
 - `content-box`.
-- `text`: 可用于实现`渐变文字`/`镂空文字`/`背景蒙版文字`.
+- `text`:
+  可用于实现`渐变文字`/`镂空文字`/`背景蒙版文字`.
 
 ```css
 @property --offset {
