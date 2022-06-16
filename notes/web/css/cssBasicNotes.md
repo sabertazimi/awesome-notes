@@ -604,7 +604,13 @@ Separate focus styles:
 - `:default`:
   匹配处于默认状态的表单元素, 可用于默认选项/推荐选项样式.
 - `:checked`:
-  匹配处于选中状态的表单元素, 可用于开关选框/多选框样式.
+  匹配处于选中状态的表单元素, 可用于开关选框/多选框样式,
+  e.g [tab](https://codepen.io/llgruff/pen/ZGBxOa),
+  [dropdown](https://codepen.io/eduardoboucas/pen/BNyKwO),
+  [modal](https://codepen.io/chrisburnell/pen/abqKZG),
+  [carousel](https://codepen.io/SitePoint/pen/MyPVdK),
+  [tree](https://codepen.io/rgg/pen/WrKyzj),
+  checkbox grid.
 - `:indeterminate`:
   - 匹配处于未选状态的单选框元素 `<input type="radio">`.
   - 匹配处于半选状态的复选框元素 `<input type="checkbox">`.
