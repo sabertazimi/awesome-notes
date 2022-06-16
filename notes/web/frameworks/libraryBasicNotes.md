@@ -139,8 +139,8 @@ tags: [Web, Framework, Library]
 - [StrAPI](https://github.com/strapi/strapi)
 - [Ghost](https://github.com/TryGhost/Ghost)
 - [Netlify](https://github.com/netlify/netlify-cms)
-- [TinaCMS](https://github.com/tinacms/tinacms)
 - [KeyStone](https://github.com/keystonejs/keystone)
+- [TinaCMS](https://github.com/tinacms/tinacms)
 - [Payload](https://github.com/payloadcms/payload)
 
 ### Desktop Solution
@@ -1025,16 +1025,25 @@ tags: [Web, Framework, Library]
 
 ## Persistent Storage
 
-- [RxDB](https://github.com/pubkey/rxdb)
-- [PouchDB](https://github.com/pouchdb/pouchdb)
-- [LowDB](https://github.com/typicode/lowdb)
-- [ImmortalDB](https://github.com/gruns/ImmortalDB)
-- [LocalForage](https://github.com/localForage/localForage)
+### Cookie
+
 - [JSCookie](https://github.com/js-cookie/js-cookie)
 - [React Cookie](https://github.com/reactivestack/cookies)
 - [Nookies: Cookie Helpers for Next.js](https://github.com/maticzav/nookies)
+
+### Web Storage
+
+- [LocalForage: IndexedDB, WebSQL and LocalStorage API Wrapper](https://github.com/localForage/localForage)
+- [RxDB: Fast, Offline-first, Reactive Database for JavaScript Applications](https://github.com/pubkey/rxdb)
+- [PouchDB: Pocket-sized and Offline-first Database for Browser](https://github.com/pouchdb/pouchdb)
+- [ImmortalDB: Relentless Key-value Store for Browser](https://github.com/gruns/ImmortalDB)
+
+### Database
+
+- [Mikro: TypeScript ORM for Node.js](https://github.com/mikro-orm/mikro-orm)
+- [LowDB: Simple JSON Database](https://github.com/typicode/lowdb)
 - [NocoDB: No Code Database](https://github.com/nocodb/nocodb)
-- [Directus: Open Source Data Platform](https://github.com/directus/directus)
+- [Directus: No-code Data Collaboration App for SQL Database](https://github.com/directus/directus)
 
 ## Search
 
