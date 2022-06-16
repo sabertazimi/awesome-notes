@@ -151,19 +151,6 @@ h1 {
 }
 ```
 
-### Parallax Effect
-
-```css
-.parallax {
-  min-height: 60%; /* key */
-  background-image: url('./images/bg.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* key */
-  background-position: center;
-  background-size: cover;
-}
-```
-
 ### Search Light Effect
 
 ```css
@@ -1253,7 +1240,83 @@ Pseudo element switch from circle to circle:
 }
 ```
 
-## Scroll Progress Indicator
+## Scroll Effect
+
+### Parallax Effect
+
+#### Background Attachment Parallax Effect
+
+```css
+.parallax {
+  min-height: 60%; /* key */
+  background-image: url('./images/bg.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* key */
+  background-position: center;
+  background-size: cover;
+}
+```
+
+#### 3D Perspective Transform Parallax Effect
+
+[3D perspective transform parallax effect](https://keithclark.co.uk/articles/pure-css-parallax-websites):
+
+```html
+<div class="parallax">
+  <div class="parallax-group">
+    <div class="parallax-layer parallax-fore-layer"></div>
+    <div class="parallax-layer parallax-base-layer"></div>
+  </div>
+  <div class="parallax-group">
+    <div class="parallax-layer parallax-base-layer"></div>
+    <div class="parallax-layer parallax-back-layer"></div>
+    <div class="parallax-layer parallax-deep-layer"></div>
+  </div>
+</div>
+
+<style>
+  .parallax {
+    perspective: 1px;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective-origin: 100% 50%;
+  }
+
+  .parallax-group {
+    position: relative;
+    height: 100vh;
+    transform-style: preserve-3d;
+  }
+
+  .parallax-layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform-origin: 100% 50%;
+  }
+
+  .parallax-fore-layer {
+    transform: translateZ(90px) scale(0.7);
+  }
+
+  .parallax-base-layer {
+    transform: translateZ(0);
+  }
+
+  .parallax-back-layer {
+    transform: translateZ(-1px) scale(2);
+  }
+
+  .parallax-deep-layer {
+    transform: translateZ(-2px) scale(3);
+  }
+</style>
+```
+
+### Page Progress Indicator
 
 ```css
 body {
