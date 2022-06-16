@@ -2105,6 +2105,23 @@ then write modern browser css code:
 }
 ```
 
+[Prevent jittery scrollbar](https://infrequently.org/2020/12/resize-resilient-deferred-rendering):
+
+```ts
+const observer = new ResizeObserver(entries => {
+  for (const entry of entries) {
+    if (entry.target.getBoundingClientRect().height > 0) {
+      observer.unobserve(entry.target);
+      entry.target.classList.remove('content-visibility-auto');
+    }
+  }
+});
+
+for (const element of document.querySelectorAll('.content-visibility-auto')) {
+  observer.observe(element);
+}
+```
+
 ### CSS Selectors Performance
 
 减少选择器的复杂性, 与构造样式本身的其他工作相比,
