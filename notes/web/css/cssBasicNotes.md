@@ -456,7 +456,7 @@ li + li {
 `:target`:
 
 - 该选择器定位当前活动页面内定位点的目标元素 (#anchor-name) `#info:target {font-size:24px;}`.
-- 可用于实现 `tab`/`carousel`/`gallery`/`slide`:
+- 可用于实现 tab/[modal](https://codepen.io/peiche/pen/kQwYVJ)/[carousel](https://codepen.io/FabianK/pen/zJLLrR)/gallery/slide:
   - 利用 `display:none` 隐藏 `#id` 元素,
     不会触发页面滚动 (防止页面抖动),
     可以触发 `:target` 伪类匹配.
