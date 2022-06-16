@@ -102,55 +102,6 @@ The optimal line length for body text is `50`–`75` characters:
 - Golden rules of web typography [reference](https://noti.st/rar/mz1rIY/golden-rules-of-typography-on-the-web).
 - Typeface [font matrix](https://pimpmytype.com/font-matrix/).
 
-## Components Design Principles
-
-- [Components Checklist](https://www.smashingmagazine.com/ebooks/checklist-cards-digital)
-- [Accordion](https://www.smashingmagazine.com/2017/06/designing-perfect-accordion-checklist)
-- [Responsive Configurator](https://www.smashingmagazine.com/2018/02/designing-a-perfect-responsive-configurator)
-- [DateTime Picker](https://www.smashingmagazine.com/2017/07/designing-perfect-date-time-picker)
-- [Feature Comparison Table](https://www.smashingmagazine.com/2017/08/designing-perfect-feature-comparison-table)
-- [Slider](https://www.smashingmagazine.com/2017/07/designing-perfect-slider)
-- [Birthday Picker](https://www.smashingmagazine.com/2021/05/frustrating-design-patterns-birthday-picker)
-- [Mega Dropdown](https://www.smashingmagazine.com/2021/05/frustrating-design-patterns-mega-dropdown-hover-menus)
-- [Frozen Filter](https://www.smashingmagazine.com/2021/07/frustrating-design-patterns-broken-frozen-filters)
-- [Disabled Button](https://www.smashingmagazine.com/2021/08/frustrating-design-patterns-disabled-buttons)
-- [Infinite Scroll](https://www.smashingmagazine.com/2022/03/designing-better-infinite-scroll)
-- [Breadcrumbs](https://www.smashingmagazine.com/2022/04/designing-better-breadcrumbs)
-- [Push Notification](https://www.smashingmagazine.com/2022/04/guide-push-notifications-developers)
-- [Carousel](https://www.smashingmagazine.com/2022/04/designing-better-carousel-ux)
-- [Navigation](https://www.smashingmagazine.com/2022/04/designing-better-navigation-ux-queries)
-- [Language Selector](https://www.smashingmagazine.com/2022/05/designing-better-language-selector)
-
-### HomePage User Experience
-
-[UX research](https://baymard.com/blog/2021-current-state-of-ecommerce-homepage-ux)
-point out that:
-
-- Feature a Broad Range of Product Types (6% Don’t).
-- Avoid Overly Aggressive and Distracting Ads (59% Don’t).
-- Implement Carousels Carefully (75% Don’t).
-- Assist the Selection of a Well-Defined Scope (62% Don’t).
-- Invest in Bespoke Imagery and Design (19% Don’t).
-- Make the Search Field Immediately Obvious (22% Don’t).
-- Implement Country & Language Selection Carefully (35% Don’t).
-- Ensure Visual Hit Areas Match the Actual Hit Areas (43% Don’t).
-
-### Form Design Principles
-
-- Form design [blog](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post).
-- Form design [book](https://www.smashingmagazine.com/printed-books/form-design-patterns).
-
-#### Buttons Placement Principles
-
-[Principles](https://adamsilver.io/articles/where-to-put-buttons-in-forms):
-
-- Align the primary button to the left edge of the inputs.
-- Put the back button above the form.
-- Put tangentially related actions above the form.
-- Place extra buttons based on what they do.
-- In some single field forms put the button next to the input (e.g `search` button).
-- Put buttons on multi select forms above the form.
-
 ## Responsive Design
 
 [Responsive web design](https://alistapart.com/article/responsive-web-design):
@@ -401,3 +352,53 @@ table {
 
 - 智能手机: 按键的复杂度转为手机操作系统的复杂度.
 - 智能推荐: 用户自己选择筛选条件的复杂度转为人工智能算法的复杂度.
+
+## Components Design Principles
+
+- [Components Checklist](https://www.smashingmagazine.com/ebooks/checklist-cards-digital)
+- [Accordion](https://www.smashingmagazine.com/2017/06/designing-perfect-accordion-checklist)
+- [Responsive Configurator](https://www.smashingmagazine.com/2018/02/designing-a-perfect-responsive-configurator)
+- [DateTime Picker](https://www.smashingmagazine.com/2017/07/designing-perfect-date-time-picker)
+- [Feature Comparison Table](https://www.smashingmagazine.com/2017/08/designing-perfect-feature-comparison-table)
+- [Slider](https://www.smashingmagazine.com/2017/07/designing-perfect-slider)
+- [Birthday Picker](https://www.smashingmagazine.com/2021/05/frustrating-design-patterns-birthday-picker)
+- [Mega Dropdown](https://www.smashingmagazine.com/2021/05/frustrating-design-patterns-mega-dropdown-hover-menus)
+- [Frozen Filter](https://www.smashingmagazine.com/2021/07/frustrating-design-patterns-broken-frozen-filters)
+- [Disabled Button](https://www.smashingmagazine.com/2021/08/frustrating-design-patterns-disabled-buttons)
+- [Infinite Scroll](https://www.smashingmagazine.com/2022/03/designing-better-infinite-scroll)
+- [Breadcrumbs](https://www.smashingmagazine.com/2022/04/designing-better-breadcrumbs)
+- [Push Notification](https://www.smashingmagazine.com/2022/04/guide-push-notifications-developers)
+- [Carousel](https://www.smashingmagazine.com/2022/04/designing-better-carousel-ux)
+- [Navigation](https://www.smashingmagazine.com/2022/04/designing-better-navigation-ux-queries)
+- [Language Selector](https://www.smashingmagazine.com/2022/05/designing-better-language-selector)
+- [Data Visualization](https://www.smashingmagazine.com/2022/06/web-design-done-well-delightful-data-visualization-examples)
+
+### HomePage User Experience
+
+[UX research](https://baymard.com/blog/2021-current-state-of-ecommerce-homepage-ux)
+point out that:
+
+- Feature a Broad Range of Product Types (6% Don’t).
+- Avoid Overly Aggressive and Distracting Ads (59% Don’t).
+- Implement Carousels Carefully (75% Don’t).
+- Assist the Selection of a Well-Defined Scope (62% Don’t).
+- Invest in Bespoke Imagery and Design (19% Don’t).
+- Make the Search Field Immediately Obvious (22% Don’t).
+- Implement Country & Language Selection Carefully (35% Don’t).
+- Ensure Visual Hit Areas Match the Actual Hit Areas (43% Don’t).
+
+### Form Design Principles
+
+- Form design [blog](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post).
+- Form design [book](https://www.smashingmagazine.com/printed-books/form-design-patterns).
+
+#### Buttons Placement Principles
+
+[Principles](https://adamsilver.io/articles/where-to-put-buttons-in-forms):
+
+- Align the primary button to the left edge of the inputs.
+- Put the back button above the form.
+- Put tangentially related actions above the form.
+- Place extra buttons based on what they do.
+- In some single field forms put the button next to the input (e.g `search` button).
+- Put buttons on multi select forms above the form.
