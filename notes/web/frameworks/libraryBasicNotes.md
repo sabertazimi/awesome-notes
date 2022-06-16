@@ -293,6 +293,7 @@ tags: [Web, Framework, Library]
 - [Zod: TypeScript-first Schema Validation with Static Type Inference](https://github.com/colinhacks/zod)
 - [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
 - [AutoMapper: Object to Object Auto Mapper](https://github.com/nartc/mapper)
+- [OW: Function Argument Validation for Humans](https://github.com/sindresorhus/ow)
 
 ### TypeScript AST Utils
 
