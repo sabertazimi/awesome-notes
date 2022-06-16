@@ -2637,6 +2637,7 @@ h1 {
 
 ## CSS Components Reference
 
+- CSS [tricks](https://github.com/l-hammer/You-need-to-know-css).
 - CSS [inspiration](https://github.com/chokcoco/CSS-Inspiration).
 - Background patterns [gallery](https://github.com/LeaVerou/css3patterns).
 - Pure CSS [icons](https://github.com/wentin/cssicon).
