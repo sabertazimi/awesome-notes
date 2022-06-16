@@ -2065,20 +2065,6 @@ then write modern browser css code:
   /* 布局包含 paint */
   contain: paint;
 }
-
-.content {
-  /* Keyword values */
-  content-visibility: visible;
-  content-visibility: hidden;
-  content-visibility: auto;
-
-  /* <length> values */
-  contain-intrinsic-size: 1000px;
-  contain-intrinsic-size: 10rem;
-
-  /* <percentage> value */
-  contain-intrinsic-size: 10%;
-}
 ```
 
 ### Content Visibility
@@ -2099,6 +2085,20 @@ then write modern browser css code:
   可用于实现 **lazy loading**, **virtualized list**.
 
 ```css
+.content {
+  /* Keyword values */
+  content-visibility: visible;
+  content-visibility: hidden;
+  content-visibility: auto;
+
+  /* <length> values */
+  contain-intrinsic-size: 1000px;
+  contain-intrinsic-size: 10rem;
+
+  /* <percentage> value */
+  contain-intrinsic-size: 10%;
+}
+
 .p {
   content-visibility: auto;
   contain-intrinsic-size: 320px; /* 预设高度, 防止滚动条频繁抖动 */
