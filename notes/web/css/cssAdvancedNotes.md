@@ -236,7 +236,7 @@ table {
 - `none`.
 - `<shadow-text>#`: `<length>{2,3} && <color>?`.
   - 不支持内阴影.
-  - `<length>{2,3}`: 不支持阴影扩展 `offset-x offset-y blur-radius`.
+  - `<length>{2,3}`: 不支持扩展阴影 `offset-x offset-y blur-radius`.
   - `<color>?`: default `revert` (user agent color).
 
 ```css
@@ -301,7 +301,7 @@ body {
 - `none`.
 - `<shadow>#`: `inset? && <length>{2,4} && <color>?`.
   - `inset?`: 支持内阴影.
-  - `<length>{2,4}`: 支持阴影扩展 `offset-x offset-y blur-radius spread-radius`.
+  - `<length>{2,4}`: 支持扩展阴影 `offset-x offset-y blur-radius spread-radius`.
   - `<color>?`: default `currentcolor` (text computed color).
 
 #### Basic Box Shadow
@@ -1090,6 +1090,21 @@ img.alpha-mask {
   filter: unset;
 }
 ```
+
+:::tip Drop Shadow
+
+`filter: drop-shadow()`:
+
+- 不支持内阴影.
+- 不支持扩展阴影.
+- 不支持多重阴影.
+- 阴影会**自动贴合形状**:
+  - 伪元素.
+  - 自定义边框.
+  - 背景渐变.
+  - SVG 元素.
+
+:::
 
 ### Backdrop Filter
 
