@@ -1777,6 +1777,8 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
 }
 ```
 
+More spinner see [SpinKit](https://github.com/tobiasahlin/SpinKit).
+
 ### Dot
 
 #### Border Dot
