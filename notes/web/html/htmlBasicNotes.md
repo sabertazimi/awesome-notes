@@ -1626,5 +1626,6 @@ A11y audit [list](https://web.dev/lighthouse-accessibility):
 ### Accessibility Reference
 
 - [Web Accessibility Initiative-Accessible Rich Internet Applications](https://www.sitepoint.com/wai-aria 'WAI-ARIA')
+- [W3C Official ARIA Examples](https://github.com/w3c/aria-practices)
 - [Semantic Search Element](https://www.sarasoueidan.com/blog/in-quest-of-search)
 - [WebAIM Million Project](https://webaim.org/projects/million)

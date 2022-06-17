@@ -2025,6 +2025,10 @@ then write modern browser css code:
 }
 ```
 
+### ARIA
+
+- W3C official ARIA [examples](https://github.com/w3c/aria-practices).
+
 ## CSS Performance
 
 ### Will Change
