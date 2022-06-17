@@ -1024,12 +1024,19 @@ For `float` element:
 [圣杯布局](https://github.com/sabertazimi/hust-web/blob/main/ife/2018/basic/layout/index.css):
 
 1. HTML: `.middle` first.
-2. `padding-left` and `padding-right` to `.container`,
+2. Padding:
+   `padding-left` and `padding-right` to `.container`,
    `min-width: 2 * (leftWidth + rightWidth)` to `.container`.
-3. Float: `float: left` to `.left`, `.middle` and `.right`.
-4. Negative margin: `margin-left: -100%` to `.left`,
-   `margin-right: -rightWidth px` to `.right`.
-5. Move: `right: leftWidth px` to `.left`.
+3. Float:
+   `float: left` to `.left`, `.middle` and `.right`
+   (Currently, `.middle` in row 1, `.left` and `.right` in row 2).
+4. Negative margin:
+   `margin-left: -100%` to `.left`,
+   `margin-right: -rightWidth px` to `.right`
+   (Pull them up to same row with `.middle`).
+5. Move:
+   `right: leftWidth px` to `.left`
+   (Adjust `.left` position).
 
 ```html
 <div class="container">
