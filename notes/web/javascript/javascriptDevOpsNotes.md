@@ -2498,6 +2498,10 @@ module.exports = babel => {
 };
 ```
 
+Babel plugins:
+
+- Define [plugin](https://github.com/FormidableLabs/babel-plugin-transform-define).
+
 ### Babel Preset Plugin
 
 - Just like `.babelrc.js`.
