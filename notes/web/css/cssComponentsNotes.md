@@ -1869,7 +1869,7 @@ More spinner see [SpinKit](https://github.com/tobiasahlin/SpinKit).
 
 #### Gradient Dot
 
-`radial-gradient` dot:
+[`radial-gradient` dot](https://css-tricks.com/single-element-loaders-the-dots):
 
 ```css
 /**
