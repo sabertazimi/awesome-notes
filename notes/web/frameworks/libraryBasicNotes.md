@@ -423,6 +423,7 @@ tags: [Web, Framework, Library]
 
 ### Comments
 
+- [Giscus: Comment System Powered by GitHub Discussion](https://github.com/giscus/giscus)
 - [GitTalk: Modern Comment Component Based on Github Issue and Preact](https://github.com/gitalk/gitalk)
 - [Utterances: Lightweight Comments Widget Built on GitHub Issues](https://github.com/utterance/utterances)
 - [Waline: Simple, Safe Comment System Inspired by Valine](https://github.com/walinejs/waline)
