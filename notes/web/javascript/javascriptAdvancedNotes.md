@@ -4180,6 +4180,10 @@ for await (const decodedChunk of decodedStream) {
 }
 ```
 
+### Web Stream
+
+- Web streams [API](https://2ality.com/2022/06/web-streams-nodejs.html).
+
 ### Internationalization
 
 #### Number i18n
