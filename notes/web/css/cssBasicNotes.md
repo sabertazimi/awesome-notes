@@ -2033,6 +2033,17 @@ wbr::after {
 
 :::
 
+```css
+.text-truncate-box {
+  display: inline-block;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: normal;
+  white-space: nowrap;
+}
+```
+
 ### Text Horizontal Direction
 
 #### Direction
