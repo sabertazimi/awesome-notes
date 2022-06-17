@@ -1733,6 +1733,14 @@ module.exports = {
 - 对 `display: inline-*` 替换元素有效.
 - Percentage `text-indent` calculate by `containing block` width.
 
+```css
+.hidden-text {
+  font: 0/0;
+  color: transparent;
+  text-indent: -9999px;
+}
+```
+
 [`tab-size`](https://developer.mozilla.org/docs/Web/CSS/tab-size):
 
 ```css
@@ -1844,23 +1852,25 @@ p {
 - 重点符号字号默认为文字字号的一半.
 
 ```css
-/* Initial value */
-text-emphasis: none;
+.text {
+  /* Initial value */
+  text-emphasis: none;
 
-/* <string> value */
-text-emphasis: 'x';
-text-emphasis: '点';
-text-emphasis: '\25B2';
-text-emphasis: '*' #555;
+  /* <string> value */
+  text-emphasis: 'x';
+  text-emphasis: '点';
+  text-emphasis: '\25B2';
+  text-emphasis: '*' #555;
 
-/* Keywords value */
-text-emphasis: filled; /* filled dot */
-text-emphasis: open; /* open dot */
-text-emphasis: sesame; /* filled sesame */
-text-emphasis: open sesame;
+  /* Keywords value */
+  text-emphasis: filled; /* filled dot */
+  text-emphasis: open; /* open dot */
+  text-emphasis: sesame; /* filled sesame */
+  text-emphasis: open sesame;
 
-/* Keywords value combined with a color */
-text-emphasis: filled sesame #555;
+  /* Keywords value combined with a color */
+  text-emphasis: filled sesame #555;
+}
 ```
 
 [`text-emphasis-position`](https://developer.mozilla.org/docs/Web/CSS/text-emphasis-position):
@@ -1873,14 +1883,16 @@ text-emphasis: filled sesame #555;
 - 默认在顶部或右侧画重点符号.
 
 ```css
-/* Initial value */
-text-emphasis-position: over right;
+.text {
+  /* Initial value */
+  text-emphasis-position: over right;
 
-/* Keywords value */
-text-emphasis-position: over left;
-text-emphasis-position: under right;
-text-emphasis-position: left under;
-text-emphasis-position: right over;
+  /* Keywords value */
+  text-emphasis-position: over left;
+  text-emphasis-position: under right;
+  text-emphasis-position: left under;
+  text-emphasis-position: right over;
+}
 ```
 
 ### Text Size Adjust
