@@ -1291,7 +1291,7 @@ Flexbox 子元素:
 
 #### Flex Margin Alignment
 
-Alignment with `margin`:
+Aligning with [auto `margin`](https://www.w3.org/TR/css-flexbox-1/#auto-margins):
 
 ```html
 <div class="parent">
