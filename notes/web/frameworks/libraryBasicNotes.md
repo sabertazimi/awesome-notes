@@ -593,6 +593,10 @@ tags: [Web, Framework, Library]
 - [Glider.js: Native Scrolling Carousel](https://github.com/NickPiscitelli/Glider.js)
 - [ReactSimplyCarousel: Lightweight, Responsive, Touch Enabled and Fully Controlled Isomorphic (SSR Support)](https://github.com/vadymshymko/react-simply-carousel)
 
+### Scrollbar
+
+- [PerfectScrollbar: Minimalistic but Perfect Custom Scrollbar Plugin](https://github.com/mdbootstrap/perfect-scrollbar)
+
 ### Slides and Presentation
 
 - [Reveal: HTML Presentation Framework](https://github.com/hakimel/reveal.js)
