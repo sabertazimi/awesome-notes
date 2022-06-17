@@ -976,6 +976,7 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 
 .right {
   margin-left: 70px;
+  overflow: hidden; /* BFC creation */
 }
 ```
 
@@ -1019,6 +1020,8 @@ For `float` element:
   causing adjacent elements to overlap the `float` element.
 
 :::
+
+[圣杯布局](https://github.com/sabertazimi/hust-web/blob/main/ife/2018/basic/layout/index.css):
 
 1. HTML: `.middle` first.
 2. `padding-left` and `padding-right` to `.container`,
