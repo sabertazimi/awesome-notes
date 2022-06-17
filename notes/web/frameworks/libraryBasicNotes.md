@@ -65,6 +65,7 @@ tags: [Web, Framework, Library]
 
 - [Daisy: Tailwind Components Plugin](https://github.com/saadeghi/daisyui)
 - [Vechai: Tailwind React Library](https://github.com/vechai/vechaiui)
+- [Elements: Tailwind Components Collection](https://github.com/mdbootstrap/Tailwind-Elements)
 - [Tailwind](https://github.com/tailwindlabs/tailwindcss)
 - [Form](https://github.com/tailwindlabs/tailwindcss-forms)
 - [Typography](https://github.com/tailwindlabs/tailwindcss-typography)
