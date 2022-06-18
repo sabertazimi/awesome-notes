@@ -495,7 +495,7 @@ li + li {
 
 #### Hover Pseudo Class
 
-`:hover`:
+[`:hover`](https://codepen.io/Chokcoco/pen/rRLJrR):
 
 - 鼠标移动到容器时的状态.
 - 不仅限于链接, 可用于页面中的任何元素.
