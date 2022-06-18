@@ -899,8 +899,8 @@ tags: [Web, Framework, Library]
 
 ### Video
 
-- [React Player](https://github.com/zhihu/griffith)
 - [Video.js](https://github.com/videojs/video.js)
+- [React Player](https://github.com/zhihu/griffith)
 - [Plyr](https://github.com/selz/plyr)
 - [FLV.js](https://github.com/bilibili/flv.js)
 - [React Youtube Player](https://github.com/tjallingt/react-youtube)
