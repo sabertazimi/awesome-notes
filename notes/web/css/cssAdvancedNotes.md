@@ -613,6 +613,8 @@ p:hover {
 - 当 `background-attachment: local` 时,
   背景图会随元素内容的滚动而滚动 (scroll with local view).
 
+[滚动阴影](https://codepen.io/Chokcoco/pen/abmqMJQ):
+
 ```css
 /**
  * 纯白渐变背景随列表滚动而滚动, 灰度渐变背景不随列表滚动而滚动.
