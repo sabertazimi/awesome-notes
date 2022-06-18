@@ -600,17 +600,17 @@ p:hover {
 
 [`background-attachment`](https://developer.mozilla.org/docs/Web/CSS/background-attachment):
 
-- `scroll`: scrolls with the main view, but stays fixed inside the local view.
-- `local`: scrolls both with the main view and the local view.
+- `scroll`: scrolls with main view, but stays fixed inside local view.
+- `local`: scrolls both with main view and local view.
 - `fixed`: stays fixed no matter what.
 
 #### Background Scroll View
 
-- 对于可以滚动的元素 (`overflow: scroll`),
-  当 `background-attachment: scroll` 时,
+对于可以滚动的元素 (`overflow: scroll`):
+
+- 当 `background-attachment: scroll` 时,
   背景图不会随元素内容的滚动而滚动 (fixed inside local view).
-- 对于可以滚动的元素 (`overflow: scroll`),
-  当 `background-attachment: local` 时,
+- 当 `background-attachment: local` 时,
   背景图会随元素内容的滚动而滚动 (scroll with local view).
 
 ```css
