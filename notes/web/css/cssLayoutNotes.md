@@ -2052,14 +2052,14 @@ selected elements in grid container:
 
 - `border` simulation.
 - Negative `margin`.
-- `<table>` element:
-  `display: table-cell` 默认等高.
 - `absolute` element:
   `.absolute { top: 0; bottom: 0; }` 使所有子元素 (`absolute`) 与父元素 (`relative`) 等高.
+- `table` layout:
+  `display: table-cell` 默认等高.
 - `flex` layout:
-  `flex` 盒子中的子元素默认拉伸至盒子高度.
+  `flex` items 默认拉伸至盒子高度.
 - `grid` layout:
-  `grid` 布局元素默认等高.
+  `grid` items 默认等高.
 
 #### Border Simulation Height Alignment
 
@@ -2101,6 +2101,57 @@ selected elements in grid container:
 .column-right {
   padding-bottom: 9999px;
   margin-bottom: -9999px;
+}
+```
+
+#### Layout Height Alignment
+
+```css
+.table {
+  display: table;
+  overflow: hidden;
+
+  .left {
+    display: table-cell;
+    width: 200px;
+    background: #4caf50;
+  }
+
+  .right {
+    display: table-cell;
+    width: 800px;
+    background: #99afe0;
+  }
+}
+
+.flex {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+
+  .left {
+    flex: 200px 0 0;
+    background: #4caf50;
+  }
+
+  .right {
+    flex: auto 1 0;
+    background: #99afe0;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 200px auto;
+  align-items: stretch;
+
+  .left {
+    background: #4caf50;
+  }
+
+  .right {
+    background: #99afe0;
+  }
 }
 ```
 
