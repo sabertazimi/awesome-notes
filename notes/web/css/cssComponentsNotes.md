@@ -1758,6 +1758,67 @@ Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
 }
 ```
 
+### Wave line
+
+Rotate border [wave](https://codepen.io/Chokcoco/pen/EXJrdB):
+
+```html
+<div class="container">
+  <div class="wave"></div>
+  <p>45%</p>
+</div>
+
+<style>
+  .container {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .wave {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: rgb(118 218 255);
+    border-radius: 50%;
+  }
+
+  .wave::before,
+  .wave::after {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 1;
+    width: 400px;
+    height: 400px;
+    content: '';
+    background-color: rgb(255 255 255 / 40%);
+    border-radius: 45%;
+    transform: translate(-50%, -70%) rotate(0);
+    animation: rotate 6s linear infinite;
+  }
+
+  .wave::after {
+    z-index: 2;
+    background-color: rgb(255 255 255 / 90%);
+    border-radius: 47%;
+    transform: translate(-50%, -70%) rotate(0);
+    animation: rotate 10s linear -5s infinite;
+  }
+
+  @keyframes rotate {
+    50% {
+      transform: translate(-50%, -73%) rotate(180deg);
+    }
+
+    100% {
+      transform: translate(-50%, -70%) rotate(360deg);
+    }
+  }
+</style>
+```
+
 ### Menu Line
 
 ```css
