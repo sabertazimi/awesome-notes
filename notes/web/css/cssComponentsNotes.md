@@ -2165,7 +2165,11 @@ const polygon = (n = 3) => {
 
 - Parent element: `background-color` + `filter: contrast()`.
 - Child element: `filter: blur()`.
-- Light/flame/rain drop emulation .
+
+[Light](https://codepen.io/Chokcoco/pen/BaaQEab),
+[flame](https://codepen.io/Chokcoco/pen/jJJbmz),
+[rain drop](https://codepen.io/Chokcoco/pen/gZVjJw)
+emulation:
 
 ```html
 <div class="container">
