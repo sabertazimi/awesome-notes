@@ -2280,9 +2280,33 @@ wait(5000, abortController.signal)
   });
 ```
 
-#### Abort Reference
+#### Abort Controller Helpers
 
-- Abort controller [snippets](https://whistlr.info/2022/abortcontroller-is-your-friend).
+Abort controller [helpers polyfill](https://whistlr.info/2022/abortcontroller-is-your-friend):
+
+```ts
+if (!timeout in AbortSignal) {
+  AbortSignal.timeout = function abortTimeout(ms) {
+    const controller = new AbortController();
+    setTimeout(() => controller.abort(), ms);
+    return controller.signal;
+  };
+}
+
+if (!any in AbortSignal) {
+  AbortSignal.any = function abortAny(signals) {
+    const controller = new AbortController();
+    signals.forEach(signal => {
+      if (signal.aborted) {
+        controller.abort();
+      } else {
+        signal.addEventListener('abort', () => controller.abort());
+      }
+    });
+    return controller.signal;
+  };
+}
+```
 
 ### Asynchronous API Comparison
 
