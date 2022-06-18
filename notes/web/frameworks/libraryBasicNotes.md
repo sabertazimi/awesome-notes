@@ -463,7 +463,7 @@ tags: [Web, Framework, Library]
 - [Balloon Hovering Tooltips](https://github.com/kazzkiq/balloon.css)
 - [Hint.css Tooltips](https://github.com/chinchang/hint.css)
 
-#### Guide
+### Guide
 
 - [JoyRide: Awesome Guided Tours](https://github.com/gilbarbara/react-joyride)
 - [Shepherd: Guide Tour Library](https://github.com/shipshapecode/shepherd)
@@ -471,11 +471,11 @@ tags: [Web, Framework, Library]
 - [Driver.js](https://github.com/kamranahmedse/driver.js)
 - [Wizard: React Stepper Guide](https://github.com/devrnt/react-use-wizard)
 
-#### Rating
+### Rating
 
 - [ReactRating](https://github.com/awran5/react-simple-star-rating)
 
-#### Timeline
+### Timeline
 
 - [PlanBy: Electronic Program Guide (EPG) based Timeline](https://github.com/karolkozer/planby)
 - [Frappe: Interactive and Modern Gantt Chart](https://github.com/frappe/gantt)
@@ -610,6 +610,17 @@ tags: [Web, Framework, Library]
 ### Picker
 
 - [React Roulette](https://github.com/effectussoftware/react-custom-roulette)
+
+### Clipboard
+
+- [Clipboard.js](https://github.com/zenorocha/clipboard.js)
+
+### Keyboard
+
+- [HotKey: Trigger Action on Element with Keyboard Shortcut](https://github.com/github/hotkey)
+- [KBar: Fast, Portable and Extensible Command K Interface](https://github.com/timc1/kbar)
+- [NinjaKeys: Keyboard Shortcuts Interface](https://github.com/ssleptsov/ninja-keys)
+- [ReactCMDKeyboard: Fast, Accessible and Pretty Command Palette](https://github.com/albingroen/react-cmdk)
 
 ### iFrame
 
@@ -908,70 +919,6 @@ tags: [Web, Framework, Library]
 - [Turf: Modular Geospatial Engine](https://github.com/Turfjs/turf)
 - [React Leaflet Map](https://github.com/PaulLeCam/react-leaflet)
 
-## Editor
-
-### Rich Text Editor
-
-- [Quill: Modern WYSIWYG Editor Built for Compatibility and Extensibility](https://github.com/quilljs/quill)
-- [Slate: Customizable Rich Text Editor Framework](https://github.com/ianstormtaylor/slate)
-- [EditorJS: Block-styled Rich Text Editor](https://github.com/codex-team/editor.js)
-- [WangEditor: Lightweight Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
-- [TinyMCE: World #1 JavaScript Library for Rich Text Editing](https://github.com/tinymce/tinymce)
-- [StyloJS: TypeScript Rich Text Editor](https://github.com/papyrs/stylo)
-- [Lexical: Draft.js alternatives](https://github.com/facebook/lexical)
-- [Draft: React Text Editor Framework](https://github.com/facebook/draft-js)
-- [Draft Plugins](https://github.com/draft-js-plugins/draft-js-plugins)
-- [TipTap: Collaborative and Headless WYSIWYG Text Editor Framework](https://github.com/ueberdosis/tiptap)
-- [ProseMirror: Collaborative and Semantic Rich Text Editing](https://github.com/ProseMirror/prosemirror-view)
-
-### Markdown Editor
-
-- [MilkDown: Plugin Driven WYSIWYG Markdown Editor Framework](https://github.com/Saul-Mirone/milkdown)
-- [ByteMD: Hackable Markdown Editor Component](https://github.com/bytedance/bytemd)
-- [Vditor: Multiple Mode Markdown Editor](https://github.com/Vanessa219/vditor)
-- [React Markdown Component](https://github.com/remarkjs/react-markdown)
-
-### Code Editor
-
-- [Monaco: Powers VS Code](https://github.com/microsoft/monaco-editor)
-- [React ACE](https://github.com/securingsincity/react-ace)
-- [ACE Editor](https://github.com/ajaxorg/ace)
-- [Code Mirror](https://github.com/codemirror/CodeMirror)
-- [Xi: Code Editor Philosophy](https://github.com/xi-editor/xi-editor)
-
-### Live Editor and Playground
-
-- [SandPack: Toolkit for creating live-running code editing experiences](https://github.com/codesandbox/sandpack)
-- [React Live: Flexible Playground for Live Editing React Components](https://github.com/FormidableLabs/react-live)
-- [React Runner](https://github.com/nihgwu/react-runner)
-- [SyncedStore: CRDT for Building Live and Collaborative Applications](https://github.com/yousefed/SyncedStore)
-
-### Web IDE
-
-- [CodeServer: VS Code in Browser](https://github.com/coder/code-server)
-- [Theia: Cloud IDE framework](https://github.com/eclipse-theia/theia)
-- [Utopia: React IDE](https://github.com/concrete-utopia/utopia)
-
-### Low-Code Editor
-
-- [LowCodeEngine: Enterprise-class Low-code Technology Stack](https://github.com/alibaba/lowcode-engine)
-- [TMagic: Tencent Low-Code Editor](https://github.com/Tencent/tmagic-editor)
-- [ToolJet: Extensible Low-code Framework for Building Business Applications](https://github.com/ToolJet/ToolJet)
-- [AppSmith: Low-Code Project to Build Admin Panels, Internal Tools, and Dashboards](https://github.com/appsmithorg/appsmith)
-- [BuildBase: Low-code Platform for Creating Internal Apps, Workflows, and Admin Panels](https://github.com/Budibase/budibase)
-- [NocoBase: Scalability-first Low-code Development Platform](https://github.com/nocobase/nocobase)
-
-### Clipboard
-
-- [Clipboard.js](https://github.com/zenorocha/clipboard.js)
-
-### Keyboard
-
-- [HotKey: Trigger Action on Element with Keyboard Shortcut](https://github.com/github/hotkey)
-- [KBar: Fast, Portable and Extensible Command K Interface](https://github.com/timc1/kbar)
-- [NinjaKeys: Keyboard Shortcuts Interface](https://github.com/ssleptsov/ninja-keys)
-- [ReactCMDKeyboard: Fast, Accessible and Pretty Command Palette](https://github.com/albingroen/react-cmdk)
-
 ## SMS
 
 ### Phone
@@ -1069,11 +1016,100 @@ tags: [Web, Framework, Library]
 - [Docusaurus Plugin: Local Search Plugin Based on Lunr.js](https://github.com/easyops-cn/docusaurus-search-local)
 - [Fuse: Lightweight Fuzzy Search JavaScript Library](https://github.com/krisk/fuse)
 
-## SEO
+### SEO
 
 - [React Helmet: Document Head Manager](https://github.com/nfl/react-helmet)
 - [NextSEO: Next.js SEO Management](https://github.com/garmeeh/next-seo)
 - [Vue Meta: Components HTML Metadata Manager with SSR Support](https://github.com/nuxt/vue-meta)
+
+## Editor
+
+### Rich Text Editor
+
+- [Quill: Modern WYSIWYG Editor Built for Compatibility and Extensibility](https://github.com/quilljs/quill)
+- [Slate: Customizable Rich Text Editor Framework](https://github.com/ianstormtaylor/slate)
+- [EditorJS: Block-styled Rich Text Editor](https://github.com/codex-team/editor.js)
+- [WangEditor: Lightweight Rich Text Editor](https://github.com/wangfupeng1988/wangEditor)
+- [TinyMCE: World #1 JavaScript Library for Rich Text Editing](https://github.com/tinymce/tinymce)
+- [StyloJS: TypeScript Rich Text Editor](https://github.com/papyrs/stylo)
+- [Lexical: Draft.js alternatives](https://github.com/facebook/lexical)
+- [Draft: React Text Editor Framework](https://github.com/facebook/draft-js)
+- [Draft Plugins](https://github.com/draft-js-plugins/draft-js-plugins)
+- [TipTap: Collaborative and Headless WYSIWYG Text Editor Framework](https://github.com/ueberdosis/tiptap)
+- [ProseMirror: Collaborative and Semantic Rich Text Editing](https://github.com/ProseMirror/prosemirror-view)
+
+### Markdown Editor
+
+- [MilkDown: Plugin Driven WYSIWYG Markdown Editor Framework](https://github.com/Saul-Mirone/milkdown)
+- [ByteMD: Hackable Markdown Editor Component](https://github.com/bytedance/bytemd)
+- [Vditor: Multiple Mode Markdown Editor](https://github.com/Vanessa219/vditor)
+- [React Markdown Component](https://github.com/remarkjs/react-markdown)
+
+### Code Editor
+
+- [Monaco: Powers VS Code](https://github.com/microsoft/monaco-editor)
+- [React ACE](https://github.com/securingsincity/react-ace)
+- [ACE Editor](https://github.com/ajaxorg/ace)
+- [Code Mirror](https://github.com/codemirror/CodeMirror)
+- [Xi: Code Editor Philosophy](https://github.com/xi-editor/xi-editor)
+
+### Live Editor and Playground
+
+- [SandPack: Toolkit for creating live-running code editing experiences](https://github.com/codesandbox/sandpack)
+- [React Live: Flexible Playground for Live Editing React Components](https://github.com/FormidableLabs/react-live)
+- [React Runner](https://github.com/nihgwu/react-runner)
+- [SyncedStore: CRDT for Building Live and Collaborative Applications](https://github.com/yousefed/SyncedStore)
+
+### Web IDE
+
+- [CodeServer: VS Code in Browser](https://github.com/coder/code-server)
+- [Theia: Cloud IDE framework](https://github.com/eclipse-theia/theia)
+- [Utopia: React IDE](https://github.com/concrete-utopia/utopia)
+
+### Low-Code Editor
+
+- [LowCodeEngine: Enterprise-class Low-code Technology Stack](https://github.com/alibaba/lowcode-engine)
+- [TMagic: Tencent Low-Code Editor](https://github.com/Tencent/tmagic-editor)
+- [ToolJet: Extensible Low-code Framework for Building Business Applications](https://github.com/ToolJet/ToolJet)
+- [AppSmith: Low-Code Project to Build Admin Panels, Internal Tools, and Dashboards](https://github.com/appsmithorg/appsmith)
+- [BuildBase: Low-code Platform for Creating Internal Apps, Workflows, and Admin Panels](https://github.com/Budibase/budibase)
+- [NocoBase: Scalability-first Low-code Development Platform](https://github.com/nocobase/nocobase)
+
+## Compiler
+
+### Language Parser
+
+- [UnifiedJS: Interface for Parsing, Inspecting, Transforming and Serializing Content through Syntax Trees](https://github.com/unifiedjs/unified)
+- [HTML Parser](https://github.com/fb55/htmlparser2)
+- [YAML Parser](https://github.com/jonschlinkert/gray-matter)
+- [XML Parser](https://github.com/TobiasNickel/tXml)
+- [SVG Parser](https://github.com/sebmarkbage/art)
+- [Crontab Parser](https://github.com/harrisiirak/cron-parser)
+- [Domain Parser](https://github.com/peerigon/parse-domain)
+- [Git URL Parser](https://github.com/IonicaBizau/git-url-parse)
+- [SemVer Parser](https://github.com/npm/node-semver)
+- [INI Parser](https://github.com/npm/ini)
+- [RSS Parser](https://github.com/rbren/rss-parser)
+
+### JavaScript Parser
+
+- [Acorn](https://github.com/acornjs/acorn)
+- [Babel](https://github.com/babel/babel)
+- [Sucrase: Super-fast Alternative to Babel Targeting Modern JS Runtime](https://github.com/alangpierce/sucrase)
+- [Espree](https://github.com/eslint/espree)
+- [Esprima](https://github.com/jquery/esprima)
+- [AST Explorer](https://github.com/fkling/astexplorer)
+- [ReactDocGen TypeScript: React TypeScript Components Properties Parser](https://github.com/styleguidist/react-docgen-typescript)
+- [Boa: Embed JavaScript Engine Written in Rust](https://github.com/boa-dev/boa)
+
+### Markdown Parser and Render
+
+- [MDX](https://github.com/mdx-js/mdx)
+- [Marked](https://github.com/markedjs/marked)
+- [MarkdownIt](https://github.com/markdown-it/markdown-it)
+- [Remark](https://github.com/remarkjs/remark)
+- [Yozora: TypeScript Markdown Parser](https://github.com/yozorajs/yozora)
+- [Prism React Renderer](https://github.com/FormidableLabs/prism-react-renderer)
 
 ## CLI
 
@@ -1144,41 +1180,6 @@ tags: [Web, Framework, Library]
 - [Jay: Supercharged JavaScript REPL](https://github.com/nikersify/jay)
 - [Fig: Terminal Autocomplete](https://github.com/withfig/autocomplete)
 - [Eruda: Console for Mobile Browsers](https://github.com/liriliri/eruda)
-
-## Compiler
-
-### Parser
-
-- [UnifiedJS: Interface for Parsing, Inspecting, Transforming and Serializing Content through Syntax Trees](https://github.com/unifiedjs/unified)
-- [HTML Parser](https://github.com/fb55/htmlparser2)
-- [YAML Parser](https://github.com/jonschlinkert/gray-matter)
-- [XML Parser](https://github.com/TobiasNickel/tXml)
-- [SVG Parser](https://github.com/sebmarkbage/art)
-- [Crontab Parser](https://github.com/harrisiirak/cron-parser)
-- [Domain Parser](https://github.com/peerigon/parse-domain)
-- [Git URL Parser](https://github.com/IonicaBizau/git-url-parse)
-- [SemVer Parser](https://github.com/npm/node-semver)
-- [INI Parser](https://github.com/npm/ini)
-- [RSS Parser](https://github.com/rbren/rss-parser)
-
-### JavaScript Parser
-
-- [Acorn](https://github.com/acornjs/acorn)
-- [Babel](https://github.com/babel/babel)
-- [Sucrase: Super-fast Alternative to Babel Targeting Modern JS Runtime](https://github.com/alangpierce/sucrase)
-- [Espree](https://github.com/eslint/espree)
-- [Esprima](https://github.com/jquery/esprima)
-- [AST Explorer](https://github.com/fkling/astexplorer)
-- [ReactDocGen TypeScript: React TypeScript Components Properties Parser](https://github.com/styleguidist/react-docgen-typescript)
-
-#### Markdown Parser and Render
-
-- [MDX](https://github.com/mdx-js/mdx)
-- [Marked](https://github.com/markedjs/marked)
-- [MarkdownIt](https://github.com/markdown-it/markdown-it)
-- [Remark](https://github.com/remarkjs/remark)
-- [Yozora: TypeScript Markdown Parser](https://github.com/yozorajs/yozora)
-- [Prism React Renderer](https://github.com/FormidableLabs/prism-react-renderer)
 
 ## Daemon
 
