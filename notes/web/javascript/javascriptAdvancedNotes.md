@@ -2540,7 +2540,7 @@ Sandbox(function (box) {
 Sandbox('dom', 'event', function (box) {
   // work with dom and event
   Sandbox('ajax', function (box) {
-    // another sandbox "box" object
+    // another "box" object
     // this "box" is not the same as
     // the "box" outside this function
     // ...
