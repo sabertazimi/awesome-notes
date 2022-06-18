@@ -1943,6 +1943,37 @@ More spinner see [SpinKit](https://github.com/tobiasahlin/SpinKit).
 }
 ```
 
+[`repeating-radial-gradient` dot](https://codepen.io/Chokcoco/pen/vYgrGEE):
+
+```css
+@property --length {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0.0008px;
+}
+
+/* TV snowflake noise signal screen effect (雪花屏效果) */
+div {
+  background-image: repeating-radial-gradient(
+    circle at 17% 32%,
+    rgb(4 4 0),
+    rgb(52 72 197),
+    rgb(115 252 224),
+    rgb(116 71 5),
+    rgb(223 46 169),
+    rgb(0 160 56),
+    rgb(234 255 0) var(--length)
+  );
+  animation: change 1s infinite alternate;
+}
+
+@keyframes change {
+  100% {
+    --length: 0.0009px;
+  }
+}
+```
+
 ### Circle
 
 - `background` circle.
