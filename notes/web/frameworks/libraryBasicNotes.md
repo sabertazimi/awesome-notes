@@ -368,7 +368,7 @@ tags: [Web, Framework, Library]
 
 ### Background Utils
 
-- [Doodle: Web Component for Drawing Patterns with CSS](https://github.com/css-doodle/css-doodle)
+- [Doodle: Web Component for Drawing Patterns Based on CSS Grids](https://github.com/css-doodle/css-doodle)
 - [Clippy: Clip-Path Maker](https://github.com/bennettfeely/Clippy)
 - [Wicked Background](https://wickedbackgrounds.com/backgrounds.html)
 
