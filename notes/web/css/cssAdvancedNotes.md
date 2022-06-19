@@ -194,6 +194,7 @@ table {
 - `box-shadow`.
 - `clip-path`.
 - Pseudo element.
+- SVG [`stroke-dasharray`](https://codepen.io/Chokcoco/pen/gOOKYmV).
 
 ## CSS Outline
 
@@ -1319,6 +1320,29 @@ circle {
 [![Stroke Linejoin](./figures/StrokeLinejoin.png)](https://developer.mozilla.org/docs/Web/SVG/Attribute/stroke-linejoin)
 
 [![Stroke Dasharray](./figures/StrokeDasharray.png)](https://developer.mozilla.org/docs/Web/SVG/Attribute/stroke-dasharray)
+
+利用 `stroke-dasharray` 与 `stroke-dashoffset` 实现[动画线条](https://codepen.io/Chokcoco/pen/gOOKYmV):
+
+```html
+<a class="container">
+  <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+    <rect class="outline" height="100%" width="100%" />
+    <div class="text">SVG Animations</div>
+  </svg>
+</a>
+
+<style>
+  .container .outline {
+    stroke-dasharray: 25 25;
+    stroke-dashoffset: -588;
+  }
+
+  .container:hover .outline {
+    stroke-dasharray: 50 50;
+    stroke-dashoffset: -275;
+  }
+</style>
+```
 
 ### SVG Marker
 
