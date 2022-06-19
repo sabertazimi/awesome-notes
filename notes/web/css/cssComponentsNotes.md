@@ -2562,6 +2562,35 @@ body {
 }
 ```
 
+#### Fade Mask Animation
+
+[Fade text](https://codepen.io/Chokcoco/pen/OJbxZLM):
+
+```css
+p {
+  margin: auto;
+  font-family: 'Reggae One', cursive;
+  font-size: 48px;
+  color: #fff;
+  mask: radial-gradient(circle at 0 50%, #000, transparent 10%, transparent 0);
+  mask-size: 100%;
+  animation: scale 5s infinite;
+}
+
+.radial {
+  mask: radial-gradient(circle at 50% 0, #000, transparent 20%, transparent 0);
+  mask-size: 100% 100%;
+  animation: scale 5s infinite;
+}
+
+@keyframes scale {
+  50%,
+  100% {
+    mask-size: 100% 2000%;
+  }
+}
+```
+
 ### Bounce Animation
 
 ```css
