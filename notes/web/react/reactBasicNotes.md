@@ -1356,7 +1356,7 @@ class Menu extends React.Component {
 }
 ```
 
-### React Hooks Reuse Pattern
+### React Hooks
 
 - No wrapper hell: every hook is just one line of code.
 - No implicit dependencies: explicit one certain call for one certain hook.
@@ -4533,6 +4533,7 @@ if (!fs.existsSync(paths.appTypeDeclarations)) {
 
 - [Low-Code Engine Technical White Paper](https://developer.aliyun.com/ebook/7507)
 
-## Interviews
+## Reference
 
-- [React Interview Questions](https://github.com/semlinker/reactjs-interview-questions)
+- React component library [patterns](https://www.gabe.pizza/notes-on-component-libraries).
+- React interview [questions](https://github.com/semlinker/reactjs-interview-questions).
