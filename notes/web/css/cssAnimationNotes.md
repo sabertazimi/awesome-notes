@@ -327,6 +327,15 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 }
 ```
 
+:::tip Transition Background Images
+
+`transition` 无法对 CSS 背景图像 (如渐变效果) 起效:
+
+- 可以通过 `opacity`/`background-position` [间接实现](https://codepen.io/chriscoyier/pen/eRbLWP)渐变图像的过渡动画.
+- 可以通过 CSS Houdini `@property` [快速实现](https://juejin.cn/post/6951201528543707150)渐变图像的过渡动画.
+
+:::
+
 ### Transition Timing Function
 
 [`<easing-function>`](https://developer.mozilla.org/docs/Web/CSS/easing-function):
