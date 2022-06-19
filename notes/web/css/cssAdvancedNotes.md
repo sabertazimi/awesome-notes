@@ -1411,23 +1411,35 @@ This is also used to create **icon systems**.
 </svg>
 ```
 
-```html
-<filter id="noise" y="0" x="0">
-  <feTurbulence stitchTiles="stitch" baseFrequency=".75" type="fractalNoise" />
-</filter>
-```
+[SVG path text](https://codepen.io/Chokcoco/pen/NEpqMK):
 
 ```html
-<pattern ...>
-  ...
-  <rect
-    width="100%"
-    height="100%"
-    fill="white"
-    filter="url(#noise)"
-    opacity=".9"
-  />
-</pattern>
+<div class="circle-word">
+  <svg
+    width="400px"
+    height="300px"
+    viewBox="0 0 400 200"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <path
+        id="textCircle"
+        d="M 20 100 A 80 80 0 0 0 180 100 A 80 80 0 0 0 20 100"
+        fill="none"
+        stroke="#333"
+      ></path>
+    </defs>
+    <text class="textCircle" fill="yellowgreen">
+      <textPath
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xlink:href="#textCircle"
+      >
+        这是一段随着 path 路径绘制的文字
+      </textPath>
+    </text>
+  </svg>
+</div>
 ```
 
 ### SVG Clip Path
