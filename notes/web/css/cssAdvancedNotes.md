@@ -188,7 +188,9 @@ table {
 
 - `border`.
 - `outline`.
-- `background` gradient.
+- `background` gradient:
+  - `linear-gradient` [border](https://codepen.io/Chokcoco/pen/YzGdEMZ).
+  - `conic-gradient` [border](https://codepen.io/Chokcoco/pen/dypaobm).
 - `box-shadow`.
 - `clip-path`.
 - Pseudo element.
