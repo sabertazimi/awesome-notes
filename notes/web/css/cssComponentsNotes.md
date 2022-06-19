@@ -2367,6 +2367,8 @@ body {
 
 ### Gradient Text Effect
 
+[Gradient text](https://codepen.io/Chokcoco/pen/Rwoybzr):
+
 ```css
 .gradient-text {
   position: relative;
@@ -2401,6 +2403,49 @@ body {
   content: '';
   background: linear-gradient(315deg, #78e56c, #127ac9);
   mix-blend-mode: darken;
+}
+
+/**
+ * @see {@link https://codepen.io/Chokcoco/pen/jOwEqvR}
+ */
+.gradient-wave-text {
+  position: relative;
+  overflow: hidden;
+  font-size: 120px;
+  font-weight: bold;
+  color: #000;
+  background: #fff;
+}
+
+.gradient-wave-text::before,
+.gradient-wave-text::after {
+  position: absolute;
+  top: -923px;
+  left: 50%;
+  z-index: 1;
+  width: 2000px;
+  height: 2000px;
+  content: '';
+  background: rgb(3 169 244 / 85%);
+  border-radius: 45% 48% 43% 47%;
+  mix-blend-mode: lighten;
+  transform: translate(-50%, -50%);
+  animation: rotate 10s infinite linear;
+}
+
+.gradient-wave-text::after {
+  border-radius: 43% 47% 44% 48%;
+  animation: rotate 10s infinite 0.5s linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 ```
 
