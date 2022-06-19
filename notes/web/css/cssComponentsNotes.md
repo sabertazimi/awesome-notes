@@ -2310,7 +2310,11 @@ const polygon = (n = 3) => {
   background: #58a;
   transform: skew(45deg);
 }
+```
 
+[Chrome style tab](https://codepen.io/Chokcoco/pen/WNNgyMV):
+
+```css
 /* 梯形 */
 .tab::before {
   position: absolute;
