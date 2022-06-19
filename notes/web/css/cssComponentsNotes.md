@@ -1876,6 +1876,9 @@ Rotate border [wave](https://codepen.io/Chokcoco/pen/EXJrdB):
 
 ### Spinner
 
+- Rotate conic gradient.
+- Rotate border.
+
 Background gradient [loading spinner](https://css-tricks.com/single-element-loaders-the-spinner):
 
 ```css
