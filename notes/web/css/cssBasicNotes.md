@@ -2864,6 +2864,8 @@ li::before {
 }
 ```
 
+[Image comparison slider](https://codepen.io/Chokcoco/pen/bGqWJZL):
+
 ```html
 <div class="image-slider">
   <div class="image-before">
