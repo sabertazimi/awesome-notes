@@ -1507,12 +1507,38 @@ Use pseudo elements to construct circle and line:
 
 ## Background and Shadow
 
-### Gradient Box Shadow
+### Gradient Border
+
+[Gradient border](https://codepen.io/Chokcoco/pen/povBORP):
 
 ```css
-/**
- * @see {@link https://alvarotrigo.com/shadow-gradients}
- */
+.gradient-border {
+  width: 200px;
+  height: 100px;
+  margin: auto;
+  clip-path: inset(0 round 10px);
+  filter: hue-rotate(360deg);
+  border: 10px solid;
+  border-image: linear-gradient(45deg, gold, deeppink) 1;
+  animation: hue 6s infinite linear;
+}
+
+@keyframes hue {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+```
+
+### Gradient Box Shadow
+
+[Gradient box shadow](https://alvarotrigo.com/shadow-gradients):
+
+```css
 .box::before {
   position: absolute;
   top: 0;
