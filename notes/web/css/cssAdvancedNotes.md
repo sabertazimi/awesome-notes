@@ -1356,7 +1356,7 @@ polyline {
 }
 ```
 
-### SVG Shape Tag
+### SVG Shape
 
 - Rectangles and squares: `<rect>`.
 - Circles: `<circle>`.
@@ -1366,7 +1366,7 @@ polyline {
 - Polygon: `<polygon>`.
 - Path: `<path>`.
 
-### SVG Text Tag
+### SVG Text
 
 The text tag `<text>` is used to create **selectable** and **accessible** text:
 
@@ -1390,18 +1390,18 @@ text {
 }
 ```
 
-### SVG Accessibility Tag
+### SVG Title
 
 The title `<title>` and description `<desc>` tags
 are specifically for providing accessibility content.
 
-### SVG Group Tag
+### SVG Group
 
 The group tag `<g>` is used to group elements together
 to add class names and apply animations, filters, patterns and effects
 to a group of elements.
 
-### SVG Defs Tag
+### SVG Defs
 
 The defs tag `<defs>` is used to define elements for later reuse.
 This is where you create
@@ -1432,8 +1432,15 @@ This is also used to create **icon systems**.
       <path d="M2,3 L2,10 L8,6 L2,3" />
     </marker>
   </defs>
+  <defs>
+    <filter id="blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+    </filter>
+  </defs>
 </svg>
 ```
+
+### SVG Path
 
 [SVG path text](https://codepen.io/Chokcoco/pen/NEpqMK):
 
@@ -1560,6 +1567,67 @@ Avatar with circle status indicator:
       <feFuncA type="discrete" tableValues="0 1" />
     </feComponentTransfer>
   </filter>
+</svg>
+```
+
+SVG
+[glitch](https://github.com/chokcoco/iCSS/issues/78)
+[filter](https://github.com/chokcoco/cnblogsArticle/issues/27):
+
+```html
+<svg>
+  <defs>
+    <filter id="fe1">
+      <feTurbulence
+        id="animation"
+        type="fractalNoise"
+        baseFrequency="0.00001 9.9999999"
+        numOctaves="1"
+        result="warp"
+      >
+        <animate
+          attributeName="baseFrequency"
+          from="0.00001 9.9999"
+          to="0.00001 0.001"
+          dur="2s"
+          repeatCount="indefinite"
+        />
+      </feTurbulence>
+      <feOffset dx="-90" dy="-90" result="warpOffset"></feOffset>
+      <feDisplacementMap
+        xChannelSelector="R"
+        yChannelSelector="G"
+        scale="30"
+        in="SourceGraphic"
+        in2="warpOffset"
+      ></feDisplacementMap>
+    </filter>
+    <filter id="fe2">
+      <feTurbulence
+        id="animation"
+        type="fractalNoise"
+        baseFrequency="9.9999999 0.00001"
+        numOctaves="1"
+        result="warp"
+      >
+        <animate
+          attributeName="baseFrequency"
+          from="9.9999999 0.00001"
+          to="0.009 0.00001"
+          dur="2s"
+          repeatCount="indefinite"
+        />
+      </feTurbulence>
+      <feOffset dx="-90" dy="-90" result="warpOffset"></feOffset>
+      <feDisplacementMap
+        xChannelSelector="R"
+        yChannelSelector="G"
+        scale="30"
+        in="SourceGraphic"
+        in2="warpOffset"
+      ></feDisplacementMap>
+    </filter>
+  </defs>
 </svg>
 ```
 
