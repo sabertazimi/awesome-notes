@@ -1419,6 +1419,86 @@ window.CSS.registerProperty({
 });
 ```
 
+CSS 不支持背景渐变色的直接过渡动画,
+需要使用**两层**背景渐变 (`background` + `::before`/`::after` `background`)
+[`opacity` 变化](https://codepen.io/chriscoyier/pen/eRbLWP)
+实现渐变背景的过渡动画.
+
+现在,
+可以对 [CSS Houdini 自定义变量](https://juejin.cn/post/6951201528543707150)
+设置 `transition`/`animation`,
+快速实现渐变背景的过渡动画:
+
+```css
+@property --houdini-color-a {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #fff;
+}
+
+@property --houdini-color-b {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: fuchsia;
+}
+
+.box {
+  background: linear-gradient(
+    45deg,
+    var(--houdini-color-a),
+    var(--houdini-color-b)
+  );
+
+  /* stylelint-disable-next-line custom-property-no-missing-var-function */
+  transition: 1s --houdini-color-a;
+  animation: change 10s infinite linear;
+}
+
+.box:hover {
+  --houdini-color-a: yellowgreen;
+}
+
+@keyframes change {
+  20% {
+    --houdini-color-b: red;
+  }
+
+  40% {
+    --houdini-color-b: #ff3c41;
+  }
+
+  60% {
+    --houdini-color-b: orange;
+  }
+
+  80% {
+    --houdini-color-b: #ae63e4;
+  }
+}
+
+@property --per {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 25%;
+}
+
+.pie {
+  background: conic-gradient(
+    yellowgreen,
+    yellowgreen var(--per),
+    transparent var(--per),
+    transparent 100%
+  );
+
+  /* stylelint-disable-next-line custom-property-no-missing-var-function */
+  transition: --per 300ms linear;
+}
+
+.pie:hover {
+  --per: 60%;
+}
+```
+
 ## CSS Colors
 
 ### Current Color
