@@ -2044,11 +2044,77 @@ div {
 - `clip-path` triangle.
 - Pseudo element triangle.
 
+Background gradient triangle:
+
 ```css
 .triangle {
   background: linear-gradient(45deg, #000 50%, transparent 0);
 }
 
+/**
+ * @see {@link https://codepen.io/Chokcoco/pen/BGeJGm}
+ */
+.arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 40px;
+  font-size: 200%;
+  color: white;
+  text-align: center;
+  background: linear-gradient(
+        -135deg,
+        transparent 10%,
+        #04e6fb 10%,
+        #65ff9a 100%
+      ) top right, linear-gradient(
+        -45deg,
+        transparent 10%,
+        #04e6fb 10%,
+        #65ff9a 100%
+      ) bottom right,
+    linear-gradient(-135deg, #04e6fb 0, #65ff9a 90%, transparent 90%) top left, linear-gradient(
+        -45deg,
+        #04e6fb 0,
+        #65ff9a 90%,
+        transparent 90%
+      ) bottom left;
+  background-repeat: no-repeat;
+  background-size: 90% 50%;
+  transform: translate(-50%, -50%);
+}
+
+/**
+ * @see {@link play.csssecrets.io/folded-corner-realistic}
+ */
+.note {
+  position: relative;
+  background: #58a; /* 回退样式 */
+  background: linear-gradient(-150deg, transparent 1.5em, #58a 0);
+}
+
+.note::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.73em;
+  height: 3em;
+  content: '';
+  background: linear-gradient(
+      to left bottom,
+      transparent 50%,
+      rgb(0 0 0 / 20%) 0,
+      rgb(0 0 0 / 40%)
+    ) 100% 0 no-repeat;
+  transform: translateY(-1.3em) rotate(-30deg);
+  transform-origin: bottom right;
+}
+```
+
+Border triangle:
+
+```css
 /* transparent border */
 .arrow-up {
   width: 0;
@@ -2057,7 +2123,11 @@ div {
   border-bottom: 20px solid #8888e8;
   border-left: 16px solid transparent;
 }
+```
 
+Clip path triangle:
+
+```css
 /* clip path */
 .arrow-right {
   width: 20px;
@@ -2065,7 +2135,11 @@ div {
   clip-path: polygon(0 0, 0 100%, 100% 50%);
   background-color: #e888a3;
 }
+```
 
+Pseudo element triangle:
+
+```css
 /* pseudo element + hidden overflow */
 .arrow-down {
   position: relative;
@@ -2096,34 +2170,6 @@ div {
  */
 .arrow::before {
   content: '&#9660';
-}
-```
-
-```css
-/**
- * @see {@link play.csssecrets.io/folded-corner-realistic}
- */
-.note {
-  position: relative;
-  background: #58a; /* 回退样式 */
-  background: linear-gradient(-150deg, transparent 1.5em, #58a 0);
-}
-
-.note::before {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 1.73em;
-  height: 3em;
-  content: '';
-  background: linear-gradient(
-      to left bottom,
-      transparent 50%,
-      rgb(0 0 0 / 20%) 0,
-      rgb(0 0 0 / 40%)
-    ) 100% 0 no-repeat;
-  transform: translateY(-1.3em) rotate(-30deg);
-  transform-origin: bottom right;
 }
 ```
 
