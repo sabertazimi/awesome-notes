@@ -170,6 +170,15 @@ npx ts-jest config:init
 npx jest
 ```
 
+### TypeScript DefinitelyTyped
+
+- Library (`npm` package):
+  `@types/*` should be `dependencies`,
+  consumers can bring in type definitions used within.
+- Application:
+  `@types/*` should be `devDependencies`,
+  type definitions are just development-time tool.
+
 ### TypeScript Compiler Performance
 
 - Faster tools: `swc`/`rome`.
@@ -233,7 +242,10 @@ declare module '*.jpg' {
 }
 ```
 
+`globals.d.ts`:
+
 ```ts
+// npm i -D @types/react @types/react-dom
 declare global {
   namespace JSX {
     interface Element extends React.ReactElement<any, any> {}
@@ -244,13 +256,9 @@ declare global {
 }
 ```
 
-```bash
-npm i -D @types/react @types/react-dom
-```
-
 ### Library Definition
 
-lib.d.ts:
+`lib.d.ts`:
 
 ```json
 {
@@ -259,10 +267,6 @@ lib.d.ts:
     "lib": ["es6", "dom"]
   }
 }
-```
-
-```bash
-tsc --target es5 --lib dom,es6
 ```
 
 ### Namespace
