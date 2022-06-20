@@ -948,7 +948,7 @@ const src = 'const a = "Hello World"';
 window.ts.transpileModule(src, {});
 ```
 
-## Access Modifiers
+## Type Modifiers
 
 ### Member Access Modifiers
 
@@ -977,7 +977,7 @@ const someThing = new Singleton(); // Error: constructor of 'singleton' is priva
 const instance = Singleton.getInstance(); // do some thing with the instance
 ```
 
-### Readonly Types
+### Readonly Type Modifier
 
 `readonly`:
 
