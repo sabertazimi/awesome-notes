@@ -183,7 +183,11 @@ npx jest
 
 - Faster tools: `swc`/`rome`.
 - Multithread: `ts-loader` + `fork-ts-checker-plugin`.
-- Project references.
+- Project references (`tsc -b` build mode):
+  - Find `tsconfig` referenced projects.
+  - Detect if they are up-to-date.
+  - Build out-of-date projects in correct order.
+  - Build provided `tsconfig` if itself or any dependencies have changed.
 - Skip type checking (sometimes).
 - Load `@types/` by need (`include`/`exclude`/`compilerOptions.types`).
 - `tsc --listFiles` 列出编译时包含文件列表,
