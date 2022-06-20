@@ -1380,7 +1380,7 @@ tags: [Web, Framework, Library]
 - [PerfumeJS: Measuring Performance Vitals Metrics](https://github.com/zizzamia/perfume.js)
 - [Node Clinic](https://github.com/clinicjs/node-clinic)
 - [Perf Tools](https://github.com/brendangregg/perf-tools)
-- [FlameGraph](https://github.com/brendangregg/FlameGraph)
+- [0x: Single-command FlameGraph Profiling](https://github.com/davidmarkclements/0x)
 - [HyperFine: CLI Benchmark Tool](https://github.com/sharkdp/hyperfine)
 - [ByteHound: Memory Profiler](https://github.com/koute/bytehound)
 - [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render)
