@@ -283,7 +283,7 @@ const sq = new polygons.Square(); // Same as 'new Shapes.Polygons.Square()'
 ```
 
 Library namespace declaration
-with [Declaration Merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-namespaces-with-classes-functions-and-enums):
+with [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-namespaces-with-classes-functions-and-enums):
 
 ```ts
 export = React;
@@ -849,6 +849,36 @@ const crazy = new CrazyClass(); // crazy would be { hello:123 }
 ```
 
 ### Interface Extension
+
+#### Overridden Properties
+
+Overridden property must be assignable to its base property
+(ensure derived interface assignable to base interface):
+
+```ts
+interface WithNullableName {
+  name: string | null;
+}
+
+interface WithNonNullableName extends WithNullableName {
+  name: string;
+}
+
+interface WithNumericName extends WithNullableName {
+  name: number | string;
+}
+// Error: Interface 'WithNumericName' incorrectly
+// extends interface 'WithNullableName'.
+//   Types of property 'name' are incompatible.
+//     Type 'string | number' is not assignable to type 'string | null'.
+//       Type 'number' is not assignable to type 'string'.
+```
+
+#### Interface Merging
+
+Interface merging isn’t used often in day-to-day TypeScript development,
+but useful for augmenting interfaces from
+external 3rd-party packages (e.g `Cypress`) or built-in global interfaces (e.g `Window`):
 
 ```ts
 // Lib a.d.ts
