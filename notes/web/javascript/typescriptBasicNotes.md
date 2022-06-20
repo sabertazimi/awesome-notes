@@ -1601,6 +1601,15 @@ function pick<T extends object, U extends keyof T>(obj: T, keys: U[]): T[U][] {
 }
 ```
 
+:::tip Generic Golden Rule
+
+[Type `T` parameters should appear twice](https://effectivetypescript.com/2020/08/12/generics-golden-rule):
+
+If a type parameter only appears in one location,
+strongly **reconsider** if actually need it.
+
+:::
+
 ## Union Types
 
 ### Basic Union
