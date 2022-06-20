@@ -385,7 +385,8 @@ namespace Utility {
 - `string`.
 - `array`.
 - `tuple`:
-  `array` with **fixed number** of elements whose types are known.
+  - **Fixed number** of elements whose types are known.
+  - Variable length `array` types aren’t assignable to `tuple` types.
 - `enum`.
 - `void`.
 - `null`.
