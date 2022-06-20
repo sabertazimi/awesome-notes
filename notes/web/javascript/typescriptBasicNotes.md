@@ -109,8 +109,8 @@ Basic [`tsconfig`](https://www.typescriptlang.org/tsconfig):
     /* Source Map Options */
     "sourceRoot": "./", // 指定调试器应该找到 TypeScript 文件而不是源文件的位置
     "mapRoot": "./", // 指定调试器应该找到映射文件而不是生成文件的位置
-    "inlineSourceMap": true, // 生成单个 sourcemap 文件，而不是将 sourcemaps 生成不同的文件
-    "inlineSources": true, // 将代码与 sourcemap 生成到一个文件中
+    "inlineSourceMap": true, // 生成单个 source map 文件，而不是将 source maps 生成不同的文件
+    "inlineSources": true, // 将代码与 source map 生成到一个文件中
 
     /* 其他选项 */
     "experimentalDecorators": true, // 启用装饰器
@@ -2152,7 +2152,33 @@ function getArea(shape: Shape) {
 }
 ```
 
-Exhaustiveness checks:
+:::tip Void and Never
+
+- 当一个函数返回空值时, 它的返回值为 `void` 类型.
+- 当一个函数**永不返回**时 (或者总是抛出错误), 它的返回值为 `never` 类型.
+- 在 `strictNullChecking` 为 `false` 时, `void` 类型可以被赋值.
+- 除了 `never` 本身以外, 其他任何类型不能赋值给 `never`.
+
+```ts
+function fail(message: string): never {
+  throw new Error(`Invariant failure: ${message}.`);
+}
+
+function workWithUnsafeParam(param: unknown) {
+  if (typeof param !== 'string') {
+    fail(`Param should be a string, not ${typeof param}`);
+  }
+
+  // Here, param is known to be type string
+  param.toUpperCase(); // Ok
+}
+```
+
+:::
+
+### Exhaustiveness Check
+
+Exhaustiveness check using `never` in `switch` statement:
 
 ```ts
 class UnsupportedValueError extends Error {
@@ -2172,15 +2198,6 @@ function toGerman4(value: NoYesStrings): string {
   }
 }
 ```
-
-:::tip Void and Never
-
-- 当一个函数返回空值时, 它的返回值为 `void` 类型.
-- 当一个函数**永不返回**时 (或者总是抛出错误), 它的返回值为 `never` 类型.
-- 在 `strictNullChecking` 为 `false` 时, `void` 类型可以被赋值.
-- 除了 `never` 本身以外, 其他任何类型不能赋值给 `never`.
-
-:::
 
 ### Excess Property Check
 
