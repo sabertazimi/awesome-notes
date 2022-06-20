@@ -42,6 +42,7 @@ tags: [Web, Framework, Library]
 - [React Next.js Boilerplate](https://github.com/BearStudio/start-ui-web)
 - [React BulletProof Boilerplate](https://github.com/alan2207/bulletproof-react)
 - [React CRA Boilerplate](https://github.com/react-boilerplate/react-boilerplate-cra-template)
+- [React PWA Boilerplate](https://github.com/cra-template/pwa)
 - [React Electron Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
 - [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
 - [React Vite Starter](https://github.com/wtchnm/Vitamin)
