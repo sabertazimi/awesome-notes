@@ -1004,6 +1004,58 @@ dates.push(new Date()); // Error
 dates[0].setFullYear(2037); // OK
 ```
 
+## Call Signature
+
+### Call Signature Type
+
+Call signature looks similar to a function type,
+but with a `:` colon instead of an `=>` arrow:
+
+```ts
+type FunctionAlias = (input: string) => number;
+
+interface CallSignature {
+  (input: string): number;
+}
+
+// Type: (input: string) => number
+const typedFunctionAlias: FunctionAlias = input => input.length; // Ok
+
+// Type: (input: string) => number
+const typedCallSignature: CallSignature = input => input.length; // Ok
+```
+
+### Call Signature Property
+
+Call signatures can be used to describe functions
+that have some **additional user-defined property** on them:
+
+```ts
+interface FunctionWithCount {
+  count: number;
+  (): void;
+}
+
+let hasCallCount: FunctionWithCount;
+
+function keepsTrackOfCalls() {
+  keepsTrackOfCalls.count += 1;
+  console.log(`I've been called ${keepsTrackOfCalls.count} times!`);
+}
+
+keepsTrackOfCalls.count = 0;
+
+hasCallCount = keepsTrackOfCalls; // Ok
+
+function doesNotHaveCount() {
+  console.log('No idea!');
+}
+
+hasCallCount = doesNotHaveCount;
+// Error: Property 'count' is missing in type
+// '() => void' but required in type 'FunctionWithCalls'
+```
+
 ## Index Signature
 
 For `JavaScript`,
