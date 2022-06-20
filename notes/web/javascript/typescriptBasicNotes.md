@@ -1524,11 +1524,11 @@ interface Quote<T = string> {
   value: T;
 }
 
-let explicit: Quote<number> = { value: 123 };
-let implicit: Quote = {
+const explicit: Quote<number> = { value: 123 };
+const implicit: Quote = {
   value: 'Be yourself. The world worships the original.',
 };
-let mismatch: Quote = { value: 123 };
+const mismatch: Quote = { value: 123 };
 //                                     ~~~
 // Error: Type 'number' is not assignable to type 'string'.
 
@@ -1538,18 +1538,18 @@ interface KeyValuePair<Key, Value = Key> {
 }
 
 // Type: KeyValuePair<string, number>
-let allExplicit: KeyValuePair<string, number> = {
+const allExplicit: KeyValuePair<string, number> = {
   key: 'rating',
   value: 10,
 };
 
 // Type: KeyValuePair<string>
-let oneDefaulting: KeyValuePair<string> = {
+const oneDefaulting: KeyValuePair<string> = {
   key: 'rating',
   value: 'ten',
 };
 
-let firstMissing: KeyValuePair = {
+const firstMissing: KeyValuePair = {
   //            ~~~~~~~~~~~~
   // Error: Generic type 'KeyValuePair<Key, Value>'
   // requires between 1 and 2 type arguments.
