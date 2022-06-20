@@ -1146,7 +1146,7 @@ function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 }
 ```
 
-### Index Signature Type Checking
+### Index Signature Type Check
 
 ```ts
 const x: { foo: number; [x: string]: any };
@@ -1786,6 +1786,25 @@ type Example2 = RegExp extends Animal ? number : string;
 // => type Example2 = string
 ```
 
+### Nested Conditional Types
+
+- Conditional types can be nested.
+- 通过嵌套条件类型, 可以将类型约束收拢到精确范围.
+
+```ts
+type TypeName<T> = T extends string
+  ? 'string'
+  : T extends number
+  ? 'number'
+  : T extends boolean
+  ? 'boolean'
+  : T extends undefined
+  ? 'undefined'
+  : T extends Function
+  ? 'function'
+  : 'object';
+```
+
 ### Index Conditional Types
 
 Conditional types are able to access members of provided types:
@@ -1813,26 +1832,27 @@ await retrieve('2', { throwIfNotFound: Math.random() > 0.5 });
 await retrieve('3', { throwIfNotFound: true });
 ```
 
-### Nested Conditional Types
-
-- Conditional types can be nested.
-- 通过嵌套条件类型, 可以将类型约束收拢到精确范围.
+### Mapped Conditional Types
 
 ```ts
-type TypeName<T> = T extends string
-  ? 'string'
-  : T extends number
-  ? 'number'
-  : T extends boolean
-  ? 'boolean'
-  : T extends undefined
-  ? 'undefined'
-  : T extends Function
-  ? 'function'
-  : 'object';
+type MakeAllMembersFunctions<T> = {
+  [K in keyof T]: T[K] extends (...args: any[]) => any ? T[K] : () => T[K];
+};
+
+type MemberFunctions = MakeAllMembersFunctions<{
+  alreadyFunction: () => string;
+  notYetFunction: number;
+}>;
+// Type:
+// {
+//   alreadyFunction: () => string,
+//   notYetFunction: () => number,
+// }
 ```
 
 ### Distributive Conditional Types
+
+Type distributivity:
 
 - Conditional types in which checked type is `naked type parameter` are called DCT.
 - DCT are automatically distributed over union types during instantiation.
@@ -1871,6 +1891,8 @@ type NotDistributed = Wrapped<number | boolean>;
 ```
 
 ## Moving Types
+
+### Typeof Types
 
 ```ts
 // 捕获字符串的类型与值
@@ -3065,12 +3087,17 @@ logger(user); // Oops! `user.isSuperAdmin` is undefined.
 
 #### Type Gymnastics Tools
 
-- Template literal types.
-- Nested conditional types
-- Distributive conditional types.
-- `infer` inference types.
-- `...` rest types: `Items extends [infer Head, ...infer Tail]`.
-- Recursive types.
+- [Template literal types](#template-literal-types).
+- [Index signature](#index-signature).
+- [Mapped types](#mapped-types).
+- [Conditional types](#conditional-types):
+  - [Nested conditional types](#nested-conditional-types).
+  - [Index conditional types](#index-conditional-types).
+  - [Mapped conditional types](#mapped-conditional-types).
+  - [Distributive conditional types](#distributive-conditional-types).
+- `infer` [inference types](#type-inference).
+- `...` [rest types](#rest-parameters): `Items extends [infer Head, ...infer Tail]`.
+- [Recursive types](#recursive-types).
 
 #### Type Gymnastics Reference
 
