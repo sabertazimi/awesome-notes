@@ -207,7 +207,7 @@ for `TypeScript` compile and build [Speed](https://github.com/typescript-cheatsh
 
 ## Modules
 
-- [Types Search](https://microsoft.github.io/TypeSearch)
+[Module types search](https://microsoft.github.io/TypeSearch):
 
 | Declaration Type | Namespace | Type | Value |
 | :--------------- | :-------- | :--- | :---- |
@@ -325,6 +325,16 @@ namespace Utility {
   Utility.log = error;
 })(Utility || (Utility = {}));
 ```
+
+:::caution No Namespace
+
+Unless authoring DefinitelyTyped type definitions for existing package,
+**do not use namespaces**.
+
+Namespaces do not match up to modern JavaScript module semantics,
+their automatic member assignments can make code confusing to read.
+
+:::
 
 ### Module Resolution
 
