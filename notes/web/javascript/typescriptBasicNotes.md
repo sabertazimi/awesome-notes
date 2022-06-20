@@ -406,12 +406,17 @@ their automatic member assignments can make code confusing to read.
   - **Fixed number** of elements whose types are known.
   - Variable length `array` types aren’t assignable to `tuple` types.
 - `enum`.
-- `void`.
 - `null`.
 - `undefined`.
+- `void`.
 - `any`.
 - `unknown`: 任何类型都能分配给 `unknown`, 但 `unknown` 不能分配给其他基本类型.
-- `never`: `switch` default case guard (exhaustiveness check).
+- `never`:
+  - `switch` default case guard (exhaustiveness check).
+  - Reduce `never` intersection type.
+  - Ignored in union type:
+    - mapped conditional type.
+    - distributive conditional type.
 
 ```ts
 let num: number;
