@@ -649,6 +649,7 @@ tags: [Web, Framework, Library]
 
 ### Mouse and Touch Utils
 
+- [UseGesture: Component-tied Mouse and Touch Gestures](https://github.com/pmndrs/use-gesture)
 - [React DnD: Drag and Drop](https://github.com/react-dnd/react-dnd)
 - [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd)
 - [DFlex: Sophisticated Drag and Drop Library](https://github.com/dflex-js/dflex)
