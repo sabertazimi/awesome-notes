@@ -156,7 +156,7 @@ module.exports = {
 
 ### ESLint Configuration
 
-- [ESLint for TypeScript](https://github.com/typescript-eslint/typescript-eslint)
+[ESLint for TypeScript](https://github.com/typescript-eslint/typescript-eslint):
 
 ```bash
 npx eslint --init
@@ -183,14 +183,14 @@ npx jest
 ### TypeScript Project Reference
 
 [Project Reference](https://www.typescriptlang.org/docs/handbook/project-references.html)
-for TypeScript compile and build [Speed](https://github.com/typescript-cheatsheets/speed).
+for `TypeScript` compile and build [Speed](https://github.com/typescript-cheatsheets/speed).
 
 ### TypeScript Monorepo Configuration
 
 [TypeScript Monorepo](https://2ality.com/2021/07/simple-monorepos.html):
 
 - NPM workspaces.
-- TypeScript references.
+- `TypeScript` references.
 
 ## Modules
 
@@ -393,7 +393,7 @@ namespace Utility {
 - `undefined`.
 - `any`.
 - `unknown`: 任何类型都能分配给 `unknown`, 但 `unknown` 不能分配给其他基本类型.
-- `never`: `switch` default case guard (exhaustiveness checks).
+- `never`: `switch` default case guard (exhaustiveness check).
 
 ```ts
 let num: number;
@@ -733,7 +733,7 @@ padding(1, 1, 1); // Error: Not a part of the available overloads
 
 :::tip Function Overload
 
-TypeScript 中的函数重载没有任何运行时开销.
+`TypeScript` 中的函数重载没有任何运行时开销.
 它只允许你记录希望调用函数的方式,
 并且编译器会检查其余代码.
 
@@ -879,7 +879,7 @@ interface WithNumericName extends WithNullableName {
 
 #### Interface Merging
 
-Interface merging isn’t used often in day-to-day TypeScript development,
+Interface merging isn’t used often in day-to-day `TypeScript` development,
 but useful for augmenting interfaces from
 external 3rd-party packages (e.g `Cypress`) or built-in global interfaces (e.g `Window`):
 
@@ -1108,10 +1108,8 @@ console.log(foo[obj]); // toString called, World
 console.log(foo.Hello); // World
 ```
 
-TypeScript will give an error to prevent beginners
-from doing such things.
-
-**Index signature error**:
+`TypeScript` will give an error to prevent beginners from doing such things,
+throw **index signature error**:
 
 ```bash
 Element implicitly has an 'any' type
@@ -1638,8 +1636,8 @@ const b = x.b;
   just like `switch case` statement.
 - Distributive conditional types
   just like `map` statement (`loop` statement) on `union` type.
-- Conditional types make TypeScript become real programing type system:
-  TypeScript type system is [Turing Complete](https://github.com/microsoft/TypeScript/issues/14833).
+- Conditional types make `TypeScript` become real programing type system:
+  `TypeScript` type system is [Turing Complete](https://github.com/microsoft/TypeScript/issues/14833).
 
 ### Basic Conditional Types
 
@@ -2897,7 +2895,7 @@ logger(user); // Oops! `user.isSuperAdmin` is undefined.
 | Program level | Runtime      | Values         | Functions     |
 | Type level    | Compile time | Specific types | Generic types |
 
-| TypeScript Term           | Set Term                 |
+| `TypeScript` Term         | Set Term                 |
 | ------------------------- | ------------------------ |
 | `never`                   | `∅` (Empty set)          |
 | Literal type              | Single element set       |
@@ -3103,6 +3101,7 @@ console.log(detectedComponents);
 
 ## TypeScript Reference
 
+- [Learning TypeScript](https://github.com/LearningTypeScript/projects)
 - [Tackling TypeScript](https://exploringjs.com/tackling-ts/index.html)
 - [TypeScript Deep Dive](https://github.com/basarat/typescript-book)
 - [Clean TypeScript Code](https://github.com/labs42io/clean-code-typescript)
