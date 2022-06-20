@@ -817,7 +817,38 @@ name = {
 };
 ```
 
-### Extends Interface
+### Interface Function
+
+- Use a method function for class instances (`this` binding to function).
+- Use a property function otherwise.
+
+```ts
+interface HasBothFunctionTypes {
+  method(): string;
+  property: () => string;
+}
+```
+
+### Interface Implementation
+
+```ts
+interface Crazy {
+  new (): {
+    hello: number;
+  };
+}
+
+class CrazyClass implements Crazy {
+  constructor() {
+    return { hello: 123 };
+  }
+}
+
+// Because
+const crazy = new CrazyClass(); // crazy would be { hello:123 }
+```
+
+### Interface Extension
 
 ```ts
 // Lib a.d.ts
@@ -844,25 +875,6 @@ declare module '3rd-party-module' {
     foo: { title: string };
   }
 }
-```
-
-### Implements Interface
-
-```ts
-interface Crazy {
-  new (): {
-    hello: number;
-  };
-}
-
-class CrazyClass implements Crazy {
-  constructor() {
-    return { hello: 123 };
-  }
-}
-
-// Because
-const crazy = new CrazyClass(); // crazy would be { hello:123 }
 ```
 
 ### Interface and Type Alias
