@@ -2324,6 +2324,20 @@ const a1 = [1, 2, 3]; // number[]
 const a2 = [1, 2, 3] as const; // readonly [1, 2, 3]
 ```
 
+Const assertion `readonly` tuples are convenient for function returns
+(returned tuples are often destructured immediately):
+
+```ts
+// Return type: readonly [string, number]
+function firstCharAndSizeAsConst(input: string) {
+  return [input[0], input.length] as const;
+}
+
+// firstChar type: string
+// size type: number
+const [firstChar, size] = firstCharAndSizeAsConst('Sabertaz');
+```
+
 ## Decorators
 
 - Attaching to a class:
