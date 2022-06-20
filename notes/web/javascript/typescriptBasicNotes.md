@@ -2152,7 +2152,7 @@ function getArea(shape: Shape) {
 }
 ```
 
-:::tip Void and Never
+:::tip Never and Void
 
 - 当一个函数返回空值时, 它的返回值为 `void` 类型.
 - 当一个函数**永不返回**时 (或者总是抛出错误), 它的返回值为 `never` 类型.
