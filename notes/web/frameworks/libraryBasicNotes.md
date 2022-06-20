@@ -130,7 +130,7 @@ tags: [Web, Framework, Library]
 - [Midway: Serverless Framework for Front-end Developers](https://github.com/midwayjs/midway)
 - [Koa: Expressive Middleware using ES2017 Async Functions](https://github.com/koajs/koa)
 - [Connect: Express-like Middleware Layer Server](https://github.com/senchalabs/connect)
-- [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify)
+- [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify-dx)
 - [Sails: Realtime MVC Framework](https://github.com/balderdashy/sails)
 - [RedWood: App Framework for Startups](https://github.com/redwoodjs/redwood)
 - [Amplication: Low-Code but High Quality Node.js Applications](https://github.com/amplication/amplication)
