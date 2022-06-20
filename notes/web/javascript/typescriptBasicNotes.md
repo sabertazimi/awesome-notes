@@ -831,6 +831,9 @@ interface HasBothFunctionTypes {
 
 ### Interface Implementation
 
+Implementing interface is purely safety check,
+does not copy any interface members onto class definition:
+
 ```ts
 interface Crazy {
   new (): {
