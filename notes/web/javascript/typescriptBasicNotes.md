@@ -1786,6 +1786,33 @@ type Example2 = RegExp extends Animal ? number : string;
 // => type Example2 = string
 ```
 
+### Index Conditional Types
+
+Conditional types are able to access members of provided types:
+
+```ts
+interface QueryOptions {
+  throwIfNotFound: boolean;
+}
+
+type QueryResult<Options extends QueryOptions> =
+  Options['throwIfNotFound'] extends true ? string : string | undefined;
+
+declare function retrieve<Options extends QueryOptions>(
+  key: string,
+  options?: Options
+): Promise<QueryResult<Options>>;
+
+// Returned type: string | undefined
+await retrieve('1');
+
+// Returned type: string | undefined
+await retrieve('2', { throwIfNotFound: Math.random() > 0.5 });
+
+// Returned type: string
+await retrieve('3', { throwIfNotFound: true });
+```
+
 ### Nested Conditional Types
 
 - Conditional types can be nested.
