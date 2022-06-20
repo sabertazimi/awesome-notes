@@ -1455,7 +1455,53 @@ class TypedEvent<T> {
 }
 ```
 
-### Specific Instances from Generic Types
+### Generic Type Alias
+
+```ts
+type CreatesValue<Input, Output> = (input: Input) => Output;
+
+// Type: (input: string) => number
+let creator: CreatesValue<string, number>;
+
+creator = text => text.length; // Ok
+
+creator = text => text.toUpperCase();
+//                ~~~~~~~~~~~~~~~~~~
+// Error: Type 'string' is not assignable to type 'number'.
+```
+
+### Generic Discriminated Union
+
+```ts
+type Result<Data> = FailureResult | SuccessfulResult<Data>;
+
+interface FailureResult {
+  error: Error;
+  succeeded: false;
+}
+
+interface SuccessfulResult<Data> {
+  data: Data;
+  succeeded: true;
+}
+
+function handleResult(result: Result<string>) {
+  if (result.succeeded) {
+    // Type of result: SuccessfulResult<string>
+    console.log(`We did it! ${result.data}`);
+  } else {
+    // Type of result: FailureResult
+    console.error(`Em... ${result.error}`);
+  }
+
+  console.log(result.data);
+  //                 ~~~~
+  // Error: Property 'data' does not exist on type 'Result<string>'.
+  //   Property 'data' does not exist on type 'FailureResult'.
+}
+```
+
+### Explicit Generic Types
 
 ```ts
 class Foo<T> {
@@ -1471,7 +1517,48 @@ function id<T>(x: T) {
 const idNum = id as { (x: number): number };
 ```
 
-### Generic Types Constraints
+### Default Generic Types
+
+```ts
+interface Quote<T = string> {
+  value: T;
+}
+
+let explicit: Quote<number> = { value: 123 };
+let implicit: Quote = {
+  value: 'Be yourself. The world worships the original.',
+};
+let mismatch: Quote = { value: 123 };
+//                                     ~~~
+// Error: Type 'number' is not assignable to type 'string'.
+
+interface KeyValuePair<Key, Value = Key> {
+  key: Key;
+  value: Value;
+}
+
+// Type: KeyValuePair<string, number>
+let allExplicit: KeyValuePair<string, number> = {
+  key: 'rating',
+  value: 10,
+};
+
+// Type: KeyValuePair<string>
+let oneDefaulting: KeyValuePair<string> = {
+  key: 'rating',
+  value: 'ten',
+};
+
+let firstMissing: KeyValuePair = {
+  //            ~~~~~~~~~~~~
+  // Error: Generic type 'KeyValuePair<Key, Value>'
+  // requires between 1 and 2 type arguments.
+  key: 'rating',
+  value: 10,
+};
+```
+
+### Constrained Generic Types
 
 ```ts
 interface Lengthwise {
@@ -1486,6 +1573,22 @@ const numberList = createList<number>(); // ok
 const stringList = createList<string>(); // ok
 const arrayList = createList<any[]>(); // ok
 const boolList = createList<boolean>(); // error
+
+function get<T, Key extends keyof T>(container: T, key: Key) {
+  return container[key];
+}
+
+const roles = {
+  favorite: 'Fargo',
+  others: ['Almost Famous', 'Burn After Reading', 'NorthLand'],
+};
+
+const favorite = get(roles, 'favorite'); // Type: string
+const others = get(roles, 'others'); // Type: string[]
+const missing = get(roles, 'extras');
+//                         ~~~~~~~~
+// Error: Argument of type '"extras"' is not assignable
+// to parameter of type '"favorite" | "others"'.
 ```
 
 ### Generic Types Programming
