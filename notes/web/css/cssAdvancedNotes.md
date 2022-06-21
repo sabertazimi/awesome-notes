@@ -238,6 +238,7 @@ table {
 
 - `none`.
 - `<shadow-text>#`: `<length>{2,3} && <color>?`.
+  - 支持多重阴影.
   - 不支持内阴影.
   - `<length>{2,3}`: 不支持扩展阴影 `offset-x offset-y blur-radius`.
   - `<color>?`: default `revert` (user agent color).
@@ -303,6 +304,7 @@ body {
 
 - `none`.
 - `<shadow>#`: `inset? && <length>{2,4} && <color>?`.
+  - 支持多重阴影.
   - `inset?`: 支持内阴影.
   - `<length>{2,4}`: 支持扩展阴影 `offset-x offset-y blur-radius spread-radius`.
   - `<color>?`: default `currentcolor` (text computed color).
@@ -1185,9 +1187,9 @@ img.alpha-mask {
 
 `filter: drop-shadow()`:
 
+- 不支持多重阴影.
 - 不支持内阴影.
 - 不支持扩展阴影.
-- 不支持多重阴影.
 - 阴影会**自动贴合形状**:
   - 伪元素.
   - 自定义边框.
