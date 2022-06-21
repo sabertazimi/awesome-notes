@@ -1358,6 +1358,15 @@ main::before {
 
 ## SVG
 
+### SVG Size
+
+Shape will zoom to fill size of SVG `width` and `height`:
+
+```html
+<!-- viewBox = <min-x> <min-y> <width> <height> -->
+<svg width="198px" height="188px" viewBox="0 0 99 94"></svg>
+```
+
 ### SVG Fill
 
 ```html
