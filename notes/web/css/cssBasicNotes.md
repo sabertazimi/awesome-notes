@@ -108,7 +108,7 @@ tags: [Web, CSS]
 
 ### Specificity
 
-[Specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity)
+[Specificity](https://developer.mozilla.org/docs/Web/CSS/Specificity)
 (`Selector Priority`) has 4 bits,
 thousands, hundreds, tens, ones `0000`:
 
@@ -1588,6 +1588,19 @@ Change `lightness` to get gradient color:
 - `W`: whiteness (`<percentage>`).
 - `B`: blackness (`<percentage>`).
 - `A`: alpha (`<percentage>`).
+
+### Color Scheme
+
+[`color-scheme`](https://developer.mozilla.org/docs/Web/CSS/color-scheme):
+
+```css
+:root {
+  color-scheme: normal;
+  color-scheme: light dark;
+  color-scheme: light;
+  color-scheme: dark;
+}
+```
 
 ### CSS Color Reference
 
