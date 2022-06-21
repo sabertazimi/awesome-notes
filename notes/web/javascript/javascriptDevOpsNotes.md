@@ -445,6 +445,15 @@ function App() {
 
 ## Web Authentication
 
+### Cookies
+
+- First request header -> without cookie.
+- First response header -> `Set-Cookie: number` to client.
+- Client store identification number for specific site into cookies files.
+- Second request header -> `Cookie: number`.
+  (extract identification number for specific site from cookies files).
+- Function: create **User Session Layer** on top of stateless HTTP.
+
 ### HTTP Basic Authentication
 
 HTTP basic authentication is 401 authentication:
