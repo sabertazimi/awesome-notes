@@ -201,7 +201,7 @@ tags: [Web, Framework, Library]
 
 - [ReactUse Hooks](https://github.com/streamich/react-use)
 - [Alibaba Hooks](https://github.com/alibaba/hooks)
-- [TypeScript Hooks](https://github.com/juliencrn/useHooks.ts)
+- [TypeScript Hooks](https://github.com/juliencrn/useHooks-ts)
 - [ReactHook: Strongly Typed and Concurrent Mode-safe Hooks](https://github.com/jaredLunde/react-hook)
 - [Optimistic State Hooks](https://github.com/perceived-dev/optimistic-state)
 - [React Media Query Hook](https://github.com/yocontra/react-responsive)
