@@ -948,34 +948,6 @@ value/max 百分比
 </picture>
 ```
 
-### Anchor
-
-`<a>`
-
-#### Anchor Href
-
-超链接指向--超链接/#id/#name
-
-#### Anchor ID or Name
-
-当前锚点标识
-
-#### Anchor Target
-
-定义被链接文档出现方式
-
-- blank 在新窗口中打开被链接文档
-- self 默认:在相同的框架中打开被链接文档
-- parent 在父框架集中打开被链接文档
-- top 在整个窗口中打开被链接文档
-- framename 在指定的框架中打开被链接文档
-
-### Embed
-
-插入媒体流:
-
-- Embed [best practice](https://web.dev/embed-best-practices).
-
 ### SVG
 
 ```ts
@@ -988,6 +960,87 @@ const svgRectElement = document.createElementNS(
   'rect'
 );
 ```
+
+### Embed
+
+Embed [best practice](https://web.dev/embed-best-practices):
+
+```html
+<script src="lazySizes.min.js" async></script>
+
+<iframe
+  data-src="https://www.youtube.com/embed/aKydtOXW8mI"
+  width="560"
+  height="315"
+  class="lazyload"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write;
+        encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+>
+</iframe>
+```
+
+### Video
+
+```html
+<video
+  src="myVideo.mp4"
+  width="640"
+  height="480"
+  controls
+  autoplay
+  preload="auto"
+  loop
+  poster="myVideoPoster.png"
+>
+  If you're reading this either video didn't load or your browser is legacy!
+</video>
+```
+
+```html
+<video
+  width="640"
+  height="480"
+  controls
+  preload="auto"
+  loop
+  poster="myVideoPoster.png"
+>
+  <source src="myVideo.sp8" type="video/super8" />
+  <source src="myVideo.mp4" type="video/mp4" />
+  <p><b>Download Video:</b> MP4 Format:<a href="myVideo.mp4">"MP4"</a></p>
+</video>
+```
+
+### Anchor
+
+#### Anchor Href
+
+`[href]` 超链接指向`超链接`/`#id`/`#name`:
+
+```html
+<a href="https://github.com">Link</a> <a href="#title">Link</a>
+```
+
+#### Anchor ID
+
+当前锚点标识.
+
+#### Anchor Name
+
+当前锚点名字.
+
+#### Anchor Target
+
+定义被链接文档出现方式:
+
+- `self`: **默认**方式, 在相同的框架中打开被链接文档.
+- `blank`: 在新窗口中打开被链接文档.
+- `parent`: 在父框架集中打开被链接文档.
+- `top`: 在整个窗口中打开被链接文档.
+- `framename`: 在指定的框架中打开被链接文档.
 
 ### Command
 
