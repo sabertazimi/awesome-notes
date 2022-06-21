@@ -339,6 +339,19 @@ but also can every `<article>` and `<section>` element.
 
 #### AutoFocus
 
+```html
+<div class="form-control">
+  <label for="search">Search the site...</label>
+  <input
+    id="search"
+    name="search"
+    type="search"
+    placeholder="Search here ..."
+    autofocus
+  />
+</div>
+```
+
 #### Required
 
 ```html
