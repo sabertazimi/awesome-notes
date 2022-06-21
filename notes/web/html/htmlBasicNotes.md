@@ -400,33 +400,126 @@ textbox.value = '666666'; //  等同于 input.value = '666666';
 
 #### Radio Input
 
-name 相同时, 多个 radio 组成一个 radio group.
+`name` 相同时, 多个 radio 组成一个 radio group.
 
 #### Checkbox Input
 
 #### Search Input
 
-搜索条.
+搜索条:
+
+```html
+<div class="form-control">
+  <label for="search">Search the site...</label>
+  <input
+    id="search"
+    name="search"
+    type="search"
+    placeholder="Search here ..."
+  />
+</div>
+```
 
 #### Tel Input
 
-电话号码 - 无输入检查.
+电话号码无输入检查:
+
+```html
+<div class="form-control">
+  <label for="tel">Telephone (so we can berate you if you're wrong)</label>
+  <input
+    id="tel"
+    name="tel"
+    type="tel"
+    placeholder="1-234-546758"
+    autocomplete="off"
+    required
+  />
+</div>
+```
 
 #### Url Input
 
+```html
+<div class="form-control">
+  <label for="web">Your Web address</label>
+  <input id="web" name="web" type="url" placeholder="https://www.mysite.com" />
+</div>
+```
+
 #### Email Input
+
+```html
+<div class="form-control">
+  <label for="email">Your Email address</label>
+  <input
+    type="email"
+    id="email"
+    name="email"
+    placeholder="dwight.schultz@gmail.com"
+    required
+  />
+</div>
+```
+
+#### Number Input
+
+```html
+<div class="form-control">
+  <label for="yearOfCrime">Year Of Crime</label>
+  <input
+    id="yearOfCrime"
+    name="yearOfCrime"
+    type="number"
+    min="1929"
+    max="2015"
+    step="1"
+    required
+  />
+</div>
+```
+
+#### Range Input
+
+```html
+<div class="form-control">
+  <input
+    id="howYouRateIt"
+    name="howYouRateIt"
+    type="range"
+    min="1"
+    max="10"
+    value="5"
+    onchange="showValue(this.value)"
+  />
+  <span id="range">5</span>
+</div>
+```
 
 #### DateTime Input
 
-date/month/week/time/datetime-local:
+`[type]`:
 
-```ts
-stepUp();
-stepDown();
-```
+- `date`.
+- `month`.
+- `week`.
+- `time`.
+- `datetime-local`.
 
 ```html
-input.valueAsNumber input.valueAsDate
+<input id="date" name="date" type="date" />
+<input id="month" name="month" type="month" />
+<input id="week" name="week" type="week" />
+<input id="time" name="time" type="time" />
+```
+
+#### Color Input
+
+```html
+<div class="form-control">
+  <label for="color">Your favorite color</label>
+  <input id="color" name="color" type="color" />
+</div>
 ```
 
 #### List Input
@@ -473,7 +566,7 @@ Capture device camera:
 
 #### Indeterminate
 
-javascript tips：检查 type=checkbox 的状态
+检查 `[type=checkbox]` 的状态:
 
 ```ts
 if (checkbox.indeterminate) {
@@ -489,7 +582,7 @@ if (checkbox.indeterminate) {
 
 #### Pattern
 
-通过正则表达式指定输入格式
+通过正则表达式指定输入格式:
 
 ```html
 <input pattern="[0-9][A-Z]{3}" />
@@ -497,11 +590,11 @@ if (checkbox.indeterminate) {
 
 #### Validity
 
-返回 ValidityState 对象，拥有 ValidityState.valid 属性
+返回 `ValidityState` 对象, 拥有 `ValidityState.valid` 属性.
 
 ### Output
 
-input 元素的镜像元素.
+`<input>` 元素的镜像元素.
 
 ### Textarea
 
