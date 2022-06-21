@@ -669,6 +669,17 @@ Separate focus styles:
 - `E F:last-of-type`: **相同类型** 的最后一个元素.
 - `E F:only-of-type`: 孩子中只有一种该元素.
 
+:::tip N Calculation
+
+`n` start from `0`,
+calculation result limit to `> 0`:
+
+- `:nth-child(5n)`: `0, 5, 10, 15, ...` -> `5, 10, 15, ...`.
+- `:nth-child(3n + 4)`: `4, 7, 10, 13, ...` -> `4, 7, 10, 13, ...`.
+- `:nth-child(-n + 3)`: `3, 2, 1, 0, -1, ...` -> `3, 2, 1`.
+- `:nth-child(n + 4):nth-child(-n + 10)`:
+  两个 `n` 分开计算, `4, 5, 6, ...` + `10, 9, 8, ...` -> `4, 5, 6, 7, 8, 9, 10`.
+
 ```css
 li:first-child:nth-last-child(4),
 li:first-child:nth-last-child(4) ~ li {
@@ -689,17 +700,6 @@ li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6) ~ li {
   color: darkblue;
 }
 ```
-
-:::tip N Calculation
-
-`n` start from `0`,
-calculation result limit to `> 0`:
-
-- `:nth-child(5n)`: `0, 5, 10, 15, ...` -> `5, 10, 15, ...`.
-- `:nth-child(3n + 4)`: `4, 7, 10, 13, ...` -> `4, 7, 10, 13, ...`.
-- `:nth-child(-n + 3)`: `3, 2, 1, 0, -1, ...` -> `3, 2, 1`.
-- `:nth-child(n + 4):nth-child(-n + 10)`:
-  `4, 5, 6, ...` + `10, 9, 8, ...` -> `4, 5, 6, 7, 8, 9, 10`.
 
 :::
 
