@@ -188,7 +188,7 @@ but also can every `<article>` and `<section>` element.
 
 代码段
 
-## Head Tag
+## Head
 
 `Meta` data list in
 [HEAD](https://github.com/joshbuchea/HEAD).
@@ -653,13 +653,13 @@ closers?.forEach(closer => {
 
 ### Details
 
-Accordion list without JavaScript:
+Accordion list:
 
 ```html
 <div class="container">
   <h3>FAQ</h3>
 
-  <details>
+  <details open>
     <summary>Why is it called an accordion menu?</summary>
     <hr />
     <p>
@@ -680,10 +680,10 @@ Accordion list without JavaScript:
     <summary>If I use an accordion menu will it make me cool?</summary>
     <hr />
     <p>
-      No, not unless you're designing a MySpace profile. The <code
-        >{"<details>"}</code
-      > element is cool though, and you can use that for a lot of things. I'm using
-      it on this page right below here, to show the code for each example!
+      No, not unless you're designing a MySpace profile. The
+      <code>{"details"}</code> element is cool though, and you can use that for
+      a lot of things. I'm using it on this page right below here, to show the
+      code for each example!
     </p>
   </details>
 </div>
@@ -706,10 +706,20 @@ Accordion list without JavaScript:
     font-size: 1.2em;
     cursor: pointer;
   }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details[open] summary {
+    font-size: 1.3em;
+  }
 </style>
 ```
 
 #### Details Summary
+
+展开与收缩时触发 `toggle` 事件:
 
 ```html
 <details>
@@ -718,13 +728,13 @@ Accordion list without JavaScript:
 </details>
 ```
 
-#### Data Grid
+#### Details Data Grid
 
-#### 配合 AutoComplete 属性
+#### Details AutoComplete
 
-#### Open
+#### Details Open
 
-默认 open=false
+默认 `open=false`.
 
 ### Description List
 
@@ -749,10 +759,6 @@ Accordion list without JavaScript:
   <dd><time datetime="1990-05-15">May 15 1990</time></dd>
 </dl>
 ```
-
-### Summary
-
-折叠/收缩时触发 toggle 事件
 
 ### Table
 
@@ -872,13 +878,11 @@ value/max 百分比
 
 ### Figure
 
-流内容 如代码、文件、图片、音频、视频
+流内容: 如代码、文件、图片、音频、视频.
 
 ### Figcaption
 
-figure 可拥有唯一的 0/1 个 figcaption
-
-`<figcaption>figure_title</figcaption>`
+`<figure>` 可拥有唯一的 `0`/`1` 个 `<figcaption>`:
 
 ```html
 <figure aria-labelledby="image-alt">
@@ -989,7 +993,7 @@ const svgRectElement = document.createElementNS(
 
 ## Information
 
-### time
+### Time
 
 #### Pub Date
 
