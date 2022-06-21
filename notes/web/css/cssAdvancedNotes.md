@@ -1175,11 +1175,6 @@ img.alpha-mask {
 
   /* Apply multiple filters */
   filter: contrast(175%) brightness(3%);
-
-  /* Global values */
-  filter: inherit;
-  filter: initial;
-  filter: unset;
 }
 ```
 
