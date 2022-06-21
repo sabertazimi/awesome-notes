@@ -2351,6 +2351,22 @@ FROM nginx:alpine
 COPY --from=builder code/build/ /usr/share/nginx/html/
 ```
 
+### Nginx Configuration
+
+子域名设置:
+
+```bash
+sudo mkdir -p /var/www/blog/html
+sudo chown -R $USER:$USER /var/www/blog/html
+sudo chmod -R 755 /var/www
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/blog
+# change 'root' and 'server_name' config, remove 'default_server' config
+sudo vim /etc/nginx/sites-available/blog
+sudo ln -s /etc/nginx/sites-available/blog /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
 ### Blue Green Deployment
 
 两套系统, 一套稳定的绿色系统, 一套即将发布的蓝色系统.
