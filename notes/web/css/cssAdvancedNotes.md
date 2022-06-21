@@ -1724,6 +1724,10 @@ SVG
 
 ### SVG Animation
 
+#### SVG CSS Animation
+
+CSS animation on SVG properties:
+
 ```css
 circle {
   animation: zoom-in-out 1s infinite alternate;
@@ -1738,6 +1742,31 @@ circle {
     r: 75px;
   }
 }
+```
+
+#### SVG SMIL Animation
+
+SVG [SMIL animation](https://css-tricks.com/guide-svg-animations-smil):
+
+```html
+<svg width="360" height="200" xmlns="http://www.w3.org/2000/svg">
+  <text font-family="microsoft yahei" font-size="40" x="0" y="0" fill="#cd0000">
+    马
+    <animateMotion
+      path="M10,80 q100,120 120,20 q140,-50 160,0"
+      begin="0s"
+      dur="3s"
+      rotate="auto"
+      repeatCount="indefinite"
+    />
+  </text>
+  <path
+    d="M10,80 q100,120 120,20 q140,-50 160,0"
+    stroke="#cd0000"
+    stroke-width="2"
+    fill="none"
+  />
+</svg>
 ```
 
 ### SVG API
