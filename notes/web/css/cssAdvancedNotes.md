@@ -793,7 +793,7 @@ body {
 
 [`object-fit`](https://developer.mozilla.org/docs/Web/CSS/object-fit)
 只对替换元素
-([`Replaced Element`](https://developer.mozilla.org/docs/Web/CSS/Replaced_element))
+([`replaced element`](https://developer.mozilla.org/docs/Web/CSS/Replaced_element))
 有作用:
 
 - `input`.
@@ -805,9 +805,15 @@ body {
 - `embed`.
 - `object`.
 
-`object-fit` (`fill | contain | cover | none | scale-down`)
-类似于 `background-size`,
+[`object-fit`](https://developer.mozilla.org/docs/Web/CSS/object-fit)
+是作用于 `replaced element` 的 `background-size`,
 可以处理图片拉伸变形与 `Cumulative Layout Shift` 问题:
+
+- `fill`.
+- `contain`.
+- `cover`.
+- `none`.
+- `scale-down`.
 
 ```css
 .image-container {
@@ -822,6 +828,85 @@ body {
   height: 100%;
   object-fit: cover;
 }
+```
+
+### Object Position
+
+[`object-position`](https://developer.mozilla.org/docs/Web/CSS/object-position)
+是作用于 `replaced element` 的 `background-position`:
+
+```css
+img {
+  /* <percentage> values */
+  object-position: 50% 50%;
+  object-position: 25% 75%;
+
+  /* Keyword values */
+  object-position: top;
+  object-position: bottom;
+  object-position: left;
+  object-position: right;
+  object-position: center;
+
+  /* <length> values */
+  object-position: 0 0;
+  object-position: 1cm 2cm;
+  object-position: 10ch 8em;
+
+  /* Edge offsets values */
+  object-position: bottom 10px right 20px;
+  object-position: right 3em bottom 10px;
+  object-position: top 0 right 10px;
+}
+```
+
+### Replaced Media Size
+
+Replaced media size [normalize style](#css-normalize):
+
+```css
+input,
+textarea,
+img,
+video,
+object {
+  box-sizing: border-box;
+  max-width: 100%;
+  height: auto;
+}
+```
+
+### Embed Object Container
+
+```html
+<div class="embed-container">
+  <iframe
+    src="http://www.youtube.com/embed/B1_N28DA3gY"
+    frameborder="0"
+    allowfullscreen
+  ></iframe>
+</div>
+
+<style>
+  .embed-container {
+    position: relative;
+    max-width: 100%;
+    height: 0;
+    height: auto;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+  }
+
+  .embed-container iframe,
+  .embed-container object,
+  .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
 ```
 
 ## CSS Shape
@@ -2521,6 +2606,7 @@ video,
 object {
   box-sizing: border-box;
   max-width: 100%;
+  height: auto;
 }
 ```
 
