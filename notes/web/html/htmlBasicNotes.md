@@ -434,7 +434,18 @@ input.valueAsNumber input.valueAsDate
 `autocomplete`, 为输入框指定智能提示数据:
 
 ```html
-<input list="datalist_id" autocomplete="on" />
+<div class="form-control">
+  <label for="awardWon">Award Won</label>
+  <input id="awardWon" name="awardWon" type="text" list="awards" />
+  <datalist id="awards">
+    <select>
+      <option value="Best Picture"></option>
+      <option value="Best Director"></option>
+      <option value="Best Adapted Screenplay"></option>
+      <option value="Best Original Screenplay"></option>
+    </select>
+  </datalist>
+</div>
 ```
 
 #### File Input
