@@ -341,6 +341,20 @@ but also can every `<article>` and `<section>` element.
 
 #### Required
 
+```html
+<div class="form-control">
+  <label for="film">The film in question?</label>
+  <input
+    id="film"
+    name="film"
+    type="text"
+    placeholder="e.g. King Kong"
+    required
+    aria-required="true"
+  />
+</div>
+```
+
 #### Disabled and Hidden
 
 - `disabled` 表单元素的数据不会被提交.
