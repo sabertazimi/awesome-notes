@@ -1590,6 +1590,8 @@ Children property:
 
 [![Grid Repeat Function](./figures/GridRepeat.png)](https://developer.mozilla.org/docs/Web/CSS/repeat)
 
+[![Grid Auto Repeat Size](./figures/GridAutoRepeatSize.png)](https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit)
+
 #### Grid Line Types
 
 `<grid-line>`:
