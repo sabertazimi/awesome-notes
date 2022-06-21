@@ -88,22 +88,22 @@ entity body
 
 #### Port to Transport Layer
 
-- bandwidth-sensitive application: UDP
-- reliable-sensitive application: TCP
+- Bandwidth-sensitive application: UDP.
+- Reliable-sensitive application: TCP.
 
-```bash
-email                   - SMTP              - TCP
-remote terminal access  - Telnet            - TCP
-Web                     - HTTP/HTTPS        - TCP
-file transfer            - FTP               - TCP
-streaming multimedia    - HTTP/HTTPS/RTP    - TCP/UDP
-internet telephony      - SIP/RTP           - UDP
-```
+| Application            | Application Layer | Transport Layer |
+| ---------------------- | ----------------- | --------------- |
+| Email                  | SMTP              | TCP             |
+| Remote terminal access | Telnet            | TCP             |
+| Web                    | HTTP/HTTPS        | TCP             |
+| File transfer          | FTP               | TCP             |
+| Streaming multimedia   | HTTP/HTTPS/RTP    | TCP/UDP         |
+| Internet telephony     | SIP/RTP           | UDP             |
 
-#### Address
+#### HTTP Address
 
-- (32 bits network layer )IP : find specific host/end-system
-- (16 bits transport layer)port: find specific process
+- IP (32 bits network layer): find specific host/end-system.
+- Port (16 bits transport layer): find specific process.
 
 ### HTTP Response Status Codes
 
@@ -563,11 +563,11 @@ Offline optimization:
 Address structure:
 
 - 32 bits long: `a.b.c.d`.
-- historical:
+- Historical:
   - Class A: `0-network(7 bits)-host(24 bits)`.
   - Class B: `10-network(14 bits)-host(16 bits)`.
-  - Class C: 110-network(21 bits)-host(8 bits)`.
-- today:
+  - Class C: `110-network(21 bits)-host(8 bits)`.
+- Today:
   `171.64.0.0/16` means `171.64.0.0` to `171.64.255.255`,
   `A/24` describes `256` addresses, `A/20` describes `4096` addresses.
 - Longest prefix matching and netmask (`A/16`):
@@ -576,8 +576,8 @@ Address structure:
 ### Packet Format
 
 - Network is big-endian.
-- in x86 processor, use `htons()/ntohs()/htonl()/ntohl()` host:
-  network -short/long helper function to transform format.
+- In x86 processor, use `htons()/ntohs()/htonl()/ntohl()` host:
+  network `short`/`long` helper function to transform format.
 
 ```cpp
 #include <arpa/inet.h>
@@ -614,11 +614,11 @@ Address resolution protocol:
 
 ## Network Tools
 
-- ifconfig + egrep.
-- netstat + egrep.
-- tcpdump.
-- nslookup.
-- wireshark.
+- `ifconfig` + `egrep`.
+- `netstat` + `egrep`.
+- `tcpdump`.
+- `nslookup`.
+- `wireshark`.
 
 ```bash
 sudo dpkg-reconfigure wireshark-common
