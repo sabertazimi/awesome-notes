@@ -3086,7 +3086,9 @@ body {
 
 ### Horizontal Scrolling
 
-[Horizontal Scrolling](https://designshack.net/articles/navigation/horizontal-scrolling-pros-cons):
+#### Horizontal Scrolling Principles
+
+Horizontal scrolling [design](https://designshack.net/articles/navigation/horizontal-scrolling-pros-cons):
 
 - Avoid a full-screen horizontal scroll;
   ensure that users know there is also content
@@ -3101,12 +3103,54 @@ body {
 - Design horizontal scroll bars in the same manner as vertical scroll bars
   to create an element of familiarity for users.
 
-Horizontal Scrolling Methods:
+#### Horizontal Scrolling Methods
 
-- Rotate 90 deg element.
-- `display: flex; overflow-x: auto;`
-- `grid-auto-flow: column;`
-- `scroll-snap-type: x mandatory; scroll-snap-align: center;`
+- Transform: rotate `90deg` element.
+- Flex.
+- Grid.
+- Scroll snap.
+
+```css
+.scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  /* Hide scrollbar in IE and Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar in Chrome */
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-container .item {
+  display: inline-flex;
+}
+
+@supports (display: grid) {
+  .scroll-container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-auto-flow: column;
+    max-width: min-content;
+  }
+}
+
+@supports (scroll-snap-type: x mandatory) {
+  .scroll-container {
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 1.2rem;
+  }
+
+  .scroll-container .item {
+    scroll-snap-align: center;
+  }
+}
+```
 
 ### Custom Scrollbar
 
