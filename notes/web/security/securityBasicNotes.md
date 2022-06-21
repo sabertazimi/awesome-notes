@@ -3,20 +3,388 @@ author: Sabertazimi
 authorTitle: Web Developer
 authorURL: https://github.com/sabertazimi
 authorImageURL: https://github.com/sabertazimi.png
-tags: [Web, Security]
+tags: [Web, DevOps, Security]
 ---
 
 # Security Basic Notes
 
+## Content Security Policy Level 3
+
+CSP help prevent from XSS:
+
+```bash
+{
+  "header": {
+    "Content-Security-Policy":
+      script-src 'nonce-random123' 'strict-dynamic' 'unsafe-eval';
+      object-src 'none';
+      base-uri 'none'
+  }
+}
+```
+
+```html
+<script>
+  alert('xss');
+</script>
+// XSS injected by attacker - blocked by CSP
+<script nonce="random123">
+  alert('this is fine!)
+</script>
+<script nonce="random123" src="https://cdnjs.com/lib.js"></script>
+```
+
+nonce only CSP block 3rd scripts and dynamic scripts generate by trusted users,
+'strict-dynamic' can tackle it.
+
+```html
+<!-- Content-Security-Policy: script-src 'nonce-random123' 'strict-dynamic' -->
+<script nonce="random123">
+  const s = document.createElement('script)
+  s.src = '/path/to/script.js';
+  s.async = true;
+  document.head.appendChild(s); // can execute correctly
+</script>
+```
+
+```html
+<!-- Given this CSP header -->
+Content-Security-Policy: script-src https://example.com/
+
+<!-- The following third-party script will not be loaded or executed -->
+<script src="https://not-example.com/js/library.js"></script>
+```
+
+## Security HTTP Headers
+
+- [X-Content-Type-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Content-Type-Options)
+- [X-Frame-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options)
+- [X-XSS-Protection](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-XSS-Protection)
+- [Helmet: Secure Express Apps with Various HTTP Headers](https://github.com/helmetjs/helmet)
+
+## Trusted Types
+
+- TrustedURL.
+- TrustedHTML.
+- TrustedScript.
+- TrustedScriptURL.
+
+```ts
+// fallback policy
+TrustedTypes.createPolicy(
+  'default',
+  {
+    createHTML(s) {
+      console.error('Please fix! Insecure string assignment detected:', s);
+      return s;
+    },
+  },
+  true
+);
+```
+
+```ts
+// Content-Security-Policy-Report-Only: trusted-types myPolicy; report-uri /cspReport
+const SanitizingPolicy = TrustedTypes.createPolicy(
+  'myPolicy',
+  {
+    createHTML: (s: string) => myCustomSanitizer(s),
+  },
+  false
+);
+
+const trustedHTML = SanitizingPolicy.createHTML(foo);
+element.innerHTML = trustedHTML;
+```
+
+## Sandbox
+
+[`Sandbox`](https://developer.51cto.com/article/710911.html):
+
+- `eval()`:
+  它能访问执行上下文中的局部变量, 也能访问所有全局变量, 是一个非常危险的函数.
+- `new Function()`:
+  在全局作用域中被创建, 不会创建闭包.
+  当运行函数时, 只能访问本地变量和全局变量,
+  不能访问 Function 构造器被调用生成的上下文的作用域.
+- `with () {}`:
+  它首先会在传入的对象中查找对应的变量,
+  如果找不到就会往更上层的全局作用域去查找,
+  导致全局环境污染.
+- 快照沙盒: ES5 沙盒, 备份恢复全局上下文.
+- 代理沙盒: ES6 沙盒, 使用 Proxy 代理全局上下文.
+- `<iframe>` 沙盒: 使用 `<iframe>` 隔离全局上下文.
+- [`ShadowRealm`](https://2ality.com/2022/04/shadow-realms.html) 沙盒.
+
+### Snapshot Sandbox
+
+`SnapshotSandbox`:
+
+```ts
+class SnapshotSandbox {
+  constructor() {
+    this.proxy = window; // window 属性.
+    this.windowSnapshot = {}; // 快照.
+    this.modifyPropsMap = {}; // 记录在 window 上的修改.
+    this.sandboxRunning = false;
+  }
+
+  active() {
+    this.windowSnapshot = {}; // 快照.
+
+    for (const prop in window) {
+      if (window.hasOwn(prop)) {
+        this.windowSnapshot[prop] = window[prop];
+      }
+
+      Object.keys(this.modifyPropsMap).forEach(p => {
+        window[p] = this.modifyPropsMap[p];
+      });
+    }
+
+    this.sandboxRunning = true;
+  }
+
+  inactive() {
+    this.modifyPropsMap = {}; // 记录在 window 上的修改.
+
+    for (const prop in window) {
+      if (window.hasOwn(prop)) {
+        if (window[prop] !== this.windowSnapshot[prop]) {
+          this.modifyPropsMap[prop] = window[prop];
+          window[prop] = this.windowSnapshot[prop];
+        }
+      }
+    }
+
+    this.sandboxRunning = false;
+  }
+}
+```
+
+### Proxy Sandbox
+
+`ProxySandbox`:
+
+```ts
+function ProxySandbox(code) {
+  code = `with (sandbox) {${code}}`;
+  // eslint-disable-next-line no-new-func
+  const fn = new Function('sandbox', code);
+
+  return function (sandbox) {
+    const sandboxProxy = new Proxy(sandbox, {
+      has(target, key) {
+        return true;
+      },
+      get(target, key) {
+        if (key === Symbol.unscopables) return undefined;
+        return target[key];
+      },
+    });
+    return fn(sandboxProxy);
+  };
+}
+```
+
+### Iframe Sandbox
+
+```ts
+class SandboxWindow {
+  constructor(context, frameWindow) {
+    return new Proxy(frameWindow, {
+      get(target, name) {
+        if (name in context) {
+          return context[name];
+        } else if (typeof target[name] === 'function' && /^[a-z]/.test(name)) {
+          return target[name].bind && target[name].bind(target);
+        } else {
+          return target[name];
+        }
+      },
+      set(target, name, value) {
+        if (name in context) {
+          return (context[name] = value);
+        }
+        target[name] = value;
+      },
+    });
+  }
+}
+
+// 需要全局共享的变量
+const context = {
+  document: new Proxy(window.document, {}),
+  location: new Proxy(window.location),
+  history: new Proxy(window.history),
+};
+
+// 创建 iframe
+const userInputUrl = '';
+const iframe = document.createElement('iframe', {
+  url: userInputUrl,
+  src: 'about:blank',
+  sandbox:
+    'allow-scripts allow-same-origin allow-popups allow-presentation allow-top-navigation',
+  style: 'display: none;',
+});
+document.body.appendChild(iframe);
+const sandboxGlobal = new Proxy(iframe.contentWindow, {});
+
+// 创建沙箱
+const newSandboxWindow = new SandboxWindow(context, sandboxGlobal);
+```
+
+## User Privacy
+
+### Browser Privacy Detection
+
+- Browser [leaks](https://browserleaks.com).
+
+### User Fingerprint
+
+- Use Canvas or WebGL to generate user
+  [fingerprint](https://yinzhicao.org/TrackingFree/crossbrowsertracking_NDSS17.pdf).
+- Location information:
+  - Country.
+  - Region.
+  - City.
+  - Zip code.
+  - Latitude.
+  - Longitude.
+  - Timezone.
+- Connection information:
+  - IP address.
+  - Internet service provider.
+  - Organization.
+  - ASN.
+  - Tor browser detection.
+- Software information:
+  - Browser.
+  - Browser plugins detection.
+  - Operation system.
+  - User agent.
+  - Preferred language.
+  - Cookies enabled detection.
+  - Java enabled detection.
+  - DNT header enabled detection.
+  - Automated browser detection.
+  - Content filters detection: Adblock detection.
+- Hardware information:
+  - Screen resolution.
+  - Color resolution.
+  - Device type.
+  - Device memory.
+  - CPU cores.
+  - Max touch points.
+  - WebGL vendor.
+  - WebGL renderer.
+  - Battery level.
+  - Batter status.
+
+```ts
+function getCanvasFingerprint() {
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  context.font = '18pt Arial';
+  context.textBaseline = 'top';
+  context.fillText('Hello, user.', 2, 2);
+  return canvas.toDataURL('image/jpeg');
+}
+
+getCanvasFingerprint();
+```
+
+## Crypto
+
+- Web crypto [API](https://developer.mozilla.org/docs/Web/API/SubtleCrypto).
+- 公钥加密私钥解密: 只有私钥拥有者可以获取信息.
+- 公钥验证私钥签名: 只有私钥拥有者可以发布签名.
+
+## Zero Trust Access Control
+
+从防御的角度来讲, 内部风险是外部风险的超集:
+当攻击者攻陷任何一个内部人员 (合法用户或员工) 的设备后,
+攻击者便成了内部人员.
+[零信任](https://zchn.github.io/j/ztcn)
+从这个角度看就是假设任何一台主机都有可能被攻陷.
+
+### Chain of Trust
+
+零信任并不是完全没有信任,
+而是几个基本的最小化的信任根 (Root of Trust),
+重构信任链 (Chain of Trust).
+通过一系列的标准化流程 (Standard Process) 建立的一个完整的信任链
+(信任树 Tree of Trust 或者信任网 Web of Trust).
+
+几个典型的例子包括:
+
+- 多因子认证 (MFA, Multi-Factor Authentication):
+  人的身份的信任根.
+- 可信平台模块 (TPM, Trusted Platform Module)和可信启动 (Trusted Boot):
+  机器的身份的信任根.
+- 源代码和可信编译 (Trusted Build):
+  软件的信任根.
+
+### Identity 2.0
+
+身份 2.0 是对于以上的信任链的标准化,
+以便于在安全访问策略中使用这些在建立信任过程中收集到的信息.
+
+在身份 2.0 中, 一切本体 (Entity) 都有身份.
+用户有用户身份, 员工有员工身份, 机器有机器身份, 软件有软件身份.
+
+在身份 2.0 中, 一切访问 (Access) 都带有访问背景 (Access Context):
+
+- 目的: 为了帮助用户解决一个技术问题
+- 访问者: 员工 A
+- 授权者: 用户 B
+- 访问方式: 软件 C
+- 访问地点: 机器 D
+
+### Continuous Access Control
+
+持续访问控制会在软件开发和运行的各个环节持续地进行访问控制:
+
+- 在员工登录时要求提供多因子认证.
+- 在部署软件时要求软件是从信任的源码库在安全的环境中编译而来,
+  并经过代码评估 (Code Review).
+- 在主机之间建立连接时要求双方提供主机完整性证明.
+- 在微服务获取特定用户数据时要求提供该用户的授权令牌 (Authorization Token).
+
+### Zero Trust Basement
+
+零信任的实施依赖于扎实的基础安全架构, 没有基础就没有上层建筑.
+谷歌零信任依赖于以下基础设施提供的基本安全保障:
+
+- 数据加密和密钥管理 (Encryption and Key Management)
+- 身份和访问管理 (Identity and Access Management)
+- 数字化人力资源管理 (Digital Human Resource)
+- 数字化设备管理 (Digital Device Management)
+- 数据中心安全 (Data Center Security)
+- 网络安全 (Network Security)
+- 主机安全 (Host Security)
+- 容器隔离 (Container Isolation, gVisor)
+- 可信启动 (Trusted Boot)
+- 可验证编译 (Verifiable Build)
+- 软件完整性验证 (Software Integrity Verification)
+- 双向 TLS (mTLS)
+- 基于服务的访问策略 (Service Access Policy)
+- 终端用户令牌 (End User Context Tokens)
+- 配置即代码 (Configuration as Code)
+- 标准化开发和部署 (Standard Development and Deployment)
+
 ## Object Injection
 
-- `__proto__.XX`
-- `constructor`
-- `hasOwnProperty`
+### Object Injection Attack
+
+- `__proto__.XX`.
+- `constructor`.
+- `hasOwnProperty`.
 
 ### Insecure Object Comparison
 
-injection:
+Injection:
 
 ```ts
 const token = req.cookies.token;
@@ -28,14 +396,16 @@ if (token && SESSIONS[token]) {
 }
 ```
 
-solutions:
+Solutions:
 
-- `crypto.timingSafeEqual`
-- `object.hasOwnProperty(token)`
+- `crypto.timingSafeEqual`.
+- `object.hasOwnProperty(token)`.
 
 ## SQL Injection
 
-user input: ' or 1=1--
+### SQL Injection Attack
+
+User input `' or 1=1--`:
 
 ```sql
 SELECT *
@@ -58,11 +428,13 @@ String sql = "SELECT * FROM users WHERE email = ?";
 
 ## Click Jacking
 
-Hover a transparent malicious link upon the true button
+### Click Jacking Attack
+
+Hover a transparent malicious link upon the true button.
 
 ### Click Jacking Protection
 
-- frame killing snippet
+Frame killing snippet:
 
 ```html
 <style>
@@ -83,7 +455,7 @@ Hover a transparent malicious link upon the true button
 </script>
 ```
 
-- X-Frame-Options
+`X-Frame-Options`:
 
 ```ts
 // nodejs
@@ -93,31 +465,29 @@ response.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
 
 ## Session Fixation
 
-### Protection
+### Session Fixation Protection
 
-在 **HTTP Cookies** 中传输**复杂**的 Session IDs, 并在**成功连接**/**恶意篡改**后重置 Session IDs.
+在 **HTTP Cookies** 中传输**复杂**的 Session IDs, 并在**成功连接**/**恶意篡改**后重置 Session IDs:
 
 - where: not passing session IDs in queryStrings/requestBody,
-  instead of passing them in **HTTP cookies**
+  instead of passing them in **HTTP cookies**.
+- what: generate complex session IDs.
+- how: reset session IDs after set up session successfully.
+- how: reset session IDs after it's been changed manually on client(Set-Cookies).
 
 ```ts
 req.session.regenerate(function (err) {
   process(err);
 });
-```
 
-- what: generate complex session IDs
-
-```ts
 const generateSessionId = session => uid(24);
 ```
 
-- how: reset session IDs after set up session successfully
-- how: reset session IDs after it's been changed manually on client(Set-Cookies)
+## XSS
 
-## XSS Attack
+### XSS Attack
 
-Cross-Site Scripting:
+Cross-Site scripting:
 
 - Reflected XSS: url input (search pages) `http://localhost:8080/test?name=<script>alert('attack')</script>`.
 - Stored XSS: store script into database.
@@ -134,7 +504,9 @@ don't trust user:
 
 ## CSRF
 
-Cross-Site Request Forgery - 跨站请求伪造:
+### CSRF Attack
+
+Cross-Site request forgery (跨站请求伪造):
 
 挟制用户在当前已登录的 Web 应用程序上执行**非本意**的操作,
 利用已认证用户(长期 Cookies), 访问攻击者网站, 并被强制执行脚本,
@@ -172,6 +544,25 @@ function openUrl(url) {
 }
 ```
 
+```python
+# Reject cross-origin requests to protect from
+# CSRF, XSSI & other bugs
+def allow_request(req):
+  # Allow requests from browsers which don't send Fetch Metadata
+  if not req['sec-fetch-site']:
+    return True
+
+  # Allow same-site and browser-initiated requests
+  if req['sec-fetch-site'] in ('same-origin', 'same-site', 'none'):
+    return True
+
+  # Allow simple top-level navigation from anywhere
+  if req['sec-fetch-mode'] === 'navigate' and req.method === 'GET':
+    return True
+
+  return False
+```
+
 ## Distributed Denial of Service
 
 DDoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
@@ -182,6 +573,8 @@ DDoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时
 - 即时通讯服务.
 
 ## File Upload Vulnerabilities
+
+### File Upload Attack
 
 当使用 JS 代码限制上传文件类型时, 攻击者 Disable JS in Browser, 并上传 malicious code file.
 
@@ -220,50 +613,61 @@ function isRelative(url) {
 
 ## User Enumeration
 
-通过暴力工具得到被攻击网站的用户名单, 并利用社工得到密码
+### User Enumeration Attack
 
-> 很显然, REST API 无法抵抗此种攻击
-> E.g [GitHub User Profile](https://github.com)
+通过暴力工具得到被攻击网站的用户名单, 并利用社工得到密码:
+
+REST API 无法抵抗此种攻击,
+e.g GitHub [user profile](https://github.com).
 
 ### User Enumeration Protection
 
+#### User API Protection
+
+- 限制 API 访问频率与次数.
+- 设置 IP 黑名单.
+
 #### Login Protection
 
-使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误
+使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误:
 
-- Login error message: Unknown User **or** Password
-- All login code-paths take the same time on average: time consuming operations
-- All login code-paths take the same context: session IDs, cookies
+- Login error message: Unknown User **or** Password.
+- All login code-paths take the same time on average: time consuming operations.
+- All login code-paths take the same context: session IDs, cookies.
 
-#### Sign Up or Reset Protection
+#### Sign Up and Reset Protection
 
 Not with name, should with email:
 
-使攻击者无法枚举用户名, 他无法确定是用户不存在还是用户已存在
+- 使攻击者无法枚举用户名, 他无法确定是用户不存在还是用户已存在.
+- Not Exist: Sending sign-up email.
+- Exist: Sending pwd-reset email.
 
-- Not Exist: Sending sign-up email
-- Exist: Sending pwd-reset email
+## XML Vulnerabilities
 
-## Inline Document Type Definition in XML
+### XML Attack
 
-Dangerous Macros:
+Inline document type definition in XML
+led to dangerous macros:
 
-- XML Bombs
-- XML External Entities
+- XML Bombs.
+- XML External Entities.
 
 ### XML Protection
 
-Disable DTD parse in XML parser
+Disable DTD parse in XML parser.
 
 ## Information Leakage
 
-- Server in Response Headers
-- Cookies: SESSION_ID -> java
-- URL: .jsp, .php, .asp
-- Error Message
-- AJAX responses
-- JSON/XML responses
-- Code Information
+### Information Leakage Attack
+
+- Server in Response Headers.
+- Cookies: SESSION_ID -> java.
+- URL: `.jsp`, `.php`, `.asp`.
+- Error Message.
+- AJAX responses.
+- JSON/XML responses.
+- Code Information.
 
 ```json
 [
@@ -287,45 +691,42 @@ Disable DTD parse in XML parser
 
 ### Information Leakage Protection
 
-- `NODE_ENV=production`
-- 处理/混淆/加密原始数据(raw data)
-- 处理/混淆客户端代码
-- 去除工具库的版本信息
-- Disable the “Server” HTTP Header and Similar Headers
-- Use Clean URLs without extensions
-- Ensure Cookie Parameters are Generic
-- Disable Client-Side Error Reporting
-- Sanitize Data Passed to the Client
-- Obfuscate JavaScript\
-- Sanitize Template Files
-- Ensure Correct Configuration of Web Root Directory
+- `NODE_ENV=production`.
+- 处理/混淆/加密原始数据(raw data).
+- 处理/混淆客户端代码.
+- 去除工具库的版本信息.
+- Disable the “Server” HTTP Header and Similar Headers.
+- Use Clean URLs without extensions.
+- Ensure Cookie Parameters are Generic.
+- Disable Client-Side Error Reporting.
+- Sanitize Data Passed to the Client.
+- Obfuscate JavaScript.
+- Sanitize Template Files.
+- Ensure Correct Configuration of Web Root Directory.
 
-## Secure Treatment of Passwords
+## Secure Passwords
 
-> [Hacks Explain](https://www.hacksplaining.com/prevention/password-mismanagement)
+Password [mis-management](https://www.hacksplaining.com/prevention/password-mismanagement).
 
-## 目录遍历攻击
+## Directory Traversal
+
+### Directory Traversal Attack
 
 ```bash
 GET /../../../passwd.key HTTP/1.1
 ```
 
-### Directory Protection
+### Directory Traversal Protection
 
-检查请求路径是否安全, 否则不返回响应
+检查请求路径是否安全, 否则不返回响应.
 
-## 病毒 NPM 包
+## ReDoS
 
-名字与流行包相近, 通过 postinstall 脚本执行病毒脚本，获取系统环境变量信息 e.g `crossenv`
+### ReDoS Attack
 
-### Package Protection
+正则表达式 DoS 攻击:
 
-- No typo in package.json
-- 禁止执行 postinstall 脚本
-
-## 正则表达式 DoS 攻击 (ReDoS)
-
-正则表达式引擎采用回溯的方式匹配所有可能性，导致性能问题
+正则表达式引擎采用回溯的方式匹配所有可能性, 导致性能问题.
 
 ### ReDoS Protection
 
@@ -334,14 +735,11 @@ GET /../../../passwd.key HTTP/1.1
 - 不动态构造正则表达式 new RegExp()
 - 禁止用户输入影响正则表达式构建/匹配
 
-## Supply Chain Attack
+## Supply Chain Security
 
-Attack:
+### Supply Chain Attack
 
 - [Running file encryption attack in Node.js module](https://dev.to/devdevcharlie/running-a-ransomware-attack-in-a-nodejs-module-4hgb).
-
-Case:
-
 - [left-pad](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm).
 - [eslint](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes).
 - [antd](https://github.com/ant-design/ant-design/issues/13098).
@@ -352,7 +750,9 @@ Case:
 - [event-source-polyfill](https://github.com/Yaffle/EventSource/commit/de137927e13d8afac153d2485152ccec48948a7a).
 - [styled-components](https://github.com/styled-components/styled-components/commit/ba9d732ca7da53f2a095e35450ecffd592c6f5ba).
 
-Solution:
+### Supply Chain Protection
+
+评估 NPM package 质量:
 
 - 代码质量.
 - 测试完备性.
@@ -366,14 +766,22 @@ Solution:
 - 使用时长.
 - 后续依赖版本更新策略.
 
-Example:
+### Malicious Package Attack
 
-- [OpenBase](https://openbase.com)
-- [NPM Package Advisor](https://snyk.io/advisor)
+名字与流行包相近, 通过 `postinstall` 脚本执行病毒脚本, 获取系统环境变量信息 e.g `crossenv`.
+
+### Malicious Package Protection
+
+- No typo in `package.json`:
+  - NPM package [database](https://openbase.com).
+  - NPM package [advisor](https://snyk.io/advisor).
+- 禁止执行 `postinstall` 脚本.
 
 ## Security Checklist
 
-### 权限系统 (注册/注册/二次验证/密码重置)
+### Access Control System Checklist
+
+注册/注册/二次验证/密码重置:
 
 - [ ] 任何地方都使用 HTTPS.
 - [ ] 使用 `Bcrypt` 存储密码哈希 (没有使用盐的必要 - `Bcrypt` 干的就是这个事).
@@ -392,7 +800,7 @@ Example:
 - [ ] 重置密码成功后，将重置使用的 token 失效.
 - [ ] Nodejs 等不使用 sudo 运行
 
-### 用户数据和权限校验
+### Authentication Checklist
 
 - [ ] 诸如`我的购物车`、`我的浏览历史`之类的资源访问，必须检查当前登录的用户是否有这些资源的访问权限.
 - [ ] 避免资源 ID 被连续遍历访问，使用 `/me/orders` 代替 `/user/37153/orders` 以防你忘了检查权限，导致数据泄露。
@@ -404,7 +812,7 @@ Example:
       的 `UUID` 而不是整数. 你可以从 github 找到你所用的语言的实现.
 - [ ] [JWT（JSON Web Token）](https://jwt.io/)很棒.当你需要构建一个 单页应用/API 时使用.
 
-### 安卓和 iOS APP
+### Mobile Application Checklist
 
 - [ ] 支付网关的 `盐（salt）` 不应该被硬编码
 - [ ] 来自第三方的 `secret` 和 `auth token` 不应该被硬编码
@@ -413,7 +821,7 @@ Example:
 - [ ] 在 iOS 系统下，使用系统的钥匙串来存储敏感信息（权限 token、api key、 等等） **不要** 把这类信息存储在用户配置里面
 - [ ] 强烈推荐[证书绑定（Certificate pinning）](https://en.wikipedia.org/wiki/HTTP_Public_Key_Pinning)
 
-### 安全头信息和配置
+### Server Configuration Checklist
 
 - [ ] `添加` [CSP](https://en.wikipedia.org/wiki/Content_Security_Policy) 头信息，
       减缓 XSS 和数据注入攻击. 这很重要.
@@ -437,7 +845,7 @@ Example:
       不要把 CSRF token 通过 http 接口暴露出来，比如第一次请求更新的时候
 - [ ] 在 get 请求参数里面，不要使用临界数据和 token。 暴露服务器日志的同时也会暴露用户数据
 
-### 过滤输入
+### Client Input Checklist
 
 - [ ] 所有暴露给用户的参数输入都应该
       `过滤` 防止 [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) 攻击.
@@ -450,7 +858,7 @@ Example:
       [SSRF](https://docs.google.com/document/d/1v1TkWZtrhzRLy0bYXBcdLUedXGb9njTNIJXa3u9akHM/edit#heading=h.t4tsk5ixehdd)
 - [ ] 在输出显示给用户之前，`过滤`输出信息
 
-### 操作
+### Operation Checklist
 
 - [ ] 如果你的业务很小或者你缺乏经验，可以评估一下使用 AWS 或者一个 PaaS 平台来运行代码
 - [ ] 在云上使用正规的脚本创建虚拟机
@@ -466,7 +874,7 @@ Example:
       [数据加密](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
       功能. 如果使用 AWS EC2，考虑使用磁盘加密功能（现在系统启动盘也能加密了）
 
-### 关于人
+### Teamwork Checklist
 
 - [ ] 开一个邮件组（例如：security@coolcorp.io）和搜集页面，方便安全研究人员提交漏洞
 - [ ] 取决于你的业务，限制用户数据库的访问
@@ -478,10 +886,16 @@ Example:
 
 ## Security Best Practice
 
-[Security Helmet](https://github.com/helmetjs/helmet):
+[Security helmet](https://github.com/helmetjs/helmet):
 
 - XSS Protection.
 - Setting a `Context-Security-Policy` header.
 - Ensure all connections to be HTTPS.
 - Avoid Clicking-jacking using `X-Frame-Options`.
 - Disable the `X-Powered-By` header.
+
+## Security Reference
+
+- Web security [checklist](https://eggjs.org/zh-cn/core/security.html).
+- ESLint node security [plugin](https://github.com/nodesecurity/eslint-plugin-security).
+- Defensive design and programming [guide](https://mp.weixin.qq.com/s/G4pME9xFHdWnFckgytnofQ).
