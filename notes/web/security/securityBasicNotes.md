@@ -781,7 +781,7 @@ GET /../../../passwd.key HTTP/1.1
 
 ### Access Control System Checklist
 
-注册/注册/二次验证/密码重置:
+注册/二次验证/密码重置:
 
 - [ ] 任何地方都使用 HTTPS.
 - [ ] 使用 `Bcrypt` 存储密码哈希 (没有使用盐的必要 - `Bcrypt` 干的就是这个事).
