@@ -1807,6 +1807,22 @@ const svgRectElement = document.createElementNS(
 - `and`: all.
 - `,`: any.
 
+[CSS Media Queries Level 4](https://developer.mozilla.org/docs/Web/CSS/Media_Queries/Using_media_queries#syntax_improvements_in_level_4):
+
+```css
+@media (height > 600px) {
+  body {
+    line-height: 1.4;
+  }
+}
+
+@media (400px <= width <= 700px) {
+  body {
+    line-height: 1.4;
+  }
+}
+```
+
 ### Media Type Query
 
 [Media types](https://developer.mozilla.org/docs/Web/CSS/@media#media_types):
