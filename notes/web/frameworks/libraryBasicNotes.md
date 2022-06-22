@@ -333,6 +333,7 @@ tags: [Web, Framework, Library]
 - [Linaria: Zero-runtime CSS-in-TypeScript Library](https://github.com/callstack/linaria)
 - [Vanilla Extract: Zero-runtime CSS-in-TypeScript](https://github.com/seek-oss/vanilla-extract)
 - [Compiled: Performant Compile Time CSS-in-TypeScript Library](https://github.com/atlassian-labs/compiled)
+- [TWind: Smallest, Fastest, Most Feature Complete Tailwind-in-JS Solution](https://github.com/tw-in-js/twind)
 
 ### Color Utils
 
