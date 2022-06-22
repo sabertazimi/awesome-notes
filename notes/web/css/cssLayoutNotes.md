@@ -839,6 +839,10 @@ calculate by containing block `height`:
 
 If `containing block` `height` is `auto`, it calculated to `0`.
 
+### Position Reference
+
+- `position` property impact on [`display` items](https://dev.to/melnik909/css-isnt-magic-all-tips-about-the-position-property-to-avoid-common-mistakes-398m).
+
 ## Float Pattern
 
 ### Float Element
