@@ -807,7 +807,7 @@ a::after {
 }
 ```
 
-`attr()` – 调用当前元素的属性:
+`attr()`, 调用当前元素的属性:
 
 ```css
 a::after {
@@ -819,7 +819,7 @@ b::after {
 }
 ```
 
-`url()`/`uri()` – 用于引用媒体文件:
+`url()`/`uri()`, 用于引用媒体文件:
 
 ```css
 h1::before {
@@ -827,27 +827,8 @@ h1::before {
 }
 ```
 
-`counter()` -
-调用计数器, 可以不使用列表元素实现序号功能,
+`counter()`, 调用计数器, 可以不使用列表元素实现序号功能,
 配合 CSS3 中`counter-increment`和`counter-reset`属性:
-
-```css
-h2::before {
-  content: 'Chapter ' counter(chapter);
-  counter-increment: chapter;
-}
-```
-
-```css
-div {
-  counter-reset: tidbit-counter 58;
-}
-
-h2::before {
-  content: counter(tidbit-counter, list-style-type) ': ';
-  counter-increment: tidbit-counter 1;
-}
-```
 
 ```html
 <div>
@@ -856,11 +837,35 @@ h2::before {
   <h2>JS</h2>
 </div>
 
+<style>
+  div {
+    counter-reset: tidbit-counter 58;
+  }
+
+  h2::before {
+    content: counter(tidbit-counter, list-style-type) ': ';
+    counter-increment: tidbit-counter 1;
+  }
+</style>
+
 <!-- output
-59: HTML
-60: CSS
-61: JS
+  59: HTML
+  60: CSS
+  61: JS
 output -->
+```
+
+伪元素可用于扩大可点击区域:
+
+```css
+.btn-text::before {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  bottom: -6px;
+  left: -8px;
+  content: '';
+}
 ```
 
 ### Backdrop Pseudo Element
