@@ -234,10 +234,26 @@ Due to asset granularity and **caching effectiveness**:
 
 HTTP/3 = `HTTP` + `QPack / Stream` + `QUIC / TLS 1.3+` + `UDP`:
 
-- 解决多次握手高延迟问题.
-- 解决队头 (数据重传) 阻塞 (后续数据) 问题.
-- QUIC 协议保证传输可靠/实现快速握手/集成 TLS 加密/实现多路复用.
-- QUIC 给每个请求流 (Stream ID) 都分配一个独立的滑动窗口, 实现无队头阻塞的多路复用, 解决 TCP 层的队头阻塞.
+- QUIC 实现快速握手, 解决多次握手高延迟问题:
+  - Establishing connection in HTTP/2 requires 3 RTT.
+  - Establishing connection in HTTP/3 only requires 2 RTT.
+- QUIC 协议保证传输可靠: packet loss handling.
+- QUIC 给每个请求流 (Stream ID) 都分配一个独立的滑动窗口, 同时进行队头压缩,
+  实现传输层**无队头阻塞的多路复用**, 解决队头 (数据重传) 阻塞 (后续数据) 问题:
+  - Stream prioritization.
+  - Header compression.
+- QUIC 集成 TLS 加密.
+- HTTP/3 brings tunable congestion control and connection migration.
+
+For a new domain,
+browser connects using H/1 or H/2.
+Server sends back an [`alternative services`](https://developer.mozilla.org/docs/Web/HTTP/Headers/Alt-Svc)
+header indicating H/3 support.
+Browser stores [`alt-svc`](https://developer.mozilla.org/docs/Web/HTTP/Headers/Alt-Svc)
+info in alt-svc cache.
+From then on,
+browser tries HTTP/3 in parallel with HTTP/1 and 2
+so that there’s an immediate fallback if network blocks.
 
 ## HTTPS
 
