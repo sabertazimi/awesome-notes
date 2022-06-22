@@ -105,7 +105,7 @@ UI 的防御性:
   - 代码审核.
   - 样式隔离.
 
-## Content Security Policy
+### Content Security Policy
 
 CSP help prevent from XSS:
 
@@ -152,7 +152,7 @@ Content-Security-Policy: script-src https://example.com/
 <script src="https://not-example.com/js/library.js"></script>
 ```
 
-## Trusted Types
+### Trusted Types
 
 - TrustedURL.
 - TrustedHTML.
@@ -187,14 +187,20 @@ const trustedHTML = SanitizingPolicy.createHTML(foo);
 element.innerHTML = trustedHTML;
 ```
 
-## Security HTTP Headers
+### Security HTTP Headers
 
-- [X-Content-Type-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Content-Type-Options)
-- [X-Frame-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options)
-- [X-XSS-Protection](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-XSS-Protection)
-- [Helmet: Secure Express Apps with Various HTTP Headers](https://github.com/helmetjs/helmet)
+Security HTTP [headers](https://github.com/helmetjs/helmet):
 
-## Sandbox
+- [X-Content-Type-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Content-Type-Options).
+- [X-Frame-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options).
+- [X-XSS-Protection](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-XSS-Protection).
+- XSS Protection.
+- Setting `Context-Security-Policy` header.
+- Ensure all connections to be HTTPS.
+- Avoid Clicking-jacking using `X-Frame-Options`.
+- Disable `X-Powered-By` header.
+
+### Sandbox
 
 [`Sandbox`](https://developer.51cto.com/article/710911.html):
 
@@ -213,7 +219,7 @@ element.innerHTML = trustedHTML;
 - `<iframe>` 沙盒: 使用 `<iframe>` 隔离全局上下文.
 - [`ShadowRealm`](https://2ality.com/2022/04/shadow-realms.html) 沙盒.
 
-### Snapshot Sandbox
+#### Snapshot Sandbox
 
 `SnapshotSandbox`:
 
@@ -259,7 +265,7 @@ class SnapshotSandbox {
 }
 ```
 
-### Proxy Sandbox
+#### Proxy Sandbox
 
 `ProxySandbox`:
 
@@ -284,7 +290,7 @@ function ProxySandbox(code) {
 }
 ```
 
-### Iframe Sandbox
+#### Iframe Sandbox
 
 ```ts
 class SandboxWindow {
@@ -332,13 +338,20 @@ const sandboxGlobal = new Proxy(iframe.contentWindow, {});
 const newSandboxWindow = new SandboxWindow(context, sandboxGlobal);
 ```
 
-## User Privacy
+### Crypto
 
-### Browser Privacy Detection
+Web crypto [API](https://developer.mozilla.org/docs/Web/API/SubtleCrypto):
+
+- 公钥加密私钥解密: 只有私钥拥有者可以获取信息.
+- 公钥验证私钥签名: 只有私钥拥有者可以发布签名.
+
+### User Privacy
+
+#### Browser Privacy Detection
 
 - Browser [leaks](https://browserleaks.com).
 
-### User Fingerprint
+#### User Fingerprint
 
 - Use Canvas or WebGL to generate user
   [fingerprint](https://yinzhicao.org/TrackingFree/crossbrowsertracking_NDSS17.pdf).
@@ -392,11 +405,410 @@ function getCanvasFingerprint() {
 getCanvasFingerprint();
 ```
 
-## Crypto
+## Security Vulnerability
 
-- Web crypto [API](https://developer.mozilla.org/docs/Web/API/SubtleCrypto).
-- 公钥加密私钥解密: 只有私钥拥有者可以获取信息.
-- 公钥验证私钥签名: 只有私钥拥有者可以发布签名.
+### Object Injection
+
+#### Object Injection Attack
+
+- `__proto__.XX`.
+- `constructor`.
+- `hasOwnProperty`.
+
+#### Insecure Object Comparison
+
+Injection:
+
+```ts
+const token = req.cookies.token;
+
+// Vulnerability:
+// SESSIONS[constructor] => `true`
+if (token && SESSIONS[token]) {
+  next();
+}
+```
+
+Solutions:
+
+- `crypto.timingSafeEqual`.
+- `object.hasOwnProperty(token)`.
+
+### SQL Injection
+
+#### SQL Injection Attack
+
+User input `' or 1=1--`:
+
+```sql
+SELECT *
+  FROM users
+ WHERE email = 'user@email.com'
+   AND pass  = '' or 1=1--' LIMIT 1
+```
+
+#### SQL Injection Protection
+
+- Don’t allow multiple statements.
+- Validate user input.
+- Allowlist user input.
+- Parameterized statements: use placeholders instead of variable interpolation.
+
+```sql
+-- Construct the SQL statement we want to run, specifying the parameter.
+String sql = "SELECT * FROM users WHERE email = ?";
+```
+
+### Click Jacking
+
+#### Click Jacking Attack
+
+Hover a transparent malicious link upon the true button.
+
+#### Click Jacking Protection
+
+Frame killing snippet:
+
+```html
+<style>
+  /* Hide page by default */
+  html {
+    display: none;
+  }
+</style>
+
+<script>
+  if (self == top) {
+    // Everything checks out, show the page.
+    document.documentElement.style.display = 'block';
+  } else {
+    // Break out of the frame.
+    top.location = self.location;
+  }
+</script>
+```
+
+`X-Frame-Options`:
+
+```ts
+// nodejs
+response.setHeader('X-Frame-Options', 'DENY');
+response.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
+```
+
+### Session Fixation
+
+#### Session Fixation Protection
+
+在 **HTTP Cookies** 中传输**复杂**的 Session IDs, 并在**成功连接**/**恶意篡改**后重置 Session IDs:
+
+- where: not passing session IDs in queryStrings/requestBody,
+  instead of passing them in **HTTP cookies**.
+- what: generate complex session IDs.
+- how: reset session IDs after set up session successfully.
+- how: reset session IDs after it's been changed manually on client(Set-Cookies).
+
+```ts
+req.session.regenerate(function (err) {
+  process(err);
+});
+
+const generateSessionId = session => uid(24);
+```
+
+### XSS
+
+#### XSS Attack
+
+Cross-Site scripting:
+
+- Reflected XSS: url input (search pages) `http://localhost:8080/test?name=<script>alert('attack')</script>`.
+- Stored XSS: store script into database.
+
+User input: `<script> malicious code </script>`.
+
+#### XSS Protection
+
+Don't trust user:
+
+- `replace(/<script>|<script/>/g, '')`.
+- `trim()`.
+- Using template engine with XSS protection (handlebars, jade, etc...).
+
+### CSRF
+
+#### CSRF Attack
+
+Cross-Site request forgery (跨站请求伪造):
+
+挟制用户在当前已登录的 Web 应用程序上执行**非本意**的操作,
+利用已认证用户(长期 Cookies), 访问攻击者网站, 并被强制执行脚本,
+在用户不知情的情况下提交 Get/Post Request with Cookies 给被攻击网站.
+
+XSS 利用的是网站对用户(输入)的信任,
+CSRF 利用的是网站对用户网页浏览器的信任.
+
+#### CSRF Protection
+
+- 确保 `GET request` 没有副作用.
+- 确保 `request` 正常渠道发起 (Hidden token check in form).
+- 开启同源策略 (**Same Origin Policy**).
+- Addition Authentication: input password again.
+- Express: `csurf` library.
+
+```html
+<a
+  href="https://an.evil.site"
+  target="_blank"
+  rel="noopener noreferrer nofollow"
+>
+  进入一个"邪恶"的网站
+</a>
+```
+
+```ts
+// old browser
+'use strict';
+
+function openUrl(url) {
+  const newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+```
+
+```python
+# Reject cross-origin requests to protect from
+# CSRF, XSSI & other bugs
+def allow_request(req):
+  # Allow requests from browsers which don't send Fetch Metadata
+  if not req['sec-fetch-site']:
+    return True
+
+  # Allow same-site and browser-initiated requests
+  if req['sec-fetch-site'] in ('same-origin', 'same-site', 'none'):
+    return True
+
+  # Allow simple top-level navigation from anywhere
+  if req['sec-fetch-mode'] === 'navigate' and req.method === 'GET':
+    return True
+
+  return False
+```
+
+### Distributed Denial of Service
+
+DDoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
+
+- Web 服务.
+- 邮件服务.
+- DNS 服务.
+- 即时通讯服务.
+
+### ReDoS
+
+#### ReDoS Attack
+
+正则表达式 DoS 攻击:
+
+正则表达式引擎采用回溯的方式匹配所有可能性, 导致性能问题.
+
+#### ReDoS Protection
+
+- 不使用 NFA 实现的正则表达式引擎, 使用 DFA 实现的正则表达式引擎
+- 不定义性能消耗过大的正则表达式
+- 不动态构造正则表达式 new RegExp()
+- 禁止用户输入影响正则表达式构建/匹配
+
+### File Upload Vulnerability
+
+#### File Upload Attack
+
+当使用 JS 代码限制上传文件类型时, 攻击者 Disable JS in Browser, 并上传 malicious code file.
+
+```php
+<?php
+    if (isset($_REQUEST['cmd'])) {
+        $cmd = ($_REQUEST['cmd']);
+        system($cmd);
+    } else {
+        echo 'What is your bidding?';
+    }
+?>
+```
+
+#### File Upload Protection
+
+对于上传文件:
+
+- 隔离 + 禁止执行
+- 重命名/Hash 化: 以防攻击者找到此文件
+- 检查文件格式
+- 检查 Content-Type Header
+- 使用 Virus Scanner
+
+### Directory Traversal
+
+#### Directory Traversal Attack
+
+```bash
+GET /../../../passwd.key HTTP/1.1
+```
+
+#### Directory Traversal Protection
+
+检查请求路径是否安全, 否则不返回响应.
+
+### Malicious Redirects
+
+#### Malicious Redirects Protection
+
+Check the Referrer when doing redirects
+
+```ts
+function isRelative(url) {
+  return url && url.match(/^\/[^\/\\]/);
+}
+```
+
+### User Enumeration
+
+#### User Enumeration Attack
+
+通过暴力工具得到被攻击网站的用户名单, 并利用社工得到密码:
+
+REST API 无法抵抗此种攻击,
+e.g GitHub [user profile](https://github.com).
+
+#### User Enumeration Protection
+
+##### User API Protection
+
+- 限制 API 访问频率与次数.
+- 设置 IP 黑名单.
+
+##### Login Protection
+
+使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误:
+
+- Login error message: Unknown User **or** Password.
+- All login code-paths take the same time on average: time consuming operations.
+- All login code-paths take the same context: session IDs, cookies.
+
+##### Sign Up and Reset Protection
+
+Not with name, should with email:
+
+- 使攻击者无法枚举用户名, 他无法确定是用户不存在还是用户已存在.
+- Not Exist: Sending sign-up email.
+- Exist: Sending pwd-reset email.
+
+### XML Vulnerability
+
+#### XML Attack
+
+Inline document type definition in XML
+led to dangerous macros:
+
+- XML Bombs.
+- XML External Entities.
+
+#### XML Protection
+
+Disable DTD parse in XML parser.
+
+### Password Vulnerability
+
+Password [mis-management](https://www.hacksplaining.com/prevention/password-mismanagement).
+
+### Information Leakage
+
+#### Information Leakage Attack
+
+- Server in Response Headers.
+- Cookies: SESSION_ID -> java.
+- URL: `.jsp`, `.php`, `.asp`.
+- Error Message.
+- AJAX responses.
+- JSON/XML responses.
+- Code Information.
+
+```json
+[
+  {
+    "Server": "Apache/1.3.23",
+    "Accept-Ranges": "bytes",
+    "Content-length": 196,
+    "Connection": "close",
+    "Content-Type": "text/html",
+    "Cookie": "SESSION_ID=XXXXX"
+  },
+  {
+    "Server": "Microsoft-IIS/5.0",
+    "Content-Type": "text/html",
+    "Accept-Ranges": "bytes",
+    "ETag": "b0aac0542e25c31",
+    "Content-Length": 7369
+  }
+]
+```
+
+#### Information Leakage Protection
+
+- `NODE_ENV=production`.
+- 处理/混淆/加密原始数据(raw data).
+- 处理/混淆客户端代码.
+- 去除工具库的版本信息.
+- Disable the `Server` HTTP Header and Similar Headers.
+- Use Clean URLs without extensions.
+- Ensure Cookie Parameters are Generic.
+- Disable Client-Side Error Reporting.
+- Sanitize Data Passed to the Client.
+- Obfuscate JavaScript.
+- Sanitize Template Files.
+- Ensure Correct Configuration of Web Root Directory.
+
+### Supply Chain Security
+
+#### Supply Chain Attack
+
+- [Running file encryption attack in Node.js module](https://dev.to/devdevcharlie/running-a-ransomware-attack-in-a-nodejs-module-4hgb).
+- [left-pad](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm).
+- [eslint](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes).
+- [antd](https://github.com/ant-design/ant-design/issues/13098).
+- [faker.js](https://github.com/marak/Faker.js).
+- [colors.js](https://github.com/Marak/colors.js/issues/285).
+- [node-ipc](https://github.com/RIAEvangelist/node-ipc).
+- [es5-ext](https://github.com/medikoo/es5-ext/commit/28de285ed433b45113f01e4ce7c74e9a356b2af2).
+- [event-source-polyfill](https://github.com/Yaffle/EventSource/commit/de137927e13d8afac153d2485152ccec48948a7a).
+- [styled-components](https://github.com/styled-components/styled-components/commit/ba9d732ca7da53f2a095e35450ecffd592c6f5ba).
+
+#### Supply Chain Protection
+
+评估 NPM package 质量:
+
+- 代码质量.
+- 测试完备性.
+- 文档完备性.
+- 工程完备性 (DevOps).
+- 开发人员构成.
+- 兼容性:
+- 流行度.
+- 历史遗留 Bug.
+- 重复实现复杂度.
+- 使用时长.
+- 后续依赖版本更新策略.
+
+#### Malicious Package Attack
+
+名字与流行包相近, 通过 `postinstall` 脚本执行病毒脚本, 获取系统环境变量信息 e.g `crossenv`.
+
+#### Malicious Package Protection
+
+- No typo in `package.json`:
+  - NPM package [database](https://openbase.com).
+  - NPM package [advisor](https://snyk.io/advisor).
+- 禁止执行 `postinstall` 脚本.
 
 ## Zero Trust Access Control
 
@@ -470,409 +882,6 @@ getCanvasFingerprint();
 - 终端用户令牌 (End User Context Tokens)
 - 配置即代码 (Configuration as Code)
 - 标准化开发和部署 (Standard Development and Deployment)
-
-## Object Injection
-
-### Object Injection Attack
-
-- `__proto__.XX`.
-- `constructor`.
-- `hasOwnProperty`.
-
-### Insecure Object Comparison
-
-Injection:
-
-```ts
-const token = req.cookies.token;
-
-// Vulnerability:
-// SESSIONS[constructor] => `true`
-if (token && SESSIONS[token]) {
-  next();
-}
-```
-
-Solutions:
-
-- `crypto.timingSafeEqual`.
-- `object.hasOwnProperty(token)`.
-
-## SQL Injection
-
-### SQL Injection Attack
-
-User input `' or 1=1--`:
-
-```sql
-SELECT *
-  FROM users
- WHERE email = 'user@email.com'
-   AND pass  = '' or 1=1--' LIMIT 1
-```
-
-### SQL Injection Protection
-
-- Don’t allow multiple statements.
-- Validate user input.
-- Allowlist user input.
-- Parameterized statements: use placeholders instead of variable interpolation.
-
-```sql
--- Construct the SQL statement we want to run, specifying the parameter.
-String sql = "SELECT * FROM users WHERE email = ?";
-```
-
-## Click Jacking
-
-### Click Jacking Attack
-
-Hover a transparent malicious link upon the true button.
-
-### Click Jacking Protection
-
-Frame killing snippet:
-
-```html
-<style>
-  /* Hide page by default */
-  html {
-    display: none;
-  }
-</style>
-
-<script>
-  if (self == top) {
-    // Everything checks out, show the page.
-    document.documentElement.style.display = 'block';
-  } else {
-    // Break out of the frame.
-    top.location = self.location;
-  }
-</script>
-```
-
-`X-Frame-Options`:
-
-```ts
-// nodejs
-response.setHeader('X-Frame-Options', 'DENY');
-response.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
-```
-
-## Session Fixation
-
-### Session Fixation Protection
-
-在 **HTTP Cookies** 中传输**复杂**的 Session IDs, 并在**成功连接**/**恶意篡改**后重置 Session IDs:
-
-- where: not passing session IDs in queryStrings/requestBody,
-  instead of passing them in **HTTP cookies**.
-- what: generate complex session IDs.
-- how: reset session IDs after set up session successfully.
-- how: reset session IDs after it's been changed manually on client(Set-Cookies).
-
-```ts
-req.session.regenerate(function (err) {
-  process(err);
-});
-
-const generateSessionId = session => uid(24);
-```
-
-## XSS
-
-### XSS Attack
-
-Cross-Site scripting:
-
-- Reflected XSS: url input (search pages) `http://localhost:8080/test?name=<script>alert('attack')</script>`.
-- Stored XSS: store script into database.
-
-User input: `<script> malicious code </script>`.
-
-### XSS Protection
-
-Don't trust user:
-
-- `replace(/<script>|<script/>/g, '')`.
-- `trim()`.
-- Using template engine with XSS protection (handlebars, jade, etc...).
-
-## CSRF
-
-### CSRF Attack
-
-Cross-Site request forgery (跨站请求伪造):
-
-挟制用户在当前已登录的 Web 应用程序上执行**非本意**的操作,
-利用已认证用户(长期 Cookies), 访问攻击者网站, 并被强制执行脚本,
-在用户不知情的情况下提交 Get/Post Request with Cookies 给被攻击网站.
-
-XSS 利用的是网站对用户(输入)的信任,
-CSRF 利用的是网站对用户网页浏览器的信任.
-
-### CSRF Protection
-
-- 确保 `GET request` 没有副作用.
-- 确保 `request` 正常渠道发起 (Hidden token check in form).
-- 开启同源策略 (**Same Origin Policy**).
-- Addition Authentication: input password again.
-- Express: `csurf` library.
-
-```html
-<a
-  href="https://an.evil.site"
-  target="_blank"
-  rel="noopener noreferrer nofollow"
->
-  进入一个"邪恶"的网站
-</a>
-```
-
-```ts
-// old browser
-'use strict';
-
-function openUrl(url) {
-  const newTab = window.open();
-  newTab.opener = null;
-  newTab.location = url;
-}
-```
-
-```python
-# Reject cross-origin requests to protect from
-# CSRF, XSSI & other bugs
-def allow_request(req):
-  # Allow requests from browsers which don't send Fetch Metadata
-  if not req['sec-fetch-site']:
-    return True
-
-  # Allow same-site and browser-initiated requests
-  if req['sec-fetch-site'] in ('same-origin', 'same-site', 'none'):
-    return True
-
-  # Allow simple top-level navigation from anywhere
-  if req['sec-fetch-mode'] === 'navigate' and req.method === 'GET':
-    return True
-
-  return False
-```
-
-## Distributed Denial of Service
-
-DDoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
-
-- Web 服务.
-- 邮件服务.
-- DNS 服务.
-- 即时通讯服务.
-
-## ReDoS
-
-### ReDoS Attack
-
-正则表达式 DoS 攻击:
-
-正则表达式引擎采用回溯的方式匹配所有可能性, 导致性能问题.
-
-### ReDoS Protection
-
-- 不使用 NFA 实现的正则表达式引擎, 使用 DFA 实现的正则表达式引擎
-- 不定义性能消耗过大的正则表达式
-- 不动态构造正则表达式 new RegExp()
-- 禁止用户输入影响正则表达式构建/匹配
-
-## File Upload Vulnerability
-
-### File Upload Attack
-
-当使用 JS 代码限制上传文件类型时, 攻击者 Disable JS in Browser, 并上传 malicious code file.
-
-```php
-<?php
-    if (isset($_REQUEST['cmd'])) {
-        $cmd = ($_REQUEST['cmd']);
-        system($cmd);
-    } else {
-        echo 'What is your bidding?';
-    }
-?>
-```
-
-### File Upload Protection
-
-对于上传文件:
-
-- 隔离 + 禁止执行
-- 重命名/Hash 化: 以防攻击者找到此文件
-- 检查文件格式
-- 检查 Content-Type Header
-- 使用 Virus Scanner
-
-## Directory Traversal
-
-### Directory Traversal Attack
-
-```bash
-GET /../../../passwd.key HTTP/1.1
-```
-
-### Directory Traversal Protection
-
-检查请求路径是否安全, 否则不返回响应.
-
-## Malicious Redirects
-
-### Malicious Redirects Protection
-
-Check the Referrer when doing redirects
-
-```ts
-function isRelative(url) {
-  return url && url.match(/^\/[^\/\\]/);
-}
-```
-
-## User Enumeration
-
-### User Enumeration Attack
-
-通过暴力工具得到被攻击网站的用户名单, 并利用社工得到密码:
-
-REST API 无法抵抗此种攻击,
-e.g GitHub [user profile](https://github.com).
-
-### User Enumeration Protection
-
-#### User API Protection
-
-- 限制 API 访问频率与次数.
-- 设置 IP 黑名单.
-
-#### Login Protection
-
-使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误:
-
-- Login error message: Unknown User **or** Password.
-- All login code-paths take the same time on average: time consuming operations.
-- All login code-paths take the same context: session IDs, cookies.
-
-#### Sign Up and Reset Protection
-
-Not with name, should with email:
-
-- 使攻击者无法枚举用户名, 他无法确定是用户不存在还是用户已存在.
-- Not Exist: Sending sign-up email.
-- Exist: Sending pwd-reset email.
-
-## XML Vulnerability
-
-### XML Attack
-
-Inline document type definition in XML
-led to dangerous macros:
-
-- XML Bombs.
-- XML External Entities.
-
-### XML Protection
-
-Disable DTD parse in XML parser.
-
-## Password Vulnerability
-
-Password [mis-management](https://www.hacksplaining.com/prevention/password-mismanagement).
-
-## Information Leakage
-
-### Information Leakage Attack
-
-- Server in Response Headers.
-- Cookies: SESSION_ID -> java.
-- URL: `.jsp`, `.php`, `.asp`.
-- Error Message.
-- AJAX responses.
-- JSON/XML responses.
-- Code Information.
-
-```json
-[
-  {
-    "Server": "Apache/1.3.23",
-    "Accept-Ranges": "bytes",
-    "Content-length": 196,
-    "Connection": "close",
-    "Content-Type": "text/html",
-    "Cookie": "SESSION_ID=XXXXX"
-  },
-  {
-    "Server": "Microsoft-IIS/5.0",
-    "Content-Type": "text/html",
-    "Accept-Ranges": "bytes",
-    "ETag": "b0aac0542e25c31",
-    "Content-Length": 7369
-  }
-]
-```
-
-### Information Leakage Protection
-
-- `NODE_ENV=production`.
-- 处理/混淆/加密原始数据(raw data).
-- 处理/混淆客户端代码.
-- 去除工具库的版本信息.
-- Disable the `Server` HTTP Header and Similar Headers.
-- Use Clean URLs without extensions.
-- Ensure Cookie Parameters are Generic.
-- Disable Client-Side Error Reporting.
-- Sanitize Data Passed to the Client.
-- Obfuscate JavaScript.
-- Sanitize Template Files.
-- Ensure Correct Configuration of Web Root Directory.
-
-## Supply Chain Security
-
-### Supply Chain Attack
-
-- [Running file encryption attack in Node.js module](https://dev.to/devdevcharlie/running-a-ransomware-attack-in-a-nodejs-module-4hgb).
-- [left-pad](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm).
-- [eslint](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes).
-- [antd](https://github.com/ant-design/ant-design/issues/13098).
-- [faker.js](https://github.com/marak/Faker.js).
-- [colors.js](https://github.com/Marak/colors.js/issues/285).
-- [node-ipc](https://github.com/RIAEvangelist/node-ipc).
-- [es5-ext](https://github.com/medikoo/es5-ext/commit/28de285ed433b45113f01e4ce7c74e9a356b2af2).
-- [event-source-polyfill](https://github.com/Yaffle/EventSource/commit/de137927e13d8afac153d2485152ccec48948a7a).
-- [styled-components](https://github.com/styled-components/styled-components/commit/ba9d732ca7da53f2a095e35450ecffd592c6f5ba).
-
-### Supply Chain Protection
-
-评估 NPM package 质量:
-
-- 代码质量.
-- 测试完备性.
-- 文档完备性.
-- 工程完备性 (DevOps).
-- 开发人员构成.
-- 兼容性:
-- 流行度.
-- 历史遗留 Bug.
-- 重复实现复杂度.
-- 使用时长.
-- 后续依赖版本更新策略.
-
-### Malicious Package Attack
-
-名字与流行包相近, 通过 `postinstall` 脚本执行病毒脚本, 获取系统环境变量信息 e.g `crossenv`.
-
-### Malicious Package Protection
-
-- No typo in `package.json`:
-  - NPM package [database](https://openbase.com).
-  - NPM package [advisor](https://snyk.io/advisor).
-- 禁止执行 `postinstall` 脚本.
 
 ## Security Checklist
 
@@ -986,16 +995,6 @@ Password [mis-management](https://www.hacksplaining.com/prevention/password-mism
 - [ ] 被黑或者数据泄露时, 检查数据访问前的日志, 通知用户更改密码, 可能需要外部的机构来帮助审计.
 - [ ] 使用 [Netflix Scumblr](https://github.com/Netflix/Scumblr) 及时了解
       你的组织 (公司) 在社交网络或者搜索引擎上的一些讨论信息, 比如黑客攻击/漏洞等等.
-
-## Security Best Practice
-
-[Security helmet](https://github.com/helmetjs/helmet):
-
-- XSS Protection.
-- Setting `Context-Security-Policy` header.
-- Ensure all connections to be HTTPS.
-- Avoid Clicking-jacking using `X-Frame-Options`.
-- Disable `X-Powered-By` header.
 
 ## Security Reference
 
