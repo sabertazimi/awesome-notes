@@ -10,6 +10,22 @@ tags: [Web, DevOps, Security]
 
 ## Security Programming
 
+### Software Security Assurance
+
+- 逻辑安全.
+- 数据安全:
+  - 数据访问权限.
+  - 数据访问时间.
+  - 数据存储格式.
+  - 数据存储位置.
+  - 数据分解与组合.
+- UI 安全.
+- 约束安全:
+  - 数据正确类型.
+  - 数据正确范围.
+  - 数据长度的最大值和最小值.
+  - 数据非法值.
+
 ### Defensive Programming
 
 [Defensive programming](https://mp.weixin.qq.com/s/G4pME9xFHdWnFckgytnofQ):
