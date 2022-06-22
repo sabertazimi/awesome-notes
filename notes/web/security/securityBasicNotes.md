@@ -34,8 +34,8 @@ CSP help prevent from XSS:
 <script nonce="random123" src="https://cdnjs.com/lib.js"></script>
 ```
 
-nonce only CSP block 3rd scripts and dynamic scripts generate by trusted users,
-'strict-dynamic' can tackle it.
+`nonce` only CSP block 3rd scripts and dynamic scripts generate by trusted users,
+`strict-dynamic` can tackle it.
 
 ```html
 <!-- Content-Security-Policy: script-src 'nonce-random123' 'strict-dynamic' -->
@@ -492,15 +492,15 @@ Cross-Site scripting:
 - Reflected XSS: url input (search pages) `http://localhost:8080/test?name=<script>alert('attack')</script>`.
 - Stored XSS: store script into database.
 
-user input: `<script> malicious code </script>`
+User input: `<script> malicious code </script>`.
 
 ### XSS Protection
 
-don't trust user:
+Don't trust user:
 
-- `replace(/<script>|<script/>/g, '')`
-- `trim()`
-- using template engine(handlebars, jade, etc...)
+- `replace(/<script>|<script/>/g, '')`.
+- `trim()`.
+- Using template engine with XSS protection (handlebars, jade, etc...).
 
 ## CSRF
 
