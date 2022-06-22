@@ -2067,7 +2067,7 @@ dd + dd::before {
 
 [Text wrapping and word breaking](https://codersblock.com/blog/deep-dive-into-text-wrapping-and-word-breaking):
 
-- `word-break`:
+- [`word-break`](https://developer.mozilla.org/docs/Web/CSS/word-break):
   - `normal`:
     default line break rule.
   - `keep-all`:
@@ -2075,20 +2075,22 @@ dd + dd::before {
     Non-CJK text behavior is same as for `normal`.
   - `break-all`:
     word breaks should be inserted between any two characters (excluding CJK text).
-  - `break-word` (**Deprecated**).
-- `overflow-wrap` (`word-wrap`):
+- [`overflow-wrap`](https://developer.mozilla.org/docs/Web/CSS/overflow-wrap)
+  (`word-wrap`):
   - `normal`.
   - `anywhere`.
   - `break-word`.
-- `line-break`: break lines of CJK text when working with punctuation and symbols.
+- [`line-break`](https://developer.mozilla.org/docs/Web/CSS/line-break)
+  (break lines of CJK text when working with punctuation and symbols):
   - `auto`.
   - `loose`.
   - `normal`.
   - `strict`.
   - `anywhere`.
-- `hyphens`: how words should be hyphenated when text wraps across multiple lines.
-  - `auto`: automatically break words at appropriate hyphenation points.
+- [`hyphens`](https://developer.mozilla.org/docs/Web/CSS/hyphens)
+  (how words should be hyphenated when text wraps across multiple lines):
   - `manual`: words are broken for line-wrapping only where `-` or `&shy;`.
+  - `auto`: automatically break words at appropriate hyphenation points.
   - `none`: words are not broken at line breaks.
 - `<wbr>`: word break opportunity.
 
@@ -2100,6 +2102,7 @@ dd + dd::before {
 
 /* 自动换行 */
 .auto-wrap {
+  hyphens: auto;
   word-break: normal;
   word-wrap: break-word;
   line-break: anywhere;
@@ -2107,6 +2110,7 @@ dd + dd::before {
 
 /* 自动换行 */
 pre {
+  hyphens: auto;
   word-wrap: break-word; /* IE 5.5-7 */
   white-space: pre-wrap; /* Modern Browsers */
   line-break: anywhere;
@@ -2198,6 +2202,7 @@ Set whether lines of text are laid out horizontally or **vertically**:
   height: auto;
   padding: 8px 5px;
   font-size: 12px;
+  hyphens: auto;
   line-height: 18px;
   word-wrap: break-word; /* 英文自动换行 */
 }
