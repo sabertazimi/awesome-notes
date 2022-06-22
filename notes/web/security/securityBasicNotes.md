@@ -932,7 +932,7 @@ Password [mis-management](https://www.hacksplaining.com/prevention/password-mism
 - [ ] `个人头像上传` 功能应过滤所有的 `EXIF` 标签.
 - [ ] 用户 ID 或者其他的 ID,
       应使用 [RFC compliant](http://www.ietf.org/rfc/rfc4122.txt) 的 `UUID` 而不是整数.
-- [ ] [`JWT`](https://jwt.io/) (JSON Web Token): 当构建一个 `SPA`/`API` 时使用 `JWT`.
+- [ ] [`JWT`](https://jwt.io) (JSON Web Token): 当构建一个 `SPA`/`API` 时使用 `JWT`.
 
 ### Mobile Application Checklist
 
@@ -995,7 +995,7 @@ Password [mis-management](https://www.hacksplaining.com/prevention/password-mism
 - [ ] 修改服务器配置, HTTPS 使用 TLS1.2, 禁用其他的模式.
 - [ ] 不要在线上开启 DEBUG 模式, 有些框架, DEBUG 模式会开启很多权限以及后门, 或者是暴露一些敏感数据到错误栈信息里面.
 - [ ] 对坏人和 DDOS 攻击要有所准备, 使用那些提供 DDOS 清洗的主机服务.
-- [ ] 监控你的系统, 同时记录到日志里面 (例如使用 [New Relic](https://newrelic.com/) 或者其他).
+- [ ] 监控你的系统, 同时记录到日志里面 (例如使用 [New Relic](https://newrelic.com) 或者其他).
 - [ ] 如果是 2B 的业务, 坚持顺从需求.
       如果使用 AWS S3, 可以考虑使用
       [数据加密](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
