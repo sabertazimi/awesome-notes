@@ -393,6 +393,7 @@ tags: [Web, Framework, Library]
 - [InfiniteGrid](https://github.com/naver/egjs-infinitegrid)
 - [Tether: Element Location](https://github.com/shipshapecode/tether)
 - [SplitJS](https://github.com/nathancahill/Split.js)
+- [Teleport: Teleport React Components in Same React Tree](https://github.com/gregberge/react-teleporter)
 
 ### Navigation
 
