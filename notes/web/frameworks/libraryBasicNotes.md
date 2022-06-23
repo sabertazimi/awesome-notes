@@ -1076,6 +1076,7 @@ tags: [Web, Framework, Library]
 - [React Live: Flexible Playground for Live Editing React Components](https://github.com/FormidableLabs/react-live)
 - [React Runner](https://github.com/nihgwu/react-runner)
 - [SyncedStore: CRDT for Building Live and Collaborative Applications](https://github.com/yousefed/SyncedStore)
+- [YJS: Shared CRDT Data Types for Building Collaborative Software](https://github.com/yjs/yjs)
 
 ### Web IDE
 
