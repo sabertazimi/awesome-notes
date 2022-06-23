@@ -1014,7 +1014,8 @@ tags: [Web, Framework, Library]
 
 ### Database
 
-- [Mikro: TypeScript ORM for Node.js](https://github.com/mikro-orm/mikro-orm)
+- [Mikro: TypeScript ORM](https://github.com/mikro-orm/mikro-orm)
+- [Sequelize: Easy-to-use and Promise-based Multi SQL Dialects ORM Tool](https://github.com/sequelize/sequelize)
 - [LowDB: Simple JSON Database](https://github.com/typicode/lowdb)
 - [NocoDB: No Code Database](https://github.com/nocodb/nocodb)
 - [Directus: No-code Data Collaboration App for SQL Database](https://github.com/directus/directus)
