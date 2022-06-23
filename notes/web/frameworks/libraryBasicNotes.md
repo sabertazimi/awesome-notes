@@ -135,7 +135,7 @@ tags: [Web, Framework, Library]
 - [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify-dx)
 - [Sails: Realtime MVC Framework](https://github.com/balderdashy/sails)
 - [RedWood: App Framework for Startups](https://github.com/redwoodjs/redwood)
-- [Amplication: Low-Code but High Quality Node.js Applications](https://github.com/amplication/amplication)
+- [Amplication: Low-Code but High Quality Applications](https://github.com/amplication/amplication)
 - [LoopBack: Build Modern API Applications](https://github.com/loopbackio/loopback-next)
 - [Aleph: Full-stack Framework in Deno](https://github.com/alephjs/aleph.js)
 
@@ -223,7 +223,7 @@ tags: [Web, Framework, Library]
 ## JavaScript Utils
 
 - [Cash: jQuery Lite](https://github.com/fabiospampinato/cash)
-- [HappyDOM: Node.js Browser API](https://github.com/capricorn86/happy-dom)
+- [HappyDOM: Browser Native API](https://github.com/capricorn86/happy-dom)
 - [ConstructJS: Byte Level Data Structures](https://github.com/francisrstokes/construct-js)
 
 ### Math Utils
@@ -255,6 +255,7 @@ tags: [Web, Framework, Library]
 
 - [Threads.js](https://github.com/andywer/threads.js)
 - [WorkerPool](https://github.com/josdejong/workerpool)
+- [TinyPool: Minimal and Tiny Worker Thread Pool](https://github.com/tinylibs/tinypool)
 - [PartyTown: Relocate Resource Intensive scripts into Web Workers](https://github.com/BuilderIO/partytown)
 - [Comlink: Shared Class between Web Workers](https://github.com/GoogleChromeLabs/comlink)
 - [GRFN: Executes Dependency Graph of Async Functions Concurrently](https://github.com/TomerAberbach/grfn)
@@ -647,7 +648,7 @@ tags: [Web, Framework, Library]
 
 - [Viewport Events](https://github.com/robb0wen/tornis)
 - [React Device Detect: Render View According to Detected Device Type](https://github.com/duskload/react-device-detect)
-- [Robot.js: Node.js Desktop Automation](https://github.com/octalmage/robotjs)
+- [Robot.js: Desktop Automation](https://github.com/octalmage/robotjs)
 
 ### Scroll Utils
 
@@ -1420,7 +1421,7 @@ tags: [Web, Framework, Library]
 
 #### Mock Servers
 
-- [SuperTest: Super-agent Driven Node.js HTTP Servers Integration Testing](https://github.com/visionmedia/supertest)
+- [SuperTest: Super-agent Driven HTTP Servers Integration Testing](https://github.com/visionmedia/supertest)
 - [JSON Server](https://github.com/typicode/json-server)
 - [JSON GraphQL Server](https://github.com/marmelab/json-graphql-server)
 - [Prism: Mocking and Contract Testing with OpenAPI](https://github.com/stoplightio/prism)
@@ -1495,7 +1496,7 @@ tags: [Web, Framework, Library]
 ### DevOps Automation CI and CD Tools
 
 - [Probot: Framework for Building GitHub Apps to Automate Workflow](https://github.com/probot/probot)
-- [Actions Toolkit: Building GitHub Actions in Node.js](https://github.com/JasonEtco/actions-toolkit)
+- [Actions Toolkit: Building GitHub Actions](https://github.com/JasonEtco/actions-toolkit)
 - [Chokidar: Minimal Cross-platform File Watching Library](https://github.com/paulmillr/chokidar)
 - [ACT: Local GitHub Action Runner](https://github.com/nektos/act)
 - [TerraForm](https://github.com/hashicorp/terraform)
@@ -1573,7 +1574,7 @@ tags: [Web, Framework, Library]
 - [Docusaurus: Easy to Maintain Documentation Websites with React Stack](https://github.com/facebook/docusaurus)
 - [Nextra: Next.js Documentation Static Site Generator](https://github.com/shuding/nextra)
 - [VuePress: Minimalistic Vue-powered Static Site Generator](https://github.com/vuejs/vuepress)
-- [Wiki.js: Modern and Powerful Wiki App Built on Node.js](https://github.com/Requarks/wiki)
+- [Wiki.js: Modern and Powerful Wiki App](https://github.com/Requarks/wiki)
 
 ### JavaScript Documentation
 
