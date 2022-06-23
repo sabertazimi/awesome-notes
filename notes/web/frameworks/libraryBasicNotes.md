@@ -495,6 +495,7 @@ tags: [Web, Framework, Library]
 
 - [PlanBy: Electronic Program Guide (EPG) based Timeline](https://github.com/karolkozer/planby)
 - [Frappe: Interactive and Modern Gantt Chart](https://github.com/frappe/gantt)
+- [MarkWhen: Cascading Timeline from Markdown-like Text](https://github.com/kochrt/markwhen)
 
 ### Form
 
