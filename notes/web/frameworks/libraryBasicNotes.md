@@ -569,6 +569,7 @@ tags: [Web, Framework, Library]
 
 - [Arborist: React Sortable, Virtual and Customizable Tree Component](https://github.com/brimdata/react-arborist)
 - [TreeView: Draggable and Droppable React TreeView Component](https://github.com/minop1205/react-dnd-treeview)
+- [ComplexTree: Accessible Tree Component with Multi-Select and Drag-And-Drop](https://github.com/lukasbach/react-complex-tree)
 
 ### Charts Visualization
 
