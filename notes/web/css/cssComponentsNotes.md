@@ -1259,7 +1259,8 @@ Pseudo element switch from circle to circle:
 
 #### 3D Perspective Transform Parallax Effect
 
-[3D perspective transform parallax effect](https://keithclark.co.uk/articles/pure-css-parallax-websites):
+[3D perspective transform](https://keithclark.co.uk/articles/pure-css-parallax-websites)
+[parallax effect](https://github.com/netlify/matterday.netlify.com):
 
 ```html
 <div class="parallax">
