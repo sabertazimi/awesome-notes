@@ -123,7 +123,8 @@ UI 的防御性:
 
 ### Content Security Policy
 
-CSP help prevent from XSS:
+[`CSP`](https://github.com/foundeo/content-security-policy.com)
+help prevent from `XSS`:
 
 ```bash
 {
@@ -136,34 +137,36 @@ CSP help prevent from XSS:
 }
 ```
 
+`nonce`-only `CSP` block 3rd scripts and dynamic scripts generate by trusted users:
+
 ```html
+<script nonce="random123">
+  alert('this is fine!');
+</script>
+<script nonce="random123" src="https://cdnjs.com/lib.js"></script>
+<!-- XSS injected by attacker - blocked by CSP -->
 <script>
   alert('xss');
 </script>
-// XSS injected by attacker - blocked by CSP
-<script nonce="random123">
-  alert('this is fine!)
-</script>
-<script nonce="random123" src="https://cdnjs.com/lib.js"></script>
 ```
 
-`nonce` only CSP block 3rd scripts and dynamic scripts generate by trusted users,
-`strict-dynamic` can tackle it.
+`strict-dynamic` `CSP` allow dynamic scripts generate by trusted users:
 
 ```html
 <!-- Content-Security-Policy: script-src 'nonce-random123' 'strict-dynamic' -->
 <script nonce="random123">
-  const s = document.createElement('script)
+  const s = document.createElement('script');
   s.src = '/path/to/script.js';
   s.async = true;
   document.head.appendChild(s); // can execute correctly
 </script>
 ```
 
+`CSP` block untrusted domain scripts:
+
 ```html
 <!-- Given this CSP header -->
-Content-Security-Policy: script-src https://example.com/
-
+<!-- Content-Security-Policy: script-src https://example.com/ -->
 <!-- The following third-party script will not be loaded or executed -->
 <script src="https://not-example.com/js/library.js"></script>
 ```
