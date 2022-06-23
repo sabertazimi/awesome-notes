@@ -1108,9 +1108,7 @@ Native Lazy Loading:
 - If put JavaScript in `<head>`,
   in such script can't access DOM directly
   (DOM haven't get parsed).
-
-Best practice: lazy loading scripts not execute immediately.
-(**Chrome Coverage Devtools**)
+- Lazy loading scripts not execute immediately (**Chrome coverage devtools**).
 
 [![Scripting Type](./figures/ScriptingType.svg)](https://sia.codes/posts/render-blocking-resources/#deep-dive%3A-optimizing-javascript-for-the-critical-rendering-path)
 
@@ -1219,8 +1217,6 @@ requireScript('the_rest.js', function () {
 前端性能监控分为两种方式,
 一种叫做合成监控 (Synthetic Monitoring, SYN),
 另一种是真实用户监控 (Real User Monitoring, RUM).
-
-> [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report)
 
 ### Synthetic Monitoring
 
