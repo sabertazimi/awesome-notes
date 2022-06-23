@@ -813,6 +813,8 @@ tags: [Web, Framework, Library]
 
 - [React Icons: SVG Icons of Popular Icon Packs](https://github.com/react-icons/react-icons)
 - [Remix Icons](https://github.com/Remix-Design/remixicon)
+- [SimpleIcons: Popular Brand SVG Icons](https://github.com/simple-icons/simple-icons)
+- [FlagIcons: Country Flag SVG Icons](https://github.com/lipis/flag-icons)
 - [Icon Font](https://www.iconfont.cn)
 - [Icons8](https://icons8.com)
 - [Ikonate](https://github.com/mikolajdobrucki/ikonate)
@@ -823,6 +825,7 @@ tags: [Web, Framework, Library]
 
 - [DiceBear: Random Avatar Generation Library](https://github.com/dicebear/dicebear)
 - [ReactAvatarEditor: Avatar Resize and Crop Component](https://github.com/mosch/react-avatar-editor)
+- [BoringAvatars: React SVG Avatar Generator from Username and Palette](https://github.com/boringdesigners/boring-avatars)
 
 ### Emoji
 
