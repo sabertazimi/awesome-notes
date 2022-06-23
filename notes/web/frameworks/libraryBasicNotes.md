@@ -203,10 +203,20 @@ tags: [Web, Framework, Library]
 - [Alibaba Hooks](https://github.com/alibaba/hooks)
 - [TypeScript Hooks](https://github.com/juliencrn/useHooks-ts)
 - [ReactHook: Strongly Typed and Concurrent Mode-safe Hooks](https://github.com/jaredLunde/react-hook)
-- [Optimistic State Hooks](https://github.com/perceived-dev/optimistic-state)
-- [React Media Query Hook](https://github.com/yocontra/react-responsive)
 - [React Hooks Gallery](https://github.com/nikgraf/react-hooks)
 - [VueUse](https://github.com/vueuse/vueuse)
+
+### State Hooks
+
+- [Optimistic State Hooks](https://github.com/perceived-dev/optimistic-state)
+
+### Sensor Hooks
+
+- [React Media Query Hook](https://github.com/yocontra/react-responsive)
+
+### Timer Hooks
+
+- [IdleTimer: User Activity Timer Component](https://github.com/SupremeTechnopriest/react-idle-timer)
 
 ## JavaScript Utils
 
