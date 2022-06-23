@@ -223,7 +223,7 @@ tags: [Web, Framework, Library]
 ## JavaScript Utils
 
 - [Cash: jQuery Lite](https://github.com/fabiospampinato/cash)
-- [HappyDOM: Browser API for Node.js](https://github.com/capricorn86/happy-dom)
+- [HappyDOM: Node.js Browser API](https://github.com/capricorn86/happy-dom)
 - [ConstructJS: Byte Level Data Structures](https://github.com/francisrstokes/construct-js)
 
 ### Math Utils
@@ -240,7 +240,7 @@ tags: [Web, Framework, Library]
 #### Glob Utils
 
 - [Globby: User-friendly Glob Matching](https://github.com/sindresorhus/globby)
-- [Glob: Glob Functionality for Node](https://github.com/isaacs/node-glob)
+- [Glob: Glob Functionality](https://github.com/isaacs/node-glob)
 - [Minimatch: Glob Matcher](https://github.com/isaacs/minimatch)
 
 #### Regular Expression Utils
@@ -449,8 +449,8 @@ tags: [Web, Framework, Library]
 
 ### Modal
 
-- [Golden: Multi Window Layout Manager for Web Apps](https://github.com/golden-layout/golden-layout)
-- [WinBox: HTML5 Window Manager for Web](https://github.com/nextapps-de/winbox)
+- [Golden: Multi Window Layout Manager](https://github.com/golden-layout/golden-layout)
+- [WinBox: HTML5 Window Manager](https://github.com/nextapps-de/winbox)
 - [NiceModal: eBay React Modal Manager](https://github.com/eBay/nice-modal-react)
 
 ### Information and Message
@@ -705,7 +705,7 @@ tags: [Web, Framework, Library]
 - [Barba.js: Smooth Transition between Pages](https://github.com/luruke/barba.js)
 - [Tilt: Smooth 3D Tilt JavaScript Library](https://github.com/micku7zu/vanilla-tilt.js)
 - [CountUp: Count Up Animation](https://github.com/glennreyes/react-countup)
-- [TheatreJS: Motion Design Editor for Web](https://github.com/ariaminaei/theatre)
+- [TheatreJS: Motion Design Editor](https://github.com/ariaminaei/theatre)
 - [AutoAnimate: Zero-config and Drop-in Animation Utility](https://github.com/formkit/auto-animate)
 
 ### CLI Animation
@@ -796,30 +796,7 @@ tags: [Web, Framework, Library]
 - [Raleway](https://fonts.google.com/specimen/Raleway)
 - [Operator](https://www.typography.com/fonts/operator/styles)
 
-## Images
-
-- [ICO](https://github.com/kevva/to-ico)
-- [Images API](https://github.com/rsms/node-imagemagick)
-- [JavaScript Load Image](https://github.com/blueimp/JavaScript-Load-Image)
-- [Sharp](https://github.com/lovell/sharp)
-- [HTML2Image](https://github.com/bubkoo/html-to-image)
-- [Tesseract: Image Recognition Tesseract OCR Engine](https://github.com/naptha/tesseract.js)
-
-### Image Color
-
-- [Color Difference Library](https://github.com/lokesh/color-thief)
-
-### Icons
-
-- [React Icons: SVG Icons of Popular Icon Packs](https://github.com/react-icons/react-icons)
-- [Remix Icons](https://github.com/Remix-Design/remixicon)
-- [SimpleIcons: Popular Brand SVG Icons](https://github.com/simple-icons/simple-icons)
-- [FlagIcons: Country Flag SVG Icons](https://github.com/lipis/flag-icons)
-- [Icon Font](https://www.iconfont.cn)
-- [Icons8](https://icons8.com)
-- [Ikonate](https://github.com/mikolajdobrucki/ikonate)
-- [CSS Icons](https://github.com/wentin/cssicon)
-- [Open Source Icons](https://www.smashingmagazine.com/2021/08/open-source-icons)
+## Image
 
 ### Avatar
 
@@ -836,6 +813,18 @@ tags: [Web, Framework, Library]
 - [Emoji Panel](https://github.com/TimeToKnow/emoji-panel)
 - [Emoji Mart: One component to Pick Emoji All](https://github.com/missive/emoji-mart)
 
+### Icon
+
+- [React Icons: SVG Icons of Popular Icon Packs](https://github.com/react-icons/react-icons)
+- [Remix Icons](https://github.com/Remix-Design/remixicon)
+- [SimpleIcons: Popular Brand SVG Icons](https://github.com/simple-icons/simple-icons)
+- [FlagIcons: Country Flag SVG Icons](https://github.com/lipis/flag-icons)
+- [Icon Font](https://www.iconfont.cn)
+- [Icons8](https://icons8.com)
+- [Ikonate](https://github.com/mikolajdobrucki/ikonate)
+- [CSS Icons](https://github.com/wentin/cssicon)
+- [Open Source Icons](https://www.smashingmagazine.com/2021/08/open-source-icons)
+
 ### SVG
 
 - [React SVG Components](https://github.com/miukimiu/react-kawaii)
@@ -849,8 +838,18 @@ tags: [Web, Framework, Library]
 - [SVG Parser](https://github.com/sebmarkbage/art)
 - [Random SVG Geometry](https://www.blobbb.fun)
 
+### Image Utils
+
+- [ImageMagick: ImageMagick Bindings](https://github.com/elad/node-imagemagick-native)
+- [ImageLoader: Load Images JavaScript Utils](https://github.com/blueimp/JavaScript-Load-Image)
+- [PSD: Blazing fast and Zero-dependency PSD Parser](https://github.com/webtoon/psd)
+- [ICO](https://github.com/kevva/to-ico)
+- [HTML2Image](https://github.com/bubkoo/html-to-image)
+- [Tesseract: Image Recognition Tesseract OCR Engine](https://github.com/naptha/tesseract.js)
+
 ### Image Size
 
+- [Sharp: Image Optimization](https://github.com/lovell/sharp)
 - [Variant Size Pictures](https://github.com/imulus/retinajs)
 - [Carver: Content-aware Image Resizer and Object Remover Based on Seam Carving Algorithm](https://github.com/trekhleb/js-image-carver)
 
@@ -1031,7 +1030,7 @@ tags: [Web, Framework, Library]
 
 - [TypeSense: Open Source Alternative to Algolia and Easier-to-Use Alternative to ElasticSearch](https://github.com/typesense/typesense)
 - [Lunr.js: Full Text Search Engine](https://github.com/olivernn/lunr.js)
-- [Solr: Solr Client for Node.js](https://github.com/lbdremy/solr-node-client)
+- [Solr: Solr Client](https://github.com/lbdremy/solr-node-client)
 - [JieBa: Chinese Text Segmentation](https://github.com/yanyiwu/nodejieba)
 - [Docusaurus Plugin: Local Search Plugin Based on Lunr.js](https://github.com/easyops-cn/docusaurus-search-local)
 - [Fuse: Lightweight Fuzzy Search JavaScript Library](https://github.com/krisk/fuse)
@@ -1166,7 +1165,7 @@ tags: [Web, Framework, Library]
 - [Cross Spawn](https://github.com/moxystudio/node-cross-spawn)
 - [Execa](https://github.com/sindresorhus/execa)
 - [Node Fetch](https://github.com/node-fetch/node-fetch)
-- [Undici: HTTP/1.1 Client Written from Scratch for Node](https://github.com/nodejs/undici)
+- [Undici: HTTP/1.1 Client](https://github.com/nodejs/undici)
 - [FS Extra](https://github.com/jprichardson/node-fs-extra)
 - [Graceful FS](https://github.com/isaacs/node-graceful-fs)
 - [MemFS: In-memory Node File System](https://github.com/streamich/memfs)
@@ -1196,8 +1195,8 @@ tags: [Web, Framework, Library]
 
 - [React Terminal](https://github.com/rohanchandra/react-terminal-component)
 - [React Console Emulator](https://github.com/js-rcon/react-console-emulator)
-- [Hyper: Terminal Built on Web](https://github.com/vercel/hyper)
-- [Xterm.js: Terminal for Web](https://github.com/xtermjs/xterm.js)
+- [Hyper: Electron Terminal](https://github.com/vercel/hyper)
+- [Xterm.js: Xterm Terminal](https://github.com/xtermjs/xterm.js)
 - [Jay: Supercharged JavaScript REPL](https://github.com/nikersify/jay)
 - [Fig: Terminal Autocomplete](https://github.com/withfig/autocomplete)
 - [Eruda: Console for Mobile Browsers](https://github.com/liriliri/eruda)
@@ -1271,7 +1270,7 @@ tags: [Web, Framework, Library]
 - [Cookie Parser](https://github.com/expressjs/cookie-parser)
 - [Cookie Session](https://github.com/expressjs/cookie-session)
 - [JWT](https://github.com/auth0/node-jsonwebtoken)
-- [PassportJS: Simple, Unobtrusive Authentication for Node.js](https://github.com/jaredhanson/passport)
+- [PassportJS: Simple, Unobtrusive Authentication](https://github.com/jaredhanson/passport)
 - [Compression](https://github.com/expressjs/compression)
 - [File Upload](https://github.com/richardgirges/express-fileupload)
 - [Morgan: Express Official Logger](https://github.com/expressjs/morgan)
