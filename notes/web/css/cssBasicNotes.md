@@ -713,7 +713,7 @@ li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6) ~ li {
   - Legacy name: `:any()`/`:matches()`.
 - `:where(<selector>)`:
   - `0` priority.
-- [`<target_element>:has(<selector>)`](https://ishadeed.com/article/css-has-parent-selector):
+- [`<target>:has(<selector>)`](https://ishadeed.com/article/css-has-parent-selector):
   - Selector priority.
   - A target element has child elements: `:has(> selector)`.
   - A target element has sibling elements: `:has(+ selector)`.
