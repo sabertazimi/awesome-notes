@@ -1444,6 +1444,7 @@ tags: [Web, Framework, Library]
 
 ### Security Tools
 
+- [MetaSploit: Penetration Testing Framework](https://github.com/rapid7/metasploit-framework)
 - [SqlMap](https://github.com/sqlmapproject/sqlmap)
 - [Zaproxy](https://github.com/zaproxy/zaproxy)
 - [Arachni](https://github.com/Arachni/arachni)
