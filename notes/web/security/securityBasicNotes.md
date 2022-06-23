@@ -621,11 +621,11 @@ def allow_request(req):
 
 DoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
 
-- Web 服务.
+- DNS 服务.
 - Email 服务.
 - FTP 服务.
-- DNS 服务.
 - Telnet 服务.
+- Web 服务.
 - 即时通讯服务.
 
 #### Dos Protection
