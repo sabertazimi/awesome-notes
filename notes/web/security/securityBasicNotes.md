@@ -426,6 +426,31 @@ getCanvasFingerprint();
 
 ## Security Vulnerability
 
+### SQL Injection
+
+#### SQL Injection Attack
+
+User input `' or 1=1--`:
+
+```sql
+SELECT *
+  FROM users
+ WHERE email = 'user@email.com'
+   AND pass  = '' or 1=1--' LIMIT 1
+```
+
+#### SQL Injection Protection
+
+- Don’t allow multiple statements.
+- Validate user input.
+- Allowlist user input.
+- Parameterized statements: use placeholders instead of variable interpolation.
+
+```sql
+-- Construct the SQL statement we want to run, specifying the parameter.
+String sql = "SELECT * FROM users WHERE email = ?";
+```
+
 ### Object Injection
 
 #### Object Injection Attack
@@ -453,87 +478,32 @@ Solutions:
 - `crypto.timingSafeEqual`.
 - `object.hasOwnProperty(token)`.
 
-### SQL Injection
+### File Upload Vulnerability
 
-#### SQL Injection Attack
+#### File Upload Attack
 
-User input `' or 1=1--`:
+当使用 JS 代码限制上传文件类型时, 攻击者 Disable JS in Browser, 并上传 malicious code file.
 
-```sql
-SELECT *
-  FROM users
- WHERE email = 'user@email.com'
-   AND pass  = '' or 1=1--' LIMIT 1
+```php
+<?php
+    if (isset($_REQUEST['cmd'])) {
+        $cmd = ($_REQUEST['cmd']);
+        system($cmd);
+    } else {
+        echo 'What is your bidding?';
+    }
+?>
 ```
 
-#### SQL Injection Protection
+#### File Upload Protection
 
-- Don’t allow multiple statements.
-- Validate user input.
-- Allowlist user input.
-- Parameterized statements: use placeholders instead of variable interpolation.
+对于上传文件:
 
-```sql
--- Construct the SQL statement we want to run, specifying the parameter.
-String sql = "SELECT * FROM users WHERE email = ?";
-```
-
-### Click Jacking
-
-#### Click Jacking Attack
-
-Hover a transparent malicious link upon the true button.
-
-#### Click Jacking Protection
-
-Frame killing snippet:
-
-```html
-<style>
-  /* Hide page by default */
-  html {
-    display: none;
-  }
-</style>
-
-<script>
-  if (self == top) {
-    // Everything checks out, show the page.
-    document.documentElement.style.display = 'block';
-  } else {
-    // Break out of the frame.
-    top.location = self.location;
-  }
-</script>
-```
-
-`X-Frame-Options`:
-
-```ts
-// nodejs
-response.setHeader('X-Frame-Options', 'DENY');
-response.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
-```
-
-### Session Fixation
-
-#### Session Fixation Protection
-
-在 **HTTP Cookies** 中传输**复杂**的 Session IDs, 并在**成功连接**/**恶意篡改**后重置 Session IDs:
-
-- where: not passing session IDs in queryStrings/requestBody,
-  instead of passing them in **HTTP cookies**.
-- what: generate complex session IDs.
-- how: reset session IDs after set up session successfully.
-- how: reset session IDs after it's been changed manually on client(Set-Cookies).
-
-```ts
-req.session.regenerate(function (err) {
-  process(err);
-});
-
-const generateSessionId = session => uid(24);
-```
+- 隔离 + 禁止执行
+- 重命名/Hash 化: 以防攻击者找到此文件
+- 检查文件格式
+- 检查 Content-Type Header
+- 使用 Virus Scanner
 
 ### XSS
 
@@ -615,64 +585,25 @@ def allow_request(req):
   return False
 ```
 
-### Denial of Service
+### Session Fixation
 
-#### Dos Attack
+#### Session Fixation Protection
 
-DoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
+在 **HTTP Cookies** 中传输**复杂**的 Session IDs, 并在**成功连接**/**恶意篡改**后重置 Session IDs:
 
-- DNS 服务.
-- Email 服务.
-- FTP 服务.
-- Telnet 服务.
-- Web 服务.
-- 即时通讯服务.
+- where: not passing session IDs in queryStrings/requestBody,
+  instead of passing them in **HTTP cookies**.
+- what: generate complex session IDs.
+- how: reset session IDs after set up session successfully.
+- how: reset session IDs after it's been changed manually on client(Set-Cookies).
 
-#### Dos Protection
+```ts
+req.session.regenerate(function (err) {
+  process(err);
+});
 
-- 购买专门设计用来对抗 DoS 攻击的设备.
-- 依靠网络服务提供商 (ISP) 来检测并消除 DoS 攻击.
-- 获取云缓存提供商的服务.
-
-#### ReDoS Attack
-
-正则表达式 DoS 攻击:
-
-正则表达式引擎采用回溯的方式匹配所有可能性, 导致性能问题.
-
-#### ReDoS Protection
-
-- 不使用 NFA 实现的正则表达式引擎, 使用 DFA 实现的正则表达式引擎.
-- 不定义性能消耗过大的正则表达式.
-- 不动态构造正则表达式 `new RegExp()`.
-- 禁止用户输入影响正则表达式构建/匹配.
-
-### File Upload Vulnerability
-
-#### File Upload Attack
-
-当使用 JS 代码限制上传文件类型时, 攻击者 Disable JS in Browser, 并上传 malicious code file.
-
-```php
-<?php
-    if (isset($_REQUEST['cmd'])) {
-        $cmd = ($_REQUEST['cmd']);
-        system($cmd);
-    } else {
-        echo 'What is your bidding?';
-    }
-?>
+const generateSessionId = session => uid(24);
 ```
-
-#### File Upload Protection
-
-对于上传文件:
-
-- 隔离 + 禁止执行
-- 重命名/Hash 化: 以防攻击者找到此文件
-- 检查文件格式
-- 检查 Content-Type Header
-- 使用 Virus Scanner
 
 ### Directory Traversal
 
@@ -685,68 +616,6 @@ GET /../../../passwd.key HTTP/1.1
 #### Directory Traversal Protection
 
 检查请求路径是否安全, 否则不返回响应.
-
-### Malicious Redirects
-
-#### Malicious Redirects Protection
-
-Check the Referrer when doing redirects
-
-```ts
-function isRelative(url) {
-  return url && url.match(/^\/[^\/\\]/);
-}
-```
-
-### User Enumeration
-
-#### User Enumeration Attack
-
-通过暴力工具得到被攻击网站的用户名单, 并利用社工得到密码:
-
-REST API 无法抵抗此种攻击,
-e.g GitHub [user profile](https://github.com).
-
-#### User Enumeration Protection
-
-##### User API Protection
-
-- 限制 API 访问频率与次数.
-- 设置 IP 黑名单.
-
-##### Login Protection
-
-使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误:
-
-- Login error message: Unknown User **or** Password.
-- All login code-paths take the same time on average: time consuming operations.
-- All login code-paths take the same context: session IDs, cookies.
-
-##### Sign Up and Reset Protection
-
-Not with name, should with email:
-
-- 使攻击者无法枚举用户名, 他无法确定是用户不存在还是用户已存在.
-- Not Exist: Sending sign-up email.
-- Exist: Sending pwd-reset email.
-
-### XML Vulnerability
-
-#### XML Attack
-
-Inline document type definition in XML
-led to dangerous macros:
-
-- XML Bombs.
-- XML External Entities.
-
-#### XML Protection
-
-Disable DTD parse in XML parser.
-
-### Password Vulnerability
-
-Password [mis-management](https://www.hacksplaining.com/prevention/password-mismanagement).
 
 ### Information Leakage
 
@@ -800,6 +669,137 @@ Password [mis-management](https://www.hacksplaining.com/prevention/password-mism
 - 对任何敏感信息源使用双因素认证.
 - 执行审核来查找潜在的漏洞.
 - 使用评估工具来确定是否存在从指定位置外的任何位置访问敏感信息源的可能.
+
+### Malicious Redirects
+
+#### Malicious Redirects Protection
+
+Check the Referrer when doing redirects
+
+```ts
+function isRelative(url) {
+  return url && url.match(/^\/[^\/\\]/);
+}
+```
+
+### User Enumeration
+
+#### User Enumeration Attack
+
+通过暴力工具得到被攻击网站的用户名单, 并利用社工得到密码:
+
+REST API 无法抵抗此种攻击,
+e.g GitHub [user profile](https://github.com).
+
+#### User Enumeration Protection
+
+##### User API Protection
+
+- 限制 API 访问频率与次数.
+- 设置 IP 黑名单.
+
+##### Login Protection
+
+使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误:
+
+- Login error message: Unknown User **or** Password.
+- All login code-paths take the same time on average: time consuming operations.
+- All login code-paths take the same context: session IDs, cookies.
+
+##### Sign Up and Reset Protection
+
+Not with name, should with email:
+
+- 使攻击者无法枚举用户名, 他无法确定是用户不存在还是用户已存在.
+- Not Exist: Sending sign-up email.
+- Exist: Sending pwd-reset email.
+
+### Password Vulnerability
+
+Password [mis-management](https://www.hacksplaining.com/prevention/password-mismanagement).
+
+### XML Vulnerability
+
+#### XML Attack
+
+Inline document type definition in XML
+led to dangerous macros:
+
+- XML Bombs.
+- XML External Entities.
+
+#### XML Protection
+
+Disable DTD parse in XML parser.
+
+### Click Jacking
+
+#### Click Jacking Attack
+
+Hover transparent malicious link upon trusted true button.
+
+#### Click Jacking Protection
+
+Frame killing snippet:
+
+```html
+<style>
+  /* Hide page by default */
+  html {
+    display: none;
+  }
+</style>
+
+<script>
+  if (self == top) {
+    // Everything checks out, show the page.
+    document.documentElement.style.display = 'block';
+  } else {
+    // Break out of the frame.
+    top.location = self.location;
+  }
+</script>
+```
+
+`X-Frame-Options`:
+
+```ts
+// nodejs
+response.setHeader('X-Frame-Options', 'DENY');
+response.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
+```
+
+### Denial of Service
+
+#### Dos Attack
+
+DoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
+
+- DNS 服务.
+- Email 服务.
+- FTP 服务.
+- Telnet 服务.
+- Web 服务.
+- 即时通讯服务.
+
+#### Dos Protection
+
+- 购买专门设计用来对抗 DoS 攻击的设备.
+- 依靠网络服务提供商 (ISP) 来检测并消除 DoS 攻击.
+- 获取云缓存提供商的服务.
+
+#### ReDoS Attack
+
+正则表达式 DoS 攻击:
+
+正则表达式引擎采用回溯的方式匹配所有可能性, 导致性能问题.
+
+#### ReDoS Protection
+
+- 不使用 NFA 实现的正则表达式引擎, 使用 DFA 实现的正则表达式引擎.
+- 不定义性能消耗过大的正则表达式.
+- 不动态构造正则表达式 `new RegExp()`.
+- 禁止用户输入影响正则表达式构建/匹配.
 
 ### Supply Chain Security
 
