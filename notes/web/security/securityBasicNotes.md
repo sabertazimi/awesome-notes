@@ -615,16 +615,24 @@ def allow_request(req):
   return False
 ```
 
-### Distributed Denial of Service
+### Denial of Service
 
-DDoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
+#### Dos Attack
+
+DoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
 
 - Web 服务.
-- 邮件服务.
+- Email 服务.
+- FTP 服务.
 - DNS 服务.
+- Telnet 服务.
 - 即时通讯服务.
 
-### ReDoS
+#### Dos Protection
+
+- 购买专门设计用来对抗 DoS 攻击的设备.
+- 依靠网络服务提供商 (ISP) 来检测并消除 DoS 攻击.
+- 获取云缓存提供商的服务.
 
 #### ReDoS Attack
 
