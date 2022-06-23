@@ -783,17 +783,23 @@ Password [mis-management](https://www.hacksplaining.com/prevention/password-mism
 #### Information Leakage Protection
 
 - `NODE_ENV=production`.
-- 处理/混淆/加密原始数据(raw data).
+- 处理/混淆/加密原始数据 (raw data).
 - 处理/混淆客户端代码.
 - 去除工具库的版本信息.
-- Disable the `Server` HTTP Header and Similar Headers.
+- Disable `Server` HTTP header and similar headers.
 - Use Clean URLs without extensions.
-- Ensure Cookie Parameters are Generic.
-- Disable Client-Side Error Reporting.
-- Sanitize Data Passed to the Client.
+- Ensure `Cookie` parameters are generic.
+- Disable client-side error reporting.
+- Sanitize data passed to client.
 - Obfuscate JavaScript.
-- Sanitize Template Files.
-- Ensure Correct Configuration of Web Root Directory.
+- Sanitize template files.
+- Ensure correct configuration of Web root directory.
+- 配置边界路由器和防火墙: 阻止从敏感来源发起的信息请求.
+- 限制对所有敏感信息源的访问.
+- 永远不要硬编码密码, 且不放在易暴露位置.
+- 对任何敏感信息源使用双因素认证.
+- 执行审核来查找潜在的漏洞.
+- 使用评估工具来确定是否存在从指定位置外的任何位置访问敏感信息源的可能.
 
 ### Supply Chain Security
 
