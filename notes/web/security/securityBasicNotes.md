@@ -640,6 +640,52 @@ def allow_request(req):
   return False
 ```
 
+### Authentication Vulnerability
+
+#### Password Attack
+
+Password [mis-management](https://www.hacksplaining.com/prevention/password-mismanagement).
+
+#### Password Protection
+
+- Require complex password.
+- Require multi-factor authentication.
+- Hashing password: `bcrypt`.
+- Salting password.
+- Secure password resets.
+- Validate email address.
+- Ban disposable email account.
+
+#### User Enumeration Attack
+
+通过暴力工具得到被攻击网站的用户名单, 并利用社工得到密码:
+
+REST API 无法抵抗此种攻击,
+e.g GitHub [user profile](https://github.com).
+
+#### User Enumeration Protection
+
+##### User API Protection
+
+- 限制 API 访问频率与次数.
+- 设置 IP 黑名单.
+
+##### Login Protection
+
+使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误:
+
+- Login error message: Unknown User **or** Password.
+- All login code-paths take the same time on average: time consuming operations.
+- All login code-paths take the same context: session IDs, cookies.
+
+##### Sign Up and Reset Protection
+
+Not with name, should with email:
+
+- 使攻击者无法枚举用户名, 他无法确定是用户不存在还是用户已存在.
+- Not Exist: Sending sign-up email.
+- Exist: Sending pwd-reset email.
+
 ### Session Fixation
 
 #### Session Fixation Protection
@@ -724,54 +770,6 @@ GET /../../../passwd.key HTTP/1.1
 - 对任何敏感信息源使用双因素认证.
 - 执行审核来查找潜在的漏洞.
 - 使用评估工具来确定是否存在从指定位置外的任何位置访问敏感信息源的可能.
-
-### User Enumeration
-
-#### User Enumeration Attack
-
-通过暴力工具得到被攻击网站的用户名单, 并利用社工得到密码:
-
-REST API 无法抵抗此种攻击,
-e.g GitHub [user profile](https://github.com).
-
-#### User Enumeration Protection
-
-##### User API Protection
-
-- 限制 API 访问频率与次数.
-- 设置 IP 黑名单.
-
-##### Login Protection
-
-使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误:
-
-- Login error message: Unknown User **or** Password.
-- All login code-paths take the same time on average: time consuming operations.
-- All login code-paths take the same context: session IDs, cookies.
-
-##### Sign Up and Reset Protection
-
-Not with name, should with email:
-
-- 使攻击者无法枚举用户名, 他无法确定是用户不存在还是用户已存在.
-- Not Exist: Sending sign-up email.
-- Exist: Sending pwd-reset email.
-
-### Password Vulnerability
-
-#### Password Attack
-
-Password [mis-management](https://www.hacksplaining.com/prevention/password-mismanagement).
-
-#### Password Protection
-
-- Require complex password.
-- Require multi-factor authentication.
-- Hashing password: `bcrypt`.
-- Salting password.
-- Secure password resets.
-- Validate email address.
-- Ban disposable email account.
 
 ### XML Vulnerability
 
