@@ -3764,6 +3764,8 @@ const nodeConfig = {
 module.exports = { webConfig, nodeConfig };
 ```
 
+#### React Server Side Rendering
+
 `start.server.js`:
 
 ```tsx
@@ -3791,6 +3793,8 @@ module.exports = () => `<!DOCTYPE html>
   </html>`;
 ```
 
+#### React Client Side Hydration
+
 `start.client.js`:
 
 ```tsx
@@ -3812,6 +3816,18 @@ return {
   state: { data },
 };
 ```
+
+:::caution SSR Hydration Warning
+
+服务端返回的 HTML 与客户端渲染结果不一致时,
+出于性能考虑,
+`hydrate` 可以弥补文本内容的差异,
+但并不能保证修补**属性**的差异,
+只在 `development` 模式下对这些不一致的问题报 `Warning`.
+因此必须重视 `SSR Hydration Warning`,
+要当 `Error` 逐个解决.
+
+:::
 
 ### SSR Reference
 
