@@ -444,7 +444,7 @@ SELECT *
 - Don't allow multiple statements.
 - Validate user input.
 - Allowlist user input.
-- Least privilege:
+- Least privilege principle:
   allow `SELECT`/`INSERT`/`UPDATE`/`DELETE` on certain data,
   forbidden `CREATE`/`DROP`/`MODIFY`.
 - Use mature object-relational mapping (ORM) library:
@@ -851,12 +851,14 @@ cat FILENAME.js | openssl dgst -sha384 -binary | openssl base64 -A
 Inline document type definition in XML
 led to dangerous macros:
 
-- XML Bombs.
-- XML External Entities.
+- XML bombs.
+- XML external entities.
 
 #### XML Protection
 
-Disable DTD parse in XML parser.
+- Disable DTD (Document Type Definitions) parse in XML parser:
+  `xml2js`, `parse-xml`, `node-xml`.
+- Least privilege principle.
 
 ### Click Jacking
 
