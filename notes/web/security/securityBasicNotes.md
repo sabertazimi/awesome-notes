@@ -790,6 +790,60 @@ GET /../../../passwd.key HTTP/1.1
 - 执行审核来查找潜在的漏洞.
 - 使用评估工具来确定是否存在从指定位置外的任何位置访问敏感信息源的可能.
 
+### Supply Chain Vulnerability
+
+#### Supply Chain Attack
+
+- [Running file encryption attack in Node.js module](https://dev.to/devdevcharlie/running-a-ransomware-attack-in-a-nodejs-module-4hgb).
+- [left-pad](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm).
+- [eslint](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes).
+- [antd](https://github.com/ant-design/ant-design/issues/13098).
+- [faker.js](https://github.com/marak/Faker.js).
+- [colors.js](https://github.com/Marak/colors.js/issues/285).
+- [node-ipc](https://github.com/RIAEvangelist/node-ipc).
+- [es5-ext](https://github.com/medikoo/es5-ext/commit/28de285ed433b45113f01e4ce7c74e9a356b2af2).
+- [event-source-polyfill](https://github.com/Yaffle/EventSource/commit/de137927e13d8afac153d2485152ccec48948a7a).
+- [styled-components](https://github.com/styled-components/styled-components/commit/ba9d732ca7da53f2a095e35450ecffd592c6f5ba).
+
+#### Supply Chain Protection
+
+评估 NPM package 质量:
+
+- 代码质量.
+- 测试完备性.
+- 文档完备性.
+- 工程完备性 (DevOps).
+- 开发人员构成.
+- 兼容性:
+- 流行度.
+- 历史遗留 Bug.
+- 重复实现复杂度.
+- 使用时长.
+- 后续依赖版本更新策略.
+
+#### Malicious Package Attack
+
+名字与流行包相近, 通过 `postinstall` 脚本执行病毒脚本, 获取系统环境变量信息 e.g `crossenv`.
+
+#### Malicious Package Protection
+
+- No typo in `package.json`:
+  - NPM package [database](https://openbase.com).
+  - NPM package [advisor](https://snyk.io/advisor).
+- 禁止执行 `postinstall` 脚本.
+- Use mature dependency management tools: `renovate`.
+- Stay alert to security issues:
+  - Apply operating system patches.
+  - Security tools: `npm audit`, `socket.security`.
+  - Official advisories.
+  - Mailing lists and blogs.
+  - Social media.
+- Package integrity check.
+
+```bash
+cat FILENAME.js | openssl dgst -sha384 -binary | openssl base64 -A
+```
+
 ### XML Vulnerability
 
 #### XML Attack
@@ -872,48 +926,6 @@ DoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时�
 - 不定义性能消耗过大的正则表达式.
 - 不动态构造正则表达式 `new RegExp()`.
 - 禁止用户输入影响正则表达式构建/匹配.
-
-### Supply Chain Security
-
-#### Supply Chain Attack
-
-- [Running file encryption attack in Node.js module](https://dev.to/devdevcharlie/running-a-ransomware-attack-in-a-nodejs-module-4hgb).
-- [left-pad](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm).
-- [eslint](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes).
-- [antd](https://github.com/ant-design/ant-design/issues/13098).
-- [faker.js](https://github.com/marak/Faker.js).
-- [colors.js](https://github.com/Marak/colors.js/issues/285).
-- [node-ipc](https://github.com/RIAEvangelist/node-ipc).
-- [es5-ext](https://github.com/medikoo/es5-ext/commit/28de285ed433b45113f01e4ce7c74e9a356b2af2).
-- [event-source-polyfill](https://github.com/Yaffle/EventSource/commit/de137927e13d8afac153d2485152ccec48948a7a).
-- [styled-components](https://github.com/styled-components/styled-components/commit/ba9d732ca7da53f2a095e35450ecffd592c6f5ba).
-
-#### Supply Chain Protection
-
-评估 NPM package 质量:
-
-- 代码质量.
-- 测试完备性.
-- 文档完备性.
-- 工程完备性 (DevOps).
-- 开发人员构成.
-- 兼容性:
-- 流行度.
-- 历史遗留 Bug.
-- 重复实现复杂度.
-- 使用时长.
-- 后续依赖版本更新策略.
-
-#### Malicious Package Attack
-
-名字与流行包相近, 通过 `postinstall` 脚本执行病毒脚本, 获取系统环境变量信息 e.g `crossenv`.
-
-#### Malicious Package Protection
-
-- No typo in `package.json`:
-  - NPM package [database](https://openbase.com).
-  - NPM package [advisor](https://snyk.io/advisor).
-- 禁止执行 `postinstall` 脚本.
 
 ## Zero Trust Access Control
 
