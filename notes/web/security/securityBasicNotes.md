@@ -447,7 +447,7 @@ SELECT *
 - Least privilege:
   allow `SELECT`/`INSERT`/`UPDATE`/`DELETE` on certain data,
   forbidden `CREATE`/`DROP`/`MODIFY`.
-- Use Object-Relational Mapping (ORM) library:
+- Use mature object-relational mapping (ORM) library:
   built-in SQL injection protection feature,
   `users.findBy({ email: "billy@gmail.com" })`.
 - Parameterized statements: use placeholders instead of variable interpolation.
@@ -559,41 +559,34 @@ Solutions:
 
 #### XSS Attack
 
-Cross-Site scripting:
+Cross-site scripting (跨站脚本):
 
-- Reflected XSS: url input (search pages) `http://localhost:8080/test?name=<script>alert('attack')</script>`.
-- Stored XSS: store script into database.
-
-User input: `<script> malicious code </script>`.
+- Reflected XSS:
+  url input (search pages)
+  `http://localhost:8080/test?name=<script>alert('attack')</script>`.
+- Stored XSS:
+  store script into database.
 
 #### XSS Protection
 
 Don't trust user:
 
-- `replace(/<script>|<script/>/g, '')`.
-- `trim()`.
-- Using template engine with XSS protection (handlebars, jade, etc...).
+- Escape control characters:
+  - `"` -> `&quot;`, `&` -> `&amp;`, `'` -> `&apos;`, `<` -> `&lt;`, `>` -> `&gt;`.
+  - `input.replace(/<script>|<script/>/g, '')`.
+  - `input.trim()`.
+- Use mature template engine: built-in XSS protection feature.
+- Content security policy: `script-src 'self' https://apis.google.com`.
 
 ### CSRF
 
 #### CSRF Attack
 
-Cross-Site request forgery (跨站请求伪造):
+Cross-site request forgery (跨站请求伪造):
 
 挟制用户在当前已登录的 Web 应用程序上执行**非本意**的操作,
-利用已认证用户(长期 Cookies), 访问攻击者网站, 并被强制执行脚本,
-在用户不知情的情况下提交 Get/Post Request with Cookies 给被攻击网站.
-
-XSS 利用的是网站对用户 (输入) 的信任,
-CSRF 利用的是网站对用户网页浏览器的信任.
-
-#### CSRF Protection
-
-- 开启同源策略 (**Same Origin Policy**).
-- 确保 `GET` request 没有副作用.
-- 确保 `request` 正常渠道发起: hidden token check in `<form>`.
-- Additional authentication: input password **again**.
-- Express: `csurf` library.
+利用已认证用户 (长期 `Cookies`), 访问攻击者网站, 并被强制执行脚本,
+在用户不知情的情况下提交 `Get`/`Post` request (with `Cookies`) 给被攻击网站.
 
 ```html
 <a
@@ -605,16 +598,28 @@ CSRF 利用的是网站对用户网页浏览器的信任.
 </a>
 ```
 
-```ts
-// old browser
-'use strict';
+:::tip XSS vs CSRF
 
-function openUrl(url) {
-  const newTab = window.open();
-  newTab.opener = null;
-  newTab.location = url;
-}
-```
+- XSS 利用的是网站对用户 (输入) 的信任.
+- CSRF 利用的是网站对用户网页浏览器的信任.
+
+:::
+
+#### CSRF Protection
+
+- `REST` (representational state transfer) 原则:
+  - `GET` request: 确保无副作用, only read objects.
+  - `PUT` request: only create new objects.
+  - `POST` request: only modify objects.
+  - `DELETE` request: only delete objects.
+- 确保 `request` 正常发起渠道:
+  - Anti-CSRF cookie: `Set-Cookie: _xsrf=5978e29d4ef434a1`.
+  - 开启同源策略: `Set-Cookie: _xsrf=5978e29d4ef434a1; SameSite=Strict;`.
+  - Hidden token check in `<form>`.
+  - 检查第三方网站 `URL`: `window.open(url).opener = null`.
+- Require re-authentication for sensitive action.
+- Use mature `CSRF` protection library:
+  express.js `csurf` library.
 
 ```python
 # Reject cross-origin requests to protect from
