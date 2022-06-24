@@ -489,12 +489,9 @@ npm i -D eslint -w package-c
 
 #### Exports Field
 
-`exports` configures the JavaScript level:
-
-File `packages/rest/build/gen/util/regexp-tools.js`
-can be imported via `@github/rest/gen/util/regexp-tools`.
-
-It bring two pros:
+`exports` configures JavaScript level,
+file `packages/rest/build/gen/util/regexp-tools.js`
+can be imported via `@github/rest/gen/util/regexp-tools`:
 
 - Don’t need to mention directory `build`/`dist` in module specifiers.
 - Don’t need to mention `.js`/`.ts` in module specifiers.

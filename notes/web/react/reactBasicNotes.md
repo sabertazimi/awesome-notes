@@ -63,9 +63,9 @@ class Example extends React.Component {
 
 ### componentDidMount
 
-- don't `setState` directly in this method
-- can use `setInterval`/`setTimeout`/AJAX request/`fetch` in this method,
-  and call `setState` as `callback` inside these functions
+- Don't `setState` directly in this method.
+- Can use `setInterval`/`setTimeout`/AJAX request/`fetch` in this method,
+  and call `setState` as `callback` inside these functions.
 
 ```tsx
 class MyComponent extends React.Component {
@@ -1205,13 +1205,13 @@ Solve:
 - Reuse code with using ES6 classes.
 - Compose multiple HOCs.
 
-Pros:
+Upside:
 
 - Reusable (abstract same logic).
 - HOC is flexible with input data
   (pass input data as parameters or derive it from props).
 
-Cons:
+Downside:
 
 - Wrapper hell: `withA(withB(withC(withD(Comp))))`.
 - Implicit dependencies: which HOC providing a certain prop.
@@ -1288,7 +1288,7 @@ Solve:
 
 e.g `Context` or `ThemesProvider` is designed base on Render Props.
 
-Pros:
+Upside:
 
 - Separate presentation from logic.
 - Extendable.
@@ -1296,7 +1296,7 @@ Pros:
 - Render Props is flexible with output data
   (children parameters definition free).
 
-Cons:
+Downside:
 
 - Wrapper hell (when many cross-cutting concerns are applied to a component).
 - Minor memory issues when defining a closure for every render.
@@ -2665,7 +2665,7 @@ const App = () => (
 
 :::
 
-#### Suspense and ErrorBoundary
+#### Error Boundary Suspense
 
 ```tsx
 const ErrorFallback = () => {
@@ -2706,7 +2706,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 };
 ```
 
-#### Suspense and Lazy
+#### Lazy Suspense
 
 Lazy loading and code splitting:
 
@@ -2760,7 +2760,7 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-#### Suspense for SSR
+#### SSR Suspense
 
 React v18+: enable `Suspense` on the server:
 
@@ -3721,25 +3721,25 @@ the client takes over and the website becomes a SPA.
 它结合了前后端分离和服务端渲染两者的优点，
 既做到了前后端分离，又能保证首页渲染速度，还有利于 SEO。
 
-### Pros of SSR
+### SSR Upside
 
 #### Performance
 
-- Smaller first meaningful paint time
-- HTML's strengths: progressive rendering
-- Browsers are incredibly good at rendering partial content
+- Smaller first meaningful paint time.
+- HTML's strengths: progressive rendering.
+- Browsers are incredibly good at rendering partial content.
 
 #### SEO
 
-- Search engine crawlers used to not execute scripts (or initial scripts)
-- Search engine usually stop after a while (roughly 10 seconds)
-- SPAs can't set meaningful HTTP status codes
+- Search engine crawlers used to not execute scripts (or initial scripts).
+- Search engine usually stop after a while (roughly 10 seconds).
+- SPAs can't set meaningful HTTP status codes.
 
 ### SSR Library
 
 - [Next.js for Isomorphic rendering](https://nextjs.org)
 
-### SSR Example
+### SSR Usage
 
 Webpack configuration:
 
