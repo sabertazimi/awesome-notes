@@ -2048,7 +2048,8 @@ function App() {
 
 ## UseId Hook
 
-Generating unique IDs on client and server.
+Generating unique IDs on client and server
+(每个 ID 代表该组件在组件树中的层级结构):
 
 ```tsx
 function Checkbox() {
