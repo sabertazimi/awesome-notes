@@ -2291,7 +2291,7 @@ function OrdinaryToPrimitive(O: object, hint: 'string' | 'number') {
 
 ### Loose Comparison
 
-`==` 与 `!=`, [JS Loose Comparison](https://felix-kling.de/js-loose-comparison):
+`==` 与 `!=` [loose comparison](https://mp.weixin.qq.com/s/05m6vw__X4P7gwgKcGlhzw):
 
 - Type conversion first, then comparison.
 - Return comparison between `ToNumber(x)` and `ToPrimitive(y)`.
