@@ -3832,6 +3832,7 @@ return {
 ### SSR Reference
 
 - Universal JavaScript [presentation](http://peerigon.github.io/talks/2018-07-20-js-camp-barcelona-bumpy-road-universal-javascript/#1).
+- React SSR [guide](https://mp.weixin.qq.com/s/j2rB8qE5OOPmLHAS7qdCrQ).
 
 ## Styled Component
 
