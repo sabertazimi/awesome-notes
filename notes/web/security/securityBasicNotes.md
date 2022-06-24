@@ -906,22 +906,27 @@ Content-Security-Policy: frame-ancestors example.com google.com
 
 ### Denial of Service
 
-#### Dos Attack
+#### DoS Attack
 
 DoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
 
 - DNS 服务.
 - Email 服务.
 - FTP 服务.
+- ICMP 服务.
+- TCP 服务.
 - Telnet 服务.
 - Web 服务.
 - 即时通讯服务.
 
-#### Dos Protection
+#### DoS Protection
 
+- Application firewall.
+- Intrusion prevention system.
 - 购买专门设计用来对抗 DoS 攻击的设备.
 - 依靠网络服务提供商 (ISP) 来检测并消除 DoS 攻击.
-- 获取云缓存提供商的服务.
+- 获取云缓存提供商的服务: mature CDN service support DDoS protection.
+- Scalable job queue.
 
 #### ReDoS Attack
 
