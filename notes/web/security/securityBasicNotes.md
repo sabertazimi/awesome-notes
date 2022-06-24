@@ -759,7 +759,19 @@ Not with name, should with email:
 
 ### Password Vulnerability
 
+#### Password Attack
+
 Password [mis-management](https://www.hacksplaining.com/prevention/password-mismanagement).
+
+#### Password Protection
+
+- Require complex password.
+- Require multi-factor authentication.
+- Hashing password: `bcrypt`.
+- Salting password.
+- Secure password resets.
+- Validate email address.
+- Ban disposable email account.
 
 ### XML Vulnerability
 
@@ -966,7 +978,7 @@ DoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时�
 注册/二次验证/密码重置:
 
 - [ ] 任何地方都使用 HTTPS.
-- [ ] 使用 `Bcrypt` 存储密码哈希.
+- [ ] 使用 `bcrypt` 存储密码哈希.
 - [ ] `登出`之后销毁会话 ID .
 - [ ] 密码重置后销毁所有活跃的会话.
 - [ ] OAuth2 验证必须包含 `state` 参数.
