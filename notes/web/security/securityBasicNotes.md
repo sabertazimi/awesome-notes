@@ -460,6 +460,38 @@ String sql = "SELECT * FROM users WHERE email = ? and encrypted_password = ?";
 statement.executeQuery(sql, email, password);
 ```
 
+### Command Injection
+
+#### Command Injection Attack
+
+```json
+{
+  "query": "?domain=google.com%3BEcho%20%22Hacked%22"
+}
+```
+
+#### Command Injection Protection
+
+Escape control characters: `<`/`>`/`?`/`=`/`&&`.
+
+#### Malicious Redirect Attack
+
+```json
+{
+  "query": "?redirect=google.com%3BEcho%20%22Hacked%22"
+}
+```
+
+#### Malicious Redirect Protection
+
+Check the `referrer` when doing redirect:
+
+```ts
+function isRelative(url) {
+  return url && url.match(/^\/[^\/\\]/);
+}
+```
+
 ### Object Injection
 
 #### Object Injection Attack
@@ -678,18 +710,6 @@ GET /../../../passwd.key HTTP/1.1
 - 对任何敏感信息源使用双因素认证.
 - 执行审核来查找潜在的漏洞.
 - 使用评估工具来确定是否存在从指定位置外的任何位置访问敏感信息源的可能.
-
-### Malicious Redirects
-
-#### Malicious Redirects Protection
-
-Check the Referrer when doing redirects
-
-```ts
-function isRelative(url) {
-  return url && url.match(/^\/[^\/\\]/);
-}
-```
 
 ### User Enumeration
 
