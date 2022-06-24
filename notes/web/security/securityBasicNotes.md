@@ -430,25 +430,34 @@ getCanvasFingerprint();
 
 #### SQL Injection Attack
 
-User input `' or 1=1--`:
+User input `' OR 1=1--`:
 
 ```sql
 SELECT *
   FROM users
  WHERE email = 'user@email.com'
-   AND pass  = '' or 1=1--' LIMIT 1
+   AND pass  = '' OR 1=1--' LIMIT 1
 ```
 
 #### SQL Injection Protection
 
-- Don’t allow multiple statements.
+- Don't allow multiple statements.
 - Validate user input.
 - Allowlist user input.
+- Least privilege:
+  allow `SELECT`/`INSERT`/`UPDATE`/`DELETE` on certain data,
+  forbidden `CREATE`/`DROP`/`MODIFY`.
+- Use Object-Relational Mapping (ORM) library:
+  built-in SQL injection protection feature,
+  `users.findBy({ email: "billy@gmail.com" })`.
 - Parameterized statements: use placeholders instead of variable interpolation.
 
 ```sql
 -- Construct the SQL statement we want to run, specifying the parameter.
-String sql = "SELECT * FROM users WHERE email = ?";
+Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+Statement statement = connection.createStatement();
+String sql = "SELECT * FROM users WHERE email = ? and encrypted_password = ?";
+statement.executeQuery(sql, email, password);
 ```
 
 ### Object Injection
