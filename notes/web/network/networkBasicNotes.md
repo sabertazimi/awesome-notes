@@ -281,6 +281,10 @@ server {
   server_name _;
   return 301 https://$host$request_uri;
 }
+
+server {
+  add_header Strict-Transport-Security "max-age=31536000" always;
+}
 ```
 
 ### HTTPS 通信过程
