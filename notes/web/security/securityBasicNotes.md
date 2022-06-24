@@ -688,17 +688,31 @@ Not with name, should with email:
 - Not Exist: Sending sign-up email.
 - Exist: Sending pwd-reset email.
 
-### Session Fixation
+### Session Vulnerability
+
+#### Session Hijacking Protection
+
+`Set-Cookie: session_id=278283910977381992837; HttpOnly; Secure; SameSite=Lax`:
+
+- Prevent XSS cookie theft,
+  disable JavaScript access to cookie:
+  `Set-Cookie: session_id=278283910977381992837; HttpOnly`.
+- Prevent CSRF cookie theft,
+  enable same-origin policy, only allow cookie on `GET` request (social media sharing):
+  `Set-Cookie: session_id=278283910977381992837; SameSite=Lax`.
+- Prevent man-in-the-middle attack,
+  use HTTPS connection:
+  `Set-Cookie: session_id=278283910977381992837; Secure`.
 
 #### Session Fixation Protection
 
 在 **HTTP Cookies** 中传输**复杂**的 Session IDs, 并在**成功连接**/**恶意篡改**后重置 Session IDs:
 
-- where: not passing session IDs in queryStrings/requestBody,
+- Where: not passing session IDs in queryStrings/requestBody,
   instead of passing them in **HTTP cookies**.
-- what: generate complex session IDs.
-- how: reset session IDs after set up session successfully.
-- how: reset session IDs after it's been changed manually on client(Set-Cookies).
+- What: generate complex session IDs.
+- How: reset session IDs after set up session successfully.
+- How: reset session IDs after it's been changed manually on client(Set-Cookies).
 
 ```ts
 req.session.regenerate(function (err) {
