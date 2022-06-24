@@ -394,7 +394,7 @@ Web crypto [API](https://developer.mozilla.org/docs/Web/API/SubtleCrypto):
   - Operation system.
   - User agent.
   - Preferred language.
-  - Cookies enabled detection.
+  - Cookie enabled detection.
   - Java enabled detection.
   - DNT header enabled detection.
   - Automated browser detection.
@@ -506,7 +506,7 @@ function isRelative(url) {
 Injection:
 
 ```ts
-const token = req.cookies.token;
+const token = req.cookie.token;
 
 // Vulnerability:
 // SESSIONS[constructor] => `true`
@@ -585,8 +585,8 @@ Don't trust user:
 Cross-site request forgery (跨站请求伪造):
 
 挟制用户在当前已登录的 Web 应用程序上执行**非本意**的操作,
-利用已认证用户 (长期 `Cookies`), 访问攻击者网站, 并被强制执行脚本,
-在用户不知情的情况下提交 `Get`/`Post` request (with `Cookies`) 给被攻击网站.
+利用已认证用户 (长期 `Cookie`), 访问攻击者网站, 并被强制执行脚本,
+在用户不知情的情况下提交 `Get`/`Post` request (with `Cookie`) 给被攻击网站.
 
 ```html
 <a
@@ -678,7 +678,7 @@ e.g GitHub [user profile](https://github.com).
 
 - Login error message: Unknown User **or** Password.
 - All login code-paths take **same time** on average: time consuming operations.
-- All login code-paths take **same context**: session IDs, cookies.
+- All login code-paths take **same context**: session ID, cookie.
 
 ##### Sign Up and Reset Protection
 
@@ -706,13 +706,13 @@ Not with name, should with email:
 
 #### Session Fixation Protection
 
-在 **HTTP Cookies** 中传输**复杂**的 Session IDs, 并在**成功连接**/**恶意篡改**后重置 Session IDs:
+在 **HTTP Cookie** 中传输**复杂**的 Session ID, 并在**成功连接**/**恶意篡改**后重置 Session ID:
 
 - Where: not passing session IDs in queryStrings/requestBody,
-  instead of passing them in **HTTP cookies**.
+  instead of passing them in **HTTP Cookie**.
 - What: generate complex session IDs.
 - How: reset session IDs after set up session successfully.
-- How: reset session IDs after it's been changed manually on client(Set-Cookies).
+- How: reset session IDs after it's been changed manually on client (`Set-Cookie`).
 
 ```ts
 req.session.regenerate(function (err) {
@@ -741,13 +741,13 @@ GET /../../../passwd.key HTTP/1.1
 
 #### Information Leakage Attack
 
-- Server in Response Headers.
-- Cookies: SESSION_ID -> java.
+- Server in response headers.
+- Cookie: J_SESSION_ID -> Java.
 - URL: `.jsp`, `.php`, `.asp`.
-- Error Message.
+- Error message.
 - AJAX responses.
 - JSON/XML responses.
-- Code Information.
+- Code information.
 
 ```json
 [
@@ -776,8 +776,8 @@ GET /../../../passwd.key HTTP/1.1
 - 处理/混淆客户端代码.
 - 去除工具库的版本信息.
 - Disable `Server` HTTP header and similar headers.
-- Use Clean URLs without extensions.
-- Ensure `Cookie` parameters are generic.
+- Use clean URLs without extensions.
+- Use generic cookie parameters.
 - Disable client-side error reporting.
 - Sanitize data passed to client.
 - Obfuscate JavaScript.
@@ -1001,7 +1001,7 @@ DoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时�
 - [ ] OAuth2 验证必须包含 `state` 参数.
 - [ ] 登陆成功之后不能直接重定向到开放的路径 (需要校验, 否则容易存在钓鱼攻击).
 - [ ] 当解析用户注册/登陆的输入时, 过滤 `javascript://`, `data://` 以及其他 CRLF 字符.
-- [ ] 使用 `secure`/`httpOnly` `cookies`.
+- [ ] 使用 `secure`/`httpOnly` `Cookie`.
 - [ ] 移动端使用 `OTP` 验证时, 当调用 `generate OTP` 或者 `Resend OTP` API 时不能把 OTP
       (One Time Password) 直接返回
       (一般是通过发送手机验证短信, 邮箱随机 code 等方式, 而不是直接 response).
