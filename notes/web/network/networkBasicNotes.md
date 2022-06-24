@@ -266,6 +266,23 @@ HyperText Transfer Protocol (HTTP) + Transport Layer Security (TLS):
   客户端需要对服务器发来的证书进行安全性校验 (使得中间人无法替换证书和公私钥).
 - 通过 CA 认证体系避免了中间人窃取 AES 密钥并发起拦截和修改 HTTP 通讯的报文.
 
+```bash
+server {
+  listen 443 ssl;
+  server_name www.example.com;
+  ssl_certificate www.example.com.crt;
+  ssl_certificate_key www.example.com.key;
+  ssl_protocols TLSv1.2 TLSv1.3;
+  ssl_ciphers HIGH:!aNULL:!MD5;
+}
+
+server {
+  listen 80 default_server;
+  server_name _;
+  return 301 https://$host$request_uri;
+}
+```
+
 ### HTTPS 通信过程
 
 证书获取及验证过程 (CA 认证体系):
