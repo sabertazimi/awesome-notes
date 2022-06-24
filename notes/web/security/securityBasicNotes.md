@@ -894,7 +894,14 @@ Frame killing snippet:
 ```ts
 // nodejs
 response.setHeader('X-Frame-Options', 'DENY');
-response.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
+```
+
+Content security policy:
+
+```bash
+Content-Security-Policy: frame-ancestors 'none'
+Content-Security-Policy: frame-ancestors 'self'
+Content-Security-Policy: frame-ancestors example.com google.com
 ```
 
 ### Denial of Service
