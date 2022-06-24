@@ -522,6 +522,7 @@ tags: [Web, Framework, Library]
 #### Select
 
 - [React Select](https://github.com/JedWatson/react-select)
+- [Choices.js: Customisable Select Text Input](https://github.com/Choices-js/Choices)
 - [Select.css](https://github.com/filamentgroup/select-css)
 - [Chosen: Awesome Select Widget](https://github.com/harvesthq/chosen)
 
