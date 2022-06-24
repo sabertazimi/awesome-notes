@@ -669,14 +669,16 @@ e.g GitHub [user profile](https://github.com).
 
 - 限制 API 访问频率与次数.
 - 设置 IP 黑名单.
+- [CAPTCHA](https://www.google.com/recaptcha/about):
+  completely automated public turing test to tell computers and humans apart.
 
 ##### Login Protection
 
 使攻击者无法枚举用户名, 他无法确定是用户不存在还是密码错误:
 
 - Login error message: Unknown User **or** Password.
-- All login code-paths take the same time on average: time consuming operations.
-- All login code-paths take the same context: session IDs, cookies.
+- All login code-paths take **same time** on average: time consuming operations.
+- All login code-paths take **same context**: session IDs, cookies.
 
 ##### Sign Up and Reset Protection
 
