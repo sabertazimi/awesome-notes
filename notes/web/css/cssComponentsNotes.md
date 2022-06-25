@@ -1785,6 +1785,57 @@ Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
 }
 ```
 
+### Bar Line
+
+Background gradient [bar](https://css-tricks.com/single-element-loaders-the-bars/#aa-lets-make-some-bars):
+
+```css
+.bars {
+  --color: no-repeat linear-gradient(#000 0 0);
+
+  width: 45px;
+  aspect-ratio: 1;
+  background: var(--color) 0% 50%, var(--color) 50% 50%, var(--color) 100% 50%;
+  background-size: 20% 100%; /* 20% * (3 bars + 2 spaces) = 100% */
+}
+```
+
+Grid pseudo element border [bar](https://css-tricks.com/single-element-loaders-the-bars/#aa-rounding-the-bars):
+
+```css
+.loader {
+  --size: 100px; /* control the size */
+
+  display: grid;
+  place-content: center;
+  place-items: center;
+  margin: 0 calc(var(--size) / 2); /* 50px */
+}
+
+.loader::before,
+.loader::after {
+  grid-area: 1 / 1;
+  content: '';
+}
+
+.loader,
+.loader::before,
+.loader::after {
+  width: calc(var(--size) / 5); /* 20px */
+  height: var(--size);
+  border-radius: var(--size);
+  transform: translate(calc(var(--index, 0) * 200%));
+}
+
+.loader::before {
+  --index: -1;
+}
+
+.loader::after {
+  --index: 1;
+}
+```
+
 ### Wave line
 
 Rotate border [wave](https://codepen.io/Chokcoco/pen/EXJrdB):
