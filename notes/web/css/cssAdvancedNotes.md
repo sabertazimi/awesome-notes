@@ -2127,6 +2127,8 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 
 ## Container Query
 
+### Container Size Query
+
 当组件出现在同一视口大小 (viewport) 页面下的不同地方时,
 e.g `.main > .button` vs `.sidebar > .button`,
 此时 `@media` 无法有效实现响应式组件,
@@ -2134,17 +2136,80 @@ e.g `.main > .button` vs `.sidebar > .button`,
 
 ```css
 .sidebar {
-  /* stylelint-disable-next-line  property-no-unknown */
   container-type: inline-size;
-  /* stylelint-disable-next-line  property-no-unknown */
   container-name: sidebar;
 }
 
-/* stylelint-disable-next-line at-rule-no-unknown */
 @container sidebar (min-width: 400px) {
   .card {
     display: grid;
     grid-template-columns: 2fr 1fr;
+  }
+}
+```
+
+### Container Style Query
+
+`@container` [style query](https://una.im/style-queries):
+
+```css
+@container style(color: hotpink) {
+  .card {
+    background: white;
+  }
+}
+
+@container style(font-style: italic) {
+  span,
+  i,
+  .etc {
+    background: lavender;
+  }
+}
+
+@container style(border-color: lightblue) {
+  button {
+    border-color: royalblue;
+  }
+}
+
+@container style(--theme: dark) {
+  .card {
+    color: white;
+    background: royalblue;
+    border-color: navy;
+  }
+
+  .card button {
+    color: white;
+    background-color: dodgerblue;
+    border-color: navy;
+  }
+}
+
+/* Update the theme on hover */
+.card:hover,
+.card:focus {
+  --theme: dark-hover;
+}
+
+/* Apply darkHover theme styles */
+@container style(--theme: dark-hover) {
+  .card {
+    background: dodgerblue;
+    border-color: navy;
+  }
+
+  .card button {
+    background-color: royalblue;
+    border-color: lightblue;
+  }
+}
+
+@container (min-width: 420px) and style(--highlight: true) {
+  /* Styles for only highlight components at a minimum width of 420px */
+  .title {
+    color: var(--highlight-color);
   }
 }
 ```
