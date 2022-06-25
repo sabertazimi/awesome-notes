@@ -670,6 +670,7 @@ e.g GitHub [user profile](https://github.com).
 ##### User API Protection
 
 - 限制 API 访问频率与次数.
+- 记录登陆日志.
 - 设置 IP 黑名单.
 - [CAPTCHA](https://www.google.com/recaptcha/about):
   completely automated public turing test to tell computers and humans apart.
