@@ -1754,8 +1754,8 @@ const screenMax = settings.screensRem['2xl'];
 
 const calcMulti = (multiMin = 0, multiMax = null) => {
   return {
-    fsMin: fsMin * Math.pow(msFactorMin, multiMin),
-    fsMax: fsMax * Math.pow(msFactorMax, multiMax || multiMin),
+    fsMin: fsMin * msFactorMin ** multiMin,
+    fsMax: fsMax * msFactorMax ** (multiMax || multiMin),
   };
 };
 

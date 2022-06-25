@@ -1542,6 +1542,7 @@ console.log(concatArray instanceof Int32Array); // true
 ```ts
 const view = new Int16Array([25, 50]);
 console.log(view instanceof Int16Array); // true
+// eslint-disable-next-line unicorn/no-instanceof-array
 console.log(view instanceof Array); // false
 console.log(Array.isArray(view)); // false
 ```
@@ -2924,6 +2925,7 @@ console.log(
   Array.prototype.isPrototypeOf(p), // true
   // eslint-disable-next-line no-proto
   p.__proto__ === Array.prototype, // true
+  // eslint-disable-next-line unicorn/no-instanceof-array
   p instanceof Array // true
 );
 ```
@@ -4782,7 +4784,6 @@ const obj = {
 ```ts
 const b = 10;
 (function b() {
-  // eslint-disable-next-line no-func-assign
   b = 20;
   console.log(b);
 })();

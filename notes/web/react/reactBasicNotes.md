@@ -1603,12 +1603,12 @@ class App extends React.Component<Props, State> {
   };
 
   // typing on RIGHT hand side of =
-  onChange = (e: React.FormEvent<HTMLInputElement>): void => {
+  onChangeEvent = (e: React.FormEvent<HTMLInputElement>): void => {
     this.setState({ text: e.currentTarget.value });
   };
 
   // typing on LEFT hand side of =
-  onChange: React.ChangeEventHandler<HTMLInputElement> = e => {
+  onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = e => {
     this.setState({ text: e.currentTarget.value });
   };
 

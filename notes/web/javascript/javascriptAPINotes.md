@@ -3845,7 +3845,7 @@ registerPaint('checkerboard', CheckerboardPainter);
 const audioContext = new AudioContext();
 
 const baseFrequency = 440;
-const getNoteFreq = (base, pitch) => base * Math.pow(2, pitch / 12);
+const getNoteFreq = (base, pitch) => base * 2 ** (pitch / 12);
 // oscillator.frequency.value = getNoteFreq(440, 7);
 
 const getNoteDetune = pitch => pitch * 100;

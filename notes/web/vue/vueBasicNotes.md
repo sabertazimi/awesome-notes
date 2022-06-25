@@ -1961,7 +1961,7 @@ with a bunch of `data-v` weirdness in front of it.
 
 ```css
 /* site.scss */
-@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+@import 'https://use.fontawesome.com/releases/v5.6.3/css/all.css';
 @import './bulma-custom.scss';
 
 html,

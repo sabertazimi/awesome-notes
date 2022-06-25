@@ -2525,8 +2525,6 @@ function useIntersectionObserver(
     observer.observe(node);
 
     return () => observer.disconnect();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [elementRef, threshold, root, rootMargin, frozen]);
 
   return entry;
@@ -2796,7 +2794,7 @@ export const useForm = ({ onSubmit }) => {
 
   const validateFields = async fieldNames => {
     let fieldsToValidate;
-    if (fieldNames instanceof Array) {
+    if (Array.is(fieldNames)) {
       fieldsToValidate = fields.current.filter(field =>
         fieldNames.includes(field.name)
       );

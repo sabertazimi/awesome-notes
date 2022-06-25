@@ -3220,12 +3220,12 @@ const negativeArray = els =>
 
 ```ts
 function toUint32(value) {
-  return Math.floor(Math.abs(Number(value))) % Math.pow(2, 32);
+  return Math.floor(Math.abs(Number(value))) % 2 ** 32;
 }
 
 function isArrayIndex(key) {
   const numericKey = toUint32(key);
-  return String(numericKey) === key && numericKey < Math.pow(2, 32) - 1;
+  return String(numericKey) === key && numericKey < 2 ** 32 - 1;
 }
 
 class MyArray {
@@ -3982,7 +3982,6 @@ const squareRoot2 = Math.SQRT2;
 Math.abs(num);
 Math.exp(num);
 Math.log(num);
-Math.pow(num, power);
 Math.sqrt(num);
 Math.acos(x);
 Math.asin(x);
@@ -4961,7 +4960,6 @@ const numbers = [1, 2, 3, 4, 5];
 // bad
 let sum = 0;
 for (const num of numbers) {
-  // eslint-disable-next-line no-const-assign
   sum += num;
 }
 console.log(sum === 15);
@@ -4969,7 +4967,6 @@ console.log(sum === 15);
 // good
 let sum = 0;
 numbers.forEach(num => {
-  // eslint-disable-next-line no-const-assign
   sum += num;
 });
 console.log(sum === 15);

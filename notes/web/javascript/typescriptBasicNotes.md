@@ -2744,11 +2744,11 @@ class MyComponent extends React.Component<Props, State> {
   private static api_version: string;
 
   // class method parameters
-  private handleFormSubmit(@decorator myParam: string) {}
+  private handleFormSubmit1(@decorator myParam: string) {}
 
   // class methods
   @decorator
-  private handleFormSubmit() {}
+  private handleFormSubmit2() {}
 
   // accessors
   @decorator
