@@ -474,6 +474,8 @@ statement.executeQuery(sql, email, password);
 
 - Escape control characters: `<`/`>`/`?`/`=`/`&&`.
 - Disable code execution during deserialization.
+- 尽量不使用系统执行命令.
+- 保证动态函数为受信任函数, 防止被攻击者替换.
 
 #### Malicious Redirect Attack
 
