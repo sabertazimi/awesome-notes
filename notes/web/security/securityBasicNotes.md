@@ -148,6 +148,24 @@ UI 的防御性:
   - 代码审核.
   - 样式隔离.
 
+### Same Origin Policy
+
+`origin` = `protocol` + `domain` + `port`:
+
+| `http://www.foo.com`      | Same Origin |            |
+| ------------------------- | ----------- | ---------- |
+| `https://www.foo.com`     | No          | `protocol` |
+| `http://app.foo.com`      | No          | `domain`   |
+| `http://foo.com`          | No          | `domain`   |
+| `http://www.foo.com:8080` | No          | `port`     |
+| `http://www.foo.com/a/`   | Yes         |            |
+
+```json
+{
+  "Access-Control-Allow-Origin": "https://api.foo.com"
+}
+```
+
 ### Content Security Policy
 
 [`CSP`](https://github.com/foundeo/content-security-policy.com)
