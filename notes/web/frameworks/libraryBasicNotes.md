@@ -111,6 +111,7 @@ tags: [Web, Framework, Library]
 - [Next](https://github.com/vercel/next.js)
 - [Remix: Full Stack Web Framework](https://github.com/remix-run/remix)
 - [Gatsby](https://github.com/gatsbyjs/gatsby)
+- [Hydrogen: React-based Framework for Building Shopify-powered Custom Storefronts](https://github.com/Shopify/hydrogen)
 - [UMI](https://github.com/umijs/umi)
 - [IceWorks](https://github.com/alibaba/ice)
 - [Blitz: Full Stack React Framework](https://github.com/blitz-js/blitz)
@@ -522,7 +523,7 @@ tags: [Web, Framework, Library]
 #### Select
 
 - [React Select](https://github.com/JedWatson/react-select)
-- [Choices.js: Customisable Select Text Input](https://github.com/Choices-js/Choices)
+- [Choices.js: Customizable Select Text Input](https://github.com/Choices-js/Choices)
 - [Select.css](https://github.com/filamentgroup/select-css)
 - [Chosen: Awesome Select Widget](https://github.com/harvesthq/chosen)
 
