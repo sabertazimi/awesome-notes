@@ -445,7 +445,7 @@ function App() {
 
 ## Web Authentication
 
-### Cookies
+### Cookie
 
 - First request header -> without cookie.
 - First response header -> `Set-Cookie: number` to client.
@@ -453,6 +453,14 @@ function App() {
 - Second request header -> `Cookie: number`.
   (extract identification number for specific site from cookies files).
 - Function: create **User Session Layer** on top of stateless HTTP.
+
+:::caution Cookie Security
+
+用户能够更改自己的 Cookie 值 (client side),
+因此不可将超过权限的数据保存在 Cookie 中 (如权限信息),
+防止用户越权.
+
+:::
 
 ### HTTP Basic Authentication
 
