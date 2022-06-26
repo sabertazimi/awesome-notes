@@ -610,7 +610,7 @@ Cross-site request forgery (跨站请求伪造):
 #### CSRF Protection
 
 - `REST` (representational state transfer) 原则:
-  - `GET` request: 确保无副作用, only read objects.
+  - `GET` request: only read objects, 确保无副作用.
   - `PUT` request: only create new objects.
   - `POST` request: only modify objects.
   - `DELETE` request: only delete objects.
