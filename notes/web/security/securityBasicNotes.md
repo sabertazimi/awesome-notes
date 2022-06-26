@@ -442,7 +442,7 @@ SELECT *
 #### SQL Injection Protection
 
 - Don't allow multiple statements.
-- Validate user input.
+- Validate user input: **是否存在/数据类型/取值范围/缺省值/正则表达式/特殊字符**.
 - Allowlist user input.
 - Least privilege principle:
   allow `SELECT`/`INSERT`/`UPDATE`/`DELETE` on certain data,
