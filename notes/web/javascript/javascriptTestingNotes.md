@@ -1270,6 +1270,17 @@ Object.defineProperty(element, 'scrollTop', {
 
 ### Logging
 
+#### Logging Type
+
+- Application client log.
+- Web server log.
+- Database server log.
+- Access log.
+- Debug log.
+- Error log.
+
+#### Logging Information
+
 - 时间, 包含时区信息和毫秒.
 - 日志级别.
 - 会话标识.
