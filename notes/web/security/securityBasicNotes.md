@@ -477,6 +477,8 @@ statement.executeQuery(sql, email, password);
 - 尽量不使用系统执行命令.
 - 保证动态函数为受信任函数, 防止被攻击者替换.
 
+### HTTP Injection
+
 #### Malicious Redirect Attack
 
 ```json
@@ -498,6 +500,18 @@ function isRelative(url) {
   return url && url.match(/^\/[^\/\\]/);
 }
 ```
+
+#### HTTP Header Injection Attack
+
+通过截断 HTTP 响应头,
+覆盖 `Location`/`Referer` 响应头,
+注入攻击者设置的 HTTP 响应头.
+
+#### HTTP Header Injection Protection
+
+- 不将外部输入作为 HTTP 响应头.
+- 检验 HTTP 响应头特殊字符: e.g 换行符.
+- 使用成熟的库生成 HTTP 响应头, 禁止简单字符拼接.
 
 ### Object Injection
 
