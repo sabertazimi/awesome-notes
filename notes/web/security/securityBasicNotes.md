@@ -453,6 +453,138 @@ getCanvasFingerprint();
 
 ## Security Vulnerability
 
+### XSS
+
+#### XSS Attack
+
+Cross-site scripting (跨站脚本):
+
+- Reflected XSS:
+  url input (search pages)
+  `http://localhost:8080/test?name=<script>alert('attack')</script>`.
+- Stored XSS:
+  store script into database.
+
+#### XSS Protection
+
+Don't trust user:
+
+- Escape control characters:
+  - `"` -> `&quot;`, `&` -> `&amp;`, `'` -> `&apos;`, `<` -> `&lt;`, `>` -> `&gt;`.
+  - `input.replace(/<script>|<script/>/g, '')`.
+  - `input.trim()`.
+- Use mature template engine: built-in XSS protection feature.
+- Content security policy: `script-src 'self' https://apis.google.com`.
+
+### CSRF
+
+#### CSRF Attack
+
+Cross-site request forgery (跨站请求伪造):
+
+挟制用户在当前已登录的 Web 应用程序上执行**非本意**的操作,
+利用已认证用户 (长期 `Cookie`), 访问攻击者网站, 并被强制执行脚本,
+在用户不知情的情况下提交 `Get`/`Post` request (with `Cookie`) 给被攻击网站.
+
+```html
+<a
+  href="https://an.evil.site"
+  target="_blank"
+  rel="noopener noreferrer nofollow"
+>
+  进入一个"邪恶"的网站
+</a>
+```
+
+:::tip XSS vs CSRF
+
+- XSS 利用的是网站对用户 (输入) 的信任.
+- CSRF 利用的是网站对用户网页浏览器的信任.
+
+:::
+
+#### CSRF Protection
+
+- `REST` (representational state transfer) 原则:
+  - `GET` request: only read objects, 确保无副作用.
+  - `PUT` request: only create new objects.
+  - `POST` request: only modify objects.
+  - `DELETE` request: only delete objects.
+- 确保 `request` 正常发起渠道:
+  - Anti-CSRF cookie: `Set-Cookie: _xsrf=5978e29d4ef434a1`.
+  - 开启同源策略: `Set-Cookie: _xsrf=5978e29d4ef434a1; SameSite=Strict;`.
+  - Hidden token check in `<form>`.
+  - 检查第三方网站 `URL`:
+    - `window.open(url).opener = null`.
+    - 显示第三方地址跳转警告页面.
+- Require re-authentication for sensitive action:
+  支付账单, 修改邮箱, 删除账号.
+- Use mature `CSRF` protection library:
+  express.js `csurf` library.
+
+```python
+# Reject cross-origin requests to protect from
+# CSRF, XSSI & other bugs
+def allow_request(req):
+  # Allow requests from browsers which don't send Fetch Metadata
+  if not req['sec-fetch-site']:
+    return True
+
+  # Allow same-site and browser-initiated requests
+  if req['sec-fetch-site'] in ('same-origin', 'same-site', 'none'):
+    return True
+
+  # Allow simple top-level navigation from anywhere
+  if req['sec-fetch-mode'] === 'navigate' and req.method === 'GET':
+    return True
+
+  return False
+```
+
+### Click Jacking
+
+#### Click Jacking Attack
+
+Hover transparent malicious link upon trusted true button.
+
+#### Click Jacking Protection
+
+Frame killing snippet:
+
+```html
+<style>
+  /* Hide page by default */
+  html {
+    display: none;
+  }
+</style>
+
+<script>
+  if (self == top) {
+    // Everything checks out, show the page.
+    document.documentElement.style.display = 'block';
+  } else {
+    // Break out of the frame.
+    top.location = self.location;
+  }
+</script>
+```
+
+`X-Frame-Options`:
+
+```ts
+// nodejs
+response.setHeader('X-Frame-Options', 'DENY');
+```
+
+Content security policy:
+
+```bash
+Content-Security-Policy: frame-ancestors 'none'
+Content-Security-Policy: frame-ancestors 'self'
+Content-Security-Policy: frame-ancestors example.com google.com
+```
+
 ### SQL Injection
 
 #### SQL Injection Attack
@@ -601,94 +733,6 @@ Solutions:
 - 检查文件内容.
 - 检查 `Content-Type` header.
 - 扫描文件: virus scanner.
-
-### XSS
-
-#### XSS Attack
-
-Cross-site scripting (跨站脚本):
-
-- Reflected XSS:
-  url input (search pages)
-  `http://localhost:8080/test?name=<script>alert('attack')</script>`.
-- Stored XSS:
-  store script into database.
-
-#### XSS Protection
-
-Don't trust user:
-
-- Escape control characters:
-  - `"` -> `&quot;`, `&` -> `&amp;`, `'` -> `&apos;`, `<` -> `&lt;`, `>` -> `&gt;`.
-  - `input.replace(/<script>|<script/>/g, '')`.
-  - `input.trim()`.
-- Use mature template engine: built-in XSS protection feature.
-- Content security policy: `script-src 'self' https://apis.google.com`.
-
-### CSRF
-
-#### CSRF Attack
-
-Cross-site request forgery (跨站请求伪造):
-
-挟制用户在当前已登录的 Web 应用程序上执行**非本意**的操作,
-利用已认证用户 (长期 `Cookie`), 访问攻击者网站, 并被强制执行脚本,
-在用户不知情的情况下提交 `Get`/`Post` request (with `Cookie`) 给被攻击网站.
-
-```html
-<a
-  href="https://an.evil.site"
-  target="_blank"
-  rel="noopener noreferrer nofollow"
->
-  进入一个"邪恶"的网站
-</a>
-```
-
-:::tip XSS vs CSRF
-
-- XSS 利用的是网站对用户 (输入) 的信任.
-- CSRF 利用的是网站对用户网页浏览器的信任.
-
-:::
-
-#### CSRF Protection
-
-- `REST` (representational state transfer) 原则:
-  - `GET` request: only read objects, 确保无副作用.
-  - `PUT` request: only create new objects.
-  - `POST` request: only modify objects.
-  - `DELETE` request: only delete objects.
-- 确保 `request` 正常发起渠道:
-  - Anti-CSRF cookie: `Set-Cookie: _xsrf=5978e29d4ef434a1`.
-  - 开启同源策略: `Set-Cookie: _xsrf=5978e29d4ef434a1; SameSite=Strict;`.
-  - Hidden token check in `<form>`.
-  - 检查第三方网站 `URL`:
-    - `window.open(url).opener = null`.
-    - 显示第三方地址跳转警告页面.
-- Require re-authentication for sensitive action:
-  支付账单, 修改邮箱, 删除账号.
-- Use mature `CSRF` protection library:
-  express.js `csurf` library.
-
-```python
-# Reject cross-origin requests to protect from
-# CSRF, XSSI & other bugs
-def allow_request(req):
-  # Allow requests from browsers which don't send Fetch Metadata
-  if not req['sec-fetch-site']:
-    return True
-
-  # Allow same-site and browser-initiated requests
-  if req['sec-fetch-site'] in ('same-origin', 'same-site', 'none'):
-    return True
-
-  # Allow simple top-level navigation from anywhere
-  if req['sec-fetch-mode'] === 'navigate' and req.method === 'GET':
-    return True
-
-  return False
-```
 
 ### Authentication Vulnerability
 
@@ -912,50 +956,6 @@ led to dangerous macros:
 - Disable DTD (Document Type Definitions) parse in XML parser:
   `xml2js`, `parse-xml`, `node-xml`.
 - Least privilege principle.
-
-### Click Jacking
-
-#### Click Jacking Attack
-
-Hover transparent malicious link upon trusted true button.
-
-#### Click Jacking Protection
-
-Frame killing snippet:
-
-```html
-<style>
-  /* Hide page by default */
-  html {
-    display: none;
-  }
-</style>
-
-<script>
-  if (self == top) {
-    // Everything checks out, show the page.
-    document.documentElement.style.display = 'block';
-  } else {
-    // Break out of the frame.
-    top.location = self.location;
-  }
-</script>
-```
-
-`X-Frame-Options`:
-
-```ts
-// nodejs
-response.setHeader('X-Frame-Options', 'DENY');
-```
-
-Content security policy:
-
-```bash
-Content-Security-Policy: frame-ancestors 'none'
-Content-Security-Policy: frame-ancestors 'self'
-Content-Security-Policy: frame-ancestors example.com google.com
-```
 
 ### Denial of Service
 
