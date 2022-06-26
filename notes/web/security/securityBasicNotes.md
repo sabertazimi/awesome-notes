@@ -487,7 +487,10 @@ statement.executeQuery(sql, email, password);
 
 #### Malicious Redirect Protection
 
-Check the `referrer` when doing redirect:
+- Check `?url=`/`?redirect` data:
+  - Escape control character.
+  - Limit redirect range.
+- Check the `referrer` when doing redirect.
 
 ```ts
 function isRelative(url) {
