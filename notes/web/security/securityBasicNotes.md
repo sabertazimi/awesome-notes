@@ -10,6 +10,33 @@ tags: [Web, DevOps, Security]
 
 ## Security Programming
 
+### Security Principles
+
+安全三要素:
+
+- 机密性 (Confidentiality).
+- 完整性 (Integrity).
+- 可用性 (Availability).
+
+安全原则:
+
+- 白名单原则:
+  - 防火墙白名单: 默认只开放 `80` 与 `443` 端口.
+  - XSS 防御白名单: 富文本编辑器只允许 `<a>` 与 `<img>` 标签.
+- 最小权限原则.
+- 纵深防御原则:
+  - Web 应用安全.
+  - 网络环境安全.
+  - 数据库安全.
+  - OS 系统安全.
+- 数据与代码分离原则:
+  - 缓冲区溢出漏洞: 混淆代码与数据边界, 导致安全问题发生.
+  - 注入漏洞: 混合应用代码与用户数据, 导致 SQL/XSS/CSRF/XML 漏洞发生.
+- 不可预测性原则:
+  - 有效地对抗基于篡改与伪造的攻击.
+  - 随机栈基址防御缓冲区溢出攻击.
+  - 加密哈希 Token 防御 CSRF 攻击.
+
 ### Software Security Assurance
 
 - 逻辑安全.
