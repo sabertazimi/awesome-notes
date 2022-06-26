@@ -570,7 +570,7 @@ Solutions:
 - 隔离文件: host files on secure system.
 - 禁止文件执行: `-x`.
 - 重命名/哈希化文件: 防止攻击者找到此文件.
-- 检查文件格式 (extension/`MIME` type).
+- 检查文件格式 (extension/`MIME` type/`Content-Type`).
 - 检查文件内容.
 - 检查 `Content-Type` header.
 - 扫描文件: virus scanner.
