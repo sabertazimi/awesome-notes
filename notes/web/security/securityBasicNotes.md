@@ -487,6 +487,7 @@ statement.executeQuery(sql, email, password);
 
 #### Malicious Redirect Protection
 
+- 显示第三方地址跳转警告页面.
 - Check `?url=`/`?redirect` data:
   - Escape control character.
   - Limit redirect range.
