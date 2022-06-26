@@ -1314,8 +1314,8 @@ logger.fatal('Fatal error occurred');
 
 #### Logging Clock
 
-- `performance.now()` is more precise (100 us)
-- `performance.now()` is strictly monotonic (unaffected by changes of machine time)
+- `performance.now()` is more precise (100 us).
+- `performance.now()` is strictly monotonic (unaffected by changes of machine time).
 
 ```ts
 let lastVisibilityChange = 0;
@@ -1392,7 +1392,7 @@ console.profileEnd();
 console.timeStamp();
 ```
 
-`console.log`
+`console.log`:
 
 ```ts
 // `sprinf` style log
@@ -1400,7 +1400,7 @@ console.log('%d %o %s', integer, object, string);
 console.log('%c ...', 'css style');
 ```
 
-`console.table`
+`console.table`:
 
 ```ts
 // display array of object (tabular data)
@@ -1481,8 +1481,8 @@ const traceProperty = (object, property) => {
 
 ### Node Debugging API
 
-- node --inspect
-- [ndb](https://github.com/GoogleChromeLabs/ndb)
+- `node --inspect`.
+- [ndb](https://github.com/GoogleChromeLabs/ndb).
 
 ```bash
 node --inspect
