@@ -1690,4 +1690,4 @@ Tool for composite stage analysis:
 
 ### Animation Panel
 
-- animations
+- Animations.
