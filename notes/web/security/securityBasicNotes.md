@@ -639,7 +639,8 @@ Cross-site request forgery (跨站请求伪造):
   - 检查第三方网站 `URL`:
     - `window.open(url).opener = null`.
     - 显示第三方地址跳转警告页面.
-- Require re-authentication for sensitive action.
+- Require re-authentication for sensitive action:
+  支付账单, 修改邮箱, 删除账号.
 - Use mature `CSRF` protection library:
   express.js `csurf` library.
 
