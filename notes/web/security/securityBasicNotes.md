@@ -525,13 +525,14 @@ Cross-site scripting (跨站脚本):
 
 Don't trust user:
 
-- Escape control characters:
+- Escape control characters (输入校验):
   - `"` -> `&quot;`, `&` -> `&amp;`, `'` -> `&apos;`, `<` -> `&lt;`, `>` -> `&gt;`.
   - `input.replace(/<script>|<script/>/g, '')`.
   - `input.trim()`.
+- Encode output result (输出编码).
 - Check HTTP `Content-Type` header.
-- Use mature template engine: built-in XSS protection feature.
 - Content security policy: `script-src 'self' https://apis.google.com`.
+- Use mature template engine: built-in XSS protection feature.
 
 ### CSRF
 
