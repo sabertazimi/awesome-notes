@@ -531,6 +531,7 @@ Cross-site request forgery (跨站请求伪造):
 - 确保 `request` 正常发起渠道:
   - Anti-CSRF cookie: `Set-Cookie: _xsrf=5978e29d4ef434a1`.
   - 开启同源策略: `Set-Cookie: _xsrf=5978e29d4ef434a1; SameSite=Strict;`.
+  - 检查 HTTP `Referer` 请求头.
   - Hidden token check in `<form>`.
   - 检查第三方网站 `URL`:
     - `window.open(url).opener = null`.
