@@ -482,6 +482,7 @@ Cross-site scripting (跨站脚本):
   `http://localhost:8080/test?name=<script>alert('attack')</script>`.
 - Stored XSS:
   store script into database.
+- Inject script in HTML/CSS/JavaScript/JSON/HTTP.
 
 #### XSS Protection
 
@@ -491,6 +492,7 @@ Don't trust user:
   - `"` -> `&quot;`, `&` -> `&amp;`, `'` -> `&apos;`, `<` -> `&lt;`, `>` -> `&gt;`.
   - `input.replace(/<script>|<script/>/g, '')`.
   - `input.trim()`.
+- Check HTTP `Content-Type` header.
 - Use mature template engine: built-in XSS protection feature.
 - Content security policy: `script-src 'self' https://apis.google.com`.
 
