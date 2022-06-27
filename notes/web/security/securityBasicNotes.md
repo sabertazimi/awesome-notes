@@ -148,6 +148,24 @@ UI 的防御性:
   - 代码审核.
   - 样式隔离.
 
+### Secure HTTP Headers
+
+Secure HTTP [headers](https://github.com/helmetjs/helmet):
+
+- [X-Content-Type-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Content-Type-Options).
+- [X-Frame-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options):
+  - `DENY`: 禁止被加载进任何 frame.
+  - `SAMEORIGIN`: 仅允许被加载进同域内的 frame.
+- [X-XSS-Protection](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-XSS-Protection):
+  - `0` :表示禁用这个策略.
+  - `1`: 默认, 对危险脚本做一些标志或修改, 以阻止在浏览器上渲染执行.
+  - `1; mode=block`:, 强制不渲染.
+- Setting `Context-Security-Policy` header.
+- Ensure all connections to be HTTPS.
+- Avoid Clicking-jacking using `X-Frame-Options`.
+- Disable `X-Powered-By` header.
+- Not put sensitive data in URL query and `Referer` header.
+
 ### Same Origin Policy
 
 `origin` = `protocol` + `domain` + `port`:
@@ -250,20 +268,6 @@ const SanitizingPolicy = TrustedTypes.createPolicy(
 const trustedHTML = SanitizingPolicy.createHTML(foo);
 element.innerHTML = trustedHTML;
 ```
-
-### Secure HTTP Headers
-
-Secure HTTP [headers](https://github.com/helmetjs/helmet):
-
-- [X-Content-Type-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Content-Type-Options).
-- [X-Frame-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options).
-- [X-XSS-Protection](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-XSS-Protection).
-- XSS Protection.
-- Setting `Context-Security-Policy` header.
-- Ensure all connections to be HTTPS.
-- Avoid Clicking-jacking using `X-Frame-Options`.
-- Disable `X-Powered-By` header.
-- Not put sensitive data in URL query and `Referer` header.
 
 ### Sandbox
 
