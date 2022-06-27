@@ -251,9 +251,9 @@ const trustedHTML = SanitizingPolicy.createHTML(foo);
 element.innerHTML = trustedHTML;
 ```
 
-### Security HTTP Headers
+### Secure HTTP Headers
 
-Security HTTP [headers](https://github.com/helmetjs/helmet):
+Secure HTTP [headers](https://github.com/helmetjs/helmet):
 
 - [X-Content-Type-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Content-Type-Options).
 - [X-Frame-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options).
@@ -542,9 +542,9 @@ Cross-site request forgery (跨站请求伪造)
   - 开启同源策略: `Set-Cookie: _xsrf=5978e29d4ef434a1; SameSite=Strict;`.
   - 检查 HTTP `Referer` 请求头.
   - Hidden token check in `<form>`.
-  - 检查第三方网站 `URL`:
+  - 检查第三方网站 `URL`, 显示第三方地址跳转警告页面:
+    - Remove sensitive data in URL query and `Referer` header.
     - `<a href="https://3rd.com" target="_blank" rel="noopener noreferrer nofollow">`.
-    - 显示第三方地址跳转警告页面.
 - Require re-authentication for sensitive action:
   支付账单, 修改邮箱, 删除账号.
 - Use mature `CSRF` protection library:
@@ -676,11 +676,13 @@ statement.executeQuery(sql, email, password);
 
 #### Malicious Redirect Protection
 
-- 显示第三方地址跳转警告页面.
+- 检查第三方网站 `URL`, 显示第三方地址跳转警告页面:
+  - Remove sensitive data in URL query and `Referer` header.
+  - `<a href="https://3rd.com" target="_blank" rel="noopener noreferrer nofollow">`.
 - Check `?url=`/`?redirect` data:
   - Escape control character.
   - Limit redirect range.
-- Check the `referrer` when doing redirect.
+- Check `Referrer` header when doing redirect.
 
 ```ts
 function isRelative(url) {
@@ -834,7 +836,7 @@ Not with name, should with email:
 - Not passing session ID in `queryString`/`requestBody`:
   跳转至第三方链接时, 会在 `Referer` header 处泄露 session ID,
   passing them in **HTTP Cookie**.
-  同样地, 不允许在 `queryString` URL 放置任何其他敏感数据 (如 token).
+  同样地, 不允许在 URL query 处放置任何其他敏感数据 (如 token).
 - Generate complex session ID.
 - 认证成功前不在会话变量中存储敏感信息.
 - Reset session ID after set up session successfully.
