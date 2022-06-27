@@ -2754,7 +2754,7 @@ JSON.stringify(new Date());
 | Custom Format (script insertion) |      222,912 |          66.3 |       11.7 |
 | Custom Format (XHR)              |      222,892 |          63.1 |       14.5 |
 
-#### Ajax Usage
+#### AJAX Usage
 
 ```ts
 const XHR = (function () {
@@ -2916,7 +2916,7 @@ getJSON('data/sample.json')
   .catch(e => handleError(`Error: ${e}`));
 ```
 
-#### Ajax Cross Origin Request
+#### AJAX Cross Origin Request
 
 ```html
 <!-- HTML -->
@@ -2931,7 +2931,7 @@ Response.Headers.Add('Access-Control-Allow-Origin', '*');
 $.ajax({
   url: 'http://map.oicqzone.com/gpsApi.php?lat=22.502412986242&lng=113.93832783228',
   type: 'GET',
-  dataType: 'JSONP', // 处理Ajax 跨域问题.
+  dataType: 'JSONP', // 处理 AJAX 跨域问题.
   success(data) {
     $('body').append(`Name: ${data}`);
   },
@@ -3901,7 +3901,7 @@ javascriptNode.onaudioprocess = function () {
   // }
 };
 
-// Load the audio from the URL via Ajax and store it in global variable audioData
+// Load the audio from the URL via AJAX and store it in global variable audioData
 // Note that the audio load is asynchronous
 function loadSound(url) {
   fetch(url)
