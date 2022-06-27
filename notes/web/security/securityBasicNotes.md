@@ -830,9 +830,10 @@ Not with name, should with email:
 
 在 **HTTP Cookie** 中传输**复杂**的 session ID, 并在**成功连接**/**恶意篡改**后重置 session ID:
 
-- Not passing session ID in `queryStrings`/`requestBody`
-  (跳转至第三方链接时, 会在 `Referer` URL 处泄露 session ID),
-  instead of passing them in **HTTP Cookie**.
+- Not passing session ID in `queryString`/`requestBody`:
+  跳转至第三方链接时, 会在 `Referer` header 处泄露 session ID,
+  passing them in **HTTP Cookie**.
+  同样地, 不允许在 `queryString` URL 放置任何其他敏感数据 (如 token).
 - Generate complex session ID.
 - 认证成功前不在会话变量中存储敏感信息.
 - Reset session ID after set up session successfully.
