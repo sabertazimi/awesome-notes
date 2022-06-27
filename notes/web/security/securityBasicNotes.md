@@ -184,6 +184,11 @@ Secure HTTP [headers](https://github.com/helmetjs/helmet):
 }
 ```
 
+- 由客户端 HTML 标签等发出的跨域 `GET` 请求默认合法, 构成开放的 Web 世界:
+  通过 `src` 属性加载的资源, 浏览器限制了 JavaScript 的权限, 使其不能读写返回的内容.
+- `XMLHttpRequest` 受同源策略限制: 默认只能访问同源对象的内容.
+- Cookie 受同源策略限制.
+
 ### Content Security Policy
 
 [`CSP`](https://github.com/foundeo/content-security-policy.com)
