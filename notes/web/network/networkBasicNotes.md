@@ -319,6 +319,7 @@ Cross origin resource sharing:
 - CORS-safeListed response header:
   `Cache-Control`, `Content-Language`, `Content-Length`, `Content-Type`,
   `Expires`, `Last-Modified`, `Pragma`.
+- 由客户端 HTML 标签等发出的跨域 `GET` 请求默认合法: 构成开放的 Web 世界.
 
 ```bash
 OPTIONS /resource.js HTTP/1.1
