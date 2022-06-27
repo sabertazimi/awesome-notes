@@ -1209,6 +1209,7 @@ DoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时�
 
 ## Security Reference
 
+- Open web application security project [cheat sheet](https://github.com/OWASP/CheatSheetSeries).
 - Web security [checklist](https://eggjs.org/zh-cn/core/security.html).
 - ESLint node security [plugin](https://github.com/nodesecurity/eslint-plugin-security).
 - Open source security state of [2022](https://snyk.io/reports/open-source-security).
