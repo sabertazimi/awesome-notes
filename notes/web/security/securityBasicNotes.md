@@ -614,7 +614,22 @@ Hover transparent malicious link upon trusted true button.
 
 #### Click Jacking Protection
 
-Frame killing snippet:
+`X-Frame-Options`:
+
+```ts
+// nodejs
+response.setHeader('X-Frame-Options', 'DENY');
+```
+
+Content security policy:
+
+```bash
+Content-Security-Policy: frame-ancestors 'none'
+Content-Security-Policy: frame-ancestors 'self'
+Content-Security-Policy: frame-ancestors example.com google.com
+```
+
+Prevent load self in frame (`Frame Busting`):
 
 ```html
 <style>
@@ -633,21 +648,6 @@ Frame killing snippet:
     top.location = self.location;
   }
 </script>
-```
-
-`X-Frame-Options`:
-
-```ts
-// nodejs
-response.setHeader('X-Frame-Options', 'DENY');
-```
-
-Content security policy:
-
-```bash
-Content-Security-Policy: frame-ancestors 'none'
-Content-Security-Policy: frame-ancestors 'self'
-Content-Security-Policy: frame-ancestors example.com google.com
 ```
 
 ### SQL Injection
