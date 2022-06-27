@@ -1180,6 +1180,8 @@
     "onclose",
     "onedark",
     "oneline",
+    "onformchange",
+    "onforminput",
     "onicecandidate",
     "oniceconnectionstatechange",
     "onmessageerror",
