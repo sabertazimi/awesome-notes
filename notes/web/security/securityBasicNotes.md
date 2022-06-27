@@ -483,7 +483,28 @@ Cross-site scripting (跨站脚本):
   `http://localhost:8080/test?name=<script>alert('attack')</script>`.
 - Stored XSS:
   store script into database.
-- Inject script in HTML/CSS/JavaScript/JSON/HTTP.
+- Inject script in HTML/CSS/JavaScript/JSON/HTTP:
+  - `<link href="">`.
+  - `<a href="">`.
+  - `<img src="">`.
+  - `<img lowsrc="">`.
+  - `<img dynsrc="">`.
+  - `<iframe src="">`.
+  - `<frame src="">`.
+  - `<meta http-equiv="refresh" content="0; url=">`.
+  - `<script src="">`.
+  - `<bgsound src="">`.
+  - `<embed src="">`.
+  - `<video src="">`.
+  - `<audio src="">`.
+  - `<table background="">`.
+  - `@import ""`.
+  - `background: url("")`.
+  - `document.write()`.
+  - `document.domain`.
+  - `window.location`.
+  - `window.name`.
+  - `element.innerHTML`.
 
 #### XSS Protection
 
