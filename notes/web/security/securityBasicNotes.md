@@ -263,6 +263,7 @@ Security HTTP [headers](https://github.com/helmetjs/helmet):
 - Ensure all connections to be HTTPS.
 - Avoid Clicking-jacking using `X-Frame-Options`.
 - Disable `X-Powered-By` header.
+- Not put sensitive data in URL query and `Referer` header.
 
 ### Sandbox
 
