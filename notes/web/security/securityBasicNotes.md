@@ -498,21 +498,27 @@ Don't trust user:
 
 #### CSRF Attack
 
-Cross-site request forgery (跨站请求伪造):
-
+Cross-site request forgery (跨站请求伪造)
 挟制用户在当前已登录的 Web 应用程序上执行**非本意**的操作,
 利用已认证用户 (长期 `Cookie`), 访问攻击者网站, 并被强制执行脚本,
-在用户不知情的情况下提交 `Get`/`Post` request (with `Cookie`) 给被攻击网站.
+在用户不知情的情况下提交 `GET`/`POST` request (with `Cookie`):
 
-```html
-<a
-  href="https://an.evil.site"
-  target="_blank"
-  rel="noopener noreferrer nofollow"
->
-  进入一个"邪恶"的网站
-</a>
-```
+- `<link href="">`.
+- `<a href="">`.
+- `<img src="">`.
+- `<img lowsrc="">`.
+- `<img dynsrc="">`.
+- `<iframe src="">`.
+- `<frame src="">`.
+- `<meta http-equiv="refresh" content="0; url=">`.
+- `<script src="">`.
+- `<bgsound src="">`.
+- `<embed src="">`.
+- `<video src="">`.
+- `<audio src="">`.
+- `<table background="">`.
+- `@import ""`.
+- `background: url("")`.
 
 :::tip XSS vs CSRF
 
@@ -534,7 +540,7 @@ Cross-site request forgery (跨站请求伪造):
   - 检查 HTTP `Referer` 请求头.
   - Hidden token check in `<form>`.
   - 检查第三方网站 `URL`:
-    - `window.open(url).opener = null`.
+    - `<a href="https://3rd.com" target="_blank" rel="noopener noreferrer nofollow">`.
     - 显示第三方地址跳转警告页面.
 - Require re-authentication for sensitive action:
   支付账单, 修改邮箱, 删除账号.
