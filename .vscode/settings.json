@@ -1422,6 +1422,7 @@
     "screenmode",
     "scriptencoding",
     "scripthost",
+    "scriptlet",
     "Scroller",
     "scrollreveal",
     "SCTP",

