@@ -628,10 +628,11 @@ Cross-site request forgery (跨站请求伪造)
   - `POST` request: only modify objects.
   - `DELETE` request: only delete objects.
 - 确保 `request` 正常发起渠道:
-  - Anti-CSRF cookie: `Set-Cookie: _xsrf=5978e29d4ef434a1`.
+  - Anti-CSRF cookie:
+    - 不可预测 salt token: `Set-Cookie: _xsrf=5978e29d4ef434a1`.
+    - Hidden token check in `<form>`.
   - 开启同源策略: `Set-Cookie: _xsrf=5978e29d4ef434a1; SameSite=Strict;`.
   - 检查 HTTP `Referer` 请求头.
-  - Hidden token check in `<form>`.
   - 检查第三方网站 `URL`, 显示第三方地址跳转警告页面:
     - Remove sensitive data in URL query and `Referer` header.
     - `<a href="https://3rd.com" target="_blank" rel="noopener noreferrer nofollow">`.
