@@ -1139,7 +1139,7 @@ led to dangerous macros:
 
 #### DoS Attack
 
-DoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
+DoS 攻击, 攻击者不断地提出服务请求, 让合法用户的请求无法及时处理:
 
 - DNS 服务.
 - Email 服务.
@@ -1158,6 +1158,29 @@ DoS, 攻击者不断地提出服务请求, 让合法用户的请求无法及时�
 - 依靠网络服务提供商 (ISP) 来检测并消除 DoS 攻击.
 - 获取云缓存提供商的服务: mature CDN service support DDoS protection.
 - Scalable job queue.
+
+#### DDoS Attack
+
+Distributed denial of service attack:
+
+- SYN flood:
+  伪造 IP 不应答服务器 `SYN/ACK` 报文, 导致服务器消耗资源 (retry time) 处理这种半连接.
+- UDP flood.
+- ICMP flood.
+- Slow connection attack: 构造 `Content-Length` 大值, 低速度发包 (10s ~ 100s 发送一个字节), 占用服务器资源.
+- Redirect attack: 入侵了一个大网站后, 通过篡改页面, 将巨大的用户流量分流到目标网站.
+
+#### DDoS Protection
+
+- SYN cookie: 每个 IP 地址分配一个 cookie, 限制访问频率, 超过一定频率后不响应 IP.
+- 限制请求频率与请求力度:
+  - 客户端: CAPTCHA（Completely Automated Pub-lic Turing Test to Tell Computers and HumansApart).
+  - 服务端: 建立应用防火墙与服务器安全模块.
+- 提升带宽最大负荷.
+- 提升服务器性能:
+  - Use mature memory cache library, e.g `Redis`.
+  - 负载均衡.
+  - CDN.
 
 #### ReDoS Attack
 
