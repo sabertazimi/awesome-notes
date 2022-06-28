@@ -940,6 +940,7 @@ e.g GitHub [user profile](https://github.com).
 - 记录登陆日志.
 - [CAPTCHA](https://www.google.com/recaptcha/about):
   completely automated public turing test to tell computers and humans apart.
+- 隐藏用户 ID, 只显示昵称.
 
 ##### Login Protection
 
