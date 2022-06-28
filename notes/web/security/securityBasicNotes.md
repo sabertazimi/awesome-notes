@@ -674,6 +674,10 @@ Hover transparent malicious link upon trusted true button:
 
 `X-Frame-Options`:
 
+- `DENY`.
+- `SAMEORIGIN`.
+- `ALLOW-FROM origin`.
+
 ```ts
 // nodejs
 response.setHeader('X-Frame-Options', 'DENY');
