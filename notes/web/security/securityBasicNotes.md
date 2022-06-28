@@ -561,11 +561,17 @@ Cross-site scripting (跨站脚本):
   - `<video><source onerror="javascript:alert(1)"></video>`.
   - `@import ""`.
   - `background: url("")`.
-  - `document.write()`.
-  - `document.domain`.
-  - `window.location`.
   - `window.name`.
+  - `window.location`.
+  - `document.domain`.
+  - `document.referrer`.
+  - `document.location.assign()`.
+  - `document.location.replace()`.
+  - `document.write()`.
   - `element.innerHTML`.
+  - `element.outerHTML`.
+  - `cookie`.
+  - `localStorage`.
 
 #### XSS Protection
 
