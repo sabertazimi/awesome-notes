@@ -978,7 +978,10 @@ Not with name, should with email:
 - Generate complex session ID.
 - 认证成功前不在会话变量中存储敏感信息.
 - Reset session ID after set up session successfully.
-- Reset session ID after it's been changed manually on client (`Set-Cookie`).
+- Reset session ID after it's been changed manually on client (`Set-Cookie`):
+  - IP.
+  - Device.
+  - User agent.
 
 ```ts
 req.session.regenerate(function (err) {
