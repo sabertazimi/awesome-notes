@@ -37,6 +37,44 @@ tags: [Web, DevOps, Security]
   - 随机栈基址防御缓冲区溢出攻击.
   - 加密哈希 Token 防御 CSRF 攻击.
 
+STRIDE 威胁分析模型:
+
+| Threat                 | Definition                  | Security   |
+| ---------------------- | --------------------------- | ---------- |
+| Spoofing               | 伪装 (他人身份)             | 认证       |
+| Tampering              | 篡改 (数据或代码)           | 完整性     |
+| Repudiation            | 抵赖 (做过的事情)           | 不可抵赖性 |
+| Information Disclosure | 信息泄露 (机密数据)         | 机密性     |
+| Denial of Service      | 拒绝服务                    | 可用性     |
+| Elevation of Privilege | 提升权限 (未经授权获得许可) | 授权       |
+
+DREAD 风险分析模型:
+
+- $\text{Risk} = \text{Probability} * \text{Damage Potential}$:
+  - 高危: 12 ~ 15 分.
+  - 中危: 8 ~ 11 分.
+  - 低危: 0 ~ 7 分.
+- Damage Potential:
+  - High: 完全验证权限, 执行管理员操作, 非法上传文件.
+  - Medium: 泄露敏感信息.
+  - Low: 泄露其他信息.
+- Reproducibility:
+  - High: 攻击者可以随意重复攻击.
+  - Medium: 攻击者可以重复攻击, 有时间限制.
+  - Low: 攻击者难以重复攻击.
+- Exploitability:
+  - High: 初学者短期能掌握攻击方法.
+  - Medium: 熟练者才能掌握攻击方法.
+  - Low: 漏洞利用条件非常苛刻.
+- Affected users:
+  - High: All user, key user, default configuration.
+  - Medium: Some user, non-default configuration.
+  - Low: Rare user, anonymous user.
+- Discoverability:
+  - High: 漏洞显眼, 攻击条件容易获得.
+  - Medium: 私有区域才可发现漏洞, 需要深入挖掘.
+  - Low: 发现漏洞极其困难.
+
 ### Software Security Assurance
 
 - 逻辑安全.
