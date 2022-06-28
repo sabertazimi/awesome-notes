@@ -593,8 +593,8 @@ Don't trust user:
 
 Cross-site request forgery (跨站请求伪造)
 挟制用户在当前已登录的 Web 应用程序上执行**非本意**的操作,
-利用已认证用户 (长期 `Cookie`), 访问攻击者网站, 并被强制执行脚本,
-在用户不知情的情况下提交 `GET`/`POST` request (with `Cookie`):
+利用已认证用户 (长期本地 `Cookie`), 访问攻击者网站, 并被强制执行脚本,
+在用户不知情的情况下提交 `GET`/`POST` request (长期本地 `Cookie`):
 
 - `<link href="">`.
 - `<a href="">`.
