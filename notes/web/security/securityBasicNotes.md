@@ -906,17 +906,23 @@ Solutions:
 
 #### Password Attack
 
-Password [mis-management](https://www.hacksplaining.com/prevention/password-mismanagement).
+Password [mis-management](https://www.hacksplaining.com/prevention/password-mismanagement):
+
+- Reused key attack: 使用同一个密钥进行多次加/解密, 将使得破解流密码变得非常简单.
 
 #### Password Protection
 
 - Require complex password.
 - Require multi-factor authentication.
-- Hashing password: `bcrypt`.
-- Salting password.
+- Secure and bobust password hashing: `bcrypt`.
+- Secure and robust password salting.
 - Secure password resets.
 - Validate email address.
 - Ban disposable email account.
+- 密钥管理:
+  - 防止密钥从非正常的渠道泄露.
+  - 定期更换密钥.
+  - 采用安全的密钥管理系统: Web 应用通过 service API 动态获取密钥, 只加载到内存中, 不写入本地文件.
 
 #### User Enumeration Attack
 
