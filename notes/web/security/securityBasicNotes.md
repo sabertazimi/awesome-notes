@@ -236,7 +236,10 @@ help prevent from `XSS`:
 {
   "header": {
     "Content-Security-Policy":
-      script-src 'nonce-random123' 'strict-dynamic' 'unsafe-eval';
+      allow 'self';
+      script-src 'nonce-random123' 'strict-dynamic' 'unsafe-eval' script.example.com;
+      media-src media.example.com;
+      img-src img.example.com;
       object-src 'none';
       base-uri 'none'
   }
@@ -268,7 +271,7 @@ help prevent from `XSS`:
 </script>
 ```
 
-`CSP` block untrusted domain scripts:
+`domain`-specific `CSP` block untrusted domain scripts:
 
 ```html
 <!-- Given this CSP header -->
