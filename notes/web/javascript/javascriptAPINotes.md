@@ -1391,6 +1391,10 @@ document.body.appendChild(table);
 <iframe src="https://www.google.com/" height="500px" width="500px"></iframe>
 <iframe src="https://platform.twitter.com/widgets/tweet_button.html"></iframe>
 <iframe srcdoc="<html><body>App</body></html>"></iframe>
+<iframe
+  sandbox="allow-same-origin allow-top-navigation allow-forms allow-scripts"
+  src="http://maps.example.com/embedded.html"
+></iframe>
 ```
 
 ```ts
