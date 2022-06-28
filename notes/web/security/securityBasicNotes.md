@@ -830,7 +830,7 @@ function isRelative(url) {
 
 #### HTTP Header Injection Attack
 
-通过截断 HTTP 响应头,
+通过截断 HTTP 响应头 (换行符/空字符),
 覆盖 `Location`/`Referer` 响应头,
 注入攻击者设置的 HTTP 响应头.
 
@@ -914,7 +914,7 @@ Password [mis-management](https://www.hacksplaining.com/prevention/password-mism
 
 - Require complex password.
 - Require multi-factor authentication.
-- Secure and bobust password hashing: `bcrypt`.
+- Secure and robust password hashing: `bcrypt`.
 - Secure and robust password salting.
 - Secure password resets.
 - Validate email address.
