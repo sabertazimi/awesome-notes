@@ -33,7 +33,7 @@ tags: [Web, Framework, Library]
 - [Projen: New Generation of Project Generators](https://github.com/projen/projen)
 - [Hygen: Component Generator](https://github.com/jondot/hygen)
 - [Plop Generator](https://github.com/plopjs/plop)
-- [TsDx: Zero-config CLI for TypeScript Package Development](https://github.com/jaredpalmer/tsdx)
+- [TsDx: Zero-config TypeScript Package Development CLI Tool](https://github.com/jaredpalmer/tsdx)
 - [UnBuild: Unified JavaScript Build System](https://github.com/unjs/unbuild)
 - [Vue CLI](https://github.com/vuejs/vue-cli)
 - [Vite](https://github.com/vitejs/vite)
@@ -555,13 +555,12 @@ tags: [Web, Framework, Library]
 
 ### Table
 
-- [React DataTable: Hooks for Building Fast and Extendable Data Tables and Grids](https://github.com/tannerlinsley/react-table)
+- [TanStack Table: Fast and Extendable Tables and DataGrids Hook](https://github.com/TanStack/table)
 - [React DataSheet: Excel-like Data Tables and Grids component](https://github.com/nadbm/react-datasheet)
-- [TanStack Table: Hooks for Building Fast and Extendable Tables and DataGrids](https://github.com/TanStack/react-table)
 - [Glide Data Grid](https://github.com/glideapps/glide-data-grid)
 - [MUI DataTable: Data Tables for React using Material UI](https://github.com/gregnb/mui-datatables)
 - [Bootstrap Table](https://github.com/wenzhixin/bootstrap-table)
-- [Tabulator: Interactive Tables and Data Grids for JavaScript](https://github.com/olifolkerd/tabulator)
+- [Tabulator: Interactive Tables and Data Grids](https://github.com/olifolkerd/tabulator)
 - [SheetJS: Spreadsheet Data Toolkit](https://github.com/SheetJS/sheetjs)
 - [FortuneSheet: Rich Excel and Google Sheets Features Spreadsheet library](https://github.com/ruilisi/fortune-sheet)
 - [HyperFormula: Complete Excel-like Calculation Engine Written in TypeScript](https://github.com/handsontable/hyperformula)
@@ -1013,12 +1012,12 @@ tags: [Web, Framework, Library]
 
 - [JSCookie](https://github.com/js-cookie/js-cookie)
 - [React Cookie](https://github.com/reactivestack/cookies)
-- [Nookies: Cookie Helpers for Next.js](https://github.com/maticzav/nookies)
+- [Nookies: Next.js Cookie Helpers](https://github.com/maticzav/nookies)
 
 ### Web Storage
 
 - [LocalForage: IndexedDB, WebSQL and LocalStorage API Wrapper](https://github.com/localForage/localForage)
-- [RxDB: Fast, Offline-first, Reactive Database for JavaScript Applications](https://github.com/pubkey/rxdb)
+- [RxDB: Fast, Offline-first, Reactive Database](https://github.com/pubkey/rxdb)
 - [PouchDB: Pocket-sized and Offline-first Database for Browser](https://github.com/pouchdb/pouchdb)
 - [ImmortalDB: Relentless Key-value Store for Browser](https://github.com/gruns/ImmortalDB)
 
@@ -1312,7 +1311,7 @@ tags: [Web, Framework, Library]
 - [SuperTokens: Open Source Alternative to Auth0 / Firebase Auth / AWS Cognito](https://github.com/supertokens/supertokens-website)
 - [MD5](https://github.com/blueimp/JavaScript-MD5)
 - [Base64](https://github.com/dankogai/js-base64)
-- [NextAuth: Authentication for Next.js](https://github.com/nextauthjs/next-auth)
+- [NextAuth: Next.js Authentication](https://github.com/nextauthjs/next-auth)
 
 ## Debugging and Testing
 
@@ -1357,7 +1356,7 @@ tags: [Web, Framework, Library]
 ### Code Analysis Tools
 
 - [SourceGraph: Universal Code Search](https://github.com/sourcegraph/sourcegraph)
-- [SonarSource: Static Analyzer for JavaScript and TypeScript](https://github.com/SonarSource/SonarJS)
+- [SonarSource: Static Source Code Analyzer](https://github.com/SonarSource/SonarJS)
 - [Babel](https://github.com/babel/babel)
 - [Acorn](https://github.com/acornjs/acorn)
 - [AST Explorer](https://github.com/fkling/astexplorer)
@@ -1488,7 +1487,7 @@ tags: [Web, Framework, Library]
 ### DevOps Project and MonoRepo Tools
 
 - [NX](https://github.com/nrwl/nx)
-- [TurboRepo: High-performance Build System for JavaScript and TypeScript Codebases](https://github.com/vercel/turborepo)
+- [TurboRepo: High-performance Build System](https://github.com/vercel/turborepo)
 - [RushStack](https://github.com/microsoft/rushstack)
 - [Projen: New Generation of Project Generators](https://github.com/projen/projen)
 - [Bit](https://github.com/teambit/bit)
@@ -1590,9 +1589,9 @@ tags: [Web, Framework, Library]
 
 ### JavaScript Documentation
 
-- [JSDoc: API Documentation Generator for JavaScript](https://github.com/jsdoc/jsdoc)
-- [TypeDoc: Documentation Generator for TypeScript Projects](https://github.com/TypeStrong/typedoc)
-- [Documentation.js: Documentation for Modern JavaScript](https://github.com/documentationjs/documentation)
+- [JSDoc: JavaScript Documentation Generator](https://github.com/jsdoc/jsdoc)
+- [TypeDoc: TypeScript Documentation Generator](https://github.com/TypeStrong/typedoc)
+- [Documentation.js: Modern JavaScript Documentation](https://github.com/documentationjs/documentation)
 
 ### React Documentation
 
