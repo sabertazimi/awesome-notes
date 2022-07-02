@@ -1063,6 +1063,7 @@ tags: [Web, Framework, Library]
 - [TinyMCE: World #1 JavaScript Library for Rich Text Editing](https://github.com/tinymce/tinymce)
 - [StyloJS: TypeScript Rich Text Editor](https://github.com/papyrs/stylo)
 - [Lexical: Draft.js alternatives](https://github.com/facebook/lexical)
+- [Verbum: Fully Flexible Text Editor Based on Lexical Framework](https://github.com/ozanyurtsever/verbum)
 - [Draft: React Text Editor Framework](https://github.com/facebook/draft-js)
 - [Draft Plugins](https://github.com/draft-js-plugins/draft-js-plugins)
 - [TipTap: Collaborative and Headless WYSIWYG Text Editor Framework](https://github.com/ueberdosis/tiptap)
