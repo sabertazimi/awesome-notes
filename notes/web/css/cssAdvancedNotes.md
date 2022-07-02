@@ -1782,6 +1782,10 @@ const svgRectElement = document.createElementNS(
 );
 ```
 
+### SVG Reference
+
+- SVG filter complete [guide](https://blog.logrocket.com/complete-guide-using-css-filters-svgs).
+
 ## Media Query
 
 - Logical operators + media types + media features.
