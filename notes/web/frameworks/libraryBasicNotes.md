@@ -593,6 +593,7 @@ tags: [Web, Framework, Library]
 - [JSXGraph: Interactive Geometry, Function Plotting, Charting and Data Visualization in Browser](https://github.com/jsxgraph/jsxgraph)
 - [Cytoscape.js: Graph Theory (Network) Library for Visualization and Analysis](https://github.com/cytoscape/cytoscape.js)
 - [Airbnb: Visualization Components](https://github.com/airbnb/visx)
+- [NeoVis.js: Graph Visualization with Data from Neo4j](https://github.com/neo4j-contrib/neovis.js)
 
 ### Charts Draw Utils
 
