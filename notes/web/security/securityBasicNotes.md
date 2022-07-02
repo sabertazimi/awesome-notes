@@ -1387,5 +1387,6 @@ Distributed denial of service attack:
 - Open web application security project [cheat sheet](https://github.com/OWASP/CheatSheetSeries).
 - Open source security state of [2022](https://snyk.io/reports/open-source-security).
 - Web security [checklist](https://eggjs.org/zh-cn/core/security.html).
+- Security search [engines](https://github.com/edoardottt/awesome-hacker-search-engines).
 - ESLint node security [plugin](https://github.com/nodesecurity/eslint-plugin-security).
 - MetaSploit: penetration testing [framework](https://github.com/rapid7/metasploit-framework).
