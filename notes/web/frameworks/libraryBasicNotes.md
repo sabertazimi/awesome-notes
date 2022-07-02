@@ -483,7 +483,7 @@ tags: [Web, Framework, Library]
 ### Guide
 
 - [JoyRide: Awesome Guided Tours](https://github.com/gilbarbara/react-joyride)
-- [Shepherd: Guide Tour Library](https://github.com/shipshapecode/shepherd)
+- [Shepherd: Guide Tour Library](https://github.com/shipshapecode/react-shepherd)
 - [Intro.js](https://github.com/usablica/intro.js)
 - [Driver.js](https://github.com/kamranahmedse/driver.js)
 - [Wizard: React Stepper Guide](https://github.com/devrnt/react-use-wizard)
