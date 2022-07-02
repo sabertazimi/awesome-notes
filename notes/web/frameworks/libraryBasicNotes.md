@@ -1307,11 +1307,12 @@ tags: [Web, Framework, Library]
 - [Swagger UI: Generate Beautiful Documentation from Swagger-compliant API](https://github.com/swagger-api/swagger-ui)
 - [DevDocs](https://github.com/freeCodeCamp/devdocs)
 
-## Encryption and Security
+### Security
 
 - [SuperTokens: Open Source Alternative to Auth0 / Firebase Auth / AWS Cognito](https://github.com/supertokens/supertokens-website)
 - [MD5](https://github.com/blueimp/JavaScript-MD5)
 - [Base64](https://github.com/dankogai/js-base64)
+- [NextAuth: Authentication for Next.js](https://github.com/nextauthjs/next-auth)
 
 ## Debugging and Testing
 
