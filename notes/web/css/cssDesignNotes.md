@@ -372,6 +372,7 @@ table {
 - [Navigation](https://www.smashingmagazine.com/2022/04/designing-better-navigation-ux-queries)
 - [Language Selector](https://www.smashingmagazine.com/2022/05/designing-better-language-selector)
 - [Data Visualization](https://www.smashingmagazine.com/2022/06/web-design-done-well-delightful-data-visualization-examples)
+- [Pricing Page](https://smashingmagazine.com/2022/07/designing-better-pricing-page)
 
 ### HomePage User Experience
 
