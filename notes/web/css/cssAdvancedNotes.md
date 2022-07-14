@@ -830,6 +830,12 @@ body {
   height: 100%;
   object-fit: cover;
 }
+
+.image-container > .aspect-ratio {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
 ```
 
 ### Object Position
