@@ -77,6 +77,14 @@ class AnimalDB {
 }
 ```
 
+:::tip Exception Handle
+
+异常处理视作单独职责,
+抽离 `try catch` 代码块,
+使之成为单独函数.
+
+:::
+
 #### Open-Closed Principle
 
 Allow users to add new functionalities without changing existing code,
