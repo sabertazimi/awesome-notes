@@ -135,76 +135,82 @@ class CoderFilter {
 }
 ```
 
-```java
-const animals: Array<Animal> = [
-    new Animal('lion'),
-    new Animal('mouse')
-];
+```ts
+const animals: Array<Animal> = [new Animal('lion'), new Animal('mouse')];
 
 function AnimalSound(a: Array<Animal>) {
-    for(int i = 0; i <= a.length; i++) {
-        if(a[i].name == 'lion')
-            log('roar');
-        if(a[i].name == 'mouse')
-            log('squeak');
+  for (let i = 0; i <= a.length; i++) {
+    if (a[i].name === 'lion') {
+      log('roar');
     }
+
+    if (a[i].name === 'mouse') {
+      log('squeak');
+    }
+  }
 }
+
 AnimalSound(animals);
 ```
 
-```java
+```ts
 class Animal {
-        makeSound();
-        //...
+  makeSound();
+  // ...
 }
+
 class Lion extends Animal {
-    makeSound() {
-        return 'roar';
-    }
+  makeSound() {
+    return 'roar';
+  }
 }
+
 class Squirrel extends Animal {
-    makeSound() {
-        return 'squeak';
-    }
+  makeSound() {
+    return 'squeak';
+  }
 }
+
 class Snake extends Animal {
-    makeSound() {
-        return 'hiss';
-    }
+  makeSound() {
+    return 'hiss';
+  }
 }
-//...
+
 function AnimalSound(a: Array<Animal>) {
-    for(int i = 0; i <= a.length; i++) {
-        log(a[i].makeSound());
-    }
+  for (let i = 0; i <= a.length; i++) {
+    log(a[i].makeSound());
+  }
 }
+
 AnimalSound(animals);
 ```
 
-```java
+```ts
 class Discount {
-    giveDiscount() {
-        if(this.customer == 'fav') {
-            return this.price * 0.2;
-        }
-        if(this.customer == 'vip') {
-            return this.price * 0.4;
-        }
+  giveDiscount() {
+    if (this.customer === 'fav') {
+      return this.price * 0.2;
     }
+
+    if (this.customer === 'vip') {
+      return this.price * 0.4;
+    }
+  }
 }
 ```
 
-```java
-class VIPDiscount: Discount {
-    getDiscount() {
-        return super.getDiscount() * 2;
-    }
+```ts
+class VIPDiscount extends Discount {
+  getDiscount() {
+    return super.getDiscount() * 2;
+  }
 }
 
-class SuperVIPDiscount: VIPDiscount {
-    getDiscount() {
-        return super.getDiscount() * 2;
-    }
+class SuperVIPDiscount extends VIPDiscount {
+  getDiscount() {
+    return super.getDiscount() * 2;
+  }
 }
 ```
 
@@ -215,159 +221,182 @@ Altering shows that SubType should not be subtype of ParentType
 (break Open Closed Principle),
 you should re-design ParentType and SubType.
 
-```java
+```ts
 function AnimalLegCount(a: Array<Animal>) {
-    for(int i = 0; i <= a.length; i++) {
-        if(typeof a[i] == Lion)
-            log(LionLegCount(a[i]));
-        if(typeof a[i] == Mouse)
-            log(MouseLegCount(a[i]));
-        if(typeof a[i] == Snake)
-            log(SnakeLegCount(a[i]));
+  for (let i = 0; i <= a.length; i++) {
+    if (typeof a[i] === Lion) {
+      log(LionLegCount(a[i]));
     }
+
+    if (typeof a[i] === Mouse) {
+      log(MouseLegCount(a[i]));
+    }
+
+    if (typeof a[i] === Snake) {
+      log(SnakeLegCount(a[i]));
+    }
+  }
 }
+
 AnimalLegCount(animals);
 ```
 
-```java
+```ts
 class Animal {
-    //...
-    LegCount();
+  LegCount() {
+    return 2;
+  }
 }
 
-//...
-class Lion extends Animal{
-    //...
-    LegCount() {
-        //...
-    }
+class Lion extends Animal {
+  LegCount() {
+    return 4;
+  }
 }
-//...
 
 function AnimalLegCount(a: Array<Animal>) {
-    for(let i = 0; i <= a.length; i++) {
-        a[i].LegCount();
-    }
+  for (let i = 0; i <= a.length; i++) {
+    a[i].LegCount();
+  }
 }
+
 AnimalLegCount(animals);
 ```
 
 #### Interface Segregation Principle
 
 - Make **fine grained** interfaces that are client specific.
-- Clients should not be forced to depend upon interfaces that they do not use.
+- Clients should not be forced to depend upon interfaces that they do not use:
+  任何层次的软件设计如果依赖了它并不需要的东西, 就会带来意料之外的麻烦.
 
-```java
+```ts
 // BAD.
 interface IShape {
-    drawCircle();
-    drawSquare();
-    drawRectangle();
+  drawCircle();
+  drawSquare();
+  drawRectangle();
 }
 
 class Circle implements IShape {
-    drawCircle(){
-        //...
-    }
-    drawSquare(){
-        //...
-    }
-    drawRectangle(){
-        //...
-    }
+  drawCircle() {
+    // ...
+  }
+
+  drawSquare() {
+    // ...
+  }
+
+  drawRectangle() {
+    // ...
+  }
 }
+
 class Square implements IShape {
-    drawCircle(){
-        //...
-    }
-    drawSquare(){
-        //...
-    }
-    drawRectangle(){
-        //...
-    }
+  drawCircle() {
+    // ...
+  }
+
+  drawSquare() {
+    // ...
+  }
+
+  drawRectangle() {
+    // ...
+  }
 }
+
 class Rectangle implements IShape {
-    drawCircle(){
-        //...
-    }
-    drawSquare(){
-        //...
-    }
-    drawRectangle(){
-        //...
-    }
+  drawCircle() {
+    // ...
+  }
+
+  drawSquare() {
+    // ...
+  }
+
+  drawRectangle() {
+    // ...
+  }
 }
 ```
 
-```java
+```ts
 // GOOD.
 interface IShape {
-    draw();
+  draw();
 }
+
 interface ICircle {
-    drawCircle();
+  drawCircle();
 }
+
 interface ISquare {
-    drawSquare();
+  drawSquare();
 }
+
 interface IRectangle {
-    drawRectangle();
+  drawRectangle();
 }
+
 interface ITriangle {
-    drawTriangle();
+  drawTriangle();
 }
+
 class Circle implements ICircle {
-    drawCircle() {
-        //...
-    }
+  drawCircle() {
+    // ...
+  }
 }
+
 class Square implements ISquare {
-    drawSquare() {
-        //...
-    }
+  drawSquare() {
+    // ...
+  }
 }
+
 class Rectangle implements IRectangle {
-    drawRectangle() {
-        //...
-    }
+  drawRectangle() {
+    // ...
+  }
 }
+
 class Triangle implements ITriangle {
-    drawTriangle() {
-        //...
-    }
+  drawTriangle() {
+    // ...
+  }
 }
+
 class CustomShape implements IShape {
-   draw(){
-      //...
-   }
+  draw() {
+    // ...
+  }
 }
 ```
 
-```java
+```ts
 // GOOD.
 class Circle implements IShape {
-    draw(){
-        //...
-    }
+  draw() {
+    // ...
+  }
 }
 
 class Triangle implements IShape {
-    draw(){
-        //...
-    }
+  draw() {
+    // ...
+  }
 }
 
 class Square implements IShape {
-    draw(){
-        //...
-    }
+  draw() {
+    // ...
+  }
 }
 
 class Rectangle implements IShape {
-    draw(){
-        //...
-    }
+  draw() {
+    // ...
+  }
 }
 ```
 
@@ -384,54 +413,59 @@ Dependency should be on **abstractions** not concretions:
   - Better reusability.
   - Better testability.
 
-```java
+```ts
 class XMLHttpService extends XMLHttpRequestService {}
+
 class Http {
-    constructor(private xmlHttpService: XMLHttpService) { }
-    get(url: string , options: any) {
-        this.xmlHttpService.request(url,'GET');
-    }
-    post() {
-        this.xmlHttpService.request(url,'POST');
-    }
-    //...
+  constructor(private xmlHttpService: XMLHttpService) {}
+
+  get(url: string, options: any) {
+    this.xmlHttpService.request(url, 'GET');
+  }
+
+  post() {
+    this.xmlHttpService.request(url, 'POST');
+  }
 }
 ```
 
-```java
+```ts
 interface Connection {
-    request(url: string, opts:any);
+  request(url: string, opts: any);
 }
 
 // Abstraction not upon on details (but upon on abstractions)
 class Http {
-    constructor(private httpConnection: Connection) { }
-    get(url: string , options: any) {
-        this.httpConnection.request(url,'GET');
-    }
-    post() {
-        this.httpConnection.request(url,'POST');
-    }
-    //...
+  constructor(private httpConnection: Connection) {}
+
+  get(url: string, options: any) {
+    this.httpConnection.request(url, 'GET');
+  }
+
+  post() {
+    this.httpConnection.request(url, 'POST');
+  }
 }
 
 class XMLHttpService implements Connection {
-    const xhr = new XMLHttpRequest();
-    //...
-    request(url: string, opts:any) {
-        xhr.open();
-        xhr.send();
-    }
+  xhr = new XMLHttpRequest();
+
+  request(url: string, opts: any) {
+    xhr.open();
+    xhr.send();
+  }
 }
+
 class NodeHttpService implements Connection {
-    request(url: string, opts:any) {
-        //...
-    }
+  request(url: string, opts: any) {
+    // ...
+  }
 }
+
 class MockHttpService implements Connection {
-    request(url: string, opts:any) {
-        //...
-    }
+  request(url: string, opts: any) {
+    // ...
+  }
 }
 ```
 
@@ -2010,9 +2044,11 @@ class Cursor {
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.ctx.beginPath();
     this.ctx.moveTo(this.position.x, this.position.y);
+
     for (let i = 0; i < this.commandStack.length; i++) {
       this.commandStack[i]();
     }
+
     this.ctx.stroke();
   }
 
@@ -2412,6 +2448,7 @@ class MicroEvent {
 
   trigger(event, ...args) {
     this._events = this._events || {};
+
     if (event in this._events === false) {
       return;
     }
