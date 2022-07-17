@@ -8,6 +8,8 @@ tags: [Programming, DevOps, Design Pattern, Clean Architecture]
 
 # Clean Architecture Basic Notes
 
+![Clean Architecture](./figures/CleanArchitecture.png)
+
 ## Domain Driven Design
 
 ### Interface Layer
