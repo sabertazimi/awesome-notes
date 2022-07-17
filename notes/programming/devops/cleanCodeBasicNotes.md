@@ -3405,6 +3405,17 @@ Bad code smell:
 - Inline function: 简化代码.
 - Extract variable: 引入解释性变量.
 - Inline variable: 简化代码.
+- Change functin declaration: 优化可读性.
+- Rename variable: 优化可读性.
+
+### Encapsulation Refactoring
+
+- Introduce parameter object: 减少函数参数, 封装数据.
+- Encapsulate record: 将键值对封装成对象.
+- Encapsulate Collection: 将集合封装成对象.
+- Encapsulate primitive: 将基本类型封装成对象.
+- Combine function into class.
+- Combine function into transform.
 
 ## Reference
 
