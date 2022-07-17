@@ -3416,6 +3416,7 @@ Bad code smell:
 - Encapsulate primitive: 将基本类型封装成对象.
 - Combine function into class.
 - Combine function into transform.
+- Extract class: 模块化代码.
 
 ## Reference
 
