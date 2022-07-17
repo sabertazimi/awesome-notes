@@ -3169,6 +3169,12 @@ Adding nondeterministic choice gives concurrent logic programming
 Adding ports or cells, gives message passing or shared state
 (named, nondeterministic, concurrent).
 
+### Object-Oriented Programming
+
+- 封装: 模块化代码, 信息隐蔽.
+- 继承: 父类和子类共享数据和方法, 高代码重用率和可维护性.
+- 多态.
+
 ### Functional Programming
 
 Based on the concept of first-class function or closure,
