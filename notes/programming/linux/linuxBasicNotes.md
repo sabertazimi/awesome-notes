@@ -881,18 +881,24 @@ finger apacheUser 查看单个用户信息
 
 ## Disk IO Commands
 
-主分区(primary)与延伸分区(extended) 延伸分区可以继续划分成逻辑分区(logical)
+主分区 (primary) 与延伸分区 (extended) 延伸分区可以继续划分成逻辑分区 (logical).
 
 ### 挂载命令
 
+```bash
 mount [-t 文件系统][-o 特殊选项] 设备文件名 挂载点(挂载目录/media /misc /mnt)
+```
 
-- 无参数 显示当前挂载设备
-- -a 依据/etc/fstab 文件配置,自动挂载
+- 无参数: 显示当前挂载设备.
+- `-a`: 依据 `/etc/fstab` 文件配置, 自动挂载.
 
+```bash
 umount 设备文件名/挂载点
+```
 
+```bash
 fdisk –l
+```
 
 ### 修复命令
 

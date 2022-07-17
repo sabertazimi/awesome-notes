@@ -320,7 +320,7 @@ ll mod_pow(ll x, ll n, ll mod) {
 
 - 对于实际操作, 直接覆写至状态数组即可, 无需关心边界条件(效果会立即生效)
 
-> e.g 交接处方块 , 2 次写 1, maps[i][j] = 1, 不用担心重复计数
+> e.g 交接处方块 , 2 次写 1, `maps[i][j] = 1`, 不用担心重复计数.
 
 ### Reverting Simulation
 
@@ -373,9 +373,9 @@ Quickly figure out connection of map.
 
 ## Dynamic Programming
 
-- dp 数组可以滚动使用, 从而节省空间
+dp 数组可以滚动使用, 从而节省空间:
 
-> dp[m][n] => dp[2][n] (dp[i & 1][j])
+> `dp[m][n]` => `dp[2][n]` (`dp[i & 1][j]`).
 
 ### Basic Dynamic Programming Problem
 
@@ -400,8 +400,8 @@ Quickly figure out connection of map.
 
 暴力 + 存储 = 记忆化搜索:
 
-- 暴力枚举每一位的 (0, ...,9)
-- 利用 dp[pos][state] 与 dfs(pos, state, k, flag) 进行存储
+- 暴力枚举每一位的 `(0, ...,9)`.
+- 利用 `dp[pos][state]` 与 `dfs(pos, state, k, flag)` 进行存储.
 
 ```cpp
 /// \brief 数字处理函数
