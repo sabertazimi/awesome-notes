@@ -3128,6 +3128,11 @@ console.log(timestampedActiveTableUserExample.isActivated);
 
 Each programming language realizes one or more paradigms.
 Each paradigm is defined by a set of programming concepts.
+每个范式都约束了某种编写代码的方式:
+
+- 结构化编程是对程序控制权的直接转移的限制.
+- 面向对象编程是对程序控制权的间接转移的限制.
+- 函数式编程是对程序中赋值操作的限制.
 
 ### Taxonomy of Paradigms
 
