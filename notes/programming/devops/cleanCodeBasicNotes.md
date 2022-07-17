@@ -3397,6 +3397,15 @@ Bad code smell:
 - 是否检查了数组的`越界`错误?
 - 是否有可以被已经存在的 API 所替代的测.
 
+## Refactoring
+
+### Refactoring Basis
+
+- Extract function: 复用代码.
+- Inline function: 简化代码.
+- Extract variable: 引入解释性变量.
+- Inline variable: 简化代码.
+
 ## Reference
 
 - JavaScript [patterns](https://www.patterns.dev).
