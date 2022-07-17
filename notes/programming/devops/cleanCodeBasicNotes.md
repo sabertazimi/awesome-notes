@@ -3353,6 +3353,22 @@ Nest.js 通过 AOP 的架构方式, 实现了松耦合, 易于维护与扩展的
 - 代码误注释.
 - 死循环: 边界检查.
 
+### Code Smell Review
+
+Bad code smell:
+
+- Mysterious name.
+- Duplicated code.
+- Long function.
+- Long parameter list.
+- Large class.
+- Global data.
+- Mutable data.
+- Divergent change (发散式变化):
+  某个模块经常因为不同的原因在不同的方向上发生变化.
+- Shotgun surgery (霰弹式修改):
+  每遇到某种变化, 必须在许多不同的类内做出许多小修改.
+
 ### Security Review
 
 - 所有的数据输入是否都进行了检查 (检测正确的类型, 长度, 格式和范围) 并且进行了编码?
