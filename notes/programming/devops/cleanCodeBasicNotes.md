@@ -3417,6 +3417,29 @@ Bad code smell:
 - Combine function into class.
 - Combine function into transform.
 - Extract class: 模块化代码.
+- 字段与方法的上移: 复用代码.
+- 字段与方法的下移: 接口隔离.
+- 用组合 (Composite) 与委托 (Delegate) 代替继承 (Extend):
+  将紧耦合转化为松耦合.
+
+### Condition Refactoring
+
+- Decompose conditional statement: 引入解释性条件语句或函数.
+- Use guard clause and assertion: 消除复杂嵌套条件语句.
+- 消除不必要条件语句:
+  - Introduce special case.
+  - Polymorphism: e.g strategy pattern.
+
+### API Refactoring
+
+- Split query from modifier: 提取副作用语句.
+- Parameterize function:
+  两个函数逻辑非常相似, 只有一些字面量值不同,
+  可以将其合并成一个函数, 以参数的形式传入不同的值, 从而消除重复代码.
+- Remove flag argument:
+  针对参数的每一种可能值, 新建一个明确函数, 优化可读性.
+- Factory pattern: 封装构造函数.
+- command pattern: 封装普通函数.
 
 ## Reference
 
