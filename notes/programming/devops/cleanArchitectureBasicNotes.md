@@ -64,6 +64,12 @@ Domain 层是领域模型系统的核心,
 - Wrap third-party libraries other using them directly:
   - Abstract: changing dependencies without changing interface.
   - Extendability: More obvious route to extending functionality.
+- Stability:
+  组件结构依赖图中各组件的稳定性指标 I 必须要按其依赖关系方向递减,
+  让每个组件的 I 指标都必须大于其所依赖组件的 I 指标,
+  `I = FanOut / (FanOut + FanIn)`,
+  `I = 0` 表示不依赖任何模块 (最稳定),
+  `I = 1` 表示不被任何模块依赖 (最不稳定).
 
 ## 高并发系统设计
 
