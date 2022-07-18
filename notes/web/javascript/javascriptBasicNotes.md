@@ -3375,6 +3375,25 @@ Object.defineProperties(o, {
 });
 ```
 
+Object keys (excluding Symbols) are strings under the hood,
+object keys are automatically converted into strings:
+
+```ts
+const obj = { 1: 'a', 2: 'b', 3: 'c' };
+const set = new Set([1, 2, 3, 4, 5]);
+Object.hasOwn(obj, '1'); // true
+Object.hasOwn(obj, 1); // true
+set.has('1'); // false
+set.has(1); // true
+
+const a = {};
+const b = { key: 'b' };
+const c = { key: 'c' };
+a[b] = 123;
+a[c] = 456;
+console.log(a[b]); // a["[object Object]"] = 456
+```
+
 #### Property Descriptor Functions
 
 - `Object.create(prototype[, descriptors])`.
