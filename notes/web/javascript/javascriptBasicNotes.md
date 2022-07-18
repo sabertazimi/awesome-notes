@@ -2236,6 +2236,12 @@ function ToNumber(argument) {
 }
 ```
 
+`ToPrimitive`:
+
+- `[Symbol.toPrimitive]()`.
+- `toString()`.
+- `valueOf()`.
+
 ```ts
 /**
  * @param hint Which type is preferred for the result string, number etc.
