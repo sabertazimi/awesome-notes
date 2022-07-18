@@ -72,6 +72,7 @@ tags: [Web, JavaScript, ECMAScript, DevOps, Testing]
   - Timer API: `jest.useFakerTimers()`/`jest.advanceTimersByTime()`/`cy.clock()`.
   - `Date` API: `jest.spyOn(Date.prototype)`/`cy.tick()`.
   - `Math.random()` API: `jest.spyOn()`/`jest.mock()`/`cy.stub()`.
+- 如果不能保持测试套件的**确定性**和**速度**, 那么它将成为生产力的障碍.
 
 ### AAA Pattern
 
