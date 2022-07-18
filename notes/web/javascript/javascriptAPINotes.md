@@ -1658,7 +1658,8 @@ console.log(myElement.get('display').value); // 'initial'
 
 - `event.preventDefault()`.
 - `event.stopPropagation()`.
-- Default `bubble` mode, can change to `capture` mode.
+- By default, event handlers are executed in the **bubbling** phase
+  (unless set `useCapture` to `true`).
 - `element.dispatchEvent(event)` to trigger events.
 
 #### Events Object
