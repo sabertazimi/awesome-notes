@@ -2668,6 +2668,12 @@ Universal module definition:
   - 模块代码默认在严格模式下执行.
 - Static:
   - `Static` and `Read-only` imports: 模块是静态结构.
+    - Imported module is `Pre-parsed`:
+      imported modules get run first,
+      code which imports module gets executed after.
+    - Imported module is `Read-only`:
+      code which imports module cannot modify imported module,
+      only module which exports them can change its value.
   - Static analysis.
   - Tree shaking.
   - Compact bundling.
