@@ -1396,6 +1396,8 @@ flattenDeep([1, [[2], [3, [4]], 5]]);
 
 `reduce`/`reduceRight`:
 
+- Accumulator: initial value, otherwise `array[0]`.
+- Current value: `array[0]`, otherwise `array[1]`.
 - Implement array sets manipulation (`reduce`/`filter`/`includes`).
 - Implement `XXXBy` functional methods.
 
