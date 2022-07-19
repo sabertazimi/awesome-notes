@@ -4612,7 +4612,7 @@ Constructor invocation (`new` call):
 - Not suited as `new` constructor:
   - No `super` binding (**lexical scope**).
   - No `new.target` binding (**lexical scope**).
-- No `function.prototype`.
+- No `function.prototype`: arrow function `prototype` property is `undefined`.
 
 ```ts
 const obj = {
