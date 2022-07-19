@@ -2508,7 +2508,7 @@ console.log(old); // { data: 5 }
 console.log(old.data); // 5
 ```
 
-### Logical Operators
+### Logical Operator
 
 - Optional Chaining Operator `?.`:
   Legible property chains that don't throw an error
@@ -2525,7 +2525,25 @@ console.log(old.data); // 5
 | `a &&= b`           | `a && (a = b)`   | Truthy                |
 | `a ??= b`           | `a ?? (a = b)`   | Nullish               |
 
-### Operators Reference
+### Delete Operator
+
+`delete` operator returns a boolean value:
+
+- `true` on a successful deletion.
+- `false` on a failed deletion:
+  `var`/`let`/`const` variables cannot be deleted using `delete` operator.
+
+```ts
+const name = 'Lydia';
+age = 21;
+
+// eslint-disable-next-line no-delete-var
+console.log(delete name); // false
+// eslint-disable-next-line no-delete-var
+console.log(delete age); // true
+```
+
+### Operator Reference
 
 - [Operator Lookup](https://www.joshwcomeau.com/operator-lookup)
 
