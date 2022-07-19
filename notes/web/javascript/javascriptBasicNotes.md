@@ -4791,6 +4791,8 @@ function setValuePure(obj, val) {
 }
 ```
 
+#### Default Parameter
+
 默认参数:
 
 - 默认参数可以使用原子值/对象值/函数返回值.
@@ -4800,7 +4802,14 @@ function setValuePure(obj, val) {
 ```ts
 // Mark required parameters via a function that throws an exception
 function foo(required = throwException()) {}
+```
 
+#### Rest Parameter
+
+- Rest parameter is array containing all remaining arguments.
+- Rest parameter can only be **last** parameter.
+
+```ts
 // Enforcing a maximum parameters
 function f(x, y, ...empty) {
   if (empty.length > 0) {
