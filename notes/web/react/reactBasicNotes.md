@@ -646,7 +646,13 @@ class CssThemeProvider extends React.PureComponent<Props> {
 **不建议使用** [`String Refs`](https://github.com/facebook/react/pull/8333#issuecomment-271648615):
 
 - React 无法获取 `this` 引用, 需要持续追踪当前`render`出的组件, 性能变慢.
-- `String Refs` 不可组合化, `Callback Refs` 可组合化.
+- `String Refs` 不可组合化:
+  if library puts ref on passed child, user can't put another ref on it.
+  `Callback Refs` are perfectly composable.
+- `String Refs` don't work with static analysis:
+  `Flow` can't guess the magic that framework does to make string ref appear on `this.refs`,
+  as well as its type (which could be different).
+  `Callback Refs` are friendly to static analysis.
 
 ```tsx
 class Foo extends Component {
