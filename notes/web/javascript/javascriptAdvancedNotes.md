@@ -2788,7 +2788,7 @@ Import map `importmap`:
   3. **`Destructuring`** behavior create a brand new value.
   4. function/class special case:
      `export default function/class thing() {}; // function/class expressions`
-     export default reference,
+     export live reference,
      `function/class thing() {}; export default thing; // function/class statements`
      export default value.
 
