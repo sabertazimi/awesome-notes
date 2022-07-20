@@ -10,7 +10,7 @@ tags: [Web, React]
 
 ## Props and States
 
-### setState
+### SetState
 
 - `setState` Synchronous Way:
   When it comes `blocking mode`
@@ -2226,12 +2226,12 @@ Context 中只定义被大多数组件所共用的属性
 (avoid **Prop Drilling**):
 
 - Global state.
-- Theme.
-- Preferred language.
+- UI Theme.
+- Preferred locale language.
 - Application configuration.
-- Authenticated user name.
-- User settings.
-- Collection of services.
+- User setting.
+- Authenticated user.
+- Service collection.
 
 频繁的 Context value 更改会导致依赖 value 的组件
 穿透 `shouldComponentUpdate`/`React.memo` 进行 `forceUpdate`,
