@@ -584,6 +584,7 @@ Don't trust user:
   - `"` -> `&quot;`, `&` -> `&amp;`, `'` -> `&apos;`, `<` -> `&lt;`, `>` -> `&gt;`.
   - `input.replace(/<script>|<script/>/g, '')`.
   - `input.trim()`.
+  - React DOM escapes any values embedded in JSX before rendering them.
 - Secure encode output result (输出编码):
   保证**编码方式一致**, e.g 混用单字节编码与多字节编码, 导致攻击者绕过 `\` 系统转义符.
 - Check HTTP `Content-Type` header.
