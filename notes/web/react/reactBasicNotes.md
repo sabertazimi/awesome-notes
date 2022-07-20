@@ -2388,6 +2388,10 @@ class ErrorBoundary extends React.Component {
 
 ### React Fragment
 
+- Less node, less memory, faster performance.
+- Avoid extra parent-child relationship for CSS flex and grid layout.
+- DOM debug inspector is less cluttered.
+
 ```tsx
 class Items extends React.Component {
   render() {
