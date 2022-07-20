@@ -1711,7 +1711,7 @@ type Input =
   | CheckboxInputDefinition;
 ```
 
-### React Portals Types
+### React Portal Types
 
 ```tsx
 const modalRoot = document.getElementById('modal-root') as HTMLElement;
@@ -1846,7 +1846,7 @@ const reducer = (state: State, action: Action): Reducer<State, Action> => {
 };
 ```
 
-### React Hooks Types
+### React Hook Types
 
 - `useState<T>`
 - `Dispatch<T>`
@@ -2430,9 +2430,9 @@ class Frameworks extends React.Component {
 }
 ```
 
-### React Portals
+### React Portal
 
-Portals provide a first-class way to render children into a DOM node
+Portal provide a first-class way to render children into a DOM node
 that exists **outside** the DOM hierarchy of the parent component
 `ReactDOM.createPortal(child, container)`.
 
