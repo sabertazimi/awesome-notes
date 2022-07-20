@@ -403,7 +403,7 @@ React 协调阶段的生命周期钩子可能会被调用多次,
 #### Creation and Mounting Phase
 
 `constructor(props, context)`
--> `getDerivedStateFromProps()`
+-> `static getDerivedStateFromProps()`
 -> `render()`
 -> `componentDidMount()`.
 
@@ -415,19 +415,24 @@ Update for three reasons:
 - `this.setState()` called.
 - `this.forceUpdate()` called.
 
-`getDerivedStateFromProps()`
+`static getDerivedStateFromProps()`
 -> `shouldComponentUpdate(nextProps, nextState)`
 -> `render()`
 -> `getSnapshotBeforeUpdate()`
 -> `componentDidUpdate(prevProps, prevState)`.
 
-getSnapshotBeforeUpdate:
+`getSnapshotBeforeUpdate()`:
 在最新的渲染输出提交给 DOM 前将会立即调用,
 这对于从 DOM 捕获信息（比如：滚动位置）很有用.
 
 #### Unmounting Phase
 
-componentWillUnmount()
+`componentWillUnmount()`.
+
+#### Error Handling Phase
+
+`static getDerivedStateFromError()`
+-> `componentDidCatch()`.
 
 ### Render Function
 
