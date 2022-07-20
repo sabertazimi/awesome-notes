@@ -956,7 +956,6 @@ tags: [Web, Framework, Library]
 - [Node Emailer](https://github.com/nodemailer/nodemailer)
 - [Email Parser](https://github.com/nodemailer/mailparser)
 - [Email Generator](https://github.com/eladnava/mailgen)
-- [MJML Markup Language](https://github.com/mjmlio/mjml)
 - [IMAP](https://github.com/mscdex/node-imap)
 - [MailSpring](https://github.com/Foundry376/Mailspring)
 - [Email Status](https://github.com/reacherhq/check-if-email-exists)
