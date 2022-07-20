@@ -392,11 +392,13 @@ class Component {
   - componentWillUnmount.
   - componentDidCatch.
 
-因为协调阶段可能被中断、恢复，甚至重做,
+因为协调阶段可能被中断与恢复, 甚至重做,
 React 协调阶段的生命周期钩子可能会被调用多次,
 **协调阶段的生命周期钩子不要包含副作用**: e.g `fetch` promises, `async` functions.
 通过 [`React.StrictMode`](https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects)
 可以自动检测应用中隐藏的问题.
+
+[![React Component Lifecycle](./figures/ReactComponentLifecycle.png)](https://reactjs.org/docs/react-component.html#the-component-lifecycle)
 
 #### Creation and Mounting Phase
 
