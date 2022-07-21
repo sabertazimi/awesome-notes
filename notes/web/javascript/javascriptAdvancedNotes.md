@@ -5328,7 +5328,8 @@ console.log('script end');
 // setTimeout.
 ```
 
-`await a(); b()` 等价于 `Promise(a()).then(b())`: a 是同步执行, b 是 MicroTask:
+`await a(); b()` 等价于 `Promise(a()).then(b())`,
+`a` 是同步执行, `b` 是 MicroTask:
 
 ```ts
 async function async1() {
