@@ -3414,6 +3414,12 @@ a[c] = 456;
 console.log(a[b]); // a["[object Object]"] = 456
 ```
 
+Object keys 遍历顺序:
+
+- 首先遍历所有数值键, 按照数值升序排列.
+- 其次遍历所有字符串键, 按照加入时间升序排列.
+- 最后遍历所有 `Symbol` 键, 按照加入时间升序排列.
+
 #### Property Descriptor Functions
 
 - `Object.create(prototype[, descriptors])`.
