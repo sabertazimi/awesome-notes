@@ -39,14 +39,16 @@ and prefer `v-if` if the condition is unlikely to change at runtime (lifecycle c
 :::tip For and If Directive
 
 - 不要把 `v-if` 和 `v-for` 同时用在同一个元素上,
-  会带来性能方面的浪费
-  (`v-for` 优先级高于 `v-if`, 每次渲染都会先循环再进行条件判断).
+  会带来性能方面的浪费,
+  且有语法歧义:
+  Vue 2.x 中 `v-for` 优先级高于 `v-if`,
+  Vue 3.x 中 `v-if` 优先级高于 `v-for`.
 - 外层嵌套 template (页面渲染不生成 DOM 节点),
   在这一层进行 `v-if` 判断,
   然后在内部进行 `v-for` 循环.
 
 ```ts
-// compiler/codegen/index.js
+// Vue 2.x: compiler/codegen/index.js
 export function genElement(el: ASTElement, state: CodegenState): string {
   if (el.parent) {
     el.pre = el.pre || el.parent.pre;
