@@ -4663,6 +4663,8 @@ func(); // `this` in `inner` function refer to `window`
 
 ### Context and Scope
 
+[执行上下文](https://juejin.cn/post/6844903682283143181):
+
 - 每个上下文都有一个关联的变量对象 (**Variable Object**),
   这个上下文中定义的所有变量和函数都存在于这个对象上.
 - 每个执行环境拥有独立的作用域链, 例如独立**活动对象** -> 独立全局对象:
