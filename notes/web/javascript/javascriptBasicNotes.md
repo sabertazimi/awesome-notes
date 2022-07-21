@@ -3608,6 +3608,23 @@ function mapObject(object, callback, thisValue) {
 }
 ```
 
+| Operation (**Only Enumerable**) | String Key | Symbol Key | Inherited |
+| ------------------------------- | ---------- | ---------- | --------- |
+| `Object.keys()`                 | ✔          | ✘          | ✘         |
+| `Object.values()`               | ✔          | ✘          | ✘         |
+| `Object.entries()`              | ✔          | ✘          | ✘         |
+| `Object.assign()`               | ✔          | ✔          | ✘         |
+| Spreading `{...x}`              | ✔          | ✔          | ✘         |
+| `JSON.stringify()`              | ✔          | ✘          | ✘         |
+| `for...in`                      | ✔          | ✘          | ✔         |
+
+| Operation (**Include Non-enumerable**) | String Key | Symbol Key | Inherited |
+| -------------------------------------- | ---------- | ---------- | --------- |
+| `Object.getOwnPropertyNames()`         | ✔          | ✘          | ✘         |
+| `Object.getOwnPropertySymbols()`       | ✘          | ✔          | ✘         |
+| `Object.getOwnPropertyDescriptors()`   | ✔          | ✔          | ✘         |
+| `Reflect.ownKeys()`                    | ✔          | ✔          | ✘         |
+
 - `Object.preventExtensions(O)`/`Object.isExtensible(O)`:
   不可新增属性, 可删除/修改属性.
 - `Object.seal(O)`/`Object.isSealed(O)`:
@@ -3628,23 +3645,6 @@ obj.foo.qux = 'abc';
 console.log(obj.foo.qux);
 // 'abc'
 ```
-
-| Operation (**Only Enumerable**) | String Key | Symbol Key | Inherited |
-| ------------------------------- | ---------- | ---------- | --------- |
-| `Object.keys()`                 | ✔          | ✘          | ✘         |
-| `Object.values()`               | ✔          | ✘          | ✘         |
-| `Object.entries()`              | ✔          | ✘          | ✘         |
-| `Object.assign()`               | ✔          | ✔          | ✘         |
-| Spreading `{...x}`              | ✔          | ✔          | ✘         |
-| `JSON.stringify()`              | ✔          | ✘          | ✘         |
-| `for...in`                      | ✔          | ✘          | ✔         |
-
-| Operation (**Include Non-enumerable**) | String Key | Symbol Key | Inherited |
-| -------------------------------------- | ---------- | ---------- | --------- |
-| `Object.getOwnPropertyNames()`         | ✔          | ✘          | ✘         |
-| `Object.getOwnPropertySymbols()`       | ✘          | ✔          | ✘         |
-| `Object.getOwnPropertyDescriptors()`   | ✔          | ✔          | ✘         |
-| `Reflect.ownKeys()`                    | ✔          | ✔          | ✘         |
 
 ### Private Property and Method
 
