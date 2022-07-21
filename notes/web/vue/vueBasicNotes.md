@@ -29,9 +29,51 @@ tags: [Web, Vue]
 </template>
 ```
 
-:::tip
-Prefer `v-show` if you need to toggle something very often,
-and prefer `v-if` if the condition is unlikely to change at runtime.
+:::tip Show and If Directive
+
+Prefer `v-show` if you need to toggle something very often (`display: none`),
+and prefer `v-if` if the condition is unlikely to change at runtime (lifecycle called).
+
+:::
+
+:::tip For and If Directive
+
+- 不要把 `v-if` 和 `v-for` 同时用在同一个元素上,
+  会带来性能方面的浪费
+  (`v-for` 优先级高于 `v-if`, 每次渲染都会先循环再进行条件判断).
+- 外层嵌套 template (页面渲染不生成 DOM 节点),
+  在这一层进行 `v-if` 判断,
+  然后在内部进行 `v-for` 循环.
+
+```ts
+// compiler/codegen/index.js
+export function genElement(el: ASTElement, state: CodegenState): string {
+  if (el.parent) {
+    el.pre = el.pre || el.parent.pre;
+  }
+
+  if (el.staticRoot && !el.staticProcessed) {
+    return genStatic(el, state);
+  } else if (el.once && !el.onceProcessed) {
+    return genOnce(el, state);
+  } else if (el.for && !el.forProcessed) {
+    return genFor(el, state);
+  } else if (el.if && !el.ifProcessed) {
+    return genIf(el, state);
+  } else if (el.tag === 'template' && !el.slotTarget && !state.pre) {
+    return genChildren(el, state) || 'void 0';
+  } else if (el.tag === 'slot') {
+    return genSlot(el, state);
+  } else {
+    // component or element
+  }
+}
+```
+
+```html
+<template v-if="isShow"><p v-for="item in items"></p></template>
+```
+
 :::
 
 ### Attributes Binding Directive
