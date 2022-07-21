@@ -1785,13 +1785,17 @@ template 属性存在, render 方法不存在时:
 - runtime with compiler 版本会在 JavaScript 运行时进行模板编译, 生成 render 函数.
 - runtime only 版本会打印警告信息, 提示用户使用 runtime with compiler 版本或者使用使用 `vue-loader` 进行静态编译.
 
-### Vue Compilation Performant Improvements
+### Vue Compilation Performance
 
 - Shorten template helper function with prefix `_v`/`_s` etc.
 - Hoist static template blocks,
   eliminate unnecessary virtual DOM diff effort,
   only track dynamic VNode.
-- Cache event handlers (like `useCallback` in React).
+- Cache event handlers (React `useCallback`):
+  默认情况下绑定事件行为会被视为动态绑定,
+  所以每次都会去追踪它的变化,
+  开启事件侦听器缓存后,
+  直接复用事件处理器.
 
 ```ts
 const enum PatchFlags {
