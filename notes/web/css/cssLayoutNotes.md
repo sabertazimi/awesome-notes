@@ -444,10 +444,10 @@ Character box/em-box/selection box:
 
 BFC 包含创建该上下文元素的所有子元素 (包含性):
 
-- 包含内部所有元素的上下外边距, 它们不会跟 BFC 外部的元素产生外边距折叠.
+- 包含内部所有元素的上下外边距:
+  它们不会跟 BFC 外部的元素产生外边距折叠 (avoid margin collapse).
 - 包含内部所有的浮动元素:
-  计算 BFC 的高度时, 浮动元素也参与计算,
-  可防止内边距塌陷 (`margin-top` collapse with `margin-bottom`).
+  计算 BFC 的高度时, 浮动元素也参与计算 (avoid height collapse).
 - 不包含创建了新 BFC 的子元素的内部元素.
 
 BFC 是页面上的一个隔离的独立容器 (隔离性):
