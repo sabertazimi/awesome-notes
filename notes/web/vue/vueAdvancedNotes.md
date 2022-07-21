@@ -2686,10 +2686,13 @@ console.assert(total.value === 36);
   - 如果对象内部要全部递归代理, 则 `Proxy` 可以只在调用时递归.
   - `Object.defineProperty` 需要在一开始就全部递归.
 - Feature:
-  - 对象上定义新属性时, 只有 `Proxy` 可以监听到.
-  - 数组新增删除修改时, 只有 `Proxy` 可以监听到.
-  - `Object.defineProperty` 无法监听数组, `Proxy` 则可以直接监听数组变化.
-  - Vue2: 重写数组方法监听数组变化, Vue3: `Proxy` 监听数组变化.
+  - 对象上定义新属性时, 只有 `Proxy` 可以监听到:
+    - Vue2: 提供 `Vue.set`/`Vue.delete` 等辅助方法.
+    - Vue3: `Proxy` 监听新属性.
+  - 数组新增删除修改时, 只有 `Proxy` 可以监听到:
+    - `Object.defineProperty` 无法监听数组, `Proxy` 则可以直接监听数组变化.
+    - Vue2: 重写数组方法监听数组变化.
+    - Vue3: `Proxy` 监听数组变化.
 - `Proxy` 不兼容 IE, `Object.defineProperty` 不兼容 IE8 及以下.
 
 Vue 2:
