@@ -1794,6 +1794,22 @@ template 属性存在, render 方法不存在时:
 - Cache event handlers (like `useCallback` in React).
 
 ```ts
+const enum PatchFlags {
+  TEXT = 1, // 动态的文本节点
+  CLASS = 1 << 1, // 2 动态的 class
+  STYLE = 1 << 2, // 4 动态的 style
+  PROPS = 1 << 3, // 8 动态属性，不包括类名和样式
+  FULL_PROPS = 1 << 4, // 16 动态 key，当 key 变化时需要完整的 diff 算法做比较
+  HYDRATE_EVENTS = 1 << 5, // 32 表示带有事件监听器的节点
+  STABLE_FRAGMENT = 1 << 6, // 64 一个不会改变子节点顺序的 Fragment
+  KEYED_FRAGMENT = 1 << 7, // 128 带有 key 属性的 Fragment
+  UNKEYED_FRAGMENT = 1 << 8, // 256 子节点没有 key 的 Fragment
+  NEED_PATCH = 1 << 9, // 512
+  DYNAMIC_SLOTS = 1 << 10, // 动态 solt
+  HOISTED = -1, // 特殊标志是负整数表示永远不会用作 diff
+  BAIL = -2, // 一个特殊的标志，指代差异算法
+}
+
 function isStatic(node: ASTNode): boolean {
   if (node.type === 2) {
     // expression
