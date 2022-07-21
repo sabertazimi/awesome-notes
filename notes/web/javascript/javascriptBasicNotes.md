@@ -4607,6 +4607,19 @@ Constructor invocation (`new` call):
 - `this` 绑定至传入的空对象.
 - `new.target` 引用构造函数.
 
+```ts
+function newConstructor(Func, ...args) {
+  // 1. 创建一个新对象
+  const obj = {};
+  // 2. 新对象原型指向构造函数原型对象
+  obj[[proto]] = Func.prototype;
+  // 3. 将构建函数的 `this` 指向新对象
+  const result = Func.apply(obj, args);
+  // 4. 返回对象
+  return result instanceof Object ? result : obj;
+}
+```
+
 :::tip Function Invocation Priority
 
 `new` constructor invocation >
