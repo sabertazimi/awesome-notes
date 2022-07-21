@@ -4607,6 +4607,15 @@ Constructor invocation (`new` call):
 - `this` 绑定至传入的空对象.
 - `new.target` 引用构造函数.
 
+:::tip Function Invocation Priority
+
+`new` constructor invocation >
+explicit invocation >
+implicit invocation >
+default invocation.
+
+:::
+
 ### Arrow Function Invocation
 
 - No `this` binding (**lexical scope**):
