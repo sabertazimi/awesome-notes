@@ -910,10 +910,11 @@ export default App;
 
 ## React Synthetic Events
 
-- Events Delegation:
+- Events delegation:
   - React 16: delegate events handlers on `document` DOM node.
   - React 17: delegate events handlers on `app` root DOM node.
-- Events Dispatching: dispatch native events to `React.onXXX` handlers by `SyntheticEvent`.
+  - 先处理原生事件, 后处理 React 事件.
+- Events dispatching: dispatch native events to `React.onXXX` handlers by `SyntheticEvent`.
   - 收集监听器: `const listeners = accumulateSinglePhaseListeners(targetFiber, eventName)`.
   - 派发合成事件: `dispatchQueue.push({ new SyntheticEvent(eventName), listeners })`.
   - 执行派发:
