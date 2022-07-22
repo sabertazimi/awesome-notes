@@ -1989,7 +1989,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-content-docs@npm:2.0.0-rc.1, @docusaurus/plugin-content-docs@npm:^2.0.0-beta.20":
+"@docusaurus/plugin-content-docs@npm:2.0.0-rc.1, @docusaurus/plugin-content-docs@npm:^2.0.0-rc.1":
   version: 2.0.0-rc.1
   resolution: "@docusaurus/plugin-content-docs@npm:2.0.0-rc.1"
   dependencies:
@@ -2225,7 +2225,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/theme-translations@npm:2.0.0-rc.1, @docusaurus/theme-translations@npm:^2.0.0-beta.20":
+"@docusaurus/theme-translations@npm:2.0.0-rc.1, @docusaurus/theme-translations@npm:^2.0.0-rc.1":
   version: 2.0.0-rc.1
   resolution: "@docusaurus/theme-translations@npm:2.0.0-rc.1"
   dependencies:
@@ -2254,7 +2254,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils-common@npm:2.0.0-rc.1, @docusaurus/utils-common@npm:^2.0.0-beta.20":
+"@docusaurus/utils-common@npm:2.0.0-rc.1, @docusaurus/utils-common@npm:^2.0.0-rc.1":
   version: 2.0.0-rc.1
   resolution: "@docusaurus/utils-common@npm:2.0.0-rc.1"
   dependencies:
@@ -2268,7 +2268,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils-validation@npm:2.0.0-rc.1, @docusaurus/utils-validation@npm:^2.0.0-beta.20":
+"@docusaurus/utils-validation@npm:2.0.0-rc.1, @docusaurus/utils-validation@npm:^2.0.0-rc.1":
   version: 2.0.0-rc.1
   resolution: "@docusaurus/utils-validation@npm:2.0.0-rc.1"
   dependencies:
@@ -2281,7 +2281,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils@npm:2.0.0-rc.1, @docusaurus/utils@npm:^2.0.0-beta.20":
+"@docusaurus/utils@npm:2.0.0-rc.1, @docusaurus/utils@npm:^2.0.0-rc.1":
   version: 2.0.0-rc.1
   resolution: "@docusaurus/utils@npm:2.0.0-rc.1"
   dependencies:
@@ -2319,15 +2319,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@easyops-cn/docusaurus-search-local@npm:^0.29.0":
-  version: 0.29.0
-  resolution: "@easyops-cn/docusaurus-search-local@npm:0.29.0"
+"@easyops-cn/docusaurus-search-local@npm:^0.30.1":
+  version: 0.30.1
+  resolution: "@easyops-cn/docusaurus-search-local@npm:0.30.1"
   dependencies:
-    "@docusaurus/plugin-content-docs": ^2.0.0-beta.20
-    "@docusaurus/theme-translations": ^2.0.0-beta.20
-    "@docusaurus/utils": ^2.0.0-beta.20
-    "@docusaurus/utils-common": ^2.0.0-beta.20
-    "@docusaurus/utils-validation": ^2.0.0-beta.20
+    "@docusaurus/plugin-content-docs": ^2.0.0-rc.1
+    "@docusaurus/theme-translations": ^2.0.0-rc.1
+    "@docusaurus/utils": ^2.0.0-rc.1
+    "@docusaurus/utils-common": ^2.0.0-rc.1
+    "@docusaurus/utils-validation": ^2.0.0-rc.1
     "@easyops-cn/autocomplete.js": ^0.38.1
     "@node-rs/jieba": ^1.6.0
     cheerio: ^1.0.0-rc.3
@@ -2340,10 +2340,10 @@ __metadata:
     mark.js: ^8.11.1
     tslib: ^2.4.0
   peerDependencies:
-    "@docusaurus/theme-common": ^2.0.0-beta.20
+    "@docusaurus/theme-common": ^2.0.0-rc.1
     react: ^16.14.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0
-  checksum: 304313edc58a756858741ac693e161b55d9dab9bb317fd144c05ef32e5809b90870ac022c1917384bfdcf419a9f5338983c8a92097682af19ed3194b1882080f
+  checksum: c8f487defd81521037459246987949c698ba1f7732abe5736fa890b86b25c246f897045cdc15bdd3308bb9a7bf0d8d085b153132d1bbcaec2c9cd6584e8ada08
   languageName: node
   linkType: hard
 
@@ -4007,7 +4007,7 @@ __metadata:
     "@docusaurus/core": 2.0.0-rc.1
     "@docusaurus/module-type-aliases": 2.0.0-rc.1
     "@docusaurus/preset-classic": 2.0.0-rc.1
-    "@easyops-cn/docusaurus-search-local": ^0.29.0
+    "@easyops-cn/docusaurus-search-local": ^0.30.1
     "@tsconfig/docusaurus": ^1.0.6
     ci-info: ^3.3.2
     eslint: ^8.20.0
@@ -13429,7 +13429,7 @@ resolve@^2.0.0-next.3:
 
 "typescript@patch:typescript@^4.7.4#~builtin<compat/typescript>":
   version: 4.7.4
-  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"
+  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=f456af"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
