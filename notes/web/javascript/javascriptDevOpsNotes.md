@@ -1047,9 +1047,11 @@ module.exports = function buildMeactPreset(context, options) {
 
 ## Webpack
 
-### Webpack Internals
+### Webpack Workflow
 
-- [Webpack source code guide](https://segmentfault.com/a/1190000039956437)
+[Webpack workflow](https://segmentfault.com/a/1190000039956437):
+
+![Webpack Workflow](./figures/WebpackWorkflow.png)
 
 ### Webpack Configuration Intellisense
 
