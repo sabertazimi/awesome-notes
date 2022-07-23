@@ -2348,6 +2348,66 @@ then write modern browser css code:
 
 - W3C official ARIA [examples](https://github.com/w3c/aria-practices).
 
+### DPR
+
+Device pixel ratio (DPR):
+
+一般情况下,
+PC 屏幕 DPR 为 1,
+1 个逻辑像素 = 1 个物理像素,
+移动端 DPR 为 2 或 3,
+1 个逻辑像素 = 2 或 3 个物理像素,
+由此产生
+`移动端/Retina 屏幕 1px 边框 (pixel border)`
+问题:
+
+- 伪元素 + `scale` 变换.
+- `border-image`.
+- `background-image`.
+- `background` gradient.
+- `box-shadow`.
+
+```css
+.scale-1px {
+  position: relative;
+  border: none;
+}
+
+.scale-1px::after {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  content: '';
+  background: #000;
+  transform: scaleY(0.5);
+  transform-origin: 0 0;
+}
+
+.border-image-1px {
+  border-width: 0 0 1px;
+  border-bottom: none;
+  border-image: url('../img/linenew.png') 0 0 2 0 stretch;
+}
+
+.background-image-1px {
+  background: url('../img/line.png') repeat-x left bottom;
+  background-size: 100% 1px;
+}
+
+.background-gradient-1px {
+  background: linear-gradient(#000, #000 100%, transparent 100%) left / 1px 100%
+      no-repeat, linear-gradient(#000, #000 100%, transparent 100%) right / 1px 100%
+      no-repeat,
+    linear-gradient(#000, #000 100%, transparent 100%) top / 100% 1px no-repeat,
+    linear-gradient(#000, #000 100%, transparent 100%) bottom / 100% 1px no-repeat;
+}
+
+.box-shadow-1px {
+  box-shadow: inset 0 -1px 1px -1px #c8c7cc;
+}
+```
+
 ## CSS Performance
 
 ### Will Change
