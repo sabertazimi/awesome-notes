@@ -1261,10 +1261,10 @@ requireScript('the_rest.js', function () {
 
 在真实用户性能数据采集时, 要关注四个方面的东西:
 
-- 使用标准的 API
-- 定义合适的指标
-- 采集正确的数据
-- 上报关联的维度
+- 使用标准的 API.
+- 定义合适的指标.
+- 采集正确的数据.
+- 上报关联的维度.
 
 ### Monitoring Standard API
 
@@ -1330,6 +1330,29 @@ Google Core Web Vitals:
 - Prefer `visibilitychange`/`pagehide` event.
   `unload`/`beforeunload` event not precise for mobile users:
   e.g switch to another app not trigger `unload` event.
+
+### GIF Image Beacon
+
+使用 `GIF` 图片进行前端监控上报:
+
+- 跨域友好: `img` 天然支持跨域.
+- 节省网络资源:
+  - 图片请求不占用 AJAX 请求限额.
+  - `GIF` 简单安全, 体积小, 对网页内容几乎无影响,
+    相较 `BMP`/`PNG`, 可以节约 `41%`/`35%` 网络资源.
+- 不会阻塞页面加载, 不影响用户体验:
+  只需 `new Image()` 对象,
+  通过 `onerror` 和 `onload` 事件来检测发送状态,
+  一般情况下无需 `append` 到 `DOM` 中.
+
+```ts
+const thisPage = window.location.href;
+const referringPage = document.referrer ? document.referrer : 'none';
+const beacon = new Image();
+beacon.src = `http://www.example.com/logger/beacon.gif?page=${encodeURI(
+  thisPage
+)}&ref=${encodeURI(referringPage)}`;
+```
 
 ## Web Performance API
 
