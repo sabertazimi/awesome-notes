@@ -3953,6 +3953,11 @@ Child.prototype.constructor = Child; // 使得 Prototype 对象与 Constructor �
 
 - `Class` 定义不能提升.
 - `Class` 具有块作用域.
+- `Class` 内部为严格模式.
+- `Class` 内部定义方法不可枚举.
+- `Class` 所有方法 (包括静态方法和实例方法) 都没有原型对象 `.prototype`,
+  没有 `[[construct]]`, 不能使用 `new` 调用.
+- `Class` 必须使用 `new` 调用, 否则会报错.
 - `typeof Class`: `function`.
 
 ```ts
