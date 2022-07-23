@@ -1567,15 +1567,32 @@ module.exports = {
 
 ### Webpack Optimization
 
-- CDN
-- 服务器端渲染
-- 提取公共库
-- 代码压缩
-- 代码分割: Chunks
-- 代码分割: 按需加载
-- 多核构建
-- 构建缓存
-- [优化构建速度](https://webpack.js.org/guides/build-performance).
+- CDN.
+- 服务器端渲染.
+- 提取公共库.
+- 代码压缩.
+- 代码分割: Chunks.
+- 代码分割: 按需加载.
+- [优化构建速度](https://webpack.js.org/guides/build-performance):
+  - 缩小文件搜索范围:
+    - 优化 `loader` 配置: `include`/`exclude`.
+    - 优化 `module.noParse` 配置:
+      忽略对部分没采用模块化的文件的递归解析处理.
+    - 优化 `resolve.modules` 配置: 第三方模块.
+    - 优化 `resolve.alias` 配置.
+    - 优化 `resolve.mainFields` 配置.
+    - 优化 `resolve.extensions` 配置: 后缀列表.
+  - 减少打包文件:
+    - 提取公共代码.
+    - 动态链接 `DllPlugin`.
+    - `externals`.
+    - Tree shaking.
+  - 缓存:
+    - [持久化缓存](https://webpack.js.org/configuration/cache).
+    - `babel` 缓存 `cacheDirectory: true`.
+    - `cache-loader`.
+  - 多进程:
+    - `thread-loader`.
 - [JD Webpack optimization guide](https://jelly.jd.com/article/61179aa26bea510187770aa3).
 
 #### Common Libraries
