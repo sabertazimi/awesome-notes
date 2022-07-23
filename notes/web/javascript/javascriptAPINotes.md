@@ -1889,6 +1889,8 @@ document.querySelector('form').addEventListener('submit', event => {
 - `blur`/`focus`/`focusin`/`focusout` event.
 - `input`/`change` event.
 - `select` event: 在文本框 (`<input>` 或 `textarea`) 上选择字符.
+- [`composition` event](https://developer.mozilla.org/docs/Web/API/CompositionEvent):
+  中文输入事件.
 
 ##### Input Focus Event
 
