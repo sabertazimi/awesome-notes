@@ -2124,8 +2124,30 @@ const objectType = typeof null; // => object
 #### Custom Object Detection
 
 - `object instanceof Constructor`:
-  查找原型链 `构造器`**原型对象** (`Constructor.prototype`).
+  在原型链上查找**构造器的原型对象** (`Constructor.prototype`).
 - `prop in object`: 查找原型链属性名.
+
+```ts
+/**
+ * L 表示左表达式, R 表示右表达式: L 为变量, R 为类型.
+ */
+function instanceOf(L, R) {
+  const prototype = R.prototype;
+  let chain = L[[proto]];
+
+  while (true) {
+    if (chain === null) {
+      return false;
+    }
+
+    if (prototype === chain) {
+      return true;
+    }
+
+    chain = chain[[proto]];
+  }
+}
+```
 
 ### Type Conversion
 
