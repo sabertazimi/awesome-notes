@@ -1504,15 +1504,24 @@ class Promise {
     return this.then(null, onRejected);
   }
 
-  finally() {
-    return this.then(null, null);
+  finally(callback) {
+    return this.then(
+      value => {
+        return Promise.resolve(callBack()).then(() => value);
+      },
+      reason => {
+        return Promise.resolve(callBack()).then(() => {
+          throw reason;
+        });
+      }
+    );
   }
 
   static all(iterable) {
     return new Promise((resolve, reject) => {
       let index = 0;
-      let elementCount = 0;
-      let result;
+      let pendingCount = 0;
+      const result = new Array(iterable.length);
 
       for (const promise of iterable) {
         const currentIndex = index;
@@ -1520,9 +1529,9 @@ class Promise {
           // eslint-disable-next-line no-loop-func
           value => {
             result[currentIndex] = value;
-            elementCount++;
+            pendingCount++;
 
-            if (elementCount === result.length) {
+            if (pendingCount === iterable.length) {
               resolve(result);
             }
           },
@@ -1535,10 +1544,39 @@ class Promise {
 
       if (index === 0) {
         resolve([]);
-        return;
+      }
+    });
+  }
+
+  static any(iterable) {
+    return new Promise((resolve, reject) => {
+      let index = 0;
+      let pendingCount = 0;
+      const error = new Error('All promise were rejected');
+      error.errors = new Array(iterable.length);
+
+      for (const promise of iterable) {
+        const currentIndex = index;
+        promise.then(
+          value => {
+            resolve(value);
+          },
+          // eslint-disable-next-line no-loop-func
+          err => {
+            error.errors[currentIndex] = err;
+            pendingCount++;
+
+            if (pendingCount === iterable.length) {
+              reject(error);
+            }
+          }
+        );
+        index++;
       }
 
-      result = new Array(index);
+      if (index === 0) {
+        resolve([]);
+      }
     });
   }
 
@@ -1560,14 +1598,14 @@ class Promise {
   static allSettled(iterable) {
     return new Promise((resolve, reject) => {
       let index = 0;
-      let elementCount = 0;
+      let pendingCount = 0;
       let result;
 
       function addElementToResult(i, elem) {
         result[i] = elem;
-        elementCount++;
+        pendingCount++;
 
-        if (elementCount === result.length) {
+        if (pendingCount === result.length) {
           resolve(result);
         }
       }
