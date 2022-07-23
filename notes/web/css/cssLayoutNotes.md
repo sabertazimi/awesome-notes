@@ -2163,6 +2163,8 @@ selected elements in grid container:
 
 ## Centering Pattern
 
+![Centering Pattern](./figures/CenteringPattern.png)
+
 ### Horizontal Centering Pattern
 
 #### Horizontal Centering Inline Element
