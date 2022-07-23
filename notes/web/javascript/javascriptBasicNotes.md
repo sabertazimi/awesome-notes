@@ -4659,6 +4659,7 @@ default invocation.
   - No `super` binding (**lexical scope**).
   - No `new.target` binding (**lexical scope**).
 - No `function.prototype`: arrow function `prototype` property is `undefined`.
+- No `yield` binding: 箭头函数不能用作 Generator 函数.
 
 ```ts
 const obj = {
