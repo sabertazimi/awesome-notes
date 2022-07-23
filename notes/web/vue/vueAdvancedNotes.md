@@ -443,7 +443,7 @@ Vue.extend = function (extendOptions: Object): Function {
 并缓冲在同一事件循环中发生的所有数据变更.
 如果同一个 `watcher` 被多次触发,
 只会被推入到队列中一次.
-在下一次事件循环 tick 中,
+在下一个事件循环 tick 中,
 `Vue` 才会真正执行队列中的数据变更,
 页面才会重新渲染,
 使得多次 DOM 更新合并成一次批处理更新.
