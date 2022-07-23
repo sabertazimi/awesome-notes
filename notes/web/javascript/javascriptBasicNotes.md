@@ -5096,6 +5096,7 @@ regardless of where it is executed later:
 - 函数中的闭包函数可对函数进行赋值或引用 (函数对于闭包来说是外部, 即内部引用外部).
 - 特权性质 (Private Getter): 从外部通过闭包方法访问内部 (函数作用域) 局部变量.
 - Local Scope -> Outer Functions Scope -> Global Scope.
+- 闭包中的变量全部保存在堆内存中, 防止函数结束后变量内存被自动回收.
 
 ```ts
 // global scope
