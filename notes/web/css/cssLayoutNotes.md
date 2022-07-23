@@ -1130,7 +1130,7 @@ Multiple `column` layout:
 - When there is **free space left**:
   used size = $\text{flex-basis} + (\text{flex-grow}/\sum\text{flex-grow})$.
 - When there is **not enough space**:
-  used size = $\text{flex-basis} - (\text{flex-shrink}/\sum\text{flex-shrink})$.
+  used size = $\text{flex-basis} - (\text{flex-shrink*flex-basis}/\sum\text{flex-shrink*flex-basis})$.
 
 | `flex-basis` | `width` | 基础尺寸     |
 | ------------ | ------- | ------------ |
