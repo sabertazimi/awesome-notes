@@ -672,14 +672,16 @@ read css -> write css (only re-layout/paint/composite once).
 
 ## Browser Caches
 
-[Dive into Browser Caches](https://github.com/ljianshu/Blog/issues/23):
+[Browser caches](https://github.com/ljianshu/Blog/issues/23)
 从缓存位置上来说分为四种, 并且各自有优先级,
 当依次查找缓存且都没有命中的时候, 才会去请求网络:
 
-- Service Worker: PWA
-- (In-) Memory Cache: reload Tab page
-- (On-) Disk Cache: big files
-- Push Cache: HTTP/2
+- Service Worker: PWA.
+- (In-) Memory Cache: reload Tab page.
+- (On-) Disk Cache: big files.
+- Push Cache: HTTP/2.
+
+[![Browser Cache](./figures/BrowserCache.webp)](https://web.dev/service-worker-caching-and-http-caching)
 
 ```ts
 // eslint-disable-next-line no-restricted-globals
@@ -707,12 +709,17 @@ self.addEventListener('fetch', event => {
 
 ### HTTP Cache
 
-浏览器缓存, 也称 HTTP 缓存,
+浏览器缓存,也称
+[HTTP 缓存](https://web.dev/http-cache),
 分为强缓存和协商缓存.
 优先级较高的是强缓存,
 在命中强缓存失败的情况下或者
 `Cache-Control: no-cache` (`no-cache` allows caches but requires revalidate) 时,
 才会走协商缓存.
+
+[![HTTP Cache](./figures/HTTPCache.webp)](https://developer.mozilla.org/docs/Web/HTTP/Caching)
+
+#### Local Cache
 
 强缓存是利用 HTTP 头中的 `Expires` 和 `Cache-Control` 两个字段来控制的.
 强缓存中, 当请求再次发出时, 浏览器会根据其中的 `Expires` 和 `Cache-Control` 判断目标资源是否 `命中` 强缓存,
@@ -724,6 +731,24 @@ self.addEventListener('fetch', event => {
 Expires: Wed, 12 Sep 2019 06:12:18 GMT
 Cache-Control: max-age=31536000
 ```
+
+`Cache-Control` directives:
+
+- `public`: 允许代理服务器缓存资源.
+- `private`: 不允许代理服务器缓存资源, 只有浏览器可以缓存.
+- `immutable`: 就算过期了也不用协商, 资源就是不变的.
+- `max-age=<time>`: 资源过期时间 (浏览器计算), 比 `Expires` 精准 (服务器计算).
+- `s-maxage=<time>`: 代理服务器的资源过期时间.
+- `max-stale=<time>`: 允许使用过期资源, 指定允许时间.
+- `stale-while-revalidate=<time>`: 在验证 (协商) 期间, 返回过期的资源.
+- `stale-if-error=<time>`: 验证 (协商) 出错的话, 返回过期的资源.
+- `must-revalidate`: 强缓存过期后, 强制等待协商缓存, 不允许使用过期资源.
+- `no-store`: 禁止强缓存和协商缓存.
+- `no-cache`: 禁止强缓存, 允许协商缓存.
+
+![Cache Control](./figures/CacheControl.webp)
+
+#### Server Cache
 
 协商缓存机制下,
 浏览器需要向服务器去询问缓存的相关信息,
@@ -776,20 +801,6 @@ If-None-Match: "10c24bc-4ab-457e1c1f"
 
 HTTP 1.1 304 Not Modified
 ```
-
-`Cache-Control` directives:
-
-- `public`: 允许代理服务器缓存资源.
-- `private`: 不允许代理服务器缓存资源, 只有浏览器可以缓存.
-- `immutable`: 就算过期了也不用协商, 资源就是不变的.
-- `max-age=<time>`: 资源过期时间 (浏览器计算), 比 `Expires` 精准 (服务器计算).
-- `s-maxage=<time>`: 代理服务器的资源过期时间.
-- `max-stale=<time>`: 允许使用过期资源, 指定允许时间.
-- `stale-while-revalidate=<time>`: 在验证 (协商) 期间, 返回过期的资源.
-- `stale-if-error=<time>`: 验证 (协商) 出错的话, 返回过期的资源.
-- `must-revalidate`: 强缓存过期后, 强制等待协商缓存, 不允许使用过期资源.
-- `no-store`: 禁止强缓存和协商缓存.
-- `no-cache`: 禁止强缓存, 允许协商缓存.
 
 ### Code Cache
 
