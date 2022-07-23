@@ -2366,6 +2366,7 @@ PC 屏幕 DPR 为 1,
 - `background-image`.
 - `background` gradient.
 - `box-shadow`.
+- `viewport` + `rem`.
 
 ```css
 .scale-1px {
@@ -2406,6 +2407,21 @@ PC 屏幕 DPR 为 1,
 .box-shadow-1px {
   box-shadow: inset 0 -1px 1px -1px #c8c7cc;
 }
+```
+
+```ts
+// Change viewport scale
+const scale = 1 / window.devicePixelRatio;
+const viewport = document.querySelector('meta[name="viewport"]');
+viewport.setAttribute(
+  'content',
+  `width=device-width,user-scalable=no,initial-scale=${scale},maximum-scale=${scale},minimum-scale=${scale}`
+);
+
+// Set root font size
+const docEl = document.documentElement;
+const fontsize = `${10 * (docEl.clientWidth / 320)}px`;
+docEl.style.fontSize = fontsize;
 ```
 
 ## CSS Performance
