@@ -2384,6 +2384,22 @@ const polygon = (n = 3) => {
 
 ## Filter and Blend Effects
 
+### Dark Mode Effect
+
+```css
+html[theme='dark'] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html[theme='dark'] img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html {
+  transition: color 300ms, background-color 300ms;
+}
+```
+
 ### Fusion Effect
 
 - Parent element: `background-color` + `filter: contrast()`.
