@@ -1098,6 +1098,8 @@ HMR:
 - 浏览器加载发生变更的增量模块.
 - Webpack 运行时触发变更模块的 `module.hot.accept` 回调, 执行代码变更逻辑.
 
+![Hot Module Replacement](./figures/HotModuleReplacement.jpg)
+
 `module.hot.accept` 有两种调用模式:
 
 - 无参调用模式 `module.hot.accept()`: 当前文件修改后, 重头执行当前文件代码.
