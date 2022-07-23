@@ -964,6 +964,7 @@ tags: [Web, Framework, Library]
 ### Robot
 
 - [GrammY: Telegram Bot Framework](https://github.com/grammyjs/grammY)
+- [Discord: Create Discord Bot with TypeScript and Decorators](https://github.com/oceanroleplay/discord.ts)
 
 ## File
 
