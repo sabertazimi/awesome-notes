@@ -4047,6 +4047,19 @@ Person.locate(); // class, class Person {}
 | `C extends Object` | `Object`             | `Object.prototype`          |
 | `C extends B`      | `B`                  | `B.prototype`               |
 
+:::tip ES5 vs ES6 Inheritance
+
+- ES5 继承先创造子类实例对象 `this`,
+  然后再将父类的属性与方法添加到 `this` 上 (`Parent.apply(this)`),
+  **实例在前继承在后**.
+- ES6 继承先将父类的属性与方法添加到 `this` 上 (必须先调用 `super()` 方法),
+  然后再用子类的构造函数修改 `this`,
+  **继承在前实例在后**.
+- ES5 继承 `Child.__proto__ === Function.prototype`.
+- ES6 继承 `Child.__proto__ === Parent`, 子类可以直接通过 `[[proto]]` 寻址到父类.
+
+:::
+
 ##### Super Class
 
 `super`:
