@@ -1024,6 +1024,7 @@ tags: [Web, Framework, Library]
 
 ### Database
 
+- [Prisma: Next-generation ORM](https://github.com/prisma/prisma)
 - [Mikro: TypeScript ORM](https://github.com/mikro-orm/mikro-orm)
 - [Sequelize: Easy-to-use and Promise-based Multi SQL Dialects ORM Tool](https://github.com/sequelize/sequelize)
 - [LowDB: Simple JSON Database](https://github.com/typicode/lowdb)
