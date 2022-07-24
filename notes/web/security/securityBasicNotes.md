@@ -460,8 +460,8 @@ const newSandboxWindow = new SandboxWindow(context, sandboxGlobal);
 
 Web crypto [API](https://developer.mozilla.org/docs/Web/API/SubtleCrypto):
 
-- 公钥加密私钥解密: 只有私钥拥有者可以获取信息.
-- 公钥验证私钥签名: 只有私钥拥有者可以发布签名.
+- 公钥加密私钥解密: 只有私钥拥有者可以获取信息, e.g HTTPS 会话密钥传输.
+- 公钥解密私钥加密: 只有私钥拥有者可以发布签名, e.g 数字签名.
 
 ### User Privacy
 
