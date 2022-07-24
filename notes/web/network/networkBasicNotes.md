@@ -187,7 +187,12 @@ HTTP/2 的多路复用就是为了解决上述的两个性能问题.
 HTTP/2 = `HTTP` + `HPack / Stream` + `TLS 1.2+` + `TCP`:
 
 - HTTP 2.0 的主要目标是改进传输性能, 实现低延迟和高吞吐量.
-- 二进制传输 (乱序二进制帧 Stream).
+- 二进制传输 (乱序二进制帧 Stream):
+  HTTP/1.1 不是二进制传输, 而是通过文本进行传输.
+  由于没有流的概念, 在并行传输数据时,
+  接收端无法区分多个响应分别对应的请求,
+  无法将多个响应的结果重新进行组装,
+  无法实现多路复用.
 - Multiplexing (多路复用): more parallelized requests.
 - Header compression (HPack): 降低协议字节开销占比 (尤其是 `Cookie` 带来的性能瓶颈).
 - 双向流量控制 (`WINDOW_UPDATE` 帧更新).
