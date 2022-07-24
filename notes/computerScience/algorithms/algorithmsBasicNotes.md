@@ -10,6 +10,8 @@ tags: [CS, Algorithm]
 
 ## Sorting Algorithm
 
+![Sorting Algorithm](./figures/SortingAlgorithm.png)
+
 ### Summary
 
 - 强制稳定: 增加(唯一)时间戳, 修改 CompareTo 接口定义 => 当主元素相同时, 时间戳小的元素更小
