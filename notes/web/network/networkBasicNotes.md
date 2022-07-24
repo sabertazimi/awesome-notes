@@ -141,6 +141,7 @@ Use reasonable HTTP status codes:
 - 200: general success.
 - 201: successful creation.
 - 301: moved permanently (SEO friendly).
+- 302: moved temporarily.
 - 304: not modified (HTTP cache).
 - 400: bad requests from client.
 - 401: unauthorized requests.
