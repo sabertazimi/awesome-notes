@@ -134,10 +134,14 @@ entity body
   - 503 Service Unavailable.
   - 504 Gateway Timeout.
 
+![HTTP Redirect](./figures/HTTPRedirect.png)
+
 Use reasonable HTTP status codes:
 
 - 200: general success.
 - 201: successful creation.
+- 301: moved permanently (SEO friendly).
+- 304: not modified (HTTP cache).
 - 400: bad requests from client.
 - 401: unauthorized requests.
 - 403: missing permissions.
