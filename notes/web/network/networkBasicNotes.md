@@ -409,10 +409,21 @@ Transmission Control Protocol (RFC 793):
 
 - 三次握手带来的延迟 (RTT: Round-trip Delay) 使得每创建一个新 TCP 连接都要付出很大代价.
   这决定了提高 TCP 应用性能的关键, 在于**重用连接**.
-- Connection-oriented service.
-- In-sequence stream of bytes service.
-- Reliable delivery.
-- **Congestion control**.
+- TCP 提供一种面向连接的, 可靠的字节流服务:
+  - Connection-oriented service.
+  - Reliable delivery.
+  - In-sequence stream of bytes service.
+- Connection-oriented service:
+  在一个 TCP 连接中,
+  仅有两方进行彼此通信,
+  广播和多播不能用于 TCP.
+- Reliable delivery:
+  - TCP 使用校验和, 确认和重传机制来保证可靠传输.
+  - TCP 给数据分节进行排序,
+    并使用累积确认保证数据的顺序不变和非重复.
+- **Congestion control**:
+  TCP 使用滑动窗口机制来实现流量控制,
+  通过动态改变窗口的大小进行拥塞控制.
 
 ### 3-way Handshake
 
