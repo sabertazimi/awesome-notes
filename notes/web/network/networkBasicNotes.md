@@ -425,10 +425,15 @@ Transmission Control Protocol (RFC 793):
   TCP 使用滑动窗口机制来实现流量控制,
   通过动态改变窗口的大小进行拥塞控制.
 
-### 3-way Handshake
+### TCP Handshake
 
-- `SYN` -> `SYN/ACK` -> `ACK`.
-- `FIN(toB)` -> `[Data+]ACK(toA)` -> `FIN(toA)` -> `ACK(toB)`.
+- 3-way handshake:
+  `SYN (toB)` -> `SYN/ACK (toA)` -> `ACK (toB)`.
+- 4-way handshake:
+  `FIN (toB)` -> `[Data+]ACK (toA)` -> `FIN (toA)` -> `ACK (toB)`.
+
+![TCP 3-way Handshake](./figures/TCP3WayHandshake.png)
+![TCP 4-way Handshake](./figures/TCP4WayHandshake.png)
 
 ### Slide Window and Retransmission
 
