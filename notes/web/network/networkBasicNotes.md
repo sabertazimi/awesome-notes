@@ -57,7 +57,11 @@ Hypertext Transfer Protocol (RFC 2068):
 - HTTP -> Socket Interface -> TCP.
 - Stateless protocol.
 - HTTP/1.0 默认不开启长连接: 客户端与服务端必须同时发送 `Connection: Keep-Alive`.
-- HTTP/1.1 默认开启长连接.
+- HTTP/1.1 默认开启长连接:
+  - `Keep-Alive: timeout=5, max=100`:
+    表示 TCP 通道保持 5 秒, 最多接收 100 次请求.
+  - `Keep-Alive` 无法保证客户端和服务器之间的连接一定活跃.
+- HTTP 为无状态协议: 每个请求相互独立.
 
 ### HTTP Connections
 
