@@ -411,16 +411,18 @@ Transmission Control Protocol (RFC 793):
   这决定了提高 TCP 应用性能的关键, 在于**重用连接**.
 - TCP 提供一种面向连接的, 可靠的字节流服务:
   - Connection-oriented service.
-  - Reliable delivery.
+  - Reliable delivery service.
   - In-sequence stream of bytes service.
 - Connection-oriented service:
   在一个 TCP 连接中,
   仅有两方进行彼此通信,
   广播和多播不能用于 TCP.
-- Reliable delivery:
+- Reliable delivery service:
   - TCP 使用校验和, 确认和重传机制来保证可靠传输.
   - TCP 给数据分节进行排序,
     并使用累积确认保证数据的顺序不变和非重复.
+- In-sequence stream of bytes service:
+  TCP 是字节流协议, 没有任何 (协议上的) 记录边界.
 - **Congestion control**:
   TCP 使用滑动窗口机制来实现流量控制,
   通过动态改变窗口的大小进行拥塞控制.
@@ -497,9 +499,20 @@ User Datagram Protocol (RFC 768):
   - 不保证交付顺序: 不设置包序号, 不重排, 不会发生队头阻塞.
   - 不跟踪连接状态: 不必建立连接或重启状态机.
   - 不需要拥塞控制: 不内置客户端或网络反馈机制.
-- Lightweight and connectionless.
-- Datagram service.
-- Unreliable delivery.
+- Lightweight and connectionless service:
+  - UDP 客户端和服务器之前不必存在长期的关系.
+  - UDP 发送数据报之前无需经过握手创建连接的过程.
+  - UDP 支持多播和广播.
+- Unreliable delivery service:
+  - UDP 本身不提供确认, 序列号, 超时重传等机制.
+  - UDP 数据报可能在网络中被复制, 被重新排序.
+  - UDP 不保证数据报会到达其最终目的地,
+    也不保证各个数据报的先后顺序,
+    也不保证每个数据报只到达一次.
+- Datagram service:
+  每个 UDP 数据报都有长度,
+  若一个数据报正确地到达目的地,
+  则该数据报的长度将随数据一起传递给接收方.
 - UDP header:
   source port(16 bit), destination port(16 bit),
   checksum(16 bit), length(16 bit).
