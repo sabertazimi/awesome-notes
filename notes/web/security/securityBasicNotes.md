@@ -1176,9 +1176,11 @@ Distributed denial of service attack:
 
 - SYN cookie: 每个 IP 地址分配一个 cookie, 限制访问频率, 超过一定频率后不响应 IP.
 - 限制请求频率与请求力度:
-  - 客户端: CAPTCHA（Completely Automated Pub-lic Turing Test to Tell Computers and HumansApart).
-  - 服务端: 建立应用防火墙与服务器安全模块.
+  - 客户端: CAPTCHA (Completely Automated Pub-lic Turing Test to Tell Computers and HumansApart).
+  - 服务端: 建立应用防火墙与服务器安全模块, e.g 过滤网关防护.
 - 提升带宽最大负荷.
+  - 缩短超时 (SYN Timeout) 时间.
+  - 增加最大半连接数.
 - 提升服务器性能:
   - Use mature memory cache library, e.g `Redis`.
   - 负载均衡.
