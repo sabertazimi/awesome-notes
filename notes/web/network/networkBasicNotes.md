@@ -45,10 +45,10 @@ nodal = proc + queue + trans + prop: 总时延 = 产生/到达时延 + 排队时
 
 Application layer protocol defines:
 
-- types of messages exchanged.
-- syntax of various message types(fields definition).
-- semantics of fields.
-- rules for when/how to send/respond to messages.
+- Types of messages exchanged.
+- Syntax of various message types(fields definition).
+- Semantics of fields.
+- Rules for when/how to send/respond to messages.
 
 ### Hypertext Transfer Protocol
 
