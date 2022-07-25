@@ -221,7 +221,7 @@ but also can every `<article>` and `<section>` element.
 
 ## Form
 
-- [Form Design Patterns](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post)
+[Form](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post):
 
 ```html
 <form action="表单提交的后台地址接口" method="post" 提交方式，一般为post>
@@ -293,8 +293,8 @@ but also can every `<article>` and `<section>` element.
 
 ### Form Validate
 
-- [Complete Guide for Form Validation](https://developer.mozilla.org/docs/Learn/HTML/Forms/Form_validation)
-- [Complete Guide for Constraint Validation](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5/Constraint_validation)
+- Form validation complete [guide](https://developer.mozilla.org/docs/Learn/HTML/Forms/Form_validation).
+- Constraint validation complete [guide](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5/Constraint_validation).
 
 ### Form Element Attribute
 
@@ -315,9 +315,11 @@ but also can every `<article>` and `<section>` element.
 
 #### Form Enctype
 
-- 默认值：application/x-www-form-urlencoded 提交前编码所有字符
-- multipart/form-data 不编码字符，**上传控件表单元素**必须使用改值
-- text/plain 表单元素数据中的空格->`+`
+`enctype` (HTTP `Content-Type` header):
+
+- 默认值: `application/x-www-form-urlencoded`, 提交前编码所有字符.
+- `multipart/form-data` 不编码字符, **上传控件表单元素**必须使用改值.
+- `text/plain`: 表单元素数据中的空格编码为 `+`.
 
 #### Form Target
 
