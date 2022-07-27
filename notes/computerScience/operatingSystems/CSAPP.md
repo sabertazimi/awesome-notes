@@ -19,7 +19,7 @@ tags: [CS, System, OS, Architecture]
 
 ### Stack Frame
 
-![stack frame](./figures/stack_frame.png)
+![Stack Frame](./figures/StackFrame.png)
 
 ```cpp
 # 准备阶段
