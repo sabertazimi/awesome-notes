@@ -909,6 +909,30 @@ video::backdrop {
 }
 ```
 
+### Marker Pseudo Element
+
+[`::marker`](https://web.dev/css-marker-pseudo-element):
+
+- `animation-*`.
+- `transition-*`.
+- `color`.
+- `direction`.
+- `font-*`.
+- `content`.
+- `unicode-bidi`.
+- `white-space`.
+
+```css
+li::marker {
+  font-variant-numeric: tabular-nums;
+  text-align: start;
+  text-align-last: start;
+  text-indent: 0;
+  text-transform: none;
+  unicode-bidi: isolate;
+}
+```
+
 ### Shadow DOM Pseudo Class and Element
 
 - `:host`: shadow DOM root element.
