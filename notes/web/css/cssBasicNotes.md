@@ -233,16 +233,36 @@ Increasing specificity by **duplicating selector**:
 - `unset` value resets a non-inherited property to its `initial` value.
 - `revert` reverses the CSS default values to the browser user-agent styles.
 
-#### Inherited CSS Property
+#### Inheritable CSS Property
 
-- All elements: visibility, cursor.
-- Inline elements:
-  letter-spacing, word-spacing, white-space, line-height,
-  color, font, font-family, font-size, font-style, font-variant, font-weight,
-  text-decoration, text-transform, direction.
-- Block elements: text-indent, text-align.
-- List elements: list-style, list-style-type, list-style-position, list-style-image.
-- Table elements: border-collapse.
+- [visibility](https://developer.mozilla.org/docs/Web/CSS/visibility)
+- [cursor](https://developer.mozilla.org/docs/Web/CSS/cursor)
+- [color](https://developer.mozilla.org/docs/Web/CSS/color)
+- [direction](https://developer.mozilla.org/docs/Web/CSS/direction)
+- [font-family](https://developer.mozilla.org/docs/Web/CSS/font-family)
+- [font-size](https://developer.mozilla.org/docs/Web/CSS/font-size)
+- [font-style](https://developer.mozilla.org/docs/Web/CSS/font-style)
+- [font-variant](https://developer.mozilla.org/docs/Web/CSS/font-variant)
+- [font-weight](https://developer.mozilla.org/docs/Web/CSS/font-weight)
+- [font](https://developer.mozilla.org/docs/Web/CSS/font)
+- [line-height](https://developer.mozilla.org/docs/Web/CSS/line-height)
+- [letter-spacing](https://developer.mozilla.org/docs/Web/CSS/letter-spacing)
+- [word-spacing](https://developer.mozilla.org/docs/Web/CSS/word-spacing)
+- [white-space](https://developer.mozilla.org/docs/Web/CSS/white-space)
+- [text-align](https://developer.mozilla.org/docs/Web/CSS/text-align)
+- [text-indent](https://developer.mozilla.org/docs/Web/CSS/text-indent)
+- [text-transform](https://developer.mozilla.org/docs/Web/CSS/text-transform)
+- [border-collapse](https://developer.mozilla.org/docs/Web/CSS/border-collapse)
+- [border-spacing](https://developer.mozilla.org/docs/Web/CSS/border-spacing)
+- [caption-side](https://developer.mozilla.org/docs/Web/CSS/caption-side)
+- [empty-cells](https://developer.mozilla.org/docs/Web/CSS/empty-cells)
+- [list-style-image](https://developer.mozilla.org/docs/Web/CSS/list-style-image)
+- [list-style-position](https://developer.mozilla.org/docs/Web/CSS/list-style-position)
+- [list-style-type](https://developer.mozilla.org/docs/Web/CSS/list-style-type)
+- [list-style](https://developer.mozilla.org/docs/Web/CSS/list-style)
+- [orphans](https://developer.mozilla.org/docs/Web/CSS/orphans)
+- [quotes](https://developer.mozilla.org/docs/Web/CSS/quotes)
+- [widows](https://developer.mozilla.org/docs/Web/CSS/widows)
 
 ## CSS Selectors
 
