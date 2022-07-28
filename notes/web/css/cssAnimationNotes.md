@@ -384,20 +384,20 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 
 By specifying the transition on the element itself,
 define the transition to occur in both directions
-(hover on and hover off).
+(hover on "enter" and hover off "exit").
 
 Change `transition` when `:hover` etc state bring magic effect:
 
 ```css
 .menu-nav {
   visibility: hidden;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out; /* Exit transition */
   transform: translateX(-100%);
 }
 
 .menu-link {
   opacity: 0;
-  transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out; /* Exit transition */
 }
 
 .menu-toggle:checked ~ .menu-nav {
@@ -408,7 +408,7 @@ Change `transition` when `:hover` etc state bring magic effect:
 .menu-toggle:checked ~ .menu-nav .menu-link {
   opacity: 1;
 
-  /* magic effect for delaying transition */
+  /* Magic effect for delaying enter transition */
   transition: opacity 0.4s ease-in-out 0.4s;
 }
 ```
