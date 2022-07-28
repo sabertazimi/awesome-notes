@@ -1082,10 +1082,12 @@ In `position`/`size`/`margin`/`padding`/`border`/`text alignment`:
 }
 ```
 
+[![Logical Properties](./figures/LogicalProperties.webp)](https://web.dev/learn/css/logical-properties)
+
 ### CSS Logical Reference
 
-- [W3C CSS Logical Draft](https://drafts.csswg.org/css-logical)
-- [CSS Tricks CSS Logical Guide](https://css-tricks.com/css-logical-properties-and-values)
+- W3C CSS logical [draft](https://drafts.csswg.org/css-logical).
+- CSS logical properties [guide](https://css-tricks.com/css-logical-properties-and-values).
 
 ## CSS Variables
 
