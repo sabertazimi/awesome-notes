@@ -777,10 +777,16 @@ li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6) ~ li {
 - 只作用于块级元素:
   `display` `block`/`inline-block`/`list-item`/`table-cell`/`table-caption`.
 - 只支持部分 CSS 属性:
-  - `color` 属性.
-  - 背景相关属性.
-  - 文本相关属性.
-  - 字体相关属性.
+  - `color`.
+  - `font` properties:
+    `font-size`, `font-weight`.
+  - `text` properties:
+    `text-decoration`, `word-spacing`.
+  - `background` properties:
+    `background-color`, `background-image`.
+  - `border` properties:
+    `border-color`.
+  - `float`.
 
 ### Selection Pseudo Element
 
