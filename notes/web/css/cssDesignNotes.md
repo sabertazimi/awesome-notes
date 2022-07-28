@@ -112,6 +112,14 @@ The optimal line length for body text is `50`–`75` characters:
 - Fluid layout.
 - Flexible image.
 
+### Mobile Viewport
+
+Disable mobile browser auto scale:
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+```
+
 ### Responsive Font
 
 - `rem`/`em` font size.
