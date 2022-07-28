@@ -1121,6 +1121,7 @@ tags: [Web, Framework, Library]
 - [SVG Parser](https://github.com/sebmarkbage/art)
 - [Crontab Parser](https://github.com/harrisiirak/cron-parser)
 - [Domain Parser](https://github.com/peerigon/parse-domain)
+- [URL Parser](https://github.com/remusao/tldts)
 - [Git URL Parser](https://github.com/IonicaBizau/git-url-parse)
 - [SemVer Parser](https://github.com/npm/node-semver)
 - [INI Parser](https://github.com/npm/ini)
