@@ -729,6 +729,10 @@ a.btn-custom {
 }
 ```
 
+### Button Reference
+
+- 100 modern CSS [buttons](https://github.com/ui-buttons/core).
+
 ## Table
 
 [Styling tables](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Styling_tables):
