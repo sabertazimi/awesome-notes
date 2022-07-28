@@ -3216,6 +3216,8 @@ Horizontal scrolling [design](https://designshack.net/articles/navigation/horizo
 
 ### Custom Scrollbar
 
+Scroll bars take up space within `padding box`.
+
 #### Standard Custom Scrollbar
 
 [`scrollbar-width`](https://developer.mozilla.org/docs/Web/CSS/scrollbar-width):
