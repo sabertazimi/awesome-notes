@@ -1229,7 +1229,7 @@ tags: [Web, Framework, Library]
 - [IMAP](https://github.com/mscdex/node-imap)
 - [SSH2: SSH2 Client and Server Modules](https://github.com/mscdex/ssh2)
 
-### HTTP Tools
+### HTTP
 
 - [MKCert: Make Locally Trusted Development Certificates](https://github.com/FiloSottile/mkcert)
 
@@ -1272,6 +1272,21 @@ tags: [Web, Framework, Library]
 
 - [Workbox: Progressive Web Apps Toolbox](https://github.com/GoogleChrome/workbox)
 - [PartyTown: 3rd Scripts Web Worker](https://github.com/BuilderIO/partytown)
+
+## Web3
+
+- [TypeChain: Ethereum Smart Contracts Bindings](https://github.com/dethcrypto/TypeChain)
+- [Web3.js: Ethereum API](https://github.com/ChainSafe/web3.js)
+- [Ethers.js: Complete Ethereum Library and Wallet](https://github.com/ethers-io/ethers.js)
+- [Foundry: Blazing fast, Portable and Modular Ethereum Application Development Toolkit](https://github.com/foundry-rs/foundry)
+- [Truffle: Smart Contracts Development Toolkit](https://github.com/trufflesuite/truffle)
+- [HardHat: Ethereum Software Development Environment](https://github.com/NomicFoundation/hardhat)
+- [Waffle: Writing and Testing Smart Contracts](https://github.com/TrueFiEng/Waffle)
+- [Remix: Browser-based Ethereum Smart Contracts Development IDE](https://github.com/ethereum/remix-project)
+- [Web3UI: Lightweight Reusable Web3 UI Components](https://github.com/web3ui/web3uikit)
+- [Moralis: Moralis React Hooks and Components](https://github.com/MoralisWeb3/react-moralis)
+- [ThirdWeb: Ultimate Web3 React Hooks Collection](https://github.com/thirdweb-dev/react)
+- [MetaMask: Ethereum Blockchain Apps Browser Extension](https://github.com/MetaMask/metamask-extension)
 
 ## Back-end Server
 
