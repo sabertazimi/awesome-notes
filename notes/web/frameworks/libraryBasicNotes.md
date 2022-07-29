@@ -1412,6 +1412,7 @@ tags: [Web, Framework, Library]
 - [ReactTracked: State Usage Tracking with Proxies](https://github.com/dai-shi/react-tracked)
 - [React Component Hierarchy](https://github.com/team-gryff/react-monocle)
 - [Retoggle: Component Inspector](https://github.com/Raathigesh/retoggle)
+- [OpenReplay: Session Replay Tool](https://github.com/openreplay/openreplay)
 
 ### Monitoring Tools
 
