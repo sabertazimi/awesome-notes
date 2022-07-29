@@ -1109,6 +1109,7 @@ tags: [Web, Framework, Library]
 - [AppSmith: Low-Code Project to Build Admin Panels, Internal Tools, and Dashboards](https://github.com/appsmithorg/appsmith)
 - [BuildBase: Low-code Platform for Creating Internal Apps, Workflows, and Admin Panels](https://github.com/Budibase/budibase)
 - [NocoBase: Scalability-first Low-code Development Platform](https://github.com/nocobase/nocobase)
+- [SunMao: Low-code Developing Framework](https://github.com/smartxworks/sunmao-ui)
 
 ## Compiler
 
