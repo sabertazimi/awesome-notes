@@ -277,6 +277,23 @@ makepkg -si
 wget https://aur.archlinux.org/packages.gz
 ```
 
+## WSL
+
+[Gzip for WSL 2](https://github.com/microsoft/WSL/issues/4461#issuecomment-1174011640):
+
+```bash
+echo -en '\x10' | sudo dd of=/usr/bin/gzip count=1 bs=1 conv=notrunc seek=$((0x189))
+```
+
+[Proxy for WSL 2](https://zinglix.xyz/2020/04/18/wsl2-proxy):
+
+```bash
+hostip=$(cat /etc/resolv.conf | grep nameserver | head -n 1 | awk '{ print $2 }')
+wslip=$(hostname -I | head -n 1 | awk '{print $1}')
+port=1080
+PROXY_SOCKS="socks5://${hostip}:${port}"
+```
+
 ## Basic Commands
 
 ### ls
