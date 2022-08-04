@@ -954,6 +954,7 @@ tags: [Web, Framework, Library]
 ### Email
 
 - [MJ-ML: Responsive Email Framework](https://github.com/mjmlio/mjml)
+- [Mailing: React Emails](https://github.com/successor-software/mailing)
 - [Node Emailer](https://github.com/nodemailer/nodemailer)
 - [Email Parser](https://github.com/nodemailer/mailparser)
 - [Email Generator](https://github.com/eladnava/mailgen)
