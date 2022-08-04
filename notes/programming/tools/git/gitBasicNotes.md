@@ -990,6 +990,8 @@ print_git_objects
 
 ### GPG Usage
 
+[Generate new GPG key](https://docs.github.com/authentication/managing-commit-signature-verification/generating-a-new-gpg-key):
+
 ```bash
 # Generate GPG key
 gpg --full-generate-key
