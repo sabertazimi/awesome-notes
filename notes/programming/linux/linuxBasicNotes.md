@@ -288,10 +288,13 @@ echo -en '\x10' | sudo dd of=/usr/bin/gzip count=1 bs=1 conv=notrunc seek=$((0x1
 [Proxy for WSL 2](https://zinglix.xyz/2020/04/18/wsl2-proxy):
 
 ```bash
-hostip=$(cat /etc/resolv.conf | grep nameserver | head -n 1 | awk '{ print $2 }')
-wslip=$(hostname -I | head -n 1 | awk '{print $1}')
-port=1080
-PROXY_SOCKS="socks5://${hostip}:${port}"
+HostIP=$(cat /etc/resolv.conf | grep nameserver | head -n 1 | awk '{ print $2 }')
+WslIP=$(hostname -I | head -n 1 | awk '{print $1}')
+Port=1080
+PROXY_SOCKS="socks5://${HostIP}:${Port}"
+
+git config --global http.proxy "${PROXY_SOCKS}"
+git config --global https.proxy "${PROXY_SOCKS}"
 ```
 
 ## Basic Commands
