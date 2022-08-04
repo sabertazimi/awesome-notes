@@ -299,14 +299,21 @@ echo -en '\x10' | sudo dd of=/usr/bin/gzip count=1 bs=1 conv=notrunc seek=$((0x1
 [Proxy for WSL 2](https://zinglix.xyz/2020/04/18/wsl2-proxy):
 
 ```bash
-HostIP=$(cat /etc/resolv.conf | grep nameserver | head -n 1 | awk '{ print $2 }')
-WslIP=$(hostname -I | head -n 1 | awk '{print $1}')
+HostIP=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
+WslIP=$(hostname -I | awk '{print $1}')
 Port=1080
 PROXY_SOCKS="socks5://${HostIP}:${Port}"
 
 git config --global http.proxy "${PROXY_SOCKS}"
 git config --global https.proxy "${PROXY_SOCKS}"
 ```
+
+:::caution Socks Client
+
+主机代理客户端需要[允许](https://github.com/microsoft/WSL/issues/4402#issuecomment-570474468)
+VLAN (或其他网络) 设备访问本地代理连接
+
+:::
 
 ## Basic Commands
 
