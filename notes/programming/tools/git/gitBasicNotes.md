@@ -1005,6 +1005,7 @@ gpg --armor --export <pub-keyID>
 # Git global configuration for GPG signature commits
 git config --global user.signingkey <pub-keyID>
 git config --global commit.gpgsign true
+git config --global gpg.program gpg
 
 # WSL2 fix: Add to ~/.zshrc
 export GPG_TTY=$(tty)
