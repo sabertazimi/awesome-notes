@@ -1021,6 +1021,20 @@ gpg --sign-key <GitHub-keyID>
 git log --show-signature
 ```
 
+[Update existing GPG key](https://inspirezone.tech/using-gpg-keys-on-github):
+
+```bash
+gpg --edit-key <pub-keyID>
+> expire
+> passwd
+> save
+```
+
+After this
+[update](https://github.blog/changelog/2022-05-31-improved-verification-of-historic-git-commit-signatures)
+commits signed with expired GPG key (before it expired)
+no longer become `unverified` state.
+
 ### LICENSE
 
 #### Popular LICENSE
