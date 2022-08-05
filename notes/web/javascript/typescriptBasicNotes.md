@@ -3270,8 +3270,6 @@ AST + Checker ~~Emitter~~> JavaScript
 #### TypeScript Scanner
 
 ```ts
-import ts from 'typescript';
-
 // 单例扫描器
 const scanner = ts.createScanner(ts.ScriptTarget.Latest, /* 忽略杂项 */ true);
 
@@ -3307,8 +3305,6 @@ while (token !== ts.SyntaxKind.EndOfFileToken) {
 ```
 
 ```ts
-import ts from 'typescript';
-
 function printAllChildren(node: ts.Node, depth = 0) {
   console.log(
     new Array(depth + 1).join('----'),
@@ -3379,8 +3375,6 @@ Program.emit ->
 ### TypeScript Internals API
 
 ```ts
-import ts from 'typescript';
-
 // Path of the file we want to analyze.
 // It's important that @types/react is installed in the same package.
 const filePath = 'example.jsx';
