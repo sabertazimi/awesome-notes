@@ -605,8 +605,9 @@ tags: [Web, Framework, Library]
 
 ### Carousel
 
-- [Nuka: Pure React Carousel Component](https://github.com/FormidableLabs/nuka-carousel)
 - [Swiper: Modern Mobile Touch Slider with Hardware Accelerated Transitions](https://github.com/nolimits4web/swiper)
+- [Nuka: Pure React Carousel Component](https://github.com/FormidableLabs/nuka-carousel)
+- [Embla: Lightweight Carousel Library with Fluid Motion and Great Swipe Precision](https://github.com/davidjerleke/embla-carousel)
 - [ReactSlick: React Carousel Component](https://github.com/akiran/react-slick)
 - [React Responsive Carousel](https://github.com/leandrowd/react-responsive-carousel)
 - [Flicking: Reliable, Flexible and Extendable Carousel](https://github.com/naver/egjs-flicking)
