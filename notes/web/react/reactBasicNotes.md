@@ -2912,7 +2912,7 @@ class App extends Component {
 export default App;
 ```
 
-Prevent useless re-rendering:
+[Prevent useless re-rendering](https://www.developerway.com/posts/react-re-renders-guide):
 
 - `shouldComponentUpdate`.
 - `React.PureComponent`: **shallow compare** diff.
