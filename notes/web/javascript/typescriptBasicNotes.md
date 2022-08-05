@@ -3209,10 +3209,40 @@ logger(user); // Oops! `user.isSuperAdmin` is undefined.
 - `...` [rest types](#rest-parameters): `Items extends [infer Head, ...infer Tail]`.
 - [Recursive types](#recursive-types).
 
-#### Type Gymnastics Reference
+#### Type Gymnastics Examples
 
 - `PathOf<Form>` complex recursive [types](https://mp.weixin.qq.com/s/KJdUdwbLN4g4M7xy34m-fA).
 - Type-safe React router advanced [types](https://speakerdeck.com/zoontek/advanced-typescript-how-we-made-our-router-typesafe).
+
+```tsx
+import React from 'react';
+
+type PathSegments<Path extends string> =
+  Path extends `${infer SegmentA}/${infer SegmentB}`
+    ? ParamOnly<SegmentA> | PathSegments<SegmentB>
+    : ParamOnly<Path>;
+type ParamOnly<Segment extends string> = Segment extends `:${infer Param}`
+  ? Param
+  : never;
+type RouteParams<Path extends string> = {
+  [Key in PathSegments<Path>]: string;
+};
+
+interface RouteProps<Path extends string> {
+  path: Path;
+  render: (routeProps: { match: { params: RouteParams<Path> } }) => void;
+}
+
+<Route
+  path="/user/:username"
+  render={routeProps => {
+    const params = routeProps.match.params;
+  }}
+/>;
+```
+
+#### Type Gymnastics Reference
+
 - Type [challenges](https://github.com/type-challenges/type-challenges).
 - Type [gymnastics](https://github.com/g-plane/type-gymnastics).
 - Type [trident](https://github.com/anuraghazra/type-trident).
