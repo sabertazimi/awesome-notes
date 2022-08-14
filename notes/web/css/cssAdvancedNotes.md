@@ -1986,6 +1986,23 @@ const svgRectElement = document.createElementNS(
 </style>
 ```
 
+### Foldable Device Query
+
+[`viewport-segments`](https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/main/Foldables/explainer.md):
+
+```css
+/* stylelint-disable-next-line media-feature-name-no-unknown */
+@media (horizontal-viewport-segments: 2) and (vertical-viewport-segments: 1) {
+  main article {
+    flex: 1 1 env(viewport-segment-width 0 0);
+  }
+
+  main aside {
+    flex: 1;
+  }
+}
+```
+
 ### Resolution Query
 
 [`<resolution>`](https://developer.mozilla.org/docs/Web/CSS/resolution):
