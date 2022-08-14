@@ -1434,8 +1434,9 @@ tags: [CS, Math]
 
 ## Mahjong Reference
 
-- [Beginner's Luck](http://beginners.biz/kihon)
-- [魔女ブログ](https://puyokururu.medium.com)
-- [おしえて！科学する麻雀](https://book.douban.com/subject/20390543)
-- [Li, Junjie, et al. "Suphx: Mastering mahjong with deep reinforcement learning." arXiv preprint arXiv:2003.13590 (2020)](https://arxiv.org/pdf/2003.13590.pdf)
-- [天鳳牌理好形表示](https://greasyfork.org/zh-CN/scripts/435111-%E5%A4%A9%E9%B3%B3%E7%89%8C%E7%90%86%E5%A5%BD%E5%BD%A2%E8%A1%A8%E7%A4%BA)
+- `Beginner's Luck` [guide](http://beginners.biz/kihon).
+- `魔女` [ブログ (Blog)](https://puyokururu.medium.com).
+- `おしえて！科学する麻雀` [book](https://book.douban.com/subject/20390543).
+- `Suphx` [AI](https://arxiv.org/pdf/2003.13590.pdf).
+- Mahjong online [reviewer](https://github.com/Equim-chan/mjai-reviewer).
+- 天鳳牌理好形表示 [插件](https://greasyfork.org/zh-CN/scripts/435111-%E5%A4%A9%E9%B3%B3%E7%89%8C%E7%90%86%E5%A5%BD%E5%BD%A2%E8%A1%A8%E7%A4%BA).
