@@ -2388,7 +2388,7 @@ PC 屏幕 DPR 为 1,
 .border-image-1px {
   border-width: 0 0 1px;
   border-bottom: none;
-  border-image: url('../img/linenew.png') 0 0 2 0 stretch;
+  border-image: url('../img/line.png') 0 0 2 0 stretch;
 }
 
 .background-image-1px {
@@ -2821,7 +2821,11 @@ video,
 object {
   box-sizing: border-box;
   max-width: 100%;
+  max-inline-size: 100%;
   height: auto;
+  block-size: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
 }
 
 button,
