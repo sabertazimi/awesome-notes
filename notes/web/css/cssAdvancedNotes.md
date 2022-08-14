@@ -2024,6 +2024,29 @@ const svgRectElement = document.createElementNS(
 - `less`.
 - `more`.
 
+```css
+@media (prefers-contrast: no-preference) {
+  html {
+    color: #333;
+    background-color: #eee;
+  }
+}
+
+@media (prefers-contrast: more) {
+  html {
+    color: #000;
+    background-color: white;
+  }
+}
+
+@media (prefers-contrast: less) {
+  html {
+    color: #555;
+    background: conic-gradient(from 90deg at 50% -10%, #bbb, 50%, #999, #bbb);
+  }
+}
+```
+
 ### Color Scheme Query
 
 `prefers-color-scheme`:
