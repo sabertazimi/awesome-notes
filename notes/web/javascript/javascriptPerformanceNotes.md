@@ -973,6 +973,11 @@ Legacy sprites optimization:
 
 ### Data Preloading
 
+- Generally, preloads will load in order parser gets to them for anything >= `Medium`.
+- Font preloads are probably best towards end of `<head>` or beginning of `<body>`.
+- Import preloads should be done after `<script>` tag that needs the import.
+- Image preloads will have a low priority (async scripts).
+
 Role of [preload scanner](https://web.dev/preload-scanner) is speculative,
 meaning that it examines **raw markup** (not scan CSS)
 in order to find resources to opportunistically fetch
@@ -1008,22 +1013,17 @@ Preload scanner can be defeated (can't discover resources quickly):
 - Lazy-loading above-the-fold images or iframes using JavaScript solution.
 - Rendering markup on client that contain document sub-resources using JavaScript.
 
-### PreFetch and PreLoad
+### Data PreFetching
 
 [Quick Link](https://github.com/GoogleChromeLabs/quicklink)
-prefetch library.
+prefetch:
 
 ```html
-<link rel="prefetch"></link>
-<link rel="preload"></link>
+<link rel="prefetch" href="hero.jpg" as="image" />
 ```
 
-- Generally, preloads will load in order parser gets to them for anything >= `Medium`.
-- Font preloads are probably best towards end of `<head>` or beginning of `<body>`.
-- Import preloads should be done after `<script>` tag that needs the import.
-- Image preloads will have a low priority (async scripts).
-
-[PreFetch and PreRender Pitfalls](https://addyosmani.com/blog/what-not-to-prefetch-prerender):
+Pre-fetch and pre-render
+[pitfalls](https://addyosmani.com/blog/what-not-to-prefetch-prerender):
 
 - Avoid prefetching pages for authentication.
 - Avoid over-prefetching to limit accidental DOS.
