@@ -382,6 +382,7 @@ but also can every `<article>` and `<section>` element.
 - `email`.
 - `new-password`.
 - `current-password`.
+- `one-time-code`.
 - `off`.
 
 ```html
