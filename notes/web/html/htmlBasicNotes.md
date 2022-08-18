@@ -293,8 +293,16 @@ but also can every `<article>` and `<section>` element.
 
 ### Form Validation
 
-- Form validation complete [guide](https://developer.mozilla.org/docs/Learn/HTML/Forms/Form_validation).
-- Constraint validation complete [guide](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5/Constraint_validation).
+- Form validation complete [guide](https://developer.mozilla.org/docs/Learn/Forms/Form_validation).
+- Constraint validation complete [guide](https://developer.mozilla.org/docs/Web/Guide/HTML/Constraint_validation).
+
+```js
+const usernameInput = document.querySelector('[name="name"]');
+
+usernameInput.addEventListener('invalid', () => {
+  usernameInput.setCustomValidity('Please enter your name.');
+});
+```
 
 ### Form Element Attributes
 
