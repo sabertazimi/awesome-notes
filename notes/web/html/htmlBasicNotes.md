@@ -377,12 +377,23 @@ but also can every `<article>` and `<section>` element.
 
 #### AutoComplete Attribute
 
-`autocomplete`:
+[`autocomplete`](https://developer.mozilla.org/docs/Web/HTML/Attributes/autocomplete):
 
 - `email`.
 - `new-password`.
 - `current-password`.
+- `street-address`.
+- `address-line1`.
+- `address-line2`.
+- `address-line3`.
+- `city`.
+- `state`.
+- `country`.
+- `tel`.
+- `zip`.
 - `one-time-code`.
+- `cc-number`.
+- `cc-exp`.
 - `off`.
 
 ```html
