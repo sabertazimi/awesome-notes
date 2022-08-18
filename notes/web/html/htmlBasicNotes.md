@@ -412,6 +412,7 @@ usernameInput.addEventListener('invalid', () => {
 - `tel`.
 - `zip`.
 - `one-time-code`.
+- `cc-name`.
 - `cc-number`.
 - `cc-exp`.
 - `off`.
