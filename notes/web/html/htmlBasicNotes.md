@@ -321,6 +321,18 @@ but also can every `<article>` and `<section>` element.
 - `multipart/form-data` 不编码字符, **上传控件表单元素**必须使用改值.
 - `text/plain`: 表单元素数据中的空格编码为 `+`.
 
+```html
+<form method="post" enctype="multipart/form-data">
+  <div>
+    <label for="file">Choose file to upload</label>
+    <input type="file" id="file" name="file" multiple />
+  </div>
+  <div>
+    <button>Upload image</button>
+  </div>
+</form>
+```
+
 #### Form Target Attribute
 
 `target` 定义表单提交后加载页面打开方式:
