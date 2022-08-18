@@ -2003,6 +2003,24 @@ const svgRectElement = document.createElementNS(
 }
 ```
 
+### Display Mode Query
+
+[`display-mode`](https://developer.mozilla.org/docs/Web/CSS/@media/display-mode):
+
+- `fullscreen`.
+- `standalone`.
+- `minimal-ui`.
+- `browser`.
+
+```css
+@media all and (display-mode: fullscreen) {
+  body {
+    margin: 0;
+    border: 5px solid black;
+  }
+}
+```
+
 ### Resolution Query
 
 [`<resolution>`](https://developer.mozilla.org/docs/Web/CSS/resolution):
