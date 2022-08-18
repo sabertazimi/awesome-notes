@@ -291,29 +291,29 @@ but also can every `<article>` and `<section>` element.
 <input type="date picker(data,month,week,time,datetime,datetime-local)" />
 ```
 
-### Form Validate
+### Form Validation
 
 - Form validation complete [guide](https://developer.mozilla.org/docs/Learn/HTML/Forms/Form_validation).
 - Constraint validation complete [guide](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5/Constraint_validation).
 
-### Form Element Attribute
+### Form Element Attributes
 
-#### Form Property
+#### Form Attribute
 
 `form=form_name`:
 使表单元素可放置于表单之外
 
-#### Form Action Property
+#### Form Action Attribute
 
 `formaction=target_name`:
 使表单元素可提交到不同页面
 
-#### Form Method Property
+#### Form Method Attribute
 
 `formmethod=post/get`:
 使表单元素以不同的方式提交
 
-#### Form Enctype
+#### Form Enctype Attribute
 
 `enctype` (HTTP `Content-Type` header):
 
@@ -321,17 +321,17 @@ but also can every `<article>` and `<section>` element.
 - `multipart/form-data` 不编码字符, **上传控件表单元素**必须使用改值.
 - `text/plain`: 表单元素数据中的空格编码为 `+`.
 
-#### Form Target
+#### Form Target Attribute
 
-定义表单提交后加载页面打开方式
+`target` 定义表单提交后加载页面打开方式:
 
-- blank 在新窗口中打开被链接文档
-- self 默认:在相同的框架中打开被链接文档
-- parent 在父框架集中打开被链接文档
-- top 在整个窗口中打开被链接文档
-- frameName 在指定的框架中打开被链接文档
+- `self` (default): 在相同的框架中打开被链接文档.
+- `blank`: 在新窗口中打开被链接文档.
+- `parent`: 在父框架集中打开被链接文档.
+- `top`: 在整个窗口中打开被链接文档.
+- `frameName`: 在指定的框架中打开被链接文档.
 
-#### Form Novalidate
+#### Form Novalidate Attribute
 
 取消表单元素的提交验证 (`novalidate`):
 
@@ -339,7 +339,7 @@ but also can every `<article>` and `<section>` element.
 使整个表单提交验证失效, 实现假提交,
 进而弹出再次确认按钮 (真提交).
 
-#### AutoFocus
+#### AutoFocus Attribute
 
 ```html
 <div class="form-control">
@@ -354,7 +354,7 @@ but also can every `<article>` and `<section>` element.
 </div>
 ```
 
-#### Required
+#### Required Attribute
 
 ```html
 <div class="form-control">
@@ -370,10 +370,55 @@ but also can every `<article>` and `<section>` element.
 </div>
 ```
 
-#### Disabled and Hidden
+#### Disabled and Hidden Attribute
 
 - `disabled` 表单元素的数据不会被提交.
 - `hidden` 表单元素的数据仍会被提交.
+
+#### AutoComplete Attribute
+
+`autocomplete`:
+
+- `email`.
+- `new-password`.
+- `current-password`.
+- `off`.
+
+```html
+<form>
+  <div>
+    <label for="email">Email</label>
+    <input autocomplete="email" required type="email" id="email" name="email" />
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input
+      autocomplete="new-password"
+      type="password"
+      id="password"
+      name="password"
+    />
+  </div>
+  <button>Sign up</button>
+</form>
+
+<form>
+  <div>
+    <label for="email">Email</label>
+    <input autocomplete="email" required type="email" id="email" name="email" />
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input
+      autocomplete="current-password"
+      type="password"
+      id="password"
+      name="password"
+    />
+  </div>
+  <button>Sign in</button>
+</form>
+```
 
 ### Form Labels
 
