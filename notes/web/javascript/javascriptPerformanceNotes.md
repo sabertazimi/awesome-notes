@@ -1223,6 +1223,12 @@ requireScript('the_rest.js', function () {
 - 冷启动开启数据预拉取.
 - 页面路由切换时进行数据预拉取 (并缓存数据).
 
+### Data Loading Reference
+
+- Fetch priority [guide](https://web.dev/priority-hints).
+- Resources priority [guide](https://web.dev/prioritize-resources).
+- 3rd-party scripts loading [guide](https://www.patterns.dev/posts/third-party).
+
 ## Performance Monitoring
 
 前端性能监控分为两种方式,
@@ -1365,7 +1371,14 @@ beacon.src = `http://www.example.com/logger/beacon.gif?page=${encodeURI(
 )}&ref=${encodeURI(referringPage)}`;
 ```
 
-## Web Performance API
+### Performance Monitoring Reference
+
+- Performance monitoring data collection and report [case](https://zhuanlan.zhihu.com/p/420330110).
+- Performance monitoring real world [case](https://juejin.cn/post/7078512301665419295).
+
+## Web Vitals
+
+### Web Performance API
 
 ```ts
 performance.mark('mainThread-start');
@@ -1374,7 +1387,9 @@ performance.mark('mainThread-stop');
 performance.measure('mainThread', 'mainThread-start', 'mainThread-stop');
 ```
 
-### First Paint Time
+### FP
+
+First paint time:
 
 ```ts
 const entryHandler = list => {
@@ -1650,6 +1665,15 @@ observer.observe({ type: 'layout-shift', buffered: true });
 // }
 ```
 
+### Web Vitals Reference
+
+- LCP optimization [guide](https://web.dev/optimize-lcp).
+- FID optimization [guide](https://web.dev/optimize-fid).
+- CLS optimization [guide](https://web.dev/optimize-cls).
+- Web vitals measurement [best practices](https://web.dev/vitals-field-measurement-best-practices).
+- Web vitals field data debugging [guide](https://web.dev/debug-web-vitals-in-the-field).
+- Web vitals real world [case](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw).
+
 ## PRPL Pattern
 
 `PRPL` pattern focuses on 4 main performance considerations:
@@ -1709,22 +1733,8 @@ observer.observe({ type: 'layout-shift', buffered: true });
 - [Lighthouse Audit Tab)](https://github.com/GoogleChrome/lighthouse)
 - [LightHouse CI Action](https://github.com/treosh/lighthouse-ci-action)
 - Audits Chrome: PWA, SEO, performance, device simulator.
-
-### Inspect Android Device
-
-- Enable development mode and USB debugging in Android Device.
-- Link Android and PC with USB cable.
-- Open `chrome://inspect/#devices` to start inspecting.
+- Android: open `chrome://inspect/#devices` to start inspecting.
 
 ## Performance Reference
 
 - `web.dev` performance complete [guide](https://web.dev/fast).
-- LCP optimization [guide](https://web.dev/optimize-lcp).
-- FID optimization [guide](https://web.dev/optimize-fid).
-- CLS optimization [guide](https://web.dev/optimize-cls).
-- Fetch priority [guide](https://web.dev/priority-hints).
-- Resources priority [guide](https://web.dev/prioritize-resources).
-- 3rd-party scripts loading [guide](https://www.patterns.dev/posts/third-party)
-- Web vitals real world [case](https://mp.weixin.qq.com/s/zJMM4SF7pc6LZPCsQfWOxw).
-- Web performance monitoring data collection and report [case](https://zhuanlan.zhihu.com/p/420330110).
-- Web performance monitoring real world [case](https://juejin.cn/post/7078512301665419295).
