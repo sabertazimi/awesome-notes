@@ -71,6 +71,8 @@ async function handleRequest(event) {
 
 ### Service Worker Caching Strategy
 
+![Service Worker Cache](./figures/ServiceWorkerCache.webp)
+
 5 caching strategy in [workbox](https://developer.chrome.com/docs/workbox/caching-strategies-overview).
 
 Stale-While-Revalidate:
