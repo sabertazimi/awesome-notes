@@ -1668,8 +1668,9 @@ observer.observe({ type: 'layout-shift', buffered: true });
 
 ### Web Vitals Reference
 
-- LCP optimization [guide](https://web.dev/optimize-lcp).
+- FID tracking [tool](https://github.com/GoogleChromeLabs/first-input-delay).
 - FID optimization [guide](https://web.dev/optimize-fid).
+- LCP optimization [guide](https://web.dev/optimize-lcp).
 - CLS optimization [guide](https://web.dev/optimize-cls).
 - Web vitals measurement [best practices](https://web.dev/vitals-field-measurement-best-practices).
 - Web vitals field data debugging [guide](https://web.dev/debug-web-vitals-in-the-field).
@@ -1723,18 +1724,22 @@ observer.observe({ type: 'layout-shift', buffered: true });
   - Avoid HTTP redirects.
   - CDN: minimize RTT.
 
-## Performance Analysis Tools
+## Performance Tools
 
-- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
-- [Chrome UX Report](https://developers.google.com/web/tools/chrome-user-experience-report)
-- [Speed Tools](https://web.dev/speed-tools)
-- [FID Tracking](https://github.com/GoogleChromeLabs/first-input-delay)
+Speed tools [list](https://web.dev/speed-tools):
+
 - [WebPageTest](https://www.webpagetest.org)
 - [PageSpeed Insights](https://pagespeed.web.dev)
-- [Lighthouse Audit Tab)](https://github.com/GoogleChrome/lighthouse)
-- [LightHouse CI Action](https://github.com/treosh/lighthouse-ci-action)
-- Audits Chrome: PWA, SEO, performance, device simulator.
-- Android: open `chrome://inspect/#devices` to start inspecting.
+- Chrome UX [report](https://developer.chrome.com/docs/crux).
+- Chrome [DevTools](https://developer.chrome.com/docs/devtools)
+- LightHouse CI [action](https://github.com/treosh/lighthouse-ci-action).
+- Chrome audit [tab](https://github.com/GoogleChrome/lighthouse):
+  - Performance [audit](https://web.dev/lighthouse-performance).
+  - PWA [audit](https://web.dev/lighthouse-pwa).
+  - Best practices [audit](https://web.dev/lighthouse-best-practices).
+  - Accessibility [audit](https://web.dev/lighthouse-accessibility).
+  - SEO [audit](https://web.dev/lighthouse-seo).
+- Chrome inspector: `chrome://inspect/#devices` to start inspecting.
 
 ## Performance Reference
 
