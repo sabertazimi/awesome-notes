@@ -3543,8 +3543,9 @@ signalingChannel.onmessage = function (msg) {
 
 ## Web Animations
 
-- `KeyframeEffect`.
-- `Animation`.
+### Keyframe Effect API
+
+`KeyframeEffect`:
 
 ```ts
 const rabbitDownKeyframes = new KeyframeEffect(
@@ -3569,7 +3570,44 @@ function downHandler() {
 }
 ```
 
-- `element.animate`.
+### Animation API
+
+- `animation.currentTime`.
+- `animation.playState`.
+- `animation.effect`.
+- `animation.pause()/play()/reverse()/finish()/cancel()`.
+
+```ts
+animation.currentTime = animation.effect.getComputedTiming().duration / 2;
+
+function currentTime(time = 0) {
+  animations.forEach(function (animation) {
+    if (typeof animation.currentTime === 'function') {
+      animation.currentTime(time);
+    } else {
+      animation.currentTime = time;
+    }
+  });
+}
+
+function createPlayer(animations) {
+  return Object.freeze({
+    play() {
+      animations.forEach(animation => animation.play());
+    },
+    pause() {
+      animations.forEach(animation => animation.pause());
+    },
+    currentTime(time = 0) {
+      animations.forEach(animation => (animation.currentTime = time));
+    },
+  });
+}
+```
+
+### Animate API
+
+`element.animate`:
 
 ```ts
 const animationKeyframes = [
@@ -3597,39 +3635,9 @@ const animation = document
   .animate(animationKeyframes, animationTiming);
 ```
 
-- `animation.currentTime`.
-- `animation.playState`.
-- `animation.effect`.
-- `animation.pause()/play()/reverse()/finish()/cancel()`.
+### Web Animations Reference
 
-```ts
-animation.pause();
-animation.currentTime = animation.effect.getComputedTiming().duration / 2;
-
-function currentTime(time = 0) {
-  animations.forEach(function (animation) {
-    if (typeof animation.currentTime === 'function') {
-      animation.currentTime(time);
-    } else {
-      animation.currentTime = time;
-    }
-  });
-}
-
-function createPlayer(animations) {
-  return Object.freeze({
-    play() {
-      animations.forEach(animation => animation.play());
-    },
-    pause() {
-      animations.forEach(animation => animation.pause());
-    },
-    currentTime(time = 0) {
-      animations.forEach(animation => (animation.currentTime = time));
-    },
-  });
-}
-```
+- Using Web Animations [API](https://developer.mozilla.org/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API).
 
 ## Web Canvas
 
