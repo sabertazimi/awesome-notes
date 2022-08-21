@@ -4019,7 +4019,7 @@ __metadata:
     ci-info: ^3.3.2
     eslint: ^8.22.0
     katex: ^0.16.0
-    markdownlint-cli: ^0.32.1
+    markdownlint-cli: ^0.32.2
     prettier: ^2.7.1
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -9229,9 +9229,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"markdownlint-cli@npm:^0.32.1":
-  version: 0.32.1
-  resolution: "markdownlint-cli@npm:0.32.1"
+"markdownlint-cli@npm:^0.32.2":
+  version: 0.32.2
+  resolution: "markdownlint-cli@npm:0.32.2"
   dependencies:
     commander: ~9.4.0
     get-stdin: ~9.0.0
@@ -9239,29 +9239,29 @@ fsevents@~2.3.2:
     ignore: ~5.2.0
     js-yaml: ^4.1.0
     jsonc-parser: ~3.1.0
-    markdownlint: ~0.26.1
-    markdownlint-rule-helpers: ~0.17.1
+    markdownlint: ~0.26.2
+    markdownlint-rule-helpers: ~0.17.2
     minimatch: ~5.1.0
     run-con: ~1.2.11
   bin:
     markdownlint: markdownlint.js
-  checksum: 094b559ef0dd2b05ba8da7fc6ceec5ba116af04049c25ab947585d009439ba289b62d6ebbb7f0f8065c0ac30a9d4f9430ee0fdbc1560624052662e3ee0b4b79a
+  checksum: 131cb66b0d6da54f0feee4a73edda6337bf81ee5fbf3afcc6417faf4d0ec6f0231b2b471614e43588f6ea19f080b1a2bc5f4312e9dbf87656934fba0edb51231
   languageName: node
   linkType: hard
 
-"markdownlint-rule-helpers@npm:~0.17.1":
-  version: 0.17.1
-  resolution: "markdownlint-rule-helpers@npm:0.17.1"
-  checksum: 0d6db4f5a20abcdc7ee8bd23311a726b573da056ae2d9063c4364a80f992ff0aaaad06cc01ab126a53c269e3e5971984f30f90fce82d1ccd351cbe1284608487
+"markdownlint-rule-helpers@npm:~0.17.2":
+  version: 0.17.2
+  resolution: "markdownlint-rule-helpers@npm:0.17.2"
+  checksum: e34c0266ffc0e1102fdd839dd70228b719c3120e8b61d0e21d4e21388a87203b7ec69d5dceb00d7bdc02fe215d2b51b14a7a72d89caa3acc7498edb38877cb40
   languageName: node
   linkType: hard
 
-"markdownlint@npm:~0.26.1":
-  version: 0.26.1
-  resolution: "markdownlint@npm:0.26.1"
+"markdownlint@npm:~0.26.2":
+  version: 0.26.2
+  resolution: "markdownlint@npm:0.26.2"
   dependencies:
     markdown-it: 13.0.1
-  checksum: 0a971abc92086fe7f9a598d2ac288a048e0c340fa5543ab4962ad7614f923fdf0e278d54fa487ea4d36a4fd1429e20b6592ce7f0ad00e95fe823970238cc3049
+  checksum: 9e20401410b5701bdaf2306a7856c8fd89c4c004b4b00568fb0f67f51a08952621e5cd260c50f947563794c971e45aac3c80f711781d921a19708c4c7ccc278c
   languageName: node
   linkType: hard
 
