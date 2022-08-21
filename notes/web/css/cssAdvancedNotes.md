@@ -2134,7 +2134,7 @@ const svgRectElement = document.createElementNS(
 - `reduce`.
 
 ```css
-@media (prefers-reduced-motion) {
+@media (prefers-reduced-motion: reduce) {
   .animated {
     animation: none;
   }
