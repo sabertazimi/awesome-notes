@@ -253,7 +253,10 @@ help prevent from `XSS`:
 指示浏览器在发出网络请求之前升级不安全的 `URL`:
 
 ```html
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<meta
+  http-equiv="Content-Security-Policy"
+  content="upgrade-insecure-requests"
+/>
 ```
 
 `block-all-mixed-content`
@@ -262,7 +265,7 @@ help prevent from `XSS`:
 包括主动和被动混合内容:
 
 ```html
-<meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
+<meta http-equiv="Content-Security-Policy" content="block-all-mixed-content" />
 ```
 
 `nonce`-only `CSP` block 3rd scripts and dynamic scripts generate by trusted users:
@@ -979,6 +982,7 @@ Not with name, should with email:
 
 #### Session Hijacking Protection
 
+Same site cookie [recipe](https://web.dev/first-party-cookie-recipes),
 `Set-Cookie: session_id=278283910977381992837; HttpOnly; Secure; SameSite=Lax`:
 
 - Prevent XSS cookie theft,
