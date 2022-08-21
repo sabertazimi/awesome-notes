@@ -186,9 +186,9 @@ UI 的防御性:
   - 代码审核.
   - 样式隔离.
 
-### Secure HTTP Headers
+### Security Headers
 
-Secure HTTP [headers](https://github.com/helmetjs/helmet):
+Security headers [list](https://web.dev/security-headers):
 
 - [X-Content-Type-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Content-Type-Options).
 - [X-Frame-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options):
