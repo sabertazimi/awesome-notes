@@ -441,8 +441,9 @@ function App() {
 
 ### SEO Reference
 
-- [SEO Basics](https://developers.google.com/search/docs/guides/javascript-seo-basics)
-- [SPA SEO Basics](https://snipcart.com/spa-seo)
+- Basic SEO [guide](https://developers.google.com/search/docs/guides/javascript-seo-basics).
+- SPA SEO [guide](https://snipcart.com/spa-seo).
+- Google SEO [guide](https://web.dev/google-search-tools).
 
 ## Web Authentication
 
