@@ -249,6 +249,22 @@ help prevent from `XSS`:
 }
 ```
 
+`upgrade-insecure-requests`
+指示浏览器在发出网络请求之前升级不安全的 `URL`:
+
+```html
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+```
+
+`block-all-mixed-content`
+指示浏览器永不加载混合内容,
+所有混合内容资源请求都会被阻止,
+包括主动和被动混合内容:
+
+```html
+<meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
+```
+
 `nonce`-only `CSP` block 3rd scripts and dynamic scripts generate by trusted users:
 
 ```html
