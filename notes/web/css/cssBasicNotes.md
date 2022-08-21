@@ -2737,6 +2737,8 @@ whether and when it is [downloaded and ready to use](https://github.com/bramstei
 
 ### Font Performance
 
+[Reduce web font size](https://web.dev/reduce-webfont-size):
+
 - Compress fonts: better formats (e.g `woff2`/`woff`).
 - Subset fonts: `unicode-range`.
 - Local fonts: `local()`.
