@@ -236,10 +236,16 @@ self.addEventListener('activate', function (event) {
 
 ### PWA Reference
 
-- [Workbox](https://github.com/GoogleChrome/workbox)
-- [Offline Cookbook](https://web.dev/offline-cookbook)
-- [Extensive Guide](https://www.smashingmagazine.com/2018/11/guide-pwa-progressive-web-applications)
-- [Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers)
+- Service worker [overview](https://developer.chrome.com/docs/workbox/service-worker-overview).
+- Workbox [library](https://github.com/GoogleChrome/workbox).
+- Offline cookbook [guide](https://web.dev/offline-cookbook).
+- PWA extensive [guide](https://www.smashingmagazine.com/2018/11/guide-pwa-progressive-web-applications).
+- Network reliable web app definitive [guide](https://web.dev/reliable):
+  - [Resilient search](https://web.dev/resilient-search-experiences).
+  - [Instant navigation](https://web.dev/instant-navigation-experiences).
+  - [App shell](https://web.dev/app-shell-ux-with-service-workers)>
+  - [Adaptive loading](https://web.dev/adaptive-loading-with-service-workers).
+  - [Broadcast updates](https://web.dev/broadcast-updates-guide).
 
 ## JamStack
 
