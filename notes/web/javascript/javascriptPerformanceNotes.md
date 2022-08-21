@@ -993,18 +993,19 @@ the preload scanner will discover and fetch the image resource more quickly.
 <link rel="preload" as="fetch" href="..." crossorigin />
 <link
   rel="preload"
-  as="image"
-  href="keyboard.jpg"
-  imagesrcset="poster_400px.jpg 400w, poster_800px.jpg 800w, poster_1600px.jpg 1600w"
-  imagesizes="50vw"
-/>
-<link
-  rel="preload"
   as="font"
   href="myFont.woff2"
   type="font/woff2"
   crossorigin
 />
+<link
+  rel="preload"
+  as="image"
+  href="keyboard.jpg"
+  imagesrcset="poster_400px.jpg 400w, poster_800px.jpg 800w, poster_1600px.jpg 1600w"
+  imagesizes="50vw"
+/>
+<link rel="preload" as="video" href="https://cdn.com/small-file.mp4" />
 ```
 
 Preload scanner can be defeated (can't discover resources quickly):
