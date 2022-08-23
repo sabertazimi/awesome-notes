@@ -711,6 +711,33 @@ title.value = 'Vue 3 Detailed Guide';
 console.log(book.title); // 'Vue 3 Detailed Guide'
 ```
 
+#### Ref Value
+
+当一个 `ref` 被嵌套在一个响应式对象中作为属性被访问或更改时,
+会自动解包 (无需使用 `.value`):
+
+```ts
+const count = ref(0);
+const state = reactive({
+  count,
+});
+console.log(state.count); // 0
+
+state.count = 1;
+console.log(count.value); // 1
+```
+
+当 `ref` 作为响应式数组或 `Map` 原生集合类型的元素被访问时,
+不会进行解包 (需要使用 `.value`):
+
+```ts
+const books = reactive([ref('Vue 3 Guide')]);
+console.log(books[0].value);
+
+const map = reactive(new Map([['count', ref(0)]]));
+console.log(map.get('count').value);
+```
+
 #### Computed Value
 
 ```ts
