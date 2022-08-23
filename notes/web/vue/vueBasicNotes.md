@@ -740,6 +740,9 @@ console.log(map.get('count').value);
 
 #### Computed Value
 
+计算属性的计算函数应只做计算而没有任何其他的副作用,
+不要在计算函数中做异步请求或者更改 DOM:
+
 ```ts
 const count = ref(1);
 const plusOne = computed(() => count.value + 1);
@@ -748,6 +751,8 @@ console.log(plusOne.value); // 2
 
 plusOne.value++; // error
 ```
+
+**特殊情况**下可通过 getter 和 setter 创建可写计算属性:
 
 ```ts
 const count = ref(1);
@@ -758,7 +763,7 @@ const plusOne = computed({
   },
 });
 
-plusOne.value = 1;
+plusOne.value = 1; // 可写计算属性
 console.log(count.value); // 0
 ```
 
