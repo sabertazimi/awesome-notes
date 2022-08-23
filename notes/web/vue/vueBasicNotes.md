@@ -890,6 +890,41 @@ watch(state, (state, prevState) => {
 state.attributes.name = 'Alex'; // Logs: "deep" "Alex" "Alex"
 ```
 
+Watch effect:
+`watchEffect()` 会立即执行一遍回调函数,
+Vue 会自动追踪副作用的依赖关系,
+自动分析出响应源 (自动追踪所有能访问到的响应式属性):
+
+```ts
+const url = ref('https://...');
+const data = ref(null);
+
+watchEffect(async () => {
+  const response = await fetch(url.value);
+  data.value = await response.json();
+});
+```
+
+Watch post effect:
+默认情况下,
+用户创建的 watcher 会在 Vue 组件更新前被调用,
+DOM 仍为旧状态,
+通过 `flush: post` 显示访问 Vue 更新后的 DOM:
+
+```ts
+watch(source, callback, {
+  flush: 'post',
+});
+
+watchEffect(callback, {
+  flush: 'post',
+});
+
+watchPostEffect(() => {
+  /* 在 Vue 更新后执行 */
+});
+```
+
 ## Animation and Transition
 
 - `v-enter-from`.
