@@ -21,10 +21,26 @@ tags: [Web, Vue]
   <p v-else-if="inventory <= 10 && inventory > 0">Almost Sold Out</p>
   <p v-else>Out of Stock</p>
   <ul>
-    <li v-for="item in items" :key="item.id">{{ item.value }}</li>
-    <li v-for="(item, index) in items">
-      {{ parentMessage }} - {{ index }} - {{ item.message }}
+    <!-- list -->
+    <li v-for="item in items" :key="item.id">{{ item.message }}</li>
+    <li v-for="(item, index) in items">{{ item.message }} {{ index }}</li>
+    <!-- destructed list -->
+    <li v-for="{ message } in items">{{ message }}</li>
+    <li v-for="({ message }, index) in items">{{ message }} {{ index }}</li>
+    <!-- nested list -->
+    <li v-for="item in items">
+      <span v-for="childItem in item.children">
+        {{ item.message }} {{ childItem }}
+      </span>
     </li>
+    <!-- iterator list -->
+    <li v-for="item of items">{{ item.message }}</li>
+    <!-- object list -->
+    <li v-for="(value, key, index) in myObject">
+      {{ index }}. {{ key }}: {{ value }}
+    </li>
+    <!-- range list -->
+    <li v-for="n in 10">{{ n }}</li>
   </ul>
 </template>
 ```
