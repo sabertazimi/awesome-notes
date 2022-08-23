@@ -882,6 +882,11 @@ watch(
   { deep: true }
 );
 
+// 直接给 `watch()` 传入一个响应式对象, 会隐式地创建一个深层侦听器
+watch(state, (state, prevState) => {
+  console.log('deep', state.attributes.name, prevState.attributes.name);
+});
+
 state.attributes.name = 'Alex'; // Logs: "deep" "Alex" "Alex"
 ```
 
