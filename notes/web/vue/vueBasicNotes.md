@@ -95,13 +95,37 @@ export function genElement(el: ASTElement, state: CodegenState): string {
 - Object binding.
 
 ```html
+<script setup lang="ts">
+  const isActive = ref(true);
+  const hasError = ref(false);
+  const activeClass = ref('active');
+  const errorClass = ref('text-danger');
+  const classObject = reactive({
+    active: true,
+    'text-danger': false,
+  });
+  const classObject = computed(() => ({
+    active: isActive.value && !error.value,
+    'text-danger': hashError.value,
+  }));
+
+  const activeColor = ref('red');
+  const fontSize = ref(30);
+  const styleObject = reactive({
+    color: 'red',
+    fontSize: '13px',
+  });
+</script>
+
 <template>
   <div class="static"></div>
   <div :class="{ active: isActive, 'text-danger': hasError }"></div>
   <div :class="[isActive ? activeClass : '', errorClass]"></div>
   <div :class="[{ active: isActive }, errorClass]"></div>
+  <div :class="classObject"></div>
   <div :style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
   <div :style="[baseStyles, overridingStyles]"></div>
+  <div :style="styleObject"></div>
   <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
 </template>
 ```
