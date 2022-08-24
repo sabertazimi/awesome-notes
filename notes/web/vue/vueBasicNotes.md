@@ -674,6 +674,25 @@ Slot props shorthand
 </TodoList>
 ```
 
+### Provide and Inject
+
+Root `provide` context value:
+
+```ts
+import { provide, ref } from 'vue';
+
+const count = ref(0);
+provide('key', count);
+```
+
+Child `inject` context value:
+
+```ts
+import { inject } from 'vue';
+
+const message = inject('message', defaultValue);
+```
+
 ## Composition API
 
 - [SFC with Script Setup](https://v3.vuejs.org/api/sfc-script-setup.html).
