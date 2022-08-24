@@ -383,84 +383,92 @@ Drag and Drop events:
 Component `v-model` directive:
 
 ```html
-<custom-input v-model="searchText"></custom-input>
-<custom-input
-  :model-value="searchText"
-  @update:model-value="searchText = $event"
-></custom-input>
+<CustomInput v-model="searchText" />
+<CustomInput
+  :modelValue="searchText"
+  @update:modelValue="newValue => searchText = newValue"
+/>
 ```
 
-```ts
-app.component('CustomInput', {
-  props: ['modelValue'],
-  emits: ['update:modelValue'],
-  template: `
-    <input
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
-    >
-  `,
-});
+```html
+<!-- CustomInput.vue -->
+<script setup>
+  defineProps(['modelValue']);
+  defineEmits(['update:modelValue']);
+</script>
+
+<template>
+  <input
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+  />
+</template>
 ```
 
-```ts
-app.component('CustomInput', {
-  props: ['modelValue'],
-  emits: ['update:modelValue'],
-  computed: {
-    value: {
-      get() {
-        return this.modelValue;
-      },
-      set(value) {
-        this.$emit('update:modelValue', value);
-      },
+```html
+<!-- CustomInput.vue -->
+<script setup>
+  import { computed } from 'vue';
+
+  const props = defineProps(['modelValue']);
+  const emit = defineEmits(['update:modelValue']);
+
+  const value = computed({
+    get() {
+      return props.modelValue;
     },
-  },
-  template: `
-    <input v-model="value">
-  `,
-});
+    set(value) {
+      emit('update:modelValue', value);
+    },
+  });
+</script>
+
+<template>
+  <input v-model="value" />
+</template>
 ```
 
-`options.model` on Child component:
+Custom component `v-model` name:
 
-```ts
-const Child = {
-  template: `
-    <div>
-      <input :value="msg" @input="updateValue" placeholder="edit me">
-    </div>
-  `,
-  props: ['msg'],
-  model: {
-    prop: 'msg',
-    event: 'change',
-  },
-  methods: {
-    updateValue(e) {
-      this.$emit('change', e.target.value);
-    },
-  },
-};
+```html
+<!-- MyComponent.vue -->
+<script setup>
+  defineProps(['title']);
+  defineEmits(['update:title']);
+</script>
 
-const vm = new Vue({
-  el: '#app',
-  components: {
-    Child,
-  },
-  data() {
-    return {
-      message: '',
-    };
-  },
-  template: `
-    <div>
-      <child v-model="message"></child>
-      <p>Message is: {{ message }}</p>
-    </div>
-  `,
-});
+<template>
+  <input
+    type="text"
+    :value="title"
+    @input="$emit('update:title', $event.target.value)"
+  />
+</template>
+```
+
+Custom component `v-model` modifier:
+
+```html
+<script setup>
+  const props = defineProps({
+    modelValue: String,
+    modelModifiers: { default: () => ({}) },
+  });
+
+  const emit = defineEmits(['update:modelValue']);
+
+  function emitValue(e) {
+    let value = e.target.value;
+    if (props.modelModifiers.capitalize) {
+      value = value.charAt(0).toUpperCase() + value.slice(1);
+    }
+    emit('update:modelValue', value);
+  }
+</script>
+
+<template>
+  <input type="text" :value="modelValue" @input="emitValue" />
+</template>
 ```
 
 ## Components
