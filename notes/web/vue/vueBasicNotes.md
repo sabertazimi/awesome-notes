@@ -523,7 +523,7 @@ Vue.createApp({
 - [Web Slot](https://developers.google.com/web/fundamentals/web-components/shadowdom#slots)
 - `name` attribute.
 - `fallback` content.
-- 插槽基本目的: 自定义组件渲染细节.
+- 插槽基本目的为自定义组件渲染细节: e.g 高级列表组件.
 - Normal Slots:
   在父组件编译和渲染阶段生成 Slots VNodes,
   数据作用域为父组件实例 (使用插槽的组件).
