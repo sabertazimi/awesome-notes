@@ -826,6 +826,27 @@ console.log(book.title); // 'Vue 3 Detailed Guide'
 
 #### Ref Value
 
+`ref` API:
+
+```ts
+import type { Ref } from 'vue';
+import { isRef, reactive, ref, toRef, unref } from 'vue';
+
+const count = ref(10);
+const state = reactive({
+  foo: 1,
+  bar: 2,
+});
+const fooRef = toRef(state, 'foo');
+
+console.log(isRef(count));
+console.log(unref(count) === 10);
+fooRef.value++;
+console.log(state.foo === 2);
+state.foo++;
+console.log(fooRef.value === 3);
+```
+
 当一个 `ref` 被嵌套在一个响应式对象中作为属性被访问或更改时,
 会自动解包 (无需使用 `.value`):
 
