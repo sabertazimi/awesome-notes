@@ -94,7 +94,7 @@ export function genElement(el: ASTElement, state: CodegenState): string {
 
 :::
 
-### Attributes Binding Directive
+### Attributes Binding Directives
 
 ```html
 <template>
@@ -104,7 +104,7 @@ export function genElement(el: ASTElement, state: CodegenState): string {
 </template>
 ```
 
-### Class and Style Binding Directive
+### Class and Style Binding Directives
 
 - Static class.
 - Array binding.
@@ -146,7 +146,7 @@ export function genElement(el: ASTElement, state: CodegenState): string {
 </template>
 ```
 
-### Event Handlers Directive
+### Event Handlers Directives
 
 #### Event Handlers and Modifiers
 
@@ -469,6 +469,52 @@ Custom component `v-model` modifier:
 <template>
   <input type="text" :value="modelValue" @input="emitValue" />
 </template>
+```
+
+### Custom Directives
+
+Custom [build-in directives](https://github.com/vuejs/core/tree/main/packages/runtime-dom/src/directives):
+
+```html
+<script setup lang="ts">
+  import { ref, vModelText } from 'vue';
+
+  vModelText.updated = (el, { value, modifiers: { capitalize } }) => {
+    if (capitalize && Object.hasOwn(value, 0)) {
+      el.value = value[0].toUpperCase() + value.slice(1);
+    }
+  };
+
+  const value = ref('');
+</script>
+
+<template>
+  <input v-model.capitalize="value" type="text" />
+</template>
+```
+
+Custom [new directives](https://github.com/vuejs/core/blob/main/packages/runtime-core/src/directives.ts):
+
+```ts
+const vDirective = {
+  // 在绑定元素的 attribute 前
+  // 或事件监听器应用前调用
+  created(el, binding, vnode, prevVnode) {},
+  // 在元素被插入到 DOM 前调用
+  beforeMount(el, binding, vnode, prevVnode) {},
+  // 在绑定元素的父组件
+  // 及他自己的所有子节点都挂载完成后调用
+  mounted(el, binding, vnode, prevVnode) {},
+  // 绑定元素的父组件更新前调用
+  beforeUpdate(el, binding, vnode, prevVnode) {},
+  // 在绑定元素的父组件
+  // 及他自己的所有子节点都更新后调用
+  updated(el, binding, vnode, prevVnode) {},
+  // 绑定元素的父组件卸载前调用
+  beforeUnmount(el, binding, vnode, prevVnode) {},
+  // 绑定元素的父组件卸载后调用
+  unmounted(el, binding, vnode, prevVnode) {},
+};
 ```
 
 ## Components
