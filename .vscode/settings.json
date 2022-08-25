@@ -1728,6 +1728,7 @@
     "Unmounting",
     "unobserve",
     "Unported",
+    "unref",
     "unregister",
     "unscopables",
     "Unshareflags",
