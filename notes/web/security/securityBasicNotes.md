@@ -606,6 +606,8 @@ Don't trust user:
   - React DOM escapes any values embedded in JSX before rendering them.
 - Secure encode output result (输出编码):
   保证**编码方式一致**, e.g 混用单字节编码与多字节编码, 导致攻击者绕过 `\` 系统转义符.
+- 任何用户提供的 URL 在进一步处理前 (e.g 保存到数据库),
+  应先做无害化处理 (`SanitizeUrl`).
 - Check HTTP `Content-Type` header.
 - Content security policy: `script-src 'self' https://apis.google.com`.
 - Use mature template engine: built-in XSS protection feature.
