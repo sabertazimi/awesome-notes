@@ -381,6 +381,9 @@ table {
 - [Language Selector](https://www.smashingmagazine.com/2022/05/designing-better-language-selector)
 - [Data Visualization](https://www.smashingmagazine.com/2022/06/web-design-done-well-delightful-data-visualization-examples)
 - [Pricing Page](https://smashingmagazine.com/2022/07/designing-better-pricing-page)
+- [Authentication Page](https://www.smashingmagazine.com/2022/08/authentication-ux-design-guidelines)
+- [Back Button](https://www.smashingmagazine.com/2022/08/back-button-ux-design)
+- [Error Message](https://www.smashingmagazine.com/2022/08/error-messages-ux-design)
 
 ### HomePage User Experience
 
