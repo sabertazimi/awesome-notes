@@ -1824,9 +1824,9 @@ const enum PatchFlags {
   HYDRATE_EVENTS = 1 << 5, // 32 表示带有事件监听器的节点
   STABLE_FRAGMENT = 1 << 6, // 64 一个不会改变子节点顺序的 Fragment
   KEYED_FRAGMENT = 1 << 7, // 128 带有 key 属性的 Fragment
-  UNKEYED_FRAGMENT = 1 << 8, // 256 子节点没有 key 的 Fragment
+  UN_KEYED_FRAGMENT = 1 << 8, // 256 子节点没有 key 的 Fragment
   NEED_PATCH = 1 << 9, // 512
-  DYNAMIC_SLOTS = 1 << 10, // 动态 solt
+  DYNAMIC_SLOTS = 1 << 10, // 动态 slot
   HOISTED = -1, // 特殊标志是负整数表示永远不会用作 diff
   BAIL = -2, // 一个特殊的标志，指代差异算法
 }
