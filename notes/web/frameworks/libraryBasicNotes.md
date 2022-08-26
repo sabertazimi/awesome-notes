@@ -1374,6 +1374,7 @@ tags: [Web, Framework, Library]
 - [Selenium](https://github.com/SeleniumHQ/selenium)
 - [Appium](https://github.com/appium/appium)
 - [Cheerio: jQuery Server Tools](https://github.com/cheeriojs/cheerio)
+- [Crawlee: Web Scraping and Browser Automation Library](https://github.com/apify/crawlee)
 
 ### Code Analysis Tools
 
