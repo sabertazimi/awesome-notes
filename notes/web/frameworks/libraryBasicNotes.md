@@ -439,6 +439,7 @@ tags: [Web, Framework, Library]
 - [Matrix](https://github.com/matrix-org/matrix-react-sdk)
 - [JsSIP: Chat Library](https://github.com/versatica/JsSIP)
 - [GalGame ChatView](https://github.com/webcyou/MessageViewJS)
+- [AdvancedChat: Beautiful Chat Rooms Web Component](https://github.com/antoine92190/vue-advanced-chat)
 
 ### Comments
 
