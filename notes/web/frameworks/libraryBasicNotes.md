@@ -1243,6 +1243,7 @@ tags: [Web, Framework, Library]
 - [WebSockets](https://github.com/websockets/ws)
 - [uWebSockets: Simple, Secure and Standards Compliant Sockets](https://github.com/uNetworking/uWebSockets)
 - [SocketCluster: Highly Scalable Realtime Framework](https://github.com/SocketCluster/socketcluster)
+- [Soketi: Fast and Resilient WebSockets Server](https://github.com/soketi/soketi)
 
 ### WebRTC
 
