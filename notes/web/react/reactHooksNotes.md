@@ -1960,9 +1960,21 @@ React will simulate unmounting and remounting component in development mode:
 
 :::
 
+### UseEffect Usage
+
+Effects are typically used to
+[synchronize with external system](https://beta.reactjs.org/learn/synchronizing-with-effects):
+browser APIs,
+third-party library,
+network, and so on.
+
+If your effect only adjusts some state based on other state,
+[you might not need effects](https://beta.reactjs.org/learn/you-might-not-need-an-effect).
+
 ### UseEffect Reference
 
 - `useEffect` complete [guide](https://overreacted.io/a-complete-guide-to-useeffect).
+- `useEffect` usage [guide](https://beta.reactjs.org/learn/you-might-not-need-an-effect).
 
 ## UseLayoutEffect Hook
 
