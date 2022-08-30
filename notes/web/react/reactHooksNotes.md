@@ -689,6 +689,20 @@ function dispatchAction<S, A>(
 }
 ```
 
+[Queueing series of state updates](https://beta.reactjs.org/learn/queueing-a-series-of-state-updates):
+
+```ts
+export function getFinalState(baseState, queue) {
+  let finalState = baseState;
+
+  for (const update of queue) {
+    finalState = typeof update === 'function' ? update(finalState) : update;
+  }
+
+  return finalState;
+}
+```
+
 ### UseState Hooks Usage
 
 ```ts
