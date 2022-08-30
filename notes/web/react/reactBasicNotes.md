@@ -61,6 +61,18 @@ class Example extends React.Component {
 // => 0 0 2 3
 ```
 
+:::tip State Structure Principles
+
+[Principles for structuring state](https://beta.reactjs.org/learn/choosing-the-state-structure):
+
+- Group related state.
+- Avoid contradictions in state.
+- Avoid duplication in state.
+- Avoid redundant state.
+- Avoid deeply nested state.
+
+:::
+
 ### componentDidMount
 
 - Don't `setState` directly in this method.
