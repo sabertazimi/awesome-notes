@@ -1294,6 +1294,73 @@ but it doesn’t impact the rendering logic,
 - `ref` can either be a state that should change as frequently as possible
   but should not trigger full re-rendering of the component.
 
+```tsx
+import { useRef, useState } from 'react';
+
+export default function Stopwatch() {
+  const [startTime, setStartTime] = useState(null);
+  const [now, setNow] = useState(null);
+  const intervalRef = useRef(null);
+
+  function handleStart() {
+    setStartTime(Date.now());
+    setNow(Date.now());
+
+    clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setNow(Date.now());
+    }, 10);
+  }
+
+  function handleStop() {
+    clearInterval(intervalRef.current);
+  }
+
+  let secondsPassed = 0;
+  if (startTime != null && now != null) {
+    secondsPassed = (now - startTime) / 1000;
+  }
+
+  return (
+    <>
+      <h1>Time passed: {secondsPassed.toFixed(3)}</h1>
+      <button onClick={handleStart}>Start</button>
+      <button onClick={handleStop}>Stop</button>
+    </>
+  );
+}
+```
+
+```tsx
+import { forwardRef, useImperativeHandle, useRef } from 'react';
+
+const MyInput = forwardRef((props, ref) => {
+  const realInputRef = useRef(null);
+  useImperativeHandle(ref, () => ({
+    // Only expose focus and nothing else
+    focus() {
+      realInputRef.current.focus();
+    },
+  }));
+  return <input {...props} ref={realInputRef} />;
+});
+
+export default function Form() {
+  const inputRef = useRef(null);
+
+  function handleClick() {
+    inputRef.current.focus();
+  }
+
+  return (
+    <>
+      <MyInput ref={inputRef} />
+      <button onClick={handleClick}>Focus the input</button>
+    </>
+  );
+}
+```
+
 ## UseContext Hook
 
 - Create custom `XXXContextProvider`:
@@ -1302,9 +1369,9 @@ but it doesn’t impact the rendering logic,
   由依赖了 context 的子组件自己进行重渲染, 未依赖的子组件不会重新渲染.
   **使用 `useMemo` 使得 value 不会导致不必要的重复渲染 (Re-rendering)**.
 - Create custom `useXXXContext` hook:
-  - Check whether component under `XXXContextProvider`.
-  - Wrap complex context logic and only expose simple API (Facade design pattern).
-  - Use `useMemo`/`useCallback` to **memorize values and functions**.
+- Check whether component under `XXXContextProvider`.
+- Wrap complex context logic and only expose simple API (Facade design pattern).
+- Use `useMemo`/`useCallback` to **memorize values and functions**.
 - Context 中只定义被大多数组件所共用的属性,
   use context to avoid **Prop Drilling**.
 
