@@ -1845,13 +1845,22 @@ long click reload: multiple reload options e.g clean cache
 
 ### Console Panel
 
-- getEventListeners(dom)
-- monitorEvents(dom, events)
-- unmonitorEvents(dom)
-- debug(fn)
-- undebug(fn)
-- monitor(fn)
-- unmonitor(fn)
+[Console utilities API](https://developer.chrome.com/docs/devtools/console/utilities):
+
+- `$_`.
+- `$0` - `$4`.
+- `$()`: `document.querySelector()`.
+- `$$()`: `document.querySelectorAll()`.
+- `getEventListeners(dom)`.
+- `monitorEvents(dom, events)`.
+- `unmonitorEvents(dom)`.
+- `monitor(fn)`.
+- `unmonitor(fn)`.
+- `debug(fn)`.
+- `undebug(fn)`.
+- `keys(object)`.
+- `values(object)`.
+- `queryObjects(Constructor)`.
 
 #### Console Settings
 
