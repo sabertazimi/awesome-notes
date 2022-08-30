@@ -1898,21 +1898,42 @@ class Counter {
 
 Cleanup API requests ([race condition](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect):
 
+- `Boolean` flag.
+- `AbortController`.
+
 ```ts
-const App = () => {
+const App = ({ url }) => {
+  const [results, setResults] = useState([]);
+  const [page, setPage] = useState(1);
+
+  // Cleanup with Boolean flag:
+  useEffect(() => {
+    let ignore = false;
+    fetchResults(url, page).then(json => {
+      if (!ignore) {
+        setResults(json);
+      }
+    });
+    return () => {
+      ignore = true;
+    };
+  }, [url, page]);
+
+  // Cleanup with AbortController:
   useEffect(() => {
     const controller = new AbortController();
     const { signal } = controller;
 
     const fetchData = async () => {
-      const response = await fetch('some api here', { signal });
-      // do something with response
+      const response = await fetch(url, { signal });
+      const json = await response.json();
+      setResults(json);
     };
 
     fetchData();
 
     return () => controller.abort();
-  }, []);
+  }, [url]);
 };
 ```
 
