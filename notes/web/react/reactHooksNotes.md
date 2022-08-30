@@ -1208,7 +1208,7 @@ function updateRef<T>(initialValue: T) {
   updating reference values during rendering (outside callbacks) is bad.
 - Lifecycle Persisted Value:
   `useRef()` creates a plain JavaScript object,
-  is persisted (stays the same) between component re-renderings.
+  is persisted (**stays the same**) between component re-renderings.
 - Silent Value:
   update reference values don't trigger re-renderings.
 - Latest Value:
