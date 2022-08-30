@@ -2444,6 +2444,10 @@ function ChatRoom({ roomId, theme }) {
 }
 ```
 
+Event functions let you split an `Effect`
+into reactive parts (which should "react" to reactive values and their changes)
+and non-reactive parts (which only read their latest values).
+
 ## Custom Hooks
 
 - [ReactUse Hooks](https://github.com/streamich/react-use)
