@@ -1968,8 +1968,26 @@ browser APIs,
 third-party library,
 network, and so on.
 
+Effects let you specify side effects that are caused by rendering itself,
+rather than by a particular event:
+
+- Sending a message in the chat is an event
+  because it is directly caused by user clicking a specific button:
+  put it in `handleClick()`.
+- However, setting up a server connection is an `Effect`
+  because it needs to happen regardless of
+  which interaction caused the component to appear:
+  put int in `useEffect()`.
+
 If your effect only adjusts some state based on other state,
-[you might not need effects](https://beta.reactjs.org/learn/you-might-not-need-an-effect).
+[you might not need effects](https://beta.reactjs.org/learn/you-might-not-need-an-effect):
+
+```ts
+function handleClick() {
+  // ✅ Buying is an event because it is caused by a particular interaction.
+  fetch('/api/buy', { method: 'POST' });
+}
+```
 
 ### UseEffect Reference
 
