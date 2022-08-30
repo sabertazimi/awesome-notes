@@ -2422,7 +2422,7 @@ function useEvent(fn) {
     ref.current = fn;
   }, [fn]);
   return useCallback((...args) => {
-    const f = ref.current;
+    const f = ref.current; // Get latest snapshot, break out closure.
     return f(...args);
   }, []);
 }
