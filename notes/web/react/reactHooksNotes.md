@@ -2414,7 +2414,7 @@ Extracting non-reactive logic out of `useEffect`,
 call `useEvent` from inside `useEffect`:
 
 ```ts
-import { useCallback, useInsertionEffect, useRef } from 'react';
+import { useCallback, useEffect, useInsertionEffect, useRef } from 'react';
 
 function useEvent(fn) {
   const ref = useRef(null);
