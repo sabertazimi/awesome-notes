@@ -1958,6 +1958,10 @@ React will simulate unmounting and remounting component in development mode:
   - Layout effect setup code runs.
   - Effect setup code runs.
 
+When `Strict Mode` is on,
+remounts twice helps find out `Effects` need cleanup
+and exposes bugs like race conditions early.
+
 :::
 
 ### UseEffect Usage
