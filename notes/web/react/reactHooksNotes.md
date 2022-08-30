@@ -1200,14 +1200,7 @@ function updateRef<T>(initialValue: T) {
 }
 ```
 
-### Refs Basis
-
-- `ref` can bind to HTMLElement.
-- `ref` can either be a state that does not need to change too often.
-- `ref` can either be a state that should change as frequently as possible
-  but should not trigger full re-rendering of the component.
-
-### Refs Values
+### Refs Features
 
 - Mutable Value:
   `useRef()` is useful for for keeping any mutable value around.
@@ -1286,6 +1279,20 @@ function User() {
   );
 }
 ```
+
+### Refs Usage
+
+If your component needs to store some value,
+but it doesn’t impact the rendering logic,
+[choose refs](https://beta.reactjs.org/learn/referencing-values-with-refs#when-to-use-refs):
+
+- Storing timeout IDs.
+- Storing and manipulating DOM elements.
+- Storing other objects that aren’t necessary to calculate the JSX.
+- `ref` can bind to HTMLElement.
+- `ref` can either be a state that does not need to change too often.
+- `ref` can either be a state that should change as frequently as possible
+  but should not trigger full re-rendering of the component.
 
 ## UseContext Hook
 
