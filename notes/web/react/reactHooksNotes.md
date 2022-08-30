@@ -1718,15 +1718,33 @@ That’s a bug and needs to be avoided.
 (`shouldComponentUpdate`, `componentDidUpdate`).
 在 Function Component, 借助 `useEffect` 可以实现自动检测.
 
-That's why provide an **empty array** as second argument to the effect hook
+If one of deps list changes, the hook runs again.
+Provide **empty array** as second argument to the effect hook
 to avoid activating it on component updates
 but **only for the mounting** of the component.
-If one of the variables changes, the hook runs again.
 For listeners binding, use `[]` deps list should be better.
 
 `set` function returned from `useState`
 and `ref` object returned by `useRef` are `Stable Value`,
 omit them from deps list.
+
+[Primitive values are better](https://beta.reactjs.org/learn/removing-effect-dependencies):
+
+```ts
+function ChatRoom({ options }) {
+  const [message, setMessage] = useState('');
+  const { roomId, serverUrl } = options;
+
+  useEffect(() => {
+    const connection = createConnection({
+      roomId,
+      serverUrl,
+    });
+    connection.connect();
+    return () => connection.disconnect();
+  }, [roomId, serverUrl]); // ✅ All dependencies declared
+}
+```
 
 Functions in `useEffect`:
 
