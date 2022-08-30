@@ -1986,10 +1986,35 @@ rather than by a particular event:
 If your effect only adjusts some state based on other state,
 [you might not need effects](https://beta.reactjs.org/learn/you-might-not-need-an-effect):
 
+- You don’t need Effects to transform data for rendering.
+- You don’t need Effects to handle user events.
+
 ```ts
 function handleClick() {
   // ✅ Buying is an event because it is caused by a particular interaction.
   fetch('/api/buy', { method: 'POST' });
+  showNotification(`Added ${product.name} to the shopping cart!`);
+  navigateTo('/checkout');
+}
+
+function Form() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  // ✅ Good: calculated during rendering
+  const fullName = `${firstName} ${lastName}`;
+
+  // ✅ Good: This logic runs because the component was displayed
+  useEffect(() => {
+    post('/analytics/event', { eventName: 'visit_form' });
+  }, []);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    // ✅ Good: Event-specific logic is in the event handler
+    post('/api/register', { firstName, lastName });
+  }
+  // ...
 }
 ```
 
