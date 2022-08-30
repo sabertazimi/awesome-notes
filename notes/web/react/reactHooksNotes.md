@@ -1287,9 +1287,9 @@ but it doesn’t impact the rendering logic,
 [choose refs](https://beta.reactjs.org/learn/referencing-values-with-refs#when-to-use-refs):
 
 - Storing timeout IDs.
-- Storing and manipulating DOM elements.
-- Storing other objects that aren’t necessary to calculate the JSX.
-- `ref` can bind to HTMLElement.
+- Storing and manipulating DOM elements (binding to HTMLElement).
+- Storing other objects that aren’t necessary to calculate the JSX:
+  work with external systems or browser APIs.
 - `ref` can either be a state that does not need to change too often.
 - `ref` can either be a state that should change as frequently as possible
   but should not trigger full re-rendering of the component.
