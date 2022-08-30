@@ -1896,7 +1896,7 @@ class Counter {
 - Prevent unexpected errors.
 - Good user experience.
 
-Cleanup API requests:
+Cleanup API requests ([race condition](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect):
 
 ```ts
 const App = () => {
