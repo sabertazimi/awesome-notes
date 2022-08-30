@@ -1784,7 +1784,7 @@ const useDataApi = (initialUrl, initialData) => {
 - setInterval 不会丢弃上一次结果,
   会引用旧状态 Closure 中的变量,
   导致其与 useEffect 所预期行为不一致.
-- 可以通过 useRef 解决这一现象.
+- 可以通过 useRef 解决这一现象: get latest value.
 
 ```tsx
 // BUG
