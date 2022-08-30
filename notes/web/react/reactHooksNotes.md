@@ -2132,15 +2132,6 @@ function Component() {
 }
 ```
 
-## UseDebugValue Hook
-
-```ts
-function App() {
-  const date = new Date();
-  useDebugValue(date, date => date.toISOString());
-}
-```
-
 ## UseImperativeHandle Hook
 
 ```tsx
@@ -2166,6 +2157,15 @@ const MyInput: RefForwardingComponent<MyInputHandles, MyInputProps> = (
 };
 
 export default React.forwardRef(MyInput);
+```
+
+## UseDebugValue Hook
+
+```ts
+function App() {
+  const date = new Date();
+  useDebugValue(date, date => date.toISOString());
+}
 ```
 
 ## UseDeferredValue Hook
@@ -2405,6 +2405,43 @@ const App = () => (
 );
 
 React.createRoot(document.querySelector('#root')).render(<App />);
+```
+
+## UseEvent Hook
+
+Extracting non-reactive logic out of `useEffect`,
+[put them into `useEvent`](https://beta.reactjs.org/learn/separating-events-from-effects),
+call `useEvent` from inside `useEffect`:
+
+```ts
+import { useCallback, useInsertionEffect, useRef } from 'react';
+
+function useEvent(fn) {
+  const ref = useRef(null);
+  useInsertionEffect(() => {
+    ref.current = fn;
+  }, [fn]);
+  return useCallback((...args) => {
+    const f = ref.current;
+    return f(...args);
+  }, []);
+}
+
+function ChatRoom({ roomId, theme }) {
+  const onConnected = useEvent(connectedRoomId => {
+    // Non-reactive to `theme`.
+    showNotification(`Welcome to ${connectedRoomId}`, theme);
+  });
+
+  useEffect(() => {
+    const connection = createConnection(serverUrl, roomId);
+    connection.on('connected', () => {
+      onConnected(roomId);
+    });
+    connection.connect();
+    return () => connection.disconnect();
+  }, [roomId, onConnected]); // Linter will allow [roomId] in the future.
+}
 ```
 
 ## Custom Hooks
