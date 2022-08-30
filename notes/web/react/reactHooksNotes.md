@@ -1711,18 +1711,24 @@ That’s a bug and needs to be avoided.
 
 ### UseEffect Deps List
 
-无论是将组件编写为类还是函数, 都必须为 effect 响应所有 props 和 state 的更新.
+无论是将组件编写为类还是函数,
+都必须为 effect 响应所有 props 和 state 的更新
+(`Reactive Value`).
 在传统的 Class Component, 需要编写代码去检测这些 props 和 state 是否变更
-(shouldComponentUpdate, componentDidUpdate).
-在 Function Component, 借助 useEffect Hook 可以实现自动检测.
+(`shouldComponentUpdate`, `componentDidUpdate`).
+在 Function Component, 借助 `useEffect` 可以实现自动检测.
 
-That’s why provide an **empty array** as second argument to the effect hook
+That's why provide an **empty array** as second argument to the effect hook
 to avoid activating it on component updates
 but **only for the mounting** of the component.
 If one of the variables changes, the hook runs again.
 For listeners binding, use `[]` deps list should be better.
 
-Functions in useEffect:
+`set` function returned from `useState`
+and `ref` object returned by `useRef` are `Stable Value`,
+omit them from deps list.
+
+Functions in `useEffect`:
 
 - If only use some functions inside an effect, move them directly into that effect.
 - Hoisting functions that don’t need props or state outside of component,
