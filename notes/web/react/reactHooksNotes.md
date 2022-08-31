@@ -2076,7 +2076,14 @@ function Form() {
   `Update` effect flags, `HasEffect | Layout` hook flags.
 - `useEffect` got invoked after `componentDidMount` **asynchronously**:
   `Update | Passive` effect flags, `HasEffect | Passive` hook flags.
-- If need to mutate the DOM or do need to perform DOM measurements,
+- Lifecycle of React component:
+  - User interacts, props or state change.
+  - React updates DOM.
+  - `useLayoutEffect` hook fires.
+  - Browser paints: visual changes are displayed to user.
+  - `useEffect` hook fires.
+- If need to mutate DOM directly (visual changes to UI)
+  or need to perform DOM measurements,
   `useLayoutEffect` is better than `useEffect`.
 
 ```ts
