@@ -643,6 +643,7 @@ tags: [Web, Framework, Library]
 - [KBar: Fast, Portable and Extensible Command K Interface](https://github.com/timc1/kbar)
 - [NinjaKeys: Keyboard Shortcuts Interface](https://github.com/ssleptsov/ninja-keys)
 - [ReactCMDKeyboard: Fast, Accessible and Pretty Command Palette](https://github.com/albingroen/react-cmdk)
+- [KMenu: Animated and Accessible Command Palette Menu](https://github.com/harshhhdev/kmenu)
 
 ### iFrame
 
