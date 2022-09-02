@@ -923,6 +923,7 @@ tags: [Web, Framework, Library]
 - [WaveSurfer: Navigable Waveform Built on Web Audio and Canvas](https://github.com/katspaugh/wavesurfer.js)
 - [Wave.js: Audio Visualizer](https://github.com/foobar404/Wave.js)
 - [Peaks: JavaScript UI Component for Interacting with Audio Waveforms](https://github.com/bbc/peaks.js)
+- [AstroFox: Turn Audio into Amazing Videos](https://github.com/astrofox-io/astrofox)
 
 ### Video
 
