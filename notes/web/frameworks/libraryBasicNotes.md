@@ -1370,6 +1370,7 @@ tags: [Web, Framework, Library]
 - [NightWatch: End to End Testing Framework](https://github.com/nightwatchjs/nightwatch)
 - [WebDriver: Next Generation Browser and Mobile Automation Test Framework](https://github.com/webdriverio/webdriverio)
 - [WebHint](https://github.com/webhintio/hint)
+- [TestCafe: Automate End-to-End Web Testing](https://github.com/DevExpress/testcafe)
 
 ### Headless Automation Tools
 
