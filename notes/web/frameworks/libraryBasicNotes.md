@@ -1371,6 +1371,7 @@ tags: [Web, Framework, Library]
 - [WebDriver: Next Generation Browser and Mobile Automation Test Framework](https://github.com/webdriverio/webdriverio)
 - [WebHint](https://github.com/webhintio/hint)
 - [TestCafe: Automate End-to-End Web Testing](https://github.com/DevExpress/testcafe)
+- [Chromatic: Automate Visual Testing](https://github.com/chromaui/chromatic-cli)
 
 ### Headless Automation Tools
 
