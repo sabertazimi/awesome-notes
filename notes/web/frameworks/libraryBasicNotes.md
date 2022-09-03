@@ -1357,11 +1357,9 @@ tags: [Web, Framework, Library]
 - [FastCheck: Property Based Testing](https://github.com/dubzzz/fast-check)
 - [Stryker: Mutation Testing](https://github.com/stryker-mutator/stryker-js)
 
-### Feature Testing
+### Visual Testing
 
-- [Karma](https://github.com/karma-runner/karma)
-- [Gecko API](https://github.com/laurentj/slimerjs)
-- [Interactor.js](https://github.com/wwilsman/interactor.js)
+- [Chromatic: Automate Visual Testing](https://github.com/chromaui/chromatic-cli)
 
 ### End to End Testing
 
@@ -1371,7 +1369,6 @@ tags: [Web, Framework, Library]
 - [WebDriver: Next Generation Browser and Mobile Automation Test Framework](https://github.com/webdriverio/webdriverio)
 - [WebHint](https://github.com/webhintio/hint)
 - [TestCafe: Automate End-to-End Web Testing](https://github.com/DevExpress/testcafe)
-- [Chromatic: Automate Visual Testing](https://github.com/chromaui/chromatic-cli)
 
 ### Headless Automation Tools
 
