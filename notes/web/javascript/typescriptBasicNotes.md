@@ -1142,7 +1142,7 @@ because expression of type 'string' can't be used to index type XXX.
 Can fixed with:
 
 - `Record<string, T>`.
-- Explicit `const` `propertyName` type.
+- `K extends keyof T`: explicit Constrained key type.
 
 ```ts
 // propertyName should be extends keyof T
