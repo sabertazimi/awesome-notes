@@ -1319,12 +1319,6 @@ Load 也不一定代表用户看到主要内容.
 - Time to Interactive (TTI): 0 ~ 3.8 ~ 7.3s.
 - First Input Delay (FID): 0 ~ 0.1 ~ 0.3s.
 
-Google Core Web Vitals:
-
-- 加载 (Loading): LCP.
-- 交互 (Interactivity): FID.
-- 视觉稳定 (Visual Stability): CLS.
-
 ### Monitoring Report Dimension
 
 不同的页面操作/页面打开方式/浏览器环境都会对我们页面加载的性能会有影响,
@@ -1665,6 +1659,14 @@ observer.observe({ type: 'layout-shift', buffered: true });
 //   value: 0.000005752046026677329,
 // }
 ```
+
+### Core Web Vitals
+
+Google Core Web Vitals:
+
+- 加载 (Loading): LCP.
+- 交互 (Interactivity): FID.
+- 视觉稳定 (Visual Stability): CLS.
 
 ### Web Vitals Reference
 
