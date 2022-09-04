@@ -1285,6 +1285,15 @@ type Age = typeof MyArray[number]['age'];
 
 type Age2 = Person['age'];
 // type Age2 = number
+
+interface UserRoleConfig {
+  visitor: ['up'];
+  user: ['view', 'create', 'update'];
+  admin: ['view', 'create', 'update', 'delete'];
+}
+
+type Role = UserRoleConfig[keyof UserRoleConfig][number];
+// type Role = 'up' | 'view' | 'create' | 'update' | "delete"
 ```
 
 `{ [K in keyof T]: indexedType }[keyof T]` 返回键名 (键名组成的联合类型):
@@ -1925,7 +1934,7 @@ type ExtractValues<T, Keys extends keyof T = Extract<keyof T, `a${string}`>> = {
 }[Keys];
 
 type Values = ExtractValues<Props>;
-// type Values = 'Foo' | 'Bar' | 'FooBar';
+// type Values = 'Foo' | 'Bar' | 'FooBar'
 ```
 
 ### Generic Types Programming
