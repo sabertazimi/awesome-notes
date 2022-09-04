@@ -1654,6 +1654,29 @@ function reverse<T>(items: T[]): T[] {
 }
 ```
 
+### Generic Parameters
+
+```ts
+type Event =
+  | {
+      type: 'LogIn';
+      payload: {
+        userId: string;
+      };
+    }
+  | {
+      type: 'SignOut';
+    };
+
+const sendEvent = <Type extends Event['type']>(
+  ...args: Extract<Event, { type: Type }> extends { payload: infer Payload }
+    ? [type: Type, payload: Payload]
+    : [type: Type]
+) => {
+  // Send event ...
+};
+```
+
 ### Generic Class
 
 ```ts
