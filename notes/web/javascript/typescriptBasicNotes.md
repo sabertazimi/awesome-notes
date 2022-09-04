@@ -1592,6 +1592,29 @@ type IteratorResult<T, TReturn = any> =
   | IteratorReturnResult<TReturn>;
 ```
 
+Rust-style discriminated union:
+
+```ts
+type Option<T> = Some<T> | None;
+interface Some<T> {
+  kind: 'Some';
+  value: T;
+}
+interface None {
+  kind: 'None';
+}
+
+type Result<TResult, TError> = Success<TResult> | Failure<TError>;
+interface Success<T> {
+  kind: 'Success';
+  value: T;
+}
+interface Failure<T> {
+  kind: 'Failure';
+  error: T;
+}
+```
+
 Prefer `Unions of Interfaces` to `Interfaces of Unions`:
 
 ```ts
