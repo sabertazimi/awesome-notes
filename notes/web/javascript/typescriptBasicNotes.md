@@ -1872,6 +1872,34 @@ const missing = get(roles, 'extras');
 // to parameter of type '"favorite" | "others"'.
 ```
 
+```ts
+const getDeepValue = <
+  T,
+  FirstKey extends keyof T,
+  SecondKey extends keyof T[FirstKey]
+>(
+  target: T,
+  firstKey: FirstKey,
+  secondKey: SecondKey
+): T[FirstKey][SecondKey] => {
+  return target[firstKey][secondKey];
+};
+
+const target = {
+  foo: {
+    a: true,
+    b: 2,
+  },
+  bar: {
+    c: 'cool',
+    d: 2,
+  },
+};
+
+const result1 = getDeepValue(target, 'foo', 'a'); // boolean
+const result2 = getDeepValue(target, 'bar', 'c'); // string
+```
+
 ### Generic Types Programming
 
 在类型编程里, 泛型就是变量:
