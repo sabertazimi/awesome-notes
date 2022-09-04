@@ -1841,6 +1841,8 @@ const firstMissing: KeyValuePair = {
 
 ### Constrained Generic Types
 
+Constrained union types:
+
 ```ts
 interface Lengthwise {
   length: number;
@@ -1854,7 +1856,11 @@ const numberList = createList<number>(); // ok
 const stringList = createList<string>(); // ok
 const arrayList = createList<any[]>(); // ok
 const boolList = createList<boolean>(); // error
+```
 
+Constrained index types:
+
+```ts
 function get<T, Key extends keyof T>(container: T, key: Key) {
   return container[key];
 }
@@ -1871,6 +1877,8 @@ const missing = get(roles, 'extras');
 // Error: Argument of type '"extras"' is not assignable
 // to parameter of type '"favorite" | "others"'.
 ```
+
+Constrained deep index types:
 
 ```ts
 const getDeepValue = <
@@ -1898,6 +1906,26 @@ const target = {
 
 const result1 = getDeepValue(target, 'foo', 'a'); // boolean
 const result2 = getDeepValue(target, 'bar', 'c'); // string
+```
+
+Constrained default types:
+
+```ts
+interface Props {
+  a1: 'Foo';
+  a2: 'Bar';
+  a3: 'FooBar';
+  b1: 'b1';
+  b2: 'b2';
+  b3: 'b3';
+}
+
+type ExtractValues<T, Keys extends keyof T = Extract<keyof T, `a${string}`>> = {
+  [K in Keys]: T[K];
+}[Keys];
+
+type Values = ExtractValues<Props>;
+// type Values = 'Foo' | 'Bar' | 'FooBar';
 ```
 
 ### Generic Types Programming
