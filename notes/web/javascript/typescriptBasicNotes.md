@@ -1867,10 +1867,31 @@ const arrayList = createList<any[]>(); // ok
 const boolList = createList<boolean>(); // error
 ```
 
+Constrained template literal types:
+
+```ts
+type RemoveMapsHelper<T> = T extends `maps:${infer U}` ? U : T;
+type RemoveMaps<T> = {
+  [K in keyof T as RemoveMapsHelper<K>]: T[K];
+};
+
+interface Data {
+  'maps:longitude': string;
+  'maps:latitude': string;
+  awesome: boolean;
+}
+type ShapedData = RemoveMaps<Data>;
+// type ShapedData = {
+//   longitude: string;
+//   latitude: string;
+//   awesome: boolean;
+// }
+```
+
 Constrained index types:
 
 ```ts
-function get<T, Key extends keyof T>(container: T, key: Key) {
+function getValue<T, Key extends keyof T>(container: T, key: Key) {
   return container[key];
 }
 
@@ -1879,17 +1900,13 @@ const roles = {
   others: ['Almost Famous', 'Burn After Reading', 'NorthLand'],
 };
 
-const favorite = get(roles, 'favorite'); // Type: string
-const others = get(roles, 'others'); // Type: string[]
-const missing = get(roles, 'extras');
+const favorite = getValue(roles, 'favorite'); // Type: string
+const others = getValue(roles, 'others'); // Type: string[]
+const missing = getValue(roles, 'extras');
 //                         ~~~~~~~~
 // Error: Argument of type '"extras"' is not assignable
 // to parameter of type '"favorite" | "others"'.
-```
 
-Constrained deep index types:
-
-```ts
 const getDeepValue = <
   T,
   FirstKey extends keyof T,
