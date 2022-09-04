@@ -2244,8 +2244,14 @@ Combine with:
 
 ```ts
 // Removes 'readonly' attributes from a type's properties
-type Mutable<Type> = {
-  -readonly [Property in keyof Type]: Type[Property];
+type Mutable<T> = {
+  -readonly [K in keyof T]: T[K];
+};
+
+type DeepImmutable<T> = {
+  readonly [K in keyof T]: keyof T[K] extends undefined
+    ? T[K]
+    : Immutable<T[K]>;
 };
 
 interface LockedAccount {
