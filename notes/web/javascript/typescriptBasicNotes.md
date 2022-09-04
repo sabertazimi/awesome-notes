@@ -2675,7 +2675,7 @@ const obj = {
 const r: Room = obj;
 ```
 
-### Type Predicate
+### Type Predicate Signature
 
 `is` keyword for `value` type predicate:
 
@@ -2720,17 +2720,12 @@ if (isTypeof(value, 'boolean')) {
 
 ## Type Assertion
 
-- `<type>`.
-- `as type`.
-
-> `as` is better in `.jsx`
+### As Assertion
 
 ```ts
 let foo: any;
 const bar = foo as string; // 现在 bar 的类型是 'string'
-```
 
-```ts
 function handler(event: Event) {
   const mouseEvent = event as MouseEvent;
 }
@@ -2771,6 +2766,57 @@ function firstCharAndSizeAsConst(input: string) {
 // firstChar type: string
 // size type: number
 const [firstChar, size] = firstCharAndSizeAsConst('Sabertaz');
+```
+
+### Assertion Signature
+
+Boolean assertion signature
+
+```ts
+function assert(condition: any, msg?: string): asserts condition {
+  if (!condition) {
+    throw new AssertionError(msg);
+  }
+}
+
+function yell(str) {
+  assert(typeof str === 'string');
+  return str.toUppercase();
+  //         ~~~~~~~~~~~
+  // error: Property 'toUppercase' does not exist on type 'string'.
+  //        Did you mean 'toUpperCase'?
+}
+```
+
+String assertion signature
+
+```ts
+function assertIsString(val: any): asserts val is string {
+  if (typeof val !== 'string') {
+    throw new AssertionError('Not a string!');
+  }
+}
+
+function yell(str: any) {
+  assertIsString(str);
+  // Now TypeScript knows that 'str' is a 'string'.
+  return str.toUppercase();
+  //         ~~~~~~~~~~~
+  // error: Property 'toUppercase' does not exist on type 'string'.
+  //        Did you mean 'toUpperCase'?
+}
+```
+
+Generics assertion signature
+
+```ts
+function assertIsDefined<T>(val: T): asserts val is NonNullable<T> {
+  if (val === undefined || val === null) {
+    throw new AssertionError(
+      `Expected 'val' to be defined, but received ${val}`
+    );
+  }
+}
 ```
 
 ## Decorators
