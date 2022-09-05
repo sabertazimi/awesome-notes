@@ -1091,6 +1091,8 @@ GET /../../../passwd.key HTTP/1.1
 
 ### Supply Chain Vulnerability
 
+[![Supply Chain Threats](./figures/supply-chain-threats.svg)](https://slsa.dev/spec)
+
 #### Supply Chain Attack
 
 - [Running file encryption attack in Node.js module](https://dev.to/devdevcharlie/running-a-ransomware-attack-in-a-nodejs-module-4hgb).
