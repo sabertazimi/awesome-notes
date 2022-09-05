@@ -123,6 +123,8 @@ tags: [Web, CSS]
 }
 ```
 
+![Layer Priority](./figures/LayerPriority.png)
+
 ### Specificity
 
 [Specificity](https://developer.mozilla.org/docs/Web/CSS/Specificity)
