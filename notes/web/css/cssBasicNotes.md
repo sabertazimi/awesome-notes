@@ -1595,6 +1595,35 @@ CSS 不支持背景渐变色的直接过渡动画,
 }
 ```
 
+`@property` feature detection and fallback:
+
+```css
+@property --parent-em {
+  syntax: '<length>';
+  initial-value: 0;
+  inherits: true;
+}
+
+@property --no-at-property-fallback {
+  syntax: '*';
+  inherits: false;
+}
+
+select {
+  --parent-em: 1em;
+  --no-at-property-fallback: 1em;
+}
+
+optgroup {
+  /* Will only inherit if `@property` not supported */
+  font-size: var(--no-at-property-fallback, 0);
+}
+
+optgroup > * {
+  font-size: var(--parent-em);
+}
+```
+
 ## CSS Colors
 
 ### Current Color
