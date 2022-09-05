@@ -3076,10 +3076,12 @@ body {
 [`scroll-snap`](https://developer.mozilla.org/docs/Web/CSS/CSS_Scroll_Snap):
 
 - 可让网页容器滚动停止时, 自动平滑定位到指定元素的指定位置.
-- Parent property:
+- Parent (scroll port) property:
   - [`scroll-snap-type`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type).
   - [`scroll-padding`](https://developer.mozilla.org/docs/Web/CSS/scroll-padding).
-- Children property:
+  - `overscroll-behavior`.
+  - Overflow axis.
+- Children (scroll item) property:
   - [`scroll-snap-align`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align).
   - [`scroll-snap-stop`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop).
   - [`scroll-margin`](https://developer.mozilla.org/docs/Web/CSS/scroll-margin).
