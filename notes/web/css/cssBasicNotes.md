@@ -3105,6 +3105,7 @@ body {
 
   .scroll-x img {
     scroll-snap-align: center;
+    scroll-snap-stop: always;
   }
 </style>
 ```
@@ -3123,6 +3124,13 @@ body {
   - `mandatory`: 强制定位, 若存在有效的定位点位置, 则滚动容器必须在滚动结束时进行定位.
   - `proximity`: 大约定位, 让浏览器自己判断要不要定位.
 
+#### Scroll Padding
+
+[`scroll-padding`](https://developer.mozilla.org/docs/Web/CSS/scroll-padding):
+
+- `auto{1,4}`.
+- `<length-percentage>{1,4}`.
+
 #### Scroll Snap Align
 
 [`scroll-snap-align`](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align):
@@ -3138,13 +3146,6 @@ body {
 
 - `normal`: 可以忽略捕获位置.
 - `always`: 不能忽略捕获位置, 且必须定位到第一个捕获元素的位置, 保证每次只滚动一屏或一个指定元.
-
-#### Scroll Padding
-
-[`scroll-padding`](https://developer.mozilla.org/docs/Web/CSS/scroll-padding):
-
-- `auto{1,4}`.
-- `<length-percentage>{1,4}`.
 
 #### Scroll Margin
 
