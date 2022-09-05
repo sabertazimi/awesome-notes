@@ -1562,7 +1562,7 @@ node --inspect server.js # Start debugging.
 node --inspect-brk server.js # Start debugging and break.
 ```
 
-Enable core modules debug information:
+[Enable core modules debug information](https://nodejs.dev/en/api/v18/cli/#node_debugmodule):
 
 ```bash
 NODE_DEBUG=fs,net,stream yarn test
