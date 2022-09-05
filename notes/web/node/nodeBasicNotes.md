@@ -1454,7 +1454,7 @@ hmac.digest('hex'); // '7x123'
 
 #### 公钥加密
 
-## Async Modules
+## Async Module
 
 对回调进行计数是处理 Node 中异步的基础 - 自定义 Semaphore 变量: 每完成一个异步处理, Semaphore++
 
@@ -1549,6 +1549,23 @@ assert.equal(1, true, 'Truthy');
 assert.notEqual(1, true, 'Truthy');
 
 assert.ok(0, 'Zero is not truthy');
+```
+
+## Debugging
+
+### Inspector CLI
+
+[Enable inspector](https://nodejs.org/en/docs/guides/debugging-getting-started);
+
+```bash
+node --inspect server.js # Start debugging.
+node --inspect-brk server.js # Start debugging and break.
+```
+
+Enable core modules debug information:
+
+```bash
+NODE_DEBUG=fs,net,stream yarn test
 ```
 
 ## Node Web Crawler
