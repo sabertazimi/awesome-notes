@@ -1563,6 +1563,8 @@ git submodule update --init --force --remote
 git bisect start
 git bisect good 42bf0c8df2
 git bisect bad 57613f8c56
+git bisect good # Current commit is good.
+git bisect bad # Current commit is bad.
 ```
 
 #### git blame
