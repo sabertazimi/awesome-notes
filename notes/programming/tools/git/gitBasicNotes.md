@@ -1557,7 +1557,13 @@ git submodule update --init --force --remote
 
 #### git bisect
 
-通过自动进行一个二分查找来找到哪一个特定的提交是导致 bug 或者问题的第一个提交.
+通过二分查找快速定位问题提交:
+
+```bash
+git bisect start
+git bisect good 42bf0c8df2
+git bisect bad 57613f8c56
+```
 
 #### git blame
 
