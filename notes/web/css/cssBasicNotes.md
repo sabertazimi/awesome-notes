@@ -77,6 +77,23 @@ tags: [Web, CSS]
 }
 ```
 
+```css
+@layer reset, externals, base, components, utilities;
+
+@import 'reset.css' layer(reset);
+@import 'carousel.css' layer(externals);
+@import 'map.css' layer(externals);
+```
+
+```html
+<link
+  rel="stylesheet"
+  href="reset.css"
+  layer="reset"
+  media="supports(at-rule(@layer))"
+/>
+```
+
 #### Layer Specificity
 
 ```css
