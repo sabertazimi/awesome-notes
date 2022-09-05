@@ -1342,6 +1342,26 @@ html {
 }
 ```
 
+[Space toggle](https://projects.verou.me/talks/dynamic-css-secrets)
+for progressive enhancement
+
+```css
+:root {
+  --in-oklab: ;
+}
+
+@supports (background: linear-gradient(in oklab, red, tan)) {
+  :root {
+    --in-oklab: in oklab;
+  }
+}
+
+/* Usage: */
+.card {
+  background: linear-gradient(var(--in-oklab) #f00, #0f0);
+}
+```
+
 ### Limit Variables
 
 For some CSS values and units have limits (e.g `<color>`),
