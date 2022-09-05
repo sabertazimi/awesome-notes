@@ -2936,6 +2936,23 @@ button {
 }
 ```
 
+#### CSS Feature Detection
+
+```html
+<script>
+  if (window.CSSPropertyRule) {
+    const root = document.documentElement;
+    root.classList.add('supports-at-property');
+  }
+</script>
+
+<style>
+  .supports-at-property optgroup {
+    font-size: 0;
+  }
+</style>
+```
+
 ### StyleLint
 
 `stylelint-config-mass` plugin `index.js`:
