@@ -267,7 +267,7 @@ JamStack 指的是一套用于构建现代网站的技术栈:
 
 [![Rendering Patterns](./figures/RenderingPatterns.png)](https://www.patterns.dev/posts/rendering-patterns)
 
-### CSR
+#### CSR
 
 - CSR hit API after the page loads (LOADING indicator).
 - Data is fetched on every page request.
@@ -295,7 +295,7 @@ export default function CSRPage() {
 }
 ```
 
-### SSR
+#### SSR
 
 - Server side rendering with [Puppeteer](https://developer.chrome.com/docs/puppeteer/ssr).
 - Web rendering [guide](https://web.dev/rendering-on-the-web).
@@ -335,7 +335,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 ```
 
-### SSG
+#### SSG
 
 - Reloading did not change anything.
 - Hit API when running `npm run build`.
@@ -361,7 +361,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 ```
 
-### ISR
+#### ISR
 
 - Based on SSG, with **revalidate limit**.
 - Cooldown state: reloading doesn't trigger changes and pages rebuilds.
@@ -391,11 +391,25 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 ```
 
+#### Islands Architecture
+
+[Islands architecture](https://www.patterns.dev/posts/islands-architecture):
+
+- Script resources for these "islands" of interactivity
+  (islands of dynamic components)
+  can be **delivered and hydrated independently**,
+  allowing the rest of the page to be just **static HTML**.
+- Islands architecture combines ideas from different rendering techniques:
+  - [Server-side rendering](https://www.patterns.dev/posts/server-side-rendering).
+  - [Static site generation](https://www.patterns.dev/posts/static-rendering).
+  - [Partial hydration](https://www.patterns.dev/posts/progressive-hydration).
+
 ### JamStack Reference
 
 - Build your own [Next.js](https://hire.jonasgalvez.com.br/2022/may/18/building-a-mini-next-js).
 - Build your own [web framework](https://vercel.com/blog/build-your-own-web-framework).
 - Modern websites building [patterns](https://dev.to/this-is-learning/patterns-for-building-javascript-websites-in-2022-5a93).
+- Modern rendering [patterns](https://www.patterns.dev/posts/#rendering-patterns).
 
 ## SEO
 
