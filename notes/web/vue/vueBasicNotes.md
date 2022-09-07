@@ -572,11 +572,13 @@ Vue.createApp({
 - 插槽基本目的为自定义组件渲染细节: e.g 高级列表组件.
 - Normal Slots:
   在父组件编译和渲染阶段生成 Slots VNodes,
-  数据作用域为父组件实例 (使用插槽的组件).
+  数据作用域为父组件实例 (使用插槽的组件),
+  即父组件同时提供 View 与 Data.
 - Scoped Slots:
   在父组件编译和渲染阶段为 `vnode.data` 添加 `scopedSlots` 对象,
   在子组件编译和渲染阶段生成 Slots VNodes,
-  数据作用域为子组件实例 (定义插槽的组件).
+  数据作用域为子组件实例 (定义插槽的组件),
+  即父组件提供 View, 子组件提供 Data.
 
 #### Fallback Slots
 
