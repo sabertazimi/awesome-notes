@@ -4435,6 +4435,12 @@ addTen.then(console.log); // 18
 
 ### Immutable
 
+Immutable data structure:
+
+- Reused reference: one address represent one data.
+- Quick comparison: different address represent different data.
+- Fast recovery and snapshot: reuse previous data.
+
 #### Immutable Array
 
 ```ts
