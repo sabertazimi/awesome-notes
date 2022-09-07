@@ -267,7 +267,7 @@ JamStack 指的是一套用于构建现代网站的技术栈:
 
 [![Rendering Patterns](./figures/RenderingPatterns.png)](https://www.patterns.dev/posts/rendering-patterns)
 
-#### CSR
+### CSR
 
 - CSR hit API after the page loads (LOADING indicator).
 - Data is fetched on every page request.
@@ -295,10 +295,20 @@ export default function CSRPage() {
 }
 ```
 
-#### SSR
+### SSR
 
-- Server side rendering with [Puppeteer](https://developer.chrome.com/docs/puppeteer/ssr).
-- Web rendering [guide](https://web.dev/rendering-on-the-web).
+Application code is written in a way that
+it can be executed **both on the server and on the client**.
+The browser displays the initial HTML (fetch from server),
+simultaneously downloads the single-page app (SPA) in the background.
+Once the client-side code is ready,
+the client takes over and the website becomes a SPA.
+
+前后端分离是一种进步，但彻底的分离，也不尽善尽美，
+比如会有首屏加载速度和 SEO 方面的困扰。
+前后端分离+服务端首屏渲染看起来是个更优的方案，
+它结合了前后端分离和服务端渲染两者的优点，
+既做到了前后端分离，又能保证首页渲染速度，还有利于 SEO。
 
 [![Server Side Rendering](./figures/ServerSideRendering.png)](https://www.patterns.dev/posts/ssr)
 
@@ -311,6 +321,91 @@ if (isBotAgent) {
   // ReactDOMServer.renderToString()
 }
 ```
+
+#### SSR Upside
+
+- Smaller first meaningful paint time.
+- HTML's strengths: progressive rendering.
+- Browsers are incredibly good at rendering partial content.
+- Search engine crawlers used to not execute scripts (or initial scripts).
+- Search engine usually stop after a while (roughly 10 seconds).
+- SPAs can't set meaningful HTTP status codes.
+
+#### SSR Usage
+
+Webpack configuration:
+
+```ts
+const baseConfig = require('./baseConfig');
+
+const webConfig = {
+  ...baseConfig,
+  target: 'web',
+};
+
+const nodeConfig = {
+  ...baseConfig,
+  target: 'node',
+  output: {
+    ...baseConfig.output,
+    libraryTarget: 'commonjs2',
+  },
+  externals: [require('webpack-node-externals')()],
+};
+
+module.exports = { webConfig, nodeConfig };
+```
+
+React server side rendering `start.server.js`:
+
+```tsx
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import App from './App.js';
+
+const render = () => ReactDOMServer.renderToString(<App />);
+
+export default render;
+```
+
+`index.html.js`:
+
+```ts
+const startApp = require('../dist/server.js').default;
+
+module.exports = () => `<!DOCTYPE html>
+    <head>
+    </head>
+    <body>
+      <div id="app">${startApp()}</div>
+      <script src="/static/client.js"></script>
+    </body>
+  </html>`;
+```
+
+React Client Side Hydration `start.client.js`:
+
+```tsx
+import React from 'react';
+import ReactDOMServer from 'react-dom';
+import App from './App.js';
+
+ReactDOM.hydrate(<App />, document.getElementById('app'));
+```
+
+Async fetch out of `<App />`:
+
+```tsx
+const data = await fetchData();
+const App = <App {...data} />;
+
+return {
+  html: ReactDOMServer.renderToString(App),
+  state: { data },
+};
+```
+
+Next.js SSR:
 
 - SSR hit API before the page loads (DELAY before render, and no LOADING indicator).
 - Data is fetched on every page request.
@@ -335,7 +430,40 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 ```
 
-#### SSG
+:::caution SSR Hydration Warning
+
+服务端返回的 HTML 与客户端渲染结果不一致时,
+出于性能考虑,
+`hydrate` 可以弥补文本内容的差异,
+但并不能保证修补**属性**的差异,
+只在 `development` 模式下对这些不一致的问题报 `Warning`.
+因此必须重视 `SSR Hydration Warning`,
+要当 `Error` 逐个解决.
+
+:::
+
+:::caution SSR Components
+
+编写 SSR 组件时:
+
+- 需要使用前后端同构的 API:
+  对于前端或后端独有的 API (e.g BOM, DOM, Node API),
+  需要进行封装 (adapter/mock).
+- 注意并发与时序:
+  浏览器环境一般只有一个用户, 单例模式容易实现;
+  但 Node.js 环境可能存在多条连接, 导致全局变量相互污染.
+
+:::
+
+#### SSR Reference
+
+- Universal JavaScript [presentation](http://peerigon.github.io/talks/2018-07-20-js-camp-barcelona-bumpy-road-universal-javascript/#1).
+- React SSR [guide](https://mp.weixin.qq.com/s/j2rB8qE5OOPmLHAS7qdCrQ).
+- Next.js for [isomorphic rendering](https://nextjs.org).
+- Server side rendering with [Puppeteer](https://developer.chrome.com/docs/puppeteer/ssr).
+- Web rendering [guide](https://web.dev/rendering-on-the-web).
+
+### SSG
 
 - Reloading did not change anything.
 - Hit API when running `npm run build`.
@@ -361,7 +489,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 ```
 
-#### ISR
+### ISR
 
 - Based on SSG, with **revalidate limit**.
 - Cooldown state: reloading doesn't trigger changes and pages rebuilds.
@@ -391,7 +519,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 ```
 
-#### Islands Architecture
+### Islands Architecture
 
 [Islands architecture](https://www.patterns.dev/posts/islands-architecture):
 
