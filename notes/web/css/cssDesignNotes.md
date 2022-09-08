@@ -363,6 +363,7 @@ table {
 
 ## Components Design Principles
 
+- [UX Checklist](https://www.smashingmagazine.com/2022/09/ux-checklists-for-interface-designers)
 - [Components Checklist](https://www.smashingmagazine.com/ebooks/checklist-cards-digital)
 - [Accordion](https://www.smashingmagazine.com/2017/06/designing-perfect-accordion-checklist)
 - [Responsive Configurator](https://www.smashingmagazine.com/2018/02/designing-a-perfect-responsive-configurator)
