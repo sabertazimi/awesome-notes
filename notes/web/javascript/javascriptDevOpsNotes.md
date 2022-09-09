@@ -356,47 +356,119 @@ const nodeConfig = {
 module.exports = { webConfig, nodeConfig };
 ```
 
-React server side rendering `start.server.js`:
+React server side rendering `start.server.js`
+(compile to `dist/server.js`):
 
 ```tsx
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import App from './App.js';
+import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
+import Koa from 'koa';
+import koaStatic from 'koa-static';
+import { Provider } from 'react-redux';
 
-const render = () => ReactDOMServer.renderToString(<App />);
+const Routes = [
+  { path: '/', component: Home, exact: true },
+  {
+    path: '/about',
+    component: About,
+    exact: true,
+  },
+];
 
-export default render;
-```
+const getStore = () => {
+  return createStore(reducer, applyMiddleware(thunk));
+};
 
-`index.html.js`:
+const app = new Koa();
+app.use(koaStatic('public'));
 
-```ts
-const startApp = require('../dist/server.js').default;
+app.use(async ctx => {
+  const store = getStore();
+  const matchedRoutes = matchRoutes(Routes, ctx.request.path);
+  const loaders = [];
 
-module.exports = () => `<!DOCTYPE html>
+  matchedRoutes.forEach(item => {
+    if (item.route.loadData) {
+      // item.route.loadData() 返回的是一个 promise.
+      loaders.push(item.route.loadData(store));
+    }
+  });
+
+  // 等待异步完成, store 已完成更新.
+  await Promise.all(loaders);
+
+  const content = renderToString(
+    <Provider store={store}>
+      <StaticRouter location={ctx.request.path}>
+        <div>{renderRoutes(Routes)}</div>
+      </StaticRouter>
+    </Provider>
+  );
+
+  ctx.body = `
+  <!DOCTYPE html>
     <head>
     </head>
     <body>
-      <div id="app">${startApp()}</div>
-      <script src="/static/client.js"></script>
+      <div id="app">${content}</div>
+      <script>
+        window.context = {
+          state: ${JSON.stringify(store.getState())}
+        };
+      </script>
+      <script src="/public/client.js"></script>
     </body>
   </html>`;
+});
+
+app.listen(3003, () => {
+  console.log('listen:3003');
+});
 ```
 
-React Client Side Hydration `start.client.js`:
+React client side hydration `start.client.js`
+(compile to `public/client.js`):
 
 ```tsx
 import React from 'react';
-import ReactDOMServer from 'react-dom';
-import App from './App.js';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
+import { Provider } from 'react-redux';
+
+const Routes = [
+  { path: '/', component: Home, exact: true },
+  {
+    path: '/about',
+    component: About,
+    exact: true,
+  },
+];
+
+const getStore = () => {
+  const defaultState = window.context ? window.context.state : {};
+  return createStore(reducer, defaultState, applyMiddleware(thunk));
+};
+
+const App = () => (
+  <Provider store={getStore()}>
+    <BrowserRouter>
+      <div>{renderRoutes(Routes)}</div>
+    </BrowserRouter>
+  </Provider>
+);
 
 ReactDOM.hydrate(<App />, document.getElementById('app'));
 ```
 
-Async fetch out of `<App />`:
+Isomorphic data fetch
+(`getStaticProps`/`getServerSideProps` in `Next.js`,
+`loader` in `Remix`):
 
 ```tsx
-const data = await fetchData();
+const data = await App.fetchData();
 const App = <App {...data} />;
 
 return {
@@ -405,7 +477,7 @@ return {
 };
 ```
 
-Next.js SSR:
+`Next.js` SSR:
 
 - SSR hit API before the page loads (DELAY before render, and no LOADING indicator).
 - Data is fetched on every page request.
@@ -463,7 +535,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
 #### SSR Reference
 
 - Universal JavaScript [presentation](http://peerigon.github.io/talks/2018-07-20-js-camp-barcelona-bumpy-road-universal-javascript/#1).
-- React SSR [guide](https://mp.weixin.qq.com/s/j2rB8qE5OOPmLHAS7qdCrQ).
+- React SSR [complete guide](https://mp.weixin.qq.com/s/j2rB8qE5OOPmLHAS7qdCrQ):
+  - SSR and hydration.
+  - Isomorphic router.
+  - Isomorphic store.
+  - Isomorphic CSS.
 - Next.js for [isomorphic rendering](https://nextjs.org).
 - Server side rendering with [Puppeteer](https://developer.chrome.com/docs/puppeteer/ssr).
 - Web rendering [guide](https://web.dev/rendering-on-the-web).
