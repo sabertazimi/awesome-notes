@@ -50,7 +50,9 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
 ## React Virtual DOM
 
 - Reduce rendering times with reconciliation algorithm,
-  improving rendering efficiency.
+  improving rendering efficiency:
+  Declarative UI performance = Diff performance + DOM performance,
+  `Virtual DOM` 主要是为了最小化 Diff 性能消耗.
 - Cross platform code.
 - Functional programming without details on DOM manipulation.
 - Virtual DOM 很多时候都不是最优的操作,
