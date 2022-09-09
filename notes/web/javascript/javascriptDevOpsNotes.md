@@ -540,6 +540,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
   - Isomorphic router.
   - Isomorphic store.
   - Isomorphic CSS.
+- Vue SSR [guide](https://mp.weixin.qq.com/s/QWtrUJcGEgNYKbhq2b8XLw):
+  - Vite.
+  - Router.
+  - Pinia.
 - Next.js for [isomorphic rendering](https://nextjs.org).
 - Server side rendering with [Puppeteer](https://developer.chrome.com/docs/puppeteer/ssr).
 - Web rendering [guide](https://web.dev/rendering-on-the-web).
