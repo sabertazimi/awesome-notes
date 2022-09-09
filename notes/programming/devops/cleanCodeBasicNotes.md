@@ -3230,9 +3230,11 @@ which makes it equivalent to the λ-calculus which is `Turing complete`.
 Evan You on Vue.js: **Seeking the Balance in Framework Design**
 on [JSConf.Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s):
 
-- Functional vs Imperative.
-- Immutable vs Mutable.
-- Referential Equality Testing vs Change Tracking.
+- `Functional Logic` vs `Imperative Logic`.
+- `Declarative UI` vs `Imperative UI`.
+- `Immutable Data` vs `Mutable Data`.
+- `Referential Equality Testing` vs `Change Tracking`.
+- `Runtime` vs `Compilation`.
 
 > 打破框架的范式之争, 其实是改变思路. 从思考不同范式之间的竞争关系, 转变成思考多个范式之间的协同关系.
 > UseRef in React, Composition in Vue
