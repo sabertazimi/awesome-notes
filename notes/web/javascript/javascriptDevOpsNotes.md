@@ -432,13 +432,18 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 :::caution SSR Hydration Warning
 
-服务端返回的 HTML 与客户端渲染结果不一致时,
-出于性能考虑,
-`hydrate` 可以弥补文本内容的差异,
-但并不能保证修补**属性**的差异,
-只在 `development` 模式下对这些不一致的问题报 `Warning`.
-因此必须重视 `SSR Hydration Warning`,
-要当 `Error` 逐个解决.
+服务端返回的 HTML 与客户端渲染结果不一致时会产生
+`SSR Hydration Warning`,
+必须重视 `SSR Hydration Warning`,
+要当 `Error` 逐个解决:
+
+- 出于性能考虑,
+  `hydrate` 可以弥补文本内容的差异,
+  但并不能保证修补**属性**的差异,
+  只在 `development` 模式下对这些不一致的问题报 `Warning`.
+- 前后端不一致时, `hydrate` 时会导致页面抖动:
+  后端渲染的部分节点被修改, 用户会看到页面突然更改的现象,
+  带来不好的用户体验.
 
 :::
 
