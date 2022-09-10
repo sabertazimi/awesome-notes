@@ -2566,6 +2566,16 @@ function resetStoreVM(store, state, hot) {
 
 ## Vue Modern Reactivity
 
+### Reactive System
+
+- `effect.ts`: `effect`, `track`, `trigger`.
+- `baseHandlers.ts`: proxy handler (`get` and `set`).
+- `reactive.ts`: `reactive` using ES6 Proxy.
+- `ref.ts`:
+  - reactive reference using Object Accessors.
+  - `ref` performant over `reactive`.
+- `computed.ts`: `computed` using `effect` and return a `ref`.
+
 ### Reactive Effects
 
 Data `getter`/`setter` -> Notify -> Watcher -> Trigger --> Renderer:
@@ -2682,14 +2692,6 @@ product.price = 10;
 console.assert(salePrice.value === 9);
 console.assert(total.value === 36);
 ```
-
-- `effect.ts`: `effect`, `track`, `trigger`.
-- `baseHandlers.ts`: proxy handler (`get` and `set`).
-- `reactive.ts`: `reactive` using ES6 Proxy.
-- `ref.ts`:
-  - reactive reference using Object Accessors.
-  - `ref` performant over `reactive`.
-- `computed.ts`: `computed` using `effect` and return a `ref`.
 
 ### Reactive Proxy
 
