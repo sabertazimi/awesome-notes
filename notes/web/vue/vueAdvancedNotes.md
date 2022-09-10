@@ -2623,7 +2623,16 @@ function trigger<T extends object>(target: T, key: Key) {
   if (!effectsMap) return;
 
   const effects = effectsMap.get(key);
-  if (effects) effects.forEach(effect => effect());
+  if (effects) {
+    // Remove current running effect
+    // to avoid infinite call stack
+    // (skip triggering current tracking effect):
+    // reactive.foo = reactive.foo + 1;
+    const effectsToRun = new Set(
+      effects.filter(effect => effect !== runningEffects.top())
+    );
+    effectsToRun.forEach(effect => effect());
+  }
 }
 
 export function reactive<T extends object>(target: T) {
