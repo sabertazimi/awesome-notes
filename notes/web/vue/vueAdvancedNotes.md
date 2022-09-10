@@ -2585,8 +2585,10 @@ console.log(data.a); // getHook() get called.
 data.a = 2; // setHook() get called.
 ```
 
-- `targetMap` -> `key: effectsMap`: key is reactive object.
-- `effectsMap` -> `key: effects`: key is object property name.
+Effects bucket:
+
+- `targetMap` = `target: effectsMap`.
+- `effectsMap` = `keyName: effectsSet`.
 
 ```ts
 type Primitive = string | number | boolean;
