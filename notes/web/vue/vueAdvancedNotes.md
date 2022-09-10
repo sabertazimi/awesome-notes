@@ -2951,3 +2951,7 @@ function handleSetupResult(instance, setupResult) {
   finishComponentSetup(instance);
 }
 ```
+
+## Vue Reference
+
+- [Vue.js Design and Implementation](https://github.com/HcySunYang/code-for-vue-3-book)
