@@ -2663,6 +2663,14 @@ export function reactive<T extends object>(target: T) {
       if (value !== null && typeof value === 'object') return reactive(value);
       else return value;
     },
+    has(target, key) {
+      track(target, key);
+      return Reflect.has(target, key);
+    },
+    ownKeys(target) {
+      track(target, IterateKey);
+      return Reflect.ownKeys(target);
+    },
     set(target, key, value, receiver) {
       const type = Object.hasOwn(target, key) ? 'SET' : 'ADD';
       const oldValue = Reflect.get(target, key, receiver);
