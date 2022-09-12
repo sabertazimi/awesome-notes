@@ -2599,6 +2599,8 @@ const runningEffects = [];
 
 const targetMap = new WeakMap();
 
+const IterateKey = Symbol('IterateKey');
+
 // runEffect -> effect -> proxy.get -> track.
 function createEffect<T>(effect: Effect<T>) {
   runningEffects.push(effect);
@@ -2618,21 +2620,39 @@ function track<T extends object>(target: T, key: Key) {
   }
 }
 
-function trigger<T extends object>(target: T, key: Key) {
+function trigger<T extends object>(target: T, key: Key, type: Type) {
   const effectsMap = targetMap.get(target);
   if (!effectsMap) return;
 
+  const effectsToRun = new Set();
+
   const effects = effectsMap.get(key);
-  if (effects) {
+  effects?.forEach(effect => {
     // Remove current running effect
     // to avoid infinite call stack
     // (skip triggering current tracking effect):
     // reactive.foo = reactive.foo + 1;
-    const effectsToRun = new Set(
-      effects.filter(effect => effect !== runningEffects.top())
-    );
-    effectsToRun.forEach(effect => effect());
+    if (effect !== runningEffects.top()) {
+      effectsToRun.add(effect);
+    }
+  });
+
+  if (type === 'ADD' || type === 'DELETE') {
+    const iterateEffects = effectsMap.get(IterateKey);
+    iterateEffects?.forEach(effect => {
+      if (effect !== runningEffects.top()) {
+        effectsToRun.add(effect);
+      }
+    });
   }
+
+  effectsToRun.forEach(effect => {
+    if (effect.options.scheduler) {
+      effect.options.scheduler(effect);
+    } else {
+      effect();
+    }
+  });
 }
 
 export function reactive<T extends object>(target: T) {
@@ -2644,9 +2664,16 @@ export function reactive<T extends object>(target: T) {
       else return value;
     },
     set(target, key, value, receiver) {
+      const type = Object.hasOwn(target, key) ? 'SET' : 'ADD';
       const oldValue = Reflect.get(target, key, receiver);
       const result = Reflect.set(target, key, value, receiver);
-      if (result && oldValue !== value) trigger(target, key);
+      if (result && oldValue !== value) trigger(target, key, type);
+      return result;
+    },
+    deleteProperty(target, key) {
+      const isOwnKey = Object.hasOwn(target, key);
+      const result = Reflect.deleteProperty(target, key);
+      if (result && isOwnKey) trigger(target, key, 'DELETE');
       return result;
     },
   };
