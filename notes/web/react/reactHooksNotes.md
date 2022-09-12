@@ -2286,6 +2286,89 @@ type UseSyncExternalStore = (
 ) => State;
 ```
 
+### Sync Browser API
+
+Sync navigator `online` API:
+
+```ts
+function subscribe(callback) {
+  window.addEventListener('online', callback);
+  window.addEventListener('offline', callback);
+  return () => {
+    window.removeEventListener('online', callback);
+    window.removeEventListener('offline', callback);
+  };
+}
+
+function useOnlineStatus() {
+  return useSyncExternalStore(
+    subscribe,
+    () => navigator.onLine,
+    () => true
+  );
+}
+
+function ChatIndicator() {
+  const isOnline = useOnlineStatus();
+  // ...
+}
+```
+
+### Sync Browser Event
+
+Sync browser `scroll` event:
+
+```tsx
+// A memoized constant fn prevents unsubscribe/resubscribe
+// In practice it is not a big deal
+function subscribe(onStoreChange) {
+  global.window?.addEventListener('scroll', onStoreChange);
+  return () => global.window?.removeEventListener('scroll', onStoreChange);
+}
+
+function useScrollY(selector = id => id) {
+  return useSyncExternalStore(
+    subscribe,
+    () => selector(global.window?.scrollY),
+    () => undefined
+  );
+}
+
+function ScrollY() {
+  const scrollY = useScrollY();
+  return <div>{scrollY}</div>;
+}
+
+function ScrollYFloored() {
+  const to = 100;
+  const scrollYFloored = useScrollY(y =>
+    y ? Math.floor(y / to) * to : undefined
+  );
+  return <div>{scrollYFloored}</div>;
+}
+```
+
+### Sync Browser Router
+
+```tsx
+function useHistorySelector(selector) {
+  const history = useHistory();
+  return useSyncExternalStore(history.listen, () => selector(history));
+}
+
+function CurrentPathname() {
+  const pathname = useHistorySelector(history => history.location.pathname);
+  return <div>{pathname}</div>;
+}
+
+function CurrentHash() {
+  const hash = useHistorySelector(history => history.location.hash);
+  return <div>{hash}</div>;
+}
+```
+
+### Sync External State
+
 Simple demo from [React Conf 2021](https://www.youtube.com/watch?v=oPfSC5bQPR8):
 
 ```tsx
