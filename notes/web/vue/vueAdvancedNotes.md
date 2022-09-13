@@ -2600,6 +2600,7 @@ const runningEffects = [];
 const targetMap = new WeakMap();
 
 const IterateKey = Symbol('IterateKey');
+const LengthKey = 'length';
 
 // runEffect -> effect -> proxy.get -> track.
 function createEffect<T>(effect: Effect<T>) {
@@ -2626,8 +2627,8 @@ function trigger<T extends object>(target: T, key: Key, type: Type) {
 
   const effectsToRun = new Set();
 
-  const effects = effectsMap.get(key);
-  effects?.forEach(effect => {
+  const ordinaryEffects = effectsMap.get(key);
+  ordinaryEffects?.forEach(effect => {
     // Remove current running effect
     // to avoid infinite call stack
     // (skip triggering current tracking effect):
@@ -2640,6 +2641,15 @@ function trigger<T extends object>(target: T, key: Key, type: Type) {
   if (type === 'ADD' || type === 'DELETE') {
     const iterateEffects = effectsMap.get(IterateKey);
     iterateEffects?.forEach(effect => {
+      if (effect !== runningEffects.top()) {
+        effectsToRun.add(effect);
+      }
+    });
+  }
+
+  if (type === 'LENGTH') {
+    const lengthEffects = effectsMap.get(LengthKey);
+    lengthEffects?.forEach(effect => {
       if (effect !== runningEffects.top()) {
         effectsToRun.add(effect);
       }
@@ -2668,11 +2678,18 @@ export function reactive<T extends object>(target: T) {
       return Reflect.has(target, key);
     },
     ownKeys(target) {
-      track(target, IterateKey);
+      // Proxy `for key in target` operator.
+      track(target, Array.isArray(target) ? LengthKey : IterateKey);
       return Reflect.ownKeys(target);
     },
     set(target, key, value, receiver) {
-      const type = Object.hasOwn(target, key) ? 'SET' : 'ADD';
+      const type = Array.isArray(target)
+        ? Number(key) < target.length
+          ? 'SET'
+          : 'LENGTH'
+        : Object.hasOwn(target, key)
+        ? 'SET'
+        : 'ADD';
       const oldValue = Reflect.get(target, key, receiver);
       const result = Reflect.set(target, key, value, receiver);
       if (result && oldValue !== value) trigger(target, key, type);
