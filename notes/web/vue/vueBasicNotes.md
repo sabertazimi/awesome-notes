@@ -849,6 +849,60 @@ state.foo++;
 console.log(fooRef.value === 3);
 ```
 
+`toRef`/`toRefs`:
+
+```ts
+function toRef(reactive, key) {
+  const wrapper = {
+    get value() {
+      return reactive[key];
+    },
+    set value(val) {
+      reactive[key] = val;
+    },
+  };
+
+  Object.defineProperty(wrapper, '__v_isRef', {
+    value: true,
+  });
+
+  return wrapper;
+}
+
+function toRefs(reactive) {
+  const refs = {};
+
+  for (const key in reactive) {
+    refs[key] = toRef(reactive, key);
+  }
+
+  return refs;
+}
+```
+
+`proxyRefs` (auto unref):
+
+```ts
+function proxyRefs(target) {
+  return new Proxy(target, {
+    get(target, key, receiver) {
+      const result = Reflect.get(target, key, receiver);
+      return result.__v_isRef ? result.value : result;
+    },
+    set(target, key, value, receiver) {
+      const result = target[key];
+
+      if (result.__v_isRef) {
+        result.value = value;
+        return true;
+      }
+
+      return Reflect.set(target, key, value, receiver);
+    },
+  });
+}
+```
+
 当一个 `ref` 被嵌套在一个响应式对象中作为属性被访问或更改时,
 会自动解包 (无需使用 `.value`):
 
