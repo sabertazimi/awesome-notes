@@ -180,6 +180,7 @@ tags: [Web, Framework, Library]
 - [JoTai: Primitive and Flexible State Management for React](https://github.com/pmndrs/jotai)
 - [Valtio: Proxy-state Simple for React and VanillaJS](https://github.com/pmndrs/valtio)
 - [Pinia: Next Generation Vue Store](https://github.com/vuejs/pinia)
+- [NanoStores: Atomic Tree-Shakable Stores](https://github.com/nanostores/nanostores)
 
 ### Reactive State Management
 
