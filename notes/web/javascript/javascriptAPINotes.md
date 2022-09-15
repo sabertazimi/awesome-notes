@@ -627,7 +627,7 @@ document.getElementsByClassName(className); // HTML5
 document.querySelector(cssSelector); // Selectors API
 document.querySelectorAll(cssSelector); // Selectors API
 
-element.getAttribute(attrName);
+element.getAttribute(attrName); // get default HTML attribute
 element.setAttribute(attrName, attrValue);
 element.removeAttribute(attrName);
 
