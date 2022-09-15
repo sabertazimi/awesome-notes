@@ -620,8 +620,7 @@ document.createElement('nodeName');
 document.createTextNode('String');
 
 document.getElementById(id);
-// eslint-disable-next-line no-restricted-globals
-document.getElementsByName(name);
+document.getElementsByName(elementName);
 document.getElementsByTagName(tagName);
 document.getElementsByClassName(className); // HTML5
 document.querySelector(cssSelector); // Selectors API
@@ -1144,9 +1143,11 @@ for (
 
 #### Attributes DOM Node
 
+HTML attributes 设置对应的 DOM properties 初始值.
+
 ```ts
-alert(div.getAttribute('id')); // "myDiv"
-alert(div.getAttribute('class')); // "bd"
+alert(div.getAttribute('id')); // "myDiv" default div.id
+alert(div.getAttribute('class')); // "bd" default div.class
 div.setAttribute('id', 'someOtherId');
 div.setAttribute('class', 'ft');
 div.removeAttribute('id');
