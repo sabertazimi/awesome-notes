@@ -1359,6 +1359,8 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
 
 ## Vue Lifecycle
 
+### Vue Options Lifecycle
+
 [![Lifecycle](./figures/lifecycle.png)](https://v2.vuejs.org/v2/api/#Options-Lifecycle-Hooks)
 
 `callHook` in `core/instance/lifecycle.js`:
@@ -1574,6 +1576,54 @@ Vue.prototype.$destroy = function () {
     vm.$vnode.parent = null;
   }
 };
+```
+
+### Vue Composition Lifecycle
+
+```ts
+let currentInstance = null;
+function setCurrentInstance(instance) {
+  currentInstance = instance;
+}
+
+function mountComponent(vnode, container, anchor) {
+  const componentOptions = vnode.type;
+  const { setup, data, props, attrs, slots } = componentOptions;
+  const instance = {
+    state: reactive(data),
+    props: shallowReadonly(props),
+    isMounted: false,
+    subTree: null,
+    slots,
+    mounted: [],
+  };
+
+  const setupContext = { attrs, slots };
+  setCurrentInstance(instance);
+  const setupResult = setup(shallowReadonly(instance.props), setupContext);
+  setCurrentInstance(null);
+
+  effect(
+    () => {
+      const subTree = render.call(renderContext, renderContext);
+
+      if (!instance.mounted) {
+        instance.mounted?.forEach(hook => hook.call(renderContext));
+      }
+    },
+    {
+      scheduler: queueJob,
+    }
+  );
+}
+
+function onMounted(fn) {
+  if (currentInstance) {
+    currentInstance.mounted.push(fn);
+  } else {
+    console.error('`onMounted().` can only called in `setup()`.');
+  }
+}
 ```
 
 ## Vue Instance
