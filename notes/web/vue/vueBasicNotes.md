@@ -1968,7 +1968,7 @@ function defineAsyncComponent({
         } else if (error.value && errorComponent) {
           return { type: errorComponent };
         } else {
-          return { type: loadingComponent };
+          return loadingComponent ? { type: loadingComponent } : placeholder;
         }
       };
     },
