@@ -2797,7 +2797,7 @@ app.product[newField] = newValue;
 
 - [`mountComponent(initialVNode, container)`](https://github.com/vuejs/core/blob/main/packages/runtime-core/src/renderer.ts).
 - `instance = createComponentInstance(initialVNode)`.
-- `setupComponent(instance)`.
+- [`setupComponent(instance)`](https://github.com/vuejs/core/blob/main/packages/runtime-core/src/component.ts).
 - `setupStatefulComponent(instance)`.
   - `setupContext = createSetupContext(instance)`: `{ attrs, slots, emit }`.
   - `setupResult = setup(instance.props, setupContext)`.
@@ -2943,7 +2943,31 @@ function createComponentInstance(vnode, parent, suspense) {
   };
 
   // 初始化渲染上下文
-  instance.ctx = { _: instance };
+  instance.ctx = new Proxy(instance, {
+    get(target, key, receiver) {
+      // data, props, computed, methods etc.
+      const [data, props] = target;
+
+      if (data && key in data) {
+        return data[key];
+      } else if (key in props) {
+        return props[key];
+      } else {
+        console.error('Not exist.');
+      }
+    },
+    set(target, key, value, receiver) {
+      // data, props, computed, methods etc.
+      if (data && key in data) {
+        data[key] = value;
+      } else if (key in props) {
+        console.warn(`Attempting to mutate read-only prop ${key}.`);
+      } else {
+        console.error('Not exist.');
+      }
+    },
+  });
+
   // 初始化根组件指针
   instance.root = parent ? parent.root : instance;
   // 初始化派发事件方法
@@ -2984,15 +3008,15 @@ function setupStatefulComponent(instance, isSSR) {
   const { setup } = Component;
 
   if (setup) {
-    // 如果 setup 函数带参数，则创建一个 setupContext
+    // 如果 setup 函数带参数, 则创建一个 setupContext
     const setupContext = (instance.setupContext =
       setup.length > 1 ? createSetupContext(instance) : null);
-    // 执行 setup 函数，获取结果
+    // 执行 setup 函数, 获取结果
     const setupResult = callWithErrorHandling(
       setup,
       instance,
       0 /* SETUP_FUNCTION */,
-      [instance.props, setupContext]
+      [shallowReadonly(instance.props), setupContext]
     );
     // 处理 setup 执行结果
     handleSetupResult(instance, setupResult);
