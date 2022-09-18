@@ -1191,7 +1191,7 @@ updates:
 
 ### Git Objects
 
-`.git/objects` is immutable, `.git/refs` is mutable
+`.git/objects` is immutable, `.git/refs` is mutable.
 
 `blob`持有文件的内容,`树对象`是一个包含`blob`对象和`子树对象`的目录列表.
 `提交对象`是工作目录的一个快照, 包含了一些像时间或提交信息这样的元数据.
@@ -1208,6 +1208,16 @@ git cat-file -p
 git update-index --add --cache-info 将文件添加至暂存区
 git write-tree 创建tree对象
 git commit-tree 创建commit对象
+
+$ git hash-object -w --stdin
+Hello, world!
+af5626b4a114abcb82d63db7c8082c3c4756e51b
+
+$ git cat-file -t af5626b4a114abcb82d63db7c8082c3c4756e51b
+blob
+
+$ git cat-file -p af5626b4a114abcb82d63db7c8082c3c4756e51b
+Hello, world!
 ```
 
 ```bash
