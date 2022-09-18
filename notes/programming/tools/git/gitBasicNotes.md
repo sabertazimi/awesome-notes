@@ -1279,6 +1279,18 @@ function print_git_objects() {
 print_git_objects
 ```
 
+### Git Packfiles
+
+Each `*.pack` file in `.git/objects/pack/`
+is called a `packfile`.
+Packfiles store multiple objects in compressed forms.
+
+The pack-index `.idx` operates
+like a query index that speeds up read queries
+that rely on the primary key (object ID).
+
+![Git Packfile](./figures/GitPackfile.webp)
+
 ### Add Inside
 
 - create blob objects: contains content of files
