@@ -1199,6 +1199,8 @@ updates:
 `工作目录`是一个目录, 有着相应的仓库, `暂存区`(索引)为下一个`提交对象`持有对应的`树对象`,
 而仓库就是一个`提交对象`的集合.
 
+[![Git Objects](./figures/GitObjects.webp)](https://github.blog/2022-08-29-gits-database-internals-i-packed-object-store)
+
 ```bash
 git hash-object 创建blob对象
 git cat-file -t
