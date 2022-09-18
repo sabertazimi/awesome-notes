@@ -76,13 +76,6 @@ git help
 git help config
 ```
 
-## File State
-
-- Untracked.
-- Unmodified(**Stable State**).
-- Modified.
-- Staged.
-
 ## Git Ignore File
 
 文件 `.gitignore` 的格式规范如下：
@@ -114,32 +107,41 @@ doc/*.txt
 doc/**/*.pdf
 ```
 
-## Diff
-
-查看未暂存(un-staged)差异
-
-```bash
-git diff
-```
-
-查看已暂存(staged)差异
-
-```bash
-git diff --staged
-```
-
-显示空白字符错误(space/tab/return)
-
-```bash
-git diff --check
-```
-
 ## Add
 
 - 交互式的选择 add 特定部分
 
 ```bash
 git add -p
+```
+
+## Remove
+
+完全删除文件
+
+```bash
+git rm filename
+```
+
+--cached: 保留磁盘文件(仅从 git 库移除文件)
+
+```bash
+git rm --cached filename
+```
+
+## Move
+
+```bash
+git mv old_path new_path
+```
+
+## Clean
+
+Remove untracked files from the working tree:
+
+```bash
+# Recursive force clean
+git clean -df
 ```
 
 ## Commit
@@ -160,9 +162,10 @@ git commit --amend -a -v
 ### Commit Style Guide
 
 - [Conventional Commits Specification](https://github.com/conventional-commits/conventionalcommits.org)
-- [Commit Lint](https://github.com/conventional-changelog/commitlint)
-- [Commitizen: Conventional commits CLI tool](https://github.com/commitizen/cz-cli)
-- [Standard Version: Automate versioning and CHANGELOG generation](https://github.com/conventional-changelog/standard-version)
+- [Commit Linter](https://github.com/conventional-changelog/commitlint)
+- [Commitizen: Conventional Commits CLI Tool](https://github.com/commitizen/cz-cli)
+- [Commitizen Conventional Changelog](https://github.com/commitizen/cz-conventional-changelog)
+- [Standard Version: Automate Versioning and CHANGELOG Generation](https://github.com/conventional-changelog/standard-version)
 
 ```bash
 npm i -D standard-version
@@ -316,6 +319,9 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 
 ## Stash
 
+临时地保存一些还没有提交的工作,
+以便在分支上不需要提交未完成工作就可以清理工作目录:
+
 - git stash: 备份当前的工作区的内容, 将当前的工作区内容保存到 Git 栈
 - git stash apply/pop: 从 Git 栈中读取最近一次保存的内容, 恢复工作区的相关内容
 - git stash branch `<branch>`: 新建分支, 并在该分支上恢复储藏内容
@@ -342,29 +348,21 @@ git checkout stash@{0} -- <filename>
 git revert -n
 ```
 
-## Remove
-
-完全删除文件
+## Reset
 
 ```bash
-git rm filename
+git reset $(git merge-base master $(git rev-parse --abbrev-ref HEAD))
 ```
 
---cached: 保留磁盘文件(仅从 git 库移除文件)
-
-```bash
-git rm --cached filename
-```
-
-## Move
-
-```bash
-git mv old_path new_path
-```
+- `git rev-parse --abbrev-rev HEAD`
+  will return the name of the branch currently on.
+- `git merge-base master $(name of your branch)`
+  will find the best common ancestor between master and current branch.
+- `git reset $(hash of the branch creation)`
+  will undo all the commits, merges, rebase
+  (preserving changes to the code).
 
 ## Log
-
-[`log` history](https://github.blog/2022-08-31-gits-database-internals-iii-file-history-queries):
 
 - -p: 打印 diff 差异信息
 - -n: n 为十进制数字,显示最近 n 次信息
@@ -471,9 +469,10 @@ git log main..feature
 
 ## Reflog
 
+分析你所有分支的头指针的日志来查找出你在重写历史上可能丢失的提交:
+
 `git reflog show` is an alias for
 `git log -g --abbrev-commit --pretty=oneline`.
-
 `git reflog` is useful for trace local git manipulation history.
 
 ```bash
@@ -487,81 +486,6 @@ git reset HEAD@{index}
 
 ```bash
 git show branchName/commitHash:fileName
-```
-
-## Remote
-
-添加与删除远程仓库源
-
-```bash
-git remote add <shortname> <remote-url>
-git remote rm <shortname>
-```
-
-拉取和推送变更
-
-```bash
-git pull [remote-name]
-git push [remote-name] [local-branch-name]:[remote-branch-name]
-```
-
-显示仓库信息
-
-```bash
-git remote show [remote-name]
-```
-
-重命名仓库缩写名
-
-```bash
-git remote rename <old> <new>
-```
-
-从本地操作,删除远程仓库的分支
-
-```bash
-git push origin --delete [remote-branch-name]
-```
-
-保存推送密码
-
-```bash
-git config --global credential.helper store
-```
-
-## Tag
-
-列出标记及其信息
-
-```bash
-git tag
-git tag -l "v1.8-"
-git show <tagName(v1.4)>
-```
-
-创建标签:
-
-- 不加-m 会调用 core.editor)
-- 省略 commit 序列,标签添加至最新提交
-
-创建附注(annotated)标签
-
-```bash
-git tag -a <tagName(v1.4)> [commit序列]
-```
-
-创建轻量(lightweight)标签
-
-```bash
-git tag <tagName(v1.4)> [commit序列]
-```
-
-共享标签至远程库
-
-```bash
-git push [remote-name] <tagName>
-git push [remote-name] --tags
-git push --follow-tags
 ```
 
 ## Alias
@@ -580,37 +504,93 @@ git config --global alias.last 'log -1 HEAD'
 git config --global alias.visual '!gitk'
 ```
 
+## Remote
+
+添加与删除远程仓库源:
+
+```bash
+git remote add <shortname> <remote-url>
+git remote rm <shortname>
+```
+
+显示仓库信息:
+
+```bash
+git remote show [remote-name]
+```
+
+重命名仓库缩写名:
+
+```bash
+git remote rename <old> <new>
+```
+
+## Pull
+
+拉取变更:
+
+```bash
+git pull [remote-name]
+git pull --rebase
+git pull --allow-unrelated-histories
+```
+
+## Fetch
+
+```bash
+git fetch <repo_name> <branch_name>
+```
+
 ## Merge
 
-合并的结果是生成一个新的快照(并提交)(新的提交对象)
+合并的结果是生成一个新的快照 (并提交) (新的提交对象).
 
 ## Rebase
 
-切换到工作分支,编码开发新特性
+切换到工作分支, 编码开发新特性:
 
 ```bash
 git checkout feature-branch
 ```
 
-新特性开发完毕,变基操作以简洁提交历史
+新特性开发完毕, 变基操作以简洁提交历史:
 
 ```bash
 git rebase master
-
 git rebase [baseBranch] [topicBranch]
 ```
 
-切换到主分支,合并特性分支
+切换到主分支, 合并特性分支:
 
 ```bash
 git checkout master
 git merge feature-branch
 ```
 
-pull with auto rebase and auto stash
+Pull with auto rebase and auto stash:
 
 ```bash
 git pull --rebase --autostash
+```
+
+## Push
+
+推送变更:
+
+```bash
+git push [remote-name] [local-branch-name]:[remote-branch-name]
+```
+
+从本地操作, 删除远程仓库的分支:
+
+```bash
+git push origin --delete [remote-branch-name]
+```
+
+保存推送密码:
+
+```bash
+git config --global credential.helper store
 ```
 
 ## Branch
@@ -811,6 +791,157 @@ issues 类型和 feature 类型的实现方式一模一样, 仅仅有名字上�
 
 1. 只能从 basedOn 类型分支上创建.
 2. 可以借助 basedOn 分支升级.
+
+## Tag
+
+列出标记及其信息
+
+```bash
+git tag
+git tag -l "v1.8-"
+git show <tagName(v1.4)>
+```
+
+创建标签:
+
+- 不加-m 会调用 core.editor)
+- 省略 commit 序列,标签添加至最新提交
+
+创建附注(annotated)标签
+
+```bash
+git tag -a <tagName(v1.4)> [commit序列]
+```
+
+创建轻量(lightweight)标签
+
+```bash
+git tag <tagName(v1.4)> [commit序列]
+```
+
+共享标签至远程库
+
+```bash
+git push [remote-name] <tagName>
+git push [remote-name] --tags
+git push --follow-tags
+```
+
+## Submodule
+
+管理一个仓库的其他外部仓库.
+它可以被用在库或者其他类型的共享资源上.
+submodule 命令有几个子命令, 如 (add/update/sync)
+用来管理这些资源.
+
+- add submodule
+
+```bash
+git submodule add git://github.com/rack/rack.git ./lib/rack
+cat .gitmodules
+```
+
+- get submodule
+
+```bash
+git submodule init
+git submodule update
+```
+
+- sync submodule
+
+```bash
+git pull origin/master --rebase
+git submodule update
+```
+
+```bash
+git submodule update --init --force --remote
+```
+
+## Diff
+
+查看未暂存(un-staged)差异
+
+```bash
+git diff
+```
+
+查看已暂存(staged)差异
+
+```bash
+git diff --staged
+```
+
+显示空白字符错误(space/tab/return)
+
+```bash
+git diff --check
+```
+
+```bash
+diff -u <src> <dist>
+diff -Nur <src_dir> <dist_dir>
+```
+
+## Patch
+
+```bash
+patch -p[num] < patchFile
+patch -dry -run -p[num] < patchFile
+```
+
+```bash
+diff -Nur program_1.0 program_2.0 > program_2.0.patch
+patch -p1 <../program_2.0.patch
+```
+
+- `git format-patch`:
+  mailbox 的格式来生成一系列的补丁以便你可以发送到一个邮件列表中.
+- `git am`:
+  应用来自邮箱的补丁.
+- `git apply`:
+  应用一个通过 git diff 或者甚至使用 GNU diff 命令创建的补丁.
+
+## Bisect
+
+通过二分查找快速定位问题提交:
+
+```bash
+git bisect start
+git bisect good 42bf0c8df2
+git bisect bad 57613f8c56
+git bisect good # Current commit is good.
+git bisect bad # Current commit is bad.
+```
+
+## Reverse List
+
+Lists commit objects in reverse chronological order:
+
+```bash
+git rev-list --count HEAD
+git rev-parse --short HEAD
+```
+
+## Filter Branch
+
+根据某些规则来重写大量的提交记录,
+例如从任何地方删除文件,
+或者通过过滤一个仓库中的一个单独的子目录以提取出一个项目:
+
+```bash
+git rev-list --objects --all
+\ | grep "$(git verify-pack -v .git/objects/pack/*.idx
+\ | sort -k 3 -n | tail -5 | awk '{print$1}')"
+git filter-branch -f --prune-empty --index-filter
+\ 'git rm -rf --cached --ignore-unmatch your-file-name'
+\ --tag-name-filter cat -- --all
+```
+
+## Cherry Pick
+
+获得在单个提交中引入的变更, 然后尝试将作为一个新的提交引入到你当前分支上.
 
 ## GitHub
 
@@ -1393,280 +1524,3 @@ git merge <giver-branch>/<giver-commit>
 
 - HEAD -> refs/heads/master -> commit object
 - branches are just refs, refs are just files (contain commit hash id)
-
-## Git Tools
-
-### Diff and Patch
-
-```bash
-diff -u <src> <dist>
-diff -Nur <src_dir> <dist_dir>
-```
-
-```bash
-patch -p[num] < patchFile
-patch -dry -run -p[num] < patchFile
-```
-
-```bash
-diff -Nur program_1.0 program_2.0 > program_2.0.patch
-patch -p1 <../program_2.0.patch
-```
-
-### Semantic Git Commit Message
-
-- [cz-cli](https://github.com/commitizen/cz-cli)
-- [cz-conventional-changelog](https://github.com/commitizen/cz-conventional-changelog)
-- [Commit Linter](https://github.com/conventional-changelog/commitlint)
-
-### Changelog Generator
-
-- [standard-version](https://github.com/conventional-changelog/standard-version)
-
-### Purge Tool
-
-```bash
-git rev-list --objects --all
-\ | grep "$(git verify-pack -v .git/objects/pack/*.idx
-\ | sort -k 3 -n | tail -5 | awk '{print$1}')"
-git filter-branch -f --prune-empty --index-filter
-\ 'git rm -rf --cached --ignore-unmatch your-file-name'
-\ --tag-name-filter cat -- --all
-```
-
-### Reverse List
-
-Lists commit objects in reverse chronological order:
-
-```bash
-git rev-list --count HEAD
-git rev-parse --short HEAD
-```
-
-## Commands List
-
-### Basic Commands
-
-#### git config
-
-#### git help
-
-#### git init
-
-#### git clone
-
-clone specific branch
-
-```bash
-git clone -b branch_name repo_url
-```
-
-#### git add
-
-#### git status
-
-#### git diff
-
-#### git difftool
-
-外置 diff 工具
-
-#### git commit
-
-#### git reset
-
-```bash
-git reset $(git merge-base master $(git rev-parse --abbrev-ref HEAD))
-```
-
-- `git rev-parse --abbrev-rev HEAD`
-  will return the name of the branch currently on
-- `git merge-base master $(name of your branch)`
-  will find the best common ancestor between master and current branch
-- `git reset $(hash of the branch creation)`
-  will undo all the commits, merges, rebase
-  (preserving changes to the code)
-
-#### git rm
-
-#### git mv
-
-#### git clean
-
-Remove untracked files from the working tree:
-
-```bash
-# Recursive force clean
-git clean -df
-```
-
-#### git branch
-
-#### git checkout
-
-#### git merge
-
-#### git mergetool
-
-外置 merge 工具
-
-#### git log
-
-#### git stash
-
-临时地保存一些还没有提交的工作, 以便在分支上不需要提交未完成工作就可以清理工作目录.
-
-#### git tag
-
-#### git fetch
-
-```bash
-git fetch <repo_name> <branch_name>
-```
-
-#### git pull
-
-```bash
-git pull --rebase
-git pull --allow-unrelated-histories
-```
-
-#### git push
-
-#### git remote
-
-#### git archive
-
-创建项目一个指定快照的归档文件
-
-#### git submodule
-
-管理一个仓库的其他外部仓库.
-它可以被用在库或者其他类型的共享资源上.
-submodule 命令有几个子命令, 如 (add/update/sync)
-用来管理这些资源.
-
-- add submodule
-
-```bash
-git submodule add git://github.com/rack/rack.git ./lib/rack
-cat .gitmodules
-```
-
-- get submodule
-
-```bash
-git submodule init
-git submodule update
-```
-
-- sync submodule
-
-```bash
-git pull origin/master --rebase
-git submodule update
-```
-
-```bash
-git submodule update --init --force --remote
-```
-
-### 检查与比较
-
-#### git show
-
-#### git shortlog
-
-创建一个漂亮的 changelog 文件
-
-#### git describe
-
-接受任何可以解析成一个提交的东西, 然后生成一个人类可读的字符串且不可变.
-这是一种获得一个提交的描述的方式, 它跟一个提交的 SHA-1 值一样是无歧义, 但是更具可读性.
-
-### 调试
-
-#### git bisect
-
-通过二分查找快速定位问题提交:
-
-```bash
-git bisect start
-git bisect good 42bf0c8df2
-git bisect bad 57613f8c56
-git bisect good # Current commit is good.
-git bisect bad # Current commit is bad.
-```
-
-#### git blame
-
-#### git grep
-
-查找任何字符串或者正则表达式
-
-### 补丁
-
-#### git cherry-pick
-
-获得在单个提交中引入的变更, 然后尝试将作为一个新的提交引入到你当前分支上.
-
-#### git rebase
-
-#### git revert
-
-### 邮件
-
-#### git apply
-
-应用一个通过 git diff 或者甚至使用 GNU diff 命令创建的补丁
-
-#### git am
-
-应用来自邮箱的补丁
-
-#### git format-patch
-
-mailbox 的格式来生成一系列的补丁以便你可以发送到一个邮件列表中
-
-#### git imap-send
-
-将一个由 git format-patch 生成的邮箱上传至 IMAP 草稿文件夹
-
-#### git send-email
-
-通过邮件发送那些使用 git format-patch 生成的补丁
-
-#### git request-pull
-
-### 外部系统
-
-#### git svn
-
-#### git fast-import
-
-对于其他版本控制系统或者从其他任何的格式导入,
-你可以使用 git fast-import 快速地将其他格式映射到 Git 可以轻松记录的格式.
-
-### 管理
-
-#### git gc
-
-在你的仓库中执行 `garbage collection`,
-删除数据库中不需要的文件和将其他文件打包成一种更有效的格式.
-
-#### git fsck
-
-检查内部数据库的问题或者不一致性
-
-#### git reflog
-
-分析你所有分支的头指针的日志来查找出你在重写历史上可能丢失的提交
-
-#### git filter-branch
-
-根据某些规则来重写大量的提交记录,
-例如从任何地方删除文件, 或者通过过滤一个仓库中的一个单独的子目录以提取出一个项目.
-
-#### git-note
-
-为特定 commit 添加 note,一个 commit 只能有一个 note
