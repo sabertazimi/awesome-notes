@@ -43,23 +43,28 @@ git config --global help.autocorrect 10
 
 ### Proxy Configuration
 
-- github.com.cnpmjs.org
-- hub.fastgit.org
-- raw.fastgit.org
-
 ```bash
-# speed up by cnpmjs
-# git clone/push/pull works
-git config --global url."https://github.com.cnpmjs.org/".insteadOf "https://github.com/"
+# GitHub proxy.
+git config --global url."https:/hub.fastgit.org/".insteadOf "https://github.com/"
 
-# post buffer config
-git config --global http.postbuffer 524288000
-git config --global http.postbuffer 1048576000
-
-# proxy
+# Socks5 proxy.
 git config --global http.proxy 'socks5://127.0.0.1:1080'
 git config --global https.proxy 'socks5://127.0.0.1:1080'
+
+# Post buffer configuration.
+git config --global http.postbuffer 524288000
+git config --global http.postbuffer 1048576000
 ```
+
+:::caution DNS Pollution
+
+To fix `SSL_ERROR_SYSCALL in connection to github.com:443`:
+
+- Ensure git configuration correct.
+- Ensure socks5 proxy stay working.
+- Change DNS server configuration (`8.8.8.8`).
+
+:::
 
 ### List and Help
 
