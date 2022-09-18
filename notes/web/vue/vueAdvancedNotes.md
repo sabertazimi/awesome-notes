@@ -1702,6 +1702,15 @@ function isStatic(node: ASTNode): boolean {
       Object.keys(node).every(isStaticKey))
   );
 }
+
+function patchElement(n1, n2) {
+  if (n2.dynamicChildren) {
+    // Skip all static blocks.
+    patchBlockChildren(n1, n2);
+  } else {
+    patchChildren(n1, n2, el);
+  }
+}
 ```
 
 ## Vue Two-Way Data Binding
