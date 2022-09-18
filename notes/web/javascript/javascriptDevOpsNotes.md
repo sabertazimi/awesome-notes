@@ -431,6 +431,10 @@ app.listen(3003, () => {
 React client side hydration `start.client.js`
 (compile to `public/client.js`):
 
+- 建立 Real DOM 与 Virtual DOM 的联系: `fiber.el = node`.
+- 绑定事件处理器.
+- 执行服务端未执行的 lifecycle hooks: `beforeMount()`/`onMounted()`.
+
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -525,10 +529,14 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 - 需要使用前后端同构的 API:
   对于前端或后端独有的 API (e.g BOM, DOM, Node API),
-  需要进行封装 (adapter/mock).
+  需要进行封装与填充 (adapter/mock/polyfill).
 - 注意并发与时序:
   浏览器环境一般只有一个用户, 单例模式容易实现;
   但 Node.js 环境可能存在多条连接, 导致全局变量相互污染.
+- 部分代码只在某一端执行:
+  在 `onCreated()` 创建定时器, 在 `onUnmounted()` 清除定时器,
+  由于 `onUnmounted()` hooks 只在客户端执行,
+  会造成服务端渲染时产生内存泄漏.
 
 :::
 
