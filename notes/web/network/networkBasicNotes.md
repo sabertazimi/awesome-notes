@@ -749,10 +749,11 @@ Address resolution protocol:
 
 ## Error Detection
 
-- TCP/IP: checksums(1 bit)
-- Ethernet(Link Layer): cyclic redundancy code(2 bit/more)
-- SSL(Secure Sockets Layer)/TLS(Transport Layer Security):
-  message authentication code(**MAC**)(cryptographic data) - prevent malicious attacks
+- TCP/IP: checksums (1 bit).
+- Ethernet (Link Layer): cyclic redundancy code (2 bit/more).
+- SSL (Secure Sockets Layer)/TLS (Transport Layer Security):
+  **MAC** (Message Authentication Code) (cryptographic data)
+  to prevent malicious attacks.
 
 ## Network Tools
 
