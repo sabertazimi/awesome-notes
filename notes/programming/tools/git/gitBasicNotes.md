@@ -364,6 +364,8 @@ git mv old_path new_path
 
 ## Log
 
+[`log` history](https://github.blog/2022-08-31-gits-database-internals-iii-file-history-queries):
+
 - -p: 打印 diff 差异信息
 - -n: n 为十进制数字,显示最近 n 次信息
 - --stat: 打印简略统计信息
