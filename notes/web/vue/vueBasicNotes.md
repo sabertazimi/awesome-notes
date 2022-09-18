@@ -2106,6 +2106,24 @@ const Teleport = {
 };
 ```
 
+### Client Only
+
+```ts
+const ClientOnly = defineComponent({
+  setup(_, { slots }) {
+    const show = ref(false);
+
+    // `onMounted()` hooks 只在客户端执行,
+    // 服务端渲染时不执行.
+    onMounted(() => {
+      show.value = true;
+    });
+
+    return () => (show.value && slots.default ? slots.default() : null);
+  },
+});
+```
+
 ## Vue Router
 
 - [Composition API Reference](https://next.router.vuejs.org/guide/advanced/composition-api.html)
