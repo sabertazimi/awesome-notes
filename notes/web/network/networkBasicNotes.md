@@ -736,7 +736,7 @@ if (packet_port == http_port) {
 
 Address resolution protocol:
 
-- 通过 ARP 广播查询对方 MAC 地址, 填写至 MAC 头部, 传入以太网 (Data Link Layer).
+- 通过 ARP 广播查询对方 MAC 地址, 填写至 MAC 头部, 传入网卡 (Link Layer).
 - generates mappings between link layer and network layer addresses cached in nodes
 - request-reply protocol: who has network address X => I have network address X
 - request sent to link layer broadcast address, reply sent to requesting address
@@ -747,6 +747,15 @@ Address resolution protocol:
   src hardware address as DEST HARDWARE ADDRESS field and opcode 2(reply)
 - if A and B aren't in same sub-net,
   they delivery ARP broadcast with third public gateway
+
+:::tip 集线器
+
+以太网集线器 (Ethernet Hub):
+
+- 中继式集线器: 广播以太帧, 接收方网卡根据 MAC 地址决定接收或丢弃报文.
+- 交换式集线器: 信号只会根据 MAC 地址流到指定设备, 不会到达其他设备.
+
+:::
 
 ## Error Detection
 
