@@ -10,10 +10,6 @@ tags: [Web, DevOps, Network]
 
 ## Internet
 
-End-to-end principle: implement features in the end-system/hosts where possible.
-
-> Congestion implemented on Transport Layer.
-
 ### Consist
 
 Internet Service Provider -> Packet Switch/Communication Link -> Host/End System.
@@ -23,6 +19,10 @@ Internet Service Provider -> Packet Switch/Communication Link -> Host/End System
 nodal = proc + queue + trans + prop: 总时延 = 产生/到达时延 + 排队时延 + 传输时延 + 传播时延.
 
 ### Layer
+
+End-to-end principle: implement features in the end-system/hosts where possible.
+
+> Congestion implemented on transport layer.
 
 #### Internet Layer
 
@@ -746,7 +746,7 @@ if (packet_port == http_port) {
 
 Address resolution protocol:
 
-- 通过 ARP 广播查询对方 MAC 地址, 填写至 MAC 头部, 传入网卡 (Link Layer).
+- 通过 ARP 广播查询对方 MAC 地址, 填写至 MAC 头部, 传入网卡 (link layer).
 - generates mappings between link layer and network layer addresses cached in nodes
 - request-reply protocol: who has network address X => I have network address X
 - request sent to link layer broadcast address, reply sent to requesting address
@@ -774,7 +774,7 @@ Address resolution protocol:
 ## Error Detection
 
 - TCP/IP: checksums (1 bit).
-- Ethernet (Link Layer): cyclic redundancy code (2 bit/more).
+- Ethernet (link layer): cyclic redundancy code (2 bit/more).
 - SSL (Secure Sockets Layer)/TLS (Transport Layer Security):
   **MAC** (Message Authentication Code) (cryptographic data)
   to prevent malicious attacks.
