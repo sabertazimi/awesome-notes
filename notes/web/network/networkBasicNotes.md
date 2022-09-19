@@ -736,6 +736,7 @@ if (packet_port == http_port) {
 
 Address resolution protocol:
 
+- 通过 ARP 广播查询对方 MAC 地址, 填写至 MAC 头部, 传入以太网 (Data Link Layer).
 - generates mappings between link layer and network layer addresses cached in nodes
 - request-reply protocol: who has network address X => I have network address X
 - request sent to link layer broadcast address, reply sent to requesting address
