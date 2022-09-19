@@ -306,7 +306,7 @@ server {
 }
 ```
 
-### HTTPS 通信过程
+### HTTPS Workflow
 
 证书获取及验证过程 (CA 认证体系):
 
@@ -344,7 +344,7 @@ server {
 - 服务器使用随机数对数据进行**对称加密**, 并将加密信息返回给客户端.
 - 客户端获得加密数据, 使用随机数作为密钥基于对称加密算法对报文进行**对称解密**.
 
-### HTTPS 安全性
+### HTTPS Security
 
 - 当浏览器获验证假公钥不合法时, 会对用户进行风险提示, 但用户仍可以授权信任证书继续操作.
 - HTTPS 重点关注传输安全, 无法保证本地随机数的存储安全 (木马, 浏览器漏洞).
@@ -427,6 +427,8 @@ Transmission Control Protocol (RFC 793):
   TCP 使用滑动窗口机制来实现流量控制.
 - Congestion control:
   TCP 通过动态改变窗口的大小进行拥塞控制.
+
+![TCP Header](./figures/TCPHeader.png)
 
 ### TCP Handshake
 
@@ -550,6 +552,8 @@ User Datagram Protocol (RFC 768):
   source port(16 bit), destination port(16 bit),
   checksum(16 bit), length(16 bit).
 
+![UDP Header](./figures/UDPHeader.png)
+
 ### UDP Performance
 
 基于 UDP 的应用程序:
@@ -637,6 +641,8 @@ openssl s_client -state -CAfile start-ssl.ca.crt -connect server.com:443
 
 ### ICMP Message Type
 
+![ICMP Header](./figures/ICMPHeader.png)
+
 - 0 type 0 code: echo reply(by ping)
 - 3 type 0 code: destination network unreachable
 - 3 type 1 code: destination host unreachable
@@ -693,6 +699,10 @@ Offline optimization:
 
 ## IP
 
+### Internet Protocol
+
+![IP Header](./figures/IPHeader.png)
+
 ### IP Service Model
 
 - prevent packets looping forever(TTL/time to live field in header):
@@ -748,14 +758,18 @@ Address resolution protocol:
 - if A and B aren't in same sub-net,
   they delivery ARP broadcast with third public gateway
 
-:::tip 集线器
+## Ethernet
+
+### Media Access Control
+
+![MAC Header](./figures/MACHeader.png)
+
+### Ethernet Hub
 
 以太网集线器 (Ethernet Hub):
 
 - 中继式集线器: 广播以太帧, 接收方网卡根据 MAC 地址决定接收或丢弃报文.
 - 交换式集线器: 信号只会根据 MAC 地址流到指定设备, 不会到达其他设备.
-
-:::
 
 ## Error Detection
 
