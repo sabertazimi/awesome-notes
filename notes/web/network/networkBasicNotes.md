@@ -712,7 +712,7 @@ Offline optimization:
 - 操作系统协议栈的 IP 模块会检查 IP 报文头部:
   - 判断本机是否为接收方.
   - 判断网络包是否经过分片.
-  - 将包转交给 TCP 模块或 UDP模块.
+  - 将包转交给 TCP 模块或 UDP 模块.
 
 :::tip IP Layer
 
