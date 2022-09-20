@@ -705,10 +705,26 @@ Offline optimization:
 
 ### IP Service Model
 
-- prevent packets looping forever(TTL/time to live field in header):
-  if TTL gets decreased to zero, then drop this datagram
-- limit fragment packets size(Packet ID, Flags, Fragment Offset)
-- reduce changes of wrong destination(Checksum, Destination Address)
+- Prevent packets looping forever(TTL/time to live field in header):
+  if TTL gets decreased to zero, then drop this datagram.
+- Limit fragment packets size(Packet ID, Flags, Fragment Offset).
+- Reduce changes of wrong destination(Checksum, Destination Address).
+
+:::tip IP Layer
+
+IP 本身不负责包的传输,
+而是委托各种通信技术将包传输到下一个路由器 (纯粹路由器).
+极简的 IP Layer 设计,
+可以根据需要灵活运用各种通信技术 (以太网, 无线网 etc),
+从而构建出互联网这一规模巨大的网络.
+
+:::
+
+### Router
+
+- 路由器的各个端口都具有 MAC 地址和 IP 地址.
+- 路由器会忽略主机号, 只匹配网络号.
+  通过路由聚合, 减少路由表记录数, 合并子网.
 
 ### IPv4 Addresses
 
@@ -792,6 +808,35 @@ Address resolution protocol:
 
 - 中继式集线器: 广播以太帧, 接收方网卡根据 MAC 地址决定接收或丢弃报文.
 - 交换式集线器: 信号只会根据 MAC 地址流到指定设备, 不会到达其他设备.
+
+## Access Network
+
+### ADSL
+
+非对称数字用户线 (Asymmetric Digital Subscriber Line):
+
+![Asymmetric Digital Subscriber Line](./figures/ADSL.png)
+
+### FTTH
+
+![Fiber](./figures/Fiber.png)
+
+光纤到户 (Fiber To The Home):
+
+![Fiber To The Home](./figures/FTTH.png)
+
+### PPPoE
+
+- 互联网接入路由器通过 PPPoE 的发现机制
+  查询 BAS (Broadband Access Server) 的 MAC 地址.
+- BAS 下发的 TCP/IP 参数会被配置到
+  互联网接入路由器的 BAS 端的端口上,
+  路由器完成了接入互联网的准备.
+- BAS 收到用户路由器发送的网络包后,
+  会去掉 MAC 头部和 PPPoE 头部,
+  然后用隧道机制将包发送给网络运营商的路由器.
+
+![PPPoE Header](./figures/PPPoEHeader.png)
 
 ## Physical Layer
 
