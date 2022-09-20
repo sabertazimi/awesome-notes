@@ -764,6 +764,28 @@ Address resolution protocol:
 
 ![MAC Header](./figures/MACHeader.png)
 
+### Switch
+
+交换机的作用为包的转发,
+它自己不会成为发送方或者接收方,
+各个端口不具有 MAC 地址.
+
+![Switch](./figures/Switch.png)
+
+交换机内部有一张 MAC 地址与对应网线端口的 MAC 地址表:
+
+- 当交换机接收到包时,
+  会将相应的端口号与发送方 MAC 地址写入表中,
+  交换机可以根据该地址表进行包的转发.
+- 当交换机发现一个包要发回到原端口时,
+  会直接丢弃该包, 防止接收方收到重复包.
+- 当地址表中找不到指定的 MAC 地址时,
+  交换机会将包转发到除了源端口之外的所有端口.
+  目标设备收到包后会返回响应包,
+  交换机此时可以更新地址表, 下次转发时无需广播发包.
+
+![Switch Circuit](./figures/SwitchCircuit.png)
+
 ### Ethernet Hub
 
 以太网集线器 (Ethernet Hub):
