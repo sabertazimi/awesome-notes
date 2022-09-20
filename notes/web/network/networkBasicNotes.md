@@ -771,6 +771,17 @@ Address resolution protocol:
 - 中继式集线器: 广播以太帧, 接收方网卡根据 MAC 地址决定接收或丢弃报文.
 - 交换式集线器: 信号只会根据 MAC 地址流到指定设备, 不会到达其他设备.
 
+## Physical Layer
+
+### Twisted Pair
+
+双绞线 (TP):
+
+- 抵消外源性噪声.
+- 抵消内源性噪声.
+
+![Twisted Pair](./figures/TwistedPair.png)
+
 ## Error Detection
 
 - TCP/IP: checksums (1 bit).
