@@ -821,9 +821,9 @@ Address resolution protocol:
 
 ![Fiber](./figures/Fiber.png)
 
-光纤到户 (Fiber To The Home):
+光纤到户 (Fiber to the Home):
 
-![Fiber To The Home](./figures/FTTH.png)
+![Fiber to the Home](./figures/FTTH.png)
 
 ### PPPoE
 
@@ -837,6 +837,19 @@ Address resolution protocol:
   然后用隧道机制将包发送给网络运营商的路由器.
 
 ![PPPoE Header](./figures/PPPoEHeader.png)
+
+### ISP
+
+- 网络包通过接入网后, 到达运营商 POP (Point of Presence) 的路由器.
+- NOC (Network Operation Center) 是运营商的核心设备 (配备高性能的路由器),
+  从 POP 传来的网络包会集中到此处,
+  并从此处转发到离目的地更近的 POP 或者其他运营商.
+- IX (Internet eXchange, 互联网交换中心) 是一个中心设备 (配备大型高速交换机),
+  同时连接多个互联网运营商, 减少线路数量.
+- 互联网内部使用 BGP (Border Gateway Protocol) 机制
+  在运营商之间交换路由信息.
+
+![Internet Service Provider](./figures/ISP.png)
 
 ## Physical Layer
 
