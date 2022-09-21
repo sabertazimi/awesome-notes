@@ -385,6 +385,7 @@ table {
 - [Authentication Page](https://www.smashingmagazine.com/2022/08/authentication-ux-design-guidelines)
 - [Back Button](https://www.smashingmagazine.com/2022/08/back-button-ux-design)
 - [Error Message](https://www.smashingmagazine.com/2022/08/error-messages-ux-design)
+- [Inline Validation](https://www.smashingmagazine.com/2022/09/inline-validation-web-forms-ux)
 
 ### HomePage User Experience
 
