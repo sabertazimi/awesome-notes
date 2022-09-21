@@ -811,25 +811,6 @@ Address resolution protocol:
 
 ![Internet Service Provider](./figures/ISP.png)
 
-## Physical Layer
-
-### Twisted Pair
-
-双绞线 (TP):
-
-- 抵消外源性噪声.
-- 抵消内源性噪声.
-
-![Twisted Pair](./figures/TwistedPair.png)
-
-| 种类            | 性能                                                      |
-| --------------- | --------------------------------------------------------- |
-| 五类 (CAT-5)    | 10BASE-T (10 Mbit/s) 和 100BASE-TX (100 Mbit/s) 以太网    |
-| 超五类 (CAT-5e) | 1000BASE-T 千兆以太网, 改善了外部串扰                     |
-| 六类 (CAT-6)    | 1000BASE-TX 千兆和 10GBASE-T 万兆以太网, 支持最高 250 MHz |
-| 超六类 (CAT-6A) | 改善了外部串扰                                            |
-| 七类 (CAT-7)    | 支持最高 600 MHz 的高速信号传输                           |
-
 ## Wireless Network
 
 ### Wireless Network Basis
@@ -876,6 +857,25 @@ Offline optimization:
 - 对重试请求采用补偿算法, 不要永远循环.
 - 离线时, 尽可能记录并在将来发送请求.
 - 利用 Web Storage API (App Cache/Local Storage/Service Worker) 实现离线应用.
+
+## Physical Layer
+
+### Twisted Pair
+
+双绞线 (TP):
+
+- 抵消外源性噪声.
+- 抵消内源性噪声.
+
+![Twisted Pair](./figures/TwistedPair.png)
+
+| 种类            | 性能                                                      |
+| --------------- | --------------------------------------------------------- |
+| 五类 (CAT-5)    | 10BASE-T (10 Mbit/s) 和 100BASE-TX (100 Mbit/s) 以太网    |
+| 超五类 (CAT-5e) | 1000BASE-T 千兆以太网, 改善了外部串扰                     |
+| 六类 (CAT-6)    | 1000BASE-TX 千兆和 10GBASE-T 万兆以太网, 支持最高 250 MHz |
+| 超六类 (CAT-6A) | 改善了外部串扰                                            |
+| 七类 (CAT-7)    | 支持最高 600 MHz 的高速信号传输                           |
 
 ## Error Detection
 
