@@ -631,72 +631,6 @@ WebRTC 是符合上述要求的框架.
 openssl s_client -state -CAfile start-ssl.ca.crt -connect server.com:443
 ```
 
-## ICMP
-
-### Internet Control Message Protocol
-
-- report error conditions back
-- help diagnose problems
-- site above IP
-
-### ICMP Message Type
-
-![ICMP Header](./figures/ICMPHeader.png)
-
-- 0 type 0 code: echo reply(by ping)
-- 3 type 0 code: destination network unreachable
-- 3 type 1 code: destination host unreachable
-- 3 type 3 code: destination port unreachable
-- 8 type 0 code: echo request(by ping)
-- 11 type 0 code: TTL(time to live) Expired(by ping)
-
-## Wireless Network
-
-### Wireless Network Basis
-
-影响数据传输速度因素:
-
-- 可用带宽 (Hz).
-- 信号强度 (SNR, Signal Noise Ratio).
-
-### Wireless NetWork Types
-
-无线标准:
-
-- WLAN (Wireless LAN):
-  IEEE 802.11, CSMA/CA (Carrier Sense Multiple Access/Collision Avoidance).
-- LTE (Long Term Evolution) / HSPA+ (High Speed Packet Access): 4G.
-
-![LTE Radio Resource Controller State Machine](./figures/LTE.png)
-
-![LTE Request](./figures/LTERequest.png)
-
-![LTE Response](./figures/LTEResponse.png)
-
-### Wireless Network Performance
-
-Battery power save optimization:
-
-- 轮询在移动网络中代价极高 (Energy Tail), 少用: e.g heart beat, round beacon.
-- 尽可能使用推送和通知.
-- 消除不必要的长连接.
-- 出站和入站请求应该合并和汇总.
-- 非关键性请求应该推迟到无线模块活动时进行.
-- 把请求分组, 尽可能多和快地下载数据, 然后让无线模块转为空闲:
-  既可以获得最大的网络吞吐量, 也能节约电量.
-- 把负载转移到 Wi-Fi 网络:
-  可以建议用户打开 Wi-Fi 连接, 以提升体验和节省电量.
-
-Offline optimization:
-
-- 不要缓存或试图猜测网络状态.
-- 调度请求, 监听并诊断错误.
-- 瞬态错误总会发生, 不可忽视, 可以采取重试策略.
-- 监听连接状态, 以便采用最佳请求方式.
-- 对重试请求采用补偿算法, 不要永远循环.
-- 离线时, 尽可能记录并在将来发送请求.
-- 利用 Web Storage API (App Cache/Local Storage/Service Worker) 实现离线应用.
-
 ## IP
 
 ### Internet Protocol
@@ -761,6 +695,28 @@ if (packet_port == http_port) {
     // OK
 }
 ```
+
+## ICMP
+
+### Internet Control Message Protocol
+
+- Report error conditions back.
+- Help diagnose problems.
+- Site above IP:
+  ICMP 报文包含在 IP 数据报中, 属于 IP 的一个用户.
+  一个 ICMP 报文包括 IP 头部 + ICMP 头部 + ICMP 报文.
+  IP 头部的 Protocol 值为 1 表示这是一个 ICMP 报文.
+
+### ICMP Message Type
+
+![ICMP Header](./figures/ICMPHeader.png)
+
+- 0 type 0 code: echo reply(by ping)
+- 3 type 0 code: destination network unreachable
+- 3 type 1 code: destination host unreachable
+- 3 type 3 code: destination port unreachable
+- 8 type 0 code: echo request(by ping)
+- 11 type 0 code: TTL(time to live) Expired(by ping)
 
 ## ARP
 
@@ -873,6 +829,53 @@ Address resolution protocol:
 | 六类 (CAT-6)    | 1000BASE-TX 千兆和 10GBASE-T 万兆以太网, 支持最高 250 MHz |
 | 超六类 (CAT-6A) | 改善了外部串扰                                            |
 | 七类 (CAT-7)    | 支持最高 600 MHz 的高速信号传输                           |
+
+## Wireless Network
+
+### Wireless Network Basis
+
+影响数据传输速度因素:
+
+- 可用带宽 (Hz).
+- 信号强度 (SNR, Signal Noise Ratio).
+
+### Wireless NetWork Types
+
+无线标准:
+
+- WLAN (Wireless LAN):
+  IEEE 802.11, CSMA/CA (Carrier Sense Multiple Access/Collision Avoidance).
+- LTE (Long Term Evolution) / HSPA+ (High Speed Packet Access): 4G.
+
+![LTE Radio Resource Controller State Machine](./figures/LTE.png)
+
+![LTE Request](./figures/LTERequest.png)
+
+![LTE Response](./figures/LTEResponse.png)
+
+### Wireless Network Performance
+
+Battery power save optimization:
+
+- 轮询在移动网络中代价极高 (Energy Tail), 少用: e.g heart beat, round beacon.
+- 尽可能使用推送和通知.
+- 消除不必要的长连接.
+- 出站和入站请求应该合并和汇总.
+- 非关键性请求应该推迟到无线模块活动时进行.
+- 把请求分组, 尽可能多和快地下载数据, 然后让无线模块转为空闲:
+  既可以获得最大的网络吞吐量, 也能节约电量.
+- 把负载转移到 Wi-Fi 网络:
+  可以建议用户打开 Wi-Fi 连接, 以提升体验和节省电量.
+
+Offline optimization:
+
+- 不要缓存或试图猜测网络状态.
+- 调度请求, 监听并诊断错误.
+- 瞬态错误总会发生, 不可忽视, 可以采取重试策略.
+- 监听连接状态, 以便采用最佳请求方式.
+- 对重试请求采用补偿算法, 不要永远循环.
+- 离线时, 尽可能记录并在将来发送请求.
+- 利用 Web Storage API (App Cache/Local Storage/Service Worker) 实现离线应用.
 
 ## Error Detection
 
