@@ -406,7 +406,7 @@ tags: [Web, Framework, Library]
 - [Bricks Layout](https://github.com/callmecavs/bricks.js)
 - [Brick Layer](https://github.com/ademilter/bricklayer)
 - [InfiniteGrid](https://github.com/naver/egjs-infinitegrid)
-- [Tether: Element Location](https://github.com/shipshapecode/tether)
+- [Tether: Positioning Engine to Make Overlays, Tooltips and Dropdowns Better](https://github.com/shipshapecode/tether)
 - [SplitJS](https://github.com/nathancahill/Split.js)
 - [Teleport: Teleport React Components in Same React Tree](https://github.com/gregberge/react-teleporter)
 
@@ -715,7 +715,7 @@ tags: [Web, Framework, Library]
 - [Barba.js: Smooth Transition between Pages](https://github.com/luruke/barba.js)
 - [Tilt: Smooth 3D Tilt JavaScript Library](https://github.com/micku7zu/vanilla-tilt.js)
 - [CountUp: Count Up Animation](https://github.com/glennreyes/react-countup)
-- [TheatreJS: Motion Design Editor](https://github.com/ariaminaei/theatre)
+- [TheatreJS: 3D Scene and Motion Design Editor](https://github.com/theatre-js/theatre)
 - [AutoAnimate: Zero-config and Drop-in Animation Utility](https://github.com/formkit/auto-animate)
 
 ### CLI Animation
@@ -1028,6 +1028,7 @@ tags: [Web, Framework, Library]
 - [RxDB: Fast, Offline-first, Reactive Database](https://github.com/pubkey/rxdb)
 - [PouchDB: Pocket-sized and Offline-first Database for Browser](https://github.com/pouchdb/pouchdb)
 - [ImmortalDB: Relentless Key-value Store for Browser](https://github.com/gruns/ImmortalDB)
+- [TinyBase: Reactive Data Store for Local‑first Apps](https://github.com/tinyplex/tinybase)
 
 ### Database
 
@@ -1076,6 +1077,7 @@ tags: [Web, Framework, Library]
 - [Draft Plugins](https://github.com/draft-js-plugins/draft-js-plugins)
 - [TipTap: Collaborative and Headless WYSIWYG Text Editor Framework](https://github.com/ueberdosis/tiptap)
 - [ProseMirror: Collaborative and Semantic Rich Text Editing](https://github.com/ProseMirror/prosemirror-view)
+- [ReactPage: Highly Customizable WYSIWYG Content Editor](https://github.com/react-page/react-page)
 
 ### Markdown Editor
 
