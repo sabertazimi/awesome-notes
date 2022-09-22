@@ -1560,6 +1560,7 @@ Largest Contentful Paint:
 - Responsive images:
   size image based on device size with `srcset` on `<img>` or `<picture>`.
 - 渐进渲染是提高 `SpeedIndex` 关键: 结合 `Suspense` 优先渲染已准备好的视图, 渐进渲染等待数据的视图.
+- LCP optimization [checklist](https://calibreapp.com/blog/largest-contentful-paint).
 - LCP optimization [guide](https://csswizardry.com/2022/03/optimising-largest-contentful-paint).
 
 ```ts
