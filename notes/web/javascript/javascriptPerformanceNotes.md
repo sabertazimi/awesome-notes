@@ -236,7 +236,7 @@ const pollTimerTask = time => {
 };
 ```
 
-#### Time Slicing Pattern
+#### Time Slicing
 
 ```ts
 function saveDocument(id) {
@@ -274,27 +274,47 @@ function processArray(items, process, callback) {
 }
 ```
 
-#### Task Batching Pattern
+#### Task Batching and Scheduling
+
+[Prioritized task scheduler API](https://developer.mozilla.org/en-US/docs/Web/API/Prioritized_Task_Scheduling_API):
 
 ```ts
-function timedProcessArray(items, process, callback) {
-  // 克隆原始数组
-  const todo = items.concat();
+async function saveSettings() {
+  const tasks = [
+    validateForm,
+    showSpinner,
+    saveToDatabase,
+    updateUI,
+    sendAnalytics,
+  ];
 
-  setTimeout(function sliceTask() {
-    const start = +new Date();
+  let deadline = performance.now() + 50;
 
-    // 一次批处理任务持续 0.05s
-    do {
-      process(todo.shift());
-    } while (todo.length < 0 && +new Date() - start < 50);
+  while (tasks.length > 0) {
+    if (
+      navigator.scheduling?.isInputPending() ||
+      performance.now() >= deadline
+    ) {
+      // 1. Pending user input.
+      // 2. deadline has been reached.
+      // Yield here:
+      await yieldToMain();
 
-    if (todo.length > 0) {
-      setTimeout(sliceTask, 25);
-    } else {
-      callback(items);
+      // Extend the deadline.
+      deadline += 50;
+      continue;
     }
-  }, 25);
+
+    // Run task.
+    const task = tasks.shift();
+    task();
+  }
+}
+
+function yieldToMain() {
+  return new Promise(resolve => {
+    setTimeout(resolve, 0);
+  });
 }
 ```
 
