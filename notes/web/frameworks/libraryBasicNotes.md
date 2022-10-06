@@ -177,10 +177,11 @@ tags: [Web, Framework, Library]
 
 - [React Recoil](https://github.com/facebookexperimental/Recoil)
 - [Zustand: Small, Fast and Scalable Bear-bones State-management Solution](https://github.com/pmndrs/zustand)
-- [JoTai: Primitive and Flexible State Management for React](https://github.com/pmndrs/jotai)
+- [JoTai: Primitive and Flexible State Management Library](https://github.com/pmndrs/jotai)
 - [Valtio: Proxy-state Simple for React and VanillaJS](https://github.com/pmndrs/valtio)
-- [Pinia: Next Generation Vue Store](https://github.com/vuejs/pinia)
 - [NanoStores: Atomic Tree-Shakable Stores](https://github.com/nanostores/nanostores)
+- [Signals: Vue-style and Performant State Management Library](https://github.com/preactjs/signals)
+- [Pinia: Next Generation Vue Store](https://github.com/vuejs/pinia)
 
 ### Reactive State Management
 
