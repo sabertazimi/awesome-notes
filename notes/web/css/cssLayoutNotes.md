@@ -1780,6 +1780,44 @@ will refactor grid item's size and location:
 }
 ```
 
+[Extending elements beyond the content area with named grid lines](https://ryanmulligan.dev/blog/layout-breakouts):
+
+```css
+.content {
+  --gap: clamp(1rem, 6vw, 3rem);
+  --full: minmax(var(--gap), 1fr);
+  --content: min(50ch, 100% - var(--gap) * 2);
+  --popup: minmax(0, 2rem);
+  --feature: minmax(0, 5rem);
+
+  display: grid;
+  grid-template-columns:
+    [full-start] var(--full)
+    [feature-start] var(--feature)
+    [popup-start] var(--popup)
+    [content-start] var(--content) [content-end]
+    var(--popup) [popup-end]
+    var(--feature) [feature-end]
+    var(--full) [full-end];
+}
+
+.content > * {
+  grid-column: content;
+}
+
+.popup {
+  grid-column: popup;
+}
+
+.feature {
+  grid-column: feature;
+}
+
+.full {
+  grid-column: full;
+}
+```
+
 #### Grid Areas
 
 - 网格线自动命名: `areaName-start`/`areaName-end`.
