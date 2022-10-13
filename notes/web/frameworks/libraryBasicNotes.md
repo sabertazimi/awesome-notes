@@ -870,7 +870,7 @@ tags: [Web, Framework, Library]
 - [LightGallery: Customizable, Modular, Responsive, LightBox Gallery Plugin](https://github.com/sachinchoolur/lightGallery)
 - [Viewer.js: Images Viewer Gallery](https://github.com/fengyuanchen/viewerjs)
 - [PhotoView: Exquisite React Photo Preview Component](https://github.com/MinJieLiu/react-photo-view)
-- [Zoom: Medium Style Image Zoom for React](https://github.com/rpearce/image-zoom)
+- [Zoom: Medium Style Image Zoom for React](https://github.com/rpearce/react-medium-image-zoom)
 
 ### Image Filter
 
