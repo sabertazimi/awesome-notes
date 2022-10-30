@@ -311,9 +311,15 @@ git config --global https.proxy "${PROXY_SOCKS}"
 :::caution Socks Client
 
 主机代理客户端需要[允许](https://github.com/microsoft/WSL/issues/4402#issuecomment-570474468)
-VLAN (或其他网络) 设备访问本地代理连接
+VLAN (或其他网络) 设备访问本地代理连接.
 
 :::
+
+[Network for WSL 2](https://github.com/microsoft/WSL/issues/4194):
+
+```bash
+netsh winsock reset
+```
 
 ## Basic Commands
 
