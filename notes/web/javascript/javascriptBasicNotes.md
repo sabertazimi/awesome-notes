@@ -5042,7 +5042,7 @@ App.utils = {};
 
   // also introduce a new sub-namespace
   this.tools = {};
-}.apply(App.utils));
+}).apply(App.utils);
 
 // inject new behavior into the tools namespace
 // which we defined via the utilities module
@@ -5051,7 +5051,7 @@ App.utils = {};
   this.diagnose = function () {
     return 'diagnosis';
   };
-}.apply(App.utils.tools));
+}).apply(App.utils.tools);
 ```
 
 ### Tail Call Optimization

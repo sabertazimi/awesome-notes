@@ -1780,7 +1780,7 @@ console.log(c);
 #### Debugger Detection
 
 ```ts
-(function () {}.constructor('debugger')());
+(function () {}).constructor('debugger')();
 ```
 
 ```ts
@@ -1796,9 +1796,9 @@ console.log(c);
     setInterval(() => {
       (function () {
         return false;
-      }
+      })
         .constructor('debugger')
-        .call());
+        .call();
     }, 50);
   }
 
