@@ -1274,13 +1274,13 @@ const MyArray = [
   { name: 'Eve', age: 38 },
 ];
 
-type Person = typeof MyArray[number];
+type Person = (typeof MyArray)[number];
 // type Person = {
 //   name: string;
 //   age: number;
 // }
 
-type Age = typeof MyArray[number]['age'];
+type Age = (typeof MyArray)[number]['age'];
 // type Age = number
 
 type Age2 = Person['age'];
@@ -1501,7 +1501,7 @@ const config = {
 
 type LazyValues = {
   [K in keyof typeof config as `${string & K}Lazy`]: () => Promise<
-    typeof config[K]
+    (typeof config)[K]
   >;
 };
 // Equivalent to:

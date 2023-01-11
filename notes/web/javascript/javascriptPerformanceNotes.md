@@ -1061,7 +1061,8 @@ Pre-fetch and pre-render
 <!-- link: initiate an early fetch but de-prioritize the script -->
 <link href="/js/script.js" rel="preload" as="script" fetchpriority="low" />
 
-<!-- img: de-prioritize an image in viewport that could be otherwise prioritized by the browser -->
+<!-- img: de-prioritize an image in viewport -->
+<!-- that could be otherwise prioritized by the browser -->
 <img src="/images/in-viewport-but-unimportant.svg" fetchpriority="low" alt="" />
 
 <!-- script: prioritize critical script -->
