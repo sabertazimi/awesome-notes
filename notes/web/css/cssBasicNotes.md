@@ -80,9 +80,9 @@ tags: [Web, CSS]
 ```css
 @layer reset, externals, base, components, utilities;
 
-@import 'reset.css' layer(reset);
-@import 'carousel.css' layer(externals);
-@import 'map.css' layer(externals);
+@import url('reset.css') layer(reset);
+@import url('carousel.css') layer(externals);
+@import url('map.css') layer(externals);
 ```
 
 ```html
@@ -105,16 +105,19 @@ tags: [Web, CSS]
   p {
     color: red;
   }
+
   @layer b {
     p {
       color: green;
     }
   }
 }
+
 @layer c {
   p {
     color: orange;
   }
+
   @layer d {
     p {
       color: blue;

@@ -106,6 +106,7 @@ $value: dummy(nth($params, 1), nth($params, 2), nth($params, 3));
 
 // Yep
 $params: (true, 42, 'kittens');
+
 @include dummy($params...);
 
 // Yep
@@ -114,6 +115,7 @@ $params: (
   'a': true,
   'b': 42,
 );
+
 @include dummy($params...);
 ```
 
@@ -145,6 +147,7 @@ div {
 
 ```scss
 @mixin border-stroke($val) {
+  /* stylelint-disable at-rule-empty-line-before */
   @if $val == light {
     border: 1px solid black;
   } @else if $val == medium {
@@ -154,6 +157,7 @@ div {
   } @else {
     border: none;
   }
+  /* stylelint-enable at-rule-empty-line-before */
 }
 ```
 
@@ -183,6 +187,7 @@ div {
 
 ```scss
 $x: 1;
+
 @while $x < 13 {
   .col-#{$x} {
     width: 100% / 12 * $x;
@@ -205,13 +210,13 @@ $x: 1;
 
 ```scss
 // import _variables.scss in main.scss
-@import 'variables';
+@import url('variables');
 ```
 
 `~` to import scss from `node_modules`
 
 ```scss
-@import '~bootstrap/scss/bootstrap';
+@import url('~bootstrap/scss/bootstrap');
 ```
 
 #### extend
@@ -378,6 +383,7 @@ $length: $value * 1em;
 @function add-10($number) {
   @if type-of($number) != 'number' {
     @warn "`#{$number}` is not a number of `add-10`.";
+
     @return false;
   }
 
