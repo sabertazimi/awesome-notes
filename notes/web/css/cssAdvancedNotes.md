@@ -1390,7 +1390,7 @@ Shape will zoom to fill size of SVG `width` and `height`:
 <style>
   .circle {
     fill: currentcolor;
-    fill-opacity: 50%;
+    fill-opacity: 0.5;
     fill-rule: nonzero;
   }
 </style>
@@ -1405,7 +1405,7 @@ circle {
   stroke-dashoffset: 0;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-opacity: 50%;
+  stroke-opacity: 0.5;
   stroke-width: 2px;
   paint-order: stroke;
   vector-effect: non-scaling-stroke;

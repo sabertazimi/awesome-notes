@@ -1442,23 +1442,6 @@ Some useful best practices:
 }
 ```
 
-### Custom Global Options
-
-```css
-$enable-caret: true !default;
-$enable-rounded: true !default;
-$enable-shadows: false !default;
-$enable-gradients: false !default;
-$enable-transitions: true !default;
-$enable-prefers-reduced-motion-media-query: true !default;
-$enable-grid-classes: true !default;
-$enable-pointer-cursor-for-buttons: true !default;
-$enable-print-styles: true !default;
-$enable-responsive-font-sizes: false !default;
-$enable-validation-icons: true !default;
-$enable-deprecation-messages: true !default;
-```
-
 ### Custom Colors
 
 - `@import '~bootstrap/scss/variables';`
@@ -1487,7 +1470,7 @@ $colors: (
   'white': $white,
   'gray': $gray-600,
   'gray-dark': $gray-800
-) !default;
+);
 ```
 
 ### Custom Spacing
@@ -1535,18 +1518,18 @@ key variable - `$spacer`:
 ### Custom Layout
 
 ```css
-$grid-columns: 12 !default;
-$grid-gutter-width: 30px !default;
+$grid-columns: 12;
+$grid-gutter-width: 30px;
 ```
 
 ### Custom Borders
 
 ```css
-$border-width: 1px !default;
-$border-color: $gray-300 !default;
-$border-radius: 0.25rem !default;
-$border-radius-lg: 0.3rem !default;
-$border-radius-sm: 0.2rem !default;
+$border-width: 1px;
+$border-color: $gray-300;
+$border-radius: 0.25rem;
+$border-radius-lg: 0.3rem;
+$border-radius-sm: 0.2rem;
 ```
 
 ### Custom Navbar and Navigation
@@ -1609,7 +1592,7 @@ $card-bg: $violet-0;
 
 ```css
 $breadcrumb-bg: $violet-0;
-$breadcrumb-divider-color: $gray-600 !default;
+$breadcrumb-divider-color: $gray-600;
 $breadcrumb-active-color: $violet-3;
 /* stylelint-disable-next-line function-no-unknown */
 $breadcrumb-divider: quote('>');
