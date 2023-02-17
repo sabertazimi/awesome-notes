@@ -2296,7 +2296,7 @@ function useAuth() {
 export { AuthProvider, useAuth };
 ```
 
-#### Ref with Context
+#### Context Refs
 
 ```tsx
 // Context.js
@@ -2359,6 +2359,16 @@ const TextArea = () => (
   </Consumer>
 );
 ```
+
+#### Context Internals
+
+`createContext` 创建了一个 `{ _currentValue, Provider, Consumer }` 对象:
+
+- `_currentValue` 保存值.
+- `Provider` 为一种 JSX 类型, 会转为对应的 fiber 类型, 负责修改 `_currentValue`.
+- `Consumer` 和 `useContext` 负责读取 `_currentValue`.
+- `Provider` 处理每个节点之前会入栈当前 `Context`, 处理完会出栈,
+  保证 `Context` 只影响子组件, 实现嵌套 `Context`.
 
 ### Error Boundary
 
