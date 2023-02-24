@@ -26,14 +26,18 @@ git config --global color.ui true
 ```
 
 ```bash
-git config --global commit.template $HOME/.GitCommit.md
-git config --global commit.gpgsign true
-git config --global user.signingkey <pub-keyID>
-
+git config --global init.defaultbranch main
 git config --global push.default simple
 git config --global merge.conflictstyle diff3
 git config --global pull.rebase true
 git config --global rebase.autoStash true
+```
+
+```bash
+git config --global commit.template $HOME/.GitCommit.md
+git config --global commit.gpgsign true
+git config --global gpg.program gpg
+git config --global user.signingkey <pub-keyID>
 ```
 
 ```bash
@@ -960,15 +964,12 @@ gpg --armor --export <pub-keyID>
 # Copy output to GitHub GPG textarea
 
 # Git global configuration for GPG signature commits
-git config --global user.signingkey <pub-keyID>
 git config --global commit.gpgsign true
 git config --global gpg.program gpg
+git config --global user.signingkey <pub-keyID>
 
 # WSL2 fix: Add to ~/.zshrc
 export GPG_TTY=$(tty)
-
-# Single signature commit
-git commit -S -m "..."
 
 # Import GitHub signature
 curl https://github.com/web-flow.gpg | gpg --import
@@ -976,6 +977,9 @@ gpg --sign-key <GitHub-keyID>
 
 # Log git signature
 git log --show-signature
+
+# Single signature commit
+git commit -S -m "..."
 ```
 
 [Update existing GPG key](https://inspirezone.tech/using-gpg-keys-on-github):
