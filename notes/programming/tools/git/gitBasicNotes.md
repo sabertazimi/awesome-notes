@@ -10,9 +10,9 @@ tags: [Programming, Tools, Git]
 
 ## Git Configuration
 
-- /etc/gitconfig
-- ~/.gitconfig 或 ~/.config/git/config
-- repo/.git/config
+- `/etc/gitconfig`.
+- `~/.gitconfig` 或 `~/.config/git/config`.
+- `repo/.git/config`.
 
 ### Basic Configuration
 
@@ -67,7 +67,7 @@ git config --global https.proxy 'socks5://127.0.0.1:1080'
 
 # Post buffer configuration.
 git config --global http.postbuffer 524288000
-git config --global http.postbuffer 1048576000
+git config --global https.postbuffer 1048576000
 ```
 
 :::caution DNS Pollution
