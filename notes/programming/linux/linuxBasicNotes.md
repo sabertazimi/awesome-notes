@@ -294,12 +294,6 @@ wsl --set-version Ubuntu-22.04 2
 wsl -l -v
 ```
 
-[Gzip for WSL 2](https://github.com/microsoft/WSL/issues/4461#issuecomment-1174011640):
-
-```bash
-echo -en '\x10' | sudo dd of=/usr/bin/gzip count=1 bs=1 conv=notrunc seek=$((0x189))
-```
-
 [Proxy for WSL 2](https://zinglix.xyz/2020/04/18/wsl2-proxy):
 
 ```bash
@@ -318,6 +312,12 @@ git config --global https.proxy "${PROXY_SOCKS}"
 VLAN (或其他网络) 设备访问本地代理连接.
 
 :::
+
+[Gzip for WSL 2](https://github.com/microsoft/WSL/issues/4461#issuecomment-1174011640):
+
+```bash
+echo -en '\x10' | sudo dd of=/usr/bin/gzip count=1 bs=1 conv=notrunc seek=$((0x189))
+```
 
 [Network for WSL 2](https://github.com/microsoft/WSL/issues/4194):
 
