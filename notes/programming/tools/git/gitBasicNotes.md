@@ -26,7 +26,7 @@ git config --global color.ui true
 ```
 
 ```bash
-git config --global init.defaultbranch main
+git config --global init.defaultBranch main
 git config --global push.default simple
 git config --global merge.conflictstyle diff3
 git config --global pull.rebase true
@@ -44,7 +44,7 @@ git config --global alias.rpo "remote prune origin"
 ```
 
 ```bash
-git config --global commit.template $HOME/.GitCommit.md
+git config --global commit.template $HOME/.gitmsg.md
 git config --global commit.gpgsign true
 git config --global gpg.program gpg
 git config --global user.signingkey <pub-keyID>
@@ -983,7 +983,8 @@ export GPG_TTY=$(tty)
 
 # Import GitHub signature
 curl https://github.com/web-flow.gpg | gpg --import
-gpg --sign-key <GitHub-keyID>
+# gpg --sign-key <GitHub-keyID>
+gpg --sign-key 4AEE18F83AFDEB23
 
 # Log git signature
 git log --show-signature

@@ -282,8 +282,11 @@ wget https://aur.archlinux.org/packages.gz
 [Upgrade to WSL 2](https://docs.microsoft.com/windows/wsl/install-manual):
 
 ```bash
-dism.exe /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux
-dism.exe /enable-feature /featurename:VirtualMachinePlatform
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+# Restart computer.
+
 wget https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 wsl --set-default-version 2
 wsl --set-version Ubuntu-22.04 2
