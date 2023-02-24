@@ -34,6 +34,16 @@ git config --global rebase.autoStash true
 ```
 
 ```bash
+git config --global alias.s "status"
+git config --global alias.c "commit --verbose"
+git config --global alias.a "add"
+git config --global alias.pr "pull --rebase"
+git config --global alias.rs "restore --staged"
+git config --global alias.st "stash"
+git config --global alias.rpo "remote prune origin"
+```
+
+```bash
 git config --global commit.template $HOME/.GitCommit.md
 git config --global commit.gpgsign true
 git config --global gpg.program gpg
