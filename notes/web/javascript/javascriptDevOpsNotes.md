@@ -624,6 +624,7 @@ export const getStaticProps: GetStaticProps = async () => {
   - [Server-side rendering](https://www.patterns.dev/posts/server-side-rendering).
   - [Static site generation](https://www.patterns.dev/posts/static-rendering).
   - [Partial hydration](https://www.patterns.dev/posts/progressive-hydration).
+- Simple islands architecture [implementation](https://juejin.cn/post/7155300194773860382).
 
 ### JamStack Reference
 
