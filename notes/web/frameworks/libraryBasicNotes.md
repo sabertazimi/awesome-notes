@@ -973,6 +973,7 @@ tags: [Web, Framework, Library]
 
 - [GrammY: Telegram Bot Framework](https://github.com/grammyjs/grammY)
 - [Discord: Create Discord Bot with TypeScript and Decorators](https://github.com/oceanroleplay/discord.ts)
+- [UrbanBot: Universal React ChatBot Library](https://github.com/urban-bot/urban-bot)
 
 ## File
 
