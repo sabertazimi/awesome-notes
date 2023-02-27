@@ -37,7 +37,7 @@ git config --global rebase.autoStash true
 git config --global alias.s "status"
 git config --global alias.c "commit --verbose"
 git config --global alias.a "add"
-git config --global alias.rs "restore"
+git config --global alias.rs "restore --staged"
 git config --global alias.st "stash"
 git config --global alias.pr "pull --rebase"
 git config --global alias.rpo "remote prune origin"
