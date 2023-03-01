@@ -473,6 +473,7 @@ tags: [Web, Framework, Library]
 - [Push.js: Browser Notification Framework](https://github.com/Nickersoft/push.js)
 - [Notifier: Native Desktop Notification](https://github.com/mikaelbr/node-notifier)
 - [Novu: Notification Infrastructure for Developers](https://github.com/novuhq/novu)
+- [Sonner: Opinionated Toast](https://github.com/emilkowalski/sonner)
 
 #### Tooltip
 
