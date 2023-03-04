@@ -306,6 +306,7 @@ tags: [Web, Framework, Library]
 - [UtilityTypes](https://github.com/piotrwitek/utility-types)
 - [ToolBelt](https://github.com/millsp/ts-toolbelt)
 - [Guards: Comprehensive Collection of Type Guards](https://github.com/sniptt-official/guards)
+- [TSReset: Improving Types for Common JavaScript APIs](https://github.com/total-typescript/ts-reset)
 
 ### TypeScript Schema Utils
 
