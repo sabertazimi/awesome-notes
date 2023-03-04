@@ -2232,7 +2232,7 @@ e.g `.main > .button` vs `.sidebar > .button`,
 
 ### Container Style Query
 
-`@container` [style query](https://una.im/style-queries):
+`@container` [style query](https://una.im/style-queries) direct parent:
 
 ```css
 @container style(color: hotpink) {
@@ -2294,6 +2294,28 @@ e.g `.main > .button` vs `.sidebar > .button`,
     color: var(--highlight-color);
   }
 }
+```
+
+`@container` style query non-direct parent:
+
+```html
+<ul class="card-list">
+  <li class="card-container">
+    <div class="card"></div>
+  </li>
+</ul>
+
+<style>
+  .card-list {
+    container-name: cards;
+  }
+
+  @container cards style(--theme: warm) {
+    .card {
+      background-color: wheat;
+    }
+  }
+</style>
 ```
 
 ## Feature Query
