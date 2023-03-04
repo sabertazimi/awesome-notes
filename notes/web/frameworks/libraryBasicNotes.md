@@ -139,6 +139,7 @@ tags: [Web, Framework, Library]
 - [Amplication: Low-Code but High Quality Applications](https://github.com/amplication/amplication)
 - [LoopBack: Build Modern API Applications](https://github.com/loopbackio/loopback-next)
 - [Aleph: Full-stack Framework in Deno](https://github.com/alephjs/aleph.js)
+- [Remult: CRUD Framework for Full Stack TypeScript](https://github.com/remult/remult)
 
 ### Headless CMS
 
