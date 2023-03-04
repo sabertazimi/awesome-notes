@@ -3309,7 +3309,7 @@ Scroll bars take up space within `padding box`.
 
 #### Chrome Custom Scrollbar
 
-[WebKit scrollbar](https://developer.mozilla.org/docs/Web/CSS/::-webkit-scrollbar):
+[WebKit scrollbar](https://github.com/henripar/scrollbar):
 
 - 整体部分: `::-webkit-scrollbar`.
 - 两端按钮: `::-webkit-scrollbar-button`.
