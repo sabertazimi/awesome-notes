@@ -1100,6 +1100,7 @@ tags: [Web, Framework, Library]
 - [ACE Editor](https://github.com/ajaxorg/ace)
 - [Code Mirror](https://github.com/codemirror/CodeMirror)
 - [Xi: Code Editor Philosophy](https://github.com/xi-editor/xi-editor)
+- [React Simple Code Editor](https://github.com/react-simple-code-editor/react-simple-code-editor)
 
 ### Live Editor and Playground
 
