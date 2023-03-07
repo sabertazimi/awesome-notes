@@ -296,7 +296,7 @@ but also can every `<article>` and `<section>` element.
 - Form validation complete [guide](https://developer.mozilla.org/docs/Learn/Forms/Form_validation).
 - Constraint validation complete [guide](https://developer.mozilla.org/docs/Web/Guide/HTML/Constraint_validation).
 
-```js
+```ts
 const usernameInput = document.querySelector('[name="name"]');
 
 usernameInput.addEventListener('invalid', () => {
