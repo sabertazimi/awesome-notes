@@ -1379,6 +1379,7 @@
     "refname",
     "regexes",
     "rehype",
+    "rejectionhandled",
     "Rellax",
     "remult",
     "renewcommand",

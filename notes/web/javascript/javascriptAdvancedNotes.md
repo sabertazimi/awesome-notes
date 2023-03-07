@@ -3577,6 +3577,93 @@ instance.interceptors.response.use(
 );
 ```
 
+```ts
+globalThis.onunhandledrejection = event => {
+  console.log(event.type);
+  // "unhandledrejection"
+  console.log(event.reason.message);
+  // "Oops!"
+  console.log(rejected === event.promise);
+  // true
+};
+
+globalThis.onrejectionhandled = event => {
+  console.log(event.type);
+  // "rejectionhandled"
+  console.log(event.reason.message);
+  // "Oops!"
+  console.log(rejected === event.promise);
+  // true
+};
+
+const possiblyUnhandledRejections = new Map();
+
+// when a rejection is unhandled, add it to the map
+globalThis.onunhandledrejection = event => {
+  // prevents the console warning
+  event.preventDefault();
+  possiblyUnhandledRejections.set(event.promise, event.reason);
+};
+
+// when a rejection is handled, remove it from the map
+globalThis.onrejectionhandled = event => {
+  possiblyUnhandledRejections.delete(event.promise);
+};
+
+setInterval(() => {
+  possiblyUnhandledRejections.forEach((reason, promise) => {
+    console.error('Unhandled rejection');
+    console.error(promise);
+    console.error(reason.message ? reason.message : reason);
+    // do something to handle these rejections
+  });
+  possiblyUnhandledRejections.clear();
+}, 60000);
+
+const rejected = Promise.reject(new Error('Oops!'));
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.log(reason.message);
+  // "Oops!"
+  console.log(rejected === promise);
+  // true
+});
+
+const rejected = Promise.reject(new Error('Oops!'));
+
+setTimeout(() => {
+  // "rejectionhandled" triggered here
+  rejected.catch(
+    reason => console.error(reason.message) // "Oops!"
+  );
+}, 500);
+
+process.on('rejectionHandled', promise => {
+  console.log(rejected === promise); // true
+});
+
+const possiblyUnhandledRejections = new Map();
+
+// when a rejection is unhandled, add it to the map
+process.on('unhandledRejection', (reason, promise) => {
+  possiblyUnhandledRejections.set(promise, reason);
+});
+
+process.on('rejectionHandled', promise => {
+  possiblyUnhandledRejections.delete(promise);
+});
+
+setInterval(() => {
+  possiblyUnhandledRejections.forEach((reason, promise) => {
+    console.error('Unhandled rejection');
+    console.error(promise);
+    console.error(reason.message ? reason.message : reason);
+    // do something to handle these rejections
+  });
+  possiblyUnhandledRejections.clear();
+}, 60000);
+```
+
 ## Regular Expression
 
 ```ts
