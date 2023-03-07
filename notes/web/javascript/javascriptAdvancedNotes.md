@@ -1249,6 +1249,63 @@ const p11 = p1.finally(() => {
 setTimeout(console.log, 0, p11); // Promise <rejected>: bar
 ```
 
+Any value or resolved promises returned
+from `finally()` is ignored:
+
+```ts
+const promise = Promise.resolve(42);
+
+promise
+  .finally(() => {
+    // Settlement handler
+    return 43; // Ignored!
+  })
+  .then(value => {
+    // Fulfillment handler
+    console.log(value); // 42
+  });
+
+promise
+  .finally(() => {
+    // Settlement handler
+    return Promise.resolve(44); // Ignored!
+  })
+  .then(value => {
+    // Fulfillment handler
+    console.log(value); // 42
+  });
+```
+
+Returning rejected promise from `finally()`
+equivalent to throwing an error:
+
+```ts
+const promise = Promise.resolve(42);
+
+promise
+  .finally(() => {
+    // eslint-disable-next-line prefer-promise-reject-errors
+    return Promise.reject(43);
+  })
+  .catch(reason => {
+    console.error(reason); // 43
+  });
+```
+
+```ts
+// eslint-disable-next-line prefer-promise-reject-errors
+const promise = Promise.reject(43);
+
+promise
+  .finally(() => {
+    // eslint-disable-next-line prefer-promise-reject-errors
+    return Promise.reject(45);
+  })
+  .catch(reason => {
+    console.log(reason); // 45
+  });
+```
+
 ### Promise Thenable and Catch
 
 The main difference between the forms
