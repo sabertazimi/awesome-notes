@@ -936,9 +936,10 @@ tags: [Web, Framework, Library]
 ### Video
 
 - [Video.js](https://github.com/videojs/video.js)
-- [React Player](https://github.com/zhihu/griffith)
+- [Griffith: ZhiHu Web Video Player](https://github.com/zhihu/griffith)
 - [Plyr](https://github.com/selz/plyr)
 - [FLV.js](https://github.com/bilibili/flv.js)
+- [ReactPlayer: Playing Variety of URLs](https://github.com/cookpete/react-player)
 - [React Youtube Player](https://github.com/tjallingt/react-youtube)
 - [VDX: FFmpeg CLI](https://github.com/yuanqing/vdx)
 - [Remotion: Create Videos Programmatically in React](https://github.com/remotion-dev/remotion)
