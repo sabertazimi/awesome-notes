@@ -2207,6 +2207,20 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 }
 ```
 
+[Respond to media query changes](https://polypane.app/blog/the-complete-guide-to-css-media-queries/#using-media-queries-in-javascript):
+
+```ts
+const match = window.matchMedia('(min-width: 400px)');
+
+match.addEventListener('change', e => {
+  if (e.matches) {
+    /* do a thing */
+  } else {
+    /* do another thing */
+  }
+});
+```
+
 ## Container Query
 
 ### Container Size Query
