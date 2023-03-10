@@ -5602,7 +5602,7 @@ Node.js can run I/O operations in a non-blocking way,
 meaning other code (and even other I/O operations) can be executed
 while an I/O operation is in progress.
 
-Instead of having to ‘wait’ for an I/O operation to complete
+Instead of having to **wait** for an I/O operation to complete
 (and essentially waste CPU cycles sitting idle),
 Node.js can use the time to execute other tasks.
 
