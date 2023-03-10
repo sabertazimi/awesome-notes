@@ -489,12 +489,33 @@ npm i -D eslint -w package-c
 
 #### Exports Field
 
+`exports` can define public API:
+
+```json
+{
+  "exports": {
+    ".": {
+      "types": "index.d.ts",
+      "module": "index.mjs",
+      "import": "index.mjs",
+      "require": "index.cjs",
+      "default": "index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "index.d.ts",
+  "browser": "index.mjs",
+  "module": "index.mjs",
+  "main": "index.cjs"
+}
+```
+
 `exports` configures JavaScript level,
 file `packages/rest/build/gen/util/regexp-tools.js`
 can be imported via `@github/rest/gen/util/regexp-tools`:
 
-- Don’t need to mention directory `build`/`dist` in module specifiers.
-- Don’t need to mention `.js`/`.ts` in module specifiers.
+- Don't need to mention directory `build`/`dist` in module specifiers.
+- Don't need to mention `.js`/`.ts` in module specifiers.
 
 > `typesVersions` for TypeScript finds type definitions (`.d.ts` files).
 
