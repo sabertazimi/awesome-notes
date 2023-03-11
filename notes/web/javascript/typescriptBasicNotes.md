@@ -126,7 +126,7 @@ npm i -D typescript ts-loader source-map-loader
 ```
 
 ```ts
-const path = require('path');
+const path = require('node:path');
 
 module.exports = {
   entry: './src/index.tsx',

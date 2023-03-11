@@ -121,7 +121,7 @@ const createBrowserWindow = () => {
 
 ```ts
 // preload.js
-const fs = require('fs');
+const fs = require('node:fs');
 
 global.desktop = {
   files: () => fs.readdirSync(__dirname),

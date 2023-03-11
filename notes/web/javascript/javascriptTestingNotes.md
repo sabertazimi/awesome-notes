@@ -526,7 +526,7 @@ module.exports = {
 `jest.env.setup.js`:
 
 ```ts
-import path from 'path';
+import path from 'node:path';
 import dotenv from 'dotenv';
 
 console.log(`============ env-setup Loaded ===========`);
@@ -877,9 +877,9 @@ A simple
 implementation:
 
 ```ts
-import { promises as fs } from 'fs';
-import { basename, dirname, join } from 'path';
-import { pathToFileURL } from 'url';
+import { promises as fs } from 'node:fs';
+import { basename, dirname, join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 async function* walk(dir: string): AsyncGenerator<string> {
   for await (const d of await fs.opendir(dir)) {
