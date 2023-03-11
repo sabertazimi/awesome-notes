@@ -1625,7 +1625,7 @@ hydrate(
 `server.js`:
 
 ```tsx
-import path from 'path';
+import path from 'node:path';
 import Express from 'express';
 import qs from 'qs';
 import React from 'react';

@@ -1492,7 +1492,7 @@ module.exports = {
 ### Webpack Library Configuration
 
 ```ts
-const path = require('path');
+const path = require('node:path');
 
 module.exports = {
   entry: {
@@ -1632,7 +1632,7 @@ const config = {
 ##### Webpack Resource Assets
 
 ```ts
-const path = require('path');
+const path = require('node:path');
 
 module.exports = {
   entry: './src/index.js',
@@ -1668,7 +1668,7 @@ img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 ##### Webpack Inline Assets
 
 ```ts
-const path = require('path');
+const path = require('node:path');
 const svgToMiniDataURI = require('mini-svg-data-uri');
 
 module.exports = {
@@ -1704,7 +1704,7 @@ block.style.background = `url(${metroMap})`;
 ##### Webpack Source Assets
 
 ```ts
-const path = require('path');
+const path = require('node:path');
 
 module.exports = {
   entry: './src/index.js',
@@ -2324,7 +2324,7 @@ module.exports = {
 ```
 
 ```ts
-const childProcess = require('child_process');
+const childProcess = require('node:child_process');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const branch = childProcess
   .execSync('git rev-parse --abbrev-ref HEAD')
@@ -2366,7 +2366,7 @@ module.exports = HotLoad;
 Typed webpack plugin from `laravel-mix/`:
 
 ```ts
-const readline = require('readline');
+const readline = require('node:readline');
 const _ = require('lodash');
 const chalk = require('chalk');
 const Table = require('cli-table3');

@@ -151,8 +151,8 @@ npm config set //registry.example.com/:_authToken XXXXXTokenXXXXX
 Release script from VitePress:
 
 ```ts
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 const chalk = require('chalk');
 const semver = require('semver');
 const { prompt } = require('enquirer');
@@ -801,9 +801,9 @@ server.on('request', function (req, res) {
   `CommonJS` 模块的导入导出语句的位置会影响模块代码语句的执行结果.
 
 ```ts
-const path = require('path');
-const fs = require('fs');
-const vm = require('vm');
+const path = require('node:path');
+const fs = require('node:fs');
+const vm = require('node:vm');
 
 function Module(id) {
   this.id = id;
@@ -957,7 +957,7 @@ process.on('exit', code => {
 - Use `process.on` to communicate between parent and child process.
 
 ```ts
-const cp = require('child_process');
+const cp = require('node:child_process');
 
 cp.exec(
   'ls -l',
@@ -998,7 +998,7 @@ const {
   isMainThread,
   parentPort,
   workerData,
-} = require('worker_threads');
+} = require('node:worker_threads');
 
 function fibonacci(num) {
   if (num <= 1) return num;
@@ -1027,7 +1027,7 @@ if (isMainThread) {
 ```
 
 ```ts
-const http = require('http');
+const http = require('node:http');
 const fibonacciWorker = require('./fibonacci-worker');
 
 const port = 3000;
@@ -1072,7 +1072,7 @@ Worker pool is needed:
 - fs.exists.
 
 ```ts
-const fs = require('fs');
+const fs = require('node:fs');
 
 function readFile(filename) {
   return new Promise((resolve, reject) => {
@@ -1097,8 +1097,8 @@ readFile('example.txt')
 ```
 
 ```ts
-import { promises as fs } from 'fs';
-import { basename, dirname, join } from 'path';
+import { promises as fs } from 'node:fs';
+import { basename, dirname, join } from 'node:path';
 
 async function* walk(dir: string): AsyncGenerator<string> {
   for await (const d of await fs.opendir(dir)) {
@@ -1152,8 +1152,8 @@ const traverse = async directory => {
 
 ```ts
 module.exports = function ls(dirName, fileType, callback) {
-  const fs = require('fs');
-  const path = require('path');
+  const fs = require('node:fs');
+  const path = require('node:path');
 
   fs.readdir(dirName, function (err, list) {
     if (err) {
@@ -1181,7 +1181,7 @@ const str = buf.toString();
 - path.extname: 返回文件类型
 
 ```ts
-const path = require('path');
+const path = require('node:path');
 
 console.log(path.extname('index.html')); // .html
 
@@ -1281,7 +1281,7 @@ server.listen(8000);
 ### Sample
 
 ```ts
-const net = require('net');
+const net = require('node:net');
 const chatServer = net.createServer();
 // 用于检测僵尸客户端,用于及时清楚僵尸客户端
 const clientList = [];
@@ -1339,8 +1339,8 @@ socket.end();
 ### Socket IO
 
 ```ts
-const http = require('http');
-const fs = require('fs');
+const http = require('node:http');
+const fs = require('node:fs');
 const io = require('socket.io');
 const sockFile = fs.readFileSync('socket.html');
 
@@ -1403,7 +1403,7 @@ url.parse(request.url, true);
 - dns.lookup
 
 ```ts
-const dns = require('dns');
+const dns = require('node:dns');
 
 dns.lookup('google.com', 4, function (e, a) {
   console.log(a);
@@ -1418,7 +1418,7 @@ dns.resolve('tazimi.tk', 'A', function (e, r) {
 ```
 
 ```ts
-const dns = require('dns');
+const dns = require('node:dns');
 
 dns.resolve('tazimi.dev', 'A', function (err, res) {
   if (err) {
@@ -1449,7 +1449,7 @@ dns.resolve('github.com', 'MX', function (err, res) {
 #### Hash API
 
 ```ts
-const crypto = require('crypto');
+const crypto = require('node:crypto');
 const md5 = crypto.createHash('md5');
 
 md5.update('foo');
@@ -1463,8 +1463,8 @@ openssl genrsa -out key.pem 1024
 ```
 
 ```ts
-const crypto = require('crypto');
-const fs = require('fs');
+const crypto = require('node:crypto');
+const fs = require('node:fs');
 const pem = fs.readFileSync('key.pem');
 const key = pem.toString('ascii');
 const hmac = crypto.createHmac('sha1', key);
@@ -1482,9 +1482,9 @@ hmac.digest('hex'); // '7x123'
 ### Cluster Module
 
 ```ts
-const cluster = require('cluster');
-const http = require('http');
-const numCPUs = require('os').cpus().length;
+const cluster = require('node:cluster');
+const http = require('node:http');
+const numCPUs = require('node:os').cpus().length;
 const rssWarn = 50 * 1024 * 1024;
 const heapWarn = 50 * 1024 * 1024;
 const workers = {};
@@ -1564,7 +1564,7 @@ function createWorker() {
 - `assert.doesNotThrow(fn)`: 测试方法是否抛出异常.
 
 ```ts
-const assert = require('assert');
+const assert = require('node:assert');
 
 assert.equal(1, true, 'Truthy');
 assert.notEqual(1, true, 'Truthy');

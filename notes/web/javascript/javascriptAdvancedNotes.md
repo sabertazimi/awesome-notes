@@ -1051,8 +1051,8 @@ for (const element of domTraversal(document.getElementById('subTree'))) {
 结合 `Promise`/`async`/`await` 可以实现异步递归算法:
 
 ```ts
-import { promises as fs } from 'fs';
-import { basename, dirname, join } from 'path';
+import { promises as fs } from 'node:fs';
+import { basename, dirname, join } from 'node:path';
 
 async function* walk(dir: string): AsyncGenerator<string> {
   for await (const d of await fs.opendir(dir)) {
@@ -2813,7 +2813,7 @@ export { firstName, lastName, year };
 
 ```ts
 // 接口改名
-export { foo as myFoo } from 'module';
+export { foo as myFoo } from 'node:module';
 export { default as Article } from './Article';
 
 // 整体输出
