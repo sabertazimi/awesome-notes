@@ -2314,10 +2314,7 @@ a.button::before {
 
 .dialog {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   width: fit-content;
   height: fit-content;
   margin: auto;
