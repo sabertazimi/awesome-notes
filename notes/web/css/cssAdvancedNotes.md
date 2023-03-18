@@ -1231,10 +1231,7 @@ main {
 /* 模糊文字背景图片 */
 main::before {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   margin: -30px;
   content: '';
   filter: blur(20px);

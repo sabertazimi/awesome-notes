@@ -908,10 +908,7 @@ output -->
 ```css
 .btn-text::before {
   position: absolute;
-  top: -6px;
-  right: -8px;
-  bottom: -6px;
-  left: -8px;
+  inset: -6px -8px;
   content: '';
 }
 ```

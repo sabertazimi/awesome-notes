@@ -242,10 +242,7 @@ li {
 
 .tab > a::before {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: -1;
   background: #ccc;
   background-image: linear-gradient(
@@ -1132,10 +1129,7 @@ Pseudo element switch from circle to circle:
 ```css
 .container {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: 99;
   text-align: center;
   white-space: nowrap;
@@ -1296,10 +1290,7 @@ Pseudo element switch from circle to circle:
 
   .parallax-layer {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     transform-origin: 100% 50%;
   }
 
@@ -1330,10 +1321,7 @@ body {
 
 .indicator {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: 1;
   pointer-events: none;
   background: linear-gradient(to right top, teal 50%, transparent 50%) no-repeat;
@@ -1346,10 +1334,7 @@ body {
 /* only show 5px background */
 .indicator::after {
   position: fixed;
-  top: 5px;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 5px 0 0;
   z-index: 1;
   content: '';
   background: #fff;
@@ -1546,10 +1531,7 @@ Use pseudo elements to construct circle and line:
 ```css
 .box::before {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: -1;
   content: '';
   background: linear-gradient(-45deg, #ff3d00 0%, #0400ff 100%);
@@ -1566,10 +1548,7 @@ Use pseudo elements to construct circle and line:
  */
 .box::after {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: -1;
   content: '';
   background: inherit;
@@ -2357,10 +2336,7 @@ const polygon = (n = 3) => {
 /* 平行四边形 */
 .button::before {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: -1;
   content: ''; /* 用伪元素来生成一个矩形 */
   background: #58a;
@@ -2374,10 +2350,7 @@ const polygon = (n = 3) => {
 /* 梯形 */
 .tab::before {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: -1;
   content: ''; /* 用伪元素来生成一个矩形 */
   background: #58a;
@@ -2480,10 +2453,7 @@ body {
 
 .gradient-text::before {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   content: '';
   background: linear-gradient(to right, deepskyblue, deeppink);
   mix-blend-mode: lighten;
@@ -2498,10 +2468,7 @@ body {
 
 .gradient-stroked-text::after {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   content: '';
   background: linear-gradient(315deg, #78e56c, #127ac9);
   mix-blend-mode: darken;
