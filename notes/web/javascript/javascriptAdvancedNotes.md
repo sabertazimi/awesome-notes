@@ -4292,6 +4292,28 @@ const blob = new Blob(['export const itsAModule = true'], {
 const blobUrl = URL.createObjectURL(blob);
 ```
 
+[Download files](https://www.amitmerchant.com/create-and-download-text-files-using-javascript):
+
+```ts
+function saveTextAsFile(textToWrite, fileNameToSaveAs, fileType) {
+  const textFileAsBlob = new Blob([textToWrite], { type: fileType });
+  const downloadLink = document.createElement('a');
+  downloadLink.innerHTML = 'Download File';
+  downloadLink.download = fileNameToSaveAs;
+
+  if (window.webkitURL != null) {
+    downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+  } else {
+    downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+    downloadLink.onclick = destroyClickedElement; // document.body.removeChild(downloadLink);
+    downloadLink.style.display = 'none';
+    document.body.appendChild(downloadLink);
+  }
+
+  downloadLink.click();
+}
+```
+
 [URLSearchParams](https://developer.mozilla.org/docs/Web/API/URLSearchParams):
 
 ```ts
