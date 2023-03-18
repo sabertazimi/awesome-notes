@@ -102,6 +102,7 @@ tags: [Web, Framework, Library]
 - [Ant Design Pro: Out-of-box UI Solution for Enterprise Applications](https://github.com/ant-design/ant-design-pro)
 - [Refine: React-based Framework for Building Internal Tools](https://github.com/pankod/refine)
 - [ReactAdmin: Frontend Framework for Building B2B Applications](https://github.com/marmelab/react-admin)
+- [Tremor: Build Dashboards Fast](https://github.com/tremorlabs/tremor)
 - [Vuestic: Vue Admin Components](https://github.com/epicmaxco/vuestic-admin)
 
 ## Framework and Solution
@@ -1062,6 +1063,7 @@ tags: [Web, Framework, Library]
 - [JieBa: Chinese Text Segmentation](https://github.com/yanyiwu/nodejieba)
 - [Docusaurus Plugin: Local Search Plugin Based on Lunr.js](https://github.com/easyops-cn/docusaurus-search-local)
 - [Fuse: Lightweight Fuzzy Search JavaScript Library](https://github.com/krisk/fuse)
+- [MiniSearch: Powerful In-memory Full-text Search Engine](https://github.com/lucaong/minisearch)
 
 ### SEO
 
