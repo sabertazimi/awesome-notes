@@ -28,6 +28,7 @@ tags: [Web, Framework, Library]
 
 - [Create React App](https://github.com/facebook/create-react-app)
 - [Create React Native App](https://github.com/expo/create-react-native-app)
+- [Create T3 App: Create Full-stack and Type-safe Next.js App](https://github.com/t3-oss/create-t3-app)
 - [Craco: Create React App Configuration Override Tool](https://github.com/gsoft-inc/craco)
 - [Modern: Meta-framework Suite Designed for Frontend-focused Modern Web Development](https://github.com/modern-js-dev/modern.js)
 - [Projen: New Generation of Project Generators](https://github.com/projen/projen)
