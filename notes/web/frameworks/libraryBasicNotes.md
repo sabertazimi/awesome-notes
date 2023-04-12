@@ -1101,8 +1101,9 @@ tags: [Web, Framework, Library]
 ### Code Editor
 
 - [Monaco: Powers VS Code](https://github.com/microsoft/monaco-editor)
-- [React ACE](https://github.com/securingsincity/react-ace)
+- [React Monaco](https://github.com/suren-atoyan/monaco-react)
 - [ACE Editor](https://github.com/ajaxorg/ace)
+- [React ACE](https://github.com/securingsincity/react-ace)
 - [Code Mirror](https://github.com/codemirror/CodeMirror)
 - [Xi: Code Editor Philosophy](https://github.com/xi-editor/xi-editor)
 - [React Simple Code Editor](https://github.com/react-simple-code-editor/react-simple-code-editor)
