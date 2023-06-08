@@ -357,8 +357,6 @@ console.log(isStringAlternative(badString)); // true
 ```ts
 // eslint-disable-next-line no-self-compare
 const truthy = 'z' === 'z'; // true
-// eslint-disable-next-line no-octal-escape
-const truthy = '\172' === 'z'; // true
 const truthy = '\x7A' === 'z'; // true
 const truthy = '\u007A' === 'z'; // true
 const truthy = '\u{7A}' === 'z'; // true
