@@ -1192,7 +1192,7 @@ console.log(el.dataset.src);
 - `compareBoundaryPoints(Range.HOW, sourceRange)`: 确定范围之间是否存在公共的边界 (起点或终点).
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <body>
     <p id="p1"><b>Hello</b> world!</p>

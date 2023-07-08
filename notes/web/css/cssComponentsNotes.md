@@ -222,7 +222,9 @@ li {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.3s, opacity 0.3s;
+  transition:
+    max-height 0.3s,
+    opacity 0.3s;
 }
 
 .anchor:target ~ .content {
@@ -717,11 +719,16 @@ a.btn-custom {
   height: 36px;
   background-color: #f0f3f9;
   border: 1px solid #a0b3d6;
-  box-shadow: 1px 1px #afc4ea, 2px 2px #afc4ea, 3px 3px #afc4ea;
+  box-shadow:
+    1px 1px #afc4ea,
+    2px 2px #afc4ea,
+    3px 3px #afc4ea;
 }
 
 .shadow-3d-button:active {
-  box-shadow: 1px 1px #afc4ea, 2px 2px #afc4ea;
+  box-shadow:
+    1px 1px #afc4ea,
+    2px 2px #afc4ea;
   transform: translate(1px, 1px);
 }
 ```
@@ -1026,15 +1033,15 @@ Pseudo element switch from circle to circle:
 
 ```css
 .gui-switch > input {
-  appearance: none;
   display: grid;
   flex-shrink: 0;
   grid: [track] 1fr / [track] 1fr;
   align-items: center;
+  padding: var(--track-padding);
+  appearance: none;
+  border-radius: var(--track-size);
   inline-size: var(--track-size);
   block-size: var(--thumb-size);
-  padding: var(--track-padding);
-  border-radius: var(--track-size);
 }
 
 .gui-switch > input::before {
@@ -1061,6 +1068,9 @@ Pseudo element switch from circle to circle:
   text-indent: 0.01px;
   text-overflow: '';
 
+  /* 消除默认样式 */
+  appearance: none;
+
   /* 将箭头图片移至右端 */
   background: url('images/arrow.png') no-repeat;
   background-color: #fff;
@@ -1068,9 +1078,6 @@ Pseudo element switch from circle to circle:
 
   /* 自定义边框 */
   border: 0;
-
-  /* 消除默认样式 */
-  appearance: none;
 }
 
 .custom-select:focus {
@@ -1197,7 +1204,9 @@ Pseudo element switch from circle to circle:
   border: solid transparent 5px;
   border-bottom-color: rgb(0 0 0 / 80%);
   opacity: 0;
-  transition: opacity 250ms, top 250ms;
+  transition:
+    opacity 250ms,
+    top 250ms;
 }
 
 /* 提示文字 */
@@ -1216,7 +1225,9 @@ Pseudo element switch from circle to circle:
   content: attr(aria-label);
   background: rgb(0 0 0 / 80%);
   opacity: 0;
-  transition: opacity 250ms, top 250ms;
+  transition:
+    opacity 250ms,
+    top 250ms;
 }
 
 /* Keeps the info boxes on top of other elements */
@@ -1404,7 +1415,9 @@ body {
 
 .slide {
   z-index: 0;
-  transition: transform 1s, opacity 0.8s;
+  transition:
+    transform 1s,
+    opacity 0.8s;
   transform: rotate(90deg);
   transform-origin: 0 0;
 }
@@ -1679,13 +1692,16 @@ Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
   width: 1.5rem;
   height: 1.5rem;
   color: dimgray;
-  background: linear-gradient(currentcolor, currentcolor) no-repeat center / 0.875em
-      2px, linear-gradient(currentcolor, currentcolor) no-repeat center / 2px 0.875em;
+  background:
+    linear-gradient(currentcolor, currentcolor) no-repeat center / 0.875em 2px,
+    linear-gradient(currentcolor, currentcolor) no-repeat center / 2px 0.875em;
   border: 1px solid gray;
 }
 
 .btn-sub {
-  background-size: 0.875em 2px, 0;
+  background-size:
+    0.875em 2px,
+    0;
 }
 ```
 
@@ -1702,7 +1718,9 @@ Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
       #eee 75%
     ), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee
         75%);
-  background-position: 0 0, 8px 8px;
+  background-position:
+    0 0,
+    8px 8px;
   background-size: 16px 16px;
 }
 ```
@@ -1778,7 +1796,10 @@ Background gradient [bar](https://css-tricks.com/single-element-loaders-the-bars
 
   width: 45px;
   aspect-ratio: 1;
-  background: var(--color) 0% 50%, var(--color) 50% 50%, var(--color) 100% 50%;
+  background:
+    var(--color) 0% 50%,
+    var(--color) 50% 50%,
+    var(--color) 100% 50%;
   background-size: 20% 100%; /* 20% * (3 bars + 2 spaces) = 100% */
 }
 ```
@@ -1916,8 +1937,9 @@ Rotate border [wave](https://codepen.io/Chokcoco/pen/EXJrdB):
   background-size: 10px 10px;
   border-top: 1px solid #e5e8eb;
   border-bottom: 1px solid #e5e8eb;
-  box-shadow: inset 0 15px 20px -15px #f6f7f9, inset -5px -15px 20px -15px
-      #f6f7f9;
+  box-shadow:
+    inset 0 15px 20px -15px #f6f7f9,
+    inset -5px -15px 20px -15px #f6f7f9;
 }
 
 /**
@@ -1931,7 +1953,11 @@ Rotate border [wave](https://codepen.io/Chokcoco/pen/EXJrdB):
     ), linear-gradient(90deg, var(--primary-line-color) 2px, transparent 0),
     linear-gradient(var(--secondary-line-color) 1px, transparent 0),
     linear-gradient(90deg, var(--secondary-line-color) 1px, transparent 0);
-  background-size: 75px 75px, 75px 75px, 15px 15px, 15px 15px;
+  background-size:
+    75px 75px,
+    75px 75px,
+    15px 15px,
+    15px 15px;
 }
 ```
 
@@ -2052,7 +2078,8 @@ div {
 
 .circle-background-corner {
   background: #58a;
-  background: radial-gradient(circle at top left, transparent 15px, #58a 0) top left,
+  background:
+    radial-gradient(circle at top left, transparent 15px, #58a 0) top left,
     radial-gradient(circle at top right, transparent 15px, #58a 0) top right,
     radial-gradient(circle at bottom right, transparent 15px, #58a 0) bottom right,
     radial-gradient(circle at bottom left, transparent 15px, #58a 0) bottom left;
@@ -2124,23 +2151,11 @@ Background gradient triangle:
   font-size: 200%;
   color: white;
   text-align: center;
-  background: linear-gradient(
-        -135deg,
-        transparent 10%,
-        #04e6fb 10%,
-        #65ff9a 100%
-      ) top right, linear-gradient(
-        -45deg,
-        transparent 10%,
-        #04e6fb 10%,
-        #65ff9a 100%
-      ) bottom right,
-    linear-gradient(-135deg, #04e6fb 0, #65ff9a 90%, transparent 90%) top left, linear-gradient(
-        -45deg,
-        #04e6fb 0,
-        #65ff9a 90%,
-        transparent 90%
-      ) bottom left;
+  background:
+    linear-gradient(-135deg, transparent 10%, #04e6fb 10%, #65ff9a 100%) top right,
+    linear-gradient(-45deg, transparent 10%, #04e6fb 10%, #65ff9a 100%) bottom right,
+    linear-gradient(-135deg, #04e6fb 0, #65ff9a 90%, transparent 90%) top left,
+    linear-gradient(-45deg, #04e6fb 0, #65ff9a 90%, transparent 90%) bottom left;
   background-repeat: no-repeat;
   background-size: 90% 50%;
   transform: translate(-50%, -50%);
@@ -2249,7 +2264,9 @@ Background gradient square shape:
     ), linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0 75%, rgb(
           0 0 0 / 25%
         ) 0);
-  background-position: 0 0, 15px 15px;
+  background-position:
+    0 0,
+    15px 15px;
   background-size: 30px 30px;
 }
 
@@ -2271,16 +2288,11 @@ Background gradient polygon:
  */
 .polygon-background-corner {
   background: #58a;
-  background: linear-gradient(135deg, transparent 15px, #58a 0) top left, linear-gradient(
-        -135deg,
-        transparent 15px,
-        #58a 0
-      ) top right,
-    linear-gradient(-45deg, transparent 15px, #58a 0) bottom right, linear-gradient(
-        45deg,
-        transparent 15px,
-        #58a 0
-      ) bottom left;
+  background:
+    linear-gradient(135deg, transparent 15px, #58a 0) top left,
+    linear-gradient(-135deg, transparent 15px, #58a 0) top right,
+    linear-gradient(-45deg, transparent 15px, #58a 0) bottom right,
+    linear-gradient(45deg, transparent 15px, #58a 0) bottom left;
   background-repeat: no-repeat;
   background-size: 50% 50%;
 }
@@ -2373,7 +2385,9 @@ html[theme='dark'] img {
 }
 
 html {
-  transition: color 300ms, background-color 300ms;
+  transition:
+    color 300ms,
+    background-color 300ms;
 }
 ```
 
@@ -2462,7 +2476,11 @@ body {
 .gradient-stroked-text {
   position: relative;
   color: #191325;
-  text-shadow: 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+  text-shadow:
+    1px 1px #fff,
+    -1px -1px #fff,
+    1px -1px #fff,
+    -1px 1px #fff;
   background: #191325;
 }
 
@@ -2574,7 +2592,9 @@ body {
 .sketch {
   width: 256px;
   height: 171px;
-  background: url('10.jpg') -2px -2px, url('10.jpg');
+  background:
+    url('10.jpg') -2px -2px,
+    url('10.jpg');
   filter: brightness(3) invert(1) grayscale(1);
   background-size: 258px 173px;
   background-blend-mode: difference;
@@ -2632,7 +2652,9 @@ body {
 .dropdown-drawer {
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.2s linear, visibility 0s linear 0.2s;
+  transition:
+    opacity 0.2s linear,
+    visibility 0s linear 0.2s;
 }
 
 .is-open .dropdown-drawer {
@@ -2817,7 +2839,9 @@ p {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.3s, opacity 0.3s;
+  transition:
+    max-height 0.3s,
+    opacity 0.3s;
 }
 
 .menu:focus-within,
@@ -3044,10 +3068,15 @@ p {
 h1 {
   width: 15ch;
   overflow: hidden;
-  font: bold 200% Consolas, Monaco, monospace;
+  font:
+    bold 200% Consolas,
+    Monaco,
+    monospace;
   white-space: nowrap;
   border-right: 0.05em solid;
-  animation: typing 8s steps(15), caret 1s steps(1) infinite;
+  animation:
+    typing 8s steps(15),
+    caret 1s steps(1) infinite;
 }
 ```
 

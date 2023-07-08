@@ -225,7 +225,7 @@ use `inline-box` with `width`
   grid-template-columns: 1fr;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (width >= 768px) {
   .box {
     grid-template-areas:
       'hd hd'
@@ -235,7 +235,7 @@ use `inline-box` with `width`
   }
 }
 
-@media only screen and (min-width: 1280px) {
+@media only screen and (width >= 1280px) {
   .box {
     grid-template-areas:
       'hd hd hd'
@@ -245,7 +245,7 @@ use `inline-box` with `width`
   }
 }
 
-@media only screen and (min-width: 1536px) {
+@media only screen and (width >= 1536px) {
   .box {
     grid-template-areas:
       'hd st1 . st2'
@@ -284,7 +284,7 @@ table {
   width: 100%;
 }
 
-@media (max-width: 30em) {
+@media (width <= 30em) {
   table,
   thead,
   tbody,

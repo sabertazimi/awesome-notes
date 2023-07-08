@@ -214,17 +214,17 @@ Individual transform [property](https://drafts.csswg.org/css-transforms-2/#indiv
 
 ```css
 .element {
-  translate: 50%;
-  translate: 100px 200px;
-  translate: 50% 105px;
-  translate: 50% 105px 5rem;
-  scale: 2;
-  scale: 2 0.5;
-  scale: 2 0.5 2;
   rotate: 90deg;
   rotate: y 0.25turn;
   rotate: z 1.57rad;
   rotate: 1 1 1 90deg;
+  scale: 2;
+  scale: 2 0.5;
+  scale: 2 0.5 2;
+  translate: 50%;
+  translate: 100px 200px;
+  translate: 50% 105px;
+  translate: 50% 105px 5rem;
 }
 ```
 

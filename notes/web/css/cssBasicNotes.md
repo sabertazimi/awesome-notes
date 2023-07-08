@@ -57,7 +57,7 @@ tags: [Web, CSS]
 ```css
 @layer [<layer-name># | <layer-name>?  {
   <stylesheet>
-}]
+}];
 ```
 
 ```css
@@ -773,7 +773,7 @@ li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6) ~ li {
 
 ```css
 :lang(en) > q {
-  quotes: '\201C''\201D''\2018''\2019';
+  quotes: '\201C' '\201D' '\2018' '\2019';
 }
 
 :lang(fr) > q {
@@ -781,7 +781,7 @@ li:first-child:nth-last-child(n + 2):nth-last-child(-n + 6) ~ li {
 }
 
 :lang(de) > q {
-  quotes: '>>' '<<' '\2039''\203A';
+  quotes: '>>' '<<' '\2039' '\203A';
 }
 ```
 
@@ -1314,7 +1314,7 @@ html {
 }
 
 /* 把当前变量变为空值 */
-@media (max-width: 37.499em) {
+@media (width <= 37.499em) {
   html {
     --media-xs: ;
     --media-lte-sm: ;
@@ -2391,7 +2391,14 @@ Set whether lines of text are laid out horizontally or **vertically**:
 
 ```css
 body {
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
 }
 ```
 
@@ -2419,7 +2426,14 @@ body {
 }
 
 body {
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Emoji, Helvetica, Arial,
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Emoji,
+    Helvetica,
+    Arial,
     sans-serif;
 }
 ```
@@ -2506,15 +2520,30 @@ math {
 }
 
 .tao {
-  font: 12px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif;
+  font:
+    12px/1.5 Tahoma,
+    Helvetica,
+    Arial,
+    '宋体',
+    sans-serif;
 }
 
 .tao-ued {
-  font: 12px/1 Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
+  font:
+    12px/1 Tahoma,
+    Helvetica,
+    Arial,
+    '\5b8b\4f53',
+    sans-serif;
 }
 
 .one-plus {
-  font: 14px/1.5 'Microsoft YaHei', Arial, Tahoma, '\5b8b\4f53', sans-serif;
+  font:
+    14px/1.5 'Microsoft YaHei',
+    Arial,
+    Tahoma,
+    '\5b8b\4f53',
+    sans-serif;
 }
 
 .github {
@@ -2523,8 +2552,19 @@ math {
 }
 
 .font-sans-serif {
-  font-family: -apple-system, BlinkMacSystemFont, 'Avenir Next,' Avenir, 'Segoe UI',
-    'Helvetica Neue', Helvetica, Cantarell, Ubuntu, Roboto, Noto, Arial, sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Avenir Next,' Avenir,
+    'Segoe UI',
+    'Helvetica Neue',
+    Helvetica,
+    Cantarell,
+    Ubuntu,
+    Roboto,
+    Noto,
+    Arial,
+    sans-serif;
 }
 
 .font-serif {
@@ -2710,8 +2750,9 @@ whether and when it is [downloaded and ready to use](https://github.com/bramstei
   font-family: ExampleFont;
   font-style: normal;
   font-weight: 400;
-  src: url('/path/to/fonts/exampleFont.woff') format('woff'), url('/path/to/fonts/exampleFont.eot')
-      format('eot');
+  src:
+    url('/path/to/fonts/exampleFont.woff') format('woff'),
+    url('/path/to/fonts/exampleFont.eot') format('eot');
   font-display: fallback;
 }
 ```
@@ -2742,11 +2783,13 @@ whether and when it is [downloaded and ready to use](https://github.com/bramstei
   font-family: 'Open Sans Regular';
   font-style: normal;
   font-weight: 400;
-  src: local('Open Sans Regular'), local('OpenSans-Regular'),
-    url('open-sans/OpenSans-Regular-Cyrillic.woff2') format('woff2'), url('open-sans/OpenSans-Regular-Cyrillic.woff')
-      format('woff'),
-    url('open-sans/OpenSans-Regular-Cyrillic.eot') format('embedded-opentype'), url('open-sans/OpenSans-Regular-Cyrillic.ttf')
-      format('truetype');
+  src:
+    local('Open Sans Regular'),
+    local('OpenSans-Regular'),
+    url('open-sans/OpenSans-Regular-Cyrillic.woff2') format('woff2'),
+    url('open-sans/OpenSans-Regular-Cyrillic.woff') format('woff'),
+    url('open-sans/OpenSans-Regular-Cyrillic.eot') format('embedded-opentype'),
+    url('open-sans/OpenSans-Regular-Cyrillic.ttf') format('truetype');
   font-display: swap;
   unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1;
 }

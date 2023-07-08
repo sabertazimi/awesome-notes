@@ -784,7 +784,7 @@ closers?.forEach(closer => {
 ### Form Demo
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
