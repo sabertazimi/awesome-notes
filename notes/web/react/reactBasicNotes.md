@@ -3831,7 +3831,9 @@ const Button = styled.button`
   color: #fff;
   border: 0;
   border-radius: 35px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.19),
+    0 6px 6px rgba(0, 0, 0, 0.23);
   cursor: pointer;
 `;
 
@@ -3871,7 +3873,9 @@ const Button = styled.button`
   font-size: 16px;
   border: 0;
   border-radius: 35px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.19),
+    0 6px 6px rgba(0, 0, 0, 0.23);
   cursor: pointer;
 
   // Using props to create a gray variant of the button

@@ -270,30 +270,47 @@ body {
 /* 描边文字 */
 .stroked-text {
   color: white;
-  text-shadow: 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+  text-shadow:
+    1px 1px black,
+    -1px -1px black,
+    1px -1px black,
+    -1px 1px black;
 }
 
 /* 发光文字 */
 .glow-text {
   color: #ffc;
-  text-shadow: 0 0 0.1em, 0 0 0.3em;
+  text-shadow:
+    0 0 0.1em,
+    0 0 0.3em;
   background: #203;
 }
 
 /* 凸起文字 */
 .extruded-text {
   color: white;
-  text-shadow: 0 1px hsl(0deg 0% 85%), 0 2px hsl(0deg 0% 80%),
-    0 3px hsl(0deg 0% 75%), 0 4px hsl(0deg 0% 70%), 0 5px hsl(0deg 0% 65%), 0
-      5px 10px black;
+  text-shadow:
+    0 1px hsl(0deg 0% 85%),
+    0 2px hsl(0deg 0% 80%),
+    0 3px hsl(0deg 0% 75%),
+    0 4px hsl(0deg 0% 70%),
+    0 5px hsl(0deg 0% 65%),
+    0 5px 10px black;
   background: #58a;
 }
 
 /* 复古文字 */
 .retro-text {
   color: white;
-  text-shadow: 1px 1px black, 2px 2px black, 3px 3px black, 4px 4px black,
-    5px 5px black, 6px 6px black, 7px 7px black, 8px 8px black;
+  text-shadow:
+    1px 1px black,
+    2px 2px black,
+    3px 3px black,
+    4px 4px black,
+    5px 5px black,
+    6px 6px black,
+    7px 7px black,
+    8px 8px black;
   background: hsl(0deg 50% 45%);
 }
 ```
@@ -343,7 +360,9 @@ Two opposite sides box shadow:
 
 ```css
 .box {
-  box-shadow: 5px 0 5px -5px black, -5px 0 5px -5px black;
+  box-shadow:
+    5px 0 5px -5px black,
+    -5px 0 5px -5px black;
 }
 ```
 
@@ -356,8 +375,11 @@ Two opposite sides box shadow:
   background-color: #fff;
 
   /* 模拟边框: 左 右 上 下 */
-  box-shadow: inset 1px 0 #a2a9b6, inset -1px 0 #a2a9b6, inset 0 1px #a2a9b6, inset
-      0 -1px #a2a9b6;
+  box-shadow:
+    inset 1px 0 #a2a9b6,
+    inset -1px 0 #a2a9b6,
+    inset 0 1px #a2a9b6,
+    inset 0 -1px #a2a9b6;
 }
 ```
 
@@ -375,13 +397,15 @@ Two opposite sides box shadow:
 
 ```css
 .neumorphic {
-  box-shadow: -10px -10px 15px rgb(255 255 255 / 50%), 10px 10px 15px rgb(70 70
-          70 / 12%);
+  box-shadow:
+    -10px -10px 15px rgb(255 255 255 / 50%),
+    10px 10px 15px rgb(70 70 70 / 12%);
 }
 
 .neumorphic:active {
-  box-shadow: inset -10px -10px 15px rgb(255 255 255 / 50%), inset 10px 10px
-      15px rgb(70 70 70 / 12%);
+  box-shadow:
+    inset -10px -10px 15px rgb(255 255 255 / 50%),
+    inset 10px 10px 15px rgb(70 70 70 / 12%);
 }
 ```
 
@@ -469,7 +493,9 @@ background-position: 1cm 2cm;
 background-position: 10ch 8em;
 
 /* Multiple images */
-background-position: 0 0, center;
+background-position:
+  0 0,
+  center;
 
 /* Edge offsets values */
 background-position: bottom 10px right 20px;
@@ -535,7 +561,9 @@ p:hover {
 ```css
 .stripe-border {
   padding: 1em;
-  background: linear-gradient(white, white) padding-box, repeating-linear-gradient(
+  background:
+    linear-gradient(white, white) padding-box,
+    repeating-linear-gradient(
         -45deg,
         red 0,
         red 12.5%,
@@ -630,7 +658,9 @@ p:hover {
           0 0 / 20%), transparent 70%);
   background-repeat: no-repeat;
   background-attachment: local, scroll;
-  background-size: 100% 50px, 100% 15px;
+  background-size:
+    100% 50px,
+    100% 15px;
 }
 ```
 
@@ -846,7 +876,6 @@ body {
 ```css
 img {
   /* <percentage> values */
-  object-position: 50% 50%;
   object-position: 25% 75%;
 
   /* Keyword values */
@@ -1798,7 +1827,7 @@ const svgRectElement = document.createElementNS(
 
 ```css
 /* screen size : 500px ~ 1000px */
-@media only screen and (min-width: 500px) and (max-width: 1000px) {
+@media only screen and (width >= 500px) and (width <= 1000px) {
   .container {
     width: 750px;
   }
@@ -1936,8 +1965,8 @@ const svgRectElement = document.createElementNS(
 
 <style>
   input[type='checkbox'] {
-    appearance: none;
     margin: 0;
+    appearance: none;
     border: solid;
   }
 
@@ -1965,18 +1994,18 @@ const svgRectElement = document.createElementNS(
 
   @media (any-pointer: fine) {
     input[type='checkbox'] {
-      appearance: none;
       width: 15px;
       height: 15px;
+      appearance: none;
       border: 1px solid blue;
     }
   }
 
   @media (any-pointer: coarse) {
     input[type='checkbox'] {
-      appearance: none;
       width: 30px;
       height: 30px;
+      appearance: none;
       border: 2px solid red;
     }
   }
@@ -1987,9 +2016,11 @@ const svgRectElement = document.createElementNS(
 
 [`viewport-segments`](https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/main/Foldables/explainer.md):
 
+<!-- markdownlint-disable MD013 -->
+
 ```css
 /* stylelint-disable-next-line media-feature-name-no-unknown */
-@media (horizontal-viewport-segments: 2) and (vertical-viewport-segments: 1) {
+@media (horizontal-viewport-segments <= 2) and (vertical-viewport-segments <= 1) {
   main article {
     flex: 1 1 env(viewport-segment-width 0 0);
   }
@@ -1999,6 +2030,8 @@ const svgRectElement = document.createElementNS(
   }
 }
 ```
+
+<!-- markdownlint-enable MD013 -->
 
 ### Display Mode Query
 
@@ -2028,21 +2061,21 @@ const svgRectElement = document.createElementNS(
 
 ```css
 /* Exact resolution */
-@media (resolution: 150dpi) {
+@media (resolution <= 150dpi) {
   p {
     color: red;
   }
 }
 
 /* Minimum resolution */
-@media (min-resolution: 72dpi) {
+@media (resolution >= 72dpi) {
   p {
     text-decoration: underline;
   }
 }
 
 /* Maximum resolution */
-@media (max-resolution: 300dpi) {
+@media (resolution <= 300dpi) {
   p {
     background: yellow;
   }
@@ -2502,9 +2535,9 @@ PC 屏幕 DPR 为 1,
 }
 
 .background-gradient-1px {
-  background: linear-gradient(#000, #000 100%, transparent 100%) left / 1px 100%
-      no-repeat, linear-gradient(#000, #000 100%, transparent 100%) right / 1px 100%
-      no-repeat,
+  background:
+    linear-gradient(#000, #000 100%, transparent 100%) left / 1px 100% no-repeat,
+    linear-gradient(#000, #000 100%, transparent 100%) right / 1px 100% no-repeat,
     linear-gradient(#000, #000 100%, transparent 100%) top / 100% 1px no-repeat,
     linear-gradient(#000, #000 100%, transparent 100%) bottom / 100% 1px no-repeat;
 }
@@ -2945,12 +2978,12 @@ button {
   font: inherit;
   color: inherit;
   text-align: inherit;
+  appearance: none;
   cursor: pointer;
   background: none;
   border: none;
   border-radius: 0;
   box-shadow: none;
-  appearance: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

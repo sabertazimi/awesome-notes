@@ -1213,7 +1213,7 @@ store.dispatch(addFave());
 export interface Middleware<
   DispatchExt = {}, // optional override return behavior of `dispatch`
   S = any, // type of the Redux store state
-  D extends Dispatch = Dispatch // type of the dispatch method
+  D extends Dispatch = Dispatch, // type of the dispatch method
 > {
   ext: DispatchExt;
 }

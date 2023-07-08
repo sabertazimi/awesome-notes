@@ -4534,9 +4534,9 @@ class Atom<T> {
   }
 }
 
-export const atom = <T>(initialState: T) => new Atom(initialState);
+export const atom = <T,>(initialState: T) => new Atom(initialState);
 
-export const useAtomValue = <T>(atom: Atom<T>) => {
+export const useAtomValue = <T,>(atom: Atom<T>) => {
   const ref = useRef(false);
   const [state, setState] = useState(atom.current);
 
@@ -4551,7 +4551,7 @@ export const useAtomValue = <T>(atom: Atom<T>) => {
 };
 
 export const setAtomValue =
-  <T>(atom: Atom<T>) =>
+  <T,>(atom: Atom<T>) =>
   (nextState: T) =>
     atom.setState(nextState);
 ```
