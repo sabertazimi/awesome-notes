@@ -2767,7 +2767,7 @@ type Falsy = false | '' | 0 | null | undefined;
 
 const isFalsy = (val: unknown): val is Falsy => !val;
 
-const isDefined = <T,>(x: T | undefined): x is T => x !== undefined;
+const isDefined = <T>(x: T | undefined): x is T => x !== undefined;
 ```
 
 ```ts
@@ -3161,7 +3161,7 @@ class TestService {
   }
 }
 
-const Factory = <T,>(Target: Constructor<T>): T => {
+const Factory = <T>(Target: Constructor<T>): T => {
   // 获取所有注入的服务
   const providers = Reflect.getMetadata('design:paramtypes', target); // [OtherService]
   const args = providers.map((Provider: Constructor) => new Provider());
