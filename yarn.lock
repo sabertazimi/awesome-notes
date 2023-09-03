@@ -4302,7 +4302,7 @@ __metadata:
     commit-and-tag-version: ^11.2.3
     eslint: ^8.48.0
     katex: ^0.16.8
-    markdownlint-cli: ^0.35.0
+    markdownlint-cli: ^0.36.0
     prettier: ^3.0.3
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -7910,18 +7910,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:~10.2.7":
-  version: 10.2.7
-  resolution: "glob@npm:10.2.7"
+"glob@npm:~10.3.4":
+  version: 10.3.4
+  resolution: "glob@npm:10.3.4"
   dependencies:
     foreground-child: ^3.1.0
     jackspeak: ^2.0.3
     minimatch: ^9.0.1
-    minipass: ^5.0.0 || ^6.0.2
-    path-scurry: ^1.7.0
+    minipass: ^5.0.0 || ^6.0.2 || ^7.0.0
+    path-scurry: ^1.10.1
   bin:
     glob: dist/cjs/src/bin.js
-  checksum: 555205a74607d6f8d9874ba888924b305b5ea1abfaa2e9ccb11ac713d040aac7edbf7d8702a2f4a1cd81b2d7666412170ce7ef061d33cddde189dae8c1a1a054
+  checksum: 176b97c124414401cb51329a93d2ba112cef8814adbed10348481916b9521b677773eee2691cb6b24d66632d8c8bb8913533f5ac4bfb2d0ef5454a1856082361
   languageName: node
   linkType: hard
 
@@ -8769,10 +8769,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ini@npm:~3.0.0":
-  version: 3.0.1
-  resolution: "ini@npm:3.0.1"
-  checksum: 947b582a822f06df3c22c75c90aec217d604ea11f7a20249530ee5c1cf8f508288439abe17b0e1d9b421bda5f4fae5e7aae0b18cb3ded5ac9d68f607df82f10f
+"ini@npm:~4.1.0":
+  version: 4.1.1
+  resolution: "ini@npm:4.1.1"
+  checksum: 0e5909554074fbc31824fa5415b0f604de4a665514c96a897a77bf77353a7ad4743927321270e9d0610a9d510ccd1f3cd77422f7cc80d8f4542dbce75476fb6d
   languageName: node
   linkType: hard
 
@@ -9914,10 +9914,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lru-cache@npm:^9.0.0":
-  version: 9.1.1
-  resolution: "lru-cache@npm:9.1.1"
-  checksum: 4d703bb9b66216bbee55ead82a9682820a2b6acbdfca491b235390b1ef1056000a032d56dfb373fdf9ad4492f1fa9d04cc9a05a77f25bd7ce6901d21ad9b68b7
+"lru-cache@npm:^9.1.1 || ^10.0.0":
+  version: 10.0.1
+  resolution: "lru-cache@npm:10.0.1"
+  checksum: 06f8d0e1ceabd76bb6f644a26dbb0b4c471b79c7b514c13c6856113879b3bf369eb7b497dad4ff2b7e2636db202412394865b33c332100876d838ad1372f0181
   languageName: node
   linkType: hard
 
@@ -10011,39 +10011,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdownlint-cli@npm:^0.35.0":
-  version: 0.35.0
-  resolution: "markdownlint-cli@npm:0.35.0"
+"markdownlint-cli@npm:^0.36.0":
+  version: 0.36.0
+  resolution: "markdownlint-cli@npm:0.36.0"
   dependencies:
     commander: ~11.0.0
     get-stdin: ~9.0.0
-    glob: ~10.2.7
+    glob: ~10.3.4
     ignore: ~5.2.4
     js-yaml: ^4.1.0
     jsonc-parser: ~3.2.0
-    markdownlint: ~0.29.0
-    minimatch: ~9.0.1
-    run-con: ~1.2.11
+    markdownlint: ~0.30.0
+    minimatch: ~9.0.3
+    run-con: ~1.3.2
   bin:
     markdownlint: markdownlint.js
-  checksum: bac4630afed9a1c395405d79931c5008ad91eedba7f9b29f09f6e9578097f728fa285adbd51198b6d76ab7705bcb252b5f5079201fbda40de5fe1f8929dc3825
+  checksum: 3aab0553dc8a73cefa317a235add2d72c337c0750de7a7551f59c220180a02142de8e72475f8f8a6bca7cabc80fbdc063f1057747e239addc35e662f0a821a5e
   languageName: node
   linkType: hard
 
-"markdownlint-micromark@npm:0.1.5":
-  version: 0.1.5
-  resolution: "markdownlint-micromark@npm:0.1.5"
-  checksum: fc69c340c31a06b46cf358759348a12b60b0080d82406ec1ed2e015e96b664e4075584980cf1bf029287109503ec37d0da012ec67827bc7a21a9f7d0b5a624b8
+"markdownlint-micromark@npm:0.1.7":
+  version: 0.1.7
+  resolution: "markdownlint-micromark@npm:0.1.7"
+  checksum: 1f40938fcbd9aab1eed1a6b5907b3a9ca731568622ea7b74f722a276216997a674a92cb7c54ee13ae6d64e81e300b26f2d5edad03d98ee9b0950871e74f21254
   languageName: node
   linkType: hard
 
-"markdownlint@npm:~0.29.0":
-  version: 0.29.0
-  resolution: "markdownlint@npm:0.29.0"
+"markdownlint@npm:~0.30.0":
+  version: 0.30.0
+  resolution: "markdownlint@npm:0.30.0"
   dependencies:
     markdown-it: 13.0.1
-    markdownlint-micromark: 0.1.5
-  checksum: 5785f5173f553510516bf1f68a0768118dcae3a3a19234f6ed57d5d5a8f5beedcca859593fdcf0d8e90fdccb69fd0e168e77416f5712e04e2062c5bf2dca5612
+    markdownlint-micromark: 0.1.7
+  checksum: cc99517c61fe8df9af918fafad314e685a8888162c476d6f7ef51555008c4f2581231e3930ea3d29b46a29307d2e4fce1c78db8dcd6962bf7069983e72cd3bba
   languageName: node
   linkType: hard
 
@@ -10355,12 +10355,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^9.0.1, minimatch@npm:~9.0.1":
-  version: 9.0.1
-  resolution: "minimatch@npm:9.0.1"
+"minimatch@npm:^9.0.1, minimatch@npm:~9.0.3":
+  version: 9.0.3
+  resolution: "minimatch@npm:9.0.3"
   dependencies:
     brace-expansion: ^2.0.1
-  checksum: 97f5f5284bb57dc65b9415dec7f17a0f6531a33572193991c60ff18450dcfad5c2dad24ffeaf60b5261dccd63aae58cc3306e2209d57e7f88c51295a532d8ec3
+  checksum: 253487976bf485b612f16bf57463520a14f512662e592e95c571afdab1442a6a6864b6c88f248ce6fc4ff0b6de04ac7aa6c8bb51e868e99d1d65eb0658a708b5
   languageName: node
   linkType: hard
 
@@ -10375,7 +10375,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimist@npm:^1.2.0, minimist@npm:^1.2.5, minimist@npm:^1.2.6":
+"minimist@npm:^1.2.0, minimist@npm:^1.2.5, minimist@npm:^1.2.6, minimist@npm:^1.2.8":
   version: 1.2.8
   resolution: "minimist@npm:1.2.8"
   checksum: 75a6d645fb122dad29c06a7597bddea977258957ed88d7a6df59b5cd3fe4a527e253e9bbf2e783e4b73657f9098b96a5fe96ab8a113655d4109108577ecf85b0
@@ -10449,17 +10449,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minipass@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "minipass@npm:5.0.0"
-  checksum: 425dab288738853fded43da3314a0b5c035844d6f3097a8e3b5b29b328da8f3c1af6fc70618b32c29ff906284cf6406b6841376f21caaadd0793c1d5a6a620ea
-  languageName: node
-  linkType: hard
-
-"minipass@npm:^5.0.0 || ^6.0.2":
-  version: 6.0.2
-  resolution: "minipass@npm:6.0.2"
-  checksum: d140b91f4ab2e5ce5a9b6c468c0e82223504acc89114c1a120d4495188b81fedf8cade72a9f4793642b4e66672f990f1e0d902dd858485216a07cd3c8a62fac9
+"minipass@npm:^5.0.0 || ^6.0.2 || ^7.0.0":
+  version: 7.0.3
+  resolution: "minipass@npm:7.0.3"
+  checksum: 6f1614f5b5b55568a46bca5fec0e7c46dac027691db27d0e1923a8192866903144cd962ac772c0e9f89b608ea818b702709c042bce98e190d258847d85461531
   languageName: node
   linkType: hard
 
@@ -11193,13 +11186,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-scurry@npm:^1.7.0":
-  version: 1.7.0
-  resolution: "path-scurry@npm:1.7.0"
+"path-scurry@npm:^1.10.1":
+  version: 1.10.1
+  resolution: "path-scurry@npm:1.10.1"
   dependencies:
-    lru-cache: ^9.0.0
-    minipass: ^5.0.0
-  checksum: 4e86df0fa6848cef1ba672d4a332b8dbd0297c42d5123bcc419d714c34b25ee6775b0d2e66dd5e698a38e9bcd808f8fc47333e3a3357307cada98e16bfae8b98
+    lru-cache: ^9.1.1 || ^10.0.0
+    minipass: ^5.0.0 || ^6.0.2 || ^7.0.0
+  checksum: e2557cff3a8fb8bc07afdd6ab163a92587884f9969b05bbbaf6fe7379348bfb09af9ed292af12ed32398b15fb443e81692047b786d1eeb6d898a51eb17ed7d90
   languageName: node
   linkType: hard
 
@@ -12823,17 +12816,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"run-con@npm:~1.2.11":
-  version: 1.2.11
-  resolution: "run-con@npm:1.2.11"
+"run-con@npm:~1.3.2":
+  version: 1.3.2
+  resolution: "run-con@npm:1.3.2"
   dependencies:
     deep-extend: ^0.6.0
-    ini: ~3.0.0
-    minimist: ^1.2.6
+    ini: ~4.1.0
+    minimist: ^1.2.8
     strip-json-comments: ~3.1.1
   bin:
     run-con: cli.js
-  checksum: 3a51dd6d2c489d6620b3595446f475bdd5b860443719633f45cee8a16b16778c91e5f614c8b5d3c15a20385fc33fbca4ef890ad1bf9e7ae2698546d8d7c33bcf
+  checksum: 7962ca68b10810256e62dd40a0c3e1c255353da7d2add8b404efa81349844f7943f90e8547f341952cb019429d95b034eb4747834945044d77d75a7309733e6e
   languageName: node
   linkType: hard
 
