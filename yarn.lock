@@ -2466,10 +2466,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:8.50.0":
-  version: 8.50.0
-  resolution: "@eslint/js@npm:8.50.0"
-  checksum: 302478f2acaaa7228729ec6a04f56641590185e1d8cd1c836a6db8a6b8009f80a57349341be9fbb9aa1721a7a569d1be3ffc598a33300d22816f11832095386c
+"@eslint/js@npm:8.51.0":
+  version: 8.51.0
+  resolution: "@eslint/js@npm:8.51.0"
+  checksum: 0228bf1e1e0414843e56d9ff362a2a72d579c078f93174666f29315690e9e30a8633ad72c923297f7fd7182381b5a476805ff04dac8debe638953eb1ded3ac73
   languageName: node
   linkType: hard
 
@@ -4339,10 +4339,10 @@ __metadata:
     "@docusaurus/preset-classic": 2.4.3
     "@easyops-cn/docusaurus-search-local": ^0.36.0
     "@tsconfig/docusaurus": ^2.0.1
-    ci-info: ^3.8.0
-    commit-and-tag-version: ^11.2.3
-    eslint: ^8.50.0
-    katex: ^0.16.8
+    ci-info: ^3.9.0
+    commit-and-tag-version: ^11.2.4
+    eslint: ^8.51.0
+    katex: ^0.16.9
     markdownlint-cli: ^0.37.0
     prettier: ^3.0.3
     react: ^18.2.0
@@ -4989,10 +4989,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-info@npm:^3.2.0, ci-info@npm:^3.8.0":
-  version: 3.8.0
-  resolution: "ci-info@npm:3.8.0"
-  checksum: d0a4d3160497cae54294974a7246202244fff031b0a6ea20dd57b10ec510aa17399c41a1b0982142c105f3255aff2173e5c0dd7302ee1b2f28ba3debda375098
+"ci-info@npm:^3.2.0, ci-info@npm:^3.8.0, ci-info@npm:^3.9.0":
+  version: 3.9.0
+  resolution: "ci-info@npm:3.9.0"
+  checksum: 6b19dc9b2966d1f8c2041a838217299718f15d6c4b63ae36e4674edd2bee48f780e94761286a56aa59eb305a85fbea4ddffb7630ec063e7ec7e7e5ad42549a87
   languageName: node
   linkType: hard
 
@@ -5215,9 +5215,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commit-and-tag-version@npm:^11.2.3":
-  version: 11.2.3
-  resolution: "commit-and-tag-version@npm:11.2.3"
+"commit-and-tag-version@npm:^11.2.4":
+  version: 11.2.4
+  resolution: "commit-and-tag-version@npm:11.2.4"
   dependencies:
     chalk: ^2.4.2
     conventional-changelog: 3.1.25
@@ -5234,7 +5234,7 @@ __metadata:
     yargs: ^17.0.0
   bin:
     commit-and-tag-version: bin/cli.js
-  checksum: f1691a84faad0ceaad8bb5970ac3d217e3eea9e8ad4a516f7b33c18f00fc01b9ccc4b3f3fc0e32ae4593658f90262e04fae5d6b891e6256290adb8566b3a080d
+  checksum: 0edd62df5abde857b82c21d4aa79a56c70177d62ece3b766d0c723aa0619c7fb2cb6e7878e30fef7c2cfa7c84fec81a6460156a7cda259498cf3dc913c39948b
   languageName: node
   linkType: hard
 
@@ -7080,14 +7080,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.50.0":
-  version: 8.50.0
-  resolution: "eslint@npm:8.50.0"
+"eslint@npm:^8.51.0":
+  version: 8.51.0
+  resolution: "eslint@npm:8.51.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.2.0
     "@eslint-community/regexpp": ^4.6.1
     "@eslint/eslintrc": ^2.1.2
-    "@eslint/js": 8.50.0
+    "@eslint/js": 8.51.0
     "@humanwhocodes/config-array": ^0.11.11
     "@humanwhocodes/module-importer": ^1.0.1
     "@nodelib/fs.walk": ^1.2.8
@@ -7123,7 +7123,7 @@ __metadata:
     text-table: ^0.2.0
   bin:
     eslint: bin/eslint.js
-  checksum: 9ebfe5615dc84700000d218e32ddfdcfc227ca600f65f18e5541ec34f8902a00356a9a8804d9468fd6c8637a5ef6a3897291dad91ba6579d5b32ffeae5e31768
+  checksum: 214fa5d1fcb67af1b8992ce9584ccd85e1aa7a482f8b8ea5b96edc28fa838a18a3b69456db45fc1ed3ef95f1e9efa9714f737292dc681e572d471d02fda9649c
   languageName: node
   linkType: hard
 
@@ -9675,14 +9675,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"katex@npm:^0.16.0, katex@npm:^0.16.8":
-  version: 0.16.8
-  resolution: "katex@npm:0.16.8"
+"katex@npm:^0.16.0, katex@npm:^0.16.9":
+  version: 0.16.9
+  resolution: "katex@npm:0.16.9"
   dependencies:
     commander: ^8.3.0
   bin:
     katex: cli.js
-  checksum: 4e75b4786101cc5eca0404bb814b2985bec506846f9015e9bf00207a3af14215e341ee62b6e7af2455a1032f8244e47a754642f250eea43d7b8007146ac01fae
+  checksum: 861194dfd4d86505e657f688fb73048d46ac498edafce71199502a35b03c0ecc35ba930c631be79c4a09d90a0d23476673cd52f6bc367c7a161854d64005fa95
   languageName: node
   linkType: hard
 
