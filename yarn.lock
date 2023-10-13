@@ -4340,7 +4340,7 @@ __metadata:
     "@easyops-cn/docusaurus-search-local": ^0.36.0
     "@tsconfig/docusaurus": ^2.0.1
     ci-info: ^3.9.0
-    commit-and-tag-version: ^11.2.4
+    commit-and-tag-version: ^11.3.0
     eslint: ^8.51.0
     katex: ^0.16.9
     markdownlint-cli: ^0.37.0
@@ -5215,9 +5215,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commit-and-tag-version@npm:^11.2.4":
-  version: 11.2.4
-  resolution: "commit-and-tag-version@npm:11.2.4"
+"commit-and-tag-version@npm:^11.3.0":
+  version: 11.3.0
+  resolution: "commit-and-tag-version@npm:11.3.0"
   dependencies:
     chalk: ^2.4.2
     conventional-changelog: 3.1.25
@@ -5234,7 +5234,7 @@ __metadata:
     yargs: ^17.0.0
   bin:
     commit-and-tag-version: bin/cli.js
-  checksum: 0edd62df5abde857b82c21d4aa79a56c70177d62ece3b766d0c723aa0619c7fb2cb6e7878e30fef7c2cfa7c84fec81a6460156a7cda259498cf3dc913c39948b
+  checksum: c91f71069dd320b00343fa4ef2096b3c1f463b3f149dd9983f3bda86446e1a53d4646eb72117060e412ba7bcf776db367ee9a619b6c6c6595d133de3e410b201
   languageName: node
   linkType: hard
 
