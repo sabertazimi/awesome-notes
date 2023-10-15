@@ -3129,10 +3129,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/docusaurus@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@tsconfig/docusaurus@npm:2.0.1"
-  checksum: 63bebda70d83c56f95a90176d2e188e1ea9c08c23b499e5e7b292ebfae0ce7117f712809828ed21ae3b8440daf22191d6bf71bf2575f9bd474a51b1770ca30cc
+"@tsconfig/docusaurus@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@tsconfig/docusaurus@npm:2.0.2"
+  checksum: 129f2532172496c108f53a15082e410b418e664c1761902664558059541a6cf7faff2b3d2953e2d507a7e3688afacf2479e17adcb35b89cae04ddb0415d0397a
   languageName: node
   linkType: hard
 
@@ -4338,7 +4338,7 @@ __metadata:
     "@docusaurus/module-type-aliases": 2.4.3
     "@docusaurus/preset-classic": 2.4.3
     "@easyops-cn/docusaurus-search-local": ^0.36.0
-    "@tsconfig/docusaurus": ^2.0.1
+    "@tsconfig/docusaurus": ^2.0.2
     ci-info: ^3.9.0
     commit-and-tag-version: ^11.3.0
     eslint: ^8.51.0
