@@ -1003,7 +1003,7 @@ Vue.prototype._render = function (): VNode {
     - `installComponentHooks`:
       - Install internal (`core/vdom/create-component.js/componentVNodeHooks`) hooks.
       - Merge user-defined VNode hooks.
-    - `new VNode(`vue-component-${Ctor.options.name}`, data, undefined, vm)`.
+    - new VNode(`vue-component-${Ctor.options.name}`, data, undefined, vm).
     - Component VNode children is `undefined`.
 - `vm._vnode.parent === vm.$vnode`.
 - 组件 patch 过程中 DOM 的插入顺序为**先子后父**:

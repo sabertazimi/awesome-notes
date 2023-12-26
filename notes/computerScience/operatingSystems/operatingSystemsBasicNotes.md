@@ -168,7 +168,8 @@ Concurrent
 
 (FFF)F0000H+FFF0H = FFFFFFF0H,
 BIOS 的 EPROM(Erasable Programmable Read Only Memory) 处
-加电后第一条指令一般是 ljmp(实模式下, 内存 !MB), 跳转地址为 CF<<4+EIP, 跳转至 BIOS 例行程序起始点.
+加电后第一条指令一般是 ljmp(实模式下, 内存 !MB), 跳转地址为 `CF<<4+EIP`,
+跳转至 BIOS 例行程序起始点.
 
 #### BIOS Config
 
@@ -452,9 +453,11 @@ Translation Lookaside Buffer:
 
 若以 4K(limit) 为 1 个页表大小, 则下级页表首址为 `段/页表中某项的值 << 12`(2^12 = 4K)
 
-- 以 vsn 为索引在进程段表中找到段表项, 获取段(页表)基址与段大小信息(item_value/limit): base = item_value << log2(limit)
+- 以 vsn 为索引在进程段表中找到段表项,
+  获取段(页表)基址与段大小信息(item_value/limit):
+  base = item_value `<<` log2(limit)
 - 以 vpn 为索引在进程页表(页表基址 = base 中找到页表项, 获取 ppn
-- ppn << log2(limit) + vpo(ppo) 为实际物理地址
+- ppn `<<` log2(limit) + vpo(ppo) 为实际物理地址
 
 ### 内存的特权级
 
@@ -464,7 +467,7 @@ Translation Lookaside Buffer:
 
 - CPL/RPL: 访问者特权级
 - DRL: 段描述符/门描述符(中断/陷阱门)中保存的特权级, 表示被访问段/中断服务/陷阱的特权级
-- CPL/RPL <= DRL e.g 0 < 3
+- CPL/RPL `<=` DRL e.g 0 < 3
 
 #### 特权级切换
 
@@ -582,7 +585,7 @@ Least Frequently Used (LFU) Algorithm:
 
 - 换入进程 A 的某个页面时, 可换出其他进程的某个页面: 为进程分配可变数目的页面
 - 关键: 确定为不同进程分配的页面数目
-- 抖动(thrashing): 进程过多, 导致大部分进程的常驻集<工作集, 缺页率较高
+- 抖动(thrashing): 进程过多, 导致大部分进程的常驻集 `<` 工作集, 缺页率较高
 
 ###### 工作集算法
 

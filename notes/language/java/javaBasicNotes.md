@@ -197,8 +197,6 @@ stringTest.substring(a, b)方法返回长度为 b-a 的子串，a(包括)、b(�
 - 内容相等：stringOne.equals(stringTwo)方法返回值 true/false
 - 不区分大小写 equalsIgnoreCase
 
-#### 代码点<代码单元(单字符)
-
 #### 常用方法
 
 #### 构建字符串
@@ -1929,7 +1927,7 @@ String itemName = ((JRadioButton) e.getSource()).getText();
 
 ### 基本写法
 
-([字符]){数量}\位置
+`([字符]){数量}\位置`.
 
 ### Group RegExp
 
