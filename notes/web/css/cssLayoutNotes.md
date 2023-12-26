@@ -1524,16 +1524,14 @@ Children property:
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  align-items: end;
-  justify-items: center;
+  place-items: end center;
 }
 
 .item {
   grid-area: footer;
   grid-row: start / end; /* 2 / -1 */
   grid-column: start / end;
-  align-self: end;
-  justify-self: center;
+  place-self: end center;
 }
 ```
 
@@ -1985,8 +1983,7 @@ selected elements in grid container:
   main {
     display: grid;
     grid: repeat(5, 60px) / repeat(7, 60px);
-    align-items: center;
-    justify-items: center;
+    place-items: center center;
     margin: 0;
   }
 

@@ -1288,8 +1288,7 @@ Pseudo element switch from circle to circle:
   .parallax {
     perspective: 1px;
     height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden auto;
     perspective-origin: 100% 50%;
   }
 
