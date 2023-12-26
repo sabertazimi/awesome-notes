@@ -2380,7 +2380,7 @@ wait(5000, abortController.signal)
 Abort controller [helpers polyfill](https://whistlr.info/2022/abortcontroller-is-your-friend):
 
 ```ts
-if (!timeout in AbortSignal) {
+if ((!timeout) in AbortSignal) {
   AbortSignal.timeout = function abortTimeout(ms) {
     const controller = new AbortController();
     setTimeout(() => controller.abort(), ms);
@@ -2388,7 +2388,7 @@ if (!timeout in AbortSignal) {
   };
 }
 
-if (!any in AbortSignal) {
+if ((!any) in AbortSignal) {
   AbortSignal.any = function abortAny(signals) {
     const controller = new AbortController();
     signals.forEach(signal => {
@@ -2723,8 +2723,8 @@ Universal module definition:
   typeof global !== 'undefined'
     ? global
     : typeof window !== 'undefined'
-    ? window
-    : this,
+      ? window
+      : this,
   function (window) {
     'use strict';
 

@@ -2546,8 +2546,8 @@ export function reactive<T extends object>(target: T) {
           ? 'SET'
           : 'LENGTH'
         : Object.hasOwn(target, key)
-        ? 'SET'
-        : 'ADD';
+          ? 'SET'
+          : 'ADD';
       const oldValue = Reflect.get(target, key, receiver);
       const result = Reflect.set(target, key, value, receiver);
       if (result && oldValue !== value) trigger(target, key, type);

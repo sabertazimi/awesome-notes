@@ -1112,22 +1112,16 @@ In `position`/`size`/`margin`/`padding`/`border`/`text alignment`:
   min-block-size: min-content;
   max-inline-size: max-content;
   max-block-size: max-content;
-  padding-block-start: 1rem;
-  padding-block-end: 1rem;
-  padding-inline-start: 1rem;
-  padding-inline-end: 1rem;
-  margin-block-start: 1rem;
-  margin-block-end: 1rem;
-  margin-inline-start: 1rem;
-  margin-inline-end: 1rem;
+  inset-block: 0 0;
+  inset-inline: 0 0;
+  padding-block: 1rem 1rem;
+  padding-inline: 1rem 1rem;
+  margin-block: 1rem 1rem;
+  margin-inline: 1rem 1rem;
   border-block-start: 1px solid blue;
   border-block-end: 1px solid blue;
   border-inline-start: 1px solid blue;
   border-inline-end: 1px solid blue;
-  inset-block-start: 0;
-  inset-block-end: 0;
-  inset-inline-start: 0;
-  inset-inline-end: 0;
 }
 ```
 
@@ -3103,9 +3097,8 @@ li::before {
   /* Additional range input feature */
   const range = document.querySelector('.image-a11y-control');
   range.addEventListener('input', event => {
-    document.querySelector(
-      '.image-before'
-    ).style.width = `${event.target.value}%`;
+    document.querySelector('.image-before').style.width =
+      `${event.target.value}%`;
   });
 </script>
 ```
@@ -3291,8 +3284,7 @@ Horizontal scrolling [design](https://designshack.net/articles/navigation/horizo
 ```css
 .scroll-container {
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto hidden;
   white-space: nowrap;
 
   /* Hide scrollbar in IE and Firefox */
@@ -3399,8 +3391,7 @@ Scroll bars take up space within `padding box`.
 .scroll-none {
   scrollbar-width: none; /* FireFox */
   -ms-overflow-style: none; /* IE 10+ */
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
 }
 
 .scroll-none::-webkit-scrollbar {
