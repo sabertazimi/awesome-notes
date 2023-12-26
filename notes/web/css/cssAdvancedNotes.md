@@ -2958,10 +2958,10 @@ img,
 video,
 object {
   box-sizing: border-box;
-  max-width: 100%;
   max-inline-size: 100%;
-  height: auto;
+  max-width: 100%;
   block-size: auto;
+  height: auto;
   aspect-ratio: 16/9;
   object-fit: cover;
 }

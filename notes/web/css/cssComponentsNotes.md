@@ -1037,18 +1037,18 @@ Pseudo element switch from circle to circle:
   flex-shrink: 0;
   grid: [track] 1fr / [track] 1fr;
   align-items: center;
+  inline-size: var(--track-size);
+  block-size: var(--thumb-size);
   padding: var(--track-padding);
   appearance: none;
   border-radius: var(--track-size);
-  inline-size: var(--track-size);
-  block-size: var(--thumb-size);
 }
 
 .gui-switch > input::before {
   grid-area: track;
-  content: '';
   inline-size: var(--thumb-size);
   block-size: var(--thumb-size);
+  content: '';
 }
 ```
 
@@ -1974,8 +1974,8 @@ Background gradient [loading spinner](https://css-tricks.com/single-element-load
   width: 100px;
   height: 100px;
   background: conic-gradient(deepskyblue, 30%, white);
-  mask-image: var(--mask);
   border-radius: 50%;
+  mask-image: var(--mask);
   animation: spin 1s linear infinite reverse;
 }
 
@@ -2430,9 +2430,9 @@ body {
 
 .card {
   background-color: rgb(17 25 40 / 54%);
+  backdrop-filter: blur(12px) saturate(200%);
   border: 1px solid rgb(255 255 255 / 12.5%);
   border-radius: 12px;
-  backdrop-filter: blur(12px) saturate(200%);
 }
 
 .hero {

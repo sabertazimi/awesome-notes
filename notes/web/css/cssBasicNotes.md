@@ -1106,14 +1106,14 @@ In `position`/`size`/`margin`/`padding`/`border`/`text alignment`:
 
 ```css
 .logical {
-  inline-size: fit-content;
-  block-size: fit-content;
-  min-inline-size: min-content;
-  min-block-size: min-content;
-  max-inline-size: max-content;
-  max-block-size: max-content;
   inset-block: 0 0;
   inset-inline: 0 0;
+  inline-size: fit-content;
+  min-inline-size: min-content;
+  max-inline-size: max-content;
+  block-size: fit-content;
+  min-block-size: min-content;
+  max-block-size: max-content;
   padding-block: 1rem 1rem;
   padding-inline: 1rem 1rem;
   margin-block: 1rem 1rem;

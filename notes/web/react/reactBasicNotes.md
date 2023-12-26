@@ -335,10 +335,7 @@ interface ComponentLifecycle<P, S, SS = any> extends NewLifecycle<P, S, SS> {
   componentDidCatch?(error: Error, errorInfo: ErrorInfo): void;
 }
 
-interface Component<P = {}, S = {}, SS = any>
-  extends ComponentLifecycle<P, S, SS> {}
-
-class Component<P, S> {
+class Component<P = {}, S = {}, SS = any> extends ComponentLifecycle<P, S, SS> {
   readonly props: Readonly<P> & Readonly<{ children?: ReactNode | undefined }>;
   state: Readonly<S>;
 

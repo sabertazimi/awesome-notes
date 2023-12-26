@@ -4828,8 +4828,8 @@ interface Observable<T> {
   observable(): this;
   readonly species: this;
 
-  static of(...items: Array<mixed>): Observable<T>;
-  static from(x: Observable<T> | Iterable<T>): Observable<T>;
+  of(...items: Array<mixed>): Observable<T>;
+  from(x: Observable<T> | Iterable<T>): Observable<T>;
 
   map<Z>(fn: (value: T) => Z): Observable<Z>;
   reduce<Z>(

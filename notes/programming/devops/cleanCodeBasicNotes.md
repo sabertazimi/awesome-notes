@@ -221,18 +221,18 @@ Altering shows that SubType should not be subtype of ParentType
 (break Open Closed Principle),
 you should re-design ParentType and SubType.
 
-```ts
+```cpp
 function AnimalLegCount(a: Array<Animal>) {
   for (let i = 0; i <= a.length; i++) {
-    if (typeof a[i] === Lion) {
+    if (typeof a[i] === 'Lion') {
       log(LionLegCount(a[i]));
     }
 
-    if (typeof a[i] === Mouse) {
+    if (typeof a[i] === 'Mouse') {
       log(MouseLegCount(a[i]));
     }
 
-    if (typeof a[i] === Snake) {
+    if (typeof a[i] === 'Snake') {
       log(SnakeLegCount(a[i]));
     }
   }
