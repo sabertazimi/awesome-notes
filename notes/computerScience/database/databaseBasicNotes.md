@@ -124,7 +124,7 @@ JavaScript Object Notation:
 - difference operator -: matching schemas => change rows/tuples
 - union/intersection operator ∪ / ∩: matching schemas => change rows/tuples
 - rename operator ρ: change schemas(attributes name),
-  different schemas <=> same schemas (**union/intersection/self-join**)
+  different schemas `<=>` same schemas (**union/intersection/self-join**)
 - assign statement :=
 - tree notation
 
@@ -263,9 +263,9 @@ CREATE VIEW Standings AS
 - key sets: closure of sets contains all attributes
 
 > assuming relation R(A, B, C, D, ..., G)
-> and closure of A, B {A, B} + `A->C->D, B->E->F, F->G`
-> => {A, B}+ = {A, B, C, ..., G}
-> then, {A, B} is a key
+> and closure of A, B `{A, B}` + `A->C->D, B->E->F, F->G`
+> => `{A, B}+ = {A, B, C, ..., G}`
+> then, `{A, B}` is a key
 > if there no exists such closure, then treat all-attributes as a key
 
 ### BCNF

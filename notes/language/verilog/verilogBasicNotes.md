@@ -630,8 +630,8 @@ initial
 
 ### Blocking and Non-Blocking
 
-- Blocking(=): 顺序执行
-- Non-Blocking(<=): 并行执行
+- Blocking(`=`): 顺序执行
+- Non-Blocking(`<=`): 并行执行
 
 ```verilog
 output = input_logic;

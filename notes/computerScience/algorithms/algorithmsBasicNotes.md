@@ -509,10 +509,10 @@ a = b+1;b = c+1;c = a+1;
 
 ### 范例
 
-- 切割钢条问题: max{p[i], r[n-i]}
+- 切割钢条问题: `max{p[i], r[n-i]}`
 - 矩阵相乘链问题
-- 最大公共子序列问题: r[i, j] = max{r[i, j-1], r[i-1, j]}
-- 无权最短路径: path[i, j] = min{path[i, r], [r, j]}
+- 最大公共子序列问题: `r[i, j]` = `max{r[i, j-1], r[i-1, j]}`
+- 无权最短路径: `path[i, j]` = `min{path[i, r], [r, j]}`
 
 ## Greedy Algorithm
 
@@ -623,7 +623,7 @@ void Relax(int u, int v, int w) {
 
 ### 结点对最短路径
 
-动态规划:l^m(i, j) = min(l^m-1(i, j), min(1<=k<=n){l^m-1(i, k)+w(k, j)})
+动态规划: l^m(i, j) = min(l^m-1(i, j), min(1 `<=` k `<=` n)`{l^m-1(i, k)+w(k, j)}`)
 
 > m: 中间结点个数
 
@@ -693,7 +693,7 @@ MaxFlow-MinCut Theorem:
 
 - f 是 G 的一个最大流
 - 残存网络 Gf 不含增广路径
-- |f| = c(S, T)(切割的容量): |f| <= c(S, T)(流网络中任意流 f <= 任意切割容量 c(S, T))
+- |f| = c(S, T)(切割的容量): |f| `<=` c(S, T)(流网络中任意流 f `<=` 任意切割容量 c(S, T))
 
 #### Ford-Fulkerson Algorithm
 

@@ -2552,10 +2552,10 @@ export default defineConfig({
 
 ### Environment Variables and Modes
 
-- `import.meta.env.MODE`: {string} running mode.
-- `import.meta.env.BASE_URL`: {string} vite `base` url.
-- `import.meta.env.PROD`: {boolean} whether in production.
-- `import.meta.env.DEV`: {boolean} whether in development.
+- `import.meta.env.MODE`: `{string}` running mode.
+- `import.meta.env.BASE_URL`: `{string}` vite `base` url.
+- `import.meta.env.PROD`: `{boolean}` whether in production.
+- `import.meta.env.DEV`: `{boolean}` whether in development.
 
 ```ts
 const router = createRouter({

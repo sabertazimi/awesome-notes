@@ -68,7 +68,7 @@ G = (S, N, T, P):
 - S: 开始符
 - N: 非终结符集合
 - T: 终结符集合
-- P: 产生式规则集合 X -> beta1, beta2, ..., betaN, X <- N, beta <- N+T
+- P: 产生式规则集合 X `->` beta1, beta2, ..., betaN, X `<-` N, beta `<-` N+T
 
 #### 形式化表示
 
@@ -142,7 +142,7 @@ e -> "\0" # basic definition
 - `[a-z]` : a|...|z
 - c? : 0/1 个 c
 - c+ : 1/n 个 c
-- c{i, j} : i-j 个 c
+- `c{i, j}` : i-j 个 c
 - "a*" : a* 自身(非 Kleene Closure)
 - . : 除 ‘\n’ 外的任意字符
 
@@ -325,7 +325,7 @@ transferFunction 中的次态不确定/不唯一(为一个开集合):
 - Multiple transitions for a state with a input
 - can epsilon moves
 
-> (cS0, a) -> {cS1, cS2}
+> (cS0, a) -> `{cS1, cS2}`
 
 ### 自动词法分析器
 
@@ -626,7 +626,7 @@ bool ll1_parsing(tokens[]) {
 
 - 存在规则: `X -> epsilon`.
 - 或者: `X -> Y1Y2...Yn`, 且存在规则 `Y1 -> epsilon, ..., Yn -> epsilon`.
-- 即 : `X -*> epsilon` (epsilon <- first(X)).
+- 即 : `X -*> epsilon` (epsilon `<-` first(X)).
 
 ```cpp
 nullable = {};
@@ -643,11 +643,11 @@ while (nullable is still changing) {
 
 ##### first sets
 
-first(X) = {t | X -_> talpha} U {epsilon | X-_>epsilon} :
+first(X) = `{t | X -_> talpha}` U `{epsilon | X-_>epsilon}` :
 
-- first(t) = {t}
-- epsilon<-first(X): X -> epsilon or X -> A1...An, epsilon<-first(Ai)
-- first(alpha)<-first(X): X -> A1..Analpha, epsilon<-first(Ai)
+- first(t) = `{t}`
+- epsilon `<-` first(X): X -> epsilon or X -> A1...An, epsilon `<-` first(Ai)
+- first(alpha) `<-` first(X): X -> A1..Analpha, epsilon `<-` first(Ai)
 
 first sets 不动点算法:
 
@@ -674,15 +674,15 @@ while (some sets is changing) {
 }
 ```
 
-| NonTerminal | First Set    |
-| :---------- | :----------- |
-| S           | {s, t, g, w} |
-| N           | {s, t, g, w} |
-| V           | {e, d}       |
+| NonTerminal | First Set      |
+| :---------- | :------------- |
+| S           | `{s, t, g, w}` |
+| N           | `{s, t, g, w}` |
+| V           | `{e, d}`       |
 
 ##### follow sets
 
-`follow(X) = {t | S -*> beta X t epsilon}`:
+follow(X) = `{t | S -*> beta X t epsilon}`:
 
 - for `X -> AB`:
   - `first(B) <- follow(A)`, `follow(X) <- follow(B)`.
@@ -762,21 +762,22 @@ calculate_select_set(production p: N->beta1...beta_n) {
 5: | a
 ```
 
-nullable = {X, Y}
+nullable = `{X, Y}`
 
-|        | X         | Y         | Z         |
-| :----- | :-------- | :-------- | :-------- |
-| first  | {a, c}    | {c}       | {a, c, d} |
-| follow | {a, c, d} | {a, c, d} | {}        |
+|        | X           | Y           | Z           |
+| :----- | :---------- | :---------- | :---------- |
+| first  | `{a, c}`    | `{c}`       | `{a, c, d}` |
+| follow | `{a, c, d}` | `{a, c, d}` | `{}`        |
 
-| production | 0   | 1         | 2   | 3         | 4         | 5   |
-| :--------- | :-- | :-------- | :-- | :-------- | :-------- | :-- |
-| select     | {d} | {a, c, d} | {c} | {a, c, d} | {a, c, d} | {a} |
+| production | 0     | 1           | 2     | 3           | 4           | 5     |
+| :--------- | :---- | :---------- | :---- | :---------- | :---------- | :---- |
+| select     | `{d}` | `{a, c, d}` | `{c}` | `{a, c, d}` | `{a, c, d}` | `{a}` |
 
-|Non\Terminal|a|c|d|
-|Z|1|1|0, 1|
-|Y|3|2, 3|3|
-|X|4, 5|4|4|
+| Non-Terminal | a      | c      | d      |
+| :----------- | :----- | :----- | :----- |
+| Z            | 1      | 1      | `0, 1` |
+| Y            | 3      | `2, 3` | 3      |
+| X            | `4, 5` | 4      | 4      |
 
 > 数字为规则编号
 
@@ -1188,7 +1189,7 @@ SLR, LR(1), LALR,
 
 - `production_with_dot_set` 中的 item 修改为 `X -> [beta1 . beta_n..., a]` 二元组
 - closure(production_set p) 中闭包规则从 `X -> [a . Y beta,a]`
-  修改为 `Y -> [.y, b]` b <- select(beta a)
+  修改为 `Y -> [.y, b]` b `<-` select(beta a)
 
 #### LALR-K
 
@@ -1201,7 +1202,7 @@ Simple LR: improves LR(k) shift/reduce heuristic
 New reduce rule:
 
 - state contains item X -> β.
-- next_token <- follow(X)
+- next_token `<-` follow(X)
 
 ##### SLR 实现
 
@@ -1654,7 +1655,7 @@ IR:
 
 #### Block
 
-- block_t: { label_t; stm_list; jmp_t; }
+- block_t: `{ label_t; stm_list; jmp_t; }`
 - 扫描三地址码, 生成 blocks
 - 图论算法:结点为 blocks, 边为跳转边
 
@@ -1728,7 +1729,7 @@ CFG 中(数据流分析-可达定义分析) 常量传播(constant propagation)�
 
 - **forwards analysis**
 - C(stm, x, in) = value of x before stm ; C(stm, x, out) = value of x after stm
-- bottom < c < top => C(stm, x, in) = least_upper_bound{ C(prev_stm_i, x, out) }:
+- bottom < c < top => C(stm, x, in) = `least_upper_bound{ C(prev_stm_i, x, out) }`:
   - C(prev_stm, x, out) = top(nondeterministic) => C(stm, x, in) = top
   - C(prev_stm1, x, out) != C(prev_stm2, x, out) => C(stm, x, in) = top
   - C(prev_stm_i, x, out) = c/bottom(dead code) => C(stm, x, in) = c
@@ -1742,7 +1743,7 @@ CFG 中(数据流分析-可达定义分析) 常量传播(constant propagation)�
 CFG 中 数据流分析-活性分析(liveness analysis), 可用于复制传播优化与寄存器分配优化:
 
 - backwards analysis
-- L(stm, x, out) = V { L(next_stm, x, in)}
+- L(stm, x, out) = `V { L(next_stm, x, in) }`
 - L(... := f(x), x, in) = true
 - L(x := e, x, in) = false
 - L(none x, x, in) = L(none x, x, out)

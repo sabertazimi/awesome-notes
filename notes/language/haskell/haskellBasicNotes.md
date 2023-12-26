@@ -483,7 +483,7 @@ Ord 成员必为 Eq 成员: class (Eq a) => Ord a where
 - 功能: 成员类型可排序
 - 成员: 大部分基本类型(不包含函数类型)
 - 方法:
-  - < > <= >= 函数
+  - `<` `>` `<=` `>=` 函数
   - compare 函数 (Ord a) => a -> a -> Ordering
 
 #### Show
@@ -766,7 +766,7 @@ instance Monad Maybe where
 ###### do 表示法
 
 - 在 do expression 中，每一行都是一个 monadic value
-- 检查返回值，使用 <-
+- 检查返回值，使用 `<-`
 
 ```haskell
 foo :: Maybe String
@@ -809,8 +809,8 @@ instance Monad [] where
 
 - 返回值交互: 下例中 n 与 return (n, ch) 进行交互
   - list comprehension 与 do 表示法 均是 >>= 的语法糖
-- list comprehension: <- 与 条件表达式
-- do 表示法: <- 与 guard 函数
+- list comprehension: `<-` 与 条件表达式
+- do 表示法: `<-` 与 guard 函数
 
 ```haskell
 ghci> [1,2] >>= \n -> ['a','b'] >>= \ch -> return (n,ch)
