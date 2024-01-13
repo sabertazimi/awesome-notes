@@ -4594,11 +4594,11 @@ __metadata:
     "@docusaurus/types": "npm:3.1.0"
     "@easyops-cn/docusaurus-search-local": "npm:^0.40.1"
     ci-info: "npm:^4.0.0"
-    commit-and-tag-version: "npm:^12.0.0"
+    commit-and-tag-version: "npm:^12.1.0"
     eslint: "npm:^8.56.0"
     katex: "npm:^0.16.9"
     markdownlint-cli: "npm:^0.38.0"
-    prettier: "npm:^3.1.1"
+    prettier: "npm:^3.2.1"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     rehype-katex: "npm:^7.0.0"
@@ -5405,9 +5405,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commit-and-tag-version@npm:^12.0.0":
-  version: 12.0.0
-  resolution: "commit-and-tag-version@npm:12.0.0"
+"commit-and-tag-version@npm:^12.1.0":
+  version: 12.1.0
+  resolution: "commit-and-tag-version@npm:12.1.0"
   dependencies:
     chalk: "npm:^2.4.2"
     conventional-changelog: "npm:3.1.25"
@@ -5424,7 +5424,7 @@ __metadata:
     yargs: "npm:^17.7.2"
   bin:
     commit-and-tag-version: bin/cli.js
-  checksum: 5e5ed5d5badd5296d1e2923555ae9c25d1b2497864b12219be1203757d5622b6f76882c8cf24ed2ce9ecc2efb9f7031f7b81d53c597100b43fdbabb9a8e7ba5b
+  checksum: 790d1459f356d2cb3b296f9ec325c5f645bb9d2ecbb202056b78f95d073d99709d462f4bf3f3660281c86d262bd05aa86478437b10f4f8d4f9d4f58cdfe5228c
   languageName: node
   linkType: hard
 
@@ -12881,12 +12881,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "prettier@npm:3.1.1"
+"prettier@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "prettier@npm:3.2.1"
   bin:
     prettier: bin/prettier.cjs
-  checksum: facc944ba20e194ff4db765e830ffbcb642803381f0d2033ed397e79904fa4ccc877dc25ad68f42d36985c01d051c990ca1b905fb83d2d7d65fe69e4386fa1a3
+  checksum: e01284f25c1e9a96dfaf4f7d0bfdf0726b26afc732b0e645a2653174d4ad5a1e85ae21ec4d327c71536f1acf8fee1dff5ea35c5b4b8e5b83ff00fe1dd6fef146
   languageName: node
   linkType: hard
 
