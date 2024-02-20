@@ -428,7 +428,7 @@ git log -p --stat --graph --pretty=format:"%h - %an, %ar : %s" --since=2.weeks p
 | --committer=       | 指定提交者                                              |
 | --after=/--since=  | 限制日志时间                                            |
 | --before=/--until= | 限制日志时间 "2008-01-15" "2 years 1 day 3 minutes ago" |
-| --help             |
+| --help             |                                                         |
 
 ### Log Filter
 
