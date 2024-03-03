@@ -1452,6 +1452,12 @@ tags: [CS, Math]
 | 子家 | `基本点 * 4` | 亲家赔`基本点 * 2`, 子家各赔`基本点 * 1` |
 | 亲家 | `基本点 * 6` | 子家各赔`基本点 * 2`                     |
 
+All Last 自摸逆转条件:
+
+- 亲家: `点差 / 4` All.
+- 子家对子家: `(0.2 * 点差, 0.4 * 点差)`.
+- 子家对亲家: `(点差 / 6, 点差 / 3)`.
+
 ## Mahjong Reference
 
 - `Beginner's Luck` [guide](http://beginners.biz/kihon).
