@@ -1286,9 +1286,9 @@ Pseudo element switch from circle to circle:
 
 <style>
   .parallax {
-    perspective: 1px;
     height: 100vh;
     overflow: hidden auto;
+    perspective: 1px;
     perspective-origin: 100% 50%;
   }
 
@@ -1469,8 +1469,8 @@ const resetScrollX = () => {
 
 .gallery img {
   flex: 1;
-  object-fit: cover;
   max-width: 100%;
+  object-fit: cover;
 }
 ```
 
@@ -1602,9 +1602,9 @@ Separate set horizontal and vertical radius to make well-designed shapes:
 .avatar {
   width: 100px;
   height: 100px;
+  object-fit: cover;
   border: solid deepskyblue;
   border-radius: 50%;
-  object-fit: cover;
   animation: morph 6s paused linear;
 }
 
@@ -2953,10 +2953,10 @@ p {
 
 ```css
 .cube {
-  backface-visibility: hidden;
-  perspective: 1000;
-  transform-style: preserve-3d;
   transform: translate3d(0, 0, 0);
+  perspective: 1000;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 ```
 
