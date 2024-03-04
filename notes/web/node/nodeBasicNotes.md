@@ -700,6 +700,33 @@ Modify package in `node_modules` conveniently:
 - [StoryBook](https://github.com/storybookjs/storybook):
   yarn 3.
 
+## PNPM
+
+### PNPM Installation
+
+```bash
+# By script.
+wget -qO- https://get.pnpm.io/install.sh | sh -
+
+# By manual download.
+mv ./pnpm-linux-x64 ./pnpm
+chmod +x ./pnpm
+./pnpm setup --force
+
+# Installed.
+alias np=pnpm
+source ~/.zshrc
+which pnpm
+pnpm --version
+pnpm store path
+```
+
+### PNPM Configuration
+
+```bash
+pnpm config set registry https://registry.npmmirror.com/
+```
+
 ## Self-Defined Module
 
 ### Basic Modular Pattern
