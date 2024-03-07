@@ -11,9 +11,9 @@ tags: [Web, Framework, Library]
 ## Indexing Tools
 
 - [OpenBase](https://openbase.com)
-- [Moiva](https://github.com/aantipov/moiva)
+- [Rising Stars](https://github.com/bestofjs/javascript-risingstars)
 - [Best of JS](https://github.com/bestofjs/bestofjs-webui)
-- [Micro.js](https://github.com/microjs/microjs.com)
+- [Moiva](https://github.com/aantipov/moiva)
 - [CodeHouse: Whole New World Developer Cheatsheets](https://github.com/saviomartin/codehouse)
 - [NPM Package Advisor](https://snyk.io/advisor)
 - [NPM Package Analytics](https://npm.devtool.tech)
@@ -83,6 +83,7 @@ tags: [Web, Framework, Library]
 - [Spectrum: Build Adaptive, Accessible and Robust User Experiences](https://github.com/adobe/react-spectrum)
 - [Reach: Accessible Foundation for React Apps and Design Systems](https://github.com/reach/reach-ui)
 - [Radix: Build High-quality and Accessible Design Systems](https://github.com/radix-ui/primitives)
+- [Shadcn: Accessible and Customizable Components can Copy and Paste](https://github.com/shadcn-ui/ui)
 
 ### Components UI Framework
 
@@ -178,7 +179,6 @@ tags: [Web, Framework, Library]
 
 ### Atom State Management
 
-- [React Recoil](https://github.com/facebookexperimental/Recoil)
 - [Zustand: Small, Fast and Scalable Bear-bones State-management Solution](https://github.com/pmndrs/zustand)
 - [JoTai: Primitive and Flexible State Management Library](https://github.com/pmndrs/jotai)
 - [Valtio: Proxy-state Simple for React and VanillaJS](https://github.com/pmndrs/valtio)
@@ -606,6 +606,7 @@ tags: [Web, Framework, Library]
 
 ### Charts Draw Utils
 
+- [ExcaliDraw: Virtual Whiteboard for Sketching Hand-drawn](https://github.com/excalidraw/excalidraw)
 - [iDraw: Simple JavaScript Framework for Drawing on Web](https://github.com/idrawjs/idraw)
 
 ### Math
@@ -863,7 +864,6 @@ tags: [Web, Framework, Library]
 - [PSD: Blazing fast and Zero-dependency PSD Parser](https://github.com/webtoon/psd)
 - [ICO](https://github.com/kevva/to-ico)
 - [HTML2Image](https://github.com/bubkoo/html-to-image)
-- [Tesseract: Image Recognition Tesseract OCR Engine](https://github.com/naptha/tesseract.js)
 
 ### Image Size
 
@@ -1356,6 +1356,18 @@ tags: [Web, Framework, Library]
 - [MD5](https://github.com/blueimp/JavaScript-MD5)
 - [Base64](https://github.com/dankogai/js-base64)
 - [NextAuth: Next.js Authentication](https://github.com/nextauthjs/next-auth)
+
+## AI
+
+### LLM
+
+- [vercel.ai: Build AI-powered Web Applications](https://github.com/vercel/ai)
+- [LangChain: LLM Framework](https://github.com/langchain-ai/langchainjs)
+- [TypeChat: Makes it Easy to Build Natural Language Interfaces](https://github.com/microsoft/TypeChat)
+
+### CV
+
+- [Tesseract: Image Recognition Tesseract OCR Engine](https://github.com/naptha/tesseract.js)
 
 ## Debugging and Testing
 
