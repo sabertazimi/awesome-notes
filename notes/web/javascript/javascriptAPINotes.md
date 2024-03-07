@@ -13,33 +13,33 @@ tags: [Web, JavaScript, ECMAScript, BOM, DOM]
 ### Window
 
 ```ts
-const selfWindow = window.self;
-const topWindow = window.top;
-const parentWindow = window.parent;
-const grandParentWindow = window.parent.parent;
+const selfWindow = window.self
+const topWindow = window.top
+const parentWindow = window.parent
+const grandParentWindow = window.parent.parent
 ```
 
 ```ts
 // eslint-disable-next-line no-restricted-globals
 if (confirm('Are you sure?')) {
-  alert("I'm so glad you're sure!");
+  alert("I'm so glad you're sure!")
 } else {
-  alert("I'm sorry to hear you're not sure.");
+  alert("I'm sorry to hear you're not sure.")
 }
 
-const result = prompt('What is your name? ', 'James');
+const result = prompt('What is your name? ', 'James')
 if (result !== null) {
-  alert(`Welcome, ${result}`);
+  alert(`Welcome, ${result}`)
 }
 
 // 显示打印对话框
-window.print();
+window.print()
 
 // 显示查找对话框
-window.find();
+window.find()
 
 // 显式打印机
-window.print();
+window.print()
 ```
 
 弹窗有非常多的安全限制:
@@ -54,24 +54,24 @@ const newWin = window.open(
   'https://www.new.com/',
   'newWindow',
   'height=400,width=400,top=10,left=10,resizable=yes'
-);
-newWin.resizeTo(500, 500);
-newWin.moveTo(100, 100);
-alert(newWin.opener === window); // true
-newWin.close();
-alert(newWin.closed); // true
+)
+newWin.resizeTo(500, 500)
+newWin.moveTo(100, 100)
+alert(newWin.opener === window) // true
+newWin.close()
+alert(newWin.closed) // true
 
-let blocked = false;
+let blocked = false
 try {
-  const newWin = window.open('https://www.new.com/', '_blank');
+  const newWin = window.open('https://www.new.com/', '_blank')
   if (newWin === null) {
-    blocked = true;
+    blocked = true
   }
 } catch (ex) {
-  blocked = true;
+  blocked = true
 }
 if (blocked) {
-  alert('The popup was blocked!');
+  alert('The popup was blocked!')
 }
 ```
 
@@ -94,31 +94,31 @@ if (blocked) {
 ```ts
 function getQueryStringArgs(location) {
   // 取得没有开头问号的查询字符串
-  const qs = location.search.length > 0 ? location.search.substring(1) : '';
+  const qs = location.search.length > 0 ? location.search.substring(1) : ''
   // 保存数据的对象
-  const args = {};
+  const args = {}
 
   // 把每个参数添加到 args 对象
   for (const item of qs.split('&').map(kv => kv.split('='))) {
-    const name = decodeURIComponent(item[0]);
-    const value = decodeURIComponent(item[1]);
+    const name = decodeURIComponent(item[0])
+    const value = decodeURIComponent(item[1])
 
     if (name.length) {
-      args[name] = value;
+      args[name] = value
     }
   }
 
-  return args;
+  return args
 }
 ```
 
 ```ts
-window.location.assign('https://www.new.com');
-window.location = 'https://www.new.com';
-window.location.href = 'https://www.new.com';
-window.location.replace('https://www.new.com'); // No new history
-window.location.reload(); // 重新加载, 可能是从缓存加载
-window.location.reload(true); // 重新加载, 从服务器加载
+window.location.assign('https://www.new.com')
+window.location = 'https://www.new.com'
+window.location.href = 'https://www.new.com'
+window.location.replace('https://www.new.com') // No new history
+window.location.reload() // 重新加载, 可能是从缓存加载
+window.location.reload(true) // 重新加载, 从服务器加载
 ```
 
 ```ts
@@ -128,11 +128,11 @@ window.addEventListener(
     // event.oldURL
     // event.nweURL
     if (window.location.hash === '#someCoolFeature') {
-      someCoolFeature();
+      someCoolFeature()
     }
   },
   false
-);
+)
 ```
 
 ### Navigator
@@ -183,9 +183,9 @@ window.addEventListener(
 #### Web Online API
 
 ```ts
-const connectionStateChange = () => console.log(navigator.onLine);
-window.addEventListener('online', connectionStateChange);
-window.addEventListener('offline', connectionStateChange);
+const connectionStateChange = () => console.log(navigator.onLine)
+window.addEventListener('online', connectionStateChange)
+window.addEventListener('offline', connectionStateChange)
 // 设备联网时:
 // true
 // 设备断网时:
@@ -195,14 +195,14 @@ window.addEventListener('offline', connectionStateChange);
 #### Web Connection API
 
 ```ts
-const downlink = navigator.connection.downlink;
-const downlinkMax = navigator.connection.downlinkMax;
-const rtt = navigator.connection.rtt;
-const type = navigator.connection.type; // wifi/bluetooth/cellular/ethernet/mixed/unknown/none.
-const networkType = navigator.connection.effectiveType; // 2G - 5G.
-const saveData = navigator.connection.saveData; // Boolean: Reduced data mode.
+const downlink = navigator.connection.downlink
+const downlinkMax = navigator.connection.downlinkMax
+const rtt = navigator.connection.rtt
+const type = navigator.connection.type // wifi/bluetooth/cellular/ethernet/mixed/unknown/none.
+const networkType = navigator.connection.effectiveType // 2G - 5G.
+const saveData = navigator.connection.saveData // Boolean: Reduced data mode.
 
-navigator.connection.addEventListener('change', changeHandler);
+navigator.connection.addEventListener('change', changeHandler)
 ```
 
 #### Web Protocol Handler API
@@ -212,7 +212,7 @@ navigator.registerProtocolHandler(
   'mailto',
   'http://www.somemailclient.com?cmd=%s',
   'Some Mail Client'
-);
+)
 ```
 
 #### Web Battery Status API
@@ -220,30 +220,30 @@ navigator.registerProtocolHandler(
 ```ts
 navigator.getBattery().then(battery => {
   // 添加充电状态变化时的处理程序
-  const chargingChangeHandler = () => console.log(battery.charging);
-  battery.addEventListener('chargingchange', chargingChangeHandler);
+  const chargingChangeHandler = () => console.log(battery.charging)
+  battery.addEventListener('chargingchange', chargingChangeHandler)
   // 添加充电时间变化时的处理程序
-  const chargingTimeChangeHandler = () => console.log(battery.chargingTime);
-  battery.addEventListener('chargingtimechange', chargingTimeChangeHandler);
+  const chargingTimeChangeHandler = () => console.log(battery.chargingTime)
+  battery.addEventListener('chargingtimechange', chargingTimeChangeHandler)
   // 添加放电时间变化时的处理程序
   const dischargingTimeChangeHandler = () =>
-    console.log(battery.dischargingTime);
+    console.log(battery.dischargingTime)
   battery.addEventListener(
     'dischargingtimechange',
     dischargingTimeChangeHandler
-  );
+  )
   // 添加电量百分比变化时的处理程序
-  const levelChangeHandler = () => console.log(battery.level * 100);
-  battery.addEventListener('levelchange', levelChangeHandler);
-});
+  const levelChangeHandler = () => console.log(battery.level * 100)
+  battery.addEventListener('levelchange', levelChangeHandler)
+})
 ```
 
 #### Web Storage Estimate API
 
 ```ts
 navigator.storage.estimate().then(estimate => {
-  console.log(((estimate.usage / estimate.quota) * 100).toFixed(2));
-});
+  console.log(((estimate.usage / estimate.quota) * 100).toFixed(2))
+})
 ```
 
 #### Web Geolocation API
@@ -258,9 +258,9 @@ if (window.navigator.geolocation) {
     timeout: 5000,
     // 最长有效期, 在重复获取地理位置时, 此参数指定多久再次获取位置.
     maximumAge: 3000,
-  });
+  })
 } else {
-  alert('Your browser does not support Geolocation!');
+  alert('Your browser does not support Geolocation!')
 }
 ```
 
@@ -270,19 +270,19 @@ locationError 为获取位置信息失败的回调函数, 可以根据错误类�
 function locationError(error) {
   switch (error.code) {
     case error.TIMEOUT:
-      showError('A timeout occurred! Please try again!');
-      break;
+      showError('A timeout occurred! Please try again!')
+      break
     case error.POSITION_UNAVAILABLE:
-      showError("We can't detect your location. Sorry!");
-      break;
+      showError("We can't detect your location. Sorry!")
+      break
     case error.PERMISSION_DENIED:
-      showError('Please allow geolocation access for this to work.');
-      break;
+      showError('Please allow geolocation access for this to work.')
+      break
     case error.UNKNOWN_ERROR:
-      showError('An unknown error occurred!');
-      break;
+      showError('An unknown error occurred!')
+      break
     default:
-      throw new Error('Unsupported error!');
+      throw new Error('Unsupported error!')
   }
 }
 ```
@@ -302,13 +302,13 @@ locationSuccess 为获取位置信息成功的回调函数,
 
 ```ts
 function locationSuccess(position) {
-  const coords = position.coords;
+  const coords = position.coords
   const latlng = new google.maps.LatLng(
     // 维度
     coords.latitude,
     // 精度
     coords.longitude
-  );
+  )
   const myOptions = {
     // 地图放大倍数
     zoom: 12,
@@ -316,10 +316,10 @@ function locationSuccess(position) {
     center: latlng,
     // 地图类型
     mapTypeId: google.maps.MapTypeId.ROADMAP,
-  };
+  }
 
   // 创建地图并输出到页面
-  const myMap = new google.maps.Map(document.getElementById('map'), myOptions);
+  const myMap = new google.maps.Map(document.getElementById('map'), myOptions)
 
   // 创建标记
   const marker = new google.maps.Marker({
@@ -327,15 +327,15 @@ function locationSuccess(position) {
     position: latlng,
     // 指定用于标注的地图
     map: myMap,
-  });
+  })
 
   // 创建标注窗口
   const infoWindow = new google.maps.InfoWindow({
     content: `您在这里<br/>纬度: ${coords.latitude}<br/>经度: ${coords.longitude}`,
-  });
+  })
 
   // 打开标注窗口
-  infoWindow.open(myMap, marker);
+  infoWindow.open(myMap, marker)
 }
 ```
 
@@ -344,7 +344,7 @@ navigator.geolocation.watchPosition(
   locationSuccess,
   locationError,
   positionOption
-);
+)
 ```
 
 #### Navigator User Agent
@@ -357,7 +357,7 @@ navigator.geolocation.watchPosition(
 - [UserAgent Data Parser](https://github.com/faisalman/ua-parser-js)
 
 ```ts
-console.log(navigator.userAgent);
+console.log(navigator.userAgent)
 // 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
 // Chrome/101.0.4922.0 Safari/537.36 Edg/101.0.1198.0'
 ```
@@ -377,33 +377,33 @@ console.log(navigator.userAgent);
 | orientation | Screen Orientation API 中屏幕的朝向      |
 
 ```ts
-const screen = window.screen;
+const screen = window.screen
 
-console.log(screen.colorDepth); // 24
-console.log(screen.pixelDepth); // 24
+console.log(screen.colorDepth) // 24
+console.log(screen.pixelDepth) // 24
 
 // 垂直看
-console.log(screen.orientation.type); // portrait-primary
-console.log(screen.orientation.angle); // 0
+console.log(screen.orientation.type) // portrait-primary
+console.log(screen.orientation.angle) // 0
 // 向左转
-console.log(screen.orientation.type); // landscape-primary
-console.log(screen.orientation.angle); // 90
+console.log(screen.orientation.type) // landscape-primary
+console.log(screen.orientation.angle) // 90
 // 向右转
-console.log(screen.orientation.type); // landscape-secondary
-console.log(screen.orientation.angle); // 270
+console.log(screen.orientation.type) // landscape-secondary
+console.log(screen.orientation.angle) // 270
 ```
 
 全屏 [API](https://developer.mozilla.org/docs/Web/API/Fullscreen_API):
 
 ```ts
 function toggleFullscreen() {
-  const elem = document.querySelector('video');
+  const elem = document.querySelector('video')
 
   if (document.fullscreenElement) {
     document
       .exitFullscreen()
       .then(() => console.log('Document Exited from Full screen mode'))
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
   } else {
     elem
       .requestFullscreen()
@@ -411,8 +411,8 @@ function toggleFullscreen() {
       .catch(err => {
         alert(
           `Error occurred while switch into fullscreen mode: ${err.message} (${err.name})`
-        );
-      });
+        )
+      })
   }
 }
 
@@ -421,7 +421,7 @@ document.onclick = function (event) {
     document
       .exitFullscreen()
       .then(() => console.log('Document Exited from Full screen mode'))
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
   } else {
     document.documentElement
       .requestFullscreen({ navigationUI: 'show' })
@@ -429,10 +429,10 @@ document.onclick = function (event) {
       .catch(err => {
         alert(
           `Error occurred while switch into fullscreen mode: ${err.message} (${err.name})`
-        );
-      });
+        )
+      })
   }
-};
+}
 ```
 
 ### History
@@ -440,50 +440,50 @@ document.onclick = function (event) {
 #### History Navigation
 
 ```ts
-const history = window.history;
+const history = window.history
 
 // 后退一页
-history.go(-1);
+history.go(-1)
 // 前进一页
-history.go(1);
+history.go(1)
 // 前进两页
-history.go(2);
+history.go(2)
 // 导航到最近的 new.com 页面
-history.go('new.com');
+history.go('new.com')
 // 导航到最近的 example.net 页面
-history.go('example.net');
+history.go('example.net')
 // 后退一页
-history.back();
+history.back()
 // 前进一页
-history.forward();
+history.forward()
 
 if (history.length === 1) {
-  console.log('这是用户窗口中的第一个页面');
+  console.log('这是用户窗口中的第一个页面')
 }
 
 if (history.scrollRestoration) {
-  history.scrollRestoration = 'manual';
+  history.scrollRestoration = 'manual'
 }
 ```
 
 #### History State Management
 
 ```ts
-const history = window.history;
+const history = window.history
 
-const stateObject = { foo: 'bar' };
-history.pushState(stateObject, 'My title', 'baz.html');
+const stateObject = { foo: 'bar' }
+history.pushState(stateObject, 'My title', 'baz.html')
 
-history.replaceState({ newFoo: 'newBar' }, 'New title'); // No new history state.
+history.replaceState({ newFoo: 'newBar' }, 'New title') // No new history state.
 
 window.addEventListener('popstate', event => {
-  const state = event.state;
+  const state = event.state
 
   if (state) {
     // 第一个页面加载时状态是 null
-    processState(state);
+    processState(state)
   }
-});
+})
 ```
 
 ### Browser Compatibility
@@ -496,58 +496,58 @@ class BrowserDetector {
     // 测试条件编译
     // IE6~10 支持
     // eslint-disable-next-line spaced-comment
-    this.isIE_Gte6Lte10 = /*@cc_on!@*/ false;
+    this.isIE_Gte6Lte10 = /*@cc_on!@*/ false
     // 测试 documentMode
     // IE7~11 支持
-    this.isIE_Gte7Lte11 = !!document.documentMode;
+    this.isIE_Gte7Lte11 = !!document.documentMode
     // 测试 StyleMedia 构造函数
     // Edge 20 及以上版本支持
-    this.isEdge_Gte20 = !!window.StyleMedia;
+    this.isEdge_Gte20 = !!window.StyleMedia
     // 测试 Firefox 专有扩展安装 API
     // 所有版本的 Firefox 都支持
-    this.isFirefox_Gte1 = typeof InstallTrigger !== 'undefined';
+    this.isFirefox_Gte1 = typeof InstallTrigger !== 'undefined'
     // 测试 chrome 对象及其 webstore 属性
     // Opera 的某些版本有 window.chrome, 但没有 window.chrome.webstore
     // 所有版本的 Chrome 都支持
-    this.isChrome_Gte1 = !!window.chrome && !!window.chrome.webstore;
+    this.isChrome_Gte1 = !!window.chrome && !!window.chrome.webstore
     // Safari 早期版本会给构造函数的标签符追加 "Constructor"字样, 如:
     // window.Element.toString(); // [object ElementConstructor]
     // Safari 3~9.1 支持
-    this.isSafari_Gte3Lte9_1 = /constructor/i.test(window.Element);
+    this.isSafari_Gte3Lte9_1 = /constructor/i.test(window.Element)
     // 推送通知 API 暴露在 window 对象上
     // 使用 IIFE 默认参数值以避免对 undefined 调用 toString()
     // Safari 7.1 及以上版本支持
     this.isSafari_Gte7_1 = (({ pushNotification = {} } = {}) =>
       pushNotification.toString() === '[object SafariRemoteNotification]')(
       window.safari
-    );
+    )
     // 测试 addons 属性
     // Opera 20 及以上版本支持
-    this.isOpera_Gte20 = !!window.opr && !!window.opr.addons;
+    this.isOpera_Gte20 = !!window.opr && !!window.opr.addons
   }
 
   isIE() {
-    return this.isIE_Gte6Lte10 || this.isIE_Gte7Lte11;
+    return this.isIE_Gte6Lte10 || this.isIE_Gte7Lte11
   }
 
   isEdge() {
-    return this.isEdge_Gte20 && !this.isIE();
+    return this.isEdge_Gte20 && !this.isIE()
   }
 
   isFirefox() {
-    return this.isFirefox_Gte1;
+    return this.isFirefox_Gte1
   }
 
   isChrome() {
-    return this.isChrome_Gte1;
+    return this.isChrome_Gte1
   }
 
   isSafari() {
-    return this.isSafari_Gte3Lte9_1 || this.isSafari_Gte7_1;
+    return this.isSafari_Gte3Lte9_1 || this.isSafari_Gte7_1
   }
 
   isOpera() {
-    return this.isOpera_Gte20;
+    return this.isOpera_Gte20
   }
 }
 ```
@@ -558,17 +558,17 @@ class BrowserDetector {
 
 ```ts
 // 检测浏览器是否支持 Netscape 式的插件
-const hasNSPlugins = !!(navigator.plugins && navigator.plugins.length);
+const hasNSPlugins = !!(navigator.plugins && navigator.plugins.length)
 // 检测浏览器是否具有 DOM Level 1 能力
 const hasDOM1 = !!(
   document.getElementById &&
   document.createElement &&
   document.getElementsByTagName
-);
+)
 
 // 特性检测
 if (document.getElementById) {
-  element = document.getElementById(id);
+  element = document.getElementById(id)
 }
 ```
 
@@ -609,57 +609,57 @@ if (document.getElementById) {
   - DOM3 XPath.
 
 ```ts
-const hasXmlDom = document.implementation.hasFeature('XML', '1.0');
-const hasHtmlDom = document.implementation.hasFeature('HTML', '1.0');
+const hasXmlDom = document.implementation.hasFeature('XML', '1.0')
+const hasHtmlDom = document.implementation.hasFeature('HTML', '1.0')
 ```
 
 ### DOM Core
 
 ```ts
-document.createElement('nodeName');
-document.createTextNode('String');
+document.createElement('nodeName')
+document.createTextNode('String')
 
-document.getElementById(id);
-document.getElementsByName(elementName);
-document.getElementsByTagName(tagName);
-document.getElementsByClassName(className); // HTML5
-document.querySelector(cssSelector); // Selectors API
-document.querySelectorAll(cssSelector); // Selectors API
+document.getElementById(id)
+document.getElementsByName(elementName)
+document.getElementsByTagName(tagName)
+document.getElementsByClassName(className) // HTML5
+document.querySelector(cssSelector) // Selectors API
+document.querySelectorAll(cssSelector) // Selectors API
 
-element.getAttribute(attrName); // get default HTML attribute
-element.setAttribute(attrName, attrValue);
-element.removeAttribute(attrName);
+element.getAttribute(attrName) // get default HTML attribute
+element.setAttribute(attrName, attrValue)
+element.removeAttribute(attrName)
 
-element.compareDocumentPosition(element);
-element.contains(element);
-element.isSameNode(element); // Same node reference
-element.isEqualNode(element); // Same nodeName/nodeValue/attributes/childNodes
-element.matches(cssSelector);
-element.closest(cssSelector); // Returns closest ancestor matching selector
-element.cloneNode();
-element.normalize();
-element.before(...elements);
-element.after(...elements);
-element.replaceWith(...elements);
-element.remove();
+element.compareDocumentPosition(element)
+element.contains(element)
+element.isSameNode(element) // Same node reference
+element.isEqualNode(element) // Same nodeName/nodeValue/attributes/childNodes
+element.matches(cssSelector)
+element.closest(cssSelector) // Returns closest ancestor matching selector
+element.cloneNode()
+element.normalize()
+element.before(...elements)
+element.after(...elements)
+element.replaceWith(...elements)
+element.remove()
 
-parentElement.hasChildNodes();
-parentElement.appendChild(childElement);
-parentElement.append(childElements);
-parentElement.insertBefore(newChild, targetChild);
-parentElement.replaceChild(newChild, targetChild);
-parentElement.replaceChildren(children);
-parentElement.removeChild(child);
+parentElement.hasChildNodes()
+parentElement.appendChild(childElement)
+parentElement.append(childElements)
+parentElement.insertBefore(newChild, targetChild)
+parentElement.replaceChild(newChild, targetChild)
+parentElement.replaceChildren(children)
+parentElement.removeChild(child)
 ```
 
 ```ts
 const showAlert = (type, message, duration = 3) => {
-  const div = document.createElement('div');
-  div.className = type;
-  div.appendChild(document.createTextNode(message));
-  container.insertBefore(div, form);
-  setTimeout(() => div.remove(), duration * 1000);
-};
+  const div = document.createElement('div')
+  div.className = type
+  div.appendChild(document.createTextNode(message))
+  container.insertBefore(div, form)
+  setTimeout(() => div.remove(), duration * 1000)
+}
 ```
 
 #### DOM Node Type
@@ -683,33 +683,33 @@ Node 除包括元素结点 (tag) 外,
 | 12        | `NOTATION_NODE`          |                      |               |
 
 ```ts
-const type = node.nodeType;
-const name = node.nodeName;
-const value = node.nodeValue;
+const type = node.nodeType
+const name = node.nodeName
+const value = node.nodeValue
 
 if (someNode.nodeType === Node.ELEMENT_NODE) {
-  alert('Node is an element.');
+  alert('Node is an element.')
 }
 ```
 
 #### DOM Attribute Node
 
 ```ts
-const id = element.attributes.getNamedItem('id').nodeValue;
-const id = element.attributes.id.nodeValue;
-element.attributes.id.nodeValue = 'someOtherId';
-const oldAttr = element.attributes.removeNamedItem('id');
-element.attributes.setNamedItem(newAttr);
+const id = element.attributes.getNamedItem('id').nodeValue
+const id = element.attributes.id.nodeValue
+element.attributes.id.nodeValue = 'someOtherId'
+const oldAttr = element.attributes.removeNamedItem('id')
+element.attributes.setNamedItem(newAttr)
 ```
 
 ```ts
-const attr = document.createAttribute('align');
-attr.value = 'left';
-element.setAttributeNode(attr);
+const attr = document.createAttribute('align')
+attr.value = 'left'
+element.setAttributeNode(attr)
 
-alert(element.attributes.align.value); // "left"
-alert(element.getAttributeNode('align').value); // "left"
-alert(element.getAttribute('align')); // "left"
+alert(element.attributes.align.value) // "left"
+alert(element.getAttributeNode('align').value) // "left"
+alert(element.getAttribute('align')) // "left"
 ```
 
 #### DOM Text Node
@@ -726,36 +726,36 @@ Text node methods:
 Normalize text nodes:
 
 ```ts
-const element = document.createElement('div');
-element.className = 'message';
+const element = document.createElement('div')
+element.className = 'message'
 
-const textNode = document.createTextNode('Hello world!');
-const anotherTextNode = document.createTextNode('Yippee!');
+const textNode = document.createTextNode('Hello world!')
+const anotherTextNode = document.createTextNode('Yippee!')
 
-element.appendChild(textNode);
-element.appendChild(anotherTextNode);
-document.body.appendChild(element);
-alert(element.childNodes.length); // 2
+element.appendChild(textNode)
+element.appendChild(anotherTextNode)
+document.body.appendChild(element)
+alert(element.childNodes.length) // 2
 
-element.normalize();
-alert(element.childNodes.length); // 1
-alert(element.firstChild.nodeValue); // "Hello world!Yippee!"
+element.normalize()
+alert(element.childNodes.length) // 1
+alert(element.firstChild.nodeValue) // "Hello world!Yippee!"
 ```
 
 Split text nodes:
 
 ```ts
-const element = document.createElement('div');
-element.className = 'message';
+const element = document.createElement('div')
+element.className = 'message'
 
-const textNode = document.createTextNode('Hello world!');
-element.appendChild(textNode);
-document.body.appendChild(element);
+const textNode = document.createTextNode('Hello world!')
+element.appendChild(textNode)
+document.body.appendChild(element)
 
-const newNode = element.firstChild.splitText(5);
-alert(element.firstChild.nodeValue); // "Hello"
-alert(newNode.nodeValue); // " world!"
-alert(element.childNodes.length); // 2
+const newNode = element.firstChild.splitText(5)
+alert(element.firstChild.nodeValue) // "Hello"
+alert(newNode.nodeValue) // " world!"
+alert(element.childNodes.length) // 2
 ```
 
 :::tip TextContent vs InnerText vs InnerHTML
@@ -771,9 +771,9 @@ alert(element.childNodes.length); // 2
   - Do parse HTML.
 
 ```ts
-const textContent = element.textContent;
-const innerText = element.innerText;
-const innerHTML = element.innerHTML;
+const textContent = element.textContent
+const innerText = element.innerText
+const innerHTML = element.innerHTML
 ```
 
 :::
@@ -783,47 +783,47 @@ const innerHTML = element.innerHTML;
 `document` node (`#document`):
 
 ```ts
-alert(document.nodeType); // 9
-alert(document.nodeName); // "#document"
-alert(document.nodeValue); // null
+alert(document.nodeType) // 9
+alert(document.nodeName) // "#document"
+alert(document.nodeValue) // null
 ```
 
 ```ts
-const html = document.documentElement;
-const doctype = document.doctype;
-const head = document.head; // HTML5 head.
-const body = document.body;
+const html = document.documentElement
+const doctype = document.doctype
+const head = document.head // HTML5 head.
+const body = document.body
 
-const title = document.title; // 可修改.
-const domain = document.domain; // 可设置同源域名.
-const url = document.URL;
-const referer = document.referer;
-const charSet = document.characterSet; // HTML5 characterSet.
+const title = document.title // 可修改.
+const domain = document.domain // 可设置同源域名.
+const url = document.URL
+const referer = document.referer
+const charSet = document.characterSet // HTML5 characterSet.
 
-const anchors = documents.anchors;
-const images = documents.images;
-const links = documents.links;
-const forms = documents.forms;
-const formElements = documents.forms[0].elements; // 第一个表单内的所有字段
+const anchors = documents.anchors
+const images = documents.images
+const links = documents.links
+const forms = documents.forms
+const formElements = documents.forms[0].elements // 第一个表单内的所有字段
 
 // HTML5 compatMode:
 if (document.compatMode === 'CSS1Compat') {
-  console.log('Standards mode');
+  console.log('Standards mode')
 } else if (document.compatMode === 'BackCompat') {
-  console.log('Quirks mode');
+  console.log('Quirks mode')
 }
 ```
 
 ```ts
-document.getElementById(id);
+document.getElementById(id)
 // eslint-disable-next-line no-restricted-globals
-document.getElementsByName(name);
-document.getElementsByTagName(tagName);
-document.getElementsByClassName(className); // HTML5
-document.querySelector(cssSelector); // Selectors API
-document.querySelectorAll(cssSelector); // Selectors API
-document.write();
-document.writeln();
+document.getElementsByName(name)
+document.getElementsByTagName(tagName)
+document.getElementsByClassName(className) // HTML5
+document.querySelector(cssSelector) // Selectors API
+document.querySelectorAll(cssSelector) // Selectors API
+document.write()
+document.writeln()
 ```
 
 #### DOM Document Type Node
@@ -833,23 +833,23 @@ document.writeln();
 ```
 
 ```ts
-console.log(document.doctype.name); // "html"
-console.log(document.nodeType); // 10
-console.log(document.doctype.nodeName); // "html"
-console.log(document.doctype.nodeValue); // null
-console.log(document.doctype.publicId); // "-// W3C// DTD HTML 4.01// EN"
-console.log(document.doctype.systemId); // "http://www.w3.org/TR/html4/strict.dtd"
+console.log(document.doctype.name) // "html"
+console.log(document.nodeType) // 10
+console.log(document.doctype.nodeName) // "html"
+console.log(document.doctype.nodeValue) // null
+console.log(document.doctype.publicId) // "-// W3C// DTD HTML 4.01// EN"
+console.log(document.doctype.systemId) // "http://www.w3.org/TR/html4/strict.dtd"
 
 const doctype = document.implementation.createDocumentType(
   'html',
   '-// W3C// DTD HTML 4.01// EN',
   'http://www.w3.org/TR/html4/strict.dtd'
-);
+)
 const doc = document.implementation.createDocument(
   'http://www.w3.org/1999/xhtml',
   'html',
   doctype
-);
+)
 ```
 
 #### DOM Document Fragment Node
@@ -857,41 +857,41 @@ const doc = document.implementation.createDocument(
 减少 DOM 操作次数, 减少页面渲染次数:
 
 ```ts
-const frag = document.createDocumentFragment();
+const frag = document.createDocumentFragment()
 
-let p;
-let t;
+let p
+let t
 
-p = document.createElement('p');
-t = document.createTextNode('first paragraph');
-p.appendChild(t);
-frag.appendChild(p);
+p = document.createElement('p')
+t = document.createTextNode('first paragraph')
+p.appendChild(t)
+frag.appendChild(p)
 
-p = document.createElement('p');
-t = document.createTextNode('second paragraph');
-p.appendChild(t);
-frag.appendChild(p);
+p = document.createElement('p')
+t = document.createTextNode('second paragraph')
+p.appendChild(t)
+frag.appendChild(p)
 
 // 只渲染一次HTML页面
-document.body.appendChild(frag);
+document.body.appendChild(frag)
 ```
 
 克隆节点进行处理, 处理完毕后再替换原节点:
 
 ```ts
-const oldNode = document.getElementById('result');
-const clone = oldNode.cloneNode(true);
+const oldNode = document.getElementById('result')
+const clone = oldNode.cloneNode(true)
 // work with the clone
 
 // when you're done:
-oldNode.parentNode.replaceChild(clone, oldNode);
+oldNode.parentNode.replaceChild(clone, oldNode)
 ```
 
 Parse HTML:
 
 ```ts
-const range = document.createRange();
-const parse = range.createContextualFragment.bind(range);
+const range = document.createRange()
+const parse = range.createContextualFragment.bind(range)
 
 parse(`<ol>
   <li>a</li>
@@ -900,19 +900,19 @@ parse(`<ol>
 <ol>
   <li>c</li>
   <li>d</li>
-</ol>`);
+</ol>`)
 
 function parseHTML(string) {
-  const context = document.implementation.createHTMLDocument();
+  const context = document.implementation.createHTMLDocument()
 
   // Set the base href for the created document so any parsed elements with URLs
   // are based on the document's URL
-  const base = context.createElement('base');
-  base.href = document.location.href;
-  context.head.appendChild(base);
+  const base = context.createElement('base')
+  base.href = document.location.href
+  context.head.appendChild(base)
 
-  context.body.innerHTML = string;
-  return context.body.children;
+  context.body.innerHTML = string
+  return context.body.children
 }
 ```
 
@@ -928,19 +928,19 @@ function parseHTML(string) {
 | insertAdjacentHTML | No   | Yes  | Yes  | Yes | Preserves       | Careful |
 
 ```ts
-const testDiv = document.getElementById('testDiv');
+const testDiv = document.getElementById('testDiv')
 
-const para = document.createElement('p');
-testDiv.appendChild(para);
+const para = document.createElement('p')
+testDiv.appendChild(para)
 
-const txt = document.createTextNode('Hello World');
-para.appendChild(txt);
+const txt = document.createTextNode('Hello World')
+para.appendChild(txt)
 ```
 
 `innerHTML`: non-concrete, including all types of childNodes:
 
 ```ts
-div.innerHTML = '<p>Test<em>test</em>Test.</p>';
+div.innerHTML = '<p>Test<em>test</em>Test.</p>'
 // <div>
 //   <p>Test<em>test</em>Test.</p>
 // </div>
@@ -951,40 +951,40 @@ div.innerHTML = '<p>Test<em>test</em>Test.</p>';
 ```ts
 // BAD
 for (const value of values) {
-  ul.innerHTML += `<li>${value}</li>`; // 别这样做！
+  ul.innerHTML += `<li>${value}</li>` // 别这样做！
 }
 
 // GOOD
-let itemsHtml = '';
+let itemsHtml = ''
 for (const value of values) {
-  itemsHtml += `<li>${value}</li>`;
+  itemsHtml += `<li>${value}</li>`
 }
-ul.innerHTML = itemsHtml;
+ul.innerHTML = itemsHtml
 
 // BEST
-ul.innerHTML = values.map(value => `<li>${value}</li>`).join('');
+ul.innerHTML = values.map(value => `<li>${value}</li>`).join('')
 ```
 
 #### Insert DOM Node
 
 ```ts
 // Append
-el.appendChild(newEl);
+el.appendChild(newEl)
 
 // Prepend
-el.insertBefore(newEl, el.firstChild);
+el.insertBefore(newEl, el.firstChild)
 
 // InsertBefore
-el.parentNode.insertBefore(newEl, el);
+el.parentNode.insertBefore(newEl, el)
 
 // InsertAfter
 function insertAfter(newElement, targetElement) {
-  const parent = targetElement.parentNode;
+  const parent = targetElement.parentNode
 
   if (parent.lastChild === targetElement) {
-    parent.appendChild(newElement);
+    parent.appendChild(newElement)
   } else {
-    parent.insertBefore(newElement, targetElement.nextSibling);
+    parent.insertBefore(newElement, targetElement.nextSibling)
   }
 }
 ```
@@ -1006,51 +1006,51 @@ function insertAfter(newElement, targetElement) {
 // <!-- beforeend -->
 // </p>
 // <!-- afterend -->
-const p = document.querySelector('p');
+const p = document.querySelector('p')
 
-p.insertAdjacentHTML('beforebegin', '<a></a>');
-p.insertAdjacentText('afterbegin', 'foo');
+p.insertAdjacentHTML('beforebegin', '<a></a>')
+p.insertAdjacentText('afterbegin', 'foo')
 
 // simply be moved element, not copied element
-p.insertAdjacentElement('beforebegin', link);
+p.insertAdjacentElement('beforebegin', link)
 ```
 
 #### Replace DOM Node
 
 ```ts
-node.replaceChild(document.createTextNode(text), node.firstChild);
-node.replaceChildren(...nodeList);
+node.replaceChild(document.createTextNode(text), node.firstChild)
+node.replaceChildren(...nodeList)
 ```
 
 #### Remove DOM Node
 
 ```ts
 // 删除第一个子节点
-const formerFirstChild = someNode.removeChild(someNode.firstChild);
+const formerFirstChild = someNode.removeChild(someNode.firstChild)
 
 // 删除最后一个子节点
-const formerLastChild = someNode.removeChild(someNode.lastChild);
+const formerLastChild = someNode.removeChild(someNode.lastChild)
 
 while (div.firstChild) {
-  div.removeChild(div.firstChild);
+  div.removeChild(div.firstChild)
 }
 
 // Remove self
-el.parentNode.removeChild(el);
-el.remove();
+el.parentNode.removeChild(el)
+el.remove()
 ```
 
 #### Traverse DOM Node
 
 ```ts
-const parent = node.parentNode;
-const children = node.childNodes;
-const first = node.firstChild;
-const last = node.lastChild;
-const previous = node.previousSibling;
-const next = node.nextSibling;
+const parent = node.parentNode
+const children = node.childNodes
+const first = node.firstChild
+const last = node.lastChild
+const previous = node.previousSibling
+const next = node.nextSibling
 
-node.matches(selector);
+node.matches(selector)
 ```
 
 [Element Traversal API](https://www.w3.org/TR/ElementTraversal):
@@ -1059,72 +1059,72 @@ For instance,
 in `childNodes` can see both text nodes, element nodes, and even comment nodes.
 
 ```ts
-const count = el.childElementCount;
-const parent = el.parentElement;
-const children = el.children;
-const first = el.firstElementChild;
-const last = el.lastElementChild;
-const previous = el.previousElementSibling;
-const next = el.nextElementSibling;
+const count = el.childElementCount
+const parent = el.parentElement
+const children = el.children
+const first = el.firstElementChild
+const last = el.lastElementChild
+const previous = el.previousElementSibling
+const next = el.nextElementSibling
 
-el.matches(selector);
+el.matches(selector)
 ```
 
 NodeList is iterable:
 
 ```ts
-const elements = document.querySelectorAll('div');
+const elements = document.querySelectorAll('div')
 
 for (const element of elements) {
-  console.log(element);
+  console.log(element)
 }
 ```
 
 [Node Iterator](https://developer.mozilla.org/docs/Web/API/NodeIterator):
 
 ```ts
-const div = document.getElementById('div1');
+const div = document.getElementById('div1')
 const filter = function (node) {
   return node.tagName.toLowerCase() === 'li'
     ? NodeFilter.FILTER_ACCEPT
-    : NodeFilter.FILTER_SKIP;
-};
+    : NodeFilter.FILTER_SKIP
+}
 const iterator = document.createNodeIterator(
   div,
   NodeFilter.SHOW_ELEMENT,
   filter,
   false
-);
+)
 
 for (
   let node = iterator.nextNode();
   node !== null;
   node = iterator.nextNode()
 ) {
-  console.log(node.tagName); // 输出标签名
+  console.log(node.tagName) // 输出标签名
 }
 ```
 
 [Tree Walker](https://developer.mozilla.org/docs/Web/API/TreeWalker):
 
 ```ts
-const div = document.getElementById('div1');
+const div = document.getElementById('div1')
 const walker = document.createTreeWalker(
   div,
   NodeFilter.SHOW_ELEMENT,
   null,
   false
-);
+)
 
-walker.firstChild(); // 前往<p>
-walker.nextSibling(); // 前往<ul>
+walker.firstChild() // 前往<p>
+walker.nextSibling() // 前往<ul>
 
 for (
   let node = walker.firstChild();
   node !== null;
   node = walker.nextSibling()
 ) {
-  console.log(node.tagName); // 遍历 <li>
+  console.log(node.tagName) // 遍历 <li>
 }
 ```
 
@@ -1146,15 +1146,15 @@ for (
 HTML attributes 设置对应的 DOM properties 初始值.
 
 ```ts
-alert(div.getAttribute('id')); // "myDiv" default div.id
-alert(div.getAttribute('class')); // "bd" default div.class
-div.setAttribute('id', 'someOtherId');
-div.setAttribute('class', 'ft');
-div.removeAttribute('id');
-div.removeAttribute('class');
+alert(div.getAttribute('id')) // "myDiv" default div.id
+alert(div.getAttribute('class')) // "bd" default div.class
+div.setAttribute('id', 'someOtherId')
+div.setAttribute('class', 'ft')
+div.removeAttribute('id')
+div.removeAttribute('class')
 
 // `data-src`
-console.log(el.dataset.src);
+console.log(el.dataset.src)
 ```
 
 #### Select DOM Node
@@ -1201,47 +1201,47 @@ console.log(el.dataset.src);
 ```
 
 ```ts
-const p1 = document.getElementById('p1');
-const helloNode = p1.firstChild.firstChild;
-const worldNode = p1.lastChild;
-const range = document.createRange();
+const p1 = document.getElementById('p1')
+const helloNode = p1.firstChild.firstChild
+const worldNode = p1.lastChild
+const range = document.createRange()
 
-range.setStart(helloNode, 2);
-range.setEnd(worldNode, 3);
-const fragment1 = range.cloneContents(); // clone
-const fragment2 = range.extractContents(); // remove and return
+range.setStart(helloNode, 2)
+range.setEnd(worldNode, 3)
+const fragment1 = range.cloneContents() // clone
+const fragment2 = range.extractContents() // remove and return
 
-p1.parentNode.appendChild(fragment1);
-p1.parentNode.appendChild(fragment2);
+p1.parentNode.appendChild(fragment1)
+p1.parentNode.appendChild(fragment2)
 ```
 
 ```ts
-const p1 = document.getElementById('p1');
-const helloNode = p1.firstChild.firstChild;
-const worldNode = p1.lastChild;
-const range = document.createRange();
+const p1 = document.getElementById('p1')
+const helloNode = p1.firstChild.firstChild
+const worldNode = p1.lastChild
+const range = document.createRange()
 
-const span = document.createElement('span');
-span.style.color = 'red';
-span.appendChild(document.createTextNode('Inserted text'));
+const span = document.createElement('span')
+span.style.color = 'red'
+span.appendChild(document.createTextNode('Inserted text'))
 
-range.setStart(helloNode, 2);
-range.setEnd(worldNode, 3);
-range.insertNode(span);
+range.setStart(helloNode, 2)
+range.setEnd(worldNode, 3)
+range.insertNode(span)
 // <p id="p1"><b>He<span style="color: red">Inserted text</span>llo</b> world</p>
 ```
 
 ```ts
-const p1 = document.getElementById('p1');
-const helloNode = p1.firstChild.firstChild;
-const worldNode = p1.lastChild;
-const range = document.createRange();
+const p1 = document.getElementById('p1')
+const helloNode = p1.firstChild.firstChild
+const worldNode = p1.lastChild
+const range = document.createRange()
 
-const span = document.createElement('span');
-span.style.backgroundColor = 'yellow';
+const span = document.createElement('span')
+span.style.backgroundColor = 'yellow'
 
-range.selectNode(helloNode);
-range.surroundContents(span);
+range.selectNode(helloNode)
+range.surroundContents(span)
 // <p><b><span style="background-color:yellow">Hello</span></b> world!</p>
 ```
 
@@ -1249,26 +1249,26 @@ range.surroundContents(span);
 
 ```ts
 function loadScript(url) {
-  const script = document.createElement('script');
-  script.src = url;
-  script.async = true;
-  document.body.appendChild(script);
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  document.body.appendChild(script)
 }
 ```
 
 ```ts
 function loadScriptString(code) {
-  const script = document.createElement('script');
-  script.async = true;
-  script.type = 'text/javascript';
+  const script = document.createElement('script')
+  script.async = true
+  script.type = 'text/javascript'
 
   try {
-    script.appendChild(document.createTextNode(code));
+    script.appendChild(document.createTextNode(code))
   } catch (ex) {
-    script.text = code;
+    script.text = code
   }
 
-  document.body.appendChild(script);
+  document.body.appendChild(script)
 }
 ```
 
@@ -1283,29 +1283,29 @@ function loadScriptString(code) {
 
 ```ts
 function loadStyles(url) {
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.type = 'text/css';
-  link.href = url;
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.type = 'text/css'
+  link.href = url
 
-  const head = document.getElementsByTagName('head')[0];
-  head.appendChild(link);
+  const head = document.getElementsByTagName('head')[0]
+  head.appendChild(link)
 }
 ```
 
 ```ts
 function loadStyleString(css) {
-  const style = document.createElement('style');
-  style.type = 'text/css';
+  const style = document.createElement('style')
+  style.type = 'text/css'
 
   try {
-    style.appendChild(document.createTextNode(css));
+    style.appendChild(document.createTextNode(css))
   } catch (ex) {
-    style.styleSheet.cssText = css;
+    style.styleSheet.cssText = css
   }
 
-  const head = document.getElementsByTagName('head')[0];
-  head.appendChild(style);
+  const head = document.getElementsByTagName('head')[0]
+  head.appendChild(style)
 }
 ```
 
@@ -1348,30 +1348,30 @@ function loadStyleString(css) {
 
 ```ts
 // 创建表格
-const table = document.createElement('table');
-table.border = 1;
-table.width = '100%';
+const table = document.createElement('table')
+table.border = 1
+table.width = '100%'
 
 // 创建表体
-const tbody = document.createElement('tbody');
-table.appendChild(tbody);
+const tbody = document.createElement('tbody')
+table.appendChild(tbody)
 
 // 创建第一行
-tbody.insertRow(0);
-tbody.rows[0].insertCell(0);
-tbody.rows[0].cells[0].appendChild(document.createTextNode('Cell 1, 1'));
-tbody.rows[0].insertCell(1);
-tbody.rows[0].cells[1].appendChild(document.createTextNode('Cell 2, 1'));
+tbody.insertRow(0)
+tbody.rows[0].insertCell(0)
+tbody.rows[0].cells[0].appendChild(document.createTextNode('Cell 1, 1'))
+tbody.rows[0].insertCell(1)
+tbody.rows[0].cells[1].appendChild(document.createTextNode('Cell 2, 1'))
 
 // 创建第二行
-tbody.insertRow(1);
-tbody.rows[1].insertCell(0);
-tbody.rows[1].cells[0].appendChild(document.createTextNode('Cell 1, 2'));
-tbody.rows[1].insertCell(1);
-tbody.rows[1].cells[1].appendChild(document.createTextNode('Cell 2, 2'));
+tbody.insertRow(1)
+tbody.rows[1].insertCell(0)
+tbody.rows[1].cells[0].appendChild(document.createTextNode('Cell 1, 2'))
+tbody.rows[1].insertCell(1)
+tbody.rows[1].cells[1].appendChild(document.createTextNode('Cell 2, 2'))
 
 // 把表格添加到文档主体
-document.body.appendChild(table);
+document.body.appendChild(table)
 ```
 
 #### Iframe
@@ -1399,9 +1399,9 @@ document.body.appendChild(table);
 ```
 
 ```ts
-const iframeDocument = iframe.contentDocument;
-const iframeStyles = iframe.contentDocument.querySelectorAll('.css');
-iframe.contentWindow.postMessage('message', '*');
+const iframeDocument = iframe.contentDocument
+const iframeStyles = iframe.contentDocument.querySelectorAll('.css')
+iframe.contentWindow.postMessage('message', '*')
 ```
 
 ### CSSOM
@@ -1415,12 +1415,12 @@ It allows users to read and modify CSS style dynamically.
 
 ```ts
 interface Element {
-  style: CSSStyleDeclaration;
+  style: CSSStyleDeclaration
 }
 
-const style = element.style.XX;
-const font = element.style.fontFamily;
-const mt = element.style.marginTopWidth;
+const style = element.style.XX
+const font = element.style.fontFamily
+const mt = element.style.marginTopWidth
 ```
 
 #### Styles Getter and Setter
@@ -1434,23 +1434,23 @@ const mt = element.style.marginTopWidth;
 - `removeProperty(name)`.
 
 ```ts
-const box = document.querySelector('.box');
+const box = document.querySelector('.box')
 
-box.style.setProperty('color', 'orange');
-box.style.setProperty('font-family', 'Georgia, serif');
-op.innerHTML = box.style.getPropertyValue('color');
-op2.innerHTML = `${box.style.item(0)}, ${box.style.item(1)}`;
+box.style.setProperty('color', 'orange')
+box.style.setProperty('font-family', 'Georgia, serif')
+op.innerHTML = box.style.getPropertyValue('color')
+op2.innerHTML = `${box.style.item(0)}, ${box.style.item(1)}`
 
-box.style.setProperty('font-size', '1.5em');
-box.style.item(0); // "font-size"
+box.style.setProperty('font-size', '1.5em')
+box.style.item(0) // "font-size"
 
-document.body.style.removeProperty('font-size');
-document.body.style.item(0); // ""
+document.body.style.removeProperty('font-size')
+document.body.style.item(0) // ""
 
-myDiv.style.cssText = 'width: 25px; height: 100px; background-color: green';
+myDiv.style.cssText = 'width: 25px; height: 100px; background-color: green'
 
 for (let i = 0, len = myDiv.style.length; i < len; i++) {
-  console.log(myDiv.style[i]); // 或者用 myDiv.style.item(i)
+  console.log(myDiv.style[i]) // 或者用 myDiv.style.item(i)
 }
 ```
 
@@ -1462,37 +1462,37 @@ for (let i = 0, len = myDiv.style.length; i < len; i++) {
 - 在所有浏览器中计算样式都是**只读**的, 不能修改 `getComputedStyle()` 方法返回的对象.
 
 ```ts
-const background = window.getComputedStyle(document.body).background;
+const background = window.getComputedStyle(document.body).background
 
 // dot notation, same as above
-const backgroundColor = window.getComputedStyle(el).backgroundColor;
+const backgroundColor = window.getComputedStyle(el).backgroundColor
 
 // square bracket notation
-const backgroundColor = window.getComputedStyle(el)['background-color'];
+const backgroundColor = window.getComputedStyle(el)['background-color']
 
 // using getPropertyValue()
 // can get css variables property too
-window.getComputedStyle(el).getPropertyValue('background-color');
+window.getComputedStyle(el).getPropertyValue('background-color')
 ```
 
 #### CSS Class List
 
 ```ts
-element.classList.add('class');
-element.classList.remove('class');
-element.classList.toggle('class');
-element.classList.contains('class');
+element.classList.add('class')
+element.classList.remove('class')
+element.classList.toggle('class')
+element.classList.contains('class')
 ```
 
 ```ts
 function addClassPolyfill(element, value) {
   if (!element.className) {
-    element.className = value;
+    element.className = value
   } else {
-    newClassName = element.className;
-    newClassName += ' ';
-    newClassName += value;
-    element.className = newClassName;
+    newClassName = element.className
+    newClassName += ' '
+    newClassName += value
+    element.className = newClassName
   }
 }
 ```
@@ -1526,40 +1526,40 @@ function addClassPolyfill(element, value) {
 - parentStyleSheet: 包含当前规则的样式表.
 
 ```ts
-const myRules = document.styleSheets[0].cssRules;
-const p = document.querySelector('p');
+const myRules = document.styleSheets[0].cssRules
+const p = document.querySelector('p')
 
 for (i of myRules) {
   if (i.type === 1) {
-    p.innerHTML += `<code>${i.selectorText}</code><br>`;
+    p.innerHTML += `<code>${i.selectorText}</code><br>`
   }
 
   if (i.selectorText === 'a:hover') {
-    i.selectorText = 'a:hover, a:active';
+    i.selectorText = 'a:hover, a:active'
   }
 
-  const myStyle = i.style;
+  const myStyle = i.style
 
   // Set the bg color on the body
-  myStyle.setProperty('background-color', 'peachPuff');
+  myStyle.setProperty('background-color', 'peachPuff')
 
   // Get the font size of the body
-  myStyle.getPropertyValue('font-size');
+  myStyle.getPropertyValue('font-size')
 
   // Get the 5th item in the body's style rule
-  myStyle.item(5);
+  myStyle.item(5)
 
   // Log the current length of the body style rule (8)
-  console.log(myStyle.length);
+  console.log(myStyle.length)
 
   // Remove the line height
-  myStyle.removeProperty('line-height');
+  myStyle.removeProperty('line-height')
 
   // log the length again (7)
-  console.log(myStyle.length);
+  console.log(myStyle.length)
 
   // Check priority of font-family (empty string)
-  myStyle.getPropertyPriority('font-family');
+  myStyle.getPropertyPriority('font-family')
 }
 ```
 
@@ -1569,15 +1569,15 @@ for (i of myRules) {
 - Nested `cssRules`.
 
 ```ts
-const myRules = document.styleSheets[0].cssRules;
-const p = document.querySelector('.output');
+const myRules = document.styleSheets[0].cssRules
+const p = document.querySelector('.output')
 
 for (i of myRules) {
   if (i.type === 4) {
-    p.innerHTML += `<code>${i.conditionText}</code><br>`;
+    p.innerHTML += `<code>${i.conditionText}</code><br>`
 
     for (j of i.cssRules) {
-      p.innerHTML += `<code>${j.selectorText}</code><br>`;
+      p.innerHTML += `<code>${j.selectorText}</code><br>`
     }
   }
 }
@@ -1590,15 +1590,15 @@ for (i of myRules) {
 - Nested `cssRules`.
 
 ```ts
-const myRules = document.styleSheets[0].cssRules;
-const p = document.querySelector('.output');
+const myRules = document.styleSheets[0].cssRules
+const p = document.querySelector('.output')
 
 for (i of myRules) {
   if (i.type === 7) {
-    p.innerHTML += `<code>${i.name}</code><br>`;
+    p.innerHTML += `<code>${i.name}</code><br>`
 
     for (j of i.cssRules) {
-      p.innerHTML += `<code>${j.keyText}</code><br>`;
+      p.innerHTML += `<code>${j.keyText}</code><br>`
     }
   }
 }
@@ -1607,22 +1607,22 @@ for (i of myRules) {
 ##### Manipulate CSS Rules
 
 ```ts
-const myStylesheet = document.styleSheets[0];
-console.log(myStylesheet.cssRules.length); // 8
+const myStylesheet = document.styleSheets[0]
+console.log(myStylesheet.cssRules.length) // 8
 
 document.styleSheets[0].insertRule(
   'article { line-height: 1.5; font-size: 1.5em; }',
   myStylesheet.cssRules.length
-);
-console.log(document.styleSheets[0].cssRules.length); // 9
+)
+console.log(document.styleSheets[0].cssRules.length) // 9
 ```
 
 ```ts
-const myStylesheet = document.styleSheets[0];
-console.log(myStylesheet.cssRules.length); // 8
+const myStylesheet = document.styleSheets[0]
+console.log(myStylesheet.cssRules.length) // 8
 
-myStylesheet.deleteRule(3);
-console.log(myStylesheet.cssRules.length); // 7
+myStylesheet.deleteRule(3)
+console.log(myStylesheet.cssRules.length) // 7
 ```
 
 #### CSS Typed Object Model API
@@ -1634,9 +1634,9 @@ as **typed JavaScript objects** rather than strings.
 [`StylePropertyMap`](https://developer.mozilla.org/docs/Web/API/StylePropertyMap):
 
 ```ts
-const styleMap = document.body.computedStyleMap();
-const cssValue = styleMap.get('line-height');
-const { value, unit } = cssValue;
+const styleMap = document.body.computedStyleMap()
+const cssValue = styleMap.get('line-height')
+const { value, unit } = cssValue
 ```
 
 [`CSSStyleValue`](https://developer.mozilla.org/docs/Web/API/CSSStyleValue):
@@ -1650,9 +1650,9 @@ const { value, unit } = cssValue;
 - [`CSSUnparsedValue`](https://developer.mozilla.org/docs/Web/API/CSSUnparsedValue).
 
 ```ts
-const styleMap = document.querySelector('#myElement').attributeStyleMap;
-styleMap.set('display', new CSSKeywordValue('initial'));
-console.log(myElement.get('display').value); // 'initial'
+const styleMap = document.querySelector('#myElement').attributeStyleMap
+styleMap.set('display', new CSSKeywordValue('initial'))
+console.log(myElement.get('display').value) // 'initial'
 ```
 
 ### DOM Events
@@ -1684,8 +1684,8 @@ console.log(myElement.get('display').value); // 'initial'
 
 ```ts
 function handleEvent(event) {
-  node.matches(event.target); // return false or true
-  node.contains(event.target); // return false or true
+  node.matches(event.target) // return false or true
+  node.contains(event.target) // return false or true
 }
 ```
 
@@ -1707,15 +1707,15 @@ function handleEvent(event) {
 ```ts
 function ready(fn) {
   if (document.readyState !== 'loading') {
-    fn();
+    fn()
   } else {
-    document.addEventListener('DOMContentLoaded', fn);
+    document.addEventListener('DOMContentLoaded', fn)
   }
 }
 
 document.addEventListener('DOMContentLoaded', event => {
-  console.log('DOM fully loaded and parsed.');
-});
+  console.log('DOM fully loaded and parsed.')
+})
 ```
 
 `readystatechange` event:
@@ -1727,41 +1727,41 @@ document.addEventListener('readystatechange', event => {
     document.readyState === 'interactive' ||
     document.readyState === 'complete'
   ) {
-    console.log('Content loaded');
+    console.log('Content loaded')
   } else if (document.readyState === 'loading') {
-    console.log('Loading');
+    console.log('Loading')
   }
-});
+})
 ```
 
 `load` event, 加载完成:
 
 ```ts
 window.addEventListener('load', () => {
-  const image = document.createElement('img');
+  const image = document.createElement('img')
   image.addEventListener('load', event => {
-    console.log(event.target.src);
-  });
-  document.body.appendChild(image);
-  image.src = 'smile.gif';
+    console.log(event.target.src)
+  })
+  document.body.appendChild(image)
+  image.src = 'smile.gif'
 
-  const script = document.createElement('script');
+  const script = document.createElement('script')
   script.addEventListener('load', event => {
-    console.log('Loaded');
-  });
-  script.src = 'example.js';
-  script.async = true;
-  document.body.appendChild(script);
+    console.log('Loaded')
+  })
+  script.src = 'example.js'
+  script.async = true
+  document.body.appendChild(script)
 
-  const link = document.createElement('link');
-  link.type = 'text/css';
-  link.rel = 'stylesheet';
+  const link = document.createElement('link')
+  link.type = 'text/css'
+  link.rel = 'stylesheet'
   link.addEventListener('load', event => {
-    console.log('css loaded');
-  });
-  link.href = 'example.css';
-  document.getElementsByTagName('head')[0].appendChild(link);
-});
+    console.log('css loaded')
+  })
+  link.href = 'example.css'
+  document.getElementsByTagName('head')[0].appendChild(link)
+})
 ```
 
 `visibilitychange` event, 切换标签页时改变网页标题/声音/视频:
@@ -1770,35 +1770,35 @@ window.addEventListener('load', () => {
 window.addEventListener('visibilitychange', () => {
   switch (document.visibilityState) {
     case 'hidden':
-      console.log('Tab隐藏');
-      break;
+      console.log('Tab隐藏')
+      break
     case 'visible':
-      console.log('Tab被聚焦');
-      break;
+      console.log('Tab被聚焦')
+      break
     default:
-      throw new Error('Unsupported visibility!');
+      throw new Error('Unsupported visibility!')
   }
-});
+})
 ```
 
 ```ts
-const videoElement = document.getElementById('videoElement');
+const videoElement = document.getElementById('videoElement')
 
 // AutoPlay the video if application is visible
 if (document.visibilityState === 'visible') {
-  videoElement.play();
+  videoElement.play()
 }
 
 // Handle page visibility change events
 function handleVisibilityChange() {
   if (document.visibilityState === 'hidden') {
-    videoElement.pause();
+    videoElement.pause()
   } else {
-    videoElement.play();
+    videoElement.play()
   }
 }
 
-document.addEventListener('visibilitychange', handleVisibilityChange, false);
+document.addEventListener('visibilitychange', handleVisibilityChange, false)
 ```
 
 - `beforeunload` event.
@@ -1819,70 +1819,70 @@ document.addEventListener('visibilitychange', handleVisibilityChange, false);
 // <form className='validated-form' noValidate onSubmit={onSubmit}>
 
 const onSubmit = event => {
-  event.preventDefault();
+  event.preventDefault()
 
-  const form = event.target;
-  const isValid = form.checkValidity(); // returns true or false
-  const formData = new FormData(form);
+  const form = event.target
+  const isValid = form.checkValidity() // returns true or false
+  const formData = new FormData(form)
 
   const validationMessages = Array.from(formData.keys()).reduce((acc, key) => {
-    acc[key] = form.elements[key].validationMessage;
-    return acc;
-  }, {});
+    acc[key] = form.elements[key].validationMessage
+    return acc
+  }, {})
 
-  setErrors(validationMessages);
+  setErrors(validationMessages)
 
   console.log({
     validationMessages,
     data,
     isValid,
-  });
+  })
 
   if (isValid) {
     // here you do what you need to do if is valid
     const data = Array.from(formData.keys()).reduce((acc, key) => {
-      acc[key] = formData.get(key);
-      return acc;
-    }, {});
+      acc[key] = formData.get(key)
+      return acc
+    }, {})
   } else {
     // apply invalid class
     Array.from(form.elements).forEach(i => {
       if (i.checkValidity()) {
         // field is valid
-        i.parentElement.classList.remove('invalid');
+        i.parentElement.classList.remove('invalid')
       } else {
         // field is invalid
-        i.parentElement.classList.add('invalid');
-        console.log(i.validity);
+        i.parentElement.classList.add('invalid')
+        console.log(i.validity)
       }
-    });
+    })
   }
-};
+}
 ```
 
 ```ts
 document.querySelector('form').addEventListener('submit', event => {
-  const form = event.target;
-  const url = new URL(form.action || window.location.href);
-  const formData = new FormData(form);
-  const searchParameters = new URLSearchParams(formData);
+  const form = event.target
+  const url = new URL(form.action || window.location.href)
+  const formData = new FormData(form)
+  const searchParameters = new URLSearchParams(formData)
 
   const options = {
     method: form.method,
-  };
+  }
 
   if (options.method === 'post') {
     // Modify request body to include form data
     options.body =
-      form.enctype === 'multipart/form-data' ? formData : searchParameters;
+      form.enctype === 'multipart/form-data' ? formData : searchParameters
   } else {
     // Modify URL to include form data
-    url.search = searchParameters;
+    url.search = searchParameters
   }
 
-  fetch(url, options);
-  event.preventDefault();
-});
+  fetch(url, options)
+  event.preventDefault()
+})
 ```
 
 #### Input Events
@@ -1901,9 +1901,9 @@ HTML5 focus management:
 - 默认情况下, `document.activeElement` 在页面刚加载完之后会设置为 `document.body`.
 
 ```ts
-document.getElementById('myButton').focus();
-console.log(document.activeElement === button); // true
-console.log(document.hasFocus()); // true
+document.getElementById('myButton').focus()
+console.log(document.activeElement === button) // true
+console.log(document.hasFocus()) // true
 ```
 
 :::tip Focus Events
@@ -1933,32 +1933,32 @@ console.log(document.hasFocus()); // true
   - `<select />`.
 
 ```ts
-const input = document.querySelector('input');
+const input = document.querySelector('input')
 
 input.addEventListener('change', () => {
   for (const file of Array.from(input.files)) {
-    const reader = new FileReader();
+    const reader = new FileReader()
     reader.addEventListener('load', () => {
-      console.log('File', file.name, 'starts with', reader.result.slice(0, 20));
-    });
-    reader.readAsText(file);
+      console.log('File', file.name, 'starts with', reader.result.slice(0, 20))
+    })
+    reader.readAsText(file)
   }
-});
+})
 ```
 
 ##### Input Select Event
 
 ```ts
-const input = document.querySelector('input');
+const input = document.querySelector('input')
 
 input.addEventListener('select', event => {
-  const log = document.getElementById('log');
+  const log = document.getElementById('log')
   const selection = event.target.value.substring(
     event.target.selectionStart,
     event.target.selectionEnd
-  );
-  log.textContent = `You selected: ${selection}`;
-});
+  )
+  log.textContent = `You selected: ${selection}`
+})
 ```
 
 #### Clipboard Events
@@ -1971,16 +1971,16 @@ input.addEventListener('select', event => {
 - `paste` event.
 
 ```ts
-const source = document.querySelector('div.source');
+const source = document.querySelector('div.source')
 
 source.addEventListener('copy', event => {
-  const selection = document.getSelection();
+  const selection = document.getSelection()
   event.clipboardData.setData(
     'text/plain',
     selection.toString().concat('copyright information')
-  );
-  event.preventDefault();
-});
+  )
+  event.preventDefault()
+})
 ```
 
 #### Mouse Events
@@ -2010,9 +2010,9 @@ Use `element.contains` to check is a better way.
 ```ts
 window.addEventListener('click', event => {
   if (document.getElementById('main').contains(event.target)) {
-    process();
+    process()
   }
-});
+})
 ```
 
 [Drag Event](https://developer.mozilla.org/docs/Web/API/DragEvent):
@@ -2035,11 +2035,11 @@ Key point for implementing DnD widget is
 [Context Menu Event](https://developer.mozilla.org/docs/Web/API/Element/contextmenu_event):
 
 ```ts
-const noContext = document.getElementById('noContextMenu');
+const noContext = document.getElementById('noContextMenu')
 
 noContext.addEventListener('contextmenu', e => {
-  e.preventDefault();
-});
+  e.preventDefault()
+})
 ```
 
 #### Keyboard Events
@@ -2047,40 +2047,40 @@ noContext.addEventListener('contextmenu', e => {
 `keydown`/`keypress`/`keyup` event:
 
 ```ts
-const textbox = document.getElementById('myText');
+const textbox = document.getElementById('myText')
 
 textbox.addEventListener('keyup', event => {
-  console.log(event.charCode || event.keyCode);
-});
+  console.log(event.charCode || event.keyCode)
+})
 ```
 
 [`event.key`](https://developer.mozilla.org/docs/Web/API/KeyboardEvent/key/Key_Values)
 (replace deprecated `event.keyCode`):
 
 ```ts
-'Alt';
-'CapsLock';
-'Control';
-'Fn';
-'Numlock';
-'Shift';
-'Enter';
-'Tab';
-' '; // space bar
+'Alt'
+'CapsLock'
+'Control'
+'Fn'
+'Numlock'
+'Shift'
+'Enter'
+'Tab'
+' ' // space bar
 
-'ArrowDown';
-'ArrowLeft';
-'ArrowRight';
-'ArrowUp';
-'Home';
-'End';
-'PageDOwn';
-'PageUp';
+'ArrowDown'
+'ArrowLeft'
+'ArrowRight'
+'ArrowUp'
+'Home'
+'End'
+'PageDOwn'
+'PageUp'
 
-'Backspace';
-'Delete';
-'Redo';
-'Undo';
+'Backspace'
+'Delete'
+'Redo'
+'Undo'
 ```
 
 #### Device Events
@@ -2103,27 +2103,27 @@ events:
 
 ```ts
 interface Pointer {
-  startTouch: Touch;
-  startTime: number;
-  status: string;
-  element: TouchEventTarget;
-  lastTouch?: Touch;
-  lastTime?: number;
-  deltaX?: number;
-  deltaY?: number;
-  duration?: number;
-  distance?: number;
-  isVertical?: boolean;
+  startTouch: Touch
+  startTime: number
+  status: string
+  element: TouchEventTarget
+  lastTouch?: Touch
+  lastTime?: number
+  deltaX?: number
+  deltaY?: number
+  duration?: number
+  distance?: number
+  isVertical?: boolean
 }
 
-type TouchEventTarget = HTMLDivElement | EventTarget;
-type TouchEventHandler = (pointer: Pointer, touch: Touch) => void;
+type TouchEventTarget = HTMLDivElement | EventTarget
+type TouchEventHandler = (pointer: Pointer, touch: Touch) => void
 
 class Recognizer {
-  pointers: Map<Touch['identifier'], Pointer>;
+  pointers: Map<Touch['identifier'], Pointer>
 
   constructor() {
-    this.pointers = new Map();
+    this.pointers = new Map()
   }
 
   start(event: TouchEvent, callback?: TouchEventHandler) {
@@ -2131,79 +2131,79 @@ class Recognizer {
     // targetTouches: 当前对象上所有触摸点的列表.
     // changedTouches: 涉及当前事件的触摸点的列表.
     for (let i = 0; i < event.changedTouches.length; i++) {
-      const touch = event.changedTouches[i];
+      const touch = event.changedTouches[i]
       const pointer: Pointer = {
         startTouch: touch,
         startTime: Date.now(),
         status: 'tapping',
         element: event.target,
-      };
-      this.pointers.set(touch.identifier, pointer);
-      if (callback) callback(pointer, touch);
+      }
+      this.pointers.set(touch.identifier, pointer)
+      if (callback) callback(pointer, touch)
     }
   }
 
   move(event: TouchEvent, callback?: TouchEventHandler) {
     for (let i = 0; i < event.changedTouches.length; i++) {
-      const touch = event.changedTouches[i];
-      const pointer = this.pointers.get(touch.identifier);
+      const touch = event.changedTouches[i]
+      const pointer = this.pointers.get(touch.identifier)
 
       if (!pointer) {
-        return;
+        return
       }
 
       if (!pointer.lastTouch) {
-        pointer.lastTouch = pointer.startTouch;
-        pointer.lastTime = pointer.startTime;
-        pointer.deltaX = 0;
-        pointer.deltaY = 0;
-        pointer.duration = 0;
-        pointer.distance = 0;
+        pointer.lastTouch = pointer.startTouch
+        pointer.lastTime = pointer.startTime
+        pointer.deltaX = 0
+        pointer.deltaY = 0
+        pointer.duration = 0
+        pointer.distance = 0
       }
 
-      let time = Date.now() - pointer.lastTime;
+      let time = Date.now() - pointer.lastTime
 
       if (time > 0) {
-        const RECORD_DURATION = 70;
+        const RECORD_DURATION = 70
 
         if (time > RECORD_DURATION) {
-          time = RECORD_DURATION;
+          time = RECORD_DURATION
         }
 
         if (pointer.duration + time > RECORD_DURATION) {
-          pointer.duration = RECORD_DURATION - time;
+          pointer.duration = RECORD_DURATION - time
         }
 
-        pointer.duration += time;
-        pointer.lastTouch = touch;
-        pointer.lastTime = Date.now();
-        pointer.deltaX = touch.clientX - pointer.startTouch.clientX;
-        pointer.deltaY = touch.clientY - pointer.startTouch.clientY;
-        const x = pointer.deltaX * pointer.deltaX;
-        const y = pointer.deltaY * pointer.deltaY;
-        pointer.distance = Math.sqrt(x + y);
-        pointer.isVertical = x < y;
+        pointer.duration += time
+        pointer.lastTouch = touch
+        pointer.lastTime = Date.now()
+        pointer.deltaX = touch.clientX - pointer.startTouch.clientX
+        pointer.deltaY = touch.clientY - pointer.startTouch.clientY
+        const x = pointer.deltaX * pointer.deltaX
+        const y = pointer.deltaY * pointer.deltaY
+        pointer.distance = Math.sqrt(x + y)
+        pointer.isVertical = x < y
 
-        if (callback) callback(pointer, touch);
+        if (callback) callback(pointer, touch)
       }
     }
   }
 
   end(event: TouchEvent, callback?: TouchEventHandler) {
     for (let i = 0; i < event.changedTouches.length; i++) {
-      const touch = event.changedTouches[i];
-      const id = touch.identifier;
-      const pointer = this.pointers.get(id);
+      const touch = event.changedTouches[i]
+      const id = touch.identifier
+      const pointer = this.pointers.get(id)
 
-      if (!pointer) continue;
-      if (callback) callback(pointer, touch);
+      if (!pointer) continue
+      if (callback) callback(pointer, touch)
 
-      this.pointers.delete(id);
+      this.pointers.delete(id)
     }
   }
 
   cancel(event: TouchEvent, callback?: TouchEventHandler) {
-    this.end(event, callback);
+    this.end(event, callback)
   }
 
   fire(elem: TouchEventTarget, type: string, props: EventInit) {
@@ -2212,40 +2212,40 @@ class Recognizer {
         bubbles: true,
         cancelable: true,
         ...props,
-      });
-      elem.dispatchEvent(event);
+      })
+      elem.dispatchEvent(event)
     }
   }
 
   static bind(el: TouchEventTarget, recognizer: Recognizer) {
     function move(event: TouchEvent) {
-      recognizer.move(event);
+      recognizer.move(event)
     }
 
     function end(event: TouchEvent) {
-      recognizer.end(event);
-      document.removeEventListener('touchmove', move);
-      document.removeEventListener('touchend', end);
-      document.removeEventListener('touchcancel', cancel);
+      recognizer.end(event)
+      document.removeEventListener('touchmove', move)
+      document.removeEventListener('touchend', end)
+      document.removeEventListener('touchcancel', cancel)
     }
 
     function cancel(event: TouchEvent) {
-      recognizer.cancel(event);
-      document.removeEventListener('touchmove', move);
-      document.removeEventListener('touchend', end);
-      document.removeEventListener('touchcancel', cancel);
+      recognizer.cancel(event)
+      document.removeEventListener('touchmove', move)
+      document.removeEventListener('touchend', end)
+      document.removeEventListener('touchcancel', cancel)
     }
 
     el.addEventListener('touchstart', function (event: TouchEvent) {
-      recognizer.start(event);
-      document.addEventListener('touchmove', move);
-      document.addEventListener('touchend', end);
-      document.addEventListener('touchcancel', cancel);
-    });
+      recognizer.start(event)
+      document.addEventListener('touchmove', move)
+      document.addEventListener('touchend', end)
+      document.addEventListener('touchcancel', cancel)
+    })
   }
 }
 
-export default Recognizer;
+export default Recognizer
 ```
 
 #### Dispatch Events
@@ -2253,23 +2253,23 @@ export default Recognizer;
 Dispatch `MouseEvent`:
 
 ```ts
-const btn = document.getElementById('myBtn');
+const btn = document.getElementById('myBtn')
 
 // 创建 event 对象
 const event = new MouseEvent('click', {
   bubbles: true,
   cancelable: true,
   view: document.defaultView,
-});
+})
 
 // 触发事件
-btn.dispatchEvent(event);
+btn.dispatchEvent(event)
 ```
 
 Dispatch `KeyboardEvent`:
 
 ```ts
-const textbox = document.getElementById('myTextbox');
+const textbox = document.getElementById('myTextbox')
 
 // 按照 DOM3 的方式创建 event 对象
 if (document.implementation.hasFeature('KeyboardEvents', '3.0')) {
@@ -2281,31 +2281,31 @@ if (document.implementation.hasFeature('KeyboardEvents', '3.0')) {
     key: 'a',
     location: 0,
     shiftKey: true,
-  });
+  })
 
   // 触发事件
-  textbox.dispatchEvent(event);
+  textbox.dispatchEvent(event)
 }
 ```
 
 Dispatch `CustomEvent`:
 
 ```ts
-const div = document.getElementById('myDiv');
+const div = document.getElementById('myDiv')
 div.addEventListener('myEvent', event => {
-  console.log(`DIV: ${event.detail}`);
-});
+  console.log(`DIV: ${event.detail}`)
+})
 document.addEventListener('myEvent', event => {
-  console.log(`DOCUMENT: ${event.detail}`);
-});
+  console.log(`DOCUMENT: ${event.detail}`)
+})
 
 if (document.implementation.hasFeature('CustomEvents', '3.0')) {
   const event = new CustomEvent('myEvent', {
     bubbles: true,
     cancelable: true,
     detail: 'Hello world!',
-  });
-  div.dispatchEvent(event);
+  })
+  div.dispatchEvent(event)
 }
 ```
 
@@ -2314,59 +2314,59 @@ if (document.implementation.hasFeature('CustomEvents', '3.0')) {
 ```ts
 class EventUtil {
   static getEvent(event) {
-    return event || window.event;
+    return event || window.event
   }
 
   static getTarget(event) {
-    return event.target || event.srcElement;
+    return event.target || event.srcElement
   }
 
   static getRelatedTarget(event) {
     // For `mouseover` and `mouseout` event:
     if (event.relatedTarget) {
-      return event.relatedTarget;
+      return event.relatedTarget
     } else if (event.toElement) {
-      return event.toElement;
+      return event.toElement
     } else if (event.fromElement) {
-      return event.fromElement;
+      return event.fromElement
     } else {
-      return null;
+      return null
     }
   }
 
   static preventDefault(event) {
     if (event.preventDefault) {
-      event.preventDefault();
+      event.preventDefault()
     } else {
-      event.returnValue = false;
+      event.returnValue = false
     }
   }
 
   static stopPropagation(event) {
     if (event.stopPropagation) {
-      event.stopPropagation();
+      event.stopPropagation()
     } else {
-      event.cancelBubble = true;
+      event.cancelBubble = true
     }
   }
 
   static addHandler(element, type, handler) {
     if (element.addEventListener) {
-      element.addEventListener(type, handler, false);
+      element.addEventListener(type, handler, false)
     } else if (element.attachEvent) {
-      element.attachEvent(`on${type}`, handler);
+      element.attachEvent(`on${type}`, handler)
     } else {
-      element[`on${type}`] = handler;
+      element[`on${type}`] = handler
     }
   }
 
   static removeHandler(element, type, handler) {
     if (element.removeEventListener) {
-      element.removeEventListener(type, handler, false);
+      element.removeEventListener(type, handler, false)
     } else if (element.detachEvent) {
-      element.detachEvent(`on${type}`, handler);
+      element.detachEvent(`on${type}`, handler)
     } else {
-      element[`on${type}`] = null;
+      element[`on${type}`] = null
     }
   }
 }
@@ -2391,20 +2391,20 @@ class EventUtil {
 const width =
   window.innerWidth ||
   document.documentElement.clientWidth ||
-  document.body.clientWidth;
+  document.body.clientWidth
 const height =
   window.innerHeight ||
   document.documentElement.clientHeight ||
-  document.body.clientHeight;
+  document.body.clientHeight
 ```
 
 ```ts
 // 缩放到 100×100
-window.resizeTo(100, 100);
+window.resizeTo(100, 100)
 // 缩放到 200×150
-window.resizeBy(100, 50);
+window.resizeBy(100, 50)
 // 缩放到 300×300
-window.resizeTo(300, 300);
+window.resizeTo(300, 300)
 ```
 
 :::tip DOM Rect API
@@ -2419,18 +2419,18 @@ while getBoundingClientRect() returns the rendering width and height.
 
 ```ts
 const isElementInViewport = el => {
-  const { top, height, left, width } = el.getBoundingClientRect();
+  const { top, height, left, width } = el.getBoundingClientRect()
   const w =
     window.innerWidth ||
     document.documentElement.clientWidth ||
-    document.body.clientWidth;
+    document.body.clientWidth
   const h =
     window.innerHeight ||
     document.documentElement.clientHeight ||
-    document.body.clientHeight;
+    document.body.clientHeight
 
-  return top <= h && top + height >= 0 && left <= w && left + width >= 0;
-};
+  return top <= h && top + height >= 0 && left <= w && left + width >= 0
+}
 ```
 
 #### DOM Left and Top
@@ -2447,39 +2447,39 @@ const isElementInViewport = el => {
 
 ```ts
 function getElementLeft(element) {
-  let actualLeft = element.offsetLeft;
-  let current = element.offsetParent;
+  let actualLeft = element.offsetLeft
+  let current = element.offsetParent
 
   while (current !== null) {
-    actualLeft += current.offsetLeft;
-    current = current.offsetParent;
+    actualLeft += current.offsetLeft
+    current = current.offsetParent
   }
 
-  return actualLeft;
+  return actualLeft
 }
 
 function getElementTop(element) {
-  let actualTop = element.offsetTop;
-  let current = element.offsetParent;
+  let actualTop = element.offsetTop
+  let current = element.offsetParent
 
   while (current !== null) {
-    actualTop += current.offsetTop;
-    current = current.offsetParent;
+    actualTop += current.offsetTop
+    current = current.offsetParent
   }
 
-  return actualTop;
+  return actualTop
 }
 ```
 
 ```ts
 // 把窗口移动到左上角
-window.moveTo(0, 0);
+window.moveTo(0, 0)
 // 把窗口向下移动 100 像素
-window.moveBy(0, 100);
+window.moveBy(0, 100)
 // 把窗口移动到坐标位置 (200, 300)
-window.moveTo(200, 300);
+window.moveTo(200, 300)
 // 把窗口向左移动 50 像素
-window.moveBy(-50, 0);
+window.moveBy(-50, 0)
 ```
 
 #### DOM Scroll Size
@@ -2495,46 +2495,46 @@ window.moveBy(-50, 0);
 const x =
   window.pageXOffset ||
   document.documentElement.scrollLeft ||
-  document.body.scrollLeft;
+  document.body.scrollLeft
 const y =
   window.pageYOffset ||
   document.documentElement.scrollTop ||
-  document.body.scrollTop;
+  document.body.scrollTop
 ```
 
 ```ts
 if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
-  console.log('Scrolled to Bottom!');
+  console.log('Scrolled to Bottom!')
 }
 ```
 
 ```ts
 // 相对于当前视口向下滚动 100 像素
-window.scrollBy(0, 100);
+window.scrollBy(0, 100)
 // 相对于当前视口向右滚动 40 像素
-window.scrollBy(40, 0);
+window.scrollBy(40, 0)
 
 // 滚动到页面左上角
-window.scrollTo(0, 0);
+window.scrollTo(0, 0)
 // 滚动到距离屏幕左边及顶边各 100 像素的位置
-window.scrollTo(100, 100);
+window.scrollTo(100, 100)
 // 正常滚动
 window.scrollTo({
   left: 100,
   top: 100,
   behavior: 'auto',
-});
+})
 // 平滑滚动
 window.scrollTo({
   left: 100,
   top: 100,
   behavior: 'smooth',
-});
+})
 
-document.forms[0].scrollIntoView(); // 窗口滚动后, 元素底部与视口底部对齐.
-document.forms[0].scrollIntoView(true); // 窗口滚动后, 元素顶部与视口顶部对齐.
-document.forms[0].scrollIntoView({ block: 'start' });
-document.forms[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+document.forms[0].scrollIntoView() // 窗口滚动后, 元素底部与视口底部对齐.
+document.forms[0].scrollIntoView(true) // 窗口滚动后, 元素顶部与视口顶部对齐.
+document.forms[0].scrollIntoView({ block: 'start' })
+document.forms[0].scrollIntoView({ behavior: 'smooth', block: 'start' })
 ```
 
 ### DOM Observer
@@ -2553,20 +2553,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const imageObserver = new IntersectionObserver((entries, imgObserver) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const lazyImage = entry.target;
-        console.log('Lazy loading ', lazyImage);
-        lazyImage.src = lazyImage.dataset.src;
+        const lazyImage = entry.target
+        console.log('Lazy loading ', lazyImage)
+        lazyImage.src = lazyImage.dataset.src
 
         // only load image once
-        lazyImage.classList.remove('lzy');
-        imgObserver.unobserve(lazyImage);
+        lazyImage.classList.remove('lzy')
+        imgObserver.unobserve(lazyImage)
       }
-    });
-  });
+    })
+  })
 
-  const lazyImages = document.querySelectorAll('img.lzy_img');
-  lazyImages.forEach(lazyImage => imageObserver.observe(lazyImage));
-});
+  const lazyImages = document.querySelectorAll('img.lzy_img')
+  lazyImages.forEach(lazyImage => imageObserver.observe(lazyImage))
+})
 ```
 
 #### Mutation Observer
@@ -2587,9 +2587,9 @@ Mutation Observer 有以下特点:
 ```ts
 const mutationObserver = new MutationObserver(mutations => {
   mutations.forEach(mutation => {
-    console.log(mutation);
-  });
-});
+    console.log(mutation)
+  })
+})
 
 // 开始侦听页面的根 HTML 元素中的更改.
 mutationObserver.observe(document.documentElement, {
@@ -2599,11 +2599,11 @@ mutationObserver.observe(document.documentElement, {
   subtree: true,
   attributeOldValue: true,
   characterDataOldValue: true,
-});
+})
 ```
 
 ```ts
-const target = document.querySelector('#container');
+const target = document.querySelector('#container')
 const callback = (mutations, observer) => {
   mutations.forEach(mutation => {
     switch (mutation.type) {
@@ -2613,39 +2613,39 @@ const callback = (mutations, observer) => {
         // and its old value is in mutation.oldValue
         // the current value can be retrieved with
         // target.getAttribute(mutation.attributeName)
-        break;
+        break
       case 'childList':
         // any added nodes are in mutation.addedNodes
         // any removed nodes are in mutation.removedNodes
-        break;
+        break
       default:
-        throw new Error('Unsupported mutation!');
+        throw new Error('Unsupported mutation!')
     }
-  });
-};
+  })
+}
 
-const observer = new MutationObserver(callback);
+const observer = new MutationObserver(callback)
 observer.observe(target, {
   attributes: true,
   attributeFilter: ['foo'], // only observe attribute 'foo'
   attributeOldValue: true,
   childList: true,
-});
+})
 ```
 
 ```ts
 const observer = new MutationObserver(mutationRecords =>
   console.log(mutationRecords)
-);
+)
 
 // 创建两个初始子节点
-document.body.appendChild(document.createElement('div'));
-document.body.appendChild(document.createElement('span'));
+document.body.appendChild(document.createElement('div'))
+document.body.appendChild(document.createElement('span'))
 
-observer.observe(document.body, { childList: true });
+observer.observe(document.body, { childList: true })
 
 // 交换子节点顺序
-document.body.insertBefore(document.body.lastChild, document.body.firstChild);
+document.body.insertBefore(document.body.lastChild, document.body.firstChild)
 // 发生了两次变化: 第一次是节点被移除, 第二次是节点被添加
 // [
 //   {
@@ -2697,19 +2697,16 @@ XML 命名空间可以实现在一个格式规范的文档中混用不同的 XML
 ```
 
 ```ts
-console.log(document.body.isDefaultNamespace('http://www.w3.org/1999/xhtml'));
-console.log(svg.lookupPrefix('http://www.w3.org/2000/svg')); // "s"
-console.log(svg.lookupNamespaceURI('s')); // "http://www.w3.org/2000/svg"
+console.log(document.body.isDefaultNamespace('http://www.w3.org/1999/xhtml'))
+console.log(svg.lookupPrefix('http://www.w3.org/2000/svg')) // "s"
+console.log(svg.lookupNamespaceURI('s')) // "http://www.w3.org/2000/svg"
 
-const newSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-const newAttr = document.createAttributeNS(
-  'http://www.somewhere.com',
-  'random'
-);
+const newSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+const newAttr = document.createAttributeNS('http://www.somewhere.com', 'random')
 const elems = document.getElementsByTagNameNS(
   'http://www.w3.org/1999/xhtml',
   '*'
-);
+)
 ```
 
 ## Network
@@ -2719,8 +2716,8 @@ const elems = document.getElementsByTagNameNS(
 JSON (JavaScript Object Notation) methods:
 
 ```ts
-const obj = JSON.parse(json);
-const json = JSON.stringify(obj);
+const obj = JSON.parse(json)
+const json = JSON.stringify(obj)
 ```
 
 [`JSON.stringify(value, filter, space)`](https://exploringjs.com/impatient-js/ch_json.html#json-replacers-revivers):
@@ -2734,15 +2731,15 @@ const json = JSON.stringify(obj);
 const obj = {
   name: 'zc',
   toJSON() {
-    return 'return toJSON';
+    return 'return toJSON'
   },
-};
+}
 
 // return toJSON
-console.log(JSON.stringify(obj));
+console.log(JSON.stringify(obj))
 
 // "2022-03-06T08:24:56.138Z"
-JSON.stringify(new Date());
+JSON.stringify(new Date())
 ```
 
 ### AJAX
@@ -2768,39 +2765,39 @@ JSON.stringify(new Date());
 const XHR = (function () {
   const standard = {
     createXHR() {
-      return new XMLHttpRequest();
+      return new XMLHttpRequest()
     },
-  };
+  }
   const newActionXObject = {
     createXHR() {
-      return new ActionXObject('Msxml12.XMLHTTP');
+      return new ActionXObject('Msxml12.XMLHTTP')
     },
-  };
+  }
   const oldActionXObject = {
     createXHR() {
-      return new ActionXObject('Microsoft.XMLHTTP');
+      return new ActionXObject('Microsoft.XMLHTTP')
     },
-  };
+  }
 
   // 根据兼容性返回对应的工厂对象
   // 此立即函数运行一次即可完成兼容性检查, 防止重复检查
   if (standard.createXHR()) {
-    return standard;
+    return standard
   } else {
     try {
-      newActionXObject.createXHR();
-      return newActionXObject;
+      newActionXObject.createXHR()
+      return newActionXObject
     } catch (o) {
-      oldActionXObject.createXHR();
-      return oldActionXObject;
+      oldActionXObject.createXHR()
+      return oldActionXObject
     }
   }
-})();
+})()
 
-const request = XHR.createXHR();
+const request = XHR.createXHR()
 
 // 3rd argument : async mode
-request.open('GET', 'example.txt', true);
+request.open('GET', 'example.txt', true)
 
 request.onreadystatechange = function () {
   // do something
@@ -2814,14 +2811,14 @@ request.onreadystatechange = function () {
   }
   */
   if (request.readyState === 4) {
-    const para = document.createElement('p');
-    const txt = document.createTextNode(request.responseText);
-    para.appendChild(txt);
-    document.getElementById('new').appendChild(para);
+    const para = document.createElement('p')
+    const txt = document.createTextNode(request.responseText)
+    para.appendChild(txt)
+    document.getElementById('new').appendChild(para)
   }
-};
+}
 
-request.send(null);
+request.send(null)
 ```
 
 ```ts
@@ -2836,92 +2833,92 @@ ajax({
   fail(status) {
     // 此处放失败后执行的代码
   },
-});
+})
 
 function ajax(options) {
-  options = options || {};
-  options.type = (options.type || 'GET').toUpperCase();
-  options.dataType = options.dataType || 'json';
-  const params = formatParams(options.data);
-  let xhr;
+  options = options || {}
+  options.type = (options.type || 'GET').toUpperCase()
+  options.dataType = options.dataType || 'json'
+  const params = formatParams(options.data)
+  let xhr
 
   // 创建 - 非IE6 - 第一步
   if (window.XMLHttpRequest) {
-    xhr = new XMLHttpRequest();
+    xhr = new XMLHttpRequest()
   } else {
     // IE6及其以下版本浏览器
-    xhr = new ActiveXObject('Microsoft.XMLHTTP');
+    xhr = new ActiveXObject('Microsoft.XMLHTTP')
   }
 
   // 接收 - 第三步
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
-      const status = xhr.status;
+      const status = xhr.status
       if (status >= 200 && status < 300) {
-        options.success && options.success(xhr.responseText, xhr.responseXML);
+        options.success && options.success(xhr.responseText, xhr.responseXML)
       } else {
-        options.fail && options.fail(status);
+        options.fail && options.fail(status)
       }
     }
-  };
+  }
 
   // 连接 和 发送 - 第二步
   if (options.type === 'GET') {
-    xhr.open('GET', `${options.url}?${params}`, true);
-    xhr.send(null);
+    xhr.open('GET', `${options.url}?${params}`, true)
+    xhr.send(null)
   } else if (options.type === 'POST') {
-    xhr.open('POST', options.url, true);
+    xhr.open('POST', options.url, true)
     // 设置表单提交时的内容类型
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send(params);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr.send(params)
   }
 }
 
 // 格式化参数
 function formatParams(data) {
-  const arr = [];
+  const arr = []
 
   for (const name in data) {
-    arr.push(`${encodeURIComponent(name)}=${encodeURIComponent(data[name])}`);
+    arr.push(`${encodeURIComponent(name)}=${encodeURIComponent(data[name])}`)
   }
 
-  arr.push(`v=${Math.random()}`.replace('.', ''));
-  return arr.join('&');
+  arr.push(`v=${Math.random()}`.replace('.', ''))
+  return arr.join('&')
 }
 ```
 
 ```ts
 function getJSON(url) {
   return new Promise((resolve, reject) => {
-    const request = new XMLHttpRequest();
+    const request = new XMLHttpRequest()
 
-    request.open('GET', url);
+    request.open('GET', url)
 
     request.onload = function () {
       try {
         if (this.status === 200) {
-          resolve(JSON.parse(this.response));
+          resolve(JSON.parse(this.response))
         } else {
-          reject(Error(`${this.status} ${this.statusText}`));
+          reject(Error(`${this.status} ${this.statusText}`))
         }
       } catch (e) {
-        reject(e.message);
+        reject(e.message)
       }
-    };
+    }
 
     request.onerror = function () {
-      reject(Error(`${this.status} ${this.statusText}`));
-    };
+      reject(Error(`${this.status} ${this.statusText}`))
+    }
 
-    request.send();
-  });
+    request.send()
+  })
 }
 
 getJSON('data/sample.json')
   .then(ninjas => {
-    assert(ninjas !== null, 'Get data');
+    assert(ninjas !== null, 'Get data')
   })
-  .catch(e => handleError(`Error: ${e}`));
+  .catch(e => handleError(`Error: ${e}`))
 ```
 
 #### AJAX Cross Origin Request
@@ -2932,7 +2929,7 @@ getJSON('data/sample.json')
 ```
 
 ```ts
-Response.Headers.Add('Access-Control-Allow-Origin', '*');
+Response.Headers.Add('Access-Control-Allow-Origin', '*')
 ```
 
 ```ts
@@ -2941,9 +2938,9 @@ $.ajax({
   type: 'GET',
   dataType: 'JSONP', // 处理 AJAX 跨域问题.
   success(data) {
-    $('body').append(`Name: ${data}`);
+    $('body').append(`Name: ${data}`)
   },
-});
+})
 ```
 
 #### AJAX Alternatives
@@ -2963,32 +2960,32 @@ const client = axios.create({
   baseURL: 'https://some-domain.com/api/',
   timeout: 1000,
   headers: { 'X-Custom-Header': 'foobar' },
-});
+})
 
 // Add a request interceptor
 client.interceptors.request.use(
   config => {
     // Do something before request is sent.
-    return config;
+    return config
   },
   error => {
     // Do something with request error.
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
 client.interceptors.response.use(
   response => {
     // Any status code that lie within the range of 2xx trigger this function.
     // Do something with response data.
-    return response;
+    return response
   },
   error => {
     // Any status codes that falls outside the range of 2xx trigger this function.
     // Do something with response error.
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 ```
 
 ### Fetch
@@ -3006,7 +3003,7 @@ const response = await fetch('/api/names', {
   headers: {
     Accept: 'application/json',
   },
-});
+})
 
 const response = await fetch('/api/names', {
   method: 'POST',
@@ -3014,37 +3011,37 @@ const response = await fetch('/api/names', {
   headers: {
     'Content-Type': 'application/json',
   },
-});
+})
 ```
 
 #### Fetch Form Data
 
 ```ts
-const imageFormData = new FormData();
-const imageInput = document.querySelector('input[type="file"][multiple]');
-const imageFiles = imageInput.files;
+const imageFormData = new FormData()
+const imageInput = document.querySelector('input[type="file"][multiple]')
+const imageFiles = imageInput.files
 
 for (const file of imageFiles) {
-  imageFormData.append('image', file);
+  imageFormData.append('image', file)
 }
 
 fetch('/img-upload', {
   method: 'POST',
   body: imageFormData,
-});
+})
 ```
 
 #### Fetch Aborting
 
 ```ts
-const abortController = new AbortController();
+const abortController = new AbortController()
 
 fetch('wikipedia.zip', { signal: abortController.signal }).catch(() =>
   console.log('Aborted!')
-);
+)
 
 // 10 毫秒后中断请求
-setTimeout(() => abortController.abort(), 10);
+setTimeout(() => abortController.abort(), 10)
 ```
 
 #### Fetch Objects API
@@ -3052,9 +3049,9 @@ setTimeout(() => abortController.abort(), 10);
 [`Headers` object](https://developer.mozilla.org/docs/Web/API/Headers):
 
 ```ts
-const myHeaders = new Headers();
-myHeaders.append('Content-Type', 'text/xml');
-myHeaders.get('Content-Type'); // should return 'text/xml'
+const myHeaders = new Headers()
+myHeaders.append('Content-Type', 'text/xml')
+myHeaders.get('Content-Type') // should return 'text/xml'
 ```
 
 [`Request` object](https://developer.mozilla.org/docs/Web/API/Request):
@@ -3066,15 +3063,15 @@ const request = new Request('/api/names', {
   headers: {
     'Content-Type': 'application/json',
   },
-});
+})
 
-const response = await fetch(request);
+const response = await fetch(request)
 ```
 
 [`Response` object](https://developer.mozilla.org/docs/Web/API/Response):
 
 ```ts
-fetch('//foo.com').then(console.log);
+fetch('//foo.com').then(console.log)
 // Response {
 //   body: (...)
 //   bodyUsed: false
@@ -3087,7 +3084,7 @@ fetch('//foo.com').then(console.log);
 //   url: "https://foo.com/"
 // }
 
-fetch('//foo.com/redirect-me').then(console.log);
+fetch('//foo.com/redirect-me').then(console.log)
 // Response {
 //   body: (...)
 //   bodyUsed: false
@@ -3100,7 +3097,7 @@ fetch('//foo.com/redirect-me').then(console.log);
 //   url: "https://foo.com/redirected-url/"
 // }
 
-fetch('//foo.com/does-not-exist').then(console.log);
+fetch('//foo.com/does-not-exist').then(console.log)
 // Response {
 //   body: (...)
 //   bodyUsed: false
@@ -3113,7 +3110,7 @@ fetch('//foo.com/does-not-exist').then(console.log);
 //   url: "https://foo.com/does-not-exist/"
 // }
 
-fetch('//foo.com/throws-error').then(console.log);
+fetch('//foo.com/throws-error').then(console.log)
 // Response {
 //   body: (...)
 //   bodyUsed: false
@@ -3142,19 +3139,19 @@ fetch('//foo.com/throws-error').then(console.log);
 fetch('https://fetch.spec.whatwg.org/')
   .then(response => response.body)
   .then(body => {
-    const reader = body.getReader();
+    const reader = body.getReader()
 
     function processNextChunk({ value, done }) {
       if (done) {
-        return;
+        return
       }
 
-      console.log(value);
-      return reader.read().then(processNextChunk);
+      console.log(value)
+      return reader.read().then(processNextChunk)
     }
 
-    return reader.read().then(processNextChunk);
-  });
+    return reader.read().then(processNextChunk)
+  })
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
@@ -3163,18 +3160,18 @@ fetch('https://fetch.spec.whatwg.org/')
 fetch('https://fetch.spec.whatwg.org/')
   .then(response => response.body)
   .then(async body => {
-    const reader = body.getReader();
+    const reader = body.getReader()
 
     while (true) {
-      const { value, done } = await reader.read();
+      const { value, done } = await reader.read()
 
       if (done) {
-        break;
+        break
       }
 
-      console.log(value);
+      console.log(value)
     }
-  });
+  })
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
@@ -3185,21 +3182,21 @@ fetch('https://fetch.spec.whatwg.org/')
 fetch('https://fetch.spec.whatwg.org/')
   .then(response => response.body)
   .then(async body => {
-    const reader = body.getReader();
+    const reader = body.getReader()
     const asyncIterable = {
       [Symbol.asyncIterator]() {
         return {
           next() {
-            return reader.read();
+            return reader.read()
           },
-        };
+        }
       },
-    };
+    }
 
     for await (const chunk of asyncIterable) {
-      console.log(chunk);
+      console.log(chunk)
     }
-  });
+  })
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
@@ -3208,32 +3205,32 @@ fetch('https://fetch.spec.whatwg.org/')
 
 ```ts
 async function* streamGenerator(stream) {
-  const reader = stream.getReader();
+  const reader = stream.getReader()
 
   try {
     while (true) {
-      const { value, done } = await reader.read();
+      const { value, done } = await reader.read()
 
       if (done) {
-        break;
+        break
       }
 
-      yield value;
+      yield value
     }
   } finally {
-    reader.releaseLock();
+    reader.releaseLock()
   }
 }
 
-const decoder = new TextDecoder();
+const decoder = new TextDecoder()
 
 fetch('https://fetch.spec.whatwg.org/')
   .then(response => response.body)
   .then(async body => {
     for await (const chunk of streamGenerator(body)) {
-      console.log(decoder.decode(chunk, { stream: true }));
+      console.log(decoder.decode(chunk, { stream: true }))
     }
-  });
+  })
 // <!doctype html><html lang="en"> ...
 // whether a <a data-link-type="dfn" href="#concept-header" ...
 // result to <var>rangeValue</var>. ...
@@ -3244,31 +3241,31 @@ fetch('https://fetch.spec.whatwg.org/')
 fetch('https://fetch.spec.whatwg.org/')
   .then(response => response.body)
   .then(body => {
-    const reader = body.getReader();
+    const reader = body.getReader()
     // 创建第二个流
     return new ReadableStream({
       async start(controller) {
         try {
           while (true) {
-            const { value, done } = await reader.read();
+            const { value, done } = await reader.read()
 
             if (done) {
-              break;
+              break
             }
 
             // 将主体流的块推到第二个流
-            controller.enqueue(value);
+            controller.enqueue(value)
           }
         } finally {
-          controller.close();
-          reader.releaseLock();
+          controller.close()
+          reader.releaseLock()
         }
       },
-    });
+    })
   })
   .then(secondaryStream => new Response(secondaryStream))
   .then(response => response.text())
-  .then(console.log);
+  .then(console.log)
 // <!doctype html><html lang="en"><head><meta charset="utf-8"> ...
 ```
 
@@ -3288,26 +3285,26 @@ fetch('https://fetch.spec.whatwg.org/')
 - Server-sent events [API](https://developer.mozilla.org/docs/Web/API/Server-sent_events/Using_server-sent_events).
 
 ```ts
-const source = new EventSource('/path/to/stream-url');
+const source = new EventSource('/path/to/stream-url')
 
-source.onopen = function () {};
+source.onopen = function () {}
 
-source.onerror = function () {};
+source.onerror = function () {}
 
 source.addEventListener('foo', function (event) {
-  processFoo(event.data);
-});
+  processFoo(event.data)
+})
 
 source.addEventListener('ping', function (event) {
-  processPing(JSON.parse(event.data).time);
-});
+  processPing(JSON.parse(event.data).time)
+})
 
 source.onmessage = function (event) {
-  log(event.id, event.data);
+  log(event.id, event.data)
   if (event.id === 'CLOSE') {
-    source.close();
+    source.close()
   }
-};
+}
 ```
 
 ### WebSocket
@@ -3367,34 +3364,34 @@ WebSocket 规范允许对协议进行扩展,
 ```ts
 function WebSocketTest() {
   if ('WebSocket' in window) {
-    alert('WebSocket is supported by your Browser!');
+    alert('WebSocket is supported by your Browser!')
     // Let us open a web socket
-    const ws = new WebSocket('ws://localhost:9998/echo');
+    const ws = new WebSocket('ws://localhost:9998/echo')
 
     ws.onopen = function () {
       // WebSocket is connected, send data using send()
-      ws.send('Message to send');
-      alert('Message is sent...');
-    };
+      ws.send('Message to send')
+      alert('Message is sent...')
+    }
 
     ws.onmessage = function (event) {
-      const receivedMessage = event.data;
-      alert('Message is received...');
-    };
+      const receivedMessage = event.data
+      alert('Message is received...')
+    }
 
     ws.onclose = function (event) {
       // websocket is closed.
       console.log(
         `As clean? ${event.wasClean} Code=${event.code} Reason=${event.reason}`
-      );
-    };
+      )
+    }
 
     ws.onerror = function () {
-      alert('Connection error.');
-    };
+      alert('Connection error.')
+    }
   } else {
     // The browser doesn't support WebSocket
-    alert('WebSocket NOT supported by your Browser!');
+    alert('WebSocket NOT supported by your Browser!')
   }
 }
 ```
@@ -3470,44 +3467,44 @@ const ice = {
     { url: 'stun:stun.l.google.com:19302' },
     { url: 'turn:user@turnserver.com', credential: 'pass' },
   ],
-};
-const signalingChannel = new SignalingChannel();
-const pc = new RTCPeerConnection(ice);
+}
+const signalingChannel = new SignalingChannel()
+const pc = new RTCPeerConnection(ice)
 
-navigator.getUserMedia({ audio: true }, getStream, logError);
+navigator.getUserMedia({ audio: true }, getStream, logError)
 
 function getStream(evt) {
-  pc.addstream(evt.stream);
+  pc.addstream(evt.stream)
 
-  const localVideo = document.querySelector('#local-video');
-  localVideo.src = window.URL.createObjectURL(evt.stream);
+  const localVideo = document.querySelector('#local-video')
+  localVideo.src = window.URL.createObjectURL(evt.stream)
 
   pc.createOffer(function (offer) {
-    pc.setLocalDescription(offer);
-    signalingChannel.send(offer.sdp);
-  });
+    pc.setLocalDescription(offer)
+    signalingChannel.send(offer.sdp)
+  })
 }
 
 pc.onicecandidate = function (evt) {
   if (evt.candidate) {
-    signalingChannel.send(evt.candidate);
+    signalingChannel.send(evt.candidate)
   }
-};
+}
 
 pc.oniceconnectionstatechange = function (evt) {
-  logStatus(`ICE connection state change: ${evt.target.iceConnectionState}`);
-};
+  logStatus(`ICE connection state change: ${evt.target.iceConnectionState}`)
+}
 
 pc.onaddstream = function (evt) {
-  const remoteVideo = document.querySelector('#remote-video');
-  remoteVideo.src = window.URL.createObjectURL(evt.stream);
-};
+  const remoteVideo = document.querySelector('#remote-video')
+  remoteVideo.src = window.URL.createObjectURL(evt.stream)
+}
 
 signalingChannel.onmessage = function (msg) {
   if (msg.candidate) {
-    pc.addIceCandidate(msg.candidate);
+    pc.addIceCandidate(msg.candidate)
   }
-};
+}
 ```
 
 #### WebRTC Performance
@@ -3556,18 +3553,18 @@ const rabbitDownKeyframes = new KeyframeEffect(
     { transform: 'translateY(100%)' }, // keyframe
   ],
   { duration: 3000, fill: 'forwards' } // keyframe options
-);
+)
 
 const rabbitDownAnimation = new Animation(
   rabbitDownKeyFrames,
   document.timeline
-);
+)
 
-whiteRabbit.addEventListener('click', downHandler);
+whiteRabbit.addEventListener('click', downHandler)
 
 function downHandler() {
-  rabbitDownAnimation.play();
-  whiteRabbit.removeEventListener('click', downHandler);
+  rabbitDownAnimation.play()
+  whiteRabbit.removeEventListener('click', downHandler)
 }
 ```
 
@@ -3579,30 +3576,30 @@ function downHandler() {
 - `animation.pause()/play()/reverse()/finish()/cancel()`.
 
 ```ts
-animation.currentTime = animation.effect.getComputedTiming().duration / 2;
+animation.currentTime = animation.effect.getComputedTiming().duration / 2
 
 function currentTime(time = 0) {
   animations.forEach(function (animation) {
     if (typeof animation.currentTime === 'function') {
-      animation.currentTime(time);
+      animation.currentTime(time)
     } else {
-      animation.currentTime = time;
+      animation.currentTime = time
     }
-  });
+  })
 }
 
 function createPlayer(animations) {
   return Object.freeze({
     play() {
-      animations.forEach(animation => animation.play());
+      animations.forEach(animation => animation.play())
     },
     pause() {
-      animations.forEach(animation => animation.pause());
+      animations.forEach(animation => animation.pause())
     },
     currentTime(time = 0) {
-      animations.forEach(animation => (animation.currentTime = time));
+      animations.forEach(animation => (animation.currentTime = time))
     },
-  });
+  })
 }
 ```
 
@@ -3624,16 +3621,16 @@ const animationKeyframes = [
     transform: 'rotate(360deg)',
     color: '#000',
   },
-];
+]
 
 const animationTiming = {
   duration: 3000,
   iterations: Infinity,
-};
+}
 
 const animation = document
   .querySelector('alice')
-  .animate(animationKeyframes, animationTiming);
+  .animate(animationKeyframes, animationTiming)
 ```
 
 ### Web Animations Reference
@@ -3651,31 +3648,31 @@ const animation = document
 - 绘制文字: `font`/`fillText()`/`measureText()`.
 
 ```ts
-const context = canvas.getContext('2d');
+const context = canvas.getContext('2d')
 ```
 
 ```ts
 // 根据参数画线
 function drawLine(fromX, fromY, toX, toY) {
-  context.moveTo(fromX, fromY);
-  context.lineTo(toX, toY);
-  context.stroke();
+  context.moveTo(fromX, fromY)
+  context.lineTo(toX, toY)
+  context.stroke()
 }
 
 // 根据参数画圆
 function drawCircle(x, y, radius, color) {
-  context.fillStyle = color;
-  context.beginPath();
-  context.arc(x, y, radius, 0, Math.PI * 2, true);
-  context.closePath();
-  context.fill();
-  context.stroke();
+  context.fillStyle = color
+  context.beginPath()
+  context.arc(x, y, radius, 0, Math.PI * 2, true)
+  context.closePath()
+  context.fill()
+  context.stroke()
 }
 
 // 改变 canvas 中图形颜色
 function changeColor(color) {
-  context.fillStyle = color;
-  context.fill();
+  context.fillStyle = color
+  context.fill()
 }
 ```
 
@@ -3684,22 +3681,22 @@ function changeColor(color) {
 ```html
 <canvas width="600" height="300"></canvas>
 <script>
-  const cx = document.querySelector('canvas').getContext('2d');
+  const cx = document.querySelector('canvas').getContext('2d')
 
   function branch(length, angle, scale) {
-    cx.fillRect(0, 0, 1, length);
-    if (length < 8) return;
-    cx.save();
-    cx.translate(0, length);
-    cx.rotate(-angle);
-    branch(length * scale, angle, scale);
-    cx.rotate(2 * angle);
-    branch(length * scale, angle, scale);
-    cx.restore();
+    cx.fillRect(0, 0, 1, length)
+    if (length < 8) return
+    cx.save()
+    cx.translate(0, length)
+    cx.rotate(-angle)
+    branch(length * scale, angle, scale)
+    cx.rotate(2 * angle)
+    branch(length * scale, angle, scale)
+    cx.restore()
   }
 
-  cx.translate(300, 0);
-  branch(60, 0.5, 0.8);
+  cx.translate(300, 0)
+  branch(60, 0.5, 0.8)
 </script>
 ```
 
@@ -3712,29 +3709,29 @@ For all objects:
 - draw(ctx): use canvas api and object properties (position/size) to render objects
 
 ```ts
-const canvas = document.getElementById('gameScreen');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById('gameScreen')
+const ctx = canvas.getContext('2d')
 
-const GAME_WIDTH = 800;
-const GAME_HEIGHT = 600;
+const GAME_WIDTH = 800
+const GAME_HEIGHT = 600
 
-const game = new Game(GAME_WIDTH, GAME_HEIGHT);
+const game = new Game(GAME_WIDTH, GAME_HEIGHT)
 
-let lastTime = 0;
+let lastTime = 0
 
 function gameLoop(timestamp) {
-  const deltaTime = timestamp - lastTime;
-  lastTime = timestamp;
+  const deltaTime = timestamp - lastTime
+  lastTime = timestamp
 
-  ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+  ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT)
 
-  game.update(deltaTime);
-  game.draw(ctx);
+  game.update(deltaTime)
+  game.draw(ctx)
 
-  requestAnimationFrame(gameLoop);
+  requestAnimationFrame(gameLoop)
 }
 
-requestAnimationFrame(gameLoop);
+requestAnimationFrame(gameLoop)
 ```
 
 ### Canvas Performance
@@ -3742,30 +3739,30 @@ requestAnimationFrame(gameLoop);
 Canvas buffer:
 
 ```ts
-frontCanvasContext.drawImage(bufferCanvas, 0, 0);
+frontCanvasContext.drawImage(bufferCanvas, 0, 0)
 ```
 
 - multiple canvas: top layer, background layer, interactive layer
 - disable alpha path
 
 ```ts
-const ctx = canvas.getContext('2d', { alpha: false });
+const ctx = canvas.getContext('2d', { alpha: false })
 ```
 
 Offscreen canvas:
 
 ```ts
 // index.js
-const offscreenCanvas = document.querySelector('#frame2');
-const offscreen = offscreenCanvas.transferControlToOffscreen();
-const worker = new Worker('./worker.js');
-worker.postMessage({ canvas: offscreen }, [offscreen]);
+const offscreenCanvas = document.querySelector('#frame2')
+const offscreen = offscreenCanvas.transferControlToOffscreen()
+const worker = new Worker('./worker.js')
+worker.postMessage({ canvas: offscreen }, [offscreen])
 
 // worker.js
 onmessage = function (event) {
-  canvas = event.data.canvas;
-  context = canvas.getContext('2d');
-};
+  canvas = event.data.canvas
+  context = canvas.getContext('2d')
+}
 ```
 
 ### CSS Houdini Painting API
@@ -3777,14 +3774,14 @@ onmessage = function (event) {
 // Create a `PaintWorklet`.
 class CheckerboardPainter {
   static get contextOptions() {
-    return { alpha: true };
+    return { alpha: true }
   }
 
   /**
    * @returns {string[]} any custom properties or regular properties
    */
   static get inputProperties() {
-    return ['--red', '--green', '--blue', '--width', 'height'];
+    return ['--red', '--green', '--blue', '--width', 'height']
   }
 
   paint(context, geometry, props) {
@@ -3792,30 +3789,30 @@ class CheckerboardPainter {
       props.get('--red').toString(),
       props.get('--green').toString(),
       props.get('--blue').toString(),
-    ];
-    const size = parseInt(props.get('--width'));
+    ]
+    const size = parseInt(props.get('--width'))
 
     for (let y = 0; y < geometry.height / size; y++) {
       for (let x = 0; x < geometry.width / size; x++) {
-        const color = colors[(x + y) % colors.length];
-        context.beginPath();
-        context.fillStyle = color;
-        context.rect(x * size, y * size, size, size);
-        context.fill();
+        const color = colors[(x + y) % colors.length]
+        context.beginPath()
+        context.fillStyle = color
+        context.rect(x * size, y * size, size, size)
+        context.fill()
       }
     }
   }
 }
 
 // Register our class under a specific name
-registerPaint('checkerboard', CheckerboardPainter);
+registerPaint('checkerboard', CheckerboardPainter)
 ```
 
 ```html
 <!-- Load a `PaintWorklet`. -->
 <script>
   if ('paintWorklet' in CSS) {
-    CSS.paintWorklet.addModule('checkerboard.js');
+    CSS.paintWorklet.addModule('checkerboard.js')
   }
 </script>
 
@@ -3858,64 +3855,64 @@ registerPaint('checkerboard', CheckerboardPainter);
 ```
 
 ```ts
-const audioContext = new AudioContext();
+const audioContext = new AudioContext()
 
-const baseFrequency = 440;
-const getNoteFreq = (base, pitch) => base * 2 ** (pitch / 12);
+const baseFrequency = 440
+const getNoteFreq = (base, pitch) => base * 2 ** (pitch / 12)
 // oscillator.frequency.value = getNoteFreq(440, 7);
 
-const getNoteDetune = pitch => pitch * 100;
+const getNoteDetune = pitch => pitch * 100
 // oscillator.detune.value = getNoteDetune(7);
 
 const play = (type, delay, pitch, duration) => {
-  const oscillator = audioContext.createOscillator();
-  oscillator.connect(audioContext.destination);
+  const oscillator = audioContext.createOscillator()
+  oscillator.connect(audioContext.destination)
 
-  oscillator.type = type;
-  oscillator.detune.value = getNoteDetune(pitch);
+  oscillator.type = type
+  oscillator.detune.value = getNoteDetune(pitch)
 
-  const startTime = audioContext.currentTime + delay;
-  const stopTime = startTime + duration;
-  oscillator.start(startTime);
-  oscillator.stop(stopTime);
-};
+  const startTime = audioContext.currentTime + delay
+  const stopTime = startTime + duration
+  oscillator.start(startTime)
+  oscillator.stop(stopTime)
+}
 ```
 
 ### Music Data
 
 ```ts
-const sampleSize = 1024; // number of samples to collect before analyzing data
-const audioUrl = 'viper.mp3';
+const sampleSize = 1024 // number of samples to collect before analyzing data
+const audioUrl = 'viper.mp3'
 
-let audioData = null;
-let audioPlaying = false;
+let audioData = null
+let audioPlaying = false
 
-const audioContext = new AudioContext();
-const sourceNode = audioContext.createBufferSource();
-const analyserNode = audioContext.createAnalyser();
-const javascriptNode = audioContext.createScriptProcessor(sampleSize, 1, 1);
+const audioContext = new AudioContext()
+const sourceNode = audioContext.createBufferSource()
+const analyserNode = audioContext.createAnalyser()
+const javascriptNode = audioContext.createScriptProcessor(sampleSize, 1, 1)
 
 // Create the array for the data values
-const amplitudeArray = new Uint8Array(analyserNode.frequencyBinCount);
+const amplitudeArray = new Uint8Array(analyserNode.frequencyBinCount)
 
 // Now connect the nodes together
-sourceNode.connect(audioContext.destination);
-sourceNode.connect(analyserNode);
-analyserNode.connect(javascriptNode);
-javascriptNode.connect(audioContext.destination);
+sourceNode.connect(audioContext.destination)
+sourceNode.connect(analyserNode)
+analyserNode.connect(javascriptNode)
+javascriptNode.connect(audioContext.destination)
 
 // setup the event handler that is triggered
 // every time enough samples have been collected
 // trigger the audio analysis and draw the results
 javascriptNode.onaudioprocess = function () {
   // get the Time Domain data for this sample
-  analyserNode.getByteTimeDomainData(amplitudeArray);
+  analyserNode.getByteTimeDomainData(amplitudeArray)
 
   // draw the display if the audio is playing
   // if (audioPlaying === true) {
   // requestAnimFrame(drawTimeDomain);
   // }
-};
+}
 
 // Load the audio from the URL via AJAX and store it in global variable audioData
 // Note that the audio load is asynchronous
@@ -3923,26 +3920,26 @@ function loadSound(url) {
   fetch(url)
     .then(response => {
       audioContext.decodeAudioData(response, buffer => {
-        audioData = buffer;
-        playSound(audioData);
-      });
+        audioData = buffer
+        playSound(audioData)
+      })
     })
     .catch(error => {
-      console.error(error);
-    });
+      console.error(error)
+    })
 }
 
 // Play the audio and loop until stopped
 function playSound(buffer) {
-  sourceNode.buffer = buffer;
-  sourceNode.start(0); // Play the sound now
-  sourceNode.loop = true;
-  audioPlaying = true;
+  sourceNode.buffer = buffer
+  sourceNode.start(0) // Play the sound now
+  sourceNode.loop = true
+  audioPlaying = true
 }
 
 function stopSound() {
-  sourceNode.stop(0);
-  audioPlaying = false;
+  sourceNode.stop(0)
+  audioPlaying = false
 }
 ```
 
@@ -3952,36 +3949,36 @@ function stopSound() {
 - [Github Demo](https://github.com/bogdan-cornianu/swave/blob/master/src/visualizer.ts)
 
 ```ts
-const WIDTH = this.canvas.clientWidth;
-const HEIGHT = this.canvas.clientHeight;
-this.analyserNode.fftSize = 256;
-const bufferLengthAlt = this.analyserNode.frequencyBinCount;
-const dataArrayAlt = new Uint8Array(bufferLengthAlt);
+const WIDTH = this.canvas.clientWidth
+const HEIGHT = this.canvas.clientHeight
+this.analyserNode.fftSize = 256
+const bufferLengthAlt = this.analyserNode.frequencyBinCount
+const dataArrayAlt = new Uint8Array(bufferLengthAlt)
 
-this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+this.ctx.clearRect(0, 0, WIDTH, HEIGHT)
 
 const draw = () => {
-  const drawVisual = requestAnimationFrame(draw);
-  this.analyserNode.getByteFrequencyData(dataArrayAlt);
+  const drawVisual = requestAnimationFrame(draw)
+  this.analyserNode.getByteFrequencyData(dataArrayAlt)
 
-  this.ctx.fillStyle = 'rgb(255, 255, 255)';
-  this.ctx.fillRect(0, 0, WIDTH, HEIGHT);
+  this.ctx.fillStyle = 'rgb(255, 255, 255)'
+  this.ctx.fillRect(0, 0, WIDTH, HEIGHT)
 
-  const barWidth = (WIDTH / bufferLengthAlt) * 2.5;
-  let barHeight;
-  let x = 0;
+  const barWidth = (WIDTH / bufferLengthAlt) * 2.5
+  let barHeight
+  let x = 0
 
   for (let i = 0; i < bufferLengthAlt; i++) {
-    barHeight = dataArrayAlt[i];
+    barHeight = dataArrayAlt[i]
 
-    this.ctx.fillStyle = `rgb(${barHeight + 100},15,156)`;
-    this.ctx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight / 2);
+    this.ctx.fillStyle = `rgb(${barHeight + 100},15,156)`
+    this.ctx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight / 2)
 
-    x += barWidth + 1;
+    x += barWidth + 1
   }
-};
+}
 
-draw();
+draw()
 ```
 
 ## Media Session
@@ -4024,49 +4021,49 @@ Other-header: other-header-value
 ```ts
 class CookieUtil {
   static get(name) {
-    const cookieName = `${encodeURIComponent(name)}=`;
-    const cookieStart = document.cookie.indexOf(cookieName);
-    let cookieValue = null;
+    const cookieName = `${encodeURIComponent(name)}=`
+    const cookieStart = document.cookie.indexOf(cookieName)
+    let cookieValue = null
 
     if (cookieStart > -1) {
-      let cookieEnd = document.cookie.indexOf(';', cookieStart);
+      let cookieEnd = document.cookie.indexOf(';', cookieStart)
 
       if (cookieEnd === -1) {
-        cookieEnd = document.cookie.length;
+        cookieEnd = document.cookie.length
       }
 
       cookieValue = decodeURIComponent(
         document.cookie.substring(cookieStart + cookieName.length, cookieEnd)
-      );
+      )
     }
 
-    return cookieValue;
+    return cookieValue
   }
 
   static set(name, value, { expires, path, domain, secure }) {
-    let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
+    let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
 
     if (expires instanceof Date) {
-      cookieText += `; expires=${expires.toGMTString()}`;
+      cookieText += `; expires=${expires.toGMTString()}`
     }
 
     if (path) {
-      cookieText += `; path=${path}`;
+      cookieText += `; path=${path}`
     }
 
     if (domain) {
-      cookieText += `; domain=${domain}`;
+      cookieText += `; domain=${domain}`
     }
 
     if (secure) {
-      cookieText += '; secure';
+      cookieText += '; secure'
     }
 
-    document.cookie = cookieText;
+    document.cookie = cookieText
   }
 
   static unset(name, { path, domain, secure }) {
-    CookieUtil.set(name, '', new Date(0), path, domain, secure);
+    CookieUtil.set(name, '', new Date(0), path, domain, secure)
   }
 }
 ```
@@ -4091,31 +4088,31 @@ class CookieUtil {
 
 ```ts
 if (!localStorage.getItem('bgColor')) {
-  populateStorage();
+  populateStorage()
 } else {
-  setStyles();
+  setStyles()
 }
 
 function populateStorage() {
-  localStorage.setItem('bgColor', document.getElementById('bgColor').value);
-  localStorage.setItem('font', document.getElementById('font').value);
-  localStorage.setItem('image', document.getElementById('image').value);
+  localStorage.setItem('bgColor', document.getElementById('bgColor').value)
+  localStorage.setItem('font', document.getElementById('font').value)
+  localStorage.setItem('image', document.getElementById('image').value)
 
-  setStyles();
+  setStyles()
 }
 
 function setStyles() {
-  const currentColor = localStorage.getItem('bgColor');
-  const currentFont = localStorage.getItem('font');
-  const currentImage = localStorage.getItem('image');
+  const currentColor = localStorage.getItem('bgColor')
+  const currentFont = localStorage.getItem('font')
+  const currentImage = localStorage.getItem('image')
 
-  document.getElementById('bgColor').value = currentColor;
-  document.getElementById('font').value = currentFont;
-  document.getElementById('image').value = currentImage;
+  document.getElementById('bgColor').value = currentColor
+  document.getElementById('font').value = currentFont
+  document.getElementById('image').value = currentImage
 
-  htmlElem.style.backgroundColor = `#${currentColor}`;
-  pElem.style.fontFamily = currentFont;
-  imgElem.setAttribute('src', currentImage);
+  htmlElem.style.backgroundColor = `#${currentColor}`
+  pElem.style.fontFamily = currentFont
+  imgElem.setAttribute('src', currentImage)
 }
 ```
 
@@ -4125,82 +4122,82 @@ function setStyles() {
 class IndexedDB {
   constructor(dbName, dbVersion, dbUpgrade) {
     return new Promise((resolve, reject) => {
-      this.db = null;
+      this.db = null
 
       if (!('indexedDB' in window)) {
-        reject(new Error('Not supported'));
+        reject(new Error('Not supported'))
       }
 
-      const dbOpen = indexedDB.open(dbName, dbVersion);
+      const dbOpen = indexedDB.open(dbName, dbVersion)
 
       if (dbUpgrade) {
         dbOpen.onupgradeneeded = e => {
-          dbUpgrade(dbOpen.result, e.oldVersion, e.newVersion);
-        };
+          dbUpgrade(dbOpen.result, e.oldVersion, e.newVersion)
+        }
       }
 
       dbOpen.onsuccess = () => {
-        this.db = dbOpen.result;
-        resolve(this);
-      };
+        this.db = dbOpen.result
+        resolve(this)
+      }
 
       dbOpen.onerror = e => {
-        reject(new Error(`IndexedDB error: ${e.target.errorCode}`));
-      };
-    });
+        reject(new Error(`IndexedDB error: ${e.target.errorCode}`))
+      }
+    })
   }
 
   get(storeName, name) {
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction(storeName, 'readonly');
-      const store = transaction.objectStore(storeName);
-      const request = store.get(name);
+      const transaction = this.db.transaction(storeName, 'readonly')
+      const store = transaction.objectStore(storeName)
+      const request = store.get(name)
 
       request.onsuccess = () => {
-        resolve(request.result);
-      };
+        resolve(request.result)
+      }
 
       request.onerror = () => {
-        reject(request.error);
-      };
-    });
+        reject(request.error)
+      }
+    })
   }
 
   set(storeName, name, value) {
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction(storeName, 'readwrite');
-      const store = transaction.objectStore(storeName);
+      const transaction = this.db.transaction(storeName, 'readwrite')
+      const store = transaction.objectStore(storeName)
 
-      store.put(value, name);
+      store.put(value, name)
 
       transaction.oncomplete = () => {
-        resolve(true);
-      };
+        resolve(true)
+      }
 
       transaction.onerror = () => {
-        reject(transaction.error);
-      };
-    });
+        reject(transaction.error)
+      }
+    })
   }
 }
 
 export class State {
-  static dbName = 'stateDB';
-  static dbVersion = 1;
-  static storeName = 'state';
-  static DB = null;
-  static target = new EventTarget();
+  static dbName = 'stateDB'
+  static dbVersion = 1
+  static storeName = 'state'
+  static DB = null
+  static target = new EventTarget()
 
   constructor(observed, updateCallback) {
-    this.updateCallback = updateCallback;
-    this.observed = new Set(observed);
+    this.updateCallback = updateCallback
+    this.observed = new Set(observed)
 
     // subscribe `set` event with `updateCallback`
     State.target.addEventListener('set', e => {
       if (this.updateCallback && this.observed.has(e.detail.name)) {
-        this.updateCallback(e.detail.name, e.detail.value);
+        this.updateCallback(e.detail.name, e.detail.value)
       }
-    });
+    })
   }
 
   async dbConnect() {
@@ -4213,55 +4210,55 @@ export class State {
           // upgrade database
           switch (oldVersion) {
             case 0: {
-              db.createObjectStore(State.storeName);
-              break;
+              db.createObjectStore(State.storeName)
+              break
             }
             default:
-              throw new Error('Unsupported version!');
+              throw new Error('Unsupported version!')
           }
         }
-      ));
+      ))
 
-    return State.DB;
+    return State.DB
   }
 
   async get(name) {
-    this.observedSet.add(name);
-    const db = await this.dbConnect();
-    return await db.get(State.storeName, name);
+    this.observedSet.add(name)
+    const db = await this.dbConnect()
+    return await db.get(State.storeName, name)
   }
 
   async set(name, value) {
-    this.observed.add(name);
-    const db = await this.dbConnect();
-    await db.set(State.storeName, name, value);
+    this.observed.add(name)
+    const db = await this.dbConnect()
+    await db.set(State.storeName, name, value)
 
     // publish event to subscriber
-    const event = new CustomEvent('set', { detail: { name, value } });
-    State.target.dispatchEvent(event);
+    const event = new CustomEvent('set', { detail: { name, value } })
+    State.target.dispatchEvent(event)
   }
 }
 ```
 
 ```ts
-const store = db.transaction('users').objectStore('users');
-const index = store.createIndex('username', 'username', { unique: true });
-const range = IDBKeyRange.bound('007', 'ace');
+const store = db.transaction('users').objectStore('users')
+const index = store.createIndex('username', 'username', { unique: true })
+const range = IDBKeyRange.bound('007', 'ace')
 
-const request = store.openCursor(range, 'next');
-const request = index.openCursor(range, 'next');
+const request = store.openCursor(range, 'next')
+const request = index.openCursor(range, 'next')
 
 request.onsuccess = function (event) {
-  const cursor = event.target.result;
+  const cursor = event.target.result
 
   if (cursor) {
     // 永远要检查
-    console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`);
-    cursor.continue(); // 移动到下一条记录
+    console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`)
+    cursor.continue() // 移动到下一条记录
   } else {
-    console.log('Done!');
+    console.log('Done!')
   }
-};
+}
 ```
 
 ### File API
@@ -4269,27 +4266,27 @@ request.onsuccess = function (event) {
 ```ts
 function readFileText(file) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => resolve(reader.result));
-    reader.addEventListener('error', () => reject(reader.error));
-    reader.readAsText(file);
-  });
+    const reader = new FileReader()
+    reader.addEventListener('load', () => resolve(reader.result))
+    reader.addEventListener('error', () => reject(reader.error))
+    reader.readAsText(file)
+  })
 }
 
 function readFileBuffer(file) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => resolve(reader.result));
-    reader.addEventListener('error', () => reject(reader.error));
-    reader.readAsArrayBuffer(file);
-  });
+    const reader = new FileReader()
+    reader.addEventListener('load', () => resolve(reader.result))
+    reader.addEventListener('error', () => reject(reader.error))
+    reader.readAsArrayBuffer(file)
+  })
 }
 
-const fileInput = document.querySelector('fileInput');
+const fileInput = document.querySelector('fileInput')
 
 for (const file of fileInput.files) {
-  const text = await readFileText(file);
-  const buffer = await readFileBuffer(file);
+  const text = await readFileText(file)
+  const buffer = await readFileBuffer(file)
 }
 ```
 
@@ -4313,32 +4310,32 @@ async function doPaymentRequest() {
           amount: { value: '10', currency: 'USD' },
         },
       }
-    );
-    const response = await request.show();
-    await validateResponse(response);
+    )
+    const response = await request.show()
+    await validateResponse(response)
   } catch (err) {
     // AbortError, SecurityError
-    console.error(err);
+    console.error(err)
   }
 }
 
 async function validateResponse(response) {
   try {
-    const errors = await checkAllValuesAreGood(response);
+    const errors = await checkAllValuesAreGood(response)
 
     if (errors.length) {
-      await response.retry(errors);
-      return validateResponse(response);
+      await response.retry(errors)
+      return validateResponse(response)
     }
 
-    await response.complete('success');
+    await response.complete('success')
   } catch (err) {
     // Something went wrong…
-    await response.complete('fail');
+    await response.complete('fail')
   }
 }
 
-doPaymentRequest();
+doPaymentRequest()
 ```
 
 [![Web Payment Workflow](./figures/WebPaymentWorkflow.webp)](https://web.dev/setting-up-a-payment-method)
@@ -4350,26 +4347,26 @@ doPaymentRequest();
 [Gamepad API](https://web.dev/gamepad):
 
 ```ts
-const gamepads = {};
+const gamepads = {}
 
 function gamepadHandler(event, connecting) {
   // gamepad === navigator.getGamepads()[gamepad.index]
-  const { gamepad } = event;
+  const { gamepad } = event
 
   if (connecting) {
-    gamepads[gamepad.index] = gamepad;
+    gamepads[gamepad.index] = gamepad
   } else {
-    delete gamepads[gamepad.index];
+    delete gamepads[gamepad.index]
   }
 }
 
 window.addEventListener('gamepadconnected', e => {
-  gamepadHandler(e, true);
-});
+  gamepadHandler(e, true)
+})
 
 window.addEventListener('gamepaddisconnected', e => {
-  gamepadHandler(e, false);
-});
+  gamepadHandler(e, false)
+})
 ```
 
 ### Web Bluetooth
@@ -4386,15 +4383,15 @@ navigator.bluetooth
     characteristic.getDescriptor('gatt.characteristic_user_description')
   )
   .then(descriptor => {
-    const encoder = new TextEncoder('utf-8');
+    const encoder = new TextEncoder('utf-8')
     const userDescription = encoder.encode(
       'Defines the time between measurements.'
-    );
-    return descriptor.writeValue(userDescription);
+    )
+    return descriptor.writeValue(userDescription)
   })
   .catch(error => {
-    console.error(error);
-  });
+    console.error(error)
+  })
 ```
 
 ### Web USB
@@ -4402,13 +4399,13 @@ navigator.bluetooth
 [USB API](https://web.dev/usb):
 
 ```ts
-let device;
+let device
 
 navigator.usb
   .requestDevice({ filters: [{ vendorId: 0x2341 }] })
   .then(selectedDevice => {
-    device = selectedDevice;
-    return device.open(); // Begin a session.
+    device = selectedDevice
+    return device.open() // Begin a session.
   })
   .then(() => device.selectConfiguration(1)) // Select configuration for the device.
   .then(() => device.claimInterface(2)) // Request exclusive control over interface.
@@ -4423,12 +4420,12 @@ navigator.usb
   ) // Ready to receive data
   .then(() => device.transferIn(5, 64)) // Waiting for 64 bytes of data from endpoint.
   .then(result => {
-    const decoder = new TextDecoder();
-    console.log(`Received: ${decoder.decode(result.data)}`);
+    const decoder = new TextDecoder()
+    console.log(`Received: ${decoder.decode(result.data)}`)
   })
   .catch(error => {
-    console.error(error);
-  });
+    console.error(error)
+  })
 ```
 
 ### Web NFC
@@ -4436,25 +4433,25 @@ navigator.usb
 [NFC API](https://web.dev/nfc):
 
 ```ts
-const encoder = new TextEncoder();
+const encoder = new TextEncoder()
 const data = {
   firstName: 'First',
   lastName: 'Last',
-};
+}
 const jsonRecord = {
   recordType: 'mime',
   mediaType: 'application/json',
   data: encoder.encode(JSON.stringify(data)),
-};
+}
 
 const imageRecord = {
   recordType: 'mime',
   mediaType: 'image/png',
   data: await(await fetch('icon1.png')).arrayBuffer(),
-};
+}
 
-const ndef = new NDEFReader();
-await ndef.write({ records: [jsonRecord, imageRecord] });
+const ndef = new NDEFReader()
+await ndef.write({ records: [jsonRecord, imageRecord] })
 ```
 
 ### Web Serial
@@ -4463,38 +4460,38 @@ await ndef.write({ records: [jsonRecord, imageRecord] });
 
 ```ts
 // Prompt user to select any serial port.
-const port = await navigator.serial.requestPort();
+const port = await navigator.serial.requestPort()
 
 // Wait for the serial port to open.
-await port.open({ baudRate: 9600 });
+await port.open({ baudRate: 9600 })
 
 // Close a serial port.
-await port.close();
+await port.close()
 ```
 
 ```ts
-const textDecoder = new TextDecoderStream();
-const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
-const reader = textDecoder.readable.getReader();
+const textDecoder = new TextDecoderStream()
+const readableStreamClosed = port.readable.pipeTo(textDecoder.writable)
+const reader = textDecoder.readable.getReader()
 
 // Listen to data coming from the serial device.
 while (true) {
-  const { value, done } = await reader.read();
+  const { value, done } = await reader.read()
   if (done) {
     // Allow the serial port to be closed later.
-    reader.releaseLock();
-    break;
+    reader.releaseLock()
+    break
   }
   // value is a string.
-  console.log(value);
+  console.log(value)
 }
 ```
 
 ```ts
-const textEncoder = new TextEncoderStream();
-const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
-const writer = textEncoder.writable.getWriter();
-await writer.write('hello');
+const textEncoder = new TextEncoderStream()
+const writableStreamClosed = textEncoder.readable.pipeTo(port.writable)
+const writer = textEncoder.writable.getWriter()
+await writer.write('hello')
 ```
 
 ### Web HID
@@ -4503,26 +4500,26 @@ await writer.write('hello');
 
 ```ts
 const waitFor = duration =>
-  new Promise(resolve => setTimeout(resolve, duration));
+  new Promise(resolve => setTimeout(resolve, duration))
 
 // Prompt user to select an Apple Keyboard Backlight device.
 const [device] = await navigator.hid.requestDevice({
   filters: [{ vendorId: 0x05ac, usage: 0x0f, usagePage: 0xff00 }],
-});
+})
 
 // Wait for the HID connection to open.
-await device.open();
+await device.open()
 
 // Blink!
-const reportId = 1;
+const reportId = 1
 
 for (let i = 0; i < 10; i++) {
   // Turn off
-  await device.sendFeatureReport(reportId, Uint32Array.from([0, 0]));
-  await waitFor(100);
+  await device.sendFeatureReport(reportId, Uint32Array.from([0, 0]))
+  await waitFor(100)
 
   // Turn on
-  await device.sendFeatureReport(reportId, Uint32Array.from([512, 0]));
-  await waitFor(100);
+  await device.sendFeatureReport(reportId, Uint32Array.from([512, 0]))
+  await waitFor(100)
 }
 ```

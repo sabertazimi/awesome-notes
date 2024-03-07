@@ -1804,14 +1804,11 @@ SVG [SMIL animation](https://css-tricks.com/guide-svg-animations-smil):
 ### SVG API
 
 ```ts
-const svgElement = document.createElementNS(
-  'http://www.w3.org/2000/svg',
-  'svg'
-);
+const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
 const svgRectElement = document.createElementNS(
   'http://www.w3.org/2000/svg',
   'rect'
-);
+)
 ```
 
 ### SVG Reference
@@ -2212,12 +2209,12 @@ Detecting media query support in CSS:
 Detecting media query support in JavaScript:
 
 ```ts
-const query = '(prefers-reduced-data)';
+const query = '(prefers-reduced-data)'
 
 // window.matchMedia(query).media return 'not all' or original query string
-const resolvedMediaQuery = window.matchMedia(query).media;
+const resolvedMediaQuery = window.matchMedia(query).media
 
-const isSupported = query === resolvedMediaQuery;
+const isSupported = query === resolvedMediaQuery
 ```
 
 ### Media Query API
@@ -2226,7 +2223,7 @@ Media query [`matchMedia`](https://developer.mozilla.org/docs/Web/API/Window/mat
 
 ```ts
 // https://developer.mozilla.org/docs/Web/API/MediaQueryList
-const mql = window.matchMedia(mediaQueryString);
+const mql = window.matchMedia(mediaQueryString)
 ```
 
 ```ts
@@ -2240,7 +2237,7 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 [Respond to media query changes](https://polypane.app/blog/the-complete-guide-to-css-media-queries/#using-media-queries-in-javascript):
 
 ```ts
-const match = window.matchMedia('(min-width: 400px)');
+const match = window.matchMedia('(min-width: 400px)')
 
 match.addEventListener('change', e => {
   if (e.matches) {
@@ -2248,7 +2245,7 @@ match.addEventListener('change', e => {
   } else {
     /* do another thing */
   }
-});
+})
 ```
 
 ## Container Query
@@ -2400,13 +2397,13 @@ e.g `.main > .button` vs `.sidebar > .button`,
 [`CSS.supports()`](https://developer.mozilla.org/docs/Web/API/CSS/supports):
 
 ```ts
-const result = CSS.supports('text-decoration-style', 'blink');
-const result = CSS.supports('display: flex');
-const result = CSS.supports('(--foo: red)');
+const result = CSS.supports('text-decoration-style', 'blink')
+const result = CSS.supports('display: flex')
+const result = CSS.supports('(--foo: red)')
 const result = CSS.supports(`
   (transform-style: preserve) or (-moz-transform-style: preserve) or
   (-o-transform-style: preserve) or (-webkit-transform-style: preserve)
-`);
+`)
 ```
 
 ## CSS Accessibility
@@ -2549,17 +2546,17 @@ PC 屏幕 DPR 为 1,
 
 ```ts
 // Change viewport scale
-const scale = 1 / window.devicePixelRatio;
-const viewport = document.querySelector('meta[name="viewport"]');
+const scale = 1 / window.devicePixelRatio
+const viewport = document.querySelector('meta[name="viewport"]')
 viewport.setAttribute(
   'content',
   `width=device-width,user-scalable=no,initial-scale=${scale},maximum-scale=${scale},minimum-scale=${scale}`
-);
+)
 
 // Set root font size
-const docEl = document.documentElement;
-const fontsize = `${10 * (docEl.clientWidth / 320)}px`;
-docEl.style.fontSize = fontsize;
+const docEl = document.documentElement
+const fontsize = `${10 * (docEl.clientWidth / 320)}px`
+docEl.style.fontSize = fontsize
 ```
 
 ## CSS Performance
@@ -2668,14 +2665,14 @@ docEl.style.fontSize = fontsize;
 const observer = new ResizeObserver(entries => {
   for (const entry of entries) {
     if (entry.target.getBoundingClientRect().height > 0) {
-      observer.unobserve(entry.target);
-      entry.target.classList.remove('content-visibility-auto');
+      observer.unobserve(entry.target)
+      entry.target.classList.remove('content-visibility-auto')
     }
   }
-});
+})
 
 for (const element of document.querySelectorAll('.content-visibility-auto')) {
-  observer.observe(element);
+  observer.observe(element)
 }
 ```
 
@@ -2794,24 +2791,24 @@ and call JavaScript API triggering layout stage (`reflow`):
 > 若想要在下次重绘时产生另一个动画画面, callback 必须调用 requestAnimationFrame.
 
 ```ts
-let start = null;
-const element = document.getElementById('SomeElementYouWantToAnimate');
-element.style.position = 'absolute';
+let start = null
+const element = document.getElementById('SomeElementYouWantToAnimate')
+element.style.position = 'absolute'
 
 function step(timestamp) {
   if (!start) {
-    start = timestamp;
+    start = timestamp
   }
 
-  const progress = timestamp - start;
-  element.style.left = `${Math.min(progress / 10, 200)}px`;
+  const progress = timestamp - start
+  element.style.left = `${Math.min(progress / 10, 200)}px`
 
   if (progress < 2000) {
-    window.requestAnimationFrame(step);
+    window.requestAnimationFrame(step)
   }
 }
 
-window.requestAnimationFrame(step);
+window.requestAnimationFrame(step)
 ```
 
 #### Animation DevTools
@@ -3007,8 +3004,8 @@ button {
 ```html
 <script>
   if (window.CSSPropertyRule) {
-    const root = document.documentElement;
-    root.classList.add('supports-at-property');
+    const root = document.documentElement
+    root.classList.add('supports-at-property')
   }
 </script>
 
@@ -3230,7 +3227,7 @@ module.exports = {
       },
     ],
   },
-};
+}
 ```
 
 `StyleLint` plugins:

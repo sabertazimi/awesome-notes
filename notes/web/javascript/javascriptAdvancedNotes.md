@@ -37,36 +37,36 @@ Iteration [protocol](https://developer.mozilla.org/docs/Web/JavaScript/Reference
 
 ```ts
 interface Iterable<T> {
-  [Symbol.iterator](): Iterator<T>;
+  [Symbol.iterator](): Iterator<T>
 }
 
 interface Iterator<T> {
-  next(...args: []): IteratorResult<T>;
-  return?(value?: T): IteratorResult<T>; // Closable iterator
-  throw?(e?: any): IteratorResult<T>;
+  next(...args: []): IteratorResult<T>
+  return?(value?: T): IteratorResult<T> // Closable iterator
+  throw?(e?: any): IteratorResult<T>
 }
 
 interface IterableIterator<T> extends Iterator<T> {
-  [Symbol.iterator](): IterableIterator<T>;
+  [Symbol.iterator](): IterableIterator<T>
 }
 
 interface AsyncIterable<T> {
-  [Symbol.asyncIterator](): AsyncIterator<T>;
+  [Symbol.asyncIterator](): AsyncIterator<T>
 }
 
 interface AsyncIterator<T> {
-  next(...args: []): Promise<IteratorResult<T>>;
-  return?(value?: T | PromiseLike<T>): Promise<IteratorResult<T>>; // Closable iterator
-  throw?(e?: any): Promise<IteratorResult<T>>;
+  next(...args: []): Promise<IteratorResult<T>>
+  return?(value?: T | PromiseLike<T>): Promise<IteratorResult<T>> // Closable iterator
+  throw?(e?: any): Promise<IteratorResult<T>>
 }
 
 interface AsyncIterableIterator<T> extends AsyncIterator<T> {
-  [Symbol.asyncIterator](): AsyncIterableIterator<T>;
+  [Symbol.asyncIterator](): AsyncIterableIterator<T>
 }
 
 interface IteratorResult<T> {
-  done: boolean;
-  value: T;
+  done: boolean
+  value: T
 }
 ```
 
@@ -76,12 +76,12 @@ interface IteratorResult<T> {
 
 ```ts
 function methodsIterator() {
-  let index = 0;
+  let index = 0
   const methods = Object.keys(this)
     .filter(key => {
-      return typeof this[key] === 'function';
+      return typeof this[key] === 'function'
     })
-    .map(key => this[key]);
+    .map(key => this[key])
 
   // iterator object
   return {
@@ -90,61 +90,61 @@ function methodsIterator() {
       done: index >= methods.length,
       value: methods[index++],
     }),
-  };
+  }
 }
 
 const myMethods = {
   toString() {
-    return '[object myMethods]';
+    return '[object myMethods]'
   },
   sumNumbers(a, b) {
-    return a + b;
+    return a + b
   },
   numbers: [1, 5, 6],
   [Symbol.iterator]: methodsIterator, // Conform to Iterable Protocol
-};
+}
 
 for (const method of myMethods) {
-  console.log(method); // logs methods `toString` and `sumNumbers`
+  console.log(method) // logs methods `toString` and `sumNumbers`
 }
 ```
 
 ```ts
 function zip(...iterables) {
-  const iterators = iterables.map(i => i[Symbol.iterator]());
-  let done = false;
+  const iterators = iterables.map(i => i[Symbol.iterator]())
+  let done = false
 
   return {
     [Symbol.iterator]() {
-      return this;
+      return this
     },
     next() {
       if (!done) {
-        const items = iterators.map(i => i.next());
-        done = items.some(item => item.done);
+        const items = iterators.map(i => i.next())
+        done = items.some(item => item.done)
 
         if (!done) {
-          return { value: items.map(i => i.value) };
+          return { value: items.map(i => i.value) }
         }
 
         // Done for the first time: close all iterators
         for (const iterator of iterators) {
           if (typeof iterator.return === 'function') {
-            iterator.return();
+            iterator.return()
           }
         }
       }
 
       // We are done
-      return { done: true };
+      return { done: true }
     },
-  };
+  }
 }
 
-const zipped = zip(['a', 'b', 'c'], ['d', 'e', 'f', 'g']);
+const zipped = zip(['a', 'b', 'c'], ['d', 'e', 'f', 'g'])
 
 for (const x of zipped) {
-  console.log(x);
+  console.log(x)
 }
 // Output:
 // ['a', 'd']
@@ -157,56 +157,56 @@ for (const x of zipped) {
 ```ts
 class Counter {
   constructor(limit) {
-    this.limit = limit;
+    this.limit = limit
   }
 
   [Symbol.iterator]() {
-    let count = 1;
-    const limit = this.limit;
+    let count = 1
+    const limit = this.limit
 
     return {
       next() {
         if (count <= limit) {
-          return { done: false, value: count++ };
+          return { done: false, value: count++ }
         } else {
-          return { done: true };
+          return { done: true }
         }
       },
       return() {
-        console.log('Exiting early');
-        return { done: true };
+        console.log('Exiting early')
+        return { done: true }
       },
-    };
+    }
   }
 }
 
-const counter1 = new Counter(5);
+const counter1 = new Counter(5)
 for (const i of counter1) {
   if (i > 2) {
-    break;
+    break
   }
-  console.log(i);
+  console.log(i)
 }
 // 1
 // 2
 // Exiting early
 
-const counter2 = new Counter(5);
+const counter2 = new Counter(5)
 try {
   for (const i of counter2) {
     if (i > 2) {
-      throw new Error('err');
+      throw new Error('err')
     }
 
-    console.log(i);
+    console.log(i)
   }
 } catch (e) {}
 // 1
 // 2
 // Exiting early
 
-const counter3 = new Counter(5);
-const [a, b] = counter3;
+const counter3 = new Counter(5)
+const [a, b] = counter3
 // Exiting early
 ```
 
@@ -216,62 +216,62 @@ const [a, b] = counter3;
 // Class Iterator:
 class MatrixIterator {
   constructor(matrix) {
-    this.x = 0;
-    this.y = 0;
-    this.matrix = matrix;
+    this.x = 0
+    this.y = 0
+    this.matrix = matrix
   }
 
   next() {
-    if (this.y === this.matrix.height) return { done: true };
+    if (this.y === this.matrix.height) return { done: true }
 
     const value = {
       x: this.x,
       y: this.y,
       value: this.matrix.get(this.x, this.y),
-    };
-
-    this.x++;
-
-    if (this.x === this.matrix.width) {
-      this.x = 0;
-      this.y++;
     }
 
-    return { value, done: false };
+    this.x++
+
+    if (this.x === this.matrix.width) {
+      this.x = 0
+      this.y++
+    }
+
+    return { value, done: false }
   }
 }
 
 // Iterable Class:
 class Matrix {
   constructor(width, height, element = (x, y) => undefined) {
-    this.width = width;
-    this.height = height;
-    this.content = [];
+    this.width = width
+    this.height = height
+    this.content = []
 
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
-        this.content[y * width + x] = element(x, y);
+        this.content[y * width + x] = element(x, y)
       }
     }
   }
 
   get(x, y) {
-    return this.content[y * this.width + x];
+    return this.content[y * this.width + x]
   }
 
   set(x, y, value) {
-    this.content[y * this.width + x] = value;
+    this.content[y * this.width + x] = value
   }
 
   [Symbol.iterator]() {
-    return new MatrixIterator(this);
+    return new MatrixIterator(this)
   }
 }
 
-const matrix = new Matrix(2, 2, (x, y) => `value ${x},${y}`);
+const matrix = new Matrix(2, 2, (x, y) => `value ${x},${y}`)
 
 for (const { x, y, value } of matrix) {
-  console.log(x, y, value);
+  console.log(x, y, value)
 }
 // → 0 0 value 0, 0
 // → 1 0 value 1, 0
@@ -284,44 +284,44 @@ for (const { x, y, value } of matrix) {
 ```ts
 const AsyncIterable = {
   [Symbol.asyncIterator]() {
-    return AsyncIterator;
+    return AsyncIterator
   },
-};
+}
 
 const AsyncIterator = {
   next() {
-    return Promise.resolve(IteratorResult);
+    return Promise.resolve(IteratorResult)
   },
   return() {
-    return Promise.resolve(IteratorResult);
+    return Promise.resolve(IteratorResult)
   },
   throw(e) {
-    return Promise.reject(e);
+    return Promise.reject(e)
   },
-};
+}
 
 const IteratorResult = {
   value: any,
   done: boolean,
-};
+}
 
 // Tasks will chained:
 ait
   .next()
   .then(({ value, done }) => ait.next())
   .then(({ value, done }) => ait.next())
-  .then(({ done }) => done);
+  .then(({ done }) => done)
 
 // Tasks will run in parallel:
-ait.next().then();
-ait.next().then();
-ait.next().then();
+ait.next().then()
+ait.next().then()
+ait.next().then()
 ```
 
 ```ts
 function remotePostsAsyncIteratorsFactory() {
-  let i = 1;
-  let done = false;
+  let i = 1
+  let done = false
 
   const asyncIterableIterator = {
     // the next method will always return a Promise
@@ -331,45 +331,45 @@ function remotePostsAsyncIteratorsFactory() {
         return Promise.resolve({
           done: true,
           value: undefined,
-        });
+        })
       }
 
       const res = await fetch(
         `https://jsonplaceholder.typicode.com/posts/${i++}`
-      ).then(r => r.json());
+      ).then(r => r.json())
 
       // the posts source is ended
       if (Object.keys(res).length === 0) {
-        done = true;
+        done = true
         return Promise.resolve({
           done: true,
           value: undefined,
-        });
+        })
       } else {
         return Promise.resolve({
           done: false,
           value: res,
-        });
+        })
       }
     },
     [Symbol.asyncIterator]() {
-      return this;
+      return this
     },
-  };
+  }
 
-  return asyncIterableIterator;
+  return asyncIterableIterator
 }
 
-(async () => {
-  const ait = remotePostsAsyncIteratorsFactory();
+;(async () => {
+  const ait = remotePostsAsyncIteratorsFactory()
 
-  await ait.next(); // { done:false, value:{id: 1, ...} }
-  await ait.next(); // { done:false, value:{id: 2, ...} }
-  await ait.next(); // { done:false, value:{id: 3, ...} }
+  await ait.next() // { done:false, value:{id: 1, ...} }
+  await ait.next() // { done:false, value:{id: 2, ...} }
+  await ait.next() // { done:false, value:{id: 3, ...} }
   // ...
-  await ait.next(); // { done:false, value:{id: 100, ...} }
-  await ait.next(); // { done:true, value:undefined }
-})();
+  await ait.next() // { done:false, value:{id: 100, ...} }
+  await ait.next() // { done:true, value:undefined }
+})()
 ```
 
 ### Closable Iterator
@@ -378,17 +378,17 @@ function remotePostsAsyncIteratorsFactory() {
 
 ```ts
 interface ClosableIterator {
-  next(): IteratorResult;
-  return(value?: any): IteratorResult;
+  next(): IteratorResult
+  return(value?: any): IteratorResult
 }
 ```
 
 - Not all iterators are closable: e.g `Array Iterator`.
 
 ```ts
-const iterable = ['a', 'b', 'c'];
-const iterator = iterable[Symbol.iterator]();
-console.log('return' in iterator);
+const iterable = ['a', 'b', 'c']
+const iterator = iterable[Symbol.iterator]()
+console.log('return' in iterator)
 // => false
 ```
 
@@ -399,52 +399,52 @@ console.log('return' in iterator);
 
 ```ts
 function* elements() {
-  yield 'a';
-  yield 'b';
-  yield 'c';
+  yield 'a'
+  yield 'b'
+  yield 'c'
 }
 
 function twoLoops(iterator) {
   // eslint-disable-next-line no-unreachable-loop
   for (const x of iterator) {
-    console.log(x);
-    break;
+    console.log(x)
+    break
   }
 
   for (const x of iterator) {
-    console.log(x);
+    console.log(x)
   }
 }
 
 class PreventReturn {
   constructor(iterator) {
-    this.iterator = iterator;
+    this.iterator = iterator
   }
 
   [Symbol.iterator]() {
-    return this;
+    return this
   }
 
   next() {
-    return this.iterator.next();
+    return this.iterator.next()
   }
 
   return(value = undefined) {
-    return { done: false, value };
+    return { done: false, value }
   }
 }
 
-twoLoops(elements());
+twoLoops(elements())
 // Output:
 // a
 
-twoLoops(new PreventReturn(elements()));
+twoLoops(new PreventReturn(elements()))
 // Output:
 // a
 // b
 // c
 
-twoLoops(['a', 'b', 'c'][Symbol.iterator]());
+twoLoops(['a', 'b', 'c'][Symbol.iterator]())
 // Output:
 // a
 // b
@@ -455,26 +455,26 @@ twoLoops(['a', 'b', 'c'][Symbol.iterator]());
 
 ```ts
 function take(n, iterable) {
-  const iter = iterable[Symbol.iterator]();
+  const iter = iterable[Symbol.iterator]()
 
   return {
     [Symbol.iterator]() {
-      return this;
+      return this
     },
     next() {
       if (n > 0) {
-        n--;
-        return iter.next();
+        n--
+        return iter.next()
       } else {
-        iter?.return();
-        return { done: true };
+        iter?.return()
+        return { done: true }
       }
     },
     return() {
-      n = 0;
-      iter?.return();
+      n = 0
+      iter?.return()
     },
-  };
+  }
 }
 ```
 
@@ -489,50 +489,50 @@ function take(n, iterable) {
 
 ```ts
 interface GeneratorFunction {
-  (...args: any[]): Generator;
-  readonly length: number;
-  readonly name: string;
-  readonly prototype: Generator;
+  (...args: any[]): Generator
+  readonly length: number
+  readonly name: string
+  readonly prototype: Generator
 }
 
 interface Generator<T> extends Iterator<T> {
-  next(...args: []): IteratorResult<T>;
-  return(value: T): IteratorResult<T>; // Required
-  throw(e: any): IteratorResult<T>; // Required
-  [Symbol.iterator](): Generator<T>;
+  next(...args: []): IteratorResult<T>
+  return(value: T): IteratorResult<T> // Required
+  throw(e: any): IteratorResult<T> // Required
+  [Symbol.iterator](): Generator<T>
 }
 
 interface AsyncGeneratorFunction {
-  (...args: any[]): AsyncGenerator;
-  readonly length: number;
-  readonly name: string;
-  readonly prototype: AsyncGenerator;
+  (...args: any[]): AsyncGenerator
+  readonly length: number
+  readonly name: string
+  readonly prototype: AsyncGenerator
 }
 
 interface AsyncGenerator<T> extends AsyncIterator<T> {
-  next(...args: []): Promise<IteratorResult<T>>;
-  return(value: T | PromiseLike<T>): Promise<IteratorResult<T>>; // Required
-  throw(e: any): Promise<IteratorResult<T>>; // Required
-  [Symbol.asyncIterator](): AsyncGenerator<T>;
+  next(...args: []): Promise<IteratorResult<T>>
+  return(value: T | PromiseLike<T>): Promise<IteratorResult<T>> // Required
+  throw(e: any): Promise<IteratorResult<T>> // Required
+  [Symbol.asyncIterator](): AsyncGenerator<T>
 }
 ```
 
 ```ts
 function* generatorFn() {}
-console.log(generatorFn);
+console.log(generatorFn)
 // f* generatorFn() {}
 
-console.log(generatorFn()[Symbol.iterator]);
+console.log(generatorFn()[Symbol.iterator])
 // f [Symbol.iterator]() {native code}
 
-console.log(generatorFn());
+console.log(generatorFn())
 // generatorFn {<suspended>}
 
-console.log(generatorFn()[Symbol.iterator]());
+console.log(generatorFn()[Symbol.iterator]())
 // generatorFn {<suspended>}
 
-const g = generatorFn(); // IterableIterator
-console.log(g === g[Symbol.iterator]());
+const g = generatorFn() // IterableIterator
+console.log(g === g[Symbol.iterator]())
 // true
 ```
 
@@ -554,19 +554,19 @@ Generators can play 3 roles:
 
 ```ts
 function* gen() {
-  yield 1;
-  yield 2;
-  yield 3;
+  yield 1
+  yield 2
+  yield 3
 }
 
-const g = gen();
+const g = gen()
 
-g.next(); // { value: 1, done: false }
-g.next(); // { value: 2, done: false }
-g.next(); // { value: 3, done: false }
-g.next(); // { value: undefined, done: true }
-g.return(); // { value: undefined, done: true }
-g.return(1); // { value: 1, done: true }
+g.next() // { value: 1, done: false }
+g.next() // { value: 2, done: false }
+g.next() // { value: 3, done: false }
+g.next() // { value: undefined, done: true }
+g.return() // { value: undefined, done: true }
+g.return(1) // { value: 1, done: true }
 ```
 
 #### Default Iterator Generator
@@ -587,31 +587,31 @@ const users = {
   *[Symbol.iterator]() {
     // this === 'users'
     for (const key in this) {
-      if (this[key]) yield key;
+      if (this[key]) yield key
     }
   },
-};
+}
 
 for (const key of users) {
-  console.log(key);
+  console.log(key)
 }
 // andrew
 // clare
 
 class Foo {
   constructor() {
-    this.values = [1, 2, 3];
+    this.values = [1, 2, 3]
   }
 
   *[Symbol.iterator]() {
-    yield* this.values;
+    yield* this.values
   }
 }
 
-const f = new Foo();
+const f = new Foo()
 
 for (const x of f) {
-  console.log(x);
+  console.log(x)
 }
 // 1
 // 2
@@ -625,16 +625,16 @@ for (const x of f) {
 
 ```ts
 function* gen() {
-  yield 1;
-  yield 2;
-  yield 3;
+  yield 1
+  yield 2
+  yield 3
 }
 
-const g = gen();
+const g = gen()
 
-g.next(); // { value: 1, done: false }
-g.return('foo'); // { value: "foo", done: true }
-g.next(); // { value: undefined, done: true }
+g.next() // { value: 1, done: false }
+g.return('foo') // { value: "foo", done: true }
+g.next() // { value: undefined, done: true }
 ```
 
 #### Error Handling Generator
@@ -647,35 +647,35 @@ g.next(); // { value: undefined, done: true }
 ```ts
 function* generator() {
   try {
-    yield 1;
+    yield 1
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
 
-  yield 2;
-  yield 3;
-  yield 4;
-  yield 5;
+  yield 2
+  yield 3
+  yield 4
+  yield 5
 }
 
-const it = generator();
+const it = generator()
 
-it.next(); // {value: 1, done: false}
+it.next() // {value: 1, done: false}
 
 // the error will be handled and printed ("Error: Handled!"),
 // then the flow will continue, so we will get the
 // next yielded value as result.
-it.throw(Error('Handled!')); // {value: 2, done: false}
+it.throw(Error('Handled!')) // {value: 2, done: false}
 
-it.next(); // {value: 3, done: false}
+it.next() // {value: 3, done: false}
 
 // now the generator instance is paused on the
 // third yield that is not inside a try-catch.
 // the error will be re-thrown out
-it.throw(Error('Not handled!')); // !!! Uncaught Error: Not handled! !!!
+it.throw(Error('Not handled!')) // !!! Uncaught Error: Not handled! !!!
 
 // now the iterator is exhausted
-it.next(); // {value: undefined, done: true}
+it.next() // {value: undefined, done: true}
 ```
 
 ### Generator Advanced Usage
@@ -690,32 +690,32 @@ it.next(); // {value: undefined, done: true}
 
 ```ts
 function* lazyCalculator(operator) {
-  const firstOperand = yield;
-  const secondOperand = yield;
+  const firstOperand = yield
+  const secondOperand = yield
 
   switch (operator) {
     case '+':
-      yield firstOperand + secondOperand;
-      return;
+      yield firstOperand + secondOperand
+      return
     case '-':
-      yield firstOperand - secondOperand;
-      return;
+      yield firstOperand - secondOperand
+      return
     case '*':
-      yield firstOperand * secondOperand;
-      return;
+      yield firstOperand * secondOperand
+      return
     case '/':
-      yield firstOperand / secondOperand;
-      return;
+      yield firstOperand / secondOperand
+      return
     default:
-      throw new Error('Unsupported operation!');
+      throw new Error('Unsupported operation!')
   }
 }
 
-const g = gen('*');
-g.next(); // { value: undefined, done: false }
-g.next(10); // { value: undefined, done: false }
-g.next(2); // { value: 20, done: false }
-g.next(); // { value: undefined, done: true }
+const g = gen('*')
+g.next() // { value: undefined, done: false }
+g.next(10) // { value: undefined, done: false }
+g.next(2) // { value: 20, done: false }
+g.next() // { value: undefined, done: true }
 ```
 
 #### Default Asynchronous Iterator Generator
@@ -725,12 +725,12 @@ Default asynchronous iterator:
 ```ts
 const asyncSource = {
   async *[Symbol.asyncIterator]() {
-    yield await new Promise(resolve => setTimeout(resolve, 1000, 1));
+    yield await new Promise(resolve => setTimeout(resolve, 1000, 1))
   },
-};
+}
 
 for await (const chunk of asyncSource) {
-  console.log(chunk);
+  console.log(chunk)
 }
 ```
 
@@ -738,26 +738,26 @@ for await (const chunk of asyncSource) {
 
 ```ts
 async function* remotePostsAsyncGenerator() {
-  let i = 1;
+  let i = 1
 
   while (true) {
     const res = await fetch(
       `https://jsonplaceholder.typicode.com/posts/${i++}`
-    ).then(r => r.json());
+    ).then(r => r.json())
 
     // when no more remote posts will be available,
     // it will break the infinite loop.
     // the async iteration will end
     if (Object.keys(res).length === 0) {
-      break;
+      break
     }
 
-    yield res;
+    yield res
   }
 }
 
 for await (const chunk of remotePostsAsyncGenerator()) {
-  console.log(chunk);
+  console.log(chunk)
 }
 ```
 
@@ -768,44 +768,44 @@ Asynchronous UI events stream (RxJS):
 ```ts
 class Observable {
   constructor() {
-    this.promiseQueue = [];
+    this.promiseQueue = []
     // 保存用于队列下一个 promise 的 resolve 方法
-    this.resolve = null;
+    this.resolve = null
     // 把最初的 promise 推到队列, 该 promise 会 resolve 为第一个观察到的事件
-    this.enqueue();
+    this.enqueue()
   }
 
   // 创建新 promise, 保存其 resolve 方法, 并把它保存到队列中
   enqueue() {
-    this.promiseQueue.push(new Promise(resolve => (this.resolve = resolve)));
+    this.promiseQueue.push(new Promise(resolve => (this.resolve = resolve)))
   }
 
   // 从队列前端移除 promise, 并返回它
   dequeue() {
-    return this.promiseQueue.shift();
+    return this.promiseQueue.shift()
   }
 
   async *fromEvent(element, eventType) {
     // 在有事件生成时, 用事件对象来 resolve 队列头部的 promise
     // 同时把另一个 promise 加入队列
     element.addEventListener(eventType, event => {
-      this.resolve(event);
-      this.enqueue();
-    });
+      this.resolve(event)
+      this.enqueue()
+    })
 
     // 每次 resolve 队列头部的 promise 后, 都会向异步迭代器返回相应的事件对象
     while (true) {
-      yield await this.dequeue();
+      yield await this.dequeue()
     }
   }
 }
 
-const observable = new Observable();
-const button = document.querySelector('button');
-const mouseClickIterator = observable.fromEvent(button, 'click');
+const observable = new Observable()
+const button = document.querySelector('button')
+const mouseClickIterator = observable.fromEvent(button, 'click')
 
 for await (const clickEvent of mouseClickIterator) {
-  console.log(clickEvent);
+  console.log(clickEvent)
 }
 ```
 
@@ -815,29 +815,29 @@ using promises, letting you write non-blocking code in a nice-ish way
 
 ```ts
 function coroutine(generatorFunc) {
-  const generator = generatorFunc();
+  const generator = generatorFunc()
 
   function nextResponse(value) {
-    const response = generator.next(value);
+    const response = generator.next(value)
 
     if (response.done) {
-      return;
+      return
     }
 
     if (value instanceof Promise) {
-      value.then(nextResponse);
+      value.then(nextResponse)
     } else {
-      nextResponse(response.value);
+      nextResponse(response.value)
     }
   }
 
-  nextResponse();
+  nextResponse()
 }
 
 coroutine(function* bounce() {
-  yield bounceUp;
-  yield bounceDown;
-});
+  yield bounceUp
+  yield bounceDown
+})
 ```
 
 利用 `async`/`await` 可以实现相同效果:
@@ -845,59 +845,59 @@ coroutine(function* bounce() {
 ```ts
 function co(gen) {
   return new Promise((resolve, reject) => {
-    const g = gen();
+    const g = gen()
 
     function next(param) {
-      const { done, value } = g.next(param);
+      const { done, value } = g.next(param)
 
       if (!done) {
         // Resolve chain.
-        Promise.resolve(value).then(res => next(res));
+        Promise.resolve(value).then(res => next(res))
       } else {
-        resolve(value);
+        resolve(value)
       }
     }
 
     // First invoke g.next() without params.
-    next();
-  });
+    next()
+  })
 }
 
 function promise1() {
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve('1');
-    }, 1000);
-  });
+      resolve('1')
+    }, 1000)
+  })
 }
 
 function promise2(value) {
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve(`value:${value}`);
-    }, 1000);
-  });
+      resolve(`value:${value}`)
+    }, 1000)
+  })
 }
 
 function* readFileGenerator() {
-  const value = yield promise1();
-  const result = yield promise2(value);
-  return result;
+  const value = yield promise1()
+  const result = yield promise2(value)
+  return result
 }
 
 async function readFile() {
-  const value = await promise1();
-  const result = await promise2(value);
-  return result;
+  const value = await promise1()
+  const result = await promise2(value)
+  return result
 }
 
-co(readFileGenerator).then(res => console.log(res));
+co(readFileGenerator).then(res => console.log(res))
 // const g = readFileGenerator();
 // const value = g.next();
 // const result = g.next(value);
 // resolve(result);
 
-readFile().then(res => console.log(res));
+readFile().then(res => console.log(res))
 ```
 
 #### Delegating Generator
@@ -910,11 +910,11 @@ readFile().then(res => console.log(res));
 
 ```ts
 function* generatorFn() {
-  console.log('iter value:', yield* [1, 2, 3]);
+  console.log('iter value:', yield* [1, 2, 3])
 }
 
 for (const x of generatorFn()) {
-  console.log('value:', x);
+  console.log('value:', x)
 }
 // value: 1
 // value: 2
@@ -924,16 +924,16 @@ for (const x of generatorFn()) {
 
 ```ts
 function* innerGeneratorFn() {
-  yield 'foo';
-  return 'bar';
+  yield 'foo'
+  return 'bar'
 }
 
 function* outerGeneratorFn(genObj) {
-  console.log('iter value:', yield* innerGeneratorFn());
+  console.log('iter value:', yield* innerGeneratorFn())
 }
 
 for (const x of outerGeneratorFn()) {
-  console.log('value:', x);
+  console.log('value:', x)
 }
 // value: foo
 // iter value: bar
@@ -941,29 +941,29 @@ for (const x of outerGeneratorFn()) {
 
 ```ts
 function* chunkify(array, n) {
-  yield array.slice(0, n);
-  array.length > n && (yield* chunkify(array.slice(n), n));
+  yield array.slice(0, n)
+  array.length > n && (yield* chunkify(array.slice(n), n))
 }
 
 async function* getRemoteData() {
-  let hasMore = true;
-  let page;
+  let hasMore = true
+  let page
 
   while (hasMore) {
     const { next_page, results } = await fetch(URL, { params: { page } }).then(
       r => r.json()
-    );
+    )
 
     // Return 5 elements with each iteration.
-    yield* chunkify(results, 5);
+    yield* chunkify(results, 5)
 
-    hasMore = next_page !== null;
-    page = next_page;
+    hasMore = next_page !== null
+    page = next_page
   }
 }
 
 for await (const chunk of getRemoteData()) {
-  console.log(chunk);
+  console.log(chunk)
 }
 ```
 
@@ -979,22 +979,22 @@ Tree traversal:
 // Tree traversal
 class BinaryTree {
   constructor(value, left = null, right = null) {
-    this.value = value;
-    this.left = left;
-    this.right = right;
+    this.value = value
+    this.left = left
+    this.right = right
   }
 
   *[Symbol.iterator]() {
-    yield this.value;
+    yield this.value
 
     if (this.left) {
       // Short for: yield* this.left[Symbol.iterator]()
-      yield* this.left;
+      yield* this.left
     }
 
     if (this.right) {
       // Short for: yield* this.right[Symbol.iterator]()
-      yield* this.right;
+      yield* this.right
     }
   }
 }
@@ -1003,10 +1003,10 @@ const tree = new BinaryTree(
   'a',
   new BinaryTree('b', new BinaryTree('c'), new BinaryTree('d')),
   new BinaryTree('e')
-);
+)
 
 for (const x of tree) {
-  console.log(x);
+  console.log(x)
 }
 // Output:
 // a
@@ -1023,8 +1023,8 @@ Graph traversal:
 function* graphTraversal(nodes) {
   for (const node of nodes) {
     if (!visitedNodes.has(node)) {
-      yield node;
-      yield* graphTraversal(node.neighbors);
+      yield node
+      yield* graphTraversal(node.neighbors)
     }
   }
 }
@@ -1034,41 +1034,41 @@ DOM traversal:
 
 ```ts
 function* domTraversal(element) {
-  yield element;
-  element = element.firstElementChild;
+  yield element
+  element = element.firstElementChild
 
   while (element) {
-    yield* domTraversal(element);
-    element = element.nextElementSibling;
+    yield* domTraversal(element)
+    element = element.nextElementSibling
   }
 }
 
 for (const element of domTraversal(document.getElementById('subTree'))) {
-  console.log(element.nodeName);
+  console.log(element.nodeName)
 }
 ```
 
 结合 `Promise`/`async`/`await` 可以实现异步递归算法:
 
 ```ts
-import { promises as fs } from 'node:fs';
-import { basename, dirname, join } from 'node:path';
+import { promises as fs } from 'node:fs'
+import { basename, dirname, join } from 'node:path'
 
 async function* walk(dir: string): AsyncGenerator<string> {
   for await (const d of await fs.opendir(dir)) {
-    const entry = join(dir, d.name);
+    const entry = join(dir, d.name)
 
     if (d.isDirectory()) {
-      yield* walk(entry);
+      yield* walk(entry)
     } else if (d.isFile()) {
-      yield entry;
+      yield entry
     }
   }
 }
 
 async function run(arg = '.') {
   if ((await fs.lstat(arg)).isFile()) {
-    return runTestFile(arg);
+    return runTestFile(arg)
   }
 
   for await (const file of walk(arg)) {
@@ -1076,8 +1076,8 @@ async function run(arg = '.') {
       !dirname(file).includes('node_modules') &&
       (basename(file) === 'test.js' || file.endsWith('.test.js'))
     ) {
-      console.log(file);
-      await runTestFile(file);
+      console.log(file)
+      await runTestFile(file)
     }
   }
 }
@@ -1108,202 +1108,202 @@ Promise style asynchronous programming:
 Resolve only accept **one** value:
 
 ```ts
-return new Promise(resolve => resolve([a, b]));
+return new Promise(resolve => resolve([a, b]))
 ```
 
 ```ts
 const thenable = {
   then(resolve, reject) {
-    resolve(42);
+    resolve(42)
   },
-};
-const promise = Promise.resolve(thenable);
+}
+const promise = Promise.resolve(thenable)
 promise.then(value => {
-  console.log(value); // 42
-});
+  console.log(value) // 42
+})
 ```
 
 `Promise.resolve` 是一个幂等方法 (状态机幂等):
 
 ```ts
-const p = Promise.resolve(7);
-setTimeout(console.log, 0, p === Promise.resolve(p));
+const p = Promise.resolve(7)
+setTimeout(console.log, 0, p === Promise.resolve(p))
 // true
-setTimeout(console.log, 0, p === Promise.resolve(Promise.resolve(p)));
+setTimeout(console.log, 0, p === Promise.resolve(Promise.resolve(p)))
 // true
 
-const p = new Promise(() => {});
-setTimeout(console.log, 0, p);
+const p = new Promise(() => {})
+setTimeout(console.log, 0, p)
 // Promise <pending>
-setTimeout(console.log, 0, Promise.resolve(p));
+setTimeout(console.log, 0, Promise.resolve(p))
 // Promise <pending>
-setTimeout(console.log, 0, p === Promise.resolve(p));
+setTimeout(console.log, 0, p === Promise.resolve(p))
 // true
 ```
 
 ### Promise Reject
 
 ```ts
-let p1 = Promise.resolve('foo');
-let p2 = p1.then();
-stetTimeout(console.log, 0, p2); // Promise <resolved>: foo
+let p1 = Promise.resolve('foo')
+let p2 = p1.then()
+stetTimeout(console.log, 0, p2) // Promise <resolved>: foo
 
 // eslint-disable-next-line prefer-promise-reject-errors
-p1 = Promise.reject('foo');
-p2 = p1.then();
+p1 = Promise.reject('foo')
+p2 = p1.then()
 // Uncaught (in promise) foo
-setTimeout(console.log, 0, p2); // Promise <rejected>: foo
+setTimeout(console.log, 0, p2) // Promise <rejected>: foo
 
-const p3 = p1.then(null, () => undefined);
-const p4 = p1.then(null, () => {});
-const p5 = p1.then(null, () => Promise.resolve());
-setTimeout(console.log, 0, p3); // Promise <resolved>: undefined
-setTimeout(console.log, 0, p4); // Promise <resolved>: undefined
-setTimeout(console.log, 0, p5); // Promise <resolved>: undefined
+const p3 = p1.then(null, () => undefined)
+const p4 = p1.then(null, () => {})
+const p5 = p1.then(null, () => Promise.resolve())
+setTimeout(console.log, 0, p3) // Promise <resolved>: undefined
+setTimeout(console.log, 0, p4) // Promise <resolved>: undefined
+setTimeout(console.log, 0, p5) // Promise <resolved>: undefined
 
-const p6 = p1.then(null, () => 'bar');
-const p7 = p1.then(null, () => Promise.resolve('bar'));
-setTimeout(console.log, 0, p6); // Promise <resolved>: bar
-setTimeout(console.log, 0, p7); // Promise <resolved>: bar
+const p6 = p1.then(null, () => 'bar')
+const p7 = p1.then(null, () => Promise.resolve('bar'))
+setTimeout(console.log, 0, p6) // Promise <resolved>: bar
+setTimeout(console.log, 0, p7) // Promise <resolved>: bar
 
-const p8 = p1.then(null, () => new Promise(() => {}));
+const p8 = p1.then(null, () => new Promise(() => {}))
 // eslint-disable-next-line prefer-promise-reject-errors
-const p9 = p1.then(null, () => Promise.reject());
+const p9 = p1.then(null, () => Promise.reject())
 // Uncaught (in promise): undefined
-setTimeout(console.log, 0, p8); // Promise <pending>
-setTimeout(console.log, 0, p9); // Promise <rejected>: undefined
+setTimeout(console.log, 0, p8) // Promise <pending>
+setTimeout(console.log, 0, p9) // Promise <rejected>: undefined
 
 const p10 = p1.then(null, () => {
   // eslint-disable-next-line no-throw-literal
-  throw 'bar';
-});
+  throw 'bar'
+})
 // Uncaught (in promise) bar
-setTimeout(console.log, 0, p10); // Promise <rejected>: bar
+setTimeout(console.log, 0, p10) // Promise <rejected>: bar
 
-const p11 = p1.then(null, () => Error('bar'));
-setTimeout(console.log, 0, p11); // Promise <resolved>: Error: bar
+const p11 = p1.then(null, () => Error('bar'))
+setTimeout(console.log, 0, p11) // Promise <resolved>: Error: bar
 ```
 
 ### Promise Catch
 
 ```ts
 // eslint-disable-next-line prefer-promise-reject-errors
-const p = Promise.reject();
+const p = Promise.reject()
 const onRejected = function (e) {
-  setTimeout(console.log, 0, 'rejected');
-};
+  setTimeout(console.log, 0, 'rejected')
+}
 // 语法糖:
-p.then(null, onRejected); // rejected
-p.catch(onRejected); // rejected
+p.then(null, onRejected) // rejected
+p.catch(onRejected) // rejected
 ```
 
 ```ts
-const p1 = new Promise(() => {});
-const p2 = p1.catch();
-setTimeout(console.log, 0, p1); // Promise <pending>
-setTimeout(console.log, 0, p2); // Promise <pending>
-setTimeout(console.log, 0, p1 === p2); // false
+const p1 = new Promise(() => {})
+const p2 = p1.catch()
+setTimeout(console.log, 0, p1) // Promise <pending>
+setTimeout(console.log, 0, p2) // Promise <pending>
+setTimeout(console.log, 0, p1 === p2) // false
 ```
 
 ### Promise Finally
 
 ```ts
-const p1 = new Promise(() => {});
-const p2 = p1.finally();
-setTimeout(console.log, 0, p1); // Promise <pending>
-setTimeout(console.log, 0, p2); // Promise <pending>
-setTimeout(console.log, 0, p1 === p2); // false
+const p1 = new Promise(() => {})
+const p2 = p1.finally()
+setTimeout(console.log, 0, p1) // Promise <pending>
+setTimeout(console.log, 0, p2) // Promise <pending>
+setTimeout(console.log, 0, p1 === p2) // false
 ```
 
 ```ts
-const p1 = Promise.resolve('foo');
+const p1 = Promise.resolve('foo')
 
 // 原样后传:
-const p2 = p1.finally();
-const p3 = p1.finally(() => undefined);
-const p4 = p1.finally(() => {});
-const p5 = p1.finally(() => Promise.resolve());
-const p6 = p1.finally(() => 'bar');
-const p7 = p1.finally(() => Promise.resolve('bar'));
-const p8 = p1.finally(() => Error('bar'));
-setTimeout(console.log, 0, p2); // Promise <resolved>: foo
-setTimeout(console.log, 0, p3); // Promise <resolved>: foo
-setTimeout(console.log, 0, p4); // Promise <resolved>: foo
-setTimeout(console.log, 0, p5); // Promise <resolved>: foo
-setTimeout(console.log, 0, p6); // Promise <resolved>: foo
-setTimeout(console.log, 0, p7); // Promise <resolved>: foo
-setTimeout(console.log, 0, p8); // Promise <resolved>: foo
+const p2 = p1.finally()
+const p3 = p1.finally(() => undefined)
+const p4 = p1.finally(() => {})
+const p5 = p1.finally(() => Promise.resolve())
+const p6 = p1.finally(() => 'bar')
+const p7 = p1.finally(() => Promise.resolve('bar'))
+const p8 = p1.finally(() => Error('bar'))
+setTimeout(console.log, 0, p2) // Promise <resolved>: foo
+setTimeout(console.log, 0, p3) // Promise <resolved>: foo
+setTimeout(console.log, 0, p4) // Promise <resolved>: foo
+setTimeout(console.log, 0, p5) // Promise <resolved>: foo
+setTimeout(console.log, 0, p6) // Promise <resolved>: foo
+setTimeout(console.log, 0, p7) // Promise <resolved>: foo
+setTimeout(console.log, 0, p8) // Promise <resolved>: foo
 
 // 特殊处理:
-const p9 = p1.finally(() => new Promise(() => {}));
-setTimeout(console.log, 0, p9); // Promise <pending>
+const p9 = p1.finally(() => new Promise(() => {}))
+setTimeout(console.log, 0, p9) // Promise <pending>
 // eslint-disable-next-line prefer-promise-reject-errors
-const p10 = p1.finally(() => Promise.reject());
+const p10 = p1.finally(() => Promise.reject())
 // Uncaught (in promise): undefined
-setTimeout(console.log, 0, p10); // Promise <rejected>: undefined
+setTimeout(console.log, 0, p10) // Promise <rejected>: undefined
 const p11 = p1.finally(() => {
   // eslint-disable-next-line no-throw-literal
-  throw 'bar';
-});
+  throw 'bar'
+})
 // Uncaught (in promise) baz
-setTimeout(console.log, 0, p11); // Promise <rejected>: bar
+setTimeout(console.log, 0, p11) // Promise <rejected>: bar
 ```
 
 Any value or resolved promises returned
 from `finally()` is ignored:
 
 ```ts
-const promise = Promise.resolve(42);
+const promise = Promise.resolve(42)
 
 promise
   .finally(() => {
     // Settlement handler
-    return 43; // Ignored!
+    return 43 // Ignored!
   })
   .then(value => {
     // Fulfillment handler
-    console.log(value); // 42
-  });
+    console.log(value) // 42
+  })
 
 promise
   .finally(() => {
     // Settlement handler
-    return Promise.resolve(44); // Ignored!
+    return Promise.resolve(44) // Ignored!
   })
   .then(value => {
     // Fulfillment handler
-    console.log(value); // 42
-  });
+    console.log(value) // 42
+  })
 ```
 
 Returning rejected promise from `finally()`
 equivalent to throwing an error:
 
 ```ts
-const promise = Promise.resolve(42);
+const promise = Promise.resolve(42)
 
 promise
   .finally(() => {
     // eslint-disable-next-line prefer-promise-reject-errors
-    return Promise.reject(43);
+    return Promise.reject(43)
   })
   .catch(reason => {
-    console.error(reason); // 43
-  });
+    console.error(reason) // 43
+  })
 ```
 
 ```ts
 // eslint-disable-next-line prefer-promise-reject-errors
-const promise = Promise.reject(43);
+const promise = Promise.reject(43)
 
 promise
   .finally(() => {
     // eslint-disable-next-line prefer-promise-reject-errors
-    return Promise.reject(45);
+    return Promise.reject(45)
   })
   .catch(reason => {
-    console.log(reason); // 45
-  });
+    console.log(reason) // 45
+  })
 ```
 
 ### Promise Thenable and Catch
@@ -1320,25 +1320,25 @@ JavaScript 运行时的错误处理机制会停止执行抛出错误之后的任
 所以并不会阻止运行时继续执行同步指令 (`Node.js` 中仍然会停止执行任何指令).
 
 ```ts
-throw new Error('foo');
-console.log('bar'); // 这一行不会执行
+throw new Error('foo')
+console.log('bar') // 这一行不会执行
 // Uncaught Error: foo
 ```
 
 ```ts
-Promise.reject(Error('foo'));
-console.log('bar');
+Promise.reject(Error('foo'))
+console.log('bar')
 // bar
 // Uncaught (in promise) Error: foo
 
-const p1 = new Promise((resolve, reject) => reject(Error('foo'))); // 1.
+const p1 = new Promise((resolve, reject) => reject(Error('foo'))) // 1.
 const p2 = new Promise((resolve, reject) => {
-  throw new Error('foo'); // 2.
-});
+  throw new Error('foo') // 2.
+})
 const p3 = Promise.resolve().then(() => {
-  throw new Error('foo'); // 4.
-});
-const p4 = Promise.reject(Error('foo')); // 3.
+  throw new Error('foo') // 4.
+})
+const p4 = Promise.reject(Error('foo')) // 3.
 // Uncaught (in promise) Error: foo
 //   at Promise (test.html:1)
 //   at new Promise (<anonymous>)
@@ -1359,41 +1359,41 @@ const p4 = Promise.reject(Error('foo')); // 3.
 - Promises on two separate chains execute in random order.
 
 ```ts
-const users = ['User1', 'User2', 'User3', 'User4'];
+const users = ['User1', 'User2', 'User3', 'User4']
 
-const response = [];
+const response = []
 
 const getUser = user => () => {
-  return axios.get(`/users/userId=${user}`).then(res => response.push(res));
-};
+  return axios.get(`/users/userId=${user}`).then(res => response.push(res))
+}
 
 const getUsers = users => {
   const [getFirstUser, getSecondUser, getThirdUser, getFourthUser] =
-    users.map(getUser);
+    users.map(getUser)
 
   getFirstUser()
     .then(getSecondUser)
     .then(getThirdUser)
     .then(getFourthUser)
-    .catch(console.log);
-};
+    .catch(console.log)
+}
 ```
 
 ```ts
-const users = ['User1', 'User2', 'User3', 'User4'];
+const users = ['User1', 'User2', 'User3', 'User4']
 
-let response = [];
+let response = []
 
 function getUsers(users) {
-  const promises = [];
-  promises[0] = axios.get(`/users/userId=${users[0]}`);
-  promises[1] = axios.get(`/users/userId=${users[1]}`);
-  promises[2] = axios.get(`/users/userId=${users[2]}`);
-  promises[3] = axios.get(`/users/userId=${users[3]}`);
+  const promises = []
+  promises[0] = axios.get(`/users/userId=${users[0]}`)
+  promises[1] = axios.get(`/users/userId=${users[1]}`)
+  promises[2] = axios.get(`/users/userId=${users[2]}`)
+  promises[3] = axios.get(`/users/userId=${users[3]}`)
 
   Promise.all(promises)
     .then(userDataArr => (response = userDataArr))
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
 }
 ```
 
@@ -1418,23 +1418,23 @@ Promise.all(urls.map(fetch))
   .then(responses => Promise.all(responses.map(res => res.text())))
   .then(texts => {
     //
-  });
+  })
 
 const loadData = async () => {
   try {
-    const urls = ['...', '...'];
+    const urls = ['...', '...']
 
-    const results = await Promise.all(urls.map(fetch));
-    const dataPromises = await results.map(result => result.json());
-    const finalData = Promise.all(dataPromises);
+    const results = await Promise.all(urls.map(fetch))
+    const dataPromises = await results.map(result => result.json())
+    const finalData = Promise.all(dataPromises)
 
-    return finalData;
+    return finalData
   } catch (err) {
-    console.log(err);
+    console.log(err)
   }
-};
+}
 
-const data = loadData().then(data => console.log(data));
+const data = loadData().then(data => console.log(data))
 ```
 
 ### Promise Polyfill
@@ -1446,13 +1446,13 @@ class Promise {
   // the async operation succeeded (resolved) or failed (rejected).
   constructor(executor) {
     if (typeof executor !== 'function') {
-      throw new TypeError('Executor must be a function');
+      throw new TypeError('Executor must be a function')
     }
 
     // Internal state. `$state` is the state of the promise, and `$chained` is
     // an array of the functions we need to call once this promise is settled.
-    this.$state = 'PENDING';
-    this.$chained = [];
+    this.$state = 'PENDING'
+    this.$chained = []
 
     // Implement `resolve()` and `reject()` for the executor function to use
     const resolve = res => {
@@ -1462,44 +1462,44 @@ class Promise {
       // or calling `reject()` after `resolve()` was already called
       // are no-ops.
       if (this.$state !== 'PENDING') {
-        return;
+        return
       }
 
       // If `res` is a "thenable", lock in this promise to match the
       // resolved or rejected state of the thenable.
-      const then = res !== null ? res.then : null;
+      const then = res !== null ? res.then : null
       if (typeof then === 'function') {
         // In this case, the promise is "resolved", but still in the 'PENDING'
         // state. This is what the ES6 spec means when it says "A resolved promise
         // may be pending, fulfilled or rejected" in
         // http://www.ecma-international.org/ecma-262/6.0/#sec-promise-objects
-        return then(resolve, reject);
+        return then(resolve, reject)
       }
 
-      this.$state = 'FULFILLED';
-      this.$internalValue = res;
+      this.$state = 'FULFILLED'
+      this.$internalValue = res
 
       // If somebody called `.then()` while this promise was pending, need
       // to call their `onFulfilled()` function
       for (const { onFulfilled } of this.$chained) {
-        onFulfilled(res);
+        onFulfilled(res)
       }
 
-      return res;
-    };
+      return res
+    }
 
     const reject = err => {
       if (this.$state !== 'PENDING') {
-        return;
+        return
       }
 
-      this.$state = 'REJECTED';
-      this.$internalValue = err;
+      this.$state = 'REJECTED'
+      this.$internalValue = err
 
       for (const { onRejected } of this.$chained) {
-        onRejected(err);
+        onRejected(err)
       }
-    };
+    }
 
     // Call the executor function with `resolve()` and `reject()` as in the spec.
     try {
@@ -1507,9 +1507,9 @@ class Promise {
       // a rejection. Keep in mind that, since `resolve()` or `reject()` can
       // only be called once, a function that synchronously calls `resolve()`
       // and then throws will lead to a fulfilled promise and a swallowed error
-      executor(resolve, reject);
+      executor(resolve, reject)
     } catch (err) {
-      reject(err);
+      reject(err)
     }
   }
 
@@ -1526,115 +1526,115 @@ class Promise {
           // If `onFulfilled()` returns a promise, trust `resolve()` to handle
           // it correctly.
           // store new value to new Promise
-          resolve(onFulfilled(res));
+          resolve(onFulfilled(res))
         } catch (err) {
-          reject(err);
+          reject(err)
         }
-      };
+      }
 
       const _onRejected = err => {
         try {
           // store new value to new Promise
-          reject(onRejected(err));
+          reject(onRejected(err))
         } catch (_err) {
-          reject(_err);
+          reject(_err)
         }
-      };
+      }
 
       switch (this.$state) {
         case 'FULFILLED':
-          _onFulfilled(this.$internalValue);
-          break;
+          _onFulfilled(this.$internalValue)
+          break
         case 'REJECTED':
-          _onRejected(this.$internalValue);
-          break;
+          _onRejected(this.$internalValue)
+          break
         default:
           this.$chained.push({
             onFulfilled: _onFulfilled,
             onRejected: _onRejected,
-          });
+          })
       }
-    });
+    })
   }
 
   catch(onRejected) {
-    return this.then(null, onRejected);
+    return this.then(null, onRejected)
   }
 
   finally(callback) {
     return this.then(
       value => {
-        return Promise.resolve(callBack()).then(() => value);
+        return Promise.resolve(callBack()).then(() => value)
       },
       reason => {
         return Promise.resolve(callBack()).then(() => {
-          throw reason;
-        });
+          throw reason
+        })
       }
-    );
+    )
   }
 
   static all(iterable) {
     return new Promise((resolve, reject) => {
-      let index = 0;
-      let pendingCount = 0;
-      const result = new Array(iterable.length);
+      let index = 0
+      let pendingCount = 0
+      const result = new Array(iterable.length)
 
       for (const promise of iterable) {
-        const currentIndex = index;
+        const currentIndex = index
         promise.then(
           // eslint-disable-next-line no-loop-func
           value => {
-            result[currentIndex] = value;
-            pendingCount++;
+            result[currentIndex] = value
+            pendingCount++
 
             if (pendingCount === iterable.length) {
-              resolve(result);
+              resolve(result)
             }
           },
           err => {
-            reject(err);
+            reject(err)
           }
-        );
-        index++;
+        )
+        index++
       }
 
       if (index === 0) {
-        resolve([]);
+        resolve([])
       }
-    });
+    })
   }
 
   static any(iterable) {
     return new Promise((resolve, reject) => {
-      let index = 0;
-      let pendingCount = 0;
-      const error = new Error('All promise were rejected');
-      error.errors = new Array(iterable.length);
+      let index = 0
+      let pendingCount = 0
+      const error = new Error('All promise were rejected')
+      error.errors = new Array(iterable.length)
 
       for (const promise of iterable) {
-        const currentIndex = index;
+        const currentIndex = index
         promise.then(
           value => {
-            resolve(value);
+            resolve(value)
           },
           // eslint-disable-next-line no-loop-func
           err => {
-            error.errors[currentIndex] = err;
-            pendingCount++;
+            error.errors[currentIndex] = err
+            pendingCount++
 
             if (pendingCount === iterable.length) {
-              reject(error);
+              reject(error)
             }
           }
-        );
-        index++;
+        )
+        index++
       }
 
       if (index === 0) {
-        resolve([]);
+        resolve([])
       }
-    });
+    })
   }
 
   static race(iterable) {
@@ -1642,33 +1642,33 @@ class Promise {
       for (const promise of iterable) {
         promise.then(
           value => {
-            resolve(value);
+            resolve(value)
           },
           err => {
-            reject(err);
+            reject(err)
           }
-        );
+        )
       }
-    });
+    })
   }
 
   static allSettled(iterable) {
     return new Promise((resolve, reject) => {
-      let index = 0;
-      let pendingCount = 0;
-      let result;
+      let index = 0
+      let pendingCount = 0
+      let result
 
       function addElementToResult(i, elem) {
-        result[i] = elem;
-        pendingCount++;
+        result[i] = elem
+        pendingCount++
 
         if (pendingCount === result.length) {
-          resolve(result);
+          resolve(result)
         }
       }
 
       for (const promise of iterable) {
-        const currentIndex = index;
+        const currentIndex = index
         promise.then(
           value =>
             addElementToResult(currentIndex, {
@@ -1680,17 +1680,17 @@ class Promise {
               status: 'rejected',
               reason,
             })
-        );
-        index++;
+        )
+        index++
       }
 
       if (index === 0) {
-        resolve([]);
-        return;
+        resolve([])
+        return
       }
 
-      result = new Array(index);
-    });
+      result = new Array(index)
+    })
   }
 }
 ```
@@ -1698,39 +1698,39 @@ class Promise {
 ### Memorize Async Function
 
 ```ts
-const memo = {};
-const progressQueues = {};
+const memo = {}
+const progressQueues = {}
 
 function memoProcessData(key) {
   return new Promise((resolve, reject) => {
     if (Object.prototype.hasOwnProperty.call(memo, key)) {
-      resolve(memo[key]);
-      return;
+      resolve(memo[key])
+      return
     }
 
     if (!Object.prototype.hasOwnProperty.call(progressQueues, key)) {
       // Called for a new key
       // Create an entry for it in progressQueues
-      progressQueues[key] = [[resolve, reject]];
+      progressQueues[key] = [[resolve, reject]]
     } else {
       // Called for a key that's still being processed
       // Enqueue it's handlers and exit.
-      progressQueues[key].push([resolve, reject]);
-      return;
+      progressQueues[key].push([resolve, reject])
+      return
     }
 
     processData(key)
       .then(data => {
-        memo[key] = data;
-        for (const [resolver] of progressQueues[key]) resolver(data);
+        memo[key] = data
+        for (const [resolver] of progressQueues[key]) resolver(data)
       })
       .catch(error => {
-        for (const [, rejector] of progressQueues[key]) rejector(error);
+        for (const [, rejector] of progressQueues[key]) rejector(error)
       })
       .finally(() => {
-        delete progressQueues[key];
-      });
-  });
+        delete progressQueues[key]
+      })
+  })
 }
 ```
 
@@ -1745,25 +1745,25 @@ function memoProcessData(key) {
 
 ```ts
 async function foo() {
-  console.log(2);
+  console.log(2)
 }
 
-console.log(1);
-foo();
-console.log(3);
+console.log(1)
+foo()
+console.log(3)
 // 1
 // 2
 // 3
 
 async function bar() {
-  console.log(2);
-  await null;
-  console.log(4);
+  console.log(2)
+  await null
+  console.log(4)
 }
 
-console.log(1);
-bar();
-console.log(3);
+console.log(1)
+bar()
+console.log(3)
 // 1
 // 2
 // 3
@@ -1776,25 +1776,25 @@ console.log(3);
 async function bar() {
   const thenable = {
     then(callback) {
-      callback('bar');
+      callback('bar')
     },
-  };
-  return thenable;
+  }
+  return thenable
 }
 
-bar().then(console.log);
+bar().then(console.log)
 // bar
 
 async function baz() {
   const thenable = {
     then(callback) {
-      callback('baz');
+      callback('baz')
     },
-  };
-  console.log(await thenable);
+  }
+  console.log(await thenable)
 }
 
-baz();
+baz()
 // baz
 ```
 
@@ -1803,21 +1803,21 @@ baz();
 ```ts
 const fetchJson = co.wrap(function* (url) {
   try {
-    const response = yield fetch(url);
-    const text = yield response.text();
-    return JSON.parse(text);
+    const response = yield fetch(url)
+    const text = yield response.text()
+    return JSON.parse(text)
   } catch (error) {
-    console.log(`ERROR: ${error.stack}`);
+    console.log(`ERROR: ${error.stack}`)
   }
-});
+})
 
 async function fetchJson(url) {
   try {
-    const response = await fetch(url);
-    const text = await response.text();
-    return JSON.parse(text);
+    const response = await fetch(url)
+    const text = await response.text()
+    return JSON.parse(text)
   } catch (error) {
-    console.log(`ERROR: ${error.stack}`);
+    console.log(`ERROR: ${error.stack}`)
   }
 }
 ```
@@ -1827,14 +1827,14 @@ async function fetchJson(url) {
 ```ts
 // BAD.
 async function downloadContent(urls) {
-  const promiseArray = urls.map(fetch);
-  return await Promise.all(promiseArray);
+  const promiseArray = urls.map(fetch)
+  return await Promise.all(promiseArray)
 }
 
 // GOOD.
 async function downloadContent(urls) {
-  const promiseArray = urls.map(fetch);
-  return Promise.all(promiseArray);
+  const promiseArray = urls.map(fetch)
+  return Promise.all(promiseArray)
 }
 ```
 
@@ -1850,46 +1850,46 @@ async function downloadContent(urls) {
 
 ```ts
 // Wrong:
-const books = await bookModel.fetchAll();
-const author = await authorModel.fetch(authorId);
+const books = await bookModel.fetchAll()
+const author = await authorModel.fetch(authorId)
 
 // Correct:
-const bookPromise = bookModel.fetchAll();
-const authorPromise = authorModel.fetch(authorId);
-const book = await bookPromise;
-const author = await authorPromise;
+const bookPromise = bookModel.fetchAll()
+const authorPromise = authorModel.fetch(authorId)
+const book = await bookPromise
+const author = await authorPromise
 
 async function getAuthors(authorIds) {
   // WRONG, this will cause sequential calls
   // const authors = authorIds.map(id => await authorModel.fetch(id));
   // CORRECT:
-  const promises = authorIds.map(id => authorModel.fetch(id));
-  const authors = await Promise.all(promises);
+  const promises = authorIds.map(id => authorModel.fetch(id))
+  const authors = await Promise.all(promises)
 }
 ```
 
 ```ts
 async function randomDelay(id) {
-  const delay = Math.random() * 1000;
+  const delay = Math.random() * 1000
   return new Promise(resolve =>
     setTimeout(() => {
-      console.log(`${id} finished`);
-      resolve(id);
+      console.log(`${id} finished`)
+      resolve(id)
     }, delay)
-  );
+  )
 }
 
 async function sequential() {
-  const t0 = Date.now();
+  const t0 = Date.now()
 
   for (let i = 0; i < 5; ++i) {
-    await randomDelay(i);
+    await randomDelay(i)
   }
 
-  console.log(`${Date.now() - t0}ms elapsed`);
+  console.log(`${Date.now() - t0}ms elapsed`)
 }
 
-sequential();
+sequential()
 // 0 finished
 // 1 finished
 // 2 finished
@@ -1898,19 +1898,19 @@ sequential();
 // 2877ms elapsed
 
 async function parallel() {
-  const t0 = Date.now();
+  const t0 = Date.now()
   const promises = Array(5)
     .fill(null)
-    .map((_, i) => randomDelay(i));
+    .map((_, i) => randomDelay(i))
 
   for (const p of promises) {
-    console.log(`awaited ${await p}`);
+    console.log(`awaited ${await p}`)
   }
 
-  console.log(`${Date.now() - t0}ms elapsed`);
+  console.log(`${Date.now() - t0}ms elapsed`)
 }
 
-parallel();
+parallel()
 // 4 finished
 // 2 finished
 // 1 finished
@@ -1930,22 +1930,22 @@ parallel();
 
 ```ts
 function sleep(time) {
-  return new Promise(resolve => setTimeout(resolve, time));
+  return new Promise(resolve => setTimeout(resolve, time))
 }
 ```
 
 ```ts
 sleep(2000).then(() => {
   // do something after 2000 milliseconds
-  console.log('resolved');
-});
+  console.log('resolved')
+})
 
 async function add(n1, n2) {
-  await sleep(2222);
-  console.log(n1 + n2);
+  await sleep(2222)
+  console.log(n1 + n2)
 }
 
-add(1, 2);
+add(1, 2)
 ```
 
 ### Race Condition
@@ -1964,23 +1964,23 @@ export default {
       results: [],
       nextRequestId: 1,
       displayedRequestId: 0,
-    };
+    }
   },
   watch: {
     async text(value) {
-      const requestId = this.nextRequestId++;
-      const results = await search(value);
+      const requestId = this.nextRequestId++
+      const results = await search(value)
 
       // guarantee display latest search results (when input keep changing)
       if (requestId < this.displayedRequestId) {
-        return;
+        return
       }
 
-      this.displayedRequestId = requestId;
-      this.results = results;
+      this.displayedRequestId = requestId
+      this.results = results
     },
   },
-};
+}
 ```
 
 ### Web Worker
@@ -2000,18 +2000,18 @@ export default {
 <button onclick="startComputation()">Start computation</button>
 
 <script>
-  const worker = new Worker('worker.js');
+  const worker = new Worker('worker.js')
 
   worker.addEventListener(
     'message',
     function (e) {
-      console.log(e.data);
+      console.log(e.data)
     },
     false
-  );
+  )
 
   function startComputation() {
-    worker.postMessage({ cmd: 'average', data: [1, 2, 3, 4] });
+    worker.postMessage({ cmd: 'average', data: [1, 2, 3, 4] })
   }
 </script>
 ```
@@ -2022,21 +2022,21 @@ export default {
 self.addEventListener(
   'message',
   function (e) {
-    const data = e.data;
+    const data = e.data
     switch (data.cmd) {
       case 'average': {
-        const result = calculateAverage(data);
+        const result = calculateAverage(data)
         // eslint-disable-next-line no-restricted-globals
-        self.postMessage(result);
-        break;
+        self.postMessage(result)
+        break
       }
       default:
         // eslint-disable-next-line no-restricted-globals
-        self.postMessage('Unknown command');
+        self.postMessage('Unknown command')
     }
   },
   false
-);
+)
 ```
 
 #### Web Worker Runtime
@@ -2075,63 +2075,63 @@ self.addEventListener(
  */
 // eslint-disable-next-line no-restricted-globals
 self.onmessage = function (event) {
-  const jsonText = event.data;
-  const jsonData = JSON.parse(jsonText);
+  const jsonText = event.data
+  const jsonData = JSON.parse(jsonText)
 
   // eslint-disable-next-line no-restricted-globals
-  self.postMessage(jsonData);
-};
+  self.postMessage(jsonData)
+}
 ```
 
 ```ts
 /*
  * main.js
  */
-const worker = new Worker('JSONParser.js');
+const worker = new Worker('JSONParser.js')
 
 worker.onmessage = function (event) {
-  const jsonData = event.data;
-  evaluateData(jsonData);
-};
+  const jsonData = event.data
+  evaluateData(jsonData)
+}
 
-worker.postMessage(jsonText);
+worker.postMessage(jsonText)
 ```
 
 ```ts
 // main.js
 function work() {
   onmessage = ({ data: { jobId, message } }) => {
-    console.log(`I am worker, I receive:-----${message}`);
-    postMessage({ jobId, result: 'message from worker' });
-  };
+    console.log(`I am worker, I receive:-----${message}`)
+    postMessage({ jobId, result: 'message from worker' })
+  }
 }
 
 const makeWorker = f => {
-  const pendingJobs = {};
+  const pendingJobs = {}
   const workerScriptBlobUrl = URL.createObjectURL(
     new Blob([`(${f.toString()})()`])
-  );
-  const worker = new Worker(workerScriptBlobUrl);
+  )
+  const worker = new Worker(workerScriptBlobUrl)
 
   worker.onmessage = ({ data: { result, jobId } }) => {
     // 调用 resolve, 改变 Promise 状态
-    pendingJobs[jobId](result);
-    delete pendingJobs[jobId];
-  };
+    pendingJobs[jobId](result)
+    delete pendingJobs[jobId]
+  }
 
   return (...message) =>
     new Promise(resolve => {
-      const jobId = String(Math.random());
-      pendingJobs[jobId] = resolve;
-      worker.postMessage({ jobId, message });
-    });
-};
+      const jobId = String(Math.random())
+      pendingJobs[jobId] = resolve
+      worker.postMessage({ jobId, message })
+    })
+}
 
-const testWorker = makeWorker(work);
+const testWorker = makeWorker(work)
 
 testWorker('message from main thread').then(message => {
-  console.log(`I am main thread, I receive:-----${message}`);
-});
+  console.log(`I am main thread, I receive:-----${message}`)
+})
 ```
 
 #### Web Worker Pool
@@ -2139,76 +2139,76 @@ testWorker('message from main thread').then(message => {
 ```ts
 class TaskWorker extends Worker {
   constructor(notifyAvailable, ...workerArgs) {
-    super(...workerArgs);
+    super(...workerArgs)
 
     // 初始化为不可用状态
-    this.available = false;
-    this.resolve = null;
-    this.reject = null;
+    this.available = false
+    this.resolve = null
+    this.reject = null
 
     // 线程池会传递回调
     // 以便工作者线程发出它需要新任务的信号
-    this.notifyAvailable = notifyAvailable;
+    this.notifyAvailable = notifyAvailable
 
     // 线程脚本在完全初始化之后
     // 会发送一条"ready"消息
-    this.onmessage = () => this.setAvailable();
+    this.onmessage = () => this.setAvailable()
   }
 
   // 由线程池调用, 以分派新任务
   dispatch({ resolve, reject, postMessageArgs }) {
-    this.available = false;
+    this.available = false
     this.onmessage = ({ data }) => {
-      resolve(data);
-      this.setAvailable();
-    };
+      resolve(data)
+      this.setAvailable()
+    }
     this.onerror = e => {
-      reject(e);
-      this.setAvailable();
-    };
-    this.postMessage(...postMessageArgs);
+      reject(e)
+      this.setAvailable()
+    }
+    this.postMessage(...postMessageArgs)
   }
 
   setAvailable() {
-    this.available = true;
-    this.resolve = null;
-    this.reject = null;
-    this.notifyAvailable();
+    this.available = true
+    this.resolve = null
+    this.reject = null
+    this.notifyAvailable()
   }
 }
 
 class WorkerPool {
   constructor(poolSize, ...workerArgs) {
-    this.taskQueue = [];
-    this.workers = [];
+    this.taskQueue = []
+    this.workers = []
 
     // 初始化线程池
     for (let i = 0; i < poolSize; ++i) {
       this.workers.push(
         new TaskWorker(() => this.dispatchIfAvailable(), ...workerArgs)
-      );
+      )
     }
   }
 
   // 把任务推入队列
   enqueue(...postMessageArgs) {
     return new Promise((resolve, reject) => {
-      this.taskQueue.push({ resolve, reject, postMessageArgs });
-      this.dispatchIfAvailable();
-    });
+      this.taskQueue.push({ resolve, reject, postMessageArgs })
+      this.dispatchIfAvailable()
+    })
   }
 
   // 把任务发送给下一个空闲的线程
   dispatchIfAvailable() {
     if (!this.taskQueue.length) {
-      return;
+      return
     }
 
     for (const worker of this.workers) {
       if (worker.available) {
-        const a = this.taskQueue.shift();
-        worker.dispatch(a);
-        break;
+        const a = this.taskQueue.shift()
+        worker.dispatch(a)
+        break
       }
     }
   }
@@ -2216,7 +2216,7 @@ class WorkerPool {
   // 终止所有工作者线程
   close() {
     for (const worker of this.workers) {
-      worker.terminate();
+      worker.terminate()
     }
   }
 }
@@ -2227,38 +2227,38 @@ class WorkerPool {
 ```ts
 // worker.js
 self.onmessage = ({ data }) => {
-  const view = new Float32Array(data.arrayBuffer);
-  let sum = 0;
+  const view = new Float32Array(data.arrayBuffer)
+  let sum = 0
   // 求和
   for (let i = data.startIdx; i < data.endIdx; ++i) {
     // 不需要原子操作, 因为只需要读
-    sum += view[i];
+    sum += view[i]
   }
   // 把结果发送给工作者线程
-  self.postMessage(sum);
-};
+  self.postMessage(sum)
+}
 // 发送消息给 TaskWorker
 // 通知工作者线程准备好接收任务了
-self.postMessage('ready');
+self.postMessage('ready')
 
 // main.js
-const totalFloats = 1e8;
-const numTasks = 20;
-const floatsPerTask = totalFloats / numTasks;
-const numWorkers = 4;
+const totalFloats = 1e8
+const numTasks = 20
+const floatsPerTask = totalFloats / numTasks
+const numWorkers = 4
 
 // 创建线程池
-const pool = new WorkerPool(numWorkers, './worker.js');
+const pool = new WorkerPool(numWorkers, './worker.js')
 
 // 填充浮点值数组
-const arrayBuffer = new SharedArrayBuffer(4 * totalFloats);
-const view = new Float32Array(arrayBuffer);
+const arrayBuffer = new SharedArrayBuffer(4 * totalFloats)
+const view = new Float32Array(arrayBuffer)
 
 for (let i = 0; i < totalFloats; ++i) {
-  view[i] = Math.random();
+  view[i] = Math.random()
 }
 
-const partialSumPromises = [];
+const partialSumPromises = []
 
 for (let i = 0; i < totalFloats; i += floatsPerTask) {
   partialSumPromises.push(
@@ -2267,13 +2267,13 @@ for (let i = 0; i < totalFloats; i += floatsPerTask) {
       endIdx: i + floatsPerTask,
       arrayBuffer,
     })
-  );
+  )
 }
 
 // 求和
 Promise.all(partialSumPromises)
   .then(partialSums => partialSums.reduce((x, y) => x + y))
-  .then(console.log);
+  .then(console.log)
 // (在这个例子中, 和应该约等于 1E8/2)
 // 49997075.47203197
 ```
@@ -2289,60 +2289,60 @@ Promise.all(partialSumPromises)
 #### Abort Fetching
 
 ```ts
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 interface Post {
-  id: number;
-  title: string;
-  body: string;
+  id: number
+  title: string
+  body: string
 }
 
 function usePostLoading() {
-  const { postId } = useParams<{ postId: string }>();
-  const [isLoading, setIsLoading] = useState(false);
-  const [post, setPost] = useState<Post | null>(null);
+  const { postId } = useParams<{ postId: string }>()
+  const [isLoading, setIsLoading] = useState(false)
+  const [post, setPost] = useState<Post | null>(null)
 
   useEffect(() => {
-    const abortController = new AbortController();
+    const abortController = new AbortController()
 
-    setIsLoading(true);
+    setIsLoading(true)
     fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
       signal: abortController.signal,
     })
       .then(response => {
         if (response.ok) {
-          return response.json();
+          return response.json()
         }
 
-        return Promise.reject(Error('The request failed.'));
+        return Promise.reject(Error('The request failed.'))
       })
       .then((fetchedPost: Post) => {
-        setPost(fetchedPost);
+        setPost(fetchedPost)
       })
       .catch(err => {
         if (abortController.signal.aborted) {
-          console.log('The user aborted the request');
+          console.log('The user aborted the request')
         } else {
-          console.error(err.message);
+          console.error(err.message)
         }
       })
       .finally(() => {
-        setIsLoading(false);
-      });
+        setIsLoading(false)
+      })
 
     return () => {
-      abortController.abort();
-    };
-  }, [postId]);
+      abortController.abort()
+    }
+  }, [postId])
 
   return {
     post,
     isLoading,
-  };
+  }
 }
 
-export default usePostLoading;
+export default usePostLoading
 ```
 
 #### Abort Promise
@@ -2351,28 +2351,28 @@ export default usePostLoading;
 function wait(time: number, signal?: AbortSignal) {
   return new Promise<void>((resolve, reject) => {
     const timeoutId = setTimeout(() => {
-      resolve();
-    }, time);
+      resolve()
+    }, time)
     signal?.addEventListener('abort', () => {
-      clearTimeout(timeoutId);
-      reject(Error('Aborted.'));
-    });
-  });
+      clearTimeout(timeoutId)
+      reject(Error('Aborted.'))
+    })
+  })
 }
 
-const abortController = new AbortController();
+const abortController = new AbortController()
 
 setTimeout(() => {
-  abortController.abort();
-}, 1000);
+  abortController.abort()
+}, 1000)
 
 wait(5000, abortController.signal)
   .then(() => {
-    console.log('5 seconds passed');
+    console.log('5 seconds passed')
   })
   .catch(() => {
-    console.log('Waiting was interrupted');
-  });
+    console.log('Waiting was interrupted')
+  })
 ```
 
 #### Abort Controller Helpers
@@ -2382,24 +2382,24 @@ Abort controller [helpers polyfill](https://whistlr.info/2022/abortcontroller-is
 ```ts
 if ((!timeout) in AbortSignal) {
   AbortSignal.timeout = function abortTimeout(ms) {
-    const controller = new AbortController();
-    setTimeout(() => controller.abort(), ms);
-    return controller.signal;
-  };
+    const controller = new AbortController()
+    setTimeout(() => controller.abort(), ms)
+    return controller.signal
+  }
 }
 
 if ((!any) in AbortSignal) {
   AbortSignal.any = function abortAny(signals) {
-    const controller = new AbortController();
+    const controller = new AbortController()
     signals.forEach(signal => {
       if (signal.aborted) {
-        controller.abort();
+        controller.abort()
       } else {
-        signal.addEventListener('abort', () => controller.abort());
+        signal.addEventListener('abort', () => controller.abort())
       }
-    });
-    return controller.signal;
-  };
+    })
+    return controller.signal
+  }
 }
 ```
 
@@ -2434,35 +2434,35 @@ if ((!any) in AbortSignal) {
 
 ```ts
 APP.namespace = function (namespaceString) {
-  let parts = namespaceString.split('.');
-  let parent = APP;
-  let i;
+  let parts = namespaceString.split('.')
+  let parent = APP
+  let i
   // strip redundant leading global
   if (parts[0] === 'APP') {
     // remove leading global
-    parts = parts.slice(1);
+    parts = parts.slice(1)
   }
   for (i = 0; i < parts.length; i += 1) {
     // create a property if it doesn't exist
     if (typeof parent[parts[i]] === 'undefined') {
-      parent[parts[i]] = {};
+      parent[parts[i]] = {}
     }
     // 关键: 向内嵌套
-    parent = parent[parts[i]];
+    parent = parent[parts[i]]
   }
   // 返回最内层模块名
-  return parent;
-};
+  return parent
+}
 ```
 
 ```ts
 // assign returned value to a local var
-const module2 = APP.namespace('APP.modules.module2');
-const truthy = module2 === APP.modules.module2; // true
+const module2 = APP.namespace('APP.modules.module2')
+const truthy = module2 === APP.modules.module2 // true
 // skip initial `APP`
-APP.namespace('modules.module51');
+APP.namespace('modules.module51')
 // long namespace
-APP.namespace('once.upon.a.time.there.was.this.long.nested.property');
+APP.namespace('once.upon.a.time.there.was.this.long.nested.property')
 ```
 
 #### Namespace Module Usage
@@ -2470,65 +2470,65 @@ APP.namespace('once.upon.a.time.there.was.this.long.nested.property');
 通过传参匿名函数, 创建命名空间, 进行模块包裹:
 
 ```ts
-const app = {};
+const app = {}
 
-(function (exports) {
-  (function (exports) {
+;(function (exports) {
+  ;(function (exports) {
     const api = {
       moduleExists: function test() {
-        return true;
+        return true
       },
-    };
+    }
     // 闭包式继承,扩展exports对象为api对象
-    $.extend(exports, api);
-  })(typeof exports === 'undefined' ? window : exports);
+    $.extend(exports, api)
+  })(typeof exports === 'undefined' ? window : exports)
   // 将api对象绑定至app对象上
-})(app);
+})(app)
 ```
 
 ```ts
 // global object
-const APP = {};
+const APP = {}
 // constructors
-APP.Parent = function () {};
-APP.Child = function () {};
+APP.Parent = function () {}
+APP.Child = function () {}
 // a variable
-APP.some_var = 1;
+APP.some_var = 1
 // an object container
-APP.modules = {};
+APP.modules = {}
 // nested objects
-APP.modules.module1 = {};
-APP.modules.module1.data = { a: 1, b: 2 };
-APP.modules.module2 = {};
+APP.modules.module1 = {}
+APP.modules.module1.data = { a: 1, b: 2 }
+APP.modules.module2 = {}
 ```
 
 ```ts
 // 命名空间模式
-APP.namespace('APP.utilities.array');
+APP.namespace('APP.utilities.array')
 
 // 形参: 导入全局变量
 APP.utilities.array = (function (app, global) {
   // 依赖模式
-  const uObj = app.utilities.object;
-  const uLang = app.utilities.lang;
+  const uObj = app.utilities.object
+  const uLang = app.utilities.lang
 
   // 私有属性
-  const arrStr = '[object Array]';
-  const toStr = Object.prototype.toString;
+  const arrStr = '[object Array]'
+  const toStr = Object.prototype.toString
 
   // 私有方法
   const inArray = function (haystack, needle) {
     for (let i = 0, max = haystack.length; i < max; i += 1) {
       if (haystack[i] === needle) {
-        return i;
+        return i
       }
     }
 
-    return -1;
-  };
+    return -1
+  }
   const isArray = function (a) {
-    return toStr.call(a) === arrayString;
-  };
+    return toStr.call(a) === arrayString
+  }
 
   // 初始化模式:
   // 初始化代码, 只执行一次.
@@ -2537,8 +2537,8 @@ APP.utilities.array = (function (app, global) {
   return {
     isArray,
     indexOf: inArray,
-  };
-})(APP, this);
+  }
+})(APP, this)
 ```
 
 ### Sandbox Module Pattern
@@ -2551,38 +2551,38 @@ APP.utilities.array = (function (app, global) {
 ```ts
 function Sandbox(...args) {
   // the last argument is the callback
-  const callback = args.pop();
+  const callback = args.pop()
   // modules can be passed as an array or as individual parameters
-  let modules = args[0] && typeof args[0] === 'string' ? args : args[0];
+  let modules = args[0] && typeof args[0] === 'string' ? args : args[0]
 
   // make sure the function is called
   // as a constructor
   if (!(this instanceof Sandbox)) {
-    return new Sandbox(modules, callback);
+    return new Sandbox(modules, callback)
   }
 
   // add properties to `this` as needed:
-  this.a = 1;
-  this.b = 2;
+  this.a = 1
+  this.b = 2
 
   // now add modules to the core `this` object
   // no modules or "*" both mean "use all modules"
   if (!modules || modules === '*') {
-    modules = [];
+    modules = []
     for (const i in Sandbox.modules) {
       if (Object.prototype.hasOwnProperty.call(Sandbox.modules, i)) {
-        modules.push(i);
+        modules.push(i)
       }
     }
   }
 
   // initialize the required modules
   for (let i = 0; i < modules.length; i += 1) {
-    Sandbox.modules[modules[i]](this);
+    Sandbox.modules[modules[i]](this)
   }
 
   // call the callback
-  callback(this);
+  callback(this)
 }
 ```
 
@@ -2592,30 +2592,30 @@ Sandbox.prototype = {
   name: 'My Application',
   version: '1.0',
   getName() {
-    return this.name;
+    return this.name
   },
-};
+}
 ```
 
 静态属性: 使用添加的方法/模块:
 
 ```ts
-Sandbox.modules = {};
+Sandbox.modules = {}
 Sandbox.modules.dom = function (box) {
-  box.getElement = function () {};
-  box.getStyle = function () {};
-  box.foo = 'bar';
-};
+  box.getElement = function () {}
+  box.getStyle = function () {}
+  box.foo = 'bar'
+}
 Sandbox.modules.event = function (box) {
   // access to the Sandbox prototype if needed:
   // box.constructor.prototype.m = "mmm";
-  box.attachEvent = function () {};
-  box.detachEvent = function () {};
-};
+  box.attachEvent = function () {}
+  box.detachEvent = function () {}
+}
 Sandbox.modules.ajax = function (box) {
-  box.makeRequest = function () {};
-  box.getResponse = function () {};
-};
+  box.makeRequest = function () {}
+  box.getResponse = function () {}
+}
 ```
 
 #### Sandbox Module Usage
@@ -2623,14 +2623,14 @@ Sandbox.modules.ajax = function (box) {
 ```ts
 Sandbox(['ajax', 'event'], function (box) {
   // console.log(box);
-});
+})
 
 Sandbox('*', function (box) {
   // console.log(box);
-});
+})
 Sandbox(function (box) {
   // console.log(box);
-});
+})
 
 Sandbox('dom', 'event', function (box) {
   // work with dom and event
@@ -2640,9 +2640,9 @@ Sandbox('dom', 'event', function (box) {
     // the "box" outside this function
     // ...
     // done with Ajax
-  });
+  })
   // no trace of Ajax module here
-});
+})
 ```
 
 ### CommonJS Pattern
@@ -2654,20 +2654,20 @@ Sandbox('dom', 'event', function (box) {
 [Minimal CJS bundler](https://github.com/sabertazimi/hust-web/blob/v2.7.0/js/bundler/index.js):
 
 ```ts
-require.cache = Object.create(null);
+require.cache = Object.create(null)
 
 // Construct 'require', 'module' and 'exports':
 function require(moduleId) {
   if (!(moduleId in require.cache)) {
-    const code = readFile(moduleId);
-    const module = { exports: {} };
-    require.cache[moduleId] = module;
+    const code = readFile(moduleId)
+    const module = { exports: {} }
+    require.cache[moduleId] = module
     // eslint-disable-next-line no-new-func
-    const wrapper = Function('require, exports, module', code);
+    const wrapper = Function('require, exports, module', code)
     // Bind code to module.exports:
-    wrapper(require, module.exports, module);
+    wrapper(require, module.exports, module)
   }
-  return require.cache[moduleId].exports;
+  return require.cache[moduleId].exports
 }
 ```
 
@@ -2682,20 +2682,20 @@ Asynchronous module definition:
 define('moduleA', ['moduleB'], function (moduleB) {
   return {
     stuff: moduleB.doStuff(),
-  };
-});
+  }
+})
 ```
 
 ```ts
 define('moduleA', ['require', 'exports'], function (require, exports) {
-  const moduleB = require('moduleB');
+  const moduleB = require('moduleB')
 
   if (condition) {
-    const moduleC = require('moduleC');
+    const moduleC = require('moduleC')
   }
 
-  exports.stuff = moduleB.doStuff();
-});
+  exports.stuff = moduleB.doStuff()
+})
 ```
 
 ### UMD Pattern
@@ -2709,15 +2709,15 @@ Universal module definition:
 /**
  * UMD Boilerplate.
  */
-(function (root, factory) {
+;(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define([], function () {
-      return factory(root);
-    });
+      return factory(root)
+    })
   } else if (typeof exports === 'object') {
-    module.exports = factory(root);
+    module.exports = factory(root)
   } else {
-    root.myPlugin = factory(root);
+    root.myPlugin = factory(root)
   }
 })(
   typeof global !== 'undefined'
@@ -2726,12 +2726,12 @@ Universal module definition:
       ? window
       : this,
   function (window) {
-    'use strict';
+    'use strict'
 
     // Module code goes here...
-    return {};
+    return {}
   }
-);
+)
 ```
 
 ### ES6 Module
@@ -2787,16 +2787,16 @@ Universal module definition:
 #### ES6 Module Syntax
 
 ```ts
-import { lastName as surname } from './profile.js';
-import module from './module.js';
-import * as Bar from './bar.js'; // Object.freeze(Bar)
-import './foo.js'; // Load effects
+import { lastName as surname } from './profile.js'
+import module from './module.js'
+import * as Bar from './bar.js' // Object.freeze(Bar)
+import './foo.js' // Load effects
 ```
 
 ```ts
-export const firstName = 'Michael';
-export const lastName = 'Jackson';
-export const year = 1958;
+export const firstName = 'Michael'
+export const lastName = 'Jackson'
+export const year = 1958
 export function foo() {}
 export function* bar() {}
 export class Foo {}
@@ -2804,20 +2804,20 @@ export class Foo {}
 
 ```ts
 // profile.js
-const firstName = 'Michael';
-const lastName = 'Jackson';
-const year = 1958;
+const firstName = 'Michael'
+const lastName = 'Jackson'
+const year = 1958
 
-export { firstName, lastName, year };
+export { firstName, lastName, year }
 ```
 
 ```ts
 // 接口改名
-export { foo as myFoo } from 'node:module';
-export { default as Article } from './Article';
+export { foo as myFoo } from 'node:module'
+export { default as Article } from './Article'
 
 // 整体输出
-export * from 'utils';
+export * from 'utils'
 ```
 
 #### ES6 Module Imports
@@ -2826,22 +2826,22 @@ Import meta `import.meta`:
 
 ```ts
 // index.mjs
-import './index2.mjs?someURLInfo=5';
+import './index2.mjs?someURLInfo=5'
 
 // index2.mjs
-new URL(import.meta.url).searchParams.get('someURLInfo'); // 5
+new URL(import.meta.url).searchParams.get('someURLInfo') // 5
 ```
 
 ```ts
-const urlOfData = new URL('data.txt', import.meta.url);
+const urlOfData = new URL('data.txt', import.meta.url)
 ```
 
 Import assertion:
 
 ```ts
-import data from './data.json' assert { type: 'json' };
+import data from './data.json' assert { type: 'json' }
 
-console.log(data);
+console.log(data)
 ```
 
 Import map `importmap`:
@@ -2857,9 +2857,9 @@ Import map `importmap`:
   }
 </script>
 <script type="module">
-  import get from 'lodash/get.js';
-  import lodash from 'lodash';
-  import('lodash').then(_ => {});
+  import get from 'lodash/get.js'
+  import lodash from 'lodash'
+  import('lodash').then(_ => {})
 </script>
 ```
 
@@ -2899,28 +2899,28 @@ Export default value:
 
 ```ts
 // module.js
-let thing = 'initial';
+let thing = 'initial'
 
-export { thing };
-export default thing;
+export { thing }
+export default thing
 
 setTimeout(() => {
-  thing = 'changed';
-}, 500);
+  thing = 'changed'
+}, 500)
 ```
 
 <!-- eslint-disable -->
 
 ```ts
 // main.js
-import { default as defaultThing, thing } from './module.js';
-import anotherDefaultThing from './module.js';
+import { default as defaultThing, thing } from './module.js'
+import anotherDefaultThing from './module.js'
 
 setTimeout(() => {
-  console.log(thing); // "changed"
-  console.log(defaultThing); // "initial"
-  console.log(anotherDefaultThing); // "initial"
-}, 1000);
+  console.log(thing) // "changed"
+  console.log(defaultThing) // "initial"
+  console.log(anotherDefaultThing) // "initial"
+}, 1000)
 ```
 
 Export live reference:
@@ -2929,26 +2929,26 @@ Export live reference:
 
 ```ts
 // module.js
-export let thing = 'initial';
+export let thing = 'initial'
 
 setTimeout(() => {
-  thing = 'changed';
-}, 500);
+  thing = 'changed'
+}, 500)
 ```
 
 <!-- eslint-disable -->
 
 ```ts
 // main.js
-import { thing as importedThing } from './module.js';
-const module = await import('./module.js');
-let { thing } = await import('./module.js'); // Destructuring behavior
+import { thing as importedThing } from './module.js'
+const module = await import('./module.js')
+let { thing } = await import('./module.js') // Destructuring behavior
 
 setTimeout(() => {
-  console.log(importedThing); // "changed"
-  console.log(module.thing); // "changed"
-  console.log(thing); // "initial"
-}, 1000);
+  console.log(importedThing) // "changed"
+  console.log(module.thing) // "changed"
+  console.log(thing) // "initial"
+}, 1000)
 ```
 
 To sum up:
@@ -2957,21 +2957,21 @@ To sum up:
 
 ```ts
 // Live reference:
-import { thing } from './module.js';
-import { thing as otherName } from './module.js';
+import { thing } from './module.js'
+import { thing as otherName } from './module.js'
 
 // Current value:
-const { thing } = await import('./module.js');
+const { thing } = await import('./module.js')
 
 // Live reference:
-export { thing };
-export { thing as otherName };
-export { thing as default };
+export { thing }
+export { thing as otherName }
+export { thing as default }
 export default function thing() {}
 
 // Current value:
-export default thing;
-export default 'hello!';
+export default thing
+export default 'hello!'
 ```
 
 <!-- eslint-enable -->
@@ -2986,13 +2986,13 @@ Modify default object behavior with `Proxy` and `Reflect`:
 ```ts
 Proxy(target, {
   set(target, name, value, receiver) {
-    const success = Reflect.set(target, name, value, receiver);
+    const success = Reflect.set(target, name, value, receiver)
     if (success) {
-      log(`property ${name} on ${target} set to ${value}`);
+      log(`property ${name} on ${target} set to ${value}`)
     }
-    return success;
+    return success
   },
-});
+})
 ```
 
 ### Proxy
@@ -3005,35 +3005,35 @@ Proxy(target, {
 ```ts
 const target = {
   id: 'target',
-};
-const handler = {};
-const proxy = new Proxy(target, handler);
+}
+const handler = {}
+const proxy = new Proxy(target, handler)
 
 // Proxy.prototype 是 undefined
-console.log(target instanceof Proxy); // TypeError
-console.log(proxy instanceof Proxy); // TypeError
+console.log(target instanceof Proxy) // TypeError
+console.log(proxy instanceof Proxy) // TypeError
 // 严格相等可以用来区分代理和目标
-console.log(target === proxy); // false
+console.log(target === proxy) // false
 ```
 
 `this` binding should process carefully:
 
 ```ts
-const proxy = new Proxy(new Date(), {});
-proxy.getDate(); // `getDate` rely on internal slots
+const proxy = new Proxy(new Date(), {})
+proxy.getDate() // `getDate` rely on internal slots
 // TypeError: `this` is not a Date object.
 
 const handler = {
   get(target, propKey, receiver) {
     if (propKey === 'getDate') {
-      return target.getDate.bind(target);
+      return target.getDate.bind(target)
     }
 
-    return Reflect.get(target, propKey, receiver);
+    return Reflect.get(target, propKey, receiver)
   },
-};
-const proxy = new Proxy(new Date('2020-12-24'), handler);
-proxy.getDate(); // 24
+}
+const proxy = new Proxy(new Date('2020-12-24'), handler)
+proxy.getDate() // 24
 ```
 
 ### Reflect
@@ -3077,18 +3077,18 @@ proxy.getDate(); // 24
 ```ts
 const target = {
   foo: 'bar',
-};
-const proxy = new Proxy(target, Reflect);
-console.log(proxy.foo); // bar
-console.log(target.foo); // bar
+}
+const proxy = new Proxy(target, Reflect)
+console.log(proxy.foo) // bar
+console.log(target.foo) // bar
 ```
 
 ```ts
-Reflect.ownKeys({ z: 3, y: 2, x: 1 }); // [ "z", "y", "x" ]
-Reflect.ownKeys([]); // ["length"]
+Reflect.ownKeys({ z: 3, y: 2, x: 1 }) // [ "z", "y", "x" ]
+Reflect.ownKeys([]) // ["length"]
 
-const sym = Symbol.for('comet');
-const sym2 = Symbol.for('meteor');
+const sym = Symbol.for('comet')
+const sym2 = Symbol.for('meteor')
 const obj = {
   [sym]: 0,
   str: 0,
@@ -3098,9 +3098,9 @@ const obj = {
   '-1': 0,
   '8': 0,
   'second str': 0,
-};
+}
 
-Reflect.ownKeys(obj);
+Reflect.ownKeys(obj)
 // [ "0", "8", "773", "str", "-1", "second str", Symbol(comet), Symbol(meteor) ]
 // Indexes in numeric order,
 // strings in insertion order,
@@ -3110,17 +3110,17 @@ Reflect.ownKeys(obj);
 CommonJS (`CJS`) to ES Module (`ESM`) exports:
 
 ```ts
-const esm$1 = { exports: {} };
+const esm$1 = { exports: {} }
 
-(function (module, exports) {
-  module.exports = () => {};
-  exports.a = 3;
-  exports.b = 4;
-})(esm$1, esm$1.exports);
+;(function (module, exports) {
+  module.exports = () => {}
+  exports.a = 3
+  exports.b = 4
+})(esm$1, esm$1.exports)
 
-const esm = esm$1.exports;
+const esm = esm$1.exports
 
-export { esm as default };
+export { esm as default }
 ```
 
 ### Proxy Usage
@@ -3131,12 +3131,12 @@ export { esm as default };
 const withZeroValue = (target, zeroValue = 0) =>
   new Proxy(target, {
     get: (obj, prop) => (prop in obj ? obj[prop] : zeroValue),
-  });
+  })
 
-let pos = { x: 4, y: 19 };
-console.log(pos.z); // => undefined
-pos = withZeroValue(pos);
-console.log(pos.z); // => 0
+let pos = { x: 4, y: 19 }
+console.log(pos.z) // => undefined
+pos = withZeroValue(pos)
+console.log(pos.z) // => 0
 ```
 
 #### Hiding Properties Protection
@@ -3150,25 +3150,25 @@ const hide = (target, prefix = '_') =>
         prop => typeof prop !== 'string' || !prop.startsWith(prefix)
       ),
     get: (obj, prop, rec) => (prop in rec ? obj[prop] : undefined),
-  });
+  })
 
 const userData = hide({
   firstName: 'Tom',
   mediumHandle: '@bar',
   _favoriteRapper: 'Drake',
-});
+})
 
-const falsy = '_favoriteRapper' in userData; // has: false
-const keys = Object.keys(userData); // ownKeys: ['firstName', 'mediumHandle']
-console.log(userData._favoriteRapper); // get: undefined
+const falsy = '_favoriteRapper' in userData // has: false
+const keys = Object.keys(userData) // ownKeys: ['firstName', 'mediumHandle']
+console.log(userData._favoriteRapper) // get: undefined
 ```
 
 #### Read Only Object Protection
 
 ```ts
 const NOPE = () => {
-  throw new Error("Can't modify read-only object");
-};
+  throw new Error("Can't modify read-only object")
+}
 
 const NOPE_HANDLER = {
   set: NOPE,
@@ -3178,14 +3178,14 @@ const NOPE_HANDLER = {
   setPrototypeOf: NOPE,
   get: (obj, prop) => {
     if (prop in obj) {
-      return Reflect.get(obj, prop);
+      return Reflect.get(obj, prop)
     }
 
-    throw new ReferenceError(`Unknown prop "${prop}"`);
+    throw new ReferenceError(`Unknown prop "${prop}"`)
   },
-};
+}
 
-const readOnly = target => new Proxy(target, NODE_HANDLER);
+const readOnly = target => new Proxy(target, NODE_HANDLER)
 ```
 
 #### Range Validation
@@ -3196,16 +3196,16 @@ const readOnly = target => new Proxy(target, NODE_HANDLER);
 const range = (min, max) =>
   new Proxy(Object.create(null), {
     has: (_, prop) => +prop >= min && +prop <= max,
-  });
+  })
 
-const X = 10.5;
-const nums = [1, 5, X, 50, 100];
+const X = 10.5
+const nums = [1, 5, X, 50, 100]
 
 if (X in range(1, 100)) {
   // => true
 }
 
-nums.filter(n => n in range(1, 10));
+nums.filter(n => n in range(1, 10))
 // => [1, 5]
 ```
 
@@ -3216,22 +3216,22 @@ nums.filter(n => n in range(1, 10));
 ```ts
 const target = {
   onlyNumbersGoHere: 0,
-};
+}
 
 const proxy = new Proxy(target, {
   set(target, property, value) {
     if (typeof value !== 'number') {
-      return false;
+      return false
     } else {
-      return Reflect.set(target, property, value);
+      return Reflect.set(target, property, value)
     }
   },
-});
+})
 
-proxy.onlyNumbersGoHere = 1;
-console.log(proxy.onlyNumbersGoHere); // 1
-proxy.onlyNumbersGoHere = '2';
-console.log(proxy.onlyNumbersGoHere); // 1
+proxy.onlyNumbersGoHere = 1
+console.log(proxy.onlyNumbersGoHere) // 1
+proxy.onlyNumbersGoHere = '2'
+console.log(proxy.onlyNumbersGoHere) // 1
 ```
 
 #### Function Parameter Validation
@@ -3240,41 +3240,41 @@ console.log(proxy.onlyNumbersGoHere); // 1
 
 ```ts
 function median(...nums) {
-  return nums.sort()[Math.floor(nums.length / 2)];
+  return nums.sort()[Math.floor(nums.length / 2)]
 }
 
 const proxy = new Proxy(median, {
   apply(target, thisArg, argumentsList) {
     for (const arg of argumentsList) {
       if (typeof arg !== 'number') {
-        throw new TypeError('Non-number argument provided');
+        throw new TypeError('Non-number argument provided')
       }
     }
 
-    return Reflect.apply(target, thisArg, argumentsList);
+    return Reflect.apply(target, thisArg, argumentsList)
   },
-});
+})
 
-console.log(proxy(4, 7, 1)); // 4
-console.log(proxy(4, '7', 1));
+console.log(proxy(4, 7, 1)) // 4
+console.log(proxy(4, '7', 1))
 // TypeError: Non-number argument provided
 
 class Person {
   constructor(name) {
-    this.name = name;
+    this.name = name
   }
 }
 
 const PersonProxy = new Proxy(Person, {
   apply(TrapTarget, thisArg, argumentList) {
-    return new TrapTarget(...argumentList);
+    return new TrapTarget(...argumentList)
   },
-});
+})
 
-const me = PersonProxy('Nicholas');
-console.log(me.name); // "Nicholas"
-console.log(me instanceof Person); // true
-console.log(me instanceof PersonProxy); // true
+const me = PersonProxy('Nicholas')
+console.log(me.name) // "Nicholas"
+console.log(me instanceof Person) // true
+console.log(me instanceof PersonProxy) // true
 ```
 
 #### Constructor Parameter Validation
@@ -3284,22 +3284,22 @@ console.log(me instanceof PersonProxy); // true
 ```ts
 class User {
   constructor(id) {
-    this.id_ = id;
+    this.id_ = id
   }
 }
 
 const ProxyUser = new Proxy(User, {
   construct(target, argumentsList, newTarget) {
     if (argumentsList[0] === undefined) {
-      throw new Error('User cannot be instantiated without id');
+      throw new Error('User cannot be instantiated without id')
     } else {
-      return Reflect.construct(target, argumentsList, newTarget);
+      return Reflect.construct(target, argumentsList, newTarget)
     }
   },
-});
+})
 
-const obj = new ProxyUser(1);
-const throwError = new ProxyUser();
+const obj = new ProxyUser(1)
+const throwError = new ProxyUser()
 // Error: User cannot be instantiated without id
 ```
 
@@ -3314,67 +3314,67 @@ const negativeArray = els =>
         +propKey < 0 ? String(target.length + +propKey) : propKey,
         receiver
       ),
-  });
+  })
 ```
 
 #### Array Manipulation Protection
 
 ```ts
 function toUint32(value) {
-  return Math.floor(Math.abs(Number(value))) % 2 ** 32;
+  return Math.floor(Math.abs(Number(value))) % 2 ** 32
 }
 
 function isArrayIndex(key) {
-  const numericKey = toUint32(key);
-  return String(numericKey) === key && numericKey < 2 ** 32 - 1;
+  const numericKey = toUint32(key)
+  return String(numericKey) === key && numericKey < 2 ** 32 - 1
 }
 
 class MyArray {
   constructor(length = 0) {
-    this.length = length;
+    this.length = length
 
     return new Proxy(this, {
       set(trapTarget, key, value) {
-        const currentLength = Reflect.get(trapTarget, 'length');
+        const currentLength = Reflect.get(trapTarget, 'length')
 
         // the special case
         if (isArrayIndex(key)) {
-          const numericKey = Number(key);
+          const numericKey = Number(key)
 
           if (numericKey >= currentLength) {
-            Reflect.set(trapTarget, 'length', numericKey + 1);
+            Reflect.set(trapTarget, 'length', numericKey + 1)
           }
         } else if (key === 'length') {
           if (value < currentLength) {
             for (let index = currentLength - 1; index >= value; index--) {
-              Reflect.deleteProperty(trapTarget, index);
+              Reflect.deleteProperty(trapTarget, index)
             }
           }
         }
 
         // always do this regardless of key type
-        return Reflect.set(trapTarget, key, value);
+        return Reflect.set(trapTarget, key, value)
       },
-    });
+    })
   }
 }
 
-const colors = new MyArray(3);
-console.log(colors instanceof MyArray); // true
-console.log(colors.length); // 3
+const colors = new MyArray(3)
+console.log(colors instanceof MyArray) // true
+console.log(colors.length) // 3
 
-colors[0] = 'red';
-colors[1] = 'green';
-colors[2] = 'blue';
-colors[3] = 'black';
-console.log(colors.length); // 4
+colors[0] = 'red'
+colors[1] = 'green'
+colors[2] = 'blue'
+colors[3] = 'black'
+console.log(colors.length) // 4
 
-colors.length = 2;
-console.log(colors.length); // 2
-console.log(colors[3]); // undefined
-console.log(colors[2]); // undefined
-console.log(colors[1]); // "green"
-console.log(colors[0]); // "red"
+colors.length = 2
+console.log(colors.length) // 2
+console.log(colors[3]) // undefined
+console.log(colors[2]) // undefined
+console.log(colors[1]) // "green"
+console.log(colors[0]) // "red"
 ```
 
 #### Exception Protection
@@ -3384,43 +3384,43 @@ function createExceptionProxy(target) {
   return new Proxy(target, {
     get: (target, prop) => {
       if (!(prop in target)) {
-        return;
+        return
       }
 
       if (typeof target[prop] === 'function') {
-        return createExceptionZone(target, prop);
+        return createExceptionZone(target, prop)
       }
 
-      return target[prop];
+      return target[prop]
     },
-  });
+  })
 }
 
 function createExceptionZone(target, prop) {
   return (...args) => {
-    let result;
+    let result
     ExceptionsZone.run(() => {
-      result = target[prop](...args);
-    });
-    return result;
-  };
+      result = target[prop](...args)
+    })
+    return result
+  }
 }
 
 class ExceptionsZone {
-  static exceptionHandler = new ExceptionHandler();
+  static exceptionHandler = new ExceptionHandler()
 
   static run(callback) {
     try {
-      callback();
+      callback()
     } catch (e) {
-      this.exceptionHandler.handle(e);
+      this.exceptionHandler.handle(e)
     }
   }
 }
 
 class ExceptionHandler {
   handle(exception) {
-    console.log('记录错误: ', exception.message, exception.stack);
+    console.log('记录错误: ', exception.message, exception.stack)
   }
 }
 ```
@@ -3429,22 +3429,22 @@ class ExceptionHandler {
 const obj = {
   name: 'obj',
   say() {
-    console.log(`Hi, I'm ${this.name}`);
+    console.log(`Hi, I'm ${this.name}`)
   },
   coding() {
     // xxx.
-    throw new Error('bug');
+    throw new Error('bug')
   },
   coding2() {
     // xxx.
-    throw new Error('bug2');
+    throw new Error('bug2')
   },
-};
+}
 
-const proxy = createProxy(obj);
+const proxy = createProxy(obj)
 
-proxy.say();
-proxy.coding();
+proxy.say()
+proxy.coding()
 ```
 
 #### Proxy Pattern Implementation
@@ -3498,25 +3498,25 @@ proxy.coding();
 ```ts
 class Error {
   // Instance properties
-  message: string;
-  cause?: any; // ES2022
-  stack: string; // non-standard but widely supported
+  message: string
+  cause?: any // ES2022
+  stack: string // non-standard but widely supported
 
   constructor(message = '', options?: ErrorOptions) {
-    this.name = 'Error';
-    this.message = message;
-    this.cause = options?.cause; // ES2022: error chain.
+    this.name = 'Error'
+    this.message = message
+    this.cause = options?.cause // ES2022: error chain.
   }
 }
 
 interface ErrorOptions {
-  cause?: string | Error; // ES2022
+  cause?: string | Error // ES2022
 }
 
 class CustomError extends Error {
   constructor(message, options) {
-    super(message, options);
-    this.name = 'CustomError';
+    super(message, options)
+    this.name = 'CustomError'
   }
 }
 ```
@@ -3529,13 +3529,13 @@ const err = {
   message: 'something wrong',
   extra: 'This was rather embarrassing',
   remedy: genericErrorHandler, // 处理错误的函数名.
-};
+}
 
 try {
-  throwError();
+  throwError()
 } catch (e) {
-  console.log(e.message);
-  e.remedy(); // genericErrorHandler.
+  console.log(e.message)
+  e.remedy() // genericErrorHandler.
 }
 ```
 
@@ -3547,9 +3547,9 @@ try {
 
 ```ts
 try {
-  recursion();
+  recursion()
 } catch (ex) {
-  console.error('error info');
+  console.error('error info')
 }
 ```
 
@@ -3571,7 +3571,7 @@ try {
 - Avoid using try-catch inside a loop:
 
 ```ts
-const object = ['foo', 'bar'];
+const object = ['foo', 'bar']
 
 try {
   for (let i = 0; i < object.length; i++) {
@@ -3587,21 +3587,21 @@ try {
 window.addEventListener(
   'error',
   error => {
-    handleError(error);
-    error.preventDefault();
+    handleError(error)
+    error.preventDefault()
   },
   true
-);
+)
 
 // Un-catch `Promise` handler
 window.addEventListener(
   'unhandledrejection',
   error => {
-    handleError(error);
-    error.preventDefault();
+    handleError(error)
+    error.preventDefault()
   },
   true
-);
+)
 ```
 
 ```ts
@@ -3611,120 +3611,120 @@ const instance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-});
+})
 
 instance.interceptors.response.use(
   response => {
-    return response.data;
+    return response.data
   },
   error => {
     // 发生异常会走到这里
     if (error.response) {
-      const response = error.response;
+      const response = error.response
 
       if (response.status >= 400) {
-        handleError(response);
+        handleError(response)
       }
     } else {
-      handleError(null);
+      handleError(null)
     }
 
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 ```
 
 ```ts
 globalThis.onunhandledrejection = event => {
-  console.log(event.type);
+  console.log(event.type)
   // "unhandledrejection"
-  console.log(event.reason.message);
+  console.log(event.reason.message)
   // "Oops!"
-  console.log(rejected === event.promise);
+  console.log(rejected === event.promise)
   // true
-};
+}
 
 globalThis.onrejectionhandled = event => {
-  console.log(event.type);
+  console.log(event.type)
   // "rejectionhandled"
-  console.log(event.reason.message);
+  console.log(event.reason.message)
   // "Oops!"
-  console.log(rejected === event.promise);
+  console.log(rejected === event.promise)
   // true
-};
+}
 
-const possiblyUnhandledRejections = new Map();
+const possiblyUnhandledRejections = new Map()
 
 // when a rejection is unhandled, add it to the map
 globalThis.onunhandledrejection = event => {
   // prevents the console warning
-  event.preventDefault();
-  possiblyUnhandledRejections.set(event.promise, event.reason);
-};
+  event.preventDefault()
+  possiblyUnhandledRejections.set(event.promise, event.reason)
+}
 
 // when a rejection is handled, remove it from the map
 globalThis.onrejectionhandled = event => {
-  possiblyUnhandledRejections.delete(event.promise);
-};
+  possiblyUnhandledRejections.delete(event.promise)
+}
 
 setInterval(() => {
   possiblyUnhandledRejections.forEach((reason, promise) => {
-    console.error('Unhandled rejection');
-    console.error(promise);
-    console.error(reason.message ? reason.message : reason);
+    console.error('Unhandled rejection')
+    console.error(promise)
+    console.error(reason.message ? reason.message : reason)
     // do something to handle these rejections
-  });
-  possiblyUnhandledRejections.clear();
-}, 60000);
+  })
+  possiblyUnhandledRejections.clear()
+}, 60000)
 
-const rejected = Promise.reject(new Error('Oops!'));
+const rejected = Promise.reject(new Error('Oops!'))
 
 process.on('unhandledRejection', (reason, promise) => {
-  console.log(reason.message);
+  console.log(reason.message)
   // "Oops!"
-  console.log(rejected === promise);
+  console.log(rejected === promise)
   // true
-});
+})
 
-const rejected = Promise.reject(new Error('Oops!'));
+const rejected = Promise.reject(new Error('Oops!'))
 
 setTimeout(() => {
   // "rejectionhandled" triggered here
   rejected.catch(
     reason => console.error(reason.message) // "Oops!"
-  );
-}, 500);
+  )
+}, 500)
 
 process.on('rejectionHandled', promise => {
-  console.log(rejected === promise); // true
-});
+  console.log(rejected === promise) // true
+})
 
-const possiblyUnhandledRejections = new Map();
+const possiblyUnhandledRejections = new Map()
 
 // when a rejection is unhandled, add it to the map
 process.on('unhandledRejection', (reason, promise) => {
-  possiblyUnhandledRejections.set(promise, reason);
-});
+  possiblyUnhandledRejections.set(promise, reason)
+})
 
 process.on('rejectionHandled', promise => {
-  possiblyUnhandledRejections.delete(promise);
-});
+  possiblyUnhandledRejections.delete(promise)
+})
 
 setInterval(() => {
   possiblyUnhandledRejections.forEach((reason, promise) => {
-    console.error('Unhandled rejection');
-    console.error(promise);
-    console.error(reason.message ? reason.message : reason);
+    console.error('Unhandled rejection')
+    console.error(promise)
+    console.error(reason.message ? reason.message : reason)
     // do something to handle these rejections
-  });
-  possiblyUnhandledRejections.clear();
-}, 60000);
+  })
+  possiblyUnhandledRejections.clear()
+}, 60000)
 ```
 
 ## Regular Expression
 
 ```ts
-const re = /pattern/gim;
+const re = /pattern/gim
 ```
 
 ### RegExp Flags
@@ -3740,13 +3740,13 @@ const re = /pattern/gim;
 
 ```ts
 function codePointLength(text) {
-  const result = text.match(/[\s\S]/gu);
-  return result ? result.length : 0;
+  const result = text.match(/[\s\S]/gu)
+  return result ? result.length : 0
 }
 
-const s = '𠮷𠮷';
-const length = s.length; // 4
-codePointLength(s); // 2
+const s = '𠮷𠮷'
+const length = s.length // 4
+codePointLength(s) // 2
 ```
 
 ### RegExp Character Classes
@@ -3812,13 +3812,13 @@ codePointLength(s); // 2
 - `hi(?!\d)` -> `high`.
 
 ```ts
-const string = 'Favorite GitHub Repos: tc39/ecma262 v8/v8.dev';
-const regex = /\b(?<owner>[a-z0-9]+)\/(?<repo>[a-z0-9\.]+)\b/g;
+const string = 'Favorite GitHub Repos: tc39/ecma262 v8/v8.dev'
+const regex = /\b(?<owner>[a-z0-9]+)\/(?<repo>[a-z0-9\.]+)\b/g
 
 for (const match of string.matchAll(regex)) {
-  console.log(`${match[0]} at ${match.index} with '${match.input}'`);
-  console.log(`owner: ${match.groups.owner}`);
-  console.log(`repo: ${match.groups.repo}`);
+  console.log(`${match[0]} at ${match.index} with '${match.input}'`)
+  console.log(`owner: ${match.groups.owner}`)
+  console.log(`repo: ${match.groups.repo}`)
 }
 ```
 
@@ -3830,14 +3830,14 @@ for (const match of string.matchAll(regex)) {
 - 反向引用可以解决正则表达式回溯失控的问题 (ReDoS).
 
 ```ts
-const regExp = /((<\/?\w+>.*)\2)/g;
+const regExp = /((<\/?\w+>.*)\2)/g
 ```
 
 ```ts
-const text = 'ooo111ooo222ooo333ooo123';
-const regExp = /(\d)\1\1/g;
-const result = text.match(regExp);
-console.log(result); // [111, 222, 333]
+const text = 'ooo111ooo222ooo333ooo123'
+const regExp = /(\d)\1\1/g
+const result = text.match(regExp)
+console.log(result) // [111, 222, 333]
 ```
 
 :::danger RegExp Static Property
@@ -3870,7 +3870,7 @@ RegExp [functions](https://exploringjs.com/impatient-js/ch_regexps.html#methods-
 #### RegExp Test
 
 ```ts
-/[a-z|A-Z|0-9]/gim.test(str);
+;/[a-z|A-Z|0-9]/gim.test(str)
 ```
 
 ```ts
@@ -3897,12 +3897,12 @@ const ignoreList = [
   '^ehthumbs\\.db$', // Folder config file
   '^Desktop\\.ini$', // Stores custom folder attributes
   '@eaDir$', // "hidden" folder where the server stores thumbnails
-];
+]
 
-export const junkRegex = new RegExp(ignoreList.join('|'));
+export const junkRegex = new RegExp(ignoreList.join('|'))
 
 export function isJunk(filename) {
-  return junkRegex.test(filename);
+  return junkRegex.test(filename)
 }
 ```
 
@@ -3913,15 +3913,15 @@ export function isJunk(filename) {
 - Search starts at substring specified by `lastIndex` property.
 
 ```ts
-const input = 'A string with 3 numbers in it... 42 and 88.';
-const number = /\b\d+\b/g;
+const input = 'A string with 3 numbers in it... 42 and 88.'
+const number = /\b\d+\b/g
 
 for (
   let match = number.exec(input);
   match !== null;
   match = number.exec(input)
 ) {
-  console.log('Found', match[0], 'at', match.index);
+  console.log('Found', match[0], 'at', match.index)
 }
 // Found 3 at 14
 // Found 42 at 33
@@ -3931,7 +3931,7 @@ for (
 #### RegExp Replace
 
 ```ts
-str.replace(regExp, str / func);
+str.replace(regExp, str / func)
 ```
 
 ##### RegExp Replace Arguments
@@ -3945,28 +3945,28 @@ str.replace(regExp, str / func);
 
 ```ts
 function upper(all, letter) {
-  return letter.toUpperCase();
+  return letter.toUpperCase()
 }
 
 assert(
   'border-bottom-width'.replace(/-(\w)/g, upper) === 'borderBottomWidth',
   'Camel cased a hyphenated string.'
-);
+)
 ```
 
 ```ts
-const RE_DATE = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
-console.log('1999-12-31'.replace(RE_DATE, '$<month>/$<day>/$<year>'));
+const RE_DATE = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/
+console.log('1999-12-31'.replace(RE_DATE, '$<month>/$<day>/$<year>'))
 // 12/31/1999
 
-const RE_DATE = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
+const RE_DATE = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/
 console.log(
   '1999-12-31'.replace(
     RE_DATE,
     (g0, y, m, d, offset, input, { year, month, day }) =>
       `${month}/${day}/${year}`
   )
-);
+)
 // 12/31/1999
 ```
 
@@ -3979,8 +3979,8 @@ console.log(
 if (!String.prototype.trim) {
   // eslint-disable-next-line no-extend-native
   String.prototype.trim = function () {
-    return this.replace(/^\s+/, '').replace(/\s+$/, '');
-  };
+    return this.replace(/^\s+/, '').replace(/\s+$/, '')
+  }
 }
 ```
 
@@ -3988,16 +3988,16 @@ if (!String.prototype.trim) {
 if (!String.prototype.trim) {
   // eslint-disable-next-line no-extend-native
   String.prototype.trim = function () {
-    const str = this.replace(/^\s+/, '');
-    let end = str.length - 1;
-    const ws = /\s/;
+    const str = this.replace(/^\s+/, '')
+    let end = str.length - 1
+    const ws = /\s/
 
     while (ws.test(str.charAt(end))) {
-      end--;
+      end--
     }
 
-    return str.slice(0, end + 1);
-  };
+    return str.slice(0, end + 1)
+  }
 }
 ```
 
@@ -4038,7 +4038,7 @@ if (!String.prototype.trim) {
 
 ```ts
 // URLSearchParams [key, value]
-const pattern = /([^&=]+)=([^&]*)/g;
+const pattern = /([^&=]+)=([^&]*)/g
 ```
 
 #### 中英文
@@ -4089,17 +4089,17 @@ implement **time slicing scheduler**.
 
 ```ts
 function processArray(items, process, done) {
-  const todo = items.slice();
+  const todo = items.slice()
 
   setTimeout(function task() {
-    process(todo.shift());
+    process(todo.shift())
 
     if (todo.length > 0) {
-      setTimeout(task, 25);
+      setTimeout(task, 25)
     } else {
-      done(items);
+      done(items)
     }
-  }, 25);
+  }, 25)
 }
 ```
 
@@ -4113,19 +4113,19 @@ function processArray(items, process, done) {
 
 ```ts
 function runAnimation(frameFunc) {
-  let lastTime = null;
+  let lastTime = null
 
   function frame(time) {
     if (lastTime !== null) {
-      const timeStep = Math.min(time - lastTime, 100) / 1000;
-      if (frameFunc(timeStep) === false) return;
+      const timeStep = Math.min(time - lastTime, 100) / 1000
+      if (frameFunc(timeStep) === false) return
     }
 
-    lastTime = time;
-    requestAnimationFrame(frame);
+    lastTime = time
+    requestAnimationFrame(frame)
   }
 
-  requestAnimationFrame(frame);
+  requestAnimationFrame(frame)
 }
 ```
 
@@ -4161,57 +4161,57 @@ function runAnimation(frameFunc) {
 - `Math.tan(x)`: 返回 x 的正切.
 
 ```ts
-const epsilon = Math.E;
-const log10 = Math.LN10;
-const log2 = Math.LN2;
-const log2e = Math.LOG2E;
-const log10e = Math.LOG10E;
-const pi = Math.PI;
-const squareRoot = Math.SQRT1_2;
-const squareRoot2 = Math.SQRT2;
+const epsilon = Math.E
+const log10 = Math.LN10
+const log2 = Math.LN2
+const log2e = Math.LOG2E
+const log10e = Math.LOG10E
+const pi = Math.PI
+const squareRoot = Math.SQRT1_2
+const squareRoot2 = Math.SQRT2
 
-Math.abs(num);
-Math.exp(num);
-Math.log(num);
-Math.sqrt(num);
-Math.acos(x);
-Math.asin(x);
-Math.atan(x);
-Math.atan2(y, x);
-Math.cos(x);
-Math.sin(x);
-Math.tan(x);
+Math.abs(num)
+Math.exp(num)
+Math.log(num)
+Math.sqrt(num)
+Math.acos(x)
+Math.asin(x)
+Math.atan(x)
+Math.atan2(y, x)
+Math.cos(x)
+Math.sin(x)
+Math.tan(x)
 ```
 
 ```ts
-console.log(Math.max(3, 54, 32, 16)); // 54
-console.log(Math.min(3, 54, 32, 16)); // 3
-console.log(Math.ceil(25.9)); // 26
-console.log(Math.ceil(25.5)); // 26
-console.log(Math.ceil(25.1)); // 26
-console.log(Math.round(25.9)); // 26
-console.log(Math.round(25.5)); // 26
-console.log(Math.round(25.1)); // 25
-console.log(Math.fround(0.4)); // 0.4000000059604645
-console.log(Math.fround(0.5)); // 0.5
-console.log(Math.fround(25.9)); // 25.899999618530273
-console.log(Math.floor(25.9)); // 25
-console.log(Math.floor(25.5)); // 25
-console.log(Math.floor(25.1)); // 25
+console.log(Math.max(3, 54, 32, 16)) // 54
+console.log(Math.min(3, 54, 32, 16)) // 3
+console.log(Math.ceil(25.9)) // 26
+console.log(Math.ceil(25.5)) // 26
+console.log(Math.ceil(25.1)) // 26
+console.log(Math.round(25.9)) // 26
+console.log(Math.round(25.5)) // 26
+console.log(Math.round(25.1)) // 25
+console.log(Math.fround(0.4)) // 0.4000000059604645
+console.log(Math.fround(0.5)) // 0.5
+console.log(Math.fround(25.9)) // 25.899999618530273
+console.log(Math.floor(25.9)) // 25
+console.log(Math.floor(25.5)) // 25
+console.log(Math.floor(25.1)) // 25
 ```
 
 ```ts
 const random = (a = 1, b = 0) => {
-  const lower = Math.min(a, b);
-  const upper = Math.max(a, b);
-  return lower + Math.random() * (upper - lower);
-};
+  const lower = Math.min(a, b)
+  const upper = Math.max(a, b)
+  return lower + Math.random() * (upper - lower)
+}
 
 const randomInt = (a = 1, b = 0) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  return Math.floor(lower + Math.random() * (upper - lower + 1));
-};
+  const lower = Math.ceil(Math.min(a, b))
+  const upper = Math.floor(Math.max(a, b))
+  return Math.floor(lower + Math.random() * (upper - lower + 1))
+}
 ```
 
 |              | -2.9 | -2.5 | -2.1 | 2.1 | 2.5 | 2.9 |
@@ -4226,21 +4226,21 @@ const randomInt = (a = 1, b = 0) => {
 [Atomics API](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Atomics):
 
 ```ts
-const sharedArrayBuffer = new SharedArrayBuffer(4);
-const dataView = new Uint32Array(sharedArrayBuffer);
+const sharedArrayBuffer = new SharedArrayBuffer(4)
+const dataView = new Uint32Array(sharedArrayBuffer)
 
-const index = 0;
-const increment = 5;
+const index = 0
+const increment = 5
 
-Atomics.add(dataView, index, increment);
-Atomics.sub(dataView, index, increment);
-Atomics.or(dataView, index, 0b1111);
-Atomics.and(dataView, index, 0b1100);
-Atomics.xor(dataView, index, 0b1111);
-Atomics.load(dataView, index);
-Atomics.store(dataView, index, 3);
-Atomics.exchange(dataView, index, 4);
-Atomics.compareExchange(dataView, index, expect, 6);
+Atomics.add(dataView, index, increment)
+Atomics.sub(dataView, index, increment)
+Atomics.or(dataView, index, 0b1111)
+Atomics.and(dataView, index, 0b1100)
+Atomics.xor(dataView, index, 0b1111)
+Atomics.load(dataView, index)
+Atomics.store(dataView, index, 3)
+Atomics.exchange(dataView, index, 4)
+Atomics.compareExchange(dataView, index, expect, 6)
 ```
 
 ### URI and URL
@@ -4249,19 +4249,19 @@ Atomics.compareExchange(dataView, index, expect, 6);
 - `encodeURIComponent()`: 编码它发现的所有非标准字符.
 
 ```ts
-const uri = 'http://www.foo.com/illegal value.js#start';
+const uri = 'http://www.foo.com/illegal value.js#start'
 // "http://www.foo.com/illegal%20value.js#start"
-console.log(encodeURI(uri));
+console.log(encodeURI(uri))
 // "http%3A%2F%2Fwww.foo.com%2Fillegal%20value.js%23start"
-console.log(encodeURIComponent(uri));
+console.log(encodeURIComponent(uri))
 ```
 
 ```ts
-const uri = 'http%3A%2F%2Fwww.foo.com%2Fillegal%20value.js%23start';
+const uri = 'http%3A%2F%2Fwww.foo.com%2Fillegal%20value.js%23start'
 // http%3A%2F%2Fwww.foo.com%2Fillegal value.js%23start
-console.log(decodeURI(uri));
+console.log(decodeURI(uri))
 // http:// www.foo.com/illegal value.js#start
-console.log(decodeURIComponent(uri));
+console.log(decodeURIComponent(uri))
 ```
 
 [URL](https://developer.mozilla.org/docs/Web/API/URL):
@@ -4280,37 +4280,37 @@ console.log(decodeURIComponent(uri));
 - `origin`: read only.
 
 ```ts
-const href = new URL('other.mjs', 'https://example.com/code/main.mjs').href;
+const href = new URL('other.mjs', 'https://example.com/code/main.mjs').href
 // 'https://example.com/code/other.mjs'
-const href = new URL('../other.mjs', 'https://example.com/code/main.mjs').href;
+const href = new URL('../other.mjs', 'https://example.com/code/main.mjs').href
 // 'https://example.com/other.mjs'
 
 const blob = new Blob(['export const itsAModule = true'], {
   type: 'text/javascript',
-});
+})
 
-const blobUrl = URL.createObjectURL(blob);
+const blobUrl = URL.createObjectURL(blob)
 ```
 
 [Download files](https://www.amitmerchant.com/create-and-download-text-files-using-javascript):
 
 ```ts
 function saveTextAsFile(textToWrite, fileNameToSaveAs, fileType) {
-  const textFileAsBlob = new Blob([textToWrite], { type: fileType });
-  const downloadLink = document.createElement('a');
-  downloadLink.innerHTML = 'Download File';
-  downloadLink.download = fileNameToSaveAs;
+  const textFileAsBlob = new Blob([textToWrite], { type: fileType })
+  const downloadLink = document.createElement('a')
+  downloadLink.innerHTML = 'Download File'
+  downloadLink.download = fileNameToSaveAs
 
   if (window.webkitURL != null) {
-    downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+    downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob)
   } else {
-    downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-    downloadLink.onclick = destroyClickedElement; // document.body.removeChild(downloadLink);
-    downloadLink.style.display = 'none';
-    document.body.appendChild(downloadLink);
+    downloadLink.href = window.URL.createObjectURL(textFileAsBlob)
+    downloadLink.onclick = destroyClickedElement // document.body.removeChild(downloadLink);
+    downloadLink.style.display = 'none'
+    document.body.appendChild(downloadLink)
   }
 
-  downloadLink.click();
+  downloadLink.click()
 }
 ```
 
@@ -4318,22 +4318,22 @@ function saveTextAsFile(textToWrite, fileNameToSaveAs, fileType) {
 
 ```ts
 // window.location.search
-const qs = '?q=javascript&num=10';
-const searchParams = new URLSearchParams(qs);
+const qs = '?q=javascript&num=10'
+const searchParams = new URLSearchParams(qs)
 
 for (const param of searchParams) {
-  console.log(param);
+  console.log(param)
 }
 // ["q", "javascript"]
 // ["num", "10"]
 
-alert(searchParams.toString()); // " q=javascript&num=10"
-searchParams.has('num'); // true
-searchParams.get('num'); // 10
-searchParams.set('page', '3');
-alert(searchParams.toString()); // " q=javascript&num=10&page=3"
-searchParams.delete('q');
-alert(searchParams.toString()); // " num=10&page=3"
+alert(searchParams.toString()) // " q=javascript&num=10"
+searchParams.has('num') // true
+searchParams.get('num') // 10
+searchParams.set('page', '3')
+alert(searchParams.toString()) // " q=javascript&num=10&page=3"
+searchParams.delete('q')
+alert(searchParams.toString()) // " num=10&page=3"
 ```
 
 ### Encoding and Decoding
@@ -4341,53 +4341,51 @@ alert(searchParams.toString()); // " num=10&page=3"
 [TextEncoder API](https://developer.mozilla.org/docs/Web/API/TextEncoder):
 
 ```ts
-const textEncoder = new TextEncoder();
-const decodedText = 'foo';
-const encodedText = textEncoder.encode(decodedText);
+const textEncoder = new TextEncoder()
+const decodedText = 'foo'
+const encodedText = textEncoder.encode(decodedText)
 // f 的 UTF-8 编码是 0x66 (即十进制 102)
 // o 的 UTF-8 编码是 0x6F (即二进制 111)
-console.log(encodedText); // Uint8Array(3) [102, 111, 111]
+console.log(encodedText) // Uint8Array(3) [102, 111, 111]
 ```
 
 ```ts
-const textEncoder = new TextEncoder();
-const fooArr = new Uint8Array(3);
-const fooResult = textEncoder.encodeInto('foo', fooArr);
-console.log(fooArr); // Uint8Array(3) [102, 111, 111]
-console.log(fooResult); // { read: 3, written: 3 }
+const textEncoder = new TextEncoder()
+const fooArr = new Uint8Array(3)
+const fooResult = textEncoder.encodeInto('foo', fooArr)
+console.log(fooArr) // Uint8Array(3) [102, 111, 111]
+console.log(fooResult) // { read: 3, written: 3 }
 ```
 
 ```ts
 async function* chars() {
-  const decodedText = 'foo';
+  const decodedText = 'foo'
   for (const char of decodedText) {
-    yield await new Promise(resolve => setTimeout(resolve, 1000, char));
+    yield await new Promise(resolve => setTimeout(resolve, 1000, char))
   }
 }
 
 const decodedTextStream = new ReadableStream({
   async start(controller) {
     for await (const chunk of chars()) {
-      controller.enqueue(chunk);
+      controller.enqueue(chunk)
     }
 
-    controller.close();
+    controller.close()
   },
-});
+})
 
-const encodedTextStream = decodedTextStream.pipeThrough(
-  new TextEncoderStream()
-);
+const encodedTextStream = decodedTextStream.pipeThrough(new TextEncoderStream())
 
-const readableStreamDefaultReader = encodedTextStream.getReader();
+const readableStreamDefaultReader = encodedTextStream.getReader()
 
 while (true) {
-  const { done, value } = await readableStreamDefaultReader.read();
+  const { done, value } = await readableStreamDefaultReader.read()
 
   if (done) {
-    break;
+    break
   } else {
-    console.log(value);
+    console.log(value)
   }
 }
 // Uint8Array[102]
@@ -4398,21 +4396,21 @@ while (true) {
 [TextDecoder API](https://developer.mozilla.org/docs/Web/API/TextDecoder):
 
 ```ts
-const textDecoder = new TextDecoder();
+const textDecoder = new TextDecoder()
 // f 的 UTF-8 编码是 0x66 (即十进制 102)
 // o 的 UTF-8 编码是 0x6F (即二进制 111)
-const encodedText = Uint8Array.of(102, 111, 111);
-const decodedText = textDecoder.decode(encodedText);
-console.log(decodedText); // foo
+const encodedText = Uint8Array.of(102, 111, 111)
+const decodedText = textDecoder.decode(encodedText)
+console.log(decodedText) // foo
 ```
 
 ```ts
-const response = await fetch(url);
-const stream = response.body.pipeThrough(new TextDecoderStream());
-const decodedStream = stream.getReader();
+const response = await fetch(url)
+const stream = response.body.pipeThrough(new TextDecoderStream())
+const decodedStream = stream.getReader()
 
 for await (const decodedChunk of decodedStream) {
-  console.log(decodedChunk);
+  console.log(decodedChunk)
 }
 ```
 
@@ -4425,50 +4423,50 @@ for await (const decodedChunk of decodedStream) {
 #### Number i18n
 
 ```ts
-const nfFrench = new Intl.NumberFormat('fr');
-nf.format(12345678901234567890n);
+const nfFrench = new Intl.NumberFormat('fr')
+nf.format(12345678901234567890n)
 // => 12 345 678 901 234 567 890
 ```
 
 #### String i18n
 
 ```ts
-const lfEnglish = new Intl.ListFormat('en');
+const lfEnglish = new Intl.ListFormat('en')
 // const lfEnglish = new Intl.ListFormat('en', { type: 'disjunction' }); => 'or'
 
-lfEnglish.format(['Ada', 'Grace', 'Ida']);
+lfEnglish.format(['Ada', 'Grace', 'Ida'])
 // => 'Ada, Grace and Ida'
 
 const formatter = new Intl.ListFormat('en', {
   style: 'long',
   type: 'conjunction',
-});
-console.log(formatter.format(vehicles));
+})
+console.log(formatter.format(vehicles))
 // expected output: "Motorcycle, Bus, and Car"
 
 const formatter2 = new Intl.ListFormat('de', {
   style: 'short',
   type: 'disjunction',
-});
-console.log(formatter2.format(vehicles));
+})
+console.log(formatter2.format(vehicles))
 // expected output: "Motorcycle, Bus oder Car"
 
-const formatter3 = new Intl.ListFormat('en', { style: 'narrow', type: 'unit' });
-console.log(formatter3.format(vehicles));
+const formatter3 = new Intl.ListFormat('en', { style: 'narrow', type: 'unit' })
+console.log(formatter3.format(vehicles))
 // expected output: "Motorcycle Bus Car"
 ```
 
 #### Time i18n
 
 ```ts
-const rtfEnglish = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+const rtfEnglish = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
 
-rtf.format(-1, 'day'); // 'yesterday'
-rtf.format(0, 'day'); // 'today'
-rtf.format(1, 'day'); // 'tomorrow'
-rtf.format(-1, 'week'); // 'last week'
-rtf.format(0, 'week'); // 'this week'
-rtf.format(1, 'week'); // 'next week'
+rtf.format(-1, 'day') // 'yesterday'
+rtf.format(0, 'day') // 'today'
+rtf.format(1, 'day') // 'tomorrow'
+rtf.format(-1, 'week') // 'last week'
+rtf.format(0, 'week') // 'this week'
+rtf.format(1, 'week') // 'next week'
 ```
 
 ```ts
@@ -4476,10 +4474,10 @@ const dtfEnglish = new Intl.DateTimeFormat('en', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
-});
+})
 
-dtfEnglish.format(new Date()); // => 'May 7, 2019'
-dtfEnglish.formatRange(start, end); // => 'May 7 - 9, 2019'
+dtfEnglish.format(new Date()) // => 'May 7, 2019'
+dtfEnglish.formatRange(start, end) // => 'May 7 - 9, 2019'
 ```
 
 ## Functional JavaScript
@@ -4515,22 +4513,22 @@ but in immutable.js `map2 === map1` become `true`
 (copy free due to immutable data).
 
 ```ts
-const map1 = { b: 2 };
-const map2 = map1.set('b', 2);
+const map1 = { b: 2 }
+const map2 = map1.set('b', 2)
 ```
 
 ### Partial Application
 
 ```ts
 const partialFromBind = (fn, ...args) => {
-  return fn.bind(null, ...args);
-};
+  return fn.bind(null, ...args)
+}
 
 const partial = (fn, ...args) => {
   return (...rest) => {
-    return fn(...args, ...rest);
-  };
-};
+    return fn(...args, ...rest)
+  }
+}
 ```
 
 ### Currying
@@ -4540,16 +4538,16 @@ Chain of multiple single argument functions:
 ```ts
 function curry(fn, ...stored_args) {
   return function (...new_args) {
-    const args = stored_args.concat(new_args);
-    return fn(...args);
-  };
+    const args = stored_args.concat(new_args)
+    return fn(...args)
+  }
 }
 
-const add = x => y => x + y;
+const add = x => y => x + y
 
-const addOne = curry(add, 1);
+const addOne = curry(add, 1)
 // addOne(3) === 4;
-const addFive = curry(addOne, 1, 3);
+const addFive = curry(addOne, 1, 3)
 // addFive(4) === 9;
 ```
 
@@ -4559,14 +4557,14 @@ const addFive = curry(addOne, 1, 3);
 const compose =
   (...fns) =>
   x =>
-    fns.reduceRight((promise, fn) => promise.then(fn), Promise.resolve(x));
+    fns.reduceRight((promise, fn) => promise.then(fn), Promise.resolve(x))
 
-const addTwo = x => x + 2;
-const addThree = x => x + 3;
-const addFive = x => x + 5;
-const addTen = compose(addTwo, addThree, addFive);
+const addTwo = x => x + 2
+const addThree = x => x + 3
+const addFive = x => x + 5
+const addTen = compose(addTwo, addThree, addFive)
 
-addTen(8).then(console.log); // 18
+addTen(8).then(console.log) // 18
 ```
 
 ### Flow
@@ -4575,28 +4573,28 @@ addTen(8).then(console.log); // 18
 const flow =
   (...fns) =>
   x =>
-    fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x));
+    fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x))
 
-const addTwo = x => x + 2;
-const addThree = x => x + 3;
-const addFive = x => x + 5;
-const addTen = flow(addTwo, addThree, addFive);
+const addTwo = x => x + 2
+const addThree = x => x + 3
+const addFive = x => x + 5
+const addTen = flow(addTwo, addThree, addFive)
 
-addTen(8).then(console.log); // 18
+addTen(8).then(console.log) // 18
 ```
 
 ### Pipe
 
 ```ts
 const pipe = (x, ...fns) =>
-  fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x));
+  fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x))
 
-const addTwo = x => x + 2;
-const addThree = x => x + 3;
-const addFive = x => x + 5;
-const addTen = pipe(8, addTwo, addThree, addFive);
+const addTwo = x => x + 2
+const addThree = x => x + 3
+const addFive = x => x + 5
+const addTen = pipe(8, addTwo, addThree, addFive)
 
-addTen.then(console.log); // 18
+addTen.then(console.log) // 18
 ```
 
 ### Immutable
@@ -4610,88 +4608,83 @@ Immutable data structure:
 #### Immutable Array
 
 ```ts
-const RE_INDEX_PROP_KEY = /^[0-9]+$/;
-const ALLOWED_PROPERTIES = new Set([
-  'length',
-  'constructor',
-  'slice',
-  'concat',
-]);
+const RE_INDEX_PROP_KEY = /^[0-9]+$/
+const ALLOWED_PROPERTIES = new Set(['length', 'constructor', 'slice', 'concat'])
 
 function createImmutableArray(arrayLike, mapFn) {
-  const arr = Array.from(arrayLike, mapFn);
+  const arr = Array.from(arrayLike, mapFn)
 
   const handler = {
     get(target, propKey, receiver) {
       if (RE_INDEX_PROP_KEY.test(propKey) || ALLOWED_PROPERTIES.has(propKey)) {
-        return Reflect.get(target, propKey, receiver);
+        return Reflect.get(target, propKey, receiver)
       }
 
-      throw new TypeError(`Property "${propKey}" can’t be accessed`);
+      throw new TypeError(`Property "${propKey}" can’t be accessed`)
     },
     set(target, propKey, value, receiver) {
-      throw new TypeError('Setting is not allowed');
+      throw new TypeError('Setting is not allowed')
     },
     deleteProperty(target, propKey) {
-      throw new TypeError('Deleting is not allowed');
+      throw new TypeError('Deleting is not allowed')
     },
-  };
+  }
 
-  return new Proxy(arr, handler);
+  return new Proxy(arr, handler)
 }
 
-const array = createImmutableArray(['a', 'b', 'c']);
+const array = createImmutableArray(['a', 'b', 'c'])
 
 // Non-destructive operations are allowed:
-assert.deepEqual(array.slice(1), ['b', 'c']);
-assert.equal(array[1], 'b');
+assert.deepEqual(array.slice(1), ['b', 'c'])
+assert.equal(array[1], 'b')
 
 // Destructive operations are not allowed:
-assert.throws(() => (array[1] = 'x'), /^TypeError: Setting is not allowed$/);
+assert.throws(() => (array[1] = 'x'), /^TypeError: Setting is not allowed$/)
 assert.throws(
   () => array.shift(),
   /^TypeError: Property "shift" can’t be accessed$/
-);
+)
 ```
 
 #### Immutable Map
 
 ```ts
 class ImmutableMap {
-  #map;
+  #map
 
   constructor(iterable) {
-    this.#map = new Map(iterable);
+    this.#map = new Map(iterable)
   }
 
   static _setUpPrototype() {
     // Only forward non-destructive methods to the map:
     for (const methodName of ['get', 'has', 'keys', 'size']) {
       ImmutableMap.prototype[methodName] = function (...args) {
-        return this.#map[methodName](...args);
-      };
+        return this.#map[methodName](...args)
+      }
     }
   }
 }
 
-ImmutableMap._setUpPrototype();
+ImmutableMap._setUpPrototype()
 
 const map = new ImmutableMap([
   [false, 'no'],
   [true, 'yes'],
-]);
+])
 
 // Non-destructive operations work as usual:
-assert.equal(map.get(true), 'yes');
-assert.equal(map.has(false), true);
-assert.deepEqual([...map.keys()], [false, true]);
+assert.equal(map.get(true), 'yes')
+assert.equal(map.has(false), true)
+assert.deepEqual([...map.keys()], [false, true])
 
 // Destructive operations are not available:
 assert.throws(
   () => map.set(false, 'never!'),
   /^TypeError: map.set is not a function$/
-);
-assert.throws(() => map.clear(), /^TypeError: map.clear is not a function$/);
+)
+assert.throws(() => map.clear(), /^TypeError: map.clear is not a function$/)
 ```
 
 #### Immutable Class
@@ -4701,45 +4694,45 @@ Copying class instances without side effects:
 ```ts
 class Point {
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
+    this.x = x
+    this.y = y
   }
 
   clone() {
-    return new Point(this.x, this.y);
+    return new Point(this.x, this.y)
   }
 
   static from(other) {
-    return new Point(other.x, other.y);
+    return new Point(other.x, other.y)
   }
 }
 
 class Color {
   constructor(name) {
-    this.name = name;
+    this.name = name
   }
 
   clone() {
-    return new Color(this.name);
+    return new Color(this.name)
   }
 
   static from(other) {
-    return new Color(other.name);
+    return new Color(other.name)
   }
 }
 
 class ColorPoint extends Point {
   constructor(x, y, color) {
-    super(x, y);
-    this.color = color;
+    super(x, y)
+    this.color = color
   }
 
   clone() {
-    return new ColorPoint(this.x, this.y, this.color.clone());
+    return new ColorPoint(this.x, this.y, this.color.clone())
   }
 
   static from(other) {
-    return new ColorPoint(other.x, other.y, Color.from(other.color));
+    return new ColorPoint(other.x, other.y, Color.from(other.color))
   }
 }
 ```
@@ -4773,73 +4766,73 @@ class ColorPoint extends Point {
 
 ```ts
 class PushArray extends Array {
-  static EVENT_NAME = 'new_value';
-  #eventEmitter = new EventEmitter();
+  static EVENT_NAME = 'new_value'
+  #eventEmitter = new EventEmitter()
 
   push(value) {
-    this.#eventEmitter.emit(PushArray.EVENT_NAME, value);
-    return super.push(value);
+    this.#eventEmitter.emit(PushArray.EVENT_NAME, value)
+    return super.push(value)
   }
 
   subscribe({ next }) {
     this.#eventEmitter.on(PushArray.EVENT_NAME, value => {
-      next(value);
-    });
+      next(value)
+    })
   }
 
   unsubscribe() {
-    this.#eventEmitter.removeAllListeners(PushArray.EVENT_NAME);
+    this.#eventEmitter.removeAllListeners(PushArray.EVENT_NAME)
   }
 }
 
 // Source
-const pushArray = new PushArray(1, 2, 3);
+const pushArray = new PushArray(1, 2, 3)
 
 // Consumer
 pushArray.subscribe({
   next(value) {
-    console.log('New value:', value);
+    console.log('New value:', value)
   },
-});
+})
 
 // Producer
-pushArray.push(4);
-pushArray.push(5);
-pushArray.unsubscribe();
-pushArray.push(6);
+pushArray.push(4)
+pushArray.push(5)
+pushArray.unsubscribe()
+pushArray.push(6)
 ```
 
 #### Observable
 
 ```ts
 interface Observer<T> {
-  next(value: T): void;
-  error?(error: Error): void;
-  complete?(): void;
+  next(value: T): void
+  error?(error: Error): void
+  complete?(): void
 }
 
 interface Subscription {
-  unsubscribe(): void;
+  unsubscribe(): void
 }
 
 interface Observable<T> {
   // eslint-disable-next-line @typescript-eslint/no-misused-new
-  new (subscriber: (observer: Observer<T>) => Subscription): Observable<T>;
-  observable(): this;
-  readonly species: this;
+  new (subscriber: (observer: Observer<T>) => Subscription): Observable<T>
+  observable(): this
+  readonly species: this
 
-  of(...items: Array<mixed>): Observable<T>;
-  from(x: Observable<T> | Iterable<T>): Observable<T>;
+  of(...items: Array<mixed>): Observable<T>
+  from(x: Observable<T> | Iterable<T>): Observable<T>
 
-  map<Z>(fn: (value: T) => Z): Observable<Z>;
+  map<Z>(fn: (value: T) => Z): Observable<Z>
   reduce<Z>(
     acc: (accumulator: Z, value: T, index?: number, array?: Array<T>) => Z,
     startsWith?: T
-  ): Observable<T>;
-  filter(predicate: (value: T) => boolean): Observable<T>;
-  skip(count: number): Observable<T>;
+  ): Observable<T>
+  filter(predicate: (value: T) => boolean): Observable<T>
+  skip(count: number): Observable<T>
 
-  subscribe(observer: Function | Observer<T>): Subscription;
+  subscribe(observer: Function | Observer<T>): Subscription
 }
 ```
 
@@ -4850,43 +4843,43 @@ const map = curry(
       const subs = stream.subscribe({
         next(value) {
           try {
-            observer.next(fn(value));
+            observer.next(fn(value))
           } catch (err) {
-            observer.error(err);
+            observer.error(err)
           }
         },
         error(e) {
-          observer.error(e);
+          observer.error(e)
         },
         complete() {
-          observer.complete();
+          observer.complete()
         },
-      });
+      })
 
-      return () => subs.unsubscribe();
+      return () => subs.unsubscribe()
     })
-);
+)
 
 const reduce = curry((accumulator, initialValue, stream) => {
-  let result = initialValue ?? {};
+  let result = initialValue ?? {}
 
   return new Observable(observer => {
     const subs = stream.subscribe({
       next(value) {
-        result = accumulator(result, value);
+        result = accumulator(result, value)
       },
       error(e) {
-        observer.error(e);
+        observer.error(e)
       },
       complete() {
-        observer.next(result);
-        observer.complete();
+        observer.next(result)
+        observer.complete()
       },
-    });
+    })
 
-    return () => subs.unsubscribe();
-  });
-});
+    return () => subs.unsubscribe()
+  })
+})
 
 const filter = curry(
   (predicate, stream) =>
@@ -4894,58 +4887,58 @@ const filter = curry(
       const subs = stream.subscribe({
         next(value) {
           if (predicate(value)) {
-            observer.next(value);
+            observer.next(value)
           }
         },
         error(e) {
-          observer.error(e);
+          observer.error(e)
         },
         complete() {
-          observer.complete();
+          observer.complete()
         },
-      });
+      })
 
-      return () => subs.unsubscribe();
+      return () => subs.unsubscribe()
     })
-);
+)
 
 const skip = curry((count, stream) => {
-  let skipped = 0;
+  let skipped = 0
 
   return new Observable(observer => {
     const subs = stream.subscribe({
       next(value) {
         if (skipped++ >= count) {
-          observer.next(value);
+          observer.next(value)
         }
       },
       error(e) {
-        observer.error(e);
+        observer.error(e)
       },
       complete() {
-        observer.complete();
+        observer.complete()
       },
-    });
+    })
 
-    return () => subs.unsubscribe();
-  });
-});
+    return () => subs.unsubscribe()
+  })
+})
 
 class Observable {
   map(fn) {
-    return map(fn, this);
+    return map(fn, this)
   }
 
   reduce(accumulator, initialValue = {}) {
-    return reduce(accumulator, initialValue, this);
+    return reduce(accumulator, initialValue, this)
   }
 
   filter(predicate) {
-    return filter(predicate, this);
+    return filter(predicate, this)
   }
 
   skip(count) {
-    return skip(count, this);
+    return skip(count, this)
   }
 }
 ```
@@ -4958,7 +4951,7 @@ Observable.of(1, 2, 3, 4)
   .reduce(add, 0)
   .subscribe({
     next: console.log,
-  });
+  })
 ```
 
 ## JavaScript Style Guide
@@ -5059,29 +5052,29 @@ Observable.of(1, 2, 3, 4)
 
 ```ts
 // very bad
-const original = { a: 1, b: 2 };
-const copy = Object.assign(original, { c: 3 }); // 变异的 `original` ಠ_ಠ
-delete copy.a; // 这....
+const original = { a: 1, b: 2 }
+const copy = Object.assign(original, { c: 3 }) // 变异的 `original` ಠ_ಠ
+delete copy.a // 这....
 
 // bad
-const original = { a: 1, b: 2 };
-const copy = Object.assign({}, original, { c: 3 });
+const original = { a: 1, b: 2 }
+const copy = Object.assign({}, original, { c: 3 })
 
 // good
-const original = { a: 1, b: 2 };
-const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
+const original = { a: 1, b: 2 }
+const copy = { ...original, c: 3 } // copy => { a: 1, b: 2, c: 3 }
 
-const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
+const { a, ...noA } = copy // noA => { b: 2, c: 3 }
 ```
 
 - Prefer `.` for static name, prefer `[]` for variable name:
 
 ```ts
 // good
-const isJedi = luke.jedi;
+const isJedi = luke.jedi
 
 function getProp(prop) {
-  return luke[prop];
+  return luke[prop]
 }
 ```
 
@@ -5092,13 +5085,13 @@ function getProp(prop) {
 - Prefer array spread (`...`) (best) or `Array.from` (good):
 
 ```ts
-const foo = document.querySelectorAll('.foo');
+const foo = document.querySelectorAll('.foo')
 
 // good
-const nodes = Array.from(foo);
+const nodes = Array.from(foo)
 
 // best
-const nodes = [...foo];
+const nodes = [...foo]
 ```
 
 ### Destruct Style
@@ -5109,22 +5102,22 @@ const nodes = [...foo];
 // bad
 function processInputBad(input) {
   // 处理代码...
-  return [left, right, top, bottom];
+  return [left, right, top, bottom]
 }
 
 // 调用者需要考虑返回数据的顺序.
-const [left, __, top] = processInputBad(input);
+const [left, __, top] = processInputBad(input)
 
 // good
 function processInput(input) {
   // 处理代码 ...
-  process();
+  process()
 
-  return { left, right, top, bottom };
+  return { left, right, top, bottom }
 }
 
 // 调用者只选择他们需要的数据.
-const { left, top } = processInput(input);
+const { left, top } = processInput(input)
 ```
 
 ### String Style
@@ -5152,7 +5145,7 @@ const { left, top } = processInput(input);
 // import { named1, named2 } from 'foo';
 
 // good
-import foo, { named1, named2 } from 'foo';
+import foo, { named1, named2 } from 'foo'
 ```
 
 - No export `let`:
@@ -5163,8 +5156,8 @@ import foo, { named1, named2 } from 'foo';
 // export { foo };
 
 // good
-const foo = 3;
-export { foo };
+const foo = 3
+export { foo }
 ```
 
 ### Iterator and Generator Style
@@ -5174,40 +5167,40 @@ export { foo };
 - Prefer functional style iterator:
 
 ```ts
-const numbers = [1, 2, 3, 4, 5];
+const numbers = [1, 2, 3, 4, 5]
 
 // bad
-let sum = 0;
+let sum = 0
 for (const num of numbers) {
-  sum += num;
+  sum += num
 }
-console.log(sum === 15);
+console.log(sum === 15)
 
 // good
-let sum = 0;
+let sum = 0
 numbers.forEach(num => {
-  sum += num;
-});
-console.log(sum === 15);
+  sum += num
+})
+console.log(sum === 15)
 
 // best (use the functional force)
-const sum = numbers.reduce((total, num) => total + num, 0);
-console.log(sum === 15);
+const sum = numbers.reduce((total, num) => total + num, 0)
+console.log(sum === 15)
 
 // bad
-const increasedByOne = [];
+const increasedByOne = []
 for (let i = 0; i < numbers.length; i++) {
-  increasedByOne.push(numbers[i] + 1);
+  increasedByOne.push(numbers[i] + 1)
 }
 
 // good
-const increasedByOne = [];
+const increasedByOne = []
 numbers.forEach(num => {
-  increasedByOne.push(num + 1);
-});
+  increasedByOne.push(num + 1)
+})
 
 // best (keeping it functional)
-const increasedByOne = numbers.map(num => num + 1);
+const increasedByOne = numbers.map(num => num + 1)
 ```
 
 ### Expression Style
@@ -5261,22 +5254,22 @@ if (collection.length > 0) {
 // good
 switch (foo) {
   case 1: {
-    const x = 1;
-    break;
+    const x = 1
+    break
   }
   case 2: {
-    const y = 2;
-    break;
+    const y = 2
+    break
   }
   case 3: {
     function f() {
       // ...
     }
-    break;
+    break
   }
   case 4:
-    bar();
-    break;
+    bar()
+    break
   default: {
     class C {}
   }
@@ -5298,12 +5291,12 @@ switch (foo) {
   - No space inner `()` `[]`.
 
 ```ts
-let d = 0;
-let a = b + 1;
+let d = 0
+let a = b + 1
 
 if (a && b && c) {
-  d = a % c;
-  a += d;
+  d = a % c
+  a += d
 }
 ```
 
@@ -5421,24 +5414,24 @@ if there’s any pending call back waiting to be executed:
 ```ts
 for (const macroTask of macroTaskQueue) {
   // 1. Handle current MacroTask.
-  runTask(macroTask);
+  runTask(macroTask)
 
   // 2. Handle all MicroTasks.
   for (const microTask of microTaskQueue) {
-    runTask(microTask);
+    runTask(microTask)
   }
 
   // 3. Handle Animation Frame.
   if (shouldRepaint()) {
     if (!animationFrameCallbackQueue.isEmpty()) {
-      const animationTasks = animationFrameCallbackQueue.copyTasks();
+      const animationTasks = animationFrameCallbackQueue.copyTasks()
 
       for (const animationTask of animationTasks) {
-        runTask(animationTask);
+        runTask(animationTask)
       }
     }
 
-    repaint();
+    repaint()
   }
 }
 ```
@@ -5448,25 +5441,25 @@ helps to defer execution of `Promise` and `bar` until the **stack** is **empty**
 
 ```ts
 const bar = () => {
-  console.log('bar');
-};
+  console.log('bar')
+}
 
 const baz = () => {
-  console.log('baz');
-};
+  console.log('baz')
+}
 
 const foo = () => {
-  console.log('foo');
-  setTimeout(bar, 0);
+  console.log('foo')
+  setTimeout(bar, 0)
   new Promise((resolve, reject) => {
-    resolve('Promise resolved');
+    resolve('Promise resolved')
   })
     .then(res => console.log(res))
-    .catch(err => console.log(err));
-  baz();
-};
+    .catch(err => console.log(err))
+  baz()
+}
 
-foo();
+foo()
 
 // foo
 // baz
@@ -5477,57 +5470,57 @@ foo();
 `process.nextTick()` run before `Promise.then()`:
 
 ```ts
-console.log('1');
+console.log('1')
 
 setTimeout(() => {
-  console.log(2);
+  console.log(2)
   Promise.resolve().then(() => {
-    console.log(3);
+    console.log(3)
     process.nextTick(function foo() {
-      console.log(4);
-    });
-  });
-});
+      console.log(4)
+    })
+  })
+})
 
 Promise.resolve().then(() => {
-  console.log(5);
+  console.log(5)
   setTimeout(() => {
-    console.log(6);
-  });
+    console.log(6)
+  })
   Promise.resolve().then(() => {
-    console.log(7);
-  });
-});
+    console.log(7)
+  })
+})
 
 process.nextTick(function foo() {
-  console.log(8);
+  console.log(8)
   process.nextTick(function foo() {
-    console.log(9);
-  });
-});
+    console.log(9)
+  })
+})
 
-console.log('10');
+console.log('10')
 // 1 10 8 9 5 7 2 3 4 6
 ```
 
 Promise 构造函数本身是同步函数:
 
 ```ts
-console.log('script start');
+console.log('script start')
 
 const promise1 = new Promise(function (resolve) {
-  console.log('promise1');
-  resolve();
-  console.log('promise1 end');
+  console.log('promise1')
+  resolve()
+  console.log('promise1 end')
 }).then(function () {
-  console.log('promise2');
-});
+  console.log('promise2')
+})
 
 setTimeout(function () {
-  console.log('setTimeout');
-});
+  console.log('setTimeout')
+})
 
-console.log('script end');
+console.log('script end')
 
 // 输出顺序:
 // script start
@@ -5543,31 +5536,31 @@ console.log('script end');
 
 ```ts
 async function async1() {
-  console.log('async1 start');
-  await async2();
-  console.log('async1 end');
+  console.log('async1 start')
+  await async2()
+  console.log('async1 end')
 }
 
 async function async2() {
-  console.log('async2');
+  console.log('async2')
 }
 
-console.log('script start');
+console.log('script start')
 
 setTimeout(function () {
-  console.log('setTimeout');
-}, 0);
+  console.log('setTimeout')
+}, 0)
 
-async1();
+async1()
 
 new Promise(function (resolve) {
-  console.log('promise1');
-  resolve();
+  console.log('promise1')
+  resolve()
 }).then(function () {
-  console.log('promise2');
-});
+  console.log('promise2')
+})
 
-console.log('script end');
+console.log('script end')
 
 // script start
 // async1 start
@@ -5584,30 +5577,30 @@ console.log('script end');
 
 ```ts
 function test() {
-  console.log('start');
+  console.log('start')
 
   setTimeout(() => {
-    console.log('children2');
+    console.log('children2')
     Promise.resolve().then(() => {
-      console.log('children2-1');
-    });
-  }, 0);
+      console.log('children2-1')
+    })
+  }, 0)
 
   setTimeout(() => {
-    console.log('children3');
+    console.log('children3')
     Promise.resolve().then(() => {
-      console.log('children3-1');
-    });
-  }, 0);
+      console.log('children3-1')
+    })
+  }, 0)
 
   Promise.resolve().then(() => {
-    console.log('children1');
-  });
+    console.log('children1')
+  })
 
-  console.log('end');
+  console.log('end')
 }
 
-test();
+test()
 
 // start
 // end
@@ -5636,81 +5629,81 @@ The Node.js execution model was designed to cater to the needs of most web serve
 which tend to be **I/O-intensive** (due to non-blocking I/O).
 
 ```ts
-console.log('glob1');
+console.log('glob1')
 
 setTimeout(function () {
-  console.log('timeout1');
+  console.log('timeout1')
   process.nextTick(function () {
-    console.log('timeout1_nextTick');
-  });
+    console.log('timeout1_nextTick')
+  })
   new Promise(function (resolve) {
-    console.log('timeout1_promise');
-    resolve();
+    console.log('timeout1_promise')
+    resolve()
   }).then(function () {
-    console.log('timeout1_then');
-  });
-});
+    console.log('timeout1_then')
+  })
+})
 
 setImmediate(function () {
-  console.log('immediate1');
+  console.log('immediate1')
   process.nextTick(function () {
-    console.log('immediate1_nextTick');
-  });
+    console.log('immediate1_nextTick')
+  })
   new Promise(function (resolve) {
-    console.log('immediate1_promise');
-    resolve();
+    console.log('immediate1_promise')
+    resolve()
   }).then(function () {
-    console.log('immediate1_then');
-  });
-});
+    console.log('immediate1_then')
+  })
+})
 
 process.nextTick(function () {
-  console.log('glob1_nextTick');
-});
+  console.log('glob1_nextTick')
+})
 new Promise(function (resolve) {
-  console.log('glob1_promise');
-  resolve();
+  console.log('glob1_promise')
+  resolve()
 }).then(function () {
-  console.log('glob1_then');
-});
+  console.log('glob1_then')
+})
 
 setTimeout(function () {
-  console.log('timeout2');
+  console.log('timeout2')
   process.nextTick(function () {
-    console.log('timeout2_nextTick');
-  });
+    console.log('timeout2_nextTick')
+  })
   new Promise(function (resolve) {
-    console.log('timeout2_promise');
-    resolve();
+    console.log('timeout2_promise')
+    resolve()
   }).then(function () {
-    console.log('timeout2_then');
-  });
-});
+    console.log('timeout2_then')
+  })
+})
 
 process.nextTick(function () {
-  console.log('glob2_nextTick');
-});
+  console.log('glob2_nextTick')
+})
 new Promise(function (resolve) {
-  console.log('glob2_promise');
-  resolve();
+  console.log('glob2_promise')
+  resolve()
 }).then(function () {
-  console.log('glob2_then');
-});
+  console.log('glob2_then')
+})
 
 setImmediate(function () {
-  console.log('immediate2');
+  console.log('immediate2')
   process.nextTick(function () {
-    console.log('immediate2_nextTick');
-  });
+    console.log('immediate2_nextTick')
+  })
   new Promise(function (resolve) {
-    console.log('immediate2_promise');
-    resolve();
+    console.log('immediate2_promise')
+    resolve()
   }).then(function () {
-    console.log('immediate2_then');
-  });
-});
+    console.log('immediate2_then')
+  })
+})
 
-console.log('glob2');
+console.log('glob2')
 
 // glob1
 // glob1_promise
@@ -5756,25 +5749,25 @@ console.log('glob2');
 // JSObject(3, 4) => Shape('x', 'y')
 // 'x' => 0 Offset, Writable, Enumerable, Configurable
 // 'y' => 1 Offset, Writable, Enumerable, Configurable
-const o1 = { x: 1, y: 2 };
-const o2 = { x: 3, y: 4 };
+const o1 = { x: 1, y: 2 }
+const o2 = { x: 3, y: 4 }
 ```
 
 Shape transform:
 
 ```ts
 // Shape chain: Shape(empty) => Shape(x) => Shape(x, y)
-const o = {};
-o.x = 1;
-o.y = 2;
+const o = {}
+o.x = 1
+o.y = 2
 
 // Shape chain: Shape(empty) => Shape(y) => Shape(y, x)
-const o = {};
-o.y = 2;
-o.x = 1;
+const o = {}
+o.y = 2
+o.x = 1
 
 // Shape chain: Shape(x)
-const o = { x: 1 };
+const o = { x: 1 }
 ```
 
 Array shape: `Shape('length'), 'length' => 0 Offset, Writable`.

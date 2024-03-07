@@ -272,12 +272,12 @@ help prevent from `XSS`:
 
 ```html
 <script nonce="random123">
-  alert('this is fine!');
+  alert('this is fine!')
 </script>
 <script nonce="random123" src="https://cdnjs.com/lib.js"></script>
 <!-- XSS injected by attacker - blocked by CSP -->
 <script>
-  alert('xss');
+  alert('xss')
 </script>
 ```
 
@@ -286,10 +286,10 @@ help prevent from `XSS`:
 ```html
 <!-- Content-Security-Policy: script-src 'nonce-random123' 'strict-dynamic' -->
 <script nonce="random123">
-  const s = document.createElement('script');
-  s.src = '/path/to/script.js';
-  s.async = true;
-  document.head.appendChild(s); // can execute correctly
+  const s = document.createElement('script')
+  s.src = '/path/to/script.js'
+  s.async = true
+  document.head.appendChild(s) // can execute correctly
 </script>
 ```
 
@@ -315,12 +315,12 @@ TrustedTypes.createPolicy(
   'default',
   {
     createHTML(s) {
-      console.error('Please fix! Insecure string assignment detected:', s);
-      return s;
+      console.error('Please fix! Insecure string assignment detected:', s)
+      return s
     },
   },
   true
-);
+)
 ```
 
 ```ts
@@ -331,10 +331,10 @@ const SanitizingPolicy = TrustedTypes.createPolicy(
     createHTML: (s: string) => myCustomSanitizer(s),
   },
   false
-);
+)
 
-const trustedHTML = SanitizingPolicy.createHTML(foo);
-element.innerHTML = trustedHTML;
+const trustedHTML = SanitizingPolicy.createHTML(foo)
+element.innerHTML = trustedHTML
 ```
 
 ### Sandbox
@@ -363,41 +363,41 @@ element.innerHTML = trustedHTML;
 ```ts
 class SnapshotSandbox {
   constructor() {
-    this.proxy = window; // window 属性.
-    this.windowSnapshot = {}; // 快照.
-    this.modifyPropsMap = {}; // 记录在 window 上的修改.
-    this.sandboxRunning = false;
+    this.proxy = window // window 属性.
+    this.windowSnapshot = {} // 快照.
+    this.modifyPropsMap = {} // 记录在 window 上的修改.
+    this.sandboxRunning = false
   }
 
   active() {
-    this.windowSnapshot = {}; // 快照.
+    this.windowSnapshot = {} // 快照.
 
     for (const prop in window) {
       if (window.hasOwn(prop)) {
-        this.windowSnapshot[prop] = window[prop];
+        this.windowSnapshot[prop] = window[prop]
       }
 
       Object.keys(this.modifyPropsMap).forEach(p => {
-        window[p] = this.modifyPropsMap[p];
-      });
+        window[p] = this.modifyPropsMap[p]
+      })
     }
 
-    this.sandboxRunning = true;
+    this.sandboxRunning = true
   }
 
   inactive() {
-    this.modifyPropsMap = {}; // 记录在 window 上的修改.
+    this.modifyPropsMap = {} // 记录在 window 上的修改.
 
     for (const prop in window) {
       if (window.hasOwn(prop)) {
         if (window[prop] !== this.windowSnapshot[prop]) {
-          this.modifyPropsMap[prop] = window[prop];
-          window[prop] = this.windowSnapshot[prop];
+          this.modifyPropsMap[prop] = window[prop]
+          window[prop] = this.windowSnapshot[prop]
         }
       }
     }
 
-    this.sandboxRunning = false;
+    this.sandboxRunning = false
   }
 }
 ```
@@ -408,22 +408,22 @@ class SnapshotSandbox {
 
 ```ts
 function ProxySandbox(code) {
-  code = `with (sandbox) {${code}}`;
+  code = `with (sandbox) {${code}}`
   // eslint-disable-next-line no-new-func
-  const fn = new Function('sandbox', code);
+  const fn = new Function('sandbox', code)
 
   return function (sandbox) {
     const sandboxProxy = new Proxy(sandbox, {
       has(target, key) {
-        return true;
+        return true
       },
       get(target, key) {
-        if (key === Symbol.unscopables) return undefined;
-        return target[key];
+        if (key === Symbol.unscopables) return undefined
+        return target[key]
       },
-    });
-    return fn(sandboxProxy);
-  };
+    })
+    return fn(sandboxProxy)
+  }
 }
 ```
 
@@ -435,20 +435,20 @@ class SandboxWindow {
     return new Proxy(frameWindow, {
       get(target, name) {
         if (name in context) {
-          return context[name];
+          return context[name]
         } else if (typeof target[name] === 'function' && /^[a-z]/.test(name)) {
-          return target[name].bind && target[name].bind(target);
+          return target[name].bind && target[name].bind(target)
         } else {
-          return target[name];
+          return target[name]
         }
       },
       set(target, name, value) {
         if (name in context) {
-          return (context[name] = value);
+          return (context[name] = value)
         }
-        target[name] = value;
+        target[name] = value
       },
-    });
+    })
   }
 }
 
@@ -457,22 +457,22 @@ const context = {
   document: new Proxy(window.document, {}),
   location: new Proxy(window.location),
   history: new Proxy(window.history),
-};
+}
 
 // 创建 iframe
-const userInputUrl = '';
+const userInputUrl = ''
 const iframe = document.createElement('iframe', {
   url: userInputUrl,
   src: 'about:blank',
   sandbox:
     'allow-scripts allow-same-origin allow-popups allow-presentation allow-top-navigation',
   style: 'display: none;',
-});
-document.body.appendChild(iframe);
-const sandboxGlobal = new Proxy(iframe.contentWindow, {});
+})
+document.body.appendChild(iframe)
+const sandboxGlobal = new Proxy(iframe.contentWindow, {})
 
 // 创建沙箱
-const newSandboxWindow = new SandboxWindow(context, sandboxGlobal);
+const newSandboxWindow = new SandboxWindow(context, sandboxGlobal)
 ```
 
 ### Crypto
@@ -531,15 +531,15 @@ Web crypto [API](https://developer.mozilla.org/docs/Web/API/SubtleCrypto):
 
 ```ts
 function getCanvasFingerprint() {
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
-  context.font = '18pt Arial';
-  context.textBaseline = 'top';
-  context.fillText('Hello, user.', 2, 2);
-  return canvas.toDataURL('image/jpeg');
+  const canvas = document.createElement('canvas')
+  const context = canvas.getContext('2d')
+  context.font = '18pt Arial'
+  context.textBaseline = 'top'
+  context.fillText('Hello, user.', 2, 2)
+  return canvas.toDataURL('image/jpeg')
 }
 
-getCanvasFingerprint();
+getCanvasFingerprint()
 ```
 
 ## Security Vulnerability
@@ -705,7 +705,7 @@ Hover transparent malicious link upon trusted true button:
 
 ```ts
 // nodejs
-response.setHeader('X-Frame-Options', 'DENY');
+response.setHeader('X-Frame-Options', 'DENY')
 ```
 
 Content security policy:
@@ -740,27 +740,27 @@ Prevent load self in frame (`Frame Busting`):
     (self.parent && !(self.parent === self) && self.parent.frames.length != 0)
   ) {
     // Break out of the frame.
-    top.location = self.location;
-    top.location.href = document.location.href;
-    top.location.href = self.location.href;
-    top.location.replace(self.location);
-    top.location.href = window.location.href;
-    top.location.replace(document.location);
-    top.location.href = window.location.href;
-    top.location.href = 'URL';
-    document.write('');
-    top.location = location;
-    top.location.replace(document.location);
-    top.location.replace('URL');
-    top.location.href = document.location;
-    top.location.replace(window.location.href);
-    top.location.href = location.href;
-    self.parent.location = document.location;
-    parent.location.href = self.document.location;
-    parent.location = self.location;
+    top.location = self.location
+    top.location.href = document.location.href
+    top.location.href = self.location.href
+    top.location.replace(self.location)
+    top.location.href = window.location.href
+    top.location.replace(document.location)
+    top.location.href = window.location.href
+    top.location.href = 'URL'
+    document.write('')
+    top.location = location
+    top.location.replace(document.location)
+    top.location.replace('URL')
+    top.location.href = document.location
+    top.location.replace(window.location.href)
+    top.location.href = location.href
+    self.parent.location = document.location
+    parent.location.href = self.document.location
+    parent.location = self.location
   } else {
     // Everything checks out, show the page.
-    document.documentElement.style.display = 'block';
+    document.documentElement.style.display = 'block'
   }
 </script>
 ```
@@ -846,7 +846,7 @@ statement.executeQuery(sql, email, password);
 
 ```ts
 function isRelative(url) {
-  return url && url.match(/^\/[^\/\\]/);
+  return url && url.match(/^\/[^\/\\]/)
 }
 ```
 
@@ -875,12 +875,12 @@ function isRelative(url) {
 Injection:
 
 ```ts
-const token = req.cookie.token;
+const token = req.cookie.token
 
 // Vulnerability:
 // SESSIONS[constructor] => `true`
 if (token && SESSIONS[token]) {
-  next();
+  next()
 }
 ```
 
@@ -1015,10 +1015,10 @@ Same site cookie [recipe](https://web.dev/first-party-cookie-recipes),
 
 ```ts
 req.session.regenerate(function (err) {
-  process(err);
-});
+  process(err)
+})
 
-const generateSessionId = session => uid(24);
+const generateSessionId = session => uid(24)
 ```
 
 ### Directory Traversal

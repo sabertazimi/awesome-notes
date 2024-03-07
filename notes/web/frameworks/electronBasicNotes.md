@@ -46,13 +46,13 @@ electron-forge start
 // main process
 global.sharedObject = {
   someProperty: 'default value',
-};
+}
 
 // render process 1
-require('remote').getGlobal('sharedObject').someProperty = 'new value';
+require('remote').getGlobal('sharedObject').someProperty = 'new value'
 
 // render process 2
-console.log(require('remote').getGlobal('sharedObject').someProperty);
+console.log(require('remote').getGlobal('sharedObject').someProperty)
 ```
 
 ## Process Communication
@@ -68,9 +68,9 @@ console.log(require('remote').getGlobal('sharedObject').someProperty);
 - remote module
 
 ```ts
-const { BrowserWindow } = require('electron').remote;
-const win = new BrowserWindow({ width: 800, height: 600 });
-win.loadURL('https://github.com');
+const { BrowserWindow } = require('electron').remote
+const win = new BrowserWindow({ width: 800, height: 600 })
+win.loadURL('https://github.com')
 ```
 
 ### Render to Render
@@ -104,7 +104,7 @@ win.loadURL('https://github.com');
 - disable nodejs in renderers that display remote content
 
 ```ts
-let win;
+let win
 
 const createBrowserWindow = () => {
   win = new BrowserWindow({
@@ -115,17 +115,17 @@ const createBrowserWindow = () => {
       nodeIntegration: false,
       preload: path.join(__dirname, 'preload.js'),
     },
-  });
-};
+  })
+}
 ```
 
 ```ts
 // preload.js
-const fs = require('node:fs');
+const fs = require('node:fs')
 
 global.desktop = {
   files: () => fs.readdirSync(__dirname),
-};
+}
 ```
 
 ## Electron Builder

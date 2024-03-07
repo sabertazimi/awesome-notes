@@ -16,29 +16,29 @@ fire callbacks when events happen.
 
 ```ts
 function Callbacks(options) {
-  let list = [];
+  let list = []
   const self = {
     add(fn) {
       if (options === 'unique') {
         if (!list.includes(fn)) {
-          list.push(fn);
+          list.push(fn)
         }
       } else {
-        list.push(fn);
+        list.push(fn)
       }
     },
     fire(args) {
       list.forEach(fn => {
-        fn(args);
-      });
+        fn(args)
+      })
 
       if (options === 'once') {
-        list = undefined;
+        list = undefined
       }
     },
-  };
+  }
 
-  return self;
+  return self
 }
 ```
 
@@ -53,13 +53,13 @@ class Promise {
   // the async operation succeeded (resolved) or failed (rejected).
   constructor(executor) {
     if (typeof executor !== 'function') {
-      throw new TypeError('Executor must be a function');
+      throw new TypeError('Executor must be a function')
     }
 
     // Internal state. `$state` is the state of the promise, and `$chained` is
     // an array of the functions we need to call once this promise is settled.
-    this.$state = 'PENDING';
-    this.$chained = [];
+    this.$state = 'PENDING'
+    this.$chained = []
 
     // Implement `resolve()` and `reject()` for the executor function to use
     const resolve = res => {
@@ -69,44 +69,44 @@ class Promise {
       // or calling `reject()` after `resolve()` was already called
       // are no-ops.
       if (this.$state !== 'PENDING') {
-        return;
+        return
       }
 
       // If `res` is a "thenable", lock in this promise to match the
       // resolved or rejected state of the thenable.
-      const then = res != null ? res.then : null;
+      const then = res != null ? res.then : null
       if (typeof then === 'function') {
         // In this case, the promise is "resolved", but still in the 'PENDING'
         // state. This is what the ES6 spec means when it says "A resolved promise
         // may be pending, fulfilled or rejected" in
         // http://www.ecma-international.org/ecma-262/6.0/#sec-promise-objects
-        return then(resolve, reject);
+        return then(resolve, reject)
       }
 
-      this.$state = 'FULFILLED';
-      this.$internalValue = res;
+      this.$state = 'FULFILLED'
+      this.$internalValue = res
 
       // If somebody called `.then()` while this promise was pending, need
       // to call their `onFulfilled()` function
       for (const { onFulfilled } of this.$chained) {
-        onFulfilled(res);
+        onFulfilled(res)
       }
 
-      return res;
-    };
+      return res
+    }
 
     const reject = err => {
       if (this.$state !== 'PENDING') {
-        return;
+        return
       }
 
-      this.$state = 'REJECTED';
-      this.$internalValue = err;
+      this.$state = 'REJECTED'
+      this.$internalValue = err
 
       for (const { onRejected } of this.$chained) {
-        onRejected(err);
+        onRejected(err)
       }
-    };
+    }
 
     // Call the executor function with `resolve()` and `reject()` as in the spec.
     try {
@@ -114,9 +114,9 @@ class Promise {
       // a rejection. Keep in mind that, since `resolve()` or `reject()` can
       // only be called once, a function that synchronously calls `resolve()`
       // and then throws will lead to a fulfilled promise and a swallowed error
-      executor(resolve, reject);
+      executor(resolve, reject)
     } catch (err) {
-      reject(err);
+      reject(err)
     }
   }
 
@@ -133,36 +133,36 @@ class Promise {
           // If `onFulfilled()` returns a promise, trust `resolve()` to handle
           // it correctly.
           // store new value to new Promise
-          resolve(onFulfilled(res));
+          resolve(onFulfilled(res))
         } catch (err) {
-          reject(err);
+          reject(err)
         }
-      };
+      }
 
       const _onRejected = err => {
         try {
           // store new value to new Promise
-          reject(onRejected(err));
+          reject(onRejected(err))
         } catch (_err) {
-          reject(_err);
+          reject(_err)
         }
-      };
+      }
 
       if (this.$state === 'FULFILLED') {
-        _onFulfilled(this.$internalValue);
+        _onFulfilled(this.$internalValue)
       } else if (this.$state === 'REJECTED') {
-        _onRejected(this.$internalValue);
+        _onRejected(this.$internalValue)
       } else {
         this.$chained.push({
           onFulfilled: _onFulfilled,
           onRejected: _onRejected,
-        });
+        })
       }
-    });
+    })
   }
 
   catch(onRejected) {
-    return this.then(null, onRejected);
+    return this.then(null, onRejected)
   }
 }
 ```
@@ -184,48 +184,48 @@ createDocumentFragment:
 
 ```ts
 function domManipulation(parentElements, target, callback) {
-  const fragment = buildFragment([target], parentElements);
-  callback.call(parentElements);
+  const fragment = buildFragment([target], parentElements)
+  callback.call(parentElements)
 }
 
 function after(...args) {
   return this.domManipulation(...args, function (elem) {
-    this.parentNode.insertBefore(elem, this.nextSibling);
-  });
+    this.parentNode.insertBefore(elem, this.nextSibling)
+  })
 }
 ```
 
 ### structure
 
 ```ts
-$('selector').html('tag+text');
-$('selector').text('text');
+$('selector').html('tag+text')
+$('selector').text('text')
 
-$('selector').clone();
-$('selector').remove();
-$('selector').appendTo('selector');
+$('selector').clone()
+$('selector').remove()
+$('selector').appendTo('selector')
 
-$('selector').parent();
-$('selector').children();
+$('selector').parent()
+$('selector').children()
 ```
 
 ```ts
-$('selector').index();
+$('selector').index()
 ```
 
 ### class
 
 ```ts
-$('selector').addClass('');
-$('selector').removeClass('');
-$('selector').hidden();
+$('selector').addClass('')
+$('selector').removeClass('')
+$('selector').hidden()
 ```
 
 ### style
 
 ```ts
-$('selector').css('color', 'red');
-$('selector').prop('disable', 'true');
+$('selector').css('color', 'red')
+$('selector').prop('disable', 'true')
 ```
 
 ## Events Module
@@ -267,19 +267,19 @@ $('selector').prop('disable', 'true');
 - unload
 
 ```ts
-$(window).scroll(function (event) {});
-$(document).height(); // 返回整个网页的高度
-$(window).height(); // 返回窗口高度
-$(window).scrollTop(); // 返回滚动条距网页顶部距离
+$(window).scroll(function (event) {})
+$(document).height() // 返回整个网页的高度
+$(window).height() // 返回窗口高度
+$(window).scrollTop() // 返回滚动条距网页顶部距离
 ```
 
 ### 常用多态函数
 
 ```ts
-$(selector).data();
-$(selector).html();
-$(selector).css();
-$(document).ready(function () {});
+$(selector).data()
+$(selector).html()
+$(selector).css()
+$(document).ready(function () {})
 ```
 
 ## AJAX Module
@@ -289,11 +289,11 @@ $(document).ready(function () {});
 `$.getJSON`:
 
 ```ts
-$.getJSON(url, data, success(data, statusCode, xhr));
+$.getJSON(url, data, success(data, statusCode, xhr))
 
 $.getJSON('test.js', function (json) {
-  alert(`JSON Data: ${json.users[3].name}`);
-});
+  alert(`JSON Data: ${json.users[3].name}`)
+})
 ```
 
 ### AJAX API
@@ -308,7 +308,7 @@ $.ajax({
   dataType: 'json',
   success: successCallback,
   error: errorHandle,
-});
+})
 ```
 
 ## Animation Module

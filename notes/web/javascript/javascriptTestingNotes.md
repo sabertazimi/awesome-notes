@@ -204,9 +204,9 @@ Fuzzing 是一种通过向目标系统提供非预期的输入并监视异常结
 5 级耦合度:
 
 ```ts
-O.property = 'tazimi';
-O.method = function () {};
-O.prototype.method = function () {};
+O.property = 'tazimi'
+O.method = function () {}
+O.prototype.method = function () {}
 ```
 
 #### 公共耦合
@@ -214,13 +214,13 @@ O.prototype.method = function () {};
 4 级耦合度, 共享全局变量:
 
 ```ts
-let Global = 'global';
+let Global = 'global'
 
 function A() {
-  Global = 'A';
+  Global = 'A'
 }
 function B() {
-  Global = 'B';
+  Global = 'B'
 }
 ```
 
@@ -229,7 +229,7 @@ function B() {
 3 级耦合度:
 
 ```ts
-const absFactory = new AbstractFactory({ env: 'TEST' });
+const absFactory = new AbstractFactory({ env: 'TEST' })
 ```
 
 #### 印记耦合
@@ -238,10 +238,10 @@ const absFactory = new AbstractFactory({ env: 'TEST' });
 
 ```ts
 O.prototype.makeBread = function (args) {
-  return new Bread(args.type, args.size);
-};
+  return new Bread(args.type, args.size)
+}
 
-O.makeBread({ type: wheat, size: 99, name: 'foo' });
+O.makeBread({ type: wheat, size: 99, name: 'foo' })
 ```
 
 #### 数据耦合
@@ -273,34 +273,34 @@ O.makeBread({ type: wheat, size: 99, name: 'foo' });
 - spy: 在原有对象的基础上, 增加监视用变量/方法 e.g assert/调用次数/参数限制
 
 ```ts
-const mockery = require('mockery');
-mockery.enable();
+const mockery = require('mockery')
+mockery.enable()
 
 describe('Sum suite File', function () {
   beforeEach(function () {
-    mockery.registerAllowable('./mySumFS', true);
-  });
+    mockery.registerAllowable('./mySumFS', true)
+  })
 
   afterEach(function () {
-    mockery.deregisterAllowable('./mySumFS');
-  });
+    mockery.deregisterAllowable('./mySumFS')
+  })
 
   it('Adds Integers!', function () {
-    const filename = 'numbers';
+    const filename = 'numbers'
     const fsMock = {
       readFileSync(path, encoding) {
-        expect(path).toEqual(filename);
-        expect(encoding).toEqual('utf8');
-        return JSON.stringify({ a: 9, b: 3 });
+        expect(path).toEqual(filename)
+        expect(encoding).toEqual('utf8')
+        return JSON.stringify({ a: 9, b: 3 })
       },
-    };
+    }
 
-    mockery.registerMock('fs', fsMock);
-    const mySum = require('./mySumFS');
-    expect(mySum.sum(filename)).toEqual(12);
-    mockery.deregisterMock('fs');
-  });
-});
+    mockery.registerMock('fs', fsMock)
+    const mySum = require('./mySumFS')
+    expect(mySum.sum(filename)).toEqual(12)
+    mockery.deregisterMock('fs')
+  })
+})
 ```
 
 ## Headless Testing
@@ -309,28 +309,28 @@ describe('Sum suite File', function () {
 - [Puppeteer Recipes](https://addyosmani.com/blog/puppeteer-recipes)
 
 ```ts
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer')
 
-(async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto('https://example.com');
-  await page.screenshot({ path: 'example.png' });
-  await browser.close();
-})();
+;(async () => {
+  const browser = await puppeteer.launch()
+  const page = await browser.newPage()
+  await page.goto('https://example.com')
+  await page.screenshot({ path: 'example.png' })
+  await browser.close()
+})()
 ```
 
 ### Browser Context
 
 ```ts
 // Create a new incognito browser context
-const context = await browser.createIncognitoBrowserContext();
+const context = await browser.createIncognitoBrowserContext()
 // Create a new page inside context.
-const page = await context.newPage();
+const page = await context.newPage()
 // ... do stuff with page ...
-await page.goto('https://example.com');
+await page.goto('https://example.com')
 // Dispose context once it's no longer needed.
-await context.close();
+await context.close()
 ```
 
 ### DOM Testing
@@ -341,57 +341,55 @@ await context.close();
 
 ```ts
 // wait for selector
-await page.waitFor('.foo');
+await page.waitFor('.foo')
 // wait for 1 second
-await page.waitFor(1000);
+await page.waitFor(1000)
 // wait for predicate
-await page.waitFor(() => !!document.querySelector('.foo'));
+await page.waitFor(() => !!document.querySelector('.foo'))
 ```
 
 ```ts
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer')
 
 puppeteer.launch().then(async browser => {
-  const page = await browser.newPage();
-  const watchDog = page.waitForFunction('window.innerWidth < 100');
-  await page.setViewport({ width: 50, height: 50 });
-  await watchDog;
-  await browser.close();
-});
+  const page = await browser.newPage()
+  const watchDog = page.waitForFunction('window.innerWidth < 100')
+  await page.setViewport({ width: 50, height: 50 })
+  await watchDog
+  await browser.close()
+})
 ```
 
 ```ts
 const [response] = await Promise.all([
   page.waitForNavigation(), // The promise resolves after navigation has finished
   page.click('a.my-link'), // Clicking the link will indirectly cause a navigation
-]);
+])
 ```
 
 ```ts
-const firstRequest = await page.waitForRequest('http://example.com/resource');
+const firstRequest = await page.waitForRequest('http://example.com/resource')
 const finalRequest = await page.waitForRequest(
   request =>
     request.url() === 'http://example.com' && request.method() === 'GET'
-);
-return firstRequest.url();
+)
+return firstRequest.url()
 ```
 
 ```ts
-const firstResponse = await page.waitForResponse(
-  'https://example.com/resource'
-);
+const firstResponse = await page.waitForResponse('https://example.com/resource')
 const finalResponse = await page.waitForResponse(
   response =>
     response.url() === 'https://example.com' && response.status() === 200
-);
-return finalResponse.ok();
+)
+return finalResponse.ok()
 ```
 
 ```ts
-await page.evaluate(() => window.open('https://www.example.com/'));
+await page.evaluate(() => window.open('https://www.example.com/'))
 const newWindowTarget = await browserContext.waitForTarget(
   target => target.url() === 'https://www.example.com/'
-);
+)
 ```
 
 ### Operation Simulation Testing
@@ -400,39 +398,38 @@ const newWindowTarget = await browserContext.waitForTarget(
 const [response] = await Promise.all([
   page.waitForNavigation(waitOptions),
   page.click(selector, clickOptions),
-]);
+])
 ```
 
 ```ts
 // Using ‘page.mouse’ to trace a 100x100 square.
-await page.mouse.move(0, 0);
-await page.mouse.down();
-await page.mouse.move(0, 100);
-await page.mouse.move(100, 100);
-await page.mouse.move(100, 0);
-await page.mouse.move(0, 0);
-await page.mouse.up();
+await page.mouse.move(0, 0)
+await page.mouse.down()
+await page.mouse.move(0, 100)
+await page.mouse.move(100, 100)
+await page.mouse.move(100, 0)
+await page.mouse.move(0, 0)
+await page.mouse.up()
 ```
 
 ```ts
-await page.keyboard.type('Hello World!');
-await page.keyboard.press('ArrowLeft');
+await page.keyboard.type('Hello World!')
+await page.keyboard.press('ArrowLeft')
 
-await page.keyboard.down('Shift');
-for (let i = 0; i < ' World'.length; i++)
-  await page.keyboard.press('ArrowLeft');
-await page.keyboard.up('Shift');
+await page.keyboard.down('Shift')
+for (let i = 0; i < ' World'.length; i++) await page.keyboard.press('ArrowLeft')
+await page.keyboard.up('Shift')
 
-await page.keyboard.press('Backspace');
+await page.keyboard.press('Backspace')
 // Result text will end up saying 'Hello!'
 ```
 
 ### Tracing Testing
 
 ```ts
-await page.tracing.start({ path: 'trace.json' });
-await page.goto('https://www.google.com');
-await page.tracing.stop();
+await page.tracing.start({ path: 'trace.json' })
+await page.goto('https://www.google.com')
+await page.tracing.stop()
 ```
 
 ### Puppeteer Testing API
@@ -480,11 +477,11 @@ npm i -D jest ts-jest @types/jest react-test-renderer
 `jest.config.js`:
 
 ```ts
-const { pathsToModuleNameMapper } = require('ts-jest/utils');
-const { compilerOptions } = require('./tsconfig.json');
+const { pathsToModuleNameMapper } = require('ts-jest/utils')
+const { compilerOptions } = require('./tsconfig.json')
 const paths = pathsToModuleNameMapper(compilerOptions.paths, {
   prefix: '<rootDir>/',
-});
+})
 
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
@@ -520,19 +517,19 @@ module.exports = {
   setupFiles: ['<rootDir>/jest.env.setup.js'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   setupTestFrameworkScriptFile: '<rootDir>/src/setupEnzyme.ts',
-};
+}
 ```
 
 `jest.env.setup.js`:
 
 ```ts
-import path from 'node:path';
-import dotenv from 'dotenv';
+import path from 'node:path'
+import dotenv from 'dotenv'
 
-console.log(`============ env-setup Loaded ===========`);
+console.log(`============ env-setup Loaded ===========`)
 dotenv.config({
   path: path.resolve(process.cwd(), 'tests', 'settings', '.test.env'),
-});
+})
 ```
 
 `jest.setup.js`:
@@ -542,7 +539,7 @@ dotenv.config({
 - [Jest DOM Expect API](https://github.com/testing-library/jest-dom)
 
 ```ts
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom/extend-expect'
 
 // Global/Window object Stubs for Jest
 window.matchMedia =
@@ -552,8 +549,8 @@ window.matchMedia =
       matches: false,
       addListener() {},
       removeListener() {},
-    };
-  };
+    }
+  }
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -567,29 +564,29 @@ Object.defineProperty(window, 'matchMedia', {
     removeEventListener: jest.fn(),
     dispatchEvent: jest.fn(),
   })),
-});
+})
 
 window.requestAnimationFrame = function (callback) {
-  setTimeout(callback);
-};
+  setTimeout(callback)
+}
 
-window.cancelAnimationFrame = window.clearTimeout;
+window.cancelAnimationFrame = window.clearTimeout
 
 window.localStorage = {
   getItem() {},
   setItem() {},
-};
+}
 
-Object.values = () => [];
+Object.values = () => []
 ```
 
 `setupEnzyme.ts`:
 
 ```ts
-import { configure } from 'enzyme';
-import * as EnzymeAdapter from 'enzyme-adapter-react-16';
+import { configure } from 'enzyme'
+import * as EnzymeAdapter from 'enzyme-adapter-react-16'
 
-configure({ adapter: new EnzymeAdapter() });
+configure({ adapter: new EnzymeAdapter() })
 ```
 
 ### Jest Basic Testing
@@ -602,33 +599,33 @@ configure({ adapter: new EnzymeAdapter() });
   - Skip temporary broken tests.
 
 ```tsx
-import { fireEvent, render, screen } from '@testing-library/react';
-import LandingNav from './LandingNav';
+import { fireEvent, render, screen } from '@testing-library/react'
+import LandingNav from './LandingNav'
 
 describe('LandingNav', () => {
   test('should expanded when clicked', () => {
-    render(<LandingNav />);
+    render(<LandingNav />)
 
     expect(screen.getByRole('navigation')).toHaveStyle(
       'transform: translateX(-100%) translateZ(0);'
-    );
-    expect(screen.getByRole('banner')).toHaveStyle('opacity: 0');
+    )
+    expect(screen.getByRole('banner')).toHaveStyle('opacity: 0')
 
-    fireEvent.click(screen.getByTestId('hamburger-icon'));
+    fireEvent.click(screen.getByTestId('hamburger-icon'))
 
     expect(screen.getByRole('navigation')).toHaveStyle(
       'transform: translateX(0%) translateZ(0);'
-    );
-    expect(screen.getByRole('banner')).toHaveStyle('opacity: 0.8');
+    )
+    expect(screen.getByRole('banner')).toHaveStyle('opacity: 0.8')
 
-    fireEvent.click(screen.getByTestId('hamburger-button'));
+    fireEvent.click(screen.getByTestId('hamburger-button'))
 
     expect(screen.getByRole('navigation')).toHaveStyle(
       'transform: translateX(-100%) translateZ(0);'
-    );
-    expect(screen.getByRole('banner')).toHaveStyle('opacity: 0');
-  });
-});
+    )
+    expect(screen.getByRole('banner')).toHaveStyle('opacity: 0')
+  })
+})
 ```
 
 ### Jest Snapshot Testing
@@ -641,18 +638,18 @@ describe('LandingNav', () => {
   use `jest -u` to overwrite existing snapshot.
 
 ```tsx
-import { fireEvent, render, screen } from '@testing-library/react';
-import ThemeSwitch from './ThemeSwitch';
+import { fireEvent, render, screen } from '@testing-library/react'
+import ThemeSwitch from './ThemeSwitch'
 
 describe('ThemeSwitch', () => {
   test('should switch dark mode when clicked', () => {
-    const { container } = render(<ThemeSwitch />);
+    const { container } = render(<ThemeSwitch />)
 
-    fireEvent.click(screen.getByTestId('toggle-wrapper'));
+    fireEvent.click(screen.getByTestId('toggle-wrapper'))
 
-    expect(container).toMatchSnapshot();
-  });
-});
+    expect(container).toMatchSnapshot()
+  })
+})
 ```
 
 ### Jest Async Testing
@@ -660,8 +657,8 @@ describe('ThemeSwitch', () => {
 Jest async [guide](https://jestjs.io/docs/tutorial-async):
 
 ```ts
-await expect(asyncCall()).resolves.toEqual('Expected');
-await expect(asyncCall()).rejects.toThrowError();
+await expect(asyncCall()).resolves.toEqual('Expected')
+await expect(asyncCall()).rejects.toThrowError()
 ```
 
 ### Jest Mocks
@@ -690,7 +687,7 @@ await expect(asyncCall()).rejects.toThrowError();
 
 ```tsx
 // react-dom.js
-const reactDom = jest.requireActual('react-dom');
+const reactDom = jest.requireActual('react-dom')
 
 function mockCreatePortal(element, target) {
   return (
@@ -698,18 +695,18 @@ function mockCreatePortal(element, target) {
       <div id="content">{element}</div>
       <div id="target" data-target-tag-name={target.tagName}></div>
     </div>
-  );
+  )
 }
 
-reactDom.createPortal = mockCreatePortal;
+reactDom.createPortal = mockCreatePortal
 
-module.exports = reactDom;
+module.exports = reactDom
 ```
 
 ```ts
 // gatsby.js
-import React from 'react';
-const gatsby = jest.requireActual('gatsby');
+import React from 'react'
+const gatsby = jest.requireActual('gatsby')
 
 module.exports = {
   ...gatsby,
@@ -735,7 +732,7 @@ module.exports = {
     ),
   StaticQuery: jest.fn(),
   useStaticQuery: jest.fn(),
-};
+}
 ```
 
 #### Jest Date Mocks
@@ -743,74 +740,74 @@ module.exports = {
 ```ts
 jest
   .spyOn(Date.prototype, 'toISOString')
-  .mockReturnValue('2020-06-20T13:37:00.000Z');
+  .mockReturnValue('2020-06-20T13:37:00.000Z')
 ```
 
 #### Jest API Mocks
 
 ```ts
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
 
 const handlers = [
   rest.get('https://mysite.com/api/role', async (req, res, ctx) => {
-    res(ctx.status(200), ctx.json({ userType: 'user' }));
+    res(ctx.status(200), ctx.json({ userType: 'user' }))
   }),
-];
+]
 
-const server = setupServer(...handlers);
+const server = setupServer(...handlers)
 
-export default server;
+export default server
 ```
 
 ```ts
-import server from './mockServer/server';
+import server from './mockServer/server'
 
 beforeAll(() => {
-  server.listen();
-});
+  server.listen()
+})
 
 afterEach(() => {
-  server.resetHandlers();
-});
+  server.resetHandlers()
+})
 
 afterAll(() => {
-  server.close();
-});
+  server.close()
+})
 ```
 
 ```tsx
-import { render, screen } from '@testing-library/react';
-import { rest } from 'msw';
-import type { UserRoleType } from './apis/user';
-import AuthButton from './components/AuthButton';
-import server from './mockServer/server';
+import { render, screen } from '@testing-library/react'
+import { rest } from 'msw'
+import type { UserRoleType } from './apis/user'
+import AuthButton from './components/AuthButton'
+import server from './mockServer/server'
 
 const setup = (userType: UserRoleType) => {
   server.use(
     rest.get('https://mysite.com/api/role', async (req, res, ctx) => {
-      return res(ctx.status(200), ctx.json({ userType }));
+      return res(ctx.status(200), ctx.json({ userType }))
     })
-  );
-};
+  )
+}
 
 describe('AuthButton', () => {
   it('should render user text', async () => {
-    setup('user');
+    setup('user')
 
-    render(<AuthButton>Hello</AuthButton>);
+    render(<AuthButton>Hello</AuthButton>)
 
-    expect(await screen.findByText('Hello User')).toBeInTheDocument();
-  });
+    expect(await screen.findByText('Hello User')).toBeInTheDocument()
+  })
 
   it('should render admin text', async () => {
-    setup('admin');
+    setup('admin')
 
-    render(<AuthButton>Hello</AuthButton>);
+    render(<AuthButton>Hello</AuthButton>)
 
-    expect(await screen.findByText('Hello Admin')).toBeInTheDocument();
-  });
-});
+    expect(await screen.findByText('Hello Admin')).toBeInTheDocument()
+  })
+})
 ```
 
 ### Jest Internals
@@ -822,52 +819,52 @@ Running tests in
 
 ```ts
 // demo.test.js
-import { test } from './TestLib.js';
+import { test } from './TestLib.js'
 
 test('succeeds', () => {
-  assert.equal(3, 3);
-});
+  assert.equal(3, 3)
+})
 
 test('fails', () => {
-  assert.equal(1, 3);
-});
+  assert.equal(1, 3)
+})
 
 // This statement can add by `babel`.
 // eslint-disable-next-line import/no-anonymous-default-export
-export default true;
+export default true
 
 // TestLib.js
-const testSuites = [];
+const testSuites = []
 
 export function test(description, callback) {
-  testSuites.push({ description, callback });
+  testSuites.push({ description, callback })
 }
 
 export function runTests() {
-  const testResults = [];
+  const testResults = []
 
   for (const testSuite of testSuites) {
     try {
-      testSuite.callback();
-      testResults.push(`${testSuite.description}: OK\n`);
+      testSuite.callback()
+      testResults.push(`${testSuite.description}: OK\n`)
     } catch (err) {
-      testResults.push(`${testSuite.description}: ${err}\n`);
+      testResults.push(`${testSuite.description}: ${err}\n`)
     }
   }
 
-  return testResults.join('');
+  return testResults.join('')
 }
 
 // TestRunner.js
 async function runTestModule(moduleSpecifier) {
-  const sr = new ShadowRealm();
-  await sr.importValue(moduleSpecifier, 'default');
-  const runTests = await sr.importValue('./TestLib.js', 'runTests');
-  const result = runTests();
-  console.log(result);
+  const sr = new ShadowRealm()
+  await sr.importValue(moduleSpecifier, 'default')
+  const runTests = await sr.importValue('./TestLib.js', 'runTests')
+  const result = runTests()
+  console.log(result)
 }
 
-await runTestModule('./demo.test.js');
+await runTestModule('./demo.test.js')
 ```
 
 #### Jest Test Runner
@@ -877,18 +874,18 @@ A simple
 implementation:
 
 ```ts
-import { promises as fs } from 'node:fs';
-import { basename, dirname, join } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { promises as fs } from 'node:fs'
+import { basename, dirname, join } from 'node:path'
+import { pathToFileURL } from 'node:url'
 
 async function* walk(dir: string): AsyncGenerator<string> {
   for await (const d of await fs.opendir(dir)) {
-    const entry = join(dir, d.name);
+    const entry = join(dir, d.name)
 
     if (d.isDirectory()) {
-      yield* walk(entry);
+      yield* walk(entry)
     } else if (d.isFile()) {
-      yield entry;
+      yield entry
     }
   }
 }
@@ -899,10 +896,10 @@ async function runTestFile(file: string): Promise<void> {
   )) {
     if (typeof value === 'function') {
       try {
-        await value();
+        await value()
       } catch (e) {
-        console.error(e instanceof Error ? e.stack : e);
-        process.exit(1);
+        console.error(e instanceof Error ? e.stack : e)
+        process.exit(1)
       }
     }
   }
@@ -910,7 +907,7 @@ async function runTestFile(file: string): Promise<void> {
 
 async function run(arg = '.') {
   if ((await fs.lstat(arg)).isFile()) {
-    return runTestFile(arg);
+    return runTestFile(arg)
   }
 
   for await (const file of walk(arg)) {
@@ -918,13 +915,13 @@ async function run(arg = '.') {
       !dirname(file).includes('node_modules') &&
       (basename(file) === 'test.js' || file.endsWith('.test.js'))
     ) {
-      console.log(file);
-      await runTestFile(file);
+      console.log(file)
+      await runTestFile(file)
     }
   }
 }
 
-run(process.argv[2]);
+run(process.argv[2])
 ```
 
 #### Jest Native Runner
@@ -933,42 +930,42 @@ Implement component testing with
 [native `node:test` module](https://whistlr.info/2022/test-react-builtin):
 
 ```tsx
-import assert from 'node:assert';
-import test from 'node:test';
-import jsdom from 'jsdom';
-import { cleanup, render } from '@testing-library/react';
+import assert from 'node:assert'
+import test from 'node:test'
+import jsdom from 'jsdom'
+import { cleanup, render } from '@testing-library/react'
 
 const j = new jsdom.JSDOM(undefined, {
   url: 'http://localhost', // Many APIs are confused without being "on a real URL"
   pretendToBeVisual: true, // This adds dummy requestAnimationFrame and friends
-});
+})
 
 // We need to add everything on JSDOM's window object to global scope.
 // We don't add anything starting with _, or anything that's already there.
 Object.getOwnPropertyNames(j.window)
   .filter(k => !k.startsWith('_') && !(k in global))
-  .forEach(k => (global[k] = j.window[k]));
+  .forEach(k => (global[k] = j.window[k]))
 
 // Finally, tell React 18+ that we are not really a browser.
-global.IS_REACT_ACT_ENVIRONMENT = true;
+global.IS_REACT_ACT_ENVIRONMENT = true
 
 const reactTest = (name, fn) => {
   return test(name, () => {
-    cleanup(); // always cleanup first
-    return fn();
-  });
-};
+    cleanup() // always cleanup first
+    return fn()
+  })
+}
 
 const FooComponent = ({ text }: { text: string }) => (
   <div>
     Hello <span data-testid="hold">{text}</span>
   </div>
-);
+)
 
 reactTest('test component', () => {
-  const result = render(<FooComponent name={Sam} />);
-  assert.strictEqual(result.getByTestId('hold').textContent, 'Sam');
-});
+  const result = render(<FooComponent name={Sam} />)
+  assert.strictEqual(result.getByTestId('hold').textContent, 'Sam')
+})
 ```
 
 ### Jest Performance
@@ -1028,13 +1025,13 @@ yarn cypress open
 `cypress.config.ts`:
 
 ```ts
-import { defineConfig } from 'cypress';
+import { defineConfig } from 'cypress'
 
 export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:3000',
   },
-});
+})
 ```
 
 `tsconfig.json`:
@@ -1078,7 +1075,7 @@ cypress/videos
 ```ts
 const config = {
   testPathIgnorePatterns: ['/node_modules/', '/.next/', '/cypress/'],
-};
+}
 ```
 
 ### Basic Cypress Testing
@@ -1086,7 +1083,7 @@ const config = {
 `cypress/support/commands.ts`:
 
 ```ts
-import '@testing-library/cypress/add-commands';
+import '@testing-library/cypress/add-commands'
 ```
 
 `cypress/e2e/component.cy.ts`:
@@ -1096,74 +1093,74 @@ import '@testing-library/cypress/add-commands';
 
 describe('component', () => {
   it('should work', () => {
-    cy.visit('/');
+    cy.visit('/')
     cy.get('#onOff')
       .should('have.text', 'off')
       .click()
-      .should('have.text', 'on');
-  });
-});
+      .should('have.text', 'on')
+  })
+})
 ```
 
 `cypress/e2e/payment.cy.ts`:
 
 ```ts
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid'
 
 describe('payment', () => {
   it('user can make payment', () => {
     //  Login.
-    cy.visit('/');
-    cy.findByRole('textbox', { name: /username/i }).type('sabertaz');
-    cy.findByLabelText(/password/i).type('secret');
-    cy.findByRole('checkbox', { name: /remember me/i }).check();
-    cy.findByRole('button', { name: /sign in/i }).click();
+    cy.visit('/')
+    cy.findByRole('textbox', { name: /username/i }).type('sabertaz')
+    cy.findByLabelText(/password/i).type('secret')
+    cy.findByRole('checkbox', { name: /remember me/i }).check()
+    cy.findByRole('button', { name: /sign in/i }).click()
 
     // Check account balance.
-    let oldBalance;
+    let oldBalance
     cy.get('[data-test=nav-user-balance]').then(
       $balance => (oldBalance = $balance.text())
-    );
+    )
 
     // Click on new button.
-    cy.findByRole('button', { name: /new/i }).click();
+    cy.findByRole('button', { name: /new/i }).click()
 
     // Search for user.
-    cy.findByRole('textbox').type('devon becker');
-    cy.findByText(/devon becker/i).click();
+    cy.findByRole('textbox').type('devon becker')
+    cy.findByText(/devon becker/i).click()
 
     // Add amount and note and click pay.
-    const paymentAmount = '5.00';
-    cy.findByPlaceholderText(/amount/i).type(paymentAmount);
-    const note = uuid();
-    cy.findByPlaceholderText(/add a note/i).type(note);
-    cy.findByRole('button', { name: /pay/i }).click();
+    const paymentAmount = '5.00'
+    cy.findByPlaceholderText(/amount/i).type(paymentAmount)
+    const note = uuid()
+    cy.findByPlaceholderText(/add a note/i).type(note)
+    cy.findByRole('button', { name: /pay/i }).click()
 
     // Return to transactions.
-    cy.findByRole('button', { name: /return to transactions/i }).click();
+    cy.findByRole('button', { name: /return to transactions/i }).click()
 
     // Go to personal payments.
-    cy.findByRole('tab', { name: /mine/i }).click();
+    cy.findByRole('tab', { name: /mine/i }).click()
 
     // Click on payment.
-    cy.findByText(note).click({ force: true });
+    cy.findByText(note).click({ force: true })
 
     // Verify if payment was made.
-    cy.findByText(`-$${paymentAmount}`).should('be.visible');
-    cy.findByText(note).should('be.visible');
+    cy.findByText(`-$${paymentAmount}`).should('be.visible')
+    cy.findByText(note).should('be.visible')
 
     // Verify if payment amount was deducted.
     cy.get('[data-test=nav-user-balance]').then($balance => {
-      const convertedOldBalance = parseFloat(oldBalance.replace(/\$|,/g, ''));
+      const convertedOldBalance = parseFloat(oldBalance.replace(/\$|,/g, ''))
       const convertedNewBalance = parseFloat(
         $balance.text().replace(/\$|,/g, '')
-      );
+      )
       expect(convertedOldBalance - convertedNewBalance).to.equal(
         parseFloat(paymentAmount)
-      );
-    });
-  });
-});
+      )
+    })
+  })
+})
 ```
 
 ### Cypress Principles
@@ -1185,11 +1182,11 @@ describe('payment', () => {
 - `cy.invoke`: invoke function on previously yielded subject.
 
 ```ts
-cy.wrap(['Wai Yan', 'Yu']).its(1).should('eq', 'Yu');
-cy.wrap({ age: 52 }).its('age').should('eq', 52);
+cy.wrap(['Wai Yan', 'Yu']).its(1).should('eq', 'Yu')
+cy.wrap({ age: 52 }).its('age').should('eq', 52)
 cy.wait('@publicTransactions')
   .its('response.body.results')
-  .invoke('slice', 0, 5);
+  .invoke('slice', 0, 5)
 ```
 
 #### Cypress Action Commands
@@ -1216,34 +1213,34 @@ cy.wait('@publicTransactions')
 ```ts
 cy.intercept('GET', '/transactions/public*', {
   fixture: 'public-transactions.json',
-}).as('mockedPublicTransactions');
+}).as('mockedPublicTransactions')
 
-cy.wait('@mockedPublicTransactions');
+cy.wait('@mockedPublicTransactions')
 
 cy.intercept('GET', '/transactions/public*', {
   headers: {
     'X-Powered-By': 'Express',
     Date: new Date().toString(),
   },
-});
+})
 
 cy.intercept('POST', '/bankAccounts', req => {
-  const { body } = req;
+  const { body } = req
   req.continue(res => {
-    res.body.data.listBankAccount = [];
-  });
-});
+    res.body.data.listBankAccount = []
+  })
+})
 
 cy.intercept('POST', apiGraphQL, req => {
-  const { body } = req;
+  const { body } = req
 
   if (
     Object.hasOwn(body, 'operationName') &&
     body.operationName === 'CreateBankAccount'
   ) {
-    req.alias = 'gqlCreateBankAccountMutation';
+    req.alias = 'gqlCreateBankAccountMutation'
   }
-});
+})
 ```
 
 - `cy.request`: API integration/E2E tests.
@@ -1251,34 +1248,34 @@ cy.intercept('POST', apiGraphQL, req => {
 ```ts
 Cypress.Commands.add('getAllPosts', () => {
   return cy.request('GET', '/api/posts').then(response => {
-    return cy.wrap(response.body);
-  });
-});
+    return cy.wrap(response.body)
+  })
+})
 
 Cypress.Commands.add('getFirstPost', () => {
   return cy.request('GET', '/api/posts').then(response => {
-    return cy.wrap(response.body).its(0);
-  });
-});
+    return cy.wrap(response.body).its(0)
+  })
+})
 
 describe('GET', () => {
   it('gets a list of users', () => {
     cy.request('GET', '/users').then(response => {
-      expect(response.status).to.eq(200);
-      expect(response.body.results).length.to.be.greaterThan(1);
-    });
-  });
+      expect(response.status).to.eq(200)
+      expect(response.body.results).length.to.be.greaterThan(1)
+    })
+  })
 
   it('gets a list of comments', () => {
-    cy.request('/comments').as('comments');
+    cy.request('/comments').as('comments')
 
     cy.get('@comments').should(response => {
-      expect(response.body).to.have.length(500);
-      expect(response).to.have.property('headers');
-      expect(response).to.have.property('duration');
-    });
-  });
-});
+      expect(response.body).to.have.length(500)
+      expect(response).to.have.property('headers')
+      expect(response).to.have.property('duration')
+    })
+  })
+})
 ```
 
 #### Cypress Custom Command
@@ -1289,10 +1286,10 @@ describe('GET', () => {
 declare global {
   namespace Cypress {
     interface Chainable {
-      findByRole(role: string): Chainable<JQuery<HTMLElement>>;
-      findByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
-      getByRole(role: string): Chainable<JQuery<HTMLElement>>;
-      getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
+      findByRole(role: string): Chainable<JQuery<HTMLElement>>
+      findByTestId(testId: string): Chainable<JQuery<HTMLElement>>
+      getByRole(role: string): Chainable<JQuery<HTMLElement>>
+      getByTestId(testId: string): Chainable<JQuery<HTMLElement>>
     }
   }
 }
@@ -1301,33 +1298,33 @@ Cypress.Commands.add(
   'findByRole',
   { prevSubject: 'element' },
   (subject, role) => {
-    return cy.wrap(subject, { log: false }).find(`[role="${role}"]`);
+    return cy.wrap(subject, { log: false }).find(`[role="${role}"]`)
   }
-);
+)
 
 Cypress.Commands.add(
   'findByTestId',
   { prevSubject: 'element' },
   (subject, testId) => {
-    return cy.wrap(subject, { log: false }).find(`[data-testid="${testId}"]`);
+    return cy.wrap(subject, { log: false }).find(`[data-testid="${testId}"]`)
   }
-);
+)
 
 Cypress.Commands.add('getByRole', role => {
-  return cy.get(`[role="${role}"]`);
-});
+  return cy.get(`[role="${role}"]`)
+})
 
 Cypress.Commands.add('getByTestId', testId => {
-  return cy.get(`[data-testid="${testId}"]`);
-});
+  return cy.get(`[data-testid="${testId}"]`)
+})
 ```
 
 [Custom command log](https://filiphric.com/improve-your-custom-command-logs-in-cypress):
 
 ```ts
 Cypress.Commands.add('take', (input: string) => {
-  let element: JQuery<HTMLElement> | HTMLElement[];
-  let count: number;
+  let element: JQuery<HTMLElement> | HTMLElement[]
+  let count: number
 
   const log = Cypress.log({
     autoEnd: false,
@@ -1336,25 +1333,25 @@ Cypress.Commands.add('take', (input: string) => {
         selector: input,
         Yielded: element,
         Elements: count,
-      };
+      }
     },
     displayName: 'take',
     name: 'Get by [data-cy] attribute',
-  });
+  })
 
   cy.get(`[data-cy=${input}]`, { log: false }).then($el => {
-    element = Cypress.dom.getElements($el);
-    count = $el.length;
-    log.set({ $el });
-    log.snapshot().end();
-  });
+    element = Cypress.dom.getElements($el)
+    count = $el.length
+    log.set({ $el })
+    log.snapshot().end()
+  })
 
   cy.on('fail', err => {
-    log.error(err);
-    log.end();
-    throw err;
-  });
-});
+    log.error(err)
+    log.end()
+    throw err
+  })
+})
 ```
 
 ### Cypress Plugin
@@ -1363,8 +1360,8 @@ Setup `TypeScript` to transpile tests:
 
 ```ts
 // cypress.config.ts
-import { defineConfig } from 'cypress';
-import wp from '@cypress/webpack-preprocessor';
+import { defineConfig } from 'cypress'
+import wp from '@cypress/webpack-preprocessor'
 
 export default defineConfig({
   e2e: {
@@ -1387,18 +1384,18 @@ export default defineConfig({
             },
           },
         })
-      );
+      )
     },
   },
-});
+})
 ```
 
 `AXE` a11y testing:
 
 ```ts
 // cypress.config.ts
-import { defineConfig } from 'cypress';
-import fetch from 'undici';
+import { defineConfig } from 'cypress'
+import fetch from 'undici'
 
 export default defineConfig({
   e2e: {
@@ -1415,23 +1412,23 @@ export default defineConfig({
             .then(xml => {
               const locs = [...xml.matchAll(`<loc>(.|\n)*?</loc>`)].map(
                 ([loc]) => loc.replace('<loc>', '').replace('</loc>', '')
-              );
-              return locs;
-            });
+              )
+              return locs
+            })
         },
-      });
+      })
 
-      return config;
+      return config
     },
   },
-});
+})
 
 // cypress/e2e/smoke.cy.ts
 it('should be accessible', () => {
   cy.task('sitemapLocations').then(pages => {
     pages.forEach(page => {
-      cy.visit(page);
-      cy.injectAxe();
+      cy.visit(page)
+      cy.injectAxe()
       cy.checkA11y(
         {
           exclude: ['.article-action'],
@@ -1442,10 +1439,10 @@ it('should be accessible', () => {
             'scrollable-region-focusable': { enabled: false },
           },
         }
-      );
-    });
-  });
-});
+      )
+    })
+  })
+})
 ```
 
 - Cypress code coverage [plugin](https://github.com/bahmutov/cypress-and-jest).
@@ -1472,54 +1469,54 @@ to window `pushState` and `replaceState`.
 
 ```ts
 const _wr = function (type) {
-  const orig = window.history[type];
+  const orig = window.history[type]
 
   return function (...args) {
-    const rv = orig.apply(this, args);
-    const e = new Event(type.toLowerCase());
-    e.arguments = args;
-    window.dispatchEvent(e);
-    return rv;
-  };
-};
+    const rv = orig.apply(this, args)
+    const e = new Event(type.toLowerCase())
+    e.arguments = args
+    window.dispatchEvent(e)
+    return rv
+  }
+}
 
-window.history.pushState = _wr('pushState');
-window.history.replaceState = _wr('replaceState');
+window.history.pushState = _wr('pushState')
+window.history.replaceState = _wr('replaceState')
 
 window.addEventListener('pushstate', function (event) {
-  console.trace('pushState');
-});
+  console.trace('pushState')
+})
 
 window.addEventListener('replacestate', function (event) {
-  console.trace('replaceState');
-});
+  console.trace('replaceState')
+})
 ```
 
 #### Event Propagation Injection
 
 ```ts
-const originalStopPropagation = MouseEvent.prototype.stopPropagation;
+const originalStopPropagation = MouseEvent.prototype.stopPropagation
 
 MouseEvent.prototype.stopPropagation = function (...args) {
-  console.trace('stopPropagation');
-  originalStopPropagation.call(this, ...args);
-};
+  console.trace('stopPropagation')
+  originalStopPropagation.call(this, ...args)
+}
 ```
 
 #### Window Scroll Injection
 
 ```ts
-let originalScrollTop = element.scrollTop;
+let originalScrollTop = element.scrollTop
 
 Object.defineProperty(element, 'scrollTop', {
   get() {
-    return originalScrollTop;
+    return originalScrollTop
   },
   set(newVal) {
-    console.trace('scrollTop');
-    originalScrollTop = newVal;
+    console.trace('scrollTop')
+    originalScrollTop = newVal
   },
-});
+})
 ```
 
 ### Logging
@@ -1545,7 +1542,7 @@ Object.defineProperty(element, 'scrollTop', {
 #### Logging Setup
 
 ```ts
-const { createLogger, format, transports } = require('winston');
+const { createLogger, format, transports } = require('winston')
 
 const logLevels = {
   fatal: 0,
@@ -1554,16 +1551,16 @@ const logLevels = {
   info: 3,
   debug: 4,
   trace: 5,
-};
+}
 
 const logger = createLogger({
   levels: logLevels,
   format: format.combine(format.timestamp(), format.json()),
   transports: [new transports.Console()],
-});
+})
 
-logger.info('System Started');
-logger.fatal('Fatal error occurred');
+logger.info('System Started')
+logger.fatal('Fatal error occurred')
 ```
 
 #### Logging Clock
@@ -1572,30 +1569,30 @@ logger.fatal('Fatal error occurred');
 - `performance.now()` is strictly monotonic (unaffected by changes of machine time).
 
 ```ts
-let lastVisibilityChange = 0;
+let lastVisibilityChange = 0
 
 window.addEventListener('visibilitychange', () => {
-  lastVisibilityChange = performance.now();
-});
+  lastVisibilityChange = performance.now()
+})
 
 // don’t log any metrics started before the last visibility change
 // don't log any metrics if the page is hidden
 // discard perf data from when the machine was not running app at full speed
 function metrics() {
   if (metric.start < lastVisibilityChange || document.hidden) {
-    return;
+    return
   }
 
-  process();
+  process()
 }
 ```
 
 ```ts
 requestAnimationFrame(() => {
   requestAnimationFrame(timestamp => {
-    metric.finish(timestamp);
-  });
-});
+    metric.finish(timestamp)
+  })
+})
 ```
 
 ### Console API
@@ -1605,53 +1602,53 @@ requestAnimationFrame(() => {
 - `monitor`: monitor object.
 
 ```ts
-const devtools = /./;
+const devtools = /./
 devtools.toString = function () {
-  this.opened = true;
-};
+  this.opened = true
+}
 
-console.log('%c', devtools);
+console.log('%c', devtools)
 // devtools.opened will become true if/when the console is opened
 ```
 
 ```ts
 // Basic console functions
-console.assert();
-console.clear();
-console.log();
-console.debug();
-console.info();
-console.warn();
-console.error();
+console.assert()
+console.clear()
+console.log()
+console.debug()
+console.info()
+console.warn()
+console.error()
 
 // Different output styles
-console.dir();
-console.dirxml();
-console.table();
-console.group();
-console.groupCollapsed();
-console.groupEnd();
+console.dir()
+console.dirxml()
+console.table()
+console.group()
+console.groupCollapsed()
+console.groupEnd()
 
 // Trace console functions
-console.trace();
-console.count();
-console.countReset();
-console.time();
-console.timeEnd();
-console.timeLog();
+console.trace()
+console.count()
+console.countReset()
+console.time()
+console.timeEnd()
+console.timeLog()
 
 // Non-standard console functions
-console.profile();
-console.profileEnd();
-console.timeStamp();
+console.profile()
+console.profileEnd()
+console.timeStamp()
 ```
 
 `console.log`:
 
 ```ts
 // `sprinf` style log
-console.log('%d %o %s', integer, object, string);
-console.log('%c ...', 'css style');
+console.log('%d %o %s', integer, object, string)
+console.log('%c ...', 'css style')
 ```
 
 `console.table`:
@@ -1680,9 +1677,9 @@ const transactions = [
     price: 59240,
     time: 1539688433,
   },
-];
+]
 
-console.table(data, ['id', 'price']);
+console.table(data, ['id', 'price'])
 ```
 
 ### JavaScript Tracing API
@@ -1694,43 +1691,43 @@ console.table(data, ['id', 'price']);
 ```
 
 ```ts
-copy(obj); // to clipboard
+copy(obj) // to clipboard
 ```
 
 ```ts
 window.onerror = function (errorMessage, scriptURI, lineNo, columnNo, error) {
-  console.log(`errorMessage: ${errorMessage}`); // 异常信息
-  console.log(`scriptURI: ${scriptURI}`); // 异常文件路径
-  console.log(`lineNo: ${lineNo}`); // 异常行号
-  console.log(`columnNo: ${columnNo}`); // 异常列号
-  console.log(`error: ${error}`); // 异常堆栈信息
+  console.log(`errorMessage: ${errorMessage}`) // 异常信息
+  console.log(`scriptURI: ${scriptURI}`) // 异常文件路径
+  console.log(`lineNo: ${lineNo}`) // 异常行号
+  console.log(`columnNo: ${columnNo}`) // 异常列号
+  console.log(`error: ${error}`) // 异常堆栈信息
   // ...
   // 异常上报
-};
+}
 
 window.addEventListener('error', function () {
-  console.log(error);
+  console.log(error)
   // ...
   // 异常上报
-});
+})
 ```
 
 #### Trace Property
 
 ```ts
 const traceProperty = (object, property) => {
-  let value = object[property];
+  let value = object[property]
   Object.defineProperty(object, property, {
     get() {
-      console.trace(`${property} requested`);
-      return value;
+      console.trace(`${property} requested`)
+      return value
     },
     set(newValue) {
-      console.trace(`setting ${property} to `, newValue);
-      value = newValue;
+      console.trace(`setting ${property} to `, newValue)
+      value = newValue
     },
-  });
-};
+  })
+}
 ```
 
 ### Node Debugging API
@@ -1752,27 +1749,27 @@ ndb index.js
 #### Console DevTools Detection
 
 ```ts
-const x = document.createElement('div');
+const x = document.createElement('div')
 
 Object.defineProperty(x, 'id', {
   get() {
     // devtool opened.
-    return 'id';
+    return 'id'
   },
-});
+})
 
-console.log(x);
+console.log(x)
 ```
 
 ```ts
 // eslint-disable-next-line prefer-regex-literals
-const c = new RegExp('1');
+const c = new RegExp('1')
 
 c.toString = function () {
   // devtool opened
-};
+}
 
-console.log(c);
+console.log(c)
 ```
 
 > Anti Method: hook `console` object, disable all outputs.
@@ -1780,39 +1777,39 @@ console.log(c);
 #### Debugger Detection
 
 ```ts
-(function () {}).constructor('debugger')();
+;(function () {}).constructor('debugger')()
 ```
 
 ```ts
-(() => {
+;(() => {
   function block() {
     if (
       window.outerHeight - window.innerHeight > 200 ||
       window.outerWidth - window.innerWidth > 200
     ) {
-      document.body.innerHTML = 'Debug detected, please reload page!';
+      document.body.innerHTML = 'Debug detected, please reload page!'
     }
 
     setInterval(() => {
-      (function () {
-        return false;
+      ;(function () {
+        return false
       })
         .constructor('debugger')
-        .call();
-    }, 50);
+        .call()
+    }, 50)
   }
 
   try {
-    block();
+    block()
   } catch (err) {}
-})();
+})()
 ```
 
 ```ts
-const startTime = new Date();
+const startTime = new Date()
 // debugger;
-const endTime = new Date();
-const isDev = endTime - startTime > 100;
+const endTime = new Date()
+const isDev = endTime - startTime > 100
 
 while (true) {
   // debugger;
@@ -1875,15 +1872,15 @@ long click reload: multiple reload options e.g clean cache
 `$0`: the reference to the currently selected element in the Elements panel.
 
 ```ts
-const listener = getEventListeners($0).click[0].listener;
-$0.removeEventListener('click', listener);
+const listener = getEventListeners($0).click[0].listener
+$0.removeEventListener('click', listener)
 $0.addEventListener('click', e => {
   // do something
   // ...
 
   // then
-  listener(e);
-});
+  listener(e)
+})
 ```
 
 ### Source Panel

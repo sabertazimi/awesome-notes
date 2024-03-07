@@ -67,21 +67,21 @@ and prefer `v-if` if the condition is unlikely to change at runtime (lifecycle c
 // Vue 2.x: compiler/codegen/index.js
 export function genElement(el: ASTElement, state: CodegenState): string {
   if (el.parent) {
-    el.pre = el.pre || el.parent.pre;
+    el.pre = el.pre || el.parent.pre
   }
 
   if (el.staticRoot && !el.staticProcessed) {
-    return genStatic(el, state);
+    return genStatic(el, state)
   } else if (el.once && !el.onceProcessed) {
-    return genOnce(el, state);
+    return genOnce(el, state)
   } else if (el.for && !el.forProcessed) {
-    return genFor(el, state);
+    return genFor(el, state)
   } else if (el.if && !el.ifProcessed) {
-    return genIf(el, state);
+    return genIf(el, state)
   } else if (el.tag === 'template' && !el.slotTarget && !state.pre) {
-    return genChildren(el, state) || 'void 0';
+    return genChildren(el, state) || 'void 0'
   } else if (el.tag === 'slot') {
-    return genSlot(el, state);
+    return genSlot(el, state)
   } else {
     // component or element
   }
@@ -112,25 +112,25 @@ export function genElement(el: ASTElement, state: CodegenState): string {
 
 ```html
 <script setup lang="ts">
-  const isActive = ref(true);
-  const hasError = ref(false);
-  const activeClass = ref('active');
-  const errorClass = ref('text-danger');
+  const isActive = ref(true)
+  const hasError = ref(false)
+  const activeClass = ref('active')
+  const errorClass = ref('text-danger')
   const classObject = reactive({
     active: true,
     'text-danger': false,
-  });
+  })
   const classObject = computed(() => ({
     active: isActive.value && !error.value,
     'text-danger': hashError.value,
-  }));
+  }))
 
-  const activeColor = ref('red');
-  const fontSize = ref(30);
+  const activeColor = ref('red')
+  const fontSize = ref(30)
   const styleObject = reactive({
     color: 'red',
     fontSize: '13px',
-  });
+  })
 </script>
 
 <template>
@@ -216,19 +216,19 @@ export function genElement(el: ASTElement, state: CodegenState): string {
 Vue.createApp({
   methods: {
     warn(message, event) {
-      if (event) event.preventDefault();
-      alert(message);
+      if (event) event.preventDefault()
+      alert(message)
     },
     one(event) {
-      if (event) event.preventDefault();
-      console.log('one');
+      if (event) event.preventDefault()
+      console.log('one')
     },
     two(event) {
-      if (event) event.preventDefault();
-      console.log('two');
+      if (event) event.preventDefault()
+      console.log('two')
     },
   },
-}).mount('#inline-handler');
+}).mount('#inline-handler')
 ```
 
 #### Custom Events
@@ -244,22 +244,22 @@ app.component('CustomForm', {
     // 验证 submit 事件
     submit: ({ email, password }) => {
       if (email && password) {
-        return true;
+        return true
       } else {
-        console.warn('Invalid submit event payload!');
-        return false;
+        console.warn('Invalid submit event payload!')
+        return false
       }
     },
   },
   methods: {
     customEvent() {
-      this.$emit('custom-event');
+      this.$emit('custom-event')
     },
     submitForm(email, password) {
-      this.$emit('submit', { email, password });
+      this.$emit('submit', { email, password })
     },
   },
-});
+})
 ```
 
 ```html
@@ -295,12 +295,12 @@ Drag and Drop events:
     },
     methods: {
       onDrag(e) {
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.dropEffect = 'move';
-        e.dataTransfer.setData('payload', JSON.stringify(this.transferData));
+        e.dataTransfer.effectAllowed = 'move'
+        e.dataTransfer.dropEffect = 'move'
+        e.dataTransfer.setData('payload', JSON.stringify(this.transferData))
       },
     },
-  };
+  }
 </script>
 ```
 
@@ -316,11 +316,11 @@ Drag and Drop events:
   export default {
     methods: {
       onDrop(e) {
-        const transferData = JSON.parse(e.dataTransfer.getData('payload'));
-        this.$emit('drop', transferData);
+        const transferData = JSON.parse(e.dataTransfer.getData('payload'))
+        this.$emit('drop', transferData)
       },
     },
-  };
+  }
 </script>
 ```
 
@@ -393,8 +393,8 @@ Component `v-model` directive:
 ```html
 <!-- CustomInput.vue -->
 <script setup>
-  defineProps(['modelValue']);
-  defineEmits(['update:modelValue']);
+  defineProps(['modelValue'])
+  defineEmits(['update:modelValue'])
 </script>
 
 <template>
@@ -408,19 +408,19 @@ Component `v-model` directive:
 ```html
 <!-- CustomInput.vue -->
 <script setup>
-  import { computed } from 'vue';
+  import { computed } from 'vue'
 
-  const props = defineProps(['modelValue']);
-  const emit = defineEmits(['update:modelValue']);
+  const props = defineProps(['modelValue'])
+  const emit = defineEmits(['update:modelValue'])
 
   const value = computed({
     get() {
-      return props.modelValue;
+      return props.modelValue
     },
     set(value) {
-      emit('update:modelValue', value);
+      emit('update:modelValue', value)
     },
-  });
+  })
 </script>
 
 <template>
@@ -433,8 +433,8 @@ Custom component `v-model` name:
 ```html
 <!-- MyComponent.vue -->
 <script setup>
-  defineProps(['title']);
-  defineEmits(['update:title']);
+  defineProps(['title'])
+  defineEmits(['update:title'])
 </script>
 
 <template>
@@ -453,16 +453,16 @@ Custom component `v-model` modifier:
   const props = defineProps({
     modelValue: String,
     modelModifiers: { default: () => ({}) },
-  });
+  })
 
-  const emit = defineEmits(['update:modelValue']);
+  const emit = defineEmits(['update:modelValue'])
 
   function emitValue(e) {
-    let value = e.target.value;
+    let value = e.target.value
     if (props.modelModifiers.capitalize) {
-      value = value.charAt(0).toUpperCase() + value.slice(1);
+      value = value.charAt(0).toUpperCase() + value.slice(1)
     }
-    emit('update:modelValue', value);
+    emit('update:modelValue', value)
   }
 </script>
 
@@ -477,15 +477,15 @@ Custom [build-in directives](https://github.com/vuejs/core/tree/main/packages/ru
 
 ```html
 <script setup lang="ts">
-  import { ref, vModelText } from 'vue';
+  import { ref, vModelText } from 'vue'
 
   vModelText.updated = (el, { value, modifiers: { capitalize } }) => {
     if (capitalize && Object.hasOwn(value, 0)) {
-      el.value = value[0].toUpperCase() + value.slice(1);
+      el.value = value[0].toUpperCase() + value.slice(1)
     }
-  };
+  }
 
-  const value = ref('');
+  const value = ref('')
 </script>
 
 <template>
@@ -514,7 +514,7 @@ const vDirective = {
   beforeUnmount(el, binding, vnode, prevVnode) {},
   // 绑定元素的父组件卸载后调用
   unmounted(el, binding, vnode, prevVnode) {},
-};
+}
 ```
 
 ## Components
@@ -540,28 +540,28 @@ Vue.createApp({
           'Vue 4 - The Mystery',
         ],
       },
-    };
+    }
   },
   computed: {
     // 计算属性的 getter
     publishedBooksMessage() {
       // `this` 指向 vm 实例
-      return this.author.books.length > 0 ? 'Yes' : 'No';
+      return this.author.books.length > 0 ? 'Yes' : 'No'
     },
     fullName: {
       // getter
       get() {
-        return `${this.firstName} ${this.lastName}`;
+        return `${this.firstName} ${this.lastName}`
       },
       // setter
       set(newValue) {
-        const names = newValue.split(' ');
-        this.firstName = names[0];
-        this.lastName = names[names.length - 1];
+        const names = newValue.split(' ')
+        this.firstName = names[0]
+        this.lastName = names[names.length - 1]
       },
     },
   },
-}).mount('#computed-basics');
+}).mount('#computed-basics')
 ```
 
 ### Slots
@@ -670,7 +670,7 @@ app.component('TodoList', {
   data() {
     return {
       items: ['Feed a cat', 'Buy milk'],
-    };
+    }
   },
   template: `
     <ul>
@@ -679,7 +679,7 @@ app.component('TodoList', {
       </li>
     </ul>
   `,
-});
+})
 ```
 
 ```html
@@ -727,18 +727,18 @@ Slot props shorthand
 Root `provide` context value:
 
 ```ts
-import { provide, ref } from 'vue';
+import { provide, ref } from 'vue'
 
-const count = ref(0);
-provide('key', count);
+const count = ref(0)
+provide('key', count)
 ```
 
 Child `inject` context value:
 
 ```ts
-import { inject } from 'vue';
+import { inject } from 'vue'
 
-const message = inject('message', defaultValue);
+const message = inject('message', defaultValue)
 ```
 
 ## Composition API
@@ -770,21 +770,21 @@ we cannot directly access `this.$emit` or `this.$route` anymore.
   - `context.root`.
 
 ```ts
-import { ref, toRefs } from 'vue';
+import { ref, toRefs } from 'vue'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   setup(props, { attrs, slots, emit, expose }) {
-    const { title } = toRefs(props);
+    const { title } = toRefs(props)
 
-    const count = ref(0);
-    const increment = () => ++count.value;
+    const count = ref(0)
+    const increment = () => ++count.value
 
-    console.log(title.value);
+    console.log(title.value)
 
-    return { title, increment };
+    return { title, increment }
   },
-};
+}
 ```
 
 ### Composition LifeCycle Hooks
@@ -810,7 +810,7 @@ just put code in `setup` methods.
 #### Reactive Value
 
 ```ts
-import { reactive, toRefs } from 'vue';
+import { reactive, toRefs } from 'vue'
 
 const book = reactive({
   author: 'Vue Team',
@@ -818,12 +818,12 @@ const book = reactive({
   title: 'Vue 3 Guide',
   description: 'You are reading this book right now ;)',
   price: 'free',
-});
+})
 
-const { author, title } = toRefs(book);
+const { author, title } = toRefs(book)
 
-title.value = 'Vue 3 Detailed Guide';
-console.log(book.title); // 'Vue 3 Detailed Guide'
+title.value = 'Vue 3 Detailed Guide'
+console.log(book.title) // 'Vue 3 Detailed Guide'
 ```
 
 #### Ref Value
@@ -831,22 +831,22 @@ console.log(book.title); // 'Vue 3 Detailed Guide'
 `ref` API:
 
 ```ts
-import type { Ref } from 'vue';
-import { isRef, reactive, ref, toRef, unref } from 'vue';
+import type { Ref } from 'vue'
+import { isRef, reactive, ref, toRef, unref } from 'vue'
 
-const count = ref(10);
+const count = ref(10)
 const state = reactive({
   foo: 1,
   bar: 2,
-});
-const fooRef = toRef(state, 'foo');
+})
+const fooRef = toRef(state, 'foo')
 
-console.log(isRef(count));
-console.log(unref(count) === 10);
-fooRef.value++;
-console.log(state.foo === 2);
-state.foo++;
-console.log(fooRef.value === 3);
+console.log(isRef(count))
+console.log(unref(count) === 10)
+fooRef.value++
+console.log(state.foo === 2)
+state.foo++
+console.log(fooRef.value === 3)
 ```
 
 `toRef`/`toRefs`:
@@ -855,28 +855,28 @@ console.log(fooRef.value === 3);
 function toRef(reactive, key) {
   const wrapper = {
     get value() {
-      return reactive[key];
+      return reactive[key]
     },
     set value(val) {
-      reactive[key] = val;
+      reactive[key] = val
     },
-  };
+  }
 
   Object.defineProperty(wrapper, '__v_isRef', {
     value: true,
-  });
+  })
 
-  return wrapper;
+  return wrapper
 }
 
 function toRefs(reactive) {
-  const refs = {};
+  const refs = {}
 
   for (const key in reactive) {
-    refs[key] = toRef(reactive, key);
+    refs[key] = toRef(reactive, key)
   }
 
-  return refs;
+  return refs
 }
 ```
 
@@ -886,20 +886,20 @@ function toRefs(reactive) {
 function proxyRefs(target) {
   return new Proxy(target, {
     get(target, key, receiver) {
-      const result = Reflect.get(target, key, receiver);
-      return result.__v_isRef ? result.value : result;
+      const result = Reflect.get(target, key, receiver)
+      return result.__v_isRef ? result.value : result
     },
     set(target, key, value, receiver) {
-      const result = target[key];
+      const result = target[key]
 
       if (result.__v_isRef) {
-        result.value = value;
-        return true;
+        result.value = value
+        return true
       }
 
-      return Reflect.set(target, key, value, receiver);
+      return Reflect.set(target, key, value, receiver)
     },
-  });
+  })
 }
 ```
 
@@ -907,25 +907,25 @@ function proxyRefs(target) {
 会自动解包 (无需使用 `.value`):
 
 ```ts
-const count = ref(0);
+const count = ref(0)
 const state = reactive({
   count,
-});
-console.log(state.count); // 0
+})
+console.log(state.count) // 0
 
-state.count = 1;
-console.log(count.value); // 1
+state.count = 1
+console.log(count.value) // 1
 ```
 
 当 `ref` 作为响应式数组或 `Map` 原生集合类型的元素被访问时,
 不会进行解包 (需要使用 `.value`):
 
 ```ts
-const books = reactive([ref('Vue 3 Guide')]);
-console.log(books[0].value);
+const books = reactive([ref('Vue 3 Guide')])
+console.log(books[0].value)
 
-const map = reactive(new Map([['count', ref(0)]]));
-console.log(map.get('count').value);
+const map = reactive(new Map([['count', ref(0)]]))
+console.log(map.get('count').value)
 ```
 
 #### Computed Value
@@ -934,27 +934,27 @@ console.log(map.get('count').value);
 不要在计算函数中做异步请求或者更改 DOM:
 
 ```ts
-const count = ref(1);
-const plusOne = computed(() => count.value + 1);
+const count = ref(1)
+const plusOne = computed(() => count.value + 1)
 
-console.log(plusOne.value); // 2
+console.log(plusOne.value) // 2
 
-plusOne.value++; // error
+plusOne.value++ // error
 ```
 
 **特殊情况**下可通过 getter 和 setter 创建可写计算属性:
 
 ```ts
-const count = ref(1);
+const count = ref(1)
 const plusOne = computed({
   get: () => count.value + 1,
   set: val => {
-    count.value = val - 1;
+    count.value = val - 1
   },
-});
+})
 
-plusOne.value = 1; // 可写计算属性
-console.log(count.value); // 0
+plusOne.value = 1 // 可写计算属性
+console.log(count.value) // 0
 ```
 
 #### Watch Value
@@ -963,48 +963,48 @@ Watch single value:
 
 ```ts
 // watching a getter
-const state = reactive({ count: 0 });
+const state = reactive({ count: 0 })
 watch(
   () => state.count,
   (count, prevCount) => {
     /* ... */
   }
-);
+)
 
 // directly watching a ref
-const count = ref(0);
+const count = ref(0)
 watch(count, (count, prevCount) => {
   /* ... */
-});
+})
 ```
 
 Watch multiple value:
 
 ```ts
-const firstName = ref('');
-const lastName = ref('');
+const firstName = ref('')
+const lastName = ref('')
 
 watch([firstName, lastName], (newValues, prevValues) => {
-  console.log(newValues, prevValues);
-});
+  console.log(newValues, prevValues)
+})
 
-firstName.value = 'John'; // logs: ["John", ""] ["", ""]
-lastName.value = 'Smith'; // logs: ["John", "Smith"] ["John", ""]
+firstName.value = 'John' // logs: ["John", ""] ["", ""]
+lastName.value = 'Smith' // logs: ["John", "Smith"] ["John", ""]
 ```
 
 Watch reactive value:
 
 ```ts
-const numbers = reactive([1, 2, 3, 4]);
+const numbers = reactive([1, 2, 3, 4])
 
 watch(
   () => [...numbers],
   (numbers, prevNumbers) => {
-    console.log(numbers, prevNumbers);
+    console.log(numbers, prevNumbers)
   }
-);
+)
 
-numbers.push(5); // logs: [1,2,3,4,5] [1,2,3,4]
+numbers.push(5) // logs: [1,2,3,4,5] [1,2,3,4]
 ```
 
 Watch deep object:
@@ -1015,29 +1015,29 @@ const state = reactive({
   attributes: {
     name: '',
   },
-});
+})
 
 watch(
   () => state,
   (state, prevState) => {
-    console.log('not deep', state.attributes.name, prevState.attributes.name);
+    console.log('not deep', state.attributes.name, prevState.attributes.name)
   }
-);
+)
 
 watch(
   () => state,
   (state, prevState) => {
-    console.log('deep', state.attributes.name, prevState.attributes.name);
+    console.log('deep', state.attributes.name, prevState.attributes.name)
   },
   { deep: true }
-);
+)
 
 // 直接给 `watch()` 传入一个响应式对象, 会隐式地创建一个深层侦听器
 watch(state, (state, prevState) => {
-  console.log('deep', state.attributes.name, prevState.attributes.name);
-});
+  console.log('deep', state.attributes.name, prevState.attributes.name)
+})
 
-state.attributes.name = 'Alex'; // Logs: "deep" "Alex" "Alex"
+state.attributes.name = 'Alex' // Logs: "deep" "Alex" "Alex"
 ```
 
 Watch effect:
@@ -1046,13 +1046,13 @@ Vue 会自动追踪副作用的依赖关系,
 自动分析出响应源 (自动追踪所有能访问到的响应式属性):
 
 ```ts
-const url = ref('https://...');
-const data = ref(null);
+const url = ref('https://...')
+const data = ref(null)
 
 watchEffect(async () => {
-  const response = await fetch(url.value);
-  data.value = await response.json();
-});
+  const response = await fetch(url.value)
+  data.value = await response.json()
+})
 ```
 
 Watch post effect:
@@ -1064,15 +1064,15 @@ DOM 仍为旧状态,
 ```ts
 watch(source, callback, {
   flush: 'post',
-});
+})
 
 watchEffect(callback, {
   flush: 'post',
-});
+})
 
 watchPostEffect(() => {
   /* 在 Vue 更新后执行 */
-});
+})
 ```
 
 ### Composable Functions
@@ -1081,52 +1081,52 @@ watchPostEffect(() => {
 该对象在组件中被解构为 ref 之后仍可以保持响应性:
 
 ```ts
-import { isRef, ref, unref, watchEffect } from 'vue';
+import { isRef, ref, unref, watchEffect } from 'vue'
 
 export function useFetch(url) {
-  const data = ref(null);
-  const error = ref(null);
+  const data = ref(null)
+  const error = ref(null)
 
   function doFetch() {
     // 在请求之前重设状态...
-    data.value = null;
-    error.value = null;
+    data.value = null
+    error.value = null
     // unref() 解包可能为 ref 的值
     fetch(unref(url))
       .then(res => res.json())
       .then(json => (data.value = json))
-      .catch(err => (error.value = err));
+      .catch(err => (error.value = err))
   }
 
   if (isRef(url)) {
     // 若输入的 URL 是一个 ref
     // 那么启动一个响应式的请求
-    watchEffect(doFetch);
+    watchEffect(doFetch)
   } else {
     // 否则只请求一次
     // 避免监听器的额外开销
-    doFetch();
+    doFetch()
   }
 
-  return { data, error };
+  return { data, error }
 }
 
 export function App() {
-  const { data, error } = useFetch('https://...');
+  const { data, error } = useFetch('https://...')
 }
 ```
 
 ```ts
-import { produce } from 'immer';
-import { shallowRef } from 'vue';
+import { produce } from 'immer'
+import { shallowRef } from 'vue'
 
 export function useImmer(baseState) {
-  const state = shallowRef(baseState);
+  const state = shallowRef(baseState)
   const update = updater => {
-    state.value = produce(state.value, updater);
-  };
+    state.value = produce(state.value, updater)
+  }
 
-  return [state, update];
+  return [state, update]
 }
 ```
 
@@ -1215,31 +1215,31 @@ export function useImmer(baseState) {
 
 <script>
   function enter(el, done) {
-    el.classList.add('before-enter');
+    el.classList.add('before-enter')
 
     setTimeout(() => {
-      el.classList.remove('before-enter');
-      el.classList.add('enter');
-    }, 20);
+      el.classList.remove('before-enter')
+      el.classList.add('enter')
+    }, 20)
 
     setTimeout(() => {
-      el.classList.remove('enter');
-      done();
-    }, 500);
+      el.classList.remove('enter')
+      done()
+    }, 500)
   }
 
   function leave(el, done) {
-    el.classList.add('before-leave');
+    el.classList.add('before-leave')
 
     setTimeout(() => {
-      el.classList.remove('before-leave');
-      el.classList.add('leave');
-    }, 0);
+      el.classList.remove('before-leave')
+      el.classList.add('leave')
+    }, 0)
 
     setTimeout(() => {
-      el.classList.remove('leave');
-      done();
-    }, 500);
+      el.classList.remove('leave')
+      done()
+    }, 500)
   }
 </script>
 ```
@@ -1344,18 +1344,18 @@ export default {
   methods: {
     beforeEnter(el) {},
     enter(el, done) {
-      done();
+      done()
     },
     afterEnter(el) {},
     enterCancelled(el) {},
     beforeLeave(el) {},
     leave(el, done) {
-      done();
+      done()
     },
     afterLeave(el) {},
     leaveCancelled(el) {},
   },
-};
+}
 ```
 
 ```html
@@ -1366,13 +1366,13 @@ export default {
 </template>
 
 <script>
-  import gsap from 'gsap';
+  import gsap from 'gsap'
 
   export default {
     methods: {
       beforeEnter(el) {
-        el.style.opacity = 0;
-        el.style.transform = 'scale(0, 0)';
+        el.style.opacity = 0
+        el.style.transform = 'scale(0, 0)'
       },
       enter(el, done) {
         gsap.to(el, {
@@ -1381,10 +1381,10 @@ export default {
           scale: 1,
           ease: 'bounce.inOut',
           onComplete: done,
-        });
+        })
       },
     },
-  };
+  }
 </script>
 ```
 
@@ -1397,46 +1397,46 @@ const Transition = {
   name: 'Transition',
   setup(props, { slots }) {
     return () => {
-      const innerVNode = slots.default();
+      const innerVNode = slots.default()
 
       innerVNode.transition = {
         beforeEnter(el) {
-          el.classList.add('enter-from');
-          el.classList.add('enter-active');
+          el.classList.add('enter-from')
+          el.classList.add('enter-active')
         },
         enter(el) {
           nextFrame(() => {
-            el.classList.remove('enter-from');
-            el.classList.add('enter-to');
+            el.classList.remove('enter-from')
+            el.classList.add('enter-to')
 
             el.addEventListener('transitionend', () => {
-              el.classList.remove('enter-to');
-              el.classList.remove('enter-active');
-            });
-          });
+              el.classList.remove('enter-to')
+              el.classList.remove('enter-active')
+            })
+          })
         },
         leave(el, performRemove) {
-          el.classList.add('leave-from');
-          el.classList.add('leave-active');
+          el.classList.add('leave-from')
+          el.classList.add('leave-active')
 
           nextFrame(() => {
-            el.classList.remove('leave-from');
-            el.classList.add('leave-to');
+            el.classList.remove('leave-from')
+            el.classList.add('leave-to')
 
             el.addEventListener('transitionend', () => {
-              el.classList.remove('leave-to');
-              el.classList.remove('leave-active');
+              el.classList.remove('leave-to')
+              el.classList.remove('leave-active')
 
-              performRemove();
-            });
-          });
+              performRemove()
+            })
+          })
         },
-      };
+      }
 
-      return innerVNode;
-    };
+      return innerVNode
+    }
   },
-};
+}
 ```
 
 #### Transition Module
@@ -1454,16 +1454,16 @@ export default {
   activate: _enter,
   remove(vnode: VNode, rm: Function) {
     if (vnode.data.show !== true) {
-      leave(vnode, rm);
+      leave(vnode, rm)
     } else {
-      rm();
+      rm()
     }
   },
-};
+}
 
 function _enter(_: any, vnode: VNodeWithData) {
   if (vnode.data.show !== true) {
-    enter(vnode);
+    enter(vnode)
   }
 }
 ```
@@ -1481,7 +1481,7 @@ const TransitionGroup = defineComponent({
   ),
 
   beforeMount() {
-    const update = this._update;
+    const update = this._update
     this._update = (vnode, hydrating) => {
       // force removing pass
       this.__patch__(
@@ -1489,59 +1489,59 @@ const TransitionGroup = defineComponent({
         this.kept,
         false, // hydrating
         true // removeOnly (!important, avoids unnecessary moves)
-      );
-      this._vnode = this.kept;
-      update.call(this, vnode, hydrating);
-    };
+      )
+      this._vnode = this.kept
+      update.call(this, vnode, hydrating)
+    }
   },
 
   updated() {
-    const children: Array<VNode> = this.prevChildren;
-    const moveClass: string = this.moveClass || `${this.name || 'v'}-move'`;
+    const children: Array<VNode> = this.prevChildren
+    const moveClass: string = this.moveClass || `${this.name || 'v'}-move'`
 
     if (!children.length || !this.hasMove(children[0].elm, moveClass)) {
-      return;
+      return
     }
 
     // we divide the work into three loops to avoid mixing DOM reads and writes
     // in each iteration - which helps prevent layout thrashing.
-    children.forEach(callPendingCbs);
-    children.forEach(recordPosition);
-    children.forEach(applyTranslation);
+    children.forEach(callPendingCbs)
+    children.forEach(recordPosition)
+    children.forEach(applyTranslation)
 
     // force reflow to put everything in position
     // assign to this to avoid being removed in tree-shaking
     // $flow-disable-line
-    this._reflow = document.body.offsetHeight;
+    this._reflow = document.body.offsetHeight
 
     children.forEach((c: VNode) => {
       if (c.data.moved) {
-        const el: any = c.elm;
-        const s: any = el.style;
-        addTransitionClass(el, moveClass);
-        s.transform = s.WebkitTransform = s.transitionDuration = '';
+        const el: any = c.elm
+        const s: any = el.style
+        addTransitionClass(el, moveClass)
+        s.transform = s.WebkitTransform = s.transitionDuration = ''
         el.addEventListener(
           transitionEndEvent,
           (el._moveCb = function cb(e) {
             if (e?.propertyName.endsWith('transform')) {
-              el.removeEventListener(transitionEndEvent, cb);
-              el._moveCb = null;
-              removeTransitionClass(el, moveClass);
+              el.removeEventListener(transitionEndEvent, cb)
+              el._moveCb = null
+              removeTransitionClass(el, moveClass)
             }
           })
-        );
+        )
       }
-    });
+    })
   },
 
   methods: {
     hasMove(el: any, moveClass: string): boolean {
       if (!hasTransition) {
-        return false;
+        return false
       }
 
       if (this._hasMove) {
-        return this._hasMove;
+        return this._hasMove
       }
 
       // Detect whether an element with the move class applied has
@@ -1549,64 +1549,64 @@ const TransitionGroup = defineComponent({
       // transition at this very moment, we make a clone of it and remove
       // all other transition classes applied to ensure only the move class
       // is applied.
-      const clone: HTMLElement = el.cloneNode();
+      const clone: HTMLElement = el.cloneNode()
 
       if (el._transitionClasses) {
         el._transitionClasses.forEach((cls: string) => {
-          removeClass(clone, cls);
-        });
+          removeClass(clone, cls)
+        })
       }
 
-      addClass(clone, moveClass);
-      clone.style.display = 'none';
-      this.$el.appendChild(clone);
-      const info: Object = getTransitionInfo(clone);
-      this.$el.removeChild(clone);
-      return (this._hasMove = info.hasTransform);
+      addClass(clone, moveClass)
+      clone.style.display = 'none'
+      this.$el.appendChild(clone)
+      const info: Object = getTransitionInfo(clone)
+      this.$el.removeChild(clone)
+      return (this._hasMove = info.hasTransform)
     },
   },
 
   render(h: Function) {
-    const tag: string = this.tag || this.$vnode.data.tag || 'span';
-    const map: Object = Object.create(null);
-    const prevChildren: Array<VNode> = (this.prevChildren = this.children);
-    const rawChildren: Array<VNode> = this.$slots.default || [];
-    const children: Array<VNode> = (this.children = []);
-    const transitionData: Object = extractTransitionData(this);
+    const tag: string = this.tag || this.$vnode.data.tag || 'span'
+    const map: Object = Object.create(null)
+    const prevChildren: Array<VNode> = (this.prevChildren = this.children)
+    const rawChildren: Array<VNode> = this.$slots.default || []
+    const children: Array<VNode> = (this.children = [])
+    const transitionData: Object = extractTransitionData(this)
 
     for (let i = 0; i < rawChildren.length; i++) {
-      const c: VNode = rawChildren[i];
+      const c: VNode = rawChildren[i]
 
       if (c.tag && c.key != null && String(c.key).indexOf('__vList') !== 0) {
-        children.push(c);
-        map[c.key] = c;
-        (c.data || (c.data = {})).transition = transitionData;
+        children.push(c)
+        map[c.key] = c
+        ;(c.data || (c.data = {})).transition = transitionData
       }
     }
 
     if (prevChildren) {
-      const kept: Array<VNode> = [];
-      const removed: Array<VNode> = [];
+      const kept: Array<VNode> = []
+      const removed: Array<VNode> = []
 
       for (let i = 0; i < prevChildren.length; i++) {
-        const c: VNode = prevChildren[i];
-        c.data.transition = transitionData;
-        c.data.pos = c.elm.getBoundingClientRect();
+        const c: VNode = prevChildren[i]
+        c.data.transition = transitionData
+        c.data.pos = c.elm.getBoundingClientRect()
 
         if (map[c.key]) {
-          kept.push(c);
+          kept.push(c)
         } else {
-          removed.push(c);
+          removed.push(c)
         }
       }
 
-      this.kept = h(tag, null, kept);
-      this.removed = removed;
+      this.kept = h(tag, null, kept)
+      this.removed = removed
     }
 
-    return h(tag, null, children);
+    return h(tag, null, children)
   },
-});
+})
 ```
 
 `Children` 从旧位置按照的缓动时间过渡偏移到当前目标位置,
@@ -1615,28 +1615,28 @@ const TransitionGroup = defineComponent({
 ```ts
 function callPendingCbs(c: VNode) {
   if (c.elm._moveCb) {
-    c.elm._moveCb();
+    c.elm._moveCb()
   }
   if (c.elm._enterCb) {
-    c.elm._enterCb();
+    c.elm._enterCb()
   }
 }
 
 function recordPosition(c: VNode) {
-  c.data.newPos = c.elm.getBoundingClientRect();
+  c.data.newPos = c.elm.getBoundingClientRect()
 }
 
 function applyTranslation(c: VNode) {
-  const oldPos = c.data.pos;
-  const newPos = c.data.newPos;
-  const dx = oldPos.left - newPos.left;
-  const dy = oldPos.top - newPos.top;
+  const oldPos = c.data.pos
+  const newPos = c.data.newPos
+  const dx = oldPos.left - newPos.left
+  const dy = oldPos.top - newPos.top
 
   if (dx || dy) {
-    c.data.moved = true;
-    const s = c.elm.style;
-    s.transform = s.WebkitTransform = `translate(${dx}px,${dy}px)`;
-    s.transitionDuration = '0s';
+    c.data.moved = true
+    const s = c.elm.style
+    s.transform = s.WebkitTransform = `translate(${dx}px,${dy}px)`
+    s.transitionDuration = '0s'
   }
 }
 ```
@@ -1651,15 +1651,15 @@ Vue.component('AsyncExample', function (resolve, reject) {
   // 这个特殊的 require 语法告诉 webpack
   // 自动将编译后的代码分割成不同的块,
   // 这些块将通过 Ajax 请求自动下载.
-  require(['./my-async-component'], resolve);
-});
+  require(['./my-async-component'], resolve)
+})
 
 // 2. Promise async component:
 Vue.component(
   'AsyncWebpackExample',
   // 该 `import` 函数返回一个 `Promise` 对象.
   () => import('./my-async-component')
-);
+)
 
 // 3. Advanced async component:
 const AsyncComp = () => ({
@@ -1673,8 +1673,8 @@ const AsyncComp = () => ({
   delay: 200,
   // 最长等待时间, 超出此时间则渲染错误组件, 默认: Infinity.
   timeout: 3000,
-});
-Vue.component('AsyncExample', AsyncComp);
+})
+Vue.component('AsyncExample', AsyncComp)
 ```
 
 #### Resolve Async Component
@@ -1697,9 +1697,9 @@ import {
   isUndef,
   once,
   remove,
-} from 'core/util/index';
-import { createEmptyVNode } from 'core/vdom/vnode';
-import { currentRenderingInstance } from 'core/instance/render';
+} from 'core/util/index'
+import { createEmptyVNode } from 'core/vdom/vnode'
+import { currentRenderingInstance } from 'core/instance/render'
 
 export function resolveAsyncComponent(
   factory: Function,
@@ -1707,129 +1707,129 @@ export function resolveAsyncComponent(
 ): Class<Component> | void {
   // 3.
   if (isTrue(factory.error) && isDef(factory.errorComp)) {
-    return factory.errorComp;
+    return factory.errorComp
   }
 
   if (isDef(factory.resolved)) {
-    return factory.resolved;
+    return factory.resolved
   }
 
-  const owner = currentRenderingInstance;
+  const owner = currentRenderingInstance
 
   if (owner && isDef(factory.owners) && !factory.owners.includes(owner)) {
     // already pending
-    factory.owners.push(owner);
+    factory.owners.push(owner)
   }
 
   // 3.
   if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
-    return factory.loadingComp;
+    return factory.loadingComp
   }
 
   if (owner && !isDef(factory.owners)) {
-    const owners = (factory.owners = [owner]);
-    let sync = true;
-    let timerLoading = null;
-    let timerTimeout = null;
+    const owners = (factory.owners = [owner])
+    let sync = true
+    let timerLoading = null
+    let timerTimeout = null
 
-    owner.$on('hook:destroyed', () => remove(owners, owner));
+    owner.$on('hook:destroyed', () => remove(owners, owner))
 
     const forceRender = (renderCompleted: boolean) => {
       for (let i = 0, l = owners.length; i < l; i++) {
-        owners[i].$forceUpdate();
+        owners[i].$forceUpdate()
       }
 
       if (renderCompleted) {
-        owners.length = 0;
+        owners.length = 0
 
         if (timerLoading !== null) {
-          clearTimeout(timerLoading);
-          timerLoading = null;
+          clearTimeout(timerLoading)
+          timerLoading = null
         }
 
         if (timerTimeout !== null) {
-          clearTimeout(timerTimeout);
-          timerTimeout = null;
+          clearTimeout(timerTimeout)
+          timerTimeout = null
         }
       }
-    };
+    }
 
     const resolve = once((res: Object | Class<Component>) => {
       // cache resolved
-      factory.resolved = ensureCtor(res, baseCtor);
+      factory.resolved = ensureCtor(res, baseCtor)
       // invoke callbacks only if this is not a synchronous resolve
       // (async resolves are shimmed as synchronous during SSR)
       if (!sync) {
-        forceRender(true);
+        forceRender(true)
       } else {
-        owners.length = 0;
+        owners.length = 0
       }
-    });
+    })
 
     const reject = once(reason => {
       if (isDef(factory.errorComp)) {
-        factory.error = true;
-        forceRender(true);
+        factory.error = true
+        forceRender(true)
       }
-    });
+    })
 
-    const res = factory(resolve, reject);
+    const res = factory(resolve, reject)
 
     if (isObject(res)) {
       if (isPromise(res)) {
         // 2. () => Promise.
         if (isUndef(factory.resolved)) {
-          res.then(resolve, reject);
+          res.then(resolve, reject)
         }
       } else if (isPromise(res.component)) {
         // 3.
-        res.component.then(resolve, reject);
+        res.component.then(resolve, reject)
 
         if (isDef(res.error)) {
-          factory.errorComp = ensureCtor(res.error, baseCtor);
+          factory.errorComp = ensureCtor(res.error, baseCtor)
         }
 
         if (isDef(res.loading)) {
-          factory.loadingComp = ensureCtor(res.loading, baseCtor);
+          factory.loadingComp = ensureCtor(res.loading, baseCtor)
 
           if (res.delay === 0) {
-            factory.loading = true;
+            factory.loading = true
           } else {
             timerLoading = setTimeout(() => {
-              timerLoading = null;
+              timerLoading = null
 
               if (isUndef(factory.resolved) && isUndef(factory.error)) {
-                factory.loading = true;
-                forceRender(false);
+                factory.loading = true
+                forceRender(false)
               }
-            }, res.delay || 200);
+            }, res.delay || 200)
           }
         }
 
         if (isDef(res.timeout)) {
           timerTimeout = setTimeout(() => {
-            timerTimeout = null;
+            timerTimeout = null
 
             if (isUndef(factory.resolved)) {
-              reject(null);
+              reject(null)
             }
-          }, res.timeout);
+          }, res.timeout)
         }
       }
     }
 
-    sync = false;
+    sync = false
     // return in case resolved synchronously
-    return factory.loading ? factory.loadingComp : factory.resolved;
+    return factory.loading ? factory.loadingComp : factory.resolved
   }
 }
 
 function ensureCtor(comp: any, base) {
   if (comp.__esModule || (hasSymbol && comp[Symbol.toStringTag] === 'Module')) {
-    comp = comp.default;
+    comp = comp.default
   }
 
-  return isObject(comp) ? base.extend(comp) : comp;
+  return isObject(comp) ? base.extend(comp) : comp
 }
 
 function createAsyncPlaceholder(
@@ -1839,10 +1839,10 @@ function createAsyncPlaceholder(
   children: ?Array<VNode>,
   tag: ?string
 ): VNode {
-  const node = createEmptyVNode();
-  node.asyncFactory = factory;
-  node.asyncMeta = { data, context, children, tag };
-  return node;
+  const node = createEmptyVNode()
+  node.asyncFactory = factory
+  node.asyncMeta = { data, context, children, tag }
+  return node
 }
 ```
 
@@ -1857,47 +1857,45 @@ function defineAsyncComponent({
   loadingComponent,
   errorComponent,
 }) {
-  let InnerComponent = null;
+  let InnerComponent = null
 
   return {
     name: 'AsyncComponentWrapper',
     setup() {
-      const loaded = ref(false);
-      const error = shallowRef(null);
-      let timer = null;
+      const loaded = ref(false)
+      const error = shallowRef(null)
+      let timer = null
 
       loader()
         .then(Component => {
-          InnerComponent = Component;
-          loaded.value = true;
+          InnerComponent = Component
+          loaded.value = true
         })
-        .catch(err => (error.value = err));
+        .catch(err => (error.value = err))
 
       if (timeout) {
         timer = setTimeout(() => {
-          const err = new Error(
-            `Async component timed out after ${timeout}ms.`
-          );
-          error.value = err;
-        }, timeout);
+          const err = new Error(`Async component timed out after ${timeout}ms.`)
+          error.value = err
+        }, timeout)
       }
 
-      onUnmounted(() => clearTimeout(timer));
+      onUnmounted(() => clearTimeout(timer))
 
-      const placeholder = { type: Text, children: '' };
+      const placeholder = { type: Text, children: '' }
 
       // Return render function.
       return () => {
         if (loaded.value) {
-          return { type: InnerComponent };
+          return { type: InnerComponent }
         } else if (error.value && errorComponent) {
-          return { type: errorComponent };
+          return { type: errorComponent }
         } else {
-          return loadingComponent ? { type: loadingComponent } : placeholder;
+          return loadingComponent ? { type: loadingComponent } : placeholder
         }
-      };
+      }
     },
-  };
+  }
 }
 ```
 
@@ -1906,9 +1904,9 @@ function defineAsyncComponent({
 ```html
 <!-- Events.vue -->
 <script setup lang="ts">
-  import { getEvents } from '@/services';
-  import type { Event } from '@/services';
-  const events: Event[] = await getEvents();
+  import { getEvents } from '@/services'
+  import type { Event } from '@/services'
+  const events: Event[] = await getEvents()
 </script>
 ```
 
@@ -1947,36 +1945,36 @@ const KeepAlive = defineComponent({
   },
 
   created() {
-    this.cache = Object.create(null);
-    this.keys = [];
+    this.cache = Object.create(null)
+    this.keys = []
   },
 
   mounted() {
     this.$watch('include', val => {
-      pruneCache(this, name => matches(val, name));
-    });
+      pruneCache(this, name => matches(val, name))
+    })
     this.$watch('exclude', val => {
-      pruneCache(this, name => !matches(val, name));
-    });
+      pruneCache(this, name => !matches(val, name))
+    })
   },
 
   unmounted() {
     for (const key in this.cache) {
-      pruneCacheEntry(this.cache, key, this.keys);
+      pruneCacheEntry(this.cache, key, this.keys)
     }
   },
 
   render() {
     // eslint-disable-next-line vue/require-slots-as-functions
-    const slot = this.$slots.default;
-    const vnode: VNode = getFirstComponentChild(slot);
+    const slot = this.$slots.default
+    const vnode: VNode = getFirstComponentChild(slot)
     const componentOptions: ?VNodeComponentOptions =
-      vnode && vnode.componentOptions;
+      vnode && vnode.componentOptions
 
     if (componentOptions) {
       // check pattern
-      const name: ?string = getComponentName(componentOptions);
-      const { include, exclude } = this;
+      const name: ?string = getComponentName(componentOptions)
+      const { include, exclude } = this
 
       if (
         // not included
@@ -1984,39 +1982,39 @@ const KeepAlive = defineComponent({
         // excluded
         (exclude && name && matches(exclude, name))
       ) {
-        return vnode;
+        return vnode
       }
 
-      const { cache, keys } = this;
+      const { cache, keys } = this
       const key: ?string =
         vnode.key == null
           ? // same constructor may get registered as different local components
             // so cid alone is not enough (#3269)
             componentOptions.Ctor.cid +
             (componentOptions.tag ? `::${componentOptions.tag}` : '')
-          : vnode.key;
+          : vnode.key
 
       if (cache[key]) {
-        vnode.componentInstance = cache[key].componentInstance;
+        vnode.componentInstance = cache[key].componentInstance
         // make current key freshest
-        remove(keys, key);
-        keys.push(key);
+        remove(keys, key)
+        keys.push(key)
       } else {
-        cache[key] = vnode;
-        keys.push(key);
+        cache[key] = vnode
+        keys.push(key)
 
         // prune oldest entry
         if (this.max && keys.length > parseInt(this.max)) {
-          pruneCacheEntry(cache, keys[0], keys, this._vnode);
+          pruneCacheEntry(cache, keys[0], keys, this._vnode)
         }
       }
 
-      vnode.data.keepAlive = true;
+      vnode.data.keepAlive = true
     }
 
-    return vnode || (slot && slot[0]);
+    return vnode || (slot && slot[0])
   },
-});
+})
 ```
 
 ```ts
@@ -2027,52 +2025,52 @@ const KeepAlive = {
     exclude: RegExp,
   },
   setup(props, { slots }) {
-    const instance = currentInstance;
-    const { move, createElement } = instance.keepAliveCtx;
+    const instance = currentInstance
+    const { move, createElement } = instance.keepAliveCtx
 
-    const storageContainer = createElement('div');
+    const storageContainer = createElement('div')
 
     instance._deActivate = vnode => {
-      move(vnode, storageContainer);
-    };
+      move(vnode, storageContainer)
+    }
 
     instance._activate = (vnode, container, anchor) => {
-      move(vnode, container, anchor);
-    };
+      move(vnode, container, anchor)
+    }
 
     return () => {
-      const rawVNode = slots.default();
+      const rawVNode = slots.default()
 
       if (typeof rawVNode.type !== 'object') {
-        return rawVNode;
+        return rawVNode
       }
 
-      const name = rawVNode.type.name;
+      const name = rawVNode.type.name
 
       if (
         name &&
         ((props.include && !props.include.test(name)) ||
           (props.exclude && props.exclude.test(name)))
       ) {
-        return rawVNode;
+        return rawVNode
       }
 
-      const cachedVNode = cache.get(rawVNode.type);
+      const cachedVNode = cache.get(rawVNode.type)
 
       if (cachedVNode) {
-        rawVNode.component = cachedVNode.component;
-        rawVNode.keptAlive = true;
+        rawVNode.component = cachedVNode.component
+        rawVNode.keptAlive = true
       } else {
-        cache.set(rawVNode.type, rawVNode);
+        cache.set(rawVNode.type, rawVNode)
       }
 
-      rawVNode.shouldKeepAlive = true;
-      rawVNode.keepAliveInstance = instance;
+      rawVNode.shouldKeepAlive = true
+      rawVNode.keepAliveInstance = instance
 
-      return rawVNode;
-    };
+      return rawVNode
+    }
   },
-};
+}
 ```
 
 ### Teleport
@@ -2081,29 +2079,29 @@ const KeepAlive = {
 const Teleport = {
   __isTeleport: true,
   process(n1, n2, container, anchor, internals) {
-    const { patch, patchChildren, move } = internals;
+    const { patch, patchChildren, move } = internals
 
     if (!n1) {
       // 挂载
       const target =
         typeof n2.props.to === 'string'
           ? document.querySelector(n2.props.to)
-          : n2.props.to;
-      n2.children.forEach(c => patch(null, c, target, anchor));
+          : n2.props.to
+      n2.children.forEach(c => patch(null, c, target, anchor))
     } else {
       // 更新
-      patchChildren(n1, n2, container);
+      patchChildren(n1, n2, container)
 
       if (n2.props.to !== n1.props.to) {
         const newTarget =
           typeof n2.props.to === 'string'
             ? document.querySelector(n2.props.to)
-            : n2.props.to;
-        n2.children.forEach(c => move(c, newTarget));
+            : n2.props.to
+        n2.children.forEach(c => move(c, newTarget))
       }
     }
   },
-};
+}
 ```
 
 ### Client Only
@@ -2111,17 +2109,17 @@ const Teleport = {
 ```ts
 const ClientOnly = defineComponent({
   setup(_, { slots }) {
-    const show = ref(false);
+    const show = ref(false)
 
     // `onMounted()` hooks 只在客户端执行,
     // 服务端渲染时不执行.
     onMounted(() => {
-      show.value = true;
-    });
+      show.value = true
+    })
 
-    return () => (show.value && slots.default ? slots.default() : null);
+    return () => (show.value && slots.default ? slots.default() : null)
   },
-});
+})
 ```
 
 ## Vue Router
@@ -2131,9 +2129,9 @@ const ClientOnly = defineComponent({
 ### Basic Routes
 
 ```ts
-import type { RouteRecordRaw } from 'vue-router';
-import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue';
+import type { RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import Home from '../views/Home.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -2147,23 +2145,23 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
-];
+]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-});
+})
 
-export default router;
+export default router
 ```
 
 ```ts
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
 
-createApp(App).use(store).use(router).mount('#app');
+createApp(App).use(store).use(router).mount('#app')
 ```
 
 ### Dynamic Routes
@@ -2197,9 +2195,9 @@ we cannot directly access `this.$router` or `this.$route` anymore.
 #### Routes Composition API
 
 ```ts
-import type { RouteRecordRaw } from 'vue-router';
-import { createRouter, createWebHistory } from 'vue-router';
-import EventDetails from '../views/EventDetails.vue';
+import type { RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import EventDetails from '../views/EventDetails.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -2207,33 +2205,33 @@ const routes: Array<RouteRecordRaw> = [
     name: 'EventDetails',
     component: EventDetails,
   },
-];
+]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-});
+})
 
-export default router;
+export default router
 ```
 
 ```html
 <script setup lang="ts">
-  import { useRoute } from 'vue-router';
-  import { getEvent } from '@/services';
-  import type { Event } from '@/services';
+  import { useRoute } from 'vue-router'
+  import { getEvent } from '@/services'
+  import type { Event } from '@/services'
 
-  const { params } = useRoute();
-  const event: Event = await getEvent(Number.parseInt(params.id));
+  const { params } = useRoute()
+  const event: Event = await getEvent(Number.parseInt(params.id))
 </script>
 ```
 
 #### Passing Routes Props
 
 ```ts
-import type { RouteRecordRaw } from 'vue-router';
-import { createRouter, createWebHistory } from 'vue-router';
-import EventDetails from '../views/EventDetails.vue';
+import type { RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import EventDetails from '../views/EventDetails.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -2242,23 +2240,23 @@ const routes: Array<RouteRecordRaw> = [
     component: EventDetails,
     props: true /* Passing route props to component */,
   },
-];
+]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-});
+})
 
-export default router;
+export default router
 ```
 
 ```html
 <script setup lang="ts">
-  import { getEvent } from '@/services';
-  import type { Event } from '@/services';
+  import { getEvent } from '@/services'
+  import type { Event } from '@/services'
 
-  const props = defineProps<{ id: string }>();
-  const event: Event = await getEvent(Number.parseInt(props.id));
+  const props = defineProps<{ id: string }>()
+  const event: Event = await getEvent(Number.parseInt(props.id))
 </script>
 ```
 
@@ -2271,7 +2269,7 @@ const routes = [
     name: 'User',
     component: User,
   },
-];
+]
 ```
 
 ```html
@@ -2281,7 +2279,7 @@ const routes = [
 ```
 
 ```ts
-router.push({ name: 'User', params: { username: 'sabertaz' } });
+router.push({ name: 'User', params: { username: 'sabertaz' } })
 ```
 
 ### Nested Routes
@@ -2301,7 +2299,7 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
-];
+]
 ```
 
 ```html
@@ -2322,7 +2320,7 @@ const routes: Array<RouteRecordRaw> = [
 ```html
 <!-- Task.vue -->
 <script setup lang="ts">
-  defineProps<{ id: string }>();
+  defineProps<{ id: string }>()
 </script>
 
 <template>
@@ -2333,68 +2331,68 @@ const routes: Array<RouteRecordRaw> = [
 ### Programmatic Routes Navigation
 
 ```ts
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
 function App() {
-  const router = useRouter();
+  const router = useRouter()
 }
 ```
 
 #### Navigate to Different Location
 
 ```ts
-const username = 'eduardo';
+const username = 'eduardo'
 // we can manually build the url but we will have to handle the encoding ourselves
-router.push(`/user/${username}`); // -> /user/eduardo
+router.push(`/user/${username}`) // -> /user/eduardo
 // same as
-router.push({ path: `/user/${username}` }); // -> /user/eduardo
+router.push({ path: `/user/${username}` }) // -> /user/eduardo
 // if possible use `name` and `params` to benefit from automatic URL encoding
-router.push({ name: 'user', params: { username } }); // -> /user/eduardo
+router.push({ name: 'user', params: { username } }) // -> /user/eduardo
 // `params` cannot be used alongside `path`
-router.push({ path: '/user', params: { username } }); // -> /user
+router.push({ path: '/user', params: { username } }) // -> /user
 ```
 
 ```ts
 // literal string path
-router.push('/users/eduardo');
+router.push('/users/eduardo')
 
 // object with path
-router.push({ path: '/users/eduardo' });
+router.push({ path: '/users/eduardo' })
 
 // named route with params to let the router build the url
-router.push({ name: 'user', params: { username: 'eduardo' } });
+router.push({ name: 'user', params: { username: 'eduardo' } })
 
 // with query, resulting in /register?plan=private
-router.push({ path: '/register', query: { plan: 'private' } });
+router.push({ path: '/register', query: { plan: 'private' } })
 
 // with hash, resulting in /about#team
-router.push({ path: '/about', hash: '#team' });
+router.push({ path: '/about', hash: '#team' })
 ```
 
 #### Replace Current Location
 
 ```ts
 // replace current location
-router.push({ path: '/home', replace: true });
+router.push({ path: '/home', replace: true })
 // equivalent to
-router.replace({ path: '/home' });
+router.replace({ path: '/home' })
 ```
 
 #### Traverse Routes History
 
 ```ts
 // go forward by one record, the same as router.forward()
-router.go(1);
+router.go(1)
 
 // go back by one record, the same as router.back()
-router.go(-1);
+router.go(-1)
 
 // go forward by 3 records
-router.go(3);
+router.go(3)
 
 // fails silently if there aren't that many records
-router.go(-100);
-router.go(100);
+router.go(-100)
+router.go(100)
 ```
 
 ### Navigation Guard Routes
@@ -2408,10 +2406,10 @@ const routes = [
     component: UserDetails,
     beforeEnter: (to, from) => {
       // reject the navigation
-      return false;
+      return false
     },
   },
-];
+]
 ```
 
 :::caution
@@ -2426,33 +2424,33 @@ don't trigger `beforeEnter` guards.
 
 ```ts
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' });
-  else next();
-});
+  if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+  else next()
+})
 ```
 
 ```ts
 router.beforeResolve(async to => {
   if (to.meta.requiresCamera) {
     try {
-      await askForCameraPermission();
+      await askForCameraPermission()
     } catch (error) {
       if (error instanceof NotAllowedError) {
         // Handle the error and then cancel the navigation.
-        return false;
+        return false
       } else {
         // Unexpected error: cancel the navigation and pass error to global handler.
-        throw error;
+        throw error
       }
     }
   }
-});
+})
 ```
 
 ```ts
 router.afterEach((to, from, failure) => {
-  if (!failure) sendToAnalytics(to.fullPath);
-});
+  if (!failure) sendToAnalytics(to.fullPath)
+})
 ```
 
 #### Full Navigation Resolution Flow
@@ -2478,56 +2476,56 @@ router.afterEach((to, from, failure) => {
 
 ```ts
 // store.ts
-import type { InjectionKey } from 'vue';
-import type { Store } from 'vuex';
-import { createStore, useStore } from 'vuex';
+import type { InjectionKey } from 'vue'
+import type { Store } from 'vuex'
+import { createStore, useStore } from 'vuex'
 
 // define your typings for the store state
 interface State {
-  count: number;
+  count: number
 }
 
 // define injection key
-const key: InjectionKey<Store<State>> = Symbol('key');
+const key: InjectionKey<Store<State>> = Symbol('key')
 
 const store = createStore<State>({
   state: {
     count: 0,
   },
-});
+})
 
-const useAppStore = () => useStore<State>(key);
+const useAppStore = () => useStore<State>(key)
 
-export { key, useAppStore };
-export type { State };
-export default store;
+export { key, useAppStore }
+export type { State }
+export default store
 ```
 
 ```ts
 // main.ts
-import { createApp } from 'vue';
-import store, { key } from './store';
+import { createApp } from 'vue'
+import store, { key } from './store'
 
-const app = createApp({});
+const app = createApp({})
 
 // pass the injection key
-app.use(store, key);
+app.use(store, key)
 
-app.mount('#app');
+app.mount('#app')
 ```
 
 ```ts
 // in a vue component
-import { useAppStore } from './store';
+import { useAppStore } from './store'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   setup() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const store = useAppStore();
-    const count = store.state.count; // typed as number
+    const store = useAppStore()
+    const count = store.state.count // typed as number
   },
-};
+}
 ```
 
 ## Vite
@@ -2535,9 +2533,9 @@ export default {
 ### Basic Configuration
 
 ```ts
-import path from 'node:path';
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import path from 'node:path'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   base: '/awesome-web/vue-trello/',
@@ -2547,7 +2545,7 @@ export default defineConfig({
       src: path.resolve(__dirname, './src'),
     },
   },
-});
+})
 ```
 
 ### Environment Variables and Modes
@@ -2561,17 +2559,17 @@ export default defineConfig({
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-});
+})
 ```
 
 ```ts
 interface ImportMetaEnv extends Readonly<Record<string, string>> {
-  readonly VITE_APP_TITLE: string;
+  readonly VITE_APP_TITLE: string
   // More environment variables...
 }
 
 interface ImportMeta {
-  readonly env: ImportMetaEnv;
+  readonly env: ImportMetaEnv
 }
 ```
 
@@ -2624,12 +2622,12 @@ body {
 
 ```ts
 // main.js
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
 
 // import styles
-import '@/styles/site.scss';
+import '@/styles/site.scss'
 ```
 
 ```ts
@@ -2642,7 +2640,7 @@ module.exports = {
       },
     },
   },
-};
+}
 ```
 
 ## Vue Best Practice

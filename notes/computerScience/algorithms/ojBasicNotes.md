@@ -45,25 +45,25 @@ getline(cin/sin, strbuf)
 ```ts
 const getNext = (p: string): number[] => {
   // next[0] = -1
-  const next: number[] = [-1];
+  const next: number[] = [-1]
 
   // maxLen = next[0] = -1
   for (let i = 0, maxLen = -1; i < p.length - 1; ) {
     if (maxLen === -1 || p[i] === p[maxLen]) {
       // p[i] === p[maxLen] => next[i + 1] = next[i] + 1 = maxLen + 1.
-      i++;
-      maxLen++;
-      next[i] = maxLen;
+      i++
+      maxLen++
+      next[i] = maxLen
     } else {
       // Back to find shorter common prefix and suffix.
-      maxLen = next[maxLen];
+      maxLen = next[maxLen]
     }
   }
 
-  return next;
-};
+  return next
+}
 
-console.log(getNext('abcdabc'));
+console.log(getNext('abcdabc'))
 // [-1, 0, 0, 0, 0, 1, 2]
 ```
 
@@ -71,43 +71,43 @@ console.log(getNext('abcdabc'));
 // 改进版
 const getNext = (p: string): number[] => {
   // next[0] = -1
-  const next: number[] = [-1];
+  const next: number[] = [-1]
 
   // maxLen = next[0] = -1
   for (let i = 0, maxLen = -1; i < p.length - 1; ) {
     if (maxLen === -1 || p[i] === p[maxLen]) {
-      i++;
-      maxLen++;
+      i++
+      maxLen++
       // 改进
-      if (p[i] !== p[maxLen]) next[i] = maxLen;
-      else next[i] = next[maxLen];
+      if (p[i] !== p[maxLen]) next[i] = maxLen
+      else next[i] = next[maxLen]
     } else {
       // Back to find shorter common prefix and suffix.
-      maxLen = next[maxLen];
+      maxLen = next[maxLen]
     }
   }
 
-  return next;
-};
+  return next
+}
 ```
 
 ```ts
 const search = (s: string, p: string): number => {
-  let i = 0;
-  let j = 0;
+  let i = 0
+  let j = 0
 
   while (i < s.length && j < p.length) {
     if (j === -1 || s[i] === p[j]) {
-      i++;
-      j++;
+      i++
+      j++
     } else {
-      j = next[j];
+      j = next[j]
     }
   }
 
-  if (j === p.length) return i - j;
-  else return -1;
-};
+  if (j === p.length) return i - j
+  else return -1
+}
 ```
 
 ### Rotate String Problem
@@ -149,22 +149,22 @@ string left_rotate(string str, int offset) {
 > LeetCode 74/240
 
 ```ts
-let lo = 0;
-let hi = nums.length - 1;
+let lo = 0
+let hi = nums.length - 1
 
 while (lo <= hi) {
-  const mid = lo + ((hi - lo) >> 1);
-  if (nums[mid] === target) return nums[mid];
-  else if (nums[mid] < target) lo = mid + 1;
-  else hi = mid - 1;
+  const mid = lo + ((hi - lo) >> 1)
+  if (nums[mid] === target) return nums[mid]
+  else if (nums[mid] < target) lo = mid + 1
+  else hi = mid - 1
 }
 ```
 
 ### Max Min Search Problem
 
 ```ts
-Math.min(...nums);
-Math.max(...nums);
+Math.min(...nums)
+Math.max(...nums)
 ```
 
 在某些问题中, 要求满足条件的 max/min, 且可以轻易地判定某个值是否满足该条件, 则可利用二分法进行值的枚举
@@ -254,8 +254,8 @@ int query(int a, int b, int k, int l, int r) {
 
 ```ts
 while (n) {
-  const bit = n % radix;
-  n = Math.floor(n / radix);
+  const bit = n % radix
+  n = Math.floor(n / radix)
 }
 ```
 
@@ -558,14 +558,14 @@ Slow and fast pointer:
 单调栈: 寻找下一个更小/更大 (Smaller/Greater) 元素.
 
 ```ts
-const stack: number[] = [];
-const greaterMap = new Map<number, number>();
+const stack: number[] = []
+const greaterMap = new Map<number, number>()
 
 for (const num of nums) {
   while (stack.length && stack[stack.length - 1] < num) {
-    greaterMap.set(stack.pop() as number, num);
+    greaterMap.set(stack.pop() as number, num)
   }
-  stack.push(num);
+  stack.push(num)
 }
 ```
 

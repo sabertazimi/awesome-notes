@@ -285,14 +285,14 @@ body {
 
 ```ts
 $('#myTabs a').click(function (e) {
-  e.preventDefault();
-  $(this).tab('show');
-});
+  e.preventDefault()
+  $(this).tab('show')
+})
 
-$('#myTabs a[href="#profile"]').tab('show'); // Select tab by name
-$('#myTabs a:first').tab('show'); // Select first tab
-$('#myTabs a:last').tab('show'); // Select last tab
-$('#myTabs li:eq(2) a').tab('show'); // Select third tab (0-indexed)
+$('#myTabs a[href="#profile"]').tab('show') // Select tab by name
+$('#myTabs a:first').tab('show') // Select first tab
+$('#myTabs a:last').tab('show') // Select last tab
+$('#myTabs li:eq(2) a').tab('show') // Select third tab (0-indexed)
 ```
 
 ### Tab Pane JS Events
@@ -306,9 +306,9 @@ $('#myTabs li:eq(2) a').tab('show'); // Select third tab (0-indexed)
 
 ```ts
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-  const target = e.target; // newly activated tab
-  const relatedTarget = e.relatedTarget; // previous active tab
-});
+  const target = e.target // newly activated tab
+  const relatedTarget = e.relatedTarget // previous active tab
+})
 ```
 
 ## Collapse
@@ -996,8 +996,8 @@ min=”(number)” max=”(number)” step=”(步长:指定输入数字必须�
 ```ts
 // manually initialization
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip();
-});
+  $('[data-toggle="tooltip"]').tooltip()
+})
 ```
 
 ```html
@@ -1054,8 +1054,8 @@ $(function () {
 ```ts
 // manually initialization
 $(function () {
-  $('[data-toggle="popover"]').popover();
-});
+  $('[data-toggle="popover"]').popover()
+})
 ```
 
 ```html
@@ -1340,13 +1340,13 @@ Slide Show:
 // and starts cycling through items.
 $('.carousel').carousel({
   interval: 2000,
-});
+})
 
-$('.carousel').carousel('cycle');
-$('.carousel').carousel('pause');
-$('.carousel').carousel(number);
-$('.carousel').carousel('prev');
-$('.carousel').carousel('next');
+$('.carousel').carousel('cycle')
+$('.carousel').carousel('pause')
+$('.carousel').carousel(number)
+$('.carousel').carousel('prev')
+$('.carousel').carousel('next')
 ```
 
 ## Common Class

@@ -59,17 +59,17 @@ NgModule 为其中的组件提供了一个编译上下文环境.
 ### Props
 
 ```ts
-import { Input } from '@angular/core';
+import { Input } from '@angular/core'
 
 class InputComponent {
-  @Input() hero: Hero;
+  @Input() hero: Hero
 }
 ```
 
 private props
 
 ```ts
-import type { HeroService } from '../hero.service';
+import type { HeroService } from '../hero.service'
 
 class HeroComponent {
   constructor(private heroService: HeroService) {}
@@ -81,8 +81,8 @@ class HeroComponent {
 parent
 
 ```ts
-import type { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import type { OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-root',
@@ -92,7 +92,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {}
 
   displayCounter(count) {
-    console.log(count);
+    console.log(count)
   }
 }
 ```
@@ -100,7 +100,7 @@ export class AppComponent implements OnInit {
 child
 
 ```ts
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 
 @Component({
   selector: 'app-child',
@@ -109,12 +109,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   </button>`,
 })
 export class AppChildComponent {
-  @Output() valueChange: EventEmitter<number> = new EventEmitter();
-  counter = 0;
+  @Output() valueChange: EventEmitter<number> = new EventEmitter()
+  counter = 0
 
   handleClick() {
-    this.counter += 1;
-    this.valueChange.emit(this.counter);
+    this.counter += 1
+    this.valueChange.emit(this.counter)
   }
 }
 ```
@@ -124,7 +124,7 @@ export class AppChildComponent {
 Angular 只会绑定到组件的公共属性
 
 ```ts
-import type { MessageService } from '../message.service';
+import type { MessageService } from '../message.service'
 
 class MessageComponent {
   constructor(public messageService: MessageService) {}
@@ -230,17 +230,17 @@ Subject 既是可观察对象的数据源, 本身也是 Observable.
 
 ```ts
 // Create simple observable that emits three values
-const myObservable = of(1, 2, 3);
+const myObservable = of(1, 2, 3)
 
 // Create observer object
 const myObserver = {
   next: x => console.log(`Observer got a next value: ${x}`),
   error: err => console.error(`Observer got an error: ${err}`),
   complete: () => console.log('Observer got a complete notification'),
-};
+}
 
 // Execute with the observer object
-const subscription = myObservable.subscribe(myObserver);
+const subscription = myObservable.subscribe(myObserver)
 // Logs:
 // Observer got a next value: 1
 // Observer got a next value: 2
@@ -251,7 +251,7 @@ const subscription = myObservable.subscribe(myObserver);
 ```ts
 class Component {
   search(term: string): void {
-    this.searchTerms.next(term);
+    this.searchTerms.next(term)
   }
 
   ngOnInit(): void {
@@ -265,7 +265,7 @@ class Component {
       // switch to new search observable each time the term changes
       // return another Observable
       switchMap((term: string) => this.heroService.searchHeroes(term))
-    );
+    )
   }
 }
 ```
@@ -277,15 +277,15 @@ RxJS 提供了 pipe 辅助函数,
 它缓解了操作符不在原型上所带来的问题.
 
 ```ts
-import { map, take } from '@rxjs/operators';
-import { of } from '@rxjs/observable';
+import { map, take } from '@rxjs/operators'
+import { of } from '@rxjs/observable'
 
-map.call(take.call(of(1, 2, 3), 2), val => val + 2);
+map.call(take.call(of(1, 2, 3), 2), val => val + 2)
 
 of(1, 2, 3).pipe(
   take(2),
   map(val => val + 2)
-);
+)
 ```
 
 ### Operator
@@ -376,17 +376,17 @@ of(1, 2, 3).pipe(
 `<router-outlet>` 会告诉路由器要在哪里显示路由的视图.
 
 ```ts
-import { NgModule } from '@angular/core';
-import type { Routes } from '@angular/router';
-import { RouterModule } from '@angular/router';
-import { HeroesComponent } from './heroes/heroes.component';
+import { NgModule } from '@angular/core'
+import type { Routes } from '@angular/router'
+import { RouterModule } from '@angular/router'
+import { HeroesComponent } from './heroes/heroes.component'
 
 const routes: Routes = [
   {
     path: 'heroes',
     component: HeroesComponent,
   },
-];
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
@@ -439,7 +439,7 @@ same to `[ngStyle]`
 
 ```ts
 class Component {
-  currentClasses;
+  currentClasses
 
   setCurrentClasses() {
     // CSS classes: added/removed per current state of component properties
@@ -447,7 +447,7 @@ class Component {
       saveable: this.canSave,
       modified: !this.isUnchanged,
       special: this.isSpecial,
-    };
+    }
   }
 }
 ```

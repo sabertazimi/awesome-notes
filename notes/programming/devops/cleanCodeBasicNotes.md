@@ -50,11 +50,11 @@ it can be difficult to understand how that will affect other dependent modules:
 // BAD
 class Animal {
   constructor(name) {
-    super(name);
+    super(name)
   }
 
   getAnimalName() {
-    return this.name;
+    return this.name
   }
 
   saveAnimal(animal) {}
@@ -63,11 +63,11 @@ class Animal {
 // GOOD
 class Animal {
   constructor(name) {
-    super(name);
+    super(name)
   }
 
   getAnimalName() {
-    return this.name;
+    return this.name
   }
 }
 
@@ -104,97 +104,97 @@ open for extension, close for modification:
 ```ts
 class Coder {
   constructor(fullName, language, hobby, education, workplace, position) {
-    this.fullName = fullName;
-    this.language = language;
-    this.hobby = hobby;
-    this.education = education;
-    this.workplace = workplace;
-    this.position = position;
+    this.fullName = fullName
+    this.language = language
+    this.hobby = hobby
+    this.education = education
+    this.workplace = workplace
+    this.position = position
   }
 }
 
 // BAD: filter by any other new property have to change CodeFilter's code.
 class CoderFilter {
   filterByName(coders, fullName) {
-    return coders.filter(coder => coder.fullName === fullName);
+    return coders.filter(coder => coder.fullName === fullName)
   }
 
   filterByLang(coders, language) {
-    return coders.filter(coder => coder.language === language);
+    return coders.filter(coder => coder.language === language)
   }
 
   filterByHobby(coders, hobby) {
-    return coders.filter(coder => coder.hobby === hobby);
+    return coders.filter(coder => coder.hobby === hobby)
   }
 }
 
 // GOOD
 class CoderFilter {
   filterByProp = (array, propName, value) =>
-    array.filter(element => element[propName] === value);
+    array.filter(element => element[propName] === value)
 }
 ```
 
 ```ts
-const animals: Array<Animal> = [new Animal('lion'), new Animal('mouse')];
+const animals: Array<Animal> = [new Animal('lion'), new Animal('mouse')]
 
 function AnimalSound(a: Array<Animal>) {
   for (let i = 0; i <= a.length; i++) {
     if (a[i].name === 'lion') {
-      log('roar');
+      log('roar')
     }
 
     if (a[i].name === 'mouse') {
-      log('squeak');
+      log('squeak')
     }
   }
 }
 
-AnimalSound(animals);
+AnimalSound(animals)
 ```
 
 ```ts
 class Animal {
-  makeSound();
+  makeSound()
   // ...
 }
 
 class Lion extends Animal {
   makeSound() {
-    return 'roar';
+    return 'roar'
   }
 }
 
 class Squirrel extends Animal {
   makeSound() {
-    return 'squeak';
+    return 'squeak'
   }
 }
 
 class Snake extends Animal {
   makeSound() {
-    return 'hiss';
+    return 'hiss'
   }
 }
 
 function AnimalSound(a: Array<Animal>) {
   for (let i = 0; i <= a.length; i++) {
-    log(a[i].makeSound());
+    log(a[i].makeSound())
   }
 }
 
-AnimalSound(animals);
+AnimalSound(animals)
 ```
 
 ```ts
 class Discount {
   giveDiscount() {
     if (this.customer === 'fav') {
-      return this.price * 0.2;
+      return this.price * 0.2
     }
 
     if (this.customer === 'vip') {
-      return this.price * 0.4;
+      return this.price * 0.4
     }
   }
 }
@@ -203,13 +203,13 @@ class Discount {
 ```ts
 class VIPDiscount extends Discount {
   getDiscount() {
-    return super.getDiscount() * 2;
+    return super.getDiscount() * 2
   }
 }
 
 class SuperVIPDiscount extends VIPDiscount {
   getDiscount() {
-    return super.getDiscount() * 2;
+    return super.getDiscount() * 2
   }
 }
 ```
@@ -244,23 +244,23 @@ AnimalLegCount(animals);
 ```ts
 class Animal {
   LegCount() {
-    return 2;
+    return 2
   }
 }
 
 class Lion extends Animal {
   LegCount() {
-    return 4;
+    return 4
   }
 }
 
 function AnimalLegCount(a: Array<Animal>) {
   for (let i = 0; i <= a.length; i++) {
-    a[i].LegCount();
+    a[i].LegCount()
   }
 }
 
-AnimalLegCount(animals);
+AnimalLegCount(animals)
 ```
 
 #### Interface Segregation Principle
@@ -272,9 +272,9 @@ AnimalLegCount(animals);
 ```ts
 // BAD.
 interface IShape {
-  drawCircle();
-  drawSquare();
-  drawRectangle();
+  drawCircle()
+  drawSquare()
+  drawRectangle()
 }
 
 class Circle implements IShape {
@@ -323,23 +323,23 @@ class Rectangle implements IShape {
 ```ts
 // GOOD.
 interface IShape {
-  draw();
+  draw()
 }
 
 interface ICircle {
-  drawCircle();
+  drawCircle()
 }
 
 interface ISquare {
-  drawSquare();
+  drawSquare()
 }
 
 interface IRectangle {
-  drawRectangle();
+  drawRectangle()
 }
 
 interface ITriangle {
-  drawTriangle();
+  drawTriangle()
 }
 
 class Circle implements ICircle {
@@ -420,18 +420,18 @@ class Http {
   constructor(private xmlHttpService: XMLHttpService) {}
 
   get(url: string, options: any) {
-    this.xmlHttpService.request(url, 'GET');
+    this.xmlHttpService.request(url, 'GET')
   }
 
   post() {
-    this.xmlHttpService.request(url, 'POST');
+    this.xmlHttpService.request(url, 'POST')
   }
 }
 ```
 
 ```ts
 interface Connection {
-  request(url: string, opts: any);
+  request(url: string, opts: any)
 }
 
 // Abstraction not upon on details (but upon on abstractions)
@@ -439,20 +439,20 @@ class Http {
   constructor(private httpConnection: Connection) {}
 
   get(url: string, options: any) {
-    this.httpConnection.request(url, 'GET');
+    this.httpConnection.request(url, 'GET')
   }
 
   post() {
-    this.httpConnection.request(url, 'POST');
+    this.httpConnection.request(url, 'POST')
   }
 }
 
 class XMLHttpService implements Connection {
-  xhr = new XMLHttpRequest();
+  xhr = new XMLHttpRequest()
 
   request(url: string, opts: any) {
-    xhr.open();
-    xhr.send();
+    xhr.open()
+    xhr.send()
   }
 }
 
@@ -528,31 +528,31 @@ not calling a constructor directly.
 CoordinateSystem = {
   CARTESIAN: 0,
   POLAR: 1,
-};
+}
 
 class Point {
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
+    this.x = x
+    this.y = y
   }
 
   static get factory() {
-    return new PointFactory();
+    return new PointFactory()
   }
 }
 
 class PointFactory {
   static newCartesianPoint(x, y) {
-    return new Point(x, y);
+    return new Point(x, y)
   }
 
   static newPolarPoint(rho, theta) {
-    return new Point(rho * Math.cos(theta), rho * Math.sin(theta));
+    return new Point(rho * Math.cos(theta), rho * Math.sin(theta))
   }
 }
 
-const point = PointFactory.newPolarPoint(5, Math.PI / 2);
-const point2 = PointFactory.newCartesianPoint(5, 6);
+const point = PointFactory.newPolarPoint(5, Math.PI / 2)
+const point2 = PointFactory.newCartesianPoint(5, 6)
 ```
 
 #### Dynamic Factory Method Pattern
@@ -565,25 +565,25 @@ class Vehicle {
     color = 'white',
     speed = 0,
   } = {}) {
-    this.type = type;
-    this.state = state;
-    this.color = color;
-    this.speed = speed;
+    this.type = type
+    this.state = state
+    this.color = color
+    this.speed = speed
   }
 
   run(...args) {
     if (args.length === 0) {
-      console.log(`${this.type} - run with: ${this.speed}km/s`);
+      console.log(`${this.type} - run with: ${this.speed}km/s`)
     } else if (toString.apply(args[0]) === '[object Number]') {
-      this.speed = args[0];
+      this.speed = args[0]
     }
   }
 
   withColor(...args) {
     if (args.length === 0) {
-      console.log(`The color of this ${this.type} product is : ${this.color}`);
+      console.log(`The color of this ${this.type} product is : ${this.color}`)
     } else if (toString.apply(args[0]) === '[object String]') {
-      this.color = args[0];
+      this.color = args[0]
     }
   }
 
@@ -592,15 +592,15 @@ class Vehicle {
       typeof this[funcName] === 'function' ||
       typeof this.prototype[funcName] === 'function'
     ) {
-      delete this[funcName];
-      this.prototype[funcName] = newFunc;
+      delete this[funcName]
+      this.prototype[funcName] = newFunc
     }
   }
 
   addFeature(funcName, newFunc) {
     if (typeof this[funcName] === 'undefined') {
-      this[funcName] = newFunc;
-      this.prototype[funcName] = newFunc;
+      this[funcName] = newFunc
+      this.prototype[funcName] = newFunc
     }
   }
 }
@@ -613,8 +613,8 @@ class Car extends Vehicle {
     speed = 10,
     doors = 4,
   } = {}) {
-    super({ type, state, color, speed });
-    this.doors = doors;
+    super({ type, state, color, speed })
+    this.doors = doors
   }
 }
 
@@ -626,100 +626,100 @@ class Truck extends Vehicle {
     speed = 8,
     wheelSize = 'large',
   } = {}) {
-    super({ type, state, color, speed });
-    this.wheelSize = 'large';
+    super({ type, state, color, speed })
+    this.wheelSize = 'large'
   }
 }
 
 class VehicleFactory {
   constructor() {
-    this.VehicleClass = Car;
+    this.VehicleClass = Car
   }
 
   createVehicle(options) {
     switch (options.vehicleType) {
       case 'car':
-        this.VehicleClass = Car;
-        break;
+        this.VehicleClass = Car
+        break
       case 'truck':
-        this.VehicleClass = Truck;
-        break;
+        this.VehicleClass = Truck
+        break
       default:
-        break;
+        break
     }
 
-    return new this.VehicleClass(options);
+    return new this.VehicleClass(options)
   }
 }
 
 class CarFactory extends VehicleFactory {
   constructor() {
-    super();
-    this.VehicleClass = Car;
+    super()
+    this.VehicleClass = Car
   }
 }
 
 class TruckFactory extends VehicleFactory {
   constructor() {
-    super();
-    this.VehicleClass = Truck;
+    super()
+    this.VehicleClass = Truck
   }
 }
 
-const vehicleFactory = new VehicleFactory();
+const vehicleFactory = new VehicleFactory()
 const car = vehicleFactory.createVehicle({
   vehicleType: 'car',
   color: 'yellow',
   doors: 6,
-});
+})
 const movingTruck = vehicleFactory.createVehicle({
   vehicleType: 'truck',
   state: 'like new',
   color: 'red',
   wheelSize: 'small',
-});
+})
 
-const truckFactory = new TruckFactory();
+const truckFactory = new TruckFactory()
 const bigTruck = truckFactory.createVehicle({
   state: 'bad.',
   color: 'pink',
   wheelSize: 'so big',
-});
+})
 ```
 
 #### Asynchronous Factory Method Pattern
 
 ```ts
 class DataContainer {
-  #data;
-  #active = false;
+  #data
+  #active = false
 
   #init(data) {
-    this.#active = true;
-    this.#data = data;
-    return this;
+    this.#active = true
+    this.#data = data
+    return this
   }
 
   #check() {
     if (!this.#active) {
-      throw new TypeError('Not created by factory');
+      throw new TypeError('Not created by factory')
     }
   }
 
   getData() {
-    this.#check();
-    return `DATA: ${this.#data}`;
+    this.#check()
+    return `DATA: ${this.#data}`
   }
 
   static async create() {
-    const data = await Promise.resolve('downloaded');
-    return new this().#init(data);
+    const data = await Promise.resolve('downloaded')
+    return new this().#init(data)
   }
 }
 
 DataContainer.create().then(dc =>
   assert.equal(dc.getData(), 'DATA: downloaded')
-);
+)
 ```
 
 ### Abstract Factory Pattern
@@ -735,13 +735,13 @@ class Drink {
 
 class Tea extends Drink {
   consume() {
-    console.log('This is Tea');
+    console.log('This is Tea')
   }
 }
 
 class Coffee extends Drink {
   consume() {
-    console.log(`This is Coffee`);
+    console.log(`This is Coffee`)
   }
 }
 
@@ -751,64 +751,64 @@ class DrinkFactory {
 
 class TeaFactory extends DrinkFactory {
   makeTea() {
-    console.log(`Tea Created`);
-    return new Tea();
+    console.log(`Tea Created`)
+    return new Tea()
   }
 }
 
 class CoffeeFactory extends DrinkFactory {
   makeCoffee() {
-    console.log(`Coffee Created`);
-    return new Coffee();
+    console.log(`Coffee Created`)
+    return new Coffee()
   }
 }
 
-const teaDrinkFactory = new TeaFactory();
-const tea = teaDrinkFactory.makeTea();
-tea.consume();
+const teaDrinkFactory = new TeaFactory()
+const tea = teaDrinkFactory.makeTea()
+tea.consume()
 ```
 
 ```ts
 class AbstractVehicleFactory {
   constructor() {
     // Vehicle types
-    this.types = {};
+    this.types = {}
   }
 
   getVehicle(type, customizations) {
-    const Vehicle = this.types[type];
+    const Vehicle = this.types[type]
 
-    return Vehicle ? new Vehicle(customizations) : null;
+    return Vehicle ? new Vehicle(customizations) : null
   }
 
   registerVehicle(type, Vehicle) {
-    const proto = Vehicle.prototype;
+    const proto = Vehicle.prototype
 
     // Only register classes that fulfill the vehicle contract
     if (proto.drive && proto.breakDown) {
-      this.types[type] = Vehicle;
+      this.types[type] = Vehicle
     }
 
-    return this;
+    return this
   }
 }
 
 // Usage:
 const abstractVehicleFactory = new AbstractVehicleFactory()
   .registerVehicle('car', Car)
-  .registerVehicle('truck', Truck);
+  .registerVehicle('truck', Truck)
 
 // Instantiate a new car based on the abstract vehicle type
 const car = abstractVehicleFactory.getVehicle('car', {
   color: 'lime green',
   state: 'like new',
-});
+})
 
 // Instantiate a new truck in a similar manner
 const truck = abstractVehicleFactory.getVehicle('truck', {
   wheelSize: 'medium',
   color: 'neon yellow',
-});
+})
 ```
 
 ### Builder Pattern
@@ -818,85 +818,85 @@ Flexible object creation with chain style calls.
 ```ts
 class Person {
   constructor() {
-    this.streetAddress = '';
-    this.postcode = '';
-    this.city = '';
-    this.companyName = '';
-    this.position = '';
-    this.annualIncome = 0;
+    this.streetAddress = ''
+    this.postcode = ''
+    this.city = ''
+    this.companyName = ''
+    this.position = ''
+    this.annualIncome = 0
   }
 
   toString() {
     return (
       `Person lives at ${this.streetAddress}, ${this.city}, ${this.postcode}\n` +
       `and works at ${this.companyName} as a ${this.position} earning ${this.annualIncome}`
-    );
+    )
   }
 }
 
 class PersonBuilder {
   constructor(person = new Person()) {
-    this.person = person;
+    this.person = person
   }
 
   get lives() {
-    return new PersonAddressBuilder(this.person);
+    return new PersonAddressBuilder(this.person)
   }
 
   get works() {
-    return new PersonJobBuilder(this.person);
+    return new PersonJobBuilder(this.person)
   }
 
   build() {
-    return this.person;
+    return this.person
   }
 }
 
 class PersonJobBuilder extends PersonBuilder {
   constructor(person) {
-    super(person);
-    console.log('New');
+    super(person)
+    console.log('New')
   }
 
   at(companyName) {
-    this.person.companyName = companyName;
-    return this;
+    this.person.companyName = companyName
+    return this
   }
 
   asA(position) {
-    this.person.position = position;
-    return this;
+    this.person.position = position
+    return this
   }
 
   earning(annualIncome) {
-    this.person.annualIncome = annualIncome;
-    return this;
+    this.person.annualIncome = annualIncome
+    return this
   }
 }
 
 class PersonAddressBuilder extends PersonBuilder {
   constructor(person) {
-    super(person);
-    console.log('New');
+    super(person)
+    console.log('New')
   }
 
   at(streetAddress) {
-    this.person.streetAddress = streetAddress;
-    return this;
+    this.person.streetAddress = streetAddress
+    return this
   }
 
   withPostcode(postcode) {
-    this.person.postcode = postcode;
-    return this;
+    this.person.postcode = postcode
+    return this
   }
 
   in(city) {
-    this.person.city = city;
-    return this;
+    this.person.city = city
+    return this
   }
 }
 
-const personBuilder = new PersonBuilder();
+const personBuilder = new PersonBuilder()
 const person = personBuilder.lives
   .at('ABC Road')
   .in('Multan')
@@ -904,7 +904,7 @@ const person = personBuilder.lives
   .works.at('Beijing')
   .asA('Engineer')
   .earning(10000)
-  .build();
+  .build()
 ```
 
 ### Prototype Pattern
@@ -917,24 +917,24 @@ const person = personBuilder.lives
 ```ts
 class Car {
   constructor(name, model) {
-    this.name = name;
-    this.model = model;
+    this.name = name
+    this.model = model
   }
 
   SetName(name) {
-    console.log(`${name}`);
+    console.log(`${name}`)
   }
 
   clone() {
-    return new Car(this.name, this.model);
+    return new Car(this.name, this.model)
   }
 }
 
-const car = new Car();
-car.SetName('Audi');
+const car = new Car()
+car.SetName('Audi')
 
-const car2 = car.clone();
-car2.SetName('BMW');
+const car2 = car.clone()
+car2.SetName('BMW')
 ```
 
 ### Singleton Pattern
@@ -955,45 +955,45 @@ car2.SetName('BMW');
 ```ts
 class Singleton {
   constructor() {
-    const instance = this.constructor.instance;
-    if (instance) return instance;
-    this.constructor.instance = this;
+    const instance = this.constructor.instance
+    if (instance) return instance
+    this.constructor.instance = this
   }
 
   say() {
-    console.log('Saying...');
+    console.log('Saying...')
   }
 }
 
 class Singleton {
-  private static instance: Singleton;
+  private static instance: Singleton
   private constructor() {}
 
   public static getInstance() {
     if (!Singleton.instance) {
-      Singleton.instance = new Singleton();
+      Singleton.instance = new Singleton()
     }
 
-    return Singleton.instance;
+    return Singleton.instance
   }
 
   someMethod() {}
 }
 
-const instance = Singleton.getInstance();
+const instance = Singleton.getInstance()
 ```
 
 #### Closure Singleton Pattern
 
 ```ts
 const createLoginLayer = (function (creator) {
-  let singleton;
+  let singleton
 
   return function () {
-    if (!singleton) singleton = creator();
-    return singleton;
-  };
-})(loginCreator);
+    if (!singleton) singleton = creator()
+    return singleton
+  }
+})(loginCreator)
 ```
 
 ### Adapter Pattern
@@ -1018,42 +1018,42 @@ class Calculator1 {
     this.operations = function (value1, value2, operation) {
       switch (operation) {
         case 'add':
-          return value1 + value2;
+          return value1 + value2
         case 'sub':
-          return value1 - value2;
+          return value1 - value2
         default:
-          throw new Error('Unsupported operations!');
+          throw new Error('Unsupported operations!')
       }
-    };
+    }
   }
 }
 
 class Calculator2 {
   constructor() {
     this.add = function (value1, value2) {
-      return value1 + value2;
-    };
+      return value1 + value2
+    }
 
     this.sub = function (value1, value2) {
-      return value1 - value2;
-    };
+      return value1 - value2
+    }
   }
 }
 
 class CalcAdapter {
   constructor() {
-    const cal2 = new Calculator2();
+    const cal2 = new Calculator2()
 
     this.operations = function (value1, value2, operation) {
       switch (operation) {
         case 'add':
-          return cal2.add(value1, value2);
+          return cal2.add(value1, value2)
         case 'sub':
-          return cal2.sub(value1, value2);
+          return cal2.sub(value1, value2)
         default:
-          throw new Error('Unsupported operations!');
+          throw new Error('Unsupported operations!')
       }
-    };
+    }
   }
 }
 ```
@@ -1063,51 +1063,51 @@ class CalcAdapter {
 function Shipping() {
   this.request = function (zipStart, zipEnd, weight) {
     // ...
-    return '$49.75';
-  };
+    return '$49.75'
+  }
 }
 
 // new interface
 function AdvancedShipping() {
   this.login = function (credentials) {
     /* ... */
-  };
+  }
   this.setStart = function (start) {
     /* ... */
-  };
+  }
   this.setDestination = function (destination) {
     /* ... */
-  };
+  }
   this.calculate = function (weight) {
-    return '$39.50';
-  };
+    return '$39.50'
+  }
 }
 
 // adapter interface
 function AdapterShipping(credentials) {
-  const shipping = new AdvancedShipping();
+  const shipping = new AdvancedShipping()
 
-  shipping.login(credentials);
+  shipping.login(credentials)
 
   return {
     request(zipStart, zipEnd, weight) {
-      shipping.setStart(zipStart);
-      shipping.setDestination(zipEnd);
-      return shipping.calculate(weight);
+      shipping.setStart(zipStart)
+      shipping.setDestination(zipEnd)
+      return shipping.calculate(weight)
     },
-  };
+  }
 }
 ```
 
 ```ts
-const shipping = new Shipping();
-const adapterShipping = new AdapterShipping(credentials);
+const shipping = new Shipping()
+const adapterShipping = new AdapterShipping(credentials)
 
 // original shipping object and interface
-let cost = shipping.request('78701', '10010', '2 lbs');
-log.add(`Old cost: ${cost}`);
+let cost = shipping.request('78701', '10010', '2 lbs')
+log.add(`Old cost: ${cost}`)
 // new shipping object with adapted interface
-cost = adapter.request('78701', '10010', '2 lbs');
+cost = adapter.request('78701', '10010', '2 lbs')
 ```
 
 ### Bridge Pattern
@@ -1120,43 +1120,43 @@ Split large class or set of closely related classes into two separate hierarchie
 ```ts
 class VectorRenderer {
   renderCircle(radius) {
-    console.log(`Drawing a circle of radius ${radius}`);
+    console.log(`Drawing a circle of radius ${radius}`)
   }
 }
 
 class RasterRenderer {
   renderCircle(radius) {
-    console.log(`Drawing pixels for circle of radius ${radius}`);
+    console.log(`Drawing pixels for circle of radius ${radius}`)
   }
 }
 
 class Shape {
   constructor(renderer) {
-    this.renderer = renderer;
+    this.renderer = renderer
   }
 }
 
 class Circle extends Shape {
   constructor(renderer, radius) {
-    super(renderer);
-    this.radius = radius;
+    super(renderer)
+    this.radius = radius
   }
 
   draw() {
-    this.renderer.renderCircle(this.radius);
+    this.renderer.renderCircle(this.radius)
   }
 
   resize(factor) {
-    this.radius *= factor;
+    this.radius *= factor
   }
 }
 
-const raster = new RasterRenderer();
-const vector = new VectorRenderer();
-const circle = new Circle(vector, 5);
-circle.draw();
-circle.resize(2);
-circle.draw();
+const raster = new RasterRenderer()
+const vector = new VectorRenderer()
+const circle = new Circle(vector, 5)
+circle.draw()
+circle.resize(2)
+circle.draw()
 ```
 
 ### Composite Pattern
@@ -1194,54 +1194,54 @@ circle.draw();
 
 ```ts
 interface Component {
-  add: (Component) => void;
-  remove: (Component) => void;
-  do: (Context) => void;
+  add: (Component) => void
+  remove: (Component) => void
+  do: (Context) => void
 }
 
 class Composite implements Component {
   add(child: Component) {
-    console.log('Add child');
+    console.log('Add child')
   }
 
   remove(child: Component) {
-    console.log('Remove child');
+    console.log('Remove child')
   }
 
   do(context: Context) {
-    console.log('Do composite work');
+    console.log('Do composite work')
 
     for (const child of this.children) {
-      child.do(context);
+      child.do(context)
     }
   }
 }
 
 class Leaf implements Component {
   add(child: Component) {
-    throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException()
   }
 
   remove(child: Component) {
-    if (this.parent === null) return;
-    console.log('Remove self');
+    if (this.parent === null) return
+    console.log('Remove self')
   }
 
   do(context: Context) {
-    console.log('Do leaf work');
+    console.log('Do leaf work')
   }
 }
 
-const root = new Composite();
-const c1 = new Composite();
-const c2 = new Composite();
-const leaf1 = new Leaf();
-const leaf2 = new Leaf();
-root.add(c1);
-root.add(c2);
-c1.add(leaf1);
-c1.add(leaf2);
-root.do();
+const root = new Composite()
+const c1 = new Composite()
+const c2 = new Composite()
+const leaf1 = new Leaf()
+const leaf2 = new Leaf()
+root.add(c1)
+root.add(c2)
+c1.add(leaf1)
+c1.add(leaf2)
+root.do()
 ```
 
 ### Decorator Pattern
@@ -1269,76 +1269,76 @@ root.do();
 
 ```ts
 function __decorate(decorators, target) {
-  const decorateTarget = target;
+  const decorateTarget = target
 
   for (const decorator of decorators) {
-    decorateTarget = decorator(decorateTarget) || decorateTarget;
+    decorateTarget = decorator(decorateTarget) || decorateTarget
   }
 
-  return decorateTarget;
+  return decorateTarget
 }
 ```
 
 ```ts
 class MacBook {
   constructor() {
-    this.cost = 997;
-    this.screenSize = 11.6;
+    this.cost = 997
+    this.screenSize = 11.6
   }
 
   getCost() {
-    return this.cost;
+    return this.cost
   }
 
   getScreenSize() {
-    return this.screenSize;
+    return this.screenSize
   }
 }
 
 // Decorator 1
 class Memory extends MacBook {
   constructor(macBook) {
-    super();
-    this.macBook = macBook;
+    super()
+    this.macBook = macBook
   }
 
   getCost() {
-    return this.macBook.getCost() + 75;
+    return this.macBook.getCost() + 75
   }
 }
 
 // Decorator 2
 class Engraving extends MacBook {
   constructor(macBook) {
-    super();
-    this.macBook = macBook;
+    super()
+    this.macBook = macBook
   }
 
   getCost() {
-    return this.macBook.getCost() + 200;
+    return this.macBook.getCost() + 200
   }
 }
 
 // Decorator 3
 class Insurance extends MacBook {
   constructor(macBook) {
-    super();
-    this.macBook = macBook;
+    super()
+    this.macBook = macBook
   }
 
   getCost() {
-    return this.macBook.getCost() + 250;
+    return this.macBook.getCost() + 250
   }
 }
 
-let mb = new MacBook();
-mb = new Memory(mb);
-mb = new Engraving(mb);
-mb = new Insurance(mb);
+let mb = new MacBook()
+mb = new Memory(mb)
+mb = new Engraving(mb)
+mb = new Insurance(mb)
 
-console.log(mb.getCost());
+console.log(mb.getCost())
 // Outputs: 1522
-console.log(mb.getScreenSize());
+console.log(mb.getScreenSize())
 // Outputs: 11.6
 ```
 
@@ -1353,62 +1353,62 @@ console.log(mb.getScreenSize());
 ```ts
 class CPU {
   freeze() {
-    console.log('Freezed....');
+    console.log('Freezed....')
   }
 
   jump(position) {
-    console.log('Go....');
+    console.log('Go....')
   }
 
   execute() {
-    console.log('Run....');
+    console.log('Run....')
   }
 }
 
 class Memory {
   load(position, data) {
-    console.log('Load....');
+    console.log('Load....')
   }
 }
 
 class HardDrive {
   read(lba, size) {
-    console.log('Read....');
+    console.log('Read....')
   }
 }
 
 class ComputerFacade {
   constructor() {
-    this.processor = new CPU();
-    this.ram = new Memory();
-    this.hd = new HardDrive();
+    this.processor = new CPU()
+    this.ram = new Memory()
+    this.hd = new HardDrive()
   }
 
   start() {
-    this.processor.freeze();
+    this.processor.freeze()
     this.ram.load(
       this.BOOT_ADDRESS,
       this.hd.read(this.BOOT_SECTOR, this.SECTOR_SIZE)
-    );
-    this.processor.jump(this.BOOT_ADDRESS);
-    this.processor.execute();
+    )
+    this.processor.jump(this.BOOT_ADDRESS)
+    this.processor.execute()
   }
 }
 
-const computer = new ComputerFacade();
-computer.start();
+const computer = new ComputerFacade()
+computer.start()
 ```
 
 ```ts
 sabertazimi.addMyEvent = function (el, ev, fn) {
   if (el.addEventListener) {
-    el.addEventListener(ev, fn, false);
+    el.addEventListener(ev, fn, false)
   } else if (el.attachEvent) {
-    el.attachEvent(`on${ev}`, fn);
+    el.attachEvent(`on${ev}`, fn)
   } else {
-    el[`on${ev}`] = fn;
+    el[`on${ev}`] = fn
   }
-};
+}
 ```
 
 ### Flyweight Pattern
@@ -1436,70 +1436,70 @@ sabertazimi.addMyEvent = function (el, ev, fn) {
 ```ts
 class Flyweight {
   constructor(make, model, processor) {
-    this.make = make;
-    this.model = model;
-    this.processor = processor;
+    this.make = make
+    this.model = model
+    this.processor = processor
   }
 }
 
 class FlyweightFactory {
-  static flyweights = new Map();
+  static flyweights = new Map()
 
   static get(make, model, processor) {
-    const id = make + model;
+    const id = make + model
 
     if (FlyweightFactory.flyweights.has(id)) {
-      return FlyweightFactory.flyweights.get(id);
+      return FlyweightFactory.flyweights.get(id)
     }
 
-    const flyweight = new Flyweight(make, model, processor);
-    FlyweightFactory.flyweights.set(id, flyweight);
-    return flyweight;
+    const flyweight = new Flyweight(make, model, processor)
+    FlyweightFactory.flyweights.set(id, flyweight)
+    return flyweight
   }
 
   static getCount() {
-    return FlyweightFactory.flyweights.size;
+    return FlyweightFactory.flyweights.size
   }
 }
 
 class Computer {
   constructor(make, model, processor, memory, tag) {
-    this.flyweight = FlyweightFactory.get(make, model, processor);
-    this.memory = memory;
-    this.tag = tag;
+    this.flyweight = FlyweightFactory.get(make, model, processor)
+    this.memory = memory
+    this.tag = tag
     this.getMake = function () {
-      return this.flyweight.make;
-    };
+      return this.flyweight.make
+    }
   }
 }
 
 class ComputerCollection {
-  computers = new Map();
+  computers = new Map()
 
   add(make, model, processor, memory, tag) {
-    this.computers.set(tag, new Computer(make, model, processor, memory, tag));
+    this.computers.set(tag, new Computer(make, model, processor, memory, tag))
   }
 
   get(tag) {
-    return this.computers.get(tag);
+    return this.computers.get(tag)
   }
 
   getCount() {
-    return this.computers.size;
+    return this.computers.size
   }
 }
 
-const computers = new ComputerCollection();
+const computers = new ComputerCollection()
 
-computers.add('Dell', 'Studio XPS', 'Intel', '5G', 'Y755P');
-computers.add('Dell', 'Studio XPS', 'Intel', '6G', 'X997T');
-computers.add('Dell', 'Studio XPS', 'Intel', '2G', 'NT777');
-computers.add('Dell', 'Studio XPS', 'Intel', '2G', '0J88A');
-computers.add('HP', 'Envy', 'Intel', '4G', 'CNU883701');
-computers.add('HP', 'Envy', 'Intel', '2G', 'TXU003283');
+computers.add('Dell', 'Studio XPS', 'Intel', '5G', 'Y755P')
+computers.add('Dell', 'Studio XPS', 'Intel', '6G', 'X997T')
+computers.add('Dell', 'Studio XPS', 'Intel', '2G', 'NT777')
+computers.add('Dell', 'Studio XPS', 'Intel', '2G', '0J88A')
+computers.add('HP', 'Envy', 'Intel', '4G', 'CNU883701')
+computers.add('HP', 'Envy', 'Intel', '2G', 'TXU003283')
 
-console.log(`Computers: ${computers.getCount()}`); // 6.
-console.log(`Flyweights: ${FlyweightFactory.getCount()}`); // 2.
+console.log(`Computers: ${computers.getCount()}`) // 6.
+console.log(`Flyweights: ${FlyweightFactory.getCount()}`) // 2.
 ```
 
 #### Flyweight Pool Pattern
@@ -1508,41 +1508,41 @@ DOM pool:
 
 ```ts
 class ObjectPool<T, P> {
-  objectFactory: () => T;
-  objectPool: [T];
+  objectFactory: () => T
+  objectPool: [T]
 
   constructor(objectFactory: () => T) {
-    this.objectFactory = objectFactory;
-    this.objectPool = [];
+    this.objectFactory = objectFactory
+    this.objectPool = []
   }
 
   create(...args: P) {
-    return objectPool.length === 0 ? objectFactory(args) : objectPool.shift();
+    return objectPool.length === 0 ? objectFactory(args) : objectPool.shift()
   }
 
   recover(obj: T) {
-    objectPool.push(obj);
+    objectPool.push(obj)
   }
 }
 
 const iframeFactory = new ObjectPool(() => {
-  const iframe = document.createElement('iframe');
-  document.body.appendChild(iframe);
+  const iframe = document.createElement('iframe')
+  document.body.appendChild(iframe)
   iframe.onload = function () {
-    iframe.onload = null;
-    iframeFactory.recover(iframe);
-  };
-  return iframe;
-});
+    iframe.onload = null
+    iframeFactory.recover(iframe)
+  }
+  return iframe
+})
 
-const iframe1 = iframeFactory.create();
-iframe1.src = 'http:// baidu.com';
-const iframe2 = iframeFactory.create();
-iframe2.src = 'http:// QQ.com';
+const iframe1 = iframeFactory.create()
+iframe1.src = 'http:// baidu.com'
+const iframe2 = iframeFactory.create()
+iframe2.src = 'http:// QQ.com'
 setTimeout(function () {
-  const iframe3 = iframeFactory.create();
-  iframe3.src = 'http:// 163.com';
-}, 3000);
+  const iframe3 = iframeFactory.create()
+  iframe3.src = 'http:// 163.com'
+}, 3000)
 ```
 
 ### Proxy Pattern
@@ -1582,81 +1582,81 @@ setTimeout(function () {
 ```ts
 class Percentage {
   constructor(percent) {
-    this.percent = percent;
+    this.percent = percent
   }
 
   toString() {
-    return `${this.percent}&`;
+    return `${this.percent}&`
   }
 
   valueOf() {
-    return this.percent / 100;
+    return this.percent / 100
   }
 }
 
-const fivePercent = new Percentage(5);
-console.log(fivePercent.toString());
-console.log(`5% of 50 is ${50 * fivePercent}`);
+const fivePercent = new Percentage(5)
+console.log(fivePercent.toString())
+console.log(`5% of 50 is ${50 * fivePercent}`)
 ```
 
 ```ts
 function GeoCoder() {
   this.getLatLng = function (address) {
     if (address === 'Amsterdam') {
-      return '52.3700° N, 4.8900° E';
+      return '52.3700° N, 4.8900° E'
     } else if (address === 'London') {
-      return '51.5171° N, 0.1062° W';
+      return '51.5171° N, 0.1062° W'
     } else if (address === 'Paris') {
-      return '48.8742° N, 2.3470° E';
+      return '48.8742° N, 2.3470° E'
     } else if (address === 'Berlin') {
-      return '52.5233° N, 13.4127° E';
+      return '52.5233° N, 13.4127° E'
     } else {
-      return '';
+      return ''
     }
-  };
+  }
 }
 
 function GeoProxy() {
-  const geocoder = new GeoCoder();
-  const geocache = {};
+  const geocoder = new GeoCoder()
+  const geocache = {}
 
   return {
     getLatLng(address) {
       if (!geocache[address]) {
-        geocache[address] = geocoder.getLatLng(address);
+        geocache[address] = geocoder.getLatLng(address)
       }
-      log.add(`${address}: ${geocache[address]}`);
-      return geocache[address];
+      log.add(`${address}: ${geocache[address]}`)
+      return geocache[address]
     },
     getCount() {
-      let count = 0;
+      let count = 0
       for (const code in geocache) {
-        count++;
+        count++
       }
-      return count;
+      return count
     },
-  };
+  }
 }
 ```
 
 Proxy in `Vue`:
 
 ```ts
-const original = { name: 'jeff' };
+const original = { name: 'jeff' }
 
 const reactive = new Proxy(original, {
   get(target, key) {
-    console.log('Tracking: ', key);
-    return target[key];
+    console.log('Tracking: ', key)
+    return target[key]
   },
   set(target, key, value) {
-    console.log('updating UI...');
-    return Reflect.set(target, key, value);
+    console.log('updating UI...')
+    return Reflect.set(target, key, value)
   },
-});
+})
 
-console.log(reactive.name); // 'Tracking: name'
-reactive.name = 'bob'; // 'updating UI...'
+console.log(reactive.name) // 'Tracking: name'
+reactive.name = 'bob' // 'updating UI...'
 ```
 
 ### Chain of Responsibility Pattern
@@ -1684,177 +1684,177 @@ reactive.name = 'bob'; // 'updating UI...'
 ```ts
 class Creature {
   constructor(name, attack, defense) {
-    this.name = name;
-    this.attack = attack;
-    this.defense = defense;
+    this.name = name
+    this.attack = attack
+    this.defense = defense
   }
 
   toString() {
-    return `${this.name} (${this.attack}/${this.defense})`;
+    return `${this.name} (${this.attack}/${this.defense})`
   }
 }
 
 // Link Node.
 class CreatureModifier {
   constructor(creature) {
-    this.creature = creature;
-    this.next = null;
+    this.creature = creature
+    this.next = null
   }
 
   // Build chains.
   add(modifier) {
-    if (this.next) this.next.add(modifier);
-    else this.next = modifier;
+    if (this.next) this.next.add(modifier)
+    else this.next = modifier
   }
 
   // Pass objects along to chains.
   handle() {
-    if (this.next) this.next.handle();
+    if (this.next) this.next.handle()
   }
 }
 
 class NoBonusesModifier extends CreatureModifier {
   constructor(creature) {
-    super(creature);
-    console.log('New');
+    super(creature)
+    console.log('New')
   }
 
   handle() {
-    console.log('No bonuses for you!');
+    console.log('No bonuses for you!')
   }
 }
 
 class DoubleAttackModifier extends CreatureModifier {
   constructor(creature) {
-    super(creature);
-    console.log('New');
+    super(creature)
+    console.log('New')
   }
 
   handle() {
-    console.log(`Doubling ${this.creature.name}'s attack`);
-    this.creature.attack *= 2;
-    super.handle(); // Call next();
+    console.log(`Doubling ${this.creature.name}'s attack`)
+    this.creature.attack *= 2
+    super.handle() // Call next();
   }
 }
 
 class IncreaseDefenseModifier extends CreatureModifier {
   constructor(creature) {
-    super(creature);
-    console.log('New');
+    super(creature)
+    console.log('New')
   }
 
   handle() {
     if (this.creature.attack <= 2) {
-      console.log(`Increasing ${this.creature.name}'s defense`);
-      this.creature.defense++;
+      console.log(`Increasing ${this.creature.name}'s defense`)
+      this.creature.defense++
     }
-    super.handle(); // Call next();
+    super.handle() // Call next();
   }
 }
 
-const peekachu = new Creature('Peekachu', 1, 1);
-console.log(peekachu.toString());
+const peekachu = new Creature('Peekachu', 1, 1)
+console.log(peekachu.toString())
 
-const root = new CreatureModifier(peekachu);
-root.add(new DoubleAttackModifier(peekachu));
-root.add(new IncreaseDefenseModifier(peekachu));
+const root = new CreatureModifier(peekachu)
+root.add(new DoubleAttackModifier(peekachu))
+root.add(new IncreaseDefenseModifier(peekachu))
 // Chain: creatureModifier -> doubleAttackModifier -> increaseDefenseModifier.
-root.handle();
+root.handle()
 
-console.log(peekachu.toString());
+console.log(peekachu.toString())
 ```
 
 ```ts
 class Koa extends EventEmitter {
   constructor() {
-    super();
-    this.middlewares = [];
+    super()
+    this.middlewares = []
   }
 
   use(fn) {
-    this.middlewares.push(fn);
+    this.middlewares.push(fn)
   }
 
   compose(middlewares, ctx) {
     const dispatch = index => {
       // End of chain.
       if (index === middlewares.length) {
-        return Promise.resolve();
+        return Promise.resolve()
       }
 
       // `next` function: call next middleware recursively.
-      const next = () => dispatch(index + 1);
+      const next = () => dispatch(index + 1)
 
       // Call current middleware.
-      const middleware = middlewares[index];
-      return Promise.resolve(middleware(ctx, next));
-    };
+      const middleware = middlewares[index]
+      return Promise.resolve(middleware(ctx, next))
+    }
 
-    return dispatch(0);
+    return dispatch(0)
   }
 
   handleRequest(req, res) {
     // When ctx.body doesn't change, statusCode contains '404'.
-    res.statusCode = 404;
+    res.statusCode = 404
 
     // Create context proxy for `req` and `res` operations.
-    const ctx = this.createContext(req, res);
+    const ctx = this.createContext(req, res)
 
     // Middleware (open api for Koa users).
-    const fn = this.compose(this.middlewares, ctx);
+    const fn = this.compose(this.middlewares, ctx)
 
     fn.then(() => {
       if (typeof ctx.body === 'object' && ctx.body !== null) {
-        res.setHeader('Content-Type', 'application/json;charset=utf8');
-        res.end(JSON.stringify(ctx.body));
+        res.setHeader('Content-Type', 'application/json;charset=utf8')
+        res.end(JSON.stringify(ctx.body))
       } else if (ctx.body instanceof Stream) {
-        ctx.body.pipe(res);
+        ctx.body.pipe(res)
       } else if (typeof ctx.body === 'string' || Buffer.isBuffer(ctx.body)) {
-        res.setHeader('Content-Type', 'text/htmlCharset=utf8');
-        res.end(ctx.body);
+        res.setHeader('Content-Type', 'text/htmlCharset=utf8')
+        res.end(ctx.body)
       } else {
-        res.end('Not Found');
+        res.end('Not Found')
       }
     }).catch(err => {
-      this.emit('error', err);
-      res.statusCode = 500;
-      res.end('Internal Server Error');
-    });
+      this.emit('error', err)
+      res.statusCode = 500
+      res.end('Internal Server Error')
+    })
   }
 
   listen(...args) {
-    const server = http.createServer(this.handleRequest.bind(this));
-    server.listen(...args);
+    const server = http.createServer(this.handleRequest.bind(this))
+    server.listen(...args)
   }
 }
 
-const app = new Koa();
+const app = new Koa()
 
 app.use(async (ctx, next) => {
-  console.log(1);
-  await next();
-  console.log(2);
-});
+  console.log(1)
+  await next()
+  console.log(2)
+})
 
 app.use(async (ctx, next) => {
-  console.log(3);
+  console.log(3)
 
   const p = new Promise((resolve, reject) => {
     setTimeout(() => {
-      console.log('3.5');
-      resolve();
-    }, 1000);
-  });
+      console.log('3.5')
+      resolve()
+    }, 1000)
+  })
 
-  await p.then();
-  await next();
-  console.log(4);
-  ctx.body = 'Hello Koa';
-});
+  await p.then()
+  await next()
+  console.log(4)
+  ctx.body = 'Hello Koa'
+})
 
 app.listen(2323, () => {
-  console.log('Koa server are listening to http://localhost:2323 ...');
-});
+  console.log('Koa server are listening to http://localhost:2323 ...')
+})
 ```
 
 ### Command Pattern
@@ -1890,7 +1890,7 @@ app.listen(2323, () => {
 
 ```ts
 // Higher order function
-const Command = receiver => () => receiver.action();
+const Command = receiver => () => receiver.action()
 ```
 
 Bind `Command` to UI components:
@@ -1903,15 +1903,15 @@ Bind `Command` to UI components:
 ```ts
 // Executor
 class Button {
-  commands = new Set();
+  commands = new Set()
 
   add(command) {
-    this.commands.set(command);
+    this.commands.set(command)
   }
 
   click() {
     for (const command of this.commands) {
-      command.execute();
+      command.execute()
     }
   }
 }
@@ -1919,92 +1919,92 @@ class Button {
 // Client: command object, `action` implemented
 class Command {
   constructor(receiver) {
-    this.receiver = receiver;
+    this.receiver = receiver
   }
 
   execute() {
-    this.receiver.action();
+    this.receiver.action()
   }
 }
 
 // Receiver
 class MenuBar {
   action() {
-    this.refresh();
+    this.refresh()
   }
 
   refresh() {
-    console.log('refresh menu pages');
+    console.log('refresh menu pages')
   }
 }
 
-const button = new Button();
-const menuBar = new MenuBar();
-const refreshMenuBarCommand = new Command(menuBar);
+const button = new Button()
+const menuBar = new MenuBar()
+const refreshMenuBarCommand = new Command(menuBar)
 
-button.add(refreshMenuBarCommand);
-button.click();
+button.add(refreshMenuBarCommand)
+button.click()
 ```
 
 ```ts
 class MenuCommand {
   constructor(action) {
-    this.action = action;
+    this.action = action
   }
 
   execute() {
-    this.action();
+    this.action()
   }
 }
 
 // --------------
-const appMenuBar = new MenuBar();
+const appMenuBar = new MenuBar()
 
 // --------------
-const fileActions = new FileActions();
-const EditActions = new EditActions();
-const InsertActions = new InsertActions();
-const HelpActions = new HelpActions();
+const fileActions = new FileActions()
+const EditActions = new EditActions()
+const InsertActions = new InsertActions()
+const HelpActions = new HelpActions()
 
 // --------------
-const openCommand = new MenuCommand(fileActions.open);
-const closeCommand = new MenuCommand(fileActions.close);
-const saveCommand = new MenuCommand(fileActions.save);
-const saveAsCommand = new MenuCommand(fileActions.saveAs);
-const fileMenu = new Menu('File');
-fileMenu.add(new MenuItem('open', openCommand));
-fileMenu.add(new MenuItem('Close', closeCommand));
-fileMenu.add(new MenuItem('Save', saveCommand));
-fileMenu.add(new MenuItem('Close', saveAsCommand));
-appMenuBar.add(fileMenu);
+const openCommand = new MenuCommand(fileActions.open)
+const closeCommand = new MenuCommand(fileActions.close)
+const saveCommand = new MenuCommand(fileActions.save)
+const saveAsCommand = new MenuCommand(fileActions.saveAs)
+const fileMenu = new Menu('File')
+fileMenu.add(new MenuItem('open', openCommand))
+fileMenu.add(new MenuItem('Close', closeCommand))
+fileMenu.add(new MenuItem('Save', saveCommand))
+fileMenu.add(new MenuItem('Close', saveAsCommand))
+appMenuBar.add(fileMenu)
 
 // --------------
-const cutCommand = new MenuCommand(EditActions.cut);
-const copyCommand = new MenuCommand(EditActions.copy);
-const pasteCommand = new MenuCommand(EditActions.paste);
-const deleteCommand = new MenuCommand(EditActions.delete);
-const editMenu = new Menu('Edit');
-editMenu.add(new MenuItem('Cut', cutCommand));
-editMenu.add(new MenuItem('Copy', copyCommand));
-editMenu.add(new MenuItem('Paste', pasteCommand));
-editMenu.add(new MenuItem('Delete', deleteCommand));
-appMenuBar.add(editMenu);
+const cutCommand = new MenuCommand(EditActions.cut)
+const copyCommand = new MenuCommand(EditActions.copy)
+const pasteCommand = new MenuCommand(EditActions.paste)
+const deleteCommand = new MenuCommand(EditActions.delete)
+const editMenu = new Menu('Edit')
+editMenu.add(new MenuItem('Cut', cutCommand))
+editMenu.add(new MenuItem('Copy', copyCommand))
+editMenu.add(new MenuItem('Paste', pasteCommand))
+editMenu.add(new MenuItem('Delete', deleteCommand))
+appMenuBar.add(editMenu)
 
 // --------------
-const textBlockCommand = new MenuCommand(InsertActions.textBlock);
-const insertMenu = new Menu('Insert');
-insertMenu.add(new MenuItem('Text  Block', textBlockCommand));
-appMenuBar.add(insertMenu);
+const textBlockCommand = new MenuCommand(InsertActions.textBlock)
+const insertMenu = new Menu('Insert')
+insertMenu.add(new MenuItem('Text  Block', textBlockCommand))
+appMenuBar.add(insertMenu)
 
 // --------------
-const showHelpCommand = new MenuCommand(HelpActions.showHelp());
-const helpMenu = new Menu('Help');
-helpMenu.add(new MenuItem('Show Help', showHelpCommand));
-appMenuBar.add(helpMenu);
+const showHelpCommand = new MenuCommand(HelpActions.showHelp())
+const helpMenu = new Menu('Help')
+helpMenu.add(new MenuItem('Show Help', showHelpCommand))
+appMenuBar.add(helpMenu)
 
 // --------------
-document.getElementsByTagName('body')[0].appendChild(appMenuBar.getElement());
-appMenuBar.show();
+document.getElementsByTagName('body')[0].appendChild(appMenuBar.getElement())
+appMenuBar.show()
 ```
 
 Command sequences to implement `Macro`/`Batch`/`Undo`/`Redo` feature:
@@ -2012,49 +2012,49 @@ Command sequences to implement `Macro`/`Batch`/`Undo`/`Redo` feature:
 ```ts
 class Cursor {
   constructor(width, height, parent) {
-    this.commandStack = [];
-    this.width = width;
-    this.height = height;
+    this.commandStack = []
+    this.width = width
+    this.height = height
 
-    this.canvas = document.createElement('canvas');
-    this.canvas.width = this.width;
-    this.canvas.height = this.height;
-    parent.appendChild(this.canvas);
+    this.canvas = document.createElement('canvas')
+    this.canvas.width = this.width
+    this.canvas.height = this.height
+    parent.appendChild(this.canvas)
 
-    this.ctx = this.canvas.getContext('2d');
-    this.ctx.fillStyle = '#CCC000';
-    this.move(0, 0);
+    this.ctx = this.canvas.getContext('2d')
+    this.ctx.fillStyle = '#CCC000'
+    this.move(0, 0)
   }
 
   move(x, y) {
     this.commandStack.push(() => {
       // `this` point to `Cursor`.
-      this.lineTo(x, y);
-    });
+      this.lineTo(x, y)
+    })
   }
 
   lineTo(x, y) {
-    this.position.x += x;
-    this.position.y += y;
-    this.ctx.lineTo(this.position.x, this.position.y);
+    this.position.x += x
+    this.position.y += y
+    this.ctx.lineTo(this.position.x, this.position.y)
   }
 
   executeCommands() {
-    this.position = { x: this.width / 2, y: this.height / 2 };
-    this.ctx.clearRect(0, 0, this.width, this.height);
-    this.ctx.beginPath();
-    this.ctx.moveTo(this.position.x, this.position.y);
+    this.position = { x: this.width / 2, y: this.height / 2 }
+    this.ctx.clearRect(0, 0, this.width, this.height)
+    this.ctx.beginPath()
+    this.ctx.moveTo(this.position.x, this.position.y)
 
     for (let i = 0; i < this.commandStack.length; i++) {
-      this.commandStack[i]();
+      this.commandStack[i]()
     }
 
-    this.ctx.stroke();
+    this.ctx.stroke()
   }
 
   undo() {
-    this.commandStack.pop();
-    this.executeCommands();
+    this.commandStack.pop()
+    this.executeCommands()
   }
 }
 ```
@@ -2084,48 +2084,48 @@ class Cursor {
 ```ts
 class Stuff {
   constructor() {
-    this.a = 11;
-    this.b = 22;
+    this.a = 11
+    this.b = 22
   }
 
   [Symbol.iterator]() {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const self = this;
-    let i = 0;
+    const self = this
+    let i = 0
 
     return {
       next() {
         return {
           done: i > 1,
           value: self[i++ === 0 ? 'a' : 'b'],
-        };
+        }
       },
-    };
+    }
   }
 
   get backwards() {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const self = this;
-    let i = 0;
+    const self = this
+    let i = 0
 
     return {
       next() {
         return {
           done: i > 1,
           value: self[i++ === 0 ? 'b' : 'a'],
-        };
+        }
       },
       // Make iterator iterable
       [Symbol.iterator]() {
-        return this;
+        return this
       },
-    };
+    }
   }
 }
 
-const stuff = new Stuff();
-for (const item of stuff) console.log(`${item}`);
-for (const item of stuff.backwards) console.log(`${item}`);
+const stuff = new Stuff()
+for (const item of stuff) console.log(`${item}`)
+for (const item of stuff.backwards) console.log(`${item}`)
 ```
 
 Implement polyfill with iterator:
@@ -2133,37 +2133,37 @@ Implement polyfill with iterator:
 ```ts
 const activeXUploader = () => {
   try {
-    return new ActiveXObject('ActiveX.Upload'); // IE 上传控件.
+    return new ActiveXObject('ActiveX.Upload') // IE 上传控件.
   } catch (e) {
-    return false;
+    return false
   }
-};
+}
 
 const flashUploader = () => {
   if (supportFlash()) {
-    const str = '<object type="application/x-shockwave-flash"></object>';
-    return $(str).appendTo($('body'));
+    const str = '<object type="application/x-shockwave-flash"></object>'
+    return $(str).appendTo($('body'))
   }
 
-  return false;
-};
+  return false
+}
 
 const formUploader = () => {
-  const str = '<input name="file" type="file" class="ui-file"/>'; // 表单上传控件.
-  return $(str).appendTo($('body'));
-};
+  const str = '<input name="file" type="file" class="ui-file"/>' // 表单上传控件.
+  return $(str).appendTo($('body'))
+}
 
 const upload = (...uploaderList) => {
   for (const uploader of uploaderList) {
-    const uploadResult = uploader();
-    if (uploadResult !== false) return uploadResult;
+    const uploadResult = uploader()
+    if (uploadResult !== false) return uploadResult
   }
-};
+}
 
-const result = upload([activeXUploader, flashUploader, formUploader]);
-const result = upload([activeXUploader, flashUploader]);
-const result = upload([activeXUploader, formUploader]);
-const result = upload([flashUploader, formUploader]);
+const result = upload([activeXUploader, flashUploader, formUploader])
+const result = upload([activeXUploader, flashUploader])
+const result = upload([activeXUploader, formUploader])
+const result = upload([flashUploader, formUploader])
 ```
 
 ### Mediator Pattern
@@ -2190,59 +2190,59 @@ const result = upload([flashUploader, formUploader]);
 ```ts
 class Person {
   constructor(name) {
-    this.name = name;
-    this.chatLog = [];
+    this.name = name
+    this.chatLog = []
   }
 
   receive(sender, message) {
-    const s = `${sender}: '${message}'`;
-    console.log(`[${this.name}'s chat session] ${s}`);
-    this.chatLog.push(s);
+    const s = `${sender}: '${message}'`
+    console.log(`[${this.name}'s chat session] ${s}`)
+    this.chatLog.push(s)
   }
 
   say(message) {
-    this.room.broadcast(this.name, message);
+    this.room.broadcast(this.name, message)
   }
 
   pm(who, message) {
-    this.room.message(this.name, who, message);
+    this.room.message(this.name, who, message)
   }
 }
 
 class ChatRoom {
   constructor() {
-    this.people = [];
+    this.people = []
   }
 
   broadcast(source, message) {
     for (const p of this.people)
-      if (p.name !== source) p.receive(source, message);
+      if (p.name !== source) p.receive(source, message)
   }
 
   join(p) {
-    const joinMsg = `${p.name} joins the chat`;
-    this.broadcast('room', joinMsg);
-    p.room = this;
-    this.people.push(p);
+    const joinMsg = `${p.name} joins the chat`
+    this.broadcast('room', joinMsg)
+    p.room = this
+    this.people.push(p)
   }
 
   message(source, destination, message) {
     for (const p of this.people)
-      if (p.name === destination) p.receive(source, message);
+      if (p.name === destination) p.receive(source, message)
   }
 }
 
-const room = new ChatRoom();
-const zee = new Person('Zee');
-const shan = new Person('Shan');
+const room = new ChatRoom()
+const zee = new Person('Zee')
+const shan = new Person('Shan')
 
-room.join(zee);
-room.join(shan);
-zee.say('Hello!!');
+room.join(zee)
+room.join(shan)
+zee.say('Hello!!')
 
-const doe = new Person('Doe');
-room.join(doe);
-doe.say('Hello everyone!');
+const doe = new Person('Doe')
+room.join(doe)
+doe.say('Hello everyone!')
 ```
 
 ### Observer Pattern
@@ -2267,60 +2267,60 @@ doe.say('Hello everyone!');
 ```ts
 class ObserverList {
   constructor() {
-    this.observerList = [];
+    this.observerList = []
   }
 
   add(obj) {
-    return this.observerList.push(obj);
+    return this.observerList.push(obj)
   }
 
   count() {
-    return this.observerList.length;
+    return this.observerList.length
   }
 
   get(index) {
     if (index > -1 && index < this.observerList.length) {
-      return this.observerList[index];
+      return this.observerList[index]
     }
   }
 
   indexOf(obj, startIndex) {
-    let i = startIndex;
+    let i = startIndex
 
     while (i < this.observerList.length) {
       if (this.observerList[i] === obj) {
-        return i;
+        return i
       }
 
-      i++;
+      i++
     }
 
-    return -1;
+    return -1
   }
 
   removeAt(index) {
-    this.observerList.splice(index, 1);
+    this.observerList.splice(index, 1)
   }
 }
 
 class Subject {
   constructor() {
-    this.observers = new ObserverList();
+    this.observers = new ObserverList()
   }
 
   addObserver(observer) {
-    this.observers.add(observer);
+    this.observers.add(observer)
   }
 
   removeObserver(observer) {
-    this.observers.removeAt(this.observers.indexOf(observer, 0));
+    this.observers.removeAt(this.observers.indexOf(observer, 0))
   }
 
   notify(context) {
-    const observerCount = this.observers.count();
+    const observerCount = this.observers.count()
 
     for (let i = 0; i < observerCount; i++) {
-      this.observers.get(i).update(context);
+      this.observers.get(i).update(context)
     }
   }
 }
@@ -2352,37 +2352,37 @@ class Observer {
 class PubSub {
   constructor() {
     // Broadcast channel
-    this.topics = {};
+    this.topics = {}
     // Topic identifier
-    this.subUid = -1;
+    this.subUid = -1
   }
 
   publish(topic, args) {
     if (!this.topics[topic]) {
-      return false;
+      return false
     }
 
-    const subscribers = this.topics[topic];
-    let len = subscribers ? subscribers.length : 0;
+    const subscribers = this.topics[topic]
+    let len = subscribers ? subscribers.length : 0
 
     while (len--) {
-      subscribers[len].func(topic, args);
+      subscribers[len].func(topic, args)
     }
 
-    return this;
+    return this
   }
 
   subscribe(topic, func) {
     if (!this.topics[topic]) {
-      this.topics[topic] = [];
+      this.topics[topic] = []
     }
 
-    const token = (++this.subUid).toString();
+    const token = (++this.subUid).toString()
     this.topics[topic].push({
       token,
       func,
-    });
-    return token;
+    })
+    return token
   }
 
   unsubscribe(token) {
@@ -2390,23 +2390,23 @@ class PubSub {
       if (this.topics[m]) {
         for (let i = 0, j = this.topics[m].length; i < j; i++) {
           if (this.topics[m][i].token === token) {
-            this.topics[m].splice(i, 1);
-            return token;
+            this.topics[m].splice(i, 1)
+            return token
           }
         }
       }
     }
 
-    return this;
+    return this
   }
 }
 
-const pubsub = new PubSub();
+const pubsub = new PubSub()
 const token = pubsub.subscribe('/addFavorite', (topic, args) => {
-  console.log('test', topic, args);
-});
-pubsub.publish('/addFavorite', ['test']);
-pubsub.unsubscribe(token);
+  console.log('test', topic, args)
+})
+pubsub.publish('/addFavorite', ['test'])
+pubsub.unsubscribe(token)
 ```
 
 #### Pub-Sub Pattern Usage
@@ -2417,13 +2417,13 @@ pubsub.unsubscribe(token);
 // Equivalent to subscribe(topicName, callback)
 $(document).on('topicName', function () {
   // ..perform some behavior
-});
+})
 
 // Equivalent to publish(topicName)
-$(document).trigger('topicName');
+$(document).trigger('topicName')
 
 // Equivalent to unsubscribe(topicName)
-$(document).off('topicName');
+$(document).off('topicName')
 ```
 
 Event emitter:
@@ -2431,30 +2431,30 @@ Event emitter:
 ```ts
 class MicroEvent {
   bind(event, callback) {
-    this._events = this._events || {};
-    this._events[event] = this._events[event] || [];
-    this._events[event].push(callback);
+    this._events = this._events || {}
+    this._events[event] = this._events[event] || []
+    this._events[event].push(callback)
   }
 
   unbind(event, callback) {
-    this._events = this._events || {};
+    this._events = this._events || {}
 
     if (event in this._events === false) {
-      return;
+      return
     }
 
-    this._events[event].splice(this._events[event].indexOf(callback), 1);
+    this._events[event].splice(this._events[event].indexOf(callback), 1)
   }
 
   trigger(event, ...args) {
-    this._events = this._events || {};
+    this._events = this._events || {}
 
     if (event in this._events === false) {
-      return;
+      return
     }
 
     for (let i = 0; i < this._events[event].length; i++) {
-      this._events[event][i].apply(this, args);
+      this._events[event][i].apply(this, args)
     }
   }
 }
@@ -2468,31 +2468,31 @@ class MicroEvent {
 - `AJAX` 层: 唯一的责任 - 请求和返回数据, 接着将数据发送给所有想要使用数据的地方.
 
 ```ts
-(function ($) {
+;(function ($) {
   // Pre-compile template and "cache" it using closure
-  const resultTemplate = _.template($('#resultTemplate').html());
+  const resultTemplate = _.template($('#resultTemplate').html())
 
   // Subscribe to the new search tags topic
   $.subscribe('/search/tags', function (tags) {
-    $('#searchResults').html(`Searched for: ${tags}`);
-  });
+    $('#searchResults').html(`Searched for: ${tags}`)
+  })
 
   // Subscribe to the new results topic
   $.subscribe('/search/resultSet', function (results) {
-    $('#searchResults').append(resultTemplate(results));
-  });
+    $('#searchResults').append(resultTemplate(results))
+  })
 
   // Submit a search query and publish tags on the /search/tags topic
   $('#flickrSearch').submit(function (e) {
-    e.preventDefault();
-    const tags = $(this).find('#query').val();
+    e.preventDefault()
+    const tags = $(this).find('#query').val()
 
     if (!tags) {
-      return;
+      return
     }
 
-    $.publish('/search/tags', [$.trim(tags)]);
-  });
+    $.publish('/search/tags', [$.trim(tags)])
+  })
 
   // Subscribe to new tags being published and perform
   // a search query using them. Once data has returned
@@ -2511,14 +2511,14 @@ class MicroEvent {
 
       function (data) {
         if (!data.items.length) {
-          return;
+          return
         }
 
-        $.publish('/search/resultSet', data.items);
+        $.publish('/search/resultSet', data.items)
       }
-    );
-  });
-})();
+    )
+  })
+})()
 ```
 
 ### State Pattern
@@ -2544,59 +2544,59 @@ class MicroEvent {
 ```ts
 class Switch {
   constructor() {
-    this.state = new OffState();
+    this.state = new OffState()
   }
 
   on() {
-    this.state.on(this);
+    this.state.on(this)
   }
 
   off() {
-    this.state.off(this);
+    this.state.off(this)
   }
 }
 
 class State {
   constructor() {
-    if (this.constructor === State) throw new Error('abstract!');
+    if (this.constructor === State) throw new Error('abstract!')
   }
 
   on(sw) {
-    console.log('Light is already on.');
+    console.log('Light is already on.')
   }
 
   off(sw) {
-    console.log('Light is already off.');
+    console.log('Light is already off.')
   }
 }
 
 class OnState extends State {
   constructor() {
-    super();
-    console.log('Light turned on.');
+    super()
+    console.log('Light turned on.')
   }
 
   off(sw) {
-    console.log('Turning light off...');
-    sw.state = new OffState();
+    console.log('Turning light off...')
+    sw.state = new OffState()
   }
 }
 
 class OffState extends State {
   constructor() {
-    super();
-    console.log('Light turned off.');
+    super()
+    console.log('Light turned off.')
   }
 
   on(sw) {
-    console.log('Turning light on...');
-    sw.state = new OnState();
+    console.log('Turning light on...')
+    sw.state = new OnState()
   }
 }
 
-const button = new Switch();
-button.on();
-button.off();
+const button = new Switch()
+button.on()
+button.off()
 ```
 
 ### Strategy Pattern
@@ -2624,7 +2624,7 @@ Change strategy:
 const OutputFormat = Object.freeze({
   markdown: 0,
   html: 1,
-});
+})
 
 class ListStrategy {
   start(buffer) {}
@@ -2634,67 +2634,67 @@ class ListStrategy {
 
 class MarkdownListStrategy extends ListStrategy {
   addListItem(buffer, item) {
-    buffer.push(` * ${item}`);
+    buffer.push(` * ${item}`)
   }
 }
 
 class HtmlListStrategy extends ListStrategy {
   start(buffer) {
-    buffer.push('<ul>');
+    buffer.push('<ul>')
   }
 
   end(buffer) {
-    buffer.push('</ul>');
+    buffer.push('</ul>')
   }
 
   addListItem(buffer, item) {
-    buffer.push(`  <li>${item}</li>`);
+    buffer.push(`  <li>${item}</li>`)
   }
 }
 
 class TextProcessor {
   constructor(outputFormat) {
-    this.buffer = [];
-    this.setOutputFormat(outputFormat);
+    this.buffer = []
+    this.setOutputFormat(outputFormat)
   }
 
   setOutputFormat(format) {
     switch (format) {
       case OutputFormat.markdown:
-        this.listStrategy = new MarkdownListStrategy();
-        break;
+        this.listStrategy = new MarkdownListStrategy()
+        break
       case OutputFormat.html:
-        this.listStrategy = new HtmlListStrategy();
-        break;
+        this.listStrategy = new HtmlListStrategy()
+        break
       default:
-        throw new Error('Unsupported output format!');
+        throw new Error('Unsupported output format!')
     }
   }
 
   appendList(items) {
-    this.listStrategy.start(this.buffer);
-    for (const item of items) this.listStrategy.addListItem(this.buffer, item);
-    this.listStrategy.end(this.buffer);
+    this.listStrategy.start(this.buffer)
+    for (const item of items) this.listStrategy.addListItem(this.buffer, item)
+    this.listStrategy.end(this.buffer)
   }
 
   clear() {
-    this.buffer = [];
+    this.buffer = []
   }
 
   toString() {
-    return this.buffer.join('\n');
+    return this.buffer.join('\n')
   }
 }
 
-const tp = new TextProcessor();
-tp.setOutputFormat(OutputFormat.markdown);
-tp.appendList(['one', 'two', 'three']);
-console.log(tp.toString());
+const tp = new TextProcessor()
+tp.setOutputFormat(OutputFormat.markdown)
+tp.appendList(['one', 'two', 'three'])
+console.log(tp.toString())
 
-tp.clear();
-tp.setOutputFormat(OutputFormat.html);
-tp.appendList(['one', 'two', 'three']);
-console.log(tp.toString());
+tp.clear()
+tp.setOutputFormat(OutputFormat.html)
+tp.appendList(['one', 'two', 'three'])
+console.log(tp.toString())
 ```
 
 Remove `if-else` statements:
@@ -2703,15 +2703,15 @@ Remove `if-else` statements:
 // 违反开放封闭原则
 const activity = (type, price) => {
   if (type === 'pre') {
-    return price * 0.95;
+    return price * 0.95
   } else if (type === 'onSale') {
-    return price * 0.9;
+    return price * 0.9
   } else if (type === 'back') {
-    return price * 0.85;
+    return price * 0.85
   } else if (type === 'limit') {
-    return price * 0.8;
+    return price * 0.8
   }
-};
+}
 
 // 利用 Strategy Pattern 进行重构
 const activity = new Map([
@@ -2719,49 +2719,49 @@ const activity = new Map([
   ['onSale', price => price * 0.9],
   ['back', price => price * 0.85],
   ['limit', price => price * 0.8],
-]);
+])
 
-const getActivityPrice = (type, price) => activity.get(type)(price);
+const getActivityPrice = (type, price) => activity.get(type)(price)
 
 // 新增新手活动
-activity.set('newcomer', price => price * 0.7);
+activity.set('newcomer', price => price * 0.7)
 ```
 
 ```ts
 module.exports = (function () {
-  const manager = {};
+  const manager = {}
 
   // command to be encapsulated
   manager.isNull = function (nu) {
-    return toString.apply(nu) === '[object Null]';
-  };
+    return toString.apply(nu) === '[object Null]'
+  }
   manager.isArray = function (arr) {
-    return toString.apply(arr) === '[object Array]';
-  };
+    return toString.apply(arr) === '[object Array]'
+  }
   manager.isString = function (str) {
-    return toString.apply(str) === '[object String]';
-  };
+    return toString.apply(str) === '[object String]'
+  }
 
   // public api
   function execute(command, ...args) {
-    return manager[command] && manager[command](...args);
+    return manager[command] && manager[command](...args)
   }
 
   function run(command) {
-    return manager[command] && manager[command]();
+    return manager[command] && manager[command]()
   }
 
   return {
     execute,
     run,
-  };
-})();
+  }
+})()
 ```
 
 Form validator:
 
 ```ts
-const errorMsg = rules[rule](element, limits);
+const errorMsg = rules[rule](element, limits)
 ```
 
 ### Template Method Pattern
@@ -2784,64 +2784,64 @@ const errorMsg = rules[rule](element, limits);
 ```ts
 class Game {
   constructor(numberOfPlayers) {
-    this.numberOfPlayers = numberOfPlayers;
-    this.currentPlayer = 0;
+    this.numberOfPlayers = numberOfPlayers
+    this.currentPlayer = 0
   }
 
   run() {
-    this.start();
+    this.start()
     while (!this.haveWinner) {
-      this.takeTurn();
+      this.takeTurn()
     }
-    console.log(`Player ${this.winningPlayer} wins.`);
+    console.log(`Player ${this.winningPlayer} wins.`)
   }
 
   start() {
-    throw new Error('Unimplemented `start` method!');
+    throw new Error('Unimplemented `start` method!')
   }
 
   takeTurn() {
-    throw new Error('Unimplemented `takeTurn` method!');
+    throw new Error('Unimplemented `takeTurn` method!')
   }
 
   get haveWinner() {
-    return this.haveWinner;
+    return this.haveWinner
   }
 
   get winningPlayer() {
-    return this.winningPlayer;
+    return this.winningPlayer
   }
 }
 
 class Chess extends Game {
   constructor() {
-    super(2);
-    this.maxTurns = 10;
-    this.turn = 1;
+    super(2)
+    this.maxTurns = 10
+    this.turn = 1
   }
 
   start() {
     console.log(
       `Starting a game of chess with ${this.numberOfPlayers} players.`
-    );
+    )
   }
 
   get haveWinner() {
-    return this.turn === this.maxTurns;
+    return this.turn === this.maxTurns
   }
 
   takeTurn() {
-    console.log(`Turn ${this.turn++} taken by player ${this.currentPlayer}.`);
-    this.currentPlayer = (this.currentPlayer + 1) % this.numberOfPlayers;
+    console.log(`Turn ${this.turn++} taken by player ${this.currentPlayer}.`)
+    this.currentPlayer = (this.currentPlayer + 1) % this.numberOfPlayers
   }
 
   get winningPlayer() {
-    return this.currentPlayer;
+    return this.currentPlayer
   }
 }
 
-const chess = new Chess();
-chess.run();
+const chess = new Chess()
+chess.run()
 ```
 
 ### Visitor Pattern
@@ -2858,35 +2858,35 @@ Separating an algorithm from an object structure on which it operates.
 ```ts
 class NumberExpression {
   constructor(value) {
-    this.value = value;
+    this.value = value
   }
 
   print(buffer) {
-    buffer.push(this.value.toString());
+    buffer.push(this.value.toString())
   }
 }
 
 class AdditionExpression {
   constructor(left, right) {
-    this.left = left;
-    this.right = right;
+    this.left = left
+    this.right = right
   }
 
   print(buffer) {
-    buffer.push('(');
-    this.left.print(buffer);
-    buffer.push('+');
-    this.right.print(buffer);
-    buffer.push(')');
+    buffer.push('(')
+    this.left.print(buffer)
+    buffer.push('+')
+    this.right.print(buffer)
+    buffer.push(')')
   }
 }
 
 const e = new AdditionExpression(
   new NumberExpression(5),
   new AdditionExpression(new NumberExpression(1), new NumberExpression(9))
-);
-const buffer = [];
-e.print(buffer);
+)
+const buffer = []
+e.print(buffer)
 ```
 
 ### IoC and DI Pattern
@@ -2912,119 +2912,119 @@ IoC Container 将 B 实例化后,
 class Component {
   // 构造函数注入.
   constructor(dep) {
-    this.dep = dep;
+    this.dep = dep
   }
 
   // 接口方法注入.
   run(context, options = {}) {
-    const dep1 = context.getDep1();
-    const dep2 = context.getDep2();
-    dep1.run();
-    dep2.run();
+    const dep1 = context.getDep1()
+    const dep2 = context.getDep2()
+    dep1.run()
+    dep2.run()
   }
 
   // 设置属性注入.
   getDep(dep) {
-    this.dep = dep;
+    this.dep = dep
   }
 
   // 工厂模式注入.
   static createComponent(dep) {
-    return new Component(dep);
+    return new Component(dep)
   }
 
   action() {
-    this.dep.run();
+    this.dep.run()
   }
 }
 
 // IoC.
-const s1 = new Service('s1');
-const s2 = Container.getService('s2');
-const s3 = Context.getDep('s3');
-const s4 = Context.getInstance();
+const s1 = new Service('s1')
+const s2 = Container.getService('s2')
+const s3 = Context.getDep('s3')
+const s4 = Context.getInstance()
 
 // DI.
-const c1 = new Component(s1);
-c1.action(); // s1 run.
-c1.getDep(s2);
-c1.action(); // s2 run.
-const c2 = Component.createComponent(s3);
-c2.action(); // s3 run.
-c2.run(s4); // s4 run.
+const c1 = new Component(s1)
+c1.action() // s1 run.
+c1.getDep(s2)
+c1.action() // s2 run.
+const c2 = Component.createComponent(s3)
+c2.action() // s3 run.
+c2.run(s4) // s4 run.
 ```
 
 #### Depends on Abstraction
 
 ```ts
 interface Database {
-  query: () => void;
+  query: () => void
 }
 
 class DbMysql extends Database {
   public query() {
-    console.log('Querying by MySQL');
+    console.log('Querying by MySQL')
   }
 }
 
 class Controller {
-  private db: Database;
+  private db: Database
 
   public constructor(db: Database) {
-    this.db = db;
+    this.db = db
   }
 
   public action() {
-    this.db.query();
+    this.db.query()
   }
 }
 
-const db = new DbMysql();
-const c = new Controller(db);
-c.action();
+const db = new DbMysql()
+const c = new Controller(db)
+c.action()
 ```
 
 #### Injection Container
 
 ```tsx
-import * as React from 'react';
-import type { IProvider } from './providers';
+import * as React from 'react'
+import type { IProvider } from './providers'
 
 class Injector {
-  private static container = new Map<string, any>();
+  private static container = new Map<string, any>()
 
   static resolve<T>(target: Type<T>): T {
     if (Injector.container.has(target.name)) {
-      return Injector.container.get(target.name);
+      return Injector.container.get(target.name)
     }
 
-    const tokens = Reflect.getMetadata('design:types', target) || [];
+    const tokens = Reflect.getMetadata('design:types', target) || []
     const injections = tokens.map((token: Type<any>): any =>
       Injector.resolve(token)
-    );
+    )
     // eslint-disable-next-line new-cap
-    const instance = new target(...injections);
-    Injector.container.set(target.name, instance);
-    return instance;
+    const instance = new target(...injections)
+    Injector.container.set(target.name, instance)
+    return instance
   }
 }
 
 export interface IProvider<T> {
-  provide(): T;
+  provide(): T
 }
 
 @injectable()
 export class NameProvider implements IProvider<string> {
   provide() {
-    return 'World';
+    return 'World'
   }
 }
 
 export class Hello extends React.Component {
-  private readonly nameProvider: IProvider<string>;
+  private readonly nameProvider: IProvider<string>
 
   render() {
-    return <h1>Hello {this.nameProvider.provide()}!</h1>;
+    return <h1>Hello {this.nameProvider.provide()}!</h1>
   }
 }
 ```
@@ -3042,20 +3042,19 @@ React and Vue drop `Mixin`:
 ```ts
 // Extend an existing object with a method from another
 function mixin(...args) {
-  const receivingClass = args[0];
-  const givingClass = args[1];
+  const receivingClass = args[0]
+  const givingClass = args[1]
 
   // Mixin provide certain methods
   if (args[2]) {
     for (let i = 2, len = args.length; i < len; i++) {
-      receivingClass.prototype[args[i]] = givingClass.prototype[args[i]];
+      receivingClass.prototype[args[i]] = givingClass.prototype[args[i]]
     }
   } else {
     // Mixin provide obj
     for (const methodName in givingClass.prototype) {
       if (!receivingClass.prototype[methodName]) {
-        receivingClass.prototype[methodName] =
-          givingClass.prototype[methodName];
+        receivingClass.prototype[methodName] = givingClass.prototype[methodName]
       }
     }
   }
@@ -3068,36 +3067,36 @@ function mixin(...args) {
 const MoveMixin = superclass =>
   class extends superclass {
     moveUp() {
-      console.log('move up');
+      console.log('move up')
     }
 
     moveDown() {
-      console.log('move down');
+      console.log('move down')
     }
 
     stop() {
-      console.log('stop! in the name of love!');
+      console.log('stop! in the name of love!')
     }
-  };
+  }
 
 class CarAnimator {
   moveLeft() {
-    console.log('move left');
+    console.log('move left')
   }
 }
 
 class PersonAnimator {
   moveRandomly() {
-    console.log('move randomly');
+    console.log('move randomly')
   }
 }
 
 class Animator extends MoveMixin(CarAnimator) {}
 
-const animator = new Animator();
-animator.moveLeft();
-animator.moveDown();
-animator.stop();
+const animator = new Animator()
+animator.moveLeft()
+animator.moveDown()
+animator.stop()
 // Outputs:
 // move left
 // move down
@@ -3106,7 +3105,7 @@ animator.stop();
 
 ```ts
 // 所有 mixins 都需要:
-type Constructor<T = {}> = new (...args: any[]) => T;
+type Constructor<T = {}> = new (...args: any[]) => T
 
 /////////////
 // mixins 例子
@@ -3115,23 +3114,23 @@ type Constructor<T = {}> = new (...args: any[]) => T;
 // 添加属性的混合例子
 function TimesTamped<TBase extends Constructor>(Base: TBase) {
   return class extends Base {
-    timestamp = Date.now();
-  };
+    timestamp = Date.now()
+  }
 }
 
 // 添加属性和方法的混合例子
 function ActiveTable<TBase extends Constructor>(Base: TBase) {
   return class extends Base {
-    isActivated = false;
+    isActivated = false
 
     activate() {
-      this.isActivated = true;
+      this.isActivated = true
     }
 
     deactivate() {
-      this.isActivated = false;
+      this.isActivated = false
     }
-  };
+  }
 }
 
 ///////////
@@ -3140,25 +3139,25 @@ function ActiveTable<TBase extends Constructor>(Base: TBase) {
 
 // 简答的类
 class User {
-  name = '';
+  name = ''
 }
 
 // 添加 TimesTamped 的 User
-const TimestampedUser = TimesTamped(User);
+const TimestampedUser = TimesTamped(User)
 
 // Tina TimesTamped 和 ActiveTable 的类
-const TimestampedActiveTableUser = TimesTamped(ActiveTable(User));
+const TimestampedActiveTableUser = TimesTamped(ActiveTable(User))
 
 //////////
 // 使用组合类
 //////////
 
-const timestampedUserExample = new TimestampedUser();
-console.log(timestampedUserExample.timestamp);
+const timestampedUserExample = new TimestampedUser()
+console.log(timestampedUserExample.timestamp)
 
-const timestampedActiveTableUserExample = new TimestampedActiveTableUser();
-console.log(timestampedActiveTableUserExample.timestamp);
-console.log(timestampedActiveTableUserExample.isActivated);
+const timestampedActiveTableUserExample = new TimestampedActiveTableUser()
+console.log(timestampedActiveTableUserExample.timestamp)
+console.log(timestampedActiveTableUserExample.isActivated)
 ```
 
 ## Programming Paradigms
@@ -3246,13 +3245,13 @@ on [JSConf.Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s):
 - Wrap Third-party Dependencies:
 
 ```tsx
-import { DatePicker as LibraryXDatePicker } from 'LibraryX';
+import { DatePicker as LibraryXDatePicker } from 'LibraryX'
 
 const DatePicker = props => {
-  return <LibraryXDatePicker {...props} />;
-};
+  return <LibraryXDatePicker {...props} />
+}
 
-export default DatePicker;
+export default DatePicker
 ```
 
 ### Framework Paradigms Comparison

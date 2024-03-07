@@ -126,7 +126,7 @@ npm i -D typescript ts-loader source-map-loader
 ```
 
 ```ts
-const path = require('node:path');
+const path = require('node:path')
 
 module.exports = {
   entry: './src/index.tsx',
@@ -151,7 +151,7 @@ module.exports = {
     react: 'React',
     'react-dom': 'ReactDOM',
   },
-};
+}
 ```
 
 ### ESLint Configuration
@@ -230,19 +230,19 @@ for `TypeScript` compile and build [Speed](https://github.com/typescript-cheatsh
 ```
 
 ```ts
-declare module '*.css';
+declare module '*.css'
 // => import * as foo from './some/file.css';
 
 declare module '*.png' {
-  const value: unknown;
-  export = value;
+  const value: unknown
+  export = value
 }
 // => import logo from './logo.png';
 // <img src={logo as string} />
 
 declare module '*.jpg' {
-  const value: unknown;
-  export = value;
+  const value: unknown
+  export = value
 }
 ```
 
@@ -254,7 +254,7 @@ declare global {
   namespace JSX {
     interface Element extends React.ReactElement<any, any> {}
     interface ElementClass extends React.Component<any> {
-      render(): React.ReactNode;
+      render(): React.ReactNode
     }
   }
 }
@@ -278,7 +278,7 @@ declare global {
 Namespace aliases:
 
 ```ts
-import polygons = Shapes.Polygons;
+import polygons = Shapes.Polygons
 
 namespace Shapes {
   export namespace Polygons {
@@ -287,24 +287,24 @@ namespace Shapes {
   }
 }
 
-const sq = new polygons.Square(); // Same as 'new Shapes.Polygons.Square()'
+const sq = new polygons.Square() // Same as 'new Shapes.Polygons.Square()'
 ```
 
 Library namespace declaration
 with [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-namespaces-with-classes-functions-and-enums):
 
 ```ts
-export = React;
-export as namespace React;
+export = React
+export as namespace React
 
 declare namespace React {
   type ElementType<P = any> =
     | {
         [K in keyof JSX.IntrinsicElements]: P extends JSX.IntrinsicElements[K]
           ? K
-          : never;
+          : never
       }[keyof JSX.IntrinsicElements]
-    | ComponentType<P>;
+    | ComponentType<P>
 }
 ```
 
@@ -313,17 +313,17 @@ declare namespace React {
 ```ts
 namespace Utility {
   export function log(msg) {
-    console.log(msg);
+    console.log(msg)
   }
   export function error(msg) {
-    console.log(msg);
+    console.log(msg)
   }
 }
 
-(function (Utility) {
-  Utility.log = log;
-  Utility.log = error;
-})(Utility || (Utility = {}));
+;(function (Utility) {
+  Utility.log = log
+  Utility.log = error
+})(Utility || (Utility = {}))
 ```
 
 :::caution No Namespace
@@ -419,41 +419,41 @@ their automatic member assignments can make code confusing to read.
     - distributive conditional type.
 
 ```ts
-let num: number;
-let str: string;
-let bool: boolean;
-let boolArray: boolean[];
-let tuple: [string, number];
-let power: any;
+let num: number
+let str: string
+let bool: boolean
+let boolArray: boolean[]
+let tuple: [string, number]
+let power: any
 
 // 赋值任意类型
-power = '123';
-power = 123;
+power = '123'
+power = 123
 
 // 它也兼容任何类型
-power = num;
-num = power;
+power = num
+num = power
 
 function log(message: string): void {
-  console.log(message);
+  console.log(message)
 }
 ```
 
 ```ts
 function unknownColor(x: never): never {
-  throw new Error('unknown color');
+  throw new Error('unknown color')
 }
 
-type Color = 'red' | 'green' | 'blue';
+type Color = 'red' | 'green' | 'blue'
 
 function getColorName(c: Color): string {
   switch (c) {
     case 'red':
-      return 'is red';
+      return 'is red'
     case 'green':
-      return 'is green';
+      return 'is green'
     default:
-      return unknownColor(c);
+      return unknownColor(c)
   }
 }
 ```
@@ -471,10 +471,10 @@ enum CardSuit {
 }
 
 // 简单的使用枚举类型
-let Card = CardSuit.Clubs;
+let Card = CardSuit.Clubs
 
 // 类型安全
-Card = 'not a member of card suit'; // Error: string 不能赋值给 `CardSuit` 类型
+Card = 'not a member of card suit' // Error: string 不能赋值给 `CardSuit` 类型
 ```
 
 ### String Enum
@@ -508,18 +508,18 @@ namespace Weekday {
     switch (day) {
       case Weekday.Saturday:
       case Weekday.Sunday:
-        return false;
+        return false
       default:
-        return true;
+        return true
     }
   }
 }
 
-const mon = Weekday.Monday;
-const sun = Weekday.Sunday;
+const mon = Weekday.Monday
+const sun = Weekday.Sunday
 
-console.log(Weekday.isBusinessDay(mon)); // true
-console.log(Weekday.isBusinessDay(sun));
+console.log(Weekday.isBusinessDay(mon)) // true
+console.log(Weekday.isBusinessDay(sun))
 ```
 
 ### Enum Flags
@@ -535,31 +535,31 @@ enum AnimalFlags {
 }
 
 interface Animal {
-  flags: AnimalFlags;
-  [key: string]: any;
+  flags: AnimalFlags
+  [key: string]: any
 }
 
 function printAnimalAbilities(animal: Animal) {
-  const animalFlags = animal.flags;
+  const animalFlags = animal.flags
   if (animalFlags & AnimalFlags.HasClaws) {
-    console.log('animal has claws');
+    console.log('animal has claws')
   }
   if (animalFlags & AnimalFlags.CanFly) {
-    console.log('animal can fly');
+    console.log('animal can fly')
   }
   if (animalFlags === AnimalFlags.None) {
-    console.log('nothing');
+    console.log('nothing')
   }
 }
 
-const animal = { flags: AnimalFlags.None };
-printAnimalAbilities(animal); // nothing
-animal.flags |= AnimalFlags.HasClaws;
-printAnimalAbilities(animal); // animal has claws
-animal.flags &= ~AnimalFlags.HasClaws;
-printAnimalAbilities(animal); // nothing
-animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly;
-printAnimalAbilities(animal); // animal has claws, animal can fly
+const animal = { flags: AnimalFlags.None }
+printAnimalAbilities(animal) // nothing
+animal.flags |= AnimalFlags.HasClaws
+printAnimalAbilities(animal) // animal has claws
+animal.flags &= ~AnimalFlags.HasClaws
+printAnimalAbilities(animal) // nothing
+animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly
+printAnimalAbilities(animal) // animal has claws, animal can fly
 ```
 
 ### Enum Index Signature
@@ -583,15 +583,15 @@ enum ColorPalette {
 }
 
 const hashString = (name = '') => {
-  return name.length;
-};
+  return name.length
+}
 
 const getColorByName = (name = ''): string => {
-  const palette = Object.keys(ColorPalette);
-  const colorIdx = hashString(name) % palette.length;
-  const paletteIdx = palette[colorIdx] as keyof typeof ColorPalette;
-  return ColorPalette[paletteIdx];
-};
+  const palette = Object.keys(ColorPalette)
+  const colorIdx = hashString(name) % palette.length
+  const paletteIdx = palette[colorIdx] as keyof typeof ColorPalette
+  return ColorPalette[paletteIdx]
+}
 ```
 
 ### Enum Internals
@@ -609,9 +609,9 @@ const enum NoYes {
 function toGerman(value: NoYes) {
   switch (value) {
     case NoYes.No:
-      return 'Neither';
+      return 'Neither'
     case NoYes.Yes:
-      return 'Ja';
+      return 'Ja'
   }
 }
 
@@ -619,9 +619,9 @@ function toGerman(value: NoYes) {
 function toGerman(value) {
   switch (value) {
     case 'No' /* No */:
-      return 'Neither';
+      return 'Neither'
     case 'Yes' /* Yes */:
-      return 'Ja';
+      return 'Ja'
   }
 }
 ```
@@ -637,16 +637,16 @@ enum Tristate {
 }
 
 // Compiles to:
-let Tristate;
-(function (Tristate) {
-  Tristate[(Tristate.False = 0)] = 'False';
-  Tristate[(Tristate.True = 1)] = 'True';
-  Tristate[(Tristate.Unknown = 2)] = 'Unknown';
-})(Tristate || (Tristate = {}));
+let Tristate
+;(function (Tristate) {
+  Tristate[(Tristate.False = 0)] = 'False'
+  Tristate[(Tristate.True = 1)] = 'True'
+  Tristate[(Tristate.Unknown = 2)] = 'Unknown'
+})(Tristate || (Tristate = {}))
 
-console.log(Tristate[0]); // 'False'
-console.log(Tristate.False); // 0
-console.log(Tristate[Tristate.False]); // 'False' because `Tristate.False == 0`
+console.log(Tristate[0]) // 'False'
+console.log(Tristate.False) // 0
+console.log(Tristate[Tristate.False]) // 'False' because `Tristate.False == 0`
 ```
 
 ```ts
@@ -655,11 +655,11 @@ enum NoYes {
   Yes = 'YES!',
 }
 
-let NoYes;
-(function (NoYes) {
-  NoYes.No = 'NO!';
-  NoYes.Yes = 'YES!';
-})(NoYes || (NoYes = {}));
+let NoYes
+;(function (NoYes) {
+  NoYes.No = 'NO!'
+  NoYes.Yes = 'YES!'
+})(NoYes || (NoYes = {}))
 ```
 
 ## Function
@@ -668,42 +668,42 @@ let NoYes;
 
 ```ts
 interface ReturnString {
-  (): string;
+  (): string
 }
 
-declare const foo: ReturnString;
+declare const foo: ReturnString
 
-const bar = foo(); // bar 被推断为一个字符串
+const bar = foo() // bar 被推断为一个字符串
 ```
 
 ```ts
 interface Complex {
-  (foo: string, bar?: number, ...others: boolean[]): number;
+  (foo: string, bar?: number, ...others: boolean[]): number
 }
 ```
 
 ```ts
 interface Overloaded {
-  (foo: string): string;
-  (foo: number): number;
+  (foo: string): string
+  (foo: number): number
 }
 
 // 实现接口的一个例子：
-function stringOrNumber(foo: number): number;
-function stringOrNumber(foo: string): string;
+function stringOrNumber(foo: number): number
+function stringOrNumber(foo: string): string
 function stringOrNumber(foo: any): any {
   if (typeof foo === 'number') {
-    return foo * foo;
+    return foo * foo
   } else if (typeof foo === 'string') {
-    return `hello ${foo}`;
+    return `hello ${foo}`
   }
 }
 
-const overloaded: Overloaded = stringOrNumber;
+const overloaded: Overloaded = stringOrNumber
 
 // 使用
-const str = overloaded(''); // str 被推断为 'string'
-const num = overloaded(123); // num 被推断为 'number'
+const str = overloaded('') // str 被推断为 'string'
+const num = overloaded(123) // num 被推断为 'number'
 ```
 
 WangCai `extends` Dog `extends` Animal.
@@ -717,7 +717,7 @@ Animal => WangCai 是 Dog => Dog 的子类型:
 在一个以 number 类型为参数，以 string 类型为返回值的函数中:
 
 ```ts
-const simple: (foo: number) => string = foo => foo.toString();
+const simple: (foo: number) => string = foo => foo.toString()
 ```
 
 ### Function Overload
@@ -730,28 +730,28 @@ const simple: (foo: number) => string = foo => foo.toString();
 
 ```ts
 // 重载
-function padding(all: number);
-function padding(topAndBottom: number, leftAndRight: number);
-function padding(top: number, right: number, bottom: number, left: number);
+function padding(all: number)
+function padding(topAndBottom: number, leftAndRight: number)
+function padding(top: number, right: number, bottom: number, left: number)
 function padding(a: number, b?: number, c?: number, d?: number) {
   if (b === undefined && c === undefined && d === undefined) {
-    b = c = d = a;
+    b = c = d = a
   } else if (c === undefined && d === undefined) {
-    c = a;
-    d = b;
+    c = a
+    d = b
   }
   return {
     top: a,
     right: b,
     bottom: c,
     left: d,
-  };
+  }
 }
 
-padding(1); // Okay: all
-padding(1, 1); // Okay: topAndBottom, leftAndRight
-padding(1, 1, 1, 1); // Okay: top, right, bottom, left
-padding(1, 1, 1); // Error: Not a part of the available overloads
+padding(1) // Okay: all
+padding(1, 1) // Okay: topAndBottom, leftAndRight
+padding(1, 1, 1, 1) // Okay: top, right, bottom, left
+padding(1, 1, 1) // Error: Not a part of the available overloads
 ```
 
 :::tip Function Overload
@@ -765,22 +765,22 @@ padding(1, 1, 1); // Error: Not a part of the available overloads
 ### Rest Parameters
 
 ```ts
-type Arr = readonly unknown[];
+type Arr = readonly unknown[]
 function partialCall<T extends Arr, U extends Arr, R>(
   f: (...args: [...T, ...U]) => R,
   ...headArgs: T
 ) {
-  return (...tailArgs: U) => f(...headArgs, ...tailArgs);
+  return (...tailArgs: U) => f(...headArgs, ...tailArgs)
 }
 
-const foo = (x: string, y: number, z: boolean) => {};
-const f1 = partialCall(foo, 100);
-const f2 = partialCall(foo, 'hello', 100, true, 'oops');
-const f3 = partialCall(foo, 'hello');
+const foo = (x: string, y: number, z: boolean) => {}
+const f1 = partialCall(foo, 100)
+const f2 = partialCall(foo, 'hello', 100, true, 'oops')
+const f3 = partialCall(foo, 'hello')
 
-f3(123, true);
-f3();
-f3(123, 'hello');
+f3(123, true)
+f3()
+f3(123, 'hello')
 ```
 
 ### Function Types Design
@@ -792,25 +792,25 @@ f3(123, 'hello');
 
 ```ts
 interface LngLat {
-  lng: number;
-  lat: number;
+  lng: number
+  lat: number
 }
 
-type LngLatLike = LngLat | { lon: number; lat: number } | [number, number];
+type LngLatLike = LngLat | { lon: number; lat: number } | [number, number]
 
 interface Camera {
-  center: LngLat;
-  zoom: number;
-  bearing: number;
-  pitch: number;
+  center: LngLat
+  zoom: number
+  bearing: number
+  pitch: number
 }
 
 interface CameraOptions extends Omit<Partial<Camera>, 'center'> {
-  center?: LngLatLike;
+  center?: LngLatLike
 }
 
 function createCamera(options: CameraOptions): Camera {
-  return CameraFactory.create(options);
+  return CameraFactory.create(options)
 }
 ```
 
@@ -818,26 +818,26 @@ function createCamera(options: CameraOptions): Camera {
 
 ```ts
 interface Name {
-  first: string;
-  second: string;
+  first: string
+  second: string
 }
 
-let name: Name;
+let name: Name
 name = {
   first: 'John',
   second: 'Doe',
-};
+}
 
 name = {
   // Error: 'Second is missing'
   first: 'John',
-};
+}
 
 name = {
   // Error: 'Second is the wrong type'
   first: 'John',
   second: 1337,
-};
+}
 ```
 
 ### Interface Function
@@ -847,8 +847,8 @@ name = {
 
 ```ts
 interface HasBothFunctionTypes {
-  method(): string;
-  property: () => string;
+  method(): string
+  property: () => string
 }
 ```
 
@@ -860,18 +860,18 @@ does not copy any interface members onto class definition:
 ```ts
 interface Crazy {
   new (): {
-    hello: number;
-  };
+    hello: number
+  }
 }
 
 class CrazyClass implements Crazy {
   constructor() {
-    return { hello: 123 };
+    return { hello: 123 }
   }
 }
 
 // Because
-const crazy = new CrazyClass(); // crazy would be { hello:123 }
+const crazy = new CrazyClass() // crazy would be { hello:123 }
 ```
 
 ### Interface Extension
@@ -883,15 +883,15 @@ Overridden property must be assignable to its base property
 
 ```ts
 interface WithNullableName {
-  name: string | null;
+  name: string | null
 }
 
 interface WithNonNullableName extends WithNullableName {
-  name: string;
+  name: string
 }
 
 interface WithNumericName extends WithNullableName {
-  name: number | string;
+  name: number | string
 }
 // Error: Interface 'WithNumericName' incorrectly
 // extends interface 'WithNullableName'.
@@ -909,18 +909,18 @@ external 3rd-party packages (e.g `Cypress`) or built-in global interfaces (e.g `
 ```ts
 // Lib a.d.ts
 interface Point {
-  x: number;
-  y: number;
+  x: number
+  y: number
 }
-declare const myPoint: Point;
+declare const myPoint: Point
 
 // Lib b.d.ts
 interface Point {
-  z: number;
+  z: number
 }
 
 // Your code
-const z = myPoint.z; // Allowed!
+const z = myPoint.z // Allowed!
 ```
 
 Extend 3rd-party module interface:
@@ -928,7 +928,7 @@ Extend 3rd-party module interface:
 ```ts
 declare module '3rd-party-module' {
   export interface Interface {
-    foo: { title: string };
+    foo: { title: string }
   }
 }
 ```
@@ -942,15 +942,15 @@ declare module '3rd-party-module' {
 
 ```ts
 interface Window {
-  title: string;
+  title: string
 }
 
 interface Window {
-  ts: TypeScriptAPI;
+  ts: TypeScriptAPI
 }
 
-const src = 'const a = "Hello World"';
-window.ts.transpileModule(src, {});
+const src = 'const a = "Hello World"'
+window.ts.transpileModule(src, {})
 ```
 
 ## Type Modifiers
@@ -961,25 +961,25 @@ window.ts.transpileModule(src, {});
 
 ```ts
 class Singleton {
-  private static instance: Singleton;
+  private static instance: Singleton
   private constructor() {
     // ..
   }
 
   public static getInstance() {
     if (!Singleton.instance) {
-      Singleton.instance = new Singleton();
+      Singleton.instance = new Singleton()
     }
 
-    return Singleton.instance;
+    return Singleton.instance
   }
 
   someMethod() {}
 }
 
-const someThing = new Singleton(); // Error: constructor of 'singleton' is private
+const someThing = new Singleton() // Error: constructor of 'singleton' is private
 
-const instance = Singleton.getInstance(); // do some thing with the instance
+const instance = Singleton.getInstance() // do some thing with the instance
 ```
 
 ### Readonly Type Modifier
@@ -988,37 +988,37 @@ const instance = Singleton.getInstance(); // do some thing with the instance
 
 ```ts
 interface Foo {
-  readonly bar: number;
-  readonly bas: number;
+  readonly bar: number
+  readonly bas: number
 }
 
 // 初始化
-const foo: Foo = { bar: 123, bas: 456 };
+const foo: Foo = { bar: 123, bas: 456 }
 
 // 不能被改变
-foo.bar = 456; // Error: foo.bar 为仅读属性
+foo.bar = 456 // Error: foo.bar 为仅读属性
 ```
 
 `readonly` indexable signature:
 
 ```ts
-type Foo = Readonly<Record<number, number>>;
+type Foo = Readonly<Record<number, number>>
 
 // 使用
 
-const foo: Foo = { 0: 123, 2: 345 };
-console.log(foo[0]); // ok (读取)
-foo[0] = 456; // Error: 属性只读
+const foo: Foo = { 0: 123, 2: 345 }
+console.log(foo[0]) // ok (读取)
+foo[0] = 456 // Error: 属性只读
 ```
 
 `readonly` class properties:
 
 ```ts
 class Foo {
-  readonly bar = 1; // OK
-  readonly baz: string;
+  readonly bar = 1 // OK
+  readonly baz: string
   constructor() {
-    this.baz = 'hello'; // OK
+    this.baz = 'hello' // OK
   }
 }
 ```
@@ -1027,17 +1027,17 @@ class Foo {
 
 ```ts
 interface Foo {
-  bar: number;
-  bas: number;
+  bar: number
+  bas: number
 }
 
-type FooReadonly = Readonly<Foo>;
+type FooReadonly = Readonly<Foo>
 
-const foo: Foo = { bar: 123, bas: 456 };
-const fooReadonly: FooReadonly = { bar: 123, bas: 456 };
+const foo: Foo = { bar: 123, bas: 456 }
+const fooReadonly: FooReadonly = { bar: 123, bas: 456 }
 
-foo.bar = 456; // ok
-fooReadonly.bar = 456; // Error: bar 属性只读
+foo.bar = 456 // ok
+fooReadonly.bar = 456 // Error: bar 属性只读
 ```
 
 `readonly` `React` props:
@@ -1045,9 +1045,9 @@ fooReadonly.bar = 456; // Error: bar 属性只读
 ```ts
 class Something extends React.Component<{ foo: number }, { baz: number }> {
   someMethod() {
-    this.props.foo = 123; // Error: props 是不可变的
+    this.props.foo = 123 // Error: props 是不可变的
     // eslint-disable-next-line react/no-direct-mutation-state
-    this.state.baz = 456; // Error: 你应该使用 this.setState()
+    this.state.baz = 456 // Error: 你应该使用 this.setState()
   }
 }
 ```
@@ -1055,9 +1055,9 @@ class Something extends React.Component<{ foo: number }, { baz: number }> {
 `readonly` is shallow:
 
 ```ts
-const dates: readonly Date[] = [new Date()];
-dates.push(new Date()); // Error
-dates[0].setFullYear(2037); // OK
+const dates: readonly Date[] = [new Date()]
+dates.push(new Date()) // Error
+dates[0].setFullYear(2037) // OK
 ```
 
 ## Call Signature
@@ -1068,17 +1068,17 @@ Call signature looks similar to a function type,
 but with a `:` colon instead of an `=>` arrow:
 
 ```ts
-type FunctionAlias = (input: string) => number;
+type FunctionAlias = (input: string) => number
 
 interface CallSignature {
-  (input: string): number;
+  (input: string): number
 }
 
 // Type: (input: string) => number
-const typedFunctionAlias: FunctionAlias = input => input.length; // Ok
+const typedFunctionAlias: FunctionAlias = input => input.length // Ok
 
 // Type: (input: string) => number
-const typedCallSignature: CallSignature = input => input.length; // Ok
+const typedCallSignature: CallSignature = input => input.length // Ok
 ```
 
 ### Call Signature Property
@@ -1088,26 +1088,26 @@ that have some **additional user-defined property** on them:
 
 ```ts
 interface FunctionWithCount {
-  count: number;
-  (): void;
+  count: number
+  (): void
 }
 
-let hasCallCount: FunctionWithCount;
+let hasCallCount: FunctionWithCount
 
 function keepsTrackOfCalls() {
-  keepsTrackOfCalls.count += 1;
-  console.log(`I've been called ${keepsTrackOfCalls.count} times!`);
+  keepsTrackOfCalls.count += 1
+  console.log(`I've been called ${keepsTrackOfCalls.count} times!`)
 }
 
-keepsTrackOfCalls.count = 0;
+keepsTrackOfCalls.count = 0
 
-hasCallCount = keepsTrackOfCalls; // Ok
+hasCallCount = keepsTrackOfCalls // Ok
 
 function doesNotHaveCount() {
-  console.log('No idea!');
+  console.log('No idea!')
 }
 
-hasCallCount = doesNotHaveCount;
+hasCallCount = doesNotHaveCount
 // Error: Property 'count' is missing in type
 // '() => void' but required in type 'FunctionWithCalls'
 ```
@@ -1120,15 +1120,15 @@ implicitly calls `toString` on any object index signature:
 ```ts
 const obj = {
   toString() {
-    console.log('toString called');
-    return 'Hello';
+    console.log('toString called')
+    return 'Hello'
   },
-};
+}
 
-const foo: any = {};
-foo[obj] = 'World'; // toString called
-console.log(foo[obj]); // toString called, World
-console.log(foo.Hello); // World
+const foo: any = {}
+foo[obj] = 'World' // toString called
+console.log(foo[obj]) // toString called, World
+console.log(foo.Hello) // World
 ```
 
 `TypeScript` will give an error to prevent beginners from doing such things,
@@ -1147,15 +1147,15 @@ Can fixed with:
 ```ts
 // propertyName should be extends keyof T
 function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
-  return o[propertyName]; // o[propertyName] is of type T[K]
+  return o[propertyName] // o[propertyName] is of type T[K]
 }
 ```
 
 ### Index Signature Type Check
 
 ```ts
-const x: { foo: number; [x: string]: any };
-x = { foo: 1, baz: 2 }; // ok, 'baz' 属性匹配于索引签名
+const x: { foo: number; [x: string]: any }
+x = { foo: 1, baz: 2 } // ok, 'baz' 属性匹配于索引签名
 ```
 
 当你声明一个索引签名时，所有明确的成员都必须符合索引签名:
@@ -1163,16 +1163,16 @@ x = { foo: 1, baz: 2 }; // ok, 'baz' 属性匹配于索引签名
 ```ts
 // ok
 interface Foo {
-  [key: string]: number;
-  x: number;
-  y: number;
+  [key: string]: number
+  x: number
+  y: number
 }
 
 // Error
 interface Bar {
-  [key: string]: number;
-  x: number;
-  y: string; // Error: y 属性必须为 number 类型
+  [key: string]: number
+  x: number
+  y: string // Error: y 属性必须为 number 类型
 }
 ```
 
@@ -1180,28 +1180,28 @@ interface Bar {
 
 ```ts
 interface FieldState {
-  value: string;
+  value: string
 }
 
-type FormState = { isValid: boolean } & Record<string, FieldState>;
+type FormState = { isValid: boolean } & Record<string, FieldState>
 ```
 
 ### Select Index Types
 
 ```ts
-type Index = 'a' | 'b' | 'c';
-type FromIndex = { [k in Index]?: number };
+type Index = 'a' | 'b' | 'c'
+type FromIndex = { [k in Index]?: number }
 
-const good: FromIndex = { b: 1, c: 2 };
+const good: FromIndex = { b: 1, c: 2 }
 
 // Error:
 // `{ b: 1, c: 2, d: 3 }` 不能分配给 'FromIndex'
 // 对象字面量只能指定已知类型，'d' 不存在 'FromIndex' 类型上
-const bad: FromIndex = { b: 1, c: 2, d: 3 };
+const bad: FromIndex = { b: 1, c: 2, d: 3 }
 ```
 
 ```ts
-type FromSomeIndex<K extends string> = { [key in K]: number };
+type FromSomeIndex<K extends string> = { [key in K]: number }
 ```
 
 ### Symbol Index Types
@@ -1209,30 +1209,30 @@ type FromSomeIndex<K extends string> = { [key in K]: number };
 Since [typescript v4.4.0](https://github.com/microsoft/TypeScript/pull/44512):
 
 ```ts
-type SymbolMap<T> = Record<symbol, T>;
+type SymbolMap<T> = Record<symbol, T>
 ```
 
 ```ts
 interface PropertyMap {
-  [key: string]: string;
-  [key: number]: string;
-  [key: symbol]: string;
+  [key: string]: string
+  [key: number]: string
+  [key: symbol]: string
 }
 ```
 
 ```ts
-type Colors = Record<symbol, number>;
+type Colors = Record<symbol, number>
 
-const red = Symbol('red');
-const green = Symbol('green');
-const blue = Symbol('blue');
+const red = Symbol('red')
+const green = Symbol('green')
+const blue = Symbol('blue')
 
-const colors: Colors = {};
+const colors: Colors = {}
 
-colors[red] = 255; // Assignment of a number is allowed
-const redVal = colors[red]; // 'redVal' has the type 'number'
+colors[red] = 255 // Assignment of a number is allowed
+const redVal = colors[red] // 'redVal' has the type 'number'
 
-colors[blue] = 'da ba dee'; // Error: Type 'string' is not assignable to type 'number'.
+colors[blue] = 'da ba dee' // Error: Type 'string' is not assignable to type 'number'.
 ```
 
 ### Template Literal Index Types
@@ -1240,12 +1240,12 @@ colors[blue] = 'da ba dee'; // Error: Type 'string' is not assignable to type 'n
 Since [typescript v4.4.0](https://github.com/microsoft/TypeScript/pull/44512):
 
 ```ts
-type DataProps = Record<`data-${string}`, string>;
+type DataProps = Record<`data-${string}`, string>
 
 // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
 interface OptionsWithDataProps extends Options {
   // Permit any property starting with 'data-'.
-  [optName: `data-${string}`]: unknown;
+  [optName: `data-${string}`]: unknown
 }
 
 const b: OptionsWithDataProps = {
@@ -1253,15 +1253,15 @@ const b: OptionsWithDataProps = {
   height: 100,
   'data-blah': true, // Works!
   'unknown-property': true, // Error! 'unknown-property' wasn't declared in 'OptionsWithDataProps'.
-};
+}
 ```
 
 ```ts
-type Thing<T> = Record<'a' | `foo${T}` | symbol, string>;
+type Thing<T> = Record<'a' | `foo${T}` | symbol, string>
 
-type StringThing = Thing<string>;
+type StringThing = Thing<string>
 // => { [a: string, [x: `foo${string}`]: string, [x: symbol]: string }
-type BarThing = Thing<'bar'>;
+type BarThing = Thing<'bar'>
 // => { [a: string, foobar: string, [x: symbol]: string }
 ```
 
@@ -1272,27 +1272,27 @@ const MyArray = [
   { name: 'Alice', age: 15 },
   { name: 'Bob', age: 23 },
   { name: 'Eve', age: 38 },
-];
+]
 
-type Person = (typeof MyArray)[number];
+type Person = (typeof MyArray)[number]
 // type Person = {
 //   name: string;
 //   age: number;
 // }
 
-type Age = (typeof MyArray)[number]['age'];
+type Age = (typeof MyArray)[number]['age']
 // type Age = number
 
-type Age2 = Person['age'];
+type Age2 = Person['age']
 // type Age2 = number
 
 interface UserRoleConfig {
-  visitor: ['up'];
-  user: ['view', 'create', 'update'];
-  admin: ['view', 'create', 'update', 'delete'];
+  visitor: ['up']
+  user: ['view', 'create', 'update']
+  admin: ['view', 'create', 'update', 'delete']
 }
 
-type Role = UserRoleConfig[keyof UserRoleConfig][number];
+type Role = UserRoleConfig[keyof UserRoleConfig][number]
 // type Role = 'up' | 'view' | 'create' | 'update' | "delete"
 ```
 
@@ -1302,62 +1302,62 @@ type Role = UserRoleConfig[keyof UserRoleConfig][number];
 type PickByValueType<T, ValueType> = Pick<
   T,
   { [K in keyof T]-?: T[K] extends ValueType ? K : never }[keyof T]
->;
+>
 
 type OmitByValueType<T, ValueType> = Pick<
   T,
   { [K in keyof T]-?: T[K] extends ValueType ? never : K }[keyof T]
->;
+>
 
 type RequiredKeys<T> = {
-  [K in keyof T]-?: {} extends Pick<T, K> ? never : K;
-}[keyof T];
+  [K in keyof T]-?: {} extends Pick<T, K> ? never : K
+}[keyof T]
 
 type OptionalKeys<T> = {
-  [K in keyof T]-?: {} extends Pick<T, K> ? K : never;
-}[keyof T];
+  [K in keyof T]-?: {} extends Pick<T, K> ? K : never
+}[keyof T]
 
 type FunctionTypeKeys<T extends object> = {
-  [K in keyof T]-?: T[K] extends Function ? K : never;
-}[keyof T];
+  [K in keyof T]-?: T[K] extends Function ? K : never
+}[keyof T]
 
 type Filter<T extends object, ValueType> = {
-  [K in keyof T as ValueType extends T[K] ? K : never]: T[K];
-}; // Filter<{name: string; id: number;}, string> => {name: string;}
+  [K in keyof T as ValueType extends T[K] ? K : never]: T[K]
+} // Filter<{name: string; id: number;}, string> => {name: string;}
 
 type FuncName<T> = {
-  [K in keyof T]: T[K] extends Function ? K : never;
-}[keyof T];
+  [K in keyof T]: T[K] extends Function ? K : never
+}[keyof T]
 ```
 
 ## Literal Types
 
 ```ts
-type CardinalDirection = 'North' | 'East' | 'South' | 'West';
+type CardinalDirection = 'North' | 'East' | 'South' | 'West'
 
 function move(distance: number, direction: CardinalDirection) {
   // ...
 }
 
-move(1, 'North'); // ok
-move(1, 'Nurth'); // Error
+move(1, 'North') // ok
+move(1, 'Nurth') // Error
 
-type OneToFive = 1 | 2 | 3 | 4 | 5;
-type Bools = true | false;
+type OneToFive = 1 | 2 | 3 | 4 | 5
+type Bools = true | false
 ```
 
 ```ts
 interface Options {
-  width: number;
+  width: number
 }
 
 function configure(x: Options | 'auto') {
   // ...
 }
 
-configure({ width: 100 });
-configure('auto');
-configure('automatic');
+configure({ width: 100 })
+configure('auto')
+configure('automatic')
 // ERROR:
 // Argument of type '"automatic"' is not assignable
 // to parameter of type 'Options | "auto"'.
@@ -1370,17 +1370,17 @@ configure('automatic');
 Based on literal types:
 
 ```ts
-type Brightness = 'dark' | 'light';
-type Color = 'blue' | 'red';
-type BrightnessAndColor = `${Brightness}-${Color}`;
+type Brightness = 'dark' | 'light'
+type Color = 'blue' | 'red'
+type BrightnessAndColor = `${Brightness}-${Color}`
 // Equivalent to: "dark-red" | "light-red" | "dark-blue" | "light-blue"
 
-const colorOk: BrightnessAndColor = 'dark-blue'; // Ok
-const colorWrongStart: BrightnessAndColor = 'medium-blue';
+const colorOk: BrightnessAndColor = 'dark-blue' // Ok
+const colorWrongStart: BrightnessAndColor = 'medium-blue'
 //  ~~~~~~~~~~~~~~~
 // Error: Type '"medium-blue"' is not assignable to type
 // '"dark-blue" | "dark-red" | "light-blue" | "light-red"'.
-const colorWrongEnd: BrightnessAndColor = 'light-green';
+const colorWrongEnd: BrightnessAndColor = 'light-green'
 //  ~~~~~~~~~~~~~
 // Error: Type '"light-green"' is not assignable to type
 // '"dark-blue" | "dark-red" | "light-blue" | "light-red"'.
@@ -1400,23 +1400,23 @@ const colorWrongEnd: BrightnessAndColor = 'light-green';
 Combined with other types:
 
 ```ts
-type Greeting = `Hello${string}`;
-const matches: Greeting = 'Hello, world!'; // Ok
-const outOfOrder: Greeting = 'World! Hello!';
+type Greeting = `Hello${string}`
+const matches: Greeting = 'Hello, world!' // Ok
+const outOfOrder: Greeting = 'World! Hello!'
 //  ~~~~~~~~~~
 // Error: Type '"World! Hello!"' is not assignable to type '`Hello ${string}`'.
-const missingAltogether: Greeting = 'hi';
+const missingAltogether: Greeting = 'hi'
 //  ~~~~~~~~~~~~~~~~~
 // Error: Type '"hi"' is not assignable to type '`Hello ${string}`'.
 
-type ExtolNumber = `much ${number} wow`;
+type ExtolNumber = `much ${number} wow`
 function extol(extolArg: ExtolNumber) {
   /* ... */
 }
-extol('much 0 wow'); // Ok
-extol('much -7 wow'); // Ok
-extol('much 9.001 wow'); // Ok
-extol('much false wow');
+extol('much 0 wow') // Ok
+extol('much -7 wow') // Ok
+extol('much 9.001 wow') // Ok
+extol('much false wow')
 //    ~~~~~~~~~~~~~~~~
 // Error: Argument of type '"much false wow"' is not
 // assignable to parameter of type '`much ${number} wow`'.
@@ -1427,39 +1427,39 @@ interface PropEventSource<Type> {
   on<Key extends string & keyof Type>(
     eventName: `${Key}Changed`,
     callback: (newValue: Type[Key]) => void
-  ): void;
+  ): void
 }
 
 // Create a "watched object" with an 'on' method
 // so that you can watch for changes to properties.
 declare function makeWatchedObject<Type>(
   obj: Type
-): Type & PropEventSource<Type>;
+): Type & PropEventSource<Type>
 
 const person = makeWatchedObject({
   firstName: 'Yi',
   lastName: 'Long',
   age: 26,
-});
+})
 
 person.on('firstNameChanged', newName => {
   // (parameter) newName: string
-  console.log(`new name is ${newName.toUpperCase()}`);
-});
+  console.log(`new name is ${newName.toUpperCase()}`)
+})
 
 person.on('ageChanged', newAge => {
   // (parameter) newAge: number
   if (newAge < 0) {
-    console.warn('warning! negative age');
+    console.warn('warning! negative age')
   }
-});
+})
 
 // It's typo-resistent
-person.on('firstName', () => {});
+person.on('firstName', () => {})
 // Argument of type '"firstName"' is not assignable to
 // parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
 
-person.on('fstNameChanged', () => {});
+person.on('fstNameChanged', () => {})
 // Argument of type '"fstNameChanged"' is not assignable to
 // parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
 ```
@@ -1469,11 +1469,11 @@ person.on('fstNameChanged', () => {});
 #### Template Literal Keys
 
 ```ts
-type DataKey = 'location' | 'name' | 'year';
+type DataKey = 'location' | 'name' | 'year'
 
 type ExistenceChecks = {
-  [K in `check${Capitalize<DataKey>}`]: () => boolean;
-};
+  [K in `check${Capitalize<DataKey>}`]: () => boolean
+}
 // Equivalent to:
 // {
 //   checkLocation: () => boolean;
@@ -1482,9 +1482,9 @@ type ExistenceChecks = {
 // }
 
 function checkExistence(checks: ExistenceChecks) {
-  checks.checkLocation(); // Type: boolean
-  checks.checkName(); // Type: boolean
-  checks.checkWrong();
+  checks.checkLocation() // Type: boolean
+  checks.checkName() // Type: boolean
+  checks.checkWrong()
   //     ~~~~~~~~~~
   // Error: Property 'checkWrong' does not exist on type 'ExistenceChecks'.
 }
@@ -1497,13 +1497,13 @@ const config = {
   location: 'unknown',
   name: 'anonymous',
   year: 0,
-};
+}
 
 type LazyValues = {
   [K in keyof typeof config as `${string & K}Lazy`]: () => Promise<
     (typeof config)[K]
-  >;
-};
+  >
+}
 // Equivalent to:
 // {
 //   locationLazy: Promise<string>;
@@ -1512,8 +1512,8 @@ type LazyValues = {
 // }
 
 async function withLazyValues(configGetter: LazyValues) {
-  await configGetter.locationLazy; // Resultant type: string
-  await configGetter.missingLazy();
+  await configGetter.locationLazy // Resultant type: string
+  await configGetter.missingLazy()
   //                 ~~~~~~~~~~~
   // Error: Property 'missingLazy' does not exist on type 'LazyValues'.
 }
@@ -1525,12 +1525,12 @@ async function withLazyValues(configGetter: LazyValues) {
 
 ```ts
 function formatCommandLine(command: string[] | string) {
-  let line = '';
+  let line = ''
 
   if (typeof command === 'string') {
-    line = command.trim();
+    line = command.trim()
   } else {
-    line = command.join(' ').trim();
+    line = command.join(' ').trim()
   }
 
   // Do stuff with line: string
@@ -1541,34 +1541,34 @@ function formatCommandLine(command: string[] | string) {
 
 ```ts
 interface Square {
-  kind: 'square';
-  size: number;
+  kind: 'square'
+  size: number
 }
 
 interface Rectangle {
-  kind: 'rectangle';
-  width: number;
-  height: number;
+  kind: 'rectangle'
+  width: number
+  height: number
 }
 
 interface Circle {
-  kind: 'circle';
-  radius: number;
+  kind: 'circle'
+  radius: number
 }
 
-type Shape = Square | Rectangle | Circle;
+type Shape = Square | Rectangle | Circle
 
 function area(s: Shape) {
   switch (s.kind) {
     case 'square':
-      return s.size * s.size;
+      return s.size * s.size
     case 'rectangle':
-      return s.width * s.height;
+      return s.width * s.height
     case 'circle':
-      return Math.PI * s.radius ** 2;
+      return Math.PI * s.radius ** 2
     default: {
-      const _exhaustiveCheck: never = s;
-      return _exhaustiveCheck;
+      const _exhaustiveCheck: never = s
+      return _exhaustiveCheck
     }
   }
 }
@@ -1578,40 +1578,40 @@ function area(s: Shape) {
 
 ```ts
 interface IteratorYieldResult<TYield> {
-  done?: false; // boolean literal type
-  value: TYield;
+  done?: false // boolean literal type
+  value: TYield
 }
 
 interface IteratorReturnResult<TReturn> {
-  done: true; // boolean literal type
-  value: TReturn;
+  done: true // boolean literal type
+  value: TReturn
 }
 
 type IteratorResult<T, TReturn = any> =
   | IteratorYieldResult<T>
-  | IteratorReturnResult<TReturn>;
+  | IteratorReturnResult<TReturn>
 ```
 
 Rust-style discriminated union:
 
 ```ts
-type Option<T> = Some<T> | None;
+type Option<T> = Some<T> | None
 interface Some<T> {
-  kind: 'Some';
-  value: T;
+  kind: 'Some'
+  value: T
 }
 interface None {
-  kind: 'None';
+  kind: 'None'
 }
 
-type Result<TResult, TError> = Success<TResult> | Failure<TError>;
+type Result<TResult, TError> = Success<TResult> | Failure<TError>
 interface Success<T> {
-  kind: 'Success';
-  value: T;
+  kind: 'Success'
+  value: T
 }
 interface Failure<T> {
-  kind: 'Failure';
-  error: T;
+  kind: 'Failure'
+  error: T
 }
 ```
 
@@ -1620,30 +1620,30 @@ Prefer `Unions of Interfaces` to `Interfaces of Unions`:
 ```ts
 // BAD design.
 interface BadLayer {
-  layout: FillLayout | LineLayout | PointLayout;
-  paint: FillPaint | LinePaint | PointPaint;
+  layout: FillLayout | LineLayout | PointLayout
+  paint: FillPaint | LinePaint | PointPaint
 }
 
 // GOOD design.
 interface FillLayer {
-  type: 'fill';
-  layout: FillLayout;
-  paint: FillPaint;
+  type: 'fill'
+  layout: FillLayout
+  paint: FillPaint
 }
 
 interface LineLayer {
-  type: 'line';
-  layout: LineLayout;
-  paint: LinePaint;
+  type: 'line'
+  layout: LineLayout
+  paint: LinePaint
 }
 
 interface PointLayer {
-  type: 'point';
-  layout: PointLayout;
-  paint: PointPaint;
+  type: 'point'
+  layout: PointLayout
+  paint: PointPaint
 }
 
-type GoodLayer = FillLayer | LineLayer | PointLayer;
+type GoodLayer = FillLayer | LineLayer | PointLayer
 ```
 
 ## Intersection Types
@@ -1652,24 +1652,24 @@ type GoodLayer = FillLayer | LineLayer | PointLayer;
 
 ```ts
 function extend<T, U>(first: T, second: U): T & U {
-  const result = {} as T & U;
+  const result = {} as T & U
   for (const id in first) {
-    (result as T)[id] = first[id];
+    ;(result as T)[id] = first[id]
   }
   for (const id in second) {
     if (!Object.prototype.hasOwnProperty.call(result, id)) {
-      (result as U)[id] = second[id];
+      ;(result as U)[id] = second[id]
     }
   }
 
-  return result;
+  return result
 }
 
-const x = extend({ a: 'hello' }, { b: 42 });
+const x = extend({ a: 'hello' }, { b: 42 })
 
 // 现在 x 拥有了 a 属性与 b 属性
-const a = x.a;
-const b = x.b;
+const a = x.a
+const b = x.b
 ```
 
 ## Generic Types
@@ -1678,11 +1678,11 @@ const b = x.b;
 
 ```ts
 function reverse<T>(items: T[]): T[] {
-  const toReturn = [];
+  const toReturn = []
   for (let i = items.length - 1; i >= 0; i--) {
-    toReturn.push(items[i]);
+    toReturn.push(items[i])
   }
-  return toReturn;
+  return toReturn
 }
 ```
 
@@ -1691,14 +1691,14 @@ function reverse<T>(items: T[]): T[] {
 ```ts
 type Event =
   | {
-      type: 'LogIn';
+      type: 'LogIn'
       payload: {
-        userId: string;
-      };
+        userId: string
+      }
     }
   | {
-      type: 'SignOut';
-    };
+      type: 'SignOut'
+    }
 
 const sendEvent = <Type extends Event['type']>(
   ...args: Extract<Event, { type: Type }> extends { payload: infer Payload }
@@ -1706,7 +1706,7 @@ const sendEvent = <Type extends Event['type']>(
     : [type: Type]
 ) => {
   // Send event ...
-};
+}
 ```
 
 ### Generic Class
@@ -1714,71 +1714,71 @@ const sendEvent = <Type extends Event['type']>(
 ```ts
 // 创建一个泛型类
 class Queue<T> {
-  private data = [];
-  push = (item: T) => this.data.push(item);
-  pop = (): T => this.data.shift();
+  private data = []
+  push = (item: T) => this.data.push(item)
+  pop = (): T => this.data.shift()
 }
 
 // 简单的使用
-const queue = new Queue<number>();
-queue.push(0);
-queue.push('1'); // Error：不能推入一个 `string`，只有 number 类型被允许
+const queue = new Queue<number>()
+queue.push(0)
+queue.push('1') // Error：不能推入一个 `string`，只有 number 类型被允许
 ```
 
 ```ts
 interface Listener<T> {
-  (event: T): any;
+  (event: T): any
 }
 
 interface Disposable {
-  dispose(): any;
+  dispose(): any
 }
 
 class TypedEvent<T> {
-  private listeners: Listener<T>[] = [];
-  private listenersOnce: Listener<T>[] = [];
+  private listeners: Listener<T>[] = []
+  private listenersOnce: Listener<T>[] = []
 
   public on = (listener: Listener<T>): Disposable => {
-    this.listeners.push(listener);
+    this.listeners.push(listener)
 
     return {
       dispose: () => this.off(listener),
-    };
-  };
+    }
+  }
 
   public once = (listener: Listener<T>): void => {
-    this.listenersOnce.push(listener);
-  };
+    this.listenersOnce.push(listener)
+  }
 
   public off = (listener: Listener<T>) => {
-    const callbackIndex = this.listeners.indexOf(listener);
-    if (callbackIndex > -1) this.listeners.splice(callbackIndex, 1);
-  };
+    const callbackIndex = this.listeners.indexOf(listener)
+    if (callbackIndex > -1) this.listeners.splice(callbackIndex, 1)
+  }
 
   public emit = (event: T) => {
-    this.listeners.forEach(listener => listener(event));
+    this.listeners.forEach(listener => listener(event))
 
-    this.listenersOnce.forEach(listener => listener(event));
-    this.listenersOnce = [];
-  };
+    this.listenersOnce.forEach(listener => listener(event))
+    this.listenersOnce = []
+  }
 
   public pipe = (te: TypedEvent<T>): Disposable => {
-    return this.on(e => te.emit(e));
-  };
+    return this.on(e => te.emit(e))
+  }
 }
 ```
 
 ### Generic Type Alias
 
 ```ts
-type CreatesValue<Input, Output> = (input: Input) => Output;
+type CreatesValue<Input, Output> = (input: Input) => Output
 
 // Type: (input: string) => number
-let creator: CreatesValue<string, number>;
+let creator: CreatesValue<string, number>
 
-creator = text => text.length; // Ok
+creator = text => text.length // Ok
 
-creator = text => text.toUpperCase();
+creator = text => text.toUpperCase()
 //                ~~~~~~~~~~~~~~~~~~
 // Error: Type 'string' is not assignable to type 'number'.
 ```
@@ -1786,28 +1786,28 @@ creator = text => text.toUpperCase();
 ### Generic Discriminated Union
 
 ```ts
-type Result<Data> = FailureResult | SuccessfulResult<Data>;
+type Result<Data> = FailureResult | SuccessfulResult<Data>
 
 interface FailureResult {
-  error: Error;
-  succeeded: false;
+  error: Error
+  succeeded: false
 }
 
 interface SuccessfulResult<Data> {
-  data: Data;
-  succeeded: true;
+  data: Data
+  succeeded: true
 }
 
 function handleResult(result: Result<string>) {
   if (result.succeeded) {
     // Type of result: SuccessfulResult<string>
-    console.log(`We did it! ${result.data}`);
+    console.log(`We did it! ${result.data}`)
   } else {
     // Type of result: FailureResult
-    console.error(`Em... ${result.error}`);
+    console.error(`Em... ${result.error}`)
   }
 
-  console.log(result.data);
+  console.log(result.data)
   //                 ~~~~
   // Error: Property 'data' does not exist on type 'Result<string>'.
   //   Property 'data' does not exist on type 'FailureResult'.
@@ -1818,49 +1818,49 @@ function handleResult(result: Result<string>) {
 
 ```ts
 class Foo<T> {
-  foo: T;
+  foo: T
 }
 
-const FooNumber = Foo as { new (): Foo<number> }; // ref 1
+const FooNumber = Foo as { new (): Foo<number> } // ref 1
 
 function id<T>(x: T) {
-  return x;
+  return x
 }
 
-const idNum = id as { (x: number): number };
+const idNum = id as { (x: number): number }
 ```
 
 ### Default Generic Types
 
 ```ts
 interface Quote<T = string> {
-  value: T;
+  value: T
 }
 
-const explicit: Quote<number> = { value: 123 };
+const explicit: Quote<number> = { value: 123 }
 const implicit: Quote = {
   value: 'Be yourself. The world worships the original.',
-};
-const mismatch: Quote = { value: 123 };
+}
+const mismatch: Quote = { value: 123 }
 //                                     ~~~
 // Error: Type 'number' is not assignable to type 'string'.
 
 interface KeyValuePair<Key, Value = Key> {
-  key: Key;
-  value: Value;
+  key: Key
+  value: Value
 }
 
 // Type: KeyValuePair<string, number>
 const allExplicit: KeyValuePair<string, number> = {
   key: 'rating',
   value: 10,
-};
+}
 
 // Type: KeyValuePair<string>
 const oneDefaulting: KeyValuePair<string> = {
   key: 'rating',
   value: 'ten',
-};
+}
 
 const firstMissing: KeyValuePair = {
   //            ~~~~~~~~~~~~
@@ -1868,7 +1868,7 @@ const firstMissing: KeyValuePair = {
   // requires between 1 and 2 type arguments.
   key: 'rating',
   value: 10,
-};
+}
 ```
 
 ### Constrained Generic Types
@@ -1877,33 +1877,33 @@ Constrained union types:
 
 ```ts
 interface Lengthwise {
-  length: number;
+  length: number
 }
 
 function createList<T extends number | Lengthwise>(): T[] {
-  return [] as T[];
+  return [] as T[]
 }
 
-const numberList = createList<number>(); // ok
-const stringList = createList<string>(); // ok
-const arrayList = createList<any[]>(); // ok
-const boolList = createList<boolean>(); // error
+const numberList = createList<number>() // ok
+const stringList = createList<string>() // ok
+const arrayList = createList<any[]>() // ok
+const boolList = createList<boolean>() // error
 ```
 
 Constrained template literal types:
 
 ```ts
-type RemoveMapsHelper<T> = T extends `maps:${infer U}` ? U : T;
+type RemoveMapsHelper<T> = T extends `maps:${infer U}` ? U : T
 type RemoveMaps<T> = {
-  [K in keyof T as RemoveMapsHelper<K>]: T[K];
-};
+  [K in keyof T as RemoveMapsHelper<K>]: T[K]
+}
 
 interface Data {
-  'maps:longitude': string;
-  'maps:latitude': string;
-  awesome: boolean;
+  'maps:longitude': string
+  'maps:latitude': string
+  awesome: boolean
 }
-type ShapedData = RemoveMaps<Data>;
+type ShapedData = RemoveMaps<Data>
 // type ShapedData = {
 //   longitude: string;
 //   latitude: string;
@@ -1915,17 +1915,17 @@ Constrained index types:
 
 ```ts
 function getValue<T, Key extends keyof T>(container: T, key: Key) {
-  return container[key];
+  return container[key]
 }
 
 const roles = {
   favorite: 'Fargo',
   others: ['Almost Famous', 'Burn After Reading', 'NorthLand'],
-};
+}
 
-const favorite = getValue(roles, 'favorite'); // Type: string
-const others = getValue(roles, 'others'); // Type: string[]
-const missing = getValue(roles, 'extras');
+const favorite = getValue(roles, 'favorite') // Type: string
+const others = getValue(roles, 'others') // Type: string[]
+const missing = getValue(roles, 'extras')
 //                         ~~~~~~~~
 // Error: Argument of type '"extras"' is not assignable
 // to parameter of type '"favorite" | "others"'.
@@ -1939,8 +1939,8 @@ const getDeepValue = <
   firstKey: FirstKey,
   secondKey: SecondKey
 ): T[FirstKey][SecondKey] => {
-  return target[firstKey][secondKey];
-};
+  return target[firstKey][secondKey]
+}
 
 const target = {
   foo: {
@@ -1951,29 +1951,29 @@ const target = {
     c: 'cool',
     d: 2,
   },
-};
+}
 
-const result1 = getDeepValue(target, 'foo', 'a'); // boolean
-const result2 = getDeepValue(target, 'bar', 'c'); // string
+const result1 = getDeepValue(target, 'foo', 'a') // boolean
+const result2 = getDeepValue(target, 'bar', 'c') // string
 ```
 
 Constrained default types:
 
 ```ts
 interface Props {
-  a1: 'Foo';
-  a2: 'Bar';
-  a3: 'FooBar';
-  b1: 'b1';
-  b2: 'b2';
-  b3: 'b3';
+  a1: 'Foo'
+  a2: 'Bar'
+  a3: 'FooBar'
+  b1: 'b1'
+  b2: 'b2'
+  b3: 'b3'
 }
 
 type ExtractValues<T, Keys extends keyof T = Extract<keyof T, `a${string}`>> = {
-  [K in Keys]: T[K];
-}[Keys];
+  [K in Keys]: T[K]
+}[Keys]
 
-type Values = ExtractValues<Props>;
+type Values = ExtractValues<Props>
 // type Values = 'Foo' | 'Bar' | 'FooBar'
 ```
 
@@ -1983,7 +1983,7 @@ type Values = ExtractValues<Props>;
 
 ```ts
 function pick<T extends object, U extends keyof T>(obj: T, keys: U[]): T[U][] {
-  return keys.map(key => obj[key]);
+  return keys.map(key => obj[key])
 }
 ```
 
@@ -2011,16 +2011,16 @@ strongly **reconsider** if actually need it.
 
 ```ts
 interface Animal {
-  live(): void;
+  live(): void
 }
 interface Dog extends Animal {
-  woof(): void;
+  woof(): void
 }
 
-type Example1 = Dog extends Animal ? number : string;
+type Example1 = Dog extends Animal ? number : string
 // => type Example1 = number
 
-type Example2 = RegExp extends Animal ? number : string;
+type Example2 = RegExp extends Animal ? number : string
 // => type Example2 = string
 ```
 
@@ -2040,7 +2040,7 @@ type TypeName<T> = T extends string
         ? 'undefined'
         : T extends Function
           ? 'function'
-          : 'object';
+          : 'object'
 ```
 
 ### Index Conditional Types
@@ -2049,38 +2049,38 @@ Conditional types are able to access members of provided types:
 
 ```ts
 interface QueryOptions {
-  throwIfNotFound: boolean;
+  throwIfNotFound: boolean
 }
 
 type QueryResult<Options extends QueryOptions> =
-  Options['throwIfNotFound'] extends true ? string : string | undefined;
+  Options['throwIfNotFound'] extends true ? string : string | undefined
 
 declare function retrieve<Options extends QueryOptions>(
   key: string,
   options?: Options
-): Promise<QueryResult<Options>>;
+): Promise<QueryResult<Options>>
 
 // Returned type: string | undefined
-await retrieve('1');
+await retrieve('1')
 
 // Returned type: string | undefined
-await retrieve('2', { throwIfNotFound: Math.random() > 0.5 });
+await retrieve('2', { throwIfNotFound: Math.random() > 0.5 })
 
 // Returned type: string
-await retrieve('3', { throwIfNotFound: true });
+await retrieve('3', { throwIfNotFound: true })
 ```
 
 ### Mapped Conditional Types
 
 ```ts
 type MakeAllMembersFunctions<T> = {
-  [K in keyof T]: T[K] extends (...args: any[]) => any ? T[K] : () => T[K];
-};
+  [K in keyof T]: T[K] extends (...args: any[]) => any ? T[K] : () => T[K]
+}
 
 type MemberFunctions = MakeAllMembersFunctions<{
-  alreadyFunction: () => string;
-  notYetFunction: number;
-}>;
+  alreadyFunction: () => string
+  notYetFunction: number
+}>
 // Type:
 // {
 //   alreadyFunction: () => string,
@@ -2102,30 +2102,30 @@ Type distributivity:
 
 ```ts
 // "string" | "function"
-type T1 = TypeName<string | (() => void)>;
+type T1 = TypeName<string | (() => void)>
 
 // "string" | "object"
-type T2 = TypeName<string | string[]>;
+type T2 = TypeName<string | string[]>
 
 // "object"
-type T3 = TypeName<string[] | number[]>;
+type T3 = TypeName<string[] | number[]>
 ```
 
 ```ts
-type Naked<T> = T extends boolean ? 'Y' : 'N';
-type Wrapped<T> = [T] extends [boolean] ? 'Y' : 'N';
+type Naked<T> = T extends boolean ? 'Y' : 'N'
+type Wrapped<T> = [T] extends [boolean] ? 'Y' : 'N'
 
 /*
  * 先分发到 Naked<number> | Naked<boolean>
  * 结果是 "N" | "Y"
  */
-type Distributed = Naked<number | boolean>;
+type Distributed = Naked<number | boolean>
 
 /*
  * 不会分发 直接是 [number | boolean] extends [boolean]
  * 结果是 "N"
  */
-type NotDistributed = Wrapped<number | boolean>;
+type NotDistributed = Wrapped<number | boolean>
 ```
 
 ## Moving Types
@@ -2134,14 +2134,14 @@ type NotDistributed = Wrapped<number | boolean>;
 
 ```ts
 // 捕获字符串的类型与值
-const foo = 'Hello World';
+const foo = 'Hello World'
 
 // 使用一个捕获的类型
-let bar: typeof foo;
+let bar: typeof foo
 
 // bar 仅能被赋值 'Hello World'
-bar = 'Hello World'; // ok
-bar = 'anything else'; // Error
+bar = 'Hello World' // ok
+bar = 'anything else' // Error
 ```
 
 ### Keyof Types
@@ -2152,14 +2152,14 @@ bar = 'anything else'; // Error
 const colors = {
   red: 'red',
   blue: 'blue',
-};
+}
 
-type Colors = keyof typeof colors;
+type Colors = keyof typeof colors
 
-let color: Colors; // color 的类型是 'red' | 'blue' (literal types)
-color = 'red'; // ok
-color = 'blue'; // ok
-color = 'anythingElse'; // Error
+let color: Colors // color 的类型是 'red' | 'blue' (literal types)
+color = 'red' // ok
+color = 'blue' // ok
+color = 'anythingElse' // Error
 ```
 
 ## Mapped Types
@@ -2171,14 +2171,14 @@ color = 'anythingElse'; // Error
 ### Basic Mapped Types
 
 ```ts
-type Readonly<T> = { readonly [P in keyof T]: T[P] };
-type Partial<T> = { [P in keyof T]?: T[P] };
-type ReadonlyPartial<T> = { readonly [P in keyof T]?: T[P] };
-type Required<T> = { [P in keyof T]-?: T[P] };
-type Nullable<T> = { [P in keyof T]: T[P] | null };
-type NonNullable<T> = T extends null | undefined ? never : T;
-type Clone<T> = { [P in keyof T]: T[P] };
-type Stringify<T> = { [P in keyof T]: string };
+type Readonly<T> = { readonly [P in keyof T]: T[P] }
+type Partial<T> = { [P in keyof T]?: T[P] }
+type ReadonlyPartial<T> = { readonly [P in keyof T]?: T[P] }
+type Required<T> = { [P in keyof T]-?: T[P] }
+type Nullable<T> = { [P in keyof T]: T[P] | null }
+type NonNullable<T> = T extends null | undefined ? never : T
+type Clone<T> = { [P in keyof T]: T[P] }
+type Stringify<T> = { [P in keyof T]: string }
 ```
 
 ### Union Mapped Types
@@ -2186,16 +2186,16 @@ type Stringify<T> = { [P in keyof T]: string };
 With distributive conditional type:
 
 ```ts
-type Extract<T, U> = T extends U ? T : never;
-type Exclude<T, U> = T extends U ? never : T;
+type Extract<T, U> = T extends U ? T : never
+type Exclude<T, U> = T extends U ? never : T
 ```
 
 ### Key Mapped Types
 
 ```ts
-type Pick<T, K extends keyof T> = { [P in K]: T[P] };
-type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
-type Record<K extends keyof any, T> = { [P in K]: T };
+type Pick<T, K extends keyof T> = { [P in K]: T[P] }
+type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>
+type Record<K extends keyof any, T> = { [P in K]: T }
 ```
 
 ### Function Mapped Types
@@ -2205,26 +2205,26 @@ type Parameters<T extends (...args: any) => any> = T extends (
   ...args: infer P
 ) => any
   ? P
-  : never;
+  : never
 
 type ConstructorParameters<T extends new (...args: any) => any> =
-  T extends new (...args: infer P) => any ? P : never;
+  T extends new (...args: infer P) => any ? P : never
 
 type ReturnType<T extends (...args: any) => any> = T extends (
   ...args: any[]
 ) => infer R
   ? R
-  : any;
+  : any
 
 type InstanceType<T extends new (...args: any) => any> = T extends new (
   ...args: any
 ) => infer R
   ? R
-  : any;
+  : any
 
 type ThisParameterType<T> = T extends (this: infer U, ...args: any[]) => any
   ? U
-  : unknown;
+  : unknown
 ```
 
 ### Custom Mapped Types
@@ -2245,21 +2245,19 @@ Combine with:
 ```ts
 // Removes 'readonly' attributes from a type's properties
 type Mutable<T> = {
-  -readonly [K in keyof T]: T[K];
-};
-
-type DeepImmutable<T> = {
-  readonly [K in keyof T]: keyof T[K] extends undefined
-    ? T[K]
-    : Immutable<T[K]>;
-};
-
-interface LockedAccount {
-  readonly id: string;
-  readonly name: string;
+  -readonly [K in keyof T]: T[K]
 }
 
-type UnlockedAccount = Mutable<LockedAccount>;
+type DeepImmutable<T> = {
+  readonly [K in keyof T]: keyof T[K] extends undefined ? T[K] : Immutable<T[K]>
+}
+
+interface LockedAccount {
+  readonly id: string
+  readonly name: string
+}
+
+type UnlockedAccount = Mutable<LockedAccount>
 // type UnlockedAccount = {
 //   id: string;
 //   name: string;
@@ -2271,16 +2269,16 @@ type UnlockedAccount = Mutable<LockedAccount>;
 type Getters<Type> = {
   [Property in keyof Type as `get${Capitalize<
     string & Property
-  >}`]: () => Type[Property];
-};
-
-interface Person {
-  name: string;
-  age: number;
-  location: string;
+  >}`]: () => Type[Property]
 }
 
-type LazyPerson = Getters<Person>;
+interface Person {
+  name: string
+  age: number
+  location: string
+}
+
+type LazyPerson = Getters<Person>
 // type LazyPerson = {
 //   getName: () => string;
 //   getAge: () => number;
@@ -2291,15 +2289,15 @@ type LazyPerson = Getters<Person>;
 ```ts
 // Remove the 'kind' property
 type RemoveKindField<Type> = {
-  [Property in keyof Type as Exclude<Property, 'kind'>]: Type[Property];
-};
-
-interface Circle {
-  kind: 'circle';
-  radius: number;
+  [Property in keyof Type as Exclude<Property, 'kind'>]: Type[Property]
 }
 
-type KindlessCircle = RemoveKindField<Circle>;
+interface Circle {
+  kind: 'circle'
+  radius: number
+}
+
+type KindlessCircle = RemoveKindField<Circle>
 // type KindlessCircle = {
 //   radius: number;
 // }
@@ -2308,15 +2306,15 @@ type KindlessCircle = RemoveKindField<Circle>;
 ```ts
 // Mapped type via conditional type
 type ExtractPII<Type> = {
-  [Property in keyof Type]: Type[Property] extends { pii: true } ? true : false;
-};
-
-interface DBFields {
-  id: { format: 'incrementing' };
-  name: { type: string; pii: true };
+  [Property in keyof Type]: Type[Property] extends { pii: true } ? true : false
 }
 
-type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>;
+interface DBFields {
+  id: { format: 'incrementing' }
+  name: { type: string; pii: true }
+}
+
+type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>
 // type ObjectsNeedingGDPRDeletion = {
 //   id: false;
 //   name: true;
@@ -2328,30 +2326,30 @@ type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>;
 ### Null Types
 
 ```ts
-type Nullish = null | undefined;
-type Nullable<T> = T | null;
-type NonUndefinedable<A> = A extends undefined ? never : A;
-type NonNullable<T> = T extends null | undefined ? never : T;
+type Nullish = null | undefined
+type Nullable<T> = T | null
+type NonUndefinedable<A> = A extends undefined ? never : A
+type NonNullable<T> = T extends null | undefined ? never : T
 ```
 
 ### Boolean Types
 
 ```ts
-type Falsy = false | '' | 0 | null | undefined;
-const isFalsy = (val: unknown): val is Falsy => !val;
+type Falsy = false | '' | 0 | null | undefined
+const isFalsy = (val: unknown): val is Falsy => !val
 ```
 
 ### Primitive Types
 
 ```ts
-type Primitive = string | number | boolean | bigint | symbol | null | undefined;
+type Primitive = string | number | boolean | bigint | symbol | null | undefined
 
 const isPrimitive = (val: unknown): val is Primitive => {
   if (val === null || val === undefined) {
-    return true;
+    return true
   }
 
-  const typeDef = typeof val;
+  const typeDef = typeof val
 
   const primitiveNonNullishTypes = [
     'string',
@@ -2359,10 +2357,10 @@ const isPrimitive = (val: unknown): val is Primitive => {
     'bigint',
     'boolean',
     'symbol',
-  ];
+  ]
 
-  return primitiveNonNullishTypes.includes(typeDef);
-};
+  return primitiveNonNullishTypes.includes(typeDef)
+}
 ```
 
 ### Promise Types
@@ -2370,31 +2368,31 @@ const isPrimitive = (val: unknown): val is Primitive => {
 ```ts
 // TypeScript 4.5.
 // Get naked Promise<T> type.
-type Awaited<T> = T extends Promise<infer U> ? Awaited<U> : T;
+type Awaited<T> = T extends Promise<infer U> ? Awaited<U> : T
 
 // A = string.
-type A = Awaited<Promise<string>>;
+type A = Awaited<Promise<string>>
 
 // B = number.
-type B = Awaited<Promise<Promise<number>>>;
+type B = Awaited<Promise<Promise<number>>>
 
 // C = boolean | number.
-type C = Awaited<boolean | Promise<number>>;
+type C = Awaited<boolean | Promise<number>>
 ```
 
 ```ts
 type Sync<T> = {
   [K in keyof T]: T[K] extends (...args: any[]) => Promise<infer Result>
     ? (...args: Parameters<T[K]>) => Result
-    : T[K];
-};
-
-interface AsyncInterface {
-  compute(arg: number): Promise<boolean>;
-  createString(): Promise<String>;
+    : T[K]
 }
 
-type SyncInterface = Sync<AsyncInterface>;
+interface AsyncInterface {
+  compute(arg: number): Promise<boolean>
+  createString(): Promise<String>
+}
+
+type SyncInterface = Sync<AsyncInterface>
 // type SyncInterface = {
 //     compute: (arg: number) => boolean;
 //     createString: () => String;
@@ -2405,31 +2403,31 @@ type SyncInterface = Sync<AsyncInterface>;
 
 ```ts
 interface Proxy<T> {
-  get(): T;
-  set(value: T): void;
+  get(): T
+  set(value: T): void
 }
 
-type Proxify<T> = { [P in keyof T]: Proxy<T[P]> };
+type Proxify<T> = { [P in keyof T]: Proxy<T[P]> }
 ```
 
 ### Recursive Types
 
 ```ts
 type DeepReadonly<T> = {
-  +readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];
-};
+  +readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P]
+}
 
 type DeepMutable<T> = {
-  -readonly [P in keyof T]: T[P] extends object ? DeepMutable<T[P]> : T[P];
-};
+  -readonly [P in keyof T]: T[P] extends object ? DeepMutable<T[P]> : T[P]
+}
 
 type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
-};
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P]
+}
 
 type DeepRequired<T> = {
-  [P in keyof T]-?: T[P] extends object | undefined ? DeepRequired<T[P]> : T[P];
-};
+  [P in keyof T]-?: T[P] extends object | undefined ? DeepRequired<T[P]> : T[P]
+}
 ```
 
 ### Nominal Brand Types
@@ -2438,26 +2436,26 @@ type DeepRequired<T> = {
 
 ```ts
 interface FooId extends String {
-  _fooIdBrand: string;
+  _fooIdBrand: string
 }
 
 interface BarId extends String {
-  _barIdBrand: string;
+  _barIdBrand: string
 }
 
-let fooId: FooId;
-let barId: BarId;
+let fooId: FooId
+let barId: BarId
 
 // 类型安全
-fooId = barId; // error
-barId = fooId; // error
-fooId = barId as FooId; // error
-barId = fooId as BarId; // error
+fooId = barId // error
+barId = fooId // error
+fooId = barId as FooId // error
+barId = fooId as BarId // error
 ```
 
 ```ts
-const typeSym = Symbol('type');
-const valueSym = Symbol('value');
+const typeSym = Symbol('type')
+const valueSym = Symbol('value')
 
 type Brand<B extends string, T> = T extends
   | undefined
@@ -2466,17 +2464,17 @@ type Brand<B extends string, T> = T extends
   | boolean
   | bigint
   ? { [typeSym]: B; [valueSym]: T }
-  : T & { [typeSym]: B };
+  : T & { [typeSym]: B }
 
 type Flavor<F extends string, T> = T & {
-  [typeSym]?: F;
-};
+  [typeSym]?: F
+}
 ```
 
 ### Lodash Types
 
 ```ts
-type Flatten<Type> = Type extends Array<infer Item> ? Item : Type;
+type Flatten<Type> = Type extends Array<infer Item> ? Item : Type
 ```
 
 ## Type Inference
@@ -2490,33 +2488,33 @@ type Parameters<T extends (...args: any) => any> = T extends (
   ...args: infer P
 ) => any
   ? P
-  : never;
+  : never
 
 type ConstructorParameters<T extends new (...args: any) => any> =
-  T extends new (...args: infer P) => any ? P : never;
+  T extends new (...args: infer P) => any ? P : never
 
 type ReturnType<T extends (...args: any) => any> = T extends (
   ...args: any[]
 ) => infer R
   ? R
-  : any;
+  : any
 
 type InstanceType<T extends new (...args: any) => any> = T extends new (
   ...args: any
 ) => infer R
   ? R
-  : any;
+  : any
 ```
 
 在协变位置上, 若同一个类型变量存在多个候选者, 则最终的类型将被推断为联合类型:
 
 ```ts
-type PropertyType<T> = T extends { id: infer U; name: infer U } ? U : never;
+type PropertyType<T> = T extends { id: infer U; name: infer U } ? U : never
 
 type InferType = PropertyType<{
-  id: number;
-  name: string;
-}>;
+  id: number
+  name: string
+}>
 // string | number
 ```
 
@@ -2524,26 +2522,26 @@ type InferType = PropertyType<{
 
 ```ts
 type PropertyType<T> = T extends {
-  a(x: infer U): void;
-  b(x: infer U): void;
+  a(x: infer U): void
+  b(x: infer U): void
 }
   ? U
-  : never;
+  : never
 
 type InferType = PropertyType<{
-  a(x: string): void;
-  b(x: number): void;
-}>;
+  a(x: string): void
+  b(x: number): void
+}>
 // string & number
 
 type UnionToIntersection<U> = (
   U extends any ? (arg: U) => void : never
 ) extends (arg: infer R) => void
   ? R
-  : never;
+  : never
 
-type UnionType = { a: 'a' } | { b: 'b' };
-type IntersectionType = UnionToIntersection<UnionType>;
+type UnionType = { a: 'a' } | { b: 'b' }
+type IntersectionType = UnionToIntersection<UnionType>
 // { a: 'a' } & { b: 'b' }
 ```
 
@@ -2553,18 +2551,18 @@ type IntersectionType = UnionToIntersection<UnionType>;
 
 ```ts
 interface Fish {
-  swim: () => void;
+  swim: () => void
 }
 interface Bird {
-  fly: () => void;
+  fly: () => void
 }
 
 function move(animal: Fish | Bird) {
   if ('swim' in animal) {
-    return animal.swim();
+    return animal.swim()
   }
 
-  return animal.fly();
+  return animal.fly()
 }
 ```
 
@@ -2573,9 +2571,9 @@ function move(animal: Fish | Bird) {
 ```ts
 function logValue(x: Date | string) {
   if (x instanceof Date) {
-    console.log(x.toUTCString());
+    console.log(x.toUTCString())
   } else {
-    console.log(x.toUpperCase());
+    console.log(x.toUpperCase())
   }
 }
 ```
@@ -2585,9 +2583,9 @@ function logValue(x: Date | string) {
 ```ts
 function fn(x: string | number) {
   if (typeof x === 'string') {
-    return x.length;
+    return x.length
   } else {
-    return x + 1;
+    return x + 1
   }
 }
 ```
@@ -2597,20 +2595,20 @@ function getScore(value: number | string): number {
   switch (typeof value) {
     case 'number':
       // %inferred-type: number
-      return value + 1;
+      return value + 1
     case 'string':
       // %inferred-type: string
-      return value.length;
+      return value.length
     default:
-      throw new Error(`Unsupported value: ${value}`);
+      throw new Error(`Unsupported value: ${value}`)
   }
 }
 ```
 
 ```ts
 function contains(text: string, terms: string | string[]) {
-  const termList = Array.isArray(terms) ? terms : [terms];
-  console.log(termList); // string[]
+  const termList = Array.isArray(terms) ? terms : [terms]
+  console.log(termList) // string[]
 }
 ```
 
@@ -2618,27 +2616,27 @@ function contains(text: string, terms: string | string[]) {
 
 ```ts
 interface Teacher {
-  kind: 'Teacher';
-  teacherId: string;
+  kind: 'Teacher'
+  teacherId: string
 }
 
 interface Student {
-  kind: 'Student';
-  studentId: string;
+  kind: 'Student'
+  studentId: string
 }
 
-type Attendee = Teacher | Student;
+type Attendee = Teacher | Student
 
 function getId(attendee: Attendee) {
   switch (attendee.kind) {
     case 'Teacher':
       // %inferred-type: { kind: "Teacher"; teacherId: string; }
-      return attendee.teacherId;
+      return attendee.teacherId
     case 'Student':
       // %inferred-type: { kind: "Student"; studentId: string; }
-      return attendee.studentId;
+      return attendee.studentId
     default:
-      throw new Error('Unsupported type');
+      throw new Error('Unsupported type')
   }
 }
 ```
@@ -2650,22 +2648,22 @@ function getId(attendee: Attendee) {
 
 ```ts
 interface Triangle {
-  kind: 'triangle';
-  sideLength: number;
+  kind: 'triangle'
+  sideLength: number
 }
 
-type Shape = Circle | Square | Triangle;
+type Shape = Circle | Square | Triangle
 
 function getArea(shape: Shape) {
   switch (shape.kind) {
     case 'circle':
-      return Math.PI * shape.radius ** 2;
+      return Math.PI * shape.radius ** 2
     case 'square':
-      return shape.sideLength ** 2;
+      return shape.sideLength ** 2
     default: {
       // Type 'Triangle' is not assignable to type 'never'.
-      const _exhaustiveCheck: never = shape;
-      return _exhaustiveCheck;
+      const _exhaustiveCheck: never = shape
+      return _exhaustiveCheck
     }
   }
 }
@@ -2680,16 +2678,16 @@ function getArea(shape: Shape) {
 
 ```ts
 function fail(message: string): never {
-  throw new Error(`Invariant failure: ${message}.`);
+  throw new Error(`Invariant failure: ${message}.`)
 }
 
 function workWithUnsafeParam(param: unknown) {
   if (typeof param !== 'string') {
-    fail(`Param should be a string, not ${typeof param}`);
+    fail(`Param should be a string, not ${typeof param}`)
   }
 
   // Here, param is known to be type string
-  param.toUpperCase(); // Ok
+  param.toUpperCase() // Ok
 }
 ```
 
@@ -2702,18 +2700,18 @@ Exhaustiveness check using `never` in `switch` statement:
 ```ts
 class UnsupportedValueError extends Error {
   constructor(value: never) {
-    super(`Unsupported value: ${value}`);
+    super(`Unsupported value: ${value}`)
   }
 }
 
 function toGerman4(value: NoYesStrings): string {
   switch (value) {
     case 'Yes':
-      return 'Ja';
+      return 'Ja'
     default:
       // @ts-expect-error: Argument of type '"No"'
       // is not assignable to parameter of type 'never'. (2345)
-      throw new UnsupportedValueError(value);
+      throw new UnsupportedValueError(value)
   }
 }
 ```
@@ -2725,8 +2723,8 @@ types check on assigning object literal to variable/function parameter.
 
 ```ts
 interface Room {
-  numDoors: number;
-  ceilingHeightFt: number;
+  numDoors: number
+  ceilingHeightFt: number
 }
 
 const r: Room = {
@@ -2736,13 +2734,13 @@ const r: Room = {
   // Excess property check:
   // Object literal may only specify known properties,
   // and 'elephant' does not exist in type 'Room'.
-};
+}
 
 enterRoom({
   numDoors: 1,
   ceilingHeightFt: 10,
   elephant: 'present',
-});
+})
 // Excess property check:
 // Object literal may only specify known properties,
 // and 'elephant' does not exist in type 'Room'.
@@ -2752,10 +2750,10 @@ const obj = {
   numDoors: 1,
   ceilingHeightFt: 10,
   elephant: 'present',
-};
+}
 
 // OK
-const r: Room = obj;
+const r: Room = obj
 ```
 
 ### Type Predicate Signature
@@ -2763,38 +2761,38 @@ const r: Room = obj;
 `is` keyword for `value` type predicate:
 
 ```ts
-type Falsy = false | '' | 0 | null | undefined;
+type Falsy = false | '' | 0 | null | undefined
 
-const isFalsy = (val: unknown): val is Falsy => !val;
+const isFalsy = (val: unknown): val is Falsy => !val
 
-const isDefined = <T>(x: T | undefined): x is T => x !== undefined;
+const isDefined = <T>(x: T | undefined): x is T => x !== undefined
 ```
 
 ```ts
 function isNotNullish<T>(value: T): value is NonNullable<T> {
-  return value !== undefined && value !== null;
+  return value !== undefined && value !== null
 }
 
 // %inferred-type: (number | null | undefined)[]
-const mixedValues = [1, undefined, 2, null];
+const mixedValues = [1, undefined, 2, null]
 
 // %inferred-type: number[]
-const numbers = mixedValues.filter(isNotNullish);
+const numbers = mixedValues.filter(isNotNullish)
 ```
 
 ```ts
 /**
  * A partial implementation of the `typeof` operator.
  */
-function isTypeof(value: any, typeString: 'boolean'): value is boolean;
-function isTypeof(value: any, typeString: 'number'): value is number;
-function isTypeof(value: any, typeString: 'string'): value is string;
+function isTypeof(value: any, typeString: 'boolean'): value is boolean
+function isTypeof(value: any, typeString: 'number'): value is number
+function isTypeof(value: any, typeString: 'string'): value is string
 
-const value: unknown = {};
+const value: unknown = {}
 
 if (isTypeof(value, 'boolean')) {
   // %inferred-type: boolean
-  console.log(value);
+  console.log(value)
 }
 ```
 
@@ -2803,11 +2801,11 @@ if (isTypeof(value, 'boolean')) {
 ### As Assertion
 
 ```ts
-let foo: any;
-const bar = foo as string; // 现在 bar 的类型是 'string'
+let foo: any
+const bar = foo as string // 现在 bar 的类型是 'string'
 
 function handler(event: Event) {
-  const mouseEvent = event as MouseEvent;
+  const mouseEvent = event as MouseEvent
 }
 ```
 
@@ -2817,21 +2815,21 @@ function handler(event: Event) {
 const v1 = {
   x: 1,
   y: 2,
-}; // { x: number; y: number; }
+} // { x: number; y: number; }
 
 const v2 = {
   x: 1 as const,
   y: 2,
-}; // { x: 1; y: number; }
+} // { x: 1; y: number; }
 
 const v3 = {
   x: 1,
   y: 2,
-} as const; // { readonly x: 1; readonly y: 2; }
+} as const // { readonly x: 1; readonly y: 2; }
 
-const a1 = [1, 2, 3]; // number[]
+const a1 = [1, 2, 3] // number[]
 
-const a2 = [1, 2, 3] as const; // readonly [1, 2, 3]
+const a2 = [1, 2, 3] as const // readonly [1, 2, 3]
 ```
 
 Const assertion `readonly` tuples are convenient for function returns
@@ -2840,12 +2838,12 @@ Const assertion `readonly` tuples are convenient for function returns
 ```ts
 // Return type: readonly [string, number]
 function firstCharAndSizeAsConst(input: string) {
-  return [input[0], input.length] as const;
+  return [input[0], input.length] as const
 }
 
 // firstChar type: string
 // size type: number
-const [firstChar, size] = firstCharAndSizeAsConst('Sabertaz');
+const [firstChar, size] = firstCharAndSizeAsConst('Sabertaz')
 ```
 
 ### Assertion Signature
@@ -2855,13 +2853,13 @@ Boolean assertion signature
 ```ts
 function assert(condition: any, msg?: string): asserts condition {
   if (!condition) {
-    throw new AssertionError(msg);
+    throw new AssertionError(msg)
   }
 }
 
 function yell(str) {
-  assert(typeof str === 'string');
-  return str.toUppercase();
+  assert(typeof str === 'string')
+  return str.toUppercase()
   //         ~~~~~~~~~~~
   // error: Property 'toUppercase' does not exist on type 'string'.
   //        Did you mean 'toUpperCase'?
@@ -2873,14 +2871,14 @@ String assertion signature
 ```ts
 function assertIsString(val: any): asserts val is string {
   if (typeof val !== 'string') {
-    throw new AssertionError('Not a string!');
+    throw new AssertionError('Not a string!')
   }
 }
 
 function yell(str: any) {
-  assertIsString(str);
+  assertIsString(str)
   // Now TypeScript knows that 'str' is a 'string'.
-  return str.toUppercase();
+  return str.toUppercase()
   //         ~~~~~~~~~~~
   // error: Property 'toUppercase' does not exist on type 'string'.
   //        Did you mean 'toUpperCase'?
@@ -2894,7 +2892,7 @@ function assertIsDefined<T>(val: T): asserts val is NonNullable<T> {
   if (val === undefined || val === null) {
     throw new AssertionError(
       `Expected 'val' to be defined, but received ${val}`
-    );
+    )
   }
 }
 ```
@@ -2918,7 +2916,7 @@ function assertIsDefined<T>(val: T): asserts val is NonNullable<T> {
 class MyComponent extends React.Component<Props, State> {
   // class properties
   @decorator
-  private static api_version: string;
+  private static api_version: string
 
   // class method parameters
   private handleFormSubmit1(@decorator myParam: string) {}
@@ -2930,7 +2928,7 @@ class MyComponent extends React.Component<Props, State> {
   // accessors
   @decorator
   public myAccessor() {
-    return this.privateProperty;
+    return this.privateProperty
   }
 }
 ```
@@ -2950,7 +2948,7 @@ class MyComponent extends React.Component<Props, State> {
 function classDecorator(options: any[]) {
   return target => {
     // ...
-  };
+  }
 }
 
 @classDecorator
@@ -2962,16 +2960,16 @@ function inject(options: { api_version: string }) {
   // returns the class decorator implementation
   return target => {
     // `target` will give us access to the entire class prototype
-    target.apiVersion = options.api_version;
-  };
+    target.apiVersion = options.api_version
+  }
 }
 
 function deprecated(target) {
   console.log(`
     this class is deprecated and will be removed
     in a future version of the app
-  `);
-  console.log(`@: ${target}`);
+  `)
+  console.log(`@: ${target}`)
 }
 
 @inject({
@@ -2979,7 +2977,7 @@ function deprecated(target) {
 })
 @deprecated
 class MyComponent extends React.Component<Props> {
-  static apiVersion: string;
+  static apiVersion: string
 }
 ```
 
@@ -3000,10 +2998,10 @@ function staticProp(constructor, name) {
 
 class MyComponent extends React.Component<Props> {
   @prop
-  public member: string;
+  public member: string
 
   @staticProp
-  public static apiVersion: string;
+  public static apiVersion: string
 }
 ```
 
@@ -3040,7 +3038,7 @@ function methodDecorator(options: any[]) {
     propertyDescriptor: PropertyDescriptor
   ) => {
     // ...
-  };
+  }
 }
 
 class MyComponent extends React.Component {
@@ -3058,8 +3056,8 @@ function enumerable(enumerable: boolean) {
     propertyKey: string,
     propertyDescriptor: PropertyDescriptor
   ) => {
-    propertyDescriptor.enumerable = enumerable;
-  };
+    propertyDescriptor.enumerable = enumerable
+  }
 }
 
 class MyComponent extends React.Component {
@@ -3082,27 +3080,27 @@ class MyComponent extends React.Component {
 ```ts
 function f(key: string): any {
   return function () {
-    console.log('执行: ', key);
-  };
+    console.log('执行: ', key)
+  }
 }
 
 @f('8. 类')
 class C {
   @f('4. 静态属性')
-  static prop?: number;
+  static prop?: number
 
   @f('5. 静态方法')
   static method(@f('6. 静态方法参数') foo) {}
 
   constructor(@f('7. 构造器参数') foo) {
-    super(foo);
+    super(foo)
   }
 
   @f('2. 实例方法')
   method(@f('1. 实例方法参数') foo) {}
 
   @f('3. 实例属性')
-  prop?: number;
+  prop?: number
 }
 
 // "执行: ",  "1. 实例方法参数"
@@ -3117,11 +3115,11 @@ class C {
 
 ```ts
 function dec(id) {
-  console.log('装饰器初始化', id);
+  console.log('装饰器初始化', id)
 
   return function (target, property, descriptor) {
-    console.log('装饰器执行', id);
-  };
+    console.log('装饰器执行', id)
+  }
 }
 
 class Example {
@@ -3141,12 +3139,12 @@ class Example {
 IoC and DI implementation:
 
 ```ts
-type Constructor<T = any> = new (...args: any[]) => T;
+type Constructor<T = any> = new (...args: any[]) => T
 
-const Injectable = (): ClassDecorator => target => {};
+const Injectable = (): ClassDecorator => target => {}
 
 class OtherService {
-  a = 1;
+  a = 1
 }
 
 @Injectable()
@@ -3154,81 +3152,81 @@ class TestService {
   constructor(public readonly otherService: OtherService) {}
 
   testMethod() {
-    console.log(this.otherService.a);
+    console.log(this.otherService.a)
   }
 }
 
 const Factory = <T>(Target: Constructor<T>): T => {
   // 获取所有注入的服务
-  const providers = Reflect.getMetadata('design:paramtypes', target); // [OtherService]
-  const args = providers.map((Provider: Constructor) => new Provider());
-  return new Target(...args);
-};
+  const providers = Reflect.getMetadata('design:paramtypes', target) // [OtherService]
+  const args = providers.map((Provider: Constructor) => new Provider())
+  return new Target(...args)
+}
 
-Factory(TestService).testMethod(); // 1
+Factory(TestService).testMethod() // 1
 ```
 
 AOP programming:
 
 ```ts
-const PATH_METADATA = 'path';
-const METHOD_METADATA = 'method';
+const PATH_METADATA = 'path'
+const METHOD_METADATA = 'method'
 
 const Controller = (path: string): ClassDecorator => {
   return target => {
-    Reflect.defineMetadata(PATH_METADATA, path, target);
-  };
-};
+    Reflect.defineMetadata(PATH_METADATA, path, target)
+  }
+}
 
 const createMappingDecorator =
   (method: string) =>
   (path: string): MethodDecorator => {
     return (target, key, descriptor) => {
-      Reflect.defineMetadata(PATH_METADATA, path, descriptor.value);
-      Reflect.defineMetadata(METHOD_METADATA, method, descriptor.value);
-    };
-  };
+      Reflect.defineMetadata(PATH_METADATA, path, descriptor.value)
+      Reflect.defineMetadata(METHOD_METADATA, method, descriptor.value)
+    }
+  }
 
-const Get = createMappingDecorator('GET');
-const Post = createMappingDecorator('POST');
+const Get = createMappingDecorator('GET')
+const Post = createMappingDecorator('POST')
 
 function mapRoute(instance: Object) {
-  const prototype = Object.getPrototypeOf(instance);
+  const prototype = Object.getPrototypeOf(instance)
 
   // 筛选出类的 methodName
   const methodsNames = Object.getOwnPropertyNames(prototype).filter(
     item => !isConstructor(item) && isFunction(prototype[item])
-  );
+  )
   return methodsNames.map(methodName => {
-    const fn = prototype[methodName];
+    const fn = prototype[methodName]
 
     // 取出定义的 metadata
-    const route = Reflect.getMetadata(PATH_METADATA, fn);
-    const method = Reflect.getMetadata(METHOD_METADATA, fn);
+    const route = Reflect.getMetadata(PATH_METADATA, fn)
+    const method = Reflect.getMetadata(METHOD_METADATA, fn)
 
     return {
       route,
       method,
       fn,
       methodName,
-    };
-  });
+    }
+  })
 }
 
 @Controller('/test')
 class SomeClass {
   @Get('/a')
   someGetMethod() {
-    return 'hello world';
+    return 'hello world'
   }
 
   @Post('/b')
   somePostMethod() {}
 }
 
-Reflect.getMetadata(PATH_METADATA, SomeClass); // '/test'
+Reflect.getMetadata(PATH_METADATA, SomeClass) // '/test'
 
-mapRoute(new SomeClass());
+mapRoute(new SomeClass())
 /**
  * [{
  *    route: '/a',
@@ -3262,18 +3260,18 @@ Type `T` is **covariant** if having `S <: P`,
 then `T<S> <: T<P>`.
 
 ```ts
-type IsSubtype<S, P> = S extends P ? true : false;
+type IsSubtype<S, P> = S extends P ? true : false
 
-type T1 = IsSubtype<Admin, User>;
+type T1 = IsSubtype<Admin, User>
 // type T1 = true
 
-type T2 = IsSubtype<Promise<Admin>, Promise<User>>;
+type T2 = IsSubtype<Promise<Admin>, Promise<User>>
 // type T2 = true
 
-type T3 = IsSubtype<'Hello', string>;
+type T3 = IsSubtype<'Hello', string>
 // type T3 = true
 
-type T4 = IsSubtype<Capitalize<'Hello'>, Capitalize<string>>;
+type T4 = IsSubtype<Capitalize<'Hello'>, Capitalize<string>>
 // type T4 = true
 ```
 
@@ -3285,51 +3283,51 @@ Type `T` is **contravariant** if having `S <: P`,
 then `T<P> <: T<S>`.
 
 ```ts
-type IsSubtype<S, P> = S extends P ? true : false;
+type IsSubtype<S, P> = S extends P ? true : false
 
-type Func<Param> = (param: Param) => void;
+type Func<Param> = (param: Param) => void
 
-type T1 = IsSubtype<Admin, User>;
+type T1 = IsSubtype<Admin, User>
 // type T1 = true
 
-type T2 = IsSubtype<Func<Admin>, Func<User>>;
+type T2 = IsSubtype<Func<Admin>, Func<User>>
 // type T2 = false
 
-type T3 = IsSubtype<Func<User>, Func<Admin>>;
+type T3 = IsSubtype<Func<User>, Func<Admin>>
 // type T3 = true
 ```
 
 ```ts
 const logAdmin: Func<Admin> = (admin: Admin): void => {
-  console.log(`Name: ${admin.userName}`);
-  console.log(`Is super admin: ${admin.isSuperAdmin.toString()}`);
-};
+  console.log(`Name: ${admin.userName}`)
+  console.log(`Is super admin: ${admin.isSuperAdmin.toString()}`)
+}
 
 const logUser: Func<User> = (user: User): void => {
-  console.log(`Name: ${user.userName}`);
-};
+  console.log(`Name: ${user.userName}`)
+}
 
-const admin = new Admin('admin1', true);
+const admin = new Admin('admin1', true)
 
-let logger: Func<Admin>;
+let logger: Func<Admin>
 
-logger = logUser;
-logger(admin); // OK
+logger = logUser
+logger(admin) // OK
 
-logger = logAdmin;
-logger(admin); // OK
+logger = logAdmin
+logger(admin) // OK
 
-const user = new User('user1');
+const user = new User('user1')
 
-let logger: Func<User>;
+let logger: Func<User>
 
-logger = logUser;
-logger(user); // OK
+logger = logUser
+logger(user) // OK
 
-logger = logAdmin;
+logger = logAdmin
 // Type 'Func<Admin>' is not assignable to type 'Func<User>'.
 //   Property 'isSuperAdmin' is missing in type 'User' but required in type 'Admin'.
-logger(user); // Oops! `user.isSuperAdmin` is undefined.
+logger(user) // Oops! `user.isSuperAdmin` is undefined.
 ```
 
 :::tip Function Types
@@ -3392,30 +3390,30 @@ logger(user); // Oops! `user.isSuperAdmin` is undefined.
 - Type-safe React router advanced [types](https://speakerdeck.com/zoontek/advanced-typescript-how-we-made-our-router-typesafe).
 
 ```tsx
-import React from 'react';
+import React from 'react'
 
 type PathSegments<Path extends string> =
   Path extends `${infer SegmentA}/${infer SegmentB}`
     ? ParamOnly<SegmentA> | PathSegments<SegmentB>
-    : ParamOnly<Path>;
+    : ParamOnly<Path>
 type ParamOnly<Segment extends string> = Segment extends `:${infer Param}`
   ? Param
-  : never;
+  : never
 type RouteParams<Path extends string> = {
-  [Key in PathSegments<Path>]: string;
-};
-
-interface RouteProps<Path extends string> {
-  path: Path;
-  render: (routeProps: { match: { params: RouteParams<Path> } }) => void;
+  [Key in PathSegments<Path>]: string
 }
 
-<Route
+interface RouteProps<Path extends string> {
+  path: Path
+  render: (routeProps: { match: { params: RouteParams<Path> } }) => void
+}
+
+;<Route
   path="/user/:username"
   render={routeProps => {
-    const params = routeProps.match.params;
+    const params = routeProps.match.params
   }}
-/>;
+/>
 ```
 
 #### Type Gymnastics Reference
@@ -3448,27 +3446,27 @@ AST + Checker ~~Emitter~~> JavaScript
 
 ```ts
 // 单例扫描器
-const scanner = ts.createScanner(ts.ScriptTarget.Latest, /* 忽略杂项 */ true);
+const scanner = ts.createScanner(ts.ScriptTarget.Latest, /* 忽略杂项 */ true)
 
 // 此函数与初始化使用的 `initializeState` 函数相似
 function initializeState(text: string) {
-  scanner.setText(text);
+  scanner.setText(text)
   scanner.setOnError((message: ts.DiagnosticMessage, length: number) => {
-    console.error(message);
-  });
-  scanner.setScriptTarget(ts.ScriptTarget.ES5);
-  scanner.setLanguageVariant(ts.LanguageVariant.Standard);
+    console.error(message)
+  })
+  scanner.setScriptTarget(ts.ScriptTarget.ES5)
+  scanner.setLanguageVariant(ts.LanguageVariant.Standard)
 }
 
 // 使用示例
-initializeState(`const foo = 123;`.trim());
+initializeState(`const foo = 123;`.trim())
 
 // 开始扫描
-let token = scanner.scan();
+let token = scanner.scan()
 
 while (token !== ts.SyntaxKind.EndOfFileToken) {
-  console.log(ts.formatSyntaxKind(token));
-  token = scanner.scan();
+  console.log(ts.formatSyntaxKind(token))
+  token = scanner.scan()
 }
 ```
 
@@ -3488,19 +3486,19 @@ function printAllChildren(node: ts.Node, depth = 0) {
     ts.formatSyntaxKind(node.kind),
     node.pos,
     node.end
-  );
-  depth++;
-  node.getChildren().forEach(c => printAllChildren(c, depth));
+  )
+  depth++
+  node.getChildren().forEach(c => printAllChildren(c, depth))
 }
 
-const sourceCode = `const foo = 123;`.trim();
+const sourceCode = `const foo = 123;`.trim()
 const sourceFile = ts.createSourceFile(
   'foo.ts',
   sourceCode,
   ts.ScriptTarget.ES5,
   true
-);
-printAllChildren(sourceFile);
+)
+printAllChildren(sourceFile)
 ```
 
 #### TypeScript Binder
@@ -3554,43 +3552,43 @@ Program.emit ->
 ```ts
 // Path of the file we want to analyze.
 // It's important that @types/react is installed in the same package.
-const filePath = 'example.jsx';
+const filePath = 'example.jsx'
 
 // Make sure to analyze .js/.jsx files.
 const options = {
   allowJs: true,
   jsx: 'preserve',
-};
+}
 
 // Create a TypeScript compilation environment.
-const host = ts.createCompilerHost(options);
+const host = ts.createCompilerHost(options)
 
 // Parse and analyze our file, along with dependencies.
-const program = ts.createProgram([filePath], options, host);
-const sourceFile = program.getSourceFile(filePath);
-const checker = program.getTypeChecker();
+const program = ts.createProgram([filePath], options, host)
+const sourceFile = program.getSourceFile(filePath)
+const checker = program.getTypeChecker()
 
-const detectedComponents = [];
+const detectedComponents = []
 
 for (const statement of sourceFile.statements) {
   if (ts.isVariableStatement(statement)) {
     for (const declaration of statement.declarationList.declarations) {
       // 🚀 This is where the magic happens.
-      const type = checker.getTypeAtLocation(declaration.name);
+      const type = checker.getTypeAtLocation(declaration.name)
 
       // A type that has call signatures is a function type.
       for (const callSignature of type.getCallSignatures()) {
-        const returnType = callSignature.getReturnType();
+        const returnType = callSignature.getReturnType()
 
         if (returnType.symbol?.getEscapedName().toString() === 'Element') {
-          detectedComponents.push(declaration.name.text);
+          detectedComponents.push(declaration.name.text)
         }
       }
     }
   }
 }
 
-console.log(detectedComponents);
+console.log(detectedComponents)
 // ["Foo", "Bar"]
 ```
 

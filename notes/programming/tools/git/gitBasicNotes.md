@@ -1465,30 +1465,30 @@ git checkout <commit-hash-id>
 
 ```ts
 // Get file commit history
-const Git = require('nodegit');
-let repo;
+const Git = require('nodegit')
+let repo
 
 Git.Repository.open(path.resolve('./.git'))
   .then(function (r) {
-    repo = r;
-    return repo.getMasterCommit();
+    repo = r
+    return repo.getMasterCommit()
   })
   .then(function (firstCommitOnMaster) {
-    const walker = repo.createRevWalk();
-    walker.push(firstCommitOnMaster.sha());
-    walker.sorting(Git.Revwalk.SORT.Time);
+    const walker = repo.createRevWalk()
+    walker.push(firstCommitOnMaster.sha())
+    walker.sorting(Git.Revwalk.SORT.Time)
 
-    return walker.fileHistoryWalk(historyFile, 2);
+    return walker.fileHistoryWalk(historyFile, 2)
   })
   .then(resultingArrayOfCommits => {
     if (resultingArrayOfCommits.length > 0) {
-      const commit = resultingArrayOfCommits[0].commit;
-      const date = commit.date();
+      const commit = resultingArrayOfCommits[0].commit
+      const date = commit.date()
     }
-  });
+  })
 
 const getGitLastUpdatedTimeStamp = filePath => {
-  let lastUpdated = 0;
+  let lastUpdated = 0
 
   try {
     lastUpdated =
@@ -1498,13 +1498,13 @@ const getGitLastUpdatedTimeStamp = filePath => {
             cwd: path.dirname(filePath),
           })
           .stdout.toString('utf-8')
-      ) * 1000;
+      ) * 1000
   } catch (e) {
     /* do not handle for now */
   }
 
-  return lastUpdated;
-};
+  return lastUpdated
+}
 ```
 
 ### Merge Inside

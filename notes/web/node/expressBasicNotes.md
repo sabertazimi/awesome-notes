@@ -18,14 +18,14 @@ tags: [Web, Node, Express]
 
 ```ts
 function middleware(req, res, next) {
-  next();
+  next()
   // OR res.send();
 }
 ```
 
 ```ts
 function middleware(err, req, res, next) {
-  next(err);
+  next(err)
   // OR res.send();
 }
 ```
@@ -33,7 +33,7 @@ function middleware(err, req, res, next) {
 ### Use
 
 ```ts
-app.use(middlewareFunction);
+app.use(middlewareFunction)
 ```
 
 ### Useful Middleware
@@ -70,9 +70,9 @@ res.locals 中的所有属性都会传递到模板的上下文中
 
 ```ts
 app.use(function (req, res, next) {
-  res.locals.user = req.user;
-  next();
-});
+  res.locals.user = req.user
+  next()
+})
 ```
 
 所有的页面模板中便可以使用 `{{user}}`.

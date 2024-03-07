@@ -35,8 +35,8 @@ Progressive Web Apps:
 ```ts
 // 20~100 ms for desktop
 // 100 ms for mobile
-const entry = performance.getEntriesByName(url)[0];
-const swStartupTime = entry.requestStart - entry.workerStart;
+const entry = performance.getEntriesByName(url)[0]
+const swStartupTime = entry.requestStart - entry.workerStart
 ```
 
 - cache reads aren't always instant:
@@ -47,17 +47,17 @@ const swStartupTime = entry.requestStart - entry.workerStart;
   - NO SW = network latency.
 
 ```ts
-const entry = performance.getEntriesByName(url)[0];
+const entry = performance.getEntriesByName(url)[0]
 
 // no remote request means this was handled by the cache
 if (entry.transferSize === 0) {
-  const cacheTime = entry.responseStart - entry.requestStart;
+  const cacheTime = entry.responseStart - entry.requestStart
 }
 
 async function handleRequest(event) {
-  const cacheStart = performance.now();
-  const response = await caches.match(event.request);
-  const cacheEnd = performance.now();
+  const cacheStart = performance.now()
+  const response = await caches.match(event.request)
+  const cacheEnd = performance.now()
 }
 ```
 
@@ -84,14 +84,14 @@ self.addEventListener('fetch', function (event) {
     caches.open(cacheName).then(function (cache) {
       cache.match(event.request).then(function (cacheResponse) {
         fetch(event.request).then(function (networkResponse) {
-          cache.put(event.request, networkResponse);
-        });
+          cache.put(event.request, networkResponse)
+        })
 
-        return cacheResponse || networkResponse;
-      });
+        return cacheResponse || networkResponse
+      })
     })
-  );
-});
+  )
+})
 ```
 
 Cache first, then Network:
@@ -102,16 +102,16 @@ self.addEventListener('fetch', function (event) {
   event.respondWith(
     caches.open(cacheName).then(function (cache) {
       cache.match(event.request).then(function (cacheResponse) {
-        if (cacheResponse) return cacheResponse;
+        if (cacheResponse) return cacheResponse
 
         return fetch(event.request).then(function (networkResponse) {
-          cache.put(event.request, networkResponse.clone());
-          return networkResponse;
-        });
-      });
+          cache.put(event.request, networkResponse.clone())
+          return networkResponse
+        })
+      })
     })
-  );
-});
+  )
+})
 ```
 
 Network first, then Cache:
@@ -121,10 +121,10 @@ Network first, then Cache:
 self.addEventListener('fetch', function (event) {
   event.respondWith(
     fetch(event.request).catch(function () {
-      return caches.match(event.request);
+      return caches.match(event.request)
     })
-  );
-});
+  )
+})
 ```
 
 Cache only:
@@ -135,11 +135,11 @@ self.addEventListener('fetch', function (event) {
   event.respondWith(
     caches.open(cacheName).then(function (cache) {
       cache.match(event.request).then(function (cacheResponse) {
-        return cacheResponse;
-      });
+        return cacheResponse
+      })
     })
-  );
-});
+  )
+})
 ```
 
 Network only:
@@ -149,10 +149,10 @@ Network only:
 self.addEventListener('fetch', function (event) {
   event.respondWith(
     fetch(event.request).then(function (networkResponse) {
-      return networkResponse;
+      return networkResponse
     })
-  );
-});
+  )
+})
 ```
 
 ### Service Worker Usage
@@ -164,8 +164,8 @@ self.addEventListener('fetch', function (event) {
 if ('serviceWorker' in navigator) {
   // Use the window load event to keep the page load performance
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js');
-  });
+    navigator.serviceWorker.register('/sw.js')
+  })
 }
 ```
 
@@ -173,7 +173,7 @@ if ('serviceWorker' in navigator) {
 
 ```ts
 function isImage(fetchRequest) {
-  return fetchRequest.method === 'GET' && fetchRequest.destination === 'image';
+  return fetchRequest.method === 'GET' && fetchRequest.destination === 'image'
 }
 
 // eslint-disable-next-line no-restricted-globals
@@ -181,36 +181,36 @@ self.addEventListener('fetch', e => {
   e.respondWith(
     fetch(e.request)
       .then(response => {
-        if (response.ok) return response;
+        if (response.ok) return response
 
         // User is online, but response was not ok
         if (isImage(e.request)) {
           // Get broken image placeholder from cache
-          return caches.match('/broken.png');
+          return caches.match('/broken.png')
         }
       })
       .catch(err => {
         // User is probably offline
         if (isImage(e.request)) {
           // Get broken image placeholder from cache
-          return caches.match('/broken.png');
+          return caches.match('/broken.png')
         }
-        process(err);
+        process(err)
       })
-  );
-});
+  )
+})
 
 // eslint-disable-next-line no-restricted-globals
 self.addEventListener('install', e => {
   // eslint-disable-next-line no-restricted-globals
-  self.skipWaiting();
+  self.skipWaiting()
   e.waitUntil(
     caches.open('precache').then(cache => {
       // Add /broken.png to "precache"
-      cache.add('/broken.png');
+      cache.add('/broken.png')
     })
-  );
-});
+  )
+})
 ```
 
 #### Caches Version Service Worker
@@ -218,20 +218,20 @@ self.addEventListener('install', e => {
 ```ts
 // eslint-disable-next-line no-restricted-globals
 self.addEventListener('activate', function (event) {
-  const cacheWhitelist = ['v2'];
+  const cacheWhitelist = ['v2']
 
   event.waitUntil(
     caches.keys().then(function (keyList) {
       return Promise.all([
         keyList.map(function (key) {
-          return cacheWhitelist.includes(key) ? caches.delete(key) : null;
+          return cacheWhitelist.includes(key) ? caches.delete(key) : null
         }),
         // eslint-disable-next-line no-restricted-globals
         self.clients.claim(),
-      ]);
+      ])
     })
-  );
-});
+  )
+})
 ```
 
 ### PWA Reference
@@ -273,25 +273,25 @@ JamStack 指的是一套用于构建现代网站的技术栈:
 - Data is fetched on every page request.
 
 ```tsx
-import { TimeSection } from '@components';
+import { TimeSection } from '@components'
 
 export default function CSRPage() {
-  const [dateTime, setDateTime] = React.useState<string>();
+  const [dateTime, setDateTime] = React.useState<string>()
 
   React.useEffect(() => {
     axios
       .get('https://worldtimeapi.org/api/ip')
       .then(res => {
-        setDateTime(res.data.datetime);
+        setDateTime(res.data.datetime)
       })
-      .catch(error => console.error(error));
-  }, []);
+      .catch(error => console.error(error))
+  }, [])
 
   return (
     <main>
       <TimeSection dateTime={dateTime} />
     </main>
-  );
+  )
 }
 ```
 
@@ -336,12 +336,12 @@ if (isBotAgent) {
 Webpack configuration:
 
 ```ts
-const baseConfig = require('./baseConfig');
+const baseConfig = require('./baseConfig')
 
 const webConfig = {
   ...baseConfig,
   target: 'web',
-};
+}
 
 const nodeConfig = {
   ...baseConfig,
@@ -351,22 +351,22 @@ const nodeConfig = {
     libraryTarget: 'commonjs2',
   },
   externals: [require('webpack-node-externals')()],
-};
+}
 
-module.exports = { webConfig, nodeConfig };
+module.exports = { webConfig, nodeConfig }
 ```
 
 React server side rendering `start.server.js`
 (compile to `dist/server.js`):
 
 ```tsx
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
-import { renderRoutes } from 'react-router-config';
-import Koa from 'koa';
-import koaStatic from 'koa-static';
-import { Provider } from 'react-redux';
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import { StaticRouter } from 'react-router-dom'
+import { renderRoutes } from 'react-router-config'
+import Koa from 'koa'
+import koaStatic from 'koa-static'
+import { Provider } from 'react-redux'
 
 const Routes = [
   { path: '/', component: Home, exact: true },
@@ -375,29 +375,29 @@ const Routes = [
     component: About,
     exact: true,
   },
-];
+]
 
 const getStore = () => {
-  return createStore(reducer, applyMiddleware(thunk));
-};
+  return createStore(reducer, applyMiddleware(thunk))
+}
 
-const app = new Koa();
-app.use(koaStatic('public'));
+const app = new Koa()
+app.use(koaStatic('public'))
 
 app.use(async ctx => {
-  const store = getStore();
-  const matchedRoutes = matchRoutes(Routes, ctx.request.path);
-  const loaders = [];
+  const store = getStore()
+  const matchedRoutes = matchRoutes(Routes, ctx.request.path)
+  const loaders = []
 
   matchedRoutes.forEach(item => {
     if (item.route.loadData) {
       // item.route.loadData() 返回的是一个 promise.
-      loaders.push(item.route.loadData(store));
+      loaders.push(item.route.loadData(store))
     }
-  });
+  })
 
   // 等待异步完成, store 已完成更新.
-  await Promise.all(loaders);
+  await Promise.all(loaders)
 
   const content = renderToString(
     <Provider store={store}>
@@ -405,7 +405,7 @@ app.use(async ctx => {
         <div>{renderRoutes(Routes)}</div>
       </StaticRouter>
     </Provider>
-  );
+  )
 
   ctx.body = `
   <!DOCTYPE html>
@@ -420,12 +420,12 @@ app.use(async ctx => {
       </script>
       <script src="/public/client.js"></script>
     </body>
-  </html>`;
-});
+  </html>`
+})
 
 app.listen(3003, () => {
-  console.log('listen:3003');
-});
+  console.log('listen:3003')
+})
 ```
 
 React client side hydration `start.client.js`
@@ -436,11 +436,11 @@ React client side hydration `start.client.js`
 - 执行服务端未执行的 lifecycle hooks: `beforeMount()`/`onMounted()`.
 
 ```tsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { renderRoutes } from 'react-router-config';
-import { Provider } from 'react-redux';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+import { renderRoutes } from 'react-router-config'
+import { Provider } from 'react-redux'
 
 const Routes = [
   { path: '/', component: Home, exact: true },
@@ -449,12 +449,12 @@ const Routes = [
     component: About,
     exact: true,
   },
-];
+]
 
 const getStore = () => {
-  const defaultState = window.context ? window.context.state : {};
-  return createStore(reducer, defaultState, applyMiddleware(thunk));
-};
+  const defaultState = window.context ? window.context.state : {}
+  return createStore(reducer, defaultState, applyMiddleware(thunk))
+}
 
 const App = () => (
   <Provider store={getStore()}>
@@ -462,9 +462,9 @@ const App = () => (
       <div>{renderRoutes(Routes)}</div>
     </BrowserRouter>
   </Provider>
-);
+)
 
-ReactDOM.hydrate(<App />, document.getElementById('app'));
+ReactDOM.hydrate(<App />, document.getElementById('app'))
 ```
 
 Isomorphic data fetch
@@ -472,13 +472,13 @@ Isomorphic data fetch
 `loader` in `Remix`):
 
 ```tsx
-const data = await App.fetchData();
-const App = <App {...data} />;
+const data = await App.fetchData()
+const App = <App {...data} />
 
 return {
   html: ReactDOMServer.renderToString(App),
   state: { data },
-};
+}
 ```
 
 `Next.js` SSR:
@@ -487,23 +487,23 @@ return {
 - Data is fetched on every page request.
 
 ```tsx
-import { TimeSection } from '@components';
+import { TimeSection } from '@components'
 
 export default function SSRPage({ dateTime }: SSRPageProps) {
   return (
     <main>
       <TimeSection dateTime={dateTime} />
     </main>
-  );
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await axios.get('https://worldtimeapi.org/api/ip');
+  const res = await axios.get('https://worldtimeapi.org/api/ip')
 
   return {
     props: { dateTime: res.data.datetime },
-  };
-};
+  }
+}
 ```
 
 :::caution SSR Hydration Warning
@@ -563,23 +563,23 @@ export const getServerSideProps: GetServerSideProps = async () => {
 - Data will not change because no further fetch.
 
 ```tsx
-import { TimeSection } from '@components';
+import { TimeSection } from '@components'
 
 export default function SSGPage({ dateTime }: SSGPageProps) {
   return (
     <main>
       <TimeSection dateTime={dateTime} />
     </main>
-  );
+  )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await axios.get('https://worldtimeapi.org/api/ip');
+  const res = await axios.get('https://worldtimeapi.org/api/ip')
 
   return {
     props: { dateTime: res.data.datetime },
-  };
-};
+  }
+}
 ```
 
 ### ISR
@@ -592,24 +592,24 @@ export const getStaticProps: GetStaticProps = async () => {
   But, the changes will be served for the next full reload.
 
 ```tsx
-import { TimeSection } from '@components';
+import { TimeSection } from '@components'
 
 export default function ISR20Page({ dateTime }: ISR20PageProps) {
   return (
     <main>
       <TimeSection dateTime={dateTime} />
     </main>
-  );
+  )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await axios.get('https://worldtimeapi.org/api/ip');
+  const res = await axios.get('https://worldtimeapi.org/api/ip')
 
   return {
     props: { dateTime: res.data.datetime },
     revalidate: 20,
-  };
-};
+  }
+}
 ```
 
 ### Islands Architecture
@@ -638,7 +638,7 @@ export const getStaticProps: GetStaticProps = async () => {
 ### SEO Metadata
 
 ```tsx
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'
 
 function App() {
   const seo = {
@@ -647,7 +647,7 @@ function App() {
       'This is an awesome site that you definitely should check out.',
     url: 'https://www.mydomain.com/about',
     image: 'https://mydomain.com/images/home/logo.png',
-  };
+  }
 
   return (
     <Helmet
@@ -667,7 +667,7 @@ function App() {
         { property: 'twitter:description', content: seo.description },
       ]}
     />
-  );
+  )
 }
 ```
 
@@ -1152,24 +1152,24 @@ npm install babel-core --save
 ```
 
 ```ts
-const babel = require('babel-core');
+const babel = require('babel-core')
 
 // 字符串转码
-babel.transform('code();', options);
+babel.transform('code();', options)
 // => { code, map, ast }
 
 // 文件转码 (异步)
 babel.transformFile('filename.js', options, function (err, result) {
-  process(err);
-  return result; // => { code, map, ast }
-});
+  process(err)
+  return result // => { code, map, ast }
+})
 
 // 文件转码 (同步)
-babel.transformFileSync('filename.js', options);
+babel.transformFileSync('filename.js', options)
 // => { code, map, ast }
 
 // Babel AST转码
-babel.transformFromAst(ast, code, options);
+babel.transformFromAst(ast, code, options)
 // => { code, map, ast }
 ```
 
@@ -1194,22 +1194,22 @@ Use Babel to refactor code:
 ```ts
 // index.js
 module.exports = babel => {
-  const t = babel.types;
-  let isJSXExisted = false;
-  let isMeactContextEnabled = false;
+  const t = babel.types
+  let isJSXExisted = false
+  let isMeactContextEnabled = false
 
   return {
     visitor: {
       Program: {
         exit(path) {
           if (isJSXExisted === true && isMeactContextEnabled === false) {
-            throw path.buildCodeFrameError(`Meact isn't in current context!`);
+            throw path.buildCodeFrameError(`Meact isn't in current context!`)
           }
         },
       },
       ImportDeclaration(path, state) {
         if (path.node.specifiers[0].local.name === 'Meact') {
-          isMeactContextEnabled = true;
+          isMeactContextEnabled = true
         }
       },
       MemberExpression(path, state) {
@@ -1217,18 +1217,18 @@ module.exports = babel => {
           path.node.object.name === 'React' &&
           path.node.property.name === 'createElement'
         ) {
-          isJSXExisted = true;
+          isJSXExisted = true
           path.replaceWith(
             t.MemberExpression(
               t.identifier('Meact'),
               t.identifier('createElement')
             )
-          );
+          )
         }
       },
     },
-  };
-};
+  }
+}
 ```
 
 Babel plugins:
@@ -1264,15 +1264,15 @@ const defaultTargets = {
   firefox: 52,
   safari: 8,
   ucandroid: 1,
-};
+}
 
 const buildTargets = options => {
-  return Object.assign({}, defaultTargets, options.additionalTargets);
-};
+  return Object.assign({}, defaultTargets, options.additionalTargets)
+}
 
 module.exports = function buildMeactPreset(context, options) {
   const transpileTargets =
-    (options && options.targets) || buildTargets(options || {});
+    (options && options.targets) || buildTargets(options || {})
 
   return {
     presets: [
@@ -1287,8 +1287,8 @@ module.exports = function buildMeactPreset(context, options) {
       require('babel-plugin-transform-meact-jsx'),
       require('@babel/plugin-transform-runtime'),
     ].filter(Boolean),
-  };
-};
+  }
+}
 ```
 
 ## Webpack
@@ -1330,7 +1330,7 @@ module.exports = {
     open: true,
     port: 2333,
   },
-};
+}
 ```
 
 ### Webpack Hot Module Replacement
@@ -1353,22 +1353,22 @@ HMR:
 
 ```ts
 // 该模块修改后, `console.log('bar')` 会重新执行
-console.log('bar');
-module.hot.accept();
+console.log('bar')
+module.hot.accept()
 ```
 
 ```ts
-import component from './component';
+import component from './component'
 
-let demoComponent = component();
-document.body.appendChild(demoComponent);
+let demoComponent = component()
+document.body.appendChild(demoComponent)
 
 if (module.hot) {
   module.hot.accept('./component', () => {
-    const nextComponent = component();
-    document.body.replaceChild(nextComponent, demoComponent);
-    demoComponent = nextComponent;
-  });
+    const nextComponent = component()
+    document.body.replaceChild(nextComponent, demoComponent)
+    demoComponent = nextComponent
+  })
 }
 ```
 
@@ -1386,7 +1386,7 @@ sudo sysctl -p
 ### Webpack Resolve Path Options
 
 ```ts
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 module.exports = {
   resolve: {
@@ -1402,19 +1402,19 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
-};
+}
 ```
 
 get `baseUrl`and `paths` from `tsconfig.json`:
 
 ```ts
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 module.exports = {
   resolve: {
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
-};
+}
 ```
 
 `jsconfig.json` for vscode resolve path:
@@ -1481,7 +1481,7 @@ module.exports = {
   cache: {
     type: 'filesystem',
   },
-};
+}
 ```
 
 #### Webpack Browser Cache
@@ -1492,7 +1492,7 @@ module.exports = {
 ### Webpack Library Configuration
 
 ```ts
-const path = require('node:path');
+const path = require('node:path')
 
 module.exports = {
   entry: {
@@ -1507,7 +1507,7 @@ module.exports = {
     libraryTarget: 'esm',
     globalObject: 'this',
   },
-};
+}
 ```
 
 ### Webpack Loader Configuration
@@ -1543,7 +1543,7 @@ const config = {
     cacheCompression: false,
     compact: isEnvProduction,
   },
-};
+}
 ```
 
 #### Webpack CSS Loader
@@ -1557,10 +1557,10 @@ const config = {
   `modules.mode` 设置为 [`pure`](https://github.com/vercel/next.js/blob/v12.1.6/packages/next/build/webpack/config/blocks/css/loaders/modules.ts#L42-L44).
 
 ```ts
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
-const devMode = process.env.NODE_ENV !== 'production';
+const devMode = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   module: {
@@ -1598,7 +1598,7 @@ module.exports = {
       new CssMinimizerPlugin(),
     ],
   },
-};
+}
 ```
 
 #### Webpack Static Assets Loader
@@ -1626,13 +1626,13 @@ const config = {
       },
     },
   ],
-};
+}
 ```
 
 ##### Webpack Resource Assets
 
 ```ts
-const path = require('node:path');
+const path = require('node:path')
 
 module.exports = {
   entry: './src/index.js',
@@ -1656,20 +1656,20 @@ module.exports = {
       },
     ],
   },
-};
+}
 ```
 
 ```ts
-import mainImage from './images/main.png';
+import mainImage from './images/main.png'
 
-img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
+img.src = mainImage // '/dist/151cfcfa1bd74779aadb.png'
 ```
 
 ##### Webpack Inline Assets
 
 ```ts
-const path = require('node:path');
-const svgToMiniDataURI = require('mini-svg-data-uri');
+const path = require('node:path')
+const svgToMiniDataURI = require('mini-svg-data-uri')
 
 module.exports = {
   entry: './src/index.js',
@@ -1684,27 +1684,27 @@ module.exports = {
         type: 'asset/inline',
         generator: {
           dataUrl: content => {
-            content = content.toString();
-            return svgToMiniDataURI(content);
+            content = content.toString()
+            return svgToMiniDataURI(content)
           },
         },
       },
     ],
   },
-};
+}
 ```
 
 ```ts
-import metroMap from './images/metro.svg';
+import metroMap from './images/metro.svg'
 
-block.style.background = `url(${metroMap})`;
+block.style.background = `url(${metroMap})`
 // => url(data:image/svg+xml;base64,PHN2ZyB4bW0iaHR0cDo...vc3ZnPgo=)
 ```
 
 ##### Webpack Source Assets
 
 ```ts
-const path = require('node:path');
+const path = require('node:path')
 
 module.exports = {
   entry: './src/index.js',
@@ -1720,13 +1720,13 @@ module.exports = {
       },
     ],
   },
-};
+}
 ```
 
 ```ts
-import exampleText from './example.txt';
+import exampleText from './example.txt'
 
-block.textContent = exampleText; // 'Hello world'
+block.textContent = exampleText // 'Hello world'
 ```
 
 #### Webpack Thread Loader
@@ -1771,11 +1771,11 @@ const config = {
     },
     // your expensive loader (e.g babel-loader)
   ],
-};
+}
 ```
 
 ```ts
-const threadLoader = require('thread-loader');
+const threadLoader = require('thread-loader')
 
 threadLoader.warmup(
   {
@@ -1789,7 +1789,7 @@ threadLoader.warmup(
     'babel-preset-es2015',
     'sass-loader',
   ]
-);
+)
 ```
 
 #### Webpack Web Worker Loader
@@ -1810,7 +1810,7 @@ module.exports = {
       },
     ],
   },
-};
+}
 ```
 
 ### Webpack Optimization
@@ -1913,20 +1913,20 @@ const config = new webpack.optimize.CommonsChunkPlugin({
 
   minSize: number,
   // Minimum size of all common module before a commons chunk is created.
-});
+})
 ```
 
 #### Code Minimization
 
 ```ts
-const TerserPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
-const isEnvProduction = process.env.NODE_ENV === 'production';
+const isEnvProduction = process.env.NODE_ENV === 'production'
 const isEnvProductionProfile =
-  isEnvProduction && process.argv.includes('--profile');
-const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
+  isEnvProduction && process.argv.includes('--profile')
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false'
 
 module.exports = {
   module: {
@@ -1978,7 +1978,7 @@ module.exports = {
       new CssMinimizerPlugin(),
     ],
   },
-};
+}
 ```
 
 #### Code Splitting
@@ -2071,7 +2071,7 @@ module.exports = {
       },
     },
   },
-};
+}
 ```
 
 [Next.js granular chunking configuration](https://web.dev/granular-chunking-nextjs):
@@ -2086,44 +2086,44 @@ module.exports = {
           chunks: 'all',
           name: 'framework',
           test(module) {
-            const resource = module.nameForCondition?.();
+            const resource = module.nameForCondition?.()
             return resource
               ? topLevelFrameworkPaths.some(pkgPath =>
                   resource.startsWith(pkgPath)
                 )
-              : false;
+              : false
           },
           priority: 40,
           enforce: true,
         },
         lib: {
           test(module: {
-            size: Function;
-            nameForCondition: Function;
+            size: Function
+            nameForCondition: Function
           }): boolean {
             return (
               module.size() > 160000 &&
               /node_modules[/\\]/.test(module.nameForCondition() || '')
-            );
+            )
           },
           name(module: {
-            type: string;
-            libIdent?: Function;
-            updateHash: (hash: crypto.Hash) => void;
+            type: string
+            libIdent?: Function
+            updateHash: (hash: crypto.Hash) => void
           }): string {
-            const hash = crypto.createHash('sha1');
+            const hash = crypto.createHash('sha1')
             if (isModuleCSS(module)) {
-              module.updateHash(hash);
+              module.updateHash(hash)
             } else {
               if (!module.libIdent) {
                 throw new Error(
                   `Encountered unknown module type: ${module.type}.`
-                );
+                )
               }
-              hash.update(module.libIdent({ context: dir }));
+              hash.update(module.libIdent({ context: dir }))
             }
 
-            return hash.digest('hex').substring(0, 8);
+            return hash.digest('hex').substring(0, 8)
           },
           priority: 30,
           minChunks: 1,
@@ -2134,7 +2134,7 @@ module.exports = {
       minSize: 20000,
     },
   },
-};
+}
 ```
 
 #### Tree Shaking
@@ -2167,7 +2167,7 @@ const config = new HardSourceWebpackPlugin({
   // Either a string of object hash function given a webpack config.
   configHash: webpackConfig => {
     // node-object-hash on npm can be used to build this.
-    return require('node-object-hash')({ sort: false }).hash(webpackConfig);
+    return require('node-object-hash')({ sort: false }).hash(webpackConfig)
   },
   // Either false, a string, an object, or a project hashing function.
   environmentHash: {
@@ -2192,7 +2192,7 @@ const config = new HardSourceWebpackPlugin({
     // (default: 50 MB) big in bytes.
     sizeThreshold: 50 * 1024 * 1024,
   },
-});
+})
 ```
 
 Webpack 5
@@ -2202,7 +2202,7 @@ const config = {
   cache: {
     type: 'memory',
   },
-};
+}
 ```
 
 ```ts
@@ -2213,19 +2213,19 @@ const config = {
       config: [__filename],
     },
   },
-};
+}
 ```
 
 #### Webpack Perf Profiling
 
 ```ts
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 
-const smp = new SpeedMeasurePlugin();
+const smp = new SpeedMeasurePlugin()
 
 const webpackConfig = smp.wrap({
   plugins: [new MyPlugin(), new MyOtherPlugin()],
-});
+})
 ```
 
 ```bash
@@ -2315,32 +2315,32 @@ module.exports = {
           !process.argv.includes('--watch')
         ) {
           // Process build errors.
-          process.exit(1);
+          process.exit(1)
         }
-      });
+      })
     },
   ],
-};
+}
 ```
 
 ```ts
-const childProcess = require('node:child_process');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const childProcess = require('node:child_process')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const branch = childProcess
   .execSync('git rev-parse --abbrev-ref HEAD')
   .toString()
-  .replace(/\s+/, '');
-const version = branch.split('/')[1];
+  .replace(/\s+/, '')
+const version = branch.split('/')[1]
 const scripts = [
   'https://cdn.bootcss.com/react-dom/16.9.0-rc.0/umd/react-dom.production.min.js',
   'https://cdn.bootcss.com/react/16.9.0/umd/react.production.min.js',
-];
+]
 
 class HotLoad {
   apply(compiler) {
     compiler.hooks.beforeRun.tap('UpdateVersion', compilation => {
-      compilation.options.output.publicPath = `./${version}/`;
-    });
+      compilation.options.output.publicPath = `./${version}/`
+    })
 
     compiler.hooks.compilation.tap('HotLoadPlugin', compilation => {
       HtmlWebpackPlugin.getHooks(compilation).alterAssetTags.tapAsync(
@@ -2352,27 +2352,27 @@ class HotLoad {
               voidTag: false,
               attributes: { src },
             }),
-          ]);
-          cb(null, data);
+          ])
+          cb(null, data)
         }
-      );
-    });
+      )
+    })
   }
 }
 
-module.exports = HotLoad;
+module.exports = HotLoad
 ```
 
 Typed webpack plugin from `laravel-mix/`:
 
 ```ts
-const readline = require('node:readline');
-const _ = require('lodash');
-const chalk = require('chalk');
-const Table = require('cli-table3');
-const stripAnsi = require('strip-ansi');
-const { formatSize } = require('webpack/lib/SizeFormatHelpers');
-const { version } = require('../../package.json');
+const readline = require('node:readline')
+const _ = require('lodash')
+const chalk = require('chalk')
+const Table = require('cli-table3')
+const stripAnsi = require('strip-ansi')
+const { formatSize } = require('webpack/lib/SizeFormatHelpers')
+const { version } = require('../../package.json')
 
 /**
  * @typedef {object} BuildOutputOptions
@@ -2398,8 +2398,8 @@ class BuildOutputPlugin {
    * @param {BuildOutputOptions} options
    */
   constructor(options) {
-    this.options = options;
-    this.patched = false;
+    this.options = options
+    this.patched = false
   }
 
   /**
@@ -2409,16 +2409,16 @@ class BuildOutputPlugin {
    */
   apply(compiler) {
     if (process.env.NODE_ENV === 'test') {
-      return;
+      return
     }
 
     compiler.hooks.done.tap('BuildOutputPlugin', stats => {
       if (stats.hasErrors()) {
-        return false;
+        return false
       }
 
       if (this.options.clearConsole) {
-        this.clearConsole();
+        this.clearConsole()
       }
 
       const data = stats.toJson({
@@ -2427,18 +2427,18 @@ class BuildOutputPlugin {
         hash: true,
         performance: true,
         relatedAssets: this.options.showRelated,
-      });
+      })
 
-      this.heading(`Laravel Mix v${version}`);
+      this.heading(`Laravel Mix v${version}`)
 
       console.log(
         chalk.green.bold(`✔ Compiled Successfully in ${data.time}ms`)
-      );
+      )
 
       if (data.assets.length) {
-        console.log(this.statsTable(data));
+        console.log(this.statsTable(data))
       }
-    });
+    })
   }
 
   /**
@@ -2447,11 +2447,11 @@ class BuildOutputPlugin {
    * @param {string} text
    */
   heading(text) {
-    console.log();
+    console.log()
 
-    console.log(chalk.bgBlue.white.bold(this.section(text)));
+    console.log(chalk.bgBlue.white.bold(this.section(text)))
 
-    console.log();
+    console.log()
   }
 
   /**
@@ -2460,14 +2460,14 @@ class BuildOutputPlugin {
    * @param {string} text
    */
   section(text) {
-    const padLength = 3;
-    const padding = ' '.repeat(padLength);
+    const padLength = 3
+    const padding = ' '.repeat(padLength)
 
-    text = `${padding}${text}${padding}`;
+    text = `${padding}${text}${padding}`
 
-    const line = ' '.repeat(text.length);
+    const line = ' '.repeat(text.length)
 
-    return `${line}\n${text}\n${line}`;
+    return `${line}\n${text}\n${line}`
   }
 
   /**
@@ -2477,7 +2477,7 @@ class BuildOutputPlugin {
    * @returns {string}
    */
   statsTable(data) {
-    const assets = this.sortAssets(data);
+    const assets = this.sortAssets(data)
 
     const table = new Table({
       head: [chalk.bold('File'), chalk.bold('Size')],
@@ -2487,16 +2487,16 @@ class BuildOutputPlugin {
         head: [],
         compact: true,
       },
-    });
+    })
 
     for (const asset of assets) {
-      table.push([chalk.green(asset.name), formatSize(asset.size)]);
+      table.push([chalk.green(asset.name), formatSize(asset.size)])
     }
 
-    this.extendTableWidth(table);
-    this.monkeyPatchTruncate();
+    this.extendTableWidth(table)
+    this.monkeyPatchTruncate()
 
-    return table.toString();
+    return table.toString()
   }
 
   /**
@@ -2504,27 +2504,27 @@ class BuildOutputPlugin {
    * @param {StatsData} data
    */
   sortAssets(data) {
-    let assets = data.assets;
+    let assets = data.assets
 
     assets = _.flatMap(assets, asset => [
       asset,
       ...(Array.isArray(asset.related) ? asset.related : []),
-    ]);
+    ])
 
-    assets = _.orderBy(assets, ['name', 'size'], ['asc', 'asc']);
+    assets = _.orderBy(assets, ['name', 'size'], ['asc', 'asc'])
 
-    return assets;
+    return assets
   }
 
   /**
    * Clear the entire screen.
    */
   clearConsole() {
-    const blank = '\n'.repeat(process.stdout.rows);
-    console.log(blank);
+    const blank = '\n'.repeat(process.stdout.rows)
+    console.log(blank)
 
-    readline.cursorTo(process.stdout, 0, 0);
-    readline.clearScreenDown(process.stdout);
+    readline.cursorTo(process.stdout, 0, 0)
+    readline.clearScreenDown(process.stdout)
   }
 
   /**
@@ -2537,36 +2537,36 @@ class BuildOutputPlugin {
    * @param {number} maxWidth
    */
   extendTableWidth(table, targetWidth = null, maxWidth = Infinity) {
-    targetWidth = targetWidth === null ? process.stdout.columns : targetWidth;
+    targetWidth = targetWidth === null ? process.stdout.columns : targetWidth
 
     if (!targetWidth) {
-      return;
+      return
     }
 
-    const tableWidth = this.calculateTableWidth(table);
+    const tableWidth = this.calculateTableWidth(table)
     const fileColIncrease = Math.min(
       targetWidth - tableWidth,
       maxWidth - tableWidth
-    );
+    )
 
     if (fileColIncrease <= 0) {
-      return;
+      return
     }
 
     // @ts-expect-error Should error
-    table.options.colWidths[0] += fileColIncrease;
+    table.options.colWidths[0] += fileColIncrease
   }
 
   monkeyPatchTruncate() {
     if (this.patched) {
-      return;
+      return
     }
 
-    this.patched = true;
+    this.patched = true
 
     // @ts-expect-error Should error
-    const utils = require('cli-table3/src/utils');
-    const oldTruncate = utils.truncate;
+    const utils = require('cli-table3/src/utils')
+    const oldTruncate = utils.truncate
 
     /**
      *
@@ -2576,11 +2576,11 @@ class BuildOutputPlugin {
      */
     utils.truncate = (str, desiredLength, truncateChar) => {
       if (stripAnsi(str).length > desiredLength) {
-        str = `…${str.substr(-desiredLength + 2)}`;
+        str = `…${str.substr(-desiredLength + 2)}`
       }
 
-      return oldTruncate(str, desiredLength, truncateChar);
-    };
+      return oldTruncate(str, desiredLength, truncateChar)
+    }
   }
 
   /**
@@ -2593,13 +2593,13 @@ class BuildOutputPlugin {
    * @param {import('cli-table3').Table} table
    */
   calculateTableWidth(table) {
-    const firstRow = table.toString().split('\n')[0];
+    const firstRow = table.toString().split('\n')[0]
 
-    return stripAnsi(firstRow).length;
+    return stripAnsi(firstRow).length
   }
 }
 
-module.exports = BuildOutputPlugin;
+module.exports = BuildOutputPlugin
 ```
 
 ### Webpack Migrate to 5
@@ -2620,15 +2620,15 @@ node --trace-deprecation node_modules/webpack/bin/webpack.js
 ## Rollup
 
 ```ts
-import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
-import typescript from '@rollup/plugin-typescript';
-import { defineConfig } from 'rollup';
-import dts from 'rollup-plugin-dts';
-import external from 'rollup-plugin-peer-deps-external';
-import postcss from 'rollup-plugin-postcss';
-import { terser } from 'rollup-plugin-terser';
-import pkg from './package.json';
+import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
+import typescript from '@rollup/plugin-typescript'
+import { defineConfig } from 'rollup'
+import dts from 'rollup-plugin-dts'
+import external from 'rollup-plugin-peer-deps-external'
+import postcss from 'rollup-plugin-postcss'
+import { terser } from 'rollup-plugin-terser'
+import pkg from './package.json'
 
 export default defineConfig([
   {
@@ -2661,7 +2661,7 @@ export default defineConfig([
     external: [/\.css$/],
     plugins: [dts()],
   },
-]);
+])
 ```
 
 ## Vite
@@ -2669,10 +2669,10 @@ export default defineConfig([
 [Unbundled development](https://vitejs.dev/guide/why.html):
 
 ```ts
-import path from 'node:path';
-import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
+import path from 'node:path'
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 
 export default defineConfig({
   plugins: [
@@ -2700,7 +2700,7 @@ export default defineConfig({
     minify: true,
     sourcemap: true,
   },
-});
+})
 ```
 
 ## ESBuild
@@ -2709,8 +2709,8 @@ ESBuild build configuration:
 
 ```ts
 // build.js
-const esbuild = require('esbuild');
-const inlineImage = require('esbuild-plugin-inline-image');
+const esbuild = require('esbuild')
+const inlineImage = require('esbuild-plugin-inline-image')
 
 esbuild
   .build({
@@ -2723,15 +2723,15 @@ esbuild
     },
     plugins: [inlineImage()],
   })
-  .catch(() => process.exit(1));
+  .catch(() => process.exit(1))
 ```
 
 ESBuild serve configuration:
 
 ```ts
 // serve.js
-const esbuild = require('esbuild');
-const inlineImage = require('esbuild-plugin-inline-image');
+const esbuild = require('esbuild')
+const inlineImage = require('esbuild-plugin-inline-image')
 
 esbuild
   .serve(
@@ -2749,13 +2749,13 @@ esbuild
       plugins: [inlineImage()],
     }
   )
-  .catch(() => process.exit());
+  .catch(() => process.exit())
 ```
 
 ESBuild webpack configuration:
 
 ```ts
-const { ESBuildMinifyPlugin } = require('esbuild-loader');
+const { ESBuildMinifyPlugin } = require('esbuild-loader')
 
 module.exports = {
   rules: [
@@ -2775,5 +2775,5 @@ module.exports = {
       }),
     ],
   },
-};
+}
 ```

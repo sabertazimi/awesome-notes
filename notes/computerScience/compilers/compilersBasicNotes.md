@@ -148,13 +148,13 @@ e -> "\0" # basic definition
 
 ```ts
 // 标识符
-const identifier = /[a-zA-Z\_][a-zA-Z\_0-9]*/g;
+const identifier = /[a-zA-Z\_][a-zA-Z\_0-9]*/g
 
 // decimal integer
-const integer = /(+|-)?(0|[1-9][0-9]*)/g;
+const integer = /(+|-)?(0|[1-9][0-9]*)/g
 
 // decimal float
-const float = /(+|-)?(0|[1-9][0-9]*|)?\.[0-9]+/g;
+const float = /(+|-)?(0|[1-9][0-9]*|)?\.[0-9]+/g
 ```
 
 ### 分析树

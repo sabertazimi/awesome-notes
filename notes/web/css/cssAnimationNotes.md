@@ -445,12 +445,12 @@ as css style of element changed (class changed):
 ```
 
 ```ts
-div.classList.add('before-enter');
+div.classList.add('before-enter')
 
 setTimeout(() => {
-  div.classList.remove('before-enter');
-  div.classList.add('enter');
-}, 20);
+  div.classList.remove('before-enter')
+  div.classList.add('enter')
+}, 20)
 ```
 
 ### Transition Internals
@@ -460,26 +460,26 @@ browser detecting different styles between `style` stage.
 
 ```ts
 // transition not working
-panel.style.transform = 'scale(0)';
-panel.style.transition = 'transform .5s';
+panel.style.transform = 'scale(0)'
+panel.style.transition = 'transform .5s'
 // previous `transform` is empty
-panel.style.transform = 'scale(1)';
+panel.style.transform = 'scale(1)'
 
 // transition working
-panel.style.transform = 'scale(0)';
-panel.style.transition = 'transform .5s';
+panel.style.transform = 'scale(0)'
+panel.style.transition = 'transform .5s'
 // previous `transform` is `scale(0)`
 requestAnimationFrame(() => {
-  panel.style.transform = 'scale(1)';
-});
+  panel.style.transform = 'scale(1)'
+})
 
 // transition working
-panel.style.transform = 'scale(0)';
+panel.style.transform = 'scale(0)'
 // `getComputedStyle(element).property` trigger a new `style` stage
-const computedTransform = getComputedStyle(panel).transform;
-panel.style.transition = 'transform .5s';
+const computedTransform = getComputedStyle(panel).transform
+panel.style.transition = 'transform .5s'
 // previous `transform` is `scale(0)`
-panel.style.transform = 'scale(1)';
+panel.style.transform = 'scale(1)'
 ```
 
 ### Transition Reference
@@ -581,8 +581,8 @@ div {
 ```
 
 ```ts
-element.classList.add('animate');
-setTimeout(() => element.classList.remove('animate'), duration);
+element.classList.add('animate')
+setTimeout(() => element.classList.remove('animate'), duration)
 ```
 
 ### Offset Animation
@@ -722,13 +722,13 @@ DOM events:
 #### TweenMax
 
 ```ts
-TweenMax.fromTo(element, 1, { x: 0 }, { x: 100 });
+TweenMax.fromTo(element, 1, { x: 0 }, { x: 100 })
 ```
 
 #### TimelineMax
 
 ```ts
-const tl = new TimelineMax();
+const tl = new TimelineMax()
 tl.staggerFrom(
   [
     '#Cap_1 > g > path:nth-child(1)',
@@ -744,7 +744,7 @@ tl.staggerFrom(
     ease: Bounce.easeOut,
     stagger: 0.2,
   }
-);
+)
 ```
 
 ### Animation Reference

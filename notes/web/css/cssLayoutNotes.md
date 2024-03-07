@@ -141,9 +141,9 @@ for `width`/`min-width`/`max-width`/`height`/`min-height`/`max-height`/
 ```ts
 window.addEventListener('resize', () => {
   // Get viewport height and multiple it by 1% to get a value for a vh unit
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
+  const vh = window.innerHeight * 0.01
+  document.documentElement.style.setProperty('--vh', `${vh}px`)
+})
 ```
 
 ### Box Margin

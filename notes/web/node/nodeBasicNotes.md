@@ -151,31 +151,31 @@ npm config set //registry.example.com/:_authToken XXXXXTokenXXXXX
 Release script from VitePress:
 
 ```ts
-const fs = require('node:fs');
-const path = require('node:path');
-const chalk = require('chalk');
-const semver = require('semver');
-const { prompt } = require('enquirer');
-const execa = require('execa');
-const currentVersion = require('../package.json').version;
+const fs = require('node:fs')
+const path = require('node:path')
+const chalk = require('chalk')
+const semver = require('semver')
+const { prompt } = require('enquirer')
+const execa = require('execa')
+const currentVersion = require('../package.json').version
 
-const versionIncrements = ['patch', 'minor', 'major'];
+const versionIncrements = ['patch', 'minor', 'major']
 
-const inc = i => semver.inc(currentVersion, i);
-const bin = name => path.resolve(__dirname, `../node_modules/.bin/${name}`);
+const inc = i => semver.inc(currentVersion, i)
+const bin = name => path.resolve(__dirname, `../node_modules/.bin/${name}`)
 const run = (bin, args, opts = {}) =>
-  execa(bin, args, { stdio: 'inherit', ...opts });
-const step = msg => console.log(chalk.cyan(msg));
+  execa(bin, args, { stdio: 'inherit', ...opts })
+const step = msg => console.log(chalk.cyan(msg))
 
 async function main() {
-  let targetVersion;
+  let targetVersion
 
   const { release } = await prompt({
     type: 'select',
     name: 'release',
     message: 'Select release type',
     choices: versionIncrements.map(i => `${i} (${inc(i)})`).concat(['custom']),
-  });
+  })
 
   if (release === 'custom') {
     targetVersion = (
@@ -185,87 +185,87 @@ async function main() {
         message: 'Input custom version',
         initial: currentVersion,
       })
-    ).version;
+    ).version
   } else {
-    targetVersion = release.match(/\((.*)\)/)[1];
+    targetVersion = release.match(/\((.*)\)/)[1]
   }
 
   if (!semver.valid(targetVersion)) {
-    throw new Error(`Invalid target version: ${targetVersion}`);
+    throw new Error(`Invalid target version: ${targetVersion}`)
   }
 
   const { yes: tagOk } = await prompt({
     type: 'confirm',
     name: 'yes',
     message: `Releasing v${targetVersion}. Confirm?`,
-  });
+  })
 
   if (!tagOk) {
-    return;
+    return
   }
 
   // Update the package version.
-  step('\nUpdating the package version...');
-  updatePackage(targetVersion);
+  step('\nUpdating the package version...')
+  updatePackage(targetVersion)
 
   // Build the package.
-  step('\nBuilding the package...');
-  await run('yarn', ['build']);
+  step('\nBuilding the package...')
+  await run('yarn', ['build'])
 
   // Generate the changelog.
-  step('\nGenerating the changelog...');
-  await run('yarn', ['changelog']);
-  await run('yarn', ['prettier', '--write', 'CHANGELOG.md']);
+  step('\nGenerating the changelog...')
+  await run('yarn', ['changelog'])
+  await run('yarn', ['prettier', '--write', 'CHANGELOG.md'])
 
   const { yes: changelogOk } = await prompt({
     type: 'confirm',
     name: 'yes',
     message: `Changelog generated. Does it look good?`,
-  });
+  })
 
   if (!changelogOk) {
-    return;
+    return
   }
 
   // Commit changes to the Git and create a tag.
-  step('\nCommitting changes...');
-  await run('git', ['add', 'CHANGELOG.md', 'package.json']);
-  await run('git', ['commit', '-m', `release: v${targetVersion}`]);
-  await run('git', ['tag', `v${targetVersion}`]);
+  step('\nCommitting changes...')
+  await run('git', ['add', 'CHANGELOG.md', 'package.json'])
+  await run('git', ['commit', '-m', `release: v${targetVersion}`])
+  await run('git', ['tag', `v${targetVersion}`])
 
   // Publish the package.
-  step('\nPublishing the package...');
+  step('\nPublishing the package...')
   await run('yarn', [
     'publish',
     '--new-version',
     targetVersion,
     '--no-commit-hooks',
     '--no-git-tag-version',
-  ]);
+  ])
   await run('npm', [
     'publish',
     '--registry',
     'https://registry.npmjs.org',
     '--access',
     'public',
-  ]);
+  ])
 
   // Push to GitHub.
-  step('\nPushing to GitHub...');
-  await run('git', ['push', 'origin', `refs/tags/v${targetVersion}`]);
-  await run('git', ['push']);
+  step('\nPushing to GitHub...')
+  await run('git', ['push', 'origin', `refs/tags/v${targetVersion}`])
+  await run('git', ['push'])
 }
 
 function updatePackage(version) {
-  const pkgPath = path.resolve(path.resolve(__dirname, '..'), 'package.json');
-  const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
+  const pkgPath = path.resolve(path.resolve(__dirname, '..'), 'package.json')
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'))
 
-  pkg.version = version;
+  pkg.version = version
 
-  fs.writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`);
+  fs.writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`)
 }
 
-main().catch(err => console.error(err));
+main().catch(err => console.error(err))
 ```
 
 ### Semantic Version
@@ -576,20 +576,20 @@ API_URL=**************************
 
 ```ts
 // config.js
-const dotenv = require('dotenv');
-dotenv.config();
+const dotenv = require('dotenv')
+dotenv.config()
 
 module.exports = {
   endpoint: process.env.API_URL,
   masterKey: process.env.API_KEY,
   port: process.env.PORT,
-};
+}
 ```
 
 ```ts
 // server.js
-const { port } = require('./config');
-console.log(`Your port is ${port}`); // 8626
+const { port } = require('./config')
+console.log(`Your port is ${port}`) // 8626
 ```
 
 ### Corepack
@@ -739,12 +739,12 @@ pnpm config set registry https://registry.npmmirror.com/
 function foo(x, y, callback) {
   try {
     if (paramNotValid()) {
-      throw new Error('Invalid parameters!');
+      throw new Error('Invalid parameters!')
     } else {
-      callback(null, param);
+      callback(null, param)
     }
   } catch (error) {
-    callback(error, param);
+    callback(error, param)
   }
 }
 ```
@@ -754,11 +754,11 @@ function foo(x, y, callback) {
 ```ts
 foo(a, b, function (err, param) {
   if (err) {
-    processError();
+    processError()
   } else {
-    process();
+    process()
   }
-});
+})
 ```
 
 ### Export Module
@@ -766,7 +766,7 @@ foo(a, b, function (err, param) {
 ```ts
 module.exports = function (args) {
   /* ... */
-};
+}
 ```
 
 ### CallBack Function
@@ -776,18 +776,18 @@ module.exports = function (args) {
 ```ts
 server.on('request', function (req, res) {
   const render = function (wsData) {
-    page = pageRender(req, session, userData, wsData);
-  };
+    page = pageRender(req, session, userData, wsData)
+  }
   const getWsInfo = function (userData) {
-    ws.get(req, render);
-  };
+    ws.get(req, render)
+  }
   const getDbInfo = function (session) {
-    db.get(session.user, getWsInfo);
-  };
+    db.get(session.user, getWsInfo)
+  }
   const getMemCached = function (req, res) {
-    memcached.getSession(req, getDbInfo);
-  };
-});
+    memcached.getSession(req, getDbInfo)
+  }
+})
 ```
 
 ### Module Resolution
@@ -828,25 +828,25 @@ server.on('request', function (req, res) {
   `CommonJS` 模块的导入导出语句的位置会影响模块代码语句的执行结果.
 
 ```ts
-const path = require('node:path');
-const fs = require('node:fs');
-const vm = require('node:vm');
+const path = require('node:path')
+const fs = require('node:fs')
+const vm = require('node:vm')
 
 function Module(id) {
-  this.id = id;
-  this.exports = {};
+  this.id = id
+  this.exports = {}
 }
 
 Module.wrapper = [
   '(function(exports, module, Require, __dirname, __filename) {',
   '})',
-];
+]
 
 Module._extensions = {
   '.js': function (module) {
-    const content = fs.readFileSync(module.id, 'utf8');
-    const fnStr = Module.wrapper[0] + content + Module.wrapper[1];
-    const fn = vm.runInThisContext(fnStr);
+    const content = fs.readFileSync(module.id, 'utf8')
+    const fnStr = Module.wrapper[0] + content + Module.wrapper[1]
+    const fn = vm.runInThisContext(fnStr)
     fn.call(
       module.exports, // Bind `this` to `module.exports`
       module.exports,
@@ -854,24 +854,24 @@ Module._extensions = {
       Require,
       _dirname,
       _filename
-    );
+    )
   },
   '.json': function (module) {
-    const json = fs.readFileSync(module.id, 'utf8');
-    module.exports = JSON.parse(json); // 把文件的结果放在exports属性上
+    const json = fs.readFileSync(module.id, 'utf8')
+    module.exports = JSON.parse(json) // 把文件的结果放在exports属性上
   },
-};
+}
 
 function Require(modulePath) {
-  const absPathname = path.resolve(__dirname, modulePath);
-  const module = new Module(absPathname);
-  tryModuleLoad(module);
-  return module.exports;
+  const absPathname = path.resolve(__dirname, modulePath)
+  const module = new Module(absPathname)
+  tryModuleLoad(module)
+  return module.exports
 }
 
 function tryModuleLoad(module) {
-  const extension = path.extname(module.id);
-  Module._extensions[extension](module);
+  const extension = path.extname(module.id)
+  Module._extensions[extension](module)
 }
 ```
 
@@ -904,8 +904,8 @@ function tryModuleLoad(module) {
 - `process.stderr`: 指向标准错误.
 
 ```ts
-process.stdin.resume();
-process.stdin.pipe(process.stdout);
+process.stdin.resume()
+process.stdin.pipe(process.stdout)
 ```
 
 ### Process Events
@@ -926,40 +926,40 @@ process.stdin.pipe(process.stdout);
 
 ```ts
 process.on('uncaughtException', err => {
-  console.log(`Uncaught exception: ${err.message}.`);
-  process.exit(1);
-});
+  console.log(`Uncaught exception: ${err.message}.`)
+  process.exit(1)
+})
 process.on('uncaughtException', (reason, promise) => {
-  console.log(`Unhandled rejection at ${promise}, reason: ${reason}.`);
-  process.exit(1);
-});
+  console.log(`Unhandled rejection at ${promise}, reason: ${reason}.`)
+  process.exit(1)
+})
 
 process.on('SIGHUP', signal => {
-  console.log(`Process ${process.pid} received a SIGHUP signal.`);
-  process.exit(0);
-});
+  console.log(`Process ${process.pid} received a SIGHUP signal.`)
+  process.exit(0)
+})
 process.on('SIGINT', signal => {
-  console.log(`Process ${process.pid} has been interrupted.`);
-  process.exit(0);
-});
+  console.log(`Process ${process.pid} has been interrupted.`)
+  process.exit(0)
+})
 process.on('SIGQUIT', signal => {
-  console.log(`Process ${process.pid} received a SIGQUIT signal.`);
-  process.exit(0);
-});
+  console.log(`Process ${process.pid} received a SIGQUIT signal.`)
+  process.exit(0)
+})
 process.on('SIGTERM', signal => {
-  console.log(`Process ${process.pid} received a SIGTERM signal.`);
-  process.exit(0);
-});
+  console.log(`Process ${process.pid} received a SIGTERM signal.`)
+  process.exit(0)
+})
 
 process.on('beforeExit', code => {
   setTimeout(() => {
-    console.log(`Process will exit with code: ${code}.`);
-    process.exit(code);
-  });
-});
+    console.log(`Process will exit with code: ${code}.`)
+    process.exit(code)
+  })
+})
 process.on('exit', code => {
-  console.log(`Process exited with code: ${code}.`);
-});
+  console.log(`Process exited with code: ${code}.`)
+})
 ```
 
 ### Process Information
@@ -984,7 +984,7 @@ process.on('exit', code => {
 - Use `process.on` to communicate between parent and child process.
 
 ```ts
-const cp = require('node:child_process');
+const cp = require('node:child_process')
 
 cp.exec(
   'ls -l',
@@ -999,11 +999,11 @@ cp.exec(
   },
   function (err, stdout, stderr) {
     if (!err) {
-      console.log(stdout);
-      console.log(stderr);
+      console.log(stdout)
+      console.log(stderr)
     }
   }
-);
+)
 ```
 
 ## Worker Threads Module
@@ -1025,11 +1025,11 @@ const {
   isMainThread,
   parentPort,
   workerData,
-} = require('node:worker_threads');
+} = require('node:worker_threads')
 
 function fibonacci(num) {
-  if (num <= 1) return num;
-  return fibonacci(num - 1) + fibonacci(num - 2);
+  if (num <= 1) return num
+  return fibonacci(num - 1) + fibonacci(num - 2)
 }
 
 if (isMainThread) {
@@ -1037,46 +1037,46 @@ if (isMainThread) {
     new Promise((resolve, reject) => {
       const worker = new Worker(__filename, {
         workerData: n,
-      });
-      worker.on('message', resolve);
-      worker.on('error', reject);
+      })
+      worker.on('message', resolve)
+      worker.on('error', reject)
       worker.on('exit', code => {
         if (code !== 0) {
-          reject(new Error(`Worker stopped with exit code ${code}`));
+          reject(new Error(`Worker stopped with exit code ${code}`))
         }
-      });
-    });
+      })
+    })
 } else {
-  const result = fibonacci(workerData);
-  parentPort.postMessage(result);
-  process.exit(0);
+  const result = fibonacci(workerData)
+  parentPort.postMessage(result)
+  process.exit(0)
 }
 ```
 
 ```ts
-const http = require('node:http');
-const fibonacciWorker = require('./fibonacci-worker');
+const http = require('node:http')
+const fibonacciWorker = require('./fibonacci-worker')
 
-const port = 3000;
+const port = 3000
 
 http
   .createServer(async (req, res) => {
-    const url = new URL(req.url, `http://${req.headers.host}`);
-    console.log('Incoming request to:', url.pathname);
+    const url = new URL(req.url, `http://${req.headers.host}`)
+    console.log('Incoming request to:', url.pathname)
 
     if (url.pathname === '/fibonacci') {
-      const n = Number(url.searchParams.get('n'));
-      console.log('Calculating fibonacci for', n);
+      const n = Number(url.searchParams.get('n'))
+      console.log('Calculating fibonacci for', n)
 
-      const result = await fibonacciWorker(n);
-      res.writeHead(200);
-      return res.end(`Result: ${result}\n`);
+      const result = await fibonacciWorker(n)
+      res.writeHead(200)
+      return res.end(`Result: ${result}\n`)
     } else {
-      res.writeHead(200);
-      return res.end('Hello World!');
+      res.writeHead(200)
+      return res.end('Hello World!')
     }
   })
-  .listen(port, () => console.log(`Listening on port ${port}...`));
+  .listen(port, () => console.log(`Listening on port ${port}...`))
 ```
 
 Worker pool is needed:
@@ -1099,49 +1099,49 @@ Worker pool is needed:
 - fs.exists.
 
 ```ts
-const fs = require('node:fs');
+const fs = require('node:fs')
 
 function readFile(filename) {
   return new Promise((resolve, reject) => {
     fs.readFile(filename, { encoding: 'utf8' }, (err, contents) => {
       if (err) {
-        reject(err);
-        return;
+        reject(err)
+        return
       }
 
-      resolve(contents);
-    });
-  });
+      resolve(contents)
+    })
+  })
 }
 
 readFile('example.txt')
   .then(contents => {
-    console.log(contents);
+    console.log(contents)
   })
   .catch(err => {
-    console.error(err.message);
-  });
+    console.error(err.message)
+  })
 ```
 
 ```ts
-import { promises as fs } from 'node:fs';
-import { basename, dirname, join } from 'node:path';
+import { promises as fs } from 'node:fs'
+import { basename, dirname, join } from 'node:path'
 
 async function* walk(dir: string): AsyncGenerator<string> {
   for await (const d of await fs.opendir(dir)) {
-    const entry = join(dir, d.name);
+    const entry = join(dir, d.name)
 
     if (d.isDirectory()) {
-      yield* walk(entry);
+      yield* walk(entry)
     } else if (d.isFile()) {
-      yield entry;
+      yield entry
     }
   }
 }
 
 async function run(arg = '.') {
   if ((await fs.lstat(arg)).isFile()) {
-    return runTestFile(arg);
+    return runTestFile(arg)
   }
 
   for await (const file of walk(arg)) {
@@ -1149,57 +1149,57 @@ async function run(arg = '.') {
       !dirname(file).includes('node_modules') &&
       (basename(file) === 'test.js' || file.endsWith('.test.js'))
     ) {
-      console.log(file);
-      await runTestFile(file);
+      console.log(file)
+      await runTestFile(file)
     }
   }
 }
 ```
 
 ```ts
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import fs from 'node:fs/promises'
+import path from 'node:path'
 
 const traverse = async directory => {
-  const files = await fs.readdir(directory);
+  const files = await fs.readdir(directory)
 
   files.forEach(async file => {
-    const filePath = path.join(directory, file);
-    const fileStat = await fs.stat(filePath);
+    const filePath = path.join(directory, file)
+    const fileStat = await fs.stat(filePath)
 
     if (fileStat.isFile()) {
-      const content = await fs.readFile(filePath, 'utf-8');
-      console.log(content);
+      const content = await fs.readFile(filePath, 'utf-8')
+      console.log(content)
     } else if (fileStat.isDirectory()) {
-      await traverse(filePath);
+      await traverse(filePath)
     }
-  });
-};
+  })
+}
 ```
 
 ```ts
 module.exports = function ls(dirName, fileType, callback) {
-  const fs = require('node:fs');
-  const path = require('node:path');
+  const fs = require('node:fs')
+  const path = require('node:path')
 
   fs.readdir(dirName, function (err, list) {
     if (err) {
-      return callback(err);
+      return callback(err)
     }
 
     list = list.filter(function (file) {
-      return path.extname(file) === `.${fileType}`;
-    });
+      return path.extname(file) === `.${fileType}`
+    })
 
-    callback(null, list);
-  });
-};
+    callback(null, list)
+  })
+}
 ```
 
 ### Buffer Object
 
 ```ts
-const str = buf.toString();
+const str = buf.toString()
 ```
 
 ### Path API
@@ -1208,19 +1208,19 @@ const str = buf.toString();
 - path.extname: 返回文件类型
 
 ```ts
-const path = require('node:path');
+const path = require('node:path')
 
-console.log(path.extname('index.html')); // .html
+console.log(path.extname('index.html')) // .html
 
-path.normalize(p);
-path.join([path1], [path2], [pathN]);
-path.resolve(from, to);
-path.relative(from, to);
-path.dirname(p);
-path.basename(p, [ext]);
-path.extname(p);
-const separator = path.sep;
-const delimiter = path.delimiter;
+path.normalize(p)
+path.join([path1], [path2], [pathN])
+path.resolve(from, to)
+path.relative(from, to)
+path.dirname(p)
+path.basename(p, [ext])
+path.extname(p)
+const separator = path.sep
+const delimiter = path.delimiter
 ```
 
 ## Http Module
@@ -1232,7 +1232,7 @@ const delimiter = path.delimiter;
 ```ts
 const request = {
   method: 'POST',
-};
+}
 ```
 
 ### Response Object
@@ -1249,51 +1249,51 @@ typedef Stream response
 
 ```ts
 response.on('data', function (data) {
-  process(data);
-});
+  process(data)
+})
 response.on('error', function (err) {
-  console.error(err);
-});
+  console.error(err)
+})
 response.on('end', function () {
-  stream.end();
-});
+  stream.end()
+})
 ```
 
 - 发出事件
 
 ```ts
-response.end(); //  传输结束
+response.end() //  传输结束
 ```
 
 #### 方法
 
 ```ts
-response.setEncoding('utf8'); // 自动将 data 事件中 Buffer 对象转换成 String
+response.setEncoding('utf8') // 自动将 data 事件中 Buffer 对象转换成 String
 
 //  content-type: text/plain
 //                application/json
-response.writeHead(200, { 'Content-Type': '' });
+response.writeHead(200, { 'Content-Type': '' })
 ```
 
 ### Http Get
 
 ```ts
-http.get(url, function callback(response) {});
+http.get(url, function callback(response) {})
 ```
 
 ```ts
 http.get(url, function (response) {
-  let pipeData = '';
+  let pipeData = ''
 
-  response.setEncoding('utf8');
+  response.setEncoding('utf8')
   response.on('data', function (data) {
-    pipeData += data;
-  });
+    pipeData += data
+  })
   response.on('end', function () {
-    console.log(pipeData.length);
-    console.log(pipeData);
-  });
-});
+    console.log(pipeData.length)
+    console.log(pipeData)
+  })
+})
 ```
 
 ### Http Server
@@ -1301,56 +1301,56 @@ http.get(url, function (response) {
 ```ts
 const server = http.createServer(function (request, response) {
   // 处理请求的逻辑...
-});
-server.listen(8000);
+})
+server.listen(8000)
 ```
 
 ### Sample
 
 ```ts
-const net = require('node:net');
-const chatServer = net.createServer();
+const net = require('node:net')
+const chatServer = net.createServer()
 // 用于检测僵尸客户端,用于及时清楚僵尸客户端
-const clientList = [];
+const clientList = []
 
 chatServer.on('connection', function (client) {
-  client.name = `${client.remoteAddress}:${client.remotePort}`;
-  client.write(`Hi ${client.name}!\n`);
-  clientList.push(client);
+  client.name = `${client.remoteAddress}:${client.remotePort}`
+  client.write(`Hi ${client.name}!\n`)
+  clientList.push(client)
 
   client.on('data', function (data) {
-    broadcast(data, client);
-  });
+    broadcast(data, client)
+  })
   client.on('end', function () {
-    clientList.splice(clientList.indexOf(client), 1);
-  });
+    clientList.splice(clientList.indexOf(client), 1)
+  })
   client.on('error', function (e) {
-    console.log(e);
-  });
-});
+    console.log(e)
+  })
+})
 
 function broadcast(message, client) {
-  const cleanup = [];
+  const cleanup = []
 
   for (let i = 0; i < clientList.length; i += 1) {
     // 向其他人(排除自身)发送消息
     if (client !== clientList[i]) {
       if (clientList[i].writable) {
-        clientList[i].write(`${client.name} says ${message}`);
+        clientList[i].write(`${client.name} says ${message}`)
       } else {
-        cleanup.push(clientList[i]);
-        clientList[i].destroy();
+        cleanup.push(clientList[i])
+        clientList[i].destroy()
       }
     }
   }
 
   // 清楚僵尸客户端
   for (let i = 0; i < cleanup.length; i += 1) {
-    clientList.splice(clientList.indexOf(cleanup[i]), 1);
+    clientList.splice(clientList.indexOf(cleanup[i]), 1)
   }
 }
 
-chatServer.listen(9000);
+chatServer.listen(9000)
 ```
 
 ## Net Module
@@ -1358,45 +1358,45 @@ chatServer.listen(9000);
 ### Socket Object
 
 ```ts
-socket.write(data);
-socket.end(data);
-socket.end();
+socket.write(data)
+socket.end(data)
+socket.end()
 ```
 
 ### Socket IO
 
 ```ts
-const http = require('node:http');
-const fs = require('node:fs');
-const io = require('socket.io');
-const sockFile = fs.readFileSync('socket.html');
+const http = require('node:http')
+const fs = require('node:fs')
+const io = require('socket.io')
+const sockFile = fs.readFileSync('socket.html')
 
-server = http.createServer();
+server = http.createServer()
 server.on('request', function (req, res) {
-  res.writeHead(200, { 'content-type': 'text/html' });
-  res.end(sockFile);
-});
-server.listen(8080);
+  res.writeHead(200, { 'content-type': 'text/html' })
+  res.end(sockFile)
+})
+server.listen(8080)
 
-const socket = io.listen(server);
+const socket = io.listen(server)
 
 // 命名空间
 socket.of('/upAndRunning').on('connection', function (client) {
-  console.log('Client connected to Up and Running namespace.');
-  client.send("Welcome to 'Up and Running'");
-});
+  console.log('Client connected to Up and Running namespace.')
+  client.send("Welcome to 'Up and Running'")
+})
 socket.of('/weather').on('connection', function (client) {
-  console.log('Client connected to Weather namespace.');
-  client.send("Welcome to 'Weather Updates'");
-});
+  console.log('Client connected to Weather namespace.')
+  client.send("Welcome to 'Weather Updates'")
+})
 ```
 
 ### Basic Methods
 
 ```ts
-const serverInstance = net.createServer(function callback(socket) {});
+const serverInstance = net.createServer(function callback(socket) {})
 
-serverInstance.listen(portNumber); // 开始监听特定端口
+serverInstance.listen(portNumber) // 开始监听特定端口
 ```
 
 ## URL Module
@@ -1420,7 +1420,7 @@ serverInstance.listen(portNumber); // 开始监听特定端口
 
 ```ts
 // true 表示调用 queryString 模块查询字符串
-url.parse(request.url, true);
+url.parse(request.url, true)
 ```
 
 ### dns
@@ -1430,38 +1430,38 @@ url.parse(request.url, true);
 - dns.lookup
 
 ```ts
-const dns = require('node:dns');
+const dns = require('node:dns')
 
 dns.lookup('google.com', 4, function (e, a) {
-  console.log(a);
-});
+  console.log(a)
+})
 
 dns.resolve('tazimi.tk', 'A', function (e, r) {
   if (e) {
-    console.log(e);
+    console.log(e)
   }
-  console.log(JSON.stringify(r, null, 2));
-});
+  console.log(JSON.stringify(r, null, 2))
+})
 ```
 
 ```ts
-const dns = require('node:dns');
+const dns = require('node:dns')
 
 dns.resolve('tazimi.dev', 'A', function (err, res) {
   if (err) {
-    console.log(err);
+    console.log(err)
   } else {
-    console.log(`A: ${JSON.stringify(res, null, 2)}`);
+    console.log(`A: ${JSON.stringify(res, null, 2)}`)
   }
-});
+})
 
 dns.resolve('github.com', 'MX', function (err, res) {
   if (err) {
-    console.log(err);
+    console.log(err)
   } else {
-    console.log(`MX: ${JSON.stringify(res, null, 2)}`);
+    console.log(`MX: ${JSON.stringify(res, null, 2)}`)
   }
-});
+})
 ```
 
 ## Security Module
@@ -1476,11 +1476,11 @@ dns.resolve('github.com', 'MX', function (err, res) {
 #### Hash API
 
 ```ts
-const crypto = require('node:crypto');
-const md5 = crypto.createHash('md5');
+const crypto = require('node:crypto')
+const md5 = crypto.createHash('md5')
 
-md5.update('foo');
-md5.digest('hex'); // 'acbd18db4cc2f85cedef654fccc4a4d8'
+md5.update('foo')
+md5.digest('hex') // 'acbd18db4cc2f85cedef654fccc4a4d8'
 ```
 
 #### HMAC API
@@ -1490,14 +1490,14 @@ openssl genrsa -out key.pem 1024
 ```
 
 ```ts
-const crypto = require('node:crypto');
-const fs = require('node:fs');
-const pem = fs.readFileSync('key.pem');
-const key = pem.toString('ascii');
-const hmac = crypto.createHmac('sha1', key);
+const crypto = require('node:crypto')
+const fs = require('node:fs')
+const pem = fs.readFileSync('key.pem')
+const key = pem.toString('ascii')
+const hmac = crypto.createHmac('sha1', key)
 
-hmac.update('bar');
-hmac.digest('hex'); // '7x123'
+hmac.update('bar')
+hmac.digest('hex') // '7x123'
 ```
 
 #### 公钥加密
@@ -1509,70 +1509,70 @@ hmac.digest('hex'); // '7x123'
 ### Cluster Module
 
 ```ts
-const cluster = require('node:cluster');
-const http = require('node:http');
-const numCPUs = require('node:os').cpus().length;
-const rssWarn = 50 * 1024 * 1024;
-const heapWarn = 50 * 1024 * 1024;
-const workers = {};
+const cluster = require('node:cluster')
+const http = require('node:http')
+const numCPUs = require('node:os').cpus().length
+const rssWarn = 50 * 1024 * 1024
+const heapWarn = 50 * 1024 * 1024
+const workers = {}
 
 if (cluster.isMaster) {
   for (let i = 0; i < numCPUs; i++) {
-    createWorker();
+    createWorker()
   }
   setInterval(function () {
-    const time = new Date().getTime();
+    const time = new Date().getTime()
     for (pid in workers) {
       if (
         Object.prototype.hasOwnProperty.call(workers, pid) &&
         workers[pid].lastCb + 5000 < time
       ) {
-        console.log(`Long running worker ${pid} killed`);
-        workers[pid].worker.kill();
-        delete workers[pid];
-        createWorker();
+        console.log(`Long running worker ${pid} killed`)
+        workers[pid].worker.kill()
+        delete workers[pid]
+        createWorker()
       }
     }
-  }, 1000);
+  }, 1000)
 } else {
   // Server
   http
     .Server(function (req, res) {
       // mess up 1 in 200 request
       if (Math.floor(Math.random() * 200) === 4) {
-        console.log(`Stopped ${process.pid} from ever finishing`);
+        console.log(`Stopped ${process.pid} from ever finishing`)
         while (true) {
-          continue;
+          continue
         }
       }
-      res.writeHead(200);
-      res.end(`hello world from ${process.pid}\n`);
+      res.writeHead(200)
+      res.end(`hello world from ${process.pid}\n`)
     })
-    .listen(8000);
+    .listen(8000)
   // Report stats once a second
   setInterval(function report() {
     process.send({
       cmd: 'reportMem',
       memory: process.memoryUsage(),
       process: process.pid,
-    });
-  }, 1000);
+    })
+  }, 1000)
 }
 
 function createWorker() {
-  const worker = cluster.fork();
-  console.log(`Created worker: ${worker.pid}`);
+  const worker = cluster.fork()
+  console.log(`Created worker: ${worker.pid}`)
 
   // allow boot time
-  workers[worker.pid] = { worker, lastCb: new Date().getTime() - 1000 };
+  workers[worker.pid] = { worker, lastCb: new Date().getTime() - 1000 }
   worker.on('message', function (m) {
     if (m.cmd === 'reportMem') {
-      workers[m.process].lastCb = new Date().getTime();
+      workers[m.process].lastCb = new Date().getTime()
       if (m.memory.rss > rssWarn) {
-        console.log(`Worker ${m.process} using too much memory.`);
+        console.log(`Worker ${m.process} using too much memory.`)
       }
     }
-  });
+  })
 }
 ```
 
@@ -1591,12 +1591,12 @@ function createWorker() {
 - `assert.doesNotThrow(fn)`: 测试方法是否抛出异常.
 
 ```ts
-const assert = require('node:assert');
+const assert = require('node:assert')
 
-assert.equal(1, true, 'Truthy');
-assert.notEqual(1, true, 'Truthy');
+assert.equal(1, true, 'Truthy')
+assert.notEqual(1, true, 'Truthy')
 
-assert.ok(0, 'Zero is not truthy');
+assert.ok(0, 'Zero is not truthy')
 ```
 
 ## Debugging
@@ -1621,51 +1621,51 @@ NODE_DEBUG=fs,net,stream yarn test
 [Simple example](https://www.zenrows.com/blog/web-scraping-with-javascript-and-nodejs):
 
 ```ts
-const axios = require('axios');
-const playwright = require('playwright');
-const cheerio = require('cheerio');
+const axios = require('axios')
+const playwright = require('playwright')
+const cheerio = require('cheerio')
 
-const url = 'https://scrapeme.live/shop/page/1/';
-const useHeadless = false; // "true" to use playwright
-const maxVisits = 30; // Arbitrary number for the maximum of links visited
-const visited = new Set();
-const allProducts = [];
+const url = 'https://scrapeme.live/shop/page/1/'
+const useHeadless = false // "true" to use playwright
+const maxVisits = 30 // Arbitrary number for the maximum of links visited
+const visited = new Set()
+const allProducts = []
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 const getHtmlPlaywright = async url => {
-  const browser = await playwright.firefox.launch();
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  await page.goto(url);
-  const html = await page.content();
-  await browser.close();
+  const browser = await playwright.firefox.launch()
+  const context = await browser.newContext()
+  const page = await context.newPage()
+  await page.goto(url)
+  const html = await page.content()
+  await browser.close()
 
-  return html;
-};
+  return html
+}
 
 const getHtmlAxios = async url => {
-  const { data } = await axios.get(url);
+  const { data } = await axios.get(url)
 
-  return data;
-};
+  return data
+}
 
 const getHtml = async url => {
-  return useHeadless ? await getHtmlPlaywright(url) : await getHtmlAxios(url);
-};
+  return useHeadless ? await getHtmlPlaywright(url) : await getHtmlAxios(url)
+}
 
 const extractContent = $ =>
   $('.product')
     .map((_, product) => {
-      const $product = $(product);
+      const $product = $(product)
 
       return {
         id: $product.find('a[data-product_id]').attr('data-product_id'),
         title: $product.find('h2').text(),
         price: $product.find('.price').text(),
-      };
+      }
     })
-    .toArray();
+    .toArray()
 
 const extractLinks = $ => [
   ...new Set(
@@ -1673,63 +1673,63 @@ const extractLinks = $ => [
       .map((_, a) => $(a).attr('href'))
       .toArray()
   ),
-];
+]
 
 const crawl = async url => {
-  visited.add(url);
-  console.log('Crawl: ', url);
-  const html = await getHtml(url);
-  const $ = cheerio.load(html);
-  const content = extractContent($);
-  const links = extractLinks($);
+  visited.add(url)
+  console.log('Crawl: ', url)
+  const html = await getHtml(url)
+  const $ = cheerio.load(html)
+  const content = extractContent($)
+  const links = extractLinks($)
   links
     .filter(link => !visited.has(link))
     .forEach(link => {
-      q.enqueue(crawlTask, link);
-    });
-  allProducts.push(...content);
+      q.enqueue(crawlTask, link)
+    })
+  allProducts.push(...content)
 
   // We can see how the list grows. Gotta catch 'em all!
-  console.log(allProducts.length);
-};
+  console.log(allProducts.length)
+}
 
 // Change the default concurrency or pass it as param
 const queue = (concurrency = 4) => {
-  let running = 0;
-  const tasks = [];
+  let running = 0
+  const tasks = []
 
   return {
     enqueue: async (task, ...params) => {
-      tasks.push({ task, params });
+      tasks.push({ task, params })
       if (running >= concurrency) {
-        return;
+        return
       }
 
-      ++running;
+      ++running
       while (tasks.length) {
-        const { task, params } = tasks.shift();
-        await task(...params);
+        const { task, params } = tasks.shift()
+        await task(...params)
       }
-      --running;
+      --running
     },
-  };
-};
+  }
+}
 
 const crawlTask = async url => {
   if (visited.size >= maxVisits) {
-    console.log('Over Max Visits, exiting');
-    return;
+    console.log('Over Max Visits, exiting')
+    return
   }
 
   if (visited.has(url)) {
-    return;
+    return
   }
 
-  await crawl(url);
-};
+  await crawl(url)
+}
 
-const q = queue();
-q.enqueue(crawlTask, url);
+const q = queue()
+q.enqueue(crawlTask, url)
 ```
 
 ## Deno

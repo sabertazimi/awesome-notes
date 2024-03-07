@@ -312,11 +312,11 @@ Generating favicons in [all necessary sizes](https://github.com/pixel-point/favp
 - Constraint validation complete [guide](https://developer.mozilla.org/docs/Web/Guide/HTML/Constraint_validation).
 
 ```ts
-const usernameInput = document.querySelector('[name="name"]');
+const usernameInput = document.querySelector('[name="name"]')
 
 usernameInput.addEventListener('invalid', () => {
-  usernameInput.setCustomValidity('Please enter your name.');
-});
+  usernameInput.setCustomValidity('Please enter your name.')
+})
 ```
 
 ### Form Element Attributes
@@ -481,8 +481,8 @@ usernameInput.addEventListener('invalid', () => {
 javascript tips：通过 control 属性改变标签对应表单元素的值
 
 ```ts
-const textbox = $('#label_id').control;
-textbox.value = '666666'; //  等同于 input.value = '666666';
+const textbox = $('#label_id').control
+textbox.value = '666666' //  等同于 input.value = '666666';
 ```
 
 ### Form Input
@@ -665,12 +665,12 @@ Capture device camera:
 
 ```ts
 if (checkbox.indeterminate) {
-  doSomething();
+  doSomething()
 } else {
   if (checkbox.checked) {
-    doSomething();
+    doSomething()
   } else {
-    doSomething();
+    doSomething()
   }
 }
 ```
@@ -736,26 +736,26 @@ if (checkbox.indeterminate) {
 ```
 
 ```ts
-const togglers = document.querySelectorAll('[data-toggle]');
-const closers = document.querySelectorAll('[data-close]');
+const togglers = document.querySelectorAll('[data-toggle]')
+const closers = document.querySelectorAll('[data-close]')
 
 togglers?.forEach(toggler => {
-  const target = toggler.getAttribute('data-toggle');
-  const dialogs = document.querySelectorAll(target);
+  const target = toggler.getAttribute('data-toggle')
+  const dialogs = document.querySelectorAll(target)
 
   toggler.addEventListener('click', _event => {
     dialogs.forEach(dialog => {
-      dialog.showModal();
-    });
-  });
-});
+      dialog.showModal()
+    })
+  })
+})
 
 closers?.forEach(closer => {
   closer.addEventListener('click', _event => {
-    const dialog = closer.closest('dialog');
-    dialog.close();
-  });
-});
+    const dialog = closer.closest('dialog')
+    dialog.close()
+  })
+})
 ```
 
 ### Datalist
@@ -1177,14 +1177,11 @@ value/max 百分比
 ### SVG
 
 ```ts
-const svgElement = document.createElementNS(
-  'http://www.w3.org/2000/svg',
-  'svg'
-);
+const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
 const svgRectElement = document.createElementNS(
   'http://www.w3.org/2000/svg',
   'rect'
-);
+)
 ```
 
 ### Embed
@@ -1304,8 +1301,8 @@ const onChange = event => {
     currentTarget: {
       dataset: { row, column },
     },
-  } = event;
-};
+  } = event
+}
 ```
 
 ### Global Attributes
@@ -1627,7 +1624,7 @@ const Field = () => (
       </div>
     )}
   </>
-);
+)
 ```
 
 ### Time Accessibility
@@ -1674,31 +1671,31 @@ document.addEventListener('keyup', event => {
     // escape
     case 27:
       // exit
-      break;
+      break
     // enter || space bar
     case 13 || 32:
       // submit or something
-      break;
+      break
     // left arrow
     case 37:
       // move back / previous
-      break;
+      break
     // right arrow
     case 39:
       // move forward
-      break;
+      break
     // up arrow
     case 38:
       // move up
-      break;
+      break
     // down arrow
     case 40:
       // move down
-      break;
+      break
     default:
-      throw new Error('Unsupported key!');
+      throw new Error('Unsupported key!')
   }
-});
+})
 ```
 
 ```ts
@@ -1712,22 +1709,22 @@ document.addEventListener('keyup', event => {
  * @param  {object} e the Event object
  */
 export function trapTabKey(e, context) {
-  if (e.key !== 'Tab') return;
+  if (e.key !== 'Tab') return
 
-  const focusableItems = getFocusable(context);
-  const focusedItem = document.activeElement;
+  const focusableItems = getFocusable(context)
+  const focusedItem = document.activeElement
 
-  const focusedItemIndex = focusableItems.indexOf(focusedItem);
+  const focusedItemIndex = focusableItems.indexOf(focusedItem)
 
   if (e.shiftKey) {
     if (focusedItemIndex === 0) {
-      focusableItems[focusableItems.length - 1].focus();
-      e.preventDefault();
+      focusableItems[focusableItems.length - 1].focus()
+      e.preventDefault()
     }
   } else {
     if (focusedItemIndex === focusableItems.length - 1) {
-      focusableItems[0].focus();
-      e.preventDefault();
+      focusableItems[0].focus()
+      e.preventDefault()
     }
   }
 }
@@ -1814,16 +1811,16 @@ export function trapTabKey(e, context) {
 ```
 
 ```ts
-const listExpander = document.querySelector('.list-expander');
-const list = document.querySelector('#expandable-list-1');
+const listExpander = document.querySelector('.list-expander')
+const list = document.querySelector('#expandable-list-1')
 
 listExpander.addEventListener('click', e => {
   if (list.getAttribute('aria-expanded') === 'true') {
-    list.setAttribute('aria-expanded', 'false');
+    list.setAttribute('aria-expanded', 'false')
   } else {
-    list.setAttribute('aria-expanded', 'true');
+    list.setAttribute('aria-expanded', 'true')
   }
-});
+})
 ```
 
 ### HTML First over ARIA

@@ -16,24 +16,24 @@ tags: [Web, CSS]
 
 ```ts
 // bottom-right:
-new_width = element_original_width + (mouseX - original_mouseX);
-new_height = element_original_height + (mouseY - original_mouseY);
+new_width = element_original_width + (mouseX - original_mouseX)
+new_height = element_original_height + (mouseY - original_mouseY)
 
 // bottom-left:
-new_width = element_original_width - (mouseX - original_mouseX);
-new_height = element_original_height + (mouseY - original_mouseY);
-new_x = element_original_x - (mouseX - original_mouseX);
+new_width = element_original_width - (mouseX - original_mouseX)
+new_height = element_original_height + (mouseY - original_mouseY)
+new_x = element_original_x - (mouseX - original_mouseX)
 
 // top-right:
-new_width = element_original_width + (mouseX - original_mouseX);
-new_height = element_original_height - (mouseY - original_mouseY);
-new_y = element_original_y + (mouseY - original_mouseY);
+new_width = element_original_width + (mouseX - original_mouseX)
+new_height = element_original_height - (mouseY - original_mouseY)
+new_y = element_original_y + (mouseY - original_mouseY)
 
 // top-left:
-new_width = element_original_width - (mouseX - original_mouseX);
-new_height = element_original_height - (mouseY - original_mouseY);
-new_x = element_original_x + (mouseX - original_mouseX);
-new_y = element_original_y + (mouseY - original_mouseY);
+new_width = element_original_width - (mouseX - original_mouseX)
+new_height = element_original_height - (mouseY - original_mouseY)
+new_x = element_original_x + (mouseX - original_mouseX)
+new_y = element_original_y + (mouseY - original_mouseY)
 ```
 
 ### Hidden Class
@@ -1441,8 +1441,8 @@ body {
 
 ```ts
 const resetScrollX = () => {
-  window.scrollTo(0, 0);
-};
+  window.scrollTo(0, 0)
+}
 ```
 
 ## Gallery
@@ -2325,18 +2325,18 @@ Background gradient polygon:
 
 ```ts
 const polygon = (n = 3) => {
-  const deg = (2 * Math.PI) / n;
-  const points = [];
+  const deg = (2 * Math.PI) / n
+  const points = []
 
   for (let i = 0; i < n; ++i) {
-    const theta = deg * i;
-    const x = `${50 * Math.cos(theta) + 50}%`;
-    const y = `${50 * Math.sin(theta) + 50}%`;
-    points.push(`${x} ${y}`);
+    const theta = deg * i
+    const x = `${50 * Math.cos(theta) + 50}%`
+    const y = `${50 * Math.sin(theta) + 50}%`
+    points.push(`${x} ${y}`)
   }
 
-  return `polygon(${points.join(',')})`;
-};
+  return `polygon(${points.join(',')})`
+}
 ```
 
 #### Transform Polygon

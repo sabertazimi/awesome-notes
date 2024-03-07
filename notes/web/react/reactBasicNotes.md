@@ -31,30 +31,30 @@ tags: [Web, React]
 ```tsx
 class Example extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       val: 0,
-    };
+    }
   }
 
   componentDidMount() {
-    this.setState({ val: this.state.val + 1 });
-    console.log(this.state.val); // 第 1 次 log
+    this.setState({ val: this.state.val + 1 })
+    console.log(this.state.val) // 第 1 次 log
 
-    this.setState({ val: this.state.val + 1 });
-    console.log(this.state.val); // 第 2 次 log
+    this.setState({ val: this.state.val + 1 })
+    console.log(this.state.val) // 第 2 次 log
 
     setTimeout(() => {
-      this.setState({ val: this.state.val + 1 });
-      console.log(this.state.val); // 第 3 次 log
+      this.setState({ val: this.state.val + 1 })
+      console.log(this.state.val) // 第 3 次 log
 
-      this.setState({ val: this.state.val + 1 });
-      console.log(this.state.val); // 第 4 次 log
-    }, 0);
+      this.setState({ val: this.state.val + 1 })
+      console.log(this.state.val) // 第 4 次 log
+    }, 0)
   }
 
   render() {
-    return <div>Example</div>;
+    return <div>Example</div>
   }
 }
 
@@ -82,12 +82,12 @@ class Example extends React.Component {
 ```tsx
 class MyComponent extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       error: null,
       isLoaded: false,
       items: [],
-    };
+    }
   }
 
   componentDidMount() {
@@ -98,7 +98,7 @@ class MyComponent extends React.Component {
           this.setState({
             isLoaded: true,
             items: result.items,
-          });
+          })
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -107,17 +107,17 @@ class MyComponent extends React.Component {
           this.setState({
             isLoaded: true,
             error,
-          });
+          })
         }
-      );
+      )
   }
 
   render() {
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded, items } = this.state
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return <div>Error: {error.message}</div>
     } else if (!isLoaded) {
-      return <div>Loading...</div>;
+      return <div>Loading...</div>
     } else {
       return (
         <ul>
@@ -127,7 +127,7 @@ class MyComponent extends React.Component {
             </li>
           ))}
         </ul>
-      );
+      )
     }
   }
 }
@@ -168,27 +168,27 @@ type ReactInternalType =
   | 'react.opaque.id'
   | 'react.debug_trace_mode'
   | 'react.offscreen'
-  | 'react.legacy_hidden';
+  | 'react.legacy_hidden'
 
 export interface ReactElement<Props> {
-  $$typeof: any;
-  key: string | number | null;
+  $$typeof: any
+  key: string | number | null
   type:
     | string
     | ((props: Props) => ReactElement<any>)
     | (new (props: Props) => ReactComponent<any>)
-    | ReactInternalType;
-  props: Props;
-  ref: Ref;
+    | ReactInternalType
+  props: Props
+  ref: Ref
 
   // ReactFiber
-  _owner: any;
+  _owner: any
 
   // __DEV__
-  _store: { validated: boolean };
-  _self: React$Element<any>;
-  _shadowChildren: any;
-  _source: Source;
+  _store: { validated: boolean }
+  _self: React$Element<any>
+  _shadowChildren: any
+  _source: Source
 }
 ```
 
@@ -202,7 +202,7 @@ ReactDOM.render(
     },
   },
   document.getElementById('root')
-);
+)
 
 // React: You told me this...
 const FormElement = {
@@ -211,7 +211,7 @@ const FormElement = {
     isSubmitted: false,
     buttonText: 'OK!',
   },
-};
+}
 
 // React: ...And Form told me this...
 const ButtonElement = {
@@ -220,7 +220,7 @@ const ButtonElement = {
     children: 'OK!',
     color: 'blue',
   },
-};
+}
 
 // React: ...and Button told me this! I guess I'm done.
 const HTMLButtonElement = {
@@ -234,7 +234,7 @@ const HTMLButtonElement = {
       },
     },
   },
-};
+}
 ```
 
 ### JSX
@@ -251,19 +251,19 @@ const HTMLButtonElement = {
 - [New JSX transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
 
 ```ts
-import React from 'react';
+import React from 'react'
 
 function App() {
-  return React.createElement('h1', null, 'Hello world');
+  return React.createElement('h1', null, 'Hello world')
 }
 ```
 
 ```ts
 // Inserted by a compiler
-import { jsx as _jsx } from 'react/jsx-runtime';
+import { jsx as _jsx } from 'react/jsx-runtime'
 
 function App() {
-  return _jsx('h1', { children: 'Hello world' });
+  return _jsx('h1', { children: 'Hello world' })
 }
 ```
 
@@ -312,48 +312,48 @@ interface NewLifecycle<P, S, SS> {
   getSnapshotBeforeUpdate?(
     prevProps: Readonly<P>,
     prevState: Readonly<S>
-  ): SS | null;
+  ): SS | null
 
   componentDidUpdate?(
     prevProps: Readonly<P>,
     prevState: Readonly<S>,
     snapshot?: SS
-  ): void;
+  ): void
 }
 
 interface ComponentLifecycle<P, S, SS = any> extends NewLifecycle<P, S, SS> {
-  componentDidMount?(): void;
+  componentDidMount?(): void
 
   shouldComponentUpdate?(
     nextProps: Readonly<P>,
     nextState: Readonly<S>,
     nextContext: any
-  ): boolean;
+  ): boolean
 
-  componentWillUnmount?(): void;
+  componentWillUnmount?(): void
 
-  componentDidCatch?(error: Error, errorInfo: ErrorInfo): void;
+  componentDidCatch?(error: Error, errorInfo: ErrorInfo): void
 }
 
 class Component<P = {}, S = {}, SS = any> extends ComponentLifecycle<P, S, SS> {
-  readonly props: Readonly<P> & Readonly<{ children?: ReactNode | undefined }>;
-  state: Readonly<S>;
+  readonly props: Readonly<P> & Readonly<{ children?: ReactNode | undefined }>
+  state: Readonly<S>
 
-  static contextType?: Context<any> | undefined;
-  context: any;
+  static contextType?: Context<any> | undefined
+  context: any
 
-  constructor(props: Readonly<P> | P);
+  constructor(props: Readonly<P> | P)
 
   setState<K extends keyof S>(
     state:
       | ((prevState: Readonly<S>, props: Readonly<P>) => Pick<S, K> | S | null)
       | (Pick<S, K> | S | null),
     callback?: () => void
-  ): void;
+  ): void
 
-  forceUpdate(callback?: () => void): void;
+  forceUpdate(callback?: () => void): void
 
-  render(): ReactNode;
+  render(): ReactNode
 }
 
 class PureComponent<P = {}, S = {}, SS = any> extends Component<P, S, SS> {}
@@ -373,9 +373,9 @@ class Component {
   render() {
     this.setState((prevState, props) => ({
       counter: prevState.counter + props.increment,
-    }));
+    }))
 
-    return <div>Component</div>;
+    return <div>Component</div>
   }
 }
 ```
@@ -468,14 +468,14 @@ const CreateTextWithProps = ({ text, ASCIIChar, ...props }) => {
       {text}
       {ASCIIChar}
     </span>
-  );
-};
+  )
+}
 
 const RepeatCharacters = ({ times, children }) => {
   return React.cloneElement(children, {
     ASCIIChar: children.props.ASCIIChar.repeat(times),
-  });
-};
+  })
+}
 
 function App() {
   return (
@@ -484,7 +484,7 @@ function App() {
         <CreateTextWithProps text="Foo Text" ASCIIChar="." />
       </RepeatCharacters>
     </div>
-  );
+  )
 }
 ```
 
@@ -494,11 +494,11 @@ const RadioGroup = props => {
     React.Children.map(props.children, child => {
       return React.cloneElement(child, {
         name: props.name,
-      });
-    });
+      })
+    })
 
-  return <div>{<RenderChildren />}</div>;
-};
+  return <div>{<RenderChildren />}</div>
+}
 
 const RadioButton = props => {
   return (
@@ -506,8 +506,8 @@ const RadioButton = props => {
       <input type="radio" value={props.value} name={props.name} />
       {props.children}
     </label>
-  );
-};
+  )
+}
 
 function App() {
   return (
@@ -516,7 +516,7 @@ function App() {
       <RadioButton value="second">Second</RadioButton>
       <RadioButton value="third">Third</RadioButton>
     </RadioGroup>
-  );
+  )
 }
 ```
 
@@ -529,10 +529,10 @@ function App() {
 - `React.Children.only(children)`.
 
 ```tsx
-import { Children, cloneElement } from 'react';
+import { Children, cloneElement } from 'react'
 
 function Breadcrumbs({ children }) {
-  const arrayChildren = Children.toArray(children);
+  const arrayChildren = Children.toArray(children)
 
   return (
     <ul
@@ -542,13 +542,13 @@ function Breadcrumbs({ children }) {
       }}
     >
       {Children.map(arrayChildren, (child, index) => {
-        const isLast = index === arrayChildren.length - 1;
+        const isLast = index === arrayChildren.length - 1
 
         if (!isLast && !child.props.link) {
           throw new Error(
             `BreadcrumbItem child no. ${index + 1}
             should be passed a 'link' prop`
-          );
+          )
         }
 
         return (
@@ -576,10 +576,10 @@ function Breadcrumbs({ children }) {
             )}
             {!isLast && <div style={{ marginRight: '5px' }}></div>}
           </>
-        );
+        )
       })}
     </ul>
-  );
+  )
 }
 
 function BreadcrumbItem({ isLast, children }) {
@@ -591,7 +591,7 @@ function BreadcrumbItem({ isLast, children }) {
     >
       {children}
     </li>
-  );
+  )
 }
 
 export default function App() {
@@ -601,7 +601,7 @@ export default function App() {
       <BreadcrumbItem link="https://example.com/hotels/">Hotels</BreadcrumbItem>
       <BreadcrumbItem>A Fancy Hotel Name</BreadcrumbItem>
     </Breadcrumbs>
-  );
+  )
 }
 ```
 
@@ -620,28 +620,28 @@ Refs 用于返回对元素的引用.
 ```ts
 function commitAttachRef(finishedWork: Fiber) {
   // finishedWork 为含有 Ref effectTag 的 Fiber
-  const ref = finishedWork.ref;
+  const ref = finishedWork.ref
 
   // 含有 ref prop, 这里是作为数据结构
   if (ref !== null) {
     // 获取 ref 属性对应的 Component 实例
-    const instance = finishedWork.stateNode;
-    let instanceToUse;
+    const instance = finishedWork.stateNode
+    let instanceToUse
     switch (finishedWork.tag) {
       case HostComponent:
         // 对于 HostComponent, 实例为对应 DOM 节点
-        instanceToUse = getPublicInstance(instance);
-        break;
+        instanceToUse = getPublicInstance(instance)
+        break
       default:
         // 其他类型实例为 fiber.stateNode
-        instanceToUse = instance;
+        instanceToUse = instance
     }
 
     // 赋值 ref
     if (typeof ref === 'function') {
-      ref(instanceToUse);
+      ref(instanceToUse)
     } else {
-      ref.current = instanceToUse;
+      ref.current = instanceToUse
     }
   }
 }
@@ -649,10 +649,10 @@ function commitAttachRef(finishedWork: Fiber) {
 
 ```tsx
 class CssThemeProvider extends React.PureComponent<Props> {
-  private rootRef = React.createRef<HTMLDivElement>();
+  private rootRef = React.createRef<HTMLDivElement>()
 
   render() {
-    return <div ref={this.rootRef}>{this.props.children}</div>;
+    return <div ref={this.rootRef}>{this.props.children}</div>
   }
 }
 ```
@@ -673,11 +673,11 @@ class CssThemeProvider extends React.PureComponent<Props> {
 ```tsx
 class Foo extends Component {
   render() {
-    return <input onClick={() => this.action()} ref="input" />;
+    return <input onClick={() => this.action()} ref="input" />
   }
 
   action() {
-    console.log(this.refs.input.value);
+    console.log(this.refs.input.value)
   }
 }
 ```
@@ -686,14 +686,14 @@ class Foo extends Component {
 class App extends React.Component {
   renderRow = index => {
     // ref 会绑定到 DataTable 组件实例, 而不是 App 组件实例上
-    return <input ref={`input-${index}`} />;
+    return <input ref={`input-${index}`} />
 
     // 如果使用 function 类型 ref, 则不会有这个问题
     // return <input ref={input => this['input-' + index] = input} />;
-  };
+  }
 
   render() {
-    return <DataTable data={this.props.data} renderRow={this.renderRow} />;
+    return <DataTable data={this.props.data} renderRow={this.renderRow} />
   }
 }
 ```
@@ -711,26 +711,26 @@ const ButtonElement = React.forwardRef((props, ref) => (
   <button ref={ref} className="CustomButton">
     {props.children}
   </button>
-));
+))
 
 // Create ref to the DOM button:
 // get ref to `<button>`
-const ref = React.createRef();
-<ButtonElement ref={ref}>{'Forward Ref'}</ButtonElement>;
+const ref = React.createRef()
+;<ButtonElement ref={ref}>{'Forward Ref'}</ButtonElement>
 ```
 
 ```tsx
-type Ref = HTMLButtonElement;
+type Ref = HTMLButtonElement
 interface Props {
-  children: React.ReactNode;
-  type: 'submit' | 'button';
+  children: React.ReactNode
+  type: 'submit' | 'button'
 }
 
 const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
   <button ref={ref} className="MyClassName" type={props.type}>
     {props.children}
   </button>
-));
+))
 ```
 
 #### Callback Refs
@@ -738,8 +738,8 @@ const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
 ```tsx
 class UserInput extends Component {
   setSearchInput = input => {
-    this.input = input;
-  };
+    this.input = input
+  }
 
   render() {
     return (
@@ -747,7 +747,7 @@ class UserInput extends Component {
         <input type="text" ref={this.setSearchInput} />
         <button type="submit">Submit</button>
       </>
-    );
+    )
   }
 }
 ```
@@ -757,26 +757,26 @@ class UserInput extends Component {
 Compound components [example](https://dev.to/alexi_be3/react-component-patterns-49ho):
 
 ```tsx
-import * as React from 'react';
+import * as React from 'react'
 
 interface Props {
-  onStateChange?(e: string): void;
-  defaultValue?: string;
+  onStateChange?(e: string): void
+  defaultValue?: string
 }
 
 interface State {
-  currentValue: string;
-  defaultValue?: string;
+  currentValue: string
+  defaultValue?: string
 }
 
 interface RadioInputProps {
-  label: string;
-  value: string;
-  name: string;
-  imgSrc: string;
-  key: string | number;
-  currentValue?: string;
-  onChange?(e: React.ChangeEvent<HTMLInputElement>): void;
+  label: string
+  value: string
+  name: string
+  imgSrc: string
+  key: string | number
+  currentValue?: string
+  onChange?(e: React.ChangeEvent<HTMLInputElement>): void
 }
 
 const RadioImageForm = ({
@@ -787,22 +787,22 @@ const RadioImageForm = ({
   const [state, setState] = React.useState<State>({
     currentValue: '',
     defaultValue,
-  });
+  })
 
   // Memoized so that providerState isn't recreated on each render
   const providerState = React.useMemo(
     () => ({
       onChange: (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const value = event.target.value;
+        const value = event.target.value
         setState({
           currentValue: value,
-        });
-        onStateChange?.(value);
+        })
+        onStateChange?.(value)
       },
       ...state,
     }),
     [state, onStateChange]
-  );
+  )
 
   return (
     <div>
@@ -814,8 +814,8 @@ const RadioImageForm = ({
         )}
       </form>
     </div>
-  );
-};
+  )
+}
 
 const RadioInput = ({
   currentValue,
@@ -838,11 +838,11 @@ const RadioInput = ({
     />
     <img alt="" src={imgSrc} />
   </label>
-);
+)
 
-RadioImageForm.RadioInput = RadioInput;
+RadioImageForm.RadioInput = RadioInput
 
-export default RadioImageForm;
+export default RadioImageForm
 ```
 
 - Compound components manage their own internal state,
@@ -851,42 +851,42 @@ export default RadioImageForm;
   automatically import child components available on compound component.
 
 ```tsx
-import type { CSSProperties, ReactNode } from 'react';
-import React from 'react';
+import type { CSSProperties, ReactNode } from 'react'
+import React from 'react'
 
 interface Props {
-  children: ReactNode;
-  style?: CSSProperties;
-  rest?: any;
+  children: ReactNode
+  style?: CSSProperties
+  rest?: any
 }
 
 const Header = ({ children, style, ...rest }: Props): JSX.Element => (
   <div style={{ ...style }} {...rest}>
     {children}
   </div>
-);
+)
 
 const Body = ({ children, style, ...rest }: Props): JSX.Element => (
   <div style={{ ...style }} {...rest}>
     {children}
   </div>
-);
+)
 
 const Footer = ({ children, style, ...rest }: Props): JSX.Element => (
   <div style={{ ...style }} {...rest}>
     {children}
   </div>
-);
+)
 
 const getChildrenOnDisplayName = (children: ReactNode[], displayName: string) =>
   React.Children.map(children, child =>
     child.displayName === displayName ? child : null
-  );
+  )
 
 const Card = ({ children }: { children: ReactNode[] }): JSX.Element => {
-  const header = getChildrenOnDisplayName(children, 'Header');
-  const body = getChildrenOnDisplayName(children, 'Body');
-  const footer = getChildrenOnDisplayName(children, 'Footer');
+  const header = getChildrenOnDisplayName(children, 'Header')
+  const body = getChildrenOnDisplayName(children, 'Body')
+  const footer = getChildrenOnDisplayName(children, 'Footer')
 
   return (
     <div className="card">
@@ -894,15 +894,15 @@ const Card = ({ children }: { children: ReactNode[] }): JSX.Element => {
       <div className="card-body">{body}</div>
       {footer && <div className="card-footer">{footer}</div>}
     </div>
-  );
-};
+  )
+}
 
-Header.displayName = 'Header';
-Body.displayName = 'Body';
-Footer.displayName = 'Footer';
-Card.Header = Header;
-Card.Body = Body;
-Card.Footer = Footer;
+Header.displayName = 'Header'
+Body.displayName = 'Body'
+Footer.displayName = 'Footer'
+Card.Header = Header
+Card.Body = Body
+Card.Footer = Footer
 
 const App = () => (
   <div>
@@ -912,9 +912,9 @@ const App = () => (
       <Card.Footer>Footer</Card.Footer>
     </Card>
   </div>
-);
+)
 
-export default App;
+export default App
 ```
 
 ## React Synthetic Events
@@ -941,10 +941,10 @@ function listenToAllSupportedEvents(rootContainerElement: EventTarget) {
   if (enableEagerRootListeners) {
     // 1. 节流优化, 保证全局注册只被调用一次.
     if (rootContainerElement[listeningMarker]) {
-      return;
+      return
     }
 
-    rootContainerElement[listeningMarker] = true;
+    rootContainerElement[listeningMarker] = true
 
     // 2. 遍历 allNativeEvents 监听冒泡和捕获阶段的事件.
     allNativeEvents.forEach(domEventName => {
@@ -954,7 +954,7 @@ function listenToAllSupportedEvents(rootContainerElement: EventTarget) {
           false, // 冒泡阶段监听.
           rootContainerElement,
           null
-        );
+        )
       }
 
       listenToNativeEvent(
@@ -962,8 +962,8 @@ function listenToAllSupportedEvents(rootContainerElement: EventTarget) {
         true, // 捕获阶段监听.
         rootContainerElement,
         null
-      );
-    });
+      )
+    })
   }
 }
 
@@ -974,17 +974,14 @@ function listenToNativeEvent(
   targetElement: Element | null,
   eventSystemFlags?: EventSystemFlags = 0
 ): void {
-  const target = rootContainerElement;
-  const listenerSet = getEventListenerSet(target);
-  const listenerSetKey = getListenerSetKey(
-    domEventName,
-    isCapturePhaseListener
-  );
+  const target = rootContainerElement
+  const listenerSet = getEventListenerSet(target)
+  const listenerSetKey = getListenerSetKey(domEventName, isCapturePhaseListener)
 
   // 利用 Set 数据结构, 保证相同的事件类型只会被注册一次.
   if (!listenerSet.has(listenerSetKey)) {
     if (isCapturePhaseListener) {
-      eventSystemFlags |= IS_CAPTURE_PHASE;
+      eventSystemFlags |= IS_CAPTURE_PHASE
     }
 
     // 注册事件监听.
@@ -993,8 +990,8 @@ function listenToNativeEvent(
       domEventName,
       eventSystemFlags,
       isCapturePhaseListener
-    );
-    listenerSet.add(listenerSetKey);
+    )
+    listenerSet.add(listenerSetKey)
   }
 }
 
@@ -1010,23 +1007,23 @@ function addTrappedEventListener(
     targetContainer,
     domEventName,
     eventSystemFlags
-  );
+  )
 
   // 2. 注册事件监听.
-  let unsubscribeListener;
+  let unsubscribeListener
 
   if (isCapturePhaseListener) {
     unsubscribeListener = addEventCaptureListener(
       targetContainer,
       domEventName,
       listener
-    );
+    )
   } else {
     unsubscribeListener = addEventBubbleListener(
       targetContainer,
       domEventName,
       listener
-    );
+    )
   }
 }
 
@@ -1036,8 +1033,8 @@ function addEventBubbleListener(
   eventType: string,
   listener: Function
 ): Function {
-  target.addEventListener(eventType, listener, false);
-  return listener;
+  target.addEventListener(eventType, listener, false)
+  return listener
 }
 
 // 注册原生捕获事件.
@@ -1046,8 +1043,8 @@ function addEventCaptureListener(
   eventType: string,
   listener: Function
 ): Function {
-  target.addEventListener(eventType, listener, true);
-  return listener;
+  target.addEventListener(eventType, listener, true)
+  return listener
 }
 ```
 
@@ -1061,20 +1058,20 @@ function createEventListenerWrapperWithPriority(
   eventSystemFlags: EventSystemFlags
 ): Function {
   // 1. 根据优先级设置 listenerWrapper.
-  const eventPriority = getEventPriorityForPluginSystem(domEventName);
-  let listenerWrapper;
+  const eventPriority = getEventPriorityForPluginSystem(domEventName)
+  let listenerWrapper
 
   switch (eventPriority) {
     case DiscreteEvent:
-      listenerWrapper = dispatchDiscreteEvent;
-      break;
+      listenerWrapper = dispatchDiscreteEvent
+      break
     case UserBlockingEvent:
-      listenerWrapper = dispatchUserBlockingUpdate;
-      break;
+      listenerWrapper = dispatchUserBlockingUpdate
+      break
     case ContinuousEvent:
     default:
-      listenerWrapper = dispatchEvent;
-      break;
+      listenerWrapper = dispatchEvent
+      break
   }
 
   // 2. 返回 listenerWrapper.
@@ -1083,7 +1080,7 @@ function createEventListenerWrapperWithPriority(
     domEventName,
     eventSystemFlags,
     targetContainer
-  );
+  )
 }
 
 function dispatchDiscreteEvent(
@@ -1092,16 +1089,16 @@ function dispatchDiscreteEvent(
   container,
   nativeEvent
 ) {
-  const previousPriority = getCurrentUpdatePriority();
-  const prevTransition = ReactCurrentBatchConfig.transition;
-  ReactCurrentBatchConfig.transition = null;
+  const previousPriority = getCurrentUpdatePriority()
+  const prevTransition = ReactCurrentBatchConfig.transition
+  ReactCurrentBatchConfig.transition = null
 
   try {
-    setCurrentUpdatePriority(DiscreteEventPriority);
-    dispatchEvent(domEventName, eventSystemFlags, container, nativeEvent);
+    setCurrentUpdatePriority(DiscreteEventPriority)
+    dispatchEvent(domEventName, eventSystemFlags, container, nativeEvent)
   } finally {
-    setCurrentUpdatePriority(previousPriority);
-    ReactCurrentBatchConfig.transition = prevTransition;
+    setCurrentUpdatePriority(previousPriority)
+    ReactCurrentBatchConfig.transition = prevTransition
   }
 }
 
@@ -1111,16 +1108,16 @@ function dispatchContinuousEvent(
   container,
   nativeEvent
 ) {
-  const previousPriority = getCurrentUpdatePriority();
-  const prevTransition = ReactCurrentBatchConfig.transition;
-  ReactCurrentBatchConfig.transition = null;
+  const previousPriority = getCurrentUpdatePriority()
+  const prevTransition = ReactCurrentBatchConfig.transition
+  ReactCurrentBatchConfig.transition = null
 
   try {
-    setCurrentUpdatePriority(ContinuousEventPriority);
-    dispatchEvent(domEventName, eventSystemFlags, container, nativeEvent);
+    setCurrentUpdatePriority(ContinuousEventPriority)
+    dispatchEvent(domEventName, eventSystemFlags, container, nativeEvent)
   } finally {
-    setCurrentUpdatePriority(previousPriority);
-    ReactCurrentBatchConfig.transition = prevTransition;
+    setCurrentUpdatePriority(previousPriority)
+    ReactCurrentBatchConfig.transition = prevTransition
   }
 }
 
@@ -1135,7 +1132,7 @@ function dispatchEvent(
     eventSystemFlags,
     targetContainer,
     nativeEvent
-  );
+  )
 
   if (blockedOn === null) {
     dispatchEventForPluginEventSystem(
@@ -1144,9 +1141,9 @@ function dispatchEvent(
       nativeEvent,
       return_targetInst,
       targetContainer
-    );
-    clearIfContinuousEvent(domEventName, nativeEvent);
-    return;
+    )
+    clearIfContinuousEvent(domEventName, nativeEvent)
+    return
   }
 
   if (
@@ -1158,22 +1155,22 @@ function dispatchEvent(
       nativeEvent
     )
   ) {
-    nativeEvent.stopPropagation();
-    return;
+    nativeEvent.stopPropagation()
+    return
   }
 
   // We need to clear only if we didn't queue because queueing is accumulative.
-  clearIfContinuousEvent(domEventName, nativeEvent);
+  clearIfContinuousEvent(domEventName, nativeEvent)
 
   if (
     eventSystemFlags & IS_CAPTURE_PHASE &&
     isDiscreteEventThatRequiresHydration(domEventName)
   ) {
     while (blockedOn !== null) {
-      const fiber = getInstanceFromNode(blockedOn);
+      const fiber = getInstanceFromNode(blockedOn)
 
       if (fiber !== null) {
-        attemptSynchronousHydration(fiber);
+        attemptSynchronousHydration(fiber)
       }
 
       const nextBlockedOn = findInstanceBlockingEvent(
@@ -1181,7 +1178,7 @@ function dispatchEvent(
         eventSystemFlags,
         targetContainer,
         nativeEvent
-      );
+      )
 
       if (nextBlockedOn === null) {
         dispatchEventForPluginEventSystem(
@@ -1190,21 +1187,21 @@ function dispatchEvent(
           nativeEvent,
           return_targetInst,
           targetContainer
-        );
+        )
       }
 
       if (nextBlockedOn === blockedOn) {
-        break;
+        break
       }
 
-      blockedOn = nextBlockedOn;
+      blockedOn = nextBlockedOn
     }
 
     if (blockedOn !== null) {
-      nativeEvent.stopPropagation();
+      nativeEvent.stopPropagation()
     }
 
-    return;
+    return
   }
 
   dispatchEventForPluginEventSystem(
@@ -1213,7 +1210,7 @@ function dispatchEvent(
     nativeEvent,
     null,
     targetContainer
-  );
+  )
 }
 ```
 
@@ -1246,13 +1243,13 @@ Downside:
 function withToggleable(Clickable) {
   return class extends React.Component {
     constructor() {
-      super();
-      this.toggle = this.toggle.bind(this);
-      this.state = { show: false };
+      super()
+      this.toggle = this.toggle.bind(this)
+      this.state = { show: false }
     }
 
     toggle() {
-      this.setState(prevState => ({ show: !prevState.show }));
+      this.setState(prevState => ({ show: !prevState.show }))
     }
 
     render() {
@@ -1261,9 +1258,9 @@ function withToggleable(Clickable) {
           <Clickable {...this.props} onClick={this.toggle} />
           {this.state.show && this.props.children}
         </div>
-      );
+      )
     }
-  };
+  }
 }
 
 class NormalMenu extends React.Component {
@@ -1272,11 +1269,11 @@ class NormalMenu extends React.Component {
       <div onClick={this.props.onClick}>
         <h1>{this.props.title}</h1>
       </div>
-    );
+    )
   }
 }
 
-export default withToggleable(NormalMenu);
+export default withToggleable(NormalMenu)
 ```
 
 ```tsx
@@ -1294,7 +1291,7 @@ class Menu extends React.Component {
           <p>More content</p>
         </ToggleableMenu>
       </div>
-    );
+    )
   }
 }
 ```
@@ -1331,17 +1328,17 @@ Downside:
 ```tsx
 class Toggleable extends React.Component {
   constructor() {
-    super();
-    this.toggle = this.toggle.bind(this);
-    this.state = { show: false };
+    super()
+    this.toggle = this.toggle.bind(this)
+    this.state = { show: false }
   }
 
   toggle() {
-    this.setState(prevState => ({ show: !prevState.show }));
+    this.setState(prevState => ({ show: !prevState.show }))
   }
 
   render() {
-    return this.props.children(this.state.show, this.toggle);
+    return this.props.children(this.state.show, this.toggle)
   }
 }
 
@@ -1356,7 +1353,7 @@ const ToggleableMenu = props => (
       </div>
     )}
   </Toggleable>
-);
+)
 ```
 
 ```tsx
@@ -1374,7 +1371,7 @@ class Menu extends React.Component {
           <p>More content</p>
         </ToggleableMenu>
       </div>
-    );
+    )
   }
 }
 ```
@@ -1403,10 +1400,10 @@ class Menu extends React.Component {
 
 ```ts
 export declare interface AppProps {
-  children: React.ReactNode; // best
-  style?: React.CSSProperties; // for style
-  onChange?: (e: React.FormEvent<HTMLInputElement>) => void; // form events!
-  props: Props & React.HTMLProps<HTMLButtonElement>;
+  children: React.ReactNode // best
+  style?: React.CSSProperties // for style
+  onChange?: (e: React.FormEvent<HTMLInputElement>) => void // form events!
+  props: Props & React.HTMLProps<HTMLButtonElement>
 }
 ```
 
@@ -1414,10 +1411,10 @@ export declare interface AppProps {
 
 ```tsx
 class CssThemeProvider extends React.PureComponent<Props> {
-  private rootRef: React.RefObject<HTMLDivElement> = React.createRef();
+  private rootRef: React.RefObject<HTMLDivElement> = React.createRef()
 
   render() {
-    return <div ref={this.rootRef}>{this.props.children}</div>;
+    return <div ref={this.rootRef}>{this.props.children}</div>
   }
 }
 ```
@@ -1437,17 +1434,17 @@ Don't use `React.FC`/`React.FunctionComponent`:
 ```tsx
 // Declaring type of props
 interface AppProps {
-  message: string;
+  message: string
 }
 
 // Inferred return type
-const App = ({ message }: AppProps) => <div>{message}</div>;
+const App = ({ message }: AppProps) => <div>{message}</div>
 
 // Explicit return type annotation
-const App = ({ message }: AppProps): JSX.Element => <div>{message}</div>;
+const App = ({ message }: AppProps): JSX.Element => <div>{message}</div>
 
 // Inline types annotation
-const App = ({ message }: { message: string }) => <div>{message}</div>;
+const App = ({ message }: { message: string }) => <div>{message}</div>
 ```
 
 ### Class Component Types
@@ -1459,32 +1456,32 @@ const App = ({ message }: { message: string }) => <div>{message}</div>;
 
 ```tsx
 class MyComponent extends React.Component<{
-  message?: string;
+  message?: string
 }> {
   render() {
-    const { message = 'default' } = this.props;
-    return <div>{message}</div>;
+    const { message = 'default' } = this.props
+    return <div>{message}</div>
   }
 }
 ```
 
 ```tsx
-import React from 'react';
-import Button from './Button';
+import React from 'react'
+import Button from './Button'
 
 type Props = typeof ButtonCounter.defaultProps & {
-  name: string;
-};
+  name: string
+}
 
-const initialState = { clicksCount: 0 };
-type State = Readonly<typeof initialState>;
+const initialState = { clicksCount: 0 }
+type State = Readonly<typeof initialState>
 
 class ButtonCounter extends React.Component<Props, State> {
-  readonly state: State = initialState;
+  readonly state: State = initialState
 
   static defaultProps = {
     name: 'count',
-  };
+  }
 
   static getDerivedStateFromProps(
     props: Props,
@@ -1494,7 +1491,7 @@ class ButtonCounter extends React.Component<Props, State> {
   }
 
   render() {
-    return <span>{this.props.foo}</span>;
+    return <span>{this.props.foo}</span>
   }
 }
 ```
@@ -1504,20 +1501,20 @@ class ButtonCounter extends React.Component<Props, State> {
 ```tsx
 // 一个泛型组件
 interface SelectProps<T> {
-  items: T[];
+  items: T[]
 }
 
 class Select<T> extends React.Component<SelectProps<T>, any> {}
 
 // 使用
-const Form = () => <Select<string> items={['a', 'b']} />;
+const Form = () => <Select<string> items={['a', 'b']} />
 ```
 
 In `.tsx` file, `<T>` maybe considered `JSX.Element`,
 use `extends {}` to avoid it:
 
 ```tsx
-const foo = <T extends {}>(arg: T) => arg;
+const foo = <T extends {}>(arg: T) => arg
 ```
 
 ### Component Props Type
@@ -1527,26 +1524,26 @@ const foo = <T extends {}>(arg: T) => arg;
 - `React.ComponentPropsWithoutRef`
 
 ```tsx
-import { Button } from 'library';
+import { Button } from 'library'
 
-type ButtonProps = React.ComponentProps<typeof Button>;
-type AlertButtonProps = Omit<ButtonProps, 'onClick'>;
+type ButtonProps = React.ComponentProps<typeof Button>
+type AlertButtonProps = Omit<ButtonProps, 'onClick'>
 
 const AlertButton: React.FC<AlertButtonProps> = props => (
   <Button onClick={() => alert('hello')} {...props} />
-);
+)
 ```
 
 Typing existing untyped React components:
 
 ```ts
 declare module 'react-router-dom' {
-  import * as React from 'react';
+  import * as React from 'react'
 
   interface NavigateProps<T> {
-    to: string | number;
-    replace?: boolean;
-    state?: T;
+    to: string | number
+    replace?: boolean
+    state?: T
   }
 
   export class Navigate<T = any> extends React.Component<NavigateProps<T>> {}
@@ -1560,10 +1557,10 @@ declare module 'react-router-dom' {
 
 ```ts
 function foo(bar: string) {
-  return { baz: 1 };
+  return { baz: 1 }
 }
 
-type FooReturn = ReturnType<typeof foo>; // { baz: number }
+type FooReturn = ReturnType<typeof foo> // { baz: number }
 ```
 
 ### React Event Types
@@ -1617,30 +1614,30 @@ type FooReturn = ReturnType<typeof foo>; // { baz: number }
 
 ```tsx
 interface State {
-  text: string;
+  text: string
 }
 
 class App extends React.Component<Props, State> {
   state = {
     text: '',
-  };
+  }
 
   // typing on RIGHT hand side of =
   onChangeEvent = (e: React.FormEvent<HTMLInputElement>): void => {
-    this.setState({ text: e.currentTarget.value });
-  };
+    this.setState({ text: e.currentTarget.value })
+  }
 
   // typing on LEFT hand side of =
   onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = e => {
-    this.setState({ text: e.currentTarget.value });
-  };
+    this.setState({ text: e.currentTarget.value })
+  }
 
   render() {
     return (
       <div>
         <input type="text" value={this.state.text} onChange={this.onChange} />
       </div>
-    );
+    )
   }
 }
 ```
@@ -1650,15 +1647,15 @@ const Form = () => (
   <form
     ref={formRef}
     onSubmit={(e: React.SyntheticEvent) => {
-      e.preventDefault();
+      e.preventDefault()
 
       const target = e.target as typeof e.target & {
-        email: { value: string };
-        password: { value: string };
-      };
+        email: { value: string }
+        password: { value: string }
+      }
 
-      const email = target.email.value; // Type Checks
-      const password = target.password.value; // Type Checks
+      const email = target.email.value // Type Checks
+      const password = target.password.value // Type Checks
     }}
   >
     <div>
@@ -1677,7 +1674,7 @@ const Form = () => (
       <input type="submit" value="Log in" />
     </div>
   </form>
-);
+)
 ```
 
 ### React HTML and CSS Types
@@ -1693,88 +1690,88 @@ const Form = () => (
 #### React Input Types
 
 ```ts
-type StringChangeHandler = (newValue: string) => void;
-type NumberChangeHandler = (newValue: number) => void;
-type BooleanChangeHandler = (newValue: boolean) => void;
+type StringChangeHandler = (newValue: string) => void
+type NumberChangeHandler = (newValue: number) => void
+type BooleanChangeHandler = (newValue: boolean) => void
 
 interface BaseInputDefinition {
-  id: string;
-  label: string;
+  id: string
+  label: string
 }
 
 interface TextInputDefinition extends BaseInputDefinition {
-  type: 'text';
-  value: string;
-  onChange: StringChangeHandler;
+  type: 'text'
+  value: string
+  onChange: StringChangeHandler
 }
 
 interface NumberInputDefinition extends BaseInputDefinition {
-  type: 'number';
-  value: number;
-  onChange: NumberChangeHandler;
+  type: 'number'
+  value: number
+  onChange: NumberChangeHandler
 }
 
 interface CheckboxInputDefinition extends BaseInputDefinition {
-  type: 'checkbox';
-  value: boolean;
-  onChange: BooleanChangeHandler;
+  type: 'checkbox'
+  value: boolean
+  onChange: BooleanChangeHandler
 }
 
 type Input =
   | TextInputDefinition
   | NumberInputDefinition
-  | CheckboxInputDefinition;
+  | CheckboxInputDefinition
 ```
 
 ### React Portal Types
 
 ```tsx
-const modalRoot = document.getElementById('modal-root') as HTMLElement;
+const modalRoot = document.getElementById('modal-root') as HTMLElement
 
 export class Modal extends React.Component {
-  el: HTMLElement = document.createElement('div');
+  el: HTMLElement = document.createElement('div')
 
   componentDidMount() {
-    modalRoot.appendChild(this.el);
+    modalRoot.appendChild(this.el)
   }
 
   componentWillUnmount() {
-    modalRoot.removeChild(this.el);
+    modalRoot.removeChild(this.el)
   }
 
   render() {
-    return ReactDOM.createPortal(this.props.children, this.el);
+    return ReactDOM.createPortal(this.props.children, this.el)
   }
 }
 ```
 
 ```tsx
-import type React from 'react';
-import { useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import type React from 'react'
+import { useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 
-const modalRoot = document.querySelector('#modal-root') as HTMLElement;
+const modalRoot = document.querySelector('#modal-root') as HTMLElement
 
 const Modal: React.FC<{}> = ({ children }) => {
-  const el = useRef(document.createElement('div'));
+  const el = useRef(document.createElement('div'))
 
   useEffect(() => {
-    const current = el.current;
-    modalRoot!.appendChild(current);
-    return () => modalRoot!.removeChild(current);
-  }, []);
+    const current = el.current
+    modalRoot!.appendChild(current)
+    return () => modalRoot!.removeChild(current)
+  }, [])
 
-  return createPortal(children, el.current);
-};
+  return createPortal(children, el.current)
+}
 
-export default Modal;
+export default Modal
 ```
 
 ```tsx
-import { Modal } from '@components';
+import { Modal } from '@components'
 
 function App() {
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = React.useState(false)
 
   return (
     <div>
@@ -1789,7 +1786,7 @@ function App() {
       )}
       <button onClick={() => setShowModal(true)}>show Modal</button>
     </div>
-  );
+  )
 }
 ```
 
@@ -1800,9 +1797,9 @@ const initialState = {
   name: '',
   points: 0,
   likesGames: true,
-};
+}
 
-type State = typeof initialState;
+type State = typeof initialState
 ```
 
 ```ts
@@ -1810,26 +1807,26 @@ export function updateName(name: string) {
   return {
     type: 'UPDATE_NAME',
     name,
-  } as const;
+  } as const
 }
 
 export function addPoints(points: number) {
   return {
     type: 'ADD_POINTS',
     points,
-  } as const;
+  } as const
 }
 
 export function setLikesGames(value: boolean) {
   return {
     type: 'SET_LIKES_GAMES',
     value,
-  } as const;
+  } as const
 }
 
 type Action = ReturnType<
   typeof updateName | typeof addPoints | typeof setLikesGames
->;
+>
 
 // =>
 // type Action = {
@@ -1845,20 +1842,20 @@ type Action = ReturnType<
 ```
 
 ```ts
-import type { Reducer } from 'redux';
+import type { Reducer } from 'redux'
 
 const reducer = (state: State, action: Action): Reducer<State, Action> => {
   switch (action.type) {
     case 'UPDATE_NAME':
-      return { ...state, name: action.name };
+      return { ...state, name: action.name }
     case 'ADD_POINTS':
-      return { ...state, points: action.points };
+      return { ...state, points: action.points }
     case 'SET_LIKES_GAMES':
-      return { ...state, likesGames: action.value };
+      return { ...state, likesGames: action.value }
     default:
-      return state;
+      return state
   }
-};
+}
 ```
 
 ### React Hook Types
@@ -1874,10 +1871,10 @@ const reducer = (state: State, action: Action): Reducer<State, Action> => {
 
 ```tsx
 function App() {
-  const [user, setUser] = React.useState<IUser>({} as IUser);
-  const handleClick = () => setUser(newUser);
+  const [user, setUser] = React.useState<IUser>({} as IUser)
+  const handleClick = () => setUser(newUser)
 
-  return <div>App</div>;
+  return <div>App</div>
 }
 ```
 
@@ -1887,26 +1884,26 @@ function App() {
   for reducer actions.
 
 ```tsx
-const initialState = { count: 0 };
-type State = typeof initialState;
+const initialState = { count: 0 }
+type State = typeof initialState
 
 type Action =
   | { type: 'increment'; payload: number }
-  | { type: 'decrement'; payload: string };
+  | { type: 'decrement'; payload: string }
 
 function reducer(state: State, action: Action) {
   switch (action.type) {
     case 'increment':
-      return { count: state.count + action.payload };
+      return { count: state.count + action.payload }
     case 'decrement':
-      return { count: state.count - Number(action.payload) };
+      return { count: state.count - Number(action.payload) }
     default:
-      throw new Error('Error');
+      throw new Error('Error')
   }
 }
 
 function Counter() {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, initialState)
 
   return (
     <>
@@ -1918,7 +1915,7 @@ function Counter() {
         +
       </button>
     </>
-  );
+  )
 }
 ```
 
@@ -1931,15 +1928,15 @@ function Counter() {
 
 ```tsx
 function Foo() {
-  const divRef = useRef<HTMLDivElement>(null);
+  const divRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!divRef.current) throw new Error('divRef is not assigned');
+    if (!divRef.current) throw new Error('divRef is not assigned')
 
-    doSomethingWith(divRef.current);
-  });
+    doSomethingWith(divRef.current)
+  })
 
-  return <div ref={divRef}>etc</div>;
+  return <div ref={divRef}>etc</div>
 }
 ```
 
@@ -1949,20 +1946,20 @@ function Foo() {
 
 ```tsx
 function Foo() {
-  const intervalRef = useRef<number | null>(null);
+  const intervalRef = useRef<number | null>(null)
 
   // You manage the ref yourself (that's why it's called MutableRefObject!)
   useEffect(() => {
-    intervalRef.current = setInterval();
-    return () => clearInterval(intervalRef.current);
-  }, []);
+    intervalRef.current = setInterval()
+    return () => clearInterval(intervalRef.current)
+  }, [])
 
   // The ref is not passed to any element's "ref" prop
   return (
     <button onClick={() => clearInterval(intervalRef.current)}>
       Cancel timer
     </button>
-  );
+  )
 }
 ```
 
@@ -1973,47 +1970,47 @@ Use `as const` type assertion to avoid type inference
 
 ```ts
 export function useLoading() {
-  const [isLoading, setState] = React.useState(false);
+  const [isLoading, setState] = React.useState(false)
   const load = () => {
-    setState(true);
-  };
+    setState(true)
+  }
 
   // return `[boolean, () => void]` as want
   // instead of `(boolean | () => void)[]`
-  return [isLoading, load] as const;
+  return [isLoading, load] as const
 }
 ```
 
 More hooks
 
 ```ts
-import type { Dispatch, SetStateAction } from 'react';
-import { useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react'
+import { useState } from 'react'
 
 interface ReturnType {
-  value: boolean;
-  setValue: Dispatch<SetStateAction<boolean>>;
-  setTrue: () => void;
-  setFalse: () => void;
-  toggle: () => void;
+  value: boolean
+  setValue: Dispatch<SetStateAction<boolean>>
+  setTrue: () => void
+  setFalse: () => void
+  toggle: () => void
 }
 
 function useBoolean(defaultValue?: boolean): ReturnType {
-  const [value, setValue] = useState(!!defaultValue);
+  const [value, setValue] = useState(!!defaultValue)
 
-  const setTrue = () => setValue(true);
-  const setFalse = () => setValue(false);
-  const toggle = () => setValue(x => !x);
+  const setTrue = () => setValue(true)
+  const setFalse = () => setValue(false)
+  const toggle = () => setValue(x => !x)
 
-  return { value, setValue, setTrue, setFalse, toggle };
+  return { value, setValue, setTrue, setFalse, toggle }
 }
 
-export default useBoolean;
+export default useBoolean
 ```
 
 ```ts
-import type { RefObject } from 'react';
-import { useEffect, useRef } from 'react';
+import type { RefObject } from 'react'
+import { useEffect, useRef } from 'react'
 
 function useEventListener<T extends HTMLElement = HTMLDivElement>(
   eventName: keyof WindowEventMap,
@@ -2021,125 +2018,125 @@ function useEventListener<T extends HTMLElement = HTMLDivElement>(
   element?: RefObject<T>
 ) {
   // Create a ref that stores handler
-  const savedHandler = useRef<(event: Event) => void>();
+  const savedHandler = useRef<(event: Event) => void>()
 
   useEffect(() => {
     // Define the listening target
-    const targetElement: T | Window = element?.current || window;
+    const targetElement: T | Window = element?.current || window
     if (!(targetElement && targetElement.addEventListener)) {
-      return;
+      return
     }
 
     // Update saved handler if necessary
     if (savedHandler.current !== handler) {
-      savedHandler.current = handler;
+      savedHandler.current = handler
     }
 
     // Create event listener that calls handler function stored in ref
     const eventListener = (event: Event) => {
-      savedHandler?.current(event);
-    };
+      savedHandler?.current(event)
+    }
 
-    targetElement.addEventListener(eventName, eventListener);
+    targetElement.addEventListener(eventName, eventListener)
 
     // Remove event listener on cleanup
     return () => {
-      targetElement.removeEventListener(eventName, eventListener);
-    };
-  }, [eventName, element, handler]);
+      targetElement.removeEventListener(eventName, eventListener)
+    }
+  }, [eventName, element, handler])
 }
 
-export default useEventListener;
+export default useEventListener
 ```
 
 ```ts
-import { useEffect, useReducer, useRef } from 'react';
+import { useEffect, useReducer, useRef } from 'react'
 
-import type { AxiosRequestConfig } from 'axios';
-import axios from 'axios';
+import type { AxiosRequestConfig } from 'axios'
+import axios from 'axios'
 
 // State & hook output
 interface State<T> {
-  status: 'init' | 'fetching' | 'error' | 'fetched';
-  data?: T;
-  error?: string;
+  status: 'init' | 'fetching' | 'error' | 'fetched'
+  data?: T
+  error?: string
 }
 
-type Cache<T> = Record<string, T>;
+type Cache<T> = Record<string, T>
 
 // discriminated union type
 type Action<T> =
   | { type: 'request' }
   | { type: 'success'; payload: T }
-  | { type: 'failure'; payload: string };
+  | { type: 'failure'; payload: string }
 
 function useFetch<T = unknown>(
   url?: string,
   options?: AxiosRequestConfig
 ): State<T> {
-  const cache = useRef<Cache<T>>({});
-  const cancelRequest = useRef<boolean>(false);
+  const cache = useRef<Cache<T>>({})
+  const cancelRequest = useRef<boolean>(false)
 
   const initialState: State<T> = {
     status: 'init',
     error: undefined,
     data: undefined,
-  };
+  }
 
   // Keep state logic separated
   const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
     switch (action.type) {
       case 'request':
-        return { ...initialState, status: 'fetching' };
+        return { ...initialState, status: 'fetching' }
       case 'success':
-        return { ...initialState, status: 'fetched', data: action.payload };
+        return { ...initialState, status: 'fetched', data: action.payload }
       case 'failure':
-        return { ...initialState, status: 'error', error: action.payload };
+        return { ...initialState, status: 'error', error: action.payload }
       default:
-        return state;
+        return state
     }
-  };
+  }
 
-  const [state, dispatch] = useReducer(fetchReducer, initialState);
+  const [state, dispatch] = useReducer(fetchReducer, initialState)
 
   useEffect(() => {
     if (!url) {
-      return;
+      return
     }
 
     const fetchData = async () => {
-      dispatch({ type: 'request' });
+      dispatch({ type: 'request' })
 
       if (cache.current[url]) {
-        dispatch({ type: 'success', payload: cache.current[url] });
+        dispatch({ type: 'success', payload: cache.current[url] })
       } else {
         try {
-          const response = await axios(url, options);
-          cache.current[url] = response.data;
+          const response = await axios(url, options)
+          cache.current[url] = response.data
 
-          if (cancelRequest.current) return;
+          if (cancelRequest.current) return
 
-          dispatch({ type: 'success', payload: response.data });
+          dispatch({ type: 'success', payload: response.data })
         } catch (error) {
-          if (cancelRequest.current) return;
+          if (cancelRequest.current) return
 
-          dispatch({ type: 'failure', payload: error.message });
+          dispatch({ type: 'failure', payload: error.message })
         }
       }
-    };
+    }
 
-    fetchData();
+    fetchData()
 
     return () => {
-      cancelRequest.current = true;
-    };
+      cancelRequest.current = true
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
+  }, [url])
 
-  return state;
+  return state
 }
 
-export default useFetch;
+export default useFetch
 ```
 
 ## React Internationalization
@@ -2158,7 +2155,7 @@ export default useFetch;
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   hello: '你好，{name}',
-};
+}
 ```
 
 ```ts
@@ -2166,38 +2163,38 @@ export default {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   hello: 'Hello，{name}',
-};
+}
 ```
 
 ```ts
-import IntlMessageFormat from 'intl-messageformat';
-import zh from '../locale/zh';
-import en from '../locale/en';
-const MESSAGES = { en, zh };
-const LOCALE = 'en'; // 这里写上决定语言的方法，例如可以从 cookie 判断语言
+import IntlMessageFormat from 'intl-messageformat'
+import zh from '../locale/zh'
+import en from '../locale/en'
+const MESSAGES = { en, zh }
+const LOCALE = 'en' // 这里写上决定语言的方法，例如可以从 cookie 判断语言
 
 class Intl {
   get(key, defaultMessage, options) {
-    let msg = MESSAGES[LOCALE][key];
+    let msg = MESSAGES[LOCALE][key]
 
     if (msg == null) {
       if (defaultMessage != null) {
-        return defaultMessage;
+        return defaultMessage
       }
 
-      return key;
+      return key
     }
 
     if (options) {
-      msg = new IntlMessageFormat(msg, LOCALE);
-      return msg.format(options);
+      msg = new IntlMessageFormat(msg, LOCALE)
+      return msg.format(options)
     }
 
-    return msg;
+    return msg
   }
 }
 
-export default Intl;
+export default Intl
 ```
 
 ### React i18n Library
@@ -2214,20 +2211,20 @@ export default Intl;
 
 ```tsx
 class Component extends React.Component {
-  state = {};
-  handleES6 = event => {};
+  state = {}
+  handleES6 = event => {}
 
   constructor(props) {
-    super(props);
-    this.handleLegacy = this.handleLegacy.bind(this);
+    super(props)
+    this.handleLegacy = this.handleLegacy.bind(this)
   }
 
   handleLegacy(event) {
-    this.setState(prev => ({ ...prev }));
+    this.setState(prev => ({ ...prev }))
   }
 
   render() {
-    return <div>Component</div>;
+    return <div>Component</div>
   }
 }
 ```
@@ -2253,69 +2250,69 @@ Context 中只定义被大多数组件所共用的属性
 增加 `render` 次数, 从而导致性能问题.
 
 ```tsx
-import React, { createContext, useContext, useMemo, useState } from 'react';
-import { fakeAuth } from './app/services/auth';
+import React, { createContext, useContext, useMemo, useState } from 'react'
+import { fakeAuth } from './app/services/auth'
 
-const authContext = createContext();
+const authContext = createContext()
 
 function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null)
 
   const signIn = useCallback(cb => {
     return fakeAuth.signIn(() => {
-      setUser('user');
-      cb();
-    });
-  }, []);
+      setUser('user')
+      cb()
+    })
+  }, [])
 
   const signOut = useCallback(cb => {
     return fakeAuth.signOut(() => {
-      setUser(null);
-      cb();
-    });
-  }, []);
+      setUser(null)
+      cb()
+    })
+  }, [])
 
   const auth = useMemo(() => {
     return {
       user,
       signIn,
       signOut,
-    };
-  }, [user, signIn, signOut]);
+    }
+  }, [user, signIn, signOut])
 
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>
 }
 
 function useAuth() {
-  return useContext(authContext);
+  return useContext(authContext)
 }
 
-export { AuthProvider, useAuth };
+export { AuthProvider, useAuth }
 ```
 
 #### Context Refs
 
 ```tsx
 // Context.js
-import React, { Component, createContext } from 'react';
+import React, { Component, createContext } from 'react'
 
 // React team — thanks for Context API 👍
-const context = createContext();
-const { Provider: ContextProvider, Consumer } = context;
+const context = createContext()
+const { Provider: ContextProvider, Consumer } = context
 
 class Provider extends Component {
   // refs
   // usage: this.textareaRef.current
-  textareaRef = React.createRef();
+  textareaRef = React.createRef()
 
   // input handler
   onInput = e => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
 
     this.setState({
       [name]: value,
-    });
-  };
+    })
+  }
 
   render() {
     return (
@@ -2327,15 +2324,15 @@ class Provider extends Component {
       >
         {this.props.children}
       </ContextProvider>
-    );
+    )
   }
 }
 ```
 
 ```tsx
 // TextArea.jsx
-import React from 'react';
-import { Consumer } from './Context';
+import React from 'react'
+import { Consumer } from './Context'
 
 const TextArea = () => (
   <Consumer>
@@ -2354,7 +2351,7 @@ const TextArea = () => (
       />
     )}
   </Consumer>
-);
+)
 ```
 
 #### Context Internals
@@ -2384,7 +2381,7 @@ class ErrorBoundary extends React.Component {
     hasError: false,
     error: null,
     info: null,
-  };
+  }
 
   // key point
   componentDidCatch(error, info) {
@@ -2392,7 +2389,7 @@ class ErrorBoundary extends React.Component {
       hasError: true,
       error,
       info,
-    });
+    })
   }
 
   render() {
@@ -2403,10 +2400,10 @@ class ErrorBoundary extends React.Component {
           <p>The error: {this.state.error.toString()}</p>
           <p>Where it occurred: {this.state.info.componentStack}</p>
         </div>
-      );
+      )
     }
 
-    return this.props.children;
+    return this.props.children
   }
 }
 ```
@@ -2426,7 +2423,7 @@ class Items extends React.Component {
         <Beverages />
         <Drinks />
       </React.Fragment>
-    );
+    )
   }
 }
 
@@ -2439,7 +2436,7 @@ class Fruit extends React.Component {
         <li>Blueberry</li>
         <li>Cherry</li>
       </>
-    );
+    )
   }
 }
 
@@ -2450,7 +2447,7 @@ class Frameworks extends React.Component {
         <p>JavaScript:</p>
         <li>React</li>,<li>Vuejs</li>,<li>Angular</li>
       </>
-    );
+    )
   }
 }
 ```
@@ -2467,31 +2464,31 @@ that exists **outside** the DOM hierarchy of the parent component
 ```
 
 ```tsx
-const portalRoot = document.getElementById('portal');
+const portalRoot = document.getElementById('portal')
 
 class Portal extends React.Component {
   constructor() {
-    super();
-    this.el = document.createElement('div');
+    super()
+    this.el = document.createElement('div')
   }
 
   componentDidMount = () => {
-    portalRoot.appendChild(this.el);
-  };
+    portalRoot.appendChild(this.el)
+  }
 
   componentWillUnmount = () => {
-    portalRoot.removeChild(this.el);
-  };
+    portalRoot.removeChild(this.el)
+  }
 
   render() {
-    const { children } = this.props;
-    return ReactDOM.createPortal(children, this.el);
+    const { children } = this.props
+    return ReactDOM.createPortal(children, this.el)
   }
 }
 
 class Modal extends React.Component {
   render() {
-    const { children, toggle, on } = this.props;
+    const { children, toggle, on } = this.props
 
     return (
       <Portal>
@@ -2509,23 +2506,23 @@ class Modal extends React.Component {
           </div>
         ) : null}
       </Portal>
-    );
+    )
   }
 }
 
 class App extends React.Component {
   state = {
     showModal: false,
-  };
+  }
 
   toggleModal = () => {
     this.setState({
       showModal: !this.state.showModal,
-    });
-  };
+    })
+  }
 
   render() {
-    const { showModal } = this.state;
+    const { showModal } = this.state
     return (
       <div className="box">
         <h1 class="subtitle">Hello, I am the parent!</h1>
@@ -2536,24 +2533,24 @@ class App extends React.Component {
           {showModal ? <h1>Hello, I am the portal!</h1> : null}
         </Modal>
       </div>
-    );
+    )
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 ### Concurrent Features
 
 ```tsx
-import * as ReactDOM from 'react-dom';
-import App from 'App';
+import * as ReactDOM from 'react-dom'
+import App from 'App'
 
 // Create a root by using ReactDOM.createRoot():
-const root = ReactDOM.createRoot(document.getElementById('app'));
+const root = ReactDOM.createRoot(document.getElementById('app'))
 
 // Render the main <App/> element to the root:
-root.render(<App />);
+root.render(<App />)
 ```
 
 ### Batching Updates
@@ -2567,8 +2564,8 @@ function handleClick() {
   // React 17: Re-rendering happens after both of the states are updated.
   // This is called batching.
   // This is also the default behavior of React 18.
-  setIsBirthday(b => !b);
-  setAge(a => a + 1);
+  setIsBirthday(b => !b)
+  setAge(a => a + 1)
 }
 
 // For the following code blocks,
@@ -2576,22 +2573,22 @@ function handleClick() {
 // 1. Promises:
 function handleClick() {
   fetchSomething().then(() => {
-    setIsBirthday(b => !b);
-    setAge(a => a + 1);
-  });
+    setIsBirthday(b => !b)
+    setAge(a => a + 1)
+  })
 }
 
 // 2. Async code:
 setInterval(() => {
-  setIsBirthday(b => !b);
-  setAge(a => a + 1);
-}, 5000);
+  setIsBirthday(b => !b)
+  setAge(a => a + 1)
+}, 5000)
 
 // 3. Native event handlers:
 element.addEventListener('click', () => {
-  setIsBirthday(b => !b);
-  setAge(a => a + 1);
-});
+  setIsBirthday(b => !b)
+  setAge(a => a + 1)
+})
 ```
 
 Reconciler 注册调度任务时, 会通过节流与防抖提升调度性能:
@@ -2611,70 +2608,70 @@ Reconciler 注册调度任务时, 会通过节流与防抖提升调度性能:
 
 ```ts
 function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
-  const existingCallbackNode = root.callbackNode;
+  const existingCallbackNode = root.callbackNode
   const nextLanes = getNextLanes(
     root,
     root === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes
-  );
+  )
 
   if (nextLanes === NoLanes) {
     if (existingCallbackNode !== null) {
-      cancelCallback(existingCallbackNode);
+      cancelCallback(existingCallbackNode)
     }
 
-    root.callbackNode = null;
-    root.callbackPriority = NoLane;
-    return;
+    root.callbackNode = null
+    root.callbackPriority = NoLane
+    return
   }
 
-  const newCallbackPriority = getHighestPriorityLane(nextLanes);
-  const existingCallbackPriority = root.callbackPriority;
+  const newCallbackPriority = getHighestPriorityLane(nextLanes)
+  const existingCallbackPriority = root.callbackPriority
 
   // Debounce.
   if (existingCallbackPriority === newCallbackPriority) {
     // The priority hasn't changed. We can reuse the existing task. Exit.
-    return;
+    return
   }
 
   // Throttle.
   if (existingCallbackNode != null) {
     // Cancel the existing callback. We'll schedule a new one below.
-    cancelCallback(existingCallbackNode);
+    cancelCallback(existingCallbackNode)
   }
 
   // Schedule a new callback.
-  let newCallbackNode;
+  let newCallbackNode
 
   if (newCallbackPriority === SyncLane) {
     if (root.tag === LegacyRoot) {
-      scheduleLegacySyncCallback(performSyncWorkOnRoot.bind(null, root));
+      scheduleLegacySyncCallback(performSyncWorkOnRoot.bind(null, root))
     } else {
-      scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root));
+      scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root))
     }
 
     if (supportsMicroTasks) {
       scheduleMicroTask(() => {
         if (executionContext === NoContext) {
-          flushSyncCallbacks();
+          flushSyncCallbacks()
         }
-      });
+      })
     } else {
-      scheduleCallback(ImmediateSchedulerPriority, flushSyncCallbacks);
+      scheduleCallback(ImmediateSchedulerPriority, flushSyncCallbacks)
     }
 
-    newCallbackNode = null;
+    newCallbackNode = null
   } else {
-    const eventPriority = lanesToEventPriority(nextLanes);
+    const eventPriority = lanesToEventPriority(nextLanes)
     const schedulerPriorityLevel =
-      eventPriorityToSchedulePriority(eventPriority);
+      eventPriorityToSchedulePriority(eventPriority)
     newCallbackNode = scheduleCallback(
       schedulerPriorityLevel,
       performConcurrentWorkOnRoot.bind(null, root)
-    );
+    )
   }
 
-  root.callbackPriority = newCallbackPriority;
-  root.callbackNode = newCallbackNode;
+  root.callbackPriority = newCallbackPriority
+  root.callbackNode = newCallbackNode
 }
 ```
 
@@ -2692,7 +2689,7 @@ const App = () => (
       </ListLayout>
     </Suspense>
   </Suspense>
-);
+)
 ```
 
 :::tip React Bottlenecks
@@ -2719,11 +2716,11 @@ const ErrorFallback = () => {
         Refresh
       </Button>
     </div>
-  );
-};
+  )
+}
 
 interface AppProviderProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export const AppProvider = ({ children }: AppProviderProps) => {
@@ -2739,8 +2736,8 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         {children}
       </ErrorBoundary>
     </React.Suspense>
-  );
-};
+  )
+}
 ```
 
 #### Lazy Suspense
@@ -2748,9 +2745,9 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 Lazy loading and code splitting:
 
 ```tsx
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react'
 
-const Product = lazy(() => import('./ProductHandler'));
+const Product = lazy(() => import('./ProductHandler'))
 
 const App = () => (
   <div className="product-list">
@@ -2764,37 +2761,37 @@ const App = () => (
       </section>
     </Suspense>
   </div>
-);
+)
 ```
 
 ```tsx
-const { lazy, Suspense } = React;
+const { lazy, Suspense } = React
 
 const Lazy = lazy(
   () =>
     new Promise(resolve => {
       setTimeout(() => {
-        resolve({ default: () => <Resource /> });
-      }, 4000);
+        resolve({ default: () => <Resource /> })
+      }, 4000)
     })
-);
+)
 
 const Resource = () => (
   <div className="box">
     <h1>React Lazy</h1>
     <p>This component loaded after 4 seconds, using React Lazy and Suspense</p>
   </div>
-);
+)
 
 const App = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Lazy />
     </Suspense>
-  );
-};
+  )
+}
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 #### SSR Suspense
@@ -2813,7 +2810,7 @@ const LandingPage = () => (
       <Comments />
     </Suspense>
   </div>
-);
+)
 ```
 
 ## React Performance
@@ -2856,29 +2853,29 @@ the same result given the same props and state,
 use `React.PureComponent`/`React.memo` for a performance boost in some cases.
 
 ```tsx
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 
 const Unstable = props => {
-  console.log(' Rendered Unstable component ');
+  console.log(' Rendered Unstable component ')
 
   return (
     <div>
       <p> {props.value}</p>
     </div>
-  );
-};
+  )
+}
 
 class App extends PureComponent {
   state = {
     value: 1,
-  };
+  }
 
   componentDidMount() {
     setInterval(() => {
       this.setState(() => {
-        return { value: 1 };
-      });
-    }, 2000);
+        return { value: 1 }
+      })
+    }, 2000)
   }
 
   render() {
@@ -2886,37 +2883,37 @@ class App extends PureComponent {
       <div>
         <Unstable value={this.state.value} />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
 ```
 
 ```tsx
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 const Unstable = React.memo(props => {
-  console.log(' Rendered this component ');
+  console.log(' Rendered this component ')
 
   return (
     <div>
       <p> {props.value}</p>
     </div>
-  );
-});
+  )
+})
 
 class App extends Component {
   state = {
     value: 1,
-  };
+  }
 
   componentDidMount() {
     setInterval(() => {
       this.setState(() => {
-        return { value: 1 };
-      });
-    }, 2000);
+        return { value: 1 }
+      })
+    }, 2000)
   }
 
   render() {
@@ -2924,11 +2921,11 @@ class App extends Component {
       <div>
         <Unstable value={this.state.value} />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
 ```
 
 [Prevent useless re-rendering](https://www.developerway.com/posts/react-re-renders-guide):
@@ -2959,10 +2956,10 @@ export default App;
 // When <App> re-rendering, <ExpensiveTree> will re-rendering:
 // <ExpensiveTree /> is actually <ExpensiveTree props={}>.
 // Every time <App> re-rendering will pass a new `{}` reference to <ExpensiveTree>.
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function App() {
-  const [color, setColor] = useState('red');
+  const [color, setColor] = useState('red')
 
   return (
     <div>
@@ -2970,17 +2967,17 @@ export default function App() {
       <p style={{ color }}>Hello, world!</p>
       <ExpensiveTree />
     </div>
-  );
+  )
 }
 
 function ExpensiveTree() {
-  const now = performance.now();
+  const now = performance.now()
 
   while (performance.now() - now < 100) {
     // Artificial delay -- do nothing for 100ms
   }
 
-  return <p>I am a very slow component tree.</p>;
+  return <p>I am a very slow component tree.</p>
 }
 ```
 
@@ -2995,17 +2992,17 @@ export default function App() {
       <Form />
       <ExpensiveTree />
     </>
-  );
+  )
 }
 
 function Form() {
-  const [color, setColor] = useState('red');
+  const [color, setColor] = useState('red')
   return (
     <>
       <input value={color} onChange={e => setColor(e.target.value)} />
       <p style={{ color }}>Hello, world!</p>
     </>
-  );
+  )
 }
 ```
 
@@ -3020,17 +3017,17 @@ export default function App() {
       <p>Hello, world!</p>
       <ExpensiveTree />
     </ColorPicker>
-  );
+  )
 }
 
 function ColorPicker({ children }) {
-  const [color, setColor] = useState('red');
+  const [color, setColor] = useState('red')
   return (
     <div style={{ color }}>
       <input value={color} onChange={e => setColor(e.target.value)} />
       {children}
     </div>
-  );
+  )
 }
 ```
 
@@ -3042,7 +3039,7 @@ function Parent({ children, lastChild }) {
       {children} {/* Bailed out */}
       {lastChild} {/* Bailed out */}
     </div>
-  );
+  )
 }
 ```
 
@@ -3051,14 +3048,14 @@ Immutable objects:
 ```tsx
 // BAD
 function App1(items) {
-  return <BigListComponent style={{ width: '100%' }} items={items} />;
+  return <BigListComponent style={{ width: '100%' }} items={items} />
 }
 
 // GOOD
-const bigListStyle = { width: '100%' };
+const bigListStyle = { width: '100%' }
 
 function App2(items) {
-  return <BigListComponent style={bigListStyle} items={items} />;
+  return <BigListComponent style={bigListStyle} items={items} />
 }
 ```
 
@@ -3067,61 +3064,61 @@ Immutable functions:
 ```tsx
 // BAD: Inline function
 function App1(items) {
-  return <BigListComponent onClick={() => dispatchEvent()} />;
+  return <BigListComponent onClick={() => dispatchEvent()} />
 }
 
 // GOOD: Reference to a function
-const clickHandler = () => dispatchEvent();
+const clickHandler = () => dispatchEvent()
 
 function App2(items) {
-  return <BigListComponent onClick={clickHandler} />;
+  return <BigListComponent onClick={clickHandler} />
 }
 ```
 
 ### Code Splitting
 
 ```tsx
-import React, { Component } from 'react';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
+import React, { Component } from 'react'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
 
 const formValidator = Yup.object().shape({
   /* ... */
-});
+})
 
 export default class Form extends Component {
   render() {
-    return <Formik validationSchema={formValidator}>{/* ... */}</Formik>;
+    return <Formik validationSchema={formValidator}>{/* ... */}</Formik>
   }
 }
 ```
 
 ```tsx
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 export default class App extends Component {
   constructor() {
-    super();
+    super()
 
     this.state = {
       Form: undefined,
-    };
+    }
   }
 
   render() {
-    const { Form } = this.state;
+    const { Form } = this.state
 
     return (
       <div className="app">
         {Form ? <Form /> : <button onClick={this.showForm}>Show form</button>}
       </div>
-    );
+    )
   }
 
   showForm = async () => {
-    const { default: Form } = await import('./Form');
-    this.setState({ Form });
-  };
+    const { default: Form } = await import('./Form')
+    this.setState({ Form })
+  }
 }
 ```
 
@@ -3144,23 +3141,23 @@ function MyComponent() {
       <span className={'heading'}>{'Title'}</span>
       <span className={'description'}>{'Description'}</span>
     </div>
-  );
+  )
 }
 ```
 
 ```tsx
-import ShallowRenderer from 'react-test-renderer/shallow';
+import ShallowRenderer from 'react-test-renderer/shallow'
 
-const renderer = new ShallowRenderer();
-renderer.render(<MyComponent />);
+const renderer = new ShallowRenderer()
+renderer.render(<MyComponent />)
 
-const result = renderer.getRenderOutput();
+const result = renderer.getRenderOutput()
 
-expect(result.type).toBe('div');
+expect(result.type).toBe('div')
 expect(result.props.children).toEqual([
   <span className={'heading'}>{'Title'}</span>,
   <span className={'description'}>{'Description'}</span>,
-]);
+])
 ```
 
 ### Test Renderer
@@ -3171,15 +3168,15 @@ expect(result.props.children).toEqual([
 而无需使用浏览器或 jsdom.
 
 ```tsx
-import TestRenderer from 'react-test-renderer';
+import TestRenderer from 'react-test-renderer'
 
-const Link = ({ page, children }) => <a href={page}>{children}</a>;
+const Link = ({ page, children }) => <a href={page}>{children}</a>
 
 const testRenderer = TestRenderer.create(
   <Link page={'https://www.facebook.com/'}>{'Facebook'}</Link>
-);
+)
 
-console.log(testRenderer.toJSON());
+console.log(testRenderer.toJSON())
 // {
 //   type: 'a',
 //   props: { href: 'https://www.facebook.com/' },
@@ -3204,12 +3201,12 @@ npm i -D enzyme enzyme-adapter-react-16 @types/enzyme
 ```
 
 ```tsx
-import React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { DataTable } from './components';
+import React from 'react'
+import { configure, shallow } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+import { DataTable } from './components'
 
-configure({ adapter: new Adapter() });
+configure({ adapter: new Adapter() })
 
 describe(() => {
   it('renders in table rows based on provided columns', () => {
@@ -3217,7 +3214,7 @@ describe(() => {
       { header: 'ID', name: 'id' },
       { header: 'Name', name: 'name' },
       { header: 'Email', name: 'email' },
-    ];
+    ]
     const data = [
       { id: 5, name: 'John', email: 'john@example.com' },
       { id: 6, name: 'Liam', email: 'liam@example.com' },
@@ -3229,44 +3226,44 @@ describe(() => {
         hello: 'hello world',
       },
       { id: 25, name: 'Amelia', email: 'amelia@example.com' },
-    ];
+    ]
 
     // Shallow render Data Table
-    const container = shallow(<DataTable data={data} cols={cols} />);
+    const container = shallow(<DataTable data={data} cols={cols} />)
 
     // There should be ONLY 1 table element
-    const table = container.find('table');
-    expect(table).toHaveLength(1);
+    const table = container.find('table')
+    expect(table).toHaveLength(1)
 
     // The table should have ONLY 1 thead element
-    const thead = table.find('thead');
-    expect(thead).toHaveLength(1);
+    const thead = table.find('thead')
+    expect(thead).toHaveLength(1)
 
     // The number of th tags should be equal to number of columns
-    const headers = thead.find('th');
-    expect(headers).toHaveLength(cols.length);
+    const headers = thead.find('th')
+    expect(headers).toHaveLength(cols.length)
     // Each th tag text should equal to column header
     headers.forEach((th, idx) => {
-      expect(th.text()).toEqual(cols[idx].header);
-    });
+      expect(th.text()).toEqual(cols[idx].header)
+    })
 
     // The table should have ONLY 1 tbody tag
-    const tbody = table.find('tbody');
-    expect(tbody).toHaveLength(1);
+    const tbody = table.find('tbody')
+    expect(tbody).toHaveLength(1)
 
     // tbody tag should have the same number of tr tags as data rows
-    const rows = tbody.find('tr');
-    expect(rows).toHaveLength(data.length);
+    const rows = tbody.find('tr')
+    expect(rows).toHaveLength(data.length)
     // Loop through each row and check the content
     rows.forEach((tr, rowIndex) => {
-      const cells = tr.find('td');
-      expect(cells).toHaveLength(cols.length);
-      expect(cells.at(0).text()).toEqual(data[rowIndex].id);
-      expect(cells.at(1).text()).toEqual(data[rowIndex].name);
-      expect(cells.at(2).text()).toEqual(data[rowIndex].email);
-    });
-  });
-});
+      const cells = tr.find('td')
+      expect(cells).toHaveLength(cols.length)
+      expect(cells.at(0).text()).toEqual(data[rowIndex].id)
+      expect(cells.at(1).text()).toEqual(data[rowIndex].name)
+      expect(cells.at(2).text()).toEqual(data[rowIndex].email)
+    })
+  })
+})
 ```
 
 ### React Testing Library Mindset
@@ -3302,68 +3299,68 @@ npm i -D @testing-library/react @testing-library/dom @testing-library/jest-dom @
 ### React Testing Library Basis
 
 ```tsx
-import React from 'react';
+import React from 'react'
 
 /**
  * render: render the component
  * screen: finding elements along with user
  **/
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { Checkbox, Welcome } from './';
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { Checkbox, Welcome } from './'
 
 describe('Welcome should', () => {
   test('has correct welcome message', () => {
-    render(<Welcome firstName="John" lastName="Doe" />);
-    expect(screen.getByRole('heading')).toHaveTextContent('Welcome, John Doe');
-  });
+    render(<Welcome firstName="John" lastName="Doe" />)
+    expect(screen.getByRole('heading')).toHaveTextContent('Welcome, John Doe')
+  })
 
   test('has correct input value', () => {
-    render(<Welcome firstName="John" lastName="Doe" />);
+    render(<Welcome firstName="John" lastName="Doe" />)
     expect(screen.getByRole('form')).toHaveFormValues({
       firstName: 'John',
       lastName: 'Doe',
-    });
-  });
+    })
+  })
 
   test('handles click correctly', () => {
-    render(<Checkbox />);
-    userEvent.click(screen.getByText('Check'));
-    expect(screen.getByLabelText('Check')).toBeChecked();
-  });
-});
+    render(<Checkbox />)
+    userEvent.click(screen.getByText('Check'))
+    expect(screen.getByLabelText('Check')).toBeChecked()
+  })
+})
 ```
 
 ```tsx
-import React from 'react';
-import { fireEvent, render, wait } from '@testing-library/react';
+import React from 'react'
+import { fireEvent, render, wait } from '@testing-library/react'
 
-import { App } from './App';
-import { api } from './api';
+import { App } from './App'
+import { api } from './api'
 
 // Normally you can mock entire module using jest.mock('./api);
-const mockCreateItem = (api.createItem = jest.fn());
+const mockCreateItem = (api.createItem = jest.fn())
 
 test('allows users to add items to their list', async () => {
-  const todoText = 'Learn spanish';
-  mockCreateItem.mockResolvedValueOnce({ id: 123, text: todoText });
+  const todoText = 'Learn spanish'
+  mockCreateItem.mockResolvedValueOnce({ id: 123, text: todoText })
 
-  const { getByText, getByLabelText } = render(<App />);
+  const { getByText, getByLabelText } = render(<App />)
 
-  const input = getByLabelText('What needs to be done?');
-  const button = getByText('Add #1');
+  const input = getByLabelText('What needs to be done?')
+  const button = getByText('Add #1')
 
-  fireEvent.change(input, { target: { value: todoText } });
-  fireEvent.click(button);
+  fireEvent.change(input, { target: { value: todoText } })
+  fireEvent.click(button)
 
-  await wait(() => getByText(todoText));
+  await wait(() => getByText(todoText))
 
-  expect(mockCreateItem).toBeCalledTimes(1);
+  expect(mockCreateItem).toBeCalledTimes(1)
   expect(mockCreateItem).toBeCalledWith(
     '/items',
     expect.objectContaining({ text: todoText })
-  );
-});
+  )
+})
 ```
 
 ### React Testing Library Events
@@ -3386,9 +3383,9 @@ npm i -D @testing-library/user-event @testing-library/dom
 ```
 
 ```tsx
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 test('click', () => {
   render(
@@ -3396,11 +3393,11 @@ test('click', () => {
       <label htmlFor="checkbox">Check</label>
       <input id="checkbox" type="checkbox" />
     </div>
-  );
+  )
 
-  userEvent.click(screen.getByText('Check'));
-  expect(screen.getByLabelText('Check')).toBeChecked();
-});
+  userEvent.click(screen.getByText('Check'))
+  expect(screen.getByLabelText('Check')).toBeChecked()
+})
 ```
 
 ### React Hooks Testing Library
@@ -3408,19 +3405,19 @@ test('click', () => {
 #### Basic Hook Testing
 
 ```ts
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react'
 
 export default function useCounter(initialValue = 0) {
-  const [count, setCount] = useState(initialValue);
-  const increment = useCallback(() => setCount(x => x + 1), []);
-  const reset = useCallback(() => setCount(initialValue), [initialValue]);
-  return { count, increment, reset };
+  const [count, setCount] = useState(initialValue)
+  const increment = useCallback(() => setCount(x => x + 1), [])
+  const reset = useCallback(() => setCount(initialValue), [initialValue])
+  return { count, increment, reset }
 }
 ```
 
 ```ts
-import { act, renderHook } from '@testing-library/react-hooks';
-import useCounter from './useCounter';
+import { act, renderHook } from '@testing-library/react-hooks'
+import useCounter from './useCounter'
 
 test('should reset counter to updated initial value', () => {
   const { result, rerender } = renderHook(
@@ -3428,84 +3425,84 @@ test('should reset counter to updated initial value', () => {
     {
       initialProps: { initialValue: 0 },
     }
-  );
+  )
 
-  rerender({ initialValue: 10 });
+  rerender({ initialValue: 10 })
 
   act(() => {
-    result.current.reset();
-  });
+    result.current.reset()
+  })
 
-  expect(result.current.count).toBe(10);
-});
+  expect(result.current.count).toBe(10)
+})
 ```
 
 #### Async Hook Testing
 
 ```ts
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react'
 
 export default function useCounter(initialValue = 0) {
-  const [count, setCount] = useState(initialValue);
-  const step = useContext(CounterStepContext);
-  const increment = useCallback(() => setCount(x => x + step), [step]);
+  const [count, setCount] = useState(initialValue)
+  const step = useContext(CounterStepContext)
+  const increment = useCallback(() => setCount(x => x + step), [step])
   const incrementAsync = useCallback(
     () => setTimeout(increment, 100),
     [increment]
-  );
-  const reset = useCallback(() => setCount(initialValue), [initialValue]);
-  return { count, increment, incrementAsync, reset };
+  )
+  const reset = useCallback(() => setCount(initialValue), [initialValue])
+  return { count, increment, incrementAsync, reset }
 }
 ```
 
 ```ts
-import { renderHook } from '@testing-library/react-hooks';
-import useCounter from './useCounter';
+import { renderHook } from '@testing-library/react-hooks'
+import useCounter from './useCounter'
 
 test('should increment counter after delay', async () => {
-  const { result, waitForNextUpdate } = renderHook(() => useCounter());
-  result.current.incrementAsync();
-  await waitForNextUpdate();
-  expect(result.current.count).toBe(1);
-});
+  const { result, waitForNextUpdate } = renderHook(() => useCounter())
+  result.current.incrementAsync()
+  await waitForNextUpdate()
+  expect(result.current.count).toBe(1)
+})
 ```
 
 #### Error Hook Testing
 
 ```ts
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react'
 
 export default function useCounter(initialValue = 0) {
-  const [count, setCount] = useState(initialValue);
-  const step = useContext(CounterStepContext);
-  const increment = useCallback(() => setCount(x => x + step), [step]);
+  const [count, setCount] = useState(initialValue)
+  const step = useContext(CounterStepContext)
+  const increment = useCallback(() => setCount(x => x + step), [step])
   const incrementAsync = useCallback(
     () => setTimeout(increment, 100),
     [increment]
-  );
-  const reset = useCallback(() => setCount(initialValue), [initialValue]);
+  )
+  const reset = useCallback(() => setCount(initialValue), [initialValue])
 
   if (count > 9000) {
-    throw new Error("It's over 9000!");
+    throw new Error("It's over 9000!")
   }
 
-  return { count, increment, incrementAsync, reset };
+  return { count, increment, incrementAsync, reset }
 }
 ```
 
 ```ts
-import { act, renderHook } from '@testing-library/react-hooks';
-import { useCounter } from './useCounter';
+import { act, renderHook } from '@testing-library/react-hooks'
+import { useCounter } from './useCounter'
 
 it('should throw when over 9000', () => {
-  const { result } = renderHook(() => useCounter(9000));
+  const { result } = renderHook(() => useCounter(9000))
 
   act(() => {
-    result.current.increment();
-  });
+    result.current.increment()
+  })
 
-  expect(result.error).toEqual(Error("It's over 9000!"));
-});
+  expect(result.error).toEqual(Error("It's over 9000!"))
+})
 ```
 
 ### React Testing Library API
@@ -3524,21 +3521,21 @@ it('should throw when over 9000', () => {
 | findAllBy  | throw    | array   | array    | Yes   |
 
 ```tsx
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import TransactionCreateStepTwo from './TransactionCreateStepTwo';
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import TransactionCreateStepTwo from './TransactionCreateStepTwo'
 
 test('if amount and note is entered, pay button becomes enabled', async () => {
   render(
     <TransactionCreateStepTwo sender={{ id: '5' }} receiver={{ id: '5' }} />
-  );
+  )
 
-  expect(await screen.findByRole('button', { name: /pay/i })).toBeDisabled();
+  expect(await screen.findByRole('button', { name: /pay/i })).toBeDisabled()
 
-  userEvent.type(screen.getByPlaceholderText(/amount/i), '50');
-  userEvent.type(screen.getByPlaceholderText(/add a note/i), 'dinner');
-  expect(await screen.findByRole('button', { name: /pay/i })).toBeEnabled();
-});
+  userEvent.type(screen.getByPlaceholderText(/amount/i), '50')
+  userEvent.type(screen.getByPlaceholderText(/add a note/i), 'dinner')
+  expect(await screen.findByRole('button', { name: /pay/i })).toBeEnabled()
+})
 ```
 
 ### React Testing Library Reference
@@ -3556,20 +3553,20 @@ test('if amount and note is entered, pay button becomes enabled', async () => {
 
 ```ts
 // bad
-import reservationCard from './ReservationCard';
+import reservationCard from './ReservationCard'
 ```
 
 ```ts
 // good
-import ReservationCard from './ReservationCard';
+import ReservationCard from './ReservationCard'
 ```
 
 ```tsx
 // bad
-const ReservationItem = <ReservationCard />;
+const ReservationItem = <ReservationCard />
 
 // good
-const reservationItem = <ReservationCard />;
+const reservationItem = <ReservationCard />
 ```
 
 - Setting displayName for HOC:
@@ -3578,21 +3575,21 @@ const reservationItem = <ReservationCard />;
 // bad
 function withFoo(WrappedComponent) {
   return function WithFoo(props) {
-    return <WrappedComponent {...props} foo />;
-  };
+    return <WrappedComponent {...props} foo />
+  }
 }
 
 // good
 function withFoo(WrappedComponent) {
   function WithFoo(props) {
-    return <WrappedComponent {...props} foo />;
+    return <WrappedComponent {...props} foo />
   }
 
   const wrappedComponentName =
-    WrappedComponent.displayName || WrappedComponent.name || 'Component';
+    WrappedComponent.displayName || WrappedComponent.name || 'Component'
 
-  WithFoo.displayName = `withFoo(${wrappedComponentName})`;
-  return WithFoo;
+  WithFoo.displayName = `withFoo(${wrappedComponentName})`
+  return WithFoo
 }
 ```
 
@@ -3605,16 +3602,16 @@ function withFoo(WrappedComponent) {
 // bad
 class Component {
   render() {
-    const { irrelevantProp, ...relevantProps } = this.props;
-    return <WrappedComponent {...this.props} />;
+    const { irrelevantProp, ...relevantProps } = this.props
+    return <WrappedComponent {...this.props} />
   }
 }
 
 // good
 class Component {
   render() {
-    const { irrelevantProp, ...relevantProps } = this.props;
-    return <WrappedComponent {...relevantProps} />;
+    const { irrelevantProp, ...relevantProps } = this.props
+    return <WrappedComponent {...relevantProps} />
   }
 }
 ```
@@ -3626,36 +3623,36 @@ class Component {
 ```tsx
 // bad
 // deprecated
-const Component = <Foo ref="myRef" />;
+const Component = <Foo ref="myRef" />
 
 // good
 const Component = (
   <Foo
     ref={ref => {
-      this.myRef = ref;
+      this.myRef = ref
     }}
   />
-);
+)
 ```
 
 ### Alignment Style
 
 ```tsx
 // good
-const Component = <Foo superLongParam="bar" anotherSuperLongParam="baz" />;
+const Component = <Foo superLongParam="bar" anotherSuperLongParam="baz" />
 
 // if props fit in one line then keep it on the same line
-const Component = <Foo bar="bar" />;
+const Component = <Foo bar="bar" />
 
 // children get indented normally
 const Component = (
   <Foo superLongParam="bar" anotherSuperLongParam="baz">
     <Bar />
   </Foo>
-);
+)
 
 // good
-const Component = <div>{showButton && <Button />}</div>;
+const Component = <div>{showButton && <Button />}</div>
 ```
 
 ### Quotes Style
@@ -3667,13 +3664,13 @@ const Component = <div>{showButton && <Button />}</div>;
 // <Foo bar='bar' />
 
 // good
-const App = <Foo bar="bar" />;
+const App = <Foo bar="bar" />
 
 // bad
 // <Foo style={{ left: "20px" }} />
 
 // good
-const App = <Foo style={{ left: '20px' }} />;
+const App = <Foo style={{ left: '20px' }} />
 ```
 
 ### Spacing Style
@@ -3689,7 +3686,7 @@ const App = <Foo style={{ left: '20px' }} />;
 // <Foo                 />
 
 // good
-const App = <Foo />;
+const App = <Foo />
 ```
 
 ```tsx
@@ -3697,7 +3694,7 @@ const App = <Foo />;
 // <Foo bar={ baz } />
 
 // good
-const App = <Foo bar={baz} />;
+const App = <Foo bar={baz} />
 ```
 
 ### Ordering of Class Component
@@ -3749,52 +3746,52 @@ const App = <Foo bar={baz} />;
 
 ```tsx
 // Import React.js, styled-components and css
-import React from 'react';
-import styled, { css } from 'styled-components';
-const container = document.querySelector('.container');
+import React from 'react'
+import styled, { css } from 'styled-components'
+const container = document.querySelector('.container')
 
 // Define new const with bold style
 const headingStyle = css`
   font-weight: bold;
-`;
+`
 
 // Define typography styles
 const H1 = styled.h1`
   font-size: 54px;
   // Using headingStyle const
   ${headingStyle}
-`;
+`
 const H2 = styled.h2`
   font-size: 36px;
   // Using headingStyle const
   ${headingStyle}
-`;
+`
 const H3 = styled.h3`
   font-size: 24px;
   // Using headingStyle const
   ${headingStyle}
-`;
+`
 const H4 = styled.h4`
   font-size: 16px;
   // Using headingStyle const
   ${headingStyle}
-`;
+`
 const H5 = styled.h5`
   font-size: 14px;
   // Using headingStyle const
   ${headingStyle}
-`;
+`
 const H6 = styled.h6`
   font-size: 12px;
   // Using headingStyle const
   ${headingStyle}
-`;
+`
 const Text = styled.p`
   font-size: 16px;
-`;
+`
 const Small = styled.small`
   font-size: 80%;
-`;
+`
 
 // Use our styles
 const WrapperContainer = () => (
@@ -3808,19 +3805,19 @@ const WrapperContainer = () => (
     <Text>Body text</Text>
     <Small>Small text</Small>
   </div>
-);
+)
 
-ReactDOM.render(<WrapperContainer />, container);
+ReactDOM.render(<WrapperContainer />, container)
 ```
 
 ### Styled Component Extension
 
 ```tsx
 // Import React.js and styled-components
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-const container = document.querySelector('.container');
+const container = document.querySelector('.container')
 
 const Button = styled.button`
   padding: 12px 24px;
@@ -3832,17 +3829,17 @@ const Button = styled.button`
     0 10px 20px rgba(0, 0, 0, 0.19),
     0 6px 6px rgba(0, 0, 0, 0.23);
   cursor: pointer;
-`;
+`
 
 // Using extend to create a red variant of the button
 const RedButton = Button.extend`
   background-color: #e74c3c;
-`;
+`
 
 // Using extend to create a green variant of the button
 const GreenButton = Button.extend`
   background-color: #2ecc71;
-`;
+`
 
 // Use our styles
 const WrapperContainer = () => (
@@ -3851,19 +3848,19 @@ const WrapperContainer = () => (
     <RedButton>Red button</RedButton>
     <GreenButton>Green button</GreenButton>
   </div>
-);
+)
 
-ReactDOM.render(<WrapperContainer />, container);
+ReactDOM.render(<WrapperContainer />, container)
 ```
 
 ### Styled Component Props
 
 ```tsx
 // Import React.js, styled-components and css
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react'
+import styled, { css } from 'styled-components'
 
-const container = document.querySelector('.container');
+const container = document.querySelector('.container')
 
 const Button = styled.button`
   padding: 12px 24px;
@@ -3895,7 +3892,7 @@ const Button = styled.button`
     `}
   // We can also use a ternary operator for "binary" changes
   color: ${props => (props.gray ? '#2c3e50' : '#fff')};
-`;
+`
 
 const WrapperContainer = () => (
   <div>
@@ -3905,15 +3902,15 @@ const WrapperContainer = () => (
     {/* Button with prop "green" */}
     <Button green>Green button</Button>
   </div>
-);
+)
 
-ReactDOM.render(<WrapperContainer />, container);
+ReactDOM.render(<WrapperContainer />, container)
 ```
 
 ### Variants Driven Components
 
 ```ts
-import { styled } from '@stitches/react';
+import { styled } from '@stitches/react'
 
 const Box = styled('div', {
   variants: {
@@ -3973,7 +3970,7 @@ const Box = styled('div', {
       },
     },
   ],
-});
+})
 ```
 
 ## Create React App
@@ -4007,15 +4004,15 @@ Initialization in `react-scripts/scripts/init.js`:
 - 可以用于改变默认 registry:
 
 ```ts
-'use strict';
+'use strict'
 
 const registries = {
   npm: 'https://registry.npmjs.org',
   yarn: 'https://registry.yarnpkg.com',
   aliyun: 'https://registry.npm.taobao.org',
-};
+}
 
-module.exports = registries;
+module.exports = registries
 ```
 
 - 自定义安装默认依赖 (`react`, `react-dom`, `react-router`, `redux` etc.)
@@ -4084,12 +4081,12 @@ const webpackConfig = {
     cacheCompression: isEnvProduction,
     compact: isEnvProduction,
   },
-};
+}
 ```
 
 ```ts
 // Add Webpack bundle analyzer plugin.
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 const webpackConfig = {
   plugins: [
@@ -4098,7 +4095,7 @@ const webpackConfig = {
         analyzerPort: 5000,
       }),
   ].filter(Boolean),
-};
+}
 ```
 
 ### CRA Usage
@@ -4129,7 +4126,7 @@ class Component {
     // Note: this is an escape hatch and should be used sparingly!
     // Normally recommend using `import` for getting asset URLs
     // as described in “Adding Images and Fonts” section.
-    return <img src={`${process.env.PUBLIC_URL}/img/logo.png`} alt="Here" />;
+    return <img src={`${process.env.PUBLIC_URL}/img/logo.png`} alt="Here" />
   }
 }
 ```
@@ -4170,7 +4167,7 @@ const App = () => (
       />
     </form>
   </div>
-);
+)
 ```
 
 ```html
@@ -4188,22 +4185,22 @@ Code splitting for [production build](https://create-react-app.dev/docs/producti
 with `import('dep').then();`:
 
 ```ts
-import type { ReportHandler } from 'web-vitals';
+import type { ReportHandler } from 'web-vitals'
 
 const reportWebVitals = (onPerfEntry?: ReportHandler) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
     // Code splitting into separate chunk
     import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(onPerfEntry);
-      getFID(onPerfEntry);
-      getFCP(onPerfEntry);
-      getLCP(onPerfEntry);
-      getTTFB(onPerfEntry);
-    });
+      getCLS(onPerfEntry)
+      getFID(onPerfEntry)
+      getFCP(onPerfEntry)
+      getLCP(onPerfEntry)
+      getTTFB(onPerfEntry)
+    })
   }
-};
+}
 
-export default reportWebVitals;
+export default reportWebVitals
 ```
 
 #### CRA Service Worker
@@ -4231,7 +4228,7 @@ function App() {
     <BrowserRouter basename="/calendar">
       <Link to="/today" />
     </BrowserRouter>
-  );
+  )
 }
 ```
 
@@ -4297,17 +4294,17 @@ In `Create React App`
 [code](https://github.com/facebook/create-react-app/blob/main/packages/create-react-app/createReactApp.js):
 
 ```ts
-const templatesVersionMinimum = '3.3.0';
+const templatesVersionMinimum = '3.3.0'
 
 // Assume compatibility if we can't test the version.
 if (!semver.valid(packageVersion)) {
-  packageVersion = templatesVersionMinimum;
+  packageVersion = templatesVersionMinimum
 }
 
 // Only support templates when used alongside new react-scripts versions.
-const supportsTemplates = semver.gte(packageVersion, templatesVersionMinimum);
+const supportsTemplates = semver.gte(packageVersion, templatesVersionMinimum)
 if (supportsTemplates) {
-  allDependencies.push(templateToInstall);
+  allDependencies.push(templateToInstall)
 }
 ```
 
@@ -4338,7 +4335,7 @@ if (!fs.existsSync(paths.appTypeDeclarations)) {
   fs.writeFileSync(
     paths.appTypeDeclarations,
     `/// <reference types="react-scripts" />${os.EOL}`
-  );
+  )
 }
 ```
 

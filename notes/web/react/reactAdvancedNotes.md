@@ -147,9 +147,9 @@ Reconciler Work Loop (`Fiber` 构造循环) 负责实现 `Task`.
 
 ```ts
 // Legacy Mode
-import type { ReactElement } from 'react';
-import Reconciler from './reconciler';
-import type { Container } from './types';
+import type { ReactElement } from 'react'
+import Reconciler from './reconciler'
+import type { Container } from './types'
 
 const Renderer = {
   render: (
@@ -158,20 +158,20 @@ const Renderer = {
     callback?: Function
   ): void => {
     if (container) {
-      const root = Reconciler.createContainer(container, 0, false, null);
-      Reconciler.updateContainer(element, root, null);
+      const root = Reconciler.createContainer(container, 0, false, null)
+      Reconciler.updateContainer(element, root, null)
     }
   },
-};
+}
 
-export default Renderer;
+export default Renderer
 ```
 
 ```ts
 // Modern Mode
-import type { ReactElement } from 'react';
-import Reconciler from './reconciler';
-import type { Container, OpaqueRoot } from './types';
+import type { ReactElement } from 'react'
+import Reconciler from './reconciler'
+import type { Container, OpaqueRoot } from './types'
 
 const Renderer = {
   createRoot: (
@@ -179,18 +179,18 @@ const Renderer = {
     callback?: Function
   ): OpaqueRoot => {
     if (container) {
-      const root = Reconciler.createContainer(container, 0, false, null);
+      const root = Reconciler.createContainer(container, 0, false, null)
 
       root.render = function (element: ReactElement) {
-        Reconciler.updateContainer(element, this, null);
-      };
+        Reconciler.updateContainer(element, this, null)
+      }
 
-      return root;
+      return root
     }
   },
-};
+}
 
-export default Renderer;
+export default Renderer
 ```
 
 ### ReactComponent SetState
@@ -294,58 +294,58 @@ React 17, stable concurrent mode with
 [`Lanes`](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js):
 
 ```ts
-export type Lanes = number;
-export type Lane = number;
+export type Lanes = number
+export type Lane = number
 
-export const TotalLanes = 31;
+export const TotalLanes = 31
 
-export const NoLanes: Lanes = /*                        */ 0b0000000000000000000000000000000;
-export const NoLane: Lane = /*                          */ 0b0000000000000000000000000000000;
+export const NoLanes: Lanes = /*                        */ 0b0000000000000000000000000000000
+export const NoLane: Lane = /*                          */ 0b0000000000000000000000000000000
 
-export const SyncLane: Lane = /*                        */ 0b0000000000000000000000000000001;
+export const SyncLane: Lane = /*                        */ 0b0000000000000000000000000000001
 
-export const InputContinuousHydrationLane: Lane = /*    */ 0b0000000000000000000000000000010;
-export const InputContinuousLane: Lanes = /*            */ 0b0000000000000000000000000000100;
+export const InputContinuousHydrationLane: Lane = /*    */ 0b0000000000000000000000000000010
+export const InputContinuousLane: Lanes = /*            */ 0b0000000000000000000000000000100
 
-export const DefaultHydrationLane: Lane = /*            */ 0b0000000000000000000000000001000;
-export const DefaultLane: Lanes = /*                    */ 0b0000000000000000000000000010000;
+export const DefaultHydrationLane: Lane = /*            */ 0b0000000000000000000000000001000
+export const DefaultLane: Lanes = /*                    */ 0b0000000000000000000000000010000
 
-const TransitionHydrationLane: Lane = /*                */ 0b0000000000000000000000000100000;
-const TransitionLanes: Lanes = /*                       */ 0b0000000001111111111111111000000;
-const TransitionLane1: Lane = /*                        */ 0b0000000000000000000000001000000;
-const TransitionLane2: Lane = /*                        */ 0b0000000000000000000000010000000;
-const TransitionLane3: Lane = /*                        */ 0b0000000000000000000000100000000;
-const TransitionLane4: Lane = /*                        */ 0b0000000000000000000001000000000;
-const TransitionLane5: Lane = /*                        */ 0b0000000000000000000010000000000;
-const TransitionLane6: Lane = /*                        */ 0b0000000000000000000100000000000;
-const TransitionLane7: Lane = /*                        */ 0b0000000000000000001000000000000;
-const TransitionLane8: Lane = /*                        */ 0b0000000000000000010000000000000;
-const TransitionLane9: Lane = /*                        */ 0b0000000000000000100000000000000;
-const TransitionLane10: Lane = /*                       */ 0b0000000000000001000000000000000;
-const TransitionLane11: Lane = /*                       */ 0b0000000000000010000000000000000;
-const TransitionLane12: Lane = /*                       */ 0b0000000000000100000000000000000;
-const TransitionLane13: Lane = /*                       */ 0b0000000000001000000000000000000;
-const TransitionLane14: Lane = /*                       */ 0b0000000000010000000000000000000;
-const TransitionLane15: Lane = /*                       */ 0b0000000000100000000000000000000;
-const TransitionLane16: Lane = /*                       */ 0b0000000001000000000000000000000;
+const TransitionHydrationLane: Lane = /*                */ 0b0000000000000000000000000100000
+const TransitionLanes: Lanes = /*                       */ 0b0000000001111111111111111000000
+const TransitionLane1: Lane = /*                        */ 0b0000000000000000000000001000000
+const TransitionLane2: Lane = /*                        */ 0b0000000000000000000000010000000
+const TransitionLane3: Lane = /*                        */ 0b0000000000000000000000100000000
+const TransitionLane4: Lane = /*                        */ 0b0000000000000000000001000000000
+const TransitionLane5: Lane = /*                        */ 0b0000000000000000000010000000000
+const TransitionLane6: Lane = /*                        */ 0b0000000000000000000100000000000
+const TransitionLane7: Lane = /*                        */ 0b0000000000000000001000000000000
+const TransitionLane8: Lane = /*                        */ 0b0000000000000000010000000000000
+const TransitionLane9: Lane = /*                        */ 0b0000000000000000100000000000000
+const TransitionLane10: Lane = /*                       */ 0b0000000000000001000000000000000
+const TransitionLane11: Lane = /*                       */ 0b0000000000000010000000000000000
+const TransitionLane12: Lane = /*                       */ 0b0000000000000100000000000000000
+const TransitionLane13: Lane = /*                       */ 0b0000000000001000000000000000000
+const TransitionLane14: Lane = /*                       */ 0b0000000000010000000000000000000
+const TransitionLane15: Lane = /*                       */ 0b0000000000100000000000000000000
+const TransitionLane16: Lane = /*                       */ 0b0000000001000000000000000000000
 
-const RetryLanes: Lanes = /*                            */ 0b0000111110000000000000000000000;
-const RetryLane1: Lane = /*                             */ 0b0000000010000000000000000000000;
-const RetryLane2: Lane = /*                             */ 0b0000000100000000000000000000000;
-const RetryLane3: Lane = /*                             */ 0b0000001000000000000000000000000;
-const RetryLane4: Lane = /*                             */ 0b0000010000000000000000000000000;
-const RetryLane5: Lane = /*                             */ 0b0000100000000000000000000000000;
+const RetryLanes: Lanes = /*                            */ 0b0000111110000000000000000000000
+const RetryLane1: Lane = /*                             */ 0b0000000010000000000000000000000
+const RetryLane2: Lane = /*                             */ 0b0000000100000000000000000000000
+const RetryLane3: Lane = /*                             */ 0b0000001000000000000000000000000
+const RetryLane4: Lane = /*                             */ 0b0000010000000000000000000000000
+const RetryLane5: Lane = /*                             */ 0b0000100000000000000000000000000
 
-export const SomeRetryLane: Lane = RetryLane1;
+export const SomeRetryLane: Lane = RetryLane1
 
-export const SelectiveHydrationLane: Lane = /*          */ 0b0001000000000000000000000000000;
+export const SelectiveHydrationLane: Lane = /*          */ 0b0001000000000000000000000000000
 
-const NonIdleLanes = /*                                 */ 0b0001111111111111111111111111111;
+const NonIdleLanes = /*                                 */ 0b0001111111111111111111111111111
 
-export const IdleHydrationLane: Lane = /*               */ 0b0010000000000000000000000000000;
-export const IdleLane: Lanes = /*                       */ 0b0100000000000000000000000000000;
+export const IdleHydrationLane: Lane = /*               */ 0b0010000000000000000000000000000
+export const IdleLane: Lanes = /*                       */ 0b0100000000000000000000000000000
 
-export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;
+export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000
 ```
 
 ### Scheduler Workflow
@@ -375,102 +375,102 @@ Scheduler main [workflow](https://github.com/facebook/react/blob/main/packages/s
 ```ts
 // 时间切片周期, 默认是 5ms.
 // 如果一个 task 运行超过该周期, 下一个 task 执行前, 会把控制权归还浏览器.
-const yieldInterval = 5;
-const maxYieldInterval = 300;
+const yieldInterval = 5
+const maxYieldInterval = 300
 
-let deadline = 0; // currentTime + yieldInterval.
-let needsPaint = false;
-let isMessageLoopRunning = false;
-let scheduledHostCallback = null;
+let deadline = 0 // currentTime + yieldInterval.
+let needsPaint = false
+let isMessageLoopRunning = false
+let scheduledHostCallback = null
 
-const channel = new MessageChannel();
-const port = channel.port2;
-channel.port1.onmessage = performWorkUntilDeadline;
+const channel = new MessageChannel()
+const port = channel.port2
+channel.port1.onmessage = performWorkUntilDeadline
 
-const scheduling = navigator.scheduling;
-const getCurrentTime = performance.now;
+const scheduling = navigator.scheduling
+const getCurrentTime = performance.now
 
 // 请求回调:
 const requestHostCallback = callback => {
   // 1. 保存 callback.
-  scheduledHostCallback = callback;
+  scheduledHostCallback = callback
 
   if (!isMessageLoopRunning) {
-    isMessageLoopRunning = true;
+    isMessageLoopRunning = true
     // 2. 通过 MessageChannel 发送消息.
-    port.postMessage(null);
+    port.postMessage(null)
   }
-};
+}
 
 // 取消回调:
 const cancelHostCallback = () => {
-  scheduledHostCallback = null;
-};
+  scheduledHostCallback = null
+}
 
 const requestHostTimeout = (callback, ms) => {
   taskTimeoutID = setTimeout(() => {
-    callback(getCurrentTime());
-  }, ms);
-};
+    callback(getCurrentTime())
+  }, ms)
+}
 
 const cancelHostTimeout = () => {
-  clearTimeout(taskTimeoutID);
-  taskTimeoutID = -1;
-};
+  clearTimeout(taskTimeoutID)
+  taskTimeoutID = -1
+}
 
 // 是否让出主线程 (time slice):
 const shouldYieldToHost = () => {
-  const currentTime = getCurrentTime();
+  const currentTime = getCurrentTime()
 
   if (currentTime >= deadline) {
     if (needsPaint || scheduling.isInputPending()) {
       // There is either a pending paint or a pending input.
-      return true;
+      return true
     }
 
     // There's no pending input.
     // Only yield if we've reached the max yield interval.
-    return currentTime >= maxYieldInterval;
+    return currentTime >= maxYieldInterval
   } else {
     // There's still time left in the frame.
-    return false;
+    return false
   }
-};
+}
 
 // 请求绘制:
 const requestPaint = () => {
-  needsPaint = true;
-};
+  needsPaint = true
+}
 
 // 实际回调函数处理:
 const performWorkUntilDeadline = () => {
   if (scheduledHostCallback !== null) {
     // 1. 设置 currentTime 与 deadline.
-    const currentTime = getCurrentTime();
-    deadline = currentTime + yieldInterval;
-    const hasTimeRemaining = true;
+    const currentTime = getCurrentTime()
+    deadline = currentTime + yieldInterval
+    const hasTimeRemaining = true
 
     try {
       // 2. 执行回调, 返回是否有还有剩余任务.
-      const hasMoreWork = scheduledHostCallback(hasTimeRemaining, currentTime);
+      const hasMoreWork = scheduledHostCallback(hasTimeRemaining, currentTime)
 
       if (!hasMoreWork) {
         // 没有剩余任务, 退出.
-        isMessageLoopRunning = false;
-        scheduledHostCallback = null;
+        isMessageLoopRunning = false
+        scheduledHostCallback = null
       } else {
-        port.postMessage(null); // 有剩余任务, 发起新的调度.
+        port.postMessage(null) // 有剩余任务, 发起新的调度.
       }
     } catch (error) {
-      port.postMessage(null); // 如有异常, 重新发起调度.
-      throw error;
+      port.postMessage(null) // 如有异常, 重新发起调度.
+      throw error
     }
   } else {
-    isMessageLoopRunning = false;
+    isMessageLoopRunning = false
   }
 
-  needsPaint = false; // Reset.
-};
+  needsPaint = false // Reset.
+}
 ```
 
 ### Scheduler Task Queue
@@ -486,14 +486,14 @@ const newTask = {
   startTime,
   expirationTime,
   sortIndex: -1, // MinHeap queue indexing.
-};
+}
 ```
 
 ```ts
 const scheduleCallback = (priorityLevel, callback, options) => {
-  const currentTime = getCurrentTime();
-  const startTime = currentTime;
-  const expirationTime = startTime + timeout[priorityLevel]; // -1/250/5000/10000/MAX_INT.
+  const currentTime = getCurrentTime()
+  const startTime = currentTime
+  const expirationTime = startTime + timeout[priorityLevel] // -1/250/5000/10000/MAX_INT.
   const newTask = {
     id: taskIdCounter++,
     callback,
@@ -501,56 +501,56 @@ const scheduleCallback = (priorityLevel, callback, options) => {
     startTime,
     expirationTime,
     sortIndex: -1,
-  };
+  }
 
   if (startTime > currentTime) {
     // Delayed task.
-    newTask.sortIndex = startTime;
-    push(timerQueue, newTask);
+    newTask.sortIndex = startTime
+    push(timerQueue, newTask)
 
     // All tasks are delayed, and this is the task with the earliest delay.
     if (peek(taskQueue) === null && newTask === peek(timerQueue)) {
       if (isHostTimeoutScheduled) {
         // Cancel an existing timeout.
-        cancelHostTimeout();
+        cancelHostTimeout()
       } else {
-        isHostTimeoutScheduled = true;
+        isHostTimeoutScheduled = true
       }
 
       // Schedule a timeout.
-      requestHostTimeout(handleTimeout, startTime - currentTime);
+      requestHostTimeout(handleTimeout, startTime - currentTime)
     }
   } else {
     // Normal task.
-    newTask.sortIndex = expirationTime;
-    push(taskQueue, newTask);
+    newTask.sortIndex = expirationTime
+    push(taskQueue, newTask)
 
     if (!isHostCallbackScheduled && !isPerformingWork) {
-      isHostCallbackScheduled = true;
-      requestHostCallback(flushWork);
+      isHostCallbackScheduled = true
+      requestHostCallback(flushWork)
     }
   }
 
-  return newTask;
-};
+  return newTask
+}
 
 const handleTimeout = currentTime => {
-  isHostTimeoutScheduled = false;
-  advanceTimers(currentTime);
+  isHostTimeoutScheduled = false
+  advanceTimers(currentTime)
 
   if (!isHostCallbackScheduled) {
     if (peek(taskQueue) !== null) {
-      isHostCallbackScheduled = true;
-      requestHostCallback(flushWork);
+      isHostCallbackScheduled = true
+      requestHostCallback(flushWork)
     } else {
-      const firstTimer = peek(timerQueue);
+      const firstTimer = peek(timerQueue)
 
       if (firstTimer !== null) {
-        requestHostTimeout(handleTimeout, firstTimer.startTime - currentTime);
+        requestHostTimeout(handleTimeout, firstTimer.startTime - currentTime)
       }
     }
   }
-};
+}
 ```
 
 ### Scheduler Work Loop
@@ -561,31 +561,31 @@ const handleTimeout = currentTime => {
 ```ts
 function flushWork(hasTimeRemaining, initialTime) {
   // We'll need a host callback the next time work is scheduled.
-  isHostCallbackScheduled = false;
+  isHostCallbackScheduled = false
 
   if (isHostTimeoutScheduled) {
     // We scheduled a timeout but it's no longer needed. Cancel it.
-    isHostTimeoutScheduled = false;
-    cancelHostTimeout();
+    isHostTimeoutScheduled = false
+    cancelHostTimeout()
   }
 
-  isPerformingWork = true; // Lock.
-  const previousPriorityLevel = currentPriorityLevel;
+  isPerformingWork = true // Lock.
+  const previousPriorityLevel = currentPriorityLevel
 
   try {
-    return workLoop(hasTimeRemaining, initialTime);
+    return workLoop(hasTimeRemaining, initialTime)
   } finally {
     // Restore context.
-    currentTask = null;
-    currentPriorityLevel = previousPriorityLevel;
-    isPerformingWork = false;
+    currentTask = null
+    currentPriorityLevel = previousPriorityLevel
+    isPerformingWork = false
   }
 }
 
 function workLoop(hasTimeRemaining, initialTime) {
-  let currentTime = initialTime;
-  advanceTimers(currentTime);
-  currentTask = peek(taskQueue);
+  let currentTime = initialTime
+  advanceTimers(currentTime)
+  currentTask = peek(taskQueue)
 
   while (currentTask !== null) {
     if (
@@ -593,48 +593,48 @@ function workLoop(hasTimeRemaining, initialTime) {
       (!hasTimeRemaining || shouldYieldToHost())
     ) {
       // This currentTask hasn't expired, and we've reached the deadline.
-      break;
+      break
     }
 
-    const callback = currentTask.callback;
+    const callback = currentTask.callback
 
     if (typeof callback === 'function') {
-      currentTask.callback = null;
-      currentPriorityLevel = currentTask.priorityLevel;
-      const didUserCallbackTimeout = currentTask.expirationTime <= currentTime;
-      const continuationCallback = callback(didUserCallbackTimeout);
-      currentTime = getCurrentTime();
+      currentTask.callback = null
+      currentPriorityLevel = currentTask.priorityLevel
+      const didUserCallbackTimeout = currentTask.expirationTime <= currentTime
+      const continuationCallback = callback(didUserCallbackTimeout)
+      currentTime = getCurrentTime()
 
       if (typeof continuationCallback === 'function') {
         // 产生了连续回调 (如 Fiber树太大, 出现了中断渲染), 保留 currentTask.
-        currentTask.callback = continuationCallback;
+        currentTask.callback = continuationCallback
       } else {
         if (currentTask === peek(taskQueue)) {
-          pop(taskQueue);
+          pop(taskQueue)
         }
       }
 
-      advanceTimers(currentTime);
+      advanceTimers(currentTime)
     } else {
       // 如果任务被取消 (currentTask.callback = null), 将其移出队列.
-      pop(taskQueue);
+      pop(taskQueue)
     }
 
-    currentTask = peek(taskQueue);
+    currentTask = peek(taskQueue)
   }
 
   // Return whether there's additional work.
   if (currentTask !== null) {
-    return true;
+    return true
   } else {
-    const firstTimer = peek(timerQueue);
+    const firstTimer = peek(timerQueue)
 
     // 存在延时任务, 继续进行调度.
     if (firstTimer !== null) {
-      requestHostTimeout(handleTimeout, firstTimer.startTime - currentTime);
+      requestHostTimeout(handleTimeout, firstTimer.startTime - currentTime)
     }
 
-    return false;
+    return false
   }
 }
 ```
@@ -656,48 +656,48 @@ React Fiber 的目标是提高其在动画、布局和手势等领域的适用�
 
 ```ts
 export interface Fiber {
-  tag: WorkTag;
-  key: string | null;
-  elementType: any;
-  type: any; // Tag/Class/Function.
-  stateNode: any; // DOM/class instance.
-  ref: (((handle: mixed) => void) & { _stringRef: ?string }) | RefObject | null;
+  tag: WorkTag
+  key: string | null
+  elementType: any
+  type: any // Tag/Class/Function.
+  stateNode: any // DOM/class instance.
+  ref: (((handle: mixed) => void) & { _stringRef: ?string }) | RefObject | null
 
   // Singly Linked List Tree Structure.
-  return: Fiber | null; // DFS parent Fiber node.
-  child: Fiber | null;
-  sibling: Fiber | null;
-  index: number;
+  return: Fiber | null // DFS parent Fiber node.
+  child: Fiber | null
+  sibling: Fiber | null
+  index: number
 
   // Props and state for output.
-  pendingProps: any;
-  memoizedProps: any;
-  updateQueue: mixed; // Updates from diff(pendingProps, memoizedProps).
-  memoizedState: any;
+  pendingProps: any
+  memoizedProps: any
+  updateQueue: mixed // Updates from diff(pendingProps, memoizedProps).
+  memoizedState: any
 
   // Context API.
-  dependencies: Dependencies | null; // (Contexts, Events) dependencies.
+  dependencies: Dependencies | null // (Contexts, Events) dependencies.
 
-  mode: TypeOfMode; // NoMode/BlockingMode/ConcurrentMode bit.
+  mode: TypeOfMode // NoMode/BlockingMode/ConcurrentMode bit.
 
   // Effects.
-  flags: Flags;
-  subtreeFlags: Flags;
-  deletions: Array<Fiber> | null;
-  nextEffect: Fiber | null; // Next effect Fiber node.
-  firstEffect: Fiber | null; // First effect Fiber node.
-  lastEffect: Fiber | null; // Last effect Fiber node.
+  flags: Flags
+  subtreeFlags: Flags
+  deletions: Array<Fiber> | null
+  nextEffect: Fiber | null // Next effect Fiber node.
+  firstEffect: Fiber | null // First effect Fiber node.
+  lastEffect: Fiber | null // Last effect Fiber node.
 
   // Priority.
-  lanes: Lanes;
-  childLanes: Lanes;
-  alternate: Fiber | null; // `current` Fiber and `workInpProgress` Fiber.
+  lanes: Lanes
+  childLanes: Lanes
+  alternate: Fiber | null // `current` Fiber and `workInpProgress` Fiber.
 
   // Performance statistics for React DevTool.
-  actualDuration?: number;
-  actualStartTime?: number;
-  selfBaseDuration?: number;
-  treeBaseDuration?: number;
+  actualDuration?: number
+  actualStartTime?: number
+  selfBaseDuration?: number
+  treeBaseDuration?: number
 }
 ```
 
@@ -735,7 +735,7 @@ type WorkTag =
   | 'ScopeComponent'
   | 'Block'
   | 'OffscreenComponent'
-  | 'LegacyHiddenComponent';
+  | 'LegacyHiddenComponent'
 ```
 
 ### React Fiber Mode
@@ -744,15 +744,15 @@ React [运行模式](https://github.com/facebook/react/blob/main/packages/react-
 所有 `Fiber.mode` 保持一致 (包括 `FiberRoot`).
 
 ```ts
-type TypeOfMode = number;
+type TypeOfMode = number
 
-const NoMode = /*                         */ 0b000000;
-const ConcurrentMode = /*                 */ 0b000001;
-const ProfileMode = /*                    */ 0b000010;
-const DebugTracingMode = /*               */ 0b000100;
-const StrictLegacyMode = /*               */ 0b001000;
-const StrictEffectsMode = /*              */ 0b010000;
-const ConcurrentUpdatesByDefaultMode = /* */ 0b100000;
+const NoMode = /*                         */ 0b000000
+const ConcurrentMode = /*                 */ 0b000001
+const ProfileMode = /*                    */ 0b000010
+const DebugTracingMode = /*               */ 0b000100
+const StrictLegacyMode = /*               */ 0b001000
+const StrictEffectsMode = /*              */ 0b010000
+const ConcurrentUpdatesByDefaultMode = /* */ 0b100000
 ```
 
 ### React Fiber Effects
@@ -774,36 +774,36 @@ then update effects to real DOM when `Commit` stage.
 常见的 Effect [标志位](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberFlags.js):
 
 ```ts
-type Flags = number;
+type Flags = number
 
-const NoFlags = /*                      */ 0b000000000000000000;
-const PerformedWork = /*                */ 0b000000000000000001;
-const Placement = /*                    */ 0b000000000000000010;
-const Update = /*                       */ 0b000000000000000100;
-const PlacementAndUpdate = /*           */ 0b000000000000000110;
-const Deletion = /*                     */ 0b000000000000001000;
-const ContentReset = /*                 */ 0b000000000000010000;
-const Callback = /*                     */ 0b000000000000100000;
-const DidCapture = /*                   */ 0b000000000001000000;
-const Ref = /*                          */ 0b000000000010000000;
-const Snapshot = /*                     */ 0b000000000100000000;
-const Passive = /*                      */ 0b000000001000000000;
-const PassiveUnmountPendingDev = /*     */ 0b000010000000000000;
-const Hydrating = /*                    */ 0b000000010000000000;
-const HydratingAndUpdate = /*           */ 0b000000010000000100;
-const LifecycleEffectMask = /*          */ 0b000000001110100100;
-const HostEffectMask = /*               */ 0b000000011111111111;
-const Incomplete = /*                   */ 0b000000100000000000;
-const ShouldCapture = /*                */ 0b000001000000000000;
-const ForceUpdateForLegacySuspense = /* */ 0b000100000000000000;
-const PassiveStatic = /*                */ 0b001000000000000000;
-const BeforeMutationMask = /*           */ 0b000000001100001010;
-const MutationMask = /*                 */ 0b000000010010011110;
-const LayoutMask = /*                   */ 0b000000000010100100;
-const PassiveMask = /*                  */ 0b000000001000001000;
-const StaticMask = /*                   */ 0b001000000000000000;
-const MountLayoutDev = /*               */ 0b010000000000000000;
-const MountPassiveDev = /*              */ 0b100000000000000000;
+const NoFlags = /*                      */ 0b000000000000000000
+const PerformedWork = /*                */ 0b000000000000000001
+const Placement = /*                    */ 0b000000000000000010
+const Update = /*                       */ 0b000000000000000100
+const PlacementAndUpdate = /*           */ 0b000000000000000110
+const Deletion = /*                     */ 0b000000000000001000
+const ContentReset = /*                 */ 0b000000000000010000
+const Callback = /*                     */ 0b000000000000100000
+const DidCapture = /*                   */ 0b000000000001000000
+const Ref = /*                          */ 0b000000000010000000
+const Snapshot = /*                     */ 0b000000000100000000
+const Passive = /*                      */ 0b000000001000000000
+const PassiveUnmountPendingDev = /*     */ 0b000010000000000000
+const Hydrating = /*                    */ 0b000000010000000000
+const HydratingAndUpdate = /*           */ 0b000000010000000100
+const LifecycleEffectMask = /*          */ 0b000000001110100100
+const HostEffectMask = /*               */ 0b000000011111111111
+const Incomplete = /*                   */ 0b000000100000000000
+const ShouldCapture = /*                */ 0b000001000000000000
+const ForceUpdateForLegacySuspense = /* */ 0b000100000000000000
+const PassiveStatic = /*                */ 0b001000000000000000
+const BeforeMutationMask = /*           */ 0b000000001100001010
+const MutationMask = /*                 */ 0b000000010010011110
+const LayoutMask = /*                   */ 0b000000000010100100
+const PassiveMask = /*                  */ 0b000000001000001000
+const StaticMask = /*                   */ 0b001000000000000000
+const MountLayoutDev = /*               */ 0b010000000000000000
+const MountPassiveDev = /*              */ 0b100000000000000000
 ```
 
 ### React Fiber Lanes
@@ -818,24 +818,24 @@ const MountPassiveDev = /*              */ 0b100000000000000000;
 
 ```ts
 export function requestUpdateLane(fiber: Fiber): Lane {
-  const mode = fiber.mode;
+  const mode = fiber.mode
 
   if ((mode & BlockingMode) === NoMode) {
     // Legacy 模式.
-    return SyncLane;
+    return SyncLane
   } else if ((mode & ConcurrentMode) === NoMode) {
     // Blocking 模式.
     return getCurrentPriorityLevel() === ImmediateSchedulerPriority
       ? SyncLane
-      : SyncBatchedLane;
+      : SyncBatchedLane
   }
 
   // Concurrent 模式.
   if (currentEventWipLanes === NoLanes) {
-    currentEventWipLanes = workInProgressRootIncludedLanes;
+    currentEventWipLanes = workInProgressRootIncludedLanes
   }
 
-  const isTransition = requestCurrentTransition() !== NoTransition;
+  const isTransition = requestCurrentTransition() !== NoTransition
 
   if (isTransition) {
     // 特殊情况, 处于 Suspense 过程中.
@@ -843,30 +843,30 @@ export function requestUpdateLane(fiber: Fiber): Lane {
       currentEventPendingLanes =
         mostRecentlyUpdatedRoot !== null
           ? mostRecentlyUpdatedRoot.pendingLanes
-          : NoLanes;
+          : NoLanes
     }
 
-    return findTransitionLane(currentEventWipLanes, currentEventPendingLanes);
+    return findTransitionLane(currentEventWipLanes, currentEventPendingLanes)
   }
 
   // 正常情况, 获取调度优先级.
-  let lane;
-  const schedulerPriority = getCurrentPriorityLevel();
+  let lane
+  const schedulerPriority = getCurrentPriorityLevel()
 
   if (
     (executionContext & DiscreteEventContext) !== NoContext &&
     schedulerPriority === UserBlockingSchedulerPriority
   ) {
     // `executionContext` 存在输入事件, 且调度优先级是用户阻塞性质.
-    lane = findUpdateLane(InputDiscreteLanePriority, currentEventWipLanes);
+    lane = findUpdateLane(InputDiscreteLanePriority, currentEventWipLanes)
   } else {
     // 调度优先级转换为车道模型.
     const schedulerLanePriority =
-      schedulerPriorityToLanePriority(schedulerPriority);
-    lane = findUpdateLane(schedulerLanePriority, currentEventWipLanes);
+      schedulerPriorityToLanePriority(schedulerPriority)
+    lane = findUpdateLane(schedulerLanePriority, currentEventWipLanes)
   }
 
-  return lane;
+  return lane
 }
 ```
 
@@ -878,43 +878,43 @@ Fiber 树构造过程中 (`Render Phase`),
 
 ```ts
 export function getNextLanes(root: FiberRoot, wipLanes: Lanes): Lanes {
-  const pendingLanes = root.pendingLanes;
+  const pendingLanes = root.pendingLanes
 
   if (pendingLanes === NoLanes) {
-    return NoLanes;
+    return NoLanes
   }
 
-  let nextLanes = NoLanes;
-  const suspendedLanes = root.suspendedLanes;
-  const pingedLanes = root.pingedLanes;
-  const nonIdlePendingLanes = pendingLanes & NonIdleLanes;
+  let nextLanes = NoLanes
+  const suspendedLanes = root.suspendedLanes
+  const pingedLanes = root.pingedLanes
+  const nonIdlePendingLanes = pendingLanes & NonIdleLanes
 
   if (nonIdlePendingLanes !== NoLanes) {
-    const nonIdleUnblockedLanes = nonIdlePendingLanes & ~suspendedLanes;
+    const nonIdleUnblockedLanes = nonIdlePendingLanes & ~suspendedLanes
 
     if (nonIdleUnblockedLanes !== NoLanes) {
-      nextLanes = getHighestPriorityLanes(nonIdleUnblockedLanes);
+      nextLanes = getHighestPriorityLanes(nonIdleUnblockedLanes)
     } else {
-      const nonIdlePingedLanes = nonIdlePendingLanes & pingedLanes;
+      const nonIdlePingedLanes = nonIdlePendingLanes & pingedLanes
 
       if (nonIdlePingedLanes !== NoLanes) {
-        nextLanes = getHighestPriorityLanes(nonIdlePingedLanes);
+        nextLanes = getHighestPriorityLanes(nonIdlePingedLanes)
       }
     }
   } else {
-    const unblockedLanes = pendingLanes & ~suspendedLanes;
+    const unblockedLanes = pendingLanes & ~suspendedLanes
 
     if (unblockedLanes !== NoLanes) {
-      nextLanes = getHighestPriorityLanes(unblockedLanes);
+      nextLanes = getHighestPriorityLanes(unblockedLanes)
     } else {
       if (pingedLanes !== NoLanes) {
-        nextLanes = getHighestPriorityLanes(pingedLanes);
+        nextLanes = getHighestPriorityLanes(pingedLanes)
       }
     }
   }
 
   if (nextLanes === NoLanes) {
-    return NoLanes;
+    return NoLanes
   }
 
   if (
@@ -922,14 +922,14 @@ export function getNextLanes(root: FiberRoot, wipLanes: Lanes): Lanes {
     wipLanes !== nextLanes &&
     (wipLanes & suspendedLanes) === NoLanes
   ) {
-    const nextLane = getHighestPriorityLane(nextLanes);
-    const wipLane = getHighestPriorityLane(wipLanes);
+    const nextLane = getHighestPriorityLane(nextLanes)
+    const wipLane = getHighestPriorityLane(wipLanes)
 
     if (
       nextLane >= wipLane ||
       (nextLane === DefaultLane && (wipLane & TransitionLanes) !== NoLanes)
     ) {
-      return wipLanes;
+      return wipLanes
     }
   }
 
@@ -939,24 +939,24 @@ export function getNextLanes(root: FiberRoot, wipLanes: Lanes): Lanes {
   ) {
     // Do nothing, use the lanes as they were assigned.
   } else if ((nextLanes & InputContinuousLane) !== NoLanes) {
-    nextLanes |= pendingLanes & DefaultLane;
+    nextLanes |= pendingLanes & DefaultLane
   }
 
-  const entangledLanes = root.entangledLanes;
+  const entangledLanes = root.entangledLanes
 
   if (entangledLanes !== NoLanes) {
-    const entanglements = root.entanglements;
-    let lanes = nextLanes & entangledLanes;
+    const entanglements = root.entanglements
+    let lanes = nextLanes & entangledLanes
 
     while (lanes > 0) {
-      const index = pickArbitraryLaneIndex(lanes);
-      const lane = 1 << index;
-      nextLanes |= entanglements[index];
-      lanes &= ~lane;
+      const index = pickArbitraryLaneIndex(lanes)
+      const lane = 1 << index
+      nextLanes |= entanglements[index]
+      lanes &= ~lane
     }
   }
 
-  return nextLanes;
+  return nextLanes
 }
 ```
 
@@ -965,37 +965,37 @@ Lanes model [use case](https://github.com/facebook/react/pull/18796):
 ```ts
 // task 与 batchTask 的优先级是否重叠:
 // 1. expirationTime:
-const isTaskIncludedInBatch = priorityOfTask >= priorityOfBatch;
+const isTaskIncludedInBatch = priorityOfTask >= priorityOfBatch
 // 2. Lanes:
-const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+const isTaskIncludedInBatch = (task & batchOfTasks) !== 0
 
 // 当同时处理一组任务, 该组内有多个任务, 且每个任务的优先级不一致:
 // 1. expirationTime:
 const isTaskIncludedInBatch =
   taskPriority <= highestPriorityInRange &&
-  taskPriority >= lowestPriorityInRange;
+  taskPriority >= lowestPriorityInRange
 // 2. Lanes:
-const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+const isTaskIncludedInBatch = (task & batchOfTasks) !== 0
 
 // 从 group 中增删 task:
 // 1. expirationTime (need list):
-task.prev.next = task.next;
+task.prev.next = task.next
 
-let current = queue;
+let current = queue
 while (task.expirationTime >= current.expirationTime) {
-  current = current.next;
+  current = current.next
 }
-task.next = current.next;
-current.next = task;
+task.next = current.next
+current.next = task
 
 const isTaskIncludedInBatch =
   taskPriority <= highestPriorityInRange &&
-  taskPriority >= lowestPriorityInRange;
+  taskPriority >= lowestPriorityInRange
 
 // 2. Lanes:
-batchOfTasks &= ~task; // Delete task.
-batchOfTasks |= task; // Add task.
-const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+batchOfTasks &= ~task // Delete task.
+batchOfTasks |= task // Add task.
+const isTaskIncludedInBatch = (task & batchOfTasks) !== 0
 ```
 
 ### React Fiber Trees
@@ -1121,7 +1121,7 @@ export function scheduleUpdateOnFiber(
   lane: Lane,
   eventTime: number
 ) {
-  const root = markUpdateLaneFromFiberToRoot(fiber, lane);
+  const root = markUpdateLaneFromFiberToRoot(fiber, lane)
 
   if (lane === SyncLane) {
     if (
@@ -1129,39 +1129,39 @@ export function scheduleUpdateOnFiber(
       (executionContext & (RenderContext | CommitContext)) === NoContext
     ) {
       // 初次渲染.
-      performSyncWorkOnRoot(root);
+      performSyncWorkOnRoot(root)
     } else {
       // 对比更新.
-      ensureRootIsScheduled(root, eventTime);
+      ensureRootIsScheduled(root, eventTime)
     }
   }
 
-  mostRecentlyUpdatedRoot = root;
+  mostRecentlyUpdatedRoot = root
 }
 
 function performSyncWorkOnRoot(root) {
   // 1. 获取本次render的优先级, 初次构造返回 NoLanes.
-  const lanes = getNextLanes(root, NoLanes);
+  const lanes = getNextLanes(root, NoLanes)
   // 2. 从root节点开始, 至上而下更新.
-  const exitStatus = renderRootSync(root, lanes);
+  const exitStatus = renderRootSync(root, lanes)
   // 3. 将最新的 Fiber 树挂载到 root.finishedWork 节点上.
-  const finishedWork: Fiber = root.current.alternate;
-  root.finishedWork = finishedWork;
-  root.finishedLanes = lanes;
+  const finishedWork: Fiber = root.current.alternate
+  root.finishedWork = finishedWork
+  root.finishedLanes = lanes
   // 4. 进入 Commit 阶段.
-  commitRoot(root);
+  commitRoot(root)
 }
 
 function performConcurrentWorkOnRoot(root) {
-  const originalCallbackNode = root.callbackNode;
+  const originalCallbackNode = root.callbackNode
 
   // 1. 刷新 pending 状态的 effects, 有可能某些 effect 会取消本次任务.
-  const didFlushPassiveEffects = flushPassiveEffects();
+  const didFlushPassiveEffects = flushPassiveEffects()
 
   if (didFlushPassiveEffects) {
     if (root.callbackNode !== originalCallbackNode) {
       // 任务被取消, 退出调用.
-      return null;
+      return null
     } else {
       // Current task was not canceled. Continue.
     }
@@ -1171,10 +1171,10 @@ function performConcurrentWorkOnRoot(root) {
   const lanes = getNextLanes(
     root,
     root === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes
-  );
+  )
 
   // 3. 构造 Fiber 树.
-  const exitStatus = renderRootConcurrent(root, lanes);
+  const exitStatus = renderRootConcurrent(root, lanes)
 
   if (
     includesSomeLane(
@@ -1184,167 +1184,167 @@ function performConcurrentWorkOnRoot(root) {
   ) {
     // 如果在 render 过程中产生了新 update, 且新 update 的优先级与最初 render 的优先级有交集.
     // 那么最初 render 无效, 丢弃最初 render 的结果, 等待下一次调度.
-    prepareFreshStack(root, NoLanes);
+    prepareFreshStack(root, NoLanes)
   } else if (exitStatus !== RootIncomplete) {
     // 4. 异常处理: 有可能fiber构造过程中出现异常.
     if (exitStatus === RootError) {
-      processError();
+      processError()
     }
 
-    const finishedWork = root.current.alternate; // Fiber
-    root.finishedWork = finishedWork;
-    root.finishedLanes = lanes;
+    const finishedWork = root.current.alternate // Fiber
+    root.finishedWork = finishedWork
+    root.finishedLanes = lanes
 
     // 5. 输出: 渲染 Fiber树.
-    finishConcurrentRender(root, exitStatus, lanes);
+    finishConcurrentRender(root, exitStatus, lanes)
   }
 
   // 退出前再次检测, 是否还有其他更新, 是否需要发起新调度.
-  ensureRootIsScheduled(root, now());
+  ensureRootIsScheduled(root, now())
 
   if (root.callbackNode === originalCallbackNode) {
     // 渲染被阻断, 返回一个新的 performConcurrentWorkOnRoot 函数, 等待下一次调度.
-    return performConcurrentWorkOnRoot.bind(null, root);
+    return performConcurrentWorkOnRoot.bind(null, root)
   }
 
-  return null;
+  return null
 }
 
 function renderRootSync(root: FiberRoot, lanes: Lanes) {
-  const prevExecutionContext = executionContext;
-  executionContext |= RenderContext;
+  const prevExecutionContext = executionContext
+  executionContext |= RenderContext
 
   // 如果 FiberRoot 变动, 或者 update.lane 变动, 都会刷新栈帧, 丢弃上一次渲染进度.
   if (workInProgressRoot !== root || workInProgressRootRenderLanes !== lanes) {
     // 刷新栈帧.
-    prepareFreshStack(root, lanes);
+    prepareFreshStack(root, lanes)
   }
   do {
     try {
-      workLoopSync();
-      break;
+      workLoopSync()
+      break
     } catch (thrownValue) {
-      handleError(root, thrownValue);
+      handleError(root, thrownValue)
     }
-  } while (true);
+  } while (true)
 
   // 重置全局变量, 表明 render 结束.
-  executionContext = prevExecutionContext;
-  workInProgressRoot = null;
-  workInProgressRootRenderLanes = NoLanes;
-  return workInProgressRootExitStatus;
+  executionContext = prevExecutionContext
+  workInProgressRoot = null
+  workInProgressRootRenderLanes = NoLanes
+  return workInProgressRootExitStatus
 }
 
 function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
-  const prevExecutionContext = executionContext;
-  executionContext |= RenderContext;
-  const prevDispatcher = pushDispatcher();
+  const prevExecutionContext = executionContext
+  executionContext |= RenderContext
+  const prevDispatcher = pushDispatcher()
 
   // 如果 FiberRoot 变动, 或者 update.lane变动, 都会刷新栈帧, 丢弃上一次渲染进度.
   if (workInProgressRoot !== root || workInProgressRootRenderLanes !== lanes) {
-    resetRenderTimer();
+    resetRenderTimer()
     // 刷新栈帧.
-    prepareFreshStack(root, lanes);
-    startWorkOnPendingInteractions(root, lanes);
+    prepareFreshStack(root, lanes)
+    startWorkOnPendingInteractions(root, lanes)
   }
 
-  const prevInteractions = pushInteractions(root);
+  const prevInteractions = pushInteractions(root)
 
   do {
     try {
-      workLoopConcurrent();
-      break;
+      workLoopConcurrent()
+      break
     } catch (thrownValue) {
-      handleError(root, thrownValue);
+      handleError(root, thrownValue)
     }
-  } while (true);
+  } while (true)
 
   // 重置全局变量.
-  resetContextDependencies();
-  popDispatcher(prevDispatcher);
-  executionContext = prevExecutionContext;
+  resetContextDependencies()
+  popDispatcher(prevDispatcher)
+  executionContext = prevExecutionContext
 
   // Check if the tree has completed.
   if (workInProgress !== null) {
     // Still work remaining.
-    return RootIncomplete;
+    return RootIncomplete
   } else {
     // Completed the tree.
     // Set this to null to indicate there's no in-progress render.
-    workInProgressRoot = null;
-    workInProgressRootRenderLanes = NoLanes;
+    workInProgressRoot = null
+    workInProgressRootRenderLanes = NoLanes
 
     // Return the final exit status.
-    return workInProgressRootExitStatus;
+    return workInProgressRootExitStatus
   }
 }
 
 function prepareFreshStack(root: FiberRoot, lanes: Lanes) {
   // 重置 FiberRoot 上的属性.
-  root.finishedWork = null;
-  root.finishedLanes = NoLanes;
-  const timeoutHandle = root.timeoutHandle;
+  root.finishedWork = null
+  root.finishedLanes = NoLanes
+  const timeoutHandle = root.timeoutHandle
 
   if (timeoutHandle !== noTimeout) {
-    root.timeoutHandle = noTimeout;
-    cancelTimeout(timeoutHandle);
+    root.timeoutHandle = noTimeout
+    cancelTimeout(timeoutHandle)
   }
 
   if (workInProgress !== null) {
-    let interruptedWork = workInProgress.return;
+    let interruptedWork = workInProgress.return
     while (interruptedWork !== null) {
-      unwindInterruptedWork(interruptedWork);
-      interruptedWork = interruptedWork.return;
+      unwindInterruptedWork(interruptedWork)
+      interruptedWork = interruptedWork.return
     }
   }
 
   // 重置全局变量.
-  workInProgressRoot = root;
-  workInProgress = createWorkInProgress(root.current, null); // currentHostRootFiber.alternate.
+  workInProgressRoot = root
+  workInProgress = createWorkInProgress(root.current, null) // currentHostRootFiber.alternate.
   workInProgressRootRenderLanes =
     subtreeRenderLanes =
     workInProgressRootIncludedLanes =
-      lanes;
-  workInProgressRootExitStatus = RootIncomplete;
-  workInProgressRootFatalError = null;
-  workInProgressRootSkippedLanes = NoLanes;
-  workInProgressRootUpdatedLanes = NoLanes;
-  workInProgressRootPingedLanes = NoLanes;
+      lanes
+  workInProgressRootExitStatus = RootIncomplete
+  workInProgressRootFatalError = null
+  workInProgressRootSkippedLanes = NoLanes
+  workInProgressRootUpdatedLanes = NoLanes
+  workInProgressRootPingedLanes = NoLanes
 }
 
 function workLoopSync() {
   while (workInProgress !== null) {
-    performUnitOfWork(workInProgress);
+    performUnitOfWork(workInProgress)
   }
 }
 
 function workLoopConcurrent() {
   // Perform work until Scheduler asks us to yield.
   while (workInProgress !== null && !shouldYield()) {
-    performUnitOfWork(workInProgress);
+    performUnitOfWork(workInProgress)
   }
 }
 
 function performUnitOfWork(unitOfWork: Fiber): void {
   // unitOfWork 就是被传入的 workInProgress.
-  const current = unitOfWork.alternate;
-  const next = beginWork(current, unitOfWork, subtreeRenderLanes);
-  unitOfWork.memoizedProps = unitOfWork.pendingProps;
+  const current = unitOfWork.alternate
+  const next = beginWork(current, unitOfWork, subtreeRenderLanes)
+  unitOfWork.memoizedProps = unitOfWork.pendingProps
 
   if (next === null) {
     // 如果没有派生出新的下级节点, 则进入 completeWork 阶段, 传入的是当前 unitOfWork.
-    completeUnitOfWork(unitOfWork);
+    completeUnitOfWork(unitOfWork)
   } else {
     // 如果派生出新的下级节点, 则递归处理.
-    workInProgress = next;
+    workInProgress = next
   }
 }
 
 function _performUnitOfWork_Recursive(unitOfWork: Fiber): void {
-  beginWork(unitOfWork.alternate, unitOfWork, subtreeRenderLanes);
-  if (unitOfWork.child) _performUnitOfWork_Recursive(unitOfWork.child);
-  completeUnitOfWork(unitOfWork);
-  if (unitOfWork.sibling) _performUnitOfWork_Recursive(unitOfWork.sibling);
+  beginWork(unitOfWork.alternate, unitOfWork, subtreeRenderLanes)
+  if (unitOfWork.child) _performUnitOfWork_Recursive(unitOfWork.child)
+  completeUnitOfWork(unitOfWork)
+  if (unitOfWork.sibling) _performUnitOfWork_Recursive(unitOfWork.sibling)
 }
 
 function beginWork(
@@ -1353,58 +1353,58 @@ function beginWork(
   renderLanes: Lanes
 ): Fiber | null {
   // 1. 设置 workInProgress 优先级为 NoLanes (最高优先级).
-  const updateLanes = workInProgress.lanes;
-  didReceiveUpdate = false;
-  workInProgress.lanes = NoLanes;
+  const updateLanes = workInProgress.lanes
+  didReceiveUpdate = false
+  workInProgress.lanes = NoLanes
 
   // 2. 根据 workInProgress 节点的类型, 用不同的方法派生出子节点.
   switch (workInProgress.tag) {
     case ClassComponent: {
-      const Component = workInProgress.type;
-      const unresolvedProps = workInProgress.pendingProps;
+      const Component = workInProgress.type
+      const unresolvedProps = workInProgress.pendingProps
       const resolvedProps =
         workInProgress.elementType === Component
           ? unresolvedProps
-          : resolveDefaultProps(Component, unresolvedProps);
+          : resolveDefaultProps(Component, unresolvedProps)
       return updateClassComponent(
         current,
         workInProgress,
         Component,
         resolvedProps,
         renderLanes
-      );
+      )
     }
     case HostRoot:
-      return updateHostRoot(current, workInProgress, renderLanes);
+      return updateHostRoot(current, workInProgress, renderLanes)
     case HostComponent:
-      return updateHostComponent(current, workInProgress, renderLanes);
+      return updateHostComponent(current, workInProgress, renderLanes)
     case HostText:
-      return updateHostText(current, workInProgress);
+      return updateHostText(current, workInProgress)
     case Fragment:
-      return updateFragment(current, workInProgress, renderLanes);
+      return updateFragment(current, workInProgress, renderLanes)
   }
 }
 
 function completeUnitOfWork(unitOfWork: Fiber): void {
-  let completedWork = unitOfWork;
+  let completedWork = unitOfWork
 
   // 外层循环控制并移动指针 (workInProgress/completedWork).
   do {
-    const current = completedWork.alternate;
-    const returnFiber = completedWork.return;
+    const current = completedWork.alternate
+    const returnFiber = completedWork.return
 
     if ((completedWork.flags & Incomplete) === NoFlags) {
       // 1. 处理 Fiber 节点, 会调用渲染器 (关联 Fiber 节点和 DOM 对象, 绑定事件等).
-      const next = completeWork(current, completedWork, subtreeRenderLanes);
+      const next = completeWork(current, completedWork, subtreeRenderLanes)
 
       if (next !== null) {
         // 如果派生出其他的子节点, 则回到 beginWork 阶段进行处理.
-        workInProgress = next;
-        return;
+        workInProgress = next
+        return
       }
 
       // 重置子节点的优先级.
-      resetChildLanes(completedWork);
+      resetChildLanes(completedWork)
 
       if (
         returnFiber !== null &&
@@ -1413,46 +1413,46 @@ function completeUnitOfWork(unitOfWork: Fiber): void {
         // 2. 收集当前 Fiber 节点以及其子树的副作用 Effects.
         // 2.1 把子节点的副作用队列添加到父节点上.
         if (returnFiber.firstEffect === null) {
-          returnFiber.firstEffect = completedWork.firstEffect;
+          returnFiber.firstEffect = completedWork.firstEffect
         }
 
         if (completedWork.lastEffect !== null) {
           if (returnFiber.lastEffect !== null) {
-            returnFiber.lastEffect.nextEffect = completedWork.firstEffect;
+            returnFiber.lastEffect.nextEffect = completedWork.firstEffect
           }
 
-          returnFiber.lastEffect = completedWork.lastEffect;
+          returnFiber.lastEffect = completedWork.lastEffect
         }
 
         // 2.2 如果当前 Fiber 节点有副作用, 将其添加到子节点的副作用队列之后.
-        const flags = completedWork.flags;
+        const flags = completedWork.flags
 
         if (returnFiber.lastEffect !== null) {
-          returnFiber.lastEffect.nextEffect = completedWork;
+          returnFiber.lastEffect.nextEffect = completedWork
         } else {
-          returnFiber.firstEffect = completedWork;
+          returnFiber.firstEffect = completedWork
         }
 
-        returnFiber.lastEffect = completedWork;
+        returnFiber.lastEffect = completedWork
       }
     }
 
-    const siblingFiber = completedWork.sibling;
+    const siblingFiber = completedWork.sibling
 
     if (siblingFiber !== null) {
       // 如果有兄弟节点, 返回之后再次进入 beginWork 阶段.
-      workInProgress = siblingFiber;
-      return;
+      workInProgress = siblingFiber
+      return
     }
 
     // 移动指针, 指向下一个节点.
-    completedWork = returnFiber;
-    workInProgress = completedWork;
-  } while (completedWork !== null);
+    completedWork = returnFiber
+    workInProgress = completedWork
+  } while (completedWork !== null)
 
   // 已回溯到根节点, 设置 workInProgressRootExitStatus = RootCompleted.
   if (workInProgressRootExitStatus === RootIncomplete) {
-    workInProgressRootExitStatus = RootCompleted;
+    workInProgressRootExitStatus = RootCompleted
   }
 }
 
@@ -1461,29 +1461,29 @@ function completeWork(
   workInProgress: Fiber,
   renderLanes: Lanes
 ): Fiber | null {
-  const newProps = workInProgress.pendingProps;
+  const newProps = workInProgress.pendingProps
 
   switch (workInProgress.tag) {
     case HostRoot: {
-      const fiberRoot: FiberRoot = workInProgress.stateNode;
+      const fiberRoot: FiberRoot = workInProgress.stateNode
 
       if (fiberRoot.pendingContext) {
-        fiberRoot.context = fiberRoot.pendingContext;
-        fiberRoot.pendingContext = null;
+        fiberRoot.context = fiberRoot.pendingContext
+        fiberRoot.pendingContext = null
       }
 
       if (current === null || current.child === null) {
         // 设置 fiber.flags.
-        workInProgress.flags |= Snapshot;
+        workInProgress.flags |= Snapshot
       }
 
-      return null;
+      return null
     }
     case HostComponent: {
-      popHostContext(workInProgress);
-      const rootContainerInstance = getRootHostContainer();
-      const type = workInProgress.type;
-      const currentHostContext = getHostContext();
+      popHostContext(workInProgress)
+      const rootContainerInstance = getRootHostContainer()
+      const type = workInProgress.type
+      const currentHostContext = getHostContext()
 
       // 1. 创建 DOM 对象.
       const instance = createInstance(
@@ -1492,13 +1492,13 @@ function completeWork(
         rootContainerInstance,
         currentHostContext,
         workInProgress
-      );
+      )
 
       // 2. 把子树中的 DOM 对象 append 到本节点的 DOM 对象之后.
-      appendAllChildren(instance, workInProgress, false, false);
+      appendAllChildren(instance, workInProgress, false, false)
 
       // 3. 设置 stateNode 属性, 指向 DOM 对象.
-      workInProgress.stateNode = instance;
+      workInProgress.stateNode = instance
 
       if (
         // 4. 设置DOM对象的属性, 绑定事件等.
@@ -1511,15 +1511,15 @@ function completeWork(
         )
       ) {
         // 设置 fiber.flags (Update).
-        markUpdate(workInProgress);
+        markUpdate(workInProgress)
       }
 
       if (workInProgress.ref !== null) {
         // 设置 fiber.flags (Ref).
-        markRef(workInProgress);
+        markRef(workInProgress)
       }
 
-      return null;
+      return null
     }
   }
 }
@@ -1530,22 +1530,22 @@ function completeWork(
 ```ts
 function updateHostRoot(current, workInProgress, renderLanes) {
   // 1. 状态计算, 更新整合到 workInProgress.memoizedState.
-  const updateQueue = workInProgress.updateQueue;
-  const nextProps = workInProgress.pendingProps;
-  const prevState = workInProgress.memoizedState;
-  const prevChildren = prevState !== null ? prevState.element : null;
-  cloneUpdateQueue(current, workInProgress);
+  const updateQueue = workInProgress.updateQueue
+  const nextProps = workInProgress.pendingProps
+  const prevState = workInProgress.memoizedState
+  const prevChildren = prevState !== null ? prevState.element : null
+  cloneUpdateQueue(current, workInProgress)
   // 遍历 updateQueue.shared.pending, 提取有足够优先级的 update对象, 计算出最终的状态 workInProgress.memoizedState.
-  processUpdateQueue(workInProgress, nextProps, null, renderLanes);
-  const nextState = workInProgress.memoizedState;
+  processUpdateQueue(workInProgress, nextProps, null, renderLanes)
+  const nextState = workInProgress.memoizedState
 
   // 2. 获取下级 ReactElement 对象.
-  const nextChildren = nextState.element;
-  const root: FiberRoot = workInProgress.stateNode;
+  const nextChildren = nextState.element
+  const root: FiberRoot = workInProgress.stateNode
 
   // 3. 根据 ReactElement 对象, 调用 reconcileChildren 生成 Fiber 子节点 (只生成次级子节点).
-  reconcileChildren(current, workInProgress, nextChildren, renderLanes);
-  return workInProgress.child;
+  reconcileChildren(current, workInProgress, nextChildren, renderLanes)
+  return workInProgress.child
 }
 ```
 
@@ -1558,28 +1558,28 @@ function updateHostComponent(
   renderLanes: Lanes
 ) {
   // 1. 状态计算, 由于 HostComponent 是无状态组件, 只需要收集 nextProps.
-  const type = workInProgress.type;
-  const nextProps = workInProgress.pendingProps;
-  const prevProps = current !== null ? current.memoizedProps : null;
+  const type = workInProgress.type
+  const nextProps = workInProgress.pendingProps
+  const prevProps = current !== null ? current.memoizedProps : null
 
   // 2. 获取下级 ReactElement 对象.
-  let nextChildren = nextProps.children;
-  const isDirectTextChild = shouldSetTextContent(type, nextProps);
+  let nextChildren = nextProps.children
+  const isDirectTextChild = shouldSetTextContent(type, nextProps)
 
   if (isDirectTextChild) {
     // 如果子节点只有一个文本节点, 不用再创建一个 HostText 类型的 Fiber.
-    nextChildren = null;
+    nextChildren = null
   } else if (prevProps !== null && shouldSetTextContent(type, prevProps)) {
     // 设置 fiber.flags.
-    workInProgress.flags |= ContentReset;
+    workInProgress.flags |= ContentReset
   }
 
   // 设置 fiber.flags.
-  markRef(current, workInProgress);
+  markRef(current, workInProgress)
 
   // 3. 根据 ReactElement 对象, 调用 reconcileChildren 生成 Fiber 子节点(只生成次级子节点)
-  reconcileChildren(current, workInProgress, nextChildren, renderLanes);
-  return workInProgress.child;
+  reconcileChildren(current, workInProgress, nextChildren, renderLanes)
+  return workInProgress.child
 }
 ```
 
@@ -1602,24 +1602,24 @@ function updateHostComponent(
 
 ```ts
 interface Update<State> {
-  lane: Lane;
-  tag: 'UpdateState' | 'ReplaceState' | 'ForceUpdate' | 'CaptureUpdate';
-  payload: any;
-  callback: (() => mixed) | null;
-  next: Update<State> | null;
-  _eventTime: number;
+  lane: Lane
+  tag: 'UpdateState' | 'ReplaceState' | 'ForceUpdate' | 'CaptureUpdate'
+  payload: any
+  callback: (() => mixed) | null
+  next: Update<State> | null
+  _eventTime: number
 }
 
 interface SharedQueue<State> {
-  pending: Update<State> | null;
+  pending: Update<State> | null
 }
 
 interface UpdateQueue<State> {
-  baseState: State;
-  firstBaseUpdate: Update<State> | null;
-  lastBaseUpdate: Update<State> | null;
-  shared: SharedQueue<State>;
-  effects: Array<Update<State>> | null; // Updates with `callback`.
+  baseState: State
+  firstBaseUpdate: Update<State> | null
+  lastBaseUpdate: Update<State> | null
+  shared: SharedQueue<State>
+  effects: Array<Update<State>> | null // Updates with `callback`.
 }
 ```
 
@@ -1630,23 +1630,23 @@ const classComponentUpdater = {
   isMounted,
   enqueueSetState(inst, payload, callback) {
     // 1. 获取 ClassComponent 实例对应的 Fiber 节点.
-    const fiber = getInstance(inst);
+    const fiber = getInstance(inst)
     // 2. 创建 Update 对象.
-    const eventTime = requestEventTime();
-    const lane = requestUpdateLane(fiber);
-    const update = createUpdate(eventTime, lane);
-    update.payload = payload;
+    const eventTime = requestEventTime()
+    const lane = requestUpdateLane(fiber)
+    const update = createUpdate(eventTime, lane)
+    update.payload = payload
 
     if (callback !== undefined && callback !== null) {
-      update.callback = callback;
+      update.callback = callback
     }
 
     // 3. 将 Update 对象添加到当前 Fiber 节点的 updateQueue.
-    enqueueUpdate(fiber, update);
+    enqueueUpdate(fiber, update)
     // 4. 请求调度, 进入 Reconciler.
-    scheduleUpdateOnFiber(fiber, lane, eventTime);
+    scheduleUpdateOnFiber(fiber, lane, eventTime)
   },
-};
+}
 ```
 
 [ReactFiberHooks.dispatchAction](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js):
@@ -1658,30 +1658,30 @@ function dispatchAction<S, A>(
   action: A
 ) {
   // 1. 创建 Update 对象.
-  const eventTime = requestEventTime();
-  const lane = requestUpdateLane(fiber);
+  const eventTime = requestEventTime()
+  const lane = requestUpdateLane(fiber)
   const update: Update<S, A> = {
     lane,
     action,
     eagerReducer: null,
     eagerState: null,
     next: null,
-  };
-
-  // 2. 将 Update 对象添加到当前 Hook 对象的 updateQueue.
-  const pending = queue.pending;
-
-  if (pending === null) {
-    update.next = update;
-  } else {
-    update.next = pending.next;
-    pending.next = update;
   }
 
-  queue.pending = update;
+  // 2. 将 Update 对象添加到当前 Hook 对象的 updateQueue.
+  const pending = queue.pending
+
+  if (pending === null) {
+    update.next = update
+  } else {
+    update.next = pending.next
+    pending.next = update
+  }
+
+  queue.pending = update
 
   // 3. 请求调度, 进入 Reconciler.
-  scheduleUpdateOnFiber(fiber, lane, eventTime);
+  scheduleUpdateOnFiber(fiber, lane, eventTime)
 }
 ```
 
@@ -1730,36 +1730,36 @@ function markUpdateLaneFromFiberToRoot(
   lane: Lane
 ): FiberRoot | null {
   // 设置 sourceFiber.lanes.
-  sourceFiber.lanes = mergeLanes(sourceFiber.lanes, lane);
-  let alternate = sourceFiber.alternate;
+  sourceFiber.lanes = mergeLanes(sourceFiber.lanes, lane)
+  let alternate = sourceFiber.alternate
 
   if (alternate !== null) {
     // 同时设置 sourceFiber.alternate.lanes.
-    alternate.lanes = mergeLanes(alternate.lanes, lane);
+    alternate.lanes = mergeLanes(alternate.lanes, lane)
   }
 
   // 从 sourceFiber 开始, 向上遍历所有 Fiber, 直到 HostRootFiber.
   // 设置沿途所有 fiber.childLanes 与 fiber.alternate.childLanes.
-  let node = sourceFiber;
-  let parent = sourceFiber.return;
+  let node = sourceFiber
+  let parent = sourceFiber.return
 
   while (parent !== null) {
-    parent.childLanes = mergeLanes(parent.childLanes, lane);
-    alternate = parent.alternate;
+    parent.childLanes = mergeLanes(parent.childLanes, lane)
+    alternate = parent.alternate
 
     if (alternate !== null) {
-      alternate.childLanes = mergeLanes(alternate.childLanes, lane);
+      alternate.childLanes = mergeLanes(alternate.childLanes, lane)
     }
 
-    node = parent;
-    parent = parent.return;
+    node = parent
+    parent = parent.return
   }
 
   if (node.tag === HostRoot) {
-    const root: FiberRoot = node.stateNode;
-    return root;
+    const root: FiberRoot = node.stateNode
+    return root
   } else {
-    return null;
+    return null
   }
 }
 
@@ -1768,53 +1768,53 @@ function beginWork(
   workInProgress: Fiber,
   renderLanes: Lanes
 ): Fiber | null {
-  const updateLanes = workInProgress.lanes;
+  const updateLanes = workInProgress.lanes
 
   if (current !== null) {
     // 进入对比.
-    const oldProps = current.memoizedProps;
-    const newProps = workInProgress.pendingProps;
+    const oldProps = current.memoizedProps
+    const newProps = workInProgress.pendingProps
     if (
       oldProps !== newProps ||
       hasLegacyContextChanged() ||
       (__DEV__ ? workInProgress.type !== current.type : false)
     ) {
-      didReceiveUpdate = true;
+      didReceiveUpdate = true
     } else if (!includesSomeLane(renderLanes, updateLanes)) {
       // 当前渲染优先级 renderLanes 不包括 fiber.lanes, 表明当前 Fiber 节点无需更新.
-      didReceiveUpdate = false;
+      didReceiveUpdate = false
       // 调用 bailoutOnAlreadyFinishedWork 循环检测子节点是否需要更新.
-      return bailoutOnAlreadyFinishedWork(current, workInProgress, renderLanes);
+      return bailoutOnAlreadyFinishedWork(current, workInProgress, renderLanes)
     }
   }
 
   // 当前节点需要更新.
-  workInProgress.lanes = NoLanes; // 最高优先级
+  workInProgress.lanes = NoLanes // 最高优先级
 
   switch (workInProgress.tag) {
     case ClassComponent: {
-      const Component = workInProgress.type;
-      const unresolvedProps = workInProgress.pendingProps;
+      const Component = workInProgress.type
+      const unresolvedProps = workInProgress.pendingProps
       const resolvedProps =
         workInProgress.elementType === Component
           ? unresolvedProps
-          : resolveDefaultProps(Component, unresolvedProps);
+          : resolveDefaultProps(Component, unresolvedProps)
       return updateClassComponent(
         current,
         workInProgress,
         Component,
         resolvedProps,
         renderLanes
-      );
+      )
     }
     case HostRoot:
-      return updateHostRoot(current, workInProgress, renderLanes);
+      return updateHostRoot(current, workInProgress, renderLanes)
     case HostComponent:
-      return updateHostComponent(current, workInProgress, renderLanes);
+      return updateHostComponent(current, workInProgress, renderLanes)
     case HostText:
-      return updateHostText(current, workInProgress);
+      return updateHostText(current, workInProgress)
     case Fragment:
-      return updateFragment(current, workInProgress, renderLanes);
+      return updateFragment(current, workInProgress, renderLanes)
   }
 }
 
@@ -1826,11 +1826,11 @@ function bailoutOnAlreadyFinishedWork(
   if (!includesSomeLane(renderLanes, workInProgress.childLanes)) {
     // 渲染优先级不包括 workInProgress.childLanes, 表明子节点也无需更新.
     // 返回 null, 直接进入回溯阶段.
-    return null;
+    return null
   } else {
     // Fiber 自身无需更新, 但子节点需要更新, clone 并返回子节点.
-    cloneChildFibers(current, workInProgress);
-    return workInProgress.child;
+    cloneChildFibers(current, workInProgress)
+    return workInProgress.child
   }
 }
 
@@ -1839,14 +1839,14 @@ function completeWork(
   workInProgress: Fiber,
   renderLanes: Lanes
 ): Fiber | null {
-  const newProps = workInProgress.pendingProps;
+  const newProps = workInProgress.pendingProps
 
   switch (workInProgress.tag) {
     case HostComponent: {
       // 非文本节点.
-      popHostContext(workInProgress);
-      const rootContainerInstance = getRootHostContainer();
-      const type = workInProgress.type;
+      popHostContext(workInProgress)
+      const rootContainerInstance = getRootHostContainer()
+      const type = workInProgress.type
 
       if (current !== null && workInProgress.stateNode !== null) {
         // 处理改动.
@@ -1856,26 +1856,26 @@ function completeWork(
           type,
           newProps,
           rootContainerInstance
-        );
+        )
 
         if (current.ref !== workInProgress.ref) {
-          markRef(workInProgress);
+          markRef(workInProgress)
         }
       }
 
-      return null;
+      return null
     }
     case HostText: {
       // 文本节点.
-      const newText = newProps;
+      const newText = newProps
 
       if (current !== null && workInProgress.stateNode !== null) {
-        const oldText = current.memoizedProps;
+        const oldText = current.memoizedProps
         // 处理改动.
-        updateHostText(current, workInProgress, oldText, newText);
+        updateHostText(current, workInProgress, oldText, newText)
       }
 
-      return null;
+      return null
     }
   }
 }
@@ -1887,14 +1887,14 @@ function updateHostComponent(
   newProps: Props,
   rootContainerInstance: Container
 ) {
-  const oldProps = current.memoizedProps;
+  const oldProps = current.memoizedProps
 
   if (oldProps === newProps) {
-    return;
+    return
   }
 
-  const instance: Instance = workInProgress.stateNode;
-  const currentHostContext = getHostContext();
+  const instance: Instance = workInProgress.stateNode
+  const currentHostContext = getHostContext()
   const updatePayload = prepareUpdate(
     instance,
     type,
@@ -1902,12 +1902,12 @@ function updateHostComponent(
     newProps,
     rootContainerInstance,
     currentHostContext
-  );
-  workInProgress.updateQueue = updatePayload;
+  )
+  workInProgress.updateQueue = updatePayload
 
   // 如果有属性变动, 设置 fiber.flags |= Update, 等待 Commit 阶段处理.
   if (updatePayload) {
-    markUpdate(workInProgress);
+    markUpdate(workInProgress)
   }
 }
 
@@ -1919,7 +1919,7 @@ function updateHostText(
 ) {
   // 如果有属性变动, 设置 fiber.flags |= Update, 等待 Commit 阶段处理.
   if (oldText !== newText) {
-    markUpdate(workInProgress);
+    markUpdate(workInProgress)
   }
 }
 ```
@@ -2045,19 +2045,19 @@ Reconciler:
 
 ```ts
 function commitRoot(root: FiberRoot, recoverableErrors: null | Array<mixed>) {
-  const previousUpdateLanePriority = getCurrentUpdatePriority();
-  const prevTransition = ReactCurrentBatchConfig.transition;
+  const previousUpdateLanePriority = getCurrentUpdatePriority()
+  const prevTransition = ReactCurrentBatchConfig.transition
 
   try {
-    ReactCurrentBatchConfig.transition = null;
-    setCurrentUpdatePriority(DiscreteEventPriority);
-    commitRootImpl(root, recoverableErrors, previousUpdateLanePriority);
+    ReactCurrentBatchConfig.transition = null
+    setCurrentUpdatePriority(DiscreteEventPriority)
+    commitRootImpl(root, recoverableErrors, previousUpdateLanePriority)
   } finally {
-    ReactCurrentBatchConfig.transition = prevTransition;
-    setCurrentUpdatePriority(previousUpdateLanePriority);
+    ReactCurrentBatchConfig.transition = prevTransition
+    setCurrentUpdatePriority(previousUpdateLanePriority)
   }
 
-  return null;
+  return null
 }
 
 function commitRootImpl(
@@ -2066,40 +2066,37 @@ function commitRootImpl(
   renderPriorityLevel: EventPriority
 ) {
   do {
-    flushPassiveEffects();
-  } while (rootWithPendingPassiveEffects !== null);
+    flushPassiveEffects()
+  } while (rootWithPendingPassiveEffects !== null)
 
-  flushRenderPhaseStrictModeWarningsInDEV();
+  flushRenderPhaseStrictModeWarningsInDEV()
 
   if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
-    throw new Error('Should not already be working.');
+    throw new Error('Should not already be working.')
   }
 
-  const finishedWork = root.finishedWork;
-  const lanes = root.finishedLanes;
+  const finishedWork = root.finishedWork
+  const lanes = root.finishedLanes
 
   if (finishedWork === null) {
-    return null;
+    return null
   }
 
   // 清空 FiberRoot 对象上的属性.
-  root.finishedWork = null;
-  root.finishedLanes = NoLanes;
-  root.callbackNode = null;
-  root.callbackPriority = NoLane;
+  root.finishedWork = null
+  root.finishedLanes = NoLanes
+  root.callbackNode = null
+  root.callbackPriority = NoLane
 
   // Update the first and last pending times on this root.
   // The new first pending time is whatever is left on the root fiber.
-  const remainingLanes = mergeLanes(
-    finishedWork.lanes,
-    finishedWork.childLanes
-  );
+  const remainingLanes = mergeLanes(finishedWork.lanes, finishedWork.childLanes)
 
   if (root === workInProgressRoot) {
     // We can reset these now that they are finished.
-    workInProgressRoot = null;
-    workInProgress = null;
-    workInProgressRootRenderLanes = NoLanes;
+    workInProgressRoot = null
+    workInProgress = null
+    workInProgressRootRenderLanes = NoLanes
   }
 
   // If there are pending passive effects, schedule a callback to process them.
@@ -2109,12 +2106,12 @@ function commitRootImpl(
     (finishedWork.flags & PassiveMask) !== NoFlags
   ) {
     if (!rootDoesHavePassiveEffects) {
-      rootDoesHavePassiveEffects = true;
-      pendingPassiveEffectsRemainingLanes = remainingLanes;
+      rootDoesHavePassiveEffects = true
+      pendingPassiveEffectsRemainingLanes = remainingLanes
       scheduleCallback(NormalSchedulerPriority, () => {
-        flushPassiveEffects();
-        return null;
-      });
+        flushPassiveEffects()
+        return null
+      })
     }
   }
 
@@ -2122,72 +2119,72 @@ function commitRootImpl(
   const subtreeHasEffects =
     (finishedWork.subtreeFlags &
       (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask)) !==
-    NoFlags;
+    NoFlags
   const rootHasEffect =
     (finishedWork.flags &
       (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask)) !==
-    NoFlags;
+    NoFlags
 
   if (subtreeHasEffects || rootHasEffect) {
     // Store context.
-    const prevTransition = ReactCurrentBatchConfig.transition;
-    const previousPriority = getCurrentUpdatePriority();
-    const prevExecutionContext = executionContext;
-    ReactCurrentBatchConfig.transition = null;
-    setCurrentUpdatePriority(DiscreteEventPriority);
-    executionContext |= CommitContext;
+    const prevTransition = ReactCurrentBatchConfig.transition
+    const previousPriority = getCurrentUpdatePriority()
+    const prevExecutionContext = executionContext
+    ReactCurrentBatchConfig.transition = null
+    setCurrentUpdatePriority(DiscreteEventPriority)
+    executionContext |= CommitContext
 
     // Reset this to null before calling life cycles.
-    ReactCurrentOwner.current = null;
+    ReactCurrentOwner.current = null
 
     // `BeforeMutation` phase:
     // read the state of the host tree right before we mutate it.
     // `getSnapshotBeforeUpdate` is called.
-    commitBeforeMutationEffects(root, finishedWork);
+    commitBeforeMutationEffects(root, finishedWork)
 
     // `Mutation` phase:
     // mutate the host tree.
-    commitMutationEffects(root, finishedWork, lanes);
+    commitMutationEffects(root, finishedWork, lanes)
 
-    resetAfterCommit(root.containerInfo);
+    resetAfterCommit(root.containerInfo)
 
     // The workInProgress tree is now the current tree (during `componentDidMount`/`Update`).
-    root.current = finishedWork;
+    root.current = finishedWork
 
     // `Layout` phase:
     // `useLayoutEffect` is called.
-    commitLayoutEffects(finishedWork, root, lanes);
+    commitLayoutEffects(finishedWork, root, lanes)
 
     // Tell Scheduler to yield at the end of the frame,
     // so the browser has an opportunity to paint.
-    requestPaint();
+    requestPaint()
 
     // Restore context.
-    executionContext = prevExecutionContext;
-    setCurrentUpdatePriority(previousPriority);
-    ReactCurrentBatchConfig.transition = prevTransition;
+    executionContext = prevExecutionContext
+    setCurrentUpdatePriority(previousPriority)
+    ReactCurrentBatchConfig.transition = prevTransition
   } else {
     // No effects.
-    root.current = finishedWork;
+    root.current = finishedWork
   }
 
-  const rootDidHavePassiveEffects = rootDoesHavePassiveEffects;
+  const rootDidHavePassiveEffects = rootDoesHavePassiveEffects
 
   if (rootDoesHavePassiveEffects) {
     // This commit has passive effects:
     // Stash a reference to them.
-    rootDoesHavePassiveEffects = false;
-    rootWithPendingPassiveEffects = root;
-    pendingPassiveEffectsLanes = lanes;
+    rootDoesHavePassiveEffects = false
+    rootWithPendingPassiveEffects = root
+    pendingPassiveEffectsLanes = lanes
   } else {
     // There were no passive effects:
     // immediately release the cache pool for this render.
-    releaseRootPooledCache(root, remainingLanes);
+    releaseRootPooledCache(root, remainingLanes)
   }
 
   // Always call this before exiting `commitRoot`,
   // to ensure that any additional work on this root is scheduled.
-  ensureRootIsScheduled(root, now());
+  ensureRootIsScheduled(root, now())
 
   // If the passive effects are the result of a discrete render,
   // flush them synchronously at the end of the current task
@@ -2196,18 +2193,18 @@ function commitRootImpl(
     includesSomeLane(pendingPassiveEffectsLanes, SyncLane) &&
     root.tag !== LegacyRoot
   ) {
-    flushPassiveEffects();
+    flushPassiveEffects()
   }
 
   // If layout work was scheduled, flush it now.
-  flushSyncCallbacks();
+  flushSyncCallbacks()
 
-  return null;
+  return null
 }
 ```
 
 ```ts
-const BeforeMutationMask = Update | Snapshot | ChildDeletion | Visibility;
+const BeforeMutationMask = Update | Snapshot | ChildDeletion | Visibility
 
 const MutationMask =
   Placement |
@@ -2216,9 +2213,9 @@ const MutationMask =
   ContentReset |
   Ref |
   Hydrating |
-  Visibility;
+  Visibility
 
-const LayoutMask = Update | Callback | Ref | Visibility;
+const LayoutMask = Update | Callback | Ref | Visibility
 ```
 
 #### Before Mutation Phase
@@ -2238,9 +2235,9 @@ const LayoutMask = Update | Callback | Ref | Visibility;
 ```ts
 // `Passive` effects.
 scheduleCallback(NormalSchedulerPriority, () => {
-  flushPassiveEffects();
-  return null;
-});
+  flushPassiveEffects()
+  return null
+})
 
 function flushPassiveEffects(): boolean {
   // Returns whether passive effects were flushed.
@@ -2248,45 +2245,45 @@ function flushPassiveEffects(): boolean {
     const priorityLevel =
       pendingPassiveEffectsRenderPriority > NormalSchedulerPriority
         ? NormalSchedulerPriority
-        : pendingPassiveEffectsRenderPriority;
-    pendingPassiveEffectsRenderPriority = NoSchedulerPriority;
-    return runWithPriority(priorityLevel, flushPassiveEffectsImpl);
+        : pendingPassiveEffectsRenderPriority
+    pendingPassiveEffectsRenderPriority = NoSchedulerPriority
+    return runWithPriority(priorityLevel, flushPassiveEffectsImpl)
   }
 
-  return false;
+  return false
 }
 
 function flushPassiveEffectsImpl() {
   if (rootWithPendingPassiveEffects === null) {
-    return false;
+    return false
   }
 
-  rootWithPendingPassiveEffects = null;
-  pendingPassiveEffectsLanes = NoLanes;
+  rootWithPendingPassiveEffects = null
+  pendingPassiveEffectsLanes = NoLanes
 
   // 1. 执行 effect.destroy().
-  const unmountEffects = pendingPassiveHookEffectsUnmount;
-  pendingPassiveHookEffectsUnmount = [];
+  const unmountEffects = pendingPassiveHookEffectsUnmount
+  pendingPassiveHookEffectsUnmount = []
 
   for (let i = 0; i < unmountEffects.length; i += 2) {
-    const effect = unmountEffects[i];
-    const fiber = unmountEffects[i + 1];
-    const destroy = effect.destroy;
-    effect.destroy = undefined;
+    const effect = unmountEffects[i]
+    const fiber = unmountEffects[i + 1]
+    const destroy = effect.destroy
+    effect.destroy = undefined
 
     if (typeof destroy === 'function') {
-      destroy();
+      destroy()
     }
   }
 
   // 2. 执行新 effect.create(), 重新赋值到 effect.destroy.
-  const mountEffects = pendingPassiveHookEffectsMount;
-  pendingPassiveHookEffectsMount = [];
+  const mountEffects = pendingPassiveHookEffectsMount
+  pendingPassiveHookEffectsMount = []
 
   for (let i = 0; i < mountEffects.length; i += 2) {
-    const effect = mountEffects[i];
-    const fiber = mountEffects[i + 1];
-    effect.destroy = create();
+    const effect = mountEffects[i]
+    const fiber = mountEffects[i + 1]
+    effect.destroy = create()
   }
 }
 ```
@@ -2294,58 +2291,58 @@ function flushPassiveEffectsImpl() {
 ```ts
 // `Snapshot` effects.
 function commitBeforeMutationEffects(root: FiberRoot, firstChild: Fiber) {
-  HostConfig.prepareForCommit(root.containerInfo);
-  nextEffect = firstChild;
+  HostConfig.prepareForCommit(root.containerInfo)
+  nextEffect = firstChild
 
   // DFS traverse.
   while (nextEffect !== null) {
-    const fiber = nextEffect;
-    const deletions = fiber.deletions;
+    const fiber = nextEffect
+    const deletions = fiber.deletions
 
     if (deletions !== null) {
       for (let i = 0; i < deletions.length; i++) {
-        const deletion = deletions[i];
-        commitBeforeMutationEffectsDeletion(deletion);
+        const deletion = deletions[i]
+        commitBeforeMutationEffectsDeletion(deletion)
       }
     }
 
-    const child = fiber.child;
+    const child = fiber.child
 
     if (
       (fiber.subtreeFlags & BeforeMutationMask) !== NoFlags &&
       child !== null
     ) {
       // 1. Visit children.
-      nextEffect = child;
+      nextEffect = child
     } else {
       while (nextEffect !== null) {
-        const fiber = nextEffect;
-        commitBeforeMutationEffectsOnFiber(fiber);
-        const sibling = fiber.sibling;
+        const fiber = nextEffect
+        commitBeforeMutationEffectsOnFiber(fiber)
+        const sibling = fiber.sibling
 
         // 2. Visit sibling.
         if (sibling !== null) {
-          nextEffect = sibling;
-          break;
+          nextEffect = sibling
+          break
         }
 
-        nextEffect = fiber.return;
+        nextEffect = fiber.return
       }
     }
   }
 }
 
 function commitBeforeMutationEffectsOnFiber(finishedWork: Fiber) {
-  const current = finishedWork.alternate;
-  const flags = finishedWork.flags;
+  const current = finishedWork.alternate
+  const flags = finishedWork.flags
 
   if ((flags & Snapshot) !== NoFlags) {
     switch (finishedWork.tag) {
       case ClassComponent: {
         if (current !== null) {
-          const prevProps = current.memoizedProps;
-          const prevState = current.memoizedState;
-          const instance = finishedWork.stateNode;
+          const prevProps = current.memoizedProps
+          const prevState = current.memoizedState
+          const instance = finishedWork.stateNode
 
           // We could update instance props and state here,
           // but instead we rely on them being set during last render.
@@ -2354,19 +2351,19 @@ function commitBeforeMutationEffectsOnFiber(finishedWork: Fiber) {
               ? prevProps
               : resolveDefaultProps(finishedWork.type, prevProps),
             prevState
-          );
-          instance.__reactInternalSnapshotBeforeUpdate = snapshot;
+          )
+          instance.__reactInternalSnapshotBeforeUpdate = snapshot
         }
 
-        break;
+        break
       }
       case HostRoot: {
         if (supportsMutation) {
-          const root = finishedWork.stateNode;
-          HostConfig.clearContainer(root.containerInfo);
+          const root = finishedWork.stateNode
+          HostConfig.clearContainer(root.containerInfo)
         }
 
-        break;
+        break
       }
       case FunctionComponent:
       case ForwardRef:
@@ -2376,12 +2373,12 @@ function commitBeforeMutationEffectsOnFiber(finishedWork: Fiber) {
       case HostPortal:
       case IncompleteClassComponent:
         // Nothing to do for these component types.
-        break;
+        break
       default: {
         throw new Error(
           'This unit of work tag should not have side-effects. This error is ' +
             'likely caused by a bug in React. Please file an issue.'
-        );
+        )
       }
     }
   }
@@ -2389,8 +2386,8 @@ function commitBeforeMutationEffectsOnFiber(finishedWork: Fiber) {
 
 function commitBeforeMutationEffectsDeletion(deletion: Fiber) {
   if (doesFiberContain(deletion, focusedInstanceHandle)) {
-    shouldFireAfterActiveInstanceBlur = true;
-    beforeActiveInstanceBlur(deletion);
+    shouldFireAfterActiveInstanceBlur = true
+    beforeActiveInstanceBlur(deletion)
   }
 }
 ```
@@ -2418,45 +2415,45 @@ export function commitMutationEffects(
   firstChild: Fiber,
   committedLanes: Lanes
 ) {
-  inProgressLanes = committedLanes;
-  inProgressRoot = root;
-  nextEffect = firstChild;
+  inProgressLanes = committedLanes
+  inProgressRoot = root
+  nextEffect = firstChild
 
   while (nextEffect !== null) {
-    const fiber = nextEffect;
-    const deletions = fiber.deletions;
+    const fiber = nextEffect
+    const deletions = fiber.deletions
 
     if (deletions !== null) {
       for (let i = 0; i < deletions.length; i++) {
-        const childToDelete = deletions[i];
-        commitDeletion(root, childToDelete, fiber);
+        const childToDelete = deletions[i]
+        commitDeletion(root, childToDelete, fiber)
       }
     }
 
-    const child = fiber.child;
+    const child = fiber.child
 
     if ((fiber.subtreeFlags & MutationMask) !== NoFlags && child !== null) {
       // 1. Visit children.
-      nextEffect = child;
+      nextEffect = child
     } else {
       while (nextEffect !== null) {
-        const fiber = nextEffect;
-        commitMutationEffectsOnFiber(fiber, root, lanes);
-        const sibling = fiber.sibling;
+        const fiber = nextEffect
+        commitMutationEffectsOnFiber(fiber, root, lanes)
+        const sibling = fiber.sibling
 
         // 2. Visit sibling.
         if (sibling !== null) {
-          nextEffect = sibling;
-          break;
+          nextEffect = sibling
+          break
         }
 
-        nextEffect = fiber.return;
+        nextEffect = fiber.return
       }
     }
   }
 
-  inProgressLanes = null;
-  inProgressRoot = null;
+  inProgressLanes = null
+  inProgressRoot = null
 }
 
 function commitMutationEffectsOnFiber(
@@ -2464,93 +2461,93 @@ function commitMutationEffectsOnFiber(
   root: FiberRoot,
   lanes: Lanes
 ) {
-  const flags = finishedWork.flags;
+  const flags = finishedWork.flags
 
   if (flags & ContentReset) {
-    commitResetTextContent(finishedWork);
+    commitResetTextContent(finishedWork)
   }
 
   if (flags & Ref) {
-    const current = finishedWork.alternate;
+    const current = finishedWork.alternate
 
     if (current !== null) {
       // 先清空 ref, 在第三阶段 (Layout), 再重新赋值.
-      commitDetachRef(current);
+      commitDetachRef(current)
     }
 
     if (finishedWork.tag === ScopeComponent) {
-      commitAttachRef(finishedWork);
+      commitAttachRef(finishedWork)
     }
   }
 
   if (flags & Visibility) {
     switch (finishedWork.tag) {
       case SuspenseComponent: {
-        const newState: OffscreenState | null = finishedWork.memoizedState;
-        const isHidden = newState !== null;
+        const newState: OffscreenState | null = finishedWork.memoizedState
+        const isHidden = newState !== null
 
         if (isHidden) {
-          const current = finishedWork.alternate;
-          const wasHidden = current !== null && current.memoizedState !== null;
+          const current = finishedWork.alternate
+          const wasHidden = current !== null && current.memoizedState !== null
 
           if (!wasHidden) {
-            markCommitTimeOfFallback();
+            markCommitTimeOfFallback()
           }
         }
 
-        break;
+        break
       }
       case OffscreenComponent: {
-        const newState: OffscreenState | null = finishedWork.memoizedState;
-        const isHidden = newState !== null;
-        const current = finishedWork.alternate;
-        const wasHidden = current !== null && current.memoizedState !== null;
-        const offscreenBoundary: Fiber = finishedWork;
+        const newState: OffscreenState | null = finishedWork.memoizedState
+        const isHidden = newState !== null
+        const current = finishedWork.alternate
+        const wasHidden = current !== null && current.memoizedState !== null
+        const offscreenBoundary: Fiber = finishedWork
 
         if (supportsMutation) {
-          hideOrUnhideAllChildren(offscreenBoundary, isHidden);
+          hideOrUnhideAllChildren(offscreenBoundary, isHidden)
         }
 
-        break;
+        break
       }
     }
   }
 
-  const primaryFlags = flags & (Placement | Update | Hydrating);
+  const primaryFlags = flags & (Placement | Update | Hydrating)
 
   switch (primaryFlags) {
     case Placement: {
       // Placement
-      commitPlacement(finishedWork);
-      finishedWork.flags &= ~Placement; // Clear bit.
-      break;
+      commitPlacement(finishedWork)
+      finishedWork.flags &= ~Placement // Clear bit.
+      break
     }
     case PlacementAndUpdate: {
       // Placement
-      commitPlacement(finishedWork);
-      finishedWork.flags &= ~Placement; // Clear bit.
+      commitPlacement(finishedWork)
+      finishedWork.flags &= ~Placement // Clear bit.
 
       // Update
-      const current = finishedWork.alternate;
-      commitWork(current, finishedWork);
-      break;
+      const current = finishedWork.alternate
+      commitWork(current, finishedWork)
+      break
     }
     case Hydrating: {
-      finishedWork.flags &= ~Hydrating; // Clear bit.
-      break;
+      finishedWork.flags &= ~Hydrating // Clear bit.
+      break
     }
     case HydratingAndUpdate: {
-      finishedWork.flags &= ~Hydrating; // Clear bit.
+      finishedWork.flags &= ~Hydrating // Clear bit.
 
       // Update
-      const current = finishedWork.alternate;
-      commitWork(current, finishedWork);
-      break;
+      const current = finishedWork.alternate
+      commitWork(current, finishedWork)
+      break
     }
     case Update: {
-      const current = finishedWork.alternate;
-      commitWork(current, finishedWork);
-      break;
+      const current = finishedWork.alternate
+      commitWork(current, finishedWork)
+      break
     }
   }
 }
@@ -2570,47 +2567,47 @@ function commitLayoutEffects(
   root: FiberRoot,
   committedLanes: Lanes
 ): void {
-  inProgressLanes = committedLanes;
-  inProgressRoot = root;
-  nextEffect = finishedWork;
+  inProgressLanes = committedLanes
+  inProgressRoot = root
+  nextEffect = finishedWork
 
   while (nextEffect !== null) {
-    const fiber = nextEffect;
-    const firstChild = fiber.child;
+    const fiber = nextEffect
+    const firstChild = fiber.child
 
     if ((fiber.subtreeFlags & LayoutMask) !== NoFlags && firstChild !== null) {
       // 1. Visit children.
-      nextEffect = firstChild;
+      nextEffect = firstChild
     } else {
       while (nextEffect !== null) {
-        const fiber = nextEffect;
+        const fiber = nextEffect
 
         if ((fiber.flags & LayoutMask) !== NoFlags) {
-          const current = fiber.alternate;
-          commitLayoutEffectOnFiber(root, current, fiber, committedLanes);
+          const current = fiber.alternate
+          commitLayoutEffectOnFiber(root, current, fiber, committedLanes)
         }
 
         // Complete `commitLayoutEffects`.
         if (fiber === subtreeRoot) {
-          nextEffect = null;
-          break;
+          nextEffect = null
+          break
         }
 
-        const sibling = fiber.sibling;
+        const sibling = fiber.sibling
 
         // 2. Visit sibling.
         if (sibling !== null) {
-          nextEffect = sibling;
-          break;
+          nextEffect = sibling
+          break
         }
 
-        nextEffect = fiber.return;
+        nextEffect = fiber.return
       }
     }
   }
 
-  inProgressLanes = null;
-  inProgressRoot = null;
+  inProgressLanes = null
+  inProgressRoot = null
 }
 
 function commitLayoutEffectOnFiber(
@@ -2628,18 +2625,18 @@ function commitLayoutEffectOnFiber(
           !enableSuspenseLayoutEffectSemantics ||
           !offscreenSubtreeWasHidden
         ) {
-          commitHookEffectListMount(HookLayout | HookHasEffect, finishedWork);
+          commitHookEffectListMount(HookLayout | HookHasEffect, finishedWork)
         }
 
-        break;
+        break
       }
       case ClassComponent: {
-        const instance = finishedWork.stateNode;
+        const instance = finishedWork.stateNode
 
         if (finishedWork.flags & Update) {
           if (!offscreenSubtreeWasHidden) {
             if (current === null) {
-              instance.componentDidMount();
+              instance.componentDidMount()
             } else {
               const prevProps =
                 finishedWork.elementType === finishedWork.type
@@ -2647,64 +2644,64 @@ function commitLayoutEffectOnFiber(
                   : resolveDefaultProps(
                       finishedWork.type,
                       current.memoizedProps
-                    );
-              const prevState = current.memoizedState;
+                    )
+              const prevState = current.memoizedState
 
               instance.componentDidUpdate(
                 prevProps,
                 prevState,
                 instance.__reactInternalSnapshotBeforeUpdate
-              );
+              )
             }
           }
         }
 
-        const updateQueue = finishedWork.updateQueue;
+        const updateQueue = finishedWork.updateQueue
 
         if (updateQueue !== null) {
           // 处理 update 回调函数, e.g: `this.setState({}, callback)`.
-          commitUpdateQueue(finishedWork, updateQueue, instance);
+          commitUpdateQueue(finishedWork, updateQueue, instance)
         }
 
-        break;
+        break
       }
       case HostRoot: {
-        const updateQueue = finishedWork.updateQueue;
+        const updateQueue = finishedWork.updateQueue
 
         if (updateQueue !== null) {
-          let instance = null;
+          let instance = null
 
           if (finishedWork.child !== null) {
             switch (finishedWork.child.tag) {
               case HostComponent:
-                instance = getPublicInstance(finishedWork.child.stateNode);
-                break;
+                instance = getPublicInstance(finishedWork.child.stateNode)
+                break
               case ClassComponent:
-                instance = finishedWork.child.stateNode;
-                break;
+                instance = finishedWork.child.stateNode
+                break
             }
           }
 
           // 处理 update 回调函数, e.g: `this.setState({}, callback)`.
-          commitUpdateQueue(finishedWork, updateQueue, instance);
+          commitUpdateQueue(finishedWork, updateQueue, instance)
         }
 
-        break;
+        break
       }
       case HostComponent: {
-        const instance: Instance = finishedWork.stateNode;
+        const instance: Instance = finishedWork.stateNode
 
         if (current === null && finishedWork.flags & Update) {
-          const type = finishedWork.type;
-          const props = finishedWork.memoizedProps;
-          commitMount(instance, type, props, finishedWork);
+          const type = finishedWork.type
+          const props = finishedWork.memoizedProps
+          commitMount(instance, type, props, finishedWork)
         }
 
-        break;
+        break
       }
       case SuspenseComponent: {
-        commitSuspenseHydrationCallbacks(finishedRoot, finishedWork);
-        break;
+        commitSuspenseHydrationCallbacks(finishedRoot, finishedWork)
+        break
       }
       case HostText:
       case HostPortal:
@@ -2714,20 +2711,20 @@ function commitLayoutEffectOnFiber(
       case ScopeComponent:
       case OffscreenComponent:
       case LegacyHiddenComponent: {
-        break;
+        break
       }
 
       default:
         throw new Error(
           'This unit of work tag should not have side-effects. This error is ' +
             'likely caused by a bug in React. Please file an issue.'
-        );
+        )
     }
   }
 
   // 重新设置ref.
   if (finishedWork.flags & Ref) {
-    commitAttachRef(finishedWork);
+    commitAttachRef(finishedWork)
   }
 }
 ```
@@ -2748,34 +2745,34 @@ function commitLayoutEffectOnFiber(
 ```ts
 const performWork = deadline => {
   if (!nextUnitOfWork) {
-    resetNextUnitOfWork();
+    resetNextUnitOfWork()
   }
 
   // whether current status is idle status or not
   while (nextUnitOfWork && deadline.timeRemaining() > ENOUGH_TIME) {
-    nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+    nextUnitOfWork = performUnitOfWork(nextUnitOfWork)
   }
 
   if (pendingCommit) {
-    commitAllWork(pendingCommit);
+    commitAllWork(pendingCommit)
   }
 
   // checks if there's pending work
   // if exist, performWork in **next frame** when idle
   if (nextUnitOfWork || updateQueue.length > 0) {
-    requestIdleCallback(performWork);
+    requestIdleCallback(performWork)
   }
-};
+}
 
 const scheduleUpdate = (instance, partialState) => {
   updateQueue.push({
     from: CLASS_COMPONENT,
     instance,
     partialState,
-  });
+  })
 
-  requestIdleCallback(performWork);
-};
+  requestIdleCallback(performWork)
+}
 
 // React.render function
 const render = (elements, container) => {
@@ -2785,8 +2782,8 @@ const render = (elements, container) => {
     newProps: {
       children: elements,
     },
-  });
+  })
 
-  requestIdleCallback(performWork);
-};
+  requestIdleCallback(performWork)
+}
 ```

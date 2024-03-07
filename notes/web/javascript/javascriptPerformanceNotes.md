@@ -53,9 +53,9 @@ tags: [Web, JavaScript, ECMAScript, Performance]
 - 局部变量引用方法时, 应注意会动态改变 this 指针.
 
 ```ts
-const DOM = tazimi.util.Dom;
+const DOM = tazimi.util.Dom
 
-DOM.method.call(/* 关注 this 指针 */);
+DOM.method.call(/* 关注 this 指针 */)
 ```
 
 #### Scope Chain Performance
@@ -72,14 +72,14 @@ const memoize = fn =>
   (
     (cache = Object.create(null)) =>
     (...args) => {
-      return cache[args] || (cache[args] = fn(...args));
+      return cache[args] || (cache[args] = fn(...args))
     }
-  )();
+  )()
 
-const memoizedGetDistance = memoize(getDistance);
+const memoizedGetDistance = memoize(getDistance)
 
-memoizedGetDistance('Murcia', 'Madrid'); // => computed, slow
-memoizedGetDistance('Murcia', 'Madrid'); // => cached, fast!
+memoizedGetDistance('Murcia', 'Madrid') // => computed, slow
+memoizedGetDistance('Murcia', 'Madrid') // => cached, fast!
 ```
 
 ### Loop Performance
@@ -88,40 +88,40 @@ memoizedGetDistance('Murcia', 'Madrid'); // => cached, fast!
 
 ```ts
 for (let i = item.length; i--; ) {
-  process(items[i]);
+  process(items[i])
 }
 
-let j = items.length;
+let j = items.length
 while (j--) {
-  process(items[i]);
+  process(items[i])
 }
 
-let k = items.length;
+let k = items.length
 do {
-  process(items[k]);
-} while (k--);
+  process(items[k])
+} while (k--)
 ```
 
 Duff's Device:
 
 ```ts
-let i = items.length % 8;
+let i = items.length % 8
 
 while (i) {
-  process(items[i--]);
+  process(items[i--])
 }
 
-i = Math.floor(items.length / 8);
+i = Math.floor(items.length / 8)
 
 while (i) {
-  process(items[i--]);
-  process(items[i--]);
-  process(items[i--]);
-  process(items[i--]);
-  process(items[i--]);
-  process(items[i--]);
-  process(items[i--]);
-  process(items[i--]);
+  process(items[i--])
+  process(items[i--])
+  process(items[i--])
+  process(items[i--])
+  process(items[i--])
+  process(items[i--])
+  process(items[i--])
+  process(items[i--])
 }
 ```
 
@@ -133,13 +133,13 @@ while (i) {
 - 位掩码
 
 ```ts
-const OPTION_A = 1;
-const OPTION_B = 2;
-const OPTION_C = 4;
-const OPTION_D = 8;
-const OPTION_E = 16;
+const OPTION_A = 1
+const OPTION_B = 2
+const OPTION_C = 4
+const OPTION_D = 8
+const OPTION_E = 16
 
-const options = OPTION_A | OPTION_C | OPTION_D;
+const options = OPTION_A | OPTION_C | OPTION_D
 ```
 
 ### Reduce Repeat Manipulation
@@ -161,15 +161,15 @@ JavaScript 代码与 UI 共享线程.
   e.g React Scheduler and Reconciler, Vue `nextTick` API.
 
 ```ts
-const button = document.getElementById('myButton');
+const button = document.getElementById('myButton')
 
 button.onclick = function () {
-  oneMethod();
+  oneMethod()
 
   setTimeout(function () {
-    document.getElementById('notice').style.color = 'red';
-  }, 250);
-};
+    document.getElementById('notice').style.color = 'red'
+  }, 250)
+}
 ```
 
 ```ts
@@ -179,44 +179,44 @@ button.onclick = function () {
 const Timer = {
   _data: {},
   start(key) {
-    Timer._data[key] = new Date();
+    Timer._data[key] = new Date()
   },
   stop(key) {
-    const time = Timer._data[key];
+    const time = Timer._data[key]
 
     if (time) {
-      Timer._data[key] = new Date() - time;
+      Timer._data[key] = new Date() - time
     }
   },
   getTime(key) {
-    return Timer._data[key];
+    return Timer._data[key]
   },
-};
+}
 ```
 
 ```ts
 const pollTimerTask = time => {
   if (timerQueue.length === 0) {
-    return;
+    return
   }
 
   while (timerQueue[0] && time >= timerQueue[0].time) {
-    const timer = timerQueue.shift();
+    const timer = timerQueue.shift()
 
     while (timer.tickerQueue.length) {
-      const { id, callback, delay, loop, defer } = timer.tickerQueue.shift();
+      const { id, callback, delay, loop, defer } = timer.tickerQueue.shift()
 
-      callback(time);
+      callback(time)
 
       if (loop && idPool[id].exist) {
-        let nextTime = timer.time + delay;
+        let nextTime = timer.time + delay
 
         // 当回调函数执行时间超过多个执行周期时
         if (time - nextTime > delay) {
-          nextTime = nextTime + Math.floor((time - nextTime) / delay) * delay;
+          nextTime = nextTime + Math.floor((time - nextTime) / delay) * delay
 
           // 延迟执行时, 将 nextTime 推迟至下一个执行周期
-          defer && (nextTime += delay);
+          defer && (nextTime += delay)
         }
 
         registerTimerWithId({
@@ -226,14 +226,14 @@ const pollTimerTask = time => {
           delay,
           loop,
           defer,
-        });
+        })
       } else {
         // 当回调函数不需要周期执行或在回调函数中执行 unregister 时
-        delete idPool[id];
+        delete idPool[id]
       }
     }
   }
-};
+}
 ```
 
 #### Time Slicing
@@ -241,36 +241,36 @@ const pollTimerTask = time => {
 ```ts
 function saveDocument(id) {
   // 利用闭包封装待执行任务
-  const tasks = [openDocument, writeText, closeDocument, updateUI];
+  const tasks = [openDocument, writeText, closeDocument, updateUI]
 
   setTimeout(function sliceTask() {
     // 执行下一个任务
-    const task = tasks.shift();
-    task(id);
+    const task = tasks.shift()
+    task(id)
 
     // 检查是否还有其他任务
     if (tasks.length > 0) {
       // 递归调用(每次参数不同)
-      setTimeout(sliceTask, 25);
+      setTimeout(sliceTask, 25)
     }
-  }, 25);
+  }, 25)
 }
 ```
 
 ```ts
 function processArray(items, process, callback) {
   // 克隆原数组
-  const todo = items.concat();
+  const todo = items.concat()
 
   setTimeout(function sliceTask() {
-    process(todo.shift());
+    process(todo.shift())
 
     if (todo.length > 0) {
-      setTimeout(sliceTask, 25);
+      setTimeout(sliceTask, 25)
     } else {
-      callback(items);
+      callback(items)
     }
-  }, 25);
+  }, 25)
 }
 ```
 
@@ -286,9 +286,9 @@ async function saveSettings() {
     saveToDatabase,
     updateUI,
     sendAnalytics,
-  ];
+  ]
 
-  let deadline = performance.now() + 50;
+  let deadline = performance.now() + 50
 
   while (tasks.length > 0) {
     if (
@@ -298,23 +298,23 @@ async function saveSettings() {
       // 1. Pending user input.
       // 2. deadline has been reached.
       // Yield here:
-      await yieldToMain();
+      await yieldToMain()
 
       // Extend the deadline.
-      deadline += 50;
-      continue;
+      deadline += 50
+      continue
     }
 
     // Run task.
-    const task = tasks.shift();
-    task();
+    const task = tasks.shift()
+    task()
   }
 }
 
 function yieldToMain() {
   return new Promise(resolve => {
-    setTimeout(resolve, 0);
-  });
+    setTimeout(resolve, 0)
+  })
 }
 ```
 
@@ -331,14 +331,14 @@ Simple debounce:
 
 ```ts
 function debounce(action, delay) {
-  let timer = null;
+  let timer = null
 
   return function () {
-    if (timer) clearTimeout(timer);
+    if (timer) clearTimeout(timer)
     timer = setTimeout(() => {
-      action();
-    }, delay);
-  };
+      action()
+    }, delay)
+  }
 }
 ```
 
@@ -346,33 +346,33 @@ Simple throttle:
 
 ```ts
 function throttle(action) {
-  let isRunning = false;
+  let isRunning = false
 
   return function () {
     if (isRunning) {
-      return;
+      return
     }
 
-    isRunning = true;
+    isRunning = true
 
     window.requestAnimationFrame(() => {
-      action();
-      isRunning = false;
-    });
-  };
+      action()
+      isRunning = false
+    })
+  }
 }
 
 function throttle(func, timeFrame) {
-  let lastTime = 0;
+  let lastTime = 0
 
   return function (...args) {
-    const now = new Date();
+    const now = new Date()
 
     if (now - lastTime >= timeFrame) {
-      func(...args);
-      lastTime = now;
+      func(...args)
+      lastTime = now
     }
-  };
+  }
 }
 ```
 
@@ -381,7 +381,7 @@ Lodash debounce:
 ```ts
 // 这个是用来获取当前时间戳的
 function now() {
-  return +new Date();
+  return +new Date()
 }
 
 /**
@@ -393,42 +393,42 @@ function now() {
  * @return {function}             返回客户调用函数
  */
 function debounce(func, wait = 50, immediate = true) {
-  let timer, context, args;
+  let timer, context, args
 
   // 延迟执行函数
   const later = () =>
     setTimeout(() => {
       // 延迟函数执行完毕, 清空缓存的定时器序号
-      timer = null;
+      timer = null
       // 延迟执行的情况下, 函数会在延迟函数中执行
       // 使用到之前缓存的参数和上下文
       if (!immediate) {
-        func.apply(context, args);
-        context = args = null;
+        func.apply(context, args)
+        context = args = null
       }
-    }, wait);
+    }, wait)
 
   // 这里返回的函数是每次实际调用的函数
   return function (...params) {
     // 如果没有创建延迟执行函数 (later), 就创建一个
     if (!timer) {
-      timer = later();
+      timer = later()
       // 如果是立即执行, 调用函数
       // 否则缓存参数和调用上下文
       if (immediate) {
-        func.apply(this, params);
+        func.apply(this, params)
       } else {
         // eslint-disable-next-line @typescript-eslint/no-this-alias
-        context = this;
-        args = params;
+        context = this
+        args = params
       }
     } else {
       // 如果已有延迟执行函数 (later), 调用的时候清除原来的并重新设定一个
       // 这样做延迟函数会重新计时
-      clearTimeout(timer);
-      timer = later();
+      clearTimeout(timer)
+      timer = later()
     }
-  };
+  }
 }
 ```
 
@@ -446,39 +446,39 @@ Lodash throttle:
  * @return {function}             返回客户调用函数
  */
 _.throttle = function (func, wait, options) {
-  let context, args, result;
-  let timeout = null;
+  let context, args, result
+  let timeout = null
   // 之前的时间戳
-  let previous = 0;
+  let previous = 0
   // 如果 options 没传则设为空对象
-  if (!options) options = {};
+  if (!options) options = {}
 
   // 定时器回调函数
   const later = function () {
     // 如果设置了 leading, 就将 previous 设为 0
     // 用于下面函数的第一个 if 判断
-    previous = options.leading === false ? 0 : _.now();
+    previous = options.leading === false ? 0 : _.now()
     // 置空一是为了防止内存泄漏, 二是为了下面的定时器判断
-    timeout = null;
-    result = func.apply(context, args);
-    if (!timeout) context = args = null;
-  };
+    timeout = null
+    result = func.apply(context, args)
+    if (!timeout) context = args = null
+  }
 
   return function (...original_args) {
     // 获得当前时间戳
-    const now = _.now();
+    const now = _.now()
 
     // 首次进入前者肯定为 true
     // 如果需要第一次不执行函数
     // 就将上次时间戳设为当前的
     // 这样在接下来计算 remaining 的值时会大于0
-    if (!previous && options.leading === false) previous = now;
+    if (!previous && options.leading === false) previous = now
 
     // 计算剩余时间
-    const remaining = wait - (now - previous);
+    const remaining = wait - (now - previous)
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    context = this;
-    args = original_args;
+    context = this
+    args = original_args
 
     // 如果当前调用已经大于上次调用时间 + wait
     // 或者用户手动调了时间
@@ -491,52 +491,52 @@ _.throttle = function (func, wait, options) {
     if (remaining <= 0 || remaining > wait) {
       // 如果存在定时器就清理掉否则会调用二次回调
       if (timeout) {
-        clearTimeout(timeout);
-        timeout = null;
+        clearTimeout(timeout)
+        timeout = null
       }
 
-      previous = now;
-      result = func.apply(context, args);
-      if (!timeout) context = args = null;
+      previous = now
+      result = func.apply(context, args)
+      if (!timeout) context = args = null
     } else if (!timeout && options.trailing !== false) {
       // 判断是否设置了定时器和 trailing
       // 没有的话就开启一个定时器
       // 并且不能不能同时设置 leading 和 trailing
-      timeout = setTimeout(later, remaining);
+      timeout = setTimeout(later, remaining)
     }
 
-    return result;
-  };
-};
+    return result
+  }
+}
 ```
 
 #### Animation Frame Throttling
 
 ```ts
 function useAnimation() {
-  const frameId = useRef(0);
-  const ticking = useRef(false);
+  const frameId = useRef(0)
+  const ticking = useRef(false)
 
   const handleResize = event => {
-    if (ticking.current) return;
-    ticking.current = true;
-    frameId.current = requestAnimationFrame(() => handleUpdate(event));
-  };
+    if (ticking.current) return
+    ticking.current = true
+    frameId.current = requestAnimationFrame(() => handleUpdate(event))
+  }
 
   const handleUpdate = event => {
-    console.log('resize update');
-    ticking.current = false;
-  };
+    console.log('resize update')
+    ticking.current = false
+  }
 
   useMount(() => {
-    window.addEventListener('resize', handleResize);
-    handleUpdate();
+    window.addEventListener('resize', handleResize)
+    handleUpdate()
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(frameId.current);
-    };
-  });
+      window.removeEventListener('resize', handleResize)
+      cancelAnimationFrame(frameId.current)
+    }
+  })
 }
 ```
 
@@ -553,49 +553,49 @@ function useAnimation() {
 
 ```ts
 window.onload = function () {
-  const oUl = document.getElementById('ul');
-  const aLi = oUl.getElementsByTagName('li');
+  const oUl = document.getElementById('ul')
+  const aLi = oUl.getElementsByTagName('li')
 
   oUl.onmouseover = function (e) {
-    const e = e || window.event;
-    const target = e.target || e.srcElement;
+    const e = e || window.event
+    const target = e.target || e.srcElement
 
     // alert(target.innerHTML);
 
     if (target.nodeName.toLowerCase() === 'li') {
-      target.style.background = 'red';
+      target.style.background = 'red'
     }
 
     // 阻止默认行为并取消冒泡
     if (typeof e.preventDefault === 'function') {
-      e.preventDefault();
-      e.stopPropagation();
+      e.preventDefault()
+      e.stopPropagation()
     } else {
-      e.returnValue = false;
-      e.cancelBubble = true;
+      e.returnValue = false
+      e.cancelBubble = true
     }
-  };
+  }
 
   oUl.onmouseout = function (e) {
-    const e = e || window.event;
-    const target = e.target || e.srcElement;
+    const e = e || window.event
+    const target = e.target || e.srcElement
 
     // alert(target.innerHTML);
 
     if (target.nodeName.toLowerCase() === 'li') {
-      target.style.background = '';
+      target.style.background = ''
     }
 
     // 阻止默认行为并取消冒泡
     if (typeof e.preventDefault === 'function') {
-      e.preventDefault();
-      e.stopPropagation();
+      e.preventDefault()
+      e.stopPropagation()
     } else {
-      e.returnValue = false;
-      e.cancelBubble = true;
+      e.returnValue = false
+      e.cancelBubble = true
     }
-  };
-};
+  }
+}
 ```
 
 ## DOM Performance
@@ -604,7 +604,7 @@ window.onload = function () {
 - 局部变量缓存布局信息.
 
 ```ts
-const btn = document.getElementById('btn');
+const btn = document.getElementById('btn')
 ```
 
 - HTML Collection 转化成数组再操作.
@@ -612,10 +612,10 @@ const btn = document.getElementById('btn');
 ```ts
 function toArray(coll) {
   for (let i = 0, a = [], len = coll.length; i < len; i++) {
-    a[i] = coll[i];
+    a[i] = coll[i]
   }
 
-  return a;
+  return a
 }
 ```
 
@@ -642,19 +642,19 @@ function toArray(coll) {
 - `document.createDocumentFragment()`.
 
 ```ts
-const fragment = document.createDocumentFragment();
-appendDataToElement(fragment, data);
-document.getElementById('myList').appendChild(fragment);
+const fragment = document.createDocumentFragment()
+appendDataToElement(fragment, data)
+document.getElementById('myList').appendChild(fragment)
 ```
 
 - oldNode.cloneNode(true);
 
 ```ts
-const old = document.getElementById('myList');
-const clone = old.cloneNode(true);
+const old = document.getElementById('myList')
+const clone = old.cloneNode(true)
 
-appendDataToElement(clone, data);
-old.parentNode.replaceChild(clone, old);
+appendDataToElement(clone, data)
+old.parentNode.replaceChild(clone, old)
 ```
 
 ### Animation Frame Performance
@@ -668,8 +668,8 @@ and just before the frame is rendered (layout, paint, composite etc.).
 在 js 中(除定位属性) 外, 不直接操作 element.style.attr/element.cssText:
 
 ```ts
-element.classList.add('className');
-element.className += ' className';
+element.classList.add('className')
+element.className += ' className'
 ```
 
 :::tip Pipeline
@@ -707,24 +707,24 @@ read css -> write css (only re-layout/paint/composite once).
 // eslint-disable-next-line no-restricted-globals
 self.addEventListener('install', event => {
   async function buildCache() {
-    const cache = await caches.open(cacheName);
-    return cache.addAll(['/main.css', '/main.mjs', '/offline.html']);
+    const cache = await caches.open(cacheName)
+    return cache.addAll(['/main.css', '/main.mjs', '/offline.html'])
   }
-  event.waitUntil(buildCache());
-});
+  event.waitUntil(buildCache())
+})
 
 // eslint-disable-next-line no-restricted-globals
 self.addEventListener('fetch', event => {
   async function cachedFetch(event) {
-    const cache = await caches.open(cacheName);
-    let response = await cache.match(event.request);
-    if (response) return response;
-    response = await fetch(event.request);
-    cache.put(event.request, response.clone());
-    return response;
+    const cache = await caches.open(cacheName)
+    let response = await cache.match(event.request)
+    if (response) return response
+    response = await fetch(event.request)
+    cache.put(event.request, response.clone())
+    return response
   }
-  event.respondWith(cachedFetch(event));
-});
+  event.respondWith(cachedFetch(event))
+})
 ```
 
 ### HTTP Cache
@@ -1078,10 +1078,10 @@ Pre-fetch and pre-render
 
 <script>
   // Critical Fetch request for article content
-  fetch('/api/articles.json', { priority: 'high' }).then(/*...*/);
+  fetch('/api/articles.json', { priority: 'high' }).then(/*...*/)
 
   // Request for related content now reduced in priority
-  fetch('/api/related.json', { priority: 'low' }).then(/*...*/);
+  fetch('/api/related.json', { priority: 'low' }).then(/*...*/)
 </script>
 ```
 
@@ -1097,10 +1097,10 @@ Lazy Loading Polyfill:
 window.addEventListener('scroll', function (event) {
   Array.from(document.querySelectorAll('.lazyload')).forEach(image => {
     if (image.slideIntoView(event.getBoundingClientRect())) {
-      image.setAttribute('src', image.dataset.src);
+      image.setAttribute('src', image.dataset.src)
     }
-  });
-});
+  })
+})
 ```
 
 Observer Lazy Loading:
@@ -1109,14 +1109,14 @@ Observer Lazy Loading:
 const observer = new IntersectionObserver(nodes => {
   nodes.forEach(v => {
     if (v.isIntersecting) {
-      v.target.src = v.target.dataset.src;
-      observer.unobserve(v.target);
+      v.target.src = v.target.dataset.src
+      observer.unobserve(v.target)
     }
-  });
-});
+  })
+})
 
-const images = document.querySelectorAll('img.lazyload');
-images.forEach(v => observer.observe(v));
+const images = document.querySelectorAll('img.lazyload')
+images.forEach(v => observer.observe(v))
 ```
 
 Native Lazy Loading:
@@ -1152,12 +1152,12 @@ Native Lazy Loading:
 ```
 
 ```tsx
-const DetailsComponent = lazy(() => import('./details'));
+const DetailsComponent = lazy(() => import('./details'))
 const PageComponent = () => {
-  <Suspense fallback={<div>Loading...</div>}>
+  ;<Suspense fallback={<div>Loading...</div>}>
     <DetailsComponent />
-  </Suspense>;
-};
+  </Suspense>
+}
 ```
 
 #### Script Lazy Loading
@@ -1168,11 +1168,11 @@ const PageComponent = () => {
     ... The full body of the page ...
     <script>
       window.onload = function () {
-        const script = document.createElement('script');
-        script.src = 'all_lazy_20100426.js';
-        script.async = true;
-        document.documentElement.firstChild.appendChild(script);
-      };
+        const script = document.createElement('script')
+        script.src = 'all_lazy_20100426.js'
+        script.async = true
+        document.documentElement.firstChild.appendChild(script)
+      }
     </script>
   </body>
 </html>
@@ -1182,30 +1182,30 @@ const PageComponent = () => {
 
 ```ts
 function requireScript(file, callback) {
-  const script = document.getElementsByTagName('script')[0];
-  const newJS = document.createElement('script');
+  const script = document.getElementsByTagName('script')[0]
+  const newJS = document.createElement('script')
 
   // IE
   newJS.onreadystatechange = function () {
     if (newJS.readyState === 'loaded' || newJS.readyState === 'complete') {
-      newJS.onreadystatechange = null;
-      callback();
+      newJS.onreadystatechange = null
+      callback()
     }
-  };
+  }
   // others
   newJS.onload = function () {
-    callback();
-  };
+    callback()
+  }
 
   // 添加至 HTML 页面
-  newJS.src = file;
-  newJS.async = true;
-  script.parentNode.insertBefore(newJS, script);
+  newJS.src = file
+  newJS.async = true
+  script.parentNode.insertBefore(newJS, script)
 }
 
 requireScript('the_rest.js', function () {
-  Application.init();
-});
+  Application.init()
+})
 ```
 
 #### Babel Configuration
@@ -1379,12 +1379,12 @@ Load 也不一定代表用户看到主要内容.
   一般情况下无需 `append` 到 `DOM` 中.
 
 ```ts
-const thisPage = window.location.href;
-const referringPage = document.referrer ? document.referrer : 'none';
-const beacon = new Image();
+const thisPage = window.location.href
+const referringPage = document.referrer ? document.referrer : 'none'
+const beacon = new Image()
 beacon.src = `http://www.example.com/logger/beacon.gif?page=${encodeURI(
   thisPage
-)}&ref=${encodeURI(referringPage)}`;
+)}&ref=${encodeURI(referringPage)}`
 ```
 
 ### Performance Monitoring Reference
@@ -1397,10 +1397,10 @@ beacon.src = `http://www.example.com/logger/beacon.gif?page=${encodeURI(
 ### Web Performance API
 
 ```ts
-performance.mark('mainThread-start');
-expensiveCalculation();
-performance.mark('mainThread-stop');
-performance.measure('mainThread', 'mainThread-start', 'mainThread-stop');
+performance.mark('mainThread-start')
+expensiveCalculation()
+performance.mark('mainThread-stop')
+performance.measure('mainThread', 'mainThread-start', 'mainThread-stop')
 ```
 
 ### FP
@@ -1411,15 +1411,15 @@ First paint time:
 const entryHandler = list => {
   for (const entry of list.getEntries()) {
     if (entry.name === 'first-paint') {
-      observer.disconnect();
+      observer.disconnect()
     }
 
-    console.log(entry);
+    console.log(entry)
   }
-};
+}
 
-const observer = new PerformanceObserver(entryHandler);
-observer.observe({ type: 'paint', buffered: true });
+const observer = new PerformanceObserver(entryHandler)
+observer.observe({ type: 'paint', buffered: true })
 
 // {
 //   duration: 0,
@@ -1431,109 +1431,109 @@ observer.observe({ type: 'paint', buffered: true });
 
 ```ts
 document.addEventListener('DOMContentLoaded', function () {
-  console.log('DOM 挂载时间: ', Date.now() - timerStart);
+  console.log('DOM 挂载时间: ', Date.now() - timerStart)
 
   // 性能日志上报...
-});
+})
 
 window.addEventListener('load', function () {
-  console.log('所有资源加载完成时间: ', Date.now() - timerStart);
+  console.log('所有资源加载完成时间: ', Date.now() - timerStart)
 
   // 性能日志上报...
-});
+})
 ```
 
 ```ts
 // 计算加载时间.
 function getPerformanceTiming() {
-  const performance = window.performance;
+  const performance = window.performance
 
   if (!performance) {
     // 当前浏览器不支持.
-    console.log('你的浏览器不支持 performance 接口');
-    return;
+    console.log('你的浏览器不支持 performance 接口')
+    return
   }
 
-  const t = performance.timing;
-  const times = {};
+  const t = performance.timing
+  const times = {}
 
   // 【重要】页面加载完成的时间.
   // 【原因】几乎代表了用户等待页面可用的时间.
-  times.loadPage = t.loadEventEnd - t.navigationStart;
+  times.loadPage = t.loadEventEnd - t.navigationStart
 
   // 【重要】解析 DOM 树结构的时间.
   // 【原因】DOM 树嵌套过多.
-  times.domReady = t.domComplete - t.responseEnd;
+  times.domReady = t.domComplete - t.responseEnd
 
   // 【重要】重定向的时间.
   // 【原因】拒绝重定向. e.g http://example.com/ 不应写成 http://example.com.
-  times.redirect = t.redirectEnd - t.redirectStart;
+  times.redirect = t.redirectEnd - t.redirectStart
 
   // 【重要】DNS 查询时间.
   // 【原因】DNS 预加载做了么? 页面内是不是使用了太多不同的域名导致域名查询的时间太长?
   // 可使用 HTML5 Prefetch 预查询 DNS, 见: [HTML5 prefetch](http://segmentfault.com/a/1190000000633364).
-  times.lookupDomain = t.domainLookupEnd - t.domainLookupStart;
+  times.lookupDomain = t.domainLookupEnd - t.domainLookupStart
 
   // 【重要】读取页面第一个字节的时间.
   // 【原因】这可以理解为用户拿到你的资源占用的时间, 加异地机房了么, 加CDN 处理了么? 加带宽了么? 加 CPU 运算速度了么?
   // TTFB 即 Time To First Byte 的意思.
   // 维基百科: https://en.wikipedia.org/wiki/Time_To_First_Byte.
-  times.ttfb = t.responseStart - t.navigationStart;
+  times.ttfb = t.responseStart - t.navigationStart
 
   // 【重要】内容加载完成的时间.
   // 【原因】页面内容经过 gzip 压缩了么, 静态资源 `CSS`/`JS` 等压缩了么?
-  times.request = t.responseEnd - t.requestStart;
+  times.request = t.responseEnd - t.requestStart
 
   // 【重要】执行 onload 回调函数的时间.
   // 【原因】是否太多不必要的操作都放到 onload 回调函数里执行了, 考虑过延迟加载/按需加载的策略么?
-  times.loadEvent = t.loadEventEnd - t.loadEventStart;
+  times.loadEvent = t.loadEventEnd - t.loadEventStart
 
   // DNS 缓存时间.
-  times.appCache = t.domainLookupStart - t.fetchStart;
+  times.appCache = t.domainLookupStart - t.fetchStart
 
   // 卸载页面的时间.
-  times.unloadEvent = t.unloadEventEnd - t.unloadEventStart;
+  times.unloadEvent = t.unloadEventEnd - t.unloadEventStart
 
   // TCP 建立连接完成握手的时间.
-  times.connect = t.connectEnd - t.connectStart;
-  return times;
+  times.connect = t.connectEnd - t.connectStart
+  return times
 }
 ```
 
 ```ts
-const [pageNav] = performance.getEntriesByType('navigation');
+const [pageNav] = performance.getEntriesByType('navigation')
 
 // Measuring DNS lookup time.
-const totalLookupTime = pageNav.domainLookupEnd - pageNav.domainLookupStart;
+const totalLookupTime = pageNav.domainLookupEnd - pageNav.domainLookupStart
 
 // Quantifying total connection time.
-const connectionTime = pageNav.connectEnd - pageNav.connectStart;
-let tlsTime = 0; // <-- Assume 0 to start with
+const connectionTime = pageNav.connectEnd - pageNav.connectStart
+let tlsTime = 0 // <-- Assume 0 to start with
 
 // Was there TLS negotiation?
 if (pageNav.secureConnectionStart > 0) {
   // Awesome! Calculate it!
-  tlsTime = pageNav.connectEnd - pageNav.secureConnectionStart;
+  tlsTime = pageNav.connectEnd - pageNav.secureConnectionStart
 }
 
 // Cache seek plus response time of the current document.
-const fetchTime = pageNav.responseEnd - pageNav.fetchStart;
+const fetchTime = pageNav.responseEnd - pageNav.fetchStart
 
 // Service worker time plus response time.
-let workerTime = 0;
+let workerTime = 0
 
 if (pageNav.workerStart > 0) {
-  workerTime = pageNav.responseEnd - pageNav.workerStart;
+  workerTime = pageNav.responseEnd - pageNav.workerStart
 }
 
 // Request time only (excluding redirects, DNS, and connection/TLS time).
-const requestTime = pageNav.responseStart - pageNav.requestStart;
+const requestTime = pageNav.responseStart - pageNav.requestStart
 
 // Response time only (download).
-const responseTime = pageNav.responseEnd - pageNav.responseStart;
+const responseTime = pageNav.responseEnd - pageNav.responseStart
 
 // Request + response time.
-const requestResponseTime = pageNav.responseEnd - pageNav.requestStart;
+const requestResponseTime = pageNav.responseEnd - pageNav.requestStart
 ```
 
 ### FCP
@@ -1552,15 +1552,15 @@ First Contentful Paint:
 const entryHandler = list => {
   for (const entry of list.getEntries()) {
     if (entry.name === 'first-contentful-paint') {
-      observer.disconnect();
+      observer.disconnect()
     }
 
-    console.log(entry);
+    console.log(entry)
   }
-};
+}
 
-const observer = new PerformanceObserver(entryHandler);
-observer.observe({ type: 'paint', buffered: true });
+const observer = new PerformanceObserver(entryHandler)
+observer.observe({ type: 'paint', buffered: true })
 
 // {
 //   duration: 0,
@@ -1587,16 +1587,16 @@ Largest Contentful Paint:
 ```ts
 const entryHandler = list => {
   if (observer) {
-    observer.disconnect();
+    observer.disconnect()
   }
 
   for (const entry of list.getEntries()) {
-    console.log(entry);
+    console.log(entry)
   }
-};
+}
 
-const observer = new PerformanceObserver(entryHandler);
-observer.observe({ type: 'largest-contentful-paint', buffered: true });
+const observer = new PerformanceObserver(entryHandler)
+observer.observe({ type: 'largest-contentful-paint', buffered: true })
 
 // {
 //   duration: 0,
@@ -1623,22 +1623,22 @@ Cumulative Layout Shift:
 - When it’s necessary to move elements, use `transform` animations.
 
 ```ts
-let sessionValue = 0;
-let sessionEntries = [];
+let sessionValue = 0
+let sessionEntries = []
 const cls = {
   subType: 'layout-shift',
   name: 'layout-shift',
   type: 'performance',
   pageURL: getPageURL(),
   value: 0,
-};
+}
 
 const entryHandler = list => {
   for (const entry of list.getEntries()) {
     // Only count layout shifts without recent user input.
     if (!entry.hadRecentInput) {
-      const firstSessionEntry = sessionEntries[0];
-      const lastSessionEntry = sessionEntries[sessionEntries.length - 1];
+      const firstSessionEntry = sessionEntries[0]
+      const lastSessionEntry = sessionEntries[sessionEntries.length - 1]
 
       // If the entry occurred less than 1 second after the previous entry and
       // less than 5 seconds after the first entry in the session, include the
@@ -1648,27 +1648,27 @@ const entryHandler = list => {
         entry.startTime - lastSessionEntry.startTime < 1000 &&
         entry.startTime - firstSessionEntry.startTime < 5000
       ) {
-        sessionValue += entry.value;
-        sessionEntries.push(formatCLSEntry(entry));
+        sessionValue += entry.value
+        sessionEntries.push(formatCLSEntry(entry))
       } else {
-        sessionValue = entry.value;
-        sessionEntries = [formatCLSEntry(entry)];
+        sessionValue = entry.value
+        sessionEntries = [formatCLSEntry(entry)]
       }
 
       // If the current session value is larger than the current CLS value,
       // update CLS and the entries contributing to it.
       if (sessionValue > cls.value) {
-        cls.value = sessionValue;
-        cls.entries = sessionEntries;
-        cls.startTime = performance.now();
-        lazyReportCache(deepCopy(cls));
+        cls.value = sessionValue
+        cls.entries = sessionEntries
+        cls.startTime = performance.now()
+        lazyReportCache(deepCopy(cls))
       }
     }
   }
-};
+}
 
-const observer = new PerformanceObserver(entryHandler);
-observer.observe({ type: 'layout-shift', buffered: true });
+const observer = new PerformanceObserver(entryHandler)
+observer.observe({ type: 'layout-shift', buffered: true })
 
 // {
 //   duration: 0,

@@ -974,7 +974,7 @@ const FOCUSABLE_SELECTOR = [
   'summary',
   'textarea:not([disabled])',
   'video[controls]',
-].join(',');
+].join(',')
 ```
 
 ## CSS Data Types
@@ -1434,14 +1434,14 @@ use variables to implement `if else` statement.
 
 ```ts
 window.addEventListener('resize', () => {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
+  const vh = window.innerHeight * 0.01
+  document.documentElement.style.setProperty('--vh', `${vh}px`)
+})
 ```
 
 ```ts
-const root = document.documentElement;
-const bgColor = getComputedStyle(root).getPropertyValue('--body-bg');
+const root = document.documentElement
+const bgColor = getComputedStyle(root).getPropertyValue('--body-bg')
 ```
 
 Change `--cursor-x` and `--cursor-y` via `JavaScript` API:
@@ -1506,7 +1506,7 @@ window.CSS.registerProperty({
   syntax: '<color>',
   inherits: false,
   initialValue: '#c0ffee',
-});
+})
 ```
 
 CSS 不支持背景渐变色的直接过渡动画,
@@ -1847,9 +1847,9 @@ const settings = {
   grid: {
     cols: 24,
   },
-};
+}
 
-const remToPx = rem => `${rem * 16}px`;
+const remToPx = rem => `${rem * 16}px`
 
 const screens = {
   sm: remToPx(settings.screensRem.sm),
@@ -1857,28 +1857,28 @@ const screens = {
   lg: remToPx(settings.screensRem.lg),
   xl: remToPx(settings.screensRem.xl),
   '2xl': remToPx(settings.screensRem['2xl']),
-};
+}
 
-const fsMin = settings.typography.fontSizeMin;
-const fsMax = settings.typography.fontSizeMax;
-const msFactorMin = settings.typography.msFactorMin;
-const msFactorMax = settings.typography.msFactorMax;
-const screenMin = settings.screensRem.min;
-const screenMax = settings.screensRem['2xl'];
+const fsMin = settings.typography.fontSizeMin
+const fsMax = settings.typography.fontSizeMax
+const msFactorMin = settings.typography.msFactorMin
+const msFactorMax = settings.typography.msFactorMax
+const screenMin = settings.screensRem.min
+const screenMax = settings.screensRem['2xl']
 
 const calcMulti = (multiMin = 0, multiMax = null) => {
   return {
     fsMin: fsMin * msFactorMin ** multiMin,
     fsMax: fsMax * msFactorMax ** (multiMax || multiMin),
-  };
-};
+  }
+}
 
 const clamp = (multiMin = 0, multiMax = null) => {
-  const _calcMulti = calcMulti(multiMin, multiMax || multiMin);
-  const _fsMin = _calcMulti.fsMin;
-  const _fsMax = _calcMulti.fsMax;
-  return `clamp(${_fsMin}rem, calc(${_fsMin}rem + (${_fsMax} - ${_fsMin}) * ((100vw - ${screenMin}rem) / (${screenMax} - ${screenMin}))), ${_fsMax}rem)`;
-};
+  const _calcMulti = calcMulti(multiMin, multiMax || multiMin)
+  const _fsMin = _calcMulti.fsMin
+  const _fsMax = _calcMulti.fsMax
+  return `clamp(${_fsMin}rem, calc(${_fsMin}rem + (${_fsMax} - ${_fsMin}) * ((100vw - ${screenMin}rem) / (${screenMax} - ${screenMin}))), ${_fsMax}rem)`
+}
 
 const fontSize = {
   xs: clamp(-2),
@@ -1894,14 +1894,14 @@ const fontSize = {
   '7xl': clamp(8),
   '8xl': clamp(9),
   '9xl': clamp(10),
-};
+}
 
 module.exports = {
   theme: {
     screens,
     fontSize,
   },
-};
+}
 ```
 
 <!-- markdownlint-enable line-length -->
@@ -3095,11 +3095,11 @@ li::before {
 
 <script>
   /* Additional range input feature */
-  const range = document.querySelector('.image-a11y-control');
+  const range = document.querySelector('.image-a11y-control')
   range.addEventListener('input', event => {
     document.querySelector('.image-before').style.width =
-      `${event.target.value}%`;
-  });
+      `${event.target.value}%`
+  })
 </script>
 ```
 
