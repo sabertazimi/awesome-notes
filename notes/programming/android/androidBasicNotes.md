@@ -365,11 +365,13 @@ android.app.Fragment
 #### Activity XML
 
 ```html
-<fragment android:id="@+id/right_fragment" <!-- custom fragment class -->
+<fragment
+  android:id="@+id/right_fragment"
   android:name="com.example.fragmentTest.RightFragment"
-  android:layout_width="0dp" android:layout_height="match_parent"
-  android:layout_weight="1" /></fragment
->
+  android:layout_width="0dp"
+  android:layout_height="match_parent"
+  android:layout_weight="1"
+></fragment>
 ```
 
 #### Create View in Fragment

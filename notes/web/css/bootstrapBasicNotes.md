@@ -8,21 +8,6 @@ tags: [Web, CSS, Bootstrap]
 
 # Bootstrap Basic Notes
 
-## Bootstrap Basis
-
-```html
-<UI API>
-  <container/content>
-  <header>
-  </header>
-  <body>
-  </body>
-  <footer>
-  </footer>
-</container/content>
-</UI API>
-```
-
 ## Grid System
 
 ### Basic
@@ -305,7 +290,7 @@ $('#myTabs li:eq(2) a').tab('show') // Select third tab (0-indexed)
   the same one as for the show.bs.tab event)
 
 ```ts
-$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+$('a[data-toggle="tab"]').on('shown.bs.tab', (e) => {
   const target = e.target // newly activated tab
   const relatedTarget = e.relatedTarget // previous active tab
 })
@@ -446,16 +431,17 @@ panel-body/list-group
 
 ```html
 <!-- type,format,value -->
-<input id=”” name=””
-type=”text/email/password/radiobutton/checkbox(checked)/submit/number/range/color/date/url”
-value=”(textfield/buttonText)” placeholder=”(默认占位文字)”
-
-<!-- validate input data -->
-
-required pattern=”[0-9a-zA-z]{5/13-16}”
-<!-- []:可用字符 {}:字符数目 -->
-min=”(number)” max=”(number)” step=”(步长:指定输入数字必须倍数关系)”
-<!-- validate input data-->
+<input
+  id=""
+  name=""
+  type="text/email/password/radiobutton/checkbox(checked)/submit/number/range/color/date/url"
+  value="(textfield/buttonText)"
+  placeholder="(默认占位文字)"
+  required
+  pattern="[0-9a-zA-z]{5/13-16}"
+  min="(number)"
+  max="(number)"
+  step="(步长:指定输入数字必须倍数关系)"
 />
 ```
 
@@ -940,8 +926,7 @@ min=”(number)” max=”(number)” step=”(步长:指定输入数字必须�
     aria-valuenow="40"
     aria-valuemin="0"
     aria-valuemax="100"
-    style="width:
-  40%"
+    style="width: 40%"
   >
     <span class="sr-only">40% Complete (success)</span>
   </div>
@@ -953,8 +938,7 @@ min=”(number)” max=”(number)” step=”(步长:指定输入数字必须�
     aria-valuenow="20"
     aria-valuemin="0"
     aria-valuemax="100"
-    style="width:
-  20%"
+    style="width: 20%"
   >
     <span class="sr-only">20% Complete</span>
   </div>
@@ -966,8 +950,7 @@ min=”(number)” max=”(number)” step=”(步长:指定输入数字必须�
     aria-valuenow="60"
     aria-valuemin="0"
     aria-valuemax="100"
-    style="width:
-  60%"
+    style="width: 60%"
   >
     <span class="sr-only">60% Complete (warning)</span>
   </div>
@@ -979,8 +962,7 @@ min=”(number)” max=”(number)” step=”(步长:指定输入数字必须�
     aria-valuenow="80"
     aria-valuemin="0"
     aria-valuemax="100"
-    style="width:
-  80%"
+    style="width: 80%"
   >
     <span class="sr-only">80% Complete (danger)</span>
   </div>
@@ -995,7 +977,7 @@ min=”(number)” max=”(number)” step=”(步长:指定输入数字必须�
 
 ```ts
 // manually initialization
-$(function () {
+$(() => {
   $('[data-toggle="tooltip"]').tooltip()
 })
 ```
@@ -1053,7 +1035,7 @@ $(function () {
 
 ```ts
 // manually initialization
-$(function () {
+$(() => {
   $('[data-toggle="popover"]').popover()
 })
 ```

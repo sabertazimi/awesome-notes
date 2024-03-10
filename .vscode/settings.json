@@ -1,5 +1,4 @@
 {
-  "eslint.experimental.useFlatConfig": false,
   "cSpell.words": [
     "AAAI",
     "aabbcc",
@@ -1689,6 +1688,7 @@
     "tprev",
     "tqdm",
     "traceroute",
+    "transitionend",
     "transpiled",
     "trbl",
     "treesitter",

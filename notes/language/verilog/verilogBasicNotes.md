@@ -739,15 +739,15 @@ x  1011 (the multiplier)
 /*
  * 利用计数器实现任意分频
  */
-always @(posedge f_clk) begin
+always @(posedge f_clk) begin
 
-    //设定频率控制字p  
-    if (i == p) begin
+    //设定频率控制字p
+    if (i == p) begin
         i=0;
-        f_out=~f_out;
+        f_out=~f_out;
     end
     else begin
-        i=i+1;
+        i=i+1;
     end
 end
 ```
@@ -913,7 +913,6 @@ end
 
 always_ff @(posedge clk)
   count <= count + 1;
-
 
 always_latch
   if (en) q <= d;

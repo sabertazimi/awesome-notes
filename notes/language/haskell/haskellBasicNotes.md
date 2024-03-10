@@ -224,7 +224,6 @@ ghci> [x*2 | x <- [1..10], x*2 >= 12]
 ghci> [ x | x <- [50..100], x `mod` 7 == 3]
 [52,59,66,73,80,87,94]
 
-
 boomBangs xs = [ if x < 10 then "BOOM!" else "BANG!" | x <- xs, odd x]
 
 ghci> boomBangs [7..13]
@@ -1364,7 +1363,6 @@ zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
 zipWith' _ [] _ = []
 zipWith' _ _ [] = []
 zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
-
 
 ghci> zipWith' (+) [4,2,5,6] [2,6,2,3]
 [6,8,7,9]

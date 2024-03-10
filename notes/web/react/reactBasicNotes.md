@@ -94,7 +94,7 @@ class MyComponent extends React.Component {
     fetch('https://api.example.com/items')
       .then(res => res.json())
       .then(
-        result => {
+        (result) => {
           this.setState({
             isLoaded: true,
             items: result.items,
@@ -103,7 +103,7 @@ class MyComponent extends React.Component {
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
-        error => {
+        (error) => {
           this.setState({
             isLoaded: true,
             error,
@@ -115,15 +115,24 @@ class MyComponent extends React.Component {
   render() {
     const { error, isLoaded, items } = this.state
     if (error) {
-      return <div>Error: {error.message}</div>
-    } else if (!isLoaded) {
+      return (
+        <div>
+          Error:
+          {error.message}
+        </div>
+      )
+    }
+    else if (!isLoaded) {
       return <div>Loading...</div>
-    } else {
+    }
+    else {
       return (
         <ul>
           {items.map(item => (
             <li key={item.name}>
-              {item.name} {item.price}
+              {item.name}
+              {' '}
+              {item.price}
             </li>
           ))}
         </ul>
@@ -309,33 +318,34 @@ React Component
 
 ```ts
 interface NewLifecycle<P, S, SS> {
-  getSnapshotBeforeUpdate?(
+  getSnapshotBeforeUpdate?: (
     prevProps: Readonly<P>,
     prevState: Readonly<S>
-  ): SS | null
+  ) => SS | null
 
-  componentDidUpdate?(
+  componentDidUpdate?: (
     prevProps: Readonly<P>,
     prevState: Readonly<S>,
     snapshot?: SS
-  ): void
+  ) => void
 }
 
 interface ComponentLifecycle<P, S, SS = any> extends NewLifecycle<P, S, SS> {
-  componentDidMount?(): void
+  componentDidMount?: () => void
 
-  shouldComponentUpdate?(
+  shouldComponentUpdate?: (
     nextProps: Readonly<P>,
     nextState: Readonly<S>,
     nextContext: any
-  ): boolean
+  ) => boolean
 
-  componentWillUnmount?(): void
+  componentWillUnmount?: () => void
 
-  componentDidCatch?(error: Error, errorInfo: ErrorInfo): void
+  componentDidCatch?: (error: Error, errorInfo: ErrorInfo) => void
 }
 
-class Component<P = {}, S = {}, SS = any> extends ComponentLifecycle<P, S, SS> {
+class Component<P = object, S = object, SS = any>
+  extends ComponentLifecycle<P, S, SS> {
   readonly props: Readonly<P> & Readonly<{ children?: ReactNode | undefined }>
   state: Readonly<S>
 
@@ -356,7 +366,8 @@ class Component<P = {}, S = {}, SS = any> extends ComponentLifecycle<P, S, SS> {
   render(): ReactNode
 }
 
-class PureComponent<P = {}, S = {}, SS = any> extends Component<P, S, SS> {}
+class PureComponent<P = object, S = object, SS = any>
+  extends Component<P, S, SS> {}
 ```
 
 #### Stateless component
@@ -462,7 +473,10 @@ Update for three reasons:
 Modify children properties:
 
 ```tsx
-const CreateTextWithProps = ({ text, ASCIIChar, ...props }) => {
+function CreateTextWithProps({ text, ASCIIChar, ...props }: {
+  text: string
+  ASCIIChar: string
+}) {
   return (
     <span {...props}>
       {text}
@@ -471,13 +485,13 @@ const CreateTextWithProps = ({ text, ASCIIChar, ...props }) => {
   )
 }
 
-const RepeatCharacters = ({ times, children }) => {
+function RepeatCharacters({ times, children }) {
   return React.cloneElement(children, {
     ASCIIChar: children.props.ASCIIChar.repeat(times),
   })
 }
 
-function App() {
+export default function App() {
   return (
     <div>
       <RepeatCharacters times={3}>
@@ -489,18 +503,29 @@ function App() {
 ```
 
 ```tsx
-const RadioGroup = props => {
+function RadioGroup(props: {
+  name: string
+  children: ReactElement
+}) {
   const RenderChildren = () =>
-    React.Children.map(props.children, child => {
+    React.Children.map(props.children, (child) => {
       return React.cloneElement(child, {
         name: props.name,
       })
     })
 
-  return <div>{<RenderChildren />}</div>
+  return (
+    <div>
+      <RenderChildren />
+    </div>
+  )
 }
 
-const RadioButton = props => {
+function RadioButton(props: {
+  value: string
+  name: string
+  children: ReactElement
+}) {
   return (
     <label>
       <input type="radio" value={props.value} name={props.name} />
@@ -509,7 +534,7 @@ const RadioButton = props => {
   )
 }
 
-function App() {
+export default function App() {
   return (
     <RadioGroup name="numbers">
       <RadioButton value="first">First</RadioButton>
@@ -531,7 +556,9 @@ function App() {
 ```tsx
 import { Children, cloneElement } from 'react'
 
-function Breadcrumbs({ children }) {
+function Breadcrumbs({ children }: {
+  children: ReactElement
+}) {
   const arrayChildren = Children.toArray(children)
 
   return (
@@ -553,27 +580,29 @@ function Breadcrumbs({ children }) {
 
         return (
           <>
-            {child.props.link ? (
-              <a
-                href={child.props.link}
-                style={{
-                  display: 'inline-block',
-                  textDecoration: 'none',
-                }}
-              >
+            {child.props.link
+              ? (
+                <a
+                  href={child.props.link}
+                  style={{
+                    display: 'inline-block',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <div style={{ marginRight: '5px' }}>
+                    {cloneElement(child, {
+                      isLast,
+                    })}
+                  </div>
+                </a>
+                )
+              : (
                 <div style={{ marginRight: '5px' }}>
                   {cloneElement(child, {
                     isLast,
                   })}
                 </div>
-              </a>
-            ) : (
-              <div style={{ marginRight: '5px' }}>
-                {cloneElement(child, {
-                  isLast,
-                })}
-              </div>
-            )}
+                )}
             {!isLast && <div style={{ marginRight: '5px' }}></div>}
           </>
         )
@@ -582,7 +611,10 @@ function Breadcrumbs({ children }) {
   )
 }
 
-function BreadcrumbItem({ isLast, children }) {
+function BreadcrumbItem({ isLast, children }: {
+  isLast: boolean
+  children: ReactElement
+}) {
   return (
     <li
       style={{
@@ -638,11 +670,9 @@ function commitAttachRef(finishedWork: Fiber) {
     }
 
     // 赋值 ref
-    if (typeof ref === 'function') {
+    if (typeof ref === 'function')
       ref(instanceToUse)
-    } else {
-      ref.current = instanceToUse
-    }
+    else ref.current = instanceToUse
   }
 }
 ```
@@ -673,18 +703,20 @@ class CssThemeProvider extends React.PureComponent<Props> {
 ```tsx
 class Foo extends Component {
   render() {
+    // eslint-disable-next-line react/no-string-refs
     return <input onClick={() => this.action()} ref="input" />
   }
 
   action() {
+    // eslint-disable-next-line react/no-string-refs
     console.log(this.refs.input.value)
   }
 }
 ```
 
 ```tsx
-class App extends React.Component {
-  renderRow = index => {
+class App extends React.Component<{ data: object }> {
+  renderRow = (index) => {
     // ref 会绑定到 DataTable 组件实例, 而不是 App 组件实例上
     return <input ref={`input-${index}`} />
 
@@ -707,16 +739,25 @@ Ref forwarding 是一个特性,
 
 ```tsx
 // functional component
-const ButtonElement = React.forwardRef((props, ref) => (
-  <button ref={ref} className="CustomButton">
-    {props.children}
-  </button>
-))
+function Button(
+  props: { children: ReactElement },
+  ref
+) {
+  return (
+    <button ref={ref} className="CustomButton">
+      {props.children}
+    </button>
+  )
+}
+
+const ButtonElement = React.forwardRef(Button)
 
 // Create ref to the DOM button:
 // get ref to `<button>`
 const ref = React.createRef()
-;<ButtonElement ref={ref}>{'Forward Ref'}</ButtonElement>
+export default function App() {
+  return (<ButtonElement ref={ref}>Forward Ref</ButtonElement>)
+}
 ```
 
 ```tsx
@@ -726,18 +767,24 @@ interface Props {
   type: 'submit' | 'button'
 }
 
-const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
-  <button ref={ref} className="MyClassName" type={props.type}>
-    {props.children}
-  </button>
-))
+function Button(props: Props, ref: Ref) {
+  return (
+    <button ref={ref} className="MyClassName" type={props.type}>
+      {props.children}
+    </button>
+  )
+}
+
+const FancyButton = React.forwardRef<Ref, Props>(Button)
+
+export default FancyButton
 ```
 
 #### Callback Refs
 
 ```tsx
 class UserInput extends Component {
-  setSearchInput = input => {
+  setSearchInput = (input) => {
     this.input = input
   }
 
@@ -760,7 +807,7 @@ Compound components [example](https://dev.to/alexi_be3/react-component-patterns-
 import * as React from 'react'
 
 interface Props {
-  onStateChange?(e: string): void
+  onStateChange?: (e: string) => void
   defaultValue?: string
 }
 
@@ -776,14 +823,14 @@ interface RadioInputProps {
   imgSrc: string
   key: string | number
   currentValue?: string
-  onChange?(e: React.ChangeEvent<HTMLInputElement>): void
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const RadioImageForm = ({
+function RadioImageForm({
   children,
   onStateChange,
   defaultValue,
-}: React.PropsWithChildren<Props>): React.ReactElement => {
+}: React.PropsWithChildren<Props>): React.ReactElement {
   const [state, setState] = React.useState<State>({
     currentValue: '',
     defaultValue,
@@ -810,14 +857,13 @@ const RadioImageForm = ({
         {React.Children.map(children, (child: React.ReactElement) =>
           React.cloneElement(child, {
             ...providerState,
-          })
-        )}
+          }))}
       </form>
     </div>
   )
 }
 
-const RadioInput = ({
+function RadioInput({
   currentValue,
   onChange,
   label,
@@ -825,20 +871,22 @@ const RadioInput = ({
   name,
   imgSrc,
   key,
-}: RadioInputProps): React.ReactElement => (
-  <label className="radio-button-group" key={key}>
-    <input
-      type="radio"
-      name={name}
-      value={value}
-      aria-label={label}
-      onChange={onChange}
-      checked={currentValue === value}
-      aria-checked={currentValue === value}
-    />
-    <img alt="" src={imgSrc} />
-  </label>
-)
+}: RadioInputProps): React.ReactElement {
+  return (
+    <label className="radio-button-group" key={key}>
+      <input
+        type="radio"
+        name={name}
+        value={value}
+        aria-label={label}
+        onChange={onChange}
+        checked={currentValue === value}
+        aria-checked={currentValue === value}
+      />
+      <img alt="" src={imgSrc} />
+    </label>
+  )
+}
 
 RadioImageForm.RadioInput = RadioInput
 
@@ -860,30 +908,36 @@ interface Props {
   rest?: any
 }
 
-const Header = ({ children, style, ...rest }: Props): JSX.Element => (
-  <div style={{ ...style }} {...rest}>
-    {children}
-  </div>
-)
-
-const Body = ({ children, style, ...rest }: Props): JSX.Element => (
-  <div style={{ ...style }} {...rest}>
-    {children}
-  </div>
-)
-
-const Footer = ({ children, style, ...rest }: Props): JSX.Element => (
-  <div style={{ ...style }} {...rest}>
-    {children}
-  </div>
-)
-
-const getChildrenOnDisplayName = (children: ReactNode[], displayName: string) =>
-  React.Children.map(children, child =>
-    child.displayName === displayName ? child : null
+function Header({ children, style, ...rest }: Props): JSX.Element {
+  return (
+    <div style={{ ...style }} {...rest}>
+      {children}
+    </div>
   )
+}
 
-const Card = ({ children }: { children: ReactNode[] }): JSX.Element => {
+function Body({ children, style, ...rest }: Props): JSX.Element {
+  return (
+    <div style={{ ...style }} {...rest}>
+      {children}
+    </div>
+  )
+}
+
+function Footer({ children, style, ...rest }: Props): JSX.Element {
+  return (
+    <div style={{ ...style }} {...rest}>
+      {children}
+    </div>
+  )
+}
+
+function getChildrenOnDisplayName(children: ReactNode[], displayName: string) {
+  return React.Children.map(children, child =>
+    child.displayName === displayName ? child : null)
+}
+
+function Card({ children }: { children: ReactNode[] }): JSX.Element {
   const header = getChildrenOnDisplayName(children, 'Header')
   const body = getChildrenOnDisplayName(children, 'Body')
   const footer = getChildrenOnDisplayName(children, 'Footer')
@@ -904,15 +958,17 @@ Card.Header = Header
 Card.Body = Body
 Card.Footer = Footer
 
-const App = () => (
-  <div>
-    <Card>
-      <Card.Header>Header</Card.Header>
-      <Card.Body>Body</Card.Body>
-      <Card.Footer>Footer</Card.Footer>
-    </Card>
-  </div>
-)
+function App() {
+  return (
+    <div>
+      <Card>
+        <Card.Header>Header</Card.Header>
+        <Card.Body>Body</Card.Body>
+        <Card.Footer>Footer</Card.Footer>
+      </Card>
+    </div>
+  )
+}
 
 export default App
 ```
@@ -940,14 +996,13 @@ export default App
 function listenToAllSupportedEvents(rootContainerElement: EventTarget) {
   if (enableEagerRootListeners) {
     // 1. 节流优化, 保证全局注册只被调用一次.
-    if (rootContainerElement[listeningMarker]) {
+    if (rootContainerElement[listeningMarker])
       return
-    }
 
     rootContainerElement[listeningMarker] = true
 
     // 2. 遍历 allNativeEvents 监听冒泡和捕获阶段的事件.
-    allNativeEvents.forEach(domEventName => {
+    allNativeEvents.forEach((domEventName) => {
       if (!nonDelegatedEvents.has(domEventName)) {
         listenToNativeEvent(
           domEventName,
@@ -980,9 +1035,8 @@ function listenToNativeEvent(
 
   // 利用 Set 数据结构, 保证相同的事件类型只会被注册一次.
   if (!listenerSet.has(listenerSetKey)) {
-    if (isCapturePhaseListener) {
+    if (isCapturePhaseListener)
       eventSystemFlags |= IS_CAPTURE_PHASE
-    }
 
     // 注册事件监听.
     addTrappedEventListener(
@@ -1018,7 +1072,8 @@ function addTrappedEventListener(
       domEventName,
       listener
     )
-  } else {
+  }
+  else {
     unsubscribeListener = addEventBubbleListener(
       targetContainer,
       domEventName,
@@ -1096,7 +1151,8 @@ function dispatchDiscreteEvent(
   try {
     setCurrentUpdatePriority(DiscreteEventPriority)
     dispatchEvent(domEventName, eventSystemFlags, container, nativeEvent)
-  } finally {
+  }
+  finally {
     setCurrentUpdatePriority(previousPriority)
     ReactCurrentBatchConfig.transition = prevTransition
   }
@@ -1115,7 +1171,8 @@ function dispatchContinuousEvent(
   try {
     setCurrentUpdatePriority(ContinuousEventPriority)
     dispatchEvent(domEventName, eventSystemFlags, container, nativeEvent)
-  } finally {
+  }
+  finally {
     setCurrentUpdatePriority(previousPriority)
     ReactCurrentBatchConfig.transition = prevTransition
   }
@@ -1163,15 +1220,14 @@ function dispatchEvent(
   clearIfContinuousEvent(domEventName, nativeEvent)
 
   if (
-    eventSystemFlags & IS_CAPTURE_PHASE &&
-    isDiscreteEventThatRequiresHydration(domEventName)
+    eventSystemFlags & IS_CAPTURE_PHASE
+    && isDiscreteEventThatRequiresHydration(domEventName)
   ) {
     while (blockedOn !== null) {
       const fiber = getInstanceFromNode(blockedOn)
 
-      if (fiber !== null) {
+      if (fiber !== null)
         attemptSynchronousHydration(fiber)
-      }
 
       const nextBlockedOn = findInstanceBlockingEvent(
         domEventName,
@@ -1190,16 +1246,14 @@ function dispatchEvent(
         )
       }
 
-      if (nextBlockedOn === blockedOn) {
+      if (nextBlockedOn === blockedOn)
         break
-      }
 
       blockedOn = nextBlockedOn
     }
 
-    if (blockedOn !== null) {
+    if (blockedOn !== null)
       nativeEvent.stopPropagation()
-    }
 
     return
   }
@@ -1241,7 +1295,7 @@ Downside:
 ```tsx
 // ToggleableMenu.jsx
 function withToggleable(Clickable) {
-  return class extends React.Component {
+  return class Toggleable extends React.Component<{ children: ReactElement }> {
     constructor() {
       super()
       this.toggle = this.toggle.bind(this)
@@ -1263,7 +1317,7 @@ function withToggleable(Clickable) {
   }
 }
 
-class NormalMenu extends React.Component {
+class NormalMenu extends React.Component<{ onClick: Function, title: string }> {
   render() {
     return (
       <div onClick={this.props.onClick}>
@@ -1273,7 +1327,8 @@ class NormalMenu extends React.Component {
   }
 }
 
-export default withToggleable(NormalMenu)
+const ToggleableMenu = withToggleable(NormalMenu)
+export default ToggleableMenu
 ```
 
 ```tsx
@@ -1326,7 +1381,12 @@ Downside:
   (restricts children components from using the data at outside field).
 
 ```tsx
-class Toggleable extends React.Component {
+interface Props {
+  title: string
+  children: ReactElement
+}
+
+class Toggleable extends React.Component<Props> {
   constructor() {
     super()
     this.toggle = this.toggle.bind(this)
@@ -1342,18 +1402,20 @@ class Toggleable extends React.Component {
   }
 }
 
-const ToggleableMenu = props => (
-  <Toggleable>
-    {(show, onClick) => (
-      <div>
-        <div onClick={onClick}>
-          <h1>{props.title}</h1>
+export default function ToggleableMenu(props: Props) {
+  return (
+    <Toggleable>
+      {(show, onClick) => (
+        <div>
+          <div onClick={onClick}>
+            <h1>{props.title}</h1>
+          </div>
+          {show && props.children}
         </div>
-        {show && props.children}
-      </div>
-    )}
-  </Toggleable>
-)
+      )}
+    </Toggleable>
+  )
+}
 ```
 
 ```tsx
@@ -1433,18 +1495,22 @@ Don't use `React.FC`/`React.FunctionComponent`:
 
 ```tsx
 // Declaring type of props
-interface AppProps {
+interface Props {
   message: string
 }
 
 // Inferred return type
-const App = ({ message }: AppProps) => <div>{message}</div>
+const Message = ({ message }: Props) => <div>{message}</div>
 
 // Explicit return type annotation
-const App = ({ message }: AppProps): JSX.Element => <div>{message}</div>
+const Message = ({ message }: Props): JSX.Element => <div>{message}</div>
 
 // Inline types annotation
-const App = ({ message }: { message: string }) => <div>{message}</div>
+const Message = ({ message }: { message: string }) => <div>{message}</div>
+
+export default function App() {
+  return <Message message="message" />
+}
 ```
 
 ### Class Component Types
@@ -1508,13 +1574,17 @@ class Select<T> extends React.Component<SelectProps<T>, any> {}
 
 // 使用
 const Form = () => <Select<string> items={['a', 'b']} />
+
+export default function App() {
+  return <Form />
+}
 ```
 
 In `.tsx` file, `<T>` maybe considered `JSX.Element`,
 use `extends {}` to avoid it:
 
 ```tsx
-const foo = <T extends {}>(arg: T) => arg
+const foo = <T extends object>(arg: T) => arg
 ```
 
 ### Component Props Type
@@ -1532,6 +1602,10 @@ type AlertButtonProps = Omit<ButtonProps, 'onClick'>
 const AlertButton: React.FC<AlertButtonProps> = props => (
   <Button onClick={() => alert('hello')} {...props} />
 )
+
+export default function App() {
+  return <AlertButton />
+}
 ```
 
 Typing existing untyped React components:
@@ -1628,7 +1702,7 @@ class App extends React.Component<Props, State> {
   }
 
   // typing on LEFT hand side of =
-  onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = e => {
+  onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     this.setState({ text: e.currentTarget.value })
   }
 
@@ -1643,38 +1717,40 @@ class App extends React.Component<Props, State> {
 ```
 
 ```tsx
-const Form = () => (
-  <form
-    ref={formRef}
-    onSubmit={(e: React.SyntheticEvent) => {
-      e.preventDefault()
+export default function Form() {
+  return (
+    <form
+      ref={formRef}
+      onSubmit={(e: React.SyntheticEvent) => {
+        e.preventDefault()
 
-      const target = e.target as typeof e.target & {
-        email: { value: string }
-        password: { value: string }
-      }
+        const target = e.target as typeof e.target & {
+          email: { value: string }
+          password: { value: string }
+        }
 
-      const email = target.email.value // Type Checks
-      const password = target.password.value // Type Checks
-    }}
-  >
-    <div>
-      <label>
-        Email:
-        <input type="email" name="email" />
-      </label>
-    </div>
-    <div>
-      <label>
-        Password:
-        <input type="password" name="password" />
-      </label>
-    </div>
-    <div>
-      <input type="submit" value="Log in" />
-    </div>
-  </form>
-)
+        const email = target.email.value // Type Checks
+        const password = target.password.value // Type Checks
+      }}
+    >
+      <div>
+        <label>
+          Email:
+          <input type="email" name="email" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Password:
+          <input type="password" name="password" />
+        </label>
+      </div>
+      <div>
+        <input type="submit" value="Log in" />
+      </div>
+    </form>
+  )
+}
 ```
 
 ### React HTML and CSS Types
@@ -1728,7 +1804,7 @@ type Input =
 ```tsx
 const modalRoot = document.getElementById('modal-root') as HTMLElement
 
-export class Modal extends React.Component {
+export class Modal extends React.Component<{ children: ReactElement }> {
   el: HTMLElement = document.createElement('div')
 
   componentDidMount() {
@@ -1752,7 +1828,7 @@ import { createPortal } from 'react-dom'
 
 const modalRoot = document.querySelector('#modal-root') as HTMLElement
 
-const Modal: React.FC<{}> = ({ children }) => {
+const Modal: React.FC<object> = ({ children }) => {
   const el = useRef(document.createElement('div'))
 
   useEffect(() => {
@@ -1770,7 +1846,7 @@ export default Modal
 ```tsx
 import { Modal } from '@components'
 
-function App() {
+export default function App() {
   const [showModal, setShowModal] = React.useState(false)
 
   return (
@@ -1779,7 +1855,8 @@ function App() {
       {showModal && (
         <Modal>
           <div>
-            I'm a modal!{' '}
+            I&apos;m a modal!
+            {' '}
             <button onClick={() => setShowModal(false)}>close</button>
           </div>
         </Modal>
@@ -1844,7 +1921,7 @@ type Action = ReturnType<
 ```ts
 import type { Reducer } from 'redux'
 
-const reducer = (state: State, action: Action): Reducer<State, Action> => {
+function reducer(state: State, action: Action): Reducer<State, Action> {
   switch (action.type) {
     case 'UPDATE_NAME':
       return { ...state, name: action.name }
@@ -1870,7 +1947,7 @@ const reducer = (state: State, action: Action): Reducer<State, Action> => {
 #### UseState Hook Type
 
 ```tsx
-function App() {
+export default function App() {
   const [user, setUser] = React.useState<IUser>({} as IUser)
   const handleClick = () => setUser(newUser)
 
@@ -1888,8 +1965,8 @@ const initialState = { count: 0 }
 type State = typeof initialState
 
 type Action =
-  | { type: 'increment'; payload: number }
-  | { type: 'decrement'; payload: string }
+  | { type: 'increment', payload: number }
+  | { type: 'decrement', payload: string }
 
 function reducer(state: State, action: Action) {
   switch (action.type) {
@@ -1902,12 +1979,14 @@ function reducer(state: State, action: Action) {
   }
 }
 
-function Counter() {
+export default function Counter() {
   const [state, dispatch] = React.useReducer(reducer, initialState)
 
   return (
     <>
-      Count: {state.count}
+      Count:
+      {' '}
+      {state.count}
       <button onClick={() => dispatch({ type: 'decrement', payload: '5' })}>
         -
       </button>
@@ -1927,11 +2006,12 @@ function Counter() {
 - Return type is `RefObject<T>`.
 
 ```tsx
-function Foo() {
+export default function Foo() {
   const divRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!divRef.current) throw new Error('divRef is not assigned')
+    if (!divRef.current)
+      throw new Error('divRef is not assigned')
 
     doSomethingWith(divRef.current)
   })
@@ -1945,7 +2025,7 @@ function Foo() {
 - Return type is `MutableRefObject<T>`.
 
 ```tsx
-function Foo() {
+export default function Foo() {
   const intervalRef = useRef<number | null>(null)
 
   // You manage the ref yourself (that's why it's called MutableRefObject!)
@@ -2023,14 +2103,12 @@ function useEventListener<T extends HTMLElement = HTMLDivElement>(
   useEffect(() => {
     // Define the listening target
     const targetElement: T | Window = element?.current || window
-    if (!(targetElement && targetElement.addEventListener)) {
+    if (!(targetElement && targetElement.addEventListener))
       return
-    }
 
     // Update saved handler if necessary
-    if (savedHandler.current !== handler) {
+    if (savedHandler.current !== handler)
       savedHandler.current = handler
-    }
 
     // Create event listener that calls handler function stored in ref
     const eventListener = (event: Event) => {
@@ -2067,8 +2145,8 @@ type Cache<T> = Record<string, T>
 // discriminated union type
 type Action<T> =
   | { type: 'request' }
-  | { type: 'success'; payload: T }
-  | { type: 'failure'; payload: string }
+  | { type: 'success', payload: T }
+  | { type: 'failure', payload: string }
 
 function useFetch<T = unknown>(
   url?: string,
@@ -2100,25 +2178,28 @@ function useFetch<T = unknown>(
   const [state, dispatch] = useReducer(fetchReducer, initialState)
 
   useEffect(() => {
-    if (!url) {
+    if (!url)
       return
-    }
 
     const fetchData = async () => {
       dispatch({ type: 'request' })
 
       if (cache.current[url]) {
         dispatch({ type: 'success', payload: cache.current[url] })
-      } else {
+      }
+      else {
         try {
           const response = await axios(url, options)
           cache.current[url] = response.data
 
-          if (cancelRequest.current) return
+          if (cancelRequest.current)
+            return
 
           dispatch({ type: 'success', payload: response.data })
-        } catch (error) {
-          if (cancelRequest.current) return
+        }
+        catch (error) {
+          if (cancelRequest.current)
+            return
 
           dispatch({ type: 'failure', payload: error.message })
         }
@@ -2130,7 +2211,6 @@ function useFetch<T = unknown>(
     return () => {
       cancelRequest.current = true
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url])
 
   return state
@@ -2152,7 +2232,7 @@ export default useFetch
 
 ```ts
 // locale/zh-CN.js
-// eslint-disable-next-line import/no-anonymous-default-export
+
 export default {
   hello: '你好，{name}',
 }
@@ -2160,7 +2240,7 @@ export default {
 
 ```ts
 // locale/en-GB.js
-// eslint-disable-next-line import/no-anonymous-default-export
+
 export default {
   hello: 'Hello，{name}',
 }
@@ -2178,9 +2258,8 @@ class Intl {
     let msg = MESSAGES[LOCALE][key]
 
     if (msg == null) {
-      if (defaultMessage != null) {
+      if (defaultMessage != null)
         return defaultMessage
-      }
 
       return key
     }
@@ -2212,7 +2291,7 @@ export default Intl
 ```tsx
 class Component extends React.Component {
   state = {}
-  handleES6 = event => {}
+  handleES6 = (event) => {}
 
   constructor(props) {
     super(props)
@@ -2255,17 +2334,21 @@ import { fakeAuth } from './app/services/auth'
 
 const authContext = createContext()
 
-function AuthProvider({ children }) {
+function useAuth() {
+  return useContext(authContext)
+}
+
+export default function AuthProvider({ children }: { children: ReactElement }) {
   const [user, setUser] = useState(null)
 
-  const signIn = useCallback(cb => {
+  const signIn = useCallback((cb) => {
     return fakeAuth.signIn(() => {
       setUser('user')
       cb()
     })
   }, [])
 
-  const signOut = useCallback(cb => {
+  const signOut = useCallback((cb) => {
     return fakeAuth.signOut(() => {
       setUser(null)
       cb()
@@ -2282,12 +2365,6 @@ function AuthProvider({ children }) {
 
   return <authContext.Provider value={auth}>{children}</authContext.Provider>
 }
-
-function useAuth() {
-  return useContext(authContext)
-}
-
-export { AuthProvider, useAuth }
 ```
 
 #### Context Refs
@@ -2300,13 +2377,13 @@ import React, { Component, createContext } from 'react'
 const context = createContext()
 const { Provider: ContextProvider, Consumer } = context
 
-class Provider extends Component {
+class Provider extends Component<{ children: ReactElement }> {
   // refs
   // usage: this.textareaRef.current
   textareaRef = React.createRef()
 
   // input handler
-  onInput = e => {
+  onInput = (e) => {
     const { name, value } = e.target
 
     this.setState({
@@ -2334,24 +2411,26 @@ class Provider extends Component {
 import React from 'react'
 import { Consumer } from './Context'
 
-const TextArea = () => (
-  <Consumer>
-    {context => (
-      <textarea
-        ref={context.textareaRef}
-        className="app__textarea"
-        name="snippet"
-        placeholder="Your snippet…"
-        onChange={context.onInput}
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="off"
-        spellCheck="false"
-        wrap="off"
-      />
-    )}
-  </Consumer>
-)
+export default function TextArea() {
+  return (
+    <Consumer>
+      {context => (
+        <textarea
+          ref={context.textareaRef}
+          className="app__textarea"
+          name="snippet"
+          placeholder="Your snippet…"
+          onChange={context.onInput}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          wrap="off"
+        />
+      )}
+    </Consumer>
+  )
+}
 ```
 
 #### Context Internals
@@ -2376,7 +2455,7 @@ const TextArea = () => (
 [React Error Boundary](https://github.com/bvaughn/react-error-boundary) library:
 
 ```tsx
-class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.Component<{ children: ReactElement }> {
   state = {
     hasError: false,
     error: null,
@@ -2397,8 +2476,14 @@ class ErrorBoundary extends React.Component {
       return (
         <div>
           <h1>Oops, something went wrong :(</h1>
-          <p>The error: {this.state.error.toString()}</p>
-          <p>Where it occurred: {this.state.info.componentStack}</p>
+          <p>
+            The error:
+            {this.state.error.toString()}
+          </p>
+          <p>
+            Where it occurred:
+            {this.state.info.componentStack}
+          </p>
         </div>
       )
     }
@@ -2445,7 +2530,11 @@ class Frameworks extends React.Component {
     return (
       <>
         <p>JavaScript:</p>
-        <li>React</li>,<li>Vuejs</li>,<li>Angular</li>
+        <li>React</li>
+        ,
+        <li>Vuejs</li>
+        ,
+        <li>Angular</li>
       </>
     )
   }
@@ -2466,7 +2555,7 @@ that exists **outside** the DOM hierarchy of the parent component
 ```tsx
 const portalRoot = document.getElementById('portal')
 
-class Portal extends React.Component {
+class Portal extends React.Component<{ children: ReactElement }> {
   constructor() {
     super()
     this.el = document.createElement('div')
@@ -2486,25 +2575,33 @@ class Portal extends React.Component {
   }
 }
 
-class Modal extends React.Component {
+interface Props {
+  on: boolean
+  toggle: Function
+  children: ReactElement
+}
+
+class Modal extends React.Component<Props> {
   render() {
     const { children, toggle, on } = this.props
 
     return (
       <Portal>
-        {on ? (
-          <div className="modal is-active">
-            <div className="modal-background" />
-            <div className="modal-content">
-              <div className="box">
-                <h2 class="subtitle">{children}</h2>
-                <button onClick={toggle} className="closeButton button is-info">
-                  Close
-                </button>
+        {on
+          ? (
+            <div className="modal is-active">
+              <div className="modal-background" />
+              <div className="modal-content">
+                <div className="box">
+                  <h2 className="subtitle">{children}</h2>
+                  <button onClick={toggle} className="closeButton button is-info">
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ) : null}
+            )
+          : null}
       </Portal>
     )
   }
@@ -2525,7 +2622,7 @@ class App extends React.Component {
     const { showModal } = this.state
     return (
       <div className="box">
-        <h1 class="subtitle">Hello, I am the parent!</h1>
+        <h1 className="subtitle">Hello, I am the parent!</h1>
         <button onClick={this.toggleModal} className="button is-black">
           Toggle Modal
         </button>
@@ -2537,7 +2634,7 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 ### Concurrent Features
@@ -2615,9 +2712,8 @@ function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
   )
 
   if (nextLanes === NoLanes) {
-    if (existingCallbackNode !== null) {
+    if (existingCallbackNode !== null)
       cancelCallback(existingCallbackNode)
-    }
 
     root.callbackNode = null
     root.callbackPriority = NoLane
@@ -2643,27 +2739,26 @@ function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
   let newCallbackNode
 
   if (newCallbackPriority === SyncLane) {
-    if (root.tag === LegacyRoot) {
+    if (root.tag === LegacyRoot)
       scheduleLegacySyncCallback(performSyncWorkOnRoot.bind(null, root))
-    } else {
-      scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root))
-    }
+    else scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root))
 
     if (supportsMicroTasks) {
       scheduleMicroTask(() => {
-        if (executionContext === NoContext) {
+        if (executionContext === NoContext)
           flushSyncCallbacks()
-        }
       })
-    } else {
+    }
+    else {
       scheduleCallback(ImmediateSchedulerPriority, flushSyncCallbacks)
     }
 
     newCallbackNode = null
-  } else {
+  }
+  else {
     const eventPriority = lanesToEventPriority(nextLanes)
-    const schedulerPriorityLevel =
-      eventPriorityToSchedulePriority(eventPriority)
+    const schedulerPriorityLevel
+      = eventPriorityToSchedulePriority(eventPriority)
     newCallbackNode = scheduleCallback(
       schedulerPriorityLevel,
       performConcurrentWorkOnRoot.bind(null, root)
@@ -2680,16 +2775,18 @@ function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
 Extract loading/skeleton/placeholder components into single place:
 
 ```tsx
-const App = () => (
-  <Suspense fallback={<Skeleton />}>
-    <Header />
-    <Suspense fallback={<ListPlaceholder />}>
-      <ListLayout>
-        <List pageId={pageId} />
-      </ListLayout>
+export default function App() {
+  return (
+    <Suspense fallback={<Skeleton />}>
+      <Header />
+      <Suspense fallback={<ListPlaceholder />}>
+        <ListLayout>
+          <List pageId={pageId} />
+        </ListLayout>
+      </Suspense>
     </Suspense>
-  </Suspense>
-)
+  )
+}
 ```
 
 :::tip React Bottlenecks
@@ -2702,7 +2799,7 @@ const App = () => (
 #### Error Boundary Suspense
 
 ```tsx
-const ErrorFallback = () => {
+function ErrorFallback() {
   return (
     <div
       className="text-red-500 w-screen h-screen flex flex-col justify-center items-center"
@@ -2723,14 +2820,14 @@ interface AppProviderProps {
   children: React.ReactNode
 }
 
-export const AppProvider = ({ children }: AppProviderProps) => {
+export function AppProvider({ children }: AppProviderProps) {
   return (
     <React.Suspense
-      fallback={
+      fallback={(
         <div className="h-screen w-screen flex items-center justify-center">
           <Spinner size="xl" />
         </div>
-      }
+      )}
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         {children}
@@ -2749,19 +2846,21 @@ import React, { Suspense, lazy } from 'react'
 
 const Product = lazy(() => import('./ProductHandler'))
 
-const App = () => (
-  <div className="product-list">
-    <h1>My Awesome Product</h1>
-    <Suspense fallback={<h2>Product list is loading...</h2>}>
-      <p>Take a look at my product:</p>
-      <section>
-        <Product id="PDT-49-232" />
-        <Product id="PDT-50-233" />
-        <Product id="PDT-51-234" />
-      </section>
-    </Suspense>
-  </div>
-)
+export default function App() {
+  return (
+    <div className="product-list">
+      <h1>My Awesome Product</h1>
+      <Suspense fallback={<h2>Product list is loading...</h2>}>
+        <p>Take a look at my product:</p>
+        <section>
+          <Product id="PDT-49-232" />
+          <Product id="PDT-50-233" />
+          <Product id="PDT-51-234" />
+        </section>
+      </Suspense>
+    </div>
+  )
+}
 ```
 
 ```tsx
@@ -2769,21 +2868,25 @@ const { lazy, Suspense } = React
 
 const Lazy = lazy(
   () =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       setTimeout(() => {
         resolve({ default: () => <Resource /> })
       }, 4000)
     })
 )
 
-const Resource = () => (
-  <div className="box">
-    <h1>React Lazy</h1>
-    <p>This component loaded after 4 seconds, using React Lazy and Suspense</p>
-  </div>
-)
+function Resource() {
+  return (
+    <div className="box">
+      <h1>React Lazy</h1>
+      <p>
+        This component loaded after 4 seconds, using React Lazy and Suspense
+      </p>
+    </div>
+  )
+}
 
-const App = () => {
+export default function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Lazy />
@@ -2791,7 +2894,7 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 #### SSR Suspense
@@ -2803,14 +2906,16 @@ React v18+: enable `Suspense` on the server:
 - Enable code splitting for SSR.
 
 ```tsx
-const LandingPage = () => (
-  <div>
-    <FastComponent />
-    <Suspense fallback={<Spinner />}>
-      <Comments />
-    </Suspense>
-  </div>
-)
+export default function LandingPage() {
+  return (
+    <div>
+      <FastComponent />
+      <Suspense fallback={<Spinner />}>
+        <Comments />
+      </Suspense>
+    </div>
+  )
+}
 ```
 
 ## React Performance
@@ -2855,12 +2960,15 @@ use `React.PureComponent`/`React.memo` for a performance boost in some cases.
 ```tsx
 import React, { PureComponent } from 'react'
 
-const Unstable = props => {
+function Unstable(props: { value: string }) {
   console.log(' Rendered Unstable component ')
 
   return (
     <div>
-      <p> {props.value}</p>
+      <p>
+        {' '}
+        {props.value}
+      </p>
     </div>
   )
 }
@@ -2893,15 +3001,20 @@ export default App
 ```tsx
 import React, { Component } from 'react'
 
-const Unstable = React.memo(props => {
+function Unstable(props: { value: string }) {
   console.log(' Rendered this component ')
 
   return (
     <div>
-      <p> {props.value}</p>
+      <p>
+        {' '}
+        {props.value}
+      </p>
     </div>
   )
-})
+}
+
+const MemoedUnstable = React.memo(Unstable)
 
 class App extends Component {
   state = {
@@ -2919,7 +3032,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Unstable value={this.state.value} />
+        <MemoedUnstable value={this.state.value} />
       </div>
     )
   }
@@ -3020,7 +3133,7 @@ export default function App() {
   )
 }
 
-function ColorPicker({ children }) {
+function ColorPicker({ children }: { children: ReactElement }) {
   const [color, setColor] = useState('red')
   return (
     <div style={{ color }}>
@@ -3032,12 +3145,21 @@ function ColorPicker({ children }) {
 ```
 
 ```tsx
-function Parent({ children, lastChild }) {
+export default function Parent({ children, lastChild }: {
+  children: ReactElement
+  lastChild: ReactElement
+}) {
   return (
     <div className="parent">
-      <ChildA /> {/* Only ChildA gets re-rendered */}
-      {children} {/* Bailed out */}
-      {lastChild} {/* Bailed out */}
+      <ChildA />
+      {' '}
+      {/* Only ChildA gets re-rendered */}
+      {children}
+      {' '}
+      {/* Bailed out */}
+      {lastChild}
+      {' '}
+      {/* Bailed out */}
     </div>
   )
 }
@@ -3047,14 +3169,16 @@ Immutable objects:
 
 ```tsx
 // BAD
-function App1(items) {
+export default function App1(items) {
   return <BigListComponent style={{ width: '100%' }} items={items} />
 }
+```
 
+```tsx
 // GOOD
 const bigListStyle = { width: '100%' }
 
-function App2(items) {
+export default function App2(items) {
   return <BigListComponent style={bigListStyle} items={items} />
 }
 ```
@@ -3063,14 +3187,16 @@ Immutable functions:
 
 ```tsx
 // BAD: Inline function
-function App1(items) {
+export default function App1(items) {
   return <BigListComponent onClick={() => dispatchEvent()} />
 }
+```
 
+```tsx
 // GOOD: Reference to a function
 const clickHandler = () => dispatchEvent()
 
-function App2(items) {
+export default function App2(items) {
   return <BigListComponent onClick={clickHandler} />
 }
 ```
@@ -3135,11 +3261,11 @@ export default class App extends Component {
 它允许渲染一个一级深的组件并断言其渲染方法返回的内容, 而不必担心子组件未实例化或渲染.
 
 ```tsx
-function MyComponent() {
+export default function MyComponent() {
   return (
     <div>
-      <span className={'heading'}>{'Title'}</span>
-      <span className={'description'}>{'Description'}</span>
+      <span className="heading">Title</span>
+      <span className="description">Description</span>
     </div>
   )
 }
@@ -3155,8 +3281,8 @@ const result = renderer.getRenderOutput()
 
 expect(result.type).toBe('div')
 expect(result.props.children).toEqual([
-  <span className={'heading'}>{'Title'}</span>,
-  <span className={'description'}>{'Description'}</span>,
+  <span key="heading" className="heading">Title</span>,
+  <span key="description" className="description">Description</span>,
 ])
 ```
 
@@ -3170,10 +3296,15 @@ expect(result.props.children).toEqual([
 ```tsx
 import TestRenderer from 'react-test-renderer'
 
-const Link = ({ page, children }) => <a href={page}>{children}</a>
+export default function Link({ page, children }: {
+  page: string
+  children: ReactElement
+}) {
+  return <a href={page}>{children}</a>
+}
 
 const testRenderer = TestRenderer.create(
-  <Link page={'https://www.facebook.com/'}>{'Facebook'}</Link>
+  <Link page="https://www.facebook.com/">Facebook</Link>
 )
 
 console.log(testRenderer.toJSON())
@@ -3304,7 +3435,7 @@ import React from 'react'
 /**
  * render: render the component
  * screen: finding elements along with user
- **/
+ */
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Checkbox, Welcome } from './'
@@ -3482,9 +3613,8 @@ export default function useCounter(initialValue = 0) {
   )
   const reset = useCallback(() => setCount(initialValue), [initialValue])
 
-  if (count > 9000) {
-    throw new Error("It's over 9000!")
-  }
+  if (count > 9000)
+    throw new Error('It\'s over 9000!')
 
   return { count, increment, incrementAsync, reset }
 }
@@ -3501,7 +3631,7 @@ it('should throw when over 9000', () => {
     result.current.increment()
   })
 
-  expect(result.error).toEqual(Error("It's over 9000!"))
+  expect(result.error).toEqual(Error('It\'s over 9000!'))
 })
 ```
 
@@ -3567,6 +3697,10 @@ const ReservationItem = <ReservationCard />
 
 // good
 const reservationItem = <ReservationCard />
+
+export default function App() {
+  return <div>App</div>
+}
 ```
 
 - Setting displayName for HOC:
@@ -3585,8 +3719,8 @@ function withFoo(WrappedComponent) {
     return <WrappedComponent {...props} foo />
   }
 
-  const wrappedComponentName =
-    WrappedComponent.displayName || WrappedComponent.name || 'Component'
+  const wrappedComponentName
+    = WrappedComponent.displayName || WrappedComponent.name || 'Component'
 
   WithFoo.displayName = `withFoo(${wrappedComponentName})`
   return WithFoo
@@ -3623,16 +3757,23 @@ class Component {
 ```tsx
 // bad
 // deprecated
-const Component = <Foo ref="myRef" />
+export default function Component() {
+  // eslint-disable-next-line react/no-string-refs
+  return <Foo ref="myRef" />
+}
+```
 
+```tsx
 // good
-const Component = (
-  <Foo
-    ref={ref => {
-      this.myRef = ref
-    }}
-  />
-)
+export default function Component() {
+  return (
+    <Foo
+      ref={(ref) => {
+        this.myRef = ref
+      }}
+    />
+  )
+}
 ```
 
 ### Alignment Style
@@ -3653,6 +3794,10 @@ const Component = (
 
 // good
 const Component = <div>{showButton && <Button />}</div>
+
+export default function App() {
+  return <Component />
+}
 ```
 
 ### Quotes Style
@@ -3664,13 +3809,17 @@ const Component = <div>{showButton && <Button />}</div>
 // <Foo bar='bar' />
 
 // good
-const App = <Foo bar="bar" />
+const Foo = <Foo bar="bar" />
 
 // bad
 // <Foo style={{ left: "20px" }} />
 
 // good
-const App = <Foo style={{ left: '20px' }} />
+const Bar = <Foo style={{ left: '20px' }} />
+
+export default function App() {
+  return <Foo />
+}
 ```
 
 ### Spacing Style
@@ -3686,15 +3835,17 @@ const App = <Foo style={{ left: '20px' }} />
 // <Foo                 />
 
 // good
-const App = <Foo />
-```
+const Foo = <Foo />
 
-```tsx
 // bad
 // <Foo bar={ baz } />
 
 // good
-const App = <Foo bar={baz} />
+const Foo = <Foo bar={baz} />
+
+export default function App() {
+  return <Foo />
+}
 ```
 
 ### Ordering of Class Component
@@ -3794,20 +3945,22 @@ const Small = styled.small`
 `
 
 // Use our styles
-const WrapperContainer = () => (
-  <div>
-    <H1>Heading h1</H1>
-    <H2>Heading h2</H2>
-    <H3>Heading h3</H3>
-    <H4>Heading h4</H4>
-    <H5>Heading h5</H5>
-    <H6>Heading h6</H6>
-    <Text>Body text</Text>
-    <Small>Small text</Small>
-  </div>
-)
+export default function WrapperContainer() {
+  return (
+    <div>
+      <H1>Heading h1</H1>
+      <H2>Heading h2</H2>
+      <H3>Heading h3</H3>
+      <H4>Heading h4</H4>
+      <H5>Heading h5</H5>
+      <H6>Heading h6</H6>
+      <Text>Body text</Text>
+      <Small>Small text</Small>
+    </div>
+  )
+}
 
-ReactDOM.render(<WrapperContainer />, container)
+ReactDOM.createRoot(container).render(<WrapperContainer />)
 ```
 
 ### Styled Component Extension
@@ -3842,15 +3995,17 @@ const GreenButton = Button.extend`
 `
 
 // Use our styles
-const WrapperContainer = () => (
-  <div>
-    <Button>Default button</Button>
-    <RedButton>Red button</RedButton>
-    <GreenButton>Green button</GreenButton>
-  </div>
-)
+export default function WrapperContainer() {
+  return (
+    <div>
+      <Button>Default button</Button>
+      <RedButton>Red button</RedButton>
+      <GreenButton>Green button</GreenButton>
+    </div>
+  )
+}
 
-ReactDOM.render(<WrapperContainer />, container)
+ReactDOM.createRoot(container).render(<WrapperContainer />)
 ```
 
 ### Styled Component Props
@@ -3874,37 +4029,39 @@ const Button = styled.button`
 
   // Using props to create a gray variant of the button
   ${props =>
-    props.gray &&
-    css`
+    props.gray
+    && css`
       background-color: #95a5a6;
     `}
   // Using props to create a green variant of the button
   ${props =>
-    props.green &&
-    css`
+    props.green
+    && css`
       background-color: #2ecc71;
     `}
   // Using props to create a red variant of the button
   ${props =>
-    props.red &&
-    css`
+    props.red
+    && css`
       background-color: #e74c3c;
     `}
   // We can also use a ternary operator for "binary" changes
   color: ${props => (props.gray ? '#2c3e50' : '#fff')};
 `
 
-const WrapperContainer = () => (
-  <div>
-    <Button>Default button</Button>
-    {/* Button with prop "red" */}
-    <Button red>Red button</Button>
-    {/* Button with prop "green" */}
-    <Button green>Green button</Button>
-  </div>
-)
+export default function WrapperContainer() {
+  return (
+    <div>
+      <Button>Default button</Button>
+      {/* Button with prop "red" */}
+      <Button red>Red button</Button>
+      {/* Button with prop "green" */}
+      <Button green>Green button</Button>
+    </div>
+  )
+}
 
-ReactDOM.render(<WrapperContainer />, container)
+ReactDOM.createRoot(container).render(<WrapperContainer />)
 ```
 
 ### Variants Driven Components
@@ -4090,10 +4247,10 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 const webpackConfig = {
   plugins: [
-    isEnvDevelopment &&
-      new BundleAnalyzerPlugin({
-        analyzerPort: 5000,
-      }),
+    isEnvDevelopment
+    && new BundleAnalyzerPlugin({
+      analyzerPort: 5000,
+    }),
   ].filter(Boolean),
 }
 ```
@@ -4155,19 +4312,25 @@ REACT_APP_NOT_SECRET_CODE=abcdef
 ```
 
 ```tsx
-const App = () => (
-  <div>
-    <small>
-      You are running this application in <b>{process.env.NODE_ENV}</b> mode.
-    </small>
-    <form>
-      <input
-        type="hidden"
-        defaultValue={process.env.REACT_APP_NOT_SECRET_CODE}
-      />
-    </form>
-  </div>
-)
+export default function App() {
+  return (
+    <div>
+      <small>
+        You are running this application in
+        {' '}
+        <b>{process.env.NODE_ENV}</b>
+        {' '}
+        mode.
+      </small>
+      <form>
+        <input
+          type="hidden"
+          defaultValue={process.env.REACT_APP_NOT_SECRET_CODE}
+        />
+      </form>
+    </div>
+  )
+}
 ```
 
 ```html
@@ -4187,7 +4350,7 @@ with `import('dep').then();`:
 ```ts
 import type { ReportHandler } from 'web-vitals'
 
-const reportWebVitals = (onPerfEntry?: ReportHandler) => {
+function reportWebVitals(onPerfEntry?: ReportHandler) {
   if (onPerfEntry && onPerfEntry instanceof Function) {
     // Code splitting into separate chunk
     import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
@@ -4223,7 +4386,7 @@ export default reportWebVitals
 
 ```tsx
 // renders <a href="/calendar/today">
-function App() {
+export default function App() {
   return (
     <BrowserRouter basename="/calendar">
       <Link to="/today" />
@@ -4297,15 +4460,13 @@ In `Create React App`
 const templatesVersionMinimum = '3.3.0'
 
 // Assume compatibility if we can't test the version.
-if (!semver.valid(packageVersion)) {
+if (!semver.valid(packageVersion))
   packageVersion = templatesVersionMinimum
-}
 
 // Only support templates when used alongside new react-scripts versions.
 const supportsTemplates = semver.gte(packageVersion, templatesVersionMinimum)
-if (supportsTemplates) {
+if (supportsTemplates)
   allDependencies.push(templateToInstall)
-}
 ```
 
 Due to version checking for template feature,

@@ -148,7 +148,7 @@ module.exports = {
     ],
   },
   externals: {
-    react: 'React',
+    'react': 'React',
     'react-dom': 'ReactDOM',
   },
 }
@@ -254,7 +254,7 @@ declare global {
   namespace JSX {
     interface Element extends React.ReactElement<any, any> {}
     interface ElementClass extends React.Component<any> {
-      render(): React.ReactNode
+      render: () => React.ReactNode
     }
   }
 }
@@ -300,10 +300,10 @@ export as namespace React
 declare namespace React {
   type ElementType<P = any> =
     | {
-        [K in keyof JSX.IntrinsicElements]: P extends JSX.IntrinsicElements[K]
-          ? K
-          : never
-      }[keyof JSX.IntrinsicElements]
+      [K in keyof JSX.IntrinsicElements]: P extends JSX.IntrinsicElements[K]
+        ? K
+        : never
+    }[keyof JSX.IntrinsicElements]
     | ComponentType<P>
 }
 ```
@@ -531,6 +531,7 @@ enum AnimalFlags {
   CanFly = 1 << 1,
   EatsFish = 1 << 2,
   Endangered = 1 << 3,
+  // eslint-disable-next-line ts/prefer-literal-enum-member
   EndangeredFlyingClawedFishEating = HasClaws | CanFly | EatsFish | Endangered,
 }
 
@@ -541,15 +542,14 @@ interface Animal {
 
 function printAnimalAbilities(animal: Animal) {
   const animalFlags = animal.flags
-  if (animalFlags & AnimalFlags.HasClaws) {
+  if (animalFlags & AnimalFlags.HasClaws)
     console.log('animal has claws')
-  }
-  if (animalFlags & AnimalFlags.CanFly) {
+
+  if (animalFlags & AnimalFlags.CanFly)
     console.log('animal can fly')
-  }
-  if (animalFlags === AnimalFlags.None) {
+
+  if (animalFlags === AnimalFlags.None)
     console.log('nothing')
-  }
 }
 
 const animal = { flags: AnimalFlags.None }
@@ -582,11 +582,11 @@ enum ColorPalette {
   orange = '#f76707',
 }
 
-const hashString = (name = '') => {
+function hashString(name = '') {
   return name.length
 }
 
-const getColorByName = (name = ''): string => {
+function getColorByName(name = ''): string {
   const palette = Object.keys(ColorPalette)
   const colorIdx = hashString(name) % palette.length
   const paletteIdx = palette[colorIdx] as keyof typeof ColorPalette
@@ -692,11 +692,10 @@ interface Overloaded {
 function stringOrNumber(foo: number): number
 function stringOrNumber(foo: string): string
 function stringOrNumber(foo: any): any {
-  if (typeof foo === 'number') {
+  if (typeof foo === 'number')
     return foo * foo
-  } else if (typeof foo === 'string') {
+  else if (typeof foo === 'string')
     return `hello ${foo}`
-  }
 }
 
 const overloaded: Overloaded = stringOrNumber
@@ -736,7 +735,8 @@ function padding(top: number, right: number, bottom: number, left: number)
 function padding(a: number, b?: number, c?: number, d?: number) {
   if (b === undefined && c === undefined && d === undefined) {
     b = c = d = a
-  } else if (c === undefined && d === undefined) {
+  }
+  else if (c === undefined && d === undefined) {
     c = a
     d = b
   }
@@ -773,7 +773,7 @@ function partialCall<T extends Arr, U extends Arr, R>(
   return (...tailArgs: U) => f(...headArgs, ...tailArgs)
 }
 
-const foo = (x: string, y: number, z: boolean) => {}
+function foo(x: string, y: number, z: boolean) {}
 const f1 = partialCall(foo, 100)
 const f2 = partialCall(foo, 'hello', 100, true, 'oops')
 const f3 = partialCall(foo, 'hello')
@@ -796,7 +796,7 @@ interface LngLat {
   lat: number
 }
 
-type LngLatLike = LngLat | { lon: number; lat: number } | [number, number]
+type LngLatLike = LngLat | { lon: number, lat: number } | [number, number]
 
 interface Camera {
   center: LngLat
@@ -847,7 +847,7 @@ name = {
 
 ```ts
 interface HasBothFunctionTypes {
-  method(): string
+  method: () => string
   property: () => string
 }
 ```
@@ -967,9 +967,8 @@ class Singleton {
   }
 
   public static getInstance() {
-    if (!Singleton.instance) {
+    if (!Singleton.instance)
       Singleton.instance = new Singleton()
-    }
 
     return Singleton.instance
   }
@@ -1046,7 +1045,7 @@ fooReadonly.bar = 456 // Error: bar 属性只读
 class Something extends React.Component<{ foo: number }, { baz: number }> {
   someMethod() {
     this.props.foo = 123 // Error: props 是不可变的
-    // eslint-disable-next-line react/no-direct-mutation-state
+
     this.state.baz = 456 // Error: 你应该使用 this.setState()
   }
 }
@@ -1154,7 +1153,7 @@ function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 ### Index Signature Type Check
 
 ```ts
-const x: { foo: number; [x: string]: any }
+const x: { foo: number, [x: string]: any }
 x = { foo: 1, baz: 2 } // ok, 'baz' 属性匹配于索引签名
 ```
 
@@ -1242,15 +1241,14 @@ Since [typescript v4.4.0](https://github.com/microsoft/TypeScript/pull/44512):
 ```ts
 type DataProps = Record<`data-${string}`, string>
 
-// eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
 interface OptionsWithDataProps extends Options {
   // Permit any property starting with 'data-'.
   [optName: `data-${string}`]: unknown
 }
 
 const b: OptionsWithDataProps = {
-  width: 100,
-  height: 100,
+  'width': 100,
+  'height': 100,
   'data-blah': true, // Works!
   'unknown-property': true, // Error! 'unknown-property' wasn't declared in 'OptionsWithDataProps'.
 }
@@ -1310,11 +1308,11 @@ type OmitByValueType<T, ValueType> = Pick<
 >
 
 type RequiredKeys<T> = {
-  [K in keyof T]-?: {} extends Pick<T, K> ? never : K
+  [K in keyof T]-?: object extends Pick<T, K> ? never : K
 }[keyof T]
 
 type OptionalKeys<T> = {
-  [K in keyof T]-?: {} extends Pick<T, K> ? K : never
+  [K in keyof T]-?: object extends Pick<T, K> ? K : never
 }[keyof T]
 
 type FunctionTypeKeys<T extends object> = {
@@ -1424,10 +1422,10 @@ extol('much false wow')
 
 ```ts
 interface PropEventSource<Type> {
-  on<Key extends string & keyof Type>(
+  on: <Key extends string & keyof Type>(
     eventName: `${Key}Changed`,
     callback: (newValue: Type[Key]) => void
-  ): void
+  ) => void
 }
 
 // Create a "watched object" with an 'on' method
@@ -1442,16 +1440,15 @@ const person = makeWatchedObject({
   age: 26,
 })
 
-person.on('firstNameChanged', newName => {
+person.on('firstNameChanged', (newName) => {
   // (parameter) newName: string
   console.log(`new name is ${newName.toUpperCase()}`)
 })
 
-person.on('ageChanged', newAge => {
+person.on('ageChanged', (newAge) => {
   // (parameter) newAge: number
-  if (newAge < 0) {
+  if (newAge < 0)
     console.warn('warning! negative age')
-  }
 })
 
 // It's typo-resistent
@@ -1527,11 +1524,10 @@ async function withLazyValues(configGetter: LazyValues) {
 function formatCommandLine(command: string[] | string) {
   let line = ''
 
-  if (typeof command === 'string') {
+  if (typeof command === 'string')
     line = command.trim()
-  } else {
+  else
     line = command.join(' ').trim()
-  }
 
   // Do stuff with line: string
 }
@@ -1679,9 +1675,9 @@ const b = x.b
 ```ts
 function reverse<T>(items: T[]): T[] {
   const toReturn = []
-  for (let i = items.length - 1; i >= 0; i--) {
+  for (let i = items.length - 1; i >= 0; i--)
     toReturn.push(items[i])
-  }
+
   return toReturn
 }
 ```
@@ -1691,20 +1687,20 @@ function reverse<T>(items: T[]): T[] {
 ```ts
 type Event =
   | {
-      type: 'LogIn'
-      payload: {
-        userId: string
-      }
+    type: 'LogIn'
+    payload: {
+      userId: string
     }
+  }
   | {
-      type: 'SignOut'
-    }
+    type: 'SignOut'
+  }
 
-const sendEvent = <Type extends Event['type']>(
+function sendEvent<Type extends Event['type']>(
   ...args: Extract<Event, { type: Type }> extends { payload: infer Payload }
     ? [type: Type, payload: Payload]
     : [type: Type]
-) => {
+) {
   // Send event ...
 }
 ```
@@ -1731,7 +1727,7 @@ interface Listener<T> {
 }
 
 interface Disposable {
-  dispose(): any
+  dispose: () => any
 }
 
 class TypedEvent<T> {
@@ -1752,7 +1748,8 @@ class TypedEvent<T> {
 
   public off = (listener: Listener<T>) => {
     const callbackIndex = this.listeners.indexOf(listener)
-    if (callbackIndex > -1) this.listeners.splice(callbackIndex, 1)
+    if (callbackIndex > -1)
+      this.listeners.splice(callbackIndex, 1)
   }
 
   public emit = (event: T) => {
@@ -1802,7 +1799,8 @@ function handleResult(result: Result<string>) {
   if (result.succeeded) {
     // Type of result: SuccessfulResult<string>
     console.log(`We did it! ${result.data}`)
-  } else {
+  }
+  else {
     // Type of result: FailureResult
     console.error(`Em... ${result.error}`)
   }
@@ -1901,7 +1899,7 @@ type RemoveMaps<T> = {
 interface Data {
   'maps:longitude': string
   'maps:latitude': string
-  awesome: boolean
+  'awesome': boolean
 }
 type ShapedData = RemoveMaps<Data>
 // type ShapedData = {
@@ -1930,15 +1928,11 @@ const missing = getValue(roles, 'extras')
 // Error: Argument of type '"extras"' is not assignable
 // to parameter of type '"favorite" | "others"'.
 
-const getDeepValue = <
+function getDeepValue<
   T,
   FirstKey extends keyof T,
   SecondKey extends keyof T[FirstKey],
->(
-  target: T,
-  firstKey: FirstKey,
-  secondKey: SecondKey
-): T[FirstKey][SecondKey] => {
+>(target: T, firstKey: FirstKey, secondKey: SecondKey): T[FirstKey][SecondKey] {
   return target[firstKey][secondKey]
 }
 
@@ -2011,10 +2005,10 @@ strongly **reconsider** if actually need it.
 
 ```ts
 interface Animal {
-  live(): void
+  live: () => void
 }
 interface Dog extends Animal {
-  woof(): void
+  woof: () => void
 }
 
 type Example1 = Dog extends Animal ? number : string
@@ -2311,7 +2305,7 @@ type ExtractPII<Type> = {
 
 interface DBFields {
   id: { format: 'incrementing' }
-  name: { type: string; pii: true }
+  name: { type: string, pii: true }
 }
 
 type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>
@@ -2344,10 +2338,9 @@ const isFalsy = (val: unknown): val is Falsy => !val
 ```ts
 type Primitive = string | number | boolean | bigint | symbol | null | undefined
 
-const isPrimitive = (val: unknown): val is Primitive => {
-  if (val === null || val === undefined) {
+function isPrimitive(val: unknown): val is Primitive {
+  if (val === null || val === undefined)
     return true
-  }
 
   const typeDef = typeof val
 
@@ -2388,8 +2381,8 @@ type Sync<T> = {
 }
 
 interface AsyncInterface {
-  compute(arg: number): Promise<boolean>
-  createString(): Promise<String>
+  compute: (arg: number) => Promise<boolean>
+  createString: () => Promise<string>
 }
 
 type SyncInterface = Sync<AsyncInterface>
@@ -2403,8 +2396,8 @@ type SyncInterface = Sync<AsyncInterface>
 
 ```ts
 interface Proxy<T> {
-  get(): T
-  set(value: T): void
+  get: () => T
+  set: (value: T) => void
 }
 
 type Proxify<T> = { [P in keyof T]: Proxy<T[P]> }
@@ -2435,11 +2428,11 @@ type DeepRequired<T> = {
 [Nominal type system](https://github.com/microsoft/TypeScript/issues/202):
 
 ```ts
-interface FooId extends String {
+interface FooId extends string {
   _fooIdBrand: string
 }
 
-interface BarId extends String {
+interface BarId extends string {
   _barIdBrand: string
 }
 
@@ -2463,7 +2456,7 @@ type Brand<B extends string, T> = T extends
   | number
   | boolean
   | bigint
-  ? { [typeSym]: B; [valueSym]: T }
+  ? { [typeSym]: B, [valueSym]: T }
   : T & { [typeSym]: B }
 
 type Flavor<F extends string, T> = T & {
@@ -2509,7 +2502,7 @@ type InstanceType<T extends new (...args: any) => any> = T extends new (
 在协变位置上, 若同一个类型变量存在多个候选者, 则最终的类型将被推断为联合类型:
 
 ```ts
-type PropertyType<T> = T extends { id: infer U; name: infer U } ? U : never
+type PropertyType<T> = T extends { id: infer U, name: infer U } ? U : never
 
 type InferType = PropertyType<{
   id: number
@@ -2522,15 +2515,15 @@ type InferType = PropertyType<{
 
 ```ts
 type PropertyType<T> = T extends {
-  a(x: infer U): void
-  b(x: infer U): void
+  a: (x: infer U) => void
+  b: (x: infer U) => void
 }
   ? U
   : never
 
 type InferType = PropertyType<{
-  a(x: string): void
-  b(x: number): void
+  a: (x: string) => void
+  b: (x: number) => void
 }>
 // string & number
 
@@ -2558,9 +2551,8 @@ interface Bird {
 }
 
 function move(animal: Fish | Bird) {
-  if ('swim' in animal) {
+  if ('swim' in animal)
     return animal.swim()
-  }
 
   return animal.fly()
 }
@@ -2570,11 +2562,10 @@ function move(animal: Fish | Bird) {
 
 ```ts
 function logValue(x: Date | string) {
-  if (x instanceof Date) {
+  if (x instanceof Date)
     console.log(x.toUTCString())
-  } else {
+  else
     console.log(x.toUpperCase())
-  }
 }
 ```
 
@@ -2582,11 +2573,10 @@ function logValue(x: Date | string) {
 
 ```ts
 function fn(x: string | number) {
-  if (typeof x === 'string') {
+  if (typeof x === 'string')
     return x.length
-  } else {
+  else
     return x + 1
-  }
 }
 ```
 
@@ -2682,9 +2672,8 @@ function fail(message: string): never {
 }
 
 function workWithUnsafeParam(param: unknown) {
-  if (typeof param !== 'string') {
+  if (typeof param !== 'string')
     fail(`Param should be a string, not ${typeof param}`)
-  }
 
   // Here, param is known to be type string
   param.toUpperCase() // Ok
@@ -2852,9 +2841,8 @@ Boolean assertion signature
 
 ```ts
 function assert(condition: any, msg?: string): asserts condition {
-  if (!condition) {
+  if (!condition)
     throw new AssertionError(msg)
-  }
 }
 
 function yell(str) {
@@ -2870,9 +2858,8 @@ String assertion signature
 
 ```ts
 function assertIsString(val: any): asserts val is string {
-  if (typeof val !== 'string') {
+  if (typeof val !== 'string')
     throw new AssertionError('Not a string!')
-  }
 }
 
 function yell(str: any) {
@@ -2946,7 +2933,7 @@ class MyComponent extends React.Component<Props, State> {
 
 ```ts
 function classDecorator(options: any[]) {
-  return target => {
+  return (target) => {
     // ...
   }
 }
@@ -2958,7 +2945,7 @@ class Component {}
 ```ts
 function inject(options: { api_version: string }) {
   // returns the class decorator implementation
-  return target => {
+  return (target) => {
     // `target` will give us access to the entire class prototype
     target.apiVersion = options.api_version
   }
@@ -3141,7 +3128,7 @@ IoC and DI implementation:
 ```ts
 type Constructor<T = any> = new (...args: any[]) => T
 
-const Injectable = (): ClassDecorator => target => {}
+const Injectable = (): ClassDecorator => (target) => {}
 
 class OtherService {
   a = 1
@@ -3156,7 +3143,7 @@ class TestService {
   }
 }
 
-const Factory = <T>(Target: Constructor<T>): T => {
+function Factory<T>(Target: Constructor<T>): T {
   // 获取所有注入的服务
   const providers = Reflect.getMetadata('design:paramtypes', target) // [OtherService]
   const args = providers.map((Provider: Constructor) => new Provider())
@@ -3172,32 +3159,32 @@ AOP programming:
 const PATH_METADATA = 'path'
 const METHOD_METADATA = 'method'
 
-const Controller = (path: string): ClassDecorator => {
-  return target => {
+function Controller(path: string): ClassDecorator {
+  return (target) => {
     Reflect.defineMetadata(PATH_METADATA, path, target)
   }
 }
 
-const createMappingDecorator =
-  (method: string) =>
-  (path: string): MethodDecorator => {
+function createMappingDecorator(method: string) {
+  return (path: string): MethodDecorator => {
     return (target, key, descriptor) => {
       Reflect.defineMetadata(PATH_METADATA, path, descriptor.value)
       Reflect.defineMetadata(METHOD_METADATA, method, descriptor.value)
     }
   }
+}
 
 const Get = createMappingDecorator('GET')
 const Post = createMappingDecorator('POST')
 
-function mapRoute(instance: Object) {
+function mapRoute(instance: object) {
   const prototype = Object.getPrototypeOf(instance)
 
   // 筛选出类的 methodName
   const methodsNames = Object.getOwnPropertyNames(prototype).filter(
     item => !isConstructor(item) && isFunction(prototype[item])
   )
-  return methodsNames.map(methodName => {
+  return methodsNames.map((methodName) => {
     const fn = prototype[methodName]
 
     // 取出定义的 metadata
@@ -3408,12 +3395,14 @@ interface RouteProps<Path extends string> {
   render: (routeProps: { match: { params: RouteParams<Path> } }) => void
 }
 
-;<Route
-  path="/user/:username"
-  render={routeProps => {
-    const params = routeProps.match.params
-  }}
-/>
+export default function App() {
+  return (
+    <Route
+      path="/user/:username"
+      render={(routeProps) => { const params = routeProps.match.params }}
+    />
+  )
+}
 ```
 
 #### Type Gymnastics Reference
@@ -3482,7 +3471,7 @@ while (token !== ts.SyntaxKind.EndOfFileToken) {
 ```ts
 function printAllChildren(node: ts.Node, depth = 0) {
   console.log(
-    new Array(depth + 1).join('----'),
+    Array.from({ length: depth + 1 }, (num, i) => i).join('----'),
     ts.formatSyntaxKind(node.kind),
     node.pos,
     node.end
@@ -3580,9 +3569,8 @@ for (const statement of sourceFile.statements) {
       for (const callSignature of type.getCallSignatures()) {
         const returnType = callSignature.getReturnType()
 
-        if (returnType.symbol?.getEscapedName().toString() === 'Element') {
+        if (returnType.symbol?.getEscapedName().toString() === 'Element')
           detectedComponents.push(declaration.name.text)
-        }
       }
     }
   }

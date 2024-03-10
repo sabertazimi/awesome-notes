@@ -426,7 +426,7 @@ Use `gird` with `min-content`:
     </header>
     <main>
       <!-- ... -->
-    </div>
+    </main>
     <footer>
       <!-- ... -->
     </footer>
@@ -544,14 +544,21 @@ a:focus::after {
     width="80"
     height="80"
     viewBox="0 0 250 250"
-    style="position: absolute; top: 0; right: 0; color: #2d3748; border: 0; fill: #718096;"
+    style="
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #2d3748;
+      border: 0;
+      fill: #718096;
+    "
     aria-hidden="true"
   >
     <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" />
     <path
       d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
       fill="currentColor"
-      style="transform-origin: 130px 106px;"
+      style="transform-origin: 130px 106px"
       class="octo-arm"
     />
     <path
@@ -707,7 +714,12 @@ a.btn-custom {
       farthest-side at bottom left,
       rgb(255 0 255/ 50%),
       transparent
-    ), radial-gradient(farthest-corner at bottom right, rgb(255 255 50/ 50%), transparent);
+    ),
+    radial-gradient(
+      farthest-corner at bottom right,
+      rgb(255 255 50/ 50%),
+      transparent
+    );
 }
 ```
 
@@ -1440,7 +1452,7 @@ body {
 如下:
 
 ```ts
-const resetScrollX = () => {
+function resetScrollX() {
   window.scrollTo(0, 0)
 }
 ```
@@ -1715,8 +1727,8 @@ Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
       transparent 25%,
       transparent 75%,
       #eee 75%
-    ), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee
-        75%);
+    ),
+    linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%);
   background-position:
     0 0,
     8px 8px;
@@ -1949,7 +1961,8 @@ Rotate border [wave](https://codepen.io/Chokcoco/pen/EXJrdB):
   background-image: linear-gradient(
       var(--primary-line-color) 2px,
       transparent 0
-    ), linear-gradient(90deg, var(--primary-line-color) 2px, transparent 0),
+    ),
+    linear-gradient(90deg, var(--primary-line-color) 2px, transparent 0),
     linear-gradient(var(--secondary-line-color) 1px, transparent 0),
     linear-gradient(90deg, var(--secondary-line-color) 1px, transparent 0);
   background-size:
@@ -2080,7 +2093,8 @@ div {
   background:
     radial-gradient(circle at top left, transparent 15px, #58a 0) top left,
     radial-gradient(circle at top right, transparent 15px, #58a 0) top right,
-    radial-gradient(circle at bottom right, transparent 15px, #58a 0) bottom right,
+    radial-gradient(circle at bottom right, transparent 15px, #58a 0) bottom
+      right,
     radial-gradient(circle at bottom left, transparent 15px, #58a 0) bottom left;
   background-repeat: no-repeat;
   background-size: 50% 50%;
@@ -2151,8 +2165,10 @@ Background gradient triangle:
   color: white;
   text-align: center;
   background:
-    linear-gradient(-135deg, transparent 10%, #04e6fb 10%, #65ff9a 100%) top right,
-    linear-gradient(-45deg, transparent 10%, #04e6fb 10%, #65ff9a 100%) bottom right,
+    linear-gradient(-135deg, transparent 10%, #04e6fb 10%, #65ff9a 100%) top
+      right,
+    linear-gradient(-45deg, transparent 10%, #04e6fb 10%, #65ff9a 100%) bottom
+      right,
     linear-gradient(-135deg, #04e6fb 0, #65ff9a 90%, transparent 90%) top left,
     linear-gradient(-45deg, #04e6fb 0, #65ff9a 90%, transparent 90%) bottom left;
   background-repeat: no-repeat;
@@ -2181,7 +2197,8 @@ Background gradient triangle:
       transparent 50%,
       rgb(0 0 0 / 20%) 0,
       rgb(0 0 0 / 40%)
-    ) 100% 0 no-repeat;
+    )
+    100% 0 no-repeat;
   transform: translateY(-1.3em) rotate(-30deg);
   transform-origin: bottom right;
 }
@@ -2260,9 +2277,13 @@ Background gradient square shape:
       rgb(0 0 0 / 25%) 25%,
       transparent 0 75%,
       rgb(0 0 0 / 25%) 0
-    ), linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0 75%, rgb(
-          0 0 0 / 25%
-        ) 0);
+    ),
+    linear-gradient(
+      45deg,
+      rgb(0 0 0 / 25%) 25%,
+      transparent 0 75%,
+      rgb(0 0 0 / 25%) 0
+    );
   background-position:
     0 0,
     15px 15px;
@@ -2324,7 +2345,7 @@ Background gradient polygon:
 ```
 
 ```ts
-const polygon = (n = 3) => {
+function polygon(n = 3) {
   const deg = (2 * Math.PI) / n
   const points = []
 

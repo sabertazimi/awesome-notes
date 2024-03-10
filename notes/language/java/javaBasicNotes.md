@@ -1998,13 +1998,13 @@ jinfo <pid>
 - 在包名的接下来一个单词为模块的名称。如：用户模块，包名为 net.vschool.user
 - 关于模块的访问操作，采用分层形式,一般分为：
 
-Dao 层操作：一般定义在 net.vschool.xxx.dao 中，其中 xxx 为模块名称。  
-Service 层操作：一般定义在 net.vschool.xxx.service 中。  
+Dao 层操作：一般定义在 net.vschool.xxx.dao 中，其中 xxx 为模块名称。
+Service 层操作：一般定义在 net.vschool.xxx.service 中。
 web 层操作：一般定义在 net.vschool.xxx.action 中。
 
-> net.vschool.user  
-> net.vschool.user.dao  
-> net.vschool.user.action  
+> net.vschool.user
+> net.vschool.user.dao
+> net.vschool.user.action
 > net.vschool.user.service
 
 ### 类名的书写规范 (Class)

@@ -276,16 +276,16 @@ O.makeBread({ type: wheat, size: 99, name: 'foo' })
 const mockery = require('mockery')
 mockery.enable()
 
-describe('Sum suite File', function () {
-  beforeEach(function () {
+describe('Sum suite File', () => {
+  beforeEach(() => {
     mockery.registerAllowable('./mySumFS', true)
   })
 
-  afterEach(function () {
+  afterEach(() => {
     mockery.deregisterAllowable('./mySumFS')
   })
 
-  it('Adds Integers!', function () {
+  it('Adds Integers!', () => {
     const filename = 'numbers'
     const fsMock = {
       readFileSync(path, encoding) {
@@ -351,7 +351,7 @@ await page.waitFor(() => !!document.querySelector('.foo'))
 ```ts
 const puppeteer = require('puppeteer')
 
-puppeteer.launch().then(async browser => {
+puppeteer.launch().then(async (browser) => {
   const page = await browser.newPage()
   const watchDog = page.waitForFunction('window.innerWidth < 100')
   await page.setViewport({ width: 50, height: 50 })
@@ -507,7 +507,7 @@ module.exports = {
   testPathIgnorePatterns: ['node_modules', '\\.cache', '<rootDir>.*/build'],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   globals: {
-    window: {},
+    'window': {},
     'ts-jest': {
       tsConfig: './tsconfig.json',
     },
@@ -542,9 +542,9 @@ dotenv.config({
 import '@testing-library/jest-dom/extend-expect'
 
 // Global/Window object Stubs for Jest
-window.matchMedia =
-  window.matchMedia ||
-  function () {
+window.matchMedia
+  = window.matchMedia
+  || function () {
     return {
       matches: false,
       addListener() {},
@@ -783,7 +783,7 @@ import type { UserRoleType } from './apis/user'
 import AuthButton from './components/AuthButton'
 import server from './mockServer/server'
 
-const setup = (userType: UserRoleType) => {
+function setup(userType: UserRoleType) {
   server.use(
     rest.get('https://mysite.com/api/role', async (req, res, ctx) => {
       return res(ctx.status(200), ctx.json({ userType }))
@@ -830,7 +830,7 @@ test('fails', () => {
 })
 
 // This statement can add by `babel`.
-// eslint-disable-next-line import/no-anonymous-default-export
+
 export default true
 
 // TestLib.js
@@ -847,7 +847,8 @@ export function runTests() {
     try {
       testSuite.callback()
       testResults.push(`${testSuite.description}: OK\n`)
-    } catch (err) {
+    }
+    catch (err) {
       testResults.push(`${testSuite.description}: ${err}\n`)
     }
   }
@@ -882,11 +883,10 @@ async function* walk(dir: string): AsyncGenerator<string> {
   for await (const d of await fs.opendir(dir)) {
     const entry = join(dir, d.name)
 
-    if (d.isDirectory()) {
-      yield* walk(entry)
-    } else if (d.isFile()) {
+    if (d.isDirectory())
+      yield * walk(entry)
+    else if (d.isFile())
       yield entry
-    }
   }
 }
 
@@ -897,7 +897,8 @@ async function runTestFile(file: string): Promise<void> {
     if (typeof value === 'function') {
       try {
         await value()
-      } catch (e) {
+      }
+      catch (e) {
         console.error(e instanceof Error ? e.stack : e)
         process.exit(1)
       }
@@ -906,14 +907,13 @@ async function runTestFile(file: string): Promise<void> {
 }
 
 async function run(arg = '.') {
-  if ((await fs.lstat(arg)).isFile()) {
+  if ((await fs.lstat(arg)).isFile())
     return runTestFile(arg)
-  }
 
   for await (const file of walk(arg)) {
     if (
-      !dirname(file).includes('node_modules') &&
-      (basename(file) === 'test.js' || file.endsWith('.test.js'))
+      !dirname(file).includes('node_modules')
+      && (basename(file) === 'test.js' || file.endsWith('.test.js'))
     ) {
       console.log(file)
       await runTestFile(file)
@@ -943,24 +943,28 @@ const j = new jsdom.JSDOM(undefined, {
 // We need to add everything on JSDOM's window object to global scope.
 // We don't add anything starting with _, or anything that's already there.
 Object.getOwnPropertyNames(j.window)
-  .filter(k => !k.startsWith('_') && !(k in global))
-  .forEach(k => (global[k] = j.window[k]))
+  .filter(k => !k.startsWith('_') && !(k in globalThis))
+  .forEach(k => (globalThis[k] = j.window[k]))
 
 // Finally, tell React 18+ that we are not really a browser.
-global.IS_REACT_ACT_ENVIRONMENT = true
+globalThis.IS_REACT_ACT_ENVIRONMENT = true
 
-const reactTest = (name, fn) => {
+function reactTest(name, fn) {
   return test(name, () => {
     cleanup() // always cleanup first
     return fn()
   })
 }
 
-const FooComponent = ({ text }: { text: string }) => (
-  <div>
-    Hello <span data-testid="hold">{text}</span>
-  </div>
-)
+export default function FooComponent({ text }: { text: string }) {
+  return (
+    <div>
+      Hello
+      {' '}
+      <span data-testid="hold">{text}</span>
+    </div>
+  )
+}
 
 reactTest('test component', () => {
   const result = render(<FooComponent name={Sam} />)
@@ -974,7 +978,7 @@ reactTest('test component', () => {
 
 - 生成虚拟文件系统 (`jest-haste-map`): 在跑第一个测试会很慢.
 - 多线程: 生成新线程耗费的资源.
-- 文件转译: `Jest` 会在执行到该文件再对它进行转译. 使用 `esbuild-jest`/`@swc/jest` 加速转译.
+- 文件转译: `Jest` 会在执行到该文件再对它进行转译. 使用 `esbuild-jest`/`@swc/jest` 加速转译.
 
 ### Jest Plugins
 
@@ -1150,13 +1154,13 @@ describe('payment', () => {
     cy.findByText(note).should('be.visible')
 
     // Verify if payment amount was deducted.
-    cy.get('[data-test=nav-user-balance]').then($balance => {
-      const convertedOldBalance = parseFloat(oldBalance.replace(/\$|,/g, ''))
-      const convertedNewBalance = parseFloat(
+    cy.get('[data-test=nav-user-balance]').then(($balance) => {
+      const convertedOldBalance = Number.parseFloat(oldBalance.replace(/\$|,/g, ''))
+      const convertedNewBalance = Number.parseFloat(
         $balance.text().replace(/\$|,/g, '')
       )
       expect(convertedOldBalance - convertedNewBalance).to.equal(
-        parseFloat(paymentAmount)
+        Number.parseFloat(paymentAmount)
       )
     })
   })
@@ -1220,26 +1224,25 @@ cy.wait('@mockedPublicTransactions')
 cy.intercept('GET', '/transactions/public*', {
   headers: {
     'X-Powered-By': 'Express',
-    Date: new Date().toString(),
+    'Date': new Date().toString(),
   },
 })
 
-cy.intercept('POST', '/bankAccounts', req => {
+cy.intercept('POST', '/bankAccounts', (req) => {
   const { body } = req
-  req.continue(res => {
+  req.continue((res) => {
     res.body.data.listBankAccount = []
   })
 })
 
-cy.intercept('POST', apiGraphQL, req => {
+cy.intercept('POST', apiGraphQL, (req) => {
   const { body } = req
 
   if (
-    Object.hasOwn(body, 'operationName') &&
-    body.operationName === 'CreateBankAccount'
-  ) {
+    Object.hasOwn(body, 'operationName')
+    && body.operationName === 'CreateBankAccount'
+  )
     req.alias = 'gqlCreateBankAccountMutation'
-  }
 })
 ```
 
@@ -1247,20 +1250,20 @@ cy.intercept('POST', apiGraphQL, req => {
 
 ```ts
 Cypress.Commands.add('getAllPosts', () => {
-  return cy.request('GET', '/api/posts').then(response => {
+  return cy.request('GET', '/api/posts').then((response) => {
     return cy.wrap(response.body)
   })
 })
 
 Cypress.Commands.add('getFirstPost', () => {
-  return cy.request('GET', '/api/posts').then(response => {
+  return cy.request('GET', '/api/posts').then((response) => {
     return cy.wrap(response.body).its(0)
   })
 })
 
 describe('GET', () => {
   it('gets a list of users', () => {
-    cy.request('GET', '/users').then(response => {
+    cy.request('GET', '/users').then((response) => {
       expect(response.status).to.eq(200)
       expect(response.body.results).length.to.be.greaterThan(1)
     })
@@ -1269,7 +1272,7 @@ describe('GET', () => {
   it('gets a list of comments', () => {
     cy.request('/comments').as('comments')
 
-    cy.get('@comments').should(response => {
+    cy.get('@comments').should((response) => {
       expect(response.body).to.have.length(500)
       expect(response).to.have.property('headers')
       expect(response).to.have.property('duration')
@@ -1286,10 +1289,10 @@ describe('GET', () => {
 declare global {
   namespace Cypress {
     interface Chainable {
-      findByRole(role: string): Chainable<JQuery<HTMLElement>>
-      findByTestId(testId: string): Chainable<JQuery<HTMLElement>>
-      getByRole(role: string): Chainable<JQuery<HTMLElement>>
-      getByTestId(testId: string): Chainable<JQuery<HTMLElement>>
+      findByRole: (role: string) => Chainable<JQuery<HTMLElement>>
+      findByTestId: (testId: string) => Chainable<JQuery<HTMLElement>>
+      getByRole: (role: string) => Chainable<JQuery<HTMLElement>>
+      getByTestId: (testId: string) => Chainable<JQuery<HTMLElement>>
     }
   }
 }
@@ -1310,11 +1313,11 @@ Cypress.Commands.add(
   }
 )
 
-Cypress.Commands.add('getByRole', role => {
+Cypress.Commands.add('getByRole', (role) => {
   return cy.get(`[role="${role}"]`)
 })
 
-Cypress.Commands.add('getByTestId', testId => {
+Cypress.Commands.add('getByTestId', (testId) => {
   return cy.get(`[data-testid="${testId}"]`)
 })
 ```
@@ -1339,14 +1342,14 @@ Cypress.Commands.add('take', (input: string) => {
     name: 'Get by [data-cy] attribute',
   })
 
-  cy.get(`[data-cy=${input}]`, { log: false }).then($el => {
+  cy.get(`[data-cy=${input}]`, { log: false }).then(($el) => {
     element = Cypress.dom.getElements($el)
     count = $el.length
     log.set({ $el })
     log.snapshot().end()
   })
 
-  cy.on('fail', err => {
+  cy.on('fail', (err) => {
     log.error(err)
     log.end()
     throw err
@@ -1409,7 +1412,7 @@ export default defineConfig({
             },
           })
             .then(res => res.text())
-            .then(xml => {
+            .then((xml) => {
               const locs = [...xml.matchAll(`<loc>(.|\n)*?</loc>`)].map(
                 ([loc]) => loc.replace('<loc>', '').replace('</loc>', '')
               )
@@ -1425,8 +1428,8 @@ export default defineConfig({
 
 // cypress/e2e/smoke.cy.ts
 it('should be accessible', () => {
-  cy.task('sitemapLocations').then(pages => {
-    pages.forEach(page => {
+  cy.task('sitemapLocations').then((pages) => {
+    pages.forEach((page) => {
       cy.visit(page)
       cy.injectAxe()
       cy.checkA11y(
@@ -1483,11 +1486,11 @@ const _wr = function (type) {
 window.history.pushState = _wr('pushState')
 window.history.replaceState = _wr('replaceState')
 
-window.addEventListener('pushstate', function (event) {
+window.addEventListener('pushstate', (event) => {
   console.trace('pushState')
 })
 
-window.addEventListener('replacestate', function (event) {
+window.addEventListener('replacestate', (event) => {
   console.trace('replaceState')
 })
 ```
@@ -1579,9 +1582,8 @@ window.addEventListener('visibilitychange', () => {
 // don't log any metrics if the page is hidden
 // discard perf data from when the machine was not running app at full speed
 function metrics() {
-  if (metric.start < lastVisibilityChange || document.hidden) {
+  if (metric.start < lastVisibilityChange || document.hidden)
     return
-  }
 
   process()
 }
@@ -1589,7 +1591,7 @@ function metrics() {
 
 ```ts
 requestAnimationFrame(() => {
-  requestAnimationFrame(timestamp => {
+  requestAnimationFrame((timestamp) => {
     metric.finish(timestamp)
   })
 })
@@ -1705,7 +1707,7 @@ window.onerror = function (errorMessage, scriptURI, lineNo, columnNo, error) {
   // 异常上报
 }
 
-window.addEventListener('error', function () {
+window.addEventListener('error', () => {
   console.log(error)
   // ...
   // 异常上报
@@ -1715,7 +1717,7 @@ window.addEventListener('error', function () {
 #### Trace Property
 
 ```ts
-const traceProperty = (object, property) => {
+function traceProperty(object, property) {
   let value = object[property]
   Object.defineProperty(object, property, {
     get() {
@@ -1784,11 +1786,10 @@ console.log(c)
 ;(() => {
   function block() {
     if (
-      window.outerHeight - window.innerHeight > 200 ||
-      window.outerWidth - window.innerWidth > 200
-    ) {
+      window.outerHeight - window.innerHeight > 200
+      || window.outerWidth - window.innerWidth > 200
+    )
       document.body.innerHTML = 'Debug detected, please reload page!'
-    }
 
     setInterval(() => {
       ;(function () {
@@ -1801,7 +1802,8 @@ console.log(c)
 
   try {
     block()
-  } catch (err) {}
+  }
+  catch (err) {}
 })()
 ```
 
@@ -1874,7 +1876,7 @@ long click reload: multiple reload options e.g clean cache
 ```ts
 const listener = getEventListeners($0).click[0].listener
 $0.removeEventListener('click', listener)
-$0.addEventListener('click', e => {
+$0.addEventListener('click', (e) => {
   // do something
   // ...
 

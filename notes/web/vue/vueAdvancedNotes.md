@@ -41,7 +41,7 @@ export default Vue
 
 ```ts
 // initMixin(Vue)
-Vue.prototype._init = function (options?: Object) {}
+Vue.prototype._init = function (options?: object) {}
 ```
 
 `core/instance/state.js`:
@@ -55,7 +55,7 @@ Vue.prototype.$delete = del
 Vue.prototype.$watch = function (
   expOrFn: string | Function,
   cb: any,
-  options?: Object
+  options?: object
 ): Function {}
 ```
 
@@ -227,7 +227,7 @@ import { query } from './util/index'
 
 const mount = Vue.prototype.$mount
 
-const idToTemplate = cached(id => {
+const idToTemplate = cached((id) => {
   const el = query(id)
   return el && el.innerHTML
 })
@@ -236,10 +236,11 @@ const idToTemplate = cached(id => {
  * Get outerHTML of elements, taking care
  * of SVG elements in IE as well.
  */
-const getOuterHTML = (el: Element): string => {
+function getOuterHTML(el: Element): string {
   if (el.outerHTML) {
     return el.outerHTML
-  } else {
+  }
+  else {
     const container = document.createElement('div')
     container.appendChild(el.cloneNode(true))
     return container.innerHTML
@@ -263,16 +264,18 @@ Vue.prototype.$mount = function (
     let template = options.template
     if (template) {
       if (typeof template === 'string') {
-        if (template.charAt(0) === '#') {
+        if (template.charAt(0) === '#')
           template = idToTemplate(template)
-        }
-      } else if (template.nodeType) {
+      }
+      else if (template.nodeType) {
         template = template.innerHTML
-      } else {
+      }
+      else {
         // Invalid template option
         return this
       }
-    } else if (el) {
+    }
+    else if (el) {
       template = getOuterHTML(el)
     }
     if (template) {
@@ -333,23 +336,23 @@ Vue.options = {
 }
 
 // initUse: global-api/use.js
-Vue.use = function (plugin: Function | Object) {}
+Vue.use = function (plugin: Function | object) {}
 
 // initMixin: global-api/mixin.js
-Vue.mixin = function (mixin: Object) {}
+Vue.mixin = function (mixin: object) {}
 
 // initExtend: global-api/extend.js
 Vue.cid = 0
-Vue.extend = function (extendOptions: Object): Function {}
+Vue.extend = function (extendOptions: object): Function {}
 
 // initAssetRegisters: global-api/assets.js
-Vue.component =
-  Vue.directive =
-  Vue.filter =
-    function (
-      id: string,
-      definition: Function | Object
-    ): Function | Object | void {}
+Vue.component
+  = Vue.directive
+  = Vue.filter
+    = function (
+        id: string,
+        definition: Function | object
+      ): Function | object | void {}
 
 // expose FunctionalRenderContext for ssr runtime helper installation
 Object.defineProperty(Vue, 'FunctionalRenderContext', {
@@ -372,16 +375,15 @@ Vue.compile = compileToFunctions
 /**
  * Class inheritance
  */
-Vue.extend = function (extendOptions: Object): Function {
+Vue.extend = function (extendOptions: object): Function {
   extendOptions = extendOptions || {}
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  // eslint-disable-next-line ts/no-this-alias
   const Super = this
   const SuperId = Super.cid
   const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
 
-  if (cachedCtors[SuperId]) {
+  if (cachedCtors[SuperId])
     return cachedCtors[SuperId]
-  }
 
   const name = extendOptions.name || Super.options.name
   const Sub = function VueComponent(options) {
@@ -397,13 +399,11 @@ Vue.extend = function (extendOptions: Object): Function {
   // For props and computed properties, we define the proxy getters on
   // the Vue instances at extension time, on the extended prototype. This
   // avoids Object.defineProperty calls for each instance created.
-  if (Sub.options.props) {
+  if (Sub.options.props)
     initProps(Sub)
-  }
 
-  if (Sub.options.computed) {
+  if (Sub.options.computed)
     initComputed(Sub)
-  }
 
   // allow further extension/mixin/plugin usage
   Sub.extend = Super.extend
@@ -412,14 +412,13 @@ Vue.extend = function (extendOptions: Object): Function {
 
   // create asset registers, so extended classes
   // can have their private assets too.
-  ASSET_TYPES.forEach(function (type) {
+  ASSET_TYPES.forEach((type) => {
     Sub[type] = Super[type]
   })
 
   // enable recursive self-lookup
-  if (name) {
+  if (name)
     Sub.options.components[name] = Sub
-  }
 
   // keep a reference to the super options at extension time.
   // later at instantiation we can check if Super's options have
@@ -463,9 +462,7 @@ function flushCallbacks() {
   const copies = callbacks.slice(0)
   callbacks.length = 0
 
-  for (let i = 0; i < copies.length; i++) {
-    copies[i]()
-  }
+  for (let i = 0; i < copies.length; i++) copies[i]()
 }
 
 let microTimerFunc
@@ -477,11 +474,12 @@ if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
   macroTimerFunc = () => {
     setImmediate(flushCallbacks)
   }
-} else if (
-  typeof MessageChannel !== 'undefined' &&
-  (isNative(MessageChannel) ||
-    // PhantomJS
-    MessageChannel.toString() === '[object MessageChannelConstructor]')
+}
+else if (
+  typeof MessageChannel !== 'undefined'
+  && (isNative(MessageChannel)
+  // PhantomJS
+  || MessageChannel.toString() === '[object MessageChannelConstructor]')
 ) {
   const channel = new MessageChannel()
   const port = channel.port2
@@ -489,7 +487,8 @@ if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
   macroTimerFunc = () => {
     port.postMessage(1)
   }
-} else {
+}
+else {
   macroTimerFunc = () => {
     setTimeout(flushCallbacks, 0)
   }
@@ -500,9 +499,11 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
   const p = Promise.resolve()
   microTimerFunc = () => {
     p.then(flushCallbacks)
-    if (isIOS) setTimeout(noop)
+    if (isIOS)
+      setTimeout(noop)
   }
-} else {
+}
+else {
   microTimerFunc = macroTimerFunc
 }
 
@@ -512,8 +513,8 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
  */
 export function withMacroTask(fn: Function): Function {
   return (
-    fn._withTask ||
-    (fn._withTask = function (...args) {
+    fn._withTask
+    || (fn._withTask = function (...args) {
       useMacroTask = true
       const res = fn(...args)
       useMacroTask = false
@@ -522,17 +523,19 @@ export function withMacroTask(fn: Function): Function {
   )
 }
 
-export function nextTick(cb?: Function, ctx?: Object) {
+export function nextTick(cb?: Function, ctx?: object) {
   let _resolve
 
   callbacks.push(() => {
     if (cb) {
       try {
         cb.call(ctx)
-      } catch (e) {
+      }
+      catch (e) {
         handleError(e, ctx, 'nextTick')
       }
-    } else if (_resolve) {
+    }
+    else if (_resolve) {
       _resolve(ctx)
     }
   })
@@ -540,15 +543,13 @@ export function nextTick(cb?: Function, ctx?: Object) {
   if (!pending) {
     pending = true
 
-    if (useMacroTask) {
+    if (useMacroTask)
       macroTimerFunc()
-    } else {
-      microTimerFunc()
-    }
+    else microTimerFunc()
   }
 
   if (!cb && typeof Promise !== 'undefined') {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       _resolve = resolve
     })
   }
@@ -561,7 +562,7 @@ export function nextTick(cb?: Function, ctx?: Object) {
 
 ```ts
 export function initMixin(Vue: GlobalAPI) {
-  Vue.mixin = function (mixin: Object) {
+  Vue.mixin = function (mixin: object) {
     this.options = mergeOptions(this.options, mixin)
     return this
   }
@@ -574,22 +575,20 @@ export function initMixin(Vue: GlobalAPI) {
 
 ```ts
 export function initUse(Vue: GlobalAPI) {
-  Vue.use = function (plugin: Function | Object, ...args: any) {
-    const installedPlugins =
-      this._installedPlugins || (this._installedPlugins = [])
+  Vue.use = function (plugin: Function | object, ...args: any) {
+    const installedPlugins
+      = this._installedPlugins || (this._installedPlugins = [])
 
-    if (installedPlugins.includes(plugin)) {
+    if (installedPlugins.includes(plugin))
       return this
-    }
 
     // Pass `Vue` to plugin install hook.
     args.unshift(this)
 
-    if (typeof plugin.install === 'function') {
+    if (typeof plugin.install === 'function')
       plugin.install(...args)
-    } else if (typeof plugin === 'function') {
+    else if (typeof plugin === 'function')
       plugin(...args)
-    }
 
     installedPlugins.push(plugin)
     return this
@@ -726,13 +725,12 @@ vm.$options = {
  * Core utility used in both instantiation and inheritance.
  */
 export function mergeOptions(
-  parent: Object,
-  child: Object,
+  parent: object,
+  child: object,
   vm?: Component
-): Object {
-  if (typeof child === 'function') {
+): object {
+  if (typeof child === 'function')
     child = child.options
-  }
 
   normalizeProps(child, vm)
   normalizeInject(child, vm)
@@ -740,27 +738,22 @@ export function mergeOptions(
 
   const extendsFrom = child.extends
 
-  if (extendsFrom) {
+  if (extendsFrom)
     parent = mergeOptions(parent, extendsFrom, vm)
-  }
 
   if (child.mixins) {
-    for (let i = 0, l = child.mixins.length; i < l; i++) {
+    for (let i = 0, l = child.mixins.length; i < l; i++)
       parent = mergeOptions(parent, child.mixins[i], vm)
-    }
   }
 
   const options = {}
   let key
 
-  for (key in parent) {
-    mergeField(key)
-  }
+  for (key in parent) mergeField(key)
 
   for (key in child) {
-    if (!hasOwn(parent, key)) {
+    if (!hasOwn(parent, key))
       mergeField(key)
-    }
   }
 
   function mergeField(key) {
@@ -777,7 +770,6 @@ export function mergeOptions(
 Props:
 
 ```ts
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   props: {
     someData1: {
@@ -794,7 +786,6 @@ export default {
 Injects:
 
 ```ts
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   inject: {
     data1: { from: 'data1' },
@@ -809,9 +800,8 @@ Directives:
 ```ts
 for (const key in dirs) {
   const def = dirs[key]
-  if (typeof def === 'function') {
+  if (typeof def === 'function')
     dirs[key] = { bind: def, update: def }
-  }
 }
 ```
 
@@ -858,7 +848,8 @@ for (const key in dirs) {
 ```ts
 const app = new Vue({ el: '#app', ...restOptionsAPI })
 vm._init(...restOptionsAPI)
-if (vm.$options.el) vm.$mount(vm.$options.el)
+if (vm.$options.el)
+  vm.$mount(vm.$options.el)
 vm.$options.render = compileToFunctions(vm.$options.template)
 mountComponent(vm, el)
 ```
@@ -873,8 +864,8 @@ mountComponent(vm, el)
 
 ```ts
 // initMixin(Vue)
-Vue.prototype._init = function (options?: Object) {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
+Vue.prototype._init = function (options?: object) {
+  // eslint-disable-next-line ts/no-this-alias
   const vm: Component = this
 
   // uid
@@ -886,7 +877,8 @@ Vue.prototype._init = function (options?: Object) {
   // merge options
   if (options && options._isComponent) {
     initInternalComponent(vm, options)
-  } else {
+  }
+  else {
     vm.$options = mergeOptions(
       resolveConstructorOptions(vm.constructor),
       options || {},
@@ -907,9 +899,8 @@ Vue.prototype._init = function (options?: Object) {
   initProvide(vm) // resolve provide after data/props
   callHook(vm, 'created')
 
-  if (vm.$options.el) {
+  if (vm.$options.el)
     vm.$mount(vm.$options.el)
-  }
 }
 ```
 
@@ -923,9 +914,8 @@ export function mountComponent(
 ): Component {
   vm.$el = el
 
-  if (!vm.$options.render) {
+  if (!vm.$options.render)
     vm.$options.render = createEmptyVNode
-  }
 
   callHook(vm, 'beforeMount')
 
@@ -940,9 +930,8 @@ export function mountComponent(
     noop,
     {
       before() {
-        if (vm._isMounted) {
+        if (vm._isMounted)
           callHook(vm, 'beforeUpdate')
-        }
       },
     },
     true /* isRenderWatcher */
@@ -967,13 +956,12 @@ export function mountComponent(
 
 ```ts
 Vue.prototype._render = function (): VNode {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  // eslint-disable-next-line ts/no-this-alias
   const vm: Component = this
   const { render, _parentVnode } = vm.$options
 
-  if (_parentVnode) {
+  if (_parentVnode)
     vm.$scopedSlots = _parentVnode.data.scopedSlots || emptyObject
-  }
 
   // set parent vnode. this allows render functions to have access
   // to the data on the placeholder node.
@@ -983,9 +971,8 @@ Vue.prototype._render = function (): VNode {
   const vnode = render.call(vm._renderProxy, vm.$createElement)
 
   // return empty vnode in case the render function errored out
-  if (!(vnode instanceof VNode)) {
+  if (!(vnode instanceof VNode))
     vnode = createEmptyVNode()
-  }
 
   // set parent
   vnode.parent = _parentVnode
@@ -1026,28 +1013,25 @@ export function createElement(
     data = undefined
   }
 
-  if (isTrue(alwaysNormalize)) {
+  if (isTrue(alwaysNormalize))
     normalizationType = ALWAYS_NORMALIZE
-  }
 
   return _createElement(context, tag, data, children, normalizationType)
 }
 
 export function _createElement(
   context: Component,
-  tag?: string | Class<Component> | Function | Object,
+  tag?: string | Class<Component> | Function | object,
   data?: VNodeData,
   children?: any,
   normalizationType?: number
 ): VNode | Array<VNode> {
-  if (isDef(data) && isDef(data.__ob__)) {
+  if (isDef(data) && isDef(data.__ob__))
     return createEmptyVNode()
-  }
 
   // object syntax in v-bind
-  if (isDef(data) && isDef(data.is)) {
+  if (isDef(data) && isDef(data.is))
     tag = data.is
-  }
 
   if (!tag) {
     // in case of component :is set to falsy value
@@ -1061,11 +1045,10 @@ export function _createElement(
     children.length = 0
   }
 
-  if (normalizationType === ALWAYS_NORMALIZE) {
+  if (normalizationType === ALWAYS_NORMALIZE)
     children = normalizeChildren(children)
-  } else if (normalizationType === SIMPLE_NORMALIZE) {
+  else if (normalizationType === SIMPLE_NORMALIZE)
     children = simpleNormalizeChildren(children)
-  }
 
   let vnode
   let ns
@@ -1084,31 +1067,38 @@ export function _createElement(
         undefined,
         context
       )
-    } else if (
-      (!data || !data.pre) &&
+    }
+    else if (
+      (!data || !data.pre)
       // eslint-disable-next-line no-cond-assign
-      isDef((Ctor = resolveAsset(context.$options, 'components', tag)))
+      && isDef((Ctor = resolveAsset(context.$options, 'components', tag)))
     ) {
       // component
       vnode = createComponent(Ctor, data, context, children, tag)
-    } else {
+    }
+    else {
       // unknown or unlisted namespaced elements
       // check at runtime because it may get assigned a namespace when its
       // parent normalizes children
       vnode = new VNode(tag, data, children, undefined, undefined, context)
     }
-  } else {
+  }
+  else {
     // direct component options / constructor
     vnode = createComponent(tag, data, context, children)
   }
 
   if (Array.isArray(vnode)) {
     return vnode
-  } else if (isDef(vnode)) {
-    if (isDef(ns)) applyNS(vnode, ns)
-    if (isDef(data)) registerDeepBindings(data)
+  }
+  else if (isDef(vnode)) {
+    if (isDef(ns))
+      applyNS(vnode, ns)
+    if (isDef(data))
+      registerDeepBindings(data)
     return vnode
-  } else {
+  }
+  else {
     return createEmptyVNode()
   }
 }
@@ -1118,7 +1108,7 @@ export function _createElement(
 
 ```ts
 Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  // eslint-disable-next-line ts/no-this-alias
   const vm: Component = this
   const prevEl = vm.$el
   const prevVnode = vm._vnode
@@ -1130,7 +1120,8 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
   if (!prevVnode) {
     // initial render
     vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */)
-  } else {
+  }
+  else {
     // updates
     vm.$el = vm.__patch__(prevVnode, vnode)
   }
@@ -1138,18 +1129,15 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
   restoreActiveInstance()
 
   // update __vue__ reference
-  if (prevEl) {
+  if (prevEl)
     prevEl.__vue__ = null
-  }
 
-  if (vm.$el) {
+  if (vm.$el)
     vm.$el.__vue__ = vm
-  }
 
   // if parent is an HOC, update its $el as well
-  if (vm.$vnode && vm.$parent && vm.$vnode === vm.$parent._vnode) {
+  if (vm.$vnode && vm.$parent && vm.$vnode === vm.$parent._vnode)
     vm.$parent.$el = vm.$el
-  }
 
   // updated hook is called by the scheduler
   // to ensure that children are updated in a parent's updated hook.
@@ -1173,15 +1161,15 @@ export function callHook(vm: Component, hook: string) {
     for (let i = 0, j = handlers.length; i < j; i++) {
       try {
         handlers[i].call(vm)
-      } catch (e) {
+      }
+      catch (e) {
         handleError(e, vm, `${hook} hook`)
       }
     }
   }
 
-  if (vm._hasHookEvent) {
+  if (vm._hasHookEvent)
     vm.$emit(`hook:${hook}`)
-  }
 
   popTarget()
 }
@@ -1194,7 +1182,7 @@ export function callHook(vm: Component, hook: string) {
 - `beforeCreate`/`created` 不能访问 DOM.
 
 ```ts
-Vue.prototype._init = function (options?: Object) {
+Vue.prototype._init = function (options?: object) {
   // ...
   initLifecycle(vm)
   initEvents(vm)
@@ -1231,9 +1219,8 @@ export function mountComponent(
     noop,
     {
       before() {
-        if (vm._isMounted) {
+        if (vm._isMounted)
           callHook(vm, 'beforeUpdate')
-        }
       },
     },
     true /* isRenderWatcher */
@@ -1260,13 +1247,10 @@ export function mountComponent(
 function invokeInsertHook(vnode, queue, initial) {
   // delay insert hooks for component root nodes, invoke them after the
   // element is really inserted
-  if (isTrue(initial) && isDef(vnode.parent)) {
+  if (isTrue(initial) && isDef(vnode.parent))
     vnode.parent.data.pendingInsert = queue
-  } else {
-    for (let i = 0; i < queue.length; ++i) {
-      queue[i].data.hook.insert(queue[i])
-    }
-  }
+  else
+    for (let i = 0; i < queue.length; ++i) queue[i].data.hook.insert(queue[i])
 }
 
 // core/vdom/create-component.js:
@@ -1302,9 +1286,8 @@ function callUpdatedHooks(queue) {
     const vm = watcher.vm
 
     // Peek up `RenderWatcher`
-    if (vm._watcher === watcher && vm._isMounted) {
+    if (vm._watcher === watcher && vm._isMounted)
       callHook(vm, 'updated')
-    }
   }
 }
 ```
@@ -1322,12 +1305,11 @@ function callUpdatedHooks(queue) {
 
 ```ts
 Vue.prototype.$destroy = function () {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  // eslint-disable-next-line ts/no-this-alias
   const vm: Component = this
 
-  if (vm._isBeingDestroyed) {
+  if (vm._isBeingDestroyed)
     return
-  }
 
   callHook(vm, 'beforeDestroy')
   vm._isBeingDestroyed = true
@@ -1335,26 +1317,21 @@ Vue.prototype.$destroy = function () {
   // remove self from parent
   const parent = vm.$parent
 
-  if (parent && !parent._isBeingDestroyed && !vm.$options.abstract) {
+  if (parent && !parent._isBeingDestroyed && !vm.$options.abstract)
     remove(parent.$children, vm)
-  }
 
   // teardown watchers
-  if (vm._watcher) {
+  if (vm._watcher)
     vm._watcher.teardown()
-  }
 
   let i = vm._watchers.length
 
-  while (i--) {
-    vm._watchers[i].teardown()
-  }
+  while (i--) vm._watchers[i].teardown()
 
   // remove reference from data ob
   // frozen object may not have observer.
-  if (vm._data.__ob__) {
+  if (vm._data.__ob__)
     vm._data.__ob__.vmCount--
-  }
 
   // call the last hook...
   vm._isDestroyed = true
@@ -1366,14 +1343,12 @@ Vue.prototype.$destroy = function () {
   vm.$off()
 
   // GC: remove __vue__ reference
-  if (vm.$el) {
+  if (vm.$el)
     vm.$el.__vue__ = null
-  }
 
   // GC: release circular reference (#6759)
-  if (vm.$vnode) {
+  if (vm.$vnode)
     vm.$vnode.parent = null
-  }
 }
 ```
 
@@ -1406,9 +1381,8 @@ function mountComponent(vnode, container, anchor) {
     () => {
       const subTree = render.call(renderContext, renderContext)
 
-      if (!instance.mounted) {
+      if (!instance.mounted)
         instance.mounted?.forEach(hook => hook.call(renderContext))
-      }
     },
     {
       scheduler: queueJob,
@@ -1417,11 +1391,9 @@ function mountComponent(vnode, container, anchor) {
 }
 
 function onMounted(fn) {
-  if (currentInstance) {
+  if (currentInstance)
     currentInstance.mounted.push(fn)
-  } else {
-    console.error('`onMounted().` can only called in `setup()`.')
-  }
+  else console.error('`onMounted().` can only called in `setup()`.')
 }
 ```
 
@@ -1429,7 +1401,7 @@ function onMounted(fn) {
 
 ```ts
 // Vue.prototype._init: core/instance/init.js
-// eslint-disable-next-line @typescript-eslint/no-this-alias
+// eslint-disable-next-line ts/no-this-alias
 const vm: Component = this
 ```
 
@@ -1528,9 +1500,9 @@ export default class VNode {
   isCloned: boolean // is a cloned node?
   isOnce: boolean // is a v-once node?
   asyncFactory: Function | void // async component factory function
-  asyncMeta: Object | void
+  asyncMeta: object | void
   isAsyncPlaceholder: boolean
-  ssrContext: Object | void
+  ssrContext: object | void
   fnContext: Component | void // real context vm for functional nodes
   fnOptions: ComponentOptions | null // for SSR caching
   fnScopeId: string | null // functional scope id support
@@ -1587,13 +1559,13 @@ const VNodeFlags = {
 
 VNodeFlags.ELEMENT = VNodeFlags.ELEMENT_HTML | VNodeFlags.ELEMENT_SVG
 
-VNodeFlags.COMPONENT_STATEFUL =
-  VNodeFlags.COMPONENT_STATEFUL_NORMAL |
-  VNodeFlags.COMPONENT_STATEFUL_SHOULD_KEEP_ALIVE |
-  VNodeFlags.COMPONENT_STATEFUL_KEPT_ALIVE
+VNodeFlags.COMPONENT_STATEFUL
+  = VNodeFlags.COMPONENT_STATEFUL_NORMAL
+  | VNodeFlags.COMPONENT_STATEFUL_SHOULD_KEEP_ALIVE
+  | VNodeFlags.COMPONENT_STATEFUL_KEPT_ALIVE
 
-VNodeFlags.COMPONENT =
-  VNodeFlags.COMPONENT_STATEFUL | VNodeFlags.COMPONENT_FUNCTIONAL
+VNodeFlags.COMPONENT
+  = VNodeFlags.COMPONENT_STATEFUL | VNodeFlags.COMPONENT_FUNCTIONAL
 
 const ChildrenFlags = {
   // 未知的 children 类型.
@@ -1608,8 +1580,8 @@ const ChildrenFlags = {
   NONE_KEYED_VNODES: 1 << 3,
 }
 
-ChildrenFlags.MULTIPLE_VNODES =
-  ChildrenFlags.KEYED_VNODES | ChildrenFlags.NONE_KEYED_VNODES
+ChildrenFlags.MULTIPLE_VNODES
+  = ChildrenFlags.KEYED_VNODES | ChildrenFlags.NONE_KEYED_VNODES
 
 export interface VNode {
   _isVNode: true
@@ -1692,14 +1664,14 @@ function isStatic(node: ASTNode): boolean {
   }
 
   return !!(
-    node.pre ||
-    (!node.hasBindings && // no dynamic bindings
-      !node.if &&
-      !node.for && // not v-if or v-for or v-else
-      !isBuiltInTag(node.tag) && // not a built-in
-      isPlatformReservedTag(node.tag) && // not a component
-      !isDirectChildOfTemplateFor(node) &&
-      Object.keys(node).every(isStaticKey))
+    node.pre
+    || (!node.hasBindings // no dynamic bindings
+    && !node.if
+    && !node.for // not v-if or v-for or v-else
+    && !isBuiltInTag(node.tag) // not a built-in
+    && isPlatformReservedTag(node.tag) // not a component
+    && !isDirectChildOfTemplateFor(node)
+    && Object.keys(node).every(isStaticKey))
   )
 }
 
@@ -1707,7 +1679,8 @@ function patchElement(n1, n2) {
   if (n2.dynamicChildren) {
     // Skip all static blocks.
     patchBlockChildren(n1, n2)
-  } else {
+  }
+  else {
     patchChildren(n1, n2, el)
   }
 }
@@ -1737,10 +1710,10 @@ const changeName = new Proxy(_data, {
 
 ```ts
 Array.from(el.getElementsByTagName('input'))
-  .filter(ele => {
+  .filter((ele) => {
     return ele.getAttribute('v-model')
   })
-  .forEach(input => {
+  .forEach((input) => {
     const name = input.getAttribute('v-model')
     input.value = changeName[name]
 
@@ -1829,14 +1802,13 @@ export default class Watcher {
     vm: Component,
     expOrFn: string | Function,
     cb: Function,
-    options?: ?Object,
+    options?: object,
     isRenderWatcher?: boolean
   ) {
     this.vm = vm
 
-    if (isRenderWatcher) {
+    if (isRenderWatcher)
       vm._watcher = this
-    }
 
     vm._watchers.push(this)
 
@@ -1847,7 +1819,8 @@ export default class Watcher {
       this.computed = !!options.computed
       this.sync = !!options.sync
       this.before = options.before
-    } else {
+    }
+    else {
       this.deep = this.user = this.computed = this.sync = false
     }
 
@@ -1864,18 +1837,19 @@ export default class Watcher {
     // parse expression for getter
     if (typeof expOrFn === 'function') {
       this.getter = expOrFn
-    } else {
+    }
+    else {
       this.getter = parsePath(expOrFn)
 
-      if (!this.getter) {
+      if (!this.getter)
         this.getter = function () {}
-      }
     }
 
     if (this.computed) {
       this.value = undefined
       this.dep = new Dep()
-    } else {
+    }
+    else {
       this.value = this.get()
     }
   }
@@ -1888,9 +1862,8 @@ export default class Watcher {
     const vm = this.vm
     const value = this.getter.call(vm, vm)
 
-    if (this.deep) {
+    if (this.deep)
       traverse(value)
-    }
 
     popTarget()
     this.cleanupDeps()
@@ -1907,9 +1880,8 @@ export default class Watcher {
       this.newDepIds.add(id)
       this.newDeps.push(dep)
 
-      if (!this.depIds.has(id)) {
+      if (!this.depIds.has(id))
         dep.addSub(this)
-      }
     }
   }
 
@@ -1918,13 +1890,11 @@ export default class Watcher {
    * Will be called when a dependency changes.
    */
   update() {
-    if (this.lazy) {
+    if (this.lazy)
       this.dirty = true
-    } else if (this.sync) {
+    else if (this.sync)
       this.run()
-    } else {
-      queueWatcher(this)
-    }
+    else queueWatcher(this)
   }
 
   /**
@@ -1949,7 +1919,8 @@ export default class Watcher {
             this.vm,
             info
           )
-        } else {
+        }
+        else {
           this.cb.call(this.vm, value, oldValue)
         }
       }
@@ -1960,9 +1931,8 @@ export default class Watcher {
    * Depend on this watcher. Only for computed property watchers.
    */
   depend() {
-    if (this.dep && Dep.target) {
+    if (this.dep && Dep.target)
       this.dep.depend()
-    }
   }
 
   /**
@@ -2011,17 +1981,14 @@ export default class Dep {
   }
 
   depend() {
-    if (Dep.target) {
+    if (Dep.target)
       Dep.target.addDep(this)
-    }
   }
 
   notify() {
     // stabilize the subscriber list first
     const subs = this.subs.slice()
-    for (let i = 0, l = subs.length; i < l; i++) {
-      subs[i].update()
-    }
+    for (let i = 0, l = subs.length; i < l; i++) subs[i].update()
   }
 }
 
@@ -2032,7 +1999,8 @@ Dep.target = null
 const targetStack = []
 
 export function pushTarget(_target: ?Watcher) {
-  if (Dep.target) targetStack.push(Dep.target)
+  if (Dep.target)
+    targetStack.push(Dep.target)
   Dep.target = _target
 }
 
@@ -2062,14 +2030,13 @@ export class Observer {
     def(value, '__ob__', this)
 
     if (Array.isArray(value)) {
-      if (hasProto) {
+      if (hasProto)
         protoAugment(value, arrayMethods)
-      } else {
-        copyAugment(value, arrayMethods, arrayKeys)
-      }
+      else copyAugment(value, arrayMethods, arrayKeys)
 
       this.observeArray(value)
-    } else {
+    }
+    else {
       this.walk(value)
     }
   }
@@ -2079,21 +2046,17 @@ export class Observer {
    * getter/setters. This method should only be called when
    * value type is Object.
    */
-  walk(obj: Object) {
+  walk(obj: object) {
     const keys = Object.keys(obj)
 
-    for (let i = 0; i < keys.length; i++) {
-      defineReactive(obj, keys[i])
-    }
+    for (let i = 0; i < keys.length; i++) defineReactive(obj, keys[i])
   }
 
   /**
    * Observe a list of Array items.
    */
   observeArray(items: Array<any>) {
-    for (let i = 0, l = items.length; i < l; i++) {
-      observe(items[i])
-    }
+    for (let i = 0, l = items.length; i < l; i++) observe(items[i])
   }
 }
 
@@ -2103,27 +2066,24 @@ export class Observer {
  * or the existing observer if the value already has one.
  */
 export function observe(value: any, asRootData: ?boolean): Observer | void {
-  if (!isObject(value) || value instanceof VNode) {
+  if (!isObject(value) || value instanceof VNode)
     return
-  }
 
   let ob: Observer | void
 
-  if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
+  if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer)
     ob = value.__ob__
-  } else if (
-    shouldObserve &&
-    !isServerRendering() &&
-    (Array.isArray(value) || isPlainObject(value)) &&
-    Object.isExtensible(value) &&
-    !value._isVue
-  ) {
+  else if (
+    shouldObserve
+    && !isServerRendering()
+    && (Array.isArray(value) || isPlainObject(value))
+    && Object.isExtensible(value)
+    && !value._isVue
+  )
     ob = new Observer(value)
-  }
 
-  if (asRootData && ob) {
+  if (asRootData && ob)
     ob.vmCount++
-  }
 
   return ob
 }
@@ -2132,7 +2092,7 @@ export function observe(value: any, asRootData: ?boolean): Observer | void {
  * Define a reactive property on an Object.
  */
 export function defineReactive(
-  obj: Object,
+  obj: object,
   key: string,
   val: any,
   customSetter?: ?Function,
@@ -2142,17 +2102,15 @@ export function defineReactive(
 
   const property = Object.getOwnPropertyDescriptor(obj, key)
 
-  if (property && property.configurable === false) {
+  if (property && property.configurable === false)
     return
-  }
 
   // cater for pre-defined getter/setters
   const getter = property && property.get
   const setter = property && property.set
 
-  if ((!getter || setter) && arguments.length === 2) {
+  if ((!getter || setter) && arguments.length === 2)
     val = obj[key]
-  }
 
   let childOb = !shallow && observe(val)
 
@@ -2171,9 +2129,8 @@ export function defineReactive(
           childOb.dep.depend()
 
           // 2. 收集嵌套数组依赖.
-          if (Array.isArray(value)) {
+          if (Array.isArray(value))
             dependArray(value)
-          }
         }
       }
 
@@ -2183,15 +2140,12 @@ export function defineReactive(
       const value = getter ? getter.call(obj) : val
 
       /* eslint-disable no-self-compare */
-      if (newVal === value || (newVal !== newVal && value !== value)) {
+      if (newVal === value || (newVal !== newVal && value !== value))
         return
-      }
 
-      if (setter) {
+      if (setter)
         setter.call(obj, newVal)
-      } else {
-        val = newVal
-      }
+      else val = newVal
 
       childOb = !shallow && observe(newVal)
       dep.notify()
@@ -2213,7 +2167,7 @@ const methodsToPatch = [
   'reverse',
 ]
 
-methodsToPatch.forEach(function (method) {
+methodsToPatch.forEach((method) => {
   // Cache original method.
   const original = Array.prototype[method]
 
@@ -2232,7 +2186,8 @@ methodsToPatch.forEach(function (method) {
         break
     }
 
-    if (inserted) ob.observeArray(inserted)
+    if (inserted)
+      ob.observeArray(inserted)
     ob.dep.notify()
     return result
   })
@@ -2247,7 +2202,7 @@ methodsToPatch.forEach(function (method) {
  * triggers change notification if the property doesn't
  * already exist.
  */
-Vue.set = function set(target: Array<any> | Object, key: any, val: any): any {
+Vue.set = function set(target: Array<any> | object, key: any, val: any): any {
   if (Array.isArray(target) && isValidArrayIndex(key)) {
     target.length = Math.max(target.length, key)
     target.splice(key, 1, val)
@@ -2261,9 +2216,8 @@ Vue.set = function set(target: Array<any> | Object, key: any, val: any): any {
 
   const ob = target.__ob__
 
-  if (target._isVue || (ob && ob.vmCount)) {
+  if (target._isVue || (ob && ob.vmCount))
     return val
-  }
 
   if (!ob) {
     target[key] = val
@@ -2278,7 +2232,7 @@ Vue.set = function set(target: Array<any> | Object, key: any, val: any): any {
 /**
  * Delete a property and trigger change if necessary.
  */
-Vue.del = function del(target: Array<any> | Object, key: any) {
+Vue.del = function del(target: Array<any> | object, key: any) {
   if (Array.isArray(target) && isValidArrayIndex(key)) {
     target.splice(key, 1)
     return
@@ -2286,19 +2240,16 @@ Vue.del = function del(target: Array<any> | Object, key: any) {
 
   const ob = target.__ob__
 
-  if (target._isVue || (ob && ob.vmCount)) {
+  if (target._isVue || (ob && ob.vmCount))
     return
-  }
 
-  if (!hasOwn(target, key)) {
+  if (!hasOwn(target, key))
     return
-  }
 
   delete target[key]
 
-  if (!ob) {
+  if (!ob)
     return
-  }
 
   ob.dep.notify()
 }
@@ -2315,7 +2266,7 @@ Vue.del = function del(target: Array<any> | Object, key: any) {
 ```ts
 const computedWatcherOptions = { computed: true }
 
-function initComputed(vm: Component, computed: Object) {
+function initComputed(vm: Component, computed: object) {
   const watchers = (vm._computedWatchers = Object.create(null))
 
   for (const key in computed) {
@@ -2330,21 +2281,21 @@ function initComputed(vm: Component, computed: Object) {
       computedWatcherOptions
     )
 
-    if (!(key in vm)) {
+    if (!(key in vm))
       defineComputed(vm, key, userDef)
-    }
   }
 }
 
 export function defineComputed(
   target: any,
   key: string,
-  userDef: Object | Function
+  userDef: object | Function
 ) {
   if (typeof userDef === 'function') {
     sharedPropertyDefinition.get = createComputedGetter(key)
     sharedPropertyDefinition.set = noop
-  } else {
+  }
+  else {
     sharedPropertyDefinition.get = userDef.get ?? noop
     sharedPropertyDefinition.set = userDef.set ?? noop
   }
@@ -2396,9 +2347,8 @@ function resetStoreVM(store, state, hot) {
   })
   Vue.config.silent = silent
 
-  if (store.strict) {
+  if (store.strict)
     enableStrictMode(store)
-  }
 
   if (oldVm) {
     if (hot) {
@@ -2470,10 +2420,12 @@ function createEffect<T>(effect: Effect<T>) {
 function track<T extends object>(target: T, key: Key) {
   for (const effect of runningEffects) {
     let effectsMap = targetMap.get(target)
-    if (!effectsMap) targetMap.set(target, (effectsMap = new Map()))
+    if (!effectsMap)
+      targetMap.set(target, (effectsMap = new Map()))
 
     let effects = effectsMap.get(key)
-    if (!effects) effectsMap.set(key, (effects = new Set()))
+    if (!effects)
+      effectsMap.set(key, (effects = new Set()))
 
     effects.add(effect)
   }
@@ -2481,45 +2433,41 @@ function track<T extends object>(target: T, key: Key) {
 
 function trigger<T extends object>(target: T, key: Key, type: Type) {
   const effectsMap = targetMap.get(target)
-  if (!effectsMap) return
+  if (!effectsMap)
+    return
 
   const effectsToRun = new Set()
 
   const ordinaryEffects = effectsMap.get(key)
-  ordinaryEffects?.forEach(effect => {
+  ordinaryEffects?.forEach((effect) => {
     // Remove current running effect
     // to avoid infinite call stack
     // (skip triggering current tracking effect):
     // reactive.foo = reactive.foo + 1;
-    if (effect !== runningEffects.top()) {
+    if (effect !== runningEffects.top())
       effectsToRun.add(effect)
-    }
   })
 
   if (type === 'ADD' || type === 'DELETE') {
     const iterateEffects = effectsMap.get(IterateKey)
-    iterateEffects?.forEach(effect => {
-      if (effect !== runningEffects.top()) {
+    iterateEffects?.forEach((effect) => {
+      if (effect !== runningEffects.top())
         effectsToRun.add(effect)
-      }
     })
   }
 
   if (type === 'LENGTH') {
     const lengthEffects = effectsMap.get(LengthKey)
-    lengthEffects?.forEach(effect => {
-      if (effect !== runningEffects.top()) {
+    lengthEffects?.forEach((effect) => {
+      if (effect !== runningEffects.top())
         effectsToRun.add(effect)
-      }
     })
   }
 
-  effectsToRun.forEach(effect => {
-    if (effect.options.scheduler) {
+  effectsToRun.forEach((effect) => {
+    if (effect.options.scheduler)
       effect.options.scheduler(effect)
-    } else {
-      effect()
-    }
+    else effect()
   })
 }
 
@@ -2528,7 +2476,8 @@ export function reactive<T extends object>(target: T) {
     get(target, key, receiver) {
       const value = Reflect.get(target, key, receiver)
       track(target, key)
-      if (value !== null && typeof value === 'object') return reactive(value)
+      if (value !== null && typeof value === 'object')
+        return reactive(value)
       else return value
     },
     has(target, key) {
@@ -2550,13 +2499,15 @@ export function reactive<T extends object>(target: T) {
           : 'ADD'
       const oldValue = Reflect.get(target, key, receiver)
       const result = Reflect.set(target, key, value, receiver)
-      if (result && oldValue !== value) trigger(target, key, type)
+      if (result && oldValue !== value)
+        trigger(target, key, type)
       return result
     },
     deleteProperty(target, key) {
       const isOwnKey = Object.hasOwn(target, key)
       const result = Reflect.deleteProperty(target, key)
-      if (result && isOwnKey) trigger(target, key, 'DELETE')
+      if (result && isOwnKey)
+        trigger(target, key, 'DELETE')
       return result
     },
   }
@@ -2669,7 +2620,7 @@ app.product[newField] = newValue
   - `ctx`: computed value/methods from `Options API`.
 
 ```ts
-const mountComponent = (
+function mountComponent(
   initialVNode,
   container,
   anchor,
@@ -2677,7 +2628,7 @@ const mountComponent = (
   parentSuspense,
   isSVG,
   optimized
-) => {
+) {
   // 创建组件实例
   const instance = (initialVNode.component = createComponentInstance(
     initialVNode,
@@ -2702,8 +2653,8 @@ const mountComponent = (
 
 function createComponentInstance(vnode, parent, suspense) {
   // 继承父组件实例上的 appContext, 如果是根组件, 则直接从根 vnode 中取.
-  const appContext =
-    (parent ? parent.appContext : vnode.appContext) || emptyAppContext
+  const appContext
+    = (parent ? parent.appContext : vnode.appContext) || emptyAppContext
 
   const instance = {
     // 组件唯一 id
@@ -2806,23 +2757,19 @@ function createComponentInstance(vnode, parent, suspense) {
       // data, props, computed, methods etc.
       const [data, props] = target
 
-      if (data && key in data) {
+      if (data && key in data)
         return data[key]
-      } else if (key in props) {
+      else if (key in props)
         return props[key]
-      } else {
-        console.error('Not exist.')
-      }
+      else console.error('Not exist.')
     },
     set(target, key, value, receiver) {
       // data, props, computed, methods etc.
-      if (data && key in data) {
+      if (data && key in data)
         data[key] = value
-      } else if (key in props) {
+      else if (key in props)
         console.warn(`Attempting to mutate read-only prop ${key}.`)
-      } else {
-        console.error('Not exist.')
-      }
+      else console.error('Not exist.')
     },
   })
 
@@ -2867,8 +2814,8 @@ function setupStatefulComponent(instance, isSSR) {
 
   if (setup) {
     // 如果 setup 函数带参数, 则创建一个 setupContext
-    const setupContext = (instance.setupContext =
-      setup.length > 1 ? createSetupContext(instance) : null)
+    const setupContext = (instance.setupContext
+      = setup.length > 1 ? createSetupContext(instance) : null)
     // 执行 setup 函数, 获取结果
     const setupResult = callWithErrorHandling(
       setup,
@@ -2878,7 +2825,8 @@ function setupStatefulComponent(instance, isSSR) {
     )
     // 处理 setup 执行结果
     handleSetupResult(instance, setupResult)
-  } else {
+  }
+  else {
     // 完成组件实例设置
     finishComponentSetup(instance)
   }
@@ -2888,7 +2836,8 @@ function handleSetupResult(instance, setupResult) {
   if (isFunction(setupResult)) {
     // setup 返回渲染函数
     instance.render = setupResult
-  } else if (isObject(setupResult)) {
+  }
+  else if (isObject(setupResult)) {
     // 把 setup 返回结果变成响应式
     instance.setupState = reactive(setupResult)
   }

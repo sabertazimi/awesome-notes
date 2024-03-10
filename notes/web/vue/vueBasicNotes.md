@@ -66,23 +66,28 @@ and prefer `v-if` if the condition is unlikely to change at runtime (lifecycle c
 ```ts
 // Vue 2.x: compiler/codegen/index.js
 export function genElement(el: ASTElement, state: CodegenState): string {
-  if (el.parent) {
+  if (el.parent)
     el.pre = el.pre || el.parent.pre
-  }
 
   if (el.staticRoot && !el.staticProcessed) {
     return genStatic(el, state)
-  } else if (el.once && !el.onceProcessed) {
+  }
+  else if (el.once && !el.onceProcessed) {
     return genOnce(el, state)
-  } else if (el.for && !el.forProcessed) {
+  }
+  else if (el.for && !el.forProcessed) {
     return genFor(el, state)
-  } else if (el.if && !el.ifProcessed) {
+  }
+  else if (el.if && !el.ifProcessed) {
     return genIf(el, state)
-  } else if (el.tag === 'template' && !el.slotTarget && !state.pre) {
+  }
+  else if (el.tag === 'template' && !el.slotTarget && !state.pre) {
     return genChildren(el, state) || 'void 0'
-  } else if (el.tag === 'slot') {
+  }
+  else if (el.tag === 'slot') {
     return genSlot(el, state)
-  } else {
+  }
+  else {
     // component or element
   }
 }
@@ -216,15 +221,18 @@ export function genElement(el: ASTElement, state: CodegenState): string {
 Vue.createApp({
   methods: {
     warn(message, event) {
-      if (event) event.preventDefault()
+      if (event)
+        event.preventDefault()
       alert(message)
     },
     one(event) {
-      if (event) event.preventDefault()
+      if (event)
+        event.preventDefault()
       console.log('one')
     },
     two(event) {
-      if (event) event.preventDefault()
+      if (event)
+        event.preventDefault()
       console.log('two')
     },
   },
@@ -245,7 +253,8 @@ app.component('CustomForm', {
     submit: ({ email, password }) => {
       if (email && password) {
         return true
-      } else {
+      }
+      else {
         console.warn('Invalid submit event payload!')
         return false
       }
@@ -377,7 +386,7 @@ Drag and Drop events:
 <!-- 自动将用户的输入值转为数值类型 -->
 <input v-model.number="age" type="number" />
 <!-- 自动过滤用户输入的首尾空白字符 -->
-<input v-model.trim="msg" /
+<input v-model.trim="msg" />
 ```
 
 Component `v-model` directive:
@@ -772,7 +781,6 @@ we cannot directly access `this.$emit` or `this.$route` anymore.
 ```ts
 import { ref, toRefs } from 'vue'
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   setup(props, { attrs, slots, emit, expose }) {
     const { title } = toRefs(props)
@@ -872,9 +880,7 @@ function toRef(reactive, key) {
 function toRefs(reactive) {
   const refs = {}
 
-  for (const key in reactive) {
-    refs[key] = toRef(reactive, key)
-  }
+  for (const key in reactive) refs[key] = toRef(reactive, key)
 
   return refs
 }
@@ -948,7 +954,7 @@ plusOne.value++ // error
 const count = ref(1)
 const plusOne = computed({
   get: () => count.value + 1,
-  set: val => {
+  set: (val) => {
     count.value = val - 1
   },
 })
@@ -1102,7 +1108,8 @@ export function useFetch(url) {
     // 若输入的 URL 是一个 ref
     // 那么启动一个响应式的请求
     watchEffect(doFetch)
-  } else {
+  }
+  else {
     // 否则只请求一次
     // 避免监听器的额外开销
     doFetch()
@@ -1122,7 +1129,7 @@ import { shallowRef } from 'vue'
 
 export function useImmer(baseState) {
   const state = shallowRef(baseState)
-  const update = updater => {
+  const update = (updater) => {
     state.value = produce(state.value, updater)
   }
 
@@ -1339,7 +1346,6 @@ transition JavaScript hooks helps a lot.
 ```
 
 ```ts
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   methods: {
     beforeEnter(el) {},
@@ -1448,23 +1454,19 @@ const Transition = {
 - 核心逻辑位于 `enter()` 与 `leave()` 函数.
 
 ```ts
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   create: _enter,
   activate: _enter,
   remove(vnode: VNode, rm: Function) {
-    if (vnode.data.show !== true) {
+    if (vnode.data.show !== true)
       leave(vnode, rm)
-    } else {
-      rm()
-    }
+    else rm()
   },
 }
 
 function _enter(_: any, vnode: VNodeWithData) {
-  if (vnode.data.show !== true) {
+  if (vnode.data.show !== true)
     enter(vnode)
-  }
 }
 ```
 
@@ -1499,9 +1501,8 @@ const TransitionGroup = defineComponent({
     const children: Array<VNode> = this.prevChildren
     const moveClass: string = this.moveClass || `${this.name || 'v'}-move'`
 
-    if (!children.length || !this.hasMove(children[0].elm, moveClass)) {
+    if (!children.length || !this.hasMove(children[0].elm, moveClass))
       return
-    }
 
     // we divide the work into three loops to avoid mixing DOM reads and writes
     // in each iteration - which helps prevent layout thrashing.
@@ -1536,13 +1537,11 @@ const TransitionGroup = defineComponent({
 
   methods: {
     hasMove(el: any, moveClass: string): boolean {
-      if (!hasTransition) {
+      if (!hasTransition)
         return false
-      }
 
-      if (this._hasMove) {
+      if (this._hasMove)
         return this._hasMove
-      }
 
       // Detect whether an element with the move class applied has
       // CSS transitions. Since the element may be inside an entering
@@ -1560,7 +1559,7 @@ const TransitionGroup = defineComponent({
       addClass(clone, moveClass)
       clone.style.display = 'none'
       this.$el.appendChild(clone)
-      const info: Object = getTransitionInfo(clone)
+      const info: object = getTransitionInfo(clone)
       this.$el.removeChild(clone)
       return (this._hasMove = info.hasTransform)
     },
@@ -1568,11 +1567,11 @@ const TransitionGroup = defineComponent({
 
   render(h: Function) {
     const tag: string = this.tag || this.$vnode.data.tag || 'span'
-    const map: Object = Object.create(null)
+    const map: object = Object.create(null)
     const prevChildren: Array<VNode> = (this.prevChildren = this.children)
     const rawChildren: Array<VNode> = this.$slots.default || []
     const children: Array<VNode> = (this.children = [])
-    const transitionData: Object = extractTransitionData(this)
+    const transitionData: object = extractTransitionData(this)
 
     for (let i = 0; i < rawChildren.length; i++) {
       const c: VNode = rawChildren[i]
@@ -1593,11 +1592,9 @@ const TransitionGroup = defineComponent({
         c.data.transition = transitionData
         c.data.pos = c.elm.getBoundingClientRect()
 
-        if (map[c.key]) {
+        if (map[c.key])
           kept.push(c)
-        } else {
-          removed.push(c)
-        }
+        else removed.push(c)
       }
 
       this.kept = h(tag, null, kept)
@@ -1614,12 +1611,11 @@ const TransitionGroup = defineComponent({
 
 ```ts
 function callPendingCbs(c: VNode) {
-  if (c.elm._moveCb) {
+  if (c.elm._moveCb)
     c.elm._moveCb()
-  }
-  if (c.elm._enterCb) {
+
+  if (c.elm._enterCb)
     c.elm._enterCb()
-  }
 }
 
 function recordPosition(c: VNode) {
@@ -1647,7 +1643,7 @@ function applyTranslation(c: VNode) {
 
 ```ts
 // 1. Basic async component:
-Vue.component('AsyncExample', function (resolve, reject) {
+Vue.component('AsyncExample', (resolve, reject) => {
   // 这个特殊的 require 语法告诉 webpack
   // 自动将编译后的代码分割成不同的块,
   // 这些块将通过 Ajax 请求自动下载.
@@ -1662,18 +1658,20 @@ Vue.component(
 )
 
 // 3. Advanced async component:
-const AsyncComp = () => ({
-  // 需要加载的组件, 应当是一个 Promise.
-  component: import('./MyComp.vue'),
-  // 加载中应当渲染的组件.
-  loading: LoadingComp,
-  // 出错时渲染的组件.
-  error: ErrorComp,
-  // 渲染加载中组件前的等待时间, 默认: 200ms.
-  delay: 200,
-  // 最长等待时间, 超出此时间则渲染错误组件, 默认: Infinity.
-  timeout: 3000,
-})
+function AsyncComp() {
+  return {
+    // 需要加载的组件, 应当是一个 Promise.
+    component: import('./MyComp.vue'),
+    // 加载中应当渲染的组件.
+    loading: LoadingComp,
+    // 出错时渲染的组件.
+    error: ErrorComp,
+    // 渲染加载中组件前的等待时间, 默认: 200ms.
+    delay: 200,
+    // 最长等待时间, 超出此时间则渲染错误组件, 默认: Infinity.
+    timeout: 3000,
+  }
+}
 Vue.component('AsyncExample', AsyncComp)
 ```
 
@@ -1706,13 +1704,11 @@ export function resolveAsyncComponent(
   baseCtor: Class<Component>
 ): Class<Component> | void {
   // 3.
-  if (isTrue(factory.error) && isDef(factory.errorComp)) {
+  if (isTrue(factory.error) && isDef(factory.errorComp))
     return factory.errorComp
-  }
 
-  if (isDef(factory.resolved)) {
+  if (isDef(factory.resolved))
     return factory.resolved
-  }
 
   const owner = currentRenderingInstance
 
@@ -1722,9 +1718,8 @@ export function resolveAsyncComponent(
   }
 
   // 3.
-  if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
+  if (isTrue(factory.loading) && isDef(factory.loadingComp))
     return factory.loadingComp
-  }
 
   if (owner && !isDef(factory.owners)) {
     const owners = (factory.owners = [owner])
@@ -1735,9 +1730,7 @@ export function resolveAsyncComponent(
     owner.$on('hook:destroyed', () => remove(owners, owner))
 
     const forceRender = (renderCompleted: boolean) => {
-      for (let i = 0, l = owners.length; i < l; i++) {
-        owners[i].$forceUpdate()
-      }
+      for (let i = 0, l = owners.length; i < l; i++) owners[i].$forceUpdate()
 
       if (renderCompleted) {
         owners.length = 0
@@ -1754,19 +1747,17 @@ export function resolveAsyncComponent(
       }
     }
 
-    const resolve = once((res: Object | Class<Component>) => {
+    const resolve = once((res: object | Class<Component>) => {
       // cache resolved
       factory.resolved = ensureCtor(res, baseCtor)
       // invoke callbacks only if this is not a synchronous resolve
       // (async resolves are shimmed as synchronous during SSR)
-      if (!sync) {
+      if (!sync)
         forceRender(true)
-      } else {
-        owners.length = 0
-      }
+      else owners.length = 0
     })
 
-    const reject = once(reason => {
+    const reject = once((reason) => {
       if (isDef(factory.errorComp)) {
         factory.error = true
         forceRender(true)
@@ -1778,23 +1769,23 @@ export function resolveAsyncComponent(
     if (isObject(res)) {
       if (isPromise(res)) {
         // 2. () => Promise.
-        if (isUndef(factory.resolved)) {
+        if (isUndef(factory.resolved))
           res.then(resolve, reject)
-        }
-      } else if (isPromise(res.component)) {
+      }
+      else if (isPromise(res.component)) {
         // 3.
         res.component.then(resolve, reject)
 
-        if (isDef(res.error)) {
+        if (isDef(res.error))
           factory.errorComp = ensureCtor(res.error, baseCtor)
-        }
 
         if (isDef(res.loading)) {
           factory.loadingComp = ensureCtor(res.loading, baseCtor)
 
           if (res.delay === 0) {
             factory.loading = true
-          } else {
+          }
+          else {
             timerLoading = setTimeout(() => {
               timerLoading = null
 
@@ -1810,9 +1801,8 @@ export function resolveAsyncComponent(
           timerTimeout = setTimeout(() => {
             timerTimeout = null
 
-            if (isUndef(factory.resolved)) {
+            if (isUndef(factory.resolved))
               reject(null)
-            }
           }, res.timeout)
         }
       }
@@ -1825,9 +1815,8 @@ export function resolveAsyncComponent(
 }
 
 function ensureCtor(comp: any, base) {
-  if (comp.__esModule || (hasSymbol && comp[Symbol.toStringTag] === 'Module')) {
+  if (comp.__esModule || (hasSymbol && comp[Symbol.toStringTag] === 'Module'))
     comp = comp.default
-  }
 
   return isObject(comp) ? base.extend(comp) : comp
 }
@@ -1867,7 +1856,7 @@ function defineAsyncComponent({
       let timer = null
 
       loader()
-        .then(Component => {
+        .then((Component) => {
           InnerComponent = Component
           loaded.value = true
         })
@@ -1886,13 +1875,11 @@ function defineAsyncComponent({
 
       // Return render function.
       return () => {
-        if (loaded.value) {
+        if (loaded.value)
           return { type: InnerComponent }
-        } else if (error.value && errorComponent) {
+        else if (error.value && errorComponent)
           return { type: errorComponent }
-        } else {
-          return loadingComponent ? { type: loadingComponent } : placeholder
-        }
+        else return loadingComponent ? { type: loadingComponent } : placeholder
       }
     },
   }
@@ -1950,26 +1937,23 @@ const KeepAlive = defineComponent({
   },
 
   mounted() {
-    this.$watch('include', val => {
+    this.$watch('include', (val) => {
       pruneCache(this, name => matches(val, name))
     })
-    this.$watch('exclude', val => {
+    this.$watch('exclude', (val) => {
       pruneCache(this, name => !matches(val, name))
     })
   },
 
   unmounted() {
-    for (const key in this.cache) {
-      pruneCacheEntry(this.cache, key, this.keys)
-    }
+    for (const key in this.cache) pruneCacheEntry(this.cache, key, this.keys)
   },
 
   render() {
-    // eslint-disable-next-line vue/require-slots-as-functions
     const slot = this.$slots.default
     const vnode: VNode = getFirstComponentChild(slot)
-    const componentOptions: ?VNodeComponentOptions =
-      vnode && vnode.componentOptions
+    const componentOptions: ?VNodeComponentOptions
+      = vnode && vnode.componentOptions
 
     if (componentOptions) {
       // check pattern
@@ -1978,20 +1962,19 @@ const KeepAlive = defineComponent({
 
       if (
         // not included
-        (include && (!name || !matches(include, name))) ||
+        (include && (!name || !matches(include, name)))
         // excluded
-        (exclude && name && matches(exclude, name))
-      ) {
+        || (exclude && name && matches(exclude, name))
+      )
         return vnode
-      }
 
       const { cache, keys } = this
-      const key: ?string =
-        vnode.key == null
-          ? // same constructor may get registered as different local components
-            // so cid alone is not enough (#3269)
-            componentOptions.Ctor.cid +
-            (componentOptions.tag ? `::${componentOptions.tag}` : '')
+      // same constructor may get registered as different local components
+      // so cid alone is not enough (#3269)
+      const key: ?string
+        = vnode.key == null
+          ? componentOptions.Ctor.cid
+          + (componentOptions.tag ? `::${componentOptions.tag}` : '')
           : vnode.key
 
       if (cache[key]) {
@@ -1999,14 +1982,14 @@ const KeepAlive = defineComponent({
         // make current key freshest
         remove(keys, key)
         keys.push(key)
-      } else {
+      }
+      else {
         cache[key] = vnode
         keys.push(key)
 
         // prune oldest entry
-        if (this.max && keys.length > parseInt(this.max)) {
+        if (this.max && keys.length > Number.parseInt(this.max))
           pruneCacheEntry(cache, keys[0], keys, this._vnode)
-        }
       }
 
       vnode.data.keepAlive = true
@@ -2030,7 +2013,7 @@ const KeepAlive = {
 
     const storageContainer = createElement('div')
 
-    instance._deActivate = vnode => {
+    instance._deActivate = (vnode) => {
       move(vnode, storageContainer)
     }
 
@@ -2041,26 +2024,25 @@ const KeepAlive = {
     return () => {
       const rawVNode = slots.default()
 
-      if (typeof rawVNode.type !== 'object') {
+      if (typeof rawVNode.type !== 'object')
         return rawVNode
-      }
 
       const name = rawVNode.type.name
 
       if (
-        name &&
-        ((props.include && !props.include.test(name)) ||
-          (props.exclude && props.exclude.test(name)))
-      ) {
+        name
+        && ((props.include && !props.include.test(name))
+        || (props.exclude && props.exclude.test(name)))
+      )
         return rawVNode
-      }
 
       const cachedVNode = cache.get(rawVNode.type)
 
       if (cachedVNode) {
         rawVNode.component = cachedVNode.component
         rawVNode.keptAlive = true
-      } else {
+      }
+      else {
         cache.set(rawVNode.type, rawVNode)
       }
 
@@ -2083,18 +2065,19 @@ const Teleport = {
 
     if (!n1) {
       // 挂载
-      const target =
-        typeof n2.props.to === 'string'
+      const target
+        = typeof n2.props.to === 'string'
           ? document.querySelector(n2.props.to)
           : n2.props.to
       n2.children.forEach(c => patch(null, c, target, anchor))
-    } else {
+    }
+    else {
       // 更新
       patchChildren(n1, n2, container)
 
       if (n2.props.to !== n1.props.to) {
-        const newTarget =
-          typeof n2.props.to === 'string'
+        const newTarget
+          = typeof n2.props.to === 'string'
             ? document.querySelector(n2.props.to)
             : n2.props.to
         n2.children.forEach(c => move(c, newTarget))
@@ -2424,21 +2407,24 @@ don't trigger `beforeEnter` guards.
 
 ```ts
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+  if (to.name !== 'Login' && !isAuthenticated)
+    next({ name: 'Login' })
   else next()
 })
 ```
 
 ```ts
-router.beforeResolve(async to => {
+router.beforeResolve(async (to) => {
   if (to.meta.requiresCamera) {
     try {
       await askForCameraPermission()
-    } catch (error) {
+    }
+    catch (error) {
       if (error instanceof NotAllowedError) {
         // Handle the error and then cancel the navigation.
         return false
-      } else {
+      }
+      else {
         // Unexpected error: cancel the navigation and pass error to global handler.
         throw error
       }
@@ -2449,7 +2435,8 @@ router.beforeResolve(async to => {
 
 ```ts
 router.afterEach((to, from, failure) => {
-  if (!failure) sendToAnalytics(to.fullPath)
+  if (!failure)
+    sendToAnalytics(to.fullPath)
 })
 ```
 
@@ -2518,10 +2505,8 @@ app.mount('#app')
 // in a vue component
 import { useAppStore } from './store'
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   setup() {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const store = useAppStore()
     const count = store.state.count // typed as number
   },

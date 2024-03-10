@@ -402,7 +402,6 @@ ssize_t rio_read_n(int fd, void *usr_buf, size_t n) {
     return (n - left);
 }
 
-
 ssize_t rio_write_n(int fd, void *usr_buf, size_t n) {
     size_t n_left = n;
     ssize_t n_written;

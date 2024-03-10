@@ -141,8 +141,8 @@ function beginWork(
     case FunctionComponent: {
       const Component = workInProgress.type
       const unresolvedProps = workInProgress.pendingProps
-      const resolvedProps =
-        workInProgress.elementType === Component
+      const resolvedProps
+        = workInProgress.elementType === Component
           ? unresolvedProps
           : resolveDefaultProps(Component, unresolvedProps)
       return updateFunctionComponent(
@@ -182,9 +182,8 @@ function updateFunctionComponent(
     return bailoutOnAlreadyFinishedWork(current, workInProgress, renderLanes)
   }
 
-  if (getIsHydrating() && hasId) {
+  if (getIsHydrating() && hasId)
     pushMaterializedTreeId(workInProgress)
-  }
 
   // React DevTools reads this flag.
   workInProgress.flags |= PerformedWork
@@ -240,8 +239,8 @@ export function renderWithHooks<Props, SecondArg>(
   workInProgress.lanes = NoLanes
 
   // Mount or Update hooks dispatcher.
-  ReactCurrentDispatcher.current =
-    current === null || current.memoizedState === null
+  ReactCurrentDispatcher.current
+    = current === null || current.memoizedState === null
       ? HooksDispatcherOnMount
       : HooksDispatcherOnUpdate
 
@@ -260,8 +259,8 @@ export function renderWithHooks<Props, SecondArg>(
 
       if (numberOfReRenders >= RE_RENDER_LIMIT) {
         throw new Error(
-          'Too many re-renders. React limits the number of renders to prevent ' +
-            'an infinite loop.'
+          'Too many re-renders. React limits the number of renders to prevent '
+          + 'an infinite loop.'
         )
       }
 
@@ -366,7 +365,8 @@ function mountWorkInProgressHook(): Hook {
   if (workInProgressHook === null) {
     // Fist hook in the list.
     currentlyRenderingFiber.memoizedState = workInProgressHook = hook
-  } else {
+  }
+  else {
     // Append to the end of list.
     workInProgressHook = workInProgressHook.next = hook
   }
@@ -382,26 +382,25 @@ function updateWorkInProgressHook(): Hook {
   if (currentHook === null) {
     const current = currentlyRenderingFiber.alternate
     nextCurrentHook = current ? current.memoizedState : null
-  } else {
+  }
+  else {
     nextCurrentHook = currentHook.next
   }
 
-  if (workInProgressHook === null) {
+  if (workInProgressHook === null)
     nextWorkInProgressHook = currentlyRenderingFiber.memoizedState
-  } else {
-    nextWorkInProgressHook = workInProgressHook.next
-  }
+  else nextWorkInProgressHook = workInProgressHook.next
 
   if (nextWorkInProgressHook !== null) {
     // There's already a work-in-progress. Reuse it.
     workInProgressHook = nextWorkInProgressHook
     nextWorkInProgressHook = workInProgressHook.next
     currentHook = nextCurrentHook
-  } else {
+  }
+  else {
     // Clone from the current hook.
-    if (nextCurrentHook === null) {
+    if (nextCurrentHook === null)
       throw new Error('Rendered more hooks than during the previous render.')
-    }
 
     currentHook = nextCurrentHook
 
@@ -418,7 +417,8 @@ function updateWorkInProgressHook(): Hook {
     if (workInProgressHook === null) {
       // This is the first hook in the list.
       currentlyRenderingFiber.memoizedState = workInProgressHook = newHook
-    } else {
+    }
+    else {
       // Append to the end of the list.
       workInProgressHook = workInProgressHook.next = newHook
     }
@@ -428,8 +428,8 @@ function updateWorkInProgressHook(): Hook {
 }
 
 function commitHookEffectListMount(tag: number, finishedWork: Fiber) {
-  const updateQueue: FunctionComponentUpdateQueue | null =
-    finishedWork.updateQueue
+  const updateQueue: FunctionComponentUpdateQueue | null
+    = finishedWork.updateQueue
   const lastEffect = updateQueue !== null ? updateQueue.lastEffect : null
 
   if (lastEffect !== null) {
@@ -448,8 +448,8 @@ function commitHookEffectListMount(tag: number, finishedWork: Fiber) {
 }
 
 function commitHookEffectListUnmount(tag: number, finishedWork: Fiber) {
-  const updateQueue: FunctionComponentUpdateQueue | null =
-    finishedWork.updateQueue
+  const updateQueue: FunctionComponentUpdateQueue | null
+    = finishedWork.updateQueue
   const lastEffect = updateQueue !== null ? updateQueue.lastEffect : null
 
   if (lastEffect !== null) {
@@ -462,9 +462,8 @@ function commitHookEffectListUnmount(tag: number, finishedWork: Fiber) {
         const destroy = effect.destroy
         effect.destroy = undefined
 
-        if (destroy !== undefined) {
+        if (destroy !== undefined)
           destroy()
-        }
       }
 
       effect = effect.next
@@ -596,9 +595,8 @@ App = MyReact.render(Component)
 function mountState<T>(initialState: T) {
   const hook = mountWorkInProgressHook()
 
-  if (typeof initialState === 'function') {
+  if (typeof initialState === 'function')
     initialState = initialState()
-  }
 
   // Setup Hook.
   hook.memoizedState = hook.baseState = initialState
@@ -647,7 +645,8 @@ function dispatchAction<S, A>(
   if (pending === null) {
     // 首个 Update, 创建一个环形链表.
     update.next = update
-  } else {
+  }
+  else {
     update.next = pending.next
     pending.next = update
   }
@@ -655,16 +654,17 @@ function dispatchAction<S, A>(
 
   const alternate = fiber.alternate
   if (
-    fiber === currentlyRenderingFiber ||
-    (alternate !== null && alternate === currentlyRenderingFiber)
+    fiber === currentlyRenderingFiber
+    || (alternate !== null && alternate === currentlyRenderingFiber)
   ) {
     // 渲染时更新, 做好全局标记.
-    didScheduleRenderPhaseUpdateDuringThisPass = didScheduleRenderPhaseUpdate =
-      true
-  } else {
+    didScheduleRenderPhaseUpdateDuringThisPass = didScheduleRenderPhaseUpdate
+      = true
+  }
+  else {
     if (
-      fiber.lanes === NoLanes &&
-      (alternate === null || alternate.lanes === NoLanes)
+      fiber.lanes === NoLanes
+      && (alternate === null || alternate.lanes === NoLanes)
     ) {
       const lastRenderedReducer = queue.lastRenderedReducer
 
@@ -677,9 +677,8 @@ function dispatchAction<S, A>(
 
         // 若在 Render 阶段, reducerEagerState === currentState,
         // 则可以无需再次计算状态, 跳过调度阶段, 后续直接使用 update.eagerState.
-        if (is(eagerState, currentState)) {
+        if (is(eagerState, currentState))
           return
-        }
       }
     }
 
@@ -695,9 +694,8 @@ function dispatchAction<S, A>(
 export function getFinalState(baseState, queue) {
   let finalState = baseState
 
-  for (const update of queue) {
+  for (const update of queue)
     finalState = typeof update === 'function' ? update(finalState) : update
-  }
 
   return finalState
 }
@@ -706,7 +704,7 @@ export function getFinalState(baseState, queue) {
 ### UseState Hooks Usage
 
 ```ts
-setState(prevState => {
+setState((prevState) => {
   // Object.assign would also work
   return { ...prevState, ...updatedValues }
 })
@@ -720,11 +718,9 @@ let update = firstUpdate
 // setState(value + 1) 与 setState(value => value + 1) 存在差异
 // 遍历 baseQueue 中的每一个 update
 do {
-  if (typeof update.action === 'function') {
+  if (typeof update.action === 'function')
     newState = update.action(newState)
-  } else {
-    newState = action
-  }
+  else newState = action
 
   update = reconciler()
 } while (update !== firstUpdate)
@@ -733,13 +729,18 @@ do {
 ```tsx
 import { useState } from 'react'
 
-function Example() {
+export default function Example() {
   // Declare a new state variable, which we'll call "count"
   const [count, setCount] = useState(0)
 
   return (
     <div>
-      <p>You clicked {count} times</p>
+      <p>
+        You clicked
+        {count}
+        {' '}
+        times
+      </p>
       <button onClick={() => setCount(count + 1)}>Click me</button>
     </div>
   )
@@ -764,9 +765,8 @@ function FriendStatus(props) {
     }
   })
 
-  if (isOnline === null) {
+  if (isOnline === null)
     return 'Loading...'
-  }
 
   return isOnline ? 'Online' : 'Offline'
 }
@@ -809,11 +809,9 @@ function mountReducer<S, I, A>(
   const hook = mountWorkInProgressHook()
   let initialState
 
-  if (init !== undefined) {
+  if (init !== undefined)
     initialState = init(initialArg)
-  } else {
-    initialState = initialArg
-  }
+  else initialState = initialArg
 
   // 2. Setup Hook.
   // 2.1 Set hook.memoizedState/hook.baseState.
@@ -895,7 +893,8 @@ function updateReducer<S, I, A>(
         if (newBaseQueueLast === null) {
           newBaseQueueFirst = newBaseQueueLast = clone
           newBaseState = newState
-        } else {
+        }
+        else {
           newBaseQueueLast = newBaseQueueLast.next = clone
         }
 
@@ -905,7 +904,8 @@ function updateReducer<S, I, A>(
           updateLane
         )
         markSkippedUpdateLanes(updateLane)
-      } else {
+      }
+      else {
         // This update does have sufficient priority (优先级足够).
         // Merge state.
         if (newBaseQueueLast !== null) {
@@ -926,7 +926,8 @@ function updateReducer<S, I, A>(
           // If this update is a state update (not a reducer) and was processed eagerly,
           // we can use the eagerly computed state
           newState = update.eagerState
-        } else {
+        }
+        else {
           // 调用 Reducer 获取最新状态.
           const action = update.action
           newState = reducer(newState, action)
@@ -936,17 +937,14 @@ function updateReducer<S, I, A>(
       update = update.next
     } while (update !== null && update !== first)
 
-    if (newBaseQueueLast === null) {
+    if (newBaseQueueLast === null)
       newBaseState = newState
-    } else {
-      newBaseQueueLast.next = newBaseQueueFirst
-    }
+    else newBaseQueueLast.next = newBaseQueueFirst
 
     // Mark that the fiber performed work,
     // but only if the new state is different from the current state.
-    if (!is(newState, hook.memoizedState)) {
+    if (!is(newState, hook.memoizedState))
       markWorkInProgressReceivedUpdate()
-    }
 
     // 把计算后结果更新到 workInProgressHook.
     hook.memoizedState = newState
@@ -991,7 +989,7 @@ function App() {
 
   // 等价于
   const [state, dispatch] = useReducer(
-    function basicStateReducer(state, action) {
+    (state, action) => {
       return typeof action === 'function' ? action(state) : action
     },
     { count: 0 }
@@ -1006,7 +1004,7 @@ function App() {
 ```
 
 ```tsx
-const insertToHistory = state => {
+function insertToHistory(state) {
   if (state && Array.isArray(state.history)) {
     // Do not mutate
     const newHistory = [...state.history]
@@ -1020,7 +1018,7 @@ const insertToHistory = state => {
   return state.history || []
 }
 
-const reducer = (state, action) => {
+function reducer(state, action) {
   switch (action.type) {
     case 'set-theme':
       return { ...state, theme: action.theme, history: insertToHistory(state) }
@@ -1032,7 +1030,8 @@ const reducer = (state, action) => {
       }
     case 'undo': {
       const isEmpty = !state.history.length
-      if (isEmpty) return state
+      if (isEmpty)
+        return state
       return { ...state.history[state.history.length - 1] }
     }
     case 'reset':
@@ -1042,7 +1041,7 @@ const reducer = (state, action) => {
   }
 }
 
-const App = () => {
+export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
   return <div>App</div>
 }
@@ -1085,9 +1084,8 @@ function updateMemo<T>(
     if (nextDeps !== null) {
       const prevDeps: Array<mixed> | null = prevState[1]
 
-      if (areHookInputsEqual(nextDeps, prevDeps)) {
+      if (areHookInputsEqual(nextDeps, prevDeps))
         return prevState[0]
-      }
     }
   }
 
@@ -1100,7 +1098,13 @@ function updateMemo<T>(
 ### UseMemo Hooks Usage
 
 ```tsx
-const Button = ({ color, children }) => {
+export default function Button({
+  color,
+  children,
+}: {
+  color: string
+  children: ReactElement
+}) {
   const textColor = useMemo(
     () => slowlyCalculateTextColor(color),
     [color] // ✅ Don’t recalculate until `color` changes
@@ -1142,9 +1146,8 @@ function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
     if (nextDeps !== null) {
       const prevDeps: Array<mixed> | null = prevState[1]
 
-      if (areHookInputsEqual(nextDeps, prevDeps)) {
+      if (areHookInputsEqual(nextDeps, prevDeps))
         return prevState[0]
-      }
     }
   }
 
@@ -1156,7 +1159,7 @@ function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
 ### UseCallback Hooks Usage
 
 ```tsx
-function Parent() {
+export default function Parent() {
   const [query, setQuery] = useState('react')
 
   // ✅ Preserves identity until query changes
@@ -1167,8 +1170,10 @@ function Parent() {
 
   return <Child fetchData={fetchData} />
 }
+```
 
-function Child({ fetchData }) {
+```tsx
+export default function Child({ fetchData }) {
   const [data, setData] = useState(null)
 
   useEffect(() => {
@@ -1217,7 +1222,7 @@ function updateRef<T>(initialValue: T) {
   (the updated reference value is available right away).
 
 ```tsx
-function Example() {
+export default function Example() {
   const [count, setCount] = useState(0)
   const latestCount = useRef(count)
 
@@ -1243,15 +1248,19 @@ function Example() {
   when the values are to be updated multiple times within a second.
 
 ```tsx
-function UserAvatar(props) {
+export default function UserAvatar(props: { src: string, name: string }) {
   return <img src={props.src} alt="User Avatar" />
 }
+```
 
-function Username(props) {
+```tsx
+export default function Username(props: { name: string }) {
   return <span>{props.name}</span>
 }
+```
 
-function User() {
+```tsx
+export default function User() {
   const user = useRef({
     name: 'UserName',
     avatarURL: 'https://avatar.com/avatar',
@@ -1317,13 +1326,15 @@ export default function Stopwatch() {
   }
 
   let secondsPassed = 0
-  if (startTime != null && now != null) {
+  if (startTime != null && now != null)
     secondsPassed = (now - startTime) / 1000
-  }
 
   return (
     <>
-      <h1>Time passed: {secondsPassed.toFixed(3)}</h1>
+      <h1>
+        Time passed:
+        {secondsPassed.toFixed(3)}
+      </h1>
       <button onClick={handleStart}>Start</button>
       <button onClick={handleStop}>Stop</button>
     </>
@@ -1334,7 +1345,10 @@ export default function Stopwatch() {
 ```tsx
 import { forwardRef, useImperativeHandle, useRef } from 'react'
 
-const MyInput = forwardRef((props, ref) => {
+interface Props {}
+
+// eslint-disable-next-line react/display-name
+const MyInput = forwardRef((props: Props, ref) => {
   const realInputRef = useRef(null)
   useImperativeHandle(ref, () => ({
     // Only expose focus and nothing else
@@ -1386,9 +1400,8 @@ export function createContext<T>(
   defaultValue: T,
   calculateChangedBits: ?((a: T, b: T) => number)
 ): ReactContext<T> {
-  if (calculateChangedBits === undefined) {
+  if (calculateChangedBits === undefined)
     calculateChangedBits = null
-  }
 
   const context: ReactContext<T> = {
     $$typeof: REACT_CONTEXT_TYPE,
@@ -1448,8 +1461,8 @@ function updateContextProvider(
     if (changedBits === 0) {
       // value 没有变动, 进入 Bailout 逻辑.
       if (
-        oldProps.children === newProps.children &&
-        !hasLegacyContextChanged()
+        oldProps.children === newProps.children
+        && !hasLegacyContextChanged()
       ) {
         return bailoutOnAlreadyFinishedWork(
           current,
@@ -1457,7 +1470,8 @@ function updateContextProvider(
           renderLanes
         )
       }
-    } else {
+    }
+    else {
       // value变动, 查找对应的 Consumers, 并使其能够被更新.
       // 向下遍历:
       // 从 ContextProvider 节点开始,
@@ -1535,7 +1549,8 @@ function readContext<T>(
       firstContext: contextItem,
       responders: null,
     }
-  } else {
+  }
+  else {
     lastContextDependency = lastContextDependency.next = contextItem
   }
 
@@ -1547,7 +1562,7 @@ function readContext<T>(
 ### UseContext Hooks Usage
 
 ```tsx
-import React, {
+import {
   createContext,
   useCallback,
   useContext,
@@ -1557,7 +1572,7 @@ import React, {
 
 const CountContext = createContext()
 
-function CountProvider(props) {
+export default function CountProvider(props) {
   const [count, setCount] = useState(0)
 
   // Use `useMemo`/`useCallback` to memorize values and functions.
@@ -1575,9 +1590,8 @@ function useCount() {
   const context = useContext(CountContext)
 
   // Check whether component under `XXXContextProvider`.
-  if (!context) {
+  if (!context)
     throw new Error('useCount must be used within a CountProvider')
-  }
 
   // Wrap complex context logic, only expose simple API.
   const { count, setCount } = context
@@ -1588,8 +1602,6 @@ function useCount() {
     increment,
   }
 }
-
-export { CountProvider, useCount }
 ```
 
 ## UseEffect Hook
@@ -1675,12 +1687,14 @@ function pushEffect(tag, create, destroy, deps) {
     componentUpdateQueue = createFunctionComponentUpdateQueue()
     currentlyRenderingFiber.updateQueue = componentUpdateQueue
     componentUpdateQueue.lastEffect = effect.next = effect
-  } else {
+  }
+  else {
     const lastEffect = componentUpdateQueue.lastEffect
 
     if (lastEffect === null) {
       componentUpdateQueue.lastEffect = effect.next = effect
-    } else {
+    }
+    else {
       // Circular effect list.
       const firstEffect = lastEffect.next
       lastEffect.next = effect
@@ -1758,7 +1772,7 @@ Functions in `useEffect`:
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const useDataApi = (initialUrl, initialData) => {
+function useDataApi(initialUrl, initialData) {
   const [data, setData] = useState(initialData)
   const [url, setUrl] = useState(initialUrl)
   const [isLoading, setIsLoading] = useState(false)
@@ -1773,7 +1787,8 @@ const useDataApi = (initialUrl, initialData) => {
         const result = await axios(url)
 
         setData(result.data)
-      } catch (error) {
+      }
+      catch (error) {
         setIsError(true)
       }
 
@@ -1783,7 +1798,7 @@ const useDataApi = (initialUrl, initialData) => {
     fetchData()
   }, [url])
 
-  const doFetch = url => {
+  const doFetch = (url) => {
     setUrl(url)
   }
 
@@ -1806,7 +1821,7 @@ const useDataApi = (initialUrl, initialData) => {
 
 ```tsx
 // BUG
-function Counter() {
+export default function Counter() {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
@@ -1822,7 +1837,7 @@ function Counter() {
 ```
 
 ```tsx
-function Counter() {
+export default function Counter() {
   const [count, setCount] = useState(0)
 
   useInterval(() => {
@@ -1859,7 +1874,7 @@ function useInterval(callback, delay) {
 - Class Component 中的 this.state.xxx 却总是指向最新的 state.
 
 ```tsx
-function Counter() {
+export default function Counter() {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
@@ -1870,7 +1885,12 @@ function Counter() {
 
   return (
     <div>
-      <p>You clicked {count} times</p>
+      <p>
+        You clicked
+        {count}
+        {' '}
+        times
+      </p>
       <button onClick={() => setCount(count + 1)}>Click me</button>
     </div>
   )
@@ -1898,7 +1918,12 @@ class Counter {
 
     return (
       <div>
-        <p>You clicked {count} times</p>
+        <p>
+          You clicked
+          {count}
+          {' '}
+          times
+        </p>
         <button onClick={() => this.setState(count + 1)}>Click me</button>
       </div>
     )
@@ -1926,17 +1951,16 @@ Cleanup API requests ([race condition](https://maxrozen.com/race-conditions-fetc
 - `AbortController`.
 
 ```ts
-const App = ({ url }) => {
+function App({ url }) {
   const [results, setResults] = useState([])
   const [page, setPage] = useState(1)
 
   // Cleanup with Boolean flag:
   useEffect(() => {
     let ignore = false
-    fetchResults(url, page).then(json => {
-      if (!ignore) {
+    fetchResults(url, page).then((json) => {
+      if (!ignore)
         setResults(json)
-      }
     })
     return () => {
       ignore = true
@@ -1964,7 +1988,7 @@ const App = ({ url }) => {
 Cleanup connections:
 
 ```ts
-const App = () => {
+function App() {
   useEffect(() => {
     const socket = new WebSocket('url', protocols)
     // do what you want with the socket
@@ -1977,7 +2001,7 @@ const App = () => {
 Cleanup timeouts:
 
 ```ts
-const App = () => {
+function App() {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       // do something in the timeout
@@ -2137,9 +2161,8 @@ but before layout effects read the new layout.
 
 ```tsx
 function useCSS(rule) {
-  if (!canUseDOM) {
+  if (!canUseDOM)
     collectedRulesSet.add(rule)
-  }
 
   useInsertionEffect(() => {
     if (!isInserted.has(rule)) {
@@ -2151,7 +2174,7 @@ function useCSS(rule) {
   return rule
 }
 
-function Component() {
+export default function Component() {
   const className = useCSS(rule)
   return <div className={className} />
 }
@@ -2161,7 +2184,7 @@ function Component() {
 
 ```tsx
 interface MyInputHandles {
-  focus(): void
+  focus: () => void
 }
 
 const MyInput: RefForwardingComponent<MyInputHandles, MyInputProps> = (
@@ -2172,16 +2195,16 @@ const MyInput: RefForwardingComponent<MyInputHandles, MyInputProps> = (
 
   useImperativeHandle(ref, () => ({
     focus: () => {
-      if (inputRef.current) {
+      if (inputRef.current)
         inputRef.current.focus()
-      }
     },
   }))
 
   return <input {...props} ref={inputRef} />
 }
 
-export default React.forwardRef(MyInput)
+const ForwardMyInput = React.forwardReft(MyInput)
+export default ForwardMyInput
 ```
 
 ## UseDebugValue Hook
@@ -2200,7 +2223,7 @@ Debounce:
 ```tsx
 import { useDeferredValue } from 'react'
 
-function App() {
+export default function App() {
   const [text, setText] = useState('hello')
 
   // Debounced value.
@@ -2227,7 +2250,7 @@ Opt-in concurrent features (implementing debounce-like function):
 import { useRef, useState, useTransition } from 'react'
 import Spinner from './Spinner'
 
-function App() {
+export default function App() {
   const input = useRef('')
   const [searchInputValue, setSearchInputValue] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
@@ -2251,7 +2274,7 @@ Generating unique IDs on client and server
 (每个 ID 代表该组件在组件树中的层级结构):
 
 ```tsx
-function Checkbox() {
+export default function Checkbox() {
   const id = useId()
 
   return (
@@ -2322,24 +2345,28 @@ Sync browser `scroll` event:
 // A memoized constant fn prevents unsubscribe/resubscribe
 // In practice it is not a big deal
 function subscribe(onStoreChange) {
-  global.window?.addEventListener('scroll', onStoreChange)
-  return () => global.window?.removeEventListener('scroll', onStoreChange)
+  globalThis.window?.addEventListener('scroll', onStoreChange)
+  return () => globalThis.window?.removeEventListener('scroll', onStoreChange)
 }
 
 function useScrollY(selector = id => id) {
   return useSyncExternalStore(
     subscribe,
-    () => selector(global.window?.scrollY),
+    () => selector(globalThis.window?.scrollY),
     () => undefined
   )
 }
+```
 
-function ScrollY() {
+```tsx
+export default function ScrollY() {
   const scrollY = useScrollY()
   return <div>{scrollY}</div>
 }
+```
 
-function ScrollYFloored() {
+```tsx
+export default function ScrollYFloored() {
   const to = 100
   const scrollYFloored = useScrollY(y =>
     y ? Math.floor(y / to) * to : undefined
@@ -2355,13 +2382,17 @@ function useHistorySelector(selector) {
   const history = useHistory()
   return useSyncExternalStore(history.listen, () => selector(history))
 }
+```
 
-function CurrentPathname() {
+```tsx
+export default function CurrentPathname() {
   const pathname = useHistorySelector(history => history.location.pathname)
   return <div>{pathname}</div>
 }
+```
 
-function CurrentHash() {
+```tsx
+export default function CurrentHash() {
   const hash = useHistorySelector(history => history.location.hash)
   return <div>{hash}</div>
 }
@@ -2381,11 +2412,11 @@ import { useSyncExternalStore } from 'use-sync-external-store/shim'
 const store = {
   state: { count: 0 },
   listeners: new Set(),
-  setState: fn => {
+  setState: (fn) => {
     store.state = fn(store.state)
     store.listeners.forEach(listener => listener())
   },
-  subscribe: callback => {
+  subscribe: (callback) => {
     store.listeners.add(callback)
     return () => store.listeners.delete(callback)
   },
@@ -2395,7 +2426,7 @@ const store = {
   },
 }
 
-function App() {
+export default function App() {
   // Basic usage. getSnapshot must return a cached/memoized result
   const state = useSyncExternalStore(store.subscribe, store.getSnapshot)
 
@@ -2421,16 +2452,16 @@ for 3rd external stores libraries (e.g `Redux`):
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSyncExternalStore } from 'use-sync-external-store/shim'
 
-const createStore = initialState => {
+function createStore(initialState) {
   let state = initialState
   const listeners = new Set()
 
   const getState = () => state
-  const setState = fn => {
+  const setState = (fn) => {
     state = fn(state)
     listeners.forEach(listener => listener())
   }
-  const subscribe = listener => {
+  const subscribe = (listener) => {
     listeners.add(listener)
     return () => listeners.delete(listener)
   }
@@ -2446,7 +2477,7 @@ const createStore = initialState => {
 // Sync external store state to React internal state
 // with `useState` and `store.subscribe`:
 // store.setState -> updater -> setState.
-const useStoreLegacy = (store, selector) => {
+function useStoreLegacy(store, selector) {
   const [state, setState] = useState(selector(store.getState()))
 
   useEffect(() => {
@@ -2460,7 +2491,7 @@ const useStoreLegacy = (store, selector) => {
 }
 
 // Use `useSyncExternalStore` for React v18+.
-const useStore = (store, selector) => {
+function useStore(store, selector) {
   return useSyncExternalStore(
     store.subscribe,
     useCallback(() => selector(store.getState()), [store, selector])
@@ -2469,7 +2500,7 @@ const useStore = (store, selector) => {
 
 const store = createStore({ count: 0, text: 'hello' })
 
-const Counter = () => {
+function Counter() {
   const count = useStore(
     store,
     useCallback(state => state.count, [])
@@ -2486,13 +2517,13 @@ const Counter = () => {
   )
 }
 
-const TextBox = () => {
+function TextBox() {
   const text = useStore(
     store,
     useCallback(state => state.text, [])
   )
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     store.setState(state => ({ ...state, text: event.target.value }))
   }
 
@@ -2503,14 +2534,16 @@ const TextBox = () => {
   )
 }
 
-const App = () => (
-  <div>
-    <Counter />
-    <Counter />
-    <TextBox />
-    <TextBox />
-  </div>
-)
+export default function App() {
+  return (
+    <div>
+      <Counter />
+      <Counter />
+      <TextBox />
+      <TextBox />
+    </div>
+  )
+}
 
 React.createRoot(document.querySelector('#root')).render(<App />)
 ```
@@ -2536,7 +2569,7 @@ function useEvent(fn) {
 }
 
 function ChatRoom({ roomId, theme }) {
-  const onConnected = useEvent(connectedRoomId => {
+  const onConnected = useEvent((connectedRoomId) => {
     // Non-reactive to `theme`.
     showNotification(`Welcome to ${connectedRoomId}`, theme)
   })
@@ -2572,8 +2605,7 @@ and non-reactive parts (which only read their latest values).
 `componentDidMount`:
 
 ```ts
-const useMount = fn => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+function useMount(fn) {
   useEffect(() => fn(), [])
 }
 ```
@@ -2581,8 +2613,7 @@ const useMount = fn => {
 componentWillUnmount:
 
 ```ts
-const useUnmount = fn => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+function useUnmount(fn) {
   useEffect(() => fn, [])
 }
 ```
@@ -2590,7 +2621,7 @@ const useUnmount = fn => {
 componentDidUpdate:
 
 ```ts
-const useUpdate = fn => {
+function useUpdate(fn) {
   const mounting = useRef(true)
 
   useEffect(() => {
@@ -2598,7 +2629,8 @@ const useUpdate = fn => {
       // first get called for componentDidMount lifecycle
       // so skip it
       mounting.current = false
-    } else {
+    }
+    else {
       fn()
     }
   })
@@ -2638,15 +2670,14 @@ export default useForceUpdate
 `isMounted`:
 
 ```ts
-const useIsMounted = () => {
+function useIsMounted() {
   const [isMount, setIsMount] = useState(false)
 
   useEffect(() => {
-    if (!isMount) {
+    if (!isMount)
       setIsMount(true)
-    }
+
     return () => setIsMount(false)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return isMount
@@ -2656,12 +2687,17 @@ const useIsMounted = () => {
 ### Custom Previous Hook
 
 ```tsx
-function Counter() {
+export default function Counter() {
   const [count, setCount] = useState(0)
   const prevCount = usePrevious(count)
   return (
     <h1>
-      Now: {count}, before: {prevCount}
+      Now:
+      {' '}
+      {count}
+      , before:
+      {' '}
+      {prevCount}
     </h1>
   )
 }
@@ -2691,9 +2727,8 @@ function useInterval(callback: () => void, delay: number | null) {
   // Set up the interval.
   useEffect(() => {
     // Don't schedule if no delay is specified.
-    if (delay === null) {
+    if (delay === null)
       return
-    }
 
     const id = setInterval(() => savedCallback.current(), delay)
 
@@ -2735,7 +2770,7 @@ function useDebounce(value, delay) {
 ```
 
 ```tsx
-function App() {
+export default function App() {
   // Usage
   const [searchTerm, setSearchTerm] = useState('')
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
@@ -2840,7 +2875,8 @@ function useIntersectionObserver(
     const node = elementRef?.current // DOM Ref
     const hasIOSupport = !!window.IntersectionObserver
 
-    if (!hasIOSupport || frozen || !node) return
+    if (!hasIOSupport || frozen || !node)
+      return
 
     const observerParams = { threshold, root, rootMargin }
     const observer = new IntersectionObserver(updateEntry, observerParams)
@@ -2865,9 +2901,8 @@ function useComponentSize() {
   const ref = React.useRef<any>()
 
   const onResize = React.useCallback(() => {
-    if (!ref.current) {
+    if (!ref.current)
       return
-    }
 
     const newHeight = ref.current.offsetHeight
     const newWidth = ref.current.offsetWidth
@@ -2881,9 +2916,8 @@ function useComponentSize() {
   }, [size.height, size.width])
 
   React.useLayoutEffect(() => {
-    if (!ref || !ref.current) {
+    if (!ref || !ref.current)
       return
-    }
 
     const resizeObserver = new ResizeObserver(onResize)
     resizeObserver.observe(ref.current)
@@ -2911,9 +2945,8 @@ function useLockedBody(initialLocked = false): ReturnType {
   // Do the side effect before render
   useLayoutEffect(() => {
     // Key point 1
-    if (!locked) {
+    if (!locked)
       return
-    }
 
     // Save initial body style
     const originalOverflow = document.body.style.overflow
@@ -2927,26 +2960,22 @@ function useLockedBody(initialLocked = false): ReturnType {
     const scrollBarWidth = root ? root.offsetWidth - root.scrollWidth : 0
 
     // Avoid width reflow
-    if (scrollBarWidth) {
+    if (scrollBarWidth)
       document.body.style.paddingRight = `${scrollBarWidth}px`
-    }
 
     // Key point 2
     return () => {
       document.body.style.overflow = originalOverflow
 
-      if (scrollBarWidth) {
+      if (scrollBarWidth)
         document.body.style.paddingRight = originalPaddingRight
-      }
     }
   }, [locked])
 
   // Update state if initialValue changes
   useEffect(() => {
-    if (locked !== initialLocked) {
+    if (locked !== initialLocked)
       setLocked(initialLocked)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialLocked])
 
   return [locked, setLocked]
@@ -2975,9 +3004,8 @@ export default function useLongPress(time = 500) {
   }
 
   function handleClick() {
-    if (isLongPress.current) {
+    if (isLongPress.current)
       return
-    }
 
     setAction('Click')
   }
@@ -2995,9 +3023,8 @@ export default function useLongPress(time = 500) {
   }
 
   function handleTouchEnd() {
-    if (action === 'LongPress') {
+    if (action === 'LongPress')
       return
-    }
 
     clearTimeout(timerRef.current)
   }
@@ -3025,15 +3052,16 @@ export default function useLongPress(time = 500) {
 ```ts
 import { useState } from 'react'
 
-const useForm = callback => {
+function useForm(callback) {
   const [values, setValues] = useState({})
 
-  const handleSubmit = event => {
-    if (event) event.preventDefault()
+  const handleSubmit = (event) => {
+    if (event)
+      event.preventDefault()
     callback()
   }
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     event.persist()
     setValues(values => ({
       ...values,
@@ -3058,11 +3086,11 @@ export default useForm
 - Custom logic via hooks `params` function.
 
 ```tsx
-export const useField = (
+export function useField(
   name,
   form,
   { defaultValue, validations = [], fieldsToValidateOnChange = [name] } = {}
-) => {
+) {
   const [value, setValue] = useState(defaultValue)
   const [errors, setErrors] = useState([])
   const [pristine, setPristine] = useState(true)
@@ -3086,7 +3114,8 @@ export const useField = (
   }
 
   useEffect(() => {
-    if (pristine) return // Avoid validate on mount
+    if (pristine)
+      return // Avoid validate on mount
     form.validateFields(fieldsToValidateOnChange)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
@@ -3097,10 +3126,10 @@ export const useField = (
     errors,
     setErrors,
     pristine,
-    onChange: e => {
-      if (pristine) {
+    onChange: (e) => {
+      if (pristine)
         setPristine(false)
-      }
+
       setValue(e.target.value)
     },
     validate,
@@ -3110,18 +3139,19 @@ export const useField = (
   return field
 }
 
-export const useForm = ({ onSubmit }) => {
+export function useForm({ onSubmit }) {
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const fields = useRef([])
 
-  const validateFields = async fieldNames => {
+  const validateFields = async (fieldNames) => {
     let fieldsToValidate
     if (Array.is(fieldNames)) {
       fieldsToValidate = fields.current.filter(field =>
         fieldNames.includes(field.name)
       )
-    } else {
+    }
+    else {
       // If fieldNames not provided, validate all fields.
       fieldsToValidate = fields.current
     }
@@ -3139,7 +3169,7 @@ export const useForm = ({ onSubmit }) => {
   }
 
   return {
-    onSubmit: async e => {
+    onSubmit: async (e) => {
       e.preventDefault()
       setSubmitting(true)
       setSubmitted(true) // User has attempted to submit form at least once
@@ -3156,8 +3186,23 @@ export const useForm = ({ onSubmit }) => {
     submitting,
   }
 }
+```
 
-const Field = ({
+```tsx
+interface Props {
+  label: string
+  name: string
+  value: string
+  onChange: Function
+  errors: string[]
+  setErrors: Function[]
+  pristine: boolean
+  validating: boolean
+  validate: Function
+  formSubmitted: boolean
+}
+
+export default function Field({
   label,
   name,
   value,
@@ -3169,7 +3214,7 @@ const Field = ({
   validate,
   formSubmitted,
   ...other
-}) => {
+}: Props) {
   const showErrors = (!pristine || formSubmitted) && !!errors.length
 
   return (
@@ -3180,30 +3225,34 @@ const Field = ({
         value={value}
         onChange={onChange}
         onBlur={() => !pristine && validate()}
-        endAdornment={
+        endAdornment={(
           <InputAdornment position="end">
             {validating && <LoadingIcon className="rotate" />}
           </InputAdornment>
-        }
+        )}
         {...other}
       />
       <FormHelperText component="div">
-        {showErrors &&
-          errors.map(errorMsg => <div key={errorMsg}>{errorMsg}</div>)}
+        {showErrors
+        && errors.map(errorMsg => <div key={errorMsg}>{errorMsg}</div>)}
       </FormHelperText>
     </FormControl>
   )
 }
+```
 
-const App = props => {
+```tsx
+export default function App(props) {
   const form = useForm({
     onSubmit: async (formData, valid) => {
-      if (!valid) return
+      if (!valid)
+        return
       await timeout(2000) // Simulate network time
       if (formData.username.length < 10) {
         // Simulate 400 response from server.
         usernameField.setErrors(['Make a longer username'])
-      } else {
+      }
+      else {
         // Simulate 201 response from server.
         window.alert(
           `form valid: ${valid}, form data: ${JSON.stringify(formData)}`
@@ -3215,7 +3264,7 @@ const App = props => {
   const usernameField = useField('username', form, {
     defaultValue: '',
     validations: [
-      async formData => {
+      async (formData) => {
         await timeout(2000)
         return formData.username.length < 6 && 'Username already exists'
       },
@@ -3226,8 +3275,8 @@ const App = props => {
     defaultValue: '',
     validations: [
       formData =>
-        formData.password.length < 6 &&
-        'Password must be at least 6 characters',
+        formData.password.length < 6
+        && 'Password must be at least 6 characters',
     ],
     fieldsToValidateOnChange: ['password', 'confirmPassword'],
   })
@@ -3235,8 +3284,8 @@ const App = props => {
     defaultValue: '',
     validations: [
       formData =>
-        formData.password !== formData.confirmPassword &&
-        'Passwords do not match',
+        formData.password !== formData.confirmPassword
+        && 'Passwords do not match',
     ],
     fieldsToValidateOnChange: ['password', 'confirmPassword'],
   })
@@ -3266,9 +3315,9 @@ const App = props => {
         <Button
           type="submit"
           disabled={
-            !form.isValid() ||
-            form.submitting ||
-            requiredFields.some(f => f.pristine)
+            !form.isValid()
+            || form.submitting
+            || requiredFields.some(f => f.pristine)
           }
         >
           {form.submitting ? 'Submitting' : 'Submit'}
@@ -3288,98 +3337,99 @@ const App = props => {
 
 ```tsx
 // https://github.com/react-hook-form/react-hook-form/blob/v7.29.0/src/logic/createFormControl.ts
-const createFormControl = () => ({
-  register: (name, options = {}) => {
-    // Register input filed.
-    let field = get(_fields, name)
-    const disabledIsDefined = isBoolean(options.disabled)
+function createFormControl() {
+  return {
+    register: (name, options = {}) => {
+      // Register input filed.
+      let field = get(_fields, name)
+      const disabledIsDefined = isBoolean(options.disabled)
 
-    set(_fields, name, {
-      _f: {
-        ...(field && field._f ? field._f : { ref: { name } }),
-        name,
-        mount: true,
-        ...options,
-      },
-    })
-    _names.mount.add(name)
+      set(_fields, name, {
+        _f: {
+          ...(field && field._f ? field._f : { ref: { name } }),
+          name,
+          mount: true,
+          ...options,
+        },
+      })
+      _names.mount.add(name)
 
-    field
-      ? disabledIsDefined &&
-        set(
+      field
+        ? disabledIsDefined
+        && set(
           _formValues,
           name,
           options.disabled
             ? undefined
             : get(_formValues, name, getFieldValue(field._f))
         )
-      : updateValidAndValue(name, true, options.value)
+        : updateValidAndValue(name, true, options.value)
 
-    return {
-      // Bind to Form Input Element.
-      ref: (ref: HTMLInputElement | null): void => {
-        if (ref) {
-          register(name, options)
-          field = get(_fields, name)
+      return {
+        // Bind to Form Input Element.
+        ref: (ref: HTMLInputElement | null): void => {
+          if (ref) {
+            register(name, options)
+            field = get(_fields, name)
 
-          const fieldRef = isUndefined(ref.value)
-            ? ref.querySelectorAll
-              ? (ref.querySelectorAll('input,select,textarea')[0] as Ref) || ref
+            const fieldRef = isUndefined(ref.value)
+              ? ref.querySelectorAll
+                ? (ref.querySelectorAll('input,select,textarea')[0] as Ref)
+                || ref
+                : ref
               : ref
-            : ref
-          const radioOrCheckbox = isRadioOrCheckbox(fieldRef)
-          const refs = field._f.refs || []
+            const radioOrCheckbox = isRadioOrCheckbox(fieldRef)
+            const refs = field._f.refs || []
 
-          if (
-            radioOrCheckbox
-              ? refs.find((option: Ref) => option === fieldRef)
-              : fieldRef === field._f.ref
-          ) {
-            return
+            if (
+              radioOrCheckbox
+                ? refs.find((option: Ref) => option === fieldRef)
+                : fieldRef === field._f.ref
+            )
+              return
+
+            set(_fields, name, {
+              _f: {
+                ...field._f,
+                ...(radioOrCheckbox
+                  ? {
+                      refs: [...refs.filter(live), fieldRef],
+                      ref: { type: fieldRef.type, name },
+                    }
+                  : { ref: fieldRef }),
+              },
+            })
+
+            updateValidAndValue(name, false, undefined, fieldRef)
           }
+          else {
+            field = get(_fields, name, {})
 
-          set(_fields, name, {
-            _f: {
-              ...field._f,
-              ...(radioOrCheckbox
-                ? {
-                    refs: [...refs.filter(live), fieldRef],
-                    ref: { type: fieldRef.type, name },
-                  }
-                : { ref: fieldRef }),
-            },
-          })
-
-          updateValidAndValue(name, false, undefined, fieldRef)
-        } else {
-          field = get(_fields, name, {})
-
-          if (field._f) {
-            field._f.mount = false
+            if (field._f)
+              field._f.mount = false
+            ;(_options.shouldUnregister || options.shouldUnregister)
+            && !(isNameInFieldArray(_names.array, name) && _stateFlags.action)
+            && _names.unMount.add(name)
           }
+        },
+        value,
+        min,
+        max,
+        required,
+        disabled,
+        ...fieldPropValues,
+      }
+    },
+    // Higher order function: onSubmit (Use Code) => onSubmit (Bind to Form Element).
+    handleSubmit: (onSubmit) => {
+      return (event: SubmitEvent) => {
+        onSubmit(this._getFormData())
+      }
+    },
+  }
+}
 
-          ;(_options.shouldUnregister || options.shouldUnregister) &&
-            !(isNameInFieldArray(_names.array, name) && _stateFlags.action) &&
-            _names.unMount.add(name)
-        }
-      },
-      value,
-      min,
-      max,
-      required,
-      disabled,
-      ...fieldPropValues,
-    }
-  },
-  // Higher order function: onSubmit (Use Code) => onSubmit (Bind to Form Element).
-  handleSubmit: onSubmit => {
-    return (event: SubmitEvent) => {
-      onSubmit(this._getFormData())
-    }
-  },
-})
-
-const useForm = () => {
+function useForm() {
   // Detailed logic handlers: DOM refs, field getter/setter, submit handler.
   const formControl = useRef<FormControl>(createFormControl())
   // Entire form state: valid, errors etc.
@@ -3390,7 +3440,7 @@ const useForm = () => {
   }
 }
 
-const App = () => {
+export default function App() {
   const { register, handleSubmit } = useForm()
   const onSubmit = data => console.log(data)
 
@@ -3424,10 +3474,8 @@ export default function useStateParams<T>(
 
   useEffect(() => {
     // Updates state when user navigates backwards or forwards in browser history
-    if (existingValue && deserialize(existingValue) !== state) {
+    if (existingValue && deserialize(existingValue) !== state)
       setState(deserialize(existingValue))
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [existingValue])
 
   const onChange = (s: T) => {
@@ -3449,7 +3497,7 @@ import { useContext, useEffect } from 'react'
 import { __RouterContext } from 'react-router'
 import useForceUpdate from 'use-force-update'
 
-const useReactRouter = () => {
+function useReactRouter() {
   const forceUpdate = useForceUpdate()
   const routerContext = useContext(__RouterContext)
 
@@ -3478,7 +3526,7 @@ const initialState = {
 }
 
 // Our reducer function to handle state changes based on action
-const reducer = (state, action) => {
+function reducer(state, action) {
   const { past, present, future } = state
 
   switch (action.type) {
@@ -3505,9 +3553,8 @@ const reducer = (state, action) => {
     case 'SET': {
       const { newPresent } = action
 
-      if (newPresent === present) {
+      if (newPresent === present)
         return state
-      }
 
       return {
         past: [...past, present],
@@ -3529,7 +3576,7 @@ const reducer = (state, action) => {
 }
 
 // Hook
-const useHistory = initialPresent => {
+function useHistory(initialPresent) {
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     present: initialPresent,
@@ -3542,15 +3589,13 @@ const useHistory = initialPresent => {
   // We memoize with useCallback to prevent unnecessary re-renders
 
   const undo = useCallback(() => {
-    if (canUndo) {
+    if (canUndo)
       dispatch({ type: 'UNDO' })
-    }
   }, [dispatch, canUndo])
 
   const redo = useCallback(() => {
-    if (canRedo) {
+    if (canRedo)
       dispatch({ type: 'REDO' })
-    }
   }, [dispatch, canRedo])
 
   const set = useCallback(
@@ -3611,7 +3656,8 @@ function useScript(src: string): Status {
 
         script.addEventListener('load', setAttributeFromEvent)
         script.addEventListener('error', setAttributeFromEvent)
-      } else {
+      }
+      else {
         // Grab existing script status from attribute and set to state.
         setStatus(script.getAttribute('data-status') as Status)
       }
@@ -3647,7 +3693,7 @@ export default useScript
 ```ts
 const cachedScripts = []
 
-const useScript = src => {
+function useScript(src) {
   // Keeping track of script loaded and error state
   const [state, setState] = useState({
     loaded: false,
@@ -3664,7 +3710,8 @@ const useScript = src => {
           loaded: true,
           error: false,
         })
-      } else {
+      }
+      else {
         cachedScripts.push(src)
 
         // Create script
@@ -3683,7 +3730,8 @@ const useScript = src => {
         const onScriptError = () => {
           // Remove from cachedScripts we can try loading again
           const index = cachedScripts.indexOf(src)
-          if (index >= 0) cachedScripts.splice(index, 1)
+          if (index >= 0)
+            cachedScripts.splice(index, 1)
           script.remove()
 
           setState({
@@ -3725,31 +3773,31 @@ function stringifyOptions(options) {
     if (key === 'days') {
       // Skip `days`.
       return acc
-    } else {
-      if (options[key] === false) {
+    }
+    else {
+      if (options[key] === false)
         return acc
-      } else if (options[key] === true) {
+      else if (options[key] === true)
         return `${acc}; ${key}`
-      } else {
-        return `${acc}; ${key}=${options[key]}`
-      }
+      else return `${acc}; ${key}=${options[key]}`
     }
   }, '')
 }
 
 function getCookie(name, initialValue = '') {
   return (
-    (isBrowser &&
-      document.cookie.split('; ').reduce((r, v) => {
-        const parts = v.split('=')
-        return parts[0] === name ? decodeURIComponent(parts[1]) : r
-      }, '')) ||
-    initialValue
+    (isBrowser
+    && document.cookie.split('; ').reduce((r, v) => {
+      const parts = v.split('=')
+      return parts[0] === name ? decodeURIComponent(parts[1]) : r
+    }, ''))
+    || initialValue
   )
 }
 
 function setCookie(name, value, options) {
-  if (!isBrowser) return
+  if (!isBrowser)
+    return
 
   const optionsWithDefaults = {
     days: 7,
@@ -3784,7 +3832,7 @@ function useCookie(key, initialValue) {
 
 ```tsx
 // https://www.robinwieruch.de/react-uselocalstorage-hook.
-const useLocalStorage = (storageKey, fallbackState) => {
+function useLocalStorage(storageKey, fallbackState) {
   const [value, setValue] = React.useState(
     JSON.parse(localStorage.getItem(storageKey)) || fallbackState
   )
@@ -3797,7 +3845,7 @@ const useLocalStorage = (storageKey, fallbackState) => {
   return [value, setValue]
 }
 
-const App = () => {
+export default function App() {
   const [isOpen, setOpen] = useLocalStorage('is-open', false)
 
   const handleToggle = () => {
@@ -3840,16 +3888,24 @@ function useFriendStatus(friendID) {
 ```
 
 ```tsx
-function FriendStatus(props) {
+export default function FriendStatus(props) {
   const isOnline = useFriendStatus(props.friend.id)
 
-  if (isOnline === null) {
+  if (isOnline === null)
     return 'Loading...'
-  }
+
   return isOnline ? 'Online' : 'Offline'
 }
+```
 
-function FriendListItem(props) {
+```tsx
+interface Props {
+  friend: {
+    id: number
+    name: string
+  }
+}
+export default function FriendListItem(props: Props) {
   const isOnline = useFriendStatus(props.friend.id)
 
   return (
@@ -3862,7 +3918,7 @@ function FriendListItem(props) {
 import React, { Fragment, useEffect, useState } from 'react'
 import axios from 'axios'
 
-const useDataApi = (initialUrl, initialData) => {
+function useDataApi(initialUrl, initialData) {
   const [data, setData] = useState(initialData)
   const [url, setUrl] = useState(initialUrl)
   const [isLoading, setIsLoading] = useState(false)
@@ -3876,7 +3932,8 @@ const useDataApi = (initialUrl, initialData) => {
       const result = await axios(url)
 
       setData(result.data)
-    } catch (error) {
+    }
+    catch (error) {
       setIsError(true)
     }
 
@@ -3908,8 +3965,7 @@ function App() {
     <Fragment>
       <form
         onSubmit={event =>
-          doGet(event, `http://hn.algolia.com/api/v1/search?query=${query}`)
-        }
+          doGet(event, `http://hn.algolia.com/api/v1/search?query=${query}`)}
       >
         <input
           type="text"
@@ -3921,17 +3977,19 @@ function App() {
 
       {isError && <div>Something went wrong ...</div>}
 
-      {isLoading ? (
-        <div>Loading ...</div>
-      ) : (
-        <ul>
-          {data.hits.map(item => (
-            <li key={item.objectID}>
-              <a href={item.url}>{item.title}</a>
-            </li>
-          ))}
-        </ul>
-      )}
+      {isLoading
+        ? (
+          <div>Loading ...</div>
+          )
+        : (
+          <ul>
+            {data.hits.map(item => (
+              <li key={item.objectID}>
+                <a href={item.url}>{item.title}</a>
+              </li>
+            ))}
+          </ul>
+          )}
     </Fragment>
   )
 }
@@ -3959,8 +4017,8 @@ type Cache<T> = Record<string, T>
 // discriminated union type
 type Action<T> =
   | { type: 'request' }
-  | { type: 'success'; payload: T }
-  | { type: 'failure'; payload: string }
+  | { type: 'success', payload: T }
+  | { type: 'failure', payload: string }
 
 function useFetch<T = unknown>(
   url?: string,
@@ -3992,25 +4050,28 @@ function useFetch<T = unknown>(
   const [state, dispatch] = useReducer(fetchReducer, initialState)
 
   useEffect(() => {
-    if (!url) {
+    if (!url)
       return
-    }
 
     const fetchData = async () => {
       dispatch({ type: 'request' })
 
       if (cache.current[url]) {
         dispatch({ type: 'success', payload: cache.current[url] })
-      } else {
+      }
+      else {
         try {
           const response = await axios(url, options)
           cache.current[url] = response.data
 
-          if (cancelRequest.current) return
+          if (cancelRequest.current)
+            return
 
           dispatch({ type: 'success', payload: response.data })
-        } catch (error) {
-          if (cancelRequest.current) return
+        }
+        catch (error) {
+          if (cancelRequest.current)
+            return
 
           dispatch({ type: 'failure', payload: error.message })
         }
@@ -4022,7 +4083,6 @@ function useFetch<T = unknown>(
     return () => {
       cancelRequest.current = true
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url])
 
   return state
@@ -4090,13 +4150,13 @@ export class RealTimeApi {
   }
 
   public fetch<T>({ path }: RealTimeFetchParams) {
-    return new Promise<T>(resolve => {
+    return new Promise<T>((resolve) => {
       this.firebase
         .database()
         .ref(path)
         .once(
           'value',
-          snapshot => {
+          (snapshot) => {
             resolve(snapshot.val())
           },
           this.handleAuthenticationErrors
@@ -4134,7 +4194,7 @@ function useRealTimeQuery<Data>(
   useEffect(() => {
     const unsubscribe = realTimeApi.subscribe<Data>({
       path: firebasePathKey,
-      callback: val => {
+      callback: (val) => {
         queryClient.setQueryData(firebasePathKey, val)
       },
     })
@@ -4176,9 +4236,8 @@ store.setState = store.setState.bind(store)
 export default function useStore() {
   const [state, set] = useState(store.state)
 
-  if (!store.setters.includes(set)) {
+  if (!store.setters.includes(set))
     store.setters.push(set)
-  }
 
   return [state, store.setState]
 }
@@ -4246,7 +4305,7 @@ export default function useStore(props: useStoreProps) {
     }))
 
     return function unregister() {
-      setState(state => {
+      setState((state) => {
         const actions = state.actions
         const removeActionIds = Object.keys(actionsByKey)
         removeActionIds.forEach(actionId => delete actions[actionId])
@@ -4318,9 +4377,8 @@ class Publisher {
   unsubscribe(subscriber: Subscriber) {
     if (this.subscribers.length) {
       const index = this.subscribers.indexOf(subscriber)
-      if (index > -1) {
+      if (index > -1)
         return this.subscribers.splice(index, 1)
-      }
     }
   }
 
@@ -4345,11 +4403,11 @@ class Subscriber {
       const recollect = this.collector()
       if (!deepEqual(recollect, this.collected)) {
         this.collected = recollect
-        if (this.onChange) {
+        if (this.onChange)
           this.onChange(this.collected)
-        }
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.warn(error)
     }
   }
@@ -4383,9 +4441,7 @@ class Stateful<T> {
   }
 
   notify() {
-    for (const listener of this.listeners) {
-      listener(this.snapshot())
-    }
+    for (const listener of this.listeners) listener(this.snapshot())
   }
 
   subscribe(callback: (value: T) => void): Disconnector {
@@ -4435,7 +4491,7 @@ export class Selector<T> extends Stateful<T> {
   }
 }
 
-export function atom<V>(value: { key: string; default: V }): Atom<V> {
+export function atom<V>(value: { key: string, default: V }): Atom<V> {
   return new Atom(value.default)
 }
 
@@ -4535,7 +4591,7 @@ class Atom<T> {
 
 export const atom = <T>(initialState: T) => new Atom(initialState)
 
-export const useAtomValue = <T>(atom: Atom<T>) => {
+export function useAtomValue<T>(atom: Atom<T>) {
   const ref = useRef(false)
   const [state, setState] = useState(atom.current)
 
@@ -4549,10 +4605,9 @@ export const useAtomValue = <T>(atom: Atom<T>) => {
   return state
 }
 
-export const setAtomValue =
-  <T>(atom: Atom<T>) =>
-  (nextState: T) =>
-    atom.setState(nextState)
+export function setAtomValue<T>(atom: Atom<T>) {
+  return (nextState: T) => atom.setState(nextState)
+}
 ```
 
 ## Hooks Best Practice

@@ -140,13 +140,11 @@ const animals: Array<Animal> = [new Animal('lion'), new Animal('mouse')]
 
 function AnimalSound(a: Array<Animal>) {
   for (let i = 0; i <= a.length; i++) {
-    if (a[i].name === 'lion') {
+    if (a[i].name === 'lion')
       log('roar')
-    }
 
-    if (a[i].name === 'mouse') {
+    if (a[i].name === 'mouse')
       log('squeak')
-    }
   }
 }
 
@@ -178,9 +176,8 @@ class Snake extends Animal {
 }
 
 function AnimalSound(a: Array<Animal>) {
-  for (let i = 0; i <= a.length; i++) {
+  for (let i = 0; i <= a.length; i++)
     log(a[i].makeSound())
-  }
 }
 
 AnimalSound(animals)
@@ -189,13 +186,11 @@ AnimalSound(animals)
 ```ts
 class Discount {
   giveDiscount() {
-    if (this.customer === 'fav') {
+    if (this.customer === 'fav')
       return this.price * 0.2
-    }
 
-    if (this.customer === 'vip') {
+    if (this.customer === 'vip')
       return this.price * 0.4
-    }
   }
 }
 ```
@@ -255,9 +250,8 @@ class Lion extends Animal {
 }
 
 function AnimalLegCount(a: Array<Animal>) {
-  for (let i = 0; i <= a.length; i++) {
+  for (let i = 0; i <= a.length; i++)
     a[i].LegCount()
-  }
 }
 
 AnimalLegCount(animals)
@@ -272,9 +266,9 @@ AnimalLegCount(animals)
 ```ts
 // BAD.
 interface IShape {
-  drawCircle()
-  drawSquare()
-  drawRectangle()
+  drawCircle: () => any
+  drawSquare: () => any
+  drawRectangle: () => any
 }
 
 class Circle implements IShape {
@@ -323,23 +317,23 @@ class Rectangle implements IShape {
 ```ts
 // GOOD.
 interface IShape {
-  draw()
+  draw: () => any
 }
 
 interface ICircle {
-  drawCircle()
+  drawCircle: () => any
 }
 
 interface ISquare {
-  drawSquare()
+  drawSquare: () => any
 }
 
 interface IRectangle {
-  drawRectangle()
+  drawRectangle: () => any
 }
 
 interface ITriangle {
-  drawTriangle()
+  drawTriangle: () => any
 }
 
 class Circle implements ICircle {
@@ -431,7 +425,7 @@ class Http {
 
 ```ts
 interface Connection {
-  request(url: string, opts: any)
+  request: (url: string, opts: any) => any
 }
 
 // Abstraction not upon on details (but upon on abstractions)
@@ -572,25 +566,23 @@ class Vehicle {
   }
 
   run(...args) {
-    if (args.length === 0) {
+    if (args.length === 0)
       console.log(`${this.type} - run with: ${this.speed}km/s`)
-    } else if (toString.apply(args[0]) === '[object Number]') {
+    else if (toString.apply(args[0]) === '[object Number]')
       this.speed = args[0]
-    }
   }
 
   withColor(...args) {
-    if (args.length === 0) {
+    if (args.length === 0)
       console.log(`The color of this ${this.type} product is : ${this.color}`)
-    } else if (toString.apply(args[0]) === '[object String]') {
+    else if (toString.apply(args[0]) === '[object String]')
       this.color = args[0]
-    }
   }
 
   reform(funcName, newFunc) {
     if (
-      typeof this[funcName] === 'function' ||
-      typeof this.prototype[funcName] === 'function'
+      typeof this[funcName] === 'function'
+      || typeof this.prototype[funcName] === 'function'
     ) {
       delete this[funcName]
       this.prototype[funcName] = newFunc
@@ -701,9 +693,8 @@ class DataContainer {
   }
 
   #check() {
-    if (!this.#active) {
+    if (!this.#active)
       throw new TypeError('Not created by factory')
-    }
   }
 
   getData() {
@@ -785,9 +776,8 @@ class AbstractVehicleFactory {
     const proto = Vehicle.prototype
 
     // Only register classes that fulfill the vehicle contract
-    if (proto.drive && proto.breakDown) {
+    if (proto.drive && proto.breakDown)
       this.types[type] = Vehicle
-    }
 
     return this
   }
@@ -828,8 +818,8 @@ class Person {
 
   toString() {
     return (
-      `Person lives at ${this.streetAddress}, ${this.city}, ${this.postcode}\n` +
-      `and works at ${this.companyName} as a ${this.position} earning ${this.annualIncome}`
+      `Person lives at ${this.streetAddress}, ${this.city}, ${this.postcode}\n`
+      + `and works at ${this.companyName} as a ${this.position} earning ${this.annualIncome}`
     )
   }
 }
@@ -956,7 +946,8 @@ car2.SetName('BMW')
 class Singleton {
   constructor() {
     const instance = this.constructor.instance
-    if (instance) return instance
+    if (instance)
+      return instance
     this.constructor.instance = this
   }
 
@@ -970,9 +961,8 @@ class Singleton {
   private constructor() {}
 
   public static getInstance() {
-    if (!Singleton.instance) {
+    if (!Singleton.instance)
       Singleton.instance = new Singleton()
-    }
 
     return Singleton.instance
   }
@@ -990,7 +980,8 @@ const createLoginLayer = (function (creator) {
   let singleton
 
   return function () {
-    if (!singleton) singleton = creator()
+    if (!singleton)
+      singleton = creator()
     return singleton
   }
 })(loginCreator)
@@ -1211,9 +1202,8 @@ class Composite implements Component {
   do(context: Context) {
     console.log('Do composite work')
 
-    for (const child of this.children) {
+    for (const child of this.children)
       child.do(context)
-    }
   }
 }
 
@@ -1223,7 +1213,8 @@ class Leaf implements Component {
   }
 
   remove(child: Component) {
-    if (this.parent === null) return
+    if (this.parent === null)
+      return
     console.log('Remove self')
   }
 
@@ -1271,9 +1262,8 @@ root.do()
 function __decorate(decorators, target) {
   const decorateTarget = target
 
-  for (const decorator of decorators) {
+  for (const decorator of decorators)
     decorateTarget = decorator(decorateTarget) || decorateTarget
-  }
 
   return decorateTarget
 }
@@ -1401,13 +1391,12 @@ computer.start()
 
 ```ts
 sabertazimi.addMyEvent = function (el, ev, fn) {
-  if (el.addEventListener) {
+  if (el.addEventListener)
     el.addEventListener(ev, fn, false)
-  } else if (el.attachEvent) {
+  else if (el.attachEvent)
     el.attachEvent(`on${ev}`, fn)
-  } else {
+  else
     el[`on${ev}`] = fn
-  }
 }
 ```
 
@@ -1448,9 +1437,8 @@ class FlyweightFactory {
   static get(make, model, processor) {
     const id = make + model
 
-    if (FlyweightFactory.flyweights.has(id)) {
+    if (FlyweightFactory.flyweights.has(id))
       return FlyweightFactory.flyweights.get(id)
-    }
 
     const flyweight = new Flyweight(make, model, processor)
     FlyweightFactory.flyweights.set(id, flyweight)
@@ -1539,7 +1527,7 @@ const iframe1 = iframeFactory.create()
 iframe1.src = 'http:// baidu.com'
 const iframe2 = iframeFactory.create()
 iframe2.src = 'http:// QQ.com'
-setTimeout(function () {
+setTimeout(() => {
   const iframe3 = iframeFactory.create()
   iframe3.src = 'http:// 163.com'
 }, 3000)
@@ -1602,17 +1590,16 @@ console.log(`5% of 50 is ${50 * fivePercent}`)
 ```ts
 function GeoCoder() {
   this.getLatLng = function (address) {
-    if (address === 'Amsterdam') {
+    if (address === 'Amsterdam')
       return '52.3700° N, 4.8900° E'
-    } else if (address === 'London') {
+    else if (address === 'London')
       return '51.5171° N, 0.1062° W'
-    } else if (address === 'Paris') {
+    else if (address === 'Paris')
       return '48.8742° N, 2.3470° E'
-    } else if (address === 'Berlin') {
+    else if (address === 'Berlin')
       return '52.5233° N, 13.4127° E'
-    } else {
+    else
       return ''
-    }
   }
 }
 
@@ -1622,17 +1609,18 @@ function GeoProxy() {
 
   return {
     getLatLng(address) {
-      if (!geocache[address]) {
+      if (!geocache[address])
         geocache[address] = geocoder.getLatLng(address)
-      }
+
       log.add(`${address}: ${geocache[address]}`)
       return geocache[address]
     },
     getCount() {
       let count = 0
-      for (const code in geocache) {
+
+      for (const code in geocache)
         count++
-      }
+
       return count
     },
   }
@@ -1703,13 +1691,15 @@ class CreatureModifier {
 
   // Build chains.
   add(modifier) {
-    if (this.next) this.next.add(modifier)
+    if (this.next)
+      this.next.add(modifier)
     else this.next = modifier
   }
 
   // Pass objects along to chains.
   handle() {
-    if (this.next) this.next.handle()
+    if (this.next)
+      this.next.handle()
   }
 }
 
@@ -1765,6 +1755,8 @@ console.log(peekachu.toString())
 ```
 
 ```ts
+import { Buffer } from 'node:buffer'
+
 class Koa extends EventEmitter {
   constructor() {
     super()
@@ -1776,11 +1768,10 @@ class Koa extends EventEmitter {
   }
 
   compose(middlewares, ctx) {
-    const dispatch = index => {
+    const dispatch = (index) => {
       // End of chain.
-      if (index === middlewares.length) {
+      if (index === middlewares.length)
         return Promise.resolve()
-      }
 
       // `next` function: call next middleware recursively.
       const next = () => dispatch(index + 1)
@@ -1807,15 +1798,18 @@ class Koa extends EventEmitter {
       if (typeof ctx.body === 'object' && ctx.body !== null) {
         res.setHeader('Content-Type', 'application/json;charset=utf8')
         res.end(JSON.stringify(ctx.body))
-      } else if (ctx.body instanceof Stream) {
+      }
+      else if (ctx.body instanceof Stream) {
         ctx.body.pipe(res)
-      } else if (typeof ctx.body === 'string' || Buffer.isBuffer(ctx.body)) {
+      }
+      else if (typeof ctx.body === 'string' || Buffer.isBuffer(ctx.body)) {
         res.setHeader('Content-Type', 'text/htmlCharset=utf8')
         res.end(ctx.body)
-      } else {
+      }
+      else {
         res.end('Not Found')
       }
-    }).catch(err => {
+    }).catch((err) => {
       this.emit('error', err)
       res.statusCode = 500
       res.end('Internal Server Error')
@@ -1910,9 +1904,8 @@ class Button {
   }
 
   click() {
-    for (const command of this.commands) {
+    for (const command of this.commands)
       command.execute()
-    }
   }
 }
 
@@ -2045,9 +2038,8 @@ class Cursor {
     this.ctx.beginPath()
     this.ctx.moveTo(this.position.x, this.position.y)
 
-    for (let i = 0; i < this.commandStack.length; i++) {
+    for (let i = 0; i < this.commandStack.length; i++)
       this.commandStack[i]()
-    }
 
     this.ctx.stroke()
   }
@@ -2089,7 +2081,7 @@ class Stuff {
   }
 
   [Symbol.iterator]() {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    // eslint-disable-next-line ts/no-this-alias
     const self = this
     let i = 0
 
@@ -2104,7 +2096,7 @@ class Stuff {
   }
 
   get backwards() {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    // eslint-disable-next-line ts/no-this-alias
     const self = this
     let i = 0
 
@@ -2131,15 +2123,16 @@ for (const item of stuff.backwards) console.log(`${item}`)
 Implement polyfill with iterator:
 
 ```ts
-const activeXUploader = () => {
+function activeXUploader() {
   try {
     return new ActiveXObject('ActiveX.Upload') // IE 上传控件.
-  } catch (e) {
+  }
+  catch (e) {
     return false
   }
 }
 
-const flashUploader = () => {
+function flashUploader() {
   if (supportFlash()) {
     const str = '<object type="application/x-shockwave-flash"></object>'
     return $(str).appendTo($('body'))
@@ -2148,15 +2141,16 @@ const flashUploader = () => {
   return false
 }
 
-const formUploader = () => {
+function formUploader() {
   const str = '<input name="file" type="file" class="ui-file"/>' // 表单上传控件.
   return $(str).appendTo($('body'))
 }
 
-const upload = (...uploaderList) => {
+function upload(...uploaderList) {
   for (const uploader of uploaderList) {
     const uploadResult = uploader()
-    if (uploadResult !== false) return uploadResult
+    if (uploadResult !== false)
+      return uploadResult
   }
 }
 
@@ -2215,8 +2209,10 @@ class ChatRoom {
   }
 
   broadcast(source, message) {
-    for (const p of this.people)
-      if (p.name !== source) p.receive(source, message)
+    for (const p of this.people) {
+      if (p.name !== source)
+        p.receive(source, message)
+    }
   }
 
   join(p) {
@@ -2227,8 +2223,10 @@ class ChatRoom {
   }
 
   message(source, destination, message) {
-    for (const p of this.people)
-      if (p.name === destination) p.receive(source, message)
+    for (const p of this.people) {
+      if (p.name === destination)
+        p.receive(source, message)
+    }
   }
 }
 
@@ -2279,18 +2277,16 @@ class ObserverList {
   }
 
   get(index) {
-    if (index > -1 && index < this.observerList.length) {
+    if (index > -1 && index < this.observerList.length)
       return this.observerList[index]
-    }
   }
 
   indexOf(obj, startIndex) {
     let i = startIndex
 
     while (i < this.observerList.length) {
-      if (this.observerList[i] === obj) {
+      if (this.observerList[i] === obj)
         return i
-      }
 
       i++
     }
@@ -2319,9 +2315,8 @@ class Subject {
   notify(context) {
     const observerCount = this.observers.count()
 
-    for (let i = 0; i < observerCount; i++) {
+    for (let i = 0; i < observerCount; i++)
       this.observers.get(i).update(context)
-    }
   }
 }
 
@@ -2358,24 +2353,21 @@ class PubSub {
   }
 
   publish(topic, args) {
-    if (!this.topics[topic]) {
+    if (!this.topics[topic])
       return false
-    }
 
     const subscribers = this.topics[topic]
     let len = subscribers ? subscribers.length : 0
 
-    while (len--) {
+    while (len--)
       subscribers[len].func(topic, args)
-    }
 
     return this
   }
 
   subscribe(topic, func) {
-    if (!this.topics[topic]) {
+    if (!this.topics[topic])
       this.topics[topic] = []
-    }
 
     const token = (++this.subUid).toString()
     this.topics[topic].push({
@@ -2415,7 +2407,7 @@ pubsub.unsubscribe(token)
 
 ```ts
 // Equivalent to subscribe(topicName, callback)
-$(document).on('topicName', function () {
+$(document).on('topicName', () => {
   // ..perform some behavior
 })
 
@@ -2439,9 +2431,8 @@ class MicroEvent {
   unbind(event, callback) {
     this._events = this._events || {}
 
-    if (event in this._events === false) {
+    if (event in this._events === false)
       return
-    }
 
     this._events[event].splice(this._events[event].indexOf(callback), 1)
   }
@@ -2449,13 +2440,11 @@ class MicroEvent {
   trigger(event, ...args) {
     this._events = this._events || {}
 
-    if (event in this._events === false) {
+    if (event in this._events === false)
       return
-    }
 
-    for (let i = 0; i < this._events[event].length; i++) {
+    for (let i = 0; i < this._events[event].length; i++)
       this._events[event][i].apply(this, args)
-    }
   }
 }
 ```
@@ -2473,12 +2462,12 @@ class MicroEvent {
   const resultTemplate = _.template($('#resultTemplate').html())
 
   // Subscribe to the new search tags topic
-  $.subscribe('/search/tags', function (tags) {
+  $.subscribe('/search/tags', (tags) => {
     $('#searchResults').html(`Searched for: ${tags}`)
   })
 
   // Subscribe to the new results topic
-  $.subscribe('/search/resultSet', function (results) {
+  $.subscribe('/search/resultSet', (results) => {
     $('#searchResults').append(resultTemplate(results))
   })
 
@@ -2487,9 +2476,8 @@ class MicroEvent {
     e.preventDefault()
     const tags = $(this).find('#query').val()
 
-    if (!tags) {
+    if (!tags)
       return
-    }
 
     $.publish('/search/tags', [$.trim(tags)])
   })
@@ -2499,7 +2487,7 @@ class MicroEvent {
   // publish this data for the rest of the application
   // to consume
 
-  $.subscribe('/search/tags', function (tags) {
+  $.subscribe('/search/tags', (tags) => {
     // Ajax Request
     $.getJSON(
       'http://api.flickr.com/services/feeds/',
@@ -2509,10 +2497,9 @@ class MicroEvent {
         format: 'json',
       },
 
-      function (data) {
-        if (!data.items.length) {
+      (data) => {
+        if (!data.items.length)
           return
-        }
 
         $.publish('/search/resultSet', data.items)
       }
@@ -2558,7 +2545,8 @@ class Switch {
 
 class State {
   constructor() {
-    if (this.constructor === State) throw new Error('abstract!')
+    if (this.constructor === State)
+      throw new Error('abstract!')
   }
 
   on(sw) {
@@ -2701,16 +2689,15 @@ Remove `if-else` statements:
 
 ```ts
 // 违反开放封闭原则
-const activity = (type, price) => {
-  if (type === 'pre') {
+function activity(type, price) {
+  if (type === 'pre')
     return price * 0.95
-  } else if (type === 'onSale') {
+  else if (type === 'onSale')
     return price * 0.9
-  } else if (type === 'back') {
+  else if (type === 'back')
     return price * 0.85
-  } else if (type === 'limit') {
+  else if (type === 'limit')
     return price * 0.8
-  }
 }
 
 // 利用 Strategy Pattern 进行重构
@@ -2790,9 +2777,9 @@ class Game {
 
   run() {
     this.start()
-    while (!this.haveWinner) {
+    while (!this.haveWinner)
       this.takeTurn()
-    }
+
     console.log(`Player ${this.winningPlayer} wins.`)
   }
 
@@ -2994,9 +2981,8 @@ class Injector {
   private static container = new Map<string, any>()
 
   static resolve<T>(target: Type<T>): T {
-    if (Injector.container.has(target.name)) {
+    if (Injector.container.has(target.name))
       return Injector.container.get(target.name)
-    }
 
     const tokens = Reflect.getMetadata('design:types', target) || []
     const injections = tokens.map((token: Type<any>): any =>
@@ -3010,7 +2996,7 @@ class Injector {
 }
 
 export interface IProvider<T> {
-  provide(): T
+  provide: () => T
 }
 
 @injectable()
@@ -3024,7 +3010,13 @@ export class Hello extends React.Component {
   private readonly nameProvider: IProvider<string>
 
   render() {
-    return <h1>Hello {this.nameProvider.provide()}!</h1>
+    return (
+      <h1>
+        Hello
+        {this.nameProvider.provide()}
+        !
+      </h1>
+    )
   }
 }
 ```
@@ -3047,15 +3039,14 @@ function mixin(...args) {
 
   // Mixin provide certain methods
   if (args[2]) {
-    for (let i = 2, len = args.length; i < len; i++) {
+    for (let i = 2, len = args.length; i < len; i++)
       receivingClass.prototype[args[i]] = givingClass.prototype[args[i]]
-    }
-  } else {
+  }
+  else {
     // Mixin provide obj
     for (const methodName in givingClass.prototype) {
-      if (!receivingClass.prototype[methodName]) {
+      if (!receivingClass.prototype[methodName])
         receivingClass.prototype[methodName] = givingClass.prototype[methodName]
-      }
     }
   }
 }
@@ -3064,8 +3055,8 @@ function mixin(...args) {
 #### Class Mixin Pattern
 
 ```ts
-const MoveMixin = superclass =>
-  class extends superclass {
+function MoveMixin(superclass) {
+  return class extends superclass {
     moveUp() {
       console.log('move up')
     }
@@ -3078,6 +3069,7 @@ const MoveMixin = superclass =>
       console.log('stop! in the name of love!')
     }
   }
+}
 
 class CarAnimator {
   moveLeft() {
@@ -3105,7 +3097,7 @@ animator.stop()
 
 ```ts
 // 所有 mixins 都需要:
-type Constructor<T = {}> = new (...args: any[]) => T
+type Constructor<T = NonNullable<unknown>> = new (...args: any[]) => T
 
 /////////////
 // mixins 例子
@@ -3247,7 +3239,7 @@ on [JSConf.Asia 2019](https://www.youtube.com/watch?v=ANtSWq-zI0s):
 ```tsx
 import { DatePicker as LibraryXDatePicker } from 'LibraryX'
 
-const DatePicker = props => {
+function DatePicker(props) {
   return <LibraryXDatePicker {...props} />
 }
 
@@ -3406,7 +3398,7 @@ Bad code smell:
 - Inline function: 简化代码.
 - Extract variable: 引入解释性变量.
 - Inline variable: 简化代码.
-- Change functin declaration: 优化可读性.
+- Change function declaration: 优化可读性.
 - Rename variable: 优化可读性.
 
 ### Encapsulation Refactoring

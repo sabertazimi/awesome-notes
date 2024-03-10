@@ -23,10 +23,10 @@ Load-ALU-Store 模式 - 读入寄存器，算术逻辑单元运算，回写至�
 ### GDB
 
 - `si` 单指令执行
-- `x/i $pc`   执行 si 命令时打印汇编代码
+- `x/i $pc` 执行 si 命令时打印汇编代码
 - `disas` 显示汇编代码
 - `bt` 查看函数堆栈
-- `step1`  下一条汇编指令
+- `step1` 下一条汇编指令
 - `info register`
 - `x /numsizeformat $pc/rsp/rbp`
 

@@ -1037,7 +1037,7 @@ E -->|No| BSD
   ><img
     alt="Creative
 Commons License"
-    style="border-width:0"
+    style="border-width: 0"
     src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a
 ><br />This work is licensed under a
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"
@@ -1469,37 +1469,38 @@ const Git = require('nodegit')
 let repo
 
 Git.Repository.open(path.resolve('./.git'))
-  .then(function (r) {
+  .then((r) => {
     repo = r
     return repo.getMasterCommit()
   })
-  .then(function (firstCommitOnMaster) {
+  .then((firstCommitOnMaster) => {
     const walker = repo.createRevWalk()
     walker.push(firstCommitOnMaster.sha())
     walker.sorting(Git.Revwalk.SORT.Time)
 
     return walker.fileHistoryWalk(historyFile, 2)
   })
-  .then(resultingArrayOfCommits => {
+  .then((resultingArrayOfCommits) => {
     if (resultingArrayOfCommits.length > 0) {
       const commit = resultingArrayOfCommits[0].commit
       const date = commit.date()
     }
   })
 
-const getGitLastUpdatedTimeStamp = filePath => {
+function getGitLastUpdatedTimeStamp(filePath) {
   let lastUpdated = 0
 
   try {
-    lastUpdated =
-      parseInt(
+    lastUpdated
+      = Number.parseInt(
         spawn
           .sync('git', ['log', '-1', '--format=%at', path.basename(filePath)], {
             cwd: path.dirname(filePath),
           })
           .stdout.toString('utf-8')
       ) * 1000
-  } catch (e) {
+  }
+  catch (e) {
     /* do not handle for now */
   }
 

@@ -71,7 +71,6 @@ tags: [CS, Algorithm]
         return inversions;
     }
 
-
     /**
      * Returns the number of inversions in the integer array.
      * The argument array is not modified.

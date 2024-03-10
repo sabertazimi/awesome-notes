@@ -69,7 +69,7 @@ res.locals 中的所有属性都会传递到模板的上下文中
 在 app.js 中, use 页面控制器之前, 加入:
 
 ```ts
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.locals.user = req.user
   next()
 })
