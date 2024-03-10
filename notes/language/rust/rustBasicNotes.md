@@ -1074,7 +1074,6 @@ impl Point<f32> {
     }
 }
 
-
 fn add<T: std::ops::Add<T, Output = T>>(a:T, b:T) -> T {
     a + b
 }
@@ -1585,7 +1584,6 @@ fn main() -> Result<(), AppError> {
     Ok(())
 }
 
-
 // --------------- 上述代码运行后的可能输出 ---------------
 // 01. 若 hello_world.txt 文件不存在
 // Error: AppError { kind: "io", message: "No such file or directory" }
@@ -1803,7 +1801,6 @@ fn main() {
 struct ImportantExcerpt<'a> {
     part: &'a str,
 }
-
 
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
@@ -2880,7 +2877,6 @@ fn consumer() -> JoinHandle<()> {
     })
 }
 
-
 fn main() {
     loop {
         reset();
@@ -2949,7 +2945,6 @@ pub struct ThreadPool {
     workers: Vec<Worker>,
     sender: mpsc::Sender<Message>,
 }
-
 
 impl ThreadPool {
     /// Create a new ThreadPool.
@@ -4055,9 +4050,9 @@ fn main(mut cx: ModuleContext) -> NeonResult<()> {
 const { fibonacci_rs } = require('./index.node')
 
 const value = process.argv[2] || null
-const number = parseInt(value)
+const number = Number.parseInt(value)
 
-if (isNaN(number)) {
+if (Number.isNaN(number)) {
   console.log('Provided value is not a number')
   return
 }

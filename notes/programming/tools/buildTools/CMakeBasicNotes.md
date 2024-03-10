@@ -153,8 +153,8 @@ Standard options:
 
 ### if control
 
-- Unary: NOT, TARGET, EXISTS (file), DEFINED
-- Binary: STREQUAL, AND, OR, MATCHES(regular expression), VERSION_LESS, VERSION_LESS_EQUAL
+- Unary: NOT, TARGET, EXISTS (file), DEFINED
+- Binary: STREQUAL, AND, OR, MATCHES(regular expression), VERSION_LESS, VERSION_LESS_EQUAL
 
 ```bash
 if(WIN32)
@@ -386,7 +386,6 @@ INSTALL(FILES files... DESTINATION <dir>
      [COMPONENT <component>]
      [RENAME <name>] [OPTIONAL])
 
-
 INSTALL(FILES COPYRIGHT README DESTINATION share/doc/cmake/t2)
 ```
 
@@ -398,7 +397,6 @@ INSTALL(PROGRAMS files... DESTINATION <dir>
      [CONFIGURATIONS [Debug|Release|...]]
      [COMPONENT <component>]
      [RENAME <name>] [OPTIONAL])
-
 
 INSTALL(PROGRAMS runHello.sh DESTINATION bin)
 ```
@@ -611,7 +609,7 @@ project(MyProject VERSION 1.0 DESCRIPTION "Very nice project" LANGUAGES CXX)
 
 ### Environment Config
 
-`set(ENV{variable_name} value)` and get `$ENV{variable_name}` environment variables
+`set(ENV{variable_name} value)` and get `$ENV{variable_name}` environment variables
 
 ### Library for Clients Usage
 

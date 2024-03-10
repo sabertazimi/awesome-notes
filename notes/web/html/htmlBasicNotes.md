@@ -666,12 +666,12 @@ Capture device camera:
 ```ts
 if (checkbox.indeterminate) {
   doSomething()
-} else {
-  if (checkbox.checked) {
+}
+else {
+  if (checkbox.checked)
     doSomething()
-  } else {
+  else
     doSomething()
-  }
 }
 ```
 
@@ -739,19 +739,19 @@ if (checkbox.indeterminate) {
 const togglers = document.querySelectorAll('[data-toggle]')
 const closers = document.querySelectorAll('[data-close]')
 
-togglers?.forEach(toggler => {
+togglers?.forEach((toggler) => {
   const target = toggler.getAttribute('data-toggle')
   const dialogs = document.querySelectorAll(target)
 
-  toggler.addEventListener('click', _event => {
-    dialogs.forEach(dialog => {
+  toggler.addEventListener('click', (_event) => {
+    dialogs.forEach((dialog) => {
       dialog.showModal()
     })
   })
 })
 
-closers?.forEach(closer => {
-  closer.addEventListener('click', _event => {
+closers?.forEach((closer) => {
+  closer.addEventListener('click', (_event) => {
     const dialog = closer.closest('dialog')
     dialog.close()
   })
@@ -761,7 +761,7 @@ closers?.forEach(closer => {
 ### Datalist
 
 ```html
-<datalist id="register-prompt" style="display:none;">
+<datalist id="register-prompt" style="display: none">
   <option value="Windows">Windows</option>
   <option value="Mac OS">Mac OS</option>
   <option value="Linux">Linux</option>
@@ -1296,7 +1296,7 @@ boolean 代表当前`<time>`表示整个网页的时间
 ```
 
 ```ts
-const onChange = event => {
+function onChange(event) {
   const {
     currentTarget: {
       dataset: { row, column },
@@ -1605,26 +1605,28 @@ With `fieldset` and `legend`:
 ```
 
 ```tsx
-const Field = () => (
-  <>
-    <div className="user-code-field">
-      <input
-        id="userCode"
-        aria-describedby={
+export default function Field() {
+  return (
+    <>
+      <div className="user-code-field">
+        <input
+          id="userCode"
+          aria-describedby={
           errors.userCode ? 'user-code-error' : 'user-code-help'
         }
-      />
-      <span id="user-code-help" className="user-code-help">
-        Enter your 4 digit user code
-      </span>
-    </div>
-    {errors.userCode && (
-      <div id="user-code-error" role="alert" className="error">
-        You must enter your 4 character user code
+        />
+        <span id="user-code-help" className="user-code-help">
+          Enter your 4 digit user code
+        </span>
       </div>
-    )}
-  </>
-)
+      {errors.userCode && (
+        <div id="user-code-error" role="alert" className="error">
+          You must enter your 4 character user code
+        </div>
+      )}
+    </>
+  )
+}
 ```
 
 ### Time Accessibility
@@ -1666,7 +1668,7 @@ const Field = () => (
 ```
 
 ```ts
-document.addEventListener('keyup', event => {
+document.addEventListener('keyup', (event) => {
   switch (event.keyCode) {
     // escape
     case 27:
@@ -1709,7 +1711,8 @@ document.addEventListener('keyup', event => {
  * @param  {object} e the Event object
  */
 export function trapTabKey(e, context) {
-  if (e.key !== 'Tab') return
+  if (e.key !== 'Tab')
+    return
 
   const focusableItems = getFocusable(context)
   const focusedItem = document.activeElement
@@ -1721,7 +1724,8 @@ export function trapTabKey(e, context) {
       focusableItems[focusableItems.length - 1].focus()
       e.preventDefault()
     }
-  } else {
+  }
+  else {
     if (focusedItemIndex === focusableItems.length - 1) {
       focusableItems[0].focus()
       e.preventDefault()
@@ -1814,12 +1818,11 @@ export function trapTabKey(e, context) {
 const listExpander = document.querySelector('.list-expander')
 const list = document.querySelector('#expandable-list-1')
 
-listExpander.addEventListener('click', e => {
-  if (list.getAttribute('aria-expanded') === 'true') {
+listExpander.addEventListener('click', (e) => {
+  if (list.getAttribute('aria-expanded') === 'true')
     list.setAttribute('aria-expanded', 'false')
-  } else {
+  else
     list.setAttribute('aria-expanded', 'true')
-  }
 })
 ```
 

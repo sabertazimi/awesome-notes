@@ -104,7 +104,7 @@ const distanceEarthSunInKm = 149_600_000
 
 const fileSystemPermission = 0b111_111_000
 const bytes = 0b1111_10101011_11110000_00001101
-const words = 0xf3b_f00d
+const words = 0xF3B_F00D
 
 const massOfElectronInKg = 9.109_383_56e-31
 const trillionInShortScale = 1e1_2
@@ -128,7 +128,7 @@ const trillionInShortScale = 1e1_2
 assert.equal(Number(123.45), 123.45)
 assert.equal(Number(''), 0)
 assert.equal(Number('\n 123.45 \t'), 123.45)
-assert.equal(Number('xyz'), NaN)
+assert.equal(Number('xyz'), Number.NaN)
 assert.equal(Number(-123n), -123)
 assert.equal(
   Number({
@@ -186,11 +186,11 @@ assert.equal(
 #### Not A Number
 
 ```ts
-const numberType = typeof NaN // 'number'
+const numberType = typeof Number.NaN // 'number'
 
-Number.isFinite(NaN)
+Number.isFinite(Number.NaN)
 // false
-Number.isNaN(NaN)
+Number.isNaN(Number.NaN)
 // true
 Number.isNaN(123)
 // false
@@ -215,7 +215,7 @@ Infinity will be converted to `null` with `JSON.stringify()`.
 
 ```ts
 const largeNumber = 1.7976931348623157e308
-// eslint-disable-next-line @typescript-eslint/no-loss-of-precision
+// eslint-disable-next-line ts/no-loss-of-precision
 const largerNumber = 1.7976931348623157e309
 
 console.log(largeNumber) // 1.7976931348623157e+308
@@ -223,7 +223,7 @@ console.log(largerNumber) // Infinity
 console.log(46 / 0) // Infinity
 console.log(Number.POSITIVE_INFINITY) // Infinity
 console.log(Number.MAX_VALUE) // Infinity
-// eslint-disable-next-line @typescript-eslint/no-loss-of-precision
+// eslint-disable-next-line ts/no-loss-of-precision
 console.log(-1.7976931348623157e309) // -Infinity
 console.log(-46 / 0) // -Infinity
 console.log(Number.NEGATIVE_INFINITY) // -Infinity
@@ -232,11 +232,11 @@ console.log(Number.MIN_VALUE) // -Infinity
 console.log(Math.max()) // -Infinity
 console.log(Math.min()) // Infinity
 
-Number.isFinite(Infinity)
+Number.isFinite(Number.POSITIVE_INFINITY)
 // false
-Number.isFinite(-Infinity)
+Number.isFinite(Number.NEGATIVE_INFINITY)
 // false
-Number.isFinite(NaN)
+Number.isFinite(Number.NaN)
 // false
 Number.isFinite(123)
 // true
@@ -274,9 +274,9 @@ Number.isInteger(33.1)
 // false
 Number.isInteger('33')
 // false
-Number.isInteger(NaN)
+Number.isInteger(Number.NaN)
 // false
-Number.isInteger(Infinity)
+Number.isInteger(Number.POSITIVE_INFINITY)
 // false
 ```
 
@@ -308,13 +308,13 @@ const a = (1 + 2) / 10 // a = 0.1 + 0.2;
 - 没有被任何变量引用的 string: 垃圾回收.
 
 ```ts
-const goodString = "I've been a good string"
+const goodString = 'I\'ve been a good string'
 console.log(typeof goodString) // string
 console.log(goodString instanceof String) // false
 console.log(Object.prototype.toString.call(goodString)) // [object String]
 
 // eslint-disable-next-line no-new-wrappers
-const badString = new String("I've been a naughty string")
+const badString = new String('I\'ve been a naughty string')
 console.log(typeof badString) // object
 console.log(badString instanceof String) // true
 console.log(Object.prototype.toString.call(badString)) // [object String]
@@ -331,8 +331,9 @@ const isString = value => typeof value === 'string' || value instanceof String
 console.log(isString(goodString)) // true
 console.log(isString(badString)) // true
 
-const isStringAlternative = value =>
-  Object.prototype.toString.call(badString) === '[object String]'
+function isStringAlternative(value) {
+  return Object.prototype.toString.call(badString) === '[object String]'
+}
 console.log(isStringAlternative(goodString)) // true
 console.log(isStringAlternative(badString)) // true
 ```
@@ -370,10 +371,10 @@ const truthy = '\u{7A}' === 'z' // true
 
 ```ts
 function is32Bit(c) {
-  return c.codePointAt(0) > 0xffff
+  return c.codePointAt(0) > 0xFFFF
 }
 
-const truthy = String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y'
+const truthy = String.fromCodePoint(0x78, 0x1F680, 0x79) === 'x\uD83D\uDE80y'
 
 const after = before.charAt(0).toUpperCase() + before.slice(1)
 ```
@@ -498,8 +499,8 @@ Array.from(str.matchAll(regexp), m => m[0])
 'na'.repeat(-0.9) // ""
 'na'.repeat(-1) // RangeError
 
-'na'.repeat(NaN) // ""
-'na'.repeat(Infinity) // RangeError
+'na'.repeat(Number.NaN) // ""
+'na'.repeat(Number.POSITIVE_INFINITY) // RangeError
 
 'na'.repeat('na') // ""
 'na'.repeat('3') // "nanana"
@@ -539,10 +540,11 @@ Array.from(str.matchAll(regexp), m => m[0])
 #### Tagged Templates Literals
 
 ```ts
-const boldify = (parts, ...insertedParts) => {
+function boldify(parts, ...insertedParts) {
   return parts
     .map((s, i) => {
-      if (i === insertedParts.length) return s
+      if (i === insertedParts.length)
+        return s
       return `${s}<strong>${insertedParts[i]}</strong>`
     })
     .join('')
@@ -558,7 +560,7 @@ function template(strings, ...keys) {
   return function (...values) {
     const dict = values[values.length - 1] || {}
     const result = [strings[0]]
-    keys.forEach(function (key, i) {
+    keys.forEach((key, i) => {
       const value = Number.isInteger(key) ? values[key] : dict[key]
       result.push(value, strings[i + 1])
     })
@@ -700,15 +702,13 @@ console.log(String.raw`first line\nsecond line`)
 function printRaw(strings) {
   console.log('Actual characters:')
 
-  for (const string of strings) {
+  for (const string of strings)
     console.log(string)
-  }
 
   console.log('Escaped characters;')
 
-  for (const rawString of strings.raw) {
+  for (const rawString of strings.raw)
     console.log(rawString)
-  }
 }
 
 printRaw`\u00A9${'and'}\n`
@@ -723,15 +723,15 @@ printRaw`\u00A9${'and'}\n`
 #### String Utils
 
 ```ts
-const ucWords = string => {
+function ucWords(string) {
   return string.toLowerCase().replace(/\b[a-z]/g, l => l.toUpperCase())
 }
 
-const ucFirst = string => {
+function ucFirst(string) {
   return string[0].toUpperCase() + string.substr(1)
 }
 
-const studlyCase = string => {
+function studlyCase(string) {
   return string
     .replace('-', ' ')
     .replace('_', ' ')
@@ -740,7 +740,7 @@ const studlyCase = string => {
     .join('')
 }
 
-const snakeCase = (string, glue = '_') => {
+function snakeCase(string, glue = '_') {
   return string
     .replace(/\W+/g, ' ')
     .split(/ |\B(?=[A-Z])/)
@@ -748,16 +748,15 @@ const snakeCase = (string, glue = '_') => {
     .join(glue)
 }
 
-const kebabCase = string => {
+function kebabCase(string) {
   return snakeCase(string, '-')
 }
 
-const objectToQueryString = obj => {
+function objectToQueryString(obj) {
   return Object.keys(obj)
     .reduce((carry, key) => {
-      if (obj[key] || obj[key] === 0) {
+      if (obj[key] || obj[key] === 0)
         return `${carry}${key}=${obj[key]}&`
-      }
 
       return carry
     }, '')
@@ -842,8 +841,8 @@ console.log(b instanceof Baz) // false
 const ReferenceType = {
   [Symbol.hasInstance](value) {
     return (
-      value !== null &&
-      (typeof value === 'object' || typeof value === 'function')
+      value !== null
+      && (typeof value === 'object' || typeof value === 'function')
     )
   },
 }
@@ -968,13 +967,13 @@ console.log(Object.prototype.toString.call(me)) // "[object Person]"
  * Takes a bigint as an argument and returns a bigint
  */
 function nthPrime(nth) {
-  if (typeof nth !== 'bigint') {
+  if (typeof nth !== 'bigint')
     throw new TypeError('Not bigint')
-  }
 
   function isPrime(p) {
     for (let i = 2n; i < p; i++) {
-      if (p % i === 0n) return false
+      if (p % i === 0n)
+        return false
     }
 
     return true
@@ -982,7 +981,8 @@ function nthPrime(nth) {
 
   for (let i = 2n; ; i++) {
     if (isPrime(i)) {
-      if (--nth === 0n) return i
+      if (--nth === 0n)
+        return i
     }
   }
 }
@@ -1174,8 +1174,8 @@ const array = [...Array(5).keys()] // => [0, 1, 2, 3, 4]
 不使用构造函数,使用数组字面量创建数组
 
 ```ts
-const arr1 = new Array(3) // 数组长度
-const arr2 = new Array(3.14) // RangeError
+const arr1 = Array.from({ length: 3 }) // 数组长度
+const arr2 = Array.from({ length: 3.14 }) // RangeError
 ```
 
 ```ts
@@ -1211,12 +1211,11 @@ interface ArrayLike<T> {
 }
 
 interface Array {
-  from<T>(iterable: Iterable<T> | ArrayLike<T>): T[]
-  from<T, U>(
+  from: (<T>(iterable: Iterable<T> | ArrayLike<T>) => T[]) & (<T, U>(
     iterable: Iterable<T> | ArrayLike<T>,
     mapFunc: (v: T, i: number) => U,
     thisArg?: any
-  ): U[]
+  ) => U[])
 }
 ```
 
@@ -1226,7 +1225,7 @@ interface Array {
 
 // NodeList 对象
 const ps = document.querySelectorAll('p')
-Array.from(ps).forEach(function (p) {
+Array.from(ps).forEach((p) => {
   console.log(p)
 })
 
@@ -1323,7 +1322,7 @@ arr.pop() // 删除数组尾元素
 // console.log([NaN].indexOf(NaN));
 // -1
 
-console.log([NaN].includes(NaN))
+console.log([Number.NaN].includes(Number.NaN))
 // true
 ```
 
@@ -1367,22 +1366,24 @@ console.log(someResult) // true
 map + flat.
 
 ```ts
-const flattenDeep = arr =>
-  Array.isArray(arr)
+function flattenDeep(arr) {
+  return Array.isArray(arr)
     ? arr.reduce((a, b) => a.concat(flattenDeep(b)), [])
     : [arr]
+}
 
 flattenDeep([1, [[2], [3, [4]], 5]])
 // => [1, 2, 3, 4, 5]
 
 // ES2019
-;[1, [2, [3, [4]], 5]].flat(Infinity)
+;[1, [2, [3, [4]], 5]].flat(Number.POSITIVE_INFINITY)
 // => [1, 2, 3, 4, 5]
 
-const flattenDeep = arr =>
-  arr.flatMap((subArray, index) =>
+function flattenDeep(arr) {
+  return arr.flatMap((subArray, index) =>
     Array.isArray(subArray) ? flattenDeep(subArray) : subArray
   )
+}
 
 flattenDeep([1, [[2], [3, [4]], 5]])
 // => [1, 2, 3, 4, 5]
@@ -1431,7 +1432,7 @@ const groupByFunction = [1.3, 2.1, 2.4].reduce(
 #### Array Traversal
 
 ```ts
-array.forEach(val => {}) // 遍历数组所有元素.
+array.forEach((val) => {}) // 遍历数组所有元素.
 ```
 
 #### Array Sort
@@ -1519,7 +1520,7 @@ function typedArrayConcat(TypedArrayConstructor, ...typedArrays) {
   const resultArray = new TypedArrayConstructor(numElements)
   // 依次转移数组
   let currentOffset = 0
-  typedArrays.forEach(x => {
+  typedArrays.forEach((x) => {
     resultArray.set(x, currentOffset)
     currentOffset += x.length
   })
@@ -1607,13 +1608,11 @@ const map = new Map([
 ])
 
 // The `for/of` loop can loop through iterators
-for (const key of map.keys()) {
+for (const key of map.keys())
   console.log(key) // 'name', 'age', 'rank'
-}
 
-for (const value of map.values()) {
+for (const value of map.values())
   console.log(value) // 'Jean-Luc Picard', 59, 'Captain'
-}
 
 for (const [key, value] of map.entries()) {
   console.log(key) // 'name', 'age', 'rank'
@@ -1664,9 +1663,8 @@ class XSet extends Set {
     const unionSet = new XSet(a)
 
     for (const b of bSets) {
-      for (const bValue of b) {
+      for (const bValue of b)
         unionSet.add(bValue)
-      }
     }
 
     return unionSet
@@ -1679,9 +1677,8 @@ class XSet extends Set {
 
     for (const aValue of intersectionSet) {
       for (const b of bSets) {
-        if (!b.has(aValue)) {
+        if (!b.has(aValue))
           intersectionSet.delete(aValue)
-        }
       }
     }
 
@@ -1694,9 +1691,8 @@ class XSet extends Set {
     const differenceSet = new XSet(a)
 
     for (const bValue of b) {
-      if (a.has(bValue)) {
+      if (a.has(bValue))
         differenceSet.delete(bValue)
-      }
     }
 
     return differenceSet
@@ -1714,9 +1710,8 @@ class XSet extends Set {
     const cartesianProductSet = new XSet()
 
     for (const aValue of a) {
-      for (const bValue of b) {
+      for (const bValue of b)
         cartesianProductSet.add([aValue, bValue])
-      }
     }
 
     return cartesianProductSet
@@ -1727,9 +1722,8 @@ class XSet extends Set {
     const powerSet = new XSet().add(new XSet())
 
     for (const aValue of a) {
-      for (const set of new XSet(powerSet)) {
+      for (const set of new XSet(powerSet))
         powerSet.add(new XSet(set).add(aValue))
-      }
     }
 
     return powerSet
@@ -1780,32 +1774,32 @@ now.toLocaleString()
 now.toLocaleDateString()
 now.toLocaleTimeString()
 
-const daysOfMonth = (year, month) => {
+function daysOfMonth(year, month) {
   // `0` for last month of next month
   return new Date(year, month + 1, 0).getDate()
 }
 
-const prevYear = year => {
+function prevYear(year) {
   return new Date(year - 1, 0).getFullYear()
 }
 
-const nextYear = year => {
+function nextYear(year) {
   return new Date(year + 1, 0).getFullYear()
 }
 
-const prevMonth = (year, month) => {
+function prevMonth(year, month) {
   return new Date(year, month - 1).getMonth()
 }
 
-const nextMonth = (year, month) => {
+function nextMonth(year, month) {
   return new Date(year, month + 1).getMonth()
 }
 ```
 
 ```ts
-const getDateItemList = (year, month) => {
+function getDateItemList(year, month) {
   const days = daysOfMonth(year, month)
-  const currentDateItemList = [...Array(days).keys()].map(index => {
+  const currentDateItemList = [...Array(days).keys()].map((index) => {
     return DateItem(year, month, 1 + index)
   })
 
@@ -1816,7 +1810,7 @@ const getDateItemList = (year, month) => {
   const prefixFirstDay = lastMonthDays - prefixDays + 1
   const prefixYear = prevYear(year)
   const prefixMonth = prevMonth(year, month)
-  const prefixDateItemList = [...Array(prefixDays).keys()].map(index => {
+  const prefixDateItemList = [...Array(prefixDays).keys()].map((index) => {
     return DateItem(prefixYear, prefixMonth, prefixFirstDay + index)
   })
 
@@ -1825,7 +1819,7 @@ const getDateItemList = (year, month) => {
   const suffixDays = lastDayWeekday === 6 ? 7 : 6 - lastDayWeekday
   const suffixYear = nextYear(year)
   const suffixMonth = nextMonth(year, month)
-  const suffixDateItemList = [...Array(suffixDays).keys()].map(index => {
+  const suffixDateItemList = [...Array(suffixDays).keys()].map((index) => {
     return DateItem(suffixYear, suffixMonth, 1 + index)
   })
 
@@ -1925,16 +1919,16 @@ const isBefore = Temporal.PlainDate.compare('2010-10-20', '2010-10-21') === -1
 const isAfter = Temporal.PlainDate.compare('2010-10-20', '2010-10-19') === 1
 const isEqual = Temporal.PlainDate.from('2010-10-20').equals('2010-10-21')
 const isEqual = Temporal.PlainDate.from('2010-10-20').equals('2010-10-20')
-const isEqual =
-  Temporal.PlainDate.from('2010-10-20').month ===
-  Temporal.PlainDate.from('2010-10-21').month
+const isEqual
+  = Temporal.PlainDate.from('2010-10-20').month
+  === Temporal.PlainDate.from('2010-10-21').month
 
 const isPlainTime = Temporal.Now.plainTimeISO() instanceof Temporal.PlainTime
 const isPlainDate = Temporal.Now.plainDateISO() instanceof Temporal.PlainDate
-const isPlainDateTime =
-  Temporal.Now.plainDateTimeISO() instanceof Temporal.PlainDateTime
-const isZonedDateTime =
-  Temporal.Now.zonedDateTimeISO() instanceof Temporal.ZonedDateTime
+const isPlainDateTime
+  = Temporal.Now.plainDateTimeISO() instanceof Temporal.PlainDateTime
+const isZonedDateTime
+  = Temporal.Now.zonedDateTimeISO() instanceof Temporal.ZonedDateTime
 ```
 
 ## Variable
@@ -2032,9 +2026,9 @@ let b = 2
 // Output 5, 5, 5, 5, 5.
 // 所有的 i 都是同一个变量, 输出同一个最终值.
 
-for (let i = 0; i < 5; ++i) {
+for (let i = 0; i < 5; ++i)
   setTimeout(() => console.log(i), 0)
-}
+
 // Output: 0, 1, 2, 3, 4.
 // JavaScript 引擎会为每个迭代循环声明一个新的迭代变量.
 // 每个 setTimeout 引用的都是不同的变量实例.
@@ -2071,10 +2065,10 @@ function funcDecl() {
 function typeOf(o) {
   const _toString = Object.prototype.toString
   const _type = {
-    undefined: 'undefined',
-    number: 'number',
-    boolean: 'boolean',
-    string: 'string',
+    'undefined': 'undefined',
+    'number': 'number',
+    'boolean': 'boolean',
+    'string': 'string',
     '[object Function]': 'function',
     '[object GeneratorFunction]': 'function',
     '[object Array]': 'array',
@@ -2130,13 +2124,11 @@ function instanceOf(L, R) {
   let chain = L[[proto]]
 
   while (true) {
-    if (chain === null) {
+    if (chain === null)
       return false
-    }
 
-    if (prototype === chain) {
+    if (prototype === chain)
       return true
-    }
 
     chain = chain[[proto]]
   }
@@ -2167,7 +2159,7 @@ const totalScore = String(this.reviewScore)
 const val = Number(inputValue)
 
 // good
-const val = parseInt(inputValue, 10)
+const val = Number.parseInt(inputValue, 10)
 
 // good
 const hasAge = Boolean(age)
@@ -2182,21 +2174,29 @@ const hasAge = !!age
 function ToString(argument) {
   if (argument === undefined) {
     return 'undefined'
-  } else if (argument === null) {
+  }
+  else if (argument === null) {
     return 'null'
-  } else if (argument === true) {
+  }
+  else if (argument === true) {
     return 'true'
-  } else if (argument === false) {
+  }
+  else if (argument === false) {
     return 'false'
-  } else if (TypeOf(argument) === 'number') {
+  }
+  else if (TypeOf(argument) === 'number') {
     return Number.toString(argument)
-  } else if (TypeOf(argument) === 'string') {
+  }
+  else if (TypeOf(argument) === 'string') {
     return argument
-  } else if (TypeOf(argument) === 'symbol') {
+  }
+  else if (TypeOf(argument) === 'symbol') {
     return Symbol.toString(argument)
-  } else if (TypeOf(argument) === 'bigint') {
+  }
+  else if (TypeOf(argument) === 'bigint') {
     return BigInt.toString(argument)
-  } else {
+  }
+  else {
     // argument is an object
     const primValue = ToPrimitive(argument, 'string')
     return ToString(primValue)
@@ -2208,9 +2208,8 @@ function ToString(argument) {
 function ToPropertyKey(argument) {
   const key = ToPrimitive(argument, 'string') // (A)
 
-  if (TypeOf(key) === 'symbol') {
+  if (TypeOf(key) === 'symbol')
     return key
-  }
 
   return ToString(key)
 }
@@ -2220,9 +2219,8 @@ function ToPropertyKey(argument) {
 function ToNumeric(value) {
   const primValue = ToPrimitive(value, 'number')
 
-  if (TypeOf(primValue) === 'bigint') {
+  if (TypeOf(primValue) === 'bigint')
     return primValue
-  }
 
   return ToNumber(primValue)
 }
@@ -2231,22 +2229,30 @@ function ToNumeric(value) {
 ```ts
 function ToNumber(argument) {
   if (argument === undefined) {
-    return NaN
-  } else if (argument === null) {
+    return Number.NaN
+  }
+  else if (argument === null) {
     return +0
-  } else if (argument === true) {
+  }
+  else if (argument === true) {
     return 1
-  } else if (argument === false) {
+  }
+  else if (argument === false) {
     return +0
-  } else if (TypeOf(argument) === 'number') {
+  }
+  else if (TypeOf(argument) === 'number') {
     return argument
-  } else if (TypeOf(argument) === 'string') {
+  }
+  else if (TypeOf(argument) === 'string') {
     return parseTheString(argument) // not shown here
-  } else if (TypeOf(argument) === 'symbol') {
+  }
+  else if (TypeOf(argument) === 'symbol') {
     throw new TypeError('Failed!')
-  } else if (TypeOf(argument) === 'bigint') {
+  }
+  else if (TypeOf(argument) === 'bigint') {
     throw new TypeError('Failed!')
-  } else {
+  }
+  else {
     // argument is an object
     const primValue = ToPrimitive(argument, 'number')
     return ToNumber(primValue)
@@ -2262,6 +2268,7 @@ function ToNumber(argument) {
 
 ```ts
 /**
+ * @param input input string
  * @param hint Which type is preferred for the result string, number etc.
  */
 function ToPrimitive(
@@ -2274,27 +2281,26 @@ function ToPrimitive(
     if (exoticToPrim !== undefined) {
       const result = exoticToPrim.call(input, hint)
 
-      if (TypeOf(result) !== 'object') {
+      if (TypeOf(result) !== 'object')
         return result
-      }
 
       throw new TypeError('[Symbol.toPrimitive]() failed!')
     }
 
-    if (hint === 'default') {
+    if (hint === 'default')
       hint = 'number'
-    }
 
     return OrdinaryToPrimitive(input, hint)
-  } else {
+  }
+  else {
     // input is already primitive
     return input
   }
 }
 
 function OrdinaryToPrimitive(O: object, hint: 'string' | 'number') {
-  const methodNames =
-    hint === 'string' ? ['toString', 'valueOf'] : ['valueOf', 'toString']
+  const methodNames
+    = hint === 'string' ? ['toString', 'valueOf'] : ['valueOf', 'toString']
 
   for (const name of methodNames) {
     const method = O[name]
@@ -2302,9 +2308,8 @@ function OrdinaryToPrimitive(O: object, hint: 'string' | 'number') {
     if (IsCallable(method)) {
       const result = method.call(O)
 
-      if (TypeOf(result) !== 'object') {
+      if (TypeOf(result) !== 'object')
         return result
-      }
     }
   }
 
@@ -2330,74 +2335,67 @@ function abstractEqualityComparison(x, y) {
   }
 
   // Comparing null with undefined
-  if (x === null && y === undefined) {
+  if (x === null && y === undefined)
     return true
-  }
-  if (x === undefined && y === null) {
+
+  if (x === undefined && y === null)
     return true
-  }
 
   // Comparing a number and a string
-  if (TypeOf(x) === 'number' && TypeOf(y) === 'string') {
+  if (TypeOf(x) === 'number' && TypeOf(y) === 'string')
     return abstractEqualityComparison(x, Number(y))
-  }
-  if (TypeOf(x) === 'string' && TypeOf(y) === 'number') {
+
+  if (TypeOf(x) === 'string' && TypeOf(y) === 'number')
     return abstractEqualityComparison(Number(x), y)
-  }
 
   // Comparing a bigint and a string
   if (TypeOf(x) === 'bigint' && TypeOf(y) === 'string') {
     const n = StringToBigInt(y)
 
-    if (Number.isNaN(n)) {
+    if (Number.isNaN(n))
       return false
-    }
 
     return abstractEqualityComparison(x, n)
   }
-  if (TypeOf(x) === 'string' && TypeOf(y) === 'bigint') {
+  if (TypeOf(x) === 'string' && TypeOf(y) === 'bigint')
     return abstractEqualityComparison(y, x)
-  }
 
   // Comparing a boolean with a non-boolean
-  if (TypeOf(x) === 'boolean') {
+  if (TypeOf(x) === 'boolean')
     return abstractEqualityComparison(Number(x), y)
-  }
-  if (TypeOf(y) === 'boolean') {
+
+  if (TypeOf(y) === 'boolean')
     return abstractEqualityComparison(x, Number(y))
-  }
 
   // Comparing an object with a primitive
   // (other than undefined, null, a boolean)
   if (
-    ['string', 'number', 'bigint', 'symbol'].includes(TypeOf(x)) &&
-    TypeOf(y) === 'object'
-  ) {
+    ['string', 'number', 'bigint', 'symbol'].includes(TypeOf(x))
+    && TypeOf(y) === 'object'
+  )
     return abstractEqualityComparison(x, ToPrimitive(y))
-  }
+
   if (
-    TypeOf(x) === 'object' &&
-    ['string', 'number', 'bigint', 'symbol'].includes(TypeOf(y))
-  ) {
+    TypeOf(x) === 'object'
+    && ['string', 'number', 'bigint', 'symbol'].includes(TypeOf(y))
+  )
     return abstractEqualityComparison(ToPrimitive(x), y)
-  }
 
   // Comparing a bigint with a number
   if (
-    (TypeOf(x) === 'bigint' && TypeOf(y) === 'number') ||
-    (TypeOf(x) === 'number' && TypeOf(y) === 'bigint')
+    (TypeOf(x) === 'bigint' && TypeOf(y) === 'number')
+    || (TypeOf(x) === 'number' && TypeOf(y) === 'bigint')
   ) {
     if (
-      [NaN, +Infinity, -Infinity].includes(x) ||
-      [NaN, +Infinity, -Infinity].includes(y)
-    ) {
+      [Number.NaN, +Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY].includes(x)
+      || [Number.NaN, +Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY].includes(y)
+    )
       return false
-    }
-    if (isSameMathematicalValue(x, y)) {
+
+    if (isSameMathematicalValue(x, y))
       return true
-    } else {
+    else
       return false
-    }
   }
 
   return false
@@ -2461,8 +2459,8 @@ Object.is(-0, -0) // true
 Object.is(0n, -0n) // true
 
 // Case 3: NaN
-Object.is(NaN, 0 / 0) // true
-Object.is(NaN, Number.NaN) // true
+Object.is(Number.NaN, 0 / 0) // true
+Object.is(Number.NaN, Number.NaN) // true
 ```
 
 ```ts
@@ -2475,7 +2473,8 @@ if (!Object.is) {
         // if x and y are both 0 of the same sign.
         // This checks for cases 1 and 2 above.
         return x !== 0 || 1 / x === 1 / y
-      } else {
+      }
+      else {
         // return true if both x AND y evaluate to NaN.
         // The only possibility for a variable to not be strictly equal to itself
         // is when that variable evaluates to NaN (example: Number.NaN, 0/0, NaN).
@@ -2732,9 +2731,9 @@ const map = new Map()
 map.set('first', 'hello')
 map.set('second', 'world')
 
-for (const [key, value] of map) {
+for (const [key, value] of map)
   console.log(`${key} is ${value}`)
-}
+
 // first is hello
 // second is world
 
@@ -2841,9 +2840,8 @@ function doAction(action) {
     },
   }
 
-  if (typeof actions[action] !== 'function') {
+  if (typeof actions[action] !== 'function')
     throw new TypeError('Invalid action.')
-  }
 
   // 闭包方法集
   return actions[action]()
@@ -2931,11 +2929,11 @@ console.log(person1 !== Person) // true
 console.log(person1 !== Person.prototype) // true
 console.log(Person.prototype !== Person) // true
 
-// eslint-disable-next-line no-proto
+// eslint-disable-next-line no-proto, no-restricted-properties
 console.log(person1.__proto__ === Person.prototype) // true
-// eslint-disable-next-line no-proto
+// eslint-disable-next-line no-proto, no-restricted-properties
 console.log(person1.__proto__.constructor === Person) // true
-// eslint-disable-next-line no-proto
+// eslint-disable-next-line no-proto, no-restricted-properties
 console.log(person1.__proto__ === person2.__proto__) // true
 
 // eslint-disable-next-line no-prototype-builtins
@@ -2965,7 +2963,7 @@ console.log(
   Reflect.getPrototypeOf(p) === Array.prototype, // true
   // eslint-disable-next-line no-prototype-builtins
   Array.prototype.isPrototypeOf(p), // true
-  // eslint-disable-next-line no-proto
+  // eslint-disable-next-line no-proto, no-restricted-properties
   p.__proto__ === Array.prototype, // true
   // eslint-disable-next-line unicorn/no-instanceof-array
   p instanceof Array // true
@@ -3054,13 +3052,11 @@ const a = {}
 // eslint-disable-next-line no-new-wrappers
 const b = new Boolean(false)
 
-if (a) {
+if (a)
   console.log(1)
-}
 
-if (b) {
+if (b)
   console.log(2)
-}
 
 // output:
 // 1
@@ -3240,18 +3236,16 @@ const employee = new Employee('Jack')
 
 ```ts
 function Foo() {
-  if (!new.target) {
+  if (!new.target)
     throw new Error('Foo() must be called with new')
-  }
 }
 ```
 
 ```ts
 function Waffle() {
   // 当未使用 `new` 关键字时, `this` 指向全局对象
-  if (!(this instanceof Waffle)) {
+  if (!(this instanceof Waffle))
     return new Waffle()
-  }
 
   // 正常构造函数
   this.tastes = 'yummy'
@@ -3291,7 +3285,7 @@ const ObjectMaker = function () {
   // user-defined literal object
   // 直接忽略 this.name.
   const that = {}
-  that.name = "And that's that"
+  that.name = 'And that\'s that'
   return that
 }
 ```
@@ -3583,9 +3577,8 @@ Object.entries(score)
 
 function findKey(object, callback, thisValue) {
   for (const [key, value] of Object.entries(object)) {
-    if (callback.call(thisValue, value, key, object)) {
+    if (callback.call(thisValue, value, key, object))
       return key
-    }
   }
 
   return undefined
@@ -3818,11 +3811,13 @@ assert.equal(copy instanceof MyClass, false)
 function deepClone(original) {
   if (Array.isArray(original)) {
     return original.map(elem => deepClone(elem))
-  } else if (typeof original === 'object' && original !== null) {
+  }
+  else if (typeof original === 'object' && original !== null) {
     return Object.fromEntries(
       Object.entries(original).map(([key, value]) => [key, deepClone(value)])
     )
-  } else {
+  }
+  else {
     // Primitive value: atomic, no need to copy
     return original
   }
@@ -3831,9 +3826,8 @@ function deepClone(original) {
 
 ```ts
 function deepUpdate(original, keys, value) {
-  if (keys.length === 0) {
+  if (keys.length === 0)
     return value
-  }
 
   const currentKey = keys[0]
 
@@ -3841,13 +3835,15 @@ function deepUpdate(original, keys, value) {
     return original.map((v, index) =>
       index === currentKey ? deepUpdate(v, keys.slice(1), value) : v
     )
-  } else if (typeof original === 'object' && original !== null) {
+  }
+  else if (typeof original === 'object' && original !== null) {
     return Object.fromEntries(
       Object.entries(original).map(([k, v]) =>
         k === currentKey ? [k, deepUpdate(v, keys.slice(1), value)] : [k, v]
       )
     )
-  } else {
+  }
+  else {
     // Primitive value
     return original
   }
@@ -3891,14 +3887,13 @@ const classSim = function (Parent, props) {
   // 新的构造函数
   const Child = function (...args) {
     if (
-      Child.uber &&
-      Object.prototype.hasOwnProperty.call(Child.uber, '_construct')
-    ) {
+      Child.uber
+      && Object.prototype.hasOwnProperty.call(Child.uber, '_construct')
+    )
       Child.uber._construct.apply(this, args)
-    }
-    if (Object.prototype.hasOwnProperty.call(Child.prototype, '_construct')) {
+
+    if (Object.prototype.hasOwnProperty.call(Child.prototype, '_construct'))
       Child.prototype._construct.apply(this, args)
-    }
   }
 
   // 类式继承
@@ -3912,9 +3907,8 @@ const classSim = function (Parent, props) {
 
   // 添加属性与方法
   for (const i in props) {
-    if (Object.prototype.hasOwnProperty.call(props, i)) {
+    if (Object.prototype.hasOwnProperty.call(props, i))
       Child.prototype[i] = props[i]
-    }
   }
 
   // return the "class"
@@ -3923,7 +3917,7 @@ const classSim = function (Parent, props) {
 
 const SuperMan = classSim(Man, {
   _construct(what) {
-    console.log("SuperMan's constructor")
+    console.log('SuperMan\'s constructor')
   },
   getName() {
     const name = SuperMan.uber.getName.call(this)
@@ -4094,9 +4088,8 @@ Person.locate() // class, class Person {}
 ```ts
 class Shape {
   constructor() {
-    if (new.target === Shape) {
+    if (new.target === Shape)
       throw new TypeError('This class cannot be instantiated directly.')
-    }
   }
 }
 
@@ -4229,8 +4222,8 @@ assert.equal(Color.getName(new Color('green')), 'green')
 assert.throws(() => Color.getName(new Person('Jane')), {
   name: 'TypeError',
   message:
-    'Cannot read private member #name from' +
-    ' an object whose class did not declare it',
+    'Cannot read private member #name from'
+    + ' an object whose class did not declare it',
 })
 ```
 
@@ -4278,11 +4271,11 @@ assert.deepEqual(Reflect.ownKeys(inst), [])
 Private member `WeakMap` polyfill:
 
 ```ts
-const classPrivateFieldGet = (receiver, state) => {
+function classPrivateFieldGet(receiver, state) {
   return state.get(receiver)
 }
 
-const classPrivateFieldSet = (receiver, state, value) => {
+function classPrivateFieldSet(receiver, state, value) {
   state.set(receiver, value)
 }
 
@@ -4351,7 +4344,8 @@ class Foo {
     try {
       const lastInstances = loadLastInstances()
       Foo.#count += lastInstances.length
-    } catch {}
+    }
+    catch {}
   }
 }
 ```
@@ -4477,7 +4471,7 @@ Global Object 属性:
 
   // Get the global variables added at runtime by filtering out the browser's
   // default global variables from the current window object.
-  const runtimeGlobals = Object.keys(window).filter(key => {
+  const runtimeGlobals = Object.keys(window).filter((key) => {
     const isFromBrowser = browserGlobals.includes(key)
     return !isFromBrowser
   })
@@ -4535,7 +4529,7 @@ const obj = {
   foo() {
     // 若不将 `this` 赋值给 `that`, 而在内部函数中直接使用 `this.value`,
     // 则会发生错误: 内部函数的 `this` 指向全局对象而不是 `obj`.
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    // eslint-disable-next-line ts/no-this-alias
     const that = this
 
     function inner() {
@@ -4734,13 +4728,12 @@ function createComparisonFunction(propertyName) {
     const value1 = object1[propertyName]
     const value2 = object2[propertyName]
 
-    if (value1 < value2) {
+    if (value1 < value2)
       return -1
-    } else if (value1 > value2) {
+    else if (value1 > value2)
       return 1
-    } else {
+    else
       return 0
-    }
   }
 }
 
@@ -4775,7 +4768,7 @@ const result = compare({ name: 'Nicholas' }, { name: 'Matt' })
 ```ts
 function foo() {}
 const bar = function () {}
-const baz = () => {}
+function baz() {}
 
 console.log(foo.name) // foo
 console.log(bar.name) // bar
@@ -4824,10 +4817,10 @@ console.log(propertyDescriptor.set.name) // set age
 ```ts
 try {
   // eslint-disable-next-line no-caller
-  if (arguments.length !== arguments.callee.length) {
+  if (arguments.length !== arguments.callee.length)
     throw new Error('传递的参数个数不匹配')
-  }
-} catch (err) {
+}
+catch (err) {
   console.log(err)
   return this
 }
@@ -4877,9 +4870,8 @@ function foo(required = throwException()) {}
 ```ts
 // Enforcing a maximum parameters
 function f(x, y, ...empty) {
-  if (empty.length > 0) {
+  if (empty.length > 0)
     throw new Error('Redundant parameters!')
-  }
 }
 ```
 
@@ -4922,11 +4914,10 @@ const foo = function foo() {}
 
 // `function f() {}` 是命名函数表达式:
 const factorial = function f(num) {
-  if (num <= 1) {
+  if (num <= 1)
     return 1
-  } else {
+  else
     return num * f(num - 1)
-  }
 }
 ```
 
@@ -4995,9 +4986,9 @@ const obj = (function () {
   }
 
   function setName(n) {
-    if (typeof n === 'string') {
+    if (typeof n === 'string')
       name = n
-    }
+
     return this
   }
 
@@ -5057,11 +5048,10 @@ App.utils = {}
 ```ts
 // Following function is not tail recursive:
 function factorial(x) {
-  if (x <= 0) {
+  if (x <= 0)
     return 1
-  } else {
+  else
     return x * factorial(x - 1) // (A): Not tail position.
-  }
 }
 
 function factorial(n) {
@@ -5070,11 +5060,10 @@ function factorial(n) {
 
 // Following function is tail recursive:
 function facRec(x, acc) {
-  if (x <= 1) {
+  if (x <= 1)
     return acc
-  } else {
+  else
     return facRec(x - 1, x * acc) // (A): Tail position.
-  }
 }
 ```
 
@@ -5169,7 +5158,8 @@ const createLoginLayer = (function (creator) {
   let singleton
 
   return function () {
-    if (!singleton) singleton = creator()
+    if (!singleton)
+      singleton = creator()
     return singleton
   }
 })(loginCreator)
@@ -5192,14 +5182,12 @@ called() // Called : 2
 
 ```ts
 // check if callback is callable
-if (typeof callback !== 'function') {
+if (typeof callback !== 'function')
   callback = false
-}
 
 // now callback:
-if (callback) {
+if (callback)
   callback()
-}
 ```
 
 ```ts
@@ -5209,17 +5197,15 @@ const findNodes = function (callback) {
   let found
 
   // check if callback is callable
-  if (typeof callback !== 'function') {
+  if (typeof callback !== 'function')
     callback = false
-  }
 
   while (i) {
     i -= 1
 
     // now callback:
-    if (callback) {
+    if (callback)
       callback(found)
-    }
 
     nodes.push(found)
   }
@@ -5234,19 +5220,16 @@ const findNodes = function (callback) {
 
 ```ts
 const findNodes = function (callbackObj, callback) {
-  if (typeof callback === 'function') {
+  if (typeof callback === 'function')
     callback.call(callbackObj, found)
-  }
 }
 
 const findNodes = function (callbackObj, callback) {
-  if (typeof callback === 'string') {
+  if (typeof callback === 'string')
     callback = callbackObj[callback]
-  }
 
-  if (typeof callback === 'function') {
+  if (typeof callback === 'function')
     callback.call(callbackObj, found)
-  }
 }
 ```
 
@@ -5282,11 +5265,11 @@ console.log(foo()) // t
 let addEvent = function (el, type, handle) {
   addEvent = el.addEventListener
     ? function (el, type, handle) {
-        el.addEventListener(type, handle, false)
-      }
+      el.addEventListener(type, handle, false)
+    }
     : function (el, type, handle) {
-        el.attachEvent(`on${type}`, handle)
-      }
+      el.attachEvent(`on${type}`, handle)
+    }
 
   // 保持每次调用对外表现行为一致
   addEvent(el, type, handle)
@@ -5337,7 +5320,7 @@ setTimeout('myFunc()', 1000)
 setTimeout('myFunc(1, 2, 3)', 1000)
 // Preferred:
 setTimeout(myFunc, 1000)
-setTimeout(function () {
+setTimeout(() => {
   myFunc(1, 2, 3)
 }, 1000)
 ```

@@ -42,9 +42,8 @@ export default function configureStore(preloadedState) {
 
   const store = createStore(rootReducer, preloadedState, composedEnhancers)
 
-  if (process.env.NODE_ENV !== 'production' && module.hot) {
+  if (process.env.NODE_ENV !== 'production' && module.hot)
     module.hot.accept('./reducers', () => store.replaceReducer(rootReducer))
-  }
 
   return store
 }
@@ -75,9 +74,8 @@ export default function configureAppStore(preloadedState) {
     preloadedState,
   })
 
-  if (process.env.NODE_ENV === 'development' && module.hot) {
+  if (process.env.NODE_ENV === 'development' && module.hot)
     module.hot.accept('./reducers', () => store.replaceReducer(rootReducer))
-  }
 
   return store
 }
@@ -324,9 +322,8 @@ const postsSlice = createSlice({
     reactionAdded(state, action) {
       const { postId, reaction } = action.payload
       const existingPost = state.entities[postId]
-      if (existingPost) {
+      if (existingPost)
         existingPost.reactions[reaction]++
-      }
     },
     postUpdated(state, action) {
       const { id, title, content } = action.payload
@@ -389,7 +386,7 @@ console.log(`The action type is: ${increment}`)
 ```ts
 import { createAction, nanoid } from '@reduxjs/toolkit'
 
-const addTodo = createAction('todos/add', function prepare(text: string) {
+const addTodo = createAction('todos/add', (text: string) => {
   return {
     payload: {
       text,
@@ -409,7 +406,7 @@ console.log(addTodo('Write more docs'))
  *     createdAt: '2019-10-03T07:53:36.581Z'
  *   }
  * }
- **/
+ */
 ```
 
 :::tip RTK Pitfall
@@ -457,11 +454,9 @@ const counterReducer = createReducer(0, {
 ```ts
 function createReducer(initialState, handlers) {
   return function reducer(state = initialState, action) {
-    if (Object.prototype.hasOwnProperty.call(handlers, action.type)) {
+    if (Object.prototype.hasOwnProperty.call(handlers, action.type))
       return handlers[action.type](state, action)
-    } else {
-      return state
-    }
+    else return state
   }
 }
 
@@ -513,9 +508,9 @@ function undoable(reducer) {
       default: {
         // Delegate handling the action to the passed reducer
         const newPresent = reducer(present, action)
-        if (present === newPresent) {
+        if (present === newPresent)
           return state
-        }
+
         return {
           past: [...past, present],
           present: newPresent,
@@ -582,7 +577,7 @@ function isNumberValueAction(
 ```ts
 import { createReducer } from '@reduxjs/toolkit'
 
-const reducer = createReducer(0, builder => {
+const reducer = createReducer(0, (builder) => {
   builder
     .addCase('increment', state => state + 1)
     .addMatcher(
@@ -623,7 +618,7 @@ interface Todo {
 const addTodo = createAction<Todo>('todos/add')
 const toggleTodo = createAction<number>('todos/toggle')
 
-const todosReducer = createReducer([] as Todo[], builder => {
+const todosReducer = createReducer([] as Todo[], (builder) => {
   builder
     .addCase(addTodo, (state, action) => {
       // This push() operation gets translated into
@@ -657,7 +652,7 @@ interface Todo {
 
 const toggleTodo = createAction<number>('todos/toggle')
 
-const todosReducer = createReducer([] as Todo[], builder => {
+const todosReducer = createReducer([] as Todo[], (builder) => {
   builder.addCase(toggleTodo, (state, action) => {
     const index = action.payload
     const todo = state[index]
@@ -760,7 +755,7 @@ const todosSlice = createSlice({
       },
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(incrementBy, (state, action) => {
         // action is inferred correctly here if using TS
@@ -802,7 +797,7 @@ Keep `useSelector` away from returns a new array reference:
 ```ts
 // ❌ Bad: cause always re-render problem
 function App() {
-  const postsForUser = useSelector(state => {
+  const postsForUser = useSelector((state) => {
     const allPosts = selectAllPosts(state)
     // Returns a new array reference every time.
     return allPosts.filter(post => post.user === userId)
@@ -835,8 +830,9 @@ If value returned by selector changes from last time it ran
 ```ts
 // Good
 const selectAllPosts = state => state.posts.posts
-const selectPostById = (state, postId) =>
-  state.posts.posts.find(post => post.id === postId)
+function selectPostById(state, postId) {
+  return state.posts.posts.find(post => post.id === postId)
+}
 
 // Memorized selector function
 const selectPostsByUser = createSelector(
@@ -881,7 +877,7 @@ const selectNestedValue = state => state.some.deeply.nested.field
 const selectTodoById = (state, todoId) => state.todos[todoId]
 
 // ❌ DO NOT memoize: deriving data, but will return a consistent result
-const selectItemsTotal = state => {
+function selectItemsTotal(state) {
   return state.items.reduce((result, item) => {
     return result + item.total
   }, 0)
@@ -904,13 +900,12 @@ recommend using thunks as the standard approach for writing async logic with Red
 function createThunkMiddleware(extraArgument) {
   return ({ dispatch, getState }) =>
     next =>
-    action => {
-      if (typeof action === 'function') {
-        return action(dispatch, getState, extraArgument)
-      }
+      (action) => {
+        if (typeof action === 'function')
+          return action(dispatch, getState, extraArgument)
 
-      return next(action)
-    }
+        return next(action)
+      }
 }
 
 const thunk = createThunkMiddleware()
@@ -1061,7 +1056,7 @@ const usersSlice = createSlice({
   reducers: {
     // Standard reducer logic, with auto-generated action types per reducer.
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     // Add reducers for additional action types and handle loading state as needed.
     builder.addCase(fetchUserById.fulfilled, (state, action) => {
       // Add user to the state array.
@@ -1156,15 +1151,16 @@ const store = createStoreWithMiddleware(todoApp)
  * Schedules actions with { meta: { delay: N } } to be delayed by N milliseconds.
  * Makes `dispatch` return a function to cancel the interval in this case.
  */
-const timeoutScheduler = store => next => action => {
-  if (!action.meta || !action.meta.delay) {
-    return next(action)
-  }
+function timeoutScheduler(store) {
+  return next => (action) => {
+    if (!action.meta || !action.meta.delay)
+      return next(action)
 
-  const intervalId = setTimeout(() => next(action), action.meta.delay)
+    const intervalId = setTimeout(() => next(action), action.meta.delay)
 
-  return function cancel() {
-    clearInterval(intervalId)
+    return function cancel() {
+      clearInterval(intervalId)
+    }
   }
 }
 ```
@@ -1173,10 +1169,12 @@ const timeoutScheduler = store => next => action => {
 
 ```ts
 // thunk middleware
-const thunk = store => next => action =>
-  typeof action === 'function'
-    ? action(store.dispatch, store.getState)
-    : next(action)
+function thunk(store) {
+  return next => action =>
+    typeof action === 'function'
+      ? action(store.dispatch, store.getState)
+      : next(action)
+}
 
 const createStoreWithMiddleware = applyMiddleware(
   logger,
@@ -1187,17 +1185,16 @@ const store = createStoreWithMiddleware(combineReducers(reducers))
 
 function addFave(tweetId) {
   return (dispatch, getState) => {
-    if (getState.tweets[tweetId] && getState.tweets[tweetId].liked) {
+    if (getState.tweets[tweetId] && getState.tweets[tweetId].liked)
       return
-    }
 
     dispatch({ type: IS_LOADING })
     // Yay, that could be sync or async dispatching
     remote.addFave(tweetId).then(
-      res => {
+      (res) => {
         dispatch({ type: ADD_FAVE_SUCCEED })
       },
-      err => {
+      (err) => {
         dispatch({ type: ADD_FAVE_FAILED, err })
       }
     )
@@ -1211,8 +1208,8 @@ store.dispatch(addFave())
 
 ```ts
 export interface Middleware<
-  DispatchExt = {}, // optional override return behavior of `dispatch`
-  S = any, // type of the Redux store state
+  DispatchExt = object,
+  S = any,
   D extends Dispatch = Dispatch, // type of the dispatch method
 > {
   ext: DispatchExt
@@ -1224,9 +1221,9 @@ import type { Middleware } from 'redux'
 import type { RootState } from '../store'
 
 export const exampleMiddleware: Middleware<
-  {}, // Most middleware do not modify the dispatch return value
+  object, // Most middleware do not modify the dispatch return value
   RootState
-> = store => next => action => {
+> = store => next => (action) => {
   const state = store.getState() // correctly typed as RootState
 }
 ```
@@ -1286,8 +1283,8 @@ export const apiSlice = createApi({
 })
 
 // Export the auto-generated hook for the `getPost` query endpoint
-export const { useGetPostQuery, useGetPostsQuery, useAddNewPostMutation } =
-  apiSlice
+export const { useGetPostQuery, useGetPostsQuery, useAddNewPostMutation }
+  = apiSlice
 ```
 
 ```ts
@@ -1308,7 +1305,7 @@ import React from 'react'
 import { useGetPostsQuery } from '../api'
 import { PostExcerpt, Spinner } from '../components'
 
-export const PostsList = () => {
+export function PostsList() {
   const {
     data: posts = [],
     isLoading,
@@ -1325,13 +1322,12 @@ export const PostsList = () => {
 
   let content
 
-  if (isLoading) {
+  if (isLoading)
     content = <Spinner text="Loading..." />
-  } else if (isSuccess) {
+  else if (isSuccess)
     content = sortedPosts.map(post => <PostExcerpt key={post.id} post={post} />)
-  } else if (isError) {
+  else if (isError)
     content = <div>{error.toString()}</div>
-  }
 
   return (
     <section className="posts-list">
@@ -1347,7 +1343,7 @@ export const PostsList = () => {
 import React, { useState } from 'react'
 import { useAddNewPostMutation } from '../api'
 
-export const AddPostForm = () => {
+export function AddPostForm() {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [userId, setUserId] = useState('')
@@ -1363,7 +1359,8 @@ export const AddPostForm = () => {
         setTitle('')
         setContent('')
         setUserId('')
-      } catch (err) {
+      }
+      catch (err) {
         console.error('Failed to save the post: ', err)
       }
     }
@@ -1499,7 +1496,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
     getUsers: builder.query({
       query: () => '/users',
-      transformResponse: responseData => {
+      transformResponse: (responseData) => {
         return usersAdapter.setAll(initialState, responseData)
       },
     }),
@@ -1515,8 +1512,8 @@ const selectUsersData = createSelector(
   usersResult => usersResult.data
 )
 
-export const { selectAll: selectAllUsers, selectById: selectUserById } =
-  usersAdapter.getSelectors(state => selectUsersData(state) ?? initialState)
+export const { selectAll: selectAllUsers, selectById: selectUserById }
+  = usersAdapter.getSelectors(state => selectUsersData(state) ?? initialState)
 ```
 
 ### RTK Query Reference
@@ -1563,9 +1560,9 @@ export default function useActions(actions) {
   const dispatch = useDispatch()
 
   return useMemo(() => {
-    if (Array.isArray(actions)) {
+    if (Array.isArray(actions))
       return actions.map(a => bindActionCreators(a, dispatch))
-    }
+
     return bindActionCreators(actions, dispatch)
   }, [actions, dispatch])
 }
@@ -1600,7 +1597,7 @@ function myThunk() {
 
 ```tsx
 import React from 'react'
-import { hydrate } from 'react-dom'
+import { hydrateRoot } from 'react-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import App from './containers/App'
@@ -1612,7 +1609,7 @@ delete window.__PRELOADED_STATE__
 
 const store = createStore(counterApp, preloadedState)
 
-hydrate(
+hydrateRoot(
   <Provider store={store}>
     <App />
   </Provider>,
@@ -1643,7 +1640,7 @@ app.use(handleRender)
 function handleRender(req, res) {
   // `parseInt` to prevent XSS attack
   const params = qs.parse(req.query)
-  const counter = parseInt(params.counter, 10) || 0
+  const counter = Number.parseInt(params.counter, 10) || 0
 
   const preloadedState = { counter }
   const store = createStore(counterApp, preloadedState)
@@ -1694,17 +1691,14 @@ app.listen(port)
 - Use middleware to change normal dispatch function.
 
 ```ts
-const applyMiddleware =
-  (...middlewares) =>
-  store => {
+function applyMiddleware(...middlewares) {
+  return (store) => {
     // should return (next) => (action) => { ... } function
-    if (middlewares.length === 0) {
+    if (middlewares.length === 0)
       return dispatch => dispatch
-    }
 
-    if (middlewares.length === 1) {
+    if (middlewares.length === 1)
       return middlewares[0]
-    }
 
     // [ (next) => (action) => {...}, ... ] array
     // next: (action) => { ... } function
@@ -1712,12 +1706,13 @@ const applyMiddleware =
 
     return boundMiddlewares.reduce((a, b) => next => a(b(next)))
   }
+}
 
-const createStore = (reducer, middleware) => {
+function createStore(reducer, middleware) {
   // closure for storing global state
   let state
   const subscribers = []
-  const coreDispatch = action => {
+  const coreDispatch = (action) => {
     validateAction(action)
     state = reducer(state, action)
     subscribers.forEach(handler => handler())
@@ -1727,16 +1722,15 @@ const createStore = (reducer, middleware) => {
   const store = {
     dispatch: coreDispatch,
     getState,
-    subscribe: handler => {
+    subscribe: (handler) => {
       subscribers.push(handler)
 
       // unsubscribe function
       return () => {
         const index = subscribers.indexOf(handler)
 
-        if (index > 0) {
+        if (index > 0)
           subscribers.splice(index, 1)
-        }
       }
     },
   }
@@ -1764,18 +1758,16 @@ const createStore = (reducer, middleware) => {
 ### Action Validation
 
 ```ts
-const isValidKey = key => {
+function isValidKey(key) {
   return ['type', 'payload', 'error', 'meta'].includes(key)
 }
 
-const validateAction = action => {
-  if (!action || typeof action !== 'object' || Array.isArray(action)) {
+function validateAction(action) {
+  if (!action || typeof action !== 'object' || Array.isArray(action))
     throw new Error('Action must be an object!')
-  }
 
-  if (typeof action.type === 'undefined') {
+  if (typeof action.type === 'undefined')
     throw new TypeError('Action must have a type!')
-  }
 
   if (!Object.keys(action).every(isValidKey)) {
     throw new Error(
@@ -1793,16 +1785,27 @@ const validateAction = action => {
     `<Consumer>{store => (<WrapperComponent store={store}>)}</Consumer>`
 
 ```tsx
-export const Provider = ({ store, children }) => {
+interface Store {
+  getState: Function
+  subscribe: Function
+  dispatch: Function
+}
+
+export function Provider({
+  store,
+  children,
+}: {
+  store: Store
+  children: ReactElement
+}) {
   const StoreContext = React.createContext(store)
 
   return (
     <StoreContext.Provider value={store}>
       <StoreContext.Consumer>
-        {store => {
+        {(store) => {
           const childrenWithStore = React.Children.map(children, child =>
-            React.cloneElement(child, { store })
-          )
+            React.cloneElement(child, { store }))
 
           return <div>{childrenWithStore}</div>
         }}
@@ -1811,10 +1814,12 @@ export const Provider = ({ store, children }) => {
   )
 }
 
-export const connect =
-  (mapStateToProps = () => ({}), mapDispatchToProps = () => ({})) =>
-  Component => {
-    class Connected extends React.Component {
+function connect(
+  mapStateToProps = () => ({}),
+  mapDispatchToProps = () => ({})
+) {
+  return (Component) => {
+    class Connected extends React.Component<{ store: Store }> {
       onStoreOrPropsChange(props) {
         const { store } = this.props
         const state = store.getState()
@@ -1826,7 +1831,7 @@ export const connect =
         })
       }
 
-      componentWillMount() {
+      UNSAFE_componentWillMount() {
         const { store } = this.props
         this.onStoreOrPropsChange(this.props)
         this.unsubscribe = store.subscribe(() =>
@@ -1834,7 +1839,7 @@ export const connect =
         )
       }
 
-      componentWillReceiveProps(nextProps) {
+      UNSAFE_componentWillReceiveProps(nextProps) {
         this.onStoreOrPropsChange(nextProps)
       }
 
@@ -1849,6 +1854,7 @@ export const connect =
 
     return Connected
   }
+}
 ```
 
 ## Redux Performance
@@ -1931,13 +1937,14 @@ state
   .concat([{ id: 'id', value: 'newValue' }])
   .slice(index + 1)
 // Second way case "EDIT":
-state.map(item => {
+state.map((item) => {
   if (item.id === 'id') {
     return {
       ...item,
       value: 'newValue',
     }
-  } else {
+  }
+  else {
     return item
   }
 })
@@ -1947,20 +1954,24 @@ state.map(item => {
 
 ```ts
 // bad
-const loadTodo = id => async (dispatch, getState) => {
-  // only fetch the todo if it isn't already loaded
-  if (!getState().todos.includes(id)) {
-    const todo = await fetch(`/todos/${id}`)
-    dispatch(addTodo(todo))
+function loadTodo(id) {
+  return async (dispatch, getState) => {
+    // only fetch the todo if it isn't already loaded
+    if (!getState().todos.includes(id)) {
+      const todo = await fetch(`/todos/${id}`)
+      dispatch(addTodo(todo))
+    }
   }
 }
 
 // good
-const loadTodo = (id, todos) => async dispatch => {
-  // only fetch the todo if it isn't already loaded
-  if (!todos.includes(id)) {
-    const todo = await fetch(`/todos/${id}`)
-    dispatch(addTodo(todo))
+function loadTodo(id, todos) {
+  return async (dispatch) => {
+    // only fetch the todo if it isn't already loaded
+    if (!todos.includes(id)) {
+      const todo = await fetch(`/todos/${id}`)
+      dispatch(addTodo(todo))
+    }
   }
 }
 ```

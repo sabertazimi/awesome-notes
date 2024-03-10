@@ -79,11 +79,11 @@ Stale-While-Revalidate:
 
 ```ts
 // eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.open(cacheName).then(function (cache) {
-      cache.match(event.request).then(function (cacheResponse) {
-        fetch(event.request).then(function (networkResponse) {
+    caches.open(cacheName).then((cache) => {
+      cache.match(event.request).then((cacheResponse) => {
+        fetch(event.request).then((networkResponse) => {
           cache.put(event.request, networkResponse)
         })
 
@@ -98,13 +98,14 @@ Cache first, then Network:
 
 ```ts
 // eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.open(cacheName).then(function (cache) {
-      cache.match(event.request).then(function (cacheResponse) {
-        if (cacheResponse) return cacheResponse
+    caches.open(cacheName).then((cache) => {
+      cache.match(event.request).then((cacheResponse) => {
+        if (cacheResponse)
+          return cacheResponse
 
-        return fetch(event.request).then(function (networkResponse) {
+        return fetch(event.request).then((networkResponse) => {
           cache.put(event.request, networkResponse.clone())
           return networkResponse
         })
@@ -118,9 +119,9 @@ Network first, then Cache:
 
 ```ts
 // eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    fetch(event.request).catch(function () {
+    fetch(event.request).catch(() => {
       return caches.match(event.request)
     })
   )
@@ -131,10 +132,10 @@ Cache only:
 
 ```ts
 // eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.open(cacheName).then(function (cache) {
-      cache.match(event.request).then(function (cacheResponse) {
+    caches.open(cacheName).then((cache) => {
+      cache.match(event.request).then((cacheResponse) => {
         return cacheResponse
       })
     })
@@ -146,9 +147,9 @@ Network only:
 
 ```ts
 // eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    fetch(event.request).then(function (networkResponse) {
+    fetch(event.request).then((networkResponse) => {
       return networkResponse
     })
   )
@@ -177,11 +178,12 @@ function isImage(fetchRequest) {
 }
 
 // eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', e => {
+self.addEventListener('fetch', (e) => {
   e.respondWith(
     fetch(e.request)
-      .then(response => {
-        if (response.ok) return response
+      .then((response) => {
+        if (response.ok)
+          return response
 
         // User is online, but response was not ok
         if (isImage(e.request)) {
@@ -189,7 +191,7 @@ self.addEventListener('fetch', e => {
           return caches.match('/broken.png')
         }
       })
-      .catch(err => {
+      .catch((err) => {
         // User is probably offline
         if (isImage(e.request)) {
           // Get broken image placeholder from cache
@@ -201,11 +203,11 @@ self.addEventListener('fetch', e => {
 })
 
 // eslint-disable-next-line no-restricted-globals
-self.addEventListener('install', e => {
+self.addEventListener('install', (e) => {
   // eslint-disable-next-line no-restricted-globals
   self.skipWaiting()
   e.waitUntil(
-    caches.open('precache').then(cache => {
+    caches.open('precache').then((cache) => {
       // Add /broken.png to "precache"
       cache.add('/broken.png')
     })
@@ -217,13 +219,13 @@ self.addEventListener('install', e => {
 
 ```ts
 // eslint-disable-next-line no-restricted-globals
-self.addEventListener('activate', function (event) {
+self.addEventListener('activate', (event) => {
   const cacheWhitelist = ['v2']
 
   event.waitUntil(
-    caches.keys().then(function (keyList) {
+    caches.keys().then((keyList) => {
       return Promise.all([
-        keyList.map(function (key) {
+        keyList.map((key) => {
           return cacheWhitelist.includes(key) ? caches.delete(key) : null
         }),
         // eslint-disable-next-line no-restricted-globals
@@ -281,7 +283,7 @@ export default function CSRPage() {
   React.useEffect(() => {
     axios
       .get('https://worldtimeapi.org/api/ip')
-      .then(res => {
+      .then((res) => {
         setDateTime(res.data.datetime)
       })
       .catch(error => console.error(error))
@@ -316,7 +318,8 @@ the client takes over and the website becomes a SPA.
 if (isBotAgent) {
   // return pre-rendering static html to search engine crawler
   // like Gatsby
-} else {
+}
+else {
   // server side rendering at runtime for real interactive users
   // ReactDOMServer.renderToString()
 }
@@ -368,7 +371,7 @@ import Koa from 'koa'
 import koaStatic from 'koa-static'
 import { Provider } from 'react-redux'
 
-const Routes = [
+const routes = [
   { path: '/', component: Home, exact: true },
   {
     path: '/about',
@@ -377,19 +380,19 @@ const Routes = [
   },
 ]
 
-const getStore = () => {
+function getStore() {
   return createStore(reducer, applyMiddleware(thunk))
 }
 
 const app = new Koa()
 app.use(koaStatic('public'))
 
-app.use(async ctx => {
+app.use(async (ctx) => {
   const store = getStore()
-  const matchedRoutes = matchRoutes(Routes, ctx.request.path)
+  const matchedRoutes = matchRoutes(routes, ctx.request.path)
   const loaders = []
 
-  matchedRoutes.forEach(item => {
+  matchedRoutes.forEach((item) => {
     if (item.route.loadData) {
       // item.route.loadData() 返回的是一个 promise.
       loaders.push(item.route.loadData(store))
@@ -402,7 +405,7 @@ app.use(async ctx => {
   const content = renderToString(
     <Provider store={store}>
       <StaticRouter location={ctx.request.path}>
-        <div>{renderRoutes(Routes)}</div>
+        <div>{renderRoutes(routes)}</div>
       </StaticRouter>
     </Provider>
   )
@@ -451,20 +454,22 @@ const Routes = [
   },
 ]
 
-const getStore = () => {
+function getStore() {
   const defaultState = window.context ? window.context.state : {}
   return createStore(reducer, defaultState, applyMiddleware(thunk))
 }
 
-const App = () => (
-  <Provider store={getStore()}>
-    <BrowserRouter>
-      <div>{renderRoutes(Routes)}</div>
-    </BrowserRouter>
-  </Provider>
-)
+export default function App() {
+  return (
+    <Provider store={getStore()}>
+      <BrowserRouter>
+        <div>{renderRoutes(Routes)}</div>
+      </BrowserRouter>
+    </Provider>
+  )
+}
 
-ReactDOM.hydrate(<App />, document.getElementById('app'))
+ReactDOM.hydrateRoot(<App />, document.getElementById('app'))
 ```
 
 Isomorphic data fetch
@@ -473,10 +478,10 @@ Isomorphic data fetch
 
 ```tsx
 const data = await App.fetchData()
-const App = <App {...data} />
+const app = <App {...data} />
 
 return {
-  html: ReactDOMServer.renderToString(App),
+  html: ReactDOMServer.renderToString(app),
   state: { data },
 }
 ```
@@ -497,6 +502,7 @@ export default function SSRPage({ dateTime }: SSRPageProps) {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const getServerSideProps: GetServerSideProps = async () => {
   const res = await axios.get('https://worldtimeapi.org/api/ip')
 
@@ -573,6 +579,7 @@ export default function SSGPage({ dateTime }: SSGPageProps) {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const getStaticProps: GetStaticProps = async () => {
   const res = await axios.get('https://worldtimeapi.org/api/ip')
 
@@ -602,6 +609,7 @@ export default function ISR20Page({ dateTime }: ISR20PageProps) {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const getStaticProps: GetStaticProps = async () => {
   const res = await axios.get('https://worldtimeapi.org/api/ip')
 
@@ -640,7 +648,7 @@ export const getStaticProps: GetStaticProps = async () => {
 ```tsx
 import { Helmet } from 'react-helmet'
 
-function App() {
+export default function App() {
   const seo = {
     title: 'About',
     description:
@@ -1159,7 +1167,7 @@ babel.transform('code();', options)
 // => { code, map, ast }
 
 // 文件转码 (异步)
-babel.transformFile('filename.js', options, function (err, result) {
+babel.transformFile('filename.js', options, (err, result) => {
   process(err)
   return result // => { code, map, ast }
 })
@@ -1193,7 +1201,7 @@ Use Babel to refactor code:
 
 ```ts
 // index.js
-module.exports = babel => {
+module.exports = (babel) => {
   const t = babel.types
   let isJSXExisted = false
   let isMeactContextEnabled = false
@@ -1202,20 +1210,18 @@ module.exports = babel => {
     visitor: {
       Program: {
         exit(path) {
-          if (isJSXExisted === true && isMeactContextEnabled === false) {
+          if (isJSXExisted === true && isMeactContextEnabled === false)
             throw path.buildCodeFrameError(`Meact isn't in current context!`)
-          }
         },
       },
       ImportDeclaration(path, state) {
-        if (path.node.specifiers[0].local.name === 'Meact') {
+        if (path.node.specifiers[0].local.name === 'Meact')
           isMeactContextEnabled = true
-        }
       },
       MemberExpression(path, state) {
         if (
-          path.node.object.name === 'React' &&
-          path.node.property.name === 'createElement'
+          path.node.object.name === 'React'
+          && path.node.property.name === 'createElement'
         ) {
           isJSXExisted = true
           path.replaceWith(
@@ -1266,13 +1272,13 @@ const defaultTargets = {
   ucandroid: 1,
 }
 
-const buildTargets = options => {
+function buildTargets(options) {
   return Object.assign({}, defaultTargets, options.additionalTargets)
 }
 
 module.exports = function buildMeactPreset(context, options) {
-  const transpileTargets =
-    (options && options.targets) || buildTargets(options || {})
+  const transpileTargets
+    = (options && options.targets) || buildTargets(options || {})
 
   return {
     presets: [
@@ -1395,7 +1401,7 @@ module.exports = {
       '~': path.resolve(__dirname, 'src'),
       '@': path.resolve(__dirname, 'src'),
       '~@': path.resolve(__dirname, 'src'),
-      vendor: path.resolve(__dirname, 'src/vendor'),
+      'vendor': path.resolve(__dirname, 'src/vendor'),
       '~component': path.resolve(__dirname, 'src/components'),
       '~config': path.resolve(__dirname, 'config'),
     },
@@ -1683,7 +1689,7 @@ module.exports = {
         test: /\.svg/,
         type: 'asset/inline',
         generator: {
-          dataUrl: content => {
+          dataUrl: (content) => {
             content = content.toString()
             return svgToMiniDataURI(content)
           },
@@ -1882,7 +1888,7 @@ const config = new webpack.optimize.CommonsChunkPlugin({
   // This option is not permitted if you're using `options.async` as well,
   // see below for more details.
 
-  minChunks: number | Infinity | fn,
+  minChunks: number | Number.POSITIVE_INFINITY | fn,
   // (module, count) => boolean,
   // The minimum number of chunks which need to contain a module
   // before it's moved into the commons chunk.
@@ -1924,8 +1930,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 const isEnvProduction = process.env.NODE_ENV === 'production'
-const isEnvProductionProfile =
-  isEnvProduction && process.argv.includes('--profile')
+const isEnvProductionProfile
+  = isEnvProduction && process.argv.includes('--profile')
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false'
 
 module.exports = {
@@ -2089,8 +2095,8 @@ module.exports = {
             const resource = module.nameForCondition?.()
             return resource
               ? topLevelFrameworkPaths.some(pkgPath =>
-                  resource.startsWith(pkgPath)
-                )
+                resource.startsWith(pkgPath)
+              )
               : false
           },
           priority: 40,
@@ -2102,8 +2108,8 @@ module.exports = {
             nameForCondition: Function
           }): boolean {
             return (
-              module.size() > 160000 &&
-              /node_modules[/\\]/.test(module.nameForCondition() || '')
+              module.size() > 160000
+              && /node_modules[/\\]/.test(module.nameForCondition() || '')
             )
           },
           name(module: {
@@ -2114,7 +2120,8 @@ module.exports = {
             const hash = crypto.createHash('sha1')
             if (isModuleCSS(module)) {
               module.updateHash(hash)
-            } else {
+            }
+            else {
               if (!module.libIdent) {
                 throw new Error(
                   `Encountered unknown module type: ${module.type}.`
@@ -2165,7 +2172,7 @@ const config = new HardSourceWebpackPlugin({
   // Either an absolute path or relative to webpack options.context.
   cacheDirectory: 'node_modules/.cache/hard-source/[confighash]',
   // Either a string of object hash function given a webpack config.
-  configHash: webpackConfig => {
+  configHash: (webpackConfig) => {
     // node-object-hash on npm can be used to build this.
     return require('node-object-hash')({ sort: false }).hash(webpackConfig)
   },
@@ -2308,11 +2315,11 @@ Webpack 5 support out of box cache.
 module.exports = {
   plugins: [
     function () {
-      this.hooks.done.tap('done', stats => {
+      this.hooks.done.tap('done', (stats) => {
         if (
-          stats.compilation.errors &&
-          stats.compilation.errors.length &&
-          !process.argv.includes('--watch')
+          stats.compilation.errors
+          && stats.compilation.errors.length
+          && !process.argv.includes('--watch')
         ) {
           // Process build errors.
           process.exit(1)
@@ -2338,11 +2345,11 @@ const scripts = [
 
 class HotLoad {
   apply(compiler) {
-    compiler.hooks.beforeRun.tap('UpdateVersion', compilation => {
+    compiler.hooks.beforeRun.tap('UpdateVersion', (compilation) => {
       compilation.options.output.publicPath = `./${version}/`
     })
 
-    compiler.hooks.compilation.tap('HotLoadPlugin', compilation => {
+    compiler.hooks.compilation.tap('HotLoadPlugin', (compilation) => {
       HtmlWebpackPlugin.getHooks(compilation).alterAssetTags.tapAsync(
         'HotLoadPlugin',
         (data, cb) => {
@@ -2376,21 +2383,21 @@ const { version } = require('../../package.json')
 
 /**
  * @typedef {object} BuildOutputOptions
- * @property {boolean} clearConsole
- * @property {boolean} showRelated
- **/
+ * @property {boolean} clearConsole console cleared
+ * @property {boolean} showRelated show related
+ */
 
 /**
  * @typedef {object} StatsAsset
- * @property {string} name
- * @property {number} size
- * @property {StatsAsset[]|{}} related
- **/
+ * @property {string} name name
+ * @property {number} size size
+ * @property {StatsAsset[]|{}} related related
+ */
 
 /**
  * @typedef {object} StatsData
- * @property {StatsAsset[]} assets
- **/
+ * @property {StatsAsset[]} assets assets
+ */
 
 class BuildOutputPlugin {
   /**
@@ -2408,18 +2415,15 @@ class BuildOutputPlugin {
    * @param {import('webpack').Compiler} compiler
    */
   apply(compiler) {
-    if (process.env.NODE_ENV === 'test') {
+    if (process.env.NODE_ENV === 'test')
       return
-    }
 
-    compiler.hooks.done.tap('BuildOutputPlugin', stats => {
-      if (stats.hasErrors()) {
+    compiler.hooks.done.tap('BuildOutputPlugin', (stats) => {
+      if (stats.hasErrors())
         return false
-      }
 
-      if (this.options.clearConsole) {
+      if (this.options.clearConsole)
         this.clearConsole()
-      }
 
       const data = stats.toJson({
         assets: true,
@@ -2435,9 +2439,8 @@ class BuildOutputPlugin {
         chalk.green.bold(`✔ Compiled Successfully in ${data.time}ms`)
       )
 
-      if (data.assets.length) {
+      if (data.assets.length)
         console.log(this.statsTable(data))
-      }
     })
   }
 
@@ -2474,7 +2477,7 @@ class BuildOutputPlugin {
    * Generate the stats table.
    *
    * @param {StatsData} data
-   * @returns {string}
+   * @returns {string} return
    */
   statsTable(data) {
     const assets = this.sortAssets(data)
@@ -2489,9 +2492,8 @@ class BuildOutputPlugin {
       },
     })
 
-    for (const asset of assets) {
+    for (const asset of assets)
       table.push([chalk.green(asset.name), formatSize(asset.size)])
-    }
 
     this.extendTableWidth(table)
     this.monkeyPatchTruncate()
@@ -2536,12 +2538,15 @@ class BuildOutputPlugin {
    * @param {number|null} targetWidth
    * @param {number} maxWidth
    */
-  extendTableWidth(table, targetWidth = null, maxWidth = Infinity) {
+  extendTableWidth(
+    table,
+    targetWidth = null,
+    maxWidth = Number.POSITIVE_INFINITY
+  ) {
     targetWidth = targetWidth === null ? process.stdout.columns : targetWidth
 
-    if (!targetWidth) {
+    if (!targetWidth)
       return
-    }
 
     const tableWidth = this.calculateTableWidth(table)
     const fileColIncrease = Math.min(
@@ -2549,18 +2554,16 @@ class BuildOutputPlugin {
       maxWidth - tableWidth
     )
 
-    if (fileColIncrease <= 0) {
+    if (fileColIncrease <= 0)
       return
-    }
 
     // @ts-expect-error Should error
     table.options.colWidths[0] += fileColIncrease
   }
 
   monkeyPatchTruncate() {
-    if (this.patched) {
+    if (this.patched)
       return
-    }
 
     this.patched = true
 
@@ -2575,9 +2578,8 @@ class BuildOutputPlugin {
      * @param {string} truncateChar
      */
     utils.truncate = (str, desiredLength, truncateChar) => {
-      if (stripAnsi(str).length > desiredLength) {
+      if (stripAnsi(str).length > desiredLength)
         str = `…${str.substr(-desiredLength + 2)}`
-      }
 
       return oldTruncate(str, desiredLength, truncateChar)
     }
@@ -2692,7 +2694,7 @@ export default defineConfig({
       external: ['react', 'react-dom'],
       output: {
         globals: {
-          react: 'React',
+          'react': 'React',
           'react-dom': 'ReactDOM',
         },
       },

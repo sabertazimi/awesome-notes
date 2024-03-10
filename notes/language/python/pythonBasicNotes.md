@@ -328,7 +328,6 @@ xml_data = tree.getroot()
 
 xmlStr = ET.tostring(xml_data, encoding='utf8', method='xml')
 
-
 data_dict = dict(xmltodict.parse(xmlStr))
 
 print(data_dict)
@@ -559,7 +558,6 @@ dz = [1,2,3,4,5,6,7,8,9,10]
 
 ax1.bar3d(x3, y3, z3, dx, dy, dz)
 
-
 ax1.set_xlabel('x axis')
 ax1.set_ylabel('y axis')
 ax1.set_zlabel('z axis')
@@ -618,7 +616,6 @@ def latexify(fig_width=None, fig_height=None, columns=1):
     }
 
     matplotlib.rcParams.update(params)
-
 
 def format_axes(ax):
 

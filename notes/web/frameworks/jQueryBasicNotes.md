@@ -20,21 +20,20 @@ function Callbacks(options) {
   const self = {
     add(fn) {
       if (options === 'unique') {
-        if (!list.includes(fn)) {
+        if (!list.includes(fn))
           list.push(fn)
-        }
-      } else {
+      }
+      else {
         list.push(fn)
       }
     },
     fire(args) {
-      list.forEach(fn => {
+      list.forEach((fn) => {
         fn(args)
       })
 
-      if (options === 'once') {
+      if (options === 'once')
         list = undefined
-      }
     },
   }
 
@@ -52,9 +51,8 @@ class Promise {
   // function is responsible for calling `resolve()` or `reject()` to say that
   // the async operation succeeded (resolved) or failed (rejected).
   constructor(executor) {
-    if (typeof executor !== 'function') {
+    if (typeof executor !== 'function')
       throw new TypeError('Executor must be a function')
-    }
 
     // Internal state. `$state` is the state of the promise, and `$chained` is
     // an array of the functions we need to call once this promise is settled.
@@ -62,15 +60,14 @@ class Promise {
     this.$chained = []
 
     // Implement `resolve()` and `reject()` for the executor function to use
-    const resolve = res => {
+    const resolve = (res) => {
       // A promise is considered "settled" when it is no longer
       // pending, that is, when either `resolve()` or `reject()`
       // was called once. Calling `resolve()` or `reject()` twice
       // or calling `reject()` after `resolve()` was already called
       // are no-ops.
-      if (this.$state !== 'PENDING') {
+      if (this.$state !== 'PENDING')
         return
-      }
 
       // If `res` is a "thenable", lock in this promise to match the
       // resolved or rejected state of the thenable.
@@ -88,24 +85,19 @@ class Promise {
 
       // If somebody called `.then()` while this promise was pending, need
       // to call their `onFulfilled()` function
-      for (const { onFulfilled } of this.$chained) {
-        onFulfilled(res)
-      }
+      for (const { onFulfilled } of this.$chained) onFulfilled(res)
 
       return res
     }
 
-    const reject = err => {
-      if (this.$state !== 'PENDING') {
+    const reject = (err) => {
+      if (this.$state !== 'PENDING')
         return
-      }
 
       this.$state = 'REJECTED'
       this.$internalValue = err
 
-      for (const { onRejected } of this.$chained) {
-        onRejected(err)
-      }
+      for (const { onRejected } of this.$chained) onRejected(err)
     }
 
     // Call the executor function with `resolve()` and `reject()` as in the spec.
@@ -115,7 +107,8 @@ class Promise {
       // only be called once, a function that synchronously calls `resolve()`
       // and then throws will lead to a fulfilled promise and a swallowed error
       executor(resolve, reject)
-    } catch (err) {
+    }
+    catch (err) {
       reject(err)
     }
   }
@@ -128,31 +121,35 @@ class Promise {
       // Ensure that errors in `onFulfilled()` and `onRejected()` reject the
       // returned promise, otherwise they'll crash the process. Also, ensure
       // that the promise
-      const _onFulfilled = res => {
+      const _onFulfilled = (res) => {
         try {
           // If `onFulfilled()` returns a promise, trust `resolve()` to handle
           // it correctly.
           // store new value to new Promise
           resolve(onFulfilled(res))
-        } catch (err) {
+        }
+        catch (err) {
           reject(err)
         }
       }
 
-      const _onRejected = err => {
+      const _onRejected = (err) => {
         try {
           // store new value to new Promise
           reject(onRejected(err))
-        } catch (_err) {
+        }
+        catch (_err) {
           reject(_err)
         }
       }
 
       if (this.$state === 'FULFILLED') {
         _onFulfilled(this.$internalValue)
-      } else if (this.$state === 'REJECTED') {
+      }
+      else if (this.$state === 'REJECTED') {
         _onRejected(this.$internalValue)
-      } else {
+      }
+      else {
         this.$chained.push({
           onFulfilled: _onFulfilled,
           onRejected: _onRejected,
@@ -267,7 +264,7 @@ $('selector').prop('disable', 'true')
 - unload
 
 ```ts
-$(window).scroll(function (event) {})
+$(window).scroll((event) => {})
 $(document).height() // 返回整个网页的高度
 $(window).height() // 返回窗口高度
 $(window).scrollTop() // 返回滚动条距网页顶部距离
@@ -279,7 +276,7 @@ $(window).scrollTop() // 返回滚动条距网页顶部距离
 $(selector).data()
 $(selector).html()
 $(selector).css()
-$(document).ready(function () {})
+$(document).ready(() => {})
 ```
 
 ## AJAX Module
@@ -291,7 +288,7 @@ $(document).ready(function () {})
 ```ts
 $.getJSON(url, data, success(data, statusCode, xhr))
 
-$.getJSON('test.js', function (json) {
+$.getJSON('test.js', (json) => {
   alert(`JSON Data: ${json.users[3].name}`)
 })
 ```

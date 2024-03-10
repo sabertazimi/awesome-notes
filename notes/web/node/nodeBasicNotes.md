@@ -163,8 +163,9 @@ const versionIncrements = ['patch', 'minor', 'major']
 
 const inc = i => semver.inc(currentVersion, i)
 const bin = name => path.resolve(__dirname, `../node_modules/.bin/${name}`)
-const run = (bin, args, opts = {}) =>
-  execa(bin, args, { stdio: 'inherit', ...opts })
+function run(bin, args, opts = {}) {
+  return execa(bin, args, { stdio: 'inherit', ...opts })
+}
 const step = msg => console.log(chalk.cyan(msg))
 
 async function main() {
@@ -186,13 +187,13 @@ async function main() {
         initial: currentVersion,
       })
     ).version
-  } else {
+  }
+  else {
     targetVersion = release.match(/\((.*)\)/)[1]
   }
 
-  if (!semver.valid(targetVersion)) {
+  if (!semver.valid(targetVersion))
     throw new Error(`Invalid target version: ${targetVersion}`)
-  }
 
   const { yes: tagOk } = await prompt({
     type: 'confirm',
@@ -200,9 +201,8 @@ async function main() {
     message: `Releasing v${targetVersion}. Confirm?`,
   })
 
-  if (!tagOk) {
+  if (!tagOk)
     return
-  }
 
   // Update the package version.
   step('\nUpdating the package version...')
@@ -223,9 +223,8 @@ async function main() {
     message: `Changelog generated. Does it look good?`,
   })
 
-  if (!changelogOk) {
+  if (!changelogOk)
     return
-  }
 
   // Commit changes to the Git and create a tag.
   step('\nCommitting changes...')
@@ -738,12 +737,12 @@ pnpm config set registry https://registry.npmmirror.com/
 ```ts
 function foo(x, y, callback) {
   try {
-    if (paramNotValid()) {
+    if (paramNotValid())
       throw new Error('Invalid parameters!')
-    } else {
+    else
       callback(null, param)
-    }
-  } catch (error) {
+  }
+  catch (error) {
     callback(error, param)
   }
 }
@@ -752,12 +751,11 @@ function foo(x, y, callback) {
 - 使用模块
 
 ```ts
-foo(a, b, function (err, param) {
-  if (err) {
+foo(a, b, (err, param) => {
+  if (err)
     processError()
-  } else {
+  else
     process()
-  }
 })
 ```
 
@@ -774,7 +772,7 @@ module.exports = function (args) {
 - 向定义最内层回调,可避免回套嵌套
 
 ```ts
-server.on('request', function (req, res) {
+server.on('request', (req, res) => {
   const render = function (wsData) {
     page = pageRender(req, session, userData, wsData)
   }
@@ -925,7 +923,7 @@ process.stdin.pipe(process.stdout)
   [library](https://github.com/godaddy/terminus).
 
 ```ts
-process.on('uncaughtException', err => {
+process.on('uncaughtException', (err) => {
   console.log(`Uncaught exception: ${err.message}.`)
   process.exit(1)
 })
@@ -934,30 +932,30 @@ process.on('uncaughtException', (reason, promise) => {
   process.exit(1)
 })
 
-process.on('SIGHUP', signal => {
+process.on('SIGHUP', (signal) => {
   console.log(`Process ${process.pid} received a SIGHUP signal.`)
   process.exit(0)
 })
-process.on('SIGINT', signal => {
+process.on('SIGINT', (signal) => {
   console.log(`Process ${process.pid} has been interrupted.`)
   process.exit(0)
 })
-process.on('SIGQUIT', signal => {
+process.on('SIGQUIT', (signal) => {
   console.log(`Process ${process.pid} received a SIGQUIT signal.`)
   process.exit(0)
 })
-process.on('SIGTERM', signal => {
+process.on('SIGTERM', (signal) => {
   console.log(`Process ${process.pid} received a SIGTERM signal.`)
   process.exit(0)
 })
 
-process.on('beforeExit', code => {
+process.on('beforeExit', (code) => {
   setTimeout(() => {
     console.log(`Process will exit with code: ${code}.`)
     process.exit(code)
   })
 })
-process.on('exit', code => {
+process.on('exit', (code) => {
   console.log(`Process exited with code: ${code}.`)
 })
 ```
@@ -997,7 +995,7 @@ cp.exec(
     cwd: null,
     env: null,
   },
-  function (err, stdout, stderr) {
+  (err, stdout, stderr) => {
     if (!err) {
       console.log(stdout)
       console.log(stderr)
@@ -1028,7 +1026,8 @@ const {
 } = require('node:worker_threads')
 
 function fibonacci(num) {
-  if (num <= 1) return num
+  if (num <= 1)
+    return num
   return fibonacci(num - 1) + fibonacci(num - 2)
 }
 
@@ -1040,13 +1039,13 @@ if (isMainThread) {
       })
       worker.on('message', resolve)
       worker.on('error', reject)
-      worker.on('exit', code => {
-        if (code !== 0) {
+      worker.on('exit', (code) => {
+        if (code !== 0)
           reject(new Error(`Worker stopped with exit code ${code}`))
-        }
       })
     })
-} else {
+}
+else {
   const result = fibonacci(workerData)
   parentPort.postMessage(result)
   process.exit(0)
@@ -1071,7 +1070,8 @@ http
       const result = await fibonacciWorker(n)
       res.writeHead(200)
       return res.end(`Result: ${result}\n`)
-    } else {
+    }
+    else {
       res.writeHead(200)
       return res.end('Hello World!')
     }
@@ -1115,10 +1115,10 @@ function readFile(filename) {
 }
 
 readFile('example.txt')
-  .then(contents => {
+  .then((contents) => {
     console.log(contents)
   })
-  .catch(err => {
+  .catch((err) => {
     console.error(err.message)
   })
 ```
@@ -1131,23 +1131,21 @@ async function* walk(dir: string): AsyncGenerator<string> {
   for await (const d of await fs.opendir(dir)) {
     const entry = join(dir, d.name)
 
-    if (d.isDirectory()) {
-      yield* walk(entry)
-    } else if (d.isFile()) {
+    if (d.isDirectory())
+      yield * walk(entry)
+    else if (d.isFile())
       yield entry
-    }
   }
 }
 
 async function run(arg = '.') {
-  if ((await fs.lstat(arg)).isFile()) {
+  if ((await fs.lstat(arg)).isFile())
     return runTestFile(arg)
-  }
 
   for await (const file of walk(arg)) {
     if (
-      !dirname(file).includes('node_modules') &&
-      (basename(file) === 'test.js' || file.endsWith('.test.js'))
+      !dirname(file).includes('node_modules')
+      && (basename(file) === 'test.js' || file.endsWith('.test.js'))
     ) {
       console.log(file)
       await runTestFile(file)
@@ -1160,17 +1158,18 @@ async function run(arg = '.') {
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-const traverse = async directory => {
+async function traverse(directory) {
   const files = await fs.readdir(directory)
 
-  files.forEach(async file => {
+  files.forEach(async (file) => {
     const filePath = path.join(directory, file)
     const fileStat = await fs.stat(filePath)
 
     if (fileStat.isFile()) {
       const content = await fs.readFile(filePath, 'utf-8')
       console.log(content)
-    } else if (fileStat.isDirectory()) {
+    }
+    else if (fileStat.isDirectory()) {
       await traverse(filePath)
     }
   })
@@ -1182,12 +1181,11 @@ module.exports = function ls(dirName, fileType, callback) {
   const fs = require('node:fs')
   const path = require('node:path')
 
-  fs.readdir(dirName, function (err, list) {
-    if (err) {
+  fs.readdir(dirName, (err, list) => {
+    if (err)
       return callback(err)
-    }
 
-    list = list.filter(function (file) {
+    list = list.filter((file) => {
       return path.extname(file) === `.${fileType}`
     })
 
@@ -1248,13 +1246,13 @@ typedef Stream response
 - 监听事件
 
 ```ts
-response.on('data', function (data) {
+response.on('data', (data) => {
   process(data)
 })
-response.on('error', function (err) {
+response.on('error', (err) => {
   console.error(err)
 })
-response.on('end', function () {
+response.on('end', () => {
   stream.end()
 })
 ```
@@ -1278,18 +1276,18 @@ response.writeHead(200, { 'Content-Type': '' })
 ### Http Get
 
 ```ts
-http.get(url, function callback(response) {})
+http.get(url, (response) => {})
 ```
 
 ```ts
-http.get(url, function (response) {
+http.get(url, (response) => {
   let pipeData = ''
 
   response.setEncoding('utf8')
-  response.on('data', function (data) {
+  response.on('data', (data) => {
     pipeData += data
   })
-  response.on('end', function () {
+  response.on('end', () => {
     console.log(pipeData.length)
     console.log(pipeData)
   })
@@ -1299,7 +1297,7 @@ http.get(url, function (response) {
 ### Http Server
 
 ```ts
-const server = http.createServer(function (request, response) {
+const server = http.createServer((request, response) => {
   // 处理请求的逻辑...
 })
 server.listen(8000)
@@ -1313,18 +1311,18 @@ const chatServer = net.createServer()
 // 用于检测僵尸客户端,用于及时清楚僵尸客户端
 const clientList = []
 
-chatServer.on('connection', function (client) {
+chatServer.on('connection', (client) => {
   client.name = `${client.remoteAddress}:${client.remotePort}`
   client.write(`Hi ${client.name}!\n`)
   clientList.push(client)
 
-  client.on('data', function (data) {
+  client.on('data', (data) => {
     broadcast(data, client)
   })
-  client.on('end', function () {
+  client.on('end', () => {
     clientList.splice(clientList.indexOf(client), 1)
   })
-  client.on('error', function (e) {
+  client.on('error', (e) => {
     console.log(e)
   })
 })
@@ -1337,7 +1335,8 @@ function broadcast(message, client) {
     if (client !== clientList[i]) {
       if (clientList[i].writable) {
         clientList[i].write(`${client.name} says ${message}`)
-      } else {
+      }
+      else {
         cleanup.push(clientList[i])
         clientList[i].destroy()
       }
@@ -1345,9 +1344,8 @@ function broadcast(message, client) {
   }
 
   // 清楚僵尸客户端
-  for (let i = 0; i < cleanup.length; i += 1) {
+  for (let i = 0; i < cleanup.length; i += 1)
     clientList.splice(clientList.indexOf(cleanup[i]), 1)
-  }
 }
 
 chatServer.listen(9000)
@@ -1372,7 +1370,7 @@ const io = require('socket.io')
 const sockFile = fs.readFileSync('socket.html')
 
 server = http.createServer()
-server.on('request', function (req, res) {
+server.on('request', (req, res) => {
   res.writeHead(200, { 'content-type': 'text/html' })
   res.end(sockFile)
 })
@@ -1381,20 +1379,20 @@ server.listen(8080)
 const socket = io.listen(server)
 
 // 命名空间
-socket.of('/upAndRunning').on('connection', function (client) {
+socket.of('/upAndRunning').on('connection', (client) => {
   console.log('Client connected to Up and Running namespace.')
-  client.send("Welcome to 'Up and Running'")
+  client.send('Welcome to \'Up and Running\'')
 })
-socket.of('/weather').on('connection', function (client) {
+socket.of('/weather').on('connection', (client) => {
   console.log('Client connected to Weather namespace.')
-  client.send("Welcome to 'Weather Updates'")
+  client.send('Welcome to \'Weather Updates\'')
 })
 ```
 
 ### Basic Methods
 
 ```ts
-const serverInstance = net.createServer(function callback(socket) {})
+const serverInstance = net.createServer((socket) => {})
 
 serverInstance.listen(portNumber) // 开始监听特定端口
 ```
@@ -1432,14 +1430,14 @@ url.parse(request.url, true)
 ```ts
 const dns = require('node:dns')
 
-dns.lookup('google.com', 4, function (e, a) {
+dns.lookup('google.com', 4, (e, a) => {
   console.log(a)
 })
 
-dns.resolve('tazimi.tk', 'A', function (e, r) {
-  if (e) {
+dns.resolve('tazimi.tk', 'A', (e, r) => {
+  if (e)
     console.log(e)
-  }
+
   console.log(JSON.stringify(r, null, 2))
 })
 ```
@@ -1447,20 +1445,18 @@ dns.resolve('tazimi.tk', 'A', function (e, r) {
 ```ts
 const dns = require('node:dns')
 
-dns.resolve('tazimi.dev', 'A', function (err, res) {
-  if (err) {
+dns.resolve('tazimi.dev', 'A', (err, res) => {
+  if (err)
     console.log(err)
-  } else {
+  else
     console.log(`A: ${JSON.stringify(res, null, 2)}`)
-  }
 })
 
-dns.resolve('github.com', 'MX', function (err, res) {
-  if (err) {
+dns.resolve('github.com', 'MX', (err, res) => {
+  if (err)
     console.log(err)
-  } else {
+  else
     console.log(`MX: ${JSON.stringify(res, null, 2)}`)
-  }
 })
 ```
 
@@ -1517,15 +1513,15 @@ const heapWarn = 50 * 1024 * 1024
 const workers = {}
 
 if (cluster.isMaster) {
-  for (let i = 0; i < numCPUs; i++) {
+  for (let i = 0; i < numCPUs; i++)
     createWorker()
-  }
-  setInterval(function () {
+
+  setInterval(() => {
     const time = new Date().getTime()
     for (pid in workers) {
       if (
-        Object.prototype.hasOwnProperty.call(workers, pid) &&
-        workers[pid].lastCb + 5000 < time
+        Object.prototype.hasOwnProperty.call(workers, pid)
+        && workers[pid].lastCb + 5000 < time
       ) {
         console.log(`Long running worker ${pid} killed`)
         workers[pid].worker.kill()
@@ -1534,23 +1530,23 @@ if (cluster.isMaster) {
       }
     }
   }, 1000)
-} else {
+}
+else {
   // Server
   http
-    .Server(function (req, res) {
+    .Server((req, res) => {
       // mess up 1 in 200 request
       if (Math.floor(Math.random() * 200) === 4) {
         console.log(`Stopped ${process.pid} from ever finishing`)
-        while (true) {
+        while (true)
           continue
-        }
       }
       res.writeHead(200)
       res.end(`hello world from ${process.pid}\n`)
     })
     .listen(8000)
   // Report stats once a second
-  setInterval(function report() {
+  setInterval(() => {
     process.send({
       cmd: 'reportMem',
       memory: process.memoryUsage(),
@@ -1565,12 +1561,11 @@ function createWorker() {
 
   // allow boot time
   workers[worker.pid] = { worker, lastCb: new Date().getTime() - 1000 }
-  worker.on('message', function (m) {
+  worker.on('message', (m) => {
     if (m.cmd === 'reportMem') {
       workers[m.process].lastCb = new Date().getTime()
-      if (m.memory.rss > rssWarn) {
+      if (m.memory.rss > rssWarn)
         console.log(`Worker ${m.process} using too much memory.`)
-      }
     }
   })
 }
@@ -1633,7 +1628,7 @@ const allProducts = []
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-const getHtmlPlaywright = async url => {
+async function getHtmlPlaywright(url) {
   const browser = await playwright.firefox.launch()
   const context = await browser.newContext()
   const page = await context.newPage()
@@ -1644,18 +1639,18 @@ const getHtmlPlaywright = async url => {
   return html
 }
 
-const getHtmlAxios = async url => {
+async function getHtmlAxios(url) {
   const { data } = await axios.get(url)
 
   return data
 }
 
-const getHtml = async url => {
+async function getHtml(url) {
   return useHeadless ? await getHtmlPlaywright(url) : await getHtmlAxios(url)
 }
 
-const extractContent = $ =>
-  $('.product')
+function extractContent($) {
+  return $('.product')
     .map((_, product) => {
       const $product = $(product)
 
@@ -1666,16 +1661,19 @@ const extractContent = $ =>
       }
     })
     .toArray()
+}
 
-const extractLinks = $ => [
-  ...new Set(
-    $('.page-numbers a')
-      .map((_, a) => $(a).attr('href'))
-      .toArray()
-  ),
-]
+function extractLinks($) {
+  return [
+    ...new Set(
+      $('.page-numbers a')
+        .map((_, a) => $(a).attr('href'))
+        .toArray()
+    ),
+  ]
+}
 
-const crawl = async url => {
+async function crawl(url) {
   visited.add(url)
   console.log('Crawl: ', url)
   const html = await getHtml(url)
@@ -1684,7 +1682,7 @@ const crawl = async url => {
   const links = extractLinks($)
   links
     .filter(link => !visited.has(link))
-    .forEach(link => {
+    .forEach((link) => {
       q.enqueue(crawlTask, link)
     })
   allProducts.push(...content)
@@ -1694,16 +1692,15 @@ const crawl = async url => {
 }
 
 // Change the default concurrency or pass it as param
-const queue = (concurrency = 4) => {
+function queue(concurrency = 4) {
   let running = 0
   const tasks = []
 
   return {
     enqueue: async (task, ...params) => {
       tasks.push({ task, params })
-      if (running >= concurrency) {
+      if (running >= concurrency)
         return
-      }
 
       ++running
       while (tasks.length) {
@@ -1715,15 +1712,14 @@ const queue = (concurrency = 4) => {
   }
 }
 
-const crawlTask = async url => {
+async function crawlTask(url) {
   if (visited.size >= maxVisits) {
     console.log('Over Max Visits, exiting')
     return
   }
 
-  if (visited.has(url)) {
+  if (visited.has(url))
     return
-  }
 
   await crawl(url)
 }

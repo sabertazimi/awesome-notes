@@ -373,11 +373,10 @@ class SnapshotSandbox {
     this.windowSnapshot = {} // 快照.
 
     for (const prop in window) {
-      if (window.hasOwn(prop)) {
+      if (window.hasOwn(prop))
         this.windowSnapshot[prop] = window[prop]
-      }
 
-      Object.keys(this.modifyPropsMap).forEach(p => {
+      Object.keys(this.modifyPropsMap).forEach((p) => {
         window[p] = this.modifyPropsMap[p]
       })
     }
@@ -418,7 +417,8 @@ function ProxySandbox(code) {
         return true
       },
       get(target, key) {
-        if (key === Symbol.unscopables) return undefined
+        if (key === Symbol.unscopables)
+          return undefined
         return target[key]
       },
     })
@@ -434,18 +434,16 @@ class SandboxWindow {
   constructor(context, frameWindow) {
     return new Proxy(frameWindow, {
       get(target, name) {
-        if (name in context) {
+        if (name in context)
           return context[name]
-        } else if (typeof target[name] === 'function' && /^[a-z]/.test(name)) {
+        else if (typeof target[name] === 'function' && /^[a-z]/.test(name))
           return target[name].bind && target[name].bind(target)
-        } else {
-          return target[name]
-        }
+        else return target[name]
       },
       set(target, name, value) {
-        if (name in context) {
+        if (name in context)
           return (context[name] = value)
-        }
+
         target[name] = value
       },
     })
@@ -879,9 +877,8 @@ const token = req.cookie.token
 
 // Vulnerability:
 // SESSIONS[constructor] => `true`
-if (token && SESSIONS[token]) {
+if (token && SESSIONS[token])
   next()
-}
 ```
 
 Solutions:
@@ -1014,7 +1011,7 @@ Same site cookie [recipe](https://web.dev/first-party-cookie-recipes),
   - User agent.
 
 ```ts
-req.session.regenerate(function (err) {
+req.session.regenerate((err) => {
   process(err)
 })
 

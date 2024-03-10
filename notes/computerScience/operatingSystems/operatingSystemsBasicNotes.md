@@ -423,7 +423,7 @@ C(cache) PPO = VPO:
 
 Translation Lookaside Buffer:
 
-缓存页表项 - key: VPN, value: PPN 　不用访问页表
+缓存页表项 - key: VPN, value: PPN 不用访问页表.
 
 ###### 多级页表
 
@@ -1243,7 +1243,6 @@ void load_elf_tables(int argc, char *argv[]) {
   assert(elf->e_type == ET_EXEC); // executable file
   assert(elf->e_machine == EM_386); // Intel 80386 architecture
   assert(elf->e_version == EV_CURRENT); // current version
-
 
   /* Load symbol table and string table for future use */
 

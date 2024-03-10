@@ -740,7 +740,7 @@ calculate_select_set(production p: N->beta1...beta_n) {
   }
 
   // all betas are in nullable (当前规则的所有右边符号都是可空集)
-  //　故, select(p) 必须包括 follow(M) (当推导出右边符号都为空时, first(p) 即为 follow(M))
+  // 故, select(p) 必须包括 follow(M) (当推导出右边符号都为空时, first(p) 即为 follow(M))
   if (i > n) {
     first(N) += follow(N);
   }
@@ -883,7 +883,6 @@ void Removing(WF *p,char *q,int n,int count) {
         p[count1].left=p[0].left[0]+str;
         p[count1].right="ε";
     }
-
 
   // 对每一个非终结符迭代
     for ( int i = 0; i <= count; i++) {

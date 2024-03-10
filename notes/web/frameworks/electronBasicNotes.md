@@ -44,7 +44,7 @@ electron-forge start
 
 ```ts
 // main process
-global.sharedObject = {
+globalThis.sharedObject = {
   someProperty: 'default value',
 }
 
@@ -106,7 +106,7 @@ win.loadURL('https://github.com')
 ```ts
 let win
 
-const createBrowserWindow = () => {
+function createBrowserWindow() {
   win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -123,7 +123,7 @@ const createBrowserWindow = () => {
 // preload.js
 const fs = require('node:fs')
 
-global.desktop = {
+globalThis.desktop = {
   files: () => fs.readdirSync(__dirname),
 }
 ```

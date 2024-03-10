@@ -155,7 +155,6 @@ $\surd \sqrt{2} \frac{x}{y}$
 \allowdisplaybreaks[4] % \eqnarray如果很长，影响分栏、换行和分页
                         %（整块挪动，造成页面空白），可以设置成为自动调整模式
 
-
 \CJKtilde   %用于解决英文字母和汉字的间距问题。例如：变量~$x$~的值。
 \renewcommand{\CJKglue}{\hskip 0pt plus 0.08\baselineskip}
 %它于必要时在汉字之间插入一个附加的空隙，以解决行的超长问题。

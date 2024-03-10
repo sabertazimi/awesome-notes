@@ -43,18 +43,19 @@ getline(cin/sin, strbuf)
 3. 最后得到, 字符串 p 向右移动位数为 `k - next[k]`, k 为 `s[k] !== p[k]` 匹配失败时的下标.
 
 ```ts
-const getNext = (p: string): number[] => {
+function getNext(p: string): number[] {
   // next[0] = -1
   const next: number[] = [-1]
 
   // maxLen = next[0] = -1
-  for (let i = 0, maxLen = -1; i < p.length - 1; ) {
+  for (let i = 0, maxLen = -1; i < p.length - 1;) {
     if (maxLen === -1 || p[i] === p[maxLen]) {
       // p[i] === p[maxLen] => next[i + 1] = next[i] + 1 = maxLen + 1.
       i++
       maxLen++
       next[i] = maxLen
-    } else {
+    }
+    else {
       // Back to find shorter common prefix and suffix.
       maxLen = next[maxLen]
     }
@@ -69,19 +70,21 @@ console.log(getNext('abcdabc'))
 
 ```ts
 // 改进版
-const getNext = (p: string): number[] => {
+function getNext(p: string): number[] {
   // next[0] = -1
   const next: number[] = [-1]
 
   // maxLen = next[0] = -1
-  for (let i = 0, maxLen = -1; i < p.length - 1; ) {
+  for (let i = 0, maxLen = -1; i < p.length - 1;) {
     if (maxLen === -1 || p[i] === p[maxLen]) {
       i++
       maxLen++
       // 改进
-      if (p[i] !== p[maxLen]) next[i] = maxLen
+      if (p[i] !== p[maxLen])
+        next[i] = maxLen
       else next[i] = next[maxLen]
-    } else {
+    }
+    else {
       // Back to find shorter common prefix and suffix.
       maxLen = next[maxLen]
     }
@@ -92,7 +95,7 @@ const getNext = (p: string): number[] => {
 ```
 
 ```ts
-const search = (s: string, p: string): number => {
+function search(s: string, p: string): number {
   let i = 0
   let j = 0
 
@@ -100,12 +103,14 @@ const search = (s: string, p: string): number => {
     if (j === -1 || s[i] === p[j]) {
       i++
       j++
-    } else {
+    }
+    else {
       j = next[j]
     }
   }
 
-  if (j === p.length) return i - j
+  if (j === p.length)
+    return i - j
   else return -1
 }
 ```
@@ -154,8 +159,10 @@ let hi = nums.length - 1
 
 while (lo <= hi) {
   const mid = lo + ((hi - lo) >> 1)
-  if (nums[mid] === target) return nums[mid]
-  else if (nums[mid] < target) lo = mid + 1
+  if (nums[mid] === target)
+    return nums[mid]
+  else if (nums[mid] < target)
+    lo = mid + 1
   else hi = mid - 1
 }
 ```
@@ -562,9 +569,9 @@ const stack: number[] = []
 const greaterMap = new Map<number, number>()
 
 for (const num of nums) {
-  while (stack.length && stack[stack.length - 1] < num) {
+  while (stack.length && stack[stack.length - 1] < num)
     greaterMap.set(stack.pop() as number, num)
-  }
+
   stack.push(num)
 }
 ```

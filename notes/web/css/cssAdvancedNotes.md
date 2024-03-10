@@ -144,7 +144,8 @@ $$
       red 5px,
       transparent 5px,
       transparent 10px
-    ) 12;
+    )
+    12;
 }
 
 .border-dashed {
@@ -155,7 +156,8 @@ $$
       deepskyblue 5px,
       transparent 5px,
       transparent 10px
-    ) 1;
+    )
+    1;
 }
 ```
 
@@ -573,7 +575,8 @@ p:hover {
         #58a 37.5%,
         transparent 0,
         transparent 50%
-      ) 0 / 5em 5em;
+      )
+      0 / 5em 5em;
   border: 1em solid transparent;
 }
 ```
@@ -654,8 +657,8 @@ p:hover {
  * 列表滚动时, 纯白渐变背景移出视口, 露出灰度渐变背景.
  */
 .scrollable-list {
-  background: linear-gradient(#fff 30%, transparent), radial-gradient(at 50% 0, rgb(0
-          0 0 / 20%), transparent 70%);
+  background: linear-gradient(#fff 30%, transparent),
+    radial-gradient(at 50% 0, rgb(0 0 0 / 20%), transparent 70%);
   background-repeat: no-repeat;
   background-attachment: local, scroll;
   background-size:
@@ -1533,7 +1536,7 @@ to be reused later.
 This is also used to create **icon systems**.
 
 ```html
-<svg width="0" height="0" style="position: absolute;">
+<svg width="0" height="0" style="position: absolute">
   <defs>
     <marker
       id="marker-circle"
@@ -1657,7 +1660,7 @@ Avatar with circle status indicator:
   width="300"
   height="300"
   viewBox="0 0 20 20"
-  style="position:absolute;left:-999px;"
+  style="position: absolute; left: -999px"
 >
   <filter id="inset-shadow">
     <!-- 投影偏移 -->
@@ -1683,7 +1686,7 @@ Avatar with circle status indicator:
 毛玻璃滤镜:
 
 ```html
-<svg width="0" height="0" style="position:absolute;">
+<svg width="0" height="0" style="position: absolute">
   <filter id="blur" color-interpolation-filters="sRGB">
     <feGaussianBlur stdDeviation="6" edgeMode="duplicate" />
     <feComponentTransfer>
@@ -2229,7 +2232,8 @@ const mql = window.matchMedia(mediaQueryString)
 ```ts
 if (window.matchMedia('(min-width: 400px)').matches) {
   /* the view port is at least 400 pixels wide */
-} else {
+}
+else {
   /* the view port is less than 400 pixels wide */
 }
 ```
@@ -2239,10 +2243,11 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 ```ts
 const match = window.matchMedia('(min-width: 400px)')
 
-match.addEventListener('change', e => {
+match.addEventListener('change', (e) => {
   if (e.matches) {
     /* do a thing */
-  } else {
+  }
+  else {
     /* do another thing */
   }
 })
@@ -2534,9 +2539,11 @@ PC 屏幕 DPR 为 1,
 .background-gradient-1px {
   background:
     linear-gradient(#000, #000 100%, transparent 100%) left / 1px 100% no-repeat,
-    linear-gradient(#000, #000 100%, transparent 100%) right / 1px 100% no-repeat,
+    linear-gradient(#000, #000 100%, transparent 100%) right / 1px 100%
+      no-repeat,
     linear-gradient(#000, #000 100%, transparent 100%) top / 100% 1px no-repeat,
-    linear-gradient(#000, #000 100%, transparent 100%) bottom / 100% 1px no-repeat;
+    linear-gradient(#000, #000 100%, transparent 100%) bottom / 100% 1px
+      no-repeat;
 }
 
 .box-shadow-1px {
@@ -2662,7 +2669,7 @@ docEl.style.fontSize = fontsize
 [Prevent jittery scrollbar](https://infrequently.org/2020/12/resize-resilient-deferred-rendering):
 
 ```ts
-const observer = new ResizeObserver(entries => {
+const observer = new ResizeObserver((entries) => {
   for (const entry of entries) {
     if (entry.target.getBoundingClientRect().height > 0) {
       observer.unobserve(entry.target)
@@ -2671,9 +2678,8 @@ const observer = new ResizeObserver(entries => {
   }
 })
 
-for (const element of document.querySelectorAll('.content-visibility-auto')) {
+for (const element of document.querySelectorAll('.content-visibility-auto'))
   observer.observe(element)
-}
 ```
 
 ### CSS Selectors Performance
@@ -2796,16 +2802,14 @@ const element = document.getElementById('SomeElementYouWantToAnimate')
 element.style.position = 'absolute'
 
 function step(timestamp) {
-  if (!start) {
+  if (!start)
     start = timestamp
-  }
 
   const progress = timestamp - start
   element.style.left = `${Math.min(progress / 10, 200)}px`
 
-  if (progress < 2000) {
+  if (progress < 2000)
     window.requestAnimationFrame(step)
-  }
 }
 
 window.requestAnimationFrame(step)
@@ -2837,7 +2841,8 @@ window.requestAnimationFrame(step)
 ```css
 .loading {
   background: url('/images/loading.gif');
-  background: url('/images/loading.png'), linear-gradient(transparent, transparent);
+  background: url('/images/loading.png'),
+    linear-gradient(transparent, transparent);
 }
 
 .shadow {

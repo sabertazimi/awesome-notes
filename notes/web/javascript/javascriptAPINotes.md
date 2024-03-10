@@ -20,17 +20,14 @@ const grandParentWindow = window.parent.parent
 ```
 
 ```ts
-// eslint-disable-next-line no-restricted-globals
-if (confirm('Are you sure?')) {
-  alert("I'm so glad you're sure!")
-} else {
-  alert("I'm sorry to hear you're not sure.")
-}
+if (confirm('Are you sure?'))
+  alert('I\'m so glad you\'re sure!')
+else
+  alert('I\'m sorry to hear you\'re not sure.')
 
 const result = prompt('What is your name? ', 'James')
-if (result !== null) {
+if (result !== null)
   alert(`Welcome, ${result}`)
-}
 
 // 显示打印对话框
 window.print()
@@ -64,15 +61,14 @@ alert(newWin.closed) // true
 let blocked = false
 try {
   const newWin = window.open('https://www.new.com/', '_blank')
-  if (newWin === null) {
+  if (newWin === null)
     blocked = true
-  }
-} catch (ex) {
+}
+catch (ex) {
   blocked = true
 }
-if (blocked) {
+if (blocked)
   alert('The popup was blocked!')
-}
 ```
 
 ### Location
@@ -103,9 +99,8 @@ function getQueryStringArgs(location) {
     const name = decodeURIComponent(item[0])
     const value = decodeURIComponent(item[1])
 
-    if (name.length) {
+    if (name.length)
       args[name] = value
-    }
   }
 
   return args
@@ -124,12 +119,11 @@ window.location.reload(true) // 重新加载, 从服务器加载
 ```ts
 window.addEventListener(
   'hashchange',
-  event => {
+  (event) => {
     // event.oldURL
     // event.nweURL
-    if (window.location.hash === '#someCoolFeature') {
+    if (window.location.hash === '#someCoolFeature')
       someCoolFeature()
-    }
   },
   false
 )
@@ -218,7 +212,7 @@ navigator.registerProtocolHandler(
 #### Web Battery Status API
 
 ```ts
-navigator.getBattery().then(battery => {
+navigator.getBattery().then((battery) => {
   // 添加充电状态变化时的处理程序
   const chargingChangeHandler = () => console.log(battery.charging)
   battery.addEventListener('chargingchange', chargingChangeHandler)
@@ -241,7 +235,7 @@ navigator.getBattery().then(battery => {
 #### Web Storage Estimate API
 
 ```ts
-navigator.storage.estimate().then(estimate => {
+navigator.storage.estimate().then((estimate) => {
   console.log(((estimate.usage / estimate.quota) * 100).toFixed(2))
 })
 ```
@@ -259,7 +253,8 @@ if (window.navigator.geolocation) {
     // 最长有效期, 在重复获取地理位置时, 此参数指定多久再次获取位置.
     maximumAge: 3000,
   })
-} else {
+}
+else {
   alert('Your browser does not support Geolocation!')
 }
 ```
@@ -273,7 +268,7 @@ function locationError(error) {
       showError('A timeout occurred! Please try again!')
       break
     case error.POSITION_UNAVAILABLE:
-      showError("We can't detect your location. Sorry!")
+      showError('We can\'t detect your location. Sorry!')
       break
     case error.PERMISSION_DENIED:
       showError('Please allow geolocation access for this to work.')
@@ -404,11 +399,12 @@ function toggleFullscreen() {
       .exitFullscreen()
       .then(() => console.log('Document Exited from Full screen mode'))
       .catch(err => console.error(err))
-  } else {
+  }
+  else {
     elem
       .requestFullscreen()
       .then(() => {})
-      .catch(err => {
+      .catch((err) => {
         alert(
           `Error occurred while switch into fullscreen mode: ${err.message} (${err.name})`
         )
@@ -422,11 +418,12 @@ document.onclick = function (event) {
       .exitFullscreen()
       .then(() => console.log('Document Exited from Full screen mode'))
       .catch(err => console.error(err))
-  } else {
+  }
+  else {
     document.documentElement
       .requestFullscreen({ navigationUI: 'show' })
       .then(() => {})
-      .catch(err => {
+      .catch((err) => {
         alert(
           `Error occurred while switch into fullscreen mode: ${err.message} (${err.name})`
         )
@@ -457,13 +454,11 @@ history.back()
 // 前进一页
 history.forward()
 
-if (history.length === 1) {
+if (history.length === 1)
   console.log('这是用户窗口中的第一个页面')
-}
 
-if (history.scrollRestoration) {
+if (history.scrollRestoration)
   history.scrollRestoration = 'manual'
-}
 ```
 
 #### History State Management
@@ -476,7 +471,7 @@ history.pushState(stateObject, 'My title', 'baz.html')
 
 history.replaceState({ newFoo: 'newBar' }, 'New title') // No new history state.
 
-window.addEventListener('popstate', event => {
+window.addEventListener('popstate', (event) => {
   const state = event.state
 
   if (state) {
@@ -495,8 +490,8 @@ class BrowserDetector {
   constructor() {
     // 测试条件编译
     // IE6~10 支持
-    // eslint-disable-next-line spaced-comment
-    this.isIE_Gte6Lte10 = /*@cc_on!@*/ false
+
+    this.isIE_Gte6Lte10 = /* @cc_on!@ */ false
     // 测试 documentMode
     // IE7~11 支持
     this.isIE_Gte7Lte11 = !!document.documentMode
@@ -561,15 +556,14 @@ class BrowserDetector {
 const hasNSPlugins = !!(navigator.plugins && navigator.plugins.length)
 // 检测浏览器是否具有 DOM Level 1 能力
 const hasDOM1 = !!(
-  document.getElementById &&
-  document.createElement &&
-  document.getElementsByTagName
+  document.getElementById
+  && document.createElement
+  && document.getElementsByTagName
 )
 
 // 特性检测
-if (document.getElementById) {
+if (document.getElementById)
   element = document.getElementById(id)
-}
 ```
 
 ## DOM
@@ -653,7 +647,7 @@ parentElement.removeChild(child)
 ```
 
 ```ts
-const showAlert = (type, message, duration = 3) => {
+function showAlert(type, message, duration = 3) {
   const div = document.createElement('div')
   div.className = type
   div.appendChild(document.createTextNode(message))
@@ -687,9 +681,8 @@ const type = node.nodeType
 const name = node.nodeName
 const value = node.nodeValue
 
-if (someNode.nodeType === Node.ELEMENT_NODE) {
+if (someNode.nodeType === Node.ELEMENT_NODE)
   alert('Node is an element.')
-}
 ```
 
 #### DOM Attribute Node
@@ -772,8 +765,9 @@ alert(element.childNodes.length) // 2
 
 ```ts
 const textContent = element.textContent
-const innerText = element.innerText
 const innerHTML = element.innerHTML
+// eslint-disable-next-line unicorn/prefer-dom-node-text-content
+const innerText = element.innerText
 ```
 
 :::
@@ -807,16 +801,15 @@ const forms = documents.forms
 const formElements = documents.forms[0].elements // 第一个表单内的所有字段
 
 // HTML5 compatMode:
-if (document.compatMode === 'CSS1Compat') {
+if (document.compatMode === 'CSS1Compat')
   console.log('Standards mode')
-} else if (document.compatMode === 'BackCompat') {
+else if (document.compatMode === 'BackCompat')
   console.log('Quirks mode')
-}
 ```
 
 ```ts
 document.getElementById(id)
-// eslint-disable-next-line no-restricted-globals
+
 document.getElementsByName(name)
 document.getElementsByTagName(tagName)
 document.getElementsByClassName(className) // HTML5
@@ -950,15 +943,14 @@ div.innerHTML = '<p>Test<em>test</em>Test.</p>'
 
 ```ts
 // BAD
-for (const value of values) {
+for (const value of values)
   ul.innerHTML += `<li>${value}</li>` // 别这样做！
-}
 
 // GOOD
 let itemsHtml = ''
-for (const value of values) {
+for (const value of values)
   itemsHtml += `<li>${value}</li>`
-}
+
 ul.innerHTML = itemsHtml
 
 // BEST
@@ -981,11 +973,10 @@ el.parentNode.insertBefore(newEl, el)
 function insertAfter(newElement, targetElement) {
   const parent = targetElement.parentNode
 
-  if (parent.lastChild === targetElement) {
+  if (parent.lastChild === targetElement)
     parent.appendChild(newElement)
-  } else {
+  else
     parent.insertBefore(newElement, targetElement.nextSibling)
-  }
 }
 ```
 
@@ -1031,9 +1022,8 @@ const formerFirstChild = someNode.removeChild(someNode.firstChild)
 // 删除最后一个子节点
 const formerLastChild = someNode.removeChild(someNode.lastChild)
 
-while (div.firstChild) {
+while (div.firstChild)
   div.removeChild(div.firstChild)
-}
 
 // Remove self
 el.parentNode.removeChild(el)
@@ -1075,9 +1065,8 @@ NodeList is iterable:
 ```ts
 const elements = document.querySelectorAll('div')
 
-for (const element of elements) {
+for (const element of elements)
   console.log(element)
-}
 ```
 
 [Node Iterator](https://developer.mozilla.org/docs/Web/API/NodeIterator):
@@ -1100,9 +1089,8 @@ for (
   let node = iterator.nextNode();
   node !== null;
   node = iterator.nextNode()
-) {
+)
   console.log(node.tagName) // 输出标签名
-}
 ```
 
 [Tree Walker](https://developer.mozilla.org/docs/Web/API/TreeWalker):
@@ -1123,9 +1111,8 @@ for (
   let node = walker.firstChild();
   node !== null;
   node = walker.nextSibling()
-) {
+)
   console.log(node.tagName) // 遍历 <li>
-}
 ```
 
 :::tip NodeIterator vs TreeWalker
@@ -1264,7 +1251,8 @@ function loadScriptString(code) {
 
   try {
     script.appendChild(document.createTextNode(code))
-  } catch (ex) {
+  }
+  catch (ex) {
     script.text = code
   }
 
@@ -1300,7 +1288,8 @@ function loadStyleString(css) {
 
   try {
     style.appendChild(document.createTextNode(css))
-  } catch (ex) {
+  }
+  catch (ex) {
     style.styleSheet.cssText = css
   }
 
@@ -1449,9 +1438,8 @@ document.body.style.item(0) // ""
 
 myDiv.style.cssText = 'width: 25px; height: 100px; background-color: green'
 
-for (let i = 0, len = myDiv.style.length; i < len; i++) {
+for (let i = 0, len = myDiv.style.length; i < len; i++)
   console.log(myDiv.style[i]) // 或者用 myDiv.style.item(i)
-}
 ```
 
 #### Computed Styles
@@ -1488,7 +1476,8 @@ element.classList.contains('class')
 function addClassPolyfill(element, value) {
   if (!element.className) {
     element.className = value
-  } else {
+  }
+  else {
     newClassName = element.className
     newClassName += ' '
     newClassName += value
@@ -1530,13 +1519,11 @@ const myRules = document.styleSheets[0].cssRules
 const p = document.querySelector('p')
 
 for (i of myRules) {
-  if (i.type === 1) {
+  if (i.type === 1)
     p.innerHTML += `<code>${i.selectorText}</code><br>`
-  }
 
-  if (i.selectorText === 'a:hover') {
+  if (i.selectorText === 'a:hover')
     i.selectorText = 'a:hover, a:active'
-  }
 
   const myStyle = i.style
 
@@ -1576,9 +1563,8 @@ for (i of myRules) {
   if (i.type === 4) {
     p.innerHTML += `<code>${i.conditionText}</code><br>`
 
-    for (j of i.cssRules) {
+    for (j of i.cssRules)
       p.innerHTML += `<code>${j.selectorText}</code><br>`
-    }
   }
 }
 ```
@@ -1597,9 +1583,8 @@ for (i of myRules) {
   if (i.type === 7) {
     p.innerHTML += `<code>${i.name}</code><br>`
 
-    for (j of i.cssRules) {
+    for (j of i.cssRules)
       p.innerHTML += `<code>${j.keyText}</code><br>`
-    }
   }
 }
 ```
@@ -1660,7 +1645,7 @@ console.log(myElement.get('display').value) // 'initial'
 - `event.preventDefault()`.
 - `event.stopPropagation()`.
 - By default, event handlers are executed in the **bubbling** phase
-  (unless set `useCapture` to `true`).
+  (unless set `useCapture` to `true`).
 - `element.dispatchEvent(event)` to trigger events.
 
 #### Events Object
@@ -1706,14 +1691,13 @@ function handleEvent(event) {
 
 ```ts
 function ready(fn) {
-  if (document.readyState !== 'loading') {
+  if (document.readyState !== 'loading')
     fn()
-  } else {
+  else
     document.addEventListener('DOMContentLoaded', fn)
-  }
 }
 
-document.addEventListener('DOMContentLoaded', event => {
+document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed.')
 })
 ```
@@ -1721,16 +1705,15 @@ document.addEventListener('DOMContentLoaded', event => {
 `readystatechange` event:
 
 ```ts
-document.addEventListener('readystatechange', event => {
+document.addEventListener('readystatechange', (event) => {
   // HTML5 readyState
   if (
-    document.readyState === 'interactive' ||
-    document.readyState === 'complete'
-  ) {
+    document.readyState === 'interactive'
+    || document.readyState === 'complete'
+  )
     console.log('Content loaded')
-  } else if (document.readyState === 'loading') {
+  else if (document.readyState === 'loading')
     console.log('Loading')
-  }
 })
 ```
 
@@ -1739,14 +1722,14 @@ document.addEventListener('readystatechange', event => {
 ```ts
 window.addEventListener('load', () => {
   const image = document.createElement('img')
-  image.addEventListener('load', event => {
+  image.addEventListener('load', (event) => {
     console.log(event.target.src)
   })
   document.body.appendChild(image)
   image.src = 'smile.gif'
 
   const script = document.createElement('script')
-  script.addEventListener('load', event => {
+  script.addEventListener('load', (event) => {
     console.log('Loaded')
   })
   script.src = 'example.js'
@@ -1756,7 +1739,7 @@ window.addEventListener('load', () => {
   const link = document.createElement('link')
   link.type = 'text/css'
   link.rel = 'stylesheet'
-  link.addEventListener('load', event => {
+  link.addEventListener('load', (event) => {
     console.log('css loaded')
   })
   link.href = 'example.css'
@@ -1785,17 +1768,15 @@ window.addEventListener('visibilitychange', () => {
 const videoElement = document.getElementById('videoElement')
 
 // AutoPlay the video if application is visible
-if (document.visibilityState === 'visible') {
+if (document.visibilityState === 'visible')
   videoElement.play()
-}
 
 // Handle page visibility change events
 function handleVisibilityChange() {
-  if (document.visibilityState === 'hidden') {
+  if (document.visibilityState === 'hidden')
     videoElement.pause()
-  } else {
+  else
     videoElement.play()
-  }
 }
 
 document.addEventListener('visibilitychange', handleVisibilityChange, false)
@@ -1818,7 +1799,7 @@ document.addEventListener('visibilitychange', handleVisibilityChange, false)
 ```ts
 // <form className='validated-form' noValidate onSubmit={onSubmit}>
 
-const onSubmit = event => {
+function onSubmit(event) {
   event.preventDefault()
 
   const form = event.target
@@ -1844,13 +1825,15 @@ const onSubmit = event => {
       acc[key] = formData.get(key)
       return acc
     }, {})
-  } else {
+  }
+  else {
     // apply invalid class
-    Array.from(form.elements).forEach(i => {
+    Array.from(form.elements).forEach((i) => {
       if (i.checkValidity()) {
         // field is valid
         i.parentElement.classList.remove('invalid')
-      } else {
+      }
+      else {
         // field is invalid
         i.parentElement.classList.add('invalid')
         console.log(i.validity)
@@ -1861,7 +1844,7 @@ const onSubmit = event => {
 ```
 
 ```ts
-document.querySelector('form').addEventListener('submit', event => {
+document.querySelector('form').addEventListener('submit', (event) => {
   const form = event.target
   const url = new URL(form.action || window.location.href)
   const formData = new FormData(form)
@@ -1873,9 +1856,10 @@ document.querySelector('form').addEventListener('submit', event => {
 
   if (options.method === 'post') {
     // Modify request body to include form data
-    options.body =
-      form.enctype === 'multipart/form-data' ? formData : searchParameters
-  } else {
+    options.body
+      = form.enctype === 'multipart/form-data' ? formData : searchParameters
+  }
+  else {
     // Modify URL to include form data
     url.search = searchParameters
   }
@@ -1951,7 +1935,7 @@ input.addEventListener('change', () => {
 ```ts
 const input = document.querySelector('input')
 
-input.addEventListener('select', event => {
+input.addEventListener('select', (event) => {
   const log = document.getElementById('log')
   const selection = event.target.value.substring(
     event.target.selectionStart,
@@ -1973,7 +1957,7 @@ input.addEventListener('select', event => {
 ```ts
 const source = document.querySelector('div.source')
 
-source.addEventListener('copy', event => {
+source.addEventListener('copy', (event) => {
   const selection = document.getSelection()
   event.clipboardData.setData(
     'text/plain',
@@ -2008,10 +1992,9 @@ For `click` event, no need for X/Y to judge internal/outside state.
 Use `element.contains` to check is a better way.
 
 ```ts
-window.addEventListener('click', event => {
-  if (document.getElementById('main').contains(event.target)) {
+window.addEventListener('click', (event) => {
+  if (document.getElementById('main').contains(event.target))
     process()
-  }
 })
 ```
 
@@ -2037,7 +2020,7 @@ Key point for implementing DnD widget is
 ```ts
 const noContext = document.getElementById('noContextMenu')
 
-noContext.addEventListener('contextmenu', e => {
+noContext.addEventListener('contextmenu', (e) => {
   e.preventDefault()
 })
 ```
@@ -2049,7 +2032,7 @@ noContext.addEventListener('contextmenu', e => {
 ```ts
 const textbox = document.getElementById('myText')
 
-textbox.addEventListener('keyup', event => {
+textbox.addEventListener('keyup', (event) => {
   console.log(event.charCode || event.keyCode)
 })
 ```
@@ -2139,7 +2122,8 @@ class Recognizer {
         element: event.target,
       }
       this.pointers.set(touch.identifier, pointer)
-      if (callback) callback(pointer, touch)
+      if (callback)
+        callback(pointer, touch)
     }
   }
 
@@ -2148,9 +2132,8 @@ class Recognizer {
       const touch = event.changedTouches[i]
       const pointer = this.pointers.get(touch.identifier)
 
-      if (!pointer) {
+      if (!pointer)
         return
-      }
 
       if (!pointer.lastTouch) {
         pointer.lastTouch = pointer.startTouch
@@ -2166,13 +2149,11 @@ class Recognizer {
       if (time > 0) {
         const RECORD_DURATION = 70
 
-        if (time > RECORD_DURATION) {
+        if (time > RECORD_DURATION)
           time = RECORD_DURATION
-        }
 
-        if (pointer.duration + time > RECORD_DURATION) {
+        if (pointer.duration + time > RECORD_DURATION)
           pointer.duration = RECORD_DURATION - time
-        }
 
         pointer.duration += time
         pointer.lastTouch = touch
@@ -2184,7 +2165,8 @@ class Recognizer {
         pointer.distance = Math.sqrt(x + y)
         pointer.isVertical = x < y
 
-        if (callback) callback(pointer, touch)
+        if (callback)
+          callback(pointer, touch)
       }
     }
   }
@@ -2195,8 +2177,10 @@ class Recognizer {
       const id = touch.identifier
       const pointer = this.pointers.get(id)
 
-      if (!pointer) continue
-      if (callback) callback(pointer, touch)
+      if (!pointer)
+        continue
+      if (callback)
+        callback(pointer, touch)
 
       this.pointers.delete(id)
     }
@@ -2236,7 +2220,7 @@ class Recognizer {
       document.removeEventListener('touchcancel', cancel)
     }
 
-    el.addEventListener('touchstart', function (event: TouchEvent) {
+    el.addEventListener('touchstart', (event: TouchEvent) => {
       recognizer.start(event)
       document.addEventListener('touchmove', move)
       document.addEventListener('touchend', end)
@@ -2292,10 +2276,10 @@ Dispatch `CustomEvent`:
 
 ```ts
 const div = document.getElementById('myDiv')
-div.addEventListener('myEvent', event => {
+div.addEventListener('myEvent', (event) => {
   console.log(`DIV: ${event.detail}`)
 })
-document.addEventListener('myEvent', event => {
+document.addEventListener('myEvent', (event) => {
   console.log(`DOCUMENT: ${event.detail}`)
 })
 
@@ -2323,51 +2307,46 @@ class EventUtil {
 
   static getRelatedTarget(event) {
     // For `mouseover` and `mouseout` event:
-    if (event.relatedTarget) {
+    if (event.relatedTarget)
       return event.relatedTarget
-    } else if (event.toElement) {
+    else if (event.toElement)
       return event.toElement
-    } else if (event.fromElement) {
+    else if (event.fromElement)
       return event.fromElement
-    } else {
+    else
       return null
-    }
   }
 
   static preventDefault(event) {
-    if (event.preventDefault) {
+    if (event.preventDefault)
       event.preventDefault()
-    } else {
+    else
       event.returnValue = false
-    }
   }
 
   static stopPropagation(event) {
-    if (event.stopPropagation) {
+    if (event.stopPropagation)
       event.stopPropagation()
-    } else {
+    else
       event.cancelBubble = true
-    }
   }
 
   static addHandler(element, type, handler) {
-    if (element.addEventListener) {
+    if (element.addEventListener)
       element.addEventListener(type, handler, false)
-    } else if (element.attachEvent) {
+    else if (element.attachEvent)
       element.attachEvent(`on${type}`, handler)
-    } else {
+    else
       element[`on${type}`] = handler
-    }
   }
 
   static removeHandler(element, type, handler) {
-    if (element.removeEventListener) {
+    if (element.removeEventListener)
       element.removeEventListener(type, handler, false)
-    } else if (element.detachEvent) {
+    else if (element.detachEvent)
       element.detachEvent(`on${type}`, handler)
-    } else {
+    else
       element[`on${type}`] = null
-    }
   }
 }
 ```
@@ -2388,14 +2367,14 @@ class EventUtil {
 // const supportInnerWidth = window.innerWidth !== undefined;
 // const supportInnerHeight = window.innerHeight !== undefined;
 // const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
-const width =
-  window.innerWidth ||
-  document.documentElement.clientWidth ||
-  document.body.clientWidth
-const height =
-  window.innerHeight ||
-  document.documentElement.clientHeight ||
-  document.body.clientHeight
+const width
+  = window.innerWidth
+  || document.documentElement.clientWidth
+  || document.body.clientWidth
+const height
+  = window.innerHeight
+  || document.documentElement.clientHeight
+  || document.body.clientHeight
 ```
 
 ```ts
@@ -2418,16 +2397,16 @@ while getBoundingClientRect() returns the rendering width and height.
 [![Client Rect](https://developer.mozilla.org/docs/Web/API/Element/getBoundingClientRect/element-box-diagram.png)](https://developer.mozilla.org/docs/Web/API/Element/getBoundingClientRect)
 
 ```ts
-const isElementInViewport = el => {
+function isElementInViewport(el) {
   const { top, height, left, width } = el.getBoundingClientRect()
-  const w =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth
-  const h =
-    window.innerHeight ||
-    document.documentElement.clientHeight ||
-    document.body.clientHeight
+  const w
+    = window.innerWidth
+    || document.documentElement.clientWidth
+    || document.body.clientWidth
+  const h
+    = window.innerHeight
+    || document.documentElement.clientHeight
+    || document.body.clientHeight
 
   return top <= h && top + height >= 0 && left <= w && left + width >= 0
 }
@@ -2492,20 +2471,19 @@ window.moveBy(-50, 0)
 ```ts
 // const supportPageOffset = window.pageXOffset !== undefined;
 // const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
-const x =
-  window.pageXOffset ||
-  document.documentElement.scrollLeft ||
-  document.body.scrollLeft
-const y =
-  window.pageYOffset ||
-  document.documentElement.scrollTop ||
-  document.body.scrollTop
+const x
+  = window.pageXOffset
+  || document.documentElement.scrollLeft
+  || document.body.scrollLeft
+const y
+  = window.pageYOffset
+  || document.documentElement.scrollTop
+  || document.body.scrollTop
 ```
 
 ```ts
-if (window.innerHeight + window.pageYOffset === document.body.scrollHeight) {
+if (window.innerHeight + window.pageYOffset === document.body.scrollHeight)
   console.log('Scrolled to Bottom!')
-}
 ```
 
 ```ts
@@ -2551,7 +2529,7 @@ document.forms[0].scrollIntoView({ behavior: 'smooth', block: 'start' })
 // <img class="lzy_img" src="lazy_img.jpg" data-src="real_img.jpg" />
 document.addEventListener('DOMContentLoaded', () => {
   const imageObserver = new IntersectionObserver((entries, imgObserver) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const lazyImage = entry.target
         console.log('Lazy loading ', lazyImage)
@@ -2585,8 +2563,8 @@ Mutation Observer 有以下特点:
 - 被观察子树中的节点 (`{ subtree: true }`) 被移出子树之后仍然能够触发变化事件.
 
 ```ts
-const mutationObserver = new MutationObserver(mutations => {
-  mutations.forEach(mutation => {
+const mutationObserver = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
     console.log(mutation)
   })
 })
@@ -2604,8 +2582,8 @@ mutationObserver.observe(document.documentElement, {
 
 ```ts
 const target = document.querySelector('#container')
-const callback = (mutations, observer) => {
-  mutations.forEach(mutation => {
+function callback(mutations, observer) {
+  mutations.forEach((mutation) => {
     switch (mutation.type) {
       case 'attributes':
         // the name of the changed attribute is in
@@ -2688,9 +2666,9 @@ XML 命名空间可以实现在一个格式规范的文档中混用不同的 XML
       xmlns:s="http://www.w3.org/2000/svg"
       version="1.1"
       viewBox="0 0 100 100"
-      style="width:100%; height:100%"
+      style="width: 100%; height: 100%"
     >
-      <s:rect x="0" y="0" width="100" height="100" style="fill:red" />
+      <s:rect x="0" y="0" width="100" height="100" style="fill: red" />
     </s:svg>
   </body>
 </html>
@@ -2783,11 +2761,13 @@ const XHR = (function () {
   // 此立即函数运行一次即可完成兼容性检查, 防止重复检查
   if (standard.createXHR()) {
     return standard
-  } else {
+  }
+  else {
     try {
       newActionXObject.createXHR()
       return newActionXObject
-    } catch (o) {
+    }
+    catch (o) {
       oldActionXObject.createXHR()
       return oldActionXObject
     }
@@ -2845,7 +2825,8 @@ function ajax(options) {
   // 创建 - 非IE6 - 第一步
   if (window.XMLHttpRequest) {
     xhr = new XMLHttpRequest()
-  } else {
+  }
+  else {
     // IE6及其以下版本浏览器
     xhr = new ActiveXObject('Microsoft.XMLHTTP')
   }
@@ -2854,11 +2835,10 @@ function ajax(options) {
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       const status = xhr.status
-      if (status >= 200 && status < 300) {
+      if (status >= 200 && status < 300)
         options.success && options.success(xhr.responseText, xhr.responseXML)
-      } else {
+      else
         options.fail && options.fail(status)
-      }
     }
   }
 
@@ -2866,7 +2846,8 @@ function ajax(options) {
   if (options.type === 'GET') {
     xhr.open('GET', `${options.url}?${params}`, true)
     xhr.send(null)
-  } else if (options.type === 'POST') {
+  }
+  else if (options.type === 'POST') {
     xhr.open('POST', options.url, true)
     // 设置表单提交时的内容类型
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -2878,9 +2859,8 @@ function ajax(options) {
 function formatParams(data) {
   const arr = []
 
-  for (const name in data) {
+  for (const name in data)
     arr.push(`${encodeURIComponent(name)}=${encodeURIComponent(data[name])}`)
-  }
 
   arr.push(`v=${Math.random()}`.replace('.', ''))
   return arr.join('&')
@@ -2896,12 +2876,12 @@ function getJSON(url) {
 
     request.onload = function () {
       try {
-        if (this.status === 200) {
+        if (this.status === 200)
           resolve(JSON.parse(this.response))
-        } else {
+        else
           reject(Error(`${this.status} ${this.statusText}`))
-        }
-      } catch (e) {
+      }
+      catch (e) {
         reject(e.message)
       }
     }
@@ -2915,7 +2895,7 @@ function getJSON(url) {
 }
 
 getJSON('data/sample.json')
-  .then(ninjas => {
+  .then((ninjas) => {
     assert(ninjas !== null, 'Get data')
   })
   .catch(e => handleError(`Error: ${e}`))
@@ -2964,23 +2944,23 @@ const client = axios.create({
 
 // Add a request interceptor
 client.interceptors.request.use(
-  config => {
+  (config) => {
     // Do something before request is sent.
     return config
   },
-  error => {
+  (error) => {
     // Do something with request error.
     return Promise.reject(error)
   }
 )
 
 client.interceptors.response.use(
-  response => {
+  (response) => {
     // Any status code that lie within the range of 2xx trigger this function.
     // Do something with response data.
     return response
   },
-  error => {
+  (error) => {
     // Any status codes that falls outside the range of 2xx trigger this function.
     // Do something with response error.
     return Promise.reject(error)
@@ -3021,9 +3001,8 @@ const imageFormData = new FormData()
 const imageInput = document.querySelector('input[type="file"][multiple]')
 const imageFiles = imageInput.files
 
-for (const file of imageFiles) {
+for (const file of imageFiles)
   imageFormData.append('image', file)
-}
 
 fetch('/img-upload', {
   method: 'POST',
@@ -3138,13 +3117,12 @@ fetch('//foo.com/throws-error').then(console.log)
 ```ts
 fetch('https://fetch.spec.whatwg.org/')
   .then(response => response.body)
-  .then(body => {
+  .then((body) => {
     const reader = body.getReader()
 
     function processNextChunk({ value, done }) {
-      if (done) {
+      if (done)
         return
-      }
 
       console.log(value)
       return reader.read().then(processNextChunk)
@@ -3159,15 +3137,14 @@ fetch('https://fetch.spec.whatwg.org/')
 
 fetch('https://fetch.spec.whatwg.org/')
   .then(response => response.body)
-  .then(async body => {
+  .then(async (body) => {
     const reader = body.getReader()
 
     while (true) {
       const { value, done } = await reader.read()
 
-      if (done) {
+      if (done)
         break
-      }
 
       console.log(value)
     }
@@ -3181,7 +3158,7 @@ fetch('https://fetch.spec.whatwg.org/')
 ```ts
 fetch('https://fetch.spec.whatwg.org/')
   .then(response => response.body)
-  .then(async body => {
+  .then(async (body) => {
     const reader = body.getReader()
     const asyncIterable = {
       [Symbol.asyncIterator]() {
@@ -3193,9 +3170,8 @@ fetch('https://fetch.spec.whatwg.org/')
       },
     }
 
-    for await (const chunk of asyncIterable) {
+    for await (const chunk of asyncIterable)
       console.log(chunk)
-    }
   })
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
@@ -3211,13 +3187,13 @@ async function* streamGenerator(stream) {
     while (true) {
       const { value, done } = await reader.read()
 
-      if (done) {
+      if (done)
         break
-      }
 
       yield value
     }
-  } finally {
+  }
+  finally {
     reader.releaseLock()
   }
 }
@@ -3226,10 +3202,9 @@ const decoder = new TextDecoder()
 
 fetch('https://fetch.spec.whatwg.org/')
   .then(response => response.body)
-  .then(async body => {
-    for await (const chunk of streamGenerator(body)) {
+  .then(async (body) => {
+    for await (const chunk of streamGenerator(body))
       console.log(decoder.decode(chunk, { stream: true }))
-    }
   })
 // <!doctype html><html lang="en"> ...
 // whether a <a data-link-type="dfn" href="#concept-header" ...
@@ -3240,7 +3215,7 @@ fetch('https://fetch.spec.whatwg.org/')
 ```ts
 fetch('https://fetch.spec.whatwg.org/')
   .then(response => response.body)
-  .then(body => {
+  .then((body) => {
     const reader = body.getReader()
     // 创建第二个流
     return new ReadableStream({
@@ -3249,14 +3224,14 @@ fetch('https://fetch.spec.whatwg.org/')
           while (true) {
             const { value, done } = await reader.read()
 
-            if (done) {
+            if (done)
               break
-            }
 
             // 将主体流的块推到第二个流
             controller.enqueue(value)
           }
-        } finally {
+        }
+        finally {
           controller.close()
           reader.releaseLock()
         }
@@ -3291,19 +3266,18 @@ source.onopen = function () {}
 
 source.onerror = function () {}
 
-source.addEventListener('foo', function (event) {
+source.addEventListener('foo', (event) => {
   processFoo(event.data)
 })
 
-source.addEventListener('ping', function (event) {
+source.addEventListener('ping', (event) => {
   processPing(JSON.parse(event.data).time)
 })
 
 source.onmessage = function (event) {
   log(event.id, event.data)
-  if (event.id === 'CLOSE') {
+  if (event.id === 'CLOSE')
     source.close()
-  }
 }
 ```
 
@@ -3389,7 +3363,8 @@ function WebSocketTest() {
     ws.onerror = function () {
       alert('Connection error.')
     }
-  } else {
+  }
+  else {
     // The browser doesn't support WebSocket
     alert('WebSocket NOT supported by your Browser!')
   }
@@ -3479,16 +3454,15 @@ function getStream(evt) {
   const localVideo = document.querySelector('#local-video')
   localVideo.src = window.URL.createObjectURL(evt.stream)
 
-  pc.createOffer(function (offer) {
+  pc.createOffer((offer) => {
     pc.setLocalDescription(offer)
     signalingChannel.send(offer.sdp)
   })
 }
 
 pc.onicecandidate = function (evt) {
-  if (evt.candidate) {
+  if (evt.candidate)
     signalingChannel.send(evt.candidate)
-  }
 }
 
 pc.oniceconnectionstatechange = function (evt) {
@@ -3501,9 +3475,8 @@ pc.onaddstream = function (evt) {
 }
 
 signalingChannel.onmessage = function (msg) {
-  if (msg.candidate) {
+  if (msg.candidate)
     pc.addIceCandidate(msg.candidate)
-  }
 }
 ```
 
@@ -3579,12 +3552,11 @@ function downHandler() {
 animation.currentTime = animation.effect.getComputedTiming().duration / 2
 
 function currentTime(time = 0) {
-  animations.forEach(function (animation) {
-    if (typeof animation.currentTime === 'function') {
+  animations.forEach((animation) => {
+    if (typeof animation.currentTime === 'function')
       animation.currentTime(time)
-    } else {
+    else
       animation.currentTime = time
-    }
   })
 }
 
@@ -3625,7 +3597,7 @@ const animationKeyframes = [
 
 const animationTiming = {
   duration: 3000,
-  iterations: Infinity,
+  iterations: Number.POSITIVE_INFINITY,
 }
 
 const animation = document
@@ -3790,7 +3762,7 @@ class CheckerboardPainter {
       props.get('--green').toString(),
       props.get('--blue').toString(),
     ]
-    const size = parseInt(props.get('--width'))
+    const size = Number.parseInt(props.get('--width'))
 
     for (let y = 0; y < geometry.height / size; y++) {
       for (let x = 0; x < geometry.width / size; x++) {
@@ -3864,7 +3836,7 @@ const getNoteFreq = (base, pitch) => base * 2 ** (pitch / 12)
 const getNoteDetune = pitch => pitch * 100
 // oscillator.detune.value = getNoteDetune(7);
 
-const play = (type, delay, pitch, duration) => {
+function play(type, delay, pitch, duration) {
   const oscillator = audioContext.createOscillator()
   oscillator.connect(audioContext.destination)
 
@@ -3918,13 +3890,13 @@ javascriptNode.onaudioprocess = function () {
 // Note that the audio load is asynchronous
 function loadSound(url) {
   fetch(url)
-    .then(response => {
-      audioContext.decodeAudioData(response, buffer => {
+    .then((response) => {
+      audioContext.decodeAudioData(response, (buffer) => {
         audioData = buffer
         playSound(audioData)
       })
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error)
     })
 }
@@ -3957,7 +3929,7 @@ const dataArrayAlt = new Uint8Array(bufferLengthAlt)
 
 this.ctx.clearRect(0, 0, WIDTH, HEIGHT)
 
-const draw = () => {
+function draw() {
   const drawVisual = requestAnimationFrame(draw)
   this.analyserNode.getByteFrequencyData(dataArrayAlt)
 
@@ -4028,9 +4000,8 @@ class CookieUtil {
     if (cookieStart > -1) {
       let cookieEnd = document.cookie.indexOf(';', cookieStart)
 
-      if (cookieEnd === -1) {
+      if (cookieEnd === -1)
         cookieEnd = document.cookie.length
-      }
 
       cookieValue = decodeURIComponent(
         document.cookie.substring(cookieStart + cookieName.length, cookieEnd)
@@ -4043,21 +4014,17 @@ class CookieUtil {
   static set(name, value, { expires, path, domain, secure }) {
     let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
 
-    if (expires instanceof Date) {
+    if (expires instanceof Date)
       cookieText += `; expires=${expires.toGMTString()}`
-    }
 
-    if (path) {
+    if (path)
       cookieText += `; path=${path}`
-    }
 
-    if (domain) {
+    if (domain)
       cookieText += `; domain=${domain}`
-    }
 
-    if (secure) {
+    if (secure)
       cookieText += '; secure'
-    }
 
     document.cookie = cookieText
   }
@@ -4087,11 +4054,10 @@ class CookieUtil {
   - `event.oldValue`: 键变化之前的值.
 
 ```ts
-if (!localStorage.getItem('bgColor')) {
+if (!localStorage.getItem('bgColor'))
   populateStorage()
-} else {
+else
   setStyles()
-}
 
 function populateStorage() {
   localStorage.setItem('bgColor', document.getElementById('bgColor').value)
@@ -4124,14 +4090,13 @@ class IndexedDB {
     return new Promise((resolve, reject) => {
       this.db = null
 
-      if (!('indexedDB' in window)) {
+      if (!('indexedDB' in window))
         reject(new Error('Not supported'))
-      }
 
       const dbOpen = indexedDB.open(dbName, dbVersion)
 
       if (dbUpgrade) {
-        dbOpen.onupgradeneeded = e => {
+        dbOpen.onupgradeneeded = (e) => {
           dbUpgrade(dbOpen.result, e.oldVersion, e.newVersion)
         }
       }
@@ -4141,7 +4106,7 @@ class IndexedDB {
         resolve(this)
       }
 
-      dbOpen.onerror = e => {
+      dbOpen.onerror = (e) => {
         reject(new Error(`IndexedDB error: ${e.target.errorCode}`))
       }
     })
@@ -4193,17 +4158,16 @@ export class State {
     this.observed = new Set(observed)
 
     // subscribe `set` event with `updateCallback`
-    State.target.addEventListener('set', e => {
-      if (this.updateCallback && this.observed.has(e.detail.name)) {
+    State.target.addEventListener('set', (e) => {
+      if (this.updateCallback && this.observed.has(e.detail.name))
         this.updateCallback(e.detail.name, e.detail.value)
-      }
     })
   }
 
   async dbConnect() {
-    State.DB =
-      State.DB ||
-      (await new IndexedDB(
+    State.DB
+      = State.DB
+      || (await new IndexedDB(
         State.dbName,
         State.dbVersion,
         (db, oldVersion, newVersion) => {
@@ -4255,7 +4219,8 @@ request.onsuccess = function (event) {
     // 永远要检查
     console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`)
     cursor.continue() // 移动到下一条记录
-  } else {
+  }
+  else {
     console.log('Done!')
   }
 }
@@ -4313,7 +4278,8 @@ async function doPaymentRequest() {
     )
     const response = await request.show()
     await validateResponse(response)
-  } catch (err) {
+  }
+  catch (err) {
     // AbortError, SecurityError
     console.error(err)
   }
@@ -4329,7 +4295,8 @@ async function validateResponse(response) {
     }
 
     await response.complete('success')
-  } catch (err) {
+  }
+  catch (err) {
     // Something went wrong…
     await response.complete('fail')
   }
@@ -4353,18 +4320,17 @@ function gamepadHandler(event, connecting) {
   // gamepad === navigator.getGamepads()[gamepad.index]
   const { gamepad } = event
 
-  if (connecting) {
+  if (connecting)
     gamepads[gamepad.index] = gamepad
-  } else {
+  else
     delete gamepads[gamepad.index]
-  }
 }
 
-window.addEventListener('gamepadconnected', e => {
+window.addEventListener('gamepadconnected', (e) => {
   gamepadHandler(e, true)
 })
 
-window.addEventListener('gamepaddisconnected', e => {
+window.addEventListener('gamepaddisconnected', (e) => {
   gamepadHandler(e, false)
 })
 ```
@@ -4382,14 +4348,14 @@ navigator.bluetooth
   .then(characteristic =>
     characteristic.getDescriptor('gatt.characteristic_user_description')
   )
-  .then(descriptor => {
+  .then((descriptor) => {
     const encoder = new TextEncoder('utf-8')
     const userDescription = encoder.encode(
       'Defines the time between measurements.'
     )
     return descriptor.writeValue(userDescription)
   })
-  .catch(error => {
+  .catch((error) => {
     console.error(error)
   })
 ```
@@ -4403,7 +4369,7 @@ let device
 
 navigator.usb
   .requestDevice({ filters: [{ vendorId: 0x2341 }] })
-  .then(selectedDevice => {
+  .then((selectedDevice) => {
     device = selectedDevice
     return device.open() // Begin a session.
   })
@@ -4419,11 +4385,11 @@ navigator.usb
     })
   ) // Ready to receive data
   .then(() => device.transferIn(5, 64)) // Waiting for 64 bytes of data from endpoint.
-  .then(result => {
+  .then((result) => {
     const decoder = new TextDecoder()
     console.log(`Received: ${decoder.decode(result.data)}`)
   })
-  .catch(error => {
+  .catch((error) => {
     console.error(error)
   })
 ```
@@ -4499,12 +4465,13 @@ await writer.write('hello')
 [Human interface devices API](https://web.dev/hid):
 
 ```ts
-const waitFor = duration =>
-  new Promise(resolve => setTimeout(resolve, duration))
+function waitFor(duration) {
+  return new Promise(resolve => setTimeout(resolve, duration))
+}
 
 // Prompt user to select an Apple Keyboard Backlight device.
 const [device] = await navigator.hid.requestDevice({
-  filters: [{ vendorId: 0x05ac, usage: 0x0f, usagePage: 0xff00 }],
+  filters: [{ vendorId: 0x05AC, usage: 0x0F, usagePage: 0xFF00 }],
 })
 
 // Wait for the HID connection to open.

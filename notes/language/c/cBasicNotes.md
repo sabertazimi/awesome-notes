@@ -338,7 +338,7 @@ extern int pthread_create __P ((
   __const pthread_attr_t *__attr,
   void *(*__start_routine) (void *)， void *__arg)
 );
-　　
+
 /**
  * 等待线程
  * @param  {被等待的线程标识符}                              pthread_t __th
@@ -494,12 +494,12 @@ void SellTickets(int agent, int *ticketsNum, Semaphore lock) {
 
 ```cpp
 #ifndef MONGOOSE_HEADER_INCLUDED
-#define    MONGOOSE_HEADER_INCLUDED
+#define MONGOOSE_HEADER_INCLUDED
 
 /*.................................
- * do something here
- *.................................
- */
+ * do something here
+ *.................................
+ */
 
 #endif /* MONGOOSE_HEADER_INCLUDED */
 ```

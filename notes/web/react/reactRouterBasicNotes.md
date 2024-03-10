@@ -78,24 +78,35 @@ render(
 ```tsx
 import { Redirect, Route } from 'react-router-dom'
 
-const PrivateRoute = ({ component: Component, toAuth, ...rest }) => {
+interface Props {
+  location: string
+}
+
+export default function PrivateRoute({
+  component,
+  toAuth,
+  ...rest
+}: {
+  component: React.Component<Props>
+  toAuth: string
+}) {
   return (
     <Route
       {...rest}
-      render={props =>
-        auth.isAuthenticated() === true ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: toAuth,
-              state: {
-                from: props.location,
-              },
-            }}
-          />
-        )
-      }
+      render={(props: Props) =>
+        auth.isAuthenticated() === true
+          ? (<Component {...props} />)
+          : (
+            <Redirect
+              to={{
+                pathname: toAuth,
+                state: {
+                  from: props.location,
+                },
+              }}
+            />
+            // eslint-disable-next-line style/jsx-indent
+            )}
     />
   )
 }
@@ -106,12 +117,14 @@ const PrivateRoute = ({ component: Component, toAuth, ...rest }) => {
 ```tsx
 import { Route } from 'react-router-dom'
 
-function App() {
+export default function App() {
   return <Route path="/repos/:userName/:repoName" component={Repo} />
 }
+```
 
+```tsx
 // In Repo.js
-function Repo() {
+export default function Repo() {
   return (
     <div>
       <div>{this.props.params.userName}</div>
@@ -130,7 +143,13 @@ function Repo() {
 ```tsx
 import { Route } from 'react-router-dom'
 
-function RenderRoute({ component: Component }) {
+interface Props {}
+
+export default function RenderRoute({
+  component,
+}: {
+  component: React.Component<Props>
+}) {
   return <Route render={props => <Component {...props} />} />
 }
 ```
@@ -140,14 +159,14 @@ function RenderRoute({ component: Component }) {
 ```tsx
 import Component from './Component'
 
-function App() {
+export default function App() {
   const { ...state } = this.props.location.state
 
   return (
     <Component
       to={{
         pathname: url,
-        state: { ...state },
+        state,
       }}
     />
   )
@@ -181,9 +200,8 @@ class Login {
     const { redirect } = this.state
     const { from } = this.props.location.state || { from: { pathname: '/' } }
 
-    if (redirect) {
+    if (redirect)
       return <Redirect to={from} />
-    }
 
     return (
       <div>
@@ -194,7 +212,8 @@ class Login {
 }
 
 // apply `history` object to props of `Login` component
-export default withRouter(Login)
+const LoginWithRouter = withRouter(Login)
+export default LoginWithRouter
 ```
 
 ## Deployment
@@ -202,7 +221,7 @@ export default withRouter(Login)
 ### Relative Path
 
 ```tsx
-const App = () => {
+export default function App() {
   const history = useHistory()
   return (
     <ConnectedRouter history={history} basename="/react-boilerplate">
@@ -220,12 +239,14 @@ const App = () => {
   )
 }
 
-const Header = () => (
-  <div>
-    <NavLink to={`${process.env.PUBLIC_URL}/`}>Home</NavLink>
-    <NavLink to={`${process.env.PUBLIC_URL}/about`}>About</NavLink>
-  </div>
-)
+function Header() {
+  return (
+    <div>
+      <NavLink to={`${process.env.PUBLIC_URL}/`}>Home</NavLink>
+      <NavLink to={`${process.env.PUBLIC_URL}/about`}>About</NavLink>
+    </div>
+  )
+}
 ```
 
 ### Webpack Dev Server
@@ -297,12 +318,12 @@ const instances = []
 const register = comp => instances.push(comp)
 const unregister = comp => instances.splice(instances.indexOf(comp), 1)
 
-const historyPush = path => {
+function historyPush(path) {
   window.history.pushState({}, null, path)
   instances.forEach(instance => instance.forceUpdate())
 }
 
-const historyReplace = path => {
+function historyReplace(path) {
   window.history.replaceState({}, null, path)
   instances.forEach(instance => instance.forceUpdate())
 }
@@ -311,7 +332,7 @@ const historyReplace = path => {
 ### Route Component
 
 ```tsx
-const matchPath = (pathname, options) => {
+function matchPath(pathname, options) {
   const { exact = false, path } = options
 
   if (!path) {
@@ -347,15 +368,15 @@ const matchPath = (pathname, options) => {
   }
 }
 
-class Route extends Component {
-  static propTypes: {
-    path: PropTypes.string
-    exact: PropTypes.bool
-    component: PropTypes.func
-    render: PropTypes.func
-  }
+interface Props {
+  path: string
+  exact: boolean
+  component: Function
+  render: Function
+}
 
-  componentWillMount() {
+class Route extends Component<Props> {
+  UNSAFE_componentWillMount() {
     window.addEventListener('popstate', this.handlePop)
     register(this)
   }
@@ -374,17 +395,14 @@ class Route extends Component {
 
     const match = matchPath(window.location.pathname, { path, exact })
 
-    if (!match) {
+    if (!match)
       return null
-    }
 
-    if (component) {
+    if (component)
       return React.createElement(component, { match })
-    }
 
-    if (render) {
+    if (render)
       return render({ match })
-    }
 
     return null
   }
@@ -397,13 +415,18 @@ Whenever a `<Link>` is clicked and the location changes,
 each `<Route>` will be aware of that and re-match and re-render with `instances`.
 
 ```tsx
-class Link extends Component {
+interface Props {
+  to: string
+  children: ReactElement
+}
+
+class Link extends Component<Props> {
   static propTypes = {
     to: PropTypes.string.isRequired,
     replace: PropTypes.bool,
   }
 
-  handleClick = event => {
+  handleClick = (event) => {
     const { replace, to } = this.props
     event.preventDefault()
 
@@ -475,18 +498,21 @@ export default function Router({ routes, defaultComponent }) {
     }
   }, [])
   return (
-    routes.find(({ path, component }) => path === currentPath)?.component ||
-    defaultComponent
+    routes.find(({ path, component }) => path === currentPath)?.component
+    || defaultComponent
   )
 }
 
-export function Link({ className, href, children }) {
-  const onClick = event => {
+export function Link({ className, href, children }: {
+  className: string
+  href: string
+  children: ReactElement
+}) {
+  const onClick = (event) => {
     // if ctrl or meta key are held on click,
     // allow default behavior of opening link in new tab
-    if (event.metaKey || event.ctrlKey) {
+    if (event.metaKey || event.ctrlKey)
       return
-    }
 
     // prevent full page reload
     event.preventDefault()
@@ -506,7 +532,7 @@ export function Link({ className, href, children }) {
   )
 }
 
-export function navigate(href) {
+function navigate(href) {
   // update url
   window.history.pushState({}, '', href)
 

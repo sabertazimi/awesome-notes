@@ -1381,9 +1381,11 @@ use variables to implement `if else` statement.
   color: hsl(0% 0% calc((var(--lightness) - 0.5) * -999999%));
 
   /* 文字阴影, 黑色文字才会出现 */
-  text-shadow: 1px 1px rgb(calc(var(--red) + 50) calc(var(--green) + 50) calc(
-          var(--blue) + 50
-        ) / calc((var(--lightness) - 0.5) * 9999));
+  text-shadow: 1px 1px
+    rgb(
+      calc(var(--red) + 50) calc(var(--green) + 50) calc(var(--blue) + 50) /
+        calc((var(--lightness) - 0.5) * 9999)
+    );
 
   /* 背景颜色 */
   background: rgb(var(--red) var(--green) var(--blue));
@@ -1393,9 +1395,8 @@ use variables to implement `if else` statement.
 
   /* 边框样式, 亮度大于 0.8 才出现 */
   border-color: rgb(
-    calc(var(--red) - 50) calc(var(--green) - 50) calc(var(--blue) - 50) / calc((
-            var(--lightness) - 0.8
-          ) * 100)
+    calc(var(--red) - 50) calc(var(--green) - 50) calc(var(--blue) - 50) /
+      calc((var(--lightness) - 0.8) * 100)
   );
 }
 ```
@@ -1837,11 +1838,11 @@ const settings = {
     lineHeight: 1.6,
   },
   screensRem: {
-    min: 20,
-    sm: 40,
-    md: 48,
-    lg: 64,
-    xl: 80,
+    'min': 20,
+    'sm': 40,
+    'md': 48,
+    'lg': 64,
+    'xl': 80,
     '2xl': 96,
   },
   grid: {
@@ -1852,10 +1853,10 @@ const settings = {
 const remToPx = rem => `${rem * 16}px`
 
 const screens = {
-  sm: remToPx(settings.screensRem.sm),
-  md: remToPx(settings.screensRem.md),
-  lg: remToPx(settings.screensRem.lg),
-  xl: remToPx(settings.screensRem.xl),
+  'sm': remToPx(settings.screensRem.sm),
+  'md': remToPx(settings.screensRem.md),
+  'lg': remToPx(settings.screensRem.lg),
+  'xl': remToPx(settings.screensRem.xl),
   '2xl': remToPx(settings.screensRem['2xl']),
 }
 
@@ -1866,14 +1867,14 @@ const msFactorMax = settings.typography.msFactorMax
 const screenMin = settings.screensRem.min
 const screenMax = settings.screensRem['2xl']
 
-const calcMulti = (multiMin = 0, multiMax = null) => {
+function calcMulti(multiMin = 0, multiMax = null) {
   return {
     fsMin: fsMin * msFactorMin ** multiMin,
     fsMax: fsMax * msFactorMax ** (multiMax || multiMin),
   }
 }
 
-const clamp = (multiMin = 0, multiMax = null) => {
+function clamp(multiMin = 0, multiMax = null) {
   const _calcMulti = calcMulti(multiMin, multiMax || multiMin)
   const _fsMin = _calcMulti.fsMin
   const _fsMax = _calcMulti.fsMax
@@ -1881,11 +1882,11 @@ const clamp = (multiMin = 0, multiMax = null) => {
 }
 
 const fontSize = {
-  xs: clamp(-2),
-  sm: clamp(-1),
-  base: clamp(0),
-  lg: clamp(1),
-  xl: clamp(2),
+  'xs': clamp(-2),
+  'sm': clamp(-1),
+  'base': clamp(0),
+  'lg': clamp(1),
+  'xl': clamp(2),
   '2xl': clamp(3),
   '3xl': clamp(4),
   '4xl': clamp(5),
@@ -2412,9 +2413,8 @@ body {
 ```css
 @font-face {
   font-family: Emoji;
-  src: local('Apple Color Emoji'), local('Segoe UI Emoji'), local(
-      'Segoe UI Symbol'
-    ), local('Noto Color Emoji');
+  src: local('Apple Color Emoji'), local('Segoe UI Emoji'),
+    local('Segoe UI Symbol'), local('Noto Color Emoji');
   font-display: swap;
   unicode-range: U+1F000-1F644, U+203C-3299;
 }
@@ -3096,7 +3096,7 @@ li::before {
 <script>
   /* Additional range input feature */
   const range = document.querySelector('.image-a11y-control')
-  range.addEventListener('input', event => {
+  range.addEventListener('input', (event) => {
     document.querySelector('.image-before').style.width =
       `${event.target.value}%`
   })
