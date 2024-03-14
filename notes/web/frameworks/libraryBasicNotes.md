@@ -158,6 +158,7 @@ tags: [Web, Framework, Library]
 - [Electron](https://github.com/electron/electron)
 - [Tauri: Smaller, Faster and More Secure Rust Application](https://github.com/tauri-apps/tauri)
 - [Neutralino: Portable and Lightweight Cross-platform C++ Application](https://github.com/neutralinojs/neutralinojs)
+- [Wasmer: Leading Wasm Runtime](https://github.com/wasmerio/wasmer)
 
 ### Mobile Solution
 
@@ -204,6 +205,7 @@ tags: [Web, Framework, Library]
 ### Router State Management
 
 - [Navigo: Simple Vanilla Router](https://github.com/krasimir/navigo)
+- [Wouter: Minimalist-friendly Routing for React and Preact](https://github.com/molefrog/wouter)
 
 ## Hooks
 
@@ -491,6 +493,7 @@ tags: [Web, Framework, Library]
 
 ### Guide
 
+- [Onboard: Onboarding Wizard Flow for Next.js Powered by Framer Motion](https://github.com/uixmat/onborda)
 - [JoyRide: Awesome Guided Tours](https://github.com/gilbarbara/react-joyride)
 - [Shepherd: Guide Tour Library](https://github.com/shipshapecode/react-shepherd)
 - [Intro.js](https://github.com/usablica/intro.js)
@@ -504,6 +507,7 @@ tags: [Web, Framework, Library]
 
 ### Timeline
 
+- [ReactChrono: Modern Timeline Component](https://github.com/prabhuignoto/react-chrono)
 - [PlanBy: Electronic Program Guide (EPG) based Timeline](https://github.com/karolkozer/planby)
 - [Frappe: Interactive and Modern Gantt Chart](https://github.com/frappe/gantt)
 - [MarkWhen: Cascading Timeline from Markdown-like Text](https://github.com/kochrt/markwhen)
@@ -566,6 +570,7 @@ tags: [Web, Framework, Library]
 ### Table
 
 - [TanStack Table: Fast and Extendable Tables and DataGrids Hook](https://github.com/TanStack/table)
+- [Mantine Table: Fully Featured Mantine Implementation of TanStack React Table](https://github.com/KevinVandy/mantine-react-table)
 - [React DataSheet: Excel-like Data Tables and Grids component](https://github.com/nadbm/react-datasheet)
 - [Glide Data Grid](https://github.com/glideapps/glide-data-grid)
 - [MUI DataTable: Data Tables for React using Material UI](https://github.com/gregnb/mui-datatables)
@@ -1168,6 +1173,7 @@ tags: [Web, Framework, Library]
 - [Marked](https://github.com/markedjs/marked)
 - [MarkdownIt](https://github.com/markdown-it/markdown-it)
 - [Remark](https://github.com/remarkjs/remark)
+- [Remark Plugin for Code Block](https://github.com/expressive-code/expressive-code)
 - [Yozora: TypeScript Markdown Parser](https://github.com/yozorajs/yozora)
 - [Prism React Renderer](https://github.com/FormidableLabs/prism-react-renderer)
 
@@ -1475,6 +1481,7 @@ tags: [Web, Framework, Library]
 - [ByteHound: Memory Profiler](https://github.com/koute/bytehound)
 - [React Re-Rendering Alert](https://github.com/welldone-software/why-did-you-render)
 - [React Benchmark Component](https://github.com/paularmstrong/react-component-benchmark)
+- [ReactGeiger: Audio React Performance](https://github.com/kristiandupont/react-geiger)
 - [V8 Compile Cache](https://github.com/zertosh/v8-compile-cache)
 - [Brotli Compression Format](https://github.com/google/brotli)
 
