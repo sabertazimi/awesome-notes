@@ -176,8 +176,7 @@ class Snake extends Animal {
 }
 
 function AnimalSound(a: Array<Animal>) {
-  for (let i = 0; i <= a.length; i++)
-    log(a[i].makeSound())
+  for (let i = 0; i <= a.length; i++) log(a[i].makeSound())
 }
 
 AnimalSound(animals)
@@ -250,8 +249,7 @@ class Lion extends Animal {
 }
 
 function AnimalLegCount(a: Array<Animal>) {
-  for (let i = 0; i <= a.length; i++)
-    a[i].LegCount()
+  for (let i = 0; i <= a.length; i++) a[i].LegCount()
 }
 
 AnimalLegCount(animals)
@@ -1000,6 +998,9 @@ const createLoginLayer = (function (creator) {
 :::tip Adapter Use Case
 
 - API adapter.
+- 3rd-party code adapter.
+- Legacy code adapter (version compatibility).
+- Testing and mocking.
 
 :::
 
@@ -1108,6 +1109,14 @@ Split large class or set of closely related classes into two separate hierarchie
 - 分离抽象和实现 (Separate abstracts and implements).
 - 分离对象的两种不同属性. `e.g` 从 2 个不同维度上扩展对象.
 
+:::tip Bridge Use Case
+
+- Platform independence: e.g separate GUI frameworks from operating systems.
+- Database drivers.
+- Device drivers.
+
+:::
+
 ```ts
 class VectorRenderer {
   renderCircle(radius) {
@@ -1163,9 +1172,10 @@ circle.draw()
 
 :::tip Composite Use Case
 
-- DOM.
+- Graphics and UI Frameworks: e.g DOM.
+- File Systems: e.g directory tree.
+- Organization Structures.
 - AST.
-- Directory Tree.
 
 :::
 
@@ -1202,8 +1212,7 @@ class Composite implements Component {
   do(context: Context) {
     console.log('Do composite work')
 
-    for (const child of this.children)
-      child.do(context)
+    for (const child of this.children) child.do(context)
   }
 }
 
@@ -1395,8 +1404,7 @@ sabertazimi.addMyEvent = function (el, ev, fn) {
     el.addEventListener(ev, fn, false)
   else if (el.attachEvent)
     el.attachEvent(`on${ev}`, fn)
-  else
-    el[`on${ev}`] = fn
+  else el[`on${ev}`] = fn
 }
 ```
 
@@ -1413,10 +1421,11 @@ sabertazimi.addMyEvent = function (el, ev, fn) {
 
 :::tip Flyweight Use Case
 
-- Objects pool.
-- DOM nodes pool.
+- Objects pool: e.g text processing.
+- DOM nodes pool: e.g user interface.
 - Event delegation.
 - Reduce similar object instances.
+- Caching.
 
 :::
 
@@ -1598,8 +1607,7 @@ function GeoCoder() {
       return '48.8742° N, 2.3470° E'
     else if (address === 'Berlin')
       return '52.5233° N, 13.4127° E'
-    else
-      return ''
+    else return ''
   }
 }
 
@@ -1618,8 +1626,7 @@ function GeoProxy() {
     getCount() {
       let count = 0
 
-      for (const code in geocache)
-        count++
+      for (const code in geocache) count++
 
       return count
     },
@@ -1658,12 +1665,15 @@ reactive.name = 'bob' // 'updating UI...'
 
 :::tip CoR Use Case
 
+- AOP: Aspect Oriented Programming.
 - Middlewares:
   - Redux.
   - Express/Koa.
   - NestJS.
-- AOP: Aspect Oriented Programming.
-- DOM event capture and bubble chian.
+- Request handling.
+- Logging and error handling.
+- Event handling: DOM event capture and bubble chian.
+- Authorization and authentication.
 - JavaScript Prototype chain.
 - JavaScript Scope chain.
 
@@ -1869,10 +1879,10 @@ app.listen(2323, () => {
 :::tip Command Use Case
 
 - Decouple `Executor` and `Receiver`.
-- Bind `Command` to UI components.
-- Command sequences (store commands + `Composite` pattern):
+- GUI applications: bind `Command` to UI components.
+- Command sequences (store commands + `Composite` pattern) for batch processing:
   `Macro`/`Batch`/`Undo`/`Redo` feature.
-- Command queue (cache commands + `Observer` pattern):
+- Command queue (cache commands + `Observer` pattern) for transaction management:
   `Redis`/`RabbitMQ`/`Kafka`.
 
 :::
@@ -1904,8 +1914,7 @@ class Button {
   }
 
   click() {
-    for (const command of this.commands)
-      command.execute()
+    for (const command of this.commands) command.execute()
   }
 }
 
@@ -2038,8 +2047,7 @@ class Cursor {
     this.ctx.beginPath()
     this.ctx.moveTo(this.position.x, this.position.y)
 
-    for (let i = 0; i < this.commandStack.length; i++)
-      this.commandStack[i]()
+    for (let i = 0; i < this.commandStack.length; i++) this.commandStack[i]()
 
     this.ctx.stroke()
   }
@@ -2259,6 +2267,7 @@ doe.say('Hello everyone!')
 - 跨层级通信.
 - Message channel.
 - 异步编程.
+- Event handling.
 
 :::
 
@@ -2359,8 +2368,7 @@ class PubSub {
     const subscribers = this.topics[topic]
     let len = subscribers ? subscribers.length : 0
 
-    while (len--)
-      subscribers[len].func(topic, args)
+    while (len--) subscribers[len].func(topic, args)
 
     return this
   }
@@ -2525,6 +2533,8 @@ class MicroEvent {
 
 - Networking protocol stack.
 - Game player logic.
+- Workflow management.
+- Finite state machines.
 
 :::
 
@@ -2603,6 +2613,8 @@ button.off()
 - 动画策略.
 - 存在大量 if-else 场景.
 - 重构代码.
+- Algorithm selection.
+- Testing and mocking.
 
 :::
 
@@ -2777,8 +2789,7 @@ class Game {
 
   run() {
     this.start()
-    while (!this.haveWinner)
-      this.takeTurn()
+    while (!this.haveWinner) this.takeTurn()
 
     console.log(`Player ${this.winningPlayer} wins.`)
   }
@@ -2837,8 +2848,9 @@ Separating an algorithm from an object structure on which it operates.
 
 :::tip Visitor Use Case
 
-- Tree.
-- Compiler (Abstract Syntax Tree).
+- Data structures: e.g Tree, Graph.
+- Document processing: e.g DOM tree, reporting and analysis.
+- Compiler: e.g abstract syntax tree.
 
 :::
 
