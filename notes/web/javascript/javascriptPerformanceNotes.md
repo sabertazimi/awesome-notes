@@ -1158,9 +1158,11 @@ Native Lazy Loading:
 const DetailsComponent = lazy(() => import('./details'))
 
 export default function PageComponent() {
-  <Suspense fallback={<div>Loading...</div>}>
-    <DetailsComponent />
-  </Suspense>
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DetailsComponent />
+    </Suspense>
+  )
 }
 ```
 
