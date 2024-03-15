@@ -93,7 +93,7 @@ export default function PrivateRoute({
   return (
     <Route
       {...rest}
-      render={(props: Props) =>
+      render={(props: Props) => (
         auth.isAuthenticated() === true
           ? (<Component {...props} />)
           : (
@@ -105,8 +105,7 @@ export default function PrivateRoute({
                 },
               }}
             />
-            // eslint-disable-next-line style/jsx-indent
-            )}
+            ))}
     />
   )
 }
