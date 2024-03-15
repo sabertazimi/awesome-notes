@@ -984,6 +984,25 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 }
 ```
 
+#### Fifty-fifty Two Column
+
+```css
+.fifty-fifty-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fifty-fifty-flex > * {
+  flex-basis: 250px;
+  flex-grow: 1;
+}
+
+.fifty-fifty-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+```
+
 ### Three Column Pattern
 
 #### Absolute Three Column
