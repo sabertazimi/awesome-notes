@@ -608,6 +608,7 @@ tags: [Web, Framework, Library]
 - [Cytoscape.js: Graph Theory (Network) Library for Visualization and Analysis](https://github.com/cytoscape/cytoscape.js)
 - [Airbnb: Visualization Components](https://github.com/airbnb/visx)
 - [NeoVis.js: Graph Visualization with Data from Neo4j](https://github.com/neo4j-contrib/neovis.js)
+- [Perspective: Data Visualization and Analytics Component for Large Streaming Datasets](https://github.com/finos/perspective)
 
 ### Charts Draw Utils
 
@@ -632,7 +633,7 @@ tags: [Web, Framework, Library]
 
 ### Scrollbar
 
-- [PerfectScrollbar: Minimalistic but Perfect Custom Scrollbar Plugin](https://github.com/mdbootstrap/perfect-scrollbar)
+- [OverlayScrollbar: Custom Style-able Overlay Scrollbar](https://github.com/KingSora/OverlayScrollbars)
 
 ### Slides and Presentation
 
@@ -750,9 +751,9 @@ tags: [Web, Framework, Library]
 
 ### Typing Effect Animation
 
+- [React Typewriter Animation](https://github.com/maxeth/react-type-animation)
 - [Typed.js](https://github.com/mattboldt/typed.js)
 - [TypeIt](https://github.com/alexmacarthur/typeit)
-- [Typewriter: React Typewriter Effect Component](https://github.com/awran5/react-simple-typewriter)
 
 ### Hover Effect Animation
 
@@ -782,7 +783,7 @@ tags: [Web, Framework, Library]
 
 ### Date Utils
 
-- [Date Lodash](https://github.com/date-fns/date-fns)
+- [Date-FNS: Modern TypeScript Date Utility](https://github.com/date-fns/date-fns)
 - [Day.js: 2kB Immutable Date-time Library Alternative to Moment.js with Same Modern API](https://github.com/iamkun/dayjs)
 - [Time Table](https://github.com/flightplan-tool/timetable-fns)
 - [Moment.js](https://github.com/moment/moment)
@@ -864,9 +865,9 @@ tags: [Web, Framework, Library]
 
 ### Image Utils
 
+- [PSD: Fast Zero-dependency PSD Parser](https://github.com/webtoon/psd)
 - [ImageMagick: ImageMagick Bindings](https://github.com/elad/node-imagemagick-native)
 - [ImageLoader: Load Images JavaScript Utils](https://github.com/blueimp/JavaScript-Load-Image)
-- [PSD: Blazing fast and Zero-dependency PSD Parser](https://github.com/webtoon/psd)
 - [ICO](https://github.com/kevva/to-ico)
 - [HTML2Image](https://github.com/bubkoo/html-to-image)
 
@@ -1176,6 +1177,7 @@ tags: [Web, Framework, Library]
 - [Remark Plugin for Code Block](https://github.com/expressive-code/expressive-code)
 - [Yozora: TypeScript Markdown Parser](https://github.com/yozorajs/yozora)
 - [Prism React Renderer](https://github.com/FormidableLabs/prism-react-renderer)
+- [Shiki: Modern Powerful Syntax Highlighter](https://github.com/shikijs/shiki)
 
 ## CLI
 
@@ -1445,6 +1447,7 @@ tags: [Web, Framework, Library]
 - [JSCPD: Copy Paste Detector](https://github.com/kucherenko/jscpd)
 - [Size Limit: Calculate Real Cost to Keep Good Performance](https://github.com/ai/size-limit)
 - [Java CheckStyle](https://github.com/checkstyle/checkstyle)
+- [Knip: Find Unused Files, Dependencies and Exports in JavaScript and TypeScript](https://github.com/webpro/knip)
 
 ### Inspect Tools
 
