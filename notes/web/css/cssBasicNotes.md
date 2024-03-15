@@ -1722,6 +1722,64 @@ Change `lightness` to get gradient color:
 }
 ```
 
+### CSS Color Mix
+
+Creating color palettes with [`color-mix()`](https://developer.mozilla.org/en-US/blog/color-palettes-css-color-mix/?utm_source=CSS-Weekly&utm_campaign=Issue-582&utm_medium=web):
+
+```css
+:root {
+  --yellow: rgb(221 215 141);
+  --peach: rgb(220 191 133);
+  --chocolate: rgb(139 99 92);
+  --khaki: rgb(96 89 77);
+  --grey: rgb(147 162 155);
+  --mix-warm: red;
+  --mix-cool: blue;
+}
+
+.palette > div {
+  --color: var(--yellow);
+
+  background: color-mix(
+    in srgb,
+    var(--color),
+    var(--mix, var(--color)) var(--amount, 10%)
+  );
+
+  &:nth-child(2) {
+    --color: var(--peach);
+  }
+
+  &:nth-child(3) {
+    --color: var(--chocolate);
+  }
+
+  &:nth-child(4) {
+    --color: var(--khaki);
+  }
+
+  &:nth-child(5) {
+    --color: var(--grey);
+  }
+}
+
+.cool {
+  --mix: var(--mix-cool);
+}
+
+.cool-20 {
+  --amount: 20%;
+}
+
+.warm {
+  --mix: var(--mix-warm);
+}
+
+.warm-20 {
+  --amount: 20%;
+}
+```
+
 ### CSS Color Reference
 
 - CSS color module level 5 [guide](https://blog.logrocket.com/exploring-css-color-module-level-5):
