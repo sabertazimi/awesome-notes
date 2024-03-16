@@ -1042,6 +1042,7 @@ tags: [Web, Framework, Library]
 - [PouchDB: Pocket-sized and Offline-first Database for Browser](https://github.com/pouchdb/pouchdb)
 - [ImmortalDB: Relentless Key-value Store for Browser](https://github.com/gruns/ImmortalDB)
 - [TinyBase: Reactive Data Store for Local‑first Apps](https://github.com/tinyplex/tinybase)
+- [Origin Private File System Tool](https://github.com/hughfenghen/opfs-tools)
 
 ### Database
 
