@@ -10,50 +10,38 @@ tags: [Web, Framework, Library]
 
 ## Indexing Tools
 
-- [OpenBase](https://openbase.com)
 - [Rising Stars](https://github.com/bestofjs/javascript-risingstars)
 - [Best of JS](https://github.com/bestofjs/bestofjs-webui)
 - [Moiva](https://github.com/aantipov/moiva)
-- [CodeHouse: Whole New World Developer Cheatsheets](https://github.com/saviomartin/codehouse)
 - [NPM Package Advisor](https://snyk.io/advisor)
 - [NPM Package Analytics](https://npm.devtool.tech)
-- [NPM Package Compare](https://npmcompare.com)
+- [NPM Package Comparator](https://npmcompare.com)
 - [NPM Package Cost](https://github.com/pastelsky/bundlephobia)
 - [NPM Package Trends](https://github.com/johnmpotter/npm-trends)
-- [NPM Package Online Explorer](https://github.com/FormidableLabs/runpkg)
+- [NPM Package Explorer](https://github.com/FormidableLabs/runpkg)
 
 ## Web Boilerplate
 
 ### Generators and CLI Tools
 
-- [Create React App](https://github.com/facebook/create-react-app)
-- [Create React Native App](https://github.com/expo/create-react-native-app)
+- [Create Vue App](https://github.com/vuejs/create-vue)
+- [Create React Native App](https://github.com/expo/expo)
 - [Create T3 App: Create Full-stack and Type-safe Next.js App](https://github.com/t3-oss/create-t3-app)
-- [Craco: Create React App Configuration Override Tool](https://github.com/gsoft-inc/craco)
 - [Modern: Meta-framework Suite Designed for Frontend-focused Modern Web Development](https://github.com/modern-js-dev/modern.js)
 - [Projen: New Generation of Project Generators](https://github.com/projen/projen)
 - [Hygen: Component Generator](https://github.com/jondot/hygen)
 - [Plop Generator](https://github.com/plopjs/plop)
-- [TsDx: Zero-config TypeScript Package Development CLI Tool](https://github.com/jaredpalmer/tsdx)
 - [UnBuild: Unified JavaScript Build System](https://github.com/unjs/unbuild)
-- [Vue CLI](https://github.com/vuejs/vue-cli)
-- [Vite](https://github.com/vitejs/vite)
 
 ### Boilerplate and Templates
 
 - [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 - [React Next.js Boilerplate](https://github.com/BearStudio/start-ui-web)
-- [React BulletProof Boilerplate](https://github.com/alan2207/bulletproof-react)
-- [React CRA Boilerplate](https://github.com/react-boilerplate/react-boilerplate-cra-template)
-- [React PWA Boilerplate](https://github.com/cra-template/pwa)
 - [React Electron Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
 - [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
 - [React Vite Starter](https://github.com/wtchnm/Vitamin)
-- [React Chrome Extension JavaScript Boilerplate](https://github.com/FullStack-Academy-Kiev/react-chrome-extension)
-- [React Chrome Extension TypeScript Boilerplate](https://github.com/Debdut/browser-extension)
-- [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)
 - [Plasmo: Browser Extension Framework](https://github.com/PlasmoHQ/plasmo)
-- [Vite Web Extension](https://github.com/antfu/vitesse-webext)
+- [Browser Extension Vite Starter](https://github.com/antfu/vitesse-webext)
 
 ## UI Framework
 
@@ -62,15 +50,13 @@ tags: [Web, Framework, Library]
 - [Bootstrap.css](https://github.com/twbs/bootstrap)
 - [Pico.css](https://github.com/picocss/pico)
 - [MVP.css](https://github.com/andybrewer/mvp)
-- [NES.css](https://github.com/nostalgic-css/NES.css)
 - [Paper.css](https://github.com/papercss/papercss)
 
 ### Utility UI Framework
 
-- [Daisy: Tailwind Components Plugin](https://github.com/saadeghi/daisyui)
-- [Vechai: Tailwind React Library](https://github.com/vechai/vechaiui)
-- [Elements: Tailwind Components Collection](https://github.com/mdbootstrap/Tailwind-Elements)
 - [Tailwind](https://github.com/tailwindlabs/tailwindcss)
+- [Daisy: Tailwind Components Plugin](https://github.com/saadeghi/daisyui)
+- [Elements: Tailwind Components Collection](https://github.com/mdbootstrap/Tailwind-Elements)
 - [Form](https://github.com/tailwindlabs/tailwindcss-forms)
 - [Typography](https://github.com/tailwindlabs/tailwindcss-typography)
 - [Aspect Ratio](https://github.com/tailwindlabs/tailwindcss-aspect-ratio)
@@ -79,10 +65,9 @@ tags: [Web, Framework, Library]
 ### Headless UI Framework
 
 - [Headless: Completely Un-styled and Fully Accessible Tailwind React Components](https://github.com/tailwindlabs/headlessui)
-- [AriaKit: Accessible React Components](https://github.com/ariakit/ariakit)
-- [Spectrum: Build Adaptive, Accessible and Robust User Experiences](https://github.com/adobe/react-spectrum)
-- [Reach: Accessible Foundation for React Apps and Design Systems](https://github.com/reach/reach-ui)
 - [Radix: Build High-quality and Accessible Design Systems](https://github.com/radix-ui/primitives)
+- [Spectrum: Build Adaptive, Accessible and Robust User Experiences](https://github.com/adobe/react-spectrum)
+- [AriaKit: Accessible React Components](https://github.com/ariakit/ariakit)
 - [Shadcn: Accessible and Customizable Components can Copy and Paste](https://github.com/shadcn-ui/ui)
 
 ### Components UI Framework
@@ -93,9 +78,7 @@ tags: [Web, Framework, Library]
 - [Next: Beautiful, Fast and Modern React UI Library](https://github.com/nextui-org/nextui)
 - [Mantine](https://github.com/mantinedev/mantine)
 - [BluePrint](https://github.com/palantir/blueprint)
-- [Geist: Modern Design System](https://github.com/geist-org/geist-ui)
 - [Primer: GitHub Primer Design System](https://github.com/primer/react)
-- [Desktop: macOS and Windows Style Components](https://github.com/gabrielbull/react-desktop)
 - [Luna: Operating System Components](https://github.com/liriliri/luna)
 - [Molecule: Lightweight Web IDE UI Framework](https://github.com/DTStack/molecule)
 
@@ -112,31 +95,30 @@ tags: [Web, Framework, Library]
 ### Front-end Solution
 
 - [Next](https://github.com/vercel/next.js)
+- [Nuxt](https://github.com/nuxt/nuxt.js)
 - [Remix: Full Stack Web Framework](https://github.com/remix-run/remix)
 - [Gatsby](https://github.com/gatsbyjs/gatsby)
-- [Hydrogen: React-based Framework for Building Shopify-powered Custom Storefronts](https://github.com/Shopify/hydrogen)
 - [UMI](https://github.com/umijs/umi)
 - [IceWorks](https://github.com/alibaba/ice)
 - [Blitz: Full Stack React Framework](https://github.com/blitz-js/blitz)
-- [Nuxt](https://github.com/nuxt/nuxt.js)
+- [Hydrogen: React-based Framework for Building Shopify-powered Custom Storefronts](https://github.com/Shopify/hydrogen)
 
 ### Micro Front-ends Solution
 
 - [QianKun](https://github.com/umijs/qiankun)
-- [IceStark](https://github.com/ice-lab/icestark)
 - [Bit](https://github.com/teambit/bit)
+- [IceStark](https://github.com/ice-lab/icestark)
 - [Garfish: ByteDance Micro Front-end Framework](https://github.com/bytedance/garfish)
 - [Single SPA](https://github.com/single-spa/single-spa)
 
 ### Back-end Solution
 
 - [Nest: Enterprise-grade Server-side Applications on Top of TypeScript](https://github.com/nestjs/nest)
+- [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify)
 - [Feathers.js: Real-time Applications Framework Based on Socket.IO](https://github.com/feathersjs/feathers)
 - [Egg.js](https://github.com/eggjs/egg)
 - [Midway: Serverless Framework for Front-end Developers](https://github.com/midwayjs/midway)
 - [Koa: Expressive Middleware using ES2017 Async Functions](https://github.com/koajs/koa)
-- [Connect: Express-like Middleware Layer Server](https://github.com/senchalabs/connect)
-- [Fastify: Fast and Low Overhead Web Framework](https://github.com/fastify/fastify-dx)
 - [Sails: Realtime MVC Framework](https://github.com/balderdashy/sails)
 - [RedWood: App Framework for Startups](https://github.com/redwoodjs/redwood)
 - [Amplication: Low-Code but High Quality Applications](https://github.com/amplication/amplication)
@@ -162,11 +144,9 @@ tags: [Web, Framework, Library]
 
 ### Mobile Solution
 
+- [Expo: Making Universal Native Apps with React on Android, iOS and Web](https://github.com/expo/expo)
 - [Uni APP: Vue for Mobile Development](https://github.com/dcloudio/uni-app)
 - [Taro: Cross-Platform and Cross-Framework Solution to Develop Mini-programs](https://github.com/NervJS/taro)
-- [Expo: Making Universal Native Apps with React on Android, iOS and Web](https://github.com/expo/expo)
-- [Rax: Progressive React Framework for Building Universal Application](https://github.com/alibaba/rax)
-- [Universal API: Universal APIs for Web, WeChat Miniapp and AliPay Miniapp](https://github.com/raxjs/universal-api)
 
 ## State Management
 
