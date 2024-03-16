@@ -831,12 +831,9 @@ tags: [Web, Framework, Library]
 
 ### Emoji
 
-- [EmojiButton: Emoji Picker](https://github.com/joeattardi/emoji-button)
-- [Picmo: JavaScript Emoji Picker](https://github.com/joeattardi/picmo)
-- [OwO Keyboard Emoji](https://github.com/DIYgod/OwO)
+- [OpenEmoji: Open Source Emoji](https://github.com/hfg-gmuend/openmoji)
 - [Twitter Emoji](https://github.com/twitter/twemoji)
-- [Emoji Panel](https://github.com/TimeToKnow/emoji-panel)
-- [Emoji Mart: One component to Pick Emoji All](https://github.com/missive/emoji-mart)
+- [Emoji Mart: Emoji Picker](https://github.com/missive/emoji-mart)
 
 ### Icon
 
