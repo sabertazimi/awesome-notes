@@ -1869,6 +1869,28 @@ document.querySelector('form').addEventListener('submit', (event) => {
 })
 ```
 
+```tsx
+import { useRouter } from 'next/navigation'
+
+export default function Page() {
+  const router = useRouter()
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    const formData = new FormData(event.target)
+    const data = Object.fromEntries(formData)
+
+    // Do something with data. Most likely, send it to the server using fetch
+
+    // Redirect the user to the new page
+    router.push('/thank-you')
+  }
+
+  return <form onSubmit={handleSubmit}>...</form>
+}
+```
+
 #### Input Events
 
 - `blur`/`focus`/`focusin`/`focusout` event.
