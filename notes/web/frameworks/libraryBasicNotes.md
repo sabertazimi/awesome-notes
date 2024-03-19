@@ -1254,8 +1254,9 @@ tags: [Web, Framework, Library]
 
 ### WebRTC
 
+- [Meet: Secure, Simple and Scalable Video Conferences](https://github.com/jitsi/jitsi-meet)
 - [PeerJS: Simple Peer-to-peer with WebRTC](https://github.com/peers/peerjs)
-- [LiveKit](https://github.com/livekit/livekit-react)
+- [LiveKit](https://github.com/livekit/components-js)
 
 ### P2P
 
