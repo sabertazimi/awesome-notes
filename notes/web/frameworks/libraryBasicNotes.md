@@ -540,16 +540,16 @@ tags: [Web, Framework, Library]
 
 #### List Virtualized Windowing
 
+- [TanStack Virtual: Headless UI for Virtualizing Large Element Lists](https://github.com/TanStack/virtual)
 - [ReactVirtualized](https://github.com/bvaughn/react-virtualized)
 - [ReactWindow: Brand New React Virtualized](https://github.com/bvaughn/react-window)
-- [ReactVirtual: Hooks for Virtualizing Scrollable Elements](https://github.com/TanStack/react-virtual)
 - [React Virtualized Auto Sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)
 - [React Virtuoso](https://github.com/petyosi/react-virtuoso)
 - [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller)
 
 ### Table
 
-- [TanStack Table: Fast and Extendable Tables and DataGrids Hook](https://github.com/TanStack/table)
+- [TanStack Table: Headless UI for Building Powerful Tables and DataGrids](https://github.com/TanStack/table)
 - [Mantine Table: Fully Featured Mantine Implementation of TanStack React Table](https://github.com/KevinVandy/mantine-react-table)
 - [React DataSheet: Excel-like Data Tables and Grids component](https://github.com/nadbm/react-datasheet)
 - [Glide Data Grid](https://github.com/glideapps/glide-data-grid)
@@ -617,10 +617,10 @@ tags: [Web, Framework, Library]
 
 ### Slides and Presentation
 
+- [Spectacle: React Based Presentation Slides](https://github.com/FormidableLabs/spectacle)
 - [Reveal: HTML Presentation Framework](https://github.com/hakimel/reveal.js)
 - [MDX Deck](https://github.com/jxnblk/mdx-deck)
 - [Surfer: Highlighting, Zooming, Scrolling, Focusing and Morphing Code Slides](https://github.com/pomber/code-surfer)
-- [Spectacle: React Based Presentation Slides](https://github.com/FormidableLabs/spectacle)
 - [SliDev: Vue Based Presentation Slides](https://github.com/slidevjs/slidev)
 - [Impress: Prezi-like Presentation Slides](https://github.com/impress/impress.js)
 - [PPTX: TypeScript PowerPoint Presentations](https://github.com/gitbrent/PptxGenJS)
