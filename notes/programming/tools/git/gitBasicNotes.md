@@ -1335,6 +1335,10 @@ updates:
       - sabertazimi
 ```
 
+### GitHub Copilot
+
+- GitHub Copilot usage [tips](https://github.blog/2024-03-25-how-to-use-github-copilot-in-your-ide-tips-tricks-and-best-practices).
+
 ## Git Internals
 
 ### Git Objects
