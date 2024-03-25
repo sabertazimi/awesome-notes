@@ -2121,37 +2121,74 @@ const svgRectElement = document.createElementNS(
 - `dark`.
 
 ```css
-.day {
-  color: black;
-  background: #eee;
-}
+:root {
+  /* light styles */
+  color-scheme: var(--color-scheme, light);
 
-.night {
-  color: white;
-  background: #333;
-}
+  /* page preference is "dark" */
+  &:has(#color-scheme option[value='dark']:checked) {
+    --color-scheme: dark;
 
-@media (prefers-color-scheme: dark) {
-  .day.dark-scheme {
-    color: white;
-    background: #333;
+    /* any additional dark styles */
   }
 
-  .night.dark-scheme {
-    color: #ddd;
-    background: black;
+  /* page preference is "system", and system preference is "dark" */
+  @media (prefers-color-scheme: dark) {
+    &:has(#color-scheme option[value='system']:checked) {
+      --color-scheme: dark;
+
+      /* any additional dark styles, again */
+    }
   }
 }
+```
 
-@media (prefers-color-scheme: light) {
-  .day.light-scheme {
-    color: #555;
-    background: white;
+```ts
+const ColorSchemeStorageItemName = 'preferredColorScheme'
+
+/*
+ * If a color scheme preference was previously stored,
+ * select the corresponding option in the color scheme preference UI
+ * unless it is already selected.
+ */
+function restoreColorSchemePreference() {
+  const colorScheme = localStorage.getItem(ColorSchemeStorageItemName)
+
+  if (!colorScheme) {
+    // There is no stored preference to restore
+    return
   }
 
-  .night.light-scheme {
-    color: black;
-    background: #eee;
+  const option = colorSchemeSelectorEl.querySelector(`[value=${colorScheme}]`)
+
+  if (!option) {
+    // The stored preference has no corresponding option in the UI.
+    localStorage.removeItem(ColorSchemeStorageItemName)
+    return
+  }
+
+  if (option.selected) {
+    // The stored preference's corresponding menu option is already selected
+    return
+  }
+
+  option.selected = true
+}
+
+/*
+ * Store an event target's value in localStorage under ColorSchemeStorageItemName
+ */
+function storeColorSchemePreference({ target }) {
+  const colorScheme = target.querySelector(':checked').value
+  localStorage.setItem(ColorSchemeStorageItemName, colorScheme)
+}
+
+function main() {
+  const colorSchemeSelectorEl = document.querySelector('#color-scheme')
+
+  if (colorSchemeSelectorEl) {
+    restoreColorSchemePreference()
+    colorSchemeSelectorEl.addEventListener('input', storeColorSchemePreference)
   }
 }
 ```
