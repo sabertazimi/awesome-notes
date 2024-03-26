@@ -302,8 +302,13 @@ WslIP=$(hostname -I | awk '{print $1}')
 Port=1080
 PROXY_SOCKS="socks5://${HostIP}:${Port}"
 
+# For Git CLI.
 git config --global http.proxy "${PROXY_SOCKS}"
 git config --global https.proxy "${PROXY_SOCKS}"
+
+# For GitHub CLI.
+export HTTP_PROXY="${PROXY_SOCKS}"
+export HTTPS_PROXY="${PROXY_SOCKS}"
 ```
 
 :::caution Socks Client
