@@ -579,8 +579,7 @@ tags: [Web, Framework, Library]
 - [AntV: React Chart Library Based on G2Plot, G6, X6, L7](https://github.com/ant-design/ant-design-charts)
 - [ReCharts: Redefined Chart Library Built with React and D3](https://github.com/recharts/recharts)
 - [HighCharts: TypeScript Charting Framework](https://github.com/highcharts/highcharts)
-- [TuiChart: TOAST UI Chart](https://github.com/nhn/tui.chart)
-- [ReactFlow: Building Interactive Node-based UIs, Editors, Flow Charts and Diagrams](https://github.com/wbkd/react-flow)
+- [XYFlow: Building Intreactive Node-based UIs, Editors, Flow Charts and Diagrams](https://github.com/xyflow/xyflow)
 - [ReaFlow: Building Workflow Editors, Flow Charts and Diagrams](https://github.com/reaviz/reaflow)
 - [Sigma: Dedicated to Graph Drawing](https://github.com/jacomyal/sigma.js)
 - [Plotly.js: Charting Library behind Plotly and Dash](https://github.com/plotly/plotly.js)
@@ -589,6 +588,7 @@ tags: [Web, Framework, Library]
 - [Airbnb: Visualization Components](https://github.com/airbnb/visx)
 - [NeoVis.js: Graph Visualization with Data from Neo4j](https://github.com/neo4j-contrib/neovis.js)
 - [Perspective: Data Visualization and Analytics Component for Large Streaming Datasets](https://github.com/finos/perspective)
+- [Tremor: Build Charts and Dashboards](https://github.com/tremorlabs/tremor)
 
 ### Charts Draw Utils
 
@@ -870,11 +870,11 @@ tags: [Web, Framework, Library]
 
 ### Image Editor
 
-- [Cropper.js: JavaScript Image Cropper](https://github.com/fengyuanchen/cropperjs)
+- [React Advanced Cropper](https://github.com/advanced-cropper/react-advanced-cropper)
 - [ImageCrop: React Image Cropping Tool](https://github.com/DominicTobias/react-image-crop)
 - [EasyCrop: Crop Images and Videos with Easy Interactions](https://github.com/ValentinH/react-easy-crop)
 - [Slider: Image Comparison Slider](https://github.com/sneas/img-comparison-slider)
-- [Tui: Full Featured Image Editor using HTML5 Canvas](https://github.com/nhn/tui.image-editor)
+- [Cropper.js: JavaScript Image Cropper](https://github.com/fengyuanchen/cropperjs)
 
 ## Canvas
 
@@ -1355,6 +1355,10 @@ tags: [Web, Framework, Library]
 ### CV
 
 - [Tesseract: Image Recognition Tesseract OCR Engine](https://github.com/naptha/tesseract.js)
+
+### Agent
+
+- [CopilotKit: Building Custom AI Copilots](https://github.com/CopilotKit/CopilotKit)
 
 ## Debugging and Testing
 
