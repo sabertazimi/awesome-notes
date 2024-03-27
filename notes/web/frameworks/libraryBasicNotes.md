@@ -191,9 +191,8 @@ tags: [Web, Framework, Library]
 
 - [ReactUse Hooks](https://github.com/streamich/react-use)
 - [Alibaba Hooks](https://github.com/alibaba/hooks)
+- [JavaScript Hooks](https://github.com/uidotdev/usehooks)
 - [TypeScript Hooks](https://github.com/juliencrn/useHooks-ts)
-- [ReactHook: Strongly Typed and Concurrent Mode-safe Hooks](https://github.com/jaredLunde/react-hook)
-- [React Hooks Gallery](https://github.com/nikgraf/react-hooks)
 - [VueUse](https://github.com/vueuse/vueuse)
 
 ### State Hooks
