@@ -279,6 +279,8 @@ wget https://aur.archlinux.org/packages.gz
 
 ## WSL
 
+### WSL Installation
+
 [Upgrade to WSL 2](https://docs.microsoft.com/windows/wsl/install-manual):
 
 ```bash
@@ -293,6 +295,8 @@ wsl --set-default-version 2
 wsl --set-version Ubuntu-22.04 2
 wsl -l -v
 ```
+
+### WSL Proxy Connection
 
 [Proxy for WSL 2](https://zinglix.xyz/2020/04/18/wsl2-proxy):
 
@@ -318,6 +322,8 @@ VLAN (或其他网络) 设备访问本地代理连接.
 
 :::
 
+### WSL Remote Connection
+
 [Gzip for WSL 2](https://github.com/microsoft/WSL/issues/4461#issuecomment-1174011640):
 
 ```bash
@@ -329,6 +335,12 @@ echo -en '\x10' | sudo dd of=/usr/bin/gzip count=1 bs=1 conv=notrunc seek=$((0x1
 ```bash
 netsh winsock reset
 ```
+
+### WSL Wi-Fi Connection
+
+Win 11 MediaTek Wi-Fi 6 delay start:
+set `Network Connections` and `WLAN AutoConfig`
+to auto-start in services.
 
 ## Basic Commands
 
