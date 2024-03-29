@@ -46,6 +46,11 @@ tags: [Web, Framework, Library]
 
 ## UI Framework
 
+### Design Systems
+
+- [OpenUI: W3C Community Group](https://open-ui.org)
+- [Design Systems Database](https://designsystems.surf)
+
 ### CSS UI Framework
 
 - [Bootstrap.css](https://github.com/twbs/bootstrap)
