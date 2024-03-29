@@ -10,6 +10,7 @@ tags: [Web, Framework, Library]
 
 ## Indexing Tools
 
+- [LibHunt](https://www.libhunt.com)
 - [Rising Stars](https://github.com/bestofjs/javascript-risingstars)
 - [Best of JS](https://github.com/bestofjs/bestofjs-webui)
 - [Moiva](https://github.com/aantipov/moiva)
