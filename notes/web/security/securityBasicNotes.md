@@ -249,6 +249,15 @@ help prevent from `XSS`:
 }
 ```
 
+Basic CSP [usage](https://www.writesoftwarewell.com/content-security-policy):
+
+```html
+<meta
+  http-equiv="Content-Security-Policy"
+  content="script-src 'self' https://safe-external-site.com; style-src 'self'"
+/>
+```
+
 `upgrade-insecure-requests`
 指示浏览器在发出网络请求之前升级不安全的 `URL`:
 
