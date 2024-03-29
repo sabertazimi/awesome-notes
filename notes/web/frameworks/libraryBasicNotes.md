@@ -300,6 +300,7 @@ tags: [Web, Framework, Library]
 - [TypeBox: JSON Schema Type Builder](https://github.com/sinclairzx81/typebox)
 - [AutoMapper: Object to Object Auto Mapper](https://github.com/nartc/mapper)
 - [OW: Function Argument Validation for Humans](https://github.com/sindresorhus/ow)
+- [SuperJSON](https://github.com/blitz-js/superjson)
 
 ### TypeScript AST Utils
 
