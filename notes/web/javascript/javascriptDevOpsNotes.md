@@ -318,8 +318,7 @@ the client takes over and the website becomes a SPA.
 if (isBotAgent) {
   // return pre-rendering static html to search engine crawler
   // like Gatsby
-}
-else {
+} else {
   // server side rendering at runtime for real interactive users
   // ReactDOMServer.renderToString()
 }
@@ -2126,8 +2125,7 @@ module.exports = {
             const hash = crypto.createHash('sha1')
             if (isModuleCSS(module)) {
               module.updateHash(hash)
-            }
-            else {
+            } else {
               if (!module.libIdent) {
                 throw new Error(
                   `Encountered unknown module type: ${module.type}.`

@@ -63,8 +63,7 @@ try {
   const newWin = window.open('https://www.new.com/', '_blank')
   if (newWin === null)
     blocked = true
-}
-catch (ex) {
+} catch (ex) {
   blocked = true
 }
 if (blocked)
@@ -253,8 +252,7 @@ if (window.navigator.geolocation) {
     // 最长有效期, 在重复获取地理位置时, 此参数指定多久再次获取位置.
     maximumAge: 3000,
   })
-}
-else {
+} else {
   alert('Your browser does not support Geolocation!')
 }
 ```
@@ -399,8 +397,7 @@ function toggleFullscreen() {
       .exitFullscreen()
       .then(() => console.log('Document Exited from Full screen mode'))
       .catch(err => console.error(err))
-  }
-  else {
+  } else {
     elem
       .requestFullscreen()
       .then(() => {})
@@ -418,8 +415,7 @@ document.onclick = function (event) {
       .exitFullscreen()
       .then(() => console.log('Document Exited from Full screen mode'))
       .catch(err => console.error(err))
-  }
-  else {
+  } else {
     document.documentElement
       .requestFullscreen({ navigationUI: 'show' })
       .then(() => {})
@@ -1251,8 +1247,7 @@ function loadScriptString(code) {
 
   try {
     script.appendChild(document.createTextNode(code))
-  }
-  catch (ex) {
+  } catch (ex) {
     script.text = code
   }
 
@@ -1288,8 +1283,7 @@ function loadStyleString(css) {
 
   try {
     style.appendChild(document.createTextNode(css))
-  }
-  catch (ex) {
+  } catch (ex) {
     style.styleSheet.cssText = css
   }
 
@@ -1476,8 +1470,7 @@ element.classList.contains('class')
 function addClassPolyfill(element, value) {
   if (!element.className) {
     element.className = value
-  }
-  else {
+  } else {
     newClassName = element.className
     newClassName += ' '
     newClassName += value
@@ -1825,15 +1818,13 @@ function onSubmit(event) {
       acc[key] = formData.get(key)
       return acc
     }, {})
-  }
-  else {
+  } else {
     // apply invalid class
     Array.from(form.elements).forEach((i) => {
       if (i.checkValidity()) {
         // field is valid
         i.parentElement.classList.remove('invalid')
-      }
-      else {
+      } else {
         // field is invalid
         i.parentElement.classList.add('invalid')
         console.log(i.validity)
@@ -1858,8 +1849,7 @@ document.querySelector('form').addEventListener('submit', (event) => {
     // Modify request body to include form data
     options.body
       = form.enctype === 'multipart/form-data' ? formData : searchParameters
-  }
-  else {
+  } else {
     // Modify URL to include form data
     url.search = searchParameters
   }
@@ -2783,13 +2773,11 @@ const XHR = (function () {
   // 此立即函数运行一次即可完成兼容性检查, 防止重复检查
   if (standard.createXHR()) {
     return standard
-  }
-  else {
+  } else {
     try {
       newActionXObject.createXHR()
       return newActionXObject
-    }
-    catch (o) {
+    } catch (o) {
       oldActionXObject.createXHR()
       return oldActionXObject
     }
@@ -2847,8 +2835,7 @@ function ajax(options) {
   // 创建 - 非IE6 - 第一步
   if (window.XMLHttpRequest) {
     xhr = new XMLHttpRequest()
-  }
-  else {
+  } else {
     // IE6及其以下版本浏览器
     xhr = new ActiveXObject('Microsoft.XMLHTTP')
   }
@@ -2868,8 +2855,7 @@ function ajax(options) {
   if (options.type === 'GET') {
     xhr.open('GET', `${options.url}?${params}`, true)
     xhr.send(null)
-  }
-  else if (options.type === 'POST') {
+  } else if (options.type === 'POST') {
     xhr.open('POST', options.url, true)
     // 设置表单提交时的内容类型
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -2902,8 +2888,7 @@ function getJSON(url) {
           resolve(JSON.parse(this.response))
         else
           reject(Error(`${this.status} ${this.statusText}`))
-      }
-      catch (e) {
+      } catch (e) {
         reject(e.message)
       }
     }
@@ -3214,8 +3199,7 @@ async function* streamGenerator(stream) {
 
       yield value
     }
-  }
-  finally {
+  } finally {
     reader.releaseLock()
   }
 }
@@ -3252,8 +3236,7 @@ fetch('https://fetch.spec.whatwg.org/')
             // 将主体流的块推到第二个流
             controller.enqueue(value)
           }
-        }
-        finally {
+        } finally {
           controller.close()
           reader.releaseLock()
         }
@@ -3385,8 +3368,7 @@ function WebSocketTest() {
     ws.onerror = function () {
       alert('Connection error.')
     }
-  }
-  else {
+  } else {
     // The browser doesn't support WebSocket
     alert('WebSocket NOT supported by your Browser!')
   }
@@ -4241,8 +4223,7 @@ request.onsuccess = function (event) {
     // 永远要检查
     console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`)
     cursor.continue() // 移动到下一条记录
-  }
-  else {
+  } else {
     console.log('Done!')
   }
 }
@@ -4300,8 +4281,7 @@ async function doPaymentRequest() {
     )
     const response = await request.show()
     await validateResponse(response)
-  }
-  catch (err) {
+  } catch (err) {
     // AbortError, SecurityError
     console.error(err)
   }
@@ -4317,8 +4297,7 @@ async function validateResponse(response) {
     }
 
     await response.complete('success')
-  }
-  catch (err) {
+  } catch (err) {
     // Something went wrong…
     await response.complete('fail')
   }

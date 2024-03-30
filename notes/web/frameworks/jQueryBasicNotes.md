@@ -22,8 +22,7 @@ function Callbacks(options) {
       if (options === 'unique') {
         if (!list.includes(fn))
           list.push(fn)
-      }
-      else {
+      } else {
         list.push(fn)
       }
     },
@@ -107,8 +106,7 @@ class Promise {
       // only be called once, a function that synchronously calls `resolve()`
       // and then throws will lead to a fulfilled promise and a swallowed error
       executor(resolve, reject)
-    }
-    catch (err) {
+    } catch (err) {
       reject(err)
     }
   }
@@ -127,8 +125,7 @@ class Promise {
           // it correctly.
           // store new value to new Promise
           resolve(onFulfilled(res))
-        }
-        catch (err) {
+        } catch (err) {
           reject(err)
         }
       }
@@ -137,19 +134,16 @@ class Promise {
         try {
           // store new value to new Promise
           reject(onRejected(err))
-        }
-        catch (_err) {
+        } catch (_err) {
           reject(_err)
         }
       }
 
       if (this.$state === 'FULFILLED') {
         _onFulfilled(this.$internalValue)
-      }
-      else if (this.$state === 'REJECTED') {
+      } else if (this.$state === 'REJECTED') {
         _onRejected(this.$internalValue)
-      }
-      else {
+      } else {
         this.$chained.push({
           onFulfilled: _onFulfilled,
           onRejected: _onRejected,

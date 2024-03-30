@@ -121,11 +121,9 @@ class MyComponent extends React.Component {
           {error.message}
         </div>
       )
-    }
-    else if (!isLoaded) {
+    } else if (!isLoaded) {
       return <div>Loading...</div>
-    }
-    else {
+    } else {
       return (
         <ul>
           {items.map(item => (
@@ -1072,8 +1070,7 @@ function addTrappedEventListener(
       domEventName,
       listener
     )
-  }
-  else {
+  } else {
     unsubscribeListener = addEventBubbleListener(
       targetContainer,
       domEventName,
@@ -1151,8 +1148,7 @@ function dispatchDiscreteEvent(
   try {
     setCurrentUpdatePriority(DiscreteEventPriority)
     dispatchEvent(domEventName, eventSystemFlags, container, nativeEvent)
-  }
-  finally {
+  } finally {
     setCurrentUpdatePriority(previousPriority)
     ReactCurrentBatchConfig.transition = prevTransition
   }
@@ -1171,8 +1167,7 @@ function dispatchContinuousEvent(
   try {
     setCurrentUpdatePriority(ContinuousEventPriority)
     dispatchEvent(domEventName, eventSystemFlags, container, nativeEvent)
-  }
-  finally {
+  } finally {
     setCurrentUpdatePriority(previousPriority)
     ReactCurrentBatchConfig.transition = prevTransition
   }
@@ -2186,8 +2181,7 @@ function useFetch<T = unknown>(
 
       if (cache.current[url]) {
         dispatch({ type: 'success', payload: cache.current[url] })
-      }
-      else {
+      } else {
         try {
           const response = await axios(url, options)
           cache.current[url] = response.data
@@ -2196,8 +2190,7 @@ function useFetch<T = unknown>(
             return
 
           dispatch({ type: 'success', payload: response.data })
-        }
-        catch (error) {
+        } catch (error) {
           if (cancelRequest.current)
             return
 
@@ -2748,14 +2741,12 @@ function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
         if (executionContext === NoContext)
           flushSyncCallbacks()
       })
-    }
-    else {
+    } else {
       scheduleCallback(ImmediateSchedulerPriority, flushSyncCallbacks)
     }
 
     newCallbackNode = null
-  }
-  else {
+  } else {
     const eventPriority = lanesToEventPriority(nextLanes)
     const schedulerPriorityLevel
       = eventPriorityToSchedulePriority(eventPriority)

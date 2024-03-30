@@ -187,8 +187,7 @@ async function main() {
         initial: currentVersion,
       })
     ).version
-  }
-  else {
+  } else {
     targetVersion = release.match(/\((.*)\)/)[1]
   }
 
@@ -741,8 +740,7 @@ function foo(x, y, callback) {
       throw new Error('Invalid parameters!')
     else
       callback(null, param)
-  }
-  catch (error) {
+  } catch (error) {
     callback(error, param)
   }
 }
@@ -1044,8 +1042,7 @@ if (isMainThread) {
           reject(new Error(`Worker stopped with exit code ${code}`))
       })
     })
-}
-else {
+} else {
   const result = fibonacci(workerData)
   parentPort.postMessage(result)
   process.exit(0)
@@ -1070,8 +1067,7 @@ http
       const result = await fibonacciWorker(n)
       res.writeHead(200)
       return res.end(`Result: ${result}\n`)
-    }
-    else {
+    } else {
       res.writeHead(200)
       return res.end('Hello World!')
     }
@@ -1168,8 +1164,7 @@ async function traverse(directory) {
     if (fileStat.isFile()) {
       const content = await fs.readFile(filePath, 'utf-8')
       console.log(content)
-    }
-    else if (fileStat.isDirectory()) {
+    } else if (fileStat.isDirectory()) {
       await traverse(filePath)
     }
   })
@@ -1335,8 +1330,7 @@ function broadcast(message, client) {
     if (client !== clientList[i]) {
       if (clientList[i].writable) {
         clientList[i].write(`${client.name} says ${message}`)
-      }
-      else {
+      } else {
         cleanup.push(clientList[i])
         clientList[i].destroy()
       }
@@ -1530,8 +1524,7 @@ if (cluster.isMaster) {
       }
     }
   }, 1000)
-}
-else {
+} else {
   // Server
   http
     .Server((req, res) => {

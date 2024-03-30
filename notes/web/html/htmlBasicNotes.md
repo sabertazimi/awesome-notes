@@ -666,8 +666,7 @@ Capture device camera:
 ```ts
 if (checkbox.indeterminate) {
   doSomething()
-}
-else {
+} else {
   if (checkbox.checked)
     doSomething()
   else
@@ -1724,8 +1723,7 @@ export function trapTabKey(e, context) {
       focusableItems[focusableItems.length - 1].focus()
       e.preventDefault()
     }
-  }
-  else {
+  } else {
     if (focusedItemIndex === focusableItems.length - 1) {
       focusableItems[0].focus()
       e.preventDefault()

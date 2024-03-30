@@ -196,8 +196,7 @@ try {
 
     console.log(i)
   }
-}
-catch (e) {}
+} catch (e) {}
 // 1
 // 2
 // Exiting early
@@ -342,8 +341,7 @@ function remotePostsAsyncIteratorsFactory() {
           done: true,
           value: undefined,
         })
-      }
-      else {
+      } else {
         return Promise.resolve({
           done: false,
           value: res,
@@ -462,8 +460,7 @@ function take(n, iterable) {
       if (n > 0) {
         n--
         return iter.next()
-      }
-      else {
+      } else {
         iter?.return()
         return { done: true }
       }
@@ -647,8 +644,7 @@ g.next() // { value: undefined, done: true }
 function* generator() {
   try {
     yield 1
-  }
-  catch (e) {
+  } catch (e) {
     console.log(e)
   }
 
@@ -846,8 +842,7 @@ function co(gen) {
       if (!done) {
         // Resolve chain.
         Promise.resolve(value).then(res => next(res))
-      }
-      else {
+      } else {
         resolve(value)
       }
     }
@@ -1421,8 +1416,7 @@ async function loadData() {
     const finalData = Promise.all(dataPromises)
 
     return finalData
-  }
-  catch (err) {
+  } catch (err) {
     console.log(err)
   }
 }
@@ -1496,8 +1490,7 @@ class Promise {
       // only be called once, a function that synchronously calls `resolve()`
       // and then throws will lead to a fulfilled promise and a swallowed error
       executor(resolve, reject)
-    }
-    catch (err) {
+    } catch (err) {
       reject(err)
     }
   }
@@ -1516,8 +1509,7 @@ class Promise {
           // it correctly.
           // store new value to new Promise
           resolve(onFulfilled(res))
-        }
-        catch (err) {
+        } catch (err) {
           reject(err)
         }
       }
@@ -1526,8 +1518,7 @@ class Promise {
         try {
           // store new value to new Promise
           reject(onRejected(err))
-        }
-        catch (_err) {
+        } catch (_err) {
           reject(_err)
         }
       }
@@ -1698,8 +1689,7 @@ function memoProcessData(key) {
       // Called for a new key
       // Create an entry for it in progressQueues
       progressQueues[key] = [[resolve, reject]]
-    }
-    else {
+    } else {
       // Called for a key that's still being processed
       // Enqueue it's handlers and exit.
       progressQueues[key].push([resolve, reject])
@@ -1793,8 +1783,7 @@ const fetchJson = co.wrap(function* (url) {
     const response = yield fetch(url)
     const text = yield response.text()
     return JSON.parse(text)
-  }
-  catch (error) {
+  } catch (error) {
     console.log(`ERROR: ${error.stack}`)
   }
 })
@@ -1804,8 +1793,7 @@ async function fetchJson(url) {
     const response = await fetch(url)
     const text = await response.text()
     return JSON.parse(text)
-  }
-  catch (error) {
+  } catch (error) {
     console.log(`ERROR: ${error.stack}`)
   }
 }
@@ -2689,11 +2677,9 @@ Universal module definition:
     define([], () => {
       return factory(root)
     })
-  }
-  else if (typeof exports === 'object') {
+  } else if (typeof exports === 'object') {
     module.exports = factory(root)
-  }
-  else {
+  } else {
     root.myPlugin = factory(root)
   }
 })(
@@ -3319,8 +3305,7 @@ class MyArray {
 
           if (numericKey >= currentLength)
             Reflect.set(trapTarget, 'length', numericKey + 1)
-        }
-        else if (key === 'length') {
+        } else if (key === 'length') {
           if (value < currentLength) {
             for (let index = currentLength - 1; index >= value; index--)
               Reflect.deleteProperty(trapTarget, index)
@@ -3385,8 +3370,7 @@ class ExceptionsZone {
   static run(callback) {
     try {
       callback()
-    }
-    catch (e) {
+    } catch (e) {
       this.exceptionHandler.handle(e)
     }
   }
@@ -3507,8 +3491,7 @@ const err = {
 
 try {
   throwError()
-}
-catch (e) {
+} catch (e) {
   console.log(e.message)
   e.remedy() // genericErrorHandler.
 }
@@ -3523,8 +3506,7 @@ catch (e) {
 ```ts
 try {
   recursion()
-}
-catch (ex) {
+} catch (ex) {
   console.error('error info')
 }
 ```
@@ -3553,8 +3535,7 @@ try {
   for (let i = 0; i < object.length; i++) {
     // do something that throws an exception
   }
-}
-catch (e) {
+} catch (e) {
   // handle exception
 }
 ```
@@ -3601,8 +3582,7 @@ instance.interceptors.response.use(
 
       if (response.status >= 400)
         handleError(response)
-    }
-    else {
+    } else {
       handleError(null)
     }
 
@@ -4279,8 +4259,7 @@ function saveTextAsFile(textToWrite, fileNameToSaveAs, fileType) {
 
   if (window.webkitURL != null) {
     downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob)
-  }
-  else {
+  } else {
     downloadLink.href = window.URL.createObjectURL(textFileAsBlob)
     downloadLink.onclick = destroyClickedElement // document.body.removeChild(downloadLink);
     downloadLink.style.display = 'none'
@@ -4817,8 +4796,7 @@ const map = curry(
         next(value) {
           try {
             observer.next(fn(value))
-          }
-          catch (err) {
+          } catch (err) {
             observer.error(err)
           }
         },

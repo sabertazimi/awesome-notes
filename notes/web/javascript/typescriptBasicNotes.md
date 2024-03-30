@@ -735,8 +735,7 @@ function padding(top: number, right: number, bottom: number, left: number)
 function padding(a: number, b?: number, c?: number, d?: number) {
   if (b === undefined && c === undefined && d === undefined) {
     b = c = d = a
-  }
-  else if (c === undefined && d === undefined) {
+  } else if (c === undefined && d === undefined) {
     c = a
     d = b
   }
@@ -1799,8 +1798,7 @@ function handleResult(result: Result<string>) {
   if (result.succeeded) {
     // Type of result: SuccessfulResult<string>
     console.log(`We did it! ${result.data}`)
-  }
-  else {
+  } else {
     // Type of result: FailureResult
     console.error(`Em... ${result.error}`)
   }
@@ -3399,7 +3397,9 @@ export default function App() {
   return (
     <Route
       path="/user/:username"
-      render={(routeProps) => { const params = routeProps.match.params }}
+      render={(routeProps) => {
+        const params = routeProps.match.params
+      }}
     />
   )
 }

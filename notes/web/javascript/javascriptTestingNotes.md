@@ -871,8 +871,7 @@ export function runTests() {
     try {
       testSuite.callback()
       testResults.push(`${testSuite.description}: OK\n`)
-    }
-    catch (err) {
+    } catch (err) {
       testResults.push(`${testSuite.description}: ${err}\n`)
     }
   }
@@ -921,8 +920,7 @@ async function runTestFile(file: string): Promise<void> {
     if (typeof value === 'function') {
       try {
         await value()
-      }
-      catch (e) {
+      } catch (e) {
         console.error(e instanceof Error ? e.stack : e)
         process.exit(1)
       }
@@ -1826,8 +1824,7 @@ console.log(c)
 
   try {
     block()
-  }
-  catch (err) {}
+  } catch (err) {}
 })()
 ```
 

@@ -1359,8 +1359,7 @@ export function AddPostForm() {
         setTitle('')
         setContent('')
         setUserId('')
-      }
-      catch (err) {
+      } catch (err) {
         console.error('Failed to save the post: ', err)
       }
     }
@@ -1943,8 +1942,7 @@ state.map((item) => {
       ...item,
       value: 'newValue',
     }
-  }
-  else {
+  } else {
     return item
   }
 })
