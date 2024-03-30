@@ -365,8 +365,7 @@ function mountWorkInProgressHook(): Hook {
   if (workInProgressHook === null) {
     // Fist hook in the list.
     currentlyRenderingFiber.memoizedState = workInProgressHook = hook
-  }
-  else {
+  } else {
     // Append to the end of list.
     workInProgressHook = workInProgressHook.next = hook
   }
@@ -382,8 +381,7 @@ function updateWorkInProgressHook(): Hook {
   if (currentHook === null) {
     const current = currentlyRenderingFiber.alternate
     nextCurrentHook = current ? current.memoizedState : null
-  }
-  else {
+  } else {
     nextCurrentHook = currentHook.next
   }
 
@@ -396,8 +394,7 @@ function updateWorkInProgressHook(): Hook {
     workInProgressHook = nextWorkInProgressHook
     nextWorkInProgressHook = workInProgressHook.next
     currentHook = nextCurrentHook
-  }
-  else {
+  } else {
     // Clone from the current hook.
     if (nextCurrentHook === null)
       throw new Error('Rendered more hooks than during the previous render.')
@@ -417,8 +414,7 @@ function updateWorkInProgressHook(): Hook {
     if (workInProgressHook === null) {
       // This is the first hook in the list.
       currentlyRenderingFiber.memoizedState = workInProgressHook = newHook
-    }
-    else {
+    } else {
       // Append to the end of the list.
       workInProgressHook = workInProgressHook.next = newHook
     }
@@ -645,8 +641,7 @@ function dispatchAction<S, A>(
   if (pending === null) {
     // 首个 Update, 创建一个环形链表.
     update.next = update
-  }
-  else {
+  } else {
     update.next = pending.next
     pending.next = update
   }
@@ -660,8 +655,7 @@ function dispatchAction<S, A>(
     // 渲染时更新, 做好全局标记.
     didScheduleRenderPhaseUpdateDuringThisPass = didScheduleRenderPhaseUpdate
       = true
-  }
-  else {
+  } else {
     if (
       fiber.lanes === NoLanes
       && (alternate === null || alternate.lanes === NoLanes)
@@ -893,8 +887,7 @@ function updateReducer<S, I, A>(
         if (newBaseQueueLast === null) {
           newBaseQueueFirst = newBaseQueueLast = clone
           newBaseState = newState
-        }
-        else {
+        } else {
           newBaseQueueLast = newBaseQueueLast.next = clone
         }
 
@@ -904,8 +897,7 @@ function updateReducer<S, I, A>(
           updateLane
         )
         markSkippedUpdateLanes(updateLane)
-      }
-      else {
+      } else {
         // This update does have sufficient priority (优先级足够).
         // Merge state.
         if (newBaseQueueLast !== null) {
@@ -926,8 +918,7 @@ function updateReducer<S, I, A>(
           // If this update is a state update (not a reducer) and was processed eagerly,
           // we can use the eagerly computed state
           newState = update.eagerState
-        }
-        else {
+        } else {
           // 调用 Reducer 获取最新状态.
           const action = update.action
           newState = reducer(newState, action)
@@ -1470,8 +1461,7 @@ function updateContextProvider(
           renderLanes
         )
       }
-    }
-    else {
+    } else {
       // value变动, 查找对应的 Consumers, 并使其能够被更新.
       // 向下遍历:
       // 从 ContextProvider 节点开始,
@@ -1549,8 +1539,7 @@ function readContext<T>(
       firstContext: contextItem,
       responders: null,
     }
-  }
-  else {
+  } else {
     lastContextDependency = lastContextDependency.next = contextItem
   }
 
@@ -1687,14 +1676,12 @@ function pushEffect(tag, create, destroy, deps) {
     componentUpdateQueue = createFunctionComponentUpdateQueue()
     currentlyRenderingFiber.updateQueue = componentUpdateQueue
     componentUpdateQueue.lastEffect = effect.next = effect
-  }
-  else {
+  } else {
     const lastEffect = componentUpdateQueue.lastEffect
 
     if (lastEffect === null) {
       componentUpdateQueue.lastEffect = effect.next = effect
-    }
-    else {
+    } else {
       // Circular effect list.
       const firstEffect = lastEffect.next
       lastEffect.next = effect
@@ -1787,8 +1774,7 @@ function useDataApi(initialUrl, initialData) {
         const result = await axios(url)
 
         setData(result.data)
-      }
-      catch (error) {
+      } catch (error) {
         setIsError(true)
       }
 
@@ -2629,8 +2615,7 @@ function useUpdate(fn) {
       // first get called for componentDidMount lifecycle
       // so skip it
       mounting.current = false
-    }
-    else {
+    } else {
       fn()
     }
   })
@@ -3150,8 +3135,7 @@ export function useForm({ onSubmit }) {
       fieldsToValidate = fields.current.filter(field =>
         fieldNames.includes(field.name)
       )
-    }
-    else {
+    } else {
       // If fieldNames not provided, validate all fields.
       fieldsToValidate = fields.current
     }
@@ -3251,8 +3235,7 @@ export default function App(props) {
       if (formData.username.length < 10) {
         // Simulate 400 response from server.
         usernameField.setErrors(['Make a longer username'])
-      }
-      else {
+      } else {
         // Simulate 201 response from server.
         window.alert(
           `form valid: ${valid}, form data: ${JSON.stringify(formData)}`
@@ -3401,8 +3384,7 @@ function createFormControl() {
             })
 
             updateValidAndValue(name, false, undefined, fieldRef)
-          }
-          else {
+          } else {
             field = get(_fields, name, {})
 
             if (field._f)
@@ -3656,8 +3638,7 @@ function useScript(src: string): Status {
 
         script.addEventListener('load', setAttributeFromEvent)
         script.addEventListener('error', setAttributeFromEvent)
-      }
-      else {
+      } else {
         // Grab existing script status from attribute and set to state.
         setStatus(script.getAttribute('data-status') as Status)
       }
@@ -3710,8 +3691,7 @@ function useScript(src) {
           loaded: true,
           error: false,
         })
-      }
-      else {
+      } else {
         cachedScripts.push(src)
 
         // Create script
@@ -3773,8 +3753,7 @@ function stringifyOptions(options) {
     if (key === 'days') {
       // Skip `days`.
       return acc
-    }
-    else {
+    } else {
       if (options[key] === false)
         return acc
       else if (options[key] === true)
@@ -3932,8 +3911,7 @@ function useDataApi(initialUrl, initialData) {
       const result = await axios(url)
 
       setData(result.data)
-    }
-    catch (error) {
+    } catch (error) {
       setIsError(true)
     }
 
@@ -4058,8 +4036,7 @@ function useFetch<T = unknown>(
 
       if (cache.current[url]) {
         dispatch({ type: 'success', payload: cache.current[url] })
-      }
-      else {
+      } else {
         try {
           const response = await axios(url, options)
           cache.current[url] = response.data
@@ -4068,8 +4045,7 @@ function useFetch<T = unknown>(
             return
 
           dispatch({ type: 'success', payload: response.data })
-        }
-        catch (error) {
+        } catch (error) {
           if (cancelRequest.current)
             return
 
@@ -4406,8 +4382,7 @@ class Subscriber {
         if (this.onChange)
           this.onChange(this.collected)
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.warn(error)
     }
   }

@@ -1503,8 +1503,7 @@ function getGitLastUpdatedTimeStamp(filePath) {
           })
           .stdout.toString('utf-8')
       ) * 1000
-  }
-  catch (e) {
+  } catch (e) {
     /* do not handle for now */
   }
 

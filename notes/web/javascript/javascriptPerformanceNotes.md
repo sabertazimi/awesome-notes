@@ -223,8 +223,7 @@ function pollTimerTask(time) {
           loop,
           defer,
         })
-      }
-      else {
+      } else {
         // 当回调函数不需要周期执行或在回调函数中执行 unregister 时
         delete idPool[id]
       }
@@ -413,14 +412,12 @@ function debounce(func, wait = 50, immediate = true) {
       // 否则缓存参数和调用上下文
       if (immediate) {
         func.apply(this, params)
-      }
-      else {
+      } else {
         // eslint-disable-next-line ts/no-this-alias
         context = this
         args = params
       }
-    }
-    else {
+    } else {
       // 如果已有延迟执行函数 (later), 调用的时候清除原来的并重新设定一个
       // 这样做延迟函数会重新计时
       clearTimeout(timer)
@@ -500,8 +497,7 @@ _.throttle = function (func, wait, options) {
       result = func.apply(context, args)
       if (!timeout)
         context = args = null
-    }
-    else if (!timeout && options.trailing !== false) {
+    } else if (!timeout && options.trailing !== false) {
       // 判断是否设置了定时器和 trailing
       // 没有的话就开启一个定时器
       // 并且不能不能同时设置 leading 和 trailing
@@ -573,8 +569,7 @@ window.onload = function () {
     if (typeof e.preventDefault === 'function') {
       e.preventDefault()
       e.stopPropagation()
-    }
-    else {
+    } else {
       e.returnValue = false
       e.cancelBubble = true
     }
@@ -593,8 +588,7 @@ window.onload = function () {
     if (typeof e.preventDefault === 'function') {
       e.preventDefault()
       e.stopPropagation()
-    }
-    else {
+    } else {
       e.returnValue = false
       e.cancelBubble = true
     }
@@ -1651,8 +1645,7 @@ function entryHandler(list) {
       ) {
         sessionValue += entry.value
         sessionEntries.push(formatCLSEntry(entry))
-      }
-      else {
+      } else {
         sessionValue = entry.value
         sessionEntries = [formatCLSEntry(entry)]
       }

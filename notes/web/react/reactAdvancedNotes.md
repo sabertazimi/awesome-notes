@@ -431,8 +431,7 @@ function shouldYieldToHost() {
     // There's no pending input.
     // Only yield if we've reached the max yield interval.
     return currentTime >= maxYieldInterval
-  }
-  else {
+  } else {
     // There's still time left in the frame.
     return false
   }
@@ -459,17 +458,14 @@ function performWorkUntilDeadline() {
         // 没有剩余任务, 退出.
         isMessageLoopRunning = false
         scheduledHostCallback = null
-      }
-      else {
+      } else {
         port.postMessage(null) // 有剩余任务, 发起新的调度.
       }
-    }
-    catch (error) {
+    } catch (error) {
       port.postMessage(null) // 如有异常, 重新发起调度.
       throw error
     }
-  }
-  else {
+  } else {
     isMessageLoopRunning = false
   }
 
@@ -517,16 +513,14 @@ function scheduleCallback(priorityLevel, callback, options) {
       if (isHostTimeoutScheduled) {
         // Cancel an existing timeout.
         cancelHostTimeout()
-      }
-      else {
+      } else {
         isHostTimeoutScheduled = true
       }
 
       // Schedule a timeout.
       requestHostTimeout(handleTimeout, startTime - currentTime)
     }
-  }
-  else {
+  } else {
     // Normal task.
     newTask.sortIndex = expirationTime
     push(taskQueue, newTask)
@@ -548,8 +542,7 @@ function handleTimeout(currentTime) {
     if (peek(taskQueue) !== null) {
       isHostCallbackScheduled = true
       requestHostCallback(flushWork)
-    }
-    else {
+    } else {
       const firstTimer = peek(timerQueue)
 
       if (firstTimer !== null)
@@ -580,8 +573,7 @@ function flushWork(hasTimeRemaining, initialTime) {
 
   try {
     return workLoop(hasTimeRemaining, initialTime)
-  }
-  finally {
+  } finally {
     // Restore context.
     currentTask = null
     currentPriorityLevel = previousPriorityLevel
@@ -615,15 +607,13 @@ function workLoop(hasTimeRemaining, initialTime) {
       if (typeof continuationCallback === 'function') {
         // 产生了连续回调 (如 Fiber树太大, 出现了中断渲染), 保留 currentTask.
         currentTask.callback = continuationCallback
-      }
-      else {
+      } else {
         if (currentTask === peek(taskQueue))
           pop(taskQueue)
       }
 
       advanceTimers(currentTime)
-    }
-    else {
+    } else {
       // 如果任务被取消 (currentTask.callback = null), 将其移出队列.
       pop(taskQueue)
     }
@@ -634,8 +624,7 @@ function workLoop(hasTimeRemaining, initialTime) {
   // Return whether there's additional work.
   if (currentTask !== null) {
     return true
-  }
-  else {
+  } else {
     const firstTimer = peek(timerQueue)
 
     // 存在延时任务, 继续进行调度.
@@ -831,8 +820,7 @@ export function requestUpdateLane(fiber: Fiber): Lane {
   if ((mode & BlockingMode) === NoMode) {
     // Legacy 模式.
     return SyncLane
-  }
-  else if ((mode & ConcurrentMode) === NoMode) {
+  } else if ((mode & ConcurrentMode) === NoMode) {
     // Blocking 模式.
     return getCurrentPriorityLevel() === ImmediateSchedulerPriority
       ? SyncLane
@@ -867,8 +855,7 @@ export function requestUpdateLane(fiber: Fiber): Lane {
   ) {
     // `executionContext` 存在输入事件, 且调度优先级是用户阻塞性质.
     lane = findUpdateLane(InputDiscreteLanePriority, currentEventWipLanes)
-  }
-  else {
+  } else {
     // 调度优先级转换为车道模型.
     const schedulerLanePriority
       = schedulerPriorityToLanePriority(schedulerPriority)
@@ -902,21 +889,18 @@ export function getNextLanes(root: FiberRoot, wipLanes: Lanes): Lanes {
 
     if (nonIdleUnblockedLanes !== NoLanes) {
       nextLanes = getHighestPriorityLanes(nonIdleUnblockedLanes)
-    }
-    else {
+    } else {
       const nonIdlePingedLanes = nonIdlePendingLanes & pingedLanes
 
       if (nonIdlePingedLanes !== NoLanes)
         nextLanes = getHighestPriorityLanes(nonIdlePingedLanes)
     }
-  }
-  else {
+  } else {
     const unblockedLanes = pendingLanes & ~suspendedLanes
 
     if (unblockedLanes !== NoLanes) {
       nextLanes = getHighestPriorityLanes(unblockedLanes)
-    }
-    else {
+    } else {
       if (pingedLanes !== NoLanes)
         nextLanes = getHighestPriorityLanes(pingedLanes)
     }
@@ -945,8 +929,7 @@ export function getNextLanes(root: FiberRoot, wipLanes: Lanes): Lanes {
     && (root.current.mode & ConcurrentUpdatesByDefaultMode) !== NoMode
   ) {
     // Do nothing, use the lanes as they were assigned.
-  }
-  else if ((nextLanes & InputContinuousLane) !== NoLanes) {
+  } else if ((nextLanes & InputContinuousLane) !== NoLanes) {
     nextLanes |= pendingLanes & DefaultLane
   }
 
@@ -1138,8 +1121,7 @@ export function scheduleUpdateOnFiber(
     ) {
       // 初次渲染.
       performSyncWorkOnRoot(root)
-    }
-    else {
+    } else {
       // 对比更新.
       ensureRootIsScheduled(root, eventTime)
     }
@@ -1171,8 +1153,7 @@ function performConcurrentWorkOnRoot(root) {
     if (root.callbackNode !== originalCallbackNode) {
       // 任务被取消, 退出调用.
       return null
-    }
-    else {
+    } else {
       // Current task was not canceled. Continue.
     }
   }
@@ -1195,8 +1176,7 @@ function performConcurrentWorkOnRoot(root) {
     // 如果在 render 过程中产生了新 update, 且新 update 的优先级与最初 render 的优先级有交集.
     // 那么最初 render 无效, 丢弃最初 render 的结果, 等待下一次调度.
     prepareFreshStack(root, NoLanes)
-  }
-  else if (exitStatus !== RootIncomplete) {
+  } else if (exitStatus !== RootIncomplete) {
     // 4. 异常处理: 有可能fiber构造过程中出现异常.
     if (exitStatus === RootError)
       processError()
@@ -1233,8 +1213,7 @@ function renderRootSync(root: FiberRoot, lanes: Lanes) {
     try {
       workLoopSync()
       break
-    }
-    catch (thrownValue) {
+    } catch (thrownValue) {
       handleError(root, thrownValue)
     }
   } while (true)
@@ -1265,8 +1244,7 @@ function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
     try {
       workLoopConcurrent()
       break
-    }
-    catch (thrownValue) {
+    } catch (thrownValue) {
       handleError(root, thrownValue)
     }
   } while (true)
@@ -1280,8 +1258,7 @@ function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
   if (workInProgress !== null) {
     // Still work remaining.
     return RootIncomplete
-  }
-  else {
+  } else {
     // Completed the tree.
     // Set this to null to indicate there's no in-progress render.
     workInProgressRoot = null
@@ -1345,8 +1322,7 @@ function performUnitOfWork(unitOfWork: Fiber): void {
   if (next === null) {
     // 如果没有派生出新的下级节点, 则进入 completeWork 阶段, 传入的是当前 unitOfWork.
     completeUnitOfWork(unitOfWork)
-  }
-  else {
+  } else {
     // 如果派生出新的下级节点, 则递归处理.
     workInProgress = next
   }
@@ -1579,8 +1555,7 @@ function updateHostComponent(
   if (isDirectTextChild) {
     // 如果子节点只有一个文本节点, 不用再创建一个 HostText 类型的 Fiber.
     nextChildren = null
-  }
-  else if (prevProps !== null && shouldSetTextContent(type, prevProps)) {
+  } else if (prevProps !== null && shouldSetTextContent(type, prevProps)) {
     // 设置 fiber.flags.
     workInProgress.flags |= ContentReset
   }
@@ -1683,8 +1658,7 @@ function dispatchAction<S, A>(
 
   if (pending === null) {
     update.next = update
-  }
-  else {
+  } else {
     update.next = pending.next
     pending.next = update
   }
@@ -1768,8 +1742,7 @@ function markUpdateLaneFromFiberToRoot(
   if (node.tag === HostRoot) {
     const root: FiberRoot = node.stateNode
     return root
-  }
-  else {
+  } else {
     return null
   }
 }
@@ -1791,8 +1764,7 @@ function beginWork(
       || (__DEV__ ? workInProgress.type !== current.type : false)
     ) {
       didReceiveUpdate = true
-    }
-    else if (!includesSomeLane(renderLanes, updateLanes)) {
+    } else if (!includesSomeLane(renderLanes, updateLanes)) {
       // 当前渲染优先级 renderLanes 不包括 fiber.lanes, 表明当前 Fiber 节点无需更新.
       didReceiveUpdate = false
       // 调用 bailoutOnAlreadyFinishedWork 循环检测子节点是否需要更新.
@@ -1839,8 +1811,7 @@ function bailoutOnAlreadyFinishedWork(
     // 渲染优先级不包括 workInProgress.childLanes, 表明子节点也无需更新.
     // 返回 null, 直接进入回溯阶段.
     return null
-  }
-  else {
+  } else {
     // Fiber 自身无需更新, 但子节点需要更新, clone 并返回子节点.
     cloneChildFibers(current, workInProgress)
     return workInProgress.child
@@ -2061,8 +2032,7 @@ function commitRoot(root: FiberRoot, recoverableErrors: null | Array<mixed>) {
     ReactCurrentBatchConfig.transition = null
     setCurrentUpdatePriority(DiscreteEventPriority)
     commitRootImpl(root, recoverableErrors, previousUpdateLanePriority)
-  }
-  finally {
+  } finally {
     ReactCurrentBatchConfig.transition = prevTransition
     setCurrentUpdatePriority(previousUpdateLanePriority)
   }
@@ -2171,8 +2141,7 @@ function commitRootImpl(
     executionContext = prevExecutionContext
     setCurrentUpdatePriority(previousPriority)
     ReactCurrentBatchConfig.transition = prevTransition
-  }
-  else {
+  } else {
     // No effects.
     root.current = finishedWork
   }
@@ -2185,8 +2154,7 @@ function commitRootImpl(
     rootDoesHavePassiveEffects = false
     rootWithPendingPassiveEffects = root
     pendingPassiveEffectsLanes = lanes
-  }
-  else {
+  } else {
     // There were no passive effects:
     // immediately release the cache pool for this render.
     releaseRootPooledCache(root, remainingLanes)
@@ -2321,8 +2289,7 @@ function commitBeforeMutationEffects(root: FiberRoot, firstChild: Fiber) {
     ) {
       // 1. Visit children.
       nextEffect = child
-    }
-    else {
+    } else {
       while (nextEffect !== null) {
         const fiber = nextEffect
         commitBeforeMutationEffectsOnFiber(fiber)
@@ -2443,8 +2410,7 @@ export function commitMutationEffects(
     if ((fiber.subtreeFlags & MutationMask) !== NoFlags && child !== null) {
       // 1. Visit children.
       nextEffect = child
-    }
-    else {
+    } else {
       while (nextEffect !== null) {
         const fiber = nextEffect
         commitMutationEffectsOnFiber(fiber, root, lanes)
@@ -2583,8 +2549,7 @@ function commitLayoutEffects(
     if ((fiber.subtreeFlags & LayoutMask) !== NoFlags && firstChild !== null) {
       // 1. Visit children.
       nextEffect = firstChild
-    }
-    else {
+    } else {
       while (nextEffect !== null) {
         const fiber = nextEffect
 
@@ -2642,8 +2607,7 @@ function commitLayoutEffectOnFiber(
           if (!offscreenSubtreeWasHidden) {
             if (current === null) {
               instance.componentDidMount()
-            }
-            else {
+            } else {
               const prevProps
                 = finishedWork.elementType === finishedWork.type
                   ? current.memoizedProps

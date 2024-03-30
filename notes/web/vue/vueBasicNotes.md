@@ -71,23 +71,17 @@ export function genElement(el: ASTElement, state: CodegenState): string {
 
   if (el.staticRoot && !el.staticProcessed) {
     return genStatic(el, state)
-  }
-  else if (el.once && !el.onceProcessed) {
+  } else if (el.once && !el.onceProcessed) {
     return genOnce(el, state)
-  }
-  else if (el.for && !el.forProcessed) {
+  } else if (el.for && !el.forProcessed) {
     return genFor(el, state)
-  }
-  else if (el.if && !el.ifProcessed) {
+  } else if (el.if && !el.ifProcessed) {
     return genIf(el, state)
-  }
-  else if (el.tag === 'template' && !el.slotTarget && !state.pre) {
+  } else if (el.tag === 'template' && !el.slotTarget && !state.pre) {
     return genChildren(el, state) || 'void 0'
-  }
-  else if (el.tag === 'slot') {
+  } else if (el.tag === 'slot') {
     return genSlot(el, state)
-  }
-  else {
+  } else {
     // component or element
   }
 }
@@ -253,8 +247,7 @@ app.component('CustomForm', {
     submit: ({ email, password }) => {
       if (email && password) {
         return true
-      }
-      else {
+      } else {
         console.warn('Invalid submit event payload!')
         return false
       }
@@ -1108,8 +1101,7 @@ export function useFetch(url) {
     // 若输入的 URL 是一个 ref
     // 那么启动一个响应式的请求
     watchEffect(doFetch)
-  }
-  else {
+  } else {
     // 否则只请求一次
     // 避免监听器的额外开销
     doFetch()
@@ -1771,8 +1763,7 @@ export function resolveAsyncComponent(
         // 2. () => Promise.
         if (isUndef(factory.resolved))
           res.then(resolve, reject)
-      }
-      else if (isPromise(res.component)) {
+      } else if (isPromise(res.component)) {
         // 3.
         res.component.then(resolve, reject)
 
@@ -1784,8 +1775,7 @@ export function resolveAsyncComponent(
 
           if (res.delay === 0) {
             factory.loading = true
-          }
-          else {
+          } else {
             timerLoading = setTimeout(() => {
               timerLoading = null
 
@@ -1982,8 +1972,7 @@ const KeepAlive = defineComponent({
         // make current key freshest
         remove(keys, key)
         keys.push(key)
-      }
-      else {
+      } else {
         cache[key] = vnode
         keys.push(key)
 
@@ -2041,8 +2030,7 @@ const KeepAlive = {
       if (cachedVNode) {
         rawVNode.component = cachedVNode.component
         rawVNode.keptAlive = true
-      }
-      else {
+      } else {
         cache.set(rawVNode.type, rawVNode)
       }
 
@@ -2070,8 +2058,7 @@ const Teleport = {
           ? document.querySelector(n2.props.to)
           : n2.props.to
       n2.children.forEach(c => patch(null, c, target, anchor))
-    }
-    else {
+    } else {
       // 更新
       patchChildren(n1, n2, container)
 
@@ -2418,13 +2405,11 @@ router.beforeResolve(async (to) => {
   if (to.meta.requiresCamera) {
     try {
       await askForCameraPermission()
-    }
-    catch (error) {
+    } catch (error) {
       if (error instanceof NotAllowedError) {
         // Handle the error and then cancel the navigation.
         return false
-      }
-      else {
+      } else {
         // Unexpected error: cancel the navigation and pass error to global handler.
         throw error
       }

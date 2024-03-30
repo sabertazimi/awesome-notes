@@ -1256,6 +1256,9 @@ Array.from([1, 2, 3], x => x * x)
 // random array generation
 Array.from(Array(5).keys())
 // [0, 1, 2, 3, 4]
+
+// Typed array initialization
+Array.from<T>({ length: maxSize }).fill(initValue)
 ```
 
 #### Array Fill
@@ -2174,29 +2177,21 @@ const hasAge = !!age
 function ToString(argument) {
   if (argument === undefined) {
     return 'undefined'
-  }
-  else if (argument === null) {
+  } else if (argument === null) {
     return 'null'
-  }
-  else if (argument === true) {
+  } else if (argument === true) {
     return 'true'
-  }
-  else if (argument === false) {
+  } else if (argument === false) {
     return 'false'
-  }
-  else if (TypeOf(argument) === 'number') {
+  } else if (TypeOf(argument) === 'number') {
     return Number.toString(argument)
-  }
-  else if (TypeOf(argument) === 'string') {
+  } else if (TypeOf(argument) === 'string') {
     return argument
-  }
-  else if (TypeOf(argument) === 'symbol') {
+  } else if (TypeOf(argument) === 'symbol') {
     return Symbol.toString(argument)
-  }
-  else if (TypeOf(argument) === 'bigint') {
+  } else if (TypeOf(argument) === 'bigint') {
     return BigInt.toString(argument)
-  }
-  else {
+  } else {
     // argument is an object
     const primValue = ToPrimitive(argument, 'string')
     return ToString(primValue)
@@ -2230,29 +2225,21 @@ function ToNumeric(value) {
 function ToNumber(argument) {
   if (argument === undefined) {
     return Number.NaN
-  }
-  else if (argument === null) {
+  } else if (argument === null) {
     return +0
-  }
-  else if (argument === true) {
+  } else if (argument === true) {
     return 1
-  }
-  else if (argument === false) {
+  } else if (argument === false) {
     return +0
-  }
-  else if (TypeOf(argument) === 'number') {
+  } else if (TypeOf(argument) === 'number') {
     return argument
-  }
-  else if (TypeOf(argument) === 'string') {
+  } else if (TypeOf(argument) === 'string') {
     return parseTheString(argument) // not shown here
-  }
-  else if (TypeOf(argument) === 'symbol') {
+  } else if (TypeOf(argument) === 'symbol') {
     throw new TypeError('Failed!')
-  }
-  else if (TypeOf(argument) === 'bigint') {
+  } else if (TypeOf(argument) === 'bigint') {
     throw new TypeError('Failed!')
-  }
-  else {
+  } else {
     // argument is an object
     const primValue = ToPrimitive(argument, 'number')
     return ToNumber(primValue)
@@ -2291,8 +2278,7 @@ function ToPrimitive(
       hint = 'number'
 
     return OrdinaryToPrimitive(input, hint)
-  }
-  else {
+  } else {
     // input is already primitive
     return input
   }
@@ -2473,8 +2459,7 @@ if (!Object.is) {
         // if x and y are both 0 of the same sign.
         // This checks for cases 1 and 2 above.
         return x !== 0 || 1 / x === 1 / y
-      }
-      else {
+      } else {
         // return true if both x AND y evaluate to NaN.
         // The only possibility for a variable to not be strictly equal to itself
         // is when that variable evaluates to NaN (example: Number.NaN, 0/0, NaN).
@@ -3811,13 +3796,11 @@ assert.equal(copy instanceof MyClass, false)
 function deepClone(original) {
   if (Array.isArray(original)) {
     return original.map(elem => deepClone(elem))
-  }
-  else if (typeof original === 'object' && original !== null) {
+  } else if (typeof original === 'object' && original !== null) {
     return Object.fromEntries(
       Object.entries(original).map(([key, value]) => [key, deepClone(value)])
     )
-  }
-  else {
+  } else {
     // Primitive value: atomic, no need to copy
     return original
   }
@@ -3835,15 +3818,13 @@ function deepUpdate(original, keys, value) {
     return original.map((v, index) =>
       index === currentKey ? deepUpdate(v, keys.slice(1), value) : v
     )
-  }
-  else if (typeof original === 'object' && original !== null) {
+  } else if (typeof original === 'object' && original !== null) {
     return Object.fromEntries(
       Object.entries(original).map(([k, v]) =>
         k === currentKey ? [k, deepUpdate(v, keys.slice(1), value)] : [k, v]
       )
     )
-  }
-  else {
+  } else {
     // Primitive value
     return original
   }
@@ -4344,8 +4325,7 @@ class Foo {
     try {
       const lastInstances = loadLastInstances()
       Foo.#count += lastInstances.length
-    }
-    catch {}
+    } catch {}
   }
 }
 ```
@@ -4819,8 +4799,7 @@ try {
   // eslint-disable-next-line no-caller
   if (arguments.length !== arguments.callee.length)
     throw new Error('传递的参数个数不匹配')
-}
-catch (err) {
+} catch (err) {
   console.log(err)
   return this
 }

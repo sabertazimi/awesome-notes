@@ -54,8 +54,7 @@ function getNext(p: string): number[] {
       i++
       maxLen++
       next[i] = maxLen
-    }
-    else {
+    } else {
       // Back to find shorter common prefix and suffix.
       maxLen = next[maxLen]
     }
@@ -83,8 +82,7 @@ function getNext(p: string): number[] {
       if (p[i] !== p[maxLen])
         next[i] = maxLen
       else next[i] = next[maxLen]
-    }
-    else {
+    } else {
       // Back to find shorter common prefix and suffix.
       maxLen = next[maxLen]
     }
@@ -103,8 +101,7 @@ function search(s: string, p: string): number {
     if (j === -1 || s[i] === p[j]) {
       i++
       j++
-    }
-    else {
+    } else {
       j = next[j]
     }
   }

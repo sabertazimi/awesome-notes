@@ -239,8 +239,7 @@ const idToTemplate = cached((id) => {
 function getOuterHTML(el: Element): string {
   if (el.outerHTML) {
     return el.outerHTML
-  }
-  else {
+  } else {
     const container = document.createElement('div')
     container.appendChild(el.cloneNode(true))
     return container.innerHTML
@@ -266,16 +265,13 @@ Vue.prototype.$mount = function (
       if (typeof template === 'string') {
         if (template.charAt(0) === '#')
           template = idToTemplate(template)
-      }
-      else if (template.nodeType) {
+      } else if (template.nodeType) {
         template = template.innerHTML
-      }
-      else {
+      } else {
         // Invalid template option
         return this
       }
-    }
-    else if (el) {
+    } else if (el) {
       template = getOuterHTML(el)
     }
     if (template) {
@@ -474,8 +470,7 @@ if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
   macroTimerFunc = () => {
     setImmediate(flushCallbacks)
   }
-}
-else if (
+} else if (
   typeof MessageChannel !== 'undefined'
   && (isNative(MessageChannel)
   // PhantomJS
@@ -487,8 +482,7 @@ else if (
   macroTimerFunc = () => {
     port.postMessage(1)
   }
-}
-else {
+} else {
   macroTimerFunc = () => {
     setTimeout(flushCallbacks, 0)
   }
@@ -502,8 +496,7 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
     if (isIOS)
       setTimeout(noop)
   }
-}
-else {
+} else {
   microTimerFunc = macroTimerFunc
 }
 
@@ -530,12 +523,10 @@ export function nextTick(cb?: Function, ctx?: object) {
     if (cb) {
       try {
         cb.call(ctx)
-      }
-      catch (e) {
+      } catch (e) {
         handleError(e, ctx, 'nextTick')
       }
-    }
-    else if (_resolve) {
+    } else if (_resolve) {
       _resolve(ctx)
     }
   })
@@ -877,8 +868,7 @@ Vue.prototype._init = function (options?: object) {
   // merge options
   if (options && options._isComponent) {
     initInternalComponent(vm, options)
-  }
-  else {
+  } else {
     vm.$options = mergeOptions(
       resolveConstructorOptions(vm.constructor),
       options || {},
@@ -1067,38 +1057,33 @@ export function _createElement(
         undefined,
         context
       )
-    }
-    else if (
+    } else if (
       (!data || !data.pre)
       // eslint-disable-next-line no-cond-assign
       && isDef((Ctor = resolveAsset(context.$options, 'components', tag)))
     ) {
       // component
       vnode = createComponent(Ctor, data, context, children, tag)
-    }
-    else {
+    } else {
       // unknown or unlisted namespaced elements
       // check at runtime because it may get assigned a namespace when its
       // parent normalizes children
       vnode = new VNode(tag, data, children, undefined, undefined, context)
     }
-  }
-  else {
+  } else {
     // direct component options / constructor
     vnode = createComponent(tag, data, context, children)
   }
 
   if (Array.isArray(vnode)) {
     return vnode
-  }
-  else if (isDef(vnode)) {
+  } else if (isDef(vnode)) {
     if (isDef(ns))
       applyNS(vnode, ns)
     if (isDef(data))
       registerDeepBindings(data)
     return vnode
-  }
-  else {
+  } else {
     return createEmptyVNode()
   }
 }
@@ -1120,8 +1105,7 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
   if (!prevVnode) {
     // initial render
     vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */)
-  }
-  else {
+  } else {
     // updates
     vm.$el = vm.__patch__(prevVnode, vnode)
   }
@@ -1161,8 +1145,7 @@ export function callHook(vm: Component, hook: string) {
     for (let i = 0, j = handlers.length; i < j; i++) {
       try {
         handlers[i].call(vm)
-      }
-      catch (e) {
+      } catch (e) {
         handleError(e, vm, `${hook} hook`)
       }
     }
@@ -1679,8 +1662,7 @@ function patchElement(n1, n2) {
   if (n2.dynamicChildren) {
     // Skip all static blocks.
     patchBlockChildren(n1, n2)
-  }
-  else {
+  } else {
     patchChildren(n1, n2, el)
   }
 }
@@ -1819,8 +1801,7 @@ export default class Watcher {
       this.computed = !!options.computed
       this.sync = !!options.sync
       this.before = options.before
-    }
-    else {
+    } else {
       this.deep = this.user = this.computed = this.sync = false
     }
 
@@ -1837,8 +1818,7 @@ export default class Watcher {
     // parse expression for getter
     if (typeof expOrFn === 'function') {
       this.getter = expOrFn
-    }
-    else {
+    } else {
       this.getter = parsePath(expOrFn)
 
       if (!this.getter)
@@ -1848,8 +1828,7 @@ export default class Watcher {
     if (this.computed) {
       this.value = undefined
       this.dep = new Dep()
-    }
-    else {
+    } else {
       this.value = this.get()
     }
   }
@@ -1919,8 +1898,7 @@ export default class Watcher {
             this.vm,
             info
           )
-        }
-        else {
+        } else {
           this.cb.call(this.vm, value, oldValue)
         }
       }
@@ -2035,8 +2013,7 @@ export class Observer {
       else copyAugment(value, arrayMethods, arrayKeys)
 
       this.observeArray(value)
-    }
-    else {
+    } else {
       this.walk(value)
     }
   }
@@ -2294,8 +2271,7 @@ export function defineComputed(
   if (typeof userDef === 'function') {
     sharedPropertyDefinition.get = createComputedGetter(key)
     sharedPropertyDefinition.set = noop
-  }
-  else {
+  } else {
     sharedPropertyDefinition.get = userDef.get ?? noop
     sharedPropertyDefinition.set = userDef.set ?? noop
   }
@@ -2825,8 +2801,7 @@ function setupStatefulComponent(instance, isSSR) {
     )
     // 处理 setup 执行结果
     handleSetupResult(instance, setupResult)
-  }
-  else {
+  } else {
     // 完成组件实例设置
     finishComponentSetup(instance)
   }
@@ -2836,8 +2811,7 @@ function handleSetupResult(instance, setupResult) {
   if (isFunction(setupResult)) {
     // setup 返回渲染函数
     instance.render = setupResult
-  }
-  else if (isObject(setupResult)) {
+  } else if (isObject(setupResult)) {
     // 把 setup 返回结果变成响应式
     instance.setupState = reactive(setupResult)
   }

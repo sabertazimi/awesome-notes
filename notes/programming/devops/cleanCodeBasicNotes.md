@@ -1808,15 +1808,12 @@ class Koa extends EventEmitter {
       if (typeof ctx.body === 'object' && ctx.body !== null) {
         res.setHeader('Content-Type', 'application/json;charset=utf8')
         res.end(JSON.stringify(ctx.body))
-      }
-      else if (ctx.body instanceof Stream) {
+      } else if (ctx.body instanceof Stream) {
         ctx.body.pipe(res)
-      }
-      else if (typeof ctx.body === 'string' || Buffer.isBuffer(ctx.body)) {
+      } else if (typeof ctx.body === 'string' || Buffer.isBuffer(ctx.body)) {
         res.setHeader('Content-Type', 'text/htmlCharset=utf8')
         res.end(ctx.body)
-      }
-      else {
+      } else {
         res.end('Not Found')
       }
     }).catch((err) => {
@@ -2134,8 +2131,7 @@ Implement polyfill with iterator:
 function activeXUploader() {
   try {
     return new ActiveXObject('ActiveX.Upload') // IE 上传控件.
-  }
-  catch (e) {
+  } catch (e) {
     return false
   }
 }
@@ -3053,8 +3049,7 @@ function mixin(...args) {
   if (args[2]) {
     for (let i = 2, len = args.length; i < len; i++)
       receivingClass.prototype[args[i]] = givingClass.prototype[args[i]]
-  }
-  else {
+  } else {
     // Mixin provide obj
     for (const methodName in givingClass.prototype) {
       if (!receivingClass.prototype[methodName])

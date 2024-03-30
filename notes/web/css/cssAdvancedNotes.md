@@ -2269,8 +2269,7 @@ const mql = window.matchMedia(mediaQueryString)
 ```ts
 if (window.matchMedia('(min-width: 400px)').matches) {
   /* the view port is at least 400 pixels wide */
-}
-else {
+} else {
   /* the view port is less than 400 pixels wide */
 }
 ```
@@ -2283,8 +2282,7 @@ const match = window.matchMedia('(min-width: 400px)')
 match.addEventListener('change', (e) => {
   if (e.matches) {
     /* do a thing */
-  }
-  else {
+  } else {
     /* do another thing */
   }
 })
