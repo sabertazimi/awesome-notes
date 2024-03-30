@@ -1140,6 +1140,12 @@ server {
 - SaaS/PaaS/IaaS [list](https://github.com/ripienaar/free-for-dev).
 - Free budget [stack](https://github.com/255kb/stack-on-a-budget).
 
+## ESLint
+
+### ESLint Flat Config
+
+Flat config compatibility [solution](https://github.com/vercel/next.js/discussions/49337).
+
 ## Babel
 
 ```bash
