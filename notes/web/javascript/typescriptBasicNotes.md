@@ -114,11 +114,7 @@ Basic [`tsconfig`](https://www.typescriptlang.org/tsconfig):
     "sourceRoot": "./", // 指定调试器应该找到 TypeScript 文件而不是源文件的位置
     "mapRoot": "./", // 指定调试器应该找到映射文件而不是生成文件的位置
     "inlineSourceMap": true, // 生成单个 source map 文件，而不是将 source maps 生成不同的文件
-    "inlineSources": true, // 将代码与 source map 生成到一个文件中
-
-    /* 其他选项 */
-    "experimentalDecorators": true, // 启用装饰器
-    "emitDecoratorMetadata": true // 为装饰器提供元数据的支持
+    "inlineSources": true // 将代码与 source map 生成到一个文件中
   }
 }
 ```
