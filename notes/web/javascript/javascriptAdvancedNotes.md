@@ -1159,7 +1159,6 @@ setTimeout(console.log, 0, p8) // Promise <pending>
 setTimeout(console.log, 0, p9) // Promise <rejected>: undefined
 
 const p10 = p1.then(null, () => {
-  // eslint-disable-next-line no-throw-literal
   throw 'bar'
 })
 // Uncaught (in promise) bar
@@ -1227,7 +1226,6 @@ const p10 = p1.finally(() => Promise.reject())
 // Uncaught (in promise): undefined
 setTimeout(console.log, 0, p10) // Promise <rejected>: undefined
 const p11 = p1.finally(() => {
-  // eslint-disable-next-line no-throw-literal
   throw 'bar'
 })
 // Uncaught (in promise) baz
