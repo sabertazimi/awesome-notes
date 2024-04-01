@@ -5293,9 +5293,9 @@ const property = 'name'
 alert(obj[property])
 
 // Anti-pattern:
-// eslint-disable-next-line no-implied-eval
+
 setTimeout('myFunc()', 1000)
-// eslint-disable-next-line no-implied-eval
+
 setTimeout('myFunc(1, 2, 3)', 1000)
 // Preferred:
 setTimeout(myFunc, 1000)
