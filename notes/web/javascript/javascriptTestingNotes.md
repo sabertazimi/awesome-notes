@@ -628,9 +628,11 @@ describe('LandingNav', () => {
 })
 ```
 
-Use `userEvent` instead of `fireEvent`:
+[Use `userEvent` instead of `fireEvent`](https://claritydev.net/blog/improving-react-testing-library-tests):
 
 ```tsx
+import userEvent from '@testing-library/user-event'
+
 // setup userEvent
 function setup(jsx) {
   return {
