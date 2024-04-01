@@ -628,7 +628,7 @@ describe('LandingNav', () => {
 })
 ```
 
-[Use `userEvent` instead of `fireEvent`](https://claritydev.net/blog/improving-react-testing-library-tests):
+Use `userEvent` instead of `fireEvent`:
 
 ```tsx
 import userEvent from '@testing-library/user-event'
@@ -650,6 +650,19 @@ describe('Form', () => {
     await user.click(screen.getByRole('button', { name: 'Sign up' }))
 
     expect(mockSave).toHaveBeenLastCalledWith({ ...defaultData, name: 'Test' })
+  })
+})
+```
+
+Use `findBy` instead of `waitFor` + `getBy`:
+
+```tsx
+describe('ListPage', () => {
+  it('renders without breaking', async () => {
+    render(<ListPage />)
+    expect(
+      await screen.findByRole('heading', { name: 'List of items' }),
+    ).toBeInTheDocument()
   })
 })
 ```
@@ -1008,6 +1021,14 @@ reactTest('test component', () => {
 
 - Jest debug [tool](https://github.com/nvh95/jest-preview).
 - Jest visual regression testing [tool](https://github.com/americanexpress/jest-image-snapshot).
+
+### Jest Best Practices
+
+- Avoid [flaky testing](https://semaphoreci.com/blog/flaky-react).
+- Use [`userEvent`](https://claritydev.net/blog/improving-react-testing-library-tests#use-userevent-instead-of-fireevent)
+  instead of `fireEvent`.
+- Use [`findBy`](https://claritydev.net/blog/improving-react-testing-library-tests#simplify-the-waitfor-queries-with-findby)
+  instead of `waitFor` + `getBy`.
 
 ## Cypress Testing
 
@@ -2000,4 +2021,4 @@ Tool for composite stage analysis:
 
 ## Reference
 
-- JavaScript testing [best practice](https://github.com/goldbergyoni/javascript-testing-best-practices).
+- JavaScript testing [best practices](https://github.com/goldbergyoni/javascript-testing-best-practices).
