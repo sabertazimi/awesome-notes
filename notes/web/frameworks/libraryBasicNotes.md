@@ -72,7 +72,7 @@ tags: [Web, Framework, Library]
 
 - [Headless: Completely Un-styled and Fully Accessible Tailwind React Components](https://github.com/tailwindlabs/headlessui)
 - [Radix: Build High-quality and Accessible Design Systems](https://github.com/radix-ui/primitives)
-- [Shadcn: Accessible and Customizable Components can Copy and Paste](https://github.com/shadcn-ui/ui)
+- [ShadCN: Accessible and Customizable Components can Copy and Paste](https://github.com/shadcn-ui/ui)
 - [Spectrum: Build Adaptive, Accessible and Robust User Experiences](https://github.com/adobe/react-spectrum)
 - [AriaKit: Accessible React Components](https://github.com/ariakit/ariakit)
 
@@ -146,7 +146,7 @@ tags: [Web, Framework, Library]
 - [Electron](https://github.com/electron/electron)
 - [Tauri: Smaller, Faster and More Secure Rust Application](https://github.com/tauri-apps/tauri)
 - [Neutralino: Portable and Lightweight Cross-platform C++ Application](https://github.com/neutralinojs/neutralinojs)
-- [Wasmer: Leading Wasm Runtime](https://github.com/wasmerio/wasmer)
+- [WasmER: Leading Wasm Runtime](https://github.com/wasmerio/wasmer)
 
 ### Mobile Solution
 
@@ -191,7 +191,7 @@ tags: [Web, Framework, Library]
 ### Router State Management
 
 - [Navigo: Simple Vanilla Router](https://github.com/krasimir/navigo)
-- [Wouter: Minimalist-friendly Routing for React and Preact](https://github.com/molefrog/wouter)
+- [Minimalist-friendly Router for React and Preact](https://github.com/molefrog/wouter)
 
 ## Hooks
 
@@ -581,7 +581,7 @@ tags: [Web, Framework, Library]
 - [AntV: React Chart Library Based on G2Plot, G6, X6, L7](https://github.com/ant-design/ant-design-charts)
 - [ReCharts: Redefined Chart Library Built with React and D3](https://github.com/recharts/recharts)
 - [HighCharts: TypeScript Charting Framework](https://github.com/highcharts/highcharts)
-- [XYFlow: Building Intreactive Node-based UIs, Editors, Flow Charts and Diagrams](https://github.com/xyflow/xyflow)
+- [XYFlow: Building Interactive Node-based UIs, Editors, Flow Charts and Diagrams](https://github.com/xyflow/xyflow)
 - [ReaFlow: Building Workflow Editors, Flow Charts and Diagrams](https://github.com/reaviz/reaflow)
 - [Sigma: Dedicated to Graph Drawing](https://github.com/jacomyal/sigma.js)
 - [Plotly.js: Charting Library behind Plotly and Dash](https://github.com/plotly/plotly.js)
@@ -594,7 +594,7 @@ tags: [Web, Framework, Library]
 
 ### Charts Draw Utils
 
-- [ExcaliDraw: Virtual Whiteboard for Sketching Hand-drawn](https://github.com/excalidraw/excalidraw)
+- [ExCaliDraw: Virtual Whiteboard for Sketching Hand-drawn](https://github.com/excalidraw/excalidraw)
 - [iDraw: Simple JavaScript Framework for Drawing on Web](https://github.com/idrawjs/idraw)
 
 ### Math
