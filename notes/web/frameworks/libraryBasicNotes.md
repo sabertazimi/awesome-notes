@@ -12,6 +12,7 @@ tags: [Web, Framework, Library]
 
 - [LibHunt](https://www.libhunt.com)
 - [Rising Stars](https://github.com/bestofjs/javascript-risingstars)
+- [Star History](https://github.com/star-history/star-history)
 - [Best of JS](https://github.com/bestofjs/bestofjs-webui)
 - [Moiva](https://github.com/aantipov/moiva)
 - [NPM Package Advisor](https://snyk.io/advisor)
