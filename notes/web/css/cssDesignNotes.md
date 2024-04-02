@@ -518,6 +518,32 @@ point out that:
 - Implement Country & Language Selection Carefully (35% Don’t).
 - Ensure Visual Hit Areas Match the Actual Hit Areas (43% Don’t).
 
+NNGroup article [homepage design principles](https://www.nngroup.com/articles/homepage-design-principles):
+
+- Ensure Easy Access to the Homepage:
+  - Ensure every page includes both implicit and explicit links to the homepage.
+  - Use a simple and predictable URL for your site.
+  - Signpost your homepage by making it visually distinct from other pages.
+- Communicate Who You Are and What You Do:
+  - Display the company name and logo prominently in the top left corner of the homepage.
+  - Include a tagline that explicitly conveys what your site or company does.
+  - Emphasize the unique value your site brings to your users,
+    as well as how it differentiates from competitors.
+  - Ensure that featured imagery accurately reflects your brand.
+- Reveal Content Through Examples:
+  - Place the most important content above the fold,
+    and lead users down the page when there is more content to see.
+  - Provide specific examples of your site's content.
+- Prompt Actions and Navigations:
+  - Include clear, descriptive link labels that resonate with your users.
+  - Emphasize high-priority tasks with a clear visual hierarchy.
+  - Locate primary navigation in a highly noticeable place.
+- Keep Homepages Simple:
+  - Opt for simple, standard homepage designs.
+  - Minimize motion and animation.
+  - Provide immediate access to content.
+  - Avoid popup windows and splash screens unless legally required.
+
 ### Form Design Principles
 
 - Form design [blog](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post).
