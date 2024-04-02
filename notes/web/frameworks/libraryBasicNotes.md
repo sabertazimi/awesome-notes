@@ -256,10 +256,6 @@ tags: [Web, Framework, Library]
 - [Bull: Premium Queue Package for Handling Distributed Jobs and Messages](https://github.com/OptimalBits/bull)
 - [BreeJS: Job Scheduler](https://github.com/breejs/bree)
 
-### Hash Utils
-
-- [NanoID](https://github.com/ai/nanoid)
-
 ### Functional Programming Utils
 
 - [Immer](https://github.com/immerjs/immer)
@@ -1341,10 +1337,18 @@ tags: [Web, Framework, Library]
 
 ### Security
 
-- [SuperTokens: Open Source Alternative to Auth0 / Firebase Auth / AWS Cognito](https://github.com/supertokens/supertokens-website)
+#### Crypto
+
+- [NanoID](https://github.com/ai/nanoid)
 - [MD5](https://github.com/blueimp/JavaScript-MD5)
 - [Base64](https://github.com/dankogai/js-base64)
+
+#### Auth
+
+- [SuperTokens: Open Source Alternative to Auth0 / Firebase Auth / AWS Cognito](https://github.com/supertokens/supertokens-website)
 - [NextAuth: Next.js Authentication](https://github.com/nextauthjs/next-auth)
+- [Lucia Auth: Simple Session Authentication](https://github.com/lucia-auth/lucia)
+- [Oslo: Collection of Auth-related Utilities](https://github.com/pilcrowonpaper/oslo)
 
 ## AI
 
