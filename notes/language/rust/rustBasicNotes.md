@@ -13,7 +13,15 @@ tags: [Language, Rust]
 ### Installation
 
 ```bash
+# RustUp script.
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+# Setup environment variables.
+echo '. $HOME/.cargo/env' >> ~/.zshrc
+# Install GCC linker and OpenSSL.
+sudo apt install build-essential libssl-dev pkg-config
+# Done.
+cargo -V
+rustc -V
 ```
 
 ### Cargo
