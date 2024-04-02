@@ -791,6 +791,294 @@ Set-Cookie: weight=100; domain=me.github.com
 - Session ID 不包含具体用户信息, 需要 Key-Value Store (e.g **Redis**) 持久化,
   在分布式环境下需要在每个服务器上都备份, 占用了大量的存储空间.
 
+#### Session Cookie Usage
+
+Session authentication with Lucia in [Next.js](https://www.robinwieruch.de/next-authentication):
+
+- `signUp` function.
+- `signIn` function.
+- `getAuth` function.
+- `signOut` function.
+- Protected routes `AuthenticatedLayout`.
+- Authorization in UI `RootLayout`.
+
+`SingUp` React Server Component:
+
+```ts
+// src/features/auth/actions/sign-up.ts
+'use server'
+
+import { generateId } from 'lucia'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+import { Argon2id } from 'oslo/password'
+import { lucia } from '@/lib/lucia'
+import { prisma } from '@/lib/prisma'
+
+async function signUp(formData: FormData) {
+  const formDataRaw = {
+    firstName: formData.get('firstName') as string,
+    lastName: formData.get('lastName') as string,
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+    confirmPassword: formData.get('confirmPassword') as string,
+  }
+
+  if (formDataRaw.password !== formDataRaw.confirmPassword)
+    throw new Error('Passwords do not match')
+
+  // TODO: add validation yourself
+  // https://www.robinwieruch.de/next-forms/
+
+  try {
+    const hashedPassword = await new Argon2id().hash(
+      formDataRaw.password
+    )
+    const userId = generateId(15)
+
+    await prisma.user.create({
+      data: {
+        id: userId,
+        firstName: formDataRaw.firstName,
+        lastName: formDataRaw.lastName,
+        email: formDataRaw.email,
+        hashedPassword,
+      },
+    })
+
+    const session = await lucia.createSession(userId, {})
+    const sessionCookie = lucia.createSessionCookie(session.id)
+
+    cookies().set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes
+    )
+  } catch (error) {
+    // TODO: add error feedback yourself
+    // https://www.robinwieruch.de/next-forms/
+    // TODO: add error handling if user email is already taken
+    // The Road to Next
+  }
+
+  redirect('/dashboard')
+}
+
+export { signUp }
+```
+
+`SingIn` React Server Component:
+
+```ts
+// src/features/auth/actions/sign-in.ts
+'use server'
+
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+import { Argon2id } from 'oslo/password'
+import { lucia } from '@/lib/lucia'
+import { prisma } from '@/lib/prisma'
+
+async function signIn(formData: FormData) {
+  const formDataRaw = {
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  }
+
+  // TODO: add validation yourself
+  // https://www.robinwieruch.de/next-forms/
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email: formDataRaw.email },
+    })
+
+    if (!user) {
+      // https://www.robinwieruch.de/next-forms/
+      throw new Error('Incorrect email or password')
+    }
+
+    const validPassword = await new Argon2id().verify(
+      user.hashedPassword,
+      formDataRaw.password
+    )
+
+    if (!validPassword) {
+      // https://www.robinwieruch.de/next-forms/
+      throw new Error('Incorrect email or password')
+    }
+
+    const session = await lucia.createSession(user.id, {})
+    const sessionCookie = lucia.createSessionCookie(session.id)
+
+    cookies().set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes
+    )
+  } catch (error) {
+    // TODO: add error feedback yourself
+    // https://www.robinwieruch.de/next-forms/
+  }
+
+  redirect('/dashboard')
+}
+
+export { signIn }
+```
+
+`getAuth` function:
+
+```ts
+// src/features/auth/queries/get-auth.ts
+import { cookies } from 'next/headers'
+import { cache } from 'react'
+
+import type { Session, User } from 'lucia'
+import { lucia } from '@/lib/lucia'
+
+export const getAuth = cache(
+  async (): Promise<
+    { user: User, session: Session } | { user: null, session: null }
+  > => {
+    const sessionId
+      = cookies().get(lucia.sessionCookieName)?.value ?? null
+
+    if (!sessionId) {
+      return {
+        user: null,
+        session: null,
+      }
+    }
+
+    const result = await lucia.validateSession(sessionId)
+
+    try {
+      if (result.session && result.session.fresh) {
+        const sessionCookie = lucia.createSessionCookie(
+          result.session.id
+        )
+        cookies().set(
+          sessionCookie.name,
+          sessionCookie.value,
+          sessionCookie.attributes
+        )
+      }
+
+      if (!result.session) {
+        const sessionCookie = lucia.createBlankSessionCookie()
+        cookies().set(
+          sessionCookie.name,
+          sessionCookie.value,
+          sessionCookie.attributes
+        )
+      }
+    } catch {}
+
+    return result
+  }
+)
+```
+
+`SingOut` React Server Component:
+
+```ts
+// src/features/auth/actions/sign-out.ts
+'use server'
+
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+import { getAuth } from '../queries/get-auth'
+import { lucia } from '@/lib/lucia'
+
+export async function signOut(_formData: FormData) {
+  const { session } = await getAuth()
+
+  if (!session)
+    redirect('/sign-in')
+
+  await lucia.invalidateSession(session.id)
+
+  const sessionCookie = lucia.createBlankSessionCookie()
+
+  cookies().set(
+    sessionCookie.name,
+    sessionCookie.value,
+    sessionCookie.attributes
+  )
+
+  redirect('/sign-in')
+}
+```
+
+Protected routes:
+
+```tsx
+// src/app/(authenticated)/layout.tsx
+// - src/app/(authenticated)/dashboard/page.tsx
+// - src/app/(authenticated)/account/page.tsx
+// - and more ...
+import { redirect } from 'next/navigation'
+import { getAuth } from '@/features/auth/queries/get-auth'
+
+export default async function AuthenticatedLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  const { user } = await getAuth()
+
+  if (!user)
+    redirect('/sign-in')
+
+  return <>{children}</>
+}
+```
+
+Authorization UI:
+
+```tsx
+// src/app/layout.tsx
+import Link from 'next/link'
+import { getAuth } from '@/features/auth/queries/get-auth'
+
+export default function RootLayout() {
+  const { user } = await getAuth()
+
+  const appNav = (
+    <>
+      <li>
+        <Link href="/">LOGO</Link>
+      </li>
+      {user && (
+        <li>
+          <Link href="/dashboard">Dashboard</Link>
+        </li>
+      )}
+    </>
+  )
+
+  const authNav = user
+    ? (
+      <li>
+        <form action={signOut}>
+          <button type="submit">Sign Out</button>
+        </form>
+      </li>
+      )
+    : (
+      <>
+        <li>
+          <Link href="/sign-up">Sign Up</Link>
+        </li>
+        <li>
+          <Link href="/sign-in">Sign In</Link>
+        </li>
+      </>
+      )
+}
+```
+
 ### Token Authentication
 
 #### Token Authentication Basis
