@@ -320,6 +320,110 @@ table {
 }
 ```
 
+## Design Systems
+
+- [OpenUI: W3C Community Group](https://open-ui.org)
+- [Design Systems Database](https://designsystems.surf)
+- [Global Design System](https://bradfrost.com/blog/post/a-global-design-system)
+
+## Design Tokens
+
+[Design tokens](https://southleft.com/insights/design-systems/the-value-of-design-tokens)
+are the atomic building blocks of a design system.
+Think of them as named containers that store your website’s visual DNA:
+
+- Colors.
+- Fonts.
+- Spacing.
+- Sizing
+- And more.
+
+### Design Tokens Importance
+
+- Consistency:
+  A token like “brand-blue” with the value “#006699” ensures
+  that exact blue is used everywhere.
+  This extends to spacing, typography, and more.
+- Maintainability:
+  Update the token, and changes ripple through your entire application
+  to complete a design refresh.
+- Scalability:
+  Design tokens keep your growing projects organized.
+  New components inherit your design rules, guaranteeing a unified look.
+- Collaboration:
+  Tokens become a shared language between designers and developers,
+  a single source of truth for your website’s style.
+
+### Design Tokens Implementation
+
+Tiered structure: we define tokens at different levels of abstraction:
+
+- Tier 1: Base value `(--color-brand-blue-800)`.
+- Tier 2: Semantic meaning `(--theme-color-content-default)`.
+- Tier 3: Component-specific use `(--theme-color-button-content)`.
+
+```html
+<script>
+  // my-button.js
+  class MyButton extends HTMLElement {
+    // ... your component setup
+
+    connectedCallback() {
+      this.shadowRoot.innerHTML = `
+       <style>
+         button {
+           background-color: var(--theme-color-button-content); /* Tier 3 token */
+           padding: var(--spacing-base);
+           color: var(--theme-color-content-default);
+         }
+       </style>
+       <button><slot>Default Button</slot></button>
+     `
+    }
+    // ... rest of your component code
+  }
+
+  customElements.define('my-button', MyButton)
+</script>
+
+<style>
+  /* Design tokens as CSS custom properties */
+  :root {
+    --color-brand-blue-800: #069; /* Tier 1 */
+    --theme-color-content-default: var(--color-brand-blue-800); /* Tier 2 */
+    --theme-color-button-content: var(
+      --theme-color-content-default
+    ); /* Tier 3 */
+  }
+</style>
+```
+
+Implementing design tokens in your workflow:
+
+- Design Phase: Defining Visual DNA:
+  - Define your design tokens in a shared document.
+  - Use tools like Figma, Sketch, or Adobe XD to create a design system.
+  - Craft the core visual attributes: color palettes, typography, spacing and sizing.
+  - Define tokens hierarchical structure: this is where tokens become powerful.
+- Exporting Phase: Generating Tokens:
+  - Use tools like Token Studio, Style Dictionary, or Figma Tokens to generate tokens.
+  - Export tokens in a format (`JSON`/`YAML`)
+    that can be consumed by your development environment.
+  - Define a naming convention for your tokens.
+  - Take use of version control and continuous integration.
+- Development Phase: Implementing Tokens:
+  - Create a CSS file to store your tokens.
+  - Use CSS custom properties to define your tokens.
+  - Implement tokens in your components.
+  - Component library integration:
+    include the generated styles in your component library environment setup
+    (e.g Storybook).
+- Maintenance Phase: Updating Tokens:
+  - Regenerate tokens and update your CSS file:
+    design systems aren’t static.
+  - Test your components to ensure the changes are applied correctly.
+  - Use version control to track changes.
+
 ## Design Principles
 
 ### Cicada Principle
