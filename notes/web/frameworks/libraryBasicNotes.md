@@ -1354,9 +1354,10 @@ tags: [Web, Framework, Library]
 
 ### LLM
 
-- [vercel.ai: Build AI-powered Web Applications](https://github.com/vercel/ai)
 - [LangChain: LLM Framework](https://github.com/langchain-ai/langchainjs)
+- [Vercel.ai: Build AI-powered Web Applications](https://github.com/vercel/ai)
 - [TypeChat: Makes it Easy to Build Natural Language Interfaces](https://github.com/microsoft/TypeChat)
+- [Jan: Offline Local ChatGPT Open Source Alternative](https://github.com/janhq/jan)
 
 ### Copilot
 
