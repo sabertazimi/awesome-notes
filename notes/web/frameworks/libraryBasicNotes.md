@@ -1348,19 +1348,30 @@ tags: [Web, Framework, Library]
 
 ## AI
 
+### CV
+
+- [Tesseract: Image Recognition Tesseract OCR Engine](https://github.com/naptha/tesseract.js)
+
 ### LLM
 
 - [vercel.ai: Build AI-powered Web Applications](https://github.com/vercel/ai)
 - [LangChain: LLM Framework](https://github.com/langchain-ai/langchainjs)
 - [TypeChat: Makes it Easy to Build Natural Language Interfaces](https://github.com/microsoft/TypeChat)
 
-### CV
-
-- [Tesseract: Image Recognition Tesseract OCR Engine](https://github.com/naptha/tesseract.js)
-
-### Agent
+### Copilot
 
 - [CopilotKit: Building Custom AI Copilots](https://github.com/CopilotKit/CopilotKit)
+- [ChatHub: All-in-one Chatbot Client](https://github.com/chathub-dev/chathub)
+- [Poe: Fast AI Chat](https://poe.com)
+- [Sider: ChatGPT4-driven Browser Copilot](https://microsoftedge.microsoft.com/addons/detail/dhoenijjpgpeimemopealfcbiecgceod)
+- [Monica: ChatGPT4-driven Browser Copilot](https://microsoftedge.microsoft.com/addons/detail/fhimbbbmdjiifimnepkibjfjbppnjble)
+- [Merlin: 1-Click access Browser Copilot](https://chromewebstore.google.com/detail/camppjleccjaphfdbohjdohecfnoikec)
+- [Max: 1-Click access Browser Copilot](https://microsoftedge.microsoft.com/addons/detail/ngphehpfehdmjellohmlojkplilekadg)
+- [TinaMind: ChatGPT-driven Free Browser Copilot](https://chromewebstore.google.com/detail/befflofjcniongenjmbkgkoljhgliihe)
+- [C4G: ChatGPT for Google](https://microsoftedge.microsoft.com/addons/detail/ilphilpfaejmgdkapaijljgcigibggam)
+- [GrammarLy: Free Writing and Grammar Checker Copilot](https://microsoftedge.microsoft.com/addons/detail/cnlefmmeadmemmdciolhbnfeacpdfbkd)
+- [DeepL: Free Translation Copilot](https://microsoftedge.microsoft.com/addons/detail/fancfknaplihpclbhbpclnmmjcjanbaf)
+- [ZipZap: Multilingual Translation Copilot](https://microsoftedge.microsoft.com/addons/detail/efjbjbiikanoebecldljpjddfhjfmnob)
 
 ## Debugging and Testing
 
