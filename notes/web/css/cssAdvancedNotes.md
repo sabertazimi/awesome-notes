@@ -2399,6 +2399,10 @@ e.g `.main > .button` vs `.sidebar > .button`,
 </style>
 ```
 
+### Container Query Reference
+
+- An interactive and comprehensive CSS container queries [guide](https://ishadeed.com/article/css-container-query-guide).
+
 ## Feature Query
 
 ### Supports At Rule
