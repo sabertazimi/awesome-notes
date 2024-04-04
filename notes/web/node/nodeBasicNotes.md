@@ -702,6 +702,26 @@ Modify package in `node_modules` conveniently:
 
 ### PNPM Installation
 
+Using Corepack or npm (recommended installation):
+
+```bash
+# Using Corepack.
+corepack enable pnpm
+
+# Using npm.
+npm install -g pnpm
+```
+
+```bash
+alias np=pnpm
+source ~/.zshrc
+which pnpm
+pnpm --version
+pnpm store path
+```
+
+Using a standalone script (without Node.js installed):
+
 ```bash
 # By script.
 wget -qO- https://get.pnpm.io/install.sh | sh -
@@ -710,13 +730,6 @@ wget -qO- https://get.pnpm.io/install.sh | sh -
 mv ./pnpm-linux-x64 ./pnpm
 chmod +x ./pnpm
 ./pnpm setup --force
-
-# Installed.
-alias np=pnpm
-source ~/.zshrc
-which pnpm
-pnpm --version
-pnpm store path
 ```
 
 ### PNPM Configuration
