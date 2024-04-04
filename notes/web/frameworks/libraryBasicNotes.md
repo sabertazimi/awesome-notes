@@ -298,6 +298,7 @@ tags: [Web, Framework, Library]
 - [AutoMapper: Object to Object Auto Mapper](https://github.com/nartc/mapper)
 - [OW: Function Argument Validation for Humans](https://github.com/sindresorhus/ow)
 - [SuperJSON](https://github.com/blitz-js/superjson)
+- [TSPattern: Pattern Matching Library (Rust/Haskell) for TypeScript](https://github.com/gvergnaud/ts-pattern)
 
 ### TypeScript AST Utils
 
