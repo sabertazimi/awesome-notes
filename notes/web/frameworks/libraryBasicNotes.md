@@ -1091,6 +1091,7 @@ tags: [Web, Framework, Library]
 - [Histoire: Fast and Beautiful Interactive Component Playground Powered by Vite](https://github.com/histoire-dev/histoire)
 - [SyncedStore: CRDT for Building Live and Collaborative Applications](https://github.com/yousefed/SyncedStore)
 - [YJS: Shared CRDT Data Types for Building Collaborative Software](https://github.com/yjs/yjs)
+- [AutoMerge: Fast Implementations of Several Different CRDTs](https://github.com/automerge/automerge)
 
 ### Web IDE
 
