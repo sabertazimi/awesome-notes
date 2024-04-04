@@ -1710,7 +1710,7 @@ document.addEventListener('readystatechange', (event) => {
 })
 ```
 
-`load` event, 加载完成:
+`load` event (加载完成):
 
 ```ts
 window.addEventListener('load', () => {
@@ -1773,6 +1773,15 @@ function handleVisibilityChange() {
 }
 
 document.addEventListener('visibilitychange', handleVisibilityChange, false)
+```
+
+`pageshow` event (e.g [BFCache compatible](https://www.sabatino.dev/bfcache-explained)):
+
+```ts
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted)
+    console.log('Page was loaded from cache.')
+})
 ```
 
 - `beforeunload` event.
