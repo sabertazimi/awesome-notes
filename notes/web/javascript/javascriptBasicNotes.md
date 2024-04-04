@@ -1352,6 +1352,23 @@ console.log(everyResult) // false
 console.log(someResult) // true
 ```
 
+#### Array With
+
+[Array.prototype.with](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/with):
+
+```ts
+const arr = [1, 2, 3, 4, 5]
+console.log(arr.with(2, 6)) // [1, 2, 6, 4, 5]
+console.log(arr) // [1, 2, 3, 4, 5]
+
+const arr = [1, 2, 3, 4, 5]
+console.log(arr.with(2, 6).map(x => x ** 2)) // [1, 4, 36, 16, 25]
+
+const frameworks = ['Nuxt', 'Remix', 'SvelteKit', 'Ember']
+console.log(frameworks.with(-1, 'React'))
+// ✅ Returns a copy with the change: ['Nuxt', 'Remix', 'SvelteKit', 'React'].
+```
+
 #### Array Map
 
 相当于 Haskell 中的 List Map:
