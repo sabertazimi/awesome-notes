@@ -229,9 +229,9 @@ tags: [Web, Framework, Library]
 
 #### Glob Utils
 
-- [Globby: User-friendly Glob Matching](https://github.com/sindresorhus/globby)
 - [Glob: Glob Functionality](https://github.com/isaacs/node-glob)
 - [Minimatch: Glob Matcher](https://github.com/isaacs/minimatch)
+- [FastGlob: Fast and Efficient Glob Library](https://github.com/mrmlnc/fast-glob)
 
 #### Regular Expression Utils
 
