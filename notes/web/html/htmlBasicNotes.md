@@ -1732,6 +1732,26 @@ export function trapTabKey(e, context) {
 }
 ```
 
+### Self-Closing Tags
+
+Self-closing tags (`<tag />`) **do not exist** in HTML.
+If a trailing / (slash) character is present in the start tag of an HTML element,
+HTML parsers ignore that slash character:
+
+```xml
+<div>This text is inside the div.</div>
+<div />This text is inside the div.
+
+<input />This text is outside the input.
+<input>This text is outside the input.</input>
+```
+
+Further reading:
+
+- Void elements in [HTML](https://developer.mozilla.org/en-US/docs/Glossary/Void_element).
+- Self-closing tags in [JSX](https://jakearchibald.com/2023/against-self-closing-tags-in-html).
+- Self-closing tags in [Svelte](https://github.com/sveltejs/svelte/issues/11052).
+
 ### ARIA
 
 [Web Accessibility Initiative - Accessible Rich Internet Applications](https://www.w3.org/WAI/intro/aria):
