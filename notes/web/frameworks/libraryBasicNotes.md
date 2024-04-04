@@ -907,15 +907,11 @@ tags: [Web, Framework, Library]
 ### Audio
 
 - [Howler.js](https://github.com/goldfire/howler.js)
-- [Music Helper Utils](https://github.com/madewithlove/music-fns)
-- [Elementary Audio Tools](https://github.com/nick-thompson/elementary)
-- [MIDI.js](https://github.com/mudcube/MIDI.js)
 - [Audio.ts: Agnostic Library Easy to Work with AudioContext and Create Audio Playlists](https://github.com/EvandroLG/ts-audio)
 - [Meyda: Audio Feature Extraction](https://github.com/meyda/meyda)
 - [WaveSurfer: Navigable Waveform Built on Web Audio and Canvas](https://github.com/katspaugh/wavesurfer.js)
-- [Wave.js: Audio Visualizer](https://github.com/foobar404/Wave.js)
 - [Peaks: JavaScript UI Component for Interacting with Audio Waveforms](https://github.com/bbc/peaks.js)
-- [AstroFox: Turn Audio into Amazing Videos](https://github.com/astrofox-io/astrofox)
+- [Tonal: functional music theory library](https://github.com/tonaljs/tonal)
 
 ### Video
 
