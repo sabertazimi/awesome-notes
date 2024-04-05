@@ -968,6 +968,7 @@ reduce image transfer sizes by average of **~20%**:
 ### Images Performance Reference
 
 - Images format [guide](https://evilmartians.com/chronicles/images-done-right-web-graphics-good-to-the-last-byte-optimization-techniques).
+- Low effort images optimization [tips](https://blog.sentry.io/low-effort-image-optimization-tips).
 - Images optimization [guide](https://www.keycdn.com/blog/optimize-images-for-web).
 - Images optimization [blog](https://stackoverflow.blog/2022/03/28/picture-perfect-images-with-the-modern-element).
 - Images optimization [book](https://www.smashingmagazine.com/printed-books/image-optimization).
