@@ -539,7 +539,7 @@ dotenv.config({
 - [Jest DOM Expect API](https://github.com/testing-library/jest-dom)
 
 ```ts
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 
 // Global/Window object Stubs for Jest
 window.matchMedia
@@ -578,6 +578,36 @@ window.localStorage = {
 }
 
 Object.values = () => []
+```
+
+`vitest.config.ts`:
+
+```ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './tests/setup.ts',
+  },
+})
+```
+
+`tests/setup.ts`:
+
+```ts
+import { afterEach, expect } from 'vitest'
+import { cleanup } from '@testing-library/react'
+import * as matchers from '@testing-library/jest-dom/matchers'
+
+expect.extend(matchers)
+
+afterEach(() => {
+  cleanup()
+})
 ```
 
 `setupEnzyme.ts`:
