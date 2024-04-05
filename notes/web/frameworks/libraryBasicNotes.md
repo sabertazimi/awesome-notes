@@ -183,6 +183,7 @@ tags: [Web, Framework, Library]
 - [SWR: React Hooks for Remote Data Fetching](https://github.com/vercel/swr)
 - [Apollo GraphQL: Fully-featured, Production Ready Caching GraphQL Client](https://github.com/apollographql/apollo-client)
 - [URQL: Highly Customizable and Versatile GraphQL Client](https://github.com/FormidableLabs/urql)
+- [Evolution: Local-first Platform for Privacy and Ease of Use](https://github.com/evoluhq/evolu)
 
 ### Router State Management
 
