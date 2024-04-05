@@ -1030,6 +1030,11 @@ tags: [Web, Framework, Library]
 - [NocoDB: No Code Database](https://github.com/nocodb/nocodb)
 - [Directus: No-code Data Collaboration App for SQL Database](https://github.com/directus/directus)
 
+### DaaS and BaaS
+
+- [Open Source Firebase Alternative](https://github.com/supabase/supabase)
+- [Convex: Backend-as-a-Service for Fullstack App Development](https://github.com/get-convex/convex-backend)
+
 ## Search
 
 ### Search UI Components
