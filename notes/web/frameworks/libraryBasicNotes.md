@@ -1364,6 +1364,11 @@ tags: [Web, Framework, Library]
 - [TypeChat: Makes it Easy to Build Natural Language Interfaces](https://github.com/microsoft/TypeChat)
 - [Jan: Offline Local ChatGPT Open Source Alternative](https://github.com/janhq/jan)
 
+### AIaaS
+
+- [JinaAI: Build MultiModal AI Applications with Cloud-native Stack](https://github.com/jina-ai/jina)
+- [LeptonAI: Simplify AI Service Building](https://github.com/leptonai/leptonai)
+
 ### AI Search
 
 - [ChatGPT](https://chat.openai.com)
