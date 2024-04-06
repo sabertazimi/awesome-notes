@@ -1390,6 +1390,11 @@ tags: [Web, Framework, Library]
 - [DeepL: Free Translation Copilot](https://microsoftedge.microsoft.com/addons/detail/fancfknaplihpclbhbpclnmmjcjanbaf)
 - [ZipZap: Multilingual Translation Copilot](https://microsoftedge.microsoft.com/addons/detail/efjbjbiikanoebecldljpjddfhjfmnob)
 
+### AI Agent
+
+- [PRAgent: Codium AI-Powered Tool for Automated Pull Request Analysis, Feedback and Suggestions](https://github.com/Codium-ai/pr-agent)
+- [SWEAgent: Princeton GitHub Issues Auto-Fixer](https://github.com/princeton-nlp/SWE-agent)
+
 ## Debugging and Testing
 
 ### Unit Testing
