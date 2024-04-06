@@ -1364,11 +1364,22 @@ tags: [Web, Framework, Library]
 - [TypeChat: Makes it Easy to Build Natural Language Interfaces](https://github.com/microsoft/TypeChat)
 - [Jan: Offline Local ChatGPT Open Source Alternative](https://github.com/janhq/jan)
 
-### Copilot
+### AI Search
+
+- [ChatGPT](https://chat.openai.com)
+- [BingAI](https://www.bing.com/chat)
+- [GeminiAI](https://gemini.google.com)
+- [PhindAI](https://www.phind.com)
+- [PerplexityAI](https://www.perplexity.ai)
+- [PoeAI: Quora ChatBots Aggregator](https://poe.com)
+- [KimiAI](https://kimi.moonshot.cn)
+- [ChatGLM](https://chatglm.cn)
+- [TongYi QianWen](https://tongyi.aliyun.com/qianwen)
+
+### AI Copilot
 
 - [CopilotKit: Building Custom AI Copilots](https://github.com/CopilotKit/CopilotKit)
 - [ChatHub: All-in-one Chatbot Client](https://github.com/chathub-dev/chathub)
-- [Poe: Fast AI Chat](https://poe.com)
 - [Sider: ChatGPT4-driven Browser Copilot](https://microsoftedge.microsoft.com/addons/detail/dhoenijjpgpeimemopealfcbiecgceod)
 - [Monica: ChatGPT4-driven Browser Copilot](https://microsoftedge.microsoft.com/addons/detail/fhimbbbmdjiifimnepkibjfjbppnjble)
 - [Merlin: 1-Click access Browser Copilot](https://chromewebstore.google.com/detail/camppjleccjaphfdbohjdohecfnoikec)
