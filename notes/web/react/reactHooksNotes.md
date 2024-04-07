@@ -682,7 +682,7 @@ function dispatchAction<S, A>(
 }
 ```
 
-[Queueing series of state updates](https://beta.reactjs.org/learn/queueing-a-series-of-state-updates):
+[Queueing series of state updates](https://react.dev/learn/queueing-a-series-of-state-updates):
 
 ```ts
 export function getFinalState(baseState, queue) {
@@ -1284,7 +1284,7 @@ export default function User() {
 
 If your component needs to store some value,
 but it doesn’t impact the rendering logic,
-[choose refs](https://beta.reactjs.org/learn/referencing-values-with-refs#when-to-use-refs):
+[choose refs](https://react.dev/learn/referencing-values-with-refs#when-to-use-refs):
 
 - Storing timeout IDs.
 - Storing and manipulating DOM elements (binding to HTMLElement).
@@ -2022,7 +2022,7 @@ and exposes bugs like race conditions early.
 ### UseEffect Usage
 
 Effects are typically used to
-[synchronize with external system](https://beta.reactjs.org/learn/synchronizing-with-effects):
+[synchronize with external system](https://react.dev/learn/synchronizing-with-effects):
 browser APIs,
 third-party library,
 network, and so on.
@@ -2039,7 +2039,7 @@ rather than by a particular event:
   put int in `useEffect()`.
 
 If your effect only adjusts some state based on other state,
-[you might not need effects](https://beta.reactjs.org/learn/you-might-not-need-an-effect):
+[you might not need effects](https://react.dev/learn/you-might-not-need-an-effect):
 
 - You don’t need Effects to transform data for rendering.
 - You don’t need Effects to handle user events.
@@ -2076,7 +2076,7 @@ function Form() {
 ### UseEffect Reference
 
 - `useEffect` complete [guide](https://overreacted.io/a-complete-guide-to-useeffect).
-- `useEffect` usage [guide](https://beta.reactjs.org/learn/you-might-not-need-an-effect).
+- `useEffect` usage [guide](https://react.dev/learn/you-might-not-need-an-effect).
 
 ## UseLayoutEffect Hook
 
@@ -2537,7 +2537,7 @@ React.createRoot(document.querySelector('#root')).render(<App />)
 ## UseEvent Hook
 
 Extracting non-reactive logic out of `useEffect`,
-[put them into `useEvent`](https://beta.reactjs.org/learn/separating-events-from-effects),
+[put them into `useEvent`](https://react.dev/learn/separating-events-from-effects),
 call `useEvent` from inside `useEffect`:
 
 ```ts

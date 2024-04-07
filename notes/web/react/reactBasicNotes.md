@@ -63,7 +63,7 @@ class Example extends React.Component {
 
 :::tip State Structure Principles
 
-[Principles for structuring state](https://beta.reactjs.org/learn/choosing-the-state-structure):
+[Principles for structuring state](https://react.dev/learn/choosing-the-state-structure):
 
 - Group related state.
 - Avoid contradictions in state.
