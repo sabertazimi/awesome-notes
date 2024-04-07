@@ -1725,11 +1725,27 @@ to avoid activating it on component updates
 but **only for the mounting** of the component.
 For listeners binding, use `[]` deps list should be better.
 
-`set` function returned from `useState`
-and `ref` object returned by `useRef` are `Stable Value`,
-omit them from deps list.
+#### UseEffect Omit Deps
 
-[Primitive values are better](https://beta.reactjs.org/learn/removing-effect-dependencies):
+Omit stable values from the deps list:
+
+- `set` function returned from `useState`.
+- `ref` object returned from `useRef`.
+
+```tsx
+export default function App() {
+  const [count, setCount] = useState(0)
+  const countRef = useRef(count)
+
+  useEffect(() => {
+    countRef.current = count
+  }, [count]) // ✅ Only count is declared.
+}
+```
+
+#### UseEffect Primitive Deps
+
+Primitive values are [better](https://react.dev/learn/removing-effect-dependencies):
 
 ```ts
 function ChatRoom({ options }) {
@@ -1746,6 +1762,8 @@ function ChatRoom({ options }) {
   }, [roomId, serverUrl]) // ✅ All dependencies declared
 }
 ```
+
+#### UseEffect Functions Deps
 
 Functions in `useEffect`:
 
@@ -1789,6 +1807,45 @@ function useDataApi(initialUrl, initialData) {
   }
 
   return { data, isLoading, isError, doFetch }
+}
+```
+
+#### UseEffect Compare Deps
+
+```ts
+import { DependencyList, EffectCallback, useEffect, useRef } from 'react'
+
+const isPrimitive = (val: any) => val !== Object(val)
+
+type DepsEqualFnType<TDeps extends DependencyList>
+  = (prevDeps: TDeps, nextDeps: TDeps) => boolean
+
+export default function useCustomCompareEffect<TDeps extends DependencyList>(
+  effect: EffectCallback,
+  deps: TDeps,
+  depsEqual: DepsEqualFnType<TDeps>,
+) {
+  const ref = useRef<TDeps | undefined>(undefined)
+
+  if (!ref.current || !depsEqual(deps, ref.current))
+    ref.current = deps
+
+  useEffect(effect, ref.current)
+}
+```
+
+```ts
+import { DependencyList, EffectCallback } from 'react'
+import useCustomCompareEffect from './useCustomCompareEffect'
+import fastDeepEqual from './misc/fastDeepEqual'
+
+const isPrimitive = (val: any) => val !== Object(val)
+
+export default function useDeepCompareEffect(
+  effect: EffectCallback,
+  deps: DependencyList,
+) {
+  useCustomCompareEffect(effect, deps, fastDeepEqual)
 }
 ```
 
