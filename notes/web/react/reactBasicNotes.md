@@ -2920,7 +2920,7 @@ Give React a chunk of code that it runs exclusively on the server,
 to do the database query to eliminate redundant network requests,
 polish FCP and LCP, and improve SEO:
 
-[![React Server Components](./figures/ReactServerComponents.png)](https://www.joshwcomeau.com/react/server-components)
+[![React Server Components](./figures/ReactServerComponents.png 'React Server Components')](https://www.joshwcomeau.com/react/server-components)
 
 Each meta-framework came up with its own approach to achieve such target.
 Next.js has one approach, Gatsby has another, Remix has yet another.
