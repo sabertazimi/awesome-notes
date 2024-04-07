@@ -1561,7 +1561,10 @@ All Last 自摸逆转条件:
 
 - `Beginner's Luck` [guide](http://beginners.biz/kihon).
 - `魔女` [ブログ (Blog)](https://puyokururu.medium.com).
-- `おしえて！科学する麻雀` [book](https://book.douban.com/subject/20390543).
+- [`科学する麻雀`](https://book.douban.com/subject/20390543).
+- [`统计学麻雀战术`](https://book.douban.com/subject/35627198).
+- `LuckyJ` [AI](https://twitter.com/LuckyJ1443836).
+- `Mortal` [AI](https://github.com/Equim-chan/mjai-reviewer).
+- `Naga` [AI](https://naga.dmv.nico/naga_report/top).
 - `Suphx` [AI](https://arxiv.org/pdf/2003.13590.pdf).
-- Mahjong online [reviewer](https://github.com/Equim-chan/mjai-reviewer).
 - 天鳳牌理好形表示 [插件](https://greasyfork.org/zh-CN/scripts/435111-%E5%A4%A9%E9%B3%B3%E7%89%8C%E7%90%86%E5%A5%BD%E5%BD%A2%E8%A1%A8%E7%A4%BA).
