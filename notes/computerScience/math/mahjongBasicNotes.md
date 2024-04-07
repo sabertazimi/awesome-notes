@@ -3,10 +3,10 @@ author: Sabertazimi
 authorTitle: Web Developer
 authorURL: https://github.com/sabertazimi
 authorImageURL: https://github.com/sabertazimi.png
-tags: [CS, Math]
+tags: [CS, Math, Mahjong]
 ---
 
-# Math Basic Notes
+# Mahjong Basic Notes
 
 ## 牌效策略
 
