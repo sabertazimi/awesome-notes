@@ -8,7 +8,40 @@ tags: [Programming, Tools, Vim]
 
 # Vim Basic Notes
 
-## Normal 模式命令
+## Vim Setup
+
+### Vim Installation
+
+```bash
+sudo add-apt-repository ppa:jonathonf/vim
+sudo apt update
+sudo apt install vim
+vim --version
+```
+
+### Vim Configuration
+
+```bash
+git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh
+```
+
+```vim
+" my_configs.vim
+:set number
+:setlocal spell!
+
+set gfn=Operator\ Mono\ Lig,Operator\ Mono\ SSm,Operator\ Mono,Fira\ Code,Monospace
+
+let g:copilot_filetypes = {
+    \ 'gitcommit': v:true,
+    \ 'markdown': v:true,
+    \ 'toml': v:true,
+    \ 'yaml': v:true
+    \ }
+```
+
+## Normal Mode Commands
 
 ### 重复命令
 
@@ -431,7 +464,7 @@ e.g >G: 缩进全文
 | `:vimgrep`                                      |                             |
 | `:make`                                         |                             |
 
-```bash
+```vim
 cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
 ```
 
@@ -685,7 +718,7 @@ set wildmode=list:longest,full
 git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
 ```
 
-```bash
+```vim
 :PluginInstall
 ```
 
@@ -920,7 +953,6 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 [LunarVim](https://github.com/LunarVim/LunarVim):
 
 ```bash
-
 git clone https://github.com/LunarVim/LunarVim
 bash LunarVim/utils/installer/install.sh
 ```
@@ -930,13 +962,13 @@ bash LunarVim/utils/installer/install.sh
 - [LSP Config](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
 - [LSP Installer](https://github.com/williamboman/nvim-lsp-installer)
 
-```bash
+```vim
 :LspInstall typescript
 ```
 
 ### NeoVim TreeSitter
 
-```bash
+```vim
 :TSInstall html css javascript typescript tsx vue json jsonc yaml bash
 ```
 
