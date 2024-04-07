@@ -8,17 +8,15 @@ tags: [Language, Python]
 
 # Python Basic Notes
 
-## Python Basics
+## Basic Types
 
-### Basic Types
-
-#### Tuples
+### Tuples
 
 tuples in python are immutable
 
-### Basic Control Statement
+## Control Statement
 
-#### For Loop
+### For Loop
 
 ```python
 for i in range(3): # goes from i = 0 to i = 2
@@ -28,14 +26,14 @@ for i in [0, 1, 2]:
   x += 1
 ```
 
-#### While Loop
+### While Loop
 
 ```python
 while x > 0:
   x -= 1
 ```
 
-### Functions
+## Functions
 
 ```python
 def join_name(first_name, last_name):
@@ -43,7 +41,7 @@ def join_name(first_name, last_name):
   return joined_name
 ```
 
-### Classes
+## Classes
 
 ```python
 class Pet(object):
@@ -65,69 +63,6 @@ print(my_dog.name)
 # orange dog named Guises.
 # Guises
 ```
-
-## NumPy Basics
-
-```python
-import numpy as np
-
-np.random.seed(seed=1234)
-```
-
-### Numpy Array Creation
-
-```python
-x = np.array(6)
-x.ndim
-x.shape
-x.size
-x.dtype
-```
-
-```python
-np.zeros((2, 2))
-np.ones((2, 2))
-np.eye((2))
-np.random.random.((2, 2))
-```
-
-### Numpy Indexing
-
-```python
-x = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
-x[:, 1]    # [2, 6, 10]
-x[0, :]    # [1, 2, 3, 4]
-x[:3, 1:3] # [[2, 3], [6, 7], [10, 11]]
-x[[0, 1, 2], [0, 2, 1]] # [1, 7, 10]
-```
-
-```python
-# Boolean array indexing
-x = np.array([[1,2], [3, 4], [5, 6]])
-print ("x:\n", x)
-print ("x > 2:\n", x > 2)
-print ("x[x > 2]:\n", x[x > 2])
-# x:
-#  [[1 2]
-#  [3 4]
-#  [5 6]]
-# x > 2:
-#  [[False False]
-#  [ True  True]
-#  [ True  True]]
-# x[x > 2]:
-#  [3 4 5 6]
-```
-
-### Numpy Matrix Operations
-
-- math: `x+y`/`x-y`/`x*y` `np.add/subtract/multiply`
-- dot product: `a.dot(b)`
-- sum: `np.sum(x)`
-- column sum: `np.sum(x, axis=0)`
-- row sum: `np.sum(x, axis=1)`
-- transposing: `x.T`
-- reshape: `np.reshape(x, (2, 3))`
 
 ## CLI Application
 
@@ -222,7 +157,7 @@ if __name__ == '__main__':
     caesar_breaker()
 ```
 
-## Process Data Files
+## Data Files
 
 ### CSV File
 
@@ -390,27 +325,75 @@ with open('saved_data.csv', 'wb') as output_file:
     dict_writer.writerows(data_listOfDict)
 ```
 
-## Matplotlib Usage
+## NumPy
+
+```python
+import numpy as np
+
+np.random.seed(seed=1234)
+```
+
+### NumPy Array Creation
+
+```python
+x = np.array(6)
+x.ndim
+x.shape
+x.size
+x.dtype
+```
+
+```python
+np.zeros((2, 2))
+np.ones((2, 2))
+np.eye((2))
+np.random.random.((2, 2))
+```
+
+### NumPy Indexing
+
+```python
+x = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+x[:, 1]    # [2, 6, 10]
+x[0, :]    # [1, 2, 3, 4]
+x[:3, 1:3] # [[2, 3], [6, 7], [10, 11]]
+x[[0, 1, 2], [0, 2, 1]] # [1, 7, 10]
+```
+
+```python
+# Boolean array indexing
+x = np.array([[1,2], [3, 4], [5, 6]])
+print ("x:\n", x)
+print ("x > 2:\n", x > 2)
+print ("x[x > 2]:\n", x[x > 2])
+# x:
+#  [[1 2]
+#  [3 4]
+#  [5 6]]
+# x > 2:
+#  [[False False]
+#  [ True  True]
+#  [ True  True]]
+# x[x > 2]:
+#  [3 4 5 6]
+```
+
+### NumPy Matrix Operations
+
+- math: `x+y`/`x-y`/`x*y` `np.add/subtract/multiply`
+- dot product: `a.dot(b)`
+- sum: `np.sum(x)`
+- column sum: `np.sum(x, axis=0)`
+- row sum: `np.sum(x, axis=1)`
+- transposing: `x.T`
+- reshape: `np.reshape(x, (2, 3))`
+
+## Matplotlib
 
 ```bash
 pip3 install matplotlib
 pip3 install ggplot
 ```
-
-### Plot Type
-
-- bar plot
-- line plot
-- scatter plot
-- pie plot
-- stack plot
-- histogram plot
-- interval plot
-- box plot
-- KDE plot
-- candlestick_ohlc plot
-
-### Basic Usage
 
 ```python
 import matplotlib.pyplot as plt
@@ -452,7 +435,20 @@ plt.subplots_adjust()
 plt.show()
 ```
 
-## Plot Style
+### Plot Type
+
+- `bar` plot.
+- `line` plot.
+- `scatter` plot.
+- `pie` plot.
+- `stack` plot.
+- `histogram` plot.
+- `interval` plot.
+- `box` plot.
+- `KDE` plot.
+- `candlestick_ohlc` plot.
+
+### Plot Style
 
 ```python
 from matplotlib import style
@@ -463,7 +459,7 @@ style.use('fivethirtyeight')
 plt.style.use('mystylesheet.mplrc')
 ```
 
-## Plot Axis Tick
+### Plot Axis Tick
 
 ```python
 ax3.xaxis.set_major_formatter(mDates.DateFormatter('%Y-%m-%d'))
@@ -477,9 +473,9 @@ plt.setp(ax1.get_xticklabels(), visible=False)
 plt.setp(ax2.get_xticklabels(), visible=False)
 ```
 
-## Plot Legend
+### Plot Legend
 
-up middle legend
+Up middle legend:
 
 ```python
 ax.legend()
@@ -487,9 +483,9 @@ leg = ax.legend(loc=9, ncol=2,prop={'size':11})
 leg.get_frame().set_alpha(0.4)
 ```
 
-## Subplot
+### Subplot
 
-tall and width for grid template
+Tall and width for grid template:
 
 ```python
 fig = plt.figure()
@@ -502,13 +498,13 @@ ax2 = plt.subplot2grid((6,1), (1,0), rowspan=4, colspan=1)
 ax3 = plt.subplot2grid((6,1), (5,0), rowspan=1, colspan=1)
 ```
 
-### Double y-axis
+Double y-axis:
 
 ```python
 ax2v = ax2.twinx()
 ```
 
-## 3D Plot
+### 3D Plot
 
 ```python
 from mpl_toolkits.mplot3d import axes3d
@@ -565,7 +561,9 @@ ax1.set_zlabel('z axis')
 plt.show()
 ```
 
-## Paper Figures Config
+### Paper Figures Plot
+
+[Matplotlib for Papers](https://github.com/jbmouret/matplotlib_for_papers):
 
 ```python
 import matplotlib.pyplot as plt
@@ -672,10 +670,6 @@ ax.set_xlim(0, 3*np.pi)
 fig.set_size_inches(width, height)
 fig.savefig('plot.pdf')
 ```
-
-## Paper Standard
-
-- [Matplotlib for Papers](https://github.com/jbmouret/matplotlib_for_papers)
 
 ## Awesome Library
 
