@@ -2575,6 +2575,21 @@ Event functions let you split an `Effect`
 into reactive parts (which should "react" to reactive values and their changes)
 and non-reactive parts (which only read their latest values).
 
+## UseOptimistic Hook
+
+### UseOptimistic Hooks Dispatcher
+
+[`updateOptimistic()`](https://jser.dev/2024-03-20-how-does-useoptimisticwork-internally-in-react#42-updateoptimistic):
+
+- An optimistic update has `revertLane` of `TransitionLaneXX` and `lane` of `SyncLane`.
+- Update is processed in `SyncLane` and also in all following renders,
+  but it is NOT skipped and always kept in the next update queue.
+- Update is reverted in `revertLane` (low priority transition lane),
+  by NOT getting added to the next queue.
+  But if the async action on the transition lane is not yet complete,
+  it suspends by throwing the promise.
+  The revert will be tried again after the async action is done.
+
 ## Custom Hooks
 
 - [ReactUse Hooks](https://github.com/streamich/react-use)
