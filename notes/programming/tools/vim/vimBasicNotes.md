@@ -945,16 +945,24 @@ sudo snap install nvim --classic
 [NvChad](https://github.com/NvChad/NvChad):
 
 ```bash
-mv ~/.config/nvim ~/.config/NVIM.BAK
-git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
+mv ~/.config/nvim{,.bak}
+git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
+# Run :MasonInstallAll command after lazy.nvim finishes downloading plugins.
 ```
 
 [LunarVim](https://github.com/LunarVim/LunarVim):
 
 ```bash
+mv ~/.config/nvim{,.bak}
 git clone https://github.com/LunarVim/LunarVim
 bash LunarVim/utils/installer/install.sh
+```
+
+[LazyVim](https://github.com/LazyVim/LazyVim):
+
+```bash
+mv ~/.config/nvim{,.bak}
+git clone https://github.com/LazyVim/starter ~/.config/nvim && nvim
 ```
 
 ### NeoVim Language server
