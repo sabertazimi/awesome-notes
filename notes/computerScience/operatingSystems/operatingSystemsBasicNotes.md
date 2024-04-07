@@ -1307,7 +1307,7 @@ void load_elf_tables(int argc, char *argv[]) {
 
 调用 `io_delay()` 函数: 对于一些老式总线的外部设备, 读写 I/O 端口的速度若过快就容易出现丢失数据的现象
 
-![I/O Model](./figures/IOModel.png)
+![I/O Model](./figures/IOModel.png 'I/O Model')
 
 ## 实践
 

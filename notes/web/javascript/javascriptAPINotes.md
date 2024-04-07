@@ -2382,7 +2382,7 @@ class EventUtil {
 - clientHeight: 内部可视区域大小 (content + padding).
 - scrollHeight: 元素内容的高度, 包括溢出部分.
 
-![Client Size](./figures/ClientSize.png)
+![Client Size](./figures/ClientSize.png 'Client Size')
 
 ```ts
 // const supportInnerWidth = window.innerWidth !== undefined;
@@ -2443,7 +2443,7 @@ function isElementInViewport(el) {
 - scrollLeft/scrollTop:
   元素滚动条位置, 被隐藏的内容区域左侧/上方的像素位置.
 
-![Offset Size](./figures/OffsetSize.png)
+![Offset Size](./figures/OffsetSize.png 'Offset Size')
 
 ```ts
 function getElementLeft(element) {
@@ -2487,7 +2487,7 @@ window.moveBy(-50, 0)
 - scrollLeft/scrollX/PageXOffset: 元素内容向右滚动了多少像素, 如果没有滚动则为 0.
 - scrollTop/scrollY/pageYOffset: 元素内容向上滚动了多少像素, 如果没有滚动则为 0.
 
-![Scroll Size](./figures/ScrollSize.png)
+![Scroll Size](./figures/ScrollSize.png 'Scroll Size')
 
 ```ts
 // const supportPageOffset = window.pageXOffset !== undefined;
@@ -3432,11 +3432,11 @@ function WebSocketTest() {
 - [RTCDataChannel](https://developer.mozilla.org/docs/Web/API/RTCDataChannel):
   DataChannel API 用于实现端到端之间的任意应用数据交换 (端到端交换版本的 WebSocket).
 
-![WebRTC Engine](./figures/WebRTCEngine.png)
+![WebRTC Engine](./figures/WebRTCEngine.png 'WebRTC Engine')
 
 #### WebRTC Layer Protocol
 
-![WebRTC Layer Protocol](./figures/WebRTCLayerProtocol.png)
+![WebRTC Layer Protocol](./figures/WebRTCLayerProtocol.png 'WebRTC Layer Protocol')
 
 - WebRTC 使用 UDP 作为传输层协议: 低延迟和及时性才是关键.
 - ICE: Interactive Connectivity Establishment (RFC 5245).

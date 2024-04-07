@@ -12,4 +12,4 @@ tags: [CS, Math, AI]
 
 ### Self-Attention Mechanism
 
-[![Self-Attention Mechanism](./figures/Self-Attention.gif 'Self-Attention Mechanism')](https://towardsdatascience.com/illustrated-self-attention-2d627e33b20a)
+[![Self-Attention Mechanism](./figures/Self-Attention.gif)](https://towardsdatascience.com/illustrated-self-attention-2d627e33b20a)

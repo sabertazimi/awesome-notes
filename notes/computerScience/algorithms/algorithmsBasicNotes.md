@@ -8,9 +8,9 @@ tags: [CS, Algorithm]
 
 # Algorithm Basic Notes
 
-## Sorting Algorithm
+## Sorting Algorithms
 
-![Sorting Algorithm](./figures/SortingAlgorithm.png)
+![Sorting Algorithms](./figures/SortingAlgorithms.png 'Sorting Algorithms')
 
 ### Summary
 
@@ -167,9 +167,7 @@ void sink(int k) {
 - 从个位到高位放入桶
 - 从高位到个位放入桶
 
-> Sorting Algorithms Performance
-
-![Performance](./figures/SortingPerformance.png)
+![Sorting Algorithms Performance](./figures/SortingPerformance.png 'Sorting Algorithms Performance')
 
 ## Tree Algorithm
 
@@ -473,14 +471,14 @@ BST + 循环双向链表:
 
 e.g 左子树：左下方 右子树：右上方
 
-## Search Algorithm
+## Search Algorithms
 
 ### First Search
 
 - DFS(深度优先)：栈实现
 - BFS(广度优先)：队列实现
 
-![Search Algorithm Performance](./figures/SearchPerformance.jpg)
+![Search Algorithms Performance](./figures/SearchPerformance.jpg 'Search Algorithms Performance')
 
 ### Cycle Detection
 
@@ -658,7 +656,7 @@ Matrix floyd_warshall(Matrix W) {
 
 MaxFlow Problem:
 
-![Ford Fulkerson Algorithm](./figures/FordFulkersonAlgorithm.png)
+![Ford Fulkerson Algorithm](./figures/FordFulkersonAlgorithm.png 'Ford Fulkerson Algorithm')
 
 #### 最大流模型
 

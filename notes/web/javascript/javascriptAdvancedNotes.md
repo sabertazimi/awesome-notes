@@ -4710,7 +4710,7 @@ class ColorPoint extends Point {
 - Async iteration: pull streams and single consumers.
 - Reactive programming: push streams and potentially multiple consumers.
 
-![Data Stream](./figures/DataStream.png)
+![Data Stream](./figures/DataStream.png 'Data Stream')
 
 #### Stream
 
@@ -5312,13 +5312,13 @@ if (a && b && c) {
 子函数**包含**它父级函数的变量环境, 把这个概念称为**闭包(Closure)**,
 即使父级函数执行环境已经从执行栈弹出了, 子函数还是可以访问父级函数变量 x (通过作用域链).
 
-![Scope Chain](./figures/ContextStackAndScopeChain.png)
+![Scope Chain](./figures/ContextStackAndScopeChain.png 'Scope Chain')
 
 ### Event Loop
 
 #### Browser Event Loop
 
-![Event Loop](./figures/EventLoop.jpg)
+![Event Loop](./figures/EventLoop.jpg 'Event Loop')
 
 The job of the **event loop** is to look into the call stack
 and determine if the call stack is empty or not.

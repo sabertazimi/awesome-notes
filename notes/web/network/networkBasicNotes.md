@@ -138,7 +138,7 @@ entity body
   - 503 Service Unavailable.
   - 504 Gateway Timeout.
 
-![HTTP Redirect](./figures/HTTPRedirect.png)
+![HTTP Redirect](./figures/HTTPRedirect.png 'HTTP Redirect')
 
 Use reasonable HTTP status codes:
 
@@ -184,9 +184,9 @@ HTTP/2 的多路复用就是为了解决上述的两个性能问题.
 帧代表着最小的数据单位, 每个帧会标识出该帧属于哪个流, 流也就是多个帧组成的数据流.
 多路复用, 就是在一个 TCP 连接中可以存在多条流, 避免队头阻塞问题和连接数过多问题.
 
-![HTTP 2.0 Binary Frame](./figures/HTTP2BinaryFrame.png)
+![HTTP 2.0 Binary Frame](./figures/HTTP2BinaryFrame.png 'HTTP 2.0 Binary Frame')
 
-![HTTP 2.0 Stream](./figures/HTTP2Stream.png)
+![HTTP 2.0 Stream](./figures/HTTP2Stream.png 'HTTP 2.0 Stream')
 
 HTTP/2 = `HTTP` + `HPack / Stream` + `TLS 1.2+` + `TCP`:
 
@@ -361,7 +361,7 @@ Cross origin resource sharing:
 - 由客户端 HTML 标签等发出的跨域 `GET` 请求默认合法, 构成开放的 Web 世界:
   通过 `src` 属性加载的资源, 浏览器限制了 JavaScript 的权限, 使其不能读写返回的内容.
 
-![Cross Origin Resource Sharing](./figures/CORS.png)
+![Cross Origin Resource Sharing](./figures/CORS.png 'Cross Origin Resource Sharing')
 
 ```bash
 OPTIONS /resource.js HTTP/1.1
@@ -403,7 +403,7 @@ Access-Control-Allow-Headers: X-Custom-Header
 
 ### Transmission Control Protocol
 
-![TCP Setup](./figures/TCPSetup.png)
+![TCP Setup](./figures/TCPSetup.png 'TCP Setup')
 
 Transmission Control Protocol (RFC 793):
 
@@ -428,7 +428,7 @@ Transmission Control Protocol (RFC 793):
 - Congestion control:
   TCP 通过动态改变窗口的大小进行拥塞控制.
 
-![TCP Header](./figures/TCPHeader.png)
+![TCP Header](./figures/TCPHeader.png 'TCP Header')
 
 ### TCP Handshake
 
@@ -437,8 +437,8 @@ Transmission Control Protocol (RFC 793):
 - 4-way handshake:
   `FIN (toB)` -> `[Data+]ACK (toA)` -> `FIN (toA)` -> `ACK (toB)`.
 
-![TCP 3-way Handshake](./figures/TCP3WayHandshake.png)
-![TCP 4-way Handshake](./figures/TCP4WayHandshake.png)
+![TCP 3-way Handshake](./figures/TCP3WayHandshake.png 'TCP 3-way Handshake')
+![TCP 4-way Handshake](./figures/TCP4WayHandshake.png 'TCP 4-way Handshake')
 
 ### Slide Window and Retransmission
 
@@ -494,9 +494,9 @@ WindowSize = BandWidth `*` RTT (带宽延迟积)
   慢启动 `cwnd = 1`,
   快速恢复 `cwnd = ssthresh`.
 
-![TCP Congestion Control](./figures/TCPCongestionControl.png)
+![TCP Congestion Control](./figures/TCPCongestionControl.png 'TCP Congestion Control')
 
-![TCP Fast Retransmission](./figures/TCPFastRetransmission.png)
+![TCP Fast Retransmission](./figures/TCPFastRetransmission.png 'TCP Fast Retransmission')
 
 :::tip Flow Control vs Congestion Control
 
@@ -552,7 +552,7 @@ User Datagram Protocol (RFC 768):
   source port(16 bit), destination port(16 bit),
   checksum(16 bit), length(16 bit).
 
-![UDP Header](./figures/UDPHeader.png)
+![UDP Header](./figures/UDPHeader.png 'UDP Header')
 
 ### UDP Performance
 
@@ -581,7 +581,7 @@ WebRTC 是符合上述要求的框架.
 
 ## TLS
 
-![Transport Layer Security](./figures/TLS.png)
+![Transport Layer Security](./figures/TLS.png 'Transport Layer Security')
 
 ### Transport Layer Security
 
@@ -598,7 +598,7 @@ WebRTC 是符合上述要求的框架.
 - 完整性:
   通过 MAC (Message Authentication Code) 签署消息, 检测消息是否被篡改或伪造的机制.
 
-![TLS Setup](./figures/TLSSetup.png)
+![TLS Setup](./figures/TLSSetup.png 'TLS Setup')
 
 ### TLS Performance
 
@@ -635,7 +635,7 @@ openssl s_client -state -CAfile start-ssl.ca.crt -connect server.com:443
 
 ### Internet Protocol
 
-![IP Header](./figures/IPHeader.png)
+![IP Header](./figures/IPHeader.png 'IP Header')
 
 ### IP Service Model
 
@@ -709,7 +709,7 @@ if (packet_port == http_port) {
 
 ### ICMP Message Type
 
-![ICMP Header](./figures/ICMPHeader.png)
+![ICMP Header](./figures/ICMPHeader.png 'ICMP Header')
 
 - 0 type 0 code: echo reply(by ping)
 - 3 type 0 code: destination network unreachable
@@ -738,7 +738,7 @@ Address resolution protocol:
 
 ### Media Access Control
 
-![MAC Header](./figures/MACHeader.png)
+![MAC Header](./figures/MACHeader.png 'MAC Header')
 
 ### Switch
 
@@ -746,7 +746,7 @@ Address resolution protocol:
 它自己不会成为发送方或者接收方,
 各个端口不具有 MAC 地址.
 
-![Switch](./figures/Switch.png)
+![Switch](./figures/Switch.png 'Switch')
 
 交换机内部有一张 MAC 地址与对应网线端口的 MAC 地址表:
 
@@ -760,7 +760,7 @@ Address resolution protocol:
   目标设备收到包后会返回响应包,
   交换机此时可以更新地址表, 下次转发时无需广播发包.
 
-![Switch Circuit](./figures/SwitchCircuit.png)
+![Switch Circuit](./figures/SwitchCircuit.png 'Switch Circuit')
 
 ### Ethernet Hub
 
@@ -775,15 +775,15 @@ Address resolution protocol:
 
 非对称数字用户线 (Asymmetric Digital Subscriber Line):
 
-![Asymmetric Digital Subscriber Line](./figures/ADSL.png)
+![Asymmetric Digital Subscriber Line](./figures/ADSL.png 'Asymmetric Digital Subscriber Line')
 
 ### FTTH
 
-![Fiber](./figures/Fiber.png)
+![Fiber](./figures/Fiber.png 'Fiber')
 
 光纤到户 (Fiber to the Home):
 
-![Fiber to the Home](./figures/FTTH.png)
+![Fiber to the Home](./figures/FTTH.png 'Fiber to the Home')
 
 ### PPPoE
 
@@ -796,7 +796,7 @@ Address resolution protocol:
   会去掉 MAC 头部和 PPPoE 头部,
   然后用隧道机制将包发送给网络运营商的路由器.
 
-![PPPoE Header](./figures/PPPoEHeader.png)
+![PPPoE Header](./figures/PPPoEHeader.png 'PPPoE Header')
 
 ### ISP
 
@@ -809,7 +809,7 @@ Address resolution protocol:
 - 互联网内部使用 BGP (Border Gateway Protocol) 机制
   在运营商之间交换路由信息.
 
-![Internet Service Provider](./figures/ISP.png)
+![Internet Service Provider](./figures/ISP.png 'Internet Service Provider')
 
 ## Wireless Network
 
@@ -828,11 +828,11 @@ Address resolution protocol:
   IEEE 802.11, CSMA/CA (Carrier Sense Multiple Access/Collision Avoidance).
 - LTE (Long Term Evolution) / HSPA+ (High Speed Packet Access): 4G.
 
-![LTE Radio Resource Controller State Machine](./figures/LTE.png)
+![LTE Radio Resource Controller State Machine](./figures/LTE.png 'LTE Radio Resource Controller State Machine')
 
-![LTE Request](./figures/LTERequest.png)
+![LTE Request](./figures/LTERequest.png 'LTE Request')
 
-![LTE Response](./figures/LTEResponse.png)
+![LTE Response](./figures/LTEResponse.png 'LTE Response')
 
 ### Wireless Network Performance
 
@@ -867,7 +867,7 @@ Offline optimization:
 - 抵消外源性噪声.
 - 抵消内源性噪声.
 
-![Twisted Pair](./figures/TwistedPair.png)
+![Twisted Pair](./figures/TwistedPair.png 'Twisted Pair')
 
 | 种类            | 性能                                                      |
 | --------------- | --------------------------------------------------------- |

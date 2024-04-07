@@ -1132,7 +1132,7 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
 
 ### Vue Options Lifecycle
 
-[![Lifecycle](./figures/lifecycle.png)](https://v2.vuejs.org/v2/api/#Options-Lifecycle-Hooks)
+[![Lifecycle](./figures/Lifecycle.png)](https://v2.vuejs.org/v2/api/#Options-Lifecycle-Hooks)
 
 `callHook` in `core/instance/lifecycle.js`:
 
@@ -1708,7 +1708,7 @@ Array.from(el.getElementsByTagName('input'))
 
 ## Vue Legacy Reactivity
 
-[![Reactive](./figures/proxy.png)](https://ustbhuangyi.github.io/vue-analysis/v2/reactive/summary.html)
+[![Reactive](./figures/Proxy.png)](https://ustbhuangyi.github.io/vue-analysis/v2/reactive/summary.html)
 
 Collect deps (get):
 

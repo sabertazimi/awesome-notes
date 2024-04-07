@@ -2920,7 +2920,7 @@ Give React a chunk of code that it runs exclusively on the server,
 to do the database query to eliminate redundant network requests,
 polish FCP and LCP, and improve SEO:
 
-[![React Server Components](./figures/ReactServerComponents.png 'React Server Components')](https://www.joshwcomeau.com/react/server-components)
+[![React Server Components](./figures/ReactServerComponents.png)](https://www.joshwcomeau.com/react/server-components)
 
 Each meta-framework came up with its own approach to achieve such target.
 Next.js has one approach, Gatsby has another, Remix has yet another.
@@ -4617,7 +4617,7 @@ if (!fs.existsSync(paths.appTypeDeclarations)) {
 [`assets.json`](https://github.com/alibaba/lowcode-engine/blob/main/packages/types/src/assets.ts),
 从而将原始组件转化为低代码组件.
 
-![Low-Code Components](./figures/LowCodeComponents.png)
+![Low-Code Components](./figures/LowCodeComponents.png 'Low-Code Components')
 
 ### Low-Code Editor
 
@@ -4644,7 +4644,7 @@ if (!fs.existsSync(paths.appTypeDeclarations)) {
 - 结构化的插件扩展功能.
 - 原地编辑功能.
 
-![Low-Code Editor](./figures/LowCodeEditor.png)
+![Low-Code Editor](./figures/LowCodeEditor.png 'Low-Code Editor')
 
 经过 `Editor` 设置后, 生成符合业务需求的
 [`schema.json`](https://github.com/alibaba/lowcode-engine/blob/main/packages/types/src/schema.ts):
@@ -4663,7 +4663,7 @@ if (!fs.existsSync(paths.appTypeDeclarations)) {
 每个 `DocumentModel` 包含一组 `Node` 构成一颗树,
 每个 `Node` 通过 `Props` 实例管理所有 `Prop`:
 
-![Low-Code Schema](./figures/LowCodeSchema.png)
+![Low-Code Schema](./figures/LowCodeSchema.png 'Low-Code Schema')
 
 ### Low-Code Renderer
 

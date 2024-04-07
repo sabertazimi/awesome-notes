@@ -1026,7 +1026,7 @@ E -->|Yes| MIT
 E -->|No| BSD
 ```
 
-![Free Software License](./figures/6_free_software_licenses.png)
+![Free Software License](./figures/6_free_software_licenses.png 'Free Software License')
 
 #### Unique LICENSE
 
@@ -1441,7 +1441,7 @@ The pack-index `.idx` operates
 like a query index that speeds up read queries
 that rely on the primary key (object ID).
 
-![Git Packfile](./figures/GitPackfile.webp)
+![Git Packfile](./figures/GitPackfile.webp 'Git Packfile')
 
 ### Add Inside
 

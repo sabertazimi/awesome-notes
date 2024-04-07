@@ -732,7 +732,7 @@ await expect(asyncCall()).rejects.toThrowError()
 
 ### Jest Mocks
 
-![Mocks](./figures/Mocks.png)
+![Mocks](./figures/Mocks.png 'Mocks')
 
 #### Jest Mocks Utils
 

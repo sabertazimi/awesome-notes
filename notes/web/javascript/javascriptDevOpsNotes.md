@@ -71,7 +71,7 @@ async function handleRequest(event) {
 
 ### Service Worker Caching Strategy
 
-![Service Worker Cache](./figures/ServiceWorkerCache.webp)
+![Service Worker Cache](./figures/ServiceWorkerCache.webp 'Service Worker Cache')
 
 5 caching strategy in [workbox](https://developer.chrome.com/docs/workbox/caching-strategies-overview).
 
@@ -1596,7 +1596,7 @@ module.exports = function buildMeactPreset(context, options) {
 
 [Webpack workflow](https://segmentfault.com/a/1190000039956437):
 
-![Webpack Workflow](./figures/WebpackWorkflow.png)
+![Webpack Workflow](./figures/WebpackWorkflow.png 'Webpack Workflow')
 
 ### Webpack Configuration Intellisense
 
@@ -1643,7 +1643,7 @@ HMR:
 - 浏览器加载发生变更的增量模块.
 - 浏览器中注入的 HMR Runtime 触发变更模块的 `module.hot.accept` 回调, 执行代码变更逻辑.
 
-![Hot Module Replacement](./figures/HotModuleReplacement.jpg)
+![Hot Module Replacement](./figures/HotModuleReplacement.jpg 'Hot Module Replacement')
 
 `module.hot.accept` 有两种调用模式:
 

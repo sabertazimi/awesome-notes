@@ -126,7 +126,7 @@ tags: [Web, CSS]
 }
 ```
 
-![Layer Priority](./figures/LayerPriority.png)
+![Layer Priority](./figures/LayerPriority.png 'Layer Priority')
 
 ### Specificity
 
@@ -2360,7 +2360,7 @@ Set direction of text, table columns, and horizontal overflow:
 </style>
 ```
 
-![Unicode Bidi](./figures/UnicodeBidi.png)
+![Unicode Bidi](./figures/UnicodeBidi.png 'Unicode Bidi')
 
 ### Text Vertical Direction
 
@@ -2737,7 +2737,7 @@ selects a normal, condensed, or expanded face from a font:
 </style>
 ```
 
-![Font Synthesis](./figures/FontSynthesis.png)
+![Font Synthesis](./figures/FontSynthesis.png 'Font Synthesis')
 
 ### Font Variant
 

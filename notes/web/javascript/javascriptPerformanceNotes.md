@@ -764,7 +764,7 @@ Cache-Control: max-age=31536000
 - `no-store`: 禁止强缓存和协商缓存.
 - `no-cache`: 禁止强缓存, 允许协商缓存.
 
-![Cache Control](./figures/CacheControl.webp)
+![Cache Control](./figures/CacheControl.webp 'Cache Control')
 
 #### Server Cache
 

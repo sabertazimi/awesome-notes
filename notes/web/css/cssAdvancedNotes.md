@@ -40,7 +40,7 @@ tags: [Web, CSS]
 }
 ```
 
-![Border Radius](./figures/BorderRadius.png)
+![Border Radius](./figures/BorderRadius.png 'Border Radius')
 
 [圆角曲线重叠时](http://w3.org/TR/css3-background/#corner-overlap),
 所有圆角半径都缩小至 $f$ 倍:
@@ -435,7 +435,7 @@ Two opposite sides box shadow:
 - 语法越靠后的背景图像的层叠等级越低:
   `background` 一般设置为 `background-image# background-color`.
 
-![Multiple Background Image](./figures/BackgroundImage.png)
+![Multiple Background Image](./figures/BackgroundImage.png 'Multiple Background Image')
 
 ```css
 .image-set {
@@ -1035,9 +1035,19 @@ making it possible to wrap text around complex objects rather than simple boxes:
 - [`<fill-rule>`](https://developer.mozilla.org/docs/Web/SVG/Attribute/fill-rule)
   用于确定复杂路径构成的图形的内部与外部, 内部填充, 外部透明.
 
-![NonZero Fill Rule](./figures/FillRuleNonZero.png)
+![NonZero Fill Rule](./figures/FillRuleNonZero.png 'NonZero Fill Rule')
 
-![EvenOdd Fill Rule](./figures/FillRuleEvenOdd.png)
+![EvenOdd Fill Rule](./figures/FillRuleEvenOdd.png 'EvenOdd Fill Rule')
+
+```css
+.clip-path {
+  clip-path: inset(10% 20% 30% 40%);
+  clip-path: circle(50% at 50% 50%);
+  clip-path: ellipse(50% 25% at 50% 50%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: path('M 0 0 L 100 0 L 100 100 L 0 100 Z');
+}
+```
 
 ### Mask
 

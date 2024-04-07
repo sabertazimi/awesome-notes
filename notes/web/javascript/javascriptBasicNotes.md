@@ -12,7 +12,7 @@ tags: [Web, JavaScript, ECMAScript]
 
 [![TC39](./figures/TC39.png)](https://github.com/tc39/proposals)
 
-- [Technical Committees 39](https://www.ecma-international.org/technical-committees/tc39 'TC39')
+- [Technical Committees 39](https://www.ecma-international.org/technical-committees/tc39)
 - [TC39 Process](http://tc39.github.io/process-document)
 - [ES2015](https://exploringjs.com/es6/ch_overviews.html)
 - [WinterCG: Web-interoperable Runtime Community Group](https://github.com/wintercg)
@@ -2862,7 +2862,7 @@ function doAction(action) {
 
 ### Prototype Chain
 
-![原型链](./figures/Prototype.png)
+![原型链](./figures/Prototype.png '原型链')
 
 - 实例化对象仅有属性`__proto__`, 没有属性`prototype`, 函数才具有属性 `prototype` (指向引擎为其自动创建的原型对象):
   `Instance.__proto__ === Constructor.prototype`.
@@ -4740,7 +4740,7 @@ const result = compare({ name: 'Nicholas' }, { name: 'Matt' })
 
 执行上述代码后的上下文栈与作用域链如下图所示:
 
-![Context Stack and Scope Chain](./figures/ContextStackAndScopeChain.png)
+![Context Stack and Scope Chain](./figures/ContextStackAndScopeChain.png 'Context Stack and Scope Chain')
 
 `createComparisonFunction()` 的活动对象并不能在它执行完毕后销毁,
 因为匿名函数的作用域链中仍然存在对它的引用.

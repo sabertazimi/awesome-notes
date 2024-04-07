@@ -1443,7 +1443,7 @@ ghci> filter (`elem` ['A'..'Z']) "i lauGh At You BecAuse u r aLL the Same"
 
 #### fold 函数与 scan 函数
 
-![折叠函数](./figures/foldl.png)
+![折叠函数](./figures/foldl.png 'Fold Function')
 
 > 如图中所示,左折叠时将 acc 视为第 0 个元素;右折叠时将 acc 视为最后一个元素.
 

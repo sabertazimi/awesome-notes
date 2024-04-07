@@ -923,7 +923,7 @@ Floating won't work inside `fixed` or `absolute` `div` unless specify width:
 }
 ```
 
-![Float Clear Fix](./figures/FloatClearFix.png)
+![Float Clear Fix](./figures/FloatClearFix.png 'Float Clear Fix')
 
 ## Column Pattern
 
@@ -1268,7 +1268,7 @@ Flexbox 子元素:
 
 `flex-direction` will change flex alignment direction and start line:
 
-![Flex Direction](./figures/FlexDirection.png)
+![Flex Direction](./figures/FlexDirection.png 'Flex Direction')
 
 #### Flex Wrap
 
@@ -1305,7 +1305,7 @@ Flexbox 子元素:
 - `*-content` adjust parent padding,
   `*-items` and `*-self` adjust children margin.
 
-![Flex Parent Alignment](./figures/FlexParentAlignment.png)
+![Flex Parent Alignment](./figures/FlexParentAlignment.png 'Flex Parent Alignment')
 
 #### Flex Children Alignment
 
@@ -1317,7 +1317,7 @@ Flexbox 子元素:
   - `center`/`start`/`end`/`self-start`/`self-end`/`flex-start`/`flex-end`.
 - `order`: `<number>`, 显示顺序, 初始为 `0`.
 
-![Flex Children Alignment](./figures/FlexChildrenAlignment.png)
+![Flex Children Alignment](./figures/FlexChildrenAlignment.png 'Flex Children Alignment')
 
 #### Flex Margin Alignment
 
@@ -1691,7 +1691,7 @@ Children property:
 </style>
 ```
 
-![Implicit Grid Layout](./figures/ImplicitGridLayout.png)
+![Implicit Grid Layout](./figures/ImplicitGridLayout.png 'Implicit Grid Layout')
 
 `grid-auto-flow`:
 
@@ -1921,7 +1921,7 @@ will refactor grid item's size and location:
 
 :::
 
-![Grid Alignment](./figures/GridAlignment.png)
+![Grid Alignment](./figures/GridAlignment.png 'Grid Alignment')
 
 ### Grid Pseudo Element
 
@@ -2217,7 +2217,7 @@ selected elements in grid container:
 
 ## Centering Pattern
 
-![Centering Pattern](./figures/CenteringPattern.png)
+[![Centering Pattern](./figures/CenteringPattern.png)](https://www.joshwcomeau.com/css/center-a-div)
 
 ### Horizontal Centering Pattern
 

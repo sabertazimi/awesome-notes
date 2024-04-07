@@ -472,7 +472,7 @@ class MockHttpService implements Connection {
 
 ## Common Design Patterns
 
-![Common Design Patterns](./figures/DesignPatterns.png)
+![Common Design Patterns](./figures/DesignPatterns.png 'Common Design Patterns')
 
 ### Patterns Classification
 
@@ -3171,7 +3171,7 @@ Each paradigm is defined by a set of programming concepts.
 
 ### Taxonomy of Paradigms
 
-![Taxonomy of Programming Paradigms](./figures/ProgrammingParadigms.jpg)
+![Taxonomy of Programming Paradigms](./figures/ProgrammingParadigms.jpg 'Taxonomy of Programming Paradigms')
 
 Nondeterminism is important for real-world interaction.
 Named state is important for modularity.

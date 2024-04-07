@@ -1486,7 +1486,7 @@ function resetScrollX() {
 }
 ```
 
-![Grid Gallery](./figures/GridGallery.png)
+![Grid Gallery](./figures/GridGallery.png 'Grid Gallery')
 
 ## Timeline and Steps
 
@@ -1736,7 +1736,7 @@ Mix `transparent` with non-`transparent` border to make shapes (e.g. triangle):
 }
 ```
 
-![Background Shape](./figures/BackgroundShape.png)
+![Background Shape](./figures/BackgroundShape.png 'Background Shape')
 
 ### Stretch Line
 
@@ -2136,7 +2136,7 @@ div {
 }
 ```
 
-![Ellipse Border](./figures/EllipseBorder.png)]
+![Ellipse Border](./figures/EllipseBorder.png 'Ellipse Border')
 
 ### Triangle
 
