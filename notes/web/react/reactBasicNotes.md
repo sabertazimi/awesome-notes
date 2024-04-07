@@ -108,7 +108,7 @@ class MyComponent extends React.Component {
             isLoaded: true,
             error,
           })
-        }
+        },
       )
   }
 
@@ -208,7 +208,7 @@ ReactDOM.render(
       buttonText: 'OK!',
     },
   },
-  document.getElementById('root')
+  document.getElementById('root'),
 )
 
 // React: You told me this...
@@ -318,13 +318,13 @@ React Component
 interface NewLifecycle<P, S, SS> {
   getSnapshotBeforeUpdate?: (
     prevProps: Readonly<P>,
-    prevState: Readonly<S>
+    prevState: Readonly<S>,
   ) => SS | null
 
   componentDidUpdate?: (
     prevProps: Readonly<P>,
     prevState: Readonly<S>,
-    snapshot?: SS
+    snapshot?: SS,
   ) => void
 }
 
@@ -334,7 +334,7 @@ interface ComponentLifecycle<P, S, SS = any> extends NewLifecycle<P, S, SS> {
   shouldComponentUpdate?: (
     nextProps: Readonly<P>,
     nextState: Readonly<S>,
-    nextContext: any
+    nextContext: any,
   ) => boolean
 
   componentWillUnmount?: () => void
@@ -342,8 +342,11 @@ interface ComponentLifecycle<P, S, SS = any> extends NewLifecycle<P, S, SS> {
   componentDidCatch?: (error: Error, errorInfo: ErrorInfo) => void
 }
 
-class Component<P = object, S = object, SS = any>
-  extends ComponentLifecycle<P, S, SS> {
+class Component<P = object, S = object, SS = any> extends ComponentLifecycle<
+  P,
+  S,
+  SS
+> {
   readonly props: Readonly<P> & Readonly<{ children?: ReactNode | undefined }>
   state: Readonly<S>
 
@@ -356,7 +359,7 @@ class Component<P = object, S = object, SS = any>
     state:
       | ((prevState: Readonly<S>, props: Readonly<P>) => Pick<S, K> | S | null)
       | (Pick<S, K> | S | null),
-    callback?: () => void
+    callback?: () => void,
   ): void
 
   forceUpdate(callback?: () => void): void
@@ -364,8 +367,11 @@ class Component<P = object, S = object, SS = any>
   render(): ReactNode
 }
 
-class PureComponent<P = object, S = object, SS = any>
-  extends Component<P, S, SS> {}
+class PureComponent<P = object, S = object, SS = any> extends Component<
+  P,
+  S,
+  SS
+> {}
 ```
 
 #### Stateless component
@@ -471,7 +477,11 @@ Update for three reasons:
 Modify children properties:
 
 ```tsx
-function CreateTextWithProps({ text, ASCIIChar, ...props }: {
+function CreateTextWithProps({
+  text,
+  ASCIIChar,
+  ...props
+}: {
   text: string
   ASCIIChar: string
 }) {
@@ -501,10 +511,7 @@ export default function App() {
 ```
 
 ```tsx
-function RadioGroup(props: {
-  name: string
-  children: ReactElement
-}) {
+function RadioGroup(props: { name: string, children: ReactElement }) {
   const RenderChildren = () =>
     React.Children.map(props.children, (child) => {
       return React.cloneElement(child, {
@@ -554,9 +561,7 @@ export default function App() {
 ```tsx
 import { Children, cloneElement } from 'react'
 
-function Breadcrumbs({ children }: {
-  children: ReactElement
-}) {
+function Breadcrumbs({ children }: { children: ReactElement }) {
   const arrayChildren = Children.toArray(children)
 
   return (
@@ -572,7 +577,7 @@ function Breadcrumbs({ children }: {
         if (!isLast && !child.props.link) {
           throw new Error(
             `BreadcrumbItem child no. ${index + 1}
-            should be passed a 'link' prop`
+            should be passed a 'link' prop`,
           )
         }
 
@@ -609,7 +614,10 @@ function Breadcrumbs({ children }: {
   )
 }
 
-function BreadcrumbItem({ isLast, children }: {
+function BreadcrumbItem({
+  isLast,
+  children,
+}: {
   isLast: boolean
   children: ReactElement
 }) {
@@ -737,10 +745,7 @@ Ref forwarding 是一个特性,
 
 ```tsx
 // functional component
-function Button(
-  props: { children: ReactElement },
-  ref
-) {
+function Button(props: { children: ReactElement }, ref) {
   return (
     <button ref={ref} className="CustomButton">
       {props.children}
@@ -754,7 +759,7 @@ const ButtonElement = React.forwardRef(Button)
 // get ref to `<button>`
 const ref = React.createRef()
 export default function App() {
-  return (<ButtonElement ref={ref}>Forward Ref</ButtonElement>)
+  return <ButtonElement ref={ref}>Forward Ref</ButtonElement>
 }
 ```
 
@@ -846,7 +851,7 @@ function RadioImageForm({
       },
       ...state,
     }),
-    [state, onStateChange]
+    [state, onStateChange],
   )
 
   return (
@@ -855,7 +860,7 @@ function RadioImageForm({
         {React.Children.map(children, (child: React.ReactElement) =>
           React.cloneElement(child, {
             ...providerState,
-          }))}
+          }),)}
       </form>
     </div>
   )
@@ -932,7 +937,7 @@ function Footer({ children, style, ...rest }: Props): JSX.Element {
 
 function getChildrenOnDisplayName(children: ReactNode[], displayName: string) {
   return React.Children.map(children, child =>
-    child.displayName === displayName ? child : null)
+    child.displayName === displayName ? child : null,)
 }
 
 function Card({ children }: { children: ReactNode[] }): JSX.Element {
@@ -1006,7 +1011,7 @@ function listenToAllSupportedEvents(rootContainerElement: EventTarget) {
           domEventName,
           false, // 冒泡阶段监听.
           rootContainerElement,
-          null
+          null,
         )
       }
 
@@ -1014,7 +1019,7 @@ function listenToAllSupportedEvents(rootContainerElement: EventTarget) {
         domEventName,
         true, // 捕获阶段监听.
         rootContainerElement,
-        null
+        null,
       )
     })
   }
@@ -1025,7 +1030,7 @@ function listenToNativeEvent(
   isCapturePhaseListener: boolean,
   rootContainerElement: EventTarget,
   targetElement: Element | null,
-  eventSystemFlags?: EventSystemFlags = 0
+  eventSystemFlags?: EventSystemFlags = 0,
 ): void {
   const target = rootContainerElement
   const listenerSet = getEventListenerSet(target)
@@ -1041,7 +1046,7 @@ function listenToNativeEvent(
       target,
       domEventName,
       eventSystemFlags,
-      isCapturePhaseListener
+      isCapturePhaseListener,
     )
     listenerSet.add(listenerSetKey)
   }
@@ -1052,13 +1057,13 @@ function addTrappedEventListener(
   domEventName: DOMEventName,
   eventSystemFlags: EventSystemFlags,
   isCapturePhaseListener: boolean,
-  isDeferredListenerForLegacyFBSupport?: boolean
+  isDeferredListenerForLegacyFBSupport?: boolean,
 ) {
   // 1. 构造 listener.
   const listener = createEventListenerWrapperWithPriority(
     targetContainer,
     domEventName,
-    eventSystemFlags
+    eventSystemFlags,
   )
 
   // 2. 注册事件监听.
@@ -1068,13 +1073,13 @@ function addTrappedEventListener(
     unsubscribeListener = addEventCaptureListener(
       targetContainer,
       domEventName,
-      listener
+      listener,
     )
   } else {
     unsubscribeListener = addEventBubbleListener(
       targetContainer,
       domEventName,
-      listener
+      listener,
     )
   }
 }
@@ -1083,7 +1088,7 @@ function addTrappedEventListener(
 function addEventBubbleListener(
   target: EventTarget,
   eventType: string,
-  listener: Function
+  listener: Function,
 ): Function {
   target.addEventListener(eventType, listener, false)
   return listener
@@ -1093,7 +1098,7 @@ function addEventBubbleListener(
 function addEventCaptureListener(
   target: EventTarget,
   eventType: string,
-  listener: Function
+  listener: Function,
 ): Function {
   target.addEventListener(eventType, listener, true)
   return listener
@@ -1107,7 +1112,7 @@ function addEventCaptureListener(
 function createEventListenerWrapperWithPriority(
   targetContainer: EventTarget,
   domEventName: DOMEventName,
-  eventSystemFlags: EventSystemFlags
+  eventSystemFlags: EventSystemFlags,
 ): Function {
   // 1. 根据优先级设置 listenerWrapper.
   const eventPriority = getEventPriorityForPluginSystem(domEventName)
@@ -1131,7 +1136,7 @@ function createEventListenerWrapperWithPriority(
     null,
     domEventName,
     eventSystemFlags,
-    targetContainer
+    targetContainer,
   )
 }
 
@@ -1139,7 +1144,7 @@ function dispatchDiscreteEvent(
   domEventName,
   eventSystemFlags,
   container,
-  nativeEvent
+  nativeEvent,
 ) {
   const previousPriority = getCurrentUpdatePriority()
   const prevTransition = ReactCurrentBatchConfig.transition
@@ -1158,7 +1163,7 @@ function dispatchContinuousEvent(
   domEventName,
   eventSystemFlags,
   container,
-  nativeEvent
+  nativeEvent,
 ) {
   const previousPriority = getCurrentUpdatePriority()
   const prevTransition = ReactCurrentBatchConfig.transition
@@ -1177,13 +1182,13 @@ function dispatchEvent(
   domEventName: DOMEventName,
   eventSystemFlags: EventSystemFlags,
   targetContainer: EventTarget,
-  nativeEvent: AnyNativeEvent
+  nativeEvent: AnyNativeEvent,
 ) {
   let blockedOn = findInstanceBlockingEvent(
     domEventName,
     eventSystemFlags,
     targetContainer,
-    nativeEvent
+    nativeEvent,
   )
 
   if (blockedOn === null) {
@@ -1192,7 +1197,7 @@ function dispatchEvent(
       eventSystemFlags,
       nativeEvent,
       return_targetInst,
-      targetContainer
+      targetContainer,
     )
     clearIfContinuousEvent(domEventName, nativeEvent)
     return
@@ -1204,7 +1209,7 @@ function dispatchEvent(
       domEventName,
       eventSystemFlags,
       targetContainer,
-      nativeEvent
+      nativeEvent,
     )
   ) {
     nativeEvent.stopPropagation()
@@ -1228,7 +1233,7 @@ function dispatchEvent(
         domEventName,
         eventSystemFlags,
         targetContainer,
-        nativeEvent
+        nativeEvent,
       )
 
       if (nextBlockedOn === null) {
@@ -1237,7 +1242,7 @@ function dispatchEvent(
           eventSystemFlags,
           nativeEvent,
           return_targetInst,
-          targetContainer
+          targetContainer,
         )
       }
 
@@ -1258,7 +1263,7 @@ function dispatchEvent(
     eventSystemFlags,
     nativeEvent,
     null,
-    targetContainer
+    targetContainer,
   )
 }
 ```
@@ -1546,7 +1551,7 @@ class ButtonCounter extends React.Component<Props, State> {
 
   static getDerivedStateFromProps(
     props: Props,
-    state: State
+    state: State,
   ): Partial<State> | null {
     // ...
   }
@@ -2090,7 +2095,7 @@ import { useEffect, useRef } from 'react'
 function useEventListener<T extends HTMLElement = HTMLDivElement>(
   eventName: keyof WindowEventMap,
   handler: (event: Event) => void,
-  element?: RefObject<T>
+  element?: RefObject<T>,
 ) {
   // Create a ref that stores handler
   const savedHandler = useRef<(event: Event) => void>()
@@ -2145,7 +2150,7 @@ type Action<T> =
 
 function useFetch<T = unknown>(
   url?: string,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): State<T> {
   const cache = useRef<Cache<T>>({})
   const cancelRequest = useRef<boolean>(false)
@@ -2701,7 +2706,7 @@ function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
   const existingCallbackNode = root.callbackNode
   const nextLanes = getNextLanes(
     root,
-    root === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes
+    root === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes,
   )
 
   if (nextLanes === NoLanes) {
@@ -2752,7 +2757,7 @@ function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
       = eventPriorityToSchedulePriority(eventPriority)
     newCallbackNode = scheduleCallback(
       schedulerPriorityLevel,
-      performConcurrentWorkOnRoot.bind(null, root)
+      performConcurrentWorkOnRoot.bind(null, root),
     )
   }
 
@@ -2863,7 +2868,7 @@ const Lazy = lazy(
       setTimeout(() => {
         resolve({ default: () => <Resource /> })
       }, 4000)
-    })
+    }),
 )
 
 function Resource() {
@@ -2908,6 +2913,56 @@ export default function LandingPage() {
   )
 }
 ```
+
+### React Server Components
+
+Give React a chunk of code that it runs exclusively on the server,
+to do the database query to eliminate redundant network requests,
+polish FCP and LCP, and improve SEO:
+
+[![React Server Components](./figures/ReactServerComponents.png)](https://www.joshwcomeau.com/react/server-components)
+
+Each meta-framework came up with its own approach to achieve such target.
+Next.js has one approach, Gatsby has another, Remix has yet another.
+It hasn't been standardized.
+
+For years, the React team has been quietly tinkering on this problem,
+trying to come up with an official way to solve this problem.
+Their solution is called `React Server Components`.
+
+Server Components never re-render.
+They run once on the server to generate the UI.
+The rendered value is sent to the client and locked in place.
+As far as React is concerned, this output is immutable, and will never change:
+
+```tsx
+import db from 'imaginary-db'
+
+export default async function Homepage() {
+  const link = db.connect('localhost', 'root', 'passw0rd')
+  const data = await db.query(link, 'SELECT * FROM products')
+
+  return (
+    <>
+      <h1>Trending Products</h1>
+      {data.map(item => (
+        <article key={item.id}>
+          <h2>{item.title}</h2>
+          <p>{item.description}</p>
+        </article>
+      ))}
+    </>
+  )
+}
+```
+
+| Features                    | Server | Client |
+| --------------------------- | :----: | :----: |
+| Backend Resources           |   o    |   x    |
+| Server Sensitive Data       |   o    |   x    |
+| Event Handlers              |   x    |   o    |
+| State and Lifecycle Effects |   x    |   o    |
+| Browser-only APIs           |   x    |   o    |
 
 ## React Performance
 
@@ -3136,7 +3191,10 @@ function ColorPicker({ children }: { children: ReactElement }) {
 ```
 
 ```tsx
-export default function Parent({ children, lastChild }: {
+export default function Parent({
+  children,
+  lastChild,
+}: {
   children: ReactElement
   lastChild: ReactElement
 }) {
@@ -3272,8 +3330,12 @@ const result = renderer.getRenderOutput()
 
 expect(result.type).toBe('div')
 expect(result.props.children).toEqual([
-  <span key="heading" className="heading">Title</span>,
-  <span key="description" className="description">Description</span>,
+  <span key="heading" className="heading">
+    Title
+  </span>,
+  <span key="description" className="description">
+    Description
+  </span>,
 ])
 ```
 
@@ -3287,7 +3349,10 @@ expect(result.props.children).toEqual([
 ```tsx
 import TestRenderer from 'react-test-renderer'
 
-export default function Link({ page, children }: {
+export default function Link({
+  page,
+  children,
+}: {
   page: string
   children: ReactElement
 }) {
@@ -3295,7 +3360,7 @@ export default function Link({ page, children }: {
 }
 
 const testRenderer = TestRenderer.create(
-  <Link page="https://www.facebook.com/">Facebook</Link>
+  <Link page="https://www.facebook.com/">Facebook</Link>,
 )
 
 console.log(testRenderer.toJSON())
@@ -3480,7 +3545,7 @@ test('allows users to add items to their list', async () => {
   expect(mockCreateItem).toBeCalledTimes(1)
   expect(mockCreateItem).toBeCalledWith(
     '/items',
-    expect.objectContaining({ text: todoText })
+    expect.objectContaining({ text: todoText }),
   )
 })
 ```
@@ -3514,7 +3579,7 @@ test('click', () => {
     <div>
       <label htmlFor="checkbox">Check</label>
       <input id="checkbox" type="checkbox" />
-    </div>
+    </div>,
   )
 
   userEvent.click(screen.getByText('Check'))
@@ -3546,7 +3611,7 @@ test('should reset counter to updated initial value', () => {
     ({ initialValue }) => useCounter(initialValue),
     {
       initialProps: { initialValue: 0 },
-    }
+    },
   )
 
   rerender({ initialValue: 10 })
@@ -3570,7 +3635,7 @@ export default function useCounter(initialValue = 0) {
   const increment = useCallback(() => setCount(x => x + step), [step])
   const incrementAsync = useCallback(
     () => setTimeout(increment, 100),
-    [increment]
+    [increment],
   )
   const reset = useCallback(() => setCount(initialValue), [initialValue])
   return { count, increment, incrementAsync, reset }
@@ -3600,7 +3665,7 @@ export default function useCounter(initialValue = 0) {
   const increment = useCallback(() => setCount(x => x + step), [step])
   const incrementAsync = useCallback(
     () => setTimeout(increment, 100),
-    [increment]
+    [increment],
   )
   const reset = useCallback(() => setCount(initialValue), [initialValue])
 
@@ -3648,7 +3713,7 @@ import TransactionCreateStepTwo from './TransactionCreateStepTwo'
 
 test('if amount and note is entered, pay button becomes enabled', async () => {
   render(
-    <TransactionCreateStepTwo sender={{ id: '5' }} receiver={{ id: '5' }} />
+    <TransactionCreateStepTwo sender={{ id: '5' }} receiver={{ id: '5' }} />,
   )
 
   expect(await screen.findByRole('button', { name: /pay/i })).toBeDisabled()
@@ -4486,7 +4551,7 @@ it will create automatically with `reference` to `react-scripts` types:
 if (!fs.existsSync(paths.appTypeDeclarations)) {
   fs.writeFileSync(
     paths.appTypeDeclarations,
-    `/// <reference types="react-scripts" />${os.EOL}`
+    `/// <reference types="react-scripts" />${os.EOL}`,
   )
 }
 ```
