@@ -84,12 +84,29 @@ $QK^T$ for Input 1:
             [1, 0, 1]
 ```
 
+:::tip $XX^T$
+
+$XX^T$ 为行向量分别与自己和其他两个行向量做内积 (点乘),
+向量的内积表征两个向量的夹角 ($\cos\theta=\frac{a \cdot b}{|a||b|}$),
+表征一个向量在另一个向量上的投影,
+投影的值大, 说明两个向量相关度高 (Relevance/Similarity).
+
+:::
+
 Softmaxed([$\sigma(z_i) = \frac{e^{z_{i}}}{\sum_{j=1}^K e^{z_{j}}}$](https://en.wikipedia.org/wiki/Softmax_function))
 attention scores $softmax(\frac{QK^T}{\sqrt{d_k}})$:
 
 ```python
 softmax([2, 4, 4]) = [0.0, 0.5, 0.5]
 ```
+
+:::tip $\sqrt{d_k}$
+
+矩阵 $A$ 中每一个元素除以 $\sqrt{d_k}$ 后, 方差变为 1.
+这使得 $softmax(A)$ 的分布"陡峭"程度与 $d$ 解耦,
+从而使得训练过程中梯度值保持稳定.
+
+:::
 
 Alignment vectors (yellow vectors) $softmax(\frac{QK^T}{\sqrt{d_k}})V$:
 
