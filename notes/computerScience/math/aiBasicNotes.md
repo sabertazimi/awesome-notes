@@ -135,30 +135,30 @@ from torch.nn.functional import softmax
 
 # 1. Prepare inputs
 x = [
-  [1, 0, 1, 0], # Input 1
-  [0, 2, 0, 2], # Input 2
-  [1, 1, 1, 1], # Input 3
+    [1, 0, 1, 0],  # Input 1
+    [0, 2, 0, 2],  # Input 2
+    [1, 1, 1, 1],  # Input 3
 ]
 x = torch.tensor(x, dtype=torch.float32)
 
 # 2. Weights initialization
 w_query = [
-  [1, 0, 1],
-  [1, 0, 0],
-  [0, 0, 1],
-  [0, 1, 1],
+    [1, 0, 1],
+    [1, 0, 0],
+    [0, 0, 1],
+    [0, 1, 1],
 ]
 w_key = [
-  [0, 0, 1],
-  [1, 1, 0],
-  [0, 1, 0],
-  [1, 1, 0],
+    [0, 0, 1],
+    [1, 1, 0],
+    [0, 1, 0],
+    [1, 1, 0],
 ]
 w_value = [
-  [0, 2, 0],
-  [0, 3, 0],
-  [1, 0, 3],
-  [1, 1, 0],
+    [0, 2, 0],
+    [0, 3, 0],
+    [1, 0, 3],
+    [1, 1, 0],
 ]
 w_query = torch.tensor(w_query, dtype=torch.float32)
 w_key = torch.tensor(w_key, dtype=torch.float32)
@@ -179,14 +179,14 @@ attn_scores_softmax = softmax(attn_scores, dim=-1)
 #         [2.9539e-04, 8.8054e-01, 1.1917e-01]])
 # For readability, approximate the above as follows
 attn_scores_softmax = [
-  [0.0, 0.5, 0.5],
-  [0.0, 1.0, 0.0],
-  [0.0, 0.9, 0.1],
+    [0.0, 0.5, 0.5],
+    [0.0, 1.0, 0.0],
+    [0.0, 0.9, 0.1],
 ]
 attn_scores_softmax = torch.tensor(attn_scores_softmax)
 
 # 6. Multiply scores with values
-weighted_values = values[:,None] * attn_scores_softmax.T[:,:,None]
+weighted_values = values[:, None] * attn_scores_softmax.T[:, :, None]
 
 # 7. Sum weighted values
 outputs = weighted_values.sum(dim=0)
@@ -198,4 +198,70 @@ print(outputs)
 # tensor([[1.9366, 6.6831, 1.5951],
 #         [2.0000, 7.9640, 0.0540],
 #         [1.9997, 7.7599, 0.3584]])
+```
+
+### Multi-Head Attention Mechanism
+
+```python
+from math import sqrt
+import torch
+import torch.nn
+
+class Self_Attention(nn.Module):
+    # input : batch_size * seq_len * input_dim
+    # q : batch_size * input_dim * dim_k
+    # k : batch_size * input_dim * dim_k
+    # v : batch_size * input_dim * dim_v
+    def __init__(self, input_dim, dim_k, dim_v):
+        super(Self_Attention, self).__init__()
+        self.q = nn.Linear(input_dim, dim_k)
+        self.k = nn.Linear(input_dim, dim_k)
+        self.v = nn.Linear(input_dim, dim_v)
+        self._norm_fact = 1 / sqrt(dim_k)
+
+    def forward(self, x):
+        Q = self.q(x)  # Q: batch_size * seq_len * dim_k
+        K = self.k(x)  # K: batch_size * seq_len * dim_k
+        V = self.v(x)  # V: batch_size * seq_len * dim_v
+
+        # Q * K.T() # batch_size * seq_len * seq_len
+        atten = nn.Softmax(dim=-1)(torch.bmm(Q, K.permute(0, 2, 1))) * self._norm_fact
+
+        # Q * K.T() * V # batch_size * seq_len * dim_v
+        output = torch.bmm(atten, V)
+
+        return output
+
+class Self_Attention_Muti_Head(nn.Module):
+    # input : batch_size * seq_len * input_dim
+    # q : batch_size * input_dim * dim_k
+    # k : batch_size * input_dim * dim_k
+    # v : batch_size * input_dim * dim_v
+    def __init__(self, input_dim, dim_k, dim_v, nums_head):
+        super(Self_Attention_Muti_Head, self).__init__()
+        assert dim_k % nums_head == 0
+        assert dim_v % nums_head == 0
+        self.q = nn.Linear(input_dim, dim_k)
+        self.k = nn.Linear(input_dim, dim_k)
+        self.v = nn.Linear(input_dim, dim_v)
+
+        self.nums_head = nums_head
+        self.dim_k = dim_k
+        self.dim_v = dim_v
+        self._norm_fact = 1 / sqrt(dim_k)
+
+    def forward(self, x):
+        Q = self.q(x).reshape(-1, x.shape[0], x.shape[1], self.dim_k // self.nums_head)
+        K = self.k(x).reshape(-1, x.shape[0], x.shape[1], self.dim_k // self.nums_head)
+        V = self.v(x).reshape(-1, x.shape[0], x.shape[1], self.dim_v // self.nums_head)
+        print(x.shape)
+        print(Q.size())
+
+        # Q * K.T() # batch_size * seq_len * seq_len
+        atten = nn.Softmax(dim=-1)(torch.matmul(Q, K.permute(0, 1, 3, 2)))
+
+        # Q * K.T() * V # batch_size * seq_len * dim_v
+        output = torch.matmul(atten, V).reshape(x.shape[0], x.shape[1], -1)
+
+        return output
 ```
