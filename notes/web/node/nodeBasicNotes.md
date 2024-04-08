@@ -368,7 +368,9 @@ npx gistUrl
 ```
 
 :::tip NPX Cache
+
 NPX cache packages in `~/.npm/_npx`.
+
 :::
 
 To get latest version package:

@@ -1256,7 +1256,9 @@ function loadScriptString(code) {
 ```
 
 :::caution InnerHTML Script
+
 所有现代浏览器中, 通过 `innerHTML` 属性创建的 `<script>` 元素永远不会执行.
+
 :::
 
 - Next.js route [loader](https://github.com/vercel/next.js/blob/canary/packages/next/client/route-loader.ts).
@@ -2408,9 +2410,11 @@ window.resizeTo(300, 300)
 ```
 
 :::tip DOM Rect API
+
 In case of transforms,
 the offsetWidth and offsetHeight returns the layout width and height (all the same),
 while getBoundingClientRect() returns the rendering width and height.
+
 :::
 
 `getBoundingClientRect`:

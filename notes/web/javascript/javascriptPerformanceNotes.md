@@ -670,7 +670,9 @@ element.className += ' className'
 ```
 
 :::tip Pipeline
+
 Script -> Style -> Layout -> Paint -> Composite.
+
 :::
 
 Make `script` stage become: read then write.
@@ -678,13 +680,17 @@ Interleaved read and write will trigger multiple times
 of re-layout/repaint/re-composite.
 
 :::danger Forced Synchronous Layout
+
 read css -> write css (re-layout/paint/composite)
 -> read css -> write css (re-layout/paint/composite)
 -> read css -> write css (re-layout/paint/composite).
+
 :::
 
 :::tip High Performance
+
 read css -> write css (only re-layout/paint/composite once).
+
 :::
 
 ## Browser Caches

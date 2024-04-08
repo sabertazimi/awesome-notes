@@ -410,7 +410,9 @@ console.log(addTodo('Write more docs'))
 ```
 
 :::tip RTK Pitfall
+
 Strongly recommend to only use string action types.
+
 :::
 
 Redux Toolkit rests on the assumption that you use string action types.
@@ -604,7 +606,9 @@ In reality, the reducer receives a proxy state
 that translates all mutations into equivalent copy operations.
 
 :::danger Mutating State Case
+
 Only write **mutating** logic in RTK `createSlice` and `createReducer` API.
+
 :::
 
 ```ts
@@ -637,7 +641,9 @@ const todosReducer = createReducer([] as Todo[], (builder) => {
 ```
 
 :::tip Reducer Pitfall
+
 Ensure that either mutate state argument or return a new state, but **not both**.
+
 :::
 
 Following reducer would throw an exception if a toggleTodo action is passed:

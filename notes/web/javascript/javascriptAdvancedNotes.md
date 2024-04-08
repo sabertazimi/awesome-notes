@@ -4057,9 +4057,11 @@ function processArray(items, process, done) {
 ```
 
 :::tips `this` Binding in Timer Function
+
 所有超时执行的代码 (函数) 都会在全局作用域中的一个匿名函数中运行,
 因此函数中的 `this` 值在非严格模式下始终指向 `window`, 在严格模式下是 `undefined`.
 若给 `setTimeout()` 提供了一个箭头函数, 则 `this` 会保留为定义它时所在的词汇作用域.
+
 :::
 
 `requestAnimationFrame` game loop:
@@ -4438,8 +4440,10 @@ dtfEnglish.formatRange(start, end) // => 'May 7 - 9, 2019'
 - Modular (composite).
 
 :::tip Functional JavaScript
+
 Functional programming is the art of composing higher-order functions
 to advance the state of a program in a pure manner.
+
 :::
 
 ### Functional JavaScript Pros
@@ -5351,9 +5355,11 @@ if there’s any pending call back waiting to be executed:
 - `Event Loop` 与 `Call Stack` 有且仅有一个, `Task/Job/Message Queue` 可以有多个.
 
 :::tip Event Loop
+
 宏任务队列取宏任务 -> 执行 1 个宏任务 -> 检查微任务队列并执行所有微任务
 -> requestAnimationFrame -> 浏览器重排/重绘 -> requestIdleCallback
 -> 宏任务队列取宏任务
+
 :::
 
 `Event Loop` simple model:
@@ -5942,14 +5948,18 @@ DTD is context-sensitive grammar.
 Use State Machine pattern to implement a tokenizer:
 
 :::tip Tokenizer
+
 Data -> Tag Open -> Tag Name -> Tag Close -> Data.
+
 :::
 
 tokenizer send tokens to constructor, constructing DOM tree:
 
 :::tip DOM Tree Constructor
+
 initial -> before HTML -> before head -> in head -> after head
 -> in body -> after body -> after after body -> EOF token.
+
 :::
 
 HTML parser performance:

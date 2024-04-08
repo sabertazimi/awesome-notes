@@ -11,7 +11,9 @@ tags: [Programming, DevOps, Design Pattern, Clean Code]
 ## Basic Code Patterns
 
 :::tip Design Patterns
+
 Software design is the art of managing dependencies and abstractions.
+
 :::
 
 - Minimizing dependencies.
@@ -2525,7 +2527,7 @@ class MicroEvent {
   - 状态切换规则分布在状态类中, 有效地消除了大量条件分支语句.
 - 符合开放封闭原则.
 
-:::tip
+:::tip State Use Case
 
 - Networking protocol stack.
 - Game player logic.

@@ -5285,6 +5285,7 @@ const greet = function greet(options, ...rest) {
 ```
 
 :::tip 多态与面向对象
+
 多态最根本的作用:
 通过把过程化的条件分支语句转化为对象的多态性,
 从而消除条件分支语句.
@@ -5292,6 +5293,7 @@ const greet = function greet(options, ...rest) {
 每个对象的职责, 成为该对象的属性与方法,
 被安装在对象内部, 每个对象负责它们自己的行为.
 这些对象可以根据同一个消息, 有条不紊地分别进行各自的工作.
+
 :::
 
 ### Eval Function

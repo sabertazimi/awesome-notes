@@ -748,8 +748,10 @@ const message = inject('message', defaultValue)
 - [SFC with Script Setup](https://v3.vuejs.org/api/sfc-script-setup.html).
 
 :::tip
+
 Can't access to `this` inside of `setup`,
 we cannot directly access `this.$emit` or `this.$route` anymore.
+
 :::
 
 ### Setup Method
@@ -2158,8 +2160,10 @@ Two methods to access route `params` in components:
 ```
 
 :::tip
+
 Can't access to `this` inside of `setup`,
 we cannot directly access `this.$router` or `this.$route` anymore.
+
 :::
 
 #### Routes Composition API
@@ -2383,11 +2387,13 @@ const routes = [
 ```
 
 :::caution
+
 `beforeEnter` guards only trigger when entering the route,
 don't trigger when the params, query or hash change.
 
 Going from `/users/2` to `/users/3` or going from `/users/2#info` to `/users/2#projects`
 don't trigger `beforeEnter` guards.
+
 :::
 
 #### Global Navigation Guards
