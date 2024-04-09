@@ -326,3 +326,8 @@ $$
 \cos({\omega_{d/2}}\cdot{t})
 \end{bmatrix}_{d\times{1}}
 $$
+
+## AI Platform
+
+- OpenAI GPT [API](https://platform.openai.com).
+- Google Gemini [API](https://ai.google.dev).
