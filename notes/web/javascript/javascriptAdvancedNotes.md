@@ -5692,7 +5692,7 @@ console.log('glob2')
 
 #### V8 Object Shape
 
-[Shapes ICS](https://mathiasbynens.be/notes/shapes-ics):
+[Shapes and Inline Caches](https://mathiasbynens.be/notes/shapes-ics):
 
 ```ts
 // o1 and o2 have the same shape
@@ -5737,12 +5737,86 @@ V8 为了提高对象属性的访问效率, 将属性分为[多种类型](https:
 - 常规属性 (properties): 字符串类型的属性 (包括负数/浮点数/Symbol), 存储为线性结构, 可快速访问.
 - 慢属性: 属性需要反复增删时, 会将属性存储类型从线性结构 (快属性) 改为字典结构 (慢属性).
 
+#### V8 Object Structure
+
+Basic [object structure](https://blog.frontend-almanac.com/js-object-structure):
+
+- Every object in JavaScript has its main internal class
+  and a [hidden class](https://v8.dev/docs/hidden-classes) that describes its shape.
+- [Hidden classes](https://v8.dev/docs/hidden-classes)
+  inherit from each other and are organized into class trees.
+  The shape of an object `{ a: 1 }` will be the parent
+  for the shape of an object `{ a: 1, b: 2 }`.
+- The order of properties matters.
+  Objects `{ a: 1, b: 2 }` and `{ b: 2, a: 1 }` will have two different shapes.
+- A subclass holds a reference to the superclass
+  and information about what has changed (transition).
+- In the class tree of each object,
+  the number of levels is not less than the number of properties in the object.
+- The fastest properties of an object will be those declared at initialization,
+  in-object property faster than external property.
+- Atypical changes in the object's structure, such as property removal (`delete`),
+  can lead to a change in the storage type of properties to a slower one.
+
+```ts
+const obj1 = { a: undefined }
+obj1.a = 1 // <- "a" - in-object property.
+
+const obj2 = {}
+obj2.a = 1 // <- "a" - external property.
+
+// Change storage type to NameDictionary.
+const obj1 = { a: 1, b: 2 }
+delete obj1.a
+
+// Storage type is not changed.
+const obj2 = { a: 1, b: 2 }
+obj2.a = undefined
+```
+
+An array is a regular class whose structure looks like `{ length: [W__] }`.
+The elements of the array are stored in special structures,
+and references to these structures are placed inside the object:
+
+- Adding or removing elements from the array
+  **does not** lead to an increase in the class tree.
+- The use of atypical keys in an array,
+  such as non-numeric keys or keys outside the range `[0 .. 2**32 - 2]`,
+  leads to the creation of new shapes in the class tree.
+- Attempting to modify an array element's attribute
+  will result in a switch to a slower storage type.
+
+```ts
+// 1. New element of the array doesn't extends the shapes tree.
+const arr = []
+arr[0] = 1
+
+// 2. Leads to the shapes tree generation:
+// { length } => { length, [-1] } => { length, [-1], [2**32 - 1] }.
+const arr = []
+arr[-1] = 1
+arr[2 ** 32 - 1] = 2
+
+// 3. Modify element's attribute result in switch to slower storage type.
+const arr = [1, 2, 3]
+// { elements: {
+//   #0: 1,
+//   #1: 2,
+//   #2: 3
+// }}
+
+Object.defineProperty(arr, '0', { writable: false })
+// { elements: {
+//   #0: { value: 1, attrs: [_EC] },
+//   #1: { value: 2, attrs: [WEC] },
+//   #2: { value: 3, attrs: [WEC] }
+// }}
+```
+
 #### V8 Garbage Collection
 
-- [Introduction](https://mp.weixin.qq.com/s/VbAUPGt3sUVzEQHxWYmlBw)
-  to V8 garbage collection.
-
-V8 分代垃圾回收算法, 将堆分为两个空间:
+V8 [garbage collection](https://mp.weixin.qq.com/s/VbAUPGt3sUVzEQHxWYmlBw)
+分代垃圾回收算法, 将堆分为两个空间:
 
 - 新生代: 存放短周期对象, 空间小, 使用 `Scavenge` 回收算法, 副垃圾回收器.
 - 老生代: 存放长周期对象, 空间大, 使用 `Mark-Sweep-Compact` 回收算法, 主垃圾回收器.
