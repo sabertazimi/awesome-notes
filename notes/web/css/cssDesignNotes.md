@@ -325,6 +325,7 @@ table {
 - [OpenUI: W3C Community Group](https://open-ui.org)
 - [Design Systems Database](https://designsystems.surf)
 - [Global Design System](https://bradfrost.com/blog/post/a-global-design-system)
+- [Logo System: Logo Design Library](https://logosystem.co)
 
 ## Design Tokens
 
