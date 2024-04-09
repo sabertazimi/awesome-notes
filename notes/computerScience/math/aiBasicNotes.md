@@ -8,7 +8,9 @@ tags: [CS, Math, AI]
 
 # AI Basic Notes
 
-## Transformer
+## Transformer Architecture
+
+[![Illustrated Transformer](./figures/TransformerArchitecture.webp)](https://jalammar.github.io/illustrated-transformer)
 
 ### Self-Attention Mechanism
 
