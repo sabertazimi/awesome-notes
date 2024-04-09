@@ -122,7 +122,7 @@ $$
 \implies
 \begin{bmatrix}
   ax + cy + e \\
-  bx+ dy + f \\
+  bx + dy + f \\
   1
 \end{bmatrix}
 $$
