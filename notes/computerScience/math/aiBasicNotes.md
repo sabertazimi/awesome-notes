@@ -126,6 +126,13 @@ Output 2: [2.0, 8.0, 0.0]
 Output 3: [2.0, 7.8, 0.3]
 ```
 
+:::tip $QK^TV$
+
+Self-attention 中的 $QKV$ 思想,
+另一个层面是想要构建一个具有全局语义整合功能的数据库.
+
+:::
+
 ```python
 import torch
 from torch.nn.functional import softmax
