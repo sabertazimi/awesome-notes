@@ -12,6 +12,13 @@ tags: [CS, Math, AI]
 
 [![Illustrated Transformer](./figures/TransformerArchitecture.webp)](https://jalammar.github.io/illustrated-transformer)
 
+- Self-attention only:
+  comparing to Recurrent Neural Networks (RNNs),
+  no recurrent layers, allows for more parallelization.
+- Multi-headed attention:
+  consistent with Convolutional Neural Networks (CNNs),
+  multiple output channels.
+
 ### Self-Attention Mechanism
 
 In layman's terms,
