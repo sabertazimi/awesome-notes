@@ -1391,6 +1391,7 @@ tags: [Web, Framework, Library]
 - [Max: 1-Click access Browser Copilot](https://microsoftedge.microsoft.com/addons/detail/ngphehpfehdmjellohmlojkplilekadg)
 - [TinaMind: ChatGPT-driven Free Browser Copilot](https://chromewebstore.google.com/detail/befflofjcniongenjmbkgkoljhgliihe)
 - [C4G: ChatGPT for Google](https://microsoftedge.microsoft.com/addons/detail/ilphilpfaejmgdkapaijljgcigibggam)
+- [Glarity: Summaries Copilot](https://github.com/sparticleinc/chatgpt-google-summary-extension)
 - [GrammarLy: Free Writing and Grammar Checker Copilot](https://microsoftedge.microsoft.com/addons/detail/cnlefmmeadmemmdciolhbnfeacpdfbkd)
 - [DeepL: Free Translation Copilot](https://microsoftedge.microsoft.com/addons/detail/fancfknaplihpclbhbpclnmmjcjanbaf)
 - [ZipZap: Multilingual Translation Copilot](https://microsoftedge.microsoft.com/addons/detail/efjbjbiikanoebecldljpjddfhjfmnob)
