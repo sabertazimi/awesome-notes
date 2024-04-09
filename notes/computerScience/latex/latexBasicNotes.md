@@ -62,7 +62,7 @@ clean:
 ## Basis
 
 - [Simple Introduction](https://liam0205.me/2014/09/08/latex-introduction)
-- [HaiYang Liu Tutorial](https://github.com/wuzhouhui/misc/blob/master/LaTeX%E5%85%A5%E9%97%A8%20%E5%88%98%E6%B5%B7%E6%B4%8B.pdf)
+- [HaiYang Liu Tutorial](https://yun.weicheng.men/Book/LaTeX%E5%85%A5%E9%97%A8.pdf)
 - [Paper Tips and Tricks](https://github.com/Wookai/paper-tips-and-tricks)
 - Writing Scientific Documents Using LaTeX.
 
