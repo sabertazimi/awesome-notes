@@ -94,7 +94,7 @@ $XX^T$ 为行向量分别与自己和其他两个行向量做内积 (点乘),
 :::
 
 Softmaxed([$\sigma(z_i) = \frac{e^{z_{i}}}{\sum_{j=1}^K e^{z_{j}}}$](https://en.wikipedia.org/wiki/Softmax_function))
-attention scores $softmax(\frac{QK^T}{\sqrt{d_k}})$:
+attention scores, $softmax(\frac{QK^T}{\sqrt{d_k}})$:
 
 ```python
 softmax([2, 4, 4]) = [0.0, 0.5, 0.5]
@@ -108,17 +108,14 @@ softmax([2, 4, 4]) = [0.0, 0.5, 0.5]
 
 :::
 
-Alignment vectors (yellow vectors) $softmax(\frac{QK^T}{\sqrt{d_k}})V$:
+Alignment vectors (yellow vectors) addition to Output 1,
+$softmax(\frac{QK^T}{\sqrt{d_k}})V$:
 
 ```python
 1: 0.0 * [1, 2, 3] = [0.0, 0.0, 0.0]
 2: 0.5 * [2, 8, 0] = [1.0, 4.0, 0.0]
 3: 0.5 * [2, 6, 3] = [1.0, 3.0, 1.5]
-```
 
-Addition to Output 1:
-
-```python
 [0.0, 0.0, 0.0] + [1.0, 4.0, 0.0] + [1.0, 3.0, 1.5] = [2.0, 7.0, 1.5]
 ```
 
